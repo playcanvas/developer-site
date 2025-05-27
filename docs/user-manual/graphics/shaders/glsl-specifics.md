@@ -14,13 +14,13 @@ The following sections outline key aspects of writing GLSL shaders for PlayCanva
 
 ### Attributes
 
-Attributes define per-vertex input data. They must be declared using the following syntax:
+Attributes define per-vertex input data, and can only be used in the vertex shader. They must be declared using the following syntax:
 
 ```glsl
 attribute vec2 aUv0;
 ```
 
-The attribute name must match the name specified in the `attributes` property when creating the [ShaderMaterial][1].
+The attribute names must match the names specified in the `attributes` property when creating the [ShaderMaterial][1].
 
 :::note
 
@@ -37,6 +37,12 @@ uniform vec3 view_position;
 ```
 
 The engine automatically sets appropriate uniform values when rendering.
+
+:::note
+
+Currently, our uniform system supports only simple types, including `float`, `int`, `uint`, as well as vectors and matrices (e.g., `vec4`, `mat4`). Structs are not supported at this time, so all uniform values must be declared as individual variables of basic types.
+
+:::
 
 ### Varyings
 

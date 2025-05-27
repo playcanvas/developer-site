@@ -14,12 +14,17 @@ Create a description of your shader:
 ``` javascript
 const shaderDesc = {
         uniqueName: 'MyShader',
-        shaderLanguage: pc.SHADERLANGUAGE_GLSL,
-        vertexCode: `
-            // write your vertex shader source code
+        vertexGLSL: `
+            // write your vertex shader source code in GLSL language
         `,
-        fragmentCode: `
-            // write your fragment shader source code
+        fragmentGLSL: `
+            // write your fragment shader source code in GLSL language
+        `,
+        vertexWGSL: `
+            // write your vertex shader source code in WGSL language
+        `,
+        fragmentWGSL: `
+            // write your fragment shader source code in WGSL language
         `,
         attributes: {
             aPosition: pc.SEMANTIC_POSITION,
@@ -35,7 +40,7 @@ Then create instances of your material, which you can use for rendering:
 const material = new pc.ShaderMaterial(shaderDesc);
 ```
 
-The shader source code can be written in GLSL if you're targeting the WebGL2 or WebGPU platforms, or in WGSL if you're targeting WebGPU only.
+The shader source code can be written in GLSL if you're targeting the WebGL2 or WebGPU platforms, or in WGSL if you're targeting WebGPU only, or both.
 
 :::note
 
@@ -48,6 +53,8 @@ If you write a GLSL shader, it is directly supported by the WebGL2 platform. How
 Before the shader is used, a preprocessing step is applied, allowing you to manage shader variations effectively.
 
 This preprocessing step follows a typical C-like preprocessor structure, handling directives such as `#define`, `#if`, `#else`, `#endif`, and similar. This gives you fine-grained control over how the shader code is compiled and customized for different use cases.
+
+You can also use `#include` directive, to include one of the registered shader chunks, for example `#include "screenDepthPS"`
 
 ### Material Shader Defines
 
@@ -207,5 +214,9 @@ And Each created shader will be logged in the browser console, where you can ins
 ![sRGB](/img/user-manual/graphics/shaders/shader-log.png)
 
 For further information, refer to the [ShaderMaterial API documentation](https://api.playcanvas.com/engine/classes/ShaderMaterial.html).
+
+### Compute shaders
+
+Compute shaders are currently supported by the engine when using WebGPU, but their integration is still evolving. Full documentation will be provided as the system matures and stabilizes. In the meantime, we recommend studying the available engine examples, which demonstrate how compute shaders can be written, dispatched, and used within the current framework.
 
 [1]: /user-manual/graphics/physical-rendering/physical-materials/
