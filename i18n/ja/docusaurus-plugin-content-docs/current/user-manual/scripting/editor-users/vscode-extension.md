@@ -34,7 +34,7 @@ For developers seeking an enhanced code editing experience with features like so
 * **Sync**: Save your changes in VS Code; the PlayCanvas extension automatically syncs these changes to the cloud.
 * **Preview and Debug**: Use the [Launch Page](/user-manual/editor/launch-page/) to preview and debug your application as you develop.
 
-### Debugging
+### デバッグ
 
 The VS Code extension for PlayCanvas does not directly support debugging of scripts running in the browser. However, you can [use browser developer tools](/user-manual/scripting/debugging/) to debug your PlayCanvas scripts in conjunction with VS Code for a powerful debugging experience.
 

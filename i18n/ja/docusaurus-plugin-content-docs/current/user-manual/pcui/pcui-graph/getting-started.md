@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: はじめに
 sidebar_position: 1
 ---
 
@@ -38,6 +38,6 @@ const graph = new Graph(schema, {
 
 You can see a full list of options [here](https://api.playcanvas.com/pcui-graph/classes/Graph.html#constructor).
 
-## Examples
+## 例
 
 Examples of PCUI Graph usage can be found in this [Storybook](https://playcanvas.github.io/pcui-graph/storybook/).

@@ -111,11 +111,11 @@ This results in the following define being added to the shader:
 
 The engine builds internal shaders out of chunks; small shader functions that are combined to form a final shader. These chunks are also available for use in custom shaders with `ShaderMaterial`, making it easy to integrate engine functionality.
 
-#### Vertex Shader
+#### バーテックスシェーダー
 
 The engine provides predefined shader includes that handle common transformations, normal calculations, and other essential operations. This allows your custom shader to automatically support skinning, morphing and instancing.
 
-For example:
+以下に例を示します。
 
 ```glsl
 // Includes transformation-related functionality provided by the engine.
@@ -158,7 +158,7 @@ void main(void)
 }
 ```
 
-#### Fragment Shader
+#### フラグメントシェーダー
 
 The engine provides predefined shader chunks you can include for common color processing effects such as gamma correction, tone mapping and fog. These includes ensure that colors are processed correctly according to the rendering settings.
 

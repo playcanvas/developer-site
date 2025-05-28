@@ -26,7 +26,7 @@ The `<pc-collision>` tag is used to define a collision component.
 
 </div>
 
-## Example
+## 例
 
 ```html
 <!-- static 1x1x1 box -->

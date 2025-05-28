@@ -8,7 +8,7 @@ The todo list below allows you to add items to the list, toggle their 'done' sta
     <iframe src="https://playcanvas.github.io/pcui/storybook/iframe?id=examples-todolist--main&viewMode=story"></iframe>
 </div>
 
-### Code
+### コード
 
 ```jsx
 import React, { useState } from 'react';

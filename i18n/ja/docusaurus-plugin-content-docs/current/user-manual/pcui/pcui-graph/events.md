@@ -1,5 +1,5 @@
 ---
-title: Events
+title: イベント
 sidebar_position: 3
 ---
 

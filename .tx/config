@@ -2969,12 +2969,12 @@ type          = GITHUBMARKDOWN
 minimum_perc  = 0
 resource_name = content/en/user-manual/scripting/editor-users/vscode-extension.md
 
-[o:playcanvas:p:playcanvas-developer-site:r:user-manual-scripting-fundamentals-application-lifecyle]
-file_filter   = i18n/<lang>/docusaurus-plugin-content-docs/current/user-manual/scripting/fundamentals/application-lifecyle.md
-source_file   = docs/user-manual/scripting/fundamentals/application-lifecyle.md
+[o:playcanvas:p:playcanvas-developer-site:r:user-manual-scripting-fundamentals-application-lifecycle]
+file_filter   = i18n/<lang>/docusaurus-plugin-content-docs/current/user-manual/scripting/fundamentals/application-lifecycle.md
+source_file   = docs/user-manual/scripting/fundamentals/application-lifecycle.md
 type          = GITHUBMARKDOWN
 minimum_perc  = 0
-resource_name = content/en/user-manual/scripting/fundamentals/application-lifecyle.md
+resource_name = content/en/user-manual/scripting/fundamentals/application-lifecycle.md
 
 [o:playcanvas:p:playcanvas-developer-site:r:user-manual-scripting-fundamentals-engine-api]
 file_filter   = i18n/<lang>/docusaurus-plugin-content-docs/current/user-manual/scripting/fundamentals/engine-api.md

@@ -56,7 +56,7 @@ update(dt) {
 
 ![Script Attributes](/img/user-manual/scripting/script-attributes.png)
 
-Once you've declared your attributes the Editor needs to parse the code in order to expose the script attributes. If attributes have been changed, you need to manually refresh the attributes you can click the parse button.
+属性を宣言したらEditorは、スクリプトの属性を露出させるためにコードをパースする必要があります。属性が変更された場合は、手動で属性を更新する必要があります。パースボタンをクリックすることができます。
 
 ![Parse Button](/img/user-manual/scripting/script-parse-button.png)
 
@@ -109,7 +109,7 @@ There are additional numerical constraints that you can set which help the edito
 speed = 10
 ```
 
-## Attribute types
+## 属性のタイプ
 
 When you expose a script member as an attribute, the editor will show a control thats relevant to the type of attribute. If the attribute is a number, it shows a numerical input, if it's a boolean, a checkbox.
 
@@ -131,9 +131,9 @@ myTexture;
 An attribute must either be initialized with a value `speed = 10`, or have a jsdoc type `@type {number}`. If neither are present, the attribute will ignored
 :::
 
-### Entity attribute
+### Entity属性
 
-The Entity type lets your reference another entity in your hierarchy. A great way to link two entities together.
+エンティティタイプにより、階層で他のエンティティを参照することができます。二つのエンティティをリンクする良い方法です。
 
 ```javascript
 /**
@@ -143,7 +143,7 @@ The Entity type lets your reference another entity in your hierarchy. A great wa
 target
 ```
 
-### Asset attribute
+### Asset属性
 
 The Asset attribute let's you reference a project asset in your script. The asset attribute also supports the `@resource` tag which limits the attribute to assets of a particular type, e.g. 'texture', 'material', 'model'.
 
@@ -163,14 +163,14 @@ initialize() {
 }
 ```
 
-### Color attribute
+### Color属性
 
 ```javascript
 /** @attribute */
 color = new Color()
 ```
 
-The color attribute shows a color picker when exposed in the editor. There are two options `rgb` and `rgba` depending on whether you wish to expose the alpha channel as well.
+色属性は、エディタで露出されたときにカラーピッカーを示します。アルファチャンネルを公開するか否かに応じて、二つのオプション`rgb`と` rgba`があります。
 
 ### Vector attribute
 
@@ -183,7 +183,7 @@ The vector attribute can be a 2, 3 or 4 dimension. The editor will show a numeri
 
 ![Attribute Vector](/img/user-manual/scripting/attribute-vec3.png)
 
-### Curve attribute
+### Curve属性
 
 ```javascript
 /**
@@ -194,7 +194,7 @@ The vector attribute can be a 2, 3 or 4 dimension. The editor will show a numeri
 wave
 ```
 
-The curve attribute is used to express a value that changes over a time period. All curves are defined over the period 0.0 - 1.0. You can define multiple curves, for example if you wish to have a 3D position from a curve defined three curves for x,y,z using the `curves` property. There is also a special curve editor for modifying colors using the `color` property.
+Curve属性は、時間の経過に応じて値が変化する値を表現するために使用します。すべてのカーブは、期間0.0 - 1.0の間で定義されます。3D位置をカーブで表現する場合は、`curves` プロパティを使用して x、y、z それぞれの 3 つのカーブを定義できます。また、`color` プロパティを使用して特別なカーブエディターを利用してカラーを変更できるようにできます。
 
 ### Attribute arrays
 

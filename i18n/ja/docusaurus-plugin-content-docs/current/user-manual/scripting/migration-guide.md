@@ -63,7 +63,7 @@ console.log(SPEED);
 
 You can learn more about the other difference between [ES Modules and standard scripts here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#other_differences_between_modules_and_standard_scripts)
 
-### Loading Order
+### スクリプトの読み込み順序
 
 :::note
 

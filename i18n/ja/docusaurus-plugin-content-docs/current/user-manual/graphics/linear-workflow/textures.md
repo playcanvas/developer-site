@@ -1,5 +1,5 @@
 ---
-title: Textures
+title: テクスチャ
 sidebar_position: 1
 ---
 

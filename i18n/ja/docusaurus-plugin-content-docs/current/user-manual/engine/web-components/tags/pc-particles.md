@@ -12,11 +12,11 @@ The `<pc-particles>` tag is used to define a particle system.
 
 ## Attributes
 
-| Attribute | Description |
+| 属性 (Attribute) | 説明 |
 | --- | --- |
 | `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `json`. |
 
-## Example
+## 例
 
 First define the particle system in JSON format:
 

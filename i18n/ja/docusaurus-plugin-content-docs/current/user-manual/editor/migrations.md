@@ -3,7 +3,7 @@ title: Migrations
 sidebar_position: 8
 ---
 
-## Introduction
+## イントロダクション
 
 This page outlines the migrations of project data between different Editor versions.
 
@@ -19,7 +19,7 @@ If your cubemap skybox has pronounced edges such as this example above, navigate
 
 <img src='/img/user-manual/editor/editor-v2/prefiltered-data.png' width='400' />
 
-#### Gamma Correction
+#### ガンマ補正 (Gamma Correction)
 
 <img src='/img/user-manual/editor/editor-v2/gamma-compare.png' />
 

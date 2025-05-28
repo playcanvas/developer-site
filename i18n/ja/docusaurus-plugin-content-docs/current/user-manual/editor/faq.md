@@ -13,7 +13,7 @@ This is a list compiled of all the most commonly asked questions and answers for
 - Check **gamma** and **tone mapping** for viewport under **Settings -> Editor**
 - Check **gamma** and **tone mapping** for each `CameraComponent` (**Engine V2 PROJECT ONLY**)
 
-#### Scene Settings
+#### シーン設定 (Scene Settings)
 
 <img src='/img/user-manual/editor/editor-v2/settings-rendering.png' width='400px' />
 

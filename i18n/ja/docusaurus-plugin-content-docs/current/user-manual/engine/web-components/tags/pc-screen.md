@@ -25,7 +25,7 @@ The `<pc-screen>` tag is used to define a screen component.
 
 </div>
 
-## Example
+## 例
 
 ```html
 <pc-entity>

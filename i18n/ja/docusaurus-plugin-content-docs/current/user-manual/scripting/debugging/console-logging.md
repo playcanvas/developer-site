@@ -161,6 +161,6 @@ Whether you launch your application using the Launch button in the PlayCanvas Ed
 * **Conditional Logging:** Use `if` statements to log only when specific conditions occur, reducing console spam.
 * **Clean Up Your Logs:** Remove temporary or excessive `console.log` statements before considering your code finished, or use `console.debug` for logs you might want later but not normally see.
 
-## Conclusion
+## 最後に
 
 The browser console is your first line of defense when debugging. Mastering `console.log` and its variations is a fundamental skill that will save you countless hours trying to figure out why your scripts aren't behaving as expected. Get comfortable opening it, logging information, and interpreting the output!

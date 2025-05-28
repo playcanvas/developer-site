@@ -1,9 +1,9 @@
 ---
-title: Hot Reloading
+title: ホットリロード
 sidebar_position: 4
 ---
 
-When you are iterating on a complex project it can be frustrating to have to do a full page refresh every time you make a change to a script. Especially if it takes you a long time to get to the point where you are testing your code. That is where hot-swapping of code comes in.
+複雑なプロジェクトで反復的な作業を行う場合、スクリプトを変更するたびにページ全体をリフレッシュする必要があると手間取ることもあります。特に、コードをテストするまでに時間がかかる場合は不便です。そこで、コードのホットスワップを利用することができます。
 
 ## How to Use Hot-swapping
 
@@ -33,9 +33,9 @@ MyScript.prototype.swap = function(old) {
 </TabItem>
 </Tabs>
 
-When a script with a `swap` function is changed in the code editor, any launched applications will reload the script and add it to script registry. Then it creates brand new script instances to swap with the old ones, calling the `swap` method during that process per each instance. The `initialize` method of the script is *not* called again. Instead, the old script instance is passed into the `swap` method and it is up to the developer to ensure that the state of the old script is copied into the new one. Declared script attributes are automatically copied over into the new script instance. It is also important to remove any event listeners from the old instance and re-attach them to the new one.
+`swap` 関数があるスクリプトがコードエディターで変更されると、起動しているすべてのアプリケーションはスクリプトをリロードし、スクリプトをスクリプトレジストリに追加します。その後、古いスクリプトと交換するために新しいスクリプトインスタンスを作成し、そのプロセスの間に各インスタンスで `swap` メソッドを呼び出します。スクリプトの `initialize` メソッドは*再度呼び出されません*。代わりに、古いスクリプトインスタンスが `swap` メソッドに渡され、開発者が古いスクリプトの状態を新しいスクリプトにコピーすることを確認する必要があります。宣言されたスクリプト属性は自動的に新しいスクリプトインスタンスにコピーされます。また、古いインスタンスからすべてのイベントリスナーを削除し、新しいインスタンスに再度設定することが重要です。
 
-For example:
+以下に例を示します。
 
 <Tabs defaultValue="esm" groupId='script-code'>
 <TabItem  value="esm" label="ESM">
@@ -119,6 +119,6 @@ Rotator.prototype.update = function (dt) {
 </TabItem>
 </Tabs>
 
-Try changing logic within the `update` method and save the code. The launched application will automatically swap `rotator` script instances with new ones and your application will keep working with the new logic.
+`update` メソッド内のロジックを変更してコードを保存してみてください。起動中のアプリケーションは、新しい `rotator` スクリプトインスタンスと交換して、新しいロジックで作動し続けます。
 
-The `swap` method is called regardless of the running state of a script instance, so if it was disabled due to an error it can be re-enabled in the `swap` method.
+`swap` メソッドはスクリプトインスタンスの実行状態にかかわらず、呼び出されるため、エラーによって無効になった場合でも、`swap` メソッドで再度有効にできます。

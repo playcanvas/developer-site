@@ -30,7 +30,7 @@ The `<pc-rigidbody>` tag is used to define a rigidbody component.
 
 </div>
 
-## Example
+## 例
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 

@@ -30,7 +30,7 @@ The `<pc-element>` tag is used to define an element component.
 
 </div>
 
-## Example
+## 例
 
 ```html
 <pc-entity>

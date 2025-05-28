@@ -37,7 +37,7 @@ The `<pc-camera>` tag is used to define a camera component.
 
 </div>
 
-## Example
+## 例
 
 ```html
 <pc-entity>

@@ -87,7 +87,7 @@ In addition to standard JavaScript types, you can configure script attributes us
 
 The expected format for each type is as follows:
 
-| PlayCanvas Data Type | Format Example                           | Description |
+| PlayCanvas Data Type | Format Example                           | 説明 |
 | -------------------- | ---------------------------------------- | ----------- |
 | **Asset**            | `asset:your-asset-id`                    | References a `<pc-asset>`. Concatenate `asset:` with the asset's `id` attribute. |
 | **Entity**           | `entity:your-entity-id`                  | References a `<pc-entity>`. Concatenate `entity:` with the entity's `id` attribute. |

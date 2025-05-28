@@ -21,11 +21,11 @@ You can click-and-drag to move individual scripts around to edit the order.
 
 When scripts are first loaded, they are immediately executed. That means that the scripts are first executed in the order that they are loaded. However, the loading order of the script **does not** effect the execution of order of script methods within script component. For example, the `initialize` methods of scripts on the same entity are called in the order that they are listed on the Entity, not the loading order.
 
-### Preloading
+### プリロード
 
 By default, as with other assets in PlayCanvas, a script asset is marked as `preload`. This means that it will be loaded before the application starts. If you disable preloading on a script, it will not be loaded under normal circumstances. This way, you can include a script in your project but prevent it from loading by unchecking `preload`. You can trigger a non-preloading script to load dynamically by using the regular asset API (see [`AssetRegistry#load`](https://api.playcanvas.com/engine/classes/AssetRegistry.html#load)).
 
-It is possible to subscribe to dynamic changes to script registry:
+スクリプトレジストリへの動的な変更にサブスクライブすることができます：
 
 ```javascript
 this.app.scripts.on('add', (name, scriptType) => {
@@ -33,6 +33,6 @@ this.app.scripts.on('add', (name, scriptType) => {
 });
 ```
 
-### Concatenation
+### 連結 (Concatenation)
 
 By default, when you publish or export your application, all preloaded Classic scripts are concatenated into a single script file. This optimizes load time by reducing the number of requests that are needed to load all your scripts.

@@ -14,11 +14,11 @@ The `<pc-model>` tag is used to define an entity that instantiates a 3D model fr
 
 All attributes of [`<pc-entity>`](../pc-entity) are also available.
 
-| Attribute | Description |
+| 属性 (Attribute) | 説明 |
 | --- | --- |
 | `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `container`. |
 
-## Example
+## 例
 
 ```html
 <pc-asset src="assets/car.glb" id="car"></pc-asset>

@@ -176,17 +176,17 @@ These are the chunk that had their signature changed to accept individual member
 
 ### *Engine v1.62*
 
-In PlayCanvas, we have two sets of shader chunks, one set we refer to as the shader frontend, which provide values for the arguments passed to our lighting algorithm, also called the shader backend.
+PlayCanvasには、2つのシェーダーチャンクがあります。1つはシェーダーフロントエンドと呼ばれ、ライティングアルゴリズムに渡される引数の値を提供します。もう1つはシェーダーバックエンドと呼ばれ、またライティングアルゴリズムとも呼ばれます。
 
-With 1.62, we are creating a clearer distinction between these two, such that the values passed to the backend are well defined and known in advance, not automatically generated. This allows for writing a fully custom shader that can interface with our lighting code just like how our native materials do.
+1.62では、これら2つの間に明確な区別を作成し、バックエンドに渡される値が事前に明確に定義され、自動生成されないようにします。これにより、ネイティブのマテリアルと同様に、ライティングコードとインターフェースすることができる完全にカスタム化されたシェーダーを作成できます。
 
-As a result of that, almost all backend chunks have been changed to accommodate for the split. This means that any custom backend shader chunks must move away from using globals to using the arguments passed to them by the lighting backend.
+その結果、ほとんどのバックエンドチャンクが変更され、分割に対応するようになりました。これは、カスタムバックエンドシェーダーチャンクがグローバル変数を使用するのではなく、ライティングバックエンドから渡された引数を使用するように移行する必要があることを意味します。
 
-This change also makes some chunks, such as the clearcoat specific ones, redundant, as their functions have become reusable when their no longer reliant on global values.
+この変更により、クリアコートの特定のチャンクなど、いくつかのチャンクは不要になりました。これらの機能は、グローバル値に依存しなくなったため再利用できるようになりました。
 
 #### Changes
 
-This release breaks most lit/frag chunks. Most of these chunks have had their signatures changed to accept the various values they need, instead of relying on globals. With that said, most globals are still set in the shader. An example of this change is:
+このリリースでは、ほとんどのライト/フラグメント・チャンクが変更されています。これらのチャンクのほとんどは、グローバル変数に依存する代わりに、必要な各種の値を受け入れるようにシグネチャが変更されました。ただし、ほとんどのグローバル変数はシェーダー内で設定されています。この変更の例を示します。
 
 ```glsl
 vec3 combineColor() {
@@ -196,7 +196,7 @@ vec3 combineColor() {
 }
 ```
 
-Is now expressed:
+は、次のように表されます。
 
 ```glsl
 vec3 combineColor(vec3 albedo, vec3 sheenSpecularity, float clearcoatSpecularity) {
@@ -206,70 +206,70 @@ vec3 combineColor(vec3 albedo, vec3 sheenSpecularity, float clearcoatSpecularity
 }
 ```
 
-Where we previously had globals, in 1.62 they are packed into structs, these structs are the primary LitShaderArgs which is defined as such:
+1.62では、以前グローバル変数だったものが構造体にパックされ、これらの構造体が主要なLitShaderArgsに定義されます。LitShaderArgsは次のように定義されます。
 
 ```glsl
 struct LitShaderArguments
 {
-    // Transparency
+    // 透明度
     float opacity;
 
-    // Normal direction in world space
+    // ワールド空間での法線方向 
     vec3 worldNormal;
 
-    // Surface albedo absorbance
+    // 表面の吸収率 
     vec3 albedo;
 
-    // Transmission factor (refraction), range [0..1]
+    // 透過係数（屈折度）, 範囲 [0..1] 
     float transmission;
 
-    // Uniform thickness of medium, used by transmission, range [0..inf]
+    // 厚さ, 透過で使用, 範囲 [0..inf]
     float thickness;
 
-    // The f0 specularity factor
+    // f0 スペキュラリティ係数 
     vec3 specularity;
 
-    // The microfacet glossiness factor, range [0..1]
+    // マイクロファセットの光沢係数 [0..1]
     float gloss;
 
-    // Surface metalness factor, range [0..1]
+    // 表面のメタリック係数 [0..1]
     float metalness;
 
-    // Specularity intensity factor, range [0..1]
+    // スペキュラリティの強度係数 [0..1]
     float specularityFactor;
 
-    // Ambient occlusion amount, range [0..1]
+    // 環境遮蔽の量 [0..1]
     float ao;
 
-    // Emission color
+    // 発光色
     vec3 emission;
 
-    // Light map color
+    // ライトマップの色
     vec3 lightmap;
 
-    // Light map direction
+    // ライトマップの方向
     vec3 lightmapDir;
 
-    // Iridescence extension arguments
+    // 虹彩効果拡張の引数
     IridescenceArgs iridescence;
 
-    // Clearcoat extension arguments
+    // クリアコート拡張の引数
     ClearcoatArgs clearcoat;
 
-    // Sheen extension arguments
+    // シーン拡張の引数
     SheenArgs sheen;
 };
 ```
 
-The last three arguments are our shading extensions. IridescenceArgs is defined as such:
+最後の3つの引数が私たちのシェーディングの拡張機能です。IridescenceArgsは次のように定義されます。
 
 ```glsl
 struct IridescenceArgs
 {
-    // Iridescence effect intensity, range [0..1]
+    // 虹彩効果の強度、範囲 [0..1]
     float intensity;
 
-    // Thickness of the iridescent microfilm layer, value is in nanometers, range [0..1000]
+    // 虹彩薄膜層の厚さ、値はナノメートル単位、範囲 [0..1000]
     float thickness;
 };
 ```
@@ -279,13 +279,13 @@ ClearcoatArgs:
 ```glsl
 struct ClearcoatArgs
 {
-    // Intensity of the clearcoat layer, range [0..1]
+    // クリアコートレイヤーの強度、範囲  [0..1]
     float specularity;
 
-    // Glossiness of clearcoat layer, range [0..1]
+    // クリアコートレイヤーの光沢度、範囲 [0..1]
     float gloss;
 
-    // The normal used for the clearcoat layer
+    // クリアコートレイヤーに使用される法線ベクトル 
     vec3 worldNormal;
 };
 ```
@@ -295,42 +295,43 @@ SheenArgs:
 ```glsl
 struct SheenArgs
 {
-    // Glossiness of the sheen layer, range [0..1]
+    // Sheenレイヤーの光沢度 [0..1]
     float gloss;
 
-    // The color of the f0 specularity factor for the sheen layer
+    // Sheenレイヤーのf0スペキュラリティ係数の色 
     vec3 specularity;
 };
 ```
 
 | Chunk | Changes |
 | --- | --- |
-| `ambient(Constant/Env/SH)` | <ul><li>Accepts a vec3 for the world normal instead of using `dNormalW`</li></ul> |
-| `aoDiffuseOcc` | <ul><li>Accepts a float value for the AO, instead of using `dAO`</li></ul> |
-| `aoSpec(Occ/OccConst/OccConstSimple/OccSimple)` | <ul><li>Accepts float gloss, float ao, a vec3 world normal and a vec3 view direction instead of using `dGlossiness`, `dAo`, `dNormalW` and `dViewDirW`</li></ul> |
-| `combine` | <ul><li>Accepts vec3 for albedo, sheen specularity and a float for clearcoat specularity instead of using `dAlbedo`, `sSpecularity` and `ccSpecularity`</li></ul> |
-| `clusteredLight` | <ul><li>Reliance on globals have been reduced to only `dLightPosW`, `dLightDirW`, `dLightDirNormW` and `dShadowCoord` which is initialized per light</li></ul> |
-| `clusteredLightShadow` | <ul><li>For omni lights, generates a local variable instead of relying on `dShadowCoord`. For spot lights, accepts the shadow coordinate instead of using `dShadowCoord` as before</li></ul> |
-| `combine` | <ul><li>Accepts vec3 albedo, vec3 sheen specularity and float clearcoat specularity instead of using `dAlbedo`, `sSpecularity` and `ccSpecularity`</li></ul> |
-| `end` | <ul><li>Passes albedo, sheen specularity and clearcoat specularity to combine using `litShaderArgs`, uses `litShaderArgs.emission` instead of relying on `dEmission`</li></ul> |
-| `fallOff(InvSquared/Linear)` | <ul><li>Accepts a float light radius and a vec3 light direction instead of using `dLightDirW`</li></ul> |
-| `fresnelSchlick` | <ul><li>Accepts gloss and `IridescenceArgs` instead of relying on `dGlossiness`, `dIridescenceFresnel` and `dIridescence`</li></ul> |
-| `iridescenceDiffraction` | <ul><li>Accepts a float as iridescence thickness instead of using `dIridescenceThickness`</li></ul> |
-| `lightDiffuseLambert` | <ul><li>Accepts vec3 world normal, a vec3 view direction, a vec3 light direction and a vec3 normalized light direction instead of using `dNormalW`, `dViewDirW`, `dLightDirW` and `dLightDirNormW`</li></ul> |
-| `lightSheen` | <ul><li>Accepts a vec3 half vector, a vec3 world normal, a vec3 view direction, a vec3 normalized light direction and a float gloss instead of relying on `dNormalW`, `dViewDirW`, `dLightDirNormW` and `dGlossiness`</li></ul> |
-| `lightSpecular(AnisoGGX/Blinn/Phong)` | <ul><li>Accepts a vec3 half vector for the reflection, a vec3 reflection direction (used by Phong only), a vec3 world normal, a vec3 view dir, a float gloss value and a 3x3 matrix for the TBN, instead of relying on `dReflDirW`, `dNormalW`, `dViewDirW`, `dGlossiness/ccGlossiness` and `dTBN`</li></ul> |
-| `lightmap(DirAdd/Add)` | <ul><li>Accepts a vec3 lightmap value, a vec3 lightmap direction, a vec3 world normal, a vec3 view direction, float gloss, vec3 specularity, a read-write vec3 normalized light direction, a vec3 geometric normal and IridescenceArgs instead of relying on `dLightMap`, `dLightmapDir`, `dNormalW`, `dViewDirW`, `dGlossiness`, `dVertexNormalW` and `dSpecularity`</li></ul> |
-| `ltc` | <ul><li>No longer uses `dViewDirW`, `dNormalW`, `dGlossiness`, `dSpecularity`, `ccGlossiness`, `ccSpecularity` and `dLightDirW`, but instead relies on their values being passed as arguments</li></ul> |
-| `metalnessModulate` | <ul><li>Accepts a `LitShaderArguments` struct which is updated by the chunk. Removes the reliance on `dSpecularity`, `dMetalness` and `dAlbedo`</li></ul> |
-| `output(Alpha/AlphaPremul)` | <ul><li>Uses `litShaderArgs.opacity` instead of `dAlpha`</li></ul> |
-| `reflDir(Aniso)` | <ul><li>Accepts a vec3 world normal, a vec3 view direction, a float value for gloss and 3x3 matrix for the TBN, instead of using `dGlossiness`, `dViewDirW`, `dNormalW` and `dTBN`</li></ul> |
-| `reflection(CC/Cube/Env/EnvHQ/Sphere/SphereLow)` | <ul><li>Accepts a vec3 reflection direction and a float gloss value instead of using `dReflDirW`/`ccReflDirW` and `dGlossiness`</li></ul> |
-| `reflectionSheen` | <ul><li>Accepts a vec3 world normal, a vec3 view direction and a float gloss value instead of using `dNormalW`, `dViewDirW` and `sGlossiness`</li></ul> |
-| `refraction(Cube/Dynamic)` | <ul><li>Accepts a vec3 world normal, float thickness, float gloss, vec3 specularity, vec3 albedo, float transmission and `IridescenceArgs` instead of using `dNormalW`, `dAlbedo`, `dTransmission`, `dThickness`, `dGlossiness`, `dSpecularity` and passes the iridescence arguments to the fresnel function</li></ul> |
-| `shadow(Common/Coord/CoordPerspZBuffer` | <ul><li>Accepts a permutation of a vec3 light direction, a vec3 light position, a vec3 normalized light direction and a vec3 geometric normal instead of using `dLightDirW`, `dLightPosW`, `dLightDirNormW` and `dVertexNormalW` and instead accepts them as arguments. The permutation depends on the requirements for the different shadow coordinate functions</li></ul> |
-| `shadow(EVSM/EVSMn/Standard/StandardGL2/VSM8)` | <ul><li>Accepts a vec3 shadow sample coordinate instead of using `dShadowCoord`</li></ul> |
-| `spot` | <ul><li>Accepts a vec3 normalized light direction instead of using `dLightDirNormW`</li></ul> |
-| `TBN(-/ObjectSpace/derivative/fast)` | <ul><li>Accepts a vec3 tangent, binormal and normal instead of using `dTangentW`, `dBinormalW` and `dNormalW`</li></ul> |
+| `ambient(Constant/Env/SH)` | <ul><li> `dNormalW` を使用する代わりに、ワールド法線のvec3を受け入れます。</li></ul> |
+| `aoDiffuseOcc` | <ul><li> `dAO` を使用する代わりに、AOのfloat値を受け入れます。</li></ul> |
+| `aoSpec(Occ/OccConst/OccConstSimple/OccSimple)` | <ul><li> `dGlossiness` 、 `dAo` 、 `dNormalW` 、 `dViewDirW` を使用する代わりに、float形式のグロス（光沢度）、float形式のAO、vec3形式のワールド法線、およびvec3形式の視点方向を受け入れます。</li></ul> |
+| `combine` | <ul><li> `dAlbedo` 、 `sSpecularity` 、 `ccSpecularity` を使用する代わりに、vec3形式のアルベド、シーンのスペキュラリティ（鏡面反射）、およびクリアコートのスペキュラリティ（鏡面反射）のfloat値を受け入れます。</li></ul> |
+| `clusteredLight` | <ul><li>グローバル変数への依存は、ライトごとに初期化される  `dLightPosW` 、 `dLightDirW` 、 `dLightDirNormW` 、および  `dShadowCoord` のみに減少しています。</li></ul> |
+| `clusteredLightShadow` | <ul><li> オムニライトの場合、 `dShadowCoord`  に依存する代わりにローカル変数を生成します。スポットライトの場合、以前の `dShadowCoord` を使用する代わりにシャドウ座標を受け入れます。</li></ul> |
+| `combine` | <ul><li> `dAlbedo` 、 `sSpecularity` 、 `ccSpecularity` を使用する代わりに、vec3形式のアルベド、vec3形式のシーンのスペキュラリティ（鏡面反射）、およびfloat形式のクリアコートのスペキュラリティ（鏡面反射）を受け入れます。</li></ul> |
+| `end` | <ul><li>アルベド、シーンのスペキュラリティ（鏡面反射）、クリアコートのスペキュラリティ（鏡面反射）を `litShaderArgs` を使用して結合し、`dEmission` に依存する代わりに `litShaderArgs.emission` を使用します。</li></ul> |
+| `fallOff(InvSquared/Linear)` | <ul><li> `dLightDirW` を使用する代わりに、光の半径の float 値と光の方向の vec3 を受け入れます。</li></ul> |
+| `fresnelSchlick` | <ul><li>`dGlossiness` 、 `dIridescenceFresnel` 、 `dIridescence` に依存する代わりに、グロス（光沢度）と `IridescenceArgs`（虹彩効果引数）を受け入れます。</li></ul> |
+| `iridescenceDiffraction` | <ul><li> `dIridescenceThickness` を使用する代わりに、虹彩効果の厚さの float 値を受け入れます。</li></ul> |
+| `lightDiffuseLambert` | <ul><li> `dNormalW` 、 `dViewDirW` 、 `dLightDirW` 、 `dLightDirNormW`  を使用する代わりに、vec3 形式のワールド法線、視点の方向、光の方向、正規化された光の方向を受け入れます。</li></ul> |
+| `lightSheen` | <ul><li> `dNormalW` 、 `dViewDirW` 、 `dLightDirNormW` 、 `dGlossiness` に依存する代わりに、vec3 形式のハーフベクトル、ワールド法線、視点の方向、正規化された光の方向、およびグロス（光沢度）の float 値を受け入れます。</li></ul> |
+| `lightSpecular(AnisoGGX/Blinn/Phong)` | <ul><li> `dReflDirW` 、 `dNormalW` 、 `dViewDirW` 、 `dGlossiness/ccGlossiness` 、 `dTBN`  に依存する代わりに、vec3 形式のリフレクション（反射）のためのハーフベクトル、Phong のみに使用される vec3 形式のリフレクション（反射）方向、vec3 形式のワールド法線、vec3 形式の視点方向、float 形式のグロス値（光沢度）、および TBN のための 3x3 マトリクスを引数として受け入れます。 </li></ul> |
+| `lightmap(DirAdd/Add)` | <ul><li> `dLightMap` 、 `dLightmapDir` 、 `dNormalW` 、 `dViewDirW` 、 `dGlossiness` 、 `dVertexNormalW` 、 `dSpecularity`  に依存する代わりに、vec3 形式のライトマップ値、ライトマップ方向、ワールド法線、視点の方向、float 形式のグロス（光沢度）、vec3 形式のスペキュラリティ（鏡面反射）、読み書き可能な vec3 形式の正規化された光の方向、vec3 形式の幾何学的法線、および IridescenceArgs（虹彩効果引数）を引数として受け入れます。</li></ul>
+  |
+| `ltc` | <ul><li>もはや `dViewDirW` 、 `dNormalW` 、 `dGlossiness` 、 `dSpecularity` 、 `ccGlossiness` 、 `ccSpecularity` 、そして `dLightDirW` を使用せず、代わりにそれらの値が引数として渡されることに依存します。</li></ul> |
+| `metalnessModulate` | <ul><li>チャンクによって更新される `LitShaderArguments` 構造体を受け入れます。 `dSpecularity` 、 `dMetalness` 、そして `dAlbedo` への依存を削除します。</li></ul> |
+| `output(Alpha/AlphaPremul)` | <ul><li>`dAlpha` の代わりに、 `litShaderArgs.opacity` を使用します。</li></ul> |
+| `reflDir(Aniso)` | <ul><li> `dGlossiness` 、`dViewDirW` 、`dNormalW` 、`dTBN` の代わりに、vec3形式のワールド法線、視点の方向、グロス値（光沢度）の浮動小数点値、そしてTBNの3x3マトリクスを引数として受け入れます。 </li></ul> |
+| `reflection(CC/Cube/Env/EnvHQ/Sphere/SphereLow)` | <ul><li> `dReflDirW` / `ccReflDirW` や `dGlossiness` の代わりに、vec3形式のリフレクション（反射）方向と浮動小数点のグロス値（光沢度）を引数として受け入れます。</li></ul> |
+| `reflectionSheen` | <ul><li> `dNormalW` 、`dViewDirW` 、`sGlossiness` の代わりに、vec3形式のワールド法線、視点の方向、浮動小数点の光沢度を引数として受け入れます。</li></ul> |
+| `refraction(Cube/Dynamic)` | <ul><li> `dNormalW` 、`dAlbedo` 、 `dTransmission` 、 `dThickness` 、 `dGlossiness` 、`dSpecularity` の代わりに、vec3形式のワールド法線、浮動小数点の厚さと光沢度、vec3形式の反射率とアルベド、浮動小数点の透過率、そして `IridescenceArgs` を引数として受け入れます。また、虹彩効果の引数はフレネル関数へ渡されます。</li></ul> |
+| `shadow(Common/Coord/CoordPerspZBuffer` | <ul><li> `dLightDirW` 、 `dLightPosW` 、 `dLightDirNormW` 、`dVertexNormalW` を使用する代わりに、vec3 形式の光の方向、光の位置、正規化された光の方向、および幾何学的な法線の順列を引数として受け入れます。この順列は、異なるシャドウ座標関数の要件によって異なります。</li></ul> |
+| `shadow(EVSM/EVSMn/Standard/StandardGL2/VSM8)` | <ul><li>`dShadowCoord`を使用する代わりに、vec3シャドウサンプル座標を受け入れます</li></ul> |
+| `spot` | <ul><li>`dLightDirNormW`を使用する代わりに、vec3で正規化された光の方向を受け入れます</li></ul> |
+| `TBN(-/ObjectSpace/derivative/fast)` | <ul><li>`dTangentW`、`dBinormalW`、`dNormalW`を使用する代わりに、vec3接線、双接線、および法線を受け入れます。</li></ul> |
 
 ---
 
@@ -338,15 +339,15 @@ struct SheenArgs
 
 | Chunk | Changes |
 | ---   | ---     |
-| `clearCoatGlossPS` | <ul><li>Renamed uniform `material_clearCoatGlossiness` to `material_clearCoatGloss`.</li></ul> |
-| `glossPS`          | <ul><li>Renamed uniform `material_glossiness` to `material_gloss`.</li></ul> |
-| `sheenGlossPS`     | <ul><li>Renamed uniform `material_sheenGlossiness` to `material_sheenGloss`.</li></ul> |
+| `clearCoatGlossPS` | <ul><li>uniformの `material_clearCoatGlossiness` を `material_clearCoatGloss` に改名しました。</li></ul> |
+| `glossPS`          | <ul><li>uniformの `material_glossiness` を `material_gloss` に改名しました。</li></ul> |
+| `sheenGlossPS`     | <ul><li>uniformの `material_sheenGlossiness` を `material_sheenGloss` に改名しました。</li></ul> |
 
 ---
 
 ### Engine v1.57
 
-In 1.57, almost all front-end chunks have been changed to minimize the amount of samplers used by the shader. This is an optional feature, however it's recommended to follow the same coding style to reduce the amount of samplers used by the shader. The following chunks are affected by it:
+1.57 では、ほぼすべてのフロントエンドチャンクが、シェーダによって使用されるサンプラー の量を最小限に抑えるように変更されました。これはオプションの機能ですが、シェーダーが使用するサンプラーの量を減らすために、同じコーディングスタイルに従うことが推奨されます。以下のチャンクがその影響を受けます。
 
 | Chunk  |
 | --- |
@@ -369,12 +370,12 @@ In 1.57, almost all front-end chunks have been changed to minimize the amount of
 | `thicknessPS` |
 | `transmissionPS` |
 
-This is also supported in custom front-end chunks, given that your chunk piggybacks on the pre-existing material samplers. To support this method in your chunks, what you'd need to do is:
+これは、カスタムフロントエンドチャンクでもサポートされており、チャンクが既存のマテリアルサンプラーをピギーバックしていることが前提です。あなたのチャンクでこの方法をサポートするために必要なことは、以下の通りです。
 
-- Remove the sampler uniform declaration from the chunk
-- Replace the sampler name with the `$SAMPLER` macro
+- チャンクからサンプラーユニフォーム宣言を削除してください。
+- サンプラー名を `$SAMPLER` マクロで置き換えます。
 
-For example:
+以下に例を示します。
 
 ```glsl
 uniform sampler2D texture_aoMap;
@@ -391,7 +392,7 @@ void getAO() {
 }
 ```
 
-Would be converted to:
+に変換されるでしょう。
 
 ```glsl
 void getAO() {
@@ -407,7 +408,7 @@ void getAO() {
 }
 ```
 
-This allows the engine to automatically pick the sampler uniform to use, thus potentially reducing the total number of samplers. But note, this is only supported for front-end chunks.
+これにより、エンジンは自動的に使用するサンプラーユニフォームを選択することができ、その結果、サンプラーの総数を減らすことができる可能性があります。しかし、これはフロントエンドチャンクにのみサポートされていることに注意してください。
 
 ---
 
@@ -415,16 +416,16 @@ This allows the engine to automatically pick the sampler uniform to use, thus po
 
 | Chunk | Changes |
 | ---   | ---     |
-| `combineXXXX` | <ul><li>all combine chunks except for `combinePS` have been deleted.</li><li>instead, combinePS is controlled with a handful of preprocessor defines.</li></ul> |
-| `refractionPS` | <ul><li>split into two new chunks, `refractionCubePS` and `refractionDynamicPS`.</li></ul> |
-| `refractionCubePS` | <ul><li>the old `refractionPS` is identical to this one, uses a cube map for refractions.</li></ul> |
-| `refractionDynamicPS` | <ul><li>new chunk which supports dynamic refractions by using the grab pass, needs `requestSceneColorMap(true);` to be set on the camera to work.</li></ul> |
-| `sheenPS` | <ul><li>new chunk to provide sheen (fabric) color.</li></ul> |
-| `sheenGlossPS` | <ul><li>new chunk to provide sheen (fabric) glossiness.</li></ul> |
-| `reflectionEnvHQPS` | <ul><li>new chunk to provide a high quality specular environment map for reflections and refractions.</li></ul> |
-| `thicknessPS` | <ul><li>new chunk to provide thickness which modifies attenuation color for transmissive (transparent/refractive) materials.</li></ul> |
-| `bakeDirLmEndPs` | <ul><li>moved to `chunks-lightmapper.js`.</li></ul> |
-| `bakeLmEndPS` | <ul><li>moved to `chunks-lightmapper.js`.</li></ul> |
+| `combineXXXX` | <ul><li>combinePS を除くすべての combine チャンクが削除されました。</li><li>その代わり、 `combinePS ` は少数のプリプロセッサ定義で制御されます。</li></ul> |
+| `refractionPS` | <ul><li>2つの新しいチャンク、 `refractionCubePS` と `refractionDynamicPS` に分割されました。</li></ul> |
+| `refractionCubePS` | <ul><li>以前の`refractionPS`は、屈折にキューブマップを使用することを前提としたものです。</li></ul> |
+| `refractionDynamicPS` | <ul><li>新しいチャンクで、グラブパスを使用して動的な屈折をサポートし、カメラに`requestSceneColorMap(true);`を設定する必要があります。</li></ul> |
+| `sheenPS` | <ul><li>布 (Fabric) のシーンを提供するための新しいチャンクです。</li></ul> |
+| `sheenGlossPS` | <ul><li>布 (Fabric) の光沢度を提供するための新しいチャンクです。</li></ul> |
+| `reflectionEnvHQPS` | <ul><li>高品質のスペキュラ環境マップを反射(Reflections)と屈折(Refractions)に提供するための新しいチャンクです。</li></ul> |
+| `thicknessPS` | <ul><li>透明または屈折性 (Transmissive) として透明 (Transparent) /屈折性 (Refractive) のマテリアルの減衰色を変更する厚み (Thickness) を提供する新しいチャンクです。</li></ul> |
+| `bakeDirLmEndPs` | <ul><li>`chunks-lightmapper.js`に移動しました（未使用）。</li></ul> |
+| `bakeLmEndPS` | <ul><li>`chunks-lightmapper.js`に移動しました（未使用）。</li></ul> |
 
 ---
 
@@ -432,31 +433,31 @@ This allows the engine to automatically pick the sampler uniform to use, thus po
 
 | Chunk | Changes |
 | --- | --- |
-| `clearCoatNormalPS` | <ul><li>refrain from generating world CC reflection, now done on the backend instead</li><li>normalize final world space normal</li></ul> |
-| `clusteredLightPS` | <ul><li>remove dead code.</li><li>the `CLUSTER_XXX` macros have been renamed to `LIT_XXX`.</li><li>each light calculates fresnel</li></ul> |
-| `combinePS` | <ul><li>new chunk to replace all the other combine chunks.</li></ul> |
-| `combineXXXX` | <ul><li>combine chunk variations have been made deprecated and replaced with a single chunk.</li></ul> |
-| `diffusePS` | <ul><li>fix gamma handling relative to albedo detail</li></ul> |
-| `diffuseDetailMapPS` | <ul><li>gamma correct detail map before combining with base albedo</li></ul> |
-| `endPS` | <ul><li>combine emissive with `dEmissive` instead of a call to `getEmission()`</li><li>`CLEARCOAT` macro is now `LIT_CLEARCOAT`.</li></ul> |
-| `emissivePS` | <ul><li>set `dEmission` global instead of returning the value in order to bring it in line with the other frontend components</li></ul> |
-| `fresnelSchlickPS` | <ul><li>fresnel effect now reacts to index of refraction.</li><li>no longer changes specularity global, but returns value to be used per-light and for the environment</li></ul> |
-| `lightmapSingleVert.js` | <ul><li>removed (unused)</li></ul> |
-| `lightmapDirPS`, `lightmapSinglePS`| <ul><li>renamed the lightmap function to `getLightMap()` instead of `addLightMap()`</li><li>changed the implementation to write `dLightmap` and `dLightmapDir` global instead of updating `dDiffuseLight` and `dSpecularLight` directly</li><li>backend now handles combining lightmap in `lightmapAddPS` and `lightmapDirAddPS`</li></ul> |
-| `lightmapAddPS`, `lightmapDirAddPS` | <ul><li>new chunks for adding the lightmap values passed in from the backend</li><li>`CLEARCOAT` macro replaced with `LIT_CLEARCOAT`.</li></ul> |
-| `lightSpecularAnisoGGXPS` | <ul><li>`CLEARCOAT` define replaced with `LIT_CLEARCOAT`</li></ul> |
-| `lightSpecularBlinnPS`, `lightSpecularPhongPS` | <ul><li>added clear coat `#define`, removed call to `antiAliasGlossiness()`</li></ul> |
-| `ltcPS` | <ul><li>`CLEARCOAT` macro replaced with `LIT_CLEARCOAT`.</li></ul> |
-| `normalMapFastPS` | <ul><li>removed</li></ul> |
-| `normalMapPS` | <ul><li>added `MAPTEXTURE` #define like the other chunks</li><li>normalize final normal</li><li>when normal texture isn't defined, calculate normal from geometry normal instead</li></ul> |
-| `normalDetailMapPS` | <ul><li>remove two (mostly) unnecessary calls to `normalize` - final normal is normalized instead</li></ul> |
-| `normalVertexPS` | <ul><li>removed chunk, moved functionality to `normalMapPS` frontend chunk</li></ul> |
-| `metalnessPS` | <ul><li>now controls metalness in front end and is not exclusive of `specularPS`</li></ul> |
-| `metalnessModulatePS` | <ul><li>new chunk to control how specular color is modulated based on specular color and albedo with regards to metalness</li></ul> |
-| `reflectionCC` | <ul><li>`CLEARCOAT` define replaced with `LIT_CLEARCOAT`.</li></ul> |
-| `specularAaNonePS`, `specularAaToksvigPS`, `specularAaToksvigFastPS` | <ul><li>removed</li></ul> |
-| `startPS` | <ul><li>removed global declarations, generate them on demand instead</li><li>`CLEARCOAT` macro replaced with `LIT_CLEARCOAT`.</li></ul> |
-| `specularPS` | <ul><li>only provides specular color, metalness modulation is now done in backend.</li></ul> |
-| `specularityFactorPS` | <ul><li>new chunk to control specular intensity for metalness workflow.</li></ul> |
+| `clearCoatNormalPS` | <ul><li>バックエンドでのworld CC reflectionの生成を控え、代わりに行います。</li><li>最終的なワールドスペース法線を正規化します。</li></ul> |
+| `clusteredLightPS` | <ul><li>不要なコードを削除します。</li><li>`CLUSTER_XXX` マクロは `LIT_XXX` に名称変更されました。</li><li>各ライトがフレネルを計算します。</li></ul> |
+| `combinePS` | <ul><li>他の組み合わせチャンクを置き換えるための新しいチャンクです。</li></ul> |
+| `combineXXXX` | <ul><li>combineチャンクのバリエーションは非推奨となり、単一のチャンクに置き換えられました。</li></ul> |
+| `diffusePS` | <ul><li>アルベドディテールに対するガンマ処理の修正</li></ul> |
+| `diffuseDetailMapPS` | <ul><li>ベースアルベドと組み合わせる前にディテールマップをガンマ補正します。</li></ul> |
+| `endPS` | <ul><li> `getEmission()` の呼び出しではなく、 `dEmissive` と組み合わせるようにエミッシブを統合します。</li><li> `CLEARCOAT` マクロは `LIT_CLEARCOAT` になりました。</li></ul> |
+| `emissivePS` | <ul><li>他のフロントエンドコンポーネントとの整合性を図るために、値を返す代わりに `dEmission` をグローバルに設定します。</li></ul> |
+| `fresnelSchlickPS` | <ul><li>フレネル効果が屈折率に反応するようになりました。</li><li>スペキュラリティのグローバル変更は行われず、ライトごとと環境に使用する値が返されるようになりました。</li></ul> |
+| `lightmapSingleVert.js` | <ul><li>削除されました（未使用）。</li></ul> |
+| `lightmapDirPS`, `lightmapSinglePS`| <ul><li>ライトマップ関数の名称を  `addLightMap() ` ではなく  `getLightMap()` に変更しました。</li><li>  `dDiffuseLight` と `dSpecularLight` を直接更新する代わりに、 `dLightmap` と  `dLightmapDir` をグローバルに書き込むように実装を変更しました。</li><li>バックエンドはライトマップの統合を `lightmapAddPS` と `lightmapDirAddPS` で処理するようになりました。</li></ul>  |
+| `lightmapAddPS`, `lightmapDirAddPS` | <ul><li>バックエンドから渡されるライトマップの値を追加するための新しいチャンクです。</li><li> `CLEARCOAT` マクロは `LIT_CLEARCOAT` に置き換えられました。</li></ul> |
+| `lightSpecularAnisoGGXPS` | <ul><li> `CLEARCOAT` 定義が `LIT_CLEARCOAT` に置き換えられました。</li></ul> |
+| `lightSpecularBlinnPS`, `lightSpecularPhongPS` | <ul><li>クリアコート用の`#define`を追加し、`antiAliasGlossiness()`の呼び出しを削除しました</li></ul> |
+| `ltcPS` | <ul><li>`CLEARCOAT` マクロを `LIT_CLEARCOAT` に置き換えました。</li></ul> |
+| `normalMapFastPS` | <ul><li>削除されました</li></ul> |
+| `normalMapPS` | <ul><li>他のチャンクと同様に `MAPTEXTURE` #define を追加しました</li><li>最終的な法線を正規化しました</li><li>法線テクスチャが定義されていない場合、ジオメトリの法線から法線を計算します</li></ul> |
+| `normalDetailMapPS` | <ul><li>`normalize` の2つの(ほとんど)不要な呼び出しを削除しました - 代わりに最終的な法線が正規化されます</li></ul> |
+| `normalVertexPS` | <ul><li>チャンクを削除し、機能を `normalMapPS` フロントエンドチャンクに移動しました</li></ul> |
+| `metalnessPS` | <ul><li>現在、フロントエンドでメタルネスを制御し、 `specularPS` の排他的な使用はありません。</li></ul> |
+| `metalnessModulatePS` | <ul><li>メタルネスに関連してスペキュラーカラーとアルベドに基づいてスペキュラーカラーがどのように変調されるかを制御する新しいチャンク。 </li></ul> |
+| `reflectionCC` | <ul><li>`CLEARCOAT` define を `LIT_CLEARCOAT` に置き換えました。</li></ul> |
+| `specularAaNonePS`, `specularAaToksvigPS`, `specularAaToksvigFastPS` | <ul><li>削除されました</li></ul> |
+| `startPS` | <ul><li>グローバル宣言を削除し、代わりに要求に応じて生成します</li><li>`CLEARCOAT` マクロを `LIT_CLEARCOAT` に置き換えました。</li></ul> |
+| `specularPS` | <ul><li>スペキュラーカラーのみを提供し、メタルネスの変調は現在バックエンドで行われます。</li></ul> |
+| `specularityFactorPS` | <ul><li>メタルネスワークフローのためのスペキュラー強度を制御する新しいチャンク。</li></ul> |
 
 [1]: https://github.com/playcanvas/engine/issues/4250

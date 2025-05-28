@@ -1,5 +1,5 @@
 ---
-title: Debugging
+title: デバッグ
 sidebar_position: 3
 ---
 

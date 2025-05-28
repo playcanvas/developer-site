@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: はじめに
 sidebar_position: 1
 ---
 

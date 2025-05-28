@@ -3,40 +3,40 @@ title: Browser Dev Tools
 sidebar_position: 2
 ---
 
-In order to create scripts for PlayCanvas, it is vital that you know how to access and use your browser's development tools.
+PlayCanvasのスクリプトを作成するためには、ブラウザの開発ツールにアクセスして使用する方法を知っていることが重要です。
 
-Chrome, Firefox and other browsers have Developer Tools integrated directly into the browser. You can usually access them by pressing F12 on Windows or ALT-CMD-I on Mac. Or use menu of a browser to access developer tools.
+Chrome、Firefoxや他のブラウザでは、ブラウザに直接組み込まれているDeveloper Toolがあります。通常、Mac上でALT-CMD-I、WindowsではF12キーを押すことでアクセスすることができます。またはブラウザのメニューを使用して開発者ツールにアクセスすることができます。
 
-### Debugging Scripts
+### スクリプトのデバッグ
 
-In order to debug your scripts, select the Sources tab in Developer Tools (Chrome). Open the 'navigator' by clicking the icon in the top left corner of the Sources pane. You should see something similar to what is shown below:
+スクリプトをデバッグするためには、Developer Tools (Chrome)でSourcesタブを選択します。Sourcesペインの左上隅にあるアイコンをクリックして 'navigator' を開きます。以下のようなものが表示されるはずです：
 
 ![Debugger](/img/user-manual/scripting/debugging/chrome-debugger.png)
 
-In Firefox it looks like this:
+Firefoxでは次のようになります：
 
 ![Firefox](/img/user-manual/scripting/debugging/firefox-debugger.png)
 
-The navigator lists all of the scripts currently running in the active tab, including any PlayCanvas scripts that you have written. Find one of your scripts in the navigator and select it to open the source code. You are now able to set breakpoints and debug.
+ナビゲータには、自身で書いたPlayCanvasスクリプトを含む、現在アクティブなタブで実行している全てのスクリプトがリストされます。ナビゲーターからスクリプトを探し、選択するとソースコードが開きます。これで、ブレイクポイントを設定してデバッグが行えます。
 
-Each browser has detailed instructions on how to debug javascript. You should read through these documents: [Chrome][3], [Firefox][4], [Safari][5], [Edge / Internet Explorer][6].
+各ブラウザには、JavaScriptをデバッグする方法の手順が詳述されています。これらのドキュメントをお読みください：[Chrome][3], [Firefox][4], [Safari][5], [Edge / Internet Explorer][6]。
 
 :::note
 
-Note that when a running app is paused at a breakpoint in the debugger, other browser windows/tabs used to launch that app (containing the PlayCanvas Code Editor or Editor etc.) might also be paused.
+実行しているappがデバッガーのブレイクポイントで一時停止された場合、そのappを起動するのに使用される他のブラウザ内ウィンドウ／タブ (PlayCanvas Code EditorまたはEditorなどを含む) も一時停止される可能性があります。
 
 :::
 
-### Debugging on Mobile Devices
+### モバイルデバイスでのデバッグ
 
-On Android, it is possible to connect to the mobile Chrome browser via the desktop Chrome browser devtools and USB cable. [Google Developer documentation][7] has the detailed steps for the setup.
+Androidでは、デスクトップChromeブラウザのデベロッパーツールとUSBケーブルを介してモバイルChromeブラウザに接続することができます。[Google Developer documentation][7]には、セットアップの詳細な手順が記載されています。
 
-iOS debugging requires access to a Mac and [Apple has outlined the steps][8] needed to enable developer options to start debugging.
+iOSデバッグには、Macへのアクセスが必要であり、[Appleが必要な手順][8]を概説しています。
 
-In the situation where either it's not possible to connect to the web view directly from Chrome or Safari (e.g. a web view in another app) or don't have access to a Mac, the following libraries and services can help and are simple to add to projects:
+ChromeやSafariからWebビューに直接接続することができない状況（別のアプリ内のWebビューなど）や、Macにアクセスできない場合は、以下のライブラリとサービスをプロジェクトに追加することができます。
 
-* [RemoteJS][9] - Allows developers to view the console output remotely in a desktop browser and also execute JS in the console which makes it very powerful. The console output can be delayed or slow though.
-* [vConsole][10] or [Eruda][11] - Adds a widget DOM object to the page that can be expanded to show console output, network requests, the page elements and more.
+* [RemoteJS][9] - 開発者は、デスクトップブラウザでコンソール出力をリモートで表示し、JSをコンソールで実行することができ、非常に強力です。コンソール出力には遅延や遅延がある場合があります。
+* [vConsole][10] または [Eruda][11] - ページに展開してコンソール出力、ネットワーク要求、ページの要素などを表示できるウィジェットDOMオブジェクトを追加します。
 
 [3]: https://developer.chrome.com/docs/devtools/javascript/
 [4]: https://firefox-source-docs.mozilla.org/devtools-user/debugger/index.html

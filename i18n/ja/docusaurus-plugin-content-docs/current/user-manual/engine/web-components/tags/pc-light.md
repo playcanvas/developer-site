@@ -32,7 +32,7 @@ The `<pc-light>` tag is used to define a light component.
 
 </div>
 
-## Example
+## 例
 
 ```html
 <pc-entity>

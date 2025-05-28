@@ -11,7 +11,7 @@ A simple use case is shown below.
 
 In this example, the created label will start with `Hello World` as its text value. When a user enters a value into the text input, the label will be updated with the new value.
 
-### How To
+### 使い方
 
 First import the components, binding classes and PCUI styles.
 

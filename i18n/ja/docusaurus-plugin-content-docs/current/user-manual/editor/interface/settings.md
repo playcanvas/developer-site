@@ -1,5 +1,5 @@
 ---
-title: Settings
+title: 設定
 sidebar_position: 2
 ---
 
@@ -19,7 +19,7 @@ Updates to Editor Settings apply only to the current project and only to you. In
 
 Here is a breakdown of the available settings:
 
-| Setting                          | Description |
+| Setting                          | 説明 |
 | -------------------------------- | ----------- |
 | **Grid Divisions**               | Determines the number of divisions in the grid in the [Viewport](../viewport). |
 | **Grid Division Size**           | Sets the size of each grid division, affecting the grid scale. |

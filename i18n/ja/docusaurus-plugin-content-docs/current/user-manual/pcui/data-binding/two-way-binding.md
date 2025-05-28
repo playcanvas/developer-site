@@ -9,7 +9,7 @@ Observers can also be bound bi-directionally, in which case an element can both 
     <iframe src="https://playcanvas.github.io/pcui/storybook/iframe?id=examples-bindingtwoway--main&viewMode=story"></iframe>
 </div>
 
-### How To
+### 使い方
 
 First import the components, binding classes and PCUI styles.
 

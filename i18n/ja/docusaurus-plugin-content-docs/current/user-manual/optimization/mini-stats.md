@@ -20,9 +20,9 @@ Clicking on the MiniStats will cycle through three supported sizes:
 * **GPU** - Shows the time in milliseconds to render each frame by the GPU. This stat is supported by both WebGL 2 and WebGPU flavors of the Engine but there are some requirements:
   * WebGL 2: The underlying WebGL implementation must support the [`EXT_disjoint_timer_query_webgl2`](https://web3dsurvey.com/webgl2/extensions/EXT_disjoint_timer_query_webgl2) extension. You can confirm whether your browser supports this extension by visiting [WebGL Report](https://webglreport.com/?v=2).
   * WebGPU: The underlying WebGPU implementation must support the GPU Adapter feature [`timestamp-query`](https://web3dsurvey.com/webgpu/features/timestamp-query).
-* **CPU** - Shows the time in milliseconds to render each frame by the CPU.
+* **CPU** - CPUによる各フレームのレンダリング時間(ミリ秒)を表示します。
 
-The CPU and GPU graphs display a breakdown of the update and render portion of the frame using red and green respectively.
+CPUおよびGPUグラフは、赤色と緑色を使用して、フレームのアップデートとレンダリング部分の詳細を表示します。
 
 ## Using MiniStats Outside of the Editor
 

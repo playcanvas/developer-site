@@ -9,7 +9,7 @@ PlayCanvasは高度なグラフィックスエンジンを搭載しています�
 
 * 物理ベースレンダリング (PBR)
 * Linear Workflow
-* Directional, point and spot lights (all of which can cast shadows)
-* Static and skinned mesh rendering
-* GPU particle engine
-* Post effect library
+* ディレクショナルライト、ポイントライト、スポットライト（いずれも影を投影可能）
+* スタティックおよびスキンメッシュレンダリング
+* GPU パーティクルエンジン
+* ポストエフェクトライブラリ

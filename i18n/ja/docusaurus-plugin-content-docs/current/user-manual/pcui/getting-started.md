@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: はじめに
 sidebar_position: 1
 ---
 
@@ -38,6 +38,6 @@ This will result in your first component being appended to your document body!
     <iframe src="https://playcanvas.github.io/pcui/storybook/iframe?id=components-button--text&viewMode=story"></iframe>
 </div>
 
-## API Reference
+## API リファレンス
 
 The [API reference](https://api.playcanvas.com/pcui/) is a list of all of PCUI's class components and their properties. It is automatically generated from the source code.

@@ -3,7 +3,7 @@ title: Engine Compatibility
 sidebar_position: 9
 ---
 
-## Introduction
+## イントロダクション
 
 The Editor supports two major release streams of the engine:
 
@@ -34,7 +34,7 @@ Once the switch has been confirmed, **all users** in the current project will be
 
 <img src='/img/user-manual/editor/editor-v2/switch-engine.png' width='400' />
 
-#### Scripting
+#### スクリプティング
 
 Given the changes in API for the engine you may wish to test your project in the launcher with Engine V1 or V2. You can do this by enabling the Force Engine V2 or Force Engine V1 checkboxes in the launcher options:
 

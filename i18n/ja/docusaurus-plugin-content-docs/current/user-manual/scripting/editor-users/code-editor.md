@@ -1,136 +1,137 @@
 ---
-title: Code Editor
+title: コードエディター
 sidebar_position: 2
 ---
 
-The Code Editor is an online real-time collaborative editor that allows you to edit your Script assets and also all the other text based assets like JSON, HTML, CSS etc.
+コードエディターは、スクリプトアセットやJSON、HTML、CSSなどのテキストベースのアセットを編集できる、オンラインリアルタイムコラボレーションエディタです。
 
-## Opening The Code Editor
+## コードエディターの開き方
 
-You can open the Code Editor from inside the [PlayCanvas Editor][2] by pressing Ctrl + I. You can also click on this toolbar icon:
+[PlayCanvasエディター][2]内でCtrl + Iを押すことで、コードエディターを開くことができます。また、ツールバーアイコンをクリックすることでも開くことができます。
 
 ![Code Editor Toolbar](/img/user-manual/scripting/code-editor-toolbar.png)
 
-Alternatively you can double click on a text-based asset like a Script to open the Code Editor focused on that asset.
+テキストベースのアセット(スクリプトなど)をダブルクリックすることでも、そのアセットに焦点を当てたコードエディターを開くことができます。
 
-## Interface
+## インターフェイス
 
 ![Code Editor](/img/user-manual/scripting/code-editor.png)
 
-### Menu
+### メニュー
 
-The menu contains all the different tools and options available along with their keyboard shortcuts.
+メニューには、すべてのツールとオプションが含まれています。それぞれのキーボードショートカットも表示されています。
 
-### Files
+### ファイル
 
-Here you can see all the assets that can be edited by the Code Editor. Click on an asset to select it. Selecting an asset will open it in the Text Editor for editing.
+ここでは、コードエディターで編集可能なすべてのアセットが表示されます。アセットを選択することで、テキストエディタで編集することができます。
 
-Single clicking an asset will open it in Preview Mode. This means that if you open another asset it will be shown in the same Tab. If you want to open an asset permanently double click on the asset or start editing it.
+アセットを単一クリックすると、プレビューモードで開かれます。これは、他のアセットを開いた場合、同じタブに表示されるということを意味します。アセットを永久に開きたい場合は、ダブルクリックするか編集を開始してください。
 
-By right clicking on an asset you will see the context menu with various asset-related options. You can also drag and drop assets into folders.
+アセットを右クリックすると、コンテキストメニューが表示され、さまざまなアセット関連のオプションが表示されます。また、アセットをフォルダにドラッグ&ドロップすることもできます。
 
-### Tabs
+### タブ
 
-Each open asset has a corresponding tab in the tab view. You can rearrange tabs by dragging and dropping them and you can also close tabs by clicking on the X button that appears when you put your mouse cursor on a tab. If you right click on a tab you will see the tab context menu with various tab-related options.
+各開いているアセットには、対応するタブがあります。タブをドラッグして並べ替えることができ、タブ上にマウスカーソルを置くとXボタンが表示され、タブを閉じることができます。タブを右クリックすると、タブ関連のオプションが表示されます。
 
-### Text Editor
+### テキストエディタ
 
-Here you can actually edit the contents of your assets. The editor uses [Monaco][4] which is the same text editor library used by Visual Studio Code.
+ここでは、アセットの内容を実際に編集できます。エディタには[Monaco][4]が使用されており、これはVisual Studio Codeで使用されているテキストエディタライブラリと同じです。
 
-In addition, the editor supports auto-complete. When you type a letter or hit Ctrl+Space you will see a list of auto-complete suggestions.
+さらに、エディタはオートコンプリートをサポートしています。文字を入力するか、Ctrl + Spaceを押すと、オートコンプリート候補のリストが表示されます。
 
-The editor will also lint your JavaScript code. This means that while you type your code the editor will scan your code for possible errors or suspicious usage. This is done with the help of [JSHint][13], which also supports special comments which control its behavior. For a list of these special comments check out the [docs][14].
+また、エディタはJavaScriptのコードをリントします。つまり、コードを入力すると、エディタは可能なエラーや不審な使用を検出するためにコードをスキャンします。これは[JSHint][13]の支援によって行われます。JSHintは、挙動を制御する特別なコメントもサポートしています。これらの特別なコメントのリストについては、[ドキュメント][14]を参照してください。
 
-### Collaborators
+### コラボレータ
 
-The Editor supports real-time collaborative editing by all users with permission to edit the code. You will see other user's avatars here.
+エディタは、コードを編集する権限を持つすべてのユーザーによるリアルタイムの共同編集をサポートしています。ここには他のユーザーのアバターが表示されます。
 
-### Status Bar
+### ステータスバー
 
-Here you can see various helpful messages while you are interacting with the Code Editor.
+コードエディターを操作している間に、さまざまなヘルプメッセージを表示できます。
 
-## Saving and Reverting
+## 保存と元に戻す
 
-The code editor is collaborative which means that every user who has the document open in the editor will see changes as they are made by other developers. However, changes are not saved automatically and when the application is run from the Editor the saved version is loaded. This means you can choose at which point to commit your change to be used by the application. Any user can save the document at any time.
+コードエディターはコラボレーションをサポートしているため、エディタでドキュメントを開いているすべてのユーザーは、他の開発者が行った変更がリアルタイムで表示されます。ただし、変更は自動的に保存されず、エディタからアプリケーションが実行されると保存されたバージョンがロードされます。つまり、アプリケーションで使用する変更をどの時点でコミットするか選択できます。ユーザーはいつでもドキュメントを保存することができます。
 
-If you have unsaved changes the Revert option in the File menu will cancel these changes and restore the document back to the saved version. If all users exit the document before saving the unsaved changes will be preserved for a short time before the document is automatically reverted to the saved version. So you should save your work before exiting the document.
+未保存の変更がある場合、ファイルメニューの「元に戻す」オプションを使用すると、これらの変更がキャンセルされ、ドキュメントが保存されたバージョンに復元されます。すべてのユーザーがドキュメントを保存せずに終了した場合、未保存の変更はドキュメントが自動的に保存されたバージョンに戻るまで一時的に保存されます。したがって、ドキュメントを終了する前に作業を保存する必要があります。
 
-## Command Palette
+## コマンドパレット
 
-All the text editing features can be found using the command palette via Ctrl + Shift + P (Windows) or Cmd + Shift + P (Mac).
+テキスト編集機能は、コマンドパレットを使用して見つけることができます。WindowsではCtrl + Shift + P、MacではCmd + Shift + Pを使用します。
 
 ![](/img/user-manual/scripting/command-palette.png)
 
-## Hot Keys
+## ホットキー
 
-The editor supports various shortcuts to help you when editing code. You can find all those options in the Menu or the command palette. The most common can be found below:
+エディタは、コードを編集する際に役立つさまざまなショートカットをサポートしています。これらのオプションは、メニューやコマンドパレットで見つけることができます。最も一般的なものは以下の通りです。
 
-| Command                         | PC                       | Mac                        |
+| コマンド                         | PC                       | Mac                        |
 |---------------------------------|--------------------------|----------------------------|
-| Save                            | Ctrl + S                 | Cmd + S                    |
-| Undo                            | Ctrl + Z                 | Cmd + Z                    |
-| Redo                            | Ctrl + Y                 | Cmd + Shift + Z or Cmd + Y |
-| Find in file                    | Ctrl + F                 | Cmd + F                    |
-| Find next match                 | F3                       | Cmd + G                    |
-| Find previous match             | Shift + F3               | Cmd + Shift + G            |
-| Replace                         | Ctrl + H                 | Cmd + Alt + F              |
-| Find in Files                   | Ctrl + Shift + F         | Cmd + Shift + F            |
-| Comment line or selection       | Ctrl + /                 | Cmd + /                    |
-| Block Comment line or selection | Alt + Shift + A          | Alt + Shift + A            |
-| Indent line or selection        | Tab                      | Tab                        |
-| Un-Indent line or selection     | Shift + Tab              | Shift + Tab                |
-| Jump to declaration             | Ctrl + F12               | Cmd + F12                  |
-| Show autocomplete               | Ctrl + Space or Ctrl + I | Ctrl + Space or Cmd + I    |
+| 保存                            | Ctrl + S                 | Cmd + S                    |
+| 元に戻す                            | Ctrl + Z                 | Cmd + Z                    |
+| やり直し                            | Ctrl + Y                 | Cmd + Shift + ZまたはCmd + Y |
+| ファイル内検索                    | Ctrl + F                 | Cmd + F                    |
+| 次の一致を検索                 | F3                       | Cmd + G                    |
+| 前の一致を検索             | Shift + F3               | Cmd + Shift + G            |
+| 置換                         | Ctrl + H                 | Cmd + Alt + F              |
+| ファイル内を検索                   | Ctrl + Shift + F         | Cmd + Shift + F            |
+| 行または選択のコメント       | Ctrl + /                 | Cmd + /                    |
+| ブロックコメント行または選択 | Alt + Shift + A          | Alt + Shift + A            |
+| 行または選択のインデント        | Tab                      | Tab                        |
+| 行または選択のインデントを解除     | Shift + Tab              | Shift + Tab                |
+| 宣言にジャンプ             | Ctrl + F12               | Cmd + F12                  |
+| オートコンプリート表示               | Ctrl + SpaceまたはCtrl + I | Ctrl + SpaceまたはCmd + I    |
 
-## Searching
+## 検索
 
-You can search for text in a file by pressing Ctrl + F (Windows) or Cmd + F (Mac). This will open up the Find panel on the top right:
+ファイル内のテキストを検索するには、WindowsではCtrl + F、MacではCmd + Fを押します。これにより、右上に検索パネルが表示されます。
 
 ![](/img/user-manual/scripting/monaco-find-panel.png)
 
-Enter your search term here and press Enter. You can navigate between matches by continuously hitting Enter (or Shift + Enter to go backwards).
+ここに検索語を入力し、Enterキーを押してください。Enterキーを連続して押すことでマッチした項目間を移動できます（Shift + Enterで後方に移動します）。
 
-If you want to replace a match enter the text you want to replace it with in the Replace input field on the right. Then hit Enter to replace the match and keep hitting Enter to replace each subsequent match (or Shift + Enter to replace backwards).
+マッチした項目を置換したい場合は、右側の置換用の入力フィールドに置換したいテキストを入力します。その後、Enterキーを押してマッチした項目を置換し、Enterキーを連打して subsequent match を置換します（Shift + Enterで後方に置換します）。
 
-### Find in Files
+### ファイル内を検索
 
-You can also find a term by searching in all your assets. To do this hit Ctrl + Shift + F to bring up the Find in Files panel on the bottom. Like before enter your search term and hit Enter. This will open up a new tab where the search results will be displayed:
+すべてのアセット内で語句を検索することもできます。これを行うには、Ctrl + Shift + Fを押して下部に「ファイル内を検索」パネルを表示します。以前と同様に検索語を入力し、Enterキーを押します。これにより、検索結果が表示される新しいタブが開きます。
 
-On the left side of the input fields there are various search options. These allow you to search using a regular expression, do a case-sensitive search or search for whole words. If you would like to learn and experiment more with regex, then [RegExr][10] is great site with cheat sheets, examples and an online editor for testing regex expressions.
+入力フィールドの左側には、様々な検索オプションがあります。これらを使用すると、正規表現を使用した検索、大文字・小文字を区別する検索、または全単語を検索することができます。もし、正規表現をより深く学び、実験したいなら、[RegExr][10]はチートシート、例、そして正規表現のテスト用のオンラインエディタを提供している素晴らしいサイトです。
 
 ![Find in Files](/img/user-manual/scripting/find-in-files-results.png)
 
-You can double click on a line in the search results to go that particular line in the asset.
+検索結果の行をダブルクリックすると、そのアセットの特定の行に移動します。
 
-## Quick Open
+## クイックオープン
 
-You can quickly open an asset by hitting Ctrl + P (or Cmd + P on Mac) which will open a panel where you can search for the asset by its name. Start typing the name of the asset and the panel will perform a fuzzy search to find the asset you are looking for. Hit Enter to open the selected asset.
+Ctrl + P（MacではCmd + P）を押すことで、アセットを素早く開くことができます。これにより、そのアセットの名前で検索できるパネルが開きます。アセットの名前を入力し始めると、パネルはあいまい検索を行い、探しているアセットを見つけます。Enterキーを押すと選択したアセットが開きます。
 
 ![Go to Anything](/img/user-manual/scripting/go-to-anything.gif)
 
 ## Preferences
 
-You can edit your preferences by clicking on Edit -> Preferences. Here you can change the font size for the text editor and also edit other editor related options.
+「Edit」->「Preferences」をクリックすることで、設定を編集できます。ここでは、テキストエディタのフォントサイズを変更したり、他のエディタ関連のオプションを編集したりできます。
 
 ![Preferences](/img/user-manual/scripting/preferences.png)
 
-## Extra Tips
+## 追加のヒント
 
-### Quick Searching
+### クイック検索
 
-Highlighting a word in the code editor will highlight all other matches in the file which makes it easier to check where a variable or function is being used.
+コードエディターで単語をハイライトすると、そのファイル内の他のすべてのマッチがハイライトされ、変数や関数がどこで使用されているかを確認するのが容易になります。
 
 ![Quick Searching](/img/user-manual/scripting/code-editor-quick-searching.gif)
 
-### Multiple Selection Editing
+### 複数選択編集
 
-Holding down Alt and clicking left mouse button will add another cursor to the editor. This allows you to quickly make the same changes in multiple areas of the file.
+Altキーを押しながら左マウスボタンをクリックすると、エディタに別のカーソルが追加されます。これにより、ファイルの複数の箇所で同じ変更を素早く行うことができます。
 
 ![Multiple Selection Editing](/img/user-manual/scripting/code-editor-multiple-selection.gif)
 
-### Rectangular Selection
+### 矩形選択
 
-Holding down Alt + Shift and dragging left mouse button will create a rectangular selection which is useful for selecting and editing columns of text.
+Alt + Shiftキーを押しながら左マウスボタンをドラッグすると、矩形選択が作成されます。これは、テキストの列を選択し、編集するのに便利です。
+ 
 
 ![Rectangular Selection](/img/user-manual/scripting/code-editor-rectangular-selection.gif)
 

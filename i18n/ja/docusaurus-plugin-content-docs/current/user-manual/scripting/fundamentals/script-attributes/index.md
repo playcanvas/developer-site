@@ -1,5 +1,5 @@
 ---
-title: Script Attributes
+title: スクリプト属性 (Script Attributes)
 sidebar_position: 4
 ---
 

@@ -8,7 +8,7 @@ In this example you can interact with the input slider to update the progress ba
     <iframe src="https://playcanvas.github.io/pcui/storybook/iframe?id=examples-history--main&viewMode=story"></iframe>
 </div>
 
-### Code
+### コード
 
 ```jsx
 import React, { useState } from 'react';

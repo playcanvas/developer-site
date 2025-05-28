@@ -24,7 +24,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 </div>
 
-## Example
+## 例
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
