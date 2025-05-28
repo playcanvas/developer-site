@@ -81,7 +81,7 @@ From the Settings panel, expand on **"External Scripts"**, and increase the numb
 In the new **"URL"** field, let's include the Colyseus JavaScript SDK, from a CDN:
 
 ```none
-https://unpkg.com/colyseus.js@^0.15.0-preview.2/dist/colyseus.js
+https://unpkg.com/colyseus.js@^0.16.0/dist/colyseus.js
 ```
 
 This is going to make the `Colyseus` [JavaScript SDK](https://docs.colyseus.io/getting-started/javascript-client/) available for our PlayCanvas scripts.
@@ -229,8 +229,13 @@ As per [Room State and Schema](#room-state-and-schema) section, whenever the ser
 We're going to listen to this event on the client-side now:
 
 ```typescript
+//
+// In order to attach callbacks to the state, we need to use the `getStateCallbacks()` method
+//
+const $ = Colyseus.getStateCallbacks(this.room);
+
 // ...
-this.room.state.players.onAdd((player, sessionId) => {
+$(this.room.state).players.onAdd((player, sessionId) => {
   //
   // A player has joined!
   //
@@ -251,7 +256,7 @@ For the visual representation, we need to clone the "Player" object, and keep a 
 this.playerEntities = {};
 
 // listen for new players
-this.room.state.players.onAdd((player, sessionId) => {
+$(this.room.state).players.onAdd((player, sessionId) => {
   // find the base Player representation (not enabled)
   const playerEntityToClone = this.app.root.findByName("Player");
 
@@ -277,7 +282,7 @@ You can keep a special reference to the current player object by checking the `s
 
 ```typescript
 // ...
-this.room.state.players.onAdd((player, sessionId) => {
+$(this.room.state).players.onAdd((player, sessionId) => {
   // ...
   if (this.room.sessionId === sessionId) {
     this.currentPlayerEntity = this.playerEntities[sessionId];
@@ -292,7 +297,7 @@ When a player is removed from the state (upon `onLeave()` in the server-side), w
 
 ```javascript
 // ...
-this.room.state.players.onRemove((player, sessionId) => {
+$(this.room.state).players.onRemove((player, sessionId) => {
   // destroy entity
   this.playerEntities[sessionId].destroy();
 
@@ -365,25 +370,25 @@ Whenever the `"updatePosition"` message is received in the server, we're going t
 
 ### Updating Player's visual representation {#updating-players-visual-representation}
 
-Having the mutation on the server, we can detect it on the client-side via `player.onChange()`, or `player.listen()`.
+Having the mutation on the server, we can detect it on the client-side via `$(player).onChange()`, or `$(player).listen()`.
 
-- `player.onChange()` is triggered **per schema instance**
-- `player.listen(prop)` is triggered **per property** change
+- `$(player).onChange()` is triggered **per schema instance**
+- `$(player).listen(prop)` is triggered **per property** change
 
 We are going to use `.onChange()` since we need all the new coordinates at once, no matter if just one has changed individually.
 
 ```typescript
 // ...
-this.room.state.players.onAdd((player, sessionId) => {
+$(this.room.state).players.onAdd((player, sessionId) => {
   // ...
-  player.onChange(() => {
+  $(player).onChange(() => {
     this.playerEntities[sessionId].setPosition(player.x, player.y, player.z);
   });
 
   // Alternative, listening to individual properties:
-  // player.listen("x", (newX, prevX) => console.log(newX, prevX));
-  // player.listen("y", (newY, prevY) => console.log(newY, prevY));
-  // player.listen("z", (newZ, prevZ) => console.log(newZ, prevZ));
+  // $(player).listen("x", (newX, prevX) => console.log(newX, prevX));
+  // $(player).listen("y", (newY, prevY) => console.log(newY, prevY));
+  // $(player).listen("z", (newZ, prevZ) => console.log(newZ, prevZ));
 });
 ```
 
