@@ -1,6 +1,6 @@
 ---
 title: Events
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 Events are a useful way of communicating between scripts in order to respond to things that happen without checking every frame.

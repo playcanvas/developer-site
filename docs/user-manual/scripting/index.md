@@ -60,8 +60,9 @@ Core concepts that apply to all PlayCanvas scripts:
 * [Getting Started](./fundamentals/anatomy/) - Basic script structure and syntax
 * [ESM Scripts](./fundamentals/esm-scripts/) - Modern scripting with ES Modules
 * [Script Lifecycle](./fundamentals/script-lifecycle/) - When and how script methods are called
-* [Events](./fundamentals/events/) - Communication between scripts
 * [Script Attributes](./fundamentals/script-attributes/) - Exposing configurable properties
+* [Calling the Engine API](./fundamentals/engine-api/) - Key classes and patterns
+* [Events](./fundamentals/events/) - Communication between scripts
 
 ### [Editor Integration](./editor-users/)
 Working with scripts in the PlayCanvas Editor:
