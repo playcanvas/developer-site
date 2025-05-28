@@ -99,6 +99,8 @@ Attributes let you expose script properties to the editor, making scripts config
 <TabItem value="esm" label="ESM">
 
 ```javascript
+import { Color, Script } from 'playcanvas';
+
 export class Configurable extends Script {
     /** @attribute */
     speed = 5;
