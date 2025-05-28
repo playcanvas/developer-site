@@ -19,7 +19,7 @@ The loading order panel shows all Classic scripts marked as `preload` and the or
 
 You can click-and-drag to move individual scripts around to edit the order.
 
-When scripts are first loaded, they are immediately executed. That means that the scripts are first executed in the order that they are loaded. However, the loading order of the script **does not** effect the execution of order of script methods within script component. For example, the `initialize` methods of scripts on the same entity are called in the order that they are listed on the Entity, not the loading order.
+When scripts are first loaded, they are immediately executed. That means that the scripts are first executed in the order that they are loaded. However, the loading order of the script **does not** affect the execution of order of script methods within script component. For example, the `initialize` methods of scripts on the same entity are called in the order that they are listed on the Entity, not the loading order.
 
 ### Preloading
 
