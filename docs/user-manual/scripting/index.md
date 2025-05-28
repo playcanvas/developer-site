@@ -59,7 +59,7 @@ Rotate.prototype.update = function(dt) {
 
 Core concepts that apply to all PlayCanvas scripts:
 
-* [Getting Started](./fundamentals/anatomy/) - Basic script structure and syntax
+* [Getting Started](./fundamentals/getting-started/) - Basic script structure and syntax
 * [ESM Scripts](./fundamentals/esm-scripts/) - Modern scripting with ES Modules
 * [Script Lifecycle](./fundamentals/script-lifecycle/) - When and how script methods are called
 * [Script Attributes](./fundamentals/script-attributes/) - Exposing configurable properties
@@ -84,6 +84,6 @@ Tools and techniques for troubleshooting your scripts:
 
 :::tip
 
-New to PlayCanvas scripting? Start with [Getting Started](./fundamentals/anatomy/) to learn the basics, then explore [ESM Scripts](./fundamentals/esm-scripts/) for the modern approach.
+New to PlayCanvas scripting? Start with [Getting Started](./fundamentals/getting-started/) to learn the basics, then explore [ESM Scripts](./fundamentals/esm-scripts/) for the modern approach.
 
 :::

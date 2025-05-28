@@ -103,5 +103,7 @@ this.app.on('game:start', this.onGameStart, this);
 * **[Events](../events/)** - Script communication patterns
 
 :::tip
-**IDE Support:** Use the [VS Code Extension](../editor-users/vscode-extension/) for autocomplete and inline documentation while writing scripts.
+
+**IDE Support:** Use the [VS Code Extension](../../editor-users/vscode-extension/) for autocomplete and inline documentation while writing scripts.
+
 :::

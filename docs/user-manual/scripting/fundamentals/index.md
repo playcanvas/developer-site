@@ -7,7 +7,7 @@ Master the core concepts of PlayCanvas scripting. Whether you're using modern ES
 
 ## Essential Concepts
 
-### [Getting Started](./anatomy/)
+### [Getting Started](./getting-started/)
 
 Learn the basic structure and syntax of PlayCanvas scripts. Understand how scripts work, their lifecycle, and how to attach them to entities.
 
