@@ -43,6 +43,7 @@ export class MyScript extends Script {
 ```
 
 **Key points for ESM scripts:**
+
 * Import the `Script` class from PlayCanvas
 * Export a class that extends `Script`
 * Use `/** @attribute */` to expose properties to the editor
@@ -68,6 +69,7 @@ MyScript.prototype.update = function(dt) {
 ```
 
 **Key points for classic scripts:**
+
 * Use `pc.createScript()` to declare the script
 * Add attributes using the `.attributes.add()` method
 * Define methods on the prototype
@@ -79,6 +81,7 @@ MyScript.prototype.update = function(dt) {
 ## Core Concepts
 
 ### Script Lifecycle
+
 Scripts have several methods that are called automatically at different times:
 
 * `initialize()` - Called once when the script starts
@@ -89,6 +92,7 @@ Scripts have several methods that are called automatically at different times:
 Learn more about the [Script Lifecycle](../script-lifecycle/).
 
 ### Attributes
+
 Attributes let you expose script properties to the editor, making scripts configurable without code changes:
 
 <Tabs defaultValue="esm" groupId='script-code'>
@@ -127,6 +131,7 @@ Configurable.attributes.add('target', { type: 'entity' });
 Learn more about [Script Attributes](./script-attributes/).
 
 ### Accessing the Entity
+
 Every script has access to the entity it's attached to via `this.entity`:
 
 ```javascript

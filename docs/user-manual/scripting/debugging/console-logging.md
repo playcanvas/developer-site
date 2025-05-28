@@ -146,7 +146,7 @@ You can log more than just strings:
 
 * **Variables:** `console.log('Player health:', this.health);`
 * **Objects and Arrays:** `console.log('My Entity:', this.entity);`, `console.log('Children:', this.entity.children);`
-    * Most browser consoles allow you to interactively inspect logged objects and arrays, expanding them to see their properties and values. This is incredibly useful for examining complex data like Entities, Components, or Materials.
+  * Most browser consoles allow you to interactively inspect logged objects and arrays, expanding them to see their properties and values. This is incredibly useful for examining complex data like Entities, Components, or Materials.
 
 ## Where Does the Output Go?
 

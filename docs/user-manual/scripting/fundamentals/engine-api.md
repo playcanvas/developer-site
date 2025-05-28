@@ -20,6 +20,7 @@ this.entity     // The entity this script is attached to
 ### Essential Classes
 
 **[`Entity`](https://api.playcanvas.com/engine/classes/Entity.html)** - Objects in your scene
+
 ```javascript
 // Common entity operations
 this.entity.setPosition(0, 5, 0);
@@ -28,6 +29,7 @@ const child = this.entity.findByName('Weapon');
 ```
 
 **[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)** - Your application
+
 ```javascript
 // Common app operations
 this.app.fire('game:start');
@@ -36,6 +38,7 @@ const texture = this.app.assets.find('logo', 'texture');
 ```
 
 **Components** - Add functionality to entities
+
 ```javascript
 // Accessing components
 const camera = this.entity.camera;
@@ -59,6 +62,7 @@ const red = new Color(1, 0, 0);
 ## Common Script Patterns
 
 ### Finding Entities
+
 ```javascript
 // By name (searches entire hierarchy)
 const player = this.app.root.findByName('Player');
@@ -71,6 +75,7 @@ const weapon = this.entity.findByPath('Arms/RightHand/Weapon');
 ```
 
 ### Working with Assets
+
 ```javascript
 // Find and load assets
 const sound = this.app.assets.find('explosion', 'audio');
@@ -81,6 +86,7 @@ this.app.assets.load(sound);
 ```
 
 ### Events and Communication
+
 ```javascript
 // Fire application events
 this.app.fire('player:died', this.entity);

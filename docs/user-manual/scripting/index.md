@@ -56,7 +56,9 @@ Rotate.prototype.update = function(dt) {
 ## What You'll Learn
 
 ### [Fundamentals](./fundamentals/)
+
 Core concepts that apply to all PlayCanvas scripts:
+
 * [Getting Started](./fundamentals/anatomy/) - Basic script structure and syntax
 * [ESM Scripts](./fundamentals/esm-scripts/) - Modern scripting with ES Modules
 * [Script Lifecycle](./fundamentals/script-lifecycle/) - When and how script methods are called
@@ -65,14 +67,18 @@ Core concepts that apply to all PlayCanvas scripts:
 * [Events](./fundamentals/events/) - Communication between scripts
 
 ### [Editor Integration](./editor-users/)
+
 Working with scripts in the PlayCanvas Editor:
+
 * [Managing Scripts](./editor-users/managing-scripts/) - Creating and organizing script files
 * [Code Editor](./editor-users/code-editor/) - Using the built-in code editor
 * [VS Code Extension](./editor-users/vscode-extension/) - Enhanced development workflow
 * [Hot Reloading](./editor-users/hot-reloading/) - Live code updates
 
 ### [Debugging](./debugging/)
+
 Tools and techniques for troubleshooting your scripts:
+
 * [Console Logging](./debugging/console-logging/) - Basic debugging with console output
 * [Browser Dev Tools](./debugging/browser-dev-tools/) - Advanced debugging techniques
 

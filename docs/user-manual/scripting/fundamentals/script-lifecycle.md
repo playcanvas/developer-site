@@ -52,11 +52,11 @@ Let's break down each of the key lifecycle methods.
 
 * This is your script's primary setup or "constructor-like" phase.
 * Ideal for:
-    * Subscribing to script [lifecycle events](#lifecycle-events).
-    * Registering [DOM event](https://developer.mozilla.org/en-US/docs/Web/Events) handlers.
-    * Creating any objects the script needs to manage internally.
-    * Caching references to other Entities in the scene hierarchy.
-    
+  * Subscribing to script [lifecycle events](#lifecycle-events).
+  * Registering [DOM event](https://developer.mozilla.org/en-US/docs/Web/Events) handlers.
+  * Creating any objects the script needs to manage internally.
+  * Caching references to other Entities in the scene hierarchy.
+
 :::warning[Constructor vs initialize]
 
 Avoid using the `constructor` for startup logic — use `initialize()` instead. Execution order of `constructor`s is not guaranteed.
@@ -195,10 +195,10 @@ MyScript.prototype.postInitialize = function() {
 
 * This is the heart of your script's runtime behavior.
 * Used for:
-    * Handling continuous input.
-    * Updating positions, rotations, and scales for movement or animation.
-    * Checking game conditions (e.g., collisions, win/loss states).
-    * Any logic that needs to be performed repeatedly over time.
+  * Handling continuous input.
+  * Updating positions, rotations, and scales for movement or animation.
+  * Checking game conditions (e.g., collisions, win/loss states).
+  * Any logic that needs to be performed repeatedly over time.
 
 :::important
 
@@ -309,16 +309,16 @@ The three main lifecycle events are `enable`, `disable`, and `destroy`.
 **When it's fired:**
 
 * When a script instance becomes enabled. This can happen in several ways:
-    * When the script is first initialized, if both the script component and its Entity start in an enabled state.
-    * When `this.enabled` is set from false to true programmatically.
-    * When the script's parent Entity (or an ancestor Entity) becomes enabled, and the script itself was already marked as enabled.
+  * When the script is first initialized, if both the script component and its Entity start in an enabled state.
+  * When `this.enabled` is set from false to true programmatically.
+  * When the script's parent Entity (or an ancestor Entity) becomes enabled, and the script itself was already marked as enabled.
 
 **Purpose:**
 
 * To perform actions when a script becomes active after being inactive.
 * Ideal for:
-    * Re-enabling behaviors that were paused (e.g., resuming animations, re-registering event listeners that were removed on disable).
-    * Updating visual states to reflect an active status.
+  * Re-enabling behaviors that were paused (e.g., resuming animations, re-registering event listeners that were removed on disable).
+  * Updating visual states to reflect an active status.
 
 **Subscribing:**
 
@@ -340,17 +340,17 @@ If a script starts in an enabled state, the `enable` event fires during the init
 **When it's fired:**
 
 * When a script instance becomes disabled. This can occur when:
-    * `this.enabled` is set from `true` to `false` programmatically.
-    * The script's parent Entity (or an ancestor Entity) becomes disabled.
-    * Before the `destroy` event is fired (as a script is implicitly disabled before destruction).
+  * `this.enabled` is set from `true` to `false` programmatically.
+  * The script's parent Entity (or an ancestor Entity) becomes disabled.
+  * Before the `destroy` event is fired (as a script is implicitly disabled before destruction).
 
 **Purpose:**
 
 * To perform actions when a script becomes inactive.
 * Ideal for:
-    * Pausing behaviors (e.g., stopping animations, unregistering event listeners that are only relevant when active).
-    * Releasing temporary resources that are only needed when enabled.
-    * Updating visual states to reflect an inactive status.
+  * Pausing behaviors (e.g., stopping animations, unregistering event listeners that are only relevant when active).
+  * Releasing temporary resources that are only needed when enabled.
+  * Updating visual states to reflect an inactive status.
 
 **Subscribing:**
 
@@ -366,9 +366,9 @@ this.on('disable', () => {
 **When it's fired:**
 
 * Whenever a script instance's effective running state changes from enabled to disabled, or from disabled to enabled. This can happen due to:
-    * The `this.enabled` property of the script instance being changed programmatically.
-    * The `enabled` state of the parent Script Component changing.
-    * The `enabled` state of the script's parent Entity (or an ancestor Entity) changing.
+  * The `this.enabled` property of the script instance being changed programmatically.
+  * The `enabled` state of the parent Script Component changing.
+  * The `enabled` state of the script's parent Entity (or an ancestor Entity) changing.
 
 **Purpose:**
 
@@ -394,17 +394,17 @@ this.on('state', (enabled) => {
 **When it's fired:**
 
 * When the script instance is about to be destroyed. This happens when:
-    * Its parent Entity is destroyed.
-    * The Script Component containing this script instance is removed from the Entity.
-    * The script instance itself is explicitly destroyed (e.g., `this.destroy()`, though less common for direct calls).
+  * Its parent Entity is destroyed.
+  * The Script Component containing this script instance is removed from the Entity.
+  * The script instance itself is explicitly destroyed (e.g., `this.destroy()`, though less common for direct calls).
 
 **Purpose:**
 
 * This is your script's final cleanup phase. It's crucial for preventing memory leaks and ensuring a clean shutdown of the script's functionality.
 * Essential for:
-    * Unsubscribing from all events the script subscribed to (e.g., `this.app.off(...)`, `someEntity.off(...)`, `this.off(...)` for its own events).
-    * Releasing any external resources or DOM elements the script might have created or holds references to.
-    * Nullifying references to other objects to help the garbage collector.
+  * Unsubscribing from all events the script subscribed to (e.g., `this.app.off(...)`, `someEntity.off(...)`, `this.off(...)` for its own events).
+  * Releasing any external resources or DOM elements the script might have created or holds references to.
+  * Nullifying references to other objects to help the garbage collector.
 
 **Subscribing:**
 
