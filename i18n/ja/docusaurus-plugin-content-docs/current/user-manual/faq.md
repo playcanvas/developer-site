@@ -1,6 +1,6 @@
 ---
 title: よくある質問
-sidebar_position: 25
+sidebar_position: 22
 ---
 
 
@@ -11,16 +11,13 @@ sidebar_position: 25
 
 [詳細を見る](/user-manual/scenes/components/)
 
-
 ## スクリプトを追加するには?
 
 <img src="https://playcanvas.com/static-assets/instructions/add-new-script.gif" />
 
 JavaScriptを使用してエンティティの動作を制御できます。 エンティティを選択し、スクリプトコンポーネントを追加し、新しいスクリプトアセットを作成してください。
 
-[詳細を見る](/user-manual/scripting/creating-new/)
-
-
+[Learn more](/user-manual/scripting/editor-users/managing-scripts/)
 
 ## 背景色を変更するには?
 
@@ -29,8 +26,6 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 または、シーンに[スカイボックス](/user-manual/assets/types/cubemap/)を追加することもできます。
 
 [詳細を見る](/user-manual/scenes/components/camera/)
-
-
 
 ## モデルのマテリアルを変更するには?
 
@@ -42,8 +37,6 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 [詳細を見る](/user-manual/assets/types/material/)
 
-
-
 ## キューブマップを作成するには?
 
 <img src="https://playcanvas.com/static-assets/instructions/new_cubemap.gif" />
@@ -54,22 +47,17 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 [詳細を見る](/user-manual/assets/types/cubemap/)
 
-
-
 ## エンティティを作成するには?
 
 <img src="https://playcanvas.com/static-assets/instructions/new_entity.gif" />
 
 ヒエラルキーパネルの<span class="pc-icon">&#57632;</span> Addボタンをクリックするか、エンティティを右クリックして**New Entity**メニュー項目を使用することで、新しいエンティティを作成できます。
 
-
-
 ## ライトを作成するには?
 
 エンティティに**Light**コンポーネントを追加することで、ライトを作成できます。また、エンティティを右クリックしてNew Entity / Directional Lightを選択して、新しい方向性ライトを作成することもできます。
 
 [詳細を見る](/user-manual/scenes/components/light/)
-
 
 ## マテリアルを作成するには?
 
@@ -79,15 +67,11 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 [詳細を見る](/user-manual/assets/types/material/)
 
-
-
 ## 新しいシェーダを作成するには?
 
 アセットパネルから新しいシェーダアセットを作成できます。**Add Asset -> Shader**をクリックしてください。
 
 [チュートリアルを見る](http://developer.playcanvas.com/tutorials/custom-shaders/)
-
-
 
 ## ボックスや球体のような形状を作成するには?
 
@@ -99,26 +83,19 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 [詳細を見る](/user-manual/scenes/components/render/)
 
-
-
 ## スカイボックスを作成するには?
 
 シーンにスカイボックスを作成するには、まず[Cubemapアセット](/user-manual/assets/types/cubemap/)を作成する必要があります。その後、Cubemapを3Dビューポートにドラッグアンドドロップするか、Scene Settingsに移動してSkyboxフィールドにCubemapをドラッグします。
 
 [詳細を見る](/user-manual/scenes/settings#skybox)
 
-
-
 ## アセットを削除するには?
 
 アセットを選択し、**Delete**を押すか、右クリックしてDeleteを選択します。
 
-
 ## エンティティを削除するには?
 
 エンティティを選択し、**Delete**を押すか、ヒエラルキーパネルの<span class="pc-icon">&#57636;</span> Deleteボタンをクリックするか、エンティティを右クリックしてコンテキストメニューからDeleteを選択することで、エンティティを削除できます。
-
-
 
 ## エンティティを複製するには?
 
@@ -126,15 +103,11 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 また、エンティティをコピーして貼り付けることもできます。コピーするには**Ctrl + C**、貼り付けるには**Ctrl + V**を押します。
 
-
-
 ## アニメーションを再生するには?
 
 3Dモデルのアニメーションを再生するには、 [モデルコンポーネント](/user-manual/scenes/components/model/)と[アニメーションコンポーネント](/user-manual/scenes/components/animation/)を持つエンティティを作成します。 **モデルコンポーネント**がモデルをレンダリングして、 **アニメーションコンポーネント**がアニメーションを再生します。
 
 モデルをレンダリングするには、モデルコンポーネントのAssetフィールドにモデルアセットをドラッグします。アニメーションを再生するには、アニメーションコンポーネントのAssetフィールドにアニメーションアセットをドラッグします。
-
-
 
 ## サウンドを再生するにはどうすればよいですか?
 
@@ -144,16 +117,11 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 [チュートリアルを見る](/tutorials/basic-audio/)
 
-
-
-
 ## コンポーネントを削除するにはどうすればよいですか?
 
 <img src="https://playcanvas.com/static-assets/instructions/remove_component.jpg" />
 
 コンポーネントを削除するには、Entityを選択して、Inspectorのコンポーネントのタイトルの横にある**<span class="pc-icon">&#57636;</span> Delete** ボタンをクリックします。
-
-
 
 ## 3Dモデルをレンダリングするには?
 
@@ -163,8 +131,6 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 [詳細を見る](/user-manual/scenes/components/model/)
 
-
-
 ## Entityを移動/回転/拡大縮小するにはどうすればよいですか?
 
 <img src="https://playcanvas.com/static-assets/instructions/transform.gif" />
@@ -173,14 +139,11 @@ Entityを移動するには、それを選択して、**<span class="pc-icon">&#
 
 Translate / Rotate / Scaleツールを切り替えるには、それぞれ1/2/3を押します。
 
-
-
 ## アセットをアップロードするには?
 
 アセットをアップロードするには、コンピュータからファイルをAssetsパネルにドラッグアンドドロップするだけです。ファイルはサーバーで処理され、Assetsパネルにすぐに表示されます。
 
 [詳細を見る](/user-manual/assets/importing/)
-
 
 ## 物理を使用するには?
 
@@ -190,11 +153,8 @@ Entityに物理特性を与えるには、 [Collision component](/user-manual/sc
 
 [チュートリアルを見る](/tutorials/collision-and-triggers/)
 
-
-
 ## リアルタイムシャドウを使用するには?
 
 リアルタイムシャドウは、**Cast Shadows**が有効になっている各光源に対してレンダリングされます。シャドウを有効にするには、Lightコンポーネントを持つEntityを選択して、Cast Shadowsを有効にします。また、シーン内の任意のModelコンポーネントでもCast Shadowsを有効にする必要があります。
 
 [詳細を見る](/user-manual/graphics/lighting/shadows/)
-

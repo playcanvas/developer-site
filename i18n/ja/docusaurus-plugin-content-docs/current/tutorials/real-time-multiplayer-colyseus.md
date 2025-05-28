@@ -81,14 +81,14 @@ PlayCanvasにColyseus JavaScript SDKを追加する必要があります。
 新しい**「URL」**フィールドに、CDNからColyseus JavaScript SDKを含めてください:
 
 ```none
-https://unpkg.com/colyseus.js@^0.15.0-preview.2/dist/colyseus.js
+https://unpkg.com/colyseus.js@^0.16.0/dist/colyseus.js
 ```
 
 これにより、PlayCanvasスクリプトの `Colyseus` [JavaScript SDK](https://docs.colyseus.io/getting-started/javascript-client/) を使用できます。
 
 ## クライアント - サーバー接続の確立 {#establishing-a-client-server-connection}
 
-新しいPlayCanvasスクリプトから、`Colyseus.Client` インスタンスを作成しましょう([「新しいスクリプトの作成方法」](/user-manual/scripting/creating-new/)を参照してください)。
+Now, from a new PlayCanvas Script, let's instantiate our `Colyseus.Client` instance. ([see "Creating new scripts"](/user-manual/scripting/editor-users/managing-scripts/))
 
 このスクリプトは、「NetworkManager」という新しい空のエンティティにアタッチできます。
 
@@ -229,10 +229,15 @@ export class MyRoomState extends Schema {
 これをクライアント側でリッスンするようにします。
 
 ```typescript
+//
+// In order to attach callbacks to the state, we need to use the `getStateCallbacks()` method
+//
+const $ = Colyseus.getStateCallbacks(this.room);
+
 // ...
-this.room.state.players.onAdd((player, sessionId) => {
+$(this.room.state).players.onAdd((player, sessionId) => {
   //
-  // プレイヤーが参加しました！
+  // A player has joined!
   //
   console.log("A player has joined! Their unique session id is", sessionId);
 });
@@ -246,26 +251,27 @@ Sceneをプレイすると、新しいクライアントがルームに参加す
 ```typescript
 // ...
 
-// `sessionId`ごとにそれぞれのプレイヤーのビジュアル表現を割り当てます
+// we will assign each player visual representation here
+// by their `sessionId`
 this.playerEntities = {};
 
-// 新しいプレイヤーをリッスンします
-this.room.state.players.onAdd((player, sessionId) => {
-// 基本のPlayer表現を検索します（有効になっていません）
-const playerEntityToClone = this.app.root.findByName("Player");
+// listen for new players
+$(this.room.state).players.onAdd((player, sessionId) => {
+  // find the base Player representation (not enabled)
+  const playerEntityToClone = this.app.root.findByName("Player");
 
-// Player表現をクローンし、有効にします！
-const entity = playerEntityToClone.clone();
-entity.enabled = true;
+  // clone the Player representation, and enabled it!
+  const entity = playerEntityToClone.clone();
+  entity.enabled = true;
 
-// サーバーデータに基づいて位置を設定します
-entity.setPosition(player.x, player.y, player.z);
+  // set position based on server data
+  entity.setPosition(player.x, player.y, player.z);
 
-// クローンをSceneに追加します
-playerEntityToClone.parent.addChild(entity);
+  // add clone to the Scene
+  playerEntityToClone.parent.addChild(entity);
 
-// `sessionId`によってビジュアル表現を割り当てます
-this.playerEntities[sessionId] = entity;
+  // assign visual representation by their `sessionId`
+  this.playerEntities[sessionId] = entity;
 });
 // ...
 ```
@@ -276,7 +282,7 @@ this.playerEntities[sessionId] = entity;
 
 ```typescript
 // ...
-this.room.state.players.onAdd((player, sessionId) => {
+$(this.room.state).players.onAdd((player, sessionId) => {
   // ...
   if (this.room.sessionId === sessionId) {
     this.currentPlayerEntity = this.playerEntities[sessionId];
@@ -291,7 +297,7 @@ this.room.state.players.onAdd((player, sessionId) => {
 
 ```javascript
 // ...
-this.room.state.players.onRemove((player, sessionId) => {
+$(this.room.state).players.onRemove((player, sessionId) => {
   // destroy entity
   this.playerEntities[sessionId].destroy();
 
@@ -366,26 +372,26 @@ this.app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
 
 ### プレイヤーの視覚表現の更新 {#updating-players-visual-representation}
 
-サーバーでの変更を持っているため、クライアント側では、`player.onChange()`または`player.listen()`を介して変更を検出できます。
+Having the mutation on the server, we can detect it on the client-side via `$(player).onChange()`, or `$(player).listen()`.
 
-- `player.onChange()`は、 **スキーマインスタンスごと** にトリガーされます。
--  `player.listen(prop)` は、 **プロパティー** の変更ごとにトリガーされます。
+- `$(player).onChange()` is triggered **per schema instance**
+- `$(player).listen(prop)` is triggered **per property** change
 
 1つずつ変更があった場合でも、すべての新しい座標が同時に必要なため、 `.onChange()` を使用する必要があります。
 
 
 ```typescript
 // ...
-this.room.state.players.onAdd((player, sessionId) => {
+$(this.room.state).players.onAdd((player, sessionId) => {
   // ...
-  player.onChange(() => {
+  $(player).onChange(() => {
     this.playerEntities[sessionId].setPosition(player.x, player.y, player.z);
   });
 
   // Alternative, listening to individual properties:
-  // player.listen("x", (newX, prevX) => console.log(newX, prevX));
-  // player.listen("y", (newY, prevY) => console.log(newY, prevY));
-  // player.listen("z", (newZ, prevZ) => console.log(newZ, prevZ));
+  // $(player).listen("x", (newX, prevX) => console.log(newX, prevX));
+  // $(player).listen("y", (newY, prevY) => console.log(newY, prevY));
+  // $(player).listen("z", (newZ, prevZ) => console.log(newZ, prevZ));
 });
 ```
 

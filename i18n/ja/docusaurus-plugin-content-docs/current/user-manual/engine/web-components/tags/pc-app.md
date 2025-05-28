@@ -12,7 +12,9 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 ## Attributes
 
-| 属性 (Attribute) | 説明 |
+<div className="nowrap-first-col">
+
+| Attribute | Description |
 | --- | --- |
 | `alpha` | Boolean attribute. Determines whether the application allocates an alpha channel in the frame buffer. Defaults to `true`. |
 | `antialias` | Boolean attribute. Determines whether the application uses anti-aliasing. Defaults to `true`. |
@@ -20,7 +22,9 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `high-resolution` | Boolean attribute. Determines whether the application renders using physical resolution or CSS resolution. Defaults to `true`. |
 | `stencil` | Boolean attribute. Determines whether the application allocates a stencil buffer. Defaults to `true`. |
 
-## 例
+</div>
+
+## Example
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 

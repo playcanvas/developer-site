@@ -40,66 +40,67 @@ PlayCanvasアプリケーションは、常に存在するデフォルトのレ�
 * **Material / Mesh**(`pc.SORTMODE_MATERIALMESH`)- 不透明なサブレイヤーのデフォルトモードです。メッシュインスタンスは、レンダリングのパフォーマンスを向上させるために、マテリアルとメッシュの切り替えを最小限に抑えるようにソートされます。
 * **Back-to-front**(`pc.SORTMODE_BACK2FRONT`)- 透明なサブレイヤーのデフォルトモードです。メッシュインスタンスは、後ろから前にソートされます。これは、異なる深度を持つ多数の半透明オブジェクトを適切にレンダリングする方法です。
 * **Front-to-back**(`pc.SORTMODE_FRONT2BACK`)- メッシュインスタンスは前から後ろにソートされます。GPUとシーンによっては、このオプションが`pc.SORTMODE_MATERIALMESH`よりもパフォーマンスが向上する場合があります。
-* **Manual**(`pc.SORTMODE_MANUAL`)- UIや2Dレイヤーのデフォルトモードです。メッシュインスタンスは、`drawOrder` プロパティに基づいてソートされます。ElementコンポーネントとSpriteコンポーネントは、このソートモードを持つレイヤーに配置する必要があります。
+* **Manual** (`pc.SORTMODE_MANUAL`) - This is the default mode for UI or 2D layers. Mesh instances are sorted based on the `MeshInstance.drawOrder` property. The Element Component and Sprite Component should be placed in layers using this sort mode.
 * **None**(`pc.SORTMODE_NONE`)- ソートは適用されません。メッシュインスタンスは、レイヤーに追加された順序で描画されます。
 
-## デフォルトレイヤー {#default-layers}
+In addition to these sort modes, the `MeshInstance.drawBucket` property provides an additional, coarser level of sorting of `MeshInstances` within a layer. This integer value, ranging from 0 to 255 (default 127), serves as the primary sort key for mesh rendering. Meshes are sorted in ascending order by `drawBucket` (lower values rendered first), and then further sorted within each bucket according to the layer's selected sort mode. Note that the `drawBucket` setting is only effective when mesh instances are added to a sub-layer with its sort mode set to `pc.SORTMODE_BACK2FRONT`, `pc.SORTMODE_FRONT2BACK`, or `pc.SORTMODE_MATERIALMESH`. This allows you to group meshes into distinct rendering buckets, forcing certain groups to render before or after others, regardless of their material or depth, offering fine-grained control over the overall rendering order within those specific sort modes.
 
-PlayCanvasアプリケーションは、デフォルトのレイヤーのセットで作成されます。これらのレイヤーを削除すると、一部のエンジン機能が正常に機能しなくなるため、これらのレイヤーはそのままにしておく必要があります。デフォルトの順序は次のとおりです:
+## Default Layers {#default-layers}
+
+PlayCanvas applications are created with a set of default layers. You should leave these layers in place as some engine features will not function correctly if they are not present. They default order is below:
 
 ![Default Layers](/img/user-manual/graphics/layers/default-layers.jpg)
 
-1. **World (Opaque)** - 透明でないコンポーネントとほとんどの不透明なコンポーネントのメッシュをレンダリングするために使用されます。
-1. **Depth (Opaque)** - シーンのカラーまたはDepthバッファをキャプチャするために使用されます。[Depth Layer][7]を参照してください。
-1. **Skybox (Opaque)** - スカイボックスをレンダリングするために使用されます。World(Opaque)の後にレンダリングされるようになっており、オーバードローを減らすためです。
-1. **World (Transparent)** - 透明なコンポーネントと他の透明なコンポーネントメッシュをレンダリングするために使用されます。
-1. **Immediate (Opaque)** - インスタントモードメッシュをレンダリングするために使用されます。例:`app.renderLine()`。
-1. **Immediate (Transparent)** - インスタントモードメッシュをレンダリングするために使用されます。例:`app.renderLine()`。
-1. **UI (Transparent)** - Elementコンポーネントをレンダリングするために使用されます。すべてのElementコンポ
+1. **World (Opaque)** - Used to render components that are not transparent and most opaque component meshes.
+1. **Depth (Opaque)** - Used to capture the color or the depth buffer of the scene, see [Depth Layer][7].
+1. **Skybox (Opaque)** - Used to render the skybox. It is rendered after the World (Opaque) to reduce overdraw.
+1. **World (Transparent)** - Used to render components that are transparent and other transparent component meshes.
+1. **Immediate (Opaque)** - Used to render immediate mode meshes. e.g. `app.renderLine()`.
+1. **Immediate (Transparent)** - Used to render immediate mode meshes. e.g. `app.renderLine()`.
+1. **UI (Transparent)** - Used to render Element components. All Element components are transparent, so the Opaque sub-layer is not used.
 
-## カスタムレイヤーの使用 {#using-custom-layers}
+## Using Custom Layers {#using-custom-layers}
 
-デフォルトのレイヤーには、エンジンの既存の機能が実装されています。ただし、独自のレイヤーを作成し、コンテンツをレンダリングする順序をカスタマイズしてこそ、エンジンを十分に活用することができます。
+The default layers are great for implementing the existing engine features but the real power comes from creating your own layers to customize the order in which your content is rendered.
 
-### レイヤーの作成 {#create-a-layer}
+### Create a layer {#create-a-layer}
 
-レイヤーの管理は、エディターの**Settings**セクション内**LAYERS**パネルからおこないます。
+Layers are controlled from the **LAYERS** panel in the **Settings** section of the Editor.
 
 ![Creating a layer](/img/user-manual/graphics/layers/new-layer.jpg)
 
-Layersセクションで、作成するレイヤーの名前を入力し**Add Layer**をクリックします。ボタンの下に利用可能なレイヤーのリストが表示され、新規作成したレイヤーも含まれています。
+In the Layers section, type in the name of the layer that you wish to create and click **Add Layer**. Your new layer will appear in the list of available layers below the button.
 
-### ソートモードの設定 {#setting-the-sort-mode}
+### Setting the sort mode {#setting-the-sort-mode}
 
 ![Edit a layer](/img/user-manual/graphics/layers/edit-layer.jpg)
 
-レイヤーリストで、各サブレレイヤーのソートモードを選択できます。
-レイヤーを拡張し、ドロップダウンメニューからソートモードを選択してください。
+You can choose the sort mode for each sub-layer in the layer list. Expand your layer and choose the sort mode from the dropdown menu.
 
-### レイヤー順序の選択 {#choosing-the-layer-order}
+### Choosing the layer order {#choosing-the-layer-order}
 
 ![Add layer](/img/user-manual/graphics/layers/add-sub-layer.jpg)
 
-レイヤー構成にサブレイヤーを追加するには、**ADD SUBLAYER**を選び、追加するサブレイヤーを選択します。レイヤーがRender Orderリストに表示されたら、各サブレイヤーをドラッグすれば順序を変更できます。
+Add a sub-layer to the layer composition by selecting **ADD SUBLAYER** and choosing which sub-layer you wish to add. Once your layer is in the Render Order list you can re-arrange the order by dragging each sub-layer up and down.
 
-### レイヤー内のエンティティのレンダリング {#rendering-entities-in-layers}
+### Rendering entities in layers {#rendering-entities-in-layers}
 
-メッシュをレンダリングするコンポーネントにはすべて`layers`プロパティがあり、このプロパティはメッシュをどのレイヤーやサブレイヤーに追加するかの決定に使用されます。これらのコンポーネントには、モデル、エレメント、スプライト、パーティクルシステムなどがあります。カメラコンポーネントとライトコンポーネントにも`layers`プロパティがあり、それぞれどのレイヤーをレンダリングするか、または照らすかを決定します。
+Components that render meshes all have a `layers` property which is used to determine which layer and sub-layer the mesh should be added to. These components include: Model, Element, Sprite, Particle System. The Camera and Light components also have a `layers` property to determine which layers they render and light respectively.
 
 ![Layer Components](/img/user-manual/graphics/layers/test-layer-components.jpg)
 
-*Note:* モデルはテストレイヤーに割り当てられています。これをレンダリングするためには、カメラはそのレイヤーリストにテストレイヤーを含める必要があります。これを照らすためには、ライトもまたそのレイヤーリストにテストレイヤーを含める必要があります。
+*Note:* The model is assigned to the Test Layer. In order for it to be rendered, the camera must include Test Layer in its layer list. In order for it to be lit, the light must include Test Layer in its layer list too.
 
-### 推奨設定 {#recommended-setup}
+### Recommended setup {#recommended-setup}
 
-通常、シーンには多くのエンティティが含まれ、それらはメッシュをレンダリングします。これらのそれぞれが正確に1つのレイヤーに存在することが推奨されます。ほとんどの場合、これらはワールドレイヤーになりますが、よりコントロールを行うために、テレイン、ビルディング、キャラクターなどのレイヤーに割り当てることができます。 
+Your scene typically contains many entities, which render meshes. It is recommended for each of these to be on exactly one layer. In most cases, these would be on the World layer, but for more control, you can assign them to layers such as Terrain, Buildings, Characters.
 
-新しいシーンにはデフォルトで一つのカメラが含まれており、多くのアプリケーションではこれだけで十分です。追加のカメラは、シーン内の異なるカメラ間でカットする場合や、ピクチャーインピクチャーや分割画面をレンダリングする場合、またはシーンをテクスチャにレンダリングする場合などに有用です。 
+A new scene by default contains a single camera, and this is all that is needed in many applications. Additional cameras are useful for cases such as cutting between different cameras in the scene, or when rendering picture in picture or split screen, or when rendering the scene into a texture.
 
-追加のカメラを追加するときには、以下の手順を推奨します。
+When you add an additional camera, these are the recommended steps:
 
-1. 新規および既存のカメラの優先度を設定し、それらがレンダリングする順序を制御します。 
-2. 新たに作成したカメラのレイヤーを設定し、それがレンダリングするレイヤーを指定します。例えば、上から見下ろすマップカメラをレンダリングし、その中にテレインとビルディングのレイヤーだけを含めたい場合、キャラクターは含めないようにするなどです。 
-3. カメラがテクスチャにレンダリングする場合は、スクリプトを使用してレンダーターゲットをカメラの `renderTarget` プロパティに割り当てます。
+1. Set the priority of new and existing cameras to control the order in which they render.
+2. Set up the layers of the newly created camera to specify which layers it renders. For example you might render a top down map camera and only want Terrain and Building layers in it, but not Characters.
+3. If your camera renders into a texture, use a script to assign a render target to the `renderTarget` property of the camera.
 
 [7]: /user-manual/graphics/cameras/depth-layer

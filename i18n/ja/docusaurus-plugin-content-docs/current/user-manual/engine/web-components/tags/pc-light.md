@@ -6,13 +6,15 @@ The `<pc-light>` tag is used to define a light component.
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](pc-entity.md).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
 :::
 
 ## Attributes
 
-| 属性 (Attribute) | 説明 |
+<div className="nowrap-first-col">
+
+| Attribute | Description |
 | --- | --- |
 | `color` | The color of the light. Can be a space-separated list of R, G, B values, a hex color code, or a [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts). If not specified, `1 1 1` is used. |
 | `cast-shadows` | Valueless attribute. If present, the light casts shadows. |
@@ -28,7 +30,9 @@ The `<pc-light>` tag is used to define a light component.
 | `type` | The type of light. Can be `directional`, `point` or `omni`. If not specified, `directional` is used. |
 | `vsm-bias` | The bias used for VSM shadows. If not specified, `0.01` is used. |
 
-## 例
+</div>
+
+## Example
 
 ```html
 <pc-entity>

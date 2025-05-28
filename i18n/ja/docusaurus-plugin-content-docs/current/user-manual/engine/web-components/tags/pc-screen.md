@@ -6,13 +6,15 @@ The `<pc-screen>` tag is used to define a screen component.
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](pc-entity.md).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
 :::
 
 ## Attributes
 
-| 属性 (Attribute) | 説明 |
+<div className="nowrap-first-col">
+
+| Attribute | Description |
 | --- | --- |
 | `blend` | Valueless attribute. If present, the screen component blends. |
 | `priority` | The priority of the screen component. Must be an integer between `0` and `255`. If not specified, `0` is used. |
@@ -21,7 +23,9 @@ The `<pc-screen>` tag is used to define a screen component.
 | `scale-blend` | The scale blend of the screen component. Must be a number between `0` and `1`. If not specified, `0.5` is used. |
 | `screen-space` | Valueless attribute. If present, the screen component is in screen space. |
 
-## 例
+</div>
+
+## Example
 
 ```html
 <pc-entity>

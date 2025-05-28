@@ -6,16 +6,18 @@ The `<pc-element>` tag is used to define an element component.
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](pc-entity.md).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
 :::
 
 ## Attributes
 
-| 属性 (Attribute) | 説明 |
+<div className="nowrap-first-col">
+
+| Attribute | Description |
 | --- | --- |
 | `anchor` | The anchor of the element component. Specified as a space-separated list of X, Y, Z, and W values. If not specified, `0 0 0 1` is used. |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](pc-asset.md) tag that has a type of `font`. |
+| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `font`. |
 | `auto-width` | Valueless attribute. If present, the element component automatically adjusts its width. |
 | `color` | The color of the element component. Can be a space-separated list of R, G, B, and A values, a hex color code, or a [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts). If not specified, `1 1 1 1` is used. |
 | `font-size` | The font size of the element component. If not specified, `16` is used. |
@@ -26,7 +28,9 @@ The `<pc-element>` tag is used to define an element component.
 | `width` | The width of the element component. If not specified, `0` is used. |
 | `wrap-lines` | Valueless attribute. If present, the element component wraps lines. |
 
-## 例
+</div>
+
+## Example
 
 ```html
 <pc-entity>

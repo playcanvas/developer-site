@@ -74,7 +74,7 @@ Sometimes developers use this approach to ensure that certain code and entities 
 
 :::note
 
-[アプリケーションルートノード](https://api.playcanvas.com/engine/classes/AppBase.html#root)は、エディタで見ることができるデフォルトで 'Root' と名前が付けられたシーンヒエラルキールートエンティティではありません。シーンヒエラルキールートエンティティは、アプリケーションルートノードの子になります。
+The [application root node](https://api.playcanvas.com/engine/classes/AppBase.html#root) is not the scene hierarchy root entity that is named 'Root' by default that you see in the scene with the Editor. The scene hierarchy root entity will be a child of the application root node.
 
 :::
 

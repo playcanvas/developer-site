@@ -1,6 +1,6 @@
 ---
 title: VS Code Extension
-sidebar_position: 12
+sidebar_position: 3
 ---
 
 For developers seeking an enhanced code editing experience with features like source control, GitHub Copilot and a wide range of extensions, integrating Visual Studio Code (VS Code) with PlayCanvas offers a powerful alternative to the built-in Code Editor. To this end, we provide an [open-source](https://github.com/playcanvas/vscode-extension) VS Code Extension.
@@ -34,7 +34,7 @@ For developers seeking an enhanced code editing experience with features like so
 * **Sync**: Save your changes in VS Code; the PlayCanvas extension automatically syncs these changes to the cloud.
 * **Preview and Debug**: Use the [Launch Page](/user-manual/editor/launch-page/) to preview and debug your application as you develop.
 
-### デバッグ
+### Debugging
 
 The VS Code extension for PlayCanvas does not directly support debugging of scripts running in the browser. However, you can [use browser developer tools](/user-manual/scripting/debugging/) to debug your PlayCanvas scripts in conjunction with VS Code for a powerful debugging experience.
 

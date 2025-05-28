@@ -19,7 +19,7 @@ Updates to Editor Settings apply only to the current project and only to you. In
 
 Here is a breakdown of the available settings:
 
-| Setting                          | 説明 |
+| Setting                          | Description |
 | -------------------------------- | ----------- |
 | **Grid Divisions**               | Determines the number of divisions in the grid in the [Viewport](../viewport). |
 | **Grid Division Size**           | Sets the size of each grid division, affecting the grid scale. |
