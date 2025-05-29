@@ -18,15 +18,15 @@ As an Editor user, you benefit from a tightly integrated development environment
 
 This collection of pages will delve into the tools and techniques unique to scripting within the PlayCanvas Editor:
 
-* [Managing Scripts in the Editor](managing-scripts):
+* [Managing Scripts in the Editor](./managing-scripts.md):
   * Creating, organizing, and deleting Script Assets in the Asset panel.
   * Understanding the connection between Script Assets (.js/.mjs files) and Script Components (instances on Entities).
   * Renaming and moving scripts, and how the Editor handles references.
-* [The Built-in Code Editor](code-editor):
+* [The Built-in Code Editor](./code-editor.md):
   * Navigating and using the Editor's integrated code editing interface.
   * Key features: syntax highlighting, autocompletion (basic), error checking, and search.
   * Tips for efficient coding directly within PlayCanvas.
-* [Using VS Code with PlayCanvas](vscode-extension):
+* [Using VS Code with PlayCanvas](./vscode-extension.md):
   * Setting up and using the official PlayCanvas VS Code Extension.
   * Benefits: advanced autocompletion, debugging, richer IntelliSense, and project-wide search.
   * Synchronizing changes between VS Code and the PlayCanvas Editor.
@@ -34,7 +34,7 @@ This collection of pages will delve into the tools and techniques unique to scri
   * How Script Attributes appear and are managed in the Inspector panel.
   * Assigning various asset types (Entities, Assets, Materials, etc.) to attributes.
   * Leveraging arrays and nested attributes for complex configurations.
-* [Script Hot Reloading](hot-reloading):
+* [Script Hot Reloading](./hot-reloading.md):
   * Understanding how Hot Reloading works and its benefits for rapid iteration.
   * What gets reloaded and what doesn't (initialize vs. swap).
   * Tips for writing scripts that work well with Hot Reloading.
