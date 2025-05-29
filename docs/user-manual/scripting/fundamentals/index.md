@@ -19,7 +19,7 @@ Explore modern ES Module-based scripting with classes, imports, and better tooli
 
 Understand when and how script methods are called - from initialization through updates to cleanup.
 
-### [Script Attributes](./script-attributes.md)
+### [Script Attributes](./script-attributes/index.md)
 
 Expose configurable properties that can be tweaked in the editor or set programmatically.
 

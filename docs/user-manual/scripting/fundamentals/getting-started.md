@@ -130,7 +130,7 @@ Configurable.attributes.add('target', { type: 'entity' });
 </TabItem>
 </Tabs>
 
-Learn more about [Script Attributes](./script-attributes.md).
+Learn more about [Script Attributes](./script-attributes/index.md).
 
 ### Accessing the Entity
 
