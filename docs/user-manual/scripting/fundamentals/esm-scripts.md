@@ -5,11 +5,6 @@ sidebar_position: 2
 
 ESM Scripts use modern ES Module syntax and provide the recommended way to write PlayCanvas scripts. They offer better code organization, static imports, improved bundling, and a more familiar development experience for modern JavaScript developers.
 
-<video width="100%" controls autoPlay loop>
-  <source src="/video/pc-esm-scripts.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
 ## Why Choose ESM Scripts?
 
 * **Modern JavaScript:** Use ES6+ features like classes, arrow functions, and destructuring
