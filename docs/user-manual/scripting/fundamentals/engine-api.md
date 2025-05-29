@@ -19,15 +19,6 @@ this.entity     // The entity this script is attached to
 
 ### Essential Classes
 
-**[`Entity`](https://api.playcanvas.com/engine/classes/Entity.html)** - Objects in your scene
-
-```javascript
-// Common entity operations
-this.entity.setPosition(0, 5, 0);
-this.entity.rotate(0, 90, 0);
-const child = this.entity.findByName('Weapon');
-```
-
 **[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)** - Your application
 
 ```javascript
@@ -37,12 +28,21 @@ const player = this.app.root.findByName('Player');
 const texture = this.app.assets.find('logo', 'texture');
 ```
 
-**Components** - Add functionality to entities
+**[`Entity`](https://api.playcanvas.com/engine/classes/Entity.html)** - Objects in your scene
+
+```javascript
+// Common entity operations
+this.entity.setPosition(0, 5, 0);
+this.entity.rotate(0, 90, 0);
+const child = this.entity.findByName('Weapon');
+```
+
+**[`Component`](https://api.playcanvas.com/engine/classes/Component.html)** - Add functionality to entities
 
 ```javascript
 // Accessing components
 const camera = this.entity.camera;
-const model = this.entity.model;
+const light = this.entity.light;
 const rigidbody = this.entity.rigidbody;
 const sound = this.entity.sound;
 ```
