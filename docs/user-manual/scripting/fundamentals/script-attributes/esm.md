@@ -7,7 +7,7 @@ sidebar_position: 1
 
 This page documents Script Attributes for the recommended **ESM Scripts** system.
 
-For **Classic Script Attributes**, click [here](../classic).
+For **Classic Script Attributes**, click [here](./classic.md).
 
 :::
 

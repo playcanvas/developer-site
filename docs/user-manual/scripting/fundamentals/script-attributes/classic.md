@@ -7,7 +7,7 @@ sidebar_position: 2
 
 This page documents Script Attributes for the deprecated **Classic Scripts** system.
 
-For **ESM Script Attributes**, click [here](../esm).
+For **ESM Script Attributes**, click [here](./esm.md).
 
 :::
 

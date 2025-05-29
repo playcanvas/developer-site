@@ -89,7 +89,7 @@ Scripts have several methods that are called automatically at different times:
 * `postUpdate(dt)` - Called after all updates complete
 * Event handlers for `enable`, `disable`, `destroy`
 
-Learn more about the [Script Lifecycle](../script-lifecycle/).
+Learn more about the [Script Lifecycle](./script-lifecycle.md).
 
 ### Attributes
 
@@ -130,7 +130,7 @@ Configurable.attributes.add('target', { type: 'entity' });
 </TabItem>
 </Tabs>
 
-Learn more about [Script Attributes](../script-attributes/).
+Learn more about [Script Attributes](./script-attributes.md).
 
 ### Accessing the Entity
 
@@ -150,9 +150,9 @@ const rigidbody = this.entity.rigidbody;
 
 ## Next Steps
 
-* **Learn ESM Scripts:** If you're starting fresh, check out [ESM Scripts](../esm-scripts/) for the modern approach
-* **Understand Lifecycle:** Read about [Script Lifecycle](../script-lifecycle/) to understand when your code runs
-* **Add Interactivity:** Explore [Events](../events/) to make scripts communicate with each other
+* **Learn ESM Scripts:** If you're starting fresh, check out [ESM Scripts](./esm-scripts.md) for the modern approach
+* **Understand Lifecycle:** Read about [Script Lifecycle](./script-lifecycle.md) to understand when your code runs
+* **Add Interactivity:** Explore [Events](./events.md) to make scripts communicate with each other
 
 :::tip
 

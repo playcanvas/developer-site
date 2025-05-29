@@ -55,35 +55,35 @@ Rotate.prototype.update = function(dt) {
 
 ## What You'll Learn
 
-### [Fundamentals](./fundamentals/)
+### [Fundamentals](./fundamentals/index.md)
 
 Core concepts that apply to all PlayCanvas scripts:
 
-* [Getting Started](./fundamentals/getting-started/) - Basic script structure and syntax
-* [ESM Scripts](./fundamentals/esm-scripts/) - Modern scripting with ES Modules
-* [Script Lifecycle](./fundamentals/script-lifecycle/) - When and how script methods are called
-* [Script Attributes](./fundamentals/script-attributes/) - Exposing configurable properties
-* [Calling the Engine API](./fundamentals/engine-api/) - Key classes and patterns
-* [Events](./fundamentals/events/) - Communication between scripts
+* [Getting Started](./fundamentals/getting-started.md) - Basic script structure and syntax
+* [ESM Scripts](./fundamentals/esm-scripts.md) - Modern scripting with ES Modules
+* [Script Lifecycle](./fundamentals/script-lifecycle.md) - When and how script methods are called
+* [Script Attributes](./fundamentals/script-attributes.md) - Exposing configurable properties
+* [Calling the Engine API](./fundamentals/engine-api.md) - Key classes and patterns
+* [Events](./fundamentals/events.md) - Communication between scripts
 
-### [Editor Integration](./editor-users/)
+### [Editor Integration](./editor-users/index.md)
 
 Working with scripts in the PlayCanvas Editor:
 
-* [Managing Scripts](./editor-users/managing-scripts/) - Creating and organizing script files
-* [Code Editor](./editor-users/code-editor/) - Using the built-in code editor
-* [VS Code Extension](./editor-users/vscode-extension/) - Enhanced development workflow
-* [Hot Reloading](./editor-users/hot-reloading/) - Live code updates
+* [Managing Scripts](./editor-users/managing-scripts.md) - Creating and organizing script files
+* [Code Editor](./editor-users/code-editor.md) - Using the built-in code editor
+* [VS Code Extension](./editor-users/vscode-extension.md) - Enhanced development workflow
+* [Hot Reloading](./editor-users/hot-reloading.md) - Live code updates
 
-### [Debugging](./debugging/)
+### [Debugging](./debugging/index.md)
 
 Tools and techniques for troubleshooting your scripts:
 
-* [Console Logging](./debugging/console-logging/) - Basic debugging with console output
-* [Browser Dev Tools](./debugging/browser-dev-tools/) - Advanced debugging techniques
+* [Console Logging](./debugging/console-logging.md) - Basic debugging with console output
+* [Browser Dev Tools](./debugging/browser-dev-tools.md) - Advanced debugging techniques
 
 :::tip
 
-New to PlayCanvas scripting? Start with [Getting Started](./fundamentals/getting-started/) to learn the basics, then explore [ESM Scripts](./fundamentals/esm-scripts/) for the modern approach.
+New to PlayCanvas scripting? Start with [Getting Started](./fundamentals/getting-started.md) to learn the basics, then explore [ESM Scripts](./fundamentals/esm-scripts.md) for the modern approach.
 
 :::

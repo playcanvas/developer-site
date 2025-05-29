@@ -18,11 +18,11 @@ For developers seeking an enhanced code editing experience with features like so
 ## Installation
 
 * **Install Visual Studio Code**: [Download  VS Code](https://code.visualstudio.com/download) and install it.
-* **Install the PlayCanvas VS Code Extension**: Search for [the PlayCanvas extension](https://marketplace.visualstudio.com/items?itemName=playcanvas.playcanvas) in the VS Code Marketplace and install it. This extension connects VS Code to your PlayCanvas projects using the PlayCanvas [REST API](/user-manual/api/).
+* **Install the PlayCanvas VS Code Extension**: Search for [the PlayCanvas extension](https://marketplace.visualstudio.com/items?itemName=playcanvas.playcanvas) in the VS Code Marketplace and install it. This extension connects VS Code to your PlayCanvas projects using the PlayCanvas [REST API](../../api/index.md).
 
 ### Configuration
 
-* [Generate a new API Key](/user-manual/api/#authorization) and copy it to the clipboard.
+* [Generate a new API Key](../../api/index.md#authorization) and copy it to the clipboard.
 * Open your project in VS Code by opening the Command Palette (`CTRL`+`Shift`+`P`) and typing "PlayCanvas: Add Project".
 * Paste your API token into the input box. This only needs to be done once.
 * Toggle "PlayCanvas: Use Playcanvas Types" to enable or disable PlayCanvas Engine API types for enhanced IntelliSense support. It adds a virtual reference to the type definitions automatically at the top of the source file. The reference will not be uploaded when the script is updated.
@@ -32,10 +32,10 @@ For developers seeking an enhanced code editing experience with features like so
 * **Add Project**: Open your project in VS Code by opening the Command Pallette (`CTRL`+`Shift`+`P`) and typing "PlayCanvas: Add Project".
 * **Edit**: Edit scripts, shaders and other text assets with rich editing support.
 * **Sync**: Save your changes in VS Code; the PlayCanvas extension automatically syncs these changes to the cloud.
-* **Preview and Debug**: Use the [Launch Page](/user-manual/editor/launch-page/) to preview and debug your application as you develop.
+* **Preview and Debug**: Use the [Launch Page](../../editor/launch-page/index.md) to preview and debug your application as you develop.
 
 ### Debugging
 
-The VS Code extension for PlayCanvas does not directly support debugging of scripts running in the browser. However, you can [use browser developer tools](/user-manual/scripting/debugging/) to debug your PlayCanvas scripts in conjunction with VS Code for a powerful debugging experience.
+The VS Code extension for PlayCanvas does not directly support debugging of scripts running in the browser. However, you can [use browser developer tools](../debugging/index.md) to debug your PlayCanvas scripts in conjunction with VS Code for a powerful debugging experience.
 
 Integrating VS Code with PlayCanvas provides a sophisticated environment tailored for advanced development workflows, giving developers the flexibility and tools needed to build complex and high-performance web-based applications.
