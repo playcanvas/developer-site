@@ -90,7 +90,7 @@ import config from '../../../utils/config.js';
 You can use an import map to simplify this to:
 
 ```js
-import config from '@/utils/config.js';
+import config from 'utils/config.js';
 ```
 
 ### Create an Import Map
