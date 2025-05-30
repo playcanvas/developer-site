@@ -288,6 +288,6 @@ CustomShader.prototype.update = function(dt) {
 Here is the complete script. Remember you'll need to create vertex shader and fragment shader assets in order for it to work.
 
 [1]: https://api.playcanvas.com/engine/classes/Shader.html
-[2]: /user-manual/scripting/script-attributes/
+[2]: /user-manual/scripting/fundamentals/script-attributes/
 [3]: /user-manual/graphics/physical-rendering/physical-materials/
 [project]: https://playcanvas.com/project/406044/overview/tutorial-custom-shaders

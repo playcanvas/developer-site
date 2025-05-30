@@ -28,6 +28,61 @@ material.chunks.APIVersion = pc.CHUNKAPI_1_55;
 
 次の表は、Engine リリースごとのチャンクの変更点をまとめたものです。
 
+### *Engine v2.6*
+
+#### Internal engine chunks
+
+The following vertex shader chunks were removed and replaced by a single `litMainVS` chunk:
+
+- `endVS`
+- `startVS`
+- `baseVS`
+- `viewNormalVS`
+- `baseNineSlicedVS`
+
+`lightmapDirAddPS` chunk has been removed, and its functionality integrated into `lightmapAddPS` chunk.
+
+`TBNderivativePS` and `TBNObjectSpacePS` chunks were removed, and their functionality integrated into `TBNPS` chunk.
+
+`startPS` chunk has been removed, and a replacement larger chunk will be added at a later stage.
+
+`outputAlphaOpaquePS` and `outputAlphaPremulPS` chunks were merged into `outputAlphaPS` chunk.
+
+`cubeMapProjectBoxPS` and `cubeMapProjectNonePS` chunks were merged into `cubeMapProjectPS` chunk.
+
+`envMultiplyPS` and `envConstPS` were merged into `envProcPS` chunk.
+
+`aoSpecOccSimplePS`, `aoSpecOccConstSimplePS`, `aoSpecOccPS` and `aoSpecOccConstPS` chunks were merged into `aoSpecOccPS` chunk.
+
+`shadowSampleCoordPS` chunk has been removed, and its content is now part of `lightFunctionPS` chunk.
+
+The following reflection related chunks had a slight change in how the texture decode function is provided. `$DECODE` is now `{reflectionDecode}` and `$DECODE_CUBEMAP` is now `{reflectionCubemapDecode}`. These chunks were affected:
+
+- `reflectionEnvPS`
+- `reflectionEnvHQPS`
+- `reflectionCubePS`
+- `reflectionSpherePS`
+
+The following ambient lighting related chunks had been removed, and merged into a single `ambientPS` chunk:
+
+- `ambientConstantPS`
+- `ambientEnvPS`
+- `ambientSHPS`
+
+### *Engine v2.5*
+
+The following chunks were removed and replaced by a single `fogPS` chunk:
+
+- `fogExpPS`
+- `fogExp2PS`
+- `fogLinearPS`
+- `fogNonePS`
+
+The following chunks were removed and replaced by a single `gammaPS` chunk:
+
+- `gamma1_0PS`
+- `gamma2_2PS`
+
 ### *Engine v1.70*
 
 | Chunk | Changes |
@@ -277,6 +332,7 @@ struct SheenArgs
 | `shadow(EVSM/EVSMn/Standard/StandardGL2/VSM8)` | <ul><li>`dShadowCoord`を使用する代わりに、vec3シャドウサンプル座標を受け入れます</li></ul> |
 | `spot` | <ul><li>`dLightDirNormW`を使用する代わりに、vec3で正規化された光の方向を受け入れます</li></ul> |
 | `TBN(-/ObjectSpace/derivative/fast)` | <ul><li>`dTangentW`、`dBinormalW`、`dNormalW`を使用する代わりに、vec3接線、双接線、および法線を受け入れます。</li></ul> |
+
 ---
 
 ### Engine v1.60

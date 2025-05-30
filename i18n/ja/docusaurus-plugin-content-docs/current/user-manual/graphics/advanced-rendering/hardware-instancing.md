@@ -6,7 +6,7 @@ sidebar_position: 5
 ハードウェアインスタンシング (Hardware instancing) は、GPUに複数の同一のメッシュを少数のドローコールでレンダリングする技術です。メッシュの各インスタンスは、異なる限定的な状態（例えば、位置や色）を持つことができます。木や弾丸などのオブジェクトを描画するのに適した技術です。
 
 
-デバイスでのサポート状況を確認するには、 `pc.GraphicsDevice.supportsInstancing`を確認します。一般的には、 WebGL2デバイスのすべてと、ANGLE_instanced_arrays拡張機能を使用してWebGL1デバイスの大部分でサポートされています。
+For its support on a device, check `pc.GraphicsDevice.supportsInstancing`. In general, it is supported on all WebGL2 devices and also on the majority of WebGL1 devices using the `ANGLE_instanced_arrays` extension.
 
 また、すべてのインスタンスがレンダリング用にGPUに送信され、カメラフラスタムカリングは行われないことに注意してください。
 
@@ -20,7 +20,7 @@ const matrices = new Float32Array(instanceCount * 16);
 const matrix = new pc.Mat4();
 let matrixIndex = 0;
 for (let i = 0; i < instanceCount; i++) {
-    matrix.setTRS(pos, pc.Vec3.ZERO, pc.Vec3.ONE);
+    matrix.setTRS(pos, pc.Quat.IDENTITY, pc.Vec3.ONE);
 
     // copy matrix elements into array of floats
     for (let m = 0; m < 16; m++)
@@ -42,7 +42,7 @@ const vertexBuffer = new pc.VertexBuffer(
 meshInst.setInstancing(vertexBuffer);
 ```
 
-注: pc.BUFFER_DYNAMICを使用して動的な頂点バッファを作成し、フレームごとにその内容を以下のように更新することができます。
+Note, that you can create a dynamic vertex buffer using `pc.BUFFER_DYNAMIC`, and update the contents of it per-frame like this:
 
 ```javascript
 vertexBuffer.setData(matrices);

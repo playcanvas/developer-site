@@ -1,33 +1,89 @@
 ---
 title: スクリプティング
-sidebar_position: 11
+sidebar_position: 9
 ---
 
-ゲームをインタラクティブにするにはスクリプトを使います。スクリプトは**JavaScript**で書きます。これはあらゆるウェブページで使用されているプログラミング言語です。
+Scripts are the heart of interactivity in PlayCanvas. They're reusable pieces of code that you attach to Entities to define behaviors, handle user input, manage game logic, and bring your projects to life.
 
-アプリケーションは二つの個別のコードベースに分かれているものと考えてください。一つはPlayCanvasが提供するエンジンです。これは、グラフィックレンダリング、入力処理、オーディオ、PlayCanvasツールのインターフェイスなどを含む基本的な機能を実装します。もう一つはスクリプトです。これは多くの場合、便利な挙動を提供する再利用可能なブロックか、アプリケーション特有のものです。
+## Two Scripting Systems
 
-基本的に、エンジンコードはアプリケーションに含まれる単一のJavaScriptファイルなので、気にかける必要はありません。エンジンの一部を書き換える場合、スクリプティングに関するこの導入は必要ないです。
+PlayCanvas supports two scripting approaches:
 
-ここでは簡単なスクリプトの例です。これは、「rotate」と呼ばれ、取り付けられているエンティティを毎秒10度回転させます。
+* **ESM Scripts** (`.mjs` files) - Modern ES Module-based scripts using class syntax. **Recommended for new projects.**
+* **Classic Scripts** (`.js` files) - The original PlayCanvas scripting system using prototype-based syntax.
+
+Both systems can coexist in the same project, allowing you to migrate gradually or use whichever approach fits your needs.
+
+## Quick Example
+
+Here's a simple script that rotates an entity:
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
-var Rotate = pc.createScript("rotate");
+import { Script } from 'playcanvas';
 
-Rotate.prototype.update = function (dt) {
-    this.entity.rotate(0, 10*dt, 0);
+export class Rotate extends Script {
+    /** @attribute */
+    speed = 10;
+
+    update(dt) {
+        this.entity.rotate(0, this.speed * dt, 0);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
+```javascript
+var Rotate = pc.createScript('rotate');
+
+Rotate.attributes.add('speed', { type: 'number', default: 10 });
+
+Rotate.prototype.update = function(dt) {
+    this.entity.rotate(0, this.speed * dt, 0);
 };
 ```
 
-スクリプトは作成されたときに指定された名前によって定義され、Editorまたはコードでエンティティにスクリプトコンポーネントを追加することで[スクリプトコンポーネント][1]に添付されます。
+</TabItem>
+</Tabs>
 
-## 用語集
+## What You'll Learn
 
-いくつかの用語を定義しましょう。
+### [Fundamentals](./fundamentals/)
 
-* ***Script*** スクリプトとはスクリプトオブジェクトの定義を一つ以上含む単一のJavaScriptファイルです。
-* ***Script Component*** スクリプトコンポーネントはPlayCanvasエンジンで定義され、ゲームエンティティにスクリプトを読み込みスクリプトオブジェクトを作成する機能を与えます。
-* ***ScriptType*** スクリプトタイプとは`pc.create Script`関数を使用して作成されるJavaScriptオブジェクトです。これは、エンティティに追加されたときにインスタンス化される新しいクラスです。
-* ***Script Instance*** スクリプトインスタンスは、ScriptTypeのインスタンスです。スクリプトコンポーネントにScriptTypeが添付されている各エンティティに対して一つのスクリプトインスタンスが作成されます。
+Core concepts that apply to all PlayCanvas scripts:
 
-[1]: /user-manual/scenes/components/script/
+* [Getting Started](./fundamentals/getting-started/) - Basic script structure and syntax
+* [ESM Scripts](./fundamentals/esm-scripts/) - Modern scripting with ES Modules
+* [Script Lifecycle](./fundamentals/script-lifecycle/) - When and how script methods are called
+* [Script Attributes](./fundamentals/script-attributes/) - Exposing configurable properties
+* [Calling the Engine API](./fundamentals/engine-api/) - Key classes and patterns
+* [Events](./fundamentals/events/) - Communication between scripts
+
+### [Editor Integration](./editor-users/)
+
+Working with scripts in the PlayCanvas Editor:
+
+* [Managing Scripts](./editor-users/managing-scripts/) - Creating and organizing script files
+* [Code Editor](./editor-users/code-editor/) - Using the built-in code editor
+* [VS Code Extension](./editor-users/vscode-extension/) - Enhanced development workflow
+* [Hot Reloading](./editor-users/hot-reloading/) - Live code updates
+
+### [Debugging](./debugging/)
+
+Tools and techniques for troubleshooting your scripts:
+
+* [Console Logging](./debugging/console-logging/) - Basic debugging with console output
+* [Browser Dev Tools](./debugging/browser-dev-tools/) - Advanced debugging techniques
+
+:::tip
+
+New to PlayCanvas scripting? Start with [Getting Started](./fundamentals/getting-started/) to learn the basics, then explore [ESM Scripts](./fundamentals/esm-scripts/) for the modern approach.
+
+:::

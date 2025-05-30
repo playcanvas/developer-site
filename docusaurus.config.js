@@ -33,10 +33,16 @@ const config = {
     locales: ['en', 'ja']
   },
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   plugins: [
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
-        { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' }
+        { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
+        { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/scripting/editor-users/loading-order/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en

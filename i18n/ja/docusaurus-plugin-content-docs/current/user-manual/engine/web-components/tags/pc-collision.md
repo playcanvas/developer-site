@@ -6,13 +6,15 @@ The `<pc-collision>` tag is used to define a collision component.
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](pc-entity.md).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
 :::
 
 ## Attributes
 
-| 属性 (Attribute) | 説明 |
+<div className="nowrap-first-col">
+
+| Attribute | Description |
 | --- | --- |
 | `axis` | The axis of the collision component. If not specified, `1` is used (Y-axis). |
 | `convex-hull` | Valueless attribute. If present, the collision component uses a convex hull. |
@@ -21,6 +23,8 @@ The `<pc-collision>` tag is used to define a collision component.
 | `height` | The height of the collision component. If not specified, `2` is used. |
 | `radius` | The radius of the collision component. If not specified, `0.5` is used. |
 | `type` | The type of collision component. Can be `box`, `capsule`, `cone`, `cylinder` or `sphere`. If not specified, `box` is used. |
+
+</div>
 
 ## 例
 
