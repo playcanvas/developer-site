@@ -93,7 +93,7 @@ You can use an import map to simplify this to:
 import config from '@/utils/config.js';
 ```
 
-## Create an Import Maps
+### Create an Import Map
 
 In the Settings Panel find the "Import Map" section. Click "Create Default" and the editor will create a new Import Map in the asset registry and assign it to the project.
 
