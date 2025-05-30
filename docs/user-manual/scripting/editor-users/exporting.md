@@ -48,12 +48,11 @@ All preloaded Classic scripts are concatenated into a single file by default. Th
 Projects that use ESM Scripts go through a modern bundling and optimization process. If your project contains any ESM scripts, the export process will automatically generate an ESM build.
 
 Key features of ESM builds:
- - **Bundled output** 
- Your code is bundled together—optionally including the PlayCanvas Engine—into a set of optimized JavaScript files.
- - **Tree-shaking** Unused code is eliminated, reducing bundle size.
- - **Code splitting** Your application is split into smaller chunks, which are loaded only when needed. This improves perceived performance by prioritizing critical code.
- - **Minification (optional)** If you enable Minify Scripts, your code is also compressed to reduce download size further.
- - **Concatenation option** If you enable Concatenate Scripts, the exporter bundles your entire application—including the engine—into the most efficient structure, based on usage patterns.
+- **Bundled output** Your code is bundled together—optionally including the PlayCanvas Engine—into a set of optimized JavaScript files.
+- **Tree-shaking** Unused code is eliminated, reducing bundle size.
+- **Code splitting** Your application is split into smaller chunks, which are loaded only when needed. This improves perceived performance by prioritizing critical code.
+- **Minification (optional)** If you enable Minify Scripts, your code is also compressed to reduce download size further.
+- **Concatenation option** If you enable Concatenate Scripts, the exporter bundles your entire application—including the engine—into the most efficient structure, based on usage patterns.
 
 #### Code Splitting
 
@@ -63,8 +62,8 @@ Although you don’t have fine-grained control over where code is split, you can
 
 You can freely mix ESM and Classic scripts within the same project. However, they are treated differently:
 
- - ESM scripts are bundled, optimized, and can benefit from tree-shaking and code splitting.
- - Classic scripts are included as separate files and are not part of the ESM bundle.
+- ESM scripts are bundled, optimized, and can benefit from tree-shaking and code splitting.
+- Classic scripts are included as separate files and are not part of the ESM bundle.
 
 This ensures backward compatibility while allowing modern development practices.
 
