@@ -39,11 +39,11 @@ this.app.scripts.on('add', (name, scriptType) => {
 
 When you publish or export your PlayCanvas project, the way your scripts are processed depends on whether you’re using Classic scripts or ECMAScript Modules (ESM).
 
-### Classic Scripts
+### Classic
 
 All preloaded Classic scripts are concatenated into a single file by default. This reduces the number of network requests and improves load times. This method ensures compatibility with older projects and is ideal for simpler codebases.
 
-### ESM Scripts
+### ESM
 
 Projects that use ESM Scripts go through a modern bundling and optimization process. If your project contains any ESM scripts, the export process will automatically generate an ESM build.
 
