@@ -120,7 +120,7 @@ You can also use Import Maps as shorthand for npm packages. For example add `"tw
 - Import Maps only apply to ESM Builds. Classic Scripts on their own don't support them.
 - The paths you define in the map must match files that exist in your project or point to valid external URLs.
 - Only one import map can be active at a time.
-- If you’re using external modules (e.g. from a CDN), ensure they are ESM-compatible and CORS-accessible.
+- If you're using external modules (e.g. from a CDN), ensure they are ESM-compatible and CORS-accessible.
 
 ### When to use Import Maps
 
