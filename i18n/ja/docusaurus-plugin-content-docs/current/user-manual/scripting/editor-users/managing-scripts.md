@@ -102,12 +102,12 @@ Open the file in the code editor. If you want to map a module like "/utils/math.
 ```json
 {
   "imports": {
-    "@math": "./utils/math.mjs"
+    "math": "./utils/math.mjs"
   }
 }
 ```
 
-Now in your code you can call `import x from "@math"` and it will resolve to your module.
+Now in your code you can call `import x from "math"` and it will resolve to your module.
 
 :::tip
 
