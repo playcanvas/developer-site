@@ -12,10 +12,15 @@ When writing PlayCanvas scripts, you're working with the [PlayCanvas Engine API]
 Every script has access to these core objects:
 
 ```javascript
-// In any script method (initialize, update, etc.)
 this.app        // The main application (AppBase)
 this.entity     // The entity this script is attached to
 ```
+
+:::important
+
+`this.app` and `this.entity` are only valid within methods defined on your Script instance (`initialize`, `update`, etc.). [Learn more](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) about JavaScript's `this` keyword.
+
+:::
 
 ### Essential Classes
 
