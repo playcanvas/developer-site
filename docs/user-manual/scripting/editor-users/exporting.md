@@ -48,6 +48,7 @@ All preloaded Classic scripts are concatenated into a single file by default. Th
 Projects that use ESM Scripts go through a modern bundling and optimization process. If your project contains any ESM scripts, the export process will automatically generate an ESM build.
 
 Key features of ESM builds:
+
 - **Bundled output** Your code is bundled together—optionally including the PlayCanvas Engine—into a set of optimized JavaScript files.
 - **Tree-shaking** Unused code is eliminated, reducing bundle size.
 - **Code splitting** Your application is split into smaller chunks, which are loaded only when needed. This improves perceived performance by prioritizing critical code.
