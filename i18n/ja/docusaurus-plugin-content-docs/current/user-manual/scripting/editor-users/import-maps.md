@@ -1,6 +1,6 @@
 ---
 title: Import Maps
-sidebar_position: 1
+sidebar_position: 1.5
 ---
 
 With ESM Scripts, you can use Import Maps to control how module specifiers are resolved in your project. Import Maps allow you to define aliases or remap module paths so you can write cleaner and more flexible imports, especially when working with shared libraries or internal tools.
