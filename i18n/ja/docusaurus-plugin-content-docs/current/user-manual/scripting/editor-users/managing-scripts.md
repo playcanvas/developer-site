@@ -111,7 +111,7 @@ Now in your code you can call `import x from "@math"` and it will resolve to you
 
 :::tip
 
-You can also use Import Maps as shorthand for npm packages. For example add `"tweenjs": "https://esm.sh/tween.js"` which will resolve to the tween.js on a CDN.
+You can also use Import Maps as shorthand for npm packages. For example, add `"tweenjs": "https://esm.sh/tween.js"` which will resolve to tween.js on a CDN.
 
 :::
 
