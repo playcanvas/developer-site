@@ -21,7 +21,7 @@ import config from 'utils/config.js';
 
 In the Settings Panel find the "Import Map" section. Click "Create Default" and the editor will create a new Import Map in the asset registry and assign it to the project.
 
-Open the file in the code editor. If you want to map a module like "/utils/math.mjs" to "@math", update the import map with the following;
+Open the file in the code editor. If you want to map a module like "/utils/math.mjs" to "math", update the import map with the following;
 
 ```json
 {
