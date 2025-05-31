@@ -1,32 +1,32 @@
 ---
-title: Scripting Fundamentals
+title: スクリプトの基礎
 sidebar_position: 1
 ---
 
-Master the core concepts of PlayCanvas scripting. Whether you're using modern ESM scripts or classic scripts, these fundamentals apply to all PlayCanvas development.
+PlayCanvasスクリプトの基礎概念をマスターしましょう。モダンなESMスクリプトでもクラシックスクリプトでも、これらの基本はすべてのPlayCanvas開発に共通します。
 
-## Essential Concepts
+## 基本的な概念
 
-### [Getting Started](./getting-started/)
+### [はじめに](./getting-started.md)
 
-Learn the basic structure and syntax of PlayCanvas scripts. Understand how scripts work, their lifecycle, and how to attach them to entities.
+PlayCanvasスクリプトの基本構造と構文を学びましょう。スクリプトがどのように動作し、ライフサイクルがどうなっているか、エンティティにどのようにアタッチするかを理解します。
 
-### [ESM Scripts](./esm-scripts/)
+### [ESMスクリプト](./esm-scripts.md)
 
-Explore modern ES Module-based scripting with classes, imports, and better tooling. **Recommended for new projects.**
+クラス、インポート、そして優れたツールを備えたモダンなESモジュールベースのスクリプティングを探求しましょう。**新しいプロジェクトにおすすめです。**
 
-### [Script Lifecycle](./script-lifecycle/)
+### [スクリプトのライフサイクル](./script-lifecycle.md)
 
-Understand when and how script methods are called - from initialization through updates to cleanup.
+スクリプトメソッドがいつ、どのように呼ばれるのかを理解しましょう。初期化から更新、クリーンアップまでの流れを学びます。
 
-### [Script Attributes](./script-attributes/)
+### [スクリプト属性](./script-attributes/index.md)
 
-Expose configurable properties that can be tweaked in the editor or set programmatically.
+エディタで調整したり、プログラムから設定できる構成可能なプロパティを公開する方法を学びます。
 
-### [Calling the Engine API](./engine-api/)
+### [エンジンAPIの呼び出し](./engine-api.md)
 
-Learn the key PlayCanvas Engine classes and patterns you'll use when writing scripts.
+スクリプトを書く際に使用する、主要なPlayCanvasエンジンクラスとそのパターンを学びましょう。
 
-### [Events](./events/)
+### [イベント](./events.md)
 
-Learn how scripts communicate with each other and respond to changes in your application.
+スクリプト同士がどのように通信し、アプリケーション内の変化に応答するのかを学びます。
