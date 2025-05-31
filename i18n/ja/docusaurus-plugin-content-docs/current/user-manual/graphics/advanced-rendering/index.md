@@ -1,4 +1,4 @@
 ---
-title: Advanced Rendering
+title: 高度なレンダリング
 sidebar_position: 7
 ---

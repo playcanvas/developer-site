@@ -1,46 +1,46 @@
 ---
-title: GLSL Specifics
+title: GLSL の詳細
 ---
 
-GLSL shaders used by the PlayCanvas engine must satisfy certain requirements. These requirements allow the engine to correctly integrate shaders, ensuring they receive the necessary resources such as attributes, uniforms, and varyings. Following these rules also allows us to automatically process the shader for slightly different requirements when transpiling to WGSL for use with WebGPU.
+PlayCanvas エンジンで使用される GLSL シェーダーは、特定の要件を満たす必要があります。これらの要件により、エンジンはシェーダーを正しく統合し、attributes、uniforms、varyings などの必要なリソースを確実に受け取れるようにします。これらの規則に従うことで、WebGPU で使用するために WGSL にトランスパイルする際に、わずかに異なる要件に対応できるようシェーダーを自動的に処理することもできます。
 
-The following sections outline key aspects of writing GLSL shaders for PlayCanvas.
+以下のセクションでは、PlayCanvas 用の GLSL シェーダーを作成する上での主要な側面を概説します。
 
 :::note
 
-`#version` should not be included in the shader source. PlayCanvas automatically adds the appropriate version directive based on whether WebGL2 or WebGPU is targeted.
+`#version` はシェーダーソースに含めるべきではありません。PlayCanvas は、WebGL2 または WebGPU がターゲットになっているかどうかに基づいて、適切なバージョンディレクティブを自動的に追加します。
 
 :::
 
-### 属性
+### アトリビュート
 
-Attributes define per-vertex input data. They must be declared using the following syntax:
+アトリビュートは、頂点ごとの入力データを定義します。それらは以下の構文を使用して宣言する必要があります。
 
 ```glsl
 attribute vec2 aUv0;
 ```
 
-The attribute name must match the name specified in the `attributes` property when creating the [ShaderMaterial][1].
+アトリビュート名は、[ShaderMaterial][1] を作成する際に `attributes` プロパティで指定された名前と一致する必要があります。
 
 :::note
 
-The `in` keyword (introduced in GLSL 3.3+) is not supported.
+`in` キーワード (GLSL 3.3+ で導入) はサポートされていません。
 
 :::
 
-### Uniforms
+### ユニフォーム
 
-Uniforms are used to pass resources from the engine to the shader. They are declared in the standard way for numerical and texture uniforms:
+ユニフォームは、エンジンからシェーダーにリソースを渡すために使用されます。それらは、数値およびテクスチャユニフォームに対して標準的な方法で宣言されます。
 
 ```glsl
 uniform vec3 view_position;
 ```
 
-The engine automatically sets appropriate uniform values when rendering.
+エンジンは、レンダリング時に適切なユニフォーム値を自動的に設定します。
 
-### Varyings
+### ベアリアブル
 
-Varyings are used to pass values from the vertex shader to the fragment shader. They must be declared using standard GLSL syntax:
+ベアリアブルは、頂点シェーダーからフラグメントシェーダーに値を渡すために使用されます。それらは標準的な GLSL 構文を使用して宣言する必要があります。
 
 ```glsl
 varying vec2 uv0;
@@ -48,7 +48,7 @@ varying vec2 uv0;
 
 :::note
 
-The `in`/`out` syntax (introduced in GLSL 3.3+) is not supported.
+`in`/`out` 構文 (GLSL 3.3+ で導入) はサポートされていません。
 
 :::
 
