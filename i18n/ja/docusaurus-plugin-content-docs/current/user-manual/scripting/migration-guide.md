@@ -3,51 +3,51 @@ title: 移行ガイド
 sidebar_position: 4
 ---
 
-ESM Scripts replace the older Classic Scripting system as the recommended way to develop PlayCanvas applications. Whilst classic scripts will continue to work in existing projects and will be supported for the foreseeable future, we recommend using the newer ESM format for your projects.
+ESMスクリプトは、PlayCanvasアプリケーションの推奨される開発方法として、従来のクラシックスクリプト方式に取って代わります。クラシックスクリプトは既存プロジェクトで引き続き動作し、今後もサポートされますが、新しいプロジェクトではESM形式の使用を推奨します。
 
-## Gradual Migration
+## 段階的な移行
 
-Using ESM Scripts within your project is entirely optional and allows you to gradually migrate your projects over to the newer ESM based format in your own time, without affecting existing projects.
+プロジェクト内でESMスクリプトを使うかどうかは完全に任意であり、既存のプロジェクトに影響を与えることなく、自由なタイミングで新しいESM形式へ段階的に移行することが可能です。
 
 :::tip
 
-**Projects can contain both ESM Scripts and Classic Scripts**
+**プロジェクトはESMスクリプトとクラシックスクリプトの両方を含めることができます**
 
-You do not need to update all your scripts together. We recommend gradually migrating scripts and iteratively testing
+すべてのスクリプトを一度に更新する必要はありません。スクリプトを段階的に移行し、反復的にテストすることをお勧めします。
 
 :::
 
-## Codemod
+## コード変換ツール（Codemod）
 
-In order to migrate Classic Scripts to the ESM format, we've provided a [codemod](https://codemod.com/registry/playcanvas-esm-scripts) that will automatically update your code.
+クラシックスクリプトをESM形式へ移行するために、コードを自動的に更新する[codemod](https://codemod.com/registry/playcanvas-esm-scripts)を用意しています。
 
-You can find the codemods in our [github repository](https://github.com/playcanvas/codemods) and you can run the codemod using the following command:
+このcodemodは[GitHubリポジトリ](https://github.com/playcanvas/codemods)で公開されており、以下のコマンドで実行できます：
 
 ```bash
 npx codemod playcanvas-esm-scripts
 ```
 
-## Known differences
+## 既知の違い
 
-In general, ESM Scripts provide a more expressive and flexible way of creating projects. Whilst we have attempted to keep the migration process as seamless as possible, there are some notable differences that you should bear in mind.
+一般的に、ESMスクリプトはより表現力豊かで柔軟なプロジェクト作成を可能にします。移行プロセスは可能な限りシームレスに保たれていますが、いくつか重要な違いがあります。
 
-### Module Scope
+### モジュールスコープ
 
-**ESM Scripts have module scope, Classic Scripts have global scope**. This means modules cannot implicitly access variables defined in other files. Often this is used as a way to define global settings or configuration. The config has a higher loading order than the script, and so the `SPEED` is accessible globally.
+**ESMスクリプトはモジュールスコープ、クラシックスクリプトはグローバルスコープ**です。これは、モジュールが他のファイルで定義された変数に暗黙的にアクセスできないことを意味します。設定をグローバルに定義するようなケースでは、ESMでは読み込み順に依存できないため、代わりに`import/export`構文を使用して依存関係を明示する必要があります。
 
 <details>
-<summary>**See code example**</summary>
+<summary>**コード例を見る**</summary>
 
 ```javascript
 // config.js
 var SPEED = 10;
 
 // script.js
-// ❌ This will not work. `SPEED` is scoped to config.js
+// ❌ 動作しません。`SPEED` は config.js 内でスコープされているため
 console.log(SPEED)
 ```
 
-This is a *hidden dependency* which breaks if the loading order changes. Instead, use `import/export` syntax to explicitly define the dependency.
+このような暗黙の依存関係は、読み込み順が変わると壊れてしまいます。代わりに次のようにします：
 
 ```javascript
 // config.mjs
@@ -55,111 +55,110 @@ export const SPEED = 10
 
 // script.mjs
 import { SPEED } from './config.mjs';
-// ✅ Works!
+// ✅ 動作します！
 console.log(SPEED); 
 ```
 
 </details>
 
-You can learn more about the other difference between [ES Modules and standard scripts here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#other_differences_between_modules_and_standard_scripts)
+[ESモジュールと通常のスクリプトの違いについてはこちら](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules#other_differences_between_modules_and_standard_scripts)もご覧ください。
 
 ### スクリプトの読み込み順序
 
 :::note
 
-**ESM Script do not have a loading order.**
+**ESMスクリプトには読み込み順の概念がありません。**
 
 :::
 
-The loading order of scripts was introduced as a way to organize dependencies between scripts and guarantee certain code would executed before others. With ES modules, these relationships can be explicitly defined through `import/export` syntax. As such, ESM Scripts do not have an loading order and they should not be relied upon to load in a certain way. Instead we encourage you to use `import/export` statements to set up dependencies.
+従来のスクリプトでは依存関係を整理する目的で読み込み順が使用されていましたが、ESモジュールでは `import/export` によって明示的に依存関係を定義できます。そのため、ESMスクリプトにおいて読み込み順に依存することは避け、明示的なインポートを行ってください。
 
-### The New `Script` Class
+### 新しい `Script` クラス
 
-With ESM Scripts, the new `Script` base class replaces the existing `ScriptType` class as the default base class. The `Script` class represents the minimal set of features necessary, but omits a couple of features present in the original `ScriptType` class.
+ESMスクリプトでは、新しい `Script` 基底クラスがデフォルトとなり、以前の `ScriptType` クラスの代わりになります。`Script` クラスは最小限の機能のみを提供し、いくつかの機能は省略されています。
 
-It's worth noting that although `Script` is now the default base class, it's still possible to use `ScriptType` as the base class (internally `ScriptType` extends `Script`), however we do not recommend doing this for ESM Scripts, due to some of the reasons listed below.
+なお、`ScriptType` クラスは引き続き使用可能ですが（内部的には `ScriptType` は `Script` を継承）、いくつかの理由からESMスクリプトでは推奨されません。
 
-#### Attribute Events
+#### 属性イベント
 
 :::note
 
-ESM Script do not fire Attribute Events.
+ESMスクリプトでは属性イベントが発火しません。
 
 :::
 
-The `Script` class does not support attributes events in the format of `attr:[name]`. The reason behind removing this is that, internally, the engine would override class members, and in practice this would create difficult-to-debug scenarios as it's not fully compatible with [ES6 class syntax](https://github.com/playcanvas/engine/issues/6316).
+`Script` クラスは `attr:[name]` の形式の属性イベントをサポートしていません。これは、エンジンがクラスメンバーを内部的に上書きすることで、ES6のクラス構文と互換性がなく、デバッグが困難になるためです。
 
-Instead, you can define your own events around class attribute members using something like the following;
+代わりに、以下のように独自のイベントを定義してください：
 
 <details>
-<summary>**See code example**</summary>
+<summary>**コード例を見る**</summary>
 
 ```javascript
 const watch = (target, prop) => {
-    const privateProp = `#{prop}`;
-    target[privateProp] = target[prop];
+    const privateProp = `#{prop}`;
+    target[privateProp] = target[prop];
 
-    Object.defineProperty(target, prop, {
-        set(value) {
-            if (target[privateProp] !== value) {
-                target.fire(`changed:${prop}`, value);
-                target[privateProp] = value;
-            }
-        },
-        get() {
-            return this[privateProp];
-        }
-    });
+    Object.defineProperty(target, prop, {
+        set(value) {
+            if (target[privateProp] !== value) {
+                target.fire(`changed:${prop}`, value);
+                target[privateProp] = value;
+            }
+        },
+        get() {
+            return this[privateProp];
+        }
+    });
 }
 
 import { Script } from 'playcanvas'
 
 export class Rotate extends Script {
-    /** attribute */
-    speed = 10;
+    /** attribute */
+    speed = 10;
 
-    initialize() {
-        watch(this, 'speed');
+    initialize() {
+        watch(this, 'speed');
 
-        this.on('changed:speed', console.log)
-    }
+        this.on('changed:speed', console.log)
+    }
 }
-
 ```
 
 </details>
 
-This also means you can have events for any class members too, not only script attributes.
+この方法ならスクリプト属性だけでなく、任意のクラスメンバーに対してもイベントを発行できます。
 
-#### Attribute Copying
+#### 属性のコピー
 
 :::note
 
-**ESM Script Attributes are not copied, they are passed by reference.**
+**ESMスクリプトの属性はコピーされず、参照で渡されます。**
 
 :::
 
-**Attributes are no longer copied, they are passed by reference.** The reasons this was changed was also due to a [bug in `ScriptType`](https://github.com/playcanvas/engine/issues/6316) that was incompatible with ES6 classes.
+属性はもはやコピーされず、参照によって渡されます。この変更は、ES6クラスと互換性がない[`ScriptType` のバグ](https://github.com/playcanvas/engine/issues/6316)によるものです。
 
-Instead, if you do need to copy values, we recommend you do it manually and explicitly via getters and setters. Whilst this is more verbose, it's clear and explicit.
+値をコピーしたい場合は、getter/setter を用いて手動かつ明示的に行うことをお勧めします。
 
 <details>
-<summary>**See code example**</summary>
+<summary>**コード例を見る**</summary>
 
 ```javascript
 import { Script, Vec3 } from 'playcanvas';
 
 export class Rotate extends Script {
 
-    _speed = new Vec3();
+    _speed = new Vec3();
 
-    set speed(value) {
-        this._speed.copy(value)
-    }
+    set speed(value) {
+        this._speed.copy(value)
+    }
 
-    get speed() {
-        return this._speed;
-    }
+    get speed() {
+        return this._speed;
+    }
 }
 ```
 
