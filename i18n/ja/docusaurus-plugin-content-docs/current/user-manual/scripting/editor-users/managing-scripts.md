@@ -1,5 +1,5 @@
 ---
-title: Managing Your Scripts
+title: あなたのスクリプトの管理
 sidebar_position: 1
 ---
 
