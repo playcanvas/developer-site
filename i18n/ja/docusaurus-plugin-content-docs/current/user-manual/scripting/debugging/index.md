@@ -3,18 +3,18 @@ title: デバッグ
 sidebar_position: 3
 ---
 
-Debugging is essential for identifying and fixing issues in your PlayCanvas scripts. When your code doesn't behave as expected, these tools and techniques will help you quickly find and resolve problems.
+デバッグは、PlayCanvasスクリプト内の問題を特定し、修正するために不可欠です。コードが期待通りに動作しない場合、これらのツールとテクニックは問題を迅速に見つけて解決するのに役立ちます。
 
-## Debugging Techniques
+## デバッグテクニック
 
-### Console Logging
+### コンソールロギング
 
-The quickest way to understand what your code is doing. Add `console.log()` statements to track execution flow and inspect variable values.
+コードが何をしているかを理解する最も手軽な方法です。実行フローを追跡し、変数の値を検査するために`console.log()`ステートメントを追加します。
 
-**[Learn Console Logging →](./console-logging.md)**
+**[コンソールロギングを学ぶ →](./console-logging.md)**
 
-### Browser Developer Tools
+### ブラウザ開発者ツール
 
-Use breakpoints, step-through debugging, and performance profiling to deeply inspect your running code.
+ブレークポイント、ステップスルーデバッグ、パフォーマンスプロファイリングを使用して、実行中のコードを詳細に検査します。
 
-**[Learn Browser Dev Tools →](./browser-dev-tools.md)**
+**[ブラウザ開発者ツールを学ぶ →](./browser-dev-tools.md)**

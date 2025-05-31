@@ -1,40 +1,40 @@
 ---
-title: Console Logging
+title: コンソールロギング
 sidebar_position: 1
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-One of the most fundamental and indispensable tools for debugging your PlayCanvas scripts is the Browser Developer Console. Every modern web browser includes a suite of developer tools, and the console is your window into logging information, viewing errors, and understanding what your code is doing behind the scenes.
+PlayCanvasスクリプトをデバッグするための最も基本的で不可欠なツールの1つが、ブラウザの開発者コンソールです。すべてのモダンなウェブブラウザには開発者ツールのスイートが含まれており、コンソールは情報のログ記録、エラーの表示、コードが舞台裏で何をしているかを理解するための窓となります。
 
-## What is the Console?
+## コンソールとは？
 
-The console is a command-line interface within your browser's developer tools that:
+コンソールは、ブラウザの開発者ツール内にあるコマンドラインインターフェースで、以下の機能を提供します。
 
-* **Displays Log Messages:** You can print messages, variable values, and object states directly from your JavaScript code.
-* **Shows Errors and Warnings:** JavaScript errors, engine warnings, and explicit error messages you log will appear here, often with stack traces to help pinpoint the source.
-* **Allows Interaction:** You can execute JavaScript commands directly in the console to inspect the state of your running application (more advanced).
+*   **ログメッセージの表示:** JavaScriptコードから直接、メッセージ、変数、オブジェクトの状態をプリントできます。
+*   **エラーと警告の表示:** JavaScriptのエラー、エンジンの警告、およびログに記録した明示的なエラーメッセージがここに表示され、多くの場合、発生源を特定するのに役立つスタックトレースも表示されます。
+*   **インタラクションの許可:** コンソールでJavaScriptコマンドを直接実行し、実行中のアプリケーションの状態を検査できます（より高度な機能）。
 
-## Opening the Console
+## コンソールの開き方
 
-How you open the developer console depends on your browser, but here are common methods:
+開発者コンソールを開く方法はブラウザによって異なりますが、一般的な方法は次のとおりです。
 
-* **Keyboard Shortcut:** Press F12 on Windows/Linux or Option + Command + J (⌥ + ⌘ + J) on macOS (Chrome/Edge/Firefox). Safari uses Option + Command + C (⌥ + ⌘ + C), but you might need to enable the Develop menu first (Preferences > Advanced > Show Develop menu in menu bar).
-* **Right-Click Menu:** Right-click anywhere on your running PlayCanvas application page and select "Inspect" or "Inspect Element". Then, navigate to the "Console" tab in the tools that appear.
-* **Browser Menu:** Look for "Developer Tools", "Web Developer", or similar options in your browser's main menu (e.g., Chrome: More Tools > Developer Tools).
+*   **キーボードショートカット:** Windows/LinuxではF12キー、macOS（Chrome/Edge/Firefox）ではOption + Command + J（⌥ + ⌘ + J）を押します。SafariではOption + Command + C（⌥ + ⌘ + C）を使用しますが、最初に開発メニューを有効にする必要がある場合があります（環境設定 > 詳細 > メニューバーに"開発"メニューを表示）。
+*   **右クリックメニュー:** 実行中のPlayCanvasアプリケーションページ上の任意の場所を右クリックし、「Inspect」または「Inspect Element」を選択します。その後、表示されるツール内の「Console」タブに移動します。
+*   **ブラウザメニュー:** ブラウザのメインメニューで「Developer Tools」、「Web Developer」、または類似のオプションを探します（例：Chromeの場合、その他のツール > デベロッパー ツール）。
 
-## Logging Messages from Your Scripts
+## スクリプトからのメッセージのログ記録
 
-The primary way to send information to the console is using the global console object available in JavaScript. You'll typically use these methods within your PlayCanvas script functions (`initialize`, `update`, event handlers, etc.).
+コンソールに情報を送信する主な方法は、JavaScriptで利用可能なグローバルな`console`オブジェクトを使用することです。これらのメソッドは通常、PlayCanvasスクリプト関数（`initialize`、`update`、イベントハンドラなど）内で使用します。
 
 ### `console.log()`
 
-This is the most common method, used for general informational output.
+これは最も一般的なメソッドで、一般的な情報出力に使用されます。
 
-* **Purpose:** Log status messages, variable values, check if a function is being called.
+*   **目的:** ステータスメッセージ、変数の値のログ記録、関数が呼び出されているかどうかの確認。
 
-**Example:**
+**例:**
 
 <Tabs>
 <TabItem value="esm" label="ESM">
@@ -46,14 +46,14 @@ export class MyLogger extends Script {
     static scriptName = 'myLogger';
 
     initialize() {
-        console.log('MyLogger script initialized on entity:', this.entity.name);
+        console.log('MyLogger script initialized on entity:', this.entity.name); // MyLoggerスクリプトがエンティティ上で初期化されました：
         const initialPosition = this.entity.getPosition();
-        console.log('Initial Position:', initialPosition.toString());
+        console.log('Initial Position:', initialPosition.toString()); // 初期位置：
     }
 
     update(dt) {
         if (this.app.keyboard.wasPressed(KEY_SPACE)) {
-            console.log('Spacebar pressed!');
+            console.log('Spacebar pressed!'); // スペースバーが押されました！
         }
     }
 }
@@ -66,14 +66,14 @@ export class MyLogger extends Script {
 var MyLogger = pc.createScript('myLogger');
 
 MyLogger.prototype.initialize = function() {
-    console.log('MyLogger script initialized on entity:', this.entity.name);
+    console.log('MyLogger script initialized on entity:', this.entity.name); // MyLoggerスクリプトがエンティティ上で初期化されました：
     var initialPosition = this.entity.getPosition();
-    console.log('Initial Position:', initialPosition.toString());
+    console.log('Initial Position:', initialPosition.toString()); // 初期位置：
 };
 
 MyLogger.prototype.update = function(dt) {
     if (this.app.keyboard.wasPressed(pc.KEY_SPACE)) {
-        console.log('Spacebar pressed!');
+        console.log('Spacebar pressed!'); // スペースバーが押されました！
     }
 };
 ```
@@ -83,28 +83,28 @@ MyLogger.prototype.update = function(dt) {
 
 ### `console.warn()`
 
-Used to indicate potential problems or situations that aren't errors but might be unexpected.
+エラーではないが予期せぬ状況や潜在的な問題を示すために使用されます。
 
-* **Purpose:** Highlight non-critical issues, deprecated usage warnings, or suspicious values.
-* **Appearance:** Messages typically appear with a yellow background or icon in the console.
+*   **目的:** 重要ではない問題、非推奨の使用警告、または疑わしい値を強調表示します。
+*   **表示:** メッセージは通常、コンソール内で黄色の背景またはアイコンと共に表示されます。
 
-**Example:**
+**例:**
 
 ```javascript
-// Inside some function
+// Inside some function // ある関数内
 if (speed < 0) {
-    console.warn('Warning: Speed is negative (' + speed + '). Is this intentional?');
+    console.warn('Warning: Speed is negative (' + speed + '). Is this intentional?'); // 警告：速度が負です（...）。これは意図的ですか？
 }
 ```
 
 ### `console.error()`
 
-Used for logging actual errors that prevent code from working correctly. PlayCanvas engine errors also use this.
+コードが正しく動作するのを妨げる実際のエラーをログに記録するために使用されます。PlayCanvasエンジンのエラーもこれを使用します。
 
-* **Purpose:** Report errors found in your logic, failed operations, or critical failures.
-* **Appearance:** Messages typically appear with a red background or icon and often include a stack trace (the sequence of function calls leading to the error).
+*   **目的:** ロジック内で見つかったエラー、失敗した操作、または致命的な障害を報告します。
+*   **外観:** メッセージは通常、赤い背景またはアイコンで表示され、多くの場合、スタックトレース（エラーにつながる関数呼び出しのシーケンス）が含まれます。
 
-**Example:**
+**例:**
 
 <Tabs>
 <TabItem value="esm" label="ESM">
@@ -114,7 +114,7 @@ initialize() {
     this.targetEntity = this.app.root.findByName('RequiredTarget');
     if (!this.targetEntity) {
         console.error('Critical Error: Could not find RequiredTarget entity! Disabling script.', this.entity.name);
-        this.enabled = false; // Stop the script from running further
+        this.enabled = false; // スクリプトがそれ以上実行されるのを停止します
     }
 }
 ```
@@ -127,7 +127,7 @@ MyScript.prototype.initialize = function() {
     this.targetEntity = this.app.root.findByName('RequiredTarget');
     if (!this.targetEntity) {
         console.error('Critical Error: Could not find RequiredTarget entity! Disabling script.', this.entity.name);
-        this.enabled = false; // Stop the script from running further
+        this.enabled = false; // スクリプトがそれ以上実行されるのを停止します
     }
 };
 ```
@@ -135,32 +135,32 @@ MyScript.prototype.initialize = function() {
 </TabItem>
 </Tabs>
 
-### Other Methods
+### その他のメソッド
 
-* `console.info()`: Similar to `console.log()`, sometimes styled differently (e.g., with an 'i' icon).
-* `console.debug()`: Often hidden by default in console settings, useful for verbose debugging messages you don't always want to see.
+*   `console.info()`: `console.log()`に似ていますが、時々異なるスタイルで表示されます（例：「i」アイコン付き）。
+*   `console.debug()`: コンソール設定でデフォルトで非表示になっていることが多く、常に見たくない詳細なデバッグメッセージに役立ちます。
 
-### Logging Different Data Types
+### 異なるデータ型のログ記録
 
-You can log more than just strings:
+文字列だけでなく、より多くのものをログに記録できます：
 
-* **Variables:** `console.log('Player health:', this.health);`
-* **Objects and Arrays:** `console.log('My Entity:', this.entity);`, `console.log('Children:', this.entity.children);`
-  * Most browser consoles allow you to interactively inspect logged objects and arrays, expanding them to see their properties and values. This is incredibly useful for examining complex data like Entities, Components, or Materials.
+*   **変数:** `console.log('Player health:', this.health);`
+*   **オブジェクトと配列:** `console.log('My Entity:', this.entity);`, `console.log('Children:', this.entity.children);`
+    *   ほとんどのブラウザコンソールでは、ログに記録されたオブジェクトや配列を対話的に検査でき、展開してそのプロパティや値を確認できます。これは、Entity、Component、またはMaterialのような複雑なデータを調べるのに非常に役立ちます。
 
-## Where Does the Output Go?
+## 出力はどこに表示されますか？
 
-Whether you launch your application using the Launch button in the PlayCanvas Editor or run a published build, the console output always appears in your browser's developer console, not within the Editor interface itself. Keep the developer tools open while testing!
+PlayCanvas EditorのLaunchボタンを使用してアプリケーションを起動する場合でも、公開されたビルドを実行する場合でも、コンソール出力は常にブラウザの開発者コンソールに表示され、Editorインターフェース自体には表示されません。テスト中は開発者ツールを開いたままにしてください！
 
-## Tips for Effective Logging
+## 効果的なログ記録のヒント
 
-* **Be Specific:** Instead of `console.log('here');`, log what is happening or the value you're interested in: `console.log('Player jumped!', this.entity.getPosition());`.
-* **Provide Context:** Especially with multiple scripts or entities, include identifying information: `console.log(this.entity.name + ': Firing weapon.');`
-* **Log Key Values:** Output variables, function arguments, and return values at critical points to trace data flow.
-* **Use Different Levels:** Use `log`, `warn`, and `error` appropriately to make important messages stand out.
-* **Conditional Logging:** Use `if` statements to log only when specific conditions occur, reducing console spam.
-* **Clean Up Your Logs:** Remove temporary or excessive `console.log` statements before considering your code finished, or use `console.debug` for logs you might want later but not normally see.
+*   **具体的に:** `console.log('here');`の代わりに、何が起こっているのか、または興味のある値をログに記録します: `console.log('Player jumped!', this.entity.getPosition());`。
+*   **コンテキストを提供する:** 特に複数のスクリプトやエンティティを使用する場合、識別情報を含めます: `console.log(this.entity.name + ': Firing weapon.');`
+*   **主要な値をログに記録する:** データフローを追跡するために、重要なポイントで変数、関数引数、および戻り値を出力します。
+*   **異なるレベルを使用する:** 重要なメッセージを目立たせるために、`log`、`warn`、`error`を適切に使用します。
+*   **条件付きログ記録:** 特定の条件が発生した場合にのみログを記録するために`if`ステートメントを使用し、コンソールのスパムを減らします。
+*   **ログをクリーンアップする:** コードが完成したと見なす前に、一時的または過剰な`console.log`ステートメントを削除するか、後で必要になるかもしれないが通常は表示されないログには`console.debug`を使用します。
 
-## 最後に
+## 結論
 
-The browser console is your first line of defense when debugging. Mastering `console.log` and its variations is a fundamental skill that will save you countless hours trying to figure out why your scripts aren't behaving as expected. Get comfortable opening it, logging information, and interpreting the output!
+ブラウザコンソールはデバッグ時の最初の防衛線です。`console.log`とそのバリエーションを習得することは、スクリプトが期待どおりに動作しない理由を解明しようとする数え切れないほどの時間を節約する基本的なスキルです。コンソールを開いて情報をログに記録し、出力を解釈することに慣れてください！

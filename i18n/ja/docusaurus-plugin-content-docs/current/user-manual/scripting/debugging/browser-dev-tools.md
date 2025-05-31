@@ -1,5 +1,5 @@
 ---
-title: Browser Dev Tools
+title: ブラウザ開発ツール
 sidebar_position: 2
 ---
 
