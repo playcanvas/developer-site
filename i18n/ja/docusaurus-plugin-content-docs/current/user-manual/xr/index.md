@@ -1,6 +1,6 @@
 ---
 title: XR
-sidebar_position: 20
+sidebar_position: 18
 ---
 
 ![VR View](/img/user-manual/xr/vr-view.png)
