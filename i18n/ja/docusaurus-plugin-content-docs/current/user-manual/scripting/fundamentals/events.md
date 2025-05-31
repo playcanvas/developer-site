@@ -13,9 +13,9 @@ sidebar_position: 6
 * `fire()` - イベントを送信します。
 * `hasEvent()` - 特定のイベントをリッスンしているかどうかを問い合わせます。
 
-## Using Events
+## イベントの使い方
 
-Trigger an event using `fire()`. In this example, the player script fires a `move` event every frame with the `x` and `y` values passed as arguments.
+イベントをトリガーするには `fire()` を使用します。この例では、プレイヤースクリプトが毎フレーム、`x` と `y` の値を引数として `move` イベントを発火します。
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
