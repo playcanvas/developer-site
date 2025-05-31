@@ -1,51 +1,51 @@
 ---
-title: Hosting on heyVR.io
+title: heyVR.ioでのホスティング
 sidebar_position: 7
 ---
 
-[heyVR.io](https://heyvr.io) is a publishing platform for WebXR games, giving you access to a global audience of hundreds of thousands of players across multiple devices. It offers a wide range of ready-to-use gameplay features to enhance your players' experience and enable you to start earning from your game through in-game content sales and advertisements.
+[heyVR.io](https://heyvr.io)はWebXRゲームのパブリッシングプラットフォームであり、複数のデバイスで何十万人ものプレイヤーからなる世界中のオーディエンスにアクセスできます。プレイヤーの体験を向上させ、ゲーム内コンテンツの販売や広告を通じてゲームから収益を得始めることができる、すぐに使える幅広いゲームプレイ機能を提供します。
 
-## Publishing Flow
+## 公開フロー
 
-To publish your game on heyVR, you'll need to follow a few simple steps:
+heyVRでゲームを公開するには、いくつかの簡単な手順に従う必要があります：
 
-1. Create a developer account (assuming you don't have one yet)
-2. Upload your game
-3. Publish!
+1. 開発者アカウントを作成する（まだお持ちでない場合）
+2. ゲームをアップロードする
+3. 公開する！
 
-You can optionally integrate the [heyVR SDK](https://docs.heyvr.io/en/game-development/sdk) into your game, which will boost player engagement and grant you access to useful features such as leaderboards, cloud saves, matchmaking and more.
+オプションで[heyVR SDK](https://docs.heyvr.io/en/game-development/sdk)をゲームに統合することで、プレイヤーのエンゲージメントを高め、リーダーボード、クラウドセーブ、マッチメイキングなどの便利な機能にアクセスできるようになります。
 
-### 1. Create a developer account
+### 1. 開発者アカウントを作成する
 
-Simply head over to the heyVR's [developer area](https://developer.heyvr.io) and register your developer account free of charge. After registration, you'll be able to create/manage your games. To read more, check out the [documentation](https://docs.heyvr.io).
+heyVRの[開発者向けエリア](https://developer.heyvr.io)にアクセスし、無料で開発者アカウントを登録してください。登録後、ゲームを作成・管理できるようになります。詳細については、[ドキュメント](https://docs.heyvr.io)をご確認ください。
 
-### 2. Upload your game
+### 2. ゲームをアップロードする
 
-Once you have created your developer account, you'll need to download a web build of your application. The steps for this process are explained in details on the [Self-hosting](/user-manual/publishing/web/self-hosting/#self-hosting-on-your-own-server) documentation page. Simply follow the steps for **Self-hosting on your own server** to acquire a **zip** file.
+開発者アカウントを作成したら、アプリケーションのWebビルドをダウンロードする必要があります。このプロセスの手順は、[自己ホスティング](/user-manual/publishing/web/self-hosting/#self-hosting-on-your-own-server)のドキュメントページで詳しく説明されています。**独自のサーバーでの自己ホスティング**の手順に従って、**zip**ファイルを入手してください。
 
-Once you have the zip build, you can follow the step-by-step guide on [publishing a game](https://docs.heyvr.io/en/developer-area/publish-a-game) on heyVR. The guide includes all the steps, requirements and common questions regarding the publishing process.
+zipビルドを入手したら、heyVRで[ゲームを公開する](https://docs.heyvr.io/en/developer-area/publish-a-game)ためのステップバイステップガイドに従うことができます。このガイドには、公開プロセスに関するすべての手順、要件、よくある質問が含まれています。
 
-### 3. Publish
+### 3. 公開
 
-That's it! By now you should be able to see, view and test your game on heyVR. Once you're ready to make it publicly accessible, you can submit your game for review. The review process is to ensure that your game aligns with the [Publishing Guidelines](https://heyvr.io/hc/legal/heyvr-io-publishing-policies) and is fully functional.
+以上です！これで、heyVRでゲームを表示、閲覧、テストできるようになります。一般公開する準備ができたら、ゲームを審査のために提出できます。審査プロセスは、ゲームが[公開ガイドライン](https://heyvr.io/hc/legal/heyvr-io-publishing-policies)に準拠しており、完全に機能することを確認するためのものです。
 
-### 4. SDK Implementation (optional)
+### 4. SDKの実装（オプション）
 
-To further enrich the user experience and boost engagement to your game, you can use the [heyVR SDK](https://docs.heyvr.io/en/game-development/sdk) to implement additional features in your game.
+ユーザー体験をさらに豊かにし、ゲームへのエンゲージメントを高めるために、[heyVR SDK](https://docs.heyvr.io/en/game-development/sdk)を使用して、ゲームに機能を追加することができます。
 
-The SDK offers the following features and more:
+SDKは以下の機能などを提供します：
 
-- User Management
-- Leaderboards
-- Cloud Saves
-- In-Game Purchases (both free & paid)
-- In-Game Advertisements
-- Multiplayer
+- ユーザー管理
+- リーダーボード
+- クラウドセーブ
+- ゲーム内購入（無料および有料）
+- ゲーム内広告
+- マルチプレイヤー
 
-A comprehensive guide on how to implement these features into your game is provided on heyVR's [Technical Documentation](https://docs.heyvr.io/en/game-development/sdk).
+これらの機能をゲームに実装する方法に関する包括的なガイドは、heyVRの[技術ドキュメント](https://docs.heyvr.io/en/game-development/sdk)で提供されています。
 
-## Useful Links
+## 役立つリンク
 
-- [Developer Area](https://developer.heyvr.io)
-- [heyVR Documentation](https://docs.heyvr.io)
-- [heyVR Support (Discord)](https://heyvr.io/discord)
+- [開発者向けエリア](https://developer.heyvr.io)
+- [heyVRドキュメント](https://docs.heyvr.io)
+- [heyVRサポート（Discord）](https://heyvr.io/discord)
