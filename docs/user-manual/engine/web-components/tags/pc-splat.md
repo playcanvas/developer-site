@@ -27,4 +27,4 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-splat>` elements using the [SplatComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.SplatComponentElement.html).
+You can programmatically create and manipulate `<pc-splat>` elements using the [SplatComponentElement API](https://api.playcanvas.com/web-components/classes/SplatComponentElement.html).

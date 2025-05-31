@@ -43,4 +43,4 @@ title: <pc-entity>
 
 ## JavaScriptインターフェース
 
-[EntityElement API](https://api.playcanvas.com/classes/EngineWebComponents.EntityElement.html)を使用して、`<pc-entity>`要素をプログラムで作成および操作できます。
+[EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html)を使用して、`<pc-entity>`要素をプログラムで作成および操作できます。

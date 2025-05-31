@@ -40,4 +40,4 @@ The `<pc-screen>` tag is used to define a screen component.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-screen>` elements using the [ScreenComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScreenComponentElement.html).
+You can programmatically create and manipulate `<pc-screen>` elements using the [ScreenComponentElement API](https://api.playcanvas.com/web-components/classes/ScreenComponentElement.html).

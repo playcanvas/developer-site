@@ -35,4 +35,4 @@ The `<pc-sounds>` tag is used to define a sound component.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-sounds>` elements using the [SoundComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.SoundComponentElement.html).
+You can programmatically create and manipulate `<pc-sounds>` elements using the [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html).

@@ -77,4 +77,4 @@ Then add the particle system to your scene in HTML:
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-particles>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ParticleSystemComponentElement.html).
+You can programmatically create and manipulate `<pc-particles>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).

@@ -30,4 +30,4 @@ title: <pc-module>
 
 ## JavaScriptインターフェース
 
-[ModuleElement API](https://api.playcanvas.com/classes/EngineWebComponents.ModuleElement.html)を使用して、`<pc-module>`要素をプログラムで作成および操作できます。
+[ModuleElement API](https://api.playcanvas.com/web-components/classes/ModuleElement.html)を使用して、`<pc-module>`要素をプログラムで作成および操作できます。

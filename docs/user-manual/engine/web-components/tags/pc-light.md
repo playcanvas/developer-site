@@ -42,4 +42,4 @@ The `<pc-light>` tag is used to define a light component.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-light>` elements using the [LightComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.LightComponentElement.html).
+You can programmatically create and manipulate `<pc-light>` elements using the [LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html).

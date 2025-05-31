@@ -32,4 +32,4 @@ title: <pc-scene>
 
 ## JavaScript インターフェース
 
-[SceneElement API](https://api.playcanvas.com/classes/EngineWebComponents.SceneElement.html) を使用して、プログラムで `<pc-scene>` 要素を作成および操作できます。
+[SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html) を使用して、プログラムで `<pc-scene>` 要素を作成および操作できます。

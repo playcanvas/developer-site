@@ -33,4 +33,4 @@ title: <pc-sky>
 
 ## JavaScriptインターフェース
 
-[SkyElement API](https://api.playcanvas.com/classes/EngineWebComponents.SkyElement.html) を使用して、`<pc-sky>` 要素をプログラムで作成および操作できます。
+[SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html) を使用して、`<pc-sky>` 要素をプログラムで作成および操作できます。

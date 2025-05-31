@@ -40,4 +40,4 @@ title: <pc-element>
 
 ## JavaScriptインターフェース
 
-[ElementComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ElementComponentElement.html)を使用して、`<pc-element>`要素をプログラムで作成および操作できます。
+[ElementComponentElement API](https://api.playcanvas.com/web-components/classes/ElementComponentElement.html)を使用して、`<pc-element>`要素をプログラムで作成および操作できます。

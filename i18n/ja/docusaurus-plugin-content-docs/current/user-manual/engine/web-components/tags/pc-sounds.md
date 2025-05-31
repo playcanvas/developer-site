@@ -35,4 +35,4 @@ title: <pc-sounds>
 
 ## JavaScriptインターフェース
 
-[SoundComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.SoundComponentElement.html)を使用して、プログラムによって`<pc-sounds>`要素を作成および操作できます。
+[SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html)を使用して、プログラムによって`<pc-sounds>`要素を作成および操作できます。

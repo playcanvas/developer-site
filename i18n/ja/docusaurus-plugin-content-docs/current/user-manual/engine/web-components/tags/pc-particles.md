@@ -77,4 +77,4 @@ title: <pc-particles>
 
 ## JavaScriptインターフェース
 
-[ParticleSystemComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ParticleSystemComponentElement.html) を使用して、`<pc-particles>` 要素をプログラムで作成および操作できます。
+[ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html) を使用して、`<pc-particles>` 要素をプログラムで作成および操作できます。

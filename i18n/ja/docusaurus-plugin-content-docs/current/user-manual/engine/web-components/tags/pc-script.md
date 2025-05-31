@@ -31,4 +31,4 @@ title: <pc-script>
 
 ## JavaScriptインターフェース
 
-[ScriptElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScriptElement.html)を使用して、`<pc-script>`要素をプログラムで作成および操作できます。
+[ScriptElement API](https://api.playcanvas.com/web-components/classes/ScriptElement.html)を使用して、`<pc-script>`要素をプログラムで作成および操作できます。

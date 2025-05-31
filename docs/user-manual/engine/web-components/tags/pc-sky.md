@@ -33,4 +33,4 @@ The `<pc-sky>` tag is used to define a sky component.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-sky>` elements using the [SkyElement API](https://api.playcanvas.com/classes/EngineWebComponents.SkyElement.html).
+You can programmatically create and manipulate `<pc-sky>` elements using the [SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html).

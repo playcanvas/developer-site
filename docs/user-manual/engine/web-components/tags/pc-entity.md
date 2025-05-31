@@ -43,4 +43,4 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-entity>` elements using the [EntityElement API](https://api.playcanvas.com/classes/EngineWebComponents.EntityElement.html).
+You can programmatically create and manipulate `<pc-entity>` elements using the [EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html).

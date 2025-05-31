@@ -32,4 +32,4 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-app>` elements using the [AppElement API](https://api.playcanvas.com/classes/EngineWebComponents.AppElement.html).
+You can programmatically create and manipulate `<pc-app>` elements using the [AppElement API](https://api.playcanvas.com/web-components/classes/AppElement.html).

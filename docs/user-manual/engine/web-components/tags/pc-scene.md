@@ -32,4 +32,4 @@ The `<pc-scene>` tag is used to define the scene.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/classes/EngineWebComponents.SceneElement.html).
+You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html).

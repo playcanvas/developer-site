@@ -42,4 +42,4 @@ title: <pc-light>
 
 ## JavaScriptインターフェース
 
-[LightComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.LightComponentElement.html)を使用して、`<pc-light>`要素をプログラムで作成および操作できます。
+[LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html)を使用して、`<pc-light>`要素をプログラムで作成および操作できます。

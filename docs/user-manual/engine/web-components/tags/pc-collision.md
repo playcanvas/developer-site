@@ -46,4 +46,4 @@ The `<pc-collision>` tag is used to define a collision component.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-collision>` elements using the [CollisionComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.CollisionComponentElement.html).
+You can programmatically create and manipulate `<pc-collision>` elements using the [CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html).

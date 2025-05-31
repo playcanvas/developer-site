@@ -29,4 +29,4 @@ title: <pc-model>
 
 ## JavaScriptインターフェース
 
-[ModelElement API](https://api.playcanvas.com/classes/EngineWebComponents.ModelElement.html)を使用して、`<pc-model>`要素をプログラムで作成および操作できます。
+[ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html)を使用して、`<pc-model>`要素をプログラムで作成および操作できます。

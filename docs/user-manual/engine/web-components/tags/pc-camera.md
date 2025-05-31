@@ -47,4 +47,4 @@ The `<pc-camera>` tag is used to define a camera component.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-camera>` elements using the [CameraComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.CameraComponentElement.html).
+You can programmatically create and manipulate `<pc-camera>` elements using the [CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html).

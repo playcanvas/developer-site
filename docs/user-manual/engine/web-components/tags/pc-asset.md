@@ -32,4 +32,4 @@ The `<pc-asset>` tag is used to define an asset.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-asset>` elements using the [AssetElement API](https://api.playcanvas.com/classes/EngineWebComponents.AssetElement.html).
+You can programmatically create and manipulate `<pc-asset>` elements using the [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html).

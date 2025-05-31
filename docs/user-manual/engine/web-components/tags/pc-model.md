@@ -29,4 +29,4 @@ All attributes of [`<pc-entity>`](../pc-entity) are also available.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/classes/EngineWebComponents.ModelElement.html).
+You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).

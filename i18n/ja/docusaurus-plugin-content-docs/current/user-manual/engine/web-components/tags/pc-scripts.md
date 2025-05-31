@@ -28,4 +28,4 @@ title: <pc-scripts>
 
 ## JavaScriptインターフェース
 
-[ScriptComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScriptComponentElement.html)を使用して、`<pc-scripts>`要素をプログラムで作成および操作できます。
+[ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html)を使用して、`<pc-scripts>`要素をプログラムで作成および操作できます。

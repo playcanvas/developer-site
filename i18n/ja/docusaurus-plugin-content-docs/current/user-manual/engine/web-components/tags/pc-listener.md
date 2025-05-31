@@ -20,4 +20,4 @@ title: <pc-listener>
 
 ## JavaScript インターフェース
 
-[ListenerComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ListenerComponentElement.html) を使用して、プログラムで `<pc-listener>` 要素を作成および操作できます。
+[ListenerComponentElement API](https://api.playcanvas.com/web-components/classes/ListenerComponentElement.html) を使用して、プログラムで `<pc-listener>` 要素を作成および操作できます。

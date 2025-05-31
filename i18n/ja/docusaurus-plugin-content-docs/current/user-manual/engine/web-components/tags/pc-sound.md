@@ -34,4 +34,4 @@ title: <pc-sound>
 
 ## JavaScriptインターフェース
 
-[SoundElement API](https://api.playcanvas.com/classes/EngineWebComponents.SoundElement.html)を使用して、`<pc-sound>`要素をプログラムによって作成および操作できます。
+[SoundElement API](https://api.playcanvas.com/web-components/classes/SoundElement.html)を使用して、`<pc-sound>`要素をプログラムによって作成および操作できます。

@@ -28,4 +28,4 @@ The `<pc-scripts>` tag is used to define a scripts component.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-scripts>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScriptComponentElement.html).
+You can programmatically create and manipulate `<pc-scripts>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html).

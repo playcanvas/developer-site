@@ -40,4 +40,4 @@ title: <pc-screen>
 
 ## JavaScript インターフェース
 
-[`<pc-screen>`] 要素をプログラムで作成および操作するには、[ScreenComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScreenComponentElement.html) を使用できます。
+[`<pc-screen>`] 要素をプログラムで作成および操作するには、[ScreenComponentElement API](https://api.playcanvas.com/web-components/classes/ScreenComponentElement.html) を使用できます。

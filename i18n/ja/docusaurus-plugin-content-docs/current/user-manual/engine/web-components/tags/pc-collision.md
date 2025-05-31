@@ -46,4 +46,4 @@ title: <pc-collision>
 
 ## JavaScriptインターフェース
 
-[CollisionComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.CollisionComponentElement.html)を使用して、`<pc-collision>`要素をプログラムで作成および操作できます。
+[CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html)を使用して、`<pc-collision>`要素をプログラムで作成および操作できます。

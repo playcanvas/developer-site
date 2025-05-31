@@ -26,4 +26,4 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-render>` elements using the [RenderComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.RenderComponentElement.html).
+You can programmatically create and manipulate `<pc-render>` elements using the [RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html).
