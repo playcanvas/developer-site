@@ -5,11 +5,6 @@ sidebar_position: 2
 
 ESMスクリプトは、モダンなESモジュール構文を使用し、PlayCanvasスクリプトの推奨される記述方法です。より良いコード構成、静的インポート、バンドル最適化、そしてモダンなJavaScript開発者にとって馴染みのある開発体験を提供します。
 
-<video width="100%" controls autoPlay loop>
-  <source src="/video/pc-esm-scripts.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
 ## なぜESMスクリプトを選ぶのか？
 
 * **モダンなJavaScript:** クラス、アロー関数、分割代入などのES6+機能が使えます
@@ -41,7 +36,9 @@ export class PlayerController extends Script {
 ```
 
 :::tip
-**1ファイルに複数スクリプト:** 1つの`.mjs`ファイルに複数のスクリプトクラスを定義することも可能ですが、各クラスは`export`されている必要があります。そうしないとエディタから認識されません。
+
+**1つのファイルに複数のスクリプト：** 単一の `.mjs` ファイル内に複数のスクリプトクラスを定義できますが、それぞれをエクスポートしないとエディタで使用できません。
+
 :::
 
 ## モジュールのインポートとエクスポート
