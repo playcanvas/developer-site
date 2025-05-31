@@ -87,8 +87,6 @@ switch (inputSource.targetRayMode) {
 
 ```javascript
 // 入力ソースデータでレイを設定
-```
-
 ray.set(inputSource.getOrigin(), inputSource.getDirection());
 
 // メッシュのバウンディングボックスがレイと交差するかどうかを確認
