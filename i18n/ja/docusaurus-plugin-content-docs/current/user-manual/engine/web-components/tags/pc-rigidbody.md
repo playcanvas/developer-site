@@ -30,12 +30,12 @@ title: <pc-rigidbody>
 
 </div>
 
-## Example
+## 例
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 <CodePenEmbed id="XJrqjJr" title="<pc-rigidbody> の例" />
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
 [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html) を使用して、`<pc-rigidbody>`要素をプログラムで作成および操作できます。

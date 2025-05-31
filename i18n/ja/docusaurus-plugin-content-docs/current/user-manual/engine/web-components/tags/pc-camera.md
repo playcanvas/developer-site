@@ -10,7 +10,7 @@ title: <pc-camera>
 
 :::
 
-## Attributes
+## 属性
 
 <div className="nowrap-first-col">
 
