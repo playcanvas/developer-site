@@ -78,6 +78,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 Most of the [Web Component examples](https://playcanvas.github.io/web-components/examples/) have integrated support for XR. Consult their source code to see how it's done.
 
-## Next Steps
+## 次のステップ
 
 The PlayCanvas Engine has comprehensive XR support, with a wide range of features and options. For more information, see the [XR documentation](/user-manual/xr).
