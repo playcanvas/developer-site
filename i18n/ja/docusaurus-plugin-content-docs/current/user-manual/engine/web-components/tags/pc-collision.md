@@ -1,12 +1,12 @@
 ---
-title: <pc-collision>
+タイトル: <pc-collision>
 ---
 
-The `<pc-collision>` tag is used to define a collision component.
+`<pc-collision>`タグは、衝突コンポーネントを定義するために使用されます。
 
-:::note
+:::注
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+*   [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 
@@ -14,29 +14,29 @@ The `<pc-collision>` tag is used to define a collision component.
 
 <div className="nowrap-first-col">
 
-| Attribute | Description |
+| 属性 | 説明 |
 | --- | --- |
-| `axis` | The axis of the collision component. If not specified, `1` is used (Y-axis). |
-| `convex-hull` | Valueless attribute. If present, the collision component uses a convex hull. |
-| `enabled` | Enabled state of the collision component. If not specified, `true` is used. |
-| `half-extents` | The half-extents of the collision component. Specified as a space-separated list of X, Y, and Z values. If not specified, `0.5 0.5 0.5` is used. |
-| `height` | The height of the collision component. If not specified, `2` is used. |
-| `radius` | The radius of the collision component. If not specified, `0.5` is used. |
-| `type` | The type of collision component. Can be `box`, `capsule`, `cone`, `cylinder` or `sphere`. If not specified, `box` is used. |
+| `axis` | 衝突コンポーネントの軸。指定しない場合、`1` (Y軸) が使用されます。 |
+| `convex-hull` | 値のない属性。存在する場合、衝突コンポーネントは凸包を使用します。 |
+| `enabled` | 衝突コンポーネントの有効状態。指定しない場合、`true` が使用されます。 |
+| `half-extents` | 衝突コンポーネントのハーフエクステント。X、Y、Z の値をスペース区切りで指定します。指定しない場合、`0.5 0.5 0.5` が使用されます。 |
+| `height` | 衝突コンポーネントの高さ。指定しない場合、`2` が使用されます。 |
+| `radius` | 衝突コンポーネントの半径。指定しない場合、`0.5` が使用されます。 |
+| `type` | 衝突コンポーネントのタイプ。`box`、`capsule`、`cone`、`cylinder`、または `sphere` のいずれかです。指定しない場合、`box` が使用されます。 |
 
 </div>
 
 ## 例
 
 ```html
-<!-- static 1x1x1 box -->
+<!-- 静的1x1x1ボックス -->
 <pc-entity>
     <pc-render type="box"></pc-render>
     <pc-collision></pc-collision>
     <pc-rigidbody></pc-rigidbody>
 </pc-entity>
 
-<!-- dynamic sphere with radius 0.5 -->
+<!-- 半径0.5の動的球 -->
 <pc-entity>
     <pc-render type="sphere"></pc-render>
     <pc-collision type="sphere"></pc-collision>
@@ -44,6 +44,6 @@ The `<pc-collision>` tag is used to define a collision component.
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-collision>` elements using the [CollisionComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.CollisionComponentElement.html).
+[CollisionComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.CollisionComponentElement.html)を使用して、<pc-collision>要素をプログラムで作成および操作できます。

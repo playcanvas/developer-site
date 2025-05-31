@@ -2,40 +2,40 @@
 title: <pc-rigidbody>
 ---
 
-The `<pc-rigidbody>` tag is used to define a rigidbody component.
+`<pc-rigidbody>`タグは、剛体コンポーネントを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
-* It must be a sibling of a [`<pc-collision>`](../pc-collision) component.
-* The ammo.js WebAssembly module must be loaded via a [`<pc-module>`](../pc-module) tag.
+*   [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+*   [`<pc-collision>`](../pc-collision)コンポーネントの兄弟である必要があります。
+*   ammo.js WebAssembly モジュールは、[`<pc-module>`](../pc-module)タグを介してロードされている必要があります。
 
 :::
 
-## 属性
+## Attributes
 
 <div className="nowrap-first-col">
 
 | Attribute | Description |
 | --- | --- |
-| `angular-damping` | The angular damping of the rigidbody. If not specified, `0` is used. |
-| `angular-factor` | The angular factor of the rigidbody. Specified as a space-separated list of X, Y, and Z values. If not specified, `1 1 1` is used. |
-| `friction` | The friction of the rigidbody. If not specified, `0.5` is used. |
-| `linear-damping` | The linear damping of the rigidbody. If not specified, `0` is used. |
-| `linear-factor` | The linear factor of the rigidbody. Specified as a space-separated list of X, Y, and Z values. If not specified, `1 1 1` is used. |
-| `mass` | The mass of the rigidbody. If not specified, `1` is used. |
-| `restitution` | The restitution of the rigidbody. If not specified, `0` is used. |
-| `rolling-friction` | The rolling friction of the rigidbody. If not specified, `0` is used. |
-| `type` | The type of rigidbody component. Can be `static`, `kinematic` or `dynamic`. |
+| `angular-damping` | 剛体の角減衰です。指定しない場合、`0` が使用されます。 |
+| `angular-factor` | 剛体の角係数です。X、Y、Z の値をスペース区切りリストで指定します。指定しない場合、`1 1 1` が使用されます。 |
+| `friction` | 剛体の摩擦です。指定しない場合、`0.5` が使用されます。 |
+| `linear-damping` | 剛体の線形減衰です。指定しない場合、`0` が使用されます。 |
+| `linear-factor` | 剛体の線形係数です。X、Y、Z の値をスペース区切りリストで指定します。指定しない場合、`1 1 1` が使用されます。 |
+| `mass` | 剛体の質量です。指定しない場合、`1` が使用されます。 |
+| `restitution` | 剛体の反発係数です。指定しない場合、`0` が使用されます。 |
+| `rolling-friction` | 剛体の転がり摩擦です。指定しない場合、`0` が使用されます。 |
+| `type` | 剛体コンポーネントのタイプです。`static`、`kinematic`、または `dynamic` のいずれかです。 |
 
 </div>
 
-## 例
+## Example
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
-<CodePenEmbed id="XJrqjJr" title="<pc-rigidbody> example" />
+<CodePenEmbed id="XJrqjJr" title="<pc-rigidbody> の例" />
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-rigidbody>` elements using the [RigidBodyComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.RigidBodyComponentElement.html).
+[RigidBodyComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.RigidBodyComponentElement.html) を使用して、`<pc-rigidbody>`要素をプログラムで作成および操作できます。

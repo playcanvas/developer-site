@@ -2,19 +2,19 @@
 title: <pc-scripts>
 ---
 
-The `<pc-scripts>` tag is used to define a scripts component.
+`<pc-scripts>`タグは、スクリプトコンポーネントを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+*   [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `enabled` | Enabled state of the scripts component. If not specified, `true` is used. |
+| `enabled` | スクリプトコンポーネントの有効状態。指定されていない場合、`true`が使用されます。 |
 
 ## 例
 
@@ -26,6 +26,6 @@ The `<pc-scripts>` tag is used to define a scripts component.
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-scripts>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScriptComponentElement.html).
+[ScriptComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScriptComponentElement.html)を使用して、`<pc-scripts>`要素をプログラムで作成および操作できます。

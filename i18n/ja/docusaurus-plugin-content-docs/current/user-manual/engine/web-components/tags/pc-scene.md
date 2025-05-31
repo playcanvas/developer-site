@@ -2,34 +2,34 @@
 title: <pc-scene>
 ---
 
-The `<pc-scene>` tag is used to define the scene.
+`<pc-scene>` タグはシーンを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of [`<pc-app>`](../pc-app).
+* [`<pc-app>`](../pc-app) の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `fog` | The type of fog to use. Can be `linear`, `exp`, or `exp2`. |
-| `fog-color` | The color of the fog. Can be a CSS color string or a hex color code. |
-| `fog-start` | The start distance of the fog. |
-| `fog-end` | The end distance of the fog. |
-| `fog-density` | The density of the fog. |
+| `fog` | 使用するフォグの種類。`linear`、`exp`、または `exp2` のいずれかです。 |
+| `fog-color` | フォグの色。CSS カラー文字列または 16 進カラーコードです。 |
+| `fog-start` | フォグの開始距離。 |
+| `fog-end` | フォグの終了距離。 |
+| `fog-density` | フォグの密度。 |
 
 ## 例
 
 ```html
 <pc-app>
     <pc-scene>
-        <!-- define pc-entity tags here -->
+        <!-- ここでpc-entityタグを定義します -->
     </pc-scene>
 </pc-app>
 ```
 
-## JavaScript Interface
+## JavaScript インターフェース
 
-You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/classes/EngineWebComponents.SceneElement.html).
+[SceneElement API](https://api.playcanvas.com/classes/EngineWebComponents.SceneElement.html) を使用して、プログラムで `<pc-scene>` 要素を作成および操作できます。

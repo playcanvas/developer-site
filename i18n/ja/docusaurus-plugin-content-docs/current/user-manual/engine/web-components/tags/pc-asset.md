@@ -2,34 +2,34 @@
 title: <pc-asset>
 ---
 
-The `<pc-asset>` tag is used to define an asset.
+`<pc-asset>`タグはアセットを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of [`<pc-app>`](../pc-app).
+* [`<pc-app>`](../pc-app)の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `id` | The ID of the asset. This is used by other tags (such as [`<pc-sky>`](../pc-sky)) to reference this asset. |
-| `lazy` | Valueless attribute. If present, the asset is not loaded until it is first referenced by the scene or explicitly requested via the Engine's Asset API. |
-| `src` | The path to the asset. |
-| `type` | The type of asset. If not specified, the type is inferred from the file extension. Can be: `audio`, `binary`, `css`, `container`, `gsplat`, `html`, `json`, `script`, `shader`, `text`, `texture`. |
+| `id` | アセットのIDです。これは、他のタグ（例: [`<pc-sky>`](../pc-sky)）からこのアセットを参照するために使用されます。 |
+| `lazy` | 値を持たない属性です。存在する場合、アセットはシーンによって最初に参照されるか、またはEngineのAsset APIを介して明示的に要求されるまでロードされません。 |
+| `src` | アセットへのパスです。 |
+| `type` | アセットのタイプです。指定されていない場合、タイプはファイル拡張子から推測されます。指定可能な値: `audio`, `binary`, `css`, `container`, `gsplat`, `html`, `json`, `script`, `shader`, `text`, `texture`。 |
 
 ## 例
 
 ```html
 <pc-app>
-    <!-- Script asset -->
+    <!-- スクリプトアセット -->
     <pc-asset src="assets/scripts/animate.mjs"></pc-asset>
-    <!-- GLB asset -->
+    <!-- GLBアセット -->
     <pc-asset src="assets/models/car.glb" id="car"></pc-asset>
 </pc-app>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-asset>` elements using the [AssetElement API](https://api.playcanvas.com/classes/EngineWebComponents.AssetElement.html).
+[AssetElement API](https://api.playcanvas.com/classes/EngineWebComponents.AssetElement.html)を使用して、プログラムで`<pc-asset>`要素を作成および操作できます。

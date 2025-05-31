@@ -2,22 +2,22 @@
 title: <pc-splat>
 ---
 
-The `<pc-splat>` tag is used to define a splat component for rendering 3D Gaussian Splats.
+`<pc-splat>` タグは、3D Gaussian Splats をレンダリングするためのスプラットコンポーネントを定義するために使用されます。
 
-When rendering splat-based scenes, it is recommended to set `antialias` and `high-resolution` on your [`<pc-app>`](../pc-app) tag to `false` for best performance.
+スプラットベースのシーンをレンダリングする場合、最高のパフォーマンスを得るためには、[`<pc-app>`](../pc-app) タグの `antialias` と `high-resolution` を `false` に設定することをお勧めします。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+*   [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `gsplat`. |
-| `enabled` | Enabled state of the splat component. If not specified, `true` is used. |
+| `asset` | `gsplat` 型を持つ [`<pc-asset>`](../pc-asset) タグの `id` と一致する必要がある文字列です。 |
+| `enabled` | スプラットコンポーネントの有効状態。指定されていない場合、`true` が使用されます。 |
 
 ## 例
 
@@ -25,6 +25,6 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 <CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
 
-## JavaScript Interface
+## JavaScript インターフェース
 
-You can programmatically create and manipulate `<pc-splat>` elements using the [SplatComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.SplatComponentElement.html).
+[SplatComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.SplatComponentElement.html) を使用して、`<pc-splat>` 要素をプログラムで作成および操作できます。

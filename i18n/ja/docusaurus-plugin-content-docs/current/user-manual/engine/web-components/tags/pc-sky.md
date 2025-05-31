@@ -2,25 +2,25 @@
 title: <pc-sky>
 ---
 
-The `<pc-sky>` tag is used to define a sky component.
+`<pc-sky>` タグはスカイコンポーネントを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-scene>`](../pc-scene).
+* [`<pc-scene>`](../pc-scene) の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `texture`. |
-| `center` | The center of the sky. Specified as a space-separated list of X, Y, and Z values in the range 0 to 1. If not specified, `0 0.01 0` is used. |
-| `intensity` | The intensity of the sky. If not specified, `1` is used. |
-| `level` | The mipmap level used to render the sky. If not specified, `0` is used (base mip level). |
-| `rotation` | The rotation of the sky. Specified as a space-separated list of X, Y, and Z values. If not specified, `0 0 0` is used. |
-| `scale` | The scale of the sky. Specified as a space-separated list of X, Y, and Z values. If not specified, `100 100 100` is used. |
-| `type` | The type of sky component. Can be `box`, `dome`, `infinite` or `none`. If not specified, `infinite` is used. |
+| `asset` | `texture` 型の [`<pc-asset>`](../pc-asset) タグの `id` と一致する文字列です。 |
+| `center` | スカイの中心です。0から1の範囲のX、Y、Z値をスペース区切りで指定します。指定しない場合、`0 0.01 0`が使用されます。 |
+| `intensity` | スカイの強度です。指定しない場合、`1`が使用されます。 |
+| `level` | スカイのレンダリングに使用されるミップマップレベルです。指定しない場合、`0`が使用されます（ベースミップレベル）。 |
+| `rotation` | スカイの回転です。X、Y、Z値をスペース区切りで指定します。指定しない場合、`0 0 0`が使用されます。 |
+| `scale` | スカイのスケールです。X、Y、Z値をスペース区切りで指定します。指定しない場合、`100 100 100`が使用されます。 |
+| `type` | スカイコンポーネントのタイプです。`box`、`dome`、`infinite`、または`none`のいずれかを指定できます。指定しない場合、`infinite`が使用されます。 |
 
 ## 例
 
@@ -31,6 +31,6 @@ The `<pc-sky>` tag is used to define a sky component.
 </pc-scene>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-sky>` elements using the [SkyElement API](https://api.playcanvas.com/classes/EngineWebComponents.SkyElement.html).
+[SkyElement API](https://api.playcanvas.com/classes/EngineWebComponents.SkyElement.html) を使用して、`<pc-sky>` 要素をプログラムで作成および操作できます。

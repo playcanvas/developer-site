@@ -2,11 +2,11 @@
 title: <pc-screen>
 ---
 
-The `<pc-screen>` tag is used to define a screen component.
+`<pc-screen>` タグは、スクリーンコンポーネントを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* それは、[`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 
 :::
 
@@ -14,14 +14,14 @@ The `<pc-screen>` tag is used to define a screen component.
 
 <div className="nowrap-first-col">
 
-| Attribute | Description |
+| 属性 | 説明 |
 | --- | --- |
-| `blend` | Valueless attribute. If present, the screen component blends. |
-| `priority` | The priority of the screen component. Must be an integer between `0` and `255`. If not specified, `0` is used. |
-| `reference-resolution` | The reference resolution of the screen component. Specified as a space-separated list of Width and Height values. If not specified, `640 320` is used. |
-| `resolution` | The resolution of the screen component. Specified as a space-separated list of Width and Height values. If not specified, `640 320` is used. |
-| `scale-blend` | The scale blend of the screen component. Must be a number between `0` and `1`. If not specified, `0.5` is used. |
-| `screen-space` | Valueless attribute. If present, the screen component is in screen space. |
+| `blend` | 値なし属性。存在する場合、スクリーンコンポーネントはブレンドされます。 |
+| `priority` | スクリーンコンポーネントの優先度。`0` から `255` までの整数である必要があります。指定されていない場合、`0` が使用されます。 |
+| `reference-resolution` | スクリーンコンポーネントの参照解像度。幅と高さの値をスペース区切りリストで指定します。指定されていない場合、`640 320` が使用されます。 |
+| `resolution` | スクリーンコンポーネントの解像度。幅と高さの値をスペース区切りリストで指定します。指定されていない場合、`640 320` が使用されます。 |
+| `scale-blend` | スクリーンコンポーネントのスケールブレンド。`0` から `1` までの数値である必要があります。指定されていない場合、`0.5` が使用されます。 |
+| `screen-space` | 値なし属性。存在する場合、スクリーンコンポーネントはスクリーンスペースにあります。 |
 
 </div>
 
@@ -29,15 +29,15 @@ The `<pc-screen>` tag is used to define a screen component.
 
 ```html
 <pc-entity>
-    <!-- define a 2d screen -->
+    <!-- 2Dスクリーンを定義 -->
     <pc-screen></pc-screen>
-    <!-- render some text on the parent screen -->
+    <!-- 親スクリーンにテキストをレンダリング -->
     <pc-entity>
         <pc-element type="text" asset="arial"text="Hello, World!"></pc-element>
     </pc-entity>
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScript インターフェース
 
-You can programmatically create and manipulate `<pc-screen>` elements using the [ScreenComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScreenComponentElement.html).
+[`<pc-screen>`] 要素をプログラムで作成および操作するには、[ScreenComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScreenComponentElement.html) を使用できます。

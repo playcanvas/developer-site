@@ -2,21 +2,21 @@
 title: <pc-render>
 ---
 
-The `<pc-render>` tag is used to define a render component that renders a 3D primitive.
+`<pc-render>` タグは、3Dプリミティブをレンダリングするレンダーコンポーネントを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* これは [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `type` | The type of render component. Can be `box`, `capsule`, `cone`, `cylinder`, `plane` or `sphere`. |
-| `cast-shadows` | Valueless attribute. If present, the render component casts shadows. |
-| `receive-shadows` | Valueless attribute. If present, the render component receives shadows. |
+| `type` | レンダーコンポーネントのタイプ。`box`、`capsule`、`cone`、`cylinder`、`plane`、または`sphere`のいずれかです。 |
+| `cast-shadows` | 値なし属性。存在する場合、レンダーコンポーネントは影を落とします。 |
+| `receive-shadows` | 値なし属性。存在する場合、レンダーコンポーネントは影を受け取ります。 |
 
 ## 例
 
@@ -24,6 +24,6 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 <CodePenEmbed id="NPKMrLy" title="<pc-render> example" />
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-render>` elements using the [RenderComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.RenderComponentElement.html).
+[RenderComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.RenderComponentElement.html) を使用して、`<pc-render>` 要素をプログラムで作成および操作できます。

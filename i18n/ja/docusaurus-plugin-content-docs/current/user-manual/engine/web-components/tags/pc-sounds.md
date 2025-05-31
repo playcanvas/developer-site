@@ -2,26 +2,26 @@
 title: <pc-sounds>
 ---
 
-The `<pc-sounds>` tag is used to define a sound component.
+`<pc-sounds>`タグは、サウンドコンポーネントを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
-* It can have 0..n [`<pc-sound>`](../pc-sound) children.
+* これは、[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* これは0個以上の[`<pc-sound>`](../pc-sound)の子要素を持つことができます。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `distance-model` | The distance model of the sound. Can be `exponential`, `inverse` or `linear`. If not specified, `linear` is used. |
-| `pitch` | The pitch of the sound. If not specified, `1` is used. |
-| `max-distance` | The maximum distance from the listener at which audio falloff stops. If not specified, `10000` is used. |
-| `positional` | Valueless attribute. If present, the sound is positional. |
-| `ref-distance` | The distance from the listener at which the volume will be at full volume. If not specified, `1` is used. |
-| `roll-off-factor` | The factor used in the falloff equation. If not specified, `1` is used. |
-| `volume` | The volume of the sound. If not specified, `1` is used. |
+| `distance-model` | サウンドの距離モデル。`exponential`、`inverse`、または`linear`を指定できます。指定しない場合、`linear`が使用されます。 |
+| `pitch` | サウンドのピッチ。指定しない場合、`1`が使用されます。 |
+| `max-distance` | リスナーからの最大距離で、ここでオーディオの減衰が停止します。指定しない場合、`10000`が使用されます。 |
+| `positional` | 値を持たない属性。存在する場合、サウンドは位置情報を持つものになります。 |
+| `ref-distance` | リスナーからの距離で、ここで音量が最大になります。指定しない場合、`1`が使用されます。 |
+| `roll-off-factor` | 減衰式で使用される係数。指定しない場合、`1`が使用されます。 |
+| `volume` | サウンドの音量。指定しない場合、`1`が使用されます。 |
 
 ## 例
 
@@ -33,6 +33,6 @@ The `<pc-sounds>` tag is used to define a sound component.
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-sounds>` elements using the [SoundComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.SoundComponentElement.html).
+[SoundComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.SoundComponentElement.html)を使用して、プログラムによって`<pc-sounds>`要素を作成および操作できます。

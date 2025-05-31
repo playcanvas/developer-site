@@ -2,27 +2,27 @@
 title: <pc-sound>
 ---
 
-The `<pc-sound>` tag is used to define a sound.
+`<pc-sound>`タグは、サウンドを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-sounds>`](../pc-sounds) component.
+* これは、[`<pc-sounds>`](../pc-sounds)コンポーネントの直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `audio`. |
-| `auto-play` | Valueless attribute. If present, the sound slot plays automatically. |
-| `duration` | The duration of the sound slot. |
-| `loop` | Valueless attribute. If present, the sound slot loops. |
-| `name` | The name of the sound slot. |
-| `overlap` | Valueless attribute. If present, the sound slot overlaps. |
-| `pitch` | The pitch of the sound slot. If not specified, `1` is used. |
-| `start-time` | The start time of the sound slot. If not specified, `0` is used. |
-| `volume` | The volume of the sound slot. If not specified, `1` is used. |
+| `asset` | `audio`タイプの[`<pc-asset>`](../pc-asset)タグの`id`と一致する必要がある文字列。 |
+| `auto-play` | 値を持たない属性。存在する場合、サウンドスロットは自動的に再生されます。 |
+| `duration` | サウンドスロットの再生時間。 |
+| `loop` | 値を持たない属性。存在する場合、サウンドスロットはループします。 |
+| `name` | サウンドスロットの名前。 |
+| `overlap` | 値を持たない属性。存在する場合、サウンドスロットはオーバーラップします。 |
+| `pitch` | サウンドスロットのピッチ。指定されていない場合、`1`が使用されます。 |
+| `start-time` | サウンドスロットの開始時間。指定されていない場合、`0`が使用されます。 |
+| `volume` | サウンドスロットの音量。指定されていない場合、`1`が使用されます。 |
 
 ## 例
 
@@ -32,6 +32,6 @@ The `<pc-sound>` tag is used to define a sound.
 </pc-sounds>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-sound>` elements using the [SoundElement API](https://api.playcanvas.com/classes/EngineWebComponents.SoundElement.html).
+[SoundElement API](https://api.playcanvas.com/classes/EngineWebComponents.SoundElement.html)を使用して、`<pc-sound>`要素をプログラムによって作成および操作できます。

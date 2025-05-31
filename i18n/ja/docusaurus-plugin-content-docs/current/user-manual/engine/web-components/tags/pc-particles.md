@@ -2,23 +2,23 @@
 title: <pc-particles>
 ---
 
-The `<pc-particles>` tag is used to define a particle system.
+`<pc-particles>` タグは、パーティクルシステムを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* これは [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `json`. |
+| `asset` | `json` 型の [\`<pc-asset>\`](../pc-asset) タグの `id` と一致する文字列です。 |
 
 ## 例
 
-First define the particle system in JSON format:
+まず、パーティクルシステムをJSON形式で定義します。
 
 ```json title="snow.json"
 {
@@ -58,7 +58,7 @@ First define the particle system in JSON format:
 }
 ```
 
-Then add the particle system to your scene in HTML:
+次に、パーティクルシステムをHTMLでシーンに追加します。
 
 ```html
 <pc-app>
@@ -75,6 +75,6 @@ Then add the particle system to your scene in HTML:
 </pc-app>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-particles>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ParticleSystemComponentElement.html).
+[ParticleSystemComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ParticleSystemComponentElement.html) を使用して、`<pc-particles>` 要素をプログラムで作成および操作できます。

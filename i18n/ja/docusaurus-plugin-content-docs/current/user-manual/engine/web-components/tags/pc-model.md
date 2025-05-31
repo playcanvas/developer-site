@@ -2,21 +2,21 @@
 title: <pc-model>
 ---
 
-The `<pc-model>` tag is used to define an entity that instantiates a 3D model from a GLB file.
+`<pc-model>`タグは、GLBファイルから3Dモデルをインスタンス化するエンティティを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-scene>`](../pc-scene) or a [`<pc-entity>`](../pc-entity).
+*   [`<pc-scene>`](../pc-scene)または[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-All attributes of [`<pc-entity>`](../pc-entity) are also available.
+[`<pc-entity>`](../pc-entity)のすべての属性も利用可能です。
 
-| 属性 (Attribute) | 説明 |
-| --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `container`. |
+| 属性    | 説明                                                                                                        |
+| --- | ---                                                                                                        |
+| `asset` | `container`タイプの[`<pc-asset>`](../pc-asset)タグの`id`と一致する必要がある文字列。 |
 
 ## 例
 
@@ -27,6 +27,6 @@ All attributes of [`<pc-entity>`](../pc-entity) are also available.
 </pc-scene>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/classes/EngineWebComponents.ModelElement.html).
+[ModelElement API](https://api.playcanvas.com/classes/EngineWebComponents.ModelElement.html)を使用して、`<pc-model>`要素をプログラムで作成および操作できます。

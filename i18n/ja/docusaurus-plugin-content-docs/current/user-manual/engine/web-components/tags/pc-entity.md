@@ -2,45 +2,45 @@
 title: <pc-entity>
 ---
 
-The `<pc-entity>` tag is used to define an entity.
+`<pc-entity>`タグは、エンティティを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of [`<pc-scene>`](../pc-scene) or another `<pc-entity>`.
+* これは、直接の[`<pc-scene>`](../pc-scene)の子であるか、または別の`<pc-entity>`の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `enabled` | Enabled state of the entity. If not specified, `true` is used. |
-| `name` | The name of the entity. |
-| `position` | The position of the entity. Specified as a space-separated list of X, Y, and Z values. If not specified, `0 0 0` is used. |
-| `rotation` | The rotation of the entity. Specified as a space-separated list of X, Y, and Z Euler angles in degrees. If not specified, `0 0 0` is used. |
-| `scale` | The scale of the entity. Specified as a space-separated list of X, Y, and Z values. If not specified, `1 1 1` is used. |
-| `tags` | A space-separated list of tags for the entity. |
+| `enabled` | エンティティの有効状態。指定されていない場合、`true`が使用されます。 |
+| `name` | エンティティの名前。 |
+| `position` | エンティティの位置。X、Y、Zの値がスペース区切りリストで指定されます。指定されていない場合、`0 0 0`が使用されます。 |
+| `rotation` | エンティティの回転。X、Y、Zのオイラー角が度単位でスペース区切りリストで指定されます。指定されていない場合、`0 0 0`が使用されます。 |
+| `scale` | エンティティのスケール。X、Y、Zの値がスペース区切りリストで指定されます。指定されていない場合、`1 1 1`が使用されます。 |
+| `tags` | エンティティのタグをスペース区切りリストで指定します。 |
 
 ## イベント
 
-Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+これらのイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用するか、このインターフェースの`oneventname`プロパティにイベントリスナーを割り当てることでリッスンできます。
 
-| Event | 説明 |
+| イベント | 説明 |
 | --- | --- |
-| `pointerdown` | Fired when a pointer is pressed down on the entity. |
-| `pointerenter` | Fired when a pointer enters the entity. |
-| `pointerleave` | Fired when a pointer leaves the entity. |
-| `pointermove` | Fired when a pointer is moved over the entity. |
-| `pointerup` | Fired when a pointer is released from the entity. |
+| `pointerdown` | ポインターがエンティティ上で押し下げられたときに発生します。 |
+| `pointerenter` | ポインターがエンティティに入ったときに発生します。 |
+| `pointerleave` | ポインターがエンティティを離れたときに発生します。 |
+| `pointermove` | ポインターがエンティティ上を移動したときに発生します。 |
+| `pointerup` | ポインターがエンティティから離されたときに発生します。 |
 
 ## 例
 
 ```html
 <pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1 tag2">
-    <!-- Child entities and components go here -->
+    <!-- ここに子エンティティとコンポーネントが配置されます -->
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-entity>` elements using the [EntityElement API](https://api.playcanvas.com/classes/EngineWebComponents.EntityElement.html).
+[EntityElement API](https://api.playcanvas.com/classes/EngineWebComponents.EntityElement.html)を使用して、`<pc-entity>`要素をプログラムで作成および操作できます。

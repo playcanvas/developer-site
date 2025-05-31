@@ -2,11 +2,11 @@
 title: <pc-light>
 ---
 
-The `<pc-light>` tag is used to define a light component.
+`<pc-light>`タグはライトコンポーネントを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+*   [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 
@@ -14,21 +14,21 @@ The `<pc-light>` tag is used to define a light component.
 
 <div className="nowrap-first-col">
 
-| Attribute | Description |
+| 属性 | 説明 |
 | --- | --- |
-| `color` | The color of the light. Can be a space-separated list of R, G, B values, a hex color code, or a [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts). If not specified, `1 1 1` is used. |
-| `cast-shadows` | Valueless attribute. If present, the light casts shadows. |
-| `inner-cone-angle` | The angle of the light's inner cone. If not specified, `40` is used. |
-| `intensity` | The intensity of the light. If not specified, `1` is used. |
-| `normal-offset-bias` | The bias of the light's normal offset. If not specified, `0.05` is used. |
-| `outer-cone-angle` | The angle of the light's outer cone. If not specified, `45` is used. |
-| `range` | The range of the light. If not specified, `10` is used. |
-| `shadow-bias` | The bias of the light's shadows. If not specified, `0.2` is used. |
-| `shadow-distance` | The distance at which the light's shadows are no longer rendered. If not specified, `16` is used. |
-| `shadow-resolution` | The resolution of the light's shadow map. If not specified, `1024` is used. |
-| `shadow-type` | The type of shadow map. Can be `pcf1-16f`, `pcf1-32f`, `pcf3-16f`, `pcf3-32f`, `pcf5-16f`, `pcf5-32f`, `vsm-16f`, `vsm-32f` or `pcss-32f`. If not specified, `pcf3-32f` is used. |
-| `type` | The type of light. Can be `directional`, `point` or `omni`. If not specified, `directional` is used. |
-| `vsm-bias` | The bias used for VSM shadows. If not specified, `0.01` is used. |
+| `color` | ライトの色。スペース区切りのR、G、B値、16進数のカラーコード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)として指定できます。指定されない場合、`1 1 1`が使用されます。 |
+| `cast-shadows` | 値を持たない属性。存在する場合、ライトは影を落とします。 |
+| `inner-cone-angle` | ライトのインナーコーンの角度。指定されない場合、`40`が使用されます。 |
+| `intensity` | ライトの強度。指定されない場合、`1`が使用されます。 |
+| `normal-offset-bias` | ライトのノーマルオフセットのバイアス。指定されない場合、`0.05`が使用されます。 |
+| `outer-cone-angle` | ライトのアウターコーンの角度。指定されない場合、`45`が使用されます。 |
+| `range` | ライトの範囲。指定されない場合、`10`が使用されます。 |
+| `shadow-bias` | ライトの影のバイアス。指定されない場合、`0.2`が使用されます。 |
+| `shadow-distance` | ライトの影がレンダリングされなくなる距離。指定されない場合、`16`が使用されます。 |
+| `shadow-resolution` | ライトのシャドウマップの解像度。指定されない場合、`1024`が使用されます。 |
+| `shadow-type` | シャドウマップのタイプ。`pcf1-16f`、`pcf1-32f`、`pcf3-16f`、`pcf3-32f`、`pcf5-16f`、`pcf5-32f`、`vsm-16f`、`vsm-32f`、または`pcss-32f`のいずれか。指定されない場合、`pcf3-32f`が使用されます。 |
+| `type` | ライトのタイプ。`directional`、`point`、または`omni`のいずれか。指定されない場合、`directional`が使用されます。 |
+| `vsm-bias` | VSMシャドウに使用されるバイアス。指定されない場合、`0.01`が使用されます。 |
 
 </div>
 
@@ -40,6 +40,6 @@ The `<pc-light>` tag is used to define a light component.
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-light>` elements using the [LightComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.LightComponentElement.html).
+[LightComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.LightComponentElement.html)を使用して、`<pc-light>`要素をプログラムで作成および操作できます。

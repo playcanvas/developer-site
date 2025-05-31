@@ -2,11 +2,11 @@
 title: <pc-listener>
 ---
 
-The `<pc-listener>` tag is used to define a listener component. It has no attributes.
+`<pc-listener>` タグは、リスナーコンポーネントを定義するために使用されます。属性はありません。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](pc-entity.md).
+* これは [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 
 :::
 
@@ -18,6 +18,6 @@ The `<pc-listener>` tag is used to define a listener component. It has no attrib
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScript インターフェース
 
-You can programmatically create and manipulate `<pc-listener>` elements using the [ListenerComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ListenerComponentElement.html).
+[ListenerComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ListenerComponentElement.html) を使用して、プログラムで `<pc-listener>` 要素を作成および操作できます。

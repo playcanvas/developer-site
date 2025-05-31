@@ -2,22 +2,22 @@
 title: <pc-script>
 ---
 
-The `<pc-script>` tag is used to define a script.
+`<pc-script>`タグは、スクリプトを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-scripts>`](../pc-scripts) component.
-* The script must have been loaded via the [`<pc-asset>`](../pc-asset) tag.
+* [`<pc-scripts>`](../pc-scripts)コンポーネントの直接の子である必要があります。
+* スクリプトは、[`<pc-asset>`](../pc-asset)タグを介してロードされている必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `attributes` | A JSON string of attributes for the script. |
-| `enabled` | Enabled state of the script. If not specified, `true` is used. |
-| `name` | The name of the script. The name is the class name of the script in camel case. |
+| `attributes` | スクリプトの属性を表すJSON文字列。 |
+| `enabled` | スクリプトの有効状態。指定されていない場合、`true`が使用されます。 |
+| `name` | スクリプトの名前。この名前は、スクリプトのクラス名をキャメルケースにしたものです。 |
 
 ## 例
 
@@ -29,6 +29,6 @@ The `<pc-script>` tag is used to define a script.
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-script>` elements using the [ScriptElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScriptElement.html).
+[ScriptElement API](https://api.playcanvas.com/classes/EngineWebComponents.ScriptElement.html)を使用して、`<pc-script>`要素をプログラムで作成および操作できます。

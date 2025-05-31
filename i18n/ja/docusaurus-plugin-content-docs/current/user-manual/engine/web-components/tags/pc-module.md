@@ -2,32 +2,32 @@
 title: <pc-module>
 ---
 
-The `<pc-module>` tag is used to load a WebAssembly module.
+`<pc-module>`タグは、WebAssemblyモジュールをロードするために使用されます。
 
 :::note
 
-* It must be a direct child of [`<pc-app>`](../pc-app).
+* [`<pc-app>`](../pc-app)の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 (Attribute) | 説明 |
+| 属性 | 説明 |
 | --- | --- |
-| `name` | The name of the module. This is used to reference the module in scripts. |
-| `glue` | The path to the glue code for the module. |
-| `wasm` | The path to the WASM file for the module. |
-| `fallback` | The path to the fallback (asm.js) code for the module (for when WebAssembly is not supported). |
+| `name` | モジュールの名前です。これはスクリプト内でモジュールを参照するために使用されます。 |
+| `glue` | モジュールのglue codeへのパスです。 |
+| `wasm` | モジュールのWASMファイルへのパスです。 |
+| `fallback` | モジュールのfallback (asm.js) コードへのパスです (WebAssemblyがサポートされていない場合)。 |
 
 ## 例
 
 ```html
 <pc-app>
-    <!-- Load the ammo.js module -->
+    <!-- ammo.jsモジュールをロードします -->
     <pc-module name="ammo" glue="ammo.js" wasm="ammo.wasm.wasm" fallback="ammo.wasm.js"></pc-module>
 </pc-app>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-module>` elements using the [ModuleElement API](https://api.playcanvas.com/classes/EngineWebComponents.ModuleElement.html).
+[ModuleElement API](https://api.playcanvas.com/classes/EngineWebComponents.ModuleElement.html)を使用して、`<pc-module>`要素をプログラムで作成および操作できます。

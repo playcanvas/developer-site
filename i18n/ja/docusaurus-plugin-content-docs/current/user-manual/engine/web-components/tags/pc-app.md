@@ -2,11 +2,11 @@
 title: <pc-app>
 ---
 
-The `<pc-app>` tag is the root element for your PlayCanvas application. It is used to initialize the PlayCanvas application and provide a container for your scene.
+`<pc-app>`タグは、PlayCanvasアプリケーションのルート要素です。PlayCanvasアプリケーションを初期化し、シーンのコンテナを提供するために使用されます。
 
 :::note
 
-* It must be a descendant of the document's `body` element.
+*   ドキュメントの`body`要素の子孫である必要があります。
 
 :::
 
@@ -14,13 +14,13 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 <div className="nowrap-first-col">
 
-| Attribute | Description |
+| 属性 | 説明 |
 | --- | --- |
-| `alpha` | Boolean attribute. Determines whether the application allocates an alpha channel in the frame buffer. Defaults to `true`. |
-| `antialias` | Boolean attribute. Determines whether the application uses anti-aliasing. Defaults to `true`. |
-| `depth` | Boolean attribute. Determines whether the application allocates a depth buffer. Defaults to `true`. |
-| `high-resolution` | Boolean attribute. Determines whether the application renders using physical resolution or CSS resolution. Defaults to `true`. |
-| `stencil` | Boolean attribute. Determines whether the application allocates a stencil buffer. Defaults to `true`. |
+| `alpha` | 真偽値属性。アプリケーションがフレームバッファにアルファチャンネルを割り当てるかどうかを決定します。デフォルトは`true`です。 |
+| `antialias` | 真偽値属性。アプリケーションがアンチエイリアシングを使用するかどうかを決定します。デフォルトは`true`です。 |
+| `depth` | 真偽値属性。アプリケーションがデプスバッファを割り当てるかどうかを決定します。デフォルトは`true`です。 |
+| `high-resolution` | 真偽値属性。アプリケーションが物理解像度またはCSS解像度を使用してレンダリングするかどうかを決定します。デフォルトは`true`です。 |
+| `stencil` | 真偽値属性。アプリケーションがステンシルバッファを割り当てるかどうかを決定します。デフォルトは`true`です。 |
 
 </div>
 
@@ -30,6 +30,6 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 <CodePenEmbed id="JoPvXjO" title="<pc-app> example" />
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-app>` elements using the [AppElement API](https://api.playcanvas.com/classes/EngineWebComponents.AppElement.html).
+[AppElement API](https://api.playcanvas.com/classes/EngineWebComponents.AppElement.html)を使用して、`<pc-app>`要素をプログラムで作成および操作できます。

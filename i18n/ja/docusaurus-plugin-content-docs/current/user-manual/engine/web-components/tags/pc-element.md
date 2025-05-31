@@ -2,11 +2,11 @@
 title: <pc-element>
 ---
 
-The `<pc-element>` tag is used to define an element component.
+`<pc-element>`タグは、要素コンポーネントを定義するために使用されます。
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* それは[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 
@@ -14,19 +14,19 @@ The `<pc-element>` tag is used to define an element component.
 
 <div className="nowrap-first-col">
 
-| Attribute | Description |
+| 属性 | 説明 |
 | --- | --- |
-| `anchor` | The anchor of the element component. Specified as a space-separated list of X, Y, Z, and W values. If not specified, `0 0 0 1` is used. |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `font`. |
-| `auto-width` | Valueless attribute. If present, the element component automatically adjusts its width. |
-| `color` | The color of the element component. Can be a space-separated list of R, G, B, and A values, a hex color code, or a [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts). If not specified, `1 1 1 1` is used. |
-| `font-size` | The font size of the element component. If not specified, `16` is used. |
-| `line-height` | The line height of the element component. If not specified, `1.2` is used. |
-| `pivot` | The pivot of the element component. Specified as a space-separated list of X and Y values. If not specified, `0.5 0.5` is used. |
-| `text` | The text of the element component. |
-| `type` | The type of element component. Can be `group`, `image` or `text`. If not specified, `group` is used. |
-| `width` | The width of the element component. If not specified, `0` is used. |
-| `wrap-lines` | Valueless attribute. If present, the element component wraps lines. |
+| `anchor` | 要素コンポーネントのアンカー。X、Y、Z、Wの値をスペースで区切ったリストとして指定します。指定しない場合、`0 0 0 1`が使用されます。 |
+| `asset` | `font`タイプの[`<pc-asset>`](../pc-asset)タグの`id`と一致する必要がある文字列。 |
+| `auto-width` | 値なし属性。存在する場合、要素コンポーネントは自動的に幅を調整します。 |
+| `color` | 要素コンポーネントの色。R、G、B、Aの値をスペースで区切ったリスト、16進カラーコード、または[名前付き色](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)で指定できます。指定しない場合、`1 1 1 1`が使用されます。 |
+| `font-size` | 要素コンポーネントのフォントサイズ。指定しない場合、`16`が使用されます。 |
+| `line-height` | 要素コンポーネントの行の高さ。指定しない場合、`1.2`が使用されます。 |
+| `pivot` | 要素コンポーネントのピボット。XとYの値をスペースで区切ったリストとして指定します。指定しない場合、`0.5 0.5`が使用されます。 |
+| `text` | 要素コンポーネントのテキスト。 |
+| `type` | 要素コンポーネントのタイプ。`group`、`image`、または`text`のいずれかです。指定しない場合、`group`が使用されます。 |
+| `width` | 要素コンポーネントの幅。指定しない場合、`0`が使用されます。 |
+| `wrap-lines` | 値なし属性。存在する場合、要素コンポーネントは行を折り返します。 |
 
 </div>
 
@@ -38,6 +38,6 @@ The `<pc-element>` tag is used to define an element component.
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-You can programmatically create and manipulate `<pc-element>` elements using the [ElementComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ElementComponentElement.html).
+[ElementComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.ElementComponentElement.html)を使用して、`<pc-element>`要素をプログラムで作成および操作できます。
