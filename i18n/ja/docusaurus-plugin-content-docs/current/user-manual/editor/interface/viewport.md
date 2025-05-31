@@ -23,17 +23,17 @@ sidebar_position: 5
 
 スクリーンショットで見ることができる3色の軸は、[ギズモ][4]と呼ばれます。これは、選択したエンティティの変換行列を操作するために使用されます。ギズモには3つの種類があります。矢印が軸の端にある「移動」、色付きの円がある「回転」、軸の端にキューブがある「拡大縮小」です。
 
-## Render Mode {#render-mode}
+## レンダーモード {#render-mode}
 
-You can modify the viewport render mode using this drop-down menu in the top-right of the viewport:
+ビューポートの右上のこのドロップダウンメニューを使用して、ビューポートのレンダーモードを変更できます。
 
 ![Viewport Render Mode Menu](/img/user-manual/editor/viewport/render-mode-menu.png)
 
-It allows you to toggle wireframe rendering:
+ワイヤーフレームレンダリングを切り替えることができます。
 
 ![Viewport Wireframe](/img/user-manual/editor/viewport/wireframe.png)
 
-You can also visualize your scene in various debug render modes. This restricts the rendered scene to just show albedo, normals, AO, emission and more.
+また、さまざまなデバッグレンダーモードでシーンを視覚化することもできます。これにより、レンダリングされるシーンはアルベド、ノーマル、AO、エミッションなどに限定されます。
 
 ![Viewport Render Modes](/img/user-manual/editor/viewport/render-modes.png)
 

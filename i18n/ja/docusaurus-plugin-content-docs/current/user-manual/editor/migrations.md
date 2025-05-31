@@ -1,33 +1,33 @@
 ---
-title: Migrations
+title: 移行
 sidebar_position: 8
 ---
 
-## イントロダクション
+## はじめに
 
-This page outlines the migrations of project data between different Editor versions.
+このページでは、異なるエディターバージョン間のプロジェクトデータの移行について概説します。
 
-### Migration from 1.48.0 to 1.50.0
+### 1.48.0から1.50.0への移行
 
-This Editor has been updated to now use Engine V2 internally. This change may cause some small visual changes for some projects. We have collated a list of the most common issues and how to fix them.
+このエディターは、内部でEngine V2を使用するように更新されました。この変更により、一部のプロジェクトでわずかな視覚的変更が発生する可能性があります。最も一般的な問題とその修正方法のリストをまとめました。
 
-#### Cubemap edge filtering
+#### キューブマップのエッジフィルタリング
 
 <img src='/img/user-manual/editor/editor-v2/edge-filter.png' width='600' />
 
-If your cubemap skybox has pronounced edges such as this example above, navigate to your cubemap asset and delete and regenerate the prefiltered data to remove them.
+キューブマップのスカイボックスに上記の例のようなはっきりとしたエッジがある場合は、キューブマップアセットに移動し、プレフィルターデータを削除して再生成することでそれらを削除します。
 
 <img src='/img/user-manual/editor/editor-v2/prefiltered-data.png' width='400' />
 
-#### ガンマ補正 (Gamma Correction)
+#### ガンマ補正
 
 <img src='/img/user-manual/editor/editor-v2/gamma-compare.png' />
 
-If you have a project with gamma correction set to 1.0, your scene may appear more saturated such as the example above (new editor on the right). Under the rendering settings, change your gamma correction to 2.2 to achieve a similar effect as before.
+ガンマ補正が1.0に設定されているプロジェクトがある場合、シーンが上記の例（右側が新しいエディター）のように、より彩度が高く表示されることがあります。レンダリング設定で、ガンマ補正を2.2に変更すると、以前と同様の効果が得られます。
 
 :::note
 
-Your scene will be rendered with the more correct linear workflow. However, there will be slight visual changes related to lighting and alpha blending.
+シーンはより正しいリニアワークフローでレンダリングされます。ただし、ライティングとアルファブレンドに関連するわずかな視覚的変更が発生します。
 
 :::
 

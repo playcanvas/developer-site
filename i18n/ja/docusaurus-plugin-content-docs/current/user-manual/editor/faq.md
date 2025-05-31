@@ -3,40 +3,40 @@ title: FAQ
 sidebar_position: 14
 ---
 
-This is a list compiled of all the most commonly asked questions and answers for the Editor powered by Engine V2 for projects running Engine V1 or V2.
+Engine V1またはV2を実行するプロジェクト向けのEngine V2を搭載したEditorに関する、よくある質問とその回答をまとめたリストです。
 
-## 1. My scene looks brighter/darker in the Editor when it was powered by Engine V1 vs V2
+## 1. Engine V1とV2を搭載したEditorでは、シーンが明るく/暗く見える
 
-### Check Camera settings
+### カメラ設定の確認
 
-- Check **gamma** and **tone mapping** for scene under **Settings -> Rendering**
-- Check **gamma** and **tone mapping** for viewport under **Settings -> Editor**
-- Check **gamma** and **tone mapping** for each `CameraComponent` (**Engine V2 PROJECT ONLY**)
+- **Settings -> Rendering** の下のシーンの **gamma** と **tone mapping** を確認してください。
+- **Settings -> Editor** の下のビューポートの **gamma** と **tone mapping** を確認してください。
+- 各 `CameraComponent` の **gamma** と **tone mapping** を確認してください (**Engine V2 PROJECT ONLY**)。
 
-#### シーン設定 (Scene Settings)
+#### シーン設定
 
 <img src='/img/user-manual/editor/editor-v2/settings-rendering.png' width='400px' />
 
-#### Viewport Settings
+#### ビューポート設定
 
 <img src='/img/user-manual/editor/editor-v2/settings-editor.png' width='400px' />
 
-#### Camera Settings
+#### カメラ設定
 
 <img src='/img/user-manual/editor/editor-v2/camera-settings.png' width='400px' />
 
-### Check Texture sRGB flags
+### テクスチャのsRGBフラグを確認する
 
-- Check if you have any audit fixes **Status Bar -> N audits found**
-  - Fixes can be applied automatically **Status Bar -> N audits found -> Fix Issues**
-  - Conflicts have to be resolved case-by-case:
-        1. Refer to **Console Output** for which textures/texture atlases are affected and where they are used
-        2. Click each warning/error to jump to where the texture/sprite is used
+- **Status Bar -> N audits found** で監査修正があるか確認してください。
+  - 修正は **Status Bar -> N audits found -> Fix Issues** から自動的に適用できます。
+  - 競合はケースバイケースで解決する必要があります。
+        1. 影響を受けるテクスチャ/texture atlases、およびそれらがどこで使用されているかについては、**Console Output** を参照してください。
+        2. 各警告/エラーをクリックして、テクスチャ/spriteが使用されている場所に移動します。
 
 #### Asset Auditor
 
 <video autoplay controls src='/video/asset-auditor.mp4' width='600px' />
 
-## 2. My camera makes objects look brighter/darker in the Editor compared to the Launcher
+## 2. EditorでカメラがオブジェクトをLauncherよりも明るく/暗く見せる
 
-If the camera is created by a script, make sure the **gamma** and **tone mapping** settings are explicitly set on the camera component.
+カメラがスクリプトによって作成されている場合、カメラコンポーネントに **gamma** と **tone mapping** の設定が明示的に設定されていることを確認してください。
