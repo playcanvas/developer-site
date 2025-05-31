@@ -1,46 +1,46 @@
 ---
-title: Using the Engine Standalone
+title: Engineをスタンドアロンで使用する
 sidebar_position: 1
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-It is possible to build applications on the PlayCanvas Engine without using the Editor. Some examples of applications built directly against the Engine are:
+PlayCanvas Engineでアプリケーションを構築する際に、エディタを使用せずに構築することが可能です。Engineを直接使用して構築されたアプリケーションの例をいくつか示します。
 
 * [glTF Viewer](https://playcanvas.com/viewer) \[[GitHub](https://github.com/playcanvas/model-viewer)\]
 * [SuperSplat](https://playcanvas.com/supersplat/editor) \[[GitHub](https://github.com/playcanvas/supersplat)\]
-* ...and, of course, the [PlayCanvas Editor](../../editor) itself!
+* ...そしてもちろん、[PlayCanvas Editor](../../editor)そのものもです！
 
-This page guides you in how to get started.
+このページでは、開始方法を説明します。
 
 :::note
 
-Before you begin, ensure you have [Node.js](https://nodejs.org/) installed.
+始める前に、[Node.js](https://nodejs.org/)がインストールされていることを確認してください。
 
 :::
 
-When setting up your project, there are two main options to consider.
+プロジェクトをセットアップする際には、考慮すべき主要な2つのオプションがあります。
 
-## Option 1: Build Tool and NPM
+## オプション1: ビルドツールとNPM
 
-This is the recommended set up that should suit most developers.
+これは、ほとんどの開発者に適した推奨されるセットアップです。
 
-A build tool can bundle your application into an optimized package that can run on a wide range of browsers. There are many build tools such as [webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org/) and [esbuild](https://esbuild.github.io/), and PlayCanvas will work with all of them. Here, we will use [Vite](https://vitejs.dev/), a popular build tool that aims to provide a faster and leaner development experience for modern web projects.
+ビルドツールは、アプリケーションを幅広いブラウザで実行できる最適化されたパッケージにバンドルできます。[webpack](https://webpack.js.org/)、[Rollup](https://rollupjs.org/)、[esbuild](https://esbuild.github.io/)など、多くのビルドツールがあり、PlayCanvasはそれらすべてで動作します。ここでは、モダンなウェブプロジェクト向けに、より高速で無駄のない開発体験を提供することを目指す人気のビルドツールである[Vite](https://vitejs.dev/)を使用します。
 
-First, select whether you prefer to develop in JavaScript or TypeScript:
+まず、JavaScriptとTypeScriptのどちらで開発するかを選択します。
 
 <Tabs>
   <TabItem value="javascript" label="JavaScript" default>
 
-1. Open a Terminal/Command Prompt, create a folder for your app and `cd` inside it.
-2. Install `playcanvas` and `vite`:
+1. ターミナル/コマンドプロンプトを開き、アプリ用のフォルダを作成してその中に`cd`します。
+2. `playcanvas`と`vite`をインストールします。
 
     ```sh
     npm install playcanvas vite --save-dev
     ```
 
-3. Create an `index.html` and paste this:
+3. `index.html`を作成し、これを貼り付けます。
 
     ```html title="index.html"
     <!DOCTYPE html>
@@ -58,12 +58,13 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     </html>
     ```
 
-4. Create a `main.js` and paste this:
+4. `main.js`を作成し、これを貼り付けます。
 
     ```javascript title="main.js"
     import * as pc from 'playcanvas';
 
     // create an application
+    // アプリケーションを作成します
     const canvas = document.getElementById('application');
     const app = new pc.Application(canvas);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
@@ -71,6 +72,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     app.start();
 
     // create a camera
+    // カメラを作成します
     const camera = new pc.Entity();
     camera.addComponent('camera', {
         clearColor: new pc.Color(0.3, 0.3, 0.7)
@@ -79,12 +81,14 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     app.root.addChild(camera);
 
     // create a light
+    // ライトを作成します
     const light = new pc.Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
+    // ボックスを作成します
     const box = new pc.Entity();
     box.addComponent('model', {
         type: 'box'
@@ -92,36 +96,37 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     app.root.addChild(box);
 
     // rotate the box
+    // ボックスを回転させます
     app.on('update', (dt) => box.rotate(10 * dt, 20 * dt, 30 * dt));
     ```
 
-5. Run the Vite development server:
+5. Vite開発サーバーを実行します。
 
     ```sh
     npx vite
     ```
 
-    This starts a server at `http://localhost:5173`. Visit this URL in your browser and you will see the following:
+    これにより、`http://localhost:5173`でサーバーが起動します。ブラウザでこのURLにアクセスすると、以下が表示されます。
 
     ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
 
     :::tip
 
-    Every time you save your source files, the tab will reload automatically. 
+    ソースファイルを保存するたびに、タブが自動的に再読み込みされます。
 
     :::
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
-1. Open a Terminal/Command Prompt, create a folder for your app and `cd` inside it.
-2. Install `playcanvas` and `vite`:
+1. ターミナル/コマンドプロンプトを開き、アプリ用のフォルダを作成してその中に`cd`します。
+2. `playcanvas`と`vite`をインストールします。
 
     ```sh
     npm install playcanvas vite --save-dev
     ```
 
-3. Create an `index.html` and paste this:
+3. `index.html`を作成し、これを貼り付けます。
 
     ```html title="index.html"
     <!DOCTYPE html>
@@ -139,19 +144,19 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     </html>
     ```
 
-4. Create a `main.ts` and paste this:
+4. `main.ts`を作成し、以下を貼り付けます。
 
     ```typescript title="main.ts"
     import * as pc from 'playcanvas';
 
-    // create an application
+    // アプリケーションを作成
     const canvas = document.getElementById('application') as HTMLCanvasElement;
     const app = new pc.Application(canvas);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
 
-    // create a camera
+    // カメラを作成
     const camera = new pc.Entity();
     camera.addComponent('camera', {
         clearColor: new pc.Color(0.3, 0.3, 0.7)
@@ -159,59 +164,59 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
-    // create a light
+    // ライトを作成
     const light = new pc.Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
-    // create a box
+    // ボックスを作成
     const box = new pc.Entity();
     box.addComponent('model', {
         type: 'box'
     });
     app.root.addChild(box);
 
-    // rotate the box
+    // ボックスを回転
     app.on('update', (dt: number) => box.rotate(10 * dt, 20 * dt, 30 * dt));
     ```
 
-5. Run the Vite development server:
+5. Vite開発サーバーを実行します。
 
     ```sh
     npx vite
     ```
 
-    This starts a server at `http://localhost:5173`. Visit this URL in your browser and you will see the following:
+    これにより、サーバーが`http://localhost:5173`で起動します。ブラウザでこのURLにアクセスすると、以下が表示されます。
 
-    ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
+    ![回転する立方体](/img/user-manual/engine/standalone/spinning-cube.webp)
 
     :::tip
 
-    Every time you save your source files, the tab will reload automatically. 
+    ソースファイルを保存するたびに、タブが自動的にリロードされます。
 
     :::
 
   </TabItem>
 </Tabs>
 
-## Option 2: Import Map and CDN
+## オプション2：インポートマップとCDN
 
-An [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) can resolve module specifiers in JavaScript modules. Consider this import statement:
+[インポートマップ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap)は、JavaScriptモジュール内のモジュール指定子を解決できます。このインポートステートメントを考えてみましょう。
 
 ```javascript
 import * as pc from 'playcanvas';
 ```
 
-An import map can resolve `playcanvas` to a CDN-hosted build of the engine that can be dynamically loaded by the browser. This means that we can skip the build step described in Option 1.
+インポートマップは、「playcanvas」をブラウザによって動的にロードできるCDNでホストされたエンジンのビルドに解決できます。これは、オプション1で説明したビルド手順をスキップできることを意味します。
 
-First, select whether you prefer to develop in JavaScript or TypeScript:
+まず、JavaScriptとTypeScriptのどちらで開発するかを選択します。
 
 <Tabs>
   <TabItem value="javascript" label="JavaScript" default>
 
-1. Open a Terminal/Command Prompt, create a folder for your app and `cd` inside it.
-2. Create an `index.html` and paste this:
+1. Terminal/Command Promptを開き、アプリのフォルダを作成し、その中に`cd`します。
+2. `index.html`を作成し、以下を貼り付けます。
 
     ```html title="index.html"
     <!DOCTYPE html>
@@ -236,19 +241,19 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     </html>
     ```
 
-3. Create a `main.js` and paste this:
+3. `main.js`を作成し、以下を貼り付けます。
 
     ```javascript title="main.js"
     import * as pc from 'playcanvas';
 
-    // create an application
+    // アプリケーションを作成
     const canvas = document.getElementById('application');
     const app = new pc.Application(canvas);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
 
-    // create a camera
+    // カメラを作成
     const camera = new pc.Entity();
     camera.addComponent('camera', {
         clearColor: new pc.Color(0.3, 0.3, 0.7)
@@ -256,38 +261,39 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
-    // create a light
+    // ライトを作成
     const light = new pc.Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
-    // create a box
+    // ボックスを作成
     const box = new pc.Entity();
     box.addComponent('model', {
         type: 'box'
     });
     app.root.addChild(box);
+```
 
-    // rotate the box
+// ボックスを回転させる
     app.on('update', (dt) => box.rotate(10 * dt, 20 * dt, 30 * dt));
     ```
 
-4. Run `serve`:
+4. `serve` を実行します:
 
     ```sh
     npx serve
     ```
 
-    This starts a server at `http://localhost:3000`. Visit this URL in your browser and you will see the following:
+    これにより、`http://localhost:3000` でサーバーが起動します。ブラウザでこのURLにアクセスすると、次の表示が表示されます:
 
-    ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
+    ![回転するキューブ](/img/user-manual/engine/standalone/spinning-cube.webp)
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
-1. Open a Terminal/Command Prompt, create a folder for your app and `cd` inside it.
-2. Create an `index.html` and paste this:
+1. ターミナル/コマンドプロンプトを開き、アプリ用のフォルダーを作成してその中に `cd` します。
+2. `index.html` を作成し、これを貼り付けます:
 
     ```html title="index.html"
     <!DOCTYPE html>
@@ -312,19 +318,19 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     </html>
     ```
 
-3. Create a `main.ts` and paste this:
+3. `main.ts` を作成し、これを貼り付けます:
 
     ```javascript title="main.ts"
     import * as pc from 'playcanvas';
 
-    // create an application
+    // アプリケーションを作成します
     const canvas = document.getElementById('application') as HTMLCanvasElement;
     const app = new pc.Application(canvas);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
 
-    // create a camera
+    // カメラを作成します
     const camera = new pc.Entity();
     camera.addComponent('camera', {
         clearColor: new pc.Color(0.3, 0.3, 0.7)
@@ -332,44 +338,44 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
-    // create a light
+    // ライトを作成します
     const light = new pc.Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
-    // create a box
+    // ボックスを作成します
     const box = new pc.Entity();
     box.addComponent('model', {
         type: 'box'
     });
     app.root.addChild(box);
 
-    // rotate the box
+    // ボックスを回転させます
     app.on('update', (dt: number) => box.rotate(10 * dt, 20 * dt, 30 * dt));
     ```
 
-4. Install `playcanvas` and `typescript`:
+4. `playcanvas` と `typescript` をインストールします:
 
     ```sh
     npm install playcanvas typescript --save-dev
     ```
 
-5. Compile `main.ts` to `main.js`:
+5. `main.ts` を `main.js` にコンパイルします:
 
     ```sh
     npx tsc main.ts --lib esnext,dom --module esnext --moduleResolution node
     ```
 
-6. Run `serve`:
+6. `serve` を実行します:
 
     ```sh
     npx serve
     ```
 
-    This starts a server at `http://localhost:3000`. Visit this URL in your browser and you will see the following:
+    これにより、`http://localhost:3000` でサーバーが起動します。ブラウザでこのURLにアクセスすると、次の表示が表示されます:
 
-    ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
+    ![回転するキューブ](/img/user-manual/engine/standalone/spinning-cube.webp)
 
   </TabItem>
 </Tabs>
