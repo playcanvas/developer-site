@@ -6,12 +6,12 @@ The `<pc-script>` tag is used to define a script.
 
 :::note
 
-* It must be a direct child of a [`<pc-scripts>`](pc-scripts.md) component.
-* The script must have been loaded via the [`<pc-asset>`](pc-asset.md) tag.
+* It must be a direct child of a [`<pc-scripts>`](../pc-scripts) component.
+* The script must have been loaded via the [`<pc-asset>`](../pc-asset) tag.
 
 :::
 
-## Attributes
+## 属性
 
 | 属性 (Attribute) | 説明 |
 | --- | --- |

@@ -6,11 +6,11 @@ The `<pc-scripts>` tag is used to define a scripts component.
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](pc-entity.md).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
 :::
 
-## Attributes
+## 属性
 
 | 属性 (Attribute) | 説明 |
 | --- | --- |

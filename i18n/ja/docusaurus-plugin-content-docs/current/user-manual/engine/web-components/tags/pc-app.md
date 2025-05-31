@@ -10,7 +10,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 :::
 
-## Attributes
+## 属性
 
 <div className="nowrap-first-col">
 

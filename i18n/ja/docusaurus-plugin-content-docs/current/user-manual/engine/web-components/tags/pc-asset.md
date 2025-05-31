@@ -6,24 +6,27 @@ The `<pc-asset>` tag is used to define an asset.
 
 :::note
 
-* It must be a direct child of [`<pc-app>`](pc-app.md).
+* It must be a direct child of [`<pc-app>`](../pc-app).
 
 :::
 
-## Attributes
+## 属性
 
 | 属性 (Attribute) | 説明 |
 | --- | --- |
-| `id` | The ID of the asset. This is used to reference the asset in scripts. |
+| `id` | The ID of the asset. This is used by other tags (such as [`<pc-sky>`](../pc-sky)) to reference this asset. |
+| `lazy` | Valueless attribute. If present, the asset is not loaded until it is first referenced by the scene or explicitly requested via the Engine's Asset API. |
 | `src` | The path to the asset. |
-| `preload` | Valueless attribute. If present, the asset is loaded immediately. |
 | `type` | The type of asset. If not specified, the type is inferred from the file extension. Can be: `audio`, `binary`, `css`, `container`, `gsplat`, `html`, `json`, `script`, `shader`, `text`, `texture`. |
 
 ## 例
 
 ```html
 <pc-app>
-    <pc-asset id="checkerboard" src="assets/textures/checkerboard.png" preload></pc-asset>
+    <!-- Script asset -->
+    <pc-asset src="assets/scripts/animate.mjs"></pc-asset>
+    <!-- GLB asset -->
+    <pc-asset src="assets/models/car.glb" id="car"></pc-asset>
 </pc-app>
 ```
 

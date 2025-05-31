@@ -10,7 +10,7 @@ The `<pc-model>` tag is used to define an entity that instantiates a 3D model fr
 
 :::
 
-## Attributes
+## 属性
 
 All attributes of [`<pc-entity>`](../pc-entity) are also available.
 

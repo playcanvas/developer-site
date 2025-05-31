@@ -10,7 +10,7 @@ The `<pc-light>` tag is used to define a light component.
 
 :::
 
-## Attributes
+## 属性
 
 <div className="nowrap-first-col">
 

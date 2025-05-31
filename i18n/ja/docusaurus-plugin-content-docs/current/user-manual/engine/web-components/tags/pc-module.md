@@ -6,11 +6,11 @@ The `<pc-module>` tag is used to load a WebAssembly module.
 
 :::note
 
-* It must be a direct child of [`<pc-app>`](pc-app.md).
+* It must be a direct child of [`<pc-app>`](../pc-app).
 
 :::
 
-## Attributes
+## 属性
 
 | 属性 (Attribute) | 説明 |
 | --- | --- |

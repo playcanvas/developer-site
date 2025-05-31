@@ -10,7 +10,7 @@ The `<pc-element>` tag is used to define an element component.
 
 :::
 
-## Attributes
+## 属性
 
 <div className="nowrap-first-col">
 

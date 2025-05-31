@@ -12,7 +12,7 @@ The `<pc-rigidbody>` tag is used to define a rigidbody component.
 
 :::
 
-## Attributes
+## 属性
 
 <div className="nowrap-first-col">
 

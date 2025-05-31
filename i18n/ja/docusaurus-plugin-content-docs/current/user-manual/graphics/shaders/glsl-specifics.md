@@ -12,7 +12,7 @@ The following sections outline key aspects of writing GLSL shaders for PlayCanva
 
 :::
 
-### Attributes
+### 属性
 
 Attributes define per-vertex input data. They must be declared using the following syntax:
 

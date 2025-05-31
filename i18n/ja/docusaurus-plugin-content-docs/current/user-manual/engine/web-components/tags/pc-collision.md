@@ -10,7 +10,7 @@ The `<pc-collision>` tag is used to define a collision component.
 
 :::
 
-## Attributes
+## 属性
 
 <div className="nowrap-first-col">
 

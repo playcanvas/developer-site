@@ -6,12 +6,12 @@ The `<pc-sounds>` tag is used to define a sound component.
 
 :::note
 
-* It must be a direct child of a [`<pc-entity>`](pc-entity.md).
-* It can have 0..n [`<pc-sound>`](pc-sound.md) children.
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It can have 0..n [`<pc-sound>`](../pc-sound) children.
 
 :::
 
-## Attributes
+## 属性
 
 | 属性 (Attribute) | 説明 |
 | --- | --- |

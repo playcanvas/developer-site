@@ -10,7 +10,7 @@ The `<pc-camera>` tag is used to define a camera component.
 
 :::
 
-## Attributes
+## 属性
 
 <div className="nowrap-first-col">
 

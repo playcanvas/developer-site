@@ -10,7 +10,7 @@ The `<pc-particles>` tag is used to define a particle system.
 
 :::
 
-## Attributes
+## 属性
 
 | 属性 (Attribute) | 説明 |
 | --- | --- |

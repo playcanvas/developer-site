@@ -10,7 +10,7 @@ The `<pc-entity>` tag is used to define an entity.
 
 :::
 
-## Attributes
+## 属性
 
 | 属性 (Attribute) | 説明 |
 | --- | --- |

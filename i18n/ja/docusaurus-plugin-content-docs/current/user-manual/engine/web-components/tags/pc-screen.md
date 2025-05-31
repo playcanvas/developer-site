@@ -10,7 +10,7 @@ The `<pc-screen>` tag is used to define a screen component.
 
 :::
 
-## Attributes
+## 属性
 
 <div className="nowrap-first-col">
 

@@ -6,11 +6,11 @@ The `<pc-scene>` tag is used to define the scene.
 
 :::note
 
-* It must be a direct child of [`<pc-app>`](pc-app.md).
+* It must be a direct child of [`<pc-app>`](../pc-app).
 
 :::
 
-## Attributes
+## 属性
 
 | 属性 (Attribute) | 説明 |
 | --- | --- |
