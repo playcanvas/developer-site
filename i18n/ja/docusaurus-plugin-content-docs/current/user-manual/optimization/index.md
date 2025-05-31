@@ -1,21 +1,21 @@
 ---
-title: Optimization
+title: 最適化
 sidebar_position: 17
 ---
 
-Optimization is a critical part of developing a PlayCanvas application. It can mean the difference between a great user experience and a terrible one.
+最適化は、PlayCanvasアプリケーション開発の重要な部分です。それは、優れたユーザーエクスペリエンスとひどいユーザーエクスペリエンスの分かれ目となることがあります。
 
 :::tip
 
-Don't wait until a project is near completion before you consider optimization. Be thinking about it from the start. It may meaningfully impact how you design your application.
+プロジェクトが完成に近づくまで最適化を考慮するのを待たないでください。最初から考慮するようにしてください。それはアプリケーションの設計方法に大きな影響を与える可能性があります。
 
 :::
 
-Let's begin by establishing the key goals for optimization and highlight why each goal is important:
+まず、最適化の主要な目標を設定し、それぞれの目標がなぜ重要なのかを強調することから始めましょう。
 
-| Goal | Why it matters |
+| 目標 | なぜ重要か |
 | ---- | -------------- |
-| ⏱️ Minimize load time | Your users have limited patience. If your app does not load quickly, they may give up waiting and go elsewhere. |
-| 🎞️ Maximize frame rate | A high (and stable) frame rate makes for pleasing visuals and low latency response to user input. |
-| 🔋 Minimize CPU and GPU load | Just because your app maintains 60 frames per second does not mean your work is done. Reducing processor load preserves battery power and keeps devices running cool. |
-| 🧠 Minimize memory utilization | Browsers allocate a limited pool of memory to applications. Once this pool is exhausted, the tab will crash and reload. Your users will be upset! |
+| ⏱️ ロード時間の最小化 | ユーザーの忍耐力は限られています。アプリのロードが速くない場合、ユーザーは待つのを諦めて他の場所へ行ってしまうかもしれません。 |
+| 🎞️ フレームレートの最大化 | 高い（そして安定した）フレームレートは、心地よいビジュアルとユーザー入力に対する低遅延の応答をもたらします。 |
+| 🔋 CPUとGPUの負荷の最小化 | アプリが1秒間に60フレームを維持しているからといって、作業が完了したわけではありません。プロセッサーの負荷を減らすことでバッテリー電力を節約し、デバイスを低温に保ちます。 |
+| 🧠 メモリ使用量の最小化 | ブラウザはアプリケーションに割り当てるメモリプールを制限しています。このプールが枯渇すると、タブがクラッシュして再ロードされます。ユーザーは不満に感じるでしょう！ |
