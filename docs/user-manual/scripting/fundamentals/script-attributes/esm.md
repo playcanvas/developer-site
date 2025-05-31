@@ -103,7 +103,7 @@ There are additional numerical constraints that you can set which help the edito
 /** 
  * @attribute
  * @range [0, 10]
- * @precison 0.1
+ * @precision 0.1
  * @step 0.05
  */
 speed = 10
