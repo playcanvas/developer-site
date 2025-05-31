@@ -84,10 +84,10 @@ export class MyScript extends Script {
         // Subscribe to some script lifecycle events
         this.on('enable', () => {
             console.log('script enabled');
-        })
+        });
         this.on('disable', () => {
             console.log('script disabled');
-        })
+        });
         this.once('destroy', () => {
             console.log('script destroyed');
         });
@@ -105,10 +105,10 @@ MyScript.prototype.initialize = function() {
     // Subscribe to some script lifecycle events
     this.on('enable', () => {
         console.log('script enabled');
-    })
+    });
     this.on('disable', () => {
         console.log('script disabled');
-    })
+    });
     this.once('destroy', () => {
         console.log('script destroyed');
     });
