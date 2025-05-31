@@ -14,7 +14,7 @@ title: <pc-camera>
 
 <div className="nowrap-first-col">
 
-| Attribute | Description |
+| 属性 | 説明 |
 | --- | --- |
 | `clear-color` | カメラの背景色。R、G、B、Aの値をスペースで区切ったリスト、16進カラーコード、または[名前付き色](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)として指定できます。指定されていない場合、`0.75 0.75 0.75 1`が使用されます。 |
 | `clear-color-buffer` | 真偽値属性。カメラがカラーバッファをクリアするかどうかを制御します。指定されていない場合、カラーバッファはクリアされます。 |

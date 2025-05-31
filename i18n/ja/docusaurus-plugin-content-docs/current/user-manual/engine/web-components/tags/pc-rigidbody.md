@@ -6,17 +6,17 @@ title: <pc-rigidbody>
 
 :::note
 
-*   [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
-*   [`<pc-collision>`](../pc-collision)コンポーネントの兄弟である必要があります。
-*   ammo.js WebAssembly モジュールは、[`<pc-module>`](../pc-module)タグを介してロードされている必要があります。
+* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-collision>`](../pc-collision)コンポーネントの兄弟である必要があります。
+* ammo.js WebAssembly モジュールは、[`<pc-module>`](../pc-module)タグを介してロードされている必要があります。
 
 :::
 
-## Attributes
+## 属性
 
 <div className="nowrap-first-col">
 
-| Attribute | Description |
+| 属性 | 説明 |
 | --- | --- |
 | `angular-damping` | 剛体の角減衰です。指定しない場合、`0` が使用されます。 |
 | `angular-factor` | 剛体の角係数です。X、Y、Z の値をスペース区切りリストで指定します。指定しない場合、`1 1 1` が使用されます。 |

@@ -14,7 +14,7 @@ title: <pc-particles>
 
 | 属性 | 説明 |
 | --- | --- |
-| `asset` | `json` 型の [\`<pc-asset>\`](../pc-asset) タグの `id` と一致する文字列です。 |
+| `asset` | `json` 型の [`<pc-asset>`](../pc-asset) タグの `id` と一致する文字列です。 |
 
 ## 例
 

@@ -1,12 +1,12 @@
 ---
-タイトル: <pc-collision>
+title: <pc-collision>
 ---
 
 `<pc-collision>`タグは、衝突コンポーネントを定義するために使用されます。
 
-:::注
+:::note
 
-*   [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 
@@ -46,4 +46,4 @@
 
 ## JavaScriptインターフェース
 
-[CollisionComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.CollisionComponentElement.html)を使用して、<pc-collision>要素をプログラムで作成および操作できます。
+[CollisionComponentElement API](https://api.playcanvas.com/classes/EngineWebComponents.CollisionComponentElement.html)を使用して、`<pc-collision>`要素をプログラムで作成および操作できます。

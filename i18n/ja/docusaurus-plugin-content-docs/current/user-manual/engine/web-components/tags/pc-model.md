@@ -6,7 +6,7 @@ title: <pc-model>
 
 :::note
 
-*   [`<pc-scene>`](../pc-scene)または[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-scene>`](../pc-scene)または[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 
