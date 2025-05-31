@@ -1,19 +1,20 @@
 ---
-title: はじめに
+title: 開始
+sidebar_position: 1
 ---
 
-Before you begin, make sure you have [Node.js](https://nodejs.org/) 18 or later installed.
+始める前に、[Node.js](https://nodejs.org/) 18以降がインストールされていることを確認してください。
 
-## Installing from NPM
+## NPMからのインストール
 
-PlayCanvas Web Components is available as a package on [NPM](https://www.npmjs.com/package/@playcanvas/web-components).
-You can install it (and the PlayCanvas Engine) as follows:
+PlayCanvas Web Componentsは、[NPM](https://www.npmjs.com/package/@playcanvas/web-components)でパッケージとして利用できます。
+次のようにインストールできます（PlayCanvas Engineも同様に）：
 
 ```bash
 npm install playcanvas @playcanvas/web-components --save-dev
 ```
 
-Next, in your HTML file, you will need an import map because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency):
+次に、HTMLファイルでインポートマップが必要になります。これは、Web ComponentsがPlayCanvas Engine（外部依存関係）を見つけられるようにするためです。
 
 ```html
 <script type="importmap">
@@ -25,37 +26,37 @@ Next, in your HTML file, you will need an import map because the Web Components 
 </script>
 ```
 
-You can then import the Web Components as follows:
+その後、Web Componentsを次のようにインポートできます。
 
 ```html
 <script type="module" src="/node_modules/@playcanvas/web-components/dist/pwc.mjs"></script>
 ```
 
-You can now incorporate any of the PlayCanvas Web Components elements into your HTML!
+これで、PlayCanvas Web Componentsのいずれかの要素をHTMLに組み込むことができます！
 
-## Using a CDN
+## CDNの使用
 
-Instead of loading the library from a local package, you can instead opt to load it from a CDN (such as jsDelivr). In this case, you would update the import map:
+ライブラリをローカルパッケージからロードする代わりに、CDN（jsDelivrなど）からロードすることを選択できます。この場合、インポートマップを更新します。
 
 ```html
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.4.0/build/playcanvas.mjs"
+            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.6.0/build/playcanvas.mjs"
         }
     }
 </script>
 ```
 
-And the components would now be imported as follows:
+コンポーネントは次のようにインポートされます。
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.1.11/dist/pwc.mjs"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.5/dist/pwc.mjs"></script>
 ```
 
-## Boilerplate HTML
+## ボイラープレートHTML
 
-Let's see how this looks in a minimal boilerplate HTML file:
+最小限のボイラープレートHTMLファイルでどのように見えるか見てみましょう。
 
 ```html
 <!DOCTYPE html>
@@ -67,11 +68,11 @@ Let's see how this looks in a minimal boilerplate HTML file:
         <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.4.0/build/playcanvas.mjs"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.6.0/build/playcanvas.mjs"
                 }
             }
         </script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.1.11/dist/pwc.mjs"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.5/dist/pwc.mjs"></script>
         <style>
             body {
                 margin: 0;
@@ -80,9 +81,9 @@ Let's see how this looks in a minimal boilerplate HTML file:
         </style>
     </head>
     <body>
-        <!-- Your PlayCanvas Web Components elements go here -->
+        <!-- あなたのPlayCanvas Web Components要素はここに配置されます -->
     </body>
 </html>
 ```
 
-You are now ready to start using the PlayCanvas Web Components to build a 3D scene!
+これで、PlayCanvas Web Componentsを使用して3Dシーンを構築する準備ができました！

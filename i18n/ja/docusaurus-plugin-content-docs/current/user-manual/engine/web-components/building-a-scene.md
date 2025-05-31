@@ -1,13 +1,13 @@
 ---
-title: Building a Scene
+title: シーンを構築する
 sidebar_position: 2
 ---
 
-Let's build a simple 3D scene step by step using PlayCanvas Web Components. We'll create a basic scene with a lit sphere.
+PlayCanvas Web Components を使用して、シンプルな3Dシーンをステップバイステップで構築しましょう。ライトが当たった球体のある基本的なシーンを作成します。
 
-## Starting Point
+## 開始点
 
-First, let's add the basic structure of our application to our HTML `body` using the [`<pc-app>`](../tags/pc-app) and [`<pc-scene>`](../tags/pc-scene) elements.
+まず、[`<pc-app>`](../tags/pc-app) および [`<pc-scene>`](../tags/pc-scene) 要素を使用して、アプリケーションの基本構造をHTMLの `body` に追加しましょう。
 
 ```html
 <pc-app>
@@ -16,17 +16,17 @@ First, let's add the basic structure of our application to our HTML `body` using
 </pc-app>
 ```
 
-This creates an empty 3D scene. However, we can't see anything rendered yet. We need a camera and some content.
+これにより、空の3Dシーンが作成されます。しかし、まだ何もレンダリングされたものは見えません。カメラとコンテンツが必要です。
 
 :::note
 
-All `pc-` elements must be closed properly. Self-closing tags (e.g. `<pc-camera />`) are not supported.
+すべての `pc-` 要素は適切に閉じられる必要があります。自己終了タグ（例：`<pc-camera />`）はサポートされていません。
 
 :::
 
-## Adding a Camera
+## カメラを追加する
 
-To view our scene, we need a camera which we can add to our scene using the [`<pc-entity>`](../tags/pc-entity) and [`<pc-camera>`](../tags/pc-camera) elements.
+シーンを表示するには、カメラが必要です。[`<pc-entity>`](../tags/pc-entity) および [`<pc-camera>`](../tags/pc-camera) 要素を使用してシーンにカメラを追加できます。
 
 ```html {3-5}
 <pc-app>
@@ -38,11 +38,11 @@ To view our scene, we need a camera which we can add to our scene using the [`<p
 </pc-app>
 ```
 
-We've added a camera entity positioned 5 units down the positive Z axis. By default, a camera looks down the negative Z axis so our camera is now looking at the origin. At this point, the rendered scene is a solid grey color (the default clear color of a camera).
+正のZ軸方向に5単位離れた位置にカメラエンティティを追加しました。デフォルトでは、カメラは負のZ軸方向を向くため、カメラは現在原点を見ています。この時点では、レンダリングされたシーンは単色の灰色です（カメラのデフォルトのクリアカラー）。
 
-## Adding a Light
+## ライトを追加する
 
-Let's add a directional light to illuminate our scene using the [`<pc-light>`](../tags/pc-light) element.
+[`<pc-light>`](../tags/pc-light) 要素を使用して、シーンを照らすための指向性ライトを追加しましょう。
 
 ```html {6-8}
 <pc-app>
@@ -57,11 +57,11 @@ Let's add a directional light to illuminate our scene using the [`<pc-light>`](.
 </pc-app>
 ```
 
-The light is rotated to shine at an angle, which will create more interesting shading on our objects.
+ライトは角度を付けて回転されており、オブジェクトにより興味深いシェーディングが作成されます。
 
-## Adding an Object
+## オブジェクトを追加する
 
-Now let's add a sphere shape to our scene using the [`<pc-render>`](../tags/pc-render) element.
+[`<pc-render>`](../tags/pc-render) 要素を使用して、シーンに球体を追加しましょう。
 
 ```html {9-11}
 <pc-app>
@@ -79,4 +79,4 @@ Now let's add a sphere shape to our scene using the [`<pc-render>`](../tags/pc-r
 </pc-app>
 ```
 
-You should now see a white sphere in the center of your screen!
+これで、画面の中央に白い球体が表示されているはずです！

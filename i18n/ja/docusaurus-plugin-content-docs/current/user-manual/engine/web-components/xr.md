@@ -1,36 +1,36 @@
 ---
-title: XR Support
+title: XR のサポート
 sidebar_position: 4
 ---
 
-PlayCanvas Web Components make it easy to add Virtual Reality (VR) and Augmented Reality (AR) support to your applications.
+PlayCanvas Web Components を使用すると、アプリケーションに Virtual Reality (VR) および Augmented Reality (AR) のサポートを簡単に追加できます。
 
-## Basic Setup
+## 基本的なセットアップ
 
-To enable XR support, you'll need:
+XR のサポートを有効にするには、以下が必要です。
 
-1. XR-specific scripts (provided by the [Engine NPM package](https://www.npmjs.com/package/playcanvas)).
-2. A camera entity with the appropriate scripts attached.
-3. UI for entering/exiting XR.
+1. XR 専用スクリプト ([Engine NPM package](https://www.npmjs.com/package/playcanvas) で提供)。
+2. 適切なスクリプトがアタッチされたカメラエンティティ。
+3. XR の開始/終了用の UI。
 
-### XR Scripts
+### XR スクリプト
 
-Specify the following scripts using [`<pc-asset>`](../tags/pc-asset) elements:
+以下のスクリプトを[`<pc-asset>`](../tags/pc-asset) 要素を使用して指定します。
 
 ```html
 <pc-asset src="/node_modules/playcanvas/scripts/esm/xr-controllers.mjs"></pc-asset>
 <pc-asset src="/node_modules/playcanvas/scripts/esm/xr-navigation.mjs"></pc-asset>
 ```
 
-* [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-controllers.mjs) - Dynamically downloads and renders XR controller models (GLBs) for any detected XR controllers (including hands).
-* [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-navigation.mjs) - Implements basic teleportation navigation (via point and select actions).
+* [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-controllers.mjs) - 検出された XR コントローラー（手を含む）の XR コントローラーモデル（GLB）を動的にダウンロードし、レンダリングします。
+* [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-navigation.mjs) - 基本的なテレポートナビゲーション（ポイント＆選択アクションによる）を実装します。
 
-### Camera Setup
+### カメラのセットアップ
 
-The XR scripts require the scene's camera to be set up as follows:
+XR スクリプトは、シーンのカメラを次のようにセットアップする必要があります。
 
 ```html
-<!-- Camera (with XR support) -->
+<!-- カメラ（XRサポート付き） -->
 <pc-entity name="camera root">
     <pc-entity name="camera">
         <pc-camera></pc-camera>
@@ -42,16 +42,16 @@ The XR scripts require the scene's camera to be set up as follows:
 </pc-entity>
 ```
 
-### UI for Entering/Exiting XR
+### XR の開始/終了用 UI
 
-Finally, you'll need to add some UI controls to allow the user to enter and exit XR mode. This is a WebXR-specific requirement, where a user gesture is required to activate a XR session. Let's create two simple buttons to trigger either an AR or VR session.
+最後に、ユーザーが XR モードを開始および終了できるように、UI コントロールを追加する必要があります。これは WebXR 固有の要件であり、XR セッションをアクティブ化するにはユーザーのジェスチャーが必要です。AR または VR セッションをトリガーするための2つのシンプルなボタンを作成しましょう。
 
 ```html
-<button id="enterAR">Enter AR</button>
-<button id="enterVR">Enter VR</button>
+<button id="enterAR">ARに入る</button>
+<button id="enterVR">VRに入る</button>
 ```
 
-Let's add event listeners to the buttons to trigger an XR session when the user clicks them.
+ユーザーがボタンをクリックしたときに XR セッションをトリガーするように、ボタンにイベントリスナーを追加しましょう。
 
 ```javascript
 document.addEventListener('DOMContentLoaded', async () => {
@@ -76,8 +76,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-Most of the [Web Component examples](https://playcanvas.github.io/web-components/examples/) have integrated support for XR. Consult their source code to see how it's done.
+ほとんどの [Web Component の例](https://playcanvas.github.io/web-components/examples/) には、XR のサポートが統合されています。それらのソースコードを参照して、どのように行われているかを確認してください。
 
 ## 次のステップ
 
-The PlayCanvas Engine has comprehensive XR support, with a wide range of features and options. For more information, see the [XR documentation](/user-manual/xr).
+PlayCanvas Engine は、幅広い機能とオプションを備えた包括的な XR サポートを提供しています。詳細については、[XR ドキュメント](/user-manual/xr) を参照してください。

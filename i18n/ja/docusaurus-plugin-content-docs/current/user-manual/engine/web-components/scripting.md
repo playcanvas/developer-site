@@ -1,30 +1,30 @@
 ---
-title: Adding Behavior with Scripts
+title: スクリプトで動作を追加する
 sidebar_position: 3
 ---
 
-Scripts add custom behaviors to entities in your PlayCanvas Web Components app.
+スクリプトは、PlayCanvas Web Componentsアプリのエンティティにカスタム動作を追加します。
 
-Let's consider a simple script that rotates an entity over time:
+エンティティを時間とともに回転させるシンプルなスクリプトを考えてみましょう。
 
 ```javascript title="rotate-script.mjs"
 export default class RotateScript {
     update(dt) {
-        // Rotate the entity 90 degrees per second around the world-space Y axis
+        // エンティティをワールド空間のY軸を中心に毎秒90度回転させる
         this.entity.rotate(0, dt * 90, 0);
     }
 }
 ```
 
-## Loading Scripts
+## スクリプトの読み込み
 
-Scripts are loaded via the [`<pc-asset>`](../tags/pc-asset) tag:
+スクリプトは[`<pc-asset>`](../tags/pc-asset)タグを介して読み込まれます。
 
 ```html
 <pc-asset src="path/to/rotate-script.mjs"></pc-asset>
 ```
 
-Then attach it to an entity using [`<pc-scripts>`](../tags/pc-scripts) and [`<pc-script>`](../tags/pc-script):
+次に、[`<pc-scripts>`](../tags/pc-scripts)と[`<pc-script>`](../tags/pc-script)を使用してエンティティにアタッチします。
 
 ```html
 <pc-entity name="spinning cube">
@@ -37,32 +37,32 @@ Then attach it to an entity using [`<pc-scripts>`](../tags/pc-scripts) and [`<pc
 
 :::important
 
-The `name` attribute of `<pc-script>` must be the class name of the script converted to camel case. Camel case is a naming convention where words are concatenated without spaces, and each word after the first starts with an uppercase letter. So `RotateScript` becomes `rotateScript` in this example.
+`<pc-script>`の`name`属性は、スクリプトのクラス名をキャメルケースに変換したものにする必要があります。キャメルケースは、単語をスペースなしで連結し、最初の単語の後に続く各単語が大文字で始まる命名規則です。この例では、`RotateScript`は`rotateScript`になります。
 
 :::
 
-## Passing Data to Scripts with Attributes
+## 属性を使用してスクリプトにデータを渡す
 
-Our rotate script is currently hardcoded to rotate at 90 degrees per second. But what if we want to rotate at a different speed? And what if we want to rotate multiple entities at different speeds? This is where script attributes come in!
+現在の回転スクリプトは、毎秒90度で回転するようにハードコードされています。しかし、異なる速度で回転させたい場合はどうでしょうか？また、複数のエンティティを異なる速度で回転させたい場合はどうでしょうか？ここでスクリプト属性が登場します！
 
-Let's update our script to accept a rotation speed as an attribute:
+回転速度を属性として受け入れるようにスクリプトを更新しましょう。
 
 ```javascript title="rotate-script.mjs" {2-6,10}
 export default class RotateScript {
     /**
-     * The speed of the rotation in degrees per second
+     * 毎秒の回転速度（度単位）
      * @attribute
      */
     speed = 90;
 
     update(dt) {
-        // Rotate the entity `speed` degrees per second around the world-space Y axis
+        // エンティティをワールド空間のY軸を中心に毎秒`speed`度回転させる
         this.entity.rotate(0, dt * this.speed, 0);
     }
 }
 ```
 
-We can now pass configuration to our script using the `attributes` attribute:
+`attributes`属性を使用して、スクリプトに設定を渡せるようになりました。
 
 ```html {4-6}
 <pc-entity name="fast spinning cube">
@@ -77,26 +77,26 @@ We can now pass configuration to our script using the `attributes` attribute:
 
 :::important
 
-The `attributes` attribute takes a JSON string. Because JSON requires properties to be enclosed in double quotes, you should enclose the JSON string in single quotes.
+`attributes`属性はJSON文字列を取ります。JSONはプロパティを二重引用符で囲む必要があるため、JSON文字列は一重引用符で囲む必要があります。
 
 :::
 
-### PlayCanvas-Specific Types for Script Attributes
+### スクリプト属性のためのPlayCanvas固有の型
 
-In addition to standard JavaScript types, you can configure script attributes using special PlayCanvas data types. When passing these values, you must supply them as strings formatted with a prefix followed by the required data. This ensures that the engine correctly interprets the attribute values.
+標準的なJavaScriptの型に加えて、特別なPlayCanvasのデータ型を使用してスクリプト属性を設定できます。これらの値を渡す際には、プレフィックスの後に必要なデータを続けた形式の文字列として提供する必要があります。これにより、エンジンが属性値を正しく解釈することが保証されます。
 
-The expected format for each type is as follows:
+各型に期待される形式は以下の通りです。
 
-| PlayCanvas Data Type | Format Example                           | 説明 |
+| PlayCanvasデータ型 | フォーマット例                           | 説明 |
 | -------------------- | ---------------------------------------- | ----------- |
-| **Asset**            | `asset:your-asset-id`                    | References a `<pc-asset>`. Concatenate `asset:` with the asset's `id` attribute. |
-| **Entity**           | `entity:your-entity-id`                  | References a `<pc-entity>`. Concatenate `entity:` with the entity's `id` attribute. |
-| **Color**            | `color:255,200,100` or `color:255,200,100,255` | Specifies a color. Provide three comma-separated values (RGB) or four values (RGBA) prefixed by `color:`. |
-| **Vec2**             | `vec2:10,20`                             | Defines a two-dimensional vector. Concatenate `vec2:` with two comma-separated numbers. |
-| **Vec3**             | `vec3:10,20,30`                          | Defines a three-dimensional vector. Concatenate `vec3:` with three comma-separated numbers. |
-| **Vec4**             | `vec4:10,20,30,40`                       | Defines a four-dimensional vector. Concatenate `vec4:` with four comma-separated numbers. |
+| **Asset**            | `asset:your-asset-id`                    | `<pc-asset>`を参照します。`asset:`とアセットの`id`属性を連結します。 |
+| **Entity**           | `entity:your-entity-id`                  | `<pc-entity>`を参照します。`entity:`とエンティティの`id`属性を連結します。 |
+| **Color**            | `color:255,200,100` or `color:255,200,100,255` | 色を指定します。`color:`をプレフィックスとして、3つのカンマ区切り値（RGB）または4つの値（RGBA）を提供します。 |
+| **Vec2**             | `vec2:10,20`                             | 2次元ベクトルを定義します。`vec2:`と2つのカンマ区切り数値を連結します。 |
+| **Vec3**             | `vec3:10,20,30`                          | 3次元ベクトルを定義します。`vec3:`と3つのカンマ区切り数値を連結します。 |
+| **Vec4**             | `vec4:10,20,30,40`                       | 4次元ベクトルを定義します。`vec4:`と4つのカンマ区切りの数値を連結します。 |
 
-Example Usage in HTML:
+HTMLでの使用例：
 
 ```html
 <pc-script name="myScript" attributes='{
@@ -106,8 +106,8 @@ Example Usage in HTML:
 }'></pc-script>
 ```
 
-[Read more](/user-manual/scripting/fundamentals/script-attributes) about Script Attributes.
+Script Attributesについての詳細はこちら[Read more](/user-manual/scripting/fundamentals/script-attributes)。
 
-## Using Ready Made Scripts from the Engine
+## Engine付属の既成スクリプトの使用
 
-Before you set about writing your own scripts, check to see whether the functionality you need is already available in the PlayCanvas Engine. The Engine ships with a library of useful scripts that you can use in your app. You can find them on [GitHub](https://github.com/playcanvas/engine/tree/main/scripts/esm) and they are used heavily in the [Web Component Examples](https://playcanvas.github.io/web-components/examples/).
+独自のスクリプトを書き始める前に、必要な機能がPlayCanvas Engineにすでに用意されていないか確認してください。Engineには、アプリで使用できる便利なスクリプトのライブラリが付属しています。それらは[GitHub](https://github.com/playcanvas/engine/tree/main/scripts/esm)で見つけることができ、[Web Component Examples](https://playcanvas.github.io/web-components/examples/)で大いに利用されています。

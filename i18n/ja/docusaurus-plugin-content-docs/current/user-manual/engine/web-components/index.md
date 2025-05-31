@@ -2,6 +2,6 @@
 title: Web Components
 ---
 
-The PlayCanvas Engine Web Components are a set of custom HTML elements that allow you to embed PlayCanvas applications in your HTML pages. They are open source under the MIT license and available on [GitHub](https://github.com/playcanvas/web-components).
+PlayCanvas Engine Web Components は、PlayCanvasアプリケーションをHTMLページに埋め込むことを可能にする、カスタムHTML要素のセットです。これらはMITライセンスの下でオープンソースであり、[GitHub](https://github.com/playcanvas/web-components)で入手可能です。
 
-The Web Components are aimed at developers that are familiar with writing HTML who want a simple way to embed PlayCanvas applications in their HTML pages.
+Web Components は、HTMLの記述に慣れており、PlayCanvasアプリケーションをHTMLページに簡単に埋め込みたいと考えている開発者を対象としています。
