@@ -273,9 +273,8 @@ import * as pc from 'playcanvas';
         type: 'box'
     });
     app.root.addChild(box);
-```
 
-// ボックスを回転させる
+    // ボックスを回転させる
     app.on('update', (dt) => box.rotate(10 * dt, 20 * dt, 30 * dt));
     ```
 
