@@ -229,7 +229,7 @@ import * as pc from 'playcanvas';
             <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas/+esm"
                 }
             }
             </script>
@@ -306,7 +306,7 @@ import * as pc from 'playcanvas';
             <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas/+esm"
                 }
             }
             </script>
