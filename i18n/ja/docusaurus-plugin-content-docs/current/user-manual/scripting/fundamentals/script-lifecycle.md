@@ -6,9 +6,9 @@ sidebar_position: 3
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Every script instance you attach to an Entity in PlayCanvas goes through a well-defined lifecycle. Understanding this lifecycle is crucial because it dictates when your code runs and how it can interact with the rest of your application. PlayCanvas provides specific functions, called lifecycle methods, that you can define in your script. The engine will automatically call these methods at the appropriate times.
+PlayCanvasのEntityにアタッチするすべてのスクリプトインスタンスは、明確に定義されたライフサイクルを経ます。このライフサイクルを理解することは、コードがいつ実行され、アプリケーションの他の部分とどのように相互作用するかを決定するため、非常に重要です。PlayCanvasは、スクリプト内で定義できるライフサイクルメソッドと呼ばれる特定の関数を提供します。エンジンは適切なタイミングでこれらのメソッドを自動的に呼び出します。
 
-Think of it like the stages in an actor's performance: preparing backstage (`initialize`), performing on stage (`update`), and taking a final bow (`destroy` event).
+それは、役者の舞台での段階のようなものです：舞台裏での準備（`initialize`）、舞台での演技（`update`）、そして最後のカーテンコール（`destroy`イベント）。
 
 ```mermaid
 graph TD
@@ -16,7 +16,7 @@ graph TD
     B --> C["<code>update(dt)</code>"]
     C --> D["<code>postUpdate(dt)</code>"]
     D --> E["<code>destroy</code> handler"]
-    %% Loop back to update
+    %% updateに戻る
     D --> C
 
     subgraph Script Lifecycle Sequence
@@ -28,48 +28,48 @@ graph TD
     end
 ```
 
-:::note[Execution Order]
+:::note[実行順序]
 
-It's important to note that if an Entity has multiple scripts attached via its Script Component, the lifecycle methods (`initialize`, `postInitialize`, `update`, `postUpdate`) for those scripts will be called in the order they appear in the component's script list for that particular Entity. This order applies consistently frame-to-frame.
+EntityがScript Componentを介して複数のスクリプトをアタッチしている場合、それらのスクリプトのライフサイクルメソッド（`initialize`、`postInitialize`、`update`、`postUpdate`）は、その特定のEntityのコンポーネントのスクリプトリストに表示される順序で呼び出されることに注意することが重要です。この順序は、フレーム間で一貫して適用されます。
 
 :::
 
-## Lifecycle Methods
+## ライフサイクルメソッド
 
-Let's break down each of the key lifecycle methods.
+各主要なライフサイクルメソッドを詳しく見ていきましょう。
 
 ### `initialize()`
 
-**When it's called:**
+**いつ呼び出されるか：**
 
-* Once per script instance.
-* After the script instance is created and its Entity is enabled.
-* After all its Script Attributes have been parsed and assigned their initial values (either defaults or values set in the Editor).
-* Crucially, it's called after the application has loaded and the entity hierarchy is constructed, but before the first `update` loop or frame is rendered.
-* If an entity or script is disabled when the application starts, the `initialize` method will be called the first time the entity and script are both enabled.
+* スクリプトインスタンスごとに一度。
+* スクリプトインスタンスが作成され、そのEntityが有効になった後。
+* すべてのScript Attributesがパースされ、初期値（デフォルトまたはEditorで設定された値）が割り当てられた後。
+* 重要なことに、アプリケーションがロードされ、エンティティ階層が構築された後、最初の`update`ループまたはフレームがレンダリングされる前に呼び出されます。
+* アプリケーションの開始時にEntityまたはスクリプトが無効になっている場合、`initialize`メソッドは、Entityとスクリプトの両方が初めて有効になったときに呼び出されます。
 
-**Purpose:**
+**目的：**
 
-* This is your script's primary setup or "constructor-like" phase.
-* Ideal for:
-  * Subscribing to script [lifecycle events](#lifecycle-events).
-  * Registering [DOM event](https://developer.mozilla.org/en-US/docs/Web/Events) handlers.
-  * Creating any objects the script needs to manage internally.
-  * Caching references to other Entities in the scene hierarchy.
+* これはスクリプトの主要なセットアップ、または「コンストラクタのような」フェーズです。
+* 理想的な用途：
+  * スクリプトの[ライフサイクルイベント](#lifecycle-events)を購読すること。
+  * [DOMイベント](https://developer.mozilla.org/en-US/docs/Web/Events)ハンドラを登録すること。
+  * スクリプトが内部的に管理する必要があるオブジェクトを作成すること。
+  * シーン階層内の他のEntityへの参照をキャッシュすること。
 
-:::warning[Constructor vs initialize]
+:::warning[コンストラクタ vs initialize]
 
-Avoid using the `constructor` for startup logic — use `initialize()` instead. Execution order of `constructor`s is not guaranteed.
-
-:::
-
-:::info[Cloning Entities]
-
-When an entity is cloned using the `entity.clone()` method, the `initialize` method on its scripts is **not** called immediately. It will only be called when the cloned entity is subsequently added to the scene hierarchy (e.g., using `this.app.root.addChild(clonedEntity)`), provided both the cloned entity and the script instance itself are enabled at that time.
+スタートアップロジックには`constructor`を使用せず、代わりに`initialize()`を使用してください。`constructor`の実行順序は保証されません。
 
 :::
 
-**Example:**
+:::info[エンティティのクローン作成]
+
+`entity.clone()`メソッドを使用してエンティティがクローンされる際、そのスクリプトの`initialize`メソッドは**即座には**呼び出されません。呼び出されるのは、クローンされたエンティティが後でシーン階層に追加されたとき（例：`this.app.root.addChild(clonedEntity)`を使用）、かつ、その時点でクローンされたエンティティとスクリプトインスタンスの両方が有効になっている場合に限られます。
+
+:::
+
+**例：**
 
 <Tabs>
 <TabItem value="esm" label="ESM">
@@ -81,13 +81,13 @@ export class MyScript extends Script {
     static scriptName = 'myScript';
 
     initialize() {
-        // Subscribe to some script lifecycle events
+        // 一部のスクリプトライフサイクルイベントを購読します
         this.on('enable', () => {
             console.log('script enabled');
-        })
+        });
         this.on('disable', () => {
             console.log('script disabled');
-        })
+        });
         this.once('destroy', () => {
             console.log('script destroyed');
         });
@@ -102,13 +102,13 @@ export class MyScript extends Script {
 var MyScript = pc.createScript('myScript');
 
 MyScript.prototype.initialize = function() {
-    // Subscribe to some script lifecycle events
+    // 一部のスクリプトライフサイクルイベントを購読します
     this.on('enable', () => {
         console.log('script enabled');
-    })
+    });
     this.on('disable', () => {
         console.log('script disabled');
-    })
+    });
     this.once('destroy', () => {
         console.log('script destroyed');
     });
@@ -120,17 +120,17 @@ MyScript.prototype.initialize = function() {
 
 ### `postInitialize()`
 
-**When it's called:**
+**呼び出されるタイミング:**
 
-* Once per script instance.
-* Called after the `initialize()` method of all script instances on all enabled Entities in the scene has completed.
+*   スクリプトインスタンスごとに一度。
+*   シーン内の有効なすべてのEntityのすべてのスクリプトインスタンスの`initialize()`メソッドが完了した後に呼び出されます。
 
-**Purpose:**
+**目的:**
 
-* Useful for setup logic that depends on other scripts or Entities having already completed their own `initialize()` phase.
-* Helps avoid race conditions where one script tries to access another script's properties before that other script has set them up.
+*   他のスクリプトやEntityがすでに独自の`initialize()`フェーズを完了していることに依存するセットアップロジックに役立ちます。
+*   あるスクリプトが別のスクリプトのプロパティを、その別のスクリプトがそれらを設定する前にアクセスしようとする競合状態を回避するのに役立ちます。
 
-**Example:**
+**例:**
 
 <Tabs>
 <TabItem value="esm" label="ESM">
@@ -142,16 +142,16 @@ export class MyScript extends Script {
     static scriptName = 'myScript';
 
     initialize() {
-        // Get a reference to another entity in the scene hierarchy
+        // シーン階層内の別のエンティティへの参照を取得します
         this.otherEntity = this.app.root.findByName('OtherEntity');
 
-        // Let's assume that when the initialize method of OtherEntity runs,
-        // it allocates a property called 'material'. At this point, we cannot
-        // be sure that OtherEntity's initialize method has executed...
+        // OtherEntityのinitializeメソッドが実行されると、
+        // 'material'というプロパティが割り当てられると仮定します。この時点では、
+        // OtherEntityのinitializeメソッドが実行されたことを確認できません...
     }
 
     postInitialize() {
-        // But we can be sure it has executed by the time we get to here...
+        // しかし、ここに来るまでには実行されていることを確認できます...
         const material = this.otherEntity.material;
     }
 }
@@ -164,16 +164,16 @@ export class MyScript extends Script {
 var MyScript = pc.createScript('myScript');
 
 MyScript.prototype.initialize = function() {
-    // Get a reference to another entity in the scene hierarchy
+    // シーン階層内の別のエンティティへの参照を取得します
     this.otherEntity = this.app.root.findByName('OtherEntity');
 
-    // Let's assume that when the initialize method of OtherEntity runs,
-    // it allocates a property called 'material'. At this point, we cannot
-    // be sure that OtherEntity's initialize method has executed...
+    // OtherEntityのinitializeメソッドが実行されると、
+    // 'material'というプロパティが割り当てられると仮定します。この時点では、
+    // OtherEntityのinitializeメソッドが実行されたことを確認できません...
 };
 
 MyScript.prototype.postInitialize = function() {
-    // But we can be sure it has executed by the time we get to here...
+    // しかし、ここに来るまでには実行されていることを確認できます...
     const material = this.otherEntity.material;
 };
 ```
@@ -183,30 +183,30 @@ MyScript.prototype.postInitialize = function() {
 
 ### `update(dt)`
 
-**When it's called:**
+**呼び出されるタイミング:**
 
-* Every frame, if the script instance, its Entity, and the Entity's ancestors are all enabled.
+*   スクリプトインスタンス、そのEntity、およびEntityの祖先がすべて有効になっている場合、毎フレーム。
 
-**Parameter:**
+**パラメータ:**
 
-* dt (delta time): A number representing the time in seconds that has passed since the last frame. This is crucial for frame-rate independent logic.
+*   dt (デルタタイム): 前のフレームから経過した時間を秒単位で表す数値です。これはフレームレートに依存しないロジックにとって重要です。
 
-**Purpose:**
+**目的:**
 
-* This is the heart of your script's runtime behavior.
-* Used for:
-  * Handling continuous input.
-  * Updating positions, rotations, and scales for movement or animation.
-  * Checking game conditions (e.g., collisions, win/loss states).
-  * Any logic that needs to be performed repeatedly over time.
+*   これはスクリプトの実行時の動作の中核です。
+*   用途:
+    *   継続的な入力の処理。
+    *   移動やアニメーションのための位置、回転、スケールの更新。
+    *   ゲームの状態の確認（例: 衝突、勝敗状態）。
+    *   時間の経過とともに繰り返し実行する必要があるあらゆるロジック。
 
 :::important
 
-Keep update as efficient as possible, as it runs very frequently. Avoid heavy computations or allocations here if they can be done elsewhere (e.g., in initialize).
+`update`は非常に頻繁に実行されるため、可能な限り効率的に保ってください。重い計算や割り当ては、他の場所（例: initialize）で実行できる場合は、ここで避けるようにしてください。
 
 :::
 
-**Example:**
+**例:**
 
 <Tabs>
 <TabItem value="esm" label="ESM">
@@ -218,7 +218,7 @@ export class Rotator extends Script {
     static scriptName = 'rotator';
 
     update(dt) {
-        // Rotate the entity 10 degrees per second around the world Y axis
+        // エンティティをワールドのY軸を中心に毎秒10度回転させます
         this.entity.rotate(0, 10 * dt, 0);
     }
 }
@@ -231,7 +231,7 @@ export class Rotator extends Script {
 var Rotator = pc.createScript('rotator');
 
 Rotator.prototype.update = function(dt) {
-    // Rotate the entity 10 degrees per second around the world Y axis
+    // エンティティをワールドのY軸を中心に毎秒10度回転させます
     this.entity.rotate(0, 10 * dt, 0);
 };
 ```
@@ -241,21 +241,21 @@ Rotator.prototype.update = function(dt) {
 
 ### `postUpdate(dt)`
 
-**When it's called:**
+**呼び出されるタイミング:**
 
-* Every frame, if the script instance and its Entity are enabled.
-* Called after the `update()` method of all script instances has completed for the current frame.
+*   スクリプトインスタンスとそのEntityが有効になっている場合、毎フレーム。
+*   現在のフレームにおけるすべてのスクリプトインスタンスの`update()`メソッドが完了した後に呼び出されます。
 
-**Parameter:**
+**パラメータ:**
 
-* dt (delta time): Same as in update().
+*   dt (デルタタイム): `update()`と同じです。
 
-**Purpose:**
+**目的:**
 
-* Useful for logic that needs to run after all primary updates have occurred.
-* Common use case: A camera script that follows a player. The player's update moves the player, and the camera's `postUpdate` then adjusts the camera's position to follow the player's new location smoothly.
+* すべての主要な更新が行われた後に実行する必要があるロジックに役立ちます。
+* 一般的な使用例：プレイヤーを追跡するカメラスクリプト。プレイヤーの更新によってプレイヤーが移動し、カメラの`postUpdate`がカメラの位置を調整して、プレイヤーの新しい位置にスムーズに追従します。
 
-**Example:**
+**例:**
 
 <Tabs>
 <TabItem value="esm" label="ESM">
@@ -271,7 +271,7 @@ export class TrackingCamera extends Script {
     }
 
     postUpdate(dt) {
-        // We know the player's position has been updated by now...
+        // ここまでにプレイヤーの位置が更新されていることがわかります...
         const playerPos = this.player.getPosition();
         this.entity.lookAt(playerPos);
     }
@@ -289,7 +289,7 @@ TrackingCamera.prototype.initialize = function() {
 };
 
 TrackingCamera.prototype.postUpdate = function(dt) {
-    // We know the player's position has been updated by now...
+    // ここまでにプレイヤーの位置が更新されていることがわかります...
     const playerPos = this.player.getPosition();
     this.entity.lookAt(playerPos);
 };
@@ -298,118 +298,119 @@ TrackingCamera.prototype.postUpdate = function(dt) {
 </TabItem>
 </Tabs>
 
-## Lifecycle Events
+## ライフサイクルイベント
 
-Beyond the primary lifecycle methods (`initialize`, `postInitialize`, `update`, `postUpdate`), script instances also emit specific events at key moments in their lifecycle. You can subscribe to these events to execute custom logic when these state changes occur. This is particularly useful for managing resources, toggling behaviors, or performing final cleanup.
+主要なライフサイクルメソッド（`initialize`、`postInitialize`、`update`、`postUpdate`）以外にも、スクリプトインスタンスはライフサイクルの重要な瞬間に特定のイベントを発行します。これらのイベントを購読することで、状態が変化したときにカスタムロジックを実行できます。これは、リソースの管理、動作の切り替え、最終的なクリーンアップの実行に特に役立ちます。
 
-The three main lifecycle events are `enable`, `disable`, and `destroy`.
+主な3つのライフサイクルイベントは、`enable`、`disable`、および`destroy`です。
 
-### `enable` Event
+### `enable` イベント
 
-**When it's fired:**
+**いつ発生するか：**
 
-* When a script instance becomes enabled. This can happen in several ways:
-  * When the script is first initialized, if both the script component and its Entity start in an enabled state.
-  * When `this.enabled` is set from false to true programmatically.
-  * When the script's parent Entity (or an ancestor Entity) becomes enabled, and the script itself was already marked as enabled.
+* スクリプトインスタンスが有効になったとき。これはいくつかの方法で発生する可能性があります：
+  * スクリプトコンポーネントとそのEntityの両方が有効な状態で開始する場合、スクリプトが最初に初期化されたとき。
+  * `this.enabled`がプログラムで`false`から`true`に設定されたとき。
+  * スクリプトの親Entity（または祖先のEntity）が有効になり、スクリプト自体がすでに有効としてマークされていたとき。
 
-**Purpose:**
+**目的：**
 
-* To perform actions when a script becomes active after being inactive.
-* Ideal for:
-  * Re-enabling behaviors that were paused (e.g., resuming animations, re-registering event listeners that were removed on disable).
-  * Updating visual states to reflect an active status.
+* スクリプトが非アクティブ状態からアクティブ状態になったときにアクションを実行するため。
+* 以下に最適です：
+  * 一時停止されていた動作を再度有効にする（例：アニメーションの再開、disable時に削除されたイベントリスナーの再登録）。
+  * アクティブなステータスを反映するように視覚的な状態を更新する。
 
-**Subscribing:**
+**購読方法：**
 
 ```javascript
-// Typically inside initialize()...
+// 通常、initialize() 内で...
 this.on('enable', () => {
-    console.log('script enabled');
+    console.log('script enabled'); // スクリプトが有効化されました
 });
 ```
 
 :::tip
 
-If a script starts in an enabled state, the `enable` event fires during the initialization phase. If you need to ensure certain setup from `onEnable` also runs if the script starts enabled, you can call the handler directly in `initialize` after subscribing, guarded by an `if (this.enabled)` check.
+スクリプトが有効な状態で開始する場合、`enable`イベントは初期化フェーズ中に発生します。スクリプトが有効な状態で開始する場合でも、`onEnable`からの特定のセットアップが実行されることを保証する必要がある場合は、購読後に`initialize`内で`if (this.enabled)`チェックで保護しながらハンドラーを直接呼び出すことができます。
 
 :::
 
-### `disable` Event
+### `disable` イベント
 
-**When it's fired:**
+**いつ発生するか：**
 
-* When a script instance becomes disabled. This can occur when:
-  * `this.enabled` is set from `true` to `false` programmatically.
-  * The script's parent Entity (or an ancestor Entity) becomes disabled.
-  * Before the `destroy` event is fired (as a script is implicitly disabled before destruction).
+* スクリプトインスタンスが無効になったとき。これは次の場合に発生する可能性があります：
+  * `this.enabled`がプログラムで`true`から`false`に設定されたとき。
+  * スクリプトの親Entity（または祖先のEntity）が無効になったとき。
+  * `destroy`イベントが発生する前（スクリプトは破棄される前に暗黙的に無効化されるため）。
 
-**Purpose:**
+**目的：**
 
-* To perform actions when a script becomes inactive.
-* Ideal for:
-  * Pausing behaviors (e.g., stopping animations, unregistering event listeners that are only relevant when active).
-  * Releasing temporary resources that are only needed when enabled.
-  * Updating visual states to reflect an inactive status.
+* スクリプトが非アクティブ状態になったときにアクションを実行するため。
+* 以下に最適です：
+  * 動作を一時停止する（例：アニメーションの停止、アクティブなときにのみ関連するイベントリスナーの登録解除）。
+  * 有効なときにのみ必要な一時的なリソースを解放する。
+  * 非アクティブなステータスを反映するように視覚的な状態を更新する。
 
-**Subscribing:**
+**購読方法：**
 
 ```javascript
-// Typically inside initialize()...
+// 通常、initialize() 内で...
 this.on('disable', () => {
-    console.log('script disabled');
+    console.log('script disabled'); // スクリプトが無効化されました
 });
 ```
 
-### `state` Event
+### `state` イベント
 
-**When it's fired:**
+**いつ発生するか：**
 
-* Whenever a script instance's effective running state changes from enabled to disabled, or from disabled to enabled. This can happen due to:
-  * The `this.enabled` property of the script instance being changed programmatically.
-  * The `enabled` state of the parent Script Component changing.
-  * The `enabled` state of the script's parent Entity (or an ancestor Entity) changing.
+* スクリプトインスタンスの実効実行状態が有効から無効へ、または無効から有効へ変化したとき。これは次の場合に発生する可能性があります：
 
-**Purpose:**
+* スクリプトインスタンスの`this.enabled`プロパティがプログラムによって変更された場合。
+  * 親のスクリプトコンポーネントの`enabled`状態が変更された場合。
+  * スクリプトの親エンティティ（または祖先エンティティ）の`enabled`状態が変更された場合。
 
-* Provides a single callback to react to any change in the script's active status.
-* Useful when you need to perform an action regardless of whether the script just became enabled or disabled, often based on the new state itself.
-* Can sometimes simplify logic compared to handling [`enable`](#enable-event) and [`disable`](#disable-event) separately, if the required action is similar in both cases but depends on the resulting state.
+**目的:**
 
-**Parameter:**
+* スクリプトのアクティブ状態のあらゆる変更に反応するための単一のコールバックを提供します。
+* スクリプトが有効になったばかりか無効になったばかりかに関わらず、多くの場合、新しい状態自体に基づいてアクションを実行する必要がある場合に役立ちます。
+* 必要なアクションが両方の場合で類似しているが、結果の状態に依存する場合、[`enable`](#enable-event) と [`disable`](#disable-event) を個別に処理するよりもロジックを簡素化できることがあります。
 
-* enabled (boolean): The new state of the script instance (`true` if it just became enabled, `false` if it just became disabled).
+**パラメーター:**
 
-**Subscribing:**
+* enabled (boolean): スクリプトインスタンスの新しい状態（有効になったばかりの場合は`true`、無効になったばかりの場合は`false`）。
+
+**購読方法:**
 
 ```javascript
-// Typically inside initialize()...
+// 通常、initialize() の内部で...
 this.on('state', (enabled) => {
     console.log(`script ${enabled ? 'enabled' : 'disabled'}`);
 });
 ```
 
-### `destroy` Event
+### `destroy` イベント
 
-**When it's fired:**
+**発火条件:**
 
-* When the script instance is about to be destroyed. This happens when:
-  * Its parent Entity is destroyed.
-  * The Script Component containing this script instance is removed from the Entity.
-  * The script instance itself is explicitly destroyed (e.g., `this.destroy()`, though less common for direct calls).
+* スクリプトインスタンスが破棄されようとしている時。これは以下の状況で発生します:
+  * その親エンティティが破棄された場合。
+  * このスクリプトインスタンスを含むスクリプトコンポーネントがエンティティから削除された場合。
+  * スクリプトインスタンス自体が明示的に破棄された場合（例: `this.destroy()`、ただし直接呼び出すことは稀です）。
 
-**Purpose:**
+**目的:**
 
-* This is your script's final cleanup phase. It's crucial for preventing memory leaks and ensuring a clean shutdown of the script's functionality.
-* Essential for:
-  * Unsubscribing from all events the script subscribed to (e.g., `this.app.off(...)`, `someEntity.off(...)`, `this.off(...)` for its own events).
-  * Releasing any external resources or DOM elements the script might have created or holds references to.
-  * Nullifying references to other objects to help the garbage collector.
+* これはスクリプトの最終クリーンアップフェーズです。メモリリークを防ぎ、スクリプトの機能をクリーンにシャットダウンするために不可欠です。
+* 以下に不可欠です:
+  * スクリプトがサブスクライブしたすべてのイベントから登録解除する（例: `this.app.off(...)`、`someEntity.off(...)`、自身のイベントの場合は`this.off(...)`）。
+  * スクリプトが作成した、または参照を保持している外部リソースやDOM要素を解放する。
+  * ガーベージコレクターを助けるために、他のオブジェクトへの参照をNULLにする。
 
-**Subscribing:**
+**購読方法:**
 
 ```javascript
-// Typically inside initialize()...
+// 通常、initialize() の内部で...
 this.once('destroy', () => {
     console.log('script destroyed');
 });
@@ -417,12 +418,12 @@ this.once('destroy', () => {
 
 :::tip[on vs once]
 
-It's common to use `this.once('destroy', ...)` because the `destroy` handler only needs to run once.
+`destroy`ハンドラーは一度だけ実行される必要があるため、`this.once('destroy', ...)`を使用するのが一般的です。
 
 :::
 
-:::important[unregister event handlers]
+:::important[イベントハンドラーの登録解除]
 
-If your script has used `on` or `once` to register any event handlers, remember to use `off` for those handlers in the `destroy` handler. Otherwise, the garbage collector may not be able to free up memory used by your script.
+スクリプトが`on`または`once`を使用してイベントハンドラーを登録している場合、`destroy`ハンドラーでそれらのハンドラーに`off`を使用することを忘れないでください。そうしないと、ガーベージコレクターがスクリプトによって使用されているメモリを解放できない可能性があります。
 
 :::

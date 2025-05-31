@@ -1,44 +1,44 @@
 ---
-title: Scripting for Editor Users
+title: Editorユーザーのためのスクリプト作成
 sidebar_position: 2
 ---
 
-This section focuses on the Editor-specific features and best practices that will enhance your scripting experience. Whether you're writing your first line of code or you're a seasoned developer, understanding these tools will significantly boost your productivity.
+このセクションでは、スクリプト作成の体験を向上させる、Editor固有の機能とベストプラクティスに焦点を当てています。初めてコードを書く方でも、ベテランの開発者でも、これらのツールを理解することで生産性が大幅に向上するでしょう。
 
-## Why This Section is Important for Editor Users
+## Editorユーザーにとってこのセクションが重要な理由
 
-As an Editor user, you benefit from a tightly integrated development environment. This means:
+Editorユーザーとして、あなたは密接に統合された開発環境の恩恵を受けることができます。これは以下のことを意味します。
 
-* **Direct Asset Management:** Scripts are assets, managed alongside your models, textures, and materials.
-* **Visual Configuration:** Script Attributes allow for easy, code-free customization of script behavior directly in the Inspector.
-* **Rapid Iteration:** Features like Hot Reloading let you see changes in real-time.
-* **Seamless Integration:** The Editor bridges the gap between your code and your scene, making it easy to connect scripts to Entities and Components.
+*   **直接的なアセット管理:** スクリプトはアセットであり、モデル、テクスチャ、マテリアルとともに管理されます。
+*   **ビジュアルな設定:** スクリプトアトリビュートを使用すると、コードを書かずにInspector内で直接スクリプトの動作を簡単にカスタマイズできます。
+*   **迅速なイテレーション:** ホットリロードのような機能により、変更をリアルタイムで確認できます。
+*   **シームレスな統合:** Editorはコードとシーン間のギャップを埋め、スクリプトをエンティティやコンポーネントに簡単に接続できるようにします。
 
-## What You'll Discover Here
+## ここで学べること
 
-This collection of pages will delve into the tools and techniques unique to scripting within the PlayCanvas Editor:
+この一連のページでは、PlayCanvas Editor内でのスクリプト作成に特有のツールとテクニックを詳しく掘り下げていきます。
 
-* [Managing Scripts in the Editor](managing-scripts):
-  * Creating, organizing, and deleting Script Assets in the Asset panel.
-  * Understanding the connection between Script Assets (.js/.mjs files) and Script Components (instances on Entities).
-  * Renaming and moving scripts, and how the Editor handles references.
-* [The Built-in Code Editor](code-editor):
-  * Navigating and using the Editor's integrated code editing interface.
-  * Key features: syntax highlighting, autocompletion (basic), error checking, and search.
-  * Tips for efficient coding directly within PlayCanvas.
-* [Using VS Code with PlayCanvas](vscode-extension):
-  * Setting up and using the official PlayCanvas VS Code Extension.
-  * Benefits: advanced autocompletion, debugging, richer IntelliSense, and project-wide search.
-  * Synchronizing changes between VS Code and the PlayCanvas Editor.
-* Script Attributes in the Editor:
-  * How Script Attributes appear and are managed in the Inspector panel.
-  * Assigning various asset types (Entities, Assets, Materials, etc.) to attributes.
-  * Leveraging arrays and nested attributes for complex configurations.
-* [Script Hot Reloading](hot-reloading):
-  * Understanding how Hot Reloading works and its benefits for rapid iteration.
-  * What gets reloaded and what doesn't (initialize vs. swap).
-  * Tips for writing scripts that work well with Hot Reloading.
+*   [Editorでのスクリプトの管理](./managing-scripts.md):
+    *   アセットパネルでのスクリプトアセットの作成、整理、削除。
+    *   スクリプトアセット（.js/.mjsファイル）とスクリプトコンポーネント（エンティティ上のインスタンス）の間の接続を理解する。
+    *   スクリプトの名前変更と移動、およびEditorが参照を処理する方法。
+*   [組み込みのコードエディタ](./code-editor.md):
+    *   Editorに統合されたコード編集インターフェースの操作と使用。
+    *   主な機能：シンタックスハイライト、オートコンプリート（基本）、エラーチェック、検索。
+    *   PlayCanvas内で直接効率的にコーディングするためのヒント。
+*   [PlayCanvasでVS Codeを使用する](./vscode-extension.md):
+    *   公式PlayCanvas VS Code Extensionのセットアップと使用。
+    *   利点：高度なオートコンプリート、デバッグ、よりリッチなIntelliSense、プロジェクト全体の検索。
+    *   VS CodeとPlayCanvas Editor間の変更の同期。
+*   Editorでのスクリプトアトリビュート:
+    *   Inspectorパネルでのスクリプトアトリビュートの表示と管理方法。
+    *   様々なアセットタイプ（エンティティ、アセット、マテリアルなど）をアトリビュートに割り当てる。
+    *   複雑な設定のために配列とネストされたアトリビュートを活用する。
+*   [スクリプトのホットリロード](./hot-reloading.md):
+    *   ホットリロードの仕組みと、迅速なイテレーションにおけるその利点を理解する。
+    *   何がリロードされ、何がされないか（initializeとswap）。
+    *   ホットリロードと相性の良いスクリプトを作成するためのヒント。
 
-## Unlocking the Editor's Power
+## Editorの力を解き放つ
 
-By familiarizing yourself with these Editor-specific aspects of scripting, you'll be able to work more efficiently and build more complex and robust interactive experiences. Each page linked above will provide detailed information and practical guidance.
+スクリプト作成におけるこれらのEditor固有の側面を習得することで、より効率的に作業し、より複雑で堅牢なインタラクティブな体験を構築できるようになるでしょう。上記の各リンク先ページでは、詳細な情報と実践的なガイダンスが提供されます。

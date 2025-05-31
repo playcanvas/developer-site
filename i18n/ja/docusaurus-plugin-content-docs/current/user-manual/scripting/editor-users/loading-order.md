@@ -1,31 +1,31 @@
 ---
-title: Script Loading Order
-sidebar_position: 5
+title: スクリプトのロード順序
+sidebar_position: 6
 ---
 
 ## ESMスクリプト
 
-ESM Scripts do not have an explicit loading order, and should not be relied upon to load in a specific order. Instead, you should use module import statements to declare dependencies between modules.
+ESMスクリプトには明示的なロード順序がなく、特定の順序でロードされることに依存すべきではありません。代わりに、モジュール間の依存関係を宣言するためにモジュールインポート文を使用する必要があります。
 
-## Classic Scripts
+## クラシック スクリプト
 
-Generally all scripts are loaded at the beginning of your application. The loading order is determined by a setting in your project which you can access from the main Editor menu or Scene Settings:
+一般的に、すべてのスクリプトはアプリケーションの起動時にロードされます。ロード順序は、メインエディターメニューまたはシーン設定からアクセスできるプロジェクトの設定によって決定されます。
 
 ![Loading Order](/img/user-manual/scripting/script-loading-order.jpg)
 
-The loading order panel shows all Classic scripts marked as `preload` and the order that they are loaded and executed in.
+ロード順序パネルには、`preload`とマークされたすべてのクラシック スクリプトと、それらがロードおよび実行される順序が表示されます。
 
 ![Loading Order List](/img/user-manual/scripting/loading-order-list.jpg)
 
-You can click-and-drag to move individual scripts around to edit the order.
+個々のスクリプトをドラッグアンドドロップで移動して、順序を編集できます。
 
-When scripts are first loaded, they are immediately executed. That means that the scripts are first executed in the order that they are loaded. However, the loading order of the script **does not** affect the execution of order of script methods within script component. For example, the `initialize` methods of scripts on the same entity are called in the order that they are listed on the Entity, not the loading order.
+スクリプトが最初にロードされると、即座に実行されます。つまり、スクリプトはロードされた順序で最初に実行されます。ただし、スクリプトのロード順序は、スクリプトコンポーネント内のスクリプトメソッドの実行順序には**影響しません**。たとえば、同じEntity上のスクリプトの`initialize`メソッドは、ロード順序ではなく、Entityにリストされている順序で呼び出されます。
 
 ### プリロード
 
-By default, as with other assets in PlayCanvas, a script asset is marked as `preload`. This means that it will be loaded before the application starts. If you disable preloading on a script, it will not be loaded under normal circumstances. This way, you can include a script in your project but prevent it from loading by unchecking `preload`. You can trigger a non-preloading script to load dynamically by using the regular asset API (see [`AssetRegistry#load`](https://api.playcanvas.com/engine/classes/AssetRegistry.html#load)).
+デフォルトでは、PlayCanvasの他のアセットと同様に、スクリプトアセットは`preload`とマークされます。これは、アプリケーションが起動する前にロードされることを意味します。スクリプトのプリロードを無効にした場合、通常の状況ではロードされません。これにより、スクリプトをプロジェクトに含めつつも、`preload`のチェックを外すことでロードを防ぐことができます。非プリロードスクリプトを動的にロードするには、通常のアセットAPIを使用できます（[`AssetRegistry#load`](https://api.playcanvas.com/engine/classes/AssetRegistry.html#load)を参照）。
 
-スクリプトレジストリへの動的な変更にサブスクライブすることができます：
+スクリプトレジストリへの動的な変更を購読することが可能です：
 
 ```javascript
 this.app.scripts.on('add', (name, scriptType) => {
@@ -33,6 +33,6 @@ this.app.scripts.on('add', (name, scriptType) => {
 });
 ```
 
-### 連結 (Concatenation)
+### 連結
 
-By default, when you publish or export your application, all preloaded Classic scripts are concatenated into a single script file. This optimizes load time by reducing the number of requests that are needed to load all your scripts.
+デフォルトでは、アプリケーションを公開またはエクスポートすると、すべてのプリロードされたクラシック スクリプトが1つのスクリプトファイルに連結されます。これにより、すべてのスクリプトをロードするために必要なリクエスト数を減らすことで、ロード時間を最適化します。

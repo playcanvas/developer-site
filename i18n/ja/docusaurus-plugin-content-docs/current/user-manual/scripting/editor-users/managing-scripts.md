@@ -3,76 +3,77 @@ title: Managing Your Scripts
 sidebar_position: 1
 ---
 
-In the PlayCanvas Editor, your JavaScript code lives in Script Assets. These are `.js` or `.mjs` files stored within your project's Asset panel, just like your models, textures, and materials. Effectively managing these Script Assets is key to an organized and efficient workflow. This page covers how to create, organize, delete, import, and assign scripts using the Editor interface.
+PlayCanvas Editor では、JavaScript コードは Script Asset に格納されます。これらは、モデル、テクスチャ、マテリアルと同様に、プロジェクトの Asset Panel 内に保存される `.js` または `.mjs` ファイルです。これらの Script Asset を効果的に管理することは、整理され効率的なワークフローの鍵となります。このページでは、エディターインターフェースを使用してスクリプトを作成、整理、削除、インポート、および割り当てる方法について説明します。
 
-Key Concepts:
+主な概念:
 
-* **Script Asset:** The `.js` or `.mjs` file containing your script's code. It resides in the Asset Panel.
-* **Script Component:** An instance of one or more Script Assets attached to an Entity. This is what makes your script "run" on that specific Entity.
+*   **Script Asset:** スクリプトのコードを含む `.js` または `.mjs` ファイル。Asset Panel にあります。
+*   **Script Component:** 1つ以上の Script Asset が Entity にアタッチされたインスタンス。これにより、スクリプトがその特定の Entity 上で「実行」されます。
 
-## Creating New Scripts
+## 新しいスクリプトの作成
 
-You can create new Script Assets directly within the Editor:
+エディター内で直接新しい Script Asset を作成できます。
 
-1. Navigate to the Asset Panel.
-2. Choose a Folder (Optional but Recommended): It's good practice to organize your scripts into folders. You can create a new folder by right-clicking in the Asset Panel and selecting New Asset > Folder.
-3. Create the Script:
-    * Right-click within the desired folder (or the root of the Asset Panel).
-    * Select New Asset > Script.  
+1.  Asset Panel に移動します。
+2.  フォルダーの選択（オプションですが推奨）：スクリプトをフォルダーに整理するのは良い習慣です。Asset Panel を右クリックし、New Asset > Folder を選択して新しいフォルダーを作成できます。
+3.  スクリプトの作成：
+    *   目的のフォルダー内（または Asset Panel のルート）で右クリックします。
+    *   New Asset > Script を選択します。
     ![New Script](/img/user-manual/scripting/new-script.png)
-    * In the popup, provide a filename for your new script.
+    *   ポップアップで、新しいスクリプトのファイル名を入力します。
 
-## Importing Scripts
+## スクリプトのインポート
 
-You can bring scripts into your PlayCanvas project from external sources:
+外部ソースから PlayCanvas プロジェクトにスクリプトを取り込むことができます。
 
-* **Importing Scripts from Your Computer:**
-    1. Locate the `.js`/`.mjs` file(s) on your computer's file system.
-    2. Drag the file(s) directly from your file explorer/finder into the desired folder in the PlayCanvas Editor's Asset Panel.
-    3. The Editor will upload and process the script, making it available as a Script Asset.
-* **Importing Scripts from the PlayCanvas Asset Store:**
-    1. Open the [Asset Store](/user-manual/assets/asset-store/) (accessible via a button in the Asset Panel header).
-    2. Browse or apply the SCRIPT filter.
-    3. Once you find a script/package you want, click to view its details and select IMPORT.
-    4. The imported script(s) will appear in your Asset Panel, typically within a new folder named after the Asset Store package. These are now regular Script Assets you can manage and use.
+*   **コンピューターからスクリプトをインポートする：**
+    1.  コンピューターのファイルシステム上で `.js`/.mjs` ファイルを見つけます。
+    2.  ファイルをファイルエクスプローラー/ファインダーから PlayCanvas Editor の Asset Panel 内の目的のフォルダーに直接ドラッグします。
+    3.  エディターがスクリプトをアップロードおよび処理し、Script Asset として利用可能にします。
+*   **PlayCanvas Asset Store からスクリプトをインポートする：**
+    1.  [Asset Store](../../assets/asset-store/index.md) を開きます（Asset Panel ヘッダーのボタンからアクセスできます）。
+    2.  閲覧するか、SCRIPT フィルターを適用します。
+    3.  目的のスクリプト/パッケージを見つけたら、クリックして詳細を表示し、IMPORT を選択します。
+    4.  インポートされたスクリプトは Asset Panel に表示され、通常は Asset Store パッケージの名前が付けられた新しいフォルダー内にあります。これらは、管理および使用できる通常の Script Asset となります。
 
-## Assigning Scripts to Entities (via Script Components)
+## エンティティへのスクリプトの割り当て（Script Component 経由）
 
-A Script Asset itself doesn't do anything until it's attached to an Entity via a Script Component.
+Script Asset 自体は、Script Component を介して Entity にアタッチされるまでは何も実行しません。
 
-1. **Select an Entity:** In the Hierarchy panel, select the Entity you want to add a script to.
-2. **Add a Script Component (if one doesn't exist):**
-    * In the Inspector panel (on the right), click the Add Component button.
-    * Select Script from the list. A new Script Component will be added to the Entity.
-3. **Assign Your Script Asset(s) to the Script Component:**
-    * The Script Component has an edit box (with the text + ADD SCRIPT). Click within the edit box to focus.
-    * A dropdown/search box will appear. Start typing the name of your script, or browse the list, and select it.
+1.  **Entity の選択：** Hierarchy panel で、スクリプトを追加したい Entity を選択します。
+2.  **Script Component の追加（存在しない場合）：**
+    *   Inspector panel（右側）で、Add Component ボタンをクリックします。
+    *   リストから Script を選択します。新しい Script Component が Entity に追加されます。
+3.  **Script Asset を Script Component に割り当てる：**
+    *   Script Component には編集ボックス（「+ ADD SCRIPT」というテキストが表示されています）があります。編集ボックス内をクリックしてフォーカスします。
+    *   ドロップダウン/検索ボックスが表示されます。スクリプトの名前を入力するか、リストを参照して選択します。
     ![Select Script](/img/user-manual/scripting/select-script.png)
-    * You can add multiple Script Assets to a single Script Component on an Entity. They will generally execute their lifecycle methods (like initialize, update) in the order they appear in the "Scripts" array, though dependencies are better managed using postInitialize or events.
+    *   1つの Script Component に複数の Script Asset を追加できます。通常、それらのライフサイクルメソッド（initialize、update など）は「Scripts」配列に表示される順序で実行されますが、依存関係は postInitialize やイベントを使用して管理する方が適切です。
 
-## Organizing Scripts
+## スクリプトの整理
 
-As your project grows, so will your number of scripts. Good organization is crucial:
+プロジェクトが大きくなると、スクリプトの数も増えます。適切な整理が不可欠です。
 
-* **Folders:** Use folders within the Asset Panel to categorize and group your scripts. You can drag-and-drop scripts between folders as necessary.
-* **Naming Conventions:** Stick to consistent and descriptive naming for your script files. This makes them easier to find and understand.
+*   **フォルダー：** Asset Panel 内のフォルダーを使用して、スクリプトを分類およびグループ化します。必要に応じて、フォルダー間でスクリプトをドラッグ＆ドロップできます。
+*   **命名規則：** スクリプトファイルには、一貫性があり説明的な命名規則を適用してください。これにより、見つけやすく、理解しやすくなります。
 
-## Deleting Scripts
+## スクリプトの削除
 
-To delete a Script Asset:
+Script Asset を削除するには：
 
-1. Select the Script Asset in the Asset Panel.
-2. Press the Delete key, or right-click and select Delete.
-3. A confirmation dialog will appear. Click DELETE to confirm.
+1.  Asset Panel で Script Asset を選択します。
+2.  Delete キーを押すか、右クリックして Delete を選択します。
+
+3. 確認ダイアログが表示されます。「DELETE」をクリックして確定します。
 
 :::note
 
-If the Script Asset is currently assigned to any Script Components on Entities in your scenes, deleting the asset will remove it from those components. You may want to delete those components if they are no longer required.
+スクリプトアセットが現在、シーン内のエンティティにあるスクリプトコンポーネントに割り当てられている場合、そのアセットを削除すると、それらのコンポーネントから削除されます。それらのコンポーネントが不要になった場合は、削除することをお勧めします。
 
 :::
 
 :::warning
 
-There is no undo for Asset Deletion so be cautious. Using [version control](/user-manual/editor/version-control/) to regularly set checkpoints is highly recommended to recover accidentally deleted files.
+アセットの削除には元に戻す機能がないため、注意してください。[バージョン管理](../../editor/version-control/index.md)を使用して定期的にチェックポイントを設定することを強くお勧めします。これにより、誤って削除したファイルを回復できます。
 
 :::

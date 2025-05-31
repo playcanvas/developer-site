@@ -1,35 +1,35 @@
 ---
-title: スクリプト属性 (Script Attributes)
-sidebar_position: 4
+title: スクリプト属性
+sidebar_position: 5
 ---
 
-Script Attributes are a powerful feature in PlayCanvas that define the public, configurable interface of your scripts. They allow you to expose specific parameters that can be easily tweaked, either programmatically when instantiating or configuring scripts in code or visually within the [PlayCanvas Editor](/user-manual/editor/). This means you can write a script once, and then easily adjust its behavior and properties for different instances or by different team members.
+スクリプト属性は、PlayCanvasの強力な機能であり、スクリプトのパブリックで設定可能なインターフェースを定義します。これらを使用すると、コードでスクリプトをインスタンス化または設定する際にプログラムで、あるいは[PlayCanvas Editor](../../../editor/index.md)内で視覚的に、簡単に調整できる特定のパラメーターを公開できます。これは、スクリプトを一度書けば、異なるインスタンスや異なるチームメンバーによって、その動作やプロパティを簡単に調整できることを意味します。
 
-## Why Use Script Attributes?
+## スクリプト属性を使用する理由
 
-* **Clear Public Interface:** Attributes formally define which parts of a script are intended to be customized, improving code clarity and maintainability.
-* **Editor Integration (Optional):** When using the PlayCanvas Editor, attributes appear as editable fields in the [Inspector panel](/user-manual/editor/interface/inspector/). This provides a user-friendly interface for artists, designers, or other developers to configure scripts without needing to delve into code.
-* **Programmatic Configuration:** When creating or managing Entities and Script Components via code, you can directly set the initial values for these attributes, allowing for dynamic and flexible setups.
-* **Reusability:** Create generic scripts (e.g., a "Movement" script) and customize their properties (like speed, direction, target) for various Entities, whether through the Editor or in your code.
-* **Collaboration:** Enable team members, including those not primarily focused on coding, to modify gameplay elements, character stats, and visual properties.
-* **Rapid Iteration:** Quickly test different configurations and values, either by adjusting them in the Editor or by modifying initialization parameters in your code.
+*   **明確なパブリックインターフェース:** 属性は、スクリプトのどの部分をカスタマイズすることを意図しているかを正式に定義し、コードの明確性と保守性を向上させます。
+*   **エディタとの統合（オプション）:** PlayCanvas Editorを使用する場合、属性は[Inspector panel](../../../editor/interface/inspector.md)に編集可能なフィールドとして表示されます。これにより、アーティスト、デザイナー、その他の開発者がコードを深く掘り下げることなくスクリプトを設定できる、ユーザーフレンドリーなインターフェースが提供されます。
+*   **プログラムによる設定:** コードを介してエンティティやスクリプトコンポーネントを作成または管理する際に、これらの属性の初期値を直接設定でき、動的で柔軟なセットアップを可能にします。
+*   **再利用性:** 汎用的なスクリプト（例：「Movement」スクリプト）を作成し、Editorまたはコードで、さまざまなエンティティに対してそのプロパティ（速度、方向、ターゲットなど）をカスタマイズできます。
+*   **コラボレーション:** 主にコーディングに集中していないチームメンバーを含む全員が、ゲームプレイ要素、キャラクターのステータス、視覚的プロパティを変更できるようにします。
+*   **迅速なイテレーション:** Editorで調整するか、コード内の初期化パラメーターを変更することにより、異なる構成と値を迅速にテストできます。
 
-## How They Work
+## 動作方法
 
-When you declare an attribute in your script, you are essentially defining a property that can be initialized and modified.
+スクリプト内で属性を宣言すると、本質的に初期化および変更が可能なプロパティを定義することになります。
 
-* **In Code:** You can set the values of these attributes when you add a script to a Script Component or at runtime via script instance properties.
-* **In the Editor:** The PlayCanvas Editor parses your script file and creates corresponding UI controls (like number fields, checkboxes, color pickers, asset pickers, etc.) in the Inspector. These controls allow you to set the values for the attributes on each specific instance of your script.
+*   **コード内:** スクリプトコンポーネントにスクリプトを追加する際、またはスクリプトインスタンスのプロパティを介して実行時に、これらの属性の値を設定できます。
+*   **エディタ内:** PlayCanvas Editorはスクリプトファイルを解析し、Inspectorに（数値フィールド、チェックボックス、カラーピッカー、アセットピッカーなどの）対応するUIコントロールを作成します。これらのコントロールを使用すると、スクリプトの各特定インスタンスの属性値を設定できます。
 
-For example, a `speed` attribute in a rotation script could be exposed. In the Editor, this would appear as a number field. Programmatically, you could set `this.speed = 5;` in an `initialize` method or `entity.script.myScript.speed = 5;` when setting up an entity. This allows you to set different rotation speeds for different spinning objects, all using the same underlying script logic, configured either visually or through code.
+たとえば、回転スクリプトの`speed`属性を公開できます。エディタでは、これは数値フィールドとして表示されます。プログラムでは、`initialize`メソッド内で`this.speed = 5;`を設定したり、エンティティを設定する際に`entity.script.myScript.speed = 5;`を設定したりできます。これにより、異なる回転するオブジェクトに対して異なる回転速度を設定でき、すべて同じ基盤となるスクリプトロジックを使用し、視覚的にまたはコードを介して設定できます。
 
-## Two Systems: ESM and Classic
+## 2つのシステム: ESM と Classic
 
-PlayCanvas has two systems for defining script attributes, corresponding to the two types of scripting methodologies:
+PlayCanvasには、スクリプト属性を定義するための2つのシステムがあり、これは2種類のスクリプト作成方法に対応しています。
 
-1. **[ESM Script Attributes](./esm.md):** Used with modern ES Module (`.mjs`) scripts. Attributes are typically declared using JSDoc comments above class member variables. This is the recommended approach for new projects.
-2. **[Classic Script Attributes](./classic.md):** Used with the older "Classic" script (`.js`) files. Attributes are declared using a specific `MyScript.attributes.add(...)` API.
+1.  **[ESM Script Attributes](./esm.md):** 最新のESモジュール（`.mjs`）スクリプトで使用されます。属性は通常、クラスメンバー変数の上のJSDocコメントを使用して宣言されます。これは新しいプロジェクトに推奨されるアプローチです。
+2.  **[Classic Script Attributes](./classic.md):** 古い「Classic」スクリプト（`.js`）ファイルで使用されます。属性は特定の`MyScript.attributes.add(...)` APIを使用して宣言されます。
 
-While the underlying goal is the same—to define a configurable interface—the syntax and some capabilities differ between the two. Click the links above to learn the specifics for each system.
+根底にある目標は同じである（設定可能なインターフェースを定義すること）一方で、構文や一部の機能は両者で異なります。各システムの詳細については、上記のリンクをクリックしてください。
 
-Understanding and utilizing Script Attributes is key to building flexible, maintainable, and collaboratively-friendly projects in PlayCanvas, whether you are leveraging the visual tools of the Editor or constructing your scenes entirely through code.
+PlayCanvasで柔軟で保守性が高く、共同作業に適したプロジェクトを構築するには、Editorの視覚的ツールを活用する場合でも、完全にコードでシーンを構築する場合でも、スクリプト属性を理解し活用することが重要です。

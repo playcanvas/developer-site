@@ -1,41 +1,41 @@
 ---
-title: VS Code Extension
-sidebar_position: 3
+title: VS Code拡張機能
+sidebar_position: 4
 ---
 
-For developers seeking an enhanced code editing experience with features like source control, GitHub Copilot and a wide range of extensions, integrating Visual Studio Code (VS Code) with PlayCanvas offers a powerful alternative to the built-in Code Editor. To this end, we provide an [open-source](https://github.com/playcanvas/vscode-extension) VS Code Extension.
+ソース管理、GitHub Copilot、幅広い拡張機能といった機能で強化されたコード編集体験を求める開発者にとって、Visual Studio Code (VS Code)をPlayCanvasと統合することは、組み込みのCode Editorに対する強力な代替手段を提供します。この目的のために、当社は[オープンソース](https://github.com/playcanvas/vscode-extension)のVS Code拡張機能を提供しています。
 
-![Live Editing script assets with VS Code extension](/img/user-manual/scripting/vscode-extension.webp)
+![VS Code拡張機能によるスクリプトアセットのライブ編集](/img/user-manual/scripting/vscode-extension.webp)
 
-## Features
+## 機能
 
-* **Real-Time Sync**: Any changes made in VS Code are automatically synced with your PlayCanvas project, ensuring that your team always has access to the latest updates.
-* **Enhanced Code Editing**: Leverage the full power of VS Code's editing features, such as IntelliSense, code snippets, GitHub Copilot and advanced refactoring tools.
-* **Source Control**: Switch branches to work in isolation.
-* **Collaboration**: Collaborate on scripts and shaders with your team, with changes reflected immediately in the PlayCanvas editor. Use the `Pull Latest` command from the context menu to pull latest changes into your VS Code environment.  
-* **Find In Files**: The extension supports searching in project files - use the `PlayCanvas: Search` command to search in a project or `PlayCanvas:Find In Folder` from the context menu to search in a folder.
+*   **リアルタイム同期**: VS Codeで行われた変更は自動的にPlayCanvasプロジェクトと同期され、チームが常に最新の更新にアクセスできるようにします。
+*   **強化されたコード編集**: IntelliSense、コードスニペット、GitHub Copilot、高度なリファクタリングツールなど、VS Codeの編集機能を最大限に活用できます。
+*   **ソース管理**: ブランチを切り替えて、独立して作業できます。
+*   **コラボレーション**: スクリプトやシェーダーをチームと共同で作業し、変更はPlayCanvasエディターに即座に反映されます。コンテキストメニューから`Pull Latest`コマンドを使用して、最新の変更をVS Code環境にプルできます。
+*   **ファイル内検索**: この拡張機能はプロジェクトファイル内の検索をサポートしています。プロジェクト内で検索するには`PlayCanvas: Search`コマンドを使用し、フォルダ内で検索するにはコンテキストメニューから`PlayCanvas:Find In Folder`を使用します。
 
-## Installation
+## インストール
 
-* **Install Visual Studio Code**: [Download  VS Code](https://code.visualstudio.com/download) and install it.
-* **Install the PlayCanvas VS Code Extension**: Search for [the PlayCanvas extension](https://marketplace.visualstudio.com/items?itemName=playcanvas.playcanvas) in the VS Code Marketplace and install it. This extension connects VS Code to your PlayCanvas projects using the PlayCanvas [REST API](/user-manual/api/).
+*   **Visual Studio Codeのインストール**: [VS Codeをダウンロード](https://code.visualstudio.com/download)してインストールします。
+*   **PlayCanvas VS Code拡張機能のインストール**: VS Code Marketplaceで[PlayCanvas拡張機能](https://marketplace.visualstudio.com/items?itemName=playcanvas.playcanvas)を検索してインストールします。この拡張機能は、PlayCanvas [REST API](../../api/index.md)を使用してVS CodeをPlayCanvasプロジェクトに接続します。
 
-### Configuration
+### 設定
 
-* [Generate a new API Key](/user-manual/api/#authorization) and copy it to the clipboard.
-* Open your project in VS Code by opening the Command Palette (`CTRL`+`Shift`+`P`) and typing "PlayCanvas: Add Project".
-* Paste your API token into the input box. This only needs to be done once.
-* Toggle "PlayCanvas: Use Playcanvas Types" to enable or disable PlayCanvas Engine API types for enhanced IntelliSense support. It adds a virtual reference to the type definitions automatically at the top of the source file. The reference will not be uploaded when the script is updated.
+*   新しい[APIキーを生成](../../api/index.md#authorization)し、クリップボードにコピーします。
+*   コマンドパレット（`CTRL`+`Shift`+`P`）を開き、「PlayCanvas: Add Project」と入力して、VS Codeでプロジェクトを開きます。
+*   APIトークンを入力ボックスに貼り付けます。これは一度だけ行う必要があります。
+*   「PlayCanvas: Use Playcanvas Types」を切り替えることで、IntelliSenseサポートを強化するためのPlayCanvas Engine API型を有効または無効にできます。これはソースファイルの先頭に型定義への仮想参照を自動的に追加します。スクリプトが更新されても、この参照はアップロードされません。
 
-## Using the Extension
+## 拡張機能の使用
 
-* **Add Project**: Open your project in VS Code by opening the Command Pallette (`CTRL`+`Shift`+`P`) and typing "PlayCanvas: Add Project".
-* **Edit**: Edit scripts, shaders and other text assets with rich editing support.
-* **Sync**: Save your changes in VS Code; the PlayCanvas extension automatically syncs these changes to the cloud.
-* **Preview and Debug**: Use the [Launch Page](/user-manual/editor/launch-page/) to preview and debug your application as you develop.
+*   **プロジェクトの追加**: コマンドパレット（`CTRL`+`Shift`+`P`）を開き、「PlayCanvas: Add Project」と入力して、VS Codeでプロジェクトを開きます。
+*   **編集**: スクリプト、シェーダー、その他のテキストアセットを豊富な編集サポートで編集します。
+*   **同期**: VS Codeで変更を保存すると、PlayCanvas拡張機能がこれらの変更を自動的にクラウドに同期します。
+*   **プレビューとデバッグ**: 開発中に、[起動ページ](../../editor/launch-page/index.md)を使用してアプリケーションをプレビューおよびデバッグします。
 
 ### デバッグ
 
-The VS Code extension for PlayCanvas does not directly support debugging of scripts running in the browser. However, you can [use browser developer tools](/user-manual/scripting/debugging/) to debug your PlayCanvas scripts in conjunction with VS Code for a powerful debugging experience.
+PlayCanvas用のVS Code拡張機能は、ブラウザで実行されているスクリプトのデバッグを直接サポートしていません。しかし、[ブラウザ開発者ツール](../debugging/index.md)をVS Codeと組み合わせて使用​​することで、強力なデバッグ体験のためにPlayCanvasスクリプトをデバッグすることができます。
 
-Integrating VS Code with PlayCanvas provides a sophisticated environment tailored for advanced development workflows, giving developers the flexibility and tools needed to build complex and high-performance web-based applications.
+VS CodeをPlayCanvasと統合することで、高度な開発ワークフローに合わせた洗練された環境が提供され、開発者は複雑で高性能なウェブベースのアプリケーションを構築するために必要な柔軟性とツールを得られます。
