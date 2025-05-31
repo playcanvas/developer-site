@@ -34,7 +34,7 @@ It's important to note that if an Entity has multiple scripts attached via its S
 
 :::
 
-## Lifecycle Methods
+## Lifecycle Methods {#lifecycle-methods}
 
 Let's break down each of the key lifecycle methods.
 
@@ -298,13 +298,13 @@ TrackingCamera.prototype.postUpdate = function(dt) {
 </TabItem>
 </Tabs>
 
-## Lifecycle Events
+## Lifecycle Events {#lifecycle-events}
 
 Beyond the primary lifecycle methods (`initialize`, `postInitialize`, `update`, `postUpdate`), script instances also emit specific events at key moments in their lifecycle. You can subscribe to these events to execute custom logic when these state changes occur. This is particularly useful for managing resources, toggling behaviors, or performing final cleanup.
 
 The three main lifecycle events are `enable`, `disable`, and `destroy`.
 
-### `enable` Event
+### `enable` Event {#enable-event}
 
 **When it's fired:**
 
@@ -335,7 +335,7 @@ If a script starts in an enabled state, the `enable` event fires during the init
 
 :::
 
-### `disable` Event
+### `disable` Event {#disable-event}
 
 **When it's fired:**
 
@@ -361,7 +361,7 @@ this.on('disable', () => {
 });
 ```
 
-### `state` Event
+### `state` Event {#state-event}
 
 **When it's fired:**
 
@@ -389,7 +389,7 @@ this.on('state', (enabled) => {
 });
 ```
 
-### `destroy` Event
+### `destroy` Event {#destroy-event}
 
 **When it's fired:**
 

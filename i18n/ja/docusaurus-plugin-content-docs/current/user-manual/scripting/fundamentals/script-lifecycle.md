@@ -34,7 +34,7 @@ EntityがScript Componentを介して複数のスクリプトをアタッチし�
 
 :::
 
-## ライフサイクルメソッド
+## ライフサイクルメソッド {#lifecycle-methods}
 
 各主要なライフサイクルメソッドを詳しく見ていきましょう。
 
@@ -298,13 +298,13 @@ TrackingCamera.prototype.postUpdate = function(dt) {
 </TabItem>
 </Tabs>
 
-## ライフサイクルイベント
+## ライフサイクルイベント {#lifecycle-events}
 
 主要なライフサイクルメソッド（`initialize`、`postInitialize`、`update`、`postUpdate`）以外にも、スクリプトインスタンスはライフサイクルの重要な瞬間に特定のイベントを発行します。これらのイベントを購読することで、状態が変化したときにカスタムロジックを実行できます。これは、リソースの管理、動作の切り替え、最終的なクリーンアップの実行に特に役立ちます。
 
 主な3つのライフサイクルイベントは、`enable`、`disable`、および`destroy`です。
 
-### `enable` イベント
+### `enable` イベント {#enable-event}
 
 **いつ発生するか：**
 
@@ -335,7 +335,7 @@ this.on('enable', () => {
 
 :::
 
-### `disable` イベント
+### `disable` イベント {#disable-event}
 
 **いつ発生するか：**
 
@@ -361,7 +361,7 @@ this.on('disable', () => {
 });
 ```
 
-### `state` イベント
+### `state` イベント {#state-event}
 
 **いつ発生するか：**
 
@@ -390,7 +390,7 @@ this.on('state', (enabled) => {
 });
 ```
 
-### `destroy` イベント
+### `destroy` イベント {#destroy-event}
 
 **発火条件:**
 
