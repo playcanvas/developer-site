@@ -33,6 +33,8 @@ WebXRでの開発を開始するためにXRハードウェアは必要ありま�
 
 [WebXR API Emulator](https://chromewebstore.google.com/detail/webxr-api-emulator/mjddjgeghkdijejnciaefnkjmkafnnje) Chrome拡張機能を使用しないでください。これはPlayCanvasと互換性がありません。これがアクティブな場合、PlayCanvasアプリケーションは例外をスローします。
 
+:::
+
 ## WebXRの開始
 
 XRセッションを開始するには、まずサポートと利用可能性を確認する必要があります。その後、ユーザーの操作に応じてセッションを開始できます。
