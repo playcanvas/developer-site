@@ -1,17 +1,17 @@
 ---
-title: 対応プラットフォーム
+title: プラットフォーム
 sidebar_position: 2
 ---
 
-WebXR has specific hardware and software requirements. It utilizes device features such as camera sensors, gyroscope, accelerometer, CPU/GPU, CV techniques, as well as OS-level and browser support.
+WebXR には、特定のハードウェアとソフトウェアの要件があります。カメラセンサー、ジャイロスコープ、加速度計、CPU/GPU、CV技術といったデバイス機能に加え、OSレベルおよびブラウザのサポートも利用します。
 
-While the market is constantly evolving with platform vendors forever improving their software, we try to ensure that PlayCanvas' WebXR support is up to date, supporting the widest range of platforms.
+プラットフォームベンダーが常にソフトウェアを改善し、市場が絶えず進化する中で、PlayCanvas の WebXR サポートが最新の状態に保たれ、最も幅広いプラットフォームをサポートするように努めています。
 
-## Platforms and Capabilities
+## プラットフォームと機能
 
-Below is a list of platforms that PlayCanvas has been tested on:
+以下は、PlayCanvas の動作が確認されているプラットフォームのリストです。
 
-| Platform         | VR | AR  | Capabilities                                                                                                      |
+| プラットフォーム         | VR | AR  | 機能                                                                                                              |
 | ---------------- | -- | --- | ----------------------------------------------------------------------------------------------------------------- |
 | Apple Vision Pro | ✅ | ❌ | Hand Tracking                                                                                                     |
 | Magic Leap       | ✅ | ✅ | Gamepads                                                                                                          |

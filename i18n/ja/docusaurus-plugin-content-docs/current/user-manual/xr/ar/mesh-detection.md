@@ -1,37 +1,37 @@
 ---
-title: Mesh Detection
+title: メッシュ検出
 sidebar_position: 1
 ---
 
-Interaction between real-world and virtual objects is achieved via visual and logical interactions between the two. Mesh detection is an API that provides access to the representation of real-world geometry in the form of meshes. It can be used in a number of ways such as:
+現実世界と仮想オブジェクト間の相互作用は、両者の視覚的および論理的な相互作用によって実現されます。メッシュ検出は、現実世界のジオメトリをメッシュの形式で表現したものにアクセスを提供するAPIです。以下のような多くの方法で使用できます。
 
-* Virtual object physics within a real-world environment
-* Path finding
-* Object placement
-* Occlusion
-* Procedural effects
+*   現実世界の環境内での仮想オブジェクトの物理演算
+*   パスファインディング
+*   オブジェクト配置
+*   オクルージョン
+*   プロシージャルエフェクト
 
-This API provides a list of meshes, their geometry, transformation and semantic labeling.
+このAPIは、メッシュのリスト、そのジオメトリ、変換、およびセマンティックラベリングを提供します。
 
-The underlying system can provide pre-captured data as well as provide real-time reconstruction depending on the underlying system implementation.
+基盤となるシステムは、その実装に応じて、事前にキャプチャされたデータを提供できるだけでなく、リアルタイムの再構築も提供できます。
 
-## Support
+## サポート
 
 ```javascript
 if (app.xr.meshDetection.supported) {
-    // mesh detection is supported
+    // メッシュ検出がサポートされています
 }
 
 app.xr.on('start', () => {
     if (app.xr.meshDetection.available) {
-        // mesh detection is available
+        // メッシュ検出が利用可能です
     }
 });
 ```
 
-## Access
+## アクセス
 
-A feature flag needs to be added to the session start:
+セッション開始時に機能フラグを追加する必要があります。
 
 ```javascript
 app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
@@ -39,19 +39,19 @@ app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
 });
 ```
 
-Meshes are added/removed asynchronously:
+メッシュは非同期で追加/削除されます。
 
 ```javascript
 app.xr.meshDetection.on('add', (xrMesh) => {
-    // a new XrMesh has been added
+    // 新しいXrMeshが追加されました
 
     xrMesh.once('remove', () => {
-        // an XrMesh has been removed
+        // XrMeshが削除されました
     });
 });
 ```
 
-Also, the list of XrMeshes is available:
+また、XrMeshのリストも利用可能です。
 
 ```javascript
 const xrMeshes = app.xr.meshDetection.meshes;
@@ -60,43 +60,43 @@ for (let i = 0; i < xrMeshes.length; i++) {
 }
 ```
 
-## Mesh
+## メッシュ
 
-Each mesh is represented as an instance of XrMesh, which can be added/removed during an active session. It also has data that can be changed during its lifetime.
+各メッシュはXrMeshのインスタンスとして表現され、アクティブなセッション中に追加/削除できます。また、そのライフタイム中に変更可能なデータも持ちます。
 
-You can access the position and rotation (world-space) of an XrMesh:
+XrMeshの位置と回転（ワールド空間）にアクセスできます。
 
 ```javascript
 entity.setPosition(xrMesh.getPosition());
 entity.setRotation(xrMesh.getRotation());
 ```
 
-Each XrMesh has its vertices and indices (in local-space), that can be used to construct a visual mesh. An example below creates a visual mesh for each XrMesh and adds it to the root of the scene:
+各XrMeshは、視覚的なメッシュを構築するために使用できる頂点とインデックス（ローカル空間）を持っています。以下の例は、各XrMeshの視覚的なメッシュを作成し、それをシーンのルートに追加します。
 
 ```javascript
 app.xr.meshDetection.on('add', (xrMesh) => {
-    // geometry data
+    // ジオメトリデータ
     const mesh = new pc.Mesh(app.graphicsDevice);
-    mesh.clear(true, true); // ensure that mesh is created with dynamic buffers
-    mesh.setPositions(xrMesh.vertices); // set vertices
-    mesh.setNormals(pc.calculateNormals(xrMesh.vertices, xrMesh.indices)); // calculate normals
-    mesh.setIndices(xrMesh.indices); // set indices
-    mesh.update(pc.PRIMITIVE_TRIANGLES); // update buffers
+    mesh.clear(true, true); // メッシュが動的バッファで作成されることを確認
+    mesh.setPositions(xrMesh.vertices); // 頂点を設定
+    mesh.setNormals(pc.calculateNormals(xrMesh.vertices, xrMesh.indices)); // 法線を計算
+    mesh.setIndices(xrMesh.indices); // インデックスを設定
+    mesh.update(pc.PRIMITIVE_TRIANGLES); // バッファを更新
 
     const material = new pc.StandardMaterial();
     const meshInstance = new pc.MeshInstance(mesh, material);
 
     const entity = new pc.Entity();
 
-    // add render component
+    // レンダリングコンポーネントを追加
     entity.addComponent('render', {
         meshInstances: [ meshInstance ]
     });
 
-    // add entity to the scene root
+    // エンティティをシーンのルートに追加
     app.root.addChild(entity);
 
-    // clean up after XrMesh is removed
+    // XrMeshが削除された後にクリーンアップ
     xrMesh.once('remove', () => {
         material.destroy();
         mesh.destroy();
@@ -105,19 +105,19 @@ app.xr.meshDetection.on('add', (xrMesh) => {
 });
 ```
 
-## Semantic Label
+## セマンティックラベル
 
-XrMesh can represent various real-world objects and a label can help to identify what it represents using its property `XrMesh.label`.
+XrMeshはさまざまな現実世界のオブジェクトを表すことができ、そのプロパティ`XrMesh.label`を使用して、それが何を表しているかを特定するのに役立ちます。
 
-These labels can be any of: `floor`, `wall`, `door`, `window`, `table`, `screen`, `global mesh`, `other`, and `more`. Here is a [list of semantic labels][1], although this list is not definitive and the platform can report anything it feels fit.
+これらのラベルは、`floor`、`wall`、`door`、`window`、`table`、`screen`、`global mesh`、`other`、`more`のいずれかです。このリストは決定的ではなく、プラットフォームは適切だと判断するあらゆるものを報告できますが、[セマンティックラベルのリスト][1]はこちらにあります。
 
-## Changes
+## 変更
 
-Depending on the underlying system capabilities, the XrMesh geometry can change while an XR session is active. You can subscribe to that event and update a visual mesh accordingly:
+基盤となるシステムの機能に応じて、XRセッションがアクティブな間にXrMeshのジオメトリが変更されることがあります。そのイベントを購読し、それに応じて視覚的なメッシュを更新できます。
 
 ```javascript
 xrMesh.on('change', () => {
-    // vertices, indices and/or label has been changed
+    // 頂点、インデックス、および/またはラベルが変更されました
 });
 ```
 

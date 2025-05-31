@@ -3,35 +3,35 @@ title: VR
 sidebar_position: 21
 ---
 
-![VR View](/img/user-manual/xr/vr-view.png)
+![VRビュー](/img/user-manual/xr/vr-view.png)
 
-PlayCanvas also lets you create Virtual Reality (VR) applications.
+PlayCanvasもバーチャルリアリティ (VR) アプリケーションを作成できます。
 
-## 対応プラットフォーム
+## プラットフォーム
 
-VR capabilities are available across various platforms: desktop (Chrome, Edge), mobile (Chrome, Samsung) and HMDs (Apple Vision Pro, Meta, Magic Leap, Pico).
+VR機能は様々なプラットフォームで利用可能です：デスクトップ (Chrome, Edge)、モバイル (Chrome, Samsung)、HMD (Apple Vision Pro, Meta, Magic Leap, Pico)。
 
 :::warning
 
-Due to an issue in WebKit on Apple Vision Pro, you must currently disable `Anti-Alias` in the Scene Settings of your project.
+Apple Vision ProのWebKitの問題により、現在、プロジェクトのScene Settingsで`Anti-Alias`を無効にする必要があります。
 
 :::
 
-## WebXR VRの始め方
+## WebXR VRの開始
 
-To start a VR session, device support and availability should be checked first. Then, on a user interaction such as a button click or other input, a VR session can be started:
+VRセッションを開始するには、まずデバイスのサポートと利用可能性を確認する必要があります。その後、ボタンのクリックやその他の入力など、ユーザーのインタラクションによってVRセッションを開始できます：
 
 ```javascript
 button.element.on('click', () => {
-    // check if XR is supported and VR is available
+    // XRがサポートされ、VRが利用可能かを確認
     if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_VR)) {
-        // start AR using a camera component
+        // カメラコンポーネントを使用してARを開始
         entity.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
     }
 });
 ```
 
-ユーザーが終了したら、VRモードは次のようにして終了できます。
+ユーザーが終了したら、次の呼び出しによってVRモードを終了できます：
 
 ```javascript
 app.xr.end();
@@ -39,4 +39,4 @@ app.xr.end();
 
 ## スターターキット
 
-PlayCanvas provides a ‘VR Kit’ project to help you and your VR experience get up and running faster. When creating a new project, simply select ‘VR Kit’ from the New Project dialog.
+PlayCanvasは、VRエクスペリエンスをより迅速に立ち上げるのに役立つ「VR Kit」プロジェクトを提供しています。新しいプロジェクトを作成する際、New Project dialogから「VR Kit」を選択するだけです。
