@@ -69,5 +69,7 @@ You can freely mix ESM and Classic scripts within the same project. However, the
 This ensures backward compatibility while allowing modern development practices.
 
 :::warning
+
 Avoid using `import()` inside Classic scripts to load ESM modules. The final paths of bundled modules may change during export, and Classic scripts won’t be able to resolve them correctly.
+
 :::
