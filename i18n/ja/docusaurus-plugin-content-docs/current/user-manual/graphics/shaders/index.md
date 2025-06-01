@@ -1,6 +1,6 @@
 ---
 title: シェーダー
-sidebar_position: 6
+sidebar_position: 5
 ---
 
 3DモデルをPlayCanvasにインポートすると、デフォルトで当社の[Physical Material][1]が使用されます。これは、レンダリングの多くのニーズをカバーできる多用途なマテリアルタイプです。
