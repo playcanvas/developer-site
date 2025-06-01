@@ -1,6 +1,6 @@
 ---
 title: パーティクル
-sidebar_position: 5
+sidebar_position: 8
 ---
 
 PlayCanvasはパーティクルシステムの作成と編集のための包括的なサポートを提供します。

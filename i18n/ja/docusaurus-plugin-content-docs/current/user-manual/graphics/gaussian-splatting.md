@@ -1,6 +1,6 @@
 ---
 title: 3D Gaussian Splatting
-sidebar_position: 3.5
+sidebar_position: 7
 ---
 
 3D Gaussian Splattingは、フォトリアリスティックなボリュメトリック点群をキャプチャしてレンダリングするための比較的新しい技術です。この技術はフォトグラメトリーに依存しているため、高品質なレンダリングシーンを非常に迅速、安価、かつ簡単に生成できます。
@@ -29,7 +29,7 @@ Inriaの[SIGGRAPH 2023の論文](https://repo-sam.inria.fr/fungraph/3d-gaussian-
 
 ![SuperSplat](/img/user-manual/graphics/gaussian-splatting/supersplat.png)
 
-PlayCanvasは、[SuperSplat](https://playcanvas.com/supersplat/editor)という強力な3D Gaussian Splatエディタを提供しています。SuperSplatは、[GitHub](https://github.com/playcanvas/supersplat)でMITライセンスの下でオープンソース化されています。
+PlayCanvasは、[SuperSplat](https://superspl.at/editor)という強力な3D Gaussian Splatエディタを提供しています。SuperSplatは、[GitHub](https://github.com/playcanvas/supersplat)でMITライセンスの下でオープンソース化されています。
 
 ### スプラットのインポート
 
@@ -55,4 +55,3 @@ PLYスプラットファイルをインポートするには：
 1. フォグは効果がありません。
 2. ダイナミックライトは効果がありません。
 3. [Image Based Lighting](../physical-rendering/image-based-lighting)は効果がありません。
-4. スプラットは影を落としません。
