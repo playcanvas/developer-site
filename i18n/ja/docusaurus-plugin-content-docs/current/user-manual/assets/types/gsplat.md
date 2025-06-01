@@ -4,7 +4,7 @@ title: GSplat
 
 GSplatアセットには3D Gaussian Splatデータが含まれています。PlayCanvasは[PLY](https://en.wikipedia.org/wiki/PLY_(file_format))ファイルからのGSplatデータのインポートをサポートしています。
 
-## アセットインスペクター
+## アセットインスペクター {#asset-inspector}
 
 [アセットパネル](/user-manual/editor/interface/assets)でGSplatアセットを選択し、[インスペクター](/user-manual/editor/interface/inspector)で表示できます。
 
