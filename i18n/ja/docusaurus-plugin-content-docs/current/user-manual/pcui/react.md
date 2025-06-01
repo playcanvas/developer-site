@@ -3,7 +3,7 @@ title: React
 sidebar_position: 2
 ---
 
-PCUI components can be used directly in React applications. Import the components from the React package and use them in your `.jsx` files as follows:
+PCUIコンポーネントはReactアプリケーションで直接使用できます。Reactパッケージからコンポーネントをインポートし、`.jsx`ファイルで次のように使用します。
 
 ```jsx
 import * as React from 'react';
@@ -17,19 +17,19 @@ ReactDOM.render(
 );
 ```
 
-This example renders a basic text input component. You can see it in action below:
+この例は基本的なテキスト入力コンポーネントをレンダリングします。以下で動作を確認できます。
 
 <div className='iframe-container'>
     <iframe src="https://playcanvas.github.io/pcui/storybook/iframe?id=components-textinput--main&viewMode=story"></iframe>
 </div>
 
-For more complex implementations, check out the [examples](../examples) section.
+より複雑な実装については、[例](../examples)セクションをご覧ください。
 
 ## Storybook
 
-The [PCUI Storybook](https://playcanvas.github.io/pcui/storybook/) provides an interactive showcase of all available components. You can:
+[PCUI Storybook](https://playcanvas.github.io/pcui/storybook/)は、利用可能なすべてのコンポーネントのインタラクティブなショーケースを提供します。以下を行うことができます。
 
-- Explore each component's properties and behavior
-- Test different configurations in real-time
-- View component documentation
-- Copy example code
+- 各コンポーネントのプロパティと動作を探索する
+- さまざまな設定をリアルタイムでテストする
+- コンポーネントのドキュメントを表示する
+- サンプルコードをコピーする

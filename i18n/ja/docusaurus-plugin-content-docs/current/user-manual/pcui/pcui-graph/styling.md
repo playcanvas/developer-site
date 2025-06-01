@@ -1,9 +1,9 @@
 ---
-title: Styling
+title: スタイリング
 sidebar_position: 5
 ---
 
-You can style your graph by overriding its default style properties. This can be achieved by modifying the defaultStyles passed in as part of an options object to the graph constructor.
+グラフは、デフォルトのスタイルプロパティを上書きすることでスタイリングできます。これは、graphコンストラクターにoptionsオブジェクトの一部として渡されるdefaultStylesを変更することで実現できます。
 
 ```javascript
 const graph = new Graph(schema, {
@@ -15,9 +15,9 @@ const graph = new Graph(schema, {
 })
 ```
 
-The `defaultStyles` object contains styling options for the graphs background as well as node and edge styles. A full list of these overridable properties can be see [here](https://github.com/playcanvas/pcui-graph/blob/main/src/constants.js).
+`defaultStyles`オブジェクトには、グラフの背景のスタイリングオプションのほか、nodeおよびedgeのスタイルが含まれています。これらの上書き可能なプロパティの全リストは、[こちら](https://github.com/playcanvas/pcui-graph/blob/main/src/constants.js)で確認できます。
 
-If you'd like to update the styling of particular node/edge types, you can override any of the node or edge properties given in the `defaultStyles` object by defining them in the schema for a particular node or edge as follows:
+特定のnode/edgeタイプのスタイリングを更新したい場合は、`defaultStyles`オブジェクトで指定されたnodeまたはedgeプロパティを、特定のnodeまたはedgeのschemaで以下のように定義することで上書きできます。
 
 ```javascript
 const schema = {
@@ -27,7 +27,7 @@ const schema = {
         },
         1: {
             name: 'red node'
-            fill: 'red' // Update the background color of any nodes of this type to red
+            fill: 'red' // このタイプのすべてのnodeの背景色を赤に更新します
         },
     }
 };
@@ -35,7 +35,7 @@ const schema = {
 const graph = new Graph(schema, {
     defaultStyles: {
         node: {
-            fill: 'grey' // All other node types will have a grey background
+            fill: 'grey' // その他すべてのnodeタイプは灰色の背景になります
         }
     }
 })

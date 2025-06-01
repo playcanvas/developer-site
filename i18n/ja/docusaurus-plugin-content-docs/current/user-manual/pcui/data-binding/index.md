@@ -1,6 +1,6 @@
 ---
-title: Data Binding
+title: データバインディング
 sidebar_position: 3
 ---
 
-The PCUI library offers a data binding layer that can be used to synchronize data across multiple components. It offers two-way binding to a given observer object, so updates made in a component are reflected in the observer's data and distributed out to all other subscribed components.
+PCUIライブラリは、複数のコンポーネント間でデータを同期するために使用できるデータバインディング層を提供します。これは、指定されたオブザーバーオブジェクトへの双方向バインディングを提供するため、コンポーネントで行われた更新はオブザーバーのデータに反映され、他のすべての購読しているコンポーネントに配布されます。

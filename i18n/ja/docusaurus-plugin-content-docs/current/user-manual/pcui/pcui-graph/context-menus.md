@@ -1,11 +1,11 @@
 ---
-title: Context Menus
+title: コンテキストメニュー
 sidebar_position: 2
 ---
 
-It is possible to create context menus on your graph which display when right clicking various graph items. There are three types of context menus; background, node and edge. You can define a set of actions which will display in each of these menus and each action item in the menu will fire an action event when selected.
+グラフ上の様々なグラフアイテムを右クリックすると表示されるコンテキストメニューを作成できます。コンテキストメニューには、バックグラウンド、ノード、エッジの3種類があります。これらの各メニューに表示するアクションのセットを定義でき、メニュー内の各アクション項目は選択されるとアクションイベントを発生させます。
 
-The background context menu appears when you right click on any blank space in the canvas. This context menu is used to add new nodes to the graph. It can be created by adding a `contextMenuItems` array to the options object passed to the graph constructor:
+バックグラウンドコンテキストメニューは、キャンバスの空白部分を右クリックすると表示されます。このコンテキストメニューは、グラフに新しいノードを追加するために使用されます。グラフコンストラクタに渡されるオプションオブジェクトに `contextMenuItems` 配列を追加することで作成できます。
 
 ```javascript
 const graph = new Graph(schema, {
@@ -34,9 +34,9 @@ const graph = new Graph(schema, {
 })
 ```
 
-The text property defines the display text of the context menu item. The action property tells the graph that this context menu item should fire an `ADD_NODE` action when it is selected. The other properties define the type of node that will be created when this item is selected. The node type references one of the node keys defined in the graphs schema. The attributes object defines the initial values of any editable attributes that exist in that nodes schema. The name attribute will also show up in the header for the node.
+`text` プロパティは、コンテキストメニュー項目の表示テキストを定義します。`action` プロパティは、このコンテキストメニュー項目が選択されたときに `ADD_NODE` アクションを発生させることをグラフに伝えます。その他のプロパティは、この項目が選択されたときに作成されるノードのタイプを定義します。ノードタイプは、グラフのスキーマで定義されているノードキーの1つを参照します。`attributes` オブジェクトは、そのノードのスキーマに存在する編集可能な属性の初期値を定義します。`name` 属性は、ノードのヘッダーにも表示されます。
 
-Context menus can also be added to nodes and edges by including contextMenu properties in their schemas as follows:
+コンテキストメニューは、以下のようにスキーマに `contextMenu` プロパティを含めることで、ノードやエッジにも追加できます。
 
 ```javascript
 const schema = {
@@ -44,8 +44,8 @@ const schema = {
         0: {
             contextMenuItems: [
                 {
-                    text: 'Delete edge', // name of the context menu item
-                    action: Graph.GRAPH_ACTIONS.DELETE_EDGE // action to carry out when item is selected
+                    text: 'Delete edge', // コンテキストメニュー項目の名前
+                    action: Graph.GRAPH_ACTIONS.DELETE_EDGE // 項目が選択されたときに実行するアクション
                 }
             ]
         }
@@ -53,15 +53,15 @@ const schema = {
 };
 ```
 
-Currently node context menus support two actions:
+現在、ノードのコンテキストメニューは2つのアクションをサポートしています。
 
 ``` javascript
-Graph.GRAPH_ACTIONS.DELTE_NODE // Delete the node associated with this context menu.
-Graph.GRAPH_ACTIONS.ADD_EDGE // Add an edge that starts from the node associated with this context menu, selecting another node will complete the edge connection. Selecting the background canvas will cancel adding an edge.
+Graph.GRAPH_ACTIONS.DELTE_NODE // このコンテキストメニューに関連付けられたノードを削除します。
+Graph.GRAPH_ACTIONS.ADD_EDGE // このコンテキストメニューに関連付けられたノードから開始するエッジを追加します。別のノードを選択するとエッジ接続が完了します。バックグラウンドキャンバスを選択すると、エッジの追加がキャンセルされます。
 ```
 
-While edges support their own deletion by adding this action in their context menu:
+一方、エッジは、このアクションをコンテキストメニューに追加することで、自身の削除をサポートします。
 
 ``` javascript
-Graph.GRAPH_ACTIONS.DELETE_EDGE // Delete the edge associated with this context menu.
+Graph.GRAPH_ACTIONS.DELETE_EDGE // このコンテキストメニューに関連付けられたエッジを削除します。
 ```

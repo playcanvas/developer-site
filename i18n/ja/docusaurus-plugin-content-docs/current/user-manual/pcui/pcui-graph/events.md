@@ -3,7 +3,7 @@ title: イベント
 sidebar_position: 3
 ---
 
-After creating a graph, you can register a callback for various events. This is achieved using the graphs [on function](https://api.playcanvas.com/pcui-graph/classes/Graph.html#on). The following events are supported:
+グラフを作成した後、さまざまなイベントのコールバックを登録できます。これは、グラフの[on 関数](https://api.playcanvas.com/pcui-graph/classes/Graph.html#on)を使用して実現されます。以下のイベントがサポートされています。
 
 ```javascript
 import Graph from '@playcanvas/pcui-graph';
@@ -13,77 +13,77 @@ const graph = new Graph(schema);
 
 /*
  * @event
- * @param {object} args.node - The node that was added
+ * @param {object} args.node - 追加されたノード
  */
 graph.on(Graph.GRAPH_ACTIONS.ADD_NODE, ({ node }) => { ... });
 
 /*
  * @event
- * @param {object} args.node - The node that was deleted
- * @param {object} args.edgeData - The edges contained in the graph
- * @param {object} args.edges - The edges that were removed when deleting this node
+ * @param {object} args.node - 削除されたノード
+ * @param {object} args.edgeData - グラフに含まれるエッジ
+ * @param {object} args.edges - このノードを削除したときに削除されたエッジ
  */
 graph.on(Graph.GRAPH_ACTIONS.DELETE_NODE, ({ node, edgeData, edges }) => { ... });
 
 /*
  * @event
- * @param {object} args.node - The node that was selected
- * @param {object} args.prevItem - The previously selected item, either a node or an edge
+ * @param {object} args.node - 選択されたノード
+ * @param {object} args.prevItem - 以前に選択されたアイテム（ノードまたはエッジ）
  */
 graph.on(Graph.GRAPH_ACTIONS.SELECT_NODE, ({ node, prevItem }) => { ... });
 
 /*
  * @event
- * @param {object} args.node - The node that was updated
- * @param {object} args.nodeId - The node id of the node that was updated
+ * @param {object} args.node - 更新されたノード
+ * @param {object} args.nodeId - 更新されたノードのノードID
  */
 graph.on(Graph.GRAPH_ACTIONS.UPDATE_NODE_POSITION, ({ node, nodeId }) => { ... });
 
 /*
  * @event
- * @param {object} args.node - The node that was updated
- * @param {object} args.attribute - The name of the attribute that was updated
- * @param {object} args.attributeKey - The key of the attribute that was updated
+ * @param {object} args.node - 更新されたノード
+ * @param {object} args.attribute - 更新された属性の名前
+ * @param {object} args.attributeKey - 更新された属性のキー
  */
 graph.on(Graph.GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, ({ node, attribute, attributeKey }) => { ... });
 
 /*
  * @event
- * @param {object} args.edge - The edge that was updated
- * @param {object} args.edgeId - The id of the edge that was updated
+ * @param {object} args.edge - 更新されたエッジ
+ * @param {object} args.edgeId - 更新されたエッジのID
  */
 graph.on(Graph.GRAPH_ACTIONS.ADD_EDGE, ({ edge, edgeId }) => { ... });
 
 /*
  * @event
- * @param {object} args.edge - The edge that was updated
- * @param {object} args.edgeId - The id of the edge that was updated
+ * @param {object} args.edge - 更新されたエッジ
+ * @param {object} args.edgeId - 更新されたエッジのID
  */
 graph.on(Graph.GRAPH_ACTIONS.DELETE_EDGE, ({ edge, edgeId }) => { ... });
 
 /*
  * @event
- * @param {object} args.edge - The edge that was selected
- * @param {object} args.prevItem - The previously selected item, either a node or an edge
+ * @param {object} args.edge - 選択されたエッジ
+ * @param {object} args.prevItem - 以前に選択されたアイテム（ノードまたはエッジ）
  */
 graph.on(Graph.GRAPH_ACTIONS.SELECT_EDGE, ({ edge, prevItem }) => { ... });
 
 /*
  * @event
- * @param {object} args.prevItem - The previously selected item, either a node or an edge
+ * @param {object} args.prevItem - 以前に選択されたアイテム（ノードまたはエッジ）
  */
 graph.on(Graph.GRAPH_ACTIONS.DESELECT_ITEM, ({ prevItem }) => { ... });
 
 /*
  * @event
- * @param {number} args.pos.x - The x position of the viewport in relation to the graph
- * @param {number} args.pos.y - The y position of the viewport in relation to the graph
+ * @param {number} args.pos.x - グラフに対するビューポートのX座標
+ * @param {number} args.pos.y - グラフに対するビューポートのY座標
  */
 graph.on(Graph.GRAPH_ACTIONS.UPDATE_TRANSLATE, ({ pos }) => { ... });
 
 /*
  * @event
- * param {number} args.scale - The current scale of the graph
+ * param {number} args.scale - グラフの現在のスケール
  */
 graph.on(Graph.GRAPH_ACTIONS.UPDATE_SCALE, ({ scale }) => { ... });
 ```

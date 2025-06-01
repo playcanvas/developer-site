@@ -3,23 +3,23 @@ title: はじめに
 sidebar_position: 1
 ---
 
-Before you begin, make sure you have [Node.js](https://nodejs.org/) 18 or later installed.
+始める前に、[Node.js](https://nodejs.org/) 18以降がインストールされていることを確認してください。
 
-## Installing from NPM
+## NPMからのインストール
 
-PCUI is available as a package on [NPM](https://www.npmjs.com/package/@playcanvas/pcui). You can install it as follows:
+PCUIは、[NPM](https://www.npmjs.com/package/@playcanvas/pcui)でパッケージとして利用できます。次のようにインストールできます。
 
 ```bash
 npm install @playcanvas/pcui --save-dev
 ```
 
-This will include the entire PCUI library in your project. The various parts of the library will be available to import from that package at the following locations:
+これにより、PCUIライブラリ全体がプロジェクトに含まれます。ライブラリの各部分は、そのパッケージから以下の場所でインポートできます。
 
-- Observers: `@playcanvas/observer`
-- ES Module Components: `@playcanvas/pcui`
-- React Components: `@playcanvas/pcui/react`
+-   オブザーバー: `@playcanvas/observer`
+-   ESモジュールコンポーネント: `@playcanvas/pcui`
+-   Reactコンポーネント: `@playcanvas/pcui/react`
 
-You can import the ES Module components into your own `.js` files and use them as follows:
+ESモジュールコンポーネントを独自の`.js`ファイルにインポートして、次のように使用できます。
 
 ```javascript
 import { Button } from '@playcanvas/pcui';
@@ -32,12 +32,12 @@ const button = new Button({
 document.body.appendChild(button.dom);
 ```
 
-This will result in your first component being appended to your document body!
+これにより、最初のコンポーネントがドキュメントのbodyに追加されます！
 
 <div className='iframe-container'>
     <iframe src="https://playcanvas.github.io/pcui/storybook/iframe?id=components-button--text&viewMode=story"></iframe>
 </div>
 
-## API リファレンス
+## APIリファレンス
 
-The [API reference](https://api.playcanvas.com/pcui/) is a list of all of PCUI's class components and their properties. It is automatically generated from the source code.
+この[APIリファレンス](https://api.playcanvas.com/pcui/)は、PCUIのすべてのクラスコンポーネントとそのプロパティのリストです。これはソースコードから自動的に生成されます。
