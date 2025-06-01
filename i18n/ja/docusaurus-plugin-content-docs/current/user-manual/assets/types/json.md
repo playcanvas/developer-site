@@ -2,36 +2,36 @@
 title: JSON
 ---
 
-[JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
+[JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) は、人間が読み書きしやすく、機械が解析および生成しやすい、軽量なデータ交換フォーマットです。
 
-In PlayCanvas, JSON assets are used to store various types of structured data. Some example use cases are:
+PlayCanvasでは、JSONアセットは様々な種類の構造化データを保存するために使用されます。いくつかの使用例を挙げます。
 
-- Configuration files
-- Data for procedural generation
-- Storing game settings
-- Level design data
+- 設定ファイル
+- プロシージャル生成用データ
+- ゲーム設定の保存
+- レベルデザインデータ
 
-## Accessing JSON Data in Scripts
+## スクリプトでのJSONデータへのアクセス
 
-To access data from a JSON asset in a script:
+スクリプト内でJSONアセットのデータにアクセスするには：
 
-1. Add the JSON asset to the script as an attribute.
-2. Access the JSON asset's resource which is the object parsed from the JSON data.
+1. JSONアセットを属性としてスクリプトに追加します。
+2. JSONデータから解析されたオブジェクトであるJSONアセットのリソースにアクセスします。
 
-例
+例：
 
 ```javascript
 var JsonScript = pc.createScript('jsonScript');
 
-// Define an attribute to hold the JSON asset
+// JSONアセットを保持するための属性を定義
 JsonScript.attributes.add('jsonAsset', { type: 'asset', assetType: 'json' });
 
 JsonScript.prototype.initialize = function () {
     if (this.jsonAsset) {
-        // Get the JSON asset's resource (an object)
-        var jsonData = this.jsonAsset.resource;
+        // JSONアセットのリソース（オブジェクト）を取得
+        const jsonData = this.jsonAsset.resource;
 
-        // Example: Accessing data from the JSON object
+        // 例：JSONオブジェクトからデータにアクセス
         if (jsonData.someDataField) {
             console.log("Data from JSON:", jsonData.someDataField);
         }

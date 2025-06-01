@@ -2,9 +2,9 @@
 title: Render
 ---
 
-The Render Asset type in PlayCanvas is a crucial component for defining the appearance of 3D models in the scene. It involves mesh data and materials that dictate how objects are rendered in the 3D environment.
+PlayCanvas における Render Asset タイプは、シーン内の 3D モデルの外観を定義するための重要なコンポーネントです。これには、3D 環境でオブジェクトがどのようにレンダリングされるかを決定するメッシュデータとマテリアルが含まれます。
 
-Render assets are primarily used for:
+Render Asset は主に以下の目的で使用されます:
 
-- Defining the shape and structure of 3D models.
-- Applying materials to models.
+- 3Dモデルの形状と構造を定義すること。
+- モデルにマテリアルを適用すること。

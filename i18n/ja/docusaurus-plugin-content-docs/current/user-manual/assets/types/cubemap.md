@@ -1,5 +1,5 @@
 ---
-title: キューブマップ (Cubemap)
+title: Cubemap
 ---
 
 キューブマップ (Cubemap) はTextureアセットの一種で、1つのキューブのそれぞれの面を表す6つのTextureアセットから構成されます。通常は以下の2つの用途があります。
