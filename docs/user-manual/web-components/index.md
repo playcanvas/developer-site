@@ -7,7 +7,7 @@ The PlayCanvas Engine Web Components are a powerful set of custom HTML elements 
 
 ## What Are Web Components?
 
-[Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) are reusable custom HTML elements that encapsulate complex functionality behind a simple, declarative interface. PlayCanvas Web Components wrap the full power of the [PlayCanvas Engine](..\engine\index.md) in easy-to-use HTML tags, making 3D development accessible to web developers of all skill levels.
+[Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) are reusable custom HTML elements that encapsulate complex functionality behind a simple, declarative interface. PlayCanvas Web Components wrap the full power of the [PlayCanvas Engine](../engine/index.md) in easy-to-use HTML tags, making 3D development accessible to web developers of all skill levels.
 
 ```html
 <!-- Create a 3D scene with just HTML -->
