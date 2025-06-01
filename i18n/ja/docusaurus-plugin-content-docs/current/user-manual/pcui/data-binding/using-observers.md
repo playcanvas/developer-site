@@ -1,19 +1,19 @@
 ---
-title: Using Observers
+title: オブザーバーの使用
 sidebar_position: 1
 ---
 
-A simple use case is shown below.
+簡単なユースケースを以下に示します。
 
 <div className='iframe-container'>
     <iframe src="https://playcanvas.github.io/pcui/storybook/iframe?id=examples-observer--main&viewMode=story"></iframe>
 </div>
 
-In this example, the created label will start with `Hello World` as its text value. When a user enters a value into the text input, the label will be updated with the new value.
+この例では、作成されたラベルはテキスト値として`Hello World`で始まります。ユーザーがテキスト入力に値を入力すると、ラベルは新しい値で更新されます。
 
-### 使い方
+### 使用方法
 
-First import the components, binding classes and PCUI styles.
+まず、コンポーネント、バインディングクラス、PCUIスタイルをインポートします。
 
 ```javascript
 import { Observer } from '@playcanvas/observer';
@@ -21,7 +21,7 @@ import { Label, TextInput, BindingObserversToElement, BindingElementToObservers 
 import '@playcanvas/pcui/styles';
 ```
 
-Create a new observer for an object which contains a text string.
+テキスト文字列を含むオブジェクトの新しいオブザーバーを作成します。
 
 ```javascript
 const observer = new Observer({
@@ -29,7 +29,7 @@ const observer = new Observer({
 });
 ```
 
-Create a label which will listen to updates from the observer.
+オブザーバーからの更新をリッスンするラベルを作成します。
 
 ```javascript
 const label = new Label({
@@ -37,13 +37,13 @@ const label = new Label({
 });
 ```
 
-Link the observer to the label, telling it to use the text variable as its value.
+オブザーバーをラベルにリンクし、text変数をその値として使用するよう指示します。
 
 ```javascript
 label.link(observer, 'text');
 ```
 
-Create a text input which will send updates to the observer.
+オブザーバーに更新を送信するテキスト入力を作成します。
 
 ```javascript
 const textInput = new TextInput({
@@ -51,7 +51,7 @@ const textInput = new TextInput({
 });
 ```
 
-Link the observer to the label, telling it to set the text variable on change.
+オブザーバーをラベルにリンクし、変更時にtext変数を設定するよう指示します。
 
 ```javascript
 textInput.link(observer, 'text');

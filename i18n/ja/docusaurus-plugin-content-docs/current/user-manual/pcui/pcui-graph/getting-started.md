@@ -3,9 +3,9 @@ title: はじめに
 sidebar_position: 1
 ---
 
-## Installing from NPM
+## NPMからのインストール
 
-PCUI Graph is available as a package on [NPM](https://www.npmjs.com/package/@playcanvas/pcui-graph). You can install it as follows:
+PCUI Graphは、[NPM](https://www.npmjs.com/package/@playcanvas/pcui-graph)でパッケージとして利用可能です。次のようにインストールできます:
 
 ```bash
 npm install @playcanvas/pcui-graph --save-dev
@@ -13,21 +13,21 @@ npm install @playcanvas/pcui-graph --save-dev
 
 :::note
 
-It is assumed you already have the `@playcanvas/pcui` package installed in your project.
+プロジェクトに `@playcanvas/pcui` パッケージがすでにインストールされていることを前提としています。
 
 :::
 
-## Importing the Graph Component
+## Graphコンポーネントのインポート
 
-You can import the `Graph` component as follows:
+`Graph`コンポーネントは次のようにインポートできます:
 
 ```javascript
 import { Graph } from '@playcanvas/pcui-graph';
 ```
 
-## Creating a Graph
+## グラフの作成
 
-Options can be passed to the `Graph` constructor as a JSON object which change the default behavior of the graph. You can do so as follows:
+グラフのデフォルトの動作を変更するオプションは、JSONオブジェクトとして`Graph`コンストラクターに渡すことができます。以下のように実行できます:
 
 ```javascript
 const graph = new Graph(schema, {
@@ -36,8 +36,8 @@ const graph = new Graph(schema, {
 });
 ```
 
-You can see a full list of options [here](https://api.playcanvas.com/pcui-graph/classes/Graph.html#constructor).
+オプションの完全なリストは[こちら](https://api.playcanvas.com/pcui-graph/classes/Graph.html#constructor)で確認できます。
 
-## 例
+## 使用例
 
-Examples of PCUI Graph usage can be found in this [Storybook](https://playcanvas.github.io/pcui-graph/storybook/).
+PCUI Graphの使用例は、こちらの[Storybook](https://playcanvas.github.io/pcui-graph/storybook/)で見つけることができます。

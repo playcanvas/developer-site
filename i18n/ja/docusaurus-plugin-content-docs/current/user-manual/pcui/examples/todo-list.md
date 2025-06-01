@@ -2,7 +2,7 @@
 title: Todo List
 ---
 
-The todo list below allows you to add items to the list, toggle their 'done' status and filter items by that status.
+以下のTodoリストでは、リストに項目を追加したり、「完了」ステータスを切り替えたり、そのステータスで項目をフィルターしたりできます。
 
 <div className='iframe-container'>
     <iframe src="https://playcanvas.github.io/pcui/storybook/iframe?id=examples-todolist--main&viewMode=story"></iframe>
