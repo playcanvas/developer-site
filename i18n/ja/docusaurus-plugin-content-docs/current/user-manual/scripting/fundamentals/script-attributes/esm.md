@@ -5,9 +5,9 @@ sidebar_position: 1
 
 :::note
 
-このページでは、推奨される **ESM Scripts** システムの Script Attributes について説明します。
+このページでは、推奨される **ESM スクリプト** システムのスクリプト属性について説明します。
 
-**Classic Script Attributes** については、[こちら](./classic.md)をクリックしてください。
+**従来のスクリプト属性**については、[こちら](./classic.md)をクリックしてください。
 
 :::
 
