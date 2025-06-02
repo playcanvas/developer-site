@@ -130,7 +130,9 @@ myTexture;
 ```
 
 :::warning
+
 An attribute must either be initialized with a value `speed = 10`, or have a jsdoc type `@type {number}`. If neither are present, the attribute will ignored
+
 :::
 
 ### Entity attribute
@@ -144,6 +146,12 @@ The Entity type lets your reference another entity in your hierarchy. A great wa
  */
 target
 ```
+
+:::important
+
+You must import `Entity` from `playcanvas` for your attribute to parse correctly.
+
+:::
 
 ### Asset attribute
 
@@ -165,12 +173,24 @@ initialize() {
 }
 ```
 
+:::important
+
+You must import `Asset` from `playcanvas` for your attribute to parse correctly.
+
+:::
+
 ### Color attribute
 
 ```javascript
 /** @attribute */
 color = new Color()
 ```
+
+:::important
+
+You must import `Color` from `playcanvas` for your attribute to parse correctly.
+
+:::
 
 The color attribute shows a color picker when exposed in the editor. There are two options `rgb` and `rgba` depending on whether you wish to expose the alpha channel as well.
 
@@ -180,6 +200,12 @@ The color attribute shows a color picker when exposed in the editor. There are t
 /** @attribute */
 position = new Vec3()
 ```
+
+:::important
+
+You must import `Vec2`/`Vec3`/`Vec4` from `playcanvas` for your attribute to parse correctly.
+
+:::
 
 The vector attribute can be a 2, 3 or 4 dimension. The editor will show a numerical input for each component, allowing you to set each one independently.
 
@@ -195,6 +221,12 @@ The vector attribute can be a 2, 3 or 4 dimension. The editor will show a numeri
  */
 wave
 ```
+
+:::important
+
+You must import `Curve` from `playcanvas` for your attribute to parse correctly.
+
+:::
 
 The curve attribute is used to express a value that changes over a time period. All curves are defined over the period 0.0 - 1.0. You can define multiple curves, for example if you wish to have a 3D position from a curve defined three curves for x,y,z using the `curves` property. There is also a special curve editor for modifying colors using the `color` property.
 
