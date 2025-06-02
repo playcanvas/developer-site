@@ -27,6 +27,8 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class MyScript extends Script {
+    static scriptName = 'myScript';
+
     /** @attribute */
     speed = 10;
 
@@ -102,6 +104,8 @@ MyScript.prototype.update = function(dt) {
 import { Color, Script } from 'playcanvas';
 
 export class Configurable extends Script {
+    static scriptName = 'configurable';
+
     /** @attribute */
     speed = 5;
 

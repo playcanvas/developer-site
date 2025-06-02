@@ -115,6 +115,8 @@ const watch = (target, prop) => {
 import { Script } from 'playcanvas'
 
 export class Rotate extends Script {
+    static scriptName = 'rotate';
+
     /** attribute */
     speed = 10;
 
@@ -150,6 +152,7 @@ Instead, if you do need to copy values, we recommend you do it manually and expl
 import { Script, Vec3 } from 'playcanvas';
 
 export class Rotate extends Script {
+    static scriptName = 'rotate';
 
     _speed = new Vec3();
 

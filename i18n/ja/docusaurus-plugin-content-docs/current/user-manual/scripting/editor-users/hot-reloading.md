@@ -44,6 +44,8 @@ MyScript.prototype.swap = function(old) {
 import { ScriptType, math } from 'playcanvas';
 
 export class Rotator extends Script {
+    static scriptName = 'rotator';
+
     /**
      * @attribute
      */
