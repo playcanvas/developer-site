@@ -68,7 +68,7 @@ attribute aUv0: vec2f;
 }
 ```
 
-As part of the VertexInput structure, and also in the global scope, these built-in attributes are automatically available:
+As part of the `VertexInput` structure, and also in the global scope, these built-in attributes are automatically available:
 
 ```wgsl
 vertexIndex: @builtin(vertex_index)
