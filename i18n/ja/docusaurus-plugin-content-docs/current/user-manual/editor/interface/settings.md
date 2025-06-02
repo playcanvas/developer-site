@@ -1,38 +1,38 @@
 ---
-title: Settings
-sidebar_position: 2
+title: 設定
+sidebar_position: 6
 ---
 
-By default, the Editor is configured with settings that should suit the majority of users. However, in some circumstances, you may wish to modify the default behavior of the Editor. To do this, load the Settings into the [Inspector](../inspector) by clicking the 'cog' icon on the [Toolbar](../toolbar) or in the [Viewport](../viewport).
+デフォルトでは、エディターは大多数のユーザーに適した設定で構成されています。しかし、特定の状況では、エディターのデフォルトの動作を変更したい場合があります。そのためには、[ツールバー](../toolbar)または[ビューポート](../viewport)にある「歯車」アイコンをクリックして、[インスペクター](../inspector)に設定を読み込みます。
 
 ![Settings](/img/user-manual/editor/toolbar/settings.png)
 
-Then, navigate to the `EDITOR` section:
+その後、`EDITOR`セクションに移動します。
 
 ![Editor Settings](/img/user-manual/editor/settings/editor-settings.png)
 
 :::note
 
-Updates to Editor Settings apply only to the current project and only to you. In other words, they are personal preferences. They all persist over multiple sessions except for `Engine Version` which is reset at the start of each session.
+エディターの設定の更新は、現在のプロジェクトにのみ、かつあなた自身にのみ適用されます。言い換えれば、これらは個人の好みです。`Engine Version`は各セッションの開始時にリセットされるため、これを除くすべての設定は複数のセッションにわたって保持されます。
 
 :::
 
-Here is a breakdown of the available settings:
+利用可能な設定の内訳は以下の通りです。
 
-| Setting                          | 説明 |
+| 設定                          | 説明 |
 | -------------------------------- | ----------- |
-| **Grid Divisions**               | Determines the number of divisions in the grid in the [Viewport](../viewport). |
-| **Grid Division Size**           | Sets the size of each grid division, affecting the grid scale. |
-| **Snap**                         | Sets the snap increment when using the [gizmos](../viewport#gizmos) in the [Viewport](../viewport). Useful for precise positioning. |
-| **Camera Clip Near**             | Sets the near clipping plane for all Editor cameras in the [Viewport](../viewport). |
-| **Camera Clip Far**              | Sets the far clipping plane for all Editor cameras in the [Viewport](../viewport). |
-| **Camera Depth Grabpass**        | Configures the camera to capture depth information for special effects. |
-| **Camera Color Grabpass**        | Configures the camera to capture color information for special effects. |
-| **Zoom Sensitivity**             | Adjusts the sensitivity of zooming in the [Viewport](../viewport). |
-| **Clear Color**                  | Sets the clear color for all Editor cameras in the [Viewport](../viewport). |
-| **Show Fog**                     | Toggles the visibility of fog in the [Viewport](../viewport), even if it is enabled in the Scene Settings. |
-| **Icons Size**                   | Changes the size of entity icons in the [Viewport](../viewport). |
-| **Engine Version**               | The engine version to use in the [Launch Page](../../launch-page) or when [publishing a build](../../../publishing/web/playcanvas-hosting#publishing-a-new-build). Defaults to the current [stable release](https://github.com/playcanvas/engine/releases) of the PlayCanvas Engine. This setting only persists for the current session. |
-| **Locale**                       | Sets the locale used by the [localization system](../../../user-interface/localization) for display in the [Viewport](../viewport). |
-| **Chat Notifications**           | Toggles browser notifications for the Editor's built-in realtime chat. |
-| **Rename Duplicated Entities**   | If enabled, duplicated entity names get an incremental number added to the end. This helps to ensure unique naming of entities. |
+| **グリッド分割数**               | [ビューポート](../viewport)内のグリッドの分割数を決定します。 |
+| **グリッド分割サイズ**           | 各グリッド分割のサイズを設定し、グリッドのスケールに影響を与えます。 |
+| **スナップ**                         | [ビューポート](../viewport)で[ギズモ](../viewport#gizmos)を使用する際のスナップ増分を設定します。正確な配置に役立ちます。 |
+| **カメラニアクリップ**             | [ビューポート](../viewport)内のすべてのエディターカメラのニアクリッピングプレーンを設定します。 |
+| **カメラファークリップ**              | [ビューポート](../viewport)内のすべてのエディターカメラのファークリッピングプレーンを設定します。 |
+| **カメラ深度グラブパス**        | 特殊効果のために深度情報をキャプチャするようにカメラを設定します。 |
+| **カメラカラーグラブパス**        | 特殊効果のために色情報をキャプチャするようにカメラを設定します。 |
+| **ズーム感度**             | [ビューポート](../viewport)でのズームの感度を調整します。 |
+| **クリアカラー**                  | [ビューポート](../viewport)内のすべてのエディターカメラのクリアカラーを設定します。 |
+| **フォグの表示**                     | シーン設定で有効になっている場合でも、[ビューポート](../viewport)でのフォグの表示を切り替えます。 |
+| **アイコンサイズ**                   | [ビューポート](../viewport)内のエンティティアイコンのサイズを変更します。 |
+| **エンジンバージョン**               | [ローンチページ](../../launch-page)または[ビルドの公開](../../../publishing/web/playcanvas-hosting#publishing-a-new-build)時に使用するエンジンバージョンです。デフォルトはPlayCanvas Engineの現在の[安定版リリース](https://github.com/playcanvas/engine/releases)です。この設定は現在のセッションでのみ保持されます。 |
+| **ロケール**                       | [ローカライズシステム](../../../user-interface/localization)が[ビューポート](../viewport)での表示に使用するロケールを設定します。 |
+| **チャット通知**           | エディターの組み込みリアルタイムチャットのブラウザ通知を切り替えます。 |
+| **重複エンティティの名前変更**   | 有効にすると、重複するエンティティ名に増分番号が末尾に追加されます。これにより、エンティティの一意な名前付けが保証されます。 |

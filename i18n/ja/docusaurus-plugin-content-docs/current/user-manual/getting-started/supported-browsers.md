@@ -1,24 +1,24 @@
 ---
-title: 対応ブラウザ
+title: サポートされているブラウザ
 sidebar_position: 2.5
 ---
 
-The browser requirements for running PlayCanvas applications are as follows:
+PlayCanvasアプリケーションを実行するためのブラウザ要件は以下の通りです。
 
-| ブラウザ                                     | バージョン | Win      | macOS    | Linux    | Chrome OS | Android  | iOS      |
-| ------------------------------------------- | ------- | -------- | -------- | -------- | --------- | -------- | -------- |
-| [Chrome](https://www.google.com/chrome/)    | 9.0+    | ✔️      | ✔️       | ✔️      | ✔️        | ✔️      | ✔️       |
-| [Safari](https://www.apple.com/safari/)     | 8.0+    |          | ✔️      |          |           |          | ✔️       |
-| [Firefox](https://www.mozilla.org/firefox/) | 4.0+    | ✔️      | ✔️       | ✔️      |           | ✔️       | ✔️      |
-| [Edge](https://www.microsoft.com/edge)      | 12.0+   | ✔️      | ✔️         | ✔️         |           | ✔️         | ✔️         |
-| [Opera](https://www.opera.com/)             | 12.0+   | ✔️      | ✔️       | ✔️      |           | ✔️       |          |
+| ブラウザ                                    | バージョン | Win      | macOS    | Linux    | Chrome OS | Android  | iOS      |
+| ------------------------------------------- | -------- | -------- | -------- | -------- | --------- | -------- | -------- |
+| [Chrome](https://www.google.com/chrome/)    | 9.0+     | ✔️      | ✔️       | ✔️      | ✔️        | ✔️      | ✔️       |
+| [Safari](https://www.apple.com/safari/)     | 8.0+     |          | ✔️      |          |           |          | ✔️       |
+| [Firefox](https://www.mozilla.org/firefox/) | 4.0+     | ✔️      | ✔️       | ✔️      |           | ✔️       | ✔️      |
+| [Edge](https://www.microsoft.com/edge)      | 12.0+    | ✔️      | ✔️         | ✔️         |           | ✔️         | ✔️         |
+| [Opera](https://www.opera.com/)             | 12.0+    | ✔️      | ✔️       | ✔️      |           | ✔️       |          |
 
 :::tip
 
-We recommend using an up-to-date operating system and browser when running PlayCanvas apps and tools.
+PlayCanvasアプリやツールを実行する際は、最新のOSとブラウザを使用することをお勧めします。
 
 :::
 
-## WebGL Support
+## WebGLサポート
 
-At the very minimum, a browser must have a working [WebGL](https://en.wikipedia.org/wiki/WebGL) 1.0 implementation for PlayCanvas to run. If you are unsure whether your browser supports WebGL, visit [this page](https://get.webgl.org/). If you see a spinning cube, you are all set! 🎉
+最低限、PlayCanvasを実行するためには、ブラウザが動作する[WebGL](https://en.wikipedia.org/wiki/WebGL) 1.0の実装を持っている必要があります。お使いのブラウザがWebGLをサポートしているか不明な場合は、[このページ](https://get.webgl.org/)にアクセスしてください。回転するキューブが見えれば、準備完了です！ 🎉

@@ -1,38 +1,34 @@
 ---
-title: Launch Page
-sidebar_position: 4.5
+title: 起動ページ
+sidebar_position: 2
 ---
 
-The Editor's Viewport is where you visually construct your application. From there, you can press the Launch button to open the Launch Page and actually _run_ your application.
+エディターのビューポートは、アプリケーションを視覚的に構築する場所です。そこから「起動」ボタンを押すと、起動ページが開き、実際にアプリケーションを_実行_できます。
 
-![Launch Button][1]
+![起動ボタン](/img/user-manual/editor/launch-page/launch-button.png)
 
-## Working with the Launch Page
+## 起動ページでの作業
 
-When you activate the Launch Page, it will open in a new tab. It is perfectly valid to switch back and forth between the Editor and the Launch Page. However, if you have a large screen or even a multi-monitor setup, consider tearing off the Launch Page tab and placing it side by side with the Editor.
+起動ページをアクティブにすると、新しいタブで開きます。エディターと起動ページの間を行き来することは全く問題ありません。ただし、大画面やマルチモニターのセットアップをお持ちの場合は、起動ページのタブを切り離してエディターと並べて配置することを検討してください。
 
-![Launch Page Side by Side][2]
+![起動ページを並べて表示](/img/user-manual/editor/launch-page/launch-page-side-by-side.png)
 
-This can make it easier and quicker to switch between the two.
+これにより、両者をより簡単かつ迅速に切り替えることができます。
 
-## Real-Time Updates
+## リアルタイム更新
 
-A key feature of the Launch Page is that it maintains a real-time connection (or live-link) to the Editor. This means that any change made in the Editor will be immediately reflected in the Launch Page.
+起動ページの主要な機能は、エディターとのリアルタイム接続（またはライブリンク）を維持していることです。これは、エディターで行われた変更がすべて、起動ページに即座に反映されることを意味します。
 
-![Launch Page Live Link][3]
+![起動ページのライブリンク](/img/user-manual/editor/launch-page/launch-page-live-link.gif)
 
-And if any other users (with write permission) are present in the Editor with you, their edits can update your Launch Page as well.
+また、他のユーザー（書き込み権限を持つ）があなたと一緒にエディターにいる場合、彼らの編集もあなたの起動ページを更新することができます。
 
-## Running on Other Devices
+## 他のデバイスでの実行
 
-Sometimes it can be useful to run the Launch Page on another device. For example, you might wish to test your application on a mobile device. To do this, ensure you are logged in to your PlayCanvas account on that device. Then, simply visit the Launch Page URL in your device's browser.
+場合によっては、起動ページを別のデバイスで実行すると便利な場合があります。例えば、モバイルデバイスでアプリケーションをテストしたいと思うかもしれません。これを行うには、そのデバイスでPlayCanvasアカウントにログインしていることを確認してください。その後、そのデバイスのブラウザで起動ページのURLにアクセスするだけです。
 
 :::tip
 
-Chrome can dynamically generate a QR code for any page. From the Launch Page on your desktop, open Chrome's main menu and select `Save and share` > `Create QR Code`. Then, scan the QR code on your mobile device to instantly visit the Launch Page.
+Chromeは任意のページのQRコードを動的に生成できます。デスクトップの起動ページから、Chromeのメインメニューを開き、「`共有と保存`」 > 「`QRコードを作成`」を選択します。その後、モバイルデバイスでQRコードをスキャンして、即座に起動ページにアクセスしてください。
 
 :::
-
-[1]: /img/user-manual/editor/launch-page/launch-button.png
-[2]: /img/user-manual/editor/launch-page/launch-page-side-by-side.png
-[3]: /img/user-manual/editor/launch-page/launch-page-live-link.gif

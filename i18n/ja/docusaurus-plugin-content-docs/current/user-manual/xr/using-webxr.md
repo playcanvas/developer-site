@@ -1,78 +1,78 @@
 ---
-title: PlayCanvasでのWebXRの使用方法
+title: PlayCanvas で WebXR を使用する
 sidebar_position: 1
 ---
 
-## Support
+## サポート
 
-WebXRのブラウザサポートはまだ全面的には実現されていません。以下のようにして確認できます。
+WebXR のブラウザサポートは（まだ）普遍的ではありません。以下のように確認できます：
 
 ```javascript
 if (app.xr.supported) {
-    //WebXRはサポートされています
+    // WebXR はサポートされています
 }
 ```
 
-## Starting an XR Session
+## XR セッションの開始
 
-To start XR session, you can use method on the Camera Component or [XrManager][2] on the Application. To start an XR session, you need to provide CameraComponent and provide the type of XR session, reference space, and optional object with additional arguments:
+XRセッションを開始するには、Camera Component のメソッド、またはアプリケーションの [XrManager][2] を使用できます。XRセッションを開始するには、CameraComponent を指定し、XRセッションのタイプ、参照空間、および追加の引数を持つオプションのオブジェクトを提供する必要があります：
 
 ```javascript
 app.xr.start(entity.camera, pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
 ```
 
-It is an asynchronous operation and is only possible to start on a user interaction, such as a button click, mouse click, or touch:
+これは非同期操作であり、ボタンクリック、マウスクリック、タッチなどのユーザー操作でのみ開始できます：
 
 ```javascript
 button.on('click', () => {
-    // start XR session
+    // XRセッションを開始
 });
 ```
 
-To know when a session is started, you can subscribe to the `start` event:
+セッションが開始されたことを知るには、`start` イベントを購読できます：
 
 ```javascript
 app.xr.on('start', () => {
-    // XR session has started
+    // XRセッションが開始されました
 });
 ```
 
-セッションタイプや参照スペースが特定のプラットフォームで利用できない場合、セッションを開始できず、コールバックでエラーが提供され、XrManagerで`error` イベントが発生します。
+セッションのタイプまたは参照空間は、特定のプラットフォームで利用できない場合があります。その場合、セッションの開始に失敗し、コールバックでエラーを提供し、XrManager で `error` イベントが発生します：
 
 ```javascript
 entity.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_UNBOUNDED, {
     callback: (err) => {
         if (err) {
-            // failed to start session
+            // セッションの開始に失敗しました
         }
     }
 });
 ```
 
-## Ending an XR Session
+## XR セッションの終了
 
-XRの終了はさまざまな方法でトリガーできます。コードからXRを終了することができます。
+XRの終了はさまざまな方法でトリガーできます。コードからXRの終了をトリガーできます：
 
 ```javascript
 app.xr.end();
 ```
 
-Also, the user might exit XR via some external process like the back button in the browser. [XrManager][2] will fire events associated with the session `end`:
+また、ユーザーはブラウザの戻るボタンのような外部プロセスを介してXRを終了する場合があります。[XrManager][2] はセッションの `end` に関連するイベントを発火します：
 
 ```javascript
 app.xr.on('end', () => {
-    // XR session has ended
+    // XRセッションが終了しました
 });
 ```
 
-## Session Types
+## セッションタイプ
 
-それぞれのプラットフォームで、異なる種類のセッションがサポートされています。これらは以下の通りです。
+各プラットフォームは、異なる種類のセッションをサポートできます。これらは次のとおりです：
 
-- **VR**(仮想現実)-一定レベルのビューアートラッキングを提供し、XRデバイスに独占アクセスを提供します。これは、アプリケーションがデバイスのフレームバッファにレンダリングされ、HTMLキャンバス要素にはレンダリングされないことを意味します。
-- **AR** (Augmented Reality) - This type of session provides exclusive access to the XR Device and content is meant to be blended with the real-world environment. In this mode, the camera's clear color should be transparent.
+- **VR** (Virtual Reality) - ある程度のビューアトラッキングを提供し、XR Device への排他的なアクセスを提供します。これは、アプリケーションが HTML canvas element ではなく、デバイスのフレームバッファにレンダリングされることを意味します。
+- **AR** (Augmented Reality) - このタイプのセッションは XR Device への排他的なアクセスを提供し、コンテンツは現実世界にブレンドされることを意図しています。このモードでは、カメラのクリアカラーは透明である必要があります。
 
-The availability of a session type can change during an application's lifetime, based on devices being plugged in or features on devices being enabled. To check if a session type is available do:
+セッションタイプの可用性は、デバイスが接続されたり、デバイスの機能が有効になったりすることに基づいて、アプリケーションのライフタイム中に変化する可能性があります。セッションタイプが利用可能かどうかを確認するには、次のようにします：
 
 ```javascript
 if (app.xr.isAvailable(pc.XRTYPE_VR)) {
@@ -80,29 +80,29 @@ if (app.xr.isAvailable(pc.XRTYPE_VR)) {
 }
 ```
 
-You can subscribe to availability change events too:
+可用性変更イベントも購読できます：
 
 ```javascript
 app.xr.on('available', (type, available) => {
     console.log('XR session', type, 'type is now', available ? 'available' : 'unavailable');
 });
 
-// or specific session type
+// または特定のセッションタイプ
 app.xr.on('available:' + pc.XRTYPE_VR, (available) => {
     console.log('XR session VR type is now', available ? 'available' : 'unavailable');
 });
 ```
 
-## Camera Position and Orientation
+## カメラの位置と向き
 
-When you are presenting in XR, the position and orientation of the camera are overwritten by data from the XR session. If you want to implement additional movement and rotation of the camera, you should add a parent entity to your camera and apply your manipulations to that entity.
+XRでプレゼンテーションを行う場合、カメラの位置と向きはXRセッションからのデータによって上書きされます。カメラにさらなる移動と回転を実装したい場合は、カメラの親エンティティを追加し、そのエンティティに操作を適用する必要があります。
 
 ![Camera Offset](/img/user-manual/xr/using-webxr/camera-offset.jpg)
 
-Position, orientation and rays of different XR objects: input sources, tracked meshes, tracked planes, tracked images, and others, are provided in world space.
+異なるXRオブジェクト（入力ソース、トラッキングされたメッシュ、トラッキングされた平面、トラッキングされた画像など）の位置、向き、およびレイは、ワールド空間で提供されます。
 
-## なぜ自動的にXRモードを有効にできないのですか?
+## なぜ XR モードを自動的に有効にできないのですか？
 
-Entering WebXR is required by browsers to be triggered by a *user action*. That means that it must be in response to a key press, a mouse click or a touch event. For that reason, there is no way to enter XR immediately on loading a page.
+WebXR への進入は、ブラウザによって*ユーザーアクション*によってトリガーされる必要があります。つまり、キー入力、マウスクリック、またはタッチイベントに応答する必要があります。そのため、ページを読み込むとすぐにXRに入る方法はありません。
 
 [2]: https://api.playcanvas.com/engine/classes/XrManager.html

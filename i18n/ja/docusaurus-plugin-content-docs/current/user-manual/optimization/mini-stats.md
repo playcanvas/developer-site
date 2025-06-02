@@ -1,37 +1,37 @@
 ---
-title: Mini Stats
+title: MiniStats
 sidebar_position: 3
 ---
 
-ミニスタッツ (Mini Stats) は、アプリケーションの主要パフォーマンス統計情報を軽量グラフィカルで表示するものです。ドローコール数、フレーム時間、CPU負荷、そして(サポートされている場合)GPU負荷を表示します。
+MiniStatsは、アプリケーションの主要なパフォーマンス統計情報を軽量なグラフィカルで表示するツールです。ドローコール数、フレームタイム、CPU負荷、および（サポートされている場合は）GPU負荷を表示します。
 
-エディタのユーザーは、ランチボタンメニューからミニスタッツパネルを有効にすることができます。
+エディターユーザーは、起動ボタンメニューからMiniStatsパネルを有効にできます。
 
 <img loading="lazy" alt="Launch Menu" width="600" src="/img/user-manual/optimization/mini-stats/launch-menu-mini-stats.png" />
 
-ミニスタッツをクリックすると、3つのサポートされているサイズを切り替えることができます。
+MiniStatsをクリックすると、サポートされている3つのサイズを切り替えることができます。
 
 <img loading="lazy" alt="Mini Stats" width="411" src="/img/user-manual/optimization/mini-stats/mini-stats.gif" />
 
-表示される情報は以下の通りです。
+表示される情報は次のとおりです。
 
-* **DrawCalls** - 1フレームにディスパッチされる描画オブジェクトの数。各ドローコールにはCPUとGPUのコストがかかるため、この数を最小限に抑えることは合理的です。
-* **Frame** - ブラウザが各フレームを処理するための合計所要時間(ミリ秒)。
-* **GPU** - GPUによる各フレームのレンダリング時間をミリ秒単位で表示します。この統計は、基礎となるWebGL実装が`EXT_disjoint_timer_query`（WebGL 1.0）または`EXT_disjoint_timer_query_webgl2`（WebGL 2.0）の拡張をサポートしている場合にのみ表示されます。ブラウザがこれらの拡張のいずれかをサポートしているかどうかは、[WebGL Report][1]で確認できます。
-* **CPU** - CPUによる各フレームのレンダリング時間(ミリ秒)を表示します。
+*   **DrawCalls** - 毎フレームディスパッチされるレンダリングされたオブジェクトの数です。各ドローコールはCPUとGPUにコストがかかるため、この数を最小限に抑えることが賢明です。
+*   **Frame** - ブラウザが各フレームを処理するのにかかる合計時間（ミリ秒）です。
+*   **GPU** - GPUによる各フレームのレンダリングにかかる時間（ミリ秒）を表示します。この統計は、EngineのWebGL 2とWebGPUの両方のフレーバーでサポートされていますが、いくつかの要件があります。
+    *   WebGL 2：基盤となるWebGL実装は、[`EXT_disjoint_timer_query_webgl2`](https://web3dsurvey.com/webgl2/extensions/EXT_disjoint_timer_query_webgl2)拡張機能をサポートしている必要があります。[WebGL Report](https://webglreport.com/?v=2)にアクセスして、お使いのブラウザがこの拡張機能をサポートしているか確認できます。
+    *   WebGPU：基盤となるWebGPU実装は、GPUアダプター機能[`timestamp-query`](https://web3dsurvey.com/webgpu/features/timestamp-query)をサポートしている必要があります。
+*   **CPU** - CPUによる各フレームのレンダリングにかかる時間（ミリ秒）を表示します。
 
-CPUおよびGPUグラフは、赤色と緑色を使用して、フレームのアップデートとレンダリング部分の詳細を表示します。
+CPUおよびGPUグラフは、フレームの更新部分とレンダリング部分の内訳を、それぞれ赤と緑を使用して表示します。
 
-## エディタの外部でミニスタッツを使用する
+## エディター外でのMiniStatsの使用
 
-ミニスタッツパネルは、エディタのLaunchページに組み込まれていますが、エディタ外でも使用できます。ソースコードは[ここ][2]にあります。 `playcanvas-extras.js`をビルドし、プロジェクトに含め、次のように呼び出します。
+MiniStatsパネルはエディターの起動ページに組み込まれていますが、エディターから独立して使用することもできます。アプリケーションにMiniStatsを追加するには、次のように呼び出すだけです。
 
 ```javascript
-    const miniStats = new pcx.MiniStats(app);
+const miniStats = new pc.MiniStats(app);
 ```
 
-['Engine-only' examples][3]では、これをすべて実行しています。
+利用可能なメソッドとプロパティの詳細については、[MiniStats APIリファレンス](https://api.playcanvas.com/engine/classes/MiniStats.html)を参照してください。
 
-[1]: https://webglreport.com/
-[2]: https://github.com/playcanvas/engine/tree/master/extras/mini-stats
-[3]: https://playcanvas.github.io/
+Engine単独のコンテキストでMiniStatsが動作している様子を見るには、[Engine Examples Browser](https://playcanvas.github.io/)をご覧ください。

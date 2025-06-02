@@ -1,6 +1,6 @@
 ---
 title: Shaders
-sidebar_position: 6
+sidebar_position: 5
 ---
 
 When you import your 3D models into PlayCanvas, by default, they will use our [Physical Material][1]. This is a versatile material type that can cover a lot of your rendering needs.
@@ -48,7 +48,7 @@ If you write a GLSL shader, it is directly supported by the WebGL2 platform. How
 
 :::
 
-## Preprocessor
+## Preprocessor {#preprocessor}
 
 Before the shader is used, a preprocessing step is applied, allowing you to manage shader variations effectively.
 
@@ -86,7 +86,7 @@ You can then use these defines within the shader for conditional logic:
 
 This system enables flexible shader variation without requiring multiple shader files, making it easier to customize rendering for different materials.
 
-### RenderPass Defines
+### RenderPass Defines {#renderpass-defines}
 
 The engine provides some defines automatically, allowing integration with render passes. By default, one of these three defines is provided to allow you to write code specific to different render passes:
 
@@ -114,11 +114,11 @@ This results in the following define being added to the shader:
 #define CUSTOM_PASS
 ```
 
-### Shader Includes
+### Shader Includes {#shader-includes}
 
 The engine builds internal shaders out of chunks; small shader functions that are combined to form a final shader. These chunks are also available for use in custom shaders with `ShaderMaterial`, making it easy to integrate engine functionality.
 
-#### Vertex Shader
+#### Vertex Shader {#vertex-shader}
 
 The engine provides predefined shader includes that handle common transformations, normal calculations, and other essential operations. This allows your custom shader to automatically support skinning, morphing and instancing.
 
@@ -165,7 +165,7 @@ void main(void)
 }
 ```
 
-#### Fragment Shader
+#### Fragment Shader {#fragment-shader}
 
 The engine provides predefined shader chunks you can include for common color processing effects such as gamma correction, tone mapping and fog. These includes ensure that colors are processed correctly according to the rendering settings.
 
@@ -201,7 +201,7 @@ For more complete examples, and also for details on how to implement instancing,
 
 :::
 
-#### Generated Shaders
+#### Generated Shaders {#generated-shaders}
 
 If you have a need to inspect the generated shaders, you can add this to your script
 

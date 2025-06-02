@@ -1,5 +1,5 @@
 ---
-title: テクスチャ (Texture)
+title: Texture
 ---
 
 テクスチャとは、[マテリアル][1]に割り当てられ、グラフィカルなプリミティブに適用される画像のことです。
@@ -71,7 +71,7 @@ Anisotropyが増加するにつれて、GPUでテクスチャをサンプリン�
 
 <img loading="lazy" src="/img/user-manual/assets/textures/samsung-s7-webgl-report.jpg" alt="Samsung S7 WebGL report" width="600" />
 
-If the engine attempts to utilize a texture that exceeds the max texture size reported by WebGL, it will resize it down to this maximum size at runtime. Note that this is only done for texture loaded from images (PNG, JPG, AVIF, WebP, GIF). Compressed textures cannot be resized at runtime and will simply fail to render if they are too large for the device.
+エンジンがWebGLによって報告される最大テクスチャサイズを超えるテクスチャを使用しようとした場合、実行時にこの最大サイズに縮小されます。これは、画像（PNG, JPG, AVIF, WebP, GIF）からロードされたテクスチャに対してのみ行われることに注意してください。圧縮されたテクスチャは実行時にサイズ変更できず、デバイスにとって大きすぎる場合は、単にレンダリングに失敗します。
 
 実行時にサイズを縮小しない場合は、2020年10月23日現在、4096x4096が非常に広範にサポートされていますし、一般的には2048x2048がどこでも動作保証されています。
 

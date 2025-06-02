@@ -1,5 +1,6 @@
 # Disable some built-in rules
 config:
+  descriptive-link-text: false
   line-length: false
   no-alt-text: false
   no-inline-html: false

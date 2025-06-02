@@ -1,6 +1,6 @@
 ---
 title: レイヤー
-sidebar_position: 4
+sidebar_position: 9
 ---
 
 ## レイヤーの概要 {#layers-overview}
@@ -40,8 +40,10 @@ PlayCanvasアプリケーションは、常に存在するデフォルトのレ�
 * **Material / Mesh**(`pc.SORTMODE_MATERIALMESH`)- 不透明なサブレイヤーのデフォルトモードです。メッシュインスタンスは、レンダリングのパフォーマンスを向上させるために、マテリアルとメッシュの切り替えを最小限に抑えるようにソートされます。
 * **Back-to-front**(`pc.SORTMODE_BACK2FRONT`)- 透明なサブレイヤーのデフォルトモードです。メッシュインスタンスは、後ろから前にソートされます。これは、異なる深度を持つ多数の半透明オブジェクトを適切にレンダリングする方法です。
 * **Front-to-back**(`pc.SORTMODE_FRONT2BACK`)- メッシュインスタンスは前から後ろにソートされます。GPUとシーンによっては、このオプションが`pc.SORTMODE_MATERIALMESH`よりもパフォーマンスが向上する場合があります。
-* **Manual**(`pc.SORTMODE_MANUAL`)- UIや2Dレイヤーのデフォルトモードです。メッシュインスタンスは、`drawOrder` プロパティに基づいてソートされます。ElementコンポーネントとSpriteコンポーネントは、このソートモードを持つレイヤーに配置する必要があります。
+* **Manual** (`pc.SORTMODE_MANUAL`) - This is the default mode for UI or 2D layers. Mesh instances are sorted based on the `MeshInstance.drawOrder` property. The Element Component and Sprite Component should be placed in layers using this sort mode.
 * **None**(`pc.SORTMODE_NONE`)- ソートは適用されません。メッシュインスタンスは、レイヤーに追加された順序で描画されます。
+
+In addition to these sort modes, the `MeshInstance.drawBucket` property provides an additional, coarser level of sorting of `MeshInstances` within a layer. This integer value, ranging from 0 to 255 (default 127), serves as the primary sort key for mesh rendering. Meshes are sorted in ascending order by `drawBucket` (lower values rendered first), and then further sorted within each bucket according to the layer's selected sort mode. Note that the `drawBucket` setting is only effective when mesh instances are added to a sub-layer with its sort mode set to `pc.SORTMODE_BACK2FRONT`, `pc.SORTMODE_FRONT2BACK`, or `pc.SORTMODE_MATERIALMESH`. This allows you to group meshes into distinct rendering buckets, forcing certain groups to render before or after others, regardless of their material or depth, offering fine-grained control over the overall rendering order within those specific sort modes.
 
 ## デフォルトレイヤー {#default-layers}
 

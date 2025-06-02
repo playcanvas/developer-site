@@ -1,80 +1,80 @@
 ---
-title: お支払いについて
-sidebar_position: 24
+title: 請求
+sidebar_position: 21
 ---
 
-Welcome to the Billing FAQ that lists the common questions relating to your PlayCanvas subscription.
+PlayCanvasサブスクリプションに関するよくある質問をまとめた請求FAQへようこそ。
 
-### Does my subscription auto-renew?
+### サブスクリプションは自動更新されますか？
 
-Yes. Once you subscribe to the Personal or Organization plan, payment will automatically be taken on a monthly basis, on the day of the month when you first subscribed.
+はい。PersonalまたはOrganizationプランを購読すると、最初に購読した日と同じ日付で、毎月自動的に支払いが行われます。
 
-### How do I cancel my subscription?
+### サブスクリプションをキャンセルするにはどうすればよいですか？
 
-You can cancel your plan subscription at any time.
+プランのサブスクリプションはいつでもキャンセルできます。
 
-1. Visit your [Account page](https://playcanvas.com/account).
-2. Scroll down to the 'Current Plan' section.
-3. If you have **Personal** showing here, hit 'Cancel' to cancel it.
-4. Hit 'OK' in the **CANCEL PLAN** dialog.
-5. Also in the 'Current Plan' section, you will see a list of your Organizations.
-6. For each Organization listed, click its icon to visit its Account page.
-7. Scroll down to the 'Current Plan' section.
-8. If you have **Organization** showing here, hit 'Cancel' to cancel it.
-9. Hit 'OK' in the **CANCEL PLAN** dialog.
+1. [アカウントページ](https://playcanvas.com/account)にアクセスします。
+2. 'Current Plan' セクションまでスクロールします。
+3. ここに**Personal**と表示されている場合、「Cancel」を押してキャンセルします。
+4. **CANCEL PLAN**ダイアログで「OK」を押します。
+5. 'Current Plan' セクションには、あなたのOrganizationsのリストも表示されます。
+6. リストにある各Organizationのアイコンをクリックして、そのアカウントページにアクセスします。
+7. 'Current Plan' セクションまでスクロールします。
+8. ここに**Organization**と表示されている場合、「Cancel」を押してキャンセルします。
+9. **CANCEL PLAN**ダイアログで「OK」を押します。
 
-Once your subscription is cancelled, you will not be billed again unless you resubscribe.
+サブスクリプションがキャンセルされると、再購読しない限り、再度請求されることはありません。
 
 :::note
 
-When you cancel your subscription, it will not revert to the free tier immediately. Instead, this will happen at your next billing date. If between the time you cancel and your next billing date you decide you would like to continue your subscription, just return to your Account page and hit 'Resume'.
+サブスクリプションをキャンセルしても、すぐに無料ティアに戻るわけではありません。これは次回の請求日に発生します。キャンセルから次回の請求日までの間にサブスクリプションを継続したいと決めた場合は、アカウントページに戻り「Resume」を押してください。
 
 :::
 
-### What happens to my published apps when I cancel my subscription?
+### サブスクリプションをキャンセルすると、公開中のアプリはどうなりますか？
 
-Your published apps will be completely unaffected if you cancel your subscription.
+サブスクリプションをキャンセルしても、公開中のアプリには全く影響がありません。これは、アプリが当社によってホストされているか、あなたによってホストされているかにかかわらず当てはまります。
 
-### What happens to my private projects when I cancel my subscription?
+### サブスクリプションをキャンセルすると、プライベートプロジェクトはどうなりますか？
 
-Your private projects will become locked (inaccessible) when you cancel your subscription. To unlock them, you have two options:
+サブスクリプションをキャンセルすると、プライベートプロジェクトはロックされ（アクセス不能になり）ます。ロックを解除するには、2つの選択肢があります。
 
-1. Resubscribe to a plan.
-2. Make the projects public.
+1. プランを再購読する。
+2. プロジェクトを公開にする。
 
-### How do I receive invoices?
+### 請求書を受け取るにはどうすればよいですか？
 
-Invoices for monthly subscriptions are emailed to the owner of the subscribed account on the monthly billing date. The subject line for these emails begins with "Your receipt from PlayCanvas Ltd".
+月額サブスクリプションの請求書は、毎月の請求日に購読アカウントの所有者にメールで送られます。これらのメールの件名は「Your receipt from PlayCanvas Ltd」から始まります。
 
 :::tip
 
-If invoices are not reaching your inbox, please check your spam folder.
+請求書が受信トレイに届かない場合は、迷惑メールフォルダをご確認ください。
 
 :::
 
-### Where can I find my billing history?
+### 請求履歴はどこで確認できますか？
 
-Your historical invoices are available to download on `playcanvas.com`. Visit your account page and scroll to the `Invoices` section. You should see something similar to this:
+過去の請求書は`playcanvas.com`からダウンロードできます。アカウントページにアクセスし、`Invoices`セクションまでスクロールしてください。次のような表示が見られるはずです。
 
 ![Billing History](/img/user-manual/billing/invoices.png)
 
-### How do I update my details on my invoices?
+### 請求書の詳細を更新するにはどうすればよいですか？
 
-You may want to edit certain details that appear on your invoices such as:
+請求書に表示される特定の詳細（例：）を編集したい場合があります。
 
-* Billing Name
-* Billing Address
+* 請求名
+* 請求先住所
 * Tax ID
 
-To do this, visit the account page for your subscribed account (remembering that Organizations have their own account page). Navigate to the Billing Info section and hit the Edit link. Fill out the payment details form and hit 'PAY NOW'.
+これを行うには、購読しているアカウントのアカウントページにアクセスします（Organizationsにはそれぞれのアカウントページがあることを覚えておいてください）。「Billing Info」セクションに移動し、「Edit」リンクをクリックします。支払い詳細フォームに記入し、「PAY NOW」を押してください。
 
 :::note
 
-While the button says 'PAY NOW', editing the details of an existing subscription will not trigger a payment straight away. You will be billed as normal on the next billing date and the invoice will show the updated details.
+ボタンには「PAY NOW」と表示されていますが、既存のサブスクリプションの詳細を編集しても、すぐに支払いがトリガーされるわけではありません。次回の請求日に通常通り請求され、請求書には更新された詳細が表示されます。
 
 :::
 
-### How is billing for Organization accounts calculated?
+### Organizationアカウントの請求はどのように計算されますか？
 
 Organizationアカウントの購入日が月次の請求日になります。つまり7月10日に購入するとその日に請求され、翌月以降の請求日は8月10日、9月10日となります。
 
@@ -97,6 +97,10 @@ Organizationプランでは、いつでもシートを追加または削除す�
 * 9月10日：8610円- 8610円 x 21/31 = **2777円** です。この請求日の時点では1シートを保有しているため、翌月には8610円が請求されます。8月20日に1シートが削除されたため、シートは31日間のうち10日間しか使用されませんでした。ユーザーは前回の請求日にそのシートの分として8610円を支払い済みのため、未使用の21日間について返金されます。したがって、請求書から8610円 x 21/31が差し引かれます。
 * 10月10日: **8610円** 。このプランは1シートを保有し、前月はプランの変更がありませんでした。
 
-### How can I contact PlayCanvas about billing?
+### Personal planを持っています。無料ユーザーをプライベートプロジェクトに追加できますか？
 
-If your question about billing is not answered on this page, please email [billing@playcanvas.com](mailto:billing@playcanvas.com).
+いいえ。Personal planを持つユーザーのみをプライベートプロジェクトに追加できます。
+
+### PlayCanvasに請求について問い合わせるにはどうすればよいですか？
+
+このページで請求に関するご質問が解決しない場合は、[billing@playcanvas.com](mailto:billing@playcanvas.com)までメールでお問い合わせください。

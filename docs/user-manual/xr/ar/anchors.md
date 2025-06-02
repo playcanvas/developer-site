@@ -7,7 +7,7 @@ Anchors provide the ability to create a point in 3D space that can be updated to
 
 Each anchor is represented as a position and orientation and can be created from an arbitrary point as well as in relation to a hit test result that will make it more reliable.
 
-### Using Anchors
+### Using Anchors {#using-anchors}
 
 To start using anchors, when a session is requested, a flag should be provided to the session:
 
@@ -17,7 +17,7 @@ app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
 });
 ```
 
-## Support
+## Support {#support}
 
 You can check if anchors are supported by the system:
 
@@ -33,7 +33,7 @@ app.xr.on('start', () => {
 });
 ```
 
-## Creating Anchors
+## Creating Anchors {#creating-anchors}
 
 Then you can create an anchor, e.g. using an arbitrary position and rotation:
 
@@ -47,7 +47,7 @@ app.xr.anchors.create(position, rotation, (err, anchor) => {
 
 Or for more reliable tracking, an anchor can be created from the [Hit Test Result][1].
 
-## Anchor
+## Anchor {#anchor}
 
 Each anchor has its position and rotation and can be updated at any point. When an anchor is updated, the application developer should update related virtual objects accordingly.
 
@@ -81,7 +81,7 @@ app.xr.anchors.on('add', (anchor) => {
 });
 ```
 
-## Persistence
+## Persistence {#persistence}
 
 Anchor persistence provides a way to remember anchors between sessions, with a limited number of anchors per origin. This allows applications to place virtual objects in relation to the real-world geometry and remain there between sessions.
 

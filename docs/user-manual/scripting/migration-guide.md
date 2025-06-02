@@ -1,161 +1,169 @@
 ---
 title: Migration Guide
-sidebar_position: 11
-unlisted: true
+sidebar_position: 4
 ---
 
-## Migrating Legacy Script Projects
+ESM Scripts replace the older Classic Scripting system as the recommended way to develop PlayCanvas applications. Whilst classic scripts will continue to work in existing projects and will be supported for the foreseeable future, we recommend using the newer ESM format for your projects.
 
-In July 2016, PlayCanvas adopted its [current scripting system][1] (sometimes known as Scripts 2.0). Legacy script projects continue to work as normal. However, it is no longer possible to fork or create new legacy script projects.
+## Gradual Migration
 
-In December 2020, it was announced that legacy script projects would be made read-only in the near future. When you open one in the Editor, you will see the following message in the project dashboard:
+Using ESM Scripts within your project is entirely optional and allows you to gradually migrate your projects over to the newer ESM based format in your own time, without affecting existing projects.
 
-![Dashboard Legacy Script](/img/user-manual/scripting/migration-guide/dashboard-warning.png)
+:::tip
 
-And the following message in the Editor:
+**Projects can contain both ESM Scripts and Classic Scripts**
 
-![Editor Legacy Script](/img/user-manual/scripting/migration-guide/editor-warning.png)
+You do not need to update all your scripts together. We recommend gradually migrating scripts and iteratively testing
 
-If you want to continue to work on legacy script projects, we recommend that you migrate them to the current format. Unfortunately, there is no automated migration process for this. Instead, it is a manual process, but this guide will walk you through it.
+:::
 
-### Step 1 - Create a New Project
+## Codemod
 
-We will begin by creating a new, blank project to transfer assets and code into. Delete the four entities created by default below the scene root entity.
+In order to migrate Classic Scripts to the ESM format, we've provided a [codemod](https://codemod.com/registry/playcanvas-esm-scripts) that will automatically update your code.
 
-### Step 2 - Transfer Assets
+You can find the codemods in our [github repository](https://github.com/playcanvas/codemods) and you can run the codemod using the following command:
 
-Next, copy all assets to your new project (minus scripts which in legacy projects are *not* true assets). It is possible to copy and paste assets from one project to another (using the right-click context menu).
+```bash
+npx codemod playcanvas-esm-scripts
+```
 
-![Copy Paste Assets](/img/user-manual/scripting/migration-guide/copy-assets.png)
+## Known differences
 
-However, legacy script projects are quite old. Years ago, assets were imported without file extensions and some metadata might not be available to view in the Inspector panel. So you might want to consider downloading your source assets and uploading them to your new project.
+In general, ESM Scripts provide a more expressive and flexible way of creating projects. Whilst we have attempted to keep the migration process as seamless as possible, there are some notable differences that you should bear in mind.
 
-### Step 3 - Transfer Scripts
+### Module Scope
 
-Download the scripts from your legacy script project via the Project Dashboard:
+**ESM Scripts have module scope, Classic Scripts have global scope**. This means modules cannot implicitly access variables defined in other files. Often this is used as a way to define global settings or configuration. The config has a higher loading order than the script, and so the `SPEED` is accessible globally.
 
-![Download Scripts](/img/user-manual/scripting/migration-guide/download-scripts.png)
-
-If your legacy project is connected to a GitHub repo, download your scripts from there.
-
-You can now upload the legacy scripts to your new project.
-
-### Step 4 - Update Scripts to Current Format
-
-The transferred scripts in your new project will now need to be updated to the current format. Here is an example, showing the legacy format:
+<details>
+<summary>**See code example**</summary>
 
 ```javascript
-pc.script.attribute('speed', 'number', 10);
+// config.js
+var SPEED = 10;
 
-pc.script.create('myScript', function (app) {
-    // Creates a new MyScript instance
-    var MyScript = function (entity) {
-        this.entity = entity;
-    };
+// script.js
+// ❌ This will not work. `SPEED` is scoped to config.js
+console.log(SPEED)
+```
 
-    MyScript.prototype = {
-        // Called once after all resources are loaded and before the first update
-        initialize: function () {
+This is a *hidden dependency* which breaks if the loading order changes. Instead, use `import/export` syntax to explicitly define the dependency.
+
+```javascript
+// config.mjs
+export const SPEED = 10
+
+// script.mjs
+import { SPEED } from './config.mjs';
+// ✅ Works!
+console.log(SPEED); 
+```
+
+</details>
+
+You can learn more about the other difference between [ES Modules and standard scripts here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#other_differences_between_modules_and_standard_scripts)
+
+### Loading Order
+
+:::note
+
+**ESM Script do not have a loading order.**
+
+:::
+
+The loading order of scripts was introduced as a way to organize dependencies between scripts and guarantee certain code would executed before others. With ES modules, these relationships can be explicitly defined through `import/export` syntax. As such, ESM Scripts do not have an loading order and they should not be relied upon to load in a certain way. Instead we encourage you to use `import/export` statements to set up dependencies.
+
+### The New `Script` Class
+
+With ESM Scripts, the new `Script` base class replaces the existing `ScriptType` class as the default base class. The `Script` class represents the minimal set of features necessary, but omits a couple of features present in the original `ScriptType` class.
+
+It's worth noting that although `Script` is now the default base class, it's still possible to use `ScriptType` as the base class (internally `ScriptType` extends `Script`), however we do not recommend doing this for ESM Scripts, due to some of the reasons listed below.
+
+#### Attribute Events
+
+:::note
+
+ESM Script do not fire Attribute Events.
+
+:::
+
+The `Script` class does not support attributes events in the format of `attr:[name]`. The reason behind removing this is that, internally, the engine would override class members, and in practice this would create difficult-to-debug scenarios as it's not fully compatible with [ES6 class syntax](https://github.com/playcanvas/engine/issues/6316).
+
+Instead, you can define your own events around class attribute members using something like the following;
+
+<details>
+<summary>**See code example**</summary>
+
+```javascript
+const watch = (target, prop) => {
+    const privateProp = `#{prop}`;
+    target[privateProp] = target[prop];
+
+    Object.defineProperty(target, prop, {
+        set(value) {
+            if (target[privateProp] !== value) {
+                target.fire(`changed:${prop}`, value);
+                target[privateProp] = value;
+            }
         },
-
-        // Called every frame, dt is time in seconds since last update
-        update: function (dt) {
+        get() {
+            return this[privateProp];
         }
-    };
-
-    return MyScript;
-});
-```
-
-And here is the equivalent script in the current format:
-
-```javascript
-var MyScript = pc.createScript('myScript');
-
-MyScript.attributes.add('speed', { type: 'number', default: 10 });
-
-// initialize code called once per entity
-MyScript.prototype.initialize = function() {
-    const app = this.app;       // application instance is available as this.app
-    const entity = this.entity; // entity property already set up
-};
-
-// update code called every frame
-MyScript.prototype.update = function(dt) {
-};
-```
-
-Things to notice:
-
-* There is no constructor in the current script format. Constructor code must be moved to the `initialize` function.
-* `app` (the `pc.Application` instance of the script) becomes `this.app`.
-* `this.entity` is automatically made available to current format scripts.
-
-#### Migrating Script Events
-
-Legacy scripts handle events like `enable`, `disable` and `destroy` as follows:
-
-```javascript
-onEnable: function () {
-
-},
-
-onDisable: function () {
-
-},
-
-onDestroy: function () {
-
-},
-```
-
-To migrate these to the current script format, you would register event handlers in the script's `initialize` function:
-
-```javascript
-MyScript.prototype.initialize = function() {
-    this.on("enable", function () {
-
     });
+}
 
-    this.on("disable", function () {
+import { Script } from 'playcanvas'
 
-    });
+export class Rotate extends Script {
+    static scriptName = 'rotate';
 
-    this.on("destroy", function () {
+    /** attribute */
+    speed = 10;
 
-    });
-};
+    initialize() {
+        watch(this, 'speed');
+
+        this.on('changed:speed', console.log)
+    }
+}
+
 ```
 
-### Step 5 - Transfer Scene Hierarchy
+</details>
 
-Next, we will transfer the legacy project's scene hierarchy across. The PlayCanvas Editor supports a copy and paste operation between two Editor instances. However, this operation fails if legacy script components are in the selection. Therefore, you should first delete all script components from your legacy script project. To do this, select all entities with legacy script components. You can do this by running the following JavaScript in the browser's JavaScript console:
+This also means you can have events for any class members too, not only script attributes.
+
+#### Attribute Copying
+
+:::note
+
+**ESM Script Attributes are not copied, they are passed by reference.**
+
+:::
+
+**Attributes are no longer copied, they are passed by reference.** The reasons this was changed was also due to a [bug in `ScriptType`](https://github.com/playcanvas/engine/issues/6316) that was incompatible with ES6 classes.
+
+Instead, if you do need to copy values, we recommend you do it manually and explicitly via getters and setters. Whilst this is more verbose, it's clear and explicit.
+
+<details>
+<summary>**See code example**</summary>
 
 ```javascript
-const entities = editor.call('entities:list').filter(function(entity) {
-    return entity.has('components.script');
-});
-if (entities.length) {
-    editor.call('selector:set', 'entity', entities);
-} else {
-    editor.call('selector:clear');
+import { Script, Vec3 } from 'playcanvas';
+
+export class Rotate extends Script {
+    static scriptName = 'rotate';
+
+    _speed = new Vec3();
+
+    set speed(value) {
+        this._speed.copy(value)
+    }
+
+    get speed() {
+        return this._speed;
+    }
 }
 ```
 
-You should see something like the following:
-
-![Select Script Entities](/img/user-manual/scripting/migration-guide/select-script-entities.png)
-
-You can then hit the delete button in the Inspector:
-
-![Delete Script Components](/img/user-manual/scripting/migration-guide/delete-script-components.png)
-
-Now you can successfully copy and paste your game's hierarchy from the read-only project to the new destination project.
-
-With this done, you can hit CTRL+Z (CMD+Z on Mac) to undo the previous deletion of your legacy script components.
-
-Reselect all entities that have a script component. Create a script component on every corresponding entity in the new project and add the corresponding scripts to those components. Finally, iterate through every script attribute on every script on every script component and copy its value over to the new project.
-
-You should now be done with the migration.
-
-[1]: https://blog.playcanvas.com/playcanvas-scripts-2-0/
+</details>

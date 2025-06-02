@@ -1,79 +1,107 @@
 ---
-title: Engine Migrations
+title: エンジンマイグレーション
 sidebar_position: 4
 ---
 
-The PlayCanvas Engine is continually evolving, and its updates occasionally introduce breaking changes that require users to adapt their scripts.
+PlayCanvas Engineは常に進化しており、そのアップデートによって、ユーザーがスクリプトを適応させる必要がある破壊的な変更が導入されることがあります。
 
-This guide provides an overview of all major breaking changes across releases, offering users a helpful resource for migrating their code to newer versions.
+このガイドでは、リリース間の主要な破壊的な変更のすべてを概観し、ユーザーがコードを新しいバージョンに移行するための役立つリソースを提供します。
 
-## Migration from 1.75.0 to 2.4.0
+問題のトラブルシューティングを行う際は、エンジンのデバッグバージョンを使用することをお勧めします。これは、非推奨メッセージ、警告、および誤った使用に関連するエラーのログを提供するからです。
 
-The migration from major version 1 to major version 2 is a substantial update, introducing numerous breaking changes.
+## 2.4.0から2.5.0へのマイグレーション
 
-### Breaking changes
+### 2.5.0での破壊的な変更
+
+#### ShaderMaterial
+
+`ShaderMaterial`は以前、各フラグメントシェーダーに必要なコードブロックを自動的に挿入することで、ガンマ補正、トーンマッピング、フォグ処理を効率化していました。この機能は現在削除され、関連する機能を個々のシェーダーが手動で含める責任となりました。
+
+`gammaCorrectOutput`、`toneMap`、`addFog`などの関数が不足していることによるシェーダーエラーに遭遇した場合、必要な関数をシェーダーに明示的に含めるようにしてください。詳細については、[このアップデート](https://github.com/playcanvas/engine/pull/7331)を参照してください。
+
+## 1.75.0から2.4.0へのマイグレーション
+
+メジャーバージョン1からメジャーバージョン2へのマイグレーションは、多数の破壊的な変更を導入する大幅なアップデートです。
+
+### 破壊的な変更
 
 #### WebGL 1
 
-Support for WebGL1 has been discontinued; the engine now exclusively supports WebGL2 and WebGPU (in beta). If your application relies on WebGL1, you will need to continue using version 1 of the engine.
+WebGL1のサポートは終了しました。エンジンは現在、WebGL2とWebGPU（ベータ版）のみをサポートしています。アプリケーションがWebGL1に依存している場合、エンジンのバージョン1を使い続ける必要があります。
 
 #### AudioSourceComponent
 
-The AudioSourceComponent, which was replaced by the SoundComponent some time ago, has now been completely removed.
+以前SoundComponentに置き換えられたAudioSourceComponentは、現在完全に削除されました。
 
-#### Legacy Scripts
+#### レガシースクリプト
 
-The legacy scripting system, deprecated since 2016 and maintained in a read-only state for several years, is now being removed entirely.
+2016年から非推奨となり、数年間読み取り専用の状態で維持されてきたレガシーなスクリプトシステムは、現在、完全に削除されます。
 
-#### Deprecated functions
+#### 非推奨関数
 
-Numerous deprecated functions that provided backward compatibility have been removed. If your application displays deprecation warnings when using the debug version of Engine 1, these issues should be resolved before migrating to Engine 2. In Engine 2, deprecated warnings are no longer displayed, and the backward compatibility code has been eliminated.
+後方互換性を提供していた多数の非推奨関数が削除されました。アプリケーションがEngine 1のデバッグバージョン使用時に非推奨警告を表示する場合、Engine 2へのマイグレーション前にこれらの問題を解決する必要があります。Engine 2では、非推奨警告はもはや表示されず、後方互換性コードは廃止されました。
 
 #### Basic Material
 
-The BasicMaterial has been removed. To achieve equivalent functionality, you can use a StandardMaterial with the emissive color or emissive map set as a replacement.
+BasicMaterialは削除されました。同等の機能を実現するには、代替としてエミッシブカラーまたはエミッシブマップが設定されたStandardMaterialを使用できます。
 
-#### Rendering to a texture
+#### Shader Material
 
-When rendering to a texture, the deprecated method of configuring the RenderTarget on the Layer has been fully removed. The RenderTarget must now be set directly on the camera instead.
+もし、エラー`Material class cannot be instantiated, use ShaderMaterial instead`を受け取った場合、これは代わりに[ShaderMaterial][1]を使用するようにコードを修正する必要があることを示しています。エンジンシェーダーが[リニアワークフロー][2]を使用するようになったため、[フラグメントシェーダー][3]で最終ガンマ補正を適用するために`gammaCorrectOutput`がどのように使用されているかに注意してください。
 
-#### Engine rendering callbacks
+#### テクスチャへのレンダリング
 
-The engine previously executed multiple callbacks per frame for camera and layer rendering. These have been replaced with an event-driven system that supports multiple subscribers. The new events are now emitted by the Scene class. For more details, refer to [this pull request](https://github.com/playcanvas/engine/pull/7156).
+テクスチャへのレンダリングを行う際、レイヤー上でRenderTargetを設定する非推奨の方法は完全に削除されました。代わりに、RenderTargetはカメラに直接設定される必要があります。
 
-#### StandardMaterial tint flags
+#### エンジンレンダリングコールバック
 
-The tint options for StandardMaterial have been confusing and inconsistent, so we've removed the flags for Ambient, Diffuse and Emissive tint. Previously, these flags only affected certain cases, such as when a texture was applied. With this update, tint colors are now always applied. To disable tinting, set the color to a neutral value (the default tint colors used when creating a new material):
+エンジンは以前、カメラおよびレイヤーのレンダリングのために、フレームごとに複数のコールバックを実行していました。これらは、複数のサブスクライバーをサポートするイベント駆動型システムに置き換えられました。新しいイベントは現在Sceneクラスによって発行されます。詳細については、[このプルリクエスト](https://github.com/playcanvas/engine/pull/7156)を参照してください。
 
-Here is the list of default colors per tint type:
+#### StandardMaterialのティントフラグ
 
-* **Ambient**: `new Color(1, 1, 1)` (white)
-* **Diffuse**: `new Color(1, 1, 1)` (white)
-* **Emissive**: `new Color(0, 0, 0)` (black)
+StandardMaterialのティントオプションは混乱を招き、一貫性がありませんでした。そのため、Ambient、Diffuse、Emissiveのティントフラグを削除しました。以前は、これらのフラグは特定のケース、例えばテクスチャが適用された場合などにのみ影響しました。このアップデートにより、ティントカラーは常に適用されるようになりました。ティントを無効にするには、色をニュートラルな値に設定します（新しいマテリアルを作成する際に使用されるデフォルトのティントカラー）：
 
-There is one somewhat confusing behavior to note. By default, the emissive tint is set to black to ensure the material doesn't emit any color. When you assign an emissive texture, it's important to set the emissive color to white; otherwise, the black tint will override the emissive contribution from the texture, resulting in no visible emission.
+ティントタイプごとのデフォルトカラーのリストは次のとおりです。
 
-#### Gamma-correction, tone-mapping and fog settings
+* **Ambient**: `new Color(1, 1, 1)` (白)
+* **Diffuse**: `new Color(1, 1, 1)` (白)
+* **Emissive**: `new Color(0, 0, 0)` (黒)
 
-Previously, the `gammaCorrection` and `toneMapping` settings were applied globally on the `Scene` and affected all cameras' rendering. Now, these settings are available directly on each camera, allowing for unique configurations and rendering for each individual camera.
+いくつか分かりにくい挙動があります。デフォルトでは、マテリアルが色を発しないように、エミッシブのティントは黒に設定されています。エミッシブテクスチャを割り当てる際は、エミッシブカラーを白に設定することが重要です。そうしないと、黒いティントがテクスチャからのエミッシブの寄与を上書きし、結果として発光が見えなくなります。
 
-Previously, fog settings were accessed directly on the `Scene`, such as `Scene.fog`, `Scene.fogColor`, and `Scene.fogEnd`. These settings have now been moved under the `Scene.fog` property, and can be set using `Scene.fog.type`, `Scene.fog.color`, `Scene.fog.end`, and similar properties.
+#### 黒いムービーテクスチャ
 
-For more details, refer to [this pull request](https://github.com/playcanvas/engine/pull/7101).
+ムービーテクスチャが黒く表示される場合、エンジンのデバッグバージョンで警告を確認してください。それは、マテリアルのティントエミッシブカラーが黒に設定されており、ムービーが黒くレンダリングされていることを示している可能性が高いです。これを修正するには、エミッシブカラーを白に変更してください。
 
-#### Gamma space textures
+#### ガンマ補正、トーンマッピング、フォグ設定
 
-Textures that represent colors, such as Diffuse, Emissive, Specular, and Sheen, are typically stored in sRGB space to maintain color range and reduce banding. When used by the engine, these textures are converted from sRGB to linear space for accurate lighting calculations. Previously, this conversion was handled by shader math, which impacted performance. With the removal of WebGL1 support, we can now leverage hardware to perform this conversion efficiently at no extra cost. The only requirement is that the texture must be created using sRGB format:
+以前は、`gammaCorrection` と `toneMapping` の設定は `Scene` にグローバルに適用され、すべてのカメラのレンダリングに影響を与えました。現在、これらの設定は各カメラで直接利用できるようになり、個々のカメラごとに独自の構成とレンダリングが可能になりました。
 
-* When loading a Texture asset that represents colors in sRGB space, it's important to specify an sRGB encoding. For details, see [this pull request](https://github.com/playcanvas/engine/pull/6739).
-* When creating a Texture instance that represents color in sRGB space, it is essential to use an sRGB pixel format, such as `PIXELFORMAT_SRGBA8`.
+以前は、フォグ設定は `Scene.fog`、`Scene.fogColor`、`Scene.fogEnd` のように `Scene` で直接アクセスできました。これらの設定は現在、`Scene.fog` プロパティの下に移動され、`Scene.fog.type`、`Scene.fog.color`、`Scene.fog.end`、および同様のプロパティを使用して設定できます。
 
-### Other changes
+詳細については、[このプルリクエスト](https://github.com/playcanvas/engine/pull/7101)を参照してください。
 
-For detailed information on the changes, refer to the release notes for each individual engine version:
+#### ガンマ空間テクスチャ
 
-* [2.0.0](https://github.com/playcanvas/engine/releases/tag/v2.0.0)
-* [2.1.0](https://github.com/playcanvas/engine/releases/tag/v2.1.0)
-* [2.2.0](https://github.com/playcanvas/engine/releases/tag/v2.2.0)
-* [2.3.0](https://github.com/playcanvas/engine/releases/tag/v2.3.0)
-* [2.4.0](https://github.com/playcanvas/engine/releases/tag/v2.4.0)
+ディフューズ、エミッシブ、スペキュラ、シアーンのような色を表現するテクスチャは、色の範囲を維持し、バンディングを減らすために通常sRGB空間に格納されます。エンジンで使用される際、これらのテクスチャは正確なライティング計算のためにsRGBから線形空間に変換されます。以前は、この変換はシェーダーの計算によって処理され、パフォーマンスに影響を与えていました。WebGL1のサポートが削除されたことにより、現在ではハードウェアを利用してこの変換を効率的に、追加コストなしで実行できるようになりました。唯一の要件は、テクスチャがsRGBフォーマットを使用して作成されている必要があるということです。
+
+*   sRGB空間で色を表現するTextureアセットをロードする際は、sRGBエンコーディングを指定することが重要です。詳細については、[このプルリクエスト](https://github.com/playcanvas/engine/pull/6739)を参照してください。
+*   sRGB空間で色を表現するTextureインスタンスを作成する際は、`PIXELFORMAT_SRGBA8` のようなsRGBピクセルフォーマットを使用することが不可欠です。
+
+#### インスタンシング
+
+コードに `transformVS` チャンクのインスタンシングセクションへのカスタマイズが含まれている場合、これらのカスタマイズを `transformInstancingVS` チャンクに移動して更新する必要があります。さらに、どの属性が使用されているかを指定するようにマテリアルを設定してください。さらなる詳細については、[このプルリクエスト](https://github.com/playcanvas/engine/pull/6867)を参照してください。
+
+### その他の変更点
+
+変更に関する詳細情報については、各エンジンバージョンのリリースノートを参照してください。
+
+*   [2.0.0](https://github.com/playcanvas/engine/releases/tag/v2.0.0)
+*   [2.1.0](https://github.com/playcanvas/engine/releases/tag/v2.1.0)
+*   [2.2.0](https://github.com/playcanvas/engine/releases/tag/v2.2.0)
+*   [2.3.0](https://github.com/playcanvas/engine/releases/tag/v2.3.0)
+*   [2.4.0](https://github.com/playcanvas/engine/releases/tag/v2.4.0)
+
+[1]: /user-manual/graphics/shaders/
+[2]: /user-manual/graphics/linear-workflow/
+[3]: /user-manual/graphics/shaders/#fragment-shader

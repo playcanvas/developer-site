@@ -1,15 +1,15 @@
 ---
-title: Anchors
+title: アンカー
 sidebar_position: 1
 ---
 
-Anchors provide the ability to create a point in 3D space that can be updated to match an ever-evolving understanding of the real world by the underlying the AR system. This allows for the placement of virtual objects in relation to the real world that feel planted in the user's environment.
+アンカーは、基盤となるARシステムによる現実世界の絶えず進化する理解に合わせて更新できる、3D空間内のポイントを作成する機能を提供します。これにより、ユーザーの環境に据え付けられているように感じられる、現実世界に関連する仮想オブジェクトの配置が可能になります。
 
-Each anchor is represented as a position and orientation and can be created from an arbitrary point as well as in relation to a hit test result that will make it more reliable.
+各アンカーは位置と向きとして表現され、任意の点から作成できるだけでなく、より信頼性の高いものにするヒットテストの結果に関連して作成することもできます。
 
-### Using Anchors
+### アンカーの使用 {#using-anchors}
 
-To start using anchors, when a session is requested, a flag should be provided to the session:
+アンカーの使用を開始するには、セッションがリクエストされた際に、そのセッションにフラグを提供する必要があります。
 
 ```javascript
 app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
@@ -17,85 +17,85 @@ app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
 });
 ```
 
-## Support
+## サポート {#support}
 
-You can check if anchors are supported by the system:
+システムがアンカーをサポートしているか確認できます。
 
 ```javascript
 if (app.xr.anchors.supported) {
-    // anchors are supported
+    // アンカーがサポートされています
 }
 
 app.xr.on('start', () => {
     if (app.xr.anchors.available) {
-        // anchors are supported and available
+        // アンカーはサポートされており、利用可能です
     }
 });
 ```
 
-## Creating Anchors
+## アンカーの作成 {#creating-anchors}
 
-Then you can create an anchor, e.g. using an arbitrary position and rotation:
+次に、例えば任意のポジションと回転を使用して、アンカーを作成できます。
 
 ```javascript
 app.xr.anchors.create(position, rotation, (err, anchor) => {
     if (!err) {
-        // new anchor has been created
+        // 新しいアンカーが作成されました
     }
 });
 ```
 
-Or for more reliable tracking, an anchor can be created from the [Hit Test Result][1].
+または、より信頼性の高いトラッキングのために、アンカーは[Hit Test Result][1]から作成できます。
 
-## アンカー (Anchor)
+## アンカー {#anchor}
 
-Each anchor has its position and rotation and can be updated at any point. When an anchor is updated, the application developer should update related virtual objects accordingly.
+各アンカーは独自のポジションと回転を持ち、いつでも更新できます。アンカーが更新された場合、アプリケーション開発者は関連する仮想オブジェクトを適切に更新する必要があります。
 
-Anchors can be added and removed dynamically during the session:
+アンカーはセッション中に動的に追加および削除できます。
 
 ```javascript
 app.xr.anchors.on('add', (anchor) => {
     const entity = new pc.Entity();
 
-    // add a cone for an anchor
+    // アンカー用にコーンを追加
     entity.addComponent('render', { type: 'cone' });
-    entity.setLocalScale(0.1, 0.1, 0.1); // 10cm diameter
+    entity.setLocalScale(0.1, 0.1, 0.1); // 直径10cm
     app.root.addChild(entity);
 
-    // transform
+    // 変換
     entity.setLocalPosition(anchor.getPosition());
     entity.setLocalRotation(anchor.getRotation());
-    entity.translateLocal(0, 0.05, 0); // offset cone
+    entity.translateLocal(0, 0.05, 0); // コーンをオフセット
 
-    // update cone when anchor changes
+    // アンカーが変更されたときにコーンを更新
     anchor.on('change', () => {
         entity.setLocalPosition(anchor.getPosition());
         entity.setLocalRotation(anchor.getRotation());
-        entity.translateLocal(0, 0.05, 0); // offset cone
+        entity.translateLocal(0, 0.05, 0); // コーンをオフセット
     });
 
-    // remove cone when anchor is destroyed
+    // アンカーが破棄されたときにコーンを削除
     anchor.once('destroy', () => {
         entity.destroy();
     });
 });
 ```
 
-## Persistence
+## 永続化 {#persistence}
 
-Anchor persistence provides a way to remember anchors between sessions, with a limited number of anchors per origin. This allows applications to place virtual objects in relation to the real-world geometry and remain there between sessions.
+アンカーの永続化は、セッション間でアンカーを記憶する方法を提供し、オリジンごとにアンカーの数が制限されています。これにより、アプリケーションは現実世界のジオメトリに関連して仮想オブジェクトを配置し、セッション間でそれらを維持することができます。
 
-You can check if persistence is supported:
+永続化がサポートされているか確認できます。
 
 ```javascript
 if (app.xr.anchors.persistence) {
-    // application can persist anchors
+    // アプリケーションはアンカーを永続化できます
 }
 ```
 
-Each anchor can have a UUID that allows it to be referenced and restored between sessions.
+各アンカーは、セッション間で参照および復元できるUUIDを持つことができます。
 
-You can access a list of persistent anchors and restore them on session start:
+永続的なアンカーのリストにアクセスし、セッション開始時にそれらを復元できます。
 
 ```javascript
 app.xr.on('start', () => {
@@ -106,12 +106,12 @@ app.xr.on('start', () => {
 });
 ```
 
-To manage individual anchor persistence, you can use `persist` and `forget` methods:
+個々のアンカーの永続化を管理するには、`persist` および `forget` メソッドを使用できます。
 
 ```javascript
 anchor.persist((err, uuid) => {
     if (uuid) {
-        // anchor has been persisted
+        // アンカーが永続化されました
     }
 });
 ```
@@ -120,7 +120,7 @@ anchor.persist((err, uuid) => {
 if (anchor.persistent) {
     anchor.forget((err) => {
         if (!err) {
-            // anchor is forgotten
+            // アンカーは忘れられました
         }
     });
 }

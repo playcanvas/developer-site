@@ -7,11 +7,11 @@ sidebar_position: 7
 
 以下は、高速なロード時間を実現するためのいくつかのヒントです。
 
-* In general, AVIF images produce smaller files than WebP, JPG, or PNG for the same image quality. It also supports an alpha channel like WebP and PNG. However [not all browsers currently support AVIF](https://caniuse.com/avif) so use it where it makes sense for your project. If you can't use AVIF, [WebP has much wider support](https://caniuse.com/webp) and produces smaller files than JPEG or PNG with similar quality, but we encourage you to test with different formats.
+* 一般的に、AVIF 画像は、同じ画質で WebP、JPG、PNG よりも小さいファイルを生成します。また、WebP や PNG と同様にアルファチャンネルもサポートしています。ただし、[現在のところすべてのブラウザが AVIF をサポートしているわけではない](https://caniuse.com/avif)ため、プロジェクトで適切に利用できる場所で使用してください。AVIF を使用できない場合、[WebP はより広範なサポート](https://caniuse.com/webp)があり、JPEG や PNG と同等の品質でより小さいファイルを生成しますが、異なる形式でテストすることをお勧めします。
 * 特定のテクスチャイメージをダウンサンプリングする機会を探してください。例えば、小さいグラフィカルオブジェクトに使用される 2048x2048 のテクスチャは、1024x1024 または512x512 でほぼ同じように見える場合があります。
 * 非同期で読み込むことができるアセットを事前にロードしないでください。例えば、ゲームの開始時にすぐにゲームミュージックを再生する必要がない場合は、Inspector パネルでそのアセットの Preload オプションをオフにすることを検討してください。
 * プリフィルター (Prefiltered) されたキューブマップを持っていて、スカイボックスの最上位ミップマップを表示していない場合、6つの面画像の preload をすべてオフにすることができます。
-* If you are not instantiating Templates at runtime, uncheck preload on the asset as they aren't needed. (See '[When do I need to load Template Assets?][1]' for more information).
+* ランタイム時に Templates をインスタンス化しない場合、アセットのプリロードのチェックを外してください。それらは必要ありません。（詳細については、「[Template Assets をロードする必要があるのはいつですか？][1]」を参照してください）。
 * インポートされたモデルに必要な頂点属性のみを持たせるようにしてください。たとえば、モデルに第2 UV セットがあるが使用していない場合、またはすべてが白い頂点カラーしかない場合は、モデリングアプリケーションに戻ってそれらの属性を削除してください。
 * Google Chrome Dev Tools の Networking パネル (または他のブラウザのそれに相当するもの) を使用して、サイズでロードされたアセットをソートし、目立つものを見つけてください。使用されていないアセットまたは重複するアセットを削除することができます。
 * PlayCanvas の組み込み物理エンジンを使用すると、379KB の追加ダウンロードコストが発生します。非常に単純な問題を解決するために物理エンジンを使用している場合は、ダウンロードペナルティを被らない代替ソリューションを採用することを検討してください。
@@ -21,7 +21,7 @@ sidebar_position: 7
 
 上記のガイドラインを超えて、ユーザーが新しいものとやりとりできるようにロードを複数の段階に分けることで、ユーザーを維持することができます。
 
-Using [Virtual Voodoo][2] as an example, we can show the 'typical' sequence that most applications will use for browser experiences.
+[Virtual Voodoo][2] を例として、ほとんどのアプリケーションがブラウザ体験で利用する「典型的な」シーケンスを示すことができます。
 
 ゲームには3つのフェーズがあります。
 
