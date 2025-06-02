@@ -89,7 +89,7 @@ uniform tints: array<vec3f, 4>;
 uniform weights: array<f32, 8>;
 ```
 
-Internally, uniforms are automatically placed in a uniform buffers, and in the shader code are accessed using `uniform.` prefix:
+Internally, uniforms are automatically placed in uniform buffers, and in the shader code are accessed using a `uniform.` prefix:
 
 ```wgsl
 var pos = uniform.view_position;
