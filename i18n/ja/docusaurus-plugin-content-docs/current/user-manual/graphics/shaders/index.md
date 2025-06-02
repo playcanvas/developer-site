@@ -11,7 +11,7 @@ sidebar_position: 5
 
 シェーダーの記述を作成します。
 
-``` javascript
+```javascript
 const shaderDesc = {
     uniqueName: 'MyShader',
     shaderLanguage: pc.SHADERLANGUAGE_GLSL,
@@ -30,7 +30,7 @@ const shaderDesc = {
 
 次に、レンダリングに使用できるマテリアルのインスタンスを作成します。
 
-``` javascript
+```javascript
 const material = new pc.ShaderMaterial(shaderDesc);
 ```
 

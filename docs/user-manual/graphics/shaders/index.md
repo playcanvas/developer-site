@@ -11,7 +11,7 @@ To create an instance of `ShaderMaterial`, these are the steps:
 
 Create a description of your shader:
 
-``` javascript
+```javascript
 const shaderDesc = {
         uniqueName: 'MyShader',
         vertexGLSL: `
@@ -36,7 +36,7 @@ const shaderDesc = {
 
 Then create instances of your material, which you can use for rendering:
 
-``` javascript
+```javascript
 const material = new pc.ShaderMaterial(shaderDesc);
 ```
 

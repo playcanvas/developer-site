@@ -55,13 +55,13 @@ const schema = {
 
 Currently, node context menus support two actions:
 
-``` javascript
+```javascript
 Graph.GRAPH_ACTIONS.DELETE_NODE // Delete the node associated with this context menu.
 Graph.GRAPH_ACTIONS.ADD_EDGE // Add an edge that starts from the node associated with this context menu, selecting another node will complete the edge connection. Selecting the background canvas will cancel adding an edge.
 ```
 
 While edges support their own deletion by adding this action in their context menu:
 
-``` javascript
+```javascript
 Graph.GRAPH_ACTIONS.DELETE_EDGE // Delete the edge associated with this context menu.
 ```
