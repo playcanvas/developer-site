@@ -33,7 +33,7 @@ export class Rotator extends Script {
     speed = 2;
 
     update(dt){
-        this.entity.rotateLocal(0, this.speed * dt, 0)
+        this.entity.rotateLocal(0, this.speed * dt, 0);
     }
 }
 ```
@@ -76,7 +76,7 @@ contextual information on what the attribute is and how it behaves
  * @attribute
  * Sets the speed of the Y rotation in degrees.
  */
-speed = 2
+speed = 2;
 ```
 
 In the editor this is available as a tooltip.
@@ -92,7 +92,7 @@ What if you also want to define a sensible range values for speed. You can do th
  * @attribute
  * @range [0, 10]
  */
-speed = 10
+speed = 10;
 ```
 
 This simply tells the editor that speed is an attribute and it's value should be within 0 - 10. The editor will create a numerical slider mapped to this range.
@@ -108,7 +108,7 @@ There are additional numerical constraints that you can set which help the edito
  * @precision 0.1
  * @step 0.05
  */
-speed = 10
+speed = 10;
 ```
 
 ## Attribute types
@@ -144,7 +144,7 @@ The Entity type lets your reference another entity in your hierarchy. A great wa
  * @attribute
  * @type {Entity}
  */
-target
+target;
 ```
 
 :::important
@@ -165,7 +165,7 @@ The runtime type of an Asset attribute is `Asset`. You can reference the resourc
  * @type {Asset}
  * @resource texture
  */
-texture
+texture;
 
 initialize() {
     console.log('This is the texture asset', this.texture);
@@ -183,7 +183,7 @@ You must import `Asset` from `playcanvas` for your attribute to parse correctly.
 
 ```javascript
 /** @attribute */
-color = new Color()
+color = new Color();
 ```
 
 :::important
@@ -198,7 +198,7 @@ The color attribute shows a color picker when exposed in the editor. There are t
 
 ```javascript
 /** @attribute */
-position = new Vec3()
+position = new Vec3();
 ```
 
 :::important
@@ -219,7 +219,7 @@ The vector attribute can be a 2, 3 or 4 dimension. The editor will show a numeri
  * @type {Curve}
  * @color rgba
  */
-wave
+wave;
 ```
 
 :::important
@@ -249,10 +249,10 @@ The `Color[]` declaration uses the [jsdoc type tag](https://jsdoc.app/tags-type)
 In your initialize or update loop, you can iterate over `gradientStops` as an array
 
 ```javascript
-initialize(){
+initialize() {
     this.gradientStops.forEach(color => {
-        console.log('This is a Color class', color)
-    })
+        console.log('This is a Color class', color);
+    });
 }
 ```
 
@@ -267,7 +267,7 @@ const Lights = {
     ON: 1,
     OFF: 0,
     UNKNOWN: 0.5
-}
+};
 
 class MyScript extends Script {
     static scriptName = 'myScript';
@@ -276,7 +276,7 @@ class MyScript extends Script {
      * @attribute
      * @type {Lights}
      */
-    ambient = Lights.OFF
+    ambient = Lights.OFF;
 }
 ```
 
@@ -297,12 +297,12 @@ export class Delorean extends Script {
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      */
-    speed = 10
+    speed = 10;
 }
 ```
 
@@ -317,13 +317,13 @@ export class Delorean extends Script {
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      * @enabledif {power}
      */
-    speed = 10
+    speed = 10;
 }
 ```
 
@@ -340,19 +340,19 @@ export class Delorean extends Script {
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      * @enabledif {power}
      */
-    speed = 10
+    speed = 10;
 
     /**
      * @attribute
      * @visibleif {speed > 88.8}
      */
-    enableFluxCapacitor = true
+    enableFluxCapacitor = true;
 }
 ```
 
@@ -384,11 +384,11 @@ class GameLogic extends Script {
      * @attribute 
      * `power` and `speed` are exposed as sub attributes
      */
-    enemy = { power: 10, speed: 3 }
+    enemy = { power: 10, speed: 3 };
 
     initialize(){
-        console.log(this.enemy.speed) // 3
-        console.log(this.enemy.power) // 10
+        console.log(this.enemy.speed); // 3
+        console.log(this.enemy.power); // 10
     }
 }
 ```
@@ -410,7 +410,7 @@ class GameLogic extends Script {
     static scriptName = 'gameLogic';
 
     /** @attribute */
-    enemy = { power: 10, speed: 3 }
+    enemy = { power: 10, speed: 3 };
 }
 ```
 
@@ -432,13 +432,13 @@ class GameLogic extends Script {
      * @attribute 
      * @type {Enemy}
      */
-    enemy
+    enemy;
 }
 ```
 
 ### Interface Attributes
 
-If you want to group attributes together and set individual constraints on it's members you can use an Interface Attribute. This provides a morea more flexible way of grouping attributes.
+If you want to group attributes together and set individual constraints on its members you can use an Interface Attribute. This provides a morea more flexible way of grouping attributes.
 
 ```javascript
 /** @interface */
@@ -447,7 +447,8 @@ class Enemy {
      * @range [0, 11]
      */
     power = 10;
-    speed = 3
+
+    speed = 3;
 }
 
 class GameLogic extends Script {
@@ -457,7 +458,7 @@ class GameLogic extends Script {
      * @attribute 
      * @type {Enemy}
      */
-    enemy
+    enemy;
 }
 ```
 
@@ -488,11 +489,11 @@ class GameLogic extends Script {
      * @attribute
      * @type {Enemy[]}
      */
-    enemies
+    enemies;
 
     update(){
         this.enemies.forEach(({ power, speed }) => {
-            this.updateEnemy(power, speed)
+            this.updateEnemy(power, speed);
         })
     }
 }

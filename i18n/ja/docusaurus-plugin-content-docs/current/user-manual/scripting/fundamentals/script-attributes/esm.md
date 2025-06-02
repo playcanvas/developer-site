@@ -33,7 +33,7 @@ export class Rotator extends Script {
     speed = 2;
 
     update(dt){
-        this.entity.rotateLocal(0, this.speed * dt, 0)
+        this.entity.rotateLocal(0, this.speed * dt, 0);
     }
 }
 ```
@@ -75,7 +75,7 @@ update(dt) {
  * @attribute
  * Y軸回転の速度を度単位で設定します。
  */
-speed = 2
+speed = 2;
 ```
 
 エディターでは、これはツールチップとして利用できます。
@@ -91,7 +91,7 @@ speed = 2
  * @attribute
  * @range [0, 10]
  */
-speed = 10
+speed = 10;
 ```
 
 これは単に、速度がアトリビュートであり、その値が0から10の範囲内であるべきことをエディターに伝えます。エディターは、この範囲にマッピングされた数値スライダーを作成します。
@@ -107,7 +107,7 @@ speed = 10
  * @precision 0.1
  * @step 0.05
  */
-speed = 10
+speed = 10;
 ```
 
 ## アトリビュートの型
@@ -143,7 +143,7 @@ Entity型を使用すると、ヒエラルキー内の別のエンティティ�
  * @attribute
  * @type {Entity}
  */
-target
+target;
 ```
 
 :::important
@@ -164,7 +164,7 @@ Asset属性のランタイム型は`Asset`です。ランタイムでAsset属性
  * @type {Asset}
  * @resource texture
  */
-texture
+texture;
 
 initialize() {
     console.log('これはテクスチャアセットです', this.texture);
@@ -182,7 +182,7 @@ initialize() {
 
 ```javascript
 /** @attribute */
-color = new Color()
+color = new Color();
 ```
 
 :::important
@@ -197,7 +197,7 @@ color = new Color()
 
 ```javascript
 /** @attribute */
-position = new Vec3()
+position = new Vec3();
 ```
 
 :::important
@@ -218,7 +218,7 @@ position = new Vec3()
  * @type {Curve}
  * @color rgba
  */
-wave
+wave;
 ```
 
 :::important
@@ -250,10 +250,8 @@ gradientStops;
 ```javascript
 initialize(){
     this.gradientStops.forEach(color => {
-        console.log('これはColorクラスです', color)
-```
-
-})
+        console.log('これはColorクラスです', color);
+    });
 }
 ```
 
@@ -268,7 +266,7 @@ const Lights = {
     ON: 1,
     OFF: 0,
     UNKNOWN: 0.5
-}
+};
 
 class MyScript extends Script {
     static scriptName = 'myScript';
@@ -277,7 +275,7 @@ class MyScript extends Script {
      * @attribute
      * @type {Lights}
      */
-    ambient = Lights.OFF
+    ambient = Lights.OFF;
 }
 ```
 
@@ -298,12 +296,12 @@ export class Delorean extends Script {
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      */
-    speed = 10
+    speed = 10;
 }
 ```
 
@@ -318,13 +316,13 @@ export class Delorean extends Script {
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      * @enabledif {power}
      */
-    speed = 10
+    speed = 10;
 }
 ```
 
@@ -341,19 +339,19 @@ export class Delorean extends Script {
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      * @enabledif {power}
      */
-    speed = 10
+    speed = 10;
 
     /**
      * @attribute
      * @visibleif {speed > 88.8}
      */
-    enableFluxCapacitor = true
+    enableFluxCapacitor = true;
 }
 ```
 
@@ -385,11 +383,11 @@ class GameLogic extends Script {
      * @attribute 
      * `power`と`speed`はサブ属性として公開されます
      */
-    enemy = { power: 10, speed: 3 }
+    enemy = { power: 10, speed: 3 };
 
-    initialize(){
-        console.log(this.enemy.speed) // 3
-        console.log(this.enemy.power) // 10
+    initialize() {
+        console.log(this.enemy.speed); // 3
+        console.log(this.enemy.power); // 10
     }
 }
 ```
@@ -411,7 +409,7 @@ class GameLogic extends Script {
     static scriptName = 'gameLogic';
 
     /** @attribute */
-    enemy = { power: 10, speed: 3 }
+    enemy = { power: 10, speed: 3 };
 }
 ```
 
@@ -433,7 +431,7 @@ class GameLogic extends Script {
      * @attribute 
      * @type {Enemy}
      */
-    enemy
+    enemy;
 }
 ```
 
@@ -448,7 +446,8 @@ class Enemy {
      * @range [0, 11]
      */
     power = 10;
-    speed = 3
+
+    speed = 3;
 }
 
 class GameLogic extends Script {
@@ -458,7 +457,7 @@ class GameLogic extends Script {
      * @attribute 
      * @type {Enemy}
      */
-    enemy
+    enemy;
 }
 ```
 
@@ -489,12 +488,12 @@ class GameLogic extends Script {
      * @attribute
      * @type {Enemy[]}
      */
-    enemies
+    enemies;
 
     update(){
         this.enemies.forEach(({ power, speed }) => {
-            this.updateEnemy(power, speed)
-        })
+            this.updateEnemy(power, speed);
+        });
     }
 }
 ```
