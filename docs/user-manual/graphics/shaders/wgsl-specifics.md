@@ -130,7 +130,7 @@ var texel = textureSample(diffuseMap, diffuseMapSampler, coords);
 
 #### Fetching Textures
 
-If you only need to read raw texel data (i.e., without filtering, mipmapping, or addressing modes), you can use textureLoad instead of textureSample. This is called non-filtered access, or simply texel fetching.
+If you only need to read raw texel data (i.e., without filtering, mipmapping, or addressing modes), you can use `textureLoad` instead of `textureSample`. This is called non-filtered access, or simply texel fetching.
 
 In such cases, no sampler is required or allowed. For example:
 
@@ -142,7 +142,7 @@ var noSamplerMap: texture_cube<f32>;
 let texel = textureLoad(noSamplerMap, coords, mipLevel);
 ```
 
-#### Unfilterable textures
+#### Unfilterable Textures
 
 WebGPU supports unfilterable float textures, which are typically used for specialized purposes such as sampling from depth textures, where filtering is not allowed. However, WGSL does not provide a distinct sample type in the syntax for declaring these unfilterable float textures. To address this limitation and enable proper bind group auto-generation based on shader declarations, we introduce a new sample type called `uff` (unfilterable-float).
 
@@ -164,7 +164,7 @@ Support for `texture_external` is not available yet, and will be added in the fu
 
 :::
 
-### Storage buffers
+### Storage Buffers
 
 Storage buffers are GPU-accessible memory resources that allow shaders to read and write arbitrary data with random access. In WGSL, they are declared using `var<storage>` and are ideal for working with large or structured datasets such as particle systems, compute data, or dynamic geometry. Unlike uniforms, storage buffers support both read and write access (with appropriate access control).
 
