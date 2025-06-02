@@ -190,7 +190,7 @@ varying texCoord: vec2f;
 
 Internally, those are parsed, and stored in `VertexOutput` structure in the vertex shader, as well as in `FragmentInput` structure in the fragment shader.
 
-#### Vertex shader
+#### Vertex Shader
 
 As part of the `VertexOutput` structure these built-in variables are automatically available:
 
@@ -211,7 +211,7 @@ varying texCoord: vec2f;
 }
 ```
 
-#### Fragment shader
+#### Fragment Shader
 
 As part of the `FragmentInput` structure these built-in variables are automatically available:
 
@@ -242,7 +242,7 @@ fn fragmentMain(input: FragmentInput) -> FragmentOutput {
 }
 ```
 
-### Fragment shader outputs
+### Fragment Shader Outputs
 
 The fragment shader is responsible for producing one or more color outputs, which are written to the render targets (color attachments) of the framebuffer.
 
