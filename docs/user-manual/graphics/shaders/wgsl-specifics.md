@@ -9,7 +9,7 @@ The following sections outline key aspects of writing WGSL shaders for PlayCanva
 
 ### Simplified Shader Interface Syntax
 
-In standard WGSL (WebGPU Shading Language), declaring uniforms, attributes, and varyings requires explicitly specifying a @group and @binding index for each resource. This can be verbose and error-prone, especially for common patterns.
+In standard WGSL (WebGPU Shading Language), declaring uniforms, attributes, and varyings requires explicitly specifying a `@group` and `@binding` index for each resource. This can be verbose and error-prone, especially for common patterns.
 
 To improve usability and streamline shader development, we adopt a simplified syntax similar to GLSL. In this model, you do not need to specify @group or @binding attributes manually—these are automatically assigned and managed by the engine based on a predefined layout.
 
