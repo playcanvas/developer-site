@@ -5,12 +5,14 @@ sidebar_position: 5
 
 import { Application, Entity } from '@playcanvas/react';
 import { Camera, Render, Light, Collision } from '@playcanvas/react/components';
-import { useState } from 'react';
+import { useState, lazy } from 'react';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Interactive from '@site/src/components/playcanvas-react-example';
 import InteractiveSource from '!!raw-loader!@site/src/components/playcanvas-react-example';
 import CodeBlock from '@theme/CodeBlock';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export const LazyInteractive = lazy(() => import('@site/src/components/playcanvas-react-example'));
 
 Let's build a simple 3D scene step by step using PlayCanvas React. We'll create a basic scene with a lit sphere and see it running live in your browser.
 
@@ -141,10 +143,12 @@ One of the great advantages of using React is how easy it is to add interactivit
 
 <Tabs>
     <TabItem default value="code" label="Code">
-        <CodeBlock language="jsx">{InteractiveSource}</CodeBlock>
+      <CodeBlock language="jsx">{InteractiveSource}</CodeBlock>
     </TabItem>
     <TabItem  value="demo" label="Demo" className='example-demo'>
-        <Interactive/>
+      <BrowserOnly>
+        <LazyInteractive/>
+      </BrowserOnly>
     </TabItem>
 </Tabs>
 
@@ -167,4 +171,4 @@ Now that you've built your first scene, try:
 - Adding movement with the `OrbitControls` script
 - Exploring physics by adding `RigidBody` and `Collision` components
 
-Now you have the basics, see the [documentation](https://plauycanvas-react.vercel.app/docs) for more examples.
+Now you have the basics, see the [documentation](https://playcanvas-react.vercel.app/docs) for more examples.

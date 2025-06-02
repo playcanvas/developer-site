@@ -114,6 +114,9 @@ const config = {
             },
           ],
         },
+        externals: {
+          'https://esm.sh/canvas-confetti': 'confetti'
+        }
       }),
     }),
   ],

@@ -1,4 +1,3 @@
-
 import { Application, Entity } from '@playcanvas/react'
 import { Camera, Light, Render } from '@playcanvas/react/components'
 import confetti from "https://esm.sh/canvas-confetti"
