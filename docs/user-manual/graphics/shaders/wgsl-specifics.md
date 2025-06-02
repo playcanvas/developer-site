@@ -128,7 +128,7 @@ var diffuseMapSampler: sampler;
 var texel = textureSample(diffuseMap, diffuseMapSampler, coords);
 ```
 
-#### Fetching textures
+#### Fetching Textures
 
 If you only need to read raw texel data (i.e., without filtering, mipmapping, or addressing modes), you can use textureLoad instead of textureSample. This is called non-filtered access, or simply texel fetching.
 
