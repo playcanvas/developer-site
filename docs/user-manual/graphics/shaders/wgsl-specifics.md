@@ -83,7 +83,7 @@ Uniforms are used to pass *numerical resources* from the engine to the shader.
 
 Uniforms are declared using this simplified syntax:
 
-```wlsl
+```wgsl
 uniform view_position: vec3f;
 uniform tints: array<vec3f, 4>;
 uniform weights: array<f32, 8>;
