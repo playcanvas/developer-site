@@ -91,7 +91,7 @@ uniform weights: array<f32, 8>;
 
 Internally, uniforms are automatically placed in a uniform buffers, and in the shader code are accessed using `uniform.` prefix:
 
-```wlsl
+```wgsl
 var pos = uniform.view_position;
 var color = uniform.tints[2];
 
