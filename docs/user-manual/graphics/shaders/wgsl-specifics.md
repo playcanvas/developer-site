@@ -268,7 +268,7 @@ Example:
 
 :::note
 
-Support for rendering to integer textures (output format other then vec4f) is not available yet, and will be added in the future.
+Support for rendering to integer textures (output format other then `vec4f`) is not available yet, and will be added in the future.
 
 :::
 
