@@ -56,7 +56,7 @@ update(dt) {
 
 ### エディターでのアトリビュート
 
-![Script Attributes](/img/user-manual/scripting/script-attributes.png)
+![スクリプト属性](/img/user-manual/scripting/script-attributes.png)
 
 アトリビュートを宣言したら、エディターはスクリプトアトリビュートを公開するためにコードをパースする必要があります。アトリビュートが変更された場合、アトリビュートを手動で更新する必要があります。パースボタンをクリックしてください。
 
