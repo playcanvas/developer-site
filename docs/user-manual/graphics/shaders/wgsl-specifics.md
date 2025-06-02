@@ -119,7 +119,7 @@ In WGSL, textures and samplers are treated as separate objects, unlike in GLSL, 
 
 When you want to sample a texture (i.e. retrieve filtered texel values), you must provide a texture object *directly followed* by a sampler.
 
-```wlsl
+```wgsl
 // 2d texture with a sampler declaration
 var diffuseMap: texture_2d<f32>;
 var diffuseMapSampler: sampler;
