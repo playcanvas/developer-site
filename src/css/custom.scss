@@ -151,3 +151,86 @@ html[data-theme='dark'] .navbar--github-link:before {
 .nowrap-first-col td:first-child {
   white-space: nowrap;
 }
+
+.example-demo {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.example-demo > canvas {
+  border-radius: var(--ifm-code-border-radius);
+}
+
+.example-demo[hidden] {
+  display: none;
+}
+
+.grabbing {
+  cursor: grab;
+}
+
+.grabbing:active {
+  cursor: grabbing;
+}
+
+.hover-grow {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-grow:hover {
+  transform: scale(1.05);
+}
+
+.hover-grow {
+  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+.hover-grow:hover {
+  transform: scale(1.05);
+  transform-origin: center;
+}
+
+.hover-grow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tablet {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  color: var(--ifm-color-primary);
+  border-radius: 100px;
+  background-color: var(--ifm-breadcrumb-item-background-active);
+  display: inline-block;
+}
+
+.font-bold {
+  font-weight: 500;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.py-1 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
+.foreground {
+  color: var(--ifm-hero-text-color);
+}
+
+.underline {
+  text-decoration: underline;
+}

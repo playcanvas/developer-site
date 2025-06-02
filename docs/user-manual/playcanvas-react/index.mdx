@@ -1,0 +1,88 @@
+---
+title: PlayCanvas React
+sidebar_position: 5.6
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+[PlayCanvas React](https://github.com/playcanvas/react) is a modern library that brings the power of the PlayCanvas 3D engine into the React ecosystem. It provides a declarative, component-based approach to building interactive 3D applications using familiar React patterns.
+
+Explore the [official documentation](https://playcanvas-react.vercel.app/docs) or browse the [GitHub repository](https://github.com/playcanvas/react) for more.
+
+<div className='flex py-1 font-bold mb-2'>
+  <a href="#quick-start">
+    <div className='tablet'>
+      <span>Getting Started →</span>
+    </div>
+  </a>  
+  <a href="https://github.com/playcanvas/react" className='foreground underline' target="_blank">View on GitHub ↗</a>
+</div>
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+  <a href="https://playcanvas-react.vercel.app/examples/splats">
+    <img
+      src="/img/user-manual/react/splats.jpg"
+      alt="Gaussian Splats Example"
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+    />
+  </a>
+  <a href="https://playcanvas-react.vercel.app/examples/model-viewer">
+    <img
+      src="/img/user-manual/react/render.png"
+      alt="3D Model Viewer Example"
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+    />
+  </a>
+  <a href="https://playcanvas-react.vercel.app/examples/physics">
+    <img
+      src="/img/user-manual/react/physics.png"
+      alt="Physics Example"
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+    />
+  </a>
+  <a href="https://stackblitz.com/edit/pc-react-tick-tock?file=src%2FScene.tsx">
+    <img
+      src="/img/user-manual/react/clock.png"
+      alt="Clock Example"
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+    />
+  </a>
+</div>
+
+## Why React?
+
+React is at the heart of modern web development, and 3D content is no longer just for games. **PlayCanvas React** brings real-time 3D into the React ecosystem, enabling developers to build immersive experiences using the same tools and patterns they already use. With support for hooks, context, and component composition, it’s 3D — the React way.
+
+Explore more in the [example gallery](https://playcanvas-react.vercel.app/examples).
+
+### Full Engine Power, React Simplicity
+
+Unlike other 3D React libraries, PlayCanvas React gives you access to the **entire** PlayCanvas engine via intuitive React components:
+
+- **Physics** – Full Ammo.js integration
+- **Gaussian Splats** – Cutting-edge 3D point cloud rendering
+- **Pointer Events** – React-style event propagation and bubbling
+- **Asset System** – Declarative and imperative loading of assets
+- **Scripts** – Escape hatches for custom logic when needed
+
+## Quick Start
+
+**The fastest way to get started is with the [StackBlitz template](https://playcanvas-react.vercel.app/new)**. It's a one-click experience that launches a basic scene with a camera and a cube. Fork, edit, or clone the code to make it your own.
+
+Alternatively, follow the [Getting Started guide](https://playcanvas-react.vercel.app/docs/getting-started) or install it directly in your project:
+
+```bash
+npm install @playcanvas/react
+
+Then follow the [first scene walkthrough](./building-a-scene) to learn how to compose a scene using PlayCanvas React components and APIs.
+
+## Learn More
+
+- [Getting Started Guide](getting-started.md) - Set up your first project
+- [Core Concepts](core-concepts.md) - Understand the ECS architecture
+- [Features Showcase](features.md) - Explore all capabilities
+- [Interactive Examples](examples.md) - Learn by doing
+- [API Reference](https://playcanvas-react.vercel.app/api) - Complete component documentation
+
+Join the growing community of developers building the next generation of 3D web experiences with **PlayCanvas React**!

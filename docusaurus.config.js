@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import path from 'path';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -100,6 +101,21 @@ const config = {
       }
     }],
     'docusaurus-plugin-sass',
+    () => ({
+      name: 'custom-webpack-config',
+      configureWebpack: () => ({
+        module: {
+          rules: [
+            {
+              test: /\.m?js$/,
+              resolve: { 
+                fullySpecified: false 
+              },
+            },
+          ],
+        },
+      }),
+    }),
   ],
 
   presets: [
