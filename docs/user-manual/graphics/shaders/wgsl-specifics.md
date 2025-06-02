@@ -221,7 +221,7 @@ frontFacing: @builtin(front_facing)     // front-facing
 sampleIndex: builtin(sample_index)      // sample index for MSAA
 ```
 
-These build-ins are also available in the global scope using these names:
+These built-ins are also available in the global scope using these names:
 
 ```wgsl
 pcPosition
