@@ -177,14 +177,6 @@ html[data-theme='dark'] .navbar--github-link:before {
 
 .hover-grow {
   transition: transform 0.2s ease-in-out;
-}
-
-.hover-grow:hover {
-  transform: scale(1.05);
-}
-
-.hover-grow {
-  transition: transform 0.2s ease-in-out;
   overflow: hidden;
 }
 
