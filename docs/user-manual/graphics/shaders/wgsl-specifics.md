@@ -109,7 +109,7 @@ Currently, our uniform system supports only simple types, including `f32`, `i32`
 
 :::
 
-### Texture resources
+### Texture Resources
 
 Texture resources are using simplified WGSL syntax, where specifying a @group and @binding index for each resource has to be omitted.
 
