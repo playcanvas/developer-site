@@ -25,6 +25,8 @@ ESMスクリプトは、`.mjs`拡張子である必要があります：
 import { Script } from 'playcanvas';
 
 export class PlayerController extends Script {
+    static scriptName = 'playerController';
+
     initialize() {
         // 初期化コードをここに
     }
@@ -64,6 +66,8 @@ import { Script } from 'playcanvas';
 import { GAME_SETTINGS, clamp } from './config.mjs';
 
 export class PlayerController extends Script {
+    static scriptName = 'playerController';
+
     update(dt) {
         const speed = GAME_SETTINGS.playerSpeed;
         // clamp関数を使う...

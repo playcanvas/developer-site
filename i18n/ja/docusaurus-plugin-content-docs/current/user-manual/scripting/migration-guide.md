@@ -115,6 +115,8 @@ const watch = (target, prop) => {
 import { Script } from 'playcanvas'
 
 export class Rotate extends Script {
+    static scriptName = 'rotate';
+
     /** attribute */
     speed = 10;
 
@@ -149,6 +151,7 @@ export class Rotate extends Script {
 import { Script, Vec3 } from 'playcanvas';
 
 export class Rotate extends Script {
+    static scriptName = 'rotate';
 
     _speed = new Vec3();
 

@@ -28,6 +28,8 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class Rotate extends Script {
+    static scriptName = 'rotate';
+
     /** @attribute */
     speed = 10;
 

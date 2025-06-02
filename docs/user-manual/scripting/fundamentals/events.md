@@ -27,6 +27,8 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class Player extends Script {
+    static scriptName = 'player';
+
     update(dt) {
         const x = 1;
         const y = 1;
@@ -60,6 +62,8 @@ Listen for events firing by using `on()` and `off()`. In this example, the displ
 import { Script } from 'playcanvas';
 
 export class Display extends Script {
+    static scriptName = 'display';
+
     /**
      * @attribute
      * @type {Entity}
@@ -130,6 +134,8 @@ Firing the `player:move` event:
 import { Script } from 'playcanvas';
 
 export class Player extends Script {
+    static scriptName = 'player';
+
     update(dt) {
         var x = 1;
         var y = 1;
@@ -138,6 +144,8 @@ export class Player extends Script {
 }
 
 export class Display extends Script {
+    static scriptName = 'display';
+
     initialize() {
         // Method to call when player moves
         const onPlayerMove = (x, y) => {

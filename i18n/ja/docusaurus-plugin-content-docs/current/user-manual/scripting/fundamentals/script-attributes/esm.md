@@ -23,6 +23,8 @@ sidebar_position: 1
 import { Script } from 'playcanvas';
 
 export class Rotator extends Script {
+    static scriptName = 'rotator';
+
     /**
      * エディターで`speed`プロパティを動的に設定できるようになりました。
      *
@@ -235,6 +237,8 @@ const Lights = {
 }
 
 class MyScript extends Script {
+    static scriptName = 'myScript';
+
     /**
      * @attribute
      * @type {Lights}
@@ -255,6 +259,8 @@ class MyScript extends Script {
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
@@ -273,6 +279,8 @@ export class Delorean extends Script {
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
@@ -294,6 +302,8 @@ export class Delorean extends Script {
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
@@ -335,6 +345,8 @@ export class Delorean extends Script {
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** 
      * @attribute 
      * `power` と `speed` はサブ属性として公開されます
@@ -362,6 +374,8 @@ class GameLogic extends Script {
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** @attribute */
     enemy = { power: 10, speed: 3 }
 }
@@ -382,6 +396,8 @@ class GameLogic extends Script {
  */
 
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /**
      * @attribute
      * @type {Enemy}
@@ -405,6 +421,8 @@ class Enemy {
 }
 
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /**
      * @attribute
      * @type {Enemy}
@@ -434,6 +452,8 @@ class GameLogic extends Script {
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /**
      * @attribute
      * @type {Enemy[]}

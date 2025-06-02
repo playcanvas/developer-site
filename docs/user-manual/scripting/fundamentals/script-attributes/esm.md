@@ -23,6 +23,8 @@ Let's start with a simple rotate script example.
 import { Script } from 'playcanvas';
 
 export class Rotator extends Script {
+    static scriptName = 'rotator';
+
     /**
      * You can now set the `speed`property dynamically in the editor.
      *
@@ -236,6 +238,8 @@ const Lights = {
 }
 
 class MyScript extends Script {
+    static scriptName = 'myScript';
+
     /**
      * @attribute
      * @type {Lights}
@@ -256,6 +260,8 @@ Let’s walk through an example:
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
@@ -274,6 +280,8 @@ We can achieve this by using the `@enabledif` tag:
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
@@ -295,6 +303,8 @@ You can also use more expressive conditions. If the condition evaluates to a [tr
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
@@ -336,6 +346,8 @@ Attribute groups are essentially objects that contain sub-attributes:
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** 
      * @attribute 
      * `power` and `speed` are exposed as sub attributes
@@ -363,6 +375,8 @@ A simple inline way of declaring attribute groups
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** @attribute */
     enemy = { power: 10, speed: 3 }
 }
@@ -380,6 +394,8 @@ This is a more modular way of declaring Attribute Groups. Whilst it is more verb
  */
 
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** 
      * @attribute 
      * @type {Enemy}
@@ -403,6 +419,8 @@ class Enemy {
 }
 
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /**
      * @attribute 
      * @type {Enemy}
@@ -432,6 +450,8 @@ Interface attributes can be used as arrays, just like plain attributes. This mea
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /**
      * @attribute
      * @type {Enemy[]}
