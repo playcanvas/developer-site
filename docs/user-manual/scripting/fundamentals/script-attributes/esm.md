@@ -386,7 +386,7 @@ class GameLogic extends Script {
      */
     enemy = { power: 10, speed: 3 };
 
-    initialize(){
+    initialize() {
         console.log(this.enemy.speed); // 3
         console.log(this.enemy.power); // 10
     }
@@ -491,7 +491,7 @@ class GameLogic extends Script {
      */
     enemies;
 
-    update(){
+    update(dt) {
         this.enemies.forEach(({ power, speed }) => {
             this.updateEnemy(power, speed);
         })

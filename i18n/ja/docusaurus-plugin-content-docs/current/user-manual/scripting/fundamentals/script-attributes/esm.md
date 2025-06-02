@@ -248,7 +248,7 @@ gradientStops;
 `initialize`または`update`ループで、`gradientStops`を配列として反復処理できます。
 
 ```javascript
-initialize(){
+initialize() {
     this.gradientStops.forEach(color => {
         console.log('これはColorクラスです', color);
     });
@@ -490,7 +490,7 @@ class GameLogic extends Script {
      */
     enemies;
 
-    update(){
+    update(dt) {
         this.enemies.forEach(({ power, speed }) => {
             this.updateEnemy(power, speed);
         });
