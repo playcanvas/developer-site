@@ -13,20 +13,19 @@ Create a description of your shader:
 
 ``` javascript
 const shaderDesc = {
-        uniqueName: 'MyShader',
-        shaderLanguage: pc.SHADERLANGUAGE_GLSL,
-        vertexCode: `
-            // write your vertex shader source code
-        `,
-        fragmentCode: `
-            // write your fragment shader source code
-        `,
-        attributes: {
-            aPosition: pc.SEMANTIC_POSITION,
-            aUv0: pc.SEMANTIC_TEXCOORD0
-        }
-    };
-
+    uniqueName: 'MyShader',
+    shaderLanguage: pc.SHADERLANGUAGE_GLSL,
+    vertexCode: `
+        // write your vertex shader source code
+    `,
+    fragmentCode: `
+        // write your fragment shader source code
+    `,
+    attributes: {
+        aPosition: pc.SEMANTIC_POSITION,
+        aUv0: pc.SEMANTIC_TEXCOORD0
+    }
+};
 ```
 
 Then create instances of your material, which you can use for rendering:

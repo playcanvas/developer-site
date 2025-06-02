@@ -13,20 +13,19 @@ sidebar_position: 5
 
 ``` javascript
 const shaderDesc = {
-        uniqueName: 'MyShader',
-        shaderLanguage: pc.SHADERLANGUAGE_GLSL,
-        vertexCode: `
-            // 頂点シェーダーのソースコードを記述します
-        `,
-        fragmentCode: `
-            // フラグメントシェーダーのソースコードを記述します
-        `,
-        attributes: {
-            aPosition: pc.SEMANTIC_POSITION,
-            aUv0: pc.SEMANTIC_TEXCOORD0
-        }
-    };
-
+    uniqueName: 'MyShader',
+    shaderLanguage: pc.SHADERLANGUAGE_GLSL,
+    vertexCode: `
+        // 頂点シェーダーのソースコードを記述します
+    `,
+    fragmentCode: `
+        // フラグメントシェーダーのソースコードを記述します
+    `,
+    attributes: {
+        aPosition: pc.SEMANTIC_POSITION,
+        aUv0: pc.SEMANTIC_TEXCOORD0
+    }
+};
 ```
 
 次に、レンダリングに使用できるマテリアルのインスタンスを作成します。
