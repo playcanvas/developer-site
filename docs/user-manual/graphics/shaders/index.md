@@ -54,7 +54,7 @@ Before the shader is used, a preprocessing step is applied, allowing you to mana
 
 This preprocessing step follows a typical C-like preprocessor structure, handling directives such as `#define`, `#if`, `#else`, `#endif`, and similar. This gives you fine-grained control over how the shader code is compiled and customized for different use cases.
 
-You can also use `#include` directive, to include one of the registered shader chunks, for example `#include "screenDepthPS"`
+You can also use a `#include` directive to include one of the registered shader chunks. For example: `#include "screenDepthPS"`
 
 ### Material Shader Defines
 
