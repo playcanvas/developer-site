@@ -167,4 +167,4 @@ Now that you've built your first scene, try:
 - Adding movement with the `OrbitControls` script
 - Exploring physics by adding `RigidBody` and `Collision` components
 
-Continue to the [Features](features.md) section to discover all the amazing things you can build with PlayCanvas React!
+Now you have the basics, see the [documentation](https://plauycanvas-react.vercel.app/docs) for more examples.
