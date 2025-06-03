@@ -1,5 +1,5 @@
 ---
-title: Interface
+title: Editor Interface
 sidebar_position: 1
 ---
 
