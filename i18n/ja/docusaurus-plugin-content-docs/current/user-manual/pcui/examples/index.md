@@ -3,10 +3,10 @@ title: 例
 sidebar_position: 4
 ---
 
-Here are some simple examples demonstrating the various PCUI elements:
+ここでは、さまざまなPCUI要素を示す簡単な例をいくつか紹介します。
 
 <div className='iframe-container'>
     <iframe src="https://playcanvas.github.io/pcui/examples/"></iframe>
 </div>
 
-The source code for these examples can be found in the [PCUI GitHub repository](https://github.com/playcanvas/pcui/tree/main/examples).
+これらの例のソースコードは、[PCUI GitHub リポジトリ](https://github.com/playcanvas/pcui/tree/main/examples)で見つけることができます。

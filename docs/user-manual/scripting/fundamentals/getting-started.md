@@ -27,6 +27,8 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class MyScript extends Script {
+    static scriptName = 'myScript';
+
     /** @attribute */
     speed = 10;
 
@@ -99,9 +101,11 @@ Attributes let you expose script properties to the editor, making scripts config
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Color, Script } from 'playcanvas';
+import { Color, Entity, Script } from 'playcanvas';
 
 export class Configurable extends Script {
+    static scriptName = 'configurable';
+
     /** @attribute */
     speed = 5;
     

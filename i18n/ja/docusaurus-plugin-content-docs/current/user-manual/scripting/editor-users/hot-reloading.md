@@ -5,9 +5,9 @@ sidebar_position: 4
 
 複雑なプロジェクトで反復的な作業を行う場合、スクリプトを変更するたびにページ全体をリフレッシュする必要があると手間取ることもあります。特に、コードをテストするまでに時間がかかる場合は不便です。そこで、コードのホットスワップを利用することができます。
 
-## How to Use Hot-swapping
+## ホットスワッピングの使い方
 
-Hot-swapping is enabled on a per-script basis. To enable it, all you need to do is implement the `swap()` method in your script.
+ホットスワッピングは、スクリプト単位で有効化できます。これを有効にするには、あなたのスクリプトに `swap()` メソッドを実装するだけです。
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -44,6 +44,8 @@ MyScript.prototype.swap = function(old) {
 import { ScriptType, math } from 'playcanvas';
 
 export class Rotator extends Script {
+    static scriptName = 'rotator';
+
     /**
      * @attribute
      */

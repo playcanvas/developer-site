@@ -1,34 +1,34 @@
 ---
-title: Engine Compatibility
+title: エンジン互換性
 sidebar_position: 9
 ---
 
-## イントロダクション
+## はじめに
 
-The Editor supports two major release streams of the engine:
+Editorは、エンジンの主要な2つのリリースストリームをサポートしています。
 
-- The latest release of engine v1.x.x (**Engine V1**)
-  - This supports WebGL1 and WebGL2, and receives critical bug fixes. It does not receive any new features.
-- The latest release of engine v2.x.x (**Engine V2**)
-  - This supports WebGL2 and WebGPU but not WebGL1 for rendering. It receives both new features and fixes.
+- エンジン v1.x.x の最新リリース (**Engine V1**)
+  - これはWebGL1とWebGL2をサポートし、重要なバグ修正を受け取ります。新しい機能は追加されません。
+- エンジン v2.x.x の最新リリース (**Engine V2**)
+  - これはWebGL2とWebGPUをサポートしますが、レンダリング用のWebGL1はサポートしません。新しい機能と修正の両方を受け取ります。
 
-You are free to switch between these at any time.
+これらはいつでも自由に切り替えることができます。
 
-### Switching projects between Engine V1 and V2
+### Engine V1とV2間でのプロジェクトの切り替え
 
-This process will involve migration and updating of scripts given differences in our Engine API between Engine V1 and V2. All details regarding the engine changes can be found [here](/user-manual/engine/migrations)
+このプロセスには、Engine V1とV2間のEngine APIの違いに伴うスクリプトの移行と更新が含まれます。エンジンの変更に関するすべての詳細は[こちら](/user-manual/engine/migrations)で確認できます。
 
-To initiate this navigate to the settings panel and click the `SWITCH TO ENGINE V2` button to convert your project to using Engine V2 (This will require a confirmation before converting). If you wish to switch back, there is a `SWITCH TO ENGINE V1` button in the same location for Project V2.
+これを開始するには、設定パネルに移動し、「`SWITCH TO ENGINE V2`」ボタンをクリックして、プロジェクトをEngine V2を使用するように変換します（変換前に確認が必要です）。元に戻したい場合は、Project V2の同じ場所に「`SWITCH TO ENGINE V1`」ボタンがあります。
 
 :::important
 
-It is recommended to create a checkpoint before switching engines.
+エンジンを切り替える前に、チェックポイントを作成することをお勧めします。
 
 :::
 
 :::warning
 
-Once the switch has been confirmed, **all users** in the current project will be reloaded.
+切り替えが確認されると、現在のプロジェクトの**すべてのユーザー**がリロードされます。
 
 :::
 
@@ -36,36 +36,36 @@ Once the switch has been confirmed, **all users** in the current project will be
 
 #### スクリプティング
 
-Given the changes in API for the engine you may wish to test your project in the launcher with Engine V1 or V2. You can do this by enabling the Force Engine V2 or Force Engine V1 checkboxes in the launcher options:
+エンジンのAPIの変更を考慮して、LauncherでEngine V1またはV2を使用してプロジェクトをテストしたい場合があります。Launcherオプションの「Force Engine V2」または「Force Engine V1」チェックボックスを有効にすることで、これを行うことができます。
 
 <img src='/img/user-manual/editor/editor-v2/launcher-options.png' width='600' />
 
-Additionally, conditionally checking the Engine version at runtime will allow your script to be made compatible with both versions of the engine during the transition time.
+さらに、実行時にエンジンのバージョンを条件付きで確認することで、移行期間中にスクリプトをエンジンの両方のバージョンと互換性を持たせることができます。
 
 <img src='/img/user-manual/editor/editor-v2/scripting-engine.png' width='300' />
 
-#### Gamma and Tonemap
+#### ガンマとトーンマップ
 
-These settings were previously found under the rendering section of the Settings panel. However, in Engine V2, these have been moved to be set per camera. Each camera component will now have these additional fields:
+これらの設定は以前、設定パネルのレンダリングセクションにありました。しかし、Engine V2では、これらはカメラごとに設定されるように移動されました。各カメラコンポーネントには、これらの追加フィールドが含まれるようになります。
 
 <img src='/img/user-manual/editor/editor-v2/gamma-tonemap.png' width='400' />
 
-The viewport settings are now located inside the EDITOR section of the Settings panel:
+ビューポートの設定は、設定パネルのEDITORセクション内に移動されました。
 
 <img src='/img/user-manual/editor/editor-v2/viewport-camera.png' width='400' />
 
 :::note
 
-If you change the settings per camera and switch back to Project V1, your per-camera settings will be lost.
+カメラごとに設定を変更し、Project V1に戻すと、カメラごとの設定は失われます。
 
 :::
 
-#### sRGB Textures
+#### sRGBテクスチャ
 
 <img src='/img/user-manual/editor/editor-v2/srgb-texture.png' width='400' />
 
-For Engine V2, textures must be set as sRGB or not, depending on their use case. The textures that store color data, such as diffuse and emissive maps, should use sRGB for accurate color representation. This is found under the texture asset panel as shown above. These will be automatically set. However, if there are conflicts, the console will display them:
+Engine V2では、テクスチャは使用ケースに応じてsRGBに設定するかどうかを決める必要があります。ディフューズマップやエミッシブマップなどの色データを保存するテクスチャは、正確な色表現のためにsRGBを使用する必要があります。これは上記に示すテクスチャアセットパネルの下にあります。これらは自動的に設定されますが、競合がある場合はconsoleに表示されます。
 
 <img src='/img/user-manual/editor/editor-v2/console-texture.png' width='600' />
 
-Click on the console message to open up the conflicting reference. If you wish to use the same texture for both sRGB and not, it is advised to duplicate your texture to cover both cases.
+consoleメッセージをクリックして、競合する参照を開きます。sRGBと非sRGBの両方に同じテクスチャを使用したい場合は、両方のケースをカバーするためにテクスチャを複製することをお勧めします。

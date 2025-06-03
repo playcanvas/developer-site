@@ -1,71 +1,70 @@
 ---
-title: Shaders
-sidebar_position: 6
+title: シェーダー
+sidebar_position: 5
 ---
 
-When you import your 3D models into PlayCanvas, by default, they will use our [Physical Material][1]. This is a versatile material type that can cover a lot of your rendering needs.
+3DモデルをPlayCanvasにインポートすると、デフォルトで当社の[Physical Material][1]が使用されます。これは、レンダリングの多くのニーズをカバーできる多用途なマテリアルタイプです。
 
-However, you will often want to perform special effects or special cases for your materials. To do this you will need to write a custom shader. In this case, you need to use `ShaderMaterial`.
+しかし、マテリアルに特殊効果や特殊なケースを適用したいと思うことがよくあります。これを行うには、カスタムシェーダーを記述する必要があります。この場合、`ShaderMaterial`を使用する必要があります。
 
-To create an instance of `ShaderMaterial`, these are the steps:
+`ShaderMaterial`のインスタンスを作成する手順は次のとおりです。
 
-Create a description of your shader:
+シェーダーの記述を作成します。
 
 ``` javascript
 const shaderDesc = {
-        uniqueName: 'MyShader',
-        shaderLanguage: pc.SHADERLANGUAGE_GLSL,
-        vertexCode: `
-            // write your vertex shader source code
-        `,
-        fragmentCode: `
-            // write your fragment shader source code
-        `,
-        attributes: {
-            aPosition: pc.SEMANTIC_POSITION,
-            aUv0: pc.SEMANTIC_TEXCOORD0
-        }
-    };
-
+    uniqueName: 'MyShader',
+    shaderLanguage: pc.SHADERLANGUAGE_GLSL,
+    vertexCode: `
+        // 頂点シェーダーのソースコードを記述します
+    `,
+    fragmentCode: `
+        // フラグメントシェーダーのソースコードを記述します
+    `,
+    attributes: {
+        aPosition: pc.SEMANTIC_POSITION,
+        aUv0: pc.SEMANTIC_TEXCOORD0
+    }
+};
 ```
 
-Then create instances of your material, which you can use for rendering:
+次に、レンダリングに使用できるマテリアルのインスタンスを作成します。
 
 ``` javascript
 const material = new pc.ShaderMaterial(shaderDesc);
 ```
 
-The shader source code can be written in GLSL if you're targeting the WebGL2 or WebGPU platforms, or in WGSL if you're targeting WebGPU only.
+シェーダーのソースコードは、WebGL2またはWebGPUプラットフォームをターゲットにする場合はGLSLで、WebGPUのみをターゲットにする場合はWGSLで記述できます。
 
 :::note
 
-If you write a GLSL shader, it is directly supported by the WebGL2 platform. However, on the WebGPU platform, GLSL shaders require transpilation to WGSL using a WASM transpiler. To avoid this transpilation step and achieve native performance related to shader compilation, and avoid additional download of WASM files, you might want to consider writing an equivalent shader in WGSL for the WebGPU platform, which is supported directly.
+GLSLシェーダーを記述した場合、WebGL2プラットフォームで直接サポートされます。しかし、WebGPUプラットフォームでは、GLSLシェーダーはWASMトランスパイラを使用してWGSLへのトランスパイルが必要です。このトランスパイルステップを避け、シェーダーコンパイルに関連するネイティブパフォーマンスを達成し、WASMファイルの追加ダウンロードを避けるために、WebGPUプラットフォーム向けにWGSLで同等のシェーダーを記述することを検討することをお勧めします。これは直接サポートされています。
 
 :::
 
-## Preprocessor
+## プリプロセッサー {#preprocessor}
 
-Before the shader is used, a preprocessing step is applied, allowing you to manage shader variations effectively.
+シェーダーが使用される前に、プリプロセッシングステップが適用され、シェーダーのバリエーションを効果的に管理できます。
 
-This preprocessing step follows a typical C-like preprocessor structure, handling directives such as `#define`, `#if`, `#else`, `#endif`, and similar. This gives you fine-grained control over how the shader code is compiled and customized for different use cases.
+このプリプロセッシングステップは、一般的なCライクなプリプロセッサー構造に従い、`#define`、`#if`、`#else`、`#endif`などのディレクティブを処理します。これにより、シェーダーコードが異なるユースケース向けにどのようにコンパイルされ、カスタマイズされるかをきめ細かく制御できます。
 
-### Material Shader Defines
+### マテリアルシェーダーの定義 {#material-shader-defines}
 
-Shader defines can be set on a per-material basis, allowing dynamic customization of shader behavior. For example:
+シェーダーの定義はマテリアルごとに設定でき、シェーダーの動作を動的にカスタマイズできます。例：
 
 ```javascript
 material.setDefine('USE_TEXTURE', true);
 material.setDefine('FIRETYPE', 'RED');
 ```
 
-This results in the following lines being added to the shader source:
+これにより、以下の行がシェーダーソースに追加されます。
 
 ```glsl
 #define USE_TEXTURE
 #define FIRETYPE RED
 ```
 
-You can then use these defines within the shader for conditional logic:
+その後、これらの定義をシェーダー内で条件ロジックに使用できます。
 
 ```glsl
 #if defined(USE_TEXTURE)
@@ -77,135 +76,135 @@ You can then use these defines within the shader for conditional logic:
 #endif
 ```
 
-This system enables flexible shader variation without requiring multiple shader files, making it easier to customize rendering for different materials.
+このシステムにより、複数のシェーダーファイルを必要とせずに柔軟なシェーダーバリエーションが可能になり、さまざまなマテリアルに合わせてレンダリングを簡単にカスタマイズできます。
 
-### RenderPass Defines
+### レンダーパスの定義 {#renderpass-defines}
 
-The engine provides some defines automatically, allowing integration with render passes. By default, one of these three defines is provided to allow you to write code specific to different render passes:
+エンジンは一部の定義を自動的に提供し、レンダーパスとの統合を可能にします。デフォルトでは、異なるレンダーパスに特化したコードを記述できるように、これら3つの定義のいずれかが提供されます。
 
 ```glsl
-// Defined for normal forward passes rendering colors
+// 通常のフォワードパスで色をレンダリングするために定義されます
 #define FORWARD_PASS
 
-// Defined for shadow rendering passes
-// Shader output specifics may depend on the shadow type used
+// シャドウレンダリングパスのために定義されます
+// シェーダー出力の詳細は、使用されるシャドウタイプによって異なる場合があります
 #define SHADOW_PASS
 
-// Defined for the render pass used by the `Picker` class to render mesh instance IDs
+// `Picker`クラスがメッシュインスタンスIDをレンダリングするために使用するレンダーパスのために定義されます
 #define SHADOW_PICK 
 ```
 
-If you use a custom render pass, created using [`CameraComponent.setShaderPass`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setshaderpass), a matching define is automatically generated. For example:
+[`CameraComponent.setShaderPass`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setshaderpass)を使用して作成されたカスタムレンダーパスを使用する場合、対応する定義が自動的に生成されます。例：
 
 ```javascript
 camera.setRenderPass('custom');
 ```
 
-This results in the following define being added to the shader:
+これにより、以下の定義がシェーダーに追加されます。
 
 ```glsl
 #define CUSTOM_PASS
 ```
 
-### Shader Includes
+### シェーダーのインクルード {#shader-includes}
 
-The engine builds internal shaders out of chunks; small shader functions that are combined to form a final shader. These chunks are also available for use in custom shaders with `ShaderMaterial`, making it easy to integrate engine functionality.
+エンジンは内部シェーダーをチャンクから構築します。これらは、最終的なシェーダーを形成するために結合される小さなシェーダー関数です。これらのチャンクは`ShaderMaterial`を使用したカスタムシェーダーでも使用でき、エンジンの機能を簡単に統合できます。
 
-#### バーテックスシェーダー
+#### 頂点シェーダー {#vertex-shader}
 
-The engine provides predefined shader includes that handle common transformations, normal calculations, and other essential operations. This allows your custom shader to automatically support skinning, morphing and instancing.
+エンジンは、一般的な変換、法線計算、その他の重要な操作を処理する事前定義されたシェーダーインクルードを提供します。これにより、カスタムシェーダーはスキニング、モーフィング、インスタンス化を自動的にサポートできます。
 
-以下に例を示します。
+例：
 
 ```glsl
-// Includes transformation-related functionality provided by the engine.
-// - Automatically declares the `vertex_position` attribute.
-// - Handles skinning and morphing if necessary.
-// - Adds the following uniforms:
+// エンジンが提供する変換関連の機能を含みます。
+// - `vertex_position`アトリビュートを自動的に宣言します。
+// - 必要に応じてスキニングとモーフィングを処理します。
+// - 以下のユニフォームを追加します：
 //   - `matrix_viewProjection`
 //   - `matrix_model`
 //   - `matrix_normal`
-// - Provides utility functions:
+// - ユーティリティ関数を提供します：
 //   - `getModelMatrix()`
 //   - `getLocalPosition()`
 #include "transformCoreVS"
 
-// Includes normal-related functionality provided by the engine.
-// - Automatically declares the `vertex_normal` attribute.
-// - Handles skinning and morphing if necessary.
-// - Provides utility functions:
+// エンジンが提供する法線関連の機能を含みます。
+// - `vertex_normal`アトリビュートを自動的に宣言します。
+// - 必要に応じてスキニングとモーフィングを処理します。
+// - ユーティリティ関数を提供します：
 //   - `getNormalMatrix()`
 //   - `getLocalNormal()`
 #include "normalCoreVS"
 
 void main(void)
 {
-    // Retrieve the model matrix, accounting for skinning, morphing, or instancing.
+    // スキニング、モーフィング、またはインスタンス化を考慮してモデル行列を取得します。
     mat4 modelMatrix = getModelMatrix();
     vec3 localPos = getLocalPosition(vertex_position.xyz);
     vec4 worldPos = modelMatrix * vec4(localPos, 1.0);
 
-    // Retrieve the normal matrix and compute the world normal.
+    // 法線行列を取得し、ワールド法線を計算します。
     mat3 normalMatrix = getNormalMatrix(modelMatrix);
     vec3 localNormal = getLocalNormal(vertex_normal);
     vec3 worldNormal = normalize(normalMatrix * localNormal);
 
-    // Example: Apply simple wrap-around diffuse lighting using the world normal.
+    // 例：ワールド法線を使用してシンプルなラップアラウンド拡散ライティングを適用します。
     brightness = (dot(worldNormal, uLightDir) + 1.0) * 0.5;
 
-    // Transform the geometry.
+    // ジオメトリを変換します。
     gl_Position = matrix_viewProjection * worldPos;
 }
 ```
 
-#### フラグメントシェーダー
+#### フラグメントシェーダー {#fragment-shader}
 
-The engine provides predefined shader chunks you can include for common color processing effects such as gamma correction, tone mapping and fog. These includes ensure that colors are processed correctly according to the rendering settings.
+エンジンは、ガンマ補正、トーンマッピング、フォグなどの一般的な色処理効果のために含めることができる事前定義されたシェーダーチャンクを提供します。これらのインクルードにより、レンダリング設定に従って色が正しく処理されます。
 
-Example Usage
+使用例
 
 ```glsl
-#include "gammaPS"       // Adds support for gamma correction of inputs and outputs
-#include "tonemappingPS" // Adds support for tone mapping
-#include "fogPS"         // Adds support for fog effects
+#include "gammaPS"       // 入出力のガンマ補正をサポートします
+#include "tonemappingPS" // トーンマッピングをサポートします
+#include "fogPS"         // フォグ効果をサポートします
 
 void main(void)
 {
-    // Evaluate color in linear color space
+    // リニアカラースペースで色を評価します
     vec3 colorLinear = ...;
 
-    // Apply fog if enabled
+    // 有効な場合はフォグを適用します
     vec3 fogged = addFog(colorLinear);
 
-    // Apply tone mapping if enabled
+    // 有効な場合はトーンマッピングを適用します
     vec3 toneMapped = toneMap(fogged);
 
-    // Apply gamma correction and output the final color
+    // ガンマ補正を適用し、最終的な色を出力します
     gl_FragColor.rgb = gammaCorrectOutput(toneMapped);
     gl_FragColor.a = alpha;
 }
 ```
 
-These functions are automatically configured based on the engine's settings, ensuring that color processing is consistent across different rendering conditions.
+これらの関数はエンジンの設定に基づいて自動的に構成され、異なるレンダリング条件下でも色処理が一貫していることを保証します。
 
 :::note
 
-For more complete examples, and also for details on how to implement instancing, refer to the engine examples.
+より完全な例、およびインスタンス化の実装方法の詳細については、エンジンの例を参照してください。
 
 :::
 
-#### Generated Shaders
+#### 生成されたシェーダー {#generated-shaders}
 
-If you have a need to inspect the generated shaders, you can add this to your script
+生成されたシェーダーを検査する必要がある場合は、これをスクリプトに追加できます
 
 ```javascript
 pc.Tracing.set(pc.TRACEID_SHADER_ALLOC, true);
 ```
 
-And Each created shader will be logged in the browser console, where you can inspect its source code, for example:
+作成された各シェーダーはブラウザのコンソールにログとして記録され、そのソースコードを検査できます。例：
 
 ![sRGB](/img/user-manual/graphics/shaders/shader-log.png)
 
-For further information, refer to the [ShaderMaterial API documentation](https://api.playcanvas.com/engine/classes/ShaderMaterial.html).
+詳細については、[ShaderMaterial APIドキュメント](https://api.playcanvas.com/engine/classes/ShaderMaterial.html)を参照してください。
 
 [1]: /user-manual/graphics/physical-rendering/physical-materials/

@@ -1,60 +1,60 @@
 ---
-title: HDR Rendering
+title: HDRレンダリング
 sidebar_position: 2
 ---
 
-High Dynamic Range (HDR) rendering significantly enhances visual realism in computer graphics by capturing and displaying a broader spectrum of light and color. This technique ensures that both the brightest highlights and the deepest shadows retain their details, offering a more lifelike representation of scenes. One notable advantage of HDR rendering is its ability to produce physically based bloom effects, where intense light sources naturally bleed into surrounding areas, mimicking real-world camera and eye behavior. Additionally, HDR rendering facilitates more accurate reflections and refractions, as it allows for light values that exceed the standard displayable range, resulting in visuals that are both striking and true to life.
+High Dynamic Range (HDR) レンダリングは、より広い範囲の光と色を捉えて表示することで、コンピュータグラフィックスにおける視覚的なリアリズムを大幅に向上させます。この技術により、最も明るいハイライトと最も深いシャドウの両方で詳細が保持され、より実物に近いシーンの表現が可能になります。HDR レンダリングの顕著な利点の1つは、物理ベースのブルーム効果を生成する能力です。これにより、強い光源が周囲の領域に自然ににじみ出し、現実世界のカメラや目の挙動を模倣します。さらに、HDR レンダリングは、標準的な表示可能範囲を超える光の値を可能にするため、より正確な反射と屈折を容易にし、印象的かつ実物に近いビジュアルを実現します。
 
 ![HDR](/img/user-manual/graphics/linear-workflow/hdr.webp)
 
-## Camera Settings
+## カメラ設定
 
-The camera provides two key settings for handling HDR rendering:
+カメラは、HDR レンダリングを処理するための2つの主要な設定を提供します:
 
 - **gammaCorrection**
 - **toneMapping**
 
-These settings can be configured based on the rendering mode.
+これらの設定は、レンダリングモードに基づいて構成できます。
 
 ### LDR (Low Dynamic Range)
 
-- **toneMapping**: For LDR rendering, you can select any tone mapping method to achieve the desired visual style. The tone mapping compresses HDR values into displayable LDR values.
-- **gammaCorrection**: Set to `GAMMA_SRGB` to indicate that the output should be stored in gamma space, as it represents colors.
-  - If the output pixel format is sRGB, gamma correction is handled by the hardware.
-  - Otherwise, gamma encoding is applied in shader code.
+- **toneMapping**: LDR レンダリングの場合、目的の視覚スタイルを実現するために、任意のトーンマッピング手法を選択できます。トーンマッピングは、HDR 値を表示可能な LDR 値に圧縮します。
+- **gammaCorrection**: 出力が色を表すため、ガンマ空間に格納されることを示すために `GAMMA_SRGB` に設定します。
+  - 出力ピクセル形式が sRGB の場合、ガンマ補正はハードウェアによって処理されます。
+  - それ以外の場合、ガンマエンコーディングはシェーダーコードで適用されます。
 
 ### HDR (High Dynamic Range)
 
-For HDR rendering, the goal is to preserve HDR colour information:
+HDR レンダリングの場合、目標は HDR カラー情報を保持することです:
 
-- **toneMapping**: Set to `TONEMAP_LINEAR` to maintain HDR colours.
-- **gammaCorrection**: Disable by setting to `GAMMA_NONE`.
-- Ensure that a compatible HDR pixel format is used for the render target. This format can be obtained using the `GraphicsDevice.getRenderableHdrFormat()` API.
+- **toneMapping**: HDR カラーを維持するために `TONEMAP_LINEAR` に設定します。
+- **gammaCorrection**: `GAMMA_NONE` に設定して無効にします。
+- レンダーターゲットに互換性のある HDR ピクセル形式が使用されていることを確認してください。この形式は `GraphicsDevice.getRenderableHdrFormat()` API を使用して取得できます。
 
-### HDR Display Output
+### HDR ディスプレイ出力
 
-When rendering in HDR mode, an HDR display output can be enabled by configuring the `Application` with the `displayFormat` parameter set to `DISPLAYFORMAT_HDR`.
+HDR モードでレンダリングする場合、`Application` を `displayFormat` パラメータが `DISPLAYFORMAT_HDR` に設定されるように構成することで、HDR ディスプレイ出力を有効にできます。
 
-- **toneMapping**: If HDR output is supported, set to `TONEMAP_NONE`.
-- **gammaCorrection**: Keep set to `GAMMA_SRGB` to ensure low-intensity values remain visually similar to LDR rendering.
-- After the device has been created, check if HDR display output is supported using `GraphicsDevice.isHdr()`. Note that for `isHdr()` to return `true`, the browser must be running on a display that supports HDR output.
+- **toneMapping**: HDR 出力がサポートされている場合、`TONEMAP_NONE` に設定します。
+- **gammaCorrection**: 低輝度値が LDR レンダリングと視覚的に類似するように、`GAMMA_SRGB` に設定を維持します。
+- デバイスが作成された後、`GraphicsDevice.isHdr()` を使用して HDR ディスプレイ出力がサポートされているかを確認します。`isHdr()` が `true` を返すには、ブラウザが HDR 出力をサポートするディスプレイで実行されている必要があることに注意してください。
 
-**Note:** Currently, HDR display output is only supported by WebGPU. On other platforms, `GraphicsDevice.isHdr()` will always return `false`.
+**注:** 現在、HDR ディスプレイ出力は WebGPU のみでサポートされています。他のプラットフォームでは、`GraphicsDevice.isHdr()` は常に `false` を返します。
 
-## PlayCanvas Engine - CameraFrame Class
+## PlayCanvas Engine - CameraFrame クラス
 
-The PlayCanvas Engine offers a comprehensive rendering setup through the `CameraFrame` class, which integrates advanced effects such as High Dynamic Range (HDR) rendering, bloom, Screen Space Ambient Occlusion (SSAO), and more. This setup enhances visual fidelity by simulating realistic lighting and post-processing effects.
+PlayCanvas Engine は、High Dynamic Range (HDR) レンダリング、ブルーム、Screen Space Ambient Occlusion (SSAO) など、高度な効果を統合した `CameraFrame` クラスを通じて、包括的なレンダリング設定を提供します。この設定は、リアルなライティングとポストプロセス効果をシミュレートすることにより、視覚的な忠実度を向上させます。
 
-### Key Features of CameraFrame
+### CameraFrame の主要な機能
 
-- **Bloom**: Simulates the scattering of light to create a glow around bright areas.
-- **SSAO**: Enhances depth perception by simulating ambient light occlusion in crevices and corners.
-- **Depth of Field (DoF)**: Mimics camera focus effects, blurring objects outside the focal plane.
-- **Temporal Anti-Aliasing (TAA)**: Reduces visual artifacts by smoothing jagged edges over time.
-- **Vignette**: Darkens the image's corners to draw attention to the center.
-- **Color Grading**: Adjusts the color balance for stylistic effects.
+- **Bloom**: 光の散乱をシミュレートし、明るい領域の周囲に光の輪を作成します。
+- **SSAO**: 隙間や角でのアンビエントライトのオクルージョンをシミュレートすることで、奥行き認識を向上させます。
+- **Depth of Field (DoF)**: カメラのフォーカス効果を模倣し、焦点面外のオブジェクトをぼかします。
+- **Temporal Anti-Aliasing (TAA)**: 時間の経過とともにギザギザのエッジを滑らかにすることで、視覚的なアーティファクトを軽減します。
+- **Vignette**: 画像の隅を暗くすることで、中央に注意を引きます。
+- **Color Grading**: スタイリッシュな効果のためにカラーバランスを調整します。
 
-### Configuring CameraFrame on a Camera
+### カメラでの CameraFrame の設定
 
 ```javascript
 const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
@@ -65,34 +65,34 @@ cameraFrame.bloom.intensity = 0.01;
 cameraFrame.update();
 ```
 
-For HDR bloom to be effective, the scene should include bright light sources. This is typically achieved using emissive materials with high intensity. For example:
+HDR bloomが効果的であるためには、シーンに明るい光源を含める必要があります。これは通常、高輝度の放射マテリアルを使用することで実現されます。例：
 
 ```javascript
 material.emissive = pc.Color.YELLOW;
 material.emissiveIntensity = 50;
 ```
 
-For more detailed information, refer to the CameraFrame [API documentation](https://api.playcanvas.com/engine/classes/CameraFrame.html).
+詳細については、CameraFrameの[APIドキュメント](https://api.playcanvas.com/engine/classes/CameraFrame.html)を参照してください。
 
-## CameraFrame in the Editor
+## エディターでのCameraFrame
 
-There is a `CameraScript` [available here](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs) for the PlayCanvas Editor project. This script integrates `CameraFrame` functionality directly into the Editor's Inspector, making it easy to set up and configure cameras with advanced rendering features.
+PlayCanvas Editorプロジェクト用の`CameraScript`が[こちら](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs)で利用可能です。このスクリプトは`CameraFrame`の機能をエディターのInspectorに直接統合し、高度なレンダリング機能を備えたカメラのセットアップと設定を容易にします。
 
-### Instructions on Use
+### 使用方法
 
-1. Add the `CameraScript` into your project and parse it.
-2. Add it to an entity that has the `CameraComponent`.
-3. Use the Inspector to configure the rendering settings for the camera, such as tone mapping, bloom, SSAO, and other effects.
+1.  `CameraScript`をプロジェクトに追加し、パースします。
+2.  `CameraComponent`を持つエンティティに追加します。
+3.  Inspectorを使用して、トーンマッピング、ブルーム、SSAO、その他のエフェクトなど、カメラのレンダリング設定を構成します。
 
-This integration streamlines the process of setting up complex camera effects and enhances the overall workflow within the PlayCanvas Editor.
+この統合により、複雑なカメラエフェクトのセットアッププロセスが効率化され、PlayCanvas Editor内での全体的なワークフローが向上します。
 
 ![CameraFrame Script](/img/user-manual/graphics/linear-workflow/camera-frame.png)
 
-## CameraFrame Tips
+## CameraFrameのヒント
 
-- HDR bloom requires at least one renderable float format (e.g., RG11B10, RGBA16F, or RGBA32F). If none of these formats are supported by the device, HDR bloom is automatically disabled.
-- The `toneMapping` property of `StandardMaterial` is ignored. Tonemapping is applied as a full-screen post-processing pass, so per-mesh tonemapping control is not possible.
-- When using `CameraFrame`, two properties control tonemapping:
-  - `CameraFrame.rendering.toneMapping` – Controls tonemapping for the 3D scene rendered within the `CameraFrame`.
-  - `CameraComponent.toneMapping` – Controls tonemapping applied after the 3D scene including post-processing is rendered. This typically affects UI elements rendered on top.
-- When using `CameraFrame`, you may notice differences in the intensity of alpha-blended geometry. This occurs because blending takes place in linear HDR space, which is more physically accurate than blending in gamma space. As a result, you may need to adjust material properties related to alpha blending.
+*   HDR bloomには、少なくとも1つのレンダリング可能な浮動小数点フォーマット（例: RG11B10、RGBA16F、またはRGBA32F）が必要です。これらのフォーマットのいずれもデバイスでサポートされていない場合、HDR bloomは自動的に無効になります。
+*   `StandardMaterial`の`toneMapping`プロパティは無視されます。トーンマッピングはフルスクリーンでのポストプロセスパスとして適用されるため、メッシュごとのトーンマッピング制御はできません。
+*   `CameraFrame`を使用する場合、2つのプロパティがトーンマッピングを制御します：
+    *   `CameraFrame.rendering.toneMapping` – `CameraFrame`内でレンダリングされる3Dシーンのトーンマッピングを制御します。
+    *   `CameraComponent.toneMapping` – ポストプロセスを含む3Dシーンがレンダリングされた後に適用されるトーンマッピングを制御します。これは通常、上部にレンダリングされるUI要素に影響を与えます。
+*   `CameraFrame`を使用すると、アルファブレンドされたジオメトリの強度が異なることに気づくかもしれません。これは、ブレンドがガンマ空間でのブレンドよりも物理的に正確なリニアHDR空間で行われるためです。その結果、アルファブレンドに関連するマテリアルプロパティを調整する必要がある場合があります。

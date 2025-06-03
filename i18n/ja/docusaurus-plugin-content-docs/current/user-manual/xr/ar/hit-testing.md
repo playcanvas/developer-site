@@ -1,120 +1,119 @@
 ---
-title: Hit Testing
+title: ヒットテスティング
 sidebar_position: 1
 ---
 
-In an AR/MR context, the interaction of virtual world objects with the real world is achieved by many techniques. Hit Testing allows one to pick a point in space by probing real-world geometry that is estimated using the underlying AR system.
+AR/MRの文脈では、仮想世界のオブジェクトと現実世界の相互作用は、多くの技術によって実現されます。ヒットテスティングは、基盤となるARシステムを使用して推定された現実世界のジオメトリを調査することにより、空間内の点を特定することを可能にします。
 
-This can be used in various ways and one of the most common is placing a virtual object in space so that it feels planted in the real world.
+これは様々な方法で使用でき、最も一般的なものの1つは、仮想オブジェクトを空間に配置して、それが現実世界に固定されているように感じさせることです。
 
-## Reliability
+## 信頼性 {#reliability}
 
-Hit Testing is implemented by an underlying system building an understanding of ever-evolving real-world geometry. Some platforms rely on pre-captured information, while some platforms estimate geometry in real-time based on Computer Vision techniques. So the reliability of hit testing is subject to the capabilities of the underlying system.
+ヒットテスティングは、常に進化する現実世界のジオメトリを理解する基盤システムによって実装されています。一部のプラットフォームは事前取得された情報に依存し、他のプラットフォームはComputer Vision技術に基づいてリアルタイムでジオメトリを推定します。したがって、ヒットテスティングの信頼性は、基盤となるシステムの能力に左右されます。
 
-## Support
+## サポート {#support}
 
-You can check if hit testing is supported by the system:
+システムがヒットテスティングをサポートしているかどうかを確認できます。
 
 ```javascript
 if (app.xr.hitTest.supported) {
-    // hit testing is supported
+    // ヒットテスティングがサポートされています
 }
 ```
 
-## Hit Test Source
+## ヒットテストソース {#hit-test-source}
 
-When we want to start hit testing, we issue a request and are provided with a `HitTestSource` instance, which then provides results in the form of events. We can manage the lifetime of the source that way.
+ヒットテスティングを開始したい場合、リクエストを発行すると`HitTestSource`インスタンスが提供され、それがイベント形式で結果を提供します。このようにしてソースのライフタイムを管理できます。
 
-The most basic way is to start probing straight from the viewer forward vector:
+最も基本的な方法は、ビューアの前方ベクトルから直接プロービングを開始することです。
 
 ```javascript
-// start a hit test
+// ヒットテストを開始
 app.xr.hitTest.start({
-    spaceType: pc.XRSPACE_VIEWER, // from a viewer space
-    callback: function (err, hitTestSource) {
+    spaceType: pc.XRSPACE_VIEWER, // ビューア空間から
+    callback: (err, hitTestSource) => {
         if (err) return;
-        // subscribe to hit test results
-        hitTestSource.on('result', function (position, rotation) {
-            // position and rotation of hit test result
-            // based on a ray facing forward from the viewer reference space
+        // ヒットテスト結果を購読
+        hitTestSource.on('result', (position, rotation) => {
+            // ヒットテスト結果の位置と回転
+            // ビューア参照空間から前方に向かうレイに基づきます
         });
     }
 });
 ```
 
-We can stop hit testing by removing its source:
+ソースを削除することで、ヒットテスティングを停止できます。
 
 ```javascript
 hitTestSource.remove();
 ```
 
-## Monoscope (Touch Screen)
+## モノスコープ（タッチスクリーン） {#monoscope-touch-screen}
 
-When an XR session is started on a monoscopic device (such as a mobile phone with a touch screen), then it is possible to start hit tests based on user touches on the screen:
+モノスコープデバイス（タッチスクリーン付きの携帯電話など）でXRセッションが開始された場合、ユーザーの画面タッチに基づいてヒットテストを開始することが可能です。
 
 ```javascript
 app.xr.hitTest.start({
-    profile: 'generic-touchscreen', // touch screen input sources
-    callback: function (err, hitTestSource) {
+    profile: 'generic-touchscreen', // タッチスクリーン入力ソース
+    callback: (err, hitTestSource) => {
         if (err) return;
-        hitTestSource.on('result', function (position, rotation, inputSource) {
-            // position and rotation of hit test result
-            // that will be created from touch on mobile devices
+        hitTestSource.on('result', (position, rotation, inputSource) => {
+            // ヒットテスト結果の位置と回転
+            // モバイルデバイスでのタッチから生成されます
         });
     }
 });
 ```
 
-Bear in mind that transient input sources (such as touch) do not provide hit test results straight away, as the hit test source is created as an asynchronous operation and its results are a subject of the underlying system being able to provide such information. This means that a touch might not provide any hit test results within its short-lived time.
+一時的な入力ソース（タッチなど）は、ヒットテストソースが非同期操作として作成され、その結果が基盤となるシステムがそのような情報を提供できるかどうかに依存するため、すぐにヒットテスト結果を提供しないことに留意してください。これは、タッチがその短期間の間にヒットテスト結果を提供しない可能性があることを意味します。
 
-## Input Source
+## 入力ソース {#input-source}
 
-The most common way to start hit testing is from a ray of an input source (e.g. controllers or hands):
+ヒットテスティングを開始する最も一般的な方法は、入力ソース（コントローラーや手など）のレイからです。
 
 ```javascript
 inputSource.hitTestStart({
-    callback: function (err, hitTestSource) {
+    callback: (err, hitTestSource) => {
         if (err) return;
-        hitTestSource.on('result', function (position, rotation) {
-            // position and rotation of a hit test result
-            // based on a ray of an input source
+        hitTestSource.on('result', (position, rotation) => {
+            // ヒットテスト結果の位置と回転
+            // 入力ソースのレイに基づきます
         });
     }
 });
 ```
 
-## Arbitrary Ray
+## 任意レイ {#arbitrary-ray}
 
-It is also possible to start a hit testing using a custom ray with the origin point and a direction:
+原点と方向を持つカスタムレイを使用してヒットテスティングを開始することも可能です。
 
 ```javascript
 const ray = new pc.Ray();
 
-ray.origin.set(0, 1, 0); // start 1 meter above the origin
-ray.direction.set(0, -1, 0); // point downwards
+ray.origin.set(0, 1, 0); // 原点から1メートル上から開始
+ray.direction.set(0, -1, 0); // 下方向を指す
 
 app.xr.hitTest.start({
     spaceType: pc.XRSPACE_LOCALFLOOR,
     offsetRay: ray,
-    callback: function (err, hitTestSource) {
-        // hit test source that will sample real world geometry
-        // from the position where AR session started
+    callback: (err, hitTestSource) => {
+        // 現実世界のジオメトリをサンプリングするヒットテストソース
+        // ARセッションが開始された位置から
     }
 });
 ```
 
+## アンカー {#anchors}
 
-## Anchors
-
-Hit tests are performed against the estimation of real-world geometry and the geometry can change if the underlying system estimation process refines the planes, meshes, or points that were hit by the hit test. For that reason, an [Anchor][1] can be created from these hit tests, which then can be updated. This allows a more planted and reliable placement of virtual objects:
+ヒットテストは、現実世界のジオメトリの推定に対して実行され、基になるシステム推定プロセスがヒットテストによってヒットされた平面、メッシュ、または点を洗練する場合、ジオメトリは変更される可能性があります。そのため、これらのヒットテストから[アンカー][1]を作成でき、その後更新することができます。これにより、仮想オブジェクトをよりしっかりとした信頼性の高い配置にすることができます:
 
 ```javascript
-// subscribe to hit test results
+// ヒットテストの結果を購読する
 hitTestSource.on('result', (position, rotation, inputSource, hitTestResult) => {
-    // create an anchor using a hit test result
+    // ヒットテストの結果を使用してアンカーを作成する
     app.xr.anchors.create(hitTestResult, (err, anchor) => {
         if (!err) {
-            // a new anchor has been created
+            // 新しいアンカーが作成されました
         }
     });
 });

@@ -3,6 +3,6 @@ title: PCUI Graph
 sidebar_position: 5
 ---
 
-![PCUI Graph Banner](/img/user-manual/pcui/pcui-graph-banner.png)
+![PCUI Graph バナー](/img/user-manual/pcui/pcui-graph-banner.png)
 
-PCUI Graph is a graph visualization framework designed to help you build applications that can create and view node-based graphs in the browser. It was built as an extension of the PCUI library but now lives in its own repository.
+PCUI Graph は、ブラウザでノードベースのグラフを作成および表示できるアプリケーションの構築を支援するために設計されたグラフ可視化フレームワークです。これは PCUI ライブラリの拡張機能として構築されましたが、現在は独自のレポジトリで管理されています。

@@ -1,6 +1,6 @@
 ---
 title: Hot Reloading
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 When you are iterating on a complex project it can be frustrating to have to do a full page refresh every time you make a change to a script. Especially if it takes you a long time to get to the point where you are testing your code. That is where hot-swapping of code comes in.
@@ -44,6 +44,8 @@ For example:
 import { ScriptType, math } from 'playcanvas';
 
 export class Rotator extends Script {
+    static scriptName = 'rotator';
+
     /**
      * @attribute
      */

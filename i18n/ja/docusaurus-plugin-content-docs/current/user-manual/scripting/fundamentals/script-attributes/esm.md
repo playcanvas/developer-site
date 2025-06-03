@@ -1,50 +1,52 @@
 ---
-title: ESM Reference
+title: ESM リファレンス
 sidebar_position: 1
 ---
 
 :::note
 
-This page documents Script Attributes for the recommended **ESM Scripts** system.
+このページでは、推奨される **ESM スクリプト** システムのスクリプト属性について説明します。
 
-For **Classic Script Attributes**, click [here](../classic).
+**従来のスクリプト属性**については、[こちら](./classic.md)をクリックしてください。
 
 :::
 
-## What are Attributes?
+## アトリビュートとは？
 
-Attributes are a powerful feature that allow you to expose specific parameters to the editor.
+アトリビュートは、特定のパラメータをエディターに公開できる強力な機能です。
 
-This means you can write code once, then tweak values on different instances to give them different properties. Artists, designers or other non-programmer team members can then adjust and modify them without writing code.
+これにより、一度コードを書けば、異なるインスタンスで値を調整して異なるプロパティを与えることができます。アーティスト、デザイナー、その他のプログラマーではないチームメンバーは、コードを書かずにそれらを調整・修正することができます。
 
-Let's start with a simple rotate script example.
+簡単な回転スクリプトの例から始めましょう。
 
 ```javascript
 import { Script } from 'playcanvas';
 
 export class Rotator extends Script {
+    static scriptName = 'rotator';
+
     /**
-     * You can now set the `speed`property dynamically in the editor.
+     * エディターで `speed` プロパティを動的に設定できるようになりました。
      *
      * @attribute
      */
     speed = 2;
 
     update(dt){
-        this.entity.rotateLocal(0, this.speed * dt, 0)
+        this.entity.rotateLocal(0, this.speed * dt, 0);
     }
 }
 ```
 
-In this example the script simply rotates the entity according to it's speed, but what value is speed?
+この例では、スクリプトはエンティティをその速度に応じて回転させるだけですが、速度の値は何でしょうか？
 
-The `@attribute` tag above the `speed` member promotes it to an attribute. When attached to an entity, the editor creates controls that allows you to dynamically set the value of `speed` at run time for each entity it's attached to.
+`speed` メンバーの上の `@attribute` タグは、それをアトリビュートに昇格させます。エンティティにアタッチされると、エディターは `speed` の値を実行時に、それがアタッチされている各エンティティに対して動的に設定できるコントロールを作成します。
 
-What this means in practice is that you can expose various members of a script to the editor and create controls to edit their values at run-time.
+これが実際に意味することは、スクリプトの様々なメンバーをエディターに公開し、それらの値を実行時に編集するためのコントロールを作成できるということです。
 
-![Attribute](/img/user-manual/scripting/attribute-basic.png)
+![アトリビュート](/img/user-manual/scripting/attribute-basic.png)
 
-Because `speed` is simply a class member you can access it as you would any other member.
+`speed` は単なるクラスメンバーであるため、他のメンバーと同じようにアクセスできます。
 
 ```javascript
 update(dt) {
@@ -52,72 +54,71 @@ update(dt) {
 }
 ```
 
-### Attributes in the Editor
+### エディターでのアトリビュート
 
-![Script Attributes](/img/user-manual/scripting/script-attributes.png)
+![スクリプト属性](/img/user-manual/scripting/script-attributes.png)
 
-属性を宣言したらEditorは、スクリプトの属性を露出させるためにコードをパースする必要があります。属性が変更された場合は、手動で属性を更新する必要があります。パースボタンをクリックすることができます。
+アトリビュートを宣言したら、エディターはスクリプトアトリビュートを公開するためにコードをパースする必要があります。アトリビュートが変更された場合、アトリビュートを手動で更新する必要があります。パースボタンをクリックしてください。
 
-![Parse Button](/img/user-manual/scripting/script-parse-button.png)
+![パースボタン](/img/user-manual/scripting/script-parse-button.png)
 
-## Attribute Information
+## アトリビュート情報
 
-When you expose an attribute to the editor, you can also surface additional information that helps provide context and present more specific controls. This can help create a better user experiences for your scripts.
+アトリビュートをエディターに公開する際、コンテキストを提供し、より具体的なコントロールを提示するのに役立つ追加情報を表示することもできます。これにより、スクリプトのユーザーエクスペリエンスを向上させることができます。
 
-### Attribute descriptions
+### アトリビュートの説明
 
-The first sentence of an `@attribute` comment block is used a description in the editor. This is a useful way to surface
-contextual information on what the attribute is and how it behaves
+`@attribute` コメントブロックの最初の文は、エディターで説明として使用されます。これは、アトリビュートが何であり、どのように動作するかについての文脈情報を表示するのに役立つ方法です。
 
 ```javascript
 /**
  * @attribute
- * Sets the speed of the Y rotation in degrees.
+ * Y軸回転の速度を度単位で設定します。
  */
-speed = 2
+speed = 2;
 ```
 
-In the editor this is available as a tooltip.
+エディターでは、これはツールチップとして利用できます。
 
-![Attribute Description](/img/user-manual/scripting/attribute-description.png)
+![アトリビュートの説明](/img/user-manual/scripting/attribute-description.png)
 
-### Attribute constraints
+### アトリビュートの制約
 
-What if you also want to define a sensible range values for speed. You can do this with the `@range` tag
+速度の適切な範囲値を定義したい場合はどうでしょうか。これは `@range` タグで行うことができます。
 
 ```javascript
 /** 
  * @attribute
  * @range [0, 10]
  */
-speed = 10
+speed = 10;
 ```
 
-This simply tells the editor that speed is an attribute and it's value should be within 0 - 10. The editor will create a numerical slider mapped to this range.
+これは単に、速度がアトリビュートであり、その値が0から10の範囲内であるべきことをエディターに伝えます。エディターは、この範囲にマッピングされた数値スライダーを作成します。
 
-![Attribute Description](/img/user-manual/scripting/attribute-constraint.png)
+![アトリビュートの説明](/img/user-manual/scripting/attribute-constraint.png)
 
-There are additional numerical constraints that you can set which help the editor limit the set of possible values
+エディターが可能な値のセットを制限するのに役立つ、追加の数値制約を設定できます。
 
 ```javascript
 /** 
  * @attribute
  * @range [0, 10]
- * @precison 0.1
+ * @precision 0.1
  * @step 0.05
  */
-speed = 10
+speed = 10;
 ```
 
-## 属性のタイプ
+## アトリビュートの型
 
-When you expose a script member as an attribute, the editor will show a control thats relevant to the type of attribute. If the attribute is a number, it shows a numerical input, if it's a boolean, a checkbox.
+スクリプトメンバーをアトリビュートとして公開すると、エディターはそのアトリビュートの型に関連するコントロールを表示します。アトリビュートが数値であれば数値入力、ブール値であればチェックボックスが表示されます。
 
-An attribute can be a `number`, `string`, `boolean`, `Vec2`, `Vec3`, `Vec4`, `Entity`, `Asset` or `Color`.
+アトリビュートは `number`、`string`、`boolean`、`Vec2`、`Vec3`、`Vec4`、`Entity`、`Asset` または `Color` にすることができます。
 
-### The @type tag
+### @type タグ
 
-In some situations you won't actually know an attributes initial value ahead of time. For example, if you want to define an asset attribute on a script, you won't necessarily have an initial value. In these situations, where a value isn't known ahead of time, but it's type is, you can use the jsdoc `@type` tag.
+属性の初期値が事前にわからない場合があります。例えば、スクリプト上でアセット属性を定義したい場合、必ずしも初期値があるとは限りません。このような、値が事前に不明でも型はわかっている状況では、jsdocの`@type`タグを使用できます。
 
 ```javascript
 /**
@@ -128,26 +129,34 @@ myTexture;
 ```
 
 :::warning
-An attribute must either be initialized with a value `speed = 10`, or have a jsdoc type `@type {number}`. If neither are present, the attribute will ignored
+
+属性は、`speed = 10`のように値で初期化されるか、`@type {number}`のようなjsdoc型を持つ必要があります。どちらも存在しない場合、その属性は無視されます。
+
 :::
 
 ### Entity属性
 
-エンティティタイプにより、階層で他のエンティティを参照することができます。二つのエンティティをリンクする良い方法です。
+Entity型を使用すると、ヒエラルキー内の別のエンティティを参照できます。2つのエンティティをリンクさせる素晴らしい方法です。
 
 ```javascript
 /**
  * @attribute
  * @type {Entity}
  */
-target
+target;
 ```
+
+:::important
+
+属性が正しく解析されるためには、`playcanvas`から`Entity`をインポートする必要があります。
+
+:::
 
 ### Asset属性
 
-The Asset attribute let's you reference a project asset in your script. The asset attribute also supports the `@resource` tag which limits the attribute to assets of a particular type, e.g. 'texture', 'material', 'model'.
+Asset属性を使用すると、スクリプト内でプロジェクトのアセットを参照できます。Asset属性は、`@resource`タグもサポートしており、これにより属性を特定のタイプ（例: 'texture'、'material'、'model'）のアセットに限定できます。
 
-The runtime type of an Asset attribute is `Asset`. You can reference the resource of an Asset attribute at runtime like so:
+Asset属性のランタイム型は`Asset`です。ランタイムでAsset属性のリソースを参照するには、次のようにします。
 
 ```javascript
 /**
@@ -155,33 +164,51 @@ The runtime type of an Asset attribute is `Asset`. You can reference the resourc
  * @type {Asset}
  * @resource texture
  */
-texture
+texture;
 
 initialize() {
-    console.log('This is the texture asset', this.texture);
-    console.log('This is the texture resource', this.texture.resource);
+    console.log('これはテクスチャアセットです', this.texture);
+    console.log('これはテクスチャリソースです', this.texture.resource);
 }
 ```
+
+:::important
+
+属性が正しく解析されるためには、`playcanvas`から`Asset`をインポートする必要があります。
+
+:::
 
 ### Color属性
 
 ```javascript
 /** @attribute */
-color = new Color()
+color = new Color();
 ```
 
-色属性は、エディタで露出されたときにカラーピッカーを示します。アルファチャンネルを公開するか否かに応じて、二つのオプション`rgb`と` rgba`があります。
+:::important
 
-### Vector attribute
+属性が正しく解析されるためには、`playcanvas`から`Color`をインポートする必要があります。
+
+:::
+
+カラー属性は、エディタで公開されるとカラーピッカーを表示します。アルファチャンネルも公開したいかどうかに応じて、`rgb`と`rgba`の2つのオプションがあります。
+
+### Vector属性
 
 ```javascript
 /** @attribute */
-position = new Vec3()
+position = new Vec3();
 ```
 
-The vector attribute can be a 2, 3 or 4 dimension. The editor will show a numerical input for each component, allowing you to set each one independently.
+:::important
 
-![Attribute Vector](/img/user-manual/scripting/attribute-vec3.png)
+属性が正しく解析されるためには、`playcanvas`から`Vec2`/`Vec3`/`Vec4`をインポートする必要があります。
+
+:::
+
+ベクトル属性は、2、3、または4次元にすることができます。エディタでは、各コンポーネントに数値入力が表示され、それぞれを独立して設定できます。
+
+![属性ベクトル](/img/user-manual/scripting/attribute-vec3.png)
 
 ### Curve属性
 
@@ -191,14 +218,20 @@ The vector attribute can be a 2, 3 or 4 dimension. The editor will show a numeri
  * @type {Curve}
  * @color rgba
  */
-wave
+wave;
 ```
 
-Curve属性は、時間の経過に応じて値が変化する値を表現するために使用します。すべてのカーブは、期間0.0 - 1.0の間で定義されます。3D位置をカーブで表現する場合は、`curves` プロパティを使用して x、y、z それぞれの 3 つのカーブを定義できます。また、`color` プロパティを使用して特別なカーブエディターを利用してカラーを変更できるようにできます。
+:::important
 
-### Attribute arrays
+属性が正しく解析されるためには、`playcanvas`から`Curve`をインポートする必要があります。
 
-In some cases you may want to expose a list of grouped attributes together. Let's say you have a script that generates a gradient, but rather than having a start and end point, you want to allow users to set an arbitrary amount of 'color stops' on the gradient. In this case you can an array qualifier in a `@type` tag.
+:::
+
+カーブ属性は、時間期間にわたって変化する値を表現するために使用されます。すべてのカーブは0.0〜1.0の期間で定義されます。複数のカーブを定義できます。例えば、`curves`プロパティを使用してx、y、z用に3つのカーブを定義することで、カーブから3D位置を得ることができます。`color`プロパティを使用して色を変更するための特別なカーブエディタもあります。
+
+### 属性配列
+
+場合によっては、グループ化された属性のリストをまとめて公開したい場合があります。例えば、グラデーションを生成するスクリプトがあり、開始点と終了点を持つ代わりに、ユーザーがグラデーションに任意の数の「カラーストップ」を設定できるようにしたいとします。この場合、`@type`タグに配列修飾子を使用します。
 
 ```javascript
 /**
@@ -208,23 +241,23 @@ In some cases you may want to expose a list of grouped attributes together. Let'
 gradientStops;
 ```
 
-The `Color[]` declaration uses the [jsdoc type tag](https://jsdoc.app/tags-type) to declare that `gradientStops` is an array of `Colors`. The editor will interpret in this way, creating a controller that allows you to set multiple `Color` values in a list.
+`Color[]`宣言は、[jsdoc type tag](https://jsdoc.app/tags-type)を使用して、`gradientStops`が`Colors`の配列であることを宣言します。エディタはこのように解釈し、リスト内で複数の`Color`値を設定できるコントローラを作成します。
 
-![Attribute Array](/img/user-manual/scripting/attribute-array.png)
+![属性配列](/img/user-manual/scripting/attribute-array.png)
 
-In your initialize or update loop, you can iterate over `gradientStops` as an array
+`initialize`または`update`ループで、`gradientStops`を配列として反復処理できます。
 
 ```javascript
-initialize(){
+initialize() {
     this.gradientStops.forEach(color => {
-        console.log('This is a Color class', color)
-    })
+        console.log('これはColorクラスです', color);
+    });
 }
 ```
 
-### Enumerations
+### 列挙型
 
-Sometimes you may want to constrain an attribute to a set of possible values. In this situation you can use the `@enum` tag. This uses an enumeration as a value for the attribute making the editor display a combo box constrained to the list of possible values
+属性を可能な値のセットに制約したい場合があります。この状況では、`@enum`タグを使用できます。これにより、属性の値として列挙型が使用され、エディターが可能な値のリストに制約されたコンボボックスを表示するようになります。
 
 ```javascript
 
@@ -233,164 +266,178 @@ const Lights = {
     ON: 1,
     OFF: 0,
     UNKNOWN: 0.5
-}
+};
 
 class MyScript extends Script {
+    static scriptName = 'myScript';
+
     /**
      * @attribute
      * @type {Lights}
      */
-    ambient = Lights.OFF
+    ambient = Lights.OFF;
 }
 ```
 
-This uses the `Lights` class as an enumeration of possible values. The `@type {Lights}` indicates that `ambient` should only have a value listed in `Lights`. At author-time the editor will generate a drop-down control using the Lights enumeration keys as labels (ON/OFF/UNKNOWN) and setting the corresponding value on `ambient`. An enumerators values can only be numbers, strings, or booleans.
+これは、`Lights`クラスを可能な値の列挙型として使用しています。`@type {Lights}`は、`ambient`が`Lights`にリストされている値のみを持つべきであることを示します。オーサータイムで、エディターは`Lights`列挙型のキー（ON/OFF/UNKNOWN）をラベルとして使用し、`ambient`にそれに対応する値を設定するドロップダウンコントロールを生成します。列挙型の値は、数値、文字列、またはブール値のみである必要があります。
 
-![Attribute Enumerations](/img/user-manual/scripting/attribute-enum.png)
+![属性の列挙](/img/user-manual/scripting/attribute-enum.png)
 
-## Conditional Attributes
+## 条件付き属性
 
-Every attribute in your script creates a corresponding UI control in the Editor. In some cases, you may want to hide or disable certain controls based on the values of other attributes.
+スクリプト内のすべての属性は、エディターに対応するUIコントロールを作成します。場合によっては、他の属性の値に基づいて特定のコントロールを非表示にしたり、無効にしたりしたいことがあります。
 
-Let’s walk through an example:
+例を見てみましょう：
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      */
-    speed = 10
+    speed = 10;
 }
 ```
 
-This will create a checkbox for power and a slider for speed. But what if we want to prevent users from adjusting the speed unless power is turned on.
+これにより、`power`用のチェックボックスと`speed`用のスライダーが作成されます。しかし、`power`がオンになっていない限り、ユーザーが`speed`を調整できないようにしたい場合はどうでしょうか。
 
-We can achieve this by using the `@enabledif` tag:
-
-```javascript
-export class Delorean extends Script {
-    /**
-     * @attribute
-     */
-    power = false
-
-    /** 
-     * @attribute
-     * @enabledif {power}
-     */
-    speed = 10
-}
-```
-
-Now, the speed slider will only be enabled when power is `true`.
-
-### Expression-Based Conditions
-
-You can also use more expressive conditions. If the condition evaluates to a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value, the control is enabled.
+これは`@enabledif`タグを使用することで実現できます。
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      * @enabledif {power}
      */
-    speed = 10
+    speed = 10;
+}
+```
+
+これで、`speed`スライダーは`power`が`true`の場合にのみ有効になります。
+
+### 式ベースの条件
+
+より表現力豊かな条件を使用することもできます。条件が[truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)な値に評価された場合、コントロールが有効になります。
+
+```javascript
+export class Delorean extends Script {
+    static scriptName = 'delorean';
+
+    /**
+     * @attribute
+     */
+    power = false;
+
+    /** 
+     * @attribute
+     * @enabledif {power}
+     */
+    speed = 10;
 
     /**
      * @attribute
      * @visibleif {speed > 88.8}
      */
-    enableFluxCapacitor = true
+    enableFluxCapacitor = true;
 }
 ```
 
-In this case:
+この場合：
 
-- The `speed` slider is only enabled if power is on.
-- The `enableFluxCapacitor` checkbox is only *visible* when `speed` is greater than `88.8`.
+- `speed`スライダーは、`power`がオンの場合にのみ有効になります。
+- `enableFluxCapacitor`チェックボックスは、`speed`が`88.8`より大きい場合にのみ*表示*されます。
 
-This allows for rich, dynamic Editor interfaces based on script state.
+これにより、スクリプトの状態に基づいた、リッチで動的なエディターインターフェースが可能になります。
 
-#### Example in Action
+#### 動作中の例
 
 <video width="50%" controls autoplay loop>
   <source src="/video/conditional-attribtues.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
 
-## Grouping Attributes
+## 属性のグループ化
 
-In some situations you may want to logically group attributes together. For example lets say you have a `GameLogic` Script with an enemy with the speed and power. Rather than declare the attributes individually, it makes sense to group them together under one `enemy` attribute. You can do this with **Attribute Groups**.
+状況によっては、属性を論理的にグループ化したい場合があります。例えば、敵の速度とパワーを持つ`GameLogic` Scriptがあるとします。属性を個別に宣言するのではなく、それらを1つの`enemy`属性の下にグループ化する方が理にかなっています。これは**Attribute Groups**を使用して行うことができます。
 
-Attribute groups are essentially objects that contain sub-attributes:
+属性グループは、本質的にサブ属性を含むオブジェクトです。
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** 
      * @attribute 
-     * `power` and `speed` are exposed as sub attributes
+     * `power`と`speed`はサブ属性として公開されます
      */
-    enemy = { power: 10, speed: 3 }
+    enemy = { power: 10, speed: 3 };
 
-    initialize(){
-        console.log(this.enemy.speed) // 3
-        console.log(this.enemy.power) // 10
+    initialize() {
+        console.log(this.enemy.speed); // 3
+        console.log(this.enemy.power); // 10
     }
 }
 ```
 
-This defines `enemy` as as Attribute Group. The editor will expose the enemy attribute with nested controllable power and speed sub-attributes. It provides a more flexible way to logically group attributes together.
+これにより、`enemy` が属性グループとして定義されます。エディターは、制御可能なpowerとspeedのネストされたサブ属性を持つenemy属性を公開します。これは、属性を論理的にグループ化するためのより柔軟な方法を提供します。
 
 :::tip
-Attribute Groups allow you to logically group together related attributes into object based structure
+属性グループを使用すると、関連する属性をオブジェクトベースの構造に論理的にグループ化できます。
 :::
 
-There are different ways you can declare Attribute Groups. You can use Inline Attribute Groups or TypeDef Groups.
+属性グループを宣言するにはさまざまな方法があります。インライン属性グループまたはTypeDefグループを使用できます。
 
-### Inline Group
+### インライングループ
 
-A simple inline way of declaring attribute groups
+属性グループを宣言するシンプルなインライン方法
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** @attribute */
-    enemy = { power: 10, speed: 3 }
+    enemy = { power: 10, speed: 3 };
 }
 ```
 
-### TypeDef Groups
+### TypeDefグループ
 
-This is a more modular way of declaring Attribute Groups. Whilst it is more verbose than using the inline version, the typedef version is more modular and can be used across multiple scripts and attributes.
+これは、属性グループを宣言するよりモジュール化された方法です。インラインバージョンを使用するよりも冗長ですが、typedefバージョンはよりモジュール化されており、複数のスクリプトや属性で使用できます。
 
 ```javascript
 /**
  * @typedef {Object} Enemy
- * @prop {number} speed - The enemies speed
- * @prop {number} power - The enemies power
+ * @prop {number} speed - 敵のスピード
+ * @prop {number} power - 敵のパワー
  */
 
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** 
      * @attribute 
      * @type {Enemy}
      */
-    enemy
+    enemy;
 }
 ```
 
-### Interface Attributes
+### インターフェース属性
 
-If you want to group attributes together and set individual constraints on it's members you can use an Interface Attribute. This provides a morea more flexible way of grouping attributes.
+属性をグループ化し、そのメンバーに個別の制約を設定したい場合は、インターフェース属性を使用できます。これは、属性をグループ化するより柔軟な方法を提供します。
 
 ```javascript
 /** @interface */
@@ -399,53 +446,58 @@ class Enemy {
      * @range [0, 11]
      */
     power = 10;
-    speed = 3
+
+    speed = 3;
 }
 
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /**
      * @attribute 
      * @type {Enemy}
      */
-    enemy
+    enemy;
 }
 ```
 
-In the above example we've created a new `Enemy` Interface with a power member constrained within *0 - 11* range. We've also declared that the `GameLogic` Script has an attribute `enemy` which is a type of `Enemy`.
+上記の例では、powerメンバーが*0 - 11*の範囲内に制約された新しい`Enemy`インターフェースを作成しました。また、`GameLogic`スクリプトが`Enemy`型の`enemy`属性を持つことを宣言しました。
 
 :::tip
-An *Interface Attribute* allows you to both logically group attributes together and set constraints on individual sub attributes. It also allows you to modularize your code.
+*インターフェース属性*を使用すると、属性を論理的にグループ化し、個々のサブ属性に制約を設定することができます。また、コードをモジュール化することもできます。
 :::
 
-#### Rules of Interface attributes
+#### インターフェース属性のルール
 
-There are a number of requirements to use Interface Attributes.
+インターフェース属性を使用するには、いくつかの要件があります。
 
-- An Interface Attribute must have an `/** @interface */` block comment before a class declaration
-- A Script Attribute must use an Interface Attribute using the `@type {InterfaceAttribute}` tag
-- All public members of an Interface Attribute are available to the editor and will be used. You do not need to use the `@attribute` tag on each member.
-- You cannot have nested Interface Attributes.
+- インターフェース属性は、クラス宣言の前に`/** @interface */`ブロックコメントを持つ必要があります。
+- スクリプト属性は、`@type {InterfaceAttribute}`タグを使用してインターフェース属性を使用する必要があります。
+- インターフェース属性のすべてのパブリックメンバーはエディターで利用可能であり、使用されます。各メンバーに`@attribute`タグを使用する必要はありません。
+- ネストされたインターフェース属性を持つことはできません。
 
-### Interface Attribute Arrays
+### インターフェース属性配列
 
-Interface attributes can be used as arrays, just like plain attributes. This means that your `GameLogic` script can use an array of enemies, each with their own controllable power and speed properties.
+インターフェース属性は、通常の属性と同様に配列として使用できます。これは、`GameLogic`スクリプトが敵の配列を使用できることを意味し、それぞれが独自の制御可能なpowerとspeedプロパティを持ちます。
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /**
      * @attribute
      * @type {Enemy[]}
      */
-    enemies
+    enemies;
 
-    update(){
+    update(dt) {
         this.enemies.forEach(({ power, speed }) => {
-            this.updateEnemy(power, speed)
-        })
+            this.updateEnemy(power, speed);
+        });
     }
 }
 ```
 
-This creates an array of Enemy controls in the editor, each with it's own numerical controls for the sub attributes
+これにより、エディターにEnemyコントロールの配列が作成され、それぞれがサブ属性の独自の数値コントロールを持ちます。
 
 ![Attribute Complex Arrays](/img/user-manual/scripting/attribute-complex-arrays.png)

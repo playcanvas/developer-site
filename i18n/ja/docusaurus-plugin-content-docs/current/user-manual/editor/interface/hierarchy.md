@@ -1,6 +1,6 @@
 ---
 title: ヒエラルキー (Hierarchy)
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 ![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.png)
@@ -21,13 +21,13 @@ sidebar_position: 3
 
 ## ヒエラルキーの検索
 
-Near the top of the Hierarchy panel is a Search box which you can use to dynamically filter the content of the Entity tree.
+ヒエラルキーパネルのほぼ上部には、エンティティツリーの内容を動的にフィルターできる検索ボックスがあります。
 
 ![Hierarchy Panel Search](/img/user-manual/editor/hierarchy/hierarchy-search.png)
 
-By default, the search will filter based on entity names with 'Smart Search' enabled. Smart Search is fuzzy, which means it matches names that are similar to the search string rather than exactly the same. This is useful if you can't quite remember the name of the Entity you are searching for.
+デフォルトでは、検索は「Smart Search」が有効な状態でエンティティ名に基づいてフィルターされます。Smart Searchはあいまい検索であり、検索文字列と完全に一致するのではなく、類似した名前を照合します。これは、探しているエンティティの名前を正確に思い出せない場合に便利です。
 
-You can customize the search by clicking the magnifying glass:
+虫眼鏡アイコンをクリックすると、検索をカスタマイズできます。
 
 ![Hierarchy Panel Search Options](/img/user-manual/editor/hierarchy/hierarchy-search-options.png)
 

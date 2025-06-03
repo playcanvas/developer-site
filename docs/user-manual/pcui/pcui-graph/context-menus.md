@@ -53,10 +53,10 @@ const schema = {
 };
 ```
 
-Currently node context menus support two actions:
+Currently, node context menus support two actions:
 
 ``` javascript
-Graph.GRAPH_ACTIONS.DELTE_NODE // Delete the node associated with this context menu.
+Graph.GRAPH_ACTIONS.DELETE_NODE // Delete the node associated with this context menu.
 Graph.GRAPH_ACTIONS.ADD_EDGE // Add an edge that starts from the node associated with this context menu, selecting another node will complete the edge connection. Selecting the background canvas will cancel adding an edge.
 ```
 

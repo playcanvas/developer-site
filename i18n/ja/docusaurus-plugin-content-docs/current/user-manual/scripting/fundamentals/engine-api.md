@@ -1,55 +1,60 @@
 ---
-title: Calling the Engine API
-sidebar_position: 5
+title: Engine APIの呼び出し
+sidebar_position: 6
 ---
 
-When writing PlayCanvas scripts, you're working with the [PlayCanvas Engine API](https://api.playcanvas.com/engine/). This page covers the essential classes and patterns you'll use most often in your scripts.
+PlayCanvasスクリプトを記述する際、[PlayCanvas Engine API](https://api.playcanvas.com/engine/)を操作することになります。このページでは、スクリプトで最も頻繁に使用する重要なクラスとパターンについて説明します。
 
-## Key Classes for Script Writers
+## スクリプト開発者向けの主要クラス
 
-### Your Script Context
+### スクリプトコンテキスト
 
-Every script has access to these core objects:
+すべてのスクリプトは、以下のコアオブジェクトにアクセスできます。
 
 ```javascript
-// In any script method (initialize, update, etc.)
-this.app        // The main application (AppBase)
-this.entity     // The entity this script is attached to
+this.app        // メインアプリケーション (AppBase)
+this.entity     // このスクリプトがアタッチされているエンティティ
 ```
 
-### Essential Classes
+:::important
 
-**[`Entity`](https://api.playcanvas.com/engine/classes/Entity.html)** - Objects in your scene
+`this.app`と`this.entity`は、Scriptインスタンスで定義されたメソッド（`initialize`、`update`など）内でのみ有効です。JavaScriptの`this`キーワードについて[詳しくはこちら](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)をご覧ください。
 
-```javascript
-// Common entity operations
-this.entity.setPosition(0, 5, 0);
-this.entity.rotate(0, 90, 0);
-const child = this.entity.findByName('Weapon');
-```
+:::
 
-**[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)** - Your application
+### 必須クラス
+
+**[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)** - アプリケーション
 
 ```javascript
-// Common app operations
+// 一般的なアプリケーション操作
 this.app.fire('game:start');
 const player = this.app.root.findByName('Player');
 const texture = this.app.assets.find('logo', 'texture');
 ```
 
-**Components** - Add functionality to entities
+**[`Entity`](https://api.playcanvas.com/engine/classes/Entity.html)** - シーン内のオブジェクト
 
 ```javascript
-// Accessing components
+// 一般的なエンティティ操作
+this.entity.setPosition(0, 5, 0);
+this.entity.rotate(0, 90, 0);
+const child = this.entity.findByName('Weapon');
+```
+
+**[`Component`](https://api.playcanvas.com/engine/classes/Component.html)** - エンティティに機能を追加する
+
+```javascript
+// コンポーネントへのアクセス
 const camera = this.entity.camera;
-const model = this.entity.model;
+const light = this.entity.light;
 const rigidbody = this.entity.rigidbody;
 const sound = this.entity.sound;
 ```
 
-### Math Classes
+### 数学クラス
 
-Import these for calculations and transformations:
+計算や変換のためにこれらをインポートします。
 
 ```javascript
 import { Vec3, Quat, Color } from 'playcanvas';
@@ -59,25 +64,25 @@ const rotation = new Quat();
 const red = new Color(1, 0, 0);
 ```
 
-## Common Script Patterns
+## 一般的なスクリプトパターン
 
-### Finding Entities
+### エンティティの検索
 
 ```javascript
-// By name (searches entire hierarchy)
+// 名前で検索（階層全体を検索）
 const player = this.app.root.findByName('Player');
 
-// By tag (returns array)
+// タグで検索（配列を返す）
 const enemies = this.app.root.findByTag('enemy');
 
-// Relative to current entity
+// 現在のエンティティからの相対パス
 const weapon = this.entity.findByPath('Arms/RightHand/Weapon');
 ```
 
-### Working with Assets
+### アセットの操作
 
 ```javascript
-// Find and load assets
+// アセットを検索してロード
 const sound = this.app.assets.find('explosion', 'audio');
 sound.ready(() => {
     this.entity.sound.play('explosion');
@@ -85,25 +90,25 @@ sound.ready(() => {
 this.app.assets.load(sound);
 ```
 
-### Events and Communication
+### イベントと通信
 
 ```javascript
-// Fire application events
+// アプリケーションイベントの発火
 this.app.fire('player:died', this.entity);
 
-// Listen for events
+// イベントのリッスン
 this.app.on('game:start', this.onGameStart, this);
 ```
 
-## Learning More
+## さらに学ぶ
 
-* **[Full Engine API Reference](https://api.playcanvas.com/engine/)** - Complete documentation
-* **[Engine Guide](/user-manual/engine/)** - In-depth guide to the PlayCanvas Engine runtime
-* **[Script Lifecycle](../script-lifecycle/)** - When your script methods are called
-* **[Events](../events/)** - Script communication patterns
+*   **[Engine API リファレンス](https://api.playcanvas.com/engine/)** - 完全なドキュメント
+*   **[Engine ガイド](../../engine/index.md)** - PlayCanvas Engineランタイムの詳細ガイド
+*   **[スクリプトライフサイクル](./script-lifecycle.md)** - スクリプトメソッドが呼び出されるタイミング
+*   **[イベント](./events.md)** - スクリプトの通信パターン
 
 :::tip
 
-**IDE Support:** Use the [VS Code Extension](../../editor-users/vscode-extension/) for autocomplete and inline documentation while writing scripts.
+**IDEサポート:** スクリプト記述中にオートコンプリートとインラインドキュメントを利用するには、[VS Code Extension](../editor-users/vscode-extension.md)を使用してください。
 
 :::

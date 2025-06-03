@@ -1,8 +1,8 @@
 ---
-title: History
+title: 履歴
 ---
 
-In this example you can interact with the input slider to update the progress bar. Any actions you make can be undone / redone using the history buttons.
+この例では、入力スライダーを操作してプログレスバーを更新できます。行った操作は、履歴ボタンを使って元に戻したり、やり直したりできます。
 
 <div className='iframe-container'>
     <iframe src="https://playcanvas.github.io/pcui/storybook/iframe?id=examples-history--main&viewMode=story"></iframe>

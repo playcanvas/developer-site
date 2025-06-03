@@ -3,13 +3,13 @@ title: テクスチャ
 sidebar_position: 1
 ---
 
-### sRGB Texture Handling  
+### sRGBテクスチャの取り扱い
 
-Textures that represent colors, such as Diffuse, Emissive, Specular, and Sheen, are typically stored in sRGB space to maintain color accuracy and reduce banding. When used by the engine, these textures are automatically converted from sRGB to linear space for correct lighting calculations. This conversion is performed by the GPU efficiently at no extra cost, provided that the texture is created using an sRGB format.  
+Diffuse、Emissive、Specular、Sheen などの色を表すテクスチャは、色の精度を維持し、バンディングを減らすために、通常 sRGB スペースに格納されます。エンジンによって使用される際、これらのテクスチャは正しいライティング計算のために sRGB から linear スペースに自動的に変換されます。この変換は、テクスチャが sRGB フォーマットを使用して作成されている場合、GPU によって追加費用なしで効率的に実行されます。
 
-#### **Specifying sRGB Encoding for Textures**  
+#### **テクスチャのsRGBエンコーディングの指定**
 
-When loading a texture asset that represents colors in sRGB space, it is important to specify sRGB encoding. The following example demonstrates how to create an asset with sRGB encoding:  
+sRGB スペースで色を表すテクスチャアセットをロードする際、sRGB エンコーディングを指定することが重要です。次の例は、sRGB エンコーディングでアセットを作成する方法を示しています。
 
 ```javascript
 new pc.Asset(
@@ -20,17 +20,17 @@ new pc.Asset(
 );
 ```
 
-#### **Marking sRGB Textures in the Editor**  
+#### **エディターでのsRGBテクスチャのマーク**
 
-When working in the Editor, ensure that the color texture is marked as **sRGB** in the inspector panel. This guarantees that the engine correctly interprets the texture as sRGB and applies the necessary conversion to linear space.
+Editor で作業する際は、カラーテクスチャがインスペクターパネルで **sRGB** としてマークされていることを確認してください。これにより、エンジンがテクスチャを sRGB として正しく解釈し、linear スペースへの必要な変換を適用することが保証されます。
 
 ![sRGB](/img/user-manual/graphics/linear-workflow/srgb-editor.png)
 
-#### **sRGB Procedural Textures / Render Targets**  
+#### **sRGBプロシージャルテクスチャ / レンダーターゲット**
 
-When creating a procedural texture or rendering to a texture that represents color and will be read by a shader, it is important to create it with an **sRGB format** to enable automatic conversion. When rendering to this texture, linear values are automatically converted to gamma space to prevent banding. Later, when the texture is used as a color texture, pixels are automatically converted back to linear space.  
+プロシージャルテクスチャを作成する場合、または色を表しシェーダーによって読み取られるテクスチャにレンダリングする場合、自動変換を有効にするために **sRGBフォーマット** で作成することが重要です。このテクスチャにレンダリングする際、linear 値はバンディングを防ぐために自動的に gamma スペースに変換されます。その後、このテクスチャがカラーテクスチャとして使用される際、ピクセルは自動的に linear スペースに逆変換されます。
 
-The following example demonstrates how to create an sRGB render target texture:  
+次の例は、sRGB レンダーターゲットテクスチャを作成する方法を示しています。
 
 ```javascript
 const texture = new pc.Texture(app.graphicsDevice, {

@@ -1,5 +1,6 @@
 ---
-title: WGSL Specifics
+title: WGSL の詳細
+sidebar_position: 2
 ---
 
-Support for WGSL in the PlayCanvas engine is under active development. Detailed information on WGSL shader requirements and integration will be provided once the implementation is finalized.
+PlayCanvasエンジンでのWGSLサポートは、現在積極的に開発を進めています。WGSLシェーダーの要件と統合についての詳しい情報は、実装が完了次第提供されます。

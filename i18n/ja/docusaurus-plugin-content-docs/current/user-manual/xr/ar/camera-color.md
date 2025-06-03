@@ -1,11 +1,11 @@
 ---
-title: Camera Color
+title: カメラの色
 sidebar_position: 1
 ---
 
-In AR, the rendered image is projected over the reconstructed camera texture on the pass-through device types. This texture can be accessed by the application.
+ARでは、レンダリングされた画像は、パススルーデバイスタイプで再構築されたカメラテクスチャの上に投影されます。このテクスチャはアプリケーションからアクセスできます。
 
-To request access to the camera color, the session should be started with an extra flag:
+カメラの色へのアクセスを要求するには、セッションを以下の追加フラグ付きで開始する必要があります。
 
 ```javascript
 app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
@@ -13,36 +13,36 @@ app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
 });
 ```
 
-## Support
+## サポート
 
-You can check if the camera color is supported by the system:
+システムがカメラの色をサポートしているかどうかを確認できます。
 
 ```javascript
 if (app.xr.views.supportedColor) {
-    // camera color access is supported
+    // カメラの色へのアクセスがサポートされています
 }
 
 app.xr.on('start', () => {
     if (app.xr.views.availableColor) {
-        // camera color texture is available
+        // カメラの色テクスチャが利用可能です
     }
 });
 ```
 
-## テクスチャ (Texture)
+## テクスチャ
 
-WebXR can work on monoscopic as well as stereoscopic devices. This means there is a list of Views that represent either a screen (monoscopic device) or an eye (stereoscopic device).
+WebXRは、単眼デバイスと立体視デバイスの両方で動作します。これは、画面（単眼デバイス）または目（立体視デバイス）のいずれかを表すViewsのリストがあることを意味します。
 
-Bear in mind that Views are not available on session start, and can be created/removed during the session's lifetime.
+Viewsはセッション開始時には利用できず、セッションの有効期間中に作成/削除される可能性があることに留意してください。
 
-For a monoscopic device, we can access its view and its texture:
+単眼デバイスの場合、そのビューとテクスチャにアクセスできます。
 
 ```javascript
 app.xr.on('start', () => {
     app.xr.views.on('add', (view) => {
-        if (view.eye === pc.XREYE_NONE) { // monoscopic view
+        if (view.eye === pc.XREYE_NONE) { // 単眼ビュー
             if (view.textureColor) {
-                // camera color texture is available
+                // カメラの色テクスチャが利用可能です
             }
         }
     });

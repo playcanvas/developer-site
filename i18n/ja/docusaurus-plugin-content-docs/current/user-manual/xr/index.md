@@ -1,49 +1,49 @@
 ---
 title: XR
-sidebar_position: 20
+sidebar_position: 18
 ---
 
-![VR View](/img/user-manual/xr/vr-view.png)
+![VRビュー](/img/user-manual/xr/vr-view.png)
 
-PlayCanvas lets you create [AR](/user-manual/xr/ar/) (Augmented Reality) and [VR](/user-manual/xr/vr/) (Virtual Reality) applications for a variety of devices based on the new WebXR API, as well as through external integrations.
+PlayCanvasでは、新しいWebXR APIに基づき、および外部統合を通じて、さまざまなデバイス向けの[AR](/user-manual/xr/ar/)（拡張現実）および[VR](/user-manual/xr/vr/)（仮想現実）アプリケーションを作成できます。
 
-## Capabilities
+## 機能
 
-Through extensions, WebXR is ever growing and various platforms are constantly implementing new and existing WebXR Modules. The PlayCanvas Engine provides access to these modules in the form of integrations, so they are easier to work with and work nicely with PlayCanvas' systems.
+拡張機能を通じてWebXRは常に成長しており、さまざまなプラットフォームで新しいWebXRモジュールや既存のWebXRモジュールの実装が継続的に行われています。PlayCanvas Engineは統合の形でこれらのモジュールへのアクセスを提供するため、それらを扱いやすく、PlayCanvasのシステムとうまく連携します。
 
-You can check a [list of currently supported modules](/user-manual/xr/capabilities/).
+[現在サポートされているモジュールの一覧](/user-manual/xr/capabilities/)を確認できます。
 
-## 対応プラットフォーム
+## プラットフォーム
 
-WebXR is a new API and it is being rolled out gradually to all major platforms. Up-to-date support can be checked on [caniuse.com](https://caniuse.com/webxr).
+WebXRは新しいAPIであり、すべての主要なプラットフォームに徐々に展開されています。最新のサポート状況は[caniuse.com](https://caniuse.com/webxr)で確認できます。
 
-Additionally, support can be achieved with the [WebXR Polyfill](https://github.com/immersive-web/webxr-polyfill).
+さらに、[WebXR Polyfill](https://github.com/immersive-web/webxr-polyfill)を使用することでサポートを実現できます。
 
-On **mobile**, WebXR works on Android with VR and AR session types.
+**モバイル**では、WebXRはAndroidでVRおよびARセッションタイプに対応しています。
 
-On **HMDs**, such as Meta Quest, WebXR is well-supported for VR and AR session types. Apple Vision Pro currently supports VR session types when enabled in Safari settings.
+**HMD**では、Meta QuestなどのデバイスでWebXRはVRおよびARセッションタイプに十分対応しています。Apple Vision Proは、Safariの設定で有効にすると、現在VRセッションタイプをサポートしています。
 
-On **desktop**, WebXR currently works in Chrome and Edge, and devices are linked through various native APIs, such as SteamVR, OpenXR, and others. This covers the majority of desktop-based VR devices and allows devices such as Meta Quest to be used via Steam Link.
+**デスクトップ**では、WebXRは現在ChromeとEdgeで動作し、デバイスはSteamVR、OpenXRなど、さまざまなネイティブAPIを介してリンクされます。これにより、デスクトップベースのVRデバイスの大部分がカバーされ、Meta QuestなどのデバイスをSteam Link経由で使用できるようになります。
 
-## Testing WebXR without an XR Device
+## XRデバイスなしでWebXRをテストする
 
-You do not need to have XR hardware to start developing with WebXR. You can install the [Immersive Web Emulator](https://chromewebstore.google.com/detail/immersive-web-emulator/cgffilbpcibhmcfbgggfhfolhkfbhmik) Chrome extension which emulates the WebXR API. It allows you to simulate various head-mounted displays and controllers via the browser's Dev Tools.
+WebXRでの開発を開始するためにXRハードウェアは必要ありません。WebXR APIをエミュレートする[Immersive Web Emulator](https://chromewebstore.google.com/detail/immersive-web-emulator/cgffilbpcibhmcfbgggfhfolhkfbhmik) Chrome拡張機能をインストールできます。これにより、ブラウザのDev Toolsを介してさまざまなヘッドマウントディスプレイとコントローラーをシミュレートできます。
 
 :::danger
 
-Do not use the [WebXR API Emulator](https://chromewebstore.google.com/detail/webxr-api-emulator/mjddjgeghkdijejnciaefnkjmkafnnje) Chrome extension. It is not compatible with PlayCanvas. PlayCanvas applications will throw an exception if it is active.
+[WebXR API Emulator](https://chromewebstore.google.com/detail/webxr-api-emulator/mjddjgeghkdijejnciaefnkjmkafnnje) Chrome拡張機能を使用しないでください。これはPlayCanvasと互換性がありません。これがアクティブな場合、PlayCanvasアプリケーションは例外をスローします。
 
 :::
 
-## Getting Started with WebXR
+## WebXRの開始
 
-To start an XR session, support and availability should be checked first. Then, on a user interaction, a session can be started:
+XRセッションを開始するには、まずサポートと利用可能性を確認する必要があります。その後、ユーザーの操作に応じてセッションを開始できます。
 
 ```javascript
 button.element.on('click', () => {
-    // check if XR is supported and VR is available
+    // XRがサポートされ、VRが利用可能か確認します
     if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_VR)) {
-        // start VR session providing a camera component
+        // カメラコンポーネントを提供してVRセッションを開始します
         app.xr.start(entity.camera, pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
     }
 });

@@ -25,6 +25,8 @@ ESM scripts must have the `.mjs` file extension:
 import { Script } from 'playcanvas';
 
 export class PlayerController extends Script {
+    static scriptName = 'playerController';
+
     initialize() {
         // Setup code here
     }
@@ -36,7 +38,9 @@ export class PlayerController extends Script {
 ```
 
 :::tip
+
 **Multiple Scripts Per File:** A single `.mjs` file can export multiple script classes, but each must be exported to be available in the editor.
+
 :::
 
 ## Module Imports and Exports
@@ -62,6 +66,8 @@ import { Script } from 'playcanvas';
 import { GAME_SETTINGS, clamp } from './config.mjs';
 
 export class PlayerController extends Script {
+    static scriptName = 'playerController';
+
     update(dt) {
         const speed = GAME_SETTINGS.playerSpeed;
         // Use clamp function...

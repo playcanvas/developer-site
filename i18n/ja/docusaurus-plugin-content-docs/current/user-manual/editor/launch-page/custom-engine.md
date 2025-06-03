@@ -70,15 +70,15 @@ PlayCanvasエンジンの前の安定したビルドはcode.playcanvas.comにア
 
 ### ローカルにビルドしたエンジンで起動
 
-If you fork the engine repo on GitHub, you can build the engine yourself (via `npm run build`). To have the launch page launch your custom build, you need to start a local web server by running `npm run serve`.
+GitHubでEngineリポジトリをフォークした場合、自身でEngineをビルドできます（`npm run build`を使用）。起動ページでカスタムビルドを起動させるには、`npm run serve`を実行してローカルウェブサーバーを起動する必要があります。
 
-Verify you can see your engine source at the URL:
+以下のURLでEngineソースが見えることを確認してください。
 
 ```none
     http://localhost:51000/playcanvas.js
 ```
 
-To use this engine in the launch page, edit the URL to:
+このEngineを起動ページで使用するには、URLを以下のように編集します。
 
 ```none
     https://launch.playcanvas.com/<scene_id>?use_local_engine=http://localhost:51000/playcanvas.js

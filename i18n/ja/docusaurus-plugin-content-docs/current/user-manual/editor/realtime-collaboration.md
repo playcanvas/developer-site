@@ -1,60 +1,60 @@
 ---
-title: Real-time Collaboration
-sidebar_position: 10.5
+title: リアルタイムコラボレーション
+sidebar_position: 5
 ---
 
-Real-time collaboration is at the heart of the PlayCanvas Editor. This brings a number of benefits:
+リアルタイムコラボレーションは、PlayCanvas Editor の中核をなす機能です。これにより、以下のようないくつかのメリットが生まれます。
 
-* 🧑‍🤝‍🧑 Multiple users can work together to build a scene.
-* 🆘 One user can join another to offer advice or help fix an issue.
-* 🔍 Stakeholders can drop by to see the latest state of a project.
+* 🧑‍🤝‍🧑 複数のユーザーが共同でシーンを構築できます。
+* 🆘 あるユーザーが別のユーザーと合流し、アドバイスを提供したり、問題の解決を支援したりできます。
+* 🔍 関係者は、プロジェクトの最新状態を確認するためにいつでも訪れることができます。
 
-Let's examine how real-time collaboration is surfaced in the interface.
+リアルタイムコラボレーションがインターフェース上でどのように表示されるかを見てみましょう。
 
-## Presence Bar
+## プレゼンスバー
 
-In the bottom left corner of the [Viewport](../interface/viewport) (next to the CHAT button), you will find the Presence Bar.
+[Viewport](../interface/viewport) の左下隅（CHAT ボタンの隣）に、プレゼンスバーがあります。
 
 ![Presence Bar](/img/user-manual/editor/realtime-collaboration/presence-bar.png)
 
-Whenever a new user enters the scene, their user avatar will be added to the Presence Bar. Likewise, when they close the Editor, their avatar will be removed from the Presence Bar. You can hover any avatar to view the associated username. And if you click an avatar, it will take you to that user's profile page.
+新しいユーザーがシーンに入ると、そのユーザーのアバターがプレゼンスバーに追加されます。同様に、Editor を閉じると、アバターはプレゼンスバーから削除されます。任意のアバターにカーソルを合わせると、関連するユーザー名が表示されます。アバターをクリックすると、そのユーザーのプロフィールページに移動します。
 
 :::tip
 
-Each user is assigned a unique 'user color' that is used throughout the interface to represent them.
+各ユーザーには一意の「ユーザーカラー」が割り当てられ、インターフェース全体でそのユーザーを表すために使用されます。
 
 :::
 
-## Real-time Chat
+## リアルタイムチャット
 
-If you select the CHAT button, the Chat panel will expand and you can broadcast messages to other users present in the Editor with you.
+CHAT ボタンを選択すると、チャットパネルが展開され、Editor 内にいる他のユーザーにメッセージをブロードキャストできます。
 
 ![Chat](/img/user-manual/editor/realtime-collaboration/chat.gif)
 
-You can toggle browser notifications for chat messages in the [Settings](../interface/settings).
+チャットメッセージのブラウザ通知は、[設定](../interface/settings)で切り替えることができます。
 
 :::tip
 
-If you paste URLs into the chat, they will be formatted as clickable hyperlinks.
+チャットに URL を貼り付けると、クリック可能なハイパーリンクとしてフォーマットされます。
 
 :::
 
-## Viewport Cameras
+## ビューポートカメラ
 
-Each user in the scene is represented in the [Viewport](../interface/viewport) by a colored, wireframe camera frustum.
+シーン内の各ユーザーは、[Viewport](../interface/viewport) 内で色付きのワイヤーフレームカメラの錐台として表現されます。
 
 ![Viewport Cameras](/img/user-manual/editor/realtime-collaboration/viewport-cameras.webp)
 
-Mouse over the shaded center plane of a user camera to view the associated username:
+ユーザーカメラの陰影付き中央平面にマウスオーバーすると、関連するユーザー名が表示されます。
 
 ![Viewport Camera Username](/img/user-manual/editor/realtime-collaboration/viewport-camera-username.png)
 
-## Selection Indicators
+## 選択インジケーター
 
-It can be useful to know what entities other users are selecting and potentially editing. The [Hierarchy](../interface/hierarchy) displays square indicators to the right of entities selected by other users (shaded according to their user color).
+他のユーザーがどのエンティティを選択し、潜在的に編集しているかを知ることは有用です。[Hierarchy](../interface/hierarchy) には、他のユーザーによって選択されたエンティティの右側に四角いインジケーターが表示されます（ユーザーカラーに応じて陰影が付けられます）。
 
 ![Selection Indicators](/img/user-manual/editor/realtime-collaboration/selection-indicators.gif)
 
-Whenever an entity with a 3D model is selected by any user, its outline will be rendered in the [Viewport](../interface/viewport).
+3D モデルを持つエンティティが任意のユーザーによって選択されると、そのアウトラインが [Viewport](../interface/viewport) にレンダリングされます。
 
 ![Viewport Selection](/img/user-manual/editor/realtime-collaboration/viewport-selection.gif)

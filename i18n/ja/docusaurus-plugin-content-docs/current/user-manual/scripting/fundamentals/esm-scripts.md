@@ -1,70 +1,75 @@
 ---
-title: ESM Scripts
+title: ESMスクリプト
 sidebar_position: 2
-image: /img/user-manual/scripting/esm-script-meta.webp
 ---
 
-ESM Scripts use modern ES Module syntax and provide the recommended way to write PlayCanvas scripts. They offer better code organization, static imports, improved bundling, and a more familiar development experience for modern JavaScript developers.
+ESMスクリプトは、モダンなESモジュール構文を使用し、PlayCanvasスクリプトの推奨される記述方法です。より良いコード構成、静的インポート、バンドル最適化、そしてモダンなJavaScript開発者にとって馴染みのある開発体験を提供します。
 
-## Why Choose ESM Scripts?
+## なぜESMスクリプトを選ぶのか？
 
-* **Modern JavaScript:** Use ES6+ features like classes, arrow functions, and destructuring
-* **Better Tooling:** Enhanced IDE support with better autocomplete and error detection
-* **Modular Code:** Import and export functionality between scripts
-* **Improved Performance:** Static imports enable better bundling and dead code elimination
-* **Future-Proof:** Built on web standards that continue to evolve
+* **モダンなJavaScript:** クラス、アロー関数、分割代入などのES6+機能が使えます
+* **優れたツールサポート:** オートコンプリートやエラーチェックが強化されたIDE対応
+* **モジュール化されたコード:** スクリプト間でインポート・エクスポートが可能
+* **パフォーマンス向上:** 静的インポートによりバンドルやデッドコード除去が改善
+* **将来性:** 継続的に進化するWeb標準に基づいた設計
 
-## Creating ESM Scripts
+## ESMスクリプトの作成
 
-ESM scripts must have the `.mjs` file extension:
+ESMスクリプトは、`.mjs`拡張子である必要があります：
 
-1. In the Asset Panel, create a new script
-2. Name it with `.mjs` extension (e.g., `PlayerController.mjs`)
-3. The editor will provide ESM boilerplate code
+1. アセットパネルで新しいスクリプトを作成
+2. ファイル名に`.mjs`拡張子を付ける（例：`PlayerController.mjs`）
+3. エディタがESMのひな形コードを自動生成
 
 ```javascript
 import { Script } from 'playcanvas';
 
 export class PlayerController extends Script {
-    initialize() {
-        // Setup code here
-    }
+    static scriptName = 'playerController';
 
-    update(dt) {
-        // Frame update code here
-    }
+    initialize() {
+        // 初期化コードをここに
+    }
+
+    update(dt) {
+        // 毎フレームの更新コードをここに
+    }
 }
 ```
 
 :::tip
-**Multiple Scripts Per File:** A single `.mjs` file can export multiple script classes, but each must be exported to be available in the editor.
+
+**1つのファイルに複数のスクリプト：** 単一の `.mjs` ファイル内に複数のスクリプトクラスを定義できますが、それぞれをエクスポートしないとエディタで使用できません。
+
 :::
 
-## Module Imports and Exports
+## モジュールのインポートとエクスポート
 
-Share code between scripts using standard ES Module syntax:
+標準のESモジュール構文を使って、スクリプト間でコードを共有できます：
 
 ```javascript
-// config.mjs - Shared configuration
+// config.mjs - 共有設定
 export const GAME_SETTINGS = {
-    playerSpeed: 5,
-    jumpHeight: 10,
-    gravity: -9.8
+    playerSpeed: 5,
+    jumpHeight: 10,
+    gravity: -9.8
 };
 
 export function clamp(value, min, max) {
-    return Math.min(Math.max(value, min), max);
+    return Math.min(Math.max(value, min), max);
 }
 ```
 
 ```javascript
-// PlayerController.mjs - Using shared code
+// PlayerController.mjs - 共有コードの使用例
 import { Script } from 'playcanvas';
 import { GAME_SETTINGS, clamp } from './config.mjs';
 
 export class PlayerController extends Script {
-    update(dt) {
-        const speed = GAME_SETTINGS.playerSpeed;
-        // Use clamp function...
-    }
+    static scriptName = 'playerController';
+
+    update(dt) {
+        const speed = GAME_SETTINGS.playerSpeed;
+        // clamp関数を使う...
+    }
 }

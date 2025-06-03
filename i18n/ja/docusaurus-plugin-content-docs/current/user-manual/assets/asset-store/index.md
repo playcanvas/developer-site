@@ -1,52 +1,52 @@
 ---
-title: Asset Store
+title: アセットストア
 sidebar_position: 5
 ---
 
-The PlayCanvas Asset Store is a library of free assets that you can use in your projects. It contains 3D models, fonts, scripts and more.
+PlayCanvas Asset Storeは、プロジェクトで使用できる無料のアセットのライブラリです。3Dモデル、フォント、スクリプトなどが含まれています。
 
-## Accessing the Asset Store
+## アセットストアへのアクセス
 
-You can access the Asset Store from within the Editor by clicking the ASSET STORE button in the top-right of the [Assets Panel](../../editor/interface/assets).
+Editor内からアセットストアにアクセスするには、[Assets Panel](../../editor/interface/assets)の右上にあるASSET STOREボタンをクリックします。
 
 ![Asset Store Button](/img/user-manual/assets/asset-store/asset-store-button.png)
 
-The Asset Store will then open:
+するとアセットストアが開きます。
 
 ![Asset Store](/img/user-manual/assets/asset-store/asset-store.png)
 
-## Selecting a Store
+## ストアの選択
 
-There are three top-level Stores to chose from:
+選択できるトップレベルのストアは3つあります。
 
 | ストア | 説明 |
 | ----- | ----------- |
-| PLAYCANVAS | Assets curated and supplied by PlayCanvas and selected partner creators. This store contains: 3D models, fonts, scripts, sky boxes, templates and textures. |
-| SKETCHFAB  | Assets curated and supplied by [Sketchfab](https://sketchfab.com/). This store contains 3D models only. [Learn more](sketchfab) about the Sketchfab Store. |
-| MY ASSETS  | Assets imported by you and stored in your user account. This store is currently in a closed beta. |
+| PLAYCANVAS | PlayCanvasおよび選ばれたパートナークリエイターによってキュレーションおよび提供されたアセット。このストアには、3Dモデル、フォント、スクリプト、スカイボックス、テンプレート、テクスチャが含まれています。 |
+| SKETCHFAB  | [Sketchfab](https://sketchfab.com/)によってキュレーションおよび提供されたアセット。このストアには3Dモデルのみが含まれています。[Sketchfabストアの詳細はこちら](sketchfab)。 |
+| MY ASSETS  | ユーザーがインポートし、ユーザーアカウントに保存されたアセット。このストアは現在クローズドベータ版です。 |
 
-## Searching the Store
+## ストアの検索
 
-To search the Store, simply enter a search term in the Search bar at the top. You can then filter and sort the search results using the Search Options:
+ストアを検索するには、上部にある検索バーに検索語句を入力するだけです。その後、検索オプションを使用して検索結果をフィルタリングおよび並べ替えることができます。
 
 ![Asset Store Search](/img/user-manual/assets/asset-store/asset-store-search.png)
 
-## Importing Assets into your Project
+## プロジェクトへのアセットのインポート
 
-Select any store item in the search results to open its details page:
+検索結果から任意のストアアイテムを選択すると、その詳細ページが開きます。
 
 ![Asset Store Details](/img/user-manual/assets/asset-store/asset-store-details.png)
 
-On the details page you can:
+詳細ページでは、次のことができます。
 
-* Read a description of the store item.
-* Inspect the files included in the store item.
-* View statistics related to the store item (file size, last updated date, etc).
-* Preview the item in the Model Viewer (only applies to 3D model assets).
-* View author and license information.
+*   ストアアイテムの説明を読む。
+*   ストアアイテムに含まれるファイルを調べる。
+*   ストアアイテムに関する統計（ファイルサイズ、最終更新日など）を表示する。
+*   Model Viewerでアイテムをプレビューする（3Dモデルアセットにのみ適用）。
+*   作成者とライセンス情報を表示する。
 
 :::note
 
-Please respect the license terms for the store items you use in your projects. For example, the [Oldsmobile Cutlass Supreme Sedan '71](https://sketchfab.com/3d-models/oldsmobile-cutlass-supreme-sedan-71-78f76d386a4341b0b71745bdc50fd5ab) in the screenshot above was authored by [Barbo](https://sketchfab.com/barbo-autos) and has CC BY 4.0 license. This means that you must give the author appropriate credit for using their works.
+プロジェクトで使用するストアアイテムのライセンス条項を遵守してください。例えば、上記のスクリーンショットにある[Oldsmobile Cutlass Supreme Sedan '71](https://sketchfab.com/3d-models/oldsmobile-cutlass-supreme-sedan-71-78f76d386a4341b0b71745bdc50fd5ab)は[Barbo](https://sketchfab.com/barbo-autos)によって作成され、CC BY 4.0ライセンスを持っています。これは、その著作物を使用する際に、作成者に適切なクレジットを付与する必要があることを意味します。
 
 :::

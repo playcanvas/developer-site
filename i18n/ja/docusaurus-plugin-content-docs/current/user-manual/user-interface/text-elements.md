@@ -15,27 +15,27 @@ sidebar_position: 6
 
 :::
 
-### Text Markup
+### テキストマークアップ
 
-Text elements support a simple markup syntax that allows you to apply different colors to specific parts of the text. Consider this example:
+`Text Element` は、テキストの特定の部分に異なる色を適用できるシンプルなマークアップ構文をサポートしています。以下の例を考えてみましょう。
 
-```
+```none
 [color="#ff0000"]Red[/color], [color="#00ff00"]green[/color] and [color="#0000ff"]blue[/color].
 ```
 
-Assuming the base color of the text element is white, this will render as follows:
+`Text Element` のベースカラーが白であると仮定すると、これは次のようにレンダリングされます。
 
 ![Text Markup](/img/user-manual/user-interface/text-element/text-markup.png)
 
 :::tip
 
-You must proactively enable support for the markup syntax on a text element. You can do this via the API:
+`Text Element` でマークアップ構文のサポートを能動的に有効にする必要があります。これはAPIを介して行うことができます。
 
 ```javascript
 entity.element.enableMarkup = true;
 ```
 
-Or by enabling it in the Editor:
+またはEditorで有効にすることで実現できます。
 
 ![Enable Markup](/img/user-manual/user-interface/text-element/enable-markup.png)
 

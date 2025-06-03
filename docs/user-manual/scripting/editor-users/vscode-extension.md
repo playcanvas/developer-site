@@ -1,6 +1,6 @@
 ---
 title: VS Code Extension
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 For developers seeking an enhanced code editing experience with features like source control, GitHub Copilot and a wide range of extensions, integrating Visual Studio Code (VS Code) with PlayCanvas offers a powerful alternative to the built-in Code Editor. To this end, we provide an [open-source](https://github.com/playcanvas/vscode-extension) VS Code Extension.

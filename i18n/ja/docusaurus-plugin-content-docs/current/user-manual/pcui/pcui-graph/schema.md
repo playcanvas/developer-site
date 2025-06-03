@@ -1,11 +1,11 @@
 ---
-title: Schema
+title: スキーマ
 sidebar_position: 4
 ---
 
-The schema object is used to define what type of graph you will be initializing. More specifically, it defines which node your graph can contain and how those nodes can be connected together with edges.
+スキーマオブジェクトは、初期化するグラフの種類を定義するために使用されます。より具体的には、グラフがどのようなノードを含み得るか、そしてそれらのノードがエッジによってどのように接続され得るかを定義します。
 
-It should contain a set of nodes and edges which can be created in the graph. Each node and edge that is defined will need a unique number key which is used to reference that particular part of the schema. In the above example the single edge type defined references the two nodes contained in the schema when defining which node types it can connect. When creating large schemas, it can be useful to define these keys before creating the schema, so they can be easily referenced:
+グラフ内で作成できるノードとエッジのセットを含む必要があります。定義される各ノードとエッジには、スキーマのその特定の部分を参照するために使用される一意の数値キーが必要になります。上記の例では、定義された単一のエッジタイプが、接続できるノードタイプを定義する際に、スキーマに含まれる2つのノードを参照しています。大規模なスキーマを作成する場合、これらのキーをスキーマ作成前に定義しておくと、簡単に参照できるため便利です。
 
 ```javascript
 const NODE_KEYS = {
@@ -29,19 +29,19 @@ const schema = {
     },
     edges: {
         [EDGE_KEYS.HELLO_TO_WORLD]: {
-            from: [NODE_KEYS.HELLO], // this edge can connect nodes of type NODE_KEYS.HELLO
-            to: [NODE_KEYS.WORLD] // to nodes of type NODE_KEYS.WORLD,
+            from: [NODE_KEYS.HELLO], // このエッジはNODE_KEYS.HELLOタイプのノードを接続できます
+            to: [NODE_KEYS.WORLD] // NODE_KEYS.WORLDタイプのノードへ
             stroke: 'blue'
         }
     }
 };
 ```
 
-The schemas above are used to created directed graphs, as they define edges which contain `from` and `to` attributes. These attributes tell an edge which nodes they can connect, creating a directed edge from one node to another.
+上記のスキーマは、`from`および`to`属性を含むエッジを定義しているため、有向グラフを作成するために使用されます。これらの属性は、エッジがどのノードを接続できるかを示し、あるノードから別のノードへの有向エッジを作成します。
 
-When creating visual programming graphs, nodes are not connected directly. Instead, they contain input and output ports which can be connected together. This will need to be expressed in the schema you create. To achieve this, you can add `inPorts` and `outPorts` attributes to your nodes in the schema. These will define a set of ports which will be created on a given node, specifying which edges can connect those ports.
+ビジュアルプログラミンググラフを作成する場合、ノードは直接接続されません。代わりに、それらは互いに接続できる入力ポートと出力ポートを含んでいます。これは、作成するスキーマで表現する必要があります。これを実現するには、スキーマ内のノードに`inPorts`および`outPorts`属性を追加できます。これらは、特定のノード上に作成されるポートのセットを定義し、どのエッジがそれらのポートを接続できるかを指定します。
 
-The schema defined above can be reworked to support port connections as follows:
+上記のスキーマは、ポート接続をサポートするように次のように再構築できます。
 
 ```javascript
 const NODE_KEYS = {
@@ -83,9 +83,9 @@ const schema = {
 };
 ```
 
-You can see that created ports have a type which defines the edge type each port accepts. Only input and output ports of the same type can be connected together in the graph. Ports also contain a name which will appear next to the port in the graph.
+作成されたポートには、各ポートが受け入れるエッジタイプを定義するタイプがあることがわかります。グラフ内では、同じタイプの入出力ポートのみが互いに接続できます。ポートには、グラフ内でポートの横に表示される名前も含まれています。
 
-Nodes can also contain editable attributes, which will show up as input fields within them. These attributes can be set in a node as follows:
+ノードは、編集可能な属性を含むこともでき、それらはノード内に表示される入力フィールドとして表示されます。これらの属性は、ノードで次のように設定できます。
 
 ```javascript
 const schema = {
@@ -114,7 +114,7 @@ const schema = {
                     type: 'VEC3_INPUT'
                 },
                 {
-                    name: 'Editable 4D vector',
+                    name: '編集可能な4次元ベクトル',
                     type: 'VEC4_INPUT'
                 }
             ]
@@ -123,7 +123,7 @@ const schema = {
 };
 ```
 
-Editable attributes for a given node type must have unique names as they are stored in the graph data in a dictionary. When a node with an editable attribute is created, it can be accessed via the graph data as follows:
+特定のノードタイプに対する編集可能な属性は、グラフデータに辞書形式で格納されるため、一意の名前を持つ必要があります。編集可能な属性を持つノードが作成された場合、それは以下のようにグラフデータ経由でアクセスできます。
 
 ```javascript
 const selectedItemId = graph.selectedItem.id;

@@ -23,6 +23,8 @@ Let's start with a simple rotate script example.
 import { Script } from 'playcanvas';
 
 export class Rotator extends Script {
+    static scriptName = 'rotator';
+
     /**
      * You can now set the `speed`property dynamically in the editor.
      *
@@ -31,7 +33,7 @@ export class Rotator extends Script {
     speed = 2;
 
     update(dt){
-        this.entity.rotateLocal(0, this.speed * dt, 0)
+        this.entity.rotateLocal(0, this.speed * dt, 0);
     }
 }
 ```
@@ -74,7 +76,7 @@ contextual information on what the attribute is and how it behaves
  * @attribute
  * Sets the speed of the Y rotation in degrees.
  */
-speed = 2
+speed = 2;
 ```
 
 In the editor this is available as a tooltip.
@@ -90,7 +92,7 @@ What if you also want to define a sensible range values for speed. You can do th
  * @attribute
  * @range [0, 10]
  */
-speed = 10
+speed = 10;
 ```
 
 This simply tells the editor that speed is an attribute and it's value should be within 0 - 10. The editor will create a numerical slider mapped to this range.
@@ -103,10 +105,10 @@ There are additional numerical constraints that you can set which help the edito
 /** 
  * @attribute
  * @range [0, 10]
- * @precison 0.1
+ * @precision 0.1
  * @step 0.05
  */
-speed = 10
+speed = 10;
 ```
 
 ## Attribute types
@@ -128,7 +130,9 @@ myTexture;
 ```
 
 :::warning
+
 An attribute must either be initialized with a value `speed = 10`, or have a jsdoc type `@type {number}`. If neither are present, the attribute will ignored
+
 :::
 
 ### Entity attribute
@@ -140,8 +144,14 @@ The Entity type lets your reference another entity in your hierarchy. A great wa
  * @attribute
  * @type {Entity}
  */
-target
+target;
 ```
+
+:::important
+
+You must import `Entity` from `playcanvas` for your attribute to parse correctly.
+
+:::
 
 ### Asset attribute
 
@@ -155,7 +165,7 @@ The runtime type of an Asset attribute is `Asset`. You can reference the resourc
  * @type {Asset}
  * @resource texture
  */
-texture
+texture;
 
 initialize() {
     console.log('This is the texture asset', this.texture);
@@ -163,12 +173,24 @@ initialize() {
 }
 ```
 
+:::important
+
+You must import `Asset` from `playcanvas` for your attribute to parse correctly.
+
+:::
+
 ### Color attribute
 
 ```javascript
 /** @attribute */
-color = new Color()
+color = new Color();
 ```
+
+:::important
+
+You must import `Color` from `playcanvas` for your attribute to parse correctly.
+
+:::
 
 The color attribute shows a color picker when exposed in the editor. There are two options `rgb` and `rgba` depending on whether you wish to expose the alpha channel as well.
 
@@ -176,8 +198,14 @@ The color attribute shows a color picker when exposed in the editor. There are t
 
 ```javascript
 /** @attribute */
-position = new Vec3()
+position = new Vec3();
 ```
+
+:::important
+
+You must import `Vec2`/`Vec3`/`Vec4` from `playcanvas` for your attribute to parse correctly.
+
+:::
 
 The vector attribute can be a 2, 3 or 4 dimension. The editor will show a numerical input for each component, allowing you to set each one independently.
 
@@ -191,8 +219,14 @@ The vector attribute can be a 2, 3 or 4 dimension. The editor will show a numeri
  * @type {Curve}
  * @color rgba
  */
-wave
+wave;
 ```
+
+:::important
+
+You must import `Curve` from `playcanvas` for your attribute to parse correctly.
+
+:::
 
 The curve attribute is used to express a value that changes over a time period. All curves are defined over the period 0.0 - 1.0. You can define multiple curves, for example if you wish to have a 3D position from a curve defined three curves for x,y,z using the `curves` property. There is also a special curve editor for modifying colors using the `color` property.
 
@@ -215,10 +249,10 @@ The `Color[]` declaration uses the [jsdoc type tag](https://jsdoc.app/tags-type)
 In your initialize or update loop, you can iterate over `gradientStops` as an array
 
 ```javascript
-initialize(){
+initialize() {
     this.gradientStops.forEach(color => {
-        console.log('This is a Color class', color)
-    })
+        console.log('This is a Color class', color);
+    });
 }
 ```
 
@@ -233,14 +267,16 @@ const Lights = {
     ON: 1,
     OFF: 0,
     UNKNOWN: 0.5
-}
+};
 
 class MyScript extends Script {
+    static scriptName = 'myScript';
+
     /**
      * @attribute
      * @type {Lights}
      */
-    ambient = Lights.OFF
+    ambient = Lights.OFF;
 }
 ```
 
@@ -256,15 +292,17 @@ Let’s walk through an example:
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      */
-    speed = 10
+    speed = 10;
 }
 ```
 
@@ -274,16 +312,18 @@ We can achieve this by using the `@enabledif` tag:
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      * @enabledif {power}
      */
-    speed = 10
+    speed = 10;
 }
 ```
 
@@ -295,22 +335,24 @@ You can also use more expressive conditions. If the condition evaluates to a [tr
 
 ```javascript
 export class Delorean extends Script {
+    static scriptName = 'delorean';
+
     /**
      * @attribute
      */
-    power = false
+    power = false;
 
     /** 
      * @attribute
      * @enabledif {power}
      */
-    speed = 10
+    speed = 10;
 
     /**
      * @attribute
      * @visibleif {speed > 88.8}
      */
-    enableFluxCapacitor = true
+    enableFluxCapacitor = true;
 }
 ```
 
@@ -336,15 +378,17 @@ Attribute groups are essentially objects that contain sub-attributes:
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** 
      * @attribute 
      * `power` and `speed` are exposed as sub attributes
      */
-    enemy = { power: 10, speed: 3 }
+    enemy = { power: 10, speed: 3 };
 
-    initialize(){
-        console.log(this.enemy.speed) // 3
-        console.log(this.enemy.power) // 10
+    initialize() {
+        console.log(this.enemy.speed); // 3
+        console.log(this.enemy.power); // 10
     }
 }
 ```
@@ -363,8 +407,10 @@ A simple inline way of declaring attribute groups
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** @attribute */
-    enemy = { power: 10, speed: 3 }
+    enemy = { power: 10, speed: 3 };
 }
 ```
 
@@ -380,17 +426,19 @@ This is a more modular way of declaring Attribute Groups. Whilst it is more verb
  */
 
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /** 
      * @attribute 
      * @type {Enemy}
      */
-    enemy
+    enemy;
 }
 ```
 
 ### Interface Attributes
 
-If you want to group attributes together and set individual constraints on it's members you can use an Interface Attribute. This provides a morea more flexible way of grouping attributes.
+If you want to group attributes together and set individual constraints on its members you can use an Interface Attribute. This provides a morea more flexible way of grouping attributes.
 
 ```javascript
 /** @interface */
@@ -399,15 +447,18 @@ class Enemy {
      * @range [0, 11]
      */
     power = 10;
-    speed = 3
+
+    speed = 3;
 }
 
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /**
      * @attribute 
      * @type {Enemy}
      */
-    enemy
+    enemy;
 }
 ```
 
@@ -432,15 +483,17 @@ Interface attributes can be used as arrays, just like plain attributes. This mea
 
 ```javascript
 class GameLogic extends Script {
+    static scriptName = 'gameLogic';
+
     /**
      * @attribute
      * @type {Enemy[]}
      */
-    enemies
+    enemies;
 
-    update(){
+    update(dt) {
         this.enemies.forEach(({ power, speed }) => {
-            this.updateEnemy(power, speed)
+            this.updateEnemy(power, speed);
         })
     }
 }

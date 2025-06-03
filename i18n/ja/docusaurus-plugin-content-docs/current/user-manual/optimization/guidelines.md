@@ -1,5 +1,5 @@
 ---
-title: General Guidelines
+title: 一般的ガイドライン
 sidebar_position: 1
 ---
 

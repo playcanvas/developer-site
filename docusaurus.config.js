@@ -42,6 +42,7 @@ const config = {
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
+        { from: ['/user-manual/graphics/shader-chunk-migrations/'], to: '/user-manual/graphics/shaders/migrations/' },
         { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/scripting/editor-users/exporting/' },
       ],
       createRedirects: (existingPath) => {

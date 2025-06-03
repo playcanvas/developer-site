@@ -13,9 +13,9 @@ sidebar_position: 6
 * `fire()` - イベントを送信します。
 * `hasEvent()` - 特定のイベントをリッスンしているかどうかを問い合わせます。
 
-## Using Events
+## イベントの使い方
 
-Trigger an event using `fire()`. In this example, the player script fires a `move` event every frame with the `x` and `y` values passed as arguments.
+イベントをトリガーするには `fire()` を使用します。この例では、プレイヤースクリプトが毎フレーム、`x` と `y` の値を引数として `move` イベントを発火します。
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -27,6 +27,8 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class Player extends Script {
+    static scriptName = 'player';
+
     update(dt) {
         const x = 1;
         const y = 1;
@@ -60,6 +62,8 @@ Player.prototype.update = function (dt) {
 import { Script } from 'playcanvas';
 
 export class Display extends Script {
+    static scriptName = 'display';
+
     /**
      * @attribute
      * @type {Entity}
@@ -130,6 +134,8 @@ Display.prototype.initialize = function () {
 import { Script } from 'playcanvas';
 
 export class Player extends Script {
+    static scriptName = 'player';
+
     update(dt) {
         var x = 1;
         var y = 1;
@@ -138,6 +144,8 @@ export class Player extends Script {
 }
 
 export class Display extends Script {
+    static scriptName = 'display';
+
     initialize() {
         // Method to call when player moves
         const onPlayerMove = (x, y) => {

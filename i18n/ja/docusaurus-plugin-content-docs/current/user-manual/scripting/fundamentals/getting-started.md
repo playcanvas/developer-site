@@ -3,54 +3,56 @@ title: はじめに
 sidebar_position: 1
 ---
 
-This guide covers the basic structure and concepts you need to understand when writing PlayCanvas scripts, whether you're using the modern ESM approach or the classic system.
+このガイドでは、モダンなESMアプローチでもクラシックシステムでも、PlayCanvasスクリプトを書く際に理解しておくべき基本構造と概念を説明します。
 
-## What is a Script?
+## スクリプトとは？
 
-A script is a piece of JavaScript code that defines behavior for an Entity in your scene. Scripts are:
+スクリプトとは、シーン内のエンティティに対する挙動を定義するJavaScriptコードです。スクリプトには以下の特性があります：
 
-* **Reusable** - The same script can be attached to multiple entities
-* **Configurable** - Use attributes to customize behavior per entity
-* **Event-driven** - Respond to lifecycle events and user interactions
+* **再利用可能** - 同じスクリプトを複数のエンティティにアタッチ可能
+* **設定可能** - 属性を使ってエンティティごとに挙動をカスタマイズ
+* **イベント駆動** - ライフサイクルイベントやユーザー操作に応答
 
-## Basic Script Structure
+## 基本的なスクリプト構造
 
-Every PlayCanvas script follows a similar pattern, regardless of which system you use:
+PlayCanvasのスクリプトは、どの方式を使っても共通のパターンに従います：
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM (Recommended)">
+<TabItem value="esm" label="ESM（推奨）">
 
 ```javascript
 import { Script } from 'playcanvas';
 
 export class MyScript extends Script {
-    /** @attribute */
-    speed = 10;
+    static scriptName = 'myScript';
 
-    initialize() {
-        // Called once when the script starts
-        console.log('Script initialized!');
-    }
+    /** @attribute */
+    speed = 10;
 
-    update(dt) {
-        // Called every frame
-        this.entity.rotate(0, this.speed * dt, 0);
-    }
+    initialize() {
+        // スクリプト開始時に一度だけ呼ばれる
+        console.log('スクリプトが初期化されました！');
+    }
+
+    update(dt) {
+        // 毎フレーム呼ばれる
+        this.entity.rotate(0, this.speed * dt, 0);
+    }
 }
 ```
 
-**Key points for ESM scripts:**
+**ESMスクリプトのポイント：**
 
-* Import the `Script` class from PlayCanvas
-* Export a class that extends `Script`
-* Use `/** @attribute */` to expose properties to the editor
-* File must have `.mjs` extension
+* PlayCanvasから`Script`クラスをインポート
+* `Script`を拡張したクラスをエクスポート
+* `/** @attribute */`でプロパティをエディタに公開
+* ファイル拡張子は`.mjs`
 
 </TabItem>
-<TabItem value="classic" label="Classic">
+<TabItem value="classic" label="クラシック">
 
 ```javascript
 var MyScript = pc.createScript('myScript');
@@ -58,50 +60,52 @@ var MyScript = pc.createScript('myScript');
 MyScript.attributes.add('speed', { type: 'number', default: 10 });
 
 MyScript.prototype.initialize = function() {
-    // Called once when the script starts
-    console.log('Script initialized!');
+    // スクリプト開始時に一度だけ呼ばれる
+    console.log('スクリプトが初期化されました！');
 };
 
 MyScript.prototype.update = function(dt) {
-    // Called every frame
-    this.entity.rotate(0, this.speed * dt, 0);
+    // 毎フレーム呼ばれる
+    this.entity.rotate(0, this.speed * dt, 0);
 };
 ```
 
-**Key points for classic scripts:**
+**クラシックスクリプトのポイント：**
 
-* Use `pc.createScript()` to declare the script
-* Add attributes using the `.attributes.add()` method
-* Define methods on the prototype
-* File has `.js` extension
+* `pc.createScript()`でスクリプトを宣言
+* `.attributes.add()`で属性を追加
+* prototypeにメソッドを定義
+* ファイル拡張子は`.js`
 
 </TabItem>
 </Tabs>
 
-## Core Concepts
+## 基本概念
 
-### Script Lifecycle
+### スクリプトのライフサイクル
 
-Scripts have several methods that are called automatically at different times:
+スクリプトには、タイミングに応じて自動的に呼ばれるメソッドがあります：
 
-* `initialize()` - Called once when the script starts
-* `update(dt)` - Called every frame with delta time
-* `postUpdate(dt)` - Called after all updates complete
-* Event handlers for `enable`, `disable`, `destroy`
+* `initialize()` - スクリプト開始時に一度だけ呼ばれる
+* `update(dt)` - 毎フレーム呼ばれ、dtはデルタタイム
+* `postUpdate(dt)` - すべてのupdate後に呼ばれる
+* `enable`, `disable`, `destroy`などのイベントハンドラ
 
-Learn more about the [Script Lifecycle](../script-lifecycle/).
+詳しくは[スクリプトのライフサイクル](./script-lifecycle.md)をご覧ください。
 
-### Attributes
+### 属性
 
-Attributes let you expose script properties to the editor, making scripts configurable without code changes:
+属性を使うことで、スクリプトのプロパティをエディタで設定でき、コードを変更せずに挙動を変えられます：
 
 <Tabs defaultValue="esm" groupId='script-code'>
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Color, Script } from 'playcanvas';
+import { Color, Entity, Script } from 'playcanvas';
 
 export class Configurable extends Script {
+    static scriptName = 'configurable';
+
     /** @attribute */
     speed = 5;
 
@@ -130,34 +134,34 @@ Configurable.attributes.add('target', { type: 'entity' });
 </TabItem>
 </Tabs>
 
-Learn more about [Script Attributes](../script-attributes/).
+詳しくは[スクリプト属性](./script-attributes/index.md)をご覧ください。
 
-### Accessing the Entity
+### エンティティへのアクセス
 
-Every script has access to the entity it's attached to via `this.entity`:
+すべてのスクリプトは、アタッチされているエンティティに`this.entity`を使ってアクセスできます：
 
 ```javascript
-// Get the entity's position
+// エンティティの位置を取得
 const position = this.entity.getPosition();
 
-// Find child entities
+// 子エンティティの検索
 const child = this.entity.findByName('ChildName');
 
-// Access components
+// コンポーネントへのアクセス
 const camera = this.entity.camera;
 const rigidbody = this.entity.rigidbody;
 ```
 
-## Next Steps
+## 次のステップ
 
-* **Learn ESM Scripts:** If you're starting fresh, check out [ESM Scripts](../esm-scripts/) for the modern approach
-* **Understand Lifecycle:** Read about [Script Lifecycle](../script-lifecycle/) to understand when your code runs
-* **Add Interactivity:** Explore [Events](../events/) to make scripts communicate with each other
+* **ESMスクリプトを学ぶ：** 新規プロジェクトでは[ESMスクリプト](./esm-scripts.md)が推奨されます
+* **ライフサイクルの理解：** [スクリプトのライフサイクル](./script-lifecycle.md)を読んで、コードがいつ実行されるかを理解しましょう
+* **インタラクティブ性の追加：** [イベント](./events.md)を使って、スクリプト同士の連携を実現しましょう
 
 :::tip
 
-**Which system should I use?**
+**どの方式を使うべき？**
 
-For new projects, we recommend **ESM Scripts** as they offer better tooling, cleaner syntax, and modern JavaScript features. Classic scripts are still fully supported for existing projects.
+新しいプロジェクトでは、より良いツールやモダンなJavaScript機能を持つ**ESMスクリプト**を推奨します。既存プロジェクトでは、クラシックスクリプトも引き続き完全にサポートされています。
 
 :::

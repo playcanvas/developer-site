@@ -1,6 +1,6 @@
 ---
 title: 3D Gaussian Splatting
-sidebar_position: 3.5
+sidebar_position: 7
 ---
 
 3D Gaussian Splatting is a relatively new technique for capturing and rendering photorealistic volumetric point clouds. Since the technique relies on photogrammetry, it is very quick, cheap and easy to generate high-quality rendered scenes.
@@ -29,7 +29,7 @@ Captured splats normally need to be edited to some degree. The generation proces
 
 ![SuperSplat](/img/user-manual/graphics/gaussian-splatting/supersplat.png)
 
-PlayCanvas provides a powerful 3D Gaussian Splat editor called [SuperSplat](https://playcanvas.com/supersplat/editor). SuperSplat is open-sourced under an MIT license on [GitHub](https://github.com/playcanvas/supersplat).
+PlayCanvas provides a powerful 3D Gaussian Splat editor called [SuperSplat](https://superspl.at/editor). SuperSplat is open-sourced under an MIT license on [GitHub](https://github.com/playcanvas/supersplat).
 
 ### Importing Splats
 
@@ -55,4 +55,3 @@ There are some limitations to keep in mind when working with splats:
 1. Fog has no effect.
 2. Dynamic lights have no effect.
 3. [Image Based Lighting](../physical-rendering/image-based-lighting) has no effect.
-4. Splats do not cast shadows.
