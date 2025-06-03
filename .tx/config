@@ -2949,11 +2949,11 @@ minimum_perc  = 0
 resource_name = content/en/user-manual/scripting/editor-users/index.md
 
 [o:playcanvas:p:playcanvas-developer-site:r:user-manual-scripting-editor-users-loading-order]
-file_filter   = i18n/<lang>/docusaurus-plugin-content-docs/current/user-manual/scripting/editor-users/exporting.md
-source_file   = docs/user-manual/scripting/editor-users/exporting.md
+file_filter   = i18n/<lang>/docusaurus-plugin-content-docs/current/user-manual/scripting/editor-users/loading-order.md
+source_file   = docs/user-manual/scripting/editor-users/loading-order.md
 type          = GITHUBMARKDOWN
 minimum_perc  = 0
-resource_name = content/en/user-manual/scripting/editor-users/exporting.md
+resource_name = content/en/user-manual/scripting/editor-users/loading-order.md
 
 [o:playcanvas:p:playcanvas-developer-site:r:user-manual-scripting-editor-users-managing-scripts]
 file_filter   = i18n/<lang>/docusaurus-plugin-content-docs/current/user-manual/scripting/editor-users/managing-scripts.md
