@@ -1,9 +1,9 @@
 ---
-title: インターフェイス
+title: エディターインターフェース
 sidebar_position: 1
 ---
 
-![Editor Interface](/img/user-manual/editor/interface/editor-interface.png)
+![エディターインターフェース](/img/user-manual/editor/interface/editor-interface.png)
 
 これはPlayCanvas Editorの主要なインターフェースです。主な領域にラベルが付いています。
 
