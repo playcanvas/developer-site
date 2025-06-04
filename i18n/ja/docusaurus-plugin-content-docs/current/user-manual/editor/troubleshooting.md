@@ -1,6 +1,6 @@
 ---
 title: トラブルシューティング
-sidebar_position: 14
+sidebar_position: 9
 ---
 
 Engine V1またはV2を実行するプロジェクト向けのEngine V2を搭載したEditorに関する、よくある質問とその回答をまとめたリストです。
