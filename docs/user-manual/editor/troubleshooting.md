@@ -1,6 +1,6 @@
 ---
-title: FAQ
-sidebar_position: 14
+title: Troubleshooting
+sidebar_position: 9
 ---
 
 This is a list compiled of all the most commonly asked questions and answers for the Editor powered by Engine V2 for projects running Engine V1 or V2.
