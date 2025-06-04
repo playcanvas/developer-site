@@ -1,5 +1,5 @@
 ---
-title: FAQ
+title: Troubleshooting
 sidebar_position: 14
 ---
 

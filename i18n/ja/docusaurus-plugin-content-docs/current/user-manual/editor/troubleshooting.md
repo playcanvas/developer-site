@@ -1,5 +1,5 @@
 ---
-title: FAQ
+title: トラブルシューティング
 sidebar_position: 14
 ---
 
