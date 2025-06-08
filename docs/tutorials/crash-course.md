@@ -8,12 +8,6 @@ thumb: /img/tutorials/crash-course/crash-course-thumbnail.jpg
     <iframe width="560" height="315" src="https://www.youtube.com/embed/9zqHlbW9XWE?si=lWifeMBGpaNqq7Sa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-:::note
-
-Phase 3 of this tutorial is still incomplete
-
-:::
-
 ## Overview
 
 In this tutorial, we will give an introduction to PlayCanvas and take you through making a complete game, end to end with PlayCanvas.
@@ -49,6 +43,12 @@ Play below! Try to get as many food items as you can before the timer runs out! 
 | `1:47:56` | **Phase 3 - Polishing & Publishing** (incomplete)  |
 |           |                                                    |
 | `2:00:57` | Wrap Up                                            |
+
+:::note
+
+Phase 3 of this tutorial is still incomplete
+
+:::
 
 ## Links and resources
 
