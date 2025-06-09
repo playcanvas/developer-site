@@ -1,33 +1,33 @@
 ---
-title: Exporting and Preloading
+title: エクスポートとプリロード
 sidebar_position: 5
 ---
 
-## Loading Order
+## 読み込み順序
 
-### ESM Scripts
+### ESMスクリプト
 
-ESM Scripts do not have an explicit loading order, and should not be relied upon to load in a specific order. Instead, you should use module import statements to declare dependencies between modules.
+ESMスクリプトには明示的な読み込み順序がなく、特定の順序で読み込まれると想定すべきではありません。代わりに、モジュール間の依存関係を宣言するには、モジュールのインポートステートメントを使用する必要があります。
 
-### Classic Scripts
+### クラシックスクリプト
 
-Generally all scripts are loaded at the beginning of your application. The loading order is determined by a setting in your project which you can access from the main Editor menu or Scene Settings:
+一般的に、すべてのスクリプトはアプリケーションの開始時に読み込まれます。読み込み順序は、メインエディタメニューまたはシーン設定からアクセスできるプロジェクトの設定によって決まります。
 
 ![Loading Order](/img/user-manual/scripting/script-loading-order.jpg)
 
-The loading order panel shows all Classic scripts marked as `preload` and the order that they are loaded and executed in.
+読み込み順序パネルには、`preload`としてマークされたすべてのクラシックスクリプトと、それらが読み込まれて実行される順序が表示されます。
 
 ![Loading Order List](/img/user-manual/scripting/loading-order-list.jpg)
 
-You can click-and-drag to move individual scripts around to edit the order.
+個々のスクリプトをクリックしてドラッグし、順序を編集できます。
 
-When scripts are first loaded, they are immediately executed. That means that the scripts are first executed in the order that they are loaded. However, the loading order of the script **does not** affect the execution of order of script methods within script component. For example, the `initialize` methods of scripts on the same entity are called in the order that they are listed on the Entity, not the loading order.
+スクリプトが最初に読み込まれると、すぐに実行されます。つまり、スクリプトは最初に読み込まれた順序で実行されます。ただし、スクリプトの読み込み順序は、スクリプトコンポーネント内のスクリプトメソッドの実行順序に**影響しません**。たとえば、同じエンティティ上のスクリプトの`initialize`メソッドは、読み込み順序ではなく、エンティティにリストされている順序で呼び出されます。
 
-## Preloading
+## プリロード
 
-By default, as with other assets in PlayCanvas, a script asset is marked as `preload`. This means that it will be loaded before the application starts. If you disable preloading on a script, it will not be loaded under normal circumstances. This way, you can include a script in your project but prevent it from loading by unchecking `preload`. You can trigger a non-preloading script to load dynamically by using the regular asset API (see [`AssetRegistry#load`](https://api.playcanvas.com/engine/classes/AssetRegistry.html#load)).
+デフォルトでは、PlayCanvasの他のアセットと同様に、スクリプトアセットは`preload`としてマークされています。これは、アプリケーションの開始前に読み込まれることを意味します。スクリプトでプリロードを無効にすると、通常の状況では読み込まれません。このようにして、プロジェクトにスクリプトを含めることができますが、`preload`のチェックを外すことで読み込みを防止できます。通常のAsset APIを使用して、プリロードされていないスクリプトの読み込みを動的にトリガーできます（[`AssetRegistry#load`](https://api.playcanvas.com/engine/classes/AssetRegistry.html#load)を参照）。
 
-It is possible to subscribe to dynamic changes to script registry:
+スクリプトレジストリの動的な変更を購読することができます。
 
 ```javascript
 this.app.scripts.on('add', (name, scriptType) => {
@@ -35,39 +35,39 @@ this.app.scripts.on('add', (name, scriptType) => {
 });
 ```
 
-## Exporting
+## エクスポート
 
-When you publish or export your PlayCanvas project, the way your scripts are processed depends on whether you’re using Classic scripts or ECMAScript Modules (ESM).
+PlayCanvasプロジェクトを公開またはエクスポートする場合、スクリプトの処理方法は、クラシックスクリプトを使用しているか、ECMAScript Modules（ESM）を使用しているかによって異なります。
 
-### Classic Scripts
+### クラシックスクリプト
 
-All preloaded Classic scripts are concatenated into a single file by default. This reduces the number of network requests and improves load times. This method ensures compatibility with older projects and is ideal for simpler codebases.
+すべてのプリロードされたクラシックスクリプトは、デフォルトで単一ファイルに連結されます。これにより、ネットワークリクエストの数が減り、ロード時間が短縮されます。この方法は、古いプロジェクトとの互換性を確保し、単純なコードベースに最適です。
 
-### ESM Scripts
+### ESMスクリプト
 
-Projects that use ESM Scripts go through a modern bundling and optimization process. If your project contains any ESM scripts, the export process will automatically generate an ESM build.
+ESMスクリプトを使用するプロジェクトは、最新のバンドルと最適化プロセスを経ます。プロジェクトにESMスクリプトが含まれている場合、エクスポートプロセスは自動的にESMビルドを生成します。
 
-Key features of ESM builds:
- - **Bundled output** 
- Your code is bundled together—optionally including the PlayCanvas Engine—into a set of optimized JavaScript files.
- - **Tree-shaking** Unused code is eliminated, reducing bundle size.
- - **Code splitting** Your application is split into smaller chunks, which are loaded only when needed. This improves perceived performance by prioritizing critical code.
- - **Minification (optional)** If you enable Minify Scripts, your code is also compressed to reduce download size further.
- - **Concatenation option** If you enable Concatenate Scripts, the exporter bundles your entire application—including the engine—into the most efficient structure, based on usage patterns.
+ESMビルドの主な機能：
+ - **バンドルされた出力**
+コードは、PlayCanvasエンジンを含めて（オプション）、最適化されたJavaScriptファイルのセットにバンドルされます。
+ - **ツリーシェイキング** 使用されていないコードが削除され、バンドルサイズが縮小されます。
+ - **コード分割** アプリケーションはより小さなチャンクに分割され、必要になった場合にのみ読み込まれます。これにより、重要なコードを優先することで、体感パフォーマンスが向上します。
+ - **ミニファイ（オプション）** スクリプトのミニファイを有効にすると、コードも圧縮され、ダウンロードサイズがさらに縮小されます。
+ - **連結オプション** スクリプトの連結を有効にすると、エクスポーターは使用パターンに基づいて、エンジンを含むアプリケーション全体を最も効率的な構造にバンドルします。
 
-#### Code Splitting
+#### コード分割
 
-Although you don’t have fine-grained control over where code is split, you can influence it. If you use dynamic `import()` statements instead of static imports, the bundler treats that module as a candidate for on-demand loading. This helps you defer non-critical code until it’s actually needed — ideal for features like menus, optional tools, or cutscenes.
+コードの分割場所を細かく制御することはできませんが、それに影響を与えることができます。静的インポートではなく動的`import()`ステートメントを使用する場合、バンドラーはそのモジュールをオンデマンド読み込みの候補として扱います。これにより、メニュー、オプションツール、カットシーンなどの機能を実際に必要になるまで延期することができます。
 
-#### Mixing ESM and Classic Scripts
+#### ESMとクラシックスクリプトの混合
 
-You can freely mix ESM and Classic scripts within the same project. However, they are treated differently:
+同じプロジェクト内でESMとクラシックスクリプトを自由に混合できます。ただし、それらは異なる方法で処理されます。
 
- - ESM scripts are bundled, optimized, and can benefit from tree-shaking and code splitting.
- - Classic scripts are included as separate files and are not part of the ESM bundle.
+- ESMスクリプトはバンドルされ、最適化され、ツリーシェイキングとコード分割の恩恵を受けることができます。
+ - クラシックスクリプトは個別のファイルとして含まれ、ESMバンドルの一部ではありません。
 
-This ensures backward compatibility while allowing modern development practices.
+これは、最新の開発プラクティスを可能にしながら、後方互換性を確保します。
 
 :::warning
-Avoid using `import()` inside Classic scripts to load ESM modules. The final paths of bundled modules may change during export, and Classic scripts won’t be able to resolve them correctly.
+クラシックスクリプト内で`import()`を使用してESMモジュールを読み込むことは避けてください。バンドルされたモジュールの最終パスはエクスポート中に変更される可能性があり、クラシックスクリプトはそれらを正しく解決できません。
 :::
