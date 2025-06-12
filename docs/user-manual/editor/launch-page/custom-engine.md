@@ -12,6 +12,12 @@ Let's look at how you handle each of these situations:
 
 ### Launch with the Dev Engine
 
+:::info
+
+If you're using ESM Scripts in your project, you need to import the ESM build of PlayCanvas. Typically this mean replacing the `.js` suffic with `.mjs`
+
+:::
+
 When you launch your app from the Editor, a new tab is opened called the launch page. The URL of this page is of the form:
 
 ```none
