@@ -17,7 +17,7 @@ The `<pc-script>` tag is used to define a script.
 | --- | --- |
 | `attributes` | A JSON string of attributes for the script. |
 | `enabled` | Enabled state of the script. If not specified, `true` is used. |
-| `name` | The name of the script. The name is the class name of the script in camel case. |
+| `name` | The name of the script. Set this to the value of the `scriptName` property of the assigned script. |
 
 ## Example
 
