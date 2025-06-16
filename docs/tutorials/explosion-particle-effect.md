@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample project showing a multi layered particle effect with screen shake.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/0hjGM2Lh/" title="Explosion Particle Effect" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/0hjGM2Lh/" title="Explosion Particle Effect" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/439297/'>Open Project ↗</Link>

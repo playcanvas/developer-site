@@ -15,7 +15,7 @@ function HomepageHeader() {
     <header className={clsx('hero hero--primary shadow-lg', styles.heroBanner)}>
       <div className="container">
         
-        <iframe src="https://ghbtns.com/github-btn.html?user=playcanvas&repo=engine&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="170" height="30" title="PlayCanvas"></iframe>
+        <iframe src="https://ghbtns.com/github-btn.html?user=playcanvas&repo=engine&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="170" height="30" title="PlayCanvas" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
         <Heading as="h1" className={clsx('hero__title', styles.heroTitle)}>
           <Translate id="homepage.title" description="The homepage title">
             {siteConfig.title}

@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 360 Image with WebXR support | Image Credit: Bob Dass from https://www.flickr.com/photos/54144402@N03/
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/v6qoi4Yt/" title="WebXR 360 Image" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/v6qoi4Yt/" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/434266/'>Open Project ↗</Link>

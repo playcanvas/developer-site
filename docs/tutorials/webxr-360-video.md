@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 360 Video with WebXR support
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/G0d8FneG/" title="WebXR 360 Video" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/G0d8FneG/" title="WebXR 360 Video" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/434444/'>Open Project ↗</Link>

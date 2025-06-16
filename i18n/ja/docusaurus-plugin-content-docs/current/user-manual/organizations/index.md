@@ -1,6 +1,6 @@
 ---
 title: Organization
-sidebar_position: 6
+sidebar_position: 3
 ---
 
 Organizationは、ビジネスや大規模プロジェクトで多数のユーザーを管理するための方法を提供します。複数の管理者を持ち、プロジェクトごとに権限を管理できます。

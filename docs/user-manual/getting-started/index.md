@@ -14,7 +14,7 @@ PlayCanvas is a visual development platform for interactive web content. Both th
 The PlayCanvas Editor is a visual editing tool that lets you build scenes, applications and games in record time. Use the Editor to manage your project assets, to add interactivity and to communicate and work with your team. The Editor is collaborative in real-time which means you can immediately see changes made by your team and you can build and test your application across all devices instantly
 
 <div className="iframe-container">
-    <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/PS4oMLPyYfI" title="PlayCanvas Editor Live Link" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/PS4oMLPyYfI" title="PlayCanvas Editor Live Link" allowfullscreen></iframe>
 </div>
 
 Find out more in the [editor][5] section.

@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 An example of adding and removing elements from the scroll view in the UI
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/XIarUWAW/" title="Dynamic UI Scroll View" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/XIarUWAW/" title="Dynamic UI Scroll View" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/734864/'>Open Project ↗</Link>

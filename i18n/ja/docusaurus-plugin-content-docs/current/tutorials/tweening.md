@@ -15,7 +15,7 @@ entity.tween(entity.getLocalPosition()).to({x: 10, y: 0, z: 0}, 1, pc.SineOut);
 ここでは、Entityのローカル位置をトゥイーンする方法の例が示されています。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/wEftzstB/" title="Using the Tween library"></iframe>
+    <iframe src="https://playcanv.as/b/wEftzstB/" title="Using the Tween library" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 この例の[Project][2]と[Editor][3]へのリンクです。
@@ -34,7 +34,7 @@ this.entity
 エンティティのローカル回転をトゥイーンする方法の例です：
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/H8553dGa/" title="Tween Local Rotation"></iframe>
+    <iframe src="https://playcanv.as/b/H8553dGa/" title="Tween Local Rotation" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 この例の[プロジェクト][2]と[エディタ][4]へのリンクを貼ります。
@@ -53,7 +53,7 @@ this.entity
 次に、Entityのローカルスケールをトゥイーンする方法の例が示されています。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/ndTiHCpD/" title="Tween Local Scale"></iframe>
+    <iframe src="https://playcanv.as/b/ndTiHCpD/" title="Tween Local Scale" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 この例の[Project][2]と[Editor][5]へのリンクです。
@@ -72,7 +72,7 @@ this.entity
 最後に、色をトゥイーンする方法です：
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/aoRYsYrc/" title="Tween Material Color"></iframe>
+    <iframe src="https://playcanv.as/b/aoRYsYrc/" title="Tween Material Color" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 この例の[プロジェクト][2]と[エディタ][6]へのリンクを貼ります。

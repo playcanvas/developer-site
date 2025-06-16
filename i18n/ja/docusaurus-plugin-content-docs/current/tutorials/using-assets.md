@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/QwDM4qaF/" title="Using the Asset Registry"></iframe>
+    <iframe src="https://playcanv.as/p/QwDM4qaF/" title="Using the Asset Registry" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 :::info
@@ -206,9 +206,9 @@ this.app.assets.load(asset);
 
 `asset.ready()`メソッドはアセットが読み込まれるとすぐにそのコールバックを呼びます。また、アセットがすでに読み込まれている場合、すぐにそれを呼び出します。アセットがすでに読み込まれている場合、 `app.assets.load()`は何もしません。
 
-[1]: https://api.playcanvas.com/classes/Engine.AssetRegistry.html
+[1]: https://api.playcanvas.com/engine/classes/AssetRegistry.html
 [3]: https://playcanvas.com/project/406036
 [5]: pathname:///downloads/tutorials/A.dae
 [6]: pathname:///downloads/tutorials/B.dae
 [7]: pathname:///downloads/tutorials/C.dae
-[8]: https://api.playcanvas.com/classes/Engine.RenderComponent.html#asset
+[8]: https://api.playcanvas.com/engine/classes/RenderComponent.html#asset

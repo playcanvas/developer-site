@@ -43,4 +43,4 @@ The Sound component can be enabled or disabled using the toggle in the top right
 You can control the properties of a Sound component using a [script component][2]. The scripting interface for the Sound component is [here][3].
 
 [2]: /user-manual/scenes/components/script
-[3]: https://api.playcanvas.com/classes/Engine.SoundComponent.html
+[3]: https://api.playcanvas.com/engine/classes/SoundComponent.html

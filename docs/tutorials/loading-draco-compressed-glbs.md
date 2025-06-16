@@ -13,7 +13,7 @@ See https://google.github.io/draco/ for more information on Draco 3D Data Compre
 See https://github.com/CesiumGS/gltf-pipeline for the tool to compress glTF models.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/2uU2aYDh/" title="Loading Draco Compressed GLBs" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/2uU2aYDh/" title="Loading Draco Compressed GLBs" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/730372/'>Open Project ↗</Link>

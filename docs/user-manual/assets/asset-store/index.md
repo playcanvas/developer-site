@@ -7,7 +7,7 @@ The PlayCanvas Asset Store is a library of free assets that you can use in your 
 
 ## Accessing the Asset Store
 
-You can access the Asset Store from within the Editor by clicking the ASSET STORE button in the top-right of the [Assets Panel](../../editor/assets).
+You can access the Asset Store from within the Editor by clicking the ASSET STORE button in the top-right of the [Assets Panel](../../editor/interface/assets).
 
 ![Asset Store Button](/img/user-manual/assets/asset-store/asset-store-button.png)
 

@@ -24,4 +24,4 @@ Learn more about:
 [6]: /user-manual/assets/models/exporting
 [7]: /user-manual/assets/types/template/
 [8]: /user-manual/assets/import-pipeline/import-hierarchy/
-[9]: /user-manual/templates/
+[9]: /user-manual/editor/templates/

@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample showing how to load multiple assets at runtime with a progress bar.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/MGKfj6jm/" title="Load assets with a progress bar" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/MGKfj6jm/" title="Load assets with a progress bar" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/436584/'>Open Project ↗</Link>

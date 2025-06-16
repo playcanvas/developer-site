@@ -26,4 +26,4 @@ LayoutChildコンポーネントは、LayoutGroupコンポーネントによっ�
 
 [0]: /user-manual/user-interface/layout-groups
 [2]: /user-manual/scenes/components/script
-[3]: https://api.playcanvas.com/classes/Engine.LayoutChildComponent.html
+[3]: https://api.playcanvas.com/engine/classes/LayoutChildComponent.html

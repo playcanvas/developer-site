@@ -26,8 +26,8 @@ sidebar_position: 2
 - GrabPass はColorバッファの使用を示します:[`GrabPass`] [2]
 - GroundFog はDepthバッファの使用を示します:[`GroundFog`] [3]
 
-[0]: https://api.playcanvas.com/classes/Engine.CameraComponent.html#requestSceneColorMap
-[1]: https://api.playcanvas.com/classes/Engine.CameraComponent.html#requestSceneDepthMap
+[0]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenecolormap
+[1]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenedepthmap
 [2]: https://playcanvas.github.io/#/graphics/grab-pass
 [3]: https://playcanvas.github.io/#/graphics/ground-fog
 [4]: /user-manual/graphics/layers/#choosing-the-layer-order

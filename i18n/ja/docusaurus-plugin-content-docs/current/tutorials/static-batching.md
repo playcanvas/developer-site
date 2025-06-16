@@ -5,5 +5,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/520
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/Qo7T1kqU/" title="Static Batching" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/Qo7T1kqU/" title="Static Batching" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

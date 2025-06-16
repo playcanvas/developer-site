@@ -1,12 +1,12 @@
 ---
 title: 3D Gaussian Splatting
-sidebar_position: 3.5
+sidebar_position: 7
 ---
 
 3D Gaussian Splatting is a relatively new technique for capturing and rendering photorealistic volumetric point clouds. Since the technique relies on photogrammetry, it is very quick, cheap and easy to generate high-quality rendered scenes.
 
 <div className="iframe-container">
-    <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/Pe4Sx8t1Ud4" title="Templates Overview" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Pe4Sx8t1Ud4" title="Templates Overview" allowfullscreen></iframe>
 </div>
 
 ## Working with Gaussian Splats
@@ -29,14 +29,14 @@ Captured splats normally need to be edited to some degree. The generation proces
 
 ![SuperSplat](/img/user-manual/graphics/gaussian-splatting/supersplat.png)
 
-PlayCanvas provides a powerful 3D Gaussian Splat editor called [SuperSplat](https://playcanvas.com/supersplat/editor). SuperSplat is open-sourced under an MIT license on [GitHub](https://github.com/playcanvas/supersplat).
+PlayCanvas provides a powerful 3D Gaussian Splat editor called [SuperSplat](https://superspl.at/editor). SuperSplat is open-sourced under an MIT license on [GitHub](https://github.com/playcanvas/supersplat).
 
 ### Importing Splats
 
 To import your PLY splat file:
 
-1. Drag it into the Editor's [Asset Panel](../../editor/assets).
-2. Drag the created [GSplat asset](../../assets/types/gsplat) into the [Viewport](../../editor/viewport). This will auto-create an Entity in the Hierarchy with a [GSplat component](../../scenes/components/gsplat) with your GSplat asset assigned to it.
+1. Drag it into the Editor's [Asset Panel](../../editor/interface/assets).
+2. Drag the created [GSplat asset](../../assets/types/gsplat) into the [Viewport](../../editor/interface/viewport). This will auto-create an Entity in the Hierarchy with a [GSplat component](../../scenes/components/gsplat) with your GSplat asset assigned to it.
 
 ![Import Gaussian Splat](/img/user-manual/graphics/gaussian-splatting/import-gsplat.webp)
 
@@ -55,4 +55,3 @@ There are some limitations to keep in mind when working with splats:
 1. Fog has no effect.
 2. Dynamic lights have no effect.
 3. [Image Based Lighting](../physical-rendering/image-based-lighting) has no effect.
-4. Splats do not cast shadows.

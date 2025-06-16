@@ -1,6 +1,6 @@
 ---
 title: Controls and Keyboard Shortcuts
-sidebar_position: 10
+sidebar_position: 3
 ---
 
 ## Camera Controls

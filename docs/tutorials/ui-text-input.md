@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1005
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/8ZQaDGf8/" title="User Interface - Text Input"></iframe>
+    <iframe src="https://playcanv.as/p/8ZQaDGf8/" title="User Interface - Text Input" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 [Click here to see the project][project-link].

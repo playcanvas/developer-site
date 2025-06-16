@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/354
 Example of how to use live HTML and CSS editing.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/KqqOGvVi/" title="HTML/CSS - Live Updates" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/KqqOGvVi/" title="HTML/CSS - Live Updates" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

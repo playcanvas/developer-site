@@ -26,8 +26,8 @@ These engine examples demonstrate the rendering of both the depth and the color 
 - GrabPass demonstrates the use of the color buffer: [`GrabPass`][2]
 - GroundFog demonstrates the use of the depth buffer: [`GroundFog`][3]
 
-[0]: https://api.playcanvas.com/classes/Engine.CameraComponent.html#requestSceneColorMap
-[1]: https://api.playcanvas.com/classes/Engine.CameraComponent.html#requestSceneDepthMap
+[0]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenecolormap
+[1]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenedepthmap
 [2]: https://playcanvas.github.io/#/graphics/grab-pass
 [3]: https://playcanvas.github.io/#/graphics/ground-fog
 [4]: /user-manual/graphics/layers/#choosing-the-layer-order

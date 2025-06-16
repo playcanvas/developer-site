@@ -9,5 +9,5 @@ Credit: https://playcanvas.com/user/lexxik
 Example of creating a planar reflection being used for a transparent mirror/water like surface.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/bQE35vbj/" title="Planar Mirror Reflection" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/bQE35vbj/" title="Planar Mirror Reflection" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

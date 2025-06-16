@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/705
 Sample application with WebXR Hands Tracking.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/VmHVW3Wb/" title="WebXR Hands" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/VmHVW3Wb/" title="WebXR Hands" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

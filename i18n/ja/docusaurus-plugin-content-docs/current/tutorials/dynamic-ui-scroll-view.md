@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/734
 An example of adding and removing elements from the scroll view in the UI
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/XIarUWAW/" title="Dynamic UI Scroll View" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/XIarUWAW/" title="Dynamic UI Scroll View" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

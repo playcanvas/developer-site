@@ -15,7 +15,7 @@ entity.tween(entity.getLocalPosition()).to({x: 10, y: 0, z: 0}, 1, pc.SineOut);
 Here is an example on how to tween the local position of an Entity:
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/wEftzstB/" title="Using the Tween library"></iframe>
+    <iframe src="https://playcanv.as/b/wEftzstB/" title="Using the Tween library" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 Here are links to the [Project][2] and the [Editor][3] for this example.
@@ -34,7 +34,7 @@ this.entity
 Here is an example on how to tween the local rotation of an Entity:
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/H8553dGa/" title="Tween Local Rotation"></iframe>
+    <iframe src="https://playcanv.as/b/H8553dGa/" title="Tween Local Rotation" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 Here are links to the [Project][2] and the [Editor][4] for this example.
@@ -53,7 +53,7 @@ this.entity
 Here's how to tween the local scale of an Entity:
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/ndTiHCpD/" title="Tween Local Scale"></iframe>
+    <iframe src="https://playcanv.as/b/ndTiHCpD/" title="Tween Local Scale" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 Here are links to the [Project][2] and the [Editor][5] for this example.
@@ -72,7 +72,7 @@ this.entity
 And finally here's a way to tween colors:
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/aoRYsYrc/" title="Tween Material Color"></iframe>
+    <iframe src="https://playcanv.as/b/aoRYsYrc/" title="Tween Material Color" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 Here are links to the [Project][2] and the [Editor][6] for this example.

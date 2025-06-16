@@ -7,7 +7,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/6919
 Full documentation for Loading Scenes is now in the [User Manual][documentation-page].
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/e/p/zsQcbehI/" title="Switch Full Scene"></iframe>
+    <iframe src="https://playcanv.as/e/p/zsQcbehI/" title="Switch Full Scene" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 [documentation-page]: /user-manual/scenes/loading-scenes/

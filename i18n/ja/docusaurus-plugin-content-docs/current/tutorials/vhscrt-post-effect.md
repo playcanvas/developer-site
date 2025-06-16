@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/373
 Basic fullscreen effect simulating a bad video screen like an old CRT.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/6hhSiHG3/" title="VHS/CRT Post Effect" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/6hhSiHG3/" title="VHS/CRT Post Effect" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

@@ -16,7 +16,7 @@ SnapchatのPlayable Adでは、[MRAID 2.0 API][mraid-api]標準が使用され�
 [Cube Jumpプロジェクト][5]は、Snapchat Playable Adフォーマットにエクスポートできる状態になっており、期待されるHTML出力は[こちら][6]からダウンロードできます。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/e/p/X1nwbUGA/" title="Cube Jump Playable Ad"></iframe>
+    <iframe src="https://playcanv.as/e/p/X1nwbUGA/" title="Cube Jump Playable Ad" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 ## ファイルサイズの補足

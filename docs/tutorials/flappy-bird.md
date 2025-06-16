@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Flappy's Back! Guide Flappy Bird through as many pipes as you can. Made with @playcanvas
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/2OlkUaxF/" title="Flappy Bird" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/2OlkUaxF/" title="Flappy Bird" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/375389/'>Open Project ↗</Link>

@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Dynamically generate normal maps and parallax maps for text
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/MbMb81DM/" title="Tutorial: Normal Mapped Text" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/MbMb81DM/" title="Tutorial: Normal Mapped Text" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/855103/'>Open Project ↗</Link>

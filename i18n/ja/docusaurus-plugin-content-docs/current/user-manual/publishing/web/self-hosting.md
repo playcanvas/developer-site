@@ -18,7 +18,7 @@ sidebar_position: 2
         <title>My Great Game</title>
     </head>
     <body>
-        <iframe loading="lazy" src="https://playcanv.as/p/PROJECT_ID/"></iframe>
+        <iframe src="https://playcanv.as/p/PROJECT_ID/" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
     </body>
 </html>
 ```
@@ -44,7 +44,6 @@ PlayCanvasサーバから独立してゲームをホスティングするには�
 * 以下のリストからエクスポートに含めるシーンを選択してください。アクティブなバナーアイコンが付いているシーンが、アプリが起動されたときに最初にロードされるシーンになります。
 * 「DOWNLOAD」ボタンをクリックして、デプロイ用に準備されたプロジェクトのzipファイルをダウンロードしてください。
 * 以下の手順で、プロジェクトのzipファイルを展開し、任意の場所に保存します。そして、`index.html` ファイルを開くことでアプリケーションを起動できます。
-
 
 ## GitHub Pages での自己ホスティング {#self-hosting-on-github-pages}
 

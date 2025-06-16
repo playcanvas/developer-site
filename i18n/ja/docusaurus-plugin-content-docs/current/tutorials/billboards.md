@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/353
 Simple example of planes that always face the camera. i.e. billboards. Click on the box and fly around the scene with WASD
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/ZCD1bSXQ/" title="Billboards" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/ZCD1bSXQ/" title="Billboards" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

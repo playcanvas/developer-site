@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 ---
 
 <div className='iframe-container'>
-    <iframe loading="lazy" src="https://playcanv.as/p/8LTSuf4F/" title="Forces and Impulses" />
+    <iframe src="https://playcanv.as/p/8LTSuf4F/" title="Forces and Impulses" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *Use the cursor keys to apply impulses, the WASD keys to apply torques and rotate the cube. Press and hold F to apply a constant upward force to cancel gravity effects.*

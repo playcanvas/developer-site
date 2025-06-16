@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/HzOzlZOC/" title="First Person Movement"></iframe>
+    <iframe src="https://playcanv.as/p/HzOzlZOC/" title="First Person Movement" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 This is an application that implements first person character movement.
@@ -276,4 +276,4 @@ FirstPersonMovement.prototype._createCamera = function () {
 </Tabs>
 
 [1]: https://playcanvas.com/project/405842
-[3]: https://api.playcanvas.com/classes/Engine.RigidBodyComponent.html#applyForce
+[3]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyforce

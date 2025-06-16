@@ -3,28 +3,29 @@ title: Plane Detection
 sidebar_position: 1
 ---
 
-Very similar to [Mesh Detection][1], Plane Detection provides access to planes that estimate real-world surfaces.
+[Mesh Detection][1]と非常によく似ており、Plane Detectionは現実世界の表面を推定するプレーンへのアクセスを提供します。
 
-Each plane can represent a surface with optionally available labels, such as: `wall`, `floor`, `table`, etc.
+各プレーンは、`wall`、`floor`、`table`などのオプションで利用可能なラベルを持つ表面を表すことができます。
 
-The underlying system can provide pre-captured data as well as provide real-time reconstruction depending on the underlying system implementation.
+基盤となるシステムの実装によっては、基盤となるシステムは事前にキャプチャされたデータとリアルタイムの再構築の両方を提供できます。
+
 ## Support
 
 ```javascript
 if (app.xr.planeDetection.supported) {
-    // plane detection is supported
+    // プレーン検出がサポートされています
 }
 
 app.xr.on('start', () => {
     if (app.xr.planeDetection.available) {
-        // plane detection is available
+        // プレーン検出が利用可能です
     }
 });
 ```
 
 ## Access
 
-A feature flag needs to be added to the session start:
+セッションの開始時に機能フラグを追加する必要があります。
 
 ```javascript
 app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
@@ -32,19 +33,19 @@ app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
 });
 ```
 
-Then planes are added/removed asynchronously:
+その後、プレーンは非同期で追加/削除されます。
 
 ```javascript
 app.xr.planeDetection.on('add', (xrPlane) => {
-    // a new XrPlane has been added
+    // 新しいXrPlaneが追加されました
 
     xrPlane.once('remove', () => {
-        // an XrPlane has been removed
+        // XrPlaneが削除されました
     });
 });
 ```
 
-Also, the list of XrPlanes is available:
+また、XrPlaneのリストが利用可能です。
 
 ```javascript
 const xrPlanes = app.xr.planeDetection.meshes;
@@ -55,39 +56,39 @@ for (let i = 0; i < xrPlanes.length; i++) {
 
 ## Mesh
 
-Each plane is represented as an instance of XrPlane which can be added/removed during an active session. It also has data that can be changed during its lifetime.
+各プレーンはXrPlaneのインスタンスとして表され、アクティブなセッション中に動的に追加/削除できます。また、そのライフタイム中に変更可能なデータも持っています。
 
-You can access the position and rotation (world-space) of an XrPlane:
+XrPlaneの位置と回転（ワールド空間）にアクセスできます。
 
 ```javascript
 entity.setPosition(xrPlane.getPosition());
 entity.setRotation(xrPlane.getRotation());
 ```
 
-Each XrPlane has its points (in local-space) and orientation, that can be used to construct a visual mesh. The list of points represents the vertices of a polygon perimeter.
+各XrPlaneは、視覚的なメッシュを構築するために使用できるポイント（ローカル空間）と向きを持っています。ポイントのリストは、多角形の境界の頂点を表します。
 
-An `xrPlane.orientation` provides information as to whether a plane is vertical, horizontal or anything else.
+`xrPlane.orientation`は、プレーンが垂直、水平、またはその他のいずれであるかに関する情報を提供します。
 
-An example below creates a visual mesh for each XrPlane and adds it to the scene root:
+以下の例は、各XrPlaneの視覚的なメッシュを作成し、それをシーンルートに追加します。
 
 ```javascript
 app.xr.planeDetection.on('add', (xrPlane) => {
-    // geometry data
+    // ジオメトリデータ
     const mesh = new pc.Mesh(app.graphicsDevice);
-    mesh.clear(true, true); // ensure that mesh is created with dynamic buffers
+    mesh.clear(true, true); // メッシュが動的バッファで作成されていることを確認
 
-    // create a list of vertices
+    // 頂点リストを作成
     const vertices = new Float32Array((xrPlane.points.length + 1) * 3);
 
-    // first point is always in the origin
+    // 最初の点は常に原点にあります
     vertices[0] = 0;
     vertices[1] = 0;
     vertices[2] = 0;
 
-    // create a list of indices
+    // インデックスリストを作成
     const indices = new Uint32Array(xrPlane.points.length * 3);
 
-    // construct a polygon where each edge is connected to the origin of a mesh
+    // 各エッジがメッシュの原点に接続されたポリゴンを構築
     for (let i = 0; i < xrPlane.points.length; i++) {
         vertices[i * 3 + 3 + 0] = xrPlane.points[i].x;
         vertices[i * 3 + 3 + 1] = xrPlane.points[i].y;
@@ -97,25 +98,25 @@ app.xr.planeDetection.on('add', (xrPlane) => {
         indices[i * 3 + 2] = ((i + 1) % xrPlane.points.length) + 1;
     }
 
-    mesh.setPositions(vertices); // set vertices
-    mesh.setNormals(pc.calculateNormals(vertices, indices)); // calculate normals
-    mesh.setIndices(indices); // set indices
-    mesh.update(pc.PRIMITIVE_TRIANGLES); // update buffers
+    mesh.setPositions(vertices); // 頂点を設定
+    mesh.setNormals(pc.calculateNormals(vertices, indices)); // 法線を計算
+    mesh.setIndices(indices); // インデックスを設定
+    mesh.update(pc.PRIMITIVE_TRIANGLES); // バッファを更新
 
     const material = new pc.StandardMaterial();
     const meshInstance = new pc.MeshInstance(mesh, material);
 
     const entity = new pc.Entity(xrPlane.label);
 
-    // add render component
+    // レンダーコンポーネントを追加
     entity.addComponent('render', {
         meshInstances: [ meshInstance ]
     });
 
-    // add entity to the scene root
+    // エンティティをシーンルートに追加
     app.root.addChild(entity);
 
-    // clean up after XrPlane is removed
+    // XrPlaneが削除された後のクリーンアップ
     xrPlane.once('remove', () => {
         material.destroy();
         mesh.destroy();
@@ -126,17 +127,17 @@ app.xr.planeDetection.on('add', (xrPlane) => {
 
 ## Semantic Label
 
-An XrPlane can represent various real-world objects and a label can help to identify what it represents using its property `XrPlane.label`.
+XrPlaneは様々な現実世界のオブジェクトを表すことができ、そのプロパティ`XrPlane.label`を使用してそれが何を表しているかを特定するのに役立つラベルを持っています。
 
-These labels can be any of: `floor`, `wall`, `door`, `window`, `table`, `screen`, `global mesh`, `other` and more. Here is a [list of semantic labels][2], although this list is not definitive and the platform can report anything it feels fit.
+これらのラベルは次のいずれかになります: `floor`、`wall`、`door`、`window`、`table`、`screen`、`global mesh`、`other` など。こちらは[セマンティックラベルのリスト][2]ですが、このリストは確定的なものではなく、プラットフォームが適切だと判断したものを報告できます。
 
-## Changes
+## 変更点
 
-Depending on the underlying system capabilities, XrPlane attributes can change while an XR session is active. You can subscribe to that event and update a visual mesh accordingly:
+基盤となるシステムの機能に応じて、XRセッションがアクティブな間にXrPlane属性が変更されることがあります。そのイベントを購読し、視覚的なメッシュを適切に更新できます:
 
 ```javascript
 xrPlane.on('change', () => {
-    // points and/or label have been changed
+    // ポイントおよび/またはラベルが変更されました
 });
 ```
 

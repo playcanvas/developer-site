@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Create QR codes at runtime with https://github.com/davidshimjs/qrcodejs
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/O5MDA13T/" title="Create QR Code at runtime" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/O5MDA13T/" title="Create QR Code at runtime" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/1025199/'>Open Project ↗</Link>

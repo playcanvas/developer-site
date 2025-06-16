@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/XVLr9TWc/" title="User Interface - Stats Counter"></iframe>
+    <iframe src="https://playcanv.as/p/XVLr9TWc/" title="User Interface - Stats Counter" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *ボタンやプログレスバーの使い方と要素とインタラクトする方法。[フルシーン][1]を参照してください。*

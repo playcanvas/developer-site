@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/1nS6AnC9/" title="Audio Effects"></iframe>
+    <iframe src="https://playcanv.as/p/1nS6AnC9/" title="Audio Effects" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *それぞれのボタンをクリックしてサウンドエフェクトを試してください。*
@@ -68,4 +68,4 @@ Soundコンポーネント APIの詳細については[こちら][8]をご覧く
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode/buffer
-[8]: https://api.playcanvas.com/classes/Engine.Sound.html
+[8]: https://api.playcanvas.com/engine/classes/Sound.html

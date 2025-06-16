@@ -52,7 +52,7 @@ A skinned mesh for a hand can used. You can check out [this project][5] as an ex
 <img loading="lazy" src="/img/user-manual/xr/skinned-hands.webp" alt="Hand tracking using skinned meshes" width="512" />
 
 [1]: https://immersive-web.github.io/webxr-hand-input/
-[2]: https://api.playcanvas.com/classes/Engine.XrHand.html
-[3]: https://api.playcanvas.com/classes/Engine.XrFinger.html
-[4]: https://api.playcanvas.com/classes/Engine.XrJoint.html
+[2]: https://api.playcanvas.com/engine/classes/XrHand.html
+[3]: https://api.playcanvas.com/engine/classes/XrFinger.html
+[4]: https://api.playcanvas.com/engine/classes/XrJoint.html
 [5]: https://playcanvas.com/project/771952/overview/webxr-realistic-hands

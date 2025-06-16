@@ -1,30 +1,30 @@
 ---
-title: テキスト (Text)
+title: Text
 ---
 
-The Text Asset type in PlayCanvas is used for storing plain text data. It's versatile and can be used for various purposes such as storing dialogue, configuration data, or any other textual information.
+PlayCanvasにおけるText Assetタイプは、プレーンテキストデータを保存するために使用されます。これは多用途であり、対話、構成データ、またはその他のテキスト情報を保存するなど、さまざまな目的に使用できます。
 
-## Accessing Text Data in Scripts
+## スクリプトでのテキストデータへのアクセス
 
-To access data from a Text Asset in a script:
+スクリプトでText Assetからデータにアクセスするには：
 
-1. Add the Text Asset to the script as an attribute.
-2. Access the Text asset's resource which is the string parsed from the text file.
+1.  Text Assetを属性としてスクリプトに追加します。
+2.  テキストファイルから解析された文字列であるText assetのresourceにアクセスします。
 
-例
+例：
 
 ```javascript
 var TextScript = pc.createScript('textScript');
 
-// Define a script attribute to hold the text asset
+// テキストアセットを保持するためのスクリプト属性を定義します
 TextScript.attributes.add('textAsset', { type: 'asset', assetType: 'text' });
 
 TextScript.prototype.initialize = function() {
     if (this.textAsset) {
-        // Get the Text asset's resource (a string)
-        var textData = this.textAsset.resource;
-
-        // Output the content of the text asset
+        // Text assetのresource（文字列）を取得します
+        const textData = this.textAsset.resource;
+        
+        // Text assetの内容を出力します
         console.log('Content of text asset: ', textData);
     }
 };

@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Basic fullscreen effect simulating a bad video screen like an old CRT.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/6hhSiHG3/" title="VHS/CRT Post Effect" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/6hhSiHG3/" title="VHS/CRT Post Effect" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/373076/'>Open Project ↗</Link>

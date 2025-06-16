@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample showing how to pick an entity by tag using raycastAll
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/j1aT7giL/" title="Physics raycasting by tag" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/j1aT7giL/" title="Physics raycasting by tag" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/691309/'>Open Project ↗</Link>

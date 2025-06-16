@@ -33,17 +33,70 @@ const config = {
     locales: ['en', 'ja']
   },
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   plugins: [
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
+        { from: ['/user-manual/graphics/shader-chunk-migrations/'], to: '/user-manual/graphics/shaders/migrations/' },
+        { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/scripting/editor-users/loading-order/' },
       ],
-      createRedirects: (path) => {
+      createRedirects: (existingPath) => {
+        // Create redirects from old paths prefixed with /en
+        const redirects = [
+          `/en${existingPath}`
+        ];
 
-        path = path.replace('/user-manual/editor/', '/user-manual/designer/');
-        path = path.replace('/user-manual/scenes/', '/user-manual/packs/');
+        if (existingPath.includes('/user-manual/editor/')) {
+          const redirect = existingPath.replace('/user-manual/editor/', '/user-manual/designer/');
+          redirects.push(redirect);
+        }
 
-        return `/en${path}`;
+        if (existingPath.includes('/user-manual/scenes/')) {
+          const redirect = existingPath.replace('/user-manual/scenes/', '/user-manual/packs/');
+          redirects.push(redirect);
+        }
+
+        if (existingPath.includes('/user-manual/editor/interface/assets')) {
+          const redirect = existingPath.replace('/user-manual/editor/interface/assets', '/user-manual/editor/assets');
+          redirects.push(redirect);
+        }
+
+        if (existingPath.includes('/user-manual/editor/interface/hierarchy')) {
+          const redirect = existingPath.replace('/user-manual/editor/interface/hierarchy', '/user-manual/editor/hierarchy');
+          redirects.push(redirect);
+        }
+
+        if (existingPath.includes('/user-manual/editor/interface/inspector')) {
+          const redirect = existingPath.replace('/user-manual/editor/interface/inspector', '/user-manual/editor/inspector');
+          redirects.push(redirect);
+        }
+
+        if (existingPath.includes('/user-manual/editor/interface/toolbar')) {
+          const redirect = existingPath.replace('/user-manual/editor/interface/toolbar', '/user-manual/editor/toolbar');
+          redirects.push(redirect);
+        }
+
+        if (existingPath.includes('/user-manual/editor/interface/viewport')) {
+          const redirect = existingPath.replace('/user-manual/editor/interface/viewport', '/user-manual/editor/viewport');
+          redirects.push(redirect);
+        }
+
+        if (existingPath.includes('/user-manual/editor/templates/')) {
+          const redirect = existingPath.replace('/user-manual/editor/templates/', '/user-manual/templates/');
+          redirects.push(redirect);
+        }
+
+        if (existingPath.includes('/user-manual/editor/version-control/')) {
+          const redirect = existingPath.replace('/user-manual/editor/version-control/', '/user-manual/version-control/');
+          redirects.push(redirect);
+        }
+
+        return redirects;
       }
     }],
     'docusaurus-plugin-sass',

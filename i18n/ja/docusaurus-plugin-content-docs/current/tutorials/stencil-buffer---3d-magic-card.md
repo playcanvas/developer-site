@@ -9,5 +9,5 @@ Example project that uses the stencil buffer to create a magic window like effec
 Credit: @ alexanderrdx for the original project
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/RAQhfemb/" title="Stencil Buffer - 3D Magic Card" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/RAQhfemb/" title="Stencil Buffer - 3D Magic Card" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

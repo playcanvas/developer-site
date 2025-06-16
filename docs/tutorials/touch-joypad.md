@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1007
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/kvE0iJWc/" title="Touchscreen Joypad Controls"></iframe>
+    <iframe src="https://playcanv.as/p/kvE0iJWc/" title="Touchscreen Joypad Controls" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 [Click here to see the project][project-link].
@@ -133,9 +133,9 @@ console.log('Was pressed: ' + buttons.wasPressed('button0'));
 
 [project-link]: https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls
 [playcanvas-ui]: /user-manual/user-interface/
-[add-template-docs]: /user-manual/templates/#adding-templates-in-your-scene
-[pc-app-mouse-api]: https://api.playcanvas.com/classes/Engine.Mouse.html
-[pc-app-touch-api]: https://api.playcanvas.com/classes/Engine.Touch.html
+[add-template-docs]: /user-manual/editor/templates/#adding-templates-in-your-scene
+[pc-app-mouse-api]: https://api.playcanvas.com/engine/classes/Mouse.html
+[pc-app-touch-api]: https://api.playcanvas.com/engine/classes/Touch.html
 [elements-manual]: /user-manual/user-interface/elements/
 [orbit-camera-joypad-input-script]: https://playcanvas.com/editor/code/1007506?tabs=111433673
 [player-controller-script]: https://playcanvas.com/editor/code/1007506?tabs=111432679

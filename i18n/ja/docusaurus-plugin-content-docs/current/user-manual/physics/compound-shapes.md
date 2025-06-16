@@ -8,7 +8,7 @@ sidebar_position: 4
 最大の利点は、メッシュコリジョン形状では不可能な動的なRigidBodyのコリジョンをコンパウンド間で行えることです(下記のように表示)。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/e/p/KXZ5Lsda/" title="Compound Physic Shapes"></iframe>
+    <iframe src="https://playcanv.as/e/p/KXZ5Lsda/" title="Compound Physic Shapes" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 [PlayCanvas プロジェクトリンク][compound-shapes-project]

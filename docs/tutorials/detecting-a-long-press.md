@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample showing how to detect a long press/touch to perform an action.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/kuSZj1KM/" title="Detecting a long press" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/kuSZj1KM/" title="Detecting a long press" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/438459/'>Open Project ↗</Link>

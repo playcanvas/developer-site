@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/zwvhLoS9/" title="Custom Shaders"></iframe>
+    <iframe src="https://playcanv.as/p/zwvhLoS9/" title="Custom Shaders" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 :::info
@@ -286,7 +286,7 @@ CustomShader.prototype.update = function(dt) {
 
 以上がそのスクリプトの全体です。このスクリプトを動作させるには、バーテックスシェーダとフラグメントシェーダのアセットを作成する必要があることを忘れないでください。
 
-[1]: https://api.playcanvas.com/classes/Engine.Shader.html
-[2]: /user-manual/scripting/script-attributes/
+[1]: https://api.playcanvas.com/engine/classes/Shader.html
+[2]: /user-manual/scripting/fundamentals/script-attributes/
 [3]: /user-manual/graphics/physical-rendering/physical-materials/
 [project]: https://playcanvas.com/project/406044/overview/tutorial-custom-shaders

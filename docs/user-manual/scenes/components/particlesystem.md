@@ -48,4 +48,4 @@ The Particle System component can be enabled or disabled using the toggle in the
 You can control a Particle System component's properties using a [script component][2]. The Particle System component's scripting interface is [here][3].
 
 [2]: /user-manual/scenes/components/script
-[3]: https://api.playcanvas.com/classes/Engine.ParticleSystemComponent.html
+[3]: https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html

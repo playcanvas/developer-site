@@ -36,6 +36,6 @@ Modelコンポーネントは、コンポーネントパネルの右上にある
 モデルのマテリアルをカスタマイズする方法については、[こちら][4]を参照してください。
 
 [2]: /user-manual/scenes/components/script
-[3]: https://api.playcanvas.com/classes/Engine.ModelComponent.html
+[3]: https://api.playcanvas.com/engine/classes/ModelComponent.html
 [4]: /user-manual/assets/types/material/#assigning-materials
 [5]: /user-manual/graphics/advanced-rendering/batching

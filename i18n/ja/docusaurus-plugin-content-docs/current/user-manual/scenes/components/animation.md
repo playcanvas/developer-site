@@ -28,4 +28,4 @@ Animationコンポーネントは、コンポーネントパネルの右上に�
 [Scriptコンポーネント][2]を使用してAnimationコンポーネントのプロパティを制御することができます。Animationコンポーネントのスクリプトインターフェースは[こちら][3]です。
 
 [2]: /user-manual/scenes/components/script
-[3]: https://api.playcanvas.com/classes/Engine.AnimationComponent.html
+[3]: https://api.playcanvas.com/engine/classes/AnimationComponent.html

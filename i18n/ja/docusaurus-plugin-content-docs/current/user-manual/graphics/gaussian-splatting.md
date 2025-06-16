@@ -1,58 +1,57 @@
 ---
 title: 3D Gaussian Splatting
-sidebar_position: 3.5
+sidebar_position: 7
 ---
 
-3D Gaussian Splatting is a relatively new technique for capturing and rendering photorealistic volumetric point clouds. Since the technique relies on photogrammetry, it is very quick, cheap and easy to generate high-quality rendered scenes.
+3D Gaussian Splattingは、フォトリアリスティックなボリュメトリック点群をキャプチャしてレンダリングするための比較的新しい技術です。この技術はフォトグラメトリーに依存しているため、高品質なレンダリングシーンを非常に迅速、安価、かつ簡単に生成できます。
 
 <div className="iframe-container">
-    <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/Pe4Sx8t1Ud4" title="Templates Overview" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Pe4Sx8t1Ud4" title="Templates Overview" allowfullscreen></iframe>
 </div>
 
-## Working with Gaussian Splats
+## Gaussian Splatsの操作
 
-### Creating Splats
+### スプラットの作成
 
-Splats are stored in binary [PLY](https://en.wikipedia.org/wiki/PLY_(file_format)) files. There are a number of ways you can generate your own splats.
+スプラットはバイナリの[PLY](https://en.wikipedia.org/wiki/PLY_(file_format))ファイルに保存されます。独自のスプラットを生成するにはいくつかの方法があります。
 
-#### 1. Use a Capture App
+#### 1. キャプチャアプリを使用する
 
-Use a splat capture app such as [Polycam](https://poly.cam/) or [Luma](https://lumalabs.ai/). With Luma, export to 'Gaussian Splat' and extract the PLY file from the downloaded ZIP file. With Polycam, export to 'splat PLY'.
+[Polycam](https://poly.cam/)や[Luma](https://lumalabs.ai/)のようなスプラットキャプチャアプリを使用してください。Lumaでは、「Gaussian Splat」としてエクスポートし、ダウンロードしたZIPファイルからPLYファイルを抽出します。Polycamでは、「splat PLY」としてエクスポートします。
 
-#### 2. Use the Inria Tools
+#### 2. Inriaツールを使用する
 
-Inria's [SIGGRAPH 2023 paper](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) links to a toolset on [GitHub](https://github.com/graphdeco-inria/gaussian-splatting) that you can download and use to generate splats from a set of images. These tools are more complicated to set up and use but they do offer fine-grained control over the splat generation process.
+Inriaの[SIGGRAPH 2023の論文](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/)は、一連の画像からスプラットを生成するためにダウンロードして使用できる[GitHub](https://github.com/graphdeco-inria/gaussian-splatting)上のツールセットにリンクしています。これらのツールはセットアップと使用がより複雑ですが、スプラット生成プロセスに対してきめ細やかな制御を提供します。
 
-### Editing Splats
+### スプラットの編集
 
-Captured splats normally need to be edited to some degree. The generation process can often create splats in the wrong location (sometimes referred to as 'floaters') so it's useful to be able to remove these stray splats. It may also be desirable to isolate a particular object (such as a person) in a captured splat and completely remove the background.
+キャプチャされたスプラットは通常、ある程度編集する必要があります。生成プロセスでは、誤った位置にスプラットが作成されることがよくあるため（「フローター」と呼ばれることもあります）、これらの浮遊スプラットを削除できると便利です。また、キャプチャされたスプラット内の特定のオブジェクト（人物など）を分離し、背景を完全に削除することが望ましい場合もあります。
 
 ![SuperSplat](/img/user-manual/graphics/gaussian-splatting/supersplat.png)
 
-PlayCanvas provides a powerful 3D Gaussian Splat editor called [SuperSplat](https://playcanvas.com/supersplat/editor). SuperSplat is open-sourced under an MIT license on [GitHub](https://github.com/playcanvas/supersplat).
+PlayCanvasは、[SuperSplat](https://superspl.at/editor)という強力な3D Gaussian Splatエディタを提供しています。SuperSplatは、[GitHub](https://github.com/playcanvas/supersplat)でMITライセンスの下でオープンソース化されています。
 
-### Importing Splats
+### スプラットのインポート
 
-To import your PLY splat file:
+PLYスプラットファイルをインポートするには：
 
-1. Drag it into the Editor's [Asset Panel](../../editor/assets).
-2. Drag the created [GSplat asset](../../assets/types/gsplat) into the [Viewport](../../editor/viewport). This will auto-create an Entity in the Hierarchy with a [GSplat component](../../scenes/components/gsplat) with your GSplat asset assigned to it.
+1. エディタの[Asset Panel](../../editor/interface/assets)にドラッグします。
+2. 作成された[GSplat asset](../../assets/types/gsplat)を[Viewport](../../editor/interface/viewport)にドラッグします。これにより、Hierarchy内に、GSplat assetが割り当てられた[GSplat component](../../scenes/components/gsplat)を持つEntityが自動的に作成されます。
 
 ![Import Gaussian Splat](/img/user-manual/graphics/gaussian-splatting/import-gsplat.webp)
 
 ## パフォーマンス
 
-Rendering splats can be expensive on both the CPU and GPU. Here are some strategies to achieve good performance:
+スプラットのレンダリングは、CPUとGPUの両方でコストがかかる場合があります。良好なパフォーマンスを達成するためのいくつかの戦略を以下に示します。
 
-- Be mindful of the number of Gaussians in your scene since every Gaussian is sorted on camera depth every frame. You can check the number contained within a particular GSplat asset by using the [Inspector](../../assets/types/gsplat/#asset-inspector). Use SuperSplat to trim unwanted Gaussians from your PLY files.
-- Disable `Anti-Alias` in the Scene Settings. Anti-aliasing is GPU intensive and offers little benefit for rendering splats.
-- Disable `Device Pixel Ratio` in the Scene Settings. This will reduce the overall number of pixels that the GPU has to process.
+- シーン内のGaussiansの数に注意してください。すべてのGaussianはフレームごとにカメラの深度に基づいてソートされます。[Inspector](../../assets/types/gsplat/#asset-inspector)を使用して、特定のGSplat assetに含まれる数を確認できます。SuperSplatを使用して、不要なGaussiansをPLYファイルから削除してください。
+- Scene Settingsで`Anti-Alias`を無効にします。アンチエイリアシングはGPUに負荷がかかり、スプラットのレンダリングにはほとんどメリットがありません。
+- Scene Settingsで`Device Pixel Ratio`を無効にします。これにより、GPUが処理する必要があるピクセルの総数が減少します。
 
 ## 制限事項
 
-There are some limitations to keep in mind when working with splats:
+スプラットを扱う際に留意すべきいくつかの制限事項があります。
 
-1. Fog has no effect.
-2. Dynamic lights have no effect.
-3. [Image Based Lighting](../physical-rendering/image-based-lighting) has no effect.
-4. Splats do not cast shadows.
+1. フォグは効果がありません。
+2. ダイナミックライトは効果がありません。
+3. [Image Based Lighting](../physical-rendering/image-based-lighting)は効果がありません。

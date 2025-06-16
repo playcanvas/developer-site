@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/9269
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/e/p/dvJYXs1Y/" title="Real-time Multiplayer with Photon - including matchmaking"></iframe>
+    <iframe src="https://playcanv.as/e/p/dvJYXs1Y/" title="Real-time Multiplayer with Photon - including matchmaking" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 :::info
@@ -800,4 +800,4 @@ Although this project was only a simple real-time communication between players,
 [4]: https://www.photonengine.com/
 [14]: https://doc-api.photonengine.com/en/javascript/current/Photon.LoadBalancing.LoadBalancingClient.html
 [15]: https://doc.photonengine.com/ja-jp/quantum/v1/reference/glossary
-[22]: /user-manual/scripting/communication/
+[22]: /user-manual/scripting/fundamentals/events/

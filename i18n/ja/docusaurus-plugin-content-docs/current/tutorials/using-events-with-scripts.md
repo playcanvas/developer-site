@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437
 Sample showing how to communicate between scripts using events.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/HXrtITkb/" title="Using events with scripts" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/HXrtITkb/" title="Using events with scripts" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

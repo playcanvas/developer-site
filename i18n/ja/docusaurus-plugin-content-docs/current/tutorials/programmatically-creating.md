@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/1VjdIY7v/" title="Programmatically Creating Entities"></iframe>
+    <iframe src="https://playcanv.as/p/1VjdIY7v/" title="Programmatically Creating Entities" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 通常、PlayCanvas エディターを使用してエンティティを作成し、ゲームのさまざまなパーツを作成するためにコンポーネントやスクリプトのコレクションを作成することが多いです。しかし、スクリプトでエンティティを作成することもできます。このチュートリアルでは、その方法を説明します。

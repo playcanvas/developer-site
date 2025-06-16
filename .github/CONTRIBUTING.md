@@ -74,7 +74,7 @@ For any JavaScript code, please refer to the [PlayCanvas style guide](https://gi
 
 ### Hyperlinks
 
-When writing a link in a Markdown file use either of the following formats but please do not to mix the formats on the same page:
+Historically, links have been placed at the bottom of a page:
 
 ```markdown
 [link text][1]
@@ -82,15 +82,7 @@ When writing a link in a Markdown file use either of the following formats but p
 [1]: https://example.com
 ```
 
-Or
-
-```markdown
-[link text][example-page]
-
-[example-page]: https://example.com
-```
-
-The only exception is writing FAQ Markdown files (located in the `faq` folder). For those, use the `\[link text\](url)` format.
+However, we now recommend using the inline `[link text](url)` format.
 
 ### Other files
 

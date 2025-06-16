@@ -1,25 +1,29 @@
 ---
-title: Asset Types
+title: アセットタイプ
 sidebar_position: 1
 ---
 
-The [Assets Panel](/user-manual/editor/assets.md) manages the assets in your project. There are several different types of asset.
+[アセットパネル](/user-manual/editor/interface/assets)は、プロジェクトのアセットを管理します。アセットにはいくつかの異なる種類があります。
 
-| タイプ                                | Imported From                    | Resource Extensions              | 説明                             |
-| ----------------------------------- | -------------------------------- | -------------------------------- | --------------------------------------- |
-| [`animation`](animation.md)         | `.glb`, `.fbx`                   | `.glb`                           | Animation keyframe data                 |
-| [`audio`](audio.md)                 | `.mp3`, `.wav`, `.ogg`           | `.mp3`, `.wav`, `.ogg`           | Sound data                              |
-| [`css`](css.md)                     | `.css`                           | `.css`                           | Stylesheets for HTML                    |
-| [`cubemap`](cubemap.md)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Environment lighting data               |
-| [`font`](font.md)                   | `.ttf`, `.woff`                  | `.json`, `.png`                  | Font data for rendering text            |
-| [`html`](html.md)                   | `.html`                          | `.html`                          | HTML documents                          |
-| [`json`](json.md)                   | `.json`                          | `.json`                          | JSON documents                          |
-| [`material`](material.md)           | `.glb`, `.fbx`                   | None                             | Material definitions for 3D models      |
-| [`render`](render.md)               | `.glb`, `.fbx`                   | `.glb`                           | 3D mesh data                            |
-| [`shader`](shader.md)               | `.glsl`, `.vert`, `.frag`        | `.glsl`, `.vert`, `.frag`        | Custom shaders for rendering            |
-| [`sprite`](sprite.md)               | Created in the Editor            | None                             | 2D images for UIs or textures           |
-| [`template`](template.md)           | `.glb`                           | None                             | Templates for entity hierarchy          |
-| [`text`](text.md)                   | `.txt`                           | `.txt`                           | Text documents                          |
-| [`texture-atlas`](texture-atlas.md) | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Sprite sheet image data                 |
-| [`texture`](texture.md)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Image data for 3D models or UIs         |
-| [`wasm`](wasm.md)                   | `.wasm`                          | `.wasm`                          | WebAssembly modules                     |
+| 種類                               | インポート元                     | リソース拡張子                   | 説明                               |
+| :------------------------------- | :------------------------------- | :------------------------------- | :--------------------------------- |
+| [`animation`](animation)         | `.glb`, `.fbx`                   | `.glb`                           | アニメーションのキーフレームデータ |
+| [`audio`](audio)                 | `.mp3`, `.wav`, `.ogg`           | `.mp3`, `.wav`, `.ogg`           | サウンドデータ                     |
+| `binary`                         | `.bin`                           | `.bin`                           | バイナリデータ                     |
+| `bundle`                         | エディタで作成                   | `.tar`                           | バンドルされたアセット             |
+| [`css`](css)                     | `.css`                           | `.css`                           | HTML用スタイルシート               |
+| [`cubemap`](cubemap)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | 環境ライティングデータ             |
+| [`font`](font)                   | `.ttf`, `.woff`                  | `.json`, `.png`                  | テキスト描画用フォントデータ       |
+| [`gsplat`](gsplat)               | `.ply`                           | `.ply`                           | 3D Gaussian Splatデータ            |
+| [`html`](html)                   | `.html`                          | `.html`                          | HTMLドキュメント                   |
+| [`json`](json)                   | `.json`                          | `.json`                          | JSONドキュメント                   |
+| [`material`](material)           | `.glb`, `.fbx`                   | None                             | 3Dモデル用マテリアル定義           |
+| [`render`](render)               | `.glb`, `.fbx`                   | `.glb`                           | 3Dメッシュデータ                   |
+| [`script`](../../scripting/index.md) | `.js`, `.mjs`                | `.js`, `.mjs`                    | スクリプト                         |
+| [`shader`](shader)               | `.glsl`, `.vert`, `.frag`        | `.glsl`, `.vert`, `.frag`        | レンダリング用カスタムシェーダー   |
+| [`sprite`](sprite)               | エディタで作成                   | None                             | UIまたはテクスチャ用2D画像         |
+| [`template`](template)           | `.glb`                           | None                             | エンティティ階層用テンプレート     |
+| [`text`](text)                   | `.txt`                           | `.txt`                           | テキストドキュメント               |
+| [`texture-atlas`](texture-atlas) | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | スプライトシート画像データ         |
+| [`texture`](texture)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | 3DモデルまたはUI用画像データ       |
+| [`wasm`](wasm)                   | `.wasm`                          | `.wasm`                          | WebAssemblyモジュール              |

@@ -32,4 +32,4 @@ Basic、Render States、Parametersの3つのセクションがあります。
 パラメーターセクションには、グラフに配置されたパラメーターノードがリストされます。名前とタイプは、グラフノード自体から取得されます。
 
 [2]: /shader-editor/window-layout/assets-pane
-[3]: https://api.playcanvas.com/classes/Engine.Material.html#blendType
+[3]: https://api.playcanvas.com/engine/classes/Material.html#blendtype

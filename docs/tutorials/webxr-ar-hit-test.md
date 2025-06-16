@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Example of how to use WebXR Hit Test API. That allows to hit test real world geometry.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/Kjol3uRS/" title="WebXR AR: Hit Test" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/Kjol3uRS/" title="WebXR AR: Hit Test" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/672464/'>Open Project ↗</Link>

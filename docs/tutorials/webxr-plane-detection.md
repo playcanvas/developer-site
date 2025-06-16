@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Example of how to use WebXR Augmented Reality: Plane Detection API. That allows to *actively* track real world surface estimations.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/f2ESRGge/" title="WebXR: Plane Detection" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/f2ESRGge/" title="WebXR: Plane Detection" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/782753/'>Open Project ↗</Link>

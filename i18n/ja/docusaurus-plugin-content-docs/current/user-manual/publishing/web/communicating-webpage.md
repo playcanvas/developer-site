@@ -14,11 +14,10 @@ PlayCanvasアプリケーションが周囲のWebページと通信する方法�
 次に、PlayCanvasアプリケーションでAPIまたは関数を公開する一例を示します。
 
 ```javascript
-
 // method one: define a global function to set the score
 window.setScore = function (score) {
-    var app = pc.Application.getApplication();
-    var entity = app.root.findByName("Score Keeper");
+    const app = pc.Application.getApplication();
+    const entity = app.root.findByName("Score Keeper");
     entity.script.scoreKeeper.setScore(score);
 }
 
@@ -41,7 +40,7 @@ ScoreKeeper.prototype.setScore = function (score) {
 window.setScore(10);
 
 // method two:
-var app = pc.Application.getApplication();
+const app = pc.Application.getApplication();
 app.fire("score:set", 10);
 
 ```
@@ -59,9 +58,9 @@ PlayCanvasアプリケーションをiframeに埋め込むことは、すばや�
 iframeとソーシャル共有バーを含まないバージョンのビルドを取得するためには、URLの `https://playcanv.as` の後に`/e`を追加します。
 
 ```html
-<iframe loading="lazy" id="app-frame" src="https://playcanv.as/e/p/example/">
+<iframe id="app-frame" src="https://playcanv.as/e/p/example/">
 <script>
-var iframe = document.getElementById("app-frame");
+const iframe = document.getElementById("app-frame");
 iframe.contentWindow.postMessage({
     score: 10,
 }, "https://playcanv.as");
@@ -69,16 +68,17 @@ iframe.contentWindow.postMessage({
 ```
 
 アプリケーションで次のようにします。
+
 ```javascript
 window.addEventListener("message", function (event) {
     if (event.origin === "http://example.com") { // always check message came from your website
-        var score = event.data.score;
+        const score = event.data.score;
 
         // call API method one:
         window.setScore(score);
 
         // call API method two:
-        var app = pc.Application.getApplication();
+        const app = pc.Application.getApplication();
         app.fire("score:set", score);
     }
 }, false);
@@ -141,10 +141,10 @@ PlayCanvasアプリケーションをセルフホストする場合、これが�
     <script src="__start__.js"></script>
     <script src="__loading__.js"></script>
     <script>
-    var app = pc.Application.getApplication();
+    const app = pc.Application.getApplication();
     app.on("start", function () {
         // get the root of the scene.
-        var hierarchy = app.root.getChildren()[0];
+        const hierarchy = app.root.children[0];
 
         // do other stuff here
     });

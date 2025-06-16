@@ -1,5 +1,5 @@
 ---
-title: オーディオ (Audio)
+title: Audio
 ---
 
 Audioアセットは、[Soundコンポーネント][sound-component]を使用して再生できる音声ファイルです。

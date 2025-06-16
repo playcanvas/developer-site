@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample with self contained FPS counter that can be used in other projects.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/VRCXOsxi/" title="Frames Per Sec (FPS) counter" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/VRCXOsxi/" title="Frames Per Sec (FPS) counter" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/433323/'>Open Project ↗</Link>

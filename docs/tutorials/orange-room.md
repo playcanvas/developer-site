@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Interactive interior visualisation with dynamic reflections and HDR lightmaps.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/1ha5glKf/" title="Orange Room" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/1ha5glKf/" title="Orange Room" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/345310/'>Open Project ↗</Link>

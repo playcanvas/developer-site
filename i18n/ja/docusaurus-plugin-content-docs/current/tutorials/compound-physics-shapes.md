@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 複合物理形状の作成の完全なドキュメントは、[ユーザーマニュアル][documentation-page]にあります。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/KXZ5Lsda/" title="Compound Physics Shapes"></iframe>
+    <iframe src="https://playcanv.as/p/KXZ5Lsda/" title="Compound Physics Shapes" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/688146/'>Open Project ↗</Link>

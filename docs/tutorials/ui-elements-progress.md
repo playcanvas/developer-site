@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/5019
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/FlebHmLs/" title="User Interface - Progress Bar"></iframe>
+    <iframe src="https://playcanv.as/p/FlebHmLs/" title="User Interface - Progress Bar" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *A progress bar using Element components. See the [full scene][1].*
@@ -174,4 +174,4 @@ Changing the `width` makes the fill image larger and changing the `rect` makes s
 [1]: https://playcanvas.com/editor/scene/547906
 [2]: /user-manual/user-interface/elements/
 [3]: /user-manual/user-interface/screens/
-[8]: https://api.playcanvas.com/classes/Engine.ElementComponent.html#rect
+[8]: https://api.playcanvas.com/engine/classes/ElementComponent.html#rect

@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4097
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/AGtssoOU/" title="Light Cookies"></iframe>
+    <iframe src="https://playcanv.as/p/AGtssoOU/" title="Light Cookies" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 Find out more by forking the [full project][1].

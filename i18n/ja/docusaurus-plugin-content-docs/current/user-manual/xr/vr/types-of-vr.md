@@ -3,18 +3,22 @@ title: VR体験の種類
 sidebar_position: 2
 ---
 
-異なるスタイルのVR体験はそれぞれ特有の基準空間を持つ可能性があります。この基準空間は、仮想オブジェクトの位置や回転が現実世界とどのように関連づけられるかを定義します。詳細は[pc.XRSPACE_*][1]を参照してください。
+異なる種類のVR体験では、異なる参照空間を使用できます。参照空間とは、VR環境内のオブジェクトやユーザーの位置と向きを定義するために使用される座標系です。これにより、アプリケーションは空間関係を一貫した方法で理解し、管理できます。`XRSPACE`定数で詳細を参照してください：
+
+* [`XRSPACE_BOUNDEDFLOOR`](https://api.playcanvas.com/engine/variables/XRSPACE_BOUNDEDFLOOR.html)
+* [`XRSPACE_LOCAL`](https://api.playcanvas.com/engine/variables/XRSPACE_LOCAL.html)
+* [`XRSPACE_LOCALFLOOR`](https://api.playcanvas.com/engine/variables/XRSPACE_LOCALFLOOR.html)
+* [`XRSPACE_UNBOUNDED`](https://api.playcanvas.com/engine/variables/XRSPACE_UNBOUNDED.html)
+* [`XRSPACE_VIEWER`](https://api.playcanvas.com/engine/variables/XRSPACE_VIEWER.html)
 
 ## ルームスケールVR
 
-Room Scale VR includes devices such as the Meta Quest, Apple Vision Pro, HTC Vive and many others. Room scale experiences are designed to allow a small or large amount of movement away from the origin position of the scene.
+ルームスケールVRは、Meta Quest、Apple Vision Pro、HTC Viveなどの多くのデバイスでサポートされています。ルームスケール体験は、シーンの原点位置から少量または大量の移動を可能にするように設計されています。
 
-適切なリファレンススペース: `pc.XRSPACE_LOCALFLOOR`, `pc.XRSPACE_BOUNDEDFLOOR`, `pc.XRSPACE_UNBOUNDED`.
+適切な参照空間：`pc.XRSPACE_LOCALFLOOR`、`pc.XRSPACE_BOUNDEDFLOOR`、`pc.XRSPACE_UNBOUNDED`。
 
-## 座った状態でのVR (Seated VR)
+## 着座型VR
 
-Seated VR or 3DoF (3 degrees of freedom) includes devices such as Google Cardboard, Samsung Gear VR and Oculus Rift. These experiences are based around the user remaining roughly stationary. In some cases there is no positional data available (e.g. Google Cardboard) and only the orientation of the headset is used.
+着座型VRまたは3DoF（3自由度）は、Google Cardboard、Samsung Gear VR、Oculus Riftなどのデバイスでサポートされています。これらの体験は、ユーザーがほぼ静止したままであることを前提としています。場合によっては、位置データが利用できず（例：Google Cardboard）、ヘッドセットの向きのみが使用されます。
 
-適切なリファレンススペース: `pc.XRSPACE_LOCAL`, `pc.XRSPACE_LOCALFLOOR`.
-
-[1]: https://api.playcanvas.com/modules/Engine.html#XRSPACE_VIEWER
+適切な参照空間：`pc.XRSPACE_LOCAL`、`pc.XRSPACE_LOCALFLOOR`。

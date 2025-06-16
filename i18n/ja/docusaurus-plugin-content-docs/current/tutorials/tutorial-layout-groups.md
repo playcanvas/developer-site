@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/553
 Use the Layout Group component to build a user interface.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/y4JwxWTI/" title="Tutorial: Layout Groups" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/y4JwxWTI/" title="Tutorial: Layout Groups" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

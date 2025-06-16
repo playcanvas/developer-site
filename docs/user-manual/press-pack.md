@@ -1,6 +1,6 @@
 ---
 title: Press Pack
-sidebar_position: 27
+sidebar_position: 24
 ---
 
 We offer a press pack for people to use when promoting or advertising PlayCanvas within their materials.

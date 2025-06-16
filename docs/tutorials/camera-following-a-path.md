@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample of a camera following points on a spline path.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/LuNJjRCr/" title="Camera following a path" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/LuNJjRCr/" title="Camera following a path" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/438429/'>Open Project ↗</Link>

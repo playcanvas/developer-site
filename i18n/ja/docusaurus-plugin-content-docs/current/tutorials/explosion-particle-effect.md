@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439
 Sample project showing a multi layered particle effect with screen shake.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/0hjGM2Lh/" title="Explosion Particle Effect" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/0hjGM2Lh/" title="Explosion Particle Effect" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

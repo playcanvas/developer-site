@@ -52,4 +52,4 @@ If the entity also has a rigidbody component, the collision component determines
 You can control a Collision component's properties using a [script component][8]. The Collision component's scripting interface is [here][9].
 
 [8]: /user-manual/scenes/components/script
-[9]: https://api.playcanvas.com/classes/Engine.CollisionComponent.html
+[9]: https://api.playcanvas.com/engine/classes/CollisionComponent.html

@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/rnIUbXws/" title="Light Halos"></iframe>
+    <iframe src="https://playcanv.as/p/rnIUbXws/" title="Light Halos" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 Find out more by forking the [full project][4].
@@ -191,4 +191,4 @@ Halo.prototype.update = function(dt) {
 That's it. A simple but pretty effect to add to your scene. Take a look at the [project][4] for more information.
 
 [4]: https://playcanvas.com/project/406040
-[5]: https://api.playcanvas.com/classes/Engine.MeshInstance.html
+[5]: https://api.playcanvas.com/engine/classes/MeshInstance.html

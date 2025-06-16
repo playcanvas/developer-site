@@ -7,7 +7,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4384
 import Link from '@docusaurus/Link';
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/NeYgvM9z/" title="Simple water surface" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/NeYgvM9z/" title="Simple water surface" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/438476/'>Open Project ↗</Link>

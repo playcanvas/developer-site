@@ -6,7 +6,7 @@ sidebar_position: 5
 ハードウェアインスタンシング (Hardware instancing) は、GPUに複数の同一のメッシュを少数のドローコールでレンダリングする技術です。メッシュの各インスタンスは、異なる限定的な状態（例えば、位置や色）を持つことができます。木や弾丸などのオブジェクトを描画するのに適した技術です。
 
 
-デバイスでのサポート状況を確認するには、 `pc.GraphicsDevice.supportsInstancing`を確認します。一般的には、 WebGL2デバイスのすべてと、ANGLE_instanced_arrays拡張機能を使用してWebGL1デバイスの大部分でサポートされています。
+For its support on a device, check `pc.GraphicsDevice.supportsInstancing`. In general, it is supported on all WebGL2 devices and also on the majority of WebGL1 devices using the `ANGLE_instanced_arrays` extension.
 
 また、すべてのインスタンスがレンダリング用にGPUに送信され、カメラフラスタムカリングは行われないことに注意してください。
 
@@ -16,30 +16,33 @@ sidebar_position: 5
 
 ```javascript
 // store matrices for individual instances into array
-var matrices = new Float32Array(instanceCount * 16);
-var matrix = new pc.Mat4();
-var matrixIndex = 0;
-for (var i = 0; i < instanceCount; i++) {
-    matrix.setTRS(pos, pc.Vec3.ZERO, pc.Vec3.ONE);
+const matrices = new Float32Array(instanceCount * 16);
+const matrix = new pc.Mat4();
+let matrixIndex = 0;
+for (let i = 0; i < instanceCount; i++) {
+    matrix.setTRS(pos, pc.Quat.IDENTITY, pc.Vec3.ONE);
 
     // copy matrix elements into array of floats
-    for (var m = 0; m < 16; m++)
+    for (let m = 0; m < 16; m++)
         matrices[matrixIndex++] = matrix.data[m];
 }
 ```
 
-以下の例では、インスタンスごとの状態を保存するVertexBufferを作成し、それを行列で初期化します。この例では、`pc.VertexFormat.defaultInstancingFormat` を使用して、インスタンスごとのMat4行列を保存することができます。その後、インスタンス化したいメッシュジオメトリを含むMeshInstanceでインスタンス化を有効にします。
- 
- 
+Create a VertexBuffer which stores per-instance state and initialize it with the matrices. In the following example, we use [`pc.VertexFormat.getDefaultInstancingFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html#getdefaultinstancingformat) which allows us to store a per-instance Mat4 matrix. Then we enable instancing on a MeshInstance, which contains the mesh geometry we want to instance.
 
 ```javascript
-var instanceCount = 10;
-var vertexBuffer = new pc.VertexBuffer(this.app.graphicsDevice, pc.VertexFormat.defaultInstancingFormat,
-                                        instanceCount, pc.BUFFER_STATIC, matrices);
+const instanceCount = 10;
+const vertexBuffer = new pc.VertexBuffer(
+    this.app.graphicsDevice,
+    pc.VertexFormat.getDefaultInstancingFormat(this.app.graphicsDevice),
+    instanceCount,
+    pc.BUFFER_STATIC,
+    matrices
+);
 meshInst.setInstancing(vertexBuffer);
 ```
 
-注: pc.BUFFER_DYNAMICを使用して動的な頂点バッファを作成し、フレームごとにその内容を以下のように更新することができます。
+Note, that you can create a dynamic vertex buffer using `pc.BUFFER_DYNAMIC`, and update the contents of it per-frame like this:
 
 ```javascript
 vertexBuffer.setData(matrices);

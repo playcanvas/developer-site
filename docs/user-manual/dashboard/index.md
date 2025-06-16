@@ -1,6 +1,6 @@
 ---
 title: Dashboard
-sidebar_position: 7
+sidebar_position: 4
 ---
 
 ![Dashboard](/img/user-manual/dashboard/dashboard.png)

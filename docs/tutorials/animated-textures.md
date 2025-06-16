@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 ---
 
 <div className='iframe-container'>
-    <iframe loading="lazy" src="https://playcanv.as/p/BM93v05L/" title="Animated Textures"></iframe>
+    <iframe src="https://playcanv.as/p/BM93v05L/" title="Animated Textures" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *See the [full project][1].*

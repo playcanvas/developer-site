@@ -7,7 +7,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 Collision Picking - クリックしてシェイプを選択する
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/Ps1tTzWn/" title="Collision Picking"></iframe>
+    <iframe src="https://playcanv.as/b/Ps1tTzWn/" title="Collision Picking" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 ---
@@ -15,7 +15,7 @@ Collision Picking - クリックしてシェイプを選択する
 Frame Buffer Picking - クリックしてグレーのシェイプを選択する。赤い形状はピックできないように設定されています。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/ZQVQqgGU/" title="Frame Buffer Picking"></iframe>
+    <iframe src="https://playcanv.as/b/ZQVQqgGU/" title="Frame Buffer Picking" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 ---
@@ -146,5 +146,5 @@ PickerFramebuffer.prototype.onSelect = function (event) {
 ```
 
 [1]: https://playcanvas.com/project/405856
-[2]: https://api.playcanvas.com/classes/Engine.RigidBodyComponentSystem.html#raycastFirst
-[3]: https://api.playcanvas.com/classes/Engine.Picker.html
+[2]: https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastfirst
+[3]: https://api.playcanvas.com/engine/classes/Picker.html

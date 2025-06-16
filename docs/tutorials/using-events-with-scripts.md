@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample showing how to communicate between scripts using events.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/HXrtITkb/" title="Using events with scripts" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/HXrtITkb/" title="Using events with scripts" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/437673/'>Open Project ↗</Link>

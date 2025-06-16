@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 ---
 
 <div className='iframe-container'>
-    <iframe loading="lazy" src="https://playcanv.as/p/8LTSuf4F/" title="Forces and Impulses" />
+    <iframe src="https://playcanv.as/p/8LTSuf4F/" title="Forces and Impulses" />
 </div>
 
 *カーソルキーを使用してインパルスを適用し、WASDキーを使用してトルクを適用し、キューブを回転させることができます。Fキーを押し続けると、重力の影響をキャンセルするために一定の上向きの力が適用されます。*
@@ -184,13 +184,13 @@ DynamicBody.prototype.reset = function () {
 };
 ```
 
-[1]: https://api.playcanvas.com/classes/Engine.RigidBodyComponent.html#applyForce
-[2]: https://api.playcanvas.com/classes/Engine.RigidBodyComponent.html#applyImpulse
-[3]: https://api.playcanvas.com/classes/Engine.RigidBodyComponent.html#applyTorque
-[4]: https://api.playcanvas.com/classes/Engine.RigidBodyComponent.html#applyTorqueImpulse
-[5]: https://api.playcanvas.com/classes/Engine.Vec3.html
-[6]: https://api.playcanvas.com/classes/Engine.CollisionComponent.html
-[7]: https://api.playcanvas.com/modules/Engine.html
+[1]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyforce
+[2]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyimpulse
+[3]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applytorque
+[4]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applytorqueimpulse
+[5]: https://api.playcanvas.com/engine/classes/Vec3.html
+[6]: https://api.playcanvas.com/engine/classes/CollisionComponent.html
+[7]: https://api.playcanvas.com/engine/
 [8]: /tutorials/first-person-movement/
 [9]: /tutorials/collision-and-triggers/
 [10]: https://playcanvas.com/project/405828/overview/tutorial-forces--impulses

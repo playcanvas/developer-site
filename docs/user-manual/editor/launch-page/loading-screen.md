@@ -10,7 +10,7 @@ It will be displayed in both the Launch Page and your published app.
 
 ## Customizing the Loading Screen
 
-If you want to create a custom loading screen, load the Settings into the [Inspector](../../inspector) by clicking the 'cog' icon on the [Toolbar](../../toolbar) or in the [Viewport](../../viewport).
+If you want to create a custom loading screen, load the Settings into the [Inspector](../../interface/inspector) by clicking the 'cog' icon on the [Toolbar](../../interface/toolbar) or in the [Viewport](../../interface/viewport).
 
 ![Settings](/img/user-manual/editor/toolbar/settings.png)
 
@@ -20,7 +20,7 @@ Then, navigate to the `LOADING SCREEN` section:
 
 You have two options:
 
-1. **CREATE DEFAULT** - Create a new loading screen script in the [Assets Panel](../../assets) that contains the full code for the default loading screen. You can customize this loading screen to your requirements.
+1. **CREATE DEFAULT** - Create a new loading screen script in the [Assets Panel](../../interface/assets) that contains the full code for the default loading screen. You can customize this loading screen to your requirements.
 2. **SELECT EXISTING** - Select a custom loading screen script from the Assets Panel.
 
 Let's assume you don't have an existing script and instead create the default loading screen script. A very minimal loading screen just displaying a solid color looks like this:

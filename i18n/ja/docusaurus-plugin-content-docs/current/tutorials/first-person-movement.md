@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/HzOzlZOC/" title="First Person Movement"></iframe>
+    <iframe src="https://playcanv.as/p/HzOzlZOC/" title="First Person Movement" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 このアプリケーションは、ファーストパーソンでのキャラクター移動を実装しています。
@@ -144,4 +144,4 @@ FirstPersonMovement.prototype._createCamera = function () {
 ```
 
 [1]: https://playcanvas.com/project/405842
-[3]: https://api.playcanvas.com/classes/Engine.RigidBodyComponent.html#applyForce
+[3]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyforce

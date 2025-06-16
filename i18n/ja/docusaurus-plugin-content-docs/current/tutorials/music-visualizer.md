@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/BqhCi6oy/" title="Creating a Music Visualizer"></iframe>
+    <iframe src="https://playcanv.as/p/BqhCi6oy/" title="Creating a Music Visualizer" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *[完成されたプロジェクト][1]をフォークして詳細をご確認ください。*
@@ -139,4 +139,4 @@ updateループでは、周波数データ (Frequency)および 時間領域 (Ti
 [1]: https://playcanvas.com/project/405891
 [2]: https://developer.mozilla.org/en/docs/Web/API/AudioContext
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode
-[4]: https://api.playcanvas.com/classes/Engine.Application.html#renderLines
+[4]: https://api.playcanvas.com/engine/classes/AppBase.html#renderlines

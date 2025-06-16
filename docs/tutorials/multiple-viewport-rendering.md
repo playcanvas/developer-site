@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 A sample showing how to render multiple viewports by modifying the viewport properties on the cameras
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/bkLdoYPQ/" title="Multiple Viewport Rendering" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/bkLdoYPQ/" title="Multiple Viewport Rendering" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/443666/'>Open Project ↗</Link>

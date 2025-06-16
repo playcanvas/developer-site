@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 A sample application with boilerplate code for WebXR support with tracked controllers using PlayCanvas.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/TUBZkBEl/" title="WebXR Tracked Controllers" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/TUBZkBEl/" title="WebXR Tracked Controllers" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/457917/'>Open Project ↗</Link>

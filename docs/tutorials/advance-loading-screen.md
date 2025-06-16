@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Project sample showing how to use project image assets in the loading screen
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/Di3Fb3fx/" title="Advance loading screen" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/Di3Fb3fx/" title="Advance loading screen" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/458028/'>Open Project ↗</Link>

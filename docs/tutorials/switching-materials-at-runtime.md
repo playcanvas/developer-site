@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample switching on a model materials at runtime.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/7EZvdnZd/" title="Switching materials at runtime" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/7EZvdnZd/" title="Switching materials at runtime" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/437442/'>Open Project ↗</Link>

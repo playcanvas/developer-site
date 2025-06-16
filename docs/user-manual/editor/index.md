@@ -1,29 +1,25 @@
 ---
 title: Editor
-sidebar_position: 8
+sidebar_position: 6
 ---
 
-The PlayCanvas Editor is a visual editing tool which you use to create and edit the [Scenes][1] and [Entities][2] that make up your game.
+## Overview
+
+The PlayCanvas Editor is a visual editing tool which you use to create and edit the [Scenes](../glossary#scene) and [Entities](../glossary#entity) that make up your project.
 
 * Runs in your browser, so it's available wherever you are.
-* Uses the PlayCanvas Engine to render your scene. What you see is what you get.
-* One button press and you are playing your game in a new tab.
+* Uses the PlayCanvas [Engine](../engine) to render your scene. What you see is what you get.
+* One button press to open your project in a new tab - the [Launch page](launch-page).
 * Live editing means that you can iterate on your game, even while it's running.
+* [Real-time collaboration](realtime-collaboration) of multiple users on a single project.
+* [Version control](version-control) to organize features into separate branches.
 
-## Interface
+## Updates
 
-<img loading="lazy" alt="Editor Interface" width="640" src="/img/user-manual/editor/editor-annotated.jpg" />
+The PlayCanvas Editor is ever changing with each update bringing in new features and deprecating old ones. To keep up, project data may have to be migrated to accommodate such changes. For larger and more complicated changes, you may have to adjust your project manually to ensure it is [compatible](engine-compatibility) with your current engine.
 
-This is the main interface to the PlayCanvas Editor. You can see labeled the main areas
+If you are having trouble applying these adjustments or notice unusual changes in your project, visit our [troubleshooting](troubleshooting) page.
 
-* **Menu** The menu contains all the commands available in the Editor. If you can't find the button or remember the hotkey, use the menu.
-* **Toolbar** Commonly used commands are available on the toolbar for quick access.
-* **Hierarchy** A hierarchical view of the Entities that make up the open Scene. Use this to select, delete and re-parent Entities.
-* **Inspector** Detailed properties of the selected [Entity][2], [Asset][4] or [Component][3].
-* **Viewport** A 3D view onto your scene, use this view to select, position and orientate Entities.
-* **Assets** A view of all the Assets in the current Project. You can search for assets by name, filter by type and also drag and drop assets to various slots or in the Design View.
+## Customization
 
-[1]: /user-manual/glossary#scene
-[2]: /user-manual/glossary#entity
-[3]: /user-manual/glossary#component
-[4]: /user-manual/glossary#asset
+In rare cases you may wish to extend the functionality of the editor to add custom behavior for your particular workflow. This can be achieved by using our [Editor API](editor-api).

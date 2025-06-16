@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437
 Sample with a smooth transition of a camera from one position and rotation to another using the Lerp and Slerp functions.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/T7VKMrs8/" title="Smooth camera movement" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/T7VKMrs8/" title="Smooth camera movement" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

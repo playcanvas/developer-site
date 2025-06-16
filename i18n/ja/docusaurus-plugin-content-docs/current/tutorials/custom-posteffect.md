@@ -7,7 +7,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 In this tutorial, you'll learn how to create a custom watercolor post effect in PlayCanvas that applies a softening filter and a paper grain texture to your scene. By the end of this guide, you'll have a visually appealing watercolor effect that you can apply to any 3D scene.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/3je0YP0q/" title="Custom Post Effects"></iframe>
+    <iframe src="https://playcanv.as/p/3je0YP0q/" title="Custom Post Effects" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 ## Step 1: Setting Up Your Shaders

@@ -1,33 +1,91 @@
 ---
 title: スクリプティング
-sidebar_position: 11
+sidebar_position: 9
 ---
 
-ゲームをインタラクティブにするにはスクリプトを使います。スクリプトは**JavaScript**で書きます。これはあらゆるウェブページで使用されているプログラミング言語です。
+スクリプトは、PlayCanvas におけるインタラクティブ性の中心です。これは再利用可能なコードのパーツであり、エンティティにアタッチすることで、挙動の定義、ユーザー入力の処理、ゲームロジックの管理など、プロジェクトに命を吹き込みます。
 
-アプリケーションは二つの個別のコードベースに分かれているものと考えてください。一つはPlayCanvasが提供するエンジンです。これは、グラフィックレンダリング、入力処理、オーディオ、PlayCanvasツールのインターフェイスなどを含む基本的な機能を実装します。もう一つはスクリプトです。これは多くの場合、便利な挙動を提供する再利用可能なブロックか、アプリケーション特有のものです。
+## 2つのスクリプティングシステム
 
-基本的に、エンジンコードはアプリケーションに含まれる単一のJavaScriptファイルなので、気にかける必要はありません。エンジンの一部を書き換える場合、スクリプティングに関するこの導入は必要ないです。
+PlayCanvas では、2つのスクリプト方式をサポートしています：
 
-ここでは簡単なスクリプトの例です。これは、「rotate」と呼ばれ、取り付けられているエンティティを毎秒10度回転させます。
+* **ESMスクリプト**（`.mjs`ファイル） - クラス構文を使ったモダンなESモジュールベースのスクリプト。**新規プロジェクトにはこちらを推奨します。**
+* **クラシックスクリプト**（`.js`ファイル） - プロトタイプベースの構文を使った、元々のPlayCanvasスクリプティングシステム。
+
+両方のシステムは同一プロジェクト内で共存できるため、徐々に移行することも、自分に合った方式を選ぶことも可能です。
+
+## クイック例
+
+以下は、エンティティを回転させる簡単なスクリプトです：
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
-var Rotate = pc.createScript("rotate");
+import { Script } from 'playcanvas';
 
-Rotate.prototype.update = function (dt) {
-    this.entity.rotate(0, 10*dt, 0);
+export class Rotate extends Script {
+    static scriptName = 'rotate';
+
+    /** @attribute */
+    speed = 10;
+
+    update(dt) {
+        this.entity.rotate(0, this.speed * dt, 0);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
+```javascript
+var Rotate = pc.createScript('rotate');
+
+Rotate.attributes.add('speed', { type: 'number', default: 10 });
+
+Rotate.prototype.update = function(dt) {
+    this.entity.rotate(0, this.speed * dt, 0);
 };
 ```
 
-スクリプトは作成されたときに指定された名前によって定義され、Editorまたはコードでエンティティにスクリプトコンポーネントを追加することで[スクリプトコンポーネント][1]に添付されます。
+</TabItem>
+</Tabs>
 
-## 用語集
+## 学べること
 
-いくつかの用語を定義しましょう。
+### [基礎知識](./fundamentals/index.md)
 
-* ***Script*** スクリプトとはスクリプトオブジェクトの定義を一つ以上含む単一のJavaScriptファイルです。
-* ***Script Component*** スクリプトコンポーネントはPlayCanvasエンジンで定義され、ゲームエンティティにスクリプトを読み込みスクリプトオブジェクトを作成する機能を与えます。
-* ***ScriptType*** スクリプトタイプとは`pc.create Script`関数を使用して作成されるJavaScriptオブジェクトです。これは、エンティティに追加されたときにインスタンス化される新しいクラスです。
-* ***Script Instance*** スクリプトインスタンスは、ScriptTypeのインスタンスです。スクリプトコンポーネントにScriptTypeが添付されている各エンティティに対して一つのスクリプトインスタンスが作成されます。
+すべてのPlayCanvasスクリプトに共通する基本的な概念：
 
-[1]: /user-manual/scenes/components/script/
+* [はじめに](./fundamentals/getting-started.md) - スクリプトの基本構造と構文
+* [ESMスクリプト](./fundamentals/esm-scripts.md) - ESモジュールによるモダンなスクリプティング
+* [スクリプトライフサイクル](./fundamentals/script-lifecycle.md) - スクリプトメソッドが呼ばれるタイミングと方法
+* [スクリプト属性](./fundamentals/script-attributes/index.md) - 設定可能なプロパティの公開
+* [エンジンAPIの呼び出し](./fundamentals/engine-api.md) - 主要なクラスとパターン
+* [イベント](./fundamentals/events.md) - スクリプト間の通信
+
+### [エディタ統合](./editor-users/index.md)
+
+PlayCanvasエディタ内でのスクリプトの取り扱い：
+
+* [スクリプトの管理](./editor-users/managing-scripts.md) - スクリプトファイルの作成と整理
+* [コードエディタ](./editor-users/code-editor.md) - 組み込みコードエディタの使用
+* [VS Code 拡張機能](./editor-users/vscode-extension.md) - 開発フローの強化
+* [ホットリロード](./editor-users/hot-reloading.md) - ライブでのコード更新
+
+### [デバッグ](./debugging/index.md)
+
+スクリプトのトラブルシューティングのためのツールと手法：
+
+* [コンソールログ](./debugging/console-logging.md) - コンソール出力による基本的なデバッグ
+* [ブラウザ開発者ツール](./debugging/browser-dev-tools.md) - 高度なデバッグ手法
+
+:::tip
+
+PlayCanvasのスクリプティングが初めてですか？ まずは[はじめに](./fundamentals/getting-started.md)から基本を学び、次にモダンなアプローチである[ESMスクリプト](./fundamentals/esm-scripts.md)を試してみましょう。
+
+:::

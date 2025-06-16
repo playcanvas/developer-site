@@ -1,6 +1,6 @@
 ---
 title: Profile
-sidebar_position: 5
+sidebar_position: 2
 ---
 
 Your profile page is the public place for showing off your PlayCanvas games.

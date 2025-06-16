@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/jpRiV53D/" title="User Interface - Buttons"></iframe>
+    <iframe src="https://playcanv.as/p/jpRiV53D/" title="User Interface - Buttons" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *ElementとButtonコンポーネントを使用したシンプルなボタン。[完全なシーン][1]を参照してください。*
@@ -149,4 +149,4 @@ this.entity.button.on('click', function(event) {
 [1]: https://playcanvas.com/editor/scene/547900
 [2]: /user-manual/user-interface/elements/
 [3]: /user-manual/user-interface/screens/
-[click-event-api]: https://api.playcanvas.com/classes/Engine.ButtonComponent.html#event:click
+[click-event-api]: https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click

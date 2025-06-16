@@ -9,5 +9,5 @@ An example shows how to focus a camera on target location
 Credit: https://playcanvas.com/user/lexxik
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/5SJsWtg3/" title="Pan Camera to Target" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/5SJsWtg3/" title="Pan Camera to Target" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample application with WebXR Hands Tracking.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/VmHVW3Wb/" title="WebXR Hands" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/VmHVW3Wb/" title="WebXR Hands" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/705931/'>Open Project ↗</Link>

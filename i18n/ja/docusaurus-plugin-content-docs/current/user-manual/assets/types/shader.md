@@ -7,9 +7,9 @@ ShaderアセットにはGLSLコードが含まれています。エディター�
 Shaderアセットを編集するには、エディターでShaderアセットを右クリックし、Editを選択します。Shaderアセットを使用してカスタムマテリアルを作成する方法の例を以下に示します。
 
 ```javascript
-var vertexShader = this.app.assets.find('my_vertex_shader');
-var fragmentShader = this.app.assets.find('my_fragment_shader');
-var shaderDefinition = {
+const vertexShader = this.app.assets.find('my_vertex_shader');
+const fragmentShader = this.app.assets.find('my_fragment_shader');
+const shaderDefinition = {
     attributes: {
         aPosition: pc.SEMANTIC_POSITION,
         aUv0: pc.SEMANTIC_TEXCOORD0
@@ -18,7 +18,7 @@ var shaderDefinition = {
     fshader: fragmentShader.resource
 };
 
-var shader = new pc.Shader(this.app.graphicsDevice, shaderDefinition);
-var material = new pc.Material();
+const shader = new pc.Shader(this.app.graphicsDevice, shaderDefinition);
+const material = new pc.Material();
 material.setShader(shader);
 ```

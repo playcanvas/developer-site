@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample showing how to load multiple assets at runtime.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/P7eFFj4u/" title="Load multiple assets at runtime" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/P7eFFj4u/" title="Load multiple assets at runtime" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/439131/'>Open Project ↗</Link>

@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/tiKpka9M/" title="Controlling Lights"></iframe>
+    <iframe src="https://playcanv.as/p/tiKpka9M/" title="Controlling Lights" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *1、2、3を押すとそれぞれスポットライト、ポイントライト、ディレクショナルライトのON/OFFが切り替わります。*
@@ -125,5 +125,5 @@ LightHandler.prototype.pivot = function () {
 };
 ```
 
-[1]: https://api.playcanvas.com/classes/Engine.LightComponent.html
+[1]: https://api.playcanvas.com/engine/classes/LightComponent.html
 [2]: https://playcanvas.com/project/405812/overview/tutorial-controlling-lights

@@ -37,7 +37,7 @@ Diffuseカラーはマテリアルのベースとなるカラーです。これ�
 Diffuseカラーは **アルベド** や **ベースカラー** と呼ばれることもあります。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/Q28EwTwQ/?color" title="Physical Materials - Diffuse"></iframe>
+    <iframe src="https://playcanv.as/p/Q28EwTwQ/?color" title="Physical Materials - Diffuse" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 インターネット上を探すと、拡散色/アルベドの値と素材の対応表をすぐに見つけることができます。
@@ -63,7 +63,7 @@ Diffuseカラーは **アルベド** や **ベースカラー** と呼ばれる�
 また、金属質マップを使うと、マテリアルの特定の部分を金属に、特定の部分を非金属に設定することができます。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/Q28EwTwQ/?metal" title="Physical Materials - Metalness"></iframe>
+    <iframe src="https://playcanv.as/p/Q28EwTwQ/?metal" title="Physical Materials - Metalness" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 ### 光沢度 (Glossiness)
@@ -71,7 +71,7 @@ Diffuseカラーは **アルベド** や **ベースカラー** と呼ばれる�
 光沢度 (Glossiness) は **Metalness** と **Specular** を使う方法の両方で使われ、マテリアルの表面がどのくらいなめらかかを定義します。光沢度はマテリアルの表面で反射する光がぼやけるか鋭いか、あるいはSpecularハイライトが広いか狭いかに影響します。光沢度は0から100の間の値か、あるいはGlossinessマップとして与えることができます。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/Q28EwTwQ/?gloss" title="Physical Materials - Glossiness"></iframe>
+    <iframe src="https://playcanv.as/p/Q28EwTwQ/?gloss" title="Physical Materials - Glossiness" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 いくつかの物理ベースレンダリングシステムでは、光沢度という用語の代わりに**粗さ (Roughness)**という用語を使います。粗さは光沢度の反対の意味です。光沢度と粗さを変換する際には、単純にその値を反転してください。
@@ -85,7 +85,7 @@ Diffuseカラーは **アルベド** や **ベースカラー** と呼ばれる�
 マテリアルの見た目をさらに良くするために、アンビエントオクルージョン、発光、透明度、法線マップとハイトマップといった様々なプロパティを使うことができます。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/Q28EwTwQ/" title="Physical Materials - All"></iframe>
+    <iframe src="https://playcanv.as/p/Q28EwTwQ/" title="Physical Materials - All" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 [5]: https://marmoset.co/posts/pbr-texture-conversion/

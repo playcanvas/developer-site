@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/XqMw92Zl/" title="Basic Audio"></iframe>
+    <iframe src="https://playcanv.as/p/XqMw92Zl/" title="Basic Audio" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *タンクは、ロボットの周りを移動しています。ゲーム上の任意の場所をクリックして撃つことができます。*

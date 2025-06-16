@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439
 Sample with a fireball that moves with the mouse
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/eavVneJi/" title="Flaming fireball" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/eavVneJi/" title="Flaming fireball" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

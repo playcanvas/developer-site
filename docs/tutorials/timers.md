@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Example of extending the PlayCanvas engine to create one shot timers. Press P to pause time.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/WsI6QA7y/" title="Timers" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/WsI6QA7y/" title="Timers" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/691984/'>Open Project ↗</Link>

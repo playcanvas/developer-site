@@ -1,15 +1,15 @@
 ---
-title: Hand Tracking
+title: ハンドトラッキング
 sidebar_position: 6
 ---
 
-If the platform supports [WebXR Hand Input][1], then an input source can have associated hand data, which is exposed as an [XrHand][2], and its data in the form of [XrFinger][3]s and [XrJoint][4]s for an application developer to use, such as wrist, fingers, joints, tips and events for detecting when hands lose/restore tracking.
+プラットフォームが[WebXR Hand Input][1]をサポートしている場合、入力ソースは関連する手データを持つことができます。これは[XrHand][2]として公開され、アプリケーション開発者が使用できるように、手首、指、関節、指先、そして手がトラッキングを失ったり回復したりするのを検出するためのイベントなど、[XrFinger][3]と[XrJoint][4]の形式でデータが提供されます。
 
-<img loading="lazy" src="/img/user-manual/xr/cube-hands.webp" alt="Hand tracking using cube primitives" width="512" />
+<img loading="lazy" src="/img/user-manual/xr/cube-hands.webp" alt="立方体プリミティブを使用したハンドトラッキング" width="512" />
 
-## Model
+## モデル
 
-Creating a basic hand model:
+基本的な手のモデルを作成する:
 
 ```javascript
 const joints = [];
@@ -26,9 +26,9 @@ if (hand) {
 }
 ```
 
-## Updates
+## 更新
 
-Every frame, joint data can change position, rotation, and other details.
+毎フレーム、関節データは位置、回転、その他の詳細を変更できます。
 
 ```javascript
 for (let i = 0; i < joints.length; i++) {
@@ -41,18 +41,18 @@ for (let i = 0; i < joints.length; i++) {
 }
 ```
 
-## Tracking
+## トラッキング
 
-Hand tracking is subject to the reliability and sophistication of the underlying system. There might be cases when tracking is not possible due to obstructions between cameras and hands, or when hands interlock in a complex way. While Computer Vision techniques are improving, when designing content with hands as an input source, their shortcomings should be taken into consideration.
+ハンドトラッキングは、基盤となるシステムの信頼性と洗練度に左右されます。カメラと手の間に障害物がある場合や、手が複雑に絡み合う場合など、トラッキングが不可能なケースがあります。コンピュータビジョン技術は進歩していますが、手を入力ソースとするコンテンツを設計する際には、その欠点を考慮に入れるべきです。
 
-## Skinning
+## スキニング
 
-A skinned mesh for a hand can used. You can check out [this project][5] as an example:
+手のスキニングされたメッシュを使用できます。例として、[このプロジェクト][5]を確認できます。
 
-<img loading="lazy" src="/img/user-manual/xr/skinned-hands.webp" alt="Hand tracking using skinned meshes" width="512" />
+<img loading="lazy" src="/img/user-manual/xr/skinned-hands.webp" alt="スキニングされたメッシュを使用したハンドトラッキング" width="512" />
 
 [1]: https://immersive-web.github.io/webxr-hand-input/
-[2]: https://api.playcanvas.com/classes/Engine.XrHand.html
-[3]: https://api.playcanvas.com/classes/Engine.XrFinger.html
-[4]: https://api.playcanvas.com/classes/Engine.XrJoint.html
+[2]: https://api.playcanvas.com/engine/classes/XrHand.html
+[3]: https://api.playcanvas.com/engine/classes/XrFinger.html
+[4]: https://api.playcanvas.com/engine/classes/XrJoint.html
 [5]: https://playcanvas.com/project/771952/overview/webxr-realistic-hands

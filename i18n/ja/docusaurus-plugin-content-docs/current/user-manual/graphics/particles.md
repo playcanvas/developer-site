@@ -1,6 +1,6 @@
 ---
 title: パーティクル
-sidebar_position: 5
+sidebar_position: 8
 ---
 
 PlayCanvasはパーティクルシステムの作成と編集のための包括的なサポートを提供します。
@@ -41,5 +41,5 @@ this.entity.particlesystem.play();
 ソフトパーティクルは、シーンジオメトリと交差する場所近くでフェードアウトするパーティクルのことを意味します。[```depthSoftening```][5]を使用してSoftパーティクルを有効にした場合は、パーティクルを描画するカメラに[Depthマップ][6]レンダリングを有効にする必要があります。
 
 [4]: /user-manual/scenes/components/particlesystem
-[5]: https://api.playcanvas.com/classes/Engine.ParticleSystemComponent.html#depthSoftening
+[5]: https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html#depthsoftening
 [6]: /user-manual/graphics/cameras/depth-layer

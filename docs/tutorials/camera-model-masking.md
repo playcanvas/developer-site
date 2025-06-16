@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample showing to use render masking on the lights and models to enable lighting to only affect certain models and cameras to render certain models.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/D4ZYtQrG/" title="Camera model masking" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/D4ZYtQrG/" title="Camera model masking" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/436772/'>Open Project ↗</Link>

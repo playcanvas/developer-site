@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/672
 Example of how to use WebXR Hit Test API. That allows to hit test real world geometry.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/Kjol3uRS/" title="WebXR AR: Hit Test" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/Kjol3uRS/" title="WebXR AR: Hit Test" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438
 A sample showing how to lock the mouse upon clicking.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/2Epvl0CT/" title="Locking the mouse" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/2Epvl0CT/" title="Locking the mouse" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

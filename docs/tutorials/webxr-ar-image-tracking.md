@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Example of how to use WebXR Augmented Reality: Image Tracking API. That allows to *actively* track real world images based on provided sample.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/PCsSvN5h/" title="WebXR: AR Image Tracking" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/PCsSvN5h/" title="WebXR: AR Image Tracking" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/739875/'>Open Project ↗</Link>

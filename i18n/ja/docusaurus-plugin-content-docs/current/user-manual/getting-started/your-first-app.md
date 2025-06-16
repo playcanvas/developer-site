@@ -6,7 +6,7 @@ sidebar_position: 3
 PlayCanvasでのアプリケーション開発は簡単で楽しいものです。基本的なことを学ぶために次のシンプルな3Dアプリを作成しましょう。
 
 <div className="iframe-container">
-    <iframe loading="lazy"  src="https://playcanv.as/p/TnUtDXWp/" title="Simple PlayCanvas App"></iframe>
+    <iframe  src="https://playcanv.as/p/TnUtDXWp/" title="Simple PlayCanvas App" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *矢印キーを使って赤いボールを動かします。*
@@ -96,11 +96,11 @@ Movement.prototype.initialize = function() {
 // update code called every frame
 Movement.prototype.update = function(dt) {
     // get which keys are pressed
-    var keyboard = this.app.keyboard;
-    var left  = keyboard.isPressed(pc.KEY_LEFT);
-    var right = keyboard.isPressed(pc.KEY_RIGHT);
-    var up    = keyboard.isPressed(pc.KEY_UP);
-    var down  = keyboard.isPressed(pc.KEY_DOWN);
+    const keyboard = this.app.keyboard;
+    const left  = keyboard.isPressed(pc.KEY_LEFT);
+    const right = keyboard.isPressed(pc.KEY_RIGHT);
+    const up    = keyboard.isPressed(pc.KEY_UP);
+    const down  = keyboard.isPressed(pc.KEY_DOWN);
 
     // move this entity based on which keys are pressed
     // dt is the time in seconds since the last frame and stands for 'delta time'

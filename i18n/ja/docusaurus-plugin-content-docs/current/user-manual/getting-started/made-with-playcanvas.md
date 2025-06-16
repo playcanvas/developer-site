@@ -12,7 +12,7 @@ PlayCanvasのユーザーによって作成された素晴らしいゲームや�
 紹介されたコンテンツへのリンクは、[ブログ投稿][2022-blog-post]で見つけることができます。
 
 <div className="iframe-container">
-    <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/46f73gp1_TU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/46f73gp1_TU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 
@@ -21,7 +21,7 @@ PlayCanvasのユーザーによって作成された素晴らしいゲームや�
 Links to the content showcased can be found on the [blog post][2021-blog-post].
 
 <div className="iframe-container">
-    <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/FrUUrVRpbzg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/FrUUrVRpbzg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 [awesome-playcanvas]: https://github.com/playcanvas/awesome-playcanvas

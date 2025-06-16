@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/457
 Sample showing how to pick at an entity
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/QGiL8OdM/" title="Simple shape raycasting" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/QGiL8OdM/" title="Simple shape raycasting" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

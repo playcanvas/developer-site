@@ -33,7 +33,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889
 最終的には、以下のようになり、ボタンのクリックでインタースティシャル広告とリワード広告を呼び出し、リフレッシュボタンでリワード広告が表示されるかどうかを確認できます(後述)。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/e/p/OkynewOO/" title="Finished Tutorial"></iframe>
+    <iframe src="https://playcanv.as/e/p/OkynewOO/" title="Finished Tutorial" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 ## 設定

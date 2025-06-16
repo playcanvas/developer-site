@@ -28,4 +28,4 @@ You can control an LayoutGroup component's properties using a [script component]
 
 [0]: /user-manual/user-interface/layout-groups
 [2]: /user-manual/scenes/components/script
-[3]: https://api.playcanvas.com/classes/Engine.LayoutGroupComponent.html
+[3]: https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html

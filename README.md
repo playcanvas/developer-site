@@ -52,7 +52,7 @@ When anything in `docs` is updated, run:
 tx push --silent
 ```
 
-Once translation acitivity on Transifex is complete, run:
+Once translation activity on Transifex is complete, run:
 
 ```sh
 tx pull -l ja --silent

@@ -146,3 +146,8 @@ html[data-theme='dark'] .navbar--github-link:before {
   padding-top: 3rem;
   padding-bottom: 1rem;
 }
+
+/* used by web components tag reference tables */
+.nowrap-first-col td:first-child {
+  white-space: nowrap;
+}

@@ -18,7 +18,7 @@ When you [publish to playcanvas.com][2], your application is assigned a URL. To 
         <title>My Great Game</title>
     </head>
     <body>
-        <iframe loading="lazy" src="https://playcanv.as/p/PROJECT_ID/"></iframe>
+        <iframe src="https://playcanv.as/p/PROJECT_ID/" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
     </body>
 </html>
 ```

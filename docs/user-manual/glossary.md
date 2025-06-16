@@ -1,6 +1,6 @@
 ---
 title: Glossary
-sidebar_position: 26
+sidebar_position: 23
 ---
 
 Here is an overview of some of the terms we use to describe the PlayCanvas Engine and Tools.

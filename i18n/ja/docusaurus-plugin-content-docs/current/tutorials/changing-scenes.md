@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 シーンの読み込みに関する完全なドキュメントは、[ユーザーマニュアル][documentation-page]にあります。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/e/p/IP7FtbDj/" title="Changing Scenes"></iframe>
+    <iframe src="https://playcanv.as/e/p/IP7FtbDj/" title="Changing Scenes" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/437633/'>Open Project ↗</Link>

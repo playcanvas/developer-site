@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 An example of a radial loading circle
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/WVAhW4ft/" title="Loading Circle UI" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/WVAhW4ft/" title="Loading Circle UI" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/705273/'>Open Project ↗</Link>

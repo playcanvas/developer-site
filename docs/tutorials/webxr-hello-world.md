@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Basic scene with support for VR camera
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/z7myUkHP/" title="WebXR Hello World" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/z7myUkHP/" title="WebXR Hello World" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/433339/'>Open Project ↗</Link>

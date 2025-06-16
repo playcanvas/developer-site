@@ -1,5 +1,5 @@
 ---
-title: キューブマップ (Cubemap)
+title: Cubemap
 ---
 
 キューブマップ (Cubemap) はTextureアセットの一種で、1つのキューブのそれぞれの面を表す6つのTextureアセットから構成されます。通常は以下の2つの用途があります。
@@ -8,7 +8,7 @@ title: キューブマップ (Cubemap)
 2. キューブマップは、任意のマテリアルに反射を追加することができます。シーン内の光沢のあるクロムのボールベアリングを想像してみてください。そのボールは周囲のシーンを反射します。オープンな環境では、通常、シーンのスカイボックスキューブマップを反射オブジェクトのマテリアルのキューブマップとして設定します。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/xp7v1oFB/" title="Cubemap"></iframe>
+    <iframe src="https://playcanv.as/b/xp7v1oFB/" title="Cubemap" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 ## キューブマップテクスチャのインポート

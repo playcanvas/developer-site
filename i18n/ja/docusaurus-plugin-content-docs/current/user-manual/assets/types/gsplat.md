@@ -2,18 +2,18 @@
 title: GSplat
 ---
 
-A GSplat asset contains 3D Gaussian Splat data. PlayCanvas supports the import of GSplat data from [PLY](https://en.wikipedia.org/wiki/PLY_(file_format)) files.
+GSplatアセットには3D Gaussian Splatデータが含まれています。PlayCanvasは[PLY](https://en.wikipedia.org/wiki/PLY_(file_format))ファイルからのGSplatデータのインポートをサポートしています。
 
-## Asset Inspector
+## アセットインスペクター {#asset-inspector}
 
-You can select a GSplat asset in the [Assets Panel](/user-manual/editor/assets) and view it in the [Inspector](/user-manual/editor/inspector).
+[アセットパネル](/user-manual/editor/interface/assets)でGSplatアセットを選択し、[インスペクター](/user-manual/editor/interface/inspector)で表示できます。
 
-![GSplat Asset Inspector](/img/user-manual/assets/types/asset-inspector-gsplat.png)
+![GSplat アセットインスペクター](/img/user-manual/assets/types/asset-inspector-gsplat.png)
 
-The META section lists some key properties of the data.
+METAセクションには、データの主要なプロパティがいくつかリストされています。
 
-| プロパティ名 | 説明 |
+| プロパティ | 説明 |
 | -------- | ----------- |
-| Format   | PLY supports `ascii 1.0`, `binary_little_endian 1.0`, and `binary_big_endian 1.0` |
-| Splats   | The total number of Gaussians stored in the PLY file |
-| Properties | The list of per-Gaussian properties stored in the PLY file (`x`, `y`, `z`, `opacity` and so on) |
+| フォーマット   | PLYは `ascii 1.0`、`binary_little_endian 1.0`、および `binary_big_endian 1.0` をサポートしています |
+| Splats   | PLYファイルに保存されているGaussianの総数 |
+| プロパティ | PLYファイルに保存されているGaussianごとのプロパティのリスト（`x`、`y`、`z`、`opacity`など） |

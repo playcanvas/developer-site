@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Get started making your own space shooter game by forking this template Asteroids shooter! Aim with your mouse and fire with your left button. Survive as long as you can!
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/cAFbOEtL/" title="Space Rocks!" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/cAFbOEtL/" title="Space Rocks!" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/1029772/'>Open Project ↗</Link>

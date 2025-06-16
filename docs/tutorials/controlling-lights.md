@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/tiKpka9M/" title="Controlling Lights"></iframe>
+    <iframe src="https://playcanv.as/p/tiKpka9M/" title="Controlling Lights" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *Press 1, 2 or 3 to enable/disable the spot, point and directional lights respectively.*
@@ -211,5 +211,8 @@ LightHandler.prototype.pivot = function () {
 </TabItem>
 </Tabs>
 
-[1]: https://api.playcanvas.com/classes/Engine.LightComponent.html
+</TabItem>
+</Tabs>
+
+[1]: https://api.playcanvas.com/engine/classes/LightComponent.html
 [2]: https://playcanvas.com/project/405812/overview/tutorial-controlling-lights

@@ -5,7 +5,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/smskdMrk/" title="Procedural Levels"></iframe>
+    <iframe src="https://playcanv.as/p/smskdMrk/" title="Procedural Levels" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 This project uses [clone()][1] function on the Entity to randomly generate a level from Entities that have been created in the Editor.
@@ -115,5 +115,5 @@ Generate.prototype.initialize = function() {
 </TabItem>
 </Tabs>
 
-[1]: https://api.playcanvas.com/classes/Engine.Entity.html#clone
+[1]: https://api.playcanvas.com/engine/classes/Entity.html#clone
 [2]: https://playcanvas.com/project/405864

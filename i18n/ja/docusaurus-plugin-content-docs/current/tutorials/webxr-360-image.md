@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/434
 360 Image with WebXR support | Image Credit: Bob Dass from https://www.flickr.com/photos/54144402@N03/
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/v6qoi4Yt/" title="WebXR 360 Image" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/v6qoi4Yt/" title="WebXR 360 Image" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

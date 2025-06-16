@@ -11,7 +11,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 :::
 
 <div className='iframe-container'>
-    <iframe loading="lazy" src="https://playcanv.as/p/HI8kniOx/" title="Animation Blending"></iframe>
+    <iframe src="https://playcanv.as/p/HI8kniOx/" title="Animation Blending" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 :::info

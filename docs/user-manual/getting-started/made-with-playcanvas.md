@@ -12,7 +12,7 @@ Find more fantastic games and experiences made by our users in the [PlayCanvas A
 Links to the content showcased can be found on the [blog post][2022-blog-post].
 
 <div className="iframe-container">
-    <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/46f73gp1_TU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/46f73gp1_TU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## PlayCanvas Showcase 2021
@@ -20,7 +20,7 @@ Links to the content showcased can be found on the [blog post][2022-blog-post].
 Links to the content showcased can be found on the [blog post][2021-blog-post].
 
 <div className="iframe-container">
-    <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/FrUUrVRpbzg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/FrUUrVRpbzg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 [awesome-playcanvas]: https://github.com/playcanvas/awesome-playcanvas

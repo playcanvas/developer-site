@@ -1,159 +1,168 @@
 ---
 title: 移行ガイド
-sidebar_position: 11
+sidebar_position: 4
 ---
 
-## レガシースクリプトプロジェクトの移行方法
+ESMスクリプトは、PlayCanvasアプリケーションの推奨される開発方法として、従来のクラシックスクリプト方式に取って代わります。クラシックスクリプトは既存プロジェクトで引き続き動作し、今後もサポートされますが、新しいプロジェクトではESM形式の使用を推奨します。
 
-2016 年 7 月、PlayCanvas は[現在のスクリプトシステム][1](Scripts 2.0 としても知られています)を採用しました。レガシー スクリプトプロジェクトは通常通り動作し続けますが、レガシー スクリプトプロジェクトのフォークや新規作成はできなくなりました。
+## 段階的な移行
 
-2020 年 12 月には、レガシースクリプトプロジェクトが近い将来 read-only になることが発表されました。エディタで開くと、プロジェクトダッシュボードには次のようなメッセージが表示されます。
+プロジェクト内でESMスクリプトを使うかどうかは完全に任意であり、既存のプロジェクトに影響を与えることなく、自由なタイミングで新しいESM形式へ段階的に移行することが可能です。
 
-![Dashboard Legacy Script](/img/user-manual/scripting/migration-guide/dashboard-warning.png)
+:::tip
 
-エディタには、次のようなメッセージが表示されます。
+**プロジェクトはESMスクリプトとクラシックスクリプトの両方を含めることができます**
 
-![Editor Legacy Script](/img/user-manual/scripting/migration-guide/editor-warning.png)
+すべてのスクリプトを一度に更新する必要はありません。スクリプトを段階的に移行し、反復的にテストすることをお勧めします。
 
-レガシースクリプトプロジェクトで作業を続けたい場合は、現在の形式に移行することをお勧めします。残念なことに、これには自動化された移行プロセスはありません。代わりに、このガイドに従って手動で移行する必要があります。
+:::
 
-### ステップ 1 - 新しいプロジェクトを作成する
+## コード変換ツール（Codemod）
 
-最初に、アセットとコードを転送するための新しい空のプロジェクトを作成します。シーンルートエンティティの下にデフォルトで作成される 4 つのエンティティを削除してください。
+クラシックスクリプトをESM形式へ移行するために、コードを自動的に更新する[codemod](https://codemod.com/registry/playcanvas-esm-scripts)を用意しています。
 
-### ステップ 2 - アセットを転送する
+このcodemodは[GitHubリポジトリ](https://github.com/playcanvas/codemods)で公開されており、以下のコマンドで実行できます：
 
-次に、すべてのアセットを新しいプロジェクトにコピーします(レガシープロジェクトのスクリプトは*実際にはアセットではないため*、スクリプトは除外します)。右クリックのコンテキストメニューを使用して、アセットを 1 つのプロジェクトから別のプロジェクトにコピーして貼り付けることができます。
-
-![Copy Paste Assets](/img/user-manual/scripting/migration-guide/copy-assets.png)
-
-ただし、レガシースクリプトプロジェクトはかなり古いため、ファイル拡張子なしでアセットがインポートされ、インスペクターパネルで表示できないメタデータがある可能性があるため、ソースアセットをダウンロードして新しいプロジェクトにアップロードすることを検討する必要があります。
-
-### ステップ 3 - スクリプトを転送する
-
-プロジェクトダッシュボードから、レガシースクリプトプロジェクトのスクリプトをダウンロードします。
-
-![Download Scripts](/img/user-manual/scripting/migration-guide/download-scripts.png)
-
-レガシープロジェクトが GitHub リポジトリに接続されている場合は、そこからスクリプトをダウンロードします。
-
-次に、レガシースクリプトを新しいプロジェクトにアップロードできます。
-
-### ステップ 4 - スクリプトを現在の形式に更新する
-
-新しいプロジェクトに転送されたスクリプトは、現在の形式に更新する必要があります。以下は、レガシーフォーマットを示す例です。
-
-```javascript
-pc.script.attribute('speed', 'number', 10);
-
-pc.script.create('myScript', function (app) {
-    // Creates a new MyScript instance
-    var MyScript = function (entity) {
-        this.entity = entity;
-    };
-
-    MyScript.prototype = {
-        // Called once after all resources are loaded and before the first update
-        initialize: function () {
-        },
-
-        // Called every frame, dt is time in seconds since last update
-        update: function (dt) {
-        }
-    };
-
-    return MyScript;
-});
+```bash
+npx codemod playcanvas-esm-scripts
 ```
 
-こちらが、現在のフォーマットに相当するスクリプトです。
+## 既知の違い
+
+一般的に、ESMスクリプトはより表現力豊かで柔軟なプロジェクト作成を可能にします。移行プロセスは可能な限りシームレスに保たれていますが、いくつか重要な違いがあります。
+
+### モジュールスコープ
+
+**ESMスクリプトはモジュールスコープ、クラシックスクリプトはグローバルスコープ**です。これは、モジュールが他のファイルで定義された変数に暗黙的にアクセスできないことを意味します。設定をグローバルに定義するようなケースでは、ESMでは読み込み順に依存できないため、代わりに`import/export`構文を使用して依存関係を明示する必要があります。
+
+<details>
+<summary>**コード例を見る**</summary>
 
 ```javascript
-var MyScript = pc.createScript('myScript');
+// config.js
+var SPEED = 10;
 
-MyScript.attributes.add('speed', { type: 'number', default: 10 });
-
-// initialize code called once per entity
-MyScript.prototype.initialize = function() {
-    var app = this.app;       // application instance is available as this.app
-    var entity = this.entity; // entity property already set up
-};
-
-// update code called every frame
-MyScript.prototype.update = function(dt) {
-};
+// script.js
+// ❌ 動作しません。`SPEED` は config.js 内でスコープされているため
+console.log(SPEED)
 ```
 
-注意すべき点:
-* 現在のスクリプト形式にはコンストラクタはありません。コンストラクタコードは `initialize` 関数に移動する必要があります。
-* スクリプトの `pc.Application` インスタンスである `app` は `this.app` になります。
-* `this.entity` は自動的に現在のフォーマットのスクリプトで使用できるようになりました。
-
-#### スクリプトイベントの移行
-
-レガシースクリプトでは、`enable`、`disable`、`destroy` などのイベントを次のように処理します。
+このような暗黙の依存関係は、読み込み順が変わると壊れてしまいます。代わりに次のようにします：
 
 ```javascript
-onEnable: function () {
+// config.mjs
+export const SPEED = 10
 
-},
-
-onDisable: function () {
-
-},
-
-onDestroy: function () {
-
-},
+// script.mjs
+import { SPEED } from './config.mjs';
+// ✅ 動作します！
+console.log(SPEED); 
 ```
 
-これらを現在のスクリプト形式に移行するには、スクリプトの `initialize` 関数でイベントハンドラーを登録する必要があります。
+</details>
+
+[ESモジュールと通常のスクリプトの違いについてはこちら](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules#other_differences_between_modules_and_standard_scripts)もご覧ください。
+
+### スクリプトの読み込み順序
+
+:::note
+
+**ESMスクリプトには読み込み順の概念がありません。**
+
+:::
+
+従来のスクリプトでは依存関係を整理する目的で読み込み順が使用されていましたが、ESモジュールでは `import/export` によって明示的に依存関係を定義できます。そのため、ESMスクリプトにおいて読み込み順に依存することは避け、明示的なインポートを行ってください。
+
+### 新しい `Script` クラス
+
+ESMスクリプトでは、新しい `Script` 基底クラスがデフォルトとなり、以前の `ScriptType` クラスの代わりになります。`Script` クラスは最小限の機能のみを提供し、いくつかの機能は省略されています。
+
+なお、`ScriptType` クラスは引き続き使用可能ですが（内部的には `ScriptType` は `Script` を継承）、いくつかの理由からESMスクリプトでは推奨されません。
+
+#### 属性イベント
+
+:::note
+
+ESMスクリプトでは属性イベントが発火しません。
+
+:::
+
+`Script` クラスは `attr:[name]` の形式の属性イベントをサポートしていません。これは、エンジンがクラスメンバーを内部的に上書きすることで、ES6のクラス構文と互換性がなく、デバッグが困難になるためです。
+
+代わりに、以下のように独自のイベントを定義してください：
+
+<details>
+<summary>**コード例を見る**</summary>
 
 ```javascript
-MyScript.prototype.initialize = function() {
-    this.on("enable", function () {
+const watch = (target, prop) => {
+    const privateProp = `#{prop}`;
+    target[privateProp] = target[prop];
 
-    });
+    Object.defineProperty(target, prop, {
+        set(value) {
+            if (target[privateProp] !== value) {
+                target.fire(`changed:${prop}`, value);
+                target[privateProp] = value;
+            }
+        },
+        get() {
+            return this[privateProp];
+        }
+    });
+}
 
-    this.on("disable", function () {
+import { Script } from 'playcanvas'
 
-    });
+export class Rotate extends Script {
+    static scriptName = 'rotate';
 
-    this.on("destroy", function () {
+    /** attribute */
+    speed = 10;
 
-    });
-};
-```
+    initialize() {
+        watch(this, 'speed');
 
-### ステップ 5 - シーンの階層を転送する
-
-次に、レガシープロジェクトのシーン階層を転送します。PlayCanvasエディターでは、2 つの Editor インスタンス間でコピー&ペーストをサポートしています。ただし、レガシーScriptコンポーネントが選択された場合、この操作は失敗します。そのため、最初にレガシースクリプトプロジェクトからすべてのScriptコンポーネントを削除する必要があります。これを行うには、レガシーScriptコンポーネントを持つすべてのエンティティを選択します。ブラウザの JavaScript コンソールで次の JavaScript を実行します。
-
-```javascript
-var entities = editor.call('entities:list').filter(function(entity) {
-    return entity.has('components.script');
-});
-if (entities.length) {
-    editor.call('selector:set', 'entity', entities);
-} else {
-    editor.call('selector:clear');
+        this.on('changed:speed', console.log)
+    }
 }
 ```
 
-以下のように表示されるはずです。
+</details>
 
-![Select Script Entities](/img/user-manual/scripting/migration-guide/select-script-entities.png)
+この方法ならスクリプト属性だけでなく、任意のクラスメンバーに対してもイベントを発行できます。
 
-次に、インスペクターで削除ボタンをクリックします。
+#### 属性のコピー
 
-![Delete Script Components](/img/user-manual/scripting/migration-guide/delete-script-components.png)
+:::note
 
-これで、read-only プロジェクトから新しい宛先プロジェクトにゲームの階層をコピーして貼り付けることができます。
+**ESMスクリプトの属性はコピーされず、参照で渡されます。**
 
-これで完了したら、CTRL+Z(Mac の場合は CMD+Z)を押して、前のレガシーScriptコンポーネントの削除を元に戻します。
+:::
 
-Scriptコンポーネントがあるすべてのエンティティを再選択します。それに対応する新しいプロジェクトの各エンティティにScriptコンポーネントを作成し、それらのコンポーネントに対応するスクリプトを追加します。最後に、すべてのScriptコンポーネントのすべてのスクリプトのすべてのスクリプト属性を反復処理して、その値を新しいプロジェクトにコピーします。
+属性はもはやコピーされず、参照によって渡されます。この変更は、ES6クラスと互換性がない[`ScriptType` のバグ](https://github.com/playcanvas/engine/issues/6316)によるものです。
 
-これで、移行が完了しました。
+値をコピーしたい場合は、getter/setter を用いて手動かつ明示的に行うことをお勧めします。
 
-[1]: https://blog.playcanvas.com/playcanvas-scripts-2-0/
+<details>
+<summary>**コード例を見る**</summary>
+
+```javascript
+import { Script, Vec3 } from 'playcanvas';
+
+export class Rotate extends Script {
+    static scriptName = 'rotate';
+
+    _speed = new Vec3();
+
+    set speed(value) {
+        this._speed.copy(value)
+    }
+
+    get speed() {
+        return this._speed;
+    }
+}
+```
+
+</details>

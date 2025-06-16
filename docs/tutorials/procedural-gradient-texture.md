@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Example of creating a procedural texture with a gradient effect by LeXXik
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/5qggchI4/" title="Procedural Gradient Texture" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/5qggchI4/" title="Procedural Gradient Texture" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/708598/'>Open Project ↗</Link>

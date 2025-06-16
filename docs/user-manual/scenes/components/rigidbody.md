@@ -39,4 +39,4 @@ You can control a Rigid Body component's properties using a [script component][5
 
 [4]: /user-manual/scenes/components/collision/
 [5]: /user-manual/scenes/components/script
-[6]: https://api.playcanvas.com/classes/Engine.RigidBodyComponent.html
+[6]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html

@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 A sample showing how to place objects in the world without using physics. Click on the ground to place boxes.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/Z2ieIwf8/" title="Place entity without physics" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/Z2ieIwf8/" title="Place entity without physics" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/437894/'>Open Project ↗</Link>

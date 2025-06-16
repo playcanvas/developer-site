@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Realistic hands in VR!
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/pG6tosLX/" title="WebXR Realistic Hands" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/pG6tosLX/" title="WebXR Realistic Hands" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/771952/'>Open Project ↗</Link>

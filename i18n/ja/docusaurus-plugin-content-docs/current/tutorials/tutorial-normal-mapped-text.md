@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/371
 Dynamically generate normal maps and parallax maps for text
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/MbMb81DM/" title="Tutorial: Normal Mapped Text" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/MbMb81DM/" title="Tutorial: Normal Mapped Text" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

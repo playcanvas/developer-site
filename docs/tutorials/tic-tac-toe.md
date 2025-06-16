@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 The classic game Tic Tac Toe
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/i5csiIb9/" title="Tic Tac Toe" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/i5csiIb9/" title="Tic Tac Toe" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/671439/'>Open Project ↗</Link>

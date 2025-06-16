@@ -44,4 +44,4 @@ Soundコンポーネントは、コンポーネントパネルの右上にある
 [Scriptコンポーネント][2]を使用して、Soundコンポーネントのプロパティを制御することができます。Soundコンポーネントのスクリプトインターフェイスは[こちら][3]です。
 
 [2]: /user-manual/scenes/components/script
-[3]: https://api.playcanvas.com/classes/Engine.SoundComponent.html
+[3]: https://api.playcanvas.com/engine/classes/SoundComponent.html

@@ -14,7 +14,7 @@ const shaderDefinition = {
         aPosition: pc.SEMANTIC_POSITION,
         aUv0: pc.SEMANTIC_TEXCOORD0
     },
-    vshader: vertexShader.resource
+    vshader: vertexShader.resource,
     fshader: fragmentShader.resource
 };
 

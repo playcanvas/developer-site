@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Learn how to render world space UI over the top of the world
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/0Ycgs0n7/" title="World space UI rendering on top" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/0Ycgs0n7/" title="World space UI rendering on top" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/691979/'>Open Project ↗</Link>

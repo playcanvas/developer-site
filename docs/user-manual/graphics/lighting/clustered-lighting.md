@@ -126,5 +126,5 @@ this.app.scene.lighting.debugLayer = undefined;
 ```
 
 [shadows]: /user-manual/graphics/lighting/shadows/#soft-shadows-vs-hard-shadows
-[pc-layer-api]: https://api.playcanvas.com/classes/Engine.Layer.html
-[pc-lighting-debug-layer-api]: https://api.playcanvas.com/classes/Engine.LightingParams.html#debugLayer
+[pc-layer-api]: https://api.playcanvas.com/engine/classes/Layer.html
+[pc-lighting-debug-layer-api]: https://api.playcanvas.com/engine/classes/LightingParams.html#debuglayer

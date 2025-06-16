@@ -1,9 +1,19 @@
 ---
 title: Billing
-sidebar_position: 24
+sidebar_position: 21
 ---
 
 Welcome to the Billing FAQ that lists the common questions relating to your PlayCanvas subscription.
+
+### Can businesses sign up to the Personal plan?
+
+Yes, providing the annual revenue of that business is below $100,000. Otherwise, the Organization plan should be selected.
+
+:::note
+
+We don't verify company revenues, so there's an element of trust involved. We rely on our users to support the ongoing development of PlayCanvas by choosing the plan that best matches their circumstances. Thanks for helping us keep PlayCanvas sustainable!
+
+:::
 
 ### Does my subscription auto-renew?
 
@@ -33,7 +43,7 @@ When you cancel your subscription, it will not revert to the free tier immediate
 
 ### What happens to my published apps when I cancel my subscription?
 
-Your published apps will be completely unaffected if you cancel your subscription.
+Your published apps will be completely unaffected if you cancel your subscription. This is true regardless of whether your apps are hosted by us or by you.
 
 ### What happens to my private projects when I cancel my subscription?
 
@@ -66,7 +76,13 @@ You may want to edit certain details that appear on your invoices such as:
 * Billing Address
 * Tax ID
 
-To do this, visit the account page for your subscribed account (remembering that Organizations have their own account page). Navigate to the Billing Info section and hit the Edit link. Fill out the payment details form and hit 'PAY NOW'. Note that editing the details of an existing subscription will not trigger a payment straight away. But on your next scheduled billing date, the invoice will show the updated details.
+To do this, visit the account page for your subscribed account (remembering that Organizations have their own account page). Navigate to the Billing Info section and hit the Edit link. Fill out the payment details form and hit 'PAY NOW'.
+
+:::note
+
+While the button says 'PAY NOW', editing the details of an existing subscription will not trigger a payment straight away. You will be billed as normal on the next billing date and the invoice will show the updated details.
+
+:::
 
 ### How is billing for Organization accounts calculated?
 
@@ -90,6 +106,10 @@ The billing events from May to October will be as follows:
 * 10th August: **$100**. The plan has 2 seats and no changes were made to the plan in the previous month.
 * 10th September: $50 - $50 x 21/31 = **$16.13**. The users has one seat on this billing date so is charged $50 for the upcoming month. A seat was removed on 20th August so it was only used for 10 of the 31 days between billing dates. Since the user paid $50 for that seat on the previous billing date, they are due a refund for the unused 21 days. So $50 x 21/31 is subtracted from the bill.
 * 10th October: **$50**. The plan has 1 seat and no changes were made to the plan in the previous month.
+
+### I have a Personal plan. Can I add a free user to my private project?
+
+No. You can only add users with a Personal plan to your private projects.
 
 ### How can I contact PlayCanvas about billing?
 

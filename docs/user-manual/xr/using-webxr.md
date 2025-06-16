@@ -105,4 +105,4 @@ Position, orientation and rays of different XR objects: input sources, tracked m
 
 Entering WebXR is required by browsers to be triggered by a *user action*. That means that it must be in response to a key press, a mouse click or a touch event. For that reason, there is no way to enter XR immediately on loading a page.
 
-[2]: https://api.playcanvas.com/classes/Engine.XrManager.html
+[2]: https://api.playcanvas.com/engine/classes/XrManager.html

@@ -59,7 +59,7 @@ How the Editor decides what is a new or removed mesh instance is done by the fol
 
 [material_asset]: /user-manual/assets/types/material/
 [texture_asset]: /user-manual/assets/types/texture/
-[template_asset]: /user-manual/templates/
-[render_component]: https://api.playcanvas.com/classes/Engine.RenderComponent.html
-[collision_component]: https://api.playcanvas.com/classes/Engine.CollisionComponent.html
+[template_asset]: /user-manual/editor/templates/
+[render_component]: https://api.playcanvas.com/engine/classes/RenderComponent.html
+[collision_component]: https://api.playcanvas.com/engine/classes/CollisionComponent.html
 [first_model_animation_import]: /tutorials/importing-first-model-and-animation/

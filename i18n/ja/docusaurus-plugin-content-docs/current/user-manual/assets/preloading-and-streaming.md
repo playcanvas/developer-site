@@ -36,14 +36,14 @@ sidebar_position: 7
 以下は、タグを使用して一連のアセットをロードする方法を示したJavaScriptの例です。
 
 ```javascript
-var assets = this.app.assets.findByTag("level-1");
-var count = 0;
+const assets = this.app.assets.findByTag("level-1");
+let count = 0;
 
-for (var i = 0; i < assets.length; i++) {
+for (let i = 0; i < assets.length; i++) {
     assets[i].once("load", function () {
         count++;
         if (count === assets.length) {
-            // 全てのアセットがロードされました。
+            // asset loading complete
         }
     });
     this.app.assets.load(assets[i]);

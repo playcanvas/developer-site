@@ -14,4 +14,4 @@ Audio Listenerコンポーネントは、コンポーネントパネルの右上
 [Script component][2]を使用して、Audio Listenerコンポーネントのプロパティをコントロールできます。Audio Listenerコンポーネントのスクリプティングインターフェイスは[こちら][3]です。
 
 [2]: /user-manual/scenes/components/script
-[3]: https://api.playcanvas.com/classes/Engine.AudioListenerComponent.html
+[3]: https://api.playcanvas.com/engine/classes/AudioListenerComponent.html

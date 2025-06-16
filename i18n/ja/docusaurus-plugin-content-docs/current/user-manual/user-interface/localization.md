@@ -128,12 +128,12 @@ console.log(localeNumberString);
 ローカライゼーションのための完全なエンジンAPIリファレンスについては、[このページ][2]を参照してください。
 
 [1]: https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html
-[2]: https://api.playcanvas.com/classes/Engine.I18n.html
-[3]: https://api.playcanvas.com/classes/Engine.I18n.html#getText
-[4]: https://api.playcanvas.com/classes/Engine.I18n.html#getPluralText
+[2]: https://api.playcanvas.com/engine/classes/I18n.html
+[3]: https://api.playcanvas.com/engine/classes/I18n.html#gettext
+[4]: https://api.playcanvas.com/engine/classes/I18n.html#getpluralText
 [5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
 [6]: http://www.thai-language.com/ref/breaking-words
 [7]: https://en.wikipedia.org/wiki/Zero-width_space
 [8]: http://www.thai-language.com/?nav=zwsp
 [10]: /tutorials/right-to-left-language-support/
-[11]: /user-manual/editor/assets/#copy-and-paste-between-projects
+[11]: /user-manual/editor/interface/assets/#copy-and-paste-between-projects

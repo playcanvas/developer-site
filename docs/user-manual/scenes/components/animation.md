@@ -28,4 +28,4 @@ The Animation component can be enabled or disabled using the toggle in the top r
 You can control an Animation component's properties using a [script component][2]. The Animation component's scripting interface is [here][3].
 
 [2]: /user-manual/scenes/components/script
-[3]: https://api.playcanvas.com/classes/Engine.AnimationComponent.html
+[3]: https://api.playcanvas.com/engine/classes/AnimationComponent.html

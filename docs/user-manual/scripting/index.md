@@ -1,33 +1,91 @@
 ---
 title: Scripting
-sidebar_position: 11
+sidebar_position: 9
 ---
 
-Scripts are how you make your PlayCanvas application interactive. They are written in regular **JavaScript** the same programming language that is used to program web pages.
+Scripts are the heart of interactivity in PlayCanvas. They're reusable pieces of code that you attach to Entities to define behaviors, handle user input, manage game logic, and bring your projects to life.
 
-You can think of your application as divided into two separate code bases. The Engine, which is provided by PlayCanvas, implements general purpose functionality such as graphics rendering, input handling, audio, and the interface to the PlayCanvas tools; and Scripts which are often specific to your application or re-usable chunks that provide useful behaviors.
+## Two Scripting Systems
 
-Generally you won't have to worry about the engine code, it's a single JavaScript file included into your application. If you're rewriting parts of the engine you probably don't need this introduction to scripting.
+PlayCanvas supports two scripting approaches:
 
-Here is an example of a simple script. It is called "rotate" and it rotates the entity that it is attached to by 10° every second.
+* **ESM Scripts** (`.mjs` files) - Modern ES Module-based scripts using class syntax. **Recommended for new projects.**
+* **Classic Scripts** (`.js` files) - The original PlayCanvas scripting system using prototype-based syntax.
+
+Both systems can coexist in the same project, allowing you to migrate gradually or use whichever approach fits your needs.
+
+## Quick Example
+
+Here's a simple script that rotates an entity:
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
-var Rotate = pc.createScript("rotate");
+import { Script } from 'playcanvas';
 
-Rotate.prototype.update = function (dt) {
-    this.entity.rotate(0, 10*dt, 0);
+export class Rotate extends Script {
+    static scriptName = 'rotate';
+
+    /** @attribute */
+    speed = 10;
+
+    update(dt) {
+        this.entity.rotate(0, this.speed * dt, 0);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
+```javascript
+var Rotate = pc.createScript('rotate');
+
+Rotate.attributes.add('speed', { type: 'number', default: 10 });
+
+Rotate.prototype.update = function(dt) {
+    this.entity.rotate(0, this.speed * dt, 0);
 };
 ```
 
-Scripts are defined by the name given when they are created and they are attached to [Script Component][1] via the Editor or by adding a script component to an Entity in your code.
+</TabItem>
+</Tabs>
 
-## Terminology
+## What You'll Learn
 
-Lets define a few pieces of terminology.
+### [Fundamentals](./fundamentals/index.md)
 
-* ***Script*** A script is a Javascript file that contains one or more definitions of Script Objects.
-* ***Script Component*** The script Component is defined in the PlayCanvas engine and gives a game Entity the functionality that loads a script and creates a script object.
-* ***ScriptType*** A ScriptType is a JavaScript object created using the `pc.createScript` function. It is essentially a new class which will be instantiated when it is added to an Entity.
-* ***Script Instance*** A script instance is an instance of a ScriptType. One script instance is created for every Entity that has a ScriptType attached to a script component.
+Core concepts that apply to all PlayCanvas scripts:
 
-[1]: /user-manual/scenes/components/script/
+* [Getting Started](./fundamentals/getting-started.md) - Basic script structure and syntax
+* [ESM Scripts](./fundamentals/esm-scripts.md) - Modern scripting with ES Modules
+* [Script Lifecycle](./fundamentals/script-lifecycle.md) - When and how script methods are called
+* [Script Attributes](./fundamentals/script-attributes/index.md) - Exposing configurable properties
+* [Calling the Engine API](./fundamentals/engine-api.md) - Key classes and patterns
+* [Events](./fundamentals/events.md) - Communication between scripts
+
+### [Editor Integration](./editor-users/index.md)
+
+Working with scripts in the PlayCanvas Editor:
+
+* [Managing Scripts](./editor-users/managing-scripts.md) - Creating and organizing script files
+* [Code Editor](./editor-users/code-editor.md) - Using the built-in code editor
+* [VS Code Extension](./editor-users/vscode-extension.md) - Enhanced development workflow
+* [Hot Reloading](./editor-users/hot-reloading.md) - Live code updates
+
+### [Debugging](./debugging/index.md)
+
+Tools and techniques for troubleshooting your scripts:
+
+* [Console Logging](./debugging/console-logging.md) - Basic debugging with console output
+* [Browser Dev Tools](./debugging/browser-dev-tools.md) - Advanced debugging techniques
+
+:::tip
+
+New to PlayCanvas scripting? Start with [Getting Started](./fundamentals/getting-started.md) to learn the basics, then explore [ESM Scripts](./fundamentals/esm-scripts.md) for the modern approach.
+
+:::

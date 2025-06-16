@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/102
 Create QR codes at runtime with https://github.com/davidshimjs/qrcodejs
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/O5MDA13T/" title="Create QR Code at runtime" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/O5MDA13T/" title="Create QR Code at runtime" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

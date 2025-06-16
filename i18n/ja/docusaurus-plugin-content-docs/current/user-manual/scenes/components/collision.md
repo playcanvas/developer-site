@@ -39,4 +39,4 @@ Collisionコンポーネントは、コンポーネントパネルの右上に�
 [Scriptコンポーネント][8]を使用してCollisionコンポーネントのプロパティを制御できます。Collisionコンポーネントのスクリプティングインターフェイスは[こちら][9]です。
 
 [8]: /user-manual/scenes/components/script
-[9]: https://api.playcanvas.com/classes/Engine.CollisionComponent.html
+[9]: https://api.playcanvas.com/engine/classes/CollisionComponent.html

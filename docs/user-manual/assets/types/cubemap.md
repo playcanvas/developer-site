@@ -8,7 +8,7 @@ Cubemaps are a special type of texture asset. They are formed from 6 texture ass
 2. A cubemap can add reflections to any material. Imagine a shiny, chrome ball bearing in your scene. The ball reflects the surrounding scene. For open environments, you would normally set the scene's sky box cubemap as the cubemap on a reflective object's materials.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/b/xp7v1oFB/" title="Cubemap"></iframe>
+    <iframe src="https://playcanv.as/b/xp7v1oFB/" title="Cubemap" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 ## Importing Cubemap Textures

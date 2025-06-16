@@ -51,5 +51,5 @@ An example below is using a silhouette of a character as the placeholder until i
 
 ![Lazy Load Character](/img/user-manual/optimization/loading/character-load.gif)
 
-[1]: /user-manual/templates/#when-do-i-need-to-load-template-assets
+[1]: /user-manual/editor/templates/#when-do-i-need-to-load-template-assets
 [2]: https://playcanv.as/p/tRUfwVg1/

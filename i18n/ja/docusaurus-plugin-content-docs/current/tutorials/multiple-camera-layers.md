@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/593
 Demonstration project that shows how to use multiple cameras and layers to render a mixed user interface of UI elements and world-space objects.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/h7V3tWZK/" title="Multiple Camera Layers" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/h7V3tWZK/" title="Multiple Camera Layers" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

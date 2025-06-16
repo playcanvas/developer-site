@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436
 Sample showing how to control the volume of a sound slot using curve data. Click on the scene to start the audio.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/hmRciuNn/" title="Sound volume control using curve" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/hmRciuNn/" title="Sound volume control using curve" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

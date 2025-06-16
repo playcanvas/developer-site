@@ -1,53 +1,53 @@
 ---
-title: Light Estimation
+title: 光の推定
 sidebar_position: 1
 ---
 
-In AR, the real world can have complex illumination and various environments. For better immersion and the ability to blend between the real and the virtual world, virtual objects can be shaded and illuminated based on Light Estimation data, such as:
+ARでは、現実世界は複雑な照明や様々な環境を持つことがあります。より良い没入感と、現実世界と仮想世界を融合させるために、仮想オブジェクトは光の推定データ（以下のようなもの）に基づいてシェーディングされ、照らされます。
 
- * **Directional light** (the most prominent), its rotation, intensity and color.
- * **Ambient light** in the form of L3 spherical harmonics.
- * **Reflections** in the form of a cube map ([currently not integrated][1]).
+*   **指向性ライト**（最も顕著なもの）、その回転、強度、色。
+*   **環境光**（L3球面調和関数形式）。
+*   **反射**（キューブマップ形式）([現在未統合][1]）。
 
-## Support
+## サポート
 
-You can check if light estimation is supported by the system:
+システムが光の推定をサポートしているかどうかを確認できます。
 
 ```javascript
 if (app.xr.lightEstimation.supportedColor) {
-    // light estimation access is supported
+    // 光の推定へのアクセスがサポートされています
 }
 
 app.xr.lightEstimation.on('available', () => {
-    // light estimation becomes available
+    // 光の推定が利用可能になります
 });
 ```
 
-## Directional Light
+## 指向性ライト
 
-The most basic information that light estimation provides is the most prominent directional light rotation, intensity and color:
+光の推定が提供する最も基本的な情報は、最も顕著な指向性ライトの回転、強度、色です。
 
 ```javascript
 const lightEstimation = app.xr.lightEstimation;
 
-// check if light estimation is available
+// 光の推定が利用可能かを確認
 if (lightEstimation.available) {
-    // rotate entity
+    // エンティティを回転
     entity.setRotation(lightEstimation.rotation());
 
-    // set light parameters
+    // ライトのパラメータを設定
     entity.light.intensity = lightEstimation.intensity;
     entity.light.color = lightEstimation.color;
 }
 ```
 
-## Ambient Light
+## 環境光
 
-As the environment is usually much more complex than a single directional light, light estimation provides ambient light information in the form of L3 SH (spherical harmonics).
+環境は通常、単一の指向性ライトよりもはるかに複雑であるため、光の推定はL3 SH（球面調和関数）形式で環境光情報を提供します。
 
-To use SH, the material either has a prefiltered cube map applied (scene skybox works also), or the constant ambient shader chunk (`ambientConstantPS`) should be updated.
+SHを使用するには、マテリアルにプリフィルタリングされたキューブマップが適用されているか（シーンのスカイボックスも機能します）、または定数環境シェーダーチャンク（`ambientConstantPS`）を更新する必要があります。
 
-You can set SH data per material:
+マテリアルごとにSHデータを設定できます。
 
 ```javascript
 if (app.xr.lightEstimation.available) {
@@ -55,16 +55,16 @@ if (app.xr.lightEstimation.available) {
 }
 ```
 
-If there is no prefiltered cube map or skybox on the scene, you can update the material chunk:
+シーンにプリフィルタリングされたキューブマップやスカイボックスがない場合は、マテリアルチャンクを更新できます。
 
 ```javascript
 material.chunks.ambientConstantPS = chunkCode;
 material.update();
 ```
 
-Shader chunk code:
+シェーダーチャンクコード：
 
-```c
+```glsl
 uniform vec3 ambientSH[9];
 
 void addAmbient(vec3 worldNormal) {
@@ -85,8 +85,8 @@ void addAmbient(vec3 worldNormal) {
 }
 ```
 
-## Reflections
+## 反射
 
-WebXR Light Estimation provides an estimation of the environment reflection in form of a cube map, but [at the moment][1] it is not integrated into PlayCanvas Engine.
+WebXR Light Estimationは、環境反射の推定をキューブマップ形式で提供しますが、[現時点では][1] PlayCanvas Engineには統合されていません。
 
 [1]: https://github.com/playcanvas/engine/issues/6070

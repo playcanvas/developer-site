@@ -187,7 +187,7 @@ The contrast of the baked ambient occlusion.
 
 Here you can create and manage Batch Groups for the Project. You can assign [Model][7] components and [Element][8] components to Batch Groups and the engine will attempt to reduce draw calls by merging the mesh instances of objects in the same group together. See more on Batching [here][9].
 
-## Loading Screen (Available for ORG users only) {#loading-screen-available-for-org-users-only}
+## Loading Screen {#loading-screen}
 
 Here you can set the script that creates the loading screen of you application. To create a new loading screen script click *Create Default*. See more information about custom loading screens [here][6].
 
@@ -241,7 +241,7 @@ When importing a scene (e.g. an FBX) this setting decides whether material files
 
 When importing a scene (e.g. an FBX) this setting decides whether texture files are overwritten with a new version imported from the scene.
 
-[1]: /user-manual/editor/toolbar
+[1]: /user-manual/editor/interface/toolbar
 [3]: /user-manual/assets/types/cubemap
 [5]: https://developer.nvidia.com/gpugems/gpugems3/part-iv-image-effects/chapter-24-importance-being-linear
 [6]: /user-manual/editor/launch-page/loading-screen

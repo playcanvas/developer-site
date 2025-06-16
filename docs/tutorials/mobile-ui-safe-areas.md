@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Example project to handle safe areas on the UI - https://developer.playcanvas.com/user-manual/user-interface/safe-area/
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/z5pXervL/" title="Mobile UI Safe Areas" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/z5pXervL/" title="Mobile UI Safe Areas" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/828118/'>Open Project ↗</Link>

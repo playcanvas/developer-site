@@ -164,9 +164,9 @@ entity.button.on('selectstart', (evt) => {
 });
 ```
 
-[1]: https://api.playcanvas.com/classes/Engine.XrInputSource.html
-[2]: https://api.playcanvas.com/classes/Engine.XrInput.html
-[3]: https://api.playcanvas.com/classes/Engine.XrManager.html
+[1]: https://api.playcanvas.com/engine/classes/XrInputSource.html
+[2]: https://api.playcanvas.com/engine/classes/XrInput.html
+[3]: https://api.playcanvas.com/engine/classes/XrManager.html
 [4]: https://www.w3.org/TR/webxr-gamepads-module-1/
 [5]: https://w3c.github.io/gamepad/
 [6]: https://github.com/immersive-web/webxr-input-profiles/tree/master/packages/registry

@@ -39,7 +39,7 @@ Here are some tips and hints on how to achieve good performance in your PlayCanv
 
 [1]: /user-manual/graphics/advanced-rendering/batching
 [2]: /user-manual/optimization/runtime-devicepixelratio
-[3]: https://api.playcanvas.com/classes/Engine.Application.html#autoRender
-[4]: https://api.playcanvas.com/classes/Engine.Application.html#renderNextFrame
-[5]: https://api.playcanvas.com/classes/Engine.RenderComponent.html#customAabb
-[6]: https://api.playcanvas.com/classes/Engine.ModelComponent.html#customAabb
+[3]: https://api.playcanvas.com/engine/classes/AppBase.html#autorender
+[4]: https://api.playcanvas.com/engine/classes/AppBase.html#rendernextframe
+[5]: https://api.playcanvas.com/engine/classes/RenderComponent.html#customaabb
+[6]: https://api.playcanvas.com/engine/classes/ModelComponent.html#customaabb

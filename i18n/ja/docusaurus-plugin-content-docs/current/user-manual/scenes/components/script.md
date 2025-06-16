@@ -20,4 +20,4 @@ PlayCanvasコードエディターでスクリプトを編集するには、リ�
 
 Scriptコンポーネントのスクリプトのインターフェースは[こちら][2]から確認できます。
 
-[2]: https://api.playcanvas.com/classes/Engine.ScriptComponent.html
+[2]: https://api.playcanvas.com/engine/classes/ScriptComponent.html

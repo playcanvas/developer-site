@@ -88,6 +88,6 @@ if (element.batchGroupId)
 
 [6]: /user-manual/scenes/settings#batch-groups
 [7]: /user-manual/scenes/components/model
-[8]: https://api.playcanvas.com/classes/Engine.BatchManager.html
+[8]: https://api.playcanvas.com/engine/classes/BatchManager.html
 [9]: /user-manual/scenes/components/sprite
 [10]: /user-manual/scenes/components/element

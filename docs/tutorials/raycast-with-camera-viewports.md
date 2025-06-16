@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Raycasting with multiple camera viewports. Click on the shapes in each view
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/dXvrDzH2/" title="Raycast with Camera Viewports" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/dXvrDzH2/" title="Raycast with Camera Viewports" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/964118/'>Open Project ↗</Link>

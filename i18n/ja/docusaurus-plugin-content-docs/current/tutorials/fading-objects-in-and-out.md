@@ -7,5 +7,5 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436
 Sample showing how to fade a model in and out using on a per model basis.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/kvToWplO/" title="Fading objects in and out" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/kvToWplO/" title="Fading objects in and out" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

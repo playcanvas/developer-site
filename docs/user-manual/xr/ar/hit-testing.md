@@ -7,11 +7,11 @@ In an AR/MR context, the interaction of virtual world objects with the real worl
 
 This can be used in various ways and one of the most common is placing a virtual object in space so that it feels planted in the real world.
 
-## Reliability
+## Reliability {#reliability}
 
 Hit Testing is implemented by an underlying system building an understanding of ever-evolving real-world geometry. Some platforms rely on pre-captured information, while some platforms estimate geometry in real-time based on Computer Vision techniques. So the reliability of hit testing is subject to the capabilities of the underlying system.
 
-## Support
+## Support {#support}
 
 You can check if hit testing is supported by the system:
 
@@ -21,7 +21,7 @@ if (app.xr.hitTest.supported) {
 }
 ```
 
-## Hit Test Source
+## Hit Test Source {#hit-test-source}
 
 When we want to start hit testing, we issue a request and are provided with a `HitTestSource` instance, which then provides results in the form of events. We can manage the lifetime of the source that way.
 
@@ -48,7 +48,7 @@ We can stop hit testing by removing its source:
 hitTestSource.remove();
 ```
 
-## Monoscope (Touch Screen)
+## Monoscope (Touch Screen) {#monoscope-touch-screen}
 
 When an XR session is started on a monoscopic device (such as a mobile phone with a touch screen), then it is possible to start hit tests based on user touches on the screen:
 
@@ -67,7 +67,7 @@ app.xr.hitTest.start({
 
 Bear in mind that transient input sources (such as touch) do not provide hit test results straight away, as the hit test source is created as an asynchronous operation and its results are a subject of the underlying system being able to provide such information. This means that a touch might not provide any hit test results within its short-lived time.
 
-## Input Source
+## Input Source {#input-source}
 
 The most common way to start hit testing is from a ray of an input source (e.g. controllers or hands):
 
@@ -83,7 +83,7 @@ inputSource.hitTestStart({
 });
 ```
 
-## Arbitrary Ray
+## Arbitrary Ray {#arbitrary-ray}
 
 It is also possible to start a hit testing using a custom ray with the origin point and a direction:
 
@@ -103,7 +103,7 @@ app.xr.hitTest.start({
 });
 ```
 
-## Anchors
+## Anchors {#anchors}
 
 Hit tests are performed against the estimation of real-world geometry and the geometry can change if the underlying system estimation process refines the planes, meshes, or points that were hit by the hit test. For that reason, an [Anchor][1] can be created from these hit tests, which then can be updated. This allows a more planted and reliable placement of virtual objects:
 

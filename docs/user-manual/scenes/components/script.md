@@ -20,4 +20,4 @@ To edit the script in the PlayCanvas Code Editor you can either click on the hyp
 
 The Script component's scripting interface is [here][2].
 
-[2]: https://api.playcanvas.com/classes/Engine.ScriptComponent.html
+[2]: https://api.playcanvas.com/engine/classes/ScriptComponent.html

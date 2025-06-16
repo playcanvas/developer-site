@@ -1,6 +1,6 @@
 ---
 title: Assets
-sidebar_position: 10
+sidebar_position: 8
 ---
 
 Assets are resources that are available to use in your game. Assets can be of various different content types, for example, 3D models or audio files. They come in two different forms: Source and Target.

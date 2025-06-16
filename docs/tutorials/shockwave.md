@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Shockwave ripple post effect
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/c16yO94k/" title="Shockwave" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/c16yO94k/" title="Shockwave" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/440868/'>Open Project ↗</Link>

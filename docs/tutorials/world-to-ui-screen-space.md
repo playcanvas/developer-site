@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 Sample in which a UI Element is positioned over a world space point.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/xU0TSSIY/" title="World to UI Screen space" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay;xr-spatial-tracking" allowfullscreen="true" allowvr="" scrolling="no" frameborder="0" />
+    <iframe src="https://playcanv.as/p/xU0TSSIY/" title="World to UI Screen space" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 <Link to='https://playcanvas.com/project/679740/'>Open Project ↗</Link>

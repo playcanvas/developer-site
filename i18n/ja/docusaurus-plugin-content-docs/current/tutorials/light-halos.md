@@ -5,7 +5,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/p/rnIUbXws/" title="Light Halos"></iframe>
+    <iframe src="https://playcanv.as/p/rnIUbXws/" title="Light Halos" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 [完成されたプロジェクト][4]をフォークして詳細をご確認ください。
@@ -126,4 +126,4 @@ Halo.prototype.update = function(dt) {
 以上です。シーンに追加するシンプルで綺麗な効果です。詳細は[プロジェクト][4]でご確認ください。
 
 [4]: https://playcanvas.com/project/406040
-[5]: https://api.playcanvas.com/classes/Engine.MeshInstance.html
+[5]: https://api.playcanvas.com/engine/classes/MeshInstance.html

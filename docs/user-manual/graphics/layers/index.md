@@ -1,6 +1,6 @@
 ---
 title: Layers
-sidebar_position: 4
+sidebar_position: 9
 ---
 
 ## Layers Overview {#layers-overview}
@@ -40,8 +40,10 @@ Each sub-layer has a sort mode. Every frame the meshes in a sub-layer are sorted
 * **Material / Mesh** (`pc.SORTMODE_MATERIALMESH`) - This is the default mode for opaque sub-layers. Mesh instances are sorted to minimize switching between materials and meshes to improve rendering performance.
 * **Back-to-front** (`pc.SORTMODE_BACK2FRONT`) - This is the default mode for transparent sub-layers. Mesh instances are sorted back to front. This is the way to properly render many semi-transparent objects on different depth, one is blended on top of another.
 * **Front-to-back** (`pc.SORTMODE_FRONT2BACK`) - Mesh instances are sorted front to back. Depending on GPU and the scene, this option may give better performance than `pc.SORTMODE_MATERIALMESH` due to reduced overdraw.
-* **Manual** (`pc.SORTMODE_MANUAL`) - This is the default mode for UI or 2D layers. Mesh instances are sorted based on `drawOrder` property. The Element Component and Sprite Component should be placed in layers with this sort mode.
+* **Manual** (`pc.SORTMODE_MANUAL`) - This is the default mode for UI or 2D layers. Mesh instances are sorted based on the `MeshInstance.drawOrder` property. The Element Component and Sprite Component should be placed in layers using this sort mode.
 * **None** (`pc.SORTMODE_NONE`) - No sorting is applied. Mesh instances are rendered in the same order they were added to a layer.
+
+In addition to these sort modes, the `MeshInstance.drawBucket` property provides an additional, coarser level of sorting of `MeshInstances` within a layer. This integer value, ranging from 0 to 255 (default 127), serves as the primary sort key for mesh rendering. Meshes are sorted in ascending order by `drawBucket` (lower values rendered first), and then further sorted within each bucket according to the layer's selected sort mode. Note that the `drawBucket` setting is only effective when mesh instances are added to a sub-layer with its sort mode set to `pc.SORTMODE_BACK2FRONT`, `pc.SORTMODE_FRONT2BACK`, or `pc.SORTMODE_MATERIALMESH`. This allows you to group meshes into distinct rendering buckets, forcing certain groups to render before or after others, regardless of their material or depth, offering fine-grained control over the overall rendering order within those specific sort modes.
 
 ## Default Layers {#default-layers}
 

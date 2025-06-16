@@ -5,7 +5,7 @@ thumb: /img/tutorials/importing-first-model-and-animation/thumbnail.jpg
 ---
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://www.youtube.com/embed/r0LYQw7laRA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/r0LYQw7laRA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## 概要

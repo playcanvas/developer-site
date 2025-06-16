@@ -11,7 +11,7 @@ This tutorial uses the deprecated Model and Animation components. Please refer t
 :::
 
 <div className='iframe-container'>
-    <iframe loading="lazy" src="https://playcanv.as/p/HI8kniOx/" title="Animation Blending"></iframe>
+    <iframe src="https://playcanv.as/p/HI8kniOx/" title="Animation Blending" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 :::info

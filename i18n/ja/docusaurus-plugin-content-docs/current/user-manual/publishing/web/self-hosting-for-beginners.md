@@ -56,7 +56,7 @@ PlayCanvasのアプリケーションを作成する際、PlayCanvasで書くコ
 ウェブスタックでは、プログラミングを行いユーザー入力に応答するのはサーバだけではありません。クライアントサイドは、ブラウザ内で実行しているコードを指します。このコードは、ブラウザが実行される言語である、JavaScriptです。クライアントサイドのJavaScriptでさまざまな操作を実行することができます。最もシンプルなのは、サーバからダウンロードしたHTMLページの変更です。
 
 ```javascript
-var title = document.getElementById("title");
+const title = document.getElementById("title");
 title.innerHTML = "This is the new title";
 ```
 

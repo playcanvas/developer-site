@@ -1,6 +1,6 @@
 ---
 title: REST API
-sidebar_position: 22
+sidebar_position: 20
 ---
 
 :::warning
@@ -143,4 +143,4 @@ APIの呼び出し回数を調整するために、次のヘッダがレスポ�
 
 レート制限を超過すると、 `429 Too Many Requests`ステータスコードを受け取ります。制限が解除されるまで、新しいリクエストを続けることはできません。
 
-[5]: /user-manual/version-control/
+[5]: /user-manual/editor/version-control/

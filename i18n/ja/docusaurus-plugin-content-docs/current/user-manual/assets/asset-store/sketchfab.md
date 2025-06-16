@@ -2,18 +2,18 @@
 title: Sketchfab
 ---
 
-The Asset Store is integrated with [Sketchfab](https://sketchfab.com/), the popular online platform for publishing, sharing, and discovering 3D, VR, and AR content. This integration gives you access to thousands of free, high-quality 3D models without having to leave the Editor.
+Asset Storeは、3D、VR、ARコンテンツの公開、共有、発見のための人気のオンラインプラットフォームである[Sketchfab](https://sketchfab.com/)と統合されています。この統合により、Editorを離れることなく、何千もの無料の高品質な3Dモデルにアクセスできます。
 
 ![Sketchfab Store](/img/user-manual/assets/asset-store/sketchfab-store.png)
 
-## Logging in to Sketchfab
+## Sketchfabへのログイン
 
-The first time you attempt to import a model from Sketchfab, you will be ask to either sign up or log in to Sketchfab:
+Sketchfabからモデルをインポートしようとすると、Sketchfabにサインアップまたはログインを求められます。
 
 ![Sketchfab Authentication](/img/user-manual/assets/asset-store/sketchfab-login.png)
 
-This will take you to `sketchfab.com` to authenticate. Once you are signed in to Sketchfab, you need to accept Sketchfab's authorization request:
+これにより`sketchfab.com`に移動して認証します。Sketchfabにサインインしたら、Sketchfabの認証リクエストを承認する必要があります。
 
 ![Sketchfab Authorization](/img/user-manual/assets/asset-store/sketchfab-authorization.png)
 
-You should then receive a message that you have successfully connected your Sketchfab account to PlayCanvas! 🎉
+その後、SketchfabアカウントがPlayCanvasに正常に接続されました！🎉というメッセージが表示されるはずです。

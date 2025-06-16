@@ -7,7 +7,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/6850
 Full documentation for Loading Scenes is now in the [User Manual][documentation-page].
 
 <div className='iframe-container'>
-    <iframe loading="lazy" src="https://playcanv.as/e/p/cjBInud1/" title="Additive Loading Scenes"></iframe>
+    <iframe src="https://playcanv.as/e/p/cjBInud1/" title="Additive Loading Scenes" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 [documentation-page]: /user-manual/scenes/loading-scenes/

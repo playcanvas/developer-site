@@ -14,7 +14,7 @@ sidebar_position: 4
 [ここに][switch-scenes-completely-project]ユーザーがタイトル画面から他のレベルに移動できる例があります。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/e/p/Q1gKd1ek/"  title="Switching Scenes Completely"></iframe>
+    <iframe src="https://playcanv.as/e/p/Q1gKd1ek/"  title="Switching Scenes Completely" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 This is done by simply calling [`SceneRegistry.changeScene`][changescene-api] with the name of the scene.
@@ -57,7 +57,7 @@ Sometimes developers use this approach to ensure that certain code and entities 
 [Below is a simplified example][additively-loading-scenes-project] of additively loading scenes where the UI in the top left is the 'main' scene and different scene hierarchies are loaded/destroyed.
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/e/p/cjBInud1/" title="Additively Loading Scenes"></iframe>
+    <iframe src="https://playcanv.as/e/p/cjBInud1/" title="Additively Loading Scenes" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 シーンヒエラルキーの複数のインスタンスを同時にロードすることはできません。これは、エンティティがエディタでユニークなGUIDが割り当てられているためです。同じシーンヒエラルキーの複数のインスタンスを同時にロードしようとすると、エンティティごとにユニークである必要があるGUIDが衝突するため、エラーが発生します。
@@ -74,7 +74,7 @@ Sometimes developers use this approach to ensure that certain code and entities 
 
 :::note
 
-[アプリケーションルートノード](https://api.playcanvas.com/classes/Engine.Application.html#root)は、エディタで見ることができるデフォルトで 'Root' と名前が付けられたシーンヒエラルキールートエンティティではありません。シーンヒエラルキールートエンティティは、アプリケーションルートノードの子になります。
+The [application root node](https://api.playcanvas.com/engine/classes/AppBase.html#root) is not the scene hierarchy root entity that is named 'Root' by default that you see in the scene with the Editor. The scene hierarchy root entity will be a child of the application root node.
 
 :::
 
@@ -193,22 +193,22 @@ this.app.scenes.loadSceneHierarchy(sceneItem, function (err, loadedSceneRootEnti
 下記の[サンプルプロジェクト][asset-load-for-scene-project]は、シーンのロード時にアセットをロードし、メインメニューに戻る際にアンロードするものです。
 
 <div className="iframe-container">
-    <iframe loading="lazy" src="https://playcanv.as/e/p/SBTfOAeM/" title="Loading scenes and assets"></iframe>
+    <iframe src="https://playcanv.as/e/p/SBTfOAeM/" title="Loading scenes and assets" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 [switch-scenes-completely-project]: https://playcanvas.com/project/924351/overview/switch-full-scene-example
 [additively-loading-scenes-project]: https://playcanvas.com/project/685077/overview/additive-loading-scenes
-[templates]: /user-manual/templates/
+[templates]: /user-manual/editor/templates/
 [assets]: /user-manual/assets/
-[loadscenehierarchy-api]: https://api.playcanvas.com/classes/Engine.SceneRegistry.html#loadSceneHierarchy
-[loadscenesettings-api]: https://api.playcanvas.com/classes/Engine.SceneRegistry.html#loadSceneSettings
-[sceneregistryitem-api]: https://api.playcanvas.com/classes/Engine.SceneRegistryItem.html
-[sceneregistry-api]: https://api.playcanvas.com/classes/Engine.SceneRegistry.html
-[application-sceneregistry-api]: https://api.playcanvas.com/classes/Engine.Application.html#scenes
-[loadhierarchycallback-api]: https://api.playcanvas.com/modules/Engine.html#LoadHierarchyCallback
-[loadsettingscallback-api]: https://api.playcanvas.com/modules/Engine.html#LoadSettingsCallback
-[application-root-api]: https://api.playcanvas.com/classes/Engine.Application.html#root
-[loadscenedata-api]: https://api.playcanvas.com/classes/Engine.SceneRegistry.html#loadSceneData
+[loadscenehierarchy-api]: https://api.playcanvas.com/engine/classes/SceneRegistry.html#loadscenehierarchy
+[loadscenesettings-api]: https://api.playcanvas.com/engine/classes/SceneRegistry.html#loadscenesettings
+[sceneregistryitem-api]: https://api.playcanvas.com/engine/classes/SceneRegistryItem.html
+[sceneregistry-api]: https://api.playcanvas.com/engine/classes/SceneRegistry.html
+[application-sceneregistry-api]: https://api.playcanvas.com/engine/classes/AppBase.html#scenes
+[loadhierarchycallback-api]: https://api.playcanvas.com/engine/types/LoadHierarchyCallback.html
+[loadsettingscallback-api]: https://api.playcanvas.com/engine/types/LoadSettingsCallback.html
+[application-root-api]: https://api.playcanvas.com/engine/classes/AppBase.html#root
+[loadscenedata-api]: https://api.playcanvas.com/engine/classes/SceneRegistry.html#loadscenedata
 [asset-tags-loading]: /user-manual/assets/preloading-and-streaming/#asset-tags
 [asset-load-for-scene-project]: https://playcanvas.com/project/926754/overview/asset-loading-for-scenes-example
-[changescene-api]: https://api.playcanvas.com/classes/Engine.SceneRegistry.html#changeScene
+[changescene-api]: https://api.playcanvas.com/engine/classes/SceneRegistry.html#changescene

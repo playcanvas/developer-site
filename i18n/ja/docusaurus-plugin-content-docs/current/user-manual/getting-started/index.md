@@ -14,7 +14,7 @@ PlayCanvasは、インタラクティブなWebコンテンツのビジュアル�
 PlayCanvasエディターは、ビジュアルエディターです。シーン、アプリケーション、ゲームを素早く構築できます。エディターを使ってプロジェクトのアセットを管理し、インタラクティブ要素を追加し、チームとのコミュニケーションや作業を行います。エディターはリアルタイムで協同作業が可能で、これによりチームの作業による変更を即座に確認でき、アプリケーションをすべてのデバイスで即時に作成し、テストすることができます。
 
 <div className="iframe-container">
-    <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/PS4oMLPyYfI" title="PlayCanvas Editor Live Link" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/PS4oMLPyYfI" title="PlayCanvas Editor Live Link" allowfullscreen></iframe>
 </div>
 
 詳細は[editor][5]セクションでご確認ください。

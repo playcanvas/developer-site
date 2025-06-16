@@ -1,52 +1,52 @@
 ---
-title: Capabilities
-sidebar_position: 2
+title: 機能
+sidebar_position: 3
 ---
 
-WebXR exposes various capabilities and new APIs through Modules, which are integrated into the PlayCanvas Engine for ease of use.
+WebXRは、さまざまな機能と新しいAPIをモジュールを通じて公開しており、これらは使いやすさのためにPlayCanvas Engineに統合されています。
 
-Some of the capabilities can be used either in [VR][1] or [AR][2], and some are generic for any immersive experience.
+一部の機能は[VR][1]または[AR][2]で使用でき、一部はあらゆる没入型体験に共通です。
 
-## Supported WebXR Modules
+## サポートされているWebXRモジュール
 
-| Feature | 説明 |
+| 機能 | 説明 |
 |-|-|
-| [Anchors][4] | Create anchors in space that are reliably positioned in relation to real-world geometry. |
-| [Persistent Anchors][5] | Allows to persist anchors between sessions. |
-| [Camera Color][6] | Provides access to a color texture of a view. |
-| [Depth Sensing][9] | Provides access to depth texture and distance querying, that can be used for virtual object occlusion with real-world geometry and reliable object placement. |
-| [DOM Overlay][7] | For monoscopic screens, allows to overlay DOM elements over an AR view. |
-| [Hand Tracking][8] | Optical hand tracking that tracks each joint of a hand. |
-| [Hit Testing][10] | Allows to ray cast real-world geometry using a ray, to get position and rotation of the intersection point. |
-| [Image Tracking][11] | Dynamic tracking of provided images, their position, and orientation. |
-| [Input Sources][3] | Various input source types such as controllers, hands, screen taps, gaze, and more. |
-| [Light Estimation][12] | Estimates real-world illumination by providing dominant directional light direction, color, and intensity as well as ambient light information in the form of spherical harmonics. |
-| [Mesh Detection][13] | Access to a representation of a real-world geometry in the form of a 3D mesh, with its position, orientation, and semantic labels. This can represent furniture, screens, rooms, and other types of static geometry. |
-| [Plane Detection][14] | Similar to mesh detection, that provides geometry in the form of planes, their position, orientation, vertices, and semantic labels. This can represent large flat surfaces, such as floors, walls, ceilings, windows, doors, and more. |
+| [アンカー][4] | 実世界のジオメトリに対して確実に配置されるアンカーを空間に作成します。 |
+| [永続アンカー][5] | セッション間でアンカーを永続化できます。 |
+| [カメラの色][6] | ビューのカラーテクスチャへのアクセスを提供します。 |
+| [デプスセンシング][9] | 深度テクスチャと距離クエリへのアクセスを提供し、実世界のジオメトリによる仮想オブジェクトのオクルージョンや、信頼性の高いオブジェクト配置に使用できます。 |
+| [DOMオーバーレイ][7] | 単眼スクリーン向けに、ARビューの上にDOM要素をオーバーレイできます。 |
+| [ハンドトラッキング][8] | 手の各関節を追跡する光学式ハンドトラッキング。 |
+| [ヒットテスト][10] | レイを使用して実世界のジオメトリにレイキャストし、交点の位置と回転を取得できます。 |
+| [画像トラッキング][11] | 提供された画像の動的な追跡、その位置、および向き。 |
+| [入力ソース][3] | コントローラー、手、画面タップ、視線など、さまざまな入力ソースタイプ。 |
+| [光推定][12] | 主要な指向性光の方向、色、強度、および球面調和関数形式の環境光情報を提供することで、実世界の照明を推定します。 |
+| [メッシュ検出][13] | 3Dメッシュ形式の実世界ジオメトリの表現へのアクセス。その位置、向き、セマンティックラベルが含まれます。家具、スクリーン、部屋、その他の種類の静的ジオメトリを表すことができます。 |
+| [平面検出][14] | メッシュ検出と同様に、平面形式のジオメトリ、その位置、向き、頂点、およびセマンティックラベルを提供します。床、壁、天井、窓、ドアなどの大きな平らな表面を表すことができます。 |
 
-## Experimental Features
+## 実験的機能
 
-The WebXR API is constantly evolving and additional APIs get released extending the XR feature set. While the engine is constantly updated with integrations for XR APIs, some of the features might come with delay. For developers willing to experiment with new features, it is possible to enable them by passing relevant `optionalFeatures` flags. 
+WebXR APIは常に進化しており、XR機能セットを拡張する追加のAPIがリリースされています。エンジンは常にXR APIとの統合で更新されていますが、一部の機能は遅れて提供される可能性があります。新機能を試したい開発者は、関連する`optionalFeatures`フラグを渡すことで、それらを有効にすることができます。
 
 :::warning
 
-Accessing internal, undocumented APIs is subject to engine changes that are not guaranteed to be backwards compatible.
+内部の、ドキュメント化されていないAPIへのアクセスは、後方互換性が保証されないエンジンの変更の影響を受ける可能性があります。
 
 :::
 
-Here is an example of enabling the experimental API for [WebXR Layers][3]:
+以下は、[WebXR Layers][3]の実験的なAPIを有効にする例です。
 
 ```javascript
 app.xr.start(cameraComponent, pc.XRTYPE_VR, pc.XRSPACE_LOCAL, {
     optionalFeatures: [ 'layers' ],
-    callback: function(err) {
+    callback: (err) => {
         if (err) {
             console.log(err);
             return;
         }
 
         if (app.xr.session.renderState.layers) {
-            // get access to WebXR Layers
+            // WebXR Layersへのアクセスを取得
         }
     }
 });

@@ -17,4 +17,4 @@ The GSplat component can be enabled or disabled using the toggle in the top righ
 
 ## スクリプトインターフェース
 
-You can control the properties of a GSplat component using a [script component](../script). The scripting interface for the GSplat component is [here](https://api.playcanvas.com/classes/Engine.GSplatComponent.html).
+You can control the properties of a GSplat component using a [script component](../script). The scripting interface for the GSplat component is [here](https://api.playcanvas.com/engine/classes/GSplatComponent.html).
