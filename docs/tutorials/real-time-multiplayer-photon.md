@@ -162,7 +162,7 @@ export class PhotonLoadBalancingPlayCanvas extends Script {
 ```
 
 </TabItem>
-<TabItem value="legacy" label="Legacy" title='./photon-loadbalancing-playcanvas.js'>
+<TabItem value="classic" label="Classic" title='./photon-loadbalancing-playcanvas.js'>
 
 ```javascript
 const PhotonLoadBalancingPlayCanvas = pc.createScript("photonLoadBalancingPlayCanvas");
