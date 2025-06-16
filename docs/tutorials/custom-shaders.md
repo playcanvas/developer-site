@@ -249,7 +249,7 @@ export class CustomShader extends Script {
         const heightTexture = this.heightMap.resource;
 
         const vertexShader = this.vs.resource;
-        const fragmentShader = "precision " + gd.precision + " float;\n";
+        let fragmentShader = "precision " + gd.precision + " float;\n";
         fragmentShader = fragmentShader + this.fs.resource;
 
         // A shader definition used to create a new shader.
