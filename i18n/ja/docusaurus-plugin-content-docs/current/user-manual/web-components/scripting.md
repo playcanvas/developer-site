@@ -8,7 +8,9 @@ sidebar_position: 3
 エンティティを時間とともに回転させるシンプルなスクリプトを考えてみましょう。
 
 ```javascript title="rotate-script.mjs"
-export default class RotateScript {
+import { Script } from 'playcanvas';
+
+export class RotateScript extends Script {
     static scriptName = 'rotateScript';
 
     update(dt) {
@@ -49,8 +51,10 @@ export default class RotateScript {
 
 回転速度を属性として受け入れるようにスクリプトを更新しましょう。
 
-```javascript title="rotate-script.mjs" {4-8,12}
-export default class RotateScript {
+```javascript title="rotate-script.mjs" {6-10,14}
+import { Script } from 'playcanvas';
+
+export class RotateScript extends Script {
     static scriptName = 'rotateScript';
 
     /**
