@@ -73,7 +73,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -112,7 +112,7 @@ Movement.prototype.update = function(dt) {
 To make the sphere controllable, let's add some code to the `update` function. Copy and paste the code below:
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { ScriptType, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';

@@ -128,7 +128,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { ScriptType, Vec3, KEY_A, KEY_D, KEY_W, KEY_S } from 'playcanvas';
@@ -333,7 +333,7 @@ socket.on('playerJoined', function (data) {
 And then declare these new functions inside Network.js:
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 initializePlayers(data) {
@@ -441,7 +441,7 @@ Network.prototype.update = function (dt) {
 And then declare these new functions inside Network.js:
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 movePlayer(data) {

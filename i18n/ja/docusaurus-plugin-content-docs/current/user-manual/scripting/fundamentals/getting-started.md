@@ -98,7 +98,7 @@ MyScript.prototype.update = function(dt) {
 属性を使うことで、スクリプトのプロパティをエディタで設定でき、コードを変更せずに挙動を変えられます：
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Color, Entity, Script } from 'playcanvas';

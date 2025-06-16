@@ -72,7 +72,7 @@ EntityがScript Componentを介して複数のスクリプトをアタッチし�
 **例：**
 
 <Tabs>
-<TabItem value="esm" label="ESM">
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -133,7 +133,7 @@ MyScript.prototype.initialize = function() {
 **例:**
 
 <Tabs>
-<TabItem value="esm" label="ESM">
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -209,7 +209,7 @@ MyScript.prototype.postInitialize = function() {
 **例:**
 
 <Tabs>
-<TabItem value="esm" label="ESM">
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -258,7 +258,7 @@ Rotator.prototype.update = function(dt) {
 **例:**
 
 <Tabs>
-<TabItem value="esm" label="ESM">
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Script } from 'playcanvas';

@@ -32,7 +32,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { ScriptType, EVENT_MOUSEDOWN } from 'playcanvas';
@@ -106,7 +106,7 @@ You are able modify the size of the buffer to be smaller to improve the performa
 It's also possible to restrict the layers to pick which the script supports via `layerNames` array. We can add the names of the layers that we want to pick from and also improves performance by rendering only what we need to the internal buffer.
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { ScriptType, Picker, Vec3, Entity, EVENT_MOUSEDOWN } from 'playcanvas';

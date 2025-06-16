@@ -86,7 +86,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { ScriptType, Entity, math } from 'playcanvas';

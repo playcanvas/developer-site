@@ -37,7 +37,7 @@ PlayCanvasスクリプトをデバッグするための最も基本的で不可�
 **例:**
 
 <Tabs>
-<TabItem value="esm" label="ESM">
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Script, KEY_SPACE } from 'playcanvas';
@@ -107,7 +107,7 @@ if (speed < 0) {
 **例:**
 
 <Tabs>
-<TabItem value="esm" label="ESM">
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
 initialize() {

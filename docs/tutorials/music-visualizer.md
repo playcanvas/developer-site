@@ -20,7 +20,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -105,7 +105,7 @@ Then in our update loop we use the `AnalyserNode` methods `getFloatFrequencyData
 ## The Visualizer
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { ScriptType, Vec3 } from 'playcanvas';

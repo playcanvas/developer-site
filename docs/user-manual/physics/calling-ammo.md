@@ -17,7 +17,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { ScriptType, Vec3 } from 'playcanvas';
@@ -279,7 +279,7 @@ Sometimes, you might find that fast moving rigid bodies in your simulations pass
 You can enable CCD for any PlayCanvas rigid body using the following script:
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Script } from 'playcanvas';

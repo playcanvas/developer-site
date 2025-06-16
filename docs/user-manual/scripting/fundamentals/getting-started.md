@@ -98,7 +98,7 @@ Learn more about the [Script Lifecycle](./script-lifecycle.md).
 Attributes let you expose script properties to the editor, making scripts configurable without code changes:
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
+<TabItem value="esm" label="ESM (Recommended)">
 
 ```javascript
 import { Color, Entity, Script } from 'playcanvas';
