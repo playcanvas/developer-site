@@ -211,8 +211,5 @@ LightHandler.prototype.pivot = function () {
 </TabItem>
 </Tabs>
 
-</TabItem>
-</Tabs>
-
 [1]: https://api.playcanvas.com/engine/classes/LightComponent.html
 [2]: https://playcanvas.com/project/405812/overview/tutorial-controlling-lights
