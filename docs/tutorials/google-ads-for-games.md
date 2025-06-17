@@ -377,13 +377,48 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class UiController extends Script {
-    static attributes = {
-        refreshButtonEntity: {type: 'entity', title: 'Refresh Button Entity'},
-        interstitialAdButtonEntity: {type: 'entity', title: 'Interstitial Ad Button Entity'},
-        rewardedAdButtonEntity: {type: 'entity', title: 'Rewarded Ad Button Entity'},
-        okRewardButtonEntity: {type: 'entity', title: 'OK Rewarded Button Entity'},
-        rewardedGivenPanelEntity: {type: 'entity', title: 'Rewarded Given Entity'}
-    };
+
+    static scriptName = "uiController";
+
+    /**
+     * 
+     * @attribute
+     * @title Refresh Button Entity
+     * @type {Entity}
+     */
+    refreshButtonEntity = null;
+
+    /**
+     * 
+     * @attribute
+     * @title Interstitial Ad Button Entity
+     * @type {Entity}
+     */
+    interstitialAdButtonEntity = null;
+
+    /**
+     * 
+     * @attribute
+     * @title Rewarded Ad Button Entity
+     * @type {Entity}
+     */
+    rewardedAdButtonEntity = null;
+
+    /**
+     * 
+     * @attribute
+     * @title OK Rewarded Button Entity
+     * @type {Entity}
+     */
+    okRewardButtonEntity = null;
+
+    /**
+     * 
+     * @attribute
+     * @title Rewarded Given Entity
+     * @type {Entity}
+     */
+    rewardedGivenPanelEntity = null;
 
     // initialize code called once per entity
     initialize() {

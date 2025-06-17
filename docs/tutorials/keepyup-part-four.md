@@ -26,37 +26,62 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, Vec3 } from 'playcanvas';
 
 export class Ball extends Script {
-    static attributes = {
-        gravity: {
-            type: 'number',
-            default: -9.8,
-            description: 'The value of gravity to use'
-        },
-        defaultTap: {
-            type: 'number',
-            default: 5,
-            description: 'Speed to set the ball to when it is tapped'
-        },
-        impactEffect: {
-            type: 'entity',
-            description: 'The particle effect to trigger when the ball is tapped'
-        },
-        ballMinimum: {
-            type: 'number',
-            default: -6,
-            description: 'When ball goes below minimum y value game over is triggered'
-        },
-        speedMult: {
-            type: 'number',
-            default: 4,
-            description: 'Multiplier to apply to X speed when tap is off center'
-        },
-        angMult: {
-            type: 'number',
-            default: -6,
-            description: 'Multiplier to apply to angular speed when tap is off center'
-        }
-    };
+
+    static scriptName = "ball";
+
+    /**
+     * The value of gravity to use.
+     * 
+     * @attribute
+     * @title Gravity
+     * @type {number}
+     */
+    gravity = -9.8;
+
+    /**
+     * Speed to set the ball to when it is tapped.
+     * 
+     * @attribute
+     * @title Default Tap
+     * @type {number}
+     */
+    defaultTap = 5;
+
+    /**
+     * The particle effect to trigger when the ball is tapped.
+     * 
+     * @attribute
+     * @title Impact Effect
+     * @type {Entity}
+     */
+    impactEffect = null;
+
+    /**
+     * When ball goes below minimum y value, game over is triggered.
+     * 
+     * @attribute
+     * @title Ball Minimum
+     * @type {number}
+     */
+    ballMinimum = -6;
+
+    /**
+     * Multiplier to apply to X speed when tap is off center.
+     * 
+     * @attribute
+     * @title Speed Mult
+     * @type {number}
+     */
+    speedMult = 4;
+
+    /**
+     * Multiplier to apply to angular speed when tap is off center.
+     * 
+     * @attribute
+     * @title Ang Mult
+     * @type {number}
+     */
+    angMult = -6;
 
     static tmp = new Vec3();
 

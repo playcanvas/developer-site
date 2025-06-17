@@ -121,14 +121,26 @@ class WatercolorEffect extends PostEffect {
 
 
 //--------------- SCRIPT DEFINITION------------------------//
-var Watercolor = pc.createScript('watercolor');
-
 export class WaterColor extends Script {
 
- static attributes = {
-    vs: { type: 'asset', assetType: 'shader', title: 'Vertex Shader' },
-    fs: { type: 'asset', assetType: 'shader', title: 'Fragment Shader' }
- }
+    static scriptName = "waterColor";
+
+    /**
+     * @attribute
+     * @title Vertex Shader
+     * @type {Asset}
+     * @resource 'shader'
+     */
+    vs
+
+    /**
+     * @attribute
+     * @title Fragment Shader
+     * @type {Asset}
+     * @resource 'shader'
+     */ 
+    fs
+
 
     // initialize code called once per entity
     initialize() {

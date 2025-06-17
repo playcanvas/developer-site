@@ -40,22 +40,35 @@ import { ScriptType, Vec3, Entity, Mouse, BODYTYPE_DYNAMIC } from 'playcanvas';
 import { KEY_A, KEY_Q, KEY_D, KEY_W, KEY_S } from 'playcanvas';
 
 export class FirstPersonMovement extends Script {
-    static attributes = {
-        camera: {
-            type: 'entity',
-            description: 'Optional, assign a camera entity, otherwise one is created'
-        },
-        power: {
-            type: 'number',
-            default: 2500,
-            description: 'Adjusts the speed of player movement'
-        },
-        lookSpeed: {
-            type: 'number',
-            default: 0.25,
-            description: 'Adjusts the sensitivity of looking'
-        }
-    };
+
+    static scriptName = "firstPersonMovement";
+
+    /**
+     * Optional, assign a camera entity, otherwise one is created.
+     * 
+     * @attribute
+     * @title Camera
+     * @type {Entity}
+     */
+    camera = null;
+
+    /**
+     * Adjusts the speed of player movement.
+     * 
+     * @attribute
+     * @title Power
+     * @type {number}
+     */
+    power = 2500;
+
+    /**
+     * Adjusts the sensitivity of looking.
+     * 
+     * @attribute
+     * @title Look Speed
+     * @type {number}
+     */
+    lookSpeed = 0.25;
 
     // initialize code called once per entity
     initialize() {

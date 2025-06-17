@@ -44,6 +44,8 @@ import { Script } from 'playcanvas';
 
 export class FbUi extends Script {
 
+    static scriptName = "fbUi";
+
     initialize() {
         this.app.on("fb:init", () => {
             this._ready = true;
@@ -229,9 +231,16 @@ The file `face-photo.js` uses the Facebook API to retrieve a list of photos from
 import { ScriptType, Vec3, string, math, Asset } from 'playcanvas';
 
 export class FacePhoto extends Script {
-    static attributes = {
-        template: { type: 'entity' }
-    };
+
+    static scriptName = "facePhoto";
+
+    /**
+     * 
+     * @attribute
+     * @title Template
+     * @type {Entity}
+     */
+    template = null;
 
     // initialize code called once per entity
     initialize() {

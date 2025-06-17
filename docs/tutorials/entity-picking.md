@@ -38,6 +38,9 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, EVENT_MOUSEDOWN } from 'playcanvas';
 
 export class PickerRaycast extends Script {
+
+    static scriptName = "pickerRayCast";
+
     // initialize code called once per entity
     initialize() {
         this.app.mouse.on(EVENT_MOUSEDOWN, this.onSelect, this);
@@ -112,23 +115,27 @@ It's also possible to restrict the layers to pick which the script supports via 
 import { ScriptType, Picker, Vec3, Entity, EVENT_MOUSEDOWN } from 'playcanvas';
 
 export class PickerFramebuffer extends Script {
-    static attributes = {
-        pickAreaScale: {
-            type: 'number',
-            title: 'Pick Area Scale',
-            description: '1 is more accurate but worse performance. 0.01 is best performance but least accurate. 0.25 is the default.',
-            default: 0.25,
-            min: 0.01,
-            max: 1
-        },
-        layerNames: {
-            type: 'string',
-            title: 'Layers Names',
-            array: true,
-            description: 'Layer names from which objects will be picked from.',
-            default: ['World']
-        }
-    };
+
+    static scriptName = "pickerFrameBuffer";
+
+    /**
+     * 1 is more accurate but worse performance. 0.01 is best performance but least accurate. 0.25 is the default.
+     * 
+     * @attribute
+     * @title Pick Area Scale
+     * @type {number}
+     * @range [0.01, 1]
+     */
+    pickAreaScale = 0.25;
+
+    /**
+     * Layer names from which objects will be picked from.
+     * 
+     * @attribute
+     * @title Layers Names
+     * @type {string[]}
+     */
+    layerNames = ['World'];
 
     initialize() {
         // Create a frame buffer picker with a scaled resolution

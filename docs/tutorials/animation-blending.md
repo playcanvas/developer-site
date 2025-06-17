@@ -50,6 +50,9 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, KEY_P } from 'playcanvas';
 
 export class AnimationBlending extends Script {
+
+    static scriptName = 'animationBlending';
+
     static states = {
         idle: {
             animation: 'male.json'

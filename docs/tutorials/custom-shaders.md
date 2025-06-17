@@ -180,6 +180,9 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class CustomShader extends Script {
+
+    static scriptName = "customShader";
+
     update(dt) {
         this.time += dt;
 
@@ -231,12 +234,47 @@ import { ScriptType, SEMANTIC_TEXCOORD0, SEMANTIC_POSITION, Shader, Material } f
 
 export class CustomShader extends Script {
 
-    static attributes = {
-        vs: { type: 'asset', assetType: 'shader', title: 'Vertex Shader' },
-        fs: { type: 'asset', assetType: 'shader', title: 'Fragment Shader' },
-        diffuseMap: { type: 'asset', assetType: 'texture', title: 'Diffuse Map' },
-        heightMap: { type: 'asset', assetType: 'texture', title: 'Height Map' }
-    },
+    static scriptName = "customShader";
+
+    /**
+     * Vertex Shader
+     * 
+     * @attribute
+     * @title Vertex Shader
+     * @type {Asset}
+     * @resource shader
+     */
+    vs = null;
+
+    /**
+     * Fragment Shader
+     * 
+     * @attribute
+     * @title Fragment Shader
+     * @type {Asset}
+     * @resource shader
+     */
+    fs = null;
+
+    /**
+     * Diffuse Map
+     * 
+     * @attribute
+     * @title Diffuse Map
+     * @type {Asset}
+     * @resource texture
+     */
+    diffuseMap = null;
+
+    /**
+     * Height Map
+     * 
+     * @attribute
+     * @title Height Map
+     * @type {Asset}
+     * @resource texture
+     */
+    heightMap = null;
 
     // initialize code called once per entity
     initialize() {

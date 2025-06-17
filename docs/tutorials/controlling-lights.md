@@ -64,6 +64,8 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, KEY_1, KEY_2, KEY_3, Color } from 'playcanvas';
 
 export class LightHandler extends Script {
+
+    static scriptName = "lightHandler";
         
     // initialize code called once per entity
     initialize() {

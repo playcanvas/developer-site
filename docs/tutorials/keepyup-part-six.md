@@ -44,9 +44,16 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class UiMenu extends Script {
-    static attributes = {
-        overlay: {type: "entity"}
-    };
+
+    static scriptName = "uiMenu";
+
+    /**
+     * 
+     * @attribute
+     * @title Overlay
+     * @type {Entity}
+     */
+    overlay = null;
 
     // initialize code called once per entity
     initialize() {

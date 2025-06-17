@@ -26,12 +26,40 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, RESOLUTION_AUTO, FILLMODE_FILL_WINDOW } from 'playcanvas';
 
 export class Game extends Script {
-    static attributes = {
-        uiMenu: {type: 'entity'},
-        uiInGame: {type: 'entity'},
-        uiGameOver: {type: 'entity'},
-        audio: {type: 'entity'}
-    };
+
+    static scriptName = "Game";
+
+    /**
+     * 
+     * @attribute
+     * @title UI Menu
+     * @type {Entity}
+     */
+    uiMenu = null;
+
+    /**
+     * 
+     * @attribute
+     * @title UI In Game
+     * @type {Entity}
+     */
+    uiInGame = null;
+
+    /**
+     * 
+     * @attribute
+     * @title UI Game Over
+     * @type {Entity}
+     */
+    uiGameOver = null;
+
+    /**
+     * 
+     * @attribute
+     * @title Audio
+     * @type {Entity}
+     */
+    audio = null;
 
     static STATE_MENU = 'menu';
     static STATE_INGAME = 'ingame';
