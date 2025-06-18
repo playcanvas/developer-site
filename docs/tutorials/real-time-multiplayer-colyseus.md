@@ -102,21 +102,21 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class NetworkManager extends Script {
-  static scriptName = "networkManager";
+    static scriptName = "networkManager";
 
-  async initialize() {
-    //
-    // instantiate the SDK
-    // (no connection is established at this point)
-    //
-    this.app.colyseus = new Colyseus.Client("ws://localhost:2567");
+    async initialize() {
+        //
+        // instantiate the SDK
+        // (no connection is established at this point)
+        //
+        this.app.colyseus = new Colyseus.Client("ws://localhost:2567");
 
-    //
-    // request to join or create a room "my_room"
-    // (establish connection with the server)
-    //
-    this.room = await this.app.colyseus.joinOrCreate("my_room");
-  }
+        //
+        // request to join or create a room "my_room"
+        // (establish connection with the server)
+        //
+        this.room = await this.app.colyseus.joinOrCreate("my_room");
+    }
 }
 ```
 
