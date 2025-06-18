@@ -47,7 +47,6 @@ export class UiMenu extends Script {
     static scriptName = "uiMenu";
 
     /**
-     * 
      * @attribute
      * @title Overlay
      * @type {Entity}
