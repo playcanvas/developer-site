@@ -8,7 +8,11 @@ Scripts add custom behaviors to entities in your PlayCanvas Web Components app.
 Let's consider a simple script that rotates an entity over time:
 
 ```javascript title="rotate-script.mjs"
-export default class RotateScript {
+import { Script } from 'playcanvas';
+
+export class RotateScript extends Script {
+    static scriptName = 'rotateScript';
+
     update(dt) {
         // Rotate the entity 90 degrees per second around the world-space Y axis
         this.entity.rotate(0, dt * 90, 0);
@@ -37,7 +41,7 @@ Then attach it to an entity using [`<pc-scripts>`](../tags/pc-scripts) and [`<pc
 
 :::important
 
-The `name` attribute of `<pc-script>` must be the class name of the script converted to camel case. Camel case is a naming convention where words are concatenated without spaces, and each word after the first starts with an uppercase letter. So `RotateScript` becomes `rotateScript` in this example.
+The `name` attribute of `<pc-script>` must match the value of the `scriptName` property of the script.
 
 :::
 
@@ -47,8 +51,12 @@ Our rotate script is currently hardcoded to rotate at 90 degrees per second. But
 
 Let's update our script to accept a rotation speed as an attribute:
 
-```javascript title="rotate-script.mjs" {2-6,10}
-export default class RotateScript {
+```javascript title="rotate-script.mjs" {6-10,14}
+import { Script } from 'playcanvas';
+
+export class RotateScript extends Script {
+    static scriptName = 'rotateScript';
+
     /**
      * The speed of the rotation in degrees per second
      * @attribute

@@ -8,7 +8,16 @@ By default, when you launch your PlayCanvas app from the Editor, it will use the
 * To temporarily step back to a previous stable engine version to mitigate a regression in the current stable build.
 * To develop and debug against your own fork of the [engine repo on GitHub][1].
 
-Let's look at how you handle each of these situations:
+:::important[Loading the Correct Engine: Module vs UMD]
+
+When loading a custom engine build, it's important to choose the correct format based on your project's script type:
+
+* If your project contains any ESM Scripts (using `import`/`export`), you need to load the module build of the engine by using the `.mjs` extension in the URL.
+* For projects that only contain Classic Scripts (using `pc.createScript`), use the UMD build with the `.js` extension.
+
+:::
+
+Now, let's look at how you handle each of these situations:
 
 ### Launch with the Dev Engine
 

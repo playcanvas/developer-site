@@ -15,11 +15,12 @@ The debug version of the Engine will report any API changes to the runtime conso
 
 ![Console output](/img/user-manual/graphics/shader-chunk-migrations/console-warning.png)
 
-Once an application's chunks have been updated to the latest API they must be flagged as such. For example, after updating a material's custom chunks to the latest engine release (say v1.55), specify this in the chunks object as follows:
+Once an application's chunks have been updated to the latest API they must be flagged as such. For example, after updating a material's custom chunks to the latest engine release (say v2.8), specify this in the chunks object as follows:
 
 ```javascript
-material.chunks.diffusePS = '...';
-material.chunks.APIVersion = pc.CHUNKAPI_1_55;
+const materialChunksGLSL = material.getShaderChunks(pc.SHADERLANGUAGE_GLSL);
+materialChunksGLSL.set('diffusePS', '...');
+material.shaderChunksVersion = '2.8';
 ```
 
 By doing this you will no longer see warning messages in the console.
