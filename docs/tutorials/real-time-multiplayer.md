@@ -353,7 +353,7 @@ And then declare these new functions inside Network.js:
 
     createPlayerEntity (data) {
         // Create a new player entity
-        var newPlayer = this.other.clone();
+        const newPlayer = this.other.clone();
         newPlayer.enabled = true;
 
         // Add the entity to the entity hierarchy
