@@ -377,7 +377,6 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class UiController extends Script {
-
     static scriptName = "uiController";
 
     /**

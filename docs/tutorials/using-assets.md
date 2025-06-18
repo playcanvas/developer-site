@@ -108,12 +108,31 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, KEY_SPACE, KEY_C, KEY_L } from 'playcanvas';
 
 export class UpdateAsset extends Script {
+    static scriptName = "updateAsset";
 
-    static attributes = {
-        a: { type: 'asset', assetType: 'render' },
-        b: { type: 'asset', assetType: 'render' },
-        c: { type: 'asset', assetType: 'render' }
-    }
+    /**
+     * @attribute
+     * @title A
+     * @type {Asset}
+     * @resource render
+     */
+    a = null;
+
+    /**
+     * @attribute
+     * @title B
+     * @type {Asset}
+     * @resource render
+     */
+    b = null;
+
+    /**
+     * @attribute
+     * @title C
+     * @type {Asset}
+     * @resource render
+     */
+    c = null;
 
     // initialize code called once per entity
     initialize() {

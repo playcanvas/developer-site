@@ -38,7 +38,6 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, EVENT_MOUSEDOWN } from 'playcanvas';
 
 export class PickerRaycast extends Script {
-
     static scriptName = "pickerRayCast";
 
     // initialize code called once per entity
@@ -115,7 +114,6 @@ It's also possible to restrict the layers to pick which the script supports via 
 import { ScriptType, Picker, Vec3, Entity, EVENT_MOUSEDOWN } from 'playcanvas';
 
 export class PickerFramebuffer extends Script {
-
     static scriptName = "pickerFrameBuffer";
 
     /**

@@ -26,8 +26,7 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, RESOLUTION_AUTO, FILLMODE_FILL_WINDOW } from 'playcanvas';
 
 export class Game extends Script {
-
-    static scriptName = "Game";
+    static scriptName = "game";
 
     /**
      * 
@@ -285,11 +284,28 @@ The input script listens for input from the mouse or touchscreen, normalizes the
 import { ScriptType, Vec3 } from 'playcanvas';
 
 export class Input extends Script {
-    static attributes = {
-        ball: {type: 'entity'},
-        camera: {type: 'entity'},
-        ballRadius: {type: 'number', default: 0.5}
-    };
+    static scriptName = "input";
+
+    /**
+     * @attribute
+     * @title Ball
+     * @type {Entity}
+     */
+    ball = null;
+
+    /**
+     * @attribute
+     * @title Camera
+     * @type {Entity}
+     */
+    camera = null;
+
+    /**
+     * @attribute
+     * @title Ball Radius
+     * @type {number}
+     */
+    ballRadius = 0.5;
 
     static worldPos = new Vec3();
 

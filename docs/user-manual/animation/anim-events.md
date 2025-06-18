@@ -35,6 +35,8 @@ import { Script } from 'playcanvas';
 
 // initialize code called once per entity
 export class AnimationEvents extends Script {
+    static scriptName = "animationEvents";
+
     initialize(){
         this.entity.anim.on('plant_foot', (event) => {
             // get the foot bone from the event's string property, either right_foot or left_foot

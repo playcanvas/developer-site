@@ -21,6 +21,8 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class TriggerVolume extends Script {
+    static scriptName = "triggerVolume";
+
     initialize() {
         this.entity.collision.on('triggerenter', (entity) => {
             console.log(`${entity.name} has entered trigger volume.`);

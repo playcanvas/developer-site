@@ -126,6 +126,7 @@ import {
 } from 'playcanvas';
 
 export class Movement extends Script {
+    static scriptName = "movement";
         
     // initialize code called once per entity
     initialize() {

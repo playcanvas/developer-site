@@ -134,13 +134,14 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, Vec3, KEY_A, KEY_D, KEY_W, KEY_S } from 'playcanvas';
 
 export class Movement extends Script {
-    static attributes = {
-        playerSpeed: {
-            type: 'number',
-            default: 30,
-            title: 'Player Speed'
-        }
-    };
+    static scriptName = "movement";
+
+    /**
+     * @attribute
+     * @title Player Speed
+     * @type {number}
+     */
+    playerSpeed = 30;
 
     // initialize code called once per entity
     initialize() {

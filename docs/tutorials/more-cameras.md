@@ -27,6 +27,8 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, KEY_SPACE } from 'playcanvas';
 
 export class Zoom extends Script {
+    static scriptName = "zoom";
+
     // initialize code called once per entity
     initialize() {
         this.targetFov = 45;
@@ -120,6 +122,8 @@ Another way you might want to create interactivity with cameras is by switching 
 import { ScriptType, KEY_SPACE, KEY_LEFT, KEY_RIGHT } from 'playcanvas';
 
 export class CameraManager extends Script {
+    static scriptName = "cameraManager";
+
     // initialize code called once per entity
     initialize() {
         this.activeCamera = this.entity.findByName('Center');

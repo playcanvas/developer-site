@@ -26,7 +26,6 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, Vec3 } from 'playcanvas';
 
 export class Ball extends Script {
-
     static scriptName = "ball";
 
     /**

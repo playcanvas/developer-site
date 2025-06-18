@@ -29,25 +29,34 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class VideoTexture extends Script {
+    static scriptName = "videoTexture";
 
-    static attributes = {
-        videoAsset: {
-            title: 'Video Asset',
-            description: 'MP4 video asset to play back on this video texture.',
-            type: 'asset'
-        },
-        videoUrl: {
-            title: 'Video Url',
-            description: 'URL to use if there is video asset selected',
-            type: 'string'
-        },
-        playEvent: {
-            title: 'Play Event',
-            description: 'Event that is fired as soon as the video texture is ready to play.',
-            type: 'string',
-            default: ''
-        }
-    }
+    /**
+     * MP4 video asset to play back on this video texture.
+     * 
+     * @attribute
+     * @title Video Asset
+     * @type {Asset}
+     */
+    videoAsset = null;
+
+    /**
+     * URL to use if there is video asset selected.
+     * 
+     * @attribute
+     * @title Video Url
+     * @type {string}
+     */
+    videoUrl = null;
+
+    /**
+     * Event that is fired as soon as the video texture is ready to play.
+     * 
+     * @attribute
+     * @title Play Event
+     * @type {string}
+     */
+    playEvent = '';
 
     // initialize code called once per entity
     initialize() {

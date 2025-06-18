@@ -24,16 +24,21 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class Generate extends Script {
-    static attributes = {
-        numTilesX: {
-            type: 'number',
-            default: 10
-        },
-        numTilesY: {
-            type: 'number',
-            default: 10
-        }
-    };
+    static scriptName = "generate";
+
+    /**
+     * @attribute
+     * @title Num Tiles X
+     * @type {number}
+     */
+    numTilesX = 10;
+
+    /**
+     * @attribute
+     * @title Num Tiles Y
+     * @type {number}
+     */
+    numTilesY = 10;
 
     // initialize code called once per entity
     initialize() {

@@ -44,7 +44,6 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class UiMenu extends Script {
-
     static scriptName = "uiMenu";
 
     /**

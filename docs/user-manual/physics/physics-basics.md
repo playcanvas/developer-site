@@ -85,6 +85,8 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class Movement extends Script {
+    static scriptName = "movement";
+
     initialize() {
 
     }

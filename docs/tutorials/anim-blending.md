@@ -85,7 +85,6 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, EVENT_KEYDOWN, EVENT_KEYUP, KEY_P } from 'playcanvas';
 
 export class KeyboardControls extends Script {
-
     static scriptName = 'keyboardControls';
 
     // initialize code called once per entity

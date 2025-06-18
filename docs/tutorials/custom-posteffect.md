@@ -122,7 +122,6 @@ class WatercolorEffect extends PostEffect {
 
 //--------------- SCRIPT DEFINITION------------------------//
 export class WaterColor extends Script {
-
     static scriptName = "waterColor";
 
     /**

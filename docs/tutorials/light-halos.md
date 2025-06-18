@@ -80,13 +80,26 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
-import { ScriptType, Vec3 } from 'playcanvas';
+import { ScriptType, Vec3, Entity } from 'playcanvas';
 
 export class Halo extends Script {
-    static attributes = {
-        camera: {type: 'entity'},
-        unidirectional: {type: 'boolean', default: false}
-    };
+    static scriptName = "halo";
+
+    /**
+     * 
+     * @attribute
+     * @title Camera
+     * @type {Entity}
+     */
+    camera = null;
+
+    /**
+     * 
+     * @attribute
+     * @title Unidirectional
+     * @type {boolean}
+     */
+    unidirectional = false;
 
     static tmp = new Vec3();
 

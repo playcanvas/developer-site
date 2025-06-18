@@ -51,13 +51,24 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
-import { ScriptType, math } from 'playcanvas';
+import { ScriptType, math, Entity } from 'playcanvas';
 
 export class ProgressBar extends Script {
-    static attributes = {
-        progressImage: { type: 'entity' },
-        progressImageMaxWidth: { type: 'number' }
-    };
+    static scriptName = "progressBar";
+
+   /**
+     * @attribute
+     * @title Progress Image
+     * @type {Entity}
+     */
+    progressImage = null;
+
+    /**
+     * @attribute
+     * @title Progress Image Max Width
+     * @type {number}
+     */
+    progressImageMaxWidth = null;
 
     initialize() {
         // use our own rect object to set the size of

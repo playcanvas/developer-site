@@ -32,6 +32,8 @@ window.setScore = function(score) {
 };
 
 export class ScoreKeeper extends Script {
+    static scriptName = "scoreKeeper";
+
     initialize() {
         // Define an application event to set the score
         this.app.on("score:set", (score) => {

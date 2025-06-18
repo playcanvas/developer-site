@@ -71,6 +71,7 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, math } from 'playcanvas';
 
 export class UiStats extends Script {
+    static scriptName = "uiStats";
 
     initialize() {
         // find our widgets

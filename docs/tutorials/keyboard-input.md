@@ -26,16 +26,23 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_A } from 'playcanvas';
 
 export class KeyboardHandler extends Script {
-    static attributes = {
-        redMaterial: {
-            type: 'asset',
-            assetType: 'material'
-        },
-        whiteMaterial: {
-            type: 'asset',
-            assetType: 'material'
-        }
-    };
+    static scriptName = "keyboardHandler";
+
+    /**
+     * @attribute
+     * @title Red Material
+     * @type {Asset}
+     * @resource material
+     */
+    redMaterial = null;
+
+    /**
+     * @attribute
+     * @title White Material
+     * @type {Asset}
+     * @resource material
+     */
+    whiteMaterial = null;
 
     // initialize code called once per entity
     initialize() {

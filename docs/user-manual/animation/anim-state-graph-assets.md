@@ -128,6 +128,9 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class AnimationBlending extends Script {
+
+  static scriptName = "animationBlending";
+
   initialize() {
     this.entity.anim.on('smile_start', (event) => {
       this.entity.anim.findAnimationLayer('smile').weight = 1;

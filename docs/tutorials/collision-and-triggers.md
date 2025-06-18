@@ -73,7 +73,6 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, Vec3 } from 'playcanvas';
 
 export class Trigger extends Script {
-
     static scriptName = "trigger";
 
     // initialize code called once per entity
@@ -155,7 +154,6 @@ Both events are useful, but in this demo we'll use the **collisionstart** event 
 import { Script } from 'playcanvas';
 
 export class Collider extends Script {
-
     static scriptName = "collider";
 
     // initialize code called once per entity

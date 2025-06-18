@@ -79,6 +79,8 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class Movement extends Script {
+    static scriptName = "movement";
+
     initialize() {
         // initialize code called once per entity
     }
@@ -118,6 +120,8 @@ To make the sphere controllable, let's add some code to the `update` function. C
 import { ScriptType, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
 
 export class Movement extends Script {
+    static scriptName = "movement";
+
     initialize() {
         // initialize code called once per entity
     }

@@ -23,9 +23,15 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class TextScript extends Script {
-    static attributes = {
-        textAsset: { type: 'asset', assetType: 'text' }
-    };
+    static scriptName = "textScript";
+
+    /**
+     * @attribute
+     * @title Text Asset
+     * @type {Asset}
+     * @resource text
+     */
+    textAsset = null;
 
     initialize() {
         if (this.textAsset) {

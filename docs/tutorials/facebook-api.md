@@ -43,7 +43,6 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class FbUi extends Script {
-
     static scriptName = "fbUi";
 
     initialize() {
@@ -231,7 +230,6 @@ The file `face-photo.js` uses the Facebook API to retrieve a list of photos from
 import { ScriptType, Vec3, string, math, Asset } from 'playcanvas';
 
 export class FacePhoto extends Script {
-
     static scriptName = "facePhoto";
 
     /**

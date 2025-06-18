@@ -28,20 +28,31 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, Vec3, MOUSEBUTTON_LEFT, MOUSEBUTTON_MIDDLE, MOUSEBUTTON_RIGHT } from 'playcanvas';
 
 export class Mouse extends Script {
-    static attributes = {
-        redMaterial: {
-            type: 'asset',
-            assetType: 'material'
-        },
-        greenMaterial: {
-            type: 'asset',
-            assetType: 'material'
-        },
-        blueMaterial: {
-            type: 'asset',
-            assetType: 'material'
-        }
-    };
+    static scriptName = "mouse";
+
+    /**
+     * @attribute
+     * @title Red Material
+     * @type {Asset}
+     * @resource material
+     */
+    redMaterial = null;
+
+    /**
+     * @attribute
+     * @title Green Material
+     * @type {Asset}
+     * @resource material
+     */
+    greenMaterial = null;
+
+    /**
+     * @attribute
+     * @title Blue Material
+     * @type {Asset}
+     * @resource material
+     */
+    blueMaterial = null;
 
     // initialize code called once per entity
     initialize() {

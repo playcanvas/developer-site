@@ -24,15 +24,58 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, Vec3, Mesh, MeshInstance, GraphNode, Model, calculateNormals } from 'playcanvas';
 
 export class Terrain extends Script {
-    static attributes = {
-        heightMap: { type: 'asset', assetType: 'texture' },
-        minHeight: { type: 'number', default: 0 },
-        maxHeight: { type: 'number', default: 10 },
-        width: { type: 'number', default: 100 },
-        depth: { type: 'number', default: 100 },
-        subdivisions: { type: 'number', default: 250 },
-        material: { type: 'asset', assetType: 'material' }
-    };
+    static scriptName = "terrain";
+
+    /**
+     * @attribute
+     * @title Height Map
+     * @type {Asset}
+     * @resource texture
+     */
+    heightMap = null;
+
+    /**
+     * @attribute
+     * @title Min Height
+     * @type {number}
+     */
+    minHeight = 0;
+
+    /**
+     * @attribute
+     * @title Max Height
+     * @type {number}
+     */
+    maxHeight = 10;
+
+    /**
+     * @attribute
+     * @title Width
+     * @type {number}
+     */
+    width = 100;
+
+    /**
+     * @attribute
+     * @title Depth
+     * @type {number}
+     */
+    depth = 100;
+
+    /**
+     * @attribute
+     * @title Subdivisions
+     * @type {number}
+     */
+    subdivisions = 250;
+
+    /**
+     * @attribute
+     * @title Material
+     * @type {Asset}
+     * @resource material
+     */
+    material = null;
 
     initialize() {
         const img = this.heightMap.resource.getSource();

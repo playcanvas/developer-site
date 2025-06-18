@@ -26,11 +26,14 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class Analyser extends Script {
-    static attributes = {
-        fftsize: {
-            type: 'number'
-        }
-    };
+    static scriptName = "analyzer";
+
+    /**
+     * @attribute
+     * @title Fftsize
+     * @type {number}
+     */
+    fftsize = null;
 
     // initialize code called once per entity
     initialize() {
@@ -111,21 +114,35 @@ Then in our update loop we use the `AnalyserNode` methods `getFloatFrequencyData
 import { ScriptType, Vec3 } from 'playcanvas';
 
 export class Visualizer extends Script {
-    static attributes = {
-        analyser: {
-            type: 'entity'
-        },
-        freqcolor: {
-            type: 'rgba'
-        },
-        timecolor: {
-            type: 'rgba'
-        },
-        heightScale: {
-            type: 'number',
-            default: 1
-        }
-    };
+    static scriptName = "visualizer";
+
+    /**
+     * @attribute
+     * @title Analyser
+     * @type {Entity}
+     */
+    analyser = null;
+
+    /**
+     * @attribute
+     * @title Freqcolor
+     * @type {Color}
+     */
+    freqcolor = null;
+
+    /**
+     * @attribute
+     * @title Timecolor
+     * @type {Color}
+     */
+    timecolor = null;
+
+    /**
+     * @attribute
+     * @title Height Scale
+     * @type {number}
+     */
+    heightScale = 1;
 
     // initialize code called once per entity
     initialize() {

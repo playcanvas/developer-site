@@ -86,20 +86,31 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, createStyle } from 'playcanvas';
 
 export class Game extends Script {
-    static attributes = {
-        display: {
-            type: 'asset',
-            assetType: 'html'
-        },
-        style: {
-            type: 'asset',
-            assetType: 'css'
-        },
-        characterData: {
-            type: 'asset',
-            assetType: 'json'
-        }
-    };
+    static scriptName = "game";
+
+    /**
+     * @attribute
+     * @title Display
+     * @type {Asset}
+     * @resource html
+     */
+    display = null;
+
+    /**
+     * @attribute
+     * @title Style
+     * @type {Asset}
+     * @resource css
+     */
+    style = null;
+
+    /**
+     * @attribute
+     * @title Character Data
+     * @type {Asset}
+     * @resource json
+     */
+    characterData = null;
 
     // initialize code called once per entity
     initialize() {

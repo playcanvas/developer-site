@@ -102,6 +102,7 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class NetworkManager extends Script {
+  static scriptName = "networkManager";
 
   async initialize() {
     //

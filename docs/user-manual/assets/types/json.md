@@ -29,10 +29,16 @@ import TabItem from '@theme/TabItem';
 ```javascript
 import { Script } from 'playcanvas';
 
-export class JsonScript extends Script {   
-    static attributes = {
-        jsonAsset: { type: 'asset', assetType: 'json' }
-    }
+export class JsonScript extends Script {
+    static scriptName = "jsonScript";
+
+    /**
+     * @attribute
+     * @title Json Asset
+     * @type {Asset}
+     * @resource json
+     */
+    jsonAsset = null;
 
     initialize() {
         if (this.jsonAsset) {

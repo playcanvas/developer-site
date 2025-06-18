@@ -94,11 +94,28 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class Leaderboard extends Script {
-    static attributes = {
-        template: { type: "entity" },
-        personal: { type: "entity" },
-        leaderboard: { type: "entity" }
-    };
+    static scriptName = "leaderBoard";
+
+    /**
+     * @attribute
+     * @title Template
+     * @type {Entity}
+     */
+    template = null;
+
+    /**
+     * @attribute
+     * @title Personal
+     * @type {Entity}
+     */
+    personal = null;
+
+    /**
+     * @attribute
+     * @title Leaderboard
+     * @type {Entity}
+     */
+    leaderboard = null;
 
     initialize() {
         this.entries = [];

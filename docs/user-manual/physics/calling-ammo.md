@@ -20,52 +20,73 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM (Recommended)">
 
 ```javascript
-import { ScriptType, Vec3 } from 'playcanvas';
+import { ScriptType, Vec3, Entity, Color } from 'playcanvas';
 
 export class PointToPointConstraint extends Script {
-    static attributes = {
-        pivotA: {
-            title: 'Pivot',
-            description: 'Position of the constraint in the local space of this entity.',
-            type: 'vec3',
-            default: [0, 0, 0]
-        },
-        entityB: {
-            title: 'Connected Entity',
-            description: 'Optional second entity',
-            type: 'entity'
-        },
-        pivotB: {
-            title: 'Connected Pivot',
-            description: 'Position of the constraint in the local space of entity B (if specified).',
-            type: 'vec3',
-            default: [0, 0, 0]
-        },
-        breakingThreshold: {
-            title: 'Break Threshold',
-            description: 'Maximum breaking impulse threshold required to break the constraint.',
-            type: 'number',
-            default: 3.4e+38
-        },
-        enableCollision: {
-            title: 'Enable Collision',
-            description: 'Enable collision between linked rigid bodies.',
-            type: 'boolean',
-            default: true
-        },
-        debugRender: {
-            title: 'Debug Render',
-            description: 'Enable to render a representation of the constraint.',
-            type: 'boolean',
-            default: false
-        },
-        debugColor: {
-            title: 'Debug Color',
-            description: 'The color of the debug rendering of the constraint.',
-            type: 'rgb',
-            default: [1, 0, 0]
-        }
-    };
+    static scriptName = "pointToPointConstraint";
+
+    /**
+     * Position of the constraint in the local space of this entity.
+     * 
+     * @attribute
+     * @title Pivot
+     * @type {Vec3}
+     */
+    pivotA = new pc.Vec3(0, 0, 0);
+
+    /**
+     * Optional second entity.
+     * 
+     * @attribute
+     * @title Connected Entity
+     * @type {Entity}
+     */
+    entityB = null;
+
+    /**
+     * Position of the constraint in the local space of entity B (if specified).
+     * 
+     * @attribute
+     * @title Connected Pivot
+     * @type {Vec3}
+     */
+    pivotB = new pc.Vec3(0, 0, 0);
+
+    /**
+     * Maximum breaking impulse threshold required to break the constraint.
+     * 
+     * @attribute
+     * @title Break Threshold
+     * @type {number}
+     */
+    breakingThreshold = 3.4e+38;
+
+    /**
+     * Enable collision between linked rigid bodies.
+     * 
+     * @attribute
+     * @title Enable Collision
+     * @type {boolean}
+     */
+    enableCollision = true;
+
+    /**
+     * Enable to render a representation of the constraint.
+     * 
+     * @attribute
+     * @title Debug Render
+     * @type {boolean}
+     */
+    debugRender = false;
+
+    /**
+     * The color of the debug rendering of the constraint.
+     * 
+     * @attribute
+     * @title Debug Color
+     * @type {Color}
+     */
+    debugColor = new Color(1, 0, 0);
 
     initialize() {
         this.createConstraint();
@@ -285,20 +306,25 @@ You can enable CCD for any PlayCanvas rigid body using the following script:
 import { Script } from 'playcanvas';
 
 export class Ccd extends Script {
-    static attributes = {
-        motionThreshold: {
-            type: 'number',
-            default: 1,
-            title: 'Motion Threshold',
-            description: 'Number of meters moved in one frame before CCD is enabled'
-        },
-        sweptSphereRadius: {
-            type: 'number',
-            default: 0.2,
-            title: 'Swept Sphere Radius',
-            description: 'This should be below the half extent of the collision volume. E.g., For an object of dimensions 1 meter, try 0.2'
-        }
-    };
+    static scriptName = "ccd";
+
+    /**
+     * Number of meters moved in one frame before CCD is enabled.
+     * 
+     * @attribute
+     * @title Motion Threshold
+     * @type {number}
+     */
+    motionThreshold = 1;
+
+    /**
+     * This should be below the half extent of the collision volume. E.g., For an object of dimensions 1 meter, try 0.2.
+     * 
+     * @attribute
+     * @title Swept Sphere Radius
+     * @type {number}
+     */
+    sweptSphereRadius = 0.2;
 
     initialize() {
         const body = this.entity.rigidbody.body;

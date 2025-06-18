@@ -122,34 +122,57 @@ import TabItem from '@theme/TabItem';
 ```javascript
 import { Script } from 'playcanvas';
 
+/** @enum {string} */
+const Region = {
+    "Select Region": "default",
+    "Asia, Singapore": "asia",
+    "Australia, Melbourne": "au",
+    "Canada, East Montreal": "cae",
+    "Chinese Mainland (See Instructions) Shanghai": "cn",
+    "Europe, Amsterdam": "eu",
+    "India, Chennai": "in",
+    "Japan, Tokyo": "jp",
+    "Russia Moscow": "ru",
+    "Russia, East Khabarovsk": "rue",
+    "South Africa Johannesburg": "za",
+    "South America, Sao Paulo": "sa",
+    "South Korea, Seoul": "kr",
+    "Turkey Istanbul": "tr",
+    "USA, East Washington": "us",
+    "USA, West San José": "usw",
+}
+
 export class PhotonLoadBalancingPlayCanvas extends Script {
-    static attributes = {
-        appId: { type: "string" },
-        appVersion: { type: "string", default: "1.0" },
-        wss: { type: "boolean", default: true },
-        region: {
-            type: "string", default: "jp",
-            description: "Photon Cloud has servers in several regions, distributed across multiple hosting centers over the world.You can choose optimized region for you.",
-            enum: [
-                { "Select Region": "default" },
-                { "Asia, Singapore": "asia" },
-                { "Australia, Melbourne": "au" },
-                { "Canada, East Montreal": "cae" },
-                { "Chinese Mainland (See Instructions) Shanghai": "cn" },
-                { "Europe, Amsterdam": "eu" },
-                { "India, Chennai": "in" },
-                { "Japan, Tokyo": "jp" },
-                { "Russia Moscow": "ru" },
-                { "Russia, East Khabarovsk": "rue" },
-                { "South Africa Johannesburg": "za" },
-                { "South America, Sao Paulo": "sa" },
-                { "South Korea, Seoul": "kr" },
-                { "Turkey Istanbul": "tr" },
-                { "USA, East Washington": "us" },
-                { "USA, West San José": "usw" },
-            ],
-        }
-    };
+    static scriptName = "photonLoadBalancingPlayCanvas";
+
+    /**
+     * @attribute
+     * @title App Id
+     * @type {string}
+     */
+    appId = null;
+
+    /**
+     * @attribute
+     * @title App Version
+     * @type {string}
+     */
+    appVersion = "1.0";
+
+    /**
+     * @attribute
+     * @title Wss
+     * @type {boolean}
+     */
+    wss = true;
+
+    /**
+     * Photon Cloud has servers in several regions, distributed across multiple hosting centers over the world.You can choose optimized region for you.
+     * 
+     * @attribute
+     * @type {Region}
+     */ 
+    region = Region["Europe, Amsterdam"]
 
     initialize() {
         // Assuming Photon and its LoadBalancingClient are globally available or imported
@@ -428,6 +451,8 @@ Create a new **player.js** for character movement.
 import { ScriptType, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
 
 export class Movement extends Script {
+    static scriptName = "movement";
+
     update (dt) {
         const pos = new Vec3(0, 0, 0);
         if (this.app.keyboard.isPressed(KEY_LEFT)) {
@@ -492,34 +517,57 @@ Use **raiseEvent** and **onEvent** to synchronize the player's location.
 ```javascript
 import { ScriptType, Entity } from 'playcanvas';
 
+/** @enum {string} */
+const Region = {
+    "Select Region": "default",
+    "Asia, Singapore": "asia",
+    "Australia, Melbourne": "au",
+    "Canada, East Montreal": "cae",
+    "Chinese Mainland (See Instructions) Shanghai": "cn",
+    "Europe, Amsterdam": "eu",
+    "India, Chennai": "in",
+    "Japan, Tokyo": "jp",
+    "Russia Moscow": "ru",
+    "Russia, East Khabarovsk": "rue",
+    "South Africa Johannesburg": "za",
+    "South America, Sao Paulo": "sa",
+    "South Korea, Seoul": "kr",
+    "Turkey Istanbul": "tr",
+    "USA, East Washington": "us",
+    "USA, West San José": "usw",
+}
+
 export class PhotonLoadBalancingPlayCanvas extends Script {
-    static attributes = {
-        appId: { type: "string" },
-        appVersion: { type: "string", default: "1.0" },
-        wss: { type: "boolean", default: true },
-        region: {
-            type: "string", default: "jp",
-            description: "Photon Cloud has servers in several regions, distributed across multiple hosting centers over the world.You can choose optimized region for you.",
-            enum: [
-                { "Select Region": "default" },
-                { "Asia, Singapore": "asia" },
-                { "Australia, Melbourne": "au" },
-                { "Canada, East Montreal": "cae" },
-                { "Chinese Mainland (See Instructions) Shanghai": "cn" },
-                { "Europe, Amsterdam": "eu" },
-                { "India, Chennai": "in" },
-                { "Japan, Tokyo": "jp" },
-                { "Russia Moscow": "ru" },
-                { "Russia, East Khabarovsk": "rue" },
-                { "South Africa Johannesburg": "za" },
-                { "South America, Sao Paulo": "sa" },
-                { "South Korea, Seoul": "kr" },
-                { "Turkey Istanbul": "tr" },
-                { "USA, East Washington": "us" },
-                { "USA, West San José": "usw" },
-            ],
-        }
-    };
+    static scriptName = "photonLoadBalancingPlayCanvas";
+
+    /**
+     * @attribute
+     * @title App Id
+     * @type {string}
+     */
+    appId = null;
+
+    /**
+     * @attribute
+     * @title App Version
+     * @type {string}
+     */
+    appVersion = "1.0";
+
+    /**
+     * @attribute
+     * @title Wss
+     * @type {boolean}
+     */
+    wss = true;
+
+    /**
+     * Photon Cloud has servers in several regions, distributed across multiple hosting centers over the world.You can choose optimized region for you.
+     * 
+     * @attribute
+     * @type {Region}
+     */ 
+    region = Region["Europe, Amsterdam"]
 
     initialize() {
         // Assuming Photon and its LoadBalancingClient are globally available or correctly imported
@@ -724,6 +772,7 @@ PhotonLoadBalancingPlayCanvas.prototype.onEvent = function (code, content, actor
 import { ScriptType, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
 
 export class Player extends Script {
+    static scriptName = "player";
 
     update(dt) {
         const pos = new Vec3(0, 0, 0);

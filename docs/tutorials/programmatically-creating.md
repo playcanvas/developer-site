@@ -92,24 +92,36 @@ import TabItem from '@theme/TabItem';
 import { ScriptType, Entity, math } from 'playcanvas';
 
 export class EntityCreator extends Script {
-    static attributes = {
-        material: {
-            type: 'asset',
-            assetType: 'material'
-        },
-        boxDimensions: {
-            type: 'number',
-            default: 10
-        },
-        lifetime: {
-            type: 'number',
-            default: 5
-        },
-        maxCubes: {
-            type: 'number',
-            default: 10
-        }
-    };
+    static scriptName = "entityCreator";
+
+    /**
+     * @attribute
+     * @title Material
+     * @type {Asset}
+     * @resource material
+     */
+    material = null;
+
+    /**
+     * @attribute
+     * @title Box Dimensions
+     * @type {number}
+     */
+    boxDimensions = 10;
+
+    /**
+     * @attribute
+     * @title Lifetime
+     * @type {number}
+     */
+    lifetime = 5;
+
+    /**
+     * @attribute
+     * @title Max Cubes
+     * @type {number}
+     */
+    maxCubes = 10;
 
     // initialize code called once per entity
     initialize() {
