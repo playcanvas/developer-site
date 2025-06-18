@@ -37,7 +37,7 @@ import { Script } from 'playcanvas';
 export class AnimationEvents extends Script {
     static scriptName = "animationEvents";
 
-    initialize(){
+    initialize() {
         this.entity.anim.on('plant_foot', (event) => {
             // get the foot bone from the event's string property, either right_foot or left_foot
             const footBone = this.entity.findByName(event.string);
