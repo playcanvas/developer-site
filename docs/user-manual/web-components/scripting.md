@@ -8,7 +8,9 @@ Scripts add custom behaviors to entities in your PlayCanvas Web Components app.
 Let's consider a simple script that rotates an entity over time:
 
 ```javascript title="rotate-script.mjs"
-export default class RotateScript {
+import { Script } from 'playcanvas';
+
+export class RotateScript extends Script {
     static scriptName = 'rotateScript';
 
     update(dt) {
@@ -49,8 +51,10 @@ Our rotate script is currently hardcoded to rotate at 90 degrees per second. But
 
 Let's update our script to accept a rotation speed as an attribute:
 
-```javascript title="rotate-script.mjs" {4-8,12}
-export default class RotateScript {
+```javascript title="rotate-script.mjs" {6-10,14}
+import { Script } from 'playcanvas';
+
+export class RotateScript extends Script {
     static scriptName = 'rotateScript';
 
     /**
