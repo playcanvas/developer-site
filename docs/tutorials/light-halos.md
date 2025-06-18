@@ -94,7 +94,6 @@ export class Halo extends Script {
     camera = null;
 
     /**
-     * 
      * @attribute
      * @title Unidirectional
      * @type {boolean}
