@@ -337,45 +337,39 @@ And then declare these new functions inside Network.js:
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-initializePlayers(data) {
-    this.players = data.players;
-    // Create a player array and populate it with the currently connected players.
+    initializePlayers (data) {
+        this.players = data.players;
+        Network.id = data.id;
 
-    this.id = data.id;
-    // Keep track of what ID number you are.
-
-    for(var id in this.players){
-        if(id != Network.id){
-            this.players[id].entity = this.createPlayerEntity(this.players[id]);
+        for (let id in this.players) {
+            if (id != Network.id) {
+                this.players[id].entity = this.createPlayerEntity(this.players[id]);
+            }
         }
-    }
-    // For every player already connected, create a new capsule entity.
 
-    this.initialized = true;
-    // Mark that the client has received data from the server.
-}
+        this.initialized = true;
+        console.log('initialized');
+    };
 
-createPlayerEntity(data) {
-    var newPlayer = this.other.clone ();
-    // Create a new player entity.
+    createPlayerEntity (data) {
+        // Create a new player entity
+        var newPlayer = this.other.clone();
+        newPlayer.enabled = true;
 
-    newPlayer.enabled = true;
-    // Enable the newly created player.
+        // Add the entity to the entity hierarchy
+        this.other.getParent().addChild(newPlayer);
 
-    this.other.getParent().addChild (newPlayer);
-    // Add the entity to the entity hierarchy.
+        // If a location was given, teleport the new entity to the position of the connected player
+        if (data)
+            newPlayer.rigidbody.teleport(data.x, data.y, data.z);
 
-    if (data)
-        newPlayer.rigidbody.teleport(data.x, data.y, data.z);
-    // If a location was given, teleport the new entity to the position of the connected player.
+        return newPlayer;
+    };
 
-    return newPlayer;
-    // Return the new entity.
-}
-
-addPlayer(data) {
-    this.players[data.id] = data;
-    this.players[data.id].entity = this.createPlayerEntity(data);
+    addPlayer (data) {
+        this.players[data.id] = data;
+        this.players[data.id].entity = this.createPlayerEntity(data);
+    };
 }
 ```
 
