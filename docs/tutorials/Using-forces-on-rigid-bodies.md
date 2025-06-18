@@ -121,7 +121,7 @@ import TabItem from '@theme/TabItem';
 
 ```javascript
 import {
-    ScriptType, Vec3,
+    Script, Vec3,
     EVENT_KEYDOWN, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_A, KEY_D, KEY_W, KEY_S, KEY_F, KEY_R
 } from 'playcanvas';
 
