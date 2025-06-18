@@ -90,7 +90,7 @@ export class KeyboardHandler extends Script {
      */
     onKeyDown(event) {
         // Check event.key to detect which key has been pressed
-        if (event.key === pc.KEY_A && this.redMaterial) {
+        if (event.key === KEY_A && this.redMaterial) {
             this.entity.render.meshInstances[0].material = this.redMaterial.resource;
         }
 
