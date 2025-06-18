@@ -130,7 +130,7 @@ export class WaterColor extends Script {
      * @type {Asset}
      * @resource 'shader'
      */
-    vs
+    vs;
 
     /**
      * @attribute
@@ -138,7 +138,7 @@ export class WaterColor extends Script {
      * @type {Asset}
      * @resource 'shader'
      */ 
-    fs
+    fs;
 
 
     // initialize code called once per entity
