@@ -380,7 +380,6 @@ export class UiController extends Script {
     static scriptName = "uiController";
 
     /**
-     * 
      * @attribute
      * @title Refresh Button Entity
      * @type {Entity}
@@ -388,7 +387,6 @@ export class UiController extends Script {
     refreshButtonEntity = null;
 
     /**
-     * 
      * @attribute
      * @title Interstitial Ad Button Entity
      * @type {Entity}
@@ -396,7 +394,6 @@ export class UiController extends Script {
     interstitialAdButtonEntity = null;
 
     /**
-     * 
      * @attribute
      * @title Rewarded Ad Button Entity
      * @type {Entity}
@@ -404,7 +401,6 @@ export class UiController extends Script {
     rewardedAdButtonEntity = null;
 
     /**
-     * 
      * @attribute
      * @title OK Rewarded Button Entity
      * @type {Entity}
@@ -412,7 +408,6 @@ export class UiController extends Script {
     okRewardButtonEntity = null;
 
     /**
-     * 
      * @attribute
      * @title Rewarded Given Entity
      * @type {Entity}
