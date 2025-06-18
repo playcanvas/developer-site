@@ -73,6 +73,79 @@ We're using the `setParameter` method on the [pc.MeshInstance][5] to set a value
 
 Here's the complete listing:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3, Entity } from 'playcanvas';
+
+export class Halo extends Script {
+    static scriptName = "halo";
+
+    /**
+     * @attribute
+     * @title Camera
+     * @type {Entity}
+     */
+    camera = null;
+
+    /**
+     * @attribute
+     * @title Unidirectional
+     * @type {boolean}
+     */
+    unidirectional = false;
+
+    static tmp = new Vec3();
+
+    // initialize code called once per entity
+    initialize() {
+        // Get the Entity with the plane model on it
+        this.plane = this.entity.children[0];
+
+        // Get the parent entity which is used for direction
+        this.parent = this.entity.parent;
+    }
+
+    // update code called every frame
+    update(dt) {
+        let tmp = Halo.tmp;
+
+        // Store the vector the parent is facing (note forwards is negative z)
+        tmp.copy(this.parent.forward).scale(-1);
+
+        let meshes = this.plane.model.meshInstances;
+
+        if (this.camera) {
+            // Set the glow to always face the camera
+            this.entity.lookAt(this.camera.getPosition(), Vec3.UP);
+
+            // If enabled, unidirectional means the glow fades off as it turns away from the camera
+            if (this.unidirectional) {
+                // Get the dot product of the parent direction and the camera direction
+                let dot = -1 * tmp.dot(this.camera.forward);
+                // If the dot product is less that 0 the glow is facing away from the camera
+                if (dot < 0) {
+                    dot = 0;
+                }
+
+                // Override the opacity value on the planes mesh instance to fade to zero as the glow turns away from the camera
+                meshes[0].setParameter("material_opacity", dot);
+            } else {
+                // Need to set a default value because of this issue for now: https://github.com/playcanvas/engine/issues/453
+                meshes[0].setParameter("material_opacity", 1);
+            }
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Halo = pc.createScript('halo');
 
@@ -122,6 +195,9 @@ Halo.prototype.update = function(dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 That's it. A simple but pretty effect to add to your scene. Take a look at the [project][4] for more information.
 

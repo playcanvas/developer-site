@@ -118,6 +118,32 @@ By default, layers animate a model in the order that they’re created in the la
 
 The blend weight value of each layer is used when blending multiple layers to determine how much each layer should contribute to the final animation. These blend weights can be adjusted at runtime in your game scripts to update the blends of your layers in real time:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class AnimationBlending extends Script {
+  static scriptName = "animationBlending";
+
+  initialize() {
+    this.entity.anim.on('smile_start', (event) => {
+      this.entity.anim.findAnimationLayer('smile').weight = 1;
+    });
+    this.entity.anim.on('smile_end', (event) => {
+      this.entity.anim.findAnimationLayer('smile').weight = 0;
+    });
+  }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var AnimationBlending = pc.createScript('animationBlending');
 
@@ -131,6 +157,9 @@ AnimationBlending.prototype.initialize = function() {
     }), this);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 If you [mask your layers][anim-layer-masking], you can set the `blend type` of your layers to `Additive` to blend in an animation which only controls part of your model's bones. Updating the `blend weight` in real time as described above can allow you to create smooth blends between animations on different layers. This is particularly useful when animation characters that need to carry out different actions using their upper and lower body. For example, you could have a `shooting` animation that is blended in and out on a characters upper body, while freeing up the lower body for various locomotion animations such as `walking` and `running`.
 

@@ -367,6 +367,120 @@ Let's see it in action:
 
 The completed `ui-controller.js` file should look like this:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class UiController extends Script {
+    static scriptName = "uiController";
+
+    /**
+     * @attribute
+     * @title Refresh Button Entity
+     * @type {Entity}
+     */
+    refreshButtonEntity = null;
+
+    /**
+     * @attribute
+     * @title Interstitial Ad Button Entity
+     * @type {Entity}
+     */
+    interstitialAdButtonEntity = null;
+
+    /**
+     * @attribute
+     * @title Rewarded Ad Button Entity
+     * @type {Entity}
+     */
+    rewardedAdButtonEntity = null;
+
+    /**
+     * @attribute
+     * @title OK Rewarded Button Entity
+     * @type {Entity}
+     */
+    okRewardButtonEntity = null;
+
+    /**
+     * @attribute
+     * @title Rewarded Given Entity
+     * @type {Entity}
+     */
+    rewardedGivenPanelEntity = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this._showRewardAdFn = null;
+
+        this.rewardedGivenPanelEntity.enabled = false;
+        this.rewardedAdButtonEntity.button.active = false;
+
+        const onRefresh = () => {
+            this.rewardedAdButtonEntity.button.active = false;
+
+            // Check if rewarded ad is available to view
+            if (afg.ready) {
+                afg.adBreak({
+                    type: 'reward',
+                    name: 'test-reward',
+                    beforeReward: function(showAdFn) {
+                        this._showRewardAdFn = showAdFn;
+                        this.rewardedAdButtonEntity.button.active = true;
+                    }.bind(this),
+                    adViewed: () => {
+                        afg.onAfterAd();
+                        this.rewardedGivenPanelEntity.enabled = true;
+                        this.rewardedAdButtonEntity.button.active = false;
+                        this._showRewardAdFn = null;
+                    },
+                    adDismissed: () => {
+                        afg.onAfterAd();
+                        this.rewardedAdButtonEntity.button.active = false;
+                        this._showRewardAdFn = null;
+                    },
+                    adBreakDone: function(placementInfo) { }.bind(this)
+                });
+            }
+        };
+
+        this.refreshButtonEntity.button.on('click', (e) => {
+            onRefresh();
+        }, this);
+
+        this.interstitialAdButtonEntity.button.on('click', (e) => {
+            if (afg.ready) {
+                afg.adBreak({
+                    type: 'start',
+                    name: 'test-interstitial',
+                    beforeAd: () => { afg.onBeforeAd(); },
+                    adBreakDone: () => { afg.onAfterAd(); onRefresh(); }
+                });
+            }
+        }, this);
+
+        this.rewardedAdButtonEntity.button.on('click', (e) => {
+            if (this._showRewardAdFn) {
+                afg.onBeforeAd();
+                this._showRewardAdFn();
+            }
+        }, this);
+
+        this.okRewardButtonEntity.button.on('click', (e) => {
+            this.rewardedGivenPanelEntity.enabled = false;
+        }, this);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var UiController = pc.createScript('uiController');
 UiController.attributes.add('refreshButtonEntity', {type: 'entity', title: 'Refresh Button Entity'});
@@ -438,6 +552,9 @@ UiController.prototype.initialize = function() {
     }, this);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 ## Wrapping up
 

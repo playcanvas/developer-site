@@ -11,6 +11,32 @@ To create a trigger volume, add a [collision component][1] to an entity and conf
 
 To check whether a volume has been entered or exited by a rigid body based entity, you need a simple script:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class TriggerVolume extends Script {
+    static scriptName = "triggerVolume";
+
+    initialize() {
+        this.entity.collision.on('triggerenter', (entity) => {
+            console.log(`${entity.name} has entered trigger volume.`);
+        });
+        this.entity.collision.on('triggerleave', (entity) => {
+            console.log(`${entity.name} has left trigger volume.`);
+        });
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var TriggerVolume = pc.createScript('triggerVolume');
 
@@ -24,5 +50,8 @@ TriggerVolume.prototype.initialize = function() {
     });
 };
 ```
+
+</TabItem>
+</Tabs>
 
 [1]: /user-manual/scenes/components/collision

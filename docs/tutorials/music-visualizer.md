@@ -16,6 +16,52 @@ Our music visualizer consists of two scripts. The analyser, plays the audio and 
 
 ## The Analyser
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Analyser extends Script {
+    static scriptName = "analyser";
+
+    /**
+     * @attribute
+     * @title Fftsize
+     * @type {number}
+     */
+    fftsize = null;
+
+    // initialize code called once per entity
+    initialize() {
+        const context = this.app.systems.sound.context;
+
+        // Create analyser node and set up
+        this.analyser = context.createAnalyser();
+        this.analyser.smoothingTimeConstant = 0.6;
+        this.analyser.fftSize = this.fftsize;
+
+        this.freqData = new Float32Array(this.analyser.frequencyBinCount);
+        this.timeData = new Float32Array(this.analyser.fftSize);
+
+        const slot = this.entity.sound.slot("track");
+        slot.setExternalNodes(this.analyser);
+    }
+
+    // update code called every frame
+    update(dt) {
+        this.analyser.getFloatFrequencyData(this.freqData);
+        this.analyser.getFloatTimeDomainData(this.timeData);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Analyser = pc.createScript('analyser');
 
@@ -46,6 +92,9 @@ Analyser.prototype.update = function(dt) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 Let's take a closer look at the code here.
 
 First we get hold of the `context`. This is the applications instance of an [`AudioContext`][2]. We use this to create a new [`AnalyserNode`][3] which is part of the Web Audio API the standard across all modern browsers. The `AnalyserNode` let's us access the raw data of the audio every frame as an array of values. It has a couple of properties `smoothingTimeConstant` determines whether the data sampling is smoothed over time. `0` means no smoothing, `1` means super-smooth. And `fftSize` this determines how many samples the analyser node will generate. It must be a power of two, the higher it is the more detailed and the more expensive for your CPU.
@@ -57,6 +106,85 @@ The final part of the setup is to use `setExternalNodes` from the PlayCanvas Sou
 Then in our update loop we use the `AnalyserNode` methods `getFloatFrequencyData` and `getFloatTimeDomainData` to fill our arrays with data. We'll be using this data in our Visualizer script.
 
 ## The Visualizer
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3 } from 'playcanvas';
+
+export class Visualizer extends Script {
+    static scriptName = "visualizer";
+
+    /**
+     * @attribute
+     * @title Analyser
+     * @type {Entity}
+     */
+    analyser = null;
+
+    /**
+     * @attribute
+     * @title Freqcolor
+     * @type {Color}
+     */
+    freqcolor = null;
+
+    /**
+     * @attribute
+     * @title Timecolor
+     * @type {Color}
+     */
+    timecolor = null;
+
+    /**
+     * @attribute
+     * @title Height Scale
+     * @type {number}
+     */
+    heightScale = 1;
+
+    // initialize code called once per entity
+    initialize() {
+        this.lines = [];
+        const count = this.analyser.script.analyser.fftsize;
+        for (let i = 0; i < count; i++) {
+            this.lines.push(new Vec3(), new Vec3()); // Push two for each line segment
+        }
+
+        this.xScale = 0.10 * 2048 / count;
+        this.minDb = this.analyser.script.analyser.analyser.minDecibels;
+        this.maxDb = this.analyser.script.analyser.analyser.maxDecibels;
+        this.freqScale = 1 / (this.maxDb - this.minDb);
+        this.freqOffset = this.minDb;
+    }
+
+    // update code called every frame
+    update(dt) {
+        this.renderData(this.analyser.script.analyser.freqData, this.freqcolor, this.freqScale, this.freqOffset);
+        this.renderData(this.analyser.script.analyser.timeData, this.timecolor, 0.5, 0);
+    }
+
+    renderData(data, color, scale, offset) {
+        let lineIndex = 0;
+        for (let i = 0; i < data.length - 1; i++) {
+            if (lineIndex < this.lines.length - 1) {
+                const h1 = scale * (data[i] - offset);
+                const h2 = scale * (data[i + 1] - offset);
+
+                this.lines[lineIndex].set(i * this.xScale, this.heightScale * h1, 0);
+                this.lines[lineIndex + 1].set((i + 1) * this.xScale, this.heightScale * h2, 0);
+
+                lineIndex += 2;
+            }
+        }
+        this.app.renderLines(this.lines, color);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Visualizer = pc.createScript('visualizer');
@@ -121,6 +249,9 @@ Visualizer.prototype.renderData = function (data, color, scale, offset) {
     this.app.renderLines(this.lines, color);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 The visualizer script takes all the data from the analyser and renders it as line graph using the [`this.app.renderLines`][4] API.
 

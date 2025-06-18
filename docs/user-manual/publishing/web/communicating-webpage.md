@@ -13,6 +13,52 @@ Common to both methods of hosting you should think about what features of your P
 
 Here is a simple example where we show a couple of different ways of exposing an API from a PlayCanvas application to a web page.
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Application } from 'playcanvas';
+
+// Define a global function to set the score
+window.setScore = function(score) {
+    const app = Application.getApplication();
+    const entity = app.root.findByName("Score Keeper");
+    if (entity && entity.script && entity.script.scoreKeeper) {
+        entity.script.scoreKeeper.setScore(score);
+    }
+};
+
+export class ScoreKeeper extends Script {
+    static scriptName = "scoreKeeper";
+
+    initialize() {
+        // Define an application event to set the score
+        this.app.on("score:set", (score) => {
+            this.setScore(score);
+        }, this);
+    }
+
+    setScore(score) {
+        // Do the score setting here.
+    }
+}
+
+// How to use the API:
+
+// Method one:
+window.setScore(10);
+
+// Method two:
+const app = Application.getApplication();
+app.fire("score:set", 10);
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 // method one: define a global function to set the score
 window.setScore = function (score) {
@@ -42,8 +88,10 @@ window.setScore(10);
 // method two:
 const app = pc.Application.getApplication();
 app.fire("score:set", 10);
-
 ```
+
+</TabItem>
+</Tabs>
 
 Method one defines a global function which can be called anywhere in your page to access your application. Method two defines an application event which you can fire from your page. The application listens for this event and performs actions in response to the event. Both are valid methods of defining an API with your application.
 
@@ -69,6 +117,29 @@ iframe.contentWindow.postMessage({
 
 In your application
 
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Application } from 'playcanvas';
+
+window.addEventListener("message", (event) => {
+    if (event.origin === "http://example.com") { // always check message came from your website
+        const score = event.data.score;
+
+        // call API method one:
+        window.setScore(score);
+
+        // call API method two:
+        const app = Application.getApplication();
+        app.fire("score:set", score);
+    }
+}, false);
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 window.addEventListener("message", function (event) {
     if (event.origin === "http://example.com") { // always check message came from your website
@@ -83,6 +154,9 @@ window.addEventListener("message", function (event) {
     }
 }, false);
 ```
+
+</TabItem>
+</Tabs>
 
 ### Serve your own HTML
 

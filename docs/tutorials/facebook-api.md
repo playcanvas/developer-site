@@ -33,6 +33,90 @@ There is a plugin to help you integrate Facebook available [on github][1]. This 
 
 In this example we've implemented a user interface to let you log in and log out of your Facebook account in the application. This is the code in `fb-ui.js`.
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class FbUi extends Script {
+    static scriptName = "fbUi";
+
+    initialize() {
+        this.app.on("fb:init", () => {
+            this._ready = true;
+            FB.getLoginStatus(this.loginChangeFn);
+        });
+
+        this._loginHandler = null;
+        this._logoutHandler = null;
+    }
+
+    loginChangeFn(response) {
+        if (response.status === "connected") {
+            this.showLogout();
+            this.hideLogin();
+            this.app.fire("app:fblogin");
+        } else {
+            this.showLogin();
+            this.hideLogout();
+            this.app.fire("app:fblogout");
+        }
+    }
+
+    showLogin() {
+        let login = document.querySelector(".fb-login");
+        if (login) {
+            login.style.display = "block";
+            if (!this._loginHandler) {
+                this._loginHandler = () => {
+                    FB.login(this.loginChangeFn, {
+                        scope: 'public_profile, user_photos'
+                    });
+                };
+                let button = login.querySelector(".fb-button");
+                button.addEventListener("click", this._loginHandler);
+            }
+        }
+    }
+
+    hideLogin() {
+        let login = document.querySelector(".fb-login");
+        if (login) {
+            login.style.display = "none";
+        }
+    }
+
+    showLogout() {
+        let logout = document.querySelector(".fb-logout");
+        if (logout) {
+            logout.style.display = "block";
+            if (!this._logoutHandler) {
+                this._logoutHandler = () => {
+                    FB.logout(this.loginChangeFn);
+                };
+                let button = logout.querySelector(".fb-button");
+                button.addEventListener("click", this._logoutHandler);
+            }
+        }
+    }
+
+    hideLogout() {
+        let logout = document.querySelector(".fb-logout");
+        if (logout) {
+            logout.style.display = "none";
+        }
+    }
+}
+
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var FbUi = pc.createScript('fbUi');
 
@@ -120,6 +204,9 @@ FbUi.prototype.hideLogout = function () {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 In the initialize step of this code we're listening for the `fb:init` event from the Facebook plugin. Once this has been fired we know that the Facebook SDK has been loaded and is ready to be used. We use three Facebook SDK functions. `FB.getLoginStatus()` reports back whether the user has already logged into Facebook through your application, `FB.login()` pops up a login dialog for the user and `FB.logout()` logs the user out of your application and of Facebook.
 
 :::warning
@@ -135,6 +222,98 @@ Note, also we fire our own application events `app:fblogin` and `app:fblogout` t
 ### Accessing the Facebook API
 
 The file `face-photo.js` uses the Facebook API to retrieve a list of photos from the user and display them in the 3D world.
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3, string, math, Asset } from 'playcanvas';
+
+export class FacePhoto extends Script {
+    static scriptName = "facePhoto";
+
+    /**
+     * 
+     * @attribute
+     * @title Template
+     * @type {Entity}
+     */
+    template = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this.textures = [];
+
+        // Set the texture loader up so that it can request cross-origin images
+        this.app.loader.getHandler("texture").crossOrigin = "anonymous";
+
+        // listen for the event that signals we've been logged into facebook
+        this.app.on("app:fblogin", this.reset, this);
+    }
+
+    reset() {
+        const app = this.app;
+        const path = string.format("{0}/photos", FB.getUserID());
+
+        const done = () => {
+            const camera = app.root.findByName("Camera");
+            if (camera && camera.script.camera) {
+                camera.script.camera.setBestCameraPositionForModel();
+            }
+        };
+
+        // request the most recent photos from user's facebook account
+        FB.api(path, (lists) => {
+            for (let i = 0; i < lists.data.length; i++) {
+                let count = lists.data.length; // Adjusted to let for block scope
+                const photoId = lists.data[i].id;
+                path = string.format("/{0}?fields=images", photoId);
+
+                // request more information including source URL of the photos
+                FB.api(path, (photo) => {
+
+                    // create a texture asset using the image URL
+                    const asset = new Asset(photo.id, "texture", {
+                        url: photo.images[0].source
+                    });
+
+                    app.assets.load(asset);
+
+                    asset.ready((asset) => {
+                        this.createPhoto(asset.resource);
+                        count--;
+                        done();
+                    });
+                });
+            }
+        });
+    }
+
+    createPhoto(texture) {
+        // clone the image template entity
+        const e = this.template.clone();
+        e.enabled = true;
+        const mesh = e.model.meshInstances[0];
+
+        // override the emissive map on the mesh instance to display the photo texture
+        mesh.setParameter("texture_emissiveMap", texture);
+
+        this.app.root.addChild(e);
+        const MIN = -2.5;
+        const MAX = 2.5;
+
+        // randomly position the photo and set the aspect ratio to the same as the texture
+        e.translate(math.random(MIN, MAX), math.random(MIN, MAX), math.random(MIN, MAX));
+        e.rotate(90, 0, 0);
+
+        const aspect = texture.width / texture.height;
+        e.setLocalScale(aspect, 1, 1);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var FacePhoto = pc.createScript('facePhoto');
@@ -183,8 +362,8 @@ FacePhoto.prototype.reset = function () {
 
                 app.assets.load(asset);
 
-                asset.ready(function (asset) {
-                    self.createPhoto(asset.resource);
+                asset.ready((asset) => {
+                    this.createPhoto(asset.resource);
                     count--;
                     done();
                 });
@@ -215,6 +394,9 @@ FacePhoto.prototype.createPhoto = function(texture) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 Some key parts of this script.
 
 ```javascript
@@ -231,9 +413,9 @@ This line listens for the login event from our `fb-ui.js` file. When the user lo
 
 ```javascript
 // request the most recent photos from user's facebook account
-FB.api(path, function (lists) {
+FB.api(path, (lists) => {
     for (var i = 0; i < lists.data.length; i++) {
-        count = lists.data.length;
+        let count = lists.data.length;
         var photoId = lists.data[i].id;
         path = pc.string.format("/{0}?fields=images", photoId);
 
@@ -247,8 +429,8 @@ FB.api(path, function (lists) {
 
             app.assets.load(asset);
 
-            asset.ready(function (asset) {
-                self.createPhoto(asset.resource);
+            asset.ready((asset) => {
+                this.createPhoto(asset.resource);
                 count--;
                 done();
             });
@@ -262,7 +444,7 @@ In this section of code we are using the Facebook API to access their [Graph API
 Once we have the URL, we create a new `texture` asset and we load the image.
 
 ```javascript
-FacePhoto.prototype.createPhoto = function(texture) {
+createPhoto(texture) {
     // clone the image template entity
     var e = this.template.clone();
     e.enabled = true;

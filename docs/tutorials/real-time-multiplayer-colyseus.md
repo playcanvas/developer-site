@@ -92,6 +92,37 @@ Now, from a new PlayCanvas Script, let's instantiate our `Colyseus.Client` insta
 
 You can attach this script to a new empty entity called "NetworkManager".
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class NetworkManager extends Script {
+    static scriptName = "networkManager";
+
+    async initialize() {
+        //
+        // instantiate the SDK
+        // (no connection is established at this point)
+        //
+        this.app.colyseus = new Colyseus.Client("ws://localhost:2567");
+
+        //
+        // request to join or create a room "my_room"
+        // (establish connection with the server)
+        //
+        this.room = await this.app.colyseus.joinOrCreate("my_room");
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var NetworkManager = pc.createScript('networkManager');
 
@@ -109,6 +140,9 @@ NetworkManager.prototype.initialize = async function () {
   this.room = await this.app.colyseus.joinOrCreate("my_room");
 }
 ```
+
+</TabItem>
+</Tabs>
 
 > Note that we're using the local `ws://localhost:2567` endpoint here. You need to [deploy your server](https://docs.colyseus.io/deployment/) to the public internet in order to play with others online. You can also use [Glitch](https://glitch.com/edit/#!/tutorial-playcanvas-server) to host your server publicly.
 

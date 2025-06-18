@@ -40,6 +40,58 @@ In the image you can see the animation component in the Inspector. There are 2 a
 
 So this kind of functionality goes beyond the abilities of the humble animation component. A script component is required to cook up this additional behavior. You can see the script component in the above screenshot of the skinned character entity in Editor and it refers to a JS file called animation_blending.js. The contents of this file is:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_P } from 'playcanvas';
+
+export class AnimationBlending extends Script {
+    static scriptName = 'animationBlending';
+
+    static states = {
+        idle: {
+            animation: 'male.json'
+        },
+        punch: {
+            animation: 'male_uppercut_jab.json'
+        }
+    }
+
+    // initialize code called once per entity
+    initialize() {
+        this.blendTime = 0.2;
+
+        this.setState('idle');
+    };
+
+    update(dt) {
+        if (this.app.keyboard.wasPressed(KEY_P)) {
+            this.setState('punch');
+        }
+
+        if (this.app.keyboard.wasReleased(KEY_P)) {
+            this.setState('idle');
+        }
+    };
+
+    setState(state) {
+        const states = AnimationBlending.states;
+
+        this.state = state;
+        // Set the current animation, taking 0.2 seconds to blend from
+        // the current animation state to the start of the target animation.
+        this.entity.animation.play(states[state].animation, this.blendTime);
+    };
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var AnimationBlending = pc.createScript('animationBlending');
 
@@ -78,6 +130,9 @@ AnimationBlending.prototype.setState = function (state) {
     this.entity.animation.play(states[state].animation, this.blendTime);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 From this point, you are able to add more and more animations to the animation component and start scripting much more complex animation state charts.
 

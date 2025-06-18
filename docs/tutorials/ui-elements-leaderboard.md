@@ -84,6 +84,90 @@ Points are anchored to the right
 
 This is the `leaderboard` script that reads our JSON asset and fills the leaderboard:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Leaderboard extends Script {
+    static scriptName = "leaderBoard";
+
+    /**
+     * @attribute
+     * @title Template
+     * @type {Entity}
+     */
+    template = null;
+
+    /**
+     * @attribute
+     * @title Personal
+     * @type {Entity}
+     */
+    personal = null;
+
+    /**
+     * @attribute
+     * @title Leaderboard
+     * @type {Entity}
+     */
+    leaderboard = null;
+
+    initialize() {
+        this.entries = [];
+
+        this.load((data) => {
+            this.clear();
+
+            // add the personal entry
+            let y = -75;
+            this.addEntry(this.personal, y, data.personal.position, data.personal.name, data.personal.score);
+
+            // add the top ten
+            y = -60;
+            for (let i = 0; i < Math.min(data.leaderboard.length, 10); i++) {
+                this.addEntry(this.leaderboard, y, i + 1, data.leaderboard[i].name, data.leaderboard[i].score);
+                y -= 99; // offset each entry
+            }
+        });
+    }
+
+    clear() {
+        this.entries.forEach(entry => entry.destroy());
+        this.entries = [];
+    }
+
+    addEntry(parent, y, position, name, score) {
+        const entry = this.template.clone();
+        entry.enabled = true;
+
+        entry.findByName("Position").element.text = position.toString();
+        entry.findByName("Name").element.text = name.toUpperCase();
+        entry.findByName("Score").element.text = score.toString();
+
+        this.entries.push(entry);
+
+        parent.addChild(entry);
+        entry.translateLocal(0, y, 0);
+    }
+
+    load(callback) {
+        const asset = this.app.assets.find("leaderboard-data.json");
+        asset.ready(() => {
+            callback(asset.resource);
+        });
+        this.app.assets.load(asset);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Leaderboard = pc.createScript('leaderboard');
 
@@ -149,6 +233,9 @@ Leaderboard.prototype.load = function (callback) {
     this.app.assets.load(asset);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 [1]: https://playcanvas.com/editor/scene/547907
 [2]: /user-manual/user-interface/elements/

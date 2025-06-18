@@ -76,6 +76,104 @@ Note, that the call to `loadJsonFromRemote` is **asynchronous**.
 
 Here is the full code listing:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, createStyle } from 'playcanvas';
+
+export class Game extends Script {
+    static scriptName = "game";
+
+    /**
+     * @attribute
+     * @title Display
+     * @type {Asset}
+     * @resource html
+     */
+    display = null;
+
+    /**
+     * @attribute
+     * @title Style
+     * @type {Asset}
+     * @resource css
+     */
+    style = null;
+
+    /**
+     * @attribute
+     * @title Character Data
+     * @type {Asset}
+     * @resource json
+     */
+    characterData = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this.initDisplay();
+
+        // Get JSON data from a project asset
+        const characterData = this.characterData.resource;
+
+        // Parse JSON data
+        const names = this.parseCharacterData(characterData);
+
+        // display character names
+        let el = document.querySelector("#character-name");
+        if (el) el.textContent = names.join(", ");
+
+        // display JSON data from asset
+        el = document.querySelector("#asset-json");
+        if (el) el.textContent = JSON.stringify(characterData, null, 4);
+
+        // load JSON from a remote server
+        this.loadJsonFromRemote("https://api.github.com/", (data) => {
+            // display JSON data from remote server
+            el = document.querySelector("#xhr-json");
+            if (el) el.textContent = JSON.stringify(data, null, 4);
+        });
+    }
+
+    initDisplay() {
+        const el = createStyle(this.style.resource);
+        document.head.appendChild(el);
+
+        const div = document.createElement("div");
+        div.setAttribute("id", "container");
+        div.innerHTML = this.display.resource;
+        document.body.appendChild(div);
+    }
+
+    parseCharacterData(data) {
+        const names = [];
+
+        // Read the character data from the JSON asset and return a list of names
+        const characters = data.characters;
+        for (let character of characters) {
+            names.push(character.firstName + ' ' + character.lastName);
+        }
+
+        return names;
+    }
+
+    loadJsonFromRemote(url, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener("load", function() {
+            callback(JSON.parse(this.responseText));
+        });
+        xhr.open("GET", url);
+        xhr.send();
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Game = pc.createScript('game');
 
@@ -155,6 +253,9 @@ Game.prototype.loadJsonFromRemote = function (url, callback) {
     xhr.send();
 };
 ```
+
+</TabItem>
+</Tabs>
 
 Try [the project][1] for yourself.
 

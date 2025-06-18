@@ -61,6 +61,54 @@ We have a script on each button to allow us to change their texture based on hov
 
 The main script that handles the interactions for each stat is `uiStats`:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, math } from 'playcanvas';
+
+export class UiStats extends Script {
+    static scriptName = "uiStats";
+
+    initialize() {
+        // find our widgets
+        this.btnPlus = this.entity.findByName('btn-plus');
+        this.btnMinus = this.entity.findByName('btn-minus');
+        this.progressBar = this.entity.findByName('progress-bar');
+        this.progressText = this.progressBar.findByName('text');
+
+        // initialize value to 0
+        this.setValue(0);
+
+        // increase value with plus button
+        this.btnPlus.element.on('click', (evt) => {
+            this.setValue(this.value + 1);
+        });
+
+        // decrease value with minus button
+        this.btnMinus.element.on('click', (evt) => {
+            this.setValue(this.value - 1);
+        });
+    }
+
+    // Sets the stat value
+    setValue(value) {
+        // clamp between min and max
+        this.value = math.clamp(value, 0, 10);
+        // set progress
+        this.progressBar.script.progressBar.setProgress(this.value / 10);
+        // update progress text
+        this.progressText.element.text = this.value + ' / ' + 10;
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var UiStats = pc.createScript('uiStats');
 
@@ -95,6 +143,9 @@ UiStats.prototype.setValue = function (value) {
     this.progressText.element.text = this.value + ' / ' + 10;
 };
 ```
+
+</TabItem>
+</Tabs>
 
 In this script we find our child elements and when the plus or minus buttons are clicked we increase / decrease the stat and update the progress bar and its text.
 

@@ -112,6 +112,45 @@ With the following effect:
 
 We have a script in the project that listens for when the user clicks on the button and updates the text in the UI to the quality setting that they've selected.
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class ButtonLogic extends Script {
+    static scriptName = "buttonLogic";
+
+    /**
+     * The entity that we want to update when the button is clicked.
+     * 
+     * @attribute
+     * @title Text Entity
+     * @type {Entity}
+     */
+    textEntity = null;
+
+    /**
+     * @attribute
+     * @title Description
+     * @type {string}
+     */
+    description = null;
+
+    initialize() {
+        this.entity.button.on('click', (event) => {
+            this.textEntity.element.text = this.description;
+        });
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var ButtonLogic = pc.createScript('buttonLogic');
 ButtonLogic.attributes.add('textEntity', {
@@ -127,6 +166,9 @@ ButtonLogic.prototype.initialize = function() {
     }, this);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 This script is attached to the button entities in the scene.
 

@@ -13,6 +13,160 @@ There are currently no PlayCanvas components which implement physics constraints
 
 Here is the script for a point-to-point constraint (essentially a ball and socket joint):
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3, Entity, Color } from 'playcanvas';
+
+export class PointToPointConstraint extends Script {
+    static scriptName = "pointToPointConstraint";
+
+    /**
+     * Position of the constraint in the local space of this entity.
+     * 
+     * @attribute
+     * @title Pivot
+     * @type {Vec3}
+     */
+    pivotA = new pc.Vec3(0, 0, 0);
+
+    /**
+     * Optional second entity.
+     * 
+     * @attribute
+     * @title Connected Entity
+     * @type {Entity}
+     */
+    entityB = null;
+
+    /**
+     * Position of the constraint in the local space of entity B (if specified).
+     * 
+     * @attribute
+     * @title Connected Pivot
+     * @type {Vec3}
+     */
+    pivotB = new pc.Vec3(0, 0, 0);
+
+    /**
+     * Maximum breaking impulse threshold required to break the constraint.
+     * 
+     * @attribute
+     * @title Break Threshold
+     * @type {number}
+     */
+    breakingThreshold = 3.4e+38;
+
+    /**
+     * Enable collision between linked rigid bodies.
+     * 
+     * @attribute
+     * @title Enable Collision
+     * @type {boolean}
+     */
+    enableCollision = true;
+
+    /**
+     * Enable to render a representation of the constraint.
+     * 
+     * @attribute
+     * @title Debug Render
+     * @type {boolean}
+     */
+    debugRender = false;
+
+    /**
+     * The color of the debug rendering of the constraint.
+     * 
+     * @attribute
+     * @title Debug Color
+     * @type {Color}
+     */
+    debugColor = new Color(1, 0, 0);
+
+    initialize() {
+        this.createConstraint();
+
+        this.on('attr', (name, value, prev) => {
+            // If any constraint properties change, recreate the constraint
+            if (name === 'pivotA' || name === 'entityB' || name === 'pivotB') {
+                this.createConstraint();
+            } else if (name === 'breakingThreshold') {
+                this.constraint.setBreakingImpulseThreshold(this.breakingThreshold);
+                this.activate();
+            }
+        });
+        this.on('enable', () => {
+            this.createConstraint();
+        });
+        this.on('disable', () => {
+            this.destroyConstraint();
+        });
+        this.on('destroy', () => {
+            this.destroyConstraint();
+        });
+    }
+
+    createConstraint() {
+        if (this.constraint) {
+            this.destroyConstraint();
+        }
+
+        var bodyA = this.entity.rigidbody.body;
+        var pivotA = new Ammo.btVector3(this.pivotA.x, this.pivotA.y, this.pivotA.z);
+        if (this.entityB && this.entityB.rigidbody) {
+            var bodyB = this.entityB.rigidbody.body;
+            var pivotB = new Ammo.btVector3(this.pivotB.x, this.pivotB.y, this.pivotB.z);
+            this.constraint = new Ammo.btPoint2PointConstraint(bodyA, bodyB, pivotA, pivotB);
+        } else {
+            this.constraint = new Ammo.btPoint2PointConstraint(bodyA, pivotA);
+        }
+
+        var dynamicsWorld = this.app.systems.rigidbody.dynamicsWorld;
+        dynamicsWorld.addConstraint(this.constraint, !this.enableCollision);
+
+        this.activate();
+    }
+
+    destroyConstraint() {
+        if (this.constraint) {
+            const dynamicsWorld = this.app.systems.rigidbody.dynamicsWorld;
+            dynamicsWorld.removeConstraint(this.constraint);
+            Ammo.destroy(this.constraint);
+            this.constraint = null;
+        }
+    }
+
+    activate() {
+        this.entity.rigidbody.activate();
+        if (this.entityB) {
+            this.entityB.rigidbody.activate();
+        }
+    }
+
+    update(dt) {
+        if (this.debugRender) {
+        // Note that it's generally bad to allocate new objects in an update function
+        // but this is just for debug rendering and will normally be disabled
+        var tempVecA = new Vec3();
+        this.entity.getWorldTransform().transformPoint(this.pivotA, tempVecA);
+        this.app.renderLine(this.entity.getPosition(), tempVecA, this.debugColor);
+        if (this.entityB) {
+            this.app.renderLine(this.entityB.getPosition(), tempVecA, this.debugColor);
+        }
+    }
+    }
+}
+
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var PointToPointConstraint = pc.createScript('pointToPointConstraint');
 
@@ -134,6 +288,9 @@ PointToPointConstraint.prototype.update = function(dt) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 You can find a project that implements all of the constraint types from ammo.js [here][4].
 
 ## Continuous Collision Detection
@@ -141,6 +298,53 @@ You can find a project that implements all of the constraint types from ammo.js 
 Sometimes, you might find that fast moving rigid bodies in your simulations pass through one another. To overcome this, ammo.js provides a concept called Continuous Collision Detection (or CCD for short). This enables additional checks for collisions by sweeping a sphere volume between the previous and current positions of a rigid body and looking for intersections with the volumes of other bodies.
 
 You can enable CCD for any PlayCanvas rigid body using the following script:
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Ccd extends Script {
+    static scriptName = "ccd";
+
+    /**
+     * Number of meters moved in one frame before CCD is enabled.
+     * 
+     * @attribute
+     * @title Motion Threshold
+     * @type {number}
+     */
+    motionThreshold = 1;
+
+    /**
+     * This should be below the half extent of the collision volume. E.g., For an object of dimensions 1 meter, try 0.2.
+     * 
+     * @attribute
+     * @title Swept Sphere Radius
+     * @type {number}
+     */
+    sweptSphereRadius = 0.2;
+
+    initialize() {
+        const body = this.entity.rigidbody.body;
+        body.setCcdMotionThreshold(this.motionThreshold);
+        body.setCcdSweptSphereRadius(this.sweptSphereRadius);
+
+        this.on('attr:motionThreshold', function(value) {
+            body = this.entity.rigidbody.body;
+            body.setCcdMotionThreshold(value);
+        });
+        this.on('attr:sweptSphereRadius', function(value) {
+            body = this.entity.rigidbody.body;
+            body.setCcdSweptSphereRadius(value);
+        });
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Ccd = pc.createScript('ccd');
@@ -177,6 +381,9 @@ Ccd.prototype.initialize = function() {
     });
 };
 ```
+
+</TabItem>
+</Tabs>
 
 You can find a project that implements CCD [here][5].
 

@@ -124,6 +124,73 @@ Duplicate the player entity and rename it as 'Other'. Uncheck the `Enabled` box 
 
 Add a script component to your player, and attach a new script called `Movement.js`:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3, KEY_A, KEY_D, KEY_W, KEY_S } from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+
+    /**
+     * @attribute
+     * @title Player Speed
+     * @type {number}
+     */
+    playerSpeed = 30;
+
+    // initialize code called once per entity
+    initialize() {
+        this.force = new Vec3();
+    }
+
+    // update code called every frame
+    update(dt) {
+        const forward = this.entity.forward;
+        const right = this.entity.right;
+        const app = this.app;
+
+        let x = 0;
+        let z = 0;
+
+        if (app.keyboard.isPressed(KEY_A)) {
+            x -= right.x;
+            z -= right.z;
+        }
+
+        if (app.keyboard.isPressed(KEY_D)) {
+            x += right.x;
+            z += right.z;
+        }
+
+        if (app.keyboard.isPressed(KEY_W)) {
+            x += forward.x;
+            z += forward.z;
+        }
+
+        if (app.keyboard.isPressed(KEY_S)) {
+            x -= forward.x;
+            z -= forward.z;
+        }
+
+        if (x !== 0 || z !== 0) {
+            x *= dt;
+            z *= dt;
+
+            this.force.set(x, 0, z).normalize().scale(this.playerSpeed);
+            this.entity.rigidbody.applyForce(this.force);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Movement = pc.createScript('movement');
 
@@ -176,6 +243,9 @@ Movement.prototype.update = function(dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 When you launch the game you should be able to use WASD to move your player around. If not, you’ve missed a step or did not set the correct settings for the entity. Try changing the speed attribute on the movement script.
 
@@ -263,6 +333,49 @@ socket.on('playerJoined', function (data) {
 
 And then declare these new functions inside Network.js:
 
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+    initializePlayers (data) {
+        this.players = data.players;
+        Network.id = data.id;
+
+        for (let id in this.players) {
+            if (id != Network.id) {
+                this.players[id].entity = this.createPlayerEntity(this.players[id]);
+            }
+        }
+
+        this.initialized = true;
+        console.log('initialized');
+    };
+
+    createPlayerEntity (data) {
+        // Create a new player entity
+        const newPlayer = this.other.clone();
+        newPlayer.enabled = true;
+
+        // Add the entity to the entity hierarchy
+        this.other.getParent().addChild(newPlayer);
+
+        // If a location was given, teleport the new entity to the position of the connected player
+        if (data)
+            newPlayer.rigidbody.teleport(data.x, data.y, data.z);
+
+        return newPlayer;
+    };
+
+    addPlayer (data) {
+        this.players[data.id] = data;
+        this.players[data.id].entity = this.createPlayerEntity(data);
+    };
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 Network.prototype.initializePlayers = function (data) {
     this.players = data.players;
@@ -299,6 +412,9 @@ Network.prototype.addPlayer = function (data) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 Now when we join the game, the client tells the server we've connected, and the server sends us a list of players with their positions. The game then creates a new entity for each player connected, and moves them to their current position. The only problem is, the server doesn't know the positions of all players. We need to send the server our current position every frame.
 
 Add this code into the `initialize` of your Network.js script:
@@ -319,6 +435,26 @@ Network.prototype.update = function (dt) {
 
 And then declare these new functions inside Network.js:
 
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+movePlayer(data) {
+    if (this.initialized)
+        this.players[data.id].entity.rigidbody.teleport (data.x, data.y, data.z);
+}
+
+updatePosition() {
+    if (this.initialized) {
+        const pos = this.player.getPosition();
+        this.socket.emit ('positionUpdate', {id: this.id, x: pos.x, y: pos.y, z: pos.z});
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 Network.prototype.movePlayer = function (data) {
     if (this.initialized && !this.players[data.id].deleted) {
@@ -333,6 +469,9 @@ Network.prototype.updatePosition = function () {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 Back on the server, we need to account for what happens when the player sends us their position. On the server, we need to add a new event:
 

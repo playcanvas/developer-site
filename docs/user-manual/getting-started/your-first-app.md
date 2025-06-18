@@ -69,6 +69,31 @@ Hit Enter and your script will be created.
 
 Now hit EDIT to open the Code Editor. You'll see the following skeleton script:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+
+    initialize() {
+        // initialize code called once per entity
+    }
+
+    update(dt) {
+        // update code called every frame
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Movement = pc.createScript('movement');
 
@@ -83,7 +108,52 @@ Movement.prototype.update = function(dt) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 To make the sphere controllable, let's add some code to the `update` function. Copy and paste the code below:
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+
+    initialize() {
+        // initialize code called once per entity
+    }
+
+    update(dt) {
+        // get which keys are pressed
+        var keyboard = this.app.keyboard;
+        var left  = keyboard.isPressed(KEY_LEFT);
+        var right = keyboard.isPressed(KEY_RIGHT);
+        var up    = keyboard.isPressed(KEY_UP);
+        var down  = keyboard.isPressed(KEY_DOWN);
+
+        // move this entity based on which keys are pressed
+        // dt is the time in seconds since the last frame and stands for 'delta time'
+        if (left) {
+            this.entity.translate(-dt, 0, 0);
+        }
+        if (right) {
+            this.entity.translate(dt, 0, 0);
+        }
+        if (up) {
+            this.entity.translate(0, 0, -dt);
+        }
+        if (down) {
+            this.entity.translate(0, 0, dt);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Movement = pc.createScript('movement');
@@ -118,6 +188,9 @@ Movement.prototype.update = function(dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 When the code is updated, save the script using CTRL+S (or CMD+S on Mac) and close the Code Editor tab.
 

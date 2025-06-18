@@ -75,6 +75,31 @@ Sometimes, it can be useful to be able to explicitly control the motion of physi
 
 The responsibility for animating kinematic bodies is on you, the developer. You will notice that the kinematic box shown above also has a script component with a script called movement.js assigned:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+
+    initialize() {
+
+    }
+
+    update(dt) {
+        this.entity.setPosition(Math.sin(Date.now() / 1000), 0.5, 0);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Movement = pc.createScript('movement');
 
@@ -88,6 +113,9 @@ Movement.prototype.update = function(dt) {
     this.entity.setPosition(Math.sin(Date.now() / 1000), 0.5, 0);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 This script simply animates the box along the world x-axis using a sine function. You move kinematic bodies using the standard transformation functions on the entity like `setPosition`, `setRotation` and `setEulerAngles`. Now when we run the scene, the dynamic box falls on the kinematic box and is carried along on top of it:
 

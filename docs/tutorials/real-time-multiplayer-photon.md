@@ -113,8 +113,81 @@ The [API reference][14] and [glossary][15] are available on Photon's site.
 
 Create a script asset named **photon-loadbalancing-playcanvas.js** to the project to initialize Photon.
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
 ```javascript
-// photon-loadbalancing-playcanvas.js
+import { Script } from 'playcanvas';
+
+/** @enum {string} */
+const Region = {
+    "Select Region": "default",
+    "Asia, Singapore": "asia",
+    "Australia, Melbourne": "au",
+    "Canada, East Montreal": "cae",
+    "Chinese Mainland (See Instructions) Shanghai": "cn",
+    "Europe, Amsterdam": "eu",
+    "India, Chennai": "in",
+    "Japan, Tokyo": "jp",
+    "Russia Moscow": "ru",
+    "Russia, East Khabarovsk": "rue",
+    "South Africa Johannesburg": "za",
+    "South America, Sao Paulo": "sa",
+    "South Korea, Seoul": "kr",
+    "Turkey Istanbul": "tr",
+    "USA, East Washington": "us",
+    "USA, West San José": "usw",
+}
+
+export class PhotonLoadBalancingPlayCanvas extends Script {
+    static scriptName = "photonLoadBalancingPlayCanvas";
+
+    /**
+     * @attribute
+     * @title App Id
+     * @type {string}
+     */
+    appId = null;
+
+    /**
+     * @attribute
+     * @title App Version
+     * @type {string}
+     */
+    appVersion = "1.0";
+
+    /**
+     * @attribute
+     * @title Wss
+     * @type {boolean}
+     */
+    wss = true;
+
+    /**
+     * Photon Cloud has servers in several regions, distributed across multiple hosting centers over the world.You can choose optimized region for you.
+     * 
+     * @attribute
+     * @type {Region}
+     */ 
+    region = Region["Europe, Amsterdam"]
+
+    initialize() {
+        // Assuming Photon and its LoadBalancingClient are globally available or imported
+        this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient(this.wss ? Photon.LoadBalancing.Constants.ConnectionProtocol.Wss : Photon.LoadBalancing.Constants.ConnectionProtocol.Ws, this.appId, this.appVersion);
+
+        // pc.Application
+        this.loadBalancingClient.app = this.app;
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic" title='./photon-loadbalancing-playcanvas.js'>
+
+```javascript
 const PhotonLoadBalancingPlayCanvas = pc.createScript("photonLoadBalancingPlayCanvas");
 PhotonLoadBalancingPlayCanvas.attributes.add("appId", { type: "string" });
 PhotonLoadBalancingPlayCanvas.attributes.add("appVersion", { type: "string", default: "1.0" });
@@ -152,6 +225,9 @@ PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 - **Photon.LoadBalancing.LoadBalancingClient**  This class contains many of the features of the Photon SDK for real-time communication.
 
 #### Set Script for Root entity
@@ -178,6 +254,28 @@ this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient( this.ws
 
 #### Connect to the master server using `connectToRegionMaster`
 
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+initialize () {
+
+    // Photon Settings
+    this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient(this.wss ? 1 : 0, this.appId, this.appVersion);
+
+    // pc.Application
+    this.loadBalancingClient.app = this.app;
+
+    // Connect to the master server
+    if (!this.loadBalancingClient.isInLobby()) {
+        this.loadBalancingClient.connectToRegionMaster(this.region);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
 
@@ -194,6 +292,9 @@ PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 - **connectToRegionMaster** Connects to the master server in the specified region.
 - **this.region** Used to configure the region.
 
@@ -206,6 +307,40 @@ If you successfully connect to the lobby by running connectToRegionMaster, Joine
 **onRoomList** function is called when a connection is made to the lobby.
 
 **JoinRandomOrCreateRoom** to join a room if it exists, or randomly join a room if it does not exist.
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+initialize() {
+
+    // Photon Settings
+    this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient(this.wss ? 1 : 0, this.appId, this.appVersion);
+
+    // pc.Application
+    this.loadBalancingClient.app = this.app;
+
+    // Connect to the master server
+    if (!this.loadBalancingClient.isInLobby()) {
+        this.loadBalancingClient.connectToRegionMaster(this.region);
+    }
+
+    // Added
+    this.loadBalancingClient.onRoomList = this.onRoomList;
+    this.loadBalancingClient.onJoinRoom = this.onJoinRoom;
+}
+
+onRoomList() {
+    this.joinRandomOrCreateRoom();
+}
+
+onJoinRoom(createdByMe) {
+    console.log("Joined the room.");
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
@@ -234,6 +369,9 @@ PhotonLoadBalancingPlayCanvas.prototype.onJoinRoom = function (createdByMe) {
     console.log("Joined the room.");
 };
 ```
+
+</TabItem>
+</Tabs>
 
 - **onRoomList(rooms)** List of rooms in the lobby.
 - **joinRandomOrCreateRoom(options, createRoomName, createOptions)** Join to a random room. If the room does not exist, a new room will be created.
@@ -306,6 +444,39 @@ If successful, the entity is added when the player joins.
 
 Create a new **player.js** for character movement.
 
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+
+    update (dt) {
+        const pos = new Vec3(0, 0, 0);
+        if (this.app.keyboard.isPressed(KEY_LEFT)) {
+            pos.x = -dt;
+        }
+        if (this.app.keyboard.isPressed(KEY_RIGHT)) {
+            pos.x = dt;
+        }
+        if (this.app.keyboard.isPressed(KEY_UP)) {
+            pos.z = -dt;
+        }
+        if (this.app.keyboard.isPressed(KEY_DOWN)) {
+            pos.z = dt;
+        }
+        if (!pos.equals(new Vec3(0, 0, 0))) {
+            this.entity.translate(pos);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 const Player = pc.createScript("player");
 
@@ -329,6 +500,9 @@ Player.prototype.update = function (dt) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 - **this.app.keyboard.isPressed:** check if the keyboard is pressed
 
 ### Synchronize other players
@@ -336,6 +510,140 @@ Player.prototype.update = function (dt) {
 Use **raiseEvent** and **onEvent** to synchronize the player's location.
 
 #### Position synchronization using **raiseEvent**
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Entity } from 'playcanvas';
+
+/** @enum {string} */
+const Region = {
+    "Select Region": "default",
+    "Asia, Singapore": "asia",
+    "Australia, Melbourne": "au",
+    "Canada, East Montreal": "cae",
+    "Chinese Mainland (See Instructions) Shanghai": "cn",
+    "Europe, Amsterdam": "eu",
+    "India, Chennai": "in",
+    "Japan, Tokyo": "jp",
+    "Russia Moscow": "ru",
+    "Russia, East Khabarovsk": "rue",
+    "South Africa Johannesburg": "za",
+    "South America, Sao Paulo": "sa",
+    "South Korea, Seoul": "kr",
+    "Turkey Istanbul": "tr",
+    "USA, East Washington": "us",
+    "USA, West San José": "usw",
+}
+
+export class PhotonLoadBalancingPlayCanvas extends Script {
+    static scriptName = "photonLoadBalancingPlayCanvas";
+
+    /**
+     * @attribute
+     * @title App Id
+     * @type {string}
+     */
+    appId = null;
+
+    /**
+     * @attribute
+     * @title App Version
+     * @type {string}
+     */
+    appVersion = "1.0";
+
+    /**
+     * @attribute
+     * @title Wss
+     * @type {boolean}
+     */
+    wss = true;
+
+    /**
+     * Photon Cloud has servers in several regions, distributed across multiple hosting centers over the world.You can choose optimized region for you.
+     * 
+     * @attribute
+     * @type {Region}
+     */ 
+    region = Region["Europe, Amsterdam"]
+
+    initialize() {
+        // Assuming Photon and its LoadBalancingClient are globally available or correctly imported
+        this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient(this.wss ? Photon.LoadBalancing.Constants.ConnectionProtocol.Wss : Photon.LoadBalancing.Constants.ConnectionProtocol.Ws, this.appId, this.appVersion);
+        
+        this.loadBalancingClient.app = this.app;
+
+        if (!this.loadBalancingClient.isInLobby()) {
+            this.loadBalancingClient.connectToRegionMaster(this.region);
+        }
+        this.loadBalancingClient.onRoomList = this.onRoomList.bind(this);
+        this.loadBalancingClient.onJoinRoom = this.onJoinRoom.bind(this);
+        this.loadBalancingClient.onActorJoin = this.onActorJoin.bind(this);
+        this.loadBalancingClient.onActorLeave = this.onActorLeave.bind(this);
+        
+        this.loadBalancingClient.onEvent = this.onEvent.bind(this);
+        this.app.on("createOtherPlayerEntity", this.createOtherPlayerEntity, this);
+        this.app.on("loadbalancing:sendPlayerPosition", this.sendPlayerPosition, this);
+    }
+
+    onRoomList() {
+        this.joinRandomOrCreateRoom();
+    }
+
+    onJoinRoom(createdByMe) {
+        this.myRoomActorsArray().forEach((actor) => {
+            if (actor.isLocal) return;
+            this.app.fire("createOtherPlayerEntity", actor);
+        });
+    }
+
+    onActorJoin(actor) {
+        if (actor.isLocal) return;
+        this.app.fire("createOtherPlayerEntity", actor);
+        const { x, y, z } = this.app.root.findByName("Player").getLocalPosition();
+        this.app.fire("loadbalancing:sendPlayerPosition", { x, y, z });
+    }
+
+    onActorLeave(actor) {
+        const { actorNr } = actor;
+        const otherPlayer = this.app.root.findByName(actorNr);
+        if (actor.isLocal || !otherPlayer) return;
+        otherPlayer.destroy();
+    }
+
+    createOtherPlayerEntity(actor) {
+        const { actorNr } = actor;
+        const entity = new Entity();
+        entity.addComponent("render", { type: "capsule" });
+        entity.setLocalPosition(0, 1, 0);
+        entity.name = actorNr;
+        this.app.root.children[0].addChild(entity);
+    }
+
+    sendPlayerPosition(position) {
+        this.loadBalancingClient.raiseEvent(1, { position });
+    }
+
+    onEvent(code, content, actorNr) {
+        switch (code) {
+            case 1: {
+                const otherPlayer = this.app.root.findByName(actorNr);
+                if (otherPlayer) {
+                    const { x, y, z } = content.position;
+                    otherPlayer.setLocalPosition(x, y, z);
+                }
+                break;
+            }
+            default:
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 const PhotonLoadBalancingPlayCanvas = pc.createScript("photonLoadBalancingPlayCanvas");
@@ -449,10 +757,50 @@ PhotonLoadBalancingPlayCanvas.prototype.onEvent = function (code, content, actor
 };
 ```
 
+</TabItem>
+</Tabs>
+
 - **raiseEvent(eventCode,data, options)** send `eventCode` and `data`.
 - **onEvent(code, content, actorNr)** receive data. Includes `actorNr` and `eventCode`.
 
 #### Changed to fire events when player moves
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
+
+export class Player extends Script {
+    static scriptName = "player";
+
+    update(dt) {
+        const pos = new Vec3(0, 0, 0);
+        if (this.app.keyboard.isPressed(KEY_LEFT)) {
+            pos.x = -dt;
+        }
+        if (this.app.keyboard.isPressed(KEY_RIGHT)) {
+            pos.x = dt;
+        }
+        if (this.app.keyboard.isPressed(KEY_UP)) {
+            pos.z = -dt;
+        }
+        if (this.app.keyboard.isPressed(KEY_DOWN)) {
+            pos.z = dt;
+        }
+        if (!pos.equals(new Vec3(0, 0, 0))) {
+            this.entity.translate(pos);
+
+            // Added
+            const { x, y, z } = this.entity.getPosition();
+            this.app.fire("loadbalancing:sendPlayerPosition", { x, y, z });
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 const Player = pc.createScript("player");
@@ -480,6 +828,9 @@ Player.prototype.update = function (dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 - **this.app.fire** [communication][22] between scripts.
 
