@@ -86,7 +86,6 @@ export class Halo extends Script {
     static scriptName = "halo";
 
     /**
-     * 
      * @attribute
      * @title Camera
      * @type {Entity}
