@@ -26,7 +26,7 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class Analyser extends Script {
-    static scriptName = "analyzer";
+    static scriptName = "analyser";
 
     /**
      * @attribute
