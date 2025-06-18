@@ -18,7 +18,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { ScriptType, Vec3, Mesh, MeshInstance, GraphNode, Model, calculateNormals } from 'playcanvas';

@@ -21,7 +21,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -56,7 +56,7 @@ Player.prototype.update = function (dt) {
 `on()` と `off()`を使用してイベントをリッスンする。この例では、表示スクリプトは、プレーヤーの`move`イベントをリッスンし、xとyの値を出力します。
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM (Recommended)">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -128,7 +128,7 @@ Display.prototype.initialize = function () {
 `player:move` イベントの発動。
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';

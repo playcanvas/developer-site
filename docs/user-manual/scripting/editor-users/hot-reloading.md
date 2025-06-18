@@ -13,7 +13,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
     swap(old) {
@@ -38,7 +38,7 @@ When a script with a `swap` function is changed in the code editor, any launched
 For example:
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { ScriptType, math } from 'playcanvas';

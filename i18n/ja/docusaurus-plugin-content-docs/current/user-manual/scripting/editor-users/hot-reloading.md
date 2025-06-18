@@ -13,7 +13,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
     swap(old) {
@@ -38,7 +38,7 @@ MyScript.prototype.swap = function(old) {
 以下に例を示します。
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { ScriptType, math } from 'playcanvas';

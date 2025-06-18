@@ -37,7 +37,7 @@ This is the most common method, used for general informational output.
 **Example:**
 
 <Tabs>
-<TabItem value="esm" label="ESM (Recommended)">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, KEY_SPACE } from 'playcanvas';
@@ -107,7 +107,7 @@ Used for logging actual errors that prevent code from working correctly. PlayCan
 **Example:**
 
 <Tabs>
-<TabItem value="esm" label="ESM (Recommended)">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 initialize() {

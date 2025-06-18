@@ -174,7 +174,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -226,7 +226,7 @@ In our shader if the value of the heightmap on a pixel is less than the value ti
 ## Complete listing
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { ScriptType, SEMANTIC_TEXCOORD0, SEMANTIC_POSITION, Shader, Material } from 'playcanvas';

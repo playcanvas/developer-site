@@ -117,7 +117,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -255,7 +255,7 @@ this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient( this.ws
 #### Connect to the master server using `connectToRegionMaster`
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 initialize () {
@@ -309,7 +309,7 @@ If you successfully connect to the lobby by running connectToRegionMaster, Joine
 **JoinRandomOrCreateRoom** to join a room if it exists, or randomly join a room if it does not exist.
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 initialize() {
@@ -445,7 +445,7 @@ If successful, the entity is added when the player joins.
 Create a new **player.js** for character movement.
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { ScriptType, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
@@ -512,7 +512,7 @@ Use **raiseEvent** and **onEvent** to synchronize the player's location.
 #### Position synchronization using **raiseEvent**
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { ScriptType, Entity } from 'playcanvas';
@@ -766,7 +766,7 @@ PhotonLoadBalancingPlayCanvas.prototype.onEvent = function (code, content, actor
 #### Changed to fire events when player moves
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { ScriptType, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';

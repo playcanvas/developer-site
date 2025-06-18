@@ -21,7 +21,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -56,7 +56,7 @@ Player.prototype.update = function (dt) {
 Listen for events firing by using `on()` and `off()`. In this example, the display script listens for the `move` event on the player and prints out the x and y values.
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM (Recommended)">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -128,7 +128,7 @@ Let's try the same example using application events.
 Firing the `player:move` event:
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';

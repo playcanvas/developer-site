@@ -72,7 +72,7 @@ When an entity is cloned using the `entity.clone()` method, the `initialize` met
 **Example:**
 
 <Tabs>
-<TabItem value="esm" label="ESM (Recommended)">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -133,7 +133,7 @@ MyScript.prototype.initialize = function() {
 **Example:**
 
 <Tabs>
-<TabItem value="esm" label="ESM (Recommended)">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -209,7 +209,7 @@ Keep update as efficient as possible, as it runs very frequently. Avoid heavy co
 **Example:**
 
 <Tabs>
-<TabItem value="esm" label="ESM (Recommended)">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -258,7 +258,7 @@ Rotator.prototype.update = function(dt) {
 **Example:**
 
 <Tabs>
-<TabItem value="esm" label="ESM (Recommended)">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';

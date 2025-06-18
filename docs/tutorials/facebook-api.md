@@ -37,7 +37,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -224,7 +224,7 @@ Note, also we fire our own application events `app:fblogin` and `app:fblogout` t
 The file `face-photo.js` uses the Facebook API to retrieve a list of photos from the user and display them in the 3D world.
 
 <Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM (Recommended)">
+<TabItem  value="esm" label="ESM">
 
 ```javascript
 import { ScriptType, Vec3, string, math, Asset } from 'playcanvas';
