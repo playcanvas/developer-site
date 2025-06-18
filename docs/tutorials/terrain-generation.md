@@ -21,7 +21,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3, Mesh, MeshInstance, GraphNode, Model, calculateNormals } from 'playcanvas';
+import { Script, Vec3, Mesh, MeshInstance, GraphNode, Model, calculateNormals } from 'playcanvas';
 
 export class Terrain extends Script {
     static scriptName = "terrain";

@@ -90,7 +90,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, PostEffect, Shader, SEMANTIC_POSITION, drawFullscreenQuad } from 'playcanvas';
+import { Script, PostEffect, Shader, SEMANTIC_POSITION, drawFullscreenQuad } from 'playcanvas';
 
 //--------------- POST EFFECT DEFINITION------------------------//
 class WatercolorEffect extends PostEffect {

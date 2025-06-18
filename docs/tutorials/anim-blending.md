@@ -82,7 +82,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, EVENT_KEYDOWN, EVENT_KEYUP, KEY_P } from 'playcanvas';
+import { Script, EVENT_KEYDOWN, EVENT_KEYUP, KEY_P } from 'playcanvas';
 
 export class KeyboardControls extends Script {
     static scriptName = 'keyboardControls';

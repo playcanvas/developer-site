@@ -68,7 +68,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, math } from 'playcanvas';
+import { Script, math } from 'playcanvas';
 
 export class UiStats extends Script {
     static scriptName = "uiStats";

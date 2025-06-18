@@ -227,7 +227,7 @@ The file `face-photo.js` uses the Facebook API to retrieve a list of photos from
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3, string, math, Asset } from 'playcanvas';
+import { Script, Vec3, string, math, Asset } from 'playcanvas';
 
 export class FacePhoto extends Script {
     static scriptName = "facePhoto";

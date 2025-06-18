@@ -100,7 +100,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, MOUSEBUTTON_LEFT } from 'playcanvas';
+import { Script, MOUSEBUTTON_LEFT } from 'playcanvas';
 
 export class InputScript extends Script {
     static scriptName = "inputScript";
@@ -158,7 +158,7 @@ Here is small script to include once in your scene:
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, EVENT_TOUCHEND } from 'playcanvas';
+import { Script, EVENT_TOUCHEND } from 'playcanvas';
 
 export class TouchFix extends Script {
     static scriptname = "touchFix";

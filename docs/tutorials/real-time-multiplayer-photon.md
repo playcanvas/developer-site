@@ -448,7 +448,7 @@ Create a new **player.js** for character movement.
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
+import { Script, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
 
 export class Movement extends Script {
     static scriptName = "movement";
@@ -515,7 +515,7 @@ Use **raiseEvent** and **onEvent** to synchronize the player's location.
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Entity } from 'playcanvas';
+import { Script, Entity } from 'playcanvas';
 
 /** @enum {string} */
 const Region = {
@@ -769,7 +769,7 @@ PhotonLoadBalancingPlayCanvas.prototype.onEvent = function (code, content, actor
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
+import { Script, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
 
 export class Player extends Script {
     static scriptName = "player";

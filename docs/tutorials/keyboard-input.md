@@ -23,7 +23,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_A } from 'playcanvas';
+import { Script, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_A } from 'playcanvas';
 
 export class KeyboardHandler extends Script {
     static scriptName = "keyboardHandler";

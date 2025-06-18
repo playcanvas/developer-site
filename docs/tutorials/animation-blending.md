@@ -47,7 +47,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, KEY_P } from 'playcanvas';
+import { Script, KEY_P } from 'playcanvas';
 
 export class AnimationBlending extends Script {
     static scriptName = 'animationBlending';

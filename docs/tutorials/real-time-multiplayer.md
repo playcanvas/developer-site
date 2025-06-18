@@ -131,7 +131,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3, KEY_A, KEY_D, KEY_W, KEY_S } from 'playcanvas';
+import { Script, Vec3, KEY_A, KEY_D, KEY_W, KEY_S } from 'playcanvas';
 
 export class Movement extends Script {
     static scriptName = "movement";

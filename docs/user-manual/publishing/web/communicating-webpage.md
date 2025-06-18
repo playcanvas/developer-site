@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Application } from 'playcanvas';
+import { Script, Application } from 'playcanvas';
 
 // Define a global function to set the score
 window.setScore = function(score) {

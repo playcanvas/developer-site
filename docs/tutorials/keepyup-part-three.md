@@ -23,7 +23,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, RESOLUTION_AUTO, FILLMODE_FILL_WINDOW } from 'playcanvas';
+import { Script, RESOLUTION_AUTO, FILLMODE_FILL_WINDOW } from 'playcanvas';
 
 export class Game extends Script {
     static scriptName = "game";
@@ -281,7 +281,7 @@ The input script listens for input from the mouse or touchscreen, normalizes the
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3 } from 'playcanvas';
+import { Script, Vec3 } from 'playcanvas';
 
 export class Input extends Script {
     static scriptName = "input";

@@ -35,7 +35,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, EVENT_MOUSEDOWN } from 'playcanvas';
+import { Script, EVENT_MOUSEDOWN } from 'playcanvas';
 
 export class PickerRaycast extends Script {
     static scriptName = "pickerRayCast";
@@ -111,7 +111,7 @@ It's also possible to restrict the layers to pick which the script supports via 
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Picker, Vec3, Entity, EVENT_MOUSEDOWN } from 'playcanvas';
+import { Script, Picker, Vec3, Entity, EVENT_MOUSEDOWN } from 'playcanvas';
 
 export class PickerFramebuffer extends Script {
     static scriptName = "pickerFrameBuffer";

@@ -24,7 +24,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, KEY_SPACE } from 'playcanvas';
+import { Script, KEY_SPACE } from 'playcanvas';
 
 export class Zoom extends Script {
     static scriptName = "zoom";
@@ -119,7 +119,7 @@ Another way you might want to create interactivity with cameras is by switching 
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, KEY_SPACE, KEY_LEFT, KEY_RIGHT } from 'playcanvas';
+import { Script, KEY_SPACE, KEY_LEFT, KEY_RIGHT } from 'playcanvas';
 
 export class CameraManager extends Script {
     static scriptName = "cameraManager";

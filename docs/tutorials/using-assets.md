@@ -105,7 +105,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, KEY_SPACE, KEY_C, KEY_L } from 'playcanvas';
+import { Script, KEY_SPACE, KEY_C, KEY_L } from 'playcanvas';
 
 export class UpdateAsset extends Script {
     static scriptName = "updateAsset";

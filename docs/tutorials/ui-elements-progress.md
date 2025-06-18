@@ -51,7 +51,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, math, Entity } from 'playcanvas';
+import { Script, math, Entity } from 'playcanvas';
 
 export class ProgressBar extends Script {
     static scriptName = "progressBar";

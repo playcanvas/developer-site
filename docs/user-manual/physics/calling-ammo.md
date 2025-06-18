@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3, Entity, Color } from 'playcanvas';
+import { Script, Vec3, Entity, Color } from 'playcanvas';
 
 export class PointToPointConstraint extends Script {
     static scriptName = "pointToPointConstraint";

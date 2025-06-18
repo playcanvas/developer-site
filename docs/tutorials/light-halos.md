@@ -80,7 +80,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3, Entity } from 'playcanvas';
+import { Script, Vec3, Entity } from 'playcanvas';
 
 export class Halo extends Script {
     static scriptName = "halo";

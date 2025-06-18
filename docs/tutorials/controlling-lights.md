@@ -61,7 +61,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, KEY_1, KEY_2, KEY_3, Color } from 'playcanvas';
+import { Script, KEY_1, KEY_2, KEY_3, Color } from 'playcanvas';
 
 export class LightHandler extends Script {
     static scriptName = "lightHandler";

@@ -36,7 +36,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3, Entity, Mouse, BODYTYPE_DYNAMIC } from 'playcanvas';
+import { Script, Vec3, Entity, Mouse, BODYTYPE_DYNAMIC } from 'playcanvas';
 import { KEY_A, KEY_Q, KEY_D, KEY_W, KEY_S } from 'playcanvas';
 
 export class FirstPersonMovement extends Script {

@@ -117,7 +117,7 @@ To make the sphere controllable, let's add some code to the `update` function. C
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
+import { Script, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
 
 export class Movement extends Script {
     static scriptName = "movement";

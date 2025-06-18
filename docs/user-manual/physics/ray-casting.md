@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Vec3 } from 'playcanvas';
+import { Script, Vec3 } from 'playcanvas';
 
 export class Raycast extends Script {
     static scriptName = "raycast";

@@ -229,7 +229,7 @@ In our shader if the value of the heightmap on a pixel is less than the value ti
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, SEMANTIC_TEXCOORD0, SEMANTIC_POSITION, Shader, Material } from 'playcanvas';
+import { Script, SEMANTIC_TEXCOORD0, SEMANTIC_POSITION, Shader, Material } from 'playcanvas';
 
 export class CustomShader extends Script {
     static scriptName = "customShader";

@@ -89,7 +89,7 @@ import TabItem from '@theme/TabItem';
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, Entity, math } from 'playcanvas';
+import { Script, Entity, math } from 'playcanvas';
 
 export class EntityCreator extends Script {
     static scriptName = "entityCreator";
