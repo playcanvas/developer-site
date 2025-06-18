@@ -128,7 +128,6 @@ import TabItem from '@theme/TabItem';
 import { Script } from 'playcanvas';
 
 export class AnimationBlending extends Script {
-
   static scriptName = "animationBlending";
 
   initialize() {
