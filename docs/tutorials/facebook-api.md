@@ -429,7 +429,7 @@ FB.api(path, (lists) => {
 
             app.assets.load(asset);
 
-            asset.ready(function (asset) {
+            asset.ready((asset) => {
                 this.createPhoto(asset.resource);
                 count--;
                 done();
