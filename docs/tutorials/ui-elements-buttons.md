@@ -143,7 +143,7 @@ export class ButtonLogic extends Script {
     initialize() {
         this.entity.button.on('click', (event) => {
             this.textEntity.element.text = this.description;
-        }, this);
+        });
     }
 }
 ```
