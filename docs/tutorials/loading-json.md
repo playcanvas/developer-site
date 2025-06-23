@@ -94,11 +94,11 @@ Once you have the javascript object you can access the data as normal. For examp
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-await loadJsonFromRemote(url, callback) {
+async function loadJsonFromRemote(url, callback) {
     const res = await fetch(url);
     const json = await res.json();
-    callback(json)
-};
+    callback(json);
+}
 
 //...
 
