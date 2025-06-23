@@ -3,6 +3,8 @@ title: Loading JSON Data
 tags: [loading]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405827/G8YF23-image-75.jpg
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/cHnXIXoN/" title="Loading JSON Data" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
@@ -11,6 +13,43 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 [This project][1] shows you how to load JSON data in two ways. First, from an asset in the project. Second, over HTTP from a remote server.
 
 ## Loading JSON from an asset
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+
+/**
+ * @attribute
+ * @title Character Data
+ * @type {Asset}
+ * @resource json
+ */
+characterData = null;
+
+parseCharacterData(data) {
+    const names = [];
+
+    // Read the character data from the JSON asset and return a list of names
+    const characters = data.characters;
+    for (let character of characters) {
+        names.push(character.firstName + ' ' + character.lastName);
+    }
+
+    return names;
+}
+
+//...
+
+// Get JSON data from a project asset
+const characterData = this.characterData.resource;
+
+// Parse JSON data
+const names = this.parseCharacterData(characterData);
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 Game.attributes.add('characterData', {
@@ -42,11 +81,37 @@ var characterData = this.characterData.resource;
 var names = this.parseCharacterData(characterData);
 ```
 
+</TabItem>
+</Tabs>
+
 You can see in the code above that all you need to do to load JSON data from an asset in your project is to use a Script Attribute of type 'asset' or to retrieve the asset from the asset registry, then access the `resource` property. For an asset of type `json` the data will already be parsed into a standard javascript object when you access the `resource` property.
 
 Once you have the javascript object you can access the data as normal. For example, looping through properties as in `parseCharacterData`.
 
 ## Loading JSON from a remote server
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+await loadJsonFromRemote(url, callback) {
+    const res = await fetch(url);
+    const json = await res.json();
+    callback(json)
+};
+
+//...
+
+// load JSON from a remote server
+loadJsonFromRemote("https://api.github.com/", (data) => {
+    // display JSON data from remote server
+    el = document.querySelector("#xhr-json");
+    el.textContent = JSON.stringify(data, null, 4);
+});
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 Game.prototype.loadJsonFromRemote = function (url, callback) {
@@ -68,6 +133,9 @@ this.loadJsonFromRemote("https://api.github.com/", function (data) {
 });
 ```
 
+</TabItem>
+</Tabs>
+
 In this code we are using the XMLHttpRequest object (which is part of the standard web browser API) to request JSON data from a URL, in this case the Github API.
 
 After receiving the `"load"` event we parse the JSON data using `JSON.parse` (another part of the standard web browser API) and return the data via the `callback` function.
@@ -75,9 +143,6 @@ After receiving the `"load"` event we parse the JSON data using `JSON.parse` (an
 Note, that the call to `loadJsonFromRemote` is **asynchronous**.
 
 Here is the full code listing:
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
 <TabItem  value="esm" label="ESM">
