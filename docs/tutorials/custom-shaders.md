@@ -140,6 +140,9 @@ this.material.setParameter('uDiffuseMap', diffuseTexture);
 The effect demonstrated in this tutorial is achieved using a height map texture. We access the texture from the asset registry using the code above. At the
 top of our script we have declared a script attribute called 'maps' which allows us to set a texture from the PlayCanvas Editor:
 
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 CustomShader.attributes.add('vs', {
     type: 'asset',
@@ -165,6 +168,50 @@ CustomShader.attributes.add('heightMap', {
     title: 'Height Map'
 });
 ```
+
+</TabItem>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+/**
+ * Vertex Shader
+ * 
+ * @attribute
+ * @title Vertex Shader
+ * @type {Asset}
+ */
+vs;
+
+/**
+ * Fragment Shader
+ * 
+ * @attribute
+ * @title Fragment Shader
+ * @type {Asset}
+ */
+fs;
+
+/**
+ * Diffuse Map
+ * 
+ * @attribute
+ * @title Diffuse Map
+ * @type {Asset}
+ */
+diffuseMap;
+
+/**
+ * Height Map
+ * 
+ * @attribute
+ * @title Height Map
+ * @type {Asset}
+ */
+heightMap;
+```
+
+</TabItem>
+</Tabs>
 
 When our height map texture is loaded we can set the uniform `uHeightMap` to be the `pc.Texture` object.
 
