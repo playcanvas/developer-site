@@ -174,38 +174,34 @@ CustomShader.attributes.add('heightMap', {
 
 ```javascript
 /**
- * Vertex Shader
- * 
  * @attribute
  * @title Vertex Shader
  * @type {Asset}
+ * @resource 'shader'
  */
 vs;
 
 /**
- * Fragment Shader
- * 
  * @attribute
  * @title Fragment Shader
  * @type {Asset}
+ * @resource 'shader'
  */
 fs;
 
 /**
- * Diffuse Map
- * 
  * @attribute
  * @title Diffuse Map
  * @type {Asset}
+ * @resource 'texture'
  */
 diffuseMap;
 
 /**
- * Height Map
- * 
  * @attribute
  * @title Height Map
  * @type {Asset}
+ * @resource 'texture'
  */
 heightMap;
 ```
@@ -282,8 +278,6 @@ export class CustomShader extends Script {
     static scriptName = "customShader";
 
     /**
-     * Vertex Shader
-     * 
      * @attribute
      * @title Vertex Shader
      * @type {Asset}
@@ -292,8 +286,6 @@ export class CustomShader extends Script {
     vs = null;
 
     /**
-     * Fragment Shader
-     * 
      * @attribute
      * @title Fragment Shader
      * @type {Asset}
@@ -302,8 +294,6 @@ export class CustomShader extends Script {
     fs = null;
 
     /**
-     * Diffuse Map
-     * 
      * @attribute
      * @title Diffuse Map
      * @type {Asset}
@@ -312,8 +302,6 @@ export class CustomShader extends Script {
     diffuseMap = null;
 
     /**
-     * Height Map
-     * 
      * @attribute
      * @title Height Map
      * @type {Asset}

@@ -376,6 +376,9 @@ var onRefresh = function () {
 // ...
 ```
 
+</TabItem>
+</Tabs>
+
 When the refresh button is pressed, we disable the reward button entity so that it isn't shown to the player and we are in a known state.
 
 In the `beforeReward` callback, we keep a reference to the function to show the ad and enable the reward button as we know we can show an ad to the player.
