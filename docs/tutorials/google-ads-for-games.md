@@ -49,7 +49,6 @@ Go to the [Google H5 Ad Tutorial (Start)][tutorial-template-start] project dashb
 
 This is a simple project where it's ready for us to add the button click callbacks to show the ads in the `ui-controller.js` script:
 
-
 <Tabs defaultValue="classic" groupId='script-code'>
 <TabItem value="classic" label="Classic">
 
@@ -81,6 +80,7 @@ UiController.prototype.initialize = function() {
     }, this);
 };
 ```
+
 </TabItem>
 <TabItem  value="esm" label="ESM">
 
