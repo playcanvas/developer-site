@@ -4,6 +4,9 @@ tags: [scripts, monetization, games]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889020/CDC848-image-75.jpg
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Links for this tutorial:
 
 - [Flappy Bird Demo][flappy-bird-ads-demo]
@@ -46,6 +49,10 @@ Go to the [Google H5 Ad Tutorial (Start)][tutorial-template-start] project dashb
 
 This is a simple project where it's ready for us to add the button click callbacks to show the ads in the `ui-controller.js` script:
 
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 // ...
 // initialize code called once per entity
@@ -74,6 +81,36 @@ UiController.prototype.initialize = function() {
     }, this);
 };
 ```
+</TabItem>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+// ...
+// initialize code called once per entity
+initialize() {
+    this.rewardedGivenPanelEntity.enabled = false;
+    this.rewardedAdButtonEntity.button.active = false;
+
+    const onRefresh = () => {}
+
+    this.refreshButtonEntity.button.on('click', onRefresh)
+
+    this.interstitialAdButtonEntity.button.on('click', (e) => {
+
+    });
+
+    this.rewardedAdButtonEntity.button.on('click', (e) => {
+
+    });
+
+    this.okRewardButtonEntity.button.on('click', (e) => {
+        
+    });
+};
+```
+
+</TabItem>
+</Tabs>
 
 The first step is to add the Google SDK integration files which we can do by copying the folder 'Google H5 Games Ads' from the [Flappy Bird project][flappy-bird-ads-demo].
 
@@ -201,6 +238,9 @@ This includes:
 Let's start with adding an interstitial ad to the project.
 
 Add the following code to the interstitial ad button click event callback in `ui-controller.js`:
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 // ...
@@ -366,9 +406,6 @@ Let's see it in action:
 ![](/img/tutorials/google-afg/tutorial-rewarded-ad.gif)
 
 The completed `ui-controller.js` file should look like this:
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="classic" groupId='script-code'>
 <TabItem  value="esm" label="ESM">
