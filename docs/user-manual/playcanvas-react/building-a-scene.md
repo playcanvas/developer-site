@@ -1,6 +1,5 @@
 ---
 title: Building a Scene
-sidebar_position: 5
 ---
 
 import { Application, Entity } from '@playcanvas/react';
