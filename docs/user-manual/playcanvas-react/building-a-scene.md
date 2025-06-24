@@ -154,13 +154,13 @@ One of the great advantages of using React is how easy it is to add interactivit
 
 ## Key Differences from Web Components
 
-When building scenes with PlayCanvas React compared to Web Components:
+When building scenes with PlayCanvas React compared to [Web Components](/user-manual/web-components/):
 
 1. **Component Structure**: Instead of HTML tags like `<pc-app>`, we use React components like `<Application>`
 2. **Props vs Attributes**: We use React props with camelCase (e.g., `clearColor`) instead of HTML attributes
 3. **Event Handling**: We can use React's event system directly (e.g., `onClick`)
 4. **State Management**: We can leverage React hooks like `useState` for dynamic behavior
-5. **Type Safety**: Full TypeScript support provides better developer experience
+5. **Type Safety**: Full TypeScript support with type safety.
 
 ## Next Steps
 
