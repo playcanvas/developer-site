@@ -16,6 +16,133 @@ These two scripts `game.js` and `input.js` are attached the root entity in the s
 
 ## game.js
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, RESOLUTION_AUTO, FILLMODE_FILL_WINDOW } from 'playcanvas';
+
+export class Game extends Script {
+    static scriptName = "game";
+
+    /**
+     * 
+     * @attribute
+     * @title UI Menu
+     * @type {Entity}
+     */
+    uiMenu = null;
+
+    /**
+     * 
+     * @attribute
+     * @title UI In Game
+     * @type {Entity}
+     */
+    uiInGame = null;
+
+    /**
+     * 
+     * @attribute
+     * @title UI Game Over
+     * @type {Entity}
+     */
+    uiGameOver = null;
+
+    /**
+     * 
+     * @attribute
+     * @title Audio
+     * @type {Entity}
+     */
+    audio = null;
+
+    static STATE_MENU = 'menu';
+    static STATE_INGAME = 'ingame';
+    static STATE_GAMEOVER = 'gameover';
+
+    // initialize code called once per entity
+    initialize() {
+        this._state = Game.STATE_MENU;
+        this._score = 0;
+
+        this.setResolution();
+
+        window.addEventListener("resize", this.setResolution.bind(this));
+
+        // listen to events from the UI
+        this.app.on("ui:start", this.start, this);
+        this.app.on("ui:reset", this.reset, this);
+    }
+
+    setResolution() {
+        // Adjust resolution based on screen size
+        const w = window.screen.width;
+        const h = window.screen.height;
+
+        if (w < 640) {
+            this.app.setCanvasResolution(RESOLUTION_AUTO, w, h);
+            this.app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+        }
+    }
+
+    // Call this to move from MENU to INGAME
+    start() {
+        this._state = Game.STATE_INGAME;
+        this.app.fire("game:start");
+        this.uiMenu.enabled = false;
+        this.uiInGame.enabled = true;
+
+        this.audio.sound.play("music");
+    }
+
+    // Call this to move from INGAME to GAMEOVER
+    gameOver() {
+        this._state = Game.STATE_GAMEOVER;
+        this.app.fire("game:gameover");
+        this.uiInGame.enabled = false;
+        this.uiGameOver.enabled = true;
+
+        this.audio.sound.stop();
+        this.audio.sound.play("gameover");
+    }
+
+    // Call this to move from GAMEOVER to MENU
+    reset() {
+        this.app.fire("game:reset");
+        this.resetScore();
+        this._state = Game.STATE_MENU;
+        this.uiGameOver.enabled = false;
+        this.uiMenu.enabled = true;
+
+        this.audio.sound.stop();
+    }
+
+    // return the current score
+    getScore() {
+        return this._score;
+    }
+
+    // add value to the score
+    addScore(v) {
+        this._score += v;
+        this.app.fire("game:score", this._score);
+    }
+
+    // reset the score
+    resetScore() {
+        this._score = 0;
+        this.app.fire("game:score", this._score);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Game = pc.createScript('game');
 
@@ -107,6 +234,9 @@ Game.prototype.resetScore = function () {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 ### Game State
 
 The game script manages the overall state of the game, it exposes some methods to alter the game state and fires events to alert other code that the game state has changed.
@@ -146,6 +276,105 @@ Finally the game script handles the initial choice of resolution to make sure th
 ## input.js
 
 The input script listens for input from the mouse or touchscreen, normalizes the input from the two into a general purpose "tap" and communicates with the rest of the application that a tap has occurred.
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3 } from 'playcanvas';
+
+export class Input extends Script {
+    static scriptName = "input";
+
+    /**
+     * @attribute
+     * @title Ball
+     * @type {Entity}
+     */
+    ball = null;
+
+    /**
+     * @attribute
+     * @title Camera
+     * @type {Entity}
+     */
+    camera = null;
+
+    /**
+     * @attribute
+     * @title Ball Radius
+     * @type {number}
+     */
+    ballRadius = 0.5;
+
+    static worldPos = new Vec3();
+
+    // initialize code called once per entity
+    initialize() {
+        this._paused = true;
+
+        // Listen for game events so we know whether to respond to input
+        this.app.on("game:start", () => {
+            this._paused = false;
+        });
+        this.app.on("game:gameover", () => {
+            this._paused = true;
+        });
+
+        // set up touch events if available
+        if (this.app.touch) {
+            this.app.touch.on("touchstart", this._onTouchStart, this);
+        }
+
+        // set up mouse events
+        this.app.mouse.on("mousedown", this._onMouseDown, this);
+    }
+
+    _onTap(x, y) {
+        let p = this.ball.getPosition();
+        let camPos = this.camera.getPosition();
+        let worldPos = Input.worldPos;
+
+        // Get the position in the 3D world of the touch or click
+        this.camera.camera.screenToWorld(x, y, camPos.z - p.z, worldPos);
+
+        // get the distance of the touch/click to the ball
+        let dx = (p.x - worldPos.x);
+        let dy = (p.y - worldPos.y);
+
+        // If the click is inside the ball, tap the ball
+        let lenSqr = dx * dx + dy * dy;
+        if (lenSqr < this.ballRadius * this.ballRadius) {
+            this.ball.script.ball.tap(dx, dy);
+        }
+    }
+
+    _onTouchStart(e) {
+        if (this._paused) {
+            return;
+        }
+
+        // respond to event
+        let touch = e.changedTouches[0];
+        this._onTap(touch.x, touch.y);
+
+        // stop mouse events firing as well
+        e.event.preventDefault();
+    }
+
+    _onMouseDown(e) {
+        if (this._paused) {
+            return;
+        }
+
+        // respond to event
+        this._onTap(e.x, e.y);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Input = pc.createScript('input');
@@ -223,6 +452,9 @@ Input.prototype._onMouseDown = function (e) {
     this._onTap(e.x, e.y);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 First, in initialize we are setting up event listening. We listen for application events to determine if the game is in a paused state (that is in the menu or in the game over state). If the input is paused we don't respond to the taps. Next we listen for touch events (note, you must check if `this.app.touch` is available) and mouse events.
 

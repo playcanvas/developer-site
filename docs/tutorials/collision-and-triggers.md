@@ -63,6 +63,36 @@ The next Entity we'll need is the trigger.
 
 With this Entity we have a *collision* component but no *rigidbody* so it acts as a trigger. The trigger Entity also has a *script* component with some code attached. Triggers are only useful if something happens when they are triggered, so we need to add some code to fire and listen for events when the trigger is activated.
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3 } from 'playcanvas';
+
+export class Trigger extends Script {
+    static scriptName = "trigger";
+
+    // initialize code called once per entity
+    initialize() {
+        this.entity.collision.on('triggerenter', this.onTriggerEnter, this);
+    };
+
+    onTriggerEnter(entity) {
+        this.entity.rigidbody.linearVelocity = Vec3.ZERO;
+        this.entity.rigidbody.angularVelocity = Vec3.ZERO;
+        // Reset back to roughly the position the entity started in.
+        const position = entity.getPosition();
+        this.entity.rigidbody.teleport(position.x, 10, 0);
+    };
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Trigger = pc.createScript('trigger');
 
@@ -79,6 +109,9 @@ Trigger.prototype.onTriggerEnter = function(entity) {
     entity.rigidbody.teleport(position.x, 10, 0);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 There two significant parts to the code above.
 
@@ -114,6 +147,31 @@ The difference between **contact** and **collisionstart** is subtle but importan
 
 Both events are useful, but in this demo we'll use the **collisionstart** event to trigger a sound effect that plays when the objects hit the ground. Here's the code:
 
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Collider extends Script {
+    static scriptName = "collider";
+
+    // initialize code called once per entity
+    initialize() {
+        this.entity.collision.on('collisionstart', this.onCollisionStart, this);
+    }
+
+    onCollisionStart(result) {
+        if (result.other.rigidbody) {
+            this.entity.sound.play("hit");
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Collider = pc.createScript('collider');
 
@@ -128,6 +186,9 @@ Collider.prototype.onCollisionStart = function (result) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 In the ```initialize``` method we set up the event listener, and then in the event handler we check to see if the other entity has a **rigidbody** component (this is to avoid playing a sound when we enter a trigger volume) and then we play the "hit" sound effect. So now, every time an Entity with the collider script attached collides with another rigid body, it will play the hit sound.
 

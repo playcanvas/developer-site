@@ -5,6 +5,16 @@ sidebar_position: 21
 
 Welcome to the Billing FAQ that lists the common questions relating to your PlayCanvas subscription.
 
+### Can businesses sign up to the Personal plan?
+
+Yes, providing the annual revenue of that business is below $100,000. Otherwise, the Organization plan should be selected.
+
+:::note
+
+We don't verify company revenues, so there's an element of trust involved. We rely on our users to support the ongoing development of PlayCanvas by choosing the plan that best matches their circumstances. Thanks for helping us keep PlayCanvas sustainable!
+
+:::
+
 ### Does my subscription auto-renew?
 
 Yes. Once you subscribe to the Personal or Organization plan, payment will automatically be taken on a monthly basis, on the day of the month when you first subscribed.

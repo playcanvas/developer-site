@@ -113,6 +113,93 @@ We include a reset function that brings the cube to its original position and, a
 
 ## Full code listing
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import {
+    Script, Vec3,
+    EVENT_KEYDOWN, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_A, KEY_D, KEY_W, KEY_S, KEY_F, KEY_R
+} from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+        
+    // initialize code called once per entity
+    initialize() {
+        this.torque = 7;
+        this.app.keyboard.on(EVENT_KEYDOWN, this.onKeyDown, this);
+
+        this.on('destroy', function() {
+            this.app.keyboard.off(EVENT_KEYDOWN, this.onKeyDown, this);
+        }, this);
+    }
+
+    onKeyDown(event) {
+        event.event.preventDefault();
+    }
+
+    // update code called every frame
+    update(dt) {
+        //update player's position
+        this.playerPos = this.entity.getLocalPosition();
+
+        const app = this.app;
+
+        //keyboard controls and applying forces and moments.
+        if (app.keyboard.isPressed(KEY_LEFT) ) {
+            this.entity.rigidbody.applyImpulse(-1, 0, 0);
+        }
+        if (app.keyboard.isPressed(KEY_RIGHT) ) {
+            this.entity.rigidbody.applyImpulse(1, 0, 0);
+        }
+        if (app.keyboard.isPressed(KEY_UP) ) {
+            this.entity.rigidbody.applyImpulse(0, 1, 0);
+        }
+        if (app.keyboard.isPressed(KEY_A) ) {
+            this.entity.rigidbody.applyTorque(0, this.torque, 0);
+        }
+        if (app.keyboard.isPressed(KEY_D) ) {
+            this.entity.rigidbody.applyTorque(0, -this.torque, 0);
+        }
+        if (app.keyboard.isPressed(KEY_W) ) {
+            this.entity.rigidbody.applyTorque(-this.torque, 0, 0);
+        }
+        if (app.keyboard.isPressed(KEY_S) ) {
+            this.entity.rigidbody.applyTorque(this.torque, 0, 0);
+        }
+        if (app.keyboard.isPressed(KEY_F) ) {
+            this.entity.rigidbody.applyForce(0, 9.8, 0);
+        }
+
+        // Keeping the cube on screen - cube moves off of one screen edge then appears from the opposite edge.
+        if (this.playerPos.x < -9.0) {
+            this.entity.rigidbody.teleport(8.8, this.playerPos.y, this.playerPos.z);
+        }
+        if (this.playerPos.x > 9.0) {
+            this.entity.rigidbody.teleport(-8.8, this.playerPos.y, this.playerPos.z);
+        }
+
+        // cube reset control
+        if (app.keyboard.wasPressed(KEY_R) ) {
+            this.reset();
+        }
+    }
+
+    reset() {
+        this.entity.rigidbody.teleport(0, 2, 0);
+        this.entity.rigidbody.linearVelocity = Vec3.ZERO;
+        this.entity.rigidbody.angularVelocity = Vec3.ZERO;
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var DynamicBody = pc.createScript('dynamicBody');
 
@@ -183,6 +270,9 @@ DynamicBody.prototype.reset = function () {
     this.entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
 };
 ```
+
+</TabItem>
+</Tabs>
 
 [1]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyforce
 [2]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyimpulse

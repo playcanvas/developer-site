@@ -44,6 +44,81 @@ The fill image is the `Fill Image` entity in our example. It is a child of the `
 
 The `Progress Bar` entity has a script to control how the progress bar is resized:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, math, Entity } from 'playcanvas';
+
+export class ProgressBar extends Script {
+    static scriptName = "progressBar";
+
+   /**
+     * @attribute
+     * @title Progress Image
+     * @type {Entity}
+     */
+    progressImage = null;
+
+    /**
+     * @attribute
+     * @title Progress Image Max Width
+     * @type {number}
+     */
+    progressImageMaxWidth = null;
+
+    initialize() {
+        // use our own rect object to set the size of
+        // the progress bar
+        this.imageRect = this.progressImage.element.rect.clone();
+
+        // initialize progress to 0
+        this.setProgress(0);
+        // if true the progress bar will increase
+        // otherwise it will decrease in update
+        this.increase = true;
+    }
+
+    setProgress(value) {
+        // clamp value between 0 and 1
+        value = math.clamp(value, 0, 1);
+
+        this.progress = value;
+
+        // find the desired width of our progress fill image
+        var width = math.lerp(0, this.progressImageMaxWidth, value);
+        // set the width of the fill image element
+        this.progressImage.element.width = width;
+
+        // Set the width of the element's rect (rect.z) to be the same
+        // value as our 0-1 progress.
+        // This is so that the fill image will only show the portion
+        // of the texture that is visible
+        this.imageRect.copy(this.progressImage.element.rect);
+        this.imageRect.z = value;
+        // force rect update
+        this.progressImage.element.rect = this.progressImage.element.rect;
+    }
+
+    // Increase or decrease the progress automatically
+    update(dt) {
+        const diff = this.increase ? dt : -dt;
+        this.setProgress(this.progress + diff);
+
+        if (this.progress >= 1)
+            this.increase = false;
+        else if (this.progress <= 0)
+            this.increase = true;
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var ProgressBar = pc.createScript('progressBar');
 
@@ -97,6 +172,9 @@ ProgressBar.prototype.update = function(dt) {
         this.increase = true;
 };
 ```
+
+</TabItem>
+</Tabs>
 
 The script has 2 attributes - the Entity that shows the fill image and the max width of that image. It has a `setProgress` function which sets the progress to a value between 0 and 1.
 

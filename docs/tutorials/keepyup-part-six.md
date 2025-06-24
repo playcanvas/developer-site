@@ -34,6 +34,61 @@ Images and Text are added to the user interface using the Element Component. Thi
 
 Let's take a look at the script for the main menu.
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class UiMenu extends Script {
+    static scriptName = "uiMenu";
+
+    /**
+     * @attribute
+     * @title Overlay
+     * @type {Entity}
+     */
+    overlay = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this.on('enable', this.onEnable, this);
+        this.on('disable', this.onDisable, this);
+
+        this.onEnable();
+    }
+
+    onEnable() {
+        // Listen for clicks on the background
+
+        this.overlay.enabled = true;
+        this.overlay.element.on("click", this.start, this);
+
+        if (this.ball) {
+            this.ball.model.meshInstances[0].material.depthTest = false;
+        }
+    }
+
+    onDisable() {
+        this.overlay.enabled = false;
+        // Stop listening to events
+        this.overlay.element.off("click", this.start, this);
+    }
+
+    start(e) {
+        this.app.fire("ui:start");
+        // prevent touch and mouse events
+        e.stopPropagation();
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var UiMenu = pc.createScript('uiMenu');
 
@@ -70,6 +125,9 @@ UiMenu.prototype.start = function (e) {
     e.stopPropagation();
 };
 ```
+
+</TabItem>
+</Tabs>
 
 First we have set up an attribute with a reference to the overlay element. The overlay element is a full screen element which tints the screen green. We also use this to detect input as we only care about the user clicking on the full screen.
 
