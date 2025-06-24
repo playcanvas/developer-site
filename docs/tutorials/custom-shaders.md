@@ -170,6 +170,36 @@ When our height map texture is loaded we can set the uniform `uHeightMap` to be 
 
 ## Updating uniforms
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class CustomShader extends Script {
+    static scriptName = "customShader";
+
+    update(dt) {
+        this.time += dt;
+
+        // Bounce value of t 0->1->0
+        var t = (this.time % 2);
+        if (t > 1) {
+            t = 1 - (t - 1);
+        }
+
+        // Update the time value in the material
+        this.material.setParameter('uTime', t);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 // update code called every frame
 CustomShader.prototype.update = function(dt) {
@@ -186,11 +216,133 @@ CustomShader.prototype.update = function(dt) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 To achieve the disappearing effect we use the height map value as a threshold, and we increase the threshold over time. In the update method above we bounce the value of `t` between 0 and 1 and we set this as the `uTime` uniform.
 
 In our shader if the value of the heightmap on a pixel is less than the value time value we don't draw the pixel. In addition at values that are close to the threshold, we draw the pixel in blue to display a nice 'edge' to the effect.
 
 ## Complete listing
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, SEMANTIC_TEXCOORD0, SEMANTIC_POSITION, Shader, Material } from 'playcanvas';
+
+export class CustomShader extends Script {
+    static scriptName = "customShader";
+
+    /**
+     * Vertex Shader
+     * 
+     * @attribute
+     * @title Vertex Shader
+     * @type {Asset}
+     * @resource shader
+     */
+    vs = null;
+
+    /**
+     * Fragment Shader
+     * 
+     * @attribute
+     * @title Fragment Shader
+     * @type {Asset}
+     * @resource shader
+     */
+    fs = null;
+
+    /**
+     * Diffuse Map
+     * 
+     * @attribute
+     * @title Diffuse Map
+     * @type {Asset}
+     * @resource texture
+     */
+    diffuseMap = null;
+
+    /**
+     * Height Map
+     * 
+     * @attribute
+     * @title Height Map
+     * @type {Asset}
+     * @resource texture
+     */
+    heightMap = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this.time = 0;
+
+        const app = this.app;
+        const gd = app.graphicsDevice;
+
+        const diffuseTexture = this.diffuseMap.resource;
+        const heightTexture = this.heightMap.resource;
+
+        const vertexShader = this.vs.resource;
+        let fragmentShader = "precision " + gd.precision + " float;\n";
+        fragmentShader = fragmentShader + this.fs.resource;
+
+        // A shader definition used to create a new shader.
+        const shaderDefinition = {
+            attributes: {
+                aPosition: SEMANTIC_POSITION,
+                aUv0: SEMANTIC_TEXCOORD0
+            },
+            vshader: vertexShader,
+            fshader: fragmentShader
+        };
+
+        // Create the shader from the definition
+        this.shader = new Shader(gd, shaderDefinition);
+
+        // Create a new material and set the shader
+        this.material = new Material();
+        this.material.shader = this.shader;
+
+        // Set the initial time parameter
+        this.material.setParameter('uTime', 0);
+
+        // Set the diffuse texture
+        this.material.setParameter('uDiffuseMap', diffuseTexture);
+
+        // Use the "clouds" texture as the height map property
+        this.material.setParameter('uHeightMap', heightTexture);
+
+        // Replace the material on the model with our new material
+        var renders = this.entity.findComponents('render');
+
+        for (var i = 0; i < renders.length; ++i) {
+            var meshInstances = renders[i].meshInstances;
+            for (var j = 0; j < meshInstances.length; j++) {
+                meshInstances[j].material = this.material;
+            }
+        }
+    }
+
+    // update code called every frame
+    update(dt) {
+        this.time += dt;
+
+        // Bounce value of t 0->1->0
+        var t = (this.time % 2);
+        if (t > 1) {
+            t = 1 - (t - 1);
+        }
+
+        // Update the time value in the material
+        this.material.setParameter('uTime', t);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var CustomShader = pc.createScript('customShader');
@@ -284,6 +436,9 @@ CustomShader.prototype.update = function(dt) {
     this.material.setParameter('uTime', t);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 Here is the complete script. Remember you'll need to create vertex shader and fragment shader assets in order for it to work.
 

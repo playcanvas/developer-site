@@ -16,6 +16,104 @@ handling keycodes and charcodes.
 
 Take a look at the keyboard input Scene in the [tutorials project][1]. Here is the code for the tutorial:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_A } from 'playcanvas';
+
+export class KeyboardHandler extends Script {
+    static scriptName = "keyboardHandler";
+
+    /**
+     * @attribute
+     * @title Red Material
+     * @type {Asset}
+     * @resource material
+     */
+    redMaterial = null;
+
+    /**
+     * @attribute
+     * @title White Material
+     * @type {Asset}
+     * @resource material
+     */
+    whiteMaterial = null;
+
+    // initialize code called once per entity
+    initialize() {
+        // Use on() to listen for events on the keyboard device.
+        // Arguments are:
+        // 1) The event name to listen for
+        // 2) The callback function to call when the event fires
+        // 3) (optional) The value to use for 'this' in the callback function
+
+        this.app.keyboard.on("keydown", this.onKeyDown, this);
+        this.app.keyboard.on("keyup", this.onKeyUp, this);
+    }
+
+    // update code called every frame
+    update(dt) {
+        /*
+         * Notice in the demo that pressing and holding the arrow keys doesn't
+         * make the block spin. wasPressed() is used to detect a
+         * keypress that occurred since the last frame and will only be
+         * called once even if the key is held down.
+         */
+        var angle = 0;
+        if (this.app.keyboard.wasPressed(KEY_LEFT)) {
+            angle = -5;
+        } else if (this.app.keyboard.wasPressed(KEY_RIGHT)) {
+            angle = 5;
+        }
+
+        /*
+         * Notice that pressing and holding the space bar makes the block
+         * continuously spin. isPressed() is used to detected if a
+         * key is down right now. So it will be true every frame as long as
+         * the key is still pressed.
+         */
+        if (this.app.keyboard.isPressed(KEY_SPACE)) {
+            angle = 1;
+        }
+
+        // Update the spinning cube
+        this.entity.rotateLocal(0, angle, 0);
+    }
+
+    /*
+     * Event handler called when key is pressed
+     */
+    onKeyDown(event) {
+        // Check event.key to detect which key has been pressed
+        if (event.key === KEY_A && this.redMaterial) {
+            this.entity.render.meshInstances[0].material = this.redMaterial.resource;
+        }
+
+        // When the space bar is pressed this scrolls the window.
+        // Calling preventDefault() on the original browser event stops this.
+        event.preventDefault();
+    }
+
+    /*
+     * Event handler called when key is released
+     */
+    onKeyUp(event) {
+        // Check event.key to detect which key has been pressed
+        if (event.key === KEY_A && this.whiteMaterial) {
+            this.entity.render.meshInstances[0].material = this.whiteMaterial.resource;
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var KeyboardHandler = pc.createScript('keyboardHandler');
 
@@ -81,7 +179,7 @@ KeyboardHandler.prototype.onKeyDown = function (event) {
 
     // When the space bar is pressed this scrolls the window.
     // Calling preventDefault() on the original browser event stops this.
-    event.event.preventDefault();
+    event.preventDefault();
 };
 
 /*
@@ -94,6 +192,9 @@ KeyboardHandler.prototype.onKeyUp = function (event) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 There are two ways of detecting keyboard input. The first is done in the update method of your scripts. Use `isPressed()` and `wasPressed()` and check whether a key is currently pressed or has just been pressed. The second uses events to respond to a key press or release as it happens.
 

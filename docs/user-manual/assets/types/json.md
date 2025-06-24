@@ -20,6 +20,43 @@ To access data from a JSON asset in a script:
 
 Example:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class JsonScript extends Script {
+    static scriptName = "jsonScript";
+
+    /**
+     * @attribute
+     * @title Json Asset
+     * @type {Asset}
+     * @resource json
+     */
+    jsonAsset = null;
+
+    initialize() {
+        if (this.jsonAsset) {
+            // Get the JSON asset's resource (an object)
+            var jsonData = this.jsonAsset.resource;
+
+            // Example: Accessing data from the JSON object
+            if (jsonData.someDataField) {
+                console.log("Data from JSON:", jsonData.someDataField);
+            }
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var JsonScript = pc.createScript('jsonScript');
 
@@ -38,3 +75,6 @@ JsonScript.prototype.initialize = function () {
     }
 };
 ```
+
+</TabItem>
+</Tabs>

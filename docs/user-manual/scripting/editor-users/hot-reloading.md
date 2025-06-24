@@ -41,7 +41,7 @@ For example:
 <TabItem  value="esm" label="ESM">
 
 ```javascript
-import { ScriptType, math } from 'playcanvas';
+import { Script, math } from 'playcanvas';
 
 export class Rotator extends Script {
     static scriptName = 'rotator';

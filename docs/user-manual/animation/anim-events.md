@@ -24,6 +24,32 @@ Each event has the following modifiable properties:
 
 After creating an event for an animation asset, the event will be fired whenever that asset is played back by an anim component. You can therefore attach listeners to the anim component to handle the event. The following example shows how to attach event listeners to the anim component:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+// initialize code called once per entity
+export class AnimationEvents extends Script {
+    static scriptName = "animationEvents";
+
+    initialize() {
+        this.entity.anim.on('plant_foot', (event) => {
+            // get the foot bone from the event's string property, either right_foot or left_foot
+            const footBone = this.entity.findByName(event.string);
+            createDustCloudAtLocation(footBone.getPosition());
+        });
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var AnimationEvents = pc.createScript('animationEvents');
 
@@ -36,5 +62,8 @@ AnimationEvents.prototype.initialize = function() {
     }, this);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 Any number of animation events can be attached to a single animation asset and used by any number of anim components. Making use of the additional `number` and `string` properties of an event allows you to differentiate between events that are passed to the same event listener.

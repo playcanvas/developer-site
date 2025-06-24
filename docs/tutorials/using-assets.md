@@ -98,6 +98,84 @@ Once the asset is loaded `asset.resource` will be a `pc.Render` instance and we 
 
 ## The complete script
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="classic" groupId='script-code'>
+<TabItem  value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_SPACE, KEY_C, KEY_L } from 'playcanvas';
+
+export class UpdateAsset extends Script {
+    static scriptName = "updateAsset";
+
+    /**
+     * @attribute
+     * @title A
+     * @type {Asset}
+     * @resource render
+     */
+    a = null;
+
+    /**
+     * @attribute
+     * @title B
+     * @type {Asset}
+     * @resource render
+     */
+    b = null;
+
+    /**
+     * @attribute
+     * @title C
+     * @type {Asset}
+     * @resource render
+     */
+    c = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this.app.keyboard.preventDefault = true;
+    }
+
+    // update code called every frame
+    update(dt) {
+        var app = this.app;
+
+        if (app.keyboard.isPressed(KEY_SPACE)) {
+            if (this.entity.render.asset !== this.b.id) {
+                // update the render component to the new Render Asset
+                console.log('Changed to B Render Asset');
+                this.entity.render.asset = this.b;
+            }
+        } else {
+            if (app.keyboard.isPressed(KEY_C)) {
+                if (this.c.loaded) {
+                    if (this.entity.render.asset !== this.c.id) {
+                        console.log('Changed to C Render Asset');
+                        this.entity.render.asset = this.c;
+                    }
+                }
+            } else {
+                if (this.entity.render.asset !== this.a.id) {
+                    // restore original Render Asset
+                    console.log('Changed to A Render Asset');
+                    this.entity.render.asset = this.a;
+                }
+            }
+        }
+
+        if (app.keyboard.isPressed(KEY_L)) {
+            app.assets.load(this.c);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var UpdateAsset = pc.createScript('updateAsset');
 
@@ -153,6 +231,9 @@ UpdateAsset.prototype.update = function(dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 ## AssetRegistry events
 
