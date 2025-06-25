@@ -17,6 +17,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | Attribute | Description |
 | --- | --- |
 | `alpha` | Boolean attribute. Determines whether the application allocates an alpha channel in the frame buffer. Defaults to `true`. |
+| `backend` | The graphics engine backend. Can be `webgpu`, `webgl2` or `null`. If `webgpu` is specified and WebGPU is not available, the engine will fall back to `webgl2`. If unspecified, `webgl2` is used. |
 | `antialias` | Boolean attribute. Determines whether the application uses anti-aliasing. Defaults to `true`. |
 | `depth` | Boolean attribute. Determines whether the application allocates a depth buffer. Defaults to `true`. |
 | `high-resolution` | Boolean attribute. Determines whether the application renders using physical resolution or CSS resolution. Defaults to `true`. |
