@@ -177,7 +177,7 @@ CustomShader.attributes.add('heightMap', {
  * @attribute
  * @title Vertex Shader
  * @type {Asset}
- * @resource 'shader'
+ * @resource shader
  */
 vs;
 
@@ -185,7 +185,7 @@ vs;
  * @attribute
  * @title Fragment Shader
  * @type {Asset}
- * @resource 'shader'
+ * @resource shader
  */
 fs;
 
@@ -193,7 +193,7 @@ fs;
  * @attribute
  * @title Diffuse Map
  * @type {Asset}
- * @resource 'texture'
+ * @resource texture
  */
 diffuseMap;
 
@@ -201,7 +201,7 @@ diffuseMap;
  * @attribute
  * @title Height Map
  * @type {Asset}
- * @resource 'texture'
+ * @resource texture
  */
 heightMap;
 ```
