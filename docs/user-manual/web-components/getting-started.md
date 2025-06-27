@@ -42,7 +42,7 @@ Instead of loading the library from a local package, you can instead opt to load
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.6.0/build/playcanvas.mjs"
+            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/build/playcanvas.mjs"
         }
     }
 </script>
@@ -51,7 +51,7 @@ Instead of loading the library from a local package, you can instead opt to load
 And the components would now be imported as follows:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.5/dist/pwc.mjs"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.7/dist/pwc.mjs"></script>
 ```
 
 ## Boilerplate HTML
@@ -68,11 +68,11 @@ Let's see how this looks in a minimal boilerplate HTML file:
         <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.6.0/build/playcanvas.mjs"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/build/playcanvas.mjs"
                 }
             }
         </script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.5/dist/pwc.mjs"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.7/dist/pwc.mjs"></script>
         <style>
             body {
                 margin: 0;
