@@ -99,25 +99,7 @@ const config = {
         return redirects;
       }
     }],
-    'docusaurus-plugin-sass',
-    () => ({
-      name: 'custom-webpack-config',
-      configureWebpack: () => ({
-        module: {
-          rules: [
-            {
-              test: /\.m?js$/,
-              resolve: { 
-                fullySpecified: false 
-              },
-            },
-          ],
-        },
-        externals: {
-          'https://esm.sh/canvas-confetti': 'confetti'
-        }
-      }),
-    }),
+    'docusaurus-plugin-sass'
   ],
 
   presets: [

@@ -146,7 +146,7 @@ One of the great advantages of using React is how easy it is to add interactivit
     </TabItem>
     <TabItem  value="demo" label="Demo" className='example-demo'>
       <BrowserOnly>
-        <LazyInteractive/>
+        {() => <LazyInteractive/>}
       </BrowserOnly>
     </TabItem>
 </Tabs>

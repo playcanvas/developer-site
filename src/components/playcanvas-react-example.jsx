@@ -1,6 +1,6 @@
 import { Application, Entity } from '@playcanvas/react'
 import { Camera, Light, Render } from '@playcanvas/react/components'
-import confetti from "https://esm.sh/canvas-confetti"
+import confetti from "canvas-confetti"
 
 export default function Interactive() {
   return (
