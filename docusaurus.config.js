@@ -99,7 +99,7 @@ const config = {
         return redirects;
       }
     }],
-    'docusaurus-plugin-sass',
+    'docusaurus-plugin-sass'
   ],
 
   presets: [
