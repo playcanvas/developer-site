@@ -62,4 +62,4 @@ Effective Dev Log posts might include:
 - **Team Updates**: New members or role changes
 - **Release Announcements**: Version updates or launch news
 
-Dev Logs are great tool to keep your the community informed about your projects - so be sure to use them!
+Dev Logs are great tool to keep your community informed about your projects - so be sure to use them!
