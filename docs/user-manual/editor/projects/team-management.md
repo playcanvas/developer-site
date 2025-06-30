@@ -12,7 +12,7 @@ To add team members to your project:
 1. Navigate to your Project Dashboard
 2. Go to the **SETTINGS** section
 3. Scroll to the **TEAM** section
-5. In the edit box, enter the username or email of the person you want to add and click **SEND**
+4. In the edit box, enter the username or email of the person you want to add and click **SEND**
 
 ## User Permissions
 
