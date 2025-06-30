@@ -33,7 +33,7 @@ To create a development log post:
 1. Navigate to your Project Dashboard
 2. Go to the **OVERVIEW** section
 3. In the center of the page, you will see the **DEV LOG FEED** section
-4. Click in the text box showing the text **What changes hae you made today?**
+4. Click in the text box showing the text **What changes have you made today?**
 5. Add your title and content
 6. Click **PREVIEW** to see how your post will appear when it is published
 7. Click **POST** to finally share your update
