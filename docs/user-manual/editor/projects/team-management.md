@@ -16,7 +16,7 @@ To add team members to your project:
 
 ## User Permissions
 
-PlayCanvas projects support four permission levels: **Read**, **Write** and **Admin**.
+PlayCanvas projects support three permission levels: **Read**, **Write** and **Admin**.
 
 | Capability | Read Access | Write Access | Admin Access |
 |------------| :---------: | :----------: | :----------: |
