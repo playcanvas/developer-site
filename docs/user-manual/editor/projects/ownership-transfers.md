@@ -13,7 +13,7 @@ Project owners have the following abilities (over and above what Admins are able
 - **Team Management**: Can add/remove any team member (including Admins)
 - **Transfer Rights**: Can transfer ownership to others
 
-## Initiating Ownership Transfers
+## Initiating Ownership Transfers {#initiating-ownership-transfers}
 
 ### From the Projects List
 

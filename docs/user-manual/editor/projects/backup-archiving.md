@@ -82,7 +82,7 @@ PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/
 - Configurable backup schedules
 - Integration with cloud storage services
 
-## Restoring Projects
+## Restoring Projects {#restoring-projects}
 
 ### From Archive Files
 
@@ -160,7 +160,7 @@ Store your backups securely:
 
 ### Version Control Integration
 
-Coordinate backups with your [version control workflow](../version-control):
+Coordinate backups with your [version control workflow](../version-control/index.md):
 
 - **Branch-specific Backups**: Export different branches separately
 - **Release Backups**: Archive every stable release
