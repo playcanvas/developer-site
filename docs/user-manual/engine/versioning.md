@@ -23,7 +23,7 @@ This is the smallest type of release which contains **non-breaking** changes to 
 
 ### `minor`
 
-This release contains all new features and additions to the engine API along with deprecations and breaking changes. The Editor supports both the latest minor and the previous minor to allow for migrations in API to occur across larger projects. 
+This release contains all new features and additions to the engine API along with deprecations and breaking changes. The Editor supports both the latest minor and the previous minor to allow for migrations in API to occur across larger projects.
 
 ### `major`
 
