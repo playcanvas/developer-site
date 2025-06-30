@@ -35,17 +35,17 @@ To export a project archive:
 2. Visit the User Page that owns the project you wish to export
 3. Locate the project in the project list
 4. Click the down arrow next to the right of the project name
-4. Select **"Export Project"**
-5. Wait for the archive to be generated
-6. Click **DOWNLOAD** to download the zip file
+5. Select **"Export Project"**
+6. Wait for the archive to be generated
+7. Click **DOWNLOAD** to download the zip file
 
 :::danger
 
 Exported projects **do not** include:
 
-* Version control history
-* Any branches other than `main`
-* The project's [Dev Log](dev-logs.md)
+- Version control history
+- Any branches other than `main`
+- The project's [Dev Log](dev-logs.md)
 
 :::
 
