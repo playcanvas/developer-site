@@ -53,6 +53,6 @@ If you have subscribed for a paid plan, that plan will be cancelled unless you c
 After you convert your account, you will be logged out. Then log back in with the new owner's account and you will be able to access the converted account and all its projects.
 
 [4]: /user-manual/profile
-[5]: /user-manual/profile/projects/#transfer-project-ownership
+[5]: /user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers
 [6]: /user-manual/organizations/managing-organizations/#projects
 [7]: /user-manual/profile/account

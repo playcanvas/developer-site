@@ -56,7 +56,7 @@ CREATE をクリックすると、[profile][4] ページに移動します。
 [2]: /img/user-manual/organizations/dropdown.png
 [3]: /img/user-manual/organizations/new-organization.jpg
 [4]: /user-manual/profile
-[5]: /user-manual/profile/projects/#transfer-project-ownership
+[5]: /user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers
 [6]: /user-manual/organizations/managing-organizations/#projects
 [7]: /user-manual/profile/account
 [8]: /img/user-manual/organizations/convert.png
