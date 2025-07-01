@@ -5,9 +5,9 @@ sidebar_position: 3
 
 The engine supports both prereleases and releases. This page outlines the hierarchy of each version type and what they represent.
 
-### `alpha` (not implemented yet)
+<!-- ### `alpha`
 
-An alpha prerelease is the most unstable type of release purely for testing features in a branch for a PR. This is useful for mobile debugging and profiling new ideas without having to deploy a full release.
+An alpha prerelease is the most unstable type of release purely for testing features in a branch for a PR. This is useful for mobile debugging and profiling new ideas without having to deploy a full release. -->
 
 ### `beta`
 
