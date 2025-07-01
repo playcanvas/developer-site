@@ -19,11 +19,17 @@ A preview prerelease is the last type of prerelease which contains all the lates
 
 ### `patch`
 
-This is the smallest type of release which contains **non-breaking** changes to the engine. This will exclude any API changes or new features - only bug fixes. The Editor will only show the latest patch version for any particular minor release.
+This is the smallest type of release following [semantic versioning](https://semver.org/). The Editor will only show the latest patch version for any particular minor release.
 
 ### `minor`
 
-This release contains all new features and additions to the engine API along with deprecations and breaking changes. The Editor supports both the latest minor and the previous minor to allow for migrations in API to occur across larger projects.
+This type of release follows the standard outlined by [semantic versioning](https://semver.org/). Occasionally we may have **breaking changes in minor releases** but these are rare and will be notified of in advance. As such the Editor supports both the latest minor and the previous minor to allow for migrations in API to occur across larger projects.
+
+:::important
+
+If you are using the engine with NPM it is recommended to use the `~X.X.X` notation to pin the major and minor version numbers and only update to the latest patch
+
+:::
 
 ### `major`
 
