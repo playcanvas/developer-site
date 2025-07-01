@@ -27,7 +27,7 @@ This type of release follows the standard outlined by [semantic versioning](http
 
 :::important
 
-If you are using the engine with NPM it is recommended to use the `~X.X.X` notation to pin the major and minor version numbers and only update to the latest patch
+If you are using the engine with NPM it is recommended to use the `~X.X.X` notation to pin the major and minor version numbers and only update to the latest patch.
 
 :::
 
