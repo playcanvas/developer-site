@@ -1,5 +1,5 @@
 ---
-title: Engine
+title: PlayCanvas Engine
 sidebar_position: 5
 ---
 

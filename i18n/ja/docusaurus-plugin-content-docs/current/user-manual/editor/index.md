@@ -1,5 +1,5 @@
 ---
-title: エディター
+title: PlayCanvas Editor
 sidebar_position: 6
 ---
 
