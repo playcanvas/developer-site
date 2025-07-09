@@ -15,4 +15,3 @@ import Link from '@docusaurus/Link';
 <Link to='https://playcanvas.com/project/688146/'>Open Project ↗</Link>
 
 [documentation-page]: /user-manual/physics/compound-shapes/
-

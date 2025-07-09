@@ -61,7 +61,6 @@ Spriteコンポーネントは、[Spriteアセット][1]をシーンに表示さ
 
 [Scriptコンポーネント][4]を使用して、Spriteコンポーネントのプロパティを制御できます。Spriteコンポーネントのスクリプトインターフェースについては、[こちら][5]を参照してください。
 
-
 [1]: /user-manual/assets/types/sprite
 [4]: /user-manual/scenes/components/script
 [5]: https://api.playcanvas.com/engine/classes/SpriteComponent.html

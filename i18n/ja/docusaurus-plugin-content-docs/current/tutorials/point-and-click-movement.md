@@ -9,4 +9,3 @@ Sample showing a simple point and click system to move an object where you user 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/RQAovNH6/" title="Point and click movement" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
-

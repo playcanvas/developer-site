@@ -366,7 +366,6 @@ this.rewardedAdButtonEntity.button.on('click', function (e) {
 ![](/img/tutorials/google-afg/tutorial-rewarded-ad.gif)
 
 完了した `ui-controller.js` ファイルは次のようになるはずです。
- 
 
 ```javascript
 var UiController = pc.createScript('uiController');

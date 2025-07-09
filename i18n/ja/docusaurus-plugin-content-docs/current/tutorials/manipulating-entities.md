@@ -36,7 +36,7 @@ var lp = entity.getLocalPosition();
 var wp = entity.getPosition();
 ```
 
-これらの方法はともに ` pc.Vec3`(配列形式のベクトル量[x、y、z])を返します。
+これらの方法はともに `pc.Vec3`(配列形式のベクトル量[x、y、z])を返します。
 
 エンティティの位置を設定するには、下記の方法を使用するだけです。
 

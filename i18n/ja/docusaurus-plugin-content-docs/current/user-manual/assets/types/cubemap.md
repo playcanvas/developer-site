@@ -90,7 +90,7 @@ Cubemapの面は以下の条件を満たす必要があります。
 
 :::
 
-## EquirectangularまたはOctahedral HDRIsをキューブマップに変換する方法は以下の通りです。
+## EquirectangularまたはOctahedral HDRIsをキューブマップに変換する方法は以下の通りです
 
 環境テクスチャ (Environment Texture) は、しばしば正距円筒図法 (equirectangular) または正八面体 (Octahedral) の形式で提供されます([例えばPoly Haven][7])など、これらのテクスチャをPlayCanvasで使用する前に、キューブマップに変換する必要があります。
 

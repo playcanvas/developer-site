@@ -20,7 +20,7 @@ In this tutorial we’ll cover how to setup a basic multiplayer project using No
 
 ## サーバーのセットアップ
 
-ピアツーピアではなく、クライアントとサーバーのモデルを実装します。これは、すべてのクライアント(PlayCanvasのインスタンス)からデータを受信し、ブロードキャストします。 
+ピアツーピアではなく、クライアントとサーバーのモデルを実装します。これは、すべてのクライアント(PlayCanvasのインスタンス)からデータを受信し、ブロードキャストします。
 
 [Glitch](https://glitch.com/) provides a really convenient way to write and deploy backend apps for free completely in your browser! You can use it without an account but creating one will let you easily find your work. [Create a new Node app](https://glitch.com/edit/#!/new-project) and replace the contents of `server.js` with this:
 
@@ -86,7 +86,6 @@ https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js
 
 次に、ネットワークロジックを処理する新しいスクリプトを作成する必要があります。 `Network.js`という新しいスクリプトを作成します。最初に、サーバーに接続する必要があります。これは、initializeメソッドに次の行を追加することで行うことができます。
 
-
 ```javascript
 this.socket = io.connect('https://playcanvas-multiplayer-server.glitch.me');
 ```
@@ -96,7 +95,6 @@ Replace `https://playcanvas-multiplayer-server.glitch.me` with the address of yo
 To confirm that this works, attach this network script to the `Root` entity, and then launch the game. Keep your eye on the server log at Glitch. If everything worked, the server should log `New client connected:` along with the client ID. The project is now setup to send and receive messages to and from the server.
 
 ## サーバーとクライアントの通信
-
 
 The way you can send data between the client and server is with the socket connection we made earlier. To send data from the client (in Network.js on PlayCanvas), we use the `emit` function. Here’s an example:
 
@@ -265,7 +263,6 @@ socket.on('playerJoined', function (data) {
 
 そして、Network.js 内に以下の新しい関数を宣言します。
 
-
 ```javascript
 Network.prototype.initializePlayers = function (data) {
     this.players = data.players;
@@ -321,7 +318,6 @@ Network.prototype.update = function (dt) {
 ```
 
 そして、Network.js 内に以下の新しい関数を宣言します。
-
 
 ```javascript
 Network.prototype.movePlayer = function (data) {

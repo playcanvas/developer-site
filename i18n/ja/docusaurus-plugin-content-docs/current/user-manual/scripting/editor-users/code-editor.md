@@ -131,7 +131,6 @@ Altキーを押しながら左マウスボタンをクリックすると、エ�
 ### 矩形選択
 
 Alt + Shiftキーを押しながら左マウスボタンをドラッグすると、矩形選択が作成されます。これは、テキストの列を選択し、編集するのに便利です。
- 
 
 ![Rectangular Selection](/img/user-manual/scripting/code-editor-rectangular-selection.gif)
 

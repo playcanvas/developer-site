@@ -60,7 +60,6 @@ TexturePackerはダウンロードできる有料ツールで、テクスチャ�
 - アトラスに追加されたスプライトは、リストの末尾に新しいフレームが追加されます。
 - 既存のスプライトは、そのフレームが更新されます。
 
-
 [texture-atlas]: /user-manual/assets/types/texture-atlas/
 [texture-packer-online]: https://www.codeandweb.com/tp-online
 [texture-packer-tool]: https://www.codeandweb.com/texturepacker

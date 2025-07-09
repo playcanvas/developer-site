@@ -15,7 +15,6 @@ Buttonコンポーネントは、2つのトランジションモードで使用�
 | Hit Padding     | 入力イベントをテストする際に含まれるImage Element周囲の追加スペース。 |
 | Transition Mode | トランジションに使用するエフェクトのタイプ。Sprite SwapまたはTint。 |
 
-
 ## スプライトスワップ (Sprite Swap)・プロパティ
 
 ![Sprite Swap Button](/img/user-manual/scenes/components/component-button-sprite-change.png)

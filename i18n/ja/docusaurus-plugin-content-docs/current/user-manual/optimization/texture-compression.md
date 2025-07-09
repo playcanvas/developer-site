@@ -25,7 +25,7 @@ sidebar_position: 1
 
 <a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.jpg" alt="Brick texture compression comparison" /></a>
 
-以下は、MacとChromeで PlayCanvas のキューブを Basis (ETCモード)[2] で比較したものと、[圧縮していないもの][3]です。
+以下は、MacとChromeで PlayCanvas のキューブを Basis [ETCモード](2) で比較したものと、[圧縮していないもの][3]です。
 
 <a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.jpg" alt="PlayCanvas cube compression comparison" /></a>
 
@@ -96,10 +96,7 @@ Legacy Texture Compression オプションを使用するには、テクスチ�
 
 <img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/migrate-legacy-to-basis.gif" alt="Migrate from Legacy to Basis" width="400" />
 
-
 [1]: https://github.com/BinomialLLC/basis_universal
 [2]: https://playcanv.as/p/j8rsh3eO/
 [3]: https://playcanv.as/p/nAW3WkW8/
 [4]: #legacy-texture-compression
-[5]: #using-basis-texture-compression
-[6]: /img/user-manual/assets/textures/texture-compression/compression-results.png

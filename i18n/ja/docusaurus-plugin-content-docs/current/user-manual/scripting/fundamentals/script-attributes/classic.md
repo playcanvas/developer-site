@@ -106,6 +106,7 @@ MyScript.prototype.initialize = function () {
 console.log('This is the texture asset', this.texture);
     console.log('This is the texture resource', this.texture.resource);
 };
+
 ```
 
 ### カラーアトリビュート

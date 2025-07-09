@@ -352,8 +352,6 @@ this.app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
 
 サーバーから `"updatePosition"` メッセージを受信するたびに、メッセージを送信したプレイヤーをその`sessionId`を通じて変更します。
 
-
-
 ```typescript
 // MyRoom.ts
 // ...
@@ -378,7 +376,6 @@ Having the mutation on the server, we can detect it on the client-side via `$(pl
 - `$(player).listen(prop)` is triggered **per property** change
 
 1つずつ変更があった場合でも、すべての新しい座標が同時に必要なため、 `.onChange()` を使用する必要があります。
-
 
 ```typescript
 // ...

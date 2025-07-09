@@ -23,9 +23,7 @@ sidebar_position: 4
 
 Collisionコンポーネントが子エンティティで、プリミティブ形状のタイプが設定されている場合、その形状は物理オブジェクトの形状を形成し、親に対する相対位置に配置されます。
 
-
 親も物理オブジェクトの重心であり、通常はオブジェクトの形状の範囲内（通常は中心）にあることをお勧めします。そうでない場合、力やトルクが加わったときに、オブジェクトが不思議な挙動を示す可能性があります。
-
 
 [primitive-shapes-list]: /user-manual/physics/physics-basics/#rigid-bodies
 [compound-shapes-project]: https://playcanvas.com/project/688146/overview/compound-physics-shapes

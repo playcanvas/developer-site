@@ -185,7 +185,7 @@ CustomShader.prototype.update = function(dt) {
 };
 ```
 
-消失エフェクトを得るために、高さマップの値を閾値として使用して、閾値を時間と共に増やします。上記の更新方法では、`t`の値を0と1の間でバウンスして、それを` uTime` uniformとして設定します。
+消失エフェクトを得るために、高さマップの値を閾値として使用して、閾値を時間と共に増やします。上記の更新方法では、`t`の値を0と1の間でバウンスして、それを`uTime` uniformとして設定します。
 
 シェーダーでは、ピクセルの高さマップの値が時間の値よりも小さい場合、そのピクセルを描画しません。加えて、しきい値に近い値の場合は、エッジを表示するためにピクセルを青色で描画します。
 
@@ -289,4 +289,3 @@ CustomShader.prototype.update = function(dt) {
 [1]: https://api.playcanvas.com/engine/classes/Shader.html
 [2]: /user-manual/scripting/fundamentals/script-attributes/
 [3]: /user-manual/graphics/physical-rendering/physical-materials/
-[project]: https://playcanvas.com/project/406044/overview/tutorial-custom-shaders

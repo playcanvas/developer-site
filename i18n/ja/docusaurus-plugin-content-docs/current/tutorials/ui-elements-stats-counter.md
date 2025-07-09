@@ -52,8 +52,8 @@ Boostカウンターを開きます - 他のエンティティも同じ構成で
 * `btn-minus`: Image Elementで、子にText Elementが含まれています。これが私たちのマイナスボタンで、グループの左下にアンカーされています。
 * `btn-plus`: Image Elementで、子にText Elementが含まれています。これが私たちのプラスボタンで、グループの右下にアンカーされています。
 * `progress-bar`: グループの下部にアンカーされたプログレスバー。背景のImage Elementで、2つの子要素が含まれています:
-    * `image-progress`: 実際にプログレスを表示するリサイズ可能なImage Element。 `progress-bar`要素の左にアンカーされています。
-    * `text`: プログレスバーを表示するText Element。`progress-bar`要素の中央にアンカーされています。
+  * `image-progress`: 実際にプログレスを表示するリサイズ可能なImage Element。 `progress-bar`要素の左にアンカーされています。
+  * `text`: プログレスバーを表示するText Element。`progress-bar`要素の中央にアンカーされています。
 
 ## スクリプト
 

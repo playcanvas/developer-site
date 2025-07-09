@@ -416,7 +416,7 @@ void getAO() {
 
 | Chunk | Changes |
 | ---   | ---     |
-| `combineXXXX` | <ul><li>combinePS を除くすべての combine チャンクが削除されました。</li><li>その代わり、 `combinePS ` は少数のプリプロセッサ定義で制御されます。</li></ul> |
+| `combineXXXX` | <ul><li>combinePS を除くすべての combine チャンクが削除されました。</li><li>その代わり、 `combinePS` は少数のプリプロセッサ定義で制御されます。</li></ul> |
 | `refractionPS` | <ul><li>2つの新しいチャンク、 `refractionCubePS` と `refractionDynamicPS` に分割されました。</li></ul> |
 | `refractionCubePS` | <ul><li>以前の`refractionPS`は、屈折にキューブマップを使用することを前提としたものです。</li></ul> |
 | `refractionDynamicPS` | <ul><li>新しいチャンクで、グラブパスを使用して動的な屈折をサポートし、カメラに`requestSceneColorMap(true);`を設定する必要があります。</li></ul> |
@@ -443,7 +443,7 @@ void getAO() {
 | `emissivePS` | <ul><li>他のフロントエンドコンポーネントとの整合性を図るために、値を返す代わりに `dEmission` をグローバルに設定します。</li></ul> |
 | `fresnelSchlickPS` | <ul><li>フレネル効果が屈折率に反応するようになりました。</li><li>スペキュラリティのグローバル変更は行われず、ライトごとと環境に使用する値が返されるようになりました。</li></ul> |
 | `lightmapSingleVert.js` | <ul><li>削除されました（未使用）。</li></ul> |
-| `lightmapDirPS`, `lightmapSinglePS`| <ul><li>ライトマップ関数の名称を  `addLightMap() ` ではなく  `getLightMap()` に変更しました。</li><li>  `dDiffuseLight` と `dSpecularLight` を直接更新する代わりに、 `dLightmap` と  `dLightmapDir` をグローバルに書き込むように実装を変更しました。</li><li>バックエンドはライトマップの統合を `lightmapAddPS` と `lightmapDirAddPS` で処理するようになりました。</li></ul>  |
+| `lightmapDirPS`, `lightmapSinglePS`| <ul><li>ライトマップ関数の名称を  `addLightMap()` ではなく  `getLightMap()` に変更しました。</li><li>  `dDiffuseLight` と `dSpecularLight` を直接更新する代わりに、 `dLightmap` と  `dLightmapDir` をグローバルに書き込むように実装を変更しました。</li><li>バックエンドはライトマップの統合を `lightmapAddPS` と `lightmapDirAddPS` で処理するようになりました。</li></ul>  |
 | `lightmapAddPS`, `lightmapDirAddPS` | <ul><li>バックエンドから渡されるライトマップの値を追加するための新しいチャンクです。</li><li> `CLEARCOAT` マクロは `LIT_CLEARCOAT` に置き換えられました。</li></ul> |
 | `lightSpecularAnisoGGXPS` | <ul><li> `CLEARCOAT` 定義が `LIT_CLEARCOAT` に置き換えられました。</li></ul> |
 | `lightSpecularBlinnPS`, `lightSpecularPhongPS` | <ul><li>クリアコート用の`#define`を追加し、`antiAliasGlossiness()`の呼び出しを削除しました</li></ul> |

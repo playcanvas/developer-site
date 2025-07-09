@@ -102,10 +102,10 @@ this.app.on('game:start', this.onGameStart, this);
 
 ## さらに学ぶ
 
-*   **[Engine API リファレンス](https://api.playcanvas.com/engine/)** - 完全なドキュメント
-*   **[Engine ガイド](../../engine/index.md)** - PlayCanvas Engineランタイムの詳細ガイド
-*   **[スクリプトライフサイクル](./script-lifecycle.md)** - スクリプトメソッドが呼び出されるタイミング
-*   **[イベント](./events.md)** - スクリプトの通信パターン
+* **[Engine API リファレンス](https://api.playcanvas.com/engine/)** - 完全なドキュメント
+* **[Engine ガイド](../../engine/index.md)** - PlayCanvas Engineランタイムの詳細ガイド
+* **[スクリプトライフサイクル](./script-lifecycle.md)** - スクリプトメソッドが呼び出されるタイミング
+* **[イベント](./events.md)** - スクリプトの通信パターン
 
 :::tip
 
