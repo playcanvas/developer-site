@@ -19,7 +19,7 @@ This will bring up the following popup:
 
 Enter the name for the Organization and an Organization ID which is a string with only alphanumeric characters and dashes allowed. The default e-mail address is your own but you can change it to a different one.
 
-Click CREATE and that will take you to the [profile][4] page of the Organization.
+Click CREATE and that will take you to the profile page of the Organization.
 
 If you have existing projects (such as private projects on a Personal plan), you can transfer them to the Organization account by the following steps:
 
@@ -52,7 +52,6 @@ If you have subscribed for a paid plan, that plan will be cancelled unless you c
 
 After you convert your account, you will be logged out. Then log back in with the new owner's account and you will be able to access the converted account and all its projects.
 
-[4]: /user-manual/profile
 [5]: /user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers
-[6]: /user-manual/organizations/managing-organizations/#projects
+[6]: /user-manual/account-management/organizations/managing/#projects
 [7]: /user-manual/account-management/user-accounts/settings/#convert-account-to-organization

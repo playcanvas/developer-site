@@ -5,17 +5,17 @@ sidebar_position: 1
 
 Organizationを作成する方法はいくつかあります。あなたが所属しているOrganizationのは、以下のようにあなたのプロフィールの名前の隣に表示されます:
 
-![Profile Organizations][1]
+![Profile Organizations](/img/user-manual/organizations/organizations.jpg)
 
 ### ドロップダウンメニューから作成する
 
 1つ目の方法は、右上のドロップダウンメニューから NEW ORGANIZATION をクリックすることです:
 
-![Dropdown][2]
+![Dropdown](/img/user-manual/organizations/dropdown.png)
 
 すると、以下のポップアップが表示されます:
 
-![New Organization][3]
+![New Organization](/img/user-manual/organizations/new-organization.jpg)
 
 Organizationの名前と、半角英数字とダッシュのみが使用可能な文字列であるOrganizationのIDを入力してください。デフォルトのメールアドレスはあなた自身のものですが、別のものに変更することができます。
 
@@ -34,11 +34,11 @@ CREATE をクリックすると、[profile][4] ページに移動します。
 
 もう1つの方法は、ユーザーアカウントをOrganizationのに変換することです。[アカウント][7]ページでCONVERTをクリックすることで、これを行うことができます。
 
-![Convert Organization][8]
+![Convert Organization](/img/user-manual/organizations/convert.png)
 
 すると、以下のポップアップが表示されます:
 
-![Convert Popup][9]
+![Convert Popup](/img/user-manual/organizations/convert-popup.png))
 
 ユーザーアカウントをOrganizationに変換すると、このユーザーアカウントでログインできなくなります。そのため、新しいOrganizationのオーナー (Owner)を指定する必要があります。
 
@@ -52,12 +52,6 @@ CREATE をクリックすると、[profile][4] ページに移動します。
 
 アカウントを変換したら、ログアウトします。次に、新しいオーナー (Owner)のアカウントでログインし、変換されたアカウントとそのすべてのプロジェクトにアクセスできます。
 
-[1]: /img/user-manual/organizations/organizations.jpg
-[2]: /img/user-manual/organizations/dropdown.png
-[3]: /img/user-manual/organizations/new-organization.jpg
-[4]: /user-manual/profile
 [5]: /user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers
-[6]: /user-manual/organizations/managing-organizations/#projects
-[7]: /user-manual/profile/account
-[8]: /img/user-manual/organizations/convert.png
-[9]: /img/user-manual/organizations/convert-popup.png
+[6]: /user-manual/account-management/organizations/managing/#projects
+[7]: /user-manual/account-management/user-accounts/settings/#convert-account-to-organization

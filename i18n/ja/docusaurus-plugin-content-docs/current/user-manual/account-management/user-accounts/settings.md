@@ -130,7 +130,7 @@ APIトークンの使用に関する詳細は、[APIドキュメント](/user-ma
 
 ## 組織
 
-### アカウントを組織に変換
+### アカウントを組織に変換 {#convert-account-to-organization}
 
 個人アカウントを[組織](../organizations/index.md)アカウントに変換します:
 

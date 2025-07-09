@@ -50,7 +50,7 @@ Organizations are ideal for:
 To start using Organizations:
 
 1. [Create an Organization](creating.md) - Set up your team workspace
-2. [Add team members](managing.md#adding-members) - Invite collaborators
+2. [Add team members](managing.md#seats) - Invite collaborators
 3. [Configure permissions](managing.md#permissions) - Set up access controls
 4. [Create team projects](managing.md#projects) - Start collaborative development
 

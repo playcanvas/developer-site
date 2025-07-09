@@ -50,7 +50,7 @@ sidebar_position: 3
 オーガニゼーションの使用を開始するには：
 
 1. [オーガニゼーションを作成する](creating.md) - チームワークスペースを設定する
-2. [チームメンバーを追加する](managing.md#adding-members) - 共同作業者を招待する
+2. [チームメンバーを追加する](managing.md#seats) - 共同作業者を招待する
 3. [権限を設定する](managing.md#permissions) - アクセス制御を設定する
 4. [チームプロジェクトを作成する](managing.md#projects) - 共同開発を開始する
 

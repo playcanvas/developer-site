@@ -130,7 +130,7 @@ Uncheck any categories you don't want to receive emails about.
 
 ## Organizations
 
-### Convert Account to Organization
+### Convert Account to Organization {#convert-account-to-organization}
 
 Transform your personal account into an [organization](../organizations/index.md) account:
 
