@@ -5,7 +5,7 @@ sidebar_position: 1
 
 ユーザーアカウントを作成したら、ユーザーホームページにアクセスできます。このページのURLは以下の形式になります：
 
-```
+```none
 https://playcanvas.com/user/<USERNAME>
 ```
 

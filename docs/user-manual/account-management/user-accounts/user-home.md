@@ -5,7 +5,7 @@ sidebar_position: 1
 
 Once you have created your user account, you can visit your User Home page. The URL for this page will be of the form:
 
-```
+```none
 https://playcanvas.com/user/<USERNAME>
 ```
 
