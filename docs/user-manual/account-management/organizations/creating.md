@@ -55,4 +55,4 @@ After you convert your account, you will be logged out. Then log back in with th
 [4]: /user-manual/profile
 [5]: /user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers
 [6]: /user-manual/organizations/managing-organizations/#projects
-[7]: /user-manual/profile/account
+[7]: /user-manual/account-management/user-accounts/settings/#convert-account-to-organization
