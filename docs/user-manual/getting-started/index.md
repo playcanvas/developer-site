@@ -48,6 +48,6 @@ Consult this simple questionnaire:
 **A coder that needs maximum control?** → Go with the [**PlayCanvas Engine**](../engine)  
 **Working in a team?** → The [**PlayCanvas Editor**](../editor) offers the best collaboration    
 **Coming from Unity or Unreal?** → The [**PlayCanvas Editor**](../editor) provides a similar end-user experience  
-**Integrating into existing an app or site?** → Choose [**React**](../playcanvas-react) or [**Web Components**](../web-components) based on your existing stack
+**Integrating into existing app or site?** → Choose [**React**](../playcanvas-react) or [**Web Components**](../web-components) based on your existing stack
 
 And if you still have questions, come and chat to us on [Discord](https://discord.gg/RSaMRzg).
