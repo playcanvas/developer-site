@@ -1,6 +1,6 @@
 ---
 title: 請求
-sidebar_position: 21
+sidebar_position: 4
 ---
 
 PlayCanvasサブスクリプションに関するよくある質問をまとめた請求FAQへようこそ。
