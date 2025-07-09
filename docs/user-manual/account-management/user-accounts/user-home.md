@@ -20,4 +20,3 @@ Here's what a new User Home page should look like:
 ![User Home Page](/img/user-manual/account-management/user-accounts/user-home.png)
 
 It defaults to showing your list of [Editor Projects](../../editor/projects/index.md).
-

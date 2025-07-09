@@ -30,4 +30,4 @@ Understanding subscriptions and payments:
 
 ---
 
-Whether you're an individual developer or part of a large team, this section will help you make the most of your PlayCanvas account. 
+Whether you're an individual developer or part of a large team, this section will help you make the most of your PlayCanvas account.

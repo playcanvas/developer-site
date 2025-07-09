@@ -70,9 +70,9 @@ Users on the Free plan will see "No credit card stored in your account" until a 
 
 Users on the Personal plan with see something of the form "Card ending in - 0000". Click **Edit** to update billing info:
 
-* Card details
-* Billing address
-* VAT number (if supported in your country)
+- Card details
+- Billing address
+- VAT number (if supported in your country)
 
 ## Invoices
 
@@ -173,6 +173,3 @@ You can't delete a user account if it currently manages any organizations. Pleas
 ---
 
 For billing-specific questions and detailed subscription management, see [Billing](../billing.md).
-
-
-

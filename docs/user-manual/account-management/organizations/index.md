@@ -65,4 +65,4 @@ To start using Organizations:
 | API Access | Limited | Full REST API |
 | Support | Standard | Priority (with plan) |
 
-[1]: https://playcanvas.com/plans 
+[1]: https://playcanvas.com/plans
