@@ -42,12 +42,12 @@ PlayCanvasは、インタラクティブでグラフィカルなウェブアプ�
 
 この簡単な質問票を参考にしてください：
 
-**3D開発は初めてですか？** → [**PlayCanvas Editor**](../editor)から始めましょう
-**React開発者ですか？** → [**PlayCanvas React**](../playcanvas-react)を使用してください
-**Vanilla HTMLとJavaScriptを好みますか？** → [**PlayCanvas Web Components**](../web-components)を試してください
-**最大限のコントロールが必要なコーダーですか？** → [**PlayCanvas Engine**](../engine)を選びましょう
-**チームで作業していますか？** → [**PlayCanvas Editor**](../editor)が最高のコラボレーションを提供します
-**UnityやUnrealからの移行ですか？** → [**PlayCanvas Editor**](../editor)は似たようなエンドユーザーエクスペリエンスを提供します
+**3D開発は初めてですか？** → [**PlayCanvas Editor**](../editor)から始めましょう  
+**React開発者ですか？** → [**PlayCanvas React**](../playcanvas-react)を使用してください  
+**Vanilla HTMLとJavaScriptを好みますか？** → [**PlayCanvas Web Components**](../web-components)を試してください  
+**最大限のコントロールが必要なコーダーですか？** → [**PlayCanvas Engine**](../engine)を選びましょう  
+**チームで作業していますか？** → [**PlayCanvas Editor**](../editor)が最高のコラボレーションを提供します  
+**UnityやUnrealからの移行ですか？** → [**PlayCanvas Editor**](../editor)は似たようなエンドユーザーエクスペリエンスを提供します  
 **既存のアプリやサイトに統合しますか？** → 既存のスタックに基づいて[**React**](../playcanvas-react)または[**Web Components**](../web-components)を選択してください
 
 ご不明な点がありましたら、[Discord](https://discord.gg/RSaMRzg)でお気軽にご相談ください。
