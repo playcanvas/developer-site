@@ -44,6 +44,9 @@ const config = {
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
         { from: ['/user-manual/billing/'], to: '/user-manual/account-management/billing/' },
         { from: ['/user-manual/graphics/shader-chunk-migrations/'], to: '/user-manual/graphics/shaders/migrations/' },
+        { from: ['/user-manual/organizations/'], to: '/user-manual/account-management/organizations/' },
+        { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
+        { from: ['/user-manual/organizations/managing-organizations/'], to: '/user-manual/account-management/organizations/managing/' },
         { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/scripting/editor-users/loading-order/' },
       ],
       createRedirects: (existingPath) => {
