@@ -32,25 +32,25 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 
 サッカーボールは[PlayCanvasアセットライブラリ][2]からインポートした3Dモデルです。footballマテリアルはすでに設定済みですが、いくつか単純な調整が必要になるかもしれません。サッカーボールに使われているそれぞれのテクスチャを確認してみましょう。
 
-#### ディフューズ (Diffuse)
+### ディフューズ (Diffuse)
 
 ![Diffuse](/img/tutorials/beginner/keepyup-part-two/ball-diffuse.jpg)
 
 Diffuseマップは表面の色を決めます。このゲームでは黒と白のサッカーボールのパターンになっています。
 
-#### 環境マップ (Environment)
+### 環境マップ (Environment)
 
 ![Environment](/img/tutorials/beginner/keepyup-part-two/ball-env.jpg)
 
 スペキュラマップの効果を説明するために必要なため、環境マップの説明を簡単にここでしておきます。環境マップの設定をしたい場合は、キューブマップをマテリアルのスロットにドラッグしてください。
 
-#### スペキュラーマップ (Specular)
+### スペキュラーマップ (Specular)
 
 ![Specular](/img/tutorials/beginner/keepyup-part-two/ball-spec.jpg)
 
 specular（鏡面）セクションはマテリアルがどのように照明と相互作用するかを決定します。specularには、「Metalnessワークフロー」と「Specularワークフロー」の2つの「ワークフロー」があります。詳細は[ドキュメント][6]をご確認ください。サッカーボールではMetalnessを使用しているので、「Use Metalness」チェックボックスをオンにしてください。サッカーボールは金属製でないので、metalnessスライダーを0になるようスライドさせます。次に、光沢スライダーを使用してマテリアルの滑らかさを設定します。ボールが滑らか過ぎず、ちょうど良い光沢になるよう約半分の位置に設定します。
 
-#### 法線 (Normal)
+### 法線 (Normal)
 
 ![Normal](/img/tutorials/beginner/keepyup-part-two/ball-normal.jpg)
 
@@ -62,7 +62,7 @@ specular（鏡面）セクションはマテリアルがどのように照明と
 
 Backdropマテリアルはより単純です。テキスチャーマップは一つのみです。
 
-#### エミッシブ (Emissive)
+### エミッシブ (Emissive)
 
 ![Emissive](/img/tutorials/beginner/keepyup-part-two/backdrop-emissive.jpg)
 

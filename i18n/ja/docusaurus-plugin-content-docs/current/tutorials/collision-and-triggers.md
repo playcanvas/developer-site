@@ -95,7 +95,7 @@ this.entity.collision.on('triggerenter', this.onTriggerEnter, this);
 
 この場合、トリガーが発火したときに、貫通するエンティティをスタート地点にリセットし、その速度をリセットします。
 
-## RigidBody
+## 動的オブジェクトの設定
 
 地面を **Static** に設定しました。次に、落下するオブジェクトを作成し、それらが **Dynamic** であることを確認します。
 

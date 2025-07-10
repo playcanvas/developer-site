@@ -319,8 +319,7 @@ struct SheenArgs
 | `lightDiffuseLambert` | <ul><li> `dNormalW` 、 `dViewDirW` 、 `dLightDirW` 、 `dLightDirNormW`  を使用する代わりに、vec3 形式のワールド法線、視点の方向、光の方向、正規化された光の方向を受け入れます。</li></ul> |
 | `lightSheen` | <ul><li> `dNormalW` 、 `dViewDirW` 、 `dLightDirNormW` 、 `dGlossiness` に依存する代わりに、vec3 形式のハーフベクトル、ワールド法線、視点の方向、正規化された光の方向、およびグロス（光沢度）の float 値を受け入れます。</li></ul> |
 | `lightSpecular(AnisoGGX/Blinn/Phong)` | <ul><li> `dReflDirW` 、 `dNormalW` 、 `dViewDirW` 、 `dGlossiness/ccGlossiness` 、 `dTBN`  に依存する代わりに、vec3 形式のリフレクション（反射）のためのハーフベクトル、Phong のみに使用される vec3 形式のリフレクション（反射）方向、vec3 形式のワールド法線、vec3 形式の視点方向、float 形式のグロス値（光沢度）、および TBN のための 3x3 マトリクスを引数として受け入れます。 </li></ul> |
-| `lightmap(DirAdd/Add)` | <ul><li> `dLightMap` 、 `dLightmapDir` 、 `dNormalW` 、 `dViewDirW` 、 `dGlossiness` 、 `dVertexNormalW` 、 `dSpecularity`  に依存する代わりに、vec3 形式のライトマップ値、ライトマップ方向、ワールド法線、視点の方向、float 形式のグロス（光沢度）、vec3 形式のスペキュラリティ（鏡面反射）、読み書き可能な vec3 形式の正規化された光の方向、vec3 形式の幾何学的法線、および IridescenceArgs（虹彩効果引数）を引数として受け入れます。</li></ul>
-  |
+| `lightmap(DirAdd/Add)` | <ul><li> `dLightMap` 、 `dLightmapDir` 、 `dNormalW` 、 `dViewDirW` 、 `dGlossiness` 、 `dVertexNormalW` 、 `dSpecularity`  に依存する代わりに、vec3 形式のライトマップ値、ライトマップ方向、ワールド法線、視点の方向、float 形式のグロス（光沢度）、vec3 形式のスペキュラリティ（鏡面反射）、読み書き可能な vec3 形式の正規化された光の方向、vec3 形式の幾何学的法線、および IridescenceArgs（虹彩効果引数）を引数として受け入れます。</li></ul> |
 | `ltc` | <ul><li>もはや `dViewDirW` 、 `dNormalW` 、 `dGlossiness` 、 `dSpecularity` 、 `ccGlossiness` 、 `ccSpecularity` 、そして `dLightDirW` を使用せず、代わりにそれらの値が引数として渡されることに依存します。</li></ul> |
 | `metalnessModulate` | <ul><li>チャンクによって更新される `LitShaderArguments` 構造体を受け入れます。 `dSpecularity` 、 `dMetalness` 、そして `dAlbedo` への依存を削除します。</li></ul> |
 | `output(Alpha/AlphaPremul)` | <ul><li>`dAlpha` の代わりに、 `litShaderArgs.opacity` を使用します。</li></ul> |

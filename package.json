@@ -34,7 +34,7 @@
     "faq": "node faq.js",
     "faq-to-json": "node faq_to_json.js --dir faq --bucket code.playcanvas.com",
     "generate-tutorial-data": "node utils/generate-tutorial-data.mjs",
-    "lint": "markdownlint-cli2 docs .github/CONTRIBUTING.md README.md"
+    "lint": "markdownlint-cli2 docs i18n .github/CONTRIBUTING.md README.md"
   },
   "dependencies": {
     "@docusaurus/core": "^3.8.1",
