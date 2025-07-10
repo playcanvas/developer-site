@@ -54,10 +54,10 @@ PlayCanvasでは、ウェブの未来はインタラクティブで三次元的�
 
 ### 始め方
 
-1.  **興味のある分野を選ぶ**：私たちのリポジトリを閲覧し、興味のあるものを見つけてください
-2.  **既存のIssueを確認する**：初めての場合は、私たちのリポジトリ全体で["good first issue"](https://github.com/search?q=org%3Aplaycanvas+label%3A%22good+first+issue%22&type=issues)ラベルを探してください。
-3.  **議論を始める**：大きな変更を実装する前に、Issueを開いてアイデアを議論してください
-4.  **ガイドラインを読む**：各リポジトリには、`CONTRIBUTING.md`ファイルに特定の貢献ガイドラインが記載されています。
+1. **興味のある分野を選ぶ**：私たちのリポジトリを閲覧し、興味のあるものを見つけてください
+2. **既存のIssueを確認する**：初めての場合は、私たちのリポジトリ全体で["good first issue"](https://github.com/search?q=org%3Aplaycanvas+label%3A%22good+first+issue%22&type=issues)ラベルを探してください。
+3. **議論を始める**：大きな変更を実装する前に、Issueを開いてアイデアを議論してください
+4. **ガイドラインを読む**：各リポジトリには、`CONTRIBUTING.md`ファイルに特定の貢献ガイドラインが記載されています。
 
 ### 貢献プロセス
 
