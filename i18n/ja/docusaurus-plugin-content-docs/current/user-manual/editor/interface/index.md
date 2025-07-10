@@ -1,6 +1,6 @@
 ---
 title: エディターインターフェース
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 ![エディターインターフェース](/img/user-manual/editor/interface/editor-interface.png)

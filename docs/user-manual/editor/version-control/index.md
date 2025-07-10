@@ -1,6 +1,6 @@
 ---
 title: Version Control
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 Once you've moved beyond the simplest of projects, you will find that version control becomes an important part of your application development process. Version Control is a catch-all term for a system that performs the following functions
