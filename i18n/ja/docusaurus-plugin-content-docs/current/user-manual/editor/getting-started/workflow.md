@@ -3,7 +3,7 @@ title: PlayCanvasのワークフロー
 sidebar_position: 1
 ---
 
-PlayCanvasを使って3DのWebアプリを構築するのは簡単です。
+PlayCanvas Editor を使って 3D ウェブアプリを構築するのは簡単です。
 
 ## アセットの作成とアップロード
 
