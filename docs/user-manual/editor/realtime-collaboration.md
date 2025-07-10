@@ -1,6 +1,6 @@
 ---
 title: Real-time Collaboration
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 Real-time collaboration is at the heart of the PlayCanvas Editor. This brings a number of benefits:

@@ -29,7 +29,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/user-manual/getting-started/your-first-app/">
+            to="/user-manual/editor/getting-started/your-first-app/">
             <Translate id="homepage.getStarted" description="Button text for creating the first app">
               Create your First App - 5min ⏱️
             </Translate>
