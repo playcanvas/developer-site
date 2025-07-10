@@ -9,9 +9,9 @@ PlayCanvasは✨ **ウェブグラフィックス作成プラットフォーム*
 
 PlayCanvasは、インタラクティブでグラフィカルなウェブアプリケーションを構築するために使用できるオープンソース製品のコレクションです。
 
-🦾 [**PlayCanvas Engine**](../engine) - すべてのPlayCanvasアプリケーションを動かすオープンソースのJavaScriptランタイム
-⚛️ [**PlayCanvas React**](../playcanvas-react) - PlayCanvas EngineをラップするオープンソースのReactベースの宣言型インターフェース
-🧩 [**PlayCanvas Web Components**](../web-components) - PlayCanvas EngineをラップするオープンソースのWeb Componentsベースの宣言型インターフェース
+🦾 [**PlayCanvas Engine**](../engine) - すべてのPlayCanvasアプリケーションを動かすオープンソースのJavaScriptランタイム  
+⚛️ [**PlayCanvas React**](../playcanvas-react) - PlayCanvas EngineをラップするオープンソースのReactベースの宣言型インターフェース  
+🧩 [**PlayCanvas Web Components**](../web-components) - PlayCanvas EngineをラップするオープンソースのWeb Componentsベースの宣言型インターフェース  
 🛠️ [**PlayCanvas Editor**](../editor) - PlayCanvasアプリケーションを構築するためのリアルタイム共同ビジュアル編集環境
 
 ## どの製品があなたに適していますか？
