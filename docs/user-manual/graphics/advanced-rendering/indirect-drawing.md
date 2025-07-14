@@ -68,6 +68,15 @@ compute.setParameter('indirectSlot', indirectSlot);
 device.computeDispatch([compute], 'GenerateIndirectDraw');
 ```
 
+## API Reference
+
+For detailed API documentation, refer to these PlayCanvas engine classes and methods:
+
+- [`MeshInstance.setIndirect()`](https://api.playcanvas.com/engine/classes/MeshInstance.html#setindirect) - Configure a mesh instance for indirect rendering
+- [`GraphicsDevice.getIndirectDrawSlot()`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getindirectdrawslot) - Allocate a slot in the indirect draw buffer
+- [`GraphicsDevice.indirectDrawBuffer`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#indirectdrawbuffer) - Access the indirect draw buffer
+- [`GraphicsDevice.maxIndirectDrawCount`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxindirectdrawcount) - Control maximum indirect draw calls per frame
+
 ## Live Example
 
 See the [Indirect Draw example](https://playcanvas.vercel.app/#/compute/indirect-draw) for a complete demonstration of indirect drawing with animated instance counts.
