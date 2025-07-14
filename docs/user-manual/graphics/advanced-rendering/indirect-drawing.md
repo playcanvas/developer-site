@@ -5,7 +5,7 @@ sidebar_position: 6
 
 Indirect drawing is a GPU-driven rendering technique where draw call parameters (such as vertex count, instance count, etc.) are stored in GPU buffer memory rather than being specified directly by the CPU. This allows compute shaders to dynamically generate or modify rendering parameters, enabling more efficient GPU-driven rendering workflows.
 
-This feature is currently **only supported on WebGPU** and is ignored on other platforms.
+This feature is currently **only supported on WebGPU** (you can check WebGPU availability using [`GraphicsDevice.isWebGPU`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#iswebgpu)) and is ignored on other platforms.
 
 ## How Indirect Drawing Works
 
