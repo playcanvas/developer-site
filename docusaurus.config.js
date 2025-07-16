@@ -45,6 +45,7 @@ const config = {
         { from: ['/user-manual/billing/'], to: '/user-manual/account-management/billing/' },
         { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },
         { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },
+        { from: ['/user-manual/graphics/gaussian-splatting/'], to: '/user-manual/gaussian-splatting/' },
         { from: ['/user-manual/graphics/shader-chunk-migrations/'], to: '/user-manual/graphics/shaders/migrations/' },
         { from: ['/user-manual/organizations/'], to: '/user-manual/account-management/organizations/' },
         { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
