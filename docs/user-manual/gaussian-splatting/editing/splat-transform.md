@@ -121,6 +121,7 @@ splat-transform input.ply --filterNaN -c opacity,gt,0.1 --filterBands 2 producti
 | `-b, --filterBands` | Retain specified number of spherical-harmonic bands | `--filterBands 0/1/2/3` |
 
 #### Condition Operators
+
 - `gt` - Greater than
 - `lt` - Less than
 - `eq` - Equal to

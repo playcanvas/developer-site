@@ -22,6 +22,7 @@ PlayCanvas provides both visual and command-line tools for editing Gaussian Spla
 ### [SuperSplat Editor](supersplat)
 
 The **SuperSplat Editor** is a powerful, browser-based visual editor designed specifically for interactive splat editing. It's perfect for:
+
 - Manual cleanup and artistic editing
 - Removing unwanted background elements
 - Fine-tuning splat positioning and colors
@@ -31,6 +32,7 @@ The **SuperSplat Editor** is a powerful, browser-based visual editor designed sp
 ### [splat-transform CLI](splat-transform)
 
 The **splat-transform CLI** is a command-line tool for batch processing and automated transformations. It excels at:
+
 - Scripted, reproducible transformations
 - Batch processing multiple files
 - Automated filtering and optimization

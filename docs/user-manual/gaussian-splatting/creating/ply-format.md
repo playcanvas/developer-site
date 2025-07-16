@@ -55,6 +55,7 @@ Standard PLY files typically store simple mesh geometry with basic properties li
 ### Extended Properties
 
 3DGS PLY files contain specialized properties for each Gaussian splat:
+
 - **Position** (`x`, `y`, `z`): 3D location of the splat center
 - **Scale** (`scale_0`, `scale_1`, `scale_2`): Size of the Gaussian along each axis
 - **Rotation** (`rot_0`, `rot_1`, `rot_2`, `rot_3`): Quaternion representing splat orientation

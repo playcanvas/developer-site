@@ -20,4 +20,3 @@ Here are some examples demonstrating different custom shader techniques:
 ### Lighting and Relighting
 
 [**3DGS with Physics and Relighting**](https://playcanvas.com/project/1358087/overview/3dgs-with-physics-and-relighting) - Uses custom shaders to relight a splat to implement a night mode with multiple moving point light sources. This example demonstrates advanced lighting techniques and how to dynamically modify splat appearance based on scene lighting conditions.
-

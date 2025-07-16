@@ -22,4 +22,4 @@ sidebar_position: 1
 - **GPU acceleration** - Recommended for large splat files
 - **No installation** - Everything runs in the browser
 
-SuperSplat continues to evolve with new features and improvements. Stay updated with the latest releases and join the community to share your creations and learn from others. 
+SuperSplat continues to evolve with new features and improvements. Stay updated with the latest releases and join the community to share your creations and learn from others.

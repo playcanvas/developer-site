@@ -23,5 +23,5 @@ Gaussian Splatting excels at capturing real-world environments through photogram
 PlayCanvas provides a complete ecosystem for working with Gaussian Splats:
 
 1. **[Creating Splats](creating)** - Methods for creating your own splat data
-3. **[Editing Splats](editing)** - Clean up and prepare splats for optimal rendering
-4. **[Rendering Splats](rendering)** - Integrate splats into your PlayCanvas projects
+2. **[Editing Splats](editing)** - Clean up and prepare splats for optimal rendering
+3. **[Rendering Splats](rendering)** - Integrate splats into your PlayCanvas projects
