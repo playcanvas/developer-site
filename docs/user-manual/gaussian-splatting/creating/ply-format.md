@@ -107,7 +107,6 @@ The PLY format serves as the lingua franca of the 3DGS ecosystem:
 - **Editors**: [SuperSplat Editor](../editing/supersplat.md)
 - **Converters**: [SplatTransform](../editing/splat-transform.md)
 - **Viewers**: [SuperSplat Viewer](https://github.com/playcanvas/supersplat-viewer), [Model Viewer](https://github.com/playcanvas/model-viewer)
-- **Game Engines**: [PlayCanvas Editor](../../editor/index.md)
 
 ### Cross-Platform Workflow
 

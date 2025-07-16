@@ -7,7 +7,7 @@ Rendering splats can be expensive on both the CPU and GPU. Here are some strateg
 
 ## Limit Gaussian Count
 
-Be mindful of the number of Gaussians in your scene since every Gaussian is sorted on camera depth every frame. You can check the number contained within a particular GSplat asset by using the [Inspector](../../assets/types/gsplat.md#asset-inspector). Use SuperSplat to trim unwanted Gaussians from your PLY files.
+Be mindful of the number of Gaussians in your scene since every Gaussian is sorted on camera depth every frame. You can check the number contained within a particular GSplat asset by using the Data Panel in the [SuperSplat Editor](https://superspl.at/editor). Use SuperSplat to trim unwanted Gaussians from your PLY files.
 
 ## Configure Scene Settings
 
