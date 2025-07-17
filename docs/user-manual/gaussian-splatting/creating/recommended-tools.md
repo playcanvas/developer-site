@@ -12,11 +12,14 @@ PlayCanvas does not itself provide a tool to convert photogrammetry into a Gauss
 | [**Polycam**](https://poly.cam/) | Easy | iOS, Android, Web | Freemium | ❌ | Complete splat creation | Mobile device |
 | [**Luma AI**](https://lumalabs.ai/app) | Easy | iOS, Android, Web | Freemium | ❌ | Complete splat creation | Mobile device |
 | [**COLMAP**](https://colmap.github.io/) | Advanced | Win, Linux, macOS | Free | ✔️ | SfM preprocessing | |
-| [**RealityScan**](https://www.realityscan.com/) | Advanced | Win | Free | ❌ | SfM preprocessing | CUDA GPU |
-| [**Postshot**](https://www.jawset.com/) | Advanced | Win | Paid | ❌ | Complete splat creation | CUDA GPU |
+| [**RealityScan**](https://www.realityscan.com/) | Advanced | Win | Free* | ❌ | SfM preprocessing | CUDA GPU |
+| [**Postshot**](https://www.jawset.com/) | Advanced | Win | Free** | ❌ | Complete splat creation | CUDA GPU |
 | [**Brush**](https://github.com/ArthurBrussee/brush) | Advanced | Multi-platform | Free | ✔️ | Complete splat creation | |
 | [**nerfstudio**](https://docs.nerf.studio/) | Advanced | Win, Linux, macOS | Free | ✔️ | Research/training | |
 | [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) | Advanced | Win, Linux | Free | ✔️ | Research/reference | CUDA GPU |
+
+*_Free for non-commercial use_  
+**_Free while in beta_
 
 ## Easy/Consumer Tools
 
@@ -48,10 +51,10 @@ These tools offer more control and customization but require technical knowledge
 Open source Structure-from-Motion (SfM) pipeline for camera alignment and sparse point cloud generation. Provides cross-platform compatibility, high-quality reconstruction, command-line and GUI interfaces, and serves as the foundation for splat training in many workflows. Particularly valuable for users on non-Windows systems.
 
 [**RealityScan**](https://www.realityscan.com/) (Windows)  
-Desktop application for camera alignment and sparse point cloud generation, which become the foundation for splat training in tools like PostShot. Requires a CUDA-enabled GPU.
+Desktop application for camera alignment and sparse point cloud generation, which become the foundation for splat training in tools like PostShot. Free for non-commercial use. Requires a CUDA-enabled GPU.
 
 [**Postshot**](https://www.jawset.com/) (Windows)  
-Desktop application for creating Gaussian splats with advanced features. Provides on-device processing, quick results, user-friendly interface. Requires a CUDA-enabled GPU.
+Desktop application for creating Gaussian splats with advanced features. Currently in beta and free to use. Provides on-device processing, quick results, user-friendly interface. Requires a CUDA-enabled GPU.
 
 [**Brush**](https://github.com/ArthurBrussee/brush) (Windows, Linux, macOS, Android, Web)  
 Open source, cross-platform engine with broad device compatibility. Uses WebGPU-based rendering, offers real-time training visualization, has no CUDA dependency, supports browsers, and works on mobile devices.
