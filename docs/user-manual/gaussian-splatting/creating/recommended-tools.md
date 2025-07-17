@@ -5,6 +5,19 @@ sidebar_position: 2
 
 PlayCanvas does not itself provide a tool to convert photogrammetry into a Gaussian splat. But there is a healthy variety of third-party tools for you to choose from, each with their strengths and weaknesses.
 
+## Quick Comparison
+
+| Tool | Difficulty | Platforms | Cost | Open Source | Primary Use | Requirements |
+|------|------------|-----------|------| :-----: |-------------|--------------|
+| [**Polycam**](https://poly.cam/) | Easy | iOS, Android, Web | Freemium | ❌ | Complete splat creation | Mobile device |
+| [**Luma AI**](https://lumalabs.ai/app) | Easy | iOS, Android, Web | Freemium | ❌ | Complete splat creation | Mobile device |
+| [**COLMAP**](https://colmap.github.io/) | Advanced | Win, Linux, macOS | Free | ✔️ | SfM preprocessing | |
+| [**RealityScan**](https://www.realityscan.com/) | Advanced | Win | Free | ❌ | SfM preprocessing | CUDA GPU |
+| [**Postshot**](https://www.jawset.com/) | Advanced | Win | Paid | ❌ | Complete splat creation | CUDA GPU |
+| [**Brush**](https://github.com/ArthurBrussee/brush) | Advanced | Multi-platform | Free | ✔️ | Complete splat creation | |
+| [**nerfstudio**](https://docs.nerf.studio/) | Advanced | Win, Linux, macOS | Free | ✔️ | Research/training | |
+| [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) | Advanced | Win, Linux | Free | ✔️ | Research/reference | CUDA GPU |
+
 ## Easy/Consumer Tools
 
 These tools are designed for users who want to create Gaussian splats quickly without technical expertise:
@@ -29,7 +42,7 @@ Select **Gaussian Splat** on export from Luma and extract the PLY file from the 
 
 ## Advanced/Pro Tools
 
-These tools offer more control and customization but require technical knowledge:
+These tools offer more control and customization but require technical knowledge and are suitable for professional workflows:
 
 [**COLMAP**](https://colmap.github.io/) (Windows, Linux, macOS)  
 Open source Structure-from-Motion (SfM) pipeline for camera alignment and sparse point cloud generation. Provides cross-platform compatibility, high-quality reconstruction, command-line and GUI interfaces, and serves as the foundation for splat training in many workflows. Particularly valuable for users on non-Windows systems.
