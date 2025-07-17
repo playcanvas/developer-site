@@ -9,14 +9,14 @@ PlayCanvas does not itself provide a tool to convert photogrammetry into a Gauss
 
 | Tool | Difficulty | Platforms | Cost | Open Source | Primary Use | Requirements |
 |------|------------|-----------|------| :-----: |-------------|--------------|
-| [**Polycam**](https://poly.cam/) | Easy | iOS, Android, Web | Freemium | ❌ | Complete splat creation | Mobile device |
-| [**Luma AI**](https://lumalabs.ai/app) | Easy | iOS, Android, Web | Freemium | ❌ | Complete splat creation | Mobile device |
-| [**COLMAP**](https://colmap.github.io/) | Advanced | Win, Linux, macOS | Free | ✔️ | SfM preprocessing | |
-| [**RealityScan**](https://www.realityscan.com/) | Advanced | Win | Free* | ❌ | SfM preprocessing | CUDA GPU |
-| [**Postshot**](https://www.jawset.com/) | Advanced | Win | Free** | ❌ | Complete splat creation | CUDA GPU |
-| [**Brush**](https://github.com/ArthurBrussee/brush) | Advanced | Multi-platform | Free | ✔️ | Complete splat creation | |
-| [**nerfstudio**](https://docs.nerf.studio/) | Advanced | Win, Linux, macOS | Free | ✔️ | Research/training | |
-| [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) | Advanced | Win, Linux | Free | ✔️ | Research/reference | CUDA GPU |
+| [**Polycam**](https://poly.cam/) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
+| [**Luma AI**](https://lumalabs.ai/app) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
+| [**COLMAP**](https://colmap.github.io/) | Advanced | Win, Linux, macOS | Free | ✔️ | Camera Poses | |
+| [**RealityScan**](https://www.realityscan.com/) | Advanced | Win | Free* | ❌ | Camera Poses | CUDA GPU |
+| [**Postshot**](https://www.jawset.com/) | Advanced | Win | Free** | ❌ | Camera Poses + Training | CUDA GPU |
+| [**Brush**](https://github.com/ArthurBrussee/brush) | Advanced | Win, Linux, macOS, Web | Free | ✔️ | Camera Poses + Training | |
+| [**nerfstudio**](https://docs.nerf.studio/) | Advanced | Win, Linux, macOS | Free | ✔️ | Research/Training | |
+| [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) | Advanced | Win, Linux | Free | ✔️ | Research/Reference | CUDA GPU |
 
 *_Free for non-commercial use_  
 **_Free while in beta_
