@@ -3,16 +3,15 @@ title: Taking Photos
 sidebar_position: 1
 ---
 
-The quality of your Gaussian splat is fundamentally determined by the quality of your input images. This guide covers essential techniques for capturing images that will produce high-quality, detailed splats.
+The quality of your Gaussian splat is fundamentally determined by the quality of your source photos. This guide covers essential techniques for capturing images that will produce high-quality, detailed splats.
 
 ## Why Photo Quality Matters
 
 Unlike traditional 3D modeling where you can fix issues in post-production, Gaussian splats are trained directly from your source imagery. This means that every problem in your source photos becomes a problem in your final splat.
 
-:::warning Consequences of poor quality images
+:::warning Poor Photo Quality Consequences
 
 Bad capture techniques result in:
-
 - **Floaters** - Stray splats in wrong locations
 - **Blurry or missing details** - Areas with insufficient coverage  
 - **Incorrect lighting** - Inconsistent illumination across the scene
