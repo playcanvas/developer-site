@@ -31,6 +31,9 @@ Select **Gaussian Splat** on export from Luma and extract the PLY file from the 
 
 These tools offer more control and customization but require technical knowledge:
 
+[**COLMAP**](https://colmap.github.io/) (Windows, Linux, macOS)  
+Open source Structure-from-Motion (SfM) pipeline for camera alignment and sparse point cloud generation. Provides cross-platform compatibility, high-quality reconstruction, command-line and GUI interfaces, and serves as the foundation for splat training in many workflows. Particularly valuable for users on non-Windows systems.
+
 [**RealityScan**](https://www.realityscan.com/) (Windows)  
 Desktop application for camera alignment and sparse point cloud generation, which become the foundation for splat training in tools like PostShot. Requires a CUDA-enabled GPU.
 
@@ -44,7 +47,7 @@ Open source, cross-platform engine with broad device compatibility. Uses WebGPU-
 Open source research framework for training various splat models. Features command-line interface, multiple model types, highly customizable settings, research-oriented approach, and active development community.
 
 [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) (Windows, Linux)  
-Original reference implementation from the 3D Gaussian Splatting paper. Provides research-grade quality, CUDA acceleration, full parameter control, though requires complex setup and is best used for experimentation.
+Original reference implementation from the 3D Gaussian Splatting paper. Has a dependency on COLMAP. Provides research-grade quality, CUDA acceleration, full parameter control, though requires complex setup and is best used for experimentation.
 
 ## Outputting a PLY File
 
