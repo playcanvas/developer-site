@@ -12,6 +12,7 @@ Unlike traditional 3D modeling where you can fix issues in post-production, Gaus
 :::warning Poor Photo Quality Consequences
 
 Bad capture techniques result in:
+
 - **Floaters** - Stray splats in wrong locations
 - **Blurry or missing details** - Areas with insufficient coverage  
 - **Incorrect lighting** - Inconsistent illumination across the scene
@@ -90,6 +91,7 @@ The most critical aspect of camera settings is maintaining **identical exposure*
 :::tip Exposure Lock Technique
 
 If you're not comfortable with manual mode:
+
 1. Use your camera's auto-exposure on the first shot
 2. Note the settings it chose
 3. Switch to manual and dial in those exact settings
@@ -112,6 +114,7 @@ The advantages of stills include access to higher resolutions (often 40MP+ vs 4K
 :::tip When to Choose Stills
 
 Use still photography for:
+
 - Small objects requiring maximum detail
 - Professional work where quality is paramount  
 - Studio or controlled lighting situations
@@ -128,6 +131,7 @@ For video capture, always shoot in **4K resolution minimum** - 1080p doesn't pro
 :::warning Video Capture Requirements
 
 Essential video settings:
+
 - **4K resolution minimum** (8MP effective)
 - **60fps+ frame rate** for motion handling
 - **Manual exposure** - no auto-adjustments
@@ -174,12 +178,14 @@ Aim for **70-80% overlap** between adjacent photos in the same ring or row. When
 ### Object Photography
 
 **Turntable Method:**
+
 1. Place object on rotating surface
 2. Take photos every 15-20 degrees (18-24 photos per ring)
 3. Capture 3-4 rings at different heights
 4. Include top-down and bottom-up views if possible
 
 **Orbital Method:**
+
 1. Walk around static object in circles
 2. Maintain consistent distance
 3. Vary height between passes
@@ -188,12 +194,14 @@ Aim for **70-80% overlap** between adjacent photos in the same ring or row. When
 ### Room/Scene Photography
 
 **Grid Pattern:**
+
 1. Plan systematic grid across the space
 2. Take photos from each grid point
 3. Vary heights (standing, crouching, elevated)
 4. Include corner and edge details
 
 **Feature-Based Coverage:**
+
 1. Identify key features and surfaces
 2. Ensure each feature visible from multiple angles
 3. Pay extra attention to transitions and corners
@@ -204,11 +212,13 @@ Aim for **70-80% overlap** between adjacent photos in the same ring or row. When
 ### Consistent Lighting
 
 **Natural Light:**
+
 - **Overcast days:** Soft, even illumination
 - **Avoid direct sunlight:** Creates harsh shadows
 - **Golden hour:** Warm but avoid dramatic shadows
 
 **Artificial Light:**
+
 - **Soft, diffused lighting:** Multiple light sources
 - **Avoid single hard lights:** Creates strong shadows
 - **Color consistency:** Same color temperature throughout
@@ -216,11 +226,13 @@ Aim for **70-80% overlap** between adjacent photos in the same ring or row. When
 ### Challenging Lighting
 
 **Mixed Lighting:**
+
 - Try to maintain consistent color temperature
 - Use manual white balance
 - Consider HDR techniques for extreme contrast
 
 **Low Light:**
+
 - Use tripod for stability
 - Increase ISO carefully
 - Consider additional lighting equipment
@@ -271,4 +283,4 @@ Before processing your photogrammetry, invest time in reviewing your captures. T
 
 Remember: good photogrammetry is the foundation of excellent Gaussian splats. While it may seem time-consuming initially, developing systematic capture habits will dramatically improve your results and reduce the time spent troubleshooting failed reconstructions.
 
-Take time to plan your capture strategy before you start shooting, and execute it methodically. The extra effort invested in proper photogrammetry pays dividends in the quality of your final splats. 
+Take time to plan your capture strategy before you start shooting, and execute it methodically. The extra effort invested in proper photogrammetry pays dividends in the quality of your final splats.
