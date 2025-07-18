@@ -26,4 +26,4 @@ The timeline panel will be displayed:
 - Use the arrow buttons to step one frame forwards and backwards 
 - Use the play button to play the animation
 - Use the dropdown to select a playback speed
-- The the slider to scrub the animation
+- Use the slider to scrub the animation
