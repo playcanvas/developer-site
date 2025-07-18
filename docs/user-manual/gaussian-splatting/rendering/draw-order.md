@@ -15,9 +15,13 @@ Because the sorting occurs asynchronously, you may notice some visual lag if the
 
 ## Multiple GSplatComponents
 
-The PlayCanvas Engine does not currently support global sorting across multiple GSplatComponents (where all Gaussians from all components would be sorted together). Instead, GSplatComponents are rendered back to front based on their bounding boxes, and each component's Gaussians are sorted independently within that component.
+GSplatComponents are rendered back to front based on their bounding boxes, and each component's Gaussians are sorted independently within that component.
 
-Support for global sorting across all GSplatComponents is currently in development.
+:::info Global sorting
+
+The PlayCanvas Engine does not currently support "global sorting" across multiple GSplatComponents (where all Gaussians from all components would be sorted together). Support for this is [currently in development](https://x.com/ValigurskyM/status/1940401991836131702). Subscribe to [this pull request](https://github.com/playcanvas/engine/pull/7825) to stay updated on progress.
+
+:::
 
 ## Depth Buffer Considerations
 
