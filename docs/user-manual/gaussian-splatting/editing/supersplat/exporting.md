@@ -48,7 +48,7 @@ Beyond the `Export Type`, you can also configure:
 
 #### Customizing the HTML Viewer
 
-The HTML Viewer is built on [PlayCanvas Web Components](https://github.com/playcanvas/web-components). You can edit the default HTML of the viewer to customize it to you liking.
+The HTML Viewer is built on [PlayCanvas Web Components](https://github.com/playcanvas/web-components). You can edit the default HTML of the viewer to customize it to your liking.
 
 #### Web Hosting for the HTML Viewer
 
