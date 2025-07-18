@@ -20,13 +20,19 @@ When you select the `Render` option, a dialog will appear with several settings 
 - **Resolution:** Choose from the following resolutions:
   - `960x540`
   - `1280x720`
-  - `1920x1080`
+  - `1920x1080` (default)
   - `2560x1440`
   - `3840x2160`
+- **Frame Rate:** Choose from the following frame rates:
+  - `12 fps`
+  - `24 fps`
+  - `30 fps` (default)
+  - `60 fps`
+  - `120 fps`
 - **Bitrate:** Adjust the quality of your video by choosing a higher or lower bitrate. Options are:
   - `Low`
   - `Medium`
-  - `High`
+  - `High` (default)
   - `Ultra`
 - **Portrait Mode:** If checked, the resolution will be flipped to be vertical. This is useful if you intend your video to be viewed in portrait on mobile.
 - **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the video.
@@ -39,8 +45,11 @@ Once you've configured your settings:
 2. The Timeline pointer will animate through all frames until video encoding is complete.
 3. On completion, your video will auto-download.
 
-> [!IMPORTANT]
+:::important
+
 Your video is rendered entirely locally on your device. No video data or splat information is uploaded to any external server.
+
+:::
 
 ## Tips for Best Results
 
