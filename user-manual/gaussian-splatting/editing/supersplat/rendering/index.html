@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Rendering | PlayCanvas Developer Site</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://developer.playcanvas.com/img/playcanvas-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://developer.playcanvas.com/img/playcanvas-social-card.jpg"><meta data-rh="true" property="og:url" content="https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/rendering/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="ja"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Rendering | PlayCanvas Developer Site"><meta data-rh="true" name="description" content="SuperSplat enables you to render high-quality videos directly from your animated 3D Gaussian Splats. Whether you want to showcase your creations on social media, embed them on your website, or keep them locally, this guide will help you get started."><meta data-rh="true" property="og:description" content="SuperSplat enables you to render high-quality videos directly from your animated 3D Gaussian Splats. Whether you want to showcase your creations on social media, embed them on your website, or keep them locally, this guide will help you get started."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/rendering/"><link data-rh="true" rel="alternate" href="https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/rendering/" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.playcanvas.com/ja/user-manual/gaussian-splatting/editing/supersplat/rendering/" hreflang="ja"><link data-rh="true" rel="alternate" href="https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/rendering/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://69QRBNV3NH-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gaussian Splatting","item":"https://developer.playcanvas.com/user-manual/gaussian-splatting/"},{"@type":"ListItem","position":2,"name":"Editing Splats","item":"https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/"},{"@type":"ListItem","position":3,"name":"SuperSplat","item":"https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/"},{"@type":"ListItem","position":4,"name":"Rendering","item":"https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/rendering"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="PlayCanvas Developer Site" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.21890ba1.css">
-<script src="/assets/js/runtime~main.afad8c31.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ad80a3f2.js" defer="defer"></script>
 <script src="/assets/js/main.dbd66ab0.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -26,16 +26,25 @@
 <ul>
 <li><code>960x540</code></li>
 <li><code>1280x720</code></li>
-<li><code>1920x1080</code></li>
+<li><code>1920x1080</code> (default)</li>
 <li><code>2560x1440</code></li>
 <li><code>3840x2160</code></li>
+</ul>
+</li>
+<li><strong>Frame Rate:</strong> Choose from the following frame rates:<!-- -->
+<ul>
+<li><code>12 fps</code></li>
+<li><code>24 fps</code></li>
+<li><code>30 fps</code> (default)</li>
+<li><code>60 fps</code></li>
+<li><code>120 fps</code></li>
 </ul>
 </li>
 <li><strong>Bitrate:</strong> Adjust the quality of your video by choosing a higher or lower bitrate. Options are:<!-- -->
 <ul>
 <li><code>Low</code></li>
 <li><code>Medium</code></li>
-<li><code>High</code></li>
+<li><code>High</code> (default)</li>
 <li><code>Ultra</code></li>
 </ul>
 </li>
@@ -49,10 +58,7 @@
 <li>The Timeline pointer will animate through all frames until video encoding is complete.</li>
 <li>On completion, your video will auto-download.</li>
 </ol>
-<blockquote>
-<p>[!IMPORTANT]
-Your video is rendered entirely locally on your device. No video data or splat information is uploaded to any external server.</p>
-</blockquote>
+<div class="theme-admonition theme-admonition-important admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>important</div><div class="admonitionContent_BuS1"><p>Your video is rendered entirely locally on your device. No video data or splat information is uploaded to any external server.</p></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="tips-for-best-results">Tips for Best Results<a href="#tips-for-best-results" class="hash-link" aria-label="Direct link to Tips for Best Results" title="Direct link to Tips for Best Results">​</a></h2>
 <ul>
 <li>Before rendering, ensure your Timeline animations are smooth and camera movements are polished.</li>
