@@ -12,7 +12,7 @@ The SuperSplat Editor allows you to publish your splat scenes to the web at [htt
    * _Description_: A textual description of your splat that will be displayed under the splat on its viewer page.
    * _Listed_: If checked, the splat will be returned in searches on the SuperSplat website. If unchecked, the splat will be discoverable by anyone who has the link.
    * _Start Position_: The starting position to use for the viewer's camera. Can be:
-      * _Default_: The viewer does it's best to pick a suitable start point.
+      * _Default_: The viewer does its best to pick a suitable start point.
       * _Current Viewport_: Use the current camera position as set in the SuperSplat Editor's viewport.
       * _1st Camera Frame_: Use the first camera's position as defined by the first frame of the Timeline.
    * _Animation_: The animation to apply to the viewer's camera. Can be:
