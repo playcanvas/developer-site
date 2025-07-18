@@ -9,7 +9,7 @@ The SuperSplat Editor allows you to publish your splat scenes to the web at [htt
 2. Select `Publish`.
 3. Fill out the options in the Publish dialog:
    * _Title_: A short title that will appear below your splat's thumbnail once it is published.
-   * _Description_: A textual description of your splat that will be displayed under the splat on it viewer page.
+   * _Description_: A textual description of your splat that will be displayed under the splat on its viewer page.
    * _Listed_: If checked, the splat will be returned in searches on the SuperSplat website. If unchecked, the splat will be discoverable by anyone who has the link.
    * _Start Position_: The starting position to use for the viewer's camera. Can be:
       * _Default_: The viewer does it's best to pick a suitable start point.
