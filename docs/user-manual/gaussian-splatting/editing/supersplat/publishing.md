@@ -23,4 +23,4 @@ The SuperSplat Editor allows you to publish your splat scenes to the web at [htt
    * _SH Bands_: The number of spherical harmonics bands to be written out to the published compressed PLY file.
 4. Select `Publish`.
 
-Once the publish process is complete, a model dialog will show with the URL of your published splat. Copy it and share it with whoever you like.
+Once the publish process is complete, a modal dialog will show with the URL of your published splat. Copy it and share it with whoever you like.
