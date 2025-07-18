@@ -23,7 +23,7 @@ The timeline panel will be displayed:
 
 <img width="931" alt="Screenshot 2025-01-03 at 13 52 25" src="/img/user-manual/gaussian-splatting/editing/supersplat/timeline.png" />
 
-- Use the arrow buttons to step one frame forwards and backwards 
+- Use the arrow buttons to step one frame forwards and backwards
 - Use the play button to play the animation
 - Use the dropdown to select a playback speed
 - Use the slider to scrub the animation

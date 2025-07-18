@@ -57,6 +57,6 @@ Once exported, you can host the HTML Viewer file somewhere to make it accessible
 1. Create a new repository on [GitHub](https://github.com).
 2. Add the exported HTML file (and the `.compressed.ply` file if you exported the viewer as a ZIP package).
 3. Visit your repository's `Settings` page. Select `Pages` on the left. Ensure `Source` is set to `Deploy from a branch` and set `Branch` to `main` and hit `Save`.
-5. It will take a few moments for your viewer to be published. The URL will be in the form:
+4. It will take a few moments for your viewer to be published. The URL will be in the form:
 
    `https://<github-username>.github.io/<repository-name>/<html-filename>`.
