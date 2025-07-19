@@ -1,6 +1,6 @@
 ---
 title: Publishing
-sidebar_position: 11
+sidebar_position: 10
 ---
 
 The SuperSplat Editor allows you to publish your splat scenes to the web at [https://superspl.at/](https://superspl.at/). Before you begin, make sure you have created a PlayCanvas account and are currently logged in. To publish:

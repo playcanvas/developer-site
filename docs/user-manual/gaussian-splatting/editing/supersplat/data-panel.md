@@ -1,6 +1,6 @@
 ---
 title: Data Panel
-sidebar_position: 8
+sidebar_position: 7
 ---
 
 The Data Panel can be used to analyze the contents of your splat scenes. Initially, it is collapsed at the bottom of the application's window. To open it, click on the panel's header or press the 'D' key.
