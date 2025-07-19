@@ -19,7 +19,7 @@ Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY fi
 
 ### Compressed PLY (`.compressed.ply`)
 
-A lightweight, compressed format that is far smaller than the equivalent uncompressed PLY file. It quantizes splat data and drops spherical harmonics from the output file. See [this article](https://blog.playcanvas.com/compressing-gaussian-splats/) for more details on the format. It can be loaded by all major WebGL engines (although the [PlayCanvas Engine](../../../engine) achieves the best performance since it renders directly from the compressed data).
+A lightweight, compressed format that is far smaller than the equivalent uncompressed PLY file. It quantizes splat data and drops spherical harmonics from the output file. See [this article](https://blog.playcanvas.com/compressing-gaussian-splats/) for more details on the format. It can be loaded by all major WebGL engines (although the [PlayCanvas Engine](/user-manual/engine) achieves the best performance since it renders directly from the compressed data).
 
 ### Splat File (`.splat`)
 
