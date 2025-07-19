@@ -1,6 +1,6 @@
 ---
 title: Timeline
-sidebar_position: 9
+sidebar_position: 8
 ---
 
 The Animation Timeline is for playing any animation set up in your project. Two types of animation can be set up:

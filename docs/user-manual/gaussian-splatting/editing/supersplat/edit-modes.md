@@ -1,6 +1,6 @@
 ---
 title: Edit Modes
-sidebar_position: 6
+sidebar_position: 5
 ---
 
 SuperSplat functions in one of two **_edit modes_**:
