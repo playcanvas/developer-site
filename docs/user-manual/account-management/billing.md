@@ -19,6 +19,22 @@ We don't verify company revenues, so there's an element of trust involved. We re
 
 Yes. Once you subscribe to the Personal or Organization plan, payment will automatically be taken on a monthly basis, on the day of the month when you first subscribed.
 
+### Can I pay in advance for my subscription?
+
+Yes, but only for Organization plan subscriptions with a minimum term of 1 year. If you'd like to pay in advance for an Organization plan, please contact us at [billing@playcanvas.com](mailto:billing@playcanvas.com) with the following information:
+
+* Number of Organization seats required
+* Term of the upgrade
+* Business name
+* Business address
+* Contact name
+* Contact email
+* VAT number (if applicable)
+
+We will generate an online invoice that can be settled by debit or credit card. Once payment is received, we'll provide you with an account upgrade code that you can apply on the [upgrade page](https://playcanvas.com/upgrade).
+
+Personal plan subscriptions are only available as monthly auto-renewing subscriptions.
+
 ### How do I cancel my subscription?
 
 You can cancel your plan subscription at any time.
