@@ -109,5 +109,5 @@ npm run one-page
 [mraid-api]: https://www.iab.com/guidelines/mraid/
 [guid-generator]: https://www.guidgenerator.com/
 [creative-preview]: https://play.google.com/store/apps/details?id=com.google.android.apps.audition&hl=en_GB&gl=US
-[host-locally]: /user-manual/publishing/web/self-hosting/#running-a-downloaded-build
+[host-locally]: /user-manual/editor/publishing/web/self-hosting/#running-a-downloaded-build
 [ngrok]: https://ngrok.com/

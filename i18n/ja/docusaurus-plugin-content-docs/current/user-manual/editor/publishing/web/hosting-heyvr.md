@@ -21,7 +21,7 @@ heyVRの[開発者向けエリア](https://developer.heyvr.io)にアクセスし
 
 ### 2. ゲームをアップロードする
 
-開発者アカウントを作成したら、アプリケーションのWebビルドをダウンロードする必要があります。このプロセスの手順は、[自己ホスティング](/user-manual/publishing/web/self-hosting/#self-hosting-on-your-own-server)のドキュメントページで詳しく説明されています。**独自のサーバーでの自己ホスティング**の手順に従って、**zip**ファイルを入手してください。
+開発者アカウントを作成したら、アプリケーションのWebビルドをダウンロードする必要があります。このプロセスの手順は、[自己ホスティング](/user-manual/editor/publishing/web/self-hosting/#self-hosting-on-your-own-server)のドキュメントページで詳しく説明されています。**独自のサーバーでの自己ホスティング**の手順に従って、**zip**ファイルを入手してください。
 
 zipビルドを入手したら、heyVRで[ゲームを公開する](https://docs.heyvr.io/en/developer-area/publish-a-game)ためのステップバイステップガイドに従うことができます。このガイドには、公開プロセスに関するすべての手順、要件、よくある質問が含まれています。
 

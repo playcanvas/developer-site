@@ -121,4 +121,4 @@ Here's a list of content types used in PlayCanvas applications:
 
 The client-side code is everything you have written as part of your PlayCanvas application. When the browser loads the `index.html` file it will start your PlayCanvas application and run all the client-side code that you have written.
 
-[1]: /user-manual/publishing/web/self-hosting/
+[1]: /user-manual/editor/publishing/web/self-hosting/

@@ -50,5 +50,5 @@ Your application is now ready to load files from a separate server. The final st
 
 Setting up CORS is different depending on which CDN or server you are using. You will need to check the documentation of your server or CDN provider to find out how to set up CORS header. For example, the page for Amazon Web Services CORS settings is [here][5]
 
-[1]: /user-manual/publishing/web/self-hosting
+[1]: /user-manual/editor/publishing/web/self-hosting
 [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html

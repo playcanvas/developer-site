@@ -10,5 +10,5 @@ PlayCanvasのゲームはウェブページで構成されています。つま�
 
 他の方法としては、ローカルアプリのリソースからPlayCanvasアプリを読み込む単一のフルスクリーンWebViewで構成されるAndroidまたはiOSアプリを作成することもできます。
 
-[cordova]: /user-manual/publishing/mobile/cordova
-[gonative]: /user-manual/publishing/mobile/gonative
+[cordova]: /user-manual/editor/publishing/mobile/cordova
+[gonative]: /user-manual/editor/publishing/mobile/gonative

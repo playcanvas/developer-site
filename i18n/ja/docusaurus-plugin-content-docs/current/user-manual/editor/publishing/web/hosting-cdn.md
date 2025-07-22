@@ -50,5 +50,5 @@ sidebar_position: 5
 
 CORSの設定は、使用するCDNまたはサーバによって異なります。CORSヘッダーの設定方法を確認するにはサーバまたはCDNプロバイダのマニュアルを確認する必要があります。例えば、Amazon Web Services CORSの設定のページは[こちら][5]です。
 
-[1]: /user-manual/publishing/web/self-hosting
+[1]: /user-manual/editor/publishing/web/self-hosting
 [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html

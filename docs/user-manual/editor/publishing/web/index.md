@@ -10,7 +10,7 @@ PlayCanvas games are actually web pages and as such, are most at home in the bro
 * [Facebook][3]
 * [heyVR.io][4]
 
-[1]: /user-manual/publishing/web/playcanvas-hosting
-[2]: /user-manual/publishing/web/self-hosting
-[3]: /user-manual/publishing/web/facebook
-[4]: /user-manual/publishing/web/hosting-heyvr
+[1]: /user-manual/editor/publishing/web/playcanvas-hosting
+[2]: /user-manual/editor/publishing/web/self-hosting
+[3]: /user-manual/editor/publishing/web/facebook
+[4]: /user-manual/editor/publishing/web/hosting-heyvr

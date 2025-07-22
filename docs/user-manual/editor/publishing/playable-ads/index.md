@@ -10,5 +10,5 @@ We are currently supporting the following playable ad networks:
 
 Other ad networks may be supported but have not yet been tested by the PlayCanvas team.
 
-[fb-ad]: /user-manual/publishing/playable-ads/fb-playable-ads
-[snapchat-ad]: /user-manual/publishing/playable-ads/snapchat-playable-ads
+[fb-ad]: /user-manual/editor/publishing/playable-ads/fb-playable-ads
+[snapchat-ad]: /user-manual/editor/publishing/playable-ads/snapchat-playable-ads

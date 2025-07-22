@@ -12,7 +12,7 @@ sidebar_position: 19
 * [デスクトップ][3]
 * [プレイアブル広告][4]
 
-[1]: /user-manual/publishing/web
-[2]: /user-manual/publishing/mobile
-[3]: /user-manual/publishing/desktop
-[4]: /user-manual/publishing/playable-ads
+[1]: /user-manual/editor/publishing/web
+[2]: /user-manual/editor/publishing/mobile
+[3]: /user-manual/editor/publishing/desktop
+[4]: /user-manual/editor/publishing/playable-ads

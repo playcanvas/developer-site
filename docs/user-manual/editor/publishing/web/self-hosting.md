@@ -65,7 +65,7 @@ There are many options for running a web server. Here are a few:
 * *Advanced:* Install [Apache][8] or [nginx][9] as a standalone service.
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
-[2]: /user-manual/publishing/web/playcanvas-hosting
+[2]: /user-manual/editor/publishing/web/playcanvas-hosting
 [6]: https://www.python.org/
 [7]: https://www.apachefriends.org/index.html
 [8]: https://httpd.apache.org/

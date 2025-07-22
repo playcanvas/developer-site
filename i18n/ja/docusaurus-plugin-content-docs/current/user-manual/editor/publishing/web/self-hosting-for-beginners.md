@@ -121,4 +121,4 @@ PlayCanvasアプリケーションのセルフホスティングに関する[詳
 
 クライアントサイドのコードは、PlayCanvasアプリケーションの一部として書かれている全てです。ブラウザが`index.html`ファイルを読み込む際、PlayCanvasアプリケーションを起動し、あなたが書いたすべてのクライアントサイドコードを実行します。
 
-[1]: /user-manual/publishing/web/self-hosting/
+[1]: /user-manual/editor/publishing/web/self-hosting/

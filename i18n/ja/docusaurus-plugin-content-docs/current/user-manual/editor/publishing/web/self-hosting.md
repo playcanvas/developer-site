@@ -65,7 +65,7 @@ GitHub Pagesドキュメントは、[`.nojekyll`][13]ファイルの使用に関
 * *上級:* スタンドアロンサービスとして[Apache][8]または[nginx][9]をインストールします。
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
-[2]: /user-manual/publishing/web/playcanvas-hosting
+[2]: /user-manual/editor/publishing/web/playcanvas-hosting
 [6]: https://www.python.org/
 [7]: https://www.apachefriends.org/index.html
 [8]: https://httpd.apache.org/

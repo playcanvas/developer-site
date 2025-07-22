@@ -10,5 +10,5 @@ sidebar_position: 4
 
 その他の広告ネットワークについても、PlayCanvasチームによるテストはまだ行われていません。
 
-[fb-ad]: /user-manual/publishing/playable-ads/fb-playable-ads
-[snapchat-ad]: /user-manual/publishing/playable-ads/snapchat-playable-ads
+[fb-ad]: /user-manual/editor/publishing/playable-ads/fb-playable-ads
+[snapchat-ad]: /user-manual/editor/publishing/playable-ads/snapchat-playable-ads
