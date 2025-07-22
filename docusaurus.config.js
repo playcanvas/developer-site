@@ -93,6 +93,11 @@ const config = {
           redirects.push(redirect);
         }
 
+        if (existingPath.includes('/user-manual/editor/publishing/')) {
+          const redirect = existingPath.replace('/user-manual/editor/publishing/', '/user-manual/publishing/');
+          redirects.push(redirect);
+        }
+
         if (existingPath.includes('/user-manual/editor/templates/')) {
           const redirect = existingPath.replace('/user-manual/editor/templates/', '/user-manual/templates/');
           redirects.push(redirect);
@@ -100,11 +105,6 @@ const config = {
 
         if (existingPath.includes('/user-manual/editor/version-control/')) {
           const redirect = existingPath.replace('/user-manual/editor/version-control/', '/user-manual/version-control/');
-          redirects.push(redirect);
-        }
-
-        if (existingPath.includes('/user-manual/editor/publishing/')) {
-          const redirect = existingPath.replace('/user-manual/editor/publishing/', '/user-manual/publishing/');
           redirects.push(redirect);
         }
 
