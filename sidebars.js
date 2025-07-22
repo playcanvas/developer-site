@@ -88,17 +88,6 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'PlayCanvas React',
-      link: {
-        type: 'doc',
-        id: 'user-manual/playcanvas-react/index',
-      },
-      items: [
-        'user-manual/playcanvas-react/building-a-scene',
-      ],
-    },
-    {
-      type: 'category',
       label: 'Engine Web Components',
       link: {
         type: 'doc',
@@ -140,6 +129,17 @@ const sidebars = {
             'user-manual/web-components/tags/pc-splat',
           ],
         },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'PlayCanvas React',
+      link: {
+        type: 'doc',
+        id: 'user-manual/playcanvas-react/index',
+      },
+      items: [
+        'user-manual/playcanvas-react/building-a-scene',
       ],
     },
     {
