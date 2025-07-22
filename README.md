@@ -44,18 +44,10 @@ npm run faq
 
 ## Localization
 
-The Developer Site is translated via [Transifex](https://www.transifex.com/playcanvas/playcanvas-developer-site). To exchange data with Transifex, you will need the `tx` CLI tool. Instructions on setting up the `tx` tool can be found [here](https://developers.transifex.com/docs/cli#installation). Note that the first time you push with `tx`, you will need to enter the Transifex developer key (contact an Admin of the Transifex project to obtain this).
+The Developer Site is localized to Japanese using AI-powered translation via the [markdown-translator](https://github.com/playcanvas/markdown-translator) tool, which leverages Google Gemini AI to translate markdown files while preserving formatting and structure.
 
-When anything in `docs` is updated, run:
+When documentation in `docs` is updated, translate the affected files to Japanese using the markdown-translator tool. The translated files should be placed in the appropriate `i18n/ja/` directory structure to be picked up by Docusaurus.
 
-```sh
-tx push --silent
-```
+Submit a PR with both the updated English content and the new Japanese translations.
 
-Once translation activity on Transifex is complete, run:
-
-```sh
-tx pull -l ja --silent
-```
-
-Then submit a PR with the updated language content.
+**Note:** We welcome PRs to fix any translation errors or improvements in the localized documentation. AI translation isn't perfect, and community contributions help ensure accuracy!
