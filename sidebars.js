@@ -88,7 +88,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Engine Web Components',
+      label: 'PlayCanvas Web Components',
       link: {
         type: 'doc',
         id: 'user-manual/web-components/index',

@@ -3,7 +3,7 @@ title: タグリファレンス
 sidebar_position: 5
 ---
 
-以下は、PlayCanvas Engine Web Components で利用可能なタグの完全なリストです。
+以下は、PlayCanvas Web Components で利用可能なタグの完全なリストです。
 
 | タグ | 説明 |
 | --- | --- |
