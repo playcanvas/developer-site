@@ -32,7 +32,7 @@ sidebar_position: 6
 | **クリアカラー**                  | [ビューポート](../viewport)内のすべてのエディターカメラのクリアカラーを設定します。 |
 | **フォグの表示**                     | シーン設定で有効になっている場合でも、[ビューポート](../viewport)でのフォグの表示を切り替えます。 |
 | **アイコンサイズ**                   | [ビューポート](../viewport)内のエンティティアイコンのサイズを変更します。 |
-| **エンジンバージョン**               | [ローンチページ](../../launch-page)または[ビルドの公開](../../../publishing/web/playcanvas-hosting#publishing-a-new-build)時に使用するエンジンバージョンです。デフォルトはPlayCanvas Engineの現在の[安定版リリース](https://github.com/playcanvas/engine/releases)です。この設定は現在のセッションでのみ保持されます。 |
+| **エンジンバージョン**               | [ローンチページ](../../launch-page)または[ビルドの公開](../../../editor/publishing/web/playcanvas-hosting#publishing-a-new-build)時に使用するエンジンバージョンです。デフォルトはPlayCanvas Engineの現在の[安定版リリース](https://github.com/playcanvas/engine/releases)です。この設定は現在のセッションでのみ保持されます。 |
 | **ロケール**                       | [ローカライズシステム](../../../user-interface/localization)が[ビューポート](../viewport)での表示に使用するロケールを設定します。 |
 | **チャット通知**           | エディターの組み込みリアルタイムチャットのブラウザ通知を切り替えます。 |
 | **重複エンティティの名前変更**   | 有効にすると、重複するエンティティ名に増分番号が末尾に追加されます。これにより、エンティティの一意な名前付けが保証されます。 |
