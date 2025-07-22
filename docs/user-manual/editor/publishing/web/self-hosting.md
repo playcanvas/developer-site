@@ -30,15 +30,15 @@ In order to host your application independently of PlayCanvas' servers, do the f
 * Go to your Project and open the Editor.
 * Click on the <span class="pc-icon">&#57911;</span> button in the left hand side toolbar or click Publishing in the top left Menu
 
-![Publish Button](/img/user-manual/publishing/toolbar-publish.png)
+![Publish Button](/img/user-manual/editor/publishing/toolbar-publish.png)
 
 * This will open up the Publishing Dialog.
 
-![Publish](/img/user-manual/publishing/dialog-publish.png)
+![Publish](/img/user-manual/editor/publishing/dialog-publish.png)
 
 * Click the DOWNLOAD .ZIP button
 
-![Download](/img/user-manual/publishing/dialog-publish-download.png)
+![Download](/img/user-manual/editor/publishing/dialog-publish-download.png)
 
 * Enter a name for your export. This will be the name of the .zip file that will be created for you.
 * Select the Scenes you want to include in your export from the list. Notice that the Scene with the active banner icon will be the first scene loaded when your app is launched.

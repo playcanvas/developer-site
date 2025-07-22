@@ -17,15 +17,15 @@ To publish you will need to have at least one scene in your project.
 * Go to your Project and open the Editor.
 * Click on the <span class="pc-icon">&#57911;</span> button in the left hand side toolbar or click Publishing in the top left Menu
 
-![Publish Button](/img/user-manual/publishing/toolbar-publish.png)
+![Publish Button](/img/user-manual/editor/publishing/toolbar-publish.png)
 
 * This will open up the Publishing dialog. Here you can publish a build or download a build for self-hosting.
 
-![Publish](/img/user-manual/publishing/dialog-publish.png)
+![Publish](/img/user-manual/editor/publishing/dialog-publish.png)
 
 * Click the PUBLISH button next to "Publish on PlayCanvas".
 
-![Publish New Build](/img/user-manual/publishing/dialog-publish-build.png)
+![Publish New Build](/img/user-manual/editor/publishing/dialog-publish-build.png)
 
 * You will then have to fill out some details about your new build. The available fields are:
 
@@ -39,7 +39,7 @@ To publish you will need to have at least one scene in your project.
   * *Generate Source Map*: Include Source Maps with the build. This can be useful for debugging but is generally disabled when publishing a production version of your app.
   * *Optimize Scene Format*: Compresses the scene JSON up to 50%. Read more [here][6].
 
-![Select scenes](/img/user-manual/publishing/dialog-publish-build-scenes.png)
+![Select scenes](/img/user-manual/editor/publishing/dialog-publish-build-scenes.png)
 
 * Select the Scenes you want to include in your build from the list. Notice that the Scene with the active banner icon will be loaded first when your build is launched if you include it in the build.
 * Click 'PUBLISH NOW'
@@ -52,7 +52,7 @@ Builds are given permanent link in the form `https://playcanv.as/b/BUILD_ID/`. T
 
 Click Builds on the same popup.
 
-![Builds](/img/user-manual/publishing/dialog-builds.png)
+![Builds](/img/user-manual/editor/publishing/dialog-builds.png)
 
 Here you can see a list of existing published builds.
 

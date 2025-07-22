@@ -75,11 +75,11 @@ To test the ad on a device, we can use the Android app [Creative Preview][creati
 
 Our recommended approach is to [host locally][host-locally] and use [ngrok][ngrok] to create a https tunnel to your computer that the app can access.
 
-<img loading="lazy" src="/img/user-manual/publishing/playable-ads/snapchat-playable-ads/ngrok.png" width="600" />
+<img loading="lazy" src="/img/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/ngrok.png" width="600" />
 
 Once this is setup, open Creative Preview app and create a new 'Display' ad with the following settings:
 
-<img loading="lazy" src="/img/user-manual/publishing/playable-ads/snapchat-playable-ads/creative-preview.png" width="300" />
+<img loading="lazy" src="/img/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/creative-preview.png" width="300" />
 
 ### Export for Snapchat
 

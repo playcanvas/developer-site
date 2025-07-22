@@ -13,15 +13,15 @@ sidebar_position: 6
 
 **3.** 提案されたら、アプリケーションタイプとして**Facebook Canvas**を選択
 
-![Facebook Canvas](/img/user-manual/publishing/web/facebook/choose-platform.jpg)
+![Facebook Canvas](/img/user-manual/editor/publishing/web/facebook/choose-platform.jpg)
 
 **4.** Secure Canvas URLにはゲームの`playcanv.as` URLを入力します
 
-![Secure Canvas](/img/user-manual/publishing/web/facebook/secure-canvas-url.jpg)
+![Secure Canvas](/img/user-manual/editor/publishing/web/facebook/secure-canvas-url.jpg)
 
 **5.** アプリケーション設定セクションにウェブサイトURLを追加して、次のようになるようにします： `https://s3-eu-west-1.amazonaws.com/apps.playcanvas.com/[BUILD_HASH]/index.html` 。このURLを見つけるためには、`playcanv.as` のゲームリンク、例えば `https://playcanv.as/p/JtL2iqIH/` を取り、`p/`の前に`e/`を追加します。例えば `https://playcanv.as/e/p/JtL2iqIH/` とします。これはブラウザでリダイレクトします、このURLをウェブサイトURLに使用します。
 
-![Website URL](/img/user-manual/publishing/web/facebook/website-url.jpg)
+![Website URL](/img/user-manual/editor/publishing/web/facebook/website-url.jpg)
 
 :::note
 
@@ -31,11 +31,11 @@ PlayCanvasのゲームのホスティング方法、また、FacebookがAPIへ�
 
 **6.** 最後に、ゲームに必要な画像やアイコンを全て設定します。
 
-![Images](/img/user-manual/publishing/web/facebook/icons.jpg)
+![Images](/img/user-manual/editor/publishing/web/facebook/icons.jpg)
 
 **7.** SettingsページにリストされているApp URLからゲームの検証を行うことができます。
 
-![App URL](/img/user-manual/publishing/web/facebook/app-url.jpg)
+![App URL](/img/user-manual/editor/publishing/web/facebook/app-url.jpg)
 
 [1]: https://facebook.com
 [2]: https://developers.facebook.com/

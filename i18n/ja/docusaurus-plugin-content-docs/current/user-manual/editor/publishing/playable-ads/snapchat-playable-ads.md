@@ -75,11 +75,11 @@ npm run one-page
 
 私たちのお勧めの方法は、[ローカルホスト][host-locally]をホストし、アプリがアクセスできるように[ngrok][ngrok]を使用することです。
 
-<img loading="lazy" src="/img/user-manual/publishing/playable-ads/snapchat-playable-ads/ngrok.png" width="600" />
+<img loading="lazy" src="/img/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/ngrok.png" width="600" />
 
 これが設定されたら、Creative Previewアプリを開き、以下の設定で新しい「Display」広告を作成します。
 
-<img loading="lazy" src="/img/user-manual/publishing/playable-ads/snapchat-playable-ads/creative-preview.png" width="300" />
+<img loading="lazy" src="/img/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/creative-preview.png" width="300" />
 
 ### Snapchatへのエクスポート
 

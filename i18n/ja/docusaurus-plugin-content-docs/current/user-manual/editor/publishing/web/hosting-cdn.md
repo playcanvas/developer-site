@@ -11,7 +11,7 @@ sidebar_position: 5
 
 最も簡単な変更は、別の場所からのすべてのアセットをロードすることです。これは`__settings__.js`の`ASSET_PREFIX`プロパティを設定して行います。
 
-![settings.js](/img/user-manual/publishing/web/cdn-settings-assets-prefix.png)
+![settings.js](/img/user-manual/editor/publishing/web/cdn-settings-assets-prefix.png)
 
 `ASSET_PREFIX`は、プリロード時とランタイム時の両方で、アセットのために作られるすべての要求(シーンを含む)の前に追加されます。たとえば、CDNアセットストアのルートフォルダに設定するべきます。上記の例では、以前は`files/123456/1/texture.jpg` のようなURLのアセットが`http://keepy-up-cdn.example.com/files/123456/1/texture.jpg` からロードされるようになりました。
 
@@ -19,11 +19,11 @@ sidebar_position: 5
 
 `index.html`によって直接参照されるファイルがいくつか残っています。具体的には、スタイルシート、PlayCanvasのjavascriptエンジン、アプリケーション`__settings__.json`、`__loading__.js`、 `__start__.js`アプリケーションスクリプトです。以下のようにindex.htmlを更新します。
 
-![index.html](/img/user-manual/publishing/web/cdn-index.png)
+![index.html](/img/user-manual/editor/publishing/web/cdn-index.png)
 
 `__settings__.js`ファイル内でアプリケーション設定の`config.json`へのパスを変更する必要があります。
 
-![settings.js](/img/user-manual/publishing/web/cdn-settings-config-prefix.png)
+![settings.js](/img/user-manual/editor/publishing/web/cdn-settings-config-prefix.png)
 
 ## CDNにファイルをコピー
 
@@ -40,7 +40,7 @@ sidebar_position: 5
 - `__start__.js`
 - `styles.css`
 
-![CDN files](/img/user-manual/publishing/web/cdn-files.png)
+![CDN files](/img/user-manual/editor/publishing/web/cdn-files.png)
 
 これらのファイルを全てCDNホスティングサービスにコピーするべきです。
 

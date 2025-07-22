@@ -5,7 +5,7 @@ sidebar_position: 1
 
 PlayCanvas supports the [Facebook Playable Ad][1] formats and requirements via an [official external tool on GitHub][2].
 
-![Facebook Playable Ads](/img/user-manual/publishing/playable-ads/fb-playable-ads/fb-playable-ads.gif)
+![Facebook Playable Ads](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ads.gif)
 
 The tool can create both the single 2MB (uncompressed) HTML file and the 5MB (uncompressed) ZIP formats via the configuration options. Full specifications for Facebook Playable Ads can be found on their [help centre][4].
 
@@ -71,13 +71,13 @@ Full details of options and commands can be found in the readme section for '[Co
 
 Follow the steps [here][10] to create a Facebook ad and at the time where the files for the ad are uploaded, there is an opportunity to test within the manager.
 
-![Test Ad](/img/user-manual/publishing/playable-ads/fb-playable-ads/fb-playable-ad-tester.jpg)
+![Test Ad](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ad-tester.jpg)
 
 Please ignore the warning about the source may contain an `XMLHttpRequest` as the code path has been removed by this tool.
 
 Facebook also allows testing on device via the ad manager but requires you to publish the ad first. This is a strange limitation by Facebook but is required at the moment.
 
-![Preview Ad](/img/user-manual/publishing/playable-ads/fb-playable-ads/fb-playable-ad-preview-device.jpg)
+![Preview Ad](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ad-preview-device.jpg)
 
 [1]: https://www.facebook.com/business/ads/playable-ad-format
 [2]: https://github.com/playcanvas/playcanvas-rest-api-tools

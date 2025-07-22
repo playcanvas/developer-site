@@ -30,15 +30,15 @@ PlayCanvasサーバから独立してゲームをホスティングするには�
 * プロジェクトに移行してEditorを開く。
 * 左側のツールバーの<span class="pc-icon">&#57911;</span>ボタンをクリックするか左上メニューからPublishingをクリック。
 
-![Publish Button](/img/user-manual/publishing/toolbar-publish.png)
+![Publish Button](/img/user-manual/editor/publishing/toolbar-publish.png)
 
 * Publishing Dialogが開きます。
 
-![Publish](/img/user-manual/publishing/dialog-publish.png)
+![Publish](/img/user-manual/editor/publishing/dialog-publish.png)
 
 * DOWNLOAD .ZIP ボタンをクリック
 
-![Download](/img/user-manual/publishing/dialog-publish-download.png)
+![Download](/img/user-manual/editor/publishing/dialog-publish-download.png)
 
 * エクスポートするファイルの名前を入力してください。これは、作成される .zip ファイルの名前になります。
 * 以下のリストからエクスポートに含めるシーンを選択してください。アクティブなバナーアイコンが付いているシーンが、アプリが起動されたときに最初にロードされるシーンになります。

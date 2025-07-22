@@ -91,7 +91,7 @@ cordova run ios
 
 実行可能ファイルがビルドプロセスで生成されると、Simulatorが開始され、それが読み込まれます。次のようなものが表示されます。
 
-![Master Archer in Simulator](/img/user-manual/publishing/cordova/simulator-master-archer.png)
+![Master Archer in Simulator](/img/user-manual/editor/publishing/cordova/simulator-master-archer.png)
 
 物理デバイスで実行するには:
 
@@ -100,11 +100,11 @@ cordova run ios
 3. プロジェクトのターゲットに対する署名と機能の設定に移動し、デジタル署名されたアプリを展開する前に有効なチームを選択します。
 4. XcodeのスキームドロップダウンリストでiOSデバイスを選択します。
 
-    ![Xcode Scheme drop-down](/img/user-manual/publishing/cordova/xcode-scheme.png)
+    ![Xcode Scheme drop-down](/img/user-manual/editor/publishing/cordova/xcode-scheme.png)
 
 5. Runボタンを押して、アプリケーションをビルド、展開、実行します。
 
-    ![Xcode Run button](/img/user-manual/publishing/cordova/xcode-run.png)
+    ![Xcode Run button](/img/user-manual/editor/publishing/cordova/xcode-run.png)
 
 アプリに満足したら、[App Store Connect] [14]に出荷することができます。
 
