@@ -226,3 +226,26 @@ html[data-theme='dark'] .navbar--github-link:before {
 .underline {
   text-decoration: underline;
 }
+
+/* Sidebar section headers */
+.sidebar-section-header {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ifm-color-emphasis-600);
+  margin: 1.5rem 0 0.5rem 0;
+  padding: 0.25rem 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding-left: var(--ifm-menu-link-padding-horizontal);
+}
+
+.sidebar-section-header:first-of-type {
+  margin-top: 0.75rem;
+  border-top: none;
+}
+
+[data-theme='dark'] .sidebar-section-header {
+  color: var(--ifm-color-emphasis-500);
+  border-top-color: var(--ifm-color-emphasis-300);
+}
