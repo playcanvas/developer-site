@@ -238,6 +238,58 @@ const sidebars = {
             'user-manual/editor/version-control/item-history',
           ],
         },
+        {
+          type: 'category',
+          label: 'Publishing',
+          link: {
+            type: 'doc',
+            id: 'user-manual/editor/publishing/index',
+          },
+          items: [
+            {
+              type: 'category',
+              label: 'Web',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/publishing/web/index',
+              },
+              items: [
+                'user-manual/editor/publishing/web/playcanvas-hosting',
+                'user-manual/editor/publishing/web/self-hosting',
+                'user-manual/editor/publishing/web/self-hosting-for-beginners',
+                'user-manual/editor/publishing/web/communicating-webpage',
+                'user-manual/editor/publishing/web/hosting-cdn',
+                'user-manual/editor/publishing/web/facebook',
+                'user-manual/editor/publishing/web/hosting-heyvr',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Mobile',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/publishing/mobile/index',
+              },
+              items: [
+                'user-manual/editor/publishing/mobile/cordova',
+                'user-manual/editor/publishing/mobile/gonative',
+              ],
+            },
+            'user-manual/editor/publishing/desktop/index',
+            {
+              type: 'category',
+              label: 'Playable Ads',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/publishing/playable-ads/index',
+              },
+              items: [
+                'user-manual/editor/publishing/playable-ads/fb-playable-ads',
+                'user-manual/editor/publishing/playable-ads/snapchat-playable-ads',
+              ],
+            },
+          ],
+        },
         'user-manual/editor/editor-api',
         'user-manual/editor/engine-compatibility',
         'user-manual/editor/troubleshooting',
@@ -741,58 +793,6 @@ const sidebars = {
         'user-manual/optimization/load-time',
         'user-manual/optimization/optimizing-scene-format',
         'user-manual/optimization/troubleshooting-performance',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Publishing',
-      link: {
-        type: 'doc',
-        id: 'user-manual/publishing/index',
-      },
-      items: [
-        {
-          type: 'category',
-          label: 'Web',
-          link: {
-            type: 'doc',
-            id: 'user-manual/publishing/web/index',
-          },
-          items: [
-            'user-manual/publishing/web/playcanvas-hosting',
-            'user-manual/publishing/web/self-hosting',
-            'user-manual/publishing/web/self-hosting-for-beginners',
-            'user-manual/publishing/web/communicating-webpage',
-            'user-manual/publishing/web/hosting-cdn',
-            'user-manual/publishing/web/facebook',
-            'user-manual/publishing/web/hosting-heyvr',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Mobile',
-          link: {
-            type: 'doc',
-            id: 'user-manual/publishing/mobile/index',
-          },
-          items: [
-            'user-manual/publishing/mobile/cordova',
-            'user-manual/publishing/mobile/gonative',
-          ],
-        },
-        'user-manual/publishing/desktop/index',
-        {
-          type: 'category',
-          label: 'Playable Ads',
-          link: {
-            type: 'doc',
-            id: 'user-manual/publishing/playable-ads/index',
-          },
-          items: [
-            'user-manual/publishing/playable-ads/fb-playable-ads',
-            'user-manual/publishing/playable-ads/snapchat-playable-ads',
-          ],
-        },
       ],
     },
     {
