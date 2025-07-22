@@ -1,9 +1,9 @@
 ---
-title: Engine Web Components
+title: PlayCanvas Web Components
 sidebar_position: 5.5
 ---
 
-The PlayCanvas Engine Web Components are a powerful set of custom HTML elements that make it incredibly easy to embed interactive 3D content directly into your web pages. Built on modern web standards, these components bridge the gap between traditional web development and 3D graphics, allowing you to create immersive experiences with simple HTML markup.
+PlayCanvas Web Components are a powerful set of custom HTML elements that make it incredibly easy to embed interactive 3D content directly into your web pages. Built on modern web standards, these components bridge the gap between traditional web development and 3D graphics, allowing you to create immersive experiences with simple HTML markup.
 
 ## What Are Web Components?
 
