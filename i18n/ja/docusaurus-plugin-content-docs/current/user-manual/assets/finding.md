@@ -1,5 +1,5 @@
 ---
-title: Third-party Asset Sites
+title: サードパーティアセットサイト
 sidebar_position: 6
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Managing Scenes
+title: シーンの管理
 sidebar_position: 3
 ---
 

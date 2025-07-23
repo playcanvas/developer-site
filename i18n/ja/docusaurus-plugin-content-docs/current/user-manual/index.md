@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: ようこそ
 sidebar_position: 0.5
 ---
 
