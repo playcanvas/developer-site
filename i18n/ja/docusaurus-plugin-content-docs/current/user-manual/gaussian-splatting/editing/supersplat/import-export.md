@@ -3,7 +3,7 @@ title: インポートとエクスポート
 sidebar_position: 3
 ---
 
-## 対応ファイル形式
+## 対応ファイル形式 {#supported-file-formats}
 
 SuperSplat は、Gaussian Splat シーンのいくつかのファイル形式に対応しています。
 
