@@ -20,6 +20,7 @@ To publish your splat:
 1. Open the `File` menu.
 2. Select `Publish`.
 3. Fill out the options in the Publish dialog:
+
    | Option | Description |
    |--------|-------------|
    | **Title** | A short title that will appear below your splat's thumbnail once it is published |
@@ -30,6 +31,7 @@ To publish your splat:
    | **Background** | The background color of the viewer |
    | **Field of View** | The vertical field of view of the viewer's camera in degrees |
    | **SH Bands** | The number of spherical harmonics bands to be written out to the published compressed PLY file |
+
 4. Select `Publish`.
 
 :::note
