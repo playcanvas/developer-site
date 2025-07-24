@@ -3,7 +3,7 @@ title: Import and Export
 sidebar_position: 3
 ---
 
-## Supported File Formats
+## Supported File Formats {#supported-file-formats}
 
 SuperSplat works with several file formats for Gaussian Splat scenes:
 
