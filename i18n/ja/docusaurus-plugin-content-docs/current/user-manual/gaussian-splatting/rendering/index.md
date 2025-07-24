@@ -1,6 +1,6 @@
 ---
 title: スプラットのレンダリング
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 PlayCanvas Engineは、Gaussian Splats用の強力で高性能なレンダラーを搭載しています。このセクションでは、このレンダラーの機能に関するいくつかのトピックについて説明します。
