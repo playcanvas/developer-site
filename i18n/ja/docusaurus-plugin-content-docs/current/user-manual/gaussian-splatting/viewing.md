@@ -9,7 +9,7 @@ Gaussian スプラットを作成したら、プロジェクトの編集や統�
 
 [PlayCanvas Model Viewer](https://playcanvas.com/viewer) は、Gaussian スプラットを含む 3D コンテンツをブラウザで直接瞬時にプレビューできるウェブベースのツールです。
 
-<video autoplay controls src='/video/playcanvas-splat-viewer.mp4' style={{width: '100%', height: 'auto'}} />
+<video autoplay muted loop controls src='/video/playcanvas-splat-viewer.mp4' style={{width: '100%', height: 'auto'}} />
 
 ### 対応スプラット形式
 
