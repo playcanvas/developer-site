@@ -52,6 +52,12 @@ All the formats described in the [Supported File Formats](#supported-file-format
 - **Compressed PLY (`.compressed.ply`)** - Smaller file size with some quality trade-offs
 - **Splat File (`.splat`)** - Alternative compressed format
 
+:::note
+
+SOGS export is not yet supported in the SuperSplat Editor (subscribe to [this GitHub issue](https://github.com/playcanvas/supersplat/issues/543) in order to receive updates). In the meantime, to convert your splats to SOGS format, please use the [SplatTransform](../splat-transform.md) CLI tool.
+
+:::
+
 ### HTML Viewer (`.html`/`.zip`)
 
 The HTML Viewer is a special export option that creates a complete web viewer for your splats. It runs in any web browser with easy-to-use camera controls and even supports AR and VR visualization for devices that support WebXR.

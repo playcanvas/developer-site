@@ -52,6 +52,12 @@ Gaussian Splat ファイルを読み込む方法は4つあります。
 - **Compressed PLY (`.compressed.ply`)** - ファイルサイズは小さいが、品質が多少犠牲になる形式
 - **Splat File (`.splat`)** - 代替の圧縮形式
 
+:::note
+
+SuperSplat Editorでは、SOGSエクスポートはまだサポートされていません（更新情報を受け取るには[このGitHub issue](https://github.com/playcanvas/supersplat/issues/543)を購読してください）。当面の間、スプラットをSOGS形式に変換するには、[SplatTransform](../splat-transform.md) CLIツールを使用してください。
+
+:::
+
 ### HTML Viewer (`.html`/`.zip`)
 
 HTML Viewer は、スプラットの完全なウェブビューアを作成する特別なエクスポートオプションです。使いやすいカメラコントロールを備え、どのウェブブラウザでも動作し、WebXR をサポートするデバイスでは AR および VR 可視化にも対応しています。
