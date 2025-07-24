@@ -615,6 +615,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/creating/ply-format',
           ],
         },
+        'user-manual/gaussian-splatting/viewing',
         {
           type: 'category',
           label: 'Editing Splats',
