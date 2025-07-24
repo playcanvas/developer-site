@@ -19,14 +19,16 @@ All tutorials in this section create the same interactive splat application feat
 We offer **four different approaches** to build the same app. Pick the one that matches your background and project needs:
 
 ### 🔧 [Using the Engine API](./engine)
+
 **Best for:** Experienced JavaScript developers who want full control
 
 - **What:** Direct PlayCanvas Engine API usage with ES6 modules
-- **Files:** `index.html` + `main.js` 
+- **Files:** `index.html` + `main.js`
 - **Pros:** Maximum flexibility, full engine access, smallest footprint
 - **Cons:** More code to write, requires engine knowledge
 
 ### 🌐 [Using Web Components](./web-components)
+
 **Best for:** Web developers familiar with HTML and modern standards
 
 - **What:** Declarative HTML using `<pc-app>`, `<pc-entity>`, `<pc-splat>` tags
@@ -35,6 +37,7 @@ We offer **four different approaches** to build the same app. Pick the one that 
 - **Cons:** Limited to web component capabilities
 
 ### ⚛️ [Using PlayCanvas React](./react)
+
 **Best for:** React developers and teams using React ecosystems
 
 - **What:** JSX components that map to PlayCanvas entities and components
@@ -43,6 +46,7 @@ We offer **four different approaches** to build the same app. Pick the one that 
 - **Cons:** Requires React knowledge and build setup
 
 ### 🎨 [Using the Editor](./editor)
+
 **Best for:** Designers, artists, and visual learners
 
 - **What:** Point-and-click interface with Asset Store integration

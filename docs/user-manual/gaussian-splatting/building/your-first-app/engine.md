@@ -85,6 +85,7 @@ app.assets.add(assets.splat);
 ```
 
 We've added two assets:
+
 - A camera controls script that will let us orbit around the scene
 - A compressed PLY file containing a toy cat splat
 
@@ -121,6 +122,7 @@ app.assets.load(assets.script);
 ```
 
 The camera controls script will allow you to:
+
 - **Left mouse drag**: Orbit around the target
 - **Right mouse drag**: Pan the camera
 - **Mouse wheel**: Zoom in and out
@@ -148,6 +150,7 @@ We've positioned the splat slightly below the origin (-0.7 on the Y axis) and ro
 Here are the complete files with all the code from the steps above:
 
 **index.html:**
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -172,6 +175,7 @@ Here are the complete files with all the code from the steps above:
 ```
 
 **main.js:**
+
 ```javascript
 import { Application, Mouse, TouchDevice, Entity, Asset } from 'playcanvas';
 

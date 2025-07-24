@@ -132,6 +132,7 @@ Congratulations! You've successfully created an interactive Gaussian splat appli
 :::tip Next Steps
 
 Now that you have a working splat app, try experimenting with:
+
 - Different PLY files from the [Asset Store](/user-manual/assets/asset-store)
 - Adding lighting effects to enhance the scene
 - Creating multiple splat entities

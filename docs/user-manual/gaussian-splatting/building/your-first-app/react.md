@@ -62,6 +62,7 @@ export default App;
 ```
 
 We've added two assets:
+
 - A camera controls script that will let us orbit around the scene
 - A compressed PLY file containing a toy cat splat
 
@@ -121,6 +122,7 @@ export default App;
 ```
 
 The camera controls script will allow you to:
+
 - **Left mouse drag**: Orbit around the target
 - **Right mouse drag**: Pan the camera
 - **Mouse wheel**: Zoom in and out
