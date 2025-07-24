@@ -9,7 +9,7 @@ Once you've created a Gaussian splat, you'll want to preview and evaluate it bef
 
 The [PlayCanvas Model Viewer](https://playcanvas.com/viewer) is a web-based tool that allows you to instantly preview 3D content, including Gaussian splats, directly in your browser.
 
-<video autoplay muted loop controls src='/video/playcanvas-splat-viewer.mp4' style={{width: '100%', height: 'auto'}} />
+<video autoPlay muted loop controls src='/video/playcanvas-splat-viewer.mp4' style={{width: '100%', height: 'auto'}} />
 
 ### Supported Splat Formats
 
