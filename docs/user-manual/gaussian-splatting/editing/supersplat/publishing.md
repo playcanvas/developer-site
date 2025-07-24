@@ -27,7 +27,7 @@ To publish your splat:
    | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
    | **Listed** | If checked, the splat will be returned in searches on the SuperSplat website. If unchecked, the splat will only be discoverable by anyone who has the link |
    | **Start Position** | The starting position to use for the viewer's camera:<br/>• **Default**: The viewer does its best to pick a suitable start point<br/>• **Current Viewport**: Use the current camera position as set in the SuperSplat Editor's viewport<br/>• **1st Camera Frame**: Use the first camera's position as defined by the first frame of the Timeline |
-   | **Animation** | The animation to apply to the viewer's camera:<br/>• **None**: No animation<br/>• **Track**: Animate the camera using keyframe set on the SuperSplat Editor's Timeline |
+   | **Animation** | The animation to apply to the viewer's camera:<br/>• **None**: No animation<br/>• **Track**: Animate the camera using keyframes set on the SuperSplat Editor's Timeline |
    | **Background** | The background color of the viewer |
    | **Field of View** | The vertical field of view of the viewer's camera in degrees |
    | **SH Bands** | The number of spherical harmonics bands to be written out to the published compressed PLY file |
