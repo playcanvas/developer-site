@@ -55,6 +55,7 @@ window.addEventListener('resize', () => app.resizeCanvas());
 ```
 
 This creates an empty 3D scene using the [`Application`](https://api.playcanvas.com/engine/classes/Application.html) class with a canvas that:
+
 - Fills the entire browser window (`FILLMODE_FILL_WINDOW`)
 - Automatically adjusts resolution based on device pixel ratio (`RESOLUTION_AUTO`)
 - Properly resizes when the window changes size
