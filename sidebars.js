@@ -648,17 +648,41 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Rendering Splats',
+          label: 'Building Splat Applications',
           link: {
             type: 'doc',
-            id: 'user-manual/gaussian-splatting/rendering/index',
+            id: 'user-manual/gaussian-splatting/building/index',
           },
           items: [
-            'user-manual/gaussian-splatting/rendering/draw-order',
-            'user-manual/gaussian-splatting/rendering/picking',
-            'user-manual/gaussian-splatting/rendering/shadows',
-            'user-manual/gaussian-splatting/rendering/custom-shaders',
-            'user-manual/gaussian-splatting/rendering/performance',
+            {
+              type: 'category',
+              label: 'Your First App',
+              link: {
+                type: 'doc',
+                id: 'user-manual/gaussian-splatting/building/your-first-app/index',
+              },
+              items: [
+                'user-manual/gaussian-splatting/building/your-first-app/engine',
+                'user-manual/gaussian-splatting/building/your-first-app/web-components',
+                'user-manual/gaussian-splatting/building/your-first-app/react',
+                'user-manual/gaussian-splatting/building/your-first-app/editor',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Engine Features',
+              link: {
+                type: 'doc',
+                id: 'user-manual/gaussian-splatting/building/engine-features/index',
+              },
+              items: [
+                'user-manual/gaussian-splatting/building/engine-features/draw-order',
+                'user-manual/gaussian-splatting/building/engine-features/picking',
+                'user-manual/gaussian-splatting/building/engine-features/shadows',
+                'user-manual/gaussian-splatting/building/engine-features/custom-shaders',
+                'user-manual/gaussian-splatting/building/engine-features/performance',
+              ],
+            },
           ],
         },
       ],
