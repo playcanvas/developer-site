@@ -29,7 +29,6 @@ First, create an `index.html` file:
     </head>
     <body>
         <script type="module" src="main.js"></script>
-        <canvas id='application'></canvas>
     </body>
 </html>
 ```
@@ -37,20 +36,22 @@ First, create an `index.html` file:
 Next, create a `main.js` file with the basic PlayCanvas application setup:
 
 ```javascript title="main.js"
-import { FILLMODE_FILL_WINDOW, RESOLUTION_AUTO, Application, Asset, AssetListLoader, Entity } from 'playcanvas';
+import { Application, Asset, AssetListLoader, Entity, FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from 'playcanvas';
 
 // Create application
-const canvas = document.getElementById('application');
-const app = new Application(canvas);
+const canvas = document.createElement('canvas');
+document.body.appendChild(canvas);
+
+const app = new Application(canvas, {
+    graphicsDeviceOptions: {
+        antialias: false
+    }
+});
 app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
 app.setCanvasResolution(RESOLUTION_AUTO);
-
-const resize = () => app.resizeCanvas();
-window.addEventListener('resize', resize);
-
-// We'll add our code here step by step
-
 app.start();
+
+window.addEventListener('resize', () => app.resizeCanvas());
 ```
 
 This creates an empty 3D scene using the [`Application`](https://api.playcanvas.com/engine/classes/Application.html) class with a canvas that:
@@ -60,9 +61,9 @@ This creates an empty 3D scene using the [`Application`](https://api.playcanvas.
 
 We can't see anything rendered yet though - we need to load assets and add a camera and content.
 
-:::note
+:::warning Performance Optimization
 
-We're using modern ES modules with an import map to provide clean imports. The import map maps `"playcanvas"` to the CDN URL, allowing us to use simple `import { ... } from 'playcanvas'` statements.
+We've disabled `antialias` in the graphics device options for optimal splat rendering performance. This setting helps reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
 
 :::
 
@@ -141,17 +142,49 @@ We reference the splat asset using `assets[1]` (the second asset in our array). 
 
 Here are the complete files with all the code from the steps above:
 
+**index.html:**
+
+```html title="index.html"
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body { margin: 0; overflow: hidden; }
+        </style>
+        <script type="importmap">
+        {
+            "imports": {
+                "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas/+esm"
+            }
+        }
+        </script>
+    </head>
+    <body>
+        <script type="module" src="main.js"></script>
+    </body>
+</html>
+```
+
+**main.js:**
+
 ```javascript title="main.js"
 import { Application, Asset, AssetListLoader, Entity, FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from 'playcanvas';
 
 // Create application
-const canvas = document.getElementById('application');
-const app = new Application(canvas);
+const canvas = document.createElement('canvas');
+document.body.appendChild(canvas);
+
+const app = new Application(canvas, {
+    graphicsDeviceOptions: {
+        antialias: false
+    }
+});
 app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
 app.setCanvasResolution(RESOLUTION_AUTO);
+app.start();
 
-const resize = () => app.resizeCanvas();
-window.addEventListener('resize', resize);
+window.addEventListener('resize', () => app.resizeCanvas());
 
 // Load assets
 const assets = [
@@ -180,8 +213,6 @@ splat.addComponent('gsplat', { asset: assets[1] });
 splat.setPosition(0, -0.7, 0);
 splat.setEulerAngles(180, 0, 0);
 app.root.addChild(splat);
-
-app.start();
 ```
 
 ## Final Result
@@ -190,7 +221,7 @@ After completing the steps above, you should see an interactive 3D toy cat splat
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
-<CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
+<CodePenEmbed id="LEpRPbj" title="PlayCanvas Engine: Your First Splat" />
 
 :::tip Try it yourself
 
