@@ -11,7 +11,7 @@ Let's set up our project with two files: an HTML file and a JavaScript file.
 
 First, create an `index.html` file:
 
-```html
+```html title="index.html"
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -36,28 +36,29 @@ First, create an `index.html` file:
 
 Next, create a `main.js` file with the basic PlayCanvas application setup:
 
-```javascript
-import { Application, Mouse, TouchDevice, Entity, Asset } from 'playcanvas';
+```javascript title="main.js"
+import { FILLMODE_FILL_WINDOW, RESOLUTION_AUTO, Application, Asset, AssetListLoader, Entity } from 'playcanvas';
 
+// Create application
 const canvas = document.getElementById('application');
-const app = new Application(canvas, {
-    mouse: new Mouse(canvas),
-    touch: new TouchDevice(canvas),
-    antialias: false
-});
+const app = new Application(canvas);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
+
+const resize = () => app.resizeCanvas();
+window.addEventListener('resize', resize);
 
 // We'll add our code here step by step
 
 app.start();
 ```
 
-This creates an empty 3D scene with a canvas that fills the browser window. However, we can't see anything rendered yet. We need a camera and some content.
+This creates an empty 3D scene using the [`Application`](https://api.playcanvas.com/engine/classes/Application.html) class with a canvas that:
+- Fills the entire browser window (`FILLMODE_FILL_WINDOW`)
+- Automatically adjusts resolution based on device pixel ratio (`RESOLUTION_AUTO`)
+- Properly resizes when the window changes size
 
-:::warning Performance Optimization
-
-We've disabled `antialias` for optimal splat rendering performance. This setting helps reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
-
-:::
+We can't see anything rendered yet though - we need to load assets and add a camera and content.
 
 :::note
 
@@ -67,31 +68,33 @@ We're using modern ES modules with an import map to provide clean imports. The i
 
 ## Loading Assets
 
-Before we can display a splat or add camera controls, we need to load the assets our app will use. Add this code to `main.js` where the comment says "We'll add our code here step by step":
+Before we can display a splat or add camera controls, we need to load the assets our app will use. We'll use the [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html) class to define our assets and the [`AssetListLoader`](https://api.playcanvas.com/engine/classes/AssetListLoader.html) to load them efficiently. Add this code to `main.js` where the comment says "We'll add our code here step by step":
 
 ```javascript
 // Load assets
-const assets = {
-    script: new Asset('camera-controls', 'script', {
+const assets = [
+    new Asset('camera-controls', 'script', {
         url: 'https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs'
     }),
-    splat: new Asset('toy', 'gsplat', {
+    new Asset('toy', 'gsplat', {
         url: 'https://developer.playcanvas.com/assets/toy-cat.compressed.ply'
     })
-};
+];
 
-app.assets.add(assets.script);
-app.assets.add(assets.splat);
+const loader = new AssetListLoader(assets, app.assets);
+await new Promise(resolve => loader.load(resolve));
 ```
 
-We've added two assets:
+We're loading two assets:
 
 - A camera controls script that will let us orbit around the scene
 - A compressed PLY file containing a toy cat splat
 
+The [`AssetListLoader`](https://api.playcanvas.com/engine/classes/AssetListLoader.html) loads all assets efficiently and we use `await` to ensure they're fully loaded before proceeding.
+
 ## Adding a Camera
 
-To view our scene, we need to create a camera entity and add it to the scene. Add this code to `main.js` after the asset loading:
+To view our scene, we need to create a camera entity using the [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) class and add a [camera component](https://api.playcanvas.com/engine/classes/CameraComponent.html) to it. Add this code to `main.js` after the asset loading:
 
 ```javascript
 // Create camera entity
@@ -105,23 +108,15 @@ We've positioned the camera 2.5 units down the negative Z axis. By default, a ca
 
 ## Adding Camera Controls
 
-Now let's make the camera interactive by loading and attaching the camera controls script. Add this code to `main.js` after the camera creation:
+Now let's make the camera interactive by attaching the camera controls script using the [script component](https://api.playcanvas.com/engine/classes/ScriptComponent.html). Add this code to `main.js` after the camera creation:
 
 ```javascript
-// Load camera controls script and attach it
-assets.script.ready(() => {
-    camera.addComponent('script');
-    camera.script.create('cameraControls', {
-        attributes: {
-            orbitSensitivity: 0.3,
-            distanceSensitivity: 0.15
-        }
-    });
-});
-app.assets.load(assets.script);
+// Add camera controls
+camera.addComponent('script');
+camera.script.create('cameraControls');
 ```
 
-The camera controls script will allow you to:
+Since we've already loaded the camera controls script using [`AssetListLoader`](https://api.playcanvas.com/engine/classes/AssetListLoader.html), we can directly create the script component. The camera controls will allow you to:
 
 - **Left mouse drag**: Orbit around the target
 - **Right mouse drag**: Pan the camera
@@ -129,104 +124,62 @@ The camera controls script will allow you to:
 
 ## Adding the Splat
 
-Now let's add our toy cat splat to the scene. Add this code to `main.js` after the camera controls:
+Now let's add our toy cat splat to the scene using the [gsplat component](https://api.playcanvas.com/engine/classes/GSplatComponent.html). Add this code to `main.js` after the camera controls:
 
 ```javascript
 // Create splat entity
-assets.splat.ready(() => {
-    const splatEntity = new Entity('toy-cat');
-    splatEntity.addComponent('gsplat', { asset: assets.splat });
-    splatEntity.setPosition(0, -0.7, 0);
-    splatEntity.setEulerAngles(180, 0, 0);
-    app.root.addChild(splatEntity);
-});
-app.assets.load(assets.splat);
+const splat = new Entity('toy-cat');
+splat.addComponent('gsplat', { asset: assets[1] });
+splat.setPosition(0, -0.7, 0);
+splat.setEulerAngles(180, 0, 0);
+app.root.addChild(splat);
 ```
 
-We've positioned the splat slightly below the origin (-0.7 on the Y axis) and rotated it 180 degrees around the X axis to orient it properly. The splat will load asynchronously once the PLY file has downloaded.
+We reference the splat asset using `assets[1]` (the second asset in our array). We've positioned the splat slightly below the origin (-0.7 on the Y axis) and rotated it 180 degrees around the X axis to orient it properly.
 
 ## Complete Code
 
 Here are the complete files with all the code from the steps above:
 
-**index.html:**
+```javascript title="main.js"
+import { Application, Asset, AssetListLoader, Entity, FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from 'playcanvas';
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <style>
-            body { margin: 0; overflow: hidden; }
-        </style>
-        <script type="importmap">
-        {
-            "imports": {
-                "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas/+esm"
-            }
-        }
-        </script>
-    </head>
-    <body>
-        <script type="module" src="main.js"></script>
-        <canvas id='application'></canvas>
-    </body>
-</html>
-```
-
-**main.js:**
-
-```javascript
-import { Application, Mouse, TouchDevice, Entity, Asset } from 'playcanvas';
-
+// Create application
 const canvas = document.getElementById('application');
-const app = new Application(canvas, {
-    mouse: new Mouse(canvas),
-    touch: new TouchDevice(canvas),
-    antialias: false,
-    preserveDrawingBuffer: false
-});
+const app = new Application(canvas);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
+
+const resize = () => app.resizeCanvas();
+window.addEventListener('resize', resize);
 
 // Load assets
-const assets = {
-    script: new Asset('camera-controls', 'script', {
+const assets = [
+    new Asset('camera-controls', 'script', {
         url: 'https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs'
     }),
-    splat: new Asset('toy', 'gsplat', {
+    new Asset('toy', 'gsplat', {
         url: 'https://developer.playcanvas.com/assets/toy-cat.compressed.ply'
     })
-};
+];
 
-app.assets.add(assets.script);
-app.assets.add(assets.splat);
+const loader = new AssetListLoader(assets, app.assets);
+await new Promise(resolve => loader.load(resolve));
 
 // Create camera entity
 const camera = new Entity('camera');
 camera.addComponent('camera');
+camera.addComponent('script');
+camera.script.create('cameraControls');
 camera.setPosition(0, 0, -2.5);
 app.root.addChild(camera);
 
-// Load camera controls script and attach it
-assets.script.ready(() => {
-    camera.addComponent('script');
-    camera.script.create('cameraControls', {
-        attributes: {
-            orbitSensitivity: 0.3,
-            distanceSensitivity: 0.15
-        }
-    });
-});
-app.assets.load(assets.script);
-
 // Create splat entity
-assets.splat.ready(() => {
-    const splatEntity = new Entity('toy-cat');
-    splatEntity.addComponent('gsplat', { asset: assets.splat });
-    splatEntity.setPosition(0, -0.7, 0);
-    splatEntity.setEulerAngles(180, 0, 0);
-    app.root.addChild(splatEntity);
-});
-app.assets.load(assets.splat);
+const splat = new Entity('toy-cat');
+splat.addComponent('gsplat', { asset: assets[1] });
+splat.setPosition(0, -0.7, 0);
+splat.setEulerAngles(180, 0, 0);
+app.root.addChild(splat);
 
 app.start();
 ```

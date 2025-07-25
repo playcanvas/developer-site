@@ -7,7 +7,9 @@ Let's build a simple Gaussian splat application step by step using [PlayCanvas W
 
 ## Starting Point
 
-First, let's add the basic structure of our application to our HTML `body` using the [`<pc-app>`](/user-manual/web-components/tags/pc-app) and [`<pc-scene>`](/user-manual/web-components/tags/pc-scene) elements.
+Begin by creating a new file called `index.html` and copy the [Web Components boilerplate HTML](/user-manual/web-components/getting-started/#boilerplate-html) into it.
+
+Now, let's add the basic structure of our application to our HTML `body` using the [`<pc-app>`](/user-manual/web-components/tags/pc-app) and [`<pc-scene>`](/user-manual/web-components/tags/pc-scene) elements.
 
 ```html
 <pc-app antialias="false" high-resolution="false">
@@ -16,7 +18,7 @@ First, let's add the basic structure of our application to our HTML `body` using
 </pc-app>
 ```
 
-This creates an empty 3D scene. However, we can't see anything rendered yet. We need a camera and a splat.
+This creates an empty 3D scene. However, we can't see anything rendered yet. For that, we will need to add a camera and a splat.
 
 :::warning Performance Optimization
 
@@ -24,13 +26,13 @@ We've disabled `antialias` and `high-resolution` on the `<pc-app>` element for o
 
 :::
 
-## Adding Assets
+## Loading Assets
 
 Before we can display a splat or add camera controls, we need to define the assets our app will use. Let's add a camera controls script and a splat asset using the [`<pc-asset>`](/user-manual/web-components/tags/pc-asset) element.
 
 ```html {2-3}
 <pc-app antialias="false" high-resolution="false">
-    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
+    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
     <pc-scene>
     </pc-scene>
@@ -48,7 +50,7 @@ To view our scene, we need a camera which we can add using the [`<pc-entity>`](/
 
 ```html {5-7}
 <pc-app antialias="false" high-resolution="false">
-    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
+    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
     <pc-scene>
         <pc-entity position="0 0 -2.5">
@@ -66,7 +68,7 @@ Now let's make the camera interactive by adding the camera controls script using
 
 ```html {7-9}
 <pc-app antialias="false" high-resolution="false">
-    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
+    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
     <pc-scene>
         <pc-entity position="0 0 -2.5">
@@ -91,7 +93,7 @@ Now let's add our toy cat splat to the scene using the [`<pc-splat>`](/user-manu
 
 ```html {11-13}
 <pc-app antialias="false" high-resolution="false">
-    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
+    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
     <pc-scene>
         <pc-entity position="0 0 -2.5">
