@@ -9,6 +9,6 @@ PlayCanvas Engineには、ガウシアンスプラット向けの強力で高性
 
 [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html)は、PlayCanvasアプリに3Dガウシアンスプラットをレンダリングする機能を提供します。使用するには：
 
-1.  エンティティを作成します
-2.  GSplatComponentを追加します
-3.  コンポーネントにGSplat Assetを設定します
+1. エンティティを作成します
+2. GSplatComponentを追加します
+3. コンポーネントにGSplat Assetを設定します
