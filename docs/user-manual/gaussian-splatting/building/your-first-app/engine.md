@@ -222,7 +222,7 @@ After completing the steps above, you should see an interactive 3D toy cat splat
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
-<CodePenEmbed id="LEpRPbj" title="PlayCanvas Engine: Your First Splat" />
+<CodePenEmbed id="LEpRPbj" defaultTab="js" title="PlayCanvas Engine: Your First Splat" />
 
 :::tip Try it yourself
 

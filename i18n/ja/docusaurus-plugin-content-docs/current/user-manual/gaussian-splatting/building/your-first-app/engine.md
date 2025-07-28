@@ -222,7 +222,7 @@ app.root.addChild(splat);
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
-<CodePenEmbed id="LEpRPbj" title="PlayCanvas Engine: 最初の Splat" />
+<CodePenEmbed id="LEpRPbj" defaultTab="js" title="PlayCanvas Engine: 最初の Splat" />
 
 :::tip 自分で試してみましょう
 
