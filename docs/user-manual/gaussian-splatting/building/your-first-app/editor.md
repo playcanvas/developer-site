@@ -7,7 +7,7 @@ Let's build a simple Gaussian splat application step by step using the [PlayCanv
 
 ## Video Walk-Through
 
-The complete process to build the app is in this 93 second video:
+The complete process to build the app is in this short video:
 
 <video autoPlay muted loop controls src='/video/my-first-splat-editor.mp4' style={{width: '100%', height: 'auto'}} />
 
