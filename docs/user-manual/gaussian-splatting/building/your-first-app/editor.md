@@ -5,6 +5,14 @@ sidebar_position: 4
 
 Let's build a simple Gaussian splat application step by step using the [PlayCanvas Editor](/user-manual/editor). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.
 
+## Video Walk-Through
+
+The complete process to build the app is in this 93 second video:
+
+<video autoPlay muted loop controls src='/video/my-first-splat-editor.mp4' style={{width: '100%', height: 'auto'}} />
+
+Here are the actions demonstrated in the video as a set of steps you can follow:
+
 ## Creating a New Project
 
 First, let's create a new PlayCanvas project:
@@ -15,52 +23,41 @@ First, let's create a new PlayCanvas project:
 4. Enter a name like "My First Splat App"
 5. Click **"CREATE"** to create the project
 
-<!-- ![Creating a new project](/img/user-manual/gaussian-splatting/building/editor-new-project.png) -->
-
-The Editor will open with an empty scene containing just a camera and directional light.
+You will be taken to the new project's dashboard. Click the EDITOR button and the Editor will open with an empty scene containing just a camera, directional light, cube and plane.
 
 :::warning Performance Optimization
 
-For optimal splat rendering performance, we'll disable anti-aliasing. Go to **Settings** → **Rendering** and uncheck **"Anti-alias"**. This helps reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering.
+For optimal splat rendering performance, disable anti-aliasing and device pixel ratio. Go to **Settings** → **Rendering** and uncheck both **"Anti-Alias"** and **"Device Pixel Ratio"**. This helps reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
 
 :::
 
-<!-- ![Disabling anti-aliasing in settings](/img/user-manual/gaussian-splatting/building/editor-disable-antialiasing.png) -->
-
 ## Uploading the Splat Asset
 
-Now let's add our toy cat splat to the project:
+First, download the toy cat splat to your local file system: [`https://developer.playcanvas.com/assets/toy-cat.compressed.ply`](https://developer.playcanvas.com/assets/toy-cat.compressed.ply)
 
-1. In the **Assets** panel (bottom of the screen), right-click in an empty area
-2. Select **"Upload"** from the context menu
-3. In the upload dialog, enter this URL: `https://developer.playcanvas.com/assets/toy-cat.compressed.ply`
-4. Click **"UPLOAD"** to add the asset to your project
+Now let's add the downloaded splat to the project:
 
-<!-- ![Uploading a PLY asset](/img/user-manual/gaussian-splatting/building/editor-upload-asset.png) -->
+1. In the **ASSETS** panel (bottom of the screen), click the + icon
+2. Select **"Upload"** from the popup menu
+3. In the file open dialog, locate and select the `toy-cat.compressed.ply`
 
 The PLY file will be processed and appear in your Assets panel as a GSplat asset.
-
-<!-- ![GSplat asset in Assets panel](/img/user-manual/gaussian-splatting/building/editor-gsplat-asset.png) -->
 
 ## Creating the Splat Entity
 
 Let's create an entity to display our splat:
 
-1. In the **Hierarchy** panel (left side), right-click on "Root"
-2. Select **"Entity"** from the context menu to create a new entity
-3. With the new entity selected, rename it to "Toy Cat" in the **Inspector** panel (right side)
-
-<!-- ![Creating a new entity](/img/user-manual/gaussian-splatting/building/editor-create-entity.png) -->
+1. In the **HIERARCHY** panel (left side), click the + icon
+2. Select **"Entity"** from the popup menu to create a new entity
+3. With the new entity selected, rename it to "Toy Cat" in the **INSPECTOR** panel (right side)
 
 ## Adding the GSplat Component
 
 Now we'll add the component that displays Gaussian splats:
 
-1. With the "Toy Cat" entity selected, scroll down in the **Inspector** panel
+1. With the "Toy Cat" entity selected, scroll down in the **INSPECTOR** panel
 2. Click **"ADD COMPONENT"**
-3. Select **"GSplat"** from the component list
-
-<!-- ![Adding GSplat component](/img/user-manual/gaussian-splatting/building/editor-add-gsplat-component.png) -->
+3. Select **"Gaussian Splat"** from the component list
 
 The GSplat component will be added to your entity.
 
@@ -68,45 +65,37 @@ The GSplat component will be added to your entity.
 
 Let's connect our uploaded splat asset to the component:
 
-1. In the GSplat component properties, click the **asset picker** (empty field next to "Asset")
+1. In the GSplat component properties, click the **asset picker** (pencil icon) for the Asset attribute
 2. Select the toy cat PLY asset we uploaded earlier
 3. The splat should now appear in the viewport!
 
-<!-- ![Assigning the GSplat asset](/img/user-manual/gaussian-splatting/building/editor-assign-asset.png) -->
-
 ## Positioning the Splat
 
-The splat might not be positioned perfectly. Let's adjust its transform:
+The splat is not be positioned correctly. Let's adjust its transform:
 
-1. With the "Toy Cat" entity still selected, look at the **Transform** section in the Inspector
-2. Set the **Position** to `0, -0.7, 0` (moves it down slightly)
-3. Set the **Rotation** to `180, 0, 0` (flips it to face the correct direction)
-
-<!-- ![Adjusting splat position and rotation](/img/user-manual/gaussian-splatting/building/editor-transform-splat.png) -->
+1. With the "Toy Cat" entity still selected, look at the **ENTITY** header section in the Inspector
+2. Set the **Rotation** to `0, 0, 180` (flips it to be the right way up)
+3. Set the **Position** to `0, -0.7, 0` (centers it on the origin)
 
 ## Adding Camera Controls
 
 To make the scene interactive, let's import a camera controls script from the Asset Store:
 
-1. In the **Assets** panel, click the **"Asset Store"** button (shopping cart icon)
-2. In the Asset Store, search for **"camera controls"**
-3. Find the **"Camera Controls"** script by PlayCanvas and click **"ADD TO PROJECT"**
-4. Click **"IMPORT"** in the confirmation dialog
-
-<!-- ![Importing camera controls from Asset Store](/img/user-manual/gaussian-splatting/building/editor-import-camera-controls.png) -->
+1. In the **ASSETS** panel, click the **"ASSET STORE"** button
+2. In the Asset Store, filter by **SCRIPTS**
+3. Find and select the **Orbit Camera** script by PlayCanvas and click **IMPORT**
+4. Close the Asset Store panel by clicking the `x` icon (top right)
 
 The script will be added to your project's Assets panel.
-
-<!-- ![Camera controls script in Assets panel](/img/user-manual/gaussian-splatting/building/editor-camera-controls-asset.png) -->
 
 Now let's attach the script to our camera:
 
 1. Select the **"Camera"** entity in the Hierarchy
 2. In the Inspector, click **"ADD COMPONENT"** and select **"Script"**
 3. In the Script component, click the **"Add Script"** dropdown
-4. Select **"camera-controls"** from the list (it should appear in the dropdown now)
-
-<!-- ![Attaching camera controls script](/img/user-manual/gaussian-splatting/building/editor-attach-script.png) -->
+4. Select **"orbitCamera"** from the list (it should appear in the dropdown now)
+5. Select **"orbitCameraInputMouse"** from the list
+6. Select **"orbitCameraInputTouch"** from the list
 
 The camera controls script is now attached and ready to use!
 
@@ -114,28 +103,26 @@ The camera controls script is now attached and ready to use!
 
 Now let's test our interactive splat scene:
 
-1. Click the **"LAUNCH"** button (play icon) in the toolbar to run the project
+1. Click the **"LAUNCH"** button in the Viewport's toolbar to run the project
 2. You should see the toy cat splat displayed in your browser
 3. Try interacting with it:
    - **Left mouse drag**: Orbit around the splat
    - **Mouse wheel**: Zoom in and out
-   - **Touch drag**: Orbit on mobile devices
-
-<!-- ![Running the splat app](/img/user-manual/gaussian-splatting/building/editor-launch-app.png) -->
 
 ## Final Result
 
 Congratulations! You've successfully created an interactive Gaussian splat application using the PlayCanvas Editor.
 
-<!-- ![Final splat application](/img/user-manual/gaussian-splatting/building/editor-final-result.png) -->
+<div className="iframe-container">
+    <iframe src="https://playcanv.as/e/p/N0FSHHVn/" title="My First Splat" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+</div>
 
 :::tip Next Steps
 
 Now that you have a working splat app, try experimenting with:
 
-- Different PLY files from the [Asset Store](/user-manual/assets/asset-store)
-- Adding lighting effects to enhance the scene
-- Creating multiple splat entities
+- Swapping the toy cat PLY file for one of your own
+- Adding a user interface
 - Building more complex interactions with scripts
 
 :::
