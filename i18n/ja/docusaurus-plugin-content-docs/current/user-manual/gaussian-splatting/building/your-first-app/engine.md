@@ -100,7 +100,7 @@ await new Promise(resolve => loader.load(resolve));
 
 ```javascript
 // カメラエンティティを作成
-const camera = new Entity('camera');
+const camera = new Entity('Camera');
 camera.addComponent('camera');
 camera.setPosition(0, 0, -2.5);
 app.root.addChild(camera);
@@ -130,7 +130,7 @@ camera.script.create('cameraControls');
 
 ```javascript
 // splatエンティティを作成
-const splat = new Entity('toy-cat');
+const splat = new Entity('Toy Cat');
 splat.addComponent('gsplat', { asset: assets[1] });
 splat.setPosition(0, -0.7, 0);
 splat.setEulerAngles(180, 0, 0);
@@ -201,7 +201,7 @@ const loader = new AssetListLoader(assets, app.assets);
 await new Promise(resolve => loader.load(resolve));
 
 // カメラエンティティを作成
-const camera = new Entity('camera');
+const camera = new Entity('Camera');
 camera.addComponent('camera');
 camera.addComponent('script');
 camera.script.create('cameraControls');
@@ -209,7 +209,7 @@ camera.setPosition(0, 0, -2.5);
 app.root.addChild(camera);
 
 // splatエンティティを作成
-const splat = new Entity('toy-cat');
+const splat = new Entity('Toy Cat');
 splat.addComponent('gsplat', { asset: assets[1] });
 splat.setPosition(0, -0.7, 0);
 splat.setEulerAngles(180, 0, 0);

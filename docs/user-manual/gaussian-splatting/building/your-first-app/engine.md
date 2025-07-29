@@ -100,7 +100,7 @@ To view our scene, we need to create a camera entity using the [`Entity`](https:
 
 ```javascript
 // Create camera entity
-const camera = new Entity('camera');
+const camera = new Entity('Camera');
 camera.addComponent('camera');
 camera.setPosition(0, 0, -2.5);
 app.root.addChild(camera);
@@ -130,7 +130,7 @@ Now let's add our toy cat splat to the scene using the [gsplat component](https:
 
 ```javascript
 // Create splat entity
-const splat = new Entity('toy-cat');
+const splat = new Entity('Toy Cat');
 splat.addComponent('gsplat', { asset: assets[1] });
 splat.setPosition(0, -0.7, 0);
 splat.setEulerAngles(180, 0, 0);
@@ -201,7 +201,7 @@ const loader = new AssetListLoader(assets, app.assets);
 await new Promise(resolve => loader.load(resolve));
 
 // Create camera entity
-const camera = new Entity('camera');
+const camera = new Entity('Camera');
 camera.addComponent('camera');
 camera.addComponent('script');
 camera.script.create('cameraControls');
@@ -209,7 +209,7 @@ camera.setPosition(0, 0, -2.5);
 app.root.addChild(camera);
 
 // Create splat entity
-const splat = new Entity('toy-cat');
+const splat = new Entity('Toy Cat');
 splat.addComponent('gsplat', { asset: assets[1] });
 splat.setPosition(0, -0.7, 0);
 splat.setEulerAngles(180, 0, 0);
