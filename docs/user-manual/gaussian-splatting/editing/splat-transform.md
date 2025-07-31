@@ -174,10 +174,9 @@ CSV export transforms your splats from opaque binary files into readable, analyz
 ### Production Optimization Pipeline
 
 ```bash
-# Clean, filter, and optimize for production
+# Clean, limit spherical harmonic bands, and apply a scale for production
 splat-transform raw_capture.ply \
   --filterNaN \
-  -c opacity,gt,0.2 \
   --filterBands 2 \
   -s 0.8 \
   production/meta.json

@@ -174,10 +174,9 @@ CSVエクスポートは、スプラットを不透明なバイナリファイ�
 ### 生産最適化パイプライン
 
 ```bash
-# クリーンアップ、フィルタリング、および生産用に最適化
+# クリーンアップし、球面調和バンドを制限し、本番環境向けにスケールを適用
 splat-transform raw_capture.ply \
   --filterNaN \
-  -c opacity,gt,0.2 \
   --filterBands 2 \
   -s 0.8 \
   production/meta.json
