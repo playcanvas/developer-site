@@ -64,7 +64,7 @@ varying vUv0: vec2f;
 fn vertexMain(input: VertexInput) -> VertexOutput {
     var output: VertexOutput;
 
-    output.vUv0 = input.aUv0;
+    output.vUv0 = aUv0;
     output.position = uniform.matrix_viewProjection * uniform.matrix_model * vec4<f32>(aPosition, 1.0);
 
     return output;
@@ -129,8 +129,8 @@ var uHeightMapSampler: sampler;
 fn fragmentMain(input: FragmentInput) -> FragmentOutput {
     var output: FragmentOutput;
 
-    let height = textureSample(uHeightMap, uHeightMapSampler, input.vUv0).r;
-    var color = textureSample(uDiffuseMap, uDiffuseMapSampler, input.vUv0);
+    let height = textureSample(uHeightMap, uHeightMapSampler, vUv0).r;
+    var color = textureSample(uDiffuseMap, uDiffuseMapSampler, vUv0);
 
     if (height < uniform.uTime) {
         discard;
