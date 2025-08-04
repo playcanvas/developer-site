@@ -11,7 +11,7 @@ PlayCanvas EngineはGaussian Splats向けにカスタムシェーダーをサポ
 
 ### アニメーション効果
 
-[**シンプルな正弦波アニメーション**](https://playcanvas.vercel.app/#/gaussian-splatting/multi-splat) - 正弦波を使用してGaussianの色と位置をアニメーション化するシンプルなシェーダーを適用します。この例では、リアルタイムでスプラットのプロパティを変更することで、動的でプロシージャルなモーション効果を作成する方法を示しています。
+[**シンプルな正弦波アニメーション**](https://playcanvas.github.io/#/gaussian-splatting/multi-splat) - 正弦波を使用してGaussianの色と位置をアニメーション化するシンプルなシェーダーを適用します。この例では、リアルタイムでスプラットのプロパティを変更することで、動的でプロシージャルなモーション効果を作成する方法を示しています。
 
 ### トランジション効果
 

@@ -11,7 +11,7 @@ Here are some examples demonstrating different custom shader techniques:
 
 ### Animation Effects
 
-[**Simple Sinusoidal Animation**](https://playcanvas.vercel.app/#/gaussian-splatting/multi-splat) - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.
+[**Simple Sinusoidal Animation**](https://playcanvas.github.io/#/gaussian-splatting/multi-splat) - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.
 
 ### Transition Effects
 

@@ -1,6 +1,6 @@
 ---
 title: Multiple Render Targets
-sidebar_position: 5
+sidebar_position: 3
 ---
 
 The multiple render targets feature allows to simultaneously render to multiple textures. This manual page explores implementation, configuration, and an example use case of multiple render targets.
