@@ -90,11 +90,11 @@ Below is a table of some common use cases each light source shape and light type
 
 | Shape/Type    | Punctual      | Rectangle               | Disk                  | Sphere              |
 | ------------- |---------------| ------------------------| ----------------------| --------------------|
-| Directional   | sun           | x                       | sun or moon           | sun or moon         |
-| Omni          | unshaded bulb | x                       | x                     | unshaded round bulb |
+| Directional   | sun           | ❌                      | sun or moon           | sun or moon         |
+| Omni          | unshaded bulb | ❌                      | ❌                    | unshaded round bulb |
 | Spot          | torch         | tv screen               | shaded bulb           | shaded round bulb   |
 
-x = no common use cases - but still can be used for application/game specific lighting effects.
+❌ = no common use cases - but still can be used for application/game specific lighting effects.
 
 ## Performance Considerations {#performance-considerations}
 
