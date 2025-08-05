@@ -3,11 +3,11 @@ title: PlayCanvas React の使用
 sidebar_position: 3
 ---
 
-[PlayCanvas React](/user-manual/playcanvas-react) を使用して、シンプルな Gaussian スプラットアプリケーションを段階的に構築しましょう。インタラクティブな3Dおもちゃの猫のスプラットを回転させることができるシーンを作成します。
+[PlayCanvas React](/user-manual/playcanvas-react) を使用して、シンプルな Gaussian Splat アプリケーションを段階的に構築しましょう。インタラクティブな3Dおもちゃの猫のスプラットを回転させられるシーンを作成します。
 
 ## 開始点
 
-まず、基本的な React コンポーネント構造を設定しましょう。PlayCanvas React の必須コンポーネントから始めます。
+まず、基本的なReactコンポーネント構造を設定しましょう。PlayCanvas React の必須コンポーネントから始めます。
 
 ```jsx
 import './App.css'
@@ -20,30 +20,28 @@ function Scene() {
 
 export default function App() {
     return (
-        <Application fillMode={FILLMODE_FILL_WINDOW} resolutionMode={RESOLUTION_AUTO}>
+        <Application
+            fillMode={FILLMODE_FILL_WINDOW}
+            resolutionMode={RESOLUTION_AUTO}
+            graphicsDeviceOptions={{ antialias: false }}
+        >
             <Scene />
         </Application>
     );
 }
 ```
 
-これは、Webアプリケーションに最適な設定で空の3Dシーンを作成します。ただし、まだ何もレンダリングされたものを見ることはできません。カメラといくつかのコンテンツが必要です。
+これにより、Webアプリケーションに最適な設定の空の3Dシーンが作成されます。ただし、まだ何もレンダリングされたものを見ることはできません。カメラとコンテンツが必要です。
 
-:::warning Performance Optimization
+:::warning パフォーマンス最適化
 
-最適なスプラットレンダリングパフォーマンスのために、`Application` を `FILLMODE_FILL_WINDOW` と `RESOLUTION_AUTO` で構成しました。これらの設定は、Gaussian スプラットレンダリングの主なボトルネックであるフラグメント処理の負荷を軽減するのに役立ちます。[パフォーマンス](../engine-features/performance.md) ガイドで詳細をご覧ください。
-
-:::
-
-:::note
-
-PlayCanvas React は、基盤となる PlayCanvas Engine にマッピングされる JSX コンポーネントを使用します。React プロジェクトに `@playcanvas/react` がインストールされていることを確認してください。
+最適なスプラットレンダリングパフォーマンスのために、`Application` を `graphicsDeviceOptions={{ antialias: false }}` で設定しました。`antialias` を `false` に設定すると、Gaussian Splat レンダリングの主要なボトルネックであるフラグメント処理の負荷が軽減されます。[パフォーマンス](../engine-features/performance.md)ガイドで詳細をご覧ください。
 
 :::
 
 ## カメラの追加
 
-シーンを表示するにはカメラが必要です。`Camera` と `OrbitControls` を持つ `Entity` コンポーネントを使用して追加できます。
+シーンを表示するにはカメラが必要です。`Entity` コンポーネントに `Camera` と `OrbitControls` を使用して追加できます。
 
 ```jsx {3-4,8-13}
 import './App.css'
@@ -63,18 +61,22 @@ function Scene() {
 
 export default function App() {
     return (
-        <Application fillMode={FILLMODE_FILL_WINDOW} resolutionMode={RESOLUTION_AUTO}>
+        <Application
+            fillMode={FILLMODE_FILL_WINDOW}
+            resolutionMode={RESOLUTION_AUTO}
+            graphicsDeviceOptions={{ antialias: false }}
+        >
             <Scene />
         </Application>
     );
 }
 ```
 
-カメラを負のZ軸方向に2.5単位移動させました。デフォルトでは、カメラは負のZ軸方向を向くため、カメラは現在、スプラットを配置する原点方向を向いています。`OrbitControls` を使用すると、次の操作が可能です。
+カメラをZ軸の負の方向に2.5単位配置しました。デフォルトでは、カメラはZ軸の負の方向を向いているため、これでカメラはスプラットを配置する原点方向を向いています。`OrbitControls` を使用すると、以下の操作が可能です。
 
-- **左マウスドラッグ**: ターゲットを中心に周回
-- **右マウスドラッグ**: カメラをパン
-- **マウスホイール**: ズームイン・ズームアウト
+-   **左マウスドラッグ**: ターゲットの周りを軌道移動
+-   **右マウスドラッグ**: カメラをパン
+-   **マウスホイール**: ズームイン・ズームアウト
 
 ## スプラットの追加
 
@@ -108,7 +110,11 @@ function Scene() {
 
 export default function App() {
     return (
-        <Application fillMode={FILLMODE_FILL_WINDOW} resolutionMode={RESOLUTION_AUTO}>
+        <Application
+            fillMode={FILLMODE_FILL_WINDOW}
+            resolutionMode={RESOLUTION_AUTO}
+            graphicsDeviceOptions={{ antialias: false }}
+        >
             <Scene />
         </Application>
     );
@@ -117,14 +123,14 @@ export default function App() {
 
 いくつかの重要な要素を追加しました。
 
-- **`useSplat` フック**: URL からスプラットアセットをロードします
-- **条件付きレンダリング**: `if (!asset) return null;` は、アセットがロードされるまでレンダリングを行わないようにします
-- **GSplat の位置決め**: スプラットは原点よりわずかに下（Y軸で-0.7）に配置され、適切に方向を合わせるためにZ軸を中心に180度回転されています
-- **React Fragment**: ラッパーなしで複数のエンティティを返すために `<>...</>` を使用します
+-   **`useSplat` フック**: URLからスプラットアセットをロードします
+-   **条件付きレンダリング**: `if (!asset) return null;` は、アセットがロードされるまでレンダリングしないことを保証します
+-   **GSplat の位置決め**: スプラットは原点よりわずかに下（Y軸で-0.7）に配置され、適切に方向を向かせるためにZ軸を中心に180度回転させられています
+-   **React Fragment**: ラッパーなしで複数のエンティティを返すために `<>...</>` を使用します
 
 ## 完全なコード
 
-上記の手順のすべてのコードを含む、完全な React コンポーネントです。
+上記の手順からのすべてのコードを含む、完全なReactコンポーネントを以下に示します。
 
 ```jsx
 import './App.css'
@@ -154,7 +160,11 @@ function Scene() {
 
 export default function App() {
     return (
-        <Application fillMode={FILLMODE_FILL_WINDOW} resolutionMode={RESOLUTION_AUTO}>
+        <Application
+            fillMode={FILLMODE_FILL_WINDOW}
+            resolutionMode={RESOLUTION_AUTO}
+            graphicsDeviceOptions={{ antialias: false }}
+        >
             <Scene />
         </Application>
     );
@@ -163,14 +173,14 @@ export default function App() {
 
 ## 最終結果
 
-上記の手順を完了すると、周回、パン、ズームが可能なインタラクティブな3Dおもちゃの猫のスプラットが表示されるはずです！
+上記の手順を完了すると、軌道移動、パン、ズームができるインタラクティブな3Dおもちゃの猫のスプラットが表示されるはずです！
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 <CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
 
-:::tip Try it yourself
+:::tip 自分で試してみよう
 
-上記の完全な JSX コードを React コンポーネントに追加し、アプリケーションを実行して、初めてのスプラットアプリが動作するのを見てみましょう！その後、PlayCanvas React のすべての機能を使用して、好きなように拡張してください！
+上記の完全なJSXコードをReactコンポーネントに追加し、アプリケーションを実行して最初のスプラットアプリが動作するのを見てみましょう！その後、PlayCanvas React の全機能を使って好きなように拡張してください！
 
 :::

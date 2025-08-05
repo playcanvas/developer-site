@@ -20,7 +20,11 @@ function Scene() {
 
 export default function App() {
     return (
-        <Application fillMode={FILLMODE_FILL_WINDOW} resolutionMode={RESOLUTION_AUTO}>
+        <Application
+            fillMode={FILLMODE_FILL_WINDOW}
+            resolutionMode={RESOLUTION_AUTO}
+            graphicsDeviceOptions={{ antialias: false }}
+        >
             <Scene />
         </Application>
     );
@@ -31,13 +35,7 @@ This creates an empty 3D scene with optimal settings for web applications. Howev
 
 :::warning Performance Optimization
 
-We've configured the `Application` with `FILLMODE_FILL_WINDOW` and `RESOLUTION_AUTO` for optimal splat rendering performance. These settings help reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
-
-:::
-
-:::note
-
-PlayCanvas React uses JSX components that map to the underlying PlayCanvas Engine. Make sure you have `@playcanvas/react` installed in your React project.
+We've configured the `Application` with `graphicsDeviceOptions={{ antialias: false }}` for optimal splat rendering performance. Setting `antialias` to `false` reduces the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
 
 :::
 
@@ -63,7 +61,11 @@ function Scene() {
 
 export default function App() {
     return (
-        <Application fillMode={FILLMODE_FILL_WINDOW} resolutionMode={RESOLUTION_AUTO}>
+        <Application
+            fillMode={FILLMODE_FILL_WINDOW}
+            resolutionMode={RESOLUTION_AUTO}
+            graphicsDeviceOptions={{ antialias: false }}
+        >
             <Scene />
         </Application>
     );
@@ -108,7 +110,11 @@ function Scene() {
 
 export default function App() {
     return (
-        <Application fillMode={FILLMODE_FILL_WINDOW} resolutionMode={RESOLUTION_AUTO}>
+        <Application
+            fillMode={FILLMODE_FILL_WINDOW}
+            resolutionMode={RESOLUTION_AUTO}
+            graphicsDeviceOptions={{ antialias: false }}
+        >
             <Scene />
         </Application>
     );
@@ -154,7 +160,11 @@ function Scene() {
 
 export default function App() {
     return (
-        <Application fillMode={FILLMODE_FILL_WINDOW} resolutionMode={RESOLUTION_AUTO}>
+        <Application
+            fillMode={FILLMODE_FILL_WINDOW}
+            resolutionMode={RESOLUTION_AUTO}
+            graphicsDeviceOptions={{ antialias: false }}
+        >
             <Scene />
         </Application>
     );
