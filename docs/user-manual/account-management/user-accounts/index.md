@@ -7,7 +7,7 @@ Your user account is your personal space within PlayCanvas. This section covers 
 
 ## Why Create a PlayCanvas User Account?
 
-Creating a free PlayCanvas account opens up a world of possibilities for building 3D web applications! One you are signed up, you can:
+Creating a free PlayCanvas account opens up a world of possibilities for building 3D web applications! Once you are signed up, you can:
 
 - 🛠️ **Access the [PlayCanvas Editor](../../editor/)** - Build 3D apps using a powerful, visual interface.
 
