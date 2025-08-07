@@ -15,11 +15,11 @@ The `<pc-entity>` tag is used to define an entity.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the entity |
-| `name` | String | `"Untitled"` | Name identifier for the entity |
-| `position` | String | `"0 0 0"` | Position as space-separated "X Y Z" values |
-| `rotation` | String | `"0 0 0"` | Rotation as space-separated "X Y Z" Euler angles in degrees |
-| `scale` | String | `"1 1 1"` | Scale as space-separated "X Y Z" values |
-| `tags` | String | `""` | Space-separated list of tags |
+| `name` | String | - | Name identifier for the entity |
+| `position` | Vector3 | `"0 0 0"` | Position as "X Y Z" values |
+| `rotation` | Vector3 | `"0 0 0"` | Rotation as "X Y Z" Euler angles in degrees |
+| `scale` | Vector3 | `"1 1 1"` | Scale as "X Y Z" values |
+| `tags` | String | - | Space-separated list of tags |
 
 ## Events
 

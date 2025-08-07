@@ -32,8 +32,8 @@ The `<pc-camera>` tag is used to define a camera component.
 | `orthographic` | Flag | - | Whether to use orthographic projection instead of perspective |
 | `ortho-height` | Number | `"10"` | Height of the orthographic projection |
 | `priority` | Number | `"0"` | Rendering priority of the camera |
-| `rect` | String | `"0 0 1 1"` | Viewport rectangle as space-separated "X Y Width Height" values |
-| `scissor-rect` | String | `"0 0 1 1"` | Scissor rectangle as space-separated "X Y Width Height" values |
+| `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
+| `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |
 | `tonemap` | Enum | `"none"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
 
 </div>

@@ -16,14 +16,14 @@ The `<pc-element>` tag is used to define an element component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `anchor` | String | `"0 0 0 1"` | Anchor point as space-separated "X Y Z W" values |
+| `anchor` | Vector4 | `"0 0 0 1"` | Anchor point as "X Y Z W" values |
 | `asset` | String | - | Font asset ID (must reference a `font` type asset) |
 | `auto-width` | Flag | - | Whether to automatically adjust width to fit content |
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `font-size` | Number | `"16"` | Font size in pixels |
 | `line-height` | Number | `"1.2"` | Line height multiplier |
-| `pivot` | String | `"0.5 0.5"` | Pivot point as space-separated "X Y" values |
+| `pivot` | Vector2 | `"0.5 0.5"` | Pivot point as "X Y" values |
 | `text` | String | - | Text content to display |
 | `type` | Enum | `"group"` | Element type: `"group"` \| `"image"` \| `"text"` |
 | `width` | Number | `"0"` | Width in pixels (0 for auto-sizing) |

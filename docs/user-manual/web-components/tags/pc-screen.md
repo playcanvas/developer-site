@@ -19,8 +19,8 @@ The `<pc-screen>` tag is used to define a screen component.
 | `blend` | Flag | - | Whether to enable alpha blending |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `priority` | Number | `"0"` | Rendering priority (0-255) |
-| `reference-resolution` | String | `"640 320"` | Reference resolution as space-separated "Width Height" values |
-| `resolution` | String | `"640 320"` | Screen resolution as space-separated "Width Height" values |
+| `reference-resolution` | Vector2 | `"640 320"` | Reference resolution as "Width Height" values |
+| `resolution` | Vector2 | `"640 320"` | Screen resolution as "Width Height" values |
 | `scale-blend` | Number | `"0.5"` | Scale blending factor (0-1) |
 | `screen-space` | Flag | - | Whether to render in screen space |
 
