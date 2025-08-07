@@ -4,17 +4,22 @@ title: <pc-scripts>
 
 `<pc-scripts>`タグは、スクリプトコンポーネントを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
 * [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* 0..n個の[`<pc-script>`](../pc-script)の子を持つことができます。
 
 :::
 
 ## 属性
 
-| 属性 | 説明 |
-| --- | --- |
-| `enabled` | スクリプトコンポーネントの有効状態。指定されていない場合、`true`が使用されます。 |
+<div className="attribute-table">
+
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+
+</div>
 
 ## 例
 

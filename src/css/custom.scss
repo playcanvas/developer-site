@@ -149,7 +149,12 @@ html[data-theme='dark'] .navbar--github-link:before {
 }
 
 /* used by web components tag reference tables */
-.nowrap-first-col td:first-child {
+.attribute-table td:nth-child(1),
+.attribute-table td:nth-child(2), 
+.attribute-table td:nth-child(3),
+.attribute-table th:nth-child(1),
+.attribute-table th:nth-child(2),
+.attribute-table th:nth-child(3) {
   white-space: nowrap;
 }
 

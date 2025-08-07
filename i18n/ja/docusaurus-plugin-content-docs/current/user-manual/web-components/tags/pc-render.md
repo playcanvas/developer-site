@@ -2,29 +2,33 @@
 title: <pc-render>
 ---
 
-`<pc-render>` タグは、3Dプリミティブをレンダリングするレンダーコンポーネントを定義するために使用されます。
+`<pc-render>`タグは、3Dプリミティブをレンダリングするレンダリングコンポーネントを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
-* これは [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 | 説明 |
-| --- | --- |
-| `cast-shadows` | 値なし属性。存在する場合、レンダーコンポーネントは影を落とします。 |
-| `enabled` | コンポーネントの有効状態。指定されていない場合、`true`が使用されます。 |
-| `receive-shadows` | 値なし属性。存在する場合、レンダーコンポーネントは影を受け取ります。 |
-| `type` | レンダーコンポーネントのタイプ。`box`、`capsule`、`cone`、`cylinder`、`plane`、または`sphere`のいずれかです。 |
+<div className="attribute-table">
+
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `cast-shadows` | Flag | - | コンポーネントが影を落とすかどうか |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `receive-shadows` | Flag | - | コンポーネントが影を受け取るかどうか |
+| `type` | 列挙型 | - | プリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
+
+</div>
 
 ## 例
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
-<CodePenEmbed id="NPKMrLy" title="<pc-render> example" />
+<CodePenEmbed id="NPKMrLy" title="<pc-render> 例" />
 
 ## JavaScriptインターフェース
 
-[RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html) を使用して、`<pc-render>` 要素をプログラムで作成および操作できます。
+[RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html)を使用して、`<pc-render>`要素をプログラムで作成および操作できます。

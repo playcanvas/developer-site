@@ -4,7 +4,7 @@ title: <pc-asset>
 
 The `<pc-asset>` tag is used to define an asset.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of [`<pc-app>`](../pc-app).
 
@@ -12,12 +12,16 @@ The `<pc-asset>` tag is used to define an asset.
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `id` | The ID of the asset. This is used by other tags (such as [`<pc-sky>`](../pc-sky)) to reference this asset. |
-| `lazy` | Valueless attribute. If present, the asset is not loaded until it is first referenced by the scene or explicitly requested via the Engine's Asset API. |
-| `src` | The path to the asset. |
-| `type` | The type of asset. If not specified, the type is inferred from the file extension. Can be: `audio`, `binary`, `css`, `container`, `gsplat`, `html`, `json`, `script`, `shader`, `text`, `texture`. |
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `id` | String | - | Unique identifier used by other tags to reference this asset |
+| `lazy` | Flag | - | Whether to defer loading until first referenced or explicitly requested |
+| `src` | String | - | Path to the asset file |
+| `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
+
+</div>
 
 ## Example
 

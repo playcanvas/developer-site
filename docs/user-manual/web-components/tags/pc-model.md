@@ -4,7 +4,7 @@ title: <pc-model>
 
 The `<pc-model>` tag is used to define an entity that instantiates a 3D model from a GLB file.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-scene>`](../pc-scene) or a [`<pc-entity>`](../pc-entity).
 
@@ -14,9 +14,13 @@ The `<pc-model>` tag is used to define an entity that instantiates a 3D model fr
 
 All attributes of [`<pc-entity>`](../pc-entity) are also available.
 
-| Attribute | Description |
-| --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `container`. |
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | String | - | Container asset ID (must reference a `container` type asset) |
+
+</div>
 
 ## Example
 

@@ -4,7 +4,7 @@ title: <pc-app>
 
 The `<pc-app>` tag is the root element for your PlayCanvas application. It is used to initialize the PlayCanvas application and provide a container for your scene.
 
-:::note
+:::note[Usage]
 
 * It must be a descendant of the document's `body` element.
 
@@ -12,16 +12,16 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
-| Attribute | Description |
-| --- | --- |
-| `alpha` | Boolean attribute. Determines whether the application allocates an alpha channel in the frame buffer. Defaults to `true`. |
-| `backend` | The graphics engine backend. Can be `webgpu`, `webgl2` or `null`. If `webgpu` is specified and WebGPU is not available, the engine will fall back to `webgl2`. If unspecified, `webgl2` is used. |
-| `antialias` | Boolean attribute. Determines whether the application uses anti-aliasing. Defaults to `true`. |
-| `depth` | Boolean attribute. Determines whether the application allocates a depth buffer. Defaults to `true`. |
-| `high-resolution` | Boolean attribute. Determines whether the application renders using physical resolution or CSS resolution. Defaults to `true`. |
-| `stencil` | Boolean attribute. Determines whether the application allocates a stencil buffer. Defaults to `true`. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `alpha` | Boolean | `"true"` | Whether the application allocates an alpha channel in the frame buffer |
+| `antialias` | Boolean | `"true"` | Whether the application uses anti-aliasing |
+| `backend` | Enum | `"webgl2"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"` |
+| `depth` | Boolean | `"true"` | Whether the application allocates a depth buffer |
+| `high-resolution` | Boolean | `"true"` | Whether to render using physical resolution or CSS resolution |
+| `stencil` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
 
 </div>
 

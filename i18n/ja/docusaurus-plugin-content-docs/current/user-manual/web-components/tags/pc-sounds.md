@@ -2,26 +2,31 @@
 title: <pc-sounds>
 ---
 
-`<pc-sounds>`タグは、サウンドコンポーネントを定義するために使用されます。
+`<pc-sounds>`タグはサウンドコンポーネントを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
-* これは、[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
-* これは0個以上の[`<pc-sound>`](../pc-sound)の子要素を持つことができます。
+* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* 0..n個の[`<pc-sound>`](../pc-sound) 子を持つことができます。
 
 :::
 
 ## 属性
 
-| 属性 | 説明 |
-| --- | --- |
-| `distance-model` | サウンドの距離モデル。`exponential`、`inverse`、または`linear`を指定できます。指定しない場合、`linear`が使用されます。 |
-| `pitch` | サウンドのピッチ。指定しない場合、`1`が使用されます。 |
-| `max-distance` | リスナーからの最大距離で、ここでオーディオの減衰が停止します。指定しない場合、`10000`が使用されます。 |
-| `positional` | 値を持たない属性。存在する場合、サウンドは位置情報を持つものになります。 |
-| `ref-distance` | リスナーからの距離で、ここで音量が最大になります。指定しない場合、`1`が使用されます。 |
-| `roll-off-factor` | 減衰式で使用される係数。指定しない場合、`1`が使用されます。 |
-| `volume` | サウンドの音量。指定しない場合、`1`が使用されます。 |
+<div className="attribute-table">
+
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `distance-model` | Enum | `"linear"` | 距離減衰モデル: `"exponential"` \| `"inverse"` \| `"linear"` |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `max-distance` | Number | `"10000"` | オーディオ減衰の最大距離 |
+| `pitch` | Number | `"1"` | このコンポーネント内のすべてのサウンドのピッチ乗数 |
+| `positional` | Flag | - | サウンドが位置情報を持つか (3D空間オーディオ) |
+| `ref-distance` | Number | `"1"` | 最大音量の基準距離 |
+| `roll-off-factor` | Number | `"1"` | 距離減衰の減衰率ファクター |
+| `volume` | Number | `"1"` | このコンポーネント内のすべてのサウンドのマスターボリューム |
+
+</div>
 
 ## 例
 
@@ -35,4 +40,4 @@ title: <pc-sounds>
 
 ## JavaScriptインターフェース
 
-[SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html)を使用して、プログラムによって`<pc-sounds>`要素を作成および操作できます。
+[SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html)を使用して、`<pc-sounds>`要素をプログラムで作成および操作できます。

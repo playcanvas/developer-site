@@ -4,17 +4,22 @@ title: <pc-scripts>
 
 The `<pc-scripts>` tag is used to define a scripts component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It can have 0..n [`<pc-script>`](../pc-script) children.
 
 :::
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `enabled` | Enabled state of the scripts component. If not specified, `true` is used. |
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+
+</div>
 
 ## Example
 

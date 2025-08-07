@@ -4,7 +4,7 @@ title: <pc-model>
 
 `<pc-model>`タグは、GLBファイルから3Dモデルをインスタンス化するエンティティを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
 * [`<pc-scene>`](../pc-scene)または[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
@@ -14,9 +14,13 @@ title: <pc-model>
 
 [`<pc-entity>`](../pc-entity)のすべての属性も利用可能です。
 
-| 属性    | 説明                                                                                                        |
-| --- | ---                                                                                                        |
-| `asset` | `container`タイプの[`<pc-asset>`](../pc-asset)タグの`id`と一致する必要がある文字列。 |
+<div className="attribute-table">
+
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `asset` | String | - | コンテナアセットID (`container`型のアセットを参照する必要があります) |
+
+</div>
 
 ## 例
 
