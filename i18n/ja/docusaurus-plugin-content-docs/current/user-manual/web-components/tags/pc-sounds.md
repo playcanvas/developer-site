@@ -15,7 +15,7 @@ title: <pc-sounds>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `distance-model` | Enum | `"linear"` | 距離減衰モデル: `"exponential"` \| `"inverse"` \| `"linear"` |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |

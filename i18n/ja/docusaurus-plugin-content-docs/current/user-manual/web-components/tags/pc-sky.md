@@ -14,7 +14,7 @@ title: <pc-sky>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `asset` | String | - | テクスチャアセットID (`texture`型のアセットを参照する必要があります) |
 | `center` | Vector3 | `"0 0.01 0"` | "X Y Z"値としてのスカイの中心 (0-1の範囲) |

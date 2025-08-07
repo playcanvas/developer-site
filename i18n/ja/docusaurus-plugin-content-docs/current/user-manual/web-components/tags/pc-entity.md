@@ -16,7 +16,7 @@ title: <pc-entity>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | エンティティの有効状態 |
 | `name` | String | - | エンティティの名前識別子 |

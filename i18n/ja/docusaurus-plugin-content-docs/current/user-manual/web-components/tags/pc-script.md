@@ -15,7 +15,7 @@ title: <pc-script>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `attributes` | 文字列 | `""` | スクリプト属性のJSON文字列 |
 | `enabled` | 真偽値 | `"true"` | スクリプトの有効状態 |

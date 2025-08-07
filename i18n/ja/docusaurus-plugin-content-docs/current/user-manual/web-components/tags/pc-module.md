@@ -14,7 +14,7 @@ title: <pc-module>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `fallback` | String | - | WebAssemblyがサポートされていない場合のフォールバック（asm.js）コードへのパス |
 | `glue` | String | - | モジュール用のJavaScriptグルーコードへのパス |

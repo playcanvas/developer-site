@@ -16,7 +16,7 @@ title: <pc-splat>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `asset` | String | - | Gaussian splatアセットID (`gsplat`タイプのアセットを参照する必要があります) |
 | `cast-shadows` | Flag | - | スプラットコンポーネントが影を落とすかどうか |

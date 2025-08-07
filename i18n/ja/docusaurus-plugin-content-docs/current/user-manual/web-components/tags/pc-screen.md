@@ -14,7 +14,7 @@ title: <pc-screen>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `blend` | Flag | - | アルファブレンディングを有効にするかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |

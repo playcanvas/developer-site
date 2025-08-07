@@ -14,7 +14,7 @@ title: <pc-render>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `cast-shadows` | フラグ | - | コンポーネントが影を落とすかどうか |
 | `enabled` | 真偽値 | `"true"` | コンポーネントの有効状態 |

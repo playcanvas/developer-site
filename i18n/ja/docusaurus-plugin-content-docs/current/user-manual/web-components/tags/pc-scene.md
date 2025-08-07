@@ -14,7 +14,7 @@ title: <pc-scene>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `fog` | Enum | - | フォグの種類：`"linear"` \| `"exp"` \| `"exp2"` |
 | `fog-color` | Color | - | CSSカラース文字列または16進数コードとしてのフォグの色 |

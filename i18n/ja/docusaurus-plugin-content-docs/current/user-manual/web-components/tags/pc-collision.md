@@ -14,7 +14,7 @@ title: <pc-collision>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `axis` | Number | `"1"` | 円柱/カプセル形状の軸 (0=X, 1=Y, 2=Z) |
 | `convex-hull` | Flag | - | メッシュ衝突に凸包を使用するかどうか |

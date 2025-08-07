@@ -14,7 +14,7 @@ title: <pc-particles>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `asset` | String | - | パーティクルシステム設定を定義するJSONアセットID |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |

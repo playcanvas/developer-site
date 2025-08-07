@@ -14,7 +14,7 @@ title: <pc-sound>
 
 <div className="attribute-table">
 
-| 属性 | 型 | デフォルト | 説明 |
+| 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `asset` | String | - | オーディオアセットID（`audio`型アセットを参照する必要があります） |
 | `auto-play` | Flag | - | サウンドが自動的に再生されるかどうか |
