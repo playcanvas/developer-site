@@ -6,7 +6,7 @@ title: <pc-screen>
 
 :::note[使用法]
 
-*   [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 

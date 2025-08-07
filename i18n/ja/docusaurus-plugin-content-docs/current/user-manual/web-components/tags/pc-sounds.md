@@ -6,8 +6,8 @@ title: <pc-sounds>
 
 :::note[使い方]
 
-*   [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
-*   0..n個の[`<pc-sound>`](../pc-sound) 子を持つことができます。
+* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* 0..n個の[`<pc-sound>`](../pc-sound) 子を持つことができます。
 
 :::
 

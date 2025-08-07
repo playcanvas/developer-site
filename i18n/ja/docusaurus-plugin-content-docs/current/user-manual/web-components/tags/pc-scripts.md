@@ -6,8 +6,8 @@ title: <pc-scripts>
 
 :::note[使用法]
 
-*   [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
-*   0..n個の[`<pc-script>`](../pc-script)の子を持つことができます。
+* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* 0..n個の[`<pc-script>`](../pc-script)の子を持つことができます。
 
 :::
 

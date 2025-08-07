@@ -6,7 +6,7 @@ title: <pc-camera>
 
 :::note[使用方法]
 
-*   [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
+* [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
 
 :::
 

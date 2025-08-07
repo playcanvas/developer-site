@@ -6,9 +6,9 @@ title: <pc-rigidbody>
 
 :::note[使用法]
 
-*   [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
-*   [`<pc-collision>`](../pc-collision)コンポーネントの兄弟要素である必要があります。
-*   ammo.js WebAssemblyモジュールは、[`<pc-module>`](../pc-module)タグを介してロードされている必要があります。
+* [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
+* [`<pc-collision>`](../pc-collision)コンポーネントの兄弟要素である必要があります。
+* ammo.js WebAssemblyモジュールは、[`<pc-module>`](../pc-module)タグを介してロードされている必要があります。
 
 :::
 

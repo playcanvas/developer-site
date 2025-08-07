@@ -8,7 +8,7 @@ title: <pc-splat>
 
 :::note[使用法]
 
-*   それは、[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* それは、[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 

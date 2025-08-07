@@ -6,7 +6,7 @@ title: <pc-sound>
 
 :::note[使用方法]
 
-*   [`<pc-sounds>`](../pc-sounds)コンポーネントの直接の子である必要があります。
+* [`<pc-sounds>`](../pc-sounds)コンポーネントの直接の子である必要があります。
 
 :::
 

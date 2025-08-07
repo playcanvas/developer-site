@@ -6,7 +6,7 @@ title: <pc-light>
 
 :::note[使用方法]
 
-*   [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 
 :::
 
