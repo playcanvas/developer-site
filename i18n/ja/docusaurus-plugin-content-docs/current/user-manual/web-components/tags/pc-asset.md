@@ -36,4 +36,4 @@ title: <pc-asset>
 
 ## JavaScriptインターフェース
 
-[AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html)を使用して、プログラムで`<pc-asset>`要素を作成および操作できます。
+[AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html)を使用して、`<pc-asset>`要素をプログラムで作成および操作できます。

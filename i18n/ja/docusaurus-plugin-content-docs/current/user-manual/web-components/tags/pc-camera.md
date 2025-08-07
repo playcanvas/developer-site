@@ -48,4 +48,4 @@ title: <pc-camera>
 
 ## JavaScriptインターフェース
 
-`<pc-camera>`要素は、[CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html)を使用してプログラムで作成および操作できます。
+[CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html)を使用して、`<pc-camera>`要素をプログラムで作成および操作できます。

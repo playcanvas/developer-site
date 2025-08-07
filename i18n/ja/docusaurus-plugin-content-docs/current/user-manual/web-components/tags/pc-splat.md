@@ -32,4 +32,4 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 ## JavaScriptインターフェース
 
-[SplatComponentElement API](https://api.playcanvas.com/web-components/classes/SplatComponentElement.html)を使用して、プログラムで`<pc-splat>`要素を作成および操作できます。
+[SplatComponentElement API](https://api.playcanvas.com/web-components/classes/SplatComponentElement.html)を使用して、`<pc-splat>`要素をプログラムで作成および操作できます。

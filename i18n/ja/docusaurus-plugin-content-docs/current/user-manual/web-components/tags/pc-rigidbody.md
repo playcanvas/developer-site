@@ -39,4 +39,4 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 ## JavaScriptインターフェース
 
-[RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html)を使用して、<pc-rigidbody>要素をプログラムで作成および操作できます。
+[RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html)を使用して、`<pc-rigidbody>`要素をプログラムで作成および操作できます。

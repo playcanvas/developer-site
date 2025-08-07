@@ -33,4 +33,4 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 ## JavaScriptインターフェース
 
-[AppElement API](https://api.playcanvas.com/web-components/classes/AppElement.html) を使用して、`<pc-app>` 要素をプログラムで作成および操作できます。
+[AppElement API](https://api.playcanvas.com/web-components/classes/AppElement.html)を使用して、`<pc-app>`要素をプログラムで作成および操作できます。

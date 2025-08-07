@@ -29,6 +29,6 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 <CodePenEmbed id="NPKMrLy" title="<pc-render> 例" />
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-[RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html) を使用して、`<pc-render>` 要素をプログラムで作成および操作できます。
+[RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html)を使用して、`<pc-render>`要素をプログラムで作成および操作できます。
