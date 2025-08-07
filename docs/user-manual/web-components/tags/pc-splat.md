@@ -17,6 +17,7 @@ When rendering splat-based scenes, it is recommended to set `antialias` and `hig
 | Attribute | Description |
 | --- | --- |
 | `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `gsplat`. |
+| `cast-shadows` | Valueless attribute. If present, the splat component casts shadows. |
 | `enabled` | Enabled state of the splat component. If not specified, `true` is used. |
 
 ## Example
