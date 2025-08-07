@@ -4,7 +4,7 @@ title: <pc-asset>
 
 The `<pc-asset>` tag is used to define an asset.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of [`<pc-app>`](../pc-app).
 
@@ -12,12 +12,16 @@ The `<pc-asset>` tag is used to define an asset.
 
 ## Attributes
 
+<div className="attribute-table">
+
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
 | `lazy` | Flag | - | Whether to defer loading until first referenced or explicitly requested |
 | `src` | String | - | Path to the asset file |
 | `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
+
+</div>
 
 ## Example
 

@@ -4,7 +4,7 @@ title: <pc-sounds>
 
 The `<pc-sounds>` tag is used to define a sound component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 * It can have 0..n [`<pc-sound>`](../pc-sound) children.
@@ -12,6 +12,8 @@ The `<pc-sounds>` tag is used to define a sound component.
 :::
 
 ## Attributes
+
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -23,6 +25,8 @@ The `<pc-sounds>` tag is used to define a sound component.
 | `ref-distance` | Number | `"1"` | Reference distance for full volume |
 | `roll-off-factor` | Number | `"1"` | Falloff rate factor for distance attenuation |
 | `volume` | Number | `"1"` | Master volume for all sounds in this component |
+
+</div>
 
 ## Example
 

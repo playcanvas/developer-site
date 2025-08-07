@@ -4,7 +4,7 @@ title: <pc-screen>
 
 The `<pc-screen>` tag is used to define a screen component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -12,7 +12,7 @@ The `<pc-screen>` tag is used to define a screen component.
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |

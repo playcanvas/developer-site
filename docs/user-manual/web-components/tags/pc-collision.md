@@ -4,7 +4,7 @@ title: <pc-collision>
 
 The `<pc-collision>` tag is used to define a collision component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -12,7 +12,7 @@ The `<pc-collision>` tag is used to define a collision component.
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |

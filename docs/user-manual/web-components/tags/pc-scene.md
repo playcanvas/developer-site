@@ -4,13 +4,15 @@ title: <pc-scene>
 
 The `<pc-scene>` tag is used to define the scene.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of [`<pc-app>`](../pc-app).
 
 :::
 
 ## Attributes
+
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -19,6 +21,8 @@ The `<pc-scene>` tag is used to define the scene.
 | `fog-density` | Number | - | Fog density for exponential fog types |
 | `fog-end` | Number | - | End distance for linear fog |
 | `fog-start` | Number | - | Start distance for linear fog |
+
+</div>
 
 ## Example
 

@@ -4,7 +4,7 @@ title: <pc-camera>
 
 The `<pc-camera>` tag is used to define a camera component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -12,7 +12,7 @@ The `<pc-camera>` tag is used to define a camera component.
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |

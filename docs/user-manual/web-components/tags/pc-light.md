@@ -4,7 +4,7 @@ title: <pc-light>
 
 The `<pc-light>` tag is used to define a light component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -12,7 +12,7 @@ The `<pc-light>` tag is used to define a light component.
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |

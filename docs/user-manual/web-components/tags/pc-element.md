@@ -4,7 +4,7 @@ title: <pc-element>
 
 The `<pc-element>` tag is used to define an element component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -12,7 +12,7 @@ The `<pc-element>` tag is used to define an element component.
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |

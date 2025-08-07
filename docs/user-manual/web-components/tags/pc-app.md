@@ -4,7 +4,7 @@ title: <pc-app>
 
 The `<pc-app>` tag is the root element for your PlayCanvas application. It is used to initialize the PlayCanvas application and provide a container for your scene.
 
-:::note
+:::note[Usage]
 
 * It must be a descendant of the document's `body` element.
 
@@ -12,7 +12,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |

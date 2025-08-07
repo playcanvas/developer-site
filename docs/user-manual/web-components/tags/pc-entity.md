@@ -4,22 +4,28 @@ title: <pc-entity>
 
 The `<pc-entity>` tag is used to define an entity.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of [`<pc-scene>`](../pc-scene) or another `<pc-entity>`.
+* It can have 0..n [`<pc-entity>`](../pc-entity) children.
+* It can optionally have one of each component type as children: [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-sounds>`](../pc-sounds), [`<pc-splat>`](../pc-splat).
 
 :::
 
 ## Attributes
 
+<div className="attribute-table">
+
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the entity |
 | `name` | String | - | Name identifier for the entity |
-| `position` | Vector3 | `"0 0 0"` | Position as "X Y Z" values |
-| `rotation` | Vector3 | `"0 0 0"` | Rotation as "X Y Z" Euler angles in degrees |
-| `scale` | Vector3 | `"1 1 1"` | Scale as "X Y Z" values |
+| `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
+| `rotation` | Vector3 | `"0 0 0"` | Local-space rotation as "X Y Z" Euler angles in degrees |
+| `scale` | Vector3 | `"1 1 1"` | Local-space scale as "X Y Z" values |
 | `tags` | String | - | Space-separated list of tags |
+
+</div>
 
 ## Events
 

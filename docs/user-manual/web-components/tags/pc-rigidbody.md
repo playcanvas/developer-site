@@ -4,7 +4,7 @@ title: <pc-rigidbody>
 
 The `<pc-rigidbody>` tag is used to define a rigidbody component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 * It must be a sibling of a [`<pc-collision>`](../pc-collision) component.
@@ -14,7 +14,7 @@ The `<pc-rigidbody>` tag is used to define a rigidbody component.
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |

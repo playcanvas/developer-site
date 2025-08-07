@@ -4,13 +4,15 @@ title: <pc-sound>
 
 The `<pc-sound>` tag is used to define a sound.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-sounds>`](../pc-sounds) component.
 
 :::
 
 ## Attributes
+
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -23,6 +25,8 @@ The `<pc-sound>` tag is used to define a sound.
 | `pitch` | Number | `"1"` | Pitch multiplier (1 = normal pitch) |
 | `start-time` | Number | `"0"` | Start time offset in seconds |
 | `volume` | Number | `"1"` | Volume level (0-1) |
+
+</div>
 
 ## Example
 

@@ -4,13 +4,15 @@ title: <pc-sky>
 
 The `<pc-sky>` tag is used to define a sky component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-scene>`](../pc-scene).
 
 :::
 
 ## Attributes
+
+<div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -21,6 +23,8 @@ The `<pc-sky>` tag is used to define a sky component.
 | `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles |
 | `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values |
 | `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |
+
+</div>
 
 ## Example
 
