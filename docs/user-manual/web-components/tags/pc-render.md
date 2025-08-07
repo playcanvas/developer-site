@@ -12,12 +12,12 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `cast-shadows` | Valueless attribute. If present, the render component casts shadows. |
-| `enabled` | Enabled state of the component. If not specified, `true` is used. |
-| `receive-shadows` | Valueless attribute. If present, the render component receives shadows. |
-| `type` | The type of render component. Can be `box`, `capsule`, `cone`, `cylinder`, `plane` or `sphere`. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `cast-shadows` | Flag | - | Whether the component casts shadows |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `receive-shadows` | Flag | - | Whether the component receives shadows |
+| `type` | Enum | - | Primitive shape: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
 ## Example
 

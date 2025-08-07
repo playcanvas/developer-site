@@ -14,9 +14,9 @@ The `<pc-model>` tag is used to define an entity that instantiates a 3D model fr
 
 All attributes of [`<pc-entity>`](../pc-entity) are also available.
 
-| Attribute | Description |
-| --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `container`. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | String | - | Container asset ID (must reference a `container` type asset) |
 
 ## Example
 

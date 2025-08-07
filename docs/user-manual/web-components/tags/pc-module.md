@@ -12,12 +12,12 @@ The `<pc-module>` tag is used to load a WebAssembly module.
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `name` | The name of the module. This is used to reference the module in scripts. |
-| `glue` | The path to the glue code for the module. |
-| `wasm` | The path to the WASM file for the module. |
-| `fallback` | The path to the fallback (asm.js) code for the module (for when WebAssembly is not supported). |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fallback` | String | - | Path to fallback (asm.js) code when WebAssembly is not supported |
+| `glue` | String | - | Path to the JavaScript glue code for the module |
+| `name` | String | - | Module name used to reference it in scripts |
+| `wasm` | String | - | Path to the WebAssembly (.wasm) file |
 
 ## Example
 

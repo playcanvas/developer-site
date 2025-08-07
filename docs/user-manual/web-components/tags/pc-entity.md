@@ -12,14 +12,14 @@ The `<pc-entity>` tag is used to define an entity.
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `enabled` | Enabled state of the entity. If not specified, `true` is used. |
-| `name` | The name of the entity. |
-| `position` | The position of the entity. Specified as a space-separated list of X, Y, and Z values. If not specified, `0 0 0` is used. |
-| `rotation` | The rotation of the entity. Specified as a space-separated list of X, Y, and Z Euler angles in degrees. If not specified, `0 0 0` is used. |
-| `scale` | The scale of the entity. Specified as a space-separated list of X, Y, and Z values. If not specified, `1 1 1` is used. |
-| `tags` | A space-separated list of tags for the entity. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | Enabled state of the entity |
+| `name` | String | `"Untitled"` | Name identifier for the entity |
+| `position` | String | `"0 0 0"` | Position as space-separated "X Y Z" values |
+| `rotation` | String | `"0 0 0"` | Rotation as space-separated "X Y Z" Euler angles in degrees |
+| `scale` | String | `"1 1 1"` | Scale as space-separated "X Y Z" values |
+| `tags` | String | `""` | Space-separated list of tags |
 
 ## Events
 

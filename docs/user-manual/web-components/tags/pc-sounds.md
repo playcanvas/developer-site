@@ -13,15 +13,16 @@ The `<pc-sounds>` tag is used to define a sound component.
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `distance-model` | The distance model of the sound. Can be `exponential`, `inverse` or `linear`. If not specified, `linear` is used. |
-| `pitch` | The pitch of the sound. If not specified, `1` is used. |
-| `max-distance` | The maximum distance from the listener at which audio falloff stops. If not specified, `10000` is used. |
-| `positional` | Valueless attribute. If present, the sound is positional. |
-| `ref-distance` | The distance from the listener at which the volume will be at full volume. If not specified, `1` is used. |
-| `roll-off-factor` | The factor used in the falloff equation. If not specified, `1` is used. |
-| `volume` | The volume of the sound. If not specified, `1` is used. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `distance-model` | Enum | `"linear"` | Distance attenuation model: `"exponential"` \| `"inverse"` \| `"linear"` |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `max-distance` | Number | `"10000"` | Maximum distance for audio falloff |
+| `pitch` | Number | `"1"` | Pitch multiplier for all sounds in this component |
+| `positional` | Flag | - | Whether the sound is positional (3D spatial audio) |
+| `ref-distance` | Number | `"1"` | Reference distance for full volume |
+| `roll-off-factor` | Number | `"1"` | Falloff rate factor for distance attenuation |
+| `volume` | Number | `"1"` | Master volume for all sounds in this component |
 
 ## Example
 

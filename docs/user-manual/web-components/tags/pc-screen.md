@@ -14,15 +14,15 @@ The `<pc-screen>` tag is used to define a screen component.
 
 <div className="nowrap-first-col">
 
-| Attribute | Description |
-| --- | --- |
-| `blend` | Valueless attribute. If present, the screen component blends. |
-| `enabled` | Enabled state of the component. If not specified, `true` is used. |
-| `priority` | The priority of the screen component. Must be an integer between `0` and `255`. If not specified, `0` is used. |
-| `reference-resolution` | The reference resolution of the screen component. Specified as a space-separated list of Width and Height values. If not specified, `640 320` is used. |
-| `resolution` | The resolution of the screen component. Specified as a space-separated list of Width and Height values. If not specified, `640 320` is used. |
-| `scale-blend` | The scale blend of the screen component. Must be a number between `0` and `1`. If not specified, `0.5` is used. |
-| `screen-space` | Valueless attribute. If present, the screen component is in screen space. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `blend` | Flag | - | Whether to enable alpha blending |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `priority` | Number | `"0"` | Rendering priority (0-255) |
+| `reference-resolution` | String | `"640 320"` | Reference resolution as space-separated "Width Height" values |
+| `resolution` | String | `"640 320"` | Screen resolution as space-separated "Width Height" values |
+| `scale-blend` | Number | `"0.5"` | Scale blending factor (0-1) |
+| `screen-space` | Flag | - | Whether to render in screen space |
 
 </div>
 

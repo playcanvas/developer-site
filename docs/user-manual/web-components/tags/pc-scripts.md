@@ -12,9 +12,9 @@ The `<pc-scripts>` tag is used to define a scripts component.
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `enabled` | Enabled state of the scripts component. If not specified, `true` is used. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | Enabled state of the scripts component |
 
 ## Example
 

@@ -12,10 +12,10 @@ The `<pc-particles>` tag is used to define a particle system.
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `json`. |
-| `enabled` | Enabled state of the component. If not specified, `true` is used. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | String | - | JSON asset ID defining the particle system configuration |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
 
 ## Example
 

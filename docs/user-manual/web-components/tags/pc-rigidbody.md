@@ -16,18 +16,18 @@ The `<pc-rigidbody>` tag is used to define a rigidbody component.
 
 <div className="nowrap-first-col">
 
-| Attribute | Description |
-| --- | --- |
-| `angular-damping` | The angular damping of the rigidbody. If not specified, `0` is used. |
-| `angular-factor` | The angular factor of the rigidbody. Specified as a space-separated list of X, Y, and Z values. If not specified, `1 1 1` is used. |
-| `enabled` | Enabled state of the component. If not specified, `true` is used. |
-| `friction` | The friction of the rigidbody. If not specified, `0.5` is used. |
-| `linear-damping` | The linear damping of the rigidbody. If not specified, `0` is used. |
-| `linear-factor` | The linear factor of the rigidbody. Specified as a space-separated list of X, Y, and Z values. If not specified, `1 1 1` is used. |
-| `mass` | The mass of the rigidbody. If not specified, `1` is used. |
-| `restitution` | The restitution of the rigidbody. If not specified, `0` is used. |
-| `rolling-friction` | The rolling friction of the rigidbody. If not specified, `0` is used. |
-| `type` | The type of rigidbody component. Can be `static`, `kinematic` or `dynamic`. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `angular-damping` | Number | `"0"` | Angular velocity damping factor |
+| `angular-factor` | String | `"1 1 1"` | Angular movement constraints as space-separated "X Y Z" values |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `friction` | Number | `"0.5"` | Surface friction coefficient |
+| `linear-damping` | Number | `"0"` | Linear velocity damping factor |
+| `linear-factor` | String | `"1 1 1"` | Linear movement constraints as space-separated "X Y Z" values |
+| `mass` | Number | `"1"` | Mass of the rigidbody in kilograms |
+| `restitution` | Number | `"0"` | Bounce/elasticity coefficient (0-1) |
+| `rolling-friction` | Number | `"0"` | Rolling resistance coefficient |
+| `type` | Enum | `"static"` | Physics body type: `"static"` \| `"kinematic"` \| `"dynamic"` |
 
 </div>
 
