@@ -17,9 +17,9 @@ title: <pc-script>
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `attributes` | 文字列 | `""` | スクリプト属性のJSON文字列 |
-| `enabled` | 真偽値 | `"true"` | スクリプトの有効状態 |
-| `name` | 文字列 | - | スクリプト名 (スクリプトの`scriptName`プロパティと一致する必要があります) |
+| `attributes` | String | `""` | スクリプト属性のJSON文字列 |
+| `enabled` | Boolean | `"true"` | スクリプトの有効状態 |
+| `name` | String | - | スクリプト名 (スクリプトの`scriptName`プロパティと一致する必要があります) |
 
 </div>
 
