@@ -18,7 +18,7 @@ The `<pc-script>` tag is used to define a script.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `attributes` | String | `""` | JSON string of script attributes |
-| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `enabled` | Boolean | `"true"` | Enabled state of the script |
 | `name` | String | - | Script name (must match the script's `scriptName` property) |
 
 </div>
