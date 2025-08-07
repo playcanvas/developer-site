@@ -1,5 +1,5 @@
 ---
-タイトル: <pc-particles>
+title: <pc-particles>
 ---
 
 `<pc-particles>`タグは、パーティクルシステムを定義するために使用されます。
