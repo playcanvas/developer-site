@@ -18,6 +18,7 @@ title: <pc-light>
 | --- | --- |
 | `color` | ライトの色。スペース区切りのR、G、B値、16進数のカラーコード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)として指定できます。指定されない場合、`1 1 1`が使用されます。 |
 | `cast-shadows` | 値を持たない属性。存在する場合、ライトは影を落とします。 |
+| `enabled` | コンポーネントの有効状態。指定されていない場合、`true`が使用されます。 |
 | `inner-cone-angle` | ライトのインナーコーンの角度。指定されない場合、`40`が使用されます。 |
 | `intensity` | ライトの強度。指定されない場合、`1`が使用されます。 |
 | `normal-offset-bias` | ライトのノーマルオフセットのバイアス。指定されない場合、`0.05`が使用されます。 |

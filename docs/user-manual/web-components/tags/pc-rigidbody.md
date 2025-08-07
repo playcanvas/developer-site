@@ -20,6 +20,7 @@ The `<pc-rigidbody>` tag is used to define a rigidbody component.
 | --- | --- |
 | `angular-damping` | The angular damping of the rigidbody. If not specified, `0` is used. |
 | `angular-factor` | The angular factor of the rigidbody. Specified as a space-separated list of X, Y, and Z values. If not specified, `1 1 1` is used. |
+| `enabled` | Enabled state of the component. If not specified, `true` is used. |
 | `friction` | The friction of the rigidbody. If not specified, `0.5` is used. |
 | `linear-damping` | The linear damping of the rigidbody. If not specified, `0` is used. |
 | `linear-factor` | The linear factor of the rigidbody. Specified as a space-separated list of X, Y, and Z values. If not specified, `1 1 1` is used. |

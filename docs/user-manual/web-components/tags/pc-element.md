@@ -20,6 +20,7 @@ The `<pc-element>` tag is used to define an element component.
 | `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `font`. |
 | `auto-width` | Valueless attribute. If present, the element component automatically adjusts its width. |
 | `color` | The color of the element component. Can be a space-separated list of R, G, B, and A values, a hex color code, or a [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts). If not specified, `1 1 1 1` is used. |
+| `enabled` | Enabled state of the component. If not specified, `true` is used. |
 | `font-size` | The font size of the element component. If not specified, `16` is used. |
 | `line-height` | The line height of the element component. If not specified, `1.2` is used. |
 | `pivot` | The pivot of the element component. Specified as a space-separated list of X and Y values. If not specified, `0.5 0.5` is used. |

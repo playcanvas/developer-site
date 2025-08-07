@@ -17,6 +17,7 @@ The `<pc-sound>` tag is used to define a sound.
 | `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `audio`. |
 | `auto-play` | Valueless attribute. If present, the sound slot plays automatically. |
 | `duration` | The duration of the sound slot. |
+| `enabled` | Enabled state of the component. If not specified, `true` is used. |
 | `loop` | Valueless attribute. If present, the sound slot loops. |
 | `name` | The name of the sound slot. |
 | `overlap` | Valueless attribute. If present, the sound slot overlaps. |
