@@ -42,7 +42,7 @@ npm install playcanvas @playcanvas/web-components --save-dev
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/build/playcanvas.mjs"
+            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.10.5/build/playcanvas.mjs"
         }
     }
 </script>
@@ -51,7 +51,7 @@ npm install playcanvas @playcanvas/web-components --save-dev
 コンポーネントは次のようにインポートされます。
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.7/dist/pwc.mjs"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.8/dist/pwc.mjs"></script>
 ```
 
 ## ボイラープレートHTML
@@ -68,11 +68,11 @@ npm install playcanvas @playcanvas/web-components --save-dev
         <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/build/playcanvas.mjs"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.10.5/build/playcanvas.mjs"
                 }
             }
         </script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.7/dist/pwc.mjs"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.8/dist/pwc.mjs"></script>
         <style>
             body {
                 margin: 0;

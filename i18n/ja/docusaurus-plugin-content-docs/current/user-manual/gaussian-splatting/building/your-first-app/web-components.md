@@ -32,7 +32,7 @@ sidebar_position: 2
 
 ```html {2-3}
 <pc-app antialias="false" high-resolution="false">
-    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/scripts/esm/camera-controls.mjs" preload></pc-asset>
+    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
     <pc-scene>
     </pc-scene>
@@ -50,7 +50,7 @@ sidebar_position: 2
 
 ```html {5-7}
 <pc-app antialias="false" high-resolution="false">
-    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/scripts/esm/camera-controls.mjs" preload></pc-asset>
+    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
     <pc-scene>
         <pc-entity position="0 0 -2.5">
@@ -68,7 +68,7 @@ sidebar_position: 2
 
 ```html {7-9}
 <pc-app antialias="false" high-resolution="false">
-    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/scripts/esm/camera-controls.mjs" preload></pc-asset>
+    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
     <pc-scene>
         <pc-entity position="0 0 -2.5">
@@ -93,7 +93,7 @@ sidebar_position: 2
 
 ```html {11-13}
 <pc-app antialias="false" high-resolution="false">
-    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/scripts/esm/camera-controls.mjs" preload></pc-asset>
+    <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
     <pc-scene>
         <pc-entity position="0 0 -2.5">
