@@ -18,6 +18,7 @@ The `<pc-light>` tag is used to define a light component.
 | --- | --- |
 | `color` | The color of the light. Can be a space-separated list of R, G, B values, a hex color code, or a [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts). If not specified, `1 1 1` is used. |
 | `cast-shadows` | Valueless attribute. If present, the light casts shadows. |
+| `enabled` | Enabled state of the component. If not specified, `true` is used. |
 | `inner-cone-angle` | The angle of the light's inner cone. If not specified, `40` is used. |
 | `intensity` | The intensity of the light. If not specified, `1` is used. |
 | `normal-offset-bias` | The bias of the light's normal offset. If not specified, `0.05` is used. |

@@ -21,6 +21,7 @@ The `<pc-camera>` tag is used to define a camera component.
 | `clear-depth-buffer` | Boolean attribute. Controls whether the camera clears the depth buffer. If unspecified, the depth buffer is cleared. |
 | `clear-stencil-buffer` | Boolean attribute. Controls whether the camera clears the stencil buffer. If unspecified, the stencil buffer is cleared. |
 | `cull-faces` | Boolean attribute. Controls whether the camera culls faces. If unspecified, faces are culled. |
+| `enabled` | Enabled state of the component. If not specified, `true` is used. |
 | `far-clip` | The far clipping plane of the camera. If unspecified, `1000` is used. |
 | `flip-faces` | Boolean attribute. Controls whether the camera flips faces. If unspecified, faces are not flipped. |
 | `fov` | The field of view of the camera. If unspecified, `45` is used. |

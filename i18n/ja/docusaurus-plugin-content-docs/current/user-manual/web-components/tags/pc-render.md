@@ -14,9 +14,10 @@ title: <pc-render>
 
 | 属性 | 説明 |
 | --- | --- |
-| `type` | レンダーコンポーネントのタイプ。`box`、`capsule`、`cone`、`cylinder`、`plane`、または`sphere`のいずれかです。 |
 | `cast-shadows` | 値なし属性。存在する場合、レンダーコンポーネントは影を落とします。 |
+| `enabled` | コンポーネントの有効状態。指定されていない場合、`true`が使用されます。 |
 | `receive-shadows` | 値なし属性。存在する場合、レンダーコンポーネントは影を受け取ります。 |
+| `type` | レンダーコンポーネントのタイプ。`box`、`capsule`、`cone`、`cylinder`、`plane`、または`sphere`のいずれかです。 |
 
 ## 例
 

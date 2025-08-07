@@ -15,6 +15,7 @@ title: <pc-particles>
 | 属性 | 説明 |
 | --- | --- |
 | `asset` | `json` 型の [`<pc-asset>`](../pc-asset) タグの `id` と一致する文字列です。 |
+| `enabled` | コンポーネントの有効状態。指定されていない場合、`true`が使用されます。 |
 
 ## 例
 

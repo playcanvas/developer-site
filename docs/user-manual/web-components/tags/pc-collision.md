@@ -18,7 +18,7 @@ The `<pc-collision>` tag is used to define a collision component.
 | --- | --- |
 | `axis` | The axis of the collision component. If not specified, `1` is used (Y-axis). |
 | `convex-hull` | Valueless attribute. If present, the collision component uses a convex hull. |
-| `enabled` | Enabled state of the collision component. If not specified, `true` is used. |
+| `enabled` | Enabled state of the component. If not specified, `true` is used. |
 | `half-extents` | The half-extents of the collision component. Specified as a space-separated list of X, Y, and Z values. If not specified, `0.5 0.5 0.5` is used. |
 | `height` | The height of the collision component. If not specified, `2` is used. |
 | `radius` | The radius of the collision component. If not specified, `0.5` is used. |
