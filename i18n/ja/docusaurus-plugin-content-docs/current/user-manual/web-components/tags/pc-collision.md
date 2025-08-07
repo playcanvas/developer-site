@@ -4,7 +4,7 @@ title: <pc-collision>
 
 `<pc-collision>`タグは、衝突コンポーネントを定義するために使用されます。
 
-:::note[使い方]
+:::note[使用法]
 
 * [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 

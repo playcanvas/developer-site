@@ -4,7 +4,7 @@ title: <pc-light>
 
 `<pc-light>` タグは、ライトコンポーネントを定義するために使用されます。
 
-:::note[使用方法]
+:::note[使用法]
 
 * [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 
@@ -41,6 +41,6 @@ title: <pc-light>
 </pc-entity>
 ```
 
-## JavaScript インターフェース
+## JavaScriptインターフェース
 
 [LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html) を使用して、`<pc-light>` 要素をプログラムで作成および操作できます。

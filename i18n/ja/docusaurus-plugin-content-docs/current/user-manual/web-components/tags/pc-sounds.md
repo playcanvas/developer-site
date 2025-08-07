@@ -4,7 +4,7 @@ title: <pc-sounds>
 
 `<pc-sounds>` タグはサウンドコンポーネントを定義するために使用されます。
 
-:::note[使い方]
+:::note[使用法]
 
 * [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 * 0..n個の[`<pc-sound>`](../pc-sound) 子を持つことができます。

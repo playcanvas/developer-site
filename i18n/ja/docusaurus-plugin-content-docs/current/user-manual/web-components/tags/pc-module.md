@@ -4,7 +4,7 @@ title: <pc-module>
 
 `<pc-module>`タグはWebAssemblyモジュールをロードするために使用されます。
 
-:::note[使用方法]
+:::note[使用法]
 
 * [`<pc-app>`](../pc-app)の直接の子である必要があります。
 

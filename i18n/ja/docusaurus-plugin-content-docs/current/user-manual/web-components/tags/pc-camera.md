@@ -4,7 +4,7 @@ title: <pc-camera>
 
 `<pc-camera>`タグはカメラコンポーネントを定義するために使用されます。
 
-:::note[使用方法]
+:::note[使用法]
 
 * [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
 

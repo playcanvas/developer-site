@@ -4,7 +4,7 @@ title: <pc-model>
 
 `<pc-model>`タグは、GLBファイルから3Dモデルをインスタンス化するエンティティを定義するために使用されます。
 
-:::note[使用方法]
+:::note[使用法]
 
 * [`<pc-scene>`](../pc-scene)または[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
