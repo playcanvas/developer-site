@@ -2,22 +2,26 @@
 title: <pc-asset>
 ---
 
-`<pc-asset>`タグはアセットを定義するために使用されます。
+`<pc-asset>`タグは、アセットを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
-* [`<pc-app>`](../pc-app)の直接の子である必要があります。
+*   [`<pc-app>`](../pc-app)の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 | 説明 |
-| --- | --- |
-| `id` | アセットのIDです。これは、他のタグ（例: [`<pc-sky>`](../pc-sky)）からこのアセットを参照するために使用されます。 |
-| `lazy` | 値を持たない属性です。存在する場合、アセットはシーンによって最初に参照されるか、またはEngineのAsset APIを介して明示的に要求されるまでロードされません。 |
-| `src` | アセットへのパスです。 |
-| `type` | アセットのタイプです。指定されていない場合、タイプはファイル拡張子から推測されます。指定可能な値: `audio`, `binary`, `css`, `container`, `gsplat`, `html`, `json`, `script`, `shader`, `text`, `texture`。 |
+<div className="attribute-table">
+
+| 属性 | 型 | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `id` | String | - | 他のタグがこのアセットを参照するために使用する一意の識別子 |
+| `lazy` | Flag | - | 最初に参照されるか、明示的に要求されるまでロードを延期するかどうか |
+| `src` | String | - | アセットファイルへのパス |
+| `type` | Enum | *inferred* | アセットタイプ：`"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
+
+</div>
 
 ## 例
 
