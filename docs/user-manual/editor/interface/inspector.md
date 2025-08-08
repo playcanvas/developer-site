@@ -1,5 +1,5 @@
 ---
-title: Inspector
+title: Inspector Panel
 sidebar_position: 4
 ---
 

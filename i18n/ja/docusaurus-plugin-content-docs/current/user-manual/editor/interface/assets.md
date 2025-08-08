@@ -1,5 +1,5 @@
 ---
-title: Assets Panel
+title: アセットパネル (Assets)
 sidebar_position: 6
 ---
 

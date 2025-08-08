@@ -1,5 +1,5 @@
 ---
-title: インスペクター (Inspector)
+title: インスペクターパネル (Inspector)
 sidebar_position: 4
 ---
 
