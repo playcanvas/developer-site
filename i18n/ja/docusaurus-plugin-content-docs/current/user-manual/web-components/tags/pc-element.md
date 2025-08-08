@@ -16,7 +16,7 @@ title: <pc-element>
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `anchor` | Vector4 | `"0 0 0 1"` | "X Y Z W" 値としてのアンカーポイント |
+| `anchor` | Vector4 | `"0 0 0 1"` | 要素のアンカーを親に対する `left bottom right top` で設定します。各値は 0〜1。`[0,0,0,0]` は親の左下に固定、`[1,1,1,1]` は右上に固定。左右または上下が異なる（スプリットアンカー）場合、その範囲に合わせて要素がリサイズされます（例: `[0,0,1,1]` は親全体を埋めます）。 |
 | `asset` | String | - | フォントアセットID (`font` 型アセットを参照する必要があります) |
 | `auto-width` | Flag | - | コンテンツに合わせて幅を自動的に調整するかどうか |
 | `color` | Color | `"1 1 1 1"` | スペース区切りのRGBA値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としての色 |
@@ -35,7 +35,7 @@ title: <pc-element>
 
 ```html
 <pc-entity>
-    <pc-element type="text" asset="arial"text="Hello, World!"></pc-element>
+    <pc-element type="text" asset="arial" text="Hello, World!"></pc-element>
 </pc-entity>
 ```
 

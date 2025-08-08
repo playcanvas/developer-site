@@ -34,7 +34,7 @@ The `<pc-screen>` tag is used to define a screen component.
     <pc-screen></pc-screen>
     <!-- render some text on the parent screen -->
     <pc-entity>
-        <pc-element type="text" asset="arial"text="Hello, World!"></pc-element>
+        <pc-element type="text" asset="arial" text="Hello, World!"></pc-element>
     </pc-entity>
 </pc-entity>
 ```

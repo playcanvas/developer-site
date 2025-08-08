@@ -16,7 +16,7 @@ The `<pc-element>` tag is used to define an element component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `anchor` | Vector4 | `"0 0 0 1"` | Anchor point as "X Y Z W" values |
+| `anchor` | Vector4 | `"0 0 0 1"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
 | `asset` | String | - | Font asset ID (must reference a `font` type asset) |
 | `auto-width` | Flag | - | Whether to automatically adjust width to fit content |
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
@@ -35,8 +35,8 @@ The `<pc-element>` tag is used to define an element component.
 
 ```html
 <pc-entity>
-    <pc-element type="text" asset="arial"text="Hello, World!"></pc-element>
-</pc-entity>
+    <pc-element type="text" asset="arial" text="Hello, World!"></pc-element>
+ </pc-entity>
 ```
 
 ## JavaScript Interface

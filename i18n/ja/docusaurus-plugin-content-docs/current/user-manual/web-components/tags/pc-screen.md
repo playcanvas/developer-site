@@ -34,7 +34,7 @@ title: <pc-screen>
     <pc-screen></pc-screen>
     <!-- 親スクリーンにテキストをレンダリング -->
     <pc-entity>
-        <pc-element type="text" asset="arial"text="Hello, World!"></pc-element>
+        <pc-element type="text" asset="arial" text="Hello, World!"></pc-element>
     </pc-entity>
 </pc-entity>
 ```
