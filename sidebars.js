@@ -189,10 +189,10 @@ const sidebars = {
           items: [
             'user-manual/editor/interface/toolbar',
             'user-manual/editor/interface/hierarchy',
-            'user-manual/editor/interface/viewport',
             'user-manual/editor/interface/inspector',
             'user-manual/editor/interface/assets',
-            'user-manual/editor/interface/settings',
+            'user-manual/editor/interface/viewport',
+            'user-manual/editor/interface/preferences',
           ],
         },
         {

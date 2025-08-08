@@ -31,7 +31,7 @@ If you select the CHAT button, the Chat panel will expand and you can broadcast 
 
 ![Chat](/img/user-manual/editor/realtime-collaboration/chat.gif)
 
-You can toggle browser notifications for chat messages in the [Settings](../interface/settings).
+You can toggle browser notifications for chat messages in the [Settings](../interface/preferences).
 
 :::tip
 

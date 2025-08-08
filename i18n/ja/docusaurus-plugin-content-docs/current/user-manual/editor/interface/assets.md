@@ -1,5 +1,5 @@
 ---
-title: Assets Panel
+title: アセットパネル (Assets)
 sidebar_position: 6
 ---
 
@@ -121,5 +121,5 @@ Editorはコードで作成されたアセットの参照を検出できませ�
 
 [2]: /user-manual/editor/interface/inspector
 [3]: /user-manual/editor/interface/viewport
-[4]: /user-manual/editor/interface/settings
+[4]: /user-manual/editor/interface/preferences
 [7]: https://api.playcanvas.com/engine/classes/AssetRegistry.html#findbytag

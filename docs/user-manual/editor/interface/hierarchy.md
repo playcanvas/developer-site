@@ -1,5 +1,5 @@
 ---
-title: Hierarchy
+title: Hierarchy Panel
 sidebar_position: 2
 ---
 

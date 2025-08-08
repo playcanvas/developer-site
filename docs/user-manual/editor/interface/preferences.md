@@ -1,5 +1,5 @@
 ---
-title: Settings
+title: Editor Preferences
 sidebar_position: 6
 ---
 

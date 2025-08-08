@@ -1,5 +1,5 @@
 ---
-title: 設定
+title: エディター環境設定
 sidebar_position: 6
 ---
 
