@@ -1,6 +1,5 @@
 ---
 title: Asset Store
-sidebar_position: 5
 ---
 
 The PlayCanvas Asset Store is a library of free assets that you can use in your projects. It contains 3D models, fonts, scripts and more.

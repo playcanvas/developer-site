@@ -1,6 +1,5 @@
 ---
 title: Snapchat Playable Ad
-sidebar_position: 2
 ---
 
 PlayCanvas supports the Snapchat Playable Ad format and requirements via an [official external tool on GitHub][2].

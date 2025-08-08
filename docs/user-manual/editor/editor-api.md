@@ -1,6 +1,5 @@
 ---
 title: Editor API
-sidebar_position: 9
 ---
 
 :::warning

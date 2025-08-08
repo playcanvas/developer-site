@@ -1,6 +1,5 @@
 ---
 title: Import and Export
-sidebar_position: 3
 ---
 
 ## Supported File Formats {#supported-file-formats}

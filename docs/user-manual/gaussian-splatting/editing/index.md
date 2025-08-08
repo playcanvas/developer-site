@@ -1,6 +1,5 @@
 ---
 title: Editing Splats
-sidebar_position: 4
 ---
 
 Raw Gaussian Splat files often need editing and optimization before they're ready for production use. This process involves removing unwanted elements, compressing file sizes, and optimizing performance for real-time rendering in PlayCanvas.

@@ -1,6 +1,5 @@
 ---
 title: Vignette Effect
-sidebar_position: 6
 ---
 
 In photography and optics, [vignetting][1] is the reduction of an image's brightness or saturation at the periphery compared to the image center. You can use it to draw attention to the center of the frame.

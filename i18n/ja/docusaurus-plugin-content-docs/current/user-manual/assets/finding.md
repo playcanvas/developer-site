@@ -1,6 +1,5 @@
 ---
 title: サードパーティアセットサイト
-sidebar_position: 6
 ---
 
 ## PlayCanvasで使用する3Dモデル、サウンドFX、音楽はどこで手に入れるのでしょうか?

@@ -1,6 +1,5 @@
 ---
 title: Shadows
-sidebar_position: 3
 ---
 
 Splats can cast shadows onto meshes (see the GSplatComponent's [castShadows](https://api.playcanvas.com/engine/classes/GSplatComponent.html#castshadows) property).

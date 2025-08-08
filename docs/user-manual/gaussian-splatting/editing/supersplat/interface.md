@@ -1,6 +1,5 @@
 ---
 title: Interface Overview
-sidebar_position: 1
 ---
 
 The SuperSplat Editor's interface appears as follows:

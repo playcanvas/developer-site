@@ -1,6 +1,5 @@
 ---
 title: Scripting for Editor Users
-sidebar_position: 2
 ---
 
 This section focuses on the Editor-specific features and best practices that will enhance your scripting experience. Whether you're writing your first line of code or you're a seasoned developer, understanding these tools will significantly boost your productivity.

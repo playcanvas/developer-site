@@ -1,6 +1,5 @@
 ---
 title: プロジェクトの作成
-sidebar_position: 1
 ---
 
 Editorプロジェクトを作成するには、2つの方法があります。

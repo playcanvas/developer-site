@@ -1,6 +1,5 @@
 ---
 title: Toolbar
-sidebar_position: 1
 ---
 
 The Editor's main toolbar can be found on the left, vertical edge of the Editor. You can access many common operations via the toolbar. Here is a list of the functionality available:

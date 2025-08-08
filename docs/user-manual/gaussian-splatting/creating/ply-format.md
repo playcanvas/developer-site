@@ -1,6 +1,5 @@
 ---
 title: The PLY Format
-sidebar_position: 3
 ---
 
 [PLY](https://en.wikipedia.org/wiki/PLY_(file_format)) (Polygon File Format) is the standard file format for storing 3D Gaussian Splat data. While PLY has been around since the 1990s as a format for storing 3D mesh data, its use in Gaussian Splatting represents a specialized application with unique characteristics and considerations.

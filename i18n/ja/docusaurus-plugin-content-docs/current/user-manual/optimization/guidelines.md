@@ -1,6 +1,5 @@
 ---
 title: 一般的ガイドライン
-sidebar_position: 1
 ---
 
 PlayCanvasアプリで最適なパフォーマンスを得るためのヒントをいくつか紹介します。

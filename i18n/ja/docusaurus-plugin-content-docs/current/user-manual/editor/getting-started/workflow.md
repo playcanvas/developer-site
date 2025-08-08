@@ -1,6 +1,5 @@
 ---
 title: PlayCanvasのワークフロー
-sidebar_position: 1
 ---
 
 PlayCanvas Editor を使って 3D ウェブアプリを構築するのは簡単です。

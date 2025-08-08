@@ -1,6 +1,5 @@
 ---
 title: Using WebXR in PlayCanvas
-sidebar_position: 1
 ---
 
 ## Support

@@ -1,6 +1,5 @@
 ---
 title: ピッキング
-sidebar_position: 2
 ---
 
 PlayCanvas Engine は、指定されたピクセルでレンダリングされたメッシュインスタンスをクエリできる[Picker API](https://api.playcanvas.com/engine/classes/Picker.html)を提供します。ピッカーは、メッシュの場合と同じ方法でスプラットと連携します。

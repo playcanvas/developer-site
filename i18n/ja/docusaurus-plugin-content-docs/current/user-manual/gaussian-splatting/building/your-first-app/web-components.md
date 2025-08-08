@@ -1,6 +1,5 @@
 ---
 title: Webコンポーネントの使用
-sidebar_position: 2
 ---
 
 [PlayCanvas Webコンポーネント](/user-manual/web-components)を使用して、簡単なGaussian splatアプリケーションをステップバイステップで構築しましょう。回転できるインタラクティブな3Dの猫のオモチャのスプラットがあるシーンを作成します。

@@ -1,6 +1,5 @@
 ---
 title: Textures
-sidebar_position: 1
 ---
 
 ### sRGB Texture Handling  

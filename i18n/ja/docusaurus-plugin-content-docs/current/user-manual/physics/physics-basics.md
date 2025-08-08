@@ -1,6 +1,5 @@
 ---
 title: 物理の基本
-sidebar_position: 1
 ---
 
 PlayCanvasには、[ammo.js][1]という非常に強力な物理エンジンが組み込まれています。これは、オープンソースのC++ Bullet物理エンジンのブラウザポートです。

@@ -1,6 +1,5 @@
 ---
 title: Sprite Editor
-sidebar_position: 1
 ---
 
 The Sprite Editor is used to edit both Texture Atlas assets and Sprite assets. It is also used to create Sprite Assets.

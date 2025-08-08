@@ -1,6 +1,5 @@
 ---
 title: シーンを構築する
-sidebar_position: 2
 ---
 
 PlayCanvas Web Components を使用して、シンプルな3Dシーンをステップバイステップで構築しましょう。ライトが当たった球体のある基本的なシーンを作成します。

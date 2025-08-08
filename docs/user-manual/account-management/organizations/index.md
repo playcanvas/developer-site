@@ -1,6 +1,5 @@
 ---
 title: Organizations
-sidebar_position: 3
 ---
 
 Organizations offer a way for businesses and large projects to manage many users. They provide enhanced collaboration features, permissions management, and team coordination tools.

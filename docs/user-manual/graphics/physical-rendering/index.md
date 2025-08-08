@@ -1,6 +1,5 @@
 ---
 title: Physically Based Rendering
-sidebar_position: 3
 ---
 
 ![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  

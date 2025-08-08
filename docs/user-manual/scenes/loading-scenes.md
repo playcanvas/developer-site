@@ -1,6 +1,5 @@
 ---
 title: Loading Scenes
-sidebar_position: 4
 ---
 
 This page will take you through loading scenes with code and also some different approaches of using scenes in projects.

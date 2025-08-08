@@ -1,6 +1,5 @@
 ---
 title: スクリプトのライフサイクル
-sidebar_position: 3
 ---
 
 import Tabs from '@theme/Tabs';

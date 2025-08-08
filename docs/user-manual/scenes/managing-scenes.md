@@ -1,6 +1,5 @@
 ---
 title: Managing Scenes
-sidebar_position: 3
 ---
 
 You can manage your scenes by opening the Scenes dialog.

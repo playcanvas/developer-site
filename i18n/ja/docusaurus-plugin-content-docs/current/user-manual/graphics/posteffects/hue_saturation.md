@@ -1,6 +1,5 @@
 ---
 title: 色相・彩度エフェクト
-sidebar_position: 4
 ---
 
 色相 (Hue) 彩度 (Saturation) エフェクトは、レンダリングされたイメージの色相と彩度を変更できます。

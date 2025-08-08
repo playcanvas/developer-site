@@ -1,6 +1,5 @@
 ---
 title: Taking Photos
-sidebar_position: 1
 ---
 
 The quality of your Gaussian splat is fundamentally determined by the quality of your source photos. This guide covers essential techniques for capturing images that will produce high-quality, detailed splats.

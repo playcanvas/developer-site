@@ -1,6 +1,5 @@
 ---
 title: Hue-Saturation Effect
-sidebar_position: 4
 ---
 
 The hue-saturation effect allows you to modify the hue and saturation of the rendered image.

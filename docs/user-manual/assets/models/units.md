@@ -1,6 +1,5 @@
 ---
 title: Units
-sidebar_position: 1
 ---
 
 PlayCanvas scenes generally treat 1 unit as 1 meter.

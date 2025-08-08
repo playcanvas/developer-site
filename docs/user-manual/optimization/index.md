@@ -1,6 +1,5 @@
 ---
 title: Optimization
-sidebar_position: 18
 ---
 
 Optimization is a critical part of developing a PlayCanvas application. It can mean the difference between a great user experience and a terrible one.

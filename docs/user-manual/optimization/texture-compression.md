@@ -1,6 +1,5 @@
 ---
 title: Texture Compression
-sidebar_position: 1
 ---
 
 Texture data is stored in a device's video memory (or VRAM). It is important to ensure that your application does not exhaust VRAM as this can cause undesirable things like browser tab crashes.

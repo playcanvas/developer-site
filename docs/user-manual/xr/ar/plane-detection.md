@@ -1,6 +1,5 @@
 ---
 title: Plane Detection
-sidebar_position: 1
 ---
 
 Very similar to [Mesh Detection][1], Plane Detection provides access to planes that estimate real-world surfaces.

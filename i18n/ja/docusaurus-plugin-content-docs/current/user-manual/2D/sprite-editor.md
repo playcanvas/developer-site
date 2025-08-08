@@ -1,6 +1,5 @@
 ---
 title: スプライトエディター
-sidebar_position: 1
 ---
 
 スプライトエディターは、Texture AtlasアセットとSpriteアセットの作成、編集に使われます。

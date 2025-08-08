@@ -1,6 +1,5 @@
 ---
 title: Rendering Media
-sidebar_position: 8
 ---
 
 SuperSplat enables you to render high-quality images and videos directly from your 3D Gaussian Splats. Whether you want to create a single frame for social media, showcase your creations with animated videos, embed them on your website, or keep them locally, this guide will help you get started.

@@ -1,6 +1,5 @@
 ---
 title: Examples
-sidebar_position: 4
 ---
 
 Here are some simple examples demonstrating the various PCUI elements:

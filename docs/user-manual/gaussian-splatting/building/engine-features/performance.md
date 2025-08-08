@@ -1,6 +1,5 @@
 ---
 title: Performance
-sidebar_position: 5
 ---
 
 Rendering splats can be expensive on both the CPU and GPU. Here are some strategies to achieve good performance:

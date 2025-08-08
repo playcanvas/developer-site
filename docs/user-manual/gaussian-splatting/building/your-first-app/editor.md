@@ -1,6 +1,5 @@
 ---
 title: Using the Editor
-sidebar_position: 4
 ---
 
 Let's build a simple Gaussian splat application step by step using the [PlayCanvas Editor](/user-manual/editor). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.

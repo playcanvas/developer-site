@@ -1,6 +1,5 @@
 ---
 title: DOM Overlay
-sidebar_position: 1
 ---
 
 ARセッションでモノスクリーンディスプレイを使用する場合、UIには通常のHTMLとCSSを使用できます。このAPIは、ARアプリケーション画面上にDOM要素をオーバーレイする機能を提供します。

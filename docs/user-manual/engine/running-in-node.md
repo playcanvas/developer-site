@@ -1,6 +1,5 @@
 ---
 title: Running the Engine in Node.js
-sidebar_position: 2
 ---
 
 [Node.js](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that can run on Windows, Linux, macOS, and more. It runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting.

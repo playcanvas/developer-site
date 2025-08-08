@@ -1,6 +1,5 @@
 ---
 title: グラフィックス
-sidebar_position: 12
 ---
 
 PlayCanvasは、ウェブ上で高性能な3Dレンダリングを提供する高度なグラフィックスエンジンを搭載しています。このエンジンは、[WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)と[WebGPU](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)の両方をサポートし、すべてのモダンブラウザでの互換性を確保しつつ、最先端のグラフィックス機能を提供します。

@@ -1,6 +1,5 @@
 ---
 title: Scene Settings
-sidebar_position: 5
 ---
 
 The Settings panel lets you set up various properties. It is accessed using the 'cog' button in the bottom left of the Editor (on the [Toolbar][1]).

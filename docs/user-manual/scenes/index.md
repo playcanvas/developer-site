@@ -1,6 +1,5 @@
 ---
 title: Scenes
-sidebar_position: 7
 ---
 
 Scenes contain:

@@ -1,6 +1,5 @@
 ---
 title: Recommended Tools
-sidebar_position: 2
 ---
 
 PlayCanvas does not itself provide a tool to convert photogrammetry into a Gaussian splat. But there is a healthy variety of third-party tools for you to choose from, each with their strengths and weaknesses.

@@ -1,6 +1,5 @@
 ---
 title: MiniStats
-sidebar_position: 3
 ---
 
 MiniStats is a lightweight graphical display of an application's key performance statistics. It shows draw call count, frame time, CPU load and (where supported) GPU load.

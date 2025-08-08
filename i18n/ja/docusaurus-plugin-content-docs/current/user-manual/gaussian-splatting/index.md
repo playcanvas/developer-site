@@ -1,6 +1,5 @@
 ---
 title: Gaussian Splatting
-sidebar_position: 12.5
 ---
 
 3D Gaussian Splattingは、フォトリアルな3Dシーンをキャプチャ、表現、レンダリングするための革新的な技術です。従来のポリゴンメッシュとは異なり、Gaussian Splattingは、何百万もの小さな半透明の楕円形のスプラットを使用して、卓越した視覚的忠実度で詳細な環境を再構築します。

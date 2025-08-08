@@ -1,6 +1,5 @@
 ---
 title: Self-hosting
-sidebar_position: 2
 ---
 
 There are two options for self-hosting a PlayCanvas application on your own domain.

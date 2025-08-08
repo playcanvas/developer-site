@@ -1,6 +1,5 @@
 ---
 title: Particles
-sidebar_position: 7
 ---
 
 PlayCanvas provides comprehensive support for creating and editing particle systems.

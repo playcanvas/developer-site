@@ -1,6 +1,5 @@
 ---
 title: Facebookプレイアブル広告
-sidebar_position: 1
 ---
 
 PlayCanvasは、[公式の外部ツール][2]を通じて[Facebook Playable Ad][1]フォーマットと要件をサポートしています。

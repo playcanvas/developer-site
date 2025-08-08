@@ -1,6 +1,5 @@
 ---
 title: Account Settings
-sidebar_position: 2
 ---
 
 Your account settings page provides access to all your personal account configuration options, from basic profile information to billing and security settings. To view your user account settings, navigate to [https://playcanvas.com/account](https://playcanvas.com/account). You should see something like this:

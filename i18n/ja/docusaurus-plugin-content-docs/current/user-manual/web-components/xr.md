@@ -1,6 +1,5 @@
 ---
 title: XR のサポート
-sidebar_position: 4
 ---
 
 PlayCanvas Web Components を使用すると、アプリケーションに Virtual Reality (VR) および Augmented Reality (AR) のサポートを簡単に追加できます。

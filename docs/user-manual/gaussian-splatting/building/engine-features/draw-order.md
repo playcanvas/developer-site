@@ -1,6 +1,5 @@
 ---
 title: Draw Order and Sorting
-sidebar_position: 1
 ---
 
 ## How Gaussians Are Sorted

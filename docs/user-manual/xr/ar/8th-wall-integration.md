@@ -1,6 +1,5 @@
 ---
 title: 8th Wall Integration
-sidebar_position: 2
 ---
 
 [8th Wall][1] is a platform that offers tools to create interactive augmented reality experiences through the web. It has a reach of over 3.5B users, and supports World tracking, Image tracking and Face tracking. In 2018, it added full integration with PlayCanvas.

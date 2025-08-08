@@ -1,6 +1,5 @@
 ---
 title: Browser Dev Tools
-sidebar_position: 2
 ---
 
 In order to create scripts for PlayCanvas, it is vital that you know how to access and use your browser's development tools.

@@ -1,6 +1,5 @@
 ---
 title: Managing Your Scripts
-sidebar_position: 1
 ---
 
 In the PlayCanvas Editor, your JavaScript code lives in Script Assets. These are `.js` or `.mjs` files stored within your project's Asset panel, just like your models, textures, and materials. Effectively managing these Script Assets is key to an organized and efficient workflow. This page covers how to create, organize, delete, import, and assign scripts using the Editor interface.

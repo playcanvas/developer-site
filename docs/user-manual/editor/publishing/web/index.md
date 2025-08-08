@@ -1,6 +1,5 @@
 ---
 title: Web
-sidebar_position: 1
 ---
 
 PlayCanvas games are actually web pages and as such, are most at home in the browser. When publishing on the web, you have a number of options:

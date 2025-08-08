@@ -1,6 +1,5 @@
 ---
 title: Organizationの作成
-sidebar_position: 1
 ---
 
 Organizationを作成する方法はいくつかあります。あなたが所属しているOrganizationのは、以下のようにあなたのプロフィールの名前の隣に表示されます:

@@ -1,6 +1,5 @@
 ---
 title: Bloom Effect
-sidebar_position: 1
 ---
 
 [Bloom][1] is a post-processing effect used to reproduce an imaging artifact of real-world cameras. The effect produces fringes (or feathers) of light extending from the borders of bright areas in an image, contributing to the illusion of an extremely bright light overwhelming the camera capturing the scene.

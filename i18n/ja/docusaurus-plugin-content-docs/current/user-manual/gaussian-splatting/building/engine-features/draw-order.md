@@ -1,6 +1,5 @@
 ---
 title: 描画順序とソート
-sidebar_position: 1
 ---
 
 ## ガウシアンのソート方法

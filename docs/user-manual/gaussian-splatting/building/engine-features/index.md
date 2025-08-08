@@ -1,6 +1,5 @@
 ---
 title: Engine Features
-sidebar_position: 2
 ---
 
 The PlayCanvas Engine includes a powerful, high-performance renderer for Gaussian Splats. This section covers a number of topics related to the capabilities of this renderer.

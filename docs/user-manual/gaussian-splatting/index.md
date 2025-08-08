@@ -1,6 +1,5 @@
 ---
 title: Gaussian Splatting
-sidebar_position: 12.5
 ---
 
 3D Gaussian Splatting is a revolutionary technique for capturing, representing, and rendering photorealistic 3D scenes. Unlike traditional polygonal meshes, Gaussian Splatting uses millions of small, semi-transparent elliptical splats to reconstruct detailed environments with exceptional visual fidelity.

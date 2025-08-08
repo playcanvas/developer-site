@@ -1,6 +1,5 @@
 ---
 title: Scripting Fundamentals
-sidebar_position: 1
 ---
 
 Master the core concepts of PlayCanvas scripting. Whether you're using modern ESM scripts or classic scripts, these fundamentals apply to all PlayCanvas development.

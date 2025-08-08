@@ -1,6 +1,5 @@
 ---
 title: Your First Splat App
-sidebar_position: 1
 ---
 
 Welcome to building your first Gaussian splat application! This section provides step-by-step tutorials to create a simple application that loads a splat of a cute toy cat that users can orbit around, pan, and zoom.

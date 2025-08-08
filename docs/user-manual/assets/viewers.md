@@ -1,6 +1,5 @@
 ---
 title: Asset Viewers
-sidebar_position: 8
 ---
 
 Some of the assets have viewer tools that can help inspect them more closely. Assets that can be viewed in these will have the option to 'Open in Viewer' in the inspector and context menu.

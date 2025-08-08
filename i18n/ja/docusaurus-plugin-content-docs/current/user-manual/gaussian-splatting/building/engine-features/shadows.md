@@ -1,6 +1,5 @@
 ---
 title: 影
-sidebar_position: 3
 ---
 
 スプラットはメッシュに影を落とすことができます (GSplatComponentの[castShadows](https://api.playcanvas.com/engine/classes/GSplatComponent.html#castshadows) プロパティを参照してください)。

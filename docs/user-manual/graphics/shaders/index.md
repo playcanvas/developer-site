@@ -1,6 +1,5 @@
 ---
 title: Shaders
-sidebar_position: 5
 ---
 
 When you import your 3D models into PlayCanvas, by default, they will use our [Physical Material][1]. This is a versatile material type that can cover a lot of your rendering needs.

@@ -1,6 +1,5 @@
 ---
 title: Picking
-sidebar_position: 2
 ---
 
 The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/classes/Picker.html) which can query the mesh instance rendered at a specified pixel. The picker works with splats in the same way that it does for meshes.

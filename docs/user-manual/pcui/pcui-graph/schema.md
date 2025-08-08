@@ -1,6 +1,5 @@
 ---
 title: Schema
-sidebar_position: 4
 ---
 
 The schema object is used to define what type of graph you will be initializing. More specifically, it defines which node your graph can contain and how those nodes can be connected together with edges.

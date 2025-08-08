@@ -1,6 +1,5 @@
 ---
 title: アセットタイプ
-sidebar_position: 1
 ---
 
 [アセットパネル](/user-manual/editor/interface/assets)は、プロジェクトのアセットを管理します。アセットにはいくつかの異なる種類があります。

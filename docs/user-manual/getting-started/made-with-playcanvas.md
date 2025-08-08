@@ -1,6 +1,5 @@
 ---
 title: Made with PlayCanvas
-sidebar_position: 4
 ---
 
 Below is our showcase video of some of the best WebGL browser games and experiences made with PlayCanvas.

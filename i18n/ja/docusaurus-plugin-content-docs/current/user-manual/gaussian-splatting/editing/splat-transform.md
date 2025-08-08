@@ -1,6 +1,5 @@
 ---
 title: SplatTransform CLIツール
-sidebar_position: 2
 ---
 
 [SplatTransform](https://github.com/playcanvas/splat-transform) は、3D Gaussian Splats の操作を容易にするために設計された強力なコマンドラインツールです。フォーマット間の変換、変換の適用、スプラットデータの分析など、SplatTransform は開発者が Gaussian splat ワークフローを正確に制御するために必要なツールを提供します。

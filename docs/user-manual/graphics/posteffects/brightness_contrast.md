@@ -1,6 +1,5 @@
 ---
 title: Brightness-Contrast Effect
-sidebar_position: 2
 ---
 
 The brightness-contrast effect allows you to modify the brightness and contrast of the rendered image.

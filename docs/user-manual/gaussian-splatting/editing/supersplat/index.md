@@ -1,6 +1,5 @@
 ---
 title: SuperSplat
-sidebar_position: 1
 ---
 
 [SuperSplat](https://superspl.at/editor) is PlayCanvas's free, [open-source](https://github.com/playcanvas/supersplat) Gaussian Splat editor designed specifically for production workflows. It runs entirely in the browser with no downloads required, making it accessible from anywhere.

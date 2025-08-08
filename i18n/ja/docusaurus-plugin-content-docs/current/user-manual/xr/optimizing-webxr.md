@@ -1,6 +1,5 @@
 ---
 title: WebXRアプリケーションの最適化
-sidebar_position: 30
 ---
 
 ## はじめに

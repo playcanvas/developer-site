@@ -1,6 +1,5 @@
 ---
 title: Hosting on heyVR.io
-sidebar_position: 7
 ---
 
 [heyVR.io](https://heyvr.io) is a publishing platform for WebXR games, giving you access to a global audience of hundreds of thousands of players across multiple devices. It offers a wide range of ready-to-use gameplay features to enhance your players' experience and enable you to start earning from your game through in-game content sales and advertisements.

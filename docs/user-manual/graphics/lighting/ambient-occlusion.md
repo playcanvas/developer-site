@@ -1,6 +1,5 @@
 ---
 title: Ambient Occlusion
-sidebar_position: 4
 ---
 
 Ambient Occlusion is a technique to approximate how much light gets onto the surface based on its occlusion by the environment.

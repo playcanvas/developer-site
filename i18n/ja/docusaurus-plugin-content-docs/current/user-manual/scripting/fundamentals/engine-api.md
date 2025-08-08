@@ -1,6 +1,5 @@
 ---
 title: Engine APIの呼び出し
-sidebar_position: 6
 ---
 
 PlayCanvasスクリプトを記述する際、[PlayCanvas Engine API](https://api.playcanvas.com/engine/)を操作することになります。このページでは、スクリプトで最も頻繁に使用する重要なクラスとパターンについて説明します。

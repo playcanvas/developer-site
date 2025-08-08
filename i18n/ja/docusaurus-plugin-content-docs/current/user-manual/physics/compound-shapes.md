@@ -1,6 +1,5 @@
 ---
 title: Compound
-sidebar_position: 4
 ---
 
 複合形状 (Compound) とは、複数のプリミティブ形状（[形状のリストはこちら][primitive-shapes-list]）から作られたカスタムコリジョン形状です。これにより、カスタムメッシュモデルを使用せずに、より複雑なコリジョン形状を作成できます。

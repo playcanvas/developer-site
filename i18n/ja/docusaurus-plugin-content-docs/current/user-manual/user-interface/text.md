@@ -1,6 +1,5 @@
 ---
 title: テキスト要素
-sidebar_position: 6
 ---
 
 `Text Element` は、[フォントアセット][1]を使用して文字列を表示するために使われます。

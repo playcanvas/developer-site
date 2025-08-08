@@ -1,6 +1,5 @@
 ---
 title: Engine API の使用
-sidebar_position: 1
 ---
 
 [PlayCanvas Engine](/user-manual/engine) を直接使用して、シンプルなGaussian splatアプリケーションをステップバイステップで構築しましょう。回転させることができるインタラクティブな3Dおもちゃの猫のsplatがあるシーンを作成します。

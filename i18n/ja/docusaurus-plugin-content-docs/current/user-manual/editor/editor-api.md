@@ -1,6 +1,5 @@
 ---
 title: エディターAPI
-sidebar_position: 9
 ---
 
 :::warning
