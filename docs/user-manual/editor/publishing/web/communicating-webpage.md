@@ -1,6 +1,5 @@
 ---
 title: Communication with web pages
-sidebar_position: 4
 ---
 
 One the key advantages of using PlayCanvas and WebGL over other plugins or cross-compiled engines is the ability to interact directly between your application and the surrounding webpage. In this page we'll talk about some common ways of interfacing your PlayCanvas application with a web page or web application.

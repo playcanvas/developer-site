@@ -1,6 +1,5 @@
 ---
 title: Organizationの管理
-sidebar_position: 2
 ---
 
 ### 権限 (Permissions) {#permissions}

@@ -1,6 +1,5 @@
 ---
 title: Depth Layer
-sidebar_position: 2
 ---
 
 Some rendering techniques require access to the depth or the color buffer of the scene for a specific camera. The Depth Layer is a special layer, which can be added to the `layers` property of a camera. The [`order`][4] of the layers defines at which point during the rendering, the depth or the color buffer is captured. The captured buffers can then be used in the following layers of the camera.

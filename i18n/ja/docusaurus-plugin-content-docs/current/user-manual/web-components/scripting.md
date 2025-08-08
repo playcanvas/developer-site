@@ -1,6 +1,5 @@
 ---
 title: スクリプトで動作を追加する
-sidebar_position: 3
 ---
 
 スクリプトは、PlayCanvas Web Components アプリのエンティティにカスタム動作を追加します。

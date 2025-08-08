@@ -1,6 +1,5 @@
 ---
 title: PlayCanvas用の3Dモデル作成
-sidebar_position: 2
 ---
 
 PlayCanvasではアートやアニメーションの構築は、ほとんど全ての利用可能な3Dモデリングプログラムを使用して行うことができます。例：Blender、SketchUp、Autodesk 3D Studio Max、Autodesk Maya。

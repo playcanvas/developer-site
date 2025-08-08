@@ -1,6 +1,5 @@
 ---
 title: GPU Profiling
-sidebar_position: 2
 ---
 
 This section explains how to use native GPU profilers to capture and analyze WebGL or WebGPU frames, enabling debugging and performance profiling of GPU operations.

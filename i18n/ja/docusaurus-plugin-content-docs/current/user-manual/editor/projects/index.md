@@ -1,6 +1,5 @@
 ---
 title: プロジェクト
-sidebar_position: 2
 ---
 
 ## 概要

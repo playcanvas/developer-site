@@ -1,6 +1,5 @@
 ---
 title: Text Elements
-sidebar_position: 6
 ---
 
 The Text Element is used to display a string of text using a [font asset][1].

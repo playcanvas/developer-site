@@ -1,6 +1,5 @@
 ---
 title: Viewing Splats
-sidebar_position: 3
 ---
 
 Once you've created a Gaussian splat, you'll want to preview and evaluate it before proceeding to editing or integration into your projects. The **PlayCanvas Model Viewer** provides a convenient way to quickly view and inspect your splat files without needing to set up a full PlayCanvas project.

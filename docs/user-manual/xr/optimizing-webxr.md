@@ -1,6 +1,5 @@
 ---
 title: Optimizing WebXR applications
-sidebar_position: 30
 ---
 
 ## Introduction

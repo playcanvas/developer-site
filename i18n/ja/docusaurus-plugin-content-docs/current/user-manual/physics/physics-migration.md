@@ -1,6 +1,5 @@
 ---
 title: ammo.jsの更新
-sidebar_position: 7
 ---
 
 ### イントロダクション

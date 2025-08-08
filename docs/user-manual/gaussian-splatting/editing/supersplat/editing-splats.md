@@ -1,6 +1,5 @@
 ---
 title: Editing Splats
-sidebar_position: 5
 ---
 
 ## Edit Modes

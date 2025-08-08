@@ -1,6 +1,5 @@
 ---
 title: クラスタードライティング
-sidebar_position: 6
 ---
 
 :::note

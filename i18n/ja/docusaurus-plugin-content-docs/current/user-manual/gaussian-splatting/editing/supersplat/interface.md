@@ -1,6 +1,5 @@
 ---
 title: インターフェースの概要
-sidebar_position: 1
 ---
 
 SuperSplat Editorのインターフェースは以下のようになります。

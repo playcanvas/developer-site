@@ -1,6 +1,5 @@
 ---
 title: アカウントの作成
-sidebar_position: 1
 ---
 
 PlayCanvasコミュニティに参加するには、新しいアカウントを作成することを強くお勧めします。[https://playcanvas.com](https://playcanvas.com)の右上にある**サインアップ**をクリックしてください。

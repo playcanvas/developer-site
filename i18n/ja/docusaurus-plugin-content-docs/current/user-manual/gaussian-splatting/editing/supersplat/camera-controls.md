@@ -1,6 +1,5 @@
 ---
 title: カメラ操作
-sidebar_position: 4
 ---
 
 SuperSplatのカメラ操作は以下の通りです。

@@ -1,6 +1,5 @@
 ---
 title: 9-slicing
-sidebar_position: 2
 ---
 
 9-slicing (sometimes called 9-patch) is a technique for 2D graphics that splits a single image into 9 areas which are scaled individually in order to prevent stretching when the image is displayed at different sizes and with different aspect ratios.

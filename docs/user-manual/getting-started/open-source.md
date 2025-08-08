@@ -1,6 +1,5 @@
 ---
 title: Open Source Mission
-sidebar_position: 5
 ---
 
 ## Mission Statement

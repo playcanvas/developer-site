@@ -1,6 +1,5 @@
 ---
 title: はじめに
-sidebar_position: 1
 ---
 
 始める前に、[Node.js](https://nodejs.org/) 18以降がインストールされていることを確認してください。

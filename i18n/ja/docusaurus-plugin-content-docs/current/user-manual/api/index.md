@@ -1,6 +1,5 @@
 ---
 title: REST API
-sidebar_position: 20
 ---
 
 :::warning

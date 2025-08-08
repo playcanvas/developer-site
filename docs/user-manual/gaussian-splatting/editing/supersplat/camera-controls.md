@@ -1,6 +1,5 @@
 ---
 title: Camera Controls
-sidebar_position: 4
 ---
 
 The camera controls in SuperSplat are as follows:

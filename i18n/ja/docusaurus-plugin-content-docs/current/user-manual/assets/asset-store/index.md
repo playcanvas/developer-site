@@ -1,6 +1,5 @@
 ---
 title: アセットストア
-sidebar_position: 5
 ---
 
 PlayCanvas Asset Storeは、プロジェクトで使用できる無料のアセットのライブラリです。3Dモデル、フォント、スクリプトなどが含まれています。

@@ -1,6 +1,5 @@
 ---
 title: PlayCanvasの利用実績
-sidebar_position: 4
 ---
 
 以下は、PlayCanvasで作成されたWebGLブラウザゲームやエクスペリエンスの中から、最高のものをいくつか紹介したショーケースビデオです。

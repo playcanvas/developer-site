@@ -1,6 +1,5 @@
 ---
 title: Using the Engine Standalone
-sidebar_position: 1
 ---
 
 import Tabs from '@theme/Tabs';

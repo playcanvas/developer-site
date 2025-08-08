@@ -1,6 +1,5 @@
 ---
 title: 公開
-sidebar_position: 9
 ---
 
 SuperSplat Editor を使用すると、スプラットシーンをウェブに [https://superspl.at/](https://superspl.at/) で公開できます。

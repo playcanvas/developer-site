@@ -1,6 +1,5 @@
 ---
 title: Custom Shaders
-sidebar_position: 4
 ---
 
 The PlayCanvas Engine supports custom shaders for Gaussian Splats, allowing you to create advanced visual effects and customize the rendering behavior beyond the standard implementation.

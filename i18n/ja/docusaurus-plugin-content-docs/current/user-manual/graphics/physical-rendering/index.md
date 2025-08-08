@@ -1,6 +1,5 @@
 ---
 title: 物理ベースレンダリング (PBR)
-sidebar_position: 3
 ---
 
 ![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  

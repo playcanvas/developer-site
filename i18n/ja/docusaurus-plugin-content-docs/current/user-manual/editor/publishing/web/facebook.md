@@ -1,6 +1,5 @@
 ---
 title: Facebook
-sidebar_position: 6
 ---
 
 [Facebook][1]から大勢のユーザにPlayCanvasゲームを公開することができます。PlayCanvasからFacebookにゲームを公開するのは簡単です。

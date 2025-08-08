@@ -1,6 +1,5 @@
 ---
 title: Nested Templates
-sidebar_position: 2
 ---
 
 PlayCanvasは、Nested Templates(ネストされたテンプレート)をサポートしています。これは、他のテンプレートのインスタンスを子として持つテンプレートのことです。例えば、果物が別のテンプレートである Tree Template を想像してください。

@@ -1,6 +1,5 @@
 ---
 title: エディタの使用
-sidebar_position: 4
 ---
 
 [PlayCanvas Editor](/user-manual/editor) を使用して、シンプルな Gaussian splat アプリケーションを段階的に構築しましょう。インタラクティブな3Dの猫のおもちゃのsplatを回転させることができるシーンを作成します。

@@ -1,6 +1,5 @@
 ---
 title: The Editor Workflow
-sidebar_position: 1
 ---
 
 Building 3D web apps with the PlayCanvas Editor is easy.

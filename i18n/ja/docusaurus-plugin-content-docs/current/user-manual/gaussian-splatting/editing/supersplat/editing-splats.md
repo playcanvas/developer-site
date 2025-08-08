@@ -1,6 +1,5 @@
 ---
 title: Splatsの編集
-sidebar_position: 5
 ---
 
 ## 編集モード

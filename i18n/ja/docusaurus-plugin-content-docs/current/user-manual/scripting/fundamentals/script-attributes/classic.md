@@ -1,6 +1,5 @@
 ---
 title: クラシックリファレンス
-sidebar_position: 2
 ---
 
 :::note

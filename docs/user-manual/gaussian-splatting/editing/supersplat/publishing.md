@@ -1,6 +1,5 @@
 ---
 title: Publishing
-sidebar_position: 9
 ---
 
 The SuperSplat Editor allows you to publish your splat scenes to the web at [https://superspl.at/](https://superspl.at/).

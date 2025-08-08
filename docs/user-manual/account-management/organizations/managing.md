@@ -1,6 +1,5 @@
 ---
 title: Managing Organizations
-sidebar_position: 2
 ---
 
 ### Permissions {#permissions}

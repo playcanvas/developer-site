@@ -1,6 +1,5 @@
 ---
 title: ESM リファレンス
-sidebar_position: 1
 ---
 
 :::note

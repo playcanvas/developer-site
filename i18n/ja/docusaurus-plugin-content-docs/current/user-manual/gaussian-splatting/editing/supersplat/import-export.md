@@ -1,6 +1,5 @@
 ---
 title: インポートとエクスポート
-sidebar_position: 3
 ---
 
 ## 対応ファイル形式 {#supported-file-formats}

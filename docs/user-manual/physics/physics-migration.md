@@ -1,6 +1,5 @@
 ---
 title: Updating ammo.js
-sidebar_position: 7
 ---
 
 ### Introduction

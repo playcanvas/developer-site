@@ -1,6 +1,5 @@
 ---
 title: 例
-sidebar_position: 4
 ---
 
 ここでは、さまざまなPCUI要素を示す簡単な例をいくつか紹介します。

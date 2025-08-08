@@ -1,6 +1,5 @@
 ---
 title: 用語集
-sidebar_position: 26
 ---
 
 以下、PlayCanvas エンジンおよびツールで使用する用語の概要です。

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Performance
-sidebar_position: 8
 ---
 
 Here are some tips to help you uncover common performance problems

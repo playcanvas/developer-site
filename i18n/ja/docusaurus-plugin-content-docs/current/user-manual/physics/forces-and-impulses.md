@@ -1,6 +1,5 @@
 ---
 title: 力と衝撃
-sidebar_position: 2
 ---
 
 ダイナミックなRigidBodyは力 (Force) や衝撃 (Impulse) に応答して移動します。力は一定の時間内にRigidBodyに加えられるのに対して、衝撃は瞬間的に加えられる力です。

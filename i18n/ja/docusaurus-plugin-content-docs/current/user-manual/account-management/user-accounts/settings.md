@@ -1,6 +1,5 @@
 ---
 title: アカウント設定
-sidebar_position: 2
 ---
 
 アカウント設定ページでは、基本的なプロフィール情報から請求およびセキュリティ設定まで、すべての個人アカウント構成オプションにアクセスできます。ユーザーアカウント設定を表示するには、[https://playcanvas.com/account](https://playcanvas.com/account)に移動します。次のようになります。

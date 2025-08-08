@@ -1,6 +1,5 @@
 ---
 title: DOM Overlay
-sidebar_position: 1
 ---
 
 When using mono screen displays for AR sessions, you can use regular HTML and CSS for the UI. This API provides the ability to overlay DOM elements over the AR application screen.

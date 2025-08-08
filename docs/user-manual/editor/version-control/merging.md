@@ -1,6 +1,5 @@
 ---
 title: Merging and resolving conflicts
-sidebar_position: 3
 ---
 
 Merging is the process by which you combine work that has been performed in one branch with work that has been performed in another branch. Merging is a natural part of the branch based workflow described in the [branches documentation][1].

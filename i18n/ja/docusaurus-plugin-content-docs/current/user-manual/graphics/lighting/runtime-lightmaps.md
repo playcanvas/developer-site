@@ -1,6 +1,5 @@
 ---
 title: ランタイムライトマップ
-sidebar_position: 5
 ---
 
 ![Sponza](/img/user-manual/graphics/lighting/lightmapping/sponza.jpg)

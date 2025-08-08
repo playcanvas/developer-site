@@ -1,6 +1,5 @@
 ---
 title: Animation Assets 
-sidebar_position: 2
 ---
 
 ![Animation Assets](/img/user-manual/anim/animation_assets.png)

@@ -1,6 +1,5 @@
 ---
 title: 初めてのPlayCanvasアプリを作る
-sidebar_position: 2
 ---
 
 PlayCanvas Editorでアプリケーションを開発するのは簡単で楽しいです。基本を学ぶのに数分費やしましょう。以下のシンプルな3Dアプリを再現します。

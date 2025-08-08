@@ -1,6 +1,5 @@
 ---
 title: Calling the Engine API
-sidebar_position: 6
 ---
 
 When writing PlayCanvas scripts, you're working with the [PlayCanvas Engine API](https://api.playcanvas.com/engine/). This page covers the essential classes and patterns you'll use most often in your scripts.

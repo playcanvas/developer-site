@@ -1,6 +1,5 @@
 ---
 title: Optimizing Load Time
-sidebar_position: 7
 ---
 
 Optimizing isn't just related to improving frame rate. Fast load times are also critical. The faster your app loads, the more likely your users will stick around to experience it. Aim to have your app load in less than 5 seconds to prevent users from churning.

@@ -1,6 +1,5 @@
 ---
 title: PlayCanvasホスティング
-sidebar_position: 1
 ---
 
 あなたのゲームを公開する最も速くて簡単な方法は、playcanvas.comに公開することです。

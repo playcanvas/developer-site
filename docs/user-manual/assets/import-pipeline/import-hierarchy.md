@@ -1,6 +1,5 @@
 ---
 title: Import Hierarchy
-sidebar_position: 1
 ---
 
 PlayCanvas supports importing models with their meshes as a hierarchy of entities in the scene. This allows you to edit the different meshes directly in the Editor. Components can be added, attach other entities, move/rotate/scale entities in the hierarchy etc.

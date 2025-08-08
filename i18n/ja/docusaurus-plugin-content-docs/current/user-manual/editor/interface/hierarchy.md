@@ -1,6 +1,5 @@
 ---
 title: ヒエラルキーパネル (Hierarchy)
-sidebar_position: 2
 ---
 
 ![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.png)

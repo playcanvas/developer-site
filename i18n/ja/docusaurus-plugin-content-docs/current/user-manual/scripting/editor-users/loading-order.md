@@ -1,6 +1,5 @@
 ---
 title: スクリプトのロード順序
-sidebar_position: 6
 ---
 
 ## ESMスクリプト

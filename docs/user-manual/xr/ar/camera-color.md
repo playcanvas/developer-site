@@ -1,6 +1,5 @@
 ---
 title: Camera Color
-sidebar_position: 1
 ---
 
 In AR, the rendered image is projected over the reconstructed camera texture on the pass-through device types. This texture can be accessed by the application.

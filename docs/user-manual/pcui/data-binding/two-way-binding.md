@@ -1,6 +1,5 @@
 ---
 title: Two Way Binding
-sidebar_position: 2
 ---
 
 Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in React to showcase binding with React components.

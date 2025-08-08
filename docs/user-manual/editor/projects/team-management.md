@@ -1,6 +1,5 @@
 ---
 title: Team Management
-sidebar_position: 4
 ---
 
 Effective team management is crucial for collaborative development in PlayCanvas. This section covers how to add team members, manage permissions, and coordinate with your development team.

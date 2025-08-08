@@ -1,6 +1,5 @@
 ---
 title: Script Attributes
-sidebar_position: 5
 ---
 
 Script Attributes are a powerful feature in PlayCanvas that define the public, configurable interface of your scripts. They allow you to expose specific parameters that can be easily tweaked, either programmatically when instantiating or configuring scripts in code or visually within the [PlayCanvas Editor](../../../editor/index.md). This means you can write a script once, and then easily adjust its behavior and properties for different instances or by different team members.

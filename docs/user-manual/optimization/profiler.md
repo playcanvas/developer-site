@@ -1,6 +1,5 @@
 ---
 title: Profiler
-sidebar_position: 2
 ---
 
 PlayCanvas provides an real-time profiler to assist in diagnosing performance problems.

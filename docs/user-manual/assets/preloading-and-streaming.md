@@ -1,6 +1,5 @@
 ---
 title: Preloading and Streaming
-sidebar_position: 7
 ---
 
 On the web, it's critical to get users into your application as soon as possible after they load the page. Presenting a loading bar and asking people to wait will lead to visitors leaving the page before your application has even got started. The PlayCanvas asset system implements a number of features to help you streamline the loading process and get your application running as fast as possible.

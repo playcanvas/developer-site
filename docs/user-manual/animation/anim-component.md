@@ -1,6 +1,5 @@
 ---
 title: Anim Component
-sidebar_position: 1
 ---
 
 Click here to learn how to use the [Anim Component][1].

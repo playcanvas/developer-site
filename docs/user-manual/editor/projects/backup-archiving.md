@@ -1,6 +1,5 @@
 ---
 title: Backup and Archiving
-sidebar_position: 6
 ---
 
 Protecting your PlayCanvas projects with regular backups is essential for safeguarding against accidental deletion, malicious actions, or data loss. This section covers all the methods available for backing up and restoring your projects.

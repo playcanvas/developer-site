@@ -1,6 +1,5 @@
 ---
 title: Device Pixel Ratio
-sidebar_position: 6
 ---
 
 Device pixel ratioは、ハードウェア画面上の物理ピクセルと論理ピクセル（画面の物理サイズに関連し、CSS解像度とも呼ばれる）の比率です。

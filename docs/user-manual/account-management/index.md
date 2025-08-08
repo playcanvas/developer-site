@@ -1,6 +1,5 @@
 ---
 title: Account Management
-sidebar_position: 2
 ---
 
 Welcome to Account Management! This section covers everything you need to know about managing your PlayCanvas account, from initial setup to advanced Organization features.

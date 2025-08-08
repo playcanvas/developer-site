@@ -1,6 +1,5 @@
 ---
 title: Your First App
-sidebar_position: 2
 ---
 
 Developing applications in the PlayCanvas Editor is easy and fun. Let's spend a few minutes learning the basics. We'll recreate the following simple 3D app:

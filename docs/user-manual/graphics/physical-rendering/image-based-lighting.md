@@ -1,6 +1,5 @@
 ---
 title: Image Based Lighting
-sidebar_position: 2
 ---
 
 To get best results with Physically Based Rendering in PlayCanvas you can use the technique called Image Based Lighting or IBL, it allows to use pre-rendered image data as source information for ambient and reflection light.

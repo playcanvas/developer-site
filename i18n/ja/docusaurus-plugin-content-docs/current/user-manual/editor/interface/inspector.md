@@ -1,6 +1,5 @@
 ---
 title: インスペクターパネル (Inspector)
-sidebar_position: 4
 ---
 
 ![Inspector Panel](/img/user-manual/editor/inspector/inspector.png)

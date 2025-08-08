@@ -1,6 +1,5 @@
 ---
 title: VS Code拡張機能
-sidebar_position: 4
 ---
 
 ソース管理、GitHub Copilot、幅広い拡張機能といった機能で強化されたコード編集体験を求める開発者にとって、Visual Studio Code (VS Code)をPlayCanvasと統合することは、組み込みのCode Editorに対する強力な代替手段を提供します。この目的のために、当社は[オープンソース](https://github.com/playcanvas/vscode-extension)のVS Code拡張機能を提供しています。

@@ -1,6 +1,5 @@
 ---
 title: Building Models
-sidebar_position: 2
 ---
 
 Building art and animations for PlayCanvas can be done using almost any of the many 3D modeling programs available. For example: Blender, SketchUp, Autodesk 3D Studio Max or Autodesk Maya.

@@ -1,6 +1,5 @@
 ---
 title: Getting Started
-sidebar_position: 1
 ---
 
 Before you begin, make sure you have [Node.js](https://nodejs.org/) 18 or later installed.

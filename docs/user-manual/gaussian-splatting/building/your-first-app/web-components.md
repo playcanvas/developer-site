@@ -1,6 +1,5 @@
 ---
 title: Using Web Components
-sidebar_position: 2
 ---
 
 Let's build a simple Gaussian splat application step by step using [PlayCanvas Web Components](/user-manual/web-components). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.

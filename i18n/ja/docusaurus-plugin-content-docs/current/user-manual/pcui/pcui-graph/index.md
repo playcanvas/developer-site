@@ -1,6 +1,5 @@
 ---
 title: PCUI Graph
-sidebar_position: 5
 ---
 
 ![PCUI Graph バナー](/img/user-manual/pcui/pcui-graph-banner.png)

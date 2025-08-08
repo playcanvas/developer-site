@@ -1,6 +1,5 @@
 ---
 title: PlayCanvas Hosting
-sidebar_position: 1
 ---
 
 The fastest, easiest, most convenient way to publish your game is to publish it to playcanvas.com.

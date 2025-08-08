@@ -1,6 +1,5 @@
 ---
 title: Importing 3D Models
-sidebar_position: 4
 ---
 
 3D models and animations are imported into PlayCanvas by uploading scene files from a [3D modeling application][1] such as [Blender][2], 3D Studio Max or Maya.

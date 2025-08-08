@@ -1,6 +1,5 @@
 ---
 title: Creating Your Account
-sidebar_position: 1
 ---
 
 To join the PlayCanvas community, we strongly recommend that you create a new account. Click **SIGN UP** at the top right of [https://playcanvas.com](https://playcanvas.com).

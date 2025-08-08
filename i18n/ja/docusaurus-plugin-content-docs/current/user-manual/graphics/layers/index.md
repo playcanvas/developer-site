@@ -1,6 +1,5 @@
 ---
 title: レイヤー
-sidebar_position: 9
 ---
 
 ## レイヤーの概要 {#layers-overview}

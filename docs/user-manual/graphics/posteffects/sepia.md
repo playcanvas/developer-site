@@ -1,6 +1,5 @@
 ---
 title: Sepia Effect
-sidebar_position: 5
 ---
 
 The Sepia effect makes the image look like an old photograph.

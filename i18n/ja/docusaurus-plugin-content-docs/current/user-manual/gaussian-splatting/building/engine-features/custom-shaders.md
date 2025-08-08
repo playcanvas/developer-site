@@ -1,6 +1,5 @@
 ---
 title: カスタムシェーダー
-sidebar_position: 4
 ---
 
 PlayCanvas EngineはGaussian Splats向けにカスタムシェーダーをサポートしており、高度な視覚効果を作成し、標準の実装を超えてレンダリング動作をカスタマイズできます。

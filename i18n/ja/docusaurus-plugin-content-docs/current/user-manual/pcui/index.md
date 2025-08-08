@@ -1,6 +1,5 @@
 ---
 title: PCUI
-sidebar_position: 20.5
 ---
 
 ![PCUI splash](/img/user-manual/pcui/pcui-banner.jpg)
