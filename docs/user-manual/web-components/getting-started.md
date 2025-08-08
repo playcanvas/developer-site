@@ -23,7 +23,7 @@ Next, in your HTML file, you will need an import map because the Web Components 
             "playcanvas": "/node_modules/playcanvas/build/playcanvas.mjs"
         }
     }
-</script>
+    </script>
 ```
 
 You can then import the Web Components as follows:
@@ -42,7 +42,7 @@ Instead of loading the library from a local package, you can instead opt to load
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.10.5/build/playcanvas.mjs"
+            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
         }
     }
 </script>
@@ -51,8 +51,14 @@ Instead of loading the library from a local package, you can instead opt to load
 And the components would now be imported as follows:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.8/dist/pwc.mjs"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"></script>
 ```
+
+:::note[Versioning]
+
+The snippets above use `@latest` for convenience. For production deployments, pin to a specific version to ensure deterministic builds (for example: `playcanvas@2.x.y` and `@playcanvas/web-components@x.y.z`). See the release notes for the latest stable versions: [PlayCanvas Engine releases](https://github.com/playcanvas/engine/releases) and [Web Components releases](https://github.com/playcanvas/web-components/releases).
+
+:::
 
 ## Boilerplate HTML
 
@@ -68,11 +74,11 @@ Let's see how this looks in a minimal boilerplate HTML file:
         <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.10.5/build/playcanvas.mjs"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
                 }
             }
         </script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.8/dist/pwc.mjs"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"></script>
         <style>
             body {
                 margin: 0;
