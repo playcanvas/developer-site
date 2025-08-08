@@ -23,7 +23,7 @@ Next, in your HTML file, you will need an import map because the Web Components 
             "playcanvas": "/node_modules/playcanvas/build/playcanvas.mjs"
         }
     }
-    </script>
+</script>
 ```
 
 You can then import the Web Components as follows:
