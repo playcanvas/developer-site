@@ -59,7 +59,6 @@ npm install playcanvas @playcanvas/web-components --save-dev
 上記のスニペットでは利便性のために `@latest` を使用しています。本番環境では確定的なビルドのために特定のバージョンに固定することを推奨します（例: `playcanvas@2.x.y`、`@playcanvas/web-components@x.y.z`）。最新の安定版はリリースノートを参照してください: [PlayCanvas Engine リリース](https://github.com/playcanvas/engine/releases) と [Web Components リリース](https://github.com/playcanvas/web-components/releases)。
 
 :::
-```
 
 ## ボイラープレートHTML
 
