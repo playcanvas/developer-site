@@ -28,7 +28,7 @@ title: <pc-light>
 | `shadow-distance` | Number | `"16"` | シャドウレンダリングの最大距離 |
 | `shadow-resolution` | Number | `"1024"` | シャドウマップの解像度 |
 | `shadow-type` | Enum | `"pcf3-32f"` | 影のフィルタリング: `"pcf1-16f"` \| `"pcf1-32f"` \| `"pcf3-16f"` \| `"pcf3-32f"` \| `"pcf5-16f"` \| `"pcf5-32f"` \| `"vsm-16f"` \| `"vsm-32f"` \| `"pcss-32f"` |
-| `type` | Enum | `"directional"` | ライトのタイプ: `"directional"` \| `"point"` \| `"omni"` |
+| `type` | Enum | `"directional"` | ライトのタイプ: `"directional"` \| `"omni"` \| `"spot"` |
 | `vsm-bias` | Number | `"0.01"` | バリアンスシャドウマップのバイアス |
 
 </div>

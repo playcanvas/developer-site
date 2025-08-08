@@ -29,7 +29,7 @@ title: <pc-sky>
 ## 例
 
 ```html
-<pc-asset id="skybox" src="assets/skybox.webp" preload></pc-asset>
+<pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
 <pc-scene>
     <pc-sky asset="skybox"></pc-sky>
 </pc-scene>

@@ -28,7 +28,7 @@ The `<pc-light>` tag is used to define a light component.
 | `shadow-distance` | Number | `"16"` | Maximum shadow rendering distance |
 | `shadow-resolution` | Number | `"1024"` | Shadow map resolution |
 | `shadow-type` | Enum | `"pcf3-32f"` | Shadow filtering: `"pcf1-16f"` \| `"pcf1-32f"` \| `"pcf3-16f"` \| `"pcf3-32f"` \| `"pcf5-16f"` \| `"pcf5-32f"` \| `"vsm-16f"` \| `"vsm-32f"` \| `"pcss-32f"` |
-| `type` | Enum | `"directional"` | Light type: `"directional"` \| `"point"` \| `"omni"` |
+| `type` | Enum | `"directional"` | Light type: `"directional"` \| `"omni"` \| `"spot"` |
 | `vsm-bias` | Number | `"0.01"` | Variance shadow map bias |
 
 </div>

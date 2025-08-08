@@ -26,4 +26,4 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 | [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
 | [`<pc-sound>`](pc-sound) | Defines a single sound assigned to a sound component. |
 | [`<pc-sounds>`](pc-sounds) | Defines a sound component. |
-| [`<pc-splat>`](pc-splat) | Defines a splat component that render 3D Gaussian Splats. |
+| [`<pc-splat>`](pc-splat) | Defines a splat component that renders 3D Gaussian Splats. |
