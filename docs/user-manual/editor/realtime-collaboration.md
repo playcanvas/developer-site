@@ -24,7 +24,7 @@ Each user is assigned a unique 'user color' that is used throughout the interfac
 
 :::
 
-## Real-time Chat
+## Real-time Chat {#real-time-chat}
 
 If you select the CHAT button, the Chat panel will expand and you can broadcast messages to other users present in the Editor with you.
 
