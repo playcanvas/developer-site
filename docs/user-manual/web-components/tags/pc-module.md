@@ -28,7 +28,7 @@ The `<pc-module>` tag is used to load a WebAssembly module.
 ```html
 <pc-app>
     <!-- Load the ammo.js module -->
-    <pc-module name="ammo" glue="ammo.js" wasm="ammo.wasm.wasm" fallback="ammo.wasm.js"></pc-module>
+    <pc-module name="ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
 </pc-app>
 ```
 
