@@ -1,12 +1,11 @@
 ---
-title: Editor Preferences
+title: Editor Settings
+sidebar_label: Editor
 ---
 
-By default, the Editor is configured with settings that should suit the majority of users. However, in some circumstances, you may wish to modify the default behavior of the Editor. To do this, load the Settings into the [Inspector](../inspector) by clicking the 'cog' icon on the [Toolbar](../toolbar) or in the [Viewport](../viewport).
+By default, the Editor is configured with settings that should suit the majority of users. However, in some circumstances, you may wish to modify the default behavior of the Editor.
 
-![Settings](/img/user-manual/editor/toolbar/settings.png)
-
-Then, navigate to the `EDITOR` section:
+In Settings, navigate to the `EDITOR` section:
 
 ![Editor Settings](/img/user-manual/editor/interface/preferences.webp)
 

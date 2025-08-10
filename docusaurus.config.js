@@ -43,7 +43,6 @@ const config = {
       redirects: [
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
         { from: ['/user-manual/billing/'], to: '/user-manual/account-management/billing/' },
-        { from: ['/user-manual/editor/interface/settings/'], to: '/user-manual/editor/interface/preferences/' },
         { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },
         { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },
         { from: ['/user-manual/graphics/gaussian-splatting/'], to: '/user-manual/gaussian-splatting/' },
