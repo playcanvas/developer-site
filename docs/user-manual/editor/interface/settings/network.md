@@ -5,6 +5,12 @@ sidebar_label: Network
 
 Configures network retry behavior for asset loading.
 
+:::note
+
+These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+
+:::
+
 ## Settings
 
 | Setting | Description |

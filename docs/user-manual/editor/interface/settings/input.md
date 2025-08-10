@@ -5,6 +5,12 @@ sidebar_label: Input
 
 Enables or disables input device handling for the application.
 
+:::note
+
+These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+
+:::
+
 ## Settings
 
 | Setting | Description |

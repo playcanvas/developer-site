@@ -5,6 +5,12 @@ sidebar_label: Asset Import
 
 Controls default behavior for imported assets.
 
+:::note
+
+These settings affect only you and global for the whole project.
+
+:::
+
 ## General
 
 | Setting | Description |

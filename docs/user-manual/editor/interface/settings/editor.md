@@ -5,15 +5,15 @@ sidebar_label: Editor
 
 By default, the Editor is configured with settings that should suit the majority of users. However, in some circumstances, you may wish to modify the default behavior of the Editor.
 
+:::note
+
+These settings affect only you and are global for the whole project. They are 'sticky' and persist over multiple sessions.
+
+:::
+
 In Settings, navigate to the `EDITOR` section:
 
 ![Editor Settings](/img/user-manual/editor/interface/preferences.webp)
-
-:::note
-
-Updates to Editor Preferences only apply to the current project and only to you. They are 'sticky' and persist over multiple sessions.
-
-:::
 
 Here is a breakdown of the available settings:
 

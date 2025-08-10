@@ -5,6 +5,12 @@ sidebar_label: Layers
 
 Layers determine which objects are rendered together and in what order.
 
+:::note
+
+These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+
+:::
+
 ## Layers
 
 - **Add Layer**: Creates a new layer for organizing scene objects.

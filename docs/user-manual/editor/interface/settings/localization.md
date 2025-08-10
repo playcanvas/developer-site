@@ -5,6 +5,12 @@ sidebar_label: Localization
 
 Manages the JSON files for supporting multiple languages.
 
+:::note
+
+These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+
+:::
+
 ## Settings
 
 | Setting | Description |

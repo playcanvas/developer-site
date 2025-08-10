@@ -5,6 +5,12 @@ sidebar_label: Engine
 
 Configure which PlayCanvas Engine version is used when launching, publishing, or downloading builds.
 
+:::note
+
+These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+
+:::
+
 ## Engine
 
 | Setting | Description |

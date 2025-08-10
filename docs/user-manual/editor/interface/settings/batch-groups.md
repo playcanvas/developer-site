@@ -5,6 +5,12 @@ sidebar_label: Batch Groups
 
 Batch Groups combine multiple meshes into a single draw call to reduce CPU overhead and improve rendering performance.
 
+:::note
+
+These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+
+:::
+
 ## Adding a Batch Group
 
 - Click **Add Group** to create a new batch group.

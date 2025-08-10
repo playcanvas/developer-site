@@ -5,6 +5,12 @@ sidebar_label: Physics
 
 Controls the global physics simulation settings.
 
+:::note
+
+These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+
+:::
+
 ## Settings
 
 | Setting | Description |

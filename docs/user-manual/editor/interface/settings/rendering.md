@@ -5,6 +5,12 @@ sidebar_label: Rendering
 
 Controls lighting, resolution, and rendering features.
 
+:::note
+
+These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+
+:::
+
 ## Environment
 
 | Setting | Description |
