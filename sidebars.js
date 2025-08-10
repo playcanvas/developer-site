@@ -194,7 +194,7 @@ const sidebars = {
             'user-manual/editor/interface/viewport',
             {
               type: 'category',
-              label: 'Settings',
+              label: 'Project Settings',
               link: {
                 type: 'doc',
                 id: 'user-manual/editor/interface/settings/index',
