@@ -27,4 +27,4 @@ These settings affect all users on the currently active [branch](../../version-c
 
 - Use **static batching** whenever possible for optimal performance.
 - Keep **Max AABB** reasonable to avoid large batches that reduce culling efficiency.
- - Assign batch groups only to relevant layers to avoid unnecessary batching.
+- Assign batch groups only to relevant layers to avoid unnecessary batching.

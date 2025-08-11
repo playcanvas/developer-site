@@ -35,5 +35,4 @@ Here is a breakdown of the available settings:
 | **Locale**                       | The locale to preview in the editor and when you launch the application. This is only visible to you, not to other team members. |
 | **Chat Notifications**           | Receive notifications for the Editor's built-in [real-time chat](../../realtime-collaboration#real-time-chat). |
 | **Rename Duplicated Entities**   | When enabled, duplicated entities are renamed by appending an incrementing number to ensure uniqueness. For example, 'Box' becomes 'Box2'. |
-| **Lightmapper Auto Bake**        | Controls whether the [runtime lightmapper](/user-manual/graphics/lighting/runtime-lightmaps) automatically rebakes lightmaps 
-whenever the scene is updated. |
+| **Lightmapper Auto Bake**        | Controls whether the [runtime lightmapper](/user-manual/graphics/lighting/runtime-lightmaps) automatically rebakes lightmaps whenever the scene is updated. |
