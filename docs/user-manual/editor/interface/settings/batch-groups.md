@@ -18,10 +18,10 @@ These settings affect all users on the currently active [branch](../../version-c
 
 | Setting | Description |
 | --- | --- |
-| **Name** | A label for the batch group. |
-| **Dynamic** | If enabled, allows batched objects to move; otherwise, they are static for better performance. |
-| **Max AABB** | Sets the maximum size of the batch's bounding box (Axis-Aligned Bounding Box) in world units. |
-| **Layers** | Specifies which render layers the batch group will be applied to. |
+| **Name** | The name of the batch group. |
+| **Dynamic** | Enable to allow objects in this batch group to move, rotate, or scale after being batched. If your objects are completely static, disable this setting. |
+| **Max AABB** | The maximum size of any dimension of a bounding box around batched objects. Larger values batch more objects (fewer draw calls) but create bigger batched objects that are harder to cull. Smaller values create more draw calls but smaller, easier-to-cull batches. |
+| **Layers** | The layers that this batch group belongs to. |
 
 ### Notes
 

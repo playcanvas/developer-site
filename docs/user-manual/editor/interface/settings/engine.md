@@ -15,7 +15,7 @@ These settings affect all users on the currently active [branch](../../version-c
 
 | Setting | Description |
 | --- | --- |
-| **Engine Version** | The engine to use when you click Launch or when you publish or download a build. This setting is only valid during your current session and is not shared with team members. |
+| **Engine Version** | The engine to use when you click Launch or when you publish or download a build. This setting is only valid during your current session and is not shared among team members. |
 
 ### Notes
 

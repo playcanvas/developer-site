@@ -15,10 +15,10 @@ These settings affect all users on the currently active [branch](../../version-c
 
 | Setting | Description |
 | --- | --- |
-| **Keyboard** | Enable keyboard input. Disable to ignore all keyboard events. |
-| **Mouse** | Enable mouse input. Disable to ignore mouse events. |
-| **Touch** | Enable touchscreen input. |
-| **Gamepads** | Enable gamepad input. |
+| **Keyboard** | Enable keyboard input. Disable to ignore keyboard input in your application. |
+| **Mouse** | Enable mouse input. Disable to ignore mouse input in your application. |
+| **Touch** | Enable touch input. Disable to ignore touch input in your application. |
+| **Gamepads** | Enable gamepad input. Disable to ignore gamepad input in your application. |
 
 ### Notes
 

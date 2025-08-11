@@ -15,8 +15,8 @@ These settings affect all users on the currently active [branch](../../version-c
 
 | Setting | Description |
 | --- | --- |
-| **Assets** | Add existing localization JSON assets to the project. They will be parsed automatically when loaded. |
-| **Create New Asset** | Create a new localization asset (default format `en-US`). |
+| **Assets** | JSON assets that contain localization data. Assets in this list are automatically parsed for localization data when loaded. These are used to localize your text elements. |
+| **Create New Asset** | Creates a new localization JSON asset with the default en-US format. |
 
 ### Notes
 

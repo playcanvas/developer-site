@@ -31,8 +31,8 @@ Defines the sequence in which layers are drawn, and separates opaque and transpa
 | Column | Description |
 | --- | --- |
 | **Layer** | The name of the render layer. |
-| **Pass** | Either *Opaque* or *Transparent*. |
-| **Enabled** | Toggles rendering of that pass. |
+| **Pass** | Either:<ul><li><strong>Opaque</strong>: Renders opaque mesh instances</li><li><strong>Transparent</strong>: Renders semi‑transparent mesh instances</li></ul> |
+| **Enabled** | Enables or disables this part of the layer. When a part is disabled, the mesh instances of that part will not be rendered. |
 
 ### Notes
 

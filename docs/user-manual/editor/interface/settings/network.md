@@ -15,7 +15,7 @@ These settings affect all users on the currently active [branch](../../version-c
 
 | Setting | Description |
 | --- | --- |
-| **Asset Retries** | Number of retry attempts for failed asset downloads. |
+| **Asset Retries** | The maximum number of times to retry loading an asset if it fails to load. If an asset request fails, it will be retried with exponential backoff. |
 
 ### Notes
 

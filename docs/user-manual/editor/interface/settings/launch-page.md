@@ -15,7 +15,7 @@ These settings affect all users on the currently active [branch](../../version-c
 
 | Setting | Description |
 | --- | --- |
-| **Enable SharedArrayBuffer** | Enables use of the `SharedArrayBuffer` API for high-performance memory sharing between the main thread and Web Workers. Requires cross-origin isolation headers on the host page. |
+| **Enable SharedArrayBuffer** | Adds the required headers on the launch page to enable SharedArrayBuffer. |
 
 ### Notes
 

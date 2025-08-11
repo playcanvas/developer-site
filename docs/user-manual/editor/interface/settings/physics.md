@@ -15,8 +15,8 @@ These settings affect all users on the currently active [branch](../../version-c
 
 | Setting | Description |
 | --- | --- |
-| **Physics Library** | Add the Ammo asm.js and WASM modules to this project from the Store. Required for rigid body and collision components. |
-| **Gravity** | Acceleration applied to all rigid bodies. Default `(0, -9.8, 0)` approximates Earth gravity. Set to `0, 0, 0` for zero‑g. |
+| **Physics Library** | Add the Ammo asm.js and WebAssembly modules to this project from the PlayCanvas Store. |
+| **Gravity** | Gravity is the acceleration applied every frame to all rigid bodies in your scene. By default, it is set to -9.8 meters per second per second, which essentially approximates Earth's gravity. If you are making a game in space, you might want to set this to 0, 0, 0 (zero g). |
 
 ### Notes
 

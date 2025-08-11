@@ -19,20 +19,21 @@ Here is a breakdown of the available settings:
 
 | Setting                          | Description |
 | -------------------------------- | ----------- |
-| **Grid Divisions**               | Determines the number of divisions in the grid in the [Viewport](../viewport). |
-| **Grid Division Size**           | Sets the size of each grid division, affecting the grid scale. |
-| **Snap**                         | Sets the snap increment when using the [gizmos](../viewport#gizmos) in the [Viewport](../viewport). Useful for precise positioning. |
-| **Zoom Sensitivity**             | Adjusts the sensitivity of zooming in the [Viewport](../viewport). |
-| **Camera Depth Grabpass**        | Configures the camera to capture depth information for special effects. |
-| **Camera Color Grabpass**        | Configures the camera to capture color information for special effects. |
-| **Camera Clip Near**             | Sets the near clipping plane for all Editor cameras in the [Viewport](../viewport). |
-| **Camera Clip Far**              | Sets the far clipping plane for all Editor cameras in the [Viewport](../viewport). |
-| **Camera Clear Color**           | Sets the clear color for all Editor cameras in the [Viewport](../viewport). |
-| **Camera Tonemapping**           | Sets the tone mapping mode for all Editor cameras in the [Viewport](../viewport). |
-| **Camera Gamma**                 | Sets the gamma correction mode for all Editor cameras in the [Viewport](../viewport). |
-| **Show Fog**                     | Toggles the visibility of fog in the [Viewport](../viewport), even if it is enabled in the Scene Settings. |
-| **Icons Size**                   | Changes the size of entity icons in the [Viewport](../viewport). |
-| **Locale**                       | Sets the locale used by the [localization system](/user-manual/user-interface/localization) for display in the [Viewport](../viewport). |
-| **Chat Notifications**           | Toggles browser notifications for the Editor's built-in [real-time chat](../../realtime-collaboration#real-time-chat). |
-| **Rename Duplicated Entities**   | If enabled, duplicated entity names get an incremental number added to the end. This helps to ensure unique naming of entities. |
-| **Lightmapper Auto Bake**        | Controls whether the [runtime lightmapper](/user-manual/graphics/lighting/runtime-lightmaps) automatically rebakes lightmaps whenever the scene is updated. |
+| **Grid Divisions**               | Divisions specifies the number of grid cells in each horizontal direction. Set to 0 to disable the grid. |
+| **Grid Division Size**           | Size specifies the size of a cell. |
+| **Snap**                         | Set the increment for [gizmo](../viewport#gizmos) snapping. Hold Shift or use the Snap toggle on the toolbar to enable snapping while using gizmos. |
+| **Zoom Sensitivity**             | Change this value if you want to adjust the zoom sensitivity in the Editor viewport. |
+| **Camera Depth Grabpass**        | Enable generating a depth map texture for the editor viewport. Required to preview certain material effects. |
+| **Camera Color Grabpass**        | Enable generating a color map texture for the editor viewport. Required to preview certain material effects. |
+| **Camera Clip Near**             | Adjust the editor camera Near clip value. This setting does not affect the game. |
+| **Camera Clip Far**              | Adjust the editor camera Far clip value. This setting does not affect the game. |
+| **Camera Clear Color**           | Set the editor camera clear color. This does not affect the game. |
+| **Camera Tonemapping**           | Set the editor camera tone mapping. This setting does not affect the game. |
+| **Camera Gamma**                 | Set the editor camera gamma correction. This setting does not affect the game. |
+| **Show Fog**                     | Enable fog rendering in the viewport. |
+| **Icons Size**                   | Size of icons displayed in the editor viewport. |
+| **Locale**                       | The locale to preview in the editor and when you launch the application. This is only visible to you, not to other team members. |
+| **Chat Notifications**           | Receive notifications for the Editor's built-in [real-time chat](../../realtime-collaboration#real-time-chat). |
+| **Rename Duplicated Entities**   | When enabled, duplicated entities are renamed by appending an incrementing number to ensure uniqueness. For example, 'Box' becomes 'Box2'. |
+| **Lightmapper Auto Bake**        | Controls whether the [runtime lightmapper](/user-manual/graphics/lighting/runtime-lightmaps) automatically rebakes lightmaps 
+whenever the scene is updated. |
