@@ -11,6 +11,12 @@ These settings affect all users on the currently active [branch](../../version-c
 
 :::
 
+Navigate to the `NETWORK` section and expand the panel:
+
+![Network Settings](/img/user-manual/editor/interface/settings/network.webp)
+
+Here is a breakdown of the available settings:
+
 ## Settings
 
 | Setting | Description |

@@ -11,6 +11,12 @@ These settings affect all users on the currently active [branch](../../version-c
 
 :::
 
+Navigate to the `LIGHTMAPPING` section and expand the panel:
+
+![Lightmapping Settings](/img/user-manual/editor/interface/settings/lightmapping.webp)
+
+Here is a breakdown of the available settings:
+
 ## General
 
 | Setting | Description |

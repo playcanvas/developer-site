@@ -11,6 +11,12 @@ These settings affect all users on the currently active [branch](../../version-c
 
 :::
 
+Navigate to the `INPUT` section and expand the panel:
+
+![Input Settings](/img/user-manual/editor/interface/settings/input.webp)
+
+Here is a breakdown of the available settings:
+
 ## Settings
 
 | Setting | Description |

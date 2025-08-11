@@ -11,6 +11,12 @@ These settings affect all users on the currently active [branch](../../version-c
 
 :::
 
+Navigate to the `LAUNCH PAGE` section and expand the panel:
+
+![Launch Page Settings](/img/user-manual/editor/interface/settings/launch-page.webp)
+
+Here is a breakdown of the available settings:
+
 ## Settings
 
 | Setting | Description |

@@ -11,6 +11,12 @@ These settings affect all users on the currently active [branch](../../version-c
 
 :::
 
+Navigate to the `ENGINE` section and expand the panel:
+
+![Engine Settings](/img/user-manual/editor/interface/settings/engine.webp)
+
+Here is a breakdown of the available settings:
+
 ## Engine
 
 | Setting | Description |

@@ -11,6 +11,12 @@ These settings affect all users on the currently active [branch](../../version-c
 
 :::
 
+Navigate to the `LAYERS` section and expand the panel:
+
+![Layers Settings](/img/user-manual/editor/interface/settings/layers.webp)
+
+Here is a breakdown of the available settings:
+
 ## Layers
 
 - **Add Layer**: Creates a new layer for organizing scene objects.
