@@ -84,7 +84,7 @@ In this animation we have created 4 batch groups for the buildings, the cacti, t
 - **Batch** - An engine object created at runtime which is the set of mesh instances that are rendered in a single draw call. A batch group may result in multiple batches depending on the properties of the mesh instances that are added to the batch group.
 - **Batch Manager** - The programmatic interface for creating and updating batches at runtime. See [API documentation][8].
 
-[6]: /user-manual/scenes/settings#batch-groups
+[6]: /user-manual/editor/interface/settings/batch-groups/
 [7]: /user-manual/scenes/components/model
 [8]: https://api.playcanvas.com/engine/classes/BatchManager.html
 [9]: /user-manual/scenes/components/sprite

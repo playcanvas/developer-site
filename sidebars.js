@@ -362,7 +362,6 @@ const sidebars = {
         'user-manual/scenes/entities/index',
         'user-manual/scenes/loading-scenes',
         'user-manual/scenes/managing-scenes',
-        'user-manual/scenes/settings',
       ],
     },
     {

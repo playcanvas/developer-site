@@ -144,6 +144,6 @@ Soft Directional Lightや環境ライトのベイキングの場合、ベイク�
 [4]: /user-manual/graphics/lighting/shadows
 [9]: /user-manual/graphics/lighting/lightmapping/#uv-mapping
 [11]: /user-manual/graphics/advanced-rendering/batching
-[14]: /user-manual/scenes/settings#ambient-color
-[15]: /user-manual/scenes/settings#skybox
-[16]: /user-manual/scenes/settings#lightmapping
+[14]: /user-manual/editor/interface/settings/rendering/
+[15]: /user-manual/editor/interface/settings/rendering/
+[16]: /user-manual/editor/interface/settings/lightmapping/
