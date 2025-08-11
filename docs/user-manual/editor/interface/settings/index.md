@@ -2,7 +2,7 @@
 title: Project Settings
 ---
 
-This section documents all configurable settings panels in the PlayCanvas Editor. Each section describes the available options, their purpose, and practical usage notes.
+Project Settings control how your project runs and how the Editor behaves for your team. They include engine/runtime configuration (rendering, physics, input, network), asset import defaults, and Editor preferences. Some settings apply only to you (session or user-specific), while most affect all collaborators on the current branch.
 
 ## Opening Settings
 
@@ -10,7 +10,9 @@ Load the Settings into the [Inspector](../inspector) by clicking the 'cog' icon 
 
 ![Settings](/img/user-manual/editor/toolbar/settings.png)
 
-## Contents
+## Settings Overview
+
+Settings are grouped into categories, where each category is shown as a collapsible panel. These categories are listed in the Inspector in the following order:
 
 | Panel | Description |
 | --- | --- |

@@ -11,7 +11,7 @@ These settings affect only you and are global for the whole project. They are 's
 
 :::
 
-In Settings, navigate to the `EDITOR` section:
+Navigate to the `EDITOR` section and expand the panel:
 
 ![Editor Settings](/img/user-manual/editor/interface/preferences.webp)
 
