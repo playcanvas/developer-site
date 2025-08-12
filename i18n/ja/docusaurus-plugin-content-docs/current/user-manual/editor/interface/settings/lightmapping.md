@@ -42,5 +42,3 @@ sidebar_label: Lightmapping
 | **Sphere Part** | アンビエントライトのベイクに含める球の割合。 |
 | **Occlusion Brightness** | ベイクされたアンビエントオクルージョンの明るさ。 |
 | **Occlusion Contrast** | ベイクされたアンビエントオクルージョンのコントラスト。 |
-
-

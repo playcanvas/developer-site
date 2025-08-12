@@ -29,5 +29,3 @@ PlayCanvas エディターからプロジェクトを実行する際に使用さ
 - 有効化する場合、ホスティング環境で以下の HTTP ヘッダーが配信されるようにしてください:
   - `Cross-Origin-Opener-Policy: same-origin`
   - `Cross-Origin-Embedder-Policy: require-corp`
-
-

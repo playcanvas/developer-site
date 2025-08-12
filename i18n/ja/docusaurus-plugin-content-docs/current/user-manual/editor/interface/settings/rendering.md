@@ -85,5 +85,3 @@ sidebar_label: Rendering
 | --- | --- |
 | **Basis Library** | Basis 圧縮をサポートするために必要なライブラリを追加します。 |
 | **Draco Library** | Draco 圧縮をサポートするために必要なライブラリを追加します。 |
-
-

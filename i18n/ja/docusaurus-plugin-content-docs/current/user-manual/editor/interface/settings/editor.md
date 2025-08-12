@@ -38,5 +38,3 @@ sidebar_label: Editor
 | **Chat Notifications** | エディター内蔵の[リアルタイムチャット](../../realtime-collaboration.md#real-time-chat)の通知を受け取ります。 |
 | **Rename Duplicated Entities** | 有効化すると、重複作成したエンティティに連番を付けて一意にします（例: 'Box' → 'Box2'）。 |
 | **Lightmapper Auto Bake** | [ランタイムライトマッパー](/user-manual/graphics/lighting/runtime-lightmaps)がシーン更新のたびに自動リベイクするかを制御します。 |
-
-
