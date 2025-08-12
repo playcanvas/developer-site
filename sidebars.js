@@ -328,6 +328,7 @@ const sidebars = {
         id: 'user-manual/scenes/index',
       },
       items: [
+        'user-manual/scenes/entities/index',
         {
           type: 'category',
           label: 'Components',
@@ -359,7 +360,6 @@ const sidebars = {
             'user-manual/scenes/components/sprite',
           ],
         },
-        'user-manual/scenes/entities/index',
         'user-manual/scenes/loading-scenes',
         'user-manual/scenes/managing-scenes',
       ],

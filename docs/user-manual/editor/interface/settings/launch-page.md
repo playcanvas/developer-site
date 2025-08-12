@@ -25,7 +25,7 @@ Here is a breakdown of the available settings:
 
 ### Notes
 
-- `SharedArrayBuffer` is required for some advanced features like multithreaded physics or WASM-based decoding.
+- [`SharedArrayBuffer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer) is required for some advanced features such as multithreaded physics.
 - When enabled, ensure your hosting setup serves the correct HTTP headers:
   - `Cross-Origin-Opener-Policy: same-origin`
   - `Cross-Origin-Embedder-Policy: require-corp`

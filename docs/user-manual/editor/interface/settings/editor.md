@@ -17,6 +17,8 @@ Navigate to the `EDITOR` section and expand the panel:
 
 Here is a breakdown of the available settings:
 
+## Settings
+
 | Setting                          | Description |
 | -------------------------------- | ----------- |
 | **Grid Divisions**               | Divisions specifies the number of grid cells in each horizontal direction. Set to 0 to disable the grid. |
