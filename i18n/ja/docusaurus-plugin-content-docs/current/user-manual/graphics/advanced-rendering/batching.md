@@ -84,7 +84,7 @@ if (element.batchGroupId)
 * **Batch** - レンダリングされるメッシュインスタンスのセットである、ランタイムで作成されるエンジンオブジェクト。Batch Groupには、バッチに追加されるメッシュインスタンスのプロパティに応じて、複数のバッチが作成される可能性があります。
 * **Batch Manager** - ランタイムでバッチを作成および更新するプログラムのインターフェイス。[APIドキュメント][8]を参照してください。
 
-[6]: /user-manual/scenes/settings#batch-groups
+[6]: /user-manual/editor/interface/settings/batch-groups/
 [7]: /user-manual/scenes/components/model
 [8]: https://api.playcanvas.com/engine/classes/BatchManager.html
 [9]: /user-manual/scenes/components/sprite

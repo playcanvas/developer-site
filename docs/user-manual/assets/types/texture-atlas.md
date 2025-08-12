@@ -29,5 +29,5 @@ The Frames of a texture atlas are keyed by a unique value, usually a integer str
 In addition to frame data the Texture Atlas contains the properties as a [texture asset][2].
 
 [2]: /user-manual/assets/types/texture
-[3]: /user-manual/scenes/settings#create-atlases
+[3]: /user-manual/editor/interface/settings/asset-import/
 [4]: /user-manual/assets/types/sprite

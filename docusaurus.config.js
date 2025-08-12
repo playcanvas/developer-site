@@ -43,7 +43,6 @@ const config = {
       redirects: [
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
         { from: ['/user-manual/billing/'], to: '/user-manual/account-management/billing/' },
-        { from: ['/user-manual/editor/interface/settings/'], to: '/user-manual/editor/interface/preferences/' },
         { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },
         { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },
         { from: ['/user-manual/graphics/gaussian-splatting/'], to: '/user-manual/gaussian-splatting/' },
@@ -51,6 +50,7 @@ const config = {
         { from: ['/user-manual/organizations/'], to: '/user-manual/account-management/organizations/' },
         { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
         { from: ['/user-manual/organizations/managing-organizations/'], to: '/user-manual/account-management/organizations/managing/' },
+        { from: ['/user-manual/editor/scene/settings/'], to: '/user-manual/editor/interface/settings/' },
         { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/scripting/editor-users/loading-order/' },
       ],
       createRedirects: (existingPath) => {

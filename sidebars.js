@@ -192,7 +192,28 @@ const sidebars = {
             'user-manual/editor/interface/inspector',
             'user-manual/editor/interface/assets',
             'user-manual/editor/interface/viewport',
-            'user-manual/editor/interface/preferences',
+            {
+              type: 'category',
+              label: 'Project Settings',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/interface/settings/index',
+              },
+              items: [
+                'user-manual/editor/interface/settings/engine',
+                'user-manual/editor/interface/settings/editor',
+                'user-manual/editor/interface/settings/asset-import',
+                'user-manual/editor/interface/settings/physics',
+                'user-manual/editor/interface/settings/rendering',
+                'user-manual/editor/interface/settings/layers',
+                'user-manual/editor/interface/settings/lightmapping',
+                'user-manual/editor/interface/settings/batch-groups',
+                'user-manual/editor/interface/settings/launch-page',
+                'user-manual/editor/interface/settings/input',
+                'user-manual/editor/interface/settings/localization',
+                'user-manual/editor/interface/settings/network',
+              ],
+            },
           ],
         },
         {
@@ -307,6 +328,7 @@ const sidebars = {
         id: 'user-manual/scenes/index',
       },
       items: [
+        'user-manual/scenes/entities/index',
         {
           type: 'category',
           label: 'Components',
@@ -338,10 +360,8 @@ const sidebars = {
             'user-manual/scenes/components/sprite',
           ],
         },
-        'user-manual/scenes/entities/index',
         'user-manual/scenes/loading-scenes',
         'user-manual/scenes/managing-scenes',
-        'user-manual/scenes/settings',
       ],
     },
     {

@@ -64,7 +64,7 @@ Add Asset (+) アイコンを使用して特定のアセットタイプを作成
 
 - ビューポートにモデルアセットをドラッグすると、モデルアセットが割り当てられたモデルコンポーネントを有する新しいエンティティが作成されます。ビューポートのカメラは自動的に新しく作成されたエンティティにズームします。
 - ビューポート内の特定のメッシュインスタンスの上にマテリアルをドラッグすると、マテリアルは(プレビューとして)ドラッグされるマテリアルに切り替えられます。マテリアルの変更を保持するには、マテリアルをドロップします。
-- ビューポートでシーンの背景の上にキューブマップをドラッグすると、キューブマップはシーンのスカイボックスのキューブマップとして割り当てられます。プロパティは[Scene Settings][4]からも設定することができます。
+- ビューポートでシーンの背景の上にキューブマップをドラッグすると、キューブマップはシーンのスカイボックスのキューブマップとして割り当てられます。このプロパティは[プロジェクト設定](/user-manual/editor/interface/settings/rendering/)でも設定できます。
 
 ## プロジェクト間でのコピーと貼り付け {#copy-and-paste-between-projects}
 
@@ -120,5 +120,4 @@ Editorはコードで作成されたアセットの参照を検出できませ�
 
 [2]: /user-manual/editor/interface/inspector
 [3]: /user-manual/editor/interface/viewport
-[4]: /user-manual/editor/interface/preferences
 [7]: https://api.playcanvas.com/engine/classes/AssetRegistry.html#findbytag

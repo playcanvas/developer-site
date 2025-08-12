@@ -64,7 +64,7 @@ You can also drag model, material, and cubemap assets directly into the [Viewpor
 
 - If you drag a model asset into the Viewport, a new entity will be created with a model component with the model asset assigned. The viewport camera will automatically zoom to the newly created entity.
 - If you drag a material over a particular mesh instance in the Viewport, its material will be switched (as a preview) to the material being dragged. To make the material change stick, simply drop the material.
-- If you drag a cubemap over the background of a scene in the Viewport, the cubemap will be assigned as the skybox cubemap of the scene. This property can also be set from the [Scene Settings][4].
+- If you drag a cubemap over the background of a scene in the Viewport, the cubemap will be assigned as the skybox cubemap of the scene. This property can also be set in the [Project Settings](/user-manual/editor/interface/settings/rendering/).
 
 ## Copy and Paste between Projects {#copy-and-paste-between-projects}
 
@@ -120,5 +120,4 @@ Selecting a reference will load it into the Inspector panel.
 
 [2]: /user-manual/editor/interface/inspector
 [3]: /user-manual/editor/interface/viewport
-[4]: /user-manual/editor/interface/preferences
 [7]: https://api.playcanvas.com/engine/classes/AssetRegistry.html#findbytag

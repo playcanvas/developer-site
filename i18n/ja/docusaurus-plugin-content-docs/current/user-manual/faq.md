@@ -86,7 +86,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 シーンにスカイボックスを作成するには、まず[Cubemapアセット](/user-manual/assets/types/cubemap/)を作成する必要があります。その後、Cubemapを3Dビューポートにドラッグアンドドロップするか、Scene Settingsに移動してSkyboxフィールドにCubemapをドラッグします。
 
-[詳細を見る](/user-manual/scenes/settings#skybox)
+[詳細を見る](/user-manual/editor/interface/settings/rendering/)
 
 ## アセットを削除するには?
 
@@ -148,7 +148,7 @@ Translate / Rotate / Scaleツールを切り替えるには、それぞれ1/2/3�
 
 Entityに物理特性を与えるには、 [Collision component](/user-manual/scenes/components/collision/) と [RigidBody component](/user-manual/scenes/components/rigidbody/) を追加する必要があります。Collision componentはEntityに物理的な形状を与え、RigidBody componentはEntityを物理エンジンでシミュレーションします。
 
-デフォルトの [gravity](/user-manual/scenes/settings#gravity) を変更することができます。
+デフォルトの [gravity](/user-manual/editor/interface/settings/physics/) を変更することができます。
 
 [チュートリアルを見る](/tutorials/collision-and-triggers/)
 

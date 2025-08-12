@@ -86,7 +86,7 @@ You can also right click on an Entity and select New Entity/Box to add a box (si
 
 To create a skybox for your scene you first need to create a [Cubemap asset](/user-manual/assets/types/cubemap/). Then you can drag and drop the Cubemap inside the 3D viewport, or you can go to the Scene Settings and drag the Cubemap in the Skybox field.
 
-[Learn more](/user-manual/scenes/settings#skybox)
+[Learn more](/user-manual/editor/interface/settings/rendering/)
 
 ## How do I delete an asset?
 
@@ -148,7 +148,7 @@ To upload Assets simply drag and drop files from your computer into the Assets p
 
 To give physical properties to an Entity you need to add a [Collision component](/user-manual/scenes/components/collision/) to it and a [RigidBody component](/user-manual/scenes/components/rigidbody/). The Collision component gives a physical shape to the Entity and the RigidBody component makes the Entity be simulated by the physics engine.
 
-You can change the default [gravity](/user-manual/scenes/settings#gravity) in the Scene Settings.
+You can change the default [gravity](/user-manual/editor/interface/settings/physics/) in the Scene Settings.
 
 [View tutorial](/tutorials/collision-and-triggers/)
 
