@@ -19,8 +19,8 @@ Here is a breakdown of the available settings:
 
 ## Settings
 
-| Setting                          | Description |
-| -------------------------------- | ----------- |
+| Setting | Description |
+| --- | --- |
 | **Grid Divisions**               | Divisions specifies the number of grid cells in each horizontal direction. Set to 0 to disable the grid. |
 | **Grid Division Size**           | Size specifies the size of a cell. |
 | **Snap**                         | Set the increment for [gizmo](../viewport.md#gizmos) snapping. Hold Shift or use the Snap toggle on the toolbar to enable snapping while using gizmos. |

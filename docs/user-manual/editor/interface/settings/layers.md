@@ -34,7 +34,7 @@ Default layers:
 
 Defines the sequence in which layers are drawn, and separates opaque and transparent rendering passes.
 
-| Column | Description |
+| Setting | Description |
 | --- | --- |
 | **Layer** | The name of the render layer. |
 | **Pass** | Either:<ul><li><strong>Opaque</strong>: Renders opaque mesh instances</li><li><strong>Transparent</strong>: Renders semi‑transparent mesh instances</li></ul> |
