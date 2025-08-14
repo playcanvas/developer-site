@@ -51,6 +51,7 @@ const config = {
         { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
         { from: ['/user-manual/organizations/managing-organizations/'], to: '/user-manual/account-management/organizations/managing/' },
         { from: ['/user-manual/editor/scene/settings/'], to: '/user-manual/editor/interface/settings/' },
+        { from: ['/user-manual/scenes/entities/'], to: '/user-manual/ecs/entities/' },
         { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/scripting/editor-users/loading-order/' },
       ],
       createRedirects: (existingPath) => {

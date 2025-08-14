@@ -373,13 +373,26 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Entity Component System',
+      link: {
+        type: 'doc',
+        id: 'user-manual/ecs/index',
+      },
+      items: [
+        'user-manual/ecs/entities',
+        'user-manual/ecs/components',
+        'user-manual/ecs/hierarchy-and-transformations',
+        'user-manual/ecs/searching-the-hierarchy',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Scenes',
       link: {
         type: 'doc',
         id: 'user-manual/scenes/index',
       },
       items: [
-        'user-manual/scenes/entities/index',
         {
           type: 'category',
           label: 'Components',
