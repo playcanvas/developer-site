@@ -10,7 +10,7 @@ title: ローディング画面
 
 ## ローディング画面のカスタマイズ
 
-カスタムのローディング画面を作成したい場合は、[Toolbar](../../interface/toolbar)または[Viewport](../../interface/viewport)の「歯車」アイコンをクリックして、[Inspector](../../interface/inspector)に設定を読み込みます。
+カスタムのローディング画面を作成したい場合は、[Toolbar](../../toolbar)または[Viewport](../../viewport)の「歯車」アイコンをクリックして、[Inspector](../../inspector)に設定を読み込みます。
 
 ![Settings](/img/user-manual/editor/toolbar/settings.png)
 
@@ -20,7 +20,7 @@ title: ローディング画面
 
 2つのオプションがあります。
 
-1. **CREATE DEFAULT** - デフォルトのローディング画面の全コードを含む新しいローディング画面スクリプトを[Assets Panel](../../interface/assets)に作成します。このローディング画面は要件に合わせてカスタマイズできます。
+1. **CREATE DEFAULT** - デフォルトのローディング画面の全コードを含む新しいローディング画面スクリプトを[Assets Panel](../../assets)に作成します。このローディング画面は要件に合わせてカスタマイズできます。
 2. **SELECT EXISTING** - Assets Panelからカスタムのローディング画面スクリプトを選択します。
 
 既存のスクリプトがないと仮定し、代わりにデフォルトのローディング画面スクリプトを作成してみましょう。単色を表示するだけの非常にミニマルなローディング画面は次のようになります。

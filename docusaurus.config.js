@@ -95,6 +95,11 @@ const config = {
           redirects.push(redirect);
         }
 
+        if (existingPath.includes('/user-manual/editor/interface/launch-page')) {
+          const redirect = existingPath.replace('/user-manual/editor/interface/launch-page', '/user-manual/editor/launch-page');
+          redirects.push(redirect);
+        }
+
         if (existingPath.includes('/user-manual/editor/publishing/')) {
           const redirect = existingPath.replace('/user-manual/editor/publishing/', '/user-manual/publishing/');
           redirects.push(redirect);
