@@ -10,7 +10,7 @@ title: ローディング画面
 
 ## ローディング画面のカスタマイズ
 
-カスタムのローディング画面を作成したい場合は、[Toolbar](../../interface/toolbar)または[Viewport](../../interface/viewport)の「歯車」アイコンをクリックして、[Inspector](../../interface/inspector)に設定を読み込みます。
+カスタムのローディング画面を作成したい場合は、[Toolbar](../../toolbar)または[Viewport](../../viewport)の「歯車」アイコンをクリックして、[Inspector](../../inspector)に設定を読み込みます。
 
 ![Settings](/img/user-manual/editor/toolbar/settings.png)
 

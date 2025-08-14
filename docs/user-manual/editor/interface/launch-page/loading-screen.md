@@ -10,7 +10,7 @@ It will be displayed in both the Launch Page and your published app.
 
 ## Customizing the Loading Screen
 
-If you want to create a custom loading screen, load the Settings into the [Inspector](../../interface/inspector) by clicking the 'cog' icon on the [Toolbar](../../interface/toolbar) or in the [Viewport](../../interface/viewport).
+If you want to create a custom loading screen, load the Settings into the [Inspector](../../inspector) by clicking the 'cog' icon on the [Toolbar](../../toolbar) or in the [Viewport](../../viewport).
 
 ![Settings](/img/user-manual/editor/toolbar/settings.png)
 
