@@ -28,7 +28,7 @@ The Inspector supports copying and pasting attribute values across entities and 
 You can copy and paste any modifiable value in the Inspector in two ways:
 
 1. Right click on an attribute to activate a context menu with Copy/Paste options.
-2. Mouse over an attribute to active Copy/Paste buttons to the right of the attribute label.
+2. Mouse over an attribute to activate Copy/Paste buttons to the right of the attribute label.
 
 The copy/paste system enforces type matching to ensure data integrity. You can only paste to an attribute that matches the type of what was previously copied. For example, you cannot paste a string value to a number field, or a boolean value to a string field.
 
