@@ -138,6 +138,18 @@ const sidebars = {
             'user-manual/editor/interface/viewport',
             {
               type: 'category',
+              label: 'Launch Page',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/interface/launch-page/index',
+              },
+              items: [
+                'user-manual/editor/interface/launch-page/custom-engine',
+                'user-manual/editor/interface/launch-page/loading-screen',
+              ],
+            },
+            {
+              type: 'category',
               label: 'Project Settings',
               link: {
                 type: 'doc',
@@ -158,18 +170,6 @@ const sidebars = {
                 'user-manual/editor/interface/settings/network',
               ],
             },
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Launch Page',
-          link: {
-            type: 'doc',
-            id: 'user-manual/editor/launch-page/index',
-          },
-          items: [
-            'user-manual/editor/launch-page/custom-engine',
-            'user-manual/editor/launch-page/loading-screen',
           ],
         },
         'user-manual/editor/keyboard-shortcuts',
