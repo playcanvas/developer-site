@@ -1,6 +1,5 @@
 ---
 title: エンティティ
-sidebar_label: エンティティ
 ---
 
 **[Entity](https://api.playcanvas.com/engine/classes/Entity.html)** は、PlayCanvas シーンの基本的な構成要素です。

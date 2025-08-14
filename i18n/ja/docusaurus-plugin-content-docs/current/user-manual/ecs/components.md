@@ -1,6 +1,5 @@
 ---
 title: コンポーネント
-sidebar_label: コンポーネント
 ---
 
 **[Component](https://api.playcanvas.com/engine/classes/Component.html)** は、エンティティにデータや振る舞いを追加します。

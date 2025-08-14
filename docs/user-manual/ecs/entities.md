@@ -1,6 +1,5 @@
 ---
 title: Entities
-sidebar_label: Entities
 ---
 
 An **Entity** is the basic building block of your PlayCanvas scene ([`Entity`](https://api.playcanvas.com/engine/classes/Entity.html)).

@@ -1,6 +1,5 @@
 ---
 title: Searching the Hierarchy
-sidebar_label: Searching the Hierarchy
 ---
 
 ## By Name
