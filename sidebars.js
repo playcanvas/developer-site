@@ -148,6 +148,7 @@ const sidebars = {
                 'user-manual/editor/interface/launch-page/loading-screen',
               ],
             },
+            'user-manual/editor/interface/keyboard-shortcuts',
             {
               type: 'category',
               label: 'Project Settings',
@@ -172,7 +173,6 @@ const sidebars = {
             },
           ],
         },
-        'user-manual/editor/keyboard-shortcuts',
         'user-manual/editor/realtime-collaboration',
         {
           type: 'category',
