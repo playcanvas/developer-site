@@ -18,6 +18,12 @@ To delete a folder, double click it in the hierarchy and hit delete. Alternative
 
 Folders can be drag and dropped into each other if you want to reorganize your folder structure.
 
+:::note
+
+Folders are essentially meta assets, exclusively designed to facilitate the organization of assets within the Editor. Folder assets are excluded from builds and are not used when building the folder structure of a published build.
+
+:::
+
 ## Creating and Uploading Assets {#creating-and-uploading-assets}
 
 You can create new assets by dragging a file from you computer's file system into the Assets Panel. The Editor will upload and import the asset for you.
