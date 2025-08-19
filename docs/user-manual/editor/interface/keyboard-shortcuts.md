@@ -1,5 +1,6 @@
 ---
 title: Controls and Keyboard Shortcuts
+sidebar_label: Controls & Keyboard Shortcuts
 ---
 
 ## Camera Controls
