@@ -317,57 +317,6 @@ const sidebars = {
       ],
     },
     {
-      type: 'category',
-      label: 'PCUI',
-      link: {
-        type: 'doc',
-        id: 'user-manual/pcui/index',
-      },
-      items: [
-        'user-manual/pcui/getting-started',
-        'user-manual/pcui/react',
-        {
-          type: 'category',
-          label: 'Data Binding',
-          link: {
-            type: 'doc',
-            id: 'user-manual/pcui/data-binding/index',
-          },
-          items: [
-            'user-manual/pcui/data-binding/using-observers',
-            'user-manual/pcui/data-binding/two-way-binding',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Examples',
-          link: {
-            type: 'doc',
-            id: 'user-manual/pcui/examples/index',
-          },
-          items: [
-            'user-manual/pcui/examples/history',
-            'user-manual/pcui/examples/todo-list',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'PCUI Graph',
-          link: {
-            type: 'doc',
-            id: 'user-manual/pcui/pcui-graph/index',
-          },
-          items: [
-            'user-manual/pcui/pcui-graph/getting-started',
-            'user-manual/pcui/pcui-graph/context-menus',
-            'user-manual/pcui/pcui-graph/events',
-            'user-manual/pcui/pcui-graph/schema',
-            'user-manual/pcui/pcui-graph/styling',
-          ],
-        },
-      ],
-    },
-    {
       type: 'html',
       value: '<div class="sidebar-section-header">Common Topics</div>',
     },
@@ -905,6 +854,10 @@ const sidebars = {
       ],
     },
     {
+      type: 'html',
+      value: '<div class="sidebar-section-header">Foundational APIs</div>',
+    },
+    {
       type: 'category',
       label: 'REST API',
       link: {
@@ -927,6 +880,61 @@ const sidebars = {
         'user-manual/api/project-archive',
         'user-manual/api/scene-list',
       ],
+    },
+    {
+      type: 'category',
+      label: 'PCUI',
+      link: {
+        type: 'doc',
+        id: 'user-manual/pcui/index',
+      },
+      items: [
+        'user-manual/pcui/getting-started',
+        'user-manual/pcui/react',
+        {
+          type: 'category',
+          label: 'Data Binding',
+          link: {
+            type: 'doc',
+            id: 'user-manual/pcui/data-binding/index',
+          },
+          items: [
+            'user-manual/pcui/data-binding/using-observers',
+            'user-manual/pcui/data-binding/two-way-binding',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Examples',
+          link: {
+            type: 'doc',
+            id: 'user-manual/pcui/examples/index',
+          },
+          items: [
+            'user-manual/pcui/examples/history',
+            'user-manual/pcui/examples/todo-list',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'PCUI Graph',
+          link: {
+            type: 'doc',
+            id: 'user-manual/pcui/pcui-graph/index',
+          },
+          items: [
+            'user-manual/pcui/pcui-graph/getting-started',
+            'user-manual/pcui/pcui-graph/context-menus',
+            'user-manual/pcui/pcui-graph/events',
+            'user-manual/pcui/pcui-graph/schema',
+            'user-manual/pcui/pcui-graph/styling',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'html',
+      value: '<div class="sidebar-section-header">Additional Resources</div>',
     },
     'user-manual/faq',
     'user-manual/glossary',
