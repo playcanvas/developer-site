@@ -35,6 +35,7 @@ PlayCanvasでは、ウェブの未来はインタラクティブで三次元的�
 | リポジトリ | 説明 | ライセンス |
 | ---------- | ----------- | ------- |
 | [**engine**](https://github.com/playcanvas/engine) | 3Dウェブアプリケーション用JavaScriptランタイム | MIT |
+| [**editor**](https://github.com/playcanvas/editor) | WebGL/WebGPU/WebXRアプリケーション構築用ビジュアル編集環境 | MIT |
 | [**react**](https://github.com/playcanvas/react) | 宣言型3Dシーン構築用Reactコンポーネント | MIT |
 | [**web-components**](https://github.com/playcanvas/web-components) | 標準ベースの3D開発用Web Components | MIT |
 | [**supersplat**](https://github.com/playcanvas/supersplat) | 3D Gaussian Splatエディター | MIT |

@@ -35,6 +35,7 @@ Here are some of our key repositories:
 | Repository | Description | License |
 | ---------- | ----------- | ------- |
 | [**engine**](https://github.com/playcanvas/engine) | JavaScript runtime for 3D web applications | MIT |
+| [**editor**](https://github.com/playcanvas/editor) | Visual editing environment for building WebGL/WebGPU/WebXR applications | MIT |
 | [**react**](https://github.com/playcanvas/react) | React components for building declarative 3D scenes | MIT |
 | [**web-components**](https://github.com/playcanvas/web-components) | Web Components for standards-based 3D development | MIT |
 | [**supersplat**](https://github.com/playcanvas/supersplat) | 3D Gaussian Splat editor | MIT |
