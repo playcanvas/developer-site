@@ -19,8 +19,8 @@ GLBのインポートでは、以下のglTF機能がサポートされ、非常�
 
 そのため、PlayCanvasを対象とする場合、特別なアートツールプラグインを使用する必要はなく、従う必要のあるPlayCanvas固有のワークフローはありません。
 
-![GLB Import Example](/img/user-manual/assets/models/building/glb-import.gif)  
-*モデル：Loïc Norgeot、蚊のスキャン：Geoffrey Marchal for [Sketchfab](https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1)、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)でライセンスされています。*
+![GLBインポートの例](/img/user-manual/assets/models/building/glb-import.gif)  
+*Loïc NorgeotによるモデルとGeoffrey Marchalによる蚊のスキャンは、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)ライセンスに基づき[Sketchfab](https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1)から提供されています*
 
 PlayCanvasは、FBXファイルのインポートもサポートしており、これはより一般的な相互運用形式の1つです。ただし、FBXのマテリアルはGLTFのマテリアルよりも忠実にはインポートされず、インポート後に編集が必要な場合があります。
 
