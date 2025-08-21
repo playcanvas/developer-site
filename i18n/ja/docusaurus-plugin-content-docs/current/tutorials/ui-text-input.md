@@ -26,7 +26,7 @@ HTML入力要素を使用することで、Webページ上でのユーザーが�
 
 そして、モバイルでの使用例です:
 
-<div class="centered"><video height="360" controls src="/img/tutorials/ui-text-input/mobile-preview.mp4"></video></div>
+<video autoPlay muted loop controls src='/video/tutorial-text-input.mp4' style={{width: '100%', height: 'auto'}} />
 
 :::note
 

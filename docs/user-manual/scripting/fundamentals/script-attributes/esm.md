@@ -364,10 +364,7 @@ This allows for rich, dynamic Editor interfaces based on script state.
 
 #### Example in Action
 
-<video width="50%" controls autoplay loop>
-  <source src="/video/conditional-attribtues.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video autoPlay muted loop controls src='/video/conditional-attribtues.mp4' style={{width: '100%', height: 'auto'}} />
 
 ## Grouping Attributes
 
