@@ -1,7 +1,7 @@
 ---
 title: 'First Person Shooter Starter Kit'
 tags: [input, camera, tutorial, scripts]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/626211/DDDD48-image-75.jpg
+thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/626211/62AB30-image-75.jpg
 ---
 
 import Link from '@docusaurus/Link';
