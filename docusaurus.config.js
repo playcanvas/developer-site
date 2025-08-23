@@ -221,16 +221,16 @@ const config = {
             title: 'Social',
             items: [
               {
-                label: 'Twitter / X',
-                href: 'https://twitter.com/playcanvas',
-              },
-              {
-                label: 'Facebook',
-                href: 'https://www.facebook.com/playcanvas',
+                label: 'X',
+                href: 'https://x.com/playcanvas',
               },
               {
                 label: 'LinkedIn',
                 href: 'https://www.linkedin.com/company/playcanvas',
+              },
+              {
+                label: 'Facebook',
+                href: 'https://www.facebook.com/playcanvas',
               },
             ],
           },
@@ -238,16 +238,16 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Forum',
-                href: 'https://forum.playcanvas.com',
-              },
-              {
                 label: 'Discord',
                 href: 'https://discord.gg/RSaMRzg',
               },
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/playcanvas',
+                label: 'Forum',
+                href: 'https://forum.playcanvas.com',
+              },
+              {
+                label: 'Reddit',
+                href: 'https://www.reddit.com/r/PlayCanvas/',
               },
             ],
           },
