@@ -28,9 +28,10 @@ const sidebars = {
         id: 'user-manual/getting-started/index',
       },
       items: [
+        'user-manual/getting-started/community',
+        'user-manual/getting-started/open-source',
         'user-manual/getting-started/supported-browsers',
         'user-manual/getting-started/made-with-playcanvas',
-        'user-manual/getting-started/open-source',
       ],
     },
     {
