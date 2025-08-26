@@ -57,9 +57,9 @@ SplatTransform detects file format based on extension. Supported formats are sho
 | Format | Extension | Input | Output | Description |
 |--------|-----------|-------|--------|-------------|
 | PLY | `.ply` | ✅ | ✅ | Uncompressed binary format |
+| Compressed PLY | `.compressed.ply` | ✅ | ✅ | Compressed binary format |
 | SPLAT | `.splat` | ✅ | ❌ | Binary format (antimatter15) |
 | KSPLAT | `.ksplat` | ✅ | ❌ | Compressed binary format (mkkellogg) |
-| Compressed PLY | `.compressed.ply` | ❌ | ✅ | Compressed binary format |
 | SOGS | `meta.json` | ❌ | ✅ | Super-compressed format (JSON + WebP) |
 | CSV | `.csv` | ❌ | ✅ | Comma-separated values for analysis |
 

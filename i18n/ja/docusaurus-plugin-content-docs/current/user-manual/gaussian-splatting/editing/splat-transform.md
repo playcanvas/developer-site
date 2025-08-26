@@ -57,9 +57,9 @@ SplatTransform は拡張子に基づいてファイルフォーマットを検�
 | フォーマット | 拡張子 | 入力 | 出力 | 説明 |
 |--------|-----------|-------|--------|-------------|
 | PLY | `.ply` | ✅ | ✅ | 非圧縮バイナリフォーマット |
+| Compressed PLY | `.compressed.ply` | ✅ | ✅ | 圧縮バイナリフォーマット |
 | SPLAT | `.splat` | ✅ | ❌ | バイナリフォーマット (antimatter15) |
 | KSPLAT | `.ksplat` | ✅ | ❌ | 圧縮バイナリフォーマット (mkkellogg) |
-| Compressed PLY | `.compressed.ply` | ❌ | ✅ | 圧縮バイナリフォーマット |
 | SOGS | `meta.json` | ❌ | ✅ | 超圧縮フォーマット (JSON + WebP) |
 | CSV | `.csv` | ❌ | ✅ | 分析用のコンマ区切り値 |
 
