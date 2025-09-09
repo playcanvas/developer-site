@@ -4,6 +4,12 @@ title: エディタの使用
 
 [PlayCanvas Editor](/user-manual/editor) を使用して、シンプルな Gaussian splat アプリケーションを段階的に構築しましょう。インタラクティブな3Dの猫のおもちゃのsplatを回転させることができるシーンを作成します。
 
+:::tip
+
+構築するプロジェクトは[こちら](https://playcanvas.com/project/1372123/overview/my-first-splat-app)で確認できます。一から構築する代わりに、[フォーク](/user-manual/editor/projects/creating/#fork-an-existing-project)して使用することもできます。または、以下の手順に従っている間に迷った場合の参考として使用してください。
+
+:::
+
 ## ビデオウォークスルー
 
 アプリを構築する完全なプロセスは、この短いビデオにあります。
