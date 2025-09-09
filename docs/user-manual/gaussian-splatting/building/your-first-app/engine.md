@@ -131,7 +131,7 @@ Now let's add our toy cat splat to the scene using the [gsplat component](https:
 // Create splat entity
 const splat = new Entity('Toy Cat');
 splat.setPosition(0, -0.7, 0);
-splat.setEulerAngles(0, 0, -180);
+splat.setEulerAngles(0, 0, 180);
 splat.addComponent('gsplat', { asset: assets[1] });
 app.root.addChild(splat);
 ```
@@ -210,7 +210,7 @@ app.root.addChild(camera);
 // Create splat entity
 const splat = new Entity('Toy Cat');
 splat.setPosition(0, -0.7, 0);
-splat.setEulerAngles(0, 0, -180);
+splat.setEulerAngles(0, 0, 180);
 splat.addComponent('gsplat', { asset: assets[1] });
 app.root.addChild(splat);
 ```

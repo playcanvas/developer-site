@@ -101,14 +101,14 @@ title: Webコンポーネントの使用
                 <pc-script name="cameraControls"></pc-script>
             </pc-scripts>
         </pc-entity>
-        <pc-entity position="0 -0.7 0" rotation="0 0 -180">
+        <pc-entity position="0 -0.7 0" rotation="0 0 180">
             <pc-splat asset="toy"></pc-splat>
         </pc-entity>
     </pc-scene>
 </pc-app>
 ```
 
-スプラットを原点よりわずかに下（Y軸で-0.7）に配置し、X軸を中心に180度回転させて適切に方向付けました。`asset="toy"`属性は、先に定義したスプラットアセットを参照しています。
+スプラットを原点よりわずかに下（Y軸で-0.7）に配置し、Z軸を中心に180度回転させて適切に方向付けました。`asset="toy"`属性は、先に定義したスプラットアセットを参照しています。
 
 ## 最終結果
 

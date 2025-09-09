@@ -101,14 +101,14 @@ Now let's add our toy cat splat to the scene using the [`<pc-splat>`](/user-manu
                 <pc-script name="cameraControls"></pc-script>
             </pc-scripts>
         </pc-entity>
-        <pc-entity position="0 -0.7 0" rotation="0 0 -180">
+        <pc-entity position="0 -0.7 0" rotation="0 0 180">
             <pc-splat asset="toy"></pc-splat>
         </pc-entity>
     </pc-scene>
 </pc-app>
 ```
 
-We've positioned the splat slightly below the origin (-0.7 on the Y axis) and rotated it 180 degrees around the X axis to orient it properly. The `asset="toy"` attribute references the splat asset we defined earlier.
+We've positioned the splat slightly below the origin (-0.7 on the Y axis) and rotated it 180 degrees around the Z axis to orient it properly. The `asset="toy"` attribute references the splat asset we defined earlier.
 
 ## Final Result
 

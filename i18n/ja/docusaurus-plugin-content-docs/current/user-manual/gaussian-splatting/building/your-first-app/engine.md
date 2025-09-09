@@ -131,7 +131,7 @@ camera.script.create('cameraControls');
 // splatエンティティを作成
 const splat = new Entity('Toy Cat');
 splat.setPosition(0, -0.7, 0);
-splat.setEulerAngles(0, 0, -180);
+splat.setEulerAngles(0, 0, 180);
 splat.addComponent('gsplat', { asset: assets[1] });
 app.root.addChild(splat);
 ```
@@ -210,7 +210,7 @@ app.root.addChild(camera);
 // splatエンティティを作成
 const splat = new Entity('Toy Cat');
 splat.setPosition(0, -0.7, 0);
-splat.setEulerAngles(0, 0, -180);
+splat.setEulerAngles(0, 0, 180);
 splat.addComponent('gsplat', { asset: assets[1] });
 app.root.addChild(splat);
 ```
