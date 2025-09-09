@@ -59,7 +59,7 @@ To view our scene, we need a camera which we can add using the [`<pc-entity>`](/
 </pc-app>
 ```
 
-We've positioned the camera 2.5 units down the negative Z axis. By default, a camera looks down the negative Z axis, so our camera is now looking toward the origin where we'll place our splat.
+We've positioned the camera 2.5 units down the Z axis. By default, a camera looks down the negative Z axis, so our camera is now looking toward the origin where we'll place our splat.
 
 ## Adding Camera Controls
 
