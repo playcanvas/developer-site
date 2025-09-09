@@ -52,7 +52,7 @@ title: Webコンポーネントの使用
     <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
-        <pc-entity position="0 0 -2.5">
+        <pc-entity position="0 0 2.5">
             <pc-camera></pc-camera>
         </pc-entity>
     </pc-scene>
@@ -70,7 +70,7 @@ title: Webコンポーネントの使用
     <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
-        <pc-entity position="0 0 -2.5">
+        <pc-entity position="0 0 2.5">
             <pc-camera></pc-camera>
             <pc-scripts>
                 <pc-script name="cameraControls"></pc-script>
@@ -95,13 +95,13 @@ title: Webコンポーネントの使用
     <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
-        <pc-entity position="0 0 -2.5">
+        <pc-entity position="0 0 2.5">
             <pc-camera></pc-camera>
             <pc-scripts>
                 <pc-script name="cameraControls"></pc-script>
             </pc-scripts>
         </pc-entity>
-        <pc-entity position="0 -0.7 0" rotation="180 0 0">
+        <pc-entity position="0 -0.7 0" rotation="0 0 -180">
             <pc-splat asset="toy"></pc-splat>
         </pc-entity>
     </pc-scene>
