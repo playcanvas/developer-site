@@ -14,7 +14,7 @@ SplatTransform is [open-sourced under an MIT license on GitHub](https://github.c
 
 SplatTransform solves important problems developers face when working with Gaussian splats:
 
-🔄 **Broad Format Support** — seamlessly convert between PLY, SPLAT, KSPLAT, SOGS and even CSV  
+🔄 **Broad Format Support** — seamlessly convert between PLY, SPLAT, KSPLAT, SOG and even CSV  
 🛠️ **Powerful Transformations** — translate, rotate, and scale your splats with precision  
 🧹 **Smart Filtering** — remove NaN values, filter by properties, and strip unnecessary data  
 📦 **Scene Merging** — combine multiple splat files into a merged scene  
@@ -43,13 +43,10 @@ Convert between commonly used splat formats with simple commands:
 
 ```bash
 # Convert KSPLAT to PLY
-splat-transform input.ksplat converted.ply
+splat-transform input.ksplat output.ply
 
-# Convert PLY to SOGS format  
-splat-transform input.ply meta.json
-
-# Convert to SPLAT format
-splat-transform input.ply output.splat
+# Convert PLY to SOG format  
+splat-transform input.ply output.sog
 ```
 
 SplatTransform detects file format based on extension. Supported formats are shown below:
@@ -60,7 +57,8 @@ SplatTransform detects file format based on extension. Supported formats are sho
 | Compressed PLY | `.compressed.ply` | ✅ | ✅ | Compressed binary format |
 | SPLAT | `.splat` | ✅ | ❌ | Binary format (antimatter15) |
 | KSPLAT | `.ksplat` | ✅ | ❌ | Compressed binary format (mkkellogg) |
-| SOGS | `meta.json` | ❌ | ✅ | Super-compressed format (JSON + WebP) |
+| SOG (bundled) | `.sog` | ❌ | ✅ | Super-compressed format (ZIP container) |
+| SOG (unbundled) | `meta.json` | ❌ | ✅ | Super-compressed format (JSON + WebP) |
 | CSV | `.csv` | ❌ | ✅ | Comma-separated values for analysis |
 
 ## Transformations
@@ -178,15 +176,15 @@ splat-transform raw_capture.ply \
   --filterNaN \
   --filterBands 2 \
   -s 0.8 \
-  production/meta.json
+  production/capture.sog
 ```
 
 ### Format Migration
 
 ```bash
-# Convert existing KSPLAT assets to PlayCanvas SOGS
+# Convert existing KSPLAT assets to PlayCanvas SOG
 for file in *.ksplat; do
-  splat-transform "$file" "${file%.ksplat}_meta.json"
+  splat-transform "$file" "${file%.ksplat}.sog"
 done
 ```
 
