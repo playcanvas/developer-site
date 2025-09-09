@@ -90,7 +90,7 @@ import { useSplat } from '@playcanvas/react/hooks'
 import { FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from 'playcanvas'
 
 function Scene() {
-    const { asset } = useSplat('toy-cat.compressed.ply');
+    const { asset } = useSplat('toy-cat.sog');
 
     if (!asset) return null;
 
@@ -140,7 +140,7 @@ import { useSplat } from '@playcanvas/react/hooks'
 import { FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from 'playcanvas'
 
 function Scene() {
-    const { asset } = useSplat('toy-cat.compressed.ply');
+    const { asset } = useSplat('toy-cat.sog');
 
     if (!asset) return null;
 

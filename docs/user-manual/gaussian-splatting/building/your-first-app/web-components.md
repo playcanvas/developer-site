@@ -32,7 +32,7 @@ Before we can display a splat or add camera controls, we need to define the asse
 ```html {2-3}
 <pc-app antialias="false" high-resolution="false">
     <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
-    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
+    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
     </pc-scene>
 </pc-app>
@@ -50,7 +50,7 @@ To view our scene, we need a camera which we can add using the [`<pc-entity>`](/
 ```html {5-7}
 <pc-app antialias="false" high-resolution="false">
     <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
-    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
+    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity position="0 0 -2.5">
             <pc-camera></pc-camera>
@@ -68,7 +68,7 @@ Now let's make the camera interactive by adding the camera controls script using
 ```html {7-9}
 <pc-app antialias="false" high-resolution="false">
     <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
-    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
+    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity position="0 0 -2.5">
             <pc-camera></pc-camera>
@@ -93,7 +93,7 @@ Now let's add our toy cat splat to the scene using the [`<pc-splat>`](/user-manu
 ```html {11-13}
 <pc-app antialias="false" high-resolution="false">
     <pc-asset id="camera-controls" src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs" preload></pc-asset>
-    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.compressed.ply"></pc-asset>
+    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity position="0 0 -2.5">
             <pc-camera></pc-camera>

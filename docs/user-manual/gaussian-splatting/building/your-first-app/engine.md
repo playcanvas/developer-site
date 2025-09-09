@@ -78,7 +78,7 @@ const assets = [
         url: 'https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs'
     }),
     new Asset('toy', 'gsplat', {
-        url: 'https://developer.playcanvas.com/assets/toy-cat.compressed.ply'
+        url: 'https://developer.playcanvas.com/assets/toy-cat.sog'
     })
 ];
 
@@ -192,7 +192,7 @@ const assets = [
         url: 'https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs'
     }),
     new Asset('toy', 'gsplat', {
-        url: 'https://developer.playcanvas.com/assets/toy-cat.compressed.ply'
+        url: 'https://developer.playcanvas.com/assets/toy-cat.sog'
     })
 ];
 

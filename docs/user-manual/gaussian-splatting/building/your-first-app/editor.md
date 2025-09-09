@@ -32,13 +32,13 @@ For optimal splat rendering performance, disable anti-aliasing and device pixel 
 
 ## Uploading the Splat Asset
 
-First, download the toy cat splat to your local file system: [`https://developer.playcanvas.com/assets/toy-cat.compressed.ply`](https://developer.playcanvas.com/assets/toy-cat.compressed.ply)
+First, download the toy cat splat to your local file system: [`https://developer.playcanvas.com/assets/toy-cat.sog`](https://developer.playcanvas.com/assets/toy-cat.sog)
 
 Now let's add the downloaded splat to the project:
 
 1. In the **ASSETS** panel (bottom of the screen), click the + icon
 2. Select **"Upload"** from the popup menu
-3. In the file open dialog, locate and select the `toy-cat.compressed.ply`
+3. In the file open dialog, locate and select the `toy-cat.sog`
 
 The PLY file will be processed and appear in your Assets panel as a GSplat asset.
 

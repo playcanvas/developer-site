@@ -32,13 +32,13 @@ title: エディタの使用
 
 ## Splatアセットのアップロード
 
-まず、猫のおもちゃのsplatをローカルファイルシステムにダウンロードします。[`https://developer.playcanvas.com/assets/toy-cat.compressed.ply`](https://developer.playcanvas.com/assets/toy-cat.compressed.ply)
+まず、猫のおもちゃのsplatをローカルファイルシステムにダウンロードします。[`https://developer.playcanvas.com/assets/toy-cat.sog`](https://developer.playcanvas.com/assets/toy-cat.sog)
 
 次に、ダウンロードしたsplatをプロジェクトに追加しましょう。
 
 1. **ASSETS** パネル (画面下部) で、+ アイコンをクリックします
 2. ポップアップメニューから **「アップロード」** を選択します
-3. ファイルを開くダイアログで、`toy-cat.compressed.ply` を見つけて選択します
+3. ファイルを開くダイアログで、`toy-cat.sog` を見つけて選択します
 
 PLYファイルは処理され、あなたのAssetsパネルにGSplatアセットとして表示されます。
 
