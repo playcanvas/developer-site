@@ -14,7 +14,7 @@ SplatTransform は、[MITライセンスの下でGitHubにてオープンソー�
 
 SplatTransform は、開発者が Gaussian splats を扱う際に直面する重要な問題を解決します：
 
-🔄 **幅広いフォーマットサポート** — PLY, SPLAT, KSPLAT, SOGS、さらにはCSV間をシームレスに変換  
+🔄 **幅広いフォーマットサポート** — PLY, SPLAT, KSPLAT, SOG、さらにはCSV間をシームレスに変換  
 🛠️ **強力な変換機能** — スプラットを正確に平行移動、回転、拡大縮小  
 🧹 **スマートフィルタリング** — NaN値の除去、プロパティによるフィルタリング、不要なデータの削除  
 📦 **シーンのマージ** — 複数のスプラットファイルを統合されたシーンに結合  
@@ -43,13 +43,10 @@ splat-transform --version
 
 ```bash
 # KSPLATをPLYに変換
-splat-transform input.ksplat converted.ply
+splat-transform input.ksplat output.ply
 
-# PLYをSOGSフォーマットに変換
-splat-transform input.ply meta.json
-
-# SPLATフォーマットに変換
-splat-transform input.ply output.splat
+# PLYをSOGフォーマットに変換  
+splat-transform input.ply output.sog
 ```
 
 SplatTransform は拡張子に基づいてファイルフォーマットを検出します。サポートされているフォーマットは以下の通りです：
@@ -60,7 +57,8 @@ SplatTransform は拡張子に基づいてファイルフォーマットを検�
 | Compressed PLY | `.compressed.ply` | ✅ | ✅ | 圧縮バイナリフォーマット |
 | SPLAT | `.splat` | ✅ | ❌ | バイナリフォーマット (antimatter15) |
 | KSPLAT | `.ksplat` | ✅ | ❌ | 圧縮バイナリフォーマット (mkkellogg) |
-| SOGS | `meta.json` | ❌ | ✅ | 超圧縮フォーマット (JSON + WebP) |
+| SOG (バンドル版) | `.sog` | ❌ | ✅ | 超圧縮フォーマット (ZIPコンテナ) |
+| SOG (非バンドル版) | `meta.json` | ❌ | ✅ | 超圧縮フォーマット (JSON + WebP) |
 | CSV | `.csv` | ❌ | ✅ | 分析用のコンマ区切り値 |
 
 ## 変換
@@ -178,15 +176,15 @@ splat-transform raw_capture.ply \
   --filterNaN \
   --filterBands 2 \
   -s 0.8 \
-  production/meta.json
+  production/capture.sog
 ```
 
 ### フォーマット移行
 
 ```bash
-# 既存のKSPLATアセットをPlayCanvas SOGSに変換
+# 既存のKSPLATアセットをPlayCanvas SOGに変換
 for file in *.ksplat; do
-  splat-transform "$file" "${file%.ksplat}_meta.json"
+  splat-transform "$file" "${file%.ksplat}.sog"
 done
 ```
 
