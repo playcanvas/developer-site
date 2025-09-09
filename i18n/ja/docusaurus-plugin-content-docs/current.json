@@ -211,6 +211,14 @@
     "message": "スプラットの編集",
     "description": "The label for category Editing Splats in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Building Splat Applications": {
+    "message": "スプラットアプリケーションの構築",
+    "description": "The label for category Building Splat Applications in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Your First Splat App": {
+    "message": "はじめてのスプラットアプリ",
+    "description": "The label for category Your First Splat App in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.SuperSplat": {
     "message": "SuperSplat",
     "description": "The label for category SuperSplat in sidebar userManualSidebar"

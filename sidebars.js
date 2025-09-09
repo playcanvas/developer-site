@@ -691,7 +691,7 @@ const sidebars = {
           items: [
             {
               type: 'category',
-              label: 'Your First App',
+              label: 'Your First Splat App',
               link: {
                 type: 'doc',
                 id: 'user-manual/gaussian-splatting/building/your-first-app/index',
