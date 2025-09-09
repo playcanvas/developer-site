@@ -40,7 +40,7 @@ Now let's add the downloaded splat to the project:
 2. Select **"Upload"** from the popup menu
 3. In the file open dialog, locate and select the `toy-cat.sog`
 
-The PLY file will be processed and appear in your Assets panel as a GSplat asset.
+The `.sog` file will be processed and appear in your Assets panel as a `gsplat` asset.
 
 ## Creating the Splat Entity
 
@@ -65,7 +65,7 @@ The GSplat component will be added to your entity.
 Let's connect our uploaded splat asset to the component:
 
 1. In the GSplat component properties, click the **asset picker** (pencil icon) for the Asset attribute
-2. Select the toy cat PLY asset we uploaded earlier
+2. Select the toy cat `gsplat` asset we uploaded earlier
 3. The splat should now appear in the viewport!
 
 ## Positioning the Splat
@@ -73,8 +73,8 @@ Let's connect our uploaded splat asset to the component:
 The splat is not be positioned correctly. Let's adjust its transform:
 
 1. With the "Toy Cat" entity still selected, look at the **ENTITY** header section in the Inspector
-2. Set the **Rotation** to `0, 0, 180` (flips it to be the right way up)
-3. Set the **Position** to `0, -0.7, 0` (centers it on the origin)
+2. Set the **Position** to `0, -0.7, 0` (centers it on the origin)
+3. Set the **Rotation** to `0, 0, 180` (flips it to be the right way up)
 
 ## Adding Camera Controls
 
@@ -120,7 +120,7 @@ Congratulations! You've successfully created an interactive Gaussian splat appli
 
 Now that you have a working splat app, try experimenting with:
 
-- Swapping the toy cat PLY file for one of your own
+- Swapping the toy cat `.sog` file for one of your own
 - Adding a user interface
 - Building more complex interactions with scripts
 
