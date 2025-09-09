@@ -89,7 +89,7 @@ await new Promise(resolve => loader.load(resolve));
 We're loading two assets:
 
 - A camera controls script that will let us orbit around the scene
-- A compressed PLY file containing a toy cat splat
+- A `.sog` file containing a toy cat splat
 
 The [`AssetListLoader`](https://api.playcanvas.com/engine/classes/AssetListLoader.html) loads all assets efficiently and we use `await` to ensure they're fully loaded before proceeding.
 
@@ -105,7 +105,7 @@ camera.addComponent('camera');
 app.root.addChild(camera);
 ```
 
-We've positioned the camera 2.5 units down the negative Z axis. By default, a camera looks down the negative Z axis, so our camera is now looking toward the origin where we'll place our splat.
+We've positioned the camera 2.5 units down the Z axis. By default, a camera looks down the negative Z axis, so our camera is now looking toward the origin where we'll place our splat.
 
 ## Adding Camera Controls
 
@@ -136,7 +136,7 @@ splat.addComponent('gsplat', { asset: assets[1] });
 app.root.addChild(splat);
 ```
 
-We reference the splat asset using `assets[1]` (the second asset in our array). We've positioned the splat slightly below the origin (-0.7 on the Y axis) and rotated it 180 degrees around the X axis to orient it properly.
+We reference the splat asset using `assets[1]` (the second asset in our array). We've positioned the splat slightly below the origin (-0.7 on the Y axis) and rotated it 180 degrees around the Z axis to orient it properly.
 
 ## Complete Code
 

@@ -89,7 +89,7 @@ await new Promise(resolve => loader.load(resolve));
 2つのアセットをロードしています：
 
 - シーンの周りを軌道移動できるカメラコントロールスクリプト
-- おもちゃの猫のsplatを含む圧縮されたPLYファイル
+- おもちゃの猫のsplatを含む`.sog`ファイル
 
 [`AssetListLoader`](https://api.playcanvas.com/engine/classes/AssetListLoader.html)はすべてのアセットを効率的にロードし、`await`を使用して、続行する前にそれらが完全にロードされていることを確認します。
 
@@ -105,7 +105,7 @@ camera.addComponent('camera');
 app.root.addChild(camera);
 ```
 
-カメラを負のZ軸方向に2.5単位配置しました。デフォルトでは、カメラは負のZ軸方向を向くため、カメラはsplatを配置する原点方向を向いています。
+カメラをZ軸方向に2.5単位配置しました。デフォルトでは、カメラは負のZ軸方向を向くため、カメラはsplatを配置する原点方向を向いています。
 
 ## カメラコントロールの追加
 
@@ -136,7 +136,7 @@ splat.addComponent('gsplat', { asset: assets[1] });
 app.root.addChild(splat);
 ```
 
-`assets[1]`（配列内の2番目のアセット）を使用してsplatアセットを参照します。splatを原点よりわずかに下（Y軸で-0.7）に配置し、X軸周りに180度回転させて適切に配置しました。
+`assets[1]`（配列内の2番目のアセット）を使用してsplatアセットを参照します。splatを原点よりわずかに下（Y軸で-0.7）に配置し、Z軸周りに180度回転させて適切に配置しました。
 
 ## 完全なコード
 
