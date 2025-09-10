@@ -25,7 +25,7 @@ First, let's create a new PlayCanvas project:
 1. Go to [playcanvas.com](https://playcanvas.com) and sign in to your account
 2. Click **"NEW"** to create a new project
 3. Select the **"Blank Project"** template
-4. Enter a name like "My First Splat App"
+4. Enter a name like "My First Splat"
 5. Click **"CREATE"** to create the project
 
 You will be taken to the new project's dashboard. Click the EDITOR button and the Editor will open with an empty scene containing just a camera, directional light, cube and plane.
@@ -52,27 +52,9 @@ The `.sog` file will be processed and appear in your Assets panel as a `gsplat` 
 
 Let's create an entity to display our splat:
 
-1. In the **HIERARCHY** panel (left side), click the + icon
-2. Select **"Entity"** from the popup menu to create a new entity
-3. With the new entity selected, rename it to "Toy Cat" in the **INSPECTOR** panel (right side)
+1. Drag and drop the `gsplat` asset from the Asset Panel into the Viewport.
 
-## Adding the GSplat Component
-
-Now we'll add the component that displays Gaussian splats:
-
-1. With the "Toy Cat" entity selected, scroll down in the **INSPECTOR** panel
-2. Click **"ADD COMPONENT"**
-3. Select **"Gaussian Splat"** from the component list
-
-The GSplat component will be added to your entity.
-
-## Assigning the Asset
-
-Let's connect our uploaded splat asset to the component:
-
-1. In the GSplat component properties, click the **asset picker** (pencil icon) for the Asset attribute
-2. Select the toy cat `gsplat` asset we uploaded earlier
-3. The splat should now appear in the viewport!
+A new entity will be created under the root in the Hierarchy panel and the toy cat should now be visible in the viewport.
 
 ## Positioning the Splat
 
@@ -80,27 +62,23 @@ The splat is not be positioned correctly. Let's adjust its transform:
 
 1. With the "Toy Cat" entity still selected, look at the **ENTITY** header section in the Inspector
 2. Set the **Position** to `0, -0.7, 0` (centers it on the origin)
-3. Set the **Rotation** to `0, 0, 180` (flips it to be the right way up)
 
 ## Adding Camera Controls
 
-To make the scene interactive, let's import a camera controls script from the Asset Store:
+To make the scene interactive, let's assign a script to our camera entity:
 
-1. In the **ASSETS** panel, click the **"ASSET STORE"** button
-2. In the Asset Store, filter by **SCRIPTS**
-3. Find and select the **Orbit Camera** script by PlayCanvas and click **IMPORT**
-4. Close the Asset Store panel by clicking the `x` icon (top right)
-
-The script will be added to your project's Assets panel.
+1. Download the [`camera-controls.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-controls.mjs) script from the PlayCanvas Engine GitHub repo
+2. In the **ASSETS** panel (bottom of the screen), click the + icon
+3. Select **"Upload"** from the popup menu
+4. In the file open dialog, locate and select the `camera-controls.mjs` script
+5. Select the uploaded script in the **ASSETS** panel and click the **PARSE** button
 
 Now let's attach the script to our camera:
 
-1. Select the **"Camera"** entity in the Hierarchy
-2. In the Inspector, click **"ADD COMPONENT"** and select **"Script"**
+1. Select the **"Camera"** entity in the **HIERARCHY** panel
+2. In the **INSPECTOR**, click **"ADD COMPONENT"** and select **"Script"**
 3. In the Script component, click the **"Add Script"** dropdown
-4. Select **"orbitCamera"** from the list (it should appear in the dropdown now)
-5. Select **"orbitCameraInputMouse"** from the list
-6. Select **"orbitCameraInputTouch"** from the list
+4. Select **"cameraControls"** from the list (it should appear in the dropdown now)
 
 The camera controls script is now attached and ready to use!
 
