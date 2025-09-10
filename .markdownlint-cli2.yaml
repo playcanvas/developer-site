@@ -5,3 +5,8 @@ config:
   no-alt-text: false
   no-inline-html: false
   no-bare-urls: false
+  code-block-style: false
+
+# Ignore system files
+ignores:
+  - "**/.DS_Store"
