@@ -22,7 +22,7 @@ export function Demo() {
     return (
         <div style={{ width: '100%', height: '400px', marginBottom: '2rem', borderRadius: '8px', overflow: 'hidden' }}>
             <Application graphicsDeviceOptions={{ antialias: false }} >
-                <Entity position={[0, 0, -2.5]}>
+                <Entity position={[0, 0, 2.5]}>
                     <Camera />
                     <Script script={CameraControls} />
                 </Entity>
@@ -69,7 +69,7 @@ import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs'
 export default function App() {
     return (
         <Application graphicsDeviceOptions={{ antialias: false }} >
-            <Entity name="Camera" position={[0, 0, -2.5]}>
+            <Entity name="Camera" position={[0, 0, 2.5]}>
                 <Camera />
                 <Script script={CameraControls} />
             </Entity>
@@ -78,7 +78,7 @@ export default function App() {
 }
 ```
 
-We've positioned the camera 2.5 units down the negative Z axis. By default, a camera looks down the negative Z axis, so our camera is now looking toward the origin where we'll place our splat. The `CameraControls` will allow you to:
+We've positioned the camera 2.5 units down the Z axis. By default, a camera looks down the negative Z axis, so our camera is now looking toward the origin where we'll place our splat. The `CameraControls` will allow you to:
 
 - **Left mouse drag**: Orbit around the target
 - **Right mouse drag**: Pan the camera
@@ -108,7 +108,7 @@ function ToyCat() {
 export default function App() {
     return (
         <Application graphicsDeviceOptions={{ antialias: false }} >
-            <Entity name="Camera" position={[0, 0, -2.5]}>
+            <Entity name="Camera" position={[0, 0, 2.5]}>
                 <Camera />
                 <Script script={CameraControls} />
             </Entity>
@@ -149,7 +149,7 @@ function ToyCat() {
 export default function App() {
     return (
         <Application graphicsDeviceOptions={{ antialias: false }} >
-            <Entity name="Camera" position={[0, 0, -2.5]}>
+            <Entity name="Camera" position={[0, 0, 2.5]}>
                 <Camera />
                 <Script script={CameraControls} />
             </Entity>
