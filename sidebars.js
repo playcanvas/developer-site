@@ -699,8 +699,8 @@ const sidebars = {
               items: [
                 'user-manual/gaussian-splatting/building/your-first-app/engine',
                 'user-manual/gaussian-splatting/building/your-first-app/editor',
-                'user-manual/gaussian-splatting/building/your-first-app/web-components',
                 'user-manual/gaussian-splatting/building/your-first-app/react',
+                'user-manual/gaussian-splatting/building/your-first-app/web-components',
               ],
             },
             {
