@@ -102,8 +102,8 @@ Now let's test our interactive splat scene:
 1. Click the **LAUNCH** button in the Viewport's toolbar to run the project
 2. You should see the toy cat splat displayed in your browser
 3. Try interacting with it:
-   - **Left mouse drag**: Orbit around the splat
-   - **Mouse wheel**: Zoom in and out
+   * **Left mouse drag**: Orbit around the splat
+   * **Mouse wheel**: Zoom in and out
 
 ## Final Result
 
@@ -117,8 +117,8 @@ Congratulations! You've successfully created an interactive Gaussian splat appli
 
 Now that you have a working splat app, try experimenting with:
 
-- Swapping the toy cat `.sog` file for one of your own
-- Adding a user interface
-- Building more complex interactions with scripts
+* Swapping the toy cat `.sog` file for one of your own
+* Adding a user interface
+* Building more complex interactions with scripts
 
 :::
