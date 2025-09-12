@@ -58,7 +58,7 @@ Now let's add the downloaded splat to the project:
 2. Select **Upload** from the popup menu
 3. In the file open dialog, locate and select the downloaded `toy-cat.sog` and click **Open**
 
-The Editor processes the `.sog` file and displays it in your Assets panel as a `gsplat` asset (with name `toy-cat.sog`).
+The Editor processes the `.sog` file and displays it in your **ASSETS** panel as a `gsplat` asset (with name `toy-cat.sog`).
 
 ## Creating the Splat Entity
 

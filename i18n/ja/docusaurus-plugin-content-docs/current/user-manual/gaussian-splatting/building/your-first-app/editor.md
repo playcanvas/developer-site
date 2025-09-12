@@ -58,7 +58,7 @@ PlayCanvasは新しいプロジェクトのダッシュボードに移動しま�
 2. ポップアップメニューから **Upload** を選択します。
 3. ファイルを開くダイアログで、ダウンロードした `toy-cat.sog` を見つけて選択し、**Open** をクリックします。
 
-Editor は `.sog` ファイルを処理し、**Assets** パネルに `gsplat` アセット (名前は `toy-cat.sog`) として表示します。
+Editor は `.sog` ファイルを処理し、**ASSETS** パネルに `gsplat` アセット (名前は `toy-cat.sog`) として表示します。
 
 ## Splat エンティティの作成
 
