@@ -24,10 +24,11 @@ Model Viewerは、以下の一般的に使用されるGaussian splatフォーマ
 ### Splatsの表示方法
 
 1. **アクセス** [playcanvas.com/viewer](https://playcanvas.com/viewer)
-2. あなたのsplatをビューアに**ドラッグ＆ドロップ**します
-   - **PLY**および**Compressed PLY**ファイルの場合：個々の`.ply`ファイルをドラッグします
-   - **SOG (bundled)**ファイルの場合：個々の`.sog`ファイルをドラッグします
-   - **SOG (unbundled)**フォーマットの場合：`meta.json`と`.webp`画像を含む親フォルダーをドラッグします
+2. ファイルシステムからビューアへsplatを**ドラッグ＆ドロップ**します
+
+   :::info[unbundled SOGシーンの表示]
+   **SOG (unbundled)**フォーマットの場合：`meta.json`と`.webp`画像を含む**親フォルダー**をドラッグします
+   :::
 3. 3Dシーンを**ナビゲート**します：
 
    | 操作 | アクション |
