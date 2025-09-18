@@ -105,11 +105,11 @@ interface Meta {
 }
 ```
 
-> **Notes**
->
-> * All codebooks contain linear-space values, not sRGB.
-> * Image data MUST be treated as raw 8-bit integers (no gamma conversion).
-> * Unless otherwise stated, channels not mentioned are ignored.
+:::note
+* All codebooks contain linear-space values, not sRGB.
+* Image data **must** be treated as raw 8-bit integers (no gamma conversion).
+* Unless otherwise stated, channels not mentioned are ignored.
+:::
 
 ---
 
