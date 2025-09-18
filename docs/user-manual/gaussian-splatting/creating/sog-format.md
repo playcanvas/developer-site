@@ -179,7 +179,7 @@ switch (mode) {
 
 **Validity constraints**
 
-* `quats.a` MUST be in **252,253,254,255**. Other values are reserved.
+* `quats.a` **must** be in **252, 253, 254, 255**. Other values are reserved.
 
 ### 3.3 Scales
 
