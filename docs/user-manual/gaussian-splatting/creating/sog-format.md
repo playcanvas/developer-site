@@ -8,7 +8,7 @@ You can create SOG files with **[SplatTransform](https://github.com/playcanvas/s
 
 This document is the format specification.
 
-## 1) File set
+## 1. File set
 
 A SOG dataset is a set of images plus a metadata file:
 
@@ -65,7 +65,7 @@ Readers **must** unzip and then resolve files using `meta.json` exactly as for t
 
 ---
 
-## 2) `meta.json`
+## 2. `meta.json`
 
 ```ts
 interface Meta {
@@ -117,7 +117,7 @@ interface Meta {
 
 ---
 
-## 3) Property encodings
+## 3. Property encodings
 
 ### 3.1 Positions
 
@@ -262,7 +262,7 @@ const v = Math.floor(n / 64);
 
 ---
 
-## 4) Example `meta.json`
+## 4. Example `meta.json`
 
 ```json
 {
@@ -294,7 +294,7 @@ const v = Math.floor(n / 64);
 
 ---
 
-## 5) Versioning & compatibility
+## 5. Versioning & compatibility
 
 * Readers **must** check `version`. This document describes **version 2**.
 * Additional optional properties may appear in future versions; readers **should** ignore unrecognized fields.
