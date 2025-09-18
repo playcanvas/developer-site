@@ -59,7 +59,7 @@ A bundled SOG is a ZIP of the files above. Readers **should** accept either layo
 * **Multi-file directory** (recommended during authoring)
 * **Single archive** (e.g., `scene.sog`) containing the same files at the archive root
 
-Readers MUST unzip and then resolve files using `meta.json` exactly as for the multi-file version.
+Readers **must** unzip and then resolve files using `meta.json` exactly as for the multi-file version.
 
 ---
 
