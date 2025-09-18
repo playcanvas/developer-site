@@ -34,7 +34,7 @@ A SOG dataset is a set of images plus a metadata file:
 All per-Gaussian properties are co-located: the same pixel (x, y) across all property images (except shN_centroids) belongs to the same Gaussian.
 
 * Pixels are laid out **row-major**, origin at the **top-left**.
-* For image width `W` and height `H`, the number of addressable gaussians is `W*H`.
+* For image width `W` and height `H`, the number of addressable Gaussians is `W*H`.
 * `meta.count` MUST be `<= W*H`. Any trailing pixels are ignored.
 
 **Indexing math (zero-based):**
