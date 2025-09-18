@@ -291,7 +291,7 @@ const v = Math.floor(n / 64);
 
 ## 5) Versioning & compatibility
 
-* Readers MUST check `version`. This document describes **version 2**.
+* Readers **must** check `version`. This document describes **version 2**.
 * Additional optional properties may appear in future versions; readers SHOULD ignore unrecognized fields.
 
 ---
