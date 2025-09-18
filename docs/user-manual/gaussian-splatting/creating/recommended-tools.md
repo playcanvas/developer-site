@@ -66,4 +66,4 @@ Original reference implementation from the 3D Gaussian Splatting paper. Has a de
 
 ## Outputting a PLY File
 
-All of these tools can output trained Gaussian splat scenes in the PLY file format. The PLY format serves as the standard interchange format for 3D Gaussian Splats, making it possible to move your creations between different applications and workflows. To better understand what these tools are producing and how to work with the resulting files effectively, let's explore the [PLY format](ply-format.md) in detail.
+All of these tools can output trained Gaussian splat scenes in the PLY file format. The PLY format serves as the standard interchange format for 3D Gaussian Splats, making it possible to move your creations between different applications and workflows. To better understand what these tools are producing and how to work with the resulting files effectively, let's explore the [PLY format](../formats/ply.md) in detail.

@@ -1,5 +1,6 @@
 ---
-title: SOG file format
+title: The SOG Format
+sidebar_label: SOG
 ---
 
 **SOG (Spatially Ordered Gaussians)** is a compact container for 3D Gaussian Splat data. It achieves high compression via quantization (lossy by design), typically yielding files **\~15–20× smaller** than an equivalent PLY.
