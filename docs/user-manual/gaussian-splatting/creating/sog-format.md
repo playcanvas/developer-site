@@ -24,9 +24,11 @@ A SOG dataset is a set of images plus a metadata file:
 | `shN_centroids.webp` | SH palette coefficients (optional)  | RGBA             |
 
 :::note[Image formats]
-* By default, images SHOULD be **lossless WebP** to preserve quantized values exactly.
-* Each property in `meta.json` names its file, so other 8-bit RGBA-capable formats MAY be used.
+
+* By default, images **should** be **lossless WebP** to preserve quantized values exactly.
+* Each property in `meta.json` names its file, so other 8-bit RGBA-capable formats **may** be used.
 * Do not use lossy encodings for these assets as lossy compression will corrupt values and can produce visible/structural artifacts.
+
 :::
 
 ### 1.1 Image dimensions & indexing
@@ -35,7 +37,7 @@ All per-Gaussian properties are co-located: the same pixel (x, y) across all pro
 
 * Pixels are laid out **row-major**, origin at the **top-left**.
 * For image width `W` and height `H`, the number of addressable Gaussians is `W*H`.
-* `meta.count` MUST be `<= W*H`. Any trailing pixels are ignored.
+* `meta.count` **must** be `<= W*H`. Any trailing pixels are ignored.
 
 **Indexing math (zero-based):**
 
@@ -106,9 +108,11 @@ interface Meta {
 ```
 
 :::note
+
 * All codebooks contain linear-space values, not sRGB.
 * Image data **must** be treated as raw 8-bit integers (no gamma conversion).
 * Unless otherwise stated, channels not mentioned are ignored.
+
 :::
 
 ---
