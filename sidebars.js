@@ -648,6 +648,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/creating/taking-photos',
             'user-manual/gaussian-splatting/creating/recommended-tools',
             'user-manual/gaussian-splatting/creating/ply-format',
+            'user-manual/gaussian-splatting/creating/sog-format',
           ],
         },
         'user-manual/gaussian-splatting/viewing',
