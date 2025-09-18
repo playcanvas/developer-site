@@ -54,7 +54,7 @@ Right-handed:
 
 ### 1.3 Bundled variant
 
-A bundled SOG is a ZIP of the files above. Readers SHOULD accept either layout:
+A bundled SOG is a ZIP of the files above. Readers **should** accept either layout:
 
 * **Multi-file directory** (recommended during authoring)
 * **Single archive** (e.g., `scene.sog`) containing the same files at the archive root
