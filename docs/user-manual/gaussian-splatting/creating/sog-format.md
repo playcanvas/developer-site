@@ -31,7 +31,7 @@ A SOG dataset is a set of images plus a metadata file:
 
 ### 1.1 Image dimensions & indexing
 
-All per-Gaussian properties are co-located: the same pixel (x,y) across all property images except shN_centroids belongs to the same Gaussian.
+All per-Gaussian properties are co-located: the same pixel (x,y) across all property images (except shN_centroids) belongs to the same Gaussian.
 
 * Pixels are laid out **row-major**, origin at the **top-left**.
 * For image width `W` and height `H`, the number of addressable gaussians is `W*H`.
@@ -115,7 +115,9 @@ interface Meta {
 
 ## 3) Property encodings
 
-### 3.1 Positions: `means_l.webp`, `means_u.webp` (RGB, 16-bit per axis)
+### 3.1 Positions
+
+> `means_l.webp`, `means_u.webp` (RGB, 16-bit per axis)
 
 Each axis is quantized to **16 bits** across two images:
 
@@ -140,9 +142,9 @@ const p = {
 };
 ```
 
-The log transform is used as it allocates more precision near the origin.
+### 3.2 Orientation
 
-### 3.2 Orientation: `quats.webp` (RGBA, 26-bit “smallest-three”)
+> `quats.webp` (RGBA, 26-bit “smallest-three”)
 
 Quaternions are encoded with **3×8-bit components + 2-bit mode** (total **26 bits**) using the standard *smallest-three* scheme.
 
@@ -152,7 +154,7 @@ Quaternions are encoded with **3×8-bit components + 2-bit mode** (total **26 bi
 
 ```ts
 // Dequantize the stored three components:
-const toComp = (c: number) => (c / 255 - 0.5) * Math.SQRT2;
+const toComp = (c: number) => (c / 255 - 0.5) * 2.0 / Math.SQRT2;
 
 const a = toComp(quats.r);
 const b = toComp(quats.g);
@@ -167,10 +169,10 @@ const d = Math.sqrt(Math.max(0, 1 - t));
 // Place components according to mode
 let q: [number, number, number, number];
 switch (mode) {
-    case 0: q = [a, b, c, d]; break; // omitted = w
-    case 1: q = [d, b, c, a]; break; // omitted = x
-    case 2: q = [b, d, c, a]; break; // omitted = y
-    case 3: q = [b, c, d, a]; break; // omitted = z
+    case 0: q = [d, a, b, c]; break; // omitted = x
+    case 1: q = [a, d, b, c]; break; // omitted = y
+    case 2: q = [a, b, d, c]; break; // omitted = z
+    case 3: q = [a, b, c, d]; break; // omitted = w
     default: throw new Error("Invalid quaternion mode");
 }
 ```
@@ -179,7 +181,9 @@ switch (mode) {
 
 * `quats.a` MUST be in **252,253,254,255**. Other values are reserved.
 
-### 3.3 Scales: `scales.webp` (RGB via codebook)
+### 3.3 Scales
+
+>  `scales.webp` (RGB via codebook)
 
 Per-axis sizes are **codebook indices**:
 
@@ -191,7 +195,9 @@ const sz = meta.scales.codebook[scales.b];
 
 Interpretation (e.g., principal axis standard deviations vs. full extents) follows the source training setup; values are in **scene units**.
 
-### 3.4 Base color + opacity (DC): `sh0.webp` (RGBA)
+### 3.4 Base color + opacity (DC)
+
+> `sh0.webp` (RGBA)
 
 `sh0` holds the **DC (l=0)** SH coefficient per color channel and **alpha**:
 
@@ -212,12 +218,14 @@ const a = sh0.a / 255;
 
 > **Color space.** Values are **linear**. If you output to sRGB, apply the usual transfer after shading/compositing.
 
-### 3.5 Higher-order SH (optional): `shN_labels.webp`, `shN_centroids.webp`
+### 3.5 Higher-order SH (optional)
 
-If present, higher-order (AC) SH coefficients are stored via a **palette**:
+> `shN_labels.webp`, `shN_centroids.webp`
 
-* `shN.count` ∈ **\[1,64k]**
-* `shN.bands` ∈ **\[1,3]**
+If present, higher-order (AC) SH coefficients are stored via a palette:
+
+* `shN.count` ∈ **\[1,64k]** number of entries.
+* `shN.bands` ∈ **\[1,3]** number of bands per entry.
 
 **Labels**
 
@@ -229,14 +237,23 @@ const index = shN_labels.r + (shN_labels.g << 8);
 
 **Centroids (palette)**
 
-* `shN_centroids.webp` contains coefficients for spherical harmonics in a row-major fashion with 64 sets per row.
+* `shN_centroids.webp` is an RGB image storing the SH coefficient palette.
+* There are always 64 entries per row; entries are packed row-major with origin top-left.
 
-Therefore the width in pixels of the centroids texture varies based on the number of bands present:
-- 1-band: 64 * 3 = 96
-- 2-bands: 64 * 8 = 512
-- 3-bands: 64 * 15 = 960
+The texture width is dependent on the number of bands:
 
-The first coefficient for spherical harmonic 0 is in the top-left pixel (0, 0). The second coefficent is at pixel (1, 0), etc.
+| Bands | Coefficients | Texure width (pixels) |
+|---|---|---|
+| 1 | 3 | 64 * 3 = 96 |
+| 2 | 8 | 64 * 8 = 512 |
+| 3 | 15 | 64 * 15 = 960 |
+
+Calculating the pixel location for spherical harmonic entry n and coefficient c:
+```ts
+const coeffs = [3, 8, 15];
+const u = (n % 64) * coeffs[bands] + c;
+const v = Math.floor(n / 64);
+```
 
 ---
 
