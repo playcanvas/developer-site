@@ -23,10 +23,11 @@ A SOG dataset is a set of images plus a metadata file:
 | `shN_labels.webp`    | Indices into SH palette (optional)  | R,G              |
 | `shN_centroids.webp` | SH palette coefficients (optional)  | RGBA             |
 
-> **Image formats.**
-> By default, images SHOULD be **lossless WebP** to preserve quantized values exactly.
-> Each property in `meta.json` names its file, so other 8-bit RGBA-capable formats MAY be used.
-> Do not use lossy encodings for these assets as lossy compression will corrupt values and can produce visible/structural artifacts.
+:::note[Image formats]
+* By default, images SHOULD be **lossless WebP** to preserve quantized values exactly.
+* Each property in `meta.json` names its file, so other 8-bit RGBA-capable formats MAY be used.
+* Do not use lossy encodings for these assets as lossy compression will corrupt values and can produce visible/structural artifacts.
+:::
 
 ### 1.1 Image dimensions & indexing
 
