@@ -177,13 +177,13 @@ switch (mode) {
 }
 ```
 
-**Validity constraints**
+#### Validity constraints
 
 * `quats.a` **must** be in **252, 253, 254, 255**. Other values are reserved.
 
 ### 3.3 Scales
 
->  `scales.webp` (RGB via codebook)
+> `scales.webp` (RGB via codebook)
 
 Per-axis sizes are **codebook indices**:
 
@@ -227,7 +227,7 @@ If present, higher-order (AC) SH coefficients are stored via a palette:
 * `shN.count` ∈ **\[1,64k]** number of entries.
 * `shN.bands` ∈ **\[1,3]** number of bands per entry.
 
-**Labels**
+#### Labels
 
 * `shN_labels.webp` stores a **16-bit index** per gaussian with range (0..count-1).
 
@@ -235,7 +235,7 @@ If present, higher-order (AC) SH coefficients are stored via a palette:
 const index = shN_labels.r + (shN_labels.g << 8);
 ```
 
-**Centroids (palette)**
+#### Centroids (palette)
 
 * `shN_centroids.webp` is an RGB image storing the SH coefficient palette.
 * There are always 64 entries per row; entries are packed row-major with origin top-left.
@@ -249,6 +249,7 @@ The texture width is dependent on the number of bands:
 | 3 | 15 | 64 * 15 = 960 |
 
 Calculating the pixel location for spherical harmonic entry n and coefficient c:
+
 ```ts
 const coeffs = [3, 8, 15];
 const u = (n % 64) * coeffs[bands] + c;
