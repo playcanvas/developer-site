@@ -434,7 +434,7 @@ class GameLogic extends Script {
 
 ### Interface Attributes
 
-If you want to group attributes together and set individual constraints on its members you can use an Interface Attribute. This provides a morea more flexible way of grouping attributes.
+If you want to group attributes together and set individual constraints on its members you can use an Interface Attribute. This provides a more flexible way of grouping attributes.
 
 ```javascript
 /** @interface */
