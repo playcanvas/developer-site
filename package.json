@@ -42,7 +42,7 @@
     "@docusaurus/preset-classic": "^3.8.1",
     "@docusaurus/theme-mermaid": "^3.8.1",
     "@mdx-js/react": "^3.1.1",
-    "@playcanvas/react": "^0.9.1",
+    "@playcanvas/react": "^0.10.0",
     "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
     "docusaurus-plugin-sass": "^0.2.6",
@@ -51,7 +51,7 @@
     "raw-loader": "^4.0.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "sass": "^1.92.1"
+    "sass": "^1.93.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.8.1",
