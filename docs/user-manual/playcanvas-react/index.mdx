@@ -4,10 +4,13 @@ title: PlayCanvas React
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import PlayCanvasReactExample from '@site/src/components/playcanvas-react/PlayCanvasReactExample';
 
-[PlayCanvas React](https://github.com/playcanvas/react) is a modern library that brings the power of the PlayCanvas 3D engine into the React ecosystem. It provides a declarative, component-based approach to building interactive 3D applications using familiar React patterns.
+[@playcanvas/react](https://github.com/playcanvas/react) brings PlayCanvas to the React ecosystem. It provides a declarative, component-based approach to building interactive 3D applications using familiar React patterns and a powerful ECS architecture. It's a thin wrapper around PlayCanvas - a batteries included library for building interactive 3D content in React. 
 
-Explore the [official documentation](https://playcanvas-react.vercel.app/docs) or browse the [GitHub repository](https://github.com/playcanvas/react) for more.
+Designed to get you up and running fast.
+
+<PlayCanvasReactExample />
 
 <div className='flex py-1 font-bold mb-2'>
   <a href="#quick-start">
@@ -17,6 +20,60 @@ Explore the [official documentation](https://playcanvas-react.vercel.app/docs) o
   </a>  
   <a href="https://github.com/playcanvas/react" className='foreground underline' target="_blank">View on GitHub ↗</a>
 </div>
+
+### How does it work?
+
+PlayCanvas has a powerful ECS architecture that aligns perfectly with React's declarative nature. You create Entities, add Components to them, and load assets. That's it. No more worrying about the underlying engine, just build your scene.
+
+Here's how you load a 3D asset, create an orbit camera and render the model.
+
+```tsx
+export const Lambo = () => {
+  // Load an asset
+  const { asset: model } = useModel('/assets/lambo.glb');
+
+  // If the asset is not loaded, return null
+  if (!model) return null;
+
+  return <>    
+    {/* create and position a camera entity */}
+    <Entity name='camera' position={[4, 1, 4]}>
+      {/* Add a camera component */}
+      <Camera clearColor='#090707' fov={28} />
+      {/* Add a orbit controls component */}
+      <OrbitControls zoomRange={[3, 6]} pitchRange={[-90, -5]}/>
+    </Entity>
+
+    {/* render the asset */}
+    <Render type='asset' asset={model}/>
+  </>
+}
+```
+
+### Full Engine Power, React Simplicity
+
+PlayCanvas React gives you access to the **entire** PlayCanvas engine via intuitive React components, without needing third-party libraries:
+
+- **Physics** – Full Ammo.js integration
+- **Gaussian Splats** – Cutting-edge 3D point cloud rendering
+- **Scripts** – Escape hatches for custom logic when needed
+
+In addition PlayCanvas React provides:
+- **Suspenseful Asset loading** – Wait for assets to load before rendering
+- **Hooks** – Simplify the process of loading assets and managing different assets.
+- **Pointer Events** – React-style event propagation and bubbling
+
+
+## Getting Started
+
+Follow our [Getting Started](./getting-started/) guide which will walk you through your first PlayCanvas React project.
+
+Alternatively, you can spin up a new project in seconds with our [StackBlitz template](https://playcanvas-react.vercel.app/new)
+
+
+### Examples
+
+Here are some examples of what you can build with PlayCanvas React:
 
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
   <a href="https://playcanvas-react.vercel.app/examples/splats">
@@ -49,39 +106,14 @@ Explore the [official documentation](https://playcanvas-react.vercel.app/docs) o
   </a>
 </div>
 
-## Why React?
-
-React is at the heart of modern web development, and 3D content is no longer just for games. **PlayCanvas React** brings real-time 3D into the React ecosystem, enabling developers to build immersive experiences using the same tools and patterns they already use. With support for hooks, context, and component composition, it’s 3D — the React way.
-
-Explore more in the [example gallery](https://playcanvas-react.vercel.app/examples).
-
-### Full Engine Power, React Simplicity
-
-PlayCanvas React gives you access to the **entire** PlayCanvas engine via intuitive React components, with all its powerful features built-in without needing third-party libraries:
-
-- **Physics** – Full Ammo.js integration
-- **Gaussian Splats** – Cutting-edge 3D point cloud rendering
-- **Pointer Events** – React-style event propagation and bubbling
-- **Asset System** – Declarative and imperative loading of assets
-- **Scripts** – Escape hatches for custom logic when needed
-
-## Quick Start
-
-**The fastest way to get started is with the [StackBlitz template](https://playcanvas-react.vercel.app/new)**. It's a one-click experience that launches a basic scene with a camera and a cube. Fork, edit, or clone the code to make it your own.
-
-Alternatively, follow the [Getting Started guide](https://playcanvas-react.vercel.app/docs/getting-started) or install it directly in your project:
-
-```bash
-npm install @playcanvas/react
-```
-
-Then follow the [first scene walkthrough](./building-a-scene) to learn how to compose a scene using PlayCanvas React components and APIs.
 
 ## Learn More
 
-- [Getting Started Guide](https://playcanvas-react.vercel.app/docs/guide/getting-started) - Set up your first project
+- [Getting Started Guide](./getting-started/) - Set up your first project
+- [Building a Scene](./building-a-scene) - Learn the fundamentals of scene composition
 - [Features Showcase](https://playcanvas-react.vercel.app/docs#features) - Explore all capabilities
 - [Interactive Playground](https://playcanvas-react.vercel.app/examples) - Learn by doing
 - [API Reference](https://playcanvas-react.vercel.app/docs/api) - Complete component documentation
 
-Join the growing community of developers building the next generation of 3D web experiences with **PlayCanvas React**!
+
+Explore the [official documentation](https://playcanvas-react.vercel.app/docs) or browse the [GitHub repository](https://github.com/playcanvas/react) for more.

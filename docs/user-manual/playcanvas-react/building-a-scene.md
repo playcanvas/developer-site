@@ -2,16 +2,8 @@
 title: Building a Scene
 ---
 
-import { Application, Entity } from '@playcanvas/react';
-import { Camera, Render, Light, Collision } from '@playcanvas/react/components';
-import { useState, lazy } from 'react';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import InteractiveSource from '!!raw-loader!@site/src/components/playcanvas-react-example';
-import CodeBlock from '@theme/CodeBlock';
-import BrowserOnly from '@docusaurus/BrowserOnly';
-
-export const LazyInteractive = lazy(() => import('@site/src/components/playcanvas-react-example'));
 
 Let's build a simple 3D scene step by step using PlayCanvas React. We'll create a basic scene with a lit sphere and see it running live in your browser.
 
@@ -109,25 +101,7 @@ export default function App() {
 </TabItem>
 <TabItem value="demo" label="Live Demo">
 
-export const CompleteScene = () => {
-  return (
-    <div style={{height: '400px', width: '100%', position: 'relative'}}>
-      <Application>
-        <Entity name="camera" position={[0, 0, 5]}>
-          <Camera clearColor="#1a1a1a" />
-        </Entity>
-        <Entity name="light" rotation={[45, 45, 0]}>
-          <Light type="directional" intensity={1} />
-        </Entity>
-        <Entity name="sphere">
-          <Render type="sphere" />
-        </Entity>
-      </Application>
-    </div>
-  );
-};
-
-<CompleteScene />
+You can see this example running live at [playcanvas-react.vercel.app/examples/hello-world](https://playcanvas-react.vercel.app/examples/hello-world).
 
 </TabItem>
 </Tabs>
@@ -138,18 +112,36 @@ You should now see a white sphere in the center of your screen!
 
 One of the great advantages of using React is how easy it is to add interactivity. Let's make our sphere respond to clicks.
 
-**Click on the Demo Tab to view the results.**
+```jsx
+import { Application, Entity } from '@playcanvas/react'
+import { Camera, Light, Render } from '@playcanvas/react/components'
+import { useState } from 'react'
 
-<Tabs>
-    <TabItem default value="code" label="Code">
-      <CodeBlock language="jsx">{InteractiveSource}</CodeBlock>
-    </TabItem>
-    <TabItem  value="demo" label="Demo" className='example-demo'>
-      <BrowserOnly>
-        {() => <LazyInteractive/>}
-      </BrowserOnly>
-    </TabItem>
-</Tabs>
+export default function App() {
+  const [sphereColor, setSphereColor] = useState([1, 1, 1])
+  
+  const handleSphereClick = () => {
+    // Change to a random color when clicked
+    setSphereColor([Math.random(), Math.random(), Math.random()])
+  }
+
+  return (
+    <Application>
+      <Entity name="camera" position={[0, 0, 5]}>
+        <Camera />
+      </Entity>
+      <Entity name="light" rotation={[45, 45, 0]}>
+        <Light type="directional" />
+      </Entity>
+      <Entity name="sphere" onClick={handleSphereClick}>
+        <Render type="sphere" />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+You can see this interactive example running live at [playcanvas-react.vercel.app/examples/pointer-events](https://playcanvas-react.vercel.app/examples/pointer-events).
 
 ## Key Differences from Web Components
 
