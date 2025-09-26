@@ -13,7 +13,7 @@ npx create playcanvas@latest -t react-ts
 
 This creates a new project with everything set up and ready to go. If you've followed the prompts, you'll have a new PlayCanvas react project running in your browser. 
 
-We recommend following [this guide](../building-a-scene) to start building your first project.
+We recommend following [this guide](../../building-a-scene) to start building your first project.
 
 :::note
 
@@ -49,7 +49,7 @@ pnpm add @playcanvas/react playcanvas
 </TabItem>
 </Tabs>
 
-Once installed, you can start using it in your project. As the next step, we recommend following the [building a scene guide](../building-a-scene) to create your first project.
+Once installed, you can start using it in your project. As the next step, we recommend following the [building a scene guide](../../building-a-scene) to create your first project.
 
 ### Starter Templates
 

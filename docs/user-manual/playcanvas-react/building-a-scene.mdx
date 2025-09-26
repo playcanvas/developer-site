@@ -45,7 +45,7 @@ We'll build the scene step by step, and you'll see the code and live examples at
 
 ## Your first scene
 
-If you've not already done so, **follow the [Installation Guide](./getting-started/installation) guide**, and
+If you've not already done so, **follow the [Installation Guide](../getting-started/installation) guide**, and
 create a new PlayCanvas React project.
 
 ```bash
@@ -90,7 +90,7 @@ If you run this or click the Demo tab, you'll see the box with a bit of lighting
 
 We've loaded an environment atlas using the `useEnvAtlas` hook. This is a hook that allows us to load an environment atlas from a URL which we pass to the `Environment` component. The library provides a number of powerful hooks for loading different types of assets, that let you manage loading states and errors.
 
-You can learn more about [loading assets](./guide/loading-assets) in the docs.
+You can learn more about [loading assets](../guide/loading-assets) in the docs.
 
 ### Adding components
 
@@ -130,7 +130,7 @@ Ok, so we have a camera and a rotating box. Let's make it more interesting by ad
     <AddModel />
 </CodeExample>
 
-You should now see the Lamborghini model in the scene. We've removed the box primitive by switching the `Render` to render assets. The asset is loaded using the `useModel` hook which is passed directly to the `Render` component. While the asset loads, we're returning `null` so nothing is rendered until the asset is loaded. You could optionally use a loading spinner here instead. Check out the [loading assets guide](./guide/loading-assets) to learn more about loading assets.
+You should now see the Lamborghini model in the scene. We've removed the box primitive by switching the `Render` to render assets. The asset is loaded using the `useModel` hook which is passed directly to the `Render` component. While the asset loads, we're returning `null` so nothing is rendered until the asset is loaded. You could optionally use a loading spinner here instead. Check out the [loading assets guide](../guide/loading-assets) to learn more about loading assets.
 
 ## Staging the scene
 
@@ -142,7 +142,7 @@ We've now got a basic 3D scene with a camera, a rotating model, and some environ
 
 ## Live example
 
-We now have a complete 3D scene with a camera, a rotating model, and some environment lighting. You can now start adding your own assets and creating your own scenes. Check out the [loading assets guide](./guide/loading-assets) to learn how to load your own assets and add interactivity with scripts.
+We now have a complete 3D scene with a camera, a rotating model, and some environment lighting. You can now start adding your own assets and creating your own scenes. Check out the [loading assets guide](../guide/loading-assets) to learn how to load your own assets and add interactivity with scripts.
 
 ```jsx title="src/App.jsx" live noInline
 const Scene = () => {
@@ -181,9 +181,9 @@ render(<App />)
 
 ## Your next steps
 
-Now you've got a basic understanding of the core concepts of PlayCanvas React, you're ready to start building your own scenes. Check out the [loading assets guide](./guide/loading-assets) to learn how to load your own assets and add interactivity with scripts.
+Now you've got a basic understanding of the core concepts of PlayCanvas React, you're ready to start building your own scenes. Check out the [loading assets guide](../guide/loading-assets) to learn how to load your own assets and add interactivity with scripts.
 
-You can also check out the [guide](./guide/) to learn about the different concepts and techniques you can use to build your scenes.
+You can also check out the [guide](../guide/) to learn about the different concepts and techniques you can use to build your scenes.
 
 
 
