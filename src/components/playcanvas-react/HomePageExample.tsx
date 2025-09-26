@@ -22,7 +22,7 @@ const HomePageExample = () => {
 
     return (
         <Entity>
-            <Environment envAtlas={envAtlas} showSkybox={false} skyboxIntensity={2}/>
+            <Environment envAtlas={envAtlas} showSkybox={false} />
             <Grid />
             <ShadowCatcher width={5} depth={5} />
             <Entity name='camera' position={[4, 1, 4]}>

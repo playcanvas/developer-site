@@ -21,7 +21,7 @@ Designed to get you up and running fast.
   <a href="https://github.com/playcanvas/react" className='foreground underline' target="_blank">View on GitHub ↗</a>
 </div>
 
-### How does it work?
+## How does it work?
 
 PlayCanvas has a powerful ECS architecture that aligns perfectly with React's declarative nature. You create Entities, add Components to them, and load assets. That's it. No more worrying about the underlying engine, just build your scene.
 
@@ -50,19 +50,16 @@ export const Lambo = () => {
 }
 ```
 
-### Full Engine Power, React Simplicity
+## Full Engine Power, React Simplicity
 
-PlayCanvas React gives you access to the **entire** PlayCanvas engine via intuitive React components, without needing third-party libraries:
+PlayCanvas React gives you access to the **entire** PlayCanvas engine—no third-party libraries required. If it’s possible in PlayCanvas, it’s possible in PlayCanvas React.  
 
-- **Physics** – Full Ammo.js integration
-- **Gaussian Splats** – Cutting-edge 3D point cloud rendering
-- **Scripts** – Escape hatches for custom logic when needed
+On top of that, PlayCanvas React adds a set of **React-first features** to make development faster and more ergonomic:
 
-In addition PlayCanvas React provides:
-- **Suspenseful Asset loading** – Wait for assets to load before rendering
-- **Hooks** – Simplify the process of loading assets and managing different assets.
-- **Pointer Events** – React-style event propagation and bubbling
-
+- **Asset Loading** – React-style asset loading with Suspense. Fine-grained control over when and how assets are fetched.
+- **Pointer Events** – Familiar event bubbling for clicks, drags, and gestures. Attach listeners to any entity and handle events naturally.
+- **Physics** – Lazy-loaded physics engine that integrates cleanly with React’s lifecycle.
+- **Hooks** – Convenient hooks for engine events, materials, asset state, and more.
 
 ## Getting Started
 
@@ -70,10 +67,9 @@ Follow our [Getting Started](./getting-started/) guide which will walk you throu
 
 Alternatively, you can spin up a new project in seconds with our [StackBlitz template](https://playcanvas-react.vercel.app/new)
 
+## Examples
 
-### Examples
-
-Here are some examples of what you can build with PlayCanvas React:
+But less talking, more doing. Here are some examples of what you can build with PlayCanvas React:
 
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
   <a href="https://playcanvas-react.vercel.app/examples/splats">
@@ -105,7 +101,6 @@ Here are some examples of what you can build with PlayCanvas React:
     />
   </a>
 </div>
-
 
 ## Learn More
 

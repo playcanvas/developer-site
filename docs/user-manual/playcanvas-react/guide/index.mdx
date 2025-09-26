@@ -1,0 +1,142 @@
+---
+title: Concepts
+---
+PlayCanvas React is a thin wrapper around the PlayCanvas engine. It's a simple declarative interface over the engine API which surfaces all the features of the engine plus a few extras to make it easier to use. Anything you can do with the engine, you can do with PlayCanvas React.
+
+## Application
+
+The `Application` is the root component of your PlayCanvas React application. It initializes the engine and provides a rendering context. If you have a single canvas in your app, it will map to an `Application` component.
+
+The `<Application />` has a number of properties for configuring the scene. You can set the fill mode, resolution mode to control how the canvas fills the window, and other properties that control the graphics device.
+
+```jsx
+<Application>
+  {/* Your scene content */}
+</Application>
+```
+
+Learn more about the `Application` component in the [API documentation](https://playcanvas-react.vercel.app/api/application).
+
+## The Basics
+
+The Engine itself uses an **Entity Component System** - it's a common architecture used by many game engines that separates out behaviour from data. ECS maps incredibly well to the declarative nature of React. It allows you to structure your scene in a way that is easy to understand and maintain.
+
+Let's take a simple example. To make a camera in PlayCanvas React, you need a `Camera` component and an `Entity`. You add the Camera to the Entity. The Entity has position and rotation allowing you to move the camera in the scene, and the Camera component provides the necessary functionality to render things. Let's take a look at how to do this in both React and JavaScript.
+
+<Tabs>
+  <TabItem label='React' value='react'>
+  ```jsx title="app.jsx"
+  <Application>
+    <Entity name='camera' position={[0, 0, 5]}>
+      <Camera />
+    </Entity>
+  </Application>
+  ```
+  </TabItem>
+  <TabItem label='JavaScript' value='javascript'>
+  ```js title="app.js"
+  const app = new Application();
+  app.init();
+
+  const camera = new Entity('camera');
+  camera.setPosition(0, 0, 5);
+  camera.create('camera')
+  app.root.addChild(camera);
+  app.start();
+  ```
+  </TabItem>
+</Tabs>
+
+## Components
+
+You can attach multiple components to an Entity, each providing a different functionality. There are a wide range of components available, and any component you can use in the engine, you can use in PlayCanvas React.
+
+- **Lights** (Directional, Point, Spot)
+- **Cameras** (Perspective, Orthographic)
+- **Render** (Sphere, Box, Cylinder, Cone, Plane, etc.)
+- **RigidBody** (RigidBody, Collision)
+- **Collision** (Collision)
+- **Anim** (Animation, Skinning)
+- **Gsplat** (Gsplat)
+- **Screen** (Screen)
+- **RigidBody** (RigidBody)
+- **Anim** (Animation, Skinning)
+
+Now that you've seen how a basic PlayCanvas React app is structured, let's look at some of the most commonly used components.
+
+## Cameras
+
+To view our scene, we need a camera. In PlayCanvas React, we use `Entity` components as containers and attach component behaviors like `Camera`:
+
+```jsx
+import { Application, Entity } from '@playcanvas/react'
+import { Camera } from '@playcanvas/react/components'
+
+export default function App() {
+  return (
+    <Application>
+      <Entity name="camera" position={[0, 0, 5]}>
+        <Camera />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+We've added a camera entity positioned 5 units down the positive Z axis. By default, a camera looks down the negative Z axis so our camera is now looking at the origin. The rendered scene shows a solid grey color (the clear color of the camera).
+
+## Lights
+
+Let's add a directional light to illuminate our scene:
+
+```jsx
+import { Application, Entity } from '@playcanvas/react'
+import { Camera, Light } from '@playcanvas/react/components'
+
+export default function App() {
+  return (
+    <Application>
+      <Entity name="camera" position={[0, 0, 5]}>
+        <Camera />
+      </Entity>
+      <Entity name="light" rotation={[45, 45, 0]}>
+        <Light type="directional" />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+The light is rotated to shine at an angle, which will create more interesting shading on our objects.
+
+## Primitives
+
+Now let's add a sphere to our scene using the `Render` component:
+
+```jsx
+import { Application, Entity } from '@playcanvas/react'
+import { Camera, Light, Render } from '@playcanvas/react/components'
+
+export default function App() {
+  return (
+    <Application>
+      <Entity name="camera" position={[0, 0, 5]}>
+        <Camera />
+      </Entity>
+      <Entity name="light" rotation={[45, 45, 0]}>
+        <Light type="directional" />
+      </Entity>
+      <Entity name="sphere">
+        <Render type="sphere" />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+You should now see a white sphere in the center of your screen!
+
+
+## Next Steps
+
+Now you have the basics, it's time to learn about [Interactivity](/docs/user-manual/playcanvas-react/guide/interactivity), how to [manage assets](/docs/user-manual/playcanvas-react/guide/loading-assets) and how to use [Physics](/docs/user-manual/playcanvas-react/guide/physics) in your project. With those basics, you're ready to build your first project!

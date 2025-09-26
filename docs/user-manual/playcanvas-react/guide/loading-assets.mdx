@@ -4,13 +4,13 @@ title: Loading Assets
 
 # Working with Assets
 
-Assets are a core part of any 3D application, and they can also take a significant amount time to load, which can make your app feel sluggish. Knowing how to load and manage assets efficiently is key to a smooth user experience.
+Assets are a core part of any 3D application, and they generally take the most time to load, which has a direct impact on your user's experience. Knowing how to load and manage assets efficiently is key to a smooth UX. Whether you want to load everything up front, or provide a fast first render, PlayCanvas React has you covered.
 
 `@playcanvas/react` provides a set of specialized hooks for loading different types of assets, as well as a utility function for loading assets. For detailed API documentation, see the API reference (coming soon).
 
 ## Basic Usage
 
-The simplest way to load an asset is to use one of the specialized hooks.
+The simplest way to load an asset is to use one of the specialized hooks. There are special hooks for models, gaussian splats, textures and environment map etc, but each have a similar shape.
 
 ```tsx title="model-viewer.tsx"
 import { useModel } from '@playcanvas/react/hooks';
@@ -70,11 +70,9 @@ There are different hooks for loading different types of assets. You can create 
 - `useEnvAtlas` for loading environment atlases
 - `useAsset` for loading any type of asset
 
-## Advanced Patterns
-
 ### Asset Caching
 
-Assets are cached by default to avoid reloading the same file multiple times. This is useful for optimizing memory usage, but you'll need to manually unload assets when they're no longer needed.
+Assets are cached by default to avoid reloading the same file multiple times. This means your not duplicating on memory, but you'll need to ensure assets are correctly unloaded when they're no longer needed.
 
 ```tsx title="unloading-model-viewer.tsx"
 import { useModel } from '@playcanvas/react/hooks';
@@ -99,41 +97,47 @@ export function UnloadingModelViewer() {
 
 ### Custom Loading States
 
-You can create custom loading states for your assets:
+You can placeholders or custom loaders whilst assets load by checking the loading state of an asset. This gives you granular control
 
 ```tsx title="loading-spinner.tsx"
-import { Script, Entity, Render } from '@playcanvas/react/components';
-import { Script as PcScript } from 'playcanvas';
-
-// Spins an entity
-class Spinner extends PcScript {
-    update(dt: number) {
-        this.entity.rotateLocal(0, 10 * dt, 0);
-    }
-}
-
-// A component that displays a loading spinner
-export function LoadingSpinner() {
-  return (
-    <Entity>
-      <Script type={Spinner}/>
-      <Render type='box'/>
-    </Entity>
-  )
-}
+import { Entity, Render } from '@playcanvas/react/components';
 
 // A component that displays a model with a custom loading state
 export function ModelWithCustomLoading() {
-  const { asset, loading } = useModel('model.glb');
+  const { asset: plane, loading: planeLoading } = useModel('plane.glb');
+  const { asset: car, loading: carLoading } = useModel('car.glb');
     
-  if (loading) return <LoadingSpinner />;
-  return <Container asset={asset} />;
+  if (planeLoading || carLoading) return <LoadingSpinner />;
+
+  return <>
+    <Render asset={car} />
+    <Render asset={plane} />
+  </>
+}
+```
+
+### Progressive Loading
+
+The loading hooks also provide a simple mechanic to progressively load assets, so you can prioritize rendering quickly following up with high quality content later.
+
+```tsx title="progressive-loading.tsx"
+import { Entity, Render } from '@playcanvas/react/components';
+
+// A component that displays a model with a custom loading state
+export function ProgressiveAsset({ low, high }) {
+  const { asset: low } = useModel(low); // load the low quality asset
+  const { asset: high } = useModel(low && high); // load the high quality asset, when the low quality is loaded
+  
+  // Show a spinner if nothing is visible
+  if (!low && !high ) return <LoadingSpinner />;
+
+  return <Render asset={high || low} />
 }
 ```
 
 ### Data Fetching Libraries
 
-If you need more advanced caching or loading strategies, you can integrate with libraries like **React Query** or **SWR** using the `fetchAsset` utility function.
+If you need more advanced caching or loading strategies, you can integrate with libraries like **React Query** or **SWR** or any other Promise based library using the `fetchAsset` utility.
 
 ```tsx title="model-with-query.tsx"
 import { fetchAsset } from '@playcanvas/react/utils';

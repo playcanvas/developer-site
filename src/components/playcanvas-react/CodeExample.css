@@ -1,0 +1,20 @@
+.code-example-demo {
+    position: relative;
+    height: 500px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.code-example-demo-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 1rem;
+}
+
+.code-example-demo-footer a {
+    color: var(--ifm-color-primary);
+    text-decoration: underline;
+    cursor: pointer;
+}

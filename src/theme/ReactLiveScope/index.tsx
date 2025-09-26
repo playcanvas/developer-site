@@ -1,5 +1,10 @@
 import React from 'react';
 
+// Engine Scripts
+import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs';
+import { ShadowCatcher as ShadowCatcherScript } from 'playcanvas/scripts/esm/shadow-catcher.mjs';
+import { Grid as GridScript } from 'playcanvas/scripts/esm/grid.mjs';
+
 // PlayCanvas React
 import * as PlayCanvasReact from '@playcanvas/react';
 import * as PlayCanvasReactComponents from '@playcanvas/react/components';
@@ -22,8 +27,11 @@ const ReactLiveScope: unknown = {
   ...PlayCanvasReactHooks,
   Grid,
   ShadowCatcher,
+  GridScript,
+  ShadowCatcherScript,
   StaticPostEffects,
   AutoRotate,
+  CameraControls,
 };
 
 export default ReactLiveScope;

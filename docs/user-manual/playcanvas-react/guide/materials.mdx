@@ -1,0 +1,40 @@
+---
+title: Materials
+---
+
+# Working with Materials
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { Materials } from './components/materials';
+import MaterialsSource from '!!raw-loader!./components/materials.jsx';
+
+Materials are a fundamental part of 3D graphics. They define the appearance of 3D objects and are used to create realistic lighting effects. Materials can be applied to `Render` components to change the appearance of 3D objects. They accept a wide range of properties to control the appearance of the material.
+
+The `useMaterial` hook returns a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance. This is useful if you need to create materials and apply them to `Render` components.
+
+```jsx copy filename="use-material.jsx"
+import { useMaterial } from '@playcanvas/react/hooks'
+
+const RedBox = () => {
+  const material = useMaterial({ diffuse: 'red' });
+  return (
+    <Entity>
+      <Render type="box" material={material} />
+    </Entity>
+  )
+}
+```
+
+In the example below, we're using the `useMaterial` hook to create a material and applying it to a `Render` component. We also add a `onClick` event to the `Entity` to change the material properties when the cube is clicked.
+
+<CodeExample label="Click the cube to change the materials properties" filename="materials.jsx" code={MaterialsSource} showDemo>
+    <Application usePhysics>
+        <Staging useControls={true} camera={[3, 2, 3]} useGrid={true}>
+            <Materials />
+        </Staging>
+    </Application>
+</CodeExample>
+
+Materials have a wide range of properties that can be used to control the appearance of the material. You can find the full list of properties [here](https://api.playcanvas.com/engine/classes/StandardMaterial.html).
+

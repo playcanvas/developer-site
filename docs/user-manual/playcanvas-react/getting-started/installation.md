@@ -5,21 +5,21 @@ title: Installation
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Installation
-
-The recommended way to get started is to use the official PlayCanvas scaffolding tool, and follow the prompts
+The recommended way to get started is to use the official PlayCanvas scaffolding tool, and follow the prompts.
 
 ```bash
 npx create playcanvas@latest -t react-ts
 ```
 
+This creates a new project with everything set up and ready to go. If you've followed the prompts, you'll have a new PlayCanvas react project running in your browser. 
+
+We recommend following [this guide](../building-a-scene) to start building your first project.
+
 :::note
 
-We're working on adding more react templates, but only have typescript for now
+We’re working on adding more React templates. Currently, only **TypeScript** is available.
 
 :::
-
-If you've followed the prompts, you'll have a new PlayCanvas react project running in your browser. We recommend following [this guide](./your-first-scene) to start building your first project.
 
 ## Manual Installation
 
@@ -49,4 +49,8 @@ pnpm add @playcanvas/react playcanvas
 </TabItem>
 </Tabs>
 
-Once installed, you can start using it in your project. As the next step, we recommend following the [getting started guide](./your-first-scene) to create your first project.
+Once installed, you can start using it in your project. As the next step, we recommend following the [building a scene guide](../building-a-scene) to create your first project.
+
+### Starter Templates
+
+Alternatively you can grab one of the [templates directly](https://github.com/playcanvas/create-playcanvas/tree/main/templates) or quickly spin a project up from our [StackBlitz template](https://stackblitz.com/edit/playcanvas-react-template?file=src%2FScene.tsx)
