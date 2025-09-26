@@ -1,12 +1,12 @@
 ---
-title: エディタの使用
+title: エディターの使用
 ---
 
-[PlayCanvas Editor](/user-manual/editor) を使用して、シンプルな Gaussian splat アプリケーションを段階的に構築しましょう。インタラクティブな3Dの猫のおもちゃのsplatを回転させることができるシーンを作成します。
+[PlayCanvas Editor](/user-manual/editor) を使って、シンプルな Gaussian splat アプリケーションを段階的に構築しましょう。インタラクティブな3Dの猫のオモチャの Splat を回転させられるシーンを作成します。
 
 :::tip
 
-構築するプロジェクトは[こちら](https://playcanvas.com/project/1372123/overview/my-first-splat-app)で確認できます。一から構築する代わりに、[フォーク](/user-manual/editor/projects/creating/#fork-an-existing-project)して使用することもできます。または、以下の手順に従っている間に迷った場合の参考として使用してください。
+構築するプロジェクトは [こちら](https://playcanvas.com/project/1372123/overview/my-first-splat-app) から見つけることができます。ゼロから構築する代わりに、代わりに単に [フォーク](/user-manual/editor/projects/creating/#fork-an-existing-project) することもできます。または、以下の手順に従っていて行き詰まった場合に参照として使用してください。
 
 :::
 
@@ -16,107 +16,98 @@ title: エディタの使用
 
 <video autoPlay muted loop controls src='/video/my-first-splat-editor.mp4' style={{width: '100%', height: 'auto'}} />
 
-以下に、ビデオで示されたアクションを、あなたが従うことができる一連のステップとして示します。
+以下は、ビデオで示されているアクションを、実行可能な一連の手順としてまとめたものです。
 
 ## 新しいプロジェクトの作成
 
 まず、新しいPlayCanvasプロジェクトを作成しましょう。
 
-1. [playcanvas.com](https://playcanvas.com) にアクセスし、アカウントにサインインします
-2. **「NEW」** をクリックして新しいプロジェクトを作成します
-3. **「Blank Project」** テンプレートを選択します
-4. 「My First Splat App」のような名前を入力します
-5. **「CREATE」** をクリックしてプロジェクトを作成します
+1. [playcanvas.com](https://playcanvas.com) にアクセスし、アカウントにサインインします。
+2. **NEW** をクリックして新しいプロジェクトを作成します。
+3. **Blank Project** テンプレートを選択します。
+4. 「My First Splat」のような名前を入力します。
+5. **CREATE** をクリックしてプロジェクトを作成します。
 
-新しいプロジェクトのダッシュボードに移動します。EDITORボタンをクリックすると、カメラ、ディレクショナルライト、キューブ、プレーンのみを含む空のシーンでエディタが開きます。
+PlayCanvasは新しいプロジェクトのダッシュボードに移動します。**EDITOR** ボタンをクリックすると、Editor が基本的なシーンとともに開きます。
 
-:::warning パフォーマンス最適化
+## シーンの準備
 
-最適なsplatレンダリングパフォーマンスのためには、アンチエイリアシングとデバイスピクセル比を無効にしてください。**設定** → **レンダリング** に移動し、**「Anti-Alias」** と **「Device Pixel Ratio」** の両方のチェックを外します。これにより、Gaussian splatレンダリングにおける主要なボトルネックであるフラグメント処理の負荷を軽減できます。詳細については、[パフォーマンス](../engine-features/performance.md) ガイドを参照してください。
+プロジェクトにいくつかの小さな修正を加えて、始めましょう。
+
+1. **HIERARCHY** パネルで、**Light**、**Box**、**Plane** の各エンティティを選択して削除します。
+2. Viewport の **Settings** アイコン (歯車) をクリックします。
+3. **INSPECTOR** パネルで、**SETTINGS → RENDERING** に移動します。
+   * **x** アイコンをクリックして **Skybox** の設定を解除します (これによりデフォルトの青い空が削除されます)。
+   * **Anti-Alias** と **Device Pixel Ratio** の両方のチェックを外します。
+
+:::info パフォーマンス最適化
+
+**Anti-Alias** と **Device Pixel Ratio** のチェックを外すことで、Gaussian splat レンダリングの主要なボトルネックであるフラグメント処理の負荷を軽減します。これにより、最適な splat レンダリングパフォーマンスを実現できます。詳細については、[パフォーマンス](../engine-features/performance.md) ガイドをご覧ください。
 
 :::
 
-## Splatアセットのアップロード
+これで、HIERARCHY に Camera エンティティだけが残った、クリーンなダークグレーの Viewport が表示されるはずです。
 
-まず、猫のおもちゃのsplatをローカルファイルシステムにダウンロードします。[`https://developer.playcanvas.com/assets/toy-cat.sog`](https://developer.playcanvas.com/assets/toy-cat.sog)
+## Splat アセットのアップロード
 
-次に、ダウンロードしたsplatをプロジェクトに追加しましょう。
+まず、猫のオモチャのSplatをローカルファイルシステムにダウンロードします: [`https://developer.playcanvas.com/assets/toy-cat.sog`](https://developer.playcanvas.com/assets/toy-cat.sog)
 
-1. **ASSETS** パネル (画面下部) で、+ アイコンをクリックします
-2. ポップアップメニューから **「アップロード」** を選択します
-3. ファイルを開くダイアログで、`toy-cat.sog` を見つけて選択します
+次に、ダウンロードした Splat をプロジェクトに追加しましょう。
 
-`.sog`ファイルは処理され、あなたのAssetsパネルに`gsplat`アセットとして表示されます。
+1. **ASSETS** パネル (画面下部) で、**+** アイコンをクリックします。
+2. ポップアップメニューから **Upload** を選択します。
+3. ファイルを開くダイアログで、ダウンロードした `toy-cat.sog` を見つけて選択し、**Open** をクリックします。
 
-## Splatエンティティの作成
+Editor は `.sog` ファイルを処理し、**ASSETS** パネルに `gsplat` アセット (名前は `toy-cat.sog`) として表示します。
 
-splatを表示するためのエンティティを作成しましょう。
+## Splat エンティティの作成
 
-1. **HIERARCHY** パネル (左側) で、+ アイコンをクリックします
-2. ポップアップメニューから **「Entity」** を選択して新しいエンティティを作成します
-3. 新しいエンティティが選択された状態で、**INSPECTOR** パネル (右側) で「Toy Cat」に名前を変更します
+Splat を表示するためのエンティティを作成しましょう。
 
-## GSplatコンポーネントの追加
+1. **ASSETS** パネルから `toy-cat.sog` アセットを Viewport にドラッグ＆ドロップします。
 
-次に、Gaussian splatを表示するコンポーネントを追加します。
+Editor は **HIERARCHY** パネルのルートの下に新しいエンティティを作成し、これで Viewport に猫のオモチャが表示されるはずです。
 
-1. 「Toy Cat」エンティティが選択された状態で、**INSPECTOR** パネルを下にスクロールします
-2. **「ADD COMPONENT」** をクリックします
-3. コンポーネントリストから **「Gaussian Splat」** を選択します
+## Splat の位置調整
 
-GSplatコンポーネントがエンティティに追加されます。
+Splat が原点に中央揃えされていないので、そのトランスフォームを調整しましょう。
 
-## アセットの割り当て
+1. **HIERARCHY** パネルで、新しく作成した Splat エンティティを選択します。
+2. **INSPECTOR** パネルで、**Position** を `X: 0, Y: -0.7, Z: 0` に設定します。
 
-アップロードしたsplatアセットをコンポーネントに接続しましょう。
-
-1. GSplatコンポーネントのプロパティで、Asset属性の **アセットピッカー** (鉛筆アイコン) をクリックします
-2. 先ほどアップロードした猫のおもちゃの`gsplat`アセットを選択します
-3. splatがビューポートに表示されるはずです！
-
-## Splatの配置
-
-splatが正しく配置されていません。その変換を調整しましょう。
-
-1. 「Toy Cat」エンティティがまだ選択された状態で、Inspectorの **ENTITY** ヘッダーセクションを確認します
-2. **Position** を `0, -0.7, 0` に設定します (原点に中央揃えします)
-3. **Rotation** を `0, 0, 180` に設定します (正しい向きに反転させます)
+これで、原点に中央揃えされた猫のオモチャが表示されるはずです。
 
 ## カメラコントロールの追加
 
-シーンをインタラクティブにするために、Asset Storeからカメラコントロールスクリプトをインポートしましょう。
+シーンをインタラクティブにするために、カメラエンティティにスクリプトを割り当てましょう。
 
-1. **ASSETS** パネルで、**「ASSET STORE」** ボタンをクリックします
-2. Asset Storeで、**SCRIPTS** でフィルタリングします
-3. PlayCanvasによる **Orbit Camera** スクリプトを見つけて選択し、**IMPORT** をクリックします
-4. `x` アイコン (右上) をクリックしてAsset Storeパネルを閉じます
-
-スクリプトはプロジェクトのAssetsパネルに追加されます。
+1. このリンクを右クリックして **名前を付けてリンクを保存...** を選択します: [`camera-controls.mjs`](https://raw.githubusercontent.com/playcanvas/engine/main/scripts/esm/camera-controls.mjs)
+2. **ASSETS** パネル (画面下部) で、**+** アイコンをクリックします。
+3. ポップアップメニューから **Upload** を選択します。
+4. ファイルを開くダイアログで、ダウンロードした `camera-controls.mjs` スクリプトを見つけて選択し、**Open** をクリックします。
 
 次に、スクリプトをカメラにアタッチしましょう。
 
-1. Hierarchyで **「Camera」** エンティティを選択します
-2. Inspectorで、**「ADD COMPONENT」** をクリックし、**「Script」** を選択します
-3. Scriptコンポーネントで、**「スクリプトを追加」** ドロップダウンをクリックします
-4. リストから **「orbitCamera」** を選択します (ドロップダウンに表示されているはずです)
-5. リストから **「orbitCameraInputMouse」** を選択します
-6. リストから **「orbitCameraInputTouch」** を選択します
+1. **HIERARCHY** パネルで、**Camera** エンティティを選択します。
+2. **INSPECTOR** で、**ADD COMPONENT** をクリックし、**Script** を選択します。
+3. **Script** コンポーネントで、**Add Script** ドロップダウンをクリックします。
+4. リストから **cameraControls** を選択します。
 
-カメラコントロールスクリプトがアタッチされ、使用準備ができました！
+これで、カメラコントロールスクリプトがアタッチされ、使用準備が整いました！
 
 ## シーンのテスト
 
-次に、インタラクティブなsplatシーンをテストしましょう。
+次に、インタラクティブな Splat シーンをテストしましょう。
 
-1. ビューポートのツールバーにある **「LAUNCH」** ボタンをクリックしてプロジェクトを実行します
-2. ブラウザに猫のおもちゃのsplatが表示されるはずです
-3. 操作してみてください。
-    - **左マウスクリック＆ドラッグ**: splatの周りをオービット
-    - **マウスホイール**: ズームイン、ズームアウト
+1. Viewport のツールバーにある **LAUNCH** ボタンをクリックしてプロジェクトを実行します。
+2. ブラウザに猫のオモチャの Splat が表示されるはずです。
+3. それを操作してみましょう。
+   * **左マウドラッグ**: Splat の周りを回転
+   * **マウスホイール**: ズームイン/ズームアウト
 
 ## 最終結果
 
-おめでとうございます！PlayCanvas Editor を使用して、インタラクティブな Gaussian splat アプリケーションを正常に作成できました。
+おめでとうございます！PlayCanvas Editor を使ってインタラクティブな Gaussian splat アプリケーションを正常に作成しました。
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/e/p/N0FSHHVn/" title="My First Splat" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
@@ -124,10 +115,10 @@ splatが正しく配置されていません。その変換を調整しましょ
 
 :::tip 次のステップ
 
-動作するsplatアプリができたので、以下を試してみてください。
+動作する Splat アプリができたので、次のことを試してみてください。
 
-- 猫のおもちゃの`.sog`ファイルを自分のものと交換する
-- ユーザーインターフェースを追加する
-- スクリプトでより複雑なインタラクションを構築する
+* 猫のオモチャの `.sog` ファイルを自分のものと交換する
+* ユーザーインターフェースを追加する
+* スクリプトでより複雑なインタラクションを構築する
 
 :::

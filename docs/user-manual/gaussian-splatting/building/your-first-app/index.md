@@ -17,14 +17,14 @@ We offer **four different approaches** to build the same app. Pick the one that 
 - **Pros:** Maximum flexibility, full engine access, smallest footprint
 - **Cons:** More code to write, requires engine knowledge
 
-### 🌐 [Using Web Components](./web-components)
+### 🎨 [Using the Editor](./editor)
 
-**Best for:** Web developers familiar with HTML and modern standards
+**Best for:** Designers, artists, and visual learners
 
-- **What:** Declarative HTML using `<pc-app>`, `<pc-entity>`, `<pc-splat>` tags
-- **Files:** Single HTML file
-- **Pros:** No build tools needed, familiar HTML syntax, quick prototyping
-- **Cons:** Limited to web component capabilities
+- **What:** Point-and-click interface with Asset Store integration
+- **Files:** PlayCanvas project (cloud-based)
+- **Pros:** No coding required, visual tools, team collaboration, publishing features
+- **Cons:** Requires PlayCanvas account, less programmatic control
 
 ### ⚛️ [Using PlayCanvas React](./react)
 
@@ -35,11 +35,11 @@ We offer **four different approaches** to build the same app. Pick the one that 
 - **Pros:** React integration, state management, TypeScript support, component composition
 - **Cons:** Requires React knowledge and build setup
 
-### 🎨 [Using the Editor](./editor)
+### 🌐 [Using Web Components](./web-components)
 
-**Best for:** Designers, artists, and visual learners
+**Best for:** Web developers familiar with HTML and modern standards
 
-- **What:** Point-and-click interface with Asset Store integration
-- **Files:** PlayCanvas project (cloud-based)
-- **Pros:** No coding required, visual tools, team collaboration, publishing features
-- **Cons:** Requires PlayCanvas account, less programmatic control
+- **What:** Declarative HTML using `<pc-app>`, `<pc-entity>`, `<pc-splat>` tags
+- **Files:** Single HTML file
+- **Pros:** No build tools needed, familiar HTML syntax, quick prototyping
+- **Cons:** Limited to web component capabilities

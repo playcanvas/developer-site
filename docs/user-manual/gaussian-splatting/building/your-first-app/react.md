@@ -2,6 +2,36 @@
 title: Using PlayCanvas React
 ---
 
+import { Application, Entity } from '@playcanvas/react'
+import { Camera, GSplat, Script } from '@playcanvas/react/components'
+import { useSplat } from '@playcanvas/react/hooks'
+import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs'
+
+export function ToyCat() {
+    const { asset } = useSplat('/assets/toy-cat.sog');
+    if (!asset) return null;
+
+    return (
+        <Entity position={[0, -0.7, 0]} rotation={[0, 0, 180]}>
+            <GSplat asset={asset} />
+        </Entity> 
+    );
+}
+
+export function Demo() {
+    return (
+        <div style={{ width: '100%', height: '400px', marginBottom: '2rem', borderRadius: '8px', overflow: 'hidden' }}>
+            <Application graphicsDeviceOptions={{ antialias: false }} >
+                <Entity position={[0, 0, 2.5]}>
+                    <Camera />
+                    <Script script={CameraControls} />
+                </Entity>
+                <ToyCat />
+            </Application>
+        </div>
+    );
+}
+
 Let's build a simple Gaussian splat application step by step using [PlayCanvas React](/user-manual/playcanvas-react). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.
 
 ## Starting Point
@@ -9,22 +39,11 @@ Let's build a simple Gaussian splat application step by step using [PlayCanvas R
 First, let's set up a basic React component structure. We'll start with the essential PlayCanvas React components:
 
 ```jsx
-import './App.css'
 import { Application } from '@playcanvas/react'
-import { FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from 'playcanvas'
-
-function Scene() {
-    return null;
-}
 
 export default function App() {
     return (
-        <Application
-            fillMode={FILLMODE_FILL_WINDOW}
-            resolutionMode={RESOLUTION_AUTO}
-            graphicsDeviceOptions={{ antialias: false }}
-        >
-            <Scene />
+        <Application graphicsDeviceOptions={{ antialias: false }} >
         </Application>
     );
 }
@@ -40,38 +59,26 @@ We've configured the `Application` with `graphicsDeviceOptions={{ antialias: fal
 
 ## Adding a Camera
 
-To view our scene, we need a camera which we can add using the `Entity` component with `Camera` and `OrbitControls`:
+To view our scene, we need a camera which we can add using the `Entity` component with `Camera` and `CameraControls`:
 
-```jsx {3-4,8-13}
-import './App.css'
+```jsx {2-3,8-11}
 import { Application, Entity } from '@playcanvas/react'
-import { Camera } from '@playcanvas/react/components'
-import { OrbitControls } from '@playcanvas/react/scripts'
-import { FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from 'playcanvas'
-
-function Scene() {
-    return (
-        <Entity position={[0, 0, -2.5]}>
-            <Camera />
-            <OrbitControls />
-        </Entity>
-    );
-}
+import { Camera, Script } from '@playcanvas/react/components'
+import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs'
 
 export default function App() {
     return (
-        <Application
-            fillMode={FILLMODE_FILL_WINDOW}
-            resolutionMode={RESOLUTION_AUTO}
-            graphicsDeviceOptions={{ antialias: false }}
-        >
-            <Scene />
+        <Application graphicsDeviceOptions={{ antialias: false }} >
+            <Entity name="Camera" position={[0, 0, 2.5]}>
+                <Camera />
+                <Script script={CameraControls} />
+            </Entity>
         </Application>
     );
 }
 ```
 
-We've positioned the camera 2.5 units down the negative Z axis. By default, a camera looks down the negative Z axis, so our camera is now looking toward the origin where we'll place our splat. The `OrbitControls` will allow you to:
+We've positioned the camera 2.5 units down the Z axis. By default, a camera looks down the negative Z axis, so our camera is now looking toward the origin where we'll place our splat. The `CameraControls` will allow you to:
 
 - **Left mouse drag**: Orbit around the target
 - **Right mouse drag**: Pan the camera
@@ -79,42 +86,33 @@ We've positioned the camera 2.5 units down the negative Z axis. By default, a ca
 
 ## Adding the Splat
 
-Now let's add our toy cat splat to the scene using the `useSplat` hook and `GSplat` component:
+Now let's add our toy cat splat as a component using the `useSplat` hook and `GSplat` component:
 
-```jsx {3,5,9-11,15-17}
-import './App.css'
+```jsx {2,4,6-15,24}
 import { Application, Entity } from '@playcanvas/react'
-import { Camera, GSplat } from '@playcanvas/react/components'
-import { OrbitControls } from '@playcanvas/react/scripts'
+import { Camera, GSplat, Script } from '@playcanvas/react/components'
+import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs'
 import { useSplat } from '@playcanvas/react/hooks'
-import { FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from 'playcanvas'
 
-function Scene() {
+function ToyCat() {
     const { asset } = useSplat('toy-cat.sog');
-
     if (!asset) return null;
 
     return (
-        <>
-            <Entity position={[0, -0.7, 0]} rotation={[0, 0, 180]}>
-                <GSplat asset={asset} />
-            </Entity>
-            <Entity position={[0, 0, -2.5]}>
-                <Camera />
-                <OrbitControls />
-            </Entity>
-        </>
+        <Entity position={[0, -0.7, 0]} rotation={[0, 0, 180]}>
+            <GSplat asset={asset} />
+        </Entity>
     );
 }
 
 export default function App() {
     return (
-        <Application
-            fillMode={FILLMODE_FILL_WINDOW}
-            resolutionMode={RESOLUTION_AUTO}
-            graphicsDeviceOptions={{ antialias: false }}
-        >
-            <Scene />
+        <Application graphicsDeviceOptions={{ antialias: false }} >
+            <Entity name="Camera" position={[0, 0, 2.5]}>
+                <Camera />
+                <Script script={CameraControls} />
+            </Entity>
+            <ToyCat />
         </Application>
     );
 }
@@ -125,46 +123,37 @@ We've added several important elements:
 - **`useSplat` hook**: Loads the splat asset from the URL
 - **Conditional rendering**: `if (!asset) return null;` ensures we don't render until the asset is loaded
 - **GSplat positioning**: The splat is positioned slightly below the origin (-0.7 on the Y axis) and rotated 180 degrees around the Z axis to orient it properly
-- **React Fragment**: We use `<>...</>` to return multiple entities without a wrapper
+- **Single Entity**: The ToyCat component returns a single Entity containing the GSplat
 
 ## Complete Code
 
 Here's the complete React component with all the code from the steps above:
 
 ```jsx
-import './App.css'
 import { Application, Entity } from '@playcanvas/react'
-import { Camera, GSplat } from '@playcanvas/react/components'
-import { OrbitControls } from '@playcanvas/react/scripts'
+import { Camera, GSplat, Script } from '@playcanvas/react/components'
+import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs'
 import { useSplat } from '@playcanvas/react/hooks'
-import { FILLMODE_FILL_WINDOW, RESOLUTION_AUTO } from 'playcanvas'
 
-function Scene() {
+function ToyCat() {
     const { asset } = useSplat('toy-cat.sog');
-
     if (!asset) return null;
 
     return (
-        <>
-            <Entity position={[0, -0.7, 0]} rotation={[0, 0, 180]}>
-                <GSplat asset={asset} />
-            </Entity>
-            <Entity position={[0, 0, -2.5]}>
-                <Camera />
-                <OrbitControls />
-            </Entity>
-        </>
+        <Entity position={[0, -0.7, 0]} rotation={[0, 0, 180]}>
+            <GSplat asset={asset} />
+        </Entity>
     );
 }
 
 export default function App() {
     return (
-        <Application
-            fillMode={FILLMODE_FILL_WINDOW}
-            resolutionMode={RESOLUTION_AUTO}
-            graphicsDeviceOptions={{ antialias: false }}
-        >
-            <Scene />
+        <Application graphicsDeviceOptions={{ antialias: false }} >
+            <Entity name="Camera" position={[0, 0, 2.5]}>
+                <Camera />
+                <Script script={CameraControls} />
+            </Entity>
+            <ToyCat />
         </Application>
     );
 }
@@ -174,9 +163,7 @@ export default function App() {
 
 After completing the steps above, you should see an interactive 3D toy cat splat that you can orbit around, pan, and zoom!
 
-import CodePenEmbed from '@site/src/components/CodePenEmbed';
-
-<CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
+<Demo />
 
 :::tip Try it yourself
 

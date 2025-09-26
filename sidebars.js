@@ -654,6 +654,18 @@ const sidebars = {
         'user-manual/gaussian-splatting/what-is-gaussian-splatting',
         {
           type: 'category',
+          label: 'Splat File Formats',
+          link: {
+            type: 'doc',
+            id: 'user-manual/gaussian-splatting/formats/index',
+          },
+          items: [
+            'user-manual/gaussian-splatting/formats/ply',
+            'user-manual/gaussian-splatting/formats/sog',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Creating Splats',
           link: {
             type: 'doc',
@@ -662,7 +674,6 @@ const sidebars = {
           items: [
             'user-manual/gaussian-splatting/creating/taking-photos',
             'user-manual/gaussian-splatting/creating/recommended-tools',
-            'user-manual/gaussian-splatting/creating/ply-format',
           ],
         },
         'user-manual/gaussian-splatting/viewing',
@@ -714,8 +725,8 @@ const sidebars = {
               items: [
                 'user-manual/gaussian-splatting/building/your-first-app/engine',
                 'user-manual/gaussian-splatting/building/your-first-app/editor',
-                'user-manual/gaussian-splatting/building/your-first-app/web-components',
                 'user-manual/gaussian-splatting/building/your-first-app/react',
+                'user-manual/gaussian-splatting/building/your-first-app/web-components',
               ],
             },
             {

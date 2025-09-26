@@ -12,18 +12,23 @@ The [PlayCanvas Model Viewer](https://playcanvas.com/viewer) is a web-based tool
 
 ### Supported Splat Formats
 
-The Model Viewer supports three commonly used Gaussian splat formats:
+The Model Viewer supports the following commonly used Gaussian splat formats:
 
-- **PLY files** (`.ply`) - Standard uncompressed splat format
-- **Compressed PLY files** (`.compressed.ply`) - PlayCanvas compressed (quantized) format
-- **SOGS format** (`meta.json` + WebP images) - Super-compressed format
+| Format | File Extension | Description |
+|--------|----------------|-------------|
+| **PLY** | `.ply` | Standard uncompressed splat format |
+| **Compressed PLY** | `.compressed.ply` | Compressed (quantized) format |
+| **SOG (bundled)** | `.sog` | Super-compressed format in single file |
+| **SOG (unbundled)** | `meta.json` + `.webp` images | Super-compressed format in multiple files |
 
 ### How to View Your Splats
 
 1. **Visit** [playcanvas.com/viewer](https://playcanvas.com/viewer)
-2. **Drag and drop** your splat onto the viewer
-   - For **PLY** and **Compressed PLY** files: drag the individual file
-   - For **SOGS** format: drag the parent folder containing `meta.json` and WebP images
+2. **Drag and drop** your splat from your file system onto the viewer
+
+   :::info[Viewing unbundled SOG scenes]
+   For **SOG (unbundled)** format: drag the **parent folder** containing `meta.json` and `.webp` images
+   :::
 3. **Navigate** the 3D scene:
 
    | Control | Action |
