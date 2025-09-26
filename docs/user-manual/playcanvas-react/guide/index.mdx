@@ -1,6 +1,10 @@
 ---
 title: Concepts
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 PlayCanvas React is a thin wrapper around the PlayCanvas engine. It's a simple declarative interface over the engine API which surfaces all the features of the engine plus a few extras to make it easier to use. Anything you can do with the engine, you can do with PlayCanvas React.
 
 ## Application
@@ -19,7 +23,7 @@ Learn more about the `Application` component in the [API documentation](https://
 
 ## The Basics
 
-The Engine itself uses an **Entity Component System** - it's a common architecture used by many game engines that separates out behaviour from data. ECS maps incredibly well to the declarative nature of React. It allows you to structure your scene in a way that is easy to understand and maintain.
+The engine itself uses an **Entity Component System** - it's a common architecture used by many game engines that separates out behavior from data. ECS maps incredibly well to the declarative nature of React. It allows you to structure your scene in a way that is easy to understand and maintain.
 
 Let's take a simple example. To make a camera in PlayCanvas React, you need a `Camera` component and an `Entity`. You add the Camera to the Entity. The Entity has position and rotation allowing you to move the camera in the scene, and the Camera component provides the necessary functionality to render things. Let's take a look at how to do this in both React and JavaScript.
 
