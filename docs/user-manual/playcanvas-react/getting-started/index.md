@@ -16,9 +16,9 @@ In this getting started guide, you'll learn how to:
 
 Before you begin, make sure you have:
 
-- **Node.js** (version 16 or higher) installed on your system
+- **Node.js** (version 18 or higher) installed on your system
 - Basic familiarity with **React** - if you're new to React, check out the [React documentation](https://react.dev/learn)
-- A text editor or IDE (we recommend [VS Code](https://code.visualstudio.com/))
+- A text editor or IDE (we recommend [Visual Studio Code](https://code.visualstudio.com/))
 
 ## Quick Start
 

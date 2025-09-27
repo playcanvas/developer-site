@@ -270,7 +270,17 @@ const sidebars = {
         id: 'user-manual/playcanvas-react/index',
       },
       items: [
-        'user-manual/playcanvas-react/getting-started/installation',
+        {
+          type: 'category',
+          label: 'Getting Started',
+          link: {
+            type: 'doc',
+            id: 'user-manual/playcanvas-react/getting-started/index',
+          },
+          items: [
+            'user-manual/playcanvas-react/getting-started/installation',
+          ]
+        },
         'user-manual/playcanvas-react/building-a-scene',
         {
           type: 'category',

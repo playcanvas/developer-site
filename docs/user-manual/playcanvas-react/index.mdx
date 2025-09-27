@@ -8,8 +8,6 @@ import PlayCanvasReactExample from '@site/src/components/playcanvas-react/PlayCa
 
 [@playcanvas/react](https://github.com/playcanvas/react) brings PlayCanvas to the React ecosystem. It provides a declarative, component-based approach to building interactive 3D applications using familiar React patterns and a powerful ECS architecture. It's a thin wrapper around PlayCanvas - a batteries-included library for building interactive 3D content in React.
 
-Designed to get you up and running fast.
-
 <PlayCanvasReactExample />
 
 <div className='flex py-1 font-bold mb-2'>
@@ -21,11 +19,11 @@ Designed to get you up and running fast.
   <a href="https://github.com/playcanvas/react" className='foreground underline' target="_blank">View on GitHub ↗</a>
 </div>
 
-## How does it work?
+## How does it Work?
 
 PlayCanvas has a powerful ECS architecture that aligns perfectly with React's declarative nature. You create Entities, add Components to them, and load assets. That's it. No more worrying about the underlying engine, just build your scene.
 
-Here's how you load a 3D asset, create an orbit camera and render the model.
+Here's how you load and render a 3D model and create an orbit camera.
 
 ```tsx
 export const Lambo = () => {
@@ -52,14 +50,14 @@ export const Lambo = () => {
 
 ## Full Engine Power, React Simplicity
 
-PlayCanvas React gives you access to the **entire** PlayCanvas engine—no third-party libraries required. If it’s possible in PlayCanvas, it’s possible in PlayCanvas React.  
+PlayCanvas React gives you access to the **entire** PlayCanvas Engine - no third-party libraries required. If it's possible in PlayCanvas, it's possible in PlayCanvas React.
 
 On top of that, PlayCanvas React adds a set of **React-first features** to make development faster and more ergonomic:
 
 - **Asset Loading** – React-style asset loading with Suspense. Fine-grained control over when and how assets are fetched.
-- **Pointer Events** – Familiar event bubbling for clicks, drags, and gestures. Attach listeners to any entity and handle events naturally.
-- **Physics** – Lazy-loaded physics engine that integrates cleanly with React’s lifecycle.
-- **Hooks** – Convenient hooks for engine events, materials, asset state, and more.
+- **Pointer Events** – Familiar event bubbling for clicks, drags and gestures. Attach listeners to any entity and handle events naturally.
+- **Physics** – Lazy-loaded physics engine that integrates cleanly with React's lifecycle.
+- **Hooks** – Convenient hooks for engine events, materials, asset state and more.
 
 ## Getting Started
 
