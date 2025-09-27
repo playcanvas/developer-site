@@ -1,8 +1,6 @@
 ---
-title: Overview
+title: Getting Started
 ---
-
-# Getting Started with PlayCanvas React
 
 Welcome to PlayCanvas React! This section will guide you through setting up your first 3D React application and teach you the fundamental concepts you need to build interactive 3D experiences.
 
