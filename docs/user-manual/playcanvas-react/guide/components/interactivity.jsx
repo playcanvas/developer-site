@@ -22,10 +22,10 @@ export const Interactivity = () => {
 
   return (
     // Attach an onClick handler to the sphere to request a color change
-    <Entity 
-      name="sphere" 
-      onClick={onRequestRandomColor} 
-      onPointerOver={onHover} 
+    <Entity
+      name="sphere"
+      onClick={onRequestRandomColor}
+      onPointerOver={onHover}
       onPointerOut={onLeave} >
         <Render type="sphere" material={material} />
     </Entity>

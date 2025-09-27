@@ -9,7 +9,6 @@ import CodeBlock from '@theme/CodeBlock';
 import PlayCanvasReactExample from '@site/src/components/playcanvas-react/PlayCanvasReactExample';
 import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
 
-
 {/* Tutorials Components */}
 import { App as CreateAScene } from './components/1.create-a-scene';
 import CreateASceneSource from '!!raw-loader!./components/1.create-a-scene';
@@ -63,6 +62,7 @@ In your `/src/App.jsx` file, you can delete everything and replace it with the f
 When you run this or click the Demo tab, you'll see a square in the center of the screen.
 
 ### What's happening here?
+
 We've created a PlayCanvas `Application` and a separate `Scene` that contains an `Entity` with a `Render` component. The `Application` is the root of every PlayCanvas application. It sets up the `canvas` and defines a rendering context.
 
 We've abstracted out a `Scene` that contains everything we want to render. It's not strictly necessary, but it's a clean and logical way to organize your code. Inside the `Scene` we've added an `Entity` component with a `Render` component. The `Entity` component is simply a container, it can be positioned, rotated and scaled, but on its own it doesn't do anything. The `Render` component gives the `Entity` the ability to render 3D assets.
@@ -74,7 +74,6 @@ PlayCanvas uses an **ECS architecture**. You add **'components'** to an `Entity`
 :::
 
 Finally we've added a `Camera` component to the `Entity`. When you attach a `Camera` component to an `Entity`, it will render the scene from that entity's position and orientation. We've set the camera's position to `[0, 0, 5]` so that it's a bit away from the box. If you play with those values, you'll see how it changes the rendered scene
-
 
 ## Adding lights
 
@@ -184,6 +183,3 @@ render(<App />)
 Now you've got a basic understanding of the core concepts of PlayCanvas React, you're ready to start building your own scenes. Check out the [loading assets guide](../guide/loading-assets) to learn how to load your own assets and add interactivity with scripts.
 
 You can also check out the [guide](../guide/) to learn about the different concepts and techniques you can use to build your scenes.
-
-
-

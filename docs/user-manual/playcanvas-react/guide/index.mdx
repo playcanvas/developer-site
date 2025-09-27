@@ -29,6 +29,7 @@ Let's take a simple example. To make a camera in PlayCanvas React, you need a `C
 
 <Tabs>
   <TabItem label='React' value='react'>
+
   ```jsx title="app.jsx"
   <Application>
     <Entity name='camera' position={[0, 0, 5]}>
@@ -36,8 +37,10 @@ Let's take a simple example. To make a camera in PlayCanvas React, you need a `C
     </Entity>
   </Application>
   ```
+
   </TabItem>
   <TabItem label='JavaScript' value='javascript'>
+
   ```js title="app.js"
   const app = new Application();
   app.init();
@@ -48,6 +51,7 @@ Let's take a simple example. To make a camera in PlayCanvas React, you need a `C
   app.root.addChild(camera);
   app.start();
   ```
+
   </TabItem>
 </Tabs>
 
@@ -139,7 +143,6 @@ export default function App() {
 ```
 
 You should now see a white sphere in the center of your screen!
-
 
 ## Next Steps
 

@@ -21,7 +21,7 @@ const Scene = () => {
     <Environment envAtlas={envAtlas} showSkybox={false}/>
   </>
 }
- 
+
 export const App = () => (
   <Application>
     <Entity name='camera' position={[4, 1, 4]}>

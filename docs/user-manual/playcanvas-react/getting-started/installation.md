@@ -11,7 +11,7 @@ The recommended way to get started is to use the official PlayCanvas scaffolding
 npx create playcanvas@latest -t react-ts
 ```
 
-This creates a new project with everything set up and ready to go. If you've followed the prompts, you'll have a new PlayCanvas react project running in your browser. 
+This creates a new project with everything set up and ready to go. If you've followed the prompts, you'll have a new PlayCanvas react project running in your browser.
 
 We recommend following [this guide](../../building-a-scene) to start building your first project.
 

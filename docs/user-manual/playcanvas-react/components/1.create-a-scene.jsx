@@ -1,7 +1,7 @@
 import { Application, Entity } from '@playcanvas/react'
 import { Render, Camera } from '@playcanvas/react/components'
 
-const Scene = () => {   
+const Scene = () => {
   return (<>
     <Entity name='box'>
       <Render type='box'/>
