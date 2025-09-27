@@ -1,0 +1,184 @@
+---
+title: Building a Scene
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import TOCInline from '@theme/TOCInline';
+import CodeBlock from '@theme/CodeBlock';
+import PlayCanvasReactExample from '@site/src/components/playcanvas-react/PlayCanvasReactExample';
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+
+import { App as CreateAScene } from './components/1.create-a-scene';
+import CreateASceneSource from '!!raw-loader!./components/1.create-a-scene';
+import { App as AddACamera } from './components/2.add-a-camera';
+import AddACameraSource from '!!raw-loader!./components/2.add-a-camera';
+import { App as AddALight } from './components/3.add-lighting';
+import AddALightSource from '!!raw-loader!./components/3.add-lighting';
+import { App as AddInteractivity } from './components/4.add-interactivity';
+import AddInteractivitySource from '!!raw-loader!./components/4.add-interactivity';
+import { App as AddModel } from './components/5.add-a-model';
+import AddModelSource from '!!raw-loader!./components/5.add-a-model';
+import { App as StagingTheScene } from './components/6.staging-the-scene';
+import StagingTheSceneSource from '!!raw-loader!./components/6.staging-the-scene';
+
+This guide will walk you through the process of setting up a new `@playcanvas/react` project and creating a simple 3D scene. By the end of this guide, you'll have a basic understanding of the core concepts of PlayCanvas React.
+
+At the end you'll have something like the following.
+
+<div style={{ position: 'relative' }}>
+    <PlayCanvasReactExample />
+    <div style={{ textAlign: 'center', position: 'absolute', bottom: 0, right: 0, margin: '1rem 2rem', fontSize: '0.9rem' }}>An interactive 3D scene built with <b>@playcanvas/react</b>.</div>
+</div>
+
+:::info
+
+This guide assumes you have some familiarity with React. If you're new to React, it's worth taking a look at the [React documentation](https://react.dev/learn) to get up to speed.
+
+:::
+
+We'll build the scene step by step, and you'll see the code and live examples at each step.
+
+<TOCInline toc={toc} minHeadingLevel={2} maxHeadingLevel={4}/>
+
+## Your first scene
+
+If you've not already done so, **follow the [Installation Guide](../getting-started/installation) guide**, and
+create a new PlayCanvas React project.
+
+```bash
+npx create playcanvas@latest my-first-3d-app -t react-ts
+```
+
+Before we get to anything more complex, let's create a simple example that displays a box. Any PlayCanvas scene starts with an **Application**, a **Scene** and a **Camera** so we can see something.
+
+In your `/src/App.jsx` file, you can delete everything and replace it with the following code.
+
+<CodeExample label="Rendering a simple box" filename="/src/App.jsx" code={CreateASceneSource}>
+    <CreateAScene />
+</CodeExample>
+
+When you run this or click the Demo tab, you'll see a square in the center of the screen.
+
+### What's happening here?
+
+We've created a PlayCanvas `Application` and a separate `Scene` that contains an `Entity` with a `Render` component. The `Application` is the root of every PlayCanvas application. It sets up an HTML `canvas` element and defines a rendering context.
+
+We've abstracted out a `Scene` that contains everything we want to render. It's not strictly necessary, but it's a clean and logical way to organize your code. Inside the `Scene`, we've added an `Entity` component with a `Render` component. The `Entity` component is simply a container. It can be positioned, rotated and scaled, but on its own, it doesn't do anything. The `Render` component gives the `Entity` the ability to render 3D assets.
+
+:::tip
+
+PlayCanvas uses an **ECS architecture**. You add **'components'** to an `Entity` to give it functionality.
+
+:::
+
+Finally we've added a `Camera` component to the `Entity`. When you attach a `Camera` component to an `Entity`, it will render the scene from that entity's position down the entity's negative Z axis. We've set the camera's position to `[0, 0, 5]` so that it's a bit away from the box. If you play with those values, you'll see how it changes the rendered scene.
+
+## Adding lights
+
+This is a great start, but we don't have any lights in the scene. You can add lighting to the scene by either adding an `Environment` or `Light` component. There are various types of lights in PlayCanvas, so check the [docs](/user-manual/graphics/lighting/lights) for a broader overview. For now, we'll use environmental lighting (which provides a more naturally lit scene) and a simple directional light which we'll use later to help ground the scene.
+
+<CodeExample label="Adding lights to the scene" filename="/src/App.jsx" code={AddALightSource} showDemo>
+    <AddALight />
+</CodeExample>
+
+If you run this or click the Demo tab, you'll see the box with a bit of lighting. There are a few new concepts here, so let's break them down.
+
+### Loading assets
+
+We've loaded an environment atlas using the `useEnvAtlas` hook. This is a hook that allows us to load an environment atlas from a URL which we pass to the `Environment` component. The library provides a number of powerful hooks for loading different types of assets that let you manage loading states and errors.
+
+[Learn more](../guide/loading-assets) about loading assets.
+
+### Adding components
+
+- `Environment` - This component adds environmental lighting to the scene.
+- `Light` - This component adds a light to the scene.
+- `Render` - This component renders the box.
+
+We do this by loading an environment atlas and passing it to the `Environment` component, and adding a `Light` component.
+
+## Adding interactivity
+
+Ok, so we have some lighting. Let's add some interactivity by adding a `Script` component so you can rotate the cube with the mouse. We'll use the `CameraControls` script to allow the camera to be rotated with the mouse. We've also added a `Camera` component to the `Entity` to set the clear color and field of view.
+
+<CodeExample label="Adding interactivity to the scene" filename="/src/App.jsx" code={AddInteractivitySource} showDemo>
+    <AddInteractivity />
+</CodeExample>
+
+There are a number of ways to add interactivity to your scene. You can attach event listeners directly to entities, or use the `Script` component to add custom behavior.
+
+### Using the `Script` component
+
+In the above example, we're using the `Script` component together with the `CameraControls` script. A `Script` component is a handy way to attach custom behavior to an `Entity`. It hooks into the engine's update loop and allows you to run code on every frame outside the React render loop. This is great for interactivity where you want to respond to user input for example, or do animations.
+
+:::tip
+
+Using a `<Script>` component is more performant than re-rendering the React tree. However, a Script can override Entity props, so it's important to be aware of this.
+
+:::
+
+Now when you run it, you should be able to rotate the cube with the mouse. You can learn more in the [Scripting section](/user-manual/scripting/).
+
+## Adding 3D models
+
+Ok, so we have a camera and a rotating box. Let's make it more interesting by adding a 3D model to the scene. You can use any 3D model format that PlayCanvas supports. [Fab](https://www.fab.com/) is a great resource for free 3D models.
+
+<CodeExample label="Adding a 3D model to the scene" filename="/src/App.jsx" code={AddModelSource} showDemo>
+    <AddModel />
+</CodeExample>
+
+You should now see the Lamborghini model in the scene. We've removed the box primitive by switching the `Render` to render assets. The asset is loaded using the `useModel` hook which is passed directly to the `Render` component. While the asset loads, we're returning `null` so nothing is rendered until the asset is loaded. You could optionally use a loading spinner here instead. Check out the [loading assets guide](../guide/loading-assets) to learn more about loading assets.
+
+## Staging the scene
+
+We've now got a basic 3D scene with a camera, a rotating model, and some environment lighting. Let's add a ground plane and some shadows to stage the scene a little better. We can use the `ShadowCatcher` and `Grid` components to help with this.
+
+<CodeExample label="Staging the scene" filename="/src/App.jsx" code={StagingTheSceneSource} showDemo>
+    <StagingTheScene />
+</CodeExample>
+
+## Live example
+
+We now have a complete 3D scene with a camera, a rotating model, and some environment lighting. You can now start adding your own assets and creating your own scenes. Check out the [loading assets guide](../guide/loading-assets) to learn how to load your own assets and add interactivity with scripts.
+
+```jsx title="src/App.jsx" live noInline
+const Scene = () => {
+  // load the assets
+  const { asset: envAtlas } = useEnvAtlas('/assets/environment.png');
+  const { asset: lambo } = useModel('/assets/lambo.glb');
+
+  // if the assets haven't loaded, don't render anything
+  if (!lambo || !envAtlas) return null;
+
+  return <Entity name='model' >
+    <Render type='asset' asset={lambo} />
+    <Entity name='directional-light' position={[0, .001, 0]}>
+      <Light type='directional' />
+    </Entity>
+    <Environment envAtlas={envAtlas} showSkybox={false} />
+  </Entity>
+}
+
+const App = () => {
+  return <Application>
+    <ShadowCatcher width={5} depth={5} />
+    <Entity name='grid' scale={[1000, 1, 1000]}>
+      <Script script={GridScript}/>
+    </Entity>
+    <Entity name='camera' position={[4, 1, 4]}>
+      <Camera clearColor='#090707' fov={28} renderSceneColorMap={true} />
+      <Script script={CameraControls} enableFly={false}/>
+    </Entity>
+    <Scene />
+  </Application>
+}
+
+render(<App />)
+```
+
+## Your next steps
+
+Now you've got a basic understanding of the core concepts of PlayCanvas React, you're ready to start building your own scenes. Check out the [loading assets guide](../guide/loading-assets) to learn how to load your own assets and add interactivity with scripts.
+
+You can also check out the [guide](../guide/) to learn about the different concepts and techniques you can use to build your scenes.

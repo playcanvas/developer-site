@@ -270,7 +270,32 @@ const sidebars = {
         id: 'user-manual/playcanvas-react/index',
       },
       items: [
+        {
+          type: 'category',
+          label: 'Getting Started',
+          link: {
+            type: 'doc',
+            id: 'user-manual/playcanvas-react/getting-started/index',
+          },
+          items: [
+            'user-manual/playcanvas-react/getting-started/installation',
+          ]
+        },
         'user-manual/playcanvas-react/building-a-scene',
+        {
+          type: 'category',
+          label: 'Guide',
+          link: {
+            type: 'doc',
+            id: 'user-manual/playcanvas-react/guide/index',
+          },
+          items: [
+            'user-manual/playcanvas-react/guide/interactivity',
+            'user-manual/playcanvas-react/guide/loading-assets',
+            'user-manual/playcanvas-react/guide/physics',
+            'user-manual/playcanvas-react/guide/materials'
+          ]
+        }
       ],
     },
     {

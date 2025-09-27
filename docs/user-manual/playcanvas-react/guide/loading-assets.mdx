@@ -1,0 +1,188 @@
+---
+title: Loading Assets
+---
+
+Assets are a core part of any 3D application, and they generally take the most time to load, which has a direct impact on your user's experience. Knowing how to load and manage assets efficiently is key to a smooth UX. Whether you want to load everything up front, or provide a fast first render, PlayCanvas React has you covered.
+
+`@playcanvas/react` provides a set of specialized hooks for loading different types of assets, as well as a utility function for loading assets. For detailed API documentation, see the API reference (coming soon).
+
+## Basic Usage
+
+The simplest way to load an asset is to use one of the specialized hooks. There are special hooks for models, gaussian splats, textures and environment map etc, but each have a similar shape.
+
+```tsx title="model-viewer.tsx"
+import { useModel } from '@playcanvas/react/hooks';
+
+export function ModelViewer() {
+  const { asset } = useModel('model.glb');
+
+  // If the asset is not loaded, return null    
+  if (!asset) return null;
+
+  // If the asset is loaded, render it
+  return <Render type='asset' asset={asset} />;
+}
+```
+
+## Preloading
+
+The asset hooks also return additional loading info and error states, so you can fallback to a preloader while loading or display an error message if the asset fails to load.
+
+```tsx title="model-viewer.tsx"
+import { useModel } from '@playcanvas/react/hooks';
+
+export function ModelViewer() {
+  const { asset, loading, error } = useModel('model.glb');
+
+  // If the asset is still loading, show a loading spinner
+  if (loading) return <LoadingSpinner />;
+
+  // If there is an error, show an error message
+  if (error) return <ErrorMessage message={error} />;
+
+  // If the asset is loaded, show the container
+  return <Container asset={asset} />;
+}
+```
+
+## Loading with Props
+
+Some assets accept additional properties to customize how they are loaded. You can pass these properties to the hook as a second argument.
+
+```tsx
+// Load a texture with specific settings
+const { asset } = useTexture('texture.jpg', {
+    mipmaps: true,
+    anisotropy: 16,
+    type: 'rgba'
+});
+```
+
+## Asset hooks
+
+There are different hooks for loading different types of assets. You can create more advanced hooks by wrapping the `useAsset` hook.
+
+- `useModel` for loading 3D GLTF/GLB models
+- `useTexture` for loading textures
+- `useSplat` for loading Gaussian Splats
+- `useEnvAtlas` for loading environment atlases
+- `useAsset` for loading any type of asset
+
+### Asset Caching
+
+Assets are cached by default to avoid reloading the same file multiple times. This means you're not duplicating on memory, but you'll need to ensure assets are correctly unloaded when they're no longer needed.
+
+```tsx title="unloading-model-viewer.tsx"
+import { useModel } from '@playcanvas/react/hooks';
+import { useEffect } from 'react';
+
+export function UnloadingModelViewer() {
+  const { asset, loading, error } = useModel('model.glb');
+
+  useEffect(() => {
+    return () => asset?.unload();
+  }, [asset]);
+
+  if (!asset) return null;
+
+  return <Container asset={asset} />;
+}
+```
+
+:::warning
+**Unloading an asset will remove it globally.** This will affect other components that are using the same asset.
+:::
+
+### Custom Loading States
+
+You can placeholders or custom loaders whilst assets load by checking the loading state of an asset. This gives you granular control.
+
+```tsx title="loading-spinner.tsx"
+import { Entity, Render } from '@playcanvas/react/components';
+
+// A component that displays a model with a custom loading state
+export function ModelWithCustomLoading() {
+  const { asset: plane, loading: planeLoading } = useModel('plane.glb');
+  const { asset: car, loading: carLoading } = useModel('car.glb');
+    
+  if (planeLoading || carLoading) return <LoadingSpinner />;
+
+  return <>
+    <Render asset={car} />
+    <Render asset={plane} />
+  </>
+}
+```
+
+### Progressive Loading
+
+The loading hooks also provide a simple mechanic to progressively load assets, so you can prioritize rendering quickly following up with high quality content later.
+
+```tsx title="progressive-loading.tsx"
+import { Entity, Render } from '@playcanvas/react/components';
+
+// A component that displays a model with a custom loading state
+export function ProgressiveAsset({ low, high }) {
+  const { asset: low } = useModel(low); // load the low quality asset
+  const { asset: high } = useModel(low && high); // load the high quality asset, when the low quality is loaded
+  
+  // Show a spinner if nothing is visible
+  if (!low && !high ) return <LoadingSpinner />;
+
+  return <Render asset={high || low} />
+}
+```
+
+### Data Fetching Libraries
+
+If you need more advanced caching or loading strategies, you can integrate with libraries like **React Query** or **SWR** or any other Promise based library using the `fetchAsset` utility.
+
+```tsx title="model-with-query.tsx"
+import { fetchAsset } from '@playcanvas/react/utils';
+import { useQuery } from '@tanstack/react-query';
+
+function useQueryModel(src: string) {
+  const query = useQuery({
+    queryKey: ['asset', src],
+    // 'container' is the type of asset we're loading (e.g., model, texture, etc.)
+    queryFn: () => fetchAsset({ app, url: src, type: 'container' })
+  });
+
+  return query;
+}
+
+export function ModelWithQuery() {
+  const { data: asset, isLoading } = useQueryModel('model.glb');
+
+  if (isLoading) return <LoadingSpinner />;
+  return <Container asset={asset} />;
+}
+```
+
+See the [React Query documentation](https://tanstack.com/query/latest) and [SWR documentation](https://swr.vercel.app/) for more information on how to use it.
+
+### Suspense Integration
+
+React Query and SWR have built-in support for Suspense, which allows you to handle loading states in a more declarative way.
+
+```tsx
+import { fetchAsset } from '@playcanvas/react/utils';
+import { useQuery } from '@tanstack/react-query';
+
+function useSuspendedQueryModel(src: string) {
+  const query = useQuery({
+    queryKey: ['asset', src],
+    queryFn: () => fetchAsset({ app, url: src, type: 'container' }),
+    suspense: true
+  });
+
+  return query;
+}
+
+export function ModelWithQuery() {
+  const { data: asset } = useSuspendedQueryModel('model.glb');
+  return <Container asset={asset} />;
+}
+```
+
+You can read more about Suspense in the [React documentation](https://react.dev/reference/react/Suspense), as well as the [React Query documentation](https://tanstack.com/query/v4/docs/framework/react/guides/suspense) and [SWR documentation](https://swr.vercel.app/docs/suspense).
