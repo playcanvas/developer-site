@@ -23,6 +23,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Getting Started',
+      key: 'general-getting-started',
       link: {
         type: 'doc',
         id: 'user-manual/getting-started/index',
@@ -98,6 +99,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Getting Started',
+          key: 'editor-getting-started',
           link: {
             type: 'doc',
             id: 'user-manual/editor/getting-started/index',
@@ -273,6 +275,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Getting Started',
+          key: 'react-getting-started',
           link: {
             type: 'doc',
             id: 'user-manual/playcanvas-react/getting-started/index',
