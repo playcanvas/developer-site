@@ -67,6 +67,18 @@
     "message": "はじめに",
     "description": "The label for category Getting Started in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Getting Started.general-getting-started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started (General) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Getting Started.editor-getting-started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started (Editor) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Getting Started.react-getting-started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started (React) in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.Account Management": {
     "message": "アカウント管理",
     "description": "The label for category Account Management in sidebar userManualSidebar"
