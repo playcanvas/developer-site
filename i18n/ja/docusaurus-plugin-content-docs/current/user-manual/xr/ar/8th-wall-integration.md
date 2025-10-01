@@ -9,5 +9,5 @@ title: 8th Wall
 8th Wallのドキュメンテーションには、[PlayCanvasの始め方][2]のページが用意されており、[スタータープロジェクト][3]も多数提供されています。
 
 [1]: https://www.8thwall.com/
-[2]: https://www.8thwall.com/docs/api/playcanvas/getting-started/
+[2]: https://www.8thwall.com/docs/legacy/api/playcanvas/getting-started/
 [3]: https://playcanvas.com/user/the8thwall
