@@ -54,7 +54,9 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "sass": "^1.93.2",
-    "sync-ammo": "^0.1.2"
+    "sync-ammo": "^0.1.2",
+    "ts-morph": "^27.0.0",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.1",
