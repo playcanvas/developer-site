@@ -1,0 +1,42 @@
+---
+title: Rigidbody
+description: Documentation for the Rigidbody component
+---
+
+The `Rigidbody` component enables physics for an [Entity](./entity), allowing it to interact with the global physics simulation. You can apply forces, torques, and other physics behaviors to an entity with a `Rigidbody` component and it will respond accordingly.
+
+:::note
+Run `npm i ammo.js` and use `<Application usePhysics/>` to enable physics.
+:::
+
+You can learn more about how physics work in PlayCanvas in the [Physics docs](/user-manual/physics/).
+
+## Usage
+
+```jsx copy
+import { Application, Entity } from '@playcanvas/react'
+import { Rigidbody, Collision, Render } from '@playcanvas/react/components'
+
+export default function Scene() {
+  return (
+    <Application usePhysics>
+      <Entity position={[0, 5, 0]}>
+        <Rigidbody type="dynamic" mass={12} />
+        <Collision type="box" />
+        <Render type="box" />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+Learn more about the [RigidBody Component](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+import { Rigidbody } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Rigidbody>;
+export default $;
+```
+

@@ -302,15 +302,26 @@ const sidebars = {
         {
           type: 'category',
           label: 'API',
-          // link: {
-          //   type: 'doc',
-          //   id: 'user-manual/playcanvas-react/guide/index',
-          // },
           items: [
             'user-manual/playcanvas-react/api/application',
-            // 'user-manual/playcanvas-react/guide/loading-assets',
-            // 'user-manual/playcanvas-react/guide/physics',
-            // 'user-manual/playcanvas-react/guide/materials'
+            'user-manual/playcanvas-react/api/entity',
+            {
+              type: 'category',
+              label: 'Components',
+              key: 'react-api-components',
+              items: [
+                'user-manual/playcanvas-react/api/align',
+                'user-manual/playcanvas-react/api/anim',
+                'user-manual/playcanvas-react/api/camera',
+                'user-manual/playcanvas-react/api/collision',
+                'user-manual/playcanvas-react/api/environment',
+                'user-manual/playcanvas-react/api/gsplat',
+                'user-manual/playcanvas-react/api/light',
+                'user-manual/playcanvas-react/api/render',
+                'user-manual/playcanvas-react/api/rigidbody',
+                'user-manual/playcanvas-react/api/script',
+              ]
+            }
           ]
         },
         

@@ -1,0 +1,38 @@
+---
+title: Anim
+description: Documentation for the Anim component
+---
+
+The `Anim` component enables animation playback for an [Entity](./entity). It allows you to play animation clips from animation assets and control their playback.
+
+## Usage
+
+```jsx copy
+import { Entity } from '@playcanvas/react'
+import { Anim, Render } from '@playcanvas/react/components'
+import { useModel } from '@playcanvas/react/hooks'
+
+const AnimatingDinosaur = (props) => {
+  const { asset } = useModel('/dinosaur.glb')
+
+  if (!asset) return null
+
+  return (
+    <Entity {...props}>
+      <Render type="asset" asset={asset} />
+      <Anim asset={asset} clip="Walk" loop />
+    </Entity>
+  )
+}
+```
+
+Learn more about the [Anim Component](https://api.playcanvas.com/engine/classes/AnimComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+import { Anim } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Anim>;
+export default $;
+```
+

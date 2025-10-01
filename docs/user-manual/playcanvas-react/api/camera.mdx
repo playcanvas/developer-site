@@ -1,0 +1,48 @@
+---
+title: Camera
+description: Documentation for the Camera component
+---
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import PlayCanvasReactExample from '@site/src/components/playcanvas-react/PlayCanvasReactExample';
+import { Entity } from '@playcanvas/react';
+import { Camera } from '@playcanvas/react/components';
+
+The `Camera` component enables an [Entity](./entity) to render a scene. You can use the entity's position and rotation to control the camera.
+
+## Usage
+
+A `Camera` is a component, so you attach it to an `Entity` and the camera will render the scene from the entity's position and rotation.
+
+<CodeExample 
+  label="Camera Example" 
+  filename="camera.jsx" 
+  code={`import { Application, Entity } from '@playcanvas/react'
+import { Camera } from '@playcanvas/react/components'
+
+export default function Scene() {
+  return (
+    <Application>
+      <Entity position={[0, 0, 5]}>
+        <Camera fov={28} clearColor="#1a1a1a" />
+      </Entity>
+    </Application>
+  )
+}`}>
+  <PlayCanvasReactExample>
+    <Entity position={[0, 0, 5]}>
+      <Camera fov={28} clearColor="#1a1a1a" />
+    </Entity>
+  </PlayCanvasReactExample>
+</CodeExample>
+
+Learn more about the [Camera Component](https://api.playcanvas.com/engine/classes/CameraComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+import { Camera } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Camera>;
+export default $;
+```
+

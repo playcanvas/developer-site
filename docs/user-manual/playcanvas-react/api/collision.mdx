@@ -1,0 +1,44 @@
+---
+title: Collision
+description: Documentation for the Collision component
+---
+
+The `Collision` component attaches a PlayCanvas [Collision Component](https://api.playcanvas.com/engine/classes/CollisionComponent.html) to an [Entity](./entity).
+
+It allows an Entity to participate in collision detection with other entities that have collision components. This is useful for physics simulations, trigger zones, and other gameplay mechanics that require detecting when objects intersect.
+
+:::note
+Enable physics by installing `ammo.js` and enabling physics on the Application using `<Application usePhysics/>`.
+:::
+
+## Usage
+
+You attach a Collision component to an Entity in the same way you would attach a Render component. To work with physics, you should also attach a `Rigidbody` component to the same `Entity`, and probably a `Render` component too.
+
+```jsx copy
+import { Application, Entity } from '@playcanvas/react'
+import { Collision, Rigidbody, Render } from '@playcanvas/react/components'
+
+export default function Scene() {
+  return (
+    <Application usePhysics>
+      <Entity>
+        <Collision type="box" />
+        <Rigidbody type="dynamic" mass={12} />
+        <Render type="box" />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+Learn more about [Collision Components](https://api.playcanvas.com/engine/classes/CollisionComponent.html) in the PlayCanvas documentation. Also see the [Rigidbody](./rigidbody) component for more information on how to use collision components with physics.
+
+## Properties
+
+```tsx asTypedoc
+import { Collision } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Collision>;
+export default $;
+```
+
