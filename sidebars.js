@@ -298,7 +298,22 @@ const sidebars = {
             'user-manual/playcanvas-react/guide/physics',
             'user-manual/playcanvas-react/guide/materials'
           ]
-        }
+        },
+        {
+          type: 'category',
+          label: 'API',
+          // link: {
+          //   type: 'doc',
+          //   id: 'user-manual/playcanvas-react/guide/index',
+          // },
+          items: [
+            'user-manual/playcanvas-react/api/application',
+            // 'user-manual/playcanvas-react/guide/loading-assets',
+            // 'user-manual/playcanvas-react/guide/physics',
+            // 'user-manual/playcanvas-react/guide/materials'
+          ]
+        },
+        
       ],
     },
     {
