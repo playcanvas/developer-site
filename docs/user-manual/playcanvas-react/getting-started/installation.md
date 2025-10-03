@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 The recommended way to get started is to use the official PlayCanvas scaffolding tool, and follow the prompts.
 
 ```bash
-npx create playcanvas@latest -t react-ts
+npm create playcanvas@latest -t react-ts
 ```
 
 This creates a new project with everything set up and ready to go. If you've followed the prompts, you'll have a new PlayCanvas React project running in your browser.
