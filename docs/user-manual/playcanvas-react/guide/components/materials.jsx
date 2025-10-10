@@ -31,7 +31,7 @@ export const Materials = () => {
   };
 
   return (
-    <Entity onClick={onRequestRandomColor} position={[0, 0.5, 0]}>
+    <Entity onClick={onRequestRandomColor} >
       <Render type="box" material={material} />
     </Entity>
   );

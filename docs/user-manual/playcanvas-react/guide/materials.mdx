@@ -7,6 +7,8 @@ import { Application } from '@playcanvas/react';
 import { Materials } from './components/materials';
 import MaterialsSource from '!!raw-loader!./components/materials.jsx';
 
+You work with materials using the [`useMaterial`](./use-material#usematerial) hook.
+
 Materials are a fundamental part of 3D graphics. They define the appearance of 3D objects and are used to create realistic lighting effects. Materials can be applied to `Render` components to change the appearance of 3D objects. They accept a wide range of properties to control the appearance of the material.
 
 The `useMaterial` hook returns a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance. This is useful if you need to create materials and apply them to `Render` components.
@@ -14,7 +16,7 @@ The `useMaterial` hook returns a [`StandardMaterial`](https://api.playcanvas.com
 ```jsx copy filename="use-material.jsx"
 import { useMaterial } from '@playcanvas/react/hooks'
 
-const RedBox = () => {
+export const RedBox = () => {
   const material = useMaterial({ diffuse: 'red' });
   return (
     <Entity>
@@ -34,4 +36,45 @@ In the example below, we're using the `useMaterial` hook to create a material an
     </Application>
 </CodeExample>
 
-Materials have a wide range of properties that can be used to control the appearance of the material. You can find the full list of properties [here](https://api.playcanvas.com/engine/classes/StandardMaterial.html).
+### Basic Properties
+
+The hook accepts amn object of properties that closely match those of the [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) class. It will return a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance which can be applied to a [`Render`](./render#render) component.
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function BasicMaterial() {
+  const material = useMaterial({
+    diffuse: 'blue',       // Base color
+    opacity: 0.7,          // Transparency (0-1)
+    metalness: 0.8,        // Metallic property (0-1)
+    roughness: 0.2,        // Surface roughness (0-1)
+    emissive: 'green',     // Emissive color
+    emissiveIntensity: 0.5 // Emissive strength
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+### Textures
+
+You can also use textures with the material by loading them with the [`useTexture`](./use-asset#usetexture) hook.
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+import { useTexture } from '@playcanvas/react/hooks'
+
+function TexturedMaterial() {
+  const { asset: diffuseTexture } = useTexture('diffuse.jpg')
+  const { asset: normalTexture } = useTexture('normal.jpg')
+  
+  const material = useMaterial({
+    diffuseMap: diffuseTexture?.resource,
+    normalMap: normalTexture?.resource,
+    diffuse: 'white' // Tint color
+  })
+  
+  return <Render type="box" material={material} />
+}
+```

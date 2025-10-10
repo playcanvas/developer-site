@@ -124,7 +124,8 @@ function generateDefinitions({ code, typeResolver }) {
   // Run through all exported declarations
   for (const [name, declarations] of exportedDeclarations) {
     const declaration = declarations[0];
-    const symbol = declaration.getSymbol()
+    const symbol = declaration?.getSymbol()
+    if(!symbol) continue;
     const description = getComment(symbol);
     const properties = declaration.getType().getApparentProperties();
     
@@ -182,7 +183,7 @@ function getDocEntry({ symbol, declaration, typeResolver = noop }) {
   
   // Extract the name and module names for the types
   const types = typesToProcess.map(t => {
-    const sym = t.getSymbol();
+    const sym = t?.getSymbol();
     const sourceFile = sym?.getDeclarations()[0]?.getSourceFile();
     return {
       name: sym?.getName() || t.getText(),

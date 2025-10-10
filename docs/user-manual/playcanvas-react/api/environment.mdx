@@ -3,7 +3,50 @@ title: Environment
 description: Documentation for the Environment component
 ---
 
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { EnvironmentExample } from './environment-example';
+import EnvironmentExampleSource from '!!raw-loader!./environment-example.jsx';
+
 The `Environment` component is used to configure the environment lighting and skybox for a scene. It provides a comprehensive way to set up atmospheric lighting, skyboxes, and environmental effects that affect the entire scene.
+
+## Usage
+
+```jsx copy
+import { Environment } from '@playcanvas/react/components'
+import { useEnvAtlas } from '@playcanvas/react/hooks'
+
+export const Scene = () => {
+  const { asset: envAtlas } = useEnvAtlas('/env_atlas.png')
+
+  return (
+    <Entity>
+      <Environment envAtlas={envAtlas} exposure={1.2} />
+      {/* Your scene entities here */}
+    </Entity>
+  )
+}
+```
+
+Try adjusting the exposure and switching between different environment atlases to see how they affect the scene lighting:
+
+<CodeExample
+  label="Environment Example"
+  filename="environment-example.jsx"
+  code={EnvironmentExampleSource}
+  showDemo>
+  <Application>
+    <Staging 
+        useLight={false} 
+        useShadow={true} 
+        camera={[3, 0.2, 3]} 
+        useControls={true}
+        sceneOffset={[0, 0, 0]}
+    >
+      <EnvironmentExample />
+    </Staging>
+  </Application>
+</CodeExample>
 
 ## Overview
 
@@ -13,8 +56,6 @@ The Environment component combines several PlayCanvas scene and sky properties i
 - **Environment Atlas**: Provides Image-Based Lighting (IBL) for realistic environmental reflections
 - **Sky Settings**: Controls sky dome properties, rotation, scale, and positioning
 - **Scene Settings**: Manages exposure, luminance, and other global lighting parameters
-
-## Usage
 
 The Environment component should be placed within an `<Application>` component. Only one Environment component should be used per application instance.
 
@@ -38,11 +79,10 @@ const EnvironmentExample = () => {
 }
 ```
 
-## Important Notes
+:::tip
+Only one `<Environment/>` component can be used per `<Application/>`. If you use multiple `<Environment/>` components, only the first one will be applied. 
+:::
 
-- **Single Instance**: Only one `<Environment/>` component should be used per application instance
-- **Asset Requirements**: The `skybox` and `envAtlas` props expect PlayCanvas Asset instances, typically loaded using hooks
-- **Automatic Cleanup**: The component automatically restores default values when unmounted
 
 ## Properties
 

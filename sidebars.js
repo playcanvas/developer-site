@@ -321,6 +321,20 @@ const sidebars = {
                 'user-manual/playcanvas-react/api/rigidbody',
                 'user-manual/playcanvas-react/api/script',
               ]
+            },
+            {
+              type: 'category',
+              label: 'Hooks',
+              key: 'react-api-hooks',
+              items: [
+                'user-manual/playcanvas-react/api/hooks',
+                'user-manual/playcanvas-react/api/use-app',
+                'user-manual/playcanvas-react/api/use-asset',
+                'user-manual/playcanvas-react/api/use-material',
+                'user-manual/playcanvas-react/api/use-parent',
+                'user-manual/playcanvas-react/api/use-app-event',
+                'user-manual/playcanvas-react/api/use-physics',
+              ]
             }
           ]
         },

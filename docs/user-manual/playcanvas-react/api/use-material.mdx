@@ -1,0 +1,250 @@
+---
+title: useMaterial
+description: Create and manage PlayCanvas materials
+---
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application, Entity } from '@playcanvas/react';
+import { Render } from '@playcanvas/react/components';
+import { useMaterial } from '@playcanvas/react/hooks';
+import MaterialExampleSource from '!!raw-loader!./material-example.jsx';
+import { MaterialExample } from './material-example.jsx';
+
+The `useMaterial` hook creates and manages PlayCanvas [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instances. It handles material creation, property updates, and cleanup automatically.
+
+## Basic Usage
+
+<CodeExample 
+    label="Set material properties dynamically" 
+    filename="material.jsx" code={MaterialExampleSource} showDemo>
+  <Application>
+    <Staging useControls={true} useGrid={true} camera={[3, 1, 3]}>
+      <MaterialExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## API Reference
+
+The hooks accepts an object with the following properties that closely match those of the [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) class.
+
+<details>
+  <summary><b>Parameters</b></summary>
+  <p>
+  ```tsx asTypedoc
+  import { useMaterial } from '@playcanvas/react/hooks'
+  type $ = Parameters<typeof useMaterial>[0];
+  export default $;
+  ```
+  </p>
+</details>
+
+The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance which can be applied to a [`Render`](./render#render) component.
+
+
+
+
+
+### Advanced Properties
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function AdvancedMaterial() {
+  const material = useMaterial({
+    diffuse: 'purple',
+    opacity: 0.9,
+    metalness: 0.3,
+    roughness: 0.4,
+    emissive: 'yellow',
+    emissiveIntensity: 0.2,
+    specular: 'white',
+    shininess: 50,
+    reflectivity: 0.8,
+    clearCoat: 0.5,
+    clearCoatRoughness: 0.1
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+## Material Types
+
+### PBR Material
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function PBRMaterial() {
+  const material = useMaterial({
+    diffuse: 'gray',
+    metalness: 0.8,
+    roughness: 0.2,
+    specular: 'white'
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+### Emissive Material
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function EmissiveMaterial() {
+  const material = useMaterial({
+    diffuse: 'black',
+    emissive: 'cyan',
+    emissiveIntensity: 1.0
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+### Transparent Material
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function TransparentMaterial() {
+  const material = useMaterial({
+    diffuse: 'blue',
+    opacity: 0.3,
+    blendType: 'alpha' // or 'additive', 'multiply', etc.
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+## Material with Textures
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+import { useTexture } from '@playcanvas/react/hooks'
+
+function TexturedMaterialExample() {
+  const { asset: diffuseMap } = useTexture('diffuse.jpg')
+  const { asset: normalMap } = useTexture('normal.jpg')
+  const { asset: roughnessMap } = useTexture('roughness.jpg')
+  
+  const material = useMaterial({
+    diffuseMap: diffuseMap?.resource,
+    normalMap: normalMap?.resource,
+    roughnessMap: roughnessMap?.resource,
+    diffuse: 'white',
+    metalness: 0.5,
+    roughness: 0.5
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+## Material Sharing
+
+You can share materials between multiple render components:
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function SharedMaterial() {
+  const material = useMaterial({
+    diffuse: 'orange',
+    metalness: 0.7,
+    roughness: 0.3
+  })
+  
+  return (
+    <div>
+      <Render type="box" material={material} />
+      <Render type="sphere" material={material} />
+      <Render type="cylinder" material={material} />
+    </div>
+  )
+}
+```
+
+## Material Cleanup
+
+The hook automatically handles material cleanup when the component unmounts:
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+import { useState } from 'react'
+
+function MaterialLifecycle() {
+  const [showMaterial, setShowMaterial] = useState(true)
+  
+  if (!showMaterial) {
+    return (
+      <button onClick={() => setShowMaterial(true)}>
+        Show Material
+      </button>
+    )
+  }
+  
+  return (
+    <div>
+      <MaterialComponent />
+      <button onClick={() => setShowMaterial(false)}>
+        Hide Material
+      </button>
+    </div>
+  )
+}
+
+function MaterialComponent() {
+  // Material is created when this renders
+  const material = useMaterial({
+    diffuse: 'green',
+    opacity: 0.8
+  })
+  
+  // Material is automatically destroyed when this unmounts
+  return <Render type="box" material={material} />
+}
+```
+
+## TypeScript
+
+The hook is fully typed with TypeScript:
+
+```tsx
+import { useMaterial } from '@playcanvas/react/hooks'
+import { StandardMaterial } from 'playcanvas'
+
+function TypedExample() {
+  const material: StandardMaterial = useMaterial({
+    diffuse: 'red', // ✅ Valid
+    opacity: 0.5,   // ✅ Valid
+    invalidProp: 'value' // ❌ TypeScript error
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+## Performance Considerations
+
+1. **Material Reuse** - Create materials once and reuse them across multiple render components
+2. **Property Updates** - The hook efficiently updates only changed properties
+3. **Memory Management** - Materials are automatically cleaned up when components unmount
+4. **Texture Loading** - Use the `useTexture` hook for efficient texture loading
+
+## Best Practices
+
+1. **Reuse materials** when possible to improve performance
+2. **Use appropriate material properties** for your use case
+3. **Handle texture loading states** when using texture maps
+4. **Consider material complexity** for performance
+5. **Use TypeScript** for better type safety
+
+## Related
+
+- [useTexture](./use-asset#usetexture) - Load texture assets
+- [Render Component](./render) - Use materials with render components
+- [StandardMaterial API](https://api.playcanvas.com/engine/classes/StandardMaterial.html) - PlayCanvas material documentation

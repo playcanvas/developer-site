@@ -3,42 +3,28 @@ title: Render
 description: Documentation for the Render component
 ---
 
-import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
-import PlayCanvasReactExample from '@site/src/components/playcanvas-react/PlayCanvasReactExample';
-import { Entity } from '@playcanvas/react';
-import { Render } from '@playcanvas/react/components';
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { RenderBox } from './render-box';
+import RenderBoxSource from '!!raw-loader!./render-box.jsx';
 
-The `Render` component allows an `Entity` to display a 3D asset or primitive shape. You can use the `type` prop to render a primitive shape or pass an asset to the `asset` prop to render a 3D model.
-
-## Usage
-
-### Rendering a Primitive
+The `<Render/>` component allows an `<Entity/>` to display a 3D asset or primitive shape. Adding the `<Render/>` component to an `<Entity/>` will add a `RenderComponent` to the entity. The `type` prop allows you to select the primitive shape to render.
 
 <CodeExample
-  label="Render Box Primitive"
+  label="Render a primitive shape"
   filename="render-box.jsx"
-  code={`import { Application, Entity } from '@playcanvas/react'
-import { Render } from '@playcanvas/react/components'
-
-export default function Scene() {
-  return (
-    <Application>
-      <Entity position={[0, 0, 0]}>
-        <Render type="box" />
-      </Entity>
-    </Application>
-  )
-}`}>
-  <PlayCanvasReactExample>
-    <Entity position={[0, 0, 0]}>
-      <Render type="box" />
-    </Entity>
-  </PlayCanvasReactExample>
+  code={RenderBoxSource}
+  showDemo>
+  <Application>
+    <Staging camera={[4, 2, 4]} useGrid={true} useControls={true} >
+      <RenderBox />
+    </Staging>
+  </Application>
 </CodeExample>
 
 ### Rendering an Asset
 
-To render a 3D model loaded from a URL, you can use the asset type and pass the asset directly to the `asset` prop.
+To render a 3D model loaded from a URL, you can use the asset type and pass the asset directly to the `asset` prop. YOu can learn more about loading assets in the [loading assets guide](../guide/loading-assets).
 
 ```jsx copy
 import { Render } from '@playcanvas/react/components'
