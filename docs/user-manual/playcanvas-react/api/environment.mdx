@@ -8,30 +8,32 @@ import { Application } from '@playcanvas/react';
 import { EnvironmentExample } from './environment-example';
 import EnvironmentExampleSource from '!!raw-loader!./environment-example.jsx';
 
-The `Environment` component is used to configure the environment lighting and skybox for a scene. It provides a comprehensive way to set up atmospheric lighting, skyboxes, and environmental effects that affect the entire scene.
+The `<Environment/>` component is used to configure the environment lighting and skybox for a scene. It provides a simple way to set up environmental lighting, skyboxes, and other effects that affect the entire scene.
+
+## Overview
+
+The Environment component combines several PlayCanvas scene and sky properties into a single, easy-to-use component:
+
+- **Skybox**: Sets the background texture for the scene
+- **Environment Atlas**: Provides Image-Based Lighting (IBL) for realistic environmental reflections
+- **Sky Settings**: Controls sky dome properties, rotation, scale, and positioning
+- **Scene Settings**: Manages exposure, luminance, and other global lighting parameters
+
+Place the `<Environment/>` component within an [`<Application/>`](./application).
+
 
 ## Usage
 
-```jsx copy
-import { Environment } from '@playcanvas/react/components'
-import { useEnvAtlas } from '@playcanvas/react/hooks'
+You can use the `<Environment/>` component to set the environment lighting and skybox for a scene.
 
-export const Scene = () => {
-  const { asset: envAtlas } = useEnvAtlas('/env_atlas.png')
+:::tip
 
-  return (
-    <Entity>
-      <Environment envAtlas={envAtlas} exposure={1.2} />
-      {/* Your scene entities here */}
-    </Entity>
-  )
-}
-```
+Only one `<Environment/>` component can be used per [`<Application/>`](./application). If you use multiple `<Environment/>` components, only the first one will be applied. 
 
-Try adjusting the exposure and switching between different environment atlases to see how they affect the scene lighting:
+:::
 
 <CodeExample
-  label="Environment Example"
+  label="Switch between different environment atlases and exposure settings"
   filename="environment-example.jsx"
   code={EnvironmentExampleSource}
   showDemo>
@@ -48,21 +50,11 @@ Try adjusting the exposure and switching between different environment atlases t
   </Application>
 </CodeExample>
 
-## Overview
+### Loading a HDR
 
-The Environment component combines several PlayCanvas scene and sky properties into a single, easy-to-use component:
-
-- **Skybox**: Sets the background texture for the scene
-- **Environment Atlas**: Provides Image-Based Lighting (IBL) for realistic environmental reflections
-- **Sky Settings**: Controls sky dome properties, rotation, scale, and positioning
-- **Scene Settings**: Manages exposure, luminance, and other global lighting parameters
-
-The Environment component should be placed within an `<Application>` component. Only one Environment component should be used per application instance.
+You use the `<Environment/>` component with a HDR
 
 ```jsx copy
-import { Environment } from '@playcanvas/react/components'
-import { useEnvAtlas } from '@playcanvas/react/hooks'
-
 const EnvironmentExample = () => {
   const { asset: envAtlas } = useEnvAtlas('/env_atlas.png')
 
@@ -78,11 +70,6 @@ const EnvironmentExample = () => {
   )
 }
 ```
-
-:::tip
-Only one `<Environment/>` component can be used per `<Application/>`. If you use multiple `<Environment/>` components, only the first one will be applied. 
-:::
-
 
 ## Properties
 
