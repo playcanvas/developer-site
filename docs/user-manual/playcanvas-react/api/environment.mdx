@@ -8,29 +8,43 @@ import { Application } from '@playcanvas/react';
 import { EnvironmentExample } from './environment-example';
 import EnvironmentExampleSource from '!!raw-loader!./environment-example.jsx';
 
-The `<Environment/>` component is used to configure the environment lighting and skybox for a scene. It provides a simple way to set up environmental lighting, skyboxes, and other effects that affect the entire scene.
+The `<Environment/>` component is used to configure the environment lighting and skybox for a scene. It provides a simple way to set up global lighting, and other effects that affect the entire scene.
 
-## Overview
+With an `<Environment/>` component in your scene, you can:
 
-The Environment component combines several PlayCanvas scene and sky properties into a single, easy-to-use component:
-
-- **Skybox**: Sets the background texture for the scene
-- **Environment Atlas**: Provides Image-Based Lighting (IBL) for realistic environmental reflections
-- **Sky Settings**: Controls sky dome properties, rotation, scale, and positioning
-- **Scene Settings**: Manages exposure, luminance, and other global lighting parameters
-
-Place the `<Environment/>` component within an [`<Application/>`](./application).
-
+- Set the background texture for the scene
+- Provides Image-Based Lighting (IBL) for realistic environmental reflections
+- Controls sky dome properties, rotation, scale, and positioning
+- Manages exposure, luminance, and other global lighting parameters
 
 ## Usage
 
-You can use the `<Environment/>` component to set the environment lighting and skybox for a scene.
+Place the `<Environment/>` component within an [`<Application/>`](./application) and add it to the scene. You'll need to load a HDR or environment atlas and provide it to the component.
 
 :::tip
 
-Only one `<Environment/>` component can be used per [`<Application/>`](./application). If you use multiple `<Environment/>` components, only the first one will be applied. 
+**You only need one `<Environment/>` component for the entire scene**. Using multiple `<Environment/>` components within the same `<Application/>` will trigger a warning.
 
 :::
+
+Simpl load a HDR and set it as the skybox. You can find great HDR images on [HDRI Haven](https://hdrihaven.com/).
+
+```jsx copy
+const EnvironmentExample = () => {
+  const { asset: skybox } = useTexture('/env.hdr')
+
+  return (
+      <Environment skybox={skybox} />
+      {/* The rest of your scene... */}
+  )
+}
+```
+
+The component will affect the entire scene, so you should only use it once. You can specify global lighting parameters like exposure, luminance, and other global lighting parameters. See the [Properties](#properties) section for more details.
+
+### Dome effect
+
+You can also use the `<Environment/>` component to create a dome effect. This is useful for creating a more realistic environment with a ground plane. You can specify the scale, position, rotation, and other properties of the dome.
 
 <CodeExample
   label="Switch between different environment atlases and exposure settings"
@@ -50,26 +64,6 @@ Only one `<Environment/>` component can be used per [`<Application/>`](./applica
   </Application>
 </CodeExample>
 
-### Loading a HDR
-
-You use the `<Environment/>` component with a HDR
-
-```jsx copy
-const EnvironmentExample = () => {
-  const { asset: envAtlas } = useEnvAtlas('/env_atlas.png')
-
-  return (
-    <Application>
-      <Environment 
-        envAtlas={envAtlas}
-        exposure={1.2}
-        showSkybox={false}
-      />
-      {/* Your scene entities here */}
-    </Application>
-  )
-}
-```
 
 ## Properties
 

@@ -37,7 +37,7 @@ export const RigidbodyExample = () => {
 
   return (<>
     {/* Ground plane */}
-    <Entity key="ground" position={[0, -0.6, 0]} scale={[10, -0.1, 10]}>
+    <Entity key="ground" position={[0, -0.6, 0]} scale={[10, 0.1, 10]}>
       <RigidBody type="static" friction={0.5} />
       <Collision type="box" halfExtents={[5, 0.1, 5]} />
     </Entity>

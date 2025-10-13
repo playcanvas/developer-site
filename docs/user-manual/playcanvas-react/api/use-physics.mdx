@@ -3,210 +3,33 @@ title: usePhysics
 description: Access physics context and state
 ---
 
-# usePhysics
+# `usePhysics`
 
-The `usePhysics` hook provides access to the physics context and state information. It allows you to check if physics is enabled, loaded, and handle any physics-related errors.
+The `usePhysics` hook provides information on the physics engine state. It allows you to check if physics is enabled, loaded, and to handle any physics-related errors.
 
-## Basic Usage
+PlayCanvas React lazily loads and instantiates the physics engine allowing you to render content ahead of time. The `usePhysics` provides a reactive mechanism to check the physics engine state.
+
+You can read more about the physics system in the [Physics guide](../guide/physics) or the [Rigidbody](/api/components/rigidbody) and [Collision](/api/components/collision) components.
+
+## Usage
+
+### Conditional Rendering
 
 ```jsx copy
 import { usePhysics } from '@playcanvas/react/hooks'
 
 function PhysicsInfo() {
   const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics()
+
+  if (!isPhysicsLoaded) return null
   
-  if (physicsError) {
-    return <div>Physics error: {physicsError.message}</div>
-  }
-  
-  if (!isPhysicsLoaded) {
-    return <div>Loading physics...</div>
-  }
-  
-  return <div>Physics is ready!</div>
+  return (<Entity>
+    <Rigidbody type="box" />
+    <Collision type="box" />
+    <Render type="box" />
+  </Entity>)
 }
 ```
-
-## Returns
-
-The hook returns a `PhysicsContextType` object with the following properties:
-
-- **isPhysicsEnabled** (`boolean`) - Whether physics is enabled on the application
-- **isPhysicsLoaded** (`boolean`) - Whether the physics library has been successfully loaded
-- **physicsError** (`Error | null`) - The error that occurred when loading physics, if any
-
-## Physics State Checking
-
-### Check if Physics is Available
-
-```jsx copy
-import { usePhysics } from '@playcanvas/react/hooks'
-
-function PhysicsStatus() {
-  const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics()
-  
-  return (
-    <div>
-      <p>Physics Enabled: {isPhysicsEnabled ? 'Yes' : 'No'}</p>
-      <p>Physics Loaded: {isPhysicsLoaded ? 'Yes' : 'No'}</p>
-      {physicsError && <p>Error: {physicsError.message}</p>}
-    </div>
-  )
-}
-```
-
-### Conditional Physics Components
-
-```jsx copy
-import { usePhysics } from '@playcanvas/react/hooks'
-
-function ConditionalPhysics() {
-  const { isPhysicsEnabled, isPhysicsLoaded } = usePhysics()
-  
-  if (!isPhysicsEnabled || !isPhysicsLoaded) {
-    return <div>Physics not available</div>
-  }
-  
-  return (
-    <Entity>
-      <Collision type="box" />
-      <Rigidbody type="dynamic" mass={10} />
-      <Render type="box" />
-    </Entity>
-  )
-}
-```
-
-## Error Handling
-
-### Handle Physics Loading Errors
-
-```jsx copy
-import { usePhysics } from '@playcanvas/react/hooks'
-
-function PhysicsErrorHandler() {
-  const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics()
-  
-  if (physicsError) {
-    return (
-      <div>
-        <h3>Physics Loading Failed</h3>
-        <p>Error: {physicsError.message}</p>
-        <button onClick={() => window.location.reload()}>
-          Retry
-        </button>
-      </div>
-    )
-  }
-  
-  if (!isPhysicsEnabled) {
-    return (
-      <div>
-        <h3>Physics Not Enabled</h3>
-        <p>Enable physics by adding usePhysics prop to Application</p>
-      </div>
-    )
-  }
-  
-  if (!isPhysicsLoaded) {
-    return (
-      <div>
-        <h3>Loading Physics</h3>
-        <p>Please wait while physics library loads...</p>
-      </div>
-    )
-  }
-  
-  return <div>Physics is ready!</div>
-}
-```
-
-### Graceful Degradation
-
-```jsx copy
-import { usePhysics } from '@playcanvas/react/hooks'
-
-function GracefulDegradation() {
-  const { isPhysicsEnabled, isPhysicsLoaded } = usePhysics()
-  
-  return (
-    <Entity>
-      <Render type="box" />
-      {isPhysicsEnabled && isPhysicsLoaded && (
-        <>
-          <Collision type="box" />
-          <Rigidbody type="dynamic" mass={10} />
-        </>
-      )}
-    </Entity>
-  )
-}
-```
-
-## Physics Setup
-
-### Enable Physics in Application
-
-```jsx copy
-import { Application } from '@playcanvas/react'
-
-function PhysicsApp() {
-  return (
-    <Application usePhysics>
-      <PhysicsInfo />
-      <PhysicsEntity />
-    </Application>
-  )
-}
-
-function PhysicsInfo() {
-  const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics()
-  
-  return (
-    <div>
-      <p>Physics Enabled: {isPhysicsEnabled ? 'Yes' : 'No'}</p>
-      <p>Physics Loaded: {isPhysicsLoaded ? 'Yes' : 'No'}</p>
-      {physicsError && <p>Error: {physicsError.message}</p>}
-    </div>
-  )
-}
-```
-
-### Physics Requirements
-
-```jsx copy
-import { usePhysics } from '@playcanvas/react/hooks'
-
-function PhysicsRequirements() {
-  const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics()
-  
-  if (!isPhysicsEnabled) {
-    return (
-      <div>
-        <h3>Physics Not Enabled</h3>
-        <p>To enable physics:</p>
-        <ol>
-          <li>Install the physics library: <code>npm install sync-ammo</code></li>
-          <li>Add <code>usePhysics</code> prop to your Application component</li>
-        </ol>
-      </div>
-    )
-  }
-  
-  if (!isPhysicsLoaded) {
-    return (
-      <div>
-        <h3>Physics Loading</h3>
-        <p>Loading physics library...</p>
-      </div>
-    )
-  }
-  
-  return <div>Physics is ready to use!</div>
-}
-```
-
-## Physics Components
 
 ### Safe Physics Component Creation
 
@@ -257,105 +80,13 @@ function PhysicsWithFallback() {
 }
 ```
 
-## Physics Debugging
+## Properties
 
-### Physics Debug Information
-
-```jsx copy
+```tsx asTypedoc
 import { usePhysics } from '@playcanvas/react/hooks'
-
-function PhysicsDebug() {
-  const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics()
-  
-  return (
-    <div>
-      <h3>Physics Debug Info</h3>
-      <ul>
-        <li>Enabled: {isPhysicsEnabled ? 'Yes' : 'No'}</li>
-        <li>Loaded: {isPhysicsLoaded ? 'Yes' : 'No'}</li>
-        <li>Error: {physicsError ? physicsError.message : 'None'}</li>
-      </ul>
-    </div>
-  )
-}
+type $ = ReturnType<typeof usePhysics>
+export default $;
 ```
-
-### Physics Performance Monitoring
-
-```jsx copy
-import { usePhysics } from '@playcanvas/react/hooks'
-import { useApp } from '@playcanvas/react/hooks'
-import { useState, useEffect } from 'react'
-
-function PhysicsPerformance() {
-  const { isPhysicsEnabled, isPhysicsLoaded } = usePhysics()
-  const app = useApp()
-  const [physicsStats, setPhysicsStats] = useState(null)
-  
-  useEffect(() => {
-    if (!isPhysicsEnabled || !isPhysicsLoaded) return
-    
-    const interval = setInterval(() => {
-      if (app.systems.rigidbody) {
-        setPhysicsStats({
-          bodies: app.systems.rigidbody.bodies.length,
-          contacts: app.systems.rigidbody.contacts.length
-        })
-      }
-    }, 1000)
-    
-    return () => clearInterval(interval)
-  }, [app, isPhysicsEnabled, isPhysicsLoaded])
-  
-  if (!isPhysicsEnabled || !isPhysicsLoaded) {
-    return <div>Physics not available</div>
-  }
-  
-  return (
-    <div>
-      <h3>Physics Performance</h3>
-      {physicsStats && (
-        <ul>
-          <li>Rigid Bodies: {physicsStats.bodies}</li>
-          <li>Contacts: {physicsStats.contacts}</li>
-        </ul>
-      )}
-    </div>
-  )
-}
-```
-
-## TypeScript
-
-The hook is fully typed with TypeScript:
-
-```tsx
-import { usePhysics, PhysicsContextType } from '@playcanvas/react/hooks'
-
-function TypedPhysicsExample() {
-  const physics: PhysicsContextType = usePhysics()
-  
-  // physics.isPhysicsEnabled is typed as boolean
-  // physics.isPhysicsLoaded is typed as boolean
-  // physics.physicsError is typed as Error | null
-  
-  return (
-    <div>
-      <p>Physics Enabled: {physics.isPhysicsEnabled}</p>
-      <p>Physics Loaded: {physics.isPhysicsLoaded}</p>
-      {physics.physicsError && <p>Error: {physics.physicsError.message}</p>}
-    </div>
-  )
-}
-```
-
-## Best Practices
-
-1. **Check physics state** before creating physics components
-2. **Handle errors gracefully** for better user experience
-3. **Provide fallbacks** when physics is not available
-4. **Monitor physics performance** in development
-5. **Use TypeScript** for better type safety
 
 ## Related
 
