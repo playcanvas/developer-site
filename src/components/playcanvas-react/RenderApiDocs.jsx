@@ -15,13 +15,13 @@ export default function RenderApiDocs({ data }) {
   
   return (
     <>
-      {/* {definitions.map((definition, index) => (
+      {definitions.map((definition, index) => (
         <div className="api-docs-definition">
           { definition.entries?.length > 0 && (
             <PropertyTable entries={definition.entries} />
           )}
         </div>
-      ))} */}
+      ))}
     </>
   );
 }

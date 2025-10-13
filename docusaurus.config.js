@@ -122,33 +122,7 @@ const config = {
         return redirects;
       }
     }],
-    'docusaurus-plugin-sass',
-    // function webpackResolvePlugin(context, options) {
-    //   const path = require('path');
-      
-    //   return {
-    //     name: 'webpack-resolve-plugin',
-    //     configureWebpack(config, isServer, utils) {
-    //       // Get absolute paths to Docusaurus's React
-    //       const docusaurusReactPath = path.resolve(__dirname, 'node_modules/react');
-    //       const docusaurusReactDomPath = path.resolve(__dirname, 'node_modules/react-dom');
-          
-    //       return {
-    //         resolve: {
-    //           alias: {
-    //             // Force ALL React imports to use Docusaurus's version (absolute paths)
-    //             'react': docusaurusReactPath,
-    //             'react-dom': docusaurusReactDomPath,
-    //             'react/jsx-runtime': path.join(docusaurusReactPath, 'jsx-runtime'),
-    //             'react/jsx-dev-runtime': path.join(docusaurusReactPath, 'jsx-dev-runtime'),
-    //           },
-    //           // Ensure symlinks are resolved
-    //           symlinks: true
-    //         }
-    //       };
-    //     }
-    //   };
-    // }
+    'docusaurus-plugin-sass'
   ],
 
   presets: [
