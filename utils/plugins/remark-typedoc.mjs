@@ -169,7 +169,7 @@ function getDocEntry({ symbol, declaration, typeResolver = noop }) {
   
   // get entry properties
   const name = symbol.getName();
-  const comments = getComment(symbol);// ?? getComment(declaration.getType().getAliasSymbol());
+  const comments = getComment(symbol);
   const description = replaceJsDocLinks(comments)//.replace(/^- /, '');
   const optional = isFunctionParameter ? valueDeclaration.isOptional() : symbol.isOptional();
   const tags = getTags(symbol);
