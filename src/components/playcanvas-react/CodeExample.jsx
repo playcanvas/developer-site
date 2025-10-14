@@ -143,7 +143,7 @@ export const Staging = ({
                 </Entity>
             )}
             { useShadow && (
-                <Entity position={sceneOffset}> */}
+                <Entity position={sceneOffset}>
                     <ShadowCatcherComponent />
                 </Entity>
             )}
