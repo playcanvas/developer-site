@@ -18,7 +18,7 @@ const { asset } = useModel('model.glb');
 return <Render asset={asset} />;
 ```
 
-In this example, we're loading a model using the [`useModel`](../../api/hooks/use-asset#usemodel) hook and rendering it using the [`<Render/>`](../../api/components/render) component.
+In this example, we're loading a model using the [`useModel`](../../api/hooks/use-asset#usemodel) hook and rendering it using the [`<Render/>`](../../api/render) component.
 
 <CodeExample
   label="Loading a model with useModel"
@@ -78,11 +78,11 @@ const { asset } = useTexture('texture.jpg', {
 There are different hooks for loading different types of assets. You can create more advanced hooks by wrapping the `useAsset` hook.
 
 - [`useModel`](../../api/hooks/use-asset#usemodel) for loading 3D GLTF/GLB models
-- [`useTexture`](../api/hooks/use-asset#usetexture) for loading textures
-- [`useSplat`](../api/hooks/use-asset#usesplat) for loading Gaussian Splats
-- [`useEnvAtlas`](../api/hooks/use-asset#useenvatlas) for loading environment atlases
-- [`useAsset`](../api/hooks/use-asset#useasset) for loading any type of asset
-- [`useFont`](../api/hooks/use-asset#usefont) for loading fonts
+- [`useTexture`](../../api/hooks/use-asset#usetexture) for loading textures
+- [`useSplat`](../../api/hooks/use-asset#usesplat) for loading Gaussian Splats
+- [`useEnvAtlas`](../../api/hooks/use-asset#useenvatlas) for loading environment atlases
+- [`useAsset`](../../api/hooks/use-asset#useasset) for loading any type of asset
+- [`useFont`](../../api/hooks/use-asset#usefont) for loading fonts
 
 ### Asset Caching
 
@@ -150,7 +150,7 @@ export function ProgressiveAsset() {
 
 ### Data Fetching Libraries
 
-If you need more advanced caching or loading strategies, you can integrate with libraries like **[React Query](https://tanstack.com/query/latest)** or **[SWR](https://swr.vercel.app/)** or any other Promise based library using the [`fetchAsset`](../../api/utils/fetch-asset) utility.
+If you need more advanced caching or loading strategies, you can integrate with libraries like **[React Query](https://tanstack.com/query/latest)** or **[SWR](https://swr.vercel.app/)** or any other Promise based library using the `fetchAsset` utility.
 
 ```tsx title="model-with-query.tsx"
 import { fetchAsset } from '@playcanvas/react/utils';

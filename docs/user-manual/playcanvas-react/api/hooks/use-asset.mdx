@@ -59,11 +59,11 @@ export function RenderSplat() {
 
 The following hooks are available:
 
-- [`useModel`](/docs/api/hooks/use-asset#usemodel) - Load a 3D model asset
-- [`useSplat`](/docs/api/hooks/use-asset#usesplat) - Load a Gaussian Splat asset
-- [`useTexture`](/docs/api/hooks/use-asset#usetexture) - Load a texture asset
-- [`useEnvAtlas`](/docs/api/hooks/use-asset#useenvatlas) - Load an environment atlas texture
-- [`useAsset`](/docs/api/hooks/use-asset#useasset) - Generic hook for loading any type of asset
+- [`useModel`](#usemodel) - Load a 3D model asset
+- [`useSplat`](#usesplat) - Load a Gaussian Splat asset
+- [`useTexture`](#usetexture) - Load a texture asset
+- [`useEnvAtlas`](#useenvatlas) - Load an environment atlas texture
+- [`useAsset`](#useasset) - Generic hook for loading any type of asset
 
 ## API
 
@@ -110,7 +110,7 @@ dracoInitialize({
 
 ## useSplat
 
-A specialized hook for loading Gaussian Splat assets. Pass the source URL of the splat file and any additional properties to pass to the asset loader and use the resulting asset in the [`<GSplat/>`](/docs/api/components/splat) component.
+A specialized hook for loading Gaussian Splat assets. Pass the source URL of the splat file and any additional properties to pass to the asset loader and use the resulting asset in the [`<GSplat/>`](../../gsplat) component.
 
 ```tsx copy filename="render-splat.tsx"
 import { useSplat } from '@playcanvas/react/hooks';
@@ -127,7 +127,7 @@ export function RenderSplat() {
 }
 ```
 
-See the [`<GSplat/>`](/docs/api/components/splat) component for more information, and the [Gaussian Splat demo](/examples/splats) for a working example.
+See the [`<GSplat/>`](../../gsplat) component for more information.
 
 ## useTexture
 
@@ -149,11 +149,11 @@ export function RenderTexture() {
 }
 ```
 
-See the [useMaterial](/docs/api/hooks/use-asset/useMaterial) hook and [Render](/docs/api/components/Render) component for more information.
+See the [useMaterial](../use-material) hook and [Render](../../render) component for more information.
 
 ## useEnvAtlas
 
-A specialized hook for loading environment atlas textures. Pass the source URL of the texture file and any additional properties to pass to the asset loader and use the resulting asset in the [`<Environment/>`](/docs/api/components/Environment) component.
+A specialized hook for loading environment atlas textures. Pass the source URL of the texture file and any additional properties to pass to the asset loader and use the resulting asset in the [`<Environment/>`](../../environment) component.
 
 ```tsx copy filename="render-env-atlas.tsx"
 import { useEnvAtlas } from '@playcanvas/react/hooks';
@@ -170,7 +170,7 @@ export function RenderEnvAtlas() {
 }
 ```
 
-See the [EnvAtlas](/docs/api/components/EnvAtlas) component for more information.
+See the [Environment](../../environment) component for more information.
 
 ## useFont
 

@@ -9,7 +9,7 @@ import { Application } from '@playcanvas/react';
 import { RenderBox } from './render-box';
 import RenderBoxSource from '!!raw-loader!./render-box.jsx';
 
-The `<Render/>` component allows an [`<Entity/>`](./entity) to display a 3D asset or primitive shape. Adding the `<Render/>` component to an [`<Entity/>`](./entity) will add a `RenderComponent` to the entity. The `type` prop allows you to select the primitive shape to render.
+The `<Render/>` component allows an [`<Entity/>`](../entity) to display a 3D asset or primitive shape. Adding the `<Render/>` component to an [`<Entity/>`](../entity) will add a `RenderComponent` to the entity. The `type` prop allows you to select the primitive shape to render.
 
 <CodeExample
   label="Render a primitive shape"
@@ -25,7 +25,7 @@ The `<Render/>` component allows an [`<Entity/>`](./entity) to display a 3D asse
 
 ## Rendering an Asset
 
-To render a 3D model loaded from a URL, you can use the asset type and pass the asset directly to the `asset` prop. YOu can learn more about loading assets in the [loading assets guide](../guide/loading-assets).
+To render a 3D model loaded from a URL, you can use the asset type and pass the asset directly to the `asset` prop. YOu can learn more about loading assets in the [loading assets guide](../../guide/loading-assets).
 
 ```jsx copy
 import { Render } from '@playcanvas/react/components'

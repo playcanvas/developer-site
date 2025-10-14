@@ -9,7 +9,7 @@ import MaterialsSource from '!!raw-loader!./components/materials.jsx';
 import { MaterialTextures } from './components/material-textures';
 import MaterialTexturesSource from '!!raw-loader!./components/material-textures.jsx';
 
-Materials are a fundamental part of 3D graphics. You work with materials in React using the [`useMaterial`](./use-material#usematerial) hook and the [`<Render/>`](./render) component.
+Materials are a fundamental part of 3D graphics. You work with materials in React using the [`useMaterial`](../../api/hooks/use-material) hook and the [`<Render/>`](../../api/render) component.
 
 They define the appearance of 3D objects and are used to create realistic lighting effects. Materials can be applied to `Render` components to change the appearance of 3D objects. They accept a wide range of properties to control the appearance of the material.
 
@@ -51,7 +51,7 @@ In the example below, we're using the `useMaterial` hook to create a material an
 
 ### Basic Properties
 
-The hook accepts amn object of properties that closely match those of the [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) class. It will return a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance which can be applied to a [`Render`](./render#render) component.
+The hook accepts amn object of properties that closely match those of the [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) class. It will return a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance which can be applied to a [`<Render/>`](../../api/render) component.
 
 ```jsx copy
 import { useMaterial } from '@playcanvas/react/hooks'
@@ -72,7 +72,7 @@ function BasicMaterialExample() {
 
 ### Textures
 
-You can also use textures with the material by loading them with the [`useTexture`](./use-asset#usetexture) hook. Try switching between different texture sets and adjusting the material properties:
+You can also use textures with the material by loading them with the [`useTexture`](../../api/hooks/use-asset#usetexture) hook. Try switching between different texture sets and adjusting the material properties:
 
 ```jsx copy
 import { useMaterial } from '@playcanvas/react/hooks'
@@ -107,7 +107,7 @@ function TexturedMaterialExample() {
 
 ## Related
 
-- [useMaterial](./use-material#usematerial)
-- [useTexture](./use-asset#usetexture)
-- [Light](./light)
-- [Render](./render)
+- [useMaterial](../../api/hooks/use-material)
+- [useTexture](../../api/hooks/use-asset#usetexture)
+- [Light](../../api/light)
+- [Render](../../api/render)
