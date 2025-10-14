@@ -27,6 +27,7 @@ export const CodeExample = ({
     language = 'jsx', 
     showDemo = false, 
     showViewSourceButton = true,
+    showControls = true,
     children, 
 }) => {
     const [renderKey, setRenderKey] = useState(0);
@@ -52,7 +53,7 @@ export const CodeExample = ({
                         </div>
                     )}
                     <div className="code-example-controls">
-                        <Leva fill/>
+                        <Leva fill hidden={showControls === false}/>
                     </div>
                 </div>
             </TabItem>
@@ -96,7 +97,7 @@ export const Staging = ({
     const { colorMode } = useColorMode();
     
     const app = useApp();
-    const { asset: envAtlas } = useEnvAtlas('/assets/environment.png');
+    const { asset: envAtlas } = useEnvAtlas('/assets/helipad.png');
     const cameraColor = colorMode === 'dark' ? '#2a2a2a' : '#e4e0e0';
 
      const [isPointerDown, setIsPointerDown] = useState(false);

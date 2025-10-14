@@ -326,14 +326,17 @@ const sidebars = {
               type: 'category',
               label: 'Hooks',
               key: 'react-api-hooks',
+              link: {
+                type: 'doc',
+                id: 'user-manual/playcanvas-react/api/hooks/index',
+              },
               items: [
-                'user-manual/playcanvas-react/api/hooks',
-                'user-manual/playcanvas-react/api/use-app',
-                'user-manual/playcanvas-react/api/use-asset',
-                'user-manual/playcanvas-react/api/use-material',
-                'user-manual/playcanvas-react/api/use-parent',
-                'user-manual/playcanvas-react/api/use-app-event',
-                'user-manual/playcanvas-react/api/use-physics',
+                'user-manual/playcanvas-react/api/hooks/use-app',
+                'user-manual/playcanvas-react/api/hooks/use-app-event',
+                'user-manual/playcanvas-react/api/hooks/use-asset',
+                'user-manual/playcanvas-react/api/hooks/use-material',
+                'user-manual/playcanvas-react/api/hooks/use-parent',
+                'user-manual/playcanvas-react/api/hooks/use-physics',
               ]
             }
           ]

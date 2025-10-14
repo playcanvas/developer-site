@@ -3,41 +3,35 @@ title: Light
 description: Documentation for the Light component
 ---
 
-import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
-import PlayCanvasReactExample from '@site/src/components/playcanvas-react/PlayCanvasReactExample';
-import { Entity } from '@playcanvas/react';
-import { Light, Render } from '@playcanvas/react/components';
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { LightExample } from './light-example';
+import LightExampleSource from '!!raw-loader!./light-example.jsx';
+
+# `<Light/>`
 
 The `Light` component allows an Entity to emit light. When attached to an `Entity`, the light can be positioned and oriented using the entity's transform. Lights can be directional, point, or spot.
 
 ## Usage
 
-<CodeExample
-  label="Directional Light Example"
-  filename="directional-light.jsx"
-  code={`import { Application, Entity } from '@playcanvas/react'
-import { Light, Render } from '@playcanvas/react/components'
+Try adjusting the light properties to see how they affect the scene:
 
-export default function Scene() {
-  return (
-    <Application>
-      <Entity>
-        <Light type="directional" intensity={0.8} />
-      </Entity>
-      <Entity position={[0, 0, 0]}>
-        <Render type="box" />
-      </Entity>
-    </Application>
-  )
-}`}>
-  <PlayCanvasReactExample>
-    <Entity>
-      <Light type="directional" intensity={0.8} />
-    </Entity>
-    <Entity position={[0, 0, 0]}>
-      <Render type="box" />
-    </Entity>
-  </PlayCanvasReactExample>
+<CodeExample
+  label="Control light properties"
+  code={LightExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging 
+      useLight={false} 
+      useGrid={true} 
+      camera={[3, 3, 3]} 
+      useControls={true}
+      useShadow={true}
+    >
+      <LightExample />
+    </Staging>
+  </Application>
 </CodeExample>
 
 Learn more about [Lights](https://api.playcanvas.com/engine/classes/LightComponent.html) in the PlayCanvas documentation.

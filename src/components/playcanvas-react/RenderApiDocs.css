@@ -20,12 +20,37 @@
 /* Properties table */
 .api-docs-properties {
   background: var(--ifm-background-color);
+  width: 100%;
+  overflow-x: auto;
 }
 
 .api-docs-properties table {
-  width: 100%;
+  width: 100% !important;
   border-collapse: collapse;
   margin: 0;
+  table-layout: auto;
+  min-width: 100%;
+  display: table;
+}
+
+.api-docs-properties thead,
+.api-docs-properties tbody {
+  width: 100%;
+  display: table-header-group;
+}
+
+.api-docs-properties tbody {
+  display: table-row-group;
+}
+
+.api-docs-properties tr {
+  width: 100%;
+  display: table-row;
+}
+
+.api-docs-properties th,
+.api-docs-properties td {
+  display: table-cell;
 }
 
 .api-docs-properties th {

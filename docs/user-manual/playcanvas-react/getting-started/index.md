@@ -25,7 +25,7 @@ Before you begin, make sure you have:
 The fastest way to get started is with our scaffolding tool:
 
 ```bash
-npx create playcanvas@latest -t react-ts
+npm create playcanvas@latest -t react-ts
 ```
 
 This creates a new project with everything set up and ready to go. You can also try our [online playground](https://playcanvas-react.vercel.app/new) to experiment without installing anything locally.

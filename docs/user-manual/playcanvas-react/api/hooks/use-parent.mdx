@@ -1,0 +1,79 @@
+---
+title: useParent
+description: Access the parent Entity from React context
+---
+
+# `useParent`
+
+The `useParent` hook provides access to the parent [Entity](https://api.playcanvas.com/engine/classes/Entity.html) from within your React components. It's essential for components that need to interact with their parent entity.
+
+## Basic Usage
+
+```jsx copy
+import { useParent } from '@playcanvas/react/hooks'
+
+function MyComponent() {
+  const parent = useParent()
+  
+  // Access parent entity properties
+  console.log('Parent name:', parent.name)
+  console.log('Parent position:', parent.position)
+  
+  return null
+}
+```
+
+## Returns
+
+```tsx asTypedoc
+import { Entity } from 'playcanvas'
+type $ = {
+  /**
+   * The PlayCanvas Entity instance
+   */
+  parent: Entity
+}
+export default $;
+```
+
+## Requirements
+
+This hook must be used within an `<Entity>` component. If used outside of this context, it will throw an error.
+
+```jsx
+// ✅ Correct usage
+<Entity>
+  <MyComponent /> {/* useParent works here */}
+</Entity>
+
+// ❌ Incorrect usage
+<MyComponent /> {/* useParent will throw an error */}
+```
+
+## Examples
+
+### Accessing Entity Properties
+
+```jsx copy
+import { useParent } from '@playcanvas/react/hooks'
+
+function EntityInfo() {
+  const parent = useParent()
+  
+  return (
+    <div>
+      <p>Entity Name: {parent.name}</p>
+      <p>Position: {parent.position.toString()}</p>
+      <p>Rotation: {parent.rotation.toString()}</p>
+      <p>Scale: {parent.scale.toString()}</p>
+    </div>
+  )
+}
+```
+
+## Related
+
+- [Entity Component](./entity) - The component that provides the entity context
+- [useApp](./use-app) - Access the Application instance
+- [useComponent](./use-component) - Create components on the parent entity
+- [Entity API](https://api.playcanvas.com/engine/classes/Entity.html) - PlayCanvas Entity documentation

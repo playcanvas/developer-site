@@ -3,31 +3,32 @@ title: GSplat
 description: Documentation for the GSplat component
 ---
 
-**Gaussian Splats** are a new way of capturing and rendering high quality 3D content. They capture the shape and lighting of a scene in a way that produces incredibly high quality results.
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { GSplatExample } from './gsplat-example';
+import GSplatExampleSource from '!!raw-loader!./gsplat-example.jsx';
+
+# `<GSplat/>`
+
+The `<GSplat>` component is used to render [Gaussian Splats](https://api.playcanvas.com/engine/classes/GSplatComponent.html). Gaussian Splats are a new way of capturing and rendering high quality 3D content. They capture the shape and lighting of a scene in a way that produces incredibly high quality results.
 
 Learn more about [Gaussian Splatting](/user-manual/gaussian-splatting/) in the PlayCanvas documentation.
 
 ## Usage
 
-Once you load a Gaussian Splat model, you can use the `GSplat` component to render it.
+Try adjusting the scale and auto-rotation to see how the Gaussian Splat behaves:
 
-```jsx copy
-import { Entity } from '@playcanvas/react'
-import { GSplat } from '@playcanvas/react/components'
-import { useSplat } from '@playcanvas/react/hooks'
-
-const SplatModel = ({ src, ...props }) => {
-  const { asset } = useSplat(src)
-
-  if (!asset) return null
-
-  return (
-    <Entity {...props}>
-      <GSplat asset={asset} />
-    </Entity>
-  )
-}
-```
+<CodeExample
+  label="GSplat Example"
+  filename="gsplat-example.jsx"
+  code={GSplatExampleSource}
+>
+  <Application>
+    <Staging useLight={false} useGrid={false} camera={[2, 1, 2]} useControls={true}>
+      <GSplatExample />
+    </Staging>
+  </Application>
+</CodeExample>
 
 Learn more about the [GSplat Component](https://api.playcanvas.com/engine/classes/GSplatComponent.html) in the PlayCanvas documentation.
 
