@@ -42,8 +42,6 @@ const EnvironmentExample = () => {
 
 The component will affect the entire scene, so you should only use it once. You can specify global lighting parameters like exposure, luminance, and other global lighting parameters. See the [Properties](#properties) section for more details.
 
-### Dome effect
-
 You can also use the `<Environment/>` component to create a dome effect. This is useful for creating a more realistic environment with a ground plane. You can specify the scale, position, rotation, and other properties of the dome.
 
 <CodeExample
@@ -52,10 +50,10 @@ You can also use the `<Environment/>` component to create a dome effect. This is
   code={EnvironmentExampleSource}
   showDemo>
   <Application>
-    <Staging 
-        useLight={false} 
-        useShadow={true} 
-        camera={[3, 0.2, 3]} 
+    <Staging
+        useLight={false}
+        useShadow={true}
+        camera={[3, 0.2, 3]}
         useControls={true}
         sceneOffset={[0, 0, 0]}
     >
@@ -63,7 +61,6 @@ You can also use the `<Environment/>` component to create a dome effect. This is
     </Staging>
   </Application>
 </CodeExample>
-
 
 ## Properties
 

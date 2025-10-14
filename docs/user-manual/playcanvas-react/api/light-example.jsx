@@ -21,8 +21,7 @@ export const LightExample = () => {
     return (
         <>
             {/* Light entity */}
-            <Entity 
-                name="light" 
+            <Entity name="light" 
                 position={lightingProps.type === 'directional' ? [0, 5, 0] : [0, 2, 0]}
                 rotation={lightingProps.type === 'directional' ? [45, 0, 0] : [0, 0, 0]}
             >
@@ -31,17 +30,17 @@ export const LightExample = () => {
 
             {/* Box to show lighting */}
             <Entity position={[0, 0, 0]}>
-                <Render type="box" castShadows receiveShadows />
+                <Render type="box" />
             </Entity>
 
             {/* Sphere to show lighting */}
             <Entity position={[2, 0, 0]}>
-                <Render type="sphere" castShadows receiveShadows />
+                <Render type="sphere" />
             </Entity>
 
             {/* Cylinder to show lighting */}
             <Entity position={[-2, 0, 0]}>
-                <Render type="cylinder" castShadows receiveShadows />
+                <Render type="cylinder" />
             </Entity>
         </>
     );

@@ -1,5 +1,4 @@
 ---
-title: useAsset
 description: Documentation for the Assets hook
 ---
 
@@ -29,7 +28,7 @@ export function RenderAsset() {
 }
 ```
 
-### Loading Progress
+## Loading Progress
 
 The `useAsset` hook supports loading progress via the `subscribe` callback. This is useful if you want to show a loading indicator or update a progress bar. Not all asset types return a progress value during load, so this is not guaranteed to be available for all asset types.
 
@@ -55,7 +54,6 @@ export function RenderSplat() {
   </Entity>);
 }
 ```
-
 
 ### All Hooks
 
@@ -176,7 +174,7 @@ See the [EnvAtlas](/docs/api/components/EnvAtlas) component for more information
 
 ## useFont
 
-Text in PlayCanvas is rendered using Signed-Distance-Fields (SDF's), so you'll need to convert your ttf fonts into the appropriate format before loading them. 
+Text in PlayCanvas is rendered using Signed-Distance-Fields (SDF's), so you'll need to convert your ttf fonts into the appropriate format before loading them.
 
 If you're using Vite or Rollup there's an official plugin to convert ttf files for you at build time. Check out the [@playcanvas/rollup](https://www.npmjs.com/package/@playcanvas/plugin) for more information.
 

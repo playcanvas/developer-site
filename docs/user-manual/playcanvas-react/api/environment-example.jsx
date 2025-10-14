@@ -24,23 +24,21 @@ export const EnvironmentExample = () => {
     
     if (!lambo || !skybox) return null;
 
-    return (
-        <>
-            {/* Environment with controllable settings */}
-            <Environment 
-                type="dome"
-                skybox={skybox}
-                exposure={exposure}
-                scale={[15, 15, 15]} 
-                center={[0.0, 0.09, 0.0]} 
-                rotation={[0, 290, 0]}
-                showSkybox={true}
-            />
+    return (<>
+        {/* Environment with controllable settings */}
+        <Environment 
+            type="dome"
+            skybox={skybox}
+            exposure={exposure}
+            scale={[15, 15, 15]} 
+            center={[0.0, 0.09, 0.0]} 
+            rotation={[0, 290, 0]}
+            showSkybox={true}
+        />
 
-            {/* Render the model */}
-            <Entity name='lambo'>
-                <Render asset={lambo} />
-            </Entity>
-        </>
-    );
+        {/* Render the model */}
+        <Entity name='lambo'>
+            <Render asset={lambo} />
+        </Entity>
+    </>);
 }

@@ -82,30 +82,19 @@ You can customize physics behavior by changing the various properties of the [`<
 />
 ```
 
-## The usePhysics Hook
+## The `usePhysics` Hook
 
-Because the physics engine is lazily loaded and instantiated you'll often want to to check the physics state to ensure it's loaded before you can use it. This allows you to handle the loading state in a reactive way.
-
-The `usePhysics` hook provides information about the physics engine state:
+Because the physics engine is lazily instantiated you'll want to handle this in a reactive way. This is where the `usePhysics` hook comes in.
 
 ```jsx
 import { usePhysics } from '@playcanvas/react/hooks';
 
 const PhysicsStatus = () => {
   const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics();
-
-  if (physicsError) {
-    return <div>Physics error: {physicsError.message}</div>;
-  }
-
-  if (!isPhysicsLoaded) {
-    return <div>Loading physics...</div>;
-  }
-
-  return <div>Physics is ready!</div>;
+  // ...
 };
 ```
 
-You can read more about the `usePhysics` hook in the [API reference](/user-manual/playcanvas-react/api/use-physics).
+The `usePhysics` hook provides information about the physics engine state. You can read more about the [`usePhysics`](../api/hooks/use-physics) hook in the API reference.
 
-For more detailed information about PlayCanvas physics, see the [PlayCanvas Physics Documentation](/user-manual/physics/).
+For more detailed information about PlayCanvas physics, see the [PlayCanvas physics](/user-manual/physics/) docs.

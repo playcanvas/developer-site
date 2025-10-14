@@ -1,39 +1,43 @@
 ---
-title: Camera
 description: Documentation for the Camera component
 ---
 
-import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
-import PlayCanvasReactExample from '@site/src/components/playcanvas-react/PlayCanvasReactExample';
-import { Entity } from '@playcanvas/react';
-import { Camera } from '@playcanvas/react/components';
+# `<Camera/>`
 
-The `Camera` component enables an [Entity](../entity) to render a scene. You can use the entity's position and rotation to control the camera.
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { CameraExample } from './camera-example';
+import CameraExampleSource from '!!raw-loader!./camera-example.jsx';
+
+Without a camera in your scene, nothing will be rendered. The `<Camera/>` component enables an [`<Entity/>`](../entity) to render a scene from it's perspective. The entity's position and rotation to control the cameras viewpoint.
 
 ## Usage
 
-A `Camera` is a component, so you attach it to an `Entity` and the camera will render the scene from the entity's position and rotation.
+Attach a `<Camera/>` to an [`<Entity/>`](../entity) and it will render the scene from the entity's position and rotation.
+
+```tsx
+<Entity>
+  <Camera clearColor="red" />
+</Entity>
+```
+
+In this example we're switching between 2 different cameras in the scene, each with it's own properties.
 
 <CodeExample
-  label="Camera Example"
-  filename="camera.jsx"
-  code={`import { Application, Entity } from '@playcanvas/react'
-import { Camera } from '@playcanvas/react/components'
-
-export default function Scene() {
-  return (
-    <Application>
-      <Entity position={[0, 0, 5]}>
-        <Camera fov={28} clearColor="#1a1a1a" />
-      </Entity>
-    </Application>
-  )
-}`}>
-  <PlayCanvasReactExample>
-    <Entity position={[0, 0, 5]}>
-      <Camera fov={28} clearColor="#1a1a1a" />
-    </Entity>
-  </PlayCanvasReactExample>
+  label="Switch between camera types"
+  code={CameraExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      useCamera={false}
+    >
+      <CameraExample />
+    </Staging>
+  </Application>
 </CodeExample>
 
 Learn more about the [Camera Component](https://api.playcanvas.com/engine/classes/CameraComponent.html) in the PlayCanvas documentation.

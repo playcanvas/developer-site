@@ -1,7 +1,8 @@
 ---
-title: useMaterial
 description: Create and manage PlayCanvas materials
 ---
+
+# `useMaterial`
 
 import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
 import { Application, Entity } from '@playcanvas/react';
@@ -10,26 +11,24 @@ import { useMaterial } from '@playcanvas/react/hooks';
 import MaterialExampleSource from '!!raw-loader!./material-example.jsx';
 import { MaterialExample } from './material-example.jsx';
 
-# `useMaterial`
-
 The `useMaterial` hook  allows you to create and manage a PlayCanvas [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance. A material with the hook and apply it to a [`<Render/>`](./render) component.
 
 ## Usage
 
 You can create a material with the hook and apply it to a [`<Render/>`](./render) component and update material properties dynamically.
 
-<CodeExample 
-  label="Set material properties dynamically" 
-  filename="material-example.jsx" 
-  code={MaterialExampleSource} 
+<CodeExample
+  label="Set material properties dynamically"
+  filename="material-example.jsx"
+  code={MaterialExampleSource}
   showDemo
 >
   <Application>
-    <Staging 
+    <Staging
       useLight={true}
       useShadow={true}
       useGrid={true}
-      camera={[3, 1, 3]} 
+      camera={[3, 1, 3]}
       useControls={true}
     >
       <MaterialExample />

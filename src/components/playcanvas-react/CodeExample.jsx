@@ -1,3 +1,4 @@
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import './CodeExample.css';
@@ -92,7 +93,8 @@ export const Staging = ({
     useGrid = false,
     useShadow = false,
     camera = [0, 0, 10], 
-    sceneOffset = [0, -0.501, 0]
+    sceneOffset = [0, -0.501, 0],
+    exposure = 1.0
 }) => {
     const { colorMode } = useColorMode();
     
@@ -133,7 +135,7 @@ export const Staging = ({
                 { useControls && <Script script={CameraControls} enableFly={false} pitchRange={new Vec2(-90, -5)} /> }
             </Entity>
             { useLight && (
-                <Environment envAtlas={envAtlas} showSkybox={false} />
+                <Environment envAtlas={envAtlas} showSkybox={false} exposure={exposure}/>
             )}
             { useGrid && (
                 <Entity name="grid" scale={[1000, 1, 1000]} position={[0, -0.5, 0]}>

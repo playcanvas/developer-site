@@ -2,8 +2,8 @@ import { Entity } from '@playcanvas/react';
 import { RigidBody, Collision, Render } from '@playcanvas/react/components';
 import { useMaterial } from '@playcanvas/react/hooks';
 import { math } from 'playcanvas';
-// ↑ imports hidden
 
+// ↑ imports hidden
 export const BasicPhysics = () => {
 
   const sphereMaterial = useMaterial({ diffuse: 'red' });

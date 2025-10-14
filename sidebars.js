@@ -310,7 +310,6 @@ const sidebars = {
               label: 'Components',
               key: 'react-api-components',
               items: [
-                'user-manual/playcanvas-react/api/align',
                 'user-manual/playcanvas-react/api/anim',
                 'user-manual/playcanvas-react/api/camera',
                 'user-manual/playcanvas-react/api/collision',
