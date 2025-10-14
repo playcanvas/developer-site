@@ -74,7 +74,7 @@ const ShadowCatcherComponent = (props) => {
         <Light type='directional' 
             castShadows={true} 
             normalOffsetBias={0} 
-            shadowas={0} 
+            shadowBias={0} 
             shadowDistance={16} 
             shadowResolution={1024} 
             shadowType={SHADOW_VSM_16F} 
