@@ -56,8 +56,6 @@ const DOC_SYMBOL = 'asTypedoc';
  * @param {string} defaultValue - The default value of the entry
 */
 
-let compilerObject;
-
 // Create a single project instance (like Nextra does)
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -116,7 +114,8 @@ export default function remarkTypedoc({ typeResolver }) {
  * @returns {Array} An array of definitions
  */
 function generateDefinitions({ code, typeResolver }) {
-  compilerObject ??= project.getTypeChecker().compilerObject;
+  // Get a fresh compiler object for each call to avoid stale references
+  const compilerObject = project.getTypeChecker().compilerObject;
   const sourceFile = project.createSourceFile('temp.tsx', code, { overwrite: true });
   const exportedDeclarations = sourceFile.getExportedDeclarations();
   const definitions = [];
@@ -126,12 +125,12 @@ function generateDefinitions({ code, typeResolver }) {
     const declaration = declarations[0];
     const symbol = declaration?.getSymbol()
     if(!symbol) continue;
-    const description = getComment(symbol);
+    const description = getComment(symbol, compilerObject);
     const properties = declaration.getType().getApparentProperties();
     
     // Run through the exports properties
     const entries = properties
-      .map(symbol => getDocEntry({ symbol, declaration, typeResolver }))
+      .map(symbol => getDocEntry({ symbol, declaration, typeResolver, compilerObject }))
       .filter(({ type }) => !!type); // Ignore properties with no type
 
     // Add the definition to the definitions array
@@ -143,8 +142,11 @@ function generateDefinitions({ code, typeResolver }) {
 
 /**
  * Get comment and tags from symbol
+ * @param {Object} symbol - The symbol to get the comment from
+ * @param {Object} compilerObject - The TypeScript compiler object
+ * @returns {string} The comment from the symbol
  */
-function getComment(symbol) {
+function getComment(symbol, compilerObject) {
   if (!symbol) {
     return ''
   }
@@ -158,9 +160,10 @@ function getComment(symbol) {
  * @param {Object} options.symbol - The symbol for the type
  * @param {Object} options.declaration - The declaration for the type
  * @param {TypeResolver} options.typeResolver - A function to resolve types
+ * @param {Object} options.compilerObject - The TypeScript compiler object
  * @returns {Entry} The documentation entry for the symbol
  */
-function getDocEntry({ symbol, declaration, typeResolver = noop }) {
+function getDocEntry({ symbol, declaration, typeResolver = noop, compilerObject }) {
 
   // get internal properties
   const subType = symbol.getTypeAtLocation(declaration);
@@ -169,7 +172,7 @@ function getDocEntry({ symbol, declaration, typeResolver = noop }) {
   
   // get entry properties
   const name = symbol.getName();
-  const comments = getComment(symbol);
+  const comments = getComment(symbol, compilerObject);
   const description = replaceJsDocLinks(comments)//.replace(/^- /, '');
   const optional = isFunctionParameter ? valueDeclaration.isOptional() : symbol.isOptional();
   const tags = getTags(symbol);
