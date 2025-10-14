@@ -219,9 +219,8 @@ function getTypeName({ symbol, subType, valueDeclaration }) {
 }
 
 /**
- * Get JSDoc tags from symbol
- * @param {Object} options - The options for generating definitions
- * @param {Object} options.symbol - The symbol for the type
+ * Get JSDoc tags from a symbol
+ * @param {import('ts-morph').Symbol} symbol - The symbol to extract JSDoc tags from
  * @returns {Map<string, string>} The JSDoc tags for the symbol
  */
 const getTags = (symbol) => {
