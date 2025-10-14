@@ -41,7 +41,7 @@ function parseData(data) {
     }
   }
   
-  return parsedData;
+  return data;
 }
 
 /**
