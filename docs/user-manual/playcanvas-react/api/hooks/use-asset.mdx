@@ -76,7 +76,7 @@ export default AssetResult;
 
 ## useModel
 
-A specialized hook for loading 3D model assets (GLB/GLTF). Pass the source URL of the model file and any additional properties to pass to the asset loader and use the resulting asset in the `<Container/>` component.
+A specialized hook for loading 3D model assets (GLB/GLTF). Pass the source URL of the model file and any additional properties to pass to the asset loader and use the resulting asset in the `<Render/>` component.
 
 ```tsx copy filename="render-model.tsx"
 import { useModel } from '@playcanvas/react/hooks';
@@ -94,7 +94,7 @@ export function RenderModel() {
 
 ### Draco Decoding
 
-The `useModel` hook also supports Draco decoding out of the box without zero configuration. @playcanvas/react will use the latest version of the Draco decoder ([1.5.7](https://github.com/google/draco?tab=readme-ov-file#version-157-release)) and lazy load it from the Google CDN.
+The `useModel` hook also supports Draco decoding out of the box with zero configuration. @playcanvas/react will use the latest version of the Draco decoder ([1.5.7](https://github.com/google/draco?tab=readme-ov-file#version-157-release)) and lazy load it from the Google CDN.
 
 Alternatively if you want to self-host the library you can manually configure the decoder using `dracoInitialize`.
 
@@ -178,7 +178,7 @@ Text in PlayCanvas is rendered using Signed-Distance-Fields (SDF's), so you'll n
 
 If you're using Vite or Rollup there's an official plugin to convert ttf files for you at build time. Check out the [@playcanvas/rollup](https://www.npmjs.com/package/@playcanvas/plugin) for more information.
 
-You can import a ttf using the `?sdf` query parameter whhich will automatically convert it into an SDF texture at build time.
+You can import a ttf using the `?sdf` query parameter which will automatically convert it into an SDF texture at build time.
 
 ```tsx copy filename="render-font.tsx"
 

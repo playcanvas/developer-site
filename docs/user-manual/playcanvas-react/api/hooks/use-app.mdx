@@ -4,7 +4,7 @@ description: Access the PlayCanvas Application instance
 
 # `useApp`
 
-The `useApp` hook provides access to the PlayCanvas [Application](https://api.playcanvas.com/engine/classes/Application.html) instance from within your React components. It's a convenient way to get information about the app state, fire events or more.
+The `useApp` hook provides access to the PlayCanvas [Application](https://api.playcanvas.com/engine/classes/Application.html) instance from within your React components. It's a convenient way to get information about the app state, fire events, and more.
 
 ```jsx copy title="./my-component.jsx" copy
 import { useApp } from '@playcanvas/react/hooks'
@@ -24,7 +24,7 @@ A reference to the app gives you access to the scene, camera, systems, etc.
 
 ## Application context
 
-The hook only makes relies on the `<Application/>` component for context, so without one it will throw an error. Call it from inside a component that is a child of an `<Application/>`.
+The hook only relies on the `<Application/>` component for context, so without one it will throw an error. Call it from inside a component that is a child of an `<Application/>`.
 
 ```jsx title="🚫 No <Application> context"
 // Nope, useApp is outside <Application>

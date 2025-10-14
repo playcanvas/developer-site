@@ -7,11 +7,11 @@ import { Application } from '@playcanvas/react';
 import { ModelLoading } from './components/model-loading';
 import ModelLoadingSource from '!!raw-loader!./components/model-loading.jsx';
 
-Whether its textures, materials or 3D models, assets are a key part of any 3D app. And generally speaking, they take the most time to load/ PlayCanvas React provides a set of specialized hooks for loading different types of assets, as well as a utility function for loading assets. This helps you get up to speed quickly but with granular control of how and when assets are loaded.
+Whether its textures, materials or 3D models, assets are a key part of any 3D app. And generally speaking, they take the most time to load. PlayCanvas React provides a set of specialized hooks for loading different types of assets, as well as a utility function for loading assets. This helps you get up to speed quickly but with granular control of how and when assets are loaded.
 
 ## Basic Usage
 
-The simplest way to load an asset is to use one of the specialized hooks. There are special hooks for [models](../../api/hooks/use-asset#usemodel), [gaussian splats](../../api/hooks/use-asset#usesplat), [textures](../../api/hooks/use-asset#usetexture), [environment map](../../api/hooks/use-asset#useenvatlas), [fonts](../../api/hooks/use-asset#usefont) and more. They all have a similar shape and return an PlayCanvas [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html).
+The simplest way to load an asset is to use one of the specialized hooks. There are special hooks for [models](../../api/hooks/use-asset#usemodel), [gaussian splats](../../api/hooks/use-asset#usesplat), [textures](../../api/hooks/use-asset#usetexture), [environment map](../../api/hooks/use-asset#useenvatlas), [fonts](../../api/hooks/use-asset#usefont) and more. They all have a similar shape and return a PlayCanvas [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html).
 
 ```tsx
 const { asset } = useModel('model.glb');
@@ -55,8 +55,8 @@ export function ModelViewer() {
   // If there is an error, show an error message
   if (error) return <ErrorMessage message={error} />;
 
-  // If the asset is loaded, show the container
-  return <Container asset={asset} />;
+  // If the asset is loaded, render it
+  return <Render type="asset" asset={asset} />;
 }
 ```
 
@@ -101,7 +101,7 @@ export function UnloadingModelViewer() {
 
   if (!asset) return null;
 
-  return <Container asset={asset} />;
+  return <Render type="asset" asset={asset} />;
 }
 ```
 
@@ -111,7 +111,7 @@ export function UnloadingModelViewer() {
 
 ### Custom Loading States
 
-You can placeholders or custom loaders whilst assets load by checking the loading state of an asset. This gives you granular control.
+You can use placeholders or custom loaders while assets load by checking the loading state of an asset. This gives you granular control.
 
 ```tsx title="loading-spinner.tsx"
 import { Entity, Render } from '@playcanvas/react/components';
@@ -170,7 +170,7 @@ export function ModelWithQuery() {
   const { data: asset, isLoading } = useQueryModel('model.glb');
 
   if (isLoading) return <LoadingSpinner />;
-  return <Container asset={asset} />;
+  return <Render type="asset" asset={asset} />;
 }
 ```
 
@@ -196,7 +196,7 @@ function useSuspendedQueryModel(src: string) {
 
 export function ModelWithQuery() {
   const { data: asset } = useSuspendedQueryModel('model.glb');
-  return <Container asset={asset} />;
+  return <Render type="asset" asset={asset} />;
 }
 ```
 
