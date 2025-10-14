@@ -16,7 +16,7 @@ export default function RenderApiDocs({ data }) {
   return (
     <>
       {definitions.map((definition, index) => (
-        <div className="api-docs-definition">
+        <div className="api-docs-definition" key={index}>
           { definition.entries?.length > 0 && (
             <PropertyTable entries={definition.entries} />
           )}
