@@ -3,7 +3,7 @@ import { visit } from 'unist-util-visit';
 import { Project, SyntaxKind, ts } from 'ts-morph';
 
 /**
- * This is a docusaurus plugin the parse TS Code blocks and extract API documentation.
+ * This is a docusaurus plugin to parse TS Code blocks and extract API documentation.
  * Use in conjunction with the RenderApiDocs component to display the TSDocs.
  * 
  * @example
