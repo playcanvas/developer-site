@@ -124,8 +124,12 @@ export function ModelWithCustomLoading() {
   if (planeLoading || carLoading) return <LoadingSpinner />;
 
   return <>
-    <Render asset={car} />
-    <Render asset={plane} />
+    <Entity name="car">
+      <Render asset={car} />
+    </Entity>
+    <Entity name="plane">
+      <Render asset={plane} />
+    </Entity>
   </>
 }
 ```
