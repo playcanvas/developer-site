@@ -8,11 +8,11 @@ import { Camera } from '@playcanvas/react/components'
 import { BasicPhysics } from './components/basic-physics';
 import BasicPhysicsSource from '!!raw-loader!./components/basic-physics.jsx'
 
-PlayCanvas ships with a robust [physics system](/user-manual/physics/). This enables realistic simulations of objects in 3D space, including gravity, collisions, forces and constraints. The physics system is powered by the [Ammo.js](https://github.com/kripken/ammo.js) physics engine.
+PlayCanvas ships with a robust [physics system](/user-manual/physics/). This enables realistic simulations of objects in 3D space, including gravity, collisions, forces and constraints. The physics system is powered by the [ammo.js](https://github.com/kripken/ammo.js) physics engine.
 
 ## Getting started
 
-PlayCanvas uses Ammo.js as the physics engine. Ammo.js is a WASM library, and in React its lazy loaded. This means your only shipping ammo.js when you need it, helping you keep your bundle size down. It also means you can render something before ammo.js has loaded, or maybe you only need physics as a result of some user interaction. In any case lazy loading ammo.js means you can get your content rendering fast.
+PlayCanvas uses ammo.js as the physics engine. ammo.js is a WASM library and in React it's lazy loaded. This means you're only shipping ammo.js when you need it, helping you keep your bundle size down. It also means you can render something before ammo.js has loaded, or maybe you only need physics as a result of some user interaction. In any case, lazy loading ammo.js means you can get your content rendering fast.
 
 To use the physics system, you'll need to install the `sync-ammo` dependency.
 

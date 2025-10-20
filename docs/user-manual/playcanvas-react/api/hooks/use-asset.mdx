@@ -6,7 +6,7 @@ description: Documentation for the Assets hook
 
 PlayCanvas React provides hooks for loading and managing different assets. These hooks simplify the process of loading assets and allow you to handle loading and error states.
 
-The general signature of every hooks looks something like the following.
+The general signature of every hook looks something like the following.
 
 ```tsx
 const { asset, loading, error } = useModel(src, props);
@@ -174,7 +174,7 @@ See the [Environment](../../environment) component for more information.
 
 ## useFont
 
-Text in PlayCanvas is rendered using Signed-Distance-Fields (SDF's), so you'll need to convert your ttf fonts into the appropriate format before loading them.
+Text in PlayCanvas is rendered using Signed-Distance-Fields (SDFs), so you'll need to convert your ttf fonts into the appropriate format before loading them.
 
 If you're using Vite or Rollup there's an official plugin to convert ttf files for you at build time. Check out the [@playcanvas/rollup](https://www.npmjs.com/package/@playcanvas/plugin) for more information.
 
