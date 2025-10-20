@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -36,6 +37,7 @@ const config = {
   markdown: {
     mermaid: true,
   },
+
   themes: ['@docusaurus/theme-mermaid', '@docusaurus/theme-live-codeblock'],
 
   plugins: [
@@ -131,6 +133,35 @@ const config = {
         docs: {
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
+          remarkPlugins: [
+            [remarkTypedoc, {
+               typeResolver: ({ displayName, types, tags }) => {
+
+                // If the type is ignored or internal, don't document it
+                if (tags.has('ignore') || tags.has('internal')) {
+                  return null;
+                }
+                
+                // Resolve each type to a URL
+                const resolvedTypes = types.map(type => {
+                  if (type.moduleName === 'playcanvas') {
+                    return {
+                      name: type.name,
+                      url: `https://api.playcanvas.com/engine/classes/${type.name}.html`
+                    };
+                  }
+
+                  // No URL for this type
+                  return { name: type.name, url: null };
+                });
+                
+                return {
+                  displayName,
+                  types: resolvedTypes
+                };
+              }
+            }]
+          ],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:

@@ -2,27 +2,42 @@
 title: Loading Assets
 ---
 
-Assets are a core part of any 3D application, and they generally take the most time to load, which has a direct impact on your user's experience. Knowing how to load and manage assets efficiently is key to a smooth UX. Whether you want to load everything up front, or provide a fast first render, PlayCanvas React has you covered.
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { ModelLoading } from './components/model-loading';
+import ModelLoadingSource from '!!raw-loader!./components/model-loading.jsx';
 
-`@playcanvas/react` provides a set of specialized hooks for loading different types of assets, as well as a utility function for loading assets. For detailed API documentation, see the API reference (coming soon).
+Whether its textures, materials or 3D models, assets are a key part of any 3D app. And generally speaking, they take the most time to load. PlayCanvas React provides a set of specialized hooks for loading different types of assets, as well as a utility function for loading assets. This helps you get up to speed quickly but with granular control of how and when assets are loaded.
 
 ## Basic Usage
 
-The simplest way to load an asset is to use one of the specialized hooks. There are special hooks for models, gaussian splats, textures and environment map etc, but each have a similar shape.
+The simplest way to load an asset is to use one of the specialized hooks. There are special hooks for [models](../../api/hooks/use-asset#usemodel), [gaussian splats](../../api/hooks/use-asset#usesplat), [textures](../../api/hooks/use-asset#usetexture), [environment map](../../api/hooks/use-asset#useenvatlas), [fonts](../../api/hooks/use-asset#usefont) and more. They all have a similar shape and return a PlayCanvas [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html).
 
-```tsx title="model-viewer.tsx"
-import { useModel } from '@playcanvas/react/hooks';
-
-export function ModelViewer() {
-  const { asset } = useModel('model.glb');
-
-  // If the asset is not loaded, return null    
-  if (!asset) return null;
-
-  // If the asset is loaded, render it
-  return <Render type='asset' asset={asset} />;
-}
+```tsx
+const { asset } = useModel('model.glb');
+return <Render asset={asset} />;
 ```
+
+In this example, we're loading a model using the [`useModel`](../../api/hooks/use-asset#usemodel) hook and rendering it using the [`<Render/>`](../../api/render) component.
+
+<CodeExample
+  label="Loading a model with useModel"
+  code={ModelLoadingSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[2, 1, 2]}
+      useControls={true}
+      exposure={3}
+    >
+      <ModelLoading />
+    </Staging>
+  </Application>
+</CodeExample>
 
 ## Preloading
 
@@ -40,8 +55,8 @@ export function ModelViewer() {
   // If there is an error, show an error message
   if (error) return <ErrorMessage message={error} />;
 
-  // If the asset is loaded, show the container
-  return <Container asset={asset} />;
+  // If the asset is loaded, render it
+  return <Render type="asset" asset={asset} />;
 }
 ```
 
@@ -62,11 +77,12 @@ const { asset } = useTexture('texture.jpg', {
 
 There are different hooks for loading different types of assets. You can create more advanced hooks by wrapping the `useAsset` hook.
 
-- `useModel` for loading 3D GLTF/GLB models
-- `useTexture` for loading textures
-- `useSplat` for loading Gaussian Splats
-- `useEnvAtlas` for loading environment atlases
-- `useAsset` for loading any type of asset
+- [`useModel`](../../api/hooks/use-asset#usemodel) for loading 3D GLTF/GLB models
+- [`useTexture`](../../api/hooks/use-asset#usetexture) for loading textures
+- [`useSplat`](../../api/hooks/use-asset#usesplat) for loading Gaussian Splats
+- [`useEnvAtlas`](../../api/hooks/use-asset#useenvatlas) for loading environment atlases
+- [`useAsset`](../../api/hooks/use-asset#useasset) for loading any type of asset
+- [`useFont`](../../api/hooks/use-asset#usefont) for loading fonts
 
 ### Asset Caching
 
@@ -85,7 +101,7 @@ export function UnloadingModelViewer() {
 
   if (!asset) return null;
 
-  return <Container asset={asset} />;
+  return <Render type="asset" asset={asset} />;
 }
 ```
 
@@ -95,7 +111,7 @@ export function UnloadingModelViewer() {
 
 ### Custom Loading States
 
-You can placeholders or custom loaders whilst assets load by checking the loading state of an asset. This gives you granular control.
+You can use placeholders or custom loaders while assets load by checking the loading state of an asset. This gives you granular control.
 
 ```tsx title="loading-spinner.tsx"
 import { Entity, Render } from '@playcanvas/react/components';
@@ -108,8 +124,12 @@ export function ModelWithCustomLoading() {
   if (planeLoading || carLoading) return <LoadingSpinner />;
 
   return <>
-    <Render asset={car} />
-    <Render asset={plane} />
+    <Entity name="car">
+      <Render asset={car} />
+    </Entity>
+    <Entity name="plane">
+      <Render asset={plane} />
+    </Entity>
   </>
 }
 ```
@@ -122,20 +142,19 @@ The loading hooks also provide a simple mechanic to progressively load assets, s
 import { Entity, Render } from '@playcanvas/react/components';
 
 // A component that displays a model with a custom loading state
-export function ProgressiveAsset({ low, high }) {
-  const { asset: low } = useModel(low); // load the low quality asset
-  const { asset: high } = useModel(low && high); // load the high quality asset, when the low quality is loaded
+export function ProgressiveAsset() {
+  const { asset: low } = useModel('./low-quality-model.sog'); // load the low quality asset
+  const { asset: high } = useModel(low && './high-quality-model.sog'); // load the high quality asset, when the low quality is loaded
   
-  // Show a spinner if nothing is visible
-  if (!low && !high ) return <LoadingSpinner />;
+  if (!low && !high ) return null;
 
-  return <Render asset={high || low} />
+  return <Gsplat asset={high || low} />
 }
 ```
 
 ### Data Fetching Libraries
 
-If you need more advanced caching or loading strategies, you can integrate with libraries like **React Query** or **SWR** or any other Promise based library using the `fetchAsset` utility.
+If you need more advanced caching or loading strategies, you can integrate with libraries like **[React Query](https://tanstack.com/query/latest)** or **[SWR](https://swr.vercel.app/)** or any other Promise based library using the `fetchAsset` utility.
 
 ```tsx title="model-with-query.tsx"
 import { fetchAsset } from '@playcanvas/react/utils';
@@ -155,7 +174,7 @@ export function ModelWithQuery() {
   const { data: asset, isLoading } = useQueryModel('model.glb');
 
   if (isLoading) return <LoadingSpinner />;
-  return <Container asset={asset} />;
+  return <Render type="asset" asset={asset} />;
 }
 ```
 
@@ -181,7 +200,7 @@ function useSuspendedQueryModel(src: string) {
 
 export function ModelWithQuery() {
   const { data: asset } = useSuspendedQueryModel('model.glb');
-  return <Container asset={asset} />;
+  return <Render type="asset" asset={asset} />;
 }
 ```
 

@@ -1,0 +1,151 @@
+---
+description: Create and manage PlayCanvas materials
+---
+
+# `useMaterial`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application, Entity } from '@playcanvas/react';
+import { Render } from '@playcanvas/react/components';
+import { useMaterial } from '@playcanvas/react/hooks';
+import MaterialExampleSource from '!!raw-loader!./material-example.jsx';
+import { MaterialExample } from './material-example.jsx';
+
+The `useMaterial` hook allows you to create and manage a PlayCanvas [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance. Create a material with the hook and apply it to a [`<Render/>`](../../render) component.
+
+## Usage
+
+You can create a material with the hook and apply it to a [`<Render/>`](../../render) component and update material properties dynamically.
+
+<CodeExample
+  label="Set material properties dynamically"
+  filename="material-example.jsx"
+  code={MaterialExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[3, 1, 3]}
+      useControls={true}
+    >
+      <MaterialExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## Parameters
+
+The hooks accepts an object with the following properties that closely match those of the [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) class.
+
+<details>
+  <summary><b>Parameters</b></summary>
+  <p>
+  ```tsx asTypedoc
+  import { useMaterial } from '@playcanvas/react/hooks'
+  type $ = Parameters<typeof useMaterial>[0];
+  export default $;
+  ```
+  </p>
+</details>
+
+## Returns
+
+The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance which can be applied to a [`Render`](../../render) component.
+
+```tsx asTypedoc
+import { StandardMaterial } from 'playcanvas'
+type $ = {
+  /**
+   * The PlayCanvas StandardMaterial instance
+   */
+  material: StandardMaterial
+}
+export default $;
+```
+
+## Further examples
+
+### Advanced Properties
+
+The `StandardMaterial` accepts many different properties which can be found [here](https://api.playcanvas.com/engine/classes/StandardMaterial.html).
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function AdvancedMaterial() {
+  const material = useMaterial({
+    diffuse: 'purple',
+    opacity: 0.9,
+    metalness: 0.3,
+    roughness: 0.4,
+    emissive: 'yellow',
+    emissiveIntensity: 0.2,
+    specular: 'white',
+    shininess: 50,
+    reflectivity: 0.8,
+    clearCoat: 0.5,
+    clearCoatRoughness: 0.1
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+### Material with Textures
+
+You can use textures with the material by loading them with the [`useTexture`](../use-asset#usetexture) hook.
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+import { useTexture } from '@playcanvas/react/hooks'
+
+function TexturedMaterialExample() {
+  const { asset: diffuseMap } = useTexture('diffuse.jpg')
+  const { asset: normalMap } = useTexture('normal.jpg')
+  const { asset: roughnessMap } = useTexture('roughness.jpg')
+  
+  const material = useMaterial({
+    diffuseMap: diffuseMap?.resource,
+    normalMap: normalMap?.resource,
+    roughnessMap: roughnessMap?.resource,
+    diffuse: 'white',
+    metalness: 0.5,
+    roughness: 0.5
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+### Material Sharing
+
+You can easily share materials between multiple render components:
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function SharedMaterial() {
+  const material = useMaterial({
+    diffuse: 'orange',
+    metalness: 0.7,
+    roughness: 0.3
+  })
+  
+  return (
+    <div>
+      <Render type="box" material={material} />
+      <Render type="sphere" material={material} />
+      <Render type="cylinder" material={material} />
+    </div>
+  )
+}
+```
+
+## Related
+
+- [useTexture](../use-asset#usetexture) - Load texture assets
+- [Render Component](../../render) - Use materials with render components
+- [StandardMaterial API](https://api.playcanvas.com/engine/classes/StandardMaterial.html) - PlayCanvas material documentation

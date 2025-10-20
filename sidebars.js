@@ -298,7 +298,49 @@ const sidebars = {
             'user-manual/playcanvas-react/guide/physics',
             'user-manual/playcanvas-react/guide/materials'
           ]
-        }
+        },
+        {
+          type: 'category',
+          label: 'API',
+          items: [
+            'user-manual/playcanvas-react/api/application',
+            'user-manual/playcanvas-react/api/entity',
+            {
+              type: 'category',
+              label: 'Components',
+              key: 'react-api-components',
+              items: [
+                'user-manual/playcanvas-react/api/anim',
+                'user-manual/playcanvas-react/api/camera',
+                'user-manual/playcanvas-react/api/collision',
+                'user-manual/playcanvas-react/api/environment',
+                'user-manual/playcanvas-react/api/gsplat',
+                'user-manual/playcanvas-react/api/light',
+                'user-manual/playcanvas-react/api/render',
+                'user-manual/playcanvas-react/api/rigidbody',
+                'user-manual/playcanvas-react/api/script',
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Hooks',
+              key: 'react-api-hooks',
+              link: {
+                type: 'doc',
+                id: 'user-manual/playcanvas-react/api/hooks/index',
+              },
+              items: [
+                'user-manual/playcanvas-react/api/hooks/use-app',
+                'user-manual/playcanvas-react/api/hooks/use-app-event',
+                'user-manual/playcanvas-react/api/hooks/use-asset',
+                'user-manual/playcanvas-react/api/hooks/use-material',
+                'user-manual/playcanvas-react/api/hooks/use-parent',
+                'user-manual/playcanvas-react/api/hooks/use-physics',
+              ]
+            }
+          ]
+        },
+        
       ],
     },
     {

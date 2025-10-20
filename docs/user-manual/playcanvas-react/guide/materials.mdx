@@ -6,15 +6,17 @@ import { CodeExample, Staging } from '@site/src/components/playcanvas-react/Code
 import { Application } from '@playcanvas/react';
 import { Materials } from './components/materials';
 import MaterialsSource from '!!raw-loader!./components/materials.jsx';
+import { MaterialTextures } from './components/material-textures';
+import MaterialTexturesSource from '!!raw-loader!./components/material-textures.jsx';
 
-Materials are a fundamental part of 3D graphics. They define the appearance of 3D objects and are used to create realistic lighting effects. Materials can be applied to `Render` components to change the appearance of 3D objects. They accept a wide range of properties to control the appearance of the material.
+Materials are a fundamental part of 3D graphics. They define the appearance and properties of 3D objects when lit.
 
-The `useMaterial` hook returns a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance. This is useful if you need to create materials and apply them to `Render` components.
+You work with materials in React using the [`useMaterial`](../../api/hooks/use-material) hook which returns a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance. You can then apply it to a [`<Render/>`](../../api/render) component.
 
 ```jsx copy filename="use-material.jsx"
 import { useMaterial } from '@playcanvas/react/hooks'
 
-const RedBox = () => {
+export const RedBox = () => {
   const material = useMaterial({ diffuse: 'red' });
   return (
     <Entity>
@@ -26,12 +28,84 @@ const RedBox = () => {
 
 In the example below, we're using the `useMaterial` hook to create a material and applying it to a `Render` component. We also add a `onClick` event to the `Entity` to change the material properties when the cube is clicked.
 
-<CodeExample label="Click the cube to change the materials properties" filename="materials.jsx" code={MaterialsSource} showDemo>
-    <Application usePhysics>
-        <Staging useControls={true} camera={[3, 2, 3]} useGrid={true}>
+<CodeExample
+  label="Click the cube to change the materials properties"
+  filename="materials.jsx"
+  code={MaterialsSource}
+  showDemo
+  showControls={false}
+>
+    <Application>
+        <Staging 
+          useControls={true} 
+          useShadow={true}
+          useGrid={true}
+          camera={[2, 1, 2]} 
+        >
             <Materials />
         </Staging>
     </Application>
 </CodeExample>
 
-Materials have a wide range of properties that can be used to control the appearance of the material. You can find the full list of properties [here](https://api.playcanvas.com/engine/classes/StandardMaterial.html).
+### Basic Properties
+
+The hook accepts an object of properties that closely match those of the [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) class. It will return a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance which can be applied to a [`<Render/>`](../../api/render) component.
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function BasicMaterialExample() {
+  const material = useMaterial({
+    diffuse: 'blue',       // Base color
+    opacity: 0.7,          // Transparency (0-1)
+    metalness: 0.8,        // Metallic property (0-1)
+    roughness: 0.2,        // Surface roughness (0-1)
+    emissive: 'green',     // Emissive color
+    emissiveIntensity: 0.5 // Emissive strength
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+### Textures
+
+You can also use textures with the material by loading them with the [`useTexture`](../../api/hooks/use-asset#usetexture) hook. Try switching between different texture sets and adjusting the material properties:
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+import { useTexture } from '@playcanvas/react/hooks'
+
+function TexturedMaterialExample() {
+  const { asset: diffuseMap } = useTexture('diffuse.jpg')
+  const material = useMaterial({ diffuseMap })
+
+  return <Render type="box" material={material} />
+}
+```
+
+<CodeExample
+  label="Switch between different material sets"
+  filename="material-textures.jsx"
+  code={MaterialTexturesSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[1.5, 0.75, 1.5]}
+      useControls={true}
+    >
+      <MaterialTextures />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## Related
+
+- [useMaterial](../../api/hooks/use-material)
+- [useTexture](../../api/hooks/use-asset#usetexture)
+- [Light](../../api/light)
+- [Render](../../api/render)

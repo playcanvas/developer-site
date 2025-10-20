@@ -1,22 +1,36 @@
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import './CodeExample.css';
 import CodeBlock from '@theme/CodeBlock';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback, useEffect, createContext, useContext } from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
+import { Leva } from 'leva'
 
 // playcanvas-react
 import { Entity } from '@playcanvas/react';
 import { Camera,  Environment, Script, Light } from '@playcanvas/react/components';
-import { useEnvAtlas } from '@playcanvas/react/hooks';
+import { useEnvAtlas, useApp } from '@playcanvas/react/hooks';
 
 // playcanvas
 import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs';
 import { Grid } from 'playcanvas/scripts/esm/grid.mjs';
 import { ShadowCatcher } from 'playcanvas/scripts/esm/shadow-catcher.mjs';
-import { Vec3, SHADOW_VSM_16F, SHADOWUPDATE_REALTIME } from 'playcanvas';  
+import { Vec2, Vec3, SHADOW_VSM_16F, SHADOWUPDATE_REALTIME } from 'playcanvas';
 
-export const CodeExample = ({ code, label, filename, language = 'jsx', children, showDemo = false, showViewSourceButton = true }) => {
+// If the code contains this regex, only display the code after it, otherwise display the entire code
+const CODE_SPLIT = '// ↑ imports hidden';
+
+export const CodeExample = ({ 
+    code, 
+    label, 
+    filename, 
+    language = 'jsx', 
+    showDemo = false, 
+    showViewSourceButton = true,
+    showControls = true,
+    children, 
+}) => {
     const [renderKey, setRenderKey] = useState(0);
 
     if (!children || !code) {
@@ -24,10 +38,7 @@ export const CodeExample = ({ code, label, filename, language = 'jsx', children,
         return null;
     }
 
-    const handleViewCode = () => {
-        // Force re-render with Code tab active
-        setRenderKey(prev => prev + 1);
-    };
+    const handleViewCode = () => setRenderKey(prev => prev + 1);
 
     return (
         <Tabs defaultValue={renderKey > 0 ? 'Code' : (showDemo ? 'Demo' : 'Code')} key={renderKey}>
@@ -42,11 +53,14 @@ export const CodeExample = ({ code, label, filename, language = 'jsx', children,
                             }}>View Code</a>
                         </div>
                     )}
+                    <div className="code-example-controls">
+                        <Leva fill hidden={showControls === false}/>
+                    </div>
                 </div>
             </TabItem>
             <TabItem value="Code">
                 <CodeBlock language={language} title={filename}>
-                    {code}
+                    {code.includes(CODE_SPLIT) ? CODE_SPLIT + code.split(CODE_SPLIT)[1] : code}
                 </CodeBlock>
             </TabItem>
         </Tabs>
@@ -54,9 +68,9 @@ export const CodeExample = ({ code, label, filename, language = 'jsx', children,
 }
 
 const ShadowCatcherComponent = (props) => {
-    const { width = 2, depth = 2, intensity = 0.75 } = props;
+    const { width = 8, depth = 8, intensity = 0.75 } = props;
     const scale = useMemo(() => new Vec3(width, 1, depth), [width, depth]);
-    return <Entity position={[0, .001, 0]}>
+    return <Entity>
         <Light type='directional' 
             castShadows={true} 
             normalOffsetBias={0} 
@@ -77,33 +91,69 @@ export const Staging = ({
     useLight = true, 
     useControls = false, 
     useGrid = false,
+    useShadow = false,
     camera = [0, 0, 10], 
+    sceneOffset = [0, -0.501, 0],
+    exposure = 1.0
 }) => {
-    
     const { colorMode } = useColorMode();
-    const { asset: envAtlas } = useEnvAtlas('/assets/environment.png');
+    
+    const app = useApp();
+    const { asset: envAtlas } = useEnvAtlas('/assets/helipad.png');
     const cameraColor = colorMode === 'dark' ? '#2a2a2a' : '#e4e0e0';
 
+     const [isPointerDown, setIsPointerDown] = useState(false);
+    const [isOverEntity, setIsOverEntity] = useState(false);
+
+    const onPointerDown = useCallback(() => setIsPointerDown(true), []);
+    const onPointerUp = useCallback(() => setIsPointerDown(false), []);
+    const onPointerOver = useCallback(() => setIsOverEntity(true), []);
+    const onPointerOut = useCallback(() => setIsOverEntity(false), []);
+
+    // Single effect that reacts to state changes
+    useEffect(() => {
+        const canvas = app.graphicsDevice.canvas;
+        if (isPointerDown) {
+            canvas.style.cursor = 'grabbing';
+        } else if (isOverEntity) {
+            canvas.style.cursor = 'grab';
+        } else {
+            canvas.style.cursor = 'default';
+        }
+    }, [isPointerDown, isOverEntity, app]);
+
+    useEffect(() => {
+        const onPointerUp = () => setIsPointerDown(false);
+        app.graphicsDevice.canvas.addEventListener('pointerup', onPointerUp);
+        return () => app.graphicsDevice?.canvas.removeEventListener('pointerup', onPointerUp);
+    }, [app]);
+
     return (
-        <>
+        <Entity>
             <Entity name="camera" position={camera} >
-                <Camera clearColor={cameraColor}/>
-                { useControls && <Script script={CameraControls} /> }
+                <Camera clearColor={cameraColor} renderSceneColorMap={true}/>
+                { useControls && <Script script={CameraControls} enableFly={false} pitchRange={new Vec2(-90, -5)} /> }
             </Entity>
             { useLight && (
-                <Environment envAtlas={envAtlas} showSkybox={false} />
+                <Environment envAtlas={envAtlas} showSkybox={false} exposure={exposure}/>
             )}
             { useGrid && (
-                <Entity name="grid" scale={[1000, 1, 1000]}>
+                <Entity name="grid" scale={[1000, 1, 1000]} position={[0, -0.5, 0]}>
                     <Script script={Grid} />
-                    <Light type='directional' 
-                        castShadows={true}
-                        intensity={0.75}
-                    />
+                </Entity>
+            )}
+            { useShadow && (
+                <Entity position={sceneOffset}>
                     <ShadowCatcherComponent />
                 </Entity>
             )}
-            { children }
-        </>
+            <Entity 
+                onPointerOver={onPointerOver} 
+                onPointerOut={onPointerOut} 
+                onPointerDown={onPointerDown} 
+                onPointerUp={onPointerUp}>
+                { children }
+            </Entity>
+        </Entity>
     )
 }

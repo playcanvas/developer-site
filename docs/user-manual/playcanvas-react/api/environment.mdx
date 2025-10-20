@@ -1,0 +1,72 @@
+---
+description: Documentation for the Environment component
+---
+
+# `<Environment/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { EnvironmentExample } from './environment-example';
+import EnvironmentExampleSource from '!!raw-loader!./environment-example.jsx';
+
+The `<Environment/>` component is used to configure the environment lighting and skybox for a scene. It provides a simple way to set up global lighting, and other effects that affect the entire scene.
+
+With an `<Environment/>` component in your scene, you can:
+
+- Set the background texture for the scene
+- Provides Image-Based Lighting (IBL) for realistic environmental reflections
+- Controls sky dome properties, rotation, scale, and positioning
+- Manages exposure, luminance, and other global lighting parameters
+
+## Usage
+
+Place the `<Environment/>` component within an [`<Application/>`](../application) and add it to the scene. You'll need to load a HDR or environment atlas and provide it to the component.
+
+:::tip
+
+**You only need one `<Environment/>` component for the entire scene**. Using multiple `<Environment/>` components within the same `<Application/>` will trigger a warning.
+
+:::
+
+Simply load a HDR and set it as the skybox. You can find great HDR images on [HDRI Haven](https://hdrihaven.com/).
+
+```jsx copy
+const EnvironmentExample = () => {
+  const { asset: skybox } = useTexture('/env.hdr')
+
+  return (
+      <Environment skybox={skybox} />
+      {/* The rest of your scene... */}
+  )
+}
+```
+
+The component will affect the entire scene, so you should only use it once. You can specify global lighting parameters like exposure, luminance, and other global lighting parameters. See the [Properties](#properties) section for more details.
+
+You can also use the `<Environment/>` component to create a dome effect. This is useful for creating a more realistic environment with a ground plane. You can specify the scale, position, rotation, and other properties of the dome.
+
+<CodeExample
+  label="Switch between different environment atlases and exposure settings"
+  filename="environment-example.jsx"
+  code={EnvironmentExampleSource}
+  showDemo>
+  <Application>
+    <Staging
+        useLight={false}
+        useShadow={true}
+        camera={[3, 0.2, 3]}
+        useControls={true}
+        sceneOffset={[0, 0, 0]}
+    >
+      <EnvironmentExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## Properties
+
+```tsx asTypedoc
+import { Environment } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Environment>;
+export default $;
+```

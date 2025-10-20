@@ -1,0 +1,32 @@
+---
+description: The `Application` component is the root component for any PlayCanvas React application. It initializes and manages the canvas and PlayCanvas application instance.
+---
+
+# `<Application/>`
+
+The `<Application />` is the root your PlayCanvas React application. It initializes the engine and provides a rendering context. An Application maps to a single canvas in your app.
+
+You can set the fill mode and resolution mode to control how the canvas fills the window, and other properties that control the graphics device.
+
+```jsx copy
+import { Application } from '@playcanvas/react'
+
+export default function Scene() {
+  return (
+    <Application 
+      fillMode={FILLMODE_FILL_WINDOW}
+      resolutionMode={RESOLUTION_AUTO}
+    >
+      {/* Your scene content */}
+    </Application>
+  )
+}
+```
+
+## Properties
+
+```tsx asTypedoc
+import { Application } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Application>;
+export default $;
+```

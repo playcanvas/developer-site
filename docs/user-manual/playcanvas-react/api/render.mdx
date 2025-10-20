@@ -1,0 +1,53 @@
+---
+description: Documentation for the Render component
+---
+
+# `<Render/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { RenderBox } from './render-box';
+import RenderBoxSource from '!!raw-loader!./render-box.jsx';
+
+The `<Render/>` component allows an [`<Entity/>`](../entity) to display a 3D asset or primitive shape. Adding the `<Render/>` component to an [`<Entity/>`](../entity) will add a `RenderComponent` to the entity. The `type` prop allows you to select the primitive shape to render.
+
+<CodeExample
+  label="Render a primitive shape"
+  filename="render-box.jsx"
+  code={RenderBoxSource}
+  showDemo>
+  <Application>
+    <Staging camera={[2, 0.75, 2]} useGrid={true} useControls={true} >
+      <RenderBox />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## Rendering an Asset
+
+To render a 3D model loaded from a URL, you can use the asset type and pass the asset directly to the `asset` prop. You can learn more about loading assets in the [loading assets guide](../../guide/loading-assets).
+
+```jsx copy
+import { Render } from '@playcanvas/react/components'
+import { useModel } from '@playcanvas/react/hooks'
+
+const RenderModel = () => {
+  const { asset } = useModel('model.glb')
+
+  if (!asset) return null
+
+  return <Entity>
+    <Render type="asset" asset={asset} />
+  </Entity>
+}
+```
+
+Learn more about the [Render Component](https://api.playcanvas.com/engine/classes/RenderComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+import { Render } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Render>;
+export default $;
+```
