@@ -9,11 +9,9 @@ import MaterialsSource from '!!raw-loader!./components/materials.jsx';
 import { MaterialTextures } from './components/material-textures';
 import MaterialTexturesSource from '!!raw-loader!./components/material-textures.jsx';
 
-Materials are a fundamental part of 3D graphics. You work with materials in React using the [`useMaterial`](../../api/hooks/use-material) hook and the [`<Render/>`](../../api/render) component.
+Materials are a fundamental part of 3D graphics. They define the appearance and properties of 3D objects when lit.
 
-They define the appearance of 3D objects and are used to create realistic lighting effects. Materials can be applied to `Render` components to change the appearance of 3D objects. They accept a wide range of properties to control the appearance of the material.
-
-The `useMaterial` hook returns a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance. This is useful if you need to create materials and apply them to `Render` components.
+You work with materials in React using the [`useMaterial`](../../api/hooks/use-material) hook which returns a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance. You can then apply it to a [`<Render/>`](../../api/render) component.
 
 ```jsx copy filename="use-material.jsx"
 import { useMaterial } from '@playcanvas/react/hooks'
