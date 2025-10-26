@@ -44,6 +44,7 @@ splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
 ```
 
 **重要なポイント：**
+
 - 入力ファイルが作業セットになり、ACTIONS が順番に適用されます
 - 最後のファイルが出力で、その後のアクションは最終結果を変更します
 

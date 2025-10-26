@@ -44,6 +44,7 @@ splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
 ```
 
 **Key points:**
+
 - Input files become the working set; ACTIONS are applied in order
 - The last file is the output; actions after it modify the final result
 
