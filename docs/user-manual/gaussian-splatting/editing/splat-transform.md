@@ -37,29 +37,105 @@ splat-transform --version
 
 ## Basic Usage
 
+The general syntax for SplatTransform is:
+
+```bash
+splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
+```
+
+**Key points:**
+
+- Input files become the working set; ACTIONS are applied in order
+- The last file is the output; actions after it modify the final result
+
 ### Format Conversion
 
 Convert between commonly used splat formats with simple commands:
 
 ```bash
-# Convert KSPLAT to PLY
+# Simple format conversion
+splat-transform input.ply output.csv
+
+# Convert from .splat format
+splat-transform input.splat output.ply
+
+# Convert from .ksplat format
 splat-transform input.ksplat output.ply
 
-# Convert PLY to SOG format  
+# Convert to compressed PLY
+splat-transform input.ply output.compressed.ply
+
+# Uncompress a compressed PLY back to standard PLY
+# (compressed .ply is detected automatically on read)
+splat-transform input.compressed.ply output.ply
+
+# Convert to SOG bundled format
 splat-transform input.ply output.sog
+
+# Convert to SOG unbundled format
+splat-transform input.ply output/meta.json
+
+# Convert from SOG (bundled) back to PLY
+splat-transform scene.sog restored.ply
+
+# Convert from SOG (unbundled folder) back to PLY
+splat-transform output/meta.json restored.ply
+
+# Convert to standalone HTML viewer
+splat-transform input.ply output.html
+
+# Convert to HTML viewer with custom settings
+splat-transform -E settings.json input.ply output.html
 ```
 
 SplatTransform detects file format based on extension. Supported formats are shown below:
 
-| Format | Extension | Input | Output | Description |
-|--------|-----------|-------|--------|-------------|
-| PLY | `.ply` | ✅ | ✅ | Uncompressed binary format |
-| Compressed PLY | `.compressed.ply` | ✅ | ✅ | Compressed binary format |
-| SPLAT | `.splat` | ✅ | ❌ | Binary format (antimatter15) |
-| KSPLAT | `.ksplat` | ✅ | ❌ | Compressed binary format (mkkellogg) |
-| SOG (bundled) | `.sog` | ❌ | ✅ | Super-compressed format (ZIP container) |
-| SOG (unbundled) | `meta.json` | ❌ | ✅ | Super-compressed format (JSON + WebP) |
-| CSV | `.csv` | ❌ | ✅ | Comma-separated values for analysis |
+| Format | Input | Output | Description |
+| ------ | ----- | ------ | ----------- |
+| `.ply` | ✅ | ✅ | Standard PLY format |
+| `.sog` | ✅ | ✅ | Bundled super-compressed format (recommended) |
+| `meta.json` | ✅ | ✅ | Unbundled super-compressed format (accompanied by `.webp` textures) |
+| `.compressed.ply` | ✅ | ✅ | Compressed PLY format (auto-detected and decompressed on read) |
+| `.ksplat` | ✅ | ❌ | Compressed splat format (mkkellogg format) |
+| `.splat` | ✅ | ❌ | Compressed splat format (antimatter15 format) |
+| `.spz` | ✅ | ❌ | Compressed splat format (Niantic format) |
+| `.mjs` | ✅ | ❌ | Generate a scene using an mjs script (Beta) |
+| `.csv` | ❌ | ✅ | Comma-separated values spreadsheet |
+| `.html` | ❌ | ✅ | Standalone HTML viewer app (embeds SOG format) |
+
+## Actions
+
+Actions can be repeated and applied in any order to transform and filter your splats:
+
+```none
+-t, --translate        <x,y,z>          Translate splats by (x, y, z)
+-r, --rotate           <x,y,z>          Rotate splats by Euler angles (x, y, z) in degrees
+-s, --scale            <factor>         Uniformly scale splats by factor
+-H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
+-N, --filter-nan                        Remove Gaussians with NaN or Inf values
+-B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
+-S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
+-V, --filter-value     <name,cmp,value> Keep splats where <name> <cmp> <value>
+                                          cmp ∈ {lt,lte,gt,gte,eq,neq}
+-p, --params           <key=val,...>    Pass parameters to .mjs generator script
+```
+
+## Global Options
+
+```none
+-h, --help                              Show this help and exit
+-v, --version                           Show version and exit
+-w, --overwrite                         Overwrite output file if it exists
+-c, --cpu                               Use CPU for SOG spherical harmonic compression
+-i, --iterations       <n>              Iterations for SOG SH compression (more=better). Default: 10
+-E, --viewer-settings  <settings.json>  HTML viewer settings JSON file
+```
+
+:::note
+
+See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `-E` option.
+
+:::
 
 ## Transformations
 
@@ -68,26 +144,15 @@ SplatTransform detects file format based on extension. Supported formats are sho
 Transform your splats during conversion with intuitive command-line options:
 
 ```bash
-# Translate splats
-splat-transform input.ply -t 0,0,10 translated.ply
+# Scale and translate
+splat-transform bunny.ply -s 0.5 -t 0,0,10 bunny_scaled.ply
 
-# Rotate around Y-axis by 90 degrees
-splat-transform input.ply -r 0,90,0 rotated.ply
+# Rotate by 90 degrees around Y axis
+splat-transform input.ply -r 0,90,0 output.ply
 
-# Scale splats by 50%
-splat-transform input.ply -s 0.5 scaled.ply
-
-# Combine multiple transformations
-splat-transform input.ply -s 0.5 -t 0,0,10 -r 0,90,0 transformed.ply
+# Chain multiple transformations
+splat-transform input.ply -s 2 -t 1,0,0 -r 0,0,45 output.ply
 ```
-
-### Transformation Options
-
-| Option | Description | Format |
-|--------|-------------|--------|
-| `-t, --translate` | Translation vector | `x,y,z` |
-| `-r, --rotate` | Rotation in degrees | `x,y,z` |
-| `-s, --scale` | Uniform scale factor | `number` |
 
 ## Filtering and Optimization
 
@@ -96,52 +161,26 @@ splat-transform input.ply -s 0.5 -t 0,0,10 -r 0,90,0 transformed.ply
 Remove unwanted data and optimize your splats for production:
 
 ```bash
-# Remove NaN values
-splat-transform input.ply --filterNaN cleaned.ply
+# Remove entries containing NaN and Inf
+splat-transform input.ply --filter-nan output.ply
 
-# Filter by opacity (keep splats with opacity > 0.3)
-splat-transform input.ply -c opacity,gt,0.3 filtered.ply
+# Filter by opacity values (keep only splats with opacity > 0.5)
+splat-transform input.ply -V opacity,gt,0.5 output.ply
 
-# Remove unnecessary data bands
-splat-transform input.ply --filterBands 2 optimized.ply
-
-# Combine multiple filters
-splat-transform input.ply --filterNaN -c opacity,gt,0.1 --filterBands 2 production.ply
+# Strip spherical harmonic bands higher than 2
+splat-transform input.ply --filter-harmonics 2 output.ply
 ```
-
-### Filter Options
-
-| Option | Description | Usage |
-|--------|-------------|-------|
-| `-n, --filterNaN` | Remove splats with NaN values | `--filterNaN` |
-| `-c, --condition` | Filter by property condition | `-c property,operator,value` |
-| `-b, --filterBands` | Retain specified number of spherical-harmonic bands | `--filterBands 0/1/2/3` |
-
-#### Condition Operators
-
-- `gt` - Greater than
-- `lt` - Less than
-- `eq` - Equal to
-- `gte` - Greater than or equal
-- `lte` - Less than or equal
 
 ## Scene Merging
 
 Combine multiple splat files into a single scene with individual transformations:
 
 ```bash
-# Simple merge
-splat-transform fileA.ply fileB.ply merged.ply
+# Combine multiple files with different transforms
+splat-transform -w cloudA.ply -r 0,90,0 cloudB.ply -s 2 merged.compressed.ply
 
-# Merge with different transformations per file
-splat-transform inputA.ply -r 0,90,0 inputB.ply -s 2 merged.ply
-
-# Complex multi-file merge
-splat-transform \
-  scene1.ply -t 0,0,0 \
-  scene2.ply -t 10,0,0 -r 0,45,0 \
-  scene3.ply -t 0,0,10 -s 0.8 \
-  combined_scene.ply
+# Apply final transformations to combined result
+splat-transform input1.ply input2.ply output.ply -t 0,0,10 -s 0.5
 ```
 
 ## CSV Export for Data Analysis
@@ -153,7 +192,7 @@ One of SplatTransform's most powerful features is CSV export, enabling data scie
 splat-transform scene.ply data.csv
 
 # Pre-filter before exporting for analysis
-splat-transform input.ply --filterNaN -c opacity,gt,0.1 analysis.csv
+splat-transform input.ply --filter-nan -V opacity,gt,0.1 analysis.csv
 ```
 
 ### Why CSV Export Matters
@@ -166,6 +205,16 @@ splat-transform input.ply --filterNaN -c opacity,gt,0.1 analysis.csv
 
 CSV export transforms your splats from opaque binary files into readable, analyzable datasets perfect for research and optimization.
 
+## Generators (Beta)
+
+Generator scripts can be used to synthesize gaussian splat data. This allows you to procedurally create splat scenes using JavaScript:
+
+```bash
+splat-transform gen-grid.mjs -p width=10,height=10,scale=10,color=0.1 scenes/grid.ply -w
+```
+
+See the [example generator scripts](https://github.com/playcanvas/splat-transform/tree/main/generators) in the GitHub repository for more details.
+
 ## Common Workflows
 
 ### Production Optimization Pipeline
@@ -173,8 +222,8 @@ CSV export transforms your splats from opaque binary files into readable, analyz
 ```bash
 # Clean, limit spherical harmonic bands, and apply a scale for production
 splat-transform raw_capture.ply \
-  --filterNaN \
-  --filterBands 2 \
+  --filter-nan \
+  --filter-harmonics 2 \
   -s 0.8 \
   production/capture.sog
 ```
@@ -193,8 +242,8 @@ done
 ```bash
 # Export for quality analysis in spreadsheet
 splat-transform scene.ply \
-  --filterNaN \
-  -c opacity,gt,0.05 \
+  --filter-nan \
+  -V opacity,gt,0.05 \
   quality_analysis.csv
 ```
 
