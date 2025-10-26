@@ -53,7 +53,7 @@ All the formats described in the [Supported File Formats](#supported-file-format
 
 :::note
 
-SOGS export is not yet supported in the SuperSplat Editor (subscribe to [this GitHub issue](https://github.com/playcanvas/supersplat/issues/543) in order to receive updates). In the meantime, to convert your splats to SOGS format, please use the [SplatTransform](../splat-transform.md) CLI tool.
+[SOG](../../formats/sog.md) export is not yet supported in the SuperSplat Editor (subscribe to [this GitHub issue](https://github.com/playcanvas/supersplat/issues/543) in order to receive updates). In the meantime, to convert your splats to SOG format, please use the [SplatTransform](../splat-transform.md) CLI tool.
 
 :::
 

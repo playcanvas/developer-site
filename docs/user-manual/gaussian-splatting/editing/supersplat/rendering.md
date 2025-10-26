@@ -80,6 +80,12 @@ Once you've configured your settings:
 2. The Timeline pointer will animate through all frames until video encoding is complete.
 3. On completion, your video will auto-download.
 
+:::tip Browser Recommendation for Video Rendering
+
+We recommend using a Chromium-based browser (Chrome, Edge, Opera, etc.) for rendering videos. Browsers that support the [FileSystem API](https://caniuse.com/native-filesystem-api) will ask you to pick a destination mp4 filename and will then stream out the file during the encoding process instead of having to do it in memory. This allows for the recording of much larger videos without running into memory limitations.
+
+:::
+
 ## Tips for Best Results
 
 - **For Images:** Position your camera carefully and consider the composition before rendering. Higher resolutions will provide more detail for print or web use.

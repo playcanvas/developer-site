@@ -50,6 +50,7 @@ Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. 
 | ![Lasso Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-lasso.svg) | **Lasso Select** | Click and drag to draw an arbitrary shape. Splats within the shape's outline will be selected. |
 | ![Polygon Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-poly.svg) | **Polygon Select** | Similar to Lasso Select. Click to create points that create the edges of an arbitrary shape. Double click to close the shape. Splats within the shape's outline will be selected. |
 | ![Brush Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-brush.svg) | **Brush Select** | Click and drag a selection circle. Change the brush size with the `[` and `]` keys. |
+| ![Flood Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-flood.svg) | **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold value (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters). |
 | ![Sphere Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-sphere.svg) | **Sphere Select** | Activate a sphere volume to add or remove splats from the current selection. Double click on any splat to reposition the sphere volume. |
 | ![Box Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-box.svg) | **Box Select** | Click and drag to create a rectangular selection box. All splats within the box boundaries will be selected. |
 
@@ -62,6 +63,27 @@ SuperSplat can translate, rotate and scale splats. To do this, select a splat in
 To achieve fine grain control over the transform of the selected splat, you can use the TRANSFORM panel (below the SCENE MANAGER panel).
 
 To set the origin of the currently active gizmo, double click anywhere in the 3D view.
+
+## Measuring and Rescaling Splats
+
+SuperSplat provides a measurement tool to help you measure distances within your splat scene and rescale it based on real-world measurements. This is accessible via the Measurement icon in the bottom toolbar.
+
+**To use the measurement tool:**
+
+1. Click the Measurement icon in the bottom toolbar to activate the tool.
+2. Click in the Viewport to place the first marker.
+3. Click again to place the second marker.
+4. Click on either marker to activate the translation gizmo and tweak its location.
+5. The length between the two markers is displayed in a popup above the bottom toolbar.
+
+**To rescale the scene:**
+
+- Edit the length value in the popup to rescale the entire scene based on that modified length.
+
+**Keyboard shortcuts:**
+
+- Press `Delete` to remove the placed markers.
+- Press `Escape` to deactivate the Measurement tool.
 
 ## Merging Splats
 
