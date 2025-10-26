@@ -75,7 +75,7 @@ SuperSplatウェブサイトで使用されているビューアは[オープン
 
 ビューアのエクスポートは、いくつかのオプションで設定できます。
 
-![Viewer Export](/img/user-manual/gaussian-splatting/editing/supersplat/viewer-export.png)
+![ビューアのエクスポート](/img/user-manual/gaussian-splatting/editing/supersplat/viewer-export.png)
 
 | オプション | 説明 |
 |--------|-------------|
