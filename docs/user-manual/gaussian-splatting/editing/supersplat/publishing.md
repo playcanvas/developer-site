@@ -27,7 +27,7 @@ To publish your splat:
 2. Select `Publish`.
 3. Fill out the options in the Publish dialog:
 
-   ![Viewer Export](/img/user-manual/gaussian-splatting/editing/supersplat/publish-settings.png)
+   ![Publish Settings](/img/user-manual/gaussian-splatting/editing/supersplat/publish-settings.png)
 
    | Option | Description |
    |--------|-------------|
