@@ -2,17 +2,24 @@
 title: 公開
 ---
 
+SuperSplatは、スプラットシーンを世界と共有するための2つの方法を提供します：
+
+1. **SuperSplatへの公開** - 簡単な共有のために [superspl.at](https://superspl.at) でスプラットをホスト
+2. **SuperSplat Viewerのセルフホスティング** - どこにでもホストできるスタンドアロンHTMLビューアをエクスポート
+
+## SuperSplatへの公開
+
 SuperSplat Editor を使用すると、スプラットシーンをウェブに [https://superspl.at/](https://superspl.at/) で公開できます。
 
 ![SuperSplat Website](/img/user-manual/gaussian-splatting/editing/supersplat/supersplat-website.png)
 
-## ログイン状態の確認
+### ログイン状態の確認
 
 スプラットを公開するには、ログインしている必要があります。
 
 始める前に、[PlayCanvasアカウントを作成し](/user-manual/account-management/user-accounts/account-creation)、[playcanvas.com](https://playcanvas.com) にログインしている必要があります。次に、[superspl.at](https://superspl.at) にも（右上にある「`Login`」ボタンから）ログインしてください。[superspl.at](https://superspl.at) のページの右上にあなたのアカウントアバターが表示されていることを確認して、ログイン状態を確かめてください。
 
-## スプラットの公開
+### スプラットの公開
 
 スプラットを公開するには：
 
@@ -42,7 +49,7 @@ SuperSplat Editor を使用すると、スプラットシーンをウェブに [
 
 公開プロセスが完了すると、公開されたスプラットのURLが記載されたモーダルダイアログが表示されます。それをコピーして、好きな人と共有してください。
 
-## 公開されたスプラットの管理
+### 公開されたスプラットの管理
 
 [superspl.at](https://superspl.at) にスプラットを公開した後、[Manageページ](https://superspl.at/manage) にアクセスして管理できます。ここから、各公開済みスプラットに対して以下の操作を実行できます：
 
@@ -52,3 +59,40 @@ SuperSplat Editor を使用すると、スプラットシーンをウェブに [
 | **説明を編集** | スプラットのビューアーページに表示される説明を更新します |
 | **リスト表示/非表示** | SuperSplatウェブサイトの公開検索にスプラットが表示されるかどうかを切り替えます |
 | **削除** | [superspl.at](https://superspl.at) からスプラットを完全に削除します（元に戻すことはできません） |
+
+## SuperSplat Viewerのセルフホスティング
+
+SuperSplatウェブサイトで使用されているビューアは[オープンソース](https://github.com/playcanvas/supersplat-viewer)であり、スプラットコンテンツをセルフホストしたい場合は、SuperSplat Editorから直接エクスポートできます。このビューアは、使いやすいカメラコントロールを備えた任意のウェブブラウザで動作し、WebXRをサポートするデバイスではARおよびVR可視化にも対応しています。
+
+### HTMLビューアのエクスポート
+
+スプラットをHTMLビューアとしてエクスポートするには：
+
+1. `Scene` > `Export` サブメニューを開きます。
+2. `Viewer App…` を選択します。
+
+### エクスポートオプション
+
+ビューアのエクスポートは、いくつかのオプションで設定できます。
+
+![Viewer Export](/img/user-manual/gaussian-splatting/editing/supersplat/viewer-export.png)
+
+| オプション | 説明 |
+|--------|-------------|
+| **Export Type** | エクスポートされるビューアの形式を制御します：<br/>• **HTML**: スプラットが Base64 エンコードされ、ファイルに直接埋め込まれた単一ページの `.html` ファイル。すべてが1つのファイルにまとめられているため非常に便利で、ファイルをダブルクリックするだけで `file://` プロトコルを使用してブラウザで動作します。ただし、Base64 エンコードにより ZIP Package 形式よりも約30%大きくなり、ブラウザによって最大サイズに異なる制限があります（32MB 未満であればどこでも読み込まれるはずですが、それ以上の場合は問題が発生する可能性があります）<br/>• **ZIP Package**: ビューアの `.html` ファイルと、スプラットを含む別の `.compressed.ply` ファイルを含む zip ファイル。サイズが小さく、読み込みが速く、どこでも読み込まれることが保証されています。ただし、`http://` 経由でのみ読み込まれるため、ローカルウェブサーバー（例: Node の [`serve`](https://www.npmjs.com/package/serve) や Python の [`SimpleHTTPServer`](https://docs.python.org/2/library/simplehttpserver.html)）を実行する必要があります |
+| **開始位置** | ビューアーのカメラに使用する開始位置：<br/>• **デフォルト**: ビューアーが最適な開始点を自動的に選択します<br/>• **現在のビューポート**: SuperSplat Editorのビューポートで設定された現在のカメラ位置を使用します<br/>• **1番目のカメラフレーム**: タイムラインの最初のフレームで定義された最初のカメラ位置を使用します |
+| **アニメーション** | ビューアーのカメラに適用するアニメーション：<br/>• **なし**: アニメーションなし<br/>• **トラック**: SuperSplat Editorのタイムラインで設定されたキーフレームを使用してカメラをアニメーション化します |
+| **背景** | ビューアーの背景色 |
+| **視野角** | ビューアーのカメラの垂直視野角（度） |
+| **SH Bands** | 公開される圧縮されたPLYファイルに書き出される球面調和バンドの数 |
+
+### HTMLビューアのウェブホスティング
+
+エクスポート後、HTML Viewer ファイルをどこかにホストしてアクセス可能にすることができます。簡単なオプションの1つは GitHub Pages を使用することです。
+
+1. [GitHub](https://github.com) で新しいリポジトリを作成します。
+2. エクスポートした HTML ファイル（ビューアを ZIP Package としてエクスポートした場合は、`.compressed.ply` ファイルも）を追加します。
+3. リポジトリの `Settings` ページにアクセスします。左側で `Pages` を選択します。`Source` が `Deploy from a branch` に設定されていることを確認し、`Branch` を `main` に設定して `Save` をクリックします。
+4. ビューアが公開されるまでに数分かかります。URLは次の形式になります。
+
+   `https://<github-username>.github.io/<repository-name>/<html-filename>`
