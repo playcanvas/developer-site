@@ -53,7 +53,7 @@ Gaussian Splat ファイルを読み込む方法は4つあります。
 
 :::note
 
-SuperSplat Editorでは、SOGSエクスポートはまだサポートされていません（更新情報を受け取るには[このGitHub issue](https://github.com/playcanvas/supersplat/issues/543)を購読してください）。当面の間、スプラットをSOGS形式に変換するには、[SplatTransform](../splat-transform.md) CLIツールを使用してください。
+SuperSplat Editorでは、[SOG](../../formats/sog.md)エクスポートはまだサポートされていません（更新情報を受け取るには[このGitHub issue](https://github.com/playcanvas/supersplat/issues/543)を購読してください）。当面の間、スプラットをSOG形式に変換するには、[SplatTransform](../splat-transform.md) CLIツールを使用してください。
 
 :::
 

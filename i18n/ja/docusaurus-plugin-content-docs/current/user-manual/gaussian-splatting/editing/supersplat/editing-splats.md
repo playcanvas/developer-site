@@ -50,6 +50,7 @@ Splatsの切り抜きや不要なGaussiansの削除は、SuperSplatの主要な�
 | ![Lasso Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-lasso.svg) | **Lasso Select** | クリック＆ドラッグで任意の図形を描画します。図形のアウトライン内のSplatsが選択されます。 |
 | ![Polygon Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-poly.svg) | **Polygon Select** | Lasso Selectに似ています。クリックして、任意の図形の辺を形成する点を作成します。ダブルクリックで図形を閉じます。図形のアウトライン内のSplatsが選択されます。 |
 | ![Brush Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-brush.svg) | **Brush Select** | クリック＆ドラッグで選択サークルを描画します。ブラッシュサイズは `[` と `]` キーで変更できます。 |
+| ![Flood Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-flood.svg) | **Flood Select** | ビューポート上でクリックして、塗りつぶしアルゴリズムに基づいた2D選択マスクを生成します。閾値（0-1）が塗りつぶしの感度を制御します。このツールは、はぐれたGaussians（フローターとも呼ばれます）を選択して削除するのに特に便利です。 |
 | ![Sphere Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-sphere.svg) | **Sphere Select** | 球状のボリュームをアクティブにして、現在の選択範囲にSplatsを追加または削除します。任意のSplatsをダブルクリックすると、球状のボリュームを再配置できます。 |
 | ![Box Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-box.svg) | **Box Select** | クリック＆ドラッグで矩形の選択ボックスを作成します。ボックスの境界内にあるすべてのSplatsが選択されます。 |
 
@@ -62,6 +63,27 @@ SuperSplatはSplatsを移動、回転、および拡大縮小できます。こ�
 選択したSplatsの変形を細かく制御するには、TRANSFORMパネル（SCENE MANAGERパネルの下）を使用できます。
 
 現在アクティブなギズモの原点を設定するには、3Dビューの任意の場所をダブルクリックします。
+
+## Splatsの測定とリスケール
+
+SuperSplatは、スプラットシーン内の距離を測定し、実際の測定値に基づいてリスケールするための測定ツールを提供しています。これは、下部ツールバーの測定アイコンからアクセスできます。
+
+**測定ツールの使用方法：**
+
+1. 下部ツールバーの測定アイコンをクリックしてツールをアクティブにします。
+2. ビューポート内をクリックして最初のマーカーを配置します。
+3. もう一度クリックして2番目のマーカーを配置します。
+4. いずれかのマーカーをクリックして平行移動ギズモをアクティブにし、その位置を微調整します。
+5. 2つのマーカー間の長さが、下部ツールバーの上のポップアップに表示されます。
+
+**シーンをリスケールするには：**
+
+- ポップアップの長さの値を編集すると、その変更された長さに基づいてシーン全体がリスケールされます。
+
+**キーボードショートカット：**
+
+- `Delete`キーを押して、配置したマーカーを削除します。
+- `Escape`キーを押して、測定ツールを無効にします。
 
 ## Splatsのマージ
 
