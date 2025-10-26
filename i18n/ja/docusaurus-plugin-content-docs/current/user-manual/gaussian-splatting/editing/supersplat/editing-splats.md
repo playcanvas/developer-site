@@ -44,15 +44,19 @@ SuperSplatは、以下の2つの**_編集モード_**のいずれかで動作し
 
 Splatsの切り抜きや不要なGaussiansの削除は、SuperSplatの主要な機能です。これを助けるために、6つの選択ツールが利用可能です：
 
-| | ツール | 説明 |
-|-|------|-------------|
-| ![Picker Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-picker.svg) | **Picker Select** | クリックで選択、またはクリック＆ドラッグで矩形選択。 |
-| ![Lasso Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-lasso.svg) | **Lasso Select** | クリック＆ドラッグで任意の図形を描画します。図形のアウトライン内のSplatsが選択されます。 |
-| ![Polygon Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-poly.svg) | **Polygon Select** | Lasso Selectに似ています。クリックして、任意の図形の辺を形成する点を作成します。ダブルクリックで図形を閉じます。図形のアウトライン内のSplatsが選択されます。 |
-| ![Brush Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-brush.svg) | **Brush Select** | クリック＆ドラッグで選択サークルを描画します。ブラッシュサイズは `[` と `]` キーで変更できます。 |
-| ![Flood Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-flood.svg) | **Flood Select** | ビューポート上でクリックして、塗りつぶしアルゴリズムに基づいた2D選択マスクを生成します。閾値（0-1）が塗りつぶしの感度を制御します。このツールは、はぐれたGaussians（フローターとも呼ばれます）を選択して削除するのに特に便利です。 |
-| ![Sphere Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-sphere.svg) | **Sphere Select** | 球状のボリュームをアクティブにして、現在の選択範囲にSplatsを追加または削除します。任意のSplatsをダブルクリックすると、球状のボリュームを再配置できます。 |
-| ![Box Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-box.svg) | **Box Select** | クリック＆ドラッグで矩形の選択ボックスを作成します。ボックスの境界内にあるすべてのSplatsが選択されます。 |
+<div class="no-wrap-first-col">
+
+| ツール | 説明 |
+|------|-------------|
+| ![Picker Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-picker.svg) **Picker Select** | クリックで選択、またはクリック＆ドラッグで矩形選択。 |
+| ![Lasso Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-lasso.svg) **Lasso Select** | クリック＆ドラッグで任意の図形を描画します。図形のアウトライン内のSplatsが選択されます。 |
+| ![Polygon Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-poly.svg) **Polygon Select** | Lasso Selectに似ています。クリックして、任意の図形の辺を形成する点を作成します。ダブルクリックで図形を閉じます。図形のアウトライン内のSplatsが選択されます。 |
+| ![Brush Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-brush.svg) **Brush Select** | クリック＆ドラッグで選択サークルを描画します。ブラッシュサイズは `[` と `]` キーで変更できます。 |
+| ![Flood Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-flood.svg) **Flood Select** | ビューポート上でクリックして、塗りつぶしアルゴリズムに基づいた2D選択マスクを生成します。閾値（0-1）が塗りつぶしの感度を制御します。このツールは、はぐれたGaussians（フローターとも呼ばれます）を選択して削除するのに特に便利です。 |
+| ![Sphere Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-sphere.svg) **Sphere Select** | 球状のボリュームをアクティブにして、現在の選択範囲にSplatsを追加または削除します。任意のSplatsをダブルクリックすると、球状のボリュームを再配置できます。 |
+| ![Box Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-box.svg) **Box Select** | クリック＆ドラッグで矩形の選択ボックスを作成します。ボックスの境界内にあるすべてのSplatsが選択されます。 |
+
+</div>
 
 選択に満足したら、Deleteキーで削除できます。
 

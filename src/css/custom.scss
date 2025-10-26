@@ -158,6 +158,18 @@ html[data-theme='dark'] .navbar--github-link:before {
   white-space: nowrap;
 }
 
+/* prevent wrapping in first column of tables */
+.no-wrap-first-col td:nth-child(1),
+.no-wrap-first-col th:nth-child(1) {
+  white-space: nowrap;
+  padding-right: 2.5rem;
+}
+
+.no-wrap-first-col td:nth-child(1) img {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
 .example-demo {
   width: 100%;
   height: 400px;
