@@ -37,16 +37,16 @@
     "lint": "markdownlint-cli2 docs i18n .github/CONTRIBUTING.md README.md"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.9.1",
-    "@docusaurus/plugin-client-redirects": "^3.9.1",
-    "@docusaurus/preset-classic": "^3.9.1",
-    "@docusaurus/theme-common": "^3.9.1",
-    "@docusaurus/theme-live-codeblock": "^3.9.1",
-    "@docusaurus/theme-mermaid": "^3.9.1",
+    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/plugin-client-redirects": "^3.9.2",
+    "@docusaurus/preset-classic": "^3.9.2",
+    "@docusaurus/theme-common": "^3.9.2",
+    "@docusaurus/theme-live-codeblock": "^3.9.2",
+    "@docusaurus/theme-mermaid": "^3.9.2",
     "@mdx-js/react": "^3.1.1",
     "@playcanvas/react": "^0.10.3",
-    "@tanstack/react-query": "^5.90.2",
-    "canvas-confetti": "^1.9.3",
+    "@tanstack/react-query": "^5.90.5",
+    "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "docusaurus-plugin-sass": "^0.2.6",
     "leva": "^0.10.0",
@@ -61,8 +61,8 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.9.1",
-    "@docusaurus/types": "^3.9.1",
+    "@docusaurus/module-type-aliases": "^3.9.2",
+    "@docusaurus/types": "^3.9.2",
     "markdownlint-cli2": "^0.18.1"
   },
   "browserslist": {
