@@ -83,17 +83,7 @@ Adjusting smoothness allows you to control the feel of your camera animation, fr
 
 Use the play button to preview your animation. The camera will interpolate between keyframes based on your smoothness setting, creating fluid motion. The animation will loop continuously from the first frame back to the beginning.
 
-## Saving Timeline Animations
-
-:::important
-
-Timeline animations are only preserved when you save your project as an `.ssproj` file. The timeline configuration is not saved when exporting to PLY or other splat formats.
-
-See [Managing Projects](managing-projects.md) for more information on saving and loading SuperSplat project files.
-
-:::
-
-## Animation Looping
+### Animation Looping
 
 The animation automatically loops from the last frame back to the first frame. To create seamless loops, it's important to avoid setting a keyframe on both the first and last frames of the timeline, as this will cause a sudden snap when the animation loops.
 
@@ -109,5 +99,15 @@ For example, with a 100-frame timeline:
   - This causes a snap/jerk when looping from frame 100 back to frame 0
 
 This technique allows the camera to smoothly transition from your last keyframe back to the starting position, creating a seamless loop.
+
+:::
+
+## Saving Timeline Animations
+
+:::important
+
+Timeline animations are only preserved when you save your project as an `.ssproj` file. The timeline configuration is not saved when exporting to PLY or other splat formats.
+
+See [Managing Projects](managing-projects.md) for more information on saving and loading SuperSplat project files.
 
 :::
