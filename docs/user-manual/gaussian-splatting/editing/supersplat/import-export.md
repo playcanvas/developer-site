@@ -39,6 +39,35 @@ There are four ways to load a Gaussian Splat file:
 
     This is particularly useful for sharing splats with others on social platforms like X and LinkedIn.
 
+### Importing PLY Sequences {#ply-sequences}
+
+SuperSplat supports importing sequences of PLY files to create splat animations. This allows you to view animated Gaussian Splats where each PLY file represents a single frame in the animation.
+
+To import a PLY sequence:
+
+1. Ensure your PLY files follow a naming convention with sequential frame numbers appended, such as:
+   - `animation_0001.ply`
+   - `animation_0002.ply`
+   - `animation_0003.ply`
+   - etc.
+
+2. Load the sequence into SuperSplat by either:
+   - **Dragging and dropping** all the PLY files from your file system into SuperSplat
+   - **Dragging and dropping** a folder containing the PLY files onto SuperSplat
+   - Using **File > Import** and selecting multiple PLY files
+
+Once loaded, SuperSplat will automatically recognize the sequence and enable the [Timeline](timeline.md) panel, allowing you to:
+
+- Step through frames using the arrow buttons
+- Play the animation using the play button
+- Scrub through the animation using the timeline slider
+
+:::note
+
+PLY sequences are memory-intensive since each frame loads a complete splat scene. For optimal performance, consider the file sizes and number of frames when working with animated splats.
+
+:::
+
 ## Exporting Splats
 
 To export your currently loaded scene, open the `Scene` > `Export` submenu. You can export to any of the supported formats above, plus an additional HTML Viewer format for web sharing.
