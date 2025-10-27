@@ -11,7 +11,7 @@ The Timeline panel allows you to create camera animations for your Gaussian Spla
 The Timeline panel includes the following controls:
 
 - **Play/Stop button** - Play or stop the animation playback
-- **Next/Previous Key buttons** - Step one frame forwards or backwards
+- **Next/Previous Key buttons** - Jump to the next or previous keyframe
 - **Add Key button (`+`)** - Create a new keyframe at the current timeline position
 - **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
 - **Timeline slider** - Scrub through the animation by dragging the playhead
