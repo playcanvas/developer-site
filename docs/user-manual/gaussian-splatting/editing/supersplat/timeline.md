@@ -29,6 +29,24 @@ To create a camera animation keyframe:
 
 The keyframe will appear as a yellow diamond on the timeline at the current frame position. Keyframes store the camera's position and rotation at that moment in time.
 
+## Importing Camera Poses as Keyframes
+
+SuperSplat can import camera poses from COLMAP reconstructions to automatically create timeline keyframes. This feature allows you to recreate the approximate camera path that was used during the original scanning of your Gaussian Splat scene.
+
+To import camera poses:
+
+1. Obtain the `images.txt` file from your COLMAP reconstruction output
+2. In SuperSplat, select **File > Import** (or drag and drop the `images.txt` file)
+3. SuperSplat will create keyframes from the camera poses in the file
+
+Each camera pose in the `images.txt` file will be placed as a keyframe on sequential frames of the timeline, in the order they appear in the file. This creates an animation that follows the original capture path.
+
+:::note
+
+The `images.txt` file contains camera poses expressed as quaternions and translation vectors in COLMAP's coordinate system. SuperSplat automatically converts these to the appropriate camera positions and orientations for the timeline.
+
+:::
+
 ## Editing Keyframes
 
 Once keyframes are created, you can modify them in two ways:
