@@ -14,8 +14,7 @@ The Timeline panel includes the following controls:
 - **Next/Previous Key buttons** - Jump to the next or previous keyframe
 - **Add Key button (`+`)** - Create a new keyframe at the current timeline position
 - **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
-- **Timeline slider** - Scrub through the animation by dragging the playhead
-- **Frame counter** - Shows the current frame number
+- **Timeline slider** - Scrub through the animation by dragging the playhead (which displays the current frame number)
 - **FPS setting** - Set the frames per second for the animation
 - **Timeline length** - Set the total duration of the animation in frames
 - **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
