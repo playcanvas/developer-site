@@ -4,7 +4,7 @@ title: Timeline
 
 The Timeline panel allows you to create camera animations for your Gaussian Splat scenes. You can set keyframes to define camera positions and movements, creating smooth animated transitions that can be played back in the editor.
 
-<img width="931" alt="Screenshot 2025-01-03 at 13 52 25" src="/img/user-manual/gaussian-splatting/editing/supersplat/timeline.png" />
+![Timeline Panel](/img/user-manual/gaussian-splatting/editing/supersplat/timeline.png)
 
 ## Timeline Controls
 
