@@ -31,11 +31,11 @@ The keyframe will appear as a yellow diamond on the timeline at the current fram
 
 ## Importing Camera Poses as Keyframes
 
-SuperSplat can import camera poses from [COLMAP](https://github.com/colmap/colmap) reconstructions to automatically create timeline keyframes. This feature allows you to recreate the approximate camera path that was used during the original scanning of your Gaussian Splat scene.
+SuperSplat can import camera poses from [COLMAP](https://colmap.github.io/) reconstructions to automatically create timeline keyframes. This feature allows you to recreate the approximate camera path that was used during the original scanning of your Gaussian Splat scene.
 
 To import camera poses:
 
-1. Obtain the `images.txt` file from your COLMAP reconstruction output
+1. Obtain the [`images.txt`](https://colmap.github.io/format.html#images-txt) file from your COLMAP reconstruction output
 2. In SuperSplat, select **File > Import** (or drag and drop the `images.txt` file)
 3. SuperSplat will create keyframes from the camera poses in the file
 
