@@ -56,7 +56,7 @@ To import a PLY sequence:
    - **Dragging and dropping** a folder containing the PLY files onto SuperSplat
    - Using **File > Import** and selecting multiple PLY files
 
-Once loaded, SuperSplat will automatically recognize the sequence and enable the Timeline panel, allowing you to:
+Once loaded, SuperSplat will automatically recognize the sequence and enable the [Timeline](timeline.md) panel, allowing you to:
 
 - Step through frames using the arrow buttons
 - Play the animation using the play button
