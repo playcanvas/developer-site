@@ -11,7 +11,7 @@ SuperSplat works with several file formats for Gaussian Splat scenes:
 | Format | Import | Export | Description |
 | ------ | ------ | ------ | ----------- |
 | `.ply` | ✅ | ✅ | Standard PLY format - most common interchange format, widely supported but heavyweight |
-| `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data and drops spherical harmonics. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
+| `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
 | `.splat` | ✅ | ✅ | Compressed splat format (antimatter15) - less efficient than compressed PLY |
 | `.lcc` | ✅ | ❌ | XGRIDS proprietary format which contains multiple levels-of-detail. Imports the highest LOD that contains less than 20 million Gaussians |
 | `.sog` | ✅ | ❌ | Bundled super-compressed format - export not yet supported ([GitHub issue](https://github.com/playcanvas/supersplat/issues/543)). Use [SplatTransform](../splat-transform.md) CLI tool to export |
