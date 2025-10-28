@@ -219,9 +219,9 @@
     "message": "スプラットの作成",
     "description": "The label for category Creating Splats in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Editing Splats": {
-    "message": "スプラットの編集",
-    "description": "The label for category Editing Splats in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.Editing and Publishing Splats": {
+    "message": "スプラットの編集と公開",
+    "description": "The label for category Editing and Publishing Splats in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Building Splat Applications": {
     "message": "スプラットアプリケーションの構築",

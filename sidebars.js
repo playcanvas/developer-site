@@ -734,7 +734,7 @@ const sidebars = {
         'user-manual/gaussian-splatting/viewing',
         {
           type: 'category',
-          label: 'Editing Splats',
+          label: 'Editing and Publishing Splats',
           link: {
             type: 'doc',
             id: 'user-manual/gaussian-splatting/editing/index',
