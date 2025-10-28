@@ -12,13 +12,12 @@ PlayCanvas does not itself provide a tool to convert photogrammetry into a Gauss
 | [**Luma AI**](https://lumalabs.ai/app) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
 | [**COLMAP**](https://colmap.github.io/) | Advanced | Win, Linux, macOS | Free | ✔️ | Camera Poses | |
 | [**RealityScan**](https://www.realityscan.com/) | Advanced | Win | Free* | ❌ | Camera Poses | CUDA GPU |
-| [**Postshot**](https://www.jawset.com/) | Advanced | Win | Free** | ❌ | Camera Poses + Training | CUDA GPU |
+| [**Postshot**](https://www.jawset.com/) | Advanced | Win | Paid | ❌ | Camera Poses + Training | CUDA GPU |
 | [**Brush**](https://github.com/ArthurBrussee/brush) | Advanced | Win, Linux, macOS, Web | Free | ✔️ | Camera Poses + Training | |
 | [**nerfstudio**](https://docs.nerf.studio/) | Advanced | Win, Linux, macOS | Free | ✔️ | Research/Training | |
 | [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) | Advanced | Win, Linux | Free | ✔️ | Research/Reference | CUDA GPU |
 
-*_Free for non-commercial use_  
-**_Free while in beta_
+*_Free for non-commercial use_
 
 ## Easy/Consumer Tools
 
@@ -53,7 +52,7 @@ Open source Structure-from-Motion (SfM) pipeline for camera alignment and sparse
 Desktop application for camera alignment and sparse point cloud generation, which become the foundation for splat training in tools like PostShot. Free for non-commercial use. Requires a CUDA-enabled GPU.
 
 [**Postshot**](https://www.jawset.com/) (Windows)  
-Desktop application for creating Gaussian splats with advanced features. Currently in beta and free to use. Provides on-device processing, quick results, user-friendly interface. Requires a CUDA-enabled GPU.
+Commercial desktop application for creating Gaussian splats with advanced features. Provides on-device processing, quick results, and a user-friendly interface. Requires a CUDA-enabled GPU.
 
 [**Brush**](https://github.com/ArthurBrussee/brush) (Windows, Linux, macOS, Android, Web)  
 Open source, cross-platform engine with broad device compatibility. Uses WebGPU-based rendering, offers real-time training visualization, has no CUDA dependency, supports browsers, and works on mobile devices.

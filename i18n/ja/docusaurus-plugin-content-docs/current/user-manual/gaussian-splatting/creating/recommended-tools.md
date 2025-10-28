@@ -12,13 +12,12 @@ PlayCanvas自体は、フォトグラメトリをGaussian splatに変換する�
 | [**Luma AI**](https://lumalabs.ai/app) | 簡単 | iOS, Android, Web | フリーミアム | ❌ | キャプチャ + トレーニング | モバイルデバイス |
 | [**COLMAP**](https://colmap.github.io/) | 上級 | Win, Linux, macOS | 無料 | ✔️ | カメラポーズ | |
 | [**RealityScan**](https://www.realityscan.com/) | 上級 | Win | 無料* | ❌ | カメラポーズ | CUDA GPU |
-| [**Postshot**](https://www.jawset.com/) | 上級 | Win | 無料** | ❌ | カメラポーズ + トレーニング | CUDA GPU |
+| [**Postshot**](https://www.jawset.com/) | 上級 | Win | 有料 | ❌ | カメラポーズ + トレーニング | CUDA GPU |
 | [**Brush**](https://github.com/ArthurBrussee/brush) | 上級 | Win, Linux, macOS, Web | 無料 | ✔️ | カメラポーズ + トレーニング | |
 | [**nerfstudio**](https://docs.nerf.studio/) | 上級 | Win, Linux, macOS | 無料 | ✔️ | 研究/トレーニング | |
 | [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) | 上級 | Win, Linux | 無料 | ✔️ | 研究/リファレンス | CUDA GPU |
 
-*_非商用利用は無料_  
-**_ベータ版の間は無料_
+*_非商用利用は無料_
 
 ## 簡単/一般ユーザー向けツール
 
@@ -53,7 +52,7 @@ Lumaからのエクスポート時に**Gaussian Splat**を選択し、ダウン�
 カメラのアライメントとスパース点群生成のためのデスクトップアプリケーションで、PostShotなどのツールでsplatトレーニングの基盤となります。非商用利用は無料です。CUDA対応GPUが必要です。
 
 [**Postshot**](https://www.jawset.com/) (Windows)  
-高度な機能を持つGaussian splatを作成するためのデスクトップアプリケーションです。現在ベータ版で無料で使用できます。デバイス上での処理、迅速な結果、ユーザーフレンドリーなインターフェースを提供します。CUDA対応GPUが必要です。
+高度な機能を持つGaussian splatを作成するための商用デスクトップアプリケーションです。デバイス上での処理、迅速な結果、ユーザーフレンドリーなインターフェースを提供します。CUDA対応GPUが必要です。
 
 [**Brush**](https://github.com/ArthurBrussee/brush) (Windows, Linux, macOS, Android, Web)  
 幅広いデバイス互換性を持つオープンソースのクロスプラットフォームエンジンです。WebGPUベースのレンダリングを使用し、リアルタイムのトレーニング可視化を提供し、CUDAへの依存がなく、ブラウザをサポートし、モバイルデバイスでも動作します。
