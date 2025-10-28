@@ -91,4 +91,4 @@ SuperSplat provides a measurement tool to help you measure distances within your
 
 ## Merging Splats
 
-It is possible to merge multiple .ply files together and output a single, combined .ply file. Simply load any number of .ply files into Scene Manager, perform whatever transformations and edits you require, and then save the result via the `Scene` > `Save` menu item.
+It is possible to merge multiple .ply files together and output a single, combined .ply file. Simply load any number of .ply files into Scene Manager, perform whatever transformations and edits you require, and then save the result via the `File` > `Save` menu item.

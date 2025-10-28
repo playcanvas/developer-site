@@ -70,6 +70,6 @@ PLY sequences are memory-intensive since each frame loads a complete splat scene
 
 ## Exporting Splats
 
-To export your currently loaded scene, open the `Scene` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
+To export your currently loaded scene, open the `File` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
 
 For information about exporting and hosting HTML viewers for your splats, see the [Publishing](publishing.md#self-hosting-the-supersplat-viewer) guide.
