@@ -13,10 +13,23 @@ PlayCanvas React makes it easy to add Virtual Reality (VR) and Augmented Reality
 
 To enable XR support in your React application, you'll need:
 
-1. **XR Scripts** - Import the XR controller and navigation scripts from the PlayCanvas engine package
-2. **Camera Setup** - Configure your camera entity with XR scripts attached
-3. **XR Controls** - Add UI buttons to enter and exit XR sessions (WebXR requires user interaction)
-4. **Secure Context** - Serve your app over HTTPS (or `localhost` during development)
+1. **XR-Compatible Graphics Device** - Enable the `xrCompatible` flag when creating your application
+2. **XR Scripts** - Import the XR controller and navigation scripts from the PlayCanvas engine package
+3. **Camera Setup** - Configure your camera entity with XR scripts attached
+4. **XR Controls** - Add UI buttons to enter and exit XR sessions (WebXR requires user interaction)
+5. **Secure Context** - Serve your app over HTTPS (or `localhost` during development)
+
+### Enable XR Compatibility
+
+First, ensure your application's graphics device is XR-compatible by setting the `xrCompatible` flag:
+
+```tsx
+<Application graphicsDeviceOptions={{ xrCompatible: true }}>
+  {/* Your XR content */}
+</Application>
+```
+
+This tells the browser to create a WebGL context that's compatible with WebXR. Without this flag, XR features won't work.
 
 ## XR Scripts
 
@@ -81,7 +94,7 @@ Here's a complete example with XR support, including buttons to enter AR/VR mode
   showDemo
   showControls={false}
 >
-  <Application>
+  <Application graphicsDeviceOptions={{ xrCompatible: true }}>
     <Staging useGrid useLight camera={[3, 2, 3]}>
       <XrExample />
     </Staging>
@@ -90,7 +103,6 @@ Here's a complete example with XR support, including buttons to enter AR/VR mode
 
 :::tip
 
-- Press **Escape** to exit an active XR session
 - XR availability depends on your device and browser support
 - Use a VR headset or AR-capable mobile device to test the full experience
 - During development, Chrome and Edge support WebXR emulation via DevTools
