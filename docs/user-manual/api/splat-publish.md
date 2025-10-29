@@ -3,8 +3,6 @@ title: Splat Publishing
 unlisted: true
 ---
 
-## Splats – Publish to SuperSplat
-
 #### Overview
 
 Publish a splat (e.g., .ply or .sog) to the SuperSplat platform using a direct AWS S3 upload using signed URL + publish flow.
@@ -43,7 +41,7 @@ const response = await fetch(`https://playcanvas.com/api/upload/signed-url`, {
         filename: filename
     }),
     headers: {
-        'Authorization': `Bearer ${user.token}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
     }
 });
@@ -139,7 +137,7 @@ const response = await fetch(`https://playcanvas.com/api/splats/publish`, {
       format: format
     }),
     headers: {
-      'Authorization': `Bearer ${user.token}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     }
 });
