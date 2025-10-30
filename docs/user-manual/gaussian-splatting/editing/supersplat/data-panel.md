@@ -9,6 +9,7 @@ The SPLAT DATA panel provides statistical visualization and analysis tools for u
 ## Overview
 
 The panel consists of three main sections:
+
 1. **Data Selector** - Choose which splat attribute to visualize
 2. **Histogram Display** - Interactive visualization of the selected data distribution  
 3. **Statistics** - Total counts for splat states
@@ -45,6 +46,7 @@ The histogram displays the distribution of the selected property across all non-
 ### Interactive Features
 
 **Hover Information** - Hover over any histogram bar to see a tooltip displaying:
+
 - **value** - The data value for this bin
 - **cnt** - Total count of splats in this bin  
 - **percentage** - Percentage of total splats

@@ -15,12 +15,11 @@ The flow consists of three main steps:
 
 All API requests must include a valid Bearer token in the `Authorization` header. Check [this document](https://developer.playcanvas.com/user-manual/api/#:~:text=You%20can%20generate%20an%20Access,you%20your%20new%20access%20token) to read about allocating a token.
 
-
 ### Routes
 
 #### Get Signed URL for AWS S3 upload
 
-```
+```none
 POST https://playcanvas.com/api/upload/signed-url
 
 Body
@@ -34,7 +33,7 @@ Response
 
 Example:
 
-```JavaScript
+```javascript
 const response = await fetch(`https://playcanvas.com/api/upload/signed-url`, {
     method: 'POST',
     body: JSON.stringify({
@@ -47,10 +46,9 @@ const response = await fetch(`https://playcanvas.com/api/upload/signed-url`, {
 });
 ```
 
-
 #### Upload to AWS S3 using signed url
 
-```
+```none
 PUT "signedUrl"
 
 Response
@@ -60,7 +58,7 @@ Response
 
 Example:
 
-```JavaScript
+```javascript
 const uploadResponse = await fetch(signedUrl, {
     method: 'PUT',
     body: fileData,
@@ -72,7 +70,7 @@ const uploadResponse = await fetch(signedUrl, {
 
 #### Start processing
 
-```
+```none
 POST https://playcanvas.com/api/splats/publish
 
 Body
@@ -125,7 +123,7 @@ Response (Splat data)
 
 Example:
 
-```JavaScript
+```javascript
 const response = await fetch(`https://playcanvas.com/api/splats/publish`, {
     method: 'POST',
     body: JSON.stringify({
@@ -176,7 +174,7 @@ Status - 201 Success
 
 #### Check the status of uploaded splat
 
-```
+```none
 GET https://playcanvas.com/api/splats/{ID}
 
 Response (Splat)
@@ -193,11 +191,9 @@ Response (Splat)
 
 Example:
 
-```JavaScript
+```javascript
 const response = await fetch(`https://playcanvas.com/api/splats/1000`)
-
 ```
-
 
 Errors
 
@@ -208,5 +204,3 @@ Errors
 | 403  | Forbidden |
 | 404  | Resource not found (e.g., sceneId) |
 | 5xx  | Server/S3 error during upload or finalize |
-
-
