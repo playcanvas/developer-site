@@ -45,7 +45,7 @@ The dropdown menu allows you to select from various splat properties for visuali
 
 ## Histogram Visualization
 
-The histogram displays the distribution of the selected property across all non-deleted splats in the scene, with blue bars representing unselected splats and orange bars representing selected splats. Locked and deleted splats are not shown in the histogram.
+The histogram displays the distribution of the selected property across all non-deleted splats in the scene, with blue bars representing unselected splats and yellow bars representing selected splats. Locked and deleted splats are not shown in the histogram.
 
 ### Interactive Features
 
@@ -56,7 +56,15 @@ The histogram displays the distribution of the selected property across all non-
 - **percentage** - Percentage of total splats
 - **sel** - Number of selected splats in this bin
 
-**Selection by Range** - Click and drag on the histogram to highlight a range of values. A dashed orange rectangle will appear showing your selection. Release to select all splats within that value range. The selection operation respects your current selection mode (new, add, remove, or intersect). Note that locked and deleted splats cannot be selected through the histogram.
+**Selection by Range** - Click and drag on the histogram to highlight a range of values. A dashed yellow rectangle will appear showing your selection. Release to select all splats within that value range. Note that locked and deleted splats cannot be selected through the histogram.
+
+Use modifier keys to control the selection operation:
+
+| Modifier Key | Action | Description |
+|--------------|--------|-------------|
+| None | New Selection | Replaces the current selection with the histogram range |
+| Shift | Add to Selection | Adds the histogram range to the existing selection |
+| Ctrl | Remove from Selection | Removes the histogram range from the existing selection |
 
 **Log Scale** - Enable the Log Scale checkbox to view the histogram with a logarithmic Y-axis. This is useful when data has a wide range of values, when most splats cluster around certain values with few outliers, or when you want to better visualize the distribution of sparse data.
 
