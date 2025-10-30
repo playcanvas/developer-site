@@ -2,7 +2,7 @@
 title: Data Panel
 ---
 
-The SPLAT DATA panel provides statistical visualization and analysis tools for understanding the distribution of data properties across your gaussian splats. It displays an interactive histogram that allows you to view and select splats based on their attribute values.
+The SPLAT DATA panel provides statistical visualization and analysis tools for understanding the distribution of data properties across your Gaussian splats. It displays an interactive histogram that allows you to view and select splats based on their attribute values.
 
 ![SPLAT DATA Panel](/img/user-manual/gaussian-splatting/editing/supersplat/data-panel.png)
 
@@ -14,7 +14,11 @@ The panel consists of three main sections:
 2. **Histogram Display** - Interactive visualization of the selected data distribution  
 3. **Statistics** - Total counts for splat states
 
-The panel is located at the bottom of the interface and can be toggled by clicking the panel header to expand/collapse it. By default, the panel starts in a collapsed state.
+The panel is located at the bottom of the interface and is collapsed by default.
+
+:::tip
+The panel can be toggled open/closed by pressing the **D** key or by clicking the panel header.
+:::
 
 ## Data Selector
 
@@ -25,9 +29,9 @@ The dropdown menu allows you to select from various splat properties for visuali
 | X | Position | Position coordinate along the X axis | - |
 | Y | Position | Position coordinate along the Y axis | - |
 | Z | Position | Position coordinate along the Z axis | - |
-| Scale X | Scale | Size of the gaussian along the X axis | - |
-| Scale Y | Scale | Size of the gaussian along the Y axis | - |
-| Scale Z | Scale | Size of the gaussian along the Z axis | - |
+| Scale X | Scale | Size of the Gaussian along the X axis | - |
+| Scale Y | Scale | Size of the Gaussian along the Y axis | - |
+| Scale Z | Scale | Size of the Gaussian along the Z axis | - |
 | Red | Color | Red channel intensity | 0-1 |
 | Green | Color | Green channel intensity | 0-1 |
 | Blue | Color | Blue channel intensity | 0-1 |
@@ -36,7 +40,7 @@ The dropdown menu allows you to select from various splat properties for visuali
 | Value | Color | Color brightness/value | 0-1 |
 | Opacity | Color | Transparency of each splat | 0-1 |
 | Distance | Derived | Distance from the origin (0,0,0) | √(x² + y² + z²) |
-| Volume | Derived | Calculated volume of each gaussian | scale_x × scale_y × scale_z |
+| Volume | Derived | Calculated volume of each Gaussian | scale_x × scale_y × scale_z |
 | Surface Area | Derived | Approximate surface area | scale_x² + scale_y² + scale_z² |
 
 ## Histogram Visualization
