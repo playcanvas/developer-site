@@ -13,12 +13,19 @@ Whether its textures, materials or 3D models, assets are a key part of any 3D ap
 
 The simplest way to load an asset is to use one of the specialized hooks. There are special hooks for [models](../../api/hooks/use-asset#usemodel), [gaussian splats](../../api/hooks/use-asset#usesplat), [textures](../../api/hooks/use-asset#usetexture), [environment map](../../api/hooks/use-asset#useenvatlas), [fonts](../../api/hooks/use-asset#usefont) and more. They all have a similar shape and return a PlayCanvas [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html).
 
+For GLB models, use the [`<Gltf>`](../modifying-glb-models) component:
+
 ```tsx
+import { useModel } from '@playcanvas/react/hooks';
+import { Gltf } from '@playcanvas/react/gltf';
+
 const { asset } = useModel('model.glb');
-return <Render asset={asset} />;
+return <Gltf asset={asset} key={asset.id} />;
 ```
 
-In this example, we're loading a model using the [`useModel`](../../api/hooks/use-asset#usemodel) hook and rendering it using the [`<Render/>`](../../api/render) component.
+The `<Gltf>` component is the recommended way to load and render GLB models. It gives you access to the model's internal structure, making it easy to modify components, add animations, or attach physics. For simple cases without modifications, you can also use [`<Render asset={asset} />`](../../api/render), but `<Gltf>` provides more flexibility.
+
+Learn more about [modifying GLB models](../modifying-glb-models) to add animations, remove lights, or attach physics components.
 
 <CodeExample
   label="Loading a model with useModel"
@@ -45,6 +52,7 @@ The asset hooks also return additional loading info and error states, so you can
 
 ```tsx title="model-viewer.tsx"
 import { useModel } from '@playcanvas/react/hooks';
+import { Gltf } from '@playcanvas/react/gltf';
 
 export function ModelViewer() {
   const { asset, loading, error } = useModel('model.glb');
@@ -56,7 +64,7 @@ export function ModelViewer() {
   if (error) return <ErrorMessage message={error} />;
 
   // If the asset is loaded, render it
-  return <Render type="asset" asset={asset} />;
+  return <Gltf asset={asset} key={asset.id} />;
 }
 ```
 
@@ -101,7 +109,7 @@ export function UnloadingModelViewer() {
 
   if (!asset) return null;
 
-  return <Render type="asset" asset={asset} />;
+  return <Gltf asset={asset} key={asset.id} />;
 }
 ```
 
@@ -114,7 +122,8 @@ export function UnloadingModelViewer() {
 You can use placeholders or custom loaders while assets load by checking the loading state of an asset. This gives you granular control.
 
 ```tsx title="loading-spinner.tsx"
-import { Entity, Render } from '@playcanvas/react/components';
+import { useModel } from '@playcanvas/react/hooks';
+import { Gltf } from '@playcanvas/react/gltf';
 
 // A component that displays a model with a custom loading state
 export function ModelWithCustomLoading() {
@@ -124,12 +133,8 @@ export function ModelWithCustomLoading() {
   if (planeLoading || carLoading) return <LoadingSpinner />;
 
   return <>
-    <Entity name="car">
-      <Render asset={car} />
-    </Entity>
-    <Entity name="plane">
-      <Render asset={plane} />
-    </Entity>
+    <Gltf asset={car} key={car.id} />
+    <Gltf asset={plane} key={plane.id} />
   </>
 }
 ```
@@ -174,7 +179,7 @@ export function ModelWithQuery() {
   const { data: asset, isLoading } = useQueryModel('model.glb');
 
   if (isLoading) return <LoadingSpinner />;
-  return <Render type="asset" asset={asset} />;
+  return <Gltf asset={asset} key={asset.id} />;
 }
 ```
 
@@ -186,6 +191,7 @@ React Query and SWR have built-in support for Suspense, which allows you to hand
 
 ```tsx
 import { fetchAsset } from '@playcanvas/react/utils';
+import { Gltf } from '@playcanvas/react/gltf';
 import { useQuery } from '@tanstack/react-query';
 
 function useSuspendedQueryModel(src: string) {
@@ -200,7 +206,7 @@ function useSuspendedQueryModel(src: string) {
 
 export function ModelWithQuery() {
   const { data: asset } = useSuspendedQueryModel('model.glb');
-  return <Render type="asset" asset={asset} />;
+  return <Gltf asset={asset} key={asset.id} />;
 }
 ```
 
