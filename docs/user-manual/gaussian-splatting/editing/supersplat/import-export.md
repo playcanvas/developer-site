@@ -11,7 +11,7 @@ SuperSplat works with several file formats for Gaussian Splat scenes:
 | Format | Import | Export | Description |
 | ------ | ------ | ------ | ----------- |
 | `.ply` | ✅ | ✅ | Standard PLY format - most common interchange format, widely supported but heavyweight |
-| `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data and drops spherical harmonics. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
+| `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
 | `.splat` | ✅ | ✅ | Compressed splat format (antimatter15) - less efficient than compressed PLY |
 | `.lcc` | ✅ | ❌ | XGRIDS proprietary format which contains multiple levels-of-detail. Imports the highest LOD that contains less than 20 million Gaussians |
 | `.sog` | ✅ | ❌ | Bundled super-compressed format - export not yet supported ([GitHub issue](https://github.com/playcanvas/supersplat/issues/543)). Use [SplatTransform](../splat-transform.md) CLI tool to export |
@@ -70,6 +70,6 @@ PLY sequences are memory-intensive since each frame loads a complete splat scene
 
 ## Exporting Splats
 
-To export your currently loaded scene, open the `Scene` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
+To export your currently loaded scene, open the `File` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
 
 For information about exporting and hosting HTML viewers for your splats, see the [Publishing](publishing.md#self-hosting-the-supersplat-viewer) guide.

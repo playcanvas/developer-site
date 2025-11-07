@@ -4,7 +4,7 @@ title: Managing Projects
 
 SuperSplat supports the `.ssproj` file format, allowing you to save and reload your work, preserving all settings and animations. This format provides an efficient way to manage projects, share work, and continue editing at a later time.
 
-## Features of .ssproj Files
+## Features of `.ssproj` Files
 
 * Full Project Save: Stores all relevant project data, including app settings, timeline settings and more.
 * Easy Reloading: Load a saved project file to restore the exact state of your work.
@@ -12,7 +12,7 @@ SuperSplat supports the `.ssproj` file format, allowing you to save and reload y
 
 ## Saving a Project
 
-To save your current work as a .ssproj file:
+To save your current work as a `.ssproj` file:
 
 * Open the `File` menu.
 * Select `Save As`.
@@ -39,6 +39,6 @@ The `.ssproj` format is actually a ZIP archive containing:
 
 * Save Regularly: To prevent data loss, save your project frequently.
 * Use Versioning: When working on major changes, save multiple versions of your project to avoid accidental overwrites.
-* Backup Your Files: Store backups of important .ssproj files in a cloud storage service or external drive.
+* Backup Your Files: Store backups of important `.ssproj` files in a cloud storage service or external drive.
 
 By utilizing the `.ssproj` format, SuperSplat users can efficiently manage and share their projects, enhancing workflow and collaboration.

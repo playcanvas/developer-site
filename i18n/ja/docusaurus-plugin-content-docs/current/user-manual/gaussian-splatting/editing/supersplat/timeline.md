@@ -31,11 +31,11 @@ title: タイムライン
 
 ## カメラポーズをキーフレームとしてインポート
 
-SuperSplatは、COLMAPリコンストラクションからカメラポーズをインポートして、タイムラインのキーフレームを自動的に作成できます。この機能により、Gaussian Splatシーンの元のスキャン時に使用されたおおよそのカメラパスを再現できます。
+SuperSplatは、[COLMAP](https://colmap.github.io/)リコンストラクションからカメラポーズをインポートして、タイムラインのキーフレームを自動的に作成できます。この機能により、Gaussian Splatシーンの元のスキャン時に使用されたおおよそのカメラパスを再現できます。
 
 カメラポーズをインポートするには：
 
-1. COLMAPリコンストラクション出力から`images.txt`ファイルを取得します
+1. COLMAPリコンストラクション出力から[`images.txt`](https://colmap.github.io/format.html#images-txt)ファイルを取得します
 2. SuperSplatで**File > Import**を選択します（または`images.txt`ファイルをドラッグアンドドロップします）
 3. SuperSplatはファイル内のカメラポーズからキーフレームを作成します
 

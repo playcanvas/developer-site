@@ -11,7 +11,7 @@ SuperSplat は、Gaussian Splat シーンのいくつかのファイル形式に
 | 形式 | インポート | エクスポート | 説明 |
 | ------ | ------ | ------ | ----------- |
 | `.ply` | ✅ | ✅ | 標準PLY形式 - 最も一般的な交換フォーマット、広くサポートされていますが大容量 |
-| `.compressed.ply` | ✅ | ✅ | 圧縮PLY形式 - 非圧縮PLYよりもはるかに小さく、データを量子化し球面調和関数を除外。[詳細](https://blog.playcanvas.com/compressing-gaussian-splats/) |
+| `.compressed.ply` | ✅ | ✅ | 圧縮PLY形式 - 非圧縮PLYよりもはるかに小さく、データを量子化。[詳細](https://blog.playcanvas.com/compressing-gaussian-splats/) |
 | `.splat` | ✅ | ✅ | 圧縮スプラット形式 (antimatter15) - 圧縮PLYよりも効率が劣る |
 | `.lcc` | ✅ | ❌ | 複数のレベル・オブ・ディテールを含むXGRIDSプロプライエタリー形式。2000万ガウシアン未満を含む最上位LODをインポートします |
 | `.sog` | ✅ | ❌ | バンドル超圧縮形式 - エクスポートはまだサポートされていません ([GitHub issue](https://github.com/playcanvas/supersplat/issues/543))。エクスポートには[SplatTransform](../splat-transform.md) CLIツールを使用 |
@@ -70,6 +70,6 @@ PLYシーケンスは、各フレームが完全なスプラットシーンを�
 
 ## スプラットのエクスポート
 
-現在読み込まれているシーンをエクスポートするには、`Scene` > `Export` サブメニューを開き、希望する形式を選択します。上記の [対応ファイル形式](#supported-file-formats) テーブルに記載されている、エクスポート対応のすべての形式が利用可能です。
+現在読み込まれているシーンをエクスポートするには、`File` > `Export` サブメニューを開き、希望する形式を選択します。上記の [対応ファイル形式](#supported-file-formats) テーブルに記載されている、エクスポート対応のすべての形式が利用可能です。
 
 スプラット用のHTMLビューアのエクスポートとホスティングについては、[公開](publishing.md#supersplat-viewerのセルフホスティング)ガイドを参照してください。

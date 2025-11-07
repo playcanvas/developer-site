@@ -70,7 +70,7 @@ The viewer used on the SuperSplat website is [open source](https://github.com/pl
 
 To export your splat as an HTML viewer:
 
-1. Open the `Scene` > `Export` submenu.
+1. Open the `File` > `Export` submenu.
 2. Select `Viewer App…`.
 
 ### Export Options
