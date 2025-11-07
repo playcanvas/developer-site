@@ -42,6 +42,18 @@ return <Gltf asset={asset} key={asset.id} />;
   </Application>
 </CodeExample>
 
+### Data-Only (Collision)
+
+You can also use a GLB only for its data. Setting `render={false}` will instantiate the hierarchy and apply all your rules, but won't add the visual model to the scene. This is perfect for invisible collision meshes.
+
+```tsx
+<Gltf asset={asset} key={asset.id} render={false}>
+  <Modify.Node path="**">
+    <Collision type="mesh" />
+  </Modify.Node>
+</Gltf>
+```
+
 ## Finding the Right Nodes
 
 To modify nodes in your GLB, you need to find them using path patterns. Here are the most common patterns:
@@ -278,70 +290,6 @@ function FindWeapons() {
 ```
 
 The predicate function receives the entity and its metadata, allowing you to match based on any criteria - component presence, name patterns, or custom properties.
-
-### Common Use Cases
-
-**Conditional component addition:**
-```tsx
-function ConditionalPhysics() {
-  // Only add physics if a specific mesh exists
-  const bodyMesh = useEntity('Body.Mesh');
-  
-  if (!bodyMesh) return null;
-  
-  return (
-    <>
-      <Collision type="box" />
-      <Rigidbody type="dynamic" />
-    </>
-  );
-}
-```
-
-**Finding entities to add effects:**
-```tsx
-function AddEffectsToLights() {
-  // Find all lights in the current subtree
-  const lights = useEntity('**[light]');
-  
-  if (!lights) return null;
-  
-  const lightArray = Array.isArray(lights) ? lights : [lights];
-  
-  return (
-    <>
-      {lightArray.map((light, index) => (
-        <Entity key={index} name={`LightEffect_${index}`}>
-          {/* Add effects relative to each light */}
-        </Entity>
-      ))}
-    </>
-  );
-}
-```
-
-**Finding specific child entities:**
-```tsx
-function AddHandAccessory() {
-  // Find the Hand entity within the Arm subtree
-  const hand = useEntity('Hand');
-  
-  if (!hand) return null;
-  
-  // Add an accessory to the hand
-  return (
-    <Entity name="Ring" position={[0, 0.05, 0]}>
-      <Render type="torus" />
-    </Entity>
-  );
-}
-
-<Gltf asset={asset} key={asset.id}>
-  <Modify.Node path="Arm">
-    <AddHandAccessory />
-  </Modify.Node>
-</Gltf>
-```
 
 Note: `useEntity` only works inside components that are children of `<Gltf>` or `<Modify.Node>`. It searches relative to the current parent context, making it perfect for finding entities within the subtree you're modifying.
 
