@@ -54,4 +54,3 @@ Extend the `CameraFrame` by adding custom render passes. This allows you to inte
 Build a complete custom post-processing stack without using `CameraFrame`. This gives you full control over the entire rendering pipeline.
 
 **Best for:** Complete custom pipelines, specialized rendering, maximum flexibility.
-

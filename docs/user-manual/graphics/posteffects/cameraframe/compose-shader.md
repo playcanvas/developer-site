@@ -66,8 +66,8 @@ app.on('update', () => {
 ## Use Cases
 
 This approach is ideal for:
+
 - Adding simple screen-space effects (vignette, color adjustments, distortion)
 - Post-processing that doesn't require additional textures or render passes
 - Quick prototyping of visual effects
 - Effects that operate on the final composed image
-

@@ -11,6 +11,7 @@ PlayCanvas offers two approaches to post-processing:
 The modern approach provides advanced, performant post-processing with HDR support and extensibility. The primary method uses the `CameraFrame` class with built-in effects, but you can also create fully custom render passes for complete control.
 
 **Key features include:**
+
 - HDR physically based bloom
 - Screen Space Ambient Occlusion (SSAO)
 - Depth of Field (DoF)
@@ -28,6 +29,7 @@ The system is highly extensible, allowing you to customize the compose shader, a
 The legacy approach uses script-based post effects that can be attached to camera entities. While older, these effects are still fully supported and functional. They provide a simpler setup for basic post-processing needs.
 
 **Available effects:**
+
 - Bloom
 - Brightness-Contrast
 - Hue-Saturation

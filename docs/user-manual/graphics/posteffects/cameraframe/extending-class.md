@@ -7,6 +7,7 @@ For more advanced customization, you can extend the `RenderPassCameraFrame` clas
 ## Overview
 
 By extending `RenderPassCameraFrame`, you can:
+
 - Add custom render passes to the pipeline
 - Modify or replace existing passes
 - Control the order of pass execution
@@ -55,9 +56,9 @@ cameraFrame.update();
 ## Use Cases
 
 This approach is suitable for:
+
 - Adding render passes that require their own render targets
 - Implementing complex multi-pass effects
 - Integrating third-party rendering techniques
 - Advanced users who need fine-grained control over the pipeline
 - Effects that need to process intermediate results from other passes
-

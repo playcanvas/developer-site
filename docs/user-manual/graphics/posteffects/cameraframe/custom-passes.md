@@ -125,6 +125,7 @@ camera.renderPasses = [scenePass, blurHPass, blurVPass];
 ## Use Cases
 
 This approach is ideal for:
+
 - **Complete custom pipelines** - When you need total control over the rendering process
 - **Integration with external systems** - Integrating third-party rendering or effects libraries
 - **Performance optimization** - Building a minimal pipeline tailored to your specific needs
@@ -138,4 +139,3 @@ This approach is ideal for:
 - **Cross-platform** - Provide both GLSL and WGSL shaders for WebGL and WebGPU support
 - **Resolution handling** - Handle dynamic resolution changes appropriately
 - **Layer management** - Properly configure which layers each pass renders
-

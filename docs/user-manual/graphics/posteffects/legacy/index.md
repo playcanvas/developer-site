@@ -31,4 +31,3 @@ You can also create your own post effects. You can find some additional ones on 
 [7]: /user-manual/graphics/posteffects/legacy/sepia
 [8]: /user-manual/graphics/posteffects/legacy/vignette
 [9]: /user-manual/scenes/components/script
-
