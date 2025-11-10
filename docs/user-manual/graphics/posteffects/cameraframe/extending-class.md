@@ -15,6 +15,8 @@ By extending `RenderPassCameraFrame`, you can:
 
 ## Example: Adding a Custom Render Pass
 
+This example demonstrates how to extend the `RenderPassCameraFrame` class to insert a custom render pass into the rendering pipeline. By overriding the `createPasses()` method, you can add your own processing step that operates on the scene texture. The `collectPasses()` method then controls where in the pipeline your custom pass executes—in this case, right before the final compose pass. This is useful when you need to apply custom effects that require their own render pass, such as edge detection, custom blur effects, or any processing that needs intermediate render targets.
+
 ```javascript
 import * as pc from 'playcanvas';
 

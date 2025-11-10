@@ -135,7 +135,7 @@ This approach is ideal for:
 ## Important Considerations
 
 - **Manual management** - You're responsible for managing render targets, textures, and memory
-- **Performance** - Ensure proper resource cleanup to avoid memory leaks
+- **Memory management** - Ensure proper resource cleanup to avoid memory leaks
 - **Cross-platform** - Provide both GLSL and WGSL shaders for WebGL and WebGPU support
 - **Resolution handling** - Handle dynamic resolution changes appropriately
 - **Layer management** - Properly configure which layers each pass renders
