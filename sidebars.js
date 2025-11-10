@@ -672,12 +672,35 @@ const sidebars = {
             id: 'user-manual/graphics/posteffects/index',
           },
           items: [
-            'user-manual/graphics/posteffects/bloom',
-            'user-manual/graphics/posteffects/brightness_contrast',
-            'user-manual/graphics/posteffects/fxaa',
-            'user-manual/graphics/posteffects/hue_saturation',
-            'user-manual/graphics/posteffects/sepia',
-            'user-manual/graphics/posteffects/vignette',
+            {
+              type: 'category',
+              label: 'Modern Post Processing',
+              link: {
+                type: 'doc',
+                id: 'user-manual/graphics/posteffects/cameraframe/index',
+              },
+              items: [
+                'user-manual/graphics/posteffects/cameraframe/compose-shader',
+                'user-manual/graphics/posteffects/cameraframe/extending-class',
+                'user-manual/graphics/posteffects/cameraframe/custom-passes',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Legacy Post Effects',
+              link: {
+                type: 'doc',
+                id: 'user-manual/graphics/posteffects/legacy/index',
+              },
+              items: [
+                'user-manual/graphics/posteffects/legacy/bloom',
+                'user-manual/graphics/posteffects/legacy/brightness_contrast',
+                'user-manual/graphics/posteffects/legacy/fxaa',
+                'user-manual/graphics/posteffects/legacy/hue_saturation',
+                'user-manual/graphics/posteffects/legacy/sepia',
+                'user-manual/graphics/posteffects/legacy/vignette',
+              ],
+            },
           ],
         },
         'user-manual/graphics/particles',
