@@ -25,19 +25,23 @@ The `gsplatCustomizeVS` shader chunk allows you to override three functions that
 Transform the position of splat centers in model space.
 
 **GLSL:**
+
 ```glsl
 void modifyCenter(inout vec3 center)
 ```
 
 **WGSL:**
+
 ```wgsl
 fn modifyCenter(center: ptr<function, vec3f>)
 ```
 
 **Parameters:**
+
 - `center` - The splat center position in model space
 
 **Example:**
+
 ```glsl
 // Offset all splats up by 1 unit
 void modifyCenter(inout vec3 center) {
@@ -50,21 +54,25 @@ void modifyCenter(inout vec3 center) {
 Modify the splat size and shape by adjusting covariance values.
 
 **GLSL:**
+
 ```glsl
 void modifyCovariance(vec3 originalCenter, vec3 modifiedCenter, inout vec3 covA, inout vec3 covB)
 ```
 
 **WGSL:**
+
 ```wgsl
 fn modifyCovariance(originalCenter: vec3f, modifiedCenter: vec3f, covA: ptr<function, vec3f>, covB: ptr<function, vec3f>)
 ```
 
 **Parameters:**
+
 - `originalCenter` - The original splat center position before modification
 - `modifiedCenter` - The splat center position after `modifyCenter()` was applied
 - `covA`, `covB` - Covariance values that define splat size and orientation
 
 **Example:**
+
 ```glsl
 // Scale all splats by 2x
 void modifyCovariance(vec3 originalCenter, vec3 modifiedCenter, inout vec3 covA, inout vec3 covB) {
@@ -77,20 +85,24 @@ void modifyCovariance(vec3 originalCenter, vec3 modifiedCenter, inout vec3 covA,
 Transform splat colors and opacity.
 
 **GLSL:**
+
 ```glsl
 void modifyColor(vec3 center, inout vec4 color)
 ```
 
 **WGSL:**
+
 ```wgsl
 fn modifyColor(center: vec3f, color: ptr<function, vec4f>)
 ```
 
 **Parameters:**
+
 - `center` - The splat center position (after `modifyCenter()` was applied)
 - `color` - The splat color (RGBA)
 
 **Example:**
+
 ```glsl
 // Darken all splats by 50%
 void modifyColor(vec3 center, inout vec4 color) {
@@ -210,16 +222,19 @@ The following helper functions are available in `modifyCovariance()` for manipul
 Scale splats uniformly by a factor.
 
 **GLSL:**
+
 ```glsl
 void gsplatApplyUniformScale(inout vec3 covA, inout vec3 covB, float scale)
 ```
 
 **WGSL:**
+
 ```wgsl
 fn gsplatApplyUniformScale(covA: ptr<function, vec3f>, covB: ptr<function, vec3f>, scale: f32)
 ```
 
 **Example:**
+
 ```glsl
 // Double the size of all splats
 gsplatApplyUniformScale(covA, covB, 2.0);
@@ -230,16 +245,19 @@ gsplatApplyUniformScale(covA, covB, 2.0);
 Extract the current size of a splat.
 
 **GLSL:**
+
 ```glsl
 float gsplatExtractSize(vec3 covA, vec3 covB)
 ```
 
 **WGSL:**
+
 ```wgsl
 fn gsplatExtractSize(covA: vec3f, covB: vec3f) -> f32
 ```
 
 **Example:**
+
 ```glsl
 // Clamp splat size to a specific range
 float size = gsplatExtractSize(covA, covB);
@@ -252,16 +270,19 @@ gsplatApplyUniformScale(covA, covB, newSize / size);
 Make splats round/spherical with a specific radius.
 
 **GLSL:**
+
 ```glsl
 void gsplatMakeRound(inout vec3 covA, inout vec3 covB, float radius)
 ```
 
 **WGSL:**
+
 ```wgsl
 fn gsplatMakeRound(covA: ptr<function, vec3f>, covB: ptr<function, vec3f>, radius: f32)
 ```
 
 **Example:**
+
 ```glsl
 // Make all splats perfectly round with uniform size
 float size = gsplatExtractSize(covA, covB);
