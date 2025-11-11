@@ -2,7 +2,7 @@
 title: Streaming LOD using Editor
 ---
 
-The PlayCanvas Engine supports [Unified Rendering](/user-manual/gaussian-splatting/building/engine-features/unified-rendering), which includes LOD streaming capabilities for Gaussian splats. Native support for this feature in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable streaming LOD functionality in your Editor projects.
+The PlayCanvas Engine supports [LOD Streaming](/user-manual/gaussian-splatting/building/engine-features/lod-streaming) for Gaussian splats. Native support for this feature in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable streaming LOD functionality in your Editor projects.
 
 ## Sample Project
 
@@ -74,7 +74,8 @@ Stay tuned for updates as these features are rolled out!
 
 ## See Also
 
-- [Unified Rendering](/user-manual/gaussian-splatting/building/engine-features/unified-rendering)
+- [LOD Streaming](/user-manual/gaussian-splatting/building/engine-features/lod-streaming)
+- [Global Sorting](/user-manual/gaussian-splatting/building/engine-features/global-sorting)
 - [SplatTransform CLI Tool](/user-manual/gaussian-splatting/editing/splat-transform)
 - [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
 - [Custom Shaders](/user-manual/gaussian-splatting/building/engine-features/custom-shaders)

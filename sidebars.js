@@ -816,8 +816,9 @@ const sidebars = {
                 id: 'user-manual/gaussian-splatting/building/engine-features/index',
               },
               items: [
-                'user-manual/gaussian-splatting/building/engine-features/unified-rendering',
                 'user-manual/gaussian-splatting/building/engine-features/draw-order',
+                'user-manual/gaussian-splatting/building/engine-features/global-sorting',
+                'user-manual/gaussian-splatting/building/engine-features/lod-streaming',
                 'user-manual/gaussian-splatting/building/engine-features/picking',
                 'user-manual/gaussian-splatting/building/engine-features/shadows',
                 'user-manual/gaussian-splatting/building/engine-features/custom-shaders',
