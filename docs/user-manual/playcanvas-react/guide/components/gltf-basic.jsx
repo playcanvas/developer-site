@@ -1,5 +1,5 @@
 import { useModel } from '@playcanvas/react/hooks';
-import { Gltf } from '@playcanvas/react/gltf';
+import { Gltf } from '@playcanvas/react';
 
 export const GltfBasic = () => {
   const { asset, error } = useModel('/assets/statue.glb');

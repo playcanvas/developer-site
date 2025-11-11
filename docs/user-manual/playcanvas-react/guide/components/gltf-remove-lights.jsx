@@ -1,5 +1,5 @@
 import { useModel } from '@playcanvas/react/hooks';
-import { Gltf, Modify } from '@playcanvas/react/gltf';
+import { Gltf, Modify } from '@playcanvas/react';
 
 export const GltfRemoveLights = () => {
   const { asset, error } = useModel('/assets/statue.glb');

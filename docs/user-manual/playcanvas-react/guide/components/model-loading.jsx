@@ -1,5 +1,5 @@
 import { useModel } from '@playcanvas/react/hooks';
-import { Gltf } from '@playcanvas/react/gltf';
+import { Gltf } from '@playcanvas/react';
 
 export const ModelLoading = () => {
   // Load the selected model

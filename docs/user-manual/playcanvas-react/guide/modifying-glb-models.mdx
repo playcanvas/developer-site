@@ -17,7 +17,7 @@ The simplest way to render a GLB model is to wrap it with the `<Gltf>` component
 
 ```tsx
 import { useModel } from '@playcanvas/react/hooks';
-import { Gltf } from '@playcanvas/react/gltf';
+import { Gltf } from '@playcanvas/react';
 
 const { asset } = useModel('model.glb');
 return <Gltf asset={asset} key={asset.id} />;
@@ -82,7 +82,7 @@ You can add new components or entities to specific nodes in your GLB. This is us
 You can add collision and rigidbody components to specific meshes in your GLB:
 
 ```tsx
-import { Gltf, Modify } from '@playcanvas/react/gltf';
+import { Gltf, Modify } from '@playcanvas/react';
 import { Collision, Rigidbody } from '@playcanvas/react/components';
 
 <Gltf asset={asset} key={asset.id}>
@@ -100,7 +100,7 @@ This adds physics components to the mesh found at the path `"Body.Mesh"`. The me
 If you need to attach an animation component to your model's skeleton, find the skeleton root node and add the `<Anim>` component:
 
 ```tsx
-import { Gltf, Modify } from '@playcanvas/react/gltf';
+import { Gltf, Modify } from '@playcanvas/react';
 import { Anim } from '@playcanvas/react/components';
 
 <Gltf asset={asset} key={asset.id}>
@@ -117,7 +117,7 @@ The path `"Root"` selects the root node of your GLB. You may need to adjust this
 You can also add entirely new entities as children of nodes in your GLB:
 
 ```tsx
-import { Gltf, Modify } from '@playcanvas/react/gltf';
+import { Gltf, Modify } from '@playcanvas/react';
 import { Entity, Light } from '@playcanvas/react/components';
 
 <Gltf asset={asset} key={asset.id}>
@@ -138,7 +138,7 @@ You can modify properties of existing components without removing them. This mer
 Your GLB might include lights or other components you don't want. You can remove them easily by selecting the nodes and using the `remove` prop.
 
 ```tsx
-import { Gltf, Modify } from '@playcanvas/react/gltf';
+import { Gltf, Modify } from '@playcanvas/react';
 
 <Gltf asset={asset} key={asset.id}>
   <Modify.Node path="**[light]">
@@ -211,7 +211,7 @@ This doubles the intensity of all lights in the GLB, regardless of their current
 Sometimes you need to find entities within the GLB hierarchy to work with them programmatically. The `useEntity` hook lets you search for entities relative to the current parent context. This is especially useful when you're adding components as children of `<Modify.Node>` and need to find other entities in the same subtree.
 
 ```tsx
-import { Gltf, Modify, useEntity } from '@playcanvas/react/gltf';
+import { Gltf, Modify, useEntity } from '@playcanvas/react';
 import { Entity, Light } from '@playcanvas/react/components';
 
 function HandGlow() {

@@ -17,7 +17,7 @@ For GLB models, use the [`<Gltf>`](../modifying-glb-models) component:
 
 ```tsx
 import { useModel } from '@playcanvas/react/hooks';
-import { Gltf } from '@playcanvas/react/gltf';
+import { Gltf } from '@playcanvas/react';
 
 const { asset } = useModel('model.glb');
 return <Gltf asset={asset} key={asset.id} />;
@@ -52,7 +52,7 @@ The asset hooks also return additional loading info and error states, so you can
 
 ```tsx title="model-viewer.tsx"
 import { useModel } from '@playcanvas/react/hooks';
-import { Gltf } from '@playcanvas/react/gltf';
+import { Gltf } from '@playcanvas/react';
 
 export function ModelViewer() {
   const { asset, loading, error } = useModel('model.glb');
@@ -123,7 +123,7 @@ You can use placeholders or custom loaders while assets load by checking the loa
 
 ```tsx title="loading-spinner.tsx"
 import { useModel } from '@playcanvas/react/hooks';
-import { Gltf } from '@playcanvas/react/gltf';
+import { Gltf } from '@playcanvas/react';
 
 // A component that displays a model with a custom loading state
 export function ModelWithCustomLoading() {
@@ -191,7 +191,7 @@ React Query and SWR have built-in support for Suspense, which allows you to hand
 
 ```tsx
 import { fetchAsset } from '@playcanvas/react/utils';
-import { Gltf } from '@playcanvas/react/gltf';
+import { Gltf } from '@playcanvas/react';
 import { useQuery } from '@tanstack/react-query';
 
 function useSuspendedQueryModel(src: string) {
