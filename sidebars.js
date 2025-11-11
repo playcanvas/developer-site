@@ -807,6 +807,7 @@ const sidebars = {
                 'user-manual/gaussian-splatting/building/your-first-app/web-components',
               ],
             },
+            'user-manual/gaussian-splatting/building/streaming-lod-editor',
             {
               type: 'category',
               label: 'Engine Features',
@@ -815,6 +816,7 @@ const sidebars = {
                 id: 'user-manual/gaussian-splatting/building/engine-features/index',
               },
               items: [
+                'user-manual/gaussian-splatting/building/engine-features/unified-rendering',
                 'user-manual/gaussian-splatting/building/engine-features/draw-order',
                 'user-manual/gaussian-splatting/building/engine-features/picking',
                 'user-manual/gaussian-splatting/building/engine-features/shadows',
