@@ -52,4 +52,3 @@ Check out the [Global Sorting example](https://playcanvas.vercel.app/#/gaussian-
 - [Draw Order and Sorting](/user-manual/gaussian-splatting/building/engine-features/draw-order)
 - [LOD Streaming](/user-manual/gaussian-splatting/building/engine-features/lod-streaming)
 - [Global Sorting Example](https://playcanvas.vercel.app/#/gaussian-splatting/global-sorting)
-

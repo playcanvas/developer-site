@@ -99,4 +99,3 @@ const gsplatSettings = app.scene.gsplat;
 - [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
 - [Streaming LOD using Editor](/user-manual/gaussian-splatting/building/streaming-lod-editor)
 - [Global Sorting](/user-manual/gaussian-splatting/building/engine-features/global-sorting)
-
