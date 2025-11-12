@@ -57,6 +57,13 @@ const config = {
         { from: ['/user-manual/editor/scene/settings/'], to: '/user-manual/editor/interface/settings/' },
         { from: ['/user-manual/scenes/entities/'], to: '/user-manual/ecs/entities/' },
         { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/scripting/editor-users/loading-order/' },
+        // Legacy post effects moved to legacy subdirectory
+        { from: ['/user-manual/graphics/posteffects/bloom/'], to: '/user-manual/graphics/posteffects/legacy/bloom/' },
+        { from: ['/user-manual/graphics/posteffects/brightness_contrast/'], to: '/user-manual/graphics/posteffects/legacy/brightness_contrast/' },
+        { from: ['/user-manual/graphics/posteffects/fxaa/'], to: '/user-manual/graphics/posteffects/legacy/fxaa/' },
+        { from: ['/user-manual/graphics/posteffects/hue_saturation/'], to: '/user-manual/graphics/posteffects/legacy/hue_saturation/' },
+        { from: ['/user-manual/graphics/posteffects/sepia/'], to: '/user-manual/graphics/posteffects/legacy/sepia/' },
+        { from: ['/user-manual/graphics/posteffects/vignette/'], to: '/user-manual/graphics/posteffects/legacy/vignette/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en

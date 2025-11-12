@@ -22,10 +22,10 @@ PlayCanvasでは、プロジェクトへのポストプロセッシングエフ�
 
 [1]: /user-manual/scenes/components/camera
 [2]: https://github.com/playcanvas/engine/tree/main/scripts/posteffects
-[3]: /user-manual/graphics/posteffects/bloom
-[4]: /user-manual/graphics/posteffects/brightness_contrast
-[5]: /user-manual/graphics/posteffects/hue_saturation
-[6]: /user-manual/graphics/posteffects/fxaa
-[7]: /user-manual/graphics/posteffects/sepia
-[8]: /user-manual/graphics/posteffects/vignette
+[3]: /user-manual/graphics/posteffects/legacy/bloom
+[4]: /user-manual/graphics/posteffects/legacy/brightness_contrast
+[5]: /user-manual/graphics/posteffects/legacy/hue_saturation
+[6]: /user-manual/graphics/posteffects/legacy/fxaa
+[7]: /user-manual/graphics/posteffects/legacy/sepia
+[8]: /user-manual/graphics/posteffects/legacy/vignette
 [9]: /user-manual/scenes/components/script

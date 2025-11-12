@@ -95,7 +95,9 @@ SplatTransform detects file format based on extension. Supported formats are sho
 | `.ply` | ✅ | ✅ | Standard PLY format |
 | `.sog` | ✅ | ✅ | Bundled super-compressed format (recommended) |
 | `meta.json` | ✅ | ✅ | Unbundled super-compressed format (accompanied by `.webp` textures) |
+| `lod-meta.json` | ❌ | ✅ | Level of detail format with octree structure |
 | `.compressed.ply` | ✅ | ✅ | Compressed PLY format (auto-detected and decompressed on read) |
+| `.lcc` | ✅ | ❌ | Level of detail container format |
 | `.ksplat` | ✅ | ❌ | Compressed splat format (mkkellogg format) |
 | `.splat` | ✅ | ❌ | Compressed splat format (antimatter15 format) |
 | `.spz` | ✅ | ❌ | Compressed splat format (Niantic format) |
@@ -118,6 +120,7 @@ Actions can be repeated and applied in any order to transform and filter your sp
 -V, --filter-value     <name,cmp,value> Keep splats where <name> <cmp> <value>
                                           cmp ∈ {lt,lte,gt,gte,eq,neq}
 -p, --params           <key=val,...>    Pass parameters to .mjs generator script
+-l, --lod              <n>              Specify the level of detail, n >= 0
 ```
 
 ## Global Options
@@ -125,10 +128,14 @@ Actions can be repeated and applied in any order to transform and filter your sp
 ```none
 -h, --help                              Show this help and exit
 -v, --version                           Show version and exit
+-q, --quiet                             Suppress non-error output
 -w, --overwrite                         Overwrite output file if it exists
 -c, --cpu                               Use CPU for SOG spherical harmonic compression
 -i, --iterations       <n>              Iterations for SOG SH compression (more=better). Default: 10
 -E, --viewer-settings  <settings.json>  HTML viewer settings JSON file
+-O, --lod-select       <n,n,...>        Comma-separated LOD levels to read from LCC input
+-C, --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
+-X, --lod-chunk-extent <n>              Approximate size of an LOD chunk in world units (m). Default: 16
 ```
 
 :::note
@@ -257,6 +264,53 @@ splat-transform \
   props.ply -t -3,0,2 -s 1.2 \
   complete_scene.ply
 ```
+
+### Generating LOD Format
+
+The LOD (Level of Detail) format enables efficient streaming and rendering of large gaussian splat scenes. The tool takes multiple pre-generated LOD files as input and generates an optimized streaming format with an octree structure for optimal download performance.
+
+**Note:** The tool does NOT create the LOD levels themselves - you must supply multiple LOD files with progressively fewer gaussians (LOD 0 = highest detail, higher numbers = lower detail).
+
+```bash
+# Generate LOD streaming format from multiple input files
+# Each input file represents a different detail level (LOD 0 is highest quality)
+splat-transform \
+  lod0.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  lod3.ply -l 3 \
+  output/lod-meta.json \
+  --filter-nan \
+  --filter-harmonics 0
+
+# Generate LOD with custom chunk settings for better performance
+splat-transform \
+  -C 1024 \
+  -X 32 \
+  lod0.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  output/lod-meta.json \
+  --filter-nan
+
+# For very large scenes, increase Node.js memory allocation
+node --max-old-space-size=32000 node_modules/.bin/splat-transform \
+  lod0.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  lod3.ply -l 3 \
+  output/lod-meta.json \
+  --filter-nan \
+  --filter-harmonics 0
+```
+
+**Tips:**
+
+- Use `--filter-nan` to remove invalid gaussians before processing
+- Use `--filter-harmonics 0` to reduce file size if color detail is less critical
+- Use `-C` to control the number of generated SOG files containing splats
+- Use `-X` to control the size of each node. Increase for very large scenes to avoid generating a huge number of nodes to manage
+- For very large scenes, use Node's `--max-old-space-size` flag to give it more memory
 
 ## Getting Help
 

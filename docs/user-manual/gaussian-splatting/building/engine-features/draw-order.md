@@ -18,7 +18,7 @@ GSplatComponents are rendered back to front based on their bounding boxes, and e
 
 :::info Global sorting
 
-The PlayCanvas Engine does not currently support "global sorting" across multiple GSplatComponents (where all Gaussians from all components would be sorted together). Support for this is [currently in development](https://x.com/ValigurskyM/status/1940401991836131702). Subscribe to [this pull request](https://github.com/playcanvas/engine/pull/7825) to stay updated on progress.
+By default, the PlayCanvas Engine does not support "global sorting" across multiple GSplatComponents (where all Gaussians from all components would be sorted together). However, you can enable [Global Sorting](/user-manual/gaussian-splatting/building/engine-features/global-sorting), a beta feature that allows all Gaussians from multiple components to be sorted together, eliminating visibility and popping artifacts.
 
 :::
 
