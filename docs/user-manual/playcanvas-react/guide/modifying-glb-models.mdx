@@ -1,0 +1,366 @@
+---
+title: Modifying GLB Models
+---
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application, Entity } from '@playcanvas/react';
+import { GltfBasic } from './components/gltf-basic';
+import GltfBasicSource from '!!raw-loader!./components/gltf-basic.jsx';
+import { GltfRemoveLights } from './components/gltf-remove-lights';
+import GltfRemoveLightsSource from '!!raw-loader!./components/gltf-remove-lights.jsx';
+
+3D models are usually provided as standalone assets. They can feel like black boxes, which makes even small tweaks awkward—you have to reopen a DCC tool, make the change, export, and repeat whenever the model updates.
+
+There are plenty of scenarios where you need to inspect or adjust a model in code. Maybe the source GLB includes lights you don't want. Maybe you’re building a car configurator and need to drive the headlights’ emissive intensity from React state. Or perhaps you want every mesh in the model to get physics components.
+
+## The `<Gltf>` Component
+
+The `<Gltf>` component is a one-stop shop for rendering a GLB model and customizing it. It works just like `<Render>`, but exposes the model’s internal hierarchy.
+
+```tsx
+import { useModel } from '@playcanvas/react/hooks';
+import { Gltf } from '@playcanvas/react';
+
+const GltfModel = () => {
+  const { asset } = useModel('model.glb');
+  return <Gltf asset={asset} key={asset.id} />;
+};
+```
+
+<CodeExample
+  label="Rendering a GLB model with Gltf"
+  code={GltfBasicSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[2, 1, 2]}
+      useControls={true}
+      exposure={3}
+    >
+      <Entity name="model" scale={[0.1, 0.1, 0.1]} position={[0, -0.5, 0]}>
+        <GltfBasic />
+      </Entity>
+    </Staging>
+  </Application>
+</CodeExample>
+
+## Modifying GLB Models
+
+You can modify a GLB model with the `<Modify>` component. It selects subnodes in the hierarchy and applies updates to each match. You can add, remove, or adjust components and even insert new entities.
+
+Here’s how you might attach a light to a hand on the model:
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  {/* Select the Hand child under Arm under Body */}
+  <Modify.Node path="Body.Arm.Hand">
+    <Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
+
+`<Modify.Node>` accepts a `path` prop that identifies which nodes to modify. In this example we’re targeting the `"Hand"` node beneath `"Arm"` beneath `"Body"`.
+
+## Finding the Right Nodes
+
+The path prop accepts a glob-like pattern for selecting nodes. This means you can select multiple components at once. For example if you want to select every `"Hand"` under the `"Body"` node in the model you can use a wildcard pattern:
+
+```tsx
+{/* Load the model */}
+<Gltf asset={asset} key={asset.id}>
+  {/* Select all hand nodes under the Body node */}
+  <Modify.Node path="Body.**.Hand">
+    {/* Add a light to each hand */}
+    <Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
+
+You can also select nodes by their component type. For example if you want to select all nodes with a `"Light"` component you can use the `"[light]"` pattern:
+
+```tsx
+{/* Load the model */}
+<Gltf asset={asset} key={asset.id}>
+  {/* Select all nodes with a Light component under the Body node */}
+  <Modify.Node path="Body.**[light]">
+    {/* Adjust each matching light */}
+    <Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
+
+To modify nodes in your GLB, you need to find them using path patterns. Here are the most common patterns:
+
+- **Exact path**: `"Body.Arm.Hand"` - Selects a specific node path
+- **Single wildcard**: `"Body.*"` - Selects all direct children of Body
+- **Multi-level wildcard**: `"Body.**"` - Selects all descendants of Body at any depth
+- **All nodes**: `"**"` - Selects every node in the hierarchy
+- **Component filter**: `"**[light]"` - Selects all nodes with a light component
+- **Combined**: `"Head.*[light]"` - Selects all direct children of Head that have a light component
+
+You can also use a predicate function to match nodes:
+
+```tsx
+<Modify.Node path={(entity) => entity.name.includes('Weapon')}>
+  <Modify.Render castShadows />
+</Modify.Node>
+```
+
+## Adding Components & Entities
+
+You can add new components or entities to specific nodes in your GLB. This is useful for attaching animations, adding physics, or inserting new elements into the hierarchy.
+
+### Adding Physics
+
+You can add collision and rigidbody components to specific meshes in your GLB:
+
+```tsx
+import { Gltf, Modify } from '@playcanvas/react';
+import { Collision, Rigidbody } from '@playcanvas/react/components';
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Body.Mesh">
+    <Collision type="box" />
+    <Rigidbody type="dynamic" mass={10} />
+  </Modify.Node>
+</Gltf>
+```
+
+This adds physics components to the mesh found at the path `"Body.Mesh"`. The mesh will now participate in physics simulations.
+
+### Adding Animations
+
+If you need to attach an animation component to your model's skeleton, find the skeleton root node and add the `<Anim>` component:
+
+```tsx
+import { Gltf, Modify } from '@playcanvas/react';
+import { Anim } from '@playcanvas/react/components';
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Root">
+    <Anim asset={asset} clip="Walk" loop />
+  </Modify.Node>
+</Gltf>
+```
+
+The path `"Root"` selects the root node of your GLB. You may need to adjust this based on your model's structure - common names are `"Root"`, `"Scene"`, or the name of your skeleton root entity.
+
+### Adding a New Entity
+
+You can also add entirely new entities as children of nodes in your GLB:
+
+```tsx
+import { Gltf, Modify } from '@playcanvas/react';
+import { Entity, Light } from '@playcanvas/react/components';
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Head">
+    <Entity name="HelmetLight" position={[0, 0.5, 0]}>
+      <Light type="omni" color="yellow" intensity={3} />
+    </Entity>
+  </Modify.Node>
+</Gltf>
+```
+
+## Modifying Existing Components
+
+You can modify properties of existing components without removing them. This merges your changes with the existing component properties.
+
+### Removing Components
+
+Your GLB might include lights or other components you don't want. You can remove them easily by selecting the nodes and using the `remove` prop.
+
+```tsx
+import { Gltf, Modify } from '@playcanvas/react';
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="**[light]">
+    <Modify.Light remove />
+  </Modify.Node>
+</Gltf>
+```
+
+The `path="**[light]"` pattern finds all nodes with a light component anywhere in the hierarchy. The `remove` prop removes the component from those nodes.
+
+<CodeExample
+  label="Removing all lights from a GLB"
+  code={GltfRemoveLightsSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[2, 1, 2]}
+      useControls={true}
+      exposure={3}
+    >
+      <Entity name="model" scale={[0.1, 0.1, 0.1]} position={[0, -0.5, 0]}>
+        <GltfRemoveLights />
+      </Entity>
+    </Staging>
+  </Application>
+</CodeExample>
+
+### Changing Light Properties
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Headlight">
+    <Modify.Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
+
+This finds the node named `"Headlight"` and updates its light color and intensity, while keeping all other light properties unchanged.
+
+### Updating Render Properties
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Body[render]">
+    <Modify.Render castShadows receiveShadows />
+  </Modify.Node>
+</Gltf>
+```
+
+The `[render]` filter selects nodes that have a render component. This enables shadow casting and receiving for the body mesh.
+
+### Functional Updates
+
+You can also use functions to update properties based on their current values:
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="**[light]">
+    <Modify.Light intensity={(val) => (val || 1) * 2} />
+  </Modify.Node>
+</Gltf>
+```
+
+This doubles the intensity of all lights in the GLB, regardless of their current values.
+
+## Finding Entities with useEntity
+
+Sometimes you need to find entities within the GLB hierarchy to work with them programmatically. The `useEntity` hook lets you search for entities relative to the current parent context. This is especially useful when you're adding components as children of `<Modify.Node>` and need to find other entities in the same subtree.
+
+```tsx
+import { Gltf, Modify, useEntity } from '@playcanvas/react';
+import { Entity, Light } from '@playcanvas/react/components';
+
+function HandGlow() {
+  // Find the 'Hand' entity relative to the current parent
+  const handEntity = useEntity('Hand');
+  
+  if (!handEntity) return null;
+  
+  // Add a glow effect to the hand
+  return (
+    <Entity name="HandGlow" position={[0, 0.1, 0]}>
+      <Light type="omni" color="cyan" intensity={2} />
+    </Entity>
+  );
+}
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Arm">
+    <HandGlow />
+  </Modify.Node>
+</Gltf>
+```
+
+In this example, `useEntity('Hand')` searches for a child named `"Hand"` relative to the `"Arm"` node. The hook returns the entity if found, or `null` if not found.
+
+### Using Path Patterns
+
+`useEntity` supports the same path patterns as `<Modify.Node>`:
+
+```tsx
+function FindMultipleLights() {
+  // Find all direct children with lights
+  const lights = useEntity('*[light]');
+  
+  if (!lights || !Array.isArray(lights)) return null;
+  
+  return (
+    <>
+      {lights.map((light, index) => (
+        <Entity key={index} name={`LightMarker_${index}`}>
+          {/* Add markers to each light */}
+        </Entity>
+      ))}
+    </>
+  );
+}
+```
+
+When using wildcards, `useEntity` returns an array of matching entities. When using an exact path, it returns a single entity.
+
+### Using Predicate Functions
+
+You can also use a function to find entities based on custom logic:
+
+```tsx
+function FindWeapons() {
+  // Find all entities whose name includes "Weapon"
+  const weapons = useEntity((entity, metadata) => 
+    entity.name.includes('Weapon')
+  );
+  
+  if (!weapons) return null;
+  
+  const weaponArray = Array.isArray(weapons) ? weapons : [weapons];
+  
+  return (
+    <>
+      {weaponArray.map((weapon, index) => (
+        <Entity key={index} name={`WeaponEffect_${index}`}>
+          <Light type="omni" color="red" intensity={1} />
+        </Entity>
+      ))}
+    </>
+  );
+}
+```
+
+The predicate function receives the entity and its metadata, allowing you to match based on any criteria - component presence, name patterns, or custom properties.
+
+Note: `useEntity` only works inside components that are children of `<Gltf>` or `<Modify.Node>`. It searches relative to the current parent context, making it perfect for finding entities within the subtree you're modifying.
+
+## Multiple Modifications
+
+You can apply multiple modifications to the same GLB. Each `<Modify.Node>` rule is independent and will be applied to matching nodes:
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  {/* Remove all original lights */}
+  <Modify.Node path="**[light]">
+    <Modify.Light remove />
+  </Modify.Node>
+
+  {/* Add shadow casting to all meshes */}
+  <Modify.Node path="**[render]">
+    <Modify.Render castShadows receiveShadows />
+  </Modify.Node>
+
+  {/* Add a new light to the head */}
+  <Modify.Node path="Head">
+    <Entity name="HeadLight">
+      <Light type="omni" color="cyan" intensity={2} />
+    </Entity>
+  </Modify.Node>
+</Gltf>
+```
+
+If multiple rules try to modify the same component on the same node, the most specific path wins. This lets you set general rules and override them with specific ones.
+
+## Related
+
+- [Loading Assets](../loading-assets/) - Learn how to load GLB assets
+- [Anim Component](../../api/anim) - Animation component reference
+- [Collision Component](../../api/collision) - Physics collision reference

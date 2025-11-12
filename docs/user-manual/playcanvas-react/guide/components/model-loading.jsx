@@ -1,6 +1,5 @@
-import { Entity } from '@playcanvas/react';
-import { Render } from '@playcanvas/react/components';
 import { useModel } from '@playcanvas/react/hooks';
+import { Gltf } from '@playcanvas/react';
 
 export const ModelLoading = () => {
   // Load the selected model
@@ -15,11 +14,7 @@ export const ModelLoading = () => {
   // If the asset is not loaded, return null
   if (!asset) return null;
 
-  // If the asset is loaded, render it
-  return (
-    <Entity position={[0, -0.5, 0]} scale={[0.1, 0.1, 0.1]}>
-      <Render asset={asset} />
-    </Entity>
-  );
+  // If the asset is loaded, render it with Gltf
+  return <Gltf asset={asset} key={asset.id} />;
 };
 

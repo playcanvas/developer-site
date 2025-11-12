@@ -295,6 +295,7 @@ const sidebars = {
           items: [
             'user-manual/playcanvas-react/guide/interactivity',
             'user-manual/playcanvas-react/guide/loading-assets',
+            'user-manual/playcanvas-react/guide/modifying-glb-models',
             'user-manual/playcanvas-react/guide/physics',
             'user-manual/playcanvas-react/guide/materials'
           ]
