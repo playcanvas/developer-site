@@ -1,0 +1,82 @@
+---
+description: Documentation for the Gltf component
+---
+
+# `<Gltf/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application, Entity } from '@playcanvas/react';
+import { GltfModifyExample } from './gltf-modify-example';
+import GltfModifyExampleSource from '!!raw-loader!./gltf-modify-example.jsx';
+
+The `<Gltf/>` component loads and instantiates a GLB scene so you can work with its hierarchy from React. It renders the model by default, builds a cache of every entity in the file, and coordinates `<Modify.*>` rules so you can declaratively adjust the imported content.
+
+Learn the bigger picture in the [Modifying GLB Models guide](../../guide/modifying-glb-models).
+
+## Usage
+
+Load a GLB with [`useModel`](../hooks/use-asset) and pass the asset into `<Gltf/>`. The component handles instantiation for you:
+
+```tsx copy
+import { useModel } from '@playcanvas/react/hooks';
+import { Entity, Gltf } from '@playcanvas/react';
+
+export function Statue() {
+  const { asset } = useModel('/assets/statue.glb');
+  if (!asset) return null;
+
+  return (
+    <Entity name="Statue">
+      <Gltf asset={asset} key={asset.id} />
+    </Entity>
+  );
+}
+```
+
+### Live example
+
+This demo adds a control to change the render style of the model. It targets all nodes with a render component and changes the render style reactively.
+
+<CodeExample
+  label="Control GLB rendering and render components"
+  filename="gltf-modify-example.jsx"
+  code={GltfModifyExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[2, 1, 2]}
+      useControls={true}
+      exposure={3}
+    >
+      <Entity name="Statue" scale={[0.1, 0.1, 0.1]} position={[0, -0.5, 0]}>
+        <GltfModifyExample />
+      </Entity>
+    </Staging>
+  </Application>
+</CodeExample>
+
+### Data-only instantiation
+
+Set `render={false}` when you only need the scene hierarchy—for example when generating colliders or running queries. `<Gltf/>` still instantiates the GLB as long as you include at least one `<Modify.Node>` child.
+
+```tsx copy
+<Gltf asset={asset} key={asset.id} render={false}>
+  <Modify.Node path="**">
+    <Collision type="mesh" />
+  </Modify.Node>
+</Gltf>
+```
+
+## Properties
+
+```tsx asTypedoc
+import { Gltf } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Gltf>;
+export default $;
+```
+
+
