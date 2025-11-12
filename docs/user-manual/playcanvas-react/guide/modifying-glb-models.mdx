@@ -3,24 +3,28 @@ title: Modifying GLB Models
 ---
 
 import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
-import { Application } from '@playcanvas/react';
+import { Application, Entity } from '@playcanvas/react';
 import { GltfBasic } from './components/gltf-basic';
 import GltfBasicSource from '!!raw-loader!./components/gltf-basic.jsx';
 import { GltfRemoveLights } from './components/gltf-remove-lights';
 import GltfRemoveLightsSource from '!!raw-loader!./components/gltf-remove-lights.jsx';
 
-GLB models often need modifications before they're ready for your scene. You might want to attach animations to the skeleton, remove unwanted lights, add physics components to meshes, or change material properties. The `<Gltf>` component makes these modifications straightforward and declarative.
+3D models are usually provided as standalone assets. They can feel like black boxes, which makes even small tweaks awkward—you have to reopen a DCC tool, make the change, export, and repeat whenever the model updates.
 
-## Basic Usage
+There are plenty of scenarios where you need to inspect or adjust a model in code. Maybe the source GLB includes lights you don't want. Maybe you’re building a car configurator and need to drive the headlights’ emissive intensity from React state. Or perhaps you want every mesh in the model to get physics components.
 
-The simplest way to render a GLB model is to wrap it with the `<Gltf>` component. It works just like `<Render>`, but gives you access to the model's internal structure.
+## The `<Gltf>` Component
+
+The `<Gltf>` component is a one-stop shop for rendering a GLB model and customizing it. It works just like `<Render>`, but exposes the model’s internal hierarchy.
 
 ```tsx
 import { useModel } from '@playcanvas/react/hooks';
 import { Gltf } from '@playcanvas/react';
 
-const { asset } = useModel('model.glb');
-return <Gltf asset={asset} key={asset.id} />;
+const GltfModel = () => {
+  const { asset } = useModel('model.glb');
+  return <Gltf asset={asset} key={asset.id} />;
+};
 ```
 
 <CodeExample
@@ -37,24 +41,57 @@ return <Gltf asset={asset} key={asset.id} />;
       useControls={true}
       exposure={3}
     >
-      <GltfBasic />
+      <Entity name="model" scale={[0.1, 0.1, 0.1]} position={[0, -0.5, 0]}>
+        <GltfBasic />
+      </Entity>
     </Staging>
   </Application>
 </CodeExample>
 
-### Data-Only (Collision)
+## Modifying GLB Models
 
-You can also use a GLB only for its data. Setting `render={false}` will instantiate the hierarchy and apply all your rules, but won't add the visual model to the scene. This is perfect for invisible collision meshes.
+You can modify a GLB model with the `<Modify>` component. It selects subnodes in the hierarchy and applies updates to each match. You can add, remove, or adjust components and even insert new entities.
+
+Here’s how you might attach a light to a hand on the model:
 
 ```tsx
-<Gltf asset={asset} key={asset.id} render={false}>
-  <Modify.Node path="**">
-    <Collision type="mesh" />
+<Gltf asset={asset} key={asset.id}>
+  {/* Select the Hand child under Arm under Body */}
+  <Modify.Node path="Body.Arm.Hand">
+    <Light color="red" intensity={2} />
   </Modify.Node>
 </Gltf>
 ```
 
+`<Modify.Node>` accepts a `path` prop that identifies which nodes to modify. In this example we’re targeting the `"Hand"` node beneath `"Arm"` beneath `"Body"`.
+
 ## Finding the Right Nodes
+
+The path prop accepts a glob-like pattern for selecting nodes. This means you can select multiple components at once. For example if you want to select every `"Hand"` under the `"Body"` node in the model you can use a wildcard pattern:
+
+```tsx
+{/* Load the model */}
+<Gltf asset={asset} key={asset.id}>
+  {/* Select all hand nodes under the Body node */}
+  <Modify.Node path="Body.**.Hand">
+    {/* Add a light to each hand */}
+    <Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
+
+You can also select nodes by their component type. For example if you want to select all nodes with a `"Light"` component you can use the `"[light]"` pattern:
+
+```tsx
+{/* Load the model */}
+<Gltf asset={asset} key={asset.id}>
+  {/* Select all nodes with a Light component under the Body node */}
+  <Modify.Node path="Body.**[light]">
+    {/* Adjust each matching light */}
+    <Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
 
 To modify nodes in your GLB, you need to find them using path patterns. Here are the most common patterns:
 
@@ -65,7 +102,7 @@ To modify nodes in your GLB, you need to find them using path patterns. Here are
 - **Component filter**: `"**[light]"` - Selects all nodes with a light component
 - **Combined**: `"Head.*[light]"` - Selects all direct children of Head that have a light component
 
-You can also use a function to match nodes:
+You can also use a predicate function to match nodes:
 
 ```tsx
 <Modify.Node path={(entity) => entity.name.includes('Weapon')}>
@@ -163,7 +200,9 @@ The `path="**[light]"` pattern finds all nodes with a light component anywhere i
       useControls={true}
       exposure={3}
     >
-      <GltfRemoveLights />
+      <Entity name="model" scale={[0.1, 0.1, 0.1]} position={[0, -0.5, 0]}>
+        <GltfRemoveLights />
+      </Entity>
     </Staging>
   </Application>
 </CodeExample>

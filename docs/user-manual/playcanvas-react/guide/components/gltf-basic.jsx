@@ -1,5 +1,5 @@
 import { useModel } from '@playcanvas/react/hooks';
-import { Gltf } from '@playcanvas/react';
+import { Gltf, Entity } from '@playcanvas/react';
 
 export const GltfBasic = () => {
   const { asset, error } = useModel('/assets/statue.glb');
@@ -11,6 +11,8 @@ export const GltfBasic = () => {
 
   if (!asset) return null;
 
-  return <Gltf asset={asset} key={asset.id} />;
+  return <Entity name='asset'>
+    <Gltf asset={asset} key={asset.id} />
+  </Entity>;
 };
 
