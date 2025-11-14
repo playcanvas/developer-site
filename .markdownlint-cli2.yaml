@@ -1,11 +1,13 @@
 # Disable some built-in rules
 config:
+  code-block-style: false
   descriptive-link-text: false
+  heading-increment: false
   line-length: false
   no-alt-text: false
-  no-inline-html: false
   no-bare-urls: false
-  code-block-style: false
+  no-inline-html: false
+  table-column-style: false
 
 # Ignore system files and JSX files
 ignores:
