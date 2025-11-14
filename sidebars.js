@@ -306,6 +306,8 @@ const sidebars = {
           items: [
             'user-manual/playcanvas-react/api/application',
             'user-manual/playcanvas-react/api/entity',
+            'user-manual/playcanvas-react/api/gltf',
+            'user-manual/playcanvas-react/api/modify',
             {
               type: 'category',
               label: 'Components',
