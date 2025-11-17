@@ -12,12 +12,6 @@ We've created a sample project that demonstrates how to use streaming LOD with G
 
 This project showcases a large-scale Gaussian splat scene with LOD streaming, including custom reveal shader effects.
 
-:::note Engine Version
-
-The project currently needs to be manually set to use **Engine version 2.13.0** until this version is used by the Editor by default in the very near future. You can set the engine version in the Launch Options.
-
-:::
-
 ## Using the Streamed GSplat Script
 
 The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable LOD streaming:
