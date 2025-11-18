@@ -42,23 +42,37 @@ However, please note that the selection behavior is still determined by the acti
 
 ## Selecting and Deleting Splats
 
-Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. To help with this, there are 6 selection tools available:
+Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. To help with this, there are 7 selection tools available:
 
 <div class="no-wrap-first-col">
 
 | Tool | Description |
 |------|-------------|
-| ![Picker Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-picker.svg) **Picker Select** | Click to select, or click + drag to rect select. |
-| ![Lasso Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-lasso.svg) **Lasso Select** | Click and drag to draw an arbitrary shape. Splats within the shape's outline will be selected. |
-| ![Polygon Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-poly.svg) **Polygon Select** | Similar to Lasso Select. Click to create points that create the edges of an arbitrary shape. Double click to close the shape. Splats within the shape's outline will be selected. |
-| ![Brush Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-brush.svg) **Brush Select** | Click and drag a selection circle. Change the brush size with the `[` and `]` keys. |
-| ![Flood Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-flood.svg) **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold value (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters). |
-| ![Sphere Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-sphere.svg) **Sphere Select** | Activate a sphere volume to add or remove splats from the current selection. Double click on any splat to reposition the sphere volume. |
-| ![Box Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-box.svg) **Box Select** | Click and drag to create a rectangular selection box. All splats within the box boundaries will be selected. |
+| ![Picker Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-picker.svg) **Picker Select** | Click to select a single splat, or click + drag to create a rectangular selection area. This is the default selection tool. |
+| ![Lasso Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-lasso.svg) **Lasso Select** | Click and drag to draw a freeform shape. Splats within the shape's outline will be selected. This is a 2D screen-space selection tool. |
+| ![Polygon Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-poly.svg) **Polygon Select** | Click to place points that define the vertices of a polygon. Double-click to close the shape. Splats within the polygon will be selected. This is useful for precise selections with straight edges. |
+| ![Brush Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-brush.svg) **Brush Select** | Click and drag to paint a selection using a circular brush. Adjust the brush size with the `[` (decrease) and `]` (increase) keys. Ideal for organic selection work. |
+| ![Flood Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-flood.svg) **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold slider (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters) that appear isolated in the scene. |
+| ![Sphere Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-sphere.svg) **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center. Use the translate gizmo to move the sphere, and adjust the radius value in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. |
+| ![Box Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-box.svg) **Box Select** | Creates a 3D rectangular volume for volumetric selection. Double-click anywhere in the scene to position the box center. Use the translate gizmo to move the box, and adjust the dimensions (LenX, LenY, LenZ) in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. This is ideal for selecting splats within a specific region of 3D space. |
 
 </div>
 
-Once you are happy with your selection, you can delete it with the Delete key.
+### Selection Modifiers
+
+All 2D selection tools (Picker, Lasso, Polygon, Brush, Flood) support modifier keys to control how the selection is applied:
+
+| Modifier | Action |
+|----------|--------|
+| **None** | Replace the current selection with the new selection |
+| **Shift** | Add to the current selection |
+| **Ctrl / Cmd** | Remove from the current selection |
+
+The 3D selection tools (Sphere Select, Box Select) have **Set**, **Add**, and **Remove** buttons in their toolbar instead of using modifier keys.
+
+### Deleting Splats
+
+Once you are happy with your selection, you can delete it with the **Delete** key.
 
 ## Transforming Splats
 

@@ -42,23 +42,37 @@ SuperSplatは、以下の2つの**_編集モード_**のいずれかで動作し
 
 ## Splatsの選択と削除
 
-Splatsの切り抜きや不要なGaussiansの削除は、SuperSplatの主要な機能です。これを助けるために、6つの選択ツールが利用可能です：
+Splatsの切り抜きや不要なGaussiansの削除は、SuperSplatの主要な機能です。これを助けるために、7つの選択ツールが利用可能です：
 
 <div class="no-wrap-first-col">
 
 | ツール | 説明 |
 |------|-------------|
-| ![Picker Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-picker.svg) **Picker Select** | クリックで選択、またはクリック＆ドラッグで矩形選択。 |
-| ![Lasso Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-lasso.svg) **Lasso Select** | クリック＆ドラッグで任意の図形を描画します。図形のアウトライン内のSplatsが選択されます。 |
-| ![Polygon Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-poly.svg) **Polygon Select** | Lasso Selectに似ています。クリックして、任意の図形の辺を形成する点を作成します。ダブルクリックで図形を閉じます。図形のアウトライン内のSplatsが選択されます。 |
-| ![Brush Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-brush.svg) **Brush Select** | クリック＆ドラッグで選択サークルを描画します。ブラッシュサイズは `[` と `]` キーで変更できます。 |
-| ![Flood Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-flood.svg) **Flood Select** | ビューポート上でクリックして、塗りつぶしアルゴリズムに基づいた2D選択マスクを生成します。閾値（0-1）が塗りつぶしの感度を制御します。このツールは、はぐれたGaussians（フローターとも呼ばれます）を選択して削除するのに特に便利です。 |
-| ![Sphere Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-sphere.svg) **Sphere Select** | 球状のボリュームをアクティブにして、現在の選択範囲にSplatsを追加または削除します。任意のSplatsをダブルクリックすると、球状のボリュームを再配置できます。 |
-| ![Box Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-box.svg) **Box Select** | クリック＆ドラッグで矩形の選択ボックスを作成します。ボックスの境界内にあるすべてのSplatsが選択されます。 |
+| ![Picker Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-picker.svg) **Picker Select** | クリックで単一のSplatを選択、またはクリック＆ドラッグで矩形領域を作成して選択。これはデフォルトの選択ツールです。 |
+| ![Lasso Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-lasso.svg) **Lasso Select** | クリック＆ドラッグで自由な形状を描画します。図形のアウトライン内のSplatsが選択されます。これは2Dスクリーン空間の選択ツールです。 |
+| ![Polygon Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-poly.svg) **Polygon Select** | クリックしてポリゴンの頂点を定義する点を配置します。ダブルクリックで図形を閉じます。ポリゴン内のSplatsが選択されます。直線のエッジを持つ正確な選択に便利です。 |
+| ![Brush Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-brush.svg) **Brush Select** | クリック＆ドラッグで円形ブラシを使用して選択をペイントします。ブラシサイズは `[`（縮小）と `]`（拡大）キーで調整できます。有機的な選択作業に最適です。 |
+| ![Flood Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-flood.svg) **Flood Select** | ビューポート上でクリックして、塗りつぶしアルゴリズムに基づいた2D選択マスクを生成します。閾値スライダー（0-1）が塗りつぶしの感度を制御します。このツールは、シーン内で孤立して表示されるはぐれたGaussians（フローターとも呼ばれます）を選択して削除するのに特に便利です。 |
+| ![Sphere Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-sphere.svg) **Sphere Select** | ボリューメトリック選択用の3D球体ボリュームを作成します。シーン内の任意の場所をダブルクリックして球の中心を配置します。移動ギズモを使用して球を移動し、ツールバーで半径値を調整します。**Set**をクリックして現在の選択を置き換え、**Add**で選択に追加、**Remove**で選択から削除します。 |
+| ![Box Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-box.svg) **Box Select** | ボリューメトリック選択用の3D矩形ボリュームを作成します。シーン内の任意の場所をダブルクリックしてボックスの中心を配置します。移動ギズモを使用してボックスを移動し、ツールバーで寸法（LenX、LenY、LenZ）を調整します。**Set**をクリックして現在の選択を置き換え、**Add**で選択に追加、**Remove**で選択から削除します。これは3D空間の特定領域内のSplatsを選択するのに最適です。 |
 
 </div>
 
-選択に満足したら、Deleteキーで削除できます。
+### 選択修飾キー
+
+すべての2D選択ツール（Picker、Lasso、Polygon、Brush、Flood）は、選択の適用方法を制御する修飾キーをサポートしています：
+
+| 修飾キー | アクション |
+|----------|--------|
+| **なし** | 新しい選択で現在の選択を置き換える |
+| **Shift** | 現在の選択に追加 |
+| **Ctrl / Cmd** | 現在の選択から削除 |
+
+3D選択ツール（Sphere Select、Box Select）は、修飾キーの代わりにツールバーに**Set**、**Add**、**Remove**ボタンがあります。
+
+### Splatsの削除
+
+選択に満足したら、**Delete**キーで削除できます。
 
 ## Splatsの変形
 
