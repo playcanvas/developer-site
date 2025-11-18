@@ -58,10 +58,22 @@ When you select `Video` from the Render menu, a dialog will appear with several 
   - `1920x1080` (default)
   - `2560x1440`
   - `3840x2160`
+- **Format:** Choose the output video format:
+  - `MP4` (default) - Most widely compatible format, ideal for general use
+  - `WebM` - Open format, excellent for web use
+  - `MOV` - Apple QuickTime format, ideal for professional video editing workflows
+  - `MKV` - Flexible open container format supporting various codecs
+- **Codec:** Choose the video codec for compression. Available options depend on the selected format:
+  - For MP4 and MOV: `H.264` (default), `H.265/HEVC`
+  - For WebM: `VP9` (default), `AV1`
+  - For MKV: `H.264` (default), `H.265/HEVC`, `VP9`, `AV1`
 - **Frame Rate:** Choose from the following frame rates:
   - `12 fps`
+  - `15 fps`
   - `24 fps`
+  - `25 fps`
   - `30 fps` (default)
+  - `48 fps`
   - `60 fps`
   - `120 fps`
 - **Bitrate:** Adjust the quality of your video by choosing a higher or lower bitrate. Options are:
@@ -69,6 +81,7 @@ When you select `Video` from the Render menu, a dialog will appear with several 
   - `Medium`
   - `High` (default)
   - `Ultra`
+- **Frame Range:** Specify the start and end frames from the Timeline to include in your video. By default, the entire Timeline is rendered.
 - **Portrait Mode:** If checked, the resolution will be flipped to be vertical. This is useful if you intend your video to be viewed in portrait on mobile.
 - **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the video.
 
@@ -82,7 +95,7 @@ Once you've configured your settings:
 
 :::tip Browser Recommendation for Video Rendering
 
-We recommend using a Chromium-based browser (Chrome, Edge, Opera, etc.) for rendering videos. Browsers that support the [FileSystem API](https://caniuse.com/native-filesystem-api) will ask you to pick a destination mp4 filename and will then stream out the file during the encoding process instead of having to do it in memory. This allows for the recording of much larger videos without running into memory limitations.
+We recommend using a Chromium-based browser (Chrome, Edge, Opera, etc.) for rendering videos. Browsers that support the [FileSystem API](https://caniuse.com/native-filesystem-api) will ask you to pick a destination filename and will then stream out the file during the encoding process instead of having to do it in memory. This allows for the recording of much larger videos without running into memory limitations.
 
 :::
 
