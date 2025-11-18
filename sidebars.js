@@ -775,8 +775,8 @@ const sidebars = {
               },
               items: [
                 'user-manual/gaussian-splatting/editing/supersplat/interface',
-                'user-manual/gaussian-splatting/editing/supersplat/managing-projects',
                 'user-manual/gaussian-splatting/editing/supersplat/import-export',
+                'user-manual/gaussian-splatting/editing/supersplat/managing-projects',
                 'user-manual/gaussian-splatting/editing/supersplat/camera-controls',
                 'user-manual/gaussian-splatting/editing/supersplat/editing-splats',
                 'user-manual/gaussian-splatting/editing/supersplat/data-panel',
