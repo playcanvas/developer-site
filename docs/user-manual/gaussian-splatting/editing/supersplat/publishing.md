@@ -45,7 +45,7 @@ To publish your splat:
 
 :::note
 
-It may take a minute or two to generate the thumbnail for your splat so be patient! ⏳
+It may take several minutes to compress your splat to SOG format during the publishing process, so be patient! ⏳
 
 :::
 
