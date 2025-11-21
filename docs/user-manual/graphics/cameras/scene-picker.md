@@ -93,4 +93,3 @@ These engine examples demonstrate the picker in action:
 [5]: https://api.playcanvas.com/engine/classes/Picker.html#destroy
 [6]: https://playcanvas.github.io/#gaussian-splatting/picking
 [7]: https://playcanvas.github.io/#/graphics/area-picker
-
