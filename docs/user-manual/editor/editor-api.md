@@ -1,6 +1,5 @@
 ---
 title: Editor API
-sidebar_position: 8
 ---
 
 :::warning
@@ -24,7 +23,7 @@ The API can be accessed via the browser's devtools console allowing for automati
 Editor API code:
 
 ```javascript
-(function(){
+(function() {
     const entities = editor.api.globals.entities.root.listByTag('red');
     for (const entity of entities) {
         entity.set('enabled', false);

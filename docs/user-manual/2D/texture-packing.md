@@ -1,6 +1,5 @@
 ---
 title: Using Texture Packers
-sidebar_position: 3
 ---
 
 ## What is texture packing?

@@ -1,6 +1,5 @@
 ---
 title: Node.jsでエンジンを実行する
-sidebar_position: 2
 ---
 
 [Node.js](https://nodejs.org/)は、Windows、Linux、macOSなどで動作するクロスプラットフォームのオープンソースJavaScriptランタイム環境です。これはV8 JavaScriptエンジン上で動作し、ウェブブラウザの外部でJavaScriptコードを実行します。Node.jsを使用すると、開発者はJavaScriptでコマンドラインツールやサーバーサイドスクリプティングを作成できます。

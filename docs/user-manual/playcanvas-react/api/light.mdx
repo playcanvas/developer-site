@@ -1,0 +1,50 @@
+---
+description: Documentation for the Light component
+---
+
+# `<Light/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { LightExample } from './light-example';
+import LightExampleSource from '!!raw-loader!./light-example.jsx';
+
+The `<Light/>` component allows an Entity to emit light. Any [`<Render/>`](../render) component will be lit by the light. When attached to an [`<Entity/>`](../entity), the light can be positioned and oriented using the entity's transform. Lights can be directional, omni or spot.
+
+## Usage
+
+Simply attach a `<Light/>` to an [`<Entity/>`](../entity) and it will emit light from the entity's position and rotation.
+
+```tsx
+<Entity>
+  <Light type="directional" intensity={10} />
+</Entity>
+```
+
+<CodeExample
+  label="Control light properties"
+  code={LightExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={false}
+      useGrid={true}
+      camera={[3, 3, 3]}
+      useControls={true}
+      useShadow={true}
+    >
+      <LightExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+Learn more about [Lights](https://api.playcanvas.com/engine/classes/LightComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+import { Light } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Light>;
+export default $;
+```

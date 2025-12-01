@@ -1,10 +1,8 @@
 ---
 title: ハードウェアインスタンシング
-sidebar_position: 5
 ---
 
 ハードウェアインスタンシング (Hardware instancing) は、GPUに複数の同一のメッシュを少数のドローコールでレンダリングする技術です。メッシュの各インスタンスは、異なる限定的な状態（例えば、位置や色）を持つことができます。木や弾丸などのオブジェクトを描画するのに適した技術です。
-
 
 For its support on a device, check `pc.GraphicsDevice.supportsInstancing`. In general, it is supported on all WebGL2 devices and also on the majority of WebGL1 devices using the `ANGLE_instanced_arrays` extension.
 

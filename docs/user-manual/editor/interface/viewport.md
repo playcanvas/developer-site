@@ -1,6 +1,5 @@
 ---
 title: Viewport
-sidebar_position: 3
 ---
 
 ![Viewport](/img/user-manual/editor/viewport/viewport.jpg)

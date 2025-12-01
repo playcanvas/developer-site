@@ -1,6 +1,5 @@
 ---
 title: Hand Tracking
-sidebar_position: 6
 ---
 
 If the platform supports [WebXR Hand Input][1], then an input source can have associated hand data, which is exposed as an [XrHand][2], and its data in the form of [XrFinger][3]s and [XrJoint][4]s for an application developer to use, such as wrist, fingers, joints, tips and events for detecting when hands lose/restore tracking.

@@ -1,0 +1,57 @@
+.code-example-demo {
+    position: relative;
+    height: 500px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.code-example-demo-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: right;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.code-example-controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+}
+
+.code-example-demo-footer a {
+    color: var(--ifm-color-primary);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.code-example-demo .overlay {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+}
+
+.overlay button {
+    margin-right: 1rem;
+    cursor: pointer;
+    color: var(--ifm-color-primary-dark);
+    font-weight: bold;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.5rem 1rem;
+}
+
+.overlay button:hover {
+    background-color: var(--ifm-color-primary-lighter);
+}
+
+.overlay button[data-selected="true"] {
+    background-color: var(--ifm-color-primary-darkest);
+    color: var(--ifm-color-primary-lightest);
+}

@@ -1,6 +1,5 @@
 ---
 title: Input Sources
-sidebar_position: 5
 ---
 
 An [XrInputSource][1] represents an input mechanism that allows the user to interact with a virtual world. Those include but are not limited to handheld controllers, optically tracked hands, gaze-based input methods, and touch screens. However, an input source is not explicitly associated with traditional gamepads, mice or keyboards.

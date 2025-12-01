@@ -1,0 +1,111 @@
+/* src/components/playcanvas-react/RenderApiDocs.css */
+
+/* Error state */
+.api-docs-error {
+  padding: 1rem;
+  border: 1px solid var(--ifm-color-danger);
+  border-radius: var(--ifm-border-radius);
+  background: var(--ifm-color-danger-contrast-background);
+  color: var(--ifm-color-danger-contrast-foreground);
+}
+
+/* Definition container */
+.api-docs-definition {
+  margin-bottom: 2rem;
+  border: 1px solid var(--ifm-border-color);
+  border-radius: var(--ifm-border-radius);
+  overflow: hidden;
+}
+
+/* Properties table */
+.api-docs-properties {
+  background: var(--ifm-background-color);
+  width: 100%;
+  overflow-x: auto;
+}
+
+.api-docs-properties table {
+  width: 100% !important;
+  border-collapse: collapse;
+  margin: 0;
+  table-layout: auto;
+  min-width: 100%;
+  display: table;
+}
+
+.api-docs-properties thead,
+.api-docs-properties tbody {
+  width: 100%;
+  display: table-header-group;
+}
+
+.api-docs-properties tbody {
+  display: table-row-group;
+}
+
+.api-docs-properties tr {
+  width: 100%;
+  display: table-row;
+}
+
+.api-docs-properties th,
+.api-docs-properties td {
+  display: table-cell;
+}
+
+.api-docs-properties th {
+  background: transparent;
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid var(--ifm-border-color);
+}
+
+.api-docs-properties td {
+  padding: 0.75rem;
+  border: 1px solid var(--ifm-border-color);
+  vertical-align: top;
+}
+
+.api-docs-properties tr:nth-child(even) {
+  background: var(--ifm-color-emphasis-25);
+}
+
+.api-docs-properties tr:hover {
+  background: var(--ifm-color-emphasis-50);
+}
+
+/* Type cell with inline description */
+.type-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.type-cell code {
+  display: inline;
+  width: fit-content;
+  padding: 0 .5rem
+}
+
+/* Type description below the type */
+.type-description {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.4;
+  margin-top: 0.5rem;
+  font-weight: normal;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .api-docs-properties tr:nth-child(even) {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .api-docs-properties tr:hover {
+  background: var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .api-docs-properties th {
+  background: transparent;
+}

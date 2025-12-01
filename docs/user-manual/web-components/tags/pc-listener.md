@@ -2,13 +2,23 @@
 title: <pc-listener>
 ---
 
-The `<pc-listener>` tag is used to define a listener component. It has no attributes.
+The `<pc-listener>` tag is used to define a listener component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
 :::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+
+</div>
 
 ## Example
 

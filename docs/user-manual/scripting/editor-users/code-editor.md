@@ -1,6 +1,5 @@
 ---
 title: Code Editor
-sidebar_position: 3
 ---
 
 The Code Editor is an online real-time collaborative editor that allows you to edit your Script assets and also all the other text based assets like JSON, HTML, CSS etc.

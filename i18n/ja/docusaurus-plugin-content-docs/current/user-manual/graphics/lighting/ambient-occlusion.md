@@ -1,13 +1,12 @@
 ---
 title: アンビエントオクルージョン(AO)
-sidebar_position: 4
 ---
 
 アンビエントオクルージョンは、環境によるオクルージョンに基づいて、どれくらいの光が表面に到達するかを予測する技法です。
 
 PlayCanvasでは、アンビエントライティングは拡散とスペキュラの両方のAOマップで乗算されます。
 
-![Ambient Occlusion comparison: without/with](/img/user-manual/graphics/lighting/lightmapping/model-ao-comparison.jpg)
+![Ambient Occlusion comparison: without/with](/img/user-manual/graphics/lighting/lightmapping/model-ao-comparison.jpg)  
 *Left: without AO; Right: with Global AO*
 
 AOマップは、異なるスケールの場合があります。例えば、モデルの異なる部分の大きなシャドーイング効果を伴う表面の裂け目またはワールドスケールのAOを示すテクスチャ詳細AO。スケールの大きいAOは、より多くのエフェクトをもたらし、通常はUV1のライトマップと一致し、より重要です。
@@ -40,7 +39,7 @@ Editorでテクスチャをアップロードし、マテリアルのAmbient Occ
 
 上で説明したグローバルアンビエントオクルージョンを使用する[例][6]やその[project][7]をご確認ください。
 
-[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][6]
+[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][6]  
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*
 
 [0]: /user-manual/graphics/lighting/lightmapping/

@@ -2,22 +2,27 @@
 title: <pc-splat>
 ---
 
-`<pc-splat>` タグは、3D Gaussian Splats をレンダリングするためのスプラットコンポーネントを定義するために使用されます。
+`<pc-splat>`タグは、3D Gaussian Splatsをレンダリングするためのスプラットコンポーネントを定義するために使用されます。
 
-スプラットベースのシーンをレンダリングする場合、最高のパフォーマンスを得るためには、[`<pc-app>`](../pc-app) タグの `antialias` と `high-resolution` を `false` に設定することをお勧めします。
+スプラットベースのシーンをレンダリングする場合、最高のパフォーマンスを得るには、[`<pc-app>`](../pc-app)タグの`antialias`と`high-resolution`を`false`に設定することをお勧めします。
 
-:::note
+:::note[使用法]
 
-*   [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* それは、[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 | 説明 |
-| --- | --- |
-| `asset` | `gsplat` 型を持つ [`<pc-asset>`](../pc-asset) タグの `id` と一致する必要がある文字列です。 |
-| `enabled` | スプラットコンポーネントの有効状態。指定されていない場合、`true` が使用されます。 |
+<div className="attribute-table">
+
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `asset` | String | - | Gaussian splatアセットID (`gsplat`タイプのアセットを参照する必要があります) |
+| `cast-shadows` | Flag | - | スプラットコンポーネントが影を落とすかどうか |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+
+</div>
 
 ## 例
 
@@ -25,6 +30,6 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 <CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
 
-## JavaScript インターフェース
+## JavaScriptインターフェース
 
-[SplatComponentElement API](https://api.playcanvas.com/web-components/classes/SplatComponentElement.html) を使用して、`<pc-splat>` 要素をプログラムで作成および操作できます。
+[SplatComponentElement API](https://api.playcanvas.com/web-components/classes/SplatComponentElement.html)を使用して、`<pc-splat>`要素をプログラムで作成および操作できます。

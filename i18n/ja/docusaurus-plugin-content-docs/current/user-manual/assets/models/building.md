@@ -1,6 +1,5 @@
 ---
 title: PlayCanvas用の3Dモデル作成
-sidebar_position: 2
 ---
 
 PlayCanvasではアートやアニメーションの構築は、ほとんど全ての利用可能な3Dモデリングプログラムを使用して行うことができます。例：Blender、SketchUp、Autodesk 3D Studio Max、Autodesk Maya。
@@ -20,9 +19,8 @@ GLBのインポートでは、以下のglTF機能がサポートされ、非常�
 
 そのため、PlayCanvasを対象とする場合、特別なアートツールプラグインを使用する必要はなく、従う必要のあるPlayCanvas固有のワークフローはありません。
 
-![GLB Import Example](/img/user-manual/assets/models/building/glb-import.gif)
-
-(モデル：Loïc Norgeot、蚊のスキャン：Geoffrey Marchal for [Sketchfab][13]、[CC BY 4.0][12]でライセンスされています。)
+![GLBインポートの例](/img/user-manual/assets/models/building/glb-import.gif)  
+*Loïc NorgeotによるモデルとGeoffrey Marchalによる蚊のスキャンは、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)ライセンスに基づき[Sketchfab](https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1)から提供されています*
 
 PlayCanvasは、FBXファイルのインポートもサポートしており、これはより一般的な相互運用形式の1つです。ただし、FBXのマテリアルはGLTFのマテリアルよりも忠実にはインポートされず、インポート後に編集が必要な場合があります。
 
@@ -41,7 +39,7 @@ PlayCanvasは、FBXファイルのインポートもサポートしており、�
 - 無料: Blender, Pixexix Free, xNormal, MaPZone, GIMP, Krita desktop, MyPaint
 - 有料: Substance Designer (Substance Painter や Bitmap2Materialも含む), Photoshop, Quixel NDO and DDO, CrazyBump, Pixexix Pro, Clip Studio Paint/Manga Studio, SERIF DrawPlus/PhotoPlus
 
-モデリングについて上記に記載されているプログラムの多くはテクスチャペイントを可能にします。より多くのオプションをご希望の場合、この[外部wiki][1]ページをご確認ください。一部には古い情報もありますのでご注意ください。
+モデリングについて上記に記載されているプログラムの多くはテクスチャペイントを可能にします。より多くのオプションをご希望の場合、この[外部wiki](http://wiki.polycount.com/wiki/Tools)ページをご確認ください。一部には古い情報もありますのでご注意ください。
 
 ## メッシュ作成に関する一般的な注意点
 
@@ -56,7 +54,7 @@ PlayCanvasは、FBXファイルのインポートもサポートしており、�
 
 ![Blender Logo](/img/user-manual/assets/models/building/blender-logo.jpg)
 
-[Blender][4]は素晴らしいフリーの3Dモデリングツールで、PlayCanvas用の3Dアセットを作るために最適です。
+[Blender](https://www.blender.org/)は素晴らしいフリーの3Dモデリングツールで、PlayCanvas用の3Dアセットを作るために最適です。
 
 BlenderはGLB、FBX、COLLADAにエクスポートすることができますが、ビルトインエクスポータにはいくつかの制限があります。
 
@@ -72,7 +70,7 @@ BlenderのCOLLADAエクスポーターはテクスチャをモデルファイル
 
 Blenderの2.71リリースでは、複数の埋め込みテクスチャを直接Blenderからエクスポートできるようになりました。まず、オブジェクトがBlender内で正しくレンダリングされていることを確認してください。FBXにエクスポートする際に、'Path Mode'をCopyに設定し、'Embed Textures'ボックスをチェックしてください。
 
-あるいは、[Autodesk FBX Converter][5]を使ってBlenderからエクスポートしたファイルをメディアを埋め込んだファイルに変換することもできます。FBX Converterでファイルを開き、*Embedded Media*チェックボックスをチェックしてセーブしなおしてください。
+あるいは、[Autodesk FBX Converter](https://www.autodesk.com/developer-network/platform-technologies/fbx-converter-archives)を使ってBlenderからエクスポートしたファイルをメディアを埋め込んだファイルに変換することもできます。FBX Converterでファイルを開き、_Embedded Media_チェックボックスをチェックしてセーブしなおしてください。
 
 :::warning
 
@@ -90,8 +88,8 @@ blendファイル内に含まれるアニメーションは、デフォルトの
 
 Blenderの使い方については様々な資料がweb上にあります。私達は以下の二つをおすすめします:
 
-- [Blender Cookie][2]
-- [Blender Guru][6]
+- [Blender Cookie](https://cgcookie.com/learn-blender)
+- [Blender Guru](https://www.blenderguru.com/)
 
 ---
 
@@ -168,11 +166,3 @@ Sphereマップはコストのかからない、もっとも信頼性の低い�
 Mayaでは、標準的なマテリアルタイプであるlambert、blinn、およびphongを使用するべきです。以下のスクリーンショットのハイライトされた領域は、PlayCanvasへのエクスポート時に利用されるマテリアル設定を示しています。
 
 ![Maya material editor](/img/user-manual/assets/models/building/maya-material-editor.jpg)
-
-[1]: http://wiki.polycount.com/wiki/Tools
-[2]: https://cgcookie.com/learn-blender
-[4]: https://www.blender.org/
-[5]: https://www.autodesk.com/developer-network/platform-technologies/fbx-converter-archives
-[6]: https://www.blenderguru.com/
-[12]: https://creativecommons.org/licenses/by/4.0/
-[13]: https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1

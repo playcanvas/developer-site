@@ -26,7 +26,7 @@ Here are examples of it being used on desktop:
 
 And on mobile:
 
-<div class="centered"><video height="360" controls src="/img/tutorials/ui-text-input/mobile-preview.mp4"></video></div>
+<video autoPlay muted loop controls src='/video/tutorial-text-input.mp4' style={{width: '100%', height: 'auto'}} />
 
 :::note
 

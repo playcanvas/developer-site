@@ -1,6 +1,5 @@
 ---
 title: User Interface
-sidebar_position: 16
 ---
 
 User Interfaces present a unique challenge for graphical applications. There are several options for building User Interfaces in PlayCanvas.

@@ -1,6 +1,5 @@
 ---
 title: Getting Started
-sidebar_position: 1
 ---
 
 This guide covers the basic structure and concepts you need to understand when writing PlayCanvas scripts, whether you're using the modern ESM approach or the classic system.

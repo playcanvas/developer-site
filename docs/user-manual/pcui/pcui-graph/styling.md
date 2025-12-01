@@ -1,6 +1,5 @@
 ---
 title: Styling
-sidebar_position: 5
 ---
 
 You can style your graph by overriding its default style properties. This can be achieved by modifying the defaultStyles passed in as part of an options object to the graph constructor.

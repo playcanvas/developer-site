@@ -1,6 +1,5 @@
 ---
 title: Clustered Lighting
-sidebar_position: 6
 ---
 
 :::note

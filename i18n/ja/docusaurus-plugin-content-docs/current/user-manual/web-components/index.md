@@ -1,9 +1,8 @@
 ---
-title: Engine Web Components
-sidebar_position: 5.5
+title: PlayCanvas Web Components
 ---
 
-PlayCanvas Engine Web Components は、インタラクティブな3Dコンテンツをウェブページに直接埋め込むことを非常に簡単にする、強力なカスタムHTML要素のセットです。最新のウェブ標準に基づいて構築されており、これらのコンポーネントは従来のウェブ開発と3Dグラフィックスの間のギャップを埋め、シンプルなHTMLマークアップで没入型のエクスペリエンスを作成することを可能にします。
+PlayCanvas Web Components は、インタラクティブな3Dコンテンツをウェブページに直接埋め込むことを非常に簡単にする、強力なカスタムHTML要素のセットです。最新のウェブ標準に基づいて構築されており、これらのコンポーネントは従来のウェブ開発と3Dグラフィックスの間のギャップを埋め、シンプルなHTMLマークアップで没入型のエクスペリエンスを作成することを可能にします。
 
 ## Web Componentsとは？
 

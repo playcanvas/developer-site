@@ -4,7 +4,7 @@ title: <pc-screen>
 
 The `<pc-screen>` tag is used to define a screen component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -12,16 +12,17 @@ The `<pc-screen>` tag is used to define a screen component.
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
-| Attribute | Description |
-| --- | --- |
-| `blend` | Valueless attribute. If present, the screen component blends. |
-| `priority` | The priority of the screen component. Must be an integer between `0` and `255`. If not specified, `0` is used. |
-| `reference-resolution` | The reference resolution of the screen component. Specified as a space-separated list of Width and Height values. If not specified, `640 320` is used. |
-| `resolution` | The resolution of the screen component. Specified as a space-separated list of Width and Height values. If not specified, `640 320` is used. |
-| `scale-blend` | The scale blend of the screen component. Must be a number between `0` and `1`. If not specified, `0.5` is used. |
-| `screen-space` | Valueless attribute. If present, the screen component is in screen space. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `blend` | Flag | - | Whether to enable alpha blending |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `priority` | Number | `"0"` | Rendering priority (0-255) |
+| `reference-resolution` | Vector2 | `"640 320"` | Reference resolution as "Width Height" values |
+| `resolution` | Vector2 | `"640 320"` | Screen resolution as "Width Height" values |
+| `scale-blend` | Number | `"0.5"` | Scale blending factor (0-1) |
+| `screen-space` | Flag | - | Whether to render in screen space |
 
 </div>
 
@@ -33,7 +34,7 @@ The `<pc-screen>` tag is used to define a screen component.
     <pc-screen></pc-screen>
     <!-- render some text on the parent screen -->
     <pc-entity>
-        <pc-element type="text" asset="arial"text="Hello, World!"></pc-element>
+        <pc-element type="text" asset="arial" text="Hello, World!"></pc-element>
     </pc-entity>
 </pc-entity>
 ```

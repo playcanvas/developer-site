@@ -1,6 +1,5 @@
 ---
 title: Lights
-sidebar_position: 1
 ---
 
 In the real world, the environment around you is lit from many sources. The Sun, street lights, TV screens and so on. In a PlayCanvas scene, you have the ability to set up a number of different types of light sources and the shape of the light source to approximate the different types of light we find in reality.
@@ -90,11 +89,11 @@ Below is a table of some common use cases each light source shape and light type
 
 | Shape/Type    | Punctual      | Rectangle               | Disk                  | Sphere              |
 | ------------- |---------------| ------------------------| ----------------------| --------------------|
-| Directional   | sun           | x                       | sun or moon           | sun or moon         |
-| Omni          | unshaded bulb | x                       | x                     | unshaded round bulb |
+| Directional   | sun           | ❌                      | sun or moon           | sun or moon         |
+| Omni          | unshaded bulb | ❌                      | ❌                    | unshaded round bulb |
 | Spot          | torch         | tv screen               | shaded bulb           | shaded round bulb   |
 
-x = no common use cases - but still can be used for application/game specific lighting effects.
+❌ = no common use cases - but still can be used for application/game specific lighting effects.
 
 ## Performance Considerations {#performance-considerations}
 

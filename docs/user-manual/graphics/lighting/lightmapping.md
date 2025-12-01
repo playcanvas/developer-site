@@ -1,6 +1,5 @@
 ---
 title: Lightmapping
-sidebar_position: 3
 ---
 
 [![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][13]

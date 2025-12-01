@@ -3,116 +3,28 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.userManualSidebar.category.はじめに": {
-    "message": "はじめに",
-    "description": "The label for category はじめに in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.プロフィール": {
-    "message": "プロフィール",
-    "description": "The label for category プロフィール in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.Organization": {
-    "message": "Organization",
-    "description": "The label for category Organization in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.プロジェクトのダッシュボード": {
-    "message": "プロジェクトのダッシュボード",
-    "description": "The label for category プロジェクトのダッシュボード in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.エディター": {
-    "message": "エディター",
-    "description": "The label for category エディター in sidebar userManualSidebar"
-  },
   "sidebar.userManualSidebar.category.Launch Page": {
     "message": "Launch Page",
     "description": "The label for category Launch Page in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Scenes": {
-    "message": "Scenes",
+    "message": "シーン",
     "description": "The label for category Scenes in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.コンポーネント": {
-    "message": "コンポーネント",
-    "description": "The label for category コンポーネント in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.アセット": {
-    "message": "アセット",
-    "description": "The label for category アセット in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.Asset Types": {
-    "message": "Asset Types",
-    "description": "The label for category Asset Types in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.アセットインポートのパイプライン": {
-    "message": "アセットインポートのパイプライン",
-    "description": "The label for category アセットインポートのパイプライン in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.Importing 3D Models": {
-    "message": "Importing 3D Models",
-    "description": "The label for category Importing 3D Models in sidebar userManualSidebar"
-  },
   "sidebar.userManualSidebar.category.Asset Store": {
-    "message": "Asset Store",
+    "message": "アセットストア",
     "description": "The label for category Asset Store in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.エンジン": {
-    "message": "エンジン",
-    "description": "The label for category エンジン in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.スクリプティング": {
-    "message": "スクリプティング",
-    "description": "The label for category スクリプティング in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.テンプレート": {
-    "message": "テンプレート",
-    "description": "The label for category テンプレート in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.バージョン管理": {
-    "message": "バージョン管理",
-    "description": "The label for category バージョン管理 in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.グラフィック": {
-    "message": "グラフィック",
-    "description": "The label for category グラフィック in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.カメラ": {
-    "message": "カメラ",
-    "description": "The label for category カメラ in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.ライティング": {
-    "message": "ライティング",
-    "description": "The label for category ライティング in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.物理ベースレンダリング (PBR)": {
-    "message": "物理ベースレンダリング (PBR)",
-    "description": "The label for category 物理ベースレンダリング (PBR) in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.ポストエフェクト": {
-    "message": "ポストエフェクト",
-    "description": "The label for category ポストエフェクト in sidebar userManualSidebar"
-  },
   "sidebar.userManualSidebar.category.Advanced Rendering": {
-    "message": "Advanced Rendering",
+    "message": "高度なレンダリング",
     "description": "The label for category Advanced Rendering in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.アニメーション": {
-    "message": "アニメーション",
-    "description": "The label for category アニメーション in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.物理演算": {
-    "message": "物理演算",
-    "description": "The label for category 物理演算 in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.2D": {
     "message": "2D",
     "description": "The label for category 2D in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.ユーザインターフェース": {
-    "message": "ユーザインターフェース",
-    "description": "The label for category ユーザインターフェース in sidebar userManualSidebar"
-  },
   "sidebar.userManualSidebar.category.Optimization": {
-    "message": "Optimization",
+    "message": "最適化",
     "description": "The label for category Optimization in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.XR": {
@@ -126,22 +38,6 @@
   "sidebar.userManualSidebar.category.AR": {
     "message": "AR",
     "description": "The label for category AR in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.プロジェクトの公開方法": {
-    "message": "プロジェクトの公開方法",
-    "description": "The label for category プロジェクトの公開方法 in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.ウェブ": {
-    "message": "ウェブ",
-    "description": "The label for category ウェブ in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.モバイル": {
-    "message": "モバイル",
-    "description": "The label for category モバイル in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.プレイアブル広告": {
-    "message": "プレイアブル広告",
-    "description": "The label for category プレイアブル広告 in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.REST API": {
     "message": "REST API",
@@ -166,5 +62,209 @@
   "sidebar.shaderEditorSidebar.category.インスペクターペイン": {
     "message": "インスペクターペイン",
     "description": "The label for category インスペクターペイン in sidebar shaderEditorSidebar"
+  },
+  "sidebar.userManualSidebar.category.Getting Started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Getting Started.general-getting-started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started (General) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Getting Started.editor-getting-started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started (Editor) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Getting Started.react-getting-started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started (React) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Account Management": {
+    "message": "アカウント管理",
+    "description": "The label for category Account Management in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.User Accounts": {
+    "message": "ユーザーアカウント",
+    "description": "The label for category User Accounts in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Organizations": {
+    "message": "組織",
+    "description": "The label for category Organizations in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.PlayCanvas Engine": {
+    "message": "PlayCanvas Engine",
+    "description": "The label for category PlayCanvas Engine in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.PlayCanvas Web Components": {
+    "message": "PlayCanvas Web Components",
+    "description": "The label for category PlayCanvas Web Components in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Tags": {
+    "message": "タグリファレンス",
+    "description": "The label for category Tags in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.PlayCanvas React": {
+    "message": "PlayCanvas React",
+    "description": "The label for category PlayCanvas React in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.PlayCanvas Editor": {
+    "message": "PlayCanvas Editor",
+    "description": "The label for category PlayCanvas Editor in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Projects": {
+    "message": "プロジェクト",
+    "description": "The label for category Projects in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Editor Interface": {
+    "message": "エディターインターフェース",
+    "description": "The label for category Editor Interface in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Templates": {
+    "message": "テンプレート",
+    "description": "The label for category Templates in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Version Control": {
+    "message": "バージョン管理",
+    "description": "The label for category Version Control in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Publishing": {
+    "message": "公開",
+    "description": "The label for category Publishing in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Web": {
+    "message": "Web",
+    "description": "The label for category Web in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Mobile": {
+    "message": "モバイル",
+    "description": "The label for category Mobile in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Playable Ads": {
+    "message": "プレイアブル広告",
+    "description": "The label for category Playable Ads in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Components": {
+    "message": "コンポーネント",
+    "description": "The label for category Components in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Assets": {
+    "message": "アセット",
+    "description": "The label for category Assets in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Types": {
+    "message": "タイプ",
+    "description": "The label for category Types in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Import Pipeline": {
+    "message": "インポートパイプライン",
+    "description": "The label for category Import Pipeline in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Models": {
+    "message": "モデル",
+    "description": "The label for category Models in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Scripting": {
+    "message": "スクリプティング",
+    "description": "The label for category Scripting in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Scripting Fundamentals": {
+    "message": "スクリプティングの基礎",
+    "description": "The label for category Scripting Fundamentals in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Script Attributes": {
+    "message": "スクリプト属性",
+    "description": "The label for category Script Attributes in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Scripting for Editor Users": {
+    "message": "エディターユーザー向けスクリプティング",
+    "description": "The label for category Scripting for Editor Users in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Debugging": {
+    "message": "デバッグ",
+    "description": "The label for category Debugging in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Graphics": {
+    "message": "グラフィック",
+    "description": "The label for category Graphics in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Cameras": {
+    "message": "カメラ",
+    "description": "The label for category Cameras in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Lighting": {
+    "message": "ライティング",
+    "description": "The label for category Lighting in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Physically Based Rendering": {
+    "message": "物理ベースレンダリング",
+    "description": "The label for category Physically Based Rendering in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Linear Workflow": {
+    "message": "リニアワークフロー",
+    "description": "The label for category Linear Workflow in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Shaders": {
+    "message": "シェーダー",
+    "description": "The label for category Shaders in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Post Effects": {
+    "message": "ポストエフェクト",
+    "description": "The label for category Post Effects in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Gaussian Splatting": {
+    "message": "ガウシアン・スプラッティング",
+    "description": "The label for category Gaussian Splatting in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Creating Splats": {
+    "message": "スプラットの作成",
+    "description": "The label for category Creating Splats in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Editing and Publishing Splats": {
+    "message": "スプラットの編集と公開",
+    "description": "The label for category Editing and Publishing Splats in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Building Splat Applications": {
+    "message": "スプラットアプリケーションの構築",
+    "description": "The label for category Building Splat Applications in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Your First Splat App": {
+    "message": "はじめてのスプラットアプリ",
+    "description": "The label for category Your First Splat App in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.SuperSplat": {
+    "message": "SuperSplat",
+    "description": "The label for category SuperSplat in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Rendering Splats": {
+    "message": "スプラットのレンダリング",
+    "description": "The label for category Rendering Splats in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Animation": {
+    "message": "アニメーション",
+    "description": "The label for category Animation in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Physics": {
+    "message": "物理演算",
+    "description": "The label for category Physics in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.User Interface": {
+    "message": "ユーザーインターフェース",
+    "description": "The label for category User Interface in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.PCUI": {
+    "message": "PCUI",
+    "description": "The label for category PCUI in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Data Binding": {
+    "message": "データバインディング",
+    "description": "The label for category Data Binding in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Examples": {
+    "message": "例",
+    "description": "The label for category Examples in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.PCUI Graph": {
+    "message": "PCUIグラフ",
+    "description": "The label for category PCUI Graph in sidebar userManualSidebar"
   }
 }

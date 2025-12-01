@@ -1,0 +1,160 @@
+---
+description: Subscribe to PlayCanvas application events
+---
+
+# `useAppEvent`
+
+The `useAppEvent` hook allows you to subscribe to PlayCanvas application events with proper TypeScript typing and automatic cleanup. It supports both built-in events and custom events.
+
+## Basic Usage
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+function MyComponent() {
+  useAppEvent('update', (dt) => {
+    console.log('Frame time:', dt)
+  })
+  
+  useAppEvent('prerender', () => {
+    console.log('Pre-rendering')
+  })
+  
+  return null
+}
+```
+
+## Parameters
+
+- **event** (`TEventName`) - The event name to subscribe to
+- **callback** (`TEventMap[TEventName]`) - The callback function to execute when the event fires
+
+## Built-in Events
+
+### Update Event
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+function UpdateHandler() {
+  useAppEvent('update', (dt) => {
+    // dt is the delta time since the last frame
+    console.log('Delta time:', dt)
+    
+    // Your update logic here
+    // This runs every frame
+  })
+  
+  return null
+}
+```
+
+### Render Events
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+function RenderHandler() {
+  useAppEvent('prerender', () => {
+    console.log('About to render frame')
+    // Pre-render logic
+  })
+  
+  useAppEvent('postrender', () => {
+    console.log('Finished rendering frame')
+    // Post-render logic
+  })
+  
+  return null
+}
+```
+
+## Custom Events
+
+You can define custom event types with TypeScript:
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+// Define your custom event map
+interface MyEventMap {
+  levelComplete: (level: number, score: number) => void
+  playerDeath: (position: [number, number, number]) => void
+  itemCollected: (itemId: string, quantity: number) => void
+}
+
+function GameEventHandler() {
+  useAppEvent<MyEventMap>('levelComplete', (level, score) => {
+    console.log(`Level ${level} completed with score ${score}`)
+  })
+  
+  useAppEvent<MyEventMap>('playerDeath', (position) => {
+    console.log('Player died at position:', position)
+  })
+  
+  useAppEvent<MyEventMap>('itemCollected', (itemId, quantity) => {
+    console.log(`Collected ${quantity} of item ${itemId}`)
+  })
+  
+  return null
+}
+```
+
+## Event Firing
+
+To fire custom events, you need access to the app instance:
+
+```jsx copy
+import { useAppEvent, useApp } from '@playcanvas/react/hooks'
+
+function EventFirer() {
+  const app = useApp()
+  
+  useAppEvent('update', (dt) => {
+    // Fire custom events
+    app.fire('levelComplete', 1, 1000)
+    app.fire('playerDeath', [0, 0, 0])
+    app.fire('itemCollected', 'coin', 1)
+  })
+  
+  return null
+}
+```
+
+## Input Handling
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+interface InputEvents {
+  keyDown: (key: string) => void
+  keyUp: (key: string) => void
+  mouseClick: (x: number, y: number) => void
+  mouseMove: (x: number, y: number) => void
+}
+
+function InputHandler() {
+  useAppEvent<InputEvents>('keyDown', (key) => {
+    console.log('Key pressed:', key)
+  })
+  
+  useAppEvent<InputEvents>('keyUp', (key) => {
+    console.log('Key released:', key)
+  })
+  
+  useAppEvent<InputEvents>('mouseClick', (x, y) => {
+    console.log('Mouse clicked at:', x, y)
+  })
+  
+  useAppEvent<InputEvents>('mouseMove', (x, y) => {
+    console.log('Mouse moved to:', x, y)
+  })
+  
+  return null
+}
+```
+
+## Related
+
+- [useApp](../use-app) - Access the Application instance
+- [Application Events](https://api.playcanvas.com/engine/classes/Application.html#events) - PlayCanvas application events documentation

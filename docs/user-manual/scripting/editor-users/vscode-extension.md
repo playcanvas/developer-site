@@ -1,6 +1,5 @@
 ---
 title: VS Code Extension
-sidebar_position: 4
 ---
 
 The PlayCanvas VS Code Extension provides a powerful, real-time editing environment for working with text-based assets from the PlayCanvas Editor. Designed for developers who prefer modern tooling such as IntelliSense, source control, GitHub Copilot, and AI-enabled workflows, the extension integrates VS Code directly with your PlayCanvas projects.

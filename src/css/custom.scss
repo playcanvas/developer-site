@@ -15,6 +15,7 @@
   --ifm-color-primary-lightest: #ffd4b7;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --doc-sidebar-width: 310px;
 
   /* shadows */
   --ring-offset-shadow: 0 0 #0000;
@@ -148,8 +149,25 @@ html[data-theme='dark'] .navbar--github-link:before {
 }
 
 /* used by web components tag reference tables */
-.nowrap-first-col td:first-child {
+.attribute-table td:nth-child(1),
+.attribute-table td:nth-child(2), 
+.attribute-table td:nth-child(3),
+.attribute-table th:nth-child(1),
+.attribute-table th:nth-child(2),
+.attribute-table th:nth-child(3) {
   white-space: nowrap;
+}
+
+/* prevent wrapping in first column of tables */
+.no-wrap-first-col td:nth-child(1),
+.no-wrap-first-col th:nth-child(1) {
+  white-space: nowrap;
+  padding-right: 2.5rem;
+}
+
+.no-wrap-first-col td:nth-child(1) img {
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
 .example-demo {
@@ -225,4 +243,27 @@ html[data-theme='dark'] .navbar--github-link:before {
 
 .underline {
   text-decoration: underline;
+}
+
+/* Sidebar section headers */
+.sidebar-section-header {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ifm-color-emphasis-600);
+  margin: 1.5rem 0 0.5rem 0;
+  padding: 0.25rem 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding-left: var(--ifm-menu-link-padding-horizontal);
+}
+
+.sidebar-section-header:first-of-type {
+  margin-top: 0.75rem;
+  border-top: none;
+}
+
+[data-theme='dark'] .sidebar-section-header {
+  color: var(--ifm-color-emphasis-500);
+  border-top-color: var(--ifm-color-emphasis-300);
 }

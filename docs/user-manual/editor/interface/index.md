@@ -1,6 +1,5 @@
 ---
 title: Editor Interface
-sidebar_position: 2
 ---
 
 ![Editor Interface](/img/user-manual/editor/interface/editor-interface.png)

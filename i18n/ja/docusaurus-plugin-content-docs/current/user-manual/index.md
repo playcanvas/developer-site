@@ -1,13 +1,9 @@
 ---
-title: ユーザーマニュアル
-sidebar_position: 0.5
+title: ようこそ
 ---
 
-PlayCanvasユーザーマニュアルは、PlayCanvasプラットフォームを使いこなすための詳細なガイドです。このマニュアルでは、JavaScriptを用いてエンジンにコーディングすることから始まり、PlayCanvasエディターを使用して[シーン][1]を構築し、ゲームをウェブやモバイルアプリストアに公開する方法までを紹介します。
+PlayCanvas User Manualへようこそ。PlayCanvasを学ぶ刺激的な旅が今、始まります！
 
-このマニュアルを最初から最後まで読めば、PlayCanvasを使用してゲームを作る流れを理解することができるでしょう。
+![PlayCanvas Demos](/img/user-manual/playcanvas-demos.webp)
 
-[それでははじめましょう！][2]
-
-[1]: /user-manual/glossary#scene
-[2]: /user-manual/getting-started
+[始めましょう](getting-started)！

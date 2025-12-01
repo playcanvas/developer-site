@@ -1,13 +1,12 @@
 ---
 title: Ambient Occlusion
-sidebar_position: 4
 ---
 
 Ambient Occlusion is a technique to approximate how much light gets onto the surface based on its occlusion by the environment.
 
 In PlayCanvas, ambient lighting is multiplied by the AO map, both diffuse and specular.
 
-![Ambient Occlusion comparison: without/with](/img/user-manual/graphics/lighting/lightmapping/model-ao-comparison.jpg)
+![Ambient Occlusion comparison: without/with](/img/user-manual/graphics/lighting/lightmapping/model-ao-comparison.jpg)  
 *Left: without AO; Right: with Global AO*
 
 AO map can be of different scale. E.g. a texture detail AO, showing surface crevices or a world-scale AO with large shadowing effect of different parts of the model. Large-scale AO will give more effect, it usually matches lightmaps on UV1, and is more important.
@@ -40,7 +39,7 @@ Simply upload texture in Editor and apply it on Ambient Occlusion slot on materi
 
 You can [explore example][6] that uses global Ambient Occlusion described above and its [project][7].
 
-[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][6]
+[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][6]  
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*
 
 [0]: /user-manual/graphics/lighting/lightmapping/

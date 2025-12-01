@@ -2,30 +2,34 @@
 title: <pc-sky>
 ---
 
-`<pc-sky>` タグはスカイコンポーネントを定義するために使用されます。
+`<pc-sky>`タグは、スカイコンポーネントを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
-* [`<pc-scene>`](../pc-scene) の直接の子である必要があります。
+* [`<pc-scene>`](../pc-scene)の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 | 説明 |
-| --- | --- |
-| `asset` | `texture` 型の [`<pc-asset>`](../pc-asset) タグの `id` と一致する文字列です。 |
-| `center` | スカイの中心です。0から1の範囲のX、Y、Z値をスペース区切りで指定します。指定しない場合、`0 0.01 0`が使用されます。 |
-| `intensity` | スカイの強度です。指定しない場合、`1`が使用されます。 |
-| `level` | スカイのレンダリングに使用されるミップマップレベルです。指定しない場合、`0`が使用されます（ベースミップレベル）。 |
-| `rotation` | スカイの回転です。X、Y、Z値をスペース区切りで指定します。指定しない場合、`0 0 0`が使用されます。 |
-| `scale` | スカイのスケールです。X、Y、Z値をスペース区切りで指定します。指定しない場合、`100 100 100`が使用されます。 |
-| `type` | スカイコンポーネントのタイプです。`box`、`dome`、`infinite`、または`none`のいずれかを指定できます。指定しない場合、`infinite`が使用されます。 |
+<div className="attribute-table">
+
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `asset` | String | - | テクスチャアセットID (`texture`型のアセットを参照する必要があります) |
+| `center` | Vector3 | `"0 0.01 0"` | "X Y Z"値としてのスカイの中心 (0-1の範囲) |
+| `intensity` | Number | `"1"` | スカイの明るさの強度 |
+| `level` | Number | `"0"` | レンダリングに使用するミップマップレベル |
+| `rotation` | Vector3 | `"0 0 0"` | "X Y Z"オイラー角としてのスカイの回転 |
+| `scale` | Vector3 | `"100 100 100"` | "X Y Z"値としてのスカイのスケール |
+| `type` | Enum | `"infinite"` | スカイの種類: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |
+
+</div>
 
 ## 例
 
 ```html
-<pc-asset id="skybox" src="assets/skybox.webp" preload></pc-asset>
+<pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
 <pc-scene>
     <pc-sky asset="skybox"></pc-sky>
 </pc-scene>
@@ -33,4 +37,4 @@ title: <pc-sky>
 
 ## JavaScriptインターフェース
 
-[SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html) を使用して、`<pc-sky>` 要素をプログラムで作成および操作できます。
+[SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html)を使用して、`<pc-sky>`要素をプログラムで作成および操作できます。

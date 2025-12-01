@@ -2,33 +2,34 @@
 title: <pc-light>
 ---
 
-`<pc-light>`タグはライトコンポーネントを定義するために使用されます。
+`<pc-light>`タグは、ライトコンポーネントを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
-| 属性 | 説明 |
-| --- | --- |
-| `color` | ライトの色。スペース区切りのR、G、B値、16進数のカラーコード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)として指定できます。指定されない場合、`1 1 1`が使用されます。 |
-| `cast-shadows` | 値を持たない属性。存在する場合、ライトは影を落とします。 |
-| `inner-cone-angle` | ライトのインナーコーンの角度。指定されない場合、`40`が使用されます。 |
-| `intensity` | ライトの強度。指定されない場合、`1`が使用されます。 |
-| `normal-offset-bias` | ライトのノーマルオフセットのバイアス。指定されない場合、`0.05`が使用されます。 |
-| `outer-cone-angle` | ライトのアウターコーンの角度。指定されない場合、`45`が使用されます。 |
-| `range` | ライトの範囲。指定されない場合、`10`が使用されます。 |
-| `shadow-bias` | ライトの影のバイアス。指定されない場合、`0.2`が使用されます。 |
-| `shadow-distance` | ライトの影がレンダリングされなくなる距離。指定されない場合、`16`が使用されます。 |
-| `shadow-resolution` | ライトのシャドウマップの解像度。指定されない場合、`1024`が使用されます。 |
-| `shadow-type` | シャドウマップのタイプ。`pcf1-16f`、`pcf1-32f`、`pcf3-16f`、`pcf3-32f`、`pcf5-16f`、`pcf5-32f`、`vsm-16f`、`vsm-32f`、または`pcss-32f`のいずれか。指定されない場合、`pcf3-32f`が使用されます。 |
-| `type` | ライトのタイプ。`directional`、`point`、または`omni`のいずれか。指定されない場合、`directional`が使用されます。 |
-| `vsm-bias` | VSMシャドウに使用されるバイアス。指定されない場合、`0.01`が使用されます。 |
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `cast-shadows` | Flag | - | ライトが影を落とすかどうか |
+| `color` | Color | `"1 1 1"` | スペース区切りのRGB値、16進数コード、または[名前付き色](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としてのライトの色 |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `inner-cone-angle` | Number | `"40"` | 内側コーン角度（度単位、スポットライト用） |
+| `intensity` | Number | `"1"` | ライトの強度乗数 |
+| `normal-offset-bias` | Number | `"0.05"` | シャドウレンダリング用の法線オフセットバイアス |
+| `outer-cone-angle` | Number | `"45"` | 外側コーン角度（度単位、スポットライト用） |
+| `range` | Number | `"10"` | ライトの有効距離 |
+| `shadow-bias` | Number | `"0.2"` | 影の深度バイアス |
+| `shadow-distance` | Number | `"16"` | シャドウレンダリングの最大距離 |
+| `shadow-resolution` | Number | `"1024"` | シャドウマップの解像度 |
+| `shadow-type` | Enum | `"pcf3-32f"` | 影のフィルタリング: `"pcf1-16f"` \| `"pcf1-32f"` \| `"pcf3-16f"` \| `"pcf3-32f"` \| `"pcf5-16f"` \| `"pcf5-32f"` \| `"vsm-16f"` \| `"vsm-32f"` \| `"pcss-32f"` |
+| `type` | Enum | `"directional"` | ライトのタイプ: `"directional"` \| `"omni"` \| `"spot"` |
+| `vsm-bias` | Number | `"0.01"` | バリアンスシャドウマップのバイアス |
 
 </div>
 

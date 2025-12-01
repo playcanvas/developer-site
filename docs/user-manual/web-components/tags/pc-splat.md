@@ -6,7 +6,7 @@ The `<pc-splat>` tag is used to define a splat component for rendering 3D Gaussi
 
 When rendering splat-based scenes, it is recommended to set `antialias` and `high-resolution` on your [`<pc-app>`](../pc-app) tag to `false` for best performance.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -14,10 +14,15 @@ When rendering splat-based scenes, it is recommended to set `antialias` and `hig
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `gsplat`. |
-| `enabled` | Enabled state of the splat component. If not specified, `true` is used. |
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | String | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
+| `cast-shadows` | Flag | - | Whether the splat component casts shadows |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+
+</div>
 
 ## Example
 

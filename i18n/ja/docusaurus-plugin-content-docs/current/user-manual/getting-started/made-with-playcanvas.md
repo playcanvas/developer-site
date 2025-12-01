@@ -1,6 +1,5 @@
 ---
 title: PlayCanvasの利用実績
-sidebar_position: 4
 ---
 
 以下は、PlayCanvasで作成されたWebGLブラウザゲームやエクスペリエンスの中から、最高のものをいくつか紹介したショーケースビデオです。
@@ -14,7 +13,6 @@ PlayCanvasのユーザーによって作成された素晴らしいゲームや�
 <div className="iframe-container">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/46f73gp1_TU" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-
 
 ## PlayCanvas Showcase 2021
 

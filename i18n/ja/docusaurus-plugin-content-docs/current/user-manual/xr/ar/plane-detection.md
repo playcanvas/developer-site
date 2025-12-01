@@ -1,6 +1,5 @@
 ---
 title: Plane Detection
-sidebar_position: 1
 ---
 
 [Mesh Detection][1]と非常によく似ており、Plane Detectionは現実世界の表面を推定するプレーンへのアクセスを提供します。

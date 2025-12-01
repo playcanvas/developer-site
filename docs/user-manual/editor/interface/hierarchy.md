@@ -1,6 +1,5 @@
 ---
-title: Hierarchy
-sidebar_position: 2
+title: Hierarchy Panel
 ---
 
 ![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.png)

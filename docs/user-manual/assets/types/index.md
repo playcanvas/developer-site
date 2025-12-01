@@ -1,6 +1,5 @@
 ---
 title: Asset Types
-sidebar_position: 1
 ---
 
 The [Assets Panel](/user-manual/editor/interface/assets) manages the assets in your project. There are several different types of asset.

@@ -1,6 +1,5 @@
 ---
 title: User Interface Basics
-sidebar_position: 1
 ---
 
 User Interfaces are built from two elements in PlayCanvas. A [Screen Component][1] describes the area that contains all the user interfaces elements and then multiple entities with [Element Components][2] are attached below the Screen Entity in the hierarchy. The Screen defines the area of the User Interface and how it is rendered (in 2D space or in the 3D world). The Elements make up the images and text components of the interface.

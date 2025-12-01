@@ -1,6 +1,5 @@
 ---
 title: 開始
-sidebar_position: 1
 ---
 
 始める前に、[Node.js](https://nodejs.org/) 18以降がインストールされていることを確認してください。
@@ -42,7 +41,7 @@ npm install playcanvas @playcanvas/web-components --save-dev
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/build/playcanvas.mjs"
+            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
         }
     }
 </script>
@@ -51,8 +50,14 @@ npm install playcanvas @playcanvas/web-components --save-dev
 コンポーネントは次のようにインポートされます。
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.7/dist/pwc.mjs"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"></script>
 ```
+
+:::note[バージョニング]
+
+上記のスニペットでは利便性のために `@latest` を使用しています。本番環境では確定的なビルドのために特定のバージョンに固定することを推奨します（例: `playcanvas@2.x.y`、`@playcanvas/web-components@x.y.z`）。最新の安定版はリリースノートを参照してください: [PlayCanvas Engine リリース](https://github.com/playcanvas/engine/releases) と [Web Components リリース](https://github.com/playcanvas/web-components/releases)。
+
+:::
 
 ## ボイラープレートHTML
 
@@ -68,11 +73,11 @@ npm install playcanvas @playcanvas/web-components --save-dev
         <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.8.2/build/playcanvas.mjs"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
                 }
             }
         </script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.2.7/dist/pwc.mjs"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"></script>
         <style>
             body {
                 margin: 0;

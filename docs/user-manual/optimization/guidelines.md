@@ -1,6 +1,5 @@
 ---
 title: General Guidelines
-sidebar_position: 1
 ---
 
 Here are some tips and hints on how to achieve good performance in your PlayCanvas app.

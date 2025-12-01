@@ -8,8 +8,8 @@ PlayCanvasにおけるText Assetタイプは、プレーンテキストデータ
 
 スクリプトでText Assetからデータにアクセスするには：
 
-1.  Text Assetを属性としてスクリプトに追加します。
-2.  テキストファイルから解析された文字列であるText assetのresourceにアクセスします。
+1. Text Assetを属性としてスクリプトに追加します。
+2. テキストファイルから解析された文字列であるText assetのresourceにアクセスします。
 
 例：
 

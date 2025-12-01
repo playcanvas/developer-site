@@ -1,6 +1,5 @@
 ---
 title: 物理の基本
-sidebar_position: 1
 ---
 
 PlayCanvasには、[ammo.js][1]という非常に強力な物理エンジンが組み込まれています。これは、オープンソースのC++ Bullet物理エンジンのブラウザポートです。
@@ -89,7 +88,7 @@ Movement.prototype.update = function(dt) {
 };
 ```
 
-このスクリプトは、正弦関数を使用して、ワールドのX軸に沿ってボックスをアニメーション化します。Kinematicボディを移動するには、 `setPosition`、` setRotation`および `setEulerAngles`のようなエンティティ上の標準の変換関数を使用します。シーンを実行すると、ダイナミックボックスがKinematicボックスの上に落ち、その上に乗ったまま運ばれます。
+このスクリプトは、正弦関数を使用して、ワールドのX軸に沿ってボックスをアニメーション化します。Kinematicボディを移動するには、 `setPosition`、`setRotation`および `setEulerAngles`のようなエンティティ上の標準の変換関数を使用します。シーンを実行すると、ダイナミックボックスがKinematicボックスの上に落ち、その上に乗ったまま運ばれます。
 
 ![Kinematic Box](/img/user-manual/physics/kinematic-box.gif)
 

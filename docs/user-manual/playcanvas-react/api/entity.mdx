@@ -1,0 +1,38 @@
+---
+description: The `Entity` component is the fundamental building block in PlayCanvas React applications.
+---
+
+# `<Entity/>`
+
+The `<Entity/>` component is the fundamental building block of a React application. It represents a node in the scene graph hierarchy and can contain other entities as children, as well as components that define its behavior and appearance.
+
+```jsx copy
+import { Entity } from '@playcanvas/react'
+
+export default function Scene() {
+  return (
+    <Entity>
+      <Entity name="child" />
+      <Entity name="other-child">
+        <Entity name="nested-child" />
+      </Entity>
+    </Entity>
+  )
+}
+```
+
+An `<Entity/>` is a transform node, which has position, rotation and scale. On its own, it has no behavior. To allow it to render something, react to physics or behave like a camera you must add behavior using components.
+
+:::tip
+
+An `<Entity/>` on its own has no behavior. You can add Components to an `<Entity/>` to give it behavior. Components are the building blocks of behavior in PlayCanvas.
+
+:::
+
+## Properties
+
+```tsx asTypedoc
+import { Entity } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Entity>;
+export default $;
+```

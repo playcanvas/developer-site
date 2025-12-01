@@ -1,6 +1,5 @@
 ---
 title: Components
-sidebar_position: 2
 ---
 
 A component encapsulates functionality that can be added to or removed from entities. For example, a component might enable an entity to play sound, render a 3D model or run a script.

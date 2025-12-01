@@ -4,7 +4,7 @@ title: <pc-collision>
 
 The `<pc-collision>` tag is used to define a collision component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -12,17 +12,17 @@ The `<pc-collision>` tag is used to define a collision component.
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
-| Attribute | Description |
-| --- | --- |
-| `axis` | The axis of the collision component. If not specified, `1` is used (Y-axis). |
-| `convex-hull` | Valueless attribute. If present, the collision component uses a convex hull. |
-| `enabled` | Enabled state of the collision component. If not specified, `true` is used. |
-| `half-extents` | The half-extents of the collision component. Specified as a space-separated list of X, Y, and Z values. If not specified, `0.5 0.5 0.5` is used. |
-| `height` | The height of the collision component. If not specified, `2` is used. |
-| `radius` | The radius of the collision component. If not specified, `0.5` is used. |
-| `type` | The type of collision component. Can be `box`, `capsule`, `cone`, `cylinder` or `sphere`. If not specified, `box` is used. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `axis` | Number | `"1"` | Axis for cylinder/capsule shapes (0=X, 1=Y, 2=Z) |
+| `convex-hull` | Flag | - | Whether to use a convex hull for mesh collision |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `half-extents` | Vector3 | `"0.5 0.5 0.5"` | Half-extents for box collision as "X Y Z" values |
+| `height` | Number | `"2"` | Height for cylinder/capsule collision shapes |
+| `radius` | Number | `"0.5"` | Radius for sphere/cylinder/capsule collision shapes |
+| `type` | Enum | `"box"` | Collision shape: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"sphere"` |
 
 </div>
 

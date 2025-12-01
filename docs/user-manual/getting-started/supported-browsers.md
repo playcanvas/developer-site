@@ -1,6 +1,5 @@
 ---
 title: Supported Browsers
-sidebar_position: 2.5
 ---
 
 The browser requirements for running PlayCanvas applications are as follows:

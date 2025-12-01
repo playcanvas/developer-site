@@ -1,6 +1,5 @@
 ---
 title: Hit Testing
-sidebar_position: 1
 ---
 
 In an AR/MR context, the interaction of virtual world objects with the real world is achieved by many techniques. Hit Testing allows one to pick a point in space by probing real-world geometry that is estimated using the underlying AR system.

@@ -1,6 +1,5 @@
 ---
 title: エディターAPI
-sidebar_position: 8
 ---
 
 :::warning
@@ -24,7 +23,7 @@ APIはブラウザの開発者ツールコンソールを介してアクセス�
 Editor API コード:
 
 ```javascript
-(function(){
+(function() {
     const entities = editor.api.globals.entities.root.listByTag('red');
     for (const entity of entities) {
         entity.set('enabled', false);

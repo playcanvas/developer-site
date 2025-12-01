@@ -1,6 +1,5 @@
 ---
 title: シーンのロード
-sidebar_position: 4
 ---
 
 このページでは、コードを使用してシーンを読み込む方法と、プロジェクトでシーンを使用する異なるアプローチについて説明します。
@@ -119,7 +118,7 @@ this.app.scenes.loadSceneSettings(sceneItem, function (err) {
 - ロードされたシーンからエンティティとコンポーネントを作成し、ヒエラルキーを[アプリケーションルートノード][application-root-api]に追加します。
 - ロードされたシーン内の ScriptTypes の `initialize` および `postInitialize` 関数を呼び出します。
 - `loadSceneHierarchy` 関数に渡されたコールバックを呼び出します。
-- (オプション)[callback][loadhierarchycallback-api]の中で、ロードされたシーンのルートを表すエンティティがパラメータとして渡されます。これは必要に応じて変更または親に設定することができます。 [シーンの加算的ロード](#loading-scenes-additively)の例では、ロードされたシーンルートを現在のシーンの別のエンティティに親に設定して管理を容易にしています。
+- [オプション][loadhierarchycallback-api]の中で、ロードされたシーンのルートを表すエンティティがパラメータとして渡されます。これは必要に応じて変更または親に設定することができます。 [シーンの加算的ロード](#loading-scenes-additively)の例では、ロードされたシーンルートを現在のシーンの別のエンティティに親に設定して管理を容易にしています。
 
 `loadSceneSettings`
 

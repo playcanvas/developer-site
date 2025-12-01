@@ -4,7 +4,7 @@ title: <pc-particles>
 
 The `<pc-particles>` tag is used to define a particle system.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -12,9 +12,14 @@ The `<pc-particles>` tag is used to define a particle system.
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `json`. |
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | String | - | JSON asset ID defining the particle system configuration |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+
+</div>
 
 ## Example
 

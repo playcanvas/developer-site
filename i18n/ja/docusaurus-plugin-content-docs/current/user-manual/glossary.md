@@ -1,37 +1,59 @@
 ---
 title: 用語集
-sidebar_position: 26
 ---
 
 以下、PlayCanvas エンジンおよびツールで使用する用語の概要です。
 
+## アニメーション (Animation) {#animation}
+
+アニメーション (Animation) は、[Entities](#entity) のプロパティを時間経過とともにアニメーション化するために使用されるキーフレームデータを含む [Asset](#asset) です。アニメーションは、変換（位置、回転、スケール）、マテリアルプロパティ、およびその他のアニメーション可能な値を制御できます。PlayCanvasでは、アニメーションは通常3Dコンテンツ作成ツールからインポートされるか、Animationコンポーネントを使用して作成され、Animationコンポーネント APIを介してスクリプトで制御できます。
+
 ## アプリケーション (Application) {#application}
 
-`Application` クラスには、アプリケーションを実行する際に必要な有用なエンジン機能が格納されます。以下を管理します。
+`Application` クラスは、PlayCanvasアプリケーションの実行に必要なすべての重要なシステムとリソースを管理するコアコンテナです。以下の要素を調整する中央ハブとして機能します。
 
 * シーンヒエラルキーとシーン設定を含む `Scene`
-* コンポーネントシステム (`ComponentSystem`)
+* エンティティの動作を処理する `ComponentSystem`s
 * 入力デバイス (キーボード、マウス、タッチおよびゲームパッド)
+* アセットの読み込みと管理
+* メインレンダーループとフレーム更新
+* オーディオコンテキストと3Dオーディオシステム
 
-Application はスクリプト関数(`initialize`, `update` など)から `this.app` としてアクセスすることができます。
+Application はスクリプト関数 (`initialize`, `update` など) から `this.app` としてアクセスでき、エンジンの機能と対話するためのメインインターフェイスを提供します。
 
 ## アセット (Asset) {#asset}
 
-アセット(Asset) は、通常、Blender や 3D Studio Max などのコンテンツ作成アプリケーションから PlayCanvas にインポートされるデータ単位です。3D モデル、アニメーション、オーディオサンプル、または画像を表すことができます。アセットは、[Components] [component] の特定の属性に割り当てることができます。たとえば、Modelコンポーネントの 'model' 属性にModelアセットを割り当てることができます。また、[Source Assets][source-asset] および[Target Assets][target-asset]も参照してください。
+アセット (Asset) は、PlayCanvasアプリケーションで使用されるリソースを表すデータ単位です。アセットは通常、コンテンツ作成アプリケーション（Blender、3D Studio Max、Photoshopなど）からインポートされますが、エディター内で直接作成することもできます。一般的なアセットタイプには以下があります：
+
+* 3Dモデルとアニメーション
+* テクスチャとマテリアル
+* オーディオファイルと音楽
+* スクリプトとJSONデータ
+* フォントとUI要素
+
+アセットは [Asset Pipeline](#asset-pipeline) を通じて管理され、[Components](#component) に割り当てて [Entities](#entity) に外観と動作を与えることができます。また、[Source Assets](#source-asset) および [Target Assets](#target-asset) も参照してください。
 
 ## アセットパイプライン (Asset Pipeline) {#asset-pipeline}
 
-アセットパイプラインは、アップロードされた[Source Asset][source-asset](例:FBXシーンファイル)を、PlayCanvasサーバー上で実行されるプロセスで、一つまたは複数の[Target Asset][target-asset](例:モデルファイル、マテリアル、およびテクスチャ)に変換します。このパイプラインは、アップロードされたファイルを最適化されたバージョンに変換して、ゲームで使用できるようにするために設計されています。アセットをパイプラインを通して処理するには、ダッシュボードまたは PlayCanvasエディターからアップロードするだけです。
+アセットパイプラインは、アップロードされた[Source Asset](#source-asset)(例:FBXシーンファイル)を、PlayCanvasサーバー上で実行されるプロセスで、一つまたは複数の[Target Asset](#target-asset)(例:モデルファイル、マテリアル、およびテクスチャ)に変換します。このパイプラインは、アップロードされたファイルを最適化されたバージョンに変換して、ゲームで使用できるようにするために設計されています。アセットをパイプラインを通して処理するには、ダッシュボードまたは PlayCanvasエディターからアップロードするだけです。
 
 ## 属性 (Attribute) {#attribute}
 
-属性 (Attribute) とは、[Component][component] のプロパティのことです。属性は、ユーザーインタフェースコントロール(ピッカー、チェックボックス、スライダーなど)を介して、PlayCanvasエディターのインタフェースに表示されます。これらのコントロールを使って属性を微調整することができ、Editor の 'Launch' ボタンからゲームを起動した後、更新は接続されたゲームにリアルタイムでライブストリーム配信されます。
+属性 (Attribute) とは、[Component](#component) のプロパティのことです。属性は、ユーザーインタフェースコントロール(ピッカー、チェックボックス、スライダーなど)を介して、PlayCanvasエディターのインタフェースに表示されます。これらのコントロールを使って属性を微調整することができ、Editor の 'Launch' ボタンからゲームを起動した後、更新は接続されたゲームにリアルタイムでライブストリーム配信されます。
+
+## コリジョン (Collision) {#collision}
+
+コリジョン (Collision) とは、3D空間で二つ以上のオブジェクトが交差する際の検出と応答を指します。PlayCanvasは、衝突検出の形状を定義するCollisionコンポーネントと、物理応答を処理するRigidbodyコンポーネントを通じて衝突検出を提供します。一般的な衝突形状には、ボックス、球体、カプセル、三角メッシュがあります。
 
 ## コンポーネント (Component) {#component}
 
-コンポーネント (Component) とは、[Entity] [entity] のプロパティや機能を記述します。PlayCanvas Engine では、長い継承クラスのチェーンを使ってゲームオブジェクトを定義する代わりに、Entity が定義され、次に複数のコンポーネントが追加されます。
+コンポーネント (Component) とは、[Entity](#entity) のプロパティや機能を記述します。PlayCanvas Engine では、長い継承クラスのチェーンを使ってゲームオブジェクトを定義する代わりに、Entity が定義され、次に複数のコンポーネントが追加されます。
 
 コンポーネントは、PlayCanvasエディターの Component メニューから Entity に追加できます。または、それぞれの `ComponentSystem` オブジェクト経由でランタイムで追加することができます。
+
+## キューブマップ (Cubemap) {#cubemap}
+
+キューブマップ (Cubemap) は、キューブを形成するように配置された6つの正方形テクスチャで構成される特別なタイプの [Texture](#texture) です。キューブマップは、遠景背景シーンを作成するためのスカイボックスや、光沢のある表面での反射をシミュレートするための環境マッピングに一般的に使用されます。PlayCanvasでは、キューブマップはHDR画像から生成したり、6つの個別のテクスチャフェイスから作成したりできます。
 
 ## DOM {#dom}
 
@@ -39,29 +61,59 @@ DOM (Document Object Model) とは、HTML ドキュメントを表す方法で�
 
 ## エンティティ (Entity) {#entity}
 
-エンティティは、[PlayCanvasエンジン][playcanvas-engine]でアプリケーションを構築するための要素の一つです。多くの場合、エンティティはゲームやアプリケーションの単一のオブジェクトを表すものですが、単一のオブジェクトは複数のエンティティで構成されることもあります。
+エンティティは、[PlayCanvasエンジン](#playcanvas-engine)でアプリケーションを構築するための要素の一つです。多くの場合、エンティティはゲームやアプリケーションの単一のオブジェクトを表すものですが、単一のオブジェクトは複数のエンティティで構成されることもあります。
 
 すべての Entity には、位置、回転、スケールがあります。変換は親ノードから継承し、子ノードに供給されます。
 
 ## フレームワーク (Framework) {#framework}
 
-Framework とは、PlayCanvas Engine の上位抽象化レベルです。Entity-Component System、PlayCanvasエディターとのインターフェイスなどの高レベル機能で構成されています。詳細については、[API Reference][api-reference] を参照してください。
+Framework とは、コアPlayCanvas Engine上に構築された、ゲーム開発に焦点を当てたインターフェイスを提供する高レベル抽象化レイヤーです。以下が含まれます：
+
+* ゲームオブジェクトを整理するためのEntity-Component System
+* アセット管理および読み込みシステム
+* 入力処理とデバイス抽象化
+* オーディオ管理と3D空間オーディオ
+* グラフィックスパイプライン管理
+* ライブリンク機能のためのPlayCanvasエディターとの統合
+
+Frameworkは一般的なゲーム開発タスクを簡素化し、インタラクティブな3Dアプリケーションを構築するための構造化されたアプローチを提供します。詳細については、[API Reference](https://api.playcanvas.com) を参照してください。
 
 ## ギズモ (Gizmo) {#gizmo}
 
 Gizmo とは、エンティティの属性を編集するためにマウスでドラッグできるコントロールです。通常、変換行列を編集するために使用されます。Gizmo は、3D 空間内の各軸のための3色のパーツで構成されています。赤は X 軸、緑は Y 軸、青は Z 軸を表します。複数の軸を同時に操作するためのコントロールもあります。 例:トランスレート Gizmo には、X 軸と Y 軸、Y 軸と Z 軸、Z 軸と X 軸の平面アイコンとしてクリック可能なプレーンアイコンがあります。
 
+## ヒエラルキー (Hierarchy) {#hierarchy}
+
+ヒエラルキー (Hierarchy) は、[Scene](#scene) 内の [Entities](#entity) のツリー構造を表示する [PlayCanvasエディター](#playcanvas-editor) のパネルです。エンティティ間の親子関係を表示し、エンティティの整理、選択、名前変更、並び替えを可能にします。ヒエラルキーは、子エンティティが親の変換を継承する変換継承構造を反映します。
+
 ## High Dynamic Range {#high-dynamic-range}
 
 High Dynamic Range(HDR)は、通常の0〜1範囲外の色情報を指します。標準の範囲では、0は黒で、1はディスプレイデバイスで表示できる最も明るい色です。現実世界では、太陽は周囲を取り囲む空よりもずっと明るくなることがあります。
 
+## インスペクタ (Inspector) {#inspector}
+
+インスペクタ (Inspector) は、現在選択されている [Entity](#entity) または [Asset](#asset) のプロパティと [Components](#component) を表示する [PlayCanvasエディター](#playcanvas-editor) のパネルです。属性の編集、コンポーネントの追加や削除、設定の構成のためのインターフェイスを提供します。インスペクタは変更をリアルタイムで更新し、開発中に即座にフィードバックを提供します。
+
+## ライト (Light) {#light}
+
+ライト (Light) は、[Scene](#scene) を照明する [Component](#component) です。PlayCanvasは、指向性ライト（太陽のような）、ポイントライト（電球のような）、スポットライト（懐中電灯のような）など、いくつかのタイプのライトをサポートしています。ライトには、色、強度、範囲、影の投影機能などのプロパティがあり、シーン内のオブジェクトをどのように照明するかに影響します。
+
 ## マテリアル (Material) {#material}
 
-マテリアル (Material) は、3D モデルの表面のプロパティを定義する Asset タイプです。 Material は、拡散色およびスペキュラ色などのプロパティのグループ、どの拡散マップおよびスペキュラマップなどのTextureアセット、を含みます。PlayCanvasエディターでは、モデルを選択して、3D ビューのモデル上で Material をクリックすることで編集することができます。
+マテリアル (Material) は、表面がレンダリング時にどのように表示されるかを定義する [Asset](#asset) です。マテリアルは、様々なパラメータを通じて3Dモデル表面の視覚的プロパティを制御します：
+
+* **アルベド/ディフューズ**: ベース色とテクスチャ
+* **ノーマル/バンプ**: 表面の詳細とテクスチャ
+* **メタルネス**: 表面がどれほど金属的に見えるか
+* **ラフネス**: 表面がどれほど滑らかまたは粗いか
+* **エミッション**: 自己発光プロパティ
+* **オパシティ**: 透明度とアルファブレンディング
+
+マテリアルは詳細な表面外観のために [Texture](#texture) アセットを参照でき、物理ベースレンダリング（PBR）と従来のライティングモデルの両方をサポートします。[PlayCanvasエディター](#playcanvas-editor) では、マテリアルはアセットパネルで選択するか、3Dビューでモデル上のマテリアルを直接クリックして編集できます。
 
 ## PlayCanvasエディター (PlayCanvas Editor) {#playcanvas-editor}
 
-PlayCanvasエディターとは、[Scenes][scene] を編集するために開発チームのメンバーが使用するビジュアル編集ツールです。PlayCanvasエディターは、[Entities][entity] を操作するために使用されます。
+PlayCanvasエディターとは、[Scenes](#scene) を編集するために開発チームのメンバーが使用するビジュアル編集ツールです。PlayCanvasエディターは、[Entities](#entity) および [Components](#component) を操作し、[Assets](#asset) を管理し、ゲームやアプリケーションの様々な側面を設定するために使用されます。階層管理、アセット整理、リアルタイムプレビュー機能のための直感的なインターフェイスパネルを提供します。
 
 ## PlayCanvas Engine {#playcanvas-engine}
 
@@ -71,7 +123,11 @@ PlayCanvas Engine で作成したプログラムは、サードパーティの�
 
 ## プロジェクト (Project) {#project}
 
-Project とは、単一のユーザーに所属する [Scenes][scene] および [Assets][asset] のコレクションです。通常、1 つの Project には、1 つのアプリケーションのリソースのみが含まれていますが、1 つの Project から複数のアプリケーションをエクスポートすることもできます。
+Project とは、単一のユーザーに所属する [Scenes](#scene) および [Assets](#asset) のコレクションです。通常、1 つの Project には、1 つのアプリケーションのリソースのみが含まれていますが、1 つの Project から複数のアプリケーションをエクスポートすることもできます。
+
+## リジッドボディ (Rigidbody) {#rigidbody}
+
+リジッドボディ (Rigidbody) は、[Entity](#entity) が物理シミュレーションに参加することを可能にする [Component](#component) です。エンティティに質量、摩擦、反発などのプロパティを与え、力、重力、衝突に応答できるようにします。リジッドボディは、静的（動かない）、キネマティック（動くが力の影響を受けない）、または動的（完全に物理シミュレーションされたオブジェクト）として構成できます。
 
 ## シーン (Scene) {#scene}
 
@@ -79,7 +135,7 @@ Scene とは、Entity データ、Art データ、Code データのコレクシ�
 
 ## スクリプト (Script) {#script}
 
-Scriptは[Asset][asset]です。それは、[Entity][entity]のScript [Component][component]に割り当てられます。スクリプトはJavaScriptで書かれています。いくつかの事前定義された関数があり、以下のように上書きできます。
+Scriptは[Asset](#asset)です。それは、[Entity](#entity)のScript [Component](#component)に割り当てられます。スクリプトはJavaScriptで書かれています。いくつかの事前定義された関数があり、以下のように上書きできます。
 
 * `initialize`-インスタンス化時に1回呼び出されます。
 * `postInitialize`-すべてのスクリプトの`initialize`関数が呼び出された後に1回だけ呼び出されます。
@@ -87,31 +143,30 @@ Scriptは[Asset][asset]です。それは、[Entity][entity]のScript [Component
 * `postUpdate`-すべてのスクリプトの`update`関数が呼び出された後、毎フレームごとに呼び出されます。
 * `swap`-'hot reload'(コードエディターでの保存イベントによる)された場合に呼び出されます。
 
+## スカイボックス (Skybox) {#skybox}
+
+スカイボックス (Skybox) は、[Scene](#scene) 全体を囲む背景で、山、雲、星などの遠景シーンの錯覚を作成するために通常使用されます。PlayCanvasでは、スカイボックスは [Cubemaps](#cubemap) を使用して作成され、シーン設定で構成できます。環境ライティングを提供し、特定の方向に他のジオメトリが見えない場合の背景として機能します。
+
 ## ソースアセット (Source Asset) {#source-asset}
 
-ソースアセットは、PlayCanvasにアップロードされたオリジナルのファイルです。ソースアセットは、[Target Asset][target-asset]を作成するPlayCanvasアセットパイプラインの入力です。
+ソースアセットは、PlayCanvasにアップロードされたオリジナルのファイルです。ソースアセットは、[Target Asset](#target-asset)を作成するPlayCanvasアセットパイプラインの入力です。
 
 ## ターゲットアセット (Target Asset) {#target-asset}
 
-ターゲットアセットは、ランタイムでゲームにロード可能なファイルです。それは、エンジンで使用できる形式になっています。ターゲットアセットは、通常、[Source Asset][source-asset]がアップロードされ、アセットパイプラインを介してインポートされた結果です。
+ターゲットアセットは、ランタイムでゲームにロード可能なファイルです。それは、エンジンで使用できる形式になっています。ターゲットアセットは、通常、[Source Asset](#source-asset)がアップロードされ、アセットパイプラインを介してインポートされた結果です。
 
 ## テンプレート (Template) {#template}
 
-Templateは[Asset][asset]であり、[Entity][entity]の階層の一部を含みます。ルートエンティティを持ち、任意の数の子要素を持つことができます。Templateは再利用可能なエンティティであり、ランタイムで動的にインスタンス化したり、[Scene][scene]に複数のインスタンスを配置したりできます。Template Assetを変更すると、Templateのすべてのインスタンスも変更されます。
+Templateは[Asset](#asset)であり、[Entity](#entity)の階層の一部を含みます。ルートエンティティを持ち、任意の数の子要素を持つことができます。Templateは再利用可能なエンティティであり、ランタイムで動的にインスタンス化したり、[Scene](#scene)に複数のインスタンスを配置したりできます。Template Assetを変更すると、Templateのすべてのインスタンスも変更されます。
 
 ## テクスチャ (Texture) {#texture}
 
-Textureは[Asset][asset]です。通常は、2Dまたは3Dジオメトリにマッピング可能な画像データを含んでいます。テクスチャは、ジェネリック数値データの他のタイプもGPU上で処理するために使用できます。PlayCanvasは、標準のWeb形式の画像(JPG、PNG、およびGIF)からテクスチャをロードできます。エンジンはまた、natively supported GPU形式にトランスコードできる、超高圧縮のBasisテクスチャを読み込むことができます。
+Textureは[Asset](#asset)です。通常は、2Dまたは3Dジオメトリにマッピング可能な画像データを含んでいます。テクスチャは、ジェネリック数値データの他のタイプもGPU上で処理するために使用できます。PlayCanvasは、標準のWeb形式の画像(JPG、PNG、およびGIF)からテクスチャをロードできます。エンジンはまた、GPUネイティブ対応形式にトランスコードできる、超高圧縮のBasisテクスチャを読み込むことができます。
 
 ## 変換行列 (Transformation Matrix) {#transformation-matrix}
 
-Transformation Matrixは、線形変換のセットを表す数学的行列です。特に、移動、回転、スケールが含まれます。これは、変換行列を使用して、3D空間のオブジェクトの位置、方向、サイズを表現できることを意味します。PlayCanvas Engineでは、各[Entity][entity]には、 `getLocalTransform()`メソッドを介してアクセス可能な変換行列があります。
+Transformation Matrixは、線形変換のセットを表す数学的行列です。特に、移動、回転、スケールが含まれます。これは、変換行列を使用して、3D空間のオブジェクトの位置、方向、サイズを表現できることを意味します。PlayCanvas Engineでは、各[Entity](#entity)には、 `getLocalTransform()`メソッドを介してアクセス可能な変換行列があります。
 
-[api-reference]: https://api.playcanvas.com
-[asset]: #asset
-[component]: #component
-[entity]: #entity
-[playcanvas-engine]: #playcanvas-engine
-[scene]: #scene
-[source-asset]: #source-asset
-[target-asset]: #target-asset
+## ビューポート (Viewport) {#viewport}
+
+ビューポート (Viewport) は、[Scene](#scene) を視覚的に表示し、操作することができる [PlayCanvasエディター](#playcanvas-editor) の3Dビューパネルです。ゲーム世界のリアルタイムレンダリングビューを提供し、さまざまなツールと [Gizmos](#gizmo) を使用して [Entities](#entity) をナビゲート、選択、操作することができます。ビューポートは、さまざまな開発ニーズに対応するため、複数のカメラ角度とレンダリングモードをサポートしています。

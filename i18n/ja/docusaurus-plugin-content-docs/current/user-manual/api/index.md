@@ -1,6 +1,5 @@
 ---
 title: REST API
-sidebar_position: 20
 ---
 
 :::warning
@@ -71,11 +70,11 @@ curl -H "Authorization: Bearer nesgdxhiqe7hylfilr6ss1rds0gq1uj8" https://playcan
 
 私たちのREST APIは、各API呼び出しの応答形式について、一般的なガイドラインに従っています。
 
-#### 単一リソースの取得 {#get-resource}
+### 単一リソースの取得 {#get-resource}
 
 単一のリソースを取得しようとしている場合、応答はあなたが要求したリソースを持つJSONオブジェクトになります。
 
-#### 複数のリソースを取得 {#get-multiple-resources}
+### 複数のリソースを取得 {#get-multiple-resources}
 
 たとえば、プロジェクトのアプリをリストアップするような複数のリソースを取得しようとしている場合は、次の形式のJSONオブジェクトを取得します。
 
@@ -110,7 +109,7 @@ curl -H "Authorization: Bearer nesgdxhiqe7hylfilr6ss1rds0gq1uj8" https://playcan
 https://playcanvas.com/api/items?limit=32&amp;skip=16
 ```
 
-#### エラー {#errors}
+### エラー {#errors}
 
 エラーが発生した場合は、次の形式のJSONオブジェクトが表示されます。
 
@@ -131,7 +130,6 @@ Calls to the REST API have a rate limit. Check your actual limits by querying [t
 | 法線 (Normal)          | The normal rate limit     | 120 requests/minute     | 240 requests/minute             |
 | Strict          | The strict rate limit     | 5 requests/minute       | 10 requests/minute              |
 | アセット (Asset)          | The assets rate limit     | 60 requests/minute      | 120 requests/minute             |
-
 
 APIの呼び出し回数を調整するために、次のヘッダがレスポンスに含まれます。
 

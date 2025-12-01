@@ -1,10 +1,8 @@
 ---
 title: Physically Based Rendering
-sidebar_position: 3
 ---
 
-![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)
-
+![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  
 *Star-Lord Model by [Joachim Coppens][2]*
 
 Physically based rendering (PBR) is a combination of artist workflow, measured physical properties and material shaders that work together to bring order and consistency to graphics rendering. Using the underlying physical principles of how light and surfaces interact we can create predictable visuals which work in all lighting conditions without special cases.

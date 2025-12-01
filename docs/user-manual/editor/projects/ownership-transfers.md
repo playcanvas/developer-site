@@ -1,6 +1,5 @@
 ---
 title: Ownership and Transfers
-sidebar_position: 7
 ---
 
 Project ownership determines who has ultimate control over a PlayCanvas project, including the ability to delete it, transfer ownership and control access. This section covers transferring ownership between users and organizations.

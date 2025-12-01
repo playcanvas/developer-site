@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -36,14 +37,33 @@ const config = {
   markdown: {
     mermaid: true,
   },
-  themes: ['@docusaurus/theme-mermaid'],
+
+  themes: ['@docusaurus/theme-mermaid', '@docusaurus/theme-live-codeblock'],
 
   plugins: [
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
+        { from: ['/user-manual/billing/'], to: '/user-manual/account-management/billing/' },
+        { from: ['/user-manual/faq/'], to: '/user-manual/editor/faq/' },
+        { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },
+        { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },
+        { from: ['/user-manual/graphics/gaussian-splatting/'], to: '/user-manual/gaussian-splatting/' },
         { from: ['/user-manual/graphics/shader-chunk-migrations/'], to: '/user-manual/graphics/shaders/migrations/' },
+        { from: ['/user-manual/organizations/'], to: '/user-manual/account-management/organizations/' },
+        { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
+        { from: ['/user-manual/organizations/managing-organizations/'], to: '/user-manual/account-management/organizations/managing/' },
+        { from: ['/user-manual/editor/keyboard-shortcuts/'], to: '/user-manual/editor/interface/keyboard-shortcuts/' },
+        { from: ['/user-manual/editor/scene/settings/'], to: '/user-manual/editor/interface/settings/' },
+        { from: ['/user-manual/scenes/entities/'], to: '/user-manual/ecs/entities/' },
         { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/scripting/editor-users/loading-order/' },
+        // Legacy post effects moved to legacy subdirectory
+        { from: ['/user-manual/graphics/posteffects/bloom/'], to: '/user-manual/graphics/posteffects/legacy/bloom/' },
+        { from: ['/user-manual/graphics/posteffects/brightness_contrast/'], to: '/user-manual/graphics/posteffects/legacy/brightness_contrast/' },
+        { from: ['/user-manual/graphics/posteffects/fxaa/'], to: '/user-manual/graphics/posteffects/legacy/fxaa/' },
+        { from: ['/user-manual/graphics/posteffects/hue_saturation/'], to: '/user-manual/graphics/posteffects/legacy/hue_saturation/' },
+        { from: ['/user-manual/graphics/posteffects/sepia/'], to: '/user-manual/graphics/posteffects/legacy/sepia/' },
+        { from: ['/user-manual/graphics/posteffects/vignette/'], to: '/user-manual/graphics/posteffects/legacy/vignette/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en
@@ -86,6 +106,16 @@ const config = {
           redirects.push(redirect);
         }
 
+        if (existingPath.includes('/user-manual/editor/interface/launch-page')) {
+          const redirect = existingPath.replace('/user-manual/editor/interface/launch-page', '/user-manual/editor/launch-page');
+          redirects.push(redirect);
+        }
+
+        if (existingPath.includes('/user-manual/editor/publishing/')) {
+          const redirect = existingPath.replace('/user-manual/editor/publishing/', '/user-manual/publishing/');
+          redirects.push(redirect);
+        }
+
         if (existingPath.includes('/user-manual/editor/templates/')) {
           const redirect = existingPath.replace('/user-manual/editor/templates/', '/user-manual/templates/');
           redirects.push(redirect);
@@ -110,6 +140,35 @@ const config = {
         docs: {
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
+          remarkPlugins: [
+            [remarkTypedoc, {
+               typeResolver: ({ displayName, types, tags }) => {
+
+                // If the type is ignored or internal, don't document it
+                if (tags.has('ignore') || tags.has('internal')) {
+                  return null;
+                }
+                
+                // Resolve each type to a URL
+                const resolvedTypes = types.map(type => {
+                  if (type.moduleName === 'playcanvas') {
+                    return {
+                      name: type.name,
+                      url: `https://api.playcanvas.com/engine/classes/${type.name}.html`
+                    };
+                  }
+
+                  // No URL for this type
+                  return { name: type.name, url: null };
+                });
+                
+                return {
+                  displayName,
+                  types: resolvedTypes
+                };
+              }
+            }]
+          ],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -200,16 +259,16 @@ const config = {
             title: 'Social',
             items: [
               {
-                label: 'Twitter / X',
-                href: 'https://twitter.com/playcanvas',
-              },
-              {
-                label: 'Facebook',
-                href: 'https://www.facebook.com/playcanvas',
+                label: 'X',
+                href: 'https://x.com/playcanvas',
               },
               {
                 label: 'LinkedIn',
                 href: 'https://www.linkedin.com/company/playcanvas',
+              },
+              {
+                label: 'Facebook',
+                href: 'https://www.facebook.com/playcanvas',
               },
             ],
           },
@@ -217,16 +276,16 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Forum',
-                href: 'https://forum.playcanvas.com',
-              },
-              {
                 label: 'Discord',
                 href: 'https://discord.gg/RSaMRzg',
               },
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/playcanvas',
+                label: 'Forum',
+                href: 'https://forum.playcanvas.com',
+              },
+              {
+                label: 'Reddit',
+                href: 'https://www.reddit.com/r/PlayCanvas/',
               },
             ],
           },

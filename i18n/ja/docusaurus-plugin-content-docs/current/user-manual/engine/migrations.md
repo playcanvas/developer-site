@@ -1,6 +1,5 @@
 ---
 title: エンジンマイグレーション
-sidebar_position: 4
 ---
 
 PlayCanvas Engineは常に進化しており、そのアップデートによって、ユーザーがスクリプトを適応させる必要がある破壊的な変更が導入されることがあります。
@@ -85,8 +84,8 @@ StandardMaterialのティントオプションは混乱を招き、一貫性が�
 
 ディフューズ、エミッシブ、スペキュラ、シアーンのような色を表現するテクスチャは、色の範囲を維持し、バンディングを減らすために通常sRGB空間に格納されます。エンジンで使用される際、これらのテクスチャは正確なライティング計算のためにsRGBから線形空間に変換されます。以前は、この変換はシェーダーの計算によって処理され、パフォーマンスに影響を与えていました。WebGL1のサポートが削除されたことにより、現在ではハードウェアを利用してこの変換を効率的に、追加コストなしで実行できるようになりました。唯一の要件は、テクスチャがsRGBフォーマットを使用して作成されている必要があるということです。
 
-*   sRGB空間で色を表現するTextureアセットをロードする際は、sRGBエンコーディングを指定することが重要です。詳細については、[このプルリクエスト](https://github.com/playcanvas/engine/pull/6739)を参照してください。
-*   sRGB空間で色を表現するTextureインスタンスを作成する際は、`PIXELFORMAT_SRGBA8` のようなsRGBピクセルフォーマットを使用することが不可欠です。
+* sRGB空間で色を表現するTextureアセットをロードする際は、sRGBエンコーディングを指定することが重要です。詳細については、[このプルリクエスト](https://github.com/playcanvas/engine/pull/6739)を参照してください。
+* sRGB空間で色を表現するTextureインスタンスを作成する際は、`PIXELFORMAT_SRGBA8` のようなsRGBピクセルフォーマットを使用することが不可欠です。
 
 #### インスタンシング
 
@@ -96,11 +95,11 @@ StandardMaterialのティントオプションは混乱を招き、一貫性が�
 
 変更に関する詳細情報については、各エンジンバージョンのリリースノートを参照してください。
 
-*   [2.0.0](https://github.com/playcanvas/engine/releases/tag/v2.0.0)
-*   [2.1.0](https://github.com/playcanvas/engine/releases/tag/v2.1.0)
-*   [2.2.0](https://github.com/playcanvas/engine/releases/tag/v2.2.0)
-*   [2.3.0](https://github.com/playcanvas/engine/releases/tag/v2.3.0)
-*   [2.4.0](https://github.com/playcanvas/engine/releases/tag/v2.4.0)
+* [2.0.0](https://github.com/playcanvas/engine/releases/tag/v2.0.0)
+* [2.1.0](https://github.com/playcanvas/engine/releases/tag/v2.1.0)
+* [2.2.0](https://github.com/playcanvas/engine/releases/tag/v2.2.0)
+* [2.3.0](https://github.com/playcanvas/engine/releases/tag/v2.3.0)
+* [2.4.0](https://github.com/playcanvas/engine/releases/tag/v2.4.0)
 
 [1]: /user-manual/graphics/shaders/
 [2]: /user-manual/graphics/linear-workflow/

@@ -1,36 +1,52 @@
 ---
 title: Getting Started
-sidebar_position: 1
 ---
 
 ## What is PlayCanvas?
 
-PlayCanvas is a visual development platform for interactive web content. Both the tools and the web apps you build are powered by HTML5. The platform is web hosted so there's nothing to install and you can access your work from any device that runs one of the supported web browsers.
+PlayCanvas is a ✨ **web graphics creation platform** ✨
 
-## Key Features
+PlayCanvas is a collection of open-source products that you can use to build interactive, graphical web applications:
 
-### Editor
+🦾 [**PlayCanvas Engine**](../engine) - Open source JavaScript run-time that powers all PlayCanvas applications  
+⚛️ [**PlayCanvas React**](../playcanvas-react) - Open source React-based declarative interface that wraps the PlayCanvas Engine  
+🧩 [**PlayCanvas Web Components**](../web-components) - Open source Web Components-based declarative interface that wraps the PlayCanvas Engine  
+🛠️ [**PlayCanvas Editor**](../editor) - Real-time collaborative visual editing environment for building PlayCanvas applications
 
-The PlayCanvas Editor is a visual editing tool that lets you build scenes, applications and games in record time. Use the Editor to manage your project assets, to add interactivity and to communicate and work with your team. The Editor is collaborative in real-time which means you can immediately see changes made by your team and you can build and test your application across all devices instantly
+## Which Product is Right For You?
 
-<div className="iframe-container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/PS4oMLPyYfI" title="PlayCanvas Editor Live Link" allowfullscreen></iframe>
-</div>
+Every developer is different, so picking the right entry point to PlayCanvas will depend on your background and skills. Let us help you choose:
 
-Find out more in the [editor][5] section.
+### 🦾 [**PlayCanvas Engine**](../engine) - *Full control development*
 
-### Assets
+**Best for:** Experienced programmers, performance-critical applications, custom workflows  
+**Choose if you:** Want maximum control, have specific architectural needs, or are building complex systems
 
-PlayCanvas is used to create and manage all the assets you need for your interactive web application. PlayCanvas accepts all major 3D file formats, plus upload images, audio and any other asset types you need.
+### ⚛️ [**PlayCanvas React**](../playcanvas-react) - *React developers*
 
-Find out more in the [assets][6] section.
+**Best for:** React developers, component-based thinkers, existing React projects  
+**Choose if you:** Already use React, want declarative 3D scenes, or need to integrate 3D into React apps
 
-### Publishing
+### 🧩 [**PlayCanvas Web Components**](../web-components) - *Standards-based development*
 
-PlayCanvas provides instant and trouble free hosting for your WebGL application with single click. We also support instant download of your complete project ready to host on your own web server.
+**Best for:** Vanilla JS developers, framework-agnostic projects, web standards enthusiasts  
+**Choose if you:** Prefer native web technologies, want framework independence, or like custom HTML elements
 
-Find out more in the [publishing][7] section.
+### 🛠️ [**PlayCanvas Editor**](../editor) - *Visual-first development*
 
-[5]: /user-manual/editor
-[6]: /user-manual/assets
-[7]: /user-manual/publishing
+**Best for:** Beginners, teams, rapid prototyping, visual learners  
+**Choose if you:** Want drag-and-drop scene building, real-time collaboration, or prefer visual tools over code
+
+### 😕 Still Confused?
+
+Consult this simple questionnaire:
+
+**New to 3D development?** → Start with the [**PlayCanvas Editor**](../editor)  
+**React developer?** → Use [**PlayCanvas React**](../playcanvas-react)  
+**Prefer vanilla HTML and JavaScript?** → Try [**PlayCanvas Web Components**](../web-components)  
+**A coder that needs maximum control?** → Go with the [**PlayCanvas Engine**](../engine)  
+**Working in a team?** → The [**PlayCanvas Editor**](../editor) offers the best collaboration  
+**Coming from Unity or Unreal?** → The [**PlayCanvas Editor**](../editor) provides a similar end-user experience  
+**Integrating into existing app or site?** → Choose [**React**](../playcanvas-react) or [**Web Components**](../web-components) based on your existing stack
+
+And if you still have questions, come and chat to us on [Discord](https://discord.gg/RSaMRzg).

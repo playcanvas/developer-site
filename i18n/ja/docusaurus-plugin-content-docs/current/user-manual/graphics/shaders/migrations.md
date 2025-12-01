@@ -1,6 +1,5 @@
 ---
 title: Shader Chunk Migrations
-sidebar_position: 3
 ---
 
 ## イントロダクション
@@ -319,8 +318,7 @@ struct SheenArgs
 | `lightDiffuseLambert` | <ul><li> `dNormalW` 、 `dViewDirW` 、 `dLightDirW` 、 `dLightDirNormW`  を使用する代わりに、vec3 形式のワールド法線、視点の方向、光の方向、正規化された光の方向を受け入れます。</li></ul> |
 | `lightSheen` | <ul><li> `dNormalW` 、 `dViewDirW` 、 `dLightDirNormW` 、 `dGlossiness` に依存する代わりに、vec3 形式のハーフベクトル、ワールド法線、視点の方向、正規化された光の方向、およびグロス（光沢度）の float 値を受け入れます。</li></ul> |
 | `lightSpecular(AnisoGGX/Blinn/Phong)` | <ul><li> `dReflDirW` 、 `dNormalW` 、 `dViewDirW` 、 `dGlossiness/ccGlossiness` 、 `dTBN`  に依存する代わりに、vec3 形式のリフレクション（反射）のためのハーフベクトル、Phong のみに使用される vec3 形式のリフレクション（反射）方向、vec3 形式のワールド法線、vec3 形式の視点方向、float 形式のグロス値（光沢度）、および TBN のための 3x3 マトリクスを引数として受け入れます。 </li></ul> |
-| `lightmap(DirAdd/Add)` | <ul><li> `dLightMap` 、 `dLightmapDir` 、 `dNormalW` 、 `dViewDirW` 、 `dGlossiness` 、 `dVertexNormalW` 、 `dSpecularity`  に依存する代わりに、vec3 形式のライトマップ値、ライトマップ方向、ワールド法線、視点の方向、float 形式のグロス（光沢度）、vec3 形式のスペキュラリティ（鏡面反射）、読み書き可能な vec3 形式の正規化された光の方向、vec3 形式の幾何学的法線、および IridescenceArgs（虹彩効果引数）を引数として受け入れます。</li></ul>
-  |
+| `lightmap(DirAdd/Add)` | <ul><li> `dLightMap` 、 `dLightmapDir` 、 `dNormalW` 、 `dViewDirW` 、 `dGlossiness` 、 `dVertexNormalW` 、 `dSpecularity`  に依存する代わりに、vec3 形式のライトマップ値、ライトマップ方向、ワールド法線、視点の方向、float 形式のグロス（光沢度）、vec3 形式のスペキュラリティ（鏡面反射）、読み書き可能な vec3 形式の正規化された光の方向、vec3 形式の幾何学的法線、および IridescenceArgs（虹彩効果引数）を引数として受け入れます。</li></ul> |
 | `ltc` | <ul><li>もはや `dViewDirW` 、 `dNormalW` 、 `dGlossiness` 、 `dSpecularity` 、 `ccGlossiness` 、 `ccSpecularity` 、そして `dLightDirW` を使用せず、代わりにそれらの値が引数として渡されることに依存します。</li></ul> |
 | `metalnessModulate` | <ul><li>チャンクによって更新される `LitShaderArguments` 構造体を受け入れます。 `dSpecularity` 、 `dMetalness` 、そして `dAlbedo` への依存を削除します。</li></ul> |
 | `output(Alpha/AlphaPremul)` | <ul><li>`dAlpha` の代わりに、 `litShaderArgs.opacity` を使用します。</li></ul> |
@@ -416,7 +414,7 @@ void getAO() {
 
 | Chunk | Changes |
 | ---   | ---     |
-| `combineXXXX` | <ul><li>combinePS を除くすべての combine チャンクが削除されました。</li><li>その代わり、 `combinePS ` は少数のプリプロセッサ定義で制御されます。</li></ul> |
+| `combineXXXX` | <ul><li>combinePS を除くすべての combine チャンクが削除されました。</li><li>その代わり、 `combinePS` は少数のプリプロセッサ定義で制御されます。</li></ul> |
 | `refractionPS` | <ul><li>2つの新しいチャンク、 `refractionCubePS` と `refractionDynamicPS` に分割されました。</li></ul> |
 | `refractionCubePS` | <ul><li>以前の`refractionPS`は、屈折にキューブマップを使用することを前提としたものです。</li></ul> |
 | `refractionDynamicPS` | <ul><li>新しいチャンクで、グラブパスを使用して動的な屈折をサポートし、カメラに`requestSceneColorMap(true);`を設定する必要があります。</li></ul> |
@@ -443,7 +441,7 @@ void getAO() {
 | `emissivePS` | <ul><li>他のフロントエンドコンポーネントとの整合性を図るために、値を返す代わりに `dEmission` をグローバルに設定します。</li></ul> |
 | `fresnelSchlickPS` | <ul><li>フレネル効果が屈折率に反応するようになりました。</li><li>スペキュラリティのグローバル変更は行われず、ライトごとと環境に使用する値が返されるようになりました。</li></ul> |
 | `lightmapSingleVert.js` | <ul><li>削除されました（未使用）。</li></ul> |
-| `lightmapDirPS`, `lightmapSinglePS`| <ul><li>ライトマップ関数の名称を  `addLightMap() ` ではなく  `getLightMap()` に変更しました。</li><li>  `dDiffuseLight` と `dSpecularLight` を直接更新する代わりに、 `dLightmap` と  `dLightmapDir` をグローバルに書き込むように実装を変更しました。</li><li>バックエンドはライトマップの統合を `lightmapAddPS` と `lightmapDirAddPS` で処理するようになりました。</li></ul>  |
+| `lightmapDirPS`, `lightmapSinglePS`| <ul><li>ライトマップ関数の名称を  `addLightMap()` ではなく  `getLightMap()` に変更しました。</li><li>  `dDiffuseLight` と `dSpecularLight` を直接更新する代わりに、 `dLightmap` と  `dLightmapDir` をグローバルに書き込むように実装を変更しました。</li><li>バックエンドはライトマップの統合を `lightmapAddPS` と `lightmapDirAddPS` で処理するようになりました。</li></ul>  |
 | `lightmapAddPS`, `lightmapDirAddPS` | <ul><li>バックエンドから渡されるライトマップの値を追加するための新しいチャンクです。</li><li> `CLEARCOAT` マクロは `LIT_CLEARCOAT` に置き換えられました。</li></ul> |
 | `lightSpecularAnisoGGXPS` | <ul><li> `CLEARCOAT` 定義が `LIT_CLEARCOAT` に置き換えられました。</li></ul> |
 | `lightSpecularBlinnPS`, `lightSpecularPhongPS` | <ul><li>クリアコート用の`#define`を追加し、`antiAliasGlossiness()`の呼び出しを削除しました</li></ul> |

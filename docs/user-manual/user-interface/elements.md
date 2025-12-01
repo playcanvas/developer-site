@@ -1,6 +1,5 @@
 ---
 title: Elements
-sidebar_position: 3
 ---
 
 Elements are the individual pieces that make up a user interface screen. A user interface element is added by attaching an Element component to an entity and adding that entity as a child or descendent of the Screen entity. An element that is part of a Screen differs from a regular entity in the way that its transform is calculated and hence the way that it is positioned on screen.

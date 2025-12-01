@@ -1,6 +1,5 @@
 ---
 title: Project Settings
-sidebar_position: 3
 ---
 
 The Project Settings allow you to configure various aspects of your project including basic information, privacy settings, and branding options.

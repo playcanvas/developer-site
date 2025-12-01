@@ -1,28 +1,37 @@
 ---
 title: カスタムシェーダー
-tags: [shaders, materials]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406044/4J2JX2-image-75.jpg"
+tags: [シェーダー, マテリアル]
+thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406044/4J2JX2-image-75.jpg
 ---
 
 <div className="iframe-container">
-    <iframe src="https://playcanv.as/p/zwvhLoS9/" title="Custom Shaders" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+    <iframe src="https://playcanv.as/p/zwvhLoS9/" title="カスタムシェーダー" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 :::info
 
-このチュートリアルでは、GLSLを使用してマテリアル上にカスタムシェーダーを作成してディゾルブエフェクトを作ります。
+このチュートリアルでは、[ShaderMaterial](https://api.playcanvas.com/engine/classes/ShaderMaterial.html) API を使用して、WebGL と WebGPU の両方で動作する、燃えるような縁を持つディゾルブエフェクトを作成します。完全なプロジェクトは[こちら](https://playcanvas.com/project/406044/overview/tutorial-custom-shaders)で確認できます。
 
 :::
 
-3DモデルをPlayCanvasにインポートすると、デフォルトで [物理マテリアル] [3]が使用されます。これは、多くのレンダリングニーズをカバーできる汎用的なマテリアルです。
+PlayCanvas に 3D モデルをインポートすると、デフォルトでは[Physical Material](/user-manual/graphics/physical-rendering/physical-materials/)が使用されます。これは、多くのレンダリング要件をカバーできる汎用性の高いマテリアルタイプです。
 
-しかし、マテリアルの特別な効果や特殊ケースを実行する必要がある場合があります。その場合は、カスタムシェーダーを記述する必要があります。
+しかし、マテリアルに特殊なエフェクトや特殊なケースを適用したいと思うことがよくあります。これを行うには、カスタムシェーダーを記述する必要があります。
 
-## シェーダーとシェーダー定義
+## ShaderMaterial API
 
-WebGLでは、すべてのブラウザで実行できるシェーダーを作成するためにGLSL言語を使用します。 PlayCanvasでは、Shaderアセットでこのコードを作成し、その後、[Shader Definition] [1]にコードを割り当てて、この定義を使用して新しい `pc.Shader`を作成します。
+PlayCanvas は、カスタムシェーダーの作成を簡素化し、WebGL (GLSL) と WebGPU (WGSL) の両方をサポートする[ShaderMaterial](https://api.playcanvas.com/engine/classes/ShaderMaterial.html) API を提供します。この API は、グラフィックス API 間の違いを自動的に処理し、シェーダー開発のためのよりクリーンなインターフェースを提供します。
 
-### バーテックスシェーダー
+## クロスプラットフォームシェーダーのサポート
+
+カスタムシェーダーがすべてのデバイスとブラウザで動作するようにするには、シェーダーの [GLSL](/user-manual/graphics/shaders/glsl-specifics/) と [WGSL](/user-manual/graphics/shaders/wgsl-specifics/) の両方のバージョンを提供する必要があります。
+
+- **GLSL** (OpenGL Shading Language): WebGL で使用されます
+- **WGSL** (WebGPU Shading Language): WebGPU で使用されます
+
+## 頂点シェーダー
+
+### GLSL 頂点シェーダー
 
 ```glsl
 attribute vec3 aPosition;
@@ -40,7 +49,31 @@ void main(void)
 }
 ```
 
-### フラグメントシェーダー
+### WGSL 頂点シェーダー
+
+```wgsl
+attribute aPosition: vec3f;
+attribute aUv0: vec2f;
+
+uniform matrix_viewProjection: mat4x4f;
+uniform matrix_model: mat4x4f;
+
+varying vUv0: vec2f;
+
+@vertex
+fn vertexMain(input: VertexInput) -> VertexOutput {
+    var output: VertexOutput;
+
+    output.vUv0 = aUv0;
+    output.position = uniform.matrix_viewProjection * uniform.matrix_model * vec4<f32>(aPosition, 1.0);
+
+    return output;
+}
+```
+
+## フラグメントシェーダー
+
+### GLSL フラグメントシェーダー
 
 ```glsl
 varying vec2 vUv0;
@@ -53,240 +86,318 @@ void main(void)
 {
     float height = texture2D(uHeightMap, vUv0).r;
     vec4 color = texture2D(uDiffuseMap, vUv0);
+
     if (height < uTime) {
-      discard;
+        discard;
     }
-    if (height < (uTime+0.04)) {
-      color = vec4(0, 0.2, 1, 1.0);
+
+    // 燃焼帯の幅
+    float edgeWidth = 0.05;
+
+    if (height < (uTime + edgeWidth)) {
+        // 内側の縁で0 → 外側の縁で1
+        float t = (height - uTime) / edgeWidth;
+
+        // 炎のグラデーション：黄色から暗いオレンジへ
+        vec3 burnColor = mix(
+            vec3(1.0, 0.7, 0.2),
+            vec3(0.6, 0.1, 0.0),
+            t
+        );
+
+        // 燃焼色を元のテクスチャとブレンドする
+        color = vec4(mix(burnColor, color.rgb, t), 1.0);
     }
+
     gl_FragColor = color;
 }
 ```
 
-上記の2つのシェーダーは、新しいマテリアルの機能を定義しています。バーテックスシェーダーでは、メッシュの頂点位置をスクリーンスペースに変換しています。フラグメントシェーダーでは、ピクセルの色を設定しています。このピクセルの色は、このアセットに提供される2つのテクスチャに基づいて選択されます。値uTimeがハイトマップ中の色よりも小さい場合は、任意のピクセルをレンダリングしません(モデルが不可視になります)。uTimeの値がハイトマップの値よりも大きい場合は、提供する拡散マップテクスチャからカラーを取得します。
+### WGSL フラグメントシェーダー
 
-### シェーダー定義
+```wgsl
+varying vUv0: vec2f;
 
-```javascript
-var vertexShader = this.vs.resource;
+uniform uTime: f32;
 
-// dynamically set the precision depending on device.
-var fragmentShader = "precision " + gd.precision + " float;\n";
-fragmentShader = fragmentShader + this.fs.resource;
+var uDiffuseMap: texture_2d<f32>;
+var uDiffuseMapSampler: sampler;
+var uHeightMap: texture_2d<f32>;
+var uHeightMapSampler: sampler;
 
+@fragment
+fn fragmentMain(input: FragmentInput) -> FragmentOutput {
+    var output: FragmentOutput;
 
-// A shader definition used to create a new shader.
-var shaderDefinition = {
-    attributes: {
-        aPosition: pc.SEMANTIC_POSITION,
-        aUv0: pc.SEMANTIC_TEXCOORD0
-    },
-    vshader: vertexShader,
-    fshader: fragmentShader
-};
+    let height = textureSample(uHeightMap, uHeightMapSampler, vUv0).r;
+    var color = textureSample(uDiffuseMap, uDiffuseMapSampler, vUv0);
+
+    if (height < uniform.uTime) {
+        discard;
+    }
+
+    // 燃焼帯の幅
+    let edgeWidth = 0.05;
+
+    if (height < (uniform.uTime + edgeWidth)) {
+        // tは0（内側の縁のすぐ内側）から1（外側の縁）まで変化
+        let t = (height - uniform.uTime) / edgeWidth;
+
+        // 炎の色：明るい黄色から暗いオレンジにフェードアウト
+        let burnColor = mix(
+            vec3f(1.0, 0.7, 0.2),
+            vec3f(0.6, 0.1, 0.0),
+            t
+        );
+
+        // 燃焼色を元のテクスチャとブレンドする（外側の縁ほど燃焼色が濃くなる）
+        color = vec4f(mix(burnColor, color.rgb, t), 1.0);
+    }
+
+    output.color = color;
+    return output;
+}
 ```
 
-シェーダー定義には3つのセクションがあります。 `attributes`では、あなたの頂点シェーダーが実行される各頂点の属性の変数名と値を指定する必要があります。これらの値は後であなたの頂点シェーダーで `attribute` として宣言されます。
+上記のシェーダーは、炎のような燃焼する縁を持つディゾルブ効果を作成します。頂点シェーダーはメッシュの頂点をスクリーン空間に変換し、フラグメントシェーダーはハイトマップテクスチャに基づいてディゾルブ効果を作成します。ピクセルでの`uTime`の値がハイトマップの値よりも大きい場合、そのピクセルは破棄されます（モデルが透明になります）。ディゾルブの縁の近くでは、リアルな燃焼効果のために炎色のグラデーションをブレンドします。
 
-バーテックスシェーダーコードは、 `vshader`プロパティで文字列として提供され、フラグメントシェーダーは 'fshader'プロパティで文字列として提供されます。
-
-上記はディゾルブエフェクトを作成するために使用されるシェーダー定義です。注意点として、2つのアセットからシェーダーコードを取得していることに注目してください。これらのアセットは[スクリプト属性][2]を使用して提供され、スクリプトからアセットに簡単にアクセスできます。
-
-属性以外に、GLSLシェーダーには2つの特別なタイプの変数 `varying` と `uniform` があります。
-
-## GLSL `varying` 変数
-
-**varying** で宣言された変数は、頂点シェーダーで設定され、フラグメントシェーダーで使用されます。これは、最初のプログラムから2番目にデータを渡す方法です。
-
-## GLSL `uniform` 変数
-
-**`uniform`** で宣言された変数は、頂点シェーダーとフラグメントシェーダーの両方で宣言されます。この変数の値は、メインアプリケーションからシェーダーに渡す必要があります。たとえば、シーンのライトの位置。
-
-## マテリアルの作成
+## ShaderMaterial の作成
 
 ```javascript
-// Create the shader from the definition
-this.shader = new pc.Shader(gd, shaderDefinition);
+// Create a new ShaderMaterial with both GLSL and WGSL versions
+this.material = new ShaderMaterial({
+    uniqueName: 'Dissolve',
+    vertexGLSL: this.vertexGLSL.resource,
+    fragmentGLSL: this.fragmentGLSL.resource,
+    vertexWGSL: this.vertexWGSL.resource,
+    fragmentWGSL: this.fragmentWGSL.resource,
+    attributes: {
+        aPosition: SEMANTIC_POSITION,
+        aUv0: SEMANTIC_TEXCOORD0
+    }
+});
+```
 
-// Create a new material and set the shader
-this.material = new pc.Material();
-this.material.shader = this.shader;
+[ShaderMaterial コンストラクター](https://api.playcanvas.com/engine/classes/ShaderMaterial.html#constructor)は、GLSL と WGSL の両方のシェーダーコードを受け取ります。PlayCanvas は、使用されているグラフィックス API に基づいて適切なバージョンを自動的に選択します。`attributes` オブジェクトは、シェーダーが期待する頂点属性を指定します。
 
+## シェーダーパラメータの設定
+
+```javascript
 // Set the initial time parameter
 this.material.setParameter('uTime', 0);
 
 // Set the diffuse texture
+const diffuseTexture = this.diffuseMap.resource;
 this.material.setParameter('uDiffuseMap', diffuseTexture);
 
-// Use the "clouds" texture as the height map property
+// Set the height map texture
+const heightTexture = this.heightMap.resource;
 this.material.setParameter('uHeightMap', heightTexture);
-
-// Replace the material on the model with our new material
-model.meshInstances[0].material = this.material;
 ```
 
-シェーダー定義を手に入れたら、新しい Shader と新しい Material を作成し、`setShader()`を使用してマテリアルにシェーダーを渡します。各 uniforms は、メソッド `setParameter()`を使用して初期化されます。最後に、元のマテリアルを新しく作成したマテリアルで置き換えます。注意:1つのモデル内の各メッシュには独自のマテリアルがあります。すなわち、モデルに1つ以上のメッシュがある場合は、1つ以上のメッシュインスタンスに、マテリアルを設定する必要があります。
+Uniform は、通常の Materials と同じように動作する[`setParameter()`](https://api.playcanvas.com/engine/classes/Material.html#setparameter)メソッドを使用して設定されます。ShaderMaterial は、GLSL と WGSL の uniform 構文の違いを自動的に処理します。
 
-*同じマテリアルを複数のメッシュに使用できます(使用すべきです)。*
-
-## テクスチャを使用する新しいマテリアル
+## シェーダーアセットのスクリプト属性
 
 ```javascript
-var diffuseTexture = this.app.assets.get(this.diffuseMap).resource;
-//...
-this.material.setParameter('uDiffuseMap', diffuseTexture);
+/**
+ * GLSL 頂点シェーダー。
+ * 
+ * @attribute
+ * @title GLSL 頂点シェーダー
+ * @type {pc.Asset}
+ */
+vertexGLSL;
+
+/**
+ * GLSL フラグメントシェーダー。
+ * 
+ * @attribute
+ * @title GLSL フラグメントシェーダー
+ * @type {pc.Asset}
+ */
+fragmentGLSL;
+
+/**
+ * WGSL 頂点シェーダー。
+ * 
+ * @attribute
+ * @title WGSL 頂点シェーダー
+ * @type {pc.Asset}
+ */
+vertexWGSL;
+
+/**
+ * WGSL フラグメントシェーダー。
+ * 
+ * @attribute
+ * @title WGSL フラグメントシェーダー
+ * @type {pc.Asset}
+ */
+fragmentWGSL;
+
+/**
+ * ディフューズマップ
+ * 
+ * @attribute
+ * @title ディフューズマップ
+ * @type {pc.Asset}
+ */
+diffuseMap;
+
+/**
+ * ハイトマップ
+ * 
+ * @attribute
+ * @title ハイトマップ
+ * @type {pc.Asset}
+ */
+heightMap;
 ```
 
-このチュートリアルで紹介されているエフェクトは、ハイトマップテクスチャを使用して達成されます。上記のコードを使用して、アセットレジストリからテクスチャにアクセスします。スクリプトのトップには、PlayCanvasエディターからテクスチャを設定できるように、 'maps'というスクリプト属性が宣言されています。
+PlayCanvas Editor で、4 つのシェーダーアセット（GLSL が 2 つ、WGSL が 2 つ）を作成し、これらのスクリプト属性に割り当てる必要があります。
+
+## Uniform の更新
 
 ```javascript
-CustomShader.attributes.add('vs', {
-    type: 'asset',
-    assetType: 'shader',
-    title: 'Vertex Shader'
-});
-
-CustomShader.attributes.add('fs', {
-    type: 'asset',
-    assetType: 'shader',
-    title: 'Fragment Shader'
-});
-
-CustomShader.attributes.add('diffuseMap', {
-    type: 'asset',
-    assetType: 'texture',
-    title: 'Diffuse Map'
-});
-
-CustomShader.attributes.add('heightMap', {
-    type: 'asset',
-    assetType: 'texture',
-    title: 'Height Map'
-});
-```
-
-ハイトマップテクスチャが読み込まれると、 `pc.Texture` オブジェクトに `uHeightMap` ユニフォームを設定できます。
-
-## Uniformの更新
-
-```javascript
-// update code called every frame
-CustomShader.prototype.update = function(dt) {
+update(dt) {
     this.time += dt;
 
-    // Bounce value of t 0->1->0
-    var t = (this.time % 2);
-    if (t > 1) {
-        t = 1 - (t - 1);
-    }
+    // 正弦波を使用して滑らかな振動を作成する
+    const t = (Math.sin(this.time) + 1) / 2;
 
-    // Update the time value in the material
+    // マテリアルのタイム値を更新する
     this.material.setParameter('uTime', t);
-};
+}
 ```
 
-消失エフェクトを得るために、高さマップの値を閾値として使用して、閾値を時間と共に増やします。上記の更新方法では、`t`の値を0と1の間でバウンスして、それを` uTime` uniformとして設定します。
+ディゾルブ効果を実現するために、時間とともに変化する閾値としてハイトマップの値を使用します。このバージョンでは、正弦波を使用して 0 から 1 の間で滑らかな振動を作成し、より自然なディゾルブアニメーションを提供します。
 
-シェーダーでは、ピクセルの高さマップの値が時間の値よりも小さい場合、そのピクセルを描画しません。加えて、しきい値に近い値の場合は、エッジを表示するためにピクセルを青色で描画します。
-
-## 完全なソースコード
+## 完全なスクリプト
 
 ```javascript
-var CustomShader = pc.createScript('customShader');
+import { Script, ShaderMaterial, SEMANTIC_POSITION, SEMANTIC_TEXCOORD0 } from 'playcanvas';
 
-CustomShader.attributes.add('vs', {
-    type: 'asset',
-    assetType: 'shader',
-    title: 'Vertex Shader'
-});
+/**
+ * エンティティのレンダーコンポーネントにディゾルブシェーダーマテリアルを適用します。
+ */
+export class CustomShader extends Script {
+    scriptName = 'dissolveShader';
 
-CustomShader.attributes.add('fs', {
-    type: 'asset',
-    assetType: 'shader',
-    title: 'Fragment Shader'
-});
+    /**
+     * GLSL 頂点シェーダー。
+     * 
+     * @attribute
+     * @title GLSL 頂点シェーダー
+     * @type {pc.Asset}
+     */
+    vertexGLSL;
 
-CustomShader.attributes.add('diffuseMap', {
-    type: 'asset',
-    assetType: 'texture',
-    title: 'Diffuse Map'
-});
+    /**
+     * GLSL フラグメントシェーダー。
+     * 
+     * @attribute
+     * @title GLSL フラグメントシェーダー
+     * @type {pc.Asset}
+     */
+    fragmentGLSL;
 
-CustomShader.attributes.add('heightMap', {
-    type: 'asset',
-    assetType: 'texture',
-    title: 'Height Map'
-});
+    /**
+     * WGSL 頂点シェーダー。
+     * 
+     * @attribute
+     * @title WGSL 頂点シェーダー
+     * @type {pc.Asset}
+     */
+    vertexWGSL;
 
-// initialize code called once per entity
-CustomShader.prototype.initialize = function() {
-    this.time = 0;
+    /**
+     * WGSL フラグメントシェーダー。
+     * 
+     * @attribute
+     * @title WGSL フラグメントシェーダー
+     * @type {pc.Asset}
+     */
+    fragmentWGSL;
 
-    var app = this.app;
-    var gd = app.graphicsDevice;
+    /**
+     * ディフューズマップ
+     * 
+     * @attribute
+     * @title ディフューズマップ
+     * @type {pc.Asset}
+     */
+    diffuseMap;
 
-    var diffuseTexture = this.diffuseMap.resource;
-    var heightTexture = this.heightMap.resource;
+    /**
+     * ハイトマップ
+     * 
+     * @attribute
+     * @title ハイトマップ
+     * @type {pc.Asset}
+     */
+    heightMap;
 
-    var vertexShader = this.vs.resource;
-    var fragmentShader = "precision " + gd.precision + " float;\n";
-    fragmentShader = fragmentShader + this.fs.resource;
+    time = 0;
 
-    // A shader definition used to create a new shader.
-    var shaderDefinition = {
-        attributes: {
-            aPosition: pc.SEMANTIC_POSITION,
-            aUv0: pc.SEMANTIC_TEXCOORD0
-        },
-        vshader: vertexShader,
-        fshader: fragmentShader
-    };
+    // エンティティごとに一度呼び出される初期化コード
+    initialize() {
+        // 新しいマテリアルを作成し、シェーダーを設定する
+        this.material = new ShaderMaterial({
+            uniqueName: 'Dissolve',
+            vertexGLSL: this.vertexGLSL.resource,
+            fragmentGLSL: this.fragmentGLSL.resource,
+            vertexWGSL: this.vertexWGSL.resource,
+            fragmentWGSL: this.fragmentWGSL.resource,
+            attributes: {
+                aPosition: SEMANTIC_POSITION,
+                aUv0: SEMANTIC_TEXCOORD0
+            }
+        });
 
-    // Create the shader from the definition
-    this.shader = new pc.Shader(gd, shaderDefinition);
+        // 初期時間パラメータを設定する
+        this.material.setParameter('uTime', 0);
 
-    // Create a new material and set the shader
-    this.material = new pc.Material();
-    this.material.shader = this.shader;
+        // ディフューズテクスチャを設定する
+        const diffuseTexture = this.diffuseMap.resource;
+        this.material.setParameter('uDiffuseMap', diffuseTexture);
 
-    // Set the initial time parameter
-    this.material.setParameter('uTime', 0);
+        // ハイトマップテクスチャを設定する
+        const heightTexture = this.heightMap.resource;
+        this.material.setParameter('uHeightMap', heightTexture);
 
-    // Set the diffuse texture
-    this.material.setParameter('uDiffuseMap', diffuseTexture);
-
-    // Use the "clouds" texture as the height map property
-    this.material.setParameter('uHeightMap', heightTexture);
-
-    // Replace the material on the model with our new material
-    var renders = this.entity.findComponents('render');
-
-    for (var i = 0; i < renders.length; ++i) {
-        var meshInstances = renders[i].meshInstances;
-        for (var j = 0; j < meshInstances.length; j++) {
-            meshInstances[j].material = this.material;
+        // すべてのレンダーコンポーネントのマテリアルを置き換える
+        const renders = this.entity.findComponents('render');
+        for (let i = 0; i < renders.length; ++i) {
+            const meshInstances = renders[i].meshInstances;
+            for (let j = 0; j < meshInstances.length; j++) {
+                meshInstances[j].material = this.material;
+            }
         }
     }
-};
 
-// update code called every frame
-CustomShader.prototype.update = function(dt) {
-    this.time += dt;
+    // フレームごとに呼び出される更新コード
+    update(dt) {
+        this.time += dt;
 
-    // Bounce value of t 0->1->0
-    var t = (this.time % 2);
-    if (t > 1) {
-        t = 1 - (t - 1);
+        // 正弦波を使用して滑らかな振動を作成する
+        const t = (Math.sin(this.time) + 1) / 2;
+
+        // マテリアルのタイム値を更新する
+        this.material.setParameter('uTime', t);
     }
-
-    // Update the time value in the material
-    this.material.setParameter('uTime', t);
-};
+}
 ```
 
-以上がそのスクリプトの全体です。このスクリプトを動作させるには、バーテックスシェーダとフラグメントシェーダのアセットを作成する必要があることを忘れないでください。
+このスクリプトは、ShaderMaterial API を使用してクロスプラットフォームのカスタムシェーダーを作成する方法を示しています。ディゾルブ効果は、ハイトマップを使用してどのピクセルを破棄するかを決定し、溶解の進行とともに燃えるような縁の効果を作成します。
 
-[1]: https://api.playcanvas.com/engine/classes/Shader.html
-[2]: /user-manual/scripting/fundamentals/script-attributes/
-[3]: /user-manual/graphics/physical-rendering/physical-materials/
-[project]: https://playcanvas.com/project/406044/overview/tutorial-custom-shaders
+## GLSL と WGSL の違い
+
+両方の API 用にシェーダーを記述する際には、以下の重要な違いに留意してください。
+
+- **構文**: WGSL はより明示的な型指定（`vec3f`、`f32`）を使用しますが、GLSL は型を推論します
+- **属性/Varyings**: WGSL は構造化された入出力を使用しますが、GLSL はグローバル変数を使用します
+- **テクスチャ**: WGSL はテクスチャとサンプラーを分離しますが、GLSL はそれらを結合します
+- **エントリポイント**: WGSL は `@vertex` および `@fragment` デコレーターを使用しますが、GLSL は `main()` を使用します
+
+ShaderMaterial API はこれらの違いを自動的に処理するため、API 固有の詳細ではなくシェーダーロジックに集中できます。

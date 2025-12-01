@@ -1,6 +1,5 @@
 ---
-title: Editor
-sidebar_position: 6
+title: PlayCanvas Editor
 ---
 
 ## Overview
@@ -9,7 +8,7 @@ The PlayCanvas Editor is a visual editing tool which you use to create and edit 
 
 * Runs in your browser, so it's available wherever you are.
 * Uses the PlayCanvas [Engine](../engine) to render your scene. What you see is what you get.
-* One button press to open your project in a new tab - the [Launch page](launch-page).
+* One button press to open your project in a new tab - the [Launch page](interface/launch-page).
 * Live editing means that you can iterate on your game, even while it's running.
 * [Real-time collaboration](realtime-collaboration) of multiple users on a single project.
 * [Version control](version-control) to organize features into separate branches.

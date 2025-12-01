@@ -1,6 +1,5 @@
 ---
 title: AR
-sidebar_position: 20
 ---
 
 PlayCanvasは、WebXR APIを通じて、また人気のあるARフレームワークとの統合を通じて、モバイルおよびHMDデバイス向けの拡張現実（AR）アプリケーションを作成できます。

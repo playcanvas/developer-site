@@ -1,6 +1,5 @@
 ---
 title: Layers
-sidebar_position: 9
 ---
 
 ## Layers Overview {#layers-overview}

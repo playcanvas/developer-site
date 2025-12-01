@@ -6,7 +6,7 @@ const faqDir = path.join(__dirname, 'faq');
 const files = fs.readdirSync(faqDir);
 files.sort();
 
-const outfile = path.join(__dirname, 'docs', 'user-manual', 'faq.md');
+const outfile = path.join(__dirname, 'docs', 'user-manual', 'editor', 'faq.md');
 const stream = fs.createWriteStream(outfile);
 
 stream.once('open', () => {

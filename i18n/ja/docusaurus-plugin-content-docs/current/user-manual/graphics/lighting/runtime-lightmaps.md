@@ -1,6 +1,5 @@
 ---
 title: ランタイムライトマップ
-sidebar_position: 5
 ---
 
 ![Sponza](/img/user-manual/graphics/lighting/lightmapping/sponza.jpg)
@@ -101,7 +100,7 @@ Soft Directional Lightや環境ライトのベイキングの場合、ベイク�
 
 ![Render Component Settings](/img/user-manual/graphics/lighting/lightmapping/render-settings.png)
 
-**キャストライトマップシャドウ (Cast Lightmap Shadows) **オプションは、モデルがライトマップにシャドウをキャストするかどうかを判断します。生成されたライトマップテクスチャの解像度を確認できます。また、UV1の領域に乗数を適用してそのサイズに影響を与えるオプションもあります。ライトマップサイズの乗数については、以下で説明します。
+**キャストライトマップシャドウ (Cast Lightmap Shadows)**オプションは、モデルがライトマップにシャドウをキャストするかどうかを判断します。生成されたライトマップテクスチャの解像度を確認できます。また、UV1の領域に乗数を適用してそのサイズに影響を与えるオプションもあります。ライトマップサイズの乗数については、以下で説明します。
 
 ## 一般的な光設定 {#common-light-settings}
 
@@ -120,7 +119,7 @@ Soft Directional Lightや環境ライトのベイキングの場合、ベイク�
 
 たとえば、サイズが1x1ユニット(メーター)の平面を検討してください。グローバルサイズの乗数が16で、モデルコンポーネント乗数が2の場合、32x32(`1 sq/m * 16 * 2`)のライトマップテクスチャサイズが生成されます。1平方メートルに32x32ピクセルがあり、これはピクセルサイズの約3cmです。
 
-**最大解像度 (Max Resolution) ** は、メモリを節約するために生成されたライトマップの最大解像度制限を設定します。
+**最大解像度 (Max Resolution)** は、メモリを節約するために生成されたライトマップの最大解像度制限を設定します。
 
 **モード**は、焼き付けるデータを指定できます(例:拡散色またはライトからピクセルへの方向)。方向データは、単純なスペキュラリティをシミュレートするために使用されます。1つの方向のみが焼き付けられるため、複数のライトが重なると複雑になります。方向の焼き付けは、個々のライトにも設定できます。
 
@@ -140,11 +139,11 @@ Soft Directional Lightや環境ライトのベイキングの場合、ベイク�
 
 警告を修正するには、Modelアセットを選択して**パイプライン**セクションを開きます。 **Auto-Unwrapping** ボタンをクリックし、進行状況バーが完了するまで待ちます。自動アンラップは、Modelアセットを編集します。そのため、ソースからモデルを再インポートする場合(たとえば、新しいFBXをアップロードする場合)は、事前に計算されたUV1が失われます。アップロードされたモデルにUV1がない場合は、モデルを再度自動アンラップする必要があります。
 
-**パディング (padding) ** オプションは、アンラップが発生するときのセクション間のスペースを決定します。ライトが存在してはいけない場所に光が見える場合は、パディングを増やしてライトブリーディングを減らすことができます。
+**パディング (padding)** オプションは、アンラップが発生するときのセクション間のスペースを決定します。ライトが存在してはいけない場所に光が見える場合は、パディングを増やしてライトブリーディングを減らすことができます。
 
 [4]: /user-manual/graphics/lighting/shadows
 [9]: /user-manual/graphics/lighting/lightmapping/#uv-mapping
 [11]: /user-manual/graphics/advanced-rendering/batching
-[14]: /user-manual/scenes/settings#ambient-color
-[15]: /user-manual/scenes/settings#skybox
-[16]: /user-manual/scenes/settings#lightmapping
+[14]: /user-manual/editor/interface/settings/rendering/
+[15]: /user-manual/editor/interface/settings/rendering/
+[16]: /user-manual/editor/interface/settings/lightmapping/

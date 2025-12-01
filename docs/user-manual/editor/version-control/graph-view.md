@@ -1,6 +1,5 @@
 ---
 title: Graph View
-sidebar_position: 10
 ---
 
 ## Overview

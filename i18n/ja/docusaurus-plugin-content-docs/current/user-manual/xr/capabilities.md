@@ -1,6 +1,5 @@
 ---
 title: 機能
-sidebar_position: 3
 ---
 
 WebXRは、さまざまな機能と新しいAPIをモジュールを通じて公開しており、これらは使いやすさのためにPlayCanvas Engineに統合されています。

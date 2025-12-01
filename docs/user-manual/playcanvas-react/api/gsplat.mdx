@@ -1,0 +1,46 @@
+---
+description: Documentation for the GSplat component
+---
+
+# `<GSplat/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { GSplatExample } from './gsplat-example';
+import GSplatExampleSource from '!!raw-loader!./gsplat-example.jsx';
+
+The `<GSplat>` component is used to render [Gaussian Splats](https://api.playcanvas.com/engine/classes/GSplatComponent.html). Gaussian Splats are a new way of capturing and rendering high quality 3D content. They capture the shape and lighting of a scene in a way that produces incredibly high quality results.
+
+The `useSplat` hooks accepts ply or sog files or any other files that can be loaded by the engine.
+
+## Usage
+
+You can load a Gaussian Splat asset with the [`useSplat`](../../api/hooks/use-asset#usesplat) hook and then use the `<GSplat>` component to render it.
+
+```tsx
+const { asset } = useSplat('/assets/toy-cat.sog');
+<GSplat asset={asset} />
+```
+
+<CodeExample
+  label="Load and render a Gaussian Splat"
+  filename="gsplat-example.jsx"
+  code={GSplatExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging useLight={false} useGrid={false} camera={[2, 1, 2]} useControls={true}>
+      <GSplatExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+Learn more about the [GSplat Component](https://api.playcanvas.com/engine/classes/GSplatComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+import { GSplat } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof GSplat>;
+export default $;
+```

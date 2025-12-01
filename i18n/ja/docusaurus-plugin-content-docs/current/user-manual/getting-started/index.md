@@ -1,36 +1,52 @@
 ---
 title: はじめに
-sidebar_position: 1
 ---
 
 ## PlayCanvasとは？
 
-PlayCanvasは、インタラクティブなWebコンテンツのビジュアル開発プラットフォームです。使用するツールも構築するWebアプリも、いずれもHTML5によって動作します。プラットフォームはWeb上にホストされているため、何もインストールする必要はありませんし、サポートされているWebブラウザを実行するどんなデバイスからでも作業にアクセスできます。
+PlayCanvasは✨ **ウェブグラフィックス作成プラットフォーム** ✨です
 
-## 主な特徴
+PlayCanvasは、インタラクティブでグラフィカルなウェブアプリケーションを構築するために使用できるオープンソース製品のコレクションです。
 
-### エディター
+🦾 [**PlayCanvas Engine**](../engine) - すべてのPlayCanvasアプリケーションを動かすオープンソースのJavaScriptランタイム  
+⚛️ [**PlayCanvas React**](../playcanvas-react) - PlayCanvas EngineをラップするオープンソースのReactベースの宣言型インターフェース  
+🧩 [**PlayCanvas Web Components**](../web-components) - PlayCanvas EngineをラップするオープンソースのWeb Componentsベースの宣言型インターフェース  
+🛠️ [**PlayCanvas Editor**](../editor) - PlayCanvasアプリケーションを構築するためのリアルタイム共同ビジュアル編集環境
 
-PlayCanvasエディターは、ビジュアルエディターです。シーン、アプリケーション、ゲームを素早く構築できます。エディターを使ってプロジェクトのアセットを管理し、インタラクティブ要素を追加し、チームとのコミュニケーションや作業を行います。エディターはリアルタイムで協同作業が可能で、これによりチームの作業による変更を即座に確認でき、アプリケーションをすべてのデバイスで即時に作成し、テストすることができます。
+## どの製品があなたに適していますか？
 
-<div className="iframe-container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/PS4oMLPyYfI" title="PlayCanvas Editor Live Link" allowfullscreen></iframe>
-</div>
+開発者はそれぞれ異なるため、PlayCanvasへの適切な入り口を選ぶことは、あなたの経験とスキルに依存します。私たちが選ぶお手伝いをします：
 
-詳細は[editor][5]セクションでご確認ください。
+### 🦾 [**PlayCanvas Engine**](../engine) - *フルコントロール開発*
 
-### アセット (Asset)
+**最適：** 経験豊富なプログラマー、パフォーマンスが重要なアプリケーション、カスタムワークフロー
+**次の場合はこれを選択：** 最大限のコントロールを望む、特定のアーキテクチャ要件がある、または複雑なシステムを構築している場合
 
-PlayCanvasは、インタラクティブ要素のあるウェブアプリケーションに必要なアセットを作成し、管理することができます。PlayCanvasはすべての主要な3Dファイル形式をインポートできるだけでなく画像、オーディオ、その他必要なアセットタイプをアップロードすることができます。
+### ⚛️ [**PlayCanvas React**](../playcanvas-react) - *React開発者向け*
 
-詳細は[アセット][6]セクションでご確認ください。
+**最適：** React開発者、コンポーネントベースで考える方、既存のReactプロジェクト
+**次の場合はこれを選択：** すでにReactを使用している、宣言型3Dシーンを望む、またはReactアプリに3Dを統合する必要がある場合
 
-### プロジェクトの公開方法
+### 🧩 [**PlayCanvas Web Components**](../web-components) - *標準ベースの開発*
 
-PlayCanvasは、WebGLアプリケーションをワンクリックでにホスティングすることができます。また、完成したプロジェクトはダウンロードもでき、自身のウェブサーバー上でホスティングすることができます。
+**最適：** Vanilla JS開発者、フレームワーク非依存のプロジェクト、ウェブ標準愛好家
+**次の場合はこれを選択：** ネイティブのウェブ技術を好む、フレームワークの独立性を望む、またはカスタムHTML要素が好きである場合
 
-詳細は [パブリッシング][7]セクションでご確認ください。
+### 🛠️ [**PlayCanvas Editor**](../editor) - *ビジュアル優先の開発*
 
-[5]: /user-manual/editor
-[6]: /user-manual/assets
-[7]: /user-manual/publishing
+**最適：** 初心者、チーム、迅速なプロトタイピング、視覚的な学習者
+**次の場合はこれを選択：** ドラッグ＆ドロップでのシーン構築を望む、リアルタイムコラボレーション、またはコードよりもビジュアルツールを好む場合
+
+### 😕 まだ迷っていますか？
+
+この簡単な質問票を参考にしてください：
+
+**3D開発は初めてですか？** → [**PlayCanvas Editor**](../editor)から始めましょう  
+**React開発者ですか？** → [**PlayCanvas React**](../playcanvas-react)を使用してください  
+**Vanilla HTMLとJavaScriptを好みますか？** → [**PlayCanvas Web Components**](../web-components)を試してください  
+**最大限のコントロールが必要なコーダーですか？** → [**PlayCanvas Engine**](../engine)を選びましょう  
+**チームで作業していますか？** → [**PlayCanvas Editor**](../editor)が最高のコラボレーションを提供します  
+**UnityやUnrealからの移行ですか？** → [**PlayCanvas Editor**](../editor)は似たようなエンドユーザーエクスペリエンスを提供します  
+**既存のアプリやサイトに統合しますか？** → 既存のスタックに基づいて[**React**](../playcanvas-react)または[**Web Components**](../web-components)を選択してください
+
+ご不明な点がありましたら、[Discord](https://discord.gg/RSaMRzg)でお気軽にご相談ください。

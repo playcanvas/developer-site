@@ -1,6 +1,5 @@
 ---
 title: 単位
-sidebar_position: 1
 ---
 
 PlayCanvasのシーンでは、一般的に1ユニットを1メートルとして扱います。

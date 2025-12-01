@@ -1,6 +1,5 @@
 ---
 title: Input
-sidebar_position: 8
 ---
 
 ユーザは、Elementコンポーネントの `useInput`フィールドを有効にすることで、[Element][1]コンポーネントとインタラクトできます。
@@ -91,7 +90,7 @@ this.entity.element.on('click', function (event) {
 }, this);
 ```
 
-`stopPropagation`を呼び出すと、イベントが` pc.Mouse`や `pc.TouchDevice`のような他の入力デバイスによって処理されなくなります。たとえば、`app.mouse.wasPressed`を使ってマウス入力を処理している場合、`mousedown`イベントで `stopPropagation`を呼び出して`app.mouse.wasPressed`がtrueを返さないようにします。 例えば：
+`stopPropagation`を呼び出すと、イベントが`pc.Mouse`や `pc.TouchDevice`のような他の入力デバイスによって処理されなくなります。たとえば、`app.mouse.wasPressed`を使ってマウス入力を処理している場合、`mousedown`イベントで `stopPropagation`を呼び出して`app.mouse.wasPressed`がtrueを返さないようにします。 例えば：
 
 ```javascript
 var InputScript = pc.createScript('inputScript');
@@ -110,6 +109,7 @@ InputScript.prototype.update = function (dt) {
     }
 }
 ```
+
 ## Google Chromeのマウスとタッチイベントの競合
 
 Google Chromeは、タッチデバイスでもマウスイベントをシミュレートします。そのため、予期しない動作が発生する可能性があります。たとえば、クリックイベントの直後にボタンを非表示にすると、その後ろにある別のUI要素も望ましくないクリックイベントを受信する可能性があります。

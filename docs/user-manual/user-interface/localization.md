@@ -1,6 +1,5 @@
 ---
 title: Localization
-sidebar_position: 9
 ---
 
 This page describes how to localize your Text Elements to different languages.

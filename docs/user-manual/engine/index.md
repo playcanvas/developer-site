@@ -1,6 +1,5 @@
 ---
-title: Engine
-sidebar_position: 5
+title: PlayCanvas Engine
 ---
 
 The PlayCanvas Engine is the run-time framework that powers your PlayCanvas applications. It is written in JavaScript and is open sourced under an MIT license on [GitHub](https://github.com/playcanvas/engine). It is published on the [NPM registry](https://www.npmjs.com/package/playcanvas) and ships with full TypeScript declarations. It also comes with a comprehensive set of [code examples](https://playcanvas.github.io/).

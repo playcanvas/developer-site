@@ -1,6 +1,5 @@
 ---
 title: Debugging
-sidebar_position: 3
 ---
 
 Debugging is essential for identifying and fixing issues in your PlayCanvas scripts. When your code doesn't behave as expected, these tools and techniques will help you quickly find and resolve problems.

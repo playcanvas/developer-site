@@ -1,6 +1,5 @@
 ---
 title: Calling the ammo.js API
-sidebar_position: 6
 ---
 
 The PlayCanvas integration with ammo.js does not expose the full capability of the ammo.js API. However, it is possible to call the ammo.js API directly from your PlayCanvas scripts.

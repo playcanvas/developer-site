@@ -1,6 +1,5 @@
 ---
 title: Hardware Instancing
-sidebar_position: 5
 ---
 
 Hardware instancing is a rendering technique which allows the GPU to render multiple identical meshes in a small number of draw calls. Each instance of the mesh can have a different limited amount of state (for example, position or color). It's a technique suitable to drawing objects such as trees or bullets, say.

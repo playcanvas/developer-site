@@ -1,6 +1,5 @@
 ---
 title: イベント
-sidebar_position: 3
 ---
 
 グラフを作成した後、さまざまなイベントのコールバックを登録できます。これは、グラフの[on 関数](https://api.playcanvas.com/pcui-graph/classes/Graph.html#on)を使用して実現されます。以下のイベントがサポートされています。

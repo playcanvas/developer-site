@@ -1,6 +1,5 @@
 ---
-title: Third-party Asset Sites
-sidebar_position: 6
+title: サードパーティアセットサイト
 ---
 
 ## PlayCanvasで使用する3Dモデル、サウンドFX、音楽はどこで手に入れるのでしょうか?

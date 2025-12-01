@@ -1,0 +1,100 @@
+---
+title: Physics
+---
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application, Entity } from '@playcanvas/react'
+import { Camera } from '@playcanvas/react/components'
+import { BasicPhysics } from './components/basic-physics';
+import BasicPhysicsSource from '!!raw-loader!./components/basic-physics.jsx'
+
+PlayCanvas ships with a robust [physics system](/user-manual/physics/). This enables realistic simulations of objects in 3D space, including gravity, collisions, forces and constraints. The physics system is powered by the [ammo.js](https://github.com/kripken/ammo.js) physics engine.
+
+## Getting started
+
+PlayCanvas uses ammo.js as the physics engine. ammo.js is a WASM library and in React it's lazy loaded. This means you're only shipping ammo.js when you need it, helping you keep your bundle size down. It also means you can render something before ammo.js has loaded, or maybe you only need physics as a result of some user interaction. In any case, lazy loading ammo.js means you can get your content rendering fast.
+
+To use the physics system, you'll need to install the `sync-ammo` dependency.
+
+```bash
+npm install sync-ammo
+```
+
+You'll also need to add the `<Application usePhysics/>` prop to your root `<Application/>` component.
+
+:::tip
+
+PlayCanvas React will only load ammo.js when you have the `<Application usePhysics/>` prop set.
+
+:::
+
+```jsx
+<Application usePhysics>
+  <Entity>
+    <Rigidbody type="box" />
+  </Entity>
+</Application>
+```
+
+## Usage
+
+You allow entities to participate in physics simulation by adding a `RigidBody` and `Collision` component to them. In the example below, we're creating a static ground, a falling sphere and a falling box.
+
+<CodeExample
+  label="Objects falling under gravity"
+  filename="basic-physics.jsx"
+  code={BasicPhysicsSource}
+  showDemo
+>
+    <Application usePhysics>
+      <Staging 
+        camera={[4, 3, 4]} 
+        useGrid={true} 
+        useControls={true}
+        useShadow={true}
+      >
+        <BasicPhysics />
+      </Staging>
+    </Application>
+</CodeExample>
+
+### Physics Properties
+
+You can customize physics behavior by changing the various properties of the [`<RigidBody/>`](../../api/rigidbody) and [`<Collision/>`](../../api/collision) components. Check out the [Physics documentation](/user-manual/physics/) for more information.
+
+```jsx
+<RigidBody 
+  type="dynamic"
+  mass={1}                // Object mass
+  linearDamping={0.1}     // Air resistance for movement
+  angularDamping={0.1}    // Air resistance for rotation
+  friction={0.5}          // Surface friction
+  restitution={0.3}       // Bounciness (0 = no bounce, 1 = perfect bounce)
+/>
+```
+
+```jsx
+<Collision 
+  type="box"
+  halfExtents={[1, 1, 1]} // Size for box collision
+  radius={0.5}            // Radius for sphere/cylinder collision
+  height={2}              // Height for capsule/cylinder collision
+/>
+```
+
+## The `usePhysics` Hook
+
+Because the physics engine is lazily instantiated you'll want to handle this in a reactive way. This is where the `usePhysics` hook comes in.
+
+```jsx
+import { usePhysics } from '@playcanvas/react/hooks';
+
+const PhysicsStatus = () => {
+  const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics();
+  // ...
+};
+```
+
+The `usePhysics` hook provides information about the physics engine state. You can read more about the [`usePhysics`](../../api/hooks/use-physics) hook in the API reference.
+
+For more detailed information about PlayCanvas physics, see the [PlayCanvas physics](/user-manual/physics/) docs.

@@ -1,13 +1,11 @@
 ---
 title: PlayCanvas用の3Dモデルのエクスポート
-sidebar_position: 3
 ---
 
 PlayCanvasは、glTFバイナリ(GLB)、FBX、OBJ、3DS、COLLADA(DAE)の以下の形式の3Dコンテンツをインポートできます。 GLBはオープンソースの標準規格であり、エディターで非常によくサポートされているため、GLBの使用を強くお勧めします。
 
-![GLB Import Example](/img/user-manual/assets/models/building/glb-import.gif)
-
-(Loïc Norgeot氏によるモデルとGeoffrey Marchal氏によるモスキートスキャンは[Sketchfab][mosquito]にてライセンスされ、[CC BY 4.0] [cc-40]である。)
+![GLBインポートの例](/img/user-manual/assets/models/building/glb-import.gif)  
+*Loïc NorgeotによるモデルとGeoffrey Marchalによる蚊のスキャンは、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)ライセンスに基づき[Sketchfab](https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1)から提供されています*
 
 GLBが利用できない場合は、ロバストで十分にテストされた業界標準形式であるFBXを使用してください。
 
@@ -25,6 +23,3 @@ GLBが利用できない場合は、ロバストで十分にテストされた�
 * モデリングアプリケーションで利用可能な最新のFBXエクスポーターをインストールしてください。
 * FBXエクスポーターパネルで 'Embed Media' （メディアの埋め込み）」オプションを選択してください。これにより、エクスポートされたFBXにシーンのテクスチャが含まれます。これにより、PlayCanvasへのインポート時にマテリアルとテクスチャのリンクが保持されます。それ以外の場合、すべてのシーンテクスチャを別々にアップロードし、すべてのテクスチャをマテリアルに再リンクする必要があります。
 * FBXエクスポーターパネルで 'Binary' ファイルフォーマットオプションを選択してください。これにより、FBXファイルサイズが大幅に削減されます。
-
-[cc-40]: https://creativecommons.org/licenses/by/4.0/
-[mosquito]: https://sketchfab.com/3d-models/

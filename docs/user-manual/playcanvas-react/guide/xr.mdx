@@ -1,0 +1,135 @@
+---
+title: XR
+---
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample'
+import { Application } from '@playcanvas/react'
+import { XrExample } from './components/xr-example'
+import XrExampleSource from '!!raw-loader!./components/xr-example.jsx'
+
+PlayCanvas React makes it easy to add Virtual Reality (VR) and Augmented Reality (AR) support to your applications using the WebXR API.
+
+## Basic Setup
+
+To enable XR support in your React application, you'll need:
+
+1. **XR Scripts** - Import the XR controller and navigation scripts from the PlayCanvas engine package
+2. **Camera Setup** - Configure your camera entity with XR scripts attached
+3. **XR Controls** - Add UI buttons to enter and exit XR sessions (WebXR requires user interaction)
+4. **Secure Context** - Serve your app over HTTPS (or `localhost` during development)
+
+## XR Scripts
+
+The PlayCanvas engine provides two essential XR scripts:
+
+- **`XrControllers`** - Automatically downloads and renders XR controller models for detected controllers (including hand tracking)
+- **`XrNavigation`** - Implements teleportation-based navigation using point-and-select actions
+
+Import them from the PlayCanvas scripts package:
+
+```tsx
+import { XrControllers } from 'playcanvas/scripts/esm/xr-controllers.mjs'
+import { XrNavigation } from 'playcanvas/scripts/esm/xr-navigation.mjs'
+```
+
+## Camera Configuration
+
+For XR to work properly, you need a camera entity with the XR scripts attached. The recommended structure is:
+
+```tsx
+<Entity name="camera-root">
+  <Entity name="camera" position={[0, 1.6, 0]}>
+    <Camera clearColor="#1e1e1e" />
+  </Entity>
+  <Script script={XrControllers} />
+  <Script script={XrNavigation} />
+</Entity>
+```
+
+The camera is positioned at approximately eye-level (1.6 meters) and the scripts are attached to the parent entity.
+
+## Starting XR Sessions
+
+WebXR requires a user gesture to start a session. Use the `app.xr` API to start and manage XR sessions:
+
+```tsx
+const app = useApp()
+
+const startVR = () => {
+  const camera = app.root.findComponent('camera')
+  if (camera) {
+    app.xr.start(camera, 'immersive-vr', 'local-floor')
+  }
+}
+
+const startAR = () => {
+  const camera = app.root.findComponent('camera')
+  if (camera) {
+    app.xr.start(camera, 'immersive-ar', 'local-floor')
+  }
+}
+```
+
+## Complete Example
+
+Here's a complete example with XR support, including buttons to enter AR/VR mode and a simple scene with cubes you can navigate around in XR:
+
+<CodeExample
+  label="XR Support with AR and VR"
+  filename="xr-example.jsx"
+  code={XrExampleSource}
+  showDemo
+  showControls={false}
+>
+  <Application>
+    <Staging useGrid useLight camera={[3, 2, 3]}>
+      <XrExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+:::tip
+
+- Press **Escape** to exit an active XR session
+- XR availability depends on your device and browser support
+- Use a VR headset or AR-capable mobile device to test the full experience
+- During development, Chrome and Edge support WebXR emulation via DevTools
+
+:::
+
+## Checking XR Availability
+
+You can check if AR or VR is available on the current device:
+
+```tsx
+const app = useApp()
+const arAvailable = app.xr.isAvailable('immersive-ar')
+const vrAvailable = app.xr.isAvailable('immersive-vr')
+```
+
+## XR Events
+
+Listen to XR session events to update your UI:
+
+```tsx
+useEffect(() => {
+  const onStart = () => console.log('XR session started')
+  const onEnd = () => console.log('XR session ended')
+  
+  app.xr.on('start', onStart)
+  app.xr.on('end', onEnd)
+  
+  return () => {
+    app.xr.off('start', onStart)
+    app.xr.off('end', onEnd)
+  }
+}, [app])
+```
+
+## Next Steps
+
+The PlayCanvas Engine has comprehensive XR support with many advanced features. For more information, check out:
+
+- [XR User Manual](/user-manual/xr) - Comprehensive XR documentation
+- [WebXR API Reference](https://api.playcanvas.com/engine/classes/XrManager.html) - Full API documentation
+- [XR Scripts Source](https://github.com/playcanvas/engine/tree/main/scripts/esm) - View the XR scripts source code

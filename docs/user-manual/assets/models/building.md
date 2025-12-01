@@ -1,6 +1,5 @@
 ---
 title: Building Models
-sidebar_position: 2
 ---
 
 Building art and animations for PlayCanvas can be done using almost any of the many 3D modeling programs available. For example: Blender, SketchUp, Autodesk 3D Studio Max or Autodesk Maya.
@@ -20,9 +19,8 @@ The import of GLBs supports the following glTF features for incredibly fast scen
 
 As such, to target PlayCanvas, you do not have to use any special art tool plugins and there are no PlayCanvas-specific workflows you must follow.
 
-![GLB Import Example](/img/user-manual/assets/models/building/glb-import.gif)
-
-(Model by Loïc Norgeot and mosquito scan by Geoffrey Marchal for [Sketchfab][13] licensed under [CC BY 4.0][12]).
+![GLB Import Example](/img/user-manual/assets/models/building/glb-import.gif)  
+*Model by Loïc Norgeot and mosquito scan by Geoffrey Marchal for [Sketchfab](https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1) licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)*
 
 PlayCanvas also supports the importing of FBX files which is another common interchange format. However, FBX materials are not imported as faithfully as glTF materials and might require some editing after import.
 
@@ -41,7 +39,7 @@ For generating textures, consider these programs:
 - Free: Blender, Pixexix Free, xNormal, MaPZone, GIMP, Krita desktop, MyPaint.
 - Paid: Substance Designer (as well as Substance Painter and Bitmap2Material), Photoshop, Quixel NDO and DDO, CrazyBump, Pixexix Pro, Clip Studio Paint/Manga Studio, SERIF DrawPlus/PhotoPlus.
 
-Note many of the programs listed above for modeling also allow texture painting. If you would like more options, this [external wiki][1] page can help. Please note that some of the information may be out-of-date.
+Note many of the programs listed above for modeling also allow texture painting. If you would like more options, this [external wiki](http://wiki.polycount.com/wiki/Tools) page can help. Please note that some of the information may be out-of-date.
 
 ## General Considerations for Mesh Construction
 
@@ -56,7 +54,7 @@ Regardless which modeling application you are using, there a number of things to
 
 ![Blender Logo](/img/user-manual/assets/models/building/blender-logo.jpg)
 
-[Blender][4] is a fantastic free tool for 3D modeling and it is perfect for generating 3D assets for PlayCanvas.
+[Blender](https://www.blender.org/) is a fantastic free tool for 3D modeling and it is perfect for generating 3D assets for PlayCanvas.
 
 Blender supports exporting to GLB, FBX and COLLADA but the built-in exporters do have some limitations.
 
@@ -72,7 +70,7 @@ The Blender COLLADA exporter does not have the ability to embed textures into th
 
 The 2.71 release of Blender features a revamped FBX export module that enables multiple embedded textures directly from Blender. First make sure the object is rendered correctly within Blender. When exporting to FBX, set the 'Path Mode' to Copy and check the 'Embed Textures' box.
 
-Alternatively, use the [Autodesk FBX Converter][5] to convert an export from Blender into one with embedded media. Just open the file in the FBX Converter and re-save with the *Embedded Media* checkbox set.
+Alternatively, use the [Autodesk FBX Converter](https://www.autodesk.com/developer-network/platform-technologies/fbx-converter-archives) to convert an export from Blender into one with embedded media. Just open the file in the FBX Converter and re-save with the *Embedded Media* checkbox set.
 
 :::warning
 
@@ -90,8 +88,8 @@ Animations included within the blend file are exported with the default fbx expo
 
 There are plenty of resources for learning how to use Blender on the web. A couple that we recommend are:
 
-- [Blender Cookie][2]
-- [Blender Guru][6]
+- [Blender Cookie](https://cgcookie.com/learn-blender)
+- [Blender Guru](https://www.blenderguru.com/)
 
 ---
 
@@ -168,11 +166,3 @@ Sphere mapping is one of the cheapest, least 'convincing' forms of reflection ma
 You should use the standard material types in Maya: lambert, blinn and phong. The highlighted areas in the screenshot below show the material settings that are respected when you export to PlayCanvas:
 
 ![Maya material editor](/img/user-manual/assets/models/building/maya-material-editor.jpg)
-
-[1]: http://wiki.polycount.com/wiki/Tools
-[2]: https://cgcookie.com/learn-blender
-[4]: https://www.blender.org/
-[5]: https://www.autodesk.com/developer-network/platform-technologies/fbx-converter-archives
-[6]: https://www.blenderguru.com/
-[12]: https://creativecommons.org/licenses/by/4.0/
-[13]: https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1

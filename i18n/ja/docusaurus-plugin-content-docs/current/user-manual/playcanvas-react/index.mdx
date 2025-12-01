@@ -1,0 +1,87 @@
+---
+title: PlayCanvas React
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+[PlayCanvas React](https://github.com/playcanvas/react) は、PlayCanvas 3D エンジンのパワーを React エコシステムにもたらすモダンなライブラリです。使い慣れた React パターンを使用して、インタラクティブな 3D アプリケーションを構築するための宣言的でコンポーネントベースのアプローチを提供します。
+
+詳細については、[公式ドキュメント](https://playcanvas-react.vercel.app/docs)を参照するか、[GitHub リポジトリ](https://github.com/playcanvas/react)をご覧ください。
+
+<div className='flex py-1 font-bold mb-2'>
+  <a href="#quick-start">
+    <div className='tablet'>
+      <span>始める →</span>
+    </div>
+  </a>  
+  <a href="https://github.com/playcanvas/react" className='foreground underline' target="_blank">GitHub で表示 ↗</a>
+</div>
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+  <a href="https://playcanvas-react.vercel.app/examples/splats">
+    <img
+      src="/img/user-manual/react/splats.jpg"
+      alt="Gaussian Splats の例"
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+    />
+  </a>
+  <a href="https://playcanvas-react.vercel.app/examples/model-viewer">
+    <img
+      src="/img/user-manual/react/render.png"
+      alt="3D モデルビューアの例"
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+    />
+  </a>
+  <a href="https://playcanvas-react.vercel.app/examples/physics">
+    <img
+      src="/img/user-manual/react/physics.png"
+      alt="物理エンジンの例"
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+    />
+  </a>
+  <a href="https://stackblitz.com/edit/pc-react-tick-tock?file=src%2FScene.tsx">
+    <img
+      src="/img/user-manual/react/clock.png"
+      alt="時計の例"
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+    />
+  </a>
+</div>
+
+## なぜ React なのか？
+
+React は現代の Web 開発の中心であり、3D コンテンツはもはやゲームのためだけのものではありません。**PlayCanvas React** は、リアルタイム 3D を React エコシステムにもたらし、開発者がすでに使用しているツールやパターンを使って没入型の体験を構築できるようにします。フック、コンテキスト、コンポーネントコンポジションのサポートにより、これこそが React 流の 3D です。
+
+詳細については、[サンプルギャラリー](https://playcanvas-react.vercel.app/examples)をご覧ください。
+
+### エンジンの全能力、React のシンプルさ
+
+PlayCanvas React は、直感的な React コンポーネントを介して **PlayCanvas** エンジン全体へのアクセスを提供し、強力なすべての機能がサードパーティライブラリを必要とせずに組み込まれています。
+
+- **物理エンジン** – 完全な Ammo.js 統合
+- **Gaussian Splats** – 最先端の 3D ポイントクラウドレンダリング
+- **ポインターイベント** – React スタイルのイベント伝播とバブリング
+- **アセットシステム** – 宣言的および命令的なアセットのロード
+- **スクリプト** – 必要に応じたカスタムロジックのエスケープハッチ
+
+## クイックスタート
+
+**最も速い開始方法は、[StackBlitz テンプレート](https://playcanvas-react.vercel.app/new)を利用することです**。これは、カメラとキューブを含む基本的なシーンをワンクリックで起動します。コードをフォーク、編集、またはクローンして、自分好みに変更してください。
+
+または、[始めるガイド](https://playcanvas-react.vercel.app/docs/getting-started)に従うか、プロジェクトに直接インストールしてください:
+
+```bash
+npm install @playcanvas/react
+```
+
+その後、[最初のシーンのチュートリアル](./building-a-scene)に従って、PlayCanvas React コンポーネントと API を使用してシーンを構成する方法を学びましょう。
+
+## 詳細
+
+- [始めるガイド](https://playcanvas-react.vercel.app/docs/guide/getting-started) - 最初のプロジェクトを設定する
+- [機能ショーケース](https://playcanvas-react.vercel.app/docs#features) - すべての機能を探索する
+- [インタラクティブプレイグラウンド](https://playcanvas-react.vercel.app/examples) - 実践しながら学ぶ
+- [API リファレンス](https://playcanvas-react.vercel.app/docs/api) - 完全なコンポーネントドキュメント
+
+**PlayCanvas React** を使って次世代の 3D ウェブ体験を構築している開発者の成長するコミュニティに参加しましょう！

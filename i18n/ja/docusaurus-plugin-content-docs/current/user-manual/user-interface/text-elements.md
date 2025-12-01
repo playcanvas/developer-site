@@ -1,6 +1,5 @@
 ---
 title: Text Elements
-sidebar_position: 6
 ---
 
 テキストエレメント (Text Element) は、[font asset][1]を使用してテキスト文字列を表示するために使用されます。

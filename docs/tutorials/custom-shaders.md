@@ -10,19 +10,28 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
 
 :::info
 
-This tutorial uses a custom shader on a material to create a dissolve effect in GLSL. The complete project can be found [here][project].
+This tutorial uses the [ShaderMaterial](https://api.playcanvas.com/engine/classes/ShaderMaterial.html) API to create a dissolve effect with burning edges that works with both WebGL and WebGPU. The complete project can be found [here](https://playcanvas.com/project/406044/overview/tutorial-custom-shaders).
 
 :::
 
-When you import your 3D models into PlayCanvas by default they will use our [Physical Material][3]. This is a versatile material type that can cover a lot of your rendering needs.
+When you import your 3D models into PlayCanvas by default they will use our [Physical Material](/user-manual/graphics/physical-rendering/physical-materials/). This is a versatile material type that can cover a lot of your rendering needs.
 
 However, you will often want to perform special effects or special cases for your materials. To do this you will need to write a custom shader.
 
-## Shaders and Shader Definition
+## ShaderMaterial API
 
-WebGL uses the GLSL language to write shaders that can be run across all browsers. In PlayCanvas you create this code in shader assets and then assign the code to a [Shader Definition][1] before using this to create a new `pc.Shader`.
+PlayCanvas provides the [ShaderMaterial](https://api.playcanvas.com/engine/classes/ShaderMaterial.html) API which simplifies the creation of custom shaders and supports both WebGL (GLSL) and WebGPU (WGSL). This API automatically handles the differences between graphics APIs and provides a cleaner interface for shader development.
 
-### Vertex Shader
+## Cross-Platform Shader Support
+
+To ensure your custom shaders work across all devices and browsers, you should provide both [GLSL](/user-manual/graphics/shaders/glsl-specifics/) and [WGSL](/user-manual/graphics/shaders/wgsl-specifics/) versions of your shaders:
+
+- **GLSL** (OpenGL Shading Language): Used by WebGL
+- **WGSL** (WebGPU Shading Language): Used by WebGPU
+
+## Vertex Shaders
+
+### GLSL Vertex Shader
 
 ```glsl
 attribute vec3 aPosition;
@@ -40,7 +49,31 @@ void main(void)
 }
 ```
 
-### Fragment Shader
+### WGSL Vertex Shader
+
+```wgsl
+attribute aPosition: vec3f;
+attribute aUv0: vec2f;
+
+uniform matrix_viewProjection: mat4x4f;
+uniform matrix_model: mat4x4f;
+
+varying vUv0: vec2f;
+
+@vertex
+fn vertexMain(input: VertexInput) -> VertexOutput {
+    var output: VertexOutput;
+
+    output.vUv0 = aUv0;
+    output.position = uniform.matrix_viewProjection * uniform.matrix_model * vec4<f32>(aPosition, 1.0);
+
+    return output;
+}
+```
+
+## Fragment Shaders
+
+### GLSL Fragment Shader
 
 ```glsl
 varying vec2 vUv0;
@@ -53,308 +86,291 @@ void main(void)
 {
     float height = texture2D(uHeightMap, vUv0).r;
     vec4 color = texture2D(uDiffuseMap, vUv0);
+
     if (height < uTime) {
-      discard;
+        discard;
     }
-    if (height < (uTime+0.04)) {
-      color = vec4(0, 0.2, 1, 1.0);
+
+    // Burning band width
+    float edgeWidth = 0.05;
+
+    if (height < (uTime + edgeWidth)) {
+        // 0 at inner edge → 1 at outer edge
+        float t = (height - uTime) / edgeWidth;
+
+        // Fire gradient: yellow to dark orange
+        vec3 burnColor = mix(
+            vec3(1.0, 0.7, 0.2),
+            vec3(0.6, 0.1, 0.0),
+            t
+        );
+
+        // Blend the burn color with the original texture
+        color = vec4(mix(burnColor, color.rgb, t), 1.0);
     }
+
     gl_FragColor = color;
 }
 ```
 
-The two shaders above define the functionality of the new Material. In the Vertex Shader we are transforming the vertex positions of the mesh into screen space. In the Fragment Shader we are setting the color of the pixel. This pixel color is chosen based on the two textures that are provided into this asset. If the value uTime is less than the color in the heightmap then we don't render any pixel (the model is invisible). If the value of uTime is greater than the heightmap value then we get the color from the diffuse map texture that we provide
+### WGSL Fragment Shader
 
-### Shader Definition
+```wgsl
+varying vUv0: vec2f;
 
-```javascript
-var vertexShader = this.vs.resource;
+uniform uTime: f32;
 
-// dynamically set the precision depending on device.
-var fragmentShader = "precision " + gd.precision + " float;\n";
-fragmentShader = fragmentShader + this.fs.resource;
+var uDiffuseMap: texture_2d<f32>;
+var uDiffuseMapSampler: sampler;
+var uHeightMap: texture_2d<f32>;
+var uHeightMapSampler: sampler;
 
+@fragment
+fn fragmentMain(input: FragmentInput) -> FragmentOutput {
+    var output: FragmentOutput;
 
-// A shader definition used to create a new shader.
-var shaderDefinition = {
-    attributes: {
-        aPosition: pc.SEMANTIC_POSITION,
-        aUv0: pc.SEMANTIC_TEXCOORD0
-    },
-    vshader: vertexShader,
-    fshader: fragmentShader
-};
+    let height = textureSample(uHeightMap, uHeightMapSampler, vUv0).r;
+    var color = textureSample(uDiffuseMap, uDiffuseMapSampler, vUv0);
+
+    if (height < uniform.uTime) {
+        discard;
+    }
+
+    // Burning band width
+    let edgeWidth = 0.05;
+
+    if (height < (uniform.uTime + edgeWidth)) {
+        // t goes from 0 (just inside edge) to 1 (outer edge)
+        let t = (height - uniform.uTime) / edgeWidth;
+
+        // Fire color: bright yellow fading to dark orange
+        let burnColor = mix(
+            vec3f(1.0, 0.7, 0.2),
+            vec3f(0.6, 0.1, 0.0),
+            t
+        );
+
+        // Blend burn color with original texture (more burn at the outer edge)
+        color = vec4f(mix(burnColor, color.rgb, t), 1.0);
+    }
+
+    output.color = color;
+    return output;
+}
 ```
 
-The shader definition contains three sections. In `attributes` you must specify the variable names and the value of attributes that will be defined for each Vertex that your vertex shader is executed for. These values are later declared in your vertex shader as an `attribute`.
+The shaders above create a dissolve effect with a fire-like burning edge. The vertex shaders transform mesh vertices into screen space, while the fragment shaders create the dissolve effect based on a height map texture. When the `uTime` value is greater than the height map value at a pixel, that pixel is discarded (making the model transparent there). Near the dissolve edge, we blend in a fire-colored gradient for a realistic burning effect.
 
-The Vertex Shader code is supplied as a string in the `vshader` property and the Fragment Shader is supplied as a string in the 'fshader' property.
-
-Above is the shader definition used to make the dissolving effect. Notice that we're getting the shader code from two assets. These assets are supplied using [script attributes][2] which make it easy to access assets from a script.
-
-Aside from attributes there are two other special types of variable in the GLSL shaders: `varying` and `uniform`
-
-## GLSL `varying` variables
-
-A variable that is declared **varying** will be set in the vertex shader, but used in the fragment shader. It's a way of passing data on from the first program to the second.
-
-## GLSL `uniform` variables
-
-A variable declared **`uniform`** will be declared in both vertex and fragment shaders. The value of this variable must be passed into the shader from the main application. For example, the position of a light in your scene.
-
-## Creating Materials
+## Creating the ShaderMaterial
 
 ```javascript
-// Create the shader from the definition
-this.shader = new pc.Shader(gd, shaderDefinition);
+// Create a new ShaderMaterial with both GLSL and WGSL versions
+this.material = new ShaderMaterial({
+    uniqueName: 'Dissolve',
+    vertexGLSL: this.vertexGLSL.resource,
+    fragmentGLSL: this.fragmentGLSL.resource,
+    vertexWGSL: this.vertexWGSL.resource,
+    fragmentWGSL: this.fragmentWGSL.resource,
+    attributes: {
+        aPosition: SEMANTIC_POSITION,
+        aUv0: SEMANTIC_TEXCOORD0
+    }
+});
+```
 
-// Create a new material and set the shader
-this.material = new pc.Material();
-this.material.shader = this.shader;
+The [ShaderMaterial constructor](https://api.playcanvas.com/engine/classes/ShaderMaterial.html#constructor) takes both GLSL and WGSL shader code. PlayCanvas will automatically choose the appropriate version based on the graphics API being used. The `attributes` object specifies the vertex attributes your shaders expect.
 
+## Setting Shader Parameters
+
+```javascript
 // Set the initial time parameter
 this.material.setParameter('uTime', 0);
 
 // Set the diffuse texture
+const diffuseTexture = this.diffuseMap.resource;
 this.material.setParameter('uDiffuseMap', diffuseTexture);
 
-// Use the "clouds" texture as the height map property
+// Set the height map texture
+const heightTexture = this.heightMap.resource;
 this.material.setParameter('uHeightMap', heightTexture);
-
-// Replace the material on the model with our new material
-model.meshInstances[0].material = this.material;
 ```
 
-Once we've got the shader definition we create a new Shader and a new Material and pass the shader onto the material using `setShader()`. The uniforms are then initialized using the `setParameter()` method. Finally we replace the original material on the model with the new material we've created. Notice, that each mesh in a model has it's own material. So if your model has more than one mesh, you may need to set the material onto more than one mesh instance.
+Uniforms are set using the [`setParameter()`](https://api.playcanvas.com/engine/classes/Material.html#setparameter) method, which works the same way as with regular materials. The ShaderMaterial automatically handles the differences between GLSL and WGSL uniform syntax.
 
-*You can (and should) use the same material on more than one mesh.*
-
-## Using a texture in a new Material
-
-```javascript
-var diffuseTexture = this.app.assets.get(this.diffuseMap).resource;
-//...
-this.material.setParameter('uDiffuseMap', diffuseTexture);
-```
-
-The effect demonstrated in this tutorial is achieved using a height map texture. We access the texture from the asset registry using the code above. At the
-top of our script we have declared a script attribute called 'maps' which allows us to set a texture from the PlayCanvas Editor:
-
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem value="classic" label="Classic">
-
-```javascript
-CustomShader.attributes.add('vs', {
-    type: 'asset',
-    assetType: 'shader',
-    title: 'Vertex Shader'
-});
-
-CustomShader.attributes.add('fs', {
-    type: 'asset',
-    assetType: 'shader',
-    title: 'Fragment Shader'
-});
-
-CustomShader.attributes.add('diffuseMap', {
-    type: 'asset',
-    assetType: 'texture',
-    title: 'Diffuse Map'
-});
-
-CustomShader.attributes.add('heightMap', {
-    type: 'asset',
-    assetType: 'texture',
-    title: 'Height Map'
-});
-```
-
-</TabItem>
-<TabItem  value="esm" label="ESM">
+## Script Attributes for Shader Assets
 
 ```javascript
 /**
+ * GLSL vertex shader.
+ * 
  * @attribute
- * @title Vertex Shader
- * @type {Asset}
- * @resource shader
+ * @title GLSL Vertex Shader
+ * @type {pc.Asset}
  */
-vs;
+vertexGLSL;
 
 /**
+ * GLSL fragment shader.
+ * 
  * @attribute
- * @title Fragment Shader
- * @type {Asset}
- * @resource shader
+ * @title GLSL Fragment Shader
+ * @type {pc.Asset}
  */
-fs;
+fragmentGLSL;
 
 /**
+ * WGSL vertex shader.
+ * 
+ * @attribute
+ * @title WGSL Vertex Shader
+ * @type {pc.Asset}
+ */
+vertexWGSL;
+
+/**
+ * WGSL fragment shader.
+ * 
+ * @attribute
+ * @title WGSL Fragment Shader
+ * @type {pc.Asset}
+ */
+fragmentWGSL;
+
+/**
+ * Diffuse Map
+ * 
  * @attribute
  * @title Diffuse Map
- * @type {Asset}
- * @resource texture
+ * @type {pc.Asset}
  */
 diffuseMap;
 
 /**
+ * Height Map
+ * 
  * @attribute
  * @title Height Map
- * @type {Asset}
- * @resource texture
+ * @type {pc.Asset}
  */
 heightMap;
 ```
 
-</TabItem>
-</Tabs>
+You'll need to create four shader assets (two GLSL and two WGSL) and assign them to these script attributes in the PlayCanvas Editor.
 
-When our height map texture is loaded we can set the uniform `uHeightMap` to be the `pc.Texture` object.
-
-## Updating uniforms
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+## Updating Uniforms
 
 ```javascript
-import { Script } from 'playcanvas';
-
-export class CustomShader extends Script {
-    static scriptName = "customShader";
-
-    update(dt) {
-        this.time += dt;
-
-        // Bounce value of t 0->1->0
-        var t = (this.time % 2);
-        if (t > 1) {
-            t = 1 - (t - 1);
-        }
-
-        // Update the time value in the material
-        this.material.setParameter('uTime', t);
-    }
-}
-```
-
-</TabItem>
-<TabItem value="classic" label="Classic">
-
-```javascript
-// update code called every frame
-CustomShader.prototype.update = function(dt) {
+update(dt) {
     this.time += dt;
 
-    // Bounce value of t 0->1->0
-    var t = (this.time % 2);
-    if (t > 1) {
-        t = 1 - (t - 1);
-    }
+    // Create a smooth oscillation using sine wave
+    const t = (Math.sin(this.time) + 1) / 2;
 
     // Update the time value in the material
     this.material.setParameter('uTime', t);
-};
+}
 ```
 
-</TabItem>
-</Tabs>
+To achieve the dissolving effect, we use the height map value as a threshold that changes over time. In this version, we use a sine wave to create a smooth oscillation between 0 and 1, providing a more natural dissolve animation.
 
-To achieve the disappearing effect we use the height map value as a threshold, and we increase the threshold over time. In the update method above we bounce the value of `t` between 0 and 1 and we set this as the `uTime` uniform.
-
-In our shader if the value of the heightmap on a pixel is less than the value time value we don't draw the pixel. In addition at values that are close to the threshold, we draw the pixel in blue to display a nice 'edge' to the effect.
-
-## Complete listing
-
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+## Complete Script
 
 ```javascript
-import { Script, SEMANTIC_TEXCOORD0, SEMANTIC_POSITION, Shader, Material } from 'playcanvas';
+import { Script, ShaderMaterial, SEMANTIC_POSITION, SEMANTIC_TEXCOORD0 } from 'playcanvas';
 
+/**
+ * Apply a dissolve shader material to an entity's render components.
+ */
 export class CustomShader extends Script {
-    static scriptName = "customShader";
+    scriptName = 'dissolveShader';
 
     /**
+     * GLSL vertex shader.
+     * 
      * @attribute
-     * @title Vertex Shader
-     * @type {Asset}
-     * @resource shader
+     * @title GLSL Vertex Shader
+     * @type {pc.Asset}
      */
-    vs = null;
+    vertexGLSL;
 
     /**
+     * GLSL fragment shader.
+     * 
      * @attribute
-     * @title Fragment Shader
-     * @type {Asset}
-     * @resource shader
+     * @title GLSL Fragment Shader
+     * @type {pc.Asset}
      */
-    fs = null;
+    fragmentGLSL;
 
     /**
+     * WGSL vertex shader.
+     * 
+     * @attribute
+     * @title WGSL Vertex Shader
+     * @type {pc.Asset}
+     */
+    vertexWGSL;
+
+    /**
+     * WGSL fragment shader.
+     * 
+     * @attribute
+     * @title WGSL Fragment Shader
+     * @type {pc.Asset}
+     */
+    fragmentWGSL;
+
+    /**
+     * Diffuse Map
+     * 
      * @attribute
      * @title Diffuse Map
-     * @type {Asset}
-     * @resource texture
+     * @type {pc.Asset}
      */
-    diffuseMap = null;
+    diffuseMap;
 
     /**
+     * Height Map
+     * 
      * @attribute
      * @title Height Map
-     * @type {Asset}
-     * @resource texture
+     * @type {pc.Asset}
      */
-    heightMap = null;
+    heightMap;
+
+    time = 0;
 
     // initialize code called once per entity
     initialize() {
-        this.time = 0;
-
-        const app = this.app;
-        const gd = app.graphicsDevice;
-
-        const diffuseTexture = this.diffuseMap.resource;
-        const heightTexture = this.heightMap.resource;
-
-        const vertexShader = this.vs.resource;
-        let fragmentShader = "precision " + gd.precision + " float;\n";
-        fragmentShader = fragmentShader + this.fs.resource;
-
-        // A shader definition used to create a new shader.
-        const shaderDefinition = {
+        // Create a new material and set the shader
+        this.material = new ShaderMaterial({
+            uniqueName: 'Dissolve',
+            vertexGLSL: this.vertexGLSL.resource,
+            fragmentGLSL: this.fragmentGLSL.resource,
+            vertexWGSL: this.vertexWGSL.resource,
+            fragmentWGSL: this.fragmentWGSL.resource,
             attributes: {
                 aPosition: SEMANTIC_POSITION,
                 aUv0: SEMANTIC_TEXCOORD0
-            },
-            vshader: vertexShader,
-            fshader: fragmentShader
-        };
-
-        // Create the shader from the definition
-        this.shader = new Shader(gd, shaderDefinition);
-
-        // Create a new material and set the shader
-        this.material = new Material();
-        this.material.shader = this.shader;
+            }
+        });
 
         // Set the initial time parameter
         this.material.setParameter('uTime', 0);
 
         // Set the diffuse texture
+        const diffuseTexture = this.diffuseMap.resource;
         this.material.setParameter('uDiffuseMap', diffuseTexture);
 
-        // Use the "clouds" texture as the height map property
+        // Set the height map texture
+        const heightTexture = this.heightMap.resource;
         this.material.setParameter('uHeightMap', heightTexture);
 
-        // Replace the material on the model with our new material
-        var renders = this.entity.findComponents('render');
-
-        for (var i = 0; i < renders.length; ++i) {
-            var meshInstances = renders[i].meshInstances;
-            for (var j = 0; j < meshInstances.length; j++) {
+        // Replace the material on all render components
+        const renders = this.entity.findComponents('render');
+        for (let i = 0; i < renders.length; ++i) {
+            const meshInstances = renders[i].meshInstances;
+            for (let j = 0; j < meshInstances.length; j++) {
                 meshInstances[j].material = this.material;
             }
         }
@@ -364,11 +380,8 @@ export class CustomShader extends Script {
     update(dt) {
         this.time += dt;
 
-        // Bounce value of t 0->1->0
-        var t = (this.time % 2);
-        if (t > 1) {
-            t = 1 - (t - 1);
-        }
+        // Create a smooth oscillation using sine wave
+        const t = (Math.sin(this.time) + 1) / 2;
 
         // Update the time value in the material
         this.material.setParameter('uTime', t);
@@ -376,108 +389,15 @@ export class CustomShader extends Script {
 }
 ```
 
-</TabItem>
-<TabItem value="classic" label="Classic">
+This script demonstrates how to create cross-platform custom shaders using the ShaderMaterial API. The dissolve effect uses a height map to determine which pixels to discard, creating a burning edge effect as the dissolution progresses.
 
-```javascript
-var CustomShader = pc.createScript('customShader');
+## GLSL vs WGSL Differences
 
-CustomShader.attributes.add('vs', {
-    type: 'asset',
-    assetType: 'shader',
-    title: 'Vertex Shader'
-});
+When writing shaders for both APIs, keep these key differences in mind:
 
-CustomShader.attributes.add('fs', {
-    type: 'asset',
-    assetType: 'shader',
-    title: 'Fragment Shader'
-});
+- **Syntax**: WGSL uses more explicit typing (`vec3f`, `f32`) while GLSL infers types
+- **Attributes/Varyings**: WGSL uses structured input/output while GLSL uses global variables
+- **Textures**: WGSL separates textures and samplers, GLSL combines them
+- **Entry points**: WGSL uses `@vertex` and `@fragment` decorators, GLSL uses `main()`
 
-CustomShader.attributes.add('diffuseMap', {
-    type: 'asset',
-    assetType: 'texture',
-    title: 'Diffuse Map'
-});
-
-CustomShader.attributes.add('heightMap', {
-    type: 'asset',
-    assetType: 'texture',
-    title: 'Height Map'
-});
-
-// initialize code called once per entity
-CustomShader.prototype.initialize = function() {
-    this.time = 0;
-
-    var app = this.app;
-    var gd = app.graphicsDevice;
-
-    var diffuseTexture = this.diffuseMap.resource;
-    var heightTexture = this.heightMap.resource;
-
-    var vertexShader = this.vs.resource;
-    var fragmentShader = "precision " + gd.precision + " float;\n";
-    fragmentShader = fragmentShader + this.fs.resource;
-
-    // A shader definition used to create a new shader.
-    var shaderDefinition = {
-        attributes: {
-            aPosition: pc.SEMANTIC_POSITION,
-            aUv0: pc.SEMANTIC_TEXCOORD0
-        },
-        vshader: vertexShader,
-        fshader: fragmentShader
-    };
-
-    // Create the shader from the definition
-    this.shader = new pc.Shader(gd, shaderDefinition);
-
-    // Create a new material and set the shader
-    this.material = new pc.Material();
-    this.material.shader = this.shader;
-
-    // Set the initial time parameter
-    this.material.setParameter('uTime', 0);
-
-    // Set the diffuse texture
-    this.material.setParameter('uDiffuseMap', diffuseTexture);
-
-    // Use the "clouds" texture as the height map property
-    this.material.setParameter('uHeightMap', heightTexture);
-
-    // Replace the material on the model with our new material
-    var renders = this.entity.findComponents('render');
-
-    for (var i = 0; i < renders.length; ++i) {
-        var meshInstances = renders[i].meshInstances;
-        for (var j = 0; j < meshInstances.length; j++) {
-            meshInstances[j].material = this.material;
-        }
-    }
-};
-
-// update code called every frame
-CustomShader.prototype.update = function(dt) {
-    this.time += dt;
-
-    // Bounce value of t 0->1->0
-    var t = (this.time % 2);
-    if (t > 1) {
-        t = 1 - (t - 1);
-    }
-
-    // Update the time value in the material
-    this.material.setParameter('uTime', t);
-};
-```
-
-</TabItem>
-</Tabs>
-
-Here is the complete script. Remember you'll need to create vertex shader and fragment shader assets in order for it to work.
-
-[1]: https://api.playcanvas.com/engine/classes/Shader.html
-[2]: /user-manual/scripting/fundamentals/script-attributes/
-[3]: /user-manual/graphics/physical-rendering/physical-materials/
-[project]: https://playcanvas.com/project/406044/overview/tutorial-custom-shaders
+The ShaderMaterial API handles these differences automatically, allowing you to focus on the shader logic rather than API-specific details.

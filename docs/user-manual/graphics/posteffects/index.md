@@ -1,32 +1,40 @@
 ---
 title: Post Effects
-sidebar_position: 6
 ---
 
-PlayCanvas supports the adding post-processing effects to your projects. Post effects modify the final rendered image and provide an easy way for you to add some visual flare to your application.
+PlayCanvas supports adding post-processing effects to your projects. Post effects modify the final rendered image and provide an easy way to add visual flair to your application.
 
-We have implemented post effects as scripts that you can add to an Entity that has a [Camera][1] component attached. To add post effects to a camera, do the following:
+PlayCanvas offers two approaches to post-processing:
 
-1. Choose one of the effects below and get the script from the GitHub link.
+## Modern Post Processing
 
-    - [Bloom][3]
-    - [Brightness-Contrast][4]
-    - [Hue-Saturation][5]
-    - [FXAA][6]
-    - [Sepia][7]
-    - [Vignette][8]
+The modern approach provides advanced, performant post-processing with HDR support and extensibility. The primary method uses the `CameraFrame` class with built-in effects, but you can also create fully custom render passes for complete control.
 
-2. Add a [Script][9] component to the Entity representing your camera.
-3. Assign the desired post effect scripts to the camera entity's Script component. Note that the order in which the post effect script are listed in the Script component determine the order in which they are applied.
+**Key features include:**
 
-You can also create your own post effects. You can find some additional ones on [GitHub][2].
+- HDR physically based bloom
+- Screen Space Ambient Occlusion (SSAO)
+- Depth of Field (DoF)
+- Temporal Anti-Aliasing (TAA)
+- Color grading and LUT support
+- Vignette and fringing effects
+- And more...
 
-[1]: /user-manual/scenes/components/camera
-[2]: https://github.com/playcanvas/engine/tree/main/scripts/posteffects
-[3]: /user-manual/graphics/posteffects/bloom
-[4]: /user-manual/graphics/posteffects/brightness_contrast
-[5]: /user-manual/graphics/posteffects/hue_saturation
-[6]: /user-manual/graphics/posteffects/fxaa
-[7]: /user-manual/graphics/posteffects/sepia
-[8]: /user-manual/graphics/posteffects/vignette
-[9]: /user-manual/scenes/components/script
+The system is highly extensible, allowing you to customize the compose shader, add custom render passes, or build a complete custom pipeline.
+
+[Learn more about Modern Post Processing →](cameraframe)
+
+## Legacy Post Effects (Script-Based)
+
+The legacy approach uses script-based post effects that can be attached to camera entities. While older, these effects are still fully supported and functional. They provide a simpler setup for basic post-processing needs.
+
+**Available effects:**
+
+- Bloom
+- Brightness-Contrast
+- Hue-Saturation
+- FXAA
+- Sepia
+- Vignette
+
+[Learn more about Legacy Post Effects →](legacy)

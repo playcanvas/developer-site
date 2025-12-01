@@ -1,6 +1,5 @@
 ---
 title: Asset Import Pipeline
-sidebar_position: 3
 ---
 
 Some assets are uploaded in source format and need to be converted into a "target" format before they can be used in a game at runtime. This process is called *Importing*. For example, a 3D model can be uploaded as an FBX file, but must be converted into a PlayCanvas compatible model file before it can be loaded in the game.

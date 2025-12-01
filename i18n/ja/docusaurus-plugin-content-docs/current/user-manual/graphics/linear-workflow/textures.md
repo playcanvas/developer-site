@@ -1,6 +1,5 @@
 ---
 title: テクスチャ
-sidebar_position: 1
 ---
 
 ### sRGBテクスチャの取り扱い

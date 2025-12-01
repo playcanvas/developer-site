@@ -1,6 +1,5 @@
 ---
-title: Managing Scenes
-sidebar_position: 3
+title: シーンの管理
 ---
 
 シーンの管理は、シーンダイアログを開いて行うことができます。

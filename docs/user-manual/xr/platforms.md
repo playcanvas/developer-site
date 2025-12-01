@@ -1,6 +1,5 @@
 ---
 title: Platforms
-sidebar_position: 2
 ---
 
 WebXR has specific hardware and software requirements. It utilizes device features such as camera sensors, gyroscope, accelerometer, CPU/GPU, CV techniques, as well as OS-level and browser support.

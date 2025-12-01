@@ -1,6 +1,5 @@
 ---
 title: GPUプロファイリング
-sidebar_position: 2
 ---
 
 このセクションでは、ネイティブGPUプロファイラを使用してWebGLまたはWebGPUフレームをキャプチャおよび分析し、GPU操作のデバッグとパフォーマンスプロファイリングを可能にする方法について説明します。
@@ -9,32 +8,32 @@ sidebar_position: 2
 
 ## Apple Silicon搭載macOS上でのWebGPUアプリケーション
 
-*   WebKitをクローンします:
+* WebKitをクローンします:
 
     ```bash
     git clone https://github.com/WebKit/WebKit.git WebKit
     ```
 
-*   MiniBrowserをビルドします（約30分かかります）:
+* MiniBrowserをビルドします（約30分かかります）:
 
     ```bash
     cd WebKit
     Tools/Scripts/build-webkit -cmakeargs="-DENABLE_WEBGPU_BY_DEFAULT=1" --release
     ```
 
-*   MiniBrowserを起動し、WebアプリケーションのURLを指定します:
+* MiniBrowserを起動し、WebアプリケーションのURLを指定します:
 
     ```bash
     __XPC_METAL_CAPTURE_ENABLED=1 Tools/Scripts/run-minibrowser --release --url https://playcanvas.github.io/
     ```
 
-*   別のコマンドラインインターフェースウィンドウから、キャプチャするフレーム数を設定します。デフォルトは1です。
+* 別のコマンドラインインターフェースウィンドウから、キャプチャするフレーム数を設定します。デフォルトは1です。
 
     ```bash
     notifyutil -s com.apple.WebKit.WebGPU.CaptureFrame 2
     ```
 
-*   適切なタイミングで、フレームをキャプチャします:
+* 適切なタイミングで、フレームをキャプチャします:
 
     ```bash
     notifyutil -p com.apple.WebKit.WebGPU.CaptureFrame
@@ -46,7 +45,7 @@ sidebar_position: 2
     Success starting GPU frame capture at path file:///var/folders/m3/cnrw6k214hxd0hq1rf7cy3w40000gn/T/com.apple.WebKit.GPU+org.webkit.MiniBrowser/8C9372EF-1254-4FC5-8CA9-730FB
     ```
 
-*   このファイルをダブルクリックしてXcodeで開き、表示されるダイアログで「Replay」ボタンをクリックします。これにより、フレームのドローコールを検査し、リソースを分析し、シェーダーをデバッグし、パフォーマンスメトリクスを収集することができます。
+* このファイルをダブルクリックしてXcodeで開き、表示されるダイアログで「Replay」ボタンをクリックします。これにより、フレームのドローコールを検査し、リソースを分析し、シェーダーをデバッグし、パフォーマンスメトリクスを収集することができます。
 
     ![Xcode](/img/user-manual/optimization/gpu-profiling/xcode-webgpu.png)
 

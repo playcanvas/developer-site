@@ -1,0 +1,70 @@
+---
+description: Access the PlayCanvas Application instance
+---
+
+# `useApp`
+
+The `useApp` hook provides access to the PlayCanvas [Application](https://api.playcanvas.com/engine/classes/Application.html) instance from within your React components. It's a convenient way to get information about the app state, fire events, and more.
+
+```jsx copy title="./my-component.jsx" copy
+import { useApp } from '@playcanvas/react/hooks'
+
+function MyComponent() {
+  const app = useApp()
+  
+  // Access application properties
+  console.log('Scene:', app.scene)
+  console.log('Camera:', app.scene.camera)
+  
+  return null
+}
+```
+
+A reference to the app gives you access to the scene, camera, systems, etc.
+
+## Application context
+
+The hook only relies on the `<Application/>` component for context, so without one it will throw an error. Call it from inside a component that is a child of an `<Application/>`.
+
+```jsx title="🚫 No <Application> context"
+// Nope, useApp is outside <Application>
+export const Wrong = () => {
+  const app = useApp();
+  return (
+    <Application>
+      <Scene/>
+    </Application>
+  )
+}
+```
+
+```jsx copy title="✅ Correct <Application> context"
+// Yep! `useApp` has <Application> context
+const Correct = () => {
+  const app = useApp();
+  return <Scene />;
+}
+
+export const App = () => <Application>
+  <Correct/>
+  </Application>
+```
+
+## Properties
+
+```tsx asTypedoc
+import { Application } from 'playcanvas'
+type $ = {
+  /**
+   * The PlayCanvas Application instance
+   */
+  app: Application
+}
+export default $;
+```
+
+## Related
+
+- [Application Component](../../application) - The component that provides the app context
+- [useParent](../use-parent) - Access the parent Entity
+- [useAppEvent](../use-app-event) - Subscribe to application events

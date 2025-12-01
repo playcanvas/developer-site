@@ -1,6 +1,5 @@
 ---
 title: Migration Guide
-sidebar_position: 4
 ---
 
 ESM Scripts replace the older Classic Scripting system as the recommended way to develop PlayCanvas applications. Whilst classic scripts will continue to work in existing projects and will be supported for the foreseeable future, we recommend using the newer ESM format for your projects.

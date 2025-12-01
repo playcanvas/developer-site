@@ -1,6 +1,5 @@
 ---
 title: XR Support
-sidebar_position: 4
 ---
 
 PlayCanvas Web Components make it easy to add Virtual Reality (VR) and Augmented Reality (AR) support to your applications.
@@ -11,7 +10,8 @@ To enable XR support, you'll need:
 
 1. XR-specific scripts (provided by the [Engine NPM package](https://www.npmjs.com/package/playcanvas)).
 2. A camera entity with the appropriate scripts attached.
-3. UI for entering/exiting XR.
+3. UI for entering/exiting XR (WebXR requires a user gesture to start a session).
+4. A secure context — serve your page over HTTPS (or `http://localhost` during development).
 
 ### XR Scripts
 
@@ -21,6 +21,19 @@ Specify the following scripts using [`<pc-asset>`](../tags/pc-asset) elements:
 <pc-asset src="/node_modules/playcanvas/scripts/esm/xr-controllers.mjs"></pc-asset>
 <pc-asset src="/node_modules/playcanvas/scripts/esm/xr-navigation.mjs"></pc-asset>
 ```
+
+Or, when using a CDN:
+
+```html
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr-controllers.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr-navigation.mjs"></pc-asset>
+```
+
+:::note[CDN and import maps]
+
+When loading XR scripts from a CDN, make sure your page’s import map also points the `playcanvas` module to the same CDN source and version as shown in the [Getting Started guide](getting-started.md). For production, consider pinning specific versions instead of `@latest`.
+
+:::
 
 * [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-controllers.mjs) - Dynamically downloads and renders XR controller models (GLBs) for any detected XR controllers (including hands).
 * [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-navigation.mjs) - Implements basic teleportation navigation (via point and select actions).

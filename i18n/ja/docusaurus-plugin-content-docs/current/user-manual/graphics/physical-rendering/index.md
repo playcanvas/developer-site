@@ -1,10 +1,8 @@
 ---
 title: 物理ベースレンダリング (PBR)
-sidebar_position: 3
 ---
 
-![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)
-
+![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  
 *Star-Lordモデル [Joachim Coppens][2]*
 
 物理ベースレンダリング(PBR)では、一貫性のあるグラフィクスレンダリングが、アーティストによるマテリアル作成、計測された物理的プロパティとマテリアルシェーダの組み合わせによって実現されます。光源と物体表面との関係をあらわす物理原則を適応することで、どのような照明環境でも特別な処理をすることなく自然な描画を行うことができます。

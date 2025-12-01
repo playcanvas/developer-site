@@ -12,13 +12,13 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/100
 
 ## 概要
 
-PlayCanvasではテキスト入力に多数の方法があり、このチュートリアルでは最も一般的なケースに対応できるように柔軟性を持つライブラリを共有します。 
+PlayCanvasではテキスト入力に多数の方法があり、このチュートリアルでは最も一般的なケースに対応できるように柔軟性を持つライブラリを共有します。
 
-それは、HTML入力要素を使って、PlayCanvasレンダリングキャンバスの上にオーバーレイされたもので、マウスまたはタッチを使用して入力要素との相互作用に応じて配置されます。 
+それは、HTML入力要素を使って、PlayCanvasレンダリングキャンバスの上にオーバーレイされたもので、マウスまたはタッチを使用して入力要素との相互作用に応じて配置されます。
 
 HTML入力要素を使用することで、Webページ上でのユーザーが期待するOSレベルの操作がすべて可能になり、コピー&ペーストやパスワードマネージャーも利用できます。
 
-タッチを使用する場合、仮想キーボードが表示されることが想定されており、HTML入力要素がそれに応じて配置されます。 
+タッチを使用する場合、仮想キーボードが表示されることが想定されており、HTML入力要素がそれに応じて配置されます。
 
 ここでは、デスクトップでの使用例です:
 
@@ -26,7 +26,7 @@ HTML入力要素を使用することで、Webページ上でのユーザーが�
 
 そして、モバイルでの使用例です:
 
-<div class="centered"><video height="360" controls src="/img/tutorials/ui-text-input/mobile-preview.mp4"></video></div>
+<video autoPlay muted loop controls src='/video/tutorial-text-input.mp4' style={{width: '100%', height: 'auto'}} />
 
 :::note
 

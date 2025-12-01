@@ -1,6 +1,5 @@
 ---
 title: Using Observers
-sidebar_position: 1
 ---
 
 A simple use case is shown below.

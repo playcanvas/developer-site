@@ -1,6 +1,5 @@
 ---
 title: React
-sidebar_position: 2
 ---
 
 PCUI components can be used directly in React applications. Import the components from the React package and use them in your `.jsx` files as follows:

@@ -1,6 +1,5 @@
 ---
 title: Classic Reference
-sidebar_position: 2
 ---
 
 :::note

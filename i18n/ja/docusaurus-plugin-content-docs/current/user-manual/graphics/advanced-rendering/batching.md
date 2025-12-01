@@ -1,6 +1,5 @@
 ---
 title: バッチング
-sidebar_position: 4
 ---
 
 バッチング (Batching) とは、複数のメッシュインスタンスを1つのメッシュインスタンスに結合することで、すべてを1回のGPUドローコールでレンダリングできるようにするプロセスです。 PlayCanvasは、[Model][7]、[Sprite][9]、および[Element][10]コンポーネントに便利な機能を提供し、これらのコンポーネントをBatch Groupに割り当てることができます。これにより、エンジンがメッシュを結合して総ドローコール数を減らす方法に関するヒントを与えることができます。
@@ -85,8 +84,7 @@ if (element.batchGroupId)
 * **Batch** - レンダリングされるメッシュインスタンスのセットである、ランタイムで作成されるエンジンオブジェクト。Batch Groupには、バッチに追加されるメッシュインスタンスのプロパティに応じて、複数のバッチが作成される可能性があります。
 * **Batch Manager** - ランタイムでバッチを作成および更新するプログラムのインターフェイス。[APIドキュメント][8]を参照してください。
 
-
-[6]: /user-manual/scenes/settings#batch-groups
+[6]: /user-manual/editor/interface/settings/batch-groups/
 [7]: /user-manual/scenes/components/model
 [8]: https://api.playcanvas.com/engine/classes/BatchManager.html
 [9]: /user-manual/scenes/components/sprite

@@ -1,6 +1,5 @@
 ---
 title: Engine APIの呼び出し
-sidebar_position: 6
 ---
 
 PlayCanvasスクリプトを記述する際、[PlayCanvas Engine API](https://api.playcanvas.com/engine/)を操作することになります。このページでは、スクリプトで最も頻繁に使用する重要なクラスとパターンについて説明します。
@@ -102,10 +101,10 @@ this.app.on('game:start', this.onGameStart, this);
 
 ## さらに学ぶ
 
-*   **[Engine API リファレンス](https://api.playcanvas.com/engine/)** - 完全なドキュメント
-*   **[Engine ガイド](../../engine/index.md)** - PlayCanvas Engineランタイムの詳細ガイド
-*   **[スクリプトライフサイクル](./script-lifecycle.md)** - スクリプトメソッドが呼び出されるタイミング
-*   **[イベント](./events.md)** - スクリプトの通信パターン
+* **[Engine API リファレンス](https://api.playcanvas.com/engine/)** - 完全なドキュメント
+* **[Engine ガイド](../../engine/index.md)** - PlayCanvas Engineランタイムの詳細ガイド
+* **[スクリプトライフサイクル](./script-lifecycle.md)** - スクリプトメソッドが呼び出されるタイミング
+* **[イベント](./events.md)** - スクリプトの通信パターン
 
 :::tip
 

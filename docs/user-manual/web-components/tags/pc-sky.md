@@ -4,7 +4,7 @@ title: <pc-sky>
 
 The `<pc-sky>` tag is used to define a sky component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-scene>`](../pc-scene).
 
@@ -12,20 +12,24 @@ The `<pc-sky>` tag is used to define a sky component.
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `asset` | A string that should match the `id` of a [`<pc-asset>`](../pc-asset) tag that has a type of `texture`. |
-| `center` | The center of the sky. Specified as a space-separated list of X, Y, and Z values in the range 0 to 1. If not specified, `0 0.01 0` is used. |
-| `intensity` | The intensity of the sky. If not specified, `1` is used. |
-| `level` | The mipmap level used to render the sky. If not specified, `0` is used (base mip level). |
-| `rotation` | The rotation of the sky. Specified as a space-separated list of X, Y, and Z values. If not specified, `0 0 0` is used. |
-| `scale` | The scale of the sky. Specified as a space-separated list of X, Y, and Z values. If not specified, `100 100 100` is used. |
-| `type` | The type of sky component. Can be `box`, `dome`, `infinite` or `none`. If not specified, `infinite` is used. |
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | String | - | Texture asset ID (must reference a `texture` type asset) |
+| `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range) |
+| `intensity` | Number | `"1"` | Sky brightness intensity |
+| `level` | Number | `"0"` | Mipmap level to use for rendering |
+| `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles |
+| `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values |
+| `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |
+
+</div>
 
 ## Example
 
 ```html
-<pc-asset id="skybox" src="assets/skybox.webp" preload></pc-asset>
+<pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
 <pc-scene>
     <pc-sky asset="skybox"></pc-sky>
 </pc-scene>

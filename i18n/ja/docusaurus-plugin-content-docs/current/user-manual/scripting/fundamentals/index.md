@@ -1,6 +1,5 @@
 ---
 title: スクリプトの基礎
-sidebar_position: 1
 ---
 
 PlayCanvasスクリプトの基礎概念をマスターしましょう。モダンなESMスクリプトでもクラシックスクリプトでも、これらの基本はすべてのPlayCanvas開発に共通します。

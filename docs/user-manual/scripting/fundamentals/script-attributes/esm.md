@@ -1,6 +1,5 @@
 ---
 title: ESM Reference
-sidebar_position: 1
 ---
 
 :::note
@@ -365,10 +364,7 @@ This allows for rich, dynamic Editor interfaces based on script state.
 
 #### Example in Action
 
-<video width="50%" controls autoplay loop>
-  <source src="/video/conditional-attribtues.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video autoPlay muted loop controls src='/video/conditional-attribtues.mp4' style={{width: '100%', height: 'auto'}} />
 
 ## Grouping Attributes
 
@@ -438,7 +434,7 @@ class GameLogic extends Script {
 
 ### Interface Attributes
 
-If you want to group attributes together and set individual constraints on its members you can use an Interface Attribute. This provides a morea more flexible way of grouping attributes.
+If you want to group attributes together and set individual constraints on its members you can use an Interface Attribute. This provides a more flexible way of grouping attributes.
 
 ```javascript
 /** @interface */

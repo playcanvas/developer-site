@@ -1,6 +1,5 @@
 ---
 title: Depth Layer
-sidebar_position: 2
 ---
 
 Some rendering techniques require access to the depth or the color buffer of the scene for a specific camera. The Depth Layer is a special layer, which can be added to the `layers` property of a camera. The [`order`][4] of the layers defines at which point during the rendering, the depth or the color buffer is captured. The captured buffers can then be used in the following layers of the camera.
@@ -28,6 +27,6 @@ These engine examples demonstrate the rendering of both the depth and the color 
 
 [0]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenecolormap
 [1]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenedepthmap
-[2]: https://playcanvas.github.io/#/graphics/grab-pass
-[3]: https://playcanvas.github.io/#/graphics/ground-fog
+[2]: https://playcanvas.github.io/#/shaders/grab-pass
+[3]: https://playcanvas.github.io/#/shaders/ground-fog
 [4]: /user-manual/graphics/layers/#choosing-the-layer-order

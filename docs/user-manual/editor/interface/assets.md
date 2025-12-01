@@ -1,6 +1,5 @@
 ---
 title: Assets Panel
-sidebar_position: 5
 ---
 
 The Assets Panel manages all of the Assets that are available in your project. From here, you can create, upload, delete, inspect and edit any Asset.
@@ -18,6 +17,12 @@ To rename a folder, double click it in the hierarchy panel and edit the Name fie
 To delete a folder, double click it in the hierarchy and hit delete. Alternatively, right click the folder you want to delete and select 'Delete' from the context menu.
 
 Folders can be drag and dropped into each other if you want to reorganize your folder structure.
+
+:::note
+
+Folders are essentially meta assets, exclusively designed to facilitate the organization of assets within the Editor. Folder assets are excluded from builds and are not used when building the folder structure of a published build.
+
+:::
 
 ## Creating and Uploading Assets {#creating-and-uploading-assets}
 
@@ -65,7 +70,7 @@ You can also drag model, material, and cubemap assets directly into the [Viewpor
 
 - If you drag a model asset into the Viewport, a new entity will be created with a model component with the model asset assigned. The viewport camera will automatically zoom to the newly created entity.
 - If you drag a material over a particular mesh instance in the Viewport, its material will be switched (as a preview) to the material being dragged. To make the material change stick, simply drop the material.
-- If you drag a cubemap over the background of a scene in the Viewport, the cubemap will be assigned as the skybox cubemap of the scene. This property can also be set from the [Scene Settings][4].
+- If you drag a cubemap over the background of a scene in the Viewport, the cubemap will be assigned as the skybox cubemap of the scene. This property can also be set in the [Project Settings](/user-manual/editor/interface/settings/rendering/).
 
 ## Copy and Paste between Projects {#copy-and-paste-between-projects}
 
@@ -121,5 +126,4 @@ Selecting a reference will load it into the Inspector panel.
 
 [2]: /user-manual/editor/interface/inspector
 [3]: /user-manual/editor/interface/viewport
-[4]: /user-manual/editor/interface/settings
 [7]: https://api.playcanvas.com/engine/classes/AssetRegistry.html#findbytag

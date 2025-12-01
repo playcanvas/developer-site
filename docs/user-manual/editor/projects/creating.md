@@ -1,6 +1,5 @@
 ---
 title: Creating Projects
-sidebar_position: 1
 ---
 
 You can create Editor projects in two ways:

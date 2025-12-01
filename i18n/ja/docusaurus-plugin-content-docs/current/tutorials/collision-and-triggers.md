@@ -95,7 +95,7 @@ this.entity.collision.on('triggerenter', this.onTriggerEnter, this);
 
 この場合、トリガーが発火したときに、貫通するエンティティをスタート地点にリセットし、その速度をリセットします。
 
-## RigidBody
+## 動的オブジェクトの設定
 
 地面を **Static** に設定しました。次に、落下するオブジェクトを作成し、それらが **Dynamic** であることを確認します。
 
@@ -107,14 +107,13 @@ this.entity.collision.on('triggerenter', this.onTriggerEnter, this);
 
 *collision*コンポーネントには3つのイベントがあります。
 
-* **contact** 2つのRigidBodyが触れたときに発生するそれぞれの接触点のために発生します。
-* **collisionstart** 2つのRigidBodyが接触して最初に発生するときに発生します。
-* **collisionend** 2つのRigidBodyが分離するときに発生します。
+- **contact** 2つのRigidBodyが触れたときに発生するそれぞれの接触点のために発生します。
+- **collisionstart** 2つのRigidBodyが接触して最初に発生するときに発生します。
+- **collisionend** 2つのRigidBodyが分離するときに発生します。
 
 **contact**と**collisionstart**の違いは微妙ですが重要です。平面に対して角度を持った立方体が着地する場合を想像してみましょう。立方体の辺が平面に触れる瞬間、立方体の2つの角が同時に接触します。この場合、3つのイベントが発生します。立方体の各角に対して2つの**contact**イベントと1つの**collisionstart**イベントです。立方体が回転し続けて落ちる間、そのまま平面と接触し続けます。最終的に平面に平らに着地したとき、立方体の辺が平面に接触するためにさらに2つの**contact**イベントが発生します。ただし、立方体はその間ずっと平面と接触し続けているため、追加の**collisionstart**イベントは発生しません。
 
 両方のイベントは有用ですが、このデモでは **collisionstart** イベントを使用して、オブジェクトが地面に衝突したときに再生される効果音をトリガーします。以下にコードを示します。
-
 
 ```javascript
 var Collider = pc.createScript('collider');

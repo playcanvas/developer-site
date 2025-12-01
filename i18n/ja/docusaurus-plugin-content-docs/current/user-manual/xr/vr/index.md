@@ -1,6 +1,5 @@
 ---
 title: VR
-sidebar_position: 21
 ---
 
 ![VRビュー](/img/user-manual/xr/vr-view.png)

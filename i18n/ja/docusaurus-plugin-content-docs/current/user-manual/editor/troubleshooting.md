@@ -1,6 +1,5 @@
 ---
 title: トラブルシューティング
-sidebar_position: 9
 ---
 
 Engine V1またはV2を実行するプロジェクト向けのEngine V2を搭載したEditorに関する、よくある質問とその回答をまとめたリストです。
@@ -35,7 +34,7 @@ Engine V1またはV2を実行するプロジェクト向けのEngine V2を搭載
 
 #### Asset Auditor
 
-<video autoplay controls src='/video/asset-auditor.mp4' width='600px' />
+<video autoPlay muted loop controls src='/video/asset-auditor.mp4' style={{width: '100%', height: 'auto'}} />
 
 ## 2. EditorでカメラがオブジェクトをLauncherよりも明るく/暗く見せる
 

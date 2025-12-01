@@ -1,6 +1,5 @@
 ---
 title: XR のサポート
-sidebar_position: 4
 ---
 
 PlayCanvas Web Components を使用すると、アプリケーションに Virtual Reality (VR) および Augmented Reality (AR) のサポートを簡単に追加できます。
@@ -11,7 +10,8 @@ XR のサポートを有効にするには、以下が必要です。
 
 1. XR 専用スクリプト ([Engine NPM package](https://www.npmjs.com/package/playcanvas) で提供)。
 2. 適切なスクリプトがアタッチされたカメラエンティティ。
-3. XR の開始/終了用の UI。
+3. XR の開始/終了用の UI（WebXR のセッション開始にはユーザーのジェスチャーが必要です）。
+4. セキュアコンテキスト — 本番では HTTPS（開発中は `http://localhost`）でページを提供してください。
 
 ### XR スクリプト
 
@@ -21,6 +21,19 @@ XR のサポートを有効にするには、以下が必要です。
 <pc-asset src="/node_modules/playcanvas/scripts/esm/xr-controllers.mjs"></pc-asset>
 <pc-asset src="/node_modules/playcanvas/scripts/esm/xr-navigation.mjs"></pc-asset>
 ```
+
+または、CDN を使用する場合:
+
+```html
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr-controllers.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr-navigation.mjs"></pc-asset>
+```
+
+:::note[CDN とインポートマップ]
+
+CDN から XR スクリプトを読み込む場合は、[Getting Started ガイド](getting-started.md) に示すように、ページのインポートマップも同じ CDN とバージョンを指すように設定してください。 本番環境では `@latest` ではなく特定バージョンへの固定を推奨します。
+
+:::
 
 * [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-controllers.mjs) - 検出された XR コントローラー（手を含む）の XR コントローラーモデル（GLB）を動的にダウンロードし、レンダリングします。
 * [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-navigation.mjs) - 基本的なテレポートナビゲーション（ポイント＆選択アクションによる）を実装します。

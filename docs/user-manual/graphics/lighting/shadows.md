@@ -1,6 +1,5 @@
 ---
 title: Shadows
-sidebar_position: 2
 ---
 
 Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows, can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene. See [Lightmaps][4].

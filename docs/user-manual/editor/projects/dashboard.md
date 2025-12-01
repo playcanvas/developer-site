@@ -1,6 +1,5 @@
 ---
 title: Project Dashboard
-sidebar_position: 2
 ---
 
 The Project Dashboard is the control center for your project, providing access to all major project functions and information.

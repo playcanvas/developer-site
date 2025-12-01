@@ -92,8 +92,6 @@ if (this.playerPos.x > 9.0) {
 
 キューブがx方向の可視範囲を超えると、teleport関数が呼び出され、立方体エンティティが画面を横切ってテレポートされます。エンティティを連続的に`if()`文をアクティブ化することを防ぐために、エンティティをより左右に移動するようにテレポートされます。
 
-
-
 ## キューブのコードをリセット
 
 ```javascript
@@ -101,6 +99,7 @@ if (app.keyboard.wasPressed(pc.KEY_R)) {
     this.reset();
 }
 ```
+
 ```javascript
 reset: function () {
     this.entity.rigidbody.teleport(0, 2, 0);

@@ -4,25 +4,29 @@ title: <pc-sound>
 
 `<pc-sound>`タグは、サウンドを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
-* これは、[`<pc-sounds>`](../pc-sounds)コンポーネントの直接の子である必要があります。
+* [`<pc-sounds>`](../pc-sounds)コンポーネントの直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 | 説明 |
-| --- | --- |
-| `asset` | `audio`タイプの[`<pc-asset>`](../pc-asset)タグの`id`と一致する必要がある文字列。 |
-| `auto-play` | 値を持たない属性。存在する場合、サウンドスロットは自動的に再生されます。 |
-| `duration` | サウンドスロットの再生時間。 |
-| `loop` | 値を持たない属性。存在する場合、サウンドスロットはループします。 |
-| `name` | サウンドスロットの名前。 |
-| `overlap` | 値を持たない属性。存在する場合、サウンドスロットはオーバーラップします。 |
-| `pitch` | サウンドスロットのピッチ。指定されていない場合、`1`が使用されます。 |
-| `start-time` | サウンドスロットの開始時間。指定されていない場合、`0`が使用されます。 |
-| `volume` | サウンドスロットの音量。指定されていない場合、`1`が使用されます。 |
+<div className="attribute-table">
+
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `asset` | String | - | オーディオアセットID（`audio`型アセットを参照する必要があります） |
+| `auto-play` | Flag | - | サウンドが自動的に再生されるかどうか |
+| `duration` | Number | - | サウンドの再生時間（秒単位） |
+| `loop` | Flag | - | サウンドがループするかどうか |
+| `name` | String | - | サウンドスロットの名前識別子 |
+| `overlap` | Flag | - | 複数回トリガーされたときにサウンドが重なることができるかどうか |
+| `pitch` | Number | `"1"` | ピッチ乗数（1 = 通常ピッチ） |
+| `start-time` | Number | `"0"` | 開始時間のオフセット（秒単位） |
+| `volume` | Number | `"1"` | 音量レベル（0-1） |
+
+</div>
 
 ## 例
 
@@ -34,4 +38,4 @@ title: <pc-sound>
 
 ## JavaScriptインターフェース
 
-[SoundElement API](https://api.playcanvas.com/web-components/classes/SoundElement.html)を使用して、`<pc-sound>`要素をプログラムによって作成および操作できます。
+[SoundElement API](https://api.playcanvas.com/web-components/classes/SoundElement.html)を使用して、`<pc-sound>`要素をプログラムで作成および操作できます。

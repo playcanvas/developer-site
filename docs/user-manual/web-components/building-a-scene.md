@@ -1,6 +1,5 @@
 ---
 title: Building a Scene
-sidebar_position: 2
 ---
 
 Let's build a simple 3D scene step by step using PlayCanvas Web Components. We'll create a basic scene with a lit sphere.

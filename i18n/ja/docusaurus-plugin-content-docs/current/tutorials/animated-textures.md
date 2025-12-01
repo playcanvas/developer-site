@@ -41,4 +41,3 @@ ScrollingTexture.prototype.update = function(dt) {
 これは、マテリアルのオフセットを変更してテクスチャをスクロールさせるためのシンプルで直接的な方法です。ただし、このコードには1つの欠点があります。それは、実際のマテリアルのプロパティが変更されることです。したがって、同じマテリアルを使用してシーン内の複数のモデルがある場合、すべてが影響を受けます。
 
 [1]: https://playcanvas.com/project/405882
-[2]: /img/tutorials/intermediate/animated-textures/coin-rotate.png

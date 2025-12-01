@@ -1,6 +1,5 @@
 ---
 title: クラスタードライティング
-sidebar_position: 6
 ---
 
 :::note
@@ -74,11 +73,9 @@ Clustered Lightingシェーダーは、サポートされるすべてのライ�
 
 - - **Automatic** – 配列サイズが0として指定されている場合、エンジンは必要に応じてアトラスを自動的に分割し、各可視光を等しくサイズのサブテクスチャに割り当てます。たとえば、フレームに3つのライトが表示される場合、アトラスは2x2サブテクスチャーに分割され、これらの4つのサブテクスチャーのうち3つがライトに割り当てられます。
 
-
     ![Atlas Split 0](/img/user-manual/graphics/lighting/lights/atlas_split_0.png)
 
 - - **Manual** – アトラスを固定数のサブテクスチャに分割できるようにします。これは、サイズが異なる場合があります。数字の配列を使用してセットアップされます。各数値は、垂直および水平の両方で分割を表します。マニュアルアトラススプリットの例については、次のセクションを参照してください。
-
 
 ### Configuring Manual Atlas Split {#configuring-manual-atlas-split}
 
@@ -90,7 +87,7 @@ Clustered Lightingシェーダーは、サポートされるすべてのライ�
 
 ![Atlas Split 2](/img/user-manual/graphics/lighting/lights/atlas_split_2.png)
 
-他の例: 
+他の例:
 
 - [3, 2] - 最初の数字はアトラスを3x3（9つの領域）に分割します。2番目の数字は、これらの領域の1つを2x2（4つの領域）に分割し、合計で12つの領域になります。
 - [4] – アトラスは4x4（16エリア）に分割されます。

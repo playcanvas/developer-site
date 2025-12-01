@@ -1,6 +1,5 @@
 ---
 title: リアルタイムコラボレーション
-sidebar_position: 5
 ---
 
 リアルタイムコラボレーションは、PlayCanvas Editor の中核をなす機能です。これにより、以下のようないくつかのメリットが生まれます。
@@ -25,13 +24,13 @@ sidebar_position: 5
 
 :::
 
-## リアルタイムチャット
+## リアルタイムチャット {#real-time-chat}
 
 CHAT ボタンを選択すると、チャットパネルが展開され、Editor 内にいる他のユーザーにメッセージをブロードキャストできます。
 
 ![Chat](/img/user-manual/editor/realtime-collaboration/chat.gif)
 
-チャットメッセージのブラウザ通知は、[設定](../interface/settings)で切り替えることができます。
+チャットメッセージのブラウザ通知は、[設定](interface/settings/editor.md#settings)で切り替えることができます。
 
 :::tip
 

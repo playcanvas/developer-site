@@ -132,8 +132,6 @@ ButtonLogic.prototype.initialize = function() {
 
 ボタンコンポーネントには、マウスとタッチ入力の両方に対して機能するコールバック関数を登録できる[`クリックイベント`][click-event-api] があります。
 
- 
-
 ```javascript
 this.entity.button.on('click', function(event) {
     this.textEntity.element.text = this.description;

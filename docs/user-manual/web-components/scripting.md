@@ -1,6 +1,5 @@
 ---
 title: Adding Behavior with Scripts
-sidebar_position: 3
 ---
 
 Scripts add custom behaviors to entities in your PlayCanvas Web Components app.

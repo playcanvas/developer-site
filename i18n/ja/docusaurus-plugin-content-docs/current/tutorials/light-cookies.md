@@ -27,7 +27,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/409
 
 ## 使用例
 
-**形状のあるライト (Shaped Lights ) ** - クッキーは、ライトソースの形状をマスキングするために有用です。たとえば、シーンに窓や蛍光灯が含まれる場合、スポットライトを使用すると丸いライトを提供します。ライトの形状を細長くするか、正方形にするために、ライトの形状をマスキングできます。
+**形状のあるライト (Shaped Lights )** - クッキーは、ライトソースの形状をマスキングするために有用です。たとえば、シーンに窓や蛍光灯が含まれる場合、スポットライトを使用すると丸いライトを提供します。ライトの形状を細長くするか、正方形にするために、ライトの形状をマスキングできます。
 
 ![Shaped Light](/img/tutorials/intermediate/light-cookies/square-cookie.jpg)
 

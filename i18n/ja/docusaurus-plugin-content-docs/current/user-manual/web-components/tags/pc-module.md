@@ -2,9 +2,9 @@
 title: <pc-module>
 ---
 
-`<pc-module>`タグは、WebAssemblyモジュールをロードするために使用されます。
+`<pc-module>`タグはWebAssemblyモジュールをロードするために使用されます。
 
-:::note
+:::note[使用法]
 
 * [`<pc-app>`](../pc-app)の直接の子である必要があります。
 
@@ -12,19 +12,23 @@ title: <pc-module>
 
 ## 属性
 
-| 属性 | 説明 |
-| --- | --- |
-| `name` | モジュールの名前です。これはスクリプト内でモジュールを参照するために使用されます。 |
-| `glue` | モジュールのglue codeへのパスです。 |
-| `wasm` | モジュールのWASMファイルへのパスです。 |
-| `fallback` | モジュールのfallback (asm.js) コードへのパスです (WebAssemblyがサポートされていない場合)。 |
+<div className="attribute-table">
+
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `fallback` | String | - | WebAssemblyがサポートされていない場合のフォールバック（asm.js）コードへのパス |
+| `glue` | String | - | モジュール用のJavaScriptグルーコードへのパス |
+| `name` | String | - | スクリプトで参照するために使用されるモジュール名 |
+| `wasm` | String | - | WebAssembly (.wasm) ファイルへのパス |
+
+</div>
 
 ## 例
 
 ```html
 <pc-app>
-    <!-- ammo.jsモジュールをロードします -->
-    <pc-module name="ammo" glue="ammo.js" wasm="ammo.wasm.wasm" fallback="ammo.wasm.js"></pc-module>
+    <!-- ammo.jsモジュールをロード -->
+    <pc-module name="ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
 </pc-app>
 ```
 

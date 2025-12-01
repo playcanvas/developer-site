@@ -1,6 +1,5 @@
 ---
 title: はじめに
-sidebar_position: 1
 ---
 
 始める前に、[Node.js](https://nodejs.org/) 18以降がインストールされていることを確認してください。
@@ -15,9 +14,9 @@ npm install @playcanvas/pcui --save-dev
 
 これにより、PCUIライブラリ全体がプロジェクトに含まれます。ライブラリの各部分は、そのパッケージから以下の場所でインポートできます。
 
--   オブザーバー: `@playcanvas/observer`
--   ESモジュールコンポーネント: `@playcanvas/pcui`
--   Reactコンポーネント: `@playcanvas/pcui/react`
+- オブザーバー: `@playcanvas/observer`
+- ESモジュールコンポーネント: `@playcanvas/pcui`
+- Reactコンポーネント: `@playcanvas/pcui/react`
 
 ESモジュールコンポーネントを独自の`.js`ファイルにインポートして、次のように使用できます。
 

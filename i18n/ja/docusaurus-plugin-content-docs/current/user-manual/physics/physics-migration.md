@@ -1,6 +1,5 @@
 ---
 title: ammo.jsの更新
-sidebar_position: 7
 ---
 
 ### イントロダクション
@@ -22,7 +21,6 @@ wasmモジュールの導入前に作成されたプロジェクトは、デフ�
 ![Physics Legacy Settings](/img/user-manual/physics/physics-legacy-settings.png)
 
 「物理を有効にする」と表示されない場合、新規のプロジェクトのため、ammo.jsの従来の組み込みバージョンを使用することができません。
- 
 
 「物理を有効にする」にチェックを付けると、ビルド時にammo.jsの旧バージョンがプロジェクトに追加されます。
 

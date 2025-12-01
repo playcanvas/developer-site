@@ -2,26 +2,26 @@
 title: <pc-app>
 ---
 
-`<pc-app>`タグは、PlayCanvasアプリケーションのルート要素です。PlayCanvasアプリケーションを初期化し、シーンのコンテナを提供するために使用されます。
+`<pc-app>`タグは、PlayCanvas アプリケーションのルート要素です。PlayCanvas アプリケーションを初期化し、シーンのコンテナを提供するために使用されます。
 
-:::note
+:::note[使用法]
 
-* ドキュメントの`body`要素の子孫である必要があります。
+* ドキュメントの `body` 要素の子孫である必要があります。
 
 :::
 
 ## 属性
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
-| 属性 | 説明 |
-| --- | --- |
-| `alpha` | 真偽値属性。アプリケーションがフレームバッファにアルファチャンネルを割り当てるかどうかを決定します。デフォルトは`true`です。 |
-| `backend` | グラフィックスエンジンのバックエンドです。`webgpu`、`webgl2`、または`null`が指定可能です。`webgpu`が指定され、WebGPUが利用できない場合、エンジンは`webgl2`にフォールバックします。指定されていない場合、`webgl2`が使用されます。 |
-| `antialias` | 真偽値属性。アプリケーションがアンチエイリアシングを使用するかどうかを決定します。デフォルトは`true`です。 |
-| `depth` | 真偽値属性。アプリケーションがデプスバッファを割り当てるかどうかを決定します。デフォルトは`true`です。 |
-| `high-resolution` | 真偽値属性。アプリケーションが物理解像度またはCSS解像度を使用してレンダリングするかどうかを決定します。デフォルトは`true`です。 |
-| `stencil` | 真偽値属性。アプリケーションがステンシルバッファを割り当てるかどうかを決定します。デフォルトは`true`です。 |
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `alpha` | Boolean | `"true"` | アプリケーションがフレームバッファにアルファチャネルを割り当てるかどうか |
+| `antialias` | Boolean | `"true"` | アプリケーションがアンチエイリアシングを使用するかどうか |
+| `backend` | Enum | `"webgl2"` | グラフィックスエンジンのバックエンド: `"webgpu"` \| `"webgl2"` \| `"null"` |
+| `depth` | Boolean | `"true"` | アプリケーションがデプスバッファを割り当てるかどうか |
+| `high-resolution` | Boolean | `"true"` | 物理解像度またはCSS解像度を使用してレンダリングするかどうか |
+| `stencil` | Boolean | `"true"` | アプリケーションがステンシルバッファを割り当てるかどうか |
 
 </div>
 
@@ -29,7 +29,7 @@ title: <pc-app>
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
-<CodePenEmbed id="JoPvXjO" title="<pc-app> example" />
+<CodePenEmbed id="JoPvXjO" title="<pc-app> の例" />
 
 ## JavaScriptインターフェース
 

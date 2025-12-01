@@ -1,6 +1,5 @@
 ---
 title: テクスチャパッキング
-sidebar_position: 3
 ---
 
 ## テクスチャパッキングとは
@@ -59,7 +58,6 @@ TexturePackerはダウンロードできる有料ツールで、テクスチャ�
 - アトラスから削除されたスプライトは、そのフレームが削除されます。
 - アトラスに追加されたスプライトは、リストの末尾に新しいフレームが追加されます。
 - 既存のスプライトは、そのフレームが更新されます。
-
 
 [texture-atlas]: /user-manual/assets/types/texture-atlas/
 [texture-packer-online]: https://www.codeandweb.com/tp-online

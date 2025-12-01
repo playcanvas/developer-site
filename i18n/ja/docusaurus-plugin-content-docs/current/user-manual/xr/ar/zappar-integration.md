@@ -1,6 +1,5 @@
 ---
 title: Zappar
-sidebar_position: 2
 ---
 
 Zapparは、画像や顔、インスタントワールドトラッキング機能を含む[PlayCanvas統合のUniversal AR SDK][1]を提供しています。彼らのSDKは、Android用ChromeおよびiOS用のSafari 11.3+をサポートし、世界中の数十億人に届けることができます。

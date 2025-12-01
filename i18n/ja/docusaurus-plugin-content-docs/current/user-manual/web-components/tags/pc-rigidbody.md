@@ -2,31 +2,32 @@
 title: <pc-rigidbody>
 ---
 
-`<pc-rigidbody>`タグは、剛体コンポーネントを定義するために使用されます。
+`<pc-rigidbody>`タグは、リジッドボディコンポーネントを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
-* [`<pc-collision>`](../pc-collision)コンポーネントの兄弟である必要があります。
-* ammo.js WebAssembly モジュールは、[`<pc-module>`](../pc-module)タグを介してロードされている必要があります。
+* [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
+* [`<pc-collision>`](../pc-collision)コンポーネントの兄弟要素である必要があります。
+* ammo.js WebAssemblyモジュールは、[`<pc-module>`](../pc-module)タグを介してロードされている必要があります。
 
 :::
 
 ## 属性
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
-| 属性 | 説明 |
-| --- | --- |
-| `angular-damping` | 剛体の角減衰です。指定しない場合、`0` が使用されます。 |
-| `angular-factor` | 剛体の角係数です。X、Y、Z の値をスペース区切りリストで指定します。指定しない場合、`1 1 1` が使用されます。 |
-| `friction` | 剛体の摩擦です。指定しない場合、`0.5` が使用されます。 |
-| `linear-damping` | 剛体の線形減衰です。指定しない場合、`0` が使用されます。 |
-| `linear-factor` | 剛体の線形係数です。X、Y、Z の値をスペース区切りリストで指定します。指定しない場合、`1 1 1` が使用されます。 |
-| `mass` | 剛体の質量です。指定しない場合、`1` が使用されます。 |
-| `restitution` | 剛体の反発係数です。指定しない場合、`0` が使用されます。 |
-| `rolling-friction` | 剛体の転がり摩擦です。指定しない場合、`0` が使用されます。 |
-| `type` | 剛体コンポーネントのタイプです。`static`、`kinematic`、または `dynamic` のいずれかです。 |
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `angular-damping` | Number | `"0"` | 角速度の減衰係数 |
+| `angular-factor` | Vector3 | `"1 1 1"` | 角運動の制約を「X Y Z」値で指定 |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `friction` | Number | `"0.5"` | 表面摩擦係数 |
+| `linear-damping` | Number | `"0"` | 線速度の減衰係数 |
+| `linear-factor` | Vector3 | `"1 1 1"` | 線形運動の制約を「X Y Z」値で指定 |
+| `mass` | Number | `"1"` | リジッドボディの質量（キログラム単位） |
+| `restitution` | Number | `"0"` | 反発/弾性係数 (0-1) |
+| `rolling-friction` | Number | `"0"` | 転がり抵抗係数 |
+| `type` | Enum | `"static"` | 物理ボディタイプ: `"static"` \| `"kinematic"` \| `"dynamic"` |
 
 </div>
 
@@ -38,4 +39,4 @@ import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
 ## JavaScriptインターフェース
 
-[RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html) を使用して、`<pc-rigidbody>`要素をプログラムで作成および操作できます。
+[RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html)を使用して、`<pc-rigidbody>`要素をプログラムで作成および操作できます。

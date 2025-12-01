@@ -1,6 +1,5 @@
 ---
-title: エディター
-sidebar_position: 6
+title: PlayCanvas Editor
 ---
 
 ## 概要
@@ -9,7 +8,7 @@ PlayCanvas Editor は、プロジェクトを構成する[シーン](../glossary
 
 * ブラウザで動作するため、どこにいても利用できます。
 * PlayCanvas [Engine](../engine) を使用してシーンをレンダリングします。見たままが結果となります。
-* ボタン1つで新しいタブでプロジェクトを開くことができます - [Launch page](launch-page)です。
+* ボタン1つで新しいタブでプロジェクトを開くことができます - [Launch page](interface/launch-page)です。
 * ライブ編集により、ゲームが実行中でも繰り返し作業を行うことができます。
 * 1つのプロジェクトで複数のユーザーによる[リアルタイムコラボレーション](realtime-collaboration)が可能です。
 * 機能を個別のブランチに整理するための[バージョン管理](version-control)。

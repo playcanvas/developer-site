@@ -7,18 +7,31 @@ Collisionコンポーネントは、エンティティにコリジョンを割�
 Collisionコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効で、かつコンポーネントがトリガー体積である場合(姉妹のRigidBodyコンポーネントを持たないため)、トリガー体積が有効になります。同様に、コンポーネントに姉妹のRigidBodyコンポーネントがある場合、rigidbodyが有効になります。
 
 #### Box
+
 ![Collision component (Box)](/img/user-manual/scenes/components/component-collision-box.png)
+
 #### Capsule
+
 ![Collision component (Capsule)](/img/user-manual/scenes/components/component-collision-capsule.png)
+
 #### Compound
+
 ![Collision component (Compound)](/img/user-manual/scenes/components/component-collision-compound.png)
+
 #### Cone
+
 ![Collision component (Cone)](/img/user-manual/scenes/components/component-collision-cone.png)
+
 #### Cylinder
+
 ![Collision component (Cylinder)](/img/user-manual/scenes/components/component-collision-cylinder.png)
+
 #### Mesh
+
 ![Collision component (Mesh)](/img/user-manual/scenes/components/component-collision-mesh.png)
+
 #### Sphere
+
 ![Collision component (Sphere)](/img/user-manual/scenes/components/component-collision-sphere.png)
 
 エンティティにRigidBodyコンポーネントがある場合、Collisionコンポーネントはrigidbodyの形状を決定します。RigidBodyコンポーネントが存在しない場合、Collisionコンポーネントはトリガー体積として扱われます。トリガー体積は、シーン内の他のRigidBodyに影響を与えることはできません。代わりに、Scriptコンポーネントを追加し、トリガーイベントに応答するスクリプトをアタッチできます。たとえば、RigidBodyコンポーネントを持つ別のエンティティがトリガーに入るか出ると、スクリプトに通知できます。

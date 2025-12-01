@@ -4,22 +4,28 @@ title: <pc-entity>
 
 The `<pc-entity>` tag is used to define an entity.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of [`<pc-scene>`](../pc-scene) or another `<pc-entity>`.
+* It can have 0..n [`<pc-entity>`](../pc-entity) children.
+* It can optionally have one of each component type as children: [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-sounds>`](../pc-sounds), [`<pc-splat>`](../pc-splat).
 
 :::
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `enabled` | Enabled state of the entity. If not specified, `true` is used. |
-| `name` | The name of the entity. |
-| `position` | The position of the entity. Specified as a space-separated list of X, Y, and Z values. If not specified, `0 0 0` is used. |
-| `rotation` | The rotation of the entity. Specified as a space-separated list of X, Y, and Z Euler angles in degrees. If not specified, `0 0 0` is used. |
-| `scale` | The scale of the entity. Specified as a space-separated list of X, Y, and Z values. If not specified, `1 1 1` is used. |
-| `tags` | A space-separated list of tags for the entity. |
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | Enabled state of the entity |
+| `name` | String | - | Name identifier for the entity |
+| `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
+| `rotation` | Vector3 | `"0 0 0"` | Local-space rotation as "X Y Z" Euler angles in degrees |
+| `scale` | Vector3 | `"1 1 1"` | Local-space scale as "X Y Z" values |
+| `tags` | String | - | Space-separated list of tags |
+
+</div>
 
 ## Events
 

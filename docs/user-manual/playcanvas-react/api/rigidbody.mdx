@@ -1,0 +1,65 @@
+---
+description: Documentation for the Rigidbody component
+---
+
+# `<Rigidbody/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { RigidbodyExample } from './rigidbody-example';
+import RigidbodyExampleSource from '!!raw-loader!./rigidbody-example.jsx';
+
+The `<Rigidbody/>` component gives an [`<Entity/>`](../entity) physical properties such as mass, velocity, and friction and allows it to interact with the global physics simulation. An `<Entity/>` with a `<Rigidbody/>` will respond to gravity, forces, torques and other physics behaviors.
+
+You can learn more about how the physics system works in PlayCanvas in the [Physics docs](/user-manual/physics/) and for React specific details, see the guide on [React Physics](/user-manual/playcanvas-react/guide/physics).
+
+## Getting started
+
+:::tip
+
+Using physics in PlayCanvas requires ammo.js and `<Application usePhysics/>` to be enabled. Run `npm i sync-ammo` from within your app.
+
+:::
+
+To use the `<Rigidbody/>` component, you need to install the `sync-ammo` dependency and you need to add the [`<Application usePhysics/>`](../application) prop set in your root [`<Application/>`](../application) component. This will enable the physics system and allow your entities to interact with the physics simulation.
+
+Check out the guide on [React Physics](/user-manual/playcanvas-react/guide/physics) for more information.
+
+## Usage
+
+Add a `<Rigidbody/>` component to an [`<Entity/>`](../entity). You'll also need to add a [`<Collision/>`](../collision) component to the entity to define the shape of the rigid body.
+
+```jsx
+<Application usePhysics>
+  <Entity>
+    <Rigidbody type="box" />
+  </Entity>
+</Application>
+```
+
+<CodeExample
+  label="Interactive Physics Example"
+  filename="rigidbody-example.jsx"
+  code={RigidbodyExampleSource}
+  showDemo>
+  <Application usePhysics>
+    <Staging
+      camera={[4, 3, 4]}
+      useGrid={true}
+      useControls={true}
+      useShadow={true}
+      >
+      <RigidbodyExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+Learn more about the [RigidBody Component](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+import { RigidBody } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof RigidBody>;
+export default $;
+```

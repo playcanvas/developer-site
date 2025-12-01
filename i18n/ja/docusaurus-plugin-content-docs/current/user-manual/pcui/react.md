@@ -1,6 +1,5 @@
 ---
 title: React
-sidebar_position: 2
 ---
 
 PCUIコンポーネントはReactアプリケーションで直接使用できます。Reactパッケージからコンポーネントをインポートし、`.jsx`ファイルで次のように使用します。

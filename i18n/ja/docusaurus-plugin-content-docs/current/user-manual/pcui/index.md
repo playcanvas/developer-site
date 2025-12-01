@@ -1,13 +1,12 @@
 ---
 title: PCUI
-sidebar_position: 20.5
 ---
 
 ![PCUI splash](/img/user-manual/pcui/pcui-banner.jpg)
 
-PCUI は _PlayCanvas User Interface_ の略です。これは、すべての PlayCanvas ツールが構築されているフロントエンド フレームワークです。
+PCUI は **P**lay**C**anvas **U**ser **I**nterface の略です。これは、すべての PlayCanvas ツールが構築されているフロントエンド フレームワークです。
 
-* [PlayCanvas Editor](https://playcanvas.com/products/editor)
+* [PlayCanvas Editor](https://github.com/playcanvas/editor)
 * [SuperSplat](https://superspl.at/editor)
 * [Model Viewer](https://playcanvas.com/viewer)
 * [Texture Tool](https://playcanvas.com/texture-tool)

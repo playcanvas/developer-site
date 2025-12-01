@@ -1,6 +1,5 @@
 ---
 title: Real-time Collaboration
-sidebar_position: 5
 ---
 
 Real-time collaboration is at the heart of the PlayCanvas Editor. This brings a number of benefits:
@@ -25,13 +24,13 @@ Each user is assigned a unique 'user color' that is used throughout the interfac
 
 :::
 
-## Real-time Chat
+## Real-time Chat {#real-time-chat}
 
 If you select the CHAT button, the Chat panel will expand and you can broadcast messages to other users present in the Editor with you.
 
 ![Chat](/img/user-manual/editor/realtime-collaboration/chat.gif)
 
-You can toggle browser notifications for chat messages in the [Settings](../interface/settings).
+You can toggle browser notifications for chat messages in the [Settings](interface/settings/editor.md#settings).
 
 :::tip
 

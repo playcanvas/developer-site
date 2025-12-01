@@ -2,42 +2,43 @@
 title: <pc-camera>
 ---
 
-`<pc-camera>`は、カメラコンポーネントを定義するために使用されるタグです。
+`<pc-camera>`タグはカメラコンポーネントを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
 
 :::
 
 ## 属性
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
-| 属性 | 説明 |
-| --- | --- |
-| `clear-color` | カメラの背景色。R、G、B、Aの値をスペースで区切ったリスト、16進カラーコード、または[名前付き色](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)として指定できます。指定されていない場合、`0.75 0.75 0.75 1`が使用されます。 |
-| `clear-color-buffer` | 真偽値属性。カメラがカラーバッファをクリアするかどうかを制御します。指定されていない場合、カラーバッファはクリアされます。 |
-| `clear-depth-buffer` | 真偽値属性。カメラがデプスバッファをクリアするかどうかを制御します。指定されていない場合、デプスバッファはクリアされます。 |
-| `clear-stencil-buffer` | 真偽値属性。カメラがステンシルバッファをクリアするかどうかを制御します。指定されていない場合、ステンシルバッファはクリアされます。 |
-| `cull-faces` | 真偽値属性。カメラが面をカリングするかどうかを制御します。指定されていない場合、面はカリングされます。 |
-| `far-clip` | カメラの遠クリッピング面。指定されていない場合、`1000`が使用されます。 |
-| `flip-faces` | 真偽値属性。カメラが面を反転させるかどうかを制御します。指定されていない場合、面は反転されません。 |
-| `fov` | カメラの視野。指定されていない場合、`45`が使用されます。 |
-| `frustum-culling` | 真偽値属性。カメラがフラスタムカリングを使用するかどうかを制御します。指定されていない場合、フラスタムカリングが使用されます。 |
-| `gamma` | カメラのガンマ。`linear`または`srgb`に設定できます。指定されていない場合、`srgb`が使用されます。 |
-| `horizontal-fov` | 値なし属性。存在する場合、カメラは水平視野を使用します。指定されていない場合、カメラは垂直視野を使用します。 |
-| `near-clip` | カメラの近クリッピング面。指定されていない場合、`0.1`が使用されます。 |
-| `orthographic` | 値なし属性。存在する場合、カメラは正投影を使用します。指定されていない場合、カメラは遠近投影を使用します。 |
-| `ortho-height` | 正投影の高さ。指定されていない場合、`10`が使用されます。 |
-| `priority` | カメラの優先度。指定されていない場合、`0`が使用されます。 |
-| `rect` | カメラのビューポート矩形。X、Y、幅、高さの値をスペースで区切ったリストとして指定されます。指定されていない場合、`0 0 1 1`が使用されます。 |
-| `scissor-rect` | カメラのシザー矩形。X、Y、幅、高さの値をスペースで区切ったリストとして指定されます。指定されていない場合、`0 0 1 1`が使用されます。 |
-| `tonemap` | カメラのトーンマップ。`none`、`aces`、`aces2`、`filmic`、`hejl`、`linear`、または`neutral`に設定できます。指定されていない場合、`none`が使用されます。 |
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `clear-color` | Color | `"0.75 0.75 0.75 1"` | スペース区切りのRGBA値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としての背景色 |
+| `clear-color-buffer` | Boolean | `"true"` | カメラがカラーバッファをクリアするかどうかを制御します |
+| `clear-depth-buffer` | Boolean | `"true"` | カメラがデプスバッファをクリアするかどうかを制御します |
+| `clear-stencil-buffer` | Boolean | `"true"` | カメラがステンシルバッファをクリアするかどうかを制御します |
+| `cull-faces` | Boolean | `"true"` | カメラが面をカリングするかどうかを制御します |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `far-clip` | Number | `"1000"` | ファーカリングプレーンの距離 |
+| `flip-faces` | Boolean | `"false"` | カメラが面を反転するかどうかを制御します |
+| `fov` | Number | `"45"` | 視野角（度数） |
+| `frustum-culling` | Boolean | `"true"` | カメラがフラスタムカリングを使用するかどうかを制御します |
+| `gamma` | Enum | `"srgb"` | カラースペース: `"linear"` \| `"srgb"` |
+| `horizontal-fov` | Flag | - | 垂直視野角の代わりに水平視野角を使用するかどうか |
+| `near-clip` | Number | `"0.1"` | ニアクリッピングプレーンの距離 |
+| `orthographic` | Flag | - | パースペクティブ投影の代わりに正射影を使用するかどうか |
+| `ortho-height` | Number | `"10"` | 正射影の高さ |
+| `priority` | Number | `"0"` | カメラのレンダリング優先度 |
+| `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |
+| `scissor-rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのシザー矩形 |
+| `tonemap` | Enum | `"none"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
 
 </div>
 
-## Example
+## 例
 
 ```html
 <pc-entity>
@@ -45,6 +46,6 @@ title: <pc-camera>
 </pc-entity>
 ```
 
-## JavaScript Interface
+## JavaScriptインターフェース
 
-[CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html)を使用して、プログラムで`<pc-camera>`要素を作成および操作できます。
+[CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html)を使用して、`<pc-camera>`要素をプログラムで作成および操作できます。

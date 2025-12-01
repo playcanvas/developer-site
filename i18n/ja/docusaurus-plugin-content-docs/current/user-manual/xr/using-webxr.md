@@ -1,6 +1,5 @@
 ---
 title: PlayCanvas で WebXR を使用する
-sidebar_position: 1
 ---
 
 ## サポート

@@ -1,6 +1,5 @@
 ---
 title: MiniStats
-sidebar_position: 3
 ---
 
 MiniStatsは、アプリケーションの主要なパフォーマンス統計情報を軽量なグラフィカルで表示するツールです。ドローコール数、フレームタイム、CPU負荷、および（サポートされている場合は）GPU負荷を表示します。
@@ -15,12 +14,12 @@ MiniStatsをクリックすると、サポートされている3つのサイズ�
 
 表示される情報は次のとおりです。
 
-*   **DrawCalls** - 毎フレームディスパッチされるレンダリングされたオブジェクトの数です。各ドローコールはCPUとGPUにコストがかかるため、この数を最小限に抑えることが賢明です。
-*   **Frame** - ブラウザが各フレームを処理するのにかかる合計時間（ミリ秒）です。
-*   **GPU** - GPUによる各フレームのレンダリングにかかる時間（ミリ秒）を表示します。この統計は、EngineのWebGL 2とWebGPUの両方のフレーバーでサポートされていますが、いくつかの要件があります。
-    *   WebGL 2：基盤となるWebGL実装は、[`EXT_disjoint_timer_query_webgl2`](https://web3dsurvey.com/webgl2/extensions/EXT_disjoint_timer_query_webgl2)拡張機能をサポートしている必要があります。[WebGL Report](https://webglreport.com/?v=2)にアクセスして、お使いのブラウザがこの拡張機能をサポートしているか確認できます。
-    *   WebGPU：基盤となるWebGPU実装は、GPUアダプター機能[`timestamp-query`](https://web3dsurvey.com/webgpu/features/timestamp-query)をサポートしている必要があります。
-*   **CPU** - CPUによる各フレームのレンダリングにかかる時間（ミリ秒）を表示します。
+* **DrawCalls** - 毎フレームディスパッチされるレンダリングされたオブジェクトの数です。各ドローコールはCPUとGPUにコストがかかるため、この数を最小限に抑えることが賢明です。
+* **Frame** - ブラウザが各フレームを処理するのにかかる合計時間（ミリ秒）です。
+* **GPU** - GPUによる各フレームのレンダリングにかかる時間（ミリ秒）を表示します。この統計は、EngineのWebGL 2とWebGPUの両方のフレーバーでサポートされていますが、いくつかの要件があります。
+  * WebGL 2：基盤となるWebGL実装は、[`EXT_disjoint_timer_query_webgl2`](https://web3dsurvey.com/webgl2/extensions/EXT_disjoint_timer_query_webgl2)拡張機能をサポートしている必要があります。[WebGL Report](https://webglreport.com/?v=2)にアクセスして、お使いのブラウザがこの拡張機能をサポートしているか確認できます。
+  * WebGPU：基盤となるWebGPU実装は、GPUアダプター機能[`timestamp-query`](https://web3dsurvey.com/webgpu/features/timestamp-query)をサポートしている必要があります。
+* **CPU** - CPUによる各フレームのレンダリングにかかる時間（ミリ秒）を表示します。
 
 CPUおよびGPUグラフは、フレームの更新部分とレンダリング部分の内訳を、それぞれ赤と緑を使用して表示します。
 

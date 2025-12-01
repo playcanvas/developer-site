@@ -81,7 +81,6 @@ Entityのヒエラルキービューにドラッグすると、そのEntityの�
 ![](/img/tutorials/importing-first-model-and-animation/texture-to-material.gif)
 
 または、マテリアルスロットの 'Edit' ボタンを使用し、アセットパネルでそれを見つけることもできます。
- 
 
 ![](/img/tutorials/importing-first-model-and-animation/material-pick-texture.gif)
 

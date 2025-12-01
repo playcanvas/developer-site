@@ -41,9 +41,9 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 ジョイスティックは3つのEntityで構成されています。
 
-- 入力領域(赤で囲まれた部分)
-- ベース(青で囲まれた部分)
-- ノブ(青で囲まれた部分)
+* 入力領域(赤で囲まれた部分)
+* ベース(青で囲まれた部分)
+* ノブ(青で囲まれた部分)
 
 ![](/img/tutorials/touchscreen-joypad-controls/joystick-layout.png)
 
@@ -100,7 +100,6 @@ console.log('X: ' + joystick.x + ', Y: ' + joystick.y);
 
 [デモ][project-link]では、カメラは右ジョイスティックによって制御されており、[こちらのスクリプト][orbit-camera-joypad-input-script]で値を取得して使用しているのがわかります。
 
-
 ## ボタンの追加
 
 ボタンは画面上の固定位置のUIエレメントです。'templates'フォルダにボタンのテンプレートがあり、[子として追加][add-template-docs]する必要があります。
@@ -114,7 +113,7 @@ UIエレメントであるため、[UIシステムレイアウト][elements-manu
 | 関数名 | 説明 |
 |---------------|-------------|
 | isPressed     | ボタンの識別子を取得し、そのボタンが現在押されている場合はtrueを返します。 |
-| wasPressed    | ボタンの識別子を取得し、そのボタンが前回のフレーム以降に押された場合はtrueを返します。
+| wasPressed    | ボタンの識別子を取得し、そのボタンが前回のフレーム以降に押された場合はtrueを返します。 |
 | wasReleased   | ボタンの識別子を取得し、そのボタンが前回のフレーム以降に離された場合はtrueを返します。 |
 | wasTapped     | ボタンの識別子を取得し、そのボタンが200ms以内に押され、離された場合はtrueを返します。つまり、クイックタップです。 |
 
@@ -131,7 +130,6 @@ console.log('Was pressed: ' + buttons.wasPressed('button0'));
 ```
 
 [このデモ][project-link]では、キャラクターは左のジョイスティックとボタンで制御されています。[ここで][player-controller-script]スクリプトを確認すると、攻撃アニメーションを再生する方法がわかります。
-
 
 [project-link]: https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls
 [playcanvas-ui]: /user-manual/user-interface/

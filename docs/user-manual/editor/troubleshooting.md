@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-sidebar_position: 9
 ---
 
 This is a list compiled of all the most commonly asked questions and answers for the Editor powered by Engine V2 for projects running Engine V1 or V2.
@@ -35,7 +34,7 @@ This is a list compiled of all the most commonly asked questions and answers for
 
 #### Asset Auditor
 
-<video autoplay controls src='/video/asset-auditor.mp4' width='600px' />
+<video autoPlay muted loop controls src='/video/asset-auditor.mp4' style={{width: '100%', height: 'auto'}} />
 
 ## 2. My camera makes objects look brighter/darker in the Editor compared to the Launcher
 

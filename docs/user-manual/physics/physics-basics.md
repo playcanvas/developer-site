@@ -1,6 +1,5 @@
 ---
 title: Physics Basics
-sidebar_position: 1
 ---
 
 PlayCanvas incorporates a very powerful physics engine called [ammo.js][1]. This is a browser port of the open source C++ Bullet physics engine.

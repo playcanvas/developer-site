@@ -2,19 +2,24 @@
 title: <pc-particles>
 ---
 
-`<pc-particles>` タグは、パーティクルシステムを定義するために使用されます。
+`<pc-particles>`タグは、パーティクルシステムを定義するために使用されます。
 
-:::note
+:::note[使用法]
 
-* これは [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
 
 :::
 
 ## 属性
 
-| 属性 | 説明 |
-| --- | --- |
-| `asset` | `json` 型の [`<pc-asset>`](../pc-asset) タグの `id` と一致する文字列です。 |
+<div className="attribute-table">
+
+| 属性 | タイプ | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `asset` | String | - | パーティクルシステム設定を定義するJSONアセットID |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+
+</div>
 
 ## 例
 
@@ -58,7 +63,7 @@ title: <pc-particles>
 }
 ```
 
-次に、パーティクルシステムをHTMLでシーンに追加します。
+次に、HTMLでシーンにパーティクルシステムを追加します。
 
 ```html
 <pc-app>
@@ -77,4 +82,4 @@ title: <pc-particles>
 
 ## JavaScriptインターフェース
 
-[ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html) を使用して、`<pc-particles>` 要素をプログラムで作成および操作できます。
+[ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html)を使用して、`<pc-particles>`要素をプログラムで作成および操作できます。

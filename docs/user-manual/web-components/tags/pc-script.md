@@ -4,7 +4,7 @@ title: <pc-script>
 
 The `<pc-script>` tag is used to define a script.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-scripts>`](../pc-scripts) component.
 * The script must have been loaded via the [`<pc-asset>`](../pc-asset) tag.
@@ -13,11 +13,15 @@ The `<pc-script>` tag is used to define a script.
 
 ## Attributes
 
-| Attribute | Description |
-| --- | --- |
-| `attributes` | A JSON string of attributes for the script. |
-| `enabled` | Enabled state of the script. If not specified, `true` is used. |
-| `name` | The name of the script. Set this to the value of the `scriptName` property of the assigned script. |
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `attributes` | String | `""` | JSON string of script attributes |
+| `enabled` | Boolean | `"true"` | Enabled state of the script |
+| `name` | String | - | Script name (must match the script's `scriptName` property) |
+
+</div>
 
 ## Example
 

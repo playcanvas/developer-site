@@ -1,6 +1,5 @@
 ---
 title: 3Dモデルのインポート
-sidebar_position: 4
 ---
 
 3Dモデルとアニメーションは、[Blender][2]、3D Studio Max、Mayaなどの[3Dモデリングアプリケーション][1]からシーンファイルをアップロードすることで、PlayCanvasにインポートされます。
@@ -11,10 +10,10 @@ PlayCanvasは、glTFバイナリ (GLB)、FBX、COLLADA、objなど、さまざ�
 
 詳細はこちら:
 
-*   [モデルの構築][5]
-*   [モデルのエクスポート][6]
-*   [モデルのインポート][8]
-*   [テンプレートの使用][9]
+* [モデルの構築][5]
+* [モデルのエクスポート][6]
+* [モデルのインポート][8]
+* [テンプレートの使用][9]
 
 [1]: /user-manual/assets/models/building
 [2]: https://www.blender.org/

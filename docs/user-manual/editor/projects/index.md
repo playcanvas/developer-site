@@ -1,6 +1,5 @@
 ---
 title: Projects
-sidebar_position: 1
 ---
 
 ## Overview
@@ -30,6 +29,6 @@ Projects are the foundation for everything you create in the PlayCanvas Editor. 
 Once you understand the basics of project management, you can:
 
 - Access the [Editor](../interface) to build your project.
-- Test your project using the [Launch Page](../launch-page).
+- Test your project using the [Launch Page](../interface/launch-page).
 - Use [Real-time Collaboration](../realtime-collaboration) to build with others.
 - Use [Version Control](../version-control) to manage your development workflow.

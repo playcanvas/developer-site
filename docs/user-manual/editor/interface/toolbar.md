@@ -1,6 +1,5 @@
 ---
 title: Toolbar
-sidebar_position: 1
 ---
 
 The Editor's main toolbar can be found on the left, vertical edge of the Editor. You can access many common operations via the toolbar. Here is a list of the functionality available:
@@ -19,8 +18,8 @@ The Editor's main toolbar can be found on the left, vertical edge of the Editor.
 | ![Redo](/img/user-manual/editor/toolbar/redo.png) | **Redo** | Redo the last operation. |
 | ![Bake](/img/user-manual/editor/toolbar/lightmapper.png) | **Lightmapper** | Access the [Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps) bake and auto-rebake controls. |
 | ![Code Editor](/img/user-manual/editor/toolbar/code-editor.png) | **Code Editor** | Open the [Code Editor](/user-manual/scripting/editor-users/code-editor). |
-| ![Publish](/img/user-manual/editor/toolbar/publish.png) | **Publish** | [Publish a build](/user-manual/publishing/web/playcanvas-hosting#publishing-a-new-build) of your project. |
+| ![Publish](/img/user-manual/editor/toolbar/publish.png) | **Publish** | [Publish a build](/user-manual/editor/publishing/web/playcanvas-hosting#publishing-a-new-build) of your project. |
 | ![How Do I](/img/user-manual/editor/toolbar/how-do-i.png) | **How Do I...?** | Toggle the 'How Do I...?' help widget in the [Viewport](../viewport). |
-| ![Controls](/img/user-manual/editor/toolbar/controls.png) | **Controls** | Show the list of [controls and keyboard shortcuts](../../keyboard-shortcuts) supported by the Editor. |
+| ![Controls](/img/user-manual/editor/toolbar/controls.png) | **Controls** | Show the list of [controls and keyboard shortcuts](../keyboard-shortcuts) supported by the Editor. |
 | ![Feedback](/img/user-manual/editor/toolbar/feedback.png) | **Feedback** | Visit the [forum](https://forum.playcanvas.com/t/playcanvas-editor-feedback) to leave feedback about the Editor. |
 | ![Settings](/img/user-manual/editor/toolbar/settings.png) | **Settings** | Load Editor and Scene Settings into the [Inspector](../inspector). |

@@ -1,6 +1,5 @@
 ---
 title: Graph View
-sidebar_position: 10
 ---
 
 ## 概要
@@ -33,21 +32,21 @@ sidebar_position: 10
 
 ノードをクリックすると、ノードとアクセス許可に応じて、以下のいずれかの選択肢に対応するコンテキストメニューが開きます。
 
-- **変更の表示 (View Changes) ** - このチェックポイントと直前のチェックポイントの間にDiff Viewを起動します。 ([詳細][view-changes])
+- **変更の表示 (View Changes)** - このチェックポイントと直前のチェックポイントの間にDiff Viewを起動します。 ([詳細][view-changes])
 
-- **比較選択 (Select for Compare) ** - 比較するペアの最初のチェックポイントを選択します。
+- **比較選択 (Select for Compare)** - 比較するペアの最初のチェックポイントを選択します。
 
-- **選択の比較 (Compare with Selected) ** - 現在のノードと、 'Select for Compare'を通じてマークされたノードとの間にDiff Viewを起動します。
+- **選択の比較 (Compare with Selected)** - 現在のノードと、 'Select for Compare'を通じてマークされたノードとの間にDiff Viewを起動します。
 
 ![](/img/user-manual/version-control/graph-view/compare-checkpoints-example.gif)
 
-- **新しいブランチ (New Branch) ** - 選択したチェックポイントから新しいブランチを作成します。 ([詳細][new-branch])
+- **新しいブランチ (New Branch)** - 選択したチェックポイントから新しいブランチを作成します。 ([詳細][new-branch])
 
-- **データのコピー (Copy Data) ** - 変更がなく、切り捨てられていないチェックポイントデータ(チェックポイントGUID、ブランチID、チェックポイントメッセージなど)をJSON形式でクリップボードにコピーします。
+- **データのコピー (Copy Data)** - 変更がなく、切り捨てられていないチェックポイントデータ(チェックポイントGUID、ブランチID、チェックポイントメッセージなど)をJSON形式でクリップボードにコピーします。
 
-- **復元 (Restore) **(現在のエディタブランチの場合のみ)- ブランチの状態を選択したチェックポイントの状態に復元します。 ([詳細][restore-checkpoint])
+- **復元 (Restore)**(現在のエディタブランチの場合のみ)- ブランチの状態を選択したチェックポイントの状態に復元します。 ([詳細][restore-checkpoint])
 
-- **ハードリセット (Hard Reset) **(現在のエディタブランチの場合のみ)- 選択したチェックポイントにハードリセットを実行します。 ([詳細][hard-reset])
+- **ハードリセット (Hard Reset)**(現在のエディタブランチの場合のみ)- 選択したチェックポイントにハードリセットを実行します。 ([詳細][hard-reset])
 
 ## 拡張可能なノード
 

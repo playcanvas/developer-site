@@ -1,0 +1,142 @@
+---
+description: Documentation for the Modify helpers
+---
+
+# `<Modify.*>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { GltfModifyExample } from './gltf-modify-example';
+import GltfModifyExampleSource from '!!raw-loader!./gltf-modify-example.jsx';
+
+`<Modify>` provides declarative rules for editing the entities and components inside a GLB. Place `<Modify.Node>` elements inside a [`<Gltf/>`](../gltf) to match part of the imported hierarchy, then use the helper subcomponents to tweak what you find.
+
+The system lets you:
+
+- Match entities using filesystem-like paths or predicate functions.
+- Merge new props into existing light, render, and camera components.
+- Remove components or replace an entity’s children entirely.
+- Add brand-new child entities inline with your rule.
+
+The [Modifying GLB Models guide](../../guide/modifying-glb-models) walks through practical scenarios using these primitives.
+
+## `<Modify.Node>`
+
+`<Modify.Node>` defines where a rule applies. Use the `path` prop to target entities by name, component filter, wildcards (`*` and `**`), or even a predicate function.
+
+```tsx copy
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Interior.**[light]">
+    <Modify.Light intensity={(current = 1) => current * 0.5} />
+  </Modify.Node>
+</Gltf>
+```
+
+Set `clearChildren` to start from a clean slate before adding your own children:
+
+```tsx copy
+<Modify.Node path="Accessories" clearChildren>
+  <Entity name="Spoiler">
+    <Render type="torus" />
+  </Entity>
+</Modify.Node>
+```
+
+Every non-`Modify.*` element you nest inside `<Modify.Node>` is cloned and appended as a child of each match.
+
+### Path helpers
+
+- `Body.FrontBumper` — exact match.
+- `Body.*` — direct children.
+- `Body.**` — any depth below `Body`.
+- `**[render]` — any entity with a render component.
+- `(entity) => entity.name.startsWith('Wheel')` — predicate function.
+
+## Component modifiers
+
+Within a node rule you can mutate existing components using the modifier helpers. Each helper supports direct values, updater functions, and a `remove` flag.
+
+```tsx copy
+<Modify.Node path="**[light]">
+  <Modify.Light color="cyan" intensity={2} />
+</Modify.Node>
+
+<Modify.Node path="**[render]">
+  <Modify.Render
+    castShadows={(value = false) => !value}
+    receiveShadows
+  />
+</Modify.Node>
+
+<Modify.Node path="Cabin.Camera">
+  <Modify.Camera remove />
+</Modify.Node>
+```
+
+All matching entities are evaluated, but if multiple rules address the same component the most specific path wins.
+
+### Functional updates
+
+Pass a function to merge props based on the current value:
+
+```tsx copy
+<Modify.Light intensity={(current = 1) => current * 1.5} />
+```
+
+Use this pattern when you want to adjust values relative to whatever ships in the GLB.
+
+## Live example
+
+The interactive demo below combines `<Gltf/>` and `<Modify.Node>` to control rendering behavior. Toggle the checkboxes to see component rules take effect. Try disabling `Render visuals` to confirm that rules still run in data-only mode.
+
+<CodeExample
+  label="Modify render components inside a GLB"
+  filename="gltf-modify-example.jsx"
+  code={GltfModifyExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useGrid
+      useShadow
+      camera={[2, 1, 2]}
+      exposure={3}
+    >
+      <GltfModifyExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## Properties
+
+### `<Modify.Node/>`
+
+```tsx asTypedoc
+import { Modify } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Modify.Node>;
+export default $;
+```
+
+### `<Modify.Light/>`
+
+```tsx asTypedoc
+import { Modify } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Modify.Light>;
+export default $;
+```
+
+### `<Modify.Render/>`
+
+```tsx asTypedoc
+import { Modify } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Modify.Render>;
+export default $;
+```
+
+### `<Modify.Camera/>`
+
+```tsx asTypedoc
+import { Modify } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Modify.Camera>;
+export default $;
+```

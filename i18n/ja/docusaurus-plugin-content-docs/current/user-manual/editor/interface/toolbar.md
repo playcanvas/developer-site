@@ -1,6 +1,5 @@
 ---
 title: ツールバー
-sidebar_position: 1
 ---
 
 Editorのメインツールバーは、Editorの左側、垂直な端にあります。ツールバーから多くの一般的な操作にアクセスできます。利用可能な機能のリストを以下に示します。
@@ -19,8 +18,8 @@ Editorのメインツールバーは、Editorの左側、垂直な端にあり�
 | ![Redo](/img/user-manual/editor/toolbar/redo.png) | **やり直し** | 最後の操作をやり直します。 |
 | ![Bake](/img/user-manual/editor/toolbar/lightmapper.png) | **Lightmapper** | [Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps)のベイクと自動再ベイクのコントロールにアクセスします。 |
 | ![Code Editor](/img/user-manual/editor/toolbar/code-editor.png) | **コードエディター** | [コードエディター](/user-manual/scripting/editor-users/code-editor)を開きます。 |
-| ![Publish](/img/user-manual/editor/toolbar/publish.png) | **公開** | プロジェクトの[ビルドを公開](/user-manual/publishing/web/playcanvas-hosting#publishing-a-new-build)します。 |
+| ![Publish](/img/user-manual/editor/toolbar/publish.png) | **公開** | プロジェクトの[ビルドを公開](/user-manual/editor/publishing/web/playcanvas-hosting#publishing-a-new-build)します。 |
 | ![How Do I](/img/user-manual/editor/toolbar/how-do-i.png) | **使い方...？** | Viewportで「使い方...？」ヘルプウィジェットを切り替えます。 |
-| ![Controls](/img/user-manual/editor/toolbar/controls.png) | **操作方法** | Editorがサポートする[操作方法とキーボードショートカット](../../keyboard-shortcuts)のリストを表示します。 |
+| ![Controls](/img/user-manual/editor/toolbar/controls.png) | **操作方法** | Editorがサポートする[操作方法とキーボードショートカット](../keyboard-shortcuts)のリストを表示します。 |
 | ![Feedback](/img/user-manual/editor/toolbar/feedback.png) | **フィードバック** | [フォーラム](https://forum.playcanvas.com/t/playcanvas-editor-feedback)を訪れて、Editorに関するフィードバックを残します。 |
 | ![Settings](/img/user-manual/editor/toolbar/settings.png) | **設定** | Editorとシーンの設定を[Inspector](../inspector)に読み込みます。 |

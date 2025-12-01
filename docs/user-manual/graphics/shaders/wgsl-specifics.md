@@ -1,6 +1,5 @@
 ---
 title: WGSL Specifics
-sidebar_position: 2
 ---
 
 WGSL shaders used by the PlayCanvas engine must satisfy certain requirements. These requirements allow the engine to correctly integrate shaders, ensuring they receive the necessary resources such as attributes, uniforms, and varyings.

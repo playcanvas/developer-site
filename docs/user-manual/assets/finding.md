@@ -1,6 +1,5 @@
 ---
 title: Third-party Asset Sites
-sidebar_position: 6
 ---
 
 ## Where can I get 3D models/Sound FX/Music for PlayCanvas?

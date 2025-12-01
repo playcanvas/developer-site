@@ -4,7 +4,7 @@ title: <pc-camera>
 
 The `<pc-camera>` tag is used to define a camera component.
 
-:::note
+:::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 
@@ -12,28 +12,29 @@ The `<pc-camera>` tag is used to define a camera component.
 
 ## Attributes
 
-<div className="nowrap-first-col">
+<div className="attribute-table">
 
-| Attribute | Description |
-| --- | --- |
-| `clear-color` | The background color of the camera. Can be a space-separated list of R, G, B, and A values, a hex color code, or a [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts). If unspecified, `0.75 0.75 0.75 1` is used. |
-| `clear-color-buffer` | Boolean attribute. Controls whether the camera clears the color buffer. If unspecified, the color buffer is cleared. |
-| `clear-depth-buffer` | Boolean attribute. Controls whether the camera clears the depth buffer. If unspecified, the depth buffer is cleared. |
-| `clear-stencil-buffer` | Boolean attribute. Controls whether the camera clears the stencil buffer. If unspecified, the stencil buffer is cleared. |
-| `cull-faces` | Boolean attribute. Controls whether the camera culls faces. If unspecified, faces are culled. |
-| `far-clip` | The far clipping plane of the camera. If unspecified, `1000` is used. |
-| `flip-faces` | Boolean attribute. Controls whether the camera flips faces. If unspecified, faces are not flipped. |
-| `fov` | The field of view of the camera. If unspecified, `45` is used. |
-| `frustum-culling` | Boolean attribute. Controls whether the camera uses frustum culling. If unspecified, frustum culling is used. |
-| `gamma` | The gamma of the camera. Can be `linear` or `srgb`. If unspecified, `srgb` is used. |
-| `horizontal-fov` | Valueless attribute. If present, the camera uses a horizontal field of view. If unspecified, the camera uses a vertical field of view. |
-| `near-clip` | The near clipping plane of the camera. If unspecified, `0.1` is used. |
-| `orthographic` | Valueless attribute. If present, the camera uses an orthographic projection. If unspecified, the camera uses a perspective projection. |
-| `ortho-height` | The height of the orthographic projection. If unspecified, `10` is used. |
-| `priority` | The priority of the camera. If unspecified, `0` is used. |
-| `rect` | The viewport rectangle of the camera. Specified as a space-separated list of X, Y, Width, and Height values. If unspecified, `0 0 1 1` is used. |
-| `scissor-rect` | The scissor rectangle of the camera. Specified as a space-separated list of X, Y, Width, and Height values. If not specified, `0 0 1 1` is used. |
-| `tonemap` | The tonemap of the camera. Can be `none`, `aces`, `aces2`, `filmic`, `hejl`, `linear`, or `neutral`. If unspecified, `none` is used. |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `clear-color` | Color | `"0.75 0.75 0.75 1"` | Background color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
+| `clear-color-buffer` | Boolean | `"true"` | Controls whether the camera clears the color buffer |
+| `clear-depth-buffer` | Boolean | `"true"` | Controls whether the camera clears the depth buffer |
+| `clear-stencil-buffer` | Boolean | `"true"` | Controls whether the camera clears the stencil buffer |
+| `cull-faces` | Boolean | `"true"` | Controls whether the camera culls faces |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `far-clip` | Number | `"1000"` | The far clipping plane distance |
+| `flip-faces` | Boolean | `"false"` | Controls whether the camera flips faces |
+| `fov` | Number | `"45"` | Field of view in degrees |
+| `frustum-culling` | Boolean | `"true"` | Controls whether the camera uses frustum culling |
+| `gamma` | Enum | `"srgb"` | Color space: `"linear"` \| `"srgb"` |
+| `horizontal-fov` | Flag | - | Whether to use horizontal field of view instead of vertical |
+| `near-clip` | Number | `"0.1"` | The near clipping plane distance |
+| `orthographic` | Flag | - | Whether to use orthographic projection instead of perspective |
+| `ortho-height` | Number | `"10"` | Height of the orthographic projection |
+| `priority` | Number | `"0"` | Rendering priority of the camera |
+| `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
+| `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |
+| `tonemap` | Enum | `"none"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
 
 </div>
 
