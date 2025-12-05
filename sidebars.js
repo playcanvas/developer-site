@@ -612,6 +612,7 @@ const sidebars = {
           },
           items: [
             'user-manual/graphics/cameras/depth-layer',
+            'user-manual/graphics/cameras/scene-picker',
           ],
         },
         {
