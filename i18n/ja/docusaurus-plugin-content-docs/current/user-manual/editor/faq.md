@@ -16,7 +16,7 @@ title: よくある質問
 
 JavaScriptを使用してエンティティの動作を制御できます。 エンティティを選択し、スクリプトコンポーネントを追加し、新しいスクリプトアセットを作成してください。
 
-[Learn more](/user-manual/scripting/editor-users/managing-scripts/)
+[Learn more](/user-manual/editor/scripting/managing-scripts/)
 
 ## 背景色を変更するには?
 

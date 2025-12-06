@@ -88,7 +88,7 @@ This is going to make the `Colyseus` [JavaScript SDK](https://docs.colyseus.io/g
 
 ## Establishing a Client-Server Connection {#establishing-a-client-server-connection}
 
-Now, from a new PlayCanvas Script, let's instantiate our `Colyseus.Client` instance. ([see "Creating new scripts"](/user-manual/scripting/editor-users/managing-scripts/))
+Now, from a new PlayCanvas Script, let's instantiate our `Colyseus.Client` instance. ([see "Creating new scripts"](/user-manual/editor/scripting/managing-scripts/))
 
 You can attach this script to a new empty entity called "NetworkManager".
 

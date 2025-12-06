@@ -113,7 +113,7 @@ HTMLでの使用例:
 }'></pc-script>
 ```
 
-スクリプト属性についての[詳細はこちら](/user-manual/scripting/fundamentals/script-attributes)。
+スクリプト属性についての[詳細はこちら](/user-manual/scripting/script-attributes)。
 
 ## エンジンに用意されているスクリプトの使用
 

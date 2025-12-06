@@ -1,15 +1,20 @@
 ---
 title: Scripting
+sidebar_position: 6
 ---
 
 Scripts are the heart of interactivity in PlayCanvas. They're reusable pieces of code that you attach to Entities to define behaviors, handle user input, manage game logic, and bring your projects to life.
+
+:::tip Using the Editor?
+If you're using the PlayCanvas Editor, check out the [Editor Scripting](/user-manual/editor/scripting/) section to learn about managing scripts, the code editor, VS Code integration, and hot reloading.
+:::
 
 ## Two Scripting Systems
 
 PlayCanvas supports two scripting approaches:
 
-* **ESM Scripts** (`.mjs` files) - Modern ES Module-based scripts using class syntax. **Recommended for new projects.**
-* **Classic Scripts** (`.js` files) - The original PlayCanvas scripting system using prototype-based syntax.
+- **ESM Scripts** (`.mjs` files) — Modern ES Module-based scripts using class syntax. **Recommended for new projects.**
+- **Classic Scripts** (`.js` files) — The original PlayCanvas scripting system using prototype-based syntax.
 
 Both systems can coexist in the same project, allowing you to migrate gradually or use whichever approach fits your needs.
 
@@ -54,37 +59,14 @@ Rotate.prototype.update = function(dt) {
 </TabItem>
 </Tabs>
 
-## What You'll Learn
+## In This Section
 
-### [Fundamentals](./fundamentals/index.md)
-
-Core concepts that apply to all PlayCanvas scripts:
-
-* [Getting Started](./fundamentals/getting-started.md) - Basic script structure and syntax
-* [ESM Scripts](./fundamentals/esm-scripts.md) - Modern scripting with ES Modules
-* [Script Lifecycle](./fundamentals/script-lifecycle.md) - When and how script methods are called
-* [Script Attributes](./fundamentals/script-attributes/index.md) - Exposing configurable properties
-* [Calling the Engine API](./fundamentals/engine-api.md) - Key classes and patterns
-* [Events](./fundamentals/events.md) - Communication between scripts
-
-### [Editor Integration](./editor-users/index.md)
-
-Working with scripts in the PlayCanvas Editor:
-
-* [Managing Scripts](./editor-users/managing-scripts.md) - Creating and organizing script files
-* [Code Editor](./editor-users/code-editor.md) - Using the built-in code editor
-* [VS Code Extension](./editor-users/vscode-extension.md) - Enhanced development workflow
-* [Hot Reloading](./editor-users/hot-reloading.md) - Live code updates
-
-### [Debugging](./debugging/index.md)
-
-Tools and techniques for troubleshooting your scripts:
-
-* [Console Logging](./debugging/console-logging.md) - Basic debugging with console output
-* [Browser Dev Tools](./debugging/browser-dev-tools.md) - Advanced debugging techniques
-
-:::tip
-
-New to PlayCanvas scripting? Start with [Getting Started](./fundamentals/getting-started.md) to learn the basics, then explore [ESM Scripts](./fundamentals/esm-scripts.md) for the modern approach.
-
-:::
+- [Getting Started](./getting-started.md) — Basic script structure and syntax.
+- [ESM Scripts](./esm-scripts.md) — Modern scripting with ES Modules.
+- [Script Lifecycle](./script-lifecycle.md) — When and how script methods are called.
+- [Application Lifecycle](./application-lifecycle.md) — Understanding app initialization and frame updates.
+- [Script Attributes](./script-attributes/index.md) — Exposing configurable properties.
+- [Engine API](./engine-api.md) — Key classes and patterns.
+- [Events](./events.md) — Communication between scripts.
+- [Debugging](./debugging/index.md) — Tools and techniques for troubleshooting.
+- [Migration Guide](./migration-guide.md) — Upgrading from classic to ESM scripts.
