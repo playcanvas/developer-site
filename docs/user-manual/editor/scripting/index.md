@@ -1,6 +1,5 @@
 ---
 title: Scripting
-sidebar_position: 5
 ---
 
 The PlayCanvas Editor provides a tightly integrated environment for writing and managing scripts. This section covers the Editor-specific tools and workflows that will enhance your scripting experience.
