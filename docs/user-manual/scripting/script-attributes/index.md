@@ -2,12 +2,12 @@
 title: Script Attributes
 ---
 
-Script Attributes are a powerful feature in PlayCanvas that define the public, configurable interface of your scripts. They allow you to expose specific parameters that can be easily tweaked, either programmatically when instantiating or configuring scripts in code or visually within the [PlayCanvas Editor](../../../editor/index.md). This means you can write a script once, and then easily adjust its behavior and properties for different instances or by different team members.
+Script Attributes are a powerful feature in PlayCanvas that define the public, configurable interface of your scripts. They allow you to expose specific parameters that can be easily tweaked, either programmatically when instantiating or configuring scripts in code or visually within the [PlayCanvas Editor](../../editor/index.md). This means you can write a script once, and then easily adjust its behavior and properties for different instances or by different team members.
 
 ## Why Use Script Attributes?
 
 * **Clear Public Interface:** Attributes formally define which parts of a script are intended to be customized, improving code clarity and maintainability.
-* **Editor Integration (Optional):** When using the PlayCanvas Editor, attributes appear as editable fields in the [Inspector panel](../../../editor/interface/inspector.md). This provides a user-friendly interface for artists, designers, or other developers to configure scripts without needing to delve into code.
+* **Editor Integration (Optional):** When using the PlayCanvas Editor, attributes appear as editable fields in the [Inspector panel](../../editor/interface/inspector.md). This provides a user-friendly interface for artists, designers, or other developers to configure scripts without needing to delve into code.
 * **Programmatic Configuration:** When creating or managing Entities and Script Components via code, you can directly set the initial values for these attributes, allowing for dynamic and flexible setups.
 * **Reusability:** Create generic scripts (e.g., a "Movement" script) and customize their properties (like speed, direction, target) for various Entities, whether through the Editor or in your code.
 * **Collaboration:** Enable team members, including those not primarily focused on coding, to modify gameplay elements, character stats, and visual properties.

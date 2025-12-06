@@ -16,7 +16,7 @@ To add a **component** to an Entity, select the Entity and then click **Add Comp
 
 You can use JavaScript to control the behavior of entities. Select any entity, add a script component and create a new script asset.
 
-[Learn more](/user-manual/scripting/editor-users/managing-scripts/)
+[Learn more](/user-manual/editor/scripting/managing-scripts/)
 
 ## How do I change the background color?
 

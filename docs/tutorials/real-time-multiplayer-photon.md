@@ -849,4 +849,4 @@ Although this project was only a simple real-time communication between players,
 [4]: https://www.photonengine.com/
 [14]: https://doc-api.photonengine.com/en/javascript/current/Photon.LoadBalancing.LoadBalancingClient.html
 [15]: https://doc.photonengine.com/ja-jp/quantum/v1/reference/glossary
-[22]: /user-manual/scripting/fundamentals/events/
+[22]: /user-manual/scripting/events/

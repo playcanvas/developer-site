@@ -56,7 +56,7 @@ const config = {
         { from: ['/user-manual/editor/keyboard-shortcuts/'], to: '/user-manual/editor/interface/keyboard-shortcuts/' },
         { from: ['/user-manual/editor/scene/settings/'], to: '/user-manual/editor/interface/settings/' },
         { from: ['/user-manual/scenes/entities/'], to: '/user-manual/ecs/entities/' },
-        { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/scripting/editor-users/loading-order/' },
+        { from: ['/user-manual/scripting/loading-order/', '/en/user-manual/scripting/loading-order'], to: '/user-manual/editor/scripting/loading-order/' },
         // Legacy post effects moved to legacy subdirectory
         { from: ['/user-manual/graphics/posteffects/bloom/'], to: '/user-manual/graphics/posteffects/legacy/bloom/' },
         { from: ['/user-manual/graphics/posteffects/brightness_contrast/'], to: '/user-manual/graphics/posteffects/legacy/brightness_contrast/' },
@@ -123,6 +123,18 @@ const config = {
 
         if (existingPath.includes('/user-manual/editor/version-control/')) {
           const redirect = existingPath.replace('/user-manual/editor/version-control/', '/user-manual/version-control/');
+          redirects.push(redirect);
+        }
+
+        // Redirect old scripting/fundamentals/ paths to scripting/
+        if (existingPath.includes('/user-manual/scripting/') && !existingPath.includes('/user-manual/scripting/fundamentals/')) {
+          const redirect = existingPath.replace('/user-manual/scripting/', '/user-manual/scripting/fundamentals/');
+          redirects.push(redirect);
+        }
+
+        // Redirect old scripting/editor-users/ paths to editor/scripting/
+        if (existingPath.includes('/user-manual/editor/scripting/')) {
+          const redirect = existingPath.replace('/user-manual/editor/scripting/', '/user-manual/scripting/editor-users/');
           redirects.push(redirect);
         }
 

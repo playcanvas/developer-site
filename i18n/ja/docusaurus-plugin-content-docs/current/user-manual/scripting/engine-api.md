@@ -102,12 +102,12 @@ this.app.on('game:start', this.onGameStart, this);
 ## さらに学ぶ
 
 * **[Engine API リファレンス](https://api.playcanvas.com/engine/)** - 完全なドキュメント
-* **[Engine ガイド](../../engine/index.md)** - PlayCanvas Engineランタイムの詳細ガイド
+* **[Engine ガイド](../engine/index.md)** - PlayCanvas Engineランタイムの詳細ガイド
 * **[スクリプトライフサイクル](./script-lifecycle.md)** - スクリプトメソッドが呼び出されるタイミング
 * **[イベント](./events.md)** - スクリプトの通信パターン
 
 :::tip
 
-**IDEサポート:** スクリプト記述中にオートコンプリートとインラインドキュメントを利用するには、[VS Code Extension](../editor-users/vscode-extension.md)を使用してください。
+**IDEサポート:** スクリプト記述中にオートコンプリートとインラインドキュメントを利用するには、[VS Code Extension](/user-manual/editor/scripting/vscode-extension.md)を使用してください。
 
 :::

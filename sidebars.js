@@ -179,6 +179,23 @@ const sidebars = {
         'user-manual/editor/realtime-collaboration',
         {
           type: 'category',
+          label: 'Scripting',
+          key: 'editor-scripting',
+          link: {
+            type: 'doc',
+            id: 'user-manual/editor/scripting/index'
+          },
+          items: [
+            'user-manual/editor/scripting/managing-scripts',
+            'user-manual/editor/scripting/import-maps',
+            'user-manual/editor/scripting/code-editor',
+            'user-manual/editor/scripting/vscode-extension',
+            'user-manual/editor/scripting/hot-reloading',
+            'user-manual/editor/scripting/loading-order'
+          ],
+        },
+        {
+          type: 'category',
           label: 'Templates',
           link: {
             type: 'doc',
@@ -531,55 +548,30 @@ const sidebars = {
     {
       type: 'category',
       label: 'Scripting',
+      key: 'scripting',
       link: {
         type: 'doc',
         id: 'user-manual/scripting/index',
       },
       items: [
+        'user-manual/scripting/getting-started',
+        'user-manual/scripting/esm-scripts',
+        'user-manual/scripting/script-lifecycle',
+        'user-manual/scripting/application-lifecycle',
         {
           type: 'category',
-          label: 'Scripting Fundamentals',
+          label: 'Script Attributes',
           link: {
             type: 'doc',
-            id: 'user-manual/scripting/fundamentals/index',
+            id: 'user-manual/scripting/script-attributes/index',
           },
           items: [
-            'user-manual/scripting/fundamentals/getting-started',
-            'user-manual/scripting/fundamentals/esm-scripts',
-            'user-manual/scripting/fundamentals/script-lifecycle',
-            'user-manual/scripting/fundamentals/application-lifecycle',
-            {
-              type: 'category',
-              label: 'Script Attributes',
-              link: {
-                type: 'doc',
-                id: 'user-manual/scripting/fundamentals/script-attributes/index',
-              },
-              items: [
-                'user-manual/scripting/fundamentals/script-attributes/classic',
-                'user-manual/scripting/fundamentals/script-attributes/esm',
-              ],
-            },
-            'user-manual/scripting/fundamentals/engine-api',
-            'user-manual/scripting/fundamentals/events'
+            'user-manual/scripting/script-attributes/classic',
+            'user-manual/scripting/script-attributes/esm',
           ],
         },
-        {
-          type: 'category',
-          label: 'Scripting for Editor Users',
-          link: {
-            type: 'doc',
-            id: 'user-manual/scripting/editor-users/index'
-          },
-          items: [
-            'user-manual/scripting/editor-users/managing-scripts',
-            'user-manual/scripting/editor-users/import-maps',
-            'user-manual/scripting/editor-users/code-editor',
-            'user-manual/scripting/editor-users/vscode-extension',
-            'user-manual/scripting/editor-users/hot-reloading',
-            'user-manual/scripting/editor-users/loading-order'
-          ],
-        },
+        'user-manual/scripting/engine-api',
+        'user-manual/scripting/events',
         {
           type: 'category',
           label: 'Debugging',

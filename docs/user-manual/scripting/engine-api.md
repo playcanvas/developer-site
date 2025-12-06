@@ -102,12 +102,12 @@ this.app.on('game:start', this.onGameStart, this);
 ## Learning More
 
 * **[Full Engine API Reference](https://api.playcanvas.com/engine/)** - Complete documentation
-* **[Engine Guide](../../engine/index.md)** - In-depth guide to the PlayCanvas Engine runtime
+* **[Engine Guide](../engine/index.md)** - In-depth guide to the PlayCanvas Engine runtime
 * **[Script Lifecycle](./script-lifecycle.md)** - When your script methods are called
 * **[Events](./events.md)** - Script communication patterns
 
 :::tip
 
-**IDE Support:** Use the [VS Code Extension](../editor-users/vscode-extension.md) for autocomplete and inline documentation while writing scripts.
+**IDE Support:** Use the [VS Code Extension](/user-manual/editor/scripting/vscode-extension.md) for autocomplete and inline documentation while writing scripts.
 
 :::

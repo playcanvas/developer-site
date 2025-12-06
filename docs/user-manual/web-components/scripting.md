@@ -113,7 +113,7 @@ Example Usage in HTML:
 }'></pc-script>
 ```
 
-[Read more](/user-manual/scripting/fundamentals/script-attributes) about Script Attributes.
+[Read more](/user-manual/scripting/script-attributes) about Script Attributes.
 
 ## Using Ready Made Scripts from the Engine
 

@@ -88,7 +88,7 @@ https://unpkg.com/colyseus.js@^0.16.0/dist/colyseus.js
 
 ## クライアント - サーバー接続の確立 {#establishing-a-client-server-connection}
 
-Now, from a new PlayCanvas Script, let's instantiate our `Colyseus.Client` instance. ([see "Creating new scripts"](/user-manual/scripting/editor-users/managing-scripts/))
+Now, from a new PlayCanvas Script, let's instantiate our `Colyseus.Client` instance. ([see "Creating new scripts"](/user-manual/editor/scripting/managing-scripts/))
 
 このスクリプトは、「NetworkManager」という新しい空のエンティティにアタッチできます。
 
