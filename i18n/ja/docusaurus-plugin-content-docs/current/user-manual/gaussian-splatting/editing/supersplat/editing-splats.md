@@ -42,7 +42,7 @@ SuperSplatは、以下の2つの**_編集モード_**のいずれかで動作し
 
 ## Splatsの選択と削除
 
-Splatsの切り抜きや不要なGaussiansの削除は、SuperSplatの主要な機能です。これを助けるために、7つの選択ツールが利用可能です：
+Splatsの切り抜きや不要なGaussiansの削除は、SuperSplatの主要な機能です。これを助けるために、8つの選択ツールが利用可能です：
 
 <div class="no-wrap-first-col">
 
@@ -53,6 +53,7 @@ Splatsの切り抜きや不要なGaussiansの削除は、SuperSplatの主要な�
 | ![Polygon Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-poly.svg) **Polygon Select** | クリックしてポリゴンの頂点を定義する点を配置します。ダブルクリックで図形を閉じます。ポリゴン内のSplatsが選択されます。直線のエッジを持つ正確な選択に便利です。 |
 | ![Brush Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-brush.svg) **Brush Select** | クリック＆ドラッグで円形ブラシを使用して選択をペイントします。ブラシサイズは `[`（縮小）と `]`（拡大）キーで調整できます。有機的な選択作業に最適です。 |
 | ![Flood Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-flood.svg) **Flood Select** | ビューポート上でクリックして、塗りつぶしアルゴリズムに基づいた2D選択マスクを生成します。閾値スライダー（0-1）が塗りつぶしの感度を制御します。このツールは、シーン内で孤立して表示されるはぐれたGaussians（フローターとも呼ばれます）を選択して削除するのに特に便利です。 |
+| ![Eyedropper Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-eyedropper.svg) **Eyedropper Select** | ビューポート上でクリックして、色の類似性に基づいてSplatsを選択します。閾値スライダー（0-1）がカラーマッチングの感度を制御します。このツールは、類似した色を持つSplatsのグループを選択するのに便利です。 |
 | ![Sphere Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-sphere.svg) **Sphere Select** | ボリューメトリック選択用の3D球体ボリュームを作成します。シーン内の任意の場所をダブルクリックして球の中心を配置します。移動ギズモを使用して球を移動し、ツールバーで半径値を調整します。**Set**をクリックして現在の選択を置き換え、**Add**で選択に追加、**Remove**で選択から削除します。 |
 | ![Box Select](/img/user-manual/gaussian-splatting/editing/supersplat/select-box.svg) **Box Select** | ボリューメトリック選択用の3D矩形ボリュームを作成します。シーン内の任意の場所をダブルクリックしてボックスの中心を配置します。移動ギズモを使用してボックスを移動し、ツールバーで寸法（LenX、LenY、LenZ）を調整します。**Set**をクリックして現在の選択を置き換え、**Add**で選択に追加、**Remove**で選択から削除します。これは3D空間の特定領域内のSplatsを選択するのに最適です。 |
 
@@ -60,7 +61,7 @@ Splatsの切り抜きや不要なGaussiansの削除は、SuperSplatの主要な�
 
 ### 選択修飾キー
 
-すべての2D選択ツール（Picker、Lasso、Polygon、Brush、Flood）は、選択の適用方法を制御する修飾キーをサポートしています：
+すべての2D選択ツール（Picker、Lasso、Polygon、Brush、Flood、Eyedropper）は、選択の適用方法を制御する修飾キーをサポートしています：
 
 | 修飾キー | アクション |
 |----------|--------|
