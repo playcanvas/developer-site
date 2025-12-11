@@ -110,6 +110,55 @@ There are additional numerical constraints that you can set which help the edito
 speed = 10;
 ```
 
+### Handling Attribute Changes
+
+What if you want to subscribe to the changes in your script attributes? Luckily, the class-based structure of the ESM scripting system means that you can subscribe to these changes as you would in any other Javascript class. You can go as simple or as complex as you like
+
+```javascript
+export class MyScript extends Script {
+
+    static scriptName = 'myScript';
+
+    // 1. Define a "internal state variable" to store the value
+    _speed = 10;
+
+    get speed() {
+        return this._speed;
+    }
+
+    /**
+     * @attribute
+     * The speed the entity should be traveling
+     * @title Speed
+     * @type {number}
+     */
+    set speed(value) {
+
+        if (this._speed === value) return;
+
+        this._speed = value;
+
+        // Run your custom logic here
+        console.log(`Speed updated to: ${value}`);
+
+        if ( value > 50 ) {
+             // Example: Fire an app event when the speed is set above 50
+             this.app.fire('flameColor:set', 'red');
+        }
+    }
+}
+```
+
+:::important
+
+You must apply `@attribute` to the setter of your property 
+
+:::
+
+In this example, we define a getter/setter pair for `speed` along with an internal state field `_speed`. When the PlayCanvas Editor changes the attribute via `this.speed` (or within the script itself!), it calls the setter, allowing you to intercept the value and run additional logic immediately.
+
+Note that the getter simply returns the internal state field, ensuring that `this.speed` still works as expected elsewhere in your code.
+
 ## Attribute types
 
 When you expose a script member as an attribute, the editor will show a control thats relevant to the type of attribute. If the attribute is a number, it shows a numerical input, if it's a boolean, a checkbox.
