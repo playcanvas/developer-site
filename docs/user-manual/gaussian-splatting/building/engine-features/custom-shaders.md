@@ -8,7 +8,7 @@ The PlayCanvas Engine supports custom shaders for Gaussian Splats, allowing you 
 
 There are two ways to customize Gaussian Splat rendering with shaders:
 
-1. **Shader Chunk Customization (Recommended)** - Override the `gsplatCustomizeVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
+1. **Shader Chunk Customization (Recommended)** - Override the `gsplatModifyVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
 
 2. **Full Shader Replacement** - Replace the entire vertex and fragment shaders for complete control. This provides maximum flexibility but requires understanding the full shader implementation.
 
@@ -18,22 +18,22 @@ Most use cases can be accomplished with shader chunk customization, which is cov
 
 ## API Reference
 
-The `gsplatCustomizeVS` shader chunk allows you to override three functions that customize how splats are rendered:
+The `gsplatModifyVS` shader chunk allows you to override three functions that customize how splats are rendered:
 
-### modifyCenter
+### modifySplatCenter
 
 Transform the position of splat centers in model space.
 
 **GLSL:**
 
 ```glsl
-void modifyCenter(inout vec3 center)
+void modifySplatCenter(inout vec3 center)
 ```
 
 **WGSL:**
 
 ```wgsl
-fn modifyCenter(center: ptr<function, vec3f>)
+fn modifySplatCenter(center: ptr<function, vec3f>)
 ```
 
 **Parameters:**
@@ -44,68 +44,69 @@ fn modifyCenter(center: ptr<function, vec3f>)
 
 ```glsl
 // Offset all splats up by 1 unit
-void modifyCenter(inout vec3 center) {
+void modifySplatCenter(inout vec3 center) {
     center.y += 1.0;
 }
 ```
 
-### modifyCovariance
+### modifySplatRotationScale
 
-Modify the splat size and shape by adjusting covariance values.
+Modify the splat size and shape by adjusting the rotation quaternion and scale vector. This is more efficient than working with covariance matrices directly.
 
 **GLSL:**
 
 ```glsl
-void modifyCovariance(vec3 originalCenter, vec3 modifiedCenter, inout vec3 covA, inout vec3 covB)
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale)
 ```
 
 **WGSL:**
 
 ```wgsl
-fn modifyCovariance(originalCenter: vec3f, modifiedCenter: vec3f, covA: ptr<function, vec3f>, covB: ptr<function, vec3f>)
+fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>)
 ```
 
 **Parameters:**
 
 - `originalCenter` - The original splat center position before modification
-- `modifiedCenter` - The splat center position after `modifyCenter()` was applied
-- `covA`, `covB` - Covariance values that define splat size and orientation
+- `modifiedCenter` - The splat center position after `modifySplatCenter()` was applied
+- `rotation` - Quaternion (x, y, z, w) representing the splat's rotation
+- `scale` - Scale vector representing the splat's size in each axis
 
 **Example:**
 
 ```glsl
 // Scale all splats by 2x
-void modifyCovariance(vec3 originalCenter, vec3 modifiedCenter, inout vec3 covA, inout vec3 covB) {
-    gsplatApplyUniformScale(covA, covB, 2.0);
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
+    scale *= 2.0;
 }
 ```
 
-### modifyColor
+### modifySplatColor
 
 Transform splat colors and opacity.
 
 **GLSL:**
 
 ```glsl
-void modifyColor(vec3 center, inout vec4 color)
+void modifySplatColor(vec3 center, inout vec4 color)
 ```
 
 **WGSL:**
 
 ```wgsl
-fn modifyColor(center: vec3f, color: ptr<function, vec4f>)
+fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>)
 ```
 
 **Parameters:**
 
-- `center` - The splat center position (after `modifyCenter()` was applied)
+- `center` - The splat center position (after `modifySplatCenter()` was applied)
 - `color` - The splat color (RGBA)
 
 **Example:**
 
 ```glsl
 // Darken all splats by 50%
-void modifyColor(vec3 center, inout vec4 color) {
+void modifySplatColor(vec3 center, inout vec4 color) {
     color.rgb *= 0.5;
 }
 ```
@@ -126,7 +127,7 @@ const customShader = `
 `;
 
 // Set the custom shader chunk override on the gsplat material
-gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatCustomizeVS', customShader);
+gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
 
 // Update the material to recompile with the new shader
 gsplatMaterial.update();
@@ -138,17 +139,17 @@ gsplatMaterial.update();
 const customShader = `
 uniform float uTime;
 
-void modifyCenter(inout vec3 center) {
+void modifySplatCenter(inout vec3 center) {
     // Create a wave effect based on height
     float heightIntensity = center.y * 0.2;
     center.x += sin(uTime * 5.0 + center.y) * 0.3 * heightIntensity;
 }
 
-void modifyCovariance(vec3 originalCenter, vec3 modifiedCenter, inout vec3 covA, inout vec3 covB) {
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
     // No modification to size
 }
 
-void modifyColor(vec3 center, inout vec4 color) {
+void modifySplatColor(vec3 center, inout vec4 color) {
     // Add a golden tint to the wave peaks
     float sineValue = abs(sin(uTime * 5.0 + center.y));
     vec3 gold = vec3(1.0, 0.85, 0.0);
@@ -159,7 +160,7 @@ void modifyColor(vec3 center, inout vec4 color) {
 
 // Set the custom shader chunk override on the gsplat material
 const shaderLanguage = app.graphicsDevice.isWebGPU ? 'wgsl' : 'glsl';
-gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatCustomizeVS', customShader);
+gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
 gsplatMaterial.update();
 
 // Update the uniform each frame
@@ -177,17 +178,17 @@ app.on('update', (dt) => {
 const customShader = `
 uniform uTime: f32;
 
-fn modifyCenter(center: ptr<function, vec3f>) {
+fn modifySplatCenter(center: ptr<function, vec3f>) {
     // Create a wave effect based on height
     let heightIntensity = (*center).y * 0.2;
     (*center).x += sin(uniform.uTime * 5.0 + (*center).y) * 0.3 * heightIntensity;
 }
 
-fn modifyCovariance(originalCenter: vec3f, modifiedCenter: vec3f, covA: ptr<function, vec3f>, covB: ptr<function, vec3f>) {
+fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
     // No modification to size
 }
 
-fn modifyColor(center: vec3f, color: ptr<function, vec4f>) {
+fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
     // Add a golden tint to the wave peaks
     let sineValue = abs(sin(uniform.uTime * 5.0 + center.y));
     let gold = vec3f(1.0, 0.85, 0.0);
@@ -198,7 +199,7 @@ fn modifyColor(center: vec3f, color: ptr<function, vec4f>) {
 
 // Set the custom shader chunk override on the gsplat material
 const shaderLanguage = app.graphicsDevice.isWebGPU ? 'wgsl' : 'glsl';
-gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatCustomizeVS', customShader);
+gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
 gsplatMaterial.update();
 ```
 
@@ -209,87 +210,79 @@ To remove a custom shader and revert to default rendering:
 ```javascript
 // Remove the custom shader chunk override from the gsplat material
 const shaderLanguage = app.graphicsDevice.isWebGPU ? 'wgsl' : 'glsl';
-gsplatMaterial.getShaderChunks(shaderLanguage).delete('gsplatCustomizeVS');
+gsplatMaterial.getShaderChunks(shaderLanguage).delete('gsplatModifyVS');
 gsplatMaterial.update();
 ```
 
 ## Helper Functions
 
-The following helper functions are available in `modifyCovariance()` for manipulating splat size and shape:
+The following helper functions are available in `modifySplatRotationScale()` for manipulating splat size and shape:
 
-### gsplatApplyUniformScale
+### gsplatGetSizeFromScale
 
-Scale splats uniformly by a factor.
+Extract the current size of a splat from its scale vector.
 
 **GLSL:**
 
 ```glsl
-void gsplatApplyUniformScale(inout vec3 covA, inout vec3 covB, float scale)
+float gsplatGetSizeFromScale(vec3 scale)
 ```
 
 **WGSL:**
 
 ```wgsl
-fn gsplatApplyUniformScale(covA: ptr<function, vec3f>, covB: ptr<function, vec3f>, scale: f32)
-```
-
-**Example:**
-
-```glsl
-// Double the size of all splats
-gsplatApplyUniformScale(covA, covB, 2.0);
-```
-
-### gsplatExtractSize
-
-Extract the current size of a splat.
-
-**GLSL:**
-
-```glsl
-float gsplatExtractSize(vec3 covA, vec3 covB)
-```
-
-**WGSL:**
-
-```wgsl
-fn gsplatExtractSize(covA: vec3f, covB: vec3f) -> f32
+fn gsplatGetSizeFromScale(scale: vec3f) -> f32
 ```
 
 **Example:**
 
 ```glsl
 // Clamp splat size to a specific range
-float size = gsplatExtractSize(covA, covB);
+float size = gsplatGetSizeFromScale(scale);
 float newSize = clamp(size, 0.01, 0.5);
-gsplatApplyUniformScale(covA, covB, newSize / size);
+scale *= newSize / size;
 ```
 
-### gsplatMakeRound
+### gsplatMakeSpherical
 
-Make splats round/spherical with a specific radius.
+Make splats spherical with a specific radius.
 
 **GLSL:**
 
 ```glsl
-void gsplatMakeRound(inout vec3 covA, inout vec3 covB, float radius)
+void gsplatMakeSpherical(inout vec3 scale, float radius)
 ```
 
 **WGSL:**
 
 ```wgsl
-fn gsplatMakeRound(covA: ptr<function, vec3f>, covB: ptr<function, vec3f>, radius: f32)
+fn gsplatMakeSpherical(scale: ptr<function, vec3f>, radius: f32)
 ```
 
 **Example:**
 
 ```glsl
-// Make all splats perfectly round with uniform size
-float size = gsplatExtractSize(covA, covB);
-gsplatMakeRound(covA, covB, size * 0.5);
+// Make all splats perfectly spherical with uniform size
+float size = gsplatGetSizeFromScale(scale);
+gsplatMakeSpherical(scale, size * 0.5);
 
-// Or hide a splat by setting radius to 0
-gsplatMakeRound(covA, covB, 0.0);
+// Or hide a splat by setting scale to zero
+scale = vec3(0.0);
+```
+
+### Direct Scale Manipulation
+
+Since the new API provides direct access to the scale vector, you can easily modify splat sizes:
+
+```glsl
+// Double the size of all splats
+scale *= 2.0;
+
+// Scale non-uniformly
+scale.x *= 2.0;  // Stretch horizontally
+
+// Hide a splat
+scale = vec3(0.0);
 ```
 
 ## Examples
