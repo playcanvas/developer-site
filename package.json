@@ -53,9 +53,9 @@
     "playcanvas": "^2.11.8",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
-    "sass": "^1.94.2",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sass": "^1.96.0",
     "sync-ammo": "^0.1.2",
     "ts-morph": "^27.0.0",
     "unist-util-visit": "^5.0.0"
@@ -63,7 +63,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
-    "markdownlint-cli2": "^0.19.1"
+    "markdownlint-cli2": "^0.20.0"
   },
   "browserslist": {
     "production": [
