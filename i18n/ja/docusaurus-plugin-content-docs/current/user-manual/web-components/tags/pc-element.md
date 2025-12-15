@@ -21,6 +21,7 @@ title: <pc-element>
 | `auto-width` | Flag | - | コンテンツに合わせて幅を自動的に調整するかどうか |
 | `color` | Color | `"1 1 1 1"` | スペース区切りのRGBA値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としての色 |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `enable-markup` | Flag | - | スタイル付きテキストのマークアップ処理を有効にします。色付きテキストの場合は `[color="#ff0000"]text[/color]` などのタグをサポートします。 |
 | `font-size` | Number | `"16"` | ピクセル単位のフォントサイズ |
 | `line-height` | Number | `"1.2"` | 行の高さの乗数 |
 | `pivot` | Vector2 | `"0.5 0.5"` | "X Y" 値としてのピボットポイント |
