@@ -21,6 +21,7 @@ The `<pc-element>` tag is used to define an element component.
 | `auto-width` | Flag | - | Whether to automatically adjust width to fit content |
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `enable-markup` | Flag | - | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
 | `font-size` | Number | `"16"` | Font size in pixels |
 | `line-height` | Number | `"1.2"` | Line height multiplier |
 | `pivot` | Vector2 | `"0.5 0.5"` | Pivot point as "X Y" values |
