@@ -1,11 +1,8 @@
 const path = require("path");
 const fs = require("fs");
-const metalsmith = require("metalsmith");
-const markdown = require("@metalsmith/markdown");
-const exec = require('child_process').exec;
-const { createGzip } = require('zlib');
+const { marked } = require("marked");
 
-const usage = 'Usage: node faq_to_json.js --dir content/en/faq --out file.json --bucket code.playcanvas.com';
+const usage = 'Usage: node faq_to_json.js --dir faq --out ../editor/static/json/howdoi.json';
 
 const args = process.argv.slice(2);
 if (args.length === 0) {
@@ -19,8 +16,6 @@ if (ind === -1 || !args[ind + 1]) {
     process.exit(-1);
 }
 const sourceDir = args[ind + 1];
-const parts = sourceDir.split('/');
-parts[0] = 'build';
 
 ind = args.indexOf('--out');
 if (ind === -1 || !args[ind + 1]) {
@@ -29,74 +24,64 @@ if (ind === -1 || !args[ind + 1]) {
 }
 const outfile = args[ind + 1];
 
-ind = args.indexOf('--bucket');
-if (ind === -1 || !args[ind + 1]) {
-    console.log(usage);
-    process.exit(-1);
-}
-const s3Bucket = args[ind + 1];
+// parse frontmatter from markdown content
+const parseFrontmatter = (content) => {
+    // normalize line endings to \n
+    const normalized = content.replace(/\r\n/g, '\n');
+    const match = normalized.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    if (!match) {
+        return { frontmatter: {}, body: normalized };
+    }
 
-// write gzipped target json file
-const writeJson = (file, json) => {
-    console.log('Saving file...');
-    const stream = fs.createWriteStream(`${file}.gz`);
-
-    const gzip = createGzip();
-    gzip.pipe(stream);
-    gzip.write(json);
-    gzip.end();
-};
-
-const upload = (file) => {
-    console.log('Uploading to S3...');
-    const cmd = `aws s3 cp --content-encoding 'gzip' ${file}.gz s3://${s3Bucket}/${file}`;
-    exec(cmd, (err) => {
-        if (err)
-            throw err;
+    const frontmatter = {};
+    match[1].split('\n').forEach(line => {
+        const [key, ...valueParts] = line.split(':');
+        if (key && valueParts.length) {
+            frontmatter[key.trim()] = valueParts.join(':').trim();
+        }
     });
+
+    return { frontmatter, body: match[2] };
 };
 
-// init metalsmith
-const m = new metalsmith(__dirname);
-m.source(sourceDir).use(markdown());
+// read all markdown files from the source directory
+const faqDir = path.join(__dirname, sourceDir);
+const files = fs.readdirSync(faqDir).filter(f => f.endsWith('.md'));
+files.sort();
 
-// convert markdown files to html
-m.build((err, results) => {
-    if (err) {
-        throw err;
-    }
+const json = [];
 
-    const json = [];
+for (const file of files) {
+    const content = fs.readFileSync(path.join(faqDir, file), 'utf8');
+    const { frontmatter, body } = parseFrontmatter(content);
 
-    // process results
-    for (const key in results) {
-        // remove html file
-        fs.unlinkSync(path.join(__dirname, 'build/' + key));
+    let html = marked.parse(body);
 
-        let html = results[key].contents.toString('utf-8');
+    // links clicked in the Editor should open a new tab
+    html = html.replace(/<a href=/g, '<a target="_blank" href=');
 
-        // links clicked in the Editor should open a new tab
-        const re = new RegExp('<a href=', 'g');
-        html = html.replace(re, '<a target="_blank" href=');
+    // style buttons in the Editor
+    html = html.replace('>Learn more<', ' class="docs">View User Manual<');
+    html = html.replace('>View tutorial<', ' class="docs">View Tutorial<');
 
-        // style buttons in the Editor
-        html = html.replace('>Learn more<', ' class="docs">View User Manual<');
-        html = html.replace('>View tutorial<', ' class="docs">View Tutorial<');
+    // add close button
+    html += '\n<button class="close">GOT IT</button>';
 
-        // add close button
-        html += '\n<button class="close">GOT IT</button>';
+    // add data to json
+    const keywords = frontmatter.keywords
+        ? frontmatter.keywords.replace(/\s+/g, '').split(',')
+        : [];
 
-        // add data to json
-        json.push({
-            title: results[key].title,
-            html: html,
-            keywords: results[key].keywords.replace(/\s+/g, '').split(',')
-        });
-    }
+    json.push({
+        title: frontmatter.title || file.replace('.md', ''),
+        html: html,
+        keywords: keywords
+    });
+}
 
-    const jsonStr = JSON.stringify(json, null, 4);
+const jsonStr = JSON.stringify(json, null, 4);
 
-    // save json and upload to S3
-    writeJson(outfile, jsonStr);
-    upload(outfile);
-});
+// save json file
+console.log(`Saving ${outfile}...`);
+fs.writeFileSync(outfile, jsonStr);
+console.log('Done.');

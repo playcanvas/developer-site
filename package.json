@@ -32,7 +32,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "faq": "node faq.js",
-    "faq-to-json": "node faq_to_json.js --dir faq --bucket code.playcanvas.com",
+    "faq-to-json": "node faq_to_json.js --dir faq --out ../editor/static/json/howdoi.json",
     "generate-tutorial-data": "node utils/generate-tutorial-data.mjs",
     "lint": "markdownlint-cli2 docs i18n .github/CONTRIBUTING.md README.md"
   },
@@ -63,7 +63,8 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
-    "markdownlint-cli2": "^0.20.0"
+    "markdownlint-cli2": "^0.20.0",
+    "marked": "^17.0.1"
   },
   "browserslist": {
     "production": [

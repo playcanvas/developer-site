@@ -7,4 +7,4 @@ keywords: asset, shader, create, material
 
 You can create a new shader asset from the asset panel. Click **Add Asset -> Shader**.
 
-[View tutorial](http://developer.playcanvas.com/tutorials/custom-shaders/)
+[View tutorial](https://developer.playcanvas.com/tutorials/custom-shaders/)
