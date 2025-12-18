@@ -75,7 +75,17 @@ for (const file of files) {
     let html = marked.parse(body);
 
     // links clicked in the Editor should open a new tab
-    html = html.replace(/<a href=/g, '<a target="_blank" href=');
+    html = html.replace(/<a\b[^>]*>/g, (match) => {
+        // If the anchor already has a target attribute, leave it unchanged
+        if (/\btarget\s*=/.test(match)) {
+            return match;
+        }
+        // Otherwise, insert target="_blank" before the href (or at the end if no href)
+        if (/\shref\s*=/.test(match)) {
+            return match.replace(/\s+href\s*=/, ' target="_blank" href=');
+        }
+        return match.replace(/<a\b/, '<a target="_blank"');
+    });
 
     // style buttons in the Editor
     html = html.replace('>Learn more<', ' class="docs">View User Manual<');
