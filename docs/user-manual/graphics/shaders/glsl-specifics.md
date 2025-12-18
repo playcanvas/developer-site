@@ -49,8 +49,7 @@ Currently, our uniform system supports only simple types, including `float`, `in
 PlayCanvas automatically sets `highp` precision (when supported by the device) for the following types:
 
 - `float`
-- `int`
-- `uint`
+- `int` (also applies to `uint`)
 - `usampler2D` (unsigned integer textures)
 - `isampler2D` (signed integer textures)
 - `sampler2DShadow`
