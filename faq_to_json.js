@@ -1,11 +1,8 @@
 const path = require("path");
 const fs = require("fs");
-const metalsmith = require("metalsmith");
-const markdown = require("@metalsmith/markdown");
-const exec = require('child_process').exec;
-const { createGzip } = require('zlib');
+const { marked } = require("marked");
 
-const usage = 'Usage: node faq_to_json.js --dir content/en/faq --out file.json --bucket code.playcanvas.com';
+const usage = 'Usage: node faq_to_json.js --dir faq --out ../editor/static/json/howdoi.json';
 
 const args = process.argv.slice(2);
 if (args.length === 0) {
@@ -19,8 +16,6 @@ if (ind === -1 || !args[ind + 1]) {
     process.exit(-1);
 }
 const sourceDir = args[ind + 1];
-const parts = sourceDir.split('/');
-parts[0] = 'build';
 
 ind = args.indexOf('--out');
 if (ind === -1 || !args[ind + 1]) {
@@ -29,74 +24,91 @@ if (ind === -1 || !args[ind + 1]) {
 }
 const outfile = args[ind + 1];
 
-ind = args.indexOf('--bucket');
-if (ind === -1 || !args[ind + 1]) {
-    console.log(usage);
-    process.exit(-1);
-}
-const s3Bucket = args[ind + 1];
+// parse frontmatter from markdown content
+const parseFrontmatter = (content) => {
+    // normalize line endings to \n
+    const normalized = content.replace(/\r\n/g, '\n');
+    const match = normalized.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    if (!match) {
+        return { frontmatter: {}, body: normalized };
+    }
 
-// write gzipped target json file
-const writeJson = (file, json) => {
-    console.log('Saving file...');
-    const stream = fs.createWriteStream(`${file}.gz`);
-
-    const gzip = createGzip();
-    gzip.pipe(stream);
-    gzip.write(json);
-    gzip.end();
-};
-
-const upload = (file) => {
-    console.log('Uploading to S3...');
-    const cmd = `aws s3 cp --content-encoding 'gzip' ${file}.gz s3://${s3Bucket}/${file}`;
-    exec(cmd, (err) => {
-        if (err)
-            throw err;
+    const frontmatter = {};
+    match[1].split('\n').forEach(line => {
+        const [key, ...valueParts] = line.split(':');
+        if (key && valueParts.length) {
+            frontmatter[key.trim()] = valueParts.join(':').trim();
+        }
     });
+
+    return { frontmatter, body: match[2] };
 };
 
-// init metalsmith
-const m = new metalsmith(__dirname);
-m.source(sourceDir).use(markdown());
-
-// convert markdown files to html
-m.build((err, results) => {
-    if (err) {
-        throw err;
+// read all markdown files from the source directory
+const faqDir = path.join(__dirname, sourceDir);
+let files;
+try {
+    if (!fs.existsSync(faqDir)) {
+        console.error(`Error: Directory '${faqDir}' does not exist.`);
+        process.exit(1);
     }
 
-    const json = [];
-
-    // process results
-    for (const key in results) {
-        // remove html file
-        fs.unlinkSync(path.join(__dirname, 'build/' + key));
-
-        let html = results[key].contents.toString('utf-8');
-
-        // links clicked in the Editor should open a new tab
-        const re = new RegExp('<a href=', 'g');
-        html = html.replace(re, '<a target="_blank" href=');
-
-        // style buttons in the Editor
-        html = html.replace('>Learn more<', ' class="docs">View User Manual<');
-        html = html.replace('>View tutorial<', ' class="docs">View Tutorial<');
-
-        // add close button
-        html += '\n<button class="close">GOT IT</button>';
-
-        // add data to json
-        json.push({
-            title: results[key].title,
-            html: html,
-            keywords: results[key].keywords.replace(/\s+/g, '').split(',')
-        });
+    const stat = fs.statSync(faqDir);
+    if (!stat.isDirectory()) {
+        console.error(`Error: '${faqDir}' is not a directory.`);
+        process.exit(1);
     }
 
-    const jsonStr = JSON.stringify(json, null, 4);
+    files = fs.readdirSync(faqDir).filter(f => f.endsWith('.md'));
+} catch (err) {
+    console.error(`Error reading directory '${faqDir}': ${err && err.message ? err.message : err}`);
+    process.exit(1);
+}
+files.sort();
 
-    // save json and upload to S3
-    writeJson(outfile, jsonStr);
-    upload(outfile);
-});
+const json = [];
+
+for (const file of files) {
+    const content = fs.readFileSync(path.join(faqDir, file), 'utf8');
+    const { frontmatter, body } = parseFrontmatter(content);
+
+    let html = marked.parse(body);
+
+    // links clicked in the Editor should open a new tab
+    html = html.replace(/<a\b[^>]*>/g, (match) => {
+        // If the anchor already has a target attribute, leave it unchanged
+        if (/\btarget\s*=/.test(match)) {
+            return match;
+        }
+        // Otherwise, insert target="_blank" before the href (or at the end if no href)
+        if (/\shref\s*=/.test(match)) {
+            return match.replace(/\s+href\s*=/, ' target="_blank" href=');
+        }
+        return match.replace(/<a\b/, '<a target="_blank"');
+    });
+
+    // style buttons in the Editor
+    html = html.replace('>Learn more<', ' class="docs">View User Manual<');
+    html = html.replace('>View tutorial<', ' class="docs">View Tutorial<');
+
+    // add close button
+    html += '\n<button class="close">GOT IT</button>';
+
+    // add data to json
+    const keywords = frontmatter.keywords
+        ? frontmatter.keywords.replace(/\s+/g, '').split(',')
+        : [];
+
+    json.push({
+        title: frontmatter.title || file.replace('.md', ''),
+        html: html,
+        keywords: keywords
+    });
+}
+
+const jsonStr = JSON.stringify(json, null, 4);
+
+// save json file
+console.log(`Saving ${outfile}...`);
+fs.writeFileSync(outfile, jsonStr);
+console.log('Done.');
