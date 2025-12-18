@@ -46,7 +46,24 @@ const parseFrontmatter = (content) => {
 
 // read all markdown files from the source directory
 const faqDir = path.join(__dirname, sourceDir);
-const files = fs.readdirSync(faqDir).filter(f => f.endsWith('.md'));
+let files;
+try {
+    if (!fs.existsSync(faqDir)) {
+        console.error(`Error: Directory '${faqDir}' does not exist.`);
+        process.exit(1);
+    }
+
+    const stat = fs.statSync(faqDir);
+    if (!stat.isDirectory()) {
+        console.error(`Error: '${faqDir}' is not a directory.`);
+        process.exit(1);
+    }
+
+    files = fs.readdirSync(faqDir).filter(f => f.endsWith('.md'));
+} catch (err) {
+    console.error(`Error reading directory '${faqDir}': ${err && err.message ? err.message : err}`);
+    process.exit(1);
+}
 files.sort();
 
 const json = [];
