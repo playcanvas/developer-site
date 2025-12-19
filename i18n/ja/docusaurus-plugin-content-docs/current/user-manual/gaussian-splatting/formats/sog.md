@@ -18,11 +18,11 @@ SOGデータセットは、画像セットとメタデータファイルで構�
 | `meta.json`          | シーンのメタデータとファイル名        | —                |
 | `means_l.webp`       | 位置 – 下位8ビット (RGB)      | R,G,B            |
 | `means_u.webp`       | 位置 – 上位8ビット (RGB)      | R,G,B            |
-| `quats.webp`         | 向き – 圧縮されたクォータニオン | R,G,B,A          |
 | `scales.webp`        | コードブックによる軸ごとのサイズ         | R,G,B            |
+| `quats.webp`         | 向き – 圧縮されたクォータニオン | R,G,B,A          |
 | `sh0.webp`           | 基本色 (DC) + 不透明度           | R,G,B,A          |
-| `shN_labels.webp`    | SHパレットへのインデックス (オプション)  | R,G              |
 | `shN_centroids.webp` | SHパレット係数 (オプション)  | RGBA             |
+| `shN_labels.webp`    | SHパレットへのインデックス (オプション)  | R,G              |
 
 :::note[画像フォーマット]
 
@@ -101,8 +101,8 @@ interface Meta {
     bands: number;         // SHバンドの数 (1..3)。DC (=バンド1) はsh0に格納されます。
     codebook: number[];    // 256個の浮動小数点数; すべてのAC係数で共有 (3.5節)
     files: [
-      "shN_labels.webp",   // Gaussianごとのパレットインデックス (0..count-1)
-      "shN_centroids.webp" // ピクセルとしてのAC係数パレット (3.5節)
+      "shN_centroids.webp",// ピクセルとしてのAC係数パレット (3.5節)
+      "shN_labels.webp"    // Gaussianごとのパレットインデックス (0..count-1)
     ];
   };
 }
@@ -113,6 +113,7 @@ interface Meta {
 * すべてのコードブックはsRGBではなく、線形空間の値を含みます。
 * 画像データは、生の8ビット整数として扱われなければ**なりません**（ガンマ変換なし）。
 * 特に記載がない限り、言及されていないチャンネルは無視されます。
+* `files`配列内のファイル名は任意ですが、順序は重要です。
 
 :::
 
@@ -288,7 +289,7 @@ const v = Math.floor(n / 64);
     "count": 128,
     "bands": 3,
     "codebook": [/* 256個の浮動小数点数 */],
-    "files": ["shN_labels.webp", "shN_centroids.webp"]
+    "files": ["shN_centroids.webp", "shN_labels.webp"]
   }
 }
 ```
