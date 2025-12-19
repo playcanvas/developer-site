@@ -226,7 +226,7 @@ const a = sh0.a / 255;
 
 ### 3.5 Higher-order SH (optional)
 
-> `shN_labels.webp`, `shN_centroids.webp`
+> `shN_centroids.webp`, `shN_labels.webp`
 
 If present, higher-order (AC) SH coefficients are stored via a palette:
 

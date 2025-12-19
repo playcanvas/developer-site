@@ -226,20 +226,12 @@ const a = sh0.a / 255;
 
 ### 3.5 高次SH (オプション)
 
-> `shN_labels.webp`, `shN_centroids.webp`
+> `shN_centroids.webp`, `shN_labels.webp`
 
 存在する場合、高次 (AC) SH係数はパレットを介して格納されます。
 
 * `shN.count` ∈ **\[1,64k]** エントリの数。
 * `shN.bands` ∈ **\[1,3]** エントリあたりのバンド数。
-
-#### ラベル
-
-* `shN_labels.webp` は、Gaussianごとに範囲 (0..count-1) の**16ビットインデックス**を格納します。
-
-```ts
-const index = shN_labels.r + (shN_labels.g << 8);
-```
 
 #### セントロイド (パレット)
 
@@ -260,6 +252,14 @@ const index = shN_labels.r + (shN_labels.g << 8);
 const coeffs = [3, 8, 15];
 const u = (n % 64) * coeffs[bands] + c;
 const v = Math.floor(n / 64);
+```
+
+#### ラベル
+
+* `shN_labels.webp` は、Gaussianごとに範囲 (0..count-1) の**16ビットインデックス**を格納します。
+
+```ts
+const index = shN_labels.r + (shN_labels.g << 8);
 ```
 
 ---
