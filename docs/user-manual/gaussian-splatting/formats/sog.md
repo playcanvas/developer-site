@@ -101,8 +101,8 @@ interface Meta {
     bands: number;         // Number of SH bands (1..3). DC (=band 1) lives in sh0.
     codebook: number[];    // 256 floats; shared for all AC coefficients (§3.5)
     files: [
-      "shN_centroids.webp" // Palette of AC coefficients as pixels (§3.5)
-      "shN_labels.webp",   // Per-gaussian palette index (0..count-1)
+      "shN_centroids.webp",// Palette of AC coefficients as pixels (§3.5)
+      "shN_labels.webp"    // Per-gaussian palette index (0..count-1)
     ];
   };
 }
