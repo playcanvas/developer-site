@@ -261,6 +261,7 @@ const v = Math.floor(n / 64);
 ```ts
 const index = shN_labels.r + (shN_labels.g << 8);
 ```
+
 ---
 
 ## 4. Example `meta.json`
