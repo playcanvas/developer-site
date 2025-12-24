@@ -217,7 +217,8 @@ As part of the `FragmentInput` structure these built-in variables are automatica
 ```wgsl
 position: @builtin(position)            // interpolated fragment position
 frontFacing: @builtin(front_facing)     // front-facing
-sampleIndex: builtin(sample_index)      // sample index for MSAA
+sampleIndex: @builtin(sample_index)     // sample index for MSAA
+primitiveIndex: @builtin(primitive_index) // primitive index (when supported)
 ```
 
 These built-ins are also available in the global scope using these names:
@@ -226,7 +227,14 @@ These built-ins are also available in the global scope using these names:
 pcPosition
 pcFrontFacing
 pcSampleIndex
+pcPrimitiveIndex  // when supported
 ```
+
+:::note
+
+The `primitiveIndex` / `pcPrimitiveIndex` built-in is only available when `device.supportsPrimitiveIndex` is true. This feature is WebGPU-only (not available on WebGL2). When the feature is supported, the engine automatically adds the required `enable primitive_index;` WGSL directive and the shader define `CAPS_PRIMITIVE_INDEX` is available for conditional compilation.
+
+:::
 
 Example:
 
