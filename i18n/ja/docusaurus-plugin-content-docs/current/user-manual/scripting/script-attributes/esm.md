@@ -133,7 +133,7 @@ export class Lamp extends Script {
 
 スクリプトメンバーをアトリビュートとして公開すると、エディターはそのアトリビュートの型に関連するコントロールを表示します。アトリビュートが数値であれば数値入力、ブール値であればチェックボックスが表示されます。
 
-アトリビュートは `number`、`string`、`boolean`、`Vec2`、`Vec3`、`Vec4`、`Entity`、`Asset` または `Color` にすることができます。
+アトリビュートは `number`、`string`、`boolean`、`Vec2`、`Vec3`、`Vec4`、`Color`、`Curve`、`Asset` または `Entity` にすることができます。
 
 ### @type タグ
 
@@ -216,23 +216,56 @@ name = '';
 enabled = true;
 ```
 
-### Entity属性
-
-Entity型を使用すると、ヒエラルキー内の別のエンティティを参照できます。2つのエンティティをリンクさせる素晴らしい方法です。
+### Vector属性
 
 ```javascript
-/**
- * @attribute
- * @type {Entity}
- */
-target;
+/** @attribute */
+position = new Vec3();
 ```
 
 :::important
 
-属性が正しく解析されるためには、`playcanvas`から`Entity`をインポートする必要があります。
+属性が正しく解析されるためには、`playcanvas`から`Vec2`/`Vec3`/`Vec4`をインポートする必要があります。
 
 :::
+
+ベクトル属性は、2、3、または4次元にすることができます。エディターでは、各コンポーネントに数値入力が表示され、それぞれを独立して設定できます。
+
+![属性ベクトル](/img/user-manual/scripting/attribute-vec3.png)
+
+### Color属性
+
+```javascript
+/** @attribute */
+color = new Color();
+```
+
+:::important
+
+属性が正しく解析されるためには、`playcanvas`から`Color`をインポートする必要があります。
+
+:::
+
+カラー属性は、エディターで公開されるとカラーピッカーを表示します。アルファチャンネルも公開したいかどうかに応じて、`rgb`と`rgba`の2つのオプションがあります。
+
+### Curve属性
+
+```javascript
+/**
+ * @attribute
+ * @type {Curve}
+ * @color rgba
+ */
+wave;
+```
+
+:::important
+
+属性が正しく解析されるためには、`playcanvas`から`Curve`をインポートする必要があります。
+
+:::
+
+カーブ属性は、時間期間にわたって変化する値を表現するために使用されます。すべてのカーブは0.0〜1.0の期間で定義されます。複数のカーブを定義できます。例えば、`curves`プロパティを使用してx、y、z用に3つのカーブを定義することで、カーブから3D位置を得ることができます。`color`プロパティを使用して色を変更するための特別なカーブエディタもあります。
 
 ### Asset属性
 
@@ -262,56 +295,23 @@ initialize() {
 
 :::
 
-### Color属性
+### Entity属性
 
-```javascript
-/** @attribute */
-color = new Color();
-```
-
-:::important
-
-属性が正しく解析されるためには、`playcanvas`から`Color`をインポートする必要があります。
-
-:::
-
-カラー属性は、エディターで公開されるとカラーピッカーを表示します。アルファチャンネルも公開したいかどうかに応じて、`rgb`と`rgba`の2つのオプションがあります。
-
-### Vector属性
-
-```javascript
-/** @attribute */
-position = new Vec3();
-```
-
-:::important
-
-属性が正しく解析されるためには、`playcanvas`から`Vec2`/`Vec3`/`Vec4`をインポートする必要があります。
-
-:::
-
-ベクトル属性は、2、3、または4次元にすることができます。エディターでは、各コンポーネントに数値入力が表示され、それぞれを独立して設定できます。
-
-![属性ベクトル](/img/user-manual/scripting/attribute-vec3.png)
-
-### Curve属性
+Entity型を使用すると、ヒエラルキー内の別のエンティティを参照できます。2つのエンティティをリンクさせる素晴らしい方法です。
 
 ```javascript
 /**
  * @attribute
- * @type {Curve}
- * @color rgba
+ * @type {Entity}
  */
-wave;
+target;
 ```
 
 :::important
 
-属性が正しく解析されるためには、`playcanvas`から`Curve`をインポートする必要があります。
+属性が正しく解析されるためには、`playcanvas`から`Entity`をインポートする必要があります。
 
 :::
-
-カーブ属性は、時間期間にわたって変化する値を表現するために使用されます。すべてのカーブは0.0〜1.0の期間で定義されます。複数のカーブを定義できます。例えば、`curves`プロパティを使用してx、y、z用に3つのカーブを定義することで、カーブから3D位置を得ることができます。`color`プロパティを使用して色を変更するための特別なカーブエディタもあります。
 
 ### 属性配列
 

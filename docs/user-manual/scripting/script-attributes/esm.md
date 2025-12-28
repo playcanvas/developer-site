@@ -133,7 +133,7 @@ The `@attribute` JSDoc block only needs to be declared once, before the getter/s
 
 When you expose a script member as an attribute, the Editor will show a control that's relevant to the type of attribute. If the attribute is a number, it shows a numerical input; if it's a boolean, a checkbox.
 
-An attribute can be a `number`, `string`, `boolean`, `Vec2`, `Vec3`, `Vec4`, `Entity`, `Asset` or `Color`.
+An attribute can be a `number`, `string`, `boolean`, `Vec2`, `Vec3`, `Vec4`, `Color`, `Curve`, `Asset` or `Entity`.
 
 ### The @type Tag
 
@@ -216,23 +216,56 @@ A boolean attribute displays a checkbox in the Editor:
 enabled = true;
 ```
 
-### Entity Attribute
-
-The Entity type lets you reference another entity in your hierarchy. A great way to link two entities together.
+### Vector Attribute
 
 ```javascript
-/**
- * @attribute
- * @type {Entity}
- */
-target;
+/** @attribute */
+position = new Vec3();
 ```
 
 :::important
 
-You must import `Entity` from `playcanvas` for your attribute to parse correctly.
+You must import `Vec2`/`Vec3`/`Vec4` from `playcanvas` for your attribute to parse correctly.
 
 :::
+
+The vector attribute can be 2, 3, or 4 dimensions. The Editor will show a numerical input for each component, allowing you to set each one independently.
+
+![Attribute Vector](/img/user-manual/scripting/attribute-vec3.png)
+
+### Color Attribute
+
+```javascript
+/** @attribute */
+color = new Color();
+```
+
+:::important
+
+You must import `Color` from `playcanvas` for your attribute to parse correctly.
+
+:::
+
+The color attribute shows a color picker when exposed in the Editor. There are two options `rgb` and `rgba` depending on whether you wish to expose the alpha channel as well.
+
+### Curve Attribute
+
+```javascript
+/**
+ * @attribute
+ * @type {Curve}
+ * @color rgba
+ */
+wave;
+```
+
+:::important
+
+You must import `Curve` from `playcanvas` for your attribute to parse correctly.
+
+:::
+
+The curve attribute is used to express a value that changes over a time period. All curves are defined over the period 0.0 - 1.0. You can define multiple curves. For example, if you wish to have a 3D position from a curve, define three curves for x, y, z using the `curves` property. There is also a special curve editor for modifying colors using the `color` property.
 
 ### Asset Attribute
 
@@ -262,56 +295,23 @@ You must import `Asset` from `playcanvas` for your attribute to parse correctly.
 
 :::
 
-### Color Attribute
+### Entity Attribute
 
-```javascript
-/** @attribute */
-color = new Color();
-```
-
-:::important
-
-You must import `Color` from `playcanvas` for your attribute to parse correctly.
-
-:::
-
-The color attribute shows a color picker when exposed in the Editor. There are two options `rgb` and `rgba` depending on whether you wish to expose the alpha channel as well.
-
-### Vector Attribute
-
-```javascript
-/** @attribute */
-position = new Vec3();
-```
-
-:::important
-
-You must import `Vec2`/`Vec3`/`Vec4` from `playcanvas` for your attribute to parse correctly.
-
-:::
-
-The vector attribute can be 2, 3, or 4 dimensions. The Editor will show a numerical input for each component, allowing you to set each one independently.
-
-![Attribute Vector](/img/user-manual/scripting/attribute-vec3.png)
-
-### Curve Attribute
+The Entity type lets you reference another entity in your hierarchy. A great way to link two entities together.
 
 ```javascript
 /**
  * @attribute
- * @type {Curve}
- * @color rgba
+ * @type {Entity}
  */
-wave;
+target;
 ```
 
 :::important
 
-You must import `Curve` from `playcanvas` for your attribute to parse correctly.
+You must import `Entity` from `playcanvas` for your attribute to parse correctly.
 
 :::
-
-The curve attribute is used to express a value that changes over a time period. All curves are defined over the period 0.0 - 1.0. You can define multiple curves. For example, if you wish to have a 3D position from a curve, define three curves for x, y, z using the `curves` property. There is also a special curve editor for modifying colors using the `color` property.
 
 ### Attribute Arrays
 
