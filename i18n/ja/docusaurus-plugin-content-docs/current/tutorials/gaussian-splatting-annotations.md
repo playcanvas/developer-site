@@ -13,4 +13,3 @@ import Link from '@docusaurus/Link';
 </div>
 
 <Link to='https://playcanvas.com/project/1444720/'>プロジェクトを開く ↗</Link>
-
