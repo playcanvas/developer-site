@@ -109,6 +109,41 @@ speed = 10;
 speed = 10;
 ```
 
+## 属性の変更に応答する
+
+ESMスクリプトでは、JavaScriptのゲッターとセッターを使用して、属性値が変更されるたびにカスタムロジックを実行できます。これは、値が変更されたときにビジュアルを更新したり、イベントをトリガーしたり、バリデーションを実行したりするのに便利です。
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Lamp extends Script {
+    static scriptName = 'lamp';
+
+    _brightness = 1;
+
+    /**
+     * @attribute
+     */
+    get brightness() {
+        return this._brightness;
+    }
+
+    set brightness(value) {
+        this._brightness = value;
+        // brightness が変更されるたびにライトの強度を更新
+        this.entity.light.intensity = value;
+    }
+}
+```
+
+この例では、`brightness`属性がエディター（または実行時）で変更されると、セッターが自動的にライトの強度を更新します。
+
+:::note
+
+`@attribute` JSDocブロックは、ゲッター/セッターのペアの前に一度だけ宣言する必要があります。
+
+:::
+
 ## アトリビュートの型
 
 スクリプトメンバーをアトリビュートとして公開すると、エディターはそのアトリビュートの型に関連するコントロールを表示します。アトリビュートが数値であれば数値入力、ブール値であればチェックボックスが表示されます。
@@ -190,7 +225,7 @@ color = new Color();
 
 :::
 
-カラー属性は、エディタで公開されるとカラーピッカーを表示します。アルファチャンネルも公開したいかどうかに応じて、`rgb`と`rgba`の2つのオプションがあります。
+カラー属性は、エディターで公開されるとカラーピッカーを表示します。アルファチャンネルも公開したいかどうかに応じて、`rgb`と`rgba`の2つのオプションがあります。
 
 ### Vector属性
 
@@ -205,7 +240,7 @@ position = new Vec3();
 
 :::
 
-ベクトル属性は、2、3、または4次元にすることができます。エディタでは、各コンポーネントに数値入力が表示され、それぞれを独立して設定できます。
+ベクトル属性は、2、3、または4次元にすることができます。エディターでは、各コンポーネントに数値入力が表示され、それぞれを独立して設定できます。
 
 ![属性ベクトル](/img/user-manual/scripting/attribute-vec3.png)
 
@@ -240,7 +275,7 @@ wave;
 gradientStops;
 ```
 
-`Color[]`宣言は、[jsdoc type tag](https://jsdoc.app/tags-type)を使用して、`gradientStops`が`Colors`の配列であることを宣言します。エディタはこのように解釈し、リスト内で複数の`Color`値を設定できるコントローラを作成します。
+`Color[]`宣言は、[jsdoc type tag](https://jsdoc.app/tags-type)を使用して、`gradientStops`が`Colors`の配列であることを宣言します。エディターはこのように解釈し、リスト内で複数の`Color`値を設定できるコントローラを作成します。
 
 ![属性配列](/img/user-manual/scripting/attribute-array.png)
 
