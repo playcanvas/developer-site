@@ -4,7 +4,7 @@ title: イベント
 
 イベントは、毎フレームチェックすることなく発生したことに応答するためにスクリプト間で通信する便利な方法です。
 
-イベントは、PlayCanvasの多くのオブジェクトタイプ（例えばスクリプトインスタンスなど）に組み込まれており、エンジンの[`EventHandler`][1]クラスから継承されたイベントハンドリングサポートがあります。イベントハンドリングオブジェクトには以下のメソッドがあります：
+イベントは、PlayCanvasの多くのオブジェクトタイプ（例えばスクリプトインスタンスなど）に組み込まれており、エンジンの[`EventHandler`](https://api.playcanvas.com/engine/classes/EventHandler.html)クラスから継承されたイベントハンドリングサポートがあります。イベントハンドリングオブジェクトには以下のメソッドがあります：
 
 * `on()` - イベントリスナーを登録します。
 * `once()` - 最初に呼ばれた後に自動的に登録解除されるイベントリスナーを登録します。
@@ -136,8 +136,8 @@ export class Player extends Script {
     static scriptName = 'player';
 
     update(dt) {
-        var x = 1;
-        var y = 1;
+        const x = 1;
+        const y = 1;
         this.app.fire('player:move', x, y);
     }
 }
@@ -200,5 +200,3 @@ Display.prototype.initialize = function () {
 </Tabs>
 
 ご覧の通り、これにより設定コードを減らし、よりクリーンなコードになります。
-
-[1]: https://api.playcanvas.com/engine/classes/EventHandler.html

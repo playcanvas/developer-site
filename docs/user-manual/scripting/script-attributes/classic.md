@@ -25,9 +25,9 @@ MyScript.attributes.add('speed', {
 });
 ```
 
-In this example, we're declaring a property called `speed` which is a `number` and has a default value of `80`:
+In this example, we're declaring a property called `speed` which is a `number` and has a default value of `80`.
 
-If you need an array of attributes set `array: true` like so:
+If you need an array of attributes, set `array: true` like so:
 
 ```javascript
 var MyScript = pc.createScript('myScript');
@@ -42,7 +42,7 @@ MyScript.attributes.add('names', {
 
 ![Script Attributes](/img/user-manual/scripting/script-attributes.png)
 
-Once you've declared your attributes the Editor needs to parse the code in order to expose the script attributes. If attributes have been changed, you need to manually refresh the attributes you can click the parse button.
+Once you've declared your attributes, the Editor needs to parse the code in order to expose the script attributes. If attributes have been changed, you need to manually refresh them by clicking the parse button.
 
 ![Parse Button](/img/user-manual/scripting/script-parse-button.png)
 
@@ -58,7 +58,7 @@ MyScript.prototype.update = function (dt) {
 
 ## Responding to Attribute Changes
 
-When you modify an attribute in the Editor the changes are sent to any copies of the application launched from the Editor. This means you can live edit your attributes without reloading your application. If you need to apply special behavior when an attribute changes. Use the `attr` and `attr:[name]` events to respond to changes
+When you modify an attribute in the Editor, the changes are sent to any copies of the application launched from the Editor. This means you can live edit your attributes without reloading your application. If you need to apply special behavior when an attribute changes, use the `attr` and `attr:[name]` events to respond to changes:
 
 ```javascript
 MyScript.prototype.initialize = function () {
@@ -84,7 +84,7 @@ When you declare an attribute you also declare the type of the attribute. This a
 MyScript.attributes.add('target', { type: 'entity' })
 ```
 
-The Entity type lets your reference another entity in your hierarchy. A great way to link two entities together.
+The Entity type lets you reference another entity in your hierarchy. A great way to link two entities together.
 
 ### Asset Attribute
 
@@ -92,7 +92,7 @@ The Entity type lets your reference another entity in your hierarchy. A great wa
 MyScript.attributes.add('textures', { type: 'asset', assetType: 'texture', array: true });
 ```
 
-The Asset attribute let's you reference a project asset in your script. The asset attribute also supports the `assetType` property which limits the attribute to assets of a particular type, e.g. 'texture', 'material', 'model'.
+The Asset attribute lets you reference a project asset in your script. The asset attribute also supports the `assetType` property which limits the attribute to assets of a particular type, e.g. 'texture', 'material', 'model'.
 
 The runtime type of an Asset attribute is `pc.Asset`. You can reference the resource of an Asset attribute at runtime like so:
 
@@ -122,7 +122,7 @@ MyScript.attributes.add('wave', { type: 'curve', color: 'r' }); // one curve for
 MyScript.attributes.add('wave', { type: 'curve', color: 'rgba' }); // four curves for full color including alpha
 ```
 
-The curve attribute is used to express a value that changes over a time period. All curves are defined over the period 0.0 - 1.0. You can define multiple curves, for example if you wish to have a 3D position from a curve defined three curves for x,y,z using the `curves` property. There is also a special curve editor for modifying colors using the `color` property.
+The curve attribute is used to express a value that changes over a time period. All curves are defined over the period 0.0 - 1.0. You can define multiple curves. For example, if you wish to have a 3D position from a curve, define three curves for x, y, z using the `curves` property. There is also a special curve editor for modifying colors using the `color` property.
 
 ### Enumeration Attribute
 
