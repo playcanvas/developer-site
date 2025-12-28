@@ -236,7 +236,9 @@ target;
 
 ### Asset属性
 
-Asset属性を使用すると、スクリプト内でプロジェクトのアセットを参照できます。Asset属性は、`@resource`タグもサポートしており、これにより属性を特定のタイプ（例: 'texture'、'material'、'model'）のアセットに限定できます。
+Asset属性を使用すると、スクリプト内でプロジェクトのアセットを参照できます。
+
+`@resource`タグは、エディターのアセットピッカーを特定のタイプのアセットのみを受け入れるように制限します。有効な値: `animation`、`animstategraph`、`audio`、`binary`、`container`、`css`、`cubemap`、`font`、`gsplat`、`html`、`json`、`material`、`model`、`render`、`script`、`shader`、`sprite`、`template`、`text`、`texture`、`textureAtlas`、`wasm`。
 
 Asset属性のランタイム型は`Asset`です。ランタイムでAsset属性のリソースを参照するには、次のようにします。
 

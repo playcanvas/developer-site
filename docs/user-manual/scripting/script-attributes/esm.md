@@ -236,7 +236,9 @@ You must import `Entity` from `playcanvas` for your attribute to parse correctly
 
 ### Asset Attribute
 
-The Asset attribute lets you reference a project asset in your script. The asset attribute also supports the `@resource` tag which limits the attribute to assets of a particular type, e.g. 'texture', 'material', 'model'.
+The Asset attribute lets you reference a project asset in your script.
+
+The `@resource` tag limits the asset picker in the Editor to only accept assets of a particular type. Valid values are: `animation`, `animstategraph`, `audio`, `binary`, `container`, `css`, `cubemap`, `font`, `gsplat`, `html`, `json`, `material`, `model`, `render`, `script`, `shader`, `sprite`, `template`, `text`, `texture`, `textureAtlas`, `wasm`.
 
 The runtime type of an Asset attribute is `Asset`. You can reference the resource of an Asset attribute at runtime like so:
 
