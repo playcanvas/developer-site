@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">&lt;GSplat/&gt; | PlayCanvas Developer Site</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://developer.playcanvas.com/img/playcanvas-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://developer.playcanvas.com/img/playcanvas-social-card.jpg"><meta data-rh="true" property="og:url" content="https://developer.playcanvas.com/user-manual/playcanvas-react/api/gsplat/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="ja"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="&lt;GSplat/&gt; | PlayCanvas Developer Site"><meta data-rh="true" name="description" content="Documentation for the GSplat component"><meta data-rh="true" property="og:description" content="Documentation for the GSplat component"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.playcanvas.com/user-manual/playcanvas-react/api/gsplat/"><link data-rh="true" rel="alternate" href="https://developer.playcanvas.com/user-manual/playcanvas-react/api/gsplat/" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.playcanvas.com/ja/user-manual/playcanvas-react/api/gsplat/" hreflang="ja"><link data-rh="true" rel="alternate" href="https://developer.playcanvas.com/user-manual/playcanvas-react/api/gsplat/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://69QRBNV3NH-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PlayCanvas React","item":"https://developer.playcanvas.com/user-manual/playcanvas-react/"},{"@type":"ListItem","position":2,"name":"<GSplat/>","item":"https://developer.playcanvas.com/user-manual/playcanvas-react/api/gsplat"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="PlayCanvas Developer Site" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.352ff43a.css">
-<script src="/assets/js/runtime~main.eda8295d.js" defer="defer"></script>
-<script src="/assets/js/main.8e950a33.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.003203a7.js" defer="defer"></script>
+<script src="/assets/js/main.d7e99bda.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -23,7 +23,15 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="properties">Properties<a href="#properties" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties" translate="no">​</a></h2>
 <div class="api-docs-definition"><div class="api-docs-properties"><table><thead><tr><th>Name</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td><code>customAabb<!-- -->?</code></td><td><div class="type-cell"><code><a href="https://api.playcanvas.com/engine/classes/BoundingBox.html" target="_blank" rel="noopener noreferrer">BoundingBox</a> | <!-- -->null</code><div class="type-description">Sets a custom object space bounding box for visibility culling of the attached gsplat.
 Gets the custom object space bounding box for visibility culling of the attached gsplat.</div></div></td><td><code>-</code></td></tr><tr><td><code>material<!-- -->?</code></td><td><div class="type-cell"><code><a href="https://api.playcanvas.com/engine/classes/ShaderMaterial.html" target="_blank" rel="noopener noreferrer">ShaderMaterial</a> | <!-- -->null</code><div class="type-description">Sets the material used to render the gsplat.
-Gets the material used to render the gsplat.</div></div></td><td><code>-</code></td></tr><tr><td><code>highQualitySH<!-- -->?</code></td><td><div class="type-cell"><code>boolean</code><div class="type-description">Sets whether to use the high quality or the approximate (but fast) spherical-harmonic calculation when rendering SOGS data.
+
+**Note:** This setter is only supported when unified is `false`. When it&#x27;s true, multiple
+gsplat components share a single material per camera/layer combination. To access materials in
+unified mode, use GsplatComponentSystem#getGSplatMaterial .
+Gets the material used to render the gsplat.
+
+**Note:** This getter returns `null` when unified is `true`. In unified mode, materials are
+organized per camera/layer combination rather than per component. To access materials in
+unified mode, use GsplatComponentSystem#getGSplatMaterial .</div></div></td><td><code>-</code></td></tr><tr><td><code>highQualitySH<!-- -->?</code></td><td><div class="type-cell"><code>boolean</code><div class="type-description">Sets whether to use the high quality or the approximate (but fast) spherical-harmonic calculation when rendering SOGS data.
 
 The low quality approximation evaluates the scene&#x27;s spherical harmonic contributions
 along the camera&#x27;s Z-axis instead of using each gaussian&#x27;s view vector. This results
@@ -34,7 +42,21 @@ when rendering large SOGS datasets, especially on mobile devices.
 Defaults to false.
 Gets whether the high quality (true) or the fast approximate (false) spherical-harmonic calculation is used when rendering SOGS data.</div></div></td><td><code>-</code></td></tr><tr><td><code>castShadows<!-- -->?</code></td><td><div class="type-cell"><code>boolean</code><div class="type-description">Sets whether gsplat will cast shadows for lights that have shadow casting enabled. Defaults
 to false.
-Gets whether gsplat will cast shadows for lights that have shadow casting enabled.</div></div></td><td><code>-</code></td></tr><tr><td><code>unified<!-- -->?</code></td><td><div class="type-cell"><code>boolean</code><div class="type-description">Sets whether to use the unified gsplat rendering. Can be changed only when the component is
+Gets whether gsplat will cast shadows for lights that have shadow casting enabled.</div></div></td><td><code>-</code></td></tr><tr><td><code>lodDistances<!-- -->?</code></td><td><div class="type-cell"><code>number[] | null</code><div class="type-description">Sets LOD distance thresholds used by octree-based gsplat rendering. The provided array
+is copied.
+Gets a copy of LOD distance thresholds previously set, or null when not set.</div></div></td><td><code>-</code></td></tr><tr><td><code>splatBudget<!-- -->?</code></td><td><div class="type-cell"><code>number</code><div class="type-description">Sets the target number of splats to render for this component. The system will adjust LOD
+levels bidirectionally to reach this budget:
+- When over budget: degrades quality for less important geometry
+- When under budget: upgrades quality for more important geometry
+
+This ensures optimal use of available rendering budget while prioritizing quality for
+closer/more important geometry.
+
+Set to 0 to disable the budget (default). When disabled, optimal LOD is determined purely
+by distance and configured LOD parameters.
+
+Only applies to octree-based gsplat rendering in unified mode.
+Gets the splat budget limit for this component.</div></div></td><td><code>-</code></td></tr><tr><td><code>unified<!-- -->?</code></td><td><div class="type-cell"><code>boolean</code><div class="type-description">Sets whether to use the unified gsplat rendering. Can be changed only when the component is
 not enabled. Default is false.
 Gets whether to use the unified gsplat rendering.</div></div></td><td><code>-</code></td></tr><tr><td><code>layers<!-- -->?</code></td><td><div class="type-cell"><code>number[]</code><div class="type-description">Sets an array of layer IDs (Layer#id ) to which this gsplat should belong. Don&#x27;t
 push, pop, splice or modify this array. If you want to change it, set a new one instead.
