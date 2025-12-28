@@ -94,34 +94,6 @@ speed = 2;
 
 This will display "Rotation Speed" in the Editor instead of "speed".
 
-### Attribute Constraints
-
-What if you also want to define a sensible range of values for speed? You can do this with the `@range` tag:
-
-```javascript
-/** 
- * @attribute
- * @range [0, 10]
- */
-speed = 10;
-```
-
-This simply tells the Editor that speed is an attribute and its value should be within 0 - 10. The Editor will create a numerical slider mapped to this range.
-
-![Attribute Description](/img/user-manual/scripting/attribute-constraint.png)
-
-There are additional numerical constraints that you can set which help the Editor limit the set of possible values:
-
-```javascript
-/** 
- * @attribute
- * @range [0, 10]
- * @precision 0.1
- * @step 0.05
- */
-speed = 10;
-```
-
 ## Responding to Attribute Changes
 
 In ESM scripts, you can use JavaScript getters and setters to execute custom logic whenever an attribute value changes. This is useful for updating visuals, triggering events, or performing validation when a value is modified.
@@ -180,6 +152,69 @@ myTexture;
 An attribute must either be initialized with a value `speed = 10`, or have a JSDoc type `@type {number}`. If neither are present, the attribute will be ignored.
 
 :::
+
+### Number Type
+
+A number attribute displays a numerical input in the Editor:
+
+```javascript
+/** @attribute */
+speed = 10;
+```
+
+You can also define a sensible range of values using the `@range` tag:
+
+```javascript
+/** 
+ * @attribute
+ * @range [0, 10]
+ */
+speed = 10;
+```
+
+This tells the Editor that the value should be within 0 - 10. The Editor will create a numerical slider mapped to this range.
+
+![Attribute Constraint](/img/user-manual/scripting/attribute-constraint.png)
+
+There are additional numerical constraints that help the Editor limit the set of possible values:
+
+```javascript
+/** 
+ * @attribute
+ * @range [0, 10]
+ * @precision 0.1
+ * @step 0.05
+ */
+speed = 10;
+```
+
+### String Type
+
+A string attribute displays a text input in the Editor:
+
+```javascript
+/** @attribute */
+name = 'Player';
+```
+
+You can also use the `@placeholder` tag to display hint text when the field is empty:
+
+```javascript
+/**
+ * @attribute
+ * @placeholder Enter player name
+ */
+name = '';
+```
+
+### Boolean Type
+
+A boolean attribute displays a checkbox in the Editor:
+
+```javascript
+/** @attribute */
+enabled = true;
+```
 
 ### Entity Attribute
 

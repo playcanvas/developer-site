@@ -94,34 +94,6 @@ speed = 2;
 
 これにより、エディターでは "speed" の代わりに "Rotation Speed" が表示されます。
 
-### アトリビュートの制約
-
-速度の適切な範囲値を定義したい場合はどうでしょうか。これは `@range` タグで行うことができます。
-
-```javascript
-/** 
- * @attribute
- * @range [0, 10]
- */
-speed = 10;
-```
-
-これは単に、速度がアトリビュートであり、その値が0から10の範囲内であるべきことをエディターに伝えます。エディターは、この範囲にマッピングされた数値スライダーを作成します。
-
-![アトリビュートの説明](/img/user-manual/scripting/attribute-constraint.png)
-
-エディターが可能な値のセットを制限するのに役立つ、追加の数値制約を設定できます。
-
-```javascript
-/** 
- * @attribute
- * @range [0, 10]
- * @precision 0.1
- * @step 0.05
- */
-speed = 10;
-```
-
 ## 属性の変更に応答する
 
 ESMスクリプトでは、JavaScriptのゲッターとセッターを使用して、属性値が変更されるたびにカスタムロジックを実行できます。これは、値が変更されたときにビジュアルを更新したり、イベントをトリガーしたり、バリデーションを実行したりするのに便利です。
@@ -180,6 +152,69 @@ myTexture;
 属性は、`speed = 10`のように値で初期化されるか、`@type {number}`のようなJSDoc型を持つ必要があります。どちらも存在しない場合、その属性は無視されます。
 
 :::
+
+### Number型
+
+数値属性は、エディターに数値入力を表示します:
+
+```javascript
+/** @attribute */
+speed = 10;
+```
+
+`@range` タグを使用して、適切な値の範囲を定義することもできます:
+
+```javascript
+/** 
+ * @attribute
+ * @range [0, 10]
+ */
+speed = 10;
+```
+
+これは、値が0から10の範囲内であるべきことをエディターに伝えます。エディターは、この範囲にマッピングされた数値スライダーを作成します。
+
+![アトリビュートの制約](/img/user-manual/scripting/attribute-constraint.png)
+
+エディターが可能な値のセットを制限するのに役立つ、追加の数値制約があります:
+
+```javascript
+/** 
+ * @attribute
+ * @range [0, 10]
+ * @precision 0.1
+ * @step 0.05
+ */
+speed = 10;
+```
+
+### String型
+
+文字列属性は、エディターにテキスト入力を表示します:
+
+```javascript
+/** @attribute */
+name = 'Player';
+```
+
+`@placeholder` タグを使用して、フィールドが空のときにヒントテキストを表示することもできます:
+
+```javascript
+/**
+ * @attribute
+ * @placeholder プレイヤー名を入力
+ */
+name = '';
+```
+
+### Boolean型
+
+ブール属性は、エディターにチェックボックスを表示します:
+
+```javascript
+/** @attribute */
+enabled = true;
+```
 
 ### Entity属性
 
