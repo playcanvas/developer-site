@@ -1,5 +1,5 @@
 ---
-title: '3Dガウシアンスプラット アノテーション'
+title: '3Dガウシアンスプラットアノテーション'
 tags: [gaussiansplatting, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1444720/AC20A8-image-75.jpg
 ---
