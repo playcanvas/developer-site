@@ -20,7 +20,7 @@ To create a branch open the version control panel, select the checkpoint that yo
 
 ![New branch dialog](/img/user-manual/version-control/branches/new-branch-dialog.png)
 
-You will be asked to name your branch. Try to give your branch a description name like `fix-player-bug` or `refactor-sound-effects`. After creating the branch you will automatically be switched to the new branch you just created.
+You will be asked to name your branch. Try to give your branch a descriptive name like `fix-player-bug` or `refactor-sound-effects`. After creating the branch you will automatically be switched to the new branch you just created.
 
 Branches created by you will automatically be favorited so you can quickly find them in the [branch filter](#filtering-branch-list) for favorites.
 
