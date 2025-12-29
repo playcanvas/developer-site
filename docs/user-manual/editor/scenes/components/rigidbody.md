@@ -31,7 +31,7 @@ Note that you must add a [collision component][4] to the same entity in order to
 | Linear Factor   | Multiplier for a body's linear movement in each world axis. If set to 0 for any axis no movement will occur in this axis - useful for the creation of 2D games or 1D/2D movement. |
 | Angular Factor  | Multiplier for a body's angular (rotational) movement about each world axis. If set to 0 for any axis, no rotation will occur around this axis. |
 | Friction        | Controls how quickly a body loses velocity when in contact with other bodies. |
-| Restitution     | A measure of the bounciness of a body between 0 and 1. Warning: setting to 1 means a moving body will never come to a stop (unless  colliding with other bodies with restitutions below 1, or unless a stop is scripted). |
+| Restitution     | A measure of the bounciness of a body between 0 and 1. Warning: setting to 1 means a moving body will never come to a stop (unless colliding with other bodies with restitutions below 1, or unless a stop is scripted). |
 
 ## Scripting Interface
 

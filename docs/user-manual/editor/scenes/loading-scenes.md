@@ -155,7 +155,7 @@ this.app.scenes.loadSceneHierarchy(sceneItem, (err, loadedSceneRootEntity) => {
 });
 ```
 
-However, as mentioned above, there is a delay between calling `loadSceneHierarchy` and the scene data actually being loaded. This means that there will be a few frames where the application will be rendering a blank screen while its waiting for the network request to complete which brings us to the alternative.
+However, as mentioned above, there is a delay between calling `loadSceneHierarchy` and the scene data actually being loaded. This means that there will be a few frames where the application will be rendering a blank screen while it's waiting for the network request to complete which brings us to the alternative.
 
 ### Destroying the old scene root entity after the new scene is loaded
 
