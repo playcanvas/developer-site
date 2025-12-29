@@ -38,7 +38,7 @@ Rigid Body (剛体) は、ゲーム世界における物理的なオブジェク
 
 シーン内で剛体を作成するには、エンティティを選択し、 *RigidBody* コンポーネントと *Collision* コンポーネントを追加します。デフォルトでは、これにより **static box** の剛体が作成されます。 *RigidBody*  コンポーネントには、オブジェクトのプロパティを調整するために使用できるさまざまなオプションが提供されています。
 
-![rigidbody component](/img/user-manual/scenes/components/component-rigid-body-dynamic.png)
+![rigidbody component](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
 
 各プロパティの詳細については、[*RigidBody*のドキュメント][5]を参照してください。
 

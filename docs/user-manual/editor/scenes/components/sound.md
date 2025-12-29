@@ -4,7 +4,7 @@ title: Sound
 
 The Sound component controls playback of audio samples.
 
-![Sound component](/img/user-manual/scenes/components/component-sound.png)
+![Sound component](/img/user-manual/editor/scenes/components/component-sound.png)
 
 Each Sound component contains "Slots" that are responsible for playing sounds. Each Slot can be assigned a different audio Asset, and can be played independently from the other Slots.
 

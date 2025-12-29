@@ -12,7 +12,7 @@ Animationコンポーネントを使用すれば、エンティティはModelコ
 
 Animationコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にすることができます。有効にすると、コンポーネントは割り当てられたアニメーションを再生します。
 
-![Animation component](/img/user-manual/scenes/components/component-animation.png)
+![Animation component](/img/user-manual/editor/scenes/components/component-animation.png)
 
 ## Properties
 

@@ -10,7 +10,7 @@ There are two types of sprite Simple and Animated.
 
 Simple Sprite Components display a single frame from an atlas
 
-![Simple Sprite](/img/user-manual/scenes/components/component-sprite-simple.png)
+![Simple Sprite](/img/user-manual/editor/scenes/components/component-sprite-simple.png)
 
 ## Simple Sprite Component Properties
 
@@ -31,7 +31,7 @@ Simple Sprite Components display a single frame from an atlas
 
 Animated Sprite Components have multiple Sprite Animation Clips attached which can play back a different Sprite Asset.
 
-![Animated Sprite](/img/user-manual/scenes/components/component-sprite-animated.png)
+![Animated Sprite](/img/user-manual/editor/scenes/components/component-sprite-animated.png)
 
 ## Animated Sprite Component Properties
 

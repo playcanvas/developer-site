@@ -8,15 +8,15 @@ The Light component can be enabled or disabled using the toggle in the top right
 
 #### Directional
 
-![Light component (Directional)](/img/user-manual/scenes/components/component-light-directional.png)
+![Light component (Directional)](/img/user-manual/editor/scenes/components/component-light-directional.png)
 
 #### Omni
 
-![Light component (Omni)](/img/user-manual/scenes/components/component-light-point.png)
+![Light component (Omni)](/img/user-manual/editor/scenes/components/component-light-point.png)
 
 #### Spot
 
-![Light component (Spot)](/img/user-manual/scenes/components/component-light-spot.png)
+![Light component (Spot)](/img/user-manual/editor/scenes/components/component-light-spot.png)
 
 ## Properties
 

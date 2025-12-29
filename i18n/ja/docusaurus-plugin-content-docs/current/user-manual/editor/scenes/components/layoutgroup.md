@@ -6,7 +6,7 @@ LayoutGroupコンポーネントは、エンティティが子ElementのElement�
 
 詳細については[レイアウトグループ][0]のセクションを参照してください。
 
-![LayoutGroup component](/img/user-manual/scenes/components/component-layoutgroup.png)
+![LayoutGroup component](/img/user-manual/editor/scenes/components/component-layoutgroup.png)
 
 ## Properties
 

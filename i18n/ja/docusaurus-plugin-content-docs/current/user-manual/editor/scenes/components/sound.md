@@ -4,7 +4,7 @@ title: Sound
 
 Soundコンポーネントは、オーディオサンプルの再生を制御します。
 
-![Sound component](/img/user-manual/scenes/components/component-sound.png)
+![Sound component](/img/user-manual/editor/scenes/components/component-sound.png)
 
 Soundコンポーネントには、サウンドの再生を担当する "スロット" が含まれています。各スロットには、異なるAudioアセットを割り当てることができ、他のスロットとは独立して再生することができます。
 

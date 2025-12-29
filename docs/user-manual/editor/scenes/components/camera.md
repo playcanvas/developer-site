@@ -6,7 +6,7 @@ The Camera component enables an entity to render a scene from a certain viewpoin
 
 The Camera component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the camera will render the scene every frame.
 
-![Camera component](/img/user-manual/scenes/components/component-camera.png)
+![Camera component](/img/user-manual/editor/scenes/components/component-camera.png)
 
 ## Properties
 

@@ -4,17 +4,17 @@ title: Organizationの作成
 
 Organizationを作成する方法はいくつかあります。あなたが所属しているOrganizationのは、以下のようにあなたのプロフィールの名前の隣に表示されます:
 
-![Profile Organizations](/img/user-manual/organizations/organizations.jpg)
+![Profile Organizations](/img/user-manual/account-management/organizations/creating/organizations.jpg)
 
 ### ドロップダウンメニューから作成する
 
 1つ目の方法は、右上のドロップダウンメニューから NEW ORGANIZATION をクリックすることです:
 
-![Dropdown](/img/user-manual/organizations/dropdown.png)
+![Dropdown](/img/user-manual/account-management/organizations/creating/dropdown.png)
 
 すると、以下のポップアップが表示されます:
 
-![New Organization](/img/user-manual/organizations/new-organization.jpg)
+![New Organization](/img/user-manual/account-management/organizations/creating/new-organization.jpg)
 
 Organizationの名前と、半角英数字とダッシュのみが使用可能な文字列であるOrganizationのIDを入力してください。デフォルトのメールアドレスはあなた自身のものですが、別のものに変更することができます。
 
@@ -33,11 +33,11 @@ Organizationの名前と、半角英数字とダッシュのみが使用可能�
 
 もう1つの方法は、ユーザーアカウントをOrganizationのに変換することです。[アカウント][7]ページでCONVERTをクリックすることで、これを行うことができます。
 
-![Convert Organization](/img/user-manual/organizations/convert.png)
+![Convert Organization](/img/user-manual/account-management/organizations/creating/convert.png)
 
 すると、以下のポップアップが表示されます:
 
-![Convert Popup](/img/user-manual/organizations/convert-popup.png))
+![Convert Popup](/img/user-manual/account-management/organizations/creating/convert-popup.png))
 
 ユーザーアカウントをOrganizationに変換すると、このユーザーアカウントでログインできなくなります。そのため、新しいOrganizationのオーナー (Owner)を指定する必要があります。
 

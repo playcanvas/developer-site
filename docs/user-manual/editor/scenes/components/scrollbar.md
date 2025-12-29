@@ -6,7 +6,7 @@ The Scrollbar component defines a scrolling control for a [Scrollview][1] compon
 
 See the [User Interface][2] section for more details.
 
-![Scrollbar Component](/img/user-manual/scenes/components/component-scrollbar.png)
+![Scrollbar Component](/img/user-manual/editor/scenes/components/component-scrollbar.png)
 
 ## Component Properties
 

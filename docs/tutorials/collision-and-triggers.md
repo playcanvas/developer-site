@@ -37,7 +37,7 @@ A rigid body is a physical presence in your game world. You can set it up with r
 
 To create a rigid body in your Scene, pick an Entity and add a *rigidbody* component and a *collision* component. By default you will create a **static box**. The *rigidbody* component has a multitude of options which you can use to tune the properties of your object.
 
-![rigidbody component](/img/user-manual/scenes/components/component-rigid-body-dynamic.png)
+![rigidbody component](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
 
 For details on each property take a look at the [*rigidbody* documentation][5].
 

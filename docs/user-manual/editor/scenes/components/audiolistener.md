@@ -6,7 +6,7 @@ The Audio Listener component specifies the listener's position in 3D space. All 
 
 The Audio Listener component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the component will act as the listener position for 3D sound effects.
 
-![Audio Listener component](/img/user-manual/scenes/components/component-audiolistener.png)
+![Audio Listener component](/img/user-manual/editor/scenes/components/component-audiolistener.png)
 
 ## Scripting Interface
 

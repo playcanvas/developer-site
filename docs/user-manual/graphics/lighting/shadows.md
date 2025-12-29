@@ -14,7 +14,7 @@ The PlayCanvas engine implements a shadowing algorithm called shadow mapping. It
 
 By default, shadow casting is disabled in PlayCanvas. You have to explicitly enable it yourself. Fortunately, enabling shadows is easy. First of all, identify which lights in your scene you want to cast shadows. Select the lights in the Hierarchy to edit their properties in the Inspector panel. Every light has a 'Cast Shadows' option. Simply check this option for the light to generate shadows for shadow casting graphical objects in your scene.
 
-![Model Component](/img/user-manual/scenes/components/component-model.png)
+![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
 
 Now you need to specify which graphical objects in your scene cast and receive shadows. By default, all render and model components cast and receive shadows. To modify these properties, select the entity in the Hierarchy, locate the render or model component in the Inspector and uncheck the 'Cast Shadows' or 'Receive Shadows' option as required.
 
