@@ -7,7 +7,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4382
 
 import Link from '@docusaurus/Link';
 
-Sample showing how to move the camera with mouse and touch to look around
+Sample showing how to move the camera with mouse and touch to look around.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/TMrb4ucs/" title="360 lookaround camera" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
