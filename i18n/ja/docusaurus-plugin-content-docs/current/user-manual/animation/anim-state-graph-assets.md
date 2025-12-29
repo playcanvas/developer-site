@@ -10,7 +10,7 @@ Animstategraphアセットは、さまざまなアニメーション状態を整
 
 エディターのアセットパネルでAnimstategraphアセットを選択すると、anim state graphエディタービューが表示されます:
 
-![Initial Editor](/img/user-manual/animation/state_graph_editor.png)
+![Initial Editor](/img/user-manual/animation/state-graph-editor.png)
 
 このビューで、アニメーションステートグラフを編集できます。以下のセクションでは、Animstategraphアセットの異なる要素が特定のアニメーション動作を定義するためにどのように使用できるかを強調します。
 
@@ -34,7 +34,7 @@ Animstategraphアセットは、さまざまなアニメーション状態を整
 
 ### START state {#start-state}
 
-![Start State](/img/user-manual/animation/start_state.png)
+![Start State](/img/user-manual/animation/start-state.png)
 
 STARTステートは、ステートグラフの入り口です。Animコンポーネントが割り当てられたanim state graphを再生し始めると、最初にこのステートに入り、直接接続されたアニメーションステートに遷移します。このアニメーションステートはデフォルトステートと呼ばれ、ここで選択できます:
 
@@ -44,13 +44,13 @@ STARTステートから他のステートへの遷移を作成することはで
 
 ### END state {#end-state}
 
-![End State](/img/user-manual/animation/end_state.png)
+![End State](/img/user-manual/animation/end-state.png)
 
 ENDステートは、現在のステートグラフからの出口を示します。アニメーションステートがENDステートに遷移するように設定されている場合、システムはSTARTステートに接続されたデフォルトアニメーションステートに直接移動します。これにより、グラフを線形にレイアウトしながら、グラフ内でサイクルフローを作成するのに役立ちます。ENDステートから他のステートへの遷移を作成することはできません。常にSTARTステートに直接遷移します。
 
 ### ANY state {#any-state}
 
-![Any State](/img/user-manual/animation/any_state.png)
+![Any State](/img/user-manual/animation/any-state.png)
 
 このステートは、システムが現在他のどのアニメーションステートにある場合でもアクティブになるトランジションを作成するために使用されます。このステートからトリガーされるすべてのトランジションは、現在有効なアニメーションステートから直接接続された場合と同様にブレンドされます。ANYステートからトランジションを作成できますが、それには戻ることはできません。
 
@@ -107,13 +107,13 @@ animstategraphが作成されると、それには一つの基本レイヤーが
 
 次に、グラフビューの右上にあるレイヤー選択ドロップダウンから選択することで、このレイヤーの編集に切り替えることが可能です:
 
-![Select Layer](/img/user-manual/animation/select_layer.png)
+![Select Layer](/img/user-manual/animation/select-layer.png)
 
 ### Layer Blending {#layer-blending}
 
 デフォルトでは、レイヤーはレイヤーパネルで作成された順序でモデルをアニメートします。モデルのボーンに設定されたアニメーション値は、後続のレイヤーによって上書きされます。代わりにレイヤーのアニメーション値を混合したい場合は、レイヤーの`ブレンドタイプ (Blend Type)`をデフォルトの`オーバーライド (Override)`ではなく`アディティブ (Additive)`に設定します。
 
-![Layer Blend](/img/user-manual/animation/anim_layer_blend.png)
+![Layer Blend](/img/user-manual/animation/anim-layer-blend.png)
 
 各レイヤーのブレンドウェイト値は、複数のレイヤーをブレンドする際に、各レイヤーが最終アニメーションにどれだけ寄与するかを決定するために使用されます。これらのブレンドウェイトは、ゲームスクリプトでランタイムで調整し、レイヤーのブレンドをリアルタイムで更新することができます。
 

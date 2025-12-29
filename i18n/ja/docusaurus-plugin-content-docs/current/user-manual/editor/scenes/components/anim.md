@@ -6,11 +6,11 @@ Animコンポーネントは、Animstategraphアセットとその必要なア�
 
 以下では、Animコンポーネントがコンポーネントに追加された後の様子が表示されます。Animstategraphアセットを選択するための利用可能なスロットが表示されます。
 
-![New Anim Component](/img/user-manual/animation/new_anim_component.png)
+![New Anim Component](/img/user-manual/animation/new-anim-component.png)
 
 Animstategraphアセットを選択すると、Animコンポーネントにアニメーションアセットスロットのリストが表示されます。ステートグラフアセットの各レイヤーの各アニメーションステートに対応するスロットが1つずつあります。これにより、実際のアニメーションデータが以前に作成したステートグラフに接続されます。複数のAnimコンポーネントが同じAnimstategraphアセットを使用でき、それぞれが独自のアニメーションアセットを持つことができます。
 
-![Anim Component With Graph](/img/user-manual/animation/anim_component_with_graph.png)
+![Anim Component With Graph](/img/user-manual/animation/anim-component-with-graph.png)
 
 After all animation state slots have been filled, the anim component will become playable. At this point the anim component can either be played via script by calling `entity.anim.playing = true` or if the `Activate` option is selected, it will play automatically upon the launch of the PlayCanvas project.
 

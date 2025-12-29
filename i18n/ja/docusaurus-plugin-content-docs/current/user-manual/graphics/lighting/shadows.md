@@ -4,7 +4,7 @@ title: シャドウ
 
 シャドウはゲームにリアリズムを追加する優れた方法です。しかし、ダイナミック(リアルタイム)シャドウは、高コストでランタイムパフォーマンスが低下する可能性があります。シーンに静的なシャドウを追加するよりも性能が高い方法については、[ライトマップ][4]をご覧ください。
 
-![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3_shadows.jpg)
+![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3-shadows.jpg)
 
 PlayCanvasエンジンは、シャドウマッピングと呼ばれるシャドウのアルゴリズムを実装しています。完全にクロスプラットフォームであり、モバイルおよびデスクトップの両方で動作することが保証されています。
 
@@ -34,11 +34,11 @@ PlayCanvasエンジンは、シャドウマッピングと呼ばれるシャド�
 
 単一のシャドウカスケードを示すスクリーンショット。
 
-![One cascade](/img/user-manual/graphics/lighting/shadows/shadow_cascades_1.jpg)
+![One cascade](/img/user-manual/graphics/lighting/shadows/shadow-cascades-1.jpg)
 
 4つのシャドウカスケードを示すスクリーンショット。
 
-![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow_cascades_4.jpg)
+![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow-cascades-4.jpg)
 
 ### カスケードの分布 {#distribution-of-cascades}
 
@@ -76,7 +76,7 @@ PlayCanvasが使用するシャドウマッピング技術には有限の解像�
 
 シャドウのアウトラインをペナンブラと呼びます。これは、シャドウを柔らかいエッジで与えます。シ
 
-![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard_vs_soft.jpg)
+![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
 
 ソフトシャドウはシャドウマップ上のサンプルをより多くGPUで取ることによって実現されています。使用されているアルゴリズムはPercentage Closest FilteringあるいはPCFと省略されて呼ばれています。このアルゴリズムはシャドウマップ内の一つのサンプルだけを読むのではなく、(3x3のマトリクスで)9個のサンプルを読み込んで使用します。
 

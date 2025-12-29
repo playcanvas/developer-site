@@ -20,7 +20,7 @@ PlayCanvasには3つの種類の光源があります。
 
 非選択時、方向性光は以下のアイコンでエディタの3Dビューに表示されます。
 
-![Directional light icon](/img/user-manual/graphics/lighting/lights/directional_icon.jpg)
+![Directional light icon](/img/user-manual/graphics/lighting/lights/directional-icon.jpg)
 
 ヒエラルキーパネルとインスペクターパネルでライトを選択するには、このアイコンをクリックします。
 
@@ -34,7 +34,7 @@ PlayCanvasには3つの種類の光源があります。
 
 非選択時、オムニライトは以下のアイコンでエディタの3Dビューに表示されます。
 
-![Omni light icon](/img/user-manual/graphics/lighting/lights/point_icon.jpg)
+![Omni light icon](/img/user-manual/graphics/lighting/lights/point-icon.jpg)
 
 ヒエラルキーパネルとインスペクターパネルでライトを選択するには、このアイコンをクリックします。
 
@@ -48,7 +48,7 @@ PlayCanvasには3つの種類の光源があります。
 
 非選択時、スポットライトは以下のアイコンでエディターの3Dビューに表示されます。
 
-![Spot light icon](/img/user-manual/graphics/lighting/lights/spot_icon.jpg)
+![Spot light icon](/img/user-manual/graphics/lighting/lights/spot-icon.jpg)
 
 ヒエラルキーパネルとインスペクターパネルでライトを選択するには、このアイコンをクリックします。
 

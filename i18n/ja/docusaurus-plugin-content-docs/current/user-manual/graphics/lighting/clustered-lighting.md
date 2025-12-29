@@ -30,7 +30,7 @@ Directional Lights は、すべてのオブジェクトに影響を及ぼすた�
 1. カメラの錐台によってライトのリストを評価することで、カメラに対して可視なライトのリストを削除します。
 2. 可視なすべてのライトの軸に沿った境界上に、ワールドスペース3Dグリッドを配置します。
 
-    ![3D Grid](/img/user-manual/graphics/lighting/lights/3d_grid.png)
+    ![3D Grid](/img/user-manual/graphics/lighting/lights/3d-grid.png)
 
 3. 3Dグリッドの各セルは、それと交差するライトのインデックスを格納します。CPU上では、この情報は毎フレーム更新され、任意の位置に影響を与えるライトのリストを取得することができます。この情報はテクスチャに格納され、GPUで使用可能になります。
 4. すべての可視ライトのプロパティは、別のテクスチャに格納されるため、GPUでアクセス可能になります。
@@ -41,7 +41,7 @@ Directional Lights は、すべてのオブジェクトに影響を及ぼすた�
 
 クラスタードライティングのオプションは、エディタ設定の「レンダリング」の下で見つけることができます。
 
-![Clustered Lighting Editor UI](/img/user-manual/graphics/lighting/lights/clustered_lighting_ui.png)
+![Clustered Lighting Editor UI](/img/user-manual/graphics/lighting/lights/clustered-lighting-ui.png)
 
 これにより、以前のライティングシステムを使用する必要がある場合にクラスタードライティングを無効にしたり、以下の[tune performance and features](#tuning-clustered-lighting)を調整したりすることができます。
 
@@ -57,7 +57,7 @@ Clustered Lightingシェーダーは、サポートされるすべてのライ�
 
 ### 3Dグリッドの設定 {#configuring-the-3d-grid}
 
-![3D Grid Configuration](/img/user-manual/graphics/lighting/lights/3d_grid_config.png)
+![3D Grid Configuration](/img/user-manual/graphics/lighting/lights/3d-grid-config.png)
 
 **Cells**プロパティを使用して、各ワールド軸に沿ってセルの数を指定できます。これにより、すべての可視ライトを含むAxis Aligned Bounding Boxが、指定された数のセルに動的に細分化されます。
 
@@ -73,7 +73,7 @@ Clustered Lightingシェーダーは、サポートされるすべてのライ�
 
 - - **Automatic** – 配列サイズが0として指定されている場合、エンジンは必要に応じてアトラスを自動的に分割し、各可視光を等しくサイズのサブテクスチャに割り当てます。たとえば、フレームに3つのライトが表示される場合、アトラスは2x2サブテクスチャーに分割され、これらの4つのサブテクスチャーのうち3つがライトに割り当てられます。
 
-    ![Atlas Split 0](/img/user-manual/graphics/lighting/lights/atlas_split_0.png)
+    ![Atlas Split 0](/img/user-manual/graphics/lighting/lights/atlas-split-0.png)
 
 - - **Manual** – アトラスを固定数のサブテクスチャに分割できるようにします。これは、サイズが異なる場合があります。数字の配列を使用してセットアップされます。各数値は、垂直および水平の両方で分割を表します。マニュアルアトラススプリットの例については、次のセクションを参照してください。
 
@@ -81,11 +81,11 @@ Clustered Lightingシェーダーは、サポートされるすべてのライ�
 
 アトラスが手動でどのように分割されるかを理解するために、2つの数字が入った配列を考えてみてください：[2, 2]。配列の最初の数字はアトラスを2x2に分割し、合計で四つの領域にします。配列のその後の数字は、これらの領域を再度分割します。この場合、配列の2番目の数字は既存の領域の1つをさらに2x2（つまり4つの領域）に分割し、合計で7つの領域になります。
 
-![Manual Split](/img/user-manual/graphics/lighting/lights/manual_split.png)
+![Manual Split](/img/user-manual/graphics/lighting/lights/manual-split.png)
 
 以下の画像は、手動でアトラス分割を指定する方法を示しています。
 
-![Atlas Split 2](/img/user-manual/graphics/lighting/lights/atlas_split_2.png)
+![Atlas Split 2](/img/user-manual/graphics/lighting/lights/atlas-split-2.png)
 
 他の例:
 

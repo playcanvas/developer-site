@@ -4,7 +4,7 @@ title: Shadows
 
 Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps][4].
 
-![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3_shadows.jpg)
+![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3-shadows.jpg)
 
 The PlayCanvas engine implements a shadowing algorithm called shadow mapping. It is completely cross-platform and so is guaranteed to work on both mobile and the desktop.
 
@@ -34,11 +34,11 @@ Number of cascades represents the number of view frustum subdivisions, and can b
 
 A screenshot showing a single shadow cascade.
 
-![One cascade](/img/user-manual/graphics/lighting/shadows/shadow_cascades_1.jpg)
+![One cascade](/img/user-manual/graphics/lighting/shadows/shadow-cascades-1.jpg)
 
 A screenshot showing four shadow cascades.
 
-![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow_cascades_4.jpg)
+![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow-cascades-4.jpg)
 
 ### Distribution of cascades {#distribution-of-cascades}
 
@@ -76,7 +76,7 @@ The Normal Offset Bias solves this problem. In addition to using the depth bias,
 
 The outline of a shadow is called the penumbra. This is a transition from dark to light which gives shadows a soft edge. Softening shadow edges is the default in PlayCanvas but you can change this setting if you wish to achieve hard edged shadows. See below for a comparison of soft and hard edged shadows:
 
-![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard_vs_soft.jpg)
+![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
 
 Soft shadows are achieved by performing more samples of the shadow map on the GPU. The algorithm used is called Percentage Closest Filtering or PCF for short. This algorithm reads 9 localized samples (a 3 by 3 matrix) from the shadow map instead of just one as is used for hard shadows.
 
