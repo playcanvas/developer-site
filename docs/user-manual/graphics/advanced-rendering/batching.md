@@ -68,7 +68,7 @@ if (element.batchGroupId)
 
 ![Western Scene](/img/user-manual/optimization/batching/western-scene.jpg)
 
-In this scene we have created a static environment from 7 separate model files, some of which are repeated in the scene. For example, the road tile is used to in 50 entities to create the long road through the center of the scene.
+In this scene we have created a static environment from 7 separate model files, some of which are repeated in the scene. For example, the road tile is used in 50 entities to create the long road through the center of the scene.
 
 ![Western Animation](/img/user-manual/optimization/batching/western-animation-all.gif)
 

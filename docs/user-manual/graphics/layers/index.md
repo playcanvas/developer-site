@@ -46,7 +46,7 @@ In addition to these sort modes, the `MeshInstance.drawBucket` property provides
 
 ## Default Layers {#default-layers}
 
-PlayCanvas applications are created with a set of default layers. You should leave these layers in place as some engine features will not function correctly if they are not present. They default order is below:
+PlayCanvas applications are created with a set of default layers. You should leave these layers in place as some engine features will not function correctly if they are not present. The default order is below:
 
 ![Default Layers](/img/user-manual/graphics/layers/default-layers.jpg)
 

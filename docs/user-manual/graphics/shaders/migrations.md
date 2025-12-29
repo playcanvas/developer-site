@@ -182,7 +182,7 @@ With 1.62, we are creating a clearer distinction between these two, such that th
 
 As a result of that, almost all backend chunks have been changed to accommodate for the split. This means that any custom backend shader chunks must move away from using globals to using the arguments passed to them by the lighting backend.
 
-This change also makes some chunks, such as the clearcoat specific ones, redundant, as their functions have become reusable when their no longer reliant on global values.
+This change also makes some chunks, such as the clearcoat specific ones, redundant, as their functions have become reusable when they're no longer reliant on global values.
 
 #### Changes
 

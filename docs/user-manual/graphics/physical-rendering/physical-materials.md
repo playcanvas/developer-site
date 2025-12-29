@@ -66,7 +66,7 @@ You can also supply a metalness map which lets you define specific areas of your
 
 ### Glossiness
 
-Glossiness is used in both  **metalness** and **specular** workflows and it defines how smooth your material surface is. The glossiness will affect how blurry or sharp the reflections on the material are, or how broad or narrow the specular highlights are. Glossiness is provided as a single value between 0-100 or a glossiness map.
+Glossiness is used in both **metalness** and **specular** workflows and it defines how smooth your material surface is. The glossiness will affect how blurry or sharp the reflections on the material are, or how broad or narrow the specular highlights are. Glossiness is provided as a single value between 0-100 or a glossiness map.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/Q28EwTwQ/?gloss" title="Physical Materials - Glossiness" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

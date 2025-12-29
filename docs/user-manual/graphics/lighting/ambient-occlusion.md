@@ -27,7 +27,7 @@ This material should be applied on all static geometry that have to be in ambien
 
 Then we need to get this data out into the texture. In 3D's Max this is done by using [Render To Texture][3], same as during Lightmapping rendering, except **output** option should be using **VRayCompleteMap**.
 
-AO Texture does not need to store very detailed information, and visually does not suffers from texture compression artifacts much. So JPEG is economical and is suitable format for it.
+AO Texture does not need to store very detailed information and visually does not suffer from texture compression artifacts much. So JPEG is economical and is a suitable format for it.
 
 ## Upload to Editor
 

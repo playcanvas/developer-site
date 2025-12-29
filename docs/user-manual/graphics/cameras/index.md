@@ -6,7 +6,7 @@ Cameras are responsible for rendering a scene to the screen. You need at least o
 
 ## Creating a Camera
 
-In the Editor's 3D View, a unselected camera is represented with the following icon:
+In the Editor's 3D View, an unselected camera is represented with the following icon:
 
 ![Camera icon](/img/user-manual/graphics/cameras/camera_icon.png)
 
@@ -16,7 +16,7 @@ To create a new camera, simply create a new entity and add a camera component to
 
 ## Orthographic vs Perspective Projection
 
-Camera's can have one of two types of projection: orthographic or perspective. Orthographic camera define a parallel projection and is often use for 2D or isometric games.
+Cameras can have one of two types of projection: orthographic or perspective. Orthographic cameras define a parallel projection and are often used for 2D or isometric games.
 
 ![Orthographic camera](/img/user-manual/graphics/cameras/camera_orthographic.png)
 

@@ -18,7 +18,7 @@ We have implemented post effects as scripts that you can add to an Entity that h
     - [Vignette][8]
 
 2. Add a [Script][9] component to the Entity representing your camera.
-3. Assign the desired post effect scripts to the camera entity's Script component. Note that the order in which the post effect script are listed in the Script component determine the order in which they are applied.
+3. Assign the desired post effect scripts to the camera entity's Script component. Note that the order in which the post effect scripts are listed in the Script component determine the order in which they are applied.
 
 You can also create your own post effects. You can find some additional ones on [GitHub][2].
 

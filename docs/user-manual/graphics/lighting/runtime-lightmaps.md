@@ -53,7 +53,7 @@ Lightmap lights use the same **Shadows** setting as dynamic lights, except the s
 
 By default, baked lights cast hard shadows. To improve the visual quality, a soft baked shadow is available for **Directional** lights when the **Bake Direction** option is not enabled. In this case, two additional options are available:
 
-- **Bake Samples** – Specifies the number of sampled used to bake the light into the lightmap. It defaults to 1 and has a maximum value of 255. The value affects the baking performance and should be set as low as possible (5-20).
+- **Bake Samples** – Specifies the number of samples used to bake the light into the lightmap. It defaults to 1 and has a maximum value of 255. The value affects the baking performance and should be set as low as possible (5-20).
 - **Bake Area** – Specifies the penumbra angle in degrees, allowing a soft shadow boundary.
 
 ![Soft Directional Light Settings](/img/user-manual/graphics/lighting/lightmapping/editor-directional-light.png)
@@ -82,7 +82,7 @@ For Soft Directional Light or Environment Light baking, a low number of samples 
 
 ![Lightmap with 15 samples](/img/user-manual/graphics/lighting/lightmapping/lightmap-15-samples.png)
 
-To improve the quality of lightmaps, a higher number of sample can be used. This results in the best quality possible, as you can see in the following image, which uses 100 samples.
+To improve the quality of lightmaps, a higher number of samples can be used. This results in the best quality possible, as you can see in the following image, which uses 100 samples.
 
 ![Lightmap with 100 samples](/img/user-manual/graphics/lighting/lightmapping/lightmap-100-samples.png)
 
@@ -104,7 +104,7 @@ The **Cast Lightmap Shadows** option determines if the model casts shadows in th
 
 ## Common Light Settings {#common-light-settings}
 
-There several combinations of light settings that can be used. Each one has a use case and by using lights with different combinations, you can balance high-quality visuals with performance.
+There are several combinations of light settings that can be used. Each one has a use case and by using lights with different combinations, you can balance high-quality visuals with performance.
 
 | Bake  | Affect Non-Baked | Affect Baked | Description |
 |-------|-----------------|--------------|-------------|

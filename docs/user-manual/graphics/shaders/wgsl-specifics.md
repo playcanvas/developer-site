@@ -133,7 +133,7 @@ If you only need to read raw texel data (i.e., without filtering, mipmapping, or
 
 In such cases, no sampler is required or allowed. For example:
 
-```wlsl
+```wgsl
 // cubemap texture without a sampler
 var noSamplerMap: texture_cube<f32>;
 
@@ -267,7 +267,7 @@ Example:
 
 :::note
 
-Support for rendering to integer textures (output format other then `vec4f`) is not available yet, and will be added in the future.
+Support for rendering to integer textures (output format other than `vec4f`) is not available yet, and will be added in the future.
 
 :::
 

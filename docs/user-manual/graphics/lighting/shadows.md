@@ -2,7 +2,7 @@
 title: Shadows
 ---
 
-Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows, can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene. See [Lightmaps][4].
+Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps][4].
 
 ![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3_shadows.jpg)
 
@@ -68,7 +68,7 @@ Shadow mapping can be prone to rendering artifacts that can look very ugly. If y
 
 ### Normal Offset Bias {#normal-offset-bias}
 
-'Shadow acne' artifacts are a big problem and the shadow bias can eliminate them quite effectively. Unfortunately, this always introduces some level of 'Peter Panning', the phenomenon where shadows make a object appear to be floating in mid-air.
+'Shadow acne' artifacts are a big problem and the shadow bias can eliminate them quite effectively. Unfortunately, this always introduces some level of 'Peter Panning', the phenomenon where shadows make an object appear to be floating in mid-air.
 
 The Normal Offset Bias solves this problem. In addition to using the depth bias, we can avoid both shadow acne and Peter Panning by making small tweaks to the UV coordinates used in the shadow map look-up. A fragment's position is offset along its geometric normal. This "Normal Offset" technique yields vastly superior results to a constant shadow bias only approach.
 
@@ -87,7 +87,7 @@ The shadow sampling type is specified per light and so the option can be found i
 Enabling shadows has performance implications:
 
 * For each shadow casting directional or spot light, the scene must be rendered once into a shadow map every frame. Omni light shadows are far more expensive since the scene is rendered six times per light (the shadow map is stored as a 6-sided cube map). Rendering the scene into shadow maps places load on both the CPU and the GPU.
-* Using a greater shadow map resolution with generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
+* Using a greater shadow map resolution will generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
 * Selecting soft shadows (PCF3x3) for the shadow sample type on a shadow receiving material is more expensive on the GPU versus the hard shadows option.
 * If your shadows are from static parts of the environment consider using [lightmaps][4] to bake shadows into textures.
 

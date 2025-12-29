@@ -4,7 +4,7 @@ title: Lights
 
 In the real world, the environment around you is lit from many sources. The Sun, street lights, TV screens and so on. In a PlayCanvas scene, you have the ability to set up a number of different types of light sources and the shape of the light source to approximate the different types of light we find in reality.
 
-Descriptions of each light type and light source shape are below and examples of different combinations of light types and given in [table](#use-cases) below.
+Descriptions of each light type and light source shape are below and examples of different combinations of light types are given in the [table](#use-cases) below.
 
 ## Light Types {#light-types}
 
@@ -32,7 +32,7 @@ A directional light lights an object like this:
 
 Omni lights are light sources that emit light in all directions. An example of this type of light source is a candle and other examples can be seen in the [table](#use-cases) below.
 
-When unselected, a omni light is represented by the following icon in the Editor's 3D view:
+When unselected, an omni light is represented by the following icon in the Editor's 3D view:
 
 ![Omni light icon](/img/user-manual/graphics/lighting/lights/point_icon.jpg)
 

@@ -2,13 +2,13 @@
 title: Image Based Lighting
 ---
 
-To get best results with Physically Based Rendering in PlayCanvas you can use the technique called Image Based Lighting or IBL, it allows to use pre-rendered image data as source information for ambient and reflection light.
+To get best results with Physically Based Rendering in PlayCanvas you can use the technique called Image Based Lighting or IBL, it allows you to use pre-rendered image data as source information for ambient and reflection light.
 
-This technique relies on [CubeMap][3] - the environment map that is made of 6 texture (faces) forming a cube to have full surround texture coverage.
+This technique relies on [CubeMap][3] - the environment map that is made of 6 textures (faces) forming a cube to have full surround texture coverage.
 
 ## HDR
 
-Image data can be stored in LDR or HDR (High Dynamic Range) color space, which allows to store more than 0.0 to 1.0 (256 gradations) in single channel. HDR allows to store values above 1.0 (what is considered "white"), with combination of many factors of environment such as gamma correction, tone mapping and exposure  it allows to contain more light details and provide much better control over light quality and desirable results to artists.
+Image data can be stored in LDR or HDR (High Dynamic Range) color space, which allows you to store more than 0.0 to 1.0 (256 gradations) in single channel. HDR allows to store values above 1.0 (what is considered "white"), with combination of many factors of environment such as gamma correction, tone mapping and exposure  it allows to contain more light details and provide much better control over light quality and desirable results to artists.
 
 ![HDR vs LDR CubeMap for Image Based Rendering](/img/user-manual/graphics/physical-rendering/ibl-hdr-ldr.jpg)
 

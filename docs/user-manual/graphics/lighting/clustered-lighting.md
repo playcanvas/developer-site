@@ -49,11 +49,11 @@ This will allow you to disable Clustered Lighting (if you need to use the previo
 
 ### Enabling Features {#enabling-features}
 
-The Clustered Lighting shader needs to handle all supported lights, so it must contain the code to handle these features. This can cause the shader to be larger than needed and take longer to compile. To resolve these issues, there is a set of feature options that allow you to disable the features your applications doesn't need and speed up the shader compilation:
+The Clustered Lighting shader needs to handle all supported lights, so it must contain the code to handle these features. This can cause the shader to be larger than needed and take longer to compile. To resolve these issues, there is a set of feature options that allow you to disable the features your application doesn't need and speed up the shader compilation:
 
 - **Shadows Enabled** – Enable or disable the support for Shadows
 - **Cookies Enabled** – Enable or disable the support for light Cookies
-- **Area Lights Enables** – Enable or disable the support for Area Lights
+- **Area Lights Enabled** – Enable or disable the support for Area Lights
 
 ### Configuring the 3D Grid {#configuring-the-3d-grid}
 
@@ -110,7 +110,7 @@ Internally, a light index is stored using 8 bits, so the maximum number of visib
 
 ## Render Debug Grid {#render-debug-grid}
 
-To help with debugging and tuning performance with Clustered Lighting, you can assign the [Layer][pc-layer-api] ID to render to to the [debugLayer of LightingParams][pc-lighting-debug-layer-api]. e.g
+To help with debugging and tuning performance with Clustered Lighting, you can assign the [Layer][pc-layer-api] ID to render to the [debugLayer of LightingParams][pc-lighting-debug-layer-api]. e.g
 
 ```javascript
 // Assuming being in a script type
