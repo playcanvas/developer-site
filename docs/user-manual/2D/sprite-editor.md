@@ -43,7 +43,7 @@ Then set the values for Offset and Spacing. Offset is the number of pixels to mo
 
 Finally set the pivot for all newly generated frames, the pivot determines the position and rotation point of the sprite. It is specified as a proportion of the width and height.
 
-Once all your settings are chose, click the **Generate Frames** button to create your frames.
+Once all your settings are chosen, click the **Generate Frames** button to create your frames.
 
 ### Frame Inspector
 
@@ -73,7 +73,7 @@ Using the Sprite Inspector you can also re-order the Frames in your Sprite, or d
 
 ## Frames Panel
 
-The Frames Panel let's you select and delete Frames from the Texture Atlas
+The Frames Panel lets you select and delete Frames from the Texture Atlas
 
 ## Asset Panel
 
