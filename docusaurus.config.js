@@ -76,9 +76,13 @@ const config = {
           redirects.push(redirect);
         }
 
-        if (existingPath.includes('/user-manual/scenes/')) {
-          const redirect = existingPath.replace('/user-manual/scenes/', '/user-manual/packs/');
+        if (existingPath.includes('/user-manual/editor/scenes/')) {
+          // Redirect from old /user-manual/scenes/ path
+          const redirect = existingPath.replace('/user-manual/editor/scenes/', '/user-manual/scenes/');
           redirects.push(redirect);
+          // Redirect from legacy /user-manual/packs/ path
+          const packRedirect = existingPath.replace('/user-manual/editor/scenes/', '/user-manual/packs/');
+          redirects.push(packRedirect);
         }
 
         if (existingPath.includes('/user-manual/editor/interface/assets')) {

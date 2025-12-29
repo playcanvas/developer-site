@@ -45,7 +45,7 @@ If the entity also has a rigidbody component, the collision component determines
 | Axis         | Capsule only. Aligns the capsule with the local-space X, Y or Z axis of the entity. |
 | Height       | Capsule only. The tip-to-tip height of the capsule. |
 | Radius       | Sphere and Capsule only. The radius of the sphere or capsule body. |
-| Asset        | Mesh only. The [render asset](../../assets/types/render.md) or model asset that will be used as a source for the triangle-based collision mesh. |
+| Asset        | Mesh only. The [render asset](../../../assets/types/render.md) or model asset that will be used as a source for the triangle-based collision mesh. |
 
 ## Scripting Interface
 
