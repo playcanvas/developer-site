@@ -10,7 +10,7 @@ Animstategraphアセットは、さまざまなアニメーション状態を整
 
 エディターのアセットパネルでAnimstategraphアセットを選択すると、anim state graphエディタービューが表示されます:
 
-![Initial Editor](/img/user-manual/anim/state_graph_editor.png)
+![Initial Editor](/img/user-manual/animation/state_graph_editor.png)
 
 このビューで、アニメーションステートグラフを編集できます。以下のセクションでは、Animstategraphアセットの異なる要素が特定のアニメーション動作を定義するためにどのように使用できるかを強調します。
 
@@ -22,7 +22,7 @@ Animstategraphアセットは、さまざまなアニメーション状態を整
 
 ### Animation States {#animation-states}
 
-![State](/img/user-manual/anim/state.png)
+![State](/img/user-manual/animation/state.png)
 
 アニメーションステートは、 'Idle'、 'Jump'、 'Walk'などの再生可能なアニメーションを定義します。新しいアニメーションステートは、ステートグラフの背後の空のキャンバスを右クリックして、メニューから '新しいステートを追加'を選択することで作成できます。エディターは新しく作成されたステートを対象とし、そのインスペクタパネルを右側に表示します。このインスペクタ内で、次のステート変数を変更できます。
 
@@ -34,23 +34,23 @@ Animstategraphアセットは、さまざまなアニメーション状態を整
 
 ### START state {#start-state}
 
-![Start State](/img/user-manual/anim/start_state.png)
+![Start State](/img/user-manual/animation/start_state.png)
 
 STARTステートは、ステートグラフの入り口です。Animコンポーネントが割り当てられたanim state graphを再生し始めると、最初にこのステートに入り、直接接続されたアニメーションステートに遷移します。このアニメーションステートはデフォルトステートと呼ばれ、ここで選択できます:
 
-![Layers](/img/user-manual/anim/layers.png)
+![Layers](/img/user-manual/animation/layers.png)
 
 STARTステートから他のステートへの遷移を作成することはできません。それは、ENDステートに遷移して再び入ることができます。
 
 ### END state {#end-state}
 
-![End State](/img/user-manual/anim/end_state.png)
+![End State](/img/user-manual/animation/end_state.png)
 
 ENDステートは、現在のステートグラフからの出口を示します。アニメーションステートがENDステートに遷移するように設定されている場合、システムはSTARTステートに接続されたデフォルトアニメーションステートに直接移動します。これにより、グラフを線形にレイアウトしながら、グラフ内でサイクルフローを作成するのに役立ちます。ENDステートから他のステートへの遷移を作成することはできません。常にSTARTステートに直接遷移します。
 
 ### ANY state {#any-state}
 
-![Any State](/img/user-manual/anim/any_state.png)
+![Any State](/img/user-manual/animation/any_state.png)
 
 このステートは、システムが現在他のどのアニメーションステートにある場合でもアクティブになるトランジションを作成するために使用されます。このステートからトリガーされるすべてのトランジションは、現在有効なアニメーションステートから直接接続された場合と同様にブレンドされます。ANYステートからトランジションを作成できますが、それには戻ることはできません。
 
@@ -79,7 +79,7 @@ ENDステートは、現在のステートグラフからの出口を示しま�
 
 新しいパラメータは、左側のインスペクタのパラメータパネルを通じて状態グラフに追加することができます。
 
-![Parameters](/img/user-manual/anim/parameters.png)
+![Parameters](/img/user-manual/animation/parameters.png)
 
 各パラメータは以下の3つの変数を設定することができます。
 
@@ -93,7 +93,7 @@ ENDステートは、現在のステートグラフからの出口を示しま�
 
 各条件は、指定された演算子を使用して条件で与えられた値とパラメータ変数の現在の値を比較する条件文から成ります。例えば、次の条件:
 
-![Condition](/img/user-manual/anim/condition.png)
+![Condition](/img/user-manual/animation/condition.png)
 
 これは、IdleとJumpのアニメーション状態間の遷移で使用でき、スクリプトを通じて'Jump'パラメータがtrueに設定されたときにのみキャラクターがジャンプすることを保証します。
 
@@ -103,17 +103,17 @@ ENDステートは、現在のステートグラフからの出口を示しま�
 
 animstategraphが作成されると、それには一つの基本レイヤーが含まれます。このレイヤーは削除できず、多くのシナリオでは唯一必要なものとなります。しかし、別のレイヤーを作成したい場合は、状態グラフビューの左のレイヤーパネルで新しいレイヤーボタンを選択して作成することができます:
 
-![Layers](/img/user-manual/anim/layers.png)
+![Layers](/img/user-manual/animation/layers.png)
 
 次に、グラフビューの右上にあるレイヤー選択ドロップダウンから選択することで、このレイヤーの編集に切り替えることが可能です:
 
-![Select Layer](/img/user-manual/anim/select_layer.png)
+![Select Layer](/img/user-manual/animation/select_layer.png)
 
 ### Layer Blending {#layer-blending}
 
 デフォルトでは、レイヤーはレイヤーパネルで作成された順序でモデルをアニメートします。モデルのボーンに設定されたアニメーション値は、後続のレイヤーによって上書きされます。代わりにレイヤーのアニメーション値を混合したい場合は、レイヤーの`ブレンドタイプ (Blend Type)`をデフォルトの`オーバーライド (Override)`ではなく`アディティブ (Additive)`に設定します。
 
-![Layer Blend](/img/user-manual/anim/anim_layer_blend.png)
+![Layer Blend](/img/user-manual/animation/anim_layer_blend.png)
 
 各レイヤーのブレンドウェイト値は、複数のレイヤーをブレンドする際に、各レイヤーが最終アニメーションにどれだけ寄与するかを決定するために使用されます。これらのブレンドウェイトは、ゲームスクリプトでランタイムで調整し、レイヤーのブレンドをリアルタイムで更新することができます。
 

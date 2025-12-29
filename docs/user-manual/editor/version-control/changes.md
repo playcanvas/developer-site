@@ -6,12 +6,12 @@ It is possible to view the difference between two the current state of the proje
 
 The first way of viewing changes it to select the view changes button in the checkpoints view. This will show you the changes made in your branch since the most recent checkpoint.
 
-![VC Panel](/img/user-manual/version-control/vc-panel.jpg)
+![VC Panel](/img/user-manual/editor/version-control/vc-panel.jpg)
 
 The second way to view changes is in the drop-down menu for each checkpoint. This will show you the difference between your current state and they checkpoint that is selected. You can use this to view the difference between your branch and checkpoint in another branch.
 
-![View Changes](/img/user-manual/version-control/view-changes.jpg)
+![View Changes](/img/user-manual/editor/version-control/view-changes.jpg)
 
 Changes are views in a similar interface to the Conflict Manager used when merging except that this interface is only for viewing and cannot be edited.
 
-![View Changes Dialog](/img/user-manual/version-control/view-changes-dialog.jpg)
+![View Changes Dialog](/img/user-manual/editor/version-control/view-changes-dialog.jpg)

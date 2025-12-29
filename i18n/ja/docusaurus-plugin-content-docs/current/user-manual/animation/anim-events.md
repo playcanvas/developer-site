@@ -8,7 +8,7 @@ Animイベントは、アニメーションの再生中にイベントリスナ�
 
 新しいイベントを作成するには、イベントを作成するアニメーションアセットをアセットパネルで選択します。次に、以下に示すようにアセットインスペクターに `+ EVENT` ボタンが表示されます。
 
-![Animation Asset With Event](/img/user-manual/anim/animation_asset_with_events.png)
+![Animation Asset With Event](/img/user-manual/animation/animation_asset_with_events.png)
 
 各イベントには、以下の修正可能なプロパティがあります。
 
