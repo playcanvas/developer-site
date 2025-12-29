@@ -65,7 +65,7 @@ There are 3 behavior types for the joystick that are commonly found in touch scr
 
 ![](/img/tutorials/touchscreen-joypad-controls/joystick-type.png)
 
-'Fixed in place' where the base of the joystick does not move from it's position:
+'Fixed in place' where the base of the joystick does not move from its position:
 ![](/img/tutorials/touchscreen-joypad-controls/joystick-fixed.gif)
 
 'Move to first touch and fixed' where the base of the joystick moves to where the user first touches in the input area and then stays fixed:
