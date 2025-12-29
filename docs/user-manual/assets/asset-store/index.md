@@ -16,7 +16,7 @@ The Asset Store will then open:
 
 ## Selecting a Store
 
-There are three top-level Stores to chose from:
+There are three top-level Stores to choose from:
 
 | Store | Description |
 | ----- | ----------- |
