@@ -22,7 +22,7 @@ Frame Buffer Picking - click to select a grey shape. The red shapes are set to b
 
 Try it from the Editor in the [tutorial project.][1]
 
-This tutorial describes to methods of selecting an Entity from the 3D scene, for example, on the click of the mouse.
+This tutorial describes two methods of selecting an Entity from the 3D scene, for example, on the click of the mouse.
 
 ## Collision Picking
 
