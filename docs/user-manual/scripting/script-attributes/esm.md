@@ -41,7 +41,7 @@ In this example the script simply rotates the entity according to its speed, but
 
 The `@attribute` tag above the `speed` member promotes it to an attribute. When attached to an entity, the Editor creates controls that allow you to dynamically set the value of `speed` at runtime for each entity it's attached to.
 
-What this means in practice is that you can expose various members of a script to the Editor and create controls to edit their values at run-time.
+What this means in practice is that you can expose various members of a script to the Editor and create controls to edit their values at runtime.
 
 ![Attribute](/img/user-manual/scripting/attribute-basic.png)
 
@@ -49,7 +49,7 @@ Because `speed` is simply a class member, you can access it as you would any oth
 
 ```javascript
 update(dt) {
-    this.entity.rotateLocal(0, this.speed, 0);
+    this.entity.rotateLocal(0, this.speed * dt, 0);
 }
 ```
 
@@ -246,7 +246,7 @@ You must import `Color` from `playcanvas` for your attribute to parse correctly.
 
 :::
 
-The color attribute shows a color picker when exposed in the Editor. There are two options `rgb` and `rgba` depending on whether you wish to expose the alpha channel as well.
+The color attribute shows a color picker when exposed in the Editor.
 
 ### Curve Attribute
 
@@ -297,7 +297,7 @@ You must import `Asset` from `playcanvas` for your attribute to parse correctly.
 
 ### Entity Attribute
 
-The Entity type lets you reference another entity in your hierarchy. A great way to link two entities together.
+The Entity type lets you reference another entity in your hierarchy, providing a great way to link two entities together.
 
 ```javascript
 /**
@@ -313,7 +313,7 @@ You must import `Entity` from `playcanvas` for your attribute to parse correctly
 
 :::
 
-### Attribute Arrays
+## Attribute Arrays
 
 In some cases you may want to expose a list of grouped attributes together. Let's say you have a script that generates a gradient, but rather than having a start and end point, you want to allow users to set an arbitrary amount of 'color stops' on the gradient. In this case you can use an array qualifier in a `@type` tag.
 
@@ -325,7 +325,7 @@ In some cases you may want to expose a list of grouped attributes together. Let'
 gradientStops;
 ```
 
-The `Color[]` declaration uses the [jsdoc type tag](https://jsdoc.app/tags-type) to declare that `gradientStops` is an array of `Colors`. The Editor will interpret it this way, creating a controller that allows you to set multiple `Color` values in a list.
+The `Color[]` declaration uses the [JSDoc type tag](https://jsdoc.app/tags-type) to declare that `gradientStops` is an array of `Color` values. The Editor will interpret it this way, creating a controller that allows you to set multiple `Color` values in a list.
 
 ![Attribute Array](/img/user-manual/scripting/attribute-array.png)
 
@@ -339,12 +339,26 @@ initialize() {
 }
 ```
 
-### Enumerations
+### Default Array Size
+
+You can use the `@size` tag to set the initial size of an array attribute:
+
+```javascript
+/**
+ * @attribute
+ * @type {Vec3[]}
+ * @size 4
+ */
+waypoints;
+```
+
+This sets the array to 4 elements by default. The size can still be changed in the Editor.
+
+## Enumerations
 
 Sometimes you may want to constrain an attribute to a set of possible values. In this situation you can use the `@enum` tag. This uses an enumeration as a value for the attribute, making the Editor display a combo box constrained to the list of possible values:
 
 ```javascript
-
 /** @enum {number} */
 const Lights = {
     ON: 1,
@@ -363,9 +377,29 @@ class MyScript extends Script {
 }
 ```
 
-This uses the `Lights` class as an enumeration of possible values. The `@type {Lights}` indicates that `ambient` should only have a value listed in `Lights`. At author-time the Editor will generate a drop-down control using the Lights enumeration keys as labels (ON/OFF/UNKNOWN) and setting the corresponding value on `ambient`. An enumerator's values can only be numbers, strings, or booleans.
+This uses the `Lights` object as an enumeration of possible values. The `@type {Lights}` indicates that `ambient` should only have a value listed in `Lights`. At author-time the Editor will generate a drop-down control using the Lights enumeration keys as labels (ON/OFF/UNKNOWN) and setting the corresponding value on `ambient`. An enumerator's values can only be numbers, strings, or booleans.
 
 ![Attribute Enumerations](/img/user-manual/scripting/attribute-enum.png)
+
+### Literal Union Types
+
+For simpler cases, you can use literal union types as an inline alternative to defining a separate enumeration object:
+
+```javascript
+/**
+ * @attribute
+ * @type {'low' | 'medium' | 'high'}
+ */
+quality = 'medium';
+
+/**
+ * @attribute
+ * @type {1 | 2 | 3 | 4}
+ */
+level = 1;
+```
+
+This creates a dropdown in the Editor with the specified values as options. Literal unions can contain strings, numbers, or booleans, but all values must be of the same type.
 
 ## Conditional Attributes
 
@@ -461,8 +495,9 @@ class GameLogic extends Script {
     static scriptName = 'gameLogic';
 
     /** 
+     * `power` and `speed` are exposed as sub-attributes.
+     *
      * @attribute 
-     * `power` and `speed` are exposed as sub attributes
      */
     enemy = { power: 10, speed: 3 };
 
@@ -494,7 +529,7 @@ class GameLogic extends Script {
 }
 ```
 
-### TypeDef Groups
+### Typedef Groups
 
 This is a more modular way of declaring Attribute Groups. Whilst it is more verbose than using the inline version, the typedef version is more modular and can be used across multiple scripts and attributes.
 
