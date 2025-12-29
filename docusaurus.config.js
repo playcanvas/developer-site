@@ -85,6 +85,14 @@ const config = {
           redirects.push(packRedirect);
         }
 
+        // Redirect old hyphenated component names to new names matching the Editor
+        if (existingPath.includes('/user-manual/editor/scenes/components/layoutgroup')) {
+          redirects.push(existingPath.replace('layoutgroup', 'layout-group'));
+        }
+        if (existingPath.includes('/user-manual/editor/scenes/components/layoutchild')) {
+          redirects.push(existingPath.replace('layoutchild', 'layout-child'));
+        }
+
         if (existingPath.includes('/user-manual/editor/interface/assets')) {
           const redirect = existingPath.replace('/user-manual/editor/interface/assets', '/user-manual/editor/assets');
           redirects.push(redirect);
