@@ -30,7 +30,7 @@ This script manages the sound effects of the application.
 
 ## Using AudioNodes
 
-The Web Audio API allows you to create various audio nodes which can be connected together to form an audio routing graph. When an audio sample is played it gets processes by each node and eventually reaches the destination usually your speakers. You can find out more details [here][5].
+The Web Audio API allows you to create various audio nodes which can be connected together to form an audio routing graph. When an audio sample is played it gets processed by each node and eventually reaches the destination usually your speakers. You can find out more details [here][5].
 
 In this example we are using a [Convolver node][6]. In our application script we are creating that node like so:
 
