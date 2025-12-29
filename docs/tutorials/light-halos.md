@@ -18,7 +18,7 @@ It works like this: We create an entity with a plane primitive attached which ha
 
 ### Texture
 
-First you'll need a halo texture. In this example we've just used a very simple blurred blob that was created in a art program like Photoshop.
+First you'll need a halo texture. In this example we've just used a very simple blurred blob that was created in an art program like Photoshop.
 
 ![blob](/img/tutorials/intermediate/light-halos/blob.jpg)
 
@@ -69,7 +69,7 @@ if (this.unidirectional) {
 }
 ```
 
-We're using the `setParameter` method on the [pc.MeshInstance][5] to set a value for the fragment shader to use. This is currently an undocumented feature in the engine (you won't find it on the link to the developer docs). The reason for this is because it relies on knowing exactly the name of the uniform variable in the shader. These values might change and this API might change in the future. But it's pretty useful, because it let's you override a single value in a shader just for that mesh instance. In this case, it's important because all the glows use the same material, but we will want a different value for the opacity for each instance of the glow.
+We're using the `setParameter` method on the [pc.MeshInstance][5] to set a value for the fragment shader to use. This is currently an undocumented feature in the engine (you won't find it on the link to the developer docs). The reason for this is because it relies on knowing exactly the name of the uniform variable in the shader. These values might change and this API might change in the future. But it's pretty useful, because it lets you override a single value in a shader just for that mesh instance. In this case, it's important because all the glows use the same material, but we will want a different value for the opacity for each instance of the glow.
 
 Here's the complete listing:
 
