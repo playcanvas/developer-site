@@ -2,7 +2,7 @@
 title: Troubleshooting Performance
 ---
 
-Here are some tips to help you uncover common performance problems
+Here are some tips to help you uncover common performance problems.
 
 ## PlayCanvas and other WebGL applications run very slowly in Google Chrome
 

@@ -58,11 +58,11 @@ You can see in this diagram that because the `fov` value is independent of the w
 
 ### `Near Clip`
 
-The near clipping distance is the distance, in metres, from the camera before which nothing will be drawn.
+The near clipping distance is the distance, in meters, from the camera before which nothing will be drawn.
 
 ### `Far Clip`
 
-The far clipping distance is the distance, in metres, from the camera after which nothing will be drawn.
+The far clipping distance is the distance, in meters, from the camera after which nothing will be drawn.
 
 ### `Priority`
 

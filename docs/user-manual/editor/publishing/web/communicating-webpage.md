@@ -2,9 +2,9 @@
 title: Communication with web pages
 ---
 
-One the key advantages of using PlayCanvas and WebGL over other plugins or cross-compiled engines is the ability to interact directly between your application and the surrounding webpage. In this page we'll talk about some common ways of interfacing your PlayCanvas application with a web page or web application.
+One of the key advantages of using PlayCanvas and WebGL over other plugins or cross-compiled engines is the ability to interact directly between your application and the surrounding webpage. In this page we'll talk about some common ways of interfacing your PlayCanvas application with a web page or web application.
 
-There are two ways you may find your PlayCanvas application communicating with the surrounding Web page. First, you may have embedded your application in a iframe in a page. Second you may be serving your own HTML page which loads an PlayCanvas page. These two methods require very different ways of communicating between web page and application.
+There are two ways you may find your PlayCanvas application communicating with the surrounding Web page. First, you may have embedded your application in a iframe in a page. Second you may be serving your own HTML page which loads a PlayCanvas page. These two methods require very different ways of communicating between web page and application.
 
 ## Defining an API
 
@@ -185,7 +185,7 @@ When you download your PlayCanvas application for self-hosting. This is the inde
 </html>
 ```
 
-It is absolutely possible and even recommended, that you modify start from this page as the basis of your web page and you can modify it to add any additional content that is required for you page.
+It is absolutely possible and even recommended, that you start from this page as the basis of your web page and you can modify it to add any additional content that is required for your page.
 
 When it comes to communicating with your PlayCanvas application, for example from a button push. You can call the APIs we defined above directly from your script. There is no need for the `postMessage` calls.
 

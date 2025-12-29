@@ -14,7 +14,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
 
 ### Audio
 
-Audio is a critical part of your game. It will provide valuable feedback to the player that their inputs are having and effect, plus it can create mood and atmosphere.
+Audio is a critical part of your game. It will provide valuable feedback to the player that their inputs are having an effect, plus it can create mood and atmosphere.
 
 The Keepy Up game has 3 audio effects: A background music track, a tap sound when you hit the ball and the sad trombone sting when you lose. Each of them is handled slightly differently.
 
@@ -29,7 +29,7 @@ this.audio.sound.play("gameover") // play the 'gameover' slot
 
 #### Ball tap
 
-The ball tap sound is attached directly to the ball Entity. It's a short, non-looping sound. So we play it every time the a tap hits the ball.
+The ball tap sound is attached directly to the ball Entity. It's a short, non-looping sound. So we play it every time a tap hits the ball.
 
 ```javascript
 this.entity.sound.play("bounce");

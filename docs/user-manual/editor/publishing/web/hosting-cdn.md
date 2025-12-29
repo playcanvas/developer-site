@@ -12,7 +12,7 @@ The simplest change to make is to load all assets from a different location. Thi
 
 ![settings.js](/img/user-manual/editor/publishing/web/cdn-settings-assets-prefix.png)
 
-The `ASSET_PREFIX` will be prepended to all request that are made for an asset (including a scene) both during the preload phase and during runtime. For example, you should set this to the root folder of your CDN asset store.  In the above example, previously an asset that would had a URL like `files/123456/1/texture.jpg` will now be loaded from `http://keepy-up-cdn.example.com/files/123456/1/texture.jpg`.
+The `ASSET_PREFIX` will be prepended to all request that are made for an asset (including a scene) both during the preload phase and during runtime. For example, you should set this to the root folder of your CDN asset store.  In the above example, previously an asset that would have had a URL like `files/123456/1/texture.jpg` will now be loaded from `http://keepy-up-cdn.example.com/files/123456/1/texture.jpg`.
 
 ## Additional URLs
 

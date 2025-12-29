@@ -8,7 +8,7 @@ The Asset Store is integrated with [Sketchfab](https://sketchfab.com/), the popu
 
 ## Logging in to Sketchfab
 
-The first time you attempt to import a model from Sketchfab, you will be ask to either sign up or log in to Sketchfab:
+The first time you attempt to import a model from Sketchfab, you will be asked to either sign up or log in to Sketchfab:
 
 ![Sketchfab Authentication](/img/user-manual/assets/asset-store/sketchfab-login.png)
 

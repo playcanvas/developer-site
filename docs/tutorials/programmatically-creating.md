@@ -39,7 +39,7 @@ entity.addComponent("render", {
 this.app.root.addChild(entity);
 ```
 
-An Entity on it's own doesn't do much, so you will need to add Components in order to add functionality to your Entity. You can use the `addComponent` method of the Entity to create and add a new Component to the Entity.
+An Entity on its own doesn't do much, so you will need to add Components in order to add functionality to your Entity. You can use the `addComponent` method of the Entity to create and add a new Component to the Entity.
 
 Each Component type has different properties that can be passed in on the data object, see the [Component's documentation][1] for more detail about which properties are available. The `data` argument can be left out and default values will be used.
 

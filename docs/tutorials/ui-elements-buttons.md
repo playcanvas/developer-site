@@ -58,7 +58,7 @@ Let's take a closer look at the first button in the example project:
 
 The button has 3 components:
 
-- **Element component** - Positions the renders the button UI relative to it's parent Screen.
+- **Element component** - Positions and renders the button UI relative to its parent Screen.
 - **Button component** - Handles how the button looks when the user is interacting with it.
 - **Script component** - Listens for events on the Button component and handles the logic on what to do when clicked.
 

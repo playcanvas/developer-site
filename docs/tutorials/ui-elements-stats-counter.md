@@ -32,7 +32,7 @@ Since it's a 2D screen we have ticked Screen Space. Our Reference Resolution is 
 
 For each stat we will create a different Group Element. This allows us to treat sub-elements of the Group to be anchored to the Group edges and allows us to treat each stat as a separate widget.
 
-We will only examine the Boost stat - the others are exactly the same. This is that the `stats-boost` Entity looks like in the viewport:
+We will only examine the Boost stat - the others are exactly the same. This is what the `stats-boost` Entity looks like in the viewport:
 
 ![Boost](/img/tutorials/ui/stats/boost-editor.png)
 

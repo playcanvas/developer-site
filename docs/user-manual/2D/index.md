@@ -16,7 +16,7 @@ The PlayCanvas Engine is designed to make creating 3D games and applications fas
 
 ![Texture Atlas](/img/user-manual/2D/texture-atlas.jpg)
 
-A [Texture Atlas][2] is a enhanced version of the standard [Texture][3] asset. In addition to the regular texture features, a Texture Atlas includes the definitions of a set of "Frames". Each frame is a region of the texture which can be referenced in a Sprite Asset.
+A [Texture Atlas][2] is an enhanced version of the standard [Texture][3] asset. In addition to the regular texture features, a Texture Atlas includes the definitions of a set of "Frames". Each frame is a region of the texture which can be referenced in a Sprite Asset.
 
 ### Sprite Editor
 

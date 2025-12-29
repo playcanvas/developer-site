@@ -42,7 +42,7 @@ The string will have something similar to the following:
 ANGLE (NVIDIA GeForce GTX 1050 Direct3D11 vs_5_0 ps_5_0)
 ```
 
-Benchmarks for different GPU cards can be found on [Video Card Benchmark][5] and [Notebook Check Smartphone and Tablet list][6] to help gauge each GPU's capability. However, given the sheer number GPU cards available, this can be extremely difficult to assess the device capabilities.
+Benchmarks for different GPU cards can be found on [Video Card Benchmark][5] and [Notebook Check Smartphone and Tablet list][6] to help gauge each GPU's capability. However, given the sheer number of GPU cards available, this can be extremely difficult to assess the device capabilities.
 
 An example for mobile can be found below (correct at time of writing Thu 30 Jul 2020):
 

@@ -43,7 +43,7 @@ Status: 200
       "id": string,
       "projectId": int,
       "name": "Branch Name",
-      "createdAt": data,
+      "createdAt": date,
       "closed": bool,
       "latestCheckpointId": string,
       "user": {

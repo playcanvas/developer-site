@@ -6,7 +6,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4580
 
 import Link from '@docusaurus/Link';
 
-Project sample showing how to use project image assets in the loading screen
+Project sample showing how to use project image assets in the loading screen.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/Di3Fb3fx/" title="Advance loading screen" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

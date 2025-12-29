@@ -122,7 +122,7 @@ And pasting into our fork of the tutorial project.
 
 Let's take a look inside:
 
-[`afg-intergration.js`][afg-intergration.js] adds Google's SDK to the page and also sets the time between ads being served to the user which we can change if need be. For the tutorial, we have also enabled test mode to show placeholders instead of real ads.
+[`afg-integration.js`][afg-integration.js] adds Google's SDK to the page and also sets the time between ads being served to the user which we can change if need be. For the tutorial, we have also enabled test mode to show placeholders instead of real ads.
 
 `ca-pub-XXXXXXXXX` will need to be replaced with your own [Publisher ID][google-publisher-id] from Google Adsense.
 
@@ -618,5 +618,5 @@ Important: For the tutorial, we used test mode so we didn't show any actual ads.
 [google-afg-signup]: https://developers.google.com/ad-placement/docs/beta
 [google-adsense]: https://www.google.com/adsense/start/
 [google-publisher-id]: https://support.google.com/adsense/answer/105516?hl=en
-[afg-intergration.js]: https://playcanvas.com/editor/code/877568?tabs=67299908
+[afg-integration.js]: https://playcanvas.com/editor/code/877568?tabs=67299908
 [afg-setup.js]: https://playcanvas.com/editor/code/877568?tabs=67301236

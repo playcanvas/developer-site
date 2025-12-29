@@ -2,7 +2,7 @@
 title: Sprite
 ---
 
-A Sprite is a 2D graphic that can be rendered into Scene. A Sprite Asset is a reference to a [Texture Atlas][1] and a sequence of frames from that atlas. In this way a sprite can either represent a single image (taken out of the atlas) or a flip-book style animation (multiple frames from the atlas).
+A Sprite is a 2D graphic that can be rendered into a scene. A Sprite Asset is a reference to a [Texture Atlas][1] and a sequence of frames from that atlas. In this way a sprite can either represent a single image (taken out of the atlas) or a flip-book style animation (multiple frames from the atlas).
 
 ## Properties
 

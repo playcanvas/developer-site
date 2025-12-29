@@ -27,7 +27,7 @@ For an omni light the cookie needs to be a cubemap so that it can be projected i
 
 ## Use Cases
 
-**Shaped Lights** - cookies are useful for masking the shape of a light source. For example, if you're scene contains a window or a fluorescent strip light using a spot light will create a light shape that is rounded. You can mask the shape of the light to be long and thin, or square in order to simulate the shape of the light.
+**Shaped Lights** - cookies are useful for masking the shape of a light source. For example, if your scene contains a window or a fluorescent strip light using a spot light will create a light shape that is rounded. You can mask the shape of the light to be long and thin, or square in order to simulate the shape of the light.
 
 ![Shaped Light](/img/tutorials/intermediate/light-cookies/square-cookie.jpg)
 

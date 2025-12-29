@@ -53,4 +53,4 @@ Once installed, you can start using it in your project. As the next step, we rec
 
 ### Starter Templates
 
-Alternatively you can grab one of the [templates directly](https://github.com/playcanvas/create-playcanvas/tree/main/templates) or quickly spin a project up from our [StackBlitz template](https://stackblitz.com/edit/playcanvas-react-template?file=src%2FScene.tsx)
+Alternatively you can grab one of the [templates directly](https://github.com/playcanvas/create-playcanvas/tree/main/templates) or quickly spin a project up from our [StackBlitz template](https://stackblitz.com/edit/playcanvas-react-template?file=src%2FScene.tsx).

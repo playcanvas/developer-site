@@ -4,7 +4,7 @@ title: Sprite
 
 The Sprite Component renders and animates [Sprite Assets][1] into the scene.
 
-There are two types of sprite Simple and Animated.
+There are two types of sprite: Simple and Animated.
 
 ## Simple Sprites
 

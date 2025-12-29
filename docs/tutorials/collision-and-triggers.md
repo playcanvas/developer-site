@@ -16,7 +16,7 @@ This tutorial introduces the basics of rigid-body physics, collision detection a
 
 The *collision* component defines a shape which can be used either to trigger events if another Entity enters or exits it -- we call this a Trigger Volume -- or it can be used together with the *rigidbody* component to give an Entity physical properties in your game -- like a bouncing ball or a heavy crate.
 
-The most important property of a *collision* component is it's **Type**, this determines the shape of the volume that will be used. There are four options:
+The most important property of a *collision* component is its **Type**, this determines the shape of the volume that will be used. There are four options:
 
 - **Box** A simple box
 - **Sphere** A simple sphere
@@ -45,7 +45,7 @@ For this demo, the important property is the **Type**. You can pick one of three
 
 - **Static** this Entity will never move.
 - **Dynamic** this Entity will move under gravity and any other forces that you apply to it.
-- **Kinematic** this Entity will not respond to forces, but will move if you directly set it's position or velocity.
+- **Kinematic** this Entity will not respond to forces, but will move if you directly set its position or velocity.
 
 ## Setting up the ground
 
@@ -113,7 +113,7 @@ Trigger.prototype.onTriggerEnter = function(entity) {
 </TabItem>
 </Tabs>
 
-There two significant parts to the code above.
+There are two significant parts to the code above.
 
 First in the ```initialize``` method we start listening to the **triggerenter** event. This event fires once when a rigid body enters a trigger volume (where a trigger volume is an entity that has a collision component but no rigidbody component). The companion event is **triggerleave** which is fired once the penetrating rigid body leaves the trigger.
 

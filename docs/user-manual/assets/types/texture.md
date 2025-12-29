@@ -37,13 +37,13 @@ By default, imported images will be resized to the nearest power of two. For exa
 
 Selecting a texture's thumbnail in the Assets panel will load it into the Inspector panel. Note that you can multi-select textures and edit the whole selection simultaneously in the Inspector.
 
-A texture shares the standard set of asset properties (ID, name, tags and so on). But it's also has some texture-specific properties.
+A texture shares the standard set of asset properties (ID, name, tags and so on). But it also has some texture-specific properties.
 
 ![Texture Properties](/img/user-manual/assets/textures/texture-properties.png)
 
 ### Texture Filtering
 
-Texture filtering gives control over how the color of a texture mapped pixel is calculated. 'Point' applied no filtering whereas 'Linear' will interpolate the color of a texel with those of its neighbors. This produces better visual results, particularly as a texture is minimized (where the texture occupies fewer pixels on the screen than it has texels).
+Texture filtering gives control over how the color of a texture mapped pixel is calculated. 'Point' applies no filtering whereas 'Linear' will interpolate the color of a texel with those of its neighbors. This produces better visual results, particularly as a texture is minimized (where the texture occupies fewer pixels on the screen than it has texels).
 
 ### Anisotropy
 

@@ -136,7 +136,7 @@ At the top is the informational header about the script if you do share the scri
 // ==/UserScript==
 ```
 
-This is private Editor API to wait for an event when the Editor has fully loaded. Using the event ensures that the Editor API is accessible before the code to extend Editor features is ran.
+This is private Editor API to wait for an event when the Editor has fully loaded. Using the event ensures that the Editor API is accessible before the code to extend Editor features is run.
 
 ```javascript
     // Wait until the Editor is available before adding the button

@@ -6,7 +6,7 @@ An HTML asset contains HTML code. The code can either be a full HTML page or jus
 
 To edit an HTML asset, right click on it in the Editor and select Edit.
 
-The loaded HTML asset is just a string. You can use that string as you like - a common way to add HTML to the document is the following
+The loaded HTML asset is just a string. You can use that string as you like. A common way to add HTML to the document is the following:
 
 ```javascript
 // get asset from registry by id

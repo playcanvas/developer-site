@@ -67,7 +67,7 @@ To cancel your Personal plan, click the **Cancel** link and confirm. Your accoun
 
 Users on the Free plan will see "No credit card stored in your account" until a paid plan is purchased.
 
-Users on the Personal plan with see something of the form "Card ending in - 0000". Click **Edit** to update billing info:
+Users on the Personal plan will see something of the form "Card ending in - 0000". Click **Edit** to update billing info:
 
 - Card details
 - Billing address

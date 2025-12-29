@@ -14,7 +14,7 @@ To create a new Template Asset you can right-click on any Entity in your Scene a
 
 ## Adding Templates in your Scene {#adding-templates-in-your-scene}
 
-You can drag & drop a Template Asset in your scene or right click under an Entity in the Hierarchy and select Template &rarr; Add Instance. Then you can select the Template Asset and that will an instance of it under the clicked Entity.
+You can drag & drop a Template Asset in your scene or right click under an Entity in the Hierarchy and select Template &rarr; Add Instance. Then you can select the Template Asset and that will add an instance of it under the clicked Entity.
 
 When an Entity is an instance of a Template it will have a slightly difference appearance in the Hierarchy:
 

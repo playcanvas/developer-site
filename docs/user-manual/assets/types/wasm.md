@@ -2,7 +2,7 @@
 title: WASM Module
 ---
 
-Wasm Modules (also known was WebAssembly Modules) contain compiled executable code for the web.
+Wasm Modules (also known as WebAssembly Modules) contain compiled executable code for the web.
 
 A Wasm module comprises three parts:
 

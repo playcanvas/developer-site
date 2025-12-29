@@ -4,7 +4,7 @@ title: Material
 
 Every surface on a 3D model is rendered using a material. The material defines the properties of that surface, such as its color, shininess, bumpiness.
 
-In PlayCanvas, a material is an Asset type which collects all these properties together. By default, it represents a Physical material. This exposes the fundamental properties that can be used to create many different types for visual effects, from smooth plastic, to rough wood, or scratched metal.
+In PlayCanvas, a material is an Asset type which collects all these properties together. By default, it represents a Physical material. This exposes the fundamental properties that can be used to create many different types of visual effects, from smooth plastic, to rough wood, or scratched metal.
 
 We also support our old Phong Material type.
 
@@ -72,7 +72,7 @@ There are a few options that are available on most texture map slots for a mater
 
 ### Texture Asset {#texture-asset}
 
-First is the texture asset, upload an image to PlayCanvas and we'll create a texture asset for you. you can assign this to a slot on a material.
+First is the texture asset. Upload an image to PlayCanvas and we'll create a texture asset for you. You can assign this to a slot on a material.
 
 ### Color or Tint Color {#color-or-tint-color}
 
@@ -106,7 +106,7 @@ Ambient properties determine how the material appears in ambient light.
 
 ### Diffuse
 
-Diffuse properties define the how a material reflects diffuse light emitted by dynamic light sources in the scene.
+Diffuse properties define how a material reflects diffuse light emitted by dynamic light sources in the scene.
 
 <img loading="lazy" src="/img/user-manual/assets/types/material/diffuse.jpg" width="300" />
 
@@ -118,7 +118,7 @@ Diffuse properties define the how a material reflects diffuse light emitted by d
 
 ### Specular
 
-Specular properties defines the color of the specular highlights. i.e. the shininess
+Specular properties define the color of the specular highlights, i.e. the shininess.
 
 <img loading="lazy" src="/img/user-manual/assets/types/material/specular.jpg" width="300" />
 

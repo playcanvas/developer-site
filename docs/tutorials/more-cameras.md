@@ -210,7 +210,7 @@ CameraManager.prototype.update = function(dt) {
 
 In this sample, pressing the arrow keys sets the current camera to be a left or right camera Entity (from those that are in the currently loaded Scene) and the space key activates the central camera.
 
-We initially  create a function to find the camera entity we want by name - with the `findByName()` function applied to the parent entity of this script (given that the cameras are located there, there is no need to use `this.app.root.findByName()` to search through all the entities in the Scene).
+We initially create a function to find the camera entity we want by name - with the `findByName()` function applied to the parent entity of this script (given that the cameras are located there, there is no need to use `this.app.root.findByName()` to search through all the entities in the Scene).
 
 We set up an object containing the names of the camera Entities that correspond to the arrow and space keys [(see the Editor scene)][3].
 

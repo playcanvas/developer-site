@@ -14,7 +14,7 @@ The Texture Atlas is used in combination with the [Sprite Asset][4] to render 2D
 
 ### Frames
 
-The Frames of a texture atlas are keyed by a unique value, usually a integer string. The format of a frame is:
+The Frames of a texture atlas are keyed by a unique value, usually an integer string. The format of a frame is:
 
 ```javascript
 {

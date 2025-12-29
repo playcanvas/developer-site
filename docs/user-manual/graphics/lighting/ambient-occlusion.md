@@ -9,13 +9,13 @@ In PlayCanvas, ambient lighting is multiplied by the AO map, both diffuse and sp
 ![Ambient Occlusion comparison: without/with](/img/user-manual/graphics/lighting/lightmapping/model-ao-comparison.jpg)  
 *Left: without AO; Right: with Global AO*
 
-AO map can be of different scale. E.g. a texture detail AO, showing surface crevices or a world-scale AO with large shadowing effect of different parts of the model. Large-scale AO will give more effect, it usually matches lightmaps on UV1, and is more important.
+AO map can be of different scale, e.g. a texture detail AO, showing surface crevices or a world-scale AO with large shadowing effect of different parts of the model. Large-scale AO will give more effect, it usually matches lightmaps on UV1, and is more important.
 
 ## Rendering Global AO
 
 Rendering AO can be done using popular 3D modelling and archviz tools. It is practically same as rendering Lightmap that is described in [Lightmapping Section][0].
 
-With few small differences where special material is applied on all geometry that will paint it so it looks like AO, and different settings during rendering into texture.
+With a few small differences where special material is applied on all geometry that will paint it so it looks like AO, and different settings during rendering into texture.
 
 In 3D's Max with VRay it is done by creating a material of **VRayDirt** type and **Ambient Occlusion** mode, where **radius** can be changed to get desirable results.
 

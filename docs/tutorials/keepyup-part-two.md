@@ -74,7 +74,7 @@ In this case, we don't want the background to be lit, it is just a static scene.
 
 ![Overlay](/img/tutorials/beginner/keepyup-part-two/overlay-material.jpg)
 
-The overlay material is even simpler than the backdrop. In this case all we are doing is setting the color off the emissive property
+The overlay material is even simpler than the backdrop. In this case all we are doing is setting the color of the emissive property
 
 ![Emissive](/img/tutorials/beginner/keepyup-part-two/overlay-emissive.jpg)
 

@@ -16,7 +16,7 @@ Text input can be done many ways in PlayCanvas and this tutorial shares a librar
 
 It uses a HTML input element that is overlaid on top of the PlayCanvas rendering canvas and is positioned depending on whether mouse or touch is used to interact with the input element.
 
-Using a HTML input element allows all the OS level operations that an user would expect on a webpage including copy and paste and password managers.
+Using a HTML input element allows all the OS level operations that a user would expect on a webpage including copy and paste and password managers.
 
 If touch is used, there is an assumption that a virtual keyboard would be shown and the HTML input element is positioned accordingly.
 

@@ -17,7 +17,7 @@ The Preview Pane displays the currently selected graph or material and supports 
 
 ### Toolbar
 
-The toolbar offers control over the lighting environment and preview shape. The toolbar is shown below with the controls numbered and brief description of each.
+The toolbar offers control over the lighting environment and preview shape. The toolbar is shown below with the controls numbered and a brief description of each.
 
 ![Preview Pane Toolbar](/img/shader-editor/preview-pane-toolbar.png)
 

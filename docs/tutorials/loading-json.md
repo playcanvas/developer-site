@@ -62,7 +62,7 @@ Game.attributes.add('characterData', {
 Game.prototype.parseCharacterData = function (data) {
     var names = [];
 
-    // Read the character data from the JSON asset return a list of names
+    // Read the character data from the JSON asset and return a list of names
     var characters = data.characters;
     for (var i = 0; i < characters.length; i++) {
         var character = characters[i];
@@ -299,7 +299,7 @@ Game.prototype.initDisplay = function () {
 Game.prototype.parseCharacterData = function (data) {
     var names = [];
 
-    // Read the character data from the JSON asset return a list of names
+    // Read the character data from the JSON asset and return a list of names
     var characters = data.characters;
     for (var i = 0; i < characters.length; i++) {
         var character = characters[i];

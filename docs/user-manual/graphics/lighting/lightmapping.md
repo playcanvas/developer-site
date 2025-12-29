@@ -88,7 +88,7 @@ Depending on the quality and time of rendering in some situations the illuminati
 
 ## Upload to Editor {#upload-to-editor}
 
-At this stage you have your geometry with a second UV channel (UV1) and HDR lightmap textures and it is time to upload them to your PlayCanvas scene and setup the materials. This is done by drag 'n' dropping the files or using the upload button in assets panel. After you've uploaded your geometry it will auto-generate materials. For each material that a lightmap is rendered for you need to set the lightmap texture. Simply select all required materials and drag'n'drop or pick lightmap texture for the Lightmap slot.
+At this stage you have your geometry with a second UV channel (UV1) and HDR lightmap textures and it is time to upload them to your PlayCanvas scene and setup the materials. This is done by dragging and dropping the files or using the upload button in the assets panel. After you've uploaded your geometry it will auto-generate materials. For each material that a lightmap is rendered for you need to set the lightmap texture. Simply select all required materials and drag'n'drop or pick lightmap texture for the Lightmap slot.
 
 ![PlayCanvas Editor: Material Lightmap Texture Slot](/img/user-manual/graphics/lighting/lightmapping/lightmapping-material-slot.png)
 

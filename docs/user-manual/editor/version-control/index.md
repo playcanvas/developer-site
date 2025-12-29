@@ -14,7 +14,7 @@ PlayCanvas has version control tools built directly into the Editor which can be
 
 You may be familiar with other version control systems (VCS), if so this summary will help you get familiar with how PlayCanvas works relative to other version control systems.
 
-You can think of a checkpoint like you would a **commit** in a VCS like Git or Mercurial. Each checkpoint is a point-in-time snapshot of project with an associated message that describes what changes were made in this checkpoint. While you are editing your project your current (un-checkpointed) changes are similar to the **working directory** i.e. you can think of these as your **local changes** (even though in PlayCanvas your local changes are shared with anyone else in the same branch as you).
+You can think of a checkpoint like you would a **commit** in a VCS like Git or Mercurial. Each checkpoint is a point-in-time snapshot of the project with an associated message that describes what changes were made in this checkpoint. While you are editing your project your current (un-checkpointed) changes are similar to the **working directory** i.e. you can think of these as your **local changes** (even though in PlayCanvas your local changes are shared with anyone else in the same branch as you).
 
 You cannot delete a checkpoint, but you can restore a previous checkpoint. Restoring a checkpoint works a little like a `git checkout <commit>` or `hg update -r <commit>`. However, in PlayCanvas we don't allow branches unless they have been explicitly created (no detached heads or similar). When you restore a previous checkpoint future changes will be children of the latest checkpoint in the branch.
 

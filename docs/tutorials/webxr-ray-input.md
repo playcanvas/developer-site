@@ -75,7 +75,7 @@ if (inputSource.grip) {
 
 ## UI
 
-3D UI is created using [Button][6] and [Element][7] components. Using combination of both, we can create interactive buttons in 3D space.
+3D UI is created using [Button][6] and [Element][7] components. Using a combination of both, we can create interactive buttons in 3D space.
 
 Creating a 3D UI for an XR environment is exactly the same as creating a 3D UI for mouse/touch interaction in a non-XR environment. Read more on creating [User Interfaces][3].
 

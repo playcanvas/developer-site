@@ -24,7 +24,7 @@ See the [Layout Groups][0] section for more details.
 
 ## Scripting Interface
 
-You can control an LayoutGroup component's properties using a [script component][2]. The LayoutGroup component's scripting interface is [here][3].
+You can control a LayoutGroup component's properties using a [script component][2]. The LayoutGroup component's scripting interface is [here][3].
 
 [0]: /user-manual/user-interface/layout-groups
 [2]: /user-manual/editor/scenes/components/script
