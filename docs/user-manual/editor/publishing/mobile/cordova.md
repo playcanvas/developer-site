@@ -66,7 +66,7 @@ To build your app for iOS, add the Cordova iOS platform to your project. From th
 cordova platform add ios
 ```
 
-Ensure that the version is `6.0.0` or higher. This is because version `6.0.0` upgraded the wrapper to use WKWebView instead of UIWebView, which bring better performance. Read more on [Cordova's blog][10].
+Ensure that the version is `6.0.0` or higher. This is because version `6.0.0` upgraded the wrapper to use WKWebView instead of UIWebView, which brings better performance. Read more on [Cordova's blog][10].
 
 By default, if you attempt to run a Cordova-based PlayCanvas app, you will encounter several errors/exceptions related to cross-origin HTTP requests. To fix this, add the following to your project's `config.xml`:
 
@@ -82,7 +82,7 @@ By default, if you attempt to run a Cordova-based PlayCanvas app, you will encou
 
 ### Testing for iOS
 
-You are now ready to test your app. For iOS, you can use Simulator or run on a physical iOS device. Simulator is installed as part the Xcode tools, runs on your Mac and simulates the various iOS based devices. To run your app in Simulator, issue the following command:
+You are now ready to test your app. For iOS, you can use Simulator or run on a physical iOS device. Simulator is installed as part of the Xcode tools, runs on your Mac and simulates the various iOS based devices. To run your app in Simulator, issue the following command:
 
 ```sh
 cordova run ios
