@@ -22,7 +22,7 @@ You can use JavaScript to control the behavior of entities. Select any entity, a
 
 To change the background color of your scene, you should update the Clear Color property of the camera in your scene.
 
-You could also try and adding a [skybox](/user-manual/assets/types/cubemap/) to your scene.
+You could also try adding a [skybox](/user-manual/assets/types/cubemap/) to your scene.
 
 [Learn more](/user-manual/editor/scenes/components/camera/)
 
