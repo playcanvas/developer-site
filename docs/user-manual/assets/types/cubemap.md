@@ -74,7 +74,7 @@ An example of a texture set that would match is:
 
 ## Image Based Lighting
 
-This technique allows to use Environment Map such as CubeMap in order to simulate physically based ambient light and reflection on materials. [Read more][6] on how it works and how to author CubeMaps for IBL.
+This technique allows you to use Environment Map such as CubeMap in order to simulate physically based ambient light and reflection on materials. [Read more][6] on how it works and how to author CubeMaps for IBL.
 
 ## Assigning Cubemaps to Materials
 
