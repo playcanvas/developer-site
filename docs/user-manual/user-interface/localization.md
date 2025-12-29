@@ -121,7 +121,7 @@ In the folder, there is Script Type called 'RtlElement' which should be added to
 
 To retrieve the text from a key in script, use the APIs:
 
-- [pc.I18n#getText][3] To retrieve the a non-plural or first text string in a plural list
+- [pc.I18n#getText][3] To retrieve a non-plural or first text string in a plural list
 - [pc.I18n#getPluralText][4] To retrieve a plural text string based on the number
 
 For the complete engine API reference for localization see [this page][2].
