@@ -6,7 +6,7 @@ LayoutChildコンポーネントは、LayoutGroupコンポーネントによっ�
 
 詳細については[レイアウトグループ][0]のセクションを参照してください。
 
-![LayoutChild component](/img/user-manual/scenes/components/component-layoutchild.png)
+![LayoutChild component](/img/user-manual/editor/scenes/components/component-layoutchild.png)
 
 ## Properties
 

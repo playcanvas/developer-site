@@ -6,7 +6,7 @@ The render component enables an entity to render a primitive shape or a render a
 
 The render component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the mesh instances referenced by the component will be added to the scene and rendered.
 
-![Render component](/img/user-manual/scenes/components/component-render.png)
+![Render component](/img/user-manual/editor/scenes/components/component-render.png)
 
 ## Properties
 

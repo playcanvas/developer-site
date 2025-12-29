@@ -12,7 +12,7 @@ The animation system touches on three main areas of the PlayCanvas platform. Thi
 
 In order to begin animating a PlayCanvas entity, you must have a set of animation assets available and imported into your PlayCanvas project. These animation assets will drive the animation of a given model you wish to animate. For example a humanoid character may have a set of animations; Idle, Walk, Jump.
 
-![Animations](/img/user-manual/anim/animations.gif)
+![Animations](/img/user-manual/animation/animations.gif)
 
 These three animations can be organized into a single animation system to create a simple locomotion system for that character. The way this is achieved in PlayCanvas is through the use of an animstategraph asset. These assets can be thought of as state machines for an entity’s animation behavior. With each state in this asset relating to an animation, the state machine can be set up to define the complex animation behavior of an entity’s model. This includes defining when the system should stop one animation and start another and how the transition between these animations should be blended.
 

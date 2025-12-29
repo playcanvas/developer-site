@@ -14,11 +14,11 @@ title: ブランチ
 
 ## 新しいブランチの作成 {#creating-a-new-branch}
 
-![Create branch](/img/user-manual/version-control/branches/new-branch.png)
+![Create branch](/img/user-manual/editor/version-control/branches/new-branch.png)
 
 ブランチを作成するには、バージョンコントロールパネルを開き、ブランチの起点となるチェックポイントを選択し、チェックポイントのドロップダウンメニューから "New Branch" オプションを選択します。
 
-![New branch dialog](/img/user-manual/version-control/branches/new-branch-dialog.png)
+![New branch dialog](/img/user-manual/editor/version-control/branches/new-branch-dialog.png)
 
 ブランチの名前をつけるように求められます。`fix-player-bug`や`refactor-sound-effects`のように、ブランチの内容を表す名前をつけてみてください。ブランチを作成した後、自動的に新しく作成したブランチに切り替えられます。
 
@@ -26,7 +26,7 @@ title: ブランチ
 
 ## ブランチリストのフィルタリング {#filtering-branch-list}
 
-![Branch filter](/img/user-manual/version-control/branches/filter-branches.gif)
+![Branch filter](/img/user-manual/editor/version-control/branches/filter-branches.gif)
 
 次の方法で分岐をフィルタリングできます。
 
@@ -38,21 +38,21 @@ title: ブランチ
 
 ### ドロップダウンメニュー {#drop-down-menu}
 
-![Favorite a branch via menu](/img/user-manual/version-control/branches/favorite-branch-via-dropdown.gif)
+![Favorite a branch via menu](/img/user-manual/editor/version-control/branches/favorite-branch-via-dropdown.gif)
 
 ### 選択されたブランチボタン {#selected-branch-button}
 
-![Favorite a branch via button](/img/user-manual/version-control/branches/favorite-branch-via-button.gif)
+![Favorite a branch via button](/img/user-manual/editor/version-control/branches/favorite-branch-via-button.gif)
 
 ## ブランチの検索 {#searching-for-a-branch}
 
-![Searching for a branch](/img/user-manual/version-control/branches/search-for-a-branch.gif)
+![Searching for a branch](/img/user-manual/editor/version-control/branches/search-for-a-branch.gif)
 
 現在のブランチリストで特定のブランチを探すためには、上部の検索バーを使用すると便利です。
 
 ## ブランチの切り替え (Switch) {#switching-to-a-branch}
 
-![Switch branch](/img/user-manual/version-control/branches/switch-branch.png)
+![Switch branch](/img/user-manual/editor/version-control/branches/switch-branch.png)
 
 ブランチを切り替えるには、バージョン管理パネルを開き、切り替えたいブランチを選択し、ブランチのドロップダウンメニューから "Switch to this branch" オプションを選択します。
 
@@ -60,13 +60,13 @@ title: ブランチ
 
 ## ブランチのクローズ (Close) {#closing-a-branch}
 
-![Close branch](/img/user-manual/version-control/branches/close-branch.png)
+![Close branch](/img/user-manual/editor/version-control/branches/close-branch.png)
 
 ブランチでの作業が完了した場合、リストから削除することができます。
 
 ブランチをクローズするするには、バージョン管理パネルを開き、閉じたいブランチを選択し、ブランチのドロップダウンメニューから "Close this branch" オプションを選択します。現在のブランチやメインブランチは閉じることができないので注意してください。現在のブランチを閉じる場合は、まず別のブランチに切り替えてください。
 
-![Close branch dialog](/img/user-manual/version-control/branches/close-branch-dialog.png)
+![Close branch dialog](/img/user-manual/editor/version-control/branches/close-branch-dialog.png)
 
 ブランチのクローズを確認するよう求められ、クローズ前にチェックポイントを作成するオプションがあります。これはデフォルトで有効化されています。これらの変更を破棄したい場合は、ここでそのオプションのチェックを外すことができます。
 
@@ -87,10 +87,10 @@ title: ブランチ
 
 ブランチを削除するには、バージョン管理パネルを開き、削除するブランチを選択し、ブランチのドロップダウンメニューで "Delete this branch" を選択します。
 
-![Delete a branch](/img/user-manual/version-control/branches/delete-branch.png)
+![Delete a branch](/img/user-manual/editor/version-control/branches/delete-branch.png)
 
 ダイアログボックスにブランチ名を入力して、ブランチの削除を確認する必要があります。
 
 **注:削除したブランチは復元できません!不安な場合は、ブランチをクローズしてください。**
 
-![Delete a branch warning](/img/user-manual/version-control/branches/delete-branch-dialog.png)
+![Delete a branch warning](/img/user-manual/editor/version-control/branches/delete-branch-dialog.png)

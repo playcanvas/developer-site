@@ -34,7 +34,7 @@ The challenge is working out the performance capabilities of the device and this
 * Using some form of benchmark on the start of the application and observing the frame rate
 * Querying the WebGL renderer data to get the name of the GPU and checking against a known list performance tiers
 
-To get information about the GPU, use the property `pc.GraphicsDevice#unmaskedRenderer`. This will contains a string with the information or an empty string if the browser does not support the property.
+To get information about the GPU, use the property `pc.GraphicsDevice#unmaskedRenderer`. This will contain a string with the information or an empty string if the browser does not support the property.
 
 The string will have something similar to the following:
 

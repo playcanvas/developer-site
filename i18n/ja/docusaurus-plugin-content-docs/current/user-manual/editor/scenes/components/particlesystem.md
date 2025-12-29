@@ -6,7 +6,7 @@ Particle Systemコンポーネントは、3D空間内でパーティクルエミ
 
 Particle Systemコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効化または無効化できます。有効にすると、パーティクルシステムはシーンに追加されてレンダリングされます。
 
-![Particle System component](/img/user-manual/scenes/components/component-particle-system.png)
+![Particle System component](/img/user-manual/editor/scenes/components/component-particle-system.png)
 
 ## Properties
 

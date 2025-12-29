@@ -8,11 +8,11 @@ title: Animレイヤーマスク
 
 Anim State Graphアセットを作成し、Animコンポーネントにアタッチすると、グラフに含まれるレイヤーのリストが表示されます。各レイヤーパネルの下にある **Create Mask** ボタンをクリックすることで、これらのレイヤーのいずれかにマスクを作成することができます。
 
-![Anim Component Create Mask](/img/user-manual/anim/anim_component_create_mask.png)
+![Anim Component Create Mask](/img/user-manual/animation/anim_component_create_mask.png)
 
 これにより、下記に示すレイヤーのマスクインスペクターが開きます。
 
-![Mask Inspector](/img/user-manual/anim/anim_mask_inspector.png)
+![Mask Inspector](/img/user-manual/animation/anim_mask_inspector.png)
 
 マスクインスペクターは、Animコンポーネントが駆動する完全なヒエラルキーを表示します。これは、Animコンポーネントで指定された`root bone`から始まります。ヒエラルキー内の各ボーンは、マスクに含めるために選択することができます。また、特定のボーンを右クリックして、ヒエラルキーの全セクションを含めたり除外したりすることもできます。このマスクで選択されていないボーンは、このマスクのレイヤーで再生されるアニメーションのいずれにも影響されません。
 

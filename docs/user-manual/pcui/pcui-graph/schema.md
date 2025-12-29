@@ -36,7 +36,7 @@ const schema = {
 };
 ```
 
-The schemas above are used to created directed graphs, as they define edges which contain `from` and `to` attributes. These attributes tell an edge which nodes they can connect, creating a directed edge from one node to another.
+The schemas above are used to create directed graphs, as they define edges which contain `from` and `to` attributes. These attributes tell an edge which nodes they can connect, creating a directed edge from one node to another.
 
 When creating visual programming graphs, nodes are not connected directly. Instead, they contain input and output ports which can be connected together. This will need to be expressed in the schema you create. To achieve this, you can add `inPorts` and `outPorts` attributes to your nodes in the schema. These will define a set of ports which will be created on a given node, specifying which edges can connect those ports.
 

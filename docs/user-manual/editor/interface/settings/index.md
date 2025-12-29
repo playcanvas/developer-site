@@ -8,7 +8,7 @@ Project Settings control how your project runs and how the Editor behaves for yo
 
 Load the Settings into the [Inspector](../inspector) by clicking the 'cog' icon on the [Toolbar](../toolbar) or in the [Viewport](../viewport).
 
-![Settings](/img/user-manual/editor/toolbar/settings.png)
+![Settings](/img/user-manual/editor/interface/toolbar/settings.png)
 
 ## Settings Overview
 

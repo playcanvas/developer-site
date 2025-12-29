@@ -10,7 +10,7 @@ Spriteコンポーネントは、[Spriteアセット][1]をシーンに表示さ
 
 シンプルSpriteコンポーネントは、アトラスからの単一のフレームを表示します。
 
-![Simple Sprite](/img/user-manual/scenes/components/component-sprite-simple.png)
+![Simple Sprite](/img/user-manual/editor/scenes/components/component-sprite-simple.png)
 
 ## シンプルSpriteコンポーネントのプロパティ
 
@@ -31,7 +31,7 @@ Spriteコンポーネントは、[Spriteアセット][1]をシーンに表示さ
 
 アニメーションSpriteコンポーネントには、異なるSpriteアセットを再生できる複数のスプライトアニメーションクリップが添付されています。
 
-![Animated Sprite](/img/user-manual/scenes/components/component-sprite-animated.png)
+![Animated Sprite](/img/user-manual/editor/scenes/components/component-sprite-animated.png)
 
 ## アニメーションSpriteコンポーネントのプロパティ
 

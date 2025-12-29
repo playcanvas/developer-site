@@ -6,11 +6,11 @@ Scriptコンポーネントは、エンティティがユーザーが提供し�
 
 Scriptコンポーネントは、コンポーネントパネルの右上のトグルを使用して有効または無効にできます。有効にした場合、すべての割り当てられたスクリプトは、毎フレーム update関数が呼び出されます。
 
-![Script component](/img/user-manual/scenes/components/component-script.png)
+![Script component](/img/user-manual/editor/scenes/components/component-script.png)
 
 新しいスクリプトを作成するには、Assetsパネルの **`+`** ボタンをクリックし、New Scriptを選択します。次に、ポップアップでスクリプトの名前を入力してEnterキーを押します。
 
-<img loading="lazy" src="/img/user-manual/scenes/components/new-script.jpg" />
+<img loading="lazy" src="/img/user-manual/editor/scenes/components/new-script.jpg" />
 
 その後、新しいスクリプトをScriptコンポーネントにドラッグ&ドロップするか、ScriptコンポーネントのインスペクタでーAdd ScriptボタンをクリックしてAssetsパネルから選択します。
 

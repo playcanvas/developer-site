@@ -12,7 +12,7 @@ Modelコンポーネントを使用すると、エンティティにプリミテ
 
 Modelコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、モデルがシーンに追加され、レンダリングされます。
 
-![Model component](/img/user-manual/scenes/components/component-model.png)
+![Model component](/img/user-manual/editor/scenes/components/component-model.png)
 
 ## Properties
 

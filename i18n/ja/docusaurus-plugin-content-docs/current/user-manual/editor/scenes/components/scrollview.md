@@ -6,7 +6,7 @@ Scrollviewコンポーネントは、ユーザーインターフェース内の�
 
 詳細については、[ユーザーインターフェイス][2]のセクションを参照してください。
 
-![Scrollview Component](/img/user-manual/scenes/components/component-scrollview.png)
+![Scrollview Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
 
 ## コンポーネントのプロパティ
 

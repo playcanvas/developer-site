@@ -6,7 +6,7 @@ Cameraコンポーネントは、特定の視点からシーンをレンダリ�
 
 Cameraコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にすることができます。有効にすると、カメラは毎フレームシーンをレンダリングします。
 
-![Camera component](/img/user-manual/scenes/components/component-camera.png)
+![Camera component](/img/user-manual/editor/scenes/components/component-camera.png)
 
 ## Properties
 

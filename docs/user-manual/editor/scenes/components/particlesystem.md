@@ -6,7 +6,7 @@ The Particle System component specifies a particle emitter in 3D space.
 
 The Particle System component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the particle system will be added to the scene and rendered.
 
-![Particle System component](/img/user-manual/scenes/components/component-particle-system.png)
+![Particle System component](/img/user-manual/editor/scenes/components/component-particle-system.png)
 
 ## Properties
 

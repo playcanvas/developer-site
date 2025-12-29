@@ -12,7 +12,7 @@ The Animation component enables an entity to specify which animations can be app
 
 The Animation component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the component will play the assigned animation.
 
-![Animation component](/img/user-manual/scenes/components/component-animation.png)
+![Animation component](/img/user-manual/editor/scenes/components/component-animation.png)
 
 ## Properties
 

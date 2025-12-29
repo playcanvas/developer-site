@@ -14,7 +14,7 @@ To confirm if you are running using the software renderer, visit [WebGL Report][
 
 ## PlayCanvas and other WebGL applications do not load in Firefox
 
-Firefox contains a blacklist of GPUs (graphics processors) and graphics card drivers which it will block from running WebGL content. In these cases Firefox not allow the application to create a WebGL context and the PlayCanvas application cannot start. It is possible that upgrading your graphics card drivers will enable the application to run.
+Firefox contains a blacklist of GPUs (graphics processors) and graphics card drivers which it will block from running WebGL content. In these cases Firefox will not allow the application to create a WebGL context and the PlayCanvas application cannot start. It is possible that upgrading your graphics card drivers will enable the application to run.
 
 You can view the blacklisted cards [here][2].
 

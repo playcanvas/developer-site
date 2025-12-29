@@ -84,7 +84,7 @@ Some maps only require a single grayscale value e.g. 0.0 -> 1.0. In this case it
 
 ### Offset & Tiling
 
-<img loading="lazy" src="/img/user-manual/material-inspector/offset-tiling.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/offset-tiling.jpg" width="300" />
 
 | Property          | Description |
 |-------------------|-------------|
@@ -96,7 +96,7 @@ Some maps only require a single grayscale value e.g. 0.0 -> 1.0. In this case it
 
 Ambient properties determine how the material appears in ambient light.
 
-<img loading="lazy" src="/img/user-manual/material-inspector/ambient.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/ambient.jpg" width="300" />
 
 | Property   | Description |
 |------------|-------------|
@@ -108,7 +108,7 @@ Ambient properties determine how the material appears in ambient light.
 
 Diffuse properties define how a material reflects diffuse light emitted by dynamic light sources in the scene.
 
-<img loading="lazy" src="/img/user-manual/material-inspector/diffuse.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/diffuse.jpg" width="300" />
 
 | Property   | Description |
 |------------|-------------|
@@ -120,7 +120,7 @@ Diffuse properties define how a material reflects diffuse light emitted by dynam
 
 Specular properties define the color of the specular highlights, i.e. the shininess.
 
-<img loading="lazy" src="/img/user-manual/material-inspector/specular.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/specular.jpg" width="300" />
 
 | Property      | Description |
 |---------------|-------------|
@@ -136,7 +136,7 @@ Specular properties define the color of the specular highlights, i.e. the shinin
 
 Emissive properties control how the material emits light (as opposed to reflecting light).
 
-<img loading="lazy" src="/img/user-manual/material-inspector/emissive.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/emissive.jpg" width="300" />
 
 | Property   | Description |
 |------------|-------------|
@@ -149,7 +149,7 @@ Emissive properties control how the material emits light (as opposed to reflecti
 
 Opacity sets the transparency level.
 
-<img loading="lazy" src="/img/user-manual/material-inspector/opacity.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/opacity.jpg" width="300" />
 
 | Property   | Description |
 |------------|-------------|
@@ -160,7 +160,7 @@ Opacity sets the transparency level.
 
 Use this to specify normal maps (these determine bumpiness - note you have to use normal maps in PlayCanvas, not height maps).
 
-<img loading="lazy" src="/img/user-manual/material-inspector/normals.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/normals.jpg" width="300" />
 
 | Property   | Description |
 |------------|-------------|
@@ -171,7 +171,7 @@ Use this to specify normal maps (these determine bumpiness - note you have to us
 
 A parallax map gives further realism to a normal map by giving the illusion of depth to a surface. Note that parallax options are only enabled if you have set a normal map on the material.
 
-<img loading="lazy" src="/img/user-manual/material-inspector/parallax.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/parallax.jpg" width="300" />
 
 | Property    | Description |
 |-------------|-------------|
@@ -182,7 +182,7 @@ A parallax map gives further realism to a normal map by giving the illusion of d
 
 Environment properties determine how a material reflects the environment.
 
-<img loading="lazy" src="/img/user-manual/material-inspector/environment.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/environment.jpg" width="300" />
 
 | Property            | Description |
 |---------------------|-------------|
@@ -196,7 +196,7 @@ Environment properties determine how a material reflects the environment.
 
 Light maps contain pre-baked diffuse lighting. Using light maps is considered an optimization in that runtime dynamic lighting calculations can be pre-calculated.
 
-<img loading="lazy" src="/img/user-manual/material-inspector/lightmap.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/lightmap.jpg" width="300" />
 
 | Property   | Description |
 |------------|-------------|
@@ -206,7 +206,7 @@ Light maps contain pre-baked diffuse lighting. Using light maps is considered an
 
 Other Render States gives additional controls over how a mesh is rendered with the specified material.
 
-<img loading="lazy" src="/img/user-manual/material-inspector/other.jpg" width="300" />
+<img loading="lazy" src="/img/user-manual/assets/types/material/other.jpg" width="300" />
 
 | Property        | Description |
 |-----------------|-------------|

@@ -6,7 +6,7 @@ Scrollbarコンポーネントは、[Scrollview][1]コンポーネント用の�
 
 詳細については、[ユーザーインターフェイス][2]のセクションを参照してください。
 
-![Scrollbar Component](/img/user-manual/scenes/components/component-scrollbar.png)
+![Scrollbar Component](/img/user-manual/editor/scenes/components/component-scrollbar.png)
 
 ## コンポーネントのプロパティ
 

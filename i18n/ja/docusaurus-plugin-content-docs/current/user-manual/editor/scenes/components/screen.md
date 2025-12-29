@@ -6,7 +6,7 @@ Screenコンポーネントは、ユーザーインターフェースの領域�
 
 詳細については、「[User Interface][0]」セクションを参照してください。
 
-![Screen Component](/img/user-manual/scenes/components/component-screen.png)
+![Screen Component](/img/user-manual/editor/scenes/components/component-screen.png)
 
 ## コンポーネントのプロパティ
 

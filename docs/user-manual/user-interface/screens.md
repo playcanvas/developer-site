@@ -42,7 +42,7 @@ You can see that the user interface now works at both resolutions.
 
 ### How is the scale factor calculated?
 
-We use the *Reference Resolution* property of the Screen component as the "ideal" resolution. If your application is displayed at a larger resolution than the reference, then it is scaled up. If it is displayed at a smaller resolution than the reference it is scaled down. Because applications may need to respond differently to horizontal or vertical changes we also expose the Scale Blend property which determines which axis to use. Scale Blend of 0 only uses the horizontal resolution, Scale Blend of 1 only uses the vertical resolution, Scale Blend of 0.5 uses both in equal quantities
+We use the *Reference Resolution* property of the Screen component as the "ideal" resolution. If your application is displayed at a larger resolution than the reference, then it is scaled up. If it is displayed at a smaller resolution than the reference it is scaled down. Because applications may need to respond differently to horizontal or vertical changes we also expose the Scale Blend property which determines which axis to use. Scale Blend of 0 only uses the horizontal resolution, Scale Blend of 1 only uses the vertical resolution, Scale Blend of 0.5 uses both in equal quantities.
 
 In these examples you can see how changing the Scale Blend property affects how the interface responds to rotating from Portrait to Landscape
 

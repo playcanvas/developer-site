@@ -38,7 +38,7 @@ For example, setting the anchor to `[0,0,0,0]` will anchor the element to the bo
 
 ## Split Anchors {#split-anchors}
 
-Sometimes it is useful to anchor different edges of an Element to different places. For example, if you wish to make a element that stretches to fill the screen whatever the resolution. You can do this by splitting the anchor's min and max values.
+Sometimes it is useful to anchor different edges of an Element to different places. For example, if you wish to make an Element that stretches to fill the screen whatever the resolution. You can do this by splitting the anchor's min and max values.
 
 ![Split Anchor](/img/user-manual/user-interface/elements/split-anchor.png)
 

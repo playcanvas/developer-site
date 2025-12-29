@@ -12,7 +12,7 @@ The Model component enables an entity to render a primitive shape or a model ass
 
 The Model component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the model will be added to the scene and rendered.
 
-![Model component](/img/user-manual/scenes/components/component-model.png)
+![Model component](/img/user-manual/editor/scenes/components/component-model.png)
 
 ## Properties
 

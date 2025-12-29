@@ -6,7 +6,7 @@ The LayoutChild component enables an element that is controlled by a LayoutGroup
 
 See the [Layout Groups][0] section for more details.
 
-![LayoutChild component](/img/user-manual/scenes/components/component-layoutchild.png)
+![LayoutChild component](/img/user-manual/editor/scenes/components/component-layoutchild.png)
 
 ## Properties
 

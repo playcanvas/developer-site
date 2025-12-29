@@ -109,7 +109,7 @@ The [thai-language.com site also has a separate tool][8] to add the zero width c
 
 Right to left languages will need extra scripts for support that can be found in this [example project][10].
 
-In the example project, there is a folder called 'Rtl Support' that needs to [copied and pasted][11] into your project.
+In the example project, there is a folder called 'Rtl Support' that needs to be [copied and pasted][11] into your project.
 
 ![](/img/user-manual/user-interface/localization/rtl-asset-folder.png)
 

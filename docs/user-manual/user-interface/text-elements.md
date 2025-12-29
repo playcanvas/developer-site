@@ -82,7 +82,7 @@ Increase Line Height to increase line spacing:
 
 ## Spacing
 
-The spacing property increase the distance between characters in a string. Fonts define the ideal distance to move the cursor forward for each character. The spacing property is a multiplier to this distance.
+The spacing property increases the distance between characters in a string. Fonts define the ideal distance to move the cursor forward for each character. The spacing property is a multiplier to this distance.
 
 ![Spacing](/img/user-manual/user-interface/text-element/spacing.png)
 
