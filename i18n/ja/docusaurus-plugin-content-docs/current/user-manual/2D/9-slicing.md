@@ -46,5 +46,5 @@ Spriteアセットには、3つの描画モードがあります。
 *Tiled* 描画モードは *Sliced*に似ていますが、セクションが伸びる代わりに、タイル状に繰り返します。中心は水平および垂直にタイル状になり、左右は垂直にタイル状になり、上下は水平にタイル状になり、角は全くタイル状になりません。
 
 [2]: /user-manual/2D/sprite-editor
-[3]: /user-manual/scenes/components/sprite
-[4]: /user-manual/scenes/components/element
+[3]: /user-manual/editor/scenes/components/sprite
+[4]: /user-manual/editor/scenes/components/element

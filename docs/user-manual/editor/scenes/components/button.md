@@ -43,7 +43,7 @@ The Button Component can be used in two Transition Modes. *Sprite Swap*, which u
 
 You can control the properties of a Button component using a [script component][5]. The scripting interface for the Button component is [here][6].
 
-[1]: /user-manual/scenes/components/screen
-[2]: /user-manual/scenes/components/element
-[5]: /user-manual/scenes/components/script
+[1]: /user-manual/editor/scenes/components/screen
+[2]: /user-manual/editor/scenes/components/element
+[5]: /user-manual/editor/scenes/components/script
 [6]: https://api.playcanvas.com/engine/classes/ButtonComponent.html

@@ -62,6 +62,6 @@ Animated Sprite Components have multiple Sprite Animation Clips attached which c
 You can control the properties of a Sprite component using a [script component][4]. The scripting interface for the Sprite component is [here][5].
 
 [1]: /user-manual/assets/types/sprite
-[4]: /user-manual/scenes/components/script
+[4]: /user-manual/editor/scenes/components/script
 [5]: https://api.playcanvas.com/engine/classes/SpriteComponent.html
 [6]: /user-manual/graphics/advanced-rendering/batching

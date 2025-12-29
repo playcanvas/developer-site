@@ -47,5 +47,5 @@ Particle Systemコンポーネントは、コンポーネントパネルの右�
 
 Particle Systemコンポーネントのプロパティは[script component][2]を使用して制御できます。Particle Systemコンポーネントのスクリプティングインターフェイスは[こちら][3]です。
 
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html

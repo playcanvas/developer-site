@@ -62,9 +62,9 @@ this.entity.sound.slot('speech').clearExternalNodes();
 Soundコンポーネント APIの詳細については[こちら][8]をご覧ください。
 
 [1]: https://playcanvas.com/editor/scene/440346
-[2]: /user-manual/scenes/components/sound
+[2]: /user-manual/editor/scenes/components/sound
 [3]: /tutorials/basic-audio/
-[4]: /user-manual/scenes/components/script
+[4]: /user-manual/editor/scenes/components/script
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode/buffer

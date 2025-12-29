@@ -27,7 +27,7 @@ PlayCanvasエンジンは、3Dゲームやアプリを素早く簡単に作成�
 *アートワークは[PixelBoy](https://twitter.com/2pblog1)によって作成されました。*
 
 [0]: /user-manual/assets/types/sprite
-[1]: /user-manual/scenes/components/sprite
+[1]: /user-manual/editor/scenes/components/sprite
 [2]: /user-manual/assets/types/texture-atlas
 [3]: /user-manual/assets/types/texture
 [4]: /user-manual/2D/sprite-editor

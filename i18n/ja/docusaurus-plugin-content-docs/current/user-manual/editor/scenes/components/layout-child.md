@@ -25,5 +25,5 @@ LayoutChildコンポーネントは、LayoutGroupコンポーネントによっ�
 [Scriptコンポーネント][2]を使用して、LayoutChildコンポーネントのプロパティを制御できます。LayoutChildコンポーネントのスクリプトインターフェースは[こちら][3]です。
 
 [0]: /user-manual/user-interface/layout-groups
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/LayoutChildComponent.html

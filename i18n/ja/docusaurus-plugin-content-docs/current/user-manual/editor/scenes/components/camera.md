@@ -27,5 +27,5 @@ Cameraコンポーネントは、コンポーネントパネルの右上にあ�
 
 [Scriptコンポーネント][2]を使用して、Cameraコンポーネントのプロパティを制御できます。Cameraコンポーネントのスクリプトインターフェースは[こちら][3]です。
 
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/CameraComponent.html

@@ -6,5 +6,5 @@ title: Animコンポーネント
 
 ![New Anim Component][2]
 
-[1]: /user-manual/scenes/components/anim/
+[1]: /user-manual/editor/scenes/components/anim/
 [2]: /img/user-manual/anim/new_anim_component.png

@@ -4,7 +4,7 @@ title: Animation
 
 :::warning
 
-The Animation component is deprecated. It has been replaced by the [Anim](/user-manual/scenes/components/anim) component.
+The Animation component is deprecated. It has been replaced by the [Anim](/user-manual/editor/scenes/components/anim) component.
 
 :::
 
@@ -27,5 +27,5 @@ The Animation component can be enabled or disabled using the toggle in the top r
 
 You can control an Animation component's properties using a [script component][2]. The Animation component's scripting interface is [here][3].
 
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/AnimationComponent.html

@@ -44,5 +44,5 @@ Lightコンポーネントは、コンポーネントパネルの右上にある
 
 Lightコンポーネントのプロパティを[Scriptコンポーネント][4]を使用して制御できます。Lightコンポーネントのスクリプトインターフェースは[こちら][5]です。
 
-[4]: /user-manual/scenes/components/script
+[4]: /user-manual/editor/scenes/components/script
 [5]: https://api.playcanvas.com/engine/classes/LightComponent.html

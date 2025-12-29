@@ -39,6 +39,6 @@ this.entity.particlesystem.play();
 
 ソフトパーティクルは、シーンジオメトリと交差する場所近くでフェードアウトするパーティクルのことを意味します。[```depthSoftening```][5]を使用してSoftパーティクルを有効にした場合は、パーティクルを描画するカメラに[Depthマップ][6]レンダリングを有効にする必要があります。
 
-[4]: /user-manual/scenes/components/particlesystem
+[4]: /user-manual/editor/scenes/components/particlesystem
 [5]: https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html#depthsoftening
 [6]: /user-manual/graphics/cameras/depth-layer

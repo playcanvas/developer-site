@@ -27,5 +27,5 @@ See the [Layout Groups][0] section for more details.
 You can control an LayoutGroup component's properties using a [script component][2]. The LayoutGroup component's scripting interface is [here][3].
 
 [0]: /user-manual/user-interface/layout-groups
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html

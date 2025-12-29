@@ -37,6 +37,6 @@ Note that you must add a [collision component][4] to the same entity in order to
 
 You can control a Rigid Body component's properties using a [script component][5]. The Rigid Body component's scripting interface is [here][6].
 
-[4]: /user-manual/scenes/components/collision/
-[5]: /user-manual/scenes/components/script
+[4]: /user-manual/editor/scenes/components/collision/
+[5]: /user-manual/editor/scenes/components/script
 [6]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html

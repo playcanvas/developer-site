@@ -85,7 +85,7 @@ In this animation we have created 4 batch groups for the buildings, the cacti, t
 - **Batch Manager** - The programmatic interface for creating and updating batches at runtime. See [API documentation][8].
 
 [6]: /user-manual/editor/interface/settings/batch-groups/
-[7]: /user-manual/scenes/components/model
+[7]: /user-manual/editor/scenes/components/model
 [8]: https://api.playcanvas.com/engine/classes/BatchManager.html
-[9]: /user-manual/scenes/components/sprite
-[10]: /user-manual/scenes/components/element
+[9]: /user-manual/editor/scenes/components/sprite
+[10]: /user-manual/editor/scenes/components/element

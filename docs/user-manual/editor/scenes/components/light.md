@@ -44,5 +44,5 @@ The Light component can be enabled or disabled using the toggle in the top right
 
 You can control a Light component's properties using a [script component][4]. The Light component's scripting interface is [here][5].
 
-[4]: /user-manual/scenes/components/script
+[4]: /user-manual/editor/scenes/components/script
 [5]: https://api.playcanvas.com/engine/classes/LightComponent.html

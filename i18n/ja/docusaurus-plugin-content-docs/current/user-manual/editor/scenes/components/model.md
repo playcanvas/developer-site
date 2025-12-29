@@ -4,7 +4,7 @@ title: Model
 
 :::warning
 
-Modelコンポーネントは非推奨です。これは[Render](/user-manual/scenes/components/render)コンポーネントに置き換えられました。
+Modelコンポーネントは非推奨です。これは[Render](/user-manual/editor/scenes/components/render)コンポーネントに置き換えられました。
 
 :::
 
@@ -35,7 +35,7 @@ Modelコンポーネントは、コンポーネントパネルの右上にある
 
 モデルのマテリアルをカスタマイズする方法については、[こちら][4]を参照してください。
 
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/ModelComponent.html
 [4]: /user-manual/assets/types/material/#assigning-materials
 [5]: /user-manual/graphics/advanced-rendering/batching

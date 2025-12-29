@@ -46,5 +46,5 @@ Sprite Assets can have one of three Render Modes.
 *Tiled* Render Mode is similar to *Sliced* mode except instead of stretching the sections repeat in tiled manner. The center tiles horizontally and vertically; the left and right tile vertically; the top and bottom tile horizontally and the corners do not tile at all.
 
 [2]: /user-manual/2D/sprite-editor
-[3]: /user-manual/scenes/components/sprite
-[4]: /user-manual/scenes/components/element
+[3]: /user-manual/editor/scenes/components/sprite
+[4]: /user-manual/editor/scenes/components/element

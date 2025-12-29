@@ -27,5 +27,5 @@ The render component can be enabled or disabled using the toggle in the top righ
 
 You can control a render component's properties using a [script component][2]. The render component's scripting interface is [here][3].
 
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/RenderComponent.html

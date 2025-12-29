@@ -27,5 +27,5 @@ LayoutGroupコンポーネントは、エンティティが子ElementのElement�
 [Scriptコンポーネント][2]を使用してLayoutGroupコンポーネントのプロパティを制御できます。 LayoutGroupコンポーネントのスクリプトインターフェイスは[こちら][3]にあります。
 
 [0]: /user-manual/user-interface/layout-groups
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html

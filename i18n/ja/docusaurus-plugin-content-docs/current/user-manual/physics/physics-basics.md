@@ -97,8 +97,8 @@ Movement.prototype.update = function(dt) {
 Kinematicボディで標準エンティティ変換関数を使用することはできますが、ダイナミックボディでは許可されていません。DynamicRigidBodyを作成するとき、そのエンティティの位置と方向の設定は物理エンジンが行うようになります。つまり、pc.Entity APIを使用してスクリプト内のエンティティの位置または方向を更新しようとすると、関数の効果は無効になります。代わりに、RigidBodyのテレポート機能を呼び出して、RigidBodyの位置や方向を瞬間的に更新する物理エンジンに明示的に通知する必要があります。
 
 [1]: https://github.com/kripken/ammo.js
-[2]: /user-manual/scenes/components/rigidbody/
-[3]: /user-manual/scenes/components/collision/
+[2]: /user-manual/editor/scenes/components/rigidbody/
+[3]: /user-manual/editor/scenes/components/collision/
 [10]: /user-manual/physics/physics-migration/
 [11]: /user-manual/assets/types/wasm/
 [12]: /user-manual/physics/compound-shapes/

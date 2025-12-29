@@ -43,7 +43,7 @@ Buttonコンポーネントは、2つのトランジションモードで使用�
 
 Buttonコンポーネントのプロパティは、[Scriptコンポーネント][5]を使用して制御できます。 Buttonコンポーネントのスクリプティングインターフェースは[こちら][6]です。
 
-[1]: /user-manual/scenes/components/screen
-[2]: /user-manual/scenes/components/element
-[5]: /user-manual/scenes/components/script
+[1]: /user-manual/editor/scenes/components/screen
+[2]: /user-manual/editor/scenes/components/element
+[5]: /user-manual/editor/scenes/components/script
 [6]: https://api.playcanvas.com/engine/classes/ButtonComponent.html

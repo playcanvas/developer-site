@@ -91,5 +91,5 @@ Enabling shadows has performance implications:
 * Selecting soft shadows (PCF3x3) for the shadow sample type on a shadow receiving material is more expensive on the GPU versus the hard shadows option.
 * If your shadows are from static parts of the environment consider using [lightmaps][4] to bake shadows into textures.
 
-[2]: /user-manual/scenes/components/light
+[2]: /user-manual/editor/scenes/components/light
 [4]: /user-manual/graphics/lighting/lightmapping

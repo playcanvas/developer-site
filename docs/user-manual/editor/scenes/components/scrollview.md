@@ -26,5 +26,5 @@ See the [User Interface][2] section for more details.
 | Scrollbar (vertical)    | The entity to be used as the vertical scrollbar. This entity must have a Scrollbar component. |
 | Visibility (vertical)   | Controls whether the vertical scrollbar should be visible all the time, or only visible when the content exceeds the size of the viewport. |
 
-[1]: /user-manual/scenes/components/scrollbar
+[1]: /user-manual/editor/scenes/components/scrollbar
 [2]: /user-manual/user-interface

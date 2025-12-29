@@ -14,4 +14,4 @@ import Link from '@docusaurus/Link';
 
 <Link to='https://playcanvas.com/project/437633/'>プロジェクトを開く ↗</Link>
 
-[documentation-page]: /user-manual/scenes/loading-scenes/
+[documentation-page]: /user-manual/editor/scenes/loading-scenes/

@@ -4,7 +4,7 @@ title: Model
 
 :::warning
 
-The Model component is deprecated. It has been replaced by the [Render](/user-manual/scenes/components/render) component.
+The Model component is deprecated. It has been replaced by the [Render](/user-manual/editor/scenes/components/render) component.
 
 :::
 
@@ -35,7 +35,7 @@ You can control a Model component's properties using a [script component][2]. Th
 
 You can learn how to customize the materials of your model [here][4].
 
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/ModelComponent.html
 [4]: /user-manual/assets/types/material/#assigning-materials
 [5]: /user-manual/graphics/advanced-rendering/batching

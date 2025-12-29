@@ -4,7 +4,7 @@ title: Animation
 
 :::warning
 
-Animationコンポーネントは非推奨です。これは[Anim](/user-manual/scenes/components/anim)コンポーネントに置き換えられました。
+Animationコンポーネントは非推奨です。これは[Anim](/user-manual/editor/scenes/components/anim)コンポーネントに置き換えられました。
 
 :::
 
@@ -27,5 +27,5 @@ Animationコンポーネントは、コンポーネントパネルの右上に�
 
 [Scriptコンポーネント][2]を使用してAnimationコンポーネントのプロパティを制御することができます。Animationコンポーネントのスクリプトインターフェースは[こちら][3]です。
 
-[2]: /user-manual/scenes/components/script
+[2]: /user-manual/editor/scenes/components/script
 [3]: https://api.playcanvas.com/engine/classes/AnimationComponent.html
