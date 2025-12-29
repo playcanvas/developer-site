@@ -10,7 +10,7 @@ In general you can separate a web application into 3 parts: Server-side, Client-
 
 ### Server-side Code
 
-When a user opens a link in their web browser the browser sends a request to a server somewhere on the internet asking for an HTML page. At its simplest this is a page of text that sits on a hard disk on the web server and is set back over the internet to the browser.
+When a user opens a link in their web browser the browser sends a request to a server somewhere on the internet asking for an HTML page. At its simplest this is a page of text that sits on a hard disk on the web server and is sent back over the internet to the browser.
 
 For web pages which are documents for displaying text or images this works very well. But in order to provide a level of interactivity often a server will do some processing after receiving the request and then **render** a page of HTML including the results of that processing.
 
@@ -31,7 +31,7 @@ For example, in PHP you could show the current date and time, inside your page.
 </html>
 ```
 
-This PHP code creates an HTML page like below and send it to the browser to display.
+This PHP code creates an HTML page like below and sends it to the browser to display.
 
 ```html
 <html>
