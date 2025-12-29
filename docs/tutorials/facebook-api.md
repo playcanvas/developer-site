@@ -10,7 +10,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 
 :::info
 
-Log in with facebook to see your photos in a 3D sculpture.
+Log in with Facebook to see your photos in a 3D sculpture.
 
 :::
 
