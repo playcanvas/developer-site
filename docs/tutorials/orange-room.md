@@ -6,7 +6,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/3453
 
 import Link from '@docusaurus/Link';
 
-Interactive interior visualisation with dynamic reflections and HDR lightmaps.
+Interactive interior visualization with dynamic reflections and HDR lightmaps.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/1ha5glKf/" title="Orange Room" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
