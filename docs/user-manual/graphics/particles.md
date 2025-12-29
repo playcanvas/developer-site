@@ -39,6 +39,6 @@ this.entity.particlesystem.play();
 
 Soft particles are particles that are faded out near their intersections with scene geometry. If soft particles are enabled by using [```depthSoftening```][5], the camera which renders the particles needs to have a [Depth Map][6] rendering enabled.
 
-[4]: /user-manual/scenes/components/particlesystem
+[4]: /user-manual/editor/scenes/components/particlesystem
 [5]: https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html#depthsoftening
 [6]: /user-manual/graphics/cameras/depth-layer

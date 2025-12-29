@@ -197,4 +197,4 @@ TouchFix.prototype.initialize = function() {
 </TabItem>
 </Tabs>
 
-[1]: /user-manual/scenes/components/element/
+[1]: /user-manual/editor/scenes/components/element/

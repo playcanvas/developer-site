@@ -94,7 +94,7 @@ You can only have one AudioListener at a time. The last AudioListener Component 
 
 :::
 
-[1]: /user-manual/scenes/components/sound
-[2]: /user-manual/scenes/components/audiolistener
+[1]: /user-manual/editor/scenes/components/sound
+[2]: /user-manual/editor/scenes/components/audiolistener
 [3]: https://playcanvas.com/editor/scene/440098
 [4]: /user-manual/assets/importing

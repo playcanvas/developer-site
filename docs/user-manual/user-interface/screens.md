@@ -55,4 +55,4 @@ With a value of 1 the decrease in vertical resolution makes the button too small
 ![Scale Blend 0.5](/img/user-manual/user-interface/screens/scale-blend-0.5.png)
 With a value of 0.5 the two changes are balanced and the button stays the same size
 
-[1]: /user-manual/scenes/components/screen
+[1]: /user-manual/editor/scenes/components/screen

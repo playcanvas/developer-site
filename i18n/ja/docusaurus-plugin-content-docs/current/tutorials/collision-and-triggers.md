@@ -135,5 +135,5 @@ Collider.prototype.onCollisionStart = function (result) {
 以上がPlayCanvasでの衝突とトリガーの処理方法です。
 
 [1]: https://playcanvas.com/project/405871
-[5]: /user-manual/scenes/components/rigidbody/
+[5]: /user-manual/editor/scenes/components/rigidbody/
 [8]: https://api.playcanvas.com/engine/classes/Entity.html

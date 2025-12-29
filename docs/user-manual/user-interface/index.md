@@ -20,5 +20,5 @@ The primary downside of using the DOM is performance. The DOM is not designed to
 
 The rest of this user guide will focus on the Screen and Element component system and using them to build user interfaces in PlayCanvas.
 
-[2]: /user-manual/scenes/components/screen
-[3]: /user-manual/scenes/components/element
+[2]: /user-manual/editor/scenes/components/screen
+[3]: /user-manual/editor/scenes/components/element

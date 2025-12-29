@@ -87,6 +87,6 @@ UiMenu.prototype.start = function (e) {
 [4]: /tutorials/keepyup-part-four/
 [5]: /tutorials/keepyup-part-five/
 [6]: /user-manual/user-interface/
-[7]: /user-manual/scenes/components/screen/
-[8]: /user-manual/scenes/components/element/
+[7]: /user-manual/editor/scenes/components/screen/
+[8]: /user-manual/editor/scenes/components/element/
 [11]: https://playcanvas.com/project/406050

@@ -24,4 +24,4 @@ TriggerVolume.prototype.initialize = function() {
 };
 ```
 
-[1]: /user-manual/scenes/components/collision
+[1]: /user-manual/editor/scenes/components/collision

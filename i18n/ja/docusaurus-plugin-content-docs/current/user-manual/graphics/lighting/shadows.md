@@ -91,5 +91,5 @@ PlayCanvasが使用するシャドウマッピング技術には有限の解像�
 * 影を受けるマテリアルのシャドウサンプルタイプとしてソフトシャドウ(PCF3x3)を選択すると、ハードシャドウのオプションを使用した場合よりも、GPUに負荷がかかります。
 * 影が環境の静的な部分から発生している場合は、[ライトマップ][4]を使用してテクスチャに影をbakeすることを検討してください。
 
-[2]: /user-manual/scenes/components/light
+[2]: /user-manual/editor/scenes/components/light
 [4]: /user-manual/graphics/lighting/lightmapping

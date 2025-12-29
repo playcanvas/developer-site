@@ -20,5 +20,5 @@ DOMを使用する主な欠点はパフォーマンスです。DOMは、高い�
 
 このユーザーガイドの残りの部分では、ScreenとElementコンポーネントシステムに焦点を当て、それらを使用してPlayCanvasでユーザーインターフェイスを構築します。
 
-[2]: /user-manual/scenes/components/screen
-[3]: /user-manual/scenes/components/element
+[2]: /user-manual/editor/scenes/components/screen
+[3]: /user-manual/editor/scenes/components/element

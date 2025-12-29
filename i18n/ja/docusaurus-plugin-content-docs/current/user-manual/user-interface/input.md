@@ -134,4 +134,4 @@ TouchFix.prototype.initialize = function() {
 };
 ```
 
-[1]: /user-manual/scenes/components/element/
+[1]: /user-manual/editor/scenes/components/element/

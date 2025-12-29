@@ -125,8 +125,8 @@ This script simply animates the box along the world x-axis using a sine function
 Although you can use the standard entity transformation function with kinematic bodies, this is not allowed for dynamic bodies. When creating a dynamic rigid body, you pass the responsibility for setting the position and orientation of that entity to the physics engine. This means that if you try to update the position or orientation of an entity in a script using the pc.Entity API, the functions will not have an effect. Instead, you must call the teleport function on the rigid body component which explicitly notifies the physics engine you want to momentarily update a rigid body's position and/or orientation.
 
 [1]: https://github.com/kripken/ammo.js
-[2]: /user-manual/scenes/components/rigidbody/
-[3]: /user-manual/scenes/components/collision/
+[2]: /user-manual/editor/scenes/components/rigidbody/
+[3]: /user-manual/editor/scenes/components/collision/
 [10]: /user-manual/physics/physics-migration/
 [11]: /user-manual/assets/types/wasm/
 [12]: /user-manual/physics/compound-shapes/

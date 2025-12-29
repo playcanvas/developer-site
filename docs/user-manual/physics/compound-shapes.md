@@ -26,4 +26,4 @@ The parent is also the center of mass of the physics object and it is recommende
 
 [primitive-shapes-list]: /user-manual/physics/physics-basics/#rigid-bodies
 [compound-shapes-project]: https://playcanvas.com/project/688146/overview/compound-physics-shapes
-[collision-component]: /user-manual/scenes/components/collision/
+[collision-component]: /user-manual/editor/scenes/components/collision/

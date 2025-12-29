@@ -9,4 +9,4 @@ Any audio format that is supported by the web-browser is supported by PlayCanvas
 Note that not all formats are supported in all browsers. Currently, the most widely supported format is [MP3][mp3].
 
 [mp3]: https://caniuse.com/mp3
-[sound-component]: /user-manual/scenes/components/sound/
+[sound-component]: /user-manual/editor/scenes/components/sound/

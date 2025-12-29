@@ -265,5 +265,5 @@ This is a complete Entity script which you can see in action at the top of the t
 
 See [the full scene here][2].
 
-[1]: /user-manual/scenes/components/
+[1]: /user-manual/editor/scenes/components/
 [2]: https://playcanvas.com/editor/scene/440341

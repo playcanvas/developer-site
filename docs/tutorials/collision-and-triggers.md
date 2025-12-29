@@ -195,5 +195,5 @@ In the ```initialize``` method we set up the event listener, and then in the eve
 And that's all there is to handling Collisions and Triggers in PlayCanvas.
 
 [1]: https://playcanvas.com/project/405871
-[5]: /user-manual/scenes/components/rigidbody/
+[5]: /user-manual/editor/scenes/components/rigidbody/
 [8]: https://api.playcanvas.com/engine/classes/Entity.html
