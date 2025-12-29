@@ -22,7 +22,7 @@ All components will gracefully handle dynamically loading assets and will start 
 
 ## When are assets loaded? {#when-are-assets-loaded}
 
-To determine when a particular asset will be loaded, you can follow these rules.
+To determine when a particular asset will be loaded, you can follow these rules:
 
 * If `preload = true` the asset will be loaded before the application starts. Otherwise:
 * If the asset is referenced by a component that is enabled on an entity that is enabled and in the scene hierarchy then it will be loaded. The asset is loaded at the time the entity or component is enabled or when the asset is assigned to the component. For entities that are enabled in the Editor, this will occur as soon as the application starts just after preloading has finished. A component is defined as enabled if it is enabled and all entities in the hierarchy above it are enabled.
