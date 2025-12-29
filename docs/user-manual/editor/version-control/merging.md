@@ -8,7 +8,7 @@ Merging is the process by which you combine work that has been performed in one 
 
 In PlayCanvas a merge takes two checkpoints from two different branches, calculates the changes that have occurred since their last shared ancestor checkpoint, combines these changes together (sometimes asking for help to resolve conflicting changes) and finally creates a new checkpoint containing the result of the merging of the two checkpoints.
 
-First, it's important to note that when you perform a merge in PlayCanvas you are not actually merging two branches. You are, in fact, merging two checkpoints. This is relevant because you may have changes in one of the two branches that are more recent that the latest checkpoint. In the case of the branch you are merging into PlayCanvas will automatically create a checkpoint to ensure you do not lose any changes.
+First, it's important to note that when you perform a merge in PlayCanvas you are not actually merging two branches. You are, in fact, merging two checkpoints. This is relevant because you may have changes in one of the two branches that are more recent than the latest checkpoint. In the case of the branch you are merging into PlayCanvas will automatically create a checkpoint to ensure you do not lose any changes.
 
 ### Example merges
 
