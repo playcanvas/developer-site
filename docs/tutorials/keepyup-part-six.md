@@ -14,7 +14,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
 
 The user interface of a game is the first thing you see and often it's the last thing people think about when making a game. But a good user interface will not only give your game a great style. It can actively affect the number of people who can play your game.
 
-User Interfaces are built in PlayCanvas using the [Screen Component][7] and the [Element Component][8]. There is more details in the [user manual][6]
+User Interfaces are built in PlayCanvas using the [Screen Component][7] and the [Element Component][8]. There are more details in the [user manual][6]
 
 ### User Interface Entities
 
@@ -137,7 +137,7 @@ We repeat similar behavior in the other two UI scripts where we listen for game 
 
 ## Game Complete
 
-Congratulations on reaching the end of the series! We hope you've learn a lot about how you can structure and build a game using PlayCanvas. If you have any feedback on the tutorial, please get in touch on our [forum][8].
+Congratulations on reaching the end of the series! We hope you've learned a lot about how you can structure and build a game using PlayCanvas. If you have any feedback on the tutorial, please get in touch on our [forum][8].
 
 [1]: /tutorials/keepyup-part-one/
 [2]: /tutorials/keepyup-part-two/
