@@ -92,7 +92,7 @@ The Color property allows you to tint the string to the color of your choice.
 
 ![Tinted](/img/user-manual/user-interface/text-element/tinted.png)
 
-## Tranparency
+## Transparency
 
 The Opacity property allows you to set the transparency of the string
 
