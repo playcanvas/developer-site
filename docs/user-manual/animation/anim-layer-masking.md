@@ -2,7 +2,7 @@
 title: Anim Layer Masks
 ---
 
-When creating complex animation behavior for your game objects, it is often necessary to isolate the playback of certain animations to specific bones in each object's model. This is particularly useful when animating characters that need to carry out multiple actions at the same time. This can be achieved in PlayCanvas by creating an a mask for a given [animation layer](/user-manual/animation/anim-state-graph-assets/#layers) in your anim component.
+When creating complex animation behavior for your game objects, it is often necessary to isolate the playback of certain animations to specific bones in each object's model. This is particularly useful when animating characters that need to carry out multiple actions at the same time. This can be achieved in PlayCanvas by creating a mask for a given [animation layer](/user-manual/animation/anim-state-graph-assets/#layers) in your anim component.
 
 ### Creating a mask
 
