@@ -14,7 +14,7 @@ Click to focus, hold and release SPACEBAR to switch between two A and B models. 
 
 :::
 
-For simple games and products you will set up all your assets in the Editor, they will be preloaded before you application starts, and your app will just work.
+For simple games and products you will set up all your assets in the Editor, they will be preloaded before your application starts, and your app will just work.
 
 For more advanced products you may wish to access your assets in code, change references, modify properties and also stream data in so that your application can load more quickly. Only loading the assets as they are needed. To do this you'll use the [`AssetRegistry`][1].
 
