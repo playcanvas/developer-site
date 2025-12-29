@@ -50,7 +50,7 @@ Depth estimation and availability of the data is subject to the reliability of t
 WebXR supports it only for the CPU-path. Using Depth Sensing, you can measure the distance by providing U and V, which are 0 to 1 coordinates of a screen (left-right and top-bottom).
 
 ```javascript
-// get monoscope view (mobile screens)
+// get monoscopic view (mobile screens)
 const view = app.xr.views.get(pc.XREYE_NONE);
 if (view) {
     // get distance from the middle of a screen
@@ -84,7 +84,7 @@ if (view) {
 
 ### Stereo Views
 
-When using the depth texture in the shader, depending on a monoscope or stereoscope scenario, a different approach should be used. This can be implemented by a `#define` in the shader:
+When using the depth texture in the shader, depending on a monoscopic or stereoscopic scenario, a different approach should be used. This can be implemented by a `#define` in the shader:
 
 ```javascript
 const view = app.xr.views.list[0];
