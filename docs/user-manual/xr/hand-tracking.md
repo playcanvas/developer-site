@@ -46,7 +46,7 @@ Hand tracking is subject to the reliability and sophistication of the underlying
 
 ## Skinning
 
-A skinned mesh for a hand can used. You can check out [this project][5] as an example:
+A skinned mesh for a hand can be used. You can check out [this project][5] as an example:
 
 <img loading="lazy" src="/img/user-manual/xr/skinned-hands.webp" alt="Hand tracking using skinned meshes" width="512" />
 

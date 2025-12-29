@@ -11,12 +11,12 @@ Some of the capabilities can be used either in [VR][1] or [AR][2], and some are 
 | Feature | Description |
 |-|-|
 | [Anchors][4] | Create anchors in space that are reliably positioned in relation to real-world geometry. |
-| [Persistent Anchors][5] | Allows to persist anchors between sessions. |
+| [Persistent Anchors][5] | Allows you to persist anchors between sessions. |
 | [Camera Color][6] | Provides access to a color texture of a view. |
 | [Depth Sensing][9] | Provides access to depth texture and distance querying, that can be used for virtual object occlusion with real-world geometry and reliable object placement. |
-| [DOM Overlay][7] | For monoscopic screens, allows to overlay DOM elements over an AR view. |
+| [DOM Overlay][7] | For monoscopic screens, allows you to overlay DOM elements over an AR view. |
 | [Hand Tracking][8] | Optical hand tracking that tracks each joint of a hand. |
-| [Hit Testing][10] | Allows to ray cast real-world geometry using a ray, to get position and rotation of the intersection point. |
+| [Hit Testing][10] | Allows you to ray cast real-world geometry using a ray to get the position and rotation of the intersection point. |
 | [Image Tracking][11] | Dynamic tracking of provided images, their position, and orientation. |
 | [Input Sources][3] | Various input source types such as controllers, hands, screen taps, gaze, and more. |
 | [Light Estimation][12] | Estimates real-world illumination by providing dominant directional light direction, color, and intensity as well as ambient light information in the form of spherical harmonics. |

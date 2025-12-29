@@ -29,7 +29,7 @@ It is best to subscribe to `add` and `remove` events and then create their visua
 
 ```javascript
 app.xr.input.on('add', (inputSource) => {
-    // input source been added
+    // input source has been added
 
     inputSource.once('remove', () => {
         // know when input source has been removed
