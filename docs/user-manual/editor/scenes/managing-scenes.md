@@ -2,7 +2,7 @@
 title: Managing Scenes
 ---
 
-The Scenes dialog allows you to create, open, duplicate, and delete scenes in your project.
+The Scenes dialog allows you to create, open, duplicate and delete scenes in your project.
 
 ## Opening the Scenes Dialog
 
@@ -50,5 +50,5 @@ Click the dropdown button on the right side of any scene to access additional ac
 | **Open in New Tab** | Opens the scene in a new browser tab. |
 
 :::note
-Creating, duplicating, and deleting scenes requires write access to the project.
+Creating, duplicating and deleting scenes requires write access to the project.
 :::
