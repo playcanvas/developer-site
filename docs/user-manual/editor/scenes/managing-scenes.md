@@ -2,18 +2,53 @@
 title: Managing Scenes
 ---
 
-You can manage your scenes by opening the Scenes dialog.
+The Scenes dialog allows you to create, open, duplicate, and delete scenes in your project.
 
-You can open the Scenes dialog either by clicking on the 'Scenes' menu option in the menu:
+## Opening the Scenes Dialog
 
-![Scenes Menu](/img/user-manual/scenes/managing-scenes/scenes-menu.jpg)
+There are two ways to open the Scenes dialog:
 
-Or by clicking on the Scenes Menu button on the top left inside the 3D viewport:
+1. **Menu** - Click the PlayCanvas logo in the top-left corner and select **Scenes**.
 
-![Scenes Viewport](/img/user-manual/scenes/managing-scenes/scenes-viewport.jpg)
+   ![Menu - Scenes option](/img/user-manual/editor/scenes/managing-scenes/menu-scenes.png)
 
-This will open up the Scenes dialog:
+2. **Scene Name** - Click on the current scene name in the viewport toolbar.
 
-![Scenes](/img/user-manual/scenes/managing-scenes/scenes.jpg)
+   ![Scene name in toolbar](/img/user-manual/editor/scenes/managing-scenes/scene-name-toolbar.png)
 
-You can create a new scene by clicking on "ADD NEW SCENE", you can click on a scene to open it up and you can click on the buttons on the right of each scene to duplicate a scene or delete it. You can also click on the banner icon on the left to make it the first scene loaded when you publish an app or when you export your project. Think of it as the first 'level' in your application.
+## Scenes Dialog Overview
+
+![Scenes dialog](/img/user-manual/editor/scenes/managing-scenes/scenes-dialog.png)
+
+The Scenes dialog displays all scenes in your project:
+
+- **Filter** - Use the search field to filter scenes by name.
+- **Scene List** - Scenes are sorted alphabetically, showing the scene name and last modified date.
+- **Current Scene** - The currently loaded scene is highlighted and its name is selectable for copying.
+
+## Opening a Scene
+
+Click on any scene in the list to open it.
+
+## Creating a New Scene
+
+1. Click the **+ ADD NEW SCENE** button at the bottom of the dialog.
+2. Enter a name for your scene.
+3. Press **Enter** to create and open the new scene.
+
+## Scene Actions Menu
+
+Click the dropdown button on the right side of any scene to access additional actions:
+
+![Scene dropdown menu](/img/user-manual/editor/scenes/managing-scenes/scene-dropdown.png)
+
+| Action | Description |
+|--------|-------------|
+| **Duplicate Scene** | Creates a copy of the scene. The duplicate is automatically named with an incremented number (e.g., "My Scene 2"). |
+| **Delete Scene** | Permanently deletes the scene after confirmation. |
+| **Item History** | Opens the version control history for the scene. |
+| **Open in New Tab** | Opens the scene in a new browser tab. |
+
+:::note
+Creating, duplicating, and deleting scenes requires write access to the project.
+:::
