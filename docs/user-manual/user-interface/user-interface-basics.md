@@ -10,7 +10,7 @@ One big difference between regular Entities and Entities that use an Element Com
 
 ## Draw Order
 
-The graphical portions of the user interface, Image and Text Elements, are drawn in the order that they appear in the hierarchy, i.e. the first child is drawn first, its child is drawn next. A child that is draw later will appear on top of one that is draw earlier.
+The graphical portions of the user interface, Image and Text Elements, are drawn in the order that they appear in the hierarchy, i.e. the first child is drawn first, its child is drawn next. A child that is drawn later will appear on top of one that is drawn earlier.
 
 To change the draw order you simply re-order the entities in the Editor hierarchy. You can re-order elements programmatically by calling `entity.reparent(...)`. Though, note, that this forces the draw order to be recalculated for the entire Screen component.
 
