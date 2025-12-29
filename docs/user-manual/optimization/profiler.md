@@ -2,7 +2,7 @@
 title: Profiler
 ---
 
-PlayCanvas provides an real-time profiler to assist in diagnosing performance problems.
+PlayCanvas provides a real-time profiler to assist in diagnosing performance problems.
 
 ![Profiler](/img/user-manual/optimization/profiler/profiler.png)
 
