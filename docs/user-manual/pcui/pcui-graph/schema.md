@@ -2,7 +2,7 @@
 title: Schema
 ---
 
-The schema object is used to define what type of graph you will be initializing. More specifically, it defines which node your graph can contain and how those nodes can be connected together with edges.
+The schema object is used to define what type of graph you will be initializing. More specifically, it defines which nodes your graph can contain and how those nodes can be connected together with edges.
 
 It should contain a set of nodes and edges which can be created in the graph. Each node and edge that is defined will need a unique number key which is used to reference that particular part of the schema. In the above example the single edge type defined references the two nodes contained in the schema when defining which node types it can connect. When creating large schemas, it can be useful to define these keys before creating the schema, so they can be easily referenced:
 
