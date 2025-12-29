@@ -6,7 +6,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4374
 
 import Link from '@docusaurus/Link';
 
-Sample switching on a model materials at runtime.
+Sample switching materials on a model at runtime.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/7EZvdnZd/" title="Switching materials at runtime" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
