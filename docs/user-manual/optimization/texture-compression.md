@@ -79,7 +79,7 @@ To use the Legacy Texture Compression options, select the texture and scroll dow
 
 <img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/enable-legacy-texture-compression.gif" alt="Enabling Legacy Texture Compression" width="400" />
 
-To remove a or several formats:
+To remove one or several formats:
 
 1. Untick all the formats you wish to remove.
 2. Click on Compress Legacy.
