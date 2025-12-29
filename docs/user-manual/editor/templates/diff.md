@@ -12,4 +12,4 @@ Click on the dot next to each override to see a dropdown menu to apply the overr
 
 ## Reverting Overrides
 
-Click on the dot next to each overrides and click Revert to revert the override.
+Click on the dot next to each override and click Revert to revert the override.
