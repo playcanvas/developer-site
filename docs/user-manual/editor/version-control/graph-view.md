@@ -66,7 +66,7 @@ The graph will also include checkpoints from closed branches so that they are ab
 
 ## Graph Node Layout Logic
 
-To reduce the the size of graph layout both vertically and horizontally and make it easier to navigate, the graph nodes are laid out in a specific way.
+To reduce the size of graph layout both vertically and horizontally and make it easier to navigate, the graph nodes are laid out in a specific way.
 
 The branch that was selected when a Graph View button was clicked is shown on the left. All other branches are positioned to the right of it.
 
