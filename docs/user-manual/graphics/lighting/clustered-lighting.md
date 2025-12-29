@@ -30,7 +30,7 @@ The following steps provide a basic overview of the Clustered Lighting implement
 1. Cull lights by all of the camera's frustums, to evaluate the list of lights visible for a frame.
 2. Place a world space 3D grid over the axis aligned bounds of all visible lights.
 
-    ![3D Grid](/img/user-manual/graphics/lighting/lights/3d_grid.png)
+    ![3D Grid](/img/user-manual/graphics/lighting/lights/3d-grid.png)
 
 3. Each cell in the 3D grid stores the light indices that intersect with it. On the CPU, this information is updated every frame and it is allowed to get a list of the lights that affect any positions. The information is stored in a texture and made available to the GPU.
 4. The properties of all visible lights are stored in another texture, so they are also accessible by the GPU.
@@ -41,7 +41,7 @@ The following steps provide a basic overview of the Clustered Lighting implement
 
 Options for Clustered Lighting can be found in the Editor Settings under 'Rendering'.
 
-![Clustered Lighting Editor UI](/img/user-manual/graphics/lighting/lights/clustered_lighting_ui.png)
+![Clustered Lighting Editor UI](/img/user-manual/graphics/lighting/lights/clustered-lighting-ui.png)
 
 This will allow you to disable Clustered Lighting (if you need to use the previous lighting system) and to [tune performance and features](#tuning-clustered-lighting) mentioned below.
 
@@ -57,7 +57,7 @@ The Clustered Lighting shader needs to handle all supported lights, so it must c
 
 ### Configuring the 3D Grid {#configuring-the-3d-grid}
 
-![3D Grid Configuration](/img/user-manual/graphics/lighting/lights/3d_grid_config.png)
+![3D Grid Configuration](/img/user-manual/graphics/lighting/lights/3d-grid-config.png)
 
 The **Cells** property allows you to specify the number of cells along each world axis. This dynamically subdivides the Axis Aligned Bounding Box, that contains all visible lights, into a specified number of cells.
 
@@ -73,7 +73,7 @@ All of the Shadow Maps and Cookie Textures used by visible lights are stored in 
 
 - **Automatic** – When the array size is specified as 0, the engine automatically splits the atlas as needed, to assign each visible light an equally sized sub-texture. For example, if you have three lights visible in a frame, the atlas will split into 2x2 sub-textures, and three of those four sub-textures will be assigned to the lights.
 
-    ![Atlas Split 0](/img/user-manual/graphics/lighting/lights/atlas_split_0.png)
+    ![Atlas Split 0](/img/user-manual/graphics/lighting/lights/atlas-split-0.png)
 
 - **Manual** – Allows the atlas to be split into a fixed number of sub-textures, which can be different sizes. It is set up using an array of numbers, where each number represents a split, both vertically and horizontally. See the next section for an example of manual atlas splits.
 
@@ -81,11 +81,11 @@ All of the Shadow Maps and Cookie Textures used by visible lights are stored in 
 
 To understand how an atlas is manually split, take an array with two numbers: [2, 2]. The first number in the array splits the atlas into 2x2, for a total of four areas. Any following numbers in the array would split these areas again. In this case, the second number in the array splits one of the existing areas into another 2x2 (e.g. four areas), for a combined total of 7 areas.
 
-![Manual Split](/img/user-manual/graphics/lighting/lights/manual_split.png)
+![Manual Split](/img/user-manual/graphics/lighting/lights/manual-split.png)
 
 The following image shows how the manual atlas split should be specified.
 
-![Atlas Split 2](/img/user-manual/graphics/lighting/lights/atlas_split_2.png)
+![Atlas Split 2](/img/user-manual/graphics/lighting/lights/atlas-split-2.png)
 
 Other Examples:
 

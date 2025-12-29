@@ -4,6 +4,6 @@ title: Anim Component
 
 Click here to learn how to use the [Anim Component][1].
 
-![New Anim Component](/img/user-manual/animation/new_anim_component.png)
+![New Anim Component](/img/user-manual/animation/new-anim-component.png)
 
 [1]: /user-manual/editor/scenes/components/anim/

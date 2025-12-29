@@ -8,21 +8,21 @@ Cameras are responsible for rendering a scene to the screen. You need at least o
 
 In the Editor's 3D View, an unselected camera is represented with the following icon:
 
-![Camera icon](/img/user-manual/graphics/cameras/camera_icon.png)
+![Camera icon](/img/user-manual/graphics/cameras/camera-icon.png)
 
 To create a new camera, simply create a new entity and add a camera component to it. For convenience, the Editor menu has an item that does this in a single step:
 
-![Camera creation](/img/user-manual/graphics/cameras/camera_create.png)
+![Camera creation](/img/user-manual/graphics/cameras/camera-create.png)
 
 ## Orthographic vs Perspective Projection
 
 Cameras can have one of two types of projection: orthographic or perspective. Orthographic cameras define a parallel projection and are often used for 2D or isometric games.
 
-![Orthographic camera](/img/user-manual/graphics/cameras/camera_orthographic.png)
+![Orthographic camera](/img/user-manual/graphics/cameras/camera-orthographic.png)
 
 More commonly used is the perspective projection. It more closely mimics how our eyes or cameras work.
 
-![Perspective camera](/img/user-manual/graphics/cameras/camera_perspective.png)
+![Perspective camera](/img/user-manual/graphics/cameras/camera-perspective.png)
 
 ## Controlling the Viewport
 
@@ -30,8 +30,8 @@ By default, a camera will render to the full width and height of its render targ
 
 For 2-player horizontal split screen, you would create two cameras and configure their viewports as follows:
 
-![Horizontal splitscreen](/img/user-manual/graphics/cameras/camera_horizontal_splitscreen.png)
+![Horizontal splitscreen](/img/user-manual/graphics/cameras/camera-horizontal-splitscreen.png)
 
 And for vertical split screen, you would configure the viewports as follows:
 
-![Vertical splitscreen](/img/user-manual/graphics/cameras/camera_vertical_splitscreen.png)
+![Vertical splitscreen](/img/user-manual/graphics/cameras/camera-vertical-splitscreen.png)

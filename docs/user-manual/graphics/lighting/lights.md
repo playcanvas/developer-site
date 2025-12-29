@@ -20,7 +20,7 @@ The most familiar light source to us is the Sun. Because the Sun is so far from 
 
 When unselected, a directional light is represented by the following icon in the Editor's 3D view:
 
-![Directional light icon](/img/user-manual/graphics/lighting/lights/directional_icon.jpg)
+![Directional light icon](/img/user-manual/graphics/lighting/lights/directional-icon.jpg)
 
 Click this icon to select the light in the Hierarchy and Inspector panels.
 
@@ -34,7 +34,7 @@ Omni lights are light sources that emit light in all directions. An example of t
 
 When unselected, an omni light is represented by the following icon in the Editor's 3D view:
 
-![Omni light icon](/img/user-manual/graphics/lighting/lights/point_icon.jpg)
+![Omni light icon](/img/user-manual/graphics/lighting/lights/point-icon.jpg)
 
 Click this icon to select the light in the Hierarchy and Inspector panels.
 
@@ -48,7 +48,7 @@ Spot lights, like omni lights, emit light in all directions. However, the light 
 
 When unselected, a spot light is represented by the following icon in the Editor's 3D view:
 
-![Spot light icon](/img/user-manual/graphics/lighting/lights/spot_icon.jpg)
+![Spot light icon](/img/user-manual/graphics/lighting/lights/spot-icon.jpg)
 
 Click this icon to select the light in the Hierarchy and Inspector panels.
 
