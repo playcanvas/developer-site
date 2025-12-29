@@ -92,7 +92,7 @@ Colorプロパティを使用すると、文字列を選択した色に色付け
 
 ![Tinted](/img/user-manual/user-interface/text-element/tinted.png)
 
-## 透明性 (Tranparency)
+## 透明性 (Transparency)
 
 Opacityプロパティでは、文字列の透明度を設定できます
 

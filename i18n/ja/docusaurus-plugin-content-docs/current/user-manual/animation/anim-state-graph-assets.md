@@ -122,17 +122,15 @@ var AnimationBlending = pc.createScript('animationBlending');
 
 // initialize code called once per entity
 AnimationBlending.prototype.initialize = function() {
-    this.entity.anim.on('smile_start', function (event) {
+    this.entity.anim.on('smile_start', (event) => {
         this.entity.anim.findAnimationLayer('smile').weight = 1;
-    }), this);
-    this.entity.anim.on('smile_end', function (event) {
+    });
+    this.entity.anim.on('smile_end', (event) => {
         this.entity.anim.findAnimationLayer('smile').weight = 0;
-    }), this);
+    });
 };
 ```
 
-あなたが[レイヤーをマスクする][anim-layer-masking]場合、モデルの骨の一部のみを制御するアニメーションをブレンドするために、レイヤーの`blend type`を`Additive`に設定することができます。上記のようにリアルタイムで`blend weight`を更新することで、異なるレイヤーのアニメーション間でスムーズなブレンドを作成することができます。これは特に、上半身と下半身で異なるアクションを行う必要があるキャラクターのアニメーションに非常に役立ちます。例えば、キャラクターの上半身に`shooting`アニメーションをブレンドインとブレンドアウトさせる一方で、下半身を`walking`や`running`などのさまざまな移動アニメーションにフリーにすることができます。
+あなたが[レイヤーをマスクする](anim-layer-masking.md)場合、モデルの骨の一部のみを制御するアニメーションをブレンドするために、レイヤーの`blend type`を`Additive`に設定することができます。上記のようにリアルタイムで`blend weight`を更新することで、異なるレイヤーのアニメーション間でスムーズなブレンドを作成することができます。これは特に、上半身と下半身で異なるアクションを行う必要があるキャラクターのアニメーションに非常に役立ちます。例えば、キャラクターの上半身に`shooting`アニメーションをブレンドインとブレンドアウトさせる一方で、下半身を`walking`や`running`などのさまざまな移動アニメーションにフリーにすることができます。
 
 `Overwrite`に設定されたレイヤーは、そのレイヤーでアニメーション化されるモデルの骨のアニメーション値を完全に置き換えます。これらの場合、最終的なアニメーションを生成する際には、以前のレイヤーは考慮されません。
-
-[anim-layer-masking]: /user-manual/animation/anim-layer-masking

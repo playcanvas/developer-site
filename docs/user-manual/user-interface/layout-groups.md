@@ -16,7 +16,7 @@ Add a Layout Group by adding the LayoutGroup Component to an existing Element En
 
 ### Orientation {#orientation}
 
-Set the `Orientation` to Horizontal to organize your layout from left-to-right or right-to-left. Or Vertical to organize your layout top-to-bottom or bottom-to-top
+Set the `Orientation` to Horizontal to organize your layout from left-to-right or right-to-left. Or Vertical to organize your layout top-to-bottom or bottom-to-top.
 
 ### Reverse {#reverse}
 

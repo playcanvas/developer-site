@@ -2,7 +2,7 @@
 title: Schema
 ---
 
-The schema object is used to define what type of graph you will be initializing. More specifically, it defines which node your graph can contain and how those nodes can be connected together with edges.
+The schema object is used to define what type of graph you will be initializing. More specifically, it defines which nodes your graph can contain and how those nodes can be connected together with edges.
 
 It should contain a set of nodes and edges which can be created in the graph. Each node and edge that is defined will need a unique number key which is used to reference that particular part of the schema. In the above example the single edge type defined references the two nodes contained in the schema when defining which node types it can connect. When creating large schemas, it can be useful to define these keys before creating the schema, so they can be easily referenced:
 
@@ -36,7 +36,7 @@ const schema = {
 };
 ```
 
-The schemas above are used to created directed graphs, as they define edges which contain `from` and `to` attributes. These attributes tell an edge which nodes they can connect, creating a directed edge from one node to another.
+The schemas above are used to create directed graphs, as they define edges which contain `from` and `to` attributes. These attributes tell an edge which nodes they can connect, creating a directed edge from one node to another.
 
 When creating visual programming graphs, nodes are not connected directly. Instead, they contain input and output ports which can be connected together. This will need to be expressed in the schema you create. To achieve this, you can add `inPorts` and `outPorts` attributes to your nodes in the schema. These will define a set of ports which will be created on a given node, specifying which edges can connect those ports.
 

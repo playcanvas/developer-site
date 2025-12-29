@@ -148,20 +148,18 @@ var AnimationBlending = pc.createScript('animationBlending');
 
 // initialize code called once per entity
 AnimationBlending.prototype.initialize = function() {
-    this.entity.anim.on('smile_start', function (event) {
+    this.entity.anim.on('smile_start', (event) => {
         this.entity.anim.findAnimationLayer('smile').weight = 1;
-    }), this);
-    this.entity.anim.on('smile_end', function (event) {
+    });
+    this.entity.anim.on('smile_end', (event) => {
         this.entity.anim.findAnimationLayer('smile').weight = 0;
-    }), this);
+    });
 };
 ```
 
 </TabItem>
 </Tabs>
 
-If you [mask your layers][anim-layer-masking], you can set the `blend type` of your layers to `Additive` to blend in an animation which only controls part of your model's bones. Updating the `blend weight` in real time as described above can allow you to create smooth blends between animations on different layers. This is particularly useful when animation characters that need to carry out different actions using their upper and lower body. For example, you could have a `shooting` animation that is blended in and out on a characters upper body, while freeing up the lower body for various locomotion animations such as `walking` and `running`.
+If you [mask your layers](anim-layer-masking.md), you can set the `blend type` of your layers to `Additive` to blend in an animation which only controls part of your model's bones. Updating the `blend weight` in real time as described above can allow you to create smooth blends between animations on different layers. This is particularly useful when animating characters that need to carry out different actions using their upper and lower body. For example, you could have a `shooting` animation that is blended in and out on a characters upper body, while freeing up the lower body for various locomotion animations such as `walking` and `running`.
 
 Any layers that are set to `Overwrite` will completely replace the animation values of the model's bones that are animated in that layer. In these instances, previous layers will not be taken into consideration when producing the final animation.
-
-[anim-layer-masking]: /user-manual/animation/anim-layer-masking

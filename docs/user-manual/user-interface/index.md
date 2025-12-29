@@ -14,7 +14,7 @@ PlayCanvas implements two components which can form the building blocks of a use
 
 Web browsers have spent years building effective and optimized systems for rendering complex interfaces to users. For some use cases using the HTML, CSS and the browser DOM are a good fit for your user interface.
 
-The primary downside of using the DOM is performance. The DOM is not designed to be run in a high framerate, real time setting. Page reflows and garbage collection can causes stutters in your application. If you're aiming for a consistent 60fps in your application this is not the best option.
+The primary downside of using the DOM is performance. The DOM is not designed to be run in a high framerate, real time setting. Page reflows and garbage collection can cause stutters in your application. If you're aiming for a consistent 60fps in your application this is not the best option.
 
 ---
 
