@@ -16,13 +16,13 @@ You should use preloading to make sure all the assets you need at the start of y
 
 ![Streaming](/img/user-manual/assets/preloading-and-streaming/streaming.gif)
 
-If an Entity in your scene and references an asset, then a loading request will be initiated when the Entity is enabled. If the Entity is enabled in the scene, then this request is made as soon as the application starts.
+If an Entity in your scene references an asset, then a loading request will be initiated when the Entity is enabled. If the Entity is enabled in the scene, then this request is made as soon as the application starts.
 
 All components will gracefully handle dynamically loading assets and will start operating as normal, once the asset is loaded. When streaming assets in dynamically like this, you will often see "popup". As a model will appear as soon as it is loaded, even if it doesn't have materials or textures yet.
 
 ## When are assets loaded? {#when-are-assets-loaded}
 
-You can determine when a particular asset will be loaded you can follow these rules.
+To determine when a particular asset will be loaded, you can follow these rules.
 
 * If `preload = true` the asset will be loaded before the application starts. Otherwise:
 * If the asset is referenced by a component that is enabled on an entity that is enabled and in the scene hierarchy then it will be loaded. The asset is loaded at the time the entity or component is enabled or when the asset is assigned to the component. For entities that are enabled in the Editor, this will occur as soon as the application starts just after preloading has finished. A component is defined as enabled if it is enabled and all entities in the hierarchy above it are enabled.
