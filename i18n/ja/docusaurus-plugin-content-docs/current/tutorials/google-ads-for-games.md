@@ -85,7 +85,7 @@ UiController.prototype.initialize = function() {
 
 中身を見てみましょう。
 
-[`afg-intergration.js`][afg-intergration.js]は、GoogleのSDKをページに追加し、ユーザーに広告が配信される間隔を設定します。この間隔は必要に応じて変更できます。チュートリアルでは、実際の広告ではなくプレースホルダーを表示するためにテストモードを有効にしています。
+[`afg-integration.js`][afg-integration.js]は、GoogleのSDKをページに追加し、ユーザーに広告が配信される間隔を設定します。この間隔は必要に応じて変更できます。チュートリアルでは、実際の広告ではなくプレースホルダーを表示するためにテストモードを有効にしています。
 
 `ca-pub-XXXXXXXXX`を、Google Adsenseから取得した[Publisher ID][google-publisher-id]に置き換える必要があります。
 
@@ -461,5 +461,5 @@ UiController.prototype.initialize = function() {
 [google-afg-signup]: https://developers.google.com/ad-placement/docs/beta
 [google-adsense]: https://www.google.com/adsense/start/
 [google-publisher-id]: https://support.google.com/adsense/answer/105516?hl=en
-[afg-intergration.js]: https://playcanvas.com/editor/code/877568?tabs=67299908
+[afg-integration.js]: https://playcanvas.com/editor/code/877568?tabs=67299908
 [afg-setup.js]: https://playcanvas.com/editor/code/877568?tabs=67301236
