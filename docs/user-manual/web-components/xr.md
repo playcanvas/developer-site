@@ -57,7 +57,7 @@ The XR scripts require the scene's camera to be set up as follows:
 
 ### UI for Entering/Exiting XR
 
-Finally, you'll need to add some UI controls to allow the user to enter and exit XR mode. This is a WebXR-specific requirement, where a user gesture is required to activate a XR session. Let's create two simple buttons to trigger either an AR or VR session.
+Finally, you'll need to add some UI controls to allow the user to enter and exit XR mode. This is a WebXR-specific requirement, where a user gesture is required to activate an XR session. Let's create two simple buttons to trigger either an AR or VR session.
 
 ```html
 <button id="enterAR">Enter AR</button>
