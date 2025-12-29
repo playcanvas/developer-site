@@ -20,7 +20,7 @@ Here are some tips and hints on how to achieve good performance in your PlayCanv
 
 * Be careful when enabling 'Use Device Pixel Ratio' in your project settings. This will cause your PlayCanvas app to utilize the native resolution of a device reducing pixelation but can result in many more pixels being filled, which can cause a significant drop in frame rate. This can be adjusted at runtime after assessing the user's device capabilities. Read more at [Adjusting Device Pixel Ratio][2].
 * Be mindful of the number of dynamic lights in your scene. Keep them to a minimum.
-* As the value for texture anisotropy increases, visual improve but performance decreases. Be careful to balance visuals against performance.
+* As the value for texture anisotropy increases, visuals improve but performance decreases. Be careful to balance visuals against performance.
 * Look for opportunities to pack multiple textures into single images. For example, a grayscale opacity map can be stored in the alpha channel of a diffuse map. Or a grayscale gloss map can be stored in the alpha channel of a specular map. This results in lower VRAM usage.
 * Post effects can be expensive so think carefully before you enable them. They can cost a lot in terms of pixel fill.
 * Enabling backface culling on a material will be cheaper than disabling it. Generally speaking, backface culling reduces the number of pixels that the GPU has to fill. This is the default setting for newly created materials.
