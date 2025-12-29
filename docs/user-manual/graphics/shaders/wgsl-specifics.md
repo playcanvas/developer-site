@@ -217,7 +217,7 @@ As part of the `FragmentInput` structure these built-in variables are automatica
 ```wgsl
 position: @builtin(position)            // interpolated fragment position
 frontFacing: @builtin(front_facing)     // front-facing
-sampleIndex: builtin(sample_index)      // sample index for MSAA
+sampleIndex: @builtin(sample_index)     // sample index for MSAA
 ```
 
 These built-ins are also available in the global scope using these names:
