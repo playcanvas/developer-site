@@ -56,7 +56,7 @@ You'll see something that looks a little like this:
 
 ![Cube](/img/tutorials/beginner/basic-materials/diffuse_normal_cube.jpg)
 
-Try modifying the **Tiling** and **Offset** properties to effect the way the texture is wrapped around the cube.
+Try modifying the **Tiling** and **Offset** properties to affect the way the texture is wrapped around the cube.
 
 Take a look at the user manual section on [Physical Materials][8] for more depth on setting up materials.
 
