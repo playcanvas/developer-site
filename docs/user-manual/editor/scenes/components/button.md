@@ -2,22 +2,22 @@
 title: Button
 ---
 
-The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen][1] and [Element][2] Components.
+The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen](/user-manual/editor/scenes/components/screen) and [Element](/user-manual/editor/scenes/components/element) Components.
 
-The Button Component can be used in two Transition Modes. *Sprite Swap*, which uses a different sprite or frame for each button state or *Tint*, which tints a single sprite with a different color for each state.
+The Button Component can be used in two Transition Modes. *Sprite Change*, which uses a different sprite or frame for each button state or *Tint*, which tints a single sprite with a different color for each state.
 
 ## Common Properties
 
 | Property        | Description |
 |-----------------|-------------|
-| Active          | When enabled the button will respond to and fire event. When disabled the button is set to the Inactive State. |
+| Active          | When enabled the button will respond to and fire events. When disabled the button is set to the Inactive State. |
 | Image           | The Image Element Entity that is used to detect input events. |
-| Hit Padding     | Additional space around the Image Element that will be included when testing for input events. |
-| Transition Mode | The type of effect to use when transitioning between states. Either Sprite Swap or Tint. |
+| Hit Padding     | Additional space around the Image Element that will be included when testing for input events. Specified as left, bottom, right, top padding values. |
+| Transition Mode | The type of effect to use when transitioning between states. Either Sprite Change or Tint. |
 
-## Sprite Swap Properties
+## Sprite Change Properties
 
-![Sprite Swap Button](/img/user-manual/editor/scenes/components/component-button-sprite-change.png)
+![Sprite Change Button](/img/user-manual/editor/scenes/components/component-button-sprite-change.png)
 
 | Property        | Description |
 |-----------------|-------------|
@@ -41,9 +41,4 @@ The Button Component can be used in two Transition Modes. *Sprite Swap*, which u
 
 ## Scripting Interface
 
-You can control the properties of a Button component using a [script component][5]. The scripting interface for the Button component is [here][6].
-
-[1]: /user-manual/editor/scenes/components/screen
-[2]: /user-manual/editor/scenes/components/element
-[5]: /user-manual/editor/scenes/components/script
-[6]: https://api.playcanvas.com/engine/classes/ButtonComponent.html
+You can control the properties of a Button component using a [script component](/user-manual/editor/scenes/components/script). The scripting interface for the Button component is [here](https://api.playcanvas.com/engine/classes/ButtonComponent.html).

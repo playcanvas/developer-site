@@ -10,7 +10,4 @@ The Audio Listener component can be enabled or disabled using the toggle in the 
 
 ## Scripting Interface
 
-You can control an Audio Listener component's properties using a [script component][2]. The Audio Listener component's scripting interface is [here][3].
-
-[2]: /user-manual/editor/scenes/components/script
-[3]: https://api.playcanvas.com/engine/classes/AudioListenerComponent.html
+You can control an Audio Listener component's properties using a [script component](/user-manual/editor/scenes/components/script). The Audio Listener component's scripting interface is [here](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html).

@@ -2,29 +2,30 @@
 title: Scrollview
 ---
 
-Scrollviewコンポーネントは、ユーザーインターフェース内のスクロール可能な領域を定義します。スクロールビューは、[Scrollbar][1]コンポーネントを介してスクロールすることができます。
+Scrollviewコンポーネントは、ユーザーインターフェース内のスクロール可能な領域を定義します。Scrollviewは[Scrollbar](/user-manual/editor/scenes/components/scrollbar)コンポーネントを介してスクロールできます。
 
-詳細については、[ユーザーインターフェイス][2]のセクションを参照してください。
+詳細については、[User Interface](/user-manual/user-interface)セクションを参照してください。
 
 ![Scrollview Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
 
-## コンポーネントのプロパティ
+## プロパティ
 
-| プロパティ名                | 説明 |
+| プロパティ名 | 説明 |
 |-------------------------|-------------|
-| Scroll Mode             | ユーザーがコンテンツの末尾をスクロールしたとき、スクロールビューの動作方法を指定します。モードは以下のように定義されます:<ul><li>Clamp: コンテンツはその境界を超えてスクロールしません。</li><li>Bounce: コンテンツは境界を超えてスクロールし、ゆっくりとバウンスします。</li><li>Infinite: コンテンツは無限にスクロールできます。</li></ul> |
-| Bounce                  | バウンスバックする前にコンテンツが移動する距離を制御します。 |
-| Friction                | スローン操作によって自由に動くコンテンツを制御します。 例えば、電話でフリックするか、マウスのスクロールホイールをフリングするかなどです。 1の値は、コンテンツがすぐに停止することを意味し、0の値はコンテンツが永遠に動き続けることを意味します(または、スクロールモードに応じて、コンテンツの境界に達するまで)。 |
-| Use Mouse Wheel         | マウスが境界内にある場合、水平方向と垂直方向のスクロールにマウスホイールを使用するかどうかを指定します。 |
-| Mouse Wheel Sensitivity | マウスホイールの水平方向と垂直方向の感度。 *マウスホイールを使用する*が設定されている場合にのみ使用されます。 方向を0に設定すると、その方向のマウスホイールスクロールが無効になります。 1は、よく感じられるデフォルトの感度です。 値は1より高く、低く設定して感度を調整できます。 デフォルトは[1、1]です。 |
-| ビューポート (Viewport)                | コンテンツがスクロールするマスクされた表示エリアとして使用するエンティティ。 このエンティティにはElementGroupコンポーネントが必要です。 |
-| Content                 | スクロールするコンテンツ自体を含むエンティティ。 このエンティティにはElementコンポーネントが必要です。 |
-| Horizontal              | 水平スクロールを有効にするかどうかを指定します。 |
-| Scrollbar (horizontal)  | 水平スクロールバーとして使用するエンティティ。 このエンティティにはScrollbarコンポーネントが必要です。 |
-| Visibility (horizontal) | 水平スクロールバーを常時表示するか、コンテンツが表示エリアのサイズを超えた時にのみ表示するかを制御します。 |
-| Vertical                | 垂直スクロールを有効にするかどうかを指定します。 |
-| Scrollbar (vertical)    | 垂直スクロールバーとして使用するエンティティ。 このエンティティにはScrollbarコンポーネントが必要です。 |
-| Visibility (vertical)   | 垂直スクロールバーを常に表示するか、コンテンツが表示エリアのサイズを超えた時にのみ表示するかを制御します。 |
+| Scroll Mode             | ユーザーがコンテンツの末尾を超えてスクロールしたときの動作を指定します。オプション: Clamp（境界で停止）、Bounce（バウンスして戻る）、Infinite（無限にスクロール）。 |
+| Bounce                  | Bounceモードのみ。バウンスバックする前にコンテンツが移動する距離を制御します（0〜10）。 |
+| Friction                | スロー操作時にコンテンツがどれだけ自由に動くかを制御します（例：電話でのフリックやマウスホイールのフリング）。1の値はコンテンツがすぐに停止することを意味し、0はコンテンツが永遠に動き続けることを意味します（またはスクロールモードに応じて境界に達するまで）。 |
+| Use Mouse Wheel         | マウスが境界内にあるときに、マウスホイールでスクロール（水平および垂直）するかどうか。 |
+| Mouse Wheel Sensitivity | Use Mouse Wheelのみ。マウスホイールの水平および垂直感度。方向を0に設定すると、その方向のスクロールが無効になります。デフォルトは[1, 1]。 |
+| Viewport                | コンテンツがスクロールするマスクされたビューポート領域として使用するエンティティ。このエンティティにはElementコンポーネントが必要です。 |
+| Content                 | スクロールするコンテンツ自体を含むエンティティ。このエンティティにはElementコンポーネントが必要です。 |
+| Horizontal              | 水平スクロールを有効にするかどうか。 |
+| Scrollbar (horizontal)  | Horizontalのみ。水平スクロールバーとして使用するエンティティ。このエンティティにはScrollbarコンポーネントが必要です。 |
+| Visibility (horizontal) | Horizontalのみ。スクロールバーの表示を制御します。オプション: Show Always、Show When Required（コンテンツがビューポートを超えた場合のみ）。 |
+| Vertical                | 垂直スクロールを有効にするかどうか。 |
+| Scrollbar (vertical)    | Verticalのみ。垂直スクロールバーとして使用するエンティティ。このエンティティにはScrollbarコンポーネントが必要です。 |
+| Visibility (vertical)   | Verticalのみ。スクロールバーの表示を制御します。オプション: Show Always、Show When Required（コンテンツがビューポートを超えた場合のみ）。 |
 
-[1]: /user-manual/editor/scenes/components/scrollbar
-[2]: /user-manual/user-interface
+## スクリプトインターフェース
+
+[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してScrollviewコンポーネントのプロパティを制御できます。Scrollviewコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html)です。

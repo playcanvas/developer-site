@@ -2,19 +2,19 @@
 title: GSplat
 ---
 
-The GSplat component enables an entity to render a 3D Gaussian Splat.
+GSplatコンポーネントは、エンティティが3Dガウシアンスプラットをレンダリングできるようにします。
 
-The GSplat component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the 3D Gaussian Splat referenced by the component will be added to the scene and rendered.
+GSplatコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、コンポーネントが参照する3Dガウシアンスプラットがシーンに追加されてレンダリングされます。
 
 ![GSplat component](/img/user-manual/editor/scenes/components/component-gsplat.png)
 
-## Properties
+## プロパティ
 
 | プロパティ名 | 説明 |
 |----------|-------------|
-| アセット (Asset)    | The GSplat asset to be rendered by this GSplat component. Only a single GSplat asset can be assigned to a GSplat component. |
-| レイヤーの一覧 (Layers)   | The [layers](/user-manual/graphics/layers) to render this element into. |
+| Asset    | このGSplatコンポーネントでレンダリングするGSplatアセット。GSplatコンポーネントには1つのGSplatアセットのみ割り当てることができます。 |
+| Layers   | このエレメントをレンダリングする[レイヤー](/user-manual/graphics/layers)。 |
 
 ## スクリプトインターフェース
 
-You can control the properties of a GSplat component using a [script component](../script). The scripting interface for the GSplat component is [here](https://api.playcanvas.com/engine/classes/GSplatComponent.html).
+[Scriptコンポーネント](../script)を使用してGSplatコンポーネントのプロパティを制御できます。GSplatコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/GSplatComponent.html)です。
