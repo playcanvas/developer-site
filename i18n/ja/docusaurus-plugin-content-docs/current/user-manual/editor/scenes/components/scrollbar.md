@@ -2,7 +2,7 @@
 title: Scrollbar
 ---
 
-Scrollbarコンポーネントは、[Scrollview](/user-manual/editor/scenes/components/scrollview)コンポーネント用のスクロールコントロールを定義します。
+Scrollbarコンポーネントは、[Scrollview](scrollview.md)コンポーネント用のスクロールコントロールを定義します。
 
 詳細については、[User Interface](/user-manual/user-interface)セクションを参照してください。
 
@@ -19,4 +19,4 @@ Scrollbarコンポーネントは、[Scrollview](/user-manual/editor/scenes/comp
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してScrollbarコンポーネントのプロパティを制御できます。Scrollbarコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してScrollbarコンポーネントのプロパティを制御できます。Scrollbarコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html)です。

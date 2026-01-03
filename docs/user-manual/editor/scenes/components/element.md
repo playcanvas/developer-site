@@ -84,4 +84,4 @@ The text element renders a string of text using a [font asset](/user-manual/asse
 
 ## Scripting Interface
 
-You can control an Element component's properties using a [script component](/user-manual/editor/scenes/components/script). The scripting interface for the Element component is [here](https://api.playcanvas.com/engine/classes/ElementComponent.html).
+You can control an Element component's properties using a [script component](script.md). The scripting interface for the Element component is [here](https://api.playcanvas.com/engine/classes/ElementComponent.html).

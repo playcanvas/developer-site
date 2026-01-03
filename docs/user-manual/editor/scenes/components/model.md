@@ -4,7 +4,7 @@ title: Model
 
 :::warning
 
-The Model component is deprecated. It has been replaced by the [Render](/user-manual/editor/scenes/components/render) component.
+The Model component is deprecated. It has been replaced by the [Render](render.md) component.
 
 :::
 
@@ -12,7 +12,7 @@ The Model component enables an entity to render a primitive shape or a model ass
 
 The Model component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the model will be added to the scene and rendered.
 
-![Model component](/img/user-manual/editor/scenes/components/component-model.png)
+![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
 
 ## Properties
 
@@ -35,7 +35,7 @@ The Model component can be enabled or disabled using the toggle in the top right
 
 ## Scripting Interface
 
-You can control a Model component's properties using a [script component](/user-manual/editor/scenes/components/script). The Model component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ModelComponent.html).
+You can control a Model component's properties using a [script component](script.md). The Model component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ModelComponent.html).
 
 ## Customizing Materials
 

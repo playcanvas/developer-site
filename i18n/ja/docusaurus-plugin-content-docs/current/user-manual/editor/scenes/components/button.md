@@ -2,7 +2,7 @@
 title: Button
 ---
 
-Buttonコンポーネントは、[Screen](/user-manual/editor/scenes/components/screen)コンポーネントと[Element](/user-manual/editor/scenes/components/element)コンポーネントで使用するユーザーインターフェイスボタンを作成するための便利なショートカットです。
+Buttonコンポーネントは、[Screen](screen.md)コンポーネントと[Element](element.md)コンポーネントで使用するユーザーインターフェイスボタンを作成するための便利なショートカットです。
 
 Buttonコンポーネントは、2つのトランジションモードで使用できます。*Sprite Change* では、各ボタンの状態に異なるスプライトまたはフレームを使用します。*Tint* では、単一のスプライトを各状態で異なる色で着色します。
 
@@ -41,4 +41,4 @@ Buttonコンポーネントは、2つのトランジションモードで使用�
 
 ## スクリプトインターフェース
 
-Buttonコンポーネントのプロパティは、[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用して制御できます。 Buttonコンポーネントのスクリプティングインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ButtonComponent.html)です。
+Buttonコンポーネントのプロパティは、[Scriptコンポーネント](script.md)を使用して制御できます。 Buttonコンポーネントのスクリプティングインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ButtonComponent.html)です。

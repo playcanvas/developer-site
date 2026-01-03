@@ -6,7 +6,7 @@ Animコンポーネントは、Animstategraphアセットとその必要なア�
 
 Animコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にすることができます。有効にしてActivateプロパティがチェックされている場合、シーンが起動されると自動的にアニメーションが再生されます。
 
-![Anim component](/img/user-manual/editor/scenes/components/component-anim.png)
+![Anim Component](/img/user-manual/editor/scenes/components/component-anim.png)
 
 ## プロパティ
 
@@ -53,4 +53,4 @@ Animstategraphアセットを選択すると、Animコンポーネントにレ�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してAnimコンポーネントのプロパティを制御することができます。Animコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/AnimComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してAnimコンポーネントのプロパティを制御することができます。Animコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/AnimComponent.html)です。

@@ -6,7 +6,7 @@ GSplatコンポーネントは、エンティティが3Dガウシアンスプラ
 
 GSplatコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、コンポーネントが参照する3Dガウシアンスプラットがシーンに追加されてレンダリングされます。
 
-![GSplat component](/img/user-manual/editor/scenes/components/component-gsplat.png)
+![GSplat Component](/img/user-manual/editor/scenes/components/component-gsplat.png)
 
 ## プロパティ
 

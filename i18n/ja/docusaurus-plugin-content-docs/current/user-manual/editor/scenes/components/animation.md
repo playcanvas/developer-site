@@ -4,7 +4,7 @@ title: Animation
 
 :::warning
 
-Animationコンポーネントは非推奨です。これは[Anim](/user-manual/editor/scenes/components/anim)コンポーネントに置き換えられました。
+Animationコンポーネントは非推奨です。これは[Anim](anim.md)コンポーネントに置き換えられました。
 
 :::
 
@@ -12,7 +12,7 @@ Animationコンポーネントを使用すれば、エンティティはModelコ
 
 Animationコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にすることができます。有効にすると、コンポーネントは割り当てられたアニメーションを再生します。
 
-![Animation component](/img/user-manual/editor/scenes/components/component-animation.png)
+![Animation Component](/img/user-manual/editor/scenes/components/component-animation.png)
 
 ## Properties
 
@@ -25,4 +25,4 @@ Animationコンポーネントは、コンポーネントパネルの右上に�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してAnimationコンポーネントのプロパティを制御することができます。Animationコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/AnimationComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してAnimationコンポーネントのプロパティを制御することができます。Animationコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/AnimationComponent.html)です。

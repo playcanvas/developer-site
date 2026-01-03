@@ -21,4 +21,4 @@ Screenコンポーネントは、ユーザーインターフェースの領域�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してScreenコンポーネントのプロパティを制御できます。Screenコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScreenComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してScreenコンポーネントのプロパティを制御できます。Screenコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScreenComponent.html)です。

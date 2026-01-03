@@ -60,4 +60,4 @@ Spriteコンポーネントは、[Spriteアセット](/user-manual/assets/types/
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してSpriteコンポーネントのプロパティを制御できます。Spriteコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/SpriteComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してSpriteコンポーネントのプロパティを制御できます。Spriteコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/SpriteComponent.html)です。

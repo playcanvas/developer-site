@@ -8,31 +8,31 @@ Collisionコンポーネントは、コンポーネントパネルの右上に�
 
 #### Box
 
-![Collision component (Box)](/img/user-manual/editor/scenes/components/component-collision-box.png)
+![Collision Component (Box)](/img/user-manual/editor/scenes/components/component-collision-box.png)
 
 #### Capsule
 
-![Collision component (Capsule)](/img/user-manual/editor/scenes/components/component-collision-capsule.png)
+![Collision Component (Capsule)](/img/user-manual/editor/scenes/components/component-collision-capsule.png)
 
 #### Compound
 
-![Collision component (Compound)](/img/user-manual/editor/scenes/components/component-collision-compound.png)
+![Collision Component (Compound)](/img/user-manual/editor/scenes/components/component-collision-compound.png)
 
 #### Cone
 
-![Collision component (Cone)](/img/user-manual/editor/scenes/components/component-collision-cone.png)
+![Collision Component (Cone)](/img/user-manual/editor/scenes/components/component-collision-cone.png)
 
 #### Cylinder
 
-![Collision component (Cylinder)](/img/user-manual/editor/scenes/components/component-collision-cylinder.png)
+![Collision Component (Cylinder)](/img/user-manual/editor/scenes/components/component-collision-cylinder.png)
 
 #### Mesh
 
-![Collision component (Mesh)](/img/user-manual/editor/scenes/components/component-collision-mesh.png)
+![Collision Component (Mesh)](/img/user-manual/editor/scenes/components/component-collision-mesh.png)
 
 #### Sphere
 
-![Collision component (Sphere)](/img/user-manual/editor/scenes/components/component-collision-sphere.png)
+![Collision Component (Sphere)](/img/user-manual/editor/scenes/components/component-collision-sphere.png)
 
 エンティティにRigidbodyコンポーネントがある場合、Collisionコンポーネントは剛体の形状を決定します。Rigidbodyコンポーネントが存在しない場合、Collisionコンポーネントはトリガーボリュームとして扱われます。トリガーボリュームは、シーン内の他の剛体のシミュレーションに影響を与えることはできません。代わりに、Scriptコンポーネントを追加し、トリガーイベントに応答するスクリプトをアタッチできます。たとえば、Rigidbodyコンポーネントを持つ別のエンティティがトリガーに入るか出ると、スクリプトに通知できます。
 
@@ -53,4 +53,4 @@ Collisionコンポーネントは、コンポーネントパネルの右上に�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してCollisionコンポーネントのプロパティを制御できます。Collisionコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/CollisionComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してCollisionコンポーネントのプロパティを制御できます。Collisionコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/CollisionComponent.html)です。

@@ -4,7 +4,7 @@ title: Model
 
 :::warning
 
-Modelコンポーネントは非推奨です。これは[Render](/user-manual/editor/scenes/components/render)コンポーネントに置き換えられました。
+Modelコンポーネントは非推奨です。これは[Render](render.md)コンポーネントに置き換えられました。
 
 :::
 
@@ -12,7 +12,7 @@ Modelコンポーネントを使用すると、エンティティにプリミテ
 
 Modelコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、モデルがシーンに追加されてレンダリングされます。
 
-![Model component](/img/user-manual/editor/scenes/components/component-model.png)
+![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
 
 ## プロパティ
 
@@ -35,7 +35,7 @@ Modelコンポーネントは、コンポーネントパネルの右上にある
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してModelコンポーネントのプロパティを制御できます。Modelコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ModelComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してModelコンポーネントのプロパティを制御できます。Modelコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ModelComponent.html)です。
 
 ## マテリアルのカスタマイズ
 

@@ -84,4 +84,4 @@ Screenコンポーネントを祖先に持つ階層内にElementコンポーネ�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してElementコンポーネントのプロパティを制御できます。Elementコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ElementComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してElementコンポーネントのプロパティを制御できます。Elementコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ElementComponent.html)です。

@@ -6,7 +6,7 @@ The LayoutGroup component enables an entity to specify the size and position of 
 
 See the [Layout Groups](/user-manual/user-interface/layout-groups) section for more details.
 
-![LayoutGroup component](/img/user-manual/editor/scenes/components/component-layoutgroup.png)
+![LayoutGroup Component](/img/user-manual/editor/scenes/components/component-layoutgroup.png)
 
 ## Properties
 
@@ -24,4 +24,4 @@ See the [Layout Groups](/user-manual/user-interface/layout-groups) section for m
 
 ## Scripting Interface
 
-You can control a LayoutGroup component's properties using a [script component](/user-manual/editor/scenes/components/script). The LayoutGroup component's scripting interface is [here](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html).
+You can control a LayoutGroup component's properties using a [script component](script.md). The LayoutGroup component's scripting interface is [here](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html).

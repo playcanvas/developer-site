@@ -6,7 +6,7 @@ The Camera component enables an entity to render a scene from a certain viewpoin
 
 The Camera component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the camera will render the scene every frame.
 
-![Camera component](/img/user-manual/editor/scenes/components/component-camera.png)
+![Camera Component](/img/user-manual/editor/scenes/components/component-camera.png)
 
 ## Properties
 
@@ -31,4 +31,4 @@ The Camera component can be enabled or disabled using the toggle in the top righ
 
 ## Scripting Interface
 
-You can control a Camera component's properties using a [script component](/user-manual/editor/scenes/components/script). The Camera component's scripting interface is [here](https://api.playcanvas.com/engine/classes/CameraComponent.html).
+You can control a Camera component's properties using a [script component](script.md). The Camera component's scripting interface is [here](https://api.playcanvas.com/engine/classes/CameraComponent.html).

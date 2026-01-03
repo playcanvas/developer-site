@@ -8,15 +8,15 @@ The Light component can be enabled or disabled using the toggle in the top right
 
 #### Directional
 
-![Light component (Directional)](/img/user-manual/editor/scenes/components/component-light-directional.png)
+![Light Component (Directional)](/img/user-manual/editor/scenes/components/component-light-directional.png)
 
 #### Omni
 
-![Light component (Omni)](/img/user-manual/editor/scenes/components/component-light-omni.png)
+![Light Component (Omni)](/img/user-manual/editor/scenes/components/component-light-omni.png)
 
 #### Spot
 
-![Light component (Spot)](/img/user-manual/editor/scenes/components/component-light-spot.png)
+![Light Component (Spot)](/img/user-manual/editor/scenes/components/component-light-spot.png)
 
 ## Properties
 
@@ -82,4 +82,4 @@ The Light component can be enabled or disabled using the toggle in the top right
 
 ## Scripting Interface
 
-You can control a Light component's properties using a [script component](/user-manual/editor/scenes/components/script). The Light component's scripting interface is [here](https://api.playcanvas.com/engine/classes/LightComponent.html).
+You can control a Light component's properties using a [script component](script.md). The Light component's scripting interface is [here](https://api.playcanvas.com/engine/classes/LightComponent.html).

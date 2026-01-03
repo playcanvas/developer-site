@@ -6,7 +6,7 @@ Renderコンポーネントは、エンティティがプリミティブ形状�
 
 Renderコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、コンポーネントで参照されるメッシュインスタンスがシーンに追加されてレンダリングされます。
 
-![Render component](/img/user-manual/editor/scenes/components/component-render.png)
+![Render Component](/img/user-manual/editor/scenes/components/component-render.png)
 
 ## プロパティ
 
@@ -30,4 +30,4 @@ Renderコンポーネントは、コンポーネントパネルの右上にあ�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してRenderコンポーネントのプロパティを制御できます。Renderコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/RenderComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してRenderコンポーネントのプロパティを制御できます。Renderコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/RenderComponent.html)です。

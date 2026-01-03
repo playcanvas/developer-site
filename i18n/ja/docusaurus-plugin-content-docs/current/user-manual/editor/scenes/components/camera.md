@@ -6,7 +6,7 @@ Cameraコンポーネントは、特定の視点からシーンをレンダリ�
 
 Cameraコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にすることができます。有効にすると、カメラは毎フレームシーンをレンダリングします。
 
-![Camera component](/img/user-manual/editor/scenes/components/component-camera.png)
+![Camera Component](/img/user-manual/editor/scenes/components/component-camera.png)
 
 ## プロパティ
 
@@ -31,4 +31,4 @@ Cameraコンポーネントは、コンポーネントパネルの右上にあ�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用して、Cameraコンポーネントのプロパティを制御できます。Cameraコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/CameraComponent.html)です。
+[Scriptコンポーネント](script.md)を使用して、Cameraコンポーネントのプロパティを制御できます。Cameraコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/CameraComponent.html)です。

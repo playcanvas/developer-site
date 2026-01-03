@@ -21,4 +21,4 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 
 ## Scripting Interface
 
-You can control a Screen component's properties using a [script component](/user-manual/editor/scenes/components/script). The Screen component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScreenComponent.html).
+You can control a Screen component's properties using a [script component](script.md). The Screen component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScreenComponent.html).

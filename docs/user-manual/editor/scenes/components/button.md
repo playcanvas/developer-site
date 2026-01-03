@@ -2,7 +2,7 @@
 title: Button
 ---
 
-The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen](/user-manual/editor/scenes/components/screen) and [Element](/user-manual/editor/scenes/components/element) Components.
+The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen](screen.md) and [Element](element.md) Components.
 
 The Button Component can be used in two Transition Modes. *Sprite Change*, which uses a different sprite or frame for each button state or *Tint*, which tints a single sprite with a different color for each state.
 
@@ -41,4 +41,4 @@ The Button Component can be used in two Transition Modes. *Sprite Change*, which
 
 ## Scripting Interface
 
-You can control the properties of a Button component using a [script component](/user-manual/editor/scenes/components/script). The scripting interface for the Button component is [here](https://api.playcanvas.com/engine/classes/ButtonComponent.html).
+You can control the properties of a Button component using a [script component](script.md). The scripting interface for the Button component is [here](https://api.playcanvas.com/engine/classes/ButtonComponent.html).

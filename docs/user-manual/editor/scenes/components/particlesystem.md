@@ -6,7 +6,7 @@ The Particle System component specifies a particle emitter in 3D space.
 
 The Particle System component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the particle system will be added to the scene and rendered.
 
-![Particle System component](/img/user-manual/editor/scenes/components/component-particlesystem.png)
+![Particle System Component](/img/user-manual/editor/scenes/components/component-particlesystem.png)
 
 ## Properties
 
@@ -114,4 +114,4 @@ These properties are shown when a Color Map or Normal Map is assigned.
 
 ## Scripting Interface
 
-You can control a Particle System component's properties using a [script component](/user-manual/editor/scenes/components/script). The Particle System component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html).
+You can control a Particle System component's properties using a [script component](script.md). The Particle System component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html).

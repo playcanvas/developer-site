@@ -8,31 +8,31 @@ The Collision component can be enabled or disabled using the toggle in the top r
 
 #### Box
 
-![Collision component (Box)](/img/user-manual/editor/scenes/components/component-collision-box.png)
+![Collision Component (Box)](/img/user-manual/editor/scenes/components/component-collision-box.png)
 
 #### Capsule
 
-![Collision component (Capsule)](/img/user-manual/editor/scenes/components/component-collision-capsule.png)
+![Collision Component (Capsule)](/img/user-manual/editor/scenes/components/component-collision-capsule.png)
 
 #### Compound
 
-![Collision component (Compound)](/img/user-manual/editor/scenes/components/component-collision-compound.png)
+![Collision Component (Compound)](/img/user-manual/editor/scenes/components/component-collision-compound.png)
 
 #### Cone
 
-![Collision component (Cone)](/img/user-manual/editor/scenes/components/component-collision-cone.png)
+![Collision Component (Cone)](/img/user-manual/editor/scenes/components/component-collision-cone.png)
 
 #### Cylinder
 
-![Collision component (Cylinder)](/img/user-manual/editor/scenes/components/component-collision-cylinder.png)
+![Collision Component (Cylinder)](/img/user-manual/editor/scenes/components/component-collision-cylinder.png)
 
 #### Mesh
 
-![Collision component (Mesh)](/img/user-manual/editor/scenes/components/component-collision-mesh.png)
+![Collision Component (Mesh)](/img/user-manual/editor/scenes/components/component-collision-mesh.png)
 
 #### Sphere
 
-![Collision component (Sphere)](/img/user-manual/editor/scenes/components/component-collision-sphere.png)
+![Collision Component (Sphere)](/img/user-manual/editor/scenes/components/component-collision-sphere.png)
 
 If the entity also has a rigidbody component, the collision component determines the shape of the rigid body. If no rigidbody component is present, the collision component is treated as a trigger volume. The trigger volume cannot affect the simulation of other rigid bodies in the scene. Instead, you can add a script component and attach a script which responds to trigger events. For example, if another entity that has a rigidbody component enters or exits the trigger, your script can be notified.
 
@@ -53,4 +53,4 @@ If the entity also has a rigidbody component, the collision component determines
 
 ## Scripting Interface
 
-You can control a Collision component's properties using a [script component](/user-manual/editor/scenes/components/script). The Collision component's scripting interface is [here](https://api.playcanvas.com/engine/classes/CollisionComponent.html).
+You can control a Collision component's properties using a [script component](script.md). The Collision component's scripting interface is [here](https://api.playcanvas.com/engine/classes/CollisionComponent.html).

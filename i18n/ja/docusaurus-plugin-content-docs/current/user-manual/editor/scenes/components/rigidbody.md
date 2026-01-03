@@ -8,17 +8,17 @@ Rigid Bodyコンポーネントは、コンポーネントパネル右上のト�
 
 #### Static
 
-![Rigid Body component (Static)](/img/user-manual/editor/scenes/components/component-rigid-body-static.png)
+![Rigid Body Component (Static)](/img/user-manual/editor/scenes/components/component-rigid-body-static.png)
 
 #### Dynamic
 
-![Rigid Body component (Dynamic)](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
+![Rigid Body Component (Dynamic)](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
 
 #### Kinematic
 
-![Rigid Body component (Kinematic)](/img/user-manual/editor/scenes/components/component-rigid-body-kinematic.png)
+![Rigid Body Component (Kinematic)](/img/user-manual/editor/scenes/components/component-rigid-body-kinematic.png)
 
-剛体の形状を定義するには、同じエンティティに[Collisionコンポーネント](/user-manual/editor/scenes/components/collision/)を追加する必要があります。そうしないと、Rigid Bodyコンポーネントは効果を持たず、物理シミュレーションに参加しません。
+剛体の形状を定義するには、同じエンティティに[Collisionコンポーネント](collision.md)を追加する必要があります。そうしないと、Rigid Bodyコンポーネントは効果を持たず、物理シミュレーションに参加しません。
 
 ## プロパティ
 
@@ -35,4 +35,4 @@ Rigid Bodyコンポーネントは、コンポーネントパネル右上のト�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してRigid Bodyコンポーネントのプロパティを制御できます。Rigid Bodyコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してRigid Bodyコンポーネントのプロパティを制御できます。Rigid Bodyコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html)です。

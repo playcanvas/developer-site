@@ -6,7 +6,7 @@ Scriptコンポーネントは、エンティティがユーザー提供のス�
 
 Scriptコンポーネントは、コンポーネントパネルの右上のトグルを使用して有効または無効にできます。有効にすると、割り当てられたすべてのスクリプトのupdate関数が毎フレーム呼び出されます。
 
-![Script component](/img/user-manual/editor/scenes/components/component-script.png)
+![Script Component](/img/user-manual/editor/scenes/components/component-script.png)
 
 ## スクリプトの追加
 
@@ -17,7 +17,7 @@ Scriptコンポーネントは、コンポーネントパネルの右上のト�
 
 または、AssetsパネルからScriptコンポーネントにスクリプトアセットをドラッグ＆ドロップすることもできます。
 
-<img loading="lazy" src="/img/user-manual/editor/scenes/components/new-script.jpg" />
+![Add Script Dialog](/img/user-manual/editor/scenes/components/new-script.jpg)
 
 ## スクリプトパネルのコントロール
 
@@ -53,4 +53,4 @@ Scriptコンポーネントは、コンポーネントパネルの右上のト�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してScriptコンポーネントのプロパティを制御できます。Scriptコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScriptComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してScriptコンポーネントのプロパティを制御できます。Scriptコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScriptComponent.html)です。

@@ -6,7 +6,7 @@ The Script component enables an entity to run user-supplied scripts. In this way
 
 The Script component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, all of the assigned scripts will have their update functions called every frame.
 
-![Script component](/img/user-manual/editor/scenes/components/component-script.png)
+![Script Component](/img/user-manual/editor/scenes/components/component-script.png)
 
 ## Adding Scripts
 
@@ -17,7 +17,7 @@ To create a new script, click on the **Add Script** dropdown in the Script compo
 
 Alternatively, you can drag a script asset from the Assets Panel onto the Script component.
 
-<img loading="lazy" src="/img/user-manual/editor/scenes/components/new-script.jpg" />
+![Add Script Dialog](/img/user-manual/editor/scenes/components/new-script.jpg)
 
 ## Script Panel Controls
 
@@ -53,4 +53,4 @@ See the [Script Attributes](/user-manual/scripting/script-attributes/) documenta
 
 ## Scripting Interface
 
-You can control a Script component's properties using a [script component](/user-manual/editor/scenes/components/script). The Script component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScriptComponent.html).
+You can control a Script component's properties using a [script component](script.md). The Script component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScriptComponent.html).

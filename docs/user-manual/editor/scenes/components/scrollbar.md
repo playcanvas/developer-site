@@ -2,7 +2,7 @@
 title: Scrollbar
 ---
 
-The Scrollbar component defines a scrolling control for a [Scrollview](/user-manual/editor/scenes/components/scrollview) component.
+The Scrollbar component defines a scrolling control for a [Scrollview](scrollview.md) component.
 
 See the [User Interface](/user-manual/user-interface) section for more details.
 
@@ -19,4 +19,4 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 
 ## Scripting Interface
 
-You can control a Scrollbar component's properties using a [script component](/user-manual/editor/scenes/components/script). The Scrollbar component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html).
+You can control a Scrollbar component's properties using a [script component](script.md). The Scrollbar component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html).

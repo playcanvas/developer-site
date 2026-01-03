@@ -6,7 +6,7 @@ The anim component is used to connect an animstategraph asset and all of its req
 
 The anim component can be enabled or disabled using the toggle in the top right of the component panel. If enabled and the Activate property is checked, the animation will play automatically when the scene is launched.
 
-![Anim component](/img/user-manual/editor/scenes/components/component-anim.png)
+![Anim Component](/img/user-manual/editor/scenes/components/component-anim.png)
 
 ## Properties
 
@@ -53,4 +53,4 @@ To edit an existing mask, click the **EDIT MASK** button. To delete a mask, clic
 
 ## Scripting Interface
 
-You can control an anim component's properties using a [script component](/user-manual/editor/scenes/components/script). The anim component's scripting interface is [here](https://api.playcanvas.com/engine/classes/AnimComponent.html).
+You can control an anim component's properties using a [script component](script.md). The anim component's scripting interface is [here](https://api.playcanvas.com/engine/classes/AnimComponent.html).

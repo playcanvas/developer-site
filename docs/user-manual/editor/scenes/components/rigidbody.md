@@ -8,17 +8,17 @@ The Rigid Body component can be enabled or disabled using the toggle in the top 
 
 #### Static
 
-![Rigid Body component (Static)](/img/user-manual/editor/scenes/components/component-rigid-body-static.png)
+![Rigid Body Component (Static)](/img/user-manual/editor/scenes/components/component-rigid-body-static.png)
 
 #### Dynamic
 
-![Rigid Body component (Dynamic)](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
+![Rigid Body Component (Dynamic)](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
 
 #### Kinematic
 
-![Rigid Body component (Kinematic)](/img/user-manual/editor/scenes/components/component-rigid-body-kinematic.png)
+![Rigid Body Component (Kinematic)](/img/user-manual/editor/scenes/components/component-rigid-body-kinematic.png)
 
-Note that you must add a [collision component](/user-manual/editor/scenes/components/collision/) to the same entity in order to define the shape of the rigid body. Otherwise, the Rigid Body component has no effect and will not participate in the physics simulation.
+Note that you must add a [collision component](collision.md) to the same entity in order to define the shape of the rigid body. Otherwise, the Rigid Body component has no effect and will not participate in the physics simulation.
 
 ## Properties
 
@@ -35,4 +35,4 @@ Note that you must add a [collision component](/user-manual/editor/scenes/compon
 
 ## Scripting Interface
 
-You can control a Rigid Body component's properties using a [script component](/user-manual/editor/scenes/components/script). The Rigid Body component's scripting interface is [here](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html).
+You can control a Rigid Body component's properties using a [script component](script.md). The Rigid Body component's scripting interface is [here](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html).
