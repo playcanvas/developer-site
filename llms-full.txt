@@ -18608,11 +18608,21 @@ URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/sup
 
 [Image: SuperSplat Interface]
 
-## Getting Started
+## Video Tutorials
+
+### Introduction to SuperSplat
 
 A great way to learn the basics on SuperSplat is to watch this video introduction:
 
 [Interactive Demo]
+
+### In-Depth Tutorial
+
+For a more comprehensive guide to using SuperSplat, check out this in-depth tutorial:
+
+[Interactive Demo]
+
+## Getting Started
 
 ### Accessing SuperSplat
 
