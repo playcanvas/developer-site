@@ -1,6 +1,7 @@
 // utils/plugins/docusaurus-plugin-llms.mjs
 import fs from 'fs';
 import path from 'path';
+import yaml from 'js-yaml';
 
 /**
  * Docusaurus plugin to generate LLM-friendly documentation files.
@@ -135,34 +136,21 @@ function processMarkdownFile(filePath, docsDir) {
 }
 
 /**
- * Parse YAML frontmatter from markdown content
+ * Parse YAML frontmatter from markdown content using js-yaml.
+ * Supports full YAML syntax including multi-line strings (| and >),
+ * multi-line arrays, nested objects, and all standard YAML constructs.
  */
 function parseFrontmatter(content) {
     const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
     if (!match) return {};
 
-    const frontmatter = {};
-    const lines = match[1].split(/\r?\n/);
-
-    for (const line of lines) {
-        const colonIndex = line.indexOf(':');
-        if (colonIndex > 0) {
-            const key = line.slice(0, colonIndex).trim();
-            let value = line.slice(colonIndex + 1).trim();
-
-            // Handle arrays like [tag1, tag2]
-            if (value.startsWith('[') && value.endsWith(']')) {
-                value = value.slice(1, -1).split(',').map(s => s.trim().replace(/^['"]|['"]$/g, ''));
-            } else {
-                // Remove surrounding quotes if present
-                value = value.replace(/^['"]|['"]$/g, '');
-            }
-
-            frontmatter[key] = value;
-        }
+    try {
+        return yaml.load(match[1]) || {};
+    } catch (error) {
+        // Log warning but return empty object to allow processing to continue
+        console.warn(`[LLMs Plugin] Warning: Failed to parse frontmatter: ${error.message}`);
+        return {};
     }
-
-    return frontmatter;
 }
 
 /**
