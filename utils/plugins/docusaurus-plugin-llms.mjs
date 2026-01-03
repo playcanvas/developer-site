@@ -12,6 +12,8 @@ import yaml from 'js-yaml';
  * @param {Object} context - Docusaurus context
  * @param {Object} options - Plugin options
  * @param {string} [options.docsDir='docs'] - Path to docs directory relative to site root
+ * @param {string[]} [options.excludeDirs=['shader-editor']] - Directories to exclude from
+ *   LLM file generation (e.g., private or unlisted documentation sections)
  * @param {boolean} [options.failOnError=false] - If true, build will fail when LLM file
  *   generation encounters an error. If false (default), errors are logged as warnings
  *   and the build continues. Set to true if LLM files are critical to your deployment.
@@ -20,6 +22,7 @@ export default function pluginLlms(context, options = {}) {
     const { siteDir, siteConfig } = context;
     const docsDir = path.join(siteDir, options.docsDir || 'docs');
     const baseUrl = siteConfig.url;
+    const excludeDirs = options.excludeDirs ?? ['shader-editor'];
     const failOnError = options.failOnError ?? false;
 
     return {
@@ -34,8 +37,8 @@ export default function pluginLlms(context, options = {}) {
                     console.warn(`[LLMs Plugin] Docs directory not found at ${docsDir}. Skipping LLM file generation.`);
                     return;
                 }
-                // Collect all markdown files
-                const docFiles = await collectMarkdownFiles(docsDir);
+                // Collect all markdown files (excluding private/unlisted directories)
+                const docFiles = await collectMarkdownFiles(docsDir, excludeDirs);
                 console.log(`[LLMs Plugin] Found ${docFiles.length} documentation files`);
 
                 // Process files and extract content
@@ -75,15 +78,22 @@ export default function pluginLlms(context, options = {}) {
 
 /**
  * Recursively collect all markdown files from a directory
+ * @param {string} dir - Directory to scan
+ * @param {string[]} excludeDirs - Directory names to exclude
+ * @param {string[]} files - Accumulated file list
  */
-function collectMarkdownFiles(dir, files = []) {
+function collectMarkdownFiles(dir, excludeDirs = [], files = []) {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
 
     for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
 
         if (entry.isDirectory()) {
-            collectMarkdownFiles(fullPath, files);
+            // Skip excluded directories
+            if (excludeDirs.includes(entry.name)) {
+                continue;
+            }
+            collectMarkdownFiles(fullPath, excludeDirs, files);
         } else if (entry.isFile() && /\.(md|mdx)$/.test(entry.name)) {
             files.push(fullPath);
         }
@@ -245,8 +255,7 @@ function getCategoryFromPath(urlPath) {
     // Map top-level paths to categories
     const categoryMap = {
         'user-manual': 'User Manual',
-        'tutorials': 'Tutorials',
-        'shader-editor': 'Shader Editor'
+        'tutorials': 'Tutorials'
     };
 
     return categoryMap[parts[0]] || parts[0];
@@ -258,31 +267,30 @@ function getCategoryFromPath(urlPath) {
 function generateLlmsTxt(docs, baseUrl) {
     const lines = [];
 
-    lines.push('# PlayCanvas Developer Documentation');
-    lines.push('');
-    lines.push('> PlayCanvas is an open-source WebGL/WebGPU 3D game engine for creating interactive experiences and games that run in the browser.');
-    lines.push('');
-    lines.push('This file provides a structured overview of the PlayCanvas documentation.');
-    lines.push(`For the complete documentation content, see: ${baseUrl}/llms-full.txt`);
-    lines.push('');
-    lines.push(`Base URL: ${baseUrl}`);
-    lines.push(`Total Documents: ${docs.length}`);
-    lines.push(`Generated: ${new Date().toISOString().split('T')[0]}`);
-    lines.push('');
+    lines.push(`# PlayCanvas Developer Documentation
 
-    lines.push('## Recommended Entry Points');
-    lines.push('');
-    lines.push('- Getting Started: /user-manual/getting-started/');
-    lines.push('- PlayCanvas Editor: /user-manual/editor/');
-    lines.push('- PlayCanvas Engine: /user-manual/engine/');
-    lines.push('- PlayCanvas React: /user-manual/playcanvas-react/');
-    lines.push('- Web Components: /user-manual/web-components/');
-    lines.push('- Scripting: /user-manual/scripting/');
-    lines.push('- Gaussian Splatting: /user-manual/gaussian-splatting/');
-    lines.push('- Graphics: /user-manual/graphics/');
-    lines.push('- Physics: /user-manual/physics/');
-    lines.push('- XR (VR/AR): /user-manual/xr/');
-    lines.push('');
+> PlayCanvas is an open-source WebGL/WebGPU 3D game engine for creating interactive experiences and games that run in the browser.
+
+This file provides a structured overview of the PlayCanvas documentation.
+For the complete documentation content, see: ${baseUrl}/llms-full.txt
+
+Base URL: ${baseUrl}
+Total Documents: ${docs.length}
+Generated: ${new Date().toISOString().split('T')[0]}
+
+## Recommended Entry Points
+
+- Getting Started: ${baseUrl}/user-manual/getting-started/
+- PlayCanvas Editor: ${baseUrl}/user-manual/editor/
+- PlayCanvas Engine: ${baseUrl}/user-manual/engine/
+- PlayCanvas React: ${baseUrl}/user-manual/playcanvas-react/
+- Web Components: ${baseUrl}/user-manual/web-components/
+- Scripting: ${baseUrl}/user-manual/scripting/
+- Gaussian Splatting: ${baseUrl}/user-manual/gaussian-splatting/
+- Graphics: ${baseUrl}/user-manual/graphics/
+- Physics: ${baseUrl}/user-manual/physics/
+- XR (VR/AR): ${baseUrl}/user-manual/xr/
+`);
 
     // Group by category
     const categories = {};
@@ -294,14 +302,24 @@ function generateLlmsTxt(docs, baseUrl) {
     }
 
     // Define category order
-    const categoryOrder = ['User Manual', 'Tutorials', 'Shader Editor'];
+    const categoryOrder = ['User Manual', 'Tutorials'];
+
+    // Define subcategory order to match sidebars.js
+    const subcategoryOrder = {
+        'User Manual': [
+            'index', 'getting-started', 'account-management',
+            'engine', 'editor', 'playcanvas-react', 'web-components',
+            'ecs', 'assets', 'scripting', 'graphics', 'gaussian-splatting',
+            'animation', 'physics', '2D', 'user-interface', 'xr',
+            'optimization', 'api', 'pcui', 'glossary', 'press-pack'
+        ]
+    };
 
     // Output each category
     for (const category of categoryOrder) {
         if (!categories[category]) continue;
 
-        lines.push(`## ${category}`);
-        lines.push('');
+        lines.push(`## ${category}\n`);
 
         // Group by subcategory (second level path)
         const subcategories = {};
@@ -314,8 +332,20 @@ function generateLlmsTxt(docs, baseUrl) {
             subcategories[subcat].push(doc);
         }
 
-        // Sort subcategories alphabetically
-        const sortedSubcats = Object.keys(subcategories).sort();
+        // Sort subcategories: use defined order if available, otherwise alphabetical
+        const order = subcategoryOrder[category];
+        const sortedSubcats = Object.keys(subcategories).sort((a, b) => {
+            if (order) {
+                const indexA = order.indexOf(a);
+                const indexB = order.indexOf(b);
+                // Items in order come first, in their defined order
+                if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                if (indexA !== -1) return -1;
+                if (indexB !== -1) return 1;
+            }
+            // Fallback to alphabetical
+            return a.localeCompare(b);
+        });
 
         for (const subcat of sortedSubcats) {
             const subcatDocs = subcategories[subcat];
@@ -342,7 +372,10 @@ function generateLlmsTxt(docs, baseUrl) {
             for (const doc of subcatDocs) {
                 lines.push(`- ${baseUrl}${doc.urlPath} - ${doc.title}`);
             }
-            lines.push('');
+
+            if (subcatDocs.length > 1) {
+                lines.push('');
+            }
         }
     }
 
@@ -350,13 +383,11 @@ function generateLlmsTxt(docs, baseUrl) {
     for (const category of Object.keys(categories)) {
         if (categoryOrder.includes(category)) continue;
 
-        lines.push(`## ${category}`);
-        lines.push('');
+        const docLinks = categories[category]
+            .map(doc => `- ${baseUrl}${doc.urlPath} - ${doc.title}`)
+            .join('\n');
 
-        for (const doc of categories[category]) {
-            lines.push(`- ${baseUrl}${doc.urlPath} - ${doc.title}`);
-        }
-        lines.push('');
+        lines.push(`## ${category}\n\n${docLinks}\n`);
     }
 
     return lines.join('\n');
@@ -368,37 +399,31 @@ function generateLlmsTxt(docs, baseUrl) {
 function generateLlmsFullTxt(docs, baseUrl) {
     const lines = [];
 
-    lines.push('# PlayCanvas Developer Documentation - Full Content');
-    lines.push('');
-    lines.push('> This file contains the complete text content of the PlayCanvas documentation.');
-    lines.push('> It is designed for consumption by Large Language Models (LLMs) and AI assistants.');
-    lines.push('');
-    lines.push(`Base URL: ${baseUrl}`);
-    lines.push(`Total Documents: ${docs.length}`);
-    lines.push(`Generated: ${new Date().toISOString().split('T')[0]}`);
-    lines.push('');
-    lines.push('='.repeat(80));
-    lines.push('');
+    lines.push(`# PlayCanvas Developer Documentation - Full Content
+
+> This file contains the complete text content of the PlayCanvas documentation.
+> It is designed for consumption by Large Language Models (LLMs) and AI assistants.
+
+Base URL: ${baseUrl}
+Total Documents: ${docs.length}
+Generated: ${new Date().toISOString().split('T')[0]}
+
+${'='.repeat(80)}
+`);
 
     for (const doc of docs) {
-        // Document header
-        lines.push(`## ${doc.title}`);
-        lines.push('');
-        lines.push(`URL: ${baseUrl}${doc.urlPath}`);
+        const tagsLine = (doc.tags && doc.tags.length > 0)
+            ? `Tags: ${Array.isArray(doc.tags) ? doc.tags.join(', ') : doc.tags}\n`
+            : '';
 
-        if (doc.tags && doc.tags.length > 0) {
-            const tagsStr = Array.isArray(doc.tags) ? doc.tags.join(', ') : doc.tags;
-            lines.push(`Tags: ${tagsStr}`);
-        }
+        lines.push(`## ${doc.title}
 
-        lines.push('');
+URL: ${baseUrl}${doc.urlPath}
+${tagsLine}
+${doc.content}
 
-        // Document content
-        lines.push(doc.content);
-
-        lines.push('');
-        lines.push('-'.repeat(80));
-        lines.push('');
+${'-'.repeat(80)}
+`);
     }
 
     return lines.join('\n');
