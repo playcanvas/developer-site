@@ -270,6 +270,20 @@ function generateLlmsTxt(docs, baseUrl) {
     lines.push(`Generated: ${new Date().toISOString().split('T')[0]}`);
     lines.push('');
 
+    lines.push('## Recommended Entry Points');
+    lines.push('');
+    lines.push('- Getting Started: /user-manual/getting-started/');
+    lines.push('- PlayCanvas Editor: /user-manual/editor/');
+    lines.push('- PlayCanvas Engine: /user-manual/engine/');
+    lines.push('- PlayCanvas React: /user-manual/playcanvas-react/');
+    lines.push('- Web Components: /user-manual/web-components/');
+    lines.push('- Scripting: /user-manual/scripting/');
+    lines.push('- Gaussian Splatting: /user-manual/gaussian-splatting/');
+    lines.push('- Graphics: /user-manual/graphics/');
+    lines.push('- Physics: /user-manual/physics/');
+    lines.push('- XR (VR/AR): /user-manual/xr/');
+    lines.push('');
+
     // Group by category
     const categories = {};
     for (const doc of docs) {
@@ -307,9 +321,18 @@ function generateLlmsTxt(docs, baseUrl) {
             const subcatDocs = subcategories[subcat];
 
             // Format subcategory name
+            // Acronyms that should be fully uppercased
+            const acronyms = new Set(['api', 'xr', '2d', 'ui', 'ecs', 'pcui']);
+            // Brand names with specific capitalization
+            const brandNames = { 'playcanvas': 'PlayCanvas' };
             const subcatName = subcat
                 .split('-')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .map((word) => {
+                    const lower = word.toLowerCase();
+                    if (acronyms.has(lower)) return word.toUpperCase();
+                    if (brandNames[lower]) return brandNames[lower];
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                })
                 .join(' ');
 
             if (subcatDocs.length > 1) {
