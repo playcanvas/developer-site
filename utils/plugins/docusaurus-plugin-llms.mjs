@@ -20,6 +20,11 @@ export default function pluginLlms(context, options) {
             console.log('[LLMs Plugin] Generating LLM-friendly documentation files...');
 
             try {
+                // Ensure the docs directory exists before processing
+                if (!fs.existsSync(docsDir)) {
+                    console.warn(`[LLMs Plugin] Docs directory not found at ${docsDir}. Skipping LLM file generation.`);
+                    return;
+                }
                 // Collect all markdown files
                 const docFiles = await collectMarkdownFiles(docsDir);
                 console.log(`[LLMs Plugin] Found ${docFiles.length} documentation files`);
