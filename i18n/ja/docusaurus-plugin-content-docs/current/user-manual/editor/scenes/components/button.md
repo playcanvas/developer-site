@@ -2,22 +2,22 @@
 title: Button
 ---
 
-Buttonコンポーネントは、[Screen][1]コンポーネントと[Element][2]コンポーネントで使用するユーザーインターフェイスボタンを作成するための便利なショートカットです。
+Buttonコンポーネントは、[Screen](/user-manual/editor/scenes/components/screen)コンポーネントと[Element](/user-manual/editor/scenes/components/element)コンポーネントで使用するユーザーインターフェイスボタンを作成するための便利なショートカットです。
 
-Buttonコンポーネントは、2つのトランジションモードで使用できます。*Sprite Swap* では、各ボタンの状態に異なるスプライトまたはフレームを使用します。*Tint* では、単一のスプライトを各状態で異なる色で着色します。
+Buttonコンポーネントは、2つのトランジションモードで使用できます。*Sprite Change* では、各ボタンの状態に異なるスプライトまたはフレームを使用します。*Tint* では、単一のスプライトを各状態で異なる色で着色します。
 
 ## 共通プロパティ
 
 | プロパティ名        | 説明 |
 |-----------------|-------------|
-| Active          | 有効にすると、ボタンが反応してイベントを発生させ、無効にするとボタンは非アクティブ状態に設定されます。 |
-| Image           | 入力イベントを検出に使用されるImage Elementエンティティ。 |
-| Hit Padding     | 入力イベントをテストする際に含まれるImage Element周囲の追加スペース。 |
-| Transition Mode | トランジションに使用するエフェクトのタイプ。Sprite SwapまたはTint。 |
+| Active          | 有効にすると、ボタンが反応してイベントを発生させます。無効にするとボタンは非アクティブ状態に設定されます。 |
+| Image           | 入力イベントを検出するために使用されるImage Elementエンティティ。 |
+| Hit Padding     | 入力イベントをテストする際に含まれるImage Element周囲の追加スペース。左、下、右、上のパディング値として指定します。 |
+| Transition Mode | トランジションに使用するエフェクトのタイプ。Sprite ChangeまたはTint。 |
 
-## スプライトスワップ (Sprite Swap)・プロパティ
+## スプライトチェンジ (Sprite Change)・プロパティ
 
-![Sprite Swap Button](/img/user-manual/editor/scenes/components/component-button-sprite-change.png)
+![Sprite Change Button](/img/user-manual/editor/scenes/components/component-button-sprite-change.png)
 
 | プロパティ名        | 説明 |
 |-----------------|-------------|
@@ -41,9 +41,4 @@ Buttonコンポーネントは、2つのトランジションモードで使用�
 
 ## スクリプトインターフェース
 
-Buttonコンポーネントのプロパティは、[Scriptコンポーネント][5]を使用して制御できます。 Buttonコンポーネントのスクリプティングインターフェースは[こちら][6]です。
-
-[1]: /user-manual/editor/scenes/components/screen
-[2]: /user-manual/editor/scenes/components/element
-[5]: /user-manual/editor/scenes/components/script
-[6]: https://api.playcanvas.com/engine/classes/ButtonComponent.html
+Buttonコンポーネントのプロパティは、[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用して制御できます。 Buttonコンポーネントのスクリプティングインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ButtonComponent.html)です。

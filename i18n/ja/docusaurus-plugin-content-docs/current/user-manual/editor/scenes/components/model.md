@@ -8,34 +8,35 @@ Modelコンポーネントは非推奨です。これは[Render](/user-manual/ed
 
 :::
 
-Modelコンポーネントを使用すると、エンティティにプリミティブシェイプまたはModelアセットをレンダリングすることができます。
+Modelコンポーネントを使用すると、エンティティにプリミティブシェイプまたはモデルアセットをレンダリングすることができます。
 
-Modelコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、モデルがシーンに追加され、レンダリングされます。
+Modelコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、モデルがシーンに追加されてレンダリングされます。
 
 ![Model component](/img/user-manual/editor/scenes/components/component-model.png)
 
-## Properties
+## プロパティ
 
-| プロパティ名              | 説明 |
-|-----------------------|-------------|
-| タイプ                  | レンダリングされるモデルの種類。次のものがあります:<ul><li>Asset</li><li>Box</li><li>Capsule</li><li>Cone</li><li>Cylinder</li><li>Plane</li><li>Sphere</li></ul> |
-| アセット (Asset)                 | このModelコンポーネントでレンダリングされるModelアセット。Typeが「asset」の場合にのみ適用されます。Modelコンポーネントごとに1つのモデルしかレンダリングできません。 |
-| Cast Shadows          | このコンポーネントでレンダリングされるモデルが、シーン内の他のモデルに影を落とす場合は有効にしてください。 |
-| Cast Lightmap Shadows | このコンポーネントでレンダリングされるモデルが、ライトマップに影を投影する場合は有効にしてください。 |
-| Receive Shadows       | このコンポーネントでレンダリングされるモデルが、シーン内の他のモデルによってキャストされた影を受け取る場合は有効にしてください。 |
-| Static                | モデルが常に動かない場合は、このボックスをオンにしてエンジンに最適化するように指示してください。 |
-| Lightmapped           | このモデルがダイナミックライトからのライティングを受け取らず、ライトマップライトによって生成されたライティングを受け取る場合は、有効にしてください。 |
-| Batch Group           | このモデルが所属するバッチグループ。バッチングについては[こちら][5]を参照してください。 |
+| プロパティ名 | 説明 |
+|---------------------------|-------------|
+| Type                      | レンダリングされるモデルのタイプ。Asset、Box、Capsule、Cone、Cylinder、Plane、Sphereのいずれか。 |
+| Model                     | Assetタイプのみ。このモデルコンポーネントでレンダリングされるモデルアセット。モデルコンポーネントごとに1つのモデルのみレンダリング可能。 |
+| Material                  | プリミティブタイプのみ。プリミティブシェイプのレンダリングに使用されるマテリアルアセット。 |
+| Cast Shadows              | 有効にすると、このコンポーネントでレンダリングされるモデルがシーン内の他のモデルに影を投影します。 |
+| Cast Lightmap Shadows     | 有効にすると、このコンポーネントでレンダリングされるモデルがライトマップに影を投影します。 |
+| Receive Shadows           | 有効にすると、このコンポーネントでレンダリングされるモデルがシーン内の他のモデルからの影を受け取ります。 |
+| Static                    | モデルが決して移動しない場合、エンジンが特定の最適化を行うためのヒントとしてこのボックスをチェックします。 |
+| Lightmapped               | 有効にすると、このモデルは動的ライトからの照明を受け取らず、ライトマップライトによって生成された照明を受け取ります。 |
+| Lightmap Size Multiplier  | このモデルの計算されたライトマップサイズに適用される乗数。より高解像度のライトマップには値を増やします。Lightmappedが有効な場合のみ表示されます。 |
+| Custom AABB               | 有効にすると、自動計算されたものではなく、可視性カリング用のカスタム軸平行境界ボックスを指定できます。 |
+| AABB Center               | カスタム境界ボックスの中心位置。Custom AABBが有効な場合のみ表示されます。 |
+| AABB Half Extents         | カスタム境界ボックスの半径（半幅、半高さ、半奥行き）。Custom AABBが有効な場合のみ表示されます。 |
+| Batch Group               | このモデルが属するバッチグループ。バッチングについては[こちら](/user-manual/graphics/advanced-rendering/batching)を参照してください。 |
+| Layers                    | このモデルをレンダリングするレイヤー。 |
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント][2]を使用して、Modelコンポーネントのプロパティを制御できます。Modelコンポーネントのスクリプトインターフェイスは[こちら][3]です。
+[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してModelコンポーネントのプロパティを制御できます。Modelコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ModelComponent.html)です。
 
 ## マテリアルのカスタマイズ
 
-モデルのマテリアルをカスタマイズする方法については、[こちら][4]を参照してください。
-
-[2]: /user-manual/editor/scenes/components/script
-[3]: https://api.playcanvas.com/engine/classes/ModelComponent.html
-[4]: /user-manual/assets/types/material/#assigning-materials
-[5]: /user-manual/graphics/advanced-rendering/batching
+モデルのマテリアルをカスタマイズする方法については、[こちら](/user-manual/assets/types/material/#assigning-materials)を参照してください。

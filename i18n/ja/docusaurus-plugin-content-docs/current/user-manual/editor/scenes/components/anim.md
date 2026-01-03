@@ -4,14 +4,53 @@ title: Anim
 
 Animコンポーネントは、Animstategraphアセットとその必要なアニメーションアセットを1つのエンティティに接続するために使用されます。
 
-以下では、Animコンポーネントがコンポーネントに追加された後の様子が表示されます。Animstategraphアセットを選択するための利用可能なスロットが表示されます。
+Animコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にすることができます。有効にしてActivateプロパティがチェックされている場合、シーンが起動されると自動的にアニメーションが再生されます。
 
-![New Anim Component](/img/user-manual/animation/new-anim-component.png)
+![Anim component](/img/user-manual/editor/scenes/components/component-anim.png)
 
-Animstategraphアセットを選択すると、Animコンポーネントにアニメーションアセットスロットのリストが表示されます。ステートグラフアセットの各レイヤーの各アニメーションステートに対応するスロットが1つずつあります。これにより、実際のアニメーションデータが以前に作成したステートグラフに接続されます。複数のAnimコンポーネントが同じAnimstategraphアセットを使用でき、それぞれが独自のアニメーションアセットを持つことができます。
+## プロパティ
+
+| プロパティ | 説明 |
+|-------------------|-------------|
+| Activate          | 有効にすると、シーンが起動されたときにアニメーションが自動的に再生を開始します。 |
+| Speed             | ステートグラフ内のすべてのアニメーションの再生速度を制御します。1は通常速度、0.5は半分の速度、2は2倍の速度です。範囲は0から2です。 |
+| Root Bone         | オプションで、アニメーションのルートボーンとして使用するエンティティを指定します。モデル階層がエンティティの最上位レベルにない場合に便利です。 |
+| Normalize Weights | 有効にすると、すべてのレイヤーのウェイトが合計1になるように正規化されます。これはレイヤーブレンディングの計算方法に影響します。 |
+| State Graph       | このエンティティのアニメーションステートマシンを定義するAnimstategraphアセット。 |
+
+## アニメーションアセットの割り当て
+
+Animstategraphアセットを選択すると、Animコンポーネントにレイヤーごとに整理されたアニメーションアセットスロットのリストが表示されます。ステートグラフアセットの各レイヤーの各アニメーションステート（START、END、ANYステートを除く）に対して1つのスロットがあります。これにより、実際のアニメーションデータが以前に作成したステートグラフに接続されます。
 
 ![Anim Component With Graph](/img/user-manual/animation/anim-component-with-graph.png)
 
-After all animation state slots have been filled, the anim component will become playable. At this point the anim component can either be played via script by calling `entity.anim.playing = true` or if the `Activate` option is selected, it will play automatically upon the launch of the PlayCanvas project.
+複数のAnimコンポーネントが同じAnimstategraphアセットを使用でき、それぞれが独自のアニメーションアセットセットを持つことができます。すべてのアニメーションステートスロットが埋められると、Animコンポーネントは再生可能になります。アニメーションはスクリプトで`entity.anim.playing = true`を呼び出すか、Activateオプションが有効な場合は自動的に再生できます。
 
-Animコンポーネントには、アニメーション再生速度を変更するオプションも用意されています。この速度は、ステートグラフ内のすべてのアニメーションに影響します。
+## レイヤーマスク
+
+ステートグラフの各レイヤーには、レイヤーのアニメーションが影響するボーンを制限するオプションのマスクを設定できます。これは、下半身で歩行アニメーションを再生しながら、上半身で手を振るアニメーションを再生するようなシナリオに便利です。
+
+![Create Mask Button](/img/user-manual/animation/anim-component-create-mask.png)
+
+レイヤーのマスクを作成するには、レイヤー名の横にある**CREATE MASK**ボタンをクリックします。これによりマスクインスペクターが開きます。
+
+### マスクインスペクター
+
+マスクインスペクターは、モデル階層内のすべてのボーンのツリービューを表示します。各ボーンには、レイヤーのアニメーションがそのボーンに影響するかどうかを決定するチェックボックスがあります。
+
+![Mask Inspector](/img/user-manual/animation/anim-mask-inspector.png)
+
+マスクインスペクターにはいくつかのコントロールがあります：
+
+| コントロール | 説明 |
+|-----------------------|-------------|
+| ADD ALL / ADD SELECTED | マスク内のすべてのボーンを有効にします。選択されているボーンがある場合は、選択されたボーンのみを有効にします。 |
+| REMOVE ALL / REMOVE SELECTED | マスク内のすべてのボーンを無効にします。選択されているボーンがある場合は、選択されたボーンのみを無効にします。 |
+| Add hierarchy（コンテキストメニュー） | ボーンを右クリックして、そのボーンとすべての子ボーンを有効にします。 |
+| Remove hierarchy（コンテキストメニュー） | ボーンを右クリックして、そのボーンとすべての子ボーンを無効にします。 |
+
+既存のマスクを編集するには、**EDIT MASK**ボタンをクリックします。マスクを削除するには、レイヤーの横にあるゴミ箱アイコンをクリックします。
+
+## スクリプトインターフェース
+
+[Scriptコンポーネント](/user-manual/editor/scenes/components/script)を使用してAnimコンポーネントのプロパティを制御することができます。Animコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/AnimComponent.html)です。

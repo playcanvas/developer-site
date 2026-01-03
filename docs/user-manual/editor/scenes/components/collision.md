@@ -38,18 +38,19 @@ If the entity also has a rigidbody component, the collision component determines
 
 ## Properties
 
-| Property     | Description |
-|--------------|-------------|
-| Type         | The type of collision primitive. Can be:<ul><li>Box</li><li>Sphere</li><li>Capsule</li><li>Mesh</li></ul> |
-| Half Extents | Box only. The half-extents of the collision box. This is a 3-dimensional vector: local space half-width, half-height, and half-depth. |
-| Axis         | Capsule only. Aligns the capsule with the local-space X, Y or Z axis of the entity. |
-| Height       | Capsule only. The tip-to-tip height of the capsule. |
-| Radius       | Sphere and Capsule only. The radius of the sphere or capsule body. |
-| Asset        | Mesh only. The [render asset](../../../assets/types/render.md) or model asset that will be used as a source for the triangle-based collision mesh. |
+| Property        | Description |
+|-----------------|-------------|
+| Type            | The type of collision primitive. Can be: Box, Sphere, Capsule, Cylinder, Cone, Mesh, or Compound. |
+| Half Extents    | Box only. The half-extents of the collision box. This is a 3-dimensional vector: local space half-width, half-height, and half-depth. |
+| Radius          | Sphere, Capsule, Cylinder, and Cone only. The radius of the collision shape. |
+| Height          | Capsule, Cylinder, and Cone only. The height of the collision shape along the selected axis. |
+| Axis            | Capsule, Cylinder, and Cone only. Aligns the collision shape with the local-space X, Y, or Z axis of the entity. |
+| Convex Hull     | Mesh only. If enabled, the collision mesh will be treated as a convex hull, which is more efficient for dynamic rigid bodies. If disabled, the mesh is used as a triangle mesh (concave), which only works with static or kinematic rigid bodies. |
+| Model Asset     | Mesh only. The model asset that will be used as a source for the collision mesh. Either a Model Asset or Render Asset can be specified, but not both. |
+| Render Asset    | Mesh only. The [render asset](/user-manual/assets/types/render) that will be used as a source for the collision mesh. Either a Model Asset or Render Asset can be specified, but not both. |
+| Position Offset | The positional offset of the collision shape relative to the entity's position. |
+| Rotation Offset | The rotational offset of the collision shape relative to the entity's rotation, specified in degrees. |
 
 ## Scripting Interface
 
-You can control a Collision component's properties using a [script component][8]. The Collision component's scripting interface is [here][9].
-
-[8]: /user-manual/editor/scenes/components/script
-[9]: https://api.playcanvas.com/engine/classes/CollisionComponent.html
+You can control a Collision component's properties using a [script component](/user-manual/editor/scenes/components/script). The Collision component's scripting interface is [here](https://api.playcanvas.com/engine/classes/CollisionComponent.html).
