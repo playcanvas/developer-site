@@ -80,8 +80,7 @@ Lightコンポーネントは、エンティティに動的な光源をアタッ
 
 ## 関連項目
 
-- [物理ライティング](/user-manual/graphics/lighting/physical-lighting) - ライティング技術について学ぶ
-- [ライトマッピング](/user-manual/graphics/lighting/lightmapping) - 静的ライティングのベイク
+- [ライティング](/user-manual/graphics/lighting/) - ライティングについて詳しく学ぶ
 
 ## スクリプトインターフェース
 
