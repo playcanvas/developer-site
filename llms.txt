@@ -9,6 +9,19 @@ Base URL: https://developer.playcanvas.com
 Total Documents: 566
 Generated: 2026-01-03
 
+## Recommended Entry Points
+
+- Getting Started: /user-manual/getting-started/
+- PlayCanvas Editor: /user-manual/editor/
+- PlayCanvas Engine: /user-manual/engine/
+- PlayCanvas React: /user-manual/playcanvas-react/
+- Web Components: /user-manual/web-components/
+- Scripting: /user-manual/scripting/
+- Gaussian Splatting: /user-manual/gaussian-splatting/
+- Graphics: /user-manual/graphics/
+- Physics: /user-manual/physics/
+- XR (VR/AR): /user-manual/xr/
+
 ## User Manual
 
 ### 2D
@@ -38,7 +51,7 @@ Generated: 2026-01-03
 - https://developer.playcanvas.com/user-manual/animation/anim-layer-masking/ - Anim Layer Masks
 - https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets/ - Animstategraph Assets
 
-### Api
+### API
 - https://developer.playcanvas.com/user-manual/api/ - REST API
 - https://developer.playcanvas.com/user-manual/api/app-download/ - Apps - Download app
 - https://developer.playcanvas.com/user-manual/api/app-get-primary/ - Apps - Get primary app
@@ -89,7 +102,7 @@ Generated: 2026-01-03
 - https://developer.playcanvas.com/user-manual/assets/types/wasm/ - WASM Module
 - https://developer.playcanvas.com/user-manual/assets/viewers/ - Asset Viewers
 
-### Ecs
+### ECS
 - https://developer.playcanvas.com/user-manual/ecs/ - Entity Component System (ECS)
 - https://developer.playcanvas.com/user-manual/ecs/components/ - Components
 - https://developer.playcanvas.com/user-manual/ecs/entities/ - Entities
@@ -304,7 +317,7 @@ Generated: 2026-01-03
 - https://developer.playcanvas.com/user-manual/optimization/texture-compression/ - Texture Compression
 - https://developer.playcanvas.com/user-manual/optimization/troubleshooting-performance/ - Troubleshooting Performance
 
-### Pcui
+### PCUI
 - https://developer.playcanvas.com/user-manual/pcui/ - PCUI
 - https://developer.playcanvas.com/user-manual/pcui/data-binding/ - Data Binding
 - https://developer.playcanvas.com/user-manual/pcui/data-binding/two-way-binding/ - Two Way Binding
@@ -332,7 +345,7 @@ Generated: 2026-01-03
 - https://developer.playcanvas.com/user-manual/physics/ray-casting/ - Ray Casting
 - https://developer.playcanvas.com/user-manual/physics/trigger-volumes/ - Trigger Volumes
 
-### Playcanvas React
+### PlayCanvas React
 - https://developer.playcanvas.com/user-manual/playcanvas-react/ - PlayCanvas React
 - https://developer.playcanvas.com/user-manual/playcanvas-react/api/align/ - `<Align/>`
 - https://developer.playcanvas.com/user-manual/playcanvas-react/api/anim/ - `<Anim/>`
@@ -426,7 +439,7 @@ Generated: 2026-01-03
 - https://developer.playcanvas.com/user-manual/web-components/tags/pc-splat/ - <pc-splat>
 - https://developer.playcanvas.com/user-manual/web-components/xr/ - XR Support
 
-### Xr
+### XR
 - https://developer.playcanvas.com/user-manual/xr/ - XR
 - https://developer.playcanvas.com/user-manual/xr/ar/ - AR
 - https://developer.playcanvas.com/user-manual/xr/ar/8th-wall-integration/ - 8th Wall Integration
