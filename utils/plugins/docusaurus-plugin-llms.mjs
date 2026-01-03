@@ -8,9 +8,9 @@ import path from 'path';
  * - llms.txt: Structured overview with links to all documentation sections
  * - llms-full.txt: Complete documentation content in a single file
  */
-export default function pluginLlms(context, options) {
+export default function pluginLlms(context, options = {}) {
     const { siteDir, siteConfig } = context;
-    const docsDir = path.join(siteDir, 'docs');
+    const docsDir = path.join(siteDir, options.docsDir || 'docs');
     const baseUrl = siteConfig.url;
 
     return {
