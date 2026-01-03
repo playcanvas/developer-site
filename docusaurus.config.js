@@ -6,6 +6,7 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
+import pluginLlms from './utils/plugins/docusaurus-plugin-llms.mjs';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -153,7 +154,8 @@ const config = {
         return redirects;
       }
     }],
-    'docusaurus-plugin-sass'
+    'docusaurus-plugin-sass',
+    pluginLlms
   ],
 
   presets: [
