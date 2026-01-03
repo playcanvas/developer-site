@@ -80,8 +80,7 @@ The Light Component attaches a dynamic light source to the Entity. The 'Type' pr
 
 ## See Also
 
-- [Physical Lighting](/user-manual/graphics/lighting/physical-lighting) - Learn about lighting techniques
-- [Lightmapping](/user-manual/graphics/lighting/lightmapping) - Bake static lighting
+- [Lighting](/user-manual/graphics/lighting/) - Learn more about lighting
 
 ## Scripting Interface
 
