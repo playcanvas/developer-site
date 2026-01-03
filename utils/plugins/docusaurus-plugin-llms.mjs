@@ -54,14 +54,14 @@ export default function pluginLlms(context, options) {
 /**
  * Recursively collect all markdown files from a directory
  */
-async function collectMarkdownFiles(dir, files = []) {
+function collectMarkdownFiles(dir, files = []) {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
 
     for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
 
         if (entry.isDirectory()) {
-            await collectMarkdownFiles(fullPath, files);
+            collectMarkdownFiles(fullPath, files);
         } else if (entry.isFile() && /\.(md|mdx)$/.test(entry.name)) {
             files.push(fullPath);
         }
