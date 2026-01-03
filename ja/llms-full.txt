@@ -13876,7 +13876,7 @@ There are many different components defined in the PlayCanvas Engine:
 | [Render](render)                  | Renders a graphical primitive or a render asset.                              |
 | [Screen](screen)                  | Defines the area and rendering of a user interface.                           |
 | [Script](script)                  | Allows the entity to run JavaScript fragments to implement custom behavior.   |
-| [Scrollbar](scrollbar)            | Defines a scrolling control for a Scrollview component.                       |
+| [Scrollbar](scrollbar)            | Defines a scrolling control for a Scroll View Component.                       |
 | [Scroll View](scrollview)         | Defines a scrollable area in a user interface.                                |
 | [Sound](sound)                    | Plays audio assets.                                                           |
 | [Sprite](sprite)                  | Renders 2D graphics at the location of the entity.                            |
@@ -13953,13 +13953,13 @@ You can control an Anim Component's properties using a [Script Component](script
 
 --------------------------------------------------------------------------------
 
-## Animation
+## Animation (Legacy)
 
 URL: https://developer.playcanvas.com/user-manual/editor/scenes/components/animation/
 
 :::warning
 
-The Animation component is deprecated. It has been replaced by the [Anim](anim.md) component.
+The Animation Component is deprecated. It has been replaced by the [Anim](anim.md) Component.
 
 :::
 
@@ -14169,7 +14169,7 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 
 ## Group Element
 
-The group element provides just the layout properties of the Element component.
+The group element provides just the layout properties of the Element Component.
 
 [Image: Group Element]
 
@@ -14229,10 +14229,10 @@ The text element renders a string of text using a [font asset](/user-manual/asse
 | Text              | The text string to display. Only shown when Localized is disabled. |
 | Key               | The localization key used to look up the translated text. Only shown when Localized is enabled. |
 | Enable Markup     | If enabled, the text can contain markup tags for styling (e.g., color, bold). |
-| Font Size         | The size in Screen component pixels to render the font at. Only shown when Auto Fit Width and Auto Fit Height are disabled. |
+| Font Size         | The size in Screen Component pixels to render the font at. Only shown when Auto Fit Width and Auto Fit Height are disabled. |
 | Min Font Size     | The minimum font size when using Auto Fit Width or Auto Fit Height. |
 | Max Font Size     | The maximum font size when using Auto Fit Width or Auto Fit Height. |
-| Line Height       | The size in Screen component pixels to move down for a new line. |
+| Line Height       | The size in Screen Component pixels to move down for a new line. |
 | Wrap Lines        | If enabled, text that overflows the width of the text element will be wrapped to the next line. |
 | Max Lines         | The maximum number of lines to display. Text beyond this limit will be clipped. Only shown when Wrap Lines is enabled. |
 | Spacing           | A multiplier to apply to the amount of space between each character. |
@@ -14269,7 +14269,7 @@ The GSplat Component enables an entity to render a 3D Gaussian Splat.
 
 | Property | Description |
 |----------|-------------|
-| Asset    | The GSplat asset to be rendered by this GSplat component. Only a single GSplat asset can be assigned to a GSplat component. |
+| Asset    | The GSplat asset to be rendered by this GSplat Component. Only a single GSplat asset can be assigned to a GSplat Component. |
 | Layers   | The [layers](/user-manual/graphics/layers) to render this element into. |
 
 ## See Also
@@ -14442,13 +14442,13 @@ You can control a Light Component's properties using a [Script Component](script
 
 --------------------------------------------------------------------------------
 
-## Model
+## Model (Legacy)
 
 URL: https://developer.playcanvas.com/user-manual/editor/scenes/components/model/
 
 :::warning
 
-The Model component is deprecated. It has been replaced by the [Render](render.md) component.
+The Model Component is deprecated. It has been replaced by the [Render](render.md) Component.
 
 :::
 
@@ -14667,7 +14667,7 @@ The Rigid Body Component enables an entity to participate in the scene's physics
 
 [Image: Rigid Body Component (Kinematic)]
 
-Note that you must add a [collision component](collision.md) to the same entity in order to define the shape of the rigid body. Otherwise, the Rigid Body component has no effect and will not participate in the physics simulation.
+Note that you must add a [Collision Component](collision.md) to the same entity in order to define the shape of the rigid body. Otherwise, the Rigid Body Component has no effect and will not participate in the physics simulation.
 
 ## Properties
 
@@ -14712,7 +14712,7 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 | Ref Resolution   | Screen Space only, when Scale Mode is Blend. The reference resolution used to calculate the scale factor (width and height). |
 | Scale Mode       | Screen Space only. Determines how the user interface scales when the window size does not match the screen size. Options: None (no scaling), Blend (scales by ratio of reference to actual resolution). |
 | Scale Blend      | Screen Space only, when Scale Mode is Blend. The weighting of scaling between horizontal (0) and vertical (1). |
-| Priority         | Determines the order in which Screen components in the same layer are rendered. Higher priority is rendered on top. Must be an integer between 0 and 127. |
+| Priority         | Determines the order in which Screen Components in the same layer are rendered. Higher priority is rendered on top. Must be an integer between 0 and 127. |
 
 ## See Also
 
@@ -14736,12 +14736,12 @@ The Script Component enables an entity to run user-supplied scripts. In this way
 
 ## Adding Scripts
 
-To create a new script, click on the **Add Script** dropdown in the Script component and either:
+To create a new script, click on the **Add Script** dropdown in the Script Component and either:
 
 - Select an existing script from the list
 - Type a new script name and click **Create Script** to create a new script asset
 
-Alternatively, you can drag a script asset from the Assets Panel onto the Script component.
+Alternatively, you can drag a script asset from the Assets Panel onto the Script Component.
 
 [Image: Add Script Dialog]
 
@@ -14792,7 +14792,7 @@ The Script Component's scripting interface is [here](https://api.playcanvas.com/
 
 URL: https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollbar/
 
-The Scrollbar Component defines a scrolling control for a [Scrollview](scrollview.md) Component.
+The Scrollbar Component defines a scrolling control for a [Scroll View](scrollview.md) Component.
 
 See the [User Interface](/user-manual/user-interface) section for more details.
 
@@ -14804,12 +14804,12 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 |-------------|-------------|
 | Orientation | Controls whether the scrollbar moves horizontally or vertically. Options: Horizontal, Vertical. |
 | Value       | The current position value of the scrollbar, in the range 0 to 1. |
-| Handle      | The entity to be used as the scrollbar handle. This entity must have an Element component. |
+| Handle      | The entity to be used as the scrollbar handle. This entity must have an Element Component. |
 | Handle Size | The size of the handle relative to the size of the track, in the range 0 to 1. For a vertical scrollbar, a value of 1 means that the handle will take up the full height of the track. |
 
 ## See Also
 
-- [Scrollview Component](scrollview.md) - The scrollable area that uses this scrollbar
+- [Scroll View Component](scrollview.md) - The scrollable area that uses this scrollbar
 - [Element Component](element.md) - Required for the scrollbar handle
 - [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
 
@@ -14819,15 +14819,15 @@ You can control a Scrollbar Component's properties using a [Script Component](sc
 
 --------------------------------------------------------------------------------
 
-## Scrollview
+## Scroll View
 
 URL: https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview/
 
-The Scrollview Component defines a scrollable area in a user interface. A Scrollview can be scrolled via [Scrollbar](scrollbar.md) Components.
+The Scroll View Component defines a scrollable area in a user interface. A Scroll View can be scrolled via [Scrollbar](scrollbar.md) Components.
 
 See the [User Interface](/user-manual/user-interface) section for more details.
 
-[Image: Scrollview Component]
+[Image: Scroll View Component]
 
 ## Properties
 
@@ -14838,13 +14838,13 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 | Friction                | Controls how freely the content should move if thrown (e.g., by flicking on a phone or flinging the scroll wheel). A value of 1 means content stops immediately; 0 means content continues moving forever (or until bounds are reached, depending on scroll mode). |
 | Use Mouse Wheel         | Whether to use mouse wheel for scrolling (horizontally and vertically) when the mouse is within bounds. |
 | Mouse Wheel Sensitivity | Use Mouse Wheel only. Mouse wheel horizontal and vertical sensitivity. Setting a direction to 0 disables scrolling in that direction. Default is [1, 1]. |
-| Viewport                | The entity to be used as the masked viewport area, within which the content will scroll. This entity must have an Element component. |
-| Content                 | The entity which contains the scrolling content itself. This entity must have an Element component. |
+| Viewport                | The entity to be used as the masked viewport area, within which the content will scroll. This entity must have an Element Component. |
+| Content                 | The entity which contains the scrolling content itself. This entity must have an Element Component. |
 | Horizontal              | Whether to enable horizontal scrolling. |
-| Scrollbar (horizontal)  | Horizontal only. The entity to be used as the horizontal scrollbar. This entity must have a Scrollbar component. |
+| Scrollbar (horizontal)  | Horizontal only. The entity to be used as the horizontal scrollbar. This entity must have a Scrollbar Component. |
 | Visibility (horizontal) | Horizontal only. Controls scrollbar visibility. Options: Show Always, Show When Required (only when content exceeds viewport). |
 | Vertical                | Whether to enable vertical scrolling. |
-| Scrollbar (vertical)    | Vertical only. The entity to be used as the vertical scrollbar. This entity must have a Scrollbar component. |
+| Scrollbar (vertical)    | Vertical only. The entity to be used as the vertical scrollbar. This entity must have a Scrollbar Component. |
 | Visibility (vertical)   | Vertical only. Controls scrollbar visibility. Options: Show Always, Show When Required (only when content exceeds viewport). |
 
 ## See Also
@@ -14855,7 +14855,7 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 
 ## Scripting Interface
 
-You can control a Scrollview Component's properties using a [Script Component](script.md). The Scrollview Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html).
+You can control a Scroll View Component's properties using a [Script Component](script.md). The Scroll View Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html).
 
 --------------------------------------------------------------------------------
 
@@ -14863,7 +14863,7 @@ You can control a Scrollview Component's properties using a [Script Component](s
 
 URL: https://developer.playcanvas.com/user-manual/editor/scenes/components/sound/
 
-The Sound component controls playback of audio samples.
+The Sound Component controls playback of audio samples.
 
 [Image: Sound Component]
 

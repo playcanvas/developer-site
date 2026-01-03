@@ -107,7 +107,7 @@ Generated: 2026-01-03
 - https://developer.playcanvas.com/user-manual/editor/scenes/ - Working with Scenes
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/ - Components
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/anim/ - Anim
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/animation/ - Animation
+- https://developer.playcanvas.com/user-manual/editor/scenes/components/animation/ - Animation (Legacy)
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener/ - Audio Listener
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/button/ - Button
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/camera/ - Camera
@@ -117,14 +117,14 @@ Generated: 2026-01-03
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild/ - Layout Child
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup/ - Layout Group
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/light/ - Light
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/model/ - Model
+- https://developer.playcanvas.com/user-manual/editor/scenes/components/model/ - Model (Legacy)
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/particlesystem/ - Particle System
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/render/ - Render
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/rigidbody/ - Rigid Body
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/screen/ - Screen
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/script/ - Script
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollbar/ - Scrollbar
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview/ - Scrollview
+- https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview/ - Scroll View
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/sound/ - Sound
 - https://developer.playcanvas.com/user-manual/editor/scenes/components/sprite/ - Sprite
 - https://developer.playcanvas.com/user-manual/editor/scenes/loading-scenes/ - Loading Scenes
