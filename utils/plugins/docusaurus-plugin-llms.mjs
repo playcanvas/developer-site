@@ -73,7 +73,7 @@ async function collectMarkdownFiles(dir, files = []) {
 /**
  * Process a markdown file and extract metadata and content
  */
-async function processMarkdownFile(filePath, docsDir) {
+function processMarkdownFile(filePath, docsDir) {
     const content = fs.readFileSync(filePath, 'utf-8');
     const relativePath = path.relative(docsDir, filePath);
 
