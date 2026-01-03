@@ -4,7 +4,7 @@ title: Scrollbar
 
 Scrollbarコンポーネントは、[Scrollview](scrollview.md)コンポーネント用のスクロールコントロールを定義します。
 
-詳細については、[User Interface](/user-manual/user-interface)セクションを参照してください。
+詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
 
 ![Scrollbar Component](/img/user-manual/editor/scenes/components/component-scrollbar.png)
 
@@ -16,6 +16,12 @@ Scrollbarコンポーネントは、[Scrollview](scrollview.md)コンポーネ�
 | Value       | スクロールバーの現在の位置の値（0から1の範囲）。 |
 | Handle      | スクロールバーのハンドルとして使用されるエンティティ。このエンティティにはElementコンポーネントが必要です。 |
 | Handle Size | トラックのサイズに対するハンドルの相対的なサイズ（0から1の範囲）。垂直スクロールバーの場合、値が1のときはハンドルがトラックの全高を占めます。 |
+
+## 関連項目
+
+- [Scrollviewコンポーネント](scrollview.md) - このスクロールバーを使用するスクロール可能エリア
+- [Elementコンポーネント](element.md) - スクロールバーハンドルに必要
+- [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
 
 ## スクリプトインターフェース
 

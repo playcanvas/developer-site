@@ -2,9 +2,7 @@
 title: Rigid Body
 ---
 
-The Rigid Body component enables an entity to participate in the scene's physics simulation. This allows the movement of an entity to be simulated realistically. The component interface dynamically displays different attributes based on the 'Type' attribute.
-
-The Rigid Body component can be enabled or disabled using the toggle in the top right of the component panel. If enabled and if the component has a sibling collision component, the rigid body will participate in the physics simulation.
+The Rigid Body Component enables an entity to participate in the scene's physics simulation. This allows the movement of an entity to be simulated realistically. The component interface dynamically displays different attributes based on the 'Type' attribute.
 
 #### Static
 
@@ -33,6 +31,11 @@ Note that you must add a [collision component](collision.md) to the same entity 
 | Friction        | Controls how quickly a body loses velocity when in contact with other bodies (0 to 1). |
 | Restitution     | A measure of the bounciness of a body (0 to 1). Warning: setting to 1 means a moving body will never come to a stop (unless colliding with other bodies with restitutions below 1, or unless a stop is scripted). |
 
+## See Also
+
+- [Collision Component](collision.md) - Required to define the rigid body's shape
+- [Physics](/user-manual/physics) - Learn more about the physics system
+
 ## Scripting Interface
 
-You can control a Rigid Body component's properties using a [script component](script.md). The Rigid Body component's scripting interface is [here](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html).
+You can control a Rigid Body Component's properties using a [Script Component](script.md). The Rigid Body Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html).

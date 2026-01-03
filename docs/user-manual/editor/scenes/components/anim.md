@@ -2,9 +2,7 @@
 title: Anim
 ---
 
-The anim component is used to connect an animstategraph asset and all of its required animation assets to a single entity.
-
-The anim component can be enabled or disabled using the toggle in the top right of the component panel. If enabled and the Activate property is checked, the animation will play automatically when the scene is launched.
+The Anim Component is used to connect an animstategraph asset and all of its required animation assets to a single entity.
 
 ![Anim Component](/img/user-manual/editor/scenes/components/component-anim.png)
 
@@ -20,11 +18,11 @@ The anim component can be enabled or disabled using the toggle in the top right 
 
 ## Assigning Animation Assets
 
-After selecting an animstategraph asset, the anim component will display a list of animation asset slots organized by layer. There will be one slot for each animation state in every layer of the state graph asset (excluding START, END, and ANY states). This is where actual animation data is connected to the previously created state graph.
+After selecting an animstategraph asset, the Anim Component will display a list of animation asset slots organized by layer. There will be one slot for each animation state in every layer of the state graph asset (excluding START, END, and ANY states). This is where actual animation data is connected to the previously created state graph.
 
 ![Anim Component With Graph](/img/user-manual/animation/anim-component-with-graph.png)
 
-Multiple anim components can use the same animstategraph asset, each with their own set of animation assets. After all animation state slots have been filled, the anim component will become playable. The animations can be played via script by calling `entity.anim.playing = true` or automatically if the Activate option is enabled.
+Multiple Anim Components can use the same animstategraph asset, each with their own set of animation assets. After all animation state slots have been filled, the Anim Component will become playable. The animations can be played via script by calling `entity.anim.playing = true` or automatically if the Activate option is enabled.
 
 ## Layer Masks
 
@@ -51,6 +49,10 @@ The mask inspector provides several controls:
 
 To edit an existing mask, click the **EDIT MASK** button. To delete a mask, click the trash icon next to the layer.
 
+## See Also
+
+- [Animation](/user-manual/animation) - Learn more about the animation system
+
 ## Scripting Interface
 
-You can control an anim component's properties using a [script component](script.md). The anim component's scripting interface is [here](https://api.playcanvas.com/engine/classes/AnimComponent.html).
+You can control an Anim Component's properties using a [Script Component](script.md). The Anim Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/AnimComponent.html).

@@ -58,6 +58,10 @@ Animated Sprite Components have multiple Sprite Animation Clips attached which c
 | Frames Per Second | The speed at which the clip is played in Frames Per Second. |
 | Sprite            | The Sprite Asset which is used to play this clip. |
 
+## See Also
+
+- [Sprite Assets](/user-manual/assets/types/sprite) - Learn about creating sprite assets
+
 ## Scripting Interface
 
-You can control the properties of a Sprite component using a [script component](script.md). The scripting interface for the Sprite component is [here](https://api.playcanvas.com/engine/classes/SpriteComponent.html).
+You can control a Sprite Component's properties using a [Script Component](script.md). The Sprite Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/SpriteComponent.html).

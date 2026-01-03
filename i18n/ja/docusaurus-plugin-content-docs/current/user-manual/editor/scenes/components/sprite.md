@@ -58,6 +58,10 @@ Spriteコンポーネントは、[Spriteアセット](/user-manual/assets/types/
 | Frames Per Second | クリップが再生される速度（フレーム/秒）。 |
 | Sprite            | このクリップを再生するために使用されるSpriteアセット。 |
 
+## 関連項目
+
+- [Spriteアセット](/user-manual/assets/types/sprite) - スプライトアセットの作成について学ぶ
+
 ## スクリプトインターフェース
 
 [Scriptコンポーネント](script.md)を使用してSpriteコンポーネントのプロパティを制御できます。Spriteコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/SpriteComponent.html)です。

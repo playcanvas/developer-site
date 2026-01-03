@@ -4,8 +4,6 @@ title: Camera
 
 Cameraコンポーネントは、特定の視点からシーンをレンダリングするための機能を提供します。
 
-Cameraコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にすることができます。有効にすると、カメラは毎フレームシーンをレンダリングします。
-
 ![Camera Component](/img/user-manual/editor/scenes/components/component-camera.png)
 
 ## プロパティ
@@ -28,6 +26,10 @@ Cameraコンポーネントは、コンポーネントパネルの右上にあ�
 | Layers             | このカメラがレンダリングするレイヤー。一致するレイヤー上のメッシュインスタンスのみがこのカメラでレンダリングされます。 |
 | Tonemapping        | HDRコンテンツをレンダリングする際に適用するトーンマッピングアルゴリズム。オプション：Linear、Filmic、Hejl、ACES、ACES2、Neutral。このプロパティはEngine v2でのみ使用可能です。 |
 | Gamma              | 適用するガンマ補正値。オプション：1.0（補正なし）または2.2（標準ガンマ）。このプロパティはEngine v2でのみ使用可能です。 |
+
+## 関連項目
+
+- [カメラ](/user-manual/graphics/cameras) - カメラについて詳しく学ぶ
 
 ## スクリプトインターフェース
 

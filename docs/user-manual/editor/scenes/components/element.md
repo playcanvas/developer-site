@@ -2,7 +2,7 @@
 title: Element
 ---
 
-An Element component when in a hierarchy with a Screen Component ancestor is used to build user interfaces made up of 2D components such as images and text. The Element provides layout properties such as anchors and a pivot point.
+The Element Component is used to build user interfaces made up of 2D components such as images and text when in a hierarchy with a Screen Component ancestor. The Element Component provides layout properties such as anchors and a pivot point.
 
 See the [User Interface](/user-manual/user-interface) section for more details.
 
@@ -82,6 +82,14 @@ The text element renders a string of text using a [font asset](/user-manual/asse
 | Shadow Color      | The color of the text shadow, including alpha for opacity. |
 | Shadow Offset     | The offset of the text shadow from the text, specified as horizontal and vertical offset. |
 
+## See Also
+
+- [Screen Component](screen.md) - The root component for user interfaces
+- [Button Component](button.md) - Interactive button elements
+- [LayoutGroup Component](layoutgroup.md) - Automatic layout of child elements
+- [LayoutChild Component](layoutchild.md) - Override layout behavior for individual elements
+- [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
+
 ## Scripting Interface
 
-You can control an Element component's properties using a [script component](script.md). The scripting interface for the Element component is [here](https://api.playcanvas.com/engine/classes/ElementComponent.html).
+You can control an Element Component's properties using a [Script Component](script.md). The Element Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ElementComponent.html).

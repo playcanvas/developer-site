@@ -10,8 +10,6 @@ Modelコンポーネントは非推奨です。これは[Render](render.md)コ�
 
 Modelコンポーネントを使用すると、エンティティにプリミティブシェイプまたはモデルアセットをレンダリングすることができます。
 
-Modelコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、モデルがシーンに追加されてレンダリングされます。
-
 ![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
 
 ## プロパティ
@@ -32,6 +30,10 @@ Modelコンポーネントは、コンポーネントパネルの右上にある
 | AABB Half Extents         | カスタム境界ボックスの半径（半幅、半高さ、半奥行き）。Custom AABBが有効な場合のみ表示されます。 |
 | Batch Group               | このモデルが属するバッチグループ。バッチングについては[こちら](/user-manual/graphics/advanced-rendering/batching)を参照してください。 |
 | Layers                    | このモデルをレンダリングするレイヤー。 |
+
+## 関連項目
+
+- [Renderコンポーネント](render.md) - このコンポーネントの推奨される代替
 
 ## スクリプトインターフェース
 

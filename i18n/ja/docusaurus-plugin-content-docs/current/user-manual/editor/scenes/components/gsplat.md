@@ -4,8 +4,6 @@ title: GSplat
 
 GSplatコンポーネントは、エンティティが3Dガウシアンスプラットをレンダリングできるようにします。
 
-GSplatコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、コンポーネントが参照する3Dガウシアンスプラットがシーンに追加されてレンダリングされます。
-
 ![GSplat Component](/img/user-manual/editor/scenes/components/component-gsplat.png)
 
 ## プロパティ
@@ -15,6 +13,10 @@ GSplatコンポーネントは、コンポーネントパネルの右上にあ�
 | Asset    | このGSplatコンポーネントでレンダリングするGSplatアセット。GSplatコンポーネントには1つのGSplatアセットのみ割り当てることができます。 |
 | Layers   | このエレメントをレンダリングする[レイヤー](/user-manual/graphics/layers)。 |
 
+## 関連項目
+
+- [ガウシアンスプラッティング](/user-manual/gaussian-splatting) - 3Dガウシアンスプラットについて詳しく学ぶ
+
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](../script)を使用してGSplatコンポーネントのプロパティを制御できます。GSplatコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/GSplatComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してGSplatコンポーネントのプロパティを制御できます。GSplatコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/GSplatComponent.html)です。

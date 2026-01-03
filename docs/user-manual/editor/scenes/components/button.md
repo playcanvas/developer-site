@@ -39,6 +39,12 @@ The Button Component can be used in two Transition Modes. *Sprite Change*, which
 | Inactive Tint | The color to tint the Image Element with when the button is in the Inactive State. |
 | Fade Duration | The time in milliseconds to blend between the different state colors. |
 
+## See Also
+
+- [Element Component](element.md) - Required for button visuals
+- [Screen Component](screen.md) - The root component for user interfaces
+- [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
+
 ## Scripting Interface
 
-You can control the properties of a Button component using a [script component](script.md). The scripting interface for the Button component is [here](https://api.playcanvas.com/engine/classes/ButtonComponent.html).
+You can control a Button Component's properties using a [Script Component](script.md). The Button Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ButtonComponent.html).

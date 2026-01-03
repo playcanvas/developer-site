@@ -6,6 +6,20 @@ A component encapsulates functionality that can be added to or removed from enti
 
 You can add a component to an entity using the PlayCanvas Editor or by using the Engine API. The properties exposed by components are listed in the [Inspector](/user-manual/editor/interface/inspector) when you select an Entity.
 
+## Component Inspector
+
+Each component appears as a panel in the Inspector with a common header containing the following controls:
+
+![Component Header](/img/user-manual/editor/scenes/components/component-header.png)
+
+| Control | Description |
+|---------|-------------|
+| Collapse/Expand | Click the arrow to collapse or expand the component panel. |
+| Component Icon | Identifies the component type. |
+| Enable Toggle | Enable or disable the component. Disabled components do not run or render. |
+| Help | Opens the documentation for this component type. |
+| Actions Menu | Click the cog icon to access Copy, Paste, and Delete options. |
+
 ## Component Types
 
 There are many different components defined in the PlayCanvas Engine:

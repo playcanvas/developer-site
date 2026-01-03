@@ -4,8 +4,6 @@ title: Collision
 
 Collisionコンポーネントは、エンティティにコリジョンボリュームを割り当てます。コンポーネントのインターフェースは「Type」属性に基づいて動的に異なる属性を表示します。
 
-Collisionコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効で、かつコンポーネントがトリガーボリュームである場合（兄弟のRigidbodyコンポーネントを持たないため）、トリガーボリュームが有効になります。同様に、コンポーネントに兄弟のRigidbodyコンポーネントがある場合、Rigidbodyが有効になります。
-
 #### Box
 
 ![Collision Component (Box)](/img/user-manual/editor/scenes/components/component-collision-box.png)
@@ -50,6 +48,11 @@ Collisionコンポーネントは、コンポーネントパネルの右上に�
 | Render Asset    | Meshのみ。コリジョンメッシュのソースとして使用される[レンダーアセット](/user-manual/assets/types/render)。Model AssetまたはRender Assetのいずれかを指定できますが、両方は指定できません。 |
 | Position Offset | エンティティの位置に対するコリジョン形状の位置オフセット。 |
 | Rotation Offset | エンティティの回転に対するコリジョン形状の回転オフセット（度単位）。 |
+
+## 関連項目
+
+- [Rigid Bodyコンポーネント](rigidbody.md) - エンティティに物理シミュレーションを追加
+- [物理](/user-manual/physics) - 物理システムについて詳しく学ぶ
 
 ## スクリプトインターフェース
 

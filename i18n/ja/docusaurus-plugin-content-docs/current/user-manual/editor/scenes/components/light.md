@@ -4,8 +4,6 @@ title: Light
 
 Lightコンポーネントは、エンティティに動的な光源をアタッチします。「Type」プロパティは、アタッチされる光源の種類と利用可能な他のプロパティを決定します。
 
-Lightコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効または無効にできます。有効にすると、ライトはシーンを照らします。
-
 #### Directional
 
 ![Light Component (Directional)](/img/user-manual/editor/scenes/components/component-light-directional.png)
@@ -79,6 +77,11 @@ Lightコンポーネントは、コンポーネントパネルの右上にある
 | プロパティ名 | 説明 |
 |-----------------------|-------------|
 | Layers                | このライトが影響するレイヤー。 |
+
+## 関連項目
+
+- [物理ライティング](/user-manual/graphics/lighting/physical-lighting) - ライティング技術について学ぶ
+- [ライトマッピング](/user-manual/graphics/lighting/lightmapping) - 静的ライティングのベイク
 
 ## スクリプトインターフェース
 

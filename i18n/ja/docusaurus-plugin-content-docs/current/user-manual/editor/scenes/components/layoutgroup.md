@@ -2,7 +2,7 @@
 title: Layout Group
 ---
 
-LayoutGroupコンポーネントは、エンティティが子ElementコンポーネントのElementコンポーネントのサイズと位置を指定できるようにします。
+LayoutGroupコンポーネントは、エンティティが子Elementコンポーネントのサイズと位置を指定できるようにします。
 
 詳細については[レイアウトグループ](/user-manual/user-interface/layout-groups)のセクションを参照してください。
 
@@ -21,6 +21,12 @@ LayoutGroupコンポーネントは、エンティティが子Elementコンポ�
 | Width Fitting  | 子エレメントを水平方向に配置およびスケーリングする際に適用されるフィッティングロジック。オプション：None、Stretch、Shrink、Both。 |
 | Height Fitting | 子エレメントを垂直方向に配置およびスケーリングする際に適用されるフィッティングロジック。オプション：None、Stretch、Shrink、Both。 |
 | Wrap           | コンテナのサイズを超えた場合に、子エレメントを新しい行/列にラップするかどうか。 |
+
+## 関連項目
+
+- [LayoutChildコンポーネント](layoutchild.md) - 個々の子のレイアウト動作をオーバーライド
+- [Elementコンポーネント](element.md) - UIレイアウトに必要
+- [レイアウトグループ](/user-manual/user-interface/layout-groups) - レイアウトグループについて詳しく学ぶ
 
 ## スクリプトインターフェース
 

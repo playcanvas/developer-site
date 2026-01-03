@@ -2,7 +2,7 @@
 title: Screen
 ---
 
-The Screen component defines the area and rendering of a user interface. Children added to a Screen component should all have an Element component.
+The Screen Component defines the area and rendering of a user interface. Children added to a Screen Component should all have an Element Component.
 
 See the [User Interface](/user-manual/user-interface) section for more details.
 
@@ -19,6 +19,12 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 | Scale Blend      | Screen Space only, when Scale Mode is Blend. The weighting of scaling between horizontal (0) and vertical (1). |
 | Priority         | Determines the order in which Screen components in the same layer are rendered. Higher priority is rendered on top. Must be an integer between 0 and 127. |
 
+## See Also
+
+- [Element Component](element.md) - UI elements that are children of the screen
+- [Button Component](button.md) - Interactive button elements
+- [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
+
 ## Scripting Interface
 
-You can control a Screen component's properties using a [script component](script.md). The Screen component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScreenComponent.html).
+You can control a Screen Component's properties using a [Script Component](script.md). The Screen Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScreenComponent.html).

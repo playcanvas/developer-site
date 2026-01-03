@@ -4,7 +4,7 @@ title: Screen
 
 Screenコンポーネントは、ユーザーインターフェースの領域とレンダリングを定義します。Screenコンポーネントに追加された子要素はすべてElementコンポーネントを持つ必要があります。
 
-詳細については、[User Interface](/user-manual/user-interface)セクションを参照してください。
+詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
 
 ![Screen Component](/img/user-manual/editor/scenes/components/component-screen.png)
 
@@ -18,6 +18,12 @@ Screenコンポーネントは、ユーザーインターフェースの領域�
 | Scale Mode       | Screen Spaceのみ。ウィンドウサイズがスクリーンサイズと一致しない場合のUIのスケーリング方法を決定します。オプション: None（スケーリングなし）、Blend（参照解像度と実際の解像度の比率でスケーリング）。 |
 | Scale Blend      | Screen Spaceのみ、Scale ModeがBlendの場合。水平（0）と垂直（1）のスケーリング間の重み付け。 |
 | Priority         | 同じレイヤー内のScreenコンポーネントがレンダリングされる順序を決定します。優先度が高いほど上位にレンダリングされます。0から127の整数である必要があります。 |
+
+## 関連項目
+
+- [Elementコンポーネント](element.md) - スクリーンの子となるUI要素
+- [Buttonコンポーネント](button.md) - インタラクティブなボタン要素
+- [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
 
 ## スクリプトインターフェース
 

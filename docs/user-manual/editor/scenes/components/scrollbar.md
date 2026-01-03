@@ -2,7 +2,7 @@
 title: Scrollbar
 ---
 
-The Scrollbar component defines a scrolling control for a [Scrollview](scrollview.md) component.
+The Scrollbar Component defines a scrolling control for a [Scrollview](scrollview.md) Component.
 
 See the [User Interface](/user-manual/user-interface) section for more details.
 
@@ -17,6 +17,12 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 | Handle      | The entity to be used as the scrollbar handle. This entity must have an Element component. |
 | Handle Size | The size of the handle relative to the size of the track, in the range 0 to 1. For a vertical scrollbar, a value of 1 means that the handle will take up the full height of the track. |
 
+## See Also
+
+- [Scrollview Component](scrollview.md) - The scrollable area that uses this scrollbar
+- [Element Component](element.md) - Required for the scrollbar handle
+- [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
+
 ## Scripting Interface
 
-You can control a Scrollbar component's properties using a [script component](script.md). The Scrollbar component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html).
+You can control a Scrollbar Component's properties using a [Script Component](script.md). The Scrollbar Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html).

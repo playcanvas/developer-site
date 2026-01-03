@@ -2,7 +2,7 @@
 title: Scrollview
 ---
 
-The Scrollview component defines a scrollable area in a user interface. A scrollview can be scrolled via [Scrollbar](scrollbar.md) components.
+The Scrollview Component defines a scrollable area in a user interface. A Scrollview can be scrolled via [Scrollbar](scrollbar.md) Components.
 
 See the [User Interface](/user-manual/user-interface) section for more details.
 
@@ -26,6 +26,12 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 | Scrollbar (vertical)    | Vertical only. The entity to be used as the vertical scrollbar. This entity must have a Scrollbar component. |
 | Visibility (vertical)   | Vertical only. Controls scrollbar visibility. Options: Show Always, Show When Required (only when content exceeds viewport). |
 
+## See Also
+
+- [Scrollbar Component](scrollbar.md) - Controls for scrolling the view
+- [Element Component](element.md) - Required for the viewport and content
+- [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
+
 ## Scripting Interface
 
-You can control a Scrollview component's properties using a [script component](script.md). The Scrollview component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html).
+You can control a Scrollview Component's properties using a [Script Component](script.md). The Scrollview Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html).

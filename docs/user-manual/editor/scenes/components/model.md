@@ -8,9 +8,7 @@ The Model component is deprecated. It has been replaced by the [Render](render.m
 
 :::
 
-The Model component enables an entity to render a primitive shape or a model asset.
-
-The Model component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the model will be added to the scene and rendered.
+The Model Component enables an entity to render a primitive shape or a model asset.
 
 ![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
 
@@ -33,9 +31,13 @@ The Model component can be enabled or disabled using the toggle in the top right
 | Batch Group               | The Batch Group that this model belongs to. More on Batching [here](/user-manual/graphics/advanced-rendering/batching). |
 | Layers                    | The layers to render this model into. |
 
+## See Also
+
+- [Render Component](render.md) - The recommended replacement for this component
+
 ## Scripting Interface
 
-You can control a Model component's properties using a [script component](script.md). The Model component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ModelComponent.html).
+You can control a Model Component's properties using a [Script Component](script.md). The Model Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ModelComponent.html).
 
 ## Customizing Materials
 

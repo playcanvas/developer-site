@@ -39,6 +39,12 @@ Buttonコンポーネントは、2つのトランジションモードで使用�
 | Inactive Tint | ボタンがアクティブでないときにImage Elementを調整する色。 |
 | Fade Duration | 異なる状態の色をブレンドするための時間（ミリ秒単位） |
 
+## 関連項目
+
+- [Elementコンポーネント](element.md) - ボタンのビジュアルに必要
+- [Screenコンポーネント](screen.md) - ユーザーインターフェースのルートコンポーネント
+- [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
+
 ## スクリプトインターフェース
 
-Buttonコンポーネントのプロパティは、[Scriptコンポーネント](script.md)を使用して制御できます。 Buttonコンポーネントのスクリプティングインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ButtonComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してButtonコンポーネントのプロパティを制御できます。Buttonコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ButtonComponent.html)です。

@@ -2,9 +2,7 @@
 title: Collision
 ---
 
-The Collision component assigns a collision volume to the entity. The component interface dynamically displays different attributes based on the 'Type' attribute.
-
-The Collision component can be enabled or disabled using the toggle in the top right of the component panel. If enabled and if the component is a trigger volume (because it has no sibling rigidbody component), the trigger volume will be enabled. Likewise, if the component does have a sibling rigidbody component, the rigidbody will be enabled.
+The Collision Component assigns a collision volume to the entity. The component interface dynamically displays different attributes based on the 'Type' attribute.
 
 #### Box
 
@@ -34,7 +32,7 @@ The Collision component can be enabled or disabled using the toggle in the top r
 
 ![Collision Component (Sphere)](/img/user-manual/editor/scenes/components/component-collision-sphere.png)
 
-If the entity also has a rigidbody component, the collision component determines the shape of the rigid body. If no rigidbody component is present, the collision component is treated as a trigger volume. The trigger volume cannot affect the simulation of other rigid bodies in the scene. Instead, you can add a script component and attach a script which responds to trigger events. For example, if another entity that has a rigidbody component enters or exits the trigger, your script can be notified.
+If the entity also has a Rigid Body Component, the Collision Component determines the shape of the rigid body. If no Rigid Body Component is present, the Collision Component is treated as a trigger volume. The trigger volume cannot affect the simulation of other rigid bodies in the scene. Instead, you can add a Script Component and attach a script which responds to trigger events. For example, if another entity that has a Rigid Body Component enters or exits the trigger, your script can be notified.
 
 ## Properties
 
@@ -51,6 +49,11 @@ If the entity also has a rigidbody component, the collision component determines
 | Position Offset | The positional offset of the collision shape relative to the entity's position. |
 | Rotation Offset | The rotational offset of the collision shape relative to the entity's rotation, specified in degrees. |
 
+## See Also
+
+- [Rigid Body Component](rigidbody.md) - Add physics simulation to the entity
+- [Physics](/user-manual/physics) - Learn more about the physics system
+
 ## Scripting Interface
 
-You can control a Collision component's properties using a [script component](script.md). The Collision component's scripting interface is [here](https://api.playcanvas.com/engine/classes/CollisionComponent.html).
+You can control a Collision Component's properties using a [Script Component](script.md). The Collision Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/CollisionComponent.html).

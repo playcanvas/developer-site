@@ -2,9 +2,7 @@
 title: Light
 ---
 
-The Light component attaches a dynamic light source to the Entity. The 'Type' property determines what kind of light is attached and what other properties are available.
-
-The Light component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the light will light the scene.
+The Light Component attaches a dynamic light source to the Entity. The 'Type' property determines what kind of light is attached and what other properties are available.
 
 #### Directional
 
@@ -80,6 +78,11 @@ The Light component can be enabled or disabled using the toggle in the top right
 |-----------------------|-------------|
 | Layers                | The layers that this light will affect. |
 
+## See Also
+
+- [Physical Lighting](/user-manual/graphics/lighting/physical-lighting) - Learn about lighting techniques
+- [Lightmapping](/user-manual/graphics/lighting/lightmapping) - Bake static lighting
+
 ## Scripting Interface
 
-You can control a Light component's properties using a [script component](script.md). The Light component's scripting interface is [here](https://api.playcanvas.com/engine/classes/LightComponent.html).
+You can control a Light Component's properties using a [Script Component](script.md). The Light Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/LightComponent.html).

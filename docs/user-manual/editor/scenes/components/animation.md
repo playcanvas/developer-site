@@ -8,9 +8,7 @@ The Animation component is deprecated. It has been replaced by the [Anim](anim.m
 
 :::
 
-The Animation component enables an entity to specify which animations can be applied to the model assigned to its Model component.
-
-The Animation component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the component will play the assigned animation.
+The Animation Component enables an entity to specify which animations can be applied to the model assigned to its Model Component.
 
 ![Animation Component](/img/user-manual/editor/scenes/components/component-animation.png)
 
@@ -23,6 +21,10 @@ The Animation component can be enabled or disabled using the toggle in the top r
 | Activate | If checked, the component will start playing the animation on load. |
 | Loop     | If checked, the animation will continue to loop back to the start on completion. Otherwise, the animation will come to a stop on its final frame. |
 
+## See Also
+
+- [Anim Component](anim.md) - The recommended replacement for this component
+
 ## Scripting Interface
 
-You can control an Animation component's properties using a [script component](script.md). The Animation component's scripting interface is [here](https://api.playcanvas.com/engine/classes/AnimationComponent.html).
+You can control an Animation Component's properties using a [Script Component](script.md). The Animation Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/AnimationComponent.html).

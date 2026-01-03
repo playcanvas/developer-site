@@ -6,11 +6,9 @@ The Sound component controls playback of audio samples.
 
 ![Sound Component](/img/user-manual/editor/scenes/components/component-sound.png)
 
-Each Sound component contains "Slots" that are responsible for playing sounds. Each Slot can be assigned a different audio Asset, and can be played independently from the other Slots.
+Each Sound Component contains "Slots" that are responsible for playing sounds. Each Slot can be assigned a different audio Asset, and can be played independently from the other Slots.
 
 You can add a new Slot by clicking on the "ADD SLOT" button. You can remove a Slot by clicking on the bin icon in the header of each slot.
-
-The Sound component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the component will play the Slots that are marked as Auto Play. The rest of the Slots can be played by scripts.
 
 ## Component Properties
 
@@ -38,6 +36,11 @@ The Sound component can be enabled or disabled using the toggle in the top right
 | Volume     | The volume of the audio asset played back by the slot (0 to 1). |
 | Pitch      | The pitch at which the audio is played. A value of 1 means the audio is played back at the original pitch. |
 
+## See Also
+
+- [Audio Listener Component](audiolistener.md) - Set the listener position for 3D audio
+- [Audio Assets](/user-manual/assets/types/audio) - Learn more about audio assets
+
 ## Scripting Interface
 
-You can control the properties of a Sound component using a [script component](script.md). The scripting interface for the Sound component is [here](https://api.playcanvas.com/engine/classes/SoundComponent.html).
+You can control a Sound Component's properties using a [Script Component](script.md). The Sound Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/SoundComponent.html).

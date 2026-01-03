@@ -4,7 +4,21 @@ title: コンポーネント
 
 コンポーネントは、エンティティに追加または削除できる機能をカプセル化します。たとえば、コンポーネントを使用してエンティティがサウンドを再生したり、3Dモデルをレンダリングしたり、スクリプトを実行したりすることができます。
 
-You can add a component to an entity using the PlayCanvas Editor or by using the Engine API. The properties exposed by components are listed in the [Inspector](/user-manual/editor/interface/inspector) when you select an Entity.
+PlayCanvasエディターまたはエンジンAPIを使用して、エンティティにコンポーネントを追加できます。コンポーネントによって公開されるプロパティは、エンティティを選択すると[インスペクター](/user-manual/editor/interface/inspector)に一覧表示されます。
+
+## コンポーネントインスペクター
+
+各コンポーネントは、以下のコントロールを含む共通のヘッダーを持つパネルとしてインスペクターに表示されます：
+
+![Component Header](/img/user-manual/editor/scenes/components/component-header.png)
+
+| コントロール | 説明 |
+|---------|-------------|
+| 折りたたみ/展開 | 矢印をクリックしてコンポーネントパネルを折りたたみまたは展開します。 |
+| コンポーネントアイコン | コンポーネントの種類を識別します。 |
+| 有効化トグル | コンポーネントを有効または無効にします。無効なコンポーネントは実行またはレンダリングされません。 |
+| ヘルプ | このコンポーネントタイプのドキュメントを開きます。 |
+| アクションメニュー | 歯車アイコンをクリックして、コピー、貼り付け、削除のオプションにアクセスします。 |
 
 ## コンポーネントの種類
 

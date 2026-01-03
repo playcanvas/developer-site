@@ -2,7 +2,7 @@
 title: Layout Group
 ---
 
-The LayoutGroup component enables an entity to specify the size and position of child Element Components.
+The LayoutGroup Component enables an entity to specify the size and position of child Element Components.
 
 See the [Layout Groups](/user-manual/user-interface/layout-groups) section for more details.
 
@@ -22,6 +22,12 @@ See the [Layout Groups](/user-manual/user-interface/layout-groups) section for m
 | Height Fitting | Fitting logic to be applied when positioning and scaling child elements vertically. Options are: None, Stretch, Shrink, Both. |
 | Wrap           | Whether or not to wrap children onto a new row/column when the size of the container is exceeded. |
 
+## See Also
+
+- [LayoutChild Component](layoutchild.md) - Override layout behavior for individual children
+- [Element Component](element.md) - Required for UI layout
+- [Layout Groups](/user-manual/user-interface/layout-groups) - Learn more about layout groups
+
 ## Scripting Interface
 
-You can control a LayoutGroup component's properties using a [script component](script.md). The LayoutGroup component's scripting interface is [here](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html).
+You can control a LayoutGroup Component's properties using a [Script Component](script.md). The LayoutGroup Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html).

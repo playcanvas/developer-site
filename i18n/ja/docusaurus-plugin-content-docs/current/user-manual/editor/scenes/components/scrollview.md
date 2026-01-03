@@ -4,7 +4,7 @@ title: Scrollview
 
 Scrollviewコンポーネントは、ユーザーインターフェース内のスクロール可能な領域を定義します。Scrollviewは[Scrollbar](scrollbar.md)コンポーネントを介してスクロールできます。
 
-詳細については、[User Interface](/user-manual/user-interface)セクションを参照してください。
+詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
 
 ![Scrollview Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
 
@@ -25,6 +25,12 @@ Scrollviewコンポーネントは、ユーザーインターフェース内の�
 | Vertical                | 垂直スクロールを有効にするかどうか。 |
 | Scrollbar (vertical)    | Verticalのみ。垂直スクロールバーとして使用するエンティティ。このエンティティにはScrollbarコンポーネントが必要です。 |
 | Visibility (vertical)   | Verticalのみ。スクロールバーの表示を制御します。オプション: Show Always、Show When Required（コンテンツがビューポートを超えた場合のみ）。 |
+
+## 関連項目
+
+- [Scrollbarコンポーネント](scrollbar.md) - ビューをスクロールするためのコントロール
+- [Elementコンポーネント](element.md) - ビューポートとコンテンツに必要
+- [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
 
 ## スクリプトインターフェース
 

@@ -4,8 +4,6 @@ title: Script
 
 Scriptコンポーネントは、エンティティがユーザー提供のスクリプトを実行することを可能にします。これにより、ユーザーはJavaScriptまたはTypeScriptを使用してスクリプトを作成し、エンティティがインスタンス化されたときやフレームごとに更新されるときに実行できます。
 
-Scriptコンポーネントは、コンポーネントパネルの右上のトグルを使用して有効または無効にできます。有効にすると、割り当てられたすべてのスクリプトのupdate関数が毎フレーム呼び出されます。
-
 ![Script Component](/img/user-manual/editor/scenes/components/component-script.png)
 
 ## スクリプトの追加
@@ -51,6 +49,11 @@ Scriptコンポーネントは、コンポーネントパネルの右上のト�
 
 スクリプトで属性を定義する方法の詳細については、[Script Attributes](/user-manual/scripting/script-attributes/)ドキュメントを参照してください。
 
+## 関連項目
+
+- [スクリプティング](/user-manual/scripting) - スクリプトの書き方を学ぶ
+- [エディタースクリプティング](/user-manual/editor/scripting) - エディターでのスクリプト管理
+
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](script.md)を使用してScriptコンポーネントのプロパティを制御できます。Scriptコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScriptComponent.html)です。
+Scriptコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScriptComponent.html)です。

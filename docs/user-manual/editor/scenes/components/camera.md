@@ -2,9 +2,7 @@
 title: Camera
 ---
 
-The Camera component enables an entity to render a scene from a certain viewpoint.
-
-The Camera component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, the camera will render the scene every frame.
+The Camera Component enables an entity to render a scene from a certain viewpoint.
 
 ![Camera Component](/img/user-manual/editor/scenes/components/component-camera.png)
 
@@ -29,6 +27,10 @@ The Camera component can be enabled or disabled using the toggle in the top righ
 | Tonemapping        | The tonemapping algorithm to apply when rendering HDR content. Options are: Linear, Filmic, Hejl, ACES, ACES2, Neutral. This property is only available with Engine v2. |
 | Gamma              | The gamma correction value to apply. Options are 1.0 (no correction) or 2.2 (standard gamma). This property is only available with Engine v2. |
 
+## See Also
+
+- [Cameras](/user-manual/graphics/cameras) - Learn more about cameras
+
 ## Scripting Interface
 
-You can control a Camera component's properties using a [script component](script.md). The Camera component's scripting interface is [here](https://api.playcanvas.com/engine/classes/CameraComponent.html).
+You can control a Camera Component's properties using a [Script Component](script.md). The Camera Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/CameraComponent.html).

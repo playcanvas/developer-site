@@ -4,8 +4,6 @@ title: Particle System
 
 Particle Systemコンポーネントは、3D空間内でパーティクルエミッターを指定します。
 
-Particle Systemコンポーネントは、コンポーネントパネルの右上にあるトグルを使用して有効化または無効化できます。有効にすると、パーティクルシステムはシーンに追加されてレンダリングされます。
-
 ![Particle System Component](/img/user-manual/editor/scenes/components/component-particlesystem.png)
 
 ## プロパティ
@@ -112,6 +110,10 @@ Particle Systemコンポーネントは、コンポーネントパネルの右�
 | Color           | 各パーティクルの色が時間とともにどのように変化するかを定義するカーブ。 |
 | Opacity         | 各パーティクルの不透明度が時間とともにどのように変化するかを定義するカーブ。カーブエディタで2つのカーブが指定されている場合、不透明度は両方のカーブの間のランダムな補間になります。 |
 
+## 関連項目
+
+- [パーティクルシステム](/user-manual/graphics/particles) - パーティクルシステムについて詳しく学ぶ
+
 ## スクリプトインターフェース
 
-Particle Systemコンポーネントのプロパティは[Scriptコンポーネント](script.md)を使用して制御できます。Particle Systemコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してParticle Systemコンポーネントのプロパティを制御できます。Particle Systemコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html)です。

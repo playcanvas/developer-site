@@ -2,7 +2,7 @@
 title: Layout Child
 ---
 
-LayoutChildコンポーネントは、LayoutGroupコンポーネントによって制御されるエレメント (Element) が、Layout Groupのデフォルト動作を上書きすることができるようにします。
+LayoutChildコンポーネントは、LayoutGroupコンポーネントによって制御されるエレメントが、Layout Groupのデフォルト動作をオーバーライドすることを可能にします。
 
 詳細については[レイアウトグループ](/user-manual/user-interface/layout-groups)のセクションを参照してください。
 
@@ -19,6 +19,12 @@ LayoutChildコンポーネントは、LayoutGroupコンポーネントによっ�
 | Fit Width Proportion  | レイアウトグループがストレッチまたはシュリンクに設定されている場合、Elementが占有する追加スペースの割合を設定します。 |
 | Fit Height Proportion | レイアウトグループがストレッチまたはシュリンクに設定されている場合、Elementが占有する追加スペースの割合を設定します。 |
 | Exclude from Layout   | レイアウトの計算時にこのElementを完全に無視します。 |
+
+## 関連項目
+
+- [LayoutGroupコンポーネント](layoutgroup.md) - レイアウトを制御する親コンポーネント
+- [Elementコンポーネント](element.md) - UIレイアウトに必要
+- [レイアウトグループ](/user-manual/user-interface/layout-groups) - レイアウトグループについて詳しく学ぶ
 
 ## スクリプトインターフェース
 

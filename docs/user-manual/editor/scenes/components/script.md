@@ -2,9 +2,7 @@
 title: Script
 ---
 
-The Script component enables an entity to run user-supplied scripts. In this way, the user can write scripts (using JavaScript or TypeScript) that run when the entity is instantiated and updated on a per-frame basis.
-
-The Script component can be enabled or disabled using the toggle in the top right of the component panel. If enabled, all of the assigned scripts will have their update functions called every frame.
+The Script Component enables an entity to run user-supplied scripts. In this way, the user can write scripts (using JavaScript or TypeScript) that run when the entity is instantiated and updated on a per-frame basis.
 
 ![Script Component](/img/user-manual/editor/scenes/components/component-script.png)
 
@@ -51,6 +49,11 @@ Scripts can define custom attributes that appear in the Inspector. These attribu
 
 See the [Script Attributes](/user-manual/scripting/script-attributes/) documentation for details on defining attributes in your scripts.
 
+## See Also
+
+- [Scripting](/user-manual/scripting) - Learn how to write scripts
+- [Editor Scripting](/user-manual/editor/scripting) - Managing scripts in the Editor
+
 ## Scripting Interface
 
-You can control a Script component's properties using a [script component](script.md). The Script component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScriptComponent.html).
+The Script Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/ScriptComponent.html).
