@@ -56,8 +56,8 @@ How the Editor decides what is a new or removed mesh instance is done by the fol
 - If in the update, a mesh instance's name does not exist, it's assumed to be a new mesh instance and a new entity is added to the template.
 - If in the update, an existing entity of the template does not have a matching mesh instance given the rules above, it's assumed that this mesh instance has been removed and the entity will be removed from the template. The exception being mentioned above, if there was a script component added to it on the template, those entities are preserved on the root. If there were no script components added, those are deleted from the template.
 
-[material_asset]: /user-manual/assets/types/material/
-[texture_asset]: /user-manual/assets/types/texture/
+[material_asset]: /user-manual/editor/assets/inspectors/material/
+[texture_asset]: /user-manual/editor/assets/inspectors/texture/
 [template_asset]: /user-manual/editor/templates/
 [render_component]: https://api.playcanvas.com/engine/classes/RenderComponent.html
 [collision_component]: https://api.playcanvas.com/engine/classes/CollisionComponent.html

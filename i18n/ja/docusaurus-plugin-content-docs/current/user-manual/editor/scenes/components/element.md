@@ -20,7 +20,7 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 
 ## テキストエレメント (Text Element)
 
-テキストエレメントは、[フォントアセット](/user-manual/assets/types/font/)を使用してテキスト文字列をレンダリングします。
+テキストエレメントは、[フォントアセット](/user-manual/editor/assets/inspectors/font/)を使用してテキスト文字列をレンダリングします。
 
 ![Text Element](/img/user-manual/editor/scenes/components/component-element-text.png)
 

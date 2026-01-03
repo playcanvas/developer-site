@@ -28,6 +28,6 @@ title: Texture Atlas
 
 フレームのデータに加え、テクスチャアトラスには[Textureアセット][2]のプロパティが含まれます。
 
-[2]: /user-manual/assets/types/texture
+[2]: /user-manual/editor/assets/inspectors/texture
 [3]: /user-manual/editor/interface/settings/asset-import/
-[4]: /user-manual/assets/types/sprite
+[4]: /user-manual/editor/assets/inspectors/sprite

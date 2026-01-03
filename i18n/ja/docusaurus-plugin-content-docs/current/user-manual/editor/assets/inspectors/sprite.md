@@ -24,5 +24,5 @@ PlayCanvasのシーン内で、1単位毎にマッピングされるスプライ
 
 スプライトが参照するテクスチャアトラスアセット
 
-[1]: /user-manual/assets/types/texture-atlas
+[1]: /user-manual/editor/assets/inspectors/texture-atlas
 [2]: /user-manual/2D/slicing

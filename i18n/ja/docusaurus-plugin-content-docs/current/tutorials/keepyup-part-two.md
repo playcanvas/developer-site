@@ -83,6 +83,6 @@ Emissiveマップは、表面の色を設定して、まるでその色の光を
 [1]: /tutorials/keepyup-part-one/
 [2]: https://store.playcanvas.com/
 [6]: /user-manual/graphics/physical-rendering/physical-materials/
-[7]: /user-manual/assets/types/cubemap/
+[7]: /user-manual/editor/assets/inspectors/cubemap/
 [15]: /tutorials/keepyup-part-three/
 [16]: https://playcanvas.com/project/406050

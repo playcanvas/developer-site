@@ -22,7 +22,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 シーンの背景色を変更するには、シーンのカメラの Clear Color プロパティを更新する必要があります。
 
-または、シーンに[スカイボックス](/user-manual/assets/types/cubemap/)を追加することもできます。
+または、シーンに[スカイボックス](/user-manual/editor/assets/inspectors/cubemap/)を追加することもできます。
 
 [詳細を見る](/user-manual/editor/scenes/components/camera/)
 
@@ -34,7 +34,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 新しいマテリアルを作成し、それをモデルにドラッグ&ドロップするか、既存のマテリアルを選択してインスペクターでプロパティを編集することができます。
 
-[詳細を見る](/user-manual/assets/types/material/)
+[詳細を見る](/user-manual/editor/assets/inspectors/material/)
 
 ## キューブマップを作成するには?
 
@@ -44,7 +44,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 キューブマップを作成するには、アセットパネルの**<span class="pc-icon">&#57632;</span> Add**ボタンをクリックして**New Cubemap**を選択し、キューブマップインスペクターに6つのテクスチャをドラッグします。物理ベースのレンダリングを活用するには、6つのテクスチャを設定した後に**Prefilter**をクリックする必要があります。
 
-[詳細を見る](/user-manual/assets/types/cubemap/)
+[詳細を見る](/user-manual/editor/assets/inspectors/cubemap/)
 
 ## エンティティを作成するには?
 
@@ -64,7 +64,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 マテリアルを作成するには、アセットパネルの**<span class="pc-icon">&#57632;</span> Add**ボタンをクリックして、**New Material**を選択します。
 
-[詳細を見る](/user-manual/assets/types/material/)
+[詳細を見る](/user-manual/editor/assets/inspectors/material/)
 
 ## 新しいシェーダを作成するには?
 
@@ -84,7 +84,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 ## スカイボックスを作成するには?
 
-シーンにスカイボックスを作成するには、まず[Cubemapアセット](/user-manual/assets/types/cubemap/)を作成する必要があります。その後、Cubemapを3Dビューポートにドラッグアンドドロップするか、Scene Settingsに移動してSkyboxフィールドにCubemapをドラッグします。
+シーンにスカイボックスを作成するには、まず[Cubemapアセット](/user-manual/editor/assets/inspectors/cubemap/)を作成する必要があります。その後、Cubemapを3Dビューポートにドラッグアンドドロップするか、Scene Settingsに移動してSkyboxフィールドにCubemapをドラッグします。
 
 [詳細を見る](/user-manual/editor/interface/settings/rendering/)
 
@@ -110,7 +110,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 ## サウンドを再生するにはどうすればよいですか?
 
-サウンドを再生するには、Entityに[Sound component](/user-manual/editor/scenes/components/sound/)を追加する必要があります。その後、[Audio assets](/user-manual/assets/types/audio/) を再生するスロットを作成することができます。スロットを追加して、オーディオアセットをアセットフィールドにドラッグアンドドロップします。サウンドを聞くためには、[AudioListener component](/user-manual/editor/scenes/components/audiolistener/)をEntityに追加する必要があります。通常はカメラEntityに追加します。
+サウンドを再生するには、Entityに[Sound component](/user-manual/editor/scenes/components/sound/)を追加する必要があります。その後、[Audio assets](/user-manual/editor/assets/inspectors/audio/) を再生するスロットを作成することができます。スロットを追加して、オーディオアセットをアセットフィールドにドラッグアンドドロップします。サウンドを聞くためには、[AudioListener component](/user-manual/editor/scenes/components/audiolistener/)をEntityに追加する必要があります。通常はカメラEntityに追加します。
 
 オーディオアセットは、コンピュータからAssetsパネルにオーディオファイルをドラッグアンドドロップすることで作成できます。
 

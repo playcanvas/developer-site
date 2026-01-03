@@ -89,6 +89,6 @@ If there is already a Model (Source) file in the current folder or a folder with
 
 Please refer to the [Animation section][4] for more details.
 
-[2]: /user-manual/assets/preloading-and-streaming/
-[3]: /user-manual/assets/import-pipeline/import-hierarchy/
-[4]: /user-manual/assets/types/animation/
+[2]: /user-manual/assets/preloading/
+[3]: /user-manual/editor/assets/import-pipeline/import-hierarchy/
+[4]: /user-manual/editor/assets/inspectors/animation/

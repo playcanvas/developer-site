@@ -26,8 +26,8 @@ The [Sprite Editor][4] is the tool used to generate Texture Atlas frames and Spr
 
 *Artwork created by [PixelBoy](https://twitter.com/2pblog1)*
 
-[0]: /user-manual/assets/types/sprite
+[0]: /user-manual/editor/assets/inspectors/sprite
 [1]: /user-manual/editor/scenes/components/sprite
-[2]: /user-manual/assets/types/texture-atlas
-[3]: /user-manual/assets/types/texture
+[2]: /user-manual/editor/assets/inspectors/texture-atlas
+[3]: /user-manual/editor/assets/inspectors/texture
 [4]: /user-manual/2D/sprite-editor

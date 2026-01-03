@@ -75,6 +75,6 @@ Anisotropyが増加するにつれて、GPUでテクスチャをサンプリン�
 
 実行時にサイズを縮小しない場合は、2020年10月23日現在、4096x4096が非常に広範にサポートされていますし、一般的には2048x2048がどこでも動作保証されています。
 
-[1]: /user-manual/assets/types/material
+[1]: /user-manual/editor/assets/inspectors/material
 [2]: https://en.wikipedia.org/wiki/High-dynamic-range_imaging
 [7]: https://webglreport.com/

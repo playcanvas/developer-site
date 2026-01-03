@@ -75,6 +75,6 @@ If the engine attempts to utilize a texture that exceeds the max texture size re
 
 If you would like to avoid downsizing at runtime, at the time of writing (Fri 23 Oct 2020), 4096x4096 is very widely supported with some developers even opting for 2048x2048 which is guaranteed to work everywhere.
 
-[1]: /user-manual/assets/types/material
+[1]: /user-manual/editor/assets/inspectors/material
 [2]: https://en.wikipedia.org/wiki/High-dynamic-range_imaging
 [7]: https://webglreport.com/

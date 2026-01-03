@@ -176,6 +176,68 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: 'category',
+          label: 'Assets',
+          link: {
+            type: 'doc',
+            id: 'user-manual/editor/assets/index',
+          },
+          items: [
+            'user-manual/editor/assets/asset-panel',
+            'user-manual/editor/assets/importing',
+            {
+              type: 'category',
+              label: 'Import Pipeline',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/assets/import-pipeline/index',
+              },
+              items: [
+                'user-manual/editor/assets/import-pipeline/import-hierarchy',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Asset Inspectors',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/assets/inspectors/index',
+              },
+              items: [
+                'user-manual/editor/assets/inspectors/animation',
+                'user-manual/editor/assets/inspectors/audio',
+                'user-manual/editor/assets/inspectors/css',
+                'user-manual/editor/assets/inspectors/cubemap',
+                'user-manual/editor/assets/inspectors/font',
+                'user-manual/editor/assets/inspectors/gsplat',
+                'user-manual/editor/assets/inspectors/html',
+                'user-manual/editor/assets/inspectors/json',
+                'user-manual/editor/assets/inspectors/material',
+                'user-manual/editor/assets/inspectors/render',
+                'user-manual/editor/assets/inspectors/shader',
+                'user-manual/editor/assets/inspectors/sprite',
+                'user-manual/editor/assets/inspectors/template',
+                'user-manual/editor/assets/inspectors/text',
+                'user-manual/editor/assets/inspectors/texture',
+                'user-manual/editor/assets/inspectors/texture-atlas',
+                'user-manual/editor/assets/inspectors/wasm',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Asset Store',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/assets/asset-store/index',
+              },
+              items: [
+                'user-manual/editor/assets/asset-store/sketchfab',
+              ],
+            },
+            'user-manual/editor/assets/viewers',
+          ],
+        },
         'user-manual/editor/realtime-collaboration',
         {
           type: 'category',
@@ -477,45 +539,10 @@ const sidebars = {
         id: 'user-manual/assets/index',
       },
       items: [
-        {
-          type: 'category',
-          label: 'Types',
-          link: {
-            type: 'doc',
-            id: 'user-manual/assets/types/index',
-          },
-          items: [
-            'user-manual/assets/types/animation',
-            'user-manual/assets/types/audio',
-            'user-manual/assets/types/css',
-            'user-manual/assets/types/cubemap',
-            'user-manual/assets/types/font',
-            'user-manual/assets/types/gsplat',
-            'user-manual/assets/types/html',
-            'user-manual/assets/types/json',
-            'user-manual/assets/types/material',
-            'user-manual/assets/types/render',
-            'user-manual/assets/types/shader',
-            'user-manual/assets/types/sprite',
-            'user-manual/assets/types/template',
-            'user-manual/assets/types/text',
-            'user-manual/assets/types/texture',
-            'user-manual/assets/types/texture-atlas',
-            'user-manual/assets/types/wasm',
-          ],
-        },
-        'user-manual/assets/importing',
-        {
-          type: 'category',
-          label: 'Import Pipeline',
-          link: {
-            type: 'doc',
-            id: 'user-manual/assets/import-pipeline/index',
-          },
-          items: [
-            'user-manual/assets/import-pipeline/import-hierarchy',
-          ],
-        },
+        'user-manual/assets/asset-registry',
+        'user-manual/assets/preloading',
+        'user-manual/assets/loading-unloading',
+        'user-manual/assets/supported-formats',
         {
           type: 'category',
           label: 'Models',
@@ -529,20 +556,7 @@ const sidebars = {
             'user-manual/assets/models/units',
           ],
         },
-        {
-          type: 'category',
-          label: 'Asset Store',
-          link: {
-            type: 'doc',
-            id: 'user-manual/assets/asset-store/index',
-          },
-          items: [
-            'user-manual/assets/asset-store/sketchfab',
-          ],
-        },
         'user-manual/assets/finding',
-        'user-manual/assets/preloading-and-streaming',
-        'user-manual/assets/viewers',
       ],
     },
     {

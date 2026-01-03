@@ -189,7 +189,7 @@ this.app.scenes.loadSceneHierarchy(sceneItem, (err, loadedSceneRootEntity) => {
 
 推奨される方法は、アセットが属するシーン名でタグ付けすることです。シーンを読み込む際は、まずタグ付けされたアセットを読み込み、すべてのアセットの準備ができたらシーンを読み込みます。
 
-アセットタグとアセット読み込みの詳細については、[このページ](/user-manual/assets/preloading-and-streaming/#asset-tags)をご覧ください。
+アセットタグとアセット読み込みの詳細については、[このページ](/user-manual/assets/preloading/)をご覧ください。
 
 以下の[サンプルプロジェクト](https://playcanvas.com/project/926754/)は、シーン読み込み時にアセットを読み込み、メインメニューに戻る際にアンロードします。
 

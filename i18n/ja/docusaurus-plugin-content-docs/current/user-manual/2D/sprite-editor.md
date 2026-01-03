@@ -81,5 +81,5 @@ Spriteアセットが選択されているときにスプライトインスペ�
 
 *アートワークは[PixelBoy](https://twitter.com/2pblog1)によって作成されました。*
 
-[6]: /user-manual/assets/types/sprite/
+[6]: /user-manual/editor/assets/inspectors/sprite/
 [7]: /user-manual/2D/slicing/

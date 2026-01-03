@@ -28,7 +28,7 @@ The Render Component enables an entity to render a primitive shape or a render a
 
 ## See Also
 
-- [Render Assets](/user-manual/assets/types/render) - Learn about render assets
+- [Render Assets](/user-manual/editor/assets/inspectors/render) - Learn about render assets
 
 ## Scripting Interface
 

@@ -1,28 +1,60 @@
 ---
-title: アセット
+title: Assets
 ---
 
-アセットとは、ゲームで使用可能なリソースのことです。アセットには、3Dモデルやオーディオファイルなど、様々なコンテンツタイプがあります。アセットには、ソースとターゲットの2つの形式があります。
+Assets are the building blocks of your PlayCanvas application. They represent all the external resources your application needs, such as 3D models, textures, audio files, and scripts.
 
-アセットのファイルをアップロードすると、ファイルはインポートパイプラインを通じて実行され、最終的にゲームで使用するためにデータを変換および最適化します。
+## Assets vs Resources
 
-## タイプ {#type}
+In PlayCanvas, there's an important distinction between **Assets** and **Resources**:
 
-PlayCanvasは、様々なコンテンツタイプのインポートをサポートしています。
+- **Asset** - A record in the asset registry that contains metadata about a resource, including its name, type, tags, and a reference to the underlying resource data. Assets are managed by the [`AssetRegistry`](asset-registry).
 
-* モデル 例：FBX, COLLADA, obj
-* 3Dアニメーション
-* テクスチャー用の画像　例：jpg, pngなど
-* オーディオ 例： mp3, oggなど
+- **Resource** - The actual runtime data that gets loaded into memory and used by the engine. For example, a texture asset's resource is the actual image data that can be applied to materials.
 
-新しいファイルをアップロードするとアセットタイプは自動的にアップロードしたファイルのタイプから設定されます。例えば、PNG ファイルをアップロードすると、作成されたアセットは*Texture*タイプになります。
+When you load an asset, PlayCanvas downloads and parses the underlying file to create the resource. The asset object then holds a reference to this resource via its `resource` property.
 
-## ソースアセット(Source) とターゲットアセット(Target) {#source-assets-and-target-assets}
+```javascript
+const asset = this.app.assets.find('my-texture');
+asset.ready((asset) => {
+    const texture = asset.resource; // The actual Texture object
+});
+this.app.assets.load(asset);
+```
 
-アセットタイプの後、アセットのもう一つ重要なプロパティは、**Source**アセットであるか、**Target**アセットであるかです。
+## Asset Lifecycle
 
-簡単に言えば、ソースアセットはアップロードした元のファイルを参照します。ターゲットアセットは、PlayCanvasの変換および最適化プロセスによって生成されたファイルの終了時に作成されます。
+Assets go through several stages during the lifetime of your application:
 
-例えば、テクスチャとしてPhotoshop（PSD）ファイルをアップロードした場合、そのPSDファイルに対して *texture* というタイプのソースアセットを作成します。その後、インポートパイプラインを実行し、PSDファイルをJPGファイルに変換します。プロセスの最後に、新しいJPGファイルに対して *texture* というタイプのターゲットアセットを作成します。
+1. **Registry** - Assets are registered in the [`AssetRegistry`](asset-registry), making them discoverable by ID, name, or tags
+2. **Loading** - Asset data is downloaded from the server
+3. **Ready** - The resource is parsed and available for use
+4. **Unloading** - Resources can be unloaded to free memory
 
-エディタやゲーム内では、常にTargetアセットを参照することになります。それはランタイムで最適化され、使用準備が整ったフォーマットであるためです。
+For details on controlling when assets load, see [Preloading](preloading) and [Loading and Unloading](loading-unloading).
+
+## Supported Formats
+
+PlayCanvas supports a wide variety of file formats for different asset types. See [Supported Formats](supported-formats) for a complete list.
+
+## Working with Assets
+
+### In the Editor
+
+If you're using the PlayCanvas Editor, see the [Editor Assets Guide](/user-manual/editor/assets/) for information on:
+
+- Importing and organizing assets
+- Configuring asset properties
+- Using the Asset Store
+
+### Programmatically
+
+For working with assets in code:
+
+- **[Asset Registry](asset-registry)** - Find and manage assets at runtime
+- **[Preloading](preloading)** - Control which assets load before your app starts
+- **[Loading and Unloading](loading-unloading)** - Dynamically load assets during runtime
+
+## Finding Assets
+
+Looking for 3D models, textures, or audio for your project? See [Finding Assets](finding) for a list of asset marketplaces and resources.

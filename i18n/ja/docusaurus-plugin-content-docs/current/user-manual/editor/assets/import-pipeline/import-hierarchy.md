@@ -56,8 +56,8 @@ PlayCanvasでは、シーン内のエンティティ階層ごとにメッシュ�
 - アップデート中に、メッシュインスタンスの名前が存在しない場合、新しいエンティティがテンプレートに追加されたものと見なされます。
 - アップデート中に、ルールに従って与えられた対応するメッシュインスタンスが存在しない場合、そのメッシュインスタンスが削除されたと見なされ、エンティティがテンプレートから削除されます。ただし、上述した例外があり、テンプレートにScriptコンポーネントが追加された場合、そのエンティティはルートに保持されます。Scriptコンポーネントが追加されなかった場合は、テンプレートから削除されます。
 
-[material_asset]: /user-manual/assets/types/material/
-[texture_asset]: /user-manual/assets/types/texture/
+[material_asset]: /user-manual/editor/assets/inspectors/material/
+[texture_asset]: /user-manual/editor/assets/inspectors/texture/
 [template_asset]: /user-manual/editor/templates/
 [render_component]: https://api.playcanvas.com/engine/classes/RenderComponent.html
 [collision_component]: https://api.playcanvas.com/engine/classes/CollisionComponent.html

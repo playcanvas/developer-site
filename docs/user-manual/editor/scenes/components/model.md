@@ -41,4 +41,4 @@ You can control a Model Component's properties using a [Script Component](script
 
 ## Customizing Materials
 
-You can learn how to customize the materials of your model [here](/user-manual/assets/types/material/#assigning-materials).
+You can learn how to customize the materials of your model [here](/user-manual/editor/assets/inspectors/material/#assigning-materials).

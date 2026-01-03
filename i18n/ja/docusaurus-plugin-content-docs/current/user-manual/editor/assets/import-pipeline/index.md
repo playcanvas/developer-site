@@ -89,6 +89,6 @@ Draco圧縮を使用する場合は、プロジェクトにDraco WASMモジュ�
 
 詳細については、[アニメーションセクション][4]を参照してください。
 
-[2]: /user-manual/assets/preloading-and-streaming/
-[3]: /user-manual/assets/import-pipeline/import-hierarchy/
-[4]: /user-manual/assets/types/animation/
+[2]: /user-manual/assets/preloading/
+[3]: /user-manual/editor/assets/import-pipeline/import-hierarchy/
+[4]: /user-manual/editor/assets/inspectors/animation/

@@ -39,7 +39,7 @@ You can add a new Slot by clicking on the "ADD SLOT" button. You can remove a Sl
 ## See Also
 
 - [Audio Listener Component](audiolistener.md) - Set the listener position for 3D audio
-- [Audio Assets](/user-manual/assets/types/audio) - Learn more about audio assets
+- [Audio Assets](/user-manual/editor/assets/inspectors/audio) - Learn more about audio assets
 
 ## Scripting Interface
 

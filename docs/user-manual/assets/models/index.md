@@ -21,6 +21,6 @@ Learn more about:
 [4]: /user-manual/glossary#target-asset
 [5]: /user-manual/assets/models/building
 [6]: /user-manual/assets/models/exporting
-[7]: /user-manual/assets/types/template/
-[8]: /user-manual/assets/import-pipeline/import-hierarchy/
+[7]: /user-manual/editor/assets/inspectors/template/
+[8]: /user-manual/editor/assets/import-pipeline/import-hierarchy/
 [9]: /user-manual/editor/templates/

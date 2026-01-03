@@ -1,8 +1,8 @@
 ---
-title: Asset Types
+title: Asset Inspectors
 ---
 
-The [Assets Panel](/user-manual/editor/interface/assets) manages the assets in your project. There are several different types of asset.
+When you select an asset in the [Assets Panel](/user-manual/editor/assets/asset-panel), its properties are displayed in the Inspector. Each asset type has its own set of configurable properties.
 
 | Type                             | Imported From                    | Resource Extensions              | Description                        |
 | -------------------------------- | -------------------------------- | -------------------------------- | ---------------------------------- |

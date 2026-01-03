@@ -28,7 +28,7 @@ Renderコンポーネントは、エンティティがプリミティブ形状�
 
 ## 関連項目
 
-- [レンダーアセット](/user-manual/assets/types/render) - レンダーアセットについて学ぶ
+- [レンダーアセット](/user-manual/editor/assets/inspectors/render) - レンダーアセットについて学ぶ
 
 ## スクリプトインターフェース
 

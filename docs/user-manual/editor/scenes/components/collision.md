@@ -45,7 +45,7 @@ If the entity also has a Rigid Body Component, the Collision Component determine
 | Axis            | Capsule, Cylinder, and Cone only. Aligns the collision shape with the local-space X, Y, or Z axis of the entity. |
 | Convex Hull     | Mesh only. If enabled, the collision mesh will be treated as a convex hull, which is more efficient for dynamic rigid bodies. If disabled, the mesh is used as a triangle mesh (concave), which only works with static or kinematic rigid bodies. |
 | Model Asset     | Mesh only. The model asset that will be used as a source for the collision mesh. Either a Model Asset or Render Asset can be specified, but not both. |
-| Render Asset    | Mesh only. The [render asset](/user-manual/assets/types/render) that will be used as a source for the collision mesh. Either a Model Asset or Render Asset can be specified, but not both. |
+| Render Asset    | Mesh only. The [render asset](/user-manual/editor/assets/inspectors/render) that will be used as a source for the collision mesh. Either a Model Asset or Render Asset can be specified, but not both. |
 | Position Offset | The positional offset of the collision shape relative to the entity's position. |
 | Rotation Offset | The rotational offset of the collision shape relative to the entity's rotation, specified in degrees. |
 
