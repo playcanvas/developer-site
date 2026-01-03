@@ -7,11 +7,19 @@ import path from 'path';
  * Generates:
  * - llms.txt: Structured overview with links to all documentation sections
  * - llms-full.txt: Complete documentation content in a single file
+ *
+ * @param {Object} context - Docusaurus context
+ * @param {Object} options - Plugin options
+ * @param {string} [options.docsDir='docs'] - Path to docs directory relative to site root
+ * @param {boolean} [options.failOnError=false] - If true, build will fail when LLM file
+ *   generation encounters an error. If false (default), errors are logged as warnings
+ *   and the build continues. Set to true if LLM files are critical to your deployment.
  */
 export default function pluginLlms(context, options = {}) {
     const { siteDir, siteConfig } = context;
     const docsDir = path.join(siteDir, options.docsDir || 'docs');
     const baseUrl = siteConfig.url;
+    const failOnError = options.failOnError ?? false;
 
     return {
         name: 'docusaurus-plugin-llms',
@@ -50,7 +58,15 @@ export default function pluginLlms(context, options = {}) {
                 console.log(`[LLMs Plugin] Generated ${llmsFullTxtPath} (${(llmsFullTxt.length / 1024).toFixed(1)} KB)`);
 
             } catch (error) {
-                console.error('[LLMs Plugin] Error generating LLM files:', error);
+                if (failOnError) {
+                    // Re-throw to fail the build
+                    throw new Error(`[LLMs Plugin] Failed to generate LLM files: ${error.message}`, { cause: error });
+                }
+                // Log warning but allow build to continue
+                // This is intentional: LLM files are supplementary and their generation
+                // failure should not prevent the main documentation from being deployed.
+                console.warn('[LLMs Plugin] Warning: Failed to generate LLM files (build continuing):', error.message);
+                console.warn('[LLMs Plugin] Set { failOnError: true } in plugin options to make this fatal.');
             }
         }
     };
