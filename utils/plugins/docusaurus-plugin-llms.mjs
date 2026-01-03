@@ -200,7 +200,7 @@ function cleanMarkdownContent(content) {
 
     // Remove iframe embeds
     cleaned = cleaned.replace(/<iframe[\s\S]*?<\/iframe>/gi, '[Interactive Demo]');
-    cleaned = cleaned.replace(/<div className="iframe-container">[\s\S]*?<\/div>/g, '[Interactive Demo]');
+    cleaned = cleaned.replace(/<div[^>]*className=["']iframe-container["'][^>]*>[\s\S]*?<\/div>/g, '[Interactive Demo]');
 
     // Simplify images - keep alt text
     cleaned = cleaned.replace(/!\[([^\]]*)\]\([^)]+\)/g, (match, alt) => {
