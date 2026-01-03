@@ -200,7 +200,13 @@ function cleanMarkdownContent(content) {
 
     // Remove JSX/MDX components but keep text content
     cleaned = cleaned.replace(/<([A-Z][a-zA-Z]*)[^>]*\/>/g, ''); // Self-closing components
-    cleaned = cleaned.replace(/<([A-Z][a-zA-Z]*)[^>]*>[\s\S]*?<\/\1>/g, ''); // Components with children
+    const componentWithChildrenRegex = /<([A-Z][a-zA-Z]*)[^>]*>[\s\S]*?<\/\1>/g;
+    // Remove components with children; iterate to handle nested components of the same type
+    let previousCleaned;
+    do {
+        previousCleaned = cleaned;
+        cleaned = cleaned.replace(componentWithChildrenRegex, '');
+    } while (cleaned !== previousCleaned);
 
     // Remove iframe embeds
     cleaned = cleaned.replace(/<iframe[\s\S]*?<\/iframe>/gi, '[Interactive Demo]');
