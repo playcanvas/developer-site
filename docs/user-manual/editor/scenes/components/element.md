@@ -8,7 +8,7 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 
 ## Group Element
 
-The group element provides just the layout properties of the Element component.
+The group element provides just the layout properties of the Element Component.
 
 ![Group Element](/img/user-manual/editor/scenes/components/component-element-group.png)
 
@@ -68,10 +68,10 @@ The text element renders a string of text using a [font asset](/user-manual/asse
 | Text              | The text string to display. Only shown when Localized is disabled. |
 | Key               | The localization key used to look up the translated text. Only shown when Localized is enabled. |
 | Enable Markup     | If enabled, the text can contain markup tags for styling (e.g., color, bold). |
-| Font Size         | The size in Screen component pixels to render the font at. Only shown when Auto Fit Width and Auto Fit Height are disabled. |
+| Font Size         | The size in Screen Component pixels to render the font at. Only shown when Auto Fit Width and Auto Fit Height are disabled. |
 | Min Font Size     | The minimum font size when using Auto Fit Width or Auto Fit Height. |
 | Max Font Size     | The maximum font size when using Auto Fit Width or Auto Fit Height. |
-| Line Height       | The size in Screen component pixels to move down for a new line. |
+| Line Height       | The size in Screen Component pixels to move down for a new line. |
 | Wrap Lines        | If enabled, text that overflows the width of the text element will be wrapped to the next line. |
 | Max Lines         | The maximum number of lines to display. Text beyond this limit will be clipped. Only shown when Wrap Lines is enabled. |
 | Spacing           | A multiplier to apply to the amount of space between each character. |

@@ -2,7 +2,7 @@
 title: Sound
 ---
 
-The Sound component controls playback of audio samples.
+The Sound Component controls playback of audio samples.
 
 ![Sound Component](/img/user-manual/editor/scenes/components/component-sound.png)
 

@@ -1,5 +1,5 @@
 ---
-title: Animation
+title: Animation (Legacy)
 ---
 
 :::warning

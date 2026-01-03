@@ -16,7 +16,7 @@ The Rigid Body Component enables an entity to participate in the scene's physics
 
 ![Rigid Body Component (Kinematic)](/img/user-manual/editor/scenes/components/component-rigid-body-kinematic.png)
 
-Note that you must add a [collision component](collision.md) to the same entity in order to define the shape of the rigid body. Otherwise, the Rigid Body component has no effect and will not participate in the physics simulation.
+Note that you must add a [Collision Component](collision.md) to the same entity in order to define the shape of the rigid body. Otherwise, the Rigid Body Component has no effect and will not participate in the physics simulation.
 
 ## Properties
 

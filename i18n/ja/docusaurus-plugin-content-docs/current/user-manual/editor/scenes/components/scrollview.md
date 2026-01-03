@@ -1,12 +1,12 @@
 ---
-title: Scrollview
+title: Scroll View
 ---
 
-Scrollviewコンポーネントは、ユーザーインターフェース内のスクロール可能な領域を定義します。Scrollviewは[Scrollbar](scrollbar.md)コンポーネントを介してスクロールできます。
+Scroll Viewコンポーネントは、ユーザーインターフェース内のスクロール可能な領域を定義します。Scroll Viewは[Scrollbar](scrollbar.md)コンポーネントを介してスクロールできます。
 
 詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
 
-![Scrollview Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
+![Scroll View Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
 
 ## プロパティ
 
@@ -34,4 +34,4 @@ Scrollviewコンポーネントは、ユーザーインターフェース内の�
 
 ## スクリプトインターフェース
 
-[Scriptコンポーネント](script.md)を使用してScrollviewコンポーネントのプロパティを制御できます。Scrollviewコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html)です。
+[Scriptコンポーネント](script.md)を使用してScroll Viewコンポーネントのプロパティを制御できます。Scroll Viewコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html)です。

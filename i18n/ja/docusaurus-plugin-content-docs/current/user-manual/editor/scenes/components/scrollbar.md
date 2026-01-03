@@ -2,7 +2,7 @@
 title: Scrollbar
 ---
 
-Scrollbarコンポーネントは、[Scrollview](scrollview.md)コンポーネント用のスクロールコントロールを定義します。
+Scrollbarコンポーネントは、[Scroll View](scrollview.md)コンポーネント用のスクロールコントロールを定義します。
 
 詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
 
@@ -19,7 +19,7 @@ Scrollbarコンポーネントは、[Scrollview](scrollview.md)コンポーネ�
 
 ## 関連項目
 
-- [Scrollviewコンポーネント](scrollview.md) - このスクロールバーを使用するスクロール可能エリア
+- [Scroll Viewコンポーネント](scrollview.md) - このスクロールバーを使用するスクロール可能エリア
 - [Elementコンポーネント](element.md) - スクロールバーハンドルに必要
 - [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
 

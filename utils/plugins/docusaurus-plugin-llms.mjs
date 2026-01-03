@@ -428,4 +428,3 @@ ${'-'.repeat(80)}
 
     return lines.join('\n');
 }
-

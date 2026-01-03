@@ -1,10 +1,10 @@
 ---
-title: Model
+title: Model (Legacy)
 ---
 
 :::warning
 
-The Model component is deprecated. It has been replaced by the [Render](render.md) component.
+The Model Component is deprecated. It has been replaced by the [Render](render.md) Component.
 
 :::
 

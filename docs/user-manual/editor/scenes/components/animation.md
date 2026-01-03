@@ -1,10 +1,10 @@
 ---
-title: Animation
+title: Animation (Legacy)
 ---
 
 :::warning
 
-The Animation component is deprecated. It has been replaced by the [Anim](anim.md) component.
+The Animation Component is deprecated. It has been replaced by the [Anim](anim.md) Component.
 
 :::
 

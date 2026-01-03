@@ -10,7 +10,7 @@ The GSplat Component enables an entity to render a 3D Gaussian Splat.
 
 | Property | Description |
 |----------|-------------|
-| Asset    | The GSplat asset to be rendered by this GSplat component. Only a single GSplat asset can be assigned to a GSplat component. |
+| Asset    | The GSplat asset to be rendered by this GSplat Component. Only a single GSplat asset can be assigned to a GSplat Component. |
 | Layers   | The [layers](/user-manual/graphics/layers) to render this element into. |
 
 ## See Also

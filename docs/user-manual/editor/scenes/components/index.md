@@ -41,7 +41,7 @@ There are many different components defined in the PlayCanvas Engine:
 | [Render](render)                  | Renders a graphical primitive or a render asset.                              |
 | [Screen](screen)                  | Defines the area and rendering of a user interface.                           |
 | [Script](script)                  | Allows the entity to run JavaScript fragments to implement custom behavior.   |
-| [Scrollbar](scrollbar)            | Defines a scrolling control for a Scrollview component.                       |
+| [Scrollbar](scrollbar)            | Defines a scrolling control for a Scroll View Component.                       |
 | [Scroll View](scrollview)         | Defines a scrollable area in a user interface.                                |
 | [Sound](sound)                    | Plays audio assets.                                                           |
 | [Sprite](sprite)                  | Renders 2D graphics at the location of the entity.                            |

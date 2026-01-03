@@ -1,5 +1,5 @@
 ---
-title: Model
+title: Model (Legacy)
 ---
 
 :::warning

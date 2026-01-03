@@ -41,7 +41,7 @@ PlayCanvasエンジンには多くの異なるコンポーネントが定義さ�
 | [Render](render)                  | グラフィカルプリミティブまたはレンダーアセットをレンダリングします。                              |
 | [Screen](screen)                  | ユーザーインターフェースの領域とレンダリングを定義します。                           |
 | [Script](script)                  | エンティティがカスタムの振る舞いを実装するためのJavaScriptフラグメントを実行できるようにします。   |
-| [Scrollbar](scrollbar)            | Scrollviewコンポーネントのスクロール制御を定義します。                       |
+| [Scrollbar](scrollbar)            | Scroll Viewコンポーネントのスクロール制御を定義します。                       |
 | [Scroll View](scrollview)         | ユーザーインターフェース内のスクロール可能なエリアを定義します。                                |
 | [Sound](sound)                    | Audioアセットを再生します。                                                           |
 | [Sprite](sprite)                  | エンティティの位置に2Dグラフィックをレンダリングします。                            |

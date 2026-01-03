@@ -8,12 +8,12 @@ The Script Component enables an entity to run user-supplied scripts. In this way
 
 ## Adding Scripts
 
-To create a new script, click on the **Add Script** dropdown in the Script component and either:
+To create a new script, click on the **Add Script** dropdown in the Script Component and either:
 
 - Select an existing script from the list
 - Type a new script name and click **Create Script** to create a new script asset
 
-Alternatively, you can drag a script asset from the Assets Panel onto the Script component.
+Alternatively, you can drag a script asset from the Assets Panel onto the Script Component.
 
 ![Add Script Dialog](/img/user-manual/editor/scenes/components/new-script.jpg)
 
