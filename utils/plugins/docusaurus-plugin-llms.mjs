@@ -154,7 +154,7 @@ function parseFrontmatter(content) {
  */
 function extractFirstHeading(content) {
     // Remove frontmatter first
-    const withoutFrontmatter = content.replace(/^---\n[\s\S]*?\n---\n*/, '');
+    const withoutFrontmatter = content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n*/, '');
     const match = withoutFrontmatter.match(/^#\s+(.+)$/m);
     return match ? match[1].trim() : null;
 }
