@@ -170,7 +170,8 @@ function extractFirstParagraph(content) {
         }
         if (trimmed.startsWith('#')) continue;
         if (trimmed.startsWith('![')) continue;
-        if (trimmed.startsWith('<')) continue;
+        // Skip lines that start with what looks like an HTML/JSX tag (e.g. <div>, <MyComponent>, </Section>)
+        if (/^<\s*\/?[A-Za-z]/.test(trimmed)) continue;
 
         paragraph += (paragraph ? ' ' : '') + trimmed;
         if (paragraph.length > 200) break;
