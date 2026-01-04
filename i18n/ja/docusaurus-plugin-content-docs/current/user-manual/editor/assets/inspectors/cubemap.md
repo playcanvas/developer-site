@@ -74,7 +74,7 @@ Cubemapの面は以下の条件を満たす必要があります。
 
 ## イメージベースドライティング(IBL)
 
-このテクニックは、Environmentマップ(例えばCubeMap)を使用して、物理ベースのアンビエントライト (Ambient Light)とマテリアルの反射をシミュレートすることができます。IBLに関する詳細は[こちら][6]をご覧ください。
+このテクニックは、Environmentマップ(例えばCubeMap)を使用して、物理ベースのアンビエントライト (Ambient Light)とマテリアルの反射をシミュレートすることができます。IBLに関する詳細は[こちら](/user-manual/graphics/physical-rendering/image-based-lighting/)をご覧ください。
 
 ## マテリアルにキューブマップを割り当てる
 
@@ -92,9 +92,9 @@ Cubemapの面は以下の条件を満たす必要があります。
 
 ## EquirectangularまたはOctahedral HDRIsをキューブマップに変換する方法は以下の通りです
 
-環境テクスチャ (Environment Texture) は、しばしば正距円筒図法 (equirectangular) または正八面体 (Octahedral) の形式で提供されます([例えばPoly Haven][7])など、これらのテクスチャをPlayCanvasで使用する前に、キューブマップに変換する必要があります。
+環境テクスチャ (Environment Texture) は、しばしば正距円筒図法 (equirectangular) または正八面体 (Octahedral) の形式で提供されます([例えばPoly Haven](https://polyhaven.com/hdris))など、これらのテクスチャをPlayCanvasで使用する前に、キューブマップに変換する必要があります。
 
-これは、ブラウザで利用可能な[PlayCanvasテクスチャツール][8]を使用して行うことができます。
+これは、ブラウザで利用可能な[PlayCanvasテクスチャツール](https://playcanvas.com/texture-tool)を使用して行うことができます。
 
 1. 環境テクスチャのHDRバージョンをダウンロードし、PlayCanvasテクスチャツールの 'Add Files'  ボタンを押してファイルを読み込みます。
 2. 左側にロードしたテクスチャを選択します。
@@ -111,12 +111,5 @@ Cubemapの面は以下の条件を満たす必要があります。
 
 他のキューブマップへの変換を行うことができるツールには以下があります。
 
-- Mateusz Wisniowski's [HDRI-to-CubeMap tool][9] (browser)
-- [cmftStudio][10] (desktop) with [guide][11]
-
-[6]: /user-manual/graphics/physical-rendering/image-based-lighting/
-[7]: https://polyhaven.com/hdris
-[8]: https://playcanvas.com/texture-tool
-[9]: https://matheowis.github.io/HDRI-to-CubeMap/
-[10]: https://github.com/dariomanesku/cmftStudio
-[11]: https://jamie-white.com/webgl/equirectangular-hdr-image-to-face-list/
+- Mateusz Wisniowski's [HDRI-to-CubeMap tool](https://matheowis.github.io/HDRI-to-CubeMap/) (browser)
+- [cmftStudio](https://github.com/dariomanesku/cmftStudio) (desktop) with [guide](https://jamie-white.com/webgl/equirectangular-hdr-image-to-face-list/)

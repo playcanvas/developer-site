@@ -6,9 +6,9 @@ title: Texture Atlas
 
 テクスチャアトラス (Texture Atlas) とは、テクスチャ内の 'フレーム' (Frames) を記述する補足データをともなうTextureアセットです。フレームは、テクスチャ内で定義された領域で 'ピボット' (Pivot) ポイントのある長方形として表示されます。ピボットポイントはフレームの位置および回転の中心を設定します。
 
-テクスチャアトラスは、通常のテクスチャアセットを右クリックして **Create Atlas** を選択することで作成されます。またはデフォルトのアセットのインポート設定を変更し、 [Create Atlases][3]を有効化します。
+テクスチャアトラスは、通常のテクスチャアセットを右クリックして **Create Atlas** を選択することで作成されます。またはデフォルトのアセットのインポート設定を変更し、 [Create Atlases](/user-manual/editor/interface/settings/asset-import/)を有効化します。
 
-テクスチャアトラスは、[Spriteアセット][4]と組み合わせて2Dグラフィックをレンダリングするために使用されます。
+テクスチャアトラスは、[Spriteアセット](/user-manual/editor/assets/inspectors/sprite)と組み合わせて2Dグラフィックをレンダリングするために使用されます。
 
 ## Properties
 
@@ -26,8 +26,4 @@ title: Texture Atlas
 
 ### テクスチャプロパティ
 
-フレームのデータに加え、テクスチャアトラスには[Textureアセット][2]のプロパティが含まれます。
-
-[2]: /user-manual/editor/assets/inspectors/texture
-[3]: /user-manual/editor/interface/settings/asset-import/
-[4]: /user-manual/editor/assets/inspectors/sprite
+フレームのデータに加え、テクスチャアトラスには[Textureアセット](/user-manual/editor/assets/inspectors/texture)のプロパティが含まれます。

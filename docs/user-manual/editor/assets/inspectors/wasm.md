@@ -12,7 +12,7 @@ A Wasm module comprises three parts:
 
 These files can be added to the project either by dragging and dropping the files into the Assets Panel or by selecting 'Upload' from the Assets Panel context menu.
 
-Please note that PlayCanvas Editor currently supports [Emscripten][2] compiled Wasm Modules only.
+Please note that PlayCanvas Editor currently supports [Emscripten](https://emscripten.org/) compiled Wasm Modules only.
 
 ## Wasm Module Properties
 
@@ -30,5 +30,3 @@ This is the JavaScript glue code required to execute Wasm code.
 ### Fallback script
 
 This is the optional fallback asm.js script to use when WebAssembly is not supported.
-
-[2]: https://emscripten.org/

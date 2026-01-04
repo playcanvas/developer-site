@@ -24,7 +24,7 @@ Scroll down to 'Asset Tasks' and enable 'Import Hierarchy':
 
 ## Importing models
 
-A full tutorial on importing your first model and animation can be found [here][first_model_animation_import].
+A full tutorial on importing your first model and animation can be found [here](/tutorials/importing-first-model-and-animation/).
 
 As an overview, when you drag the model file into the 'Assets Panel':
 
@@ -36,11 +36,11 @@ The following assets will be created when imported:
 
 | Asset Type | Description |
 |------------|-------------|
-| **[Materials][material_asset]** | Materials used by the imported model, mapped to the mesh instance. |
-| **[Textures][texture_asset]** | Embedded textures in the model file (if any). These will automatically be mapped to the associated materials. |
-| **[Template][template_asset]** | The template stores the scene hierarchy of the model. Create an instance of the template to bring the model into the scene. |
+| **[Materials](/user-manual/editor/assets/inspectors/material/)** | Materials used by the imported model, mapped to the mesh instance. |
+| **[Textures](/user-manual/editor/assets/inspectors/texture/)** | Embedded textures in the model file (if any). These will automatically be mapped to the associated materials. |
+| **[Template](/user-manual/editor/templates/)** | The template stores the scene hierarchy of the model. Create an instance of the template to bring the model into the scene. |
 | **Container** | The GLB that stores all the meshes of the model. |
-| **Render** | Render assets reference a mesh in the container asset and are used by the [Render Component][render_component] to render the mesh in the scene. They can also be used with the [Collision Component][collision_component] as a mesh for physics. |
+| **Render** | Render assets reference a mesh in the container asset and are used by the [Render Component](https://api.playcanvas.com/engine/classes/RenderComponent.html) to render the mesh in the scene. They can also be used with the [Collision Component](https://api.playcanvas.com/engine/classes/CollisionComponent.html) as a mesh for physics. |
 
 ## Updating models
 
@@ -55,10 +55,3 @@ How the Editor decides what is a new or removed mesh instance is done by the fol
 - If in the update, a mesh instance's name and its parent mesh's instance name matches an existing mesh instance and its parent, they are assumed to be the same mesh instance in the hierarchy and is updated.
 - If in the update, a mesh instance's name does not exist, it's assumed to be a new mesh instance and a new entity is added to the template.
 - If in the update, an existing entity of the template does not have a matching mesh instance given the rules above, it's assumed that this mesh instance has been removed and the entity will be removed from the template. The exception being mentioned above, if there was a script component added to it on the template, those entities are preserved on the root. If there were no script components added, those are deleted from the template.
-
-[material_asset]: /user-manual/editor/assets/inspectors/material/
-[texture_asset]: /user-manual/editor/assets/inspectors/texture/
-[template_asset]: /user-manual/editor/templates/
-[render_component]: https://api.playcanvas.com/engine/classes/RenderComponent.html
-[collision_component]: https://api.playcanvas.com/engine/classes/CollisionComponent.html
-[first_model_animation_import]: /tutorials/importing-first-model-and-animation/

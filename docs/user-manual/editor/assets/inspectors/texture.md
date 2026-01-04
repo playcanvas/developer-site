@@ -2,7 +2,7 @@
 title: Texture
 ---
 
-A texture is an image that can be assigned to a [material][1] and then applied to a graphical primitive.
+A texture is an image that can be assigned to a [material](/user-manual/editor/assets/inspectors/material) and then applied to a graphical primitive.
 
 ## Importing Textures
 
@@ -29,7 +29,7 @@ Imported JPG, PNG, AVIF, WebP and GIF files remain in their original format.
 
 GIF, TGA, BMP and TIF image types will be converted to JPG or PNG on import. If the imported image has transparency, it will be converted to PNG. Otherwise, it will be converted to JPG.
 
-HDR and EXR are [high dynamic range formats][2] formats. Images of these types are converted to PNG on import and marked as being stored in RGBM format. RGBM essentially stores a multiplier for RGB values in the PNG's alpha channel, enabling the compression of an HDR format into a low dynamic range format.
+HDR and EXR are [high dynamic range formats](https://en.wikipedia.org/wiki/High-dynamic-range_imaging) formats. Images of these types are converted to PNG on import and marked as being stored in RGBM format. RGBM essentially stores a multiplier for RGB values in the PNG's alpha channel, enabling the compression of an HDR format into a low dynamic range format.
 
 By default, imported images will be resized to the nearest power of two. For example, an image that is 323x414 will be resized to 256x512 on import. This is done because the graphics engine cannot utilize mipmapping with non-power of two textures. However, this behavior can be overridden by disabling the 'Textures POT' setting in the Asset Tasks panel before importing a non-power of two texture.
 
@@ -61,7 +61,7 @@ The texture addressing properties give you control over how a texture is sampled
 
 ## Max Texture Size
 
-Different devices can support different texture sizes. Using [WebGL report][7] on the device and browser, we can see the max size supported.
+Different devices can support different texture sizes. Using [WebGL report](https://webglreport.com/) on the device and browser, we can see the max size supported.
 
 For example, this is from a MacBook Pro 16 inch (2020) laptop with Chrome which shows support up to 16384x16384.
 
@@ -74,7 +74,3 @@ Whereas on a Samsung S7 mobile device, only 4096x4096 is supported.
 If the engine attempts to utilize a texture that exceeds the max texture size reported by WebGL, it will resize it down to this maximum size at runtime. Note that this is only done for texture loaded from images (PNG, JPG, AVIF, WebP, GIF). Compressed textures cannot be resized at runtime and will simply fail to render if they are too large for the device.
 
 If you would like to avoid downsizing at runtime, at the time of writing (Fri 23 Oct 2020), 4096x4096 is very widely supported with some developers even opting for 2048x2048 which is guaranteed to work everywhere.
-
-[1]: /user-manual/editor/assets/inspectors/material
-[2]: https://en.wikipedia.org/wiki/High-dynamic-range_imaging
-[7]: https://webglreport.com/

@@ -24,7 +24,7 @@ PlayCanvasでは、シーン内のエンティティ階層ごとにメッシュ�
 
 ## モデルのインポート
 
-最初のモデルとアニメーションのインポートについての完全なチュートリアルは[こちら][first_model_animation_import]で見つけることができます。
+最初のモデルとアニメーションのインポートについての完全なチュートリアルは[こちら](/tutorials/importing-first-model-and-animation/)で見つけることができます。
 
 概要として、モデルファイルを 'アセットパネル' にドラッグします。
 
@@ -36,11 +36,11 @@ PlayCanvasでは、シーン内のエンティティ階層ごとにメッシュ�
 
 | アセットタイプ | 説明 |
 |------------|-------------|
-| **[マテリアル][material_asset]** | インポートされたモデルで使用される、メッシュインスタンスにマップされたマテリアル。 |
-| **[テクスチャ][texture_asset]** | モデルファイルに埋め込まれたテクスチャ(ある場合)。これらは、関連するマテリアルに自動的にマップされます。 |
-| **[テンプレート][template_asset]** | モデルのシーン階層を保存するテンプレート。テンプレートのインスタンスを作成して、モデルをシーンに持ち込みます。 |
+| **[マテリアル](/user-manual/editor/assets/inspectors/material/)** | インポートされたモデルで使用される、メッシュインスタンスにマップされたマテリアル。 |
+| **[テクスチャ](/user-manual/editor/assets/inspectors/texture/)** | モデルファイルに埋め込まれたテクスチャ(ある場合)。これらは、関連するマテリアルに自動的にマップされます。 |
+| **[テンプレート](/user-manual/editor/templates/)** | モデルのシーン階層を保存するテンプレート。テンプレートのインスタンスを作成して、モデルをシーンに持ち込みます。 |
 | **Container** | モデルのすべてのメッシュを保存するGLB。 |
-| **Render** | Renderアセットは、コンテナアセット内のメッシュを参照し、[Renderコンポーネント][render_component]でシーン内のメッシュをレンダリングするために使用されます。また、[Collisionコンポーネント][collision_component]として、物理用のメッシュとしても使用できます。 |
+| **Render** | Renderアセットは、コンテナアセット内のメッシュを参照し、[Renderコンポーネント](https://api.playcanvas.com/engine/classes/RenderComponent.html)でシーン内のメッシュをレンダリングするために使用されます。また、[Collisionコンポーネント](https://api.playcanvas.com/engine/classes/CollisionComponent.html)として、物理用のメッシュとしても使用できます。 |
 
 ## モデルの更新
 
@@ -55,10 +55,3 @@ PlayCanvasでは、シーン内のエンティティ階層ごとにメッシュ�
 - アップデート中に、メッシュインスタンスの名前とその親メッシュのインスタンスの名前が既存のメッシュインスタンスとその親と一致している場合、それらは階層内の同じメッシュインスタンスと見なされ、更新されます。
 - アップデート中に、メッシュインスタンスの名前が存在しない場合、新しいエンティティがテンプレートに追加されたものと見なされます。
 - アップデート中に、ルールに従って与えられた対応するメッシュインスタンスが存在しない場合、そのメッシュインスタンスが削除されたと見なされ、エンティティがテンプレートから削除されます。ただし、上述した例外があり、テンプレートにScriptコンポーネントが追加された場合、そのエンティティはルートに保持されます。Scriptコンポーネントが追加されなかった場合は、テンプレートから削除されます。
-
-[material_asset]: /user-manual/editor/assets/inspectors/material/
-[texture_asset]: /user-manual/editor/assets/inspectors/texture/
-[template_asset]: /user-manual/editor/templates/
-[render_component]: https://api.playcanvas.com/engine/classes/RenderComponent.html
-[collision_component]: https://api.playcanvas.com/engine/classes/CollisionComponent.html
-[first_model_animation_import]: /tutorials/importing-first-model-and-animation/

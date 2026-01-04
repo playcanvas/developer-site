@@ -2,7 +2,7 @@
 title: Animation
 ---
 
-Animationアセットは、3Dモデルで単一のアニメーションを再生するために使用されます。アニメーションは、アニメーションデータを含む3Dシーン(FBXファイルなど)をアップロードすることによってインポートされます。アニメーションデータは、[アセットパイプライン][asset_pipeline]によってアップロードされたファイルから抽出され、ゲームで使用するための[ターゲットアセット][target_asset]が作成されます。
+Animationアセットは、3Dモデルで単一のアニメーションを再生するために使用されます。アニメーションは、アニメーションデータを含む3Dシーン(FBXファイルなど)をアップロードすることによってインポートされます。アニメーションデータは、[アセットパイプライン](/user-manual/glossary#asset-pipeline)によってアップロードされたファイルから抽出され、ゲームで使用するための[ターゲットアセット](/user-manual/glossary#target-asset)が作成されます。
 
 ## アニメーションプレビュー
 
@@ -10,7 +10,7 @@ Animationアセットは、3Dモデルで単一のアニメーションを再生
 
 ![Asset Inspector Preview](/img/user-manual/assets/animation/inspector-preview.gif)
 
-また、グラフで状態を選択すると、[Anim State Graph Editor][anim-state-graph-editor]にもビューアがあります。選択すると、グラフを使用しているシーン内のすべてのエンティティが一覧表示され、プレビューのために選択できます。
+また、グラフで状態を選択すると、[Anim State Graph Editor](/user-manual/animation/anim-state-graph-assets/)にもビューアがあります。選択すると、グラフを使用しているシーン内のすべてのエンティティが一覧表示され、プレビューのために選択できます。
 
 ![Anim State Graph Preview](/img/user-manual/assets/animation/anim-state-graph-preview.gif)
 
@@ -32,7 +32,7 @@ Animationアセットは、3Dモデルで単一のアニメーションを再生
 
 アニメーションをインポートする際に、生成されるアセットの名前は、アニメーションファイルの 'Take Name' から設定するか、代わりにアニメーションのファイル名を使用することができます。このオプションは、GLBエクスポート形式のみで利用可能です。
 
-これは、[Mixamo][mixamo]などのストアから取得されるアセットに便利です。Mixamoでは、すべてのテイク名が 'mixamo.com' となっており、ファイル名をアセット名として使用する方が明確です。
+これは、[Mixamo](https://www.mixamo.com/)などのストアから取得されるアセットに便利です。Mixamoでは、すべてのテイク名が 'mixamo.com' となっており、ファイル名をアセット名として使用する方が明確です。
 
 ### サンプルレート (Sample rate)
 
@@ -51,8 +51,3 @@ JSONおよびGLBエクスポート形式の両方で利用可能です。Curve T
 GLBエクスポート形式のみで利用可能です。このオプションを有効にすると、元のアニメーションのイージングをアニメーションカーブに保持することができます。ただし、これにより、キーフレームごとに追加情報が含まれ、ファイルサイズが増加します。
 
 このオプションを有効にする場合、サンプルレートを無効にし、Curve Toleranceを0に設定することが推奨されます。
-
-[asset_pipeline]: /user-manual/glossary#asset-pipeline
-[target_asset]: /user-manual/glossary#target-asset
-[mixamo]: https://www.mixamo.com/
-[anim-state-graph-editor]: /user-manual/animation/anim-state-graph-assets/

@@ -12,9 +12,9 @@ title: アセットビューアー
 
 ![Model Viewer Preview](/img/user-manual/assets/viewers/model-viewer-preview.jpg)
 
-(モデル: Wayfair LLC. [CC BY 4.0][cc-40] International 2021)
+(モデル: Wayfair LLC. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) International 2021)
 
-以下のアセットタイプで[オープンソースのモデルビューアー][model-viewer-github]が利用できます。
+以下のアセットタイプで[オープンソースのモデルビューアー](https://github.com/playcanvas/model-viewer)が利用できます。
 
 - GLB形式のモデル(ソース)
 - Model
@@ -27,11 +27,7 @@ title: アセットビューアー
 
 ![Texture Tool Preview](/img/user-manual/assets/viewers/texture-tool-preview.jpg)
 
-以下のアセットタイプで[オープンソースのテクスチャツール][texture-tool-github]が利用できます:
+以下のアセットタイプで[オープンソースのテクスチャツール](https://github.com/playcanvas/texture-tool)が利用できます:
 
 - テクスチャ (Texture)
 - Texture Atlas
-
-[model-viewer-github]: https://github.com/playcanvas/model-viewer
-[texture-tool-github]: https://github.com/playcanvas/texture-tool
-[cc-40]: https://creativecommons.org/licenses/by/4.0/

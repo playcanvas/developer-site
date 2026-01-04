@@ -25,7 +25,7 @@ PlayCanvasは、ソース (Source) アセットがアップロードされると
 
 ### アセットのデフォルトをプリロードに設定 (Assets default to preload) {#assets-default-to-preload}
 
-新しく作成されたアセットは、このオプションが有効または無効かどうかに応じて、自動的に[プリロード][2]に設定されます。これにはJavaScriptのスクリプトファイルは含まれません。JavaScriptのスクリプトファイルは、作成されたときに常にプリロードされます。
+新しく作成されたアセットは、このオプションが有効または無効かどうかに応じて、自動的に[プリロード](/user-manual/assets/preloading/)に設定されます。これにはJavaScriptのスクリプトファイルは含まれません。JavaScriptのスクリプトファイルは、作成されたときに常にプリロードされます。
 
 ## テクスチャインポート設定 (Texture Import Settings) {#texture-import-settings}
 
@@ -69,7 +69,7 @@ PlayCanvasは、ソース (Source) アセットがアップロードされると
 
 ### ヒエラルキーを含むモデルのインポート {#import-hierarchy}
 
-[Convert to GLB](#convert-to-glb)オプションを使用している場合にのみ利用可能です。モデルファイルがインポートされると、エンティティとしてモデル全体のフルヒエラルキーを含むTemplateアセットが作成され、エディタで直接操作することができます。この機能についての詳細は、[こちら][3]を参照してください。
+[Convert to GLB](#convert-to-glb)オプションを使用している場合にのみ利用可能です。モデルファイルがインポートされると、エンティティとしてモデル全体のフルヒエラルキーを含むTemplateアセットが作成され、エディタで直接操作することができます。この機能についての詳細は、[こちら](/user-manual/editor/assets/import-pipeline/import-hierarchy/)を参照してください。
 
 ### メッシュ圧縮 (Mesh Compression) {#mesh-compression}
 
@@ -87,8 +87,4 @@ Draco圧縮を使用する場合は、プロジェクトにDraco WASMモジュ�
 
 ## アニメーションインポート設定 (Animation Import Settings) {#animation-import-settings}
 
-詳細については、[アニメーションセクション][4]を参照してください。
-
-[2]: /user-manual/assets/preloading/
-[3]: /user-manual/editor/assets/import-pipeline/import-hierarchy/
-[4]: /user-manual/editor/assets/inspectors/animation/
+詳細については、[アニメーションセクション](/user-manual/editor/assets/inspectors/animation/)を参照してください。

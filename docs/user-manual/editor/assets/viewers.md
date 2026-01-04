@@ -12,9 +12,9 @@ Clicking on either of these options will open the viewer with the asset in a new
 
 ![Model Viewer Preview](/img/user-manual/assets/viewers/model-viewer-preview.jpg)
 
-(Model: Copyright 2021 Wayfair LLC. [CC BY 4.0][cc-40] International)
+(Model: Copyright 2021 Wayfair LLC. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) International)
 
-The [open source Model Viewer][model-viewer-github] is available for the following asset types:
+The [open source Model Viewer](https://github.com/playcanvas/model-viewer) is available for the following asset types:
 
 - Model (Source) that are GLBs
 - Model
@@ -27,11 +27,7 @@ The Model Viewer is useful for inspecting the model node hierarchy, morph target
 
 ![Texture Tool Preview](/img/user-manual/assets/viewers/texture-tool-preview.jpg)
 
-The [open source Texture Tool][texture-tool-github] is available for the following asset types:
+The [open source Texture Tool](https://github.com/playcanvas/texture-tool) is available for the following asset types:
 
 - Texture
 - Texture Atlas
-
-[model-viewer-github]: https://github.com/playcanvas/model-viewer
-[texture-tool-github]: https://github.com/playcanvas/texture-tool
-[cc-40]: https://creativecommons.org/licenses/by/4.0/

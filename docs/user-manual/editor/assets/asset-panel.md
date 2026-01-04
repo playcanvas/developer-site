@@ -52,7 +52,7 @@ You can perform a global search for assets in your project using the Search box.
 
 **RegExp** - It is possible to search using regular expressions. Add `*` at the beginning of search field and type regexp query after. To search for all assets use `*.` (any character) regexp query.
 
-**Tags** - To search by tags and their combinations type tags in square brackets `[ ]`. Simple query operators: AND, OR are allowed by expressing query as array of strings or other arrays with strings. Logic of query is same as for [`findByTag`][7] from `AssetsRegistry`.
+**Tags** - To search by tags and their combinations type tags in square brackets `[ ]`. Simple query operators: AND, OR are allowed by expressing query as array of strings or other arrays with strings. Logic of query is same as for [`findByTag`](https://api.playcanvas.com/engine/classes/AssetRegistry.html#findbytag) from `AssetsRegistry`.
 Here are some examples:
 
 - `[ level-1 ]` - returns all assets that are tagged by `level-1`.
@@ -64,9 +64,9 @@ Here are some examples:
 
 Assets can be moved to different folders by dragging them from the main panel to a folder in the folder hierarchy. Note that assets support multi-selection. Pressing CTRL+A will select all assets in the currently selected folder.
 
-You can also drag Assets from the Asset Panel to highlighted slots in the [Inspector][2]. Slots in the Inspector will either be asset attributes of components or asset-type script attributes.
+You can also drag Assets from the Asset Panel to highlighted slots in the [Inspector](/user-manual/editor/interface/inspector). Slots in the Inspector will either be asset attributes of components or asset-type script attributes.
 
-You can also drag model, material, and cubemap assets directly into the [Viewport][3]
+You can also drag model, material, and cubemap assets directly into the [Viewport](/user-manual/editor/interface/viewport)
 
 - If you drag a model asset into the Viewport, a new entity will be created with a model component with the model asset assigned. The viewport camera will automatically zoom to the newly created entity.
 - If you drag a material over a particular mesh instance in the Viewport, its material will be switched (as a preview) to the material being dragged. To make the material change stick, simply drop the material.
@@ -123,7 +123,3 @@ If an asset does have references, you can check them via the References content 
 ![Asset References](/img/user-manual/editor/assets-panel/asset-references.png)
 
 Selecting a reference will load it into the Inspector panel.
-
-[2]: /user-manual/editor/interface/inspector
-[3]: /user-manual/editor/interface/viewport
-[7]: https://api.playcanvas.com/engine/classes/AssetRegistry.html#findbytag

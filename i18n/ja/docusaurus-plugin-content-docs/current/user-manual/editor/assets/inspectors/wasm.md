@@ -12,7 +12,7 @@ Wasmモジュールには3つの部分があります。
 
 これらのファイルは、アセットパネルにドラッグアンドドロップするか、アセットパネルコンテキストメニューから 'Upload' を選択することでプロジェクトに追加できます。
 
-PlayCanvasエディターは現在、[Emscripten][2]でコンパイルされたWasmモジュールのみをサポートしていることに注意してください。
+PlayCanvasエディターは現在、[Emscripten](https://emscripten.org/)でコンパイルされたWasmモジュールのみをサポートしていることに注意してください。
 
 ## Wasmモジュールのプロパティ
 
@@ -30,5 +30,3 @@ Once the files have been added to the project, select the Wasm Module to display
 ### フォールバックスクリプト (Fallback script)
 
 これは、WebAssemblyがサポートされていない際に使用する、オプションのフォールバックasm.js スクリプトです。
-
-[2]: https://emscripten.org/

@@ -25,7 +25,7 @@ So, if you leave this enabled, you are able to organize your source and target a
 
 ### Assets default to preload {#assets-default-to-preload}
 
-Newly created assets will automatically be set to [preload][2] or not depending on whether this option is enabled or not. The exception to this are JavaScript script files which will always be set to preloaded when created.
+Newly created assets will automatically be set to [preload](/user-manual/assets/preloading/) or not depending on whether this option is enabled or not. The exception to this are JavaScript script files which will always be set to preloaded when created.
 
 ## Texture Import Settings {#texture-import-settings}
 
@@ -69,7 +69,7 @@ Enabled by default on new projects, imported models and animations will create G
 
 ### Import Hierarchy {#import-hierarchy}
 
-Only available if using [Convert to GLB](#convert-to-glb) option. When a model file is imported, a template asset is created that contains the full hierarchy of the model as entities allowing to you to manipulate them directly in the Editor. See more information about this feature [here][3].
+Only available if using [Convert to GLB](#convert-to-glb) option. When a model file is imported, a template asset is created that contains the full hierarchy of the model as entities allowing to you to manipulate them directly in the Editor. See more information about this feature [here](/user-manual/editor/assets/import-pipeline/import-hierarchy/).
 
 ### Mesh Compression {#mesh-compression}
 
@@ -87,8 +87,4 @@ If there is already a Model (Source) file in the current folder or a folder with
 
 ## Animation Import Settings {#animation-import-settings}
 
-Please refer to the [Animation section][4] for more details.
-
-[2]: /user-manual/assets/preloading/
-[3]: /user-manual/editor/assets/import-pipeline/import-hierarchy/
-[4]: /user-manual/editor/assets/inspectors/animation/
+Please refer to the [Animation section](/user-manual/editor/assets/inspectors/animation/) for more details.

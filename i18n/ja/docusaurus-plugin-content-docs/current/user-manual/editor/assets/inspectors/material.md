@@ -16,13 +16,13 @@ PlayCanvasに3Dモデル(例:FBXまたはCOLLADA)ファイルをアップロー�
 
 PlayCanvas Editorインターフェイスから直接新しいマテリアルを作成できます。
 
-![Create Material][1]
+![Create Material](/img/user-manual/assets/materials/create-asset-menu.jpg)
 
 これにより、新しいマテリアルアセットが作成され、画面の右側にマテリアルインスペクターが開きます。
 
 ## マテリアルの選択 {#selecting-a-material}
 
-![Model Inspector][2]
+![Model Inspector](/img/user-manual/assets/materials/model-inspector-simple.jpg)
 
 マテリアルを編集するには、まず選択する必要があります。これにより、マテリアルインスペクターが表示されます。
 
@@ -32,13 +32,13 @@ PlayCanvas Editorインターフェイスから直接新しいマテリアルを
 
 ## マテリアルの割り当て {#assigning-materials}
 
-![Model Component][3]
+![Model Component](/img/user-manual/assets/materials/model.png)
 
 Modelアセットのどこにどのマテリアルを割り当てるかを変更することができます。また、Modelコンポーネントを持つ特定のEntityのマテリアルをカスタマイズすることもできます。
 
 Modelコンポーネントを持つEntityを選択すると、2つのボタンが表示されます - アセットマテリアルとEntityマテリアル。
 
-![Model Inspector Free Slot][4]
+![Model Inspector Free Slot](/img/user-manual/assets/materials/model-inspector-free-slot.jpg)
 
 Asset Materialsをクリックすると、Modelアセットが選択されます。アセットパネルからもModelアセットを選択できます。モデルインスペクターには、モデルのメッシュと各々に割り当てられたマテリアルが表示されます。Xボタンを使用してマテリアルをクリアでき、空きスロットをクリックして新しいマテリアルを割り当てることができます。
 
@@ -46,25 +46,25 @@ Asset Materialsをクリックすると、Modelアセットが選択されます
 
 エンティティマテリアルをクリックすると、まずカスタマイズするメッシュインスタンスを選択するよう求められます。
 
-![Select Mesh Instance][5]
+![Select Mesh Instance](/img/user-manual/assets/materials/select.png)
 
 メッシュインスタンスを選択した後、Modelコンポーネントに新しいマテリアルピッカーが表示されます。
 
-![Selected Mesh Instance][6]
+![Selected Mesh Instance](/img/user-manual/assets/materials/selected.png)
 
 その後、この特定のエンティティに別のマテリアルを選択できます。
 
-![Select Different Material][7]
+![Select Different Material](/img/user-manual/assets/materials/overridden.png)
 
 ## マテリアルの編集 {#editing-a-material}
 
-![Material Inspector][8]
+![Material Inspector](/img/user-manual/assets/materials/material-inspector.jpg)
 
 マテリアルを選択した後、そのプロパティを編集できます。
 
 ## マテリアルマップ  {#material-maps}
 
-![Material Map Slot][11]
+![Material Map Slot](/img/user-manual/assets/materials/material-map-slot.jpg)
 
 マテリアルの編集には、上記ページで詳細に説明されているさまざまなスロットにテクスチャマップを作成および割り当てることが多く含まれます。
 
@@ -215,13 +215,3 @@ Light Mapには事前にベイクされたDiffuse Lightingが含まれていま�
 | Cull            | オプションは次のとおりです。<ul> <li>None: 前面と背面の両方がレンダリングされます。</li> <li>Front Faces: 前面がレンダリングされ、背面はレンダリングされません。</li> <li>Back Faces: 背面がレンダリングされ、前面はレンダリングされません。これがデフォルトです。</li> </ul> PlayCanvasでは、反時計回りの頂点の巻き方が前面の三角形を指定すると規定しています。背面のカリングは、背面のピクセルが頻繁に上書きされる（凸メッシュの場合）ため、パフォーマンス向上に役立つことが多いです。 |
 | Blend Type      | オプションは次のとおりです。<ul> <li>None: メッシュは不透明です。これがデフォルトです。</li> <li>Normal: メッシュは透明で、ステンドグラスのようです。</li> <li>Additive: メッシュの色がフレームバッファにすでにレンダリングされているものに加えられます。</li> <li>Pre-multiply: Normal'ブレンドと同様ですが、このマテリアルでレンダリングされるメッシュの色がすでにそのアルファ値で調整されていると想定されます。</li><li>Multiply: レンダリング時に、メッシュの色がフレームバッファにすでにレンダリングされたものと乗算されます。</li></ul> |
 | Shadow Sampling | オプションは: <ul><li>Hard</li><li>PCF 3x3</li></ul>  |
-
-[1]: /img/user-manual/assets/materials/create-asset-menu.jpg
-[2]: /img/user-manual/assets/materials/model-inspector-simple.jpg
-[3]: /img/user-manual/assets/materials/model.png
-[4]: /img/user-manual/assets/materials/model-inspector-free-slot.jpg
-[5]: /img/user-manual/assets/materials/select.png
-[6]: /img/user-manual/assets/materials/selected.png
-[7]: /img/user-manual/assets/materials/overridden.png
-[8]: /img/user-manual/assets/materials/material-inspector.jpg
-[11]: /img/user-manual/assets/materials/material-map-slot.jpg

@@ -74,7 +74,7 @@ An example of a texture set that would match is:
 
 ## Image Based Lighting
 
-This technique allows you to use Environment Map such as CubeMap in order to simulate physically based ambient light and reflection on materials. [Read more][6] on how it works and how to author CubeMaps for IBL.
+This technique allows you to use Environment Map such as CubeMap in order to simulate physically based ambient light and reflection on materials. [Read more](/user-manual/graphics/physical-rendering/image-based-lighting/) on how it works and how to author CubeMaps for IBL.
 
 ## Assigning Cubemaps to Materials
 
@@ -92,9 +92,9 @@ A Physical material will use the scene's skybox as a default environment map if 
 
 ## Converting Equirectangular or Octahedral HDRIs to Cubemaps
 
-Environment textures often are in a equirectangular or Octahedral format ([Poly Haven][7] for example) and will need to be converted to cubemaps before they can be used in PlayCanvas.
+Environment textures often are in a equirectangular or Octahedral format ([Poly Haven](https://polyhaven.com/hdris) for example) and will need to be converted to cubemaps before they can be used in PlayCanvas.
 
-This can be done via [PlayCanvas Texture Tool][8], available in the browser.
+This can be done via [PlayCanvas Texture Tool](https://playcanvas.com/texture-tool), available in the browser.
 
 1. Download the HDR version of environment texture and press 'Add Files' button in PlayCanvas Texture Tool to load the file.
 2. Select the loaded texture on the left.
@@ -111,12 +111,5 @@ This can be done via [PlayCanvas Texture Tool][8], available in the browser.
 
 Other tools that can also do this conversion include:
 
-- Mateusz Wisniowski's [HDRI-to-CubeMap tool][9] (browser)
-- [cmftStudio][10] (desktop) with [guide][11]
-
-[6]: /user-manual/graphics/physical-rendering/image-based-lighting/
-[7]: https://polyhaven.com/hdris
-[8]: https://playcanvas.com/texture-tool
-[9]: https://matheowis.github.io/HDRI-to-CubeMap/
-[10]: https://github.com/dariomanesku/cmftStudio
-[11]: https://jamie-white.com/webgl/equirectangular-hdr-image-to-face-list/
+- Mateusz Wisniowski's [HDRI-to-CubeMap tool](https://matheowis.github.io/HDRI-to-CubeMap/) (browser)
+- [cmftStudio](https://github.com/dariomanesku/cmftStudio) (desktop) with [guide](https://jamie-white.com/webgl/equirectangular-hdr-image-to-face-list/)
