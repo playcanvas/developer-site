@@ -10068,6 +10068,48 @@ URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/
 
 When you select an asset in the [Assets Panel](/user-manual/editor/assets/asset-panel), its properties are displayed in the Inspector. Each asset type has its own set of configurable properties.
 
+## Common Properties
+
+All asset inspectors display a common set of properties in the header section:
+
+[Image: Common Asset Inspector Properties]
+
+| Property | Description |
+|----------|-------------|
+| ID | The unique identifier for the asset. Useful for referencing the asset in scripts. |
+| Name | The display name of the asset. This can be edited to rename the asset. |
+| Tags | Tags assigned to the asset for organization and filtering, both in the [Assets Panel](/user-manual/editor/assets/asset-panel#searching) and at runtime via the [Engine API](/user-manual/assets/asset-registry#by-tag). |
+| Type | The [asset type](#asset-types) (read-only). |
+| Exclude | When enabled, the asset is excluded from the published build. Useful for development-only assets such as test scripts or READMEs. |
+| Preload | When enabled, the asset is loaded at application startup. When disabled, referenced assets load asynchronously after the app starts, while unreferenced assets must be loaded manually via script. |
+| Size | The file size of the asset (read-only). |
+| Source | A reference to the source asset from which this asset was derived, if applicable (read-only). |
+| Created | The date and time the asset was created (read-only). |
+
+### Script Assets
+
+Script assets display additional properties:
+
+[Image: Script Asset Inspector Properties]
+
+| Property | Description |
+|----------|-------------|
+| Loading Order | Opens the [script loading order manager](/user-manual/editor/scripting/loading-order) to control the order scripts are loaded. |
+| Loading Type | Controls when the script is loaded: <ul><li>**Asset** - loaded as a regular asset</li><li>**Before Engine** - loaded before the PlayCanvas engine</li><li>**After Engine** - loaded after the engine but before application start</li></ul> |
+
+### Asset Store Assets
+
+Assets imported from the [Asset Store](/user-manual/editor/assets/asset-store) display additional attribution properties:
+
+[Image: Asset Store Inspector Properties]
+
+| Property | Description |
+|----------|-------------|
+| License | The license under which the asset is provided, with a link to license details. |
+| Author | The original author of the asset, with a link to their profile. |
+
+## Asset Types
+
 | Type                             | Imported From                    | Resource Extensions              | Description                        |
 | -------------------------------- | -------------------------------- | -------------------------------- | ---------------------------------- |
 | [`animation`](animation)         | `.glb`, `.fbx`                   | `.glb`                           | Animation keyframe data            |
@@ -10153,11 +10195,33 @@ If enabling this option, it is recommended that Sample Rate is disabled and Curv
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio/
 
-Audio assets are sound files which can be played back using the [Sound component](/user-manual/editor/scenes/components/sound/).
+Audio assets are sound files which can be played back using the [Sound Component](/user-manual/editor/scenes/components/sound/).
 
-Any audio format that is supported by the web-browser is supported by PlayCanvas. No processing is done to the audio file on import.
+Any audio format that is supported by the web browser is supported by PlayCanvas. No processing is done to the audio file on import.
 
-Note that not all formats are supported in all browsers. Currently, the most widely supported format is [MP3](https://caniuse.com/mp3).
+Common formats like MP3, AAC, Ogg Vorbis, and WAV are supported across all modern browsers.
+
+:::tip
+MP3 is recommended as it offers good compression and [universal compatibility](https://caniuse.com/mp3).
+:::
+
+## Inspector
+
+[Image: Audio Asset Inspector]
+
+The Audio asset inspector displays audio information and provides playback controls to preview the sound.
+
+## Properties
+
+| Property | Description |
+|----------|-------------|
+| Duration | The length of the audio file in seconds (read-only). |
+
+The inspector also includes playback controls (play/pause button and timeline) to preview the audio.
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10165,30 +10229,23 @@ Note that not all formats are supported in all browsers. Currently, the most wid
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/css/
 
-A CSS asset contains CSS code. You can create a new CSS asset in the Editor or by uploading a file with a .css extension.
+A CSS asset contains CSS code. You can create a new CSS asset in the Editor or by uploading a file with a `.css` extension.
 
 To edit a CSS asset, right click on it in the Editor and select Edit.
 
-The loaded CSS asset resource is just a string. You can use the string as you like. A common way to add the loaded CSS string to the document is the following:
+## Inspector
 
-```javascript
-// get asset from registry by id
-const asset = app.assets.get(32);
+[Image: CSS Asset Inspector]
 
-// create element
-const style = document.createElement('style');
-style.type = "text/css";
-style.textContent = asset.resource || '';
-document.head.appendChild(style);
+The CSS asset inspector displays a preview of the CSS code contained in the asset.
 
-// update the style when the asset's resource loads/changes
-asset.on('load', function() {
-    style.innerHTML = asset.resource;
-});
+## Properties
 
-// make sure assets loads
-app.assets.load(asset);
-```
+This asset type has no configurable properties in the Inspector. It displays a read-only preview of the CSS code.
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10312,7 +10369,7 @@ Other tools that can also do this conversion include:
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/font/
 
-A Font asset contains an image with all the characters of the font that the user chose to include, and data related to how each character should be displayed. Font assets are used to render text using an [Element](/user-manual/editor/scenes/components/element/) component of type Text. To render text, add an Element component to an Entity set its type to Text and drag and drop the Font asset to the Font slot of the Element component.
+A Font asset contains an image with all the characters of the font that the user chose to include, and data related to how each character should be displayed. Font assets are used to render text using an [Element](/user-manual/editor/scenes/components/element/) component of type Text. To render text, add an Element Component to an Entity set its type to Text and drag and drop the Font asset to the Font slot of the Element Component.
 
 You can create a Font asset by uploading a font file ending in `.ttf`, `.ttc`, `.otf` or `.dfont`. We convert the uploaded font to a multi-channel signed distance field. This makes a font keep its details at various sizes so you only need to upload one font and use the same one for every size you want to display. The technique might work better for some fonts than others.
 
@@ -10350,21 +10407,33 @@ Click on the Process Font button after you make changes to the Font asset in ord
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/gsplat/
 
-A GSplat asset contains 3D Gaussian Splat data. PlayCanvas supports the import of GSplat data from [PLY](https://en.wikipedia.org/wiki/PLY_(file_format)) files.
+A GSplat asset contains 3D Gaussian Splat data. PlayCanvas supports the import of GSplat data from [PLY](/user-manual/gaussian-splatting/formats/ply) files (including compressed PLY) and [SOG](/user-manual/gaussian-splatting/formats/sog) files.
 
-## Asset Inspector {#asset-inspector}
+:::tip
+The [SOG format](/user-manual/gaussian-splatting/formats/sog) is recommended for its efficient compression, resulting in smaller file sizes and faster load times.
+:::
+
+## Inspector
 
 You can select a GSplat asset in the [Assets Panel](/user-manual/editor/interface/assets) and view it in the [Inspector](/user-manual/editor/interface/inspector).
 
 [Image: GSplat Asset Inspector]
 
-The META section lists some key properties of the data.
+## Properties
+
+The META section lists the key properties of the GSplat data.
 
 | Property | Description |
-| -------- | ----------- |
-| Format   | PLY supports `ascii 1.0`, `binary_little_endian 1.0`, and `binary_big_endian 1.0` |
-| Splats   | The total number of Gaussians stored in the PLY file |
-| Properties | The list of per-Gaussian properties stored in the PLY file (`x`, `y`, `z`, `opacity` and so on) |
+|----------|-------------|
+| Format | The file format: PLY (`binary_little_endian 1.0`), Compressed PLY, or SOG (read-only). |
+| Splats | The total number of Gaussians stored in the PLY file (read-only). |
+| SH Bands | The number of spherical harmonics bands used for view-dependent color (read-only). |
+| Bound Min | The minimum bounds of the Gaussian splat data in 3D space (read-only). |
+| Bound Max | The maximum bounds of the Gaussian splat data in 3D space (read-only). |
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10372,30 +10441,23 @@ The META section lists some key properties of the data.
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/html/
 
-An HTML asset contains HTML code. The code can either be a full HTML page or just partial HTML. You can create a new HTML asset in the Editor or by uploading a file with an .html extension.
+An HTML asset contains HTML code. The code can either be a full HTML page or just partial HTML. You can create a new HTML asset in the Editor or by uploading a file with an `.html` extension.
 
 To edit an HTML asset, right click on it in the Editor and select Edit.
 
-The loaded HTML asset is just a string. You can use that string as you like. A common way to add HTML to the document is the following:
+## Inspector
 
-```javascript
-// get asset from registry by id
-const asset = app.assets.get(32);
+[Image: HTML Asset Inspector]
 
-// create element
-const div = document.createElement('div');
-div.innerHTML = asset.resource || '';
-document.body.appendChild(div);
+The HTML asset inspector displays a preview of the HTML code contained in the asset.
 
-// when asset resource loads/changes,
-// update html of element
-asset.on('load', function() {
-    div.innerHTML = asset.resource;
-});
+## Properties
 
-// make sure assets loads
-app.assets.load(asset);
-```
+This asset type has no configurable properties in the Inspector. It displays a read-only preview of the HTML code.
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10412,14 +10474,19 @@ In PlayCanvas, JSON assets are used to store various types of structured data. S
 - Storing game settings
 - Level design data
 
-## Accessing JSON Data in Scripts
+## Inspector
 
-To access data from a JSON asset in a script:
+[Image: JSON Asset Inspector]
 
-1. Add the JSON asset to the script as an attribute.
-2. Access the JSON asset's resource which is the object parsed from the JSON data.
+The JSON asset inspector displays a formatted preview of the JSON data contained in the asset.
 
-Example:
+## Properties
+
+This asset type has no configurable properties in the Inspector. It displays a read-only preview of the JSON data with syntax formatting.
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10451,7 +10518,7 @@ This creates a new material Asset and opens up the material inspector on the rig
 
 In order to edit a material, first you must select it. This will bring up the material inspector.
 
-You can select a material in the asset panel. You can also select materials from the model inspector or from the model component.
+You can select a material in the asset panel. You can also select materials from the model inspector or from the Model Component.
 
 Generally, clicking on a material preview icon will take you to the material inspector.
 
@@ -10459,9 +10526,9 @@ Generally, clicking on a material preview icon will take you to the material ins
 
 [Image: Model Component]
 
-You can modify which materials are assigned to where on a model asset or you can customize the materials of a particular Entity that has a model component.
+You can modify which materials are assigned to where on a model asset or you can customize the materials of a particular Entity that has a Model Component.
 
-When you select an Entity with a model component you will see two buttons - Asset Materials and Entity Materials.
+When you select an Entity with a Model Component you will see two buttons - Asset Materials and Entity Materials.
 
 [Image: Model Inspector Free Slot]
 
@@ -10473,7 +10540,7 @@ Clicking on Entity Materials will first ask you to select the mesh instance for 
 
 [Image: Select Mesh Instance]
 
-After selecting the mesh instance a new material picker will appear in the model component:
+After selecting the mesh instance a new material picker will appear in the Model Component:
 
 [Image: Selected Mesh Instance]
 
@@ -10647,12 +10714,44 @@ Other Render States gives additional controls over how a mesh is rendered with t
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/render/
 
-The Render Asset type in PlayCanvas is a crucial component for defining the appearance of 3D models in the scene. It involves mesh data and materials that dictate how objects are rendered in the 3D environment.
+A Render asset contains 3D mesh data extracted from imported 3D model files (such as GLB or FBX). It defines the shape and structure of 3D models and is used by the [Render Component](/user-manual/editor/scenes/components/render/) to display geometry in the scene.
 
 Render assets are primarily used for:
 
-- Defining the shape and structure of 3D models.
-- Applying materials to models.
+- Defining the shape and structure of 3D models
+- Applying materials to mesh surfaces
+
+## Inspector
+
+The Render asset inspector displays metadata about the mesh and its relationship to the source container asset.
+
+## Properties
+
+### Meta
+
+[Image: Render Asset Inspector - Meta]
+
+| Property | Description |
+|----------|-------------|
+| Vertices | The total number of vertices in the mesh (read-only). |
+| Triangles | The total number of triangles in the mesh (read-only). |
+| Meshes | The number of mesh instances contained in the asset (read-only). |
+| Skinned | Whether the mesh contains skinning data for skeletal animation (read-only). |
+| Attributes | The vertex attributes present in the mesh data, such as position, normal, UV coordinates (read-only). |
+| Mesh Compression | The compression format used, if any (e.g., Draco) (read-only). |
+
+### Render
+
+[Image: Render Asset Inspector - Render]
+
+| Property | Description |
+|----------|-------------|
+| Index | The index of this render asset within its source container (read-only). |
+| Container | A reference to the source container asset (GLB) from which this render was extracted (read-only). |
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10660,26 +10759,23 @@ Render assets are primarily used for:
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/shader/
 
-A shader asset contains GLSL code. You can create a new Shader asset by clicking New Shader in the Asset Panel in the Editor or by uploading a file with an extension of ```.vert```, ```.frag``` or ```.glsl```.
+A Shader asset contains GLSL code for custom rendering effects. You can create a new Shader asset by clicking New Shader in the Asset Panel or by uploading a file with an extension of `.vert`, `.frag`, or `.glsl`.
 
-To edit a Shader asset, right click on it in the Editor and select Edit. Here's an example on using Shader assets to create a custom material.
+To edit a Shader asset, right click on it in the Editor and select Edit.
 
-```javascript
-const vertexShader = this.app.assets.find('my_vertex_shader');
-const fragmentShader = this.app.assets.find('my_fragment_shader');
-const shaderDefinition = {
-    attributes: {
-        aPosition: pc.SEMANTIC_POSITION,
-        aUv0: pc.SEMANTIC_TEXCOORD0
-    },
-    vshader: vertexShader.resource,
-    fshader: fragmentShader.resource
-};
+## Inspector
 
-const shader = new pc.Shader(this.app.graphicsDevice, shaderDefinition);
-const material = new pc.Material();
-material.setShader(shader);
-```
+[Image: Shader Asset Inspector]
+
+The Shader asset inspector displays a preview of the GLSL shader code contained in the asset.
+
+## Properties
+
+This asset type has no configurable properties in the Inspector. It displays a read-only preview of the shader code.
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10687,27 +10783,23 @@ material.setShader(shader);
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/sprite/
 
-A Sprite is a 2D graphic that can be rendered into a scene. A Sprite Asset is a reference to a [Texture Atlas](/user-manual/editor/assets/inspectors/texture-atlas) and a sequence of frames from that atlas. In this way a sprite can either represent a single image (taken out of the atlas) or a flip-book style animation (multiple frames from the atlas).
+A Sprite is a 2D graphic that can be rendered into a scene. A Sprite asset is a reference to a [Texture Atlas](/user-manual/editor/assets/inspectors/texture-atlas) and a sequence of frames from that atlas. In this way a sprite can either represent a single image (taken out of the atlas) or a flip-book style animation (multiple frames from the atlas).
+
+## Inspector
+
+[Image: Sprite Asset Inspector]
 
 ## Properties
 
-[Image: Sprites]
+| Property | Description |
+|----------|-------------|
+| Pixels Per Unit | The number of pixels in the sprite image that maps to 1 Unit in the PlayCanvas scene. For example, if `pixelsPerUnit` is 1 and the sprite is 32x32, it will be 32 units across and high when rendered in the scene. By default, a sprite with *Simple* render mode has `pixelsPerUnit` set to 100, meaning a 100x100 sprite will be 1 unit wide/high. *Sliced* sprites default to 1 because they are typically used for UI where 1 sprite pixel should map to 1 screen pixel. |
+| Render Mode | Controls how the sprite is rendered: **Simple** - the sprite does not use border values; **Sliced** - uses border values to perform [9-sliced](/user-manual/2D/slicing) rendering by stretching; **Tiled** - uses border values to perform [9-sliced](/user-manual/2D/slicing) rendering by tiling. |
+| Texture Atlas | The Texture Atlas asset that the sprite references. |
 
-### Pixels Per Unit
-
-The number of pixels in the sprite image that maps to 1 Unit in the PlayCanvas scene. e.g If `pixelsPerUnit` is 1 and the sprite is 32x32. Then it will be 32 units across and high when rendered in the scene. By default a sprite with the *Simple* render mode is created with `pixelsPerUnit` set to 100. This means that a 100x100 sprite will be 1 unit wide/high in the scene.
-
-If you create a *Sliced* sprite, by default it will be created with a `pixelsPerUnit` value of 1. Because these sprites are usually used as part of a Screen Component for building user interfaces, 1 sprite pixel should map to 1 screen pixel.
-
-### Render Mode
-
-* Simple - the sprite does not use the border values
-* Sliced - the sprite uses the border values to perform [9-sliced](/user-manual/2D/slicing) rendering by stretching.
-* Tiled - the sprite uses the border values to perform [9-sliced](/user-manual/2D/slicing) rendering by tiling.
-
-### Texture Atlas
-
-The Texture Atlas asset that the sprite references
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10715,9 +10807,23 @@ The Texture Atlas asset that the sprite references
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/template/
 
-A Template (also called a Prefab) is an Asset that contains a piece of an Entity hierarchy. It has a root Entity and can have any number of children. A Template is a reusable Entity that you can instantiate dynamically at runtime or place multiple instances of it in your Scene. When you change the Template Asset all instances of the Template will also change.
+A Template (also called a Prefab) is an asset that contains a piece of an Entity hierarchy. It has a root Entity and can have any number of children. A Template is a reusable Entity that you can instantiate dynamically at runtime or place multiple instances of it in your Scene. When you change the Template asset, all instances of the Template will also change.
 
-For more information about working with Templates see [here](/user-manual/editor/templates/).
+For more information about working with Templates, see [Templates](/user-manual/editor/templates/).
+
+## Inspector
+
+{/*[Image: Template Asset Inspector]*/}
+
+The Template asset inspector displays an interactive 3D preview of the Template's entity hierarchy. You can rotate the preview by clicking and dragging.
+
+## Properties
+
+This asset type has no configurable properties in the Inspector. It provides a visual preview only.
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10725,16 +10831,23 @@ For more information about working with Templates see [here](/user-manual/editor
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/text/
 
-The Text Asset type in PlayCanvas is used for storing plain text data. It's versatile and can be used for various purposes such as storing dialogue, configuration data, or any other textual information.
+A Text asset is used for storing plain text data. It's versatile and can be used for various purposes such as storing dialogue, configuration data, or any other textual information.
 
-## Accessing Text Data in Scripts
+You can create a new Text asset in the Editor or by uploading a file with a `.txt` extension.
 
-To access data from a Text Asset in a script:
+## Inspector
 
-1. Add the Text Asset to the script as an attribute.
-2. Access the Text asset's resource which is the string parsed from the text file.
+[Image: Text Asset Inspector]
 
-Example:
+The Text asset inspector displays a preview of the text content contained in the asset.
+
+## Properties
+
+This asset type has no configurable properties in the Inspector. It displays a read-only preview of the text content.
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
@@ -10742,13 +10855,15 @@ Example:
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture-atlas/
 
-[Image: Texture Atlas]
-
 A Texture Atlas asset is a texture asset with additional data which describes 'Frames' inside the texture. Frames are regions defined in the texture as a rectangle with a 'pivot' point which sets the positional and rotational center of the frame.
 
-Texture Atlases are created by right-clicking on a regular Texture Asset and selecting **Create Atlas**. Or by changing the default asset settings to enable [Create Atlases](/user-manual/editor/interface/settings/asset-import/)
+Texture Atlases are created by right-clicking on a regular Texture asset and selecting **Create Atlas**, or by changing the default asset settings to enable [Create Atlases](/user-manual/editor/interface/settings/asset-import/).
 
-The Texture Atlas is used in combination with the [Sprite Asset](/user-manual/editor/assets/inspectors/sprite) to render 2D graphics.
+The Texture Atlas is used in combination with the [Sprite asset](/user-manual/editor/assets/inspectors/sprite) to render 2D graphics.
+
+## Inspector
+
+[Image: Texture Atlas]
 
 ## Properties
 
@@ -10760,13 +10875,17 @@ The Frames of a texture atlas are keyed by a unique value, usually an integer st
 {
     rect: [0, 0, 0, 0],  // u,v,width,height - width and height in pixels
     pivot: [0, 0],       // x,y - as a proportion 0-1
-    border: [0, 0, 0, 0] // left, bottom, right - top in pixels
+    border: [0, 0, 0, 0] // left, bottom, right, top - in pixels
 }
 ```
 
 ### Texture Properties
 
-In addition to frame data the Texture Atlas contains the properties as a [texture asset](/user-manual/editor/assets/inspectors/texture).
+In addition to frame data, the Texture Atlas contains the same properties as a [Texture asset](/user-manual/editor/assets/inspectors/texture).
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::
 
 --------------------------------------------------------------------------------
 
