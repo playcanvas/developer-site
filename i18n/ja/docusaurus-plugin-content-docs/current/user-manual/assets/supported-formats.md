@@ -105,5 +105,5 @@ GLB は 3D モデルの推奨フォーマットです。コンパクトで読み
 
 ## 関連項目
 
-- [モデル](models/) - PlayCanvas 用の 3D モデルの準備
+- [モデル](models/index.md) - PlayCanvas 用の 3D モデルの準備
 - [アセットインスペクター](/user-manual/editor/assets/inspectors/) - エディタでアセットプロパティを設定

@@ -142,7 +142,7 @@ Translate / Rotate / Scaleツールを切り替えるには、それぞれ1/2/3�
 
 アセットをアップロードするには、コンピュータからファイルをAssetsパネルにドラッグアンドドロップするだけです。ファイルはサーバーで処理され、Assetsパネルにすぐに表示されます。
 
-[詳細を見る](/user-manual/assets/importing/)
+[詳細を見る](/user-manual/editor/assets/importing/)
 
 ## 物理を使用するには?
 

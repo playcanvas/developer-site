@@ -171,5 +171,5 @@ for (const asset of assets) {
 
 ## See Also
 
-- [Asset Registry](asset-registry) - Finding and managing assets
-- [Preloading](preloading) - Loading assets before your app starts
+- [Asset Registry](asset-registry.md) - Finding and managing assets
+- [Preloading](preloading.md) - Loading assets before your app starts

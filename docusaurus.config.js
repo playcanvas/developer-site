@@ -122,11 +122,6 @@ const config = {
           redirects.push(existingPath.replace('layoutchild', 'layout-child'));
         }
 
-        if (existingPath.includes('/user-manual/editor/interface/assets')) {
-          const redirect = existingPath.replace('/user-manual/editor/interface/assets', '/user-manual/editor/assets');
-          redirects.push(redirect);
-        }
-
         if (existingPath.includes('/user-manual/editor/interface/hierarchy')) {
           const redirect = existingPath.replace('/user-manual/editor/interface/hierarchy', '/user-manual/editor/hierarchy');
           redirects.push(redirect);

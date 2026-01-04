@@ -171,5 +171,5 @@ for (const asset of assets) {
 
 ## 関連項目
 
-- [アセットレジストリ](asset-registry) - アセットの検索と管理
-- [プリロード](preloading) - アプリ開始前のアセット読み込み
+- [アセットレジストリ](asset-registry.md) - アセットの検索と管理
+- [プリロード](preloading.md) - アプリ開始前のアセット読み込み

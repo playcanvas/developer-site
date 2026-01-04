@@ -6,7 +6,7 @@ PlayCanvas Asset Storeは、プロジェクトで使用できる無料のアセ�
 
 ## アセットストアへのアクセス
 
-Editor内からアセットストアにアクセスするには、[Assets Panel](../../editor/interface/assets)の右上にあるASSET STOREボタンをクリックします。
+Editor内からアセットストアにアクセスするには、[Assets Panel](../../interface/assets.md)の右上にあるASSET STOREボタンをクリックします。
 
 ![Asset Store Button](/img/user-manual/assets/asset-store/asset-store-button.png)
 

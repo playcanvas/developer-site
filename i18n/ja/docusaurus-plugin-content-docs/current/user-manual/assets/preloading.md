@@ -69,5 +69,5 @@ const assets = this.app.assets.findByTag(['level-1', 'level-2']);
 
 ## 関連項目
 
-- [アセットレジストリ](asset-registry) - アセットの検索と管理
-- [読み込みとアンロード](loading-unloading) - 動的なアセット管理
+- [アセットレジストリ](asset-registry.md) - アセットの検索と管理
+- [読み込みとアンロード](loading-unloading.md) - 動的なアセット管理

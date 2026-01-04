@@ -146,6 +146,6 @@ this.app.assets.load(asset);
 
 ## 関連項目
 
-- [プリロード](preloading) - アプリ開始前に読み込むアセットを制御する
-- [読み込みとアンロード](loading-unloading) - アセットの動的な読み込み管理
+- [プリロード](preloading.md) - アプリ開始前に読み込むアセットを制御する
+- [読み込みとアンロード](loading-unloading.md) - アセットの動的な読み込み管理
 - [`AssetRegistry` API リファレンス](https://api.playcanvas.com/engine/classes/AssetRegistry.html)

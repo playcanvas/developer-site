@@ -179,6 +179,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Assets',
+          key: 'editor-assets',
           link: {
             type: 'doc',
             id: 'user-manual/editor/assets/index',
@@ -534,6 +535,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Assets',
+      key: 'common-assets',
       link: {
         type: 'doc',
         id: 'user-manual/assets/index',
