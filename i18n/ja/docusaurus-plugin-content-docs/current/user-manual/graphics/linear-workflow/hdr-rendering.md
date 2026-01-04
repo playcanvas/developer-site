@@ -73,7 +73,7 @@ material.emissiveIntensity = 50;
 
 詳細については、CameraFrameの[APIドキュメント](https://api.playcanvas.com/engine/classes/CameraFrame.html)を参照してください。
 
-## エディターでのCameraFrame
+## エディターでのCameraFrame {#cameraframe-in-the-editor}
 
 PlayCanvas Editorプロジェクト用の`CameraScript`が[こちら](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs)で利用可能です。このスクリプトは`CameraFrame`の機能をエディターのInspectorに直接統合し、高度なレンダリング機能を備えたカメラのセットアップと設定を容易にします。
 

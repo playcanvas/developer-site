@@ -258,6 +258,53 @@ splat-transform \
   complete_scene.ply
 ```
 
+### LOD形式の生成 {#generating-lod-format}
+
+LOD (Level of Detail) 形式は、大きなガウシアンスプラットシーンの効率的なストリーミングとレンダリングを可能にします。このツールは、事前に生成された複数のLODファイルを入力として受け取り、最適なダウンロードパフォーマンスのためにオクツリー構造を持つ最適化されたストリーミング形式を生成します。
+
+**注:** このツールはLODレベル自体を作成しません - 段階的にガウシアンが少なくなる複数のLODファイルを提供する必要があります（LOD 0 = 最高詳細、数字が大きいほど詳細度が低い）。
+
+```bash
+# 複数の入力ファイルからLODストリーミング形式を生成
+# 各入力ファイルは異なる詳細レベルを表します（LOD 0は最高品質）
+splat-transform \
+  lod0.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  lod3.ply -l 3 \
+  output/lod-meta.json \
+  --filter-nan \
+  --filter-harmonics 0
+
+# より良いパフォーマンスのためにカスタムチャンク設定でLODを生成
+splat-transform \
+  -C 1024 \
+  -X 32 \
+  lod0.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  output/lod-meta.json \
+  --filter-nan
+
+# 非常に大きなシーンの場合、Node.jsのメモリ割り当てを増やす
+node --max-old-space-size=32000 node_modules/.bin/splat-transform \
+  lod0.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  lod3.ply -l 3 \
+  output/lod-meta.json \
+  --filter-nan \
+  --filter-harmonics 0
+```
+
+**ヒント:**
+
+- `--filter-nan`を使用して、処理前に無効なガウシアンを削除
+- 色の詳細がそれほど重要でない場合は、`--filter-harmonics 0`を使用してファイルサイズを削減
+- `-C`を使用して、スプラットを含む生成されるSOGファイルの数を制御
+- `-X`を使用して各ノードのサイズを制御。非常に大きなシーンの場合は増やして、管理するノードの数が膨大になるのを避ける
+- 非常に大きなシーンの場合は、Nodeの`--max-old-space-size`フラグを使用してより多くのメモリを割り当てる
+
 ## ヘルプの取得
 
 任意のコマンドのヘルプを取得します：
