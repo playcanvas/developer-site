@@ -9,7 +9,7 @@ Audio Listenerコンポーネントは、リスナーの3D空間での位置を�
 ## 関連項目
 
 - [Soundコンポーネント](sound.md) - 3D空間でオーディオを再生
-- [オーディオアセット](/user-manual/assets/types/audio) - オーディオアセットについて詳しく学ぶ
+- [オーディオアセット](/user-manual/editor/assets/inspectors/audio) - オーディオアセットについて詳しく学ぶ
 
 ## スクリプトインターフェース
 

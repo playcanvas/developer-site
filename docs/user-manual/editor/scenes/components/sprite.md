@@ -2,7 +2,7 @@
 title: Sprite
 ---
 
-The Sprite Component renders and animates [Sprite Assets](/user-manual/assets/types/sprite) into the scene.
+The Sprite Component renders and animates [Sprite Assets](/user-manual/editor/assets/inspectors/sprite) into the scene.
 
 There are two types of sprite: Simple and Animated.
 
@@ -60,7 +60,7 @@ Animated Sprite Components have multiple Sprite Animation Clips attached which c
 
 ## See Also
 
-- [Sprite Assets](/user-manual/assets/types/sprite) - Learn about creating sprite assets
+- [Sprite Assets](/user-manual/editor/assets/inspectors/sprite) - Learn about creating sprite assets
 
 ## Scripting Interface
 

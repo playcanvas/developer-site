@@ -41,4 +41,4 @@ Modelコンポーネントを使用すると、エンティティにプリミテ
 
 ## マテリアルのカスタマイズ
 
-モデルのマテリアルをカスタマイズする方法については、[こちら](/user-manual/assets/types/material/#assigning-materials)を参照してください。
+モデルのマテリアルをカスタマイズする方法については、[こちら](/user-manual/editor/assets/inspectors/material/#assigning-materials)を参照してください。

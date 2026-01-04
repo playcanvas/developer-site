@@ -39,7 +39,7 @@ Soundコンポーネントには、サウンドの再生を担当する「スロ
 ## 関連項目
 
 - [Audio Listenerコンポーネント](audiolistener.md) - 3Dオーディオのリスナー位置を設定
-- [オーディオアセット](/user-manual/assets/types/audio) - オーディオアセットについて詳しく学ぶ
+- [オーディオアセット](/user-manual/editor/assets/inspectors/audio) - オーディオアセットについて詳しく学ぶ
 
 ## スクリプトインターフェース
 

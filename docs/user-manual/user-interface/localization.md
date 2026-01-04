@@ -135,4 +135,4 @@ For the complete engine API reference for localization see [this page][2].
 [7]: https://en.wikipedia.org/wiki/Zero-width_space
 [8]: http://www.thai-language.com/?nav=zwsp
 [10]: /tutorials/right-to-left-language-support/
-[11]: /user-manual/editor/interface/assets/#copy-and-paste-between-projects
+[11]: /user-manual/editor/assets/asset-panel/#copy-and-paste-between-projects

@@ -98,5 +98,5 @@ Opacity プロパティは、文字列の透明度を設定できます
 
 ![透明](/img/user-manual/user-interface/text-element/transparent.png)
 
-[1]: /user-manual/assets/types/font
+[1]: /user-manual/editor/assets/inspectors/font
 [11]: /user-manual/user-interface/localization

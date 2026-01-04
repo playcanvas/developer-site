@@ -64,7 +64,7 @@ The lighting in this scene is implemented using Lightmap and AO textures and Box
 [0]: https://github.com/dariomanesku/cmftStudio
 [1]: /user-manual/graphics/lighting/lightmapping/#gamma-correction
 [2]: http://www.scriptspot.com/3ds-max/scripts/vray-cubemap-generator-for-unity
-[3]: /user-manual/assets/types/cubemap/
+[3]: /user-manual/editor/assets/inspectors/cubemap/
 [6]: http://www.hdrlabs.com/sibl/archive.html
 [7]: https://playcanv.as/p/zdkARz26/
 [8]: https://playcanvas.com/project/446587/overview/archviz-example

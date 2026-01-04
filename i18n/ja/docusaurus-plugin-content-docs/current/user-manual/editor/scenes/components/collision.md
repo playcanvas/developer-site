@@ -45,7 +45,7 @@ Collisionコンポーネントは、エンティティにコリジョンボリ�
 | Axis            | Capsule、Cylinder、Coneのみ。コリジョン形状をエンティティのローカルスペースのX、Y、またはZ軸に整列させます。 |
 | Convex Hull     | Meshのみ。有効にすると、コリジョンメッシュは凸包として扱われ、動的剛体でより効率的になります。無効の場合、メッシュは三角形メッシュ（凹型）として使用され、静的またはキネマティック剛体でのみ機能します。 |
 | Model Asset     | Meshのみ。コリジョンメッシュのソースとして使用されるモデルアセット。Model AssetまたはRender Assetのいずれかを指定できますが、両方は指定できません。 |
-| Render Asset    | Meshのみ。コリジョンメッシュのソースとして使用される[レンダーアセット](/user-manual/assets/types/render)。Model AssetまたはRender Assetのいずれかを指定できますが、両方は指定できません。 |
+| Render Asset    | Meshのみ。コリジョンメッシュのソースとして使用される[レンダーアセット](/user-manual/editor/assets/inspectors/render)。Model AssetまたはRender Assetのいずれかを指定できますが、両方は指定できません。 |
 | Position Offset | エンティティの位置に対するコリジョン形状の位置オフセット。 |
 | Rotation Offset | エンティティの回転に対するコリジョン形状の回転オフセット（度単位）。 |
 

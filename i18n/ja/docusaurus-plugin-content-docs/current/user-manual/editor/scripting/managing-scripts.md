@@ -30,7 +30,7 @@ PlayCanvas Editor では、JavaScript コードは Script Asset に格納され�
     2. ファイルをファイルエクスプローラー/ファインダーから PlayCanvas Editor の Asset Panel 内の目的のフォルダーに直接ドラッグします。
     3. エディターがスクリプトをアップロードおよび処理し、Script Asset として利用可能にします。
 * **PlayCanvas Asset Store からスクリプトをインポートする：**
-    1. [Asset Store](../../assets/asset-store/index.md) を開きます（Asset Panel ヘッダーのボタンからアクセスできます）。
+    1. [Asset Store](../assets/asset-store/index.md) を開きます（Asset Panel ヘッダーのボタンからアクセスできます）。
     2. 閲覧するか、SCRIPT フィルターを適用します。
     3. 目的のスクリプト/パッケージを見つけたら、クリックして詳細を表示し、IMPORT を選択します。
     4. インポートされたスクリプトは Asset Panel に表示され、通常は Asset Store パッケージの名前が付けられた新しいフォルダー内にあります。これらは、管理および使用できる通常の Script Asset となります。

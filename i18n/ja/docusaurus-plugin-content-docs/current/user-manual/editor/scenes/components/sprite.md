@@ -2,7 +2,7 @@
 title: Sprite
 ---
 
-Spriteコンポーネントは、[Spriteアセット](/user-manual/assets/types/sprite)をシーンにレンダリングおよびアニメーションさせます。
+Spriteコンポーネントは、[Spriteアセット](/user-manual/editor/assets/inspectors/sprite)をシーンにレンダリングおよびアニメーションさせます。
 
 スプライトにはSimpleとAnimatedの2種類があります。
 
@@ -60,7 +60,7 @@ Spriteコンポーネントは、[Spriteアセット](/user-manual/assets/types/
 
 ## 関連項目
 
-- [Spriteアセット](/user-manual/assets/types/sprite) - スプライトアセットの作成について学ぶ
+- [Spriteアセット](/user-manual/editor/assets/inspectors/sprite) - スプライトアセットの作成について学ぶ
 
 ## スクリプトインターフェース
 

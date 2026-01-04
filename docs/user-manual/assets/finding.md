@@ -6,7 +6,7 @@ title: Third-party Asset Sites
 
 Sometimes it's important to make your own unique assets, but sometimes a completely bespoke asset is too expensive or time-consuming to make. So we've gathered together a list of links and resources for places that you can get free or paid-for assets of all types.
 
-If you've got other suggestions for this page. Then let us know on the [forum][1].
+If you've got other suggestions for this page. Then let us know on the [forum](https://forum.playcanvas.com/).
 
 ## Asset Marketplaces
 
@@ -30,11 +30,6 @@ Asset marketplaces are online libraries of content that you can download, either
 
 There are tools available that can generate game assets procedurally. Here are some good examples:
 
-* [Sound FX Generator][2]
-* [Spacescape Skybox Generator][3]
-* [Sloyd 3D Model Generator][4]
-
-[1]: https://forum.playcanvas.com/
-[2]: https://www.bfxr.net/
-[3]: http://alexcpeterson.com/spacescape
-[4]: https://sloyd.ai
+* [Sound FX Generator](https://www.bfxr.net/)
+* [Spacescape Skybox Generator](http://alexcpeterson.com/spacescape)
+* [Sloyd 3D Model Generator](https://sloyd.ai)

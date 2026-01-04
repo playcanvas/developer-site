@@ -81,5 +81,5 @@ The Asset Panel shows you all the Sprite Assets that have been created from the 
 
 *Artwork created by [PixelBoy](https://twitter.com/2pblog1)*
 
-[6]: /user-manual/assets/types/sprite/
+[6]: /user-manual/editor/assets/inspectors/sprite/
 [7]: /user-manual/2D/slicing/

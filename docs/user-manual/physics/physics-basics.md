@@ -128,5 +128,5 @@ Although you can use the standard entity transformation function with kinematic 
 [2]: /user-manual/editor/scenes/components/rigidbody/
 [3]: /user-manual/editor/scenes/components/collision/
 [10]: /user-manual/physics/physics-migration/
-[11]: /user-manual/assets/types/wasm/
+[11]: /user-manual/editor/assets/inspectors/wasm/
 [12]: /user-manual/physics/compound-shapes/

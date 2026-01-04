@@ -189,7 +189,7 @@ A common question with scenes is if the assets used in the scene will be loaded 
 
 The recommended practice is to tag assets with the scene name they belong to. When loading a scene, load the tagged assets first, then load the scene once all assets are ready.
 
-More information about asset tags and asset loading can be found on [this page](/user-manual/assets/preloading-and-streaming/#asset-tags).
+More information about asset tags and asset loading can be found on [this page](/user-manual/assets/preloading/).
 
 The [example project](https://playcanvas.com/project/926754/) below loads the assets when loading the scene and unloads when returning the main menu.
 
