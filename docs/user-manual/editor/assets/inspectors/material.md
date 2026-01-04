@@ -26,7 +26,7 @@ This creates a new material Asset and opens up the material inspector on the rig
 
 In order to edit a material, first you must select it. This will bring up the material inspector.
 
-You can select a material in the asset panel. You can also select materials from the model inspector or from the model component.
+You can select a material in the asset panel. You can also select materials from the model inspector or from the Model Component.
 
 Generally, clicking on a material preview icon will take you to the material inspector.
 
@@ -34,9 +34,9 @@ Generally, clicking on a material preview icon will take you to the material ins
 
 ![Model Component](/img/user-manual/assets/materials/model.png)
 
-You can modify which materials are assigned to where on a model asset or you can customize the materials of a particular Entity that has a model component.
+You can modify which materials are assigned to where on a model asset or you can customize the materials of a particular Entity that has a Model Component.
 
-When you select an Entity with a model component you will see two buttons - Asset Materials and Entity Materials.
+When you select an Entity with a Model Component you will see two buttons - Asset Materials and Entity Materials.
 
 ![Model Inspector Free Slot](/img/user-manual/assets/materials/model-inspector-free-slot.jpg)
 
@@ -48,7 +48,7 @@ Clicking on Entity Materials will first ask you to select the mesh instance for 
 
 ![Select Mesh Instance](/img/user-manual/assets/materials/select.png)
 
-After selecting the mesh instance a new material picker will appear in the model component:
+After selecting the mesh instance a new material picker will appear in the Model Component:
 
 ![Selected Mesh Instance](/img/user-manual/assets/materials/selected.png)
 

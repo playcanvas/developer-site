@@ -2,27 +2,20 @@
 title: HTML
 ---
 
-HTMLアセットにはHTMLコードが含まれます。コードは完全なHTMLページまたは部分的なHTMLである場合があります。新しいHTMLアセットをエディタで作成するか、拡張子が.htmlのファイルをアップロードして作成できます。
+HTMLアセットにはHTMLコードが含まれます。コードは完全なHTMLページまたは部分的なHTMLである場合があります。新しいHTMLアセットをエディターで作成するか、`.html`拡張子のファイルをアップロードして作成できます。
 
-HTMLアセットを編集するには、エディタで右クリックしてEditを選択します。
+HTMLアセットを編集するには、エディターで右クリックしてEditを選択します。
 
-読み込まれたHTMLアセットは単なる文字列です。その文字列を好きなように使用できます。ドキュメントにHTMLを追加する一般的な方法は以下のとおりです。
+## Inspector
 
-```javascript
-// get asset from registry by id
-const asset = app.assets.get(32);
+![HTML Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-html.png)
 
-// create element
-const div = document.createElement('div');
-div.innerHTML = asset.resource || '';
-document.body.appendChild(div);
+HTML アセットインスペクターは、アセットに含まれるHTMLコードのプレビューを表示します。
 
-// when asset resource loads/changes,
-// update html of element
-asset.on('load', function() {
-    div.innerHTML = asset.resource;
-});
+## Properties
 
-// make sure assets loads
-app.assets.load(asset);
-```
+このアセットタイプには、インスペクターで設定可能なプロパティはありません。HTMLコードの読み取り専用プレビューが表示されます。
+
+:::tip
+スクリプトでこのアセットを使用するには、[Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。
+:::

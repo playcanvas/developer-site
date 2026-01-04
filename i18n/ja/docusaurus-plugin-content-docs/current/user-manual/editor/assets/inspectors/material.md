@@ -26,7 +26,7 @@ PlayCanvas Editorインターフェイスから直接新しいマテリアルを
 
 マテリアルを編集するには、まず選択する必要があります。これにより、マテリアルインスペクターが表示されます。
 
-マテリアルをアセットパネルで選択することもできます。また、モデルインスペクターやモデルコンポーネントからもマテリアルを選択できます。
+マテリアルをアセットパネルで選択することもできます。また、モデルインスペクターやModel Componentからもマテリアルを選択できます。
 
 マテリアルのプレビューアイコンをクリックすると、マテリアルインスペクターに移動します。
 
@@ -34,9 +34,9 @@ PlayCanvas Editorインターフェイスから直接新しいマテリアルを
 
 ![Model Component](/img/user-manual/assets/materials/model.png)
 
-Modelアセットのどこにどのマテリアルを割り当てるかを変更することができます。また、Modelコンポーネントを持つ特定のEntityのマテリアルをカスタマイズすることもできます。
+Modelアセットのどこにどのマテリアルを割り当てるかを変更することができます。また、Model Componentを持つ特定のEntityのマテリアルをカスタマイズすることもできます。
 
-Modelコンポーネントを持つEntityを選択すると、2つのボタンが表示されます - アセットマテリアルとEntityマテリアル。
+Model Componentを持つEntityを選択すると、2つのボタンが表示されます - アセットマテリアルとEntityマテリアル。
 
 ![Model Inspector Free Slot](/img/user-manual/assets/materials/model-inspector-free-slot.jpg)
 
@@ -48,7 +48,7 @@ Asset Materialsをクリックすると、Modelアセットが選択されます
 
 ![Select Mesh Instance](/img/user-manual/assets/materials/select.png)
 
-メッシュインスタンスを選択した後、Modelコンポーネントに新しいマテリアルピッカーが表示されます。
+メッシュインスタンスを選択した後、Model Componentに新しいマテリアルピッカーが表示されます。
 
 ![Selected Mesh Instance](/img/user-manual/assets/materials/selected.png)
 

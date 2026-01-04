@@ -36,7 +36,7 @@ const asset = this.app.assets.find('My Texture');
 const assets = this.app.assets.findAll('Enemy');
 ```
 
-### タグによる検索
+### タグによる検索 {#by-tag}
 
 アセットにはタグを付けてグループ化することができます。特定のタグを持つすべてのアセットを検索します。
 

@@ -2,27 +2,20 @@
 title: CSS
 ---
 
-CSSアセットはCSSコードを含みます。エディタで新しいCSSアセットを作成するか、.css拡張子を持つファイルをアップロードして作成することができます。
+CSSアセットはCSSコードを含みます。エディターで新しいCSSアセットを作成するか、`.css`拡張子を持つファイルをアップロードして作成することができます。
 
 CSSアセットを編集するには、エディターで右クリックしてEditを選択します。
 
-読み込まれたCSSアセットリソースは、文字列として存在します。この文字列を使いたいように利用できます。ロードされたCSS文字列をドキュメントに追加する一般的な方法は以下の通りです。
+## Inspector
 
-```javascript
-// get asset from registry by id
-const asset = app.assets.get(32);
+![CSS Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-css.png)
 
-// create element
-const style = document.createElement('style');
-style.type = "text/css";
-style.textContent = asset.resource || '';
-document.head.appendChild(style);
+CSS アセットインスペクターは、アセットに含まれるCSSコードのプレビューを表示します。
 
-// update the style when the asset's resource loads/changes
-asset.on('load', function() {
-    style.innerHTML = asset.resource;
-});
+## Properties
 
-// make sure assets loads
-app.assets.load(asset);
-```
+このアセットタイプには、インスペクターで設定可能なプロパティはありません。CSSコードの読み取り専用プレビューが表示されます。
+
+:::tip
+スクリプトでこのアセットを使用するには、[Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。
+:::
