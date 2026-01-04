@@ -1,29 +1,29 @@
 ---
-title: Loading and Unloading
+title: 読み込みとアンロード
 ---
 
-PlayCanvas provides APIs to dynamically load and unload assets at runtime. This gives you fine-grained control over memory usage and allows you to stream content as needed.
+PlayCanvas は、実行時にアセットを動的に読み込みおよびアンロードするための API を提供しています。これにより、メモリ使用量をきめ細かく制御し、必要に応じてコンテンツをストリーミングすることができます。
 
-## Loading Assets
+## アセットの読み込み
 
-### Loading Registered Assets
+### 登録済みアセットの読み込み
 
-For assets that are already in the asset registry (e.g., assets added in the Editor), use `app.assets.load()`:
+アセットレジストリに既に存在するアセット（エディタで追加されたアセットなど）の場合は、`app.assets.load()` を使用します。
 
 ```javascript
 const asset = this.app.assets.find('My Texture');
 
 asset.ready((asset) => {
-    // Asset is loaded and ready to use
+    // アセットが読み込まれ、使用可能になった
     const texture = asset.resource;
 });
 
 this.app.assets.load(asset);
 ```
 
-### Loading from URL
+### URL からの読み込み
 
-To load an asset from a URL at runtime, use `app.assets.loadFromUrl()`:
+実行時に URL からアセットを読み込むには、`app.assets.loadFromUrl()` を使用します。
 
 ```javascript
 this.app.assets.loadFromUrl('path/to/texture.png', 'texture', (err, asset) => {
@@ -32,25 +32,25 @@ this.app.assets.loadFromUrl('path/to/texture.png', 'texture', (err, asset) => {
         return;
     }
     
-    // Asset is loaded and added to the registry
+    // アセットが読み込まれ、レジストリに追加された
     const texture = asset.resource;
 });
 ```
 
-The second parameter specifies the asset type. Common types include:
-- `texture` - Images (PNG, JPG, WebP, etc.)
-- `model` - 3D models (GLB)
-- `audio` - Sound files (MP3, OGG, WAV)
-- `json` - JSON data
-- `binary` - Binary data
-- `css` - Stylesheets
-- `html` - HTML documents
-- `script` - JavaScript files
-- `shader` - Shader code
+2 番目のパラメータはアセットタイプを指定します。一般的なタイプには以下があります。
+- `texture` - 画像（PNG、JPG、WebP など）
+- `model` - 3D モデル（GLB）
+- `audio` - サウンドファイル（MP3、OGG、WAV）
+- `json` - JSON データ
+- `binary` - バイナリデータ
+- `css` - スタイルシート
+- `html` - HTML ドキュメント
+- `script` - JavaScript ファイル
+- `shader` - シェーダーコード
 
-### Loading with Options
+### オプション付きの読み込み
 
-You can pass additional options when loading from URL:
+URL から読み込む際に追加オプションを渡すことができます。
 
 ```javascript
 this.app.assets.loadFromUrlAndFilename(
@@ -63,38 +63,38 @@ this.app.assets.loadFromUrlAndFilename(
             return;
         }
         
-        // Create an entity from the loaded model
+        // 読み込んだモデルからエンティティを作成
         const entity = asset.resource.instantiateRenderEntity();
         this.app.root.addChild(entity);
     }
 );
 ```
 
-## Handling Load Events
+## 読み込みイベントの処理
 
-### Using ready()
+### ready() の使用
 
-The `ready()` method executes a callback when an asset is loaded. If the asset is already loaded, the callback fires immediately:
+`ready()` メソッドは、アセットが読み込まれたときにコールバックを実行します。アセットが既に読み込まれている場合、コールバックは即座に実行されます。
 
 ```javascript
 const asset = this.app.assets.find('My Model');
 
 asset.ready((asset) => {
-    // Safe to use asset.resource here
+    // ここで asset.resource を安全に使用できる
 });
 
-// Trigger loading if not already loaded
+// まだ読み込まれていない場合は読み込みをトリガー
 if (!asset.loaded) {
     this.app.assets.load(asset);
 }
 ```
 
-### Using Events
+### イベントの使用
 
-You can listen for load events on individual assets or the registry:
+個別のアセットまたはレジストリで読み込みイベントをリッスンできます。
 
 ```javascript
-// Listen on a specific asset
+// 特定のアセットでリッスン
 asset.on('load', (asset) => {
     console.log('Asset loaded:', asset.name);
 });
@@ -103,40 +103,40 @@ asset.on('error', (err, asset) => {
     console.error('Load failed:', asset.name, err);
 });
 
-// Listen on the registry for any asset
+// レジストリで任意のアセットをリッスン
 this.app.assets.on('load', (asset) => {
     console.log('Some asset loaded:', asset.name);
 });
 ```
 
-## Unloading Assets
+## アセットのアンロード
 
-To free memory, you can unload assets that are no longer needed:
+メモリを解放するには、不要になったアセットをアンロードできます。
 
 ```javascript
 const asset = this.app.assets.find('Large Texture');
 
-// Unload the resource but keep the asset in the registry
+// リソースをアンロードするが、アセットはレジストリに残す
 asset.unload();
 
-// The asset can be loaded again later
+// アセットは後で再度読み込むことができる
 this.app.assets.load(asset);
 ```
 
-### Removing Assets
+### アセットの削除
 
-To completely remove an asset from the registry:
+アセットをレジストリから完全に削除するには：
 
 ```javascript
 const asset = this.app.assets.find('Temporary Asset');
 
-// Remove from registry (also unloads the resource)
+// レジストリから削除（リソースもアンロードされる）
 this.app.assets.remove(asset);
 ```
 
-## Loading Multiple Assets
+## 複数アセットの読み込み
 
-To load multiple assets and wait for all of them:
+複数のアセットを読み込み、すべての完了を待つには：
 
 ```javascript
 const assetNames = ['texture1', 'texture2', 'model1'];
@@ -148,7 +148,7 @@ const total = assets.length;
 const onAssetLoad = () => {
     loaded++;
     if (loaded === total) {
-        // All assets loaded
+        // すべてのアセットが読み込まれた
         this.onAllAssetsReady();
     }
 };
@@ -161,15 +161,14 @@ for (const asset of assets) {
 }
 ```
 
-## Best Practices
+## ベストプラクティス
 
-- **Unload unused assets** - Free memory by unloading assets when changing levels or scenes
-- **Use ready()** - It handles both loaded and not-yet-loaded cases
-- **Handle errors** - Always provide error handling for dynamic loads
-- **Batch loads** - Load related assets together to avoid visual inconsistencies
+- **未使用アセットをアンロードする** - レベルやシーンを切り替える際にアセットをアンロードしてメモリを解放する
+- **ready() を使用する** - 読み込み済みと未読み込みの両方のケースを処理できる
+- **エラーを処理する** - 動的読み込みには常にエラーハンドリングを提供する
+- **まとめて読み込む** - 関連するアセットを一緒に読み込み、視覚的な不整合を避ける
 
-## See Also
+## 関連項目
 
-- [Asset Registry](asset-registry) - Finding and managing assets
-- [Preloading](preloading) - Loading assets before your app starts
-
+- [アセットレジストリ](asset-registry) - アセットの検索と管理
+- [プリロード](preloading) - アプリ開始前のアセット読み込み

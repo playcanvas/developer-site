@@ -1,60 +1,60 @@
 ---
-title: Assets
+title: アセット
 ---
 
-Assets are the building blocks of your PlayCanvas application. They represent all the external resources your application needs, such as 3D models, textures, audio files, and scripts.
+アセットは、PlayCanvas アプリケーションの構成要素です。3D モデル、テクスチャ、オーディオファイル、スクリプトなど、アプリケーションに必要なすべての外部リソースを表します。
 
-## Assets vs Resources
+## アセットとリソースの違い
 
-In PlayCanvas, there's an important distinction between **Assets** and **Resources**:
+PlayCanvas では、**アセット**と**リソース**には重要な違いがあります。
 
-- **Asset** - A record in the asset registry that contains metadata about a resource, including its name, type, tags, and a reference to the underlying resource data. Assets are managed by the [`AssetRegistry`](asset-registry).
+- **アセット** - アセットレジストリ内のレコードで、リソースに関するメタデータ（名前、タイプ、タグ、基になるリソースデータへの参照など）を含みます。アセットは [`AssetRegistry`](asset-registry) によって管理されます。
 
-- **Resource** - The actual runtime data that gets loaded into memory and used by the engine. For example, a texture asset's resource is the actual image data that can be applied to materials.
+- **リソース** - メモリに読み込まれ、エンジンによって使用される実際のランタイムデータです。たとえば、テクスチャアセットのリソースは、マテリアルに適用できる実際の画像データです。
 
-When you load an asset, PlayCanvas downloads and parses the underlying file to create the resource. The asset object then holds a reference to this resource via its `resource` property.
+アセットを読み込むと、PlayCanvas は基になるファイルをダウンロードして解析し、リソースを作成します。アセットオブジェクトは、`resource` プロパティを通じてこのリソースへの参照を保持します。
 
 ```javascript
 const asset = this.app.assets.find('my-texture');
 asset.ready((asset) => {
-    const texture = asset.resource; // The actual Texture object
+    const texture = asset.resource; // 実際の Texture オブジェクト
 });
 this.app.assets.load(asset);
 ```
 
-## Asset Lifecycle
+## アセットのライフサイクル
 
-Assets go through several stages during the lifetime of your application:
+アセットは、アプリケーションの実行中にいくつかの段階を経ます。
 
-1. **Registry** - Assets are registered in the [`AssetRegistry`](asset-registry), making them discoverable by ID, name, or tags
-2. **Loading** - Asset data is downloaded from the server
-3. **Ready** - The resource is parsed and available for use
-4. **Unloading** - Resources can be unloaded to free memory
+1. **レジストリ** - アセットは [`AssetRegistry`](asset-registry) に登録され、ID、名前、またはタグで検索可能になります
+2. **読み込み** - アセットデータがサーバーからダウンロードされます
+3. **準備完了** - リソースが解析され、使用可能になります
+4. **アンロード** - メモリを解放するためにリソースをアンロードできます
 
-For details on controlling when assets load, see [Preloading](preloading) and [Loading and Unloading](loading-unloading).
+アセットの読み込みタイミングを制御する方法については、[プリロード](preloading) と [読み込みとアンロード](loading-unloading) を参照してください。
 
-## Supported Formats
+## サポートされているフォーマット
 
-PlayCanvas supports a wide variety of file formats for different asset types. See [Supported Formats](supported-formats) for a complete list.
+PlayCanvas は、さまざまなアセットタイプに対して多様なファイルフォーマットをサポートしています。完全なリストについては、[サポートされているフォーマット](supported-formats) を参照してください。
 
-## Working with Assets
+## アセットの操作
 
-### In the Editor
+### エディタでの操作
 
-If you're using the PlayCanvas Editor, see the [Editor Assets Guide](/user-manual/editor/assets/) for information on:
+PlayCanvas エディタを使用している場合は、[エディタアセットガイド](/user-manual/editor/assets/) で以下の情報を確認してください。
 
-- Importing and organizing assets
-- Configuring asset properties
-- Using the Asset Store
+- アセットのインポートと整理
+- アセットプロパティの設定
+- アセットストアの使用
 
-### Programmatically
+### プログラムでの操作
 
-For working with assets in code:
+コードでアセットを操作する場合：
 
-- **[Asset Registry](asset-registry)** - Find and manage assets at runtime
-- **[Preloading](preloading)** - Control which assets load before your app starts
-- **[Loading and Unloading](loading-unloading)** - Dynamically load assets during runtime
+- **[アセットレジストリ](asset-registry)** - 実行時にアセットを検索・管理する
+- **[プリロード](preloading)** - アプリ開始前に読み込むアセットを制御する
+- **[読み込みとアンロード](loading-unloading)** - 実行時にアセットを動的に読み込む
 
-## Finding Assets
+## アセットの入手先
 
-Looking for 3D models, textures, or audio for your project? See [Finding Assets](finding) for a list of asset marketplaces and resources.
+プロジェクト用の 3D モデル、テクスチャ、オーディオをお探しですか？アセットマーケットプレイスやリソースのリストについては、[アセットの入手先](finding) を参照してください。

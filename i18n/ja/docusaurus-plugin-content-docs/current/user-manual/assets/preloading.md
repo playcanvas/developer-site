@@ -1,48 +1,48 @@
 ---
-title: Preloading
+title: プリロード
 ---
 
-On the web, it's critical to get users into your application as soon as possible. The PlayCanvas asset system provides preloading to ensure essential assets are ready before your application starts.
+Web では、ユーザーをできるだけ早くアプリケーションに誘導することが重要です。PlayCanvas のアセットシステムは、アプリケーション開始前に必要なアセットを確実に準備するためのプリロード機能を提供しています。
 
-## The Preload Flag
+## プリロードフラグ
 
-Every asset has a `preload` property. When set to `true`, the asset will be downloaded and its resource created before the application's `initialize` phase begins.
+すべてのアセットには `preload` プロパティがあります。`true` に設定すると、アプリケーションの `initialize` フェーズが開始される前にアセットがダウンロードされ、リソースが作成されます。
 
-You should use preloading for assets that are needed immediately when your application starts. This prevents assets from "popping in" after the application is already running.
+アプリケーション開始時にすぐに必要なアセットにはプリロードを使用してください。これにより、アプリケーションが既に実行されている状態でアセットが「ポップイン」するのを防ぎます。
 
 :::tip
 
-In the PlayCanvas Editor, you can set the preload flag in the asset's properties panel. By default, new assets have preload enabled.
+PlayCanvas エディタでは、アセットのプロパティパネルでプリロードフラグを設定できます。デフォルトでは、新しいアセットはプリロードが有効になっています。
 
 :::
 
-## When Are Assets Loaded?
+## アセットはいつ読み込まれるか？
 
-Assets are loaded according to these rules:
+アセットは以下のルールに従って読み込まれます。
 
-1. **Preloaded assets** (`preload = true`) are loaded before the application starts
-2. **Referenced assets** are loaded when an enabled component references them. For entities enabled in the scene, this happens immediately after preloading completes
-3. **Dependent assets** are loaded when their parent asset loads. For example, when a model loads, its referenced materials load, which in turn load their referenced textures
+1. **プリロードアセット**（`preload = true`）は、アプリケーション開始前に読み込まれます
+2. **参照されたアセット**は、有効なコンポーネントがそれらを参照したときに読み込まれます。シーンで有効になっているエンティティの場合、これはプリロード完了直後に発生します
+3. **依存アセット**は、親アセットが読み込まれたときに読み込まれます。たとえば、モデルが読み込まれると、参照されているマテリアルが読み込まれ、さらにそれらが参照するテクスチャが読み込まれます
 
-## Streaming vs Preloading
+## ストリーミング vs プリロード
 
-If an asset is not preloaded, it will be streamed in when needed. Components handle this gracefully and begin operating once their assets are ready. However, you may see visual "popup" as models appear before their textures finish loading.
+アセットがプリロードされていない場合、必要なときにストリーミングされます。コンポーネントはこれを適切に処理し、アセットの準備ができ次第動作を開始します。ただし、テクスチャの読み込みが完了する前にモデルが表示されるなど、視覚的な「ポップアップ」が発生する場合があります。
 
-## Loading Asset Groups with Tags
+## タグを使用したアセットグループの読み込み
 
-To avoid popup, you can load groups of assets before displaying them. Use asset tags to organize assets into logical groups:
+ポップアップを避けるために、表示する前にアセットのグループを読み込むことができます。アセットタグを使用してアセットを論理的なグループに整理します。
 
 ```javascript
-// Find all assets tagged for level 1
+// レベル 1 用にタグ付けされたすべてのアセットを検索
 const assets = this.app.assets.findByTag('level-1');
 let loadedCount = 0;
 
-// Load each asset
+// 各アセットを読み込む
 for (const asset of assets) {
     asset.once('load', () => {
         loadedCount++;
         if (loadedCount === assets.length) {
-            // All level-1 assets are loaded
+            // すべての level-1 アセットが読み込まれた
             this.startLevel();
         }
     });
@@ -50,25 +50,24 @@ for (const asset of assets) {
 }
 ```
 
-You can also use more complex tag queries:
+より複雑なタグクエリも使用できます。
 
 ```javascript
-// Assets tagged with BOTH 'level-1' AND 'enemy'
+// 'level-1' と 'enemy' の両方のタグが付いたアセット
 const enemies = this.app.assets.findByTag('level-1', 'enemy');
 
-// Assets tagged with 'level-1' OR 'level-2'
+// 'level-1' または 'level-2' のタグが付いたアセット
 const assets = this.app.assets.findByTag(['level-1', 'level-2']);
 ```
 
-## Best Practices
+## ベストプラクティス
 
-- **Preload essential assets** - UI elements, player models, and anything needed immediately
-- **Stream large assets** - Background music, distant scenery, optional content
-- **Use tags for levels** - Group assets by level or area to load them together
-- **Show loading progress** - For streamed content, display a loading indicator
+- **必須アセットをプリロードする** - UI 要素、プレイヤーモデル、すぐに必要なものすべて
+- **大きなアセットはストリーミングする** - BGM、遠景、オプションコンテンツ
+- **レベルごとにタグを使用する** - レベルやエリアごとにアセットをグループ化して一緒に読み込む
+- **読み込み進捗を表示する** - ストリーミングコンテンツにはローディングインジケータを表示する
 
-## See Also
+## 関連項目
 
-- [Asset Registry](asset-registry) - Finding and managing assets
-- [Loading and Unloading](loading-unloading) - Dynamic asset management
-
+- [アセットレジストリ](asset-registry) - アセットの検索と管理
+- [読み込みとアンロード](loading-unloading) - 動的なアセット管理

@@ -1,29 +1,28 @@
 ---
-title: Assets
+title: アセット
 ---
 
-The PlayCanvas Editor provides a complete asset management system for your project. This section covers how to work with assets in the Editor, including importing, organizing, and configuring them.
+PlayCanvas エディタは、プロジェクト用の完全なアセット管理システムを提供します。このセクションでは、エディタでのアセットの操作方法（インポート、整理、設定など）について説明します。
 
-## What You'll Learn
+## 学習内容
 
-- **[Assets Panel](asset-panel)** - Navigate and manage your project's assets using the Assets Panel
-- **[Importing Assets](importing)** - Upload and import assets into your project
-- **[Import Pipeline](import-pipeline/)** - Configure how assets are processed during import
-- **[Asset Inspectors](inspectors/)** - Configure asset properties using the Inspector
-- **[Asset Store](asset-store/)** - Browse and import assets from the PlayCanvas Asset Store
-- **[Asset Viewers](viewers)** - Inspect models and textures in dedicated viewer tools
+- **[アセットパネル](asset-panel)** - アセットパネルを使用してプロジェクトのアセットをナビゲートおよび管理する
+- **[アセットのインポート](importing)** - プロジェクトにアセットをアップロードおよびインポートする
+- **[インポートパイプライン](import-pipeline/)** - インポート時のアセット処理方法を設定する
+- **[アセットインスペクター](inspectors/)** - インスペクターを使用してアセットプロパティを設定する
+- **[アセットストア](asset-store/)** - PlayCanvas アセットストアからアセットを閲覧およびインポートする
+- **[アセットビューア](viewers)** - 専用のビューアツールでモデルとテクスチャを検査する
 
-## Overview
+## 概要
 
-Assets in the Editor are managed through the [Assets Panel](asset-panel), which provides a visual interface for:
+エディタのアセットは[アセットパネル](asset-panel)を通じて管理され、以下のビジュアルインターフェースを提供します：
 
-- Organizing assets into folders
-- Uploading new assets via drag-and-drop
-- Searching and filtering assets
-- Inspecting and editing asset properties
-- Copying assets between projects
+- アセットをフォルダに整理
+- ドラッグ＆ドロップで新しいアセットをアップロード
+- アセットの検索とフィルタリング
+- アセットプロパティの検査と編集
+- プロジェクト間でアセットをコピー
 
-When you upload a file, the Editor runs it through the [import pipeline](import-pipeline/) to convert and optimize it for use in your application. The resulting asset can then be configured using the appropriate [asset inspector](inspectors/).
+ファイルをアップロードすると、エディタは[インポートパイプライン](import-pipeline/)を通じてファイルを処理し、アプリケーションで使用できるように変換および最適化します。作成されたアセットは、適切な[アセットインスペクター](inspectors/)を使用して設定できます。
 
-For conceptual information about assets and how to work with them programmatically, see the [Assets](/user-manual/assets/) section in Common Topics.
-
+アセットの概念的な情報やプログラムでの操作方法については、共通トピックの[アセット](/user-manual/assets/)セクションを参照してください。

@@ -1,130 +1,129 @@
 ---
-title: Assets Panel
+title: アセットパネル
 ---
 
-The Assets Panel manages all of the Assets that are available in your project. From here, you can create, upload, delete, inspect and edit any Asset.
+アセットパネルは、プロジェクトで利用可能なすべてのアセットを管理します。ここから、アセットの作成、アップロード、削除、検査、編集を行うことができます。
 
-![Assets Panel](/img/user-manual/editor/assets-panel.png)
+![アセットパネル](/img/user-manual/editor/assets-panel.png)
 
-## Folder Hierarchy {#folder-hierarchy}
+## フォルダ階層 {#folder-hierarchy}
 
-The folder panel allows you to organize your assets into a tree of folders.
+フォルダパネルでは、アセットをフォルダのツリー構造に整理することができます。
 
-To create a new Folder, select the Add Asset (+) button and select 'Folder'. Alternatively, right click the folder where you would like a new folder to be created and select 'New Asset' > 'Folder'.
+新しいフォルダを作成するには、アセット追加（+）ボタンを選択し、「Folder」を選択します。または、新しいフォルダを作成したい場所のフォルダを右クリックし、「New Asset」>「Folder」を選択します。
 
-To rename a folder, double click it in the hierarchy panel and edit the Name field in the Inspector.
+フォルダの名前を変更するには、階層パネルでフォルダをダブルクリックし、インスペクターで名前フィールドを編集します。
 
-To delete a folder, double click it in the hierarchy and hit delete. Alternatively, right click the folder you want to delete and select 'Delete' from the context menu.
+フォルダを削除するには、階層でフォルダをダブルクリックして Delete キーを押します。または、削除したいフォルダを右クリックし、コンテキストメニューから「Delete」を選択します。
 
-Folders can be drag and dropped into each other if you want to reorganize your folder structure.
-
-:::note
-
-Folders are essentially meta assets, exclusively designed to facilitate the organization of assets within the Editor. Folder assets are excluded from builds and are not used when building the folder structure of a published build.
-
-:::
-
-## Creating and Uploading Assets {#creating-and-uploading-assets}
-
-You can create new assets by dragging a file from you computer's file system into the Assets Panel. The Editor will upload and import the asset for you.
-
-You can also create certain assets types using the Add Asset (+) icon.
-
-You can delete assets by selecting them and clicking the Delete Asset icon.
-
-## Editing Assets {#editing-assets}
-
-Certain text-based assets can be opened and edited in the PlayCanvas Script Editor: text, json, shader, html, css and script assets. To do this, simply double click on the asset's thumbnail.
-
-## Inspecting Assets {#inspecting-assets}
-
-To inspect the details of any given asset, select its thumbnail in the Assets Panel. The asset's details will be displayed in the Inspector.
-
-## Filtering {#filtering}
-
-Filter which assets are visible using the filter drop down to select the type of asset to view.
-
-## Searching {#searching}
-
-You can perform a global search for assets in your project using the Search box. Simply start typing into the box and the Editor will show matching results dynamically in the Assets Panel.
-
-**ID** - Specific asset can be found by its unique ID, by simply typing ID in search field it will recognize exact match and only show one asset with that ID.
-
-**RegExp** - It is possible to search using regular expressions. Add `*` at the beginning of search field and type regexp query after. To search for all assets use `*.` (any character) regexp query.
-
-**Tags** - To search by tags and their combinations type tags in square brackets `[ ]`. Simple query operators: AND, OR are allowed by expressing query as array of strings or other arrays with strings. Logic of query is same as for [`findByTag`][7] from `AssetsRegistry`.
-Here are some examples:
-
-- `[ level-1 ]` - returns all assets that are tagged by `level-1`.
-- `[ level-1, level-2 ]` - returns all assets that are tagged by `level-1 OR level-2`.
-- `[ [ level-1, monster ] ]` - returns all assets that are tagged by `level-1 AND monster`. Notice extra brackets.
-- `[ [ level-1, monster ], [ level-2, monster ] ]` - returns all assets that are tagged by `(level-1 AND monster) OR (level-2 AND monster)`.
-
-## Drag and Drop {#drag-and-drop}
-
-Assets can be moved to different folders by dragging them from the main panel to a folder in the folder hierarchy. Note that assets support multi-selection. Pressing CTRL+A will select all assets in the currently selected folder.
-
-You can also drag Assets from the Asset Panel to highlighted slots in the [Inspector][2]. Slots in the Inspector will either be asset attributes of components or asset-type script attributes.
-
-You can also drag model, material, and cubemap assets directly into the [Viewport][3]
-
-- If you drag a model asset into the Viewport, a new entity will be created with a model component with the model asset assigned. The viewport camera will automatically zoom to the newly created entity.
-- If you drag a material over a particular mesh instance in the Viewport, its material will be switched (as a preview) to the material being dragged. To make the material change stick, simply drop the material.
-- If you drag a cubemap over the background of a scene in the Viewport, the cubemap will be assigned as the skybox cubemap of the scene. This property can also be set in the [Project Settings](/user-manual/editor/interface/settings/rendering/).
-
-## Copy and Paste between Projects {#copy-and-paste-between-projects}
-
-To copy an asset or a selection of assets between projects, select the asset(s) and right-click to bring up the context menu to select 'Copy'. You can also use the hotkey Ctrl/Cmd + C instead if the context menu is not available due to being a read-only project.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-copy.png" alt="Right click copy menu" width="500" />
-
-In the project that you want to copy the asset(s) to, right click in the assets panel and select 'Paste'. Ctrl/Cmd + V hotkey can be used instead.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste.png" alt="Right click paste menu" width="500" />
-
-Copy and pasting an asset will also copy its asset dependencies too. For example, here we have a model which references two materials and they reference a set of textures.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/copy-and-paste-model-with-dependencies.png" alt="Model example" width="100%" />
-
-If you copy and paste just the model asset into a different project, those asset dependencies are copied too.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-reference-assets.png" alt="Pasted referenced assets" width="100%" />
-
-By default, it is pasted as a flat hierarchy. If you want keep the folder structure, hold Shift when the context menu is opened and an option will appear called 'Paste (keep folders)'. This will attempt to keep the folder structure using the folder you are pasting into as the root folder.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste-keep-folders.png" alt="Right click paste (keep folders) menu" width="500" />
-
-Will result in the following where the folder structure is preserved:
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-assets-keep-folders.png" alt="Pasted referenced assets with folders" width="100%" />
-
-We generally recommend that if you will be using this feature for reusable libraries and assets, to keep it contained to a root level folder that can be easily copied and pasted to other projects. This will keep the folder structure of projects simpler and cleaner.
+フォルダ構造を再編成したい場合は、フォルダを他のフォルダにドラッグ＆ドロップできます。
 
 :::note
 
-Note that copy and pasting assets does not overwrite existing assets with the same name and will create a new asset.
+フォルダは本質的にメタアセットであり、エディタ内でアセットを整理するためだけに設計されています。フォルダアセットはビルドから除外され、公開ビルドのフォルダ構造を構築する際には使用されません。
 
 :::
 
-## Checking References {#checking-references}
+## アセットの作成とアップロード {#creating-and-uploading-assets}
 
-Sometimes it's useful to know where assets are being used (or referenced) within a particular scene. If the Editor cannot detect any references for an asset, a small dot will be displayed on its thumbnail:
+コンピュータのファイルシステムからアセットパネルにファイルをドラッグすることで、新しいアセットを作成できます。エディタがアセットをアップロードしてインポートします。
 
-![Unreferenced Asset](/img/user-manual/editor/assets-panel/unreferenced-asset.png)
+また、アセット追加（+）アイコンを使用して特定のアセットタイプを作成することもできます。
+
+アセットを選択してアセット削除アイコンをクリックすることで、アセットを削除できます。
+
+## アセットの編集 {#editing-assets}
+
+特定のテキストベースのアセットは、PlayCanvas スクリプトエディタで開いて編集できます：text、json、shader、html、css、script アセット。これを行うには、アセットのサムネイルをダブルクリックするだけです。
+
+## アセットの検査 {#inspecting-assets}
+
+任意のアセットの詳細を検査するには、アセットパネルでそのサムネイルを選択します。アセットの詳細がインスペクターに表示されます。
+
+## フィルタリング {#filtering}
+
+フィルタードロップダウンを使用して、表示するアセットタイプを選択し、表示されるアセットをフィルタリングします。
+
+## 検索 {#searching}
+
+検索ボックスを使用して、プロジェクト内のアセットをグローバル検索できます。ボックスに入力を開始するだけで、エディタがアセットパネルに一致する結果を動的に表示します。
+
+**ID** - 検索フィールドに ID を入力するだけで、一意の ID によって特定のアセットを見つけることができます。完全一致を認識し、その ID を持つアセットのみを表示します。
+
+**RegExp** - 正規表現を使用した検索が可能です。検索フィールドの先頭に `*` を追加し、その後に正規表現クエリを入力します。すべてのアセットを検索するには、`*.`（任意の文字）正規表現クエリを使用します。
+
+**Tags** - タグとその組み合わせで検索するには、角括弧 `[ ]` 内にタグを入力します。シンプルなクエリ演算子：AND、OR は、文字列の配列または文字列を含む他の配列としてクエリを表現することで使用できます。クエリのロジックは `AssetsRegistry` の [`findByTag`][7] と同じです。
+以下にいくつかの例を示します：
+
+- `[ level-1 ]` - `level-1` でタグ付けされたすべてのアセットを返します。
+- `[ level-1, level-2 ]` - `level-1 OR level-2` でタグ付けされたすべてのアセットを返します。
+- `[ [ level-1, monster ] ]` - `level-1 AND monster` でタグ付けされたすべてのアセットを返します。追加の括弧に注意してください。
+- `[ [ level-1, monster ], [ level-2, monster ] ]` - `(level-1 AND monster) OR (level-2 AND monster)` でタグ付けされたすべてのアセットを返します。
+
+## ドラッグ＆ドロップ {#drag-and-drop}
+
+アセットは、メインパネルからフォルダ階層内のフォルダにドラッグすることで、別のフォルダに移動できます。アセットは複数選択をサポートしています。CTRL+A を押すと、現在選択されているフォルダ内のすべてのアセットが選択されます。
+
+また、アセットパネルから[インスペクター][2]のハイライトされたスロットにアセットをドラッグすることもできます。インスペクターのスロットは、コンポーネントのアセット属性またはアセットタイプのスクリプト属性のいずれかです。
+
+モデル、マテリアル、キューブマップアセットを[ビューポート][3]に直接ドラッグすることもできます。
+
+- モデルアセットをビューポートにドラッグすると、モデルアセットが割り当てられたモデルコンポーネントを持つ新しいエンティティが作成されます。ビューポートカメラは自動的に新しく作成されたエンティティにズームします。
+- ビューポート内の特定のメッシュインスタンスにマテリアルをドラッグすると、そのマテリアルが（プレビューとして）ドラッグ中のマテリアルに切り替わります。マテリアルの変更を確定するには、マテリアルをドロップするだけです。
+- ビューポートでシーンの背景にキューブマップをドラッグすると、キューブマップがシーンのスカイボックスキューブマップとして割り当てられます。このプロパティは[プロジェクト設定](/user-manual/editor/interface/settings/rendering/)でも設定できます。
+
+## プロジェクト間でのコピー＆ペースト {#copy-and-paste-between-projects}
+
+プロジェクト間でアセットまたはアセットの選択をコピーするには、アセットを選択して右クリックし、コンテキストメニューを表示して「Copy」を選択します。読み取り専用プロジェクトのためコンテキストメニューが利用できない場合は、代わりにホットキー Ctrl/Cmd + C を使用できます。
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-copy.png" alt="右クリックコピーメニュー" width="500" />
+
+アセットをコピーしたいプロジェクトで、アセットパネルを右クリックし、「Paste」を選択します。代わりに Ctrl/Cmd + V ホットキーを使用できます。
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste.png" alt="右クリックペーストメニュー" width="500" />
+
+アセットをコピー＆ペーストすると、そのアセットの依存関係もコピーされます。たとえば、ここには 2 つのマテリアルを参照するモデルがあり、それらは一連のテクスチャを参照しています。
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/copy-and-paste-model-with-dependencies.png" alt="モデルの例" width="100%" />
+
+モデルアセットだけを別のプロジェクトにコピー＆ペーストすると、それらのアセット依存関係もコピーされます。
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-reference-assets.png" alt="ペーストされた参照アセット" width="100%" />
+
+デフォルトでは、フラットな階層としてペーストされます。フォルダ構造を維持したい場合は、コンテキストメニューを開いているときに Shift キーを押し続けると、「Paste (keep folders)」というオプションが表示されます。これにより、ペースト先のフォルダをルートフォルダとして使用してフォルダ構造を維持しようとします。
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste-keep-folders.png" alt="右クリックペースト（フォルダ保持）メニュー" width="500" />
+
+結果として、フォルダ構造が保持された以下のようになります：
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-assets-keep-folders.png" alt="フォルダ付きでペーストされた参照アセット" width="100%" />
+
+再利用可能なライブラリやアセットにこの機能を使用する場合は、他のプロジェクトに簡単にコピー＆ペーストできるルートレベルのフォルダに含めることをお勧めします。これにより、プロジェクトのフォルダ構造がよりシンプルでクリーンに保たれます。
+
+:::note
+
+アセットのコピー＆ペーストは、同じ名前の既存のアセットを上書きせず、新しいアセットを作成することに注意してください。
+
+:::
+
+## 参照の確認 {#checking-references}
+
+特定のシーン内でアセットがどこで使用（または参照）されているかを知ることが役立つ場合があります。エディタがアセットの参照を検出できない場合、サムネイルに小さなドットが表示されます：
+
+![未参照アセット](/img/user-manual/editor/assets-panel/unreferenced-asset.png)
 
 :::warning
 
-Note that the Editor cannot detect references to assets that are made in code. So think carefully before you delete an asset based on this indicator!
+エディタはコードで行われたアセットへの参照を検出できないことに注意してください。このインジケータに基づいてアセットを削除する前に、慎重に検討してください！
 
 :::
 
-If an asset does have references, you can check them via the References content menu item:
+アセットに参照がある場合は、参照コンテンツメニュー項目から確認できます：
 
-![Asset References](/img/user-manual/editor/assets-panel/asset-references.png)
+![アセット参照](/img/user-manual/editor/assets-panel/asset-references.png)
 
-Selecting a reference will load it into the Inspector panel.
+参照を選択すると、インスペクターパネルに読み込まれます。
 
 [2]: /user-manual/editor/interface/inspector
 [3]: /user-manual/editor/interface/viewport
 [7]: https://api.playcanvas.com/engine/classes/AssetRegistry.html#findbytag
-

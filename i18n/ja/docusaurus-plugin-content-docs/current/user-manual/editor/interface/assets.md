@@ -1,17 +1,17 @@
 ---
-title: Assets Panel
+title: アセットパネル
 ---
 
-The Assets Panel manages all of the Assets that are available in your project. From here, you can create, upload, delete, inspect and edit any Asset.
+アセットパネルは、プロジェクトで利用可能なすべてのアセットを管理します。ここから、アセットの作成、アップロード、削除、検査、編集を行うことができます。
 
-![Assets Panel](/img/user-manual/editor/assets-panel.png)
+![アセットパネル](/img/user-manual/editor/assets-panel.png)
 
-The Assets Panel provides powerful features for organizing and managing your project's assets, including:
+アセットパネルは、プロジェクトのアセットを整理および管理するための強力な機能を提供します：
 
-- **Folder organization** - Create a hierarchy of folders to organize assets
-- **Search and filter** - Find assets by name, ID, tags, or type
-- **Drag and drop** - Move assets between folders or into the viewport
-- **Copy and paste** - Share assets between projects
-- **Reference checking** - See where assets are used in your scene
+- **フォルダ整理** - アセットを整理するためのフォルダ階層を作成
+- **検索とフィルター** - 名前、ID、タグ、またはタイプでアセットを検索
+- **ドラッグ＆ドロップ** - フォルダ間またはビューポートへアセットを移動
+- **コピー＆ペースト** - プロジェクト間でアセットを共有
+- **参照チェック** - シーン内でアセットがどこで使用されているかを確認
 
-For detailed documentation on all Assets Panel features, see the [Assets section](/user-manual/editor/assets/).
+アセットパネルのすべての機能に関する詳細なドキュメントについては、[アセットセクション](/user-manual/editor/assets/)を参照してください。

@@ -1,110 +1,109 @@
 ---
-title: Supported Formats
+title: サポートされているフォーマット
 ---
 
-PlayCanvas supports a wide variety of file formats for different asset types. This page lists the formats that can be used in your projects.
+PlayCanvas は、さまざまなアセットタイプに対して多様なファイルフォーマットをサポートしています。このページでは、プロジェクトで使用できるフォーマットを一覧で紹介します。
 
-## 3D Models
+## 3D モデル
 
-| Format | Extension | Notes |
+| フォーマット | 拡張子 | 備考 |
 |--------|-----------|-------|
-| glTF Binary | `.glb` | Recommended format. Efficient, widely supported |
-| glTF | `.gltf` | JSON-based with external files |
-| FBX | `.fbx` | Converted to GLB on import in Editor |
-| COLLADA | `.dae` | Converted to GLB on import in Editor |
-| OBJ | `.obj` | Basic mesh format, no animations |
+| glTF Binary | `.glb` | 推奨フォーマット。効率的で広くサポートされている |
+| glTF | `.gltf` | 外部ファイルを伴う JSON ベース |
+| FBX | `.fbx` | エディタでのインポート時に GLB に変換 |
+| COLLADA | `.dae` | エディタでのインポート時に GLB に変換 |
+| OBJ | `.obj` | 基本的なメッシュフォーマット、アニメーションなし |
 
 :::tip
 
-GLB is the recommended format for 3D models. It's compact, loads quickly, and supports all PlayCanvas features including animations, materials, and morph targets.
+GLB は 3D モデルの推奨フォーマットです。コンパクトで読み込みが速く、アニメーション、マテリアル、モーフターゲットを含むすべての PlayCanvas 機能をサポートしています。
 
 :::
 
-## Textures
+## テクスチャ
 
-| Format | Extension | Notes |
+| フォーマット | 拡張子 | 備考 |
 |--------|-----------|-------|
-| PNG | `.png` | Lossless, supports transparency |
-| JPEG | `.jpg`, `.jpeg` | Lossy compression, no transparency |
-| WebP | `.webp` | Modern format, good compression |
-| AVIF | `.avif` | Next-gen format, excellent compression |
-| GIF | `.gif` | Converted to PNG/JPG on import |
-| TGA | `.tga` | Converted to PNG/JPG on import |
-| BMP | `.bmp` | Converted to PNG/JPG on import |
-| TIFF | `.tif`, `.tiff` | Converted to PNG/JPG on import |
-| HDR | `.hdr` | High dynamic range, for environment maps |
-| EXR | `.exr` | High dynamic range, converted to RGBM PNG |
+| PNG | `.png` | ロスレス、透明度をサポート |
+| JPEG | `.jpg`, `.jpeg` | 非可逆圧縮、透明度なし |
+| WebP | `.webp` | モダンなフォーマット、良好な圧縮率 |
+| AVIF | `.avif` | 次世代フォーマット、優れた圧縮率 |
+| GIF | `.gif` | インポート時に PNG/JPG に変換 |
+| TGA | `.tga` | インポート時に PNG/JPG に変換 |
+| BMP | `.bmp` | インポート時に PNG/JPG に変換 |
+| TIFF | `.tif`, `.tiff` | インポート時に PNG/JPG に変換 |
+| HDR | `.hdr` | ハイダイナミックレンジ、環境マップ用 |
+| EXR | `.exr` | ハイダイナミックレンジ、RGBM PNG に変換 |
 
-### Texture Compression
+### テクスチャ圧縮
 
-For optimized delivery, textures can be compressed to GPU-native formats:
+最適化された配信のために、テクスチャを GPU ネイティブフォーマットに圧縮できます。
 
-| Format | Platform | Notes |
+| フォーマット | プラットフォーム | 備考 |
 |--------|----------|-------|
-| Basis | All | Universal compressed format |
-| DXT/BC | Desktop | Windows/Mac/Linux |
-| PVRTC | iOS | Apple devices |
-| ETC | Android | Most Android devices |
-| ASTC | Modern mobile | iOS 8+, Android with ASTC support |
+| Basis | すべて | ユニバーサル圧縮フォーマット |
+| DXT/BC | デスクトップ | Windows/Mac/Linux |
+| PVRTC | iOS | Apple デバイス |
+| ETC | Android | ほとんどの Android デバイス |
+| ASTC | モダンモバイル | iOS 8+、ASTC サポート付き Android |
 
-## Audio
+## オーディオ
 
-| Format | Extension | Notes |
+| フォーマット | 拡張子 | 備考 |
 |--------|-----------|-------|
-| MP3 | `.mp3` | Widely supported, good compression |
-| OGG Vorbis | `.ogg` | Open format, good quality |
-| WAV | `.wav` | Uncompressed, large files |
-| M4A | `.m4a` | AAC audio |
+| MP3 | `.mp3` | 広くサポート、良好な圧縮率 |
+| OGG Vorbis | `.ogg` | オープンフォーマット、高品質 |
+| WAV | `.wav` | 非圧縮、ファイルサイズ大 |
+| M4A | `.m4a` | AAC オーディオ |
 
 :::note
 
-For best browser compatibility, provide both MP3 and OGG versions of audio files. PlayCanvas will use the format supported by the user's browser.
+ブラウザ互換性を最大化するには、オーディオファイルの MP3 と OGG の両方のバージョンを提供してください。PlayCanvas はユーザーのブラウザがサポートするフォーマットを使用します。
 
 :::
 
-## Fonts
+## フォント
 
-| Format | Extension | Notes |
+| フォーマット | 拡張子 | 備考 |
 |--------|-----------|-------|
-| TrueType | `.ttf` | Converted to bitmap font on import |
-| WOFF | `.woff` | Web font format |
+| TrueType | `.ttf` | インポート時にビットマップフォントに変換 |
+| WOFF | `.woff` | Web フォントフォーマット |
 
-## Scripts
+## スクリプト
 
-| Format | Extension | Notes |
+| フォーマット | 拡張子 | 備考 |
 |--------|-----------|-------|
-| JavaScript | `.js` | Classic scripts |
-| ES Module | `.mjs` | ESM scripts (recommended) |
+| JavaScript | `.js` | クラシックスクリプト |
+| ES Module | `.mjs` | ESM スクリプト（推奨） |
 
-## Data Files
+## データファイル
 
-| Format | Extension | Notes |
+| フォーマット | 拡張子 | 備考 |
 |--------|-----------|-------|
-| JSON | `.json` | Structured data |
-| Text | `.txt` | Plain text |
-| CSV | `.csv` | Tabular data (as text) |
-| XML | `.xml` | Markup data (as text) |
-| HTML | `.html` | HTML documents |
-| CSS | `.css` | Stylesheets |
+| JSON | `.json` | 構造化データ |
+| Text | `.txt` | プレーンテキスト |
+| CSV | `.csv` | 表形式データ（テキストとして） |
+| XML | `.xml` | マークアップデータ（テキストとして） |
+| HTML | `.html` | HTML ドキュメント |
+| CSS | `.css` | スタイルシート |
 
-## Shaders
+## シェーダー
 
-| Format | Extension | Notes |
+| フォーマット | 拡張子 | 備考 |
 |--------|-----------|-------|
-| GLSL | `.glsl` | OpenGL shading language |
-| Vertex Shader | `.vert` | Vertex shader source |
-| Fragment Shader | `.frag` | Fragment shader source |
+| GLSL | `.glsl` | OpenGL シェーディング言語 |
+| Vertex Shader | `.vert` | 頂点シェーダーソース |
+| Fragment Shader | `.frag` | フラグメントシェーダーソース |
 
-## Other
+## その他
 
-| Format | Extension | Notes |
+| フォーマット | 拡張子 | 備考 |
 |--------|-----------|-------|
-| WebAssembly | `.wasm` | Compiled binary modules |
-| Binary | `.bin` | Raw binary data |
-| PLY | `.ply` | 3D Gaussian Splat data |
+| WebAssembly | `.wasm` | コンパイル済みバイナリモジュール |
+| Binary | `.bin` | 生のバイナリデータ |
+| PLY | `.ply` | 3D Gaussian Splat データ |
 
-## See Also
+## 関連項目
 
-- [Models](models/) - Preparing 3D models for PlayCanvas
-- [Asset Inspectors](/user-manual/editor/assets/inspectors/) - Configure asset properties in the Editor
-
+- [モデル](models/) - PlayCanvas 用の 3D モデルの準備
+- [アセットインスペクター](/user-manual/editor/assets/inspectors/) - エディタでアセットプロパティを設定
