@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 543
-Generated: 2026-01-03
+Total Documents: 548
+Generated: 2026-01-04
 
 ================================================================================
 
@@ -381,7 +381,7 @@ You can only have one AudioListener at a time. The last AudioListener Component 
 [1]: /user-manual/editor/scenes/components/sound
 [2]: /user-manual/editor/scenes/components/audiolistener
 [3]: https://playcanvas.com/editor/scene/440098
-[4]: /user-manual/assets/importing
+[4]: /user-manual/editor/assets/importing
 
 --------------------------------------------------------------------------------
 
@@ -2551,7 +2551,7 @@ Continue on to [Part 3][15].
 [1]: /tutorials/keepyup-part-one/
 [2]: https://store.playcanvas.com/
 [6]: /user-manual/graphics/physical-rendering/physical-materials/
-[7]: /user-manual/assets/types/cubemap/
+[7]: /user-manual/editor/assets/inspectors/cubemap/
 [15]: /tutorials/keepyup-part-three/
 [16]: https://playcanvas.com/project/406050
 
@@ -6027,10 +6027,10 @@ The [Sprite Editor][4] is the tool used to generate Texture Atlas frames and Spr
 
 *Artwork created by [PixelBoy](https://twitter.com/2pblog1)*
 
-[0]: /user-manual/assets/types/sprite
+[0]: /user-manual/editor/assets/inspectors/sprite
 [1]: /user-manual/editor/scenes/components/sprite
-[2]: /user-manual/assets/types/texture-atlas
-[3]: /user-manual/assets/types/texture
+[2]: /user-manual/editor/assets/inspectors/texture-atlas
+[3]: /user-manual/editor/assets/inspectors/texture
 [4]: /user-manual/2D/sprite-editor
 
 --------------------------------------------------------------------------------
@@ -6171,7 +6171,7 @@ The Asset Panel shows you all the Sprite Assets that have been created from the 
 
 *Artwork created by [PixelBoy](https://twitter.com/2pblog1)*
 
-[6]: /user-manual/assets/types/sprite/
+[6]: /user-manual/editor/assets/inspectors/sprite/
 [7]: /user-manual/2D/slicing/
 
 --------------------------------------------------------------------------------
@@ -6231,7 +6231,7 @@ When updating the texture atlas later in development, as long as the sprite file
 - Sprites that have been added on the atlas will have new frames added to the end of the list.
 - Existing sprites will have their frames updated.
 
-[texture-atlas]: /user-manual/assets/types/texture-atlas/
+[texture-atlas]: /user-manual/editor/assets/inspectors/texture-atlas/
 [texture-packer-online]: https://www.codeandweb.com/tp-online
 [texture-packer-tool]: https://www.codeandweb.com/texturepacker
 [9-slicing]: /user-manual/2D/slicing/
@@ -8530,106 +8530,216 @@ Errors
 
 URL: https://developer.playcanvas.com/user-manual/assets/
 
-Assets are resources that are available to use in your game. Assets can be of various different content types, for example, 3D models or audio files. They come in two different forms: Source and Target.
+Assets are the building blocks of your PlayCanvas application. They represent all the external resources your application needs, such as 3D models, textures, audio files, and scripts.
 
-After uploading a file for an Asset the file is run through the importing pipeline which converts and optimizes the data for final use in the game.
+## Assets vs Resources
 
-## Type {#type}
+In PlayCanvas, there's an important distinction between **Assets** and **Resources**:
 
-PlayCanvas supports the importing of a wide variety of content types:
+- **Asset** - A record in the asset registry that contains metadata about a resource, including its name, type, tags, and a reference to the underlying resource data. Assets are managed by the [`AssetRegistry`](asset-registry).
 
-* Models e.g. FBX, COLLADA, obj
-* 3D Animations
-* Images for textures e.g. jpg, png
-* Audio e.g. mp3, ogg
+- **Resource** - The actual runtime data that gets loaded into memory and used by the engine. For example, a texture asset's resource is the actual image data that can be applied to materials.
 
-When you upload a new file the asset type will be set automatically from the type of file you've uploaded. For example, if you upload a PNG file, the Asset created will be a *texture* type.
+When you load an asset, PlayCanvas downloads and parses the underlying file to create the resource. The asset object then holds a reference to this resource via its `resource` property.
 
-## Source Assets and Target Assets {#source-assets-and-target-assets}
+```javascript
+const asset = this.app.assets.find('my-texture');
+asset.ready((asset) => {
+    const texture = asset.resource; // The actual Texture object
+});
+this.app.assets.load(asset);
+```
 
-After the asset type, the next most important property of an Asset is whether it is a **Source** Asset or a **Target** Asset.
+## Asset Lifecycle
 
-Put simply, Source Assets reference the original files that you uploaded. Target Assets are created at the end of the import pipeline for any files that have been generated by the PlayCanvas conversion and optimization process.
+Assets go through several stages during the lifetime of your application:
 
-For example, if you upload a Photoshop (PSD) file for a texture, we create a Source Asset of type *texture* for that PSD file. Then we run the import pipeline and convert the PSD file into a JPG file. At the end of the process we create a Target Asset of type *texture* for the new JPG file.
+1. **Registry** - Assets are registered in the [`AssetRegistry`](asset-registry), making them discoverable by ID, name, or tags
+2. **Loading** - Asset data is downloaded from the server
+3. **Ready** - The resource is parsed and available for use
+4. **Unloading** - Resources can be unloaded to free memory
 
-In the Editor and in your game, you will only ever be referring to Target Assets. That is because they are in formats optimized and ready to use at runtime.
+For details on controlling when assets load, see [Preloading](preloading) and [Loading and Unloading](loading-unloading).
 
---------------------------------------------------------------------------------
+## Supported Formats
 
-## Asset Store
+PlayCanvas supports a wide variety of file formats for different asset types. See [Supported Formats](supported-formats) for a complete list.
 
-URL: https://developer.playcanvas.com/user-manual/assets/asset-store/
+## Working with Assets
 
-The PlayCanvas Asset Store is a library of free assets that you can use in your projects. It contains 3D models, fonts, scripts and more.
+### In the Editor
 
-## Accessing the Asset Store
+If you're using the PlayCanvas Editor, see the [Editor Assets Guide](/user-manual/editor/assets/) for information on:
 
-You can access the Asset Store from within the Editor by clicking the ASSET STORE button in the top-right of the [Assets Panel](../../editor/interface/assets).
+- Importing and organizing assets
+- Configuring asset properties
+- Using the Asset Store
 
-[Image: Asset Store Button]
+### Programmatically
 
-The Asset Store will then open:
+For working with assets in code:
 
-[Image: Asset Store]
+- **[Asset Registry](asset-registry)** - Find and manage assets at runtime
+- **[Preloading](preloading)** - Control which assets load before your app starts
+- **[Loading and Unloading](loading-unloading)** - Dynamically load assets during runtime
 
-## Selecting a Store
+## Finding Assets
 
-There are three top-level Stores to choose from:
-
-| Store | Description |
-| ----- | ----------- |
-| PLAYCANVAS | Assets curated and supplied by PlayCanvas and selected partner creators. This store contains: 3D models, fonts, scripts, sky boxes, templates and textures. |
-| SKETCHFAB  | Assets curated and supplied by [Sketchfab](https://sketchfab.com/). This store contains 3D models only. [Learn more](sketchfab) about the Sketchfab Store. |
-| MY ASSETS  | Assets imported by you and stored in your user account. This store is currently in a closed beta. |
-
-## Searching the Store
-
-To search the Store, simply enter a search term in the Search bar at the top. You can then filter and sort the search results using the Search Options:
-
-[Image: Asset Store Search]
-
-## Importing Assets into your Project
-
-Select any store item in the search results to open its details page:
-
-[Image: Asset Store Details]
-
-On the details page you can:
-
-* Read a description of the store item.
-* Inspect the files included in the store item.
-* View statistics related to the store item (file size, last updated date, etc).
-* Preview the item in the Model Viewer (only applies to 3D model assets).
-* View author and license information.
-
-:::note
-
-Please respect the license terms for the store items you use in your projects. For example, the [Oldsmobile Cutlass Supreme Sedan '71](https://sketchfab.com/3d-models/oldsmobile-cutlass-supreme-sedan-71-78f76d386a4341b0b71745bdc50fd5ab) in the screenshot above was authored by [Barbo](https://sketchfab.com/barbo-autos) and has CC BY 4.0 license. This means that you must give the author appropriate credit for using their works.
-
-:::
+Looking for 3D models, textures, or audio for your project? See [Finding Assets](finding) for a list of asset marketplaces and resources.
 
 --------------------------------------------------------------------------------
 
-## Sketchfab
+## Asset Registry
 
-URL: https://developer.playcanvas.com/user-manual/assets/asset-store/sketchfab/
+URL: https://developer.playcanvas.com/user-manual/assets/asset-registry/
 
-The Asset Store is integrated with [Sketchfab](https://sketchfab.com/), the popular online platform for publishing, sharing, and discovering 3D, VR, and AR content. This integration gives you access to thousands of free, high-quality 3D models without having to leave the Editor.
+The [`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html) is the central system for managing assets in PlayCanvas. It maintains a collection of all assets available to your application and provides methods to find, load, and manage them.
 
-[Image: Sketchfab Store]
+## Accessing the Registry
 
-## Logging in to Sketchfab
+The asset registry is available via the application object:
 
-The first time you attempt to import a model from Sketchfab, you will be asked to either sign up or log in to Sketchfab:
+```javascript
+const assets = this.app.assets;
+```
 
-[Image: Sketchfab Authentication]
+## Finding Assets
 
-This will take you to `sketchfab.com` to authenticate. Once you are signed in to Sketchfab, you need to accept Sketchfab's authorization request:
+### By ID
 
-[Image: Sketchfab Authorization]
+Every asset has a unique numeric ID. This is the most reliable way to reference an asset:
 
-You should then receive a message that you have successfully connected your Sketchfab account to PlayCanvas! 🎉
+```javascript
+const asset = this.app.assets.get(123456);
+```
+
+### By Name
+
+Find an asset by its name. Returns the first matching asset:
+
+```javascript
+const asset = this.app.assets.find('My Texture');
+```
+
+Find all assets with a given name:
+
+```javascript
+const assets = this.app.assets.findAll('Enemy');
+```
+
+### By Tag
+
+Assets can be tagged for easy grouping. Find all assets with a specific tag:
+
+```javascript
+const levelAssets = this.app.assets.findByTag('level-1');
+```
+
+Find assets matching multiple tags (AND logic):
+
+```javascript
+// Assets tagged with BOTH 'level-1' AND 'enemy'
+const enemies = this.app.assets.findByTag('level-1', 'enemy');
+```
+
+Find assets matching any of several tags (OR logic):
+
+```javascript
+// Assets tagged with 'level-1' OR 'level-2'
+const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+```
+
+## Asset Events
+
+The registry emits events when assets are added, removed, or loaded:
+
+### Registry Events
+
+```javascript
+// Asset added to registry
+this.app.assets.on('add', (asset) => {
+    console.log('Asset added:', asset.name);
+});
+
+// Asset removed from registry
+this.app.assets.on('remove', (asset) => {
+    console.log('Asset removed:', asset.name);
+});
+
+// Asset loaded
+this.app.assets.on('load', (asset) => {
+    console.log('Asset loaded:', asset.name);
+});
+
+// Asset failed to load
+this.app.assets.on('error', (err, asset) => {
+    console.error('Failed to load:', asset.name, err);
+});
+```
+
+### Individual Asset Events
+
+You can also listen for events on specific assets:
+
+```javascript
+const asset = this.app.assets.find('My Texture');
+
+// Called when the asset's resource is ready
+asset.on('load', (asset) => {
+    console.log('Texture loaded:', asset.resource);
+});
+
+// Called if loading fails
+asset.on('error', (err, asset) => {
+    console.error('Failed:', err);
+});
+
+// Called when the asset is removed from the registry
+asset.on('remove', (asset) => {
+    console.log('Asset removed');
+});
+
+// Called when any property changes
+asset.on('change', (asset, property, newValue, oldValue) => {
+    console.log(`${property} changed from ${oldValue} to ${newValue}`);
+});
+```
+
+### Using ready()
+
+The `ready()` method is a convenient way to execute code when an asset is loaded. If the asset is already loaded, the callback fires immediately:
+
+```javascript
+const asset = this.app.assets.find('My Texture');
+
+asset.ready((asset) => {
+    // Asset is guaranteed to be loaded here
+    const texture = asset.resource;
+    material.diffuseMap = texture;
+});
+
+// Make sure to trigger loading if not already loaded
+this.app.assets.load(asset);
+```
+
+## Adding Assets at Runtime
+
+You can create and add new assets to the registry at runtime:
+
+```javascript
+const asset = new pc.Asset('New Texture', 'texture', {
+    url: 'path/to/texture.png'
+});
+
+this.app.assets.add(asset);
+this.app.assets.load(asset);
+```
+
+## See Also
+
+- [Preloading](preloading.md) - Control which assets load before your app starts
+- [Loading and Unloading](loading-unloading.md) - Dynamically manage asset loading
+- [`AssetRegistry` API Reference](https://api.playcanvas.com/engine/classes/AssetRegistry.html)
 
 --------------------------------------------------------------------------------
 
@@ -8641,7 +8751,7 @@ URL: https://developer.playcanvas.com/user-manual/assets/finding/
 
 Sometimes it's important to make your own unique assets, but sometimes a completely bespoke asset is too expensive or time-consuming to make. So we've gathered together a list of links and resources for places that you can get free or paid-for assets of all types.
 
-If you've got other suggestions for this page. Then let us know on the [forum][1].
+If you've got other suggestions for this page. Then let us know on the [forum](https://forum.playcanvas.com/).
 
 ## Asset Marketplaces
 
@@ -8665,226 +8775,187 @@ Asset marketplaces are online libraries of content that you can download, either
 
 There are tools available that can generate game assets procedurally. Here are some good examples:
 
-* [Sound FX Generator][2]
-* [Spacescape Skybox Generator][3]
-* [Sloyd 3D Model Generator][4]
-
-[1]: https://forum.playcanvas.com/
-[2]: https://www.bfxr.net/
-[3]: http://alexcpeterson.com/spacescape
-[4]: https://sloyd.ai
+* [Sound FX Generator](https://www.bfxr.net/)
+* [Spacescape Skybox Generator](http://alexcpeterson.com/spacescape)
+* [Sloyd 3D Model Generator](https://sloyd.ai)
 
 --------------------------------------------------------------------------------
 
-## Asset Import Pipeline
+## Loading and Unloading
+
+URL: https://developer.playcanvas.com/user-manual/assets/loading-unloading/
 
-URL: https://developer.playcanvas.com/user-manual/assets/import-pipeline/
+PlayCanvas provides APIs to dynamically load and unload assets at runtime. This gives you fine-grained control over memory usage and allows you to stream content as needed.
+
+## Loading Assets
 
-Some assets are uploaded in source format and need to be converted into a "target" format before they can be used in a game at runtime. This process is called *Importing*. For example, a 3D model can be uploaded as an FBX file, but must be converted into a PlayCanvas compatible model file before it can be loaded in the game.
+### Loading Registered Assets
+
+For assets that are already in the asset registry (e.g., assets added in the Editor), use `app.assets.load()`:
+
+```javascript
+const asset = this.app.assets.find('My Texture');
 
-Some assets don't need to be imported before they can be used. For example a PNG image can be used as a texture immediately.
+asset.ready((asset) => {
+    // Asset is loaded and ready to use
+    const texture = asset.resource;
+});
 
-## Asset Tasks {#asset-tasks}
+this.app.assets.load(asset);
+```
 
-When a source asset is uploaded, PlayCanvas starts an Asset Task to perform this import process on our server.
+### Loading from URL
 
-There are a variety of options available to tune the behavior of the import pipeline to suit your needs.
+To load an asset from a URL at runtime, use `app.assets.loadFromUrl()`:
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/asset-tasks.png" width="480" />
+```javascript
+this.app.assets.loadFromUrl('path/to/texture.png', 'texture', (err, asset) => {
+    if (err) {
+        console.error('Failed to load texture:', err);
+        return;
+    }
+    
+    // Asset is loaded and added to the registry
+    const texture = asset.resource;
+});
+```
 
-### Search related assets {#search-related-assets}
+The second parameter specifies the asset type. Common types include:
 
-When you update an source asset by uploading a new version of the file. There are two possible behaviors for how we update the target assets that are created by the import pipeline.
+- `texture` - Images (PNG, JPG, WebP, etc.)
+- `model` - 3D models (GLB)
+- `audio` - Sound files (MP3, OGG, WAV)
+- `json` - JSON data
+- `binary` - Binary data
+- `css` - Stylesheets
+- `html` - HTML documents
+- `script` - JavaScript files
+- `shader` - Shader code
 
-* If **Search related assets** is enabled, the pipeline will update target assets no matter what folder they are located in.
-* If **Search related assets** is not enabled, the pipeline will only look for the target assets in the same folder as the source asset.
+### Loading with Options
 
-So, if you leave this enabled, you are able to organize your source and target assets into folders and be sure that when you update a source assets it will update all related assets.
+You can pass additional options when loading from URL:
 
-### Assets default to preload {#assets-default-to-preload}
+```javascript
+this.app.assets.loadFromUrlAndFilename(
+    'path/to/model.glb',
+    'model.glb',
+    'container',
+    (err, asset) => {
+        if (err) {
+            console.error('Failed to load model:', err);
+            return;
+        }
+        
+        // Create an entity from the loaded model
+        const entity = asset.resource.instantiateRenderEntity();
+        this.app.root.addChild(entity);
+    }
+);
+```
 
-Newly created assets will automatically be set to [preload][2] or not depending on whether this option is enabled or not. The exception to this are JavaScript script files which will always be set to preloaded when created.
+## Handling Load Events
 
-## Texture Import Settings {#texture-import-settings}
+### Using ready()
 
-These options only affect the importing of images and textures.
+The `ready()` method executes a callback when an asset is loaded. If the asset is already loaded, the callback fires immediately:
 
-### Texture POT (Power of Two) {#texture-pot-power-of-two}
+```javascript
+const asset = this.app.assets.find('My Model');
 
-When this option is enabled textures that are not a power of two will be converted to the nearest power of two resolution when they are imported.
+asset.ready((asset) => {
+    // Safe to use asset.resource here
+});
 
-### Create Atlases {#create-atlases}
+// Trigger loading if not already loaded
+if (!asset.loaded) {
+    this.app.assets.load(asset);
+}
+```
 
-Images that are uploaded will be imported as a texture atlas instead of a normal texture asset. This is a useful time saver when uploading many spritesheets or UI assets.
+### Using Events
 
-## Model Import Settings {#model-import-settings}
+You can listen for load events on individual assets or the registry:
 
-These options only affect the importing of model or scene files (e.g. FBX, Collada, obj, etc)
+```javascript
+// Listen on a specific asset
+asset.on('load', (asset) => {
+    console.log('Asset loaded:', asset.name);
+});
 
-### Preserve material mappings {#preserve-material-mappings}
+asset.on('error', (err, asset) => {
+    console.error('Load failed:', asset.name, err);
+});
 
-When a model file is updated or reimported, the Editor will try to preserve the material mappings that were set on it.
+// Listen on the registry for any asset
+this.app.assets.on('load', (asset) => {
+    console.log('Some asset loaded:', asset.name);
+});
+```
 
-### Overwrite Models {#overwrite-models}
+## Unloading Assets
 
-When a model file is updated or reimported this option determines whether or not the target model file is overwritten. The default behavior is to overwrite with the new model.
+To free memory, you can unload assets that are no longer needed:
 
-### Overwrite Animations {#overwrite-animations}
+```javascript
+const asset = this.app.assets.find('Large Texture');
 
-When a model file is updated or reimported this option determines whether or not a animations created from the model are overwritten. The default behavior is to overwrite with the new animations.
+// Unload the resource but keep the asset in the registry
+asset.unload();
 
-### Overwrite Materials {#overwrite-materials}
+// The asset can be loaded again later
+this.app.assets.load(asset);
+```
 
-When a model file is updated or reimported this option determines whether or not materials created from the model are overwritten. The default behavior is to leave existing materials.
+### Removing Assets
 
-### Overwrite Textures {#overwrite-textures}
+To completely remove an asset from the registry:
 
-When a model file is updated or reimported this option determines whether or not textures created from the model are overwritten. The default behavior is to overwrite with the new textures.
+```javascript
+const asset = this.app.assets.find('Temporary Asset');
 
-### Convert to GLB {#convert-to-glb}
+// Remove from registry (also unloads the resource)
+this.app.assets.remove(asset);
+```
 
-Enabled by default on new projects, imported models and animations will create GLB model and animation assets instead of the older, deprecated JSON format.
+## Loading Multiple Assets
 
-### Import Hierarchy {#import-hierarchy}
+To load multiple assets and wait for all of them:
 
-Only available if using [Convert to GLB](#convert-to-glb) option. When a model file is imported, a template asset is created that contains the full hierarchy of the model as entities allowing to you to manipulate them directly in the Editor. See more information about this feature [here][3].
+```javascript
+const assetNames = ['texture1', 'texture2', 'model1'];
+const assets = assetNames.map(name => this.app.assets.find(name));
 
-### Mesh Compression {#mesh-compression}
+let loaded = 0;
+const total = assets.length;
 
-Only available if using [Convert to GLB](#convert-to-glb) option. Setting this to a compression format will automatically compress mesh data when importing or re-importing model files. This can drastically reduce the size of GLB files at the cost of some runtime decompression cost.
+const onAssetLoad = () => {
+    loaded++;
+    if (loaded === total) {
+        // All assets loaded
+        this.onAllAssetsReady();
+    }
+};
 
-If using Draco compression, remember to import the Draco WASM module into the project otherwise the models will not load.
+for (const asset of assets) {
+    asset.ready(onAssetLoad);
+    if (!asset.loaded) {
+        this.app.assets.load(asset);
+    }
+}
+```
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/draco-import-button.png" width="480" />
+## Best Practices
 
-### Create FBX Folder {#create-fbx-folder}
+- **Unload unused assets** - Free memory by unloading assets when changing levels or scenes
+- **Use ready()** - It handles both loaded and not-yet-loaded cases
+- **Handle errors** - Always provide error handling for dynamic loads
+- **Batch loads** - Load related assets together to avoid visual inconsistencies
 
-When importing a model file (e.g a GLB or FBX), the Editor will create a folder for the assets created by the import such as render, template and material assets.
+## See Also
 
-If there is already a Model (Source) file in the current folder or a folder with the same name as the file being imported, it will overwrite the existing assets instead of creating a new folder.
-
-## Animation Import Settings {#animation-import-settings}
-
-Please refer to the [Animation section][4] for more details.
-
-[2]: /user-manual/assets/preloading-and-streaming/
-[3]: /user-manual/assets/import-pipeline/import-hierarchy/
-[4]: /user-manual/assets/types/animation/
-
---------------------------------------------------------------------------------
-
-## Import Hierarchy
-
-URL: https://developer.playcanvas.com/user-manual/assets/import-pipeline/import-hierarchy/
-
-PlayCanvas supports importing models with their meshes as a hierarchy of entities in the scene. This allows you to edit the different meshes directly in the Editor. Components can be added, attach other entities, move/rotate/scale entities in the hierarchy etc.
-
-[Image: Edit model hierarchy in the Editor]
-
-## How to enable
-
-:::note
-
-This is now enabled by default for new projects.
-
-:::
-
-Open the 'Project Settings'
-
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/project-settings.png" width="480" />
-
-Scroll down to 'Asset Tasks' and enable 'Import Hierarchy':
-
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/asset-tasks.png" width="360" />
-
-## Importing models
-
-A full tutorial on importing your first model and animation can be found [here][first_model_animation_import].
-
-As an overview, when you drag the model file into the 'Assets Panel':
-
-[Image: Drag Model into Assets Panel]
-
-The following assets will be created when imported:
-
-[Image: Created Assets]
-
-| Asset Type | Description |
-|------------|-------------|
-| **[Materials][material_asset]** | Materials used by the imported model, mapped to the mesh instance. |
-| **[Textures][texture_asset]** | Embedded textures in the model file (if any). These will automatically be mapped to the associated materials. |
-| **[Template][template_asset]** | The template stores the scene hierarchy of the model. Create an instance of the template to bring the model into the scene. |
-| **Container** | The GLB that stores all the meshes of the model. |
-| **Render** | Render assets reference a mesh in the container asset and are used by the [Render Component][render_component] to render the mesh in the scene. They can also be used with the [Collision Component][collision_component] as a mesh for physics. |
-
-## Updating models
-
-As the hierarchy is created as part of a template, when a model is updated it may affect the template instances in the scenes.
-
-Added components to entities in the template will be kept during the update unless the mesh instance that the entity represents no longer exists in the updated model.
-
-The exception to this is if a script component is added to an entity in the template and the mesh instance it represents is no longer part of the updated model, it will be moved under the root entity in the template so there is no data loss. Any entities that were under it before the update will be kept as well.
-
-How the Editor decides what is a new or removed mesh instance is done by the following:
-
-- If in the update, a mesh instance's name and its parent mesh's instance name matches an existing mesh instance and its parent, they are assumed to be the same mesh instance in the hierarchy and is updated.
-- If in the update, a mesh instance's name does not exist, it's assumed to be a new mesh instance and a new entity is added to the template.
-- If in the update, an existing entity of the template does not have a matching mesh instance given the rules above, it's assumed that this mesh instance has been removed and the entity will be removed from the template. The exception being mentioned above, if there was a script component added to it on the template, those entities are preserved on the root. If there were no script components added, those are deleted from the template.
-
-[material_asset]: /user-manual/assets/types/material/
-[texture_asset]: /user-manual/assets/types/texture/
-[template_asset]: /user-manual/editor/templates/
-[render_component]: https://api.playcanvas.com/engine/classes/RenderComponent.html
-[collision_component]: https://api.playcanvas.com/engine/classes/CollisionComponent.html
-[first_model_animation_import]: /tutorials/importing-first-model-and-animation/
-
---------------------------------------------------------------------------------
-
-## Uploading and Importing
-
-URL: https://developer.playcanvas.com/user-manual/assets/importing/
-
-## Creating New Assets
-
-To upload an asset to PlayCanvas, follow these steps:
-
-### In the Editor
-
-* Drag and drop your asset file into the Asset panel in the Editor window.
-* A progress bar will appear along the bottom.
-* When the progress bar disappears, your new Asset will appear in the Asset panel.
-
-Now, when you attempt to choose an asset via the asset picker attribute control (for the Model component or the Animation component for example), your asset will be available for assignment.
-
-:::note
-
-There is a file size limit of 340MB.
-
-:::
-
-## Updating Existing Assets
-
-To update an Asset that you have already uploaded. Upload the asset again, ensuring that you have the same filename as the existing asset. PlayCanvas will update the existing asset with the new upload.
-
-## Migrating from JSON to glTF GLB
-
-As of Wed 14 Oct 2020, PlayCanvas will be creating GLBs for model and animation imports instead of JSON. This gives a large reduction in parsing times which means lower load times and more responsive applications.
-
-For projects created prior to this date, they will still create JSON assets by default for consistency.
-
-If you would like to migrate assets to the GLB format, please go to 'Project Settings'.
-
-<img loading="lazy" src="/img/user-manual/assets/importing/project-settings.png" alt="Project settings" width="300" />
-
-Open 'Asset Tasks' and tick 'Convert to GLB'.
-
-<img loading="lazy" src="/img/user-manual/assets/importing/asset-tasks.png" alt="Asset tasks settings" width="400" />
-
-And finally reimport the model and/or animation file (via drag and drop or the 'Upload' menu option) to create the GLB asset.
-
-<img loading="lazy" src="/img/user-manual/assets/importing/drag-and-drop.gif" alt="Drag and drop file" />
-
-Once created, this can be referenced to Entities in place of the existing JSON asset.
+- [Asset Registry](asset-registry.md) - Finding and managing assets
+- [Preloading](preloading.md) - Loading assets before your app starts
 
 --------------------------------------------------------------------------------
 
@@ -8892,28 +8963,18 @@ Once created, this can be referenced to Entities in place of the existing JSON a
 
 URL: https://developer.playcanvas.com/user-manual/assets/models/
 
-3D models and animations are imported into PlayCanvas by uploading scene files from a [3D modeling application][1] such as [Blender][2], 3D Studio Max or Maya.
+3D models and animations are imported into PlayCanvas by uploading scene files from a [3D modeling application](/user-manual/assets/models/building) such as [Blender](https://www.blender.org/), 3D Studio Max or Maya.
 
 PlayCanvas supports a wide variety of formats, such as glTF binary (GLB), FBX, COLLADA and obj. We recommend using the GLB format for best results.
 
-Uploading one of these files will create a [Source Asset][3] of type 'Model' and will produce several [Target Assets][4] including a '[Template][7]' with the model hierarchy and 'Render' assets. You can add an instance of the 'Template' in your game.
+Uploading one of these files will create a [Source Asset](/user-manual/glossary#source-asset) of type 'Model' and will produce several [Target Assets](/user-manual/glossary#target-asset) including a '[Template](/user-manual/editor/assets/inspectors/template/)' with the model hierarchy and 'Render' assets. You can add an instance of the 'Template' in your game.
 
 Learn more about:
 
-* [Building Models][5]
-* [Exporting Models][6]
-* [Importing Models][8]
-* [Using Templates][9]
-
-[1]: /user-manual/assets/models/building
-[2]: https://www.blender.org/
-[3]: /user-manual/glossary#source-asset
-[4]: /user-manual/glossary#target-asset
-[5]: /user-manual/assets/models/building
-[6]: /user-manual/assets/models/exporting
-[7]: /user-manual/assets/types/template/
-[8]: /user-manual/assets/import-pipeline/import-hierarchy/
-[9]: /user-manual/editor/templates/
+* [Building Models](/user-manual/assets/models/building)
+* [Exporting Models](/user-manual/assets/models/exporting)
+* [Importing Models](/user-manual/editor/assets/import-pipeline/import-hierarchy/)
+* [Using Templates](/user-manual/editor/templates/)
 
 --------------------------------------------------------------------------------
 
@@ -9148,950 +9209,191 @@ To check or set working units in Maya, open the Preferences dialog:
 
 --------------------------------------------------------------------------------
 
-## Preloading and Streaming
+## Preloading
 
-URL: https://developer.playcanvas.com/user-manual/assets/preloading-and-streaming/
+URL: https://developer.playcanvas.com/user-manual/assets/preloading/
 
-On the web, it's critical to get users into your application as soon as possible after they load the page. Presenting a loading bar and asking people to wait will lead to visitors leaving the page before your application has even got started. The PlayCanvas asset system implements a number of features to help you streamline the loading process and get your application running as fast as possible.
+On the web, it's critical to get users into your application as soon as possible. The PlayCanvas asset system provides preloading to ensure essential assets are ready before your application starts.
 
-## Preload {#preload}
+## The Preload Flag
 
-[Image: Asset Properties]
+Every asset has a `preload` property. When set to `true`, the asset will be downloaded and its resource created before the application's `initialize` phase begins.
 
-Every asset in your project has a property called `preload`. By default this is set to true. If an asset is marked as preload it will be downloaded and created before the initialize phase of your application begins.
+You should use preloading for assets that are needed immediately when your application starts. This prevents assets from "popping in" after the application is already running.
 
-You should use preloading to make sure all the assets you need at the start of your application are present. This will prevent any assets from 'popping' in after the application begins.
+:::tip
 
-## Streaming {#streaming}
-
-[Image: Streaming]
-
-If an Entity in your scene references an asset, then a loading request will be initiated when the Entity is enabled. If the Entity is enabled in the scene, then this request is made as soon as the application starts.
-
-All components will gracefully handle dynamically loading assets and will start operating as normal, once the asset is loaded. When streaming assets in dynamically like this, you will often see "popup". As a model will appear as soon as it is loaded, even if it doesn't have materials or textures yet.
-
-## When are assets loaded? {#when-are-assets-loaded}
-
-To determine when a particular asset will be loaded, you can follow these rules:
-
-* If `preload = true` the asset will be loaded before the application starts. Otherwise:
-* If the asset is referenced by a component that is enabled on an entity that is enabled and in the scene hierarchy then it will be loaded. The asset is loaded at the time the entity or component is enabled or when the asset is assigned to the component. For entities that are enabled in the Editor, this will occur as soon as the application starts just after preloading has finished. A component is defined as enabled if it is enabled and all entities in the hierarchy above it are enabled.
-* If the asset is referenced by another asset that is loaded then it will be loaded. e.g. If a model is loaded and references a material, the material will be loaded, if the material references a texture the texture will be loaded.
-
-## Asset Tags {#asset-tags}
-
-In many cases, you don't wish assets to "popup" as they load. It's preferable to load a set of assets and then display them. To do this, you can use Asset Tags to create groups of assets. Then you can load all assets with a particular tag before using them.
-
-Here is some example javascript which shows you how you might load a set of assets using a tag.
-
-```javascript
-const assets = this.app.assets.findByTag("level-1");
-let count = 0;
-
-for (let i = 0; i < assets.length; i++) {
-    assets[i].once("load", function () {
-        count++;
-        if (count === assets.length) {
-            // asset loading complete
-        }
-    });
-    this.app.assets.load(assets[i]);
-}
-```
-
---------------------------------------------------------------------------------
-
-## Asset Types
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/
-
-The [Assets Panel](/user-manual/editor/interface/assets) manages the assets in your project. There are several different types of asset.
-
-| Type                             | Imported From                    | Resource Extensions              | Description                        |
-| -------------------------------- | -------------------------------- | -------------------------------- | ---------------------------------- |
-| [`animation`](animation)         | `.glb`, `.fbx`                   | `.glb`                           | Animation keyframe data            |
-| [`audio`](audio)                 | `.mp3`, `.wav`, `.ogg`           | `.mp3`, `.wav`, `.ogg`           | Sound data                         |
-| `binary`                         | `.bin`                           | `.bin`                           | Binary data                        |
-| `bundle`                         | Created in the Editor            | `.tar`                           | Bundled assets                     |
-| [`css`](css)                     | `.css`                           | `.css`                           | Stylesheets for HTML               |
-| [`cubemap`](cubemap)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Environment lighting data          |
-| [`font`](font)                   | `.ttf`, `.woff`                  | `.json`, `.png`                  | Font data for rendering text       |
-| [`gsplat`](gsplat)               | `.ply`                           | `.ply`                           | 3D Gaussian Splat data             |
-| [`html`](html)                   | `.html`                          | `.html`                          | HTML documents                     |
-| [`json`](json)                   | `.json`                          | `.json`                          | JSON documents                     |
-| [`material`](material)           | `.glb`, `.fbx`                   | None                             | Material definitions for 3D models |
-| [`render`](render)               | `.glb`, `.fbx`                   | `.glb`                           | 3D mesh data                       |
-| [`script`](../../scripting/index.md) | `.js`, `.mjs`                | `.js`, `.mjs`                    | Scripts                            |
-| [`shader`](shader)               | `.glsl`, `.vert`, `.frag`        | `.glsl`, `.vert`, `.frag`        | Custom shaders for rendering       |
-| [`sprite`](sprite)               | Created in the Editor            | None                             | 2D images for UIs or textures      |
-| [`template`](template)           | `.glb`                           | None                             | Templates for entity hierarchy     |
-| [`text`](text)                   | `.txt`                           | `.txt`                           | Text documents                     |
-| [`texture-atlas`](texture-atlas) | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Sprite sheet image data            |
-| [`texture`](texture)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Image data for 3D models or UIs    |
-| [`wasm`](wasm)                   | `.wasm`                          | `.wasm`                          | WebAssembly modules                |
-
---------------------------------------------------------------------------------
-
-## Animation
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/animation/
-
-An Animation asset is used to play a single animation on a 3D model. Animations are imported by uploading 3D scenes (such as FBX files) which contain animation data. The animation data is extracted from the uploaded file by the [asset pipeline][asset_pipeline] and a [Target Asset][target_asset] is created to use in game.
-
-## Animation Preview
-
-The inspector has a viewer that can be used to preview the animation with any Template or Model asset. This is useful if you have a single animation that can be applied to different character rigs.
-
-[Image: Asset Inspector Preview]
-
-There is also a viewer in the [Anim State Graph Editor][anim-state-graph-editor] when you select a state in the graph. When selected, all Entities in the scene that are using the graph will show in a list and can be selected for preview.
-
-[Image: Anim State Graph Preview]
-
-## Animation Import Settings
-
-:::warning
-
-This is an experimental feature. Please let us know your feedback in the [forums](https://forum.playcanvas.com/).
+In the PlayCanvas Editor, you can set the preload flag in the asset's properties panel. By default, new assets have preload enabled.
 
 :::
 
-When importing animations, there are settings that can be tweaked to adjust the animation quality against the file size.
+## When Are Assets Loaded?
 
-They can be found in the Project Settings under Asset Tasks.
+Assets are loaded according to these rules:
 
-[Image: Animation Import Settings]
+1. **Preloaded assets** (`preload = true`) are loaded before the application starts
+2. **Referenced assets** are loaded when an enabled component references them. For entities enabled in the scene, this happens immediately after preloading completes
+3. **Dependent assets** are loaded when their parent asset loads. For example, when a model loads, its referenced materials load, which in turn load their referenced textures
 
-### Naming Strategy
+## Streaming vs Preloading
 
-Only available for GLB export format. When importing an animation, the generated asset name can either be set from the 'Take Name' in the animation file, or use the animation filename instead.
+If an asset is not preloaded, it will be streamed in when needed. Components handle this gracefully and begin operating once their assets are ready. However, you may see visual "popup" as models appear before their textures finish loading.
 
-This is useful with assets that are brought/taken from a store such as [Mixamo][mixamo] where all the take names are 'mixamo.com' and using the filename as the asset name is clearer.
+## Loading Asset Groups with Tags
 
-### Sample rate
+To avoid popup, you can load groups of assets before displaying them. Use asset tags to organize assets into logical groups:
 
-Available for both JSON and GLB export formats. The higher the rate, the higher detail and fidelity the animation at the cost of size. If you would like to keep the keyframes that have been set and defined in the original animation, select Disabled.
+```javascript
+// Find all assets tagged for level 1
+const assets = this.app.assets.findByTag('level-1');
+let loadedCount = 0;
 
-### Curve tolerance
+// Load each asset
+for (const asset of assets) {
+    asset.once('load', () => {
+        loadedCount++;
+        if (loadedCount === assets.length) {
+            // All level-1 assets are loaded
+            this.startLevel();
+        }
+    });
+    this.app.assets.load(asset);
+}
+```
 
-Available for both JSON and GLB export formats. Curve tolerance controls a lossy compression setting of the animation import with the idea that a saving in file size can be made with little or no noticeable difference.
+You can also use more complex tag queries:
 
-This is a value between 0 and 100 where the higher number, the smaller the file size but at cost of losing information in the animation. 0 would be no compression and 100 would lose all information.
+```javascript
+// Assets tagged with BOTH 'level-1' AND 'enemy'
+const enemies = this.app.assets.findByTag('level-1', 'enemy');
 
-1 or 2 is considered to be good starting point.
+// Assets tagged with 'level-1' OR 'level-2'
+const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+```
 
-### Cubic curves
+## Best Practices
 
-Only available for GLB export formats. Enable this option if you wish to keep the easing in the animation curves from the original animation. However, this will mean that the file will have extra information per keyframe and increase the size.
+- **Preload essential assets** - UI elements, player models, and anything needed immediately
+- **Stream large assets** - Background music, distant scenery, optional content
+- **Use tags for levels** - Group assets by level or area to load them together
+- **Show loading progress** - For streamed content, display a loading indicator
 
-If enabling this option, it is recommended that Sample Rate is disabled and Curve Tolerance is set to 0.
+## See Also
 
-[asset_pipeline]: /user-manual/glossary#asset-pipeline
-[target_asset]: /user-manual/glossary#target-asset
-[mixamo]: https://www.mixamo.com/
-[anim-state-graph-editor]: /user-manual/animation/anim-state-graph-assets/
+- [Asset Registry](asset-registry.md) - Finding and managing assets
+- [Loading and Unloading](loading-unloading.md) - Dynamic asset management
 
 --------------------------------------------------------------------------------
+
+## Supported Formats
+
+URL: https://developer.playcanvas.com/user-manual/assets/supported-formats/
+
+PlayCanvas supports a wide variety of file formats for different asset types. This page lists the formats that can be used in your projects.
+
+## 3D Models
+
+| Format | Extension | Notes |
+|--------|-----------|-------|
+| glTF Binary | `.glb` | Recommended format. Efficient, widely supported |
+| glTF | `.gltf` | JSON-based with external files |
+| FBX | `.fbx` | Converted to GLB on import in Editor |
+| COLLADA | `.dae` | Converted to GLB on import in Editor |
+| OBJ | `.obj` | Basic mesh format, no animations |
+
+:::tip
+
+GLB is the recommended format for 3D models. It's compact, loads quickly, and supports all PlayCanvas features including animations, materials, and morph targets.
+
+:::
+
+## Textures
+
+| Format | Extension | Notes |
+|--------|-----------|-------|
+| PNG | `.png` | Lossless, supports transparency |
+| JPEG | `.jpg`, `.jpeg` | Lossy compression, no transparency |
+| WebP | `.webp` | Modern format, good compression |
+| AVIF | `.avif` | Next-gen format, excellent compression |
+| GIF | `.gif` | Converted to PNG/JPG on import |
+| TGA | `.tga` | Converted to PNG/JPG on import |
+| BMP | `.bmp` | Converted to PNG/JPG on import |
+| TIFF | `.tif`, `.tiff` | Converted to PNG/JPG on import |
+| HDR | `.hdr` | High dynamic range, for environment maps |
+| EXR | `.exr` | High dynamic range, converted to RGBM PNG |
+
+### Texture Compression
+
+For optimized delivery, textures can be compressed to GPU-native formats:
+
+| Format | Platform | Notes |
+|--------|----------|-------|
+| Basis | All | Universal compressed format |
+| DXT/BC | Desktop | Windows/Mac/Linux |
+| PVRTC | iOS | Apple devices |
+| ETC | Android | Most Android devices |
+| ASTC | Modern mobile | iOS 8+, Android with ASTC support |
 
 ## Audio
 
-URL: https://developer.playcanvas.com/user-manual/assets/types/audio/
-
-Audio assets are sound files which can be played back using the [Sound component][sound-component].
-
-Any audio format that is supported by the web-browser is supported by PlayCanvas. No processing is done to the audio file on import.
-
-Note that not all formats are supported in all browsers. Currently, the most widely supported format is [MP3][mp3].
-
-[mp3]: https://caniuse.com/mp3
-[sound-component]: /user-manual/editor/scenes/components/sound/
-
---------------------------------------------------------------------------------
-
-## CSS
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/css/
-
-A CSS asset contains CSS code. You can create a new CSS asset in the Editor or by uploading a file with a .css extension.
-
-To edit a CSS asset, right click on it in the Editor and select Edit.
-
-The loaded CSS asset resource is just a string. You can use the string as you like. A common way to add the loaded CSS string to the document is the following:
-
-```javascript
-// get asset from registry by id
-const asset = app.assets.get(32);
-
-// create element
-const style = document.createElement('style');
-style.type = "text/css";
-style.textContent = asset.resource || '';
-document.head.appendChild(style);
-
-// update the style when the asset's resource loads/changes
-asset.on('load', function() {
-    style.innerHTML = asset.resource;
-});
-
-// make sure assets loads
-app.assets.load(asset);
-```
-
---------------------------------------------------------------------------------
-
-## Cubemap
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/cubemap/
-
-Cubemaps are a special type of texture asset. They are formed from 6 texture assets where each texture represents the face of a cube. They typically have two uses:
-
-1. A cubemap can define your scene's sky box. A sky box contains imagery of the distant visuals of your scene such as hills, mountains, the sky and so on.
-2. A cubemap can add reflections to any material. Imagine a shiny, chrome ball bearing in your scene. The ball reflects the surrounding scene. For open environments, you would normally set the scene's sky box cubemap as the cubemap on a reflective object's materials.
-
-[Interactive Demo]
-
-## Importing Cubemap Textures
-
-A cubemap is an asset that requires six texture assets as input. Therefore, in order to fully configure a new cubemap asset, you must first import 6 images into your project. To do this, simply drag 6 images from your file system into the Assets panel (or select the Asset panel's Upload option). Once uploaded and processed, the images will appear in the Assets panel where they are now ready to be assigned to a cubemap asset.
-
-## Creating Cubemaps
-
-You can create new cubemap assets directly from the PlayCanvas Editor interface. Use the Create Asset menu in the Asset panel.
-
-[Image: Cubemap Creation]
-
-This creates a new cubemap Asset and opens up the Cubemap Editor on the right-hand side of the screen.
-
-## Selecting Cubemaps
-
-To select a cubemap in order to edit it, select it in the Asset Panel. The easiest way to do this is to select the cubemap filter to narrow down the options for selection. Cubemaps are identified by cross-shaped thumbnails:
-
-[Image: Cubemap Thumbnails]
-
-When a cubemap is selected, it will be loaded into the Inspector panel on the right of the Editor.
-
-## Cubemap Properties
-
-Once you have a cubemap selected, you can edit its properties.
-
-[Image: Cubemap Properties]
-
-### Filtering
-
-This setting determines how the pixels of the cubemaps are interpolated as they are magnified. Magnification is when the texel to screen pixel ratio is less than one. Linear gives the best results visually, followed by Nearest.
-
-### Anisotropy
-
-Anisotropy is a value between 1 and 16 that gives control over the quality of texture sampling as the camera's view vector becomes more closely aligned with the plane of a textured surface.
-
-## Assigning Textures to Cubemaps
-
-[Image: Cubemap Preview]
-
-The cubemap Preview panel displays the six faces of a cubemap flattened into the shape of a cross. Imagine a cardboard box that has been unfolded to lay flat. To construct a cubemap, simply drag texture assets from the Assets panel to the face slots in the Preview panel. You can also select a cubemap face slot and then select a texture asset from the Assets panel.
-
-Cubemap faces must be:
-
-- Square (the same resolution in width and height)
-- Power of two in dimension (1x1, 2x2, 4x4, 8x8, 16x16, 32x32 and so on)
-- All faces must be the same resolution
-
-To assist you, the Editor attempts to figure out how to auto-assign textures to faces intelligently. It does this when you drag the first face to a slot by trying to match commonly used naming conventions for cubemap faces, such as:
-
-- negx, posx, negy, posy, negz, posz
-- left, right, top|up, bottom|down, front|forward, back|backward
-- 0-5|1-6
-
-An example of a texture set that would match is:
-
-- face_posx.jpg
-- face_negx.jpg
-- face_posy.jpg
-- face_negy.jpg
-- face_posz.jpg
-- face_negz.jpg
-
-## Image Based Lighting
-
-This technique allows you to use Environment Map such as CubeMap in order to simulate physically based ambient light and reflection on materials. [Read more][6] on how it works and how to author CubeMaps for IBL.
-
-## Assigning Cubemaps to Materials
-
-The default Phong and Physical material types both have reflection properties. If you expand the Environment property section, you see the following:
-
-[Image: Cubemap Material]
-
-You can click the Empty slot to select a cubemap or drag and drop a cubemap asset from the asset panel into the cubemap slot.
+| Format | Extension | Notes |
+|--------|-----------|-------|
+| MP3 | `.mp3` | Widely supported, good compression |
+| OGG Vorbis | `.ogg` | Open format, good quality |
+| WAV | `.wav` | Uncompressed, large files |
+| M4A | `.m4a` | AAC audio |
 
 :::note
 
-A Physical material will use the scene's skybox as a default environment map if it is assigned and prefiltered.
+For best browser compatibility, provide both MP3 and OGG versions of audio files. PlayCanvas will use the format supported by the user's browser.
 
 :::
 
-## Converting Equirectangular or Octahedral HDRIs to Cubemaps
-
-Environment textures often are in a equirectangular or Octahedral format ([Poly Haven][7] for example) and will need to be converted to cubemaps before they can be used in PlayCanvas.
-
-This can be done via [PlayCanvas Texture Tool][8], available in the browser.
-
-1. Download the HDR version of environment texture and press 'Add Files' button in PlayCanvas Texture Tool to load the file.
-2. Select the loaded texture on the left.
-3. Under 'Reproject' section, change the 'source' to the format of texture.
-4. Change 'target' to 'cube'.
-5. Change 'encoding' to the desired format:
-    - 'rgbe' for exporting to 'HDR'
-    - 'rgbm' for exporting to 'PNG'
-6. Set the width to the desired size per face texture. 512 is a good balance between quality and file size.
-7. Press 'Reproject' button to do the conversion to a cubemap.
-8. Press 'Export to PNG' or 'Export to HDR' to download the 6 individual cubemap face textures that are ready to be uploaded to PlayCanvas.
-
-[Image: PlayCanvas Texture Tool]
-
-Other tools that can also do this conversion include:
-
-- Mateusz Wisniowski's [HDRI-to-CubeMap tool][9] (browser)
-- [cmftStudio][10] (desktop) with [guide][11]
-
-[6]: /user-manual/graphics/physical-rendering/image-based-lighting/
-[7]: https://polyhaven.com/hdris
-[8]: https://playcanvas.com/texture-tool
-[9]: https://matheowis.github.io/HDRI-to-CubeMap/
-[10]: https://github.com/dariomanesku/cmftStudio
-[11]: https://jamie-white.com/webgl/equirectangular-hdr-image-to-face-list/
-
---------------------------------------------------------------------------------
-
-## Font
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/font/
-
-A Font asset contains an image with all the characters of the font that the user chose to include, and data related to how each character should be displayed. Font assets are used to render text using an [Element][1] component of type Text. To render text, add an Element component to an Entity set its type to Text and drag and drop the Font asset to the Font slot of the Element component.
-
-You can create a Font asset by uploading a font file ending in `.ttf`, `.ttc`, `.otf` or `.dfont`. We convert the uploaded font to a multi-channel signed distance field. This makes a font keep its details at various sizes so you only need to upload one font and use the same one for every size you want to display. The technique might work better for some fonts than others.
-
-Here are the properties that you can edit for a Font asset in the Editor:
-
-[Image: Font Asset]
-
-## Properties
-
-### Intensity
-
-Intensity is used to boost the value read from the signed distance field, 0 is no boost, 1 is max boost. This can be useful if the font does not render with clean smooth edges with the default intensity or if you are rendering the font at small font sizes.
-
-## Character Presets
-
-Click on a preset to include its characters to the Font asset. Clicking on a preset will add the characters to the existing selection.
-
-## Custom Character Range
-
-If you want to include a specific range of characters to the Font asset, enter the range in Hex and click the Plus icon to add the range to the character selection.
-
-## Font
-
-### Characters
-
-The characters that should be included in the Font asset. If you only need numbers for example, there is no need to include all the other characters of the Font. This is useful to keep Font assets small. Please note that some characters may not exist in the uploaded font.
-
-## Process Font
-
-Click on the Process Font button after you make changes to the Font asset in order to generate a new version.
-
-[1]: /user-manual/editor/scenes/components/element/
-
---------------------------------------------------------------------------------
-
-## GSplat
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/gsplat/
-
-A GSplat asset contains 3D Gaussian Splat data. PlayCanvas supports the import of GSplat data from [PLY](https://en.wikipedia.org/wiki/PLY_(file_format)) files.
-
-## Asset Inspector {#asset-inspector}
-
-You can select a GSplat asset in the [Assets Panel](/user-manual/editor/interface/assets) and view it in the [Inspector](/user-manual/editor/interface/inspector).
-
-[Image: GSplat Asset Inspector]
-
-The META section lists some key properties of the data.
-
-| Property | Description |
-| -------- | ----------- |
-| Format   | PLY supports `ascii 1.0`, `binary_little_endian 1.0`, and `binary_big_endian 1.0` |
-| Splats   | The total number of Gaussians stored in the PLY file |
-| Properties | The list of per-Gaussian properties stored in the PLY file (`x`, `y`, `z`, `opacity` and so on) |
-
---------------------------------------------------------------------------------
-
-## HTML
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/html/
-
-An HTML asset contains HTML code. The code can either be a full HTML page or just partial HTML. You can create a new HTML asset in the Editor or by uploading a file with an .html extension.
-
-To edit an HTML asset, right click on it in the Editor and select Edit.
-
-The loaded HTML asset is just a string. You can use that string as you like. A common way to add HTML to the document is the following:
-
-```javascript
-// get asset from registry by id
-const asset = app.assets.get(32);
-
-// create element
-const div = document.createElement('div');
-div.innerHTML = asset.resource || '';
-document.body.appendChild(div);
-
-// when asset resource loads/changes,
-// update html of element
-asset.on('load', function() {
-    div.innerHTML = asset.resource;
-});
-
-// make sure assets loads
-app.assets.load(asset);
-```
-
---------------------------------------------------------------------------------
-
-## JSON
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/json/
-
-[JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
-
-In PlayCanvas, JSON assets are used to store various types of structured data. Some example use cases are:
-
-- Configuration files
-- Data for procedural generation
-- Storing game settings
-- Level design data
-
-## Accessing JSON Data in Scripts
-
-To access data from a JSON asset in a script:
-
-1. Add the JSON asset to the script as an attribute.
-2. Access the JSON asset's resource which is the object parsed from the JSON data.
-
-Example:
-
---------------------------------------------------------------------------------
-
-## Material
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/material/
-
-Every surface on a 3D model is rendered using a material. The material defines the properties of that surface, such as its color, shininess, bumpiness.
-
-In PlayCanvas, a material is an Asset type which collects all these properties together. By default, it represents a Physical material. This exposes the fundamental properties that can be used to create many different types of visual effects, from smooth plastic, to rough wood, or scratched metal.
-
-We also support our old Phong Material type.
-
-## Importing Materials {#importing-materials}
-
-Materials are imported automatically when you upload a 3D model (e.g. FBX or COLLADA) file into PlayCanvas. Materials will be generated with the same properties as they exist in your 3D modelling tool. If you upload using embedded media (FBX only) all the relevant texture maps will be automatically set up for you.
-
-## Creating New Materials {#creating-new-materials}
-
-You can create new materials directly from the PlayCanvas Editor interface.
-
-[Image: Create Material]
-
-This creates a new material Asset and opens up the material inspector on the right-hand side of the screen.
-
-## Selecting a Material {#selecting-a-material}
-
-[Image: Model Inspector]
-
-In order to edit a material, first you must select it. This will bring up the material inspector.
-
-You can select a material in the asset panel. You can also select materials from the model inspector or from the model component.
-
-Generally, clicking on a material preview icon will take you to the material inspector.
-
-## Assigning Materials {#assigning-materials}
-
-[Image: Model Component]
-
-You can modify which materials are assigned to where on a model asset or you can customize the materials of a particular Entity that has a model component.
-
-When you select an Entity with a model component you will see two buttons - Asset Materials and Entity Materials.
-
-[Image: Model Inspector Free Slot]
-
-Clicking on Asset Materials will select the model asset. You can also select the model asset from the asset panel. The model inspector will show the meshes of model and which material is assigned to each. You can clear a material using the X button, and click the empty slot to assign a new material.
-
-You can also drag and drop material Assets from the asset panel onto the material slot.
-
-Clicking on Entity Materials will first ask you to select the mesh instance for which you want to customize the material:
-
-[Image: Select Mesh Instance]
-
-After selecting the mesh instance a new material picker will appear in the model component:
-
-[Image: Selected Mesh Instance]
-
-Then you can select a different material for this particular Entity:
-
-[Image: Select Different Material]
-
-## Editing a Material {#editing-a-material}
-
-[Image: Material Inspector]
-
-Once you have a material selected you can edit its properties.
-
-## Material Maps {#material-maps}
-
-[Image: Material Map Slot]
-
-Much of editing a material involves creating and assigning textures maps to the various slots detailed on the pages above.
-
-There are a few options that are available on most texture map slots for a material.
-
-### Texture Asset {#texture-asset}
-
-First is the texture asset. Upload an image to PlayCanvas and we'll create a texture asset for you. You can assign this to a slot on a material.
-
-### Color or Tint Color {#color-or-tint-color}
-
-Some map slots can be a flat color instead of a texture map. Some slots also support a tint color if a texture is also assigned. If enabled the tint color is multiplied by the color in the texture map slot.
-
-### Channel {#channel}
-
-Some maps only require a single grayscale value e.g. 0.0 -> 1.0. In this case it is possible to select which channel of the texture to use. **RGB** means that all three channels are used. **R**, **G** or **B** means that only the red, green or blue channel will be used.
-
-### Offset & Tiling
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/offset-tiling.jpg" width="300" />
-
-| Property          | Description |
-|-------------------|-------------|
-| Apply to all Maps | Uncheck this to apply offset and tiling values to individual maps. |
-| Offset            | The offset in U and V to apply to the first UV channel referenced by maps in this material. |
-| Tiling            | The scale in U and V to apply to the first UV channel referenced by maps in this material. |
-
-### Ambient
-
-Ambient properties determine how the material appears in ambient light.
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/ambient.jpg" width="300" />
-
-| Property   | Description |
-|------------|-------------|
-| Tint       | Check this to multiply the scene's global ambient color with a material specific color. |
-| Color      | The tint color to multiply the scene's global ambient color. |
-| AO Texture | An ambient occlusion map containing pre-baked ambient occlusion. |
-
-### Diffuse
-
-Diffuse properties define how a material reflects diffuse light emitted by dynamic light sources in the scene.
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/diffuse.jpg" width="300" />
-
-| Property   | Description |
-|------------|-------------|
-| Texture    | The diffuse map that specifies the per-pixel diffuse material color. If no diffuse map is set, the diffuse color is used instead. |
-| Tint       | Check this to modulate the material's diffuse map with a material specific diffuse color. |
-| Color      | If no diffuse map is set, this is the diffuse color of the material. If a diffuse map is set and tint is enabled, this color modulates the material's diffuse map. |
-
-### Specular
-
-Specular properties define the color of the specular highlights, i.e. the shininess.
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/specular.jpg" width="300" />
-
-| Property      | Description |
-|---------------|-------------|
-| Use Metalness | Toggle between specular and metalness workflow. |
-| Specular Map  | The specular map that specifies the per-pixel specular color. If no specular map is set, the specular color is used instead. |
-| Tint          | Check this to modulate the material's specular map with a material specific specular color. |
-| Color         | If no specular map is set, this is the specular color of the material. If a specular map is set and tint is enabled, this color modulates the material's specular map. |
-| Metalness Map | [Only when using metalness] This map specifies per-pixel metalness values. A value of 1 is metal and a value of 0 is non-metal. |
-| Gloss Map     | The gloss map that specifies a per-pixel shininess value. The gloss map is modulated by the shininess property. |
-| Glossiness    | A value determining the smoothness of a surface. For smaller shininess values, a surface is rougher and specular highlights will be broader. For larger shininess values, a surface is smoother and will exhibit more concentrated specular highlights (as the surface is polished and shiny). |
-
-### Emissive
-
-Emissive properties control how the material emits light (as opposed to reflecting light).
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/emissive.jpg" width="300" />
-
-| Property   | Description |
-|------------|-------------|
-| Texture    | The emissive map that specifies the per-pixel emissive color. If no emissive map is set, the emissive color is used instead. |
-| Tint       | Check this to modulate the material's emissive map with a material specific emissive color. |
-| Color      | If no emissive map is set, this is the emissive color of the material. If an emissive map is set and tint is enabled, this color modulates the material's emissive map. |
-| Intensity  | A multiplier for emissive color that can achieve overbright effects for exceptionally bright emissive materials. |
-
-### Opacity
-
-Opacity sets the transparency level.
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/opacity.jpg" width="300" />
-
-| Property   | Description |
-|------------|-------------|
-| Texture    | The opacity map that specifies the per-pixel opacity. The opacity map is modulated by the 'Amount' property. |
-| Intensity  | The opacity of the material. This is a value between 0 (completely transparent) and 1 (completely opaque. It defaults to 1. |
-
-### Normals
-
-Use this to specify normal maps (these determine bumpiness - note you have to use normal maps in PlayCanvas, not height maps).
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/normals.jpg" width="300" />
-
-| Property   | Description |
-|------------|-------------|
-| Bumpiness  | The strength of the applied normal map. This is a value between 0 (the normal map has no effect) and 2 (the effect of the normal map is exaggerated). It defaults to 1. |
-| Texture    | The normal map that specifies the per-pixel surface normals. The normal map is modulated by the 'Bumpiness' property. |
-
-### Parallax
-
-A parallax map gives further realism to a normal map by giving the illusion of depth to a surface. Note that parallax options are only enabled if you have set a normal map on the material.
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/parallax.jpg" width="300" />
-
-| Property    | Description |
-|-------------|-------------|
-| Height Map  | The height map that specifies the per-pixel strength of the parallax effect. White is full height and black is zero height. |
-| Strength    | The strength of a parallax effect (a value between 0 and 2, defaulting to 1). |
-
-### Environment
-
-Environment properties determine how a material reflects the environment.
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/environment.jpg" width="300" />
-
-| Property            | Description |
-|---------------------|-------------|
-| Sphere Map          | A sphere map texture asset that approximates environment reflection. If a sphere map is set, the Cube Map property will be hidden (since these properties are mutually exclusive). |
-| Cube Map            | A cube map texture asset that approximates environment reflection (with greater accuracy than is possible with a sphere map). If a cube map is set, the Sphere Map property will be hidden (since these properties are mutually exclusive). |
-| Reflectivity        | A factor to determine what portion of light is reflected from the material. This value defaults to 1 (full reflectivity). |
-| Refraction          | A factor to determine what portion of light passes through the material. |
-| Index of Refraction | Determines the amount of distortion of light passing through the material. |
-
-### Light Map
-
-Light maps contain pre-baked diffuse lighting. Using light maps is considered an optimization in that runtime dynamic lighting calculations can be pre-calculated.
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/lightmap.jpg" width="300" />
-
-| Property   | Description |
-|------------|-------------|
-| Texture    | The lightmap texture that contains pre-baked diffuse lighting. The lightmap requires the material to be applied to a mesh that has two UV sets. The lightmap uses the second set of UVs. |
-
-### Other Render States
-
-Other Render States gives additional controls over how a mesh is rendered with the specified material.
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/other.jpg" width="300" />
-
-| Property        | Description |
-|-----------------|-------------|
-| Depth Test      | If checked, when a mesh with the material is rendered, a per pixel check is performed to determine if the pixel passes the engine's depth test. By default, the test is that the pixel must have a z depth less than or equal to whatever is already in the depth buffer. In other words, the mesh is only visible if nothing is in front of it. If unchecked, the mesh is rendered regardless of what is already in the depth buffer. Defaults to on. |
-| Depth Write     | If checked, when a mesh with the material is rendered, its depth information is written to the depth buffer. This ensures that when subsequent meshes are rendered, they can be successfully depth tested against meshes rendered with this material. Defaults to on. |
-| Cull            | Options are: <ul><li>None: Both front faces and back faces are rendered.</li><li>Front Faces: front faces are rendered and back faces are not.</li><li>Back Faces: back faces are rendered and front faces are not. This is the default.</li></ul> PlayCanvas dictates that a counter-clockwise vertex winding specifies a front face triangle. Note that backface culling is often good for performance because backface pixels are often overwritten (for convex meshes) which can result in redundant filling of pixels. |
-| Blend Type      | Options are: <ul><li>None: The mesh is opaque. This is the default.</li><li>Normal: The mesh is transparent, like stained glass.</li><li>Additive: The mesh color is added to whatever has already been rendered to the frame buffer.</li><li>Pre-multiply: Like 'Normal' blending except it is assumed that the color of the mesh being rendered with this material has already been modulated by its alpha value.</li><li>Multiply: When rendered, the mesh color is multiplied by whatever has already been rendered to the frame buffer.</li></ul> |
-| Shadow Sampling | Options are: <ul><li>Hard</li><li>PCF 3x3</li></ul> |
-
---------------------------------------------------------------------------------
-
-## Render
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/render/
-
-The Render Asset type in PlayCanvas is a crucial component for defining the appearance of 3D models in the scene. It involves mesh data and materials that dictate how objects are rendered in the 3D environment.
-
-Render assets are primarily used for:
-
-- Defining the shape and structure of 3D models.
-- Applying materials to models.
-
---------------------------------------------------------------------------------
-
-## Shader
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/shader/
-
-A shader asset contains GLSL code. You can create a new Shader asset by clicking New Shader in the Asset Panel in the Editor or by uploading a file with an extension of ```.vert```, ```.frag``` or ```.glsl```.
-
-To edit a Shader asset, right click on it in the Editor and select Edit. Here's an example on using Shader assets to create a custom material.
-
-```javascript
-const vertexShader = this.app.assets.find('my_vertex_shader');
-const fragmentShader = this.app.assets.find('my_fragment_shader');
-const shaderDefinition = {
-    attributes: {
-        aPosition: pc.SEMANTIC_POSITION,
-        aUv0: pc.SEMANTIC_TEXCOORD0
-    },
-    vshader: vertexShader.resource,
-    fshader: fragmentShader.resource
-};
-
-const shader = new pc.Shader(this.app.graphicsDevice, shaderDefinition);
-const material = new pc.Material();
-material.setShader(shader);
-```
-
---------------------------------------------------------------------------------
-
-## Sprite
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/sprite/
-
-A Sprite is a 2D graphic that can be rendered into a scene. A Sprite Asset is a reference to a [Texture Atlas][1] and a sequence of frames from that atlas. In this way a sprite can either represent a single image (taken out of the atlas) or a flip-book style animation (multiple frames from the atlas).
-
-## Properties
-
-[Image: Sprites]
-
-### Pixels Per Unit
-
-The number of pixels in the sprite image that maps to 1 Unit in the PlayCanvas scene. e.g If `pixelsPerUnit` is 1 and the sprite is 32x32. Then it will be 32 units across and high when rendered in the scene. By default a sprite with the *Simple* render mode is created with `pixelsPerUnit` set to 100. This means that a 100x100 sprite will be 1 unit wide/high in the scene.
-
-If you create a *Sliced* sprite, by default it will be created with a `pixelsPerUnit` value of 1. Because these sprites are usually used as part of a Screen Component for building user interfaces, 1 sprite pixel should map to 1 screen pixel.
-
-### Render Mode
-
-* Simple - the sprite does not use the border values
-* Sliced - the sprite uses the border values to perform [9-sliced][2] rendering by stretching.
-* Tiled - the sprite uses the border values to perform [9-sliced][2] rendering by tiling.
-
-### Texture Atlas
-
-The Texture Atlas asset that the sprite references
-
-[1]: /user-manual/assets/types/texture-atlas
-[2]: /user-manual/2D/slicing
-
---------------------------------------------------------------------------------
-
-## Template
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/template/
-
-A Template (also called a Prefab) is an Asset that contains a piece of an Entity hierarchy. It has a root Entity and can have any number of children. A Template is a reusable Entity that you can instantiate dynamically at runtime or place multiple instances of it in your Scene. When you change the Template Asset all instances of the Template will also change.
-
-For more information about working with Templates see [here][1].
-
-[1]: /user-manual/editor/templates/
-
---------------------------------------------------------------------------------
-
-## Text
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/text/
-
-The Text Asset type in PlayCanvas is used for storing plain text data. It's versatile and can be used for various purposes such as storing dialogue, configuration data, or any other textual information.
-
-## Accessing Text Data in Scripts
-
-To access data from a Text Asset in a script:
-
-1. Add the Text Asset to the script as an attribute.
-2. Access the Text asset's resource which is the string parsed from the text file.
-
-Example:
-
---------------------------------------------------------------------------------
-
-## Texture Atlas
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/texture-atlas/
-
-[Image: Texture Atlas]
-
-A Texture Atlas asset is a texture asset with additional data which describes 'Frames' inside the texture. Frames are regions defined in the texture as a rectangle with a 'pivot' point which sets the positional and rotational center of the frame.
-
-Texture Atlases are created by right-clicking on a regular Texture Asset and selecting **Create Atlas**. Or by changing the default asset settings to enable [Create Atlases][3]
-
-The Texture Atlas is used in combination with the [Sprite Asset][4] to render 2D graphics.
-
-## Properties
-
-### Frames
-
-The Frames of a texture atlas are keyed by a unique value, usually an integer string. The format of a frame is:
-
-```javascript
-{
-    rect: [0, 0, 0, 0],  // u,v,width,height - width and height in pixels
-    pivot: [0, 0],       // x,y - as a proportion 0-1
-    border: [0, 0, 0, 0] // left, bottom, right - top in pixels
-}
-```
-
-### Texture Properties
-
-In addition to frame data the Texture Atlas contains the properties as a [texture asset][2].
-
-[2]: /user-manual/assets/types/texture
-[3]: /user-manual/editor/interface/settings/asset-import/
-[4]: /user-manual/assets/types/sprite
-
---------------------------------------------------------------------------------
-
-## Texture
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/texture/
-
-A texture is an image that can be assigned to a [material][1] and then applied to a graphical primitive.
-
-## Importing Textures
-
-There are 3 ways you can import texture assets into PlayCanvas:
-
-1. Drag and drop images into the Assets panel.
-2. Select 'Upload' from the context menu in the Assets panel and select an image using the file browser.
-3. Import an FBX file that embeds textures.
-
-Supported image formats are:
-
-* JPG
-* PNG
-* AVIF
-* WEBP
-* GIF
-* TGA
-* BMP
-* TIF
-* HDR
-* EXR
-
-Imported JPG, PNG, AVIF, WebP and GIF files remain in their original format.
-
-GIF, TGA, BMP and TIF image types will be converted to JPG or PNG on import. If the imported image has transparency, it will be converted to PNG. Otherwise, it will be converted to JPG.
-
-HDR and EXR are [high dynamic range formats][2] formats. Images of these types are converted to PNG on import and marked as being stored in RGBM format. RGBM essentially stores a multiplier for RGB values in the PNG's alpha channel, enabling the compression of an HDR format into a low dynamic range format.
-
-By default, imported images will be resized to the nearest power of two. For example, an image that is 323x414 will be resized to 256x512 on import. This is done because the graphics engine cannot utilize mipmapping with non-power of two textures. However, this behavior can be overridden by disabling the 'Textures POT' setting in the Asset Tasks panel before importing a non-power of two texture.
-
-## Texture Properties
-
-Selecting a texture's thumbnail in the Assets panel will load it into the Inspector panel. Note that you can multi-select textures and edit the whole selection simultaneously in the Inspector.
-
-A texture shares the standard set of asset properties (ID, name, tags and so on). But it also has some texture-specific properties.
-
-[Image: Texture Properties]
-
-### Texture Filtering
-
-Texture filtering gives control over how the color of a texture mapped pixel is calculated. 'Point' applies no filtering whereas 'Linear' will interpolate the color of a texel with those of its neighbors. This produces better visual results, particularly as a texture is minimized (where the texture occupies fewer pixels on the screen than it has texels).
-
-### Anisotropy
-
-When textures are viewed on surfaces at an oblique angle, quality can suffer and they can appear blurred. To fix this problem, you can set a value for anisotropy. See how different anisotropy values can affect the appearance of a texture:
-
-[Image: Anisotropy]
-
-Note that as anisotropy increases, the cost of sampling the texture on the GPU also increases.
-
-### Texture Addressing
-
-The texture addressing properties give you control over how a texture is sampled for texture coordinates outside the range 0 to 1. See how the different modes affect the sprite below:
-
-[Image: Addressing]
-
-## Max Texture Size
-
-Different devices can support different texture sizes. Using [WebGL report][7] on the device and browser, we can see the max size supported.
-
-For example, this is from a MacBook Pro 16 inch (2020) laptop with Chrome which shows support up to 16384x16384.
-
-<img loading="lazy" src="/img/user-manual/assets/textures/mac-webgl-report.png" alt="Macbook Pro WebGL report" width="600" />
-
-Whereas on a Samsung S7 mobile device, only 4096x4096 is supported.
-
-<img loading="lazy" src="/img/user-manual/assets/textures/samsung-s7-webgl-report.jpg" alt="Samsung S7 WebGL report" width="600" />
-
-If the engine attempts to utilize a texture that exceeds the max texture size reported by WebGL, it will resize it down to this maximum size at runtime. Note that this is only done for texture loaded from images (PNG, JPG, AVIF, WebP, GIF). Compressed textures cannot be resized at runtime and will simply fail to render if they are too large for the device.
-
-If you would like to avoid downsizing at runtime, at the time of writing (Fri 23 Oct 2020), 4096x4096 is very widely supported with some developers even opting for 2048x2048 which is guaranteed to work everywhere.
-
-[1]: /user-manual/assets/types/material
-[2]: https://en.wikipedia.org/wiki/High-dynamic-range_imaging
-[7]: https://webglreport.com/
-
---------------------------------------------------------------------------------
-
-## WASM Module
-
-URL: https://developer.playcanvas.com/user-manual/assets/types/wasm/
-
-Wasm Modules (also known as WebAssembly Modules) contain compiled executable code for the web.
-
-A Wasm module comprises three parts:
-
-* the binary executable file
-* the JavaScript glue code file
-* an optional fallback asm.js
-
-These files can be added to the project either by dragging and dropping the files into the Assets Panel or by selecting 'Upload' from the Assets Panel context menu.
-
-Please note that PlayCanvas Editor currently supports [Emscripten][2] compiled Wasm Modules only.
-
-## Wasm Module Properties
-
-Once the files have been added to the project, select the Wasm Module to display its properties in the Inspector Panel:
-[Image: Wasm Module Properties]
-
-### Name
-
-Name must match the module name defined in the glue and fallback script. This name is used to instantiate the module at load time.
-
-### Glue script
-
-This is the JavaScript glue code required to execute Wasm code.
-
-### Fallback script
-
-This is the optional fallback asm.js script to use when WebAssembly is not supported.
-
-[2]: https://emscripten.org/
-
---------------------------------------------------------------------------------
-
-## Asset Viewers
-
-URL: https://developer.playcanvas.com/user-manual/assets/viewers/
-
-Some of the assets have viewer tools that can help inspect them more closely. Assets that can be viewed in these will have the option to 'Open in Viewer' in the inspector and context menu.
-
-[Image: Open in Viewer option]
-
-Clicking on either of these options will open the viewer with the asset in a new tab.
-
-## Model Viewer
-
-[Image: Model Viewer Preview]
-
-(Model: Copyright 2021 Wayfair LLC. [CC BY 4.0][cc-40] International)
-
-The [open source Model Viewer][model-viewer-github] is available for the following asset types:
-
-- Model (Source) that are GLBs
-- Model
-- Container
-- Animation
-
-The Model Viewer is useful for inspecting the model node hierarchy, morph targets and debugging animation issues.
-
-## Texture Tool
-
-[Image: Texture Tool Preview]
-
-The [open source Texture Tool][texture-tool-github] is available for the following asset types:
-
-- Texture
-- Texture Atlas
-
-[model-viewer-github]: https://github.com/playcanvas/model-viewer
-[texture-tool-github]: https://github.com/playcanvas/texture-tool
-[cc-40]: https://creativecommons.org/licenses/by/4.0/
+## Fonts
+
+| Format | Extension | Notes |
+|--------|-----------|-------|
+| TrueType | `.ttf` | Converted to bitmap font on import |
+| WOFF | `.woff` | Web font format |
+
+## Scripts
+
+| Format | Extension | Notes |
+|--------|-----------|-------|
+| JavaScript | `.js` | Classic scripts |
+| ES Module | `.mjs` | ESM scripts (recommended) |
+
+## Data Files
+
+| Format | Extension | Notes |
+|--------|-----------|-------|
+| JSON | `.json` | Structured data |
+| Text | `.txt` | Plain text |
+| CSV | `.csv` | Tabular data (as text) |
+| XML | `.xml` | Markup data (as text) |
+| HTML | `.html` | HTML documents |
+| CSS | `.css` | Stylesheets |
+
+## Shaders
+
+| Format | Extension | Notes |
+|--------|-----------|-------|
+| GLSL | `.glsl` | OpenGL shading language |
+| Vertex Shader | `.vert` | Vertex shader source |
+| Fragment Shader | `.frag` | Fragment shader source |
+
+## Other
+
+| Format | Extension | Notes |
+|--------|-----------|-------|
+| WebAssembly | `.wasm` | Compiled binary modules |
+| Binary | `.bin` | Raw binary data |
+| PLY | `.ply` | 3D Gaussian Splat data |
+
+## See Also
+
+- [Models](models/index.md) - Preparing 3D models for PlayCanvas
+- [Asset Inspectors](/user-manual/editor/assets/inspectors/) - Configure asset properties in the Editor
 
 --------------------------------------------------------------------------------
 
@@ -10321,6 +9623,1300 @@ If you are having trouble applying these adjustments or notice unusual changes i
 ## Customization
 
 In rare cases you may wish to extend the functionality of the editor to add custom behavior for your particular workflow. This can be achieved by using our [Editor API](editor-api).
+
+--------------------------------------------------------------------------------
+
+## Assets
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/
+
+The PlayCanvas Editor provides a complete asset management system for your project. This section covers how to work with assets in the Editor, including importing, organizing, and configuring them.
+
+## What You'll Learn
+
+- **[Assets Panel](asset-panel)** - Navigate and manage your project's assets using the Assets Panel
+- **[Importing Assets](importing)** - Upload and import assets into your project
+- **[Import Pipeline](import-pipeline/)** - Configure how assets are processed during import
+- **[Asset Inspectors](inspectors/)** - Configure asset properties using the Inspector
+- **[Asset Store](asset-store/)** - Browse and import assets from the PlayCanvas Asset Store
+- **[Asset Viewers](viewers)** - Inspect models and textures in dedicated viewer tools
+
+## Overview
+
+Assets in the Editor are managed through the [Assets Panel](asset-panel), which provides a visual interface for:
+
+- Organizing assets into folders
+- Uploading new assets via drag-and-drop
+- Searching and filtering assets
+- Inspecting and editing asset properties
+- Copying assets between projects
+
+When you upload a file, the Editor runs it through the [import pipeline](import-pipeline/) to convert and optimize it for use in your application. The resulting asset can then be configured using the appropriate [asset inspector](inspectors/).
+
+For conceptual information about assets and how to work with them programmatically, see the [Assets](/user-manual/assets/) section in Common Topics.
+
+--------------------------------------------------------------------------------
+
+## Assets Panel
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/asset-panel/
+
+The Assets Panel manages all of the Assets that are available in your project. From here, you can create, upload, delete, inspect and edit any Asset.
+
+[Image: Assets Panel]
+
+## Folder Hierarchy {#folder-hierarchy}
+
+The folder panel allows you to organize your assets into a tree of folders.
+
+To create a new Folder, select the Add Asset (+) button and select 'Folder'. Alternatively, right click the folder where you would like a new folder to be created and select 'New Asset' > 'Folder'.
+
+To rename a folder, double click it in the hierarchy panel and edit the Name field in the Inspector.
+
+To delete a folder, double click it in the hierarchy and hit delete. Alternatively, right click the folder you want to delete and select 'Delete' from the context menu.
+
+Folders can be drag and dropped into each other if you want to reorganize your folder structure.
+
+:::note
+
+Folders are essentially meta assets, exclusively designed to facilitate the organization of assets within the Editor. Folder assets are excluded from builds and are not used when building the folder structure of a published build.
+
+:::
+
+## Creating and Uploading Assets {#creating-and-uploading-assets}
+
+You can create new assets by dragging a file from you computer's file system into the Assets Panel. The Editor will upload and import the asset for you.
+
+You can also create certain assets types using the Add Asset (+) icon.
+
+You can delete assets by selecting them and clicking the Delete Asset icon.
+
+## Editing Assets {#editing-assets}
+
+Certain text-based assets can be opened and edited in the PlayCanvas Script Editor: text, json, shader, html, css and script assets. To do this, simply double click on the asset's thumbnail.
+
+## Inspecting Assets {#inspecting-assets}
+
+To inspect the details of any given asset, select its thumbnail in the Assets Panel. The asset's details will be displayed in the Inspector.
+
+## Filtering {#filtering}
+
+Filter which assets are visible using the filter drop down to select the type of asset to view.
+
+## Searching {#searching}
+
+You can perform a global search for assets in your project using the Search box. Simply start typing into the box and the Editor will show matching results dynamically in the Assets Panel.
+
+**ID** - Specific asset can be found by its unique ID, by simply typing ID in search field it will recognize exact match and only show one asset with that ID.
+
+**RegExp** - It is possible to search using regular expressions. Add `*` at the beginning of search field and type regexp query after. To search for all assets use `*.` (any character) regexp query.
+
+**Tags** - To search by tags and their combinations type tags in square brackets `[ ]`. Simple query operators: AND, OR are allowed by expressing query as array of strings or other arrays with strings. Logic of query is same as for [`findByTag`](https://api.playcanvas.com/engine/classes/AssetRegistry.html#findbytag) from `AssetsRegistry`.
+Here are some examples:
+
+- `[ level-1 ]` - returns all assets that are tagged by `level-1`.
+- `[ level-1, level-2 ]` - returns all assets that are tagged by `level-1 OR level-2`.
+- `[ [ level-1, monster ] ]` - returns all assets that are tagged by `level-1 AND monster`. Notice extra brackets.
+- `[ [ level-1, monster ], [ level-2, monster ] ]` - returns all assets that are tagged by `(level-1 AND monster) OR (level-2 AND monster)`.
+
+## Drag and Drop {#drag-and-drop}
+
+Assets can be moved to different folders by dragging them from the main panel to a folder in the folder hierarchy. Note that assets support multi-selection. Pressing CTRL+A will select all assets in the currently selected folder.
+
+You can also drag Assets from the Asset Panel to highlighted slots in the [Inspector](/user-manual/editor/interface/inspector). Slots in the Inspector will either be asset attributes of components or asset-type script attributes.
+
+You can also drag model, material, and cubemap assets directly into the [Viewport](/user-manual/editor/interface/viewport)
+
+- If you drag a model asset into the Viewport, a new entity will be created with a model component with the model asset assigned. The viewport camera will automatically zoom to the newly created entity.
+- If you drag a material over a particular mesh instance in the Viewport, its material will be switched (as a preview) to the material being dragged. To make the material change stick, simply drop the material.
+- If you drag a cubemap over the background of a scene in the Viewport, the cubemap will be assigned as the skybox cubemap of the scene. This property can also be set in the [Project Settings](/user-manual/editor/interface/settings/rendering/).
+
+## Copy and Paste between Projects {#copy-and-paste-between-projects}
+
+To copy an asset or a selection of assets between projects, select the asset(s) and right-click to bring up the context menu to select 'Copy'. You can also use the hotkey Ctrl/Cmd + C instead if the context menu is not available due to being a read-only project.
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-copy.png" alt="Right click copy menu" width="500" />
+
+In the project that you want to copy the asset(s) to, right click in the assets panel and select 'Paste'. Ctrl/Cmd + V hotkey can be used instead.
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste.png" alt="Right click paste menu" width="500" />
+
+Copy and pasting an asset will also copy its asset dependencies too. For example, here we have a model which references two materials and they reference a set of textures.
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/copy-and-paste-model-with-dependencies.png" alt="Model example" width="100%" />
+
+If you copy and paste just the model asset into a different project, those asset dependencies are copied too.
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-reference-assets.png" alt="Pasted referenced assets" width="100%" />
+
+By default, it is pasted as a flat hierarchy. If you want keep the folder structure, hold Shift when the context menu is opened and an option will appear called 'Paste (keep folders)'. This will attempt to keep the folder structure using the folder you are pasting into as the root folder.
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste-keep-folders.png" alt="Right click paste (keep folders) menu" width="500" />
+
+Will result in the following where the folder structure is preserved:
+
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-assets-keep-folders.png" alt="Pasted referenced assets with folders" width="100%" />
+
+We generally recommend that if you will be using this feature for reusable libraries and assets, to keep it contained to a root level folder that can be easily copied and pasted to other projects. This will keep the folder structure of projects simpler and cleaner.
+
+:::note
+
+Note that copy and pasting assets does not overwrite existing assets with the same name and will create a new asset.
+
+:::
+
+## Checking References {#checking-references}
+
+Sometimes it's useful to know where assets are being used (or referenced) within a particular scene. If the Editor cannot detect any references for an asset, a small dot will be displayed on its thumbnail:
+
+[Image: Unreferenced Asset]
+
+:::warning
+
+Note that the Editor cannot detect references to assets that are made in code. So think carefully before you delete an asset based on this indicator!
+
+:::
+
+If an asset does have references, you can check them via the References content menu item:
+
+[Image: Asset References]
+
+Selecting a reference will load it into the Inspector panel.
+
+--------------------------------------------------------------------------------
+
+## Asset Store
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/asset-store/
+
+The PlayCanvas Asset Store is a library of free assets that you can use in your projects. It contains 3D models, fonts, scripts and more.
+
+## Accessing the Asset Store
+
+You can access the Asset Store from within the Editor by clicking the ASSET STORE button in the top-right of the [Assets Panel](../../interface/assets.md).
+
+[Image: Asset Store Button]
+
+The Asset Store will then open:
+
+[Image: Asset Store]
+
+## Selecting a Store
+
+There are three top-level Stores to choose from:
+
+| Store | Description |
+| ----- | ----------- |
+| PLAYCANVAS | Assets curated and supplied by PlayCanvas and selected partner creators. This store contains: 3D models, fonts, scripts, sky boxes, templates and textures. |
+| SKETCHFAB  | Assets curated and supplied by [Sketchfab](https://sketchfab.com/). This store contains 3D models only. [Learn more](sketchfab) about the Sketchfab Store. |
+| MY ASSETS  | Assets imported by you and stored in your user account. This store is currently in a closed beta. |
+
+## Searching the Store
+
+To search the Store, simply enter a search term in the Search bar at the top. You can then filter and sort the search results using the Search Options:
+
+[Image: Asset Store Search]
+
+## Importing Assets into your Project
+
+Select any store item in the search results to open its details page:
+
+[Image: Asset Store Details]
+
+On the details page you can:
+
+* Read a description of the store item.
+* Inspect the files included in the store item.
+* View statistics related to the store item (file size, last updated date, etc).
+* Preview the item in the Model Viewer (only applies to 3D model assets).
+* View author and license information.
+
+:::note
+
+Please respect the license terms for the store items you use in your projects. For example, the [Oldsmobile Cutlass Supreme Sedan '71](https://sketchfab.com/3d-models/oldsmobile-cutlass-supreme-sedan-71-78f76d386a4341b0b71745bdc50fd5ab) in the screenshot above was authored by [Barbo](https://sketchfab.com/barbo-autos) and has CC BY 4.0 license. This means that you must give the author appropriate credit for using their works.
+
+:::
+
+--------------------------------------------------------------------------------
+
+## Sketchfab
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/asset-store/sketchfab/
+
+The Asset Store is integrated with [Sketchfab](https://sketchfab.com/), the popular online platform for publishing, sharing, and discovering 3D, VR, and AR content. This integration gives you access to thousands of free, high-quality 3D models without having to leave the Editor.
+
+[Image: Sketchfab Store]
+
+## Logging in to Sketchfab
+
+The first time you attempt to import a model from Sketchfab, you will be asked to either sign up or log in to Sketchfab:
+
+[Image: Sketchfab Authentication]
+
+This will take you to `sketchfab.com` to authenticate. Once you are signed in to Sketchfab, you need to accept Sketchfab's authorization request:
+
+[Image: Sketchfab Authorization]
+
+You should then receive a message that you have successfully connected your Sketchfab account to PlayCanvas! 🎉
+
+--------------------------------------------------------------------------------
+
+## Asset Import Pipeline
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline/
+
+Some assets are uploaded in source format and need to be converted into a "target" format before they can be used in a game at runtime. This process is called *Importing*. For example, a 3D model can be uploaded as an FBX file, but must be converted into a PlayCanvas compatible model file before it can be loaded in the game.
+
+Some assets don't need to be imported before they can be used. For example a PNG image can be used as a texture immediately.
+
+## Asset Tasks {#asset-tasks}
+
+When a source asset is uploaded, PlayCanvas starts an Asset Task to perform this import process on our server.
+
+There are a variety of options available to tune the behavior of the import pipeline to suit your needs.
+
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/asset-tasks.png" width="480" />
+
+### Search related assets {#search-related-assets}
+
+When you update an source asset by uploading a new version of the file. There are two possible behaviors for how we update the target assets that are created by the import pipeline.
+
+* If **Search related assets** is enabled, the pipeline will update target assets no matter what folder they are located in.
+* If **Search related assets** is not enabled, the pipeline will only look for the target assets in the same folder as the source asset.
+
+So, if you leave this enabled, you are able to organize your source and target assets into folders and be sure that when you update a source assets it will update all related assets.
+
+### Assets default to preload {#assets-default-to-preload}
+
+Newly created assets will automatically be set to [preload](/user-manual/assets/preloading/) or not depending on whether this option is enabled or not. The exception to this are JavaScript script files which will always be set to preloaded when created.
+
+## Texture Import Settings {#texture-import-settings}
+
+These options only affect the importing of images and textures.
+
+### Texture POT (Power of Two) {#texture-pot-power-of-two}
+
+When this option is enabled textures that are not a power of two will be converted to the nearest power of two resolution when they are imported.
+
+### Create Atlases {#create-atlases}
+
+Images that are uploaded will be imported as a texture atlas instead of a normal texture asset. This is a useful time saver when uploading many spritesheets or UI assets.
+
+## Model Import Settings {#model-import-settings}
+
+These options only affect the importing of model or scene files (e.g. FBX, Collada, obj, etc)
+
+### Preserve material mappings {#preserve-material-mappings}
+
+When a model file is updated or reimported, the Editor will try to preserve the material mappings that were set on it.
+
+### Overwrite Models {#overwrite-models}
+
+When a model file is updated or reimported this option determines whether or not the target model file is overwritten. The default behavior is to overwrite with the new model.
+
+### Overwrite Animations {#overwrite-animations}
+
+When a model file is updated or reimported this option determines whether or not a animations created from the model are overwritten. The default behavior is to overwrite with the new animations.
+
+### Overwrite Materials {#overwrite-materials}
+
+When a model file is updated or reimported this option determines whether or not materials created from the model are overwritten. The default behavior is to leave existing materials.
+
+### Overwrite Textures {#overwrite-textures}
+
+When a model file is updated or reimported this option determines whether or not textures created from the model are overwritten. The default behavior is to overwrite with the new textures.
+
+### Convert to GLB {#convert-to-glb}
+
+Enabled by default on new projects, imported models and animations will create GLB model and animation assets instead of the older, deprecated JSON format.
+
+### Import Hierarchy {#import-hierarchy}
+
+Only available if using [Convert to GLB](#convert-to-glb) option. When a model file is imported, a template asset is created that contains the full hierarchy of the model as entities allowing to you to manipulate them directly in the Editor. See more information about this feature [here](/user-manual/editor/assets/import-pipeline/import-hierarchy/).
+
+### Mesh Compression {#mesh-compression}
+
+Only available if using [Convert to GLB](#convert-to-glb) option. Setting this to a compression format will automatically compress mesh data when importing or re-importing model files. This can drastically reduce the size of GLB files at the cost of some runtime decompression cost.
+
+If using Draco compression, remember to import the Draco WASM module into the project otherwise the models will not load.
+
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/draco-import-button.png" width="480" />
+
+### Create FBX Folder {#create-fbx-folder}
+
+When importing a model file (e.g a GLB or FBX), the Editor will create a folder for the assets created by the import such as render, template and material assets.
+
+If there is already a Model (Source) file in the current folder or a folder with the same name as the file being imported, it will overwrite the existing assets instead of creating a new folder.
+
+## Animation Import Settings {#animation-import-settings}
+
+Please refer to the [Animation section](/user-manual/editor/assets/inspectors/animation/) for more details.
+
+--------------------------------------------------------------------------------
+
+## Import Hierarchy
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline/import-hierarchy/
+
+PlayCanvas supports importing models with their meshes as a hierarchy of entities in the scene. This allows you to edit the different meshes directly in the Editor. Components can be added, attach other entities, move/rotate/scale entities in the hierarchy etc.
+
+[Image: Edit model hierarchy in the Editor]
+
+## How to enable
+
+:::note
+
+This is now enabled by default for new projects.
+
+:::
+
+Open the 'Project Settings'
+
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/project-settings.png" width="480" />
+
+Scroll down to 'Asset Tasks' and enable 'Import Hierarchy':
+
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/asset-tasks.png" width="360" />
+
+## Importing models
+
+A full tutorial on importing your first model and animation can be found [here](/tutorials/importing-first-model-and-animation/).
+
+As an overview, when you drag the model file into the 'Assets Panel':
+
+[Image: Drag Model into Assets Panel]
+
+The following assets will be created when imported:
+
+[Image: Created Assets]
+
+| Asset Type | Description |
+|------------|-------------|
+| **[Materials](/user-manual/editor/assets/inspectors/material/)** | Materials used by the imported model, mapped to the mesh instance. |
+| **[Textures](/user-manual/editor/assets/inspectors/texture/)** | Embedded textures in the model file (if any). These will automatically be mapped to the associated materials. |
+| **[Template](/user-manual/editor/templates/)** | The template stores the scene hierarchy of the model. Create an instance of the template to bring the model into the scene. |
+| **Container** | The GLB that stores all the meshes of the model. |
+| **Render** | Render assets reference a mesh in the container asset and are used by the [Render Component](https://api.playcanvas.com/engine/classes/RenderComponent.html) to render the mesh in the scene. They can also be used with the [Collision Component](https://api.playcanvas.com/engine/classes/CollisionComponent.html) as a mesh for physics. |
+
+## Updating models
+
+As the hierarchy is created as part of a template, when a model is updated it may affect the template instances in the scenes.
+
+Added components to entities in the template will be kept during the update unless the mesh instance that the entity represents no longer exists in the updated model.
+
+The exception to this is if a script component is added to an entity in the template and the mesh instance it represents is no longer part of the updated model, it will be moved under the root entity in the template so there is no data loss. Any entities that were under it before the update will be kept as well.
+
+How the Editor decides what is a new or removed mesh instance is done by the following:
+
+- If in the update, a mesh instance's name and its parent mesh's instance name matches an existing mesh instance and its parent, they are assumed to be the same mesh instance in the hierarchy and is updated.
+- If in the update, a mesh instance's name does not exist, it's assumed to be a new mesh instance and a new entity is added to the template.
+- If in the update, an existing entity of the template does not have a matching mesh instance given the rules above, it's assumed that this mesh instance has been removed and the entity will be removed from the template. The exception being mentioned above, if there was a script component added to it on the template, those entities are preserved on the root. If there were no script components added, those are deleted from the template.
+
+--------------------------------------------------------------------------------
+
+## Uploading and Importing
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/importing/
+
+## Creating New Assets
+
+To upload an asset to PlayCanvas, follow these steps:
+
+### In the Editor
+
+* Drag and drop your asset file into the Asset panel in the Editor window.
+* A progress bar will appear along the bottom.
+* When the progress bar disappears, your new Asset will appear in the Asset panel.
+
+Now, when you attempt to choose an asset via the asset picker attribute control (for the Model component or the Animation component for example), your asset will be available for assignment.
+
+:::note
+
+There is a file size limit of 340MB.
+
+:::
+
+## Updating Existing Assets
+
+To update an Asset that you have already uploaded. Upload the asset again, ensuring that you have the same filename as the existing asset. PlayCanvas will update the existing asset with the new upload.
+
+## Migrating from JSON to glTF GLB
+
+As of Wed 14 Oct 2020, PlayCanvas will be creating GLBs for model and animation imports instead of JSON. This gives a large reduction in parsing times which means lower load times and more responsive applications.
+
+For projects created prior to this date, they will still create JSON assets by default for consistency.
+
+If you would like to migrate assets to the GLB format, please go to 'Project Settings'.
+
+<img loading="lazy" src="/img/user-manual/assets/importing/project-settings.png" alt="Project settings" width="300" />
+
+Open 'Asset Tasks' and tick 'Convert to GLB'.
+
+<img loading="lazy" src="/img/user-manual/assets/importing/asset-tasks.png" alt="Asset tasks settings" width="400" />
+
+And finally reimport the model and/or animation file (via drag and drop or the 'Upload' menu option) to create the GLB asset.
+
+<img loading="lazy" src="/img/user-manual/assets/importing/drag-and-drop.gif" alt="Drag and drop file" />
+
+Once created, this can be referenced to Entities in place of the existing JSON asset.
+
+--------------------------------------------------------------------------------
+
+## Asset Inspectors
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/
+
+When you select an asset in the [Assets Panel](/user-manual/editor/assets/asset-panel), its properties are displayed in the Inspector. Each asset type has its own set of configurable properties.
+
+| Type                             | Imported From                    | Resource Extensions              | Description                        |
+| -------------------------------- | -------------------------------- | -------------------------------- | ---------------------------------- |
+| [`animation`](animation)         | `.glb`, `.fbx`                   | `.glb`                           | Animation keyframe data            |
+| [`audio`](audio)                 | `.mp3`, `.wav`, `.ogg`           | `.mp3`, `.wav`, `.ogg`           | Sound data                         |
+| `binary`                         | `.bin`                           | `.bin`                           | Binary data                        |
+| `bundle`                         | Created in the Editor            | `.tar`                           | Bundled assets                     |
+| [`css`](css)                     | `.css`                           | `.css`                           | Stylesheets for HTML               |
+| [`cubemap`](cubemap)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Environment lighting data          |
+| [`font`](font)                   | `.ttf`, `.woff`                  | `.json`, `.png`                  | Font data for rendering text       |
+| [`gsplat`](gsplat)               | `.ply`                           | `.ply`                           | 3D Gaussian Splat data             |
+| [`html`](html)                   | `.html`                          | `.html`                          | HTML documents                     |
+| [`json`](json)                   | `.json`                          | `.json`                          | JSON documents                     |
+| [`material`](material)           | `.glb`, `.fbx`                   | None                             | Material definitions for 3D models |
+| [`render`](render)               | `.glb`, `.fbx`                   | `.glb`                           | 3D mesh data                       |
+| [`script`](../../scripting/index.md) | `.js`, `.mjs`                | `.js`, `.mjs`                    | Scripts                            |
+| [`shader`](shader)               | `.glsl`, `.vert`, `.frag`        | `.glsl`, `.vert`, `.frag`        | Custom shaders for rendering       |
+| [`sprite`](sprite)               | Created in the Editor            | None                             | 2D images for UIs or textures      |
+| [`template`](template)           | `.glb`                           | None                             | Templates for entity hierarchy     |
+| [`text`](text)                   | `.txt`                           | `.txt`                           | Text documents                     |
+| [`texture-atlas`](texture-atlas) | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Sprite sheet image data            |
+| [`texture`](texture)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Image data for 3D models or UIs    |
+| [`wasm`](wasm)                   | `.wasm`                          | `.wasm`                          | WebAssembly modules                |
+
+--------------------------------------------------------------------------------
+
+## Animation
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation/
+
+An Animation asset is used to play a single animation on a 3D model. Animations are imported by uploading 3D scenes (such as FBX files) which contain animation data. The animation data is extracted from the uploaded file by the [asset pipeline](/user-manual/glossary#asset-pipeline) and a [Target Asset](/user-manual/glossary#target-asset) is created to use in game.
+
+## Animation Preview
+
+The inspector has a viewer that can be used to preview the animation with any Template or Model asset. This is useful if you have a single animation that can be applied to different character rigs.
+
+[Image: Asset Inspector Preview]
+
+There is also a viewer in the [Anim State Graph Editor](/user-manual/animation/anim-state-graph-assets/) when you select a state in the graph. When selected, all Entities in the scene that are using the graph will show in a list and can be selected for preview.
+
+[Image: Anim State Graph Preview]
+
+## Animation Import Settings
+
+:::warning
+
+This is an experimental feature. Please let us know your feedback in the [forums](https://forum.playcanvas.com/).
+
+:::
+
+When importing animations, there are settings that can be tweaked to adjust the animation quality against the file size.
+
+They can be found in the Project Settings under Asset Tasks.
+
+[Image: Animation Import Settings]
+
+### Naming Strategy
+
+Only available for GLB export format. When importing an animation, the generated asset name can either be set from the 'Take Name' in the animation file, or use the animation filename instead.
+
+This is useful with assets that are brought/taken from a store such as [Mixamo](https://www.mixamo.com/) where all the take names are 'mixamo.com' and using the filename as the asset name is clearer.
+
+### Sample rate
+
+Available for both JSON and GLB export formats. The higher the rate, the higher detail and fidelity the animation at the cost of size. If you would like to keep the keyframes that have been set and defined in the original animation, select Disabled.
+
+### Curve tolerance
+
+Available for both JSON and GLB export formats. Curve tolerance controls a lossy compression setting of the animation import with the idea that a saving in file size can be made with little or no noticeable difference.
+
+This is a value between 0 and 100 where the higher number, the smaller the file size but at cost of losing information in the animation. 0 would be no compression and 100 would lose all information.
+
+1 or 2 is considered to be good starting point.
+
+### Cubic curves
+
+Only available for GLB export formats. Enable this option if you wish to keep the easing in the animation curves from the original animation. However, this will mean that the file will have extra information per keyframe and increase the size.
+
+If enabling this option, it is recommended that Sample Rate is disabled and Curve Tolerance is set to 0.
+
+--------------------------------------------------------------------------------
+
+## Audio
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio/
+
+Audio assets are sound files which can be played back using the [Sound component](/user-manual/editor/scenes/components/sound/).
+
+Any audio format that is supported by the web-browser is supported by PlayCanvas. No processing is done to the audio file on import.
+
+Note that not all formats are supported in all browsers. Currently, the most widely supported format is [MP3](https://caniuse.com/mp3).
+
+--------------------------------------------------------------------------------
+
+## CSS
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/css/
+
+A CSS asset contains CSS code. You can create a new CSS asset in the Editor or by uploading a file with a .css extension.
+
+To edit a CSS asset, right click on it in the Editor and select Edit.
+
+The loaded CSS asset resource is just a string. You can use the string as you like. A common way to add the loaded CSS string to the document is the following:
+
+```javascript
+// get asset from registry by id
+const asset = app.assets.get(32);
+
+// create element
+const style = document.createElement('style');
+style.type = "text/css";
+style.textContent = asset.resource || '';
+document.head.appendChild(style);
+
+// update the style when the asset's resource loads/changes
+asset.on('load', function() {
+    style.innerHTML = asset.resource;
+});
+
+// make sure assets loads
+app.assets.load(asset);
+```
+
+--------------------------------------------------------------------------------
+
+## Cubemap
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/cubemap/
+
+Cubemaps are a special type of texture asset. They are formed from 6 texture assets where each texture represents the face of a cube. They typically have two uses:
+
+1. A cubemap can define your scene's sky box. A sky box contains imagery of the distant visuals of your scene such as hills, mountains, the sky and so on.
+2. A cubemap can add reflections to any material. Imagine a shiny, chrome ball bearing in your scene. The ball reflects the surrounding scene. For open environments, you would normally set the scene's sky box cubemap as the cubemap on a reflective object's materials.
+
+[Interactive Demo]
+
+## Importing Cubemap Textures
+
+A cubemap is an asset that requires six texture assets as input. Therefore, in order to fully configure a new cubemap asset, you must first import 6 images into your project. To do this, simply drag 6 images from your file system into the Assets panel (or select the Asset panel's Upload option). Once uploaded and processed, the images will appear in the Assets panel where they are now ready to be assigned to a cubemap asset.
+
+## Creating Cubemaps
+
+You can create new cubemap assets directly from the PlayCanvas Editor interface. Use the Create Asset menu in the Asset panel.
+
+[Image: Cubemap Creation]
+
+This creates a new cubemap Asset and opens up the Cubemap Editor on the right-hand side of the screen.
+
+## Selecting Cubemaps
+
+To select a cubemap in order to edit it, select it in the Asset Panel. The easiest way to do this is to select the cubemap filter to narrow down the options for selection. Cubemaps are identified by cross-shaped thumbnails:
+
+[Image: Cubemap Thumbnails]
+
+When a cubemap is selected, it will be loaded into the Inspector panel on the right of the Editor.
+
+## Cubemap Properties
+
+Once you have a cubemap selected, you can edit its properties.
+
+[Image: Cubemap Properties]
+
+### Filtering
+
+This setting determines how the pixels of the cubemaps are interpolated as they are magnified. Magnification is when the texel to screen pixel ratio is less than one. Linear gives the best results visually, followed by Nearest.
+
+### Anisotropy
+
+Anisotropy is a value between 1 and 16 that gives control over the quality of texture sampling as the camera's view vector becomes more closely aligned with the plane of a textured surface.
+
+## Assigning Textures to Cubemaps
+
+[Image: Cubemap Preview]
+
+The cubemap Preview panel displays the six faces of a cubemap flattened into the shape of a cross. Imagine a cardboard box that has been unfolded to lay flat. To construct a cubemap, simply drag texture assets from the Assets panel to the face slots in the Preview panel. You can also select a cubemap face slot and then select a texture asset from the Assets panel.
+
+Cubemap faces must be:
+
+- Square (the same resolution in width and height)
+- Power of two in dimension (1x1, 2x2, 4x4, 8x8, 16x16, 32x32 and so on)
+- All faces must be the same resolution
+
+To assist you, the Editor attempts to figure out how to auto-assign textures to faces intelligently. It does this when you drag the first face to a slot by trying to match commonly used naming conventions for cubemap faces, such as:
+
+- negx, posx, negy, posy, negz, posz
+- left, right, top|up, bottom|down, front|forward, back|backward
+- 0-5|1-6
+
+An example of a texture set that would match is:
+
+- face_posx.jpg
+- face_negx.jpg
+- face_posy.jpg
+- face_negy.jpg
+- face_posz.jpg
+- face_negz.jpg
+
+## Image Based Lighting
+
+This technique allows you to use Environment Map such as CubeMap in order to simulate physically based ambient light and reflection on materials. [Read more](/user-manual/graphics/physical-rendering/image-based-lighting/) on how it works and how to author CubeMaps for IBL.
+
+## Assigning Cubemaps to Materials
+
+The default Phong and Physical material types both have reflection properties. If you expand the Environment property section, you see the following:
+
+[Image: Cubemap Material]
+
+You can click the Empty slot to select a cubemap or drag and drop a cubemap asset from the asset panel into the cubemap slot.
+
+:::note
+
+A Physical material will use the scene's skybox as a default environment map if it is assigned and prefiltered.
+
+:::
+
+## Converting Equirectangular or Octahedral HDRIs to Cubemaps
+
+Environment textures often are in a equirectangular or Octahedral format ([Poly Haven](https://polyhaven.com/hdris) for example) and will need to be converted to cubemaps before they can be used in PlayCanvas.
+
+This can be done via [PlayCanvas Texture Tool](https://playcanvas.com/texture-tool), available in the browser.
+
+1. Download the HDR version of environment texture and press 'Add Files' button in PlayCanvas Texture Tool to load the file.
+2. Select the loaded texture on the left.
+3. Under 'Reproject' section, change the 'source' to the format of texture.
+4. Change 'target' to 'cube'.
+5. Change 'encoding' to the desired format:
+    - 'rgbe' for exporting to 'HDR'
+    - 'rgbm' for exporting to 'PNG'
+6. Set the width to the desired size per face texture. 512 is a good balance between quality and file size.
+7. Press 'Reproject' button to do the conversion to a cubemap.
+8. Press 'Export to PNG' or 'Export to HDR' to download the 6 individual cubemap face textures that are ready to be uploaded to PlayCanvas.
+
+[Image: PlayCanvas Texture Tool]
+
+Other tools that can also do this conversion include:
+
+- Mateusz Wisniowski's [HDRI-to-CubeMap tool](https://matheowis.github.io/HDRI-to-CubeMap/) (browser)
+- [cmftStudio](https://github.com/dariomanesku/cmftStudio) (desktop) with [guide](https://jamie-white.com/webgl/equirectangular-hdr-image-to-face-list/)
+
+--------------------------------------------------------------------------------
+
+## Font
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/font/
+
+A Font asset contains an image with all the characters of the font that the user chose to include, and data related to how each character should be displayed. Font assets are used to render text using an [Element](/user-manual/editor/scenes/components/element/) component of type Text. To render text, add an Element component to an Entity set its type to Text and drag and drop the Font asset to the Font slot of the Element component.
+
+You can create a Font asset by uploading a font file ending in `.ttf`, `.ttc`, `.otf` or `.dfont`. We convert the uploaded font to a multi-channel signed distance field. This makes a font keep its details at various sizes so you only need to upload one font and use the same one for every size you want to display. The technique might work better for some fonts than others.
+
+Here are the properties that you can edit for a Font asset in the Editor:
+
+[Image: Font Asset]
+
+## Properties
+
+### Intensity
+
+Intensity is used to boost the value read from the signed distance field, 0 is no boost, 1 is max boost. This can be useful if the font does not render with clean smooth edges with the default intensity or if you are rendering the font at small font sizes.
+
+## Character Presets
+
+Click on a preset to include its characters to the Font asset. Clicking on a preset will add the characters to the existing selection.
+
+## Custom Character Range
+
+If you want to include a specific range of characters to the Font asset, enter the range in Hex and click the Plus icon to add the range to the character selection.
+
+## Font
+
+### Characters
+
+The characters that should be included in the Font asset. If you only need numbers for example, there is no need to include all the other characters of the Font. This is useful to keep Font assets small. Please note that some characters may not exist in the uploaded font.
+
+## Process Font
+
+Click on the Process Font button after you make changes to the Font asset in order to generate a new version.
+
+--------------------------------------------------------------------------------
+
+## GSplat
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/gsplat/
+
+A GSplat asset contains 3D Gaussian Splat data. PlayCanvas supports the import of GSplat data from [PLY](https://en.wikipedia.org/wiki/PLY_(file_format)) files.
+
+## Asset Inspector {#asset-inspector}
+
+You can select a GSplat asset in the [Assets Panel](/user-manual/editor/interface/assets) and view it in the [Inspector](/user-manual/editor/interface/inspector).
+
+[Image: GSplat Asset Inspector]
+
+The META section lists some key properties of the data.
+
+| Property | Description |
+| -------- | ----------- |
+| Format   | PLY supports `ascii 1.0`, `binary_little_endian 1.0`, and `binary_big_endian 1.0` |
+| Splats   | The total number of Gaussians stored in the PLY file |
+| Properties | The list of per-Gaussian properties stored in the PLY file (`x`, `y`, `z`, `opacity` and so on) |
+
+--------------------------------------------------------------------------------
+
+## HTML
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/html/
+
+An HTML asset contains HTML code. The code can either be a full HTML page or just partial HTML. You can create a new HTML asset in the Editor or by uploading a file with an .html extension.
+
+To edit an HTML asset, right click on it in the Editor and select Edit.
+
+The loaded HTML asset is just a string. You can use that string as you like. A common way to add HTML to the document is the following:
+
+```javascript
+// get asset from registry by id
+const asset = app.assets.get(32);
+
+// create element
+const div = document.createElement('div');
+div.innerHTML = asset.resource || '';
+document.body.appendChild(div);
+
+// when asset resource loads/changes,
+// update html of element
+asset.on('load', function() {
+    div.innerHTML = asset.resource;
+});
+
+// make sure assets loads
+app.assets.load(asset);
+```
+
+--------------------------------------------------------------------------------
+
+## JSON
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/json/
+
+[JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
+
+In PlayCanvas, JSON assets are used to store various types of structured data. Some example use cases are:
+
+- Configuration files
+- Data for procedural generation
+- Storing game settings
+- Level design data
+
+## Accessing JSON Data in Scripts
+
+To access data from a JSON asset in a script:
+
+1. Add the JSON asset to the script as an attribute.
+2. Access the JSON asset's resource which is the object parsed from the JSON data.
+
+Example:
+
+--------------------------------------------------------------------------------
+
+## Material
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/material/
+
+Every surface on a 3D model is rendered using a material. The material defines the properties of that surface, such as its color, shininess, bumpiness.
+
+In PlayCanvas, a material is an Asset type which collects all these properties together. By default, it represents a Physical material. This exposes the fundamental properties that can be used to create many different types of visual effects, from smooth plastic, to rough wood, or scratched metal.
+
+We also support our old Phong Material type.
+
+## Importing Materials {#importing-materials}
+
+Materials are imported automatically when you upload a 3D model (e.g. FBX or COLLADA) file into PlayCanvas. Materials will be generated with the same properties as they exist in your 3D modelling tool. If you upload using embedded media (FBX only) all the relevant texture maps will be automatically set up for you.
+
+## Creating New Materials {#creating-new-materials}
+
+You can create new materials directly from the PlayCanvas Editor interface.
+
+[Image: Create Material]
+
+This creates a new material Asset and opens up the material inspector on the right-hand side of the screen.
+
+## Selecting a Material {#selecting-a-material}
+
+[Image: Model Inspector]
+
+In order to edit a material, first you must select it. This will bring up the material inspector.
+
+You can select a material in the asset panel. You can also select materials from the model inspector or from the model component.
+
+Generally, clicking on a material preview icon will take you to the material inspector.
+
+## Assigning Materials {#assigning-materials}
+
+[Image: Model Component]
+
+You can modify which materials are assigned to where on a model asset or you can customize the materials of a particular Entity that has a model component.
+
+When you select an Entity with a model component you will see two buttons - Asset Materials and Entity Materials.
+
+[Image: Model Inspector Free Slot]
+
+Clicking on Asset Materials will select the model asset. You can also select the model asset from the asset panel. The model inspector will show the meshes of model and which material is assigned to each. You can clear a material using the X button, and click the empty slot to assign a new material.
+
+You can also drag and drop material Assets from the asset panel onto the material slot.
+
+Clicking on Entity Materials will first ask you to select the mesh instance for which you want to customize the material:
+
+[Image: Select Mesh Instance]
+
+After selecting the mesh instance a new material picker will appear in the model component:
+
+[Image: Selected Mesh Instance]
+
+Then you can select a different material for this particular Entity:
+
+[Image: Select Different Material]
+
+## Editing a Material {#editing-a-material}
+
+[Image: Material Inspector]
+
+Once you have a material selected you can edit its properties.
+
+## Material Maps {#material-maps}
+
+[Image: Material Map Slot]
+
+Much of editing a material involves creating and assigning textures maps to the various slots detailed on the pages above.
+
+There are a few options that are available on most texture map slots for a material.
+
+### Texture Asset {#texture-asset}
+
+First is the texture asset. Upload an image to PlayCanvas and we'll create a texture asset for you. You can assign this to a slot on a material.
+
+### Color or Tint Color {#color-or-tint-color}
+
+Some map slots can be a flat color instead of a texture map. Some slots also support a tint color if a texture is also assigned. If enabled the tint color is multiplied by the color in the texture map slot.
+
+### Channel {#channel}
+
+Some maps only require a single grayscale value e.g. 0.0 -> 1.0. In this case it is possible to select which channel of the texture to use. **RGB** means that all three channels are used. **R**, **G** or **B** means that only the red, green or blue channel will be used.
+
+### Offset & Tiling
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/offset-tiling.jpg" width="300" />
+
+| Property          | Description |
+|-------------------|-------------|
+| Apply to all Maps | Uncheck this to apply offset and tiling values to individual maps. |
+| Offset            | The offset in U and V to apply to the first UV channel referenced by maps in this material. |
+| Tiling            | The scale in U and V to apply to the first UV channel referenced by maps in this material. |
+
+### Ambient
+
+Ambient properties determine how the material appears in ambient light.
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/ambient.jpg" width="300" />
+
+| Property   | Description |
+|------------|-------------|
+| Tint       | Check this to multiply the scene's global ambient color with a material specific color. |
+| Color      | The tint color to multiply the scene's global ambient color. |
+| AO Texture | An ambient occlusion map containing pre-baked ambient occlusion. |
+
+### Diffuse
+
+Diffuse properties define how a material reflects diffuse light emitted by dynamic light sources in the scene.
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/diffuse.jpg" width="300" />
+
+| Property   | Description |
+|------------|-------------|
+| Texture    | The diffuse map that specifies the per-pixel diffuse material color. If no diffuse map is set, the diffuse color is used instead. |
+| Tint       | Check this to modulate the material's diffuse map with a material specific diffuse color. |
+| Color      | If no diffuse map is set, this is the diffuse color of the material. If a diffuse map is set and tint is enabled, this color modulates the material's diffuse map. |
+
+### Specular
+
+Specular properties define the color of the specular highlights, i.e. the shininess.
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/specular.jpg" width="300" />
+
+| Property      | Description |
+|---------------|-------------|
+| Use Metalness | Toggle between specular and metalness workflow. |
+| Specular Map  | The specular map that specifies the per-pixel specular color. If no specular map is set, the specular color is used instead. |
+| Tint          | Check this to modulate the material's specular map with a material specific specular color. |
+| Color         | If no specular map is set, this is the specular color of the material. If a specular map is set and tint is enabled, this color modulates the material's specular map. |
+| Metalness Map | [Only when using metalness] This map specifies per-pixel metalness values. A value of 1 is metal and a value of 0 is non-metal. |
+| Gloss Map     | The gloss map that specifies a per-pixel shininess value. The gloss map is modulated by the shininess property. |
+| Glossiness    | A value determining the smoothness of a surface. For smaller shininess values, a surface is rougher and specular highlights will be broader. For larger shininess values, a surface is smoother and will exhibit more concentrated specular highlights (as the surface is polished and shiny). |
+
+### Emissive
+
+Emissive properties control how the material emits light (as opposed to reflecting light).
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/emissive.jpg" width="300" />
+
+| Property   | Description |
+|------------|-------------|
+| Texture    | The emissive map that specifies the per-pixel emissive color. If no emissive map is set, the emissive color is used instead. |
+| Tint       | Check this to modulate the material's emissive map with a material specific emissive color. |
+| Color      | If no emissive map is set, this is the emissive color of the material. If an emissive map is set and tint is enabled, this color modulates the material's emissive map. |
+| Intensity  | A multiplier for emissive color that can achieve overbright effects for exceptionally bright emissive materials. |
+
+### Opacity
+
+Opacity sets the transparency level.
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/opacity.jpg" width="300" />
+
+| Property   | Description |
+|------------|-------------|
+| Texture    | The opacity map that specifies the per-pixel opacity. The opacity map is modulated by the 'Amount' property. |
+| Intensity  | The opacity of the material. This is a value between 0 (completely transparent) and 1 (completely opaque. It defaults to 1. |
+
+### Normals
+
+Use this to specify normal maps (these determine bumpiness - note you have to use normal maps in PlayCanvas, not height maps).
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/normals.jpg" width="300" />
+
+| Property   | Description |
+|------------|-------------|
+| Bumpiness  | The strength of the applied normal map. This is a value between 0 (the normal map has no effect) and 2 (the effect of the normal map is exaggerated). It defaults to 1. |
+| Texture    | The normal map that specifies the per-pixel surface normals. The normal map is modulated by the 'Bumpiness' property. |
+
+### Parallax
+
+A parallax map gives further realism to a normal map by giving the illusion of depth to a surface. Note that parallax options are only enabled if you have set a normal map on the material.
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/parallax.jpg" width="300" />
+
+| Property    | Description |
+|-------------|-------------|
+| Height Map  | The height map that specifies the per-pixel strength of the parallax effect. White is full height and black is zero height. |
+| Strength    | The strength of a parallax effect (a value between 0 and 2, defaulting to 1). |
+
+### Environment
+
+Environment properties determine how a material reflects the environment.
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/environment.jpg" width="300" />
+
+| Property            | Description |
+|---------------------|-------------|
+| Sphere Map          | A sphere map texture asset that approximates environment reflection. If a sphere map is set, the Cube Map property will be hidden (since these properties are mutually exclusive). |
+| Cube Map            | A cube map texture asset that approximates environment reflection (with greater accuracy than is possible with a sphere map). If a cube map is set, the Sphere Map property will be hidden (since these properties are mutually exclusive). |
+| Reflectivity        | A factor to determine what portion of light is reflected from the material. This value defaults to 1 (full reflectivity). |
+| Refraction          | A factor to determine what portion of light passes through the material. |
+| Index of Refraction | Determines the amount of distortion of light passing through the material. |
+
+### Light Map
+
+Light maps contain pre-baked diffuse lighting. Using light maps is considered an optimization in that runtime dynamic lighting calculations can be pre-calculated.
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/lightmap.jpg" width="300" />
+
+| Property   | Description |
+|------------|-------------|
+| Texture    | The lightmap texture that contains pre-baked diffuse lighting. The lightmap requires the material to be applied to a mesh that has two UV sets. The lightmap uses the second set of UVs. |
+
+### Other Render States
+
+Other Render States gives additional controls over how a mesh is rendered with the specified material.
+
+<img loading="lazy" src="/img/user-manual/assets/types/material/other.jpg" width="300" />
+
+| Property        | Description |
+|-----------------|-------------|
+| Depth Test      | If checked, when a mesh with the material is rendered, a per pixel check is performed to determine if the pixel passes the engine's depth test. By default, the test is that the pixel must have a z depth less than or equal to whatever is already in the depth buffer. In other words, the mesh is only visible if nothing is in front of it. If unchecked, the mesh is rendered regardless of what is already in the depth buffer. Defaults to on. |
+| Depth Write     | If checked, when a mesh with the material is rendered, its depth information is written to the depth buffer. This ensures that when subsequent meshes are rendered, they can be successfully depth tested against meshes rendered with this material. Defaults to on. |
+| Cull            | Options are: <ul><li>None: Both front faces and back faces are rendered.</li><li>Front Faces: front faces are rendered and back faces are not.</li><li>Back Faces: back faces are rendered and front faces are not. This is the default.</li></ul> PlayCanvas dictates that a counter-clockwise vertex winding specifies a front face triangle. Note that backface culling is often good for performance because backface pixels are often overwritten (for convex meshes) which can result in redundant filling of pixels. |
+| Blend Type      | Options are: <ul><li>None: The mesh is opaque. This is the default.</li><li>Normal: The mesh is transparent, like stained glass.</li><li>Additive: The mesh color is added to whatever has already been rendered to the frame buffer.</li><li>Pre-multiply: Like 'Normal' blending except it is assumed that the color of the mesh being rendered with this material has already been modulated by its alpha value.</li><li>Multiply: When rendered, the mesh color is multiplied by whatever has already been rendered to the frame buffer.</li></ul> |
+| Shadow Sampling | Options are: <ul><li>Hard</li><li>PCF 3x3</li></ul> |
+
+--------------------------------------------------------------------------------
+
+## Render
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/render/
+
+The Render Asset type in PlayCanvas is a crucial component for defining the appearance of 3D models in the scene. It involves mesh data and materials that dictate how objects are rendered in the 3D environment.
+
+Render assets are primarily used for:
+
+- Defining the shape and structure of 3D models.
+- Applying materials to models.
+
+--------------------------------------------------------------------------------
+
+## Shader
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/shader/
+
+A shader asset contains GLSL code. You can create a new Shader asset by clicking New Shader in the Asset Panel in the Editor or by uploading a file with an extension of ```.vert```, ```.frag``` or ```.glsl```.
+
+To edit a Shader asset, right click on it in the Editor and select Edit. Here's an example on using Shader assets to create a custom material.
+
+```javascript
+const vertexShader = this.app.assets.find('my_vertex_shader');
+const fragmentShader = this.app.assets.find('my_fragment_shader');
+const shaderDefinition = {
+    attributes: {
+        aPosition: pc.SEMANTIC_POSITION,
+        aUv0: pc.SEMANTIC_TEXCOORD0
+    },
+    vshader: vertexShader.resource,
+    fshader: fragmentShader.resource
+};
+
+const shader = new pc.Shader(this.app.graphicsDevice, shaderDefinition);
+const material = new pc.Material();
+material.setShader(shader);
+```
+
+--------------------------------------------------------------------------------
+
+## Sprite
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/sprite/
+
+A Sprite is a 2D graphic that can be rendered into a scene. A Sprite Asset is a reference to a [Texture Atlas](/user-manual/editor/assets/inspectors/texture-atlas) and a sequence of frames from that atlas. In this way a sprite can either represent a single image (taken out of the atlas) or a flip-book style animation (multiple frames from the atlas).
+
+## Properties
+
+[Image: Sprites]
+
+### Pixels Per Unit
+
+The number of pixels in the sprite image that maps to 1 Unit in the PlayCanvas scene. e.g If `pixelsPerUnit` is 1 and the sprite is 32x32. Then it will be 32 units across and high when rendered in the scene. By default a sprite with the *Simple* render mode is created with `pixelsPerUnit` set to 100. This means that a 100x100 sprite will be 1 unit wide/high in the scene.
+
+If you create a *Sliced* sprite, by default it will be created with a `pixelsPerUnit` value of 1. Because these sprites are usually used as part of a Screen Component for building user interfaces, 1 sprite pixel should map to 1 screen pixel.
+
+### Render Mode
+
+* Simple - the sprite does not use the border values
+* Sliced - the sprite uses the border values to perform [9-sliced](/user-manual/2D/slicing) rendering by stretching.
+* Tiled - the sprite uses the border values to perform [9-sliced](/user-manual/2D/slicing) rendering by tiling.
+
+### Texture Atlas
+
+The Texture Atlas asset that the sprite references
+
+--------------------------------------------------------------------------------
+
+## Template
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/template/
+
+A Template (also called a Prefab) is an Asset that contains a piece of an Entity hierarchy. It has a root Entity and can have any number of children. A Template is a reusable Entity that you can instantiate dynamically at runtime or place multiple instances of it in your Scene. When you change the Template Asset all instances of the Template will also change.
+
+For more information about working with Templates see [here](/user-manual/editor/templates/).
+
+--------------------------------------------------------------------------------
+
+## Text
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/text/
+
+The Text Asset type in PlayCanvas is used for storing plain text data. It's versatile and can be used for various purposes such as storing dialogue, configuration data, or any other textual information.
+
+## Accessing Text Data in Scripts
+
+To access data from a Text Asset in a script:
+
+1. Add the Text Asset to the script as an attribute.
+2. Access the Text asset's resource which is the string parsed from the text file.
+
+Example:
+
+--------------------------------------------------------------------------------
+
+## Texture Atlas
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture-atlas/
+
+[Image: Texture Atlas]
+
+A Texture Atlas asset is a texture asset with additional data which describes 'Frames' inside the texture. Frames are regions defined in the texture as a rectangle with a 'pivot' point which sets the positional and rotational center of the frame.
+
+Texture Atlases are created by right-clicking on a regular Texture Asset and selecting **Create Atlas**. Or by changing the default asset settings to enable [Create Atlases](/user-manual/editor/interface/settings/asset-import/)
+
+The Texture Atlas is used in combination with the [Sprite Asset](/user-manual/editor/assets/inspectors/sprite) to render 2D graphics.
+
+## Properties
+
+### Frames
+
+The Frames of a texture atlas are keyed by a unique value, usually an integer string. The format of a frame is:
+
+```javascript
+{
+    rect: [0, 0, 0, 0],  // u,v,width,height - width and height in pixels
+    pivot: [0, 0],       // x,y - as a proportion 0-1
+    border: [0, 0, 0, 0] // left, bottom, right - top in pixels
+}
+```
+
+### Texture Properties
+
+In addition to frame data the Texture Atlas contains the properties as a [texture asset](/user-manual/editor/assets/inspectors/texture).
+
+--------------------------------------------------------------------------------
+
+## Texture
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture/
+
+A texture is an image that can be assigned to a [material](/user-manual/editor/assets/inspectors/material) and then applied to a graphical primitive.
+
+## Importing Textures
+
+There are 3 ways you can import texture assets into PlayCanvas:
+
+1. Drag and drop images into the Assets panel.
+2. Select 'Upload' from the context menu in the Assets panel and select an image using the file browser.
+3. Import an FBX file that embeds textures.
+
+Supported image formats are:
+
+* JPG
+* PNG
+* AVIF
+* WEBP
+* GIF
+* TGA
+* BMP
+* TIF
+* HDR
+* EXR
+
+Imported JPG, PNG, AVIF, WebP and GIF files remain in their original format.
+
+GIF, TGA, BMP and TIF image types will be converted to JPG or PNG on import. If the imported image has transparency, it will be converted to PNG. Otherwise, it will be converted to JPG.
+
+HDR and EXR are [high dynamic range formats](https://en.wikipedia.org/wiki/High-dynamic-range_imaging) formats. Images of these types are converted to PNG on import and marked as being stored in RGBM format. RGBM essentially stores a multiplier for RGB values in the PNG's alpha channel, enabling the compression of an HDR format into a low dynamic range format.
+
+By default, imported images will be resized to the nearest power of two. For example, an image that is 323x414 will be resized to 256x512 on import. This is done because the graphics engine cannot utilize mipmapping with non-power of two textures. However, this behavior can be overridden by disabling the 'Textures POT' setting in the Asset Tasks panel before importing a non-power of two texture.
+
+## Texture Properties
+
+Selecting a texture's thumbnail in the Assets panel will load it into the Inspector panel. Note that you can multi-select textures and edit the whole selection simultaneously in the Inspector.
+
+A texture shares the standard set of asset properties (ID, name, tags and so on). But it also has some texture-specific properties.
+
+[Image: Texture Properties]
+
+### Texture Filtering
+
+Texture filtering gives control over how the color of a texture mapped pixel is calculated. 'Point' applies no filtering whereas 'Linear' will interpolate the color of a texel with those of its neighbors. This produces better visual results, particularly as a texture is minimized (where the texture occupies fewer pixels on the screen than it has texels).
+
+### Anisotropy
+
+When textures are viewed on surfaces at an oblique angle, quality can suffer and they can appear blurred. To fix this problem, you can set a value for anisotropy. See how different anisotropy values can affect the appearance of a texture:
+
+[Image: Anisotropy]
+
+Note that as anisotropy increases, the cost of sampling the texture on the GPU also increases.
+
+### Texture Addressing
+
+The texture addressing properties give you control over how a texture is sampled for texture coordinates outside the range 0 to 1. See how the different modes affect the sprite below:
+
+[Image: Addressing]
+
+## Max Texture Size
+
+Different devices can support different texture sizes. Using [WebGL report](https://webglreport.com/) on the device and browser, we can see the max size supported.
+
+For example, this is from a MacBook Pro 16 inch (2020) laptop with Chrome which shows support up to 16384x16384.
+
+<img loading="lazy" src="/img/user-manual/assets/textures/mac-webgl-report.png" alt="Macbook Pro WebGL report" width="600" />
+
+Whereas on a Samsung S7 mobile device, only 4096x4096 is supported.
+
+<img loading="lazy" src="/img/user-manual/assets/textures/samsung-s7-webgl-report.jpg" alt="Samsung S7 WebGL report" width="600" />
+
+If the engine attempts to utilize a texture that exceeds the max texture size reported by WebGL, it will resize it down to this maximum size at runtime. Note that this is only done for texture loaded from images (PNG, JPG, AVIF, WebP, GIF). Compressed textures cannot be resized at runtime and will simply fail to render if they are too large for the device.
+
+If you would like to avoid downsizing at runtime, at the time of writing (Fri 23 Oct 2020), 4096x4096 is very widely supported with some developers even opting for 2048x2048 which is guaranteed to work everywhere.
+
+--------------------------------------------------------------------------------
+
+## WASM Module
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/wasm/
+
+Wasm Modules (also known as WebAssembly Modules) contain compiled executable code for the web.
+
+A Wasm module comprises three parts:
+
+* the binary executable file
+* the JavaScript glue code file
+* an optional fallback asm.js
+
+These files can be added to the project either by dragging and dropping the files into the Assets Panel or by selecting 'Upload' from the Assets Panel context menu.
+
+Please note that PlayCanvas Editor currently supports [Emscripten](https://emscripten.org/) compiled Wasm Modules only.
+
+## Wasm Module Properties
+
+Once the files have been added to the project, select the Wasm Module to display its properties in the Inspector Panel:
+[Image: Wasm Module Properties]
+
+### Name
+
+Name must match the module name defined in the glue and fallback script. This name is used to instantiate the module at load time.
+
+### Glue script
+
+This is the JavaScript glue code required to execute Wasm code.
+
+### Fallback script
+
+This is the optional fallback asm.js script to use when WebAssembly is not supported.
+
+--------------------------------------------------------------------------------
+
+## Asset Viewers
+
+URL: https://developer.playcanvas.com/user-manual/editor/assets/viewers/
+
+Some of the assets have viewer tools that can help inspect them more closely. Assets that can be viewed in these will have the option to 'Open in Viewer' in the inspector and context menu.
+
+[Image: Open in Viewer option]
+
+Clicking on either of these options will open the viewer with the asset in a new tab.
+
+## Model Viewer
+
+[Image: Model Viewer Preview]
+
+(Model: Copyright 2021 Wayfair LLC. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) International)
+
+The [open source Model Viewer](https://github.com/playcanvas/model-viewer) is available for the following asset types:
+
+- Model (Source) that are GLBs
+- Model
+- Container
+- Animation
+
+The Model Viewer is useful for inspecting the model node hierarchy, morph targets and debugging animation issues.
+
+## Texture Tool
+
+[Image: Texture Tool Preview]
+
+The [open source Texture Tool](https://github.com/playcanvas/texture-tool) is available for the following asset types:
+
+- Texture
+- Texture Atlas
 
 --------------------------------------------------------------------------------
 
@@ -10597,7 +11193,7 @@ You can use JavaScript to control the behavior of entities. Select any entity, a
 
 To change the background color of your scene, you should update the Clear Color property of the camera in your scene.
 
-You could also try adding a [skybox](/user-manual/assets/types/cubemap/) to your scene.
+You could also try adding a [skybox](/user-manual/editor/assets/inspectors/cubemap/) to your scene.
 
 [Learn more](/user-manual/editor/scenes/components/camera/)
 
@@ -10609,7 +11205,7 @@ Every surface on a 3D model is rendered using a **material**. The material defin
 
 You can create a new material and drag and drop it on your model or you can select its existing materials and edit their properties in the Inspector.
 
-[Learn more](/user-manual/assets/types/material/)
+[Learn more](/user-manual/editor/assets/inspectors/material/)
 
 ## How do I create a cubemap?
 
@@ -10619,7 +11215,7 @@ Cubemaps are a special type of texture asset. They are formed from 6 texture ass
 
 To create a cubemap click on the **<span class="pc-icon">&#57632;</span> Add** button in the Assets panel and select **New Cubemap**. Then drag 6 textures in the cubemap inspector. To take advantage of Physically Based Rendering make sure you click **Prefilter** after setting the 6 textures.
 
-[Learn more](/user-manual/assets/types/cubemap/)
+[Learn more](/user-manual/editor/assets/inspectors/cubemap/)
 
 ## How do I create an Entity?
 
@@ -10639,7 +11235,7 @@ Every surface on a 3D model is rendered using a **material**. The material defin
 
 To create a material click on the **<span class="pc-icon">&#57632;</span> Add** button in the Assets panel and then select **New Material**.
 
-[Learn more](/user-manual/assets/types/material/)
+[Learn more](/user-manual/editor/assets/inspectors/material/)
 
 ## How do I create a new shader?
 
@@ -10659,7 +11255,7 @@ You can also right click on an Entity and select New Entity/Box to add a box (si
 
 ## How do I create a skybox?
 
-To create a skybox for your scene you first need to create a [Cubemap asset](/user-manual/assets/types/cubemap/). Then you can drag and drop the Cubemap inside the 3D viewport, or you can go to the Scene Settings and drag the Cubemap in the Skybox field.
+To create a skybox for your scene you first need to create a [Cubemap asset](/user-manual/editor/assets/inspectors/cubemap/). Then you can drag and drop the Cubemap inside the 3D viewport, or you can go to the Scene Settings and drag the Cubemap in the Skybox field.
 
 [Learn more](/user-manual/editor/interface/settings/rendering/)
 
@@ -10685,7 +11281,7 @@ To render the model drag a model Asset in the Asset field of the Model Component
 
 ## How do I play a sound?
 
-To play sounds you need to add a [Sound component](/user-manual/editor/scenes/components/sound/) to an Entity. Then you can create slots to play [Audio assets](/user-manual/assets/types/audio/). Simply click "Add Slot" and drag an Audio Asset on the Asset field. In order to hear the sounds you also need to add an [AudioListener component](/user-manual/editor/scenes/components/audiolistener/) to an Entity - usually to the Camera Entity.
+To play sounds you need to add a [Sound component](/user-manual/editor/scenes/components/sound/) to an Entity. Then you can create slots to play [Audio assets](/user-manual/editor/assets/inspectors/audio/). Simply click "Add Slot" and drag an Audio Asset on the Asset field. In order to hear the sounds you also need to add an [AudioListener component](/user-manual/editor/scenes/components/audiolistener/) to an Entity - usually to the Camera Entity.
 
 You can create Audio assets by dragging audio files from your computer into the Assets panel.
 
@@ -10717,7 +11313,7 @@ Switch between the Translate / Rotate / Scale tools by pressing 1 / 2 / 3 respec
 
 To upload Assets simply drag and drop files from your computer into the Assets panel. Your files will be processed by the server and will appear shortly after in the Assets Panel.
 
-[Learn more](/user-manual/assets/importing/)
+[Learn more](/user-manual/editor/assets/importing/)
 
 ## How do I use physics?
 
@@ -10909,127 +11505,15 @@ The Assets Panel manages all of the Assets that are available in your project. F
 
 [Image: Assets Panel]
 
-## Folder Hierarchy {#folder-hierarchy}
+The Assets Panel provides powerful features for organizing and managing your project's assets, including:
 
-The folder panel allows you to organize your assets into a tree of folders.
+- **Folder organization** - Create a hierarchy of folders to organize assets
+- **Search and filter** - Find assets by name, ID, tags, or type
+- **Drag and drop** - Move assets between folders or into the viewport
+- **Copy and paste** - Share assets between projects
+- **Reference checking** - See where assets are used in your scene
 
-To create a new Folder, select the Add Asset (+) button and select 'Folder'. Alternatively, right click the folder where you would like a new folder to be created and select 'New Asset' > 'Folder'.
-
-To rename a folder, double click it in the hierarchy panel and edit the Name field in the Inspector.
-
-To delete a folder, double click it in the hierarchy and hit delete. Alternatively, right click the folder you want to delete and select 'Delete' from the context menu.
-
-Folders can be drag and dropped into each other if you want to reorganize your folder structure.
-
-:::note
-
-Folders are essentially meta assets, exclusively designed to facilitate the organization of assets within the Editor. Folder assets are excluded from builds and are not used when building the folder structure of a published build.
-
-:::
-
-## Creating and Uploading Assets {#creating-and-uploading-assets}
-
-You can create new assets by dragging a file from you computer's file system into the Assets Panel. The Editor will upload and import the asset for you.
-
-You can also create certain assets types using the Add Asset (+) icon.
-
-You can delete assets by selecting them and clicking the Delete Asset icon.
-
-## Editing Assets {#editing-assets}
-
-Certain text-based assets can be opened and edited in the PlayCanvas Script Editor: text, json, shader, html, css and script assets. To do this, simply double click on the asset's thumbnail.
-
-## Inspecting Assets {#inspecting-assets}
-
-To inspect the details of any given asset, select its thumbnail in the Assets Panel. The asset's details will be displayed in the Inspector.
-
-## Filtering {#filtering}
-
-Filter which assets are visible using the filter drop down to select the type of asset to view.
-
-## Searching {#searching}
-
-You can perform a global search for assets in your project using the Search box. Simply start typing into the box and the Editor will show matching results dynamically in the Assets Panel.
-
-**ID** - Specific asset can be found by its unique ID, by simply typing ID in search field it will recognize exact match and only show one asset with that ID.
-
-**RegExp** - It is possible to search using regular expressions. Add `*` at the beginning of search field and type regexp query after. To search for all assets use `*.` (any character) regexp query.
-
-**Tags** - To search by tags and their combinations type tags in square brackets `[ ]`. Simple query operators: AND, OR are allowed by expressing query as array of strings or other arrays with strings. Logic of query is same as for [`findByTag`][7] from `AssetsRegistry`.
-Here are some examples:
-
-- `[ level-1 ]` - returns all assets that are tagged by `level-1`.
-- `[ level-1, level-2 ]` - returns all assets that are tagged by `level-1 OR level-2`.
-- `[ [ level-1, monster ] ]` - returns all assets that are tagged by `level-1 AND monster`. Notice extra brackets.
-- `[ [ level-1, monster ], [ level-2, monster ] ]` - returns all assets that are tagged by `(level-1 AND monster) OR (level-2 AND monster)`.
-
-## Drag and Drop {#drag-and-drop}
-
-Assets can be moved to different folders by dragging them from the main panel to a folder in the folder hierarchy. Note that assets support multi-selection. Pressing CTRL+A will select all assets in the currently selected folder.
-
-You can also drag Assets from the Asset Panel to highlighted slots in the [Inspector][2]. Slots in the Inspector will either be asset attributes of components or asset-type script attributes.
-
-You can also drag model, material, and cubemap assets directly into the [Viewport][3]
-
-- If you drag a model asset into the Viewport, a new entity will be created with a model component with the model asset assigned. The viewport camera will automatically zoom to the newly created entity.
-- If you drag a material over a particular mesh instance in the Viewport, its material will be switched (as a preview) to the material being dragged. To make the material change stick, simply drop the material.
-- If you drag a cubemap over the background of a scene in the Viewport, the cubemap will be assigned as the skybox cubemap of the scene. This property can also be set in the [Project Settings](/user-manual/editor/interface/settings/rendering/).
-
-## Copy and Paste between Projects {#copy-and-paste-between-projects}
-
-To copy an asset or a selection of assets between projects, select the asset(s) and right-click to bring up the context menu to select 'Copy'. You can also use the hotkey Ctrl/Cmd + C instead if the context menu is not available due to being a read-only project.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-copy.png" alt="Right click copy menu" width="500" />
-
-In the project that you want to copy the asset(s) to, right click in the assets panel and select 'Paste'. Ctrl/Cmd + V hotkey can be used instead.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste.png" alt="Right click paste menu" width="500" />
-
-Copy and pasting an asset will also copy its asset dependencies too. For example, here we have a model which references two materials and they reference a set of textures.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/copy-and-paste-model-with-dependencies.png" alt="Model example" width="100%" />
-
-If you copy and paste just the model asset into a different project, those asset dependencies are copied too.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-reference-assets.png" alt="Pasted referenced assets" width="100%" />
-
-By default, it is pasted as a flat hierarchy. If you want keep the folder structure, hold Shift when the context menu is opened and an option will appear called 'Paste (keep folders)'. This will attempt to keep the folder structure using the folder you are pasting into as the root folder.
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste-keep-folders.png" alt="Right click paste (keep folders) menu" width="500" />
-
-Will result in the following where the folder structure is preserved:
-
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-assets-keep-folders.png" alt="Pasted referenced assets with folders" width="100%" />
-
-We generally recommend that if you will be using this feature for reusable libraries and assets, to keep it contained to a root level folder that can be easily copied and pasted to other projects. This will keep the folder structure of projects simpler and cleaner.
-
-:::note
-
-Note that copy and pasting assets does not overwrite existing assets with the same name and will create a new asset.
-
-:::
-
-## Checking References {#checking-references}
-
-Sometimes it's useful to know where assets are being used (or referenced) within a particular scene. If the Editor cannot detect any references for an asset, a small dot will be displayed on its thumbnail:
-
-[Image: Unreferenced Asset]
-
-:::warning
-
-Note that the Editor cannot detect references to assets that are made in code. So think carefully before you delete an asset based on this indicator!
-
-:::
-
-If an asset does have references, you can check them via the References content menu item:
-
-[Image: Asset References]
-
-Selecting a reference will load it into the Inspector panel.
-
-[2]: /user-manual/editor/interface/inspector
-[3]: /user-manual/editor/interface/viewport
-[7]: https://api.playcanvas.com/engine/classes/AssetRegistry.html#findbytag
+For detailed documentation on all Assets Panel features, see the [Assets section](/user-manual/editor/assets/).
 
 --------------------------------------------------------------------------------
 
@@ -13997,7 +14481,7 @@ The Audio Listener Component specifies the listener's position in 3D space. All 
 ## See Also
 
 - [Sound Component](sound.md) - Play audio in 3D space
-- [Audio Assets](/user-manual/assets/types/audio) - Learn more about audio assets
+- [Audio Assets](/user-manual/editor/assets/inspectors/audio) - Learn more about audio assets
 
 ## Scripting Interface
 
@@ -14144,7 +14628,7 @@ If the entity also has a Rigid Body Component, the Collision Component determine
 | Axis            | Capsule, Cylinder, and Cone only. Aligns the collision shape with the local-space X, Y, or Z axis of the entity. |
 | Convex Hull     | Mesh only. If enabled, the collision mesh will be treated as a convex hull, which is more efficient for dynamic rigid bodies. If disabled, the mesh is used as a triangle mesh (concave), which only works with static or kinematic rigid bodies. |
 | Model Asset     | Mesh only. The model asset that will be used as a source for the collision mesh. Either a Model Asset or Render Asset can be specified, but not both. |
-| Render Asset    | Mesh only. The [render asset](/user-manual/assets/types/render) that will be used as a source for the collision mesh. Either a Model Asset or Render Asset can be specified, but not both. |
+| Render Asset    | Mesh only. The [render asset](/user-manual/editor/assets/inspectors/render) that will be used as a source for the collision mesh. Either a Model Asset or Render Asset can be specified, but not both. |
 | Position Offset | The positional offset of the collision shape relative to the entity's position. |
 | Rotation Offset | The rotational offset of the collision shape relative to the entity's rotation, specified in degrees. |
 
@@ -14181,7 +14665,7 @@ The image element displays an image using a texture asset, sprite asset, or a so
 
 ## Text Element
 
-The text element renders a string of text using a [font asset](/user-manual/assets/types/font/).
+The text element renders a string of text using a [font asset](/user-manual/editor/assets/inspectors/font/).
 
 [Image: Text Element]
 
@@ -14485,7 +14969,7 @@ You can control a Model Component's properties using a [Script Component](script
 
 ## Customizing Materials
 
-You can learn how to customize the materials of your model [here](/user-manual/assets/types/material/#assigning-materials).
+You can learn how to customize the materials of your model [here](/user-manual/editor/assets/inspectors/material/#assigning-materials).
 
 --------------------------------------------------------------------------------
 
@@ -14641,7 +15125,7 @@ The Render Component enables an entity to render a primitive shape or a render a
 
 ## See Also
 
-- [Render Assets](/user-manual/assets/types/render) - Learn about render assets
+- [Render Assets](/user-manual/editor/assets/inspectors/render) - Learn about render assets
 
 ## Scripting Interface
 
@@ -14900,7 +15384,7 @@ You can add a new Slot by clicking on the "ADD SLOT" button. You can remove a Sl
 ## See Also
 
 - [Audio Listener Component](audiolistener.md) - Set the listener position for 3D audio
-- [Audio Assets](/user-manual/assets/types/audio) - Learn more about audio assets
+- [Audio Assets](/user-manual/editor/assets/inspectors/audio) - Learn more about audio assets
 
 ## Scripting Interface
 
@@ -14912,7 +15396,7 @@ You can control a Sound Component's properties using a [Script Component](script
 
 URL: https://developer.playcanvas.com/user-manual/editor/scenes/components/sprite/
 
-The Sprite Component renders and animates [Sprite Assets](/user-manual/assets/types/sprite) into the scene.
+The Sprite Component renders and animates [Sprite Assets](/user-manual/editor/assets/inspectors/sprite) into the scene.
 
 There are two types of sprite: Simple and Animated.
 
@@ -14970,7 +15454,7 @@ Animated Sprite Components have multiple Sprite Animation Clips attached which c
 
 ## See Also
 
-- [Sprite Assets](/user-manual/assets/types/sprite) - Learn about creating sprite assets
+- [Sprite Assets](/user-manual/editor/assets/inspectors/sprite) - Learn about creating sprite assets
 
 ## Scripting Interface
 
@@ -15165,7 +15649,7 @@ A common question with scenes is if the assets used in the scene will be loaded 
 
 The recommended practice is to tag assets with the scene name they belong to. When loading a scene, load the tagged assets first, then load the scene once all assets are ready.
 
-More information about asset tags and asset loading can be found on [this page](/user-manual/assets/preloading-and-streaming/#asset-tags).
+More information about asset tags and asset loading can be found on [this page](/user-manual/assets/preloading/).
 
 The [example project](https://playcanvas.com/project/926754/) below loads the assets when loading the scene and unloads when returning the main menu.
 
@@ -15548,7 +16032,7 @@ You can bring scripts into your PlayCanvas project from external sources:
     2. Drag the file(s) directly from your file explorer/finder into the desired folder in the PlayCanvas Editor's Asset Panel.
     3. The Editor will upload and process the script, making it available as a Script Asset.
 * **Importing Scripts from the PlayCanvas Asset Store:**
-    1. Open the [Asset Store](../../assets/asset-store/index.md) (accessible via a button in the Asset Panel header).
+    1. Open the [Asset Store](../assets/asset-store/index.md) (accessible via a button in the Asset Panel header).
     2. Browse or apply the SCRIPT filter.
     3. Once you find a script/package you want, click to view its details and select IMPORT.
     4. The imported script(s) will appear in your Asset Panel, typically within a new folder named after the Asset Store package. These are now regular Script Assets you can manage and use.
@@ -22321,7 +22805,7 @@ The lighting in this scene is implemented using Lightmap and AO textures and Box
 [0]: https://github.com/dariomanesku/cmftStudio
 [1]: /user-manual/graphics/lighting/lightmapping/#gamma-correction
 [2]: http://www.scriptspot.com/3ds-max/scripts/vray-cubemap-generator-for-unity
-[3]: /user-manual/assets/types/cubemap/
+[3]: /user-manual/editor/assets/inspectors/cubemap/
 [6]: http://www.hdrlabs.com/sibl/archive.html
 [7]: https://playcanv.as/p/zdkARz26/
 [8]: https://playcanvas.com/project/446587/overview/archviz-example
@@ -25457,7 +25941,7 @@ Although you can use the standard entity transformation function with kinematic 
 [2]: /user-manual/editor/scenes/components/rigidbody/
 [3]: /user-manual/editor/scenes/components/collision/
 [10]: /user-manual/physics/physics-migration/
-[11]: /user-manual/assets/types/wasm/
+[11]: /user-manual/editor/assets/inspectors/wasm/
 [12]: /user-manual/physics/compound-shapes/
 
 --------------------------------------------------------------------------------
@@ -30231,7 +30715,7 @@ For the complete engine API reference for localization see [this page][2].
 [7]: https://en.wikipedia.org/wiki/Zero-width_space
 [8]: http://www.thai-language.com/?nav=zwsp
 [10]: /tutorials/right-to-left-language-support/
-[11]: /user-manual/editor/interface/assets/#copy-and-paste-between-projects
+[11]: /user-manual/editor/assets/asset-panel/#copy-and-paste-between-projects
 
 --------------------------------------------------------------------------------
 
@@ -30448,7 +30932,7 @@ The Opacity property allows you to set the transparency of the string
 
 [Image: Transparent]
 
-[1]: /user-manual/assets/types/font
+[1]: /user-manual/editor/assets/inspectors/font
 [11]: /user-manual/user-interface/localization
 
 --------------------------------------------------------------------------------

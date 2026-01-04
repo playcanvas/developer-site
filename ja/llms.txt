@@ -6,8 +6,8 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 543
-Generated: 2026-01-03
+Total Documents: 548
+Generated: 2026-01-04
 
 ## Recommended Entry Points
 
@@ -50,6 +50,32 @@ Generated: 2026-01-03
 
 ### Editor
 - https://developer.playcanvas.com/user-manual/editor/ - PlayCanvas Editor
+- https://developer.playcanvas.com/user-manual/editor/assets/ - Assets
+- https://developer.playcanvas.com/user-manual/editor/assets/asset-panel/ - Assets Panel
+- https://developer.playcanvas.com/user-manual/editor/assets/asset-store/ - Asset Store
+- https://developer.playcanvas.com/user-manual/editor/assets/asset-store/sketchfab/ - Sketchfab
+- https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline/ - Asset Import Pipeline
+- https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline/import-hierarchy/ - Import Hierarchy
+- https://developer.playcanvas.com/user-manual/editor/assets/importing/ - Uploading and Importing
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/ - Asset Inspectors
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation/ - Animation
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio/ - Audio
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/css/ - CSS
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/cubemap/ - Cubemap
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/font/ - Font
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/gsplat/ - GSplat
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/html/ - HTML
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/json/ - JSON
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/material/ - Material
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/render/ - Render
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/shader/ - Shader
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/sprite/ - Sprite
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/template/ - Template
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/text/ - Text
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture-atlas/ - Texture Atlas
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture/ - Texture
+- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/wasm/ - WASM Module
+- https://developer.playcanvas.com/user-manual/editor/assets/viewers/ - Asset Viewers
 - https://developer.playcanvas.com/user-manual/editor/editor-api/ - Editor API
 - https://developer.playcanvas.com/user-manual/editor/engine-compatibility/ - Engine Compatibility
 - https://developer.playcanvas.com/user-manual/editor/faq/ - Common Questions
@@ -221,36 +247,15 @@ Generated: 2026-01-03
 
 ### Assets
 - https://developer.playcanvas.com/user-manual/assets/ - Assets
-- https://developer.playcanvas.com/user-manual/assets/asset-store/ - Asset Store
-- https://developer.playcanvas.com/user-manual/assets/asset-store/sketchfab/ - Sketchfab
+- https://developer.playcanvas.com/user-manual/assets/asset-registry/ - Asset Registry
 - https://developer.playcanvas.com/user-manual/assets/finding/ - Third-party Asset Sites
-- https://developer.playcanvas.com/user-manual/assets/import-pipeline/ - Asset Import Pipeline
-- https://developer.playcanvas.com/user-manual/assets/import-pipeline/import-hierarchy/ - Import Hierarchy
-- https://developer.playcanvas.com/user-manual/assets/importing/ - Uploading and Importing
+- https://developer.playcanvas.com/user-manual/assets/loading-unloading/ - Loading and Unloading
 - https://developer.playcanvas.com/user-manual/assets/models/ - Importing 3D Models
 - https://developer.playcanvas.com/user-manual/assets/models/building/ - Building Models
 - https://developer.playcanvas.com/user-manual/assets/models/exporting/ - Exporting Assets
 - https://developer.playcanvas.com/user-manual/assets/models/units/ - Units
-- https://developer.playcanvas.com/user-manual/assets/preloading-and-streaming/ - Preloading and Streaming
-- https://developer.playcanvas.com/user-manual/assets/types/ - Asset Types
-- https://developer.playcanvas.com/user-manual/assets/types/animation/ - Animation
-- https://developer.playcanvas.com/user-manual/assets/types/audio/ - Audio
-- https://developer.playcanvas.com/user-manual/assets/types/css/ - CSS
-- https://developer.playcanvas.com/user-manual/assets/types/cubemap/ - Cubemap
-- https://developer.playcanvas.com/user-manual/assets/types/font/ - Font
-- https://developer.playcanvas.com/user-manual/assets/types/gsplat/ - GSplat
-- https://developer.playcanvas.com/user-manual/assets/types/html/ - HTML
-- https://developer.playcanvas.com/user-manual/assets/types/json/ - JSON
-- https://developer.playcanvas.com/user-manual/assets/types/material/ - Material
-- https://developer.playcanvas.com/user-manual/assets/types/render/ - Render
-- https://developer.playcanvas.com/user-manual/assets/types/shader/ - Shader
-- https://developer.playcanvas.com/user-manual/assets/types/sprite/ - Sprite
-- https://developer.playcanvas.com/user-manual/assets/types/template/ - Template
-- https://developer.playcanvas.com/user-manual/assets/types/text/ - Text
-- https://developer.playcanvas.com/user-manual/assets/types/texture-atlas/ - Texture Atlas
-- https://developer.playcanvas.com/user-manual/assets/types/texture/ - Texture
-- https://developer.playcanvas.com/user-manual/assets/types/wasm/ - WASM Module
-- https://developer.playcanvas.com/user-manual/assets/viewers/ - Asset Viewers
+- https://developer.playcanvas.com/user-manual/assets/preloading/ - Preloading
+- https://developer.playcanvas.com/user-manual/assets/supported-formats/ - Supported Formats
 
 ### Scripting
 - https://developer.playcanvas.com/user-manual/scripting/ - Scripting
