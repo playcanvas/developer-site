@@ -1,139 +1,139 @@
 ---
-title: Asset Registry
+title: アセットレジストリ
 ---
 
-The [`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html) is the central system for managing assets in PlayCanvas. It maintains a collection of all assets available to your application and provides methods to find, load, and manage them.
+[`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html) は、PlayCanvas でアセットを管理するための中心的なシステムです。アプリケーションで利用可能なすべてのアセットのコレクションを保持し、アセットの検索、読み込み、管理を行うためのメソッドを提供します。
 
-## Accessing the Registry
+## レジストリへのアクセス
 
-The asset registry is available via the application object:
+アセットレジストリは、アプリケーションオブジェクトを通じてアクセスできます。
 
 ```javascript
 const assets = this.app.assets;
 ```
 
-## Finding Assets
+## アセットの検索
 
-### By ID
+### ID による検索
 
-Every asset has a unique numeric ID. This is the most reliable way to reference an asset:
+すべてのアセットには一意の数値 ID があります。これはアセットを参照する最も確実な方法です。
 
 ```javascript
 const asset = this.app.assets.get(123456);
 ```
 
-### By Name
+### 名前による検索
 
-Find an asset by its name. Returns the first matching asset:
+名前でアセットを検索します。最初に一致したアセットを返します。
 
 ```javascript
 const asset = this.app.assets.find('My Texture');
 ```
 
-Find all assets with a given name:
+指定した名前を持つすべてのアセットを検索します。
 
 ```javascript
 const assets = this.app.assets.findAll('Enemy');
 ```
 
-### By Tag
+### タグによる検索
 
-Assets can be tagged for easy grouping. Find all assets with a specific tag:
+アセットにはタグを付けてグループ化することができます。特定のタグを持つすべてのアセットを検索します。
 
 ```javascript
 const levelAssets = this.app.assets.findByTag('level-1');
 ```
 
-Find assets matching multiple tags (AND logic):
+複数のタグに一致するアセットを検索します（AND ロジック）。
 
 ```javascript
-// Assets tagged with BOTH 'level-1' AND 'enemy'
+// 'level-1' と 'enemy' の両方のタグが付いたアセット
 const enemies = this.app.assets.findByTag('level-1', 'enemy');
 ```
 
-Find assets matching any of several tags (OR logic):
+複数のタグのいずれかに一致するアセットを検索します（OR ロジック）。
 
 ```javascript
-// Assets tagged with 'level-1' OR 'level-2'
+// 'level-1' または 'level-2' のタグが付いたアセット
 const assets = this.app.assets.findByTag(['level-1', 'level-2']);
 ```
 
-## Asset Events
+## アセットイベント
 
-The registry emits events when assets are added, removed, or loaded:
+レジストリは、アセットが追加、削除、または読み込まれたときにイベントを発行します。
 
-### Registry Events
+### レジストリイベント
 
 ```javascript
-// Asset added to registry
+// アセットがレジストリに追加された
 this.app.assets.on('add', (asset) => {
     console.log('Asset added:', asset.name);
 });
 
-// Asset removed from registry
+// アセットがレジストリから削除された
 this.app.assets.on('remove', (asset) => {
     console.log('Asset removed:', asset.name);
 });
 
-// Asset loaded
+// アセットが読み込まれた
 this.app.assets.on('load', (asset) => {
     console.log('Asset loaded:', asset.name);
 });
 
-// Asset failed to load
+// アセットの読み込みに失敗した
 this.app.assets.on('error', (err, asset) => {
     console.error('Failed to load:', asset.name, err);
 });
 ```
 
-### Individual Asset Events
+### 個別のアセットイベント
 
-You can also listen for events on specific assets:
+特定のアセットのイベントをリッスンすることもできます。
 
 ```javascript
 const asset = this.app.assets.find('My Texture');
 
-// Called when the asset's resource is ready
+// アセットのリソースが準備できたときに呼び出される
 asset.on('load', (asset) => {
     console.log('Texture loaded:', asset.resource);
 });
 
-// Called if loading fails
+// 読み込みに失敗したときに呼び出される
 asset.on('error', (err, asset) => {
     console.error('Failed:', err);
 });
 
-// Called when the asset is removed from the registry
+// アセットがレジストリから削除されたときに呼び出される
 asset.on('remove', (asset) => {
     console.log('Asset removed');
 });
 
-// Called when any property changes
+// プロパティが変更されたときに呼び出される
 asset.on('change', (asset, property, newValue, oldValue) => {
     console.log(`${property} changed from ${oldValue} to ${newValue}`);
 });
 ```
 
-### Using ready()
+### ready() の使用
 
-The `ready()` method is a convenient way to execute code when an asset is loaded. If the asset is already loaded, the callback fires immediately:
+`ready()` メソッドは、アセットが読み込まれたときにコードを実行する便利な方法です。アセットがすでに読み込まれている場合、コールバックは即座に実行されます。
 
 ```javascript
 const asset = this.app.assets.find('My Texture');
 
 asset.ready((asset) => {
-    // Asset is guaranteed to be loaded here
+    // ここではアセットが読み込まれていることが保証されています
     const texture = asset.resource;
     material.diffuseMap = texture;
 });
 
-// Make sure to trigger loading if not already loaded
+// まだ読み込まれていない場合は、読み込みをトリガーする
 this.app.assets.load(asset);
 ```
 
-## Adding Assets at Runtime
+## 実行時にアセットを追加する
 
-You can create and add new assets to the registry at runtime:
+実行時に新しいアセットを作成してレジストリに追加することができます。
 
 ```javascript
 const asset = new pc.Asset('New Texture', 'texture', {
@@ -144,9 +144,8 @@ this.app.assets.add(asset);
 this.app.assets.load(asset);
 ```
 
-## See Also
+## 関連項目
 
-- [Preloading](preloading) - Control which assets load before your app starts
-- [Loading and Unloading](loading-unloading) - Dynamically manage asset loading
-- [`AssetRegistry` API Reference](https://api.playcanvas.com/engine/classes/AssetRegistry.html)
-
+- [プリロード](preloading) - アプリ開始前に読み込むアセットを制御する
+- [読み込みとアンロード](loading-unloading) - アセットの動的な読み込み管理
+- [`AssetRegistry` API リファレンス](https://api.playcanvas.com/engine/classes/AssetRegistry.html)
