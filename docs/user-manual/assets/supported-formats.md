@@ -107,4 +107,3 @@ For best browser compatibility, provide both MP3 and OGG versions of audio files
 
 - [Models](models/) - Preparing 3D models for PlayCanvas
 - [Asset Inspectors](/user-manual/editor/assets/inspectors/) - Configure asset properties in the Editor
-

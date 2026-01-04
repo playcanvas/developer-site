@@ -38,6 +38,7 @@ this.app.assets.loadFromUrl('path/to/texture.png', 'texture', (err, asset) => {
 ```
 
 The second parameter specifies the asset type. Common types include:
+
 - `texture` - Images (PNG, JPG, WebP, etc.)
 - `model` - 3D models (GLB)
 - `audio` - Sound files (MP3, OGG, WAV)
@@ -172,4 +173,3 @@ for (const asset of assets) {
 
 - [Asset Registry](asset-registry) - Finding and managing assets
 - [Preloading](preloading) - Loading assets before your app starts
-

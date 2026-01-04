@@ -149,4 +149,3 @@ this.app.assets.load(asset);
 - [Preloading](preloading) - Control which assets load before your app starts
 - [Loading and Unloading](loading-unloading) - Dynamically manage asset loading
 - [`AssetRegistry` API Reference](https://api.playcanvas.com/engine/classes/AssetRegistry.html)
-

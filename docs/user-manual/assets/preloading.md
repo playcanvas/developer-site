@@ -71,4 +71,3 @@ const assets = this.app.assets.findByTag(['level-1', 'level-2']);
 
 - [Asset Registry](asset-registry) - Finding and managing assets
 - [Loading and Unloading](loading-unloading) - Dynamic asset management
-

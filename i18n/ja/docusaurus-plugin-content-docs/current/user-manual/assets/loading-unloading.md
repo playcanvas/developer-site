@@ -38,6 +38,7 @@ this.app.assets.loadFromUrl('path/to/texture.png', 'texture', (err, asset) => {
 ```
 
 2 番目のパラメータはアセットタイプを指定します。一般的なタイプには以下があります。
+
 - `texture` - 画像（PNG、JPG、WebP など）
 - `model` - 3D モデル（GLB）
 - `audio` - サウンドファイル（MP3、OGG、WAV）
