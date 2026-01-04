@@ -11,30 +11,16 @@ PlayCanvasでは、JSONアセットは様々な種類の構造化データを保
 - ゲーム設定の保存
 - レベルデザインデータ
 
-## スクリプトでのJSONデータへのアクセス
+## Inspector
 
-スクリプト内でJSONアセットのデータにアクセスするには：
+![JSON Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-json.png)
 
-1. JSONアセットを属性としてスクリプトに追加します。
-2. JSONデータから解析されたオブジェクトであるJSONアセットのリソースにアクセスします。
+JSON アセットインスペクターは、アセットに含まれるJSONデータのフォーマット済みプレビューを表示します。
 
-例：
+## Properties
 
-```javascript
-var JsonScript = pc.createScript('jsonScript');
+このアセットタイプには、インスペクターで設定可能なプロパティはありません。構文フォーマットされたJSONデータの読み取り専用プレビューが表示されます。
 
-// JSONアセットを保持するための属性を定義
-JsonScript.attributes.add('jsonAsset', { type: 'asset', assetType: 'json' });
-
-JsonScript.prototype.initialize = function () {
-    if (this.jsonAsset) {
-        // JSONアセットのリソース（オブジェクト）を取得
-        const jsonData = this.jsonAsset.resource;
-
-        // 例：JSONオブジェクトからデータにアクセス
-        if (jsonData.someDataField) {
-            console.log("Data from JSON:", jsonData.someDataField);
-        }
-    }
-};
-```
+:::tip
+スクリプトでこのアセットを使用するには、[Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。
+:::

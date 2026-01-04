@@ -4,6 +4,48 @@ title: Asset Inspectors
 
 When you select an asset in the [Assets Panel](/user-manual/editor/assets/asset-panel), its properties are displayed in the Inspector. Each asset type has its own set of configurable properties.
 
+## Common Properties
+
+All asset inspectors display a common set of properties in the header section:
+
+![Common Asset Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common.png)
+
+| Property | Description |
+|----------|-------------|
+| ID | The unique identifier for the asset. Useful for referencing the asset in scripts. |
+| Name | The display name of the asset. This can be edited to rename the asset. |
+| Tags | Tags assigned to the asset for organization and filtering, both in the [Assets Panel](/user-manual/editor/assets/asset-panel#searching) and at runtime via the [Engine API](/user-manual/assets/asset-registry#by-tag). |
+| Type | The [asset type](#asset-types) (read-only). |
+| Exclude | When enabled, the asset is excluded from the published build. Useful for development-only assets such as test scripts or READMEs. |
+| Preload | When enabled, the asset is loaded at application startup. When disabled, referenced assets load asynchronously after the app starts, while unreferenced assets must be loaded manually via script. |
+| Size | The file size of the asset (read-only). |
+| Source | A reference to the source asset from which this asset was derived, if applicable (read-only). |
+| Created | The date and time the asset was created (read-only). |
+
+### Script Assets
+
+Script assets display additional properties:
+
+![Script Asset Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common-script.png)
+
+| Property | Description |
+|----------|-------------|
+| Loading Order | Opens the [script loading order manager](/user-manual/editor/scripting/loading-order) to control the order scripts are loaded. |
+| Loading Type | Controls when the script is loaded: <ul><li>**Asset** - loaded as a regular asset</li><li>**Before Engine** - loaded before the PlayCanvas engine</li><li>**After Engine** - loaded after the engine but before application start</li></ul> |
+
+### Asset Store Assets
+
+Assets imported from the [Asset Store](/user-manual/editor/assets/asset-store) display additional attribution properties:
+
+![Asset Store Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common-license.png)
+
+| Property | Description |
+|----------|-------------|
+| License | The license under which the asset is provided, with a link to license details. |
+| Author | The original author of the asset, with a link to their profile. |
+
+## Asset Types
+
 | Type                             | Imported From                    | Resource Extensions              | Description                        |
 | -------------------------------- | -------------------------------- | -------------------------------- | ---------------------------------- |
 | [`animation`](animation)         | `.glb`, `.fbx`                   | `.glb`                           | Animation keyframe data            |

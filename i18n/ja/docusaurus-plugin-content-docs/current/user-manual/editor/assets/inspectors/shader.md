@@ -2,23 +2,20 @@
 title: Shader
 ---
 
-ShaderアセットにはGLSLコードが含まれています。エディターのアセットパネルで New Shaderをクリックするか、拡張子が ```.vert```、 ```.frag```、または ```.glsl``` のファイルをアップロードすることで、新しいShaderアセットを作成できます。
+Shader アセットには、カスタムレンダリングエフェクト用のGLSLコードが含まれています。アセットパネルでNew Shaderをクリックするか、`.vert`、`.frag`、または`.glsl`拡張子のファイルをアップロードすることで、新しいShaderアセットを作成できます。
 
-Shaderアセットを編集するには、エディターでShaderアセットを右クリックし、Editを選択します。Shaderアセットを使用してカスタムマテリアルを作成する方法の例を以下に示します。
+Shaderアセットを編集するには、エディターで右クリックしてEditを選択します。
 
-```javascript
-const vertexShader = this.app.assets.find('my_vertex_shader');
-const fragmentShader = this.app.assets.find('my_fragment_shader');
-const shaderDefinition = {
-    attributes: {
-        aPosition: pc.SEMANTIC_POSITION,
-        aUv0: pc.SEMANTIC_TEXCOORD0
-    },
-    vshader: vertexShader.resource
-    fshader: fragmentShader.resource
-};
+## Inspector
 
-const shader = new pc.Shader(this.app.graphicsDevice, shaderDefinition);
-const material = new pc.Material();
-material.setShader(shader);
-```
+![Shader Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-shader.png)
+
+Shader アセットインスペクターは、アセットに含まれるGLSLシェーダーコードのプレビューを表示します。
+
+## Properties
+
+このアセットタイプには、インスペクターで設定可能なプロパティはありません。シェーダーコードの読み取り専用プレビューが表示されます。
+
+:::tip
+スクリプトでこのアセットを使用するには、[Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。
+:::

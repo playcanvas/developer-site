@@ -2,30 +2,20 @@
 title: Text
 ---
 
-PlayCanvasにおけるText Assetタイプは、プレーンテキストデータを保存するために使用されます。これは多用途であり、対話、構成データ、またはその他のテキスト情報を保存するなど、さまざまな目的に使用できます。
+Text アセットは、プレーンテキストデータを保存するために使用されます。多用途であり、対話、構成データ、またはその他のテキスト情報を保存するなど、さまざまな目的に使用できます。
 
-## スクリプトでのテキストデータへのアクセス
+エディターで新しいTextアセットを作成するか、`.txt`拡張子のファイルをアップロードして作成できます。
 
-スクリプトでText Assetからデータにアクセスするには：
+## Inspector
 
-1. Text Assetを属性としてスクリプトに追加します。
-2. テキストファイルから解析された文字列であるText assetのresourceにアクセスします。
+![Text Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-text.png)
 
-例：
+Text アセットインスペクターは、アセットに含まれるテキストコンテンツのプレビューを表示します。
 
-```javascript
-var TextScript = pc.createScript('textScript');
+## Properties
 
-// テキストアセットを保持するためのスクリプト属性を定義します
-TextScript.attributes.add('textAsset', { type: 'asset', assetType: 'text' });
+このアセットタイプには、インスペクターで設定可能なプロパティはありません。テキストコンテンツの読み取り専用プレビューが表示されます。
 
-TextScript.prototype.initialize = function() {
-    if (this.textAsset) {
-        // Text assetのresource（文字列）を取得します
-        const textData = this.textAsset.resource;
-        
-        // Text assetの内容を出力します
-        console.log('Content of text asset: ', textData);
-    }
-};
-```
+:::tip
+スクリプトでこのアセットを使用するには、[Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。
+:::

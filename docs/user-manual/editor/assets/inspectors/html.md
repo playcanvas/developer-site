@@ -2,27 +2,20 @@
 title: HTML
 ---
 
-An HTML asset contains HTML code. The code can either be a full HTML page or just partial HTML. You can create a new HTML asset in the Editor or by uploading a file with an .html extension.
+An HTML asset contains HTML code. The code can either be a full HTML page or just partial HTML. You can create a new HTML asset in the Editor or by uploading a file with an `.html` extension.
 
 To edit an HTML asset, right click on it in the Editor and select Edit.
 
-The loaded HTML asset is just a string. You can use that string as you like. A common way to add HTML to the document is the following:
+## Inspector
 
-```javascript
-// get asset from registry by id
-const asset = app.assets.get(32);
+![HTML Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-html.png)
 
-// create element
-const div = document.createElement('div');
-div.innerHTML = asset.resource || '';
-document.body.appendChild(div);
+The HTML asset inspector displays a preview of the HTML code contained in the asset.
 
-// when asset resource loads/changes,
-// update html of element
-asset.on('load', function() {
-    div.innerHTML = asset.resource;
-});
+## Properties
 
-// make sure assets loads
-app.assets.load(asset);
-```
+This asset type has no configurable properties in the Inspector. It displays a read-only preview of the HTML code.
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::

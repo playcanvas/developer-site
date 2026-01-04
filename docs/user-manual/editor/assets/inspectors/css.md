@@ -2,27 +2,20 @@
 title: CSS
 ---
 
-A CSS asset contains CSS code. You can create a new CSS asset in the Editor or by uploading a file with a .css extension.
+A CSS asset contains CSS code. You can create a new CSS asset in the Editor or by uploading a file with a `.css` extension.
 
 To edit a CSS asset, right click on it in the Editor and select Edit.
 
-The loaded CSS asset resource is just a string. You can use the string as you like. A common way to add the loaded CSS string to the document is the following:
+## Inspector
 
-```javascript
-// get asset from registry by id
-const asset = app.assets.get(32);
+![CSS Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-css.png)
 
-// create element
-const style = document.createElement('style');
-style.type = "text/css";
-style.textContent = asset.resource || '';
-document.head.appendChild(style);
+The CSS asset inspector displays a preview of the CSS code contained in the asset.
 
-// update the style when the asset's resource loads/changes
-asset.on('load', function() {
-    style.innerHTML = asset.resource;
-});
+## Properties
 
-// make sure assets loads
-app.assets.load(asset);
-```
+This asset type has no configurable properties in the Inspector. It displays a read-only preview of the CSS code.
+
+:::tip
+To use this asset in scripts, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
+:::

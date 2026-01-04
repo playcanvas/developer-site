@@ -2,17 +2,19 @@
 title: Texture Atlas
 ---
 
-![Texture Atlas](/img/user-manual/assets/texture-atlas/texture-atlas.jpg)
+テクスチャアトラス (Texture Atlas) とは、テクスチャ内の「フレーム」(Frames) を記述する補足データをともなうTextureアセットです。フレームは、テクスチャ内で定義された領域で「ピボット」(Pivot) ポイントのある長方形として表示されます。ピボットポイントはフレームの位置および回転の中心を設定します。
 
-テクスチャアトラス (Texture Atlas) とは、テクスチャ内の 'フレーム' (Frames) を記述する補足データをともなうTextureアセットです。フレームは、テクスチャ内で定義された領域で 'ピボット' (Pivot) ポイントのある長方形として表示されます。ピボットポイントはフレームの位置および回転の中心を設定します。
-
-テクスチャアトラスは、通常のテクスチャアセットを右クリックして **Create Atlas** を選択することで作成されます。またはデフォルトのアセットのインポート設定を変更し、 [Create Atlases](/user-manual/editor/interface/settings/asset-import/)を有効化します。
+テクスチャアトラスは、通常のテクスチャアセットを右クリックして**Create Atlas**を選択することで作成されます。またはデフォルトのアセットのインポート設定を変更し、[Create Atlases](/user-manual/editor/interface/settings/asset-import/)を有効化します。
 
 テクスチャアトラスは、[Spriteアセット](/user-manual/editor/assets/inspectors/sprite)と組み合わせて2Dグラフィックをレンダリングするために使用されます。
 
+## Inspector
+
+![Texture Atlas](/img/user-manual/assets/texture-atlas/texture-atlas.jpg)
+
 ## Properties
 
-### フレーム (Frames)
+### Frames
 
 テクスチャアトラスのフレームは、通常の整数文字列によってキーの設定がされています。フレームのフォーマットは以下の通りです。
 
@@ -20,10 +22,14 @@ title: Texture Atlas
 {
     rect: [0, 0, 0, 0],  // u,v,width,height - 幅と高さはピクセル単位
     pivot: [0, 0],       // x,y - 比率0-1
-    border: [0, 0, 0, 0] // left, bottom, right, top - 上はピクセル単位
+    border: [0, 0, 0, 0] // left, bottom, right, top - ピクセル単位
 }
 ```
 
-### テクスチャプロパティ
+### Texture Properties
 
-フレームのデータに加え、テクスチャアトラスには[Textureアセット](/user-manual/editor/assets/inspectors/texture)のプロパティが含まれます。
+フレームのデータに加え、テクスチャアトラスには[Textureアセット](/user-manual/editor/assets/inspectors/texture)と同じプロパティが含まれます。
+
+:::tip
+スクリプトでこのアセットを使用するには、[Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。
+:::
