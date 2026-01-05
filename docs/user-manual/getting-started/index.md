@@ -9,9 +9,9 @@ PlayCanvas is a ✨ **web graphics creation platform** ✨
 PlayCanvas is a collection of open-source products that you can use to build interactive, graphical web applications:
 
 🦾 [**PlayCanvas Engine**](../engine) - Open source JavaScript run-time that powers all PlayCanvas applications  
+🛠️ [**PlayCanvas Editor**](../editor) - Real-time collaborative visual editing environment for building PlayCanvas applications  
 ⚛️ [**PlayCanvas React**](../react) - Open source React-based declarative interface that wraps the PlayCanvas Engine  
-🧩 [**PlayCanvas Web Components**](../web-components) - Open source Web Components-based declarative interface that wraps the PlayCanvas Engine  
-🛠️ [**PlayCanvas Editor**](../editor) - Real-time collaborative visual editing environment for building PlayCanvas applications
+🧩 [**PlayCanvas Web Components**](../web-components) - Open source Web Components-based declarative interface that wraps the PlayCanvas Engine
 
 ## Which Product is Right For You?
 
@@ -22,6 +22,11 @@ Every developer is different, so picking the right entry point to PlayCanvas wil
 **Best for:** Experienced programmers, performance-critical applications, custom workflows  
 **Choose if you:** Want maximum control, have specific architectural needs, or are building complex systems
 
+### 🛠️ [**PlayCanvas Editor**](../editor) - *Visual-first development*
+
+**Best for:** Beginners, teams, rapid prototyping, visual learners  
+**Choose if you:** Want drag-and-drop scene building, real-time collaboration, or prefer visual tools over code
+
 ### ⚛️ [**PlayCanvas React**](../react) - *React developers*
 
 **Best for:** React developers, component-based thinkers, existing React projects  
@@ -31,11 +36,6 @@ Every developer is different, so picking the right entry point to PlayCanvas wil
 
 **Best for:** Vanilla JS developers, framework-agnostic projects, web standards enthusiasts  
 **Choose if you:** Prefer native web technologies, want framework independence, or like custom HTML elements
-
-### 🛠️ [**PlayCanvas Editor**](../editor) - *Visual-first development*
-
-**Best for:** Beginners, teams, rapid prototyping, visual learners  
-**Choose if you:** Want drag-and-drop scene building, real-time collaboration, or prefer visual tools over code
 
 ### 😕 Still Confused?
 
