@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 548
-Generated: 2026-01-04
+Generated: 2026-01-05
 
 ================================================================================
 
@@ -6590,7 +6590,7 @@ Creating a free PlayCanvas account opens up a world of possibilities for buildin
 
 - 🛠️ **Access the [PlayCanvas Editor](../../editor/)** - Build 3D apps using a powerful, visual interface.
 
-But not everyone opts to use the PlayCanvas Editor - perhaps you prefer to use the [PlayCanvas Engine](../../engine/) directly, or [PlayCanvas Web Components](../../web-components/) or [PlayCanvas React](../../playcanvas-react/) instead. Does it still make sense to create a PlayCanvas account? Absolutely! And here's why:
+But not everyone opts to use the PlayCanvas Editor - perhaps you prefer to use the [PlayCanvas Engine](../../engine/) directly, or [PlayCanvas Web Components](../../web-components/) or [PlayCanvas React](../../react/) instead. Does it still make sense to create a PlayCanvas account? Absolutely! And here's why:
 
 - 🔍 **Explore and learn** - Browse scripts and assets in thousands of public Editor projects to learn and find inspiration
 - ⚙️ **Generate Assets** - Use the Editor's asset processing capabilities to generate assets for use in any PlayCanvas-based project
@@ -18229,7 +18229,7 @@ const { asset } = useSplat('/assets/toy-cat.sog');
     );
 }
 
-Let's build a simple Gaussian splat application step by step using [PlayCanvas React](/user-manual/playcanvas-react). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.
+Let's build a simple Gaussian splat application step by step using [PlayCanvas React](/user-manual/react). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.
 
 ## Starting Point
 
@@ -20661,7 +20661,7 @@ PlayCanvas is a ✨ **web graphics creation platform** ✨
 PlayCanvas is a collection of open-source products that you can use to build interactive, graphical web applications:
 
 🦾 [**PlayCanvas Engine**](../engine) - Open source JavaScript run-time that powers all PlayCanvas applications  
-⚛️ [**PlayCanvas React**](../playcanvas-react) - Open source React-based declarative interface that wraps the PlayCanvas Engine  
+⚛️ [**PlayCanvas React**](../react) - Open source React-based declarative interface that wraps the PlayCanvas Engine  
 🧩 [**PlayCanvas Web Components**](../web-components) - Open source Web Components-based declarative interface that wraps the PlayCanvas Engine  
 🛠️ [**PlayCanvas Editor**](../editor) - Real-time collaborative visual editing environment for building PlayCanvas applications
 
@@ -20674,7 +20674,7 @@ Every developer is different, so picking the right entry point to PlayCanvas wil
 **Best for:** Experienced programmers, performance-critical applications, custom workflows  
 **Choose if you:** Want maximum control, have specific architectural needs, or are building complex systems
 
-### ⚛️ [**PlayCanvas React**](../playcanvas-react) - *React developers*
+### ⚛️ [**PlayCanvas React**](../react) - *React developers*
 
 **Best for:** React developers, component-based thinkers, existing React projects  
 **Choose if you:** Already use React, want declarative 3D scenes, or need to integrate 3D into React apps
@@ -20694,12 +20694,12 @@ Every developer is different, so picking the right entry point to PlayCanvas wil
 Consult this simple questionnaire:
 
 **New to 3D development?** → Start with the [**PlayCanvas Editor**](../editor)  
-**React developer?** → Use [**PlayCanvas React**](../playcanvas-react)  
+**React developer?** → Use [**PlayCanvas React**](../react)  
 **Prefer vanilla HTML and JavaScript?** → Try [**PlayCanvas Web Components**](../web-components)  
 **A coder that needs maximum control?** → Go with the [**PlayCanvas Engine**](../engine)  
 **Working in a team?** → The [**PlayCanvas Editor**](../editor) offers the best collaboration  
 **Coming from Unity or Unreal?** → The [**PlayCanvas Editor**](../editor) provides a similar end-user experience  
-**Integrating into existing app or site?** → Choose [**React**](../playcanvas-react) or [**Web Components**](../web-components) based on your existing stack
+**Integrating into existing app or site?** → Choose [**React**](../react) or [**Web Components**](../web-components) based on your existing stack
 
 And if you still have questions, come and chat to us on [Discord](https://discord.gg/RSaMRzg).
 
@@ -26135,9 +26135,24 @@ To check whether a volume has been entered or exited by a rigid body based entit
 
 --------------------------------------------------------------------------------
 
+## Press Pack
+
+URL: https://developer.playcanvas.com/user-manual/press-pack/
+
+We offer a press pack for people to use when promoting or advertising PlayCanvas within their materials.
+
+The pack includes logos and promotional images in the common aspect ratios. There is also a video that can be used where animation is needed.
+
+[Download ZIP (44.5MB)][download-link]
+Last updated: Mon 15 Aug 2022
+
+[download-link]: pathname:///downloads/playcanvas-press-pack.zip
+
+--------------------------------------------------------------------------------
+
 ## PlayCanvas React
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/
+URL: https://developer.playcanvas.com/user-manual/react/
 
 [@playcanvas/react](https://github.com/playcanvas/react) brings PlayCanvas to the React ecosystem. It provides a declarative, component-based approach to building interactive 3D applications using familiar React patterns and a powerful ECS architecture. It's a thin wrapper around PlayCanvas - a batteries-included library for building interactive 3D content in React.
 
@@ -26240,7 +26255,7 @@ Explore the [official documentation](https://playcanvas-react.vercel.app/docs) o
 
 ## `<Align/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/align/
+URL: https://developer.playcanvas.com/user-manual/react/api/align/
 
 # ``
 
@@ -26272,7 +26287,7 @@ type $ = React.ComponentProps<typeof Align>;
 
 ## `<Anim/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/anim/
+URL: https://developer.playcanvas.com/user-manual/react/api/anim/
 
 # ``
 
@@ -26307,7 +26322,7 @@ type $ = React.ComponentProps<typeof Anim>;
 
 ## `<Application/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/application/
+URL: https://developer.playcanvas.com/user-manual/react/api/application/
 
 # ``
 
@@ -26335,7 +26350,7 @@ type $ = React.ComponentProps<typeof Application>;
 
 ## `<Camera/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/camera/
+URL: https://developer.playcanvas.com/user-manual/react/api/camera/
 
 # ``
 
@@ -26365,7 +26380,7 @@ type $ = React.ComponentProps<typeof Camera>;
 
 ## `<Collision/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/collision/
+URL: https://developer.playcanvas.com/user-manual/react/api/collision/
 
 # ``
 
@@ -26403,7 +26418,7 @@ type $ = React.ComponentProps<typeof Collision>;
 
 ## `<Entity/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/entity/
+URL: https://developer.playcanvas.com/user-manual/react/api/entity/
 
 # ``
 
@@ -26438,7 +26453,7 @@ type $ = React.ComponentProps<typeof Entity>;
 
 ## `<Environment/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/environment/
+URL: https://developer.playcanvas.com/user-manual/react/api/environment/
 
 # ``
 
@@ -26490,7 +26505,7 @@ type $ = React.ComponentProps<typeof Environment>;
 
 ## `<Gltf/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/gltf/
+URL: https://developer.playcanvas.com/user-manual/react/api/gltf/
 
 # ``
 
@@ -26537,7 +26552,7 @@ type $ = React.ComponentProps<typeof Gltf>;
 
 ## `<GSplat/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/gsplat/
+URL: https://developer.playcanvas.com/user-manual/react/api/gsplat/
 
 # ``
 
@@ -26568,7 +26583,7 @@ type $ = React.ComponentProps<typeof GSplat>;
 
 ## Hooks
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/
+URL: https://developer.playcanvas.com/user-manual/react/api/hooks/
 
 PlayCanvas React provides a comprehensive set of React hooks that make it easy to integrate PlayCanvas functionality into your React applications. These hooks handle the complex lifecycle management and provide a clean, React-friendly API.
 
@@ -26645,7 +26660,7 @@ const { asset } = useAsset('texture.jpg', 'texture') // Asset | null
 
 ## `useAppEvent`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-app-event/
+URL: https://developer.playcanvas.com/user-manual/react/api/hooks/use-app-event/
 
 # `useAppEvent`
 
@@ -26802,7 +26817,7 @@ function InputHandler() {
 
 ## `useApp`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-app/
+URL: https://developer.playcanvas.com/user-manual/react/api/hooks/use-app/
 
 # `useApp`
 
@@ -26858,7 +26873,7 @@ type $ = {
 
 ## Asset Hooks
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-asset/
+URL: https://developer.playcanvas.com/user-manual/react/api/hooks/use-asset/
 
 # Asset Hooks
 
@@ -27061,7 +27076,7 @@ const assetTypeToLoadType = {
 
 ## `useMaterial`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-material/
+URL: https://developer.playcanvas.com/user-manual/react/api/hooks/use-material/
 
 # `useMaterial`
 
@@ -27185,7 +27200,7 @@ function SharedMaterial() {
 
 ## `useParent`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-parent/
+URL: https://developer.playcanvas.com/user-manual/react/api/hooks/use-parent/
 
 # `useParent`
 
@@ -27257,7 +27272,7 @@ function EntityInfo() {
 
 ## `usePhysics`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-physics/
+URL: https://developer.playcanvas.com/user-manual/react/api/hooks/use-physics/
 
 # `usePhysics`
 
@@ -27334,7 +27349,7 @@ type $ = ReturnType<typeof usePhysics>
 
 ## `<Light/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/light/
+URL: https://developer.playcanvas.com/user-manual/react/api/light/
 
 # ``
 
@@ -27362,7 +27377,7 @@ type $ = React.ComponentProps<typeof Light>;
 
 ## `<Modify.*>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/modify/
+URL: https://developer.playcanvas.com/user-manual/react/api/modify/
 
 # `<Modify.*>`
 
@@ -27478,7 +27493,7 @@ type $ = React.ComponentProps<typeof Modify.Camera>;
 
 ## `<Render/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/render/
+URL: https://developer.playcanvas.com/user-manual/react/api/render/
 
 # ``
 
@@ -27513,13 +27528,13 @@ type $ = React.ComponentProps<typeof Render>;
 
 ## `<Rigidbody/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/rigidbody/
+URL: https://developer.playcanvas.com/user-manual/react/api/rigidbody/
 
 # ``
 
 The `` component gives an [``](../entity) physical properties such as mass, velocity, and friction and allows it to interact with the global physics simulation. An `` with a `` will respond to gravity, forces, torques and other physics behaviors.
 
-You can learn more about how the physics system works in PlayCanvas in the [Physics docs](/user-manual/physics/) and for React specific details, see the guide on [React Physics](/user-manual/playcanvas-react/guide/physics).
+You can learn more about how the physics system works in PlayCanvas in the [Physics docs](/user-manual/physics/) and for React specific details, see the guide on [React Physics](/user-manual/react/guide/physics).
 
 ## Getting started
 
@@ -27531,7 +27546,7 @@ Using physics in PlayCanvas requires ammo.js and `` to be enabled. Run `npm i sy
 
 To use the `` component, you need to install the `sync-ammo` dependency and you need to add the [``](../application) prop set in your root [``](../application) component. This will enable the physics system and allow your entities to interact with the physics simulation.
 
-Check out the guide on [React Physics](/user-manual/playcanvas-react/guide/physics) for more information.
+Check out the guide on [React Physics](/user-manual/react/guide/physics) for more information.
 
 ## Usage
 
@@ -27555,7 +27570,7 @@ type $ = React.ComponentProps<typeof RigidBody>;
 
 ## `<Script/>`
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/api/script/
+URL: https://developer.playcanvas.com/user-manual/react/api/script/
 
 # ``
 
@@ -27606,7 +27621,7 @@ type $ = {
 
 ## Building a Scene
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/building-a-scene/
+URL: https://developer.playcanvas.com/user-manual/react/building-a-scene/
 
 This guide will walk you through the process of setting up a new `@playcanvas/react` project and creating a simple 3D scene. By the end of this guide, you'll have a basic understanding of the core concepts of PlayCanvas React.
 
@@ -27737,7 +27752,7 @@ You can also check out the [guide](../guide/) to learn about the different conce
 
 ## Getting Started
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/getting-started/
+URL: https://developer.playcanvas.com/user-manual/react/getting-started/
 
 Welcome to PlayCanvas React! This section will guide you through setting up your first 3D React application and teach you the fundamental concepts you need to build interactive 3D experiences.
 
@@ -27777,7 +27792,7 @@ For more advanced topics and examples, explore the complete [PlayCanvas React do
 
 ## Installation
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/getting-started/installation/
+URL: https://developer.playcanvas.com/user-manual/react/getting-started/installation/
 
 The recommended way to get started is to use the official PlayCanvas scaffolding tool, and follow the prompts.
 
@@ -27809,7 +27824,7 @@ Alternatively you can grab one of the [templates directly](https://github.com/pl
 
 ## Concepts
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/guide/
+URL: https://developer.playcanvas.com/user-manual/react/guide/
 
 PlayCanvas React is a thin wrapper around the PlayCanvas engine. It's a simple, declarative interface over the engine API which surfaces all the features of the engine plus a few extras to make it easier to use. Anything you can do with the engine, you can do with PlayCanvas React.
 
@@ -27898,7 +27913,7 @@ Now you have the basics, it's time to learn about [Interactivity](./interactivit
 
 ## Interactivity
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/guide/interactivity/
+URL: https://developer.playcanvas.com/user-manual/react/guide/interactivity/
 
 Once you have a scene, you'll want to make it interactive. You can do this in a number of ways depending on your use case.
 
@@ -27967,7 +27982,7 @@ Now that you've learned about interactivity, you can learn about [Physics](../ph
 
 ## Loading Assets
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/guide/loading-assets/
+URL: https://developer.playcanvas.com/user-manual/react/guide/loading-assets/
 
 Whether its textures, materials or 3D models, assets are a key part of any 3D app. And generally speaking, they take the most time to load. PlayCanvas React provides a set of specialized hooks for loading different types of assets, as well as a utility function for loading assets. This helps you get up to speed quickly but with granular control of how and when assets are loaded.
 
@@ -28141,7 +28156,7 @@ You can read more about Suspense in the [React documentation](https://react.dev/
 
 ## Materials
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/guide/materials/
+URL: https://developer.playcanvas.com/user-manual/react/guide/materials/
 
 Materials are a fundamental part of 3D graphics. They define the appearance and properties of 3D objects when lit.
 
@@ -28203,7 +28218,7 @@ function TexturedMaterialExample() {
 
 ## Modifying GLB Models
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/guide/modifying-glb-models/
+URL: https://developer.playcanvas.com/user-manual/react/guide/modifying-glb-models/
 
 3D models are usually provided as standalone assets. They can feel like black boxes, which makes even small tweaks awkward—you have to reopen a DCC tool, make the change, export, and repeat whenever the model updates.
 
@@ -28406,7 +28421,7 @@ If multiple rules try to modify the same component on the same node, the most sp
 
 ## Physics
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/guide/physics/
+URL: https://developer.playcanvas.com/user-manual/react/guide/physics/
 
 PlayCanvas ships with a robust [physics system](/user-manual/physics/). This enables realistic simulations of objects in 3D space, including gravity, collisions, forces and constraints. The physics system is powered by the [ammo.js](https://github.com/kripken/ammo.js) physics engine.
 
@@ -28468,7 +28483,7 @@ For more detailed information about PlayCanvas physics, see the [PlayCanvas phys
 
 ## XR
 
-URL: https://developer.playcanvas.com/user-manual/playcanvas-react/guide/xr/
+URL: https://developer.playcanvas.com/user-manual/react/guide/xr/
 
 PlayCanvas React makes it easy to add Virtual Reality (VR) and Augmented Reality (AR) support to your applications using the WebXR API.
 
@@ -28578,21 +28593,6 @@ The PlayCanvas Engine has comprehensive XR support with many advanced features. 
 - [XR User Manual](/user-manual/xr) - Comprehensive XR documentation
 - [WebXR API Reference](https://api.playcanvas.com/engine/classes/XrManager.html) - Full API documentation
 - [XR Scripts Source](https://github.com/playcanvas/engine/tree/main/scripts/esm) - View the XR scripts source code
-
---------------------------------------------------------------------------------
-
-## Press Pack
-
-URL: https://developer.playcanvas.com/user-manual/press-pack/
-
-We offer a press pack for people to use when promoting or advertising PlayCanvas within their materials.
-
-The pack includes logos and promotional images in the common aspect ratios. There is also a video that can be used where animation is needed.
-
-[Download ZIP (44.5MB)][download-link]
-Last updated: Mon 15 Aug 2022
-
-[download-link]: pathname:///downloads/playcanvas-press-pack.zip
 
 --------------------------------------------------------------------------------
 

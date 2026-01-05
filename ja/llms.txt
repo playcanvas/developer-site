@@ -7,14 +7,14 @@ For the complete documentation content, see: https://developer.playcanvas.com/ll
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 548
-Generated: 2026-01-04
+Generated: 2026-01-05
 
 ## Recommended Entry Points
 
 - Getting Started: https://developer.playcanvas.com/user-manual/getting-started/
 - PlayCanvas Editor: https://developer.playcanvas.com/user-manual/editor/
 - PlayCanvas Engine: https://developer.playcanvas.com/user-manual/engine/
-- PlayCanvas React: https://developer.playcanvas.com/user-manual/playcanvas-react/
+- PlayCanvas React: https://developer.playcanvas.com/user-manual/react/
 - Web Components: https://developer.playcanvas.com/user-manual/web-components/
 - Scripting: https://developer.playcanvas.com/user-manual/scripting/
 - Gaussian Splatting: https://developer.playcanvas.com/user-manual/gaussian-splatting/
@@ -175,39 +175,39 @@ Generated: 2026-01-04
 - https://developer.playcanvas.com/user-manual/editor/version-control/item-history/ - Item History
 - https://developer.playcanvas.com/user-manual/editor/version-control/merging/ - Merging and resolving conflicts
 
-### PlayCanvas React
-- https://developer.playcanvas.com/user-manual/playcanvas-react/ - PlayCanvas React
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/align/ - `<Align/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/anim/ - `<Anim/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/application/ - `<Application/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/camera/ - `<Camera/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/collision/ - `<Collision/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/entity/ - `<Entity/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/environment/ - `<Environment/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/gltf/ - `<Gltf/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/gsplat/ - `<GSplat/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/ - Hooks
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-app-event/ - `useAppEvent`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-app/ - `useApp`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-asset/ - Asset Hooks
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-material/ - `useMaterial`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-parent/ - `useParent`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/hooks/use-physics/ - `usePhysics`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/light/ - `<Light/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/modify/ - `<Modify.*>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/render/ - `<Render/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/rigidbody/ - `<Rigidbody/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/api/script/ - `<Script/>`
-- https://developer.playcanvas.com/user-manual/playcanvas-react/building-a-scene/ - Building a Scene
-- https://developer.playcanvas.com/user-manual/playcanvas-react/getting-started/ - Getting Started
-- https://developer.playcanvas.com/user-manual/playcanvas-react/getting-started/installation/ - Installation
-- https://developer.playcanvas.com/user-manual/playcanvas-react/guide/ - Concepts
-- https://developer.playcanvas.com/user-manual/playcanvas-react/guide/interactivity/ - Interactivity
-- https://developer.playcanvas.com/user-manual/playcanvas-react/guide/loading-assets/ - Loading Assets
-- https://developer.playcanvas.com/user-manual/playcanvas-react/guide/materials/ - Materials
-- https://developer.playcanvas.com/user-manual/playcanvas-react/guide/modifying-glb-models/ - Modifying GLB Models
-- https://developer.playcanvas.com/user-manual/playcanvas-react/guide/physics/ - Physics
-- https://developer.playcanvas.com/user-manual/playcanvas-react/guide/xr/ - XR
+### React
+- https://developer.playcanvas.com/user-manual/react/ - PlayCanvas React
+- https://developer.playcanvas.com/user-manual/react/api/align/ - `<Align/>`
+- https://developer.playcanvas.com/user-manual/react/api/anim/ - `<Anim/>`
+- https://developer.playcanvas.com/user-manual/react/api/application/ - `<Application/>`
+- https://developer.playcanvas.com/user-manual/react/api/camera/ - `<Camera/>`
+- https://developer.playcanvas.com/user-manual/react/api/collision/ - `<Collision/>`
+- https://developer.playcanvas.com/user-manual/react/api/entity/ - `<Entity/>`
+- https://developer.playcanvas.com/user-manual/react/api/environment/ - `<Environment/>`
+- https://developer.playcanvas.com/user-manual/react/api/gltf/ - `<Gltf/>`
+- https://developer.playcanvas.com/user-manual/react/api/gsplat/ - `<GSplat/>`
+- https://developer.playcanvas.com/user-manual/react/api/hooks/ - Hooks
+- https://developer.playcanvas.com/user-manual/react/api/hooks/use-app-event/ - `useAppEvent`
+- https://developer.playcanvas.com/user-manual/react/api/hooks/use-app/ - `useApp`
+- https://developer.playcanvas.com/user-manual/react/api/hooks/use-asset/ - Asset Hooks
+- https://developer.playcanvas.com/user-manual/react/api/hooks/use-material/ - `useMaterial`
+- https://developer.playcanvas.com/user-manual/react/api/hooks/use-parent/ - `useParent`
+- https://developer.playcanvas.com/user-manual/react/api/hooks/use-physics/ - `usePhysics`
+- https://developer.playcanvas.com/user-manual/react/api/light/ - `<Light/>`
+- https://developer.playcanvas.com/user-manual/react/api/modify/ - `<Modify.*>`
+- https://developer.playcanvas.com/user-manual/react/api/render/ - `<Render/>`
+- https://developer.playcanvas.com/user-manual/react/api/rigidbody/ - `<Rigidbody/>`
+- https://developer.playcanvas.com/user-manual/react/api/script/ - `<Script/>`
+- https://developer.playcanvas.com/user-manual/react/building-a-scene/ - Building a Scene
+- https://developer.playcanvas.com/user-manual/react/getting-started/ - Getting Started
+- https://developer.playcanvas.com/user-manual/react/getting-started/installation/ - Installation
+- https://developer.playcanvas.com/user-manual/react/guide/ - Concepts
+- https://developer.playcanvas.com/user-manual/react/guide/interactivity/ - Interactivity
+- https://developer.playcanvas.com/user-manual/react/guide/loading-assets/ - Loading Assets
+- https://developer.playcanvas.com/user-manual/react/guide/materials/ - Materials
+- https://developer.playcanvas.com/user-manual/react/guide/modifying-glb-models/ - Modifying GLB Models
+- https://developer.playcanvas.com/user-manual/react/guide/physics/ - Physics
+- https://developer.playcanvas.com/user-manual/react/guide/xr/ - XR
 
 ### Web Components
 - https://developer.playcanvas.com/user-manual/web-components/ - PlayCanvas Web Components
