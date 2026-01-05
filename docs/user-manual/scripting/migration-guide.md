@@ -66,11 +66,11 @@ You can learn more about the other difference between [ES Modules and standard s
 
 :::note
 
-**ESM Script do not have a loading order.**
+**ESM Scripts do not have a loading order.**
 
 :::
 
-The loading order of scripts was introduced as a way to organize dependencies between scripts and guarantee certain code would executed before others. With ES modules, these relationships can be explicitly defined through `import/export` syntax. As such, ESM Scripts do not have an loading order and they should not be relied upon to load in a certain way. Instead we encourage you to use `import/export` statements to set up dependencies.
+The loading order of scripts was introduced as a way to organize dependencies between scripts and guarantee certain code would be executed before others. With ES modules, these relationships can be explicitly defined through `import/export` syntax. As such, ESM Scripts do not have a loading order and they should not be relied upon to load in a certain way. Instead we encourage you to use `import/export` statements to set up dependencies.
 
 ### The New `Script` Class
 
@@ -82,7 +82,7 @@ It's worth noting that although `Script` is now the default base class, it's sti
 
 :::note
 
-ESM Script do not fire Attribute Events.
+ESM Scripts do not fire Attribute Events.
 
 :::
 

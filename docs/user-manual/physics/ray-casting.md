@@ -120,8 +120,6 @@ Raycast.prototype.doRaycast = function (screenX, screenY) {
 </TabItem>
 </Tabs>
 
-You can find a project that uses ray casting for entity selection [here][1].
+You can find a project that uses ray casting for entity selection [here](https://playcanvas.com/project/410547/overview/entity-picking-using-physics).
 
 Ray casting has other applications too. An entity can probe the environment by firing ray casts. For example, to determine if an entity is on the ground, it can fire a ray cast directly downwards some distance and check if it intersects with the environment.
-
-[1]: https://playcanvas.com/project/410547/overview/entity-picking-using-physics

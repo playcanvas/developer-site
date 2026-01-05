@@ -4,7 +4,7 @@ title: Shader Chunk Migrations
 
 ## Introduction
 
-The PlayCanvas Engine's material shader chunk system is undergoing substantial changes in order to support a more flexible material system. Please see [this page][1] for more context.
+The PlayCanvas Engine's material shader chunk system is undergoing substantial changes in order to support a more flexible material system. Please see [this page](https://github.com/playcanvas/engine/issues/4250) for more context.
 
 In order to help users migrate their existing custom shader chunks, this page lists the changes made to chunks and organizes them by engine release (starting v1.51).
 
@@ -182,7 +182,7 @@ With 1.62, we are creating a clearer distinction between these two, such that th
 
 As a result of that, almost all backend chunks have been changed to accommodate for the split. This means that any custom backend shader chunks must move away from using globals to using the arguments passed to them by the lighting backend.
 
-This change also makes some chunks, such as the clearcoat specific ones, redundant, as their functions have become reusable when their no longer reliant on global values.
+This change also makes some chunks, such as the clearcoat specific ones, redundant, as their functions have become reusable when they're no longer reliant on global values.
 
 #### Changes
 
@@ -458,5 +458,3 @@ This allows the engine to automatically pick the sampler uniform to use, thus po
 | `startPS` | <ul><li>removed global declarations, generate them on demand instead</li><li>`CLEARCOAT` macro replaced with `LIT_CLEARCOAT`.</li></ul> |
 | `specularPS` | <ul><li>only provides specular color, metalness modulation is now done in backend.</li></ul> |
 | `specularityFactorPS` | <ul><li>new chunk to control specular intensity for metalness workflow.</li></ul> |
-
-[1]: https://github.com/playcanvas/engine/issues/4250

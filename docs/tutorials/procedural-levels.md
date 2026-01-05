@@ -8,9 +8,9 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
     <iframe src="https://playcanv.as/p/smskdMrk/" title="Procedural Levels" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-This project uses [clone()][1] function on the Entity to randomly generate a level from Entities that have been created in the Editor.
+This project uses [clone()](https://api.playcanvas.com/engine/classes/Entity.html#clone) function on the Entity to randomly generate a level from Entities that have been created in the Editor.
 
-Try it from the Editor in the [tutorial project.][2]
+Try it from the Editor in the [tutorial project.](https://playcanvas.com/project/405864)
 
 This script below is a very simple level generation program. It takes two Entities that have been setup in the Editor: 'Grass' and 'House' and uses them as tiles for a grid based level. The level is created by randomly choosing one of the tiles, cloning the tile to create a new Entity, then placing the new Entity at the correct grid position.
 
@@ -119,6 +119,3 @@ Generate.prototype.initialize = function() {
 
 </TabItem>
 </Tabs>
-
-[1]: https://api.playcanvas.com/engine/classes/Entity.html#clone
-[2]: https://playcanvas.com/project/405864

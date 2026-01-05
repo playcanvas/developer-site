@@ -6,13 +6,25 @@ title: SuperSplat
 
 ![SuperSplat Interface](/img/user-manual/gaussian-splatting/supersplat-interface.png)
 
-## Getting Started
+## Video Tutorials
+
+### Introduction to SuperSplat
 
 A great way to learn the basics on SuperSplat is to watch this video introduction:
 
 <div className="iframe-container">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/MwzaEM2I55I" title="SuperSplat Basics" allowfullscreen></iframe>
 </div>
+
+### In-Depth Tutorial
+
+For a more comprehensive guide to using SuperSplat, check out this in-depth tutorial:
+
+<div className="iframe-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/J37rTieKgJ8" title="SuperSplat In-Depth Tutorial" allowfullscreen></iframe>
+</div>
+
+## Getting Started
 
 ### Accessing SuperSplat
 

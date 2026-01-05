@@ -10,7 +10,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 
 *Press 1, 2 or 3 to enable/disable the spot, point and directional lights respectively.*
 
-In this tutorial we will show you how to enable/disable lights in PlayCanvas and to change light color and intensity. Note that there are many more controllable light features and properties, such as the light range. See the [API listing here][1] for more details.
+In this tutorial we will show you how to enable/disable lights in PlayCanvas and to change light color and intensity. Note that there are many more controllable light features and properties, such as the light range. See the [API listing here](https://api.playcanvas.com/engine/classes/LightComponent.html) for more details.
 
 It is also important to be aware of the different limits for differing light properties, for example red, green and blue values are set between 0 and 1, but intensity reaches from 0 up to 10. Also some lights have properties unique to them, such as the cone angles for the spot light.
 
@@ -50,7 +50,7 @@ Using `entity.light.color.r` to access and change the red value of a light's col
 
 ## General setup
 
-We added a spot light (attached to a parent assembly of a basic torch model), an omni light attached to a parent sphere model, in addition to the default directional light that is created for every new Scene. The controlling script was attached to the root entity. The sphere and torch were made children of a blank entity residing in the centre of the scene to enable easy rotation. The [full Editor scene and scripts can be accessed here][2] in the 'controllingLights' Scene.
+We added a spot light (attached to a parent assembly of a basic torch model), an omni light attached to a parent sphere model, in addition to the default directional light that is created for every new Scene. The controlling script was attached to the root entity. The sphere and torch were made children of a blank entity residing in the centre of the scene to enable easy rotation. The [full Editor scene and scripts can be accessed here](https://playcanvas.com/project/405812/overview/tutorial-controlling-lights) in the 'controllingLights' Scene.
 
 The full code used for the above PlayCanvas app is as follows.
 
@@ -211,6 +211,3 @@ LightHandler.prototype.pivot = function () {
 
 </TabItem>
 </Tabs>
-
-[1]: https://api.playcanvas.com/engine/classes/LightComponent.html
-[2]: https://playcanvas.com/project/405812/overview/tutorial-controlling-lights

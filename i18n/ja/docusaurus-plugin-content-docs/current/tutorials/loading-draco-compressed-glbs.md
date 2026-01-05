@@ -1,15 +1,19 @@
 ---
-title: 'Loading Draco Compressed GLBs'
-tags: [rendering, assets, tutorial, entities]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/730372/61CE32-image-75.jpg"
+title: 'Draco圧縮GLBの読み込み'
+tags: [rendering, assets, tutorial, scripts]
+thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/730372/61CE32-image-75.jpg
 ---
 
-How to load a Draco compressed GLB.
+import Link from '@docusaurus/Link';
 
-See https://google.github.io/draco/ for more information on Draco 3D Data Compression.
+Draco圧縮GLBを読み込む方法。
 
-See https://github.com/CesiumGS/gltf-pipeline for the tool to compress glTF models.
+Draco 3Dデータ圧縮の詳細は https://google.github.io/draco/ を参照してください。
+
+glTFモデルを圧縮するツールについては https://github.com/CesiumGS/gltf-pipeline を参照してください。
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/2uU2aYDh/" title="Loading Draco Compressed GLBs" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
+
+<Link to='https://playcanvas.com/project/730372/'>プロジェクトを開く ↗</Link>

@@ -172,6 +172,4 @@ void main (void) {
 
 ## 例
 
-上記で説明したものと同様のシェーダーで深度センシングを適用して、カメラの前にクアッドをレンダリングする[この例][1]を確認できます。
-
-[1]: https://playcanvas.github.io/#/xr/ar-camera-depth
+上記で説明したものと同様のシェーダーで深度センシングを適用して、カメラの前にクアッドをレンダリングする[この例](https://playcanvas.github.io/#/xr/ar-camera-depth)を確認できます。

@@ -4,7 +4,7 @@ title: Events
 
 Events are a useful way of communicating between scripts in order to respond to things that happen without checking every frame.
 
-Many PlayCanvas object types (such as script instances) have event handling support built-in, inherited from the Engine's [`EventHandler`][1] class. Event handling objects have the following methods:
+Many PlayCanvas object types (such as script instances) have event handling support built-in, inherited from the Engine's [`EventHandler`](https://api.playcanvas.com/engine/classes/EventHandler.html) class. Event handling objects have the following methods:
 
 * `on()` - registers an event listener.
 * `once()` - registers an event listener that unregisters itself after the first time it is called.
@@ -52,7 +52,7 @@ Player.prototype.update = function (dt) {
 </TabItem>
 </Tabs>
 
-Listen for events firing by using `on()` and `off()`. In this example, the display script listens for the `move` event on the player and prints out the x and y values.
+Listen for events by using `on()` and `off()`. In this example, the display script listens for the `move` event on the player and prints out the x and y values.
 
 <Tabs defaultValue="esm" groupId='script-code'>
 <TabItem value="esm" label="ESM">
@@ -118,7 +118,7 @@ Display.prototype.initialize = function () {
 
 ## Application Events
 
-There is a very convenient and powerful method of using events to communicate between entities that we call "Application Events". As you can see in the example above, listening for events on specific entities incurs some set up cost. For instance, the listener must have a reference to the specific entity that is firing the event. This works with some cases, but for a more general case we find that it is more appropriate to use the main application (`this.app`) as a central hub for firing events. This means you don't have to keep references of entities around in order to use the events.
+There is a very convenient and powerful method of using events to communicate between entities that we call "Application Events". As you can see in the example above, listening for events on specific entities incurs some setup cost. For instance, the listener must have a reference to the specific entity that is firing the event. This works in some cases, but for a more general case we find that it is more appropriate to use the main application (`this.app`) as a central hub for firing events. This means you don't have to keep references to entities around in order to use the events.
 
 This works by firing and listening to all events on `this.app`. By convention, we use namespaces in event names in order to signal event scope and prevent clashes. For example, the `player:move` event is fired on the application instead of firing the `move` event on the player.
 
@@ -136,8 +136,8 @@ export class Player extends Script {
     static scriptName = 'player';
 
     update(dt) {
-        var x = 1;
-        var y = 1;
+        const x = 1;
+        const y = 1;
         this.app.fire('player:move', x, y);
     }
 }
@@ -200,5 +200,3 @@ Display.prototype.initialize = function () {
 </Tabs>
 
 As you can see, this reduces the amount of set up and makes for cleaner code.
-
-[1]: https://api.playcanvas.com/engine/classes/EventHandler.html

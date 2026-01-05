@@ -8,9 +8,9 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/5019
     <iframe src="https://playcanv.as/p/FlebHmLs/" title="User Interface - Progress Bar" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*A progress bar using Element components. See the [full scene][1].*
+*A progress bar using Element components. See the [full scene](https://playcanvas.com/editor/scene/547906).*
 
-We can easily create progress bars using the built-in [Elements][2]. In this tutorial we have a progress bar that loops from empty to full every few seconds.
+We can easily create progress bars using the built-in [Elements](/user-manual/user-interface/elements/). In this tutorial we have a progress bar that loops from empty to full every few seconds.
 
 ## Hierarchy
 
@@ -20,7 +20,7 @@ This is what our UI looks like in the Hierarchy:
 
 ## Screen setup
 
-Our [screen][3] is set up like so:
+Our [screen](/user-manual/user-interface/screens/) is set up like so:
 
 ![Screen](/img/tutorials/ui/progressbar/screen.png)
 
@@ -180,9 +180,4 @@ The script has 2 attributes - the Entity that shows the fill image and the max w
 
 The `update` method essentially loops progress between 0 and 1. The important thing to note in this script is how we need to change the `width` and the `rect` of the fill image in order to properly resize our progress bar.
 
-Changing the `width` makes the fill image larger and changing the `rect` makes sure that we only show the portion of the texture that is visible, so that we avoid stretching the visible texture. [Here][8] is the API reference for `rect`.
-
-[1]: https://playcanvas.com/editor/scene/547906
-[2]: /user-manual/user-interface/elements/
-[3]: /user-manual/user-interface/screens/
-[8]: https://api.playcanvas.com/engine/classes/ElementComponent.html#rect
+Changing the `width` makes the fill image larger and changing the `rect` makes sure that we only show the portion of the texture that is visible, so that we avoid stretching the visible texture. [Here](https://api.playcanvas.com/engine/classes/ElementComponent.html#rect) is the API reference for `rect`.

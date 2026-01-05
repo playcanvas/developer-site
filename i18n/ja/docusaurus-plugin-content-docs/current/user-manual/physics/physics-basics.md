@@ -2,9 +2,9 @@
 title: 物理の基本
 ---
 
-PlayCanvasには、[ammo.js][1]という非常に強力な物理エンジンが組み込まれています。これは、オープンソースのC++ Bullet物理エンジンのブラウザポートです。
+PlayCanvasには、[ammo.js](https://github.com/kripken/ammo.js)という非常に強力な物理エンジンが組み込まれています。これは、オープンソースのC++ Bullet物理エンジンのブラウザポートです。
 
-PlayCanvasには、物理シミュレーションをセットアップするための[RigidBody][2] および[Collision][3] コンポーネントがあります。
+PlayCanvasには、物理シミュレーションをセットアップするための[RigidBody](/user-manual/editor/scenes/components/rigidbody/) および[Collision](/user-manual/editor/scenes/components/collision/) コンポーネントがあります。
 
 ## 物理を有効化 {#enabling-physics}
 
@@ -14,9 +14,9 @@ Scene Settingsパネルのインポートボタンを使用して、ammo.jsモ�
 
 ![Physics Settings](/img/user-manual/physics/physics-settings.png)
 
-これにより、PlayCanvasが提供するammo.jsのデフォルトビルドがインポートされます。独自のバージョンのammo.jsをコンパイルし、代わりにプロジェクトに追加することもできます。詳細は、[このページ][11]を参照してください。
+これにより、PlayCanvasが提供するammo.jsのデフォルトビルドがインポートされます。独自のバージョンのammo.jsをコンパイルし、代わりにプロジェクトに追加することもできます。詳細は、[このページ](/user-manual/editor/assets/inspectors/wasm/)を参照してください。
 
-従来のプロジェクトを最新のammo.jsに移行する方法の詳細は、 [このページ][10]を参照してください。
+従来のプロジェクトを最新のammo.jsに移行する方法の詳細は、 [このページ](/user-manual/physics/physics-migration/)を参照してください。
 
 ## 重力 (Gravity) {#gravity}
 
@@ -46,7 +46,7 @@ Collisionコンポーネントは、ボディの物理的な形状を指定し�
 - Cylinder
 - Mesh
 - Cone
-- [Compound][12]
+- [Compound](/user-manual/physics/compound-shapes/)
 
 ## Staticなグラウンドの作成 {#creating-a-static-ground}
 
@@ -95,10 +95,3 @@ Movement.prototype.update = function(dt) {
 ## Dynamicボディのテレポート {#teleporting-dynamic-bodies}
 
 Kinematicボディで標準エンティティ変換関数を使用することはできますが、ダイナミックボディでは許可されていません。DynamicRigidBodyを作成するとき、そのエンティティの位置と方向の設定は物理エンジンが行うようになります。つまり、pc.Entity APIを使用してスクリプト内のエンティティの位置または方向を更新しようとすると、関数の効果は無効になります。代わりに、RigidBodyのテレポート機能を呼び出して、RigidBodyの位置や方向を瞬間的に更新する物理エンジンに明示的に通知する必要があります。
-
-[1]: https://github.com/kripken/ammo.js
-[2]: /user-manual/scenes/components/rigidbody/
-[3]: /user-manual/scenes/components/collision/
-[10]: /user-manual/physics/physics-migration/
-[11]: /user-manual/assets/types/wasm/
-[12]: /user-manual/physics/compound-shapes/

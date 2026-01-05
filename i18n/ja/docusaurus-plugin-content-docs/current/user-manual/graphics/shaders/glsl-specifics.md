@@ -20,7 +20,7 @@ PlayCanvas エンジンで使用される GLSL シェーダーは、特定の要
 attribute vec2 aUv0;
 ```
 
-アトリビュート名は、[ShaderMaterial][1] を作成する際に `attributes` プロパティで指定された名前と一致する必要があります。
+アトリビュート名は、[ShaderMaterial](/user-manual/graphics/shaders/) を作成する際に `attributes` プロパティで指定された名前と一致する必要があります。
 
 :::note
 
@@ -51,5 +51,3 @@ varying vec2 uv0;
 `in`/`out` 構文 (GLSL 3.3+ で導入) はサポートされていません。
 
 :::
-
-[1]: /user-manual/graphics/shaders/

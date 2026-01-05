@@ -8,9 +8,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
     <iframe src="https://playcanv.as/p/smskdMrk/" title="Procedural Levels" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-このプロジェクトでは、エディターで作成されたエンティティを元に、[clone()][1] 関数を使用してステージ（レベル）をランダムに生成しています。
+このプロジェクトでは、エディターで作成されたエンティティを元に、[clone()](https://api.playcanvas.com/engine/classes/Entity.html#clone) 関数を使用してステージ（レベル）をランダムに生成しています。
 
-[チュートリアルプロジェクト][2]のエディターからお試しください。
+[チュートリアルプロジェクト](https://playcanvas.com/project/405864)のエディターからお試しください。
 
 以下のスクリプトは非常にシンプルなステージ（レベル）生成プログラムです。エディタで設定された2つのエンティティ、「Grass（草）」と「House（家）」をタイルとして使用し、グリッドベースのレベルを作成します。レベルは、タイルの中からランダムに1つ選択し、そのタイルを複製して新しいエンティティを作成し、新しいエンティティを正しいグリッド位置に配置することで作成されます。
 
@@ -54,6 +54,3 @@ Generate.prototype.initialize = function() {
     }
 };
 ```
-
-[1]: https://api.playcanvas.com/engine/classes/Entity.html#clone
-[2]: https://playcanvas.com/project/405864

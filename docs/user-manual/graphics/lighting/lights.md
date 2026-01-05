@@ -4,7 +4,7 @@ title: Lights
 
 In the real world, the environment around you is lit from many sources. The Sun, street lights, TV screens and so on. In a PlayCanvas scene, you have the ability to set up a number of different types of light sources and the shape of the light source to approximate the different types of light we find in reality.
 
-Descriptions of each light type and light source shape are below and examples of different combinations of light types and given in [table](#use-cases) below.
+Descriptions of each light type and light source shape are below and examples of different combinations of light types are given in the [table](#use-cases) below.
 
 ## Light Types {#light-types}
 
@@ -20,7 +20,7 @@ The most familiar light source to us is the Sun. Because the Sun is so far from 
 
 When unselected, a directional light is represented by the following icon in the Editor's 3D view:
 
-![Directional light icon](/img/user-manual/graphics/lighting/lights/directional_icon.jpg)
+![Directional light icon](/img/user-manual/graphics/lighting/lights/directional-icon.jpg)
 
 Click this icon to select the light in the Hierarchy and Inspector panels.
 
@@ -32,9 +32,9 @@ A directional light lights an object like this:
 
 Omni lights are light sources that emit light in all directions. An example of this type of light source is a candle and other examples can be seen in the [table](#use-cases) below.
 
-When unselected, a omni light is represented by the following icon in the Editor's 3D view:
+When unselected, an omni light is represented by the following icon in the Editor's 3D view:
 
-![Omni light icon](/img/user-manual/graphics/lighting/lights/point_icon.jpg)
+![Omni light icon](/img/user-manual/graphics/lighting/lights/point-icon.jpg)
 
 Click this icon to select the light in the Hierarchy and Inspector panels.
 
@@ -48,7 +48,7 @@ Spot lights, like omni lights, emit light in all directions. However, the light 
 
 When unselected, a spot light is represented by the following icon in the Editor's 3D view:
 
-![Spot light icon](/img/user-manual/graphics/lighting/lights/spot_icon.jpg)
+![Spot light icon](/img/user-manual/graphics/lighting/lights/spot-icon.jpg)
 
 Click this icon to select the light in the Hierarchy and Inspector panels.
 

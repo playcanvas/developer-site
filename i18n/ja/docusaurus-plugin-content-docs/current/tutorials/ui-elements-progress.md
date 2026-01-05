@@ -8,9 +8,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
     <iframe src="https://playcanv.as/p/FlebHmLs/" title="User Interface - Progress Bar" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*Elementコンポーネントを使用するプログレスバー。[フルシーン][1]を参照してください*
+*Elementコンポーネントを使用するプログレスバー。[フルシーン](https://playcanvas.com/editor/scene/547906)を参照してください*
 
-ビルトイン[Elements][2]を使用してプログレスバーを簡単に作成できます。本チュートリアルでは、数秒ごとに空からいっぱいにループするプログレスバーを使用しています。
+ビルトイン[Elements](/user-manual/user-interface/elements/)を使用してプログレスバーを簡単に作成できます。本チュートリアルでは、数秒ごとに空からいっぱいにループするプログレスバーを使用しています。
 
 ## ヒエラルキー (Hierarchy)
 
@@ -20,7 +20,7 @@ UIの構造は次のようになります。
 
 ## スクリーンの設定
 
-[スクリーン][3]は次のように設定されています。
+[スクリーン](/user-manual/user-interface/screens/)は次のように設定されています。
 
 ![Screen](/img/tutorials/ui/progressbar/screen.png)
 
@@ -102,9 +102,4 @@ ProgressBar.prototype.update = function(dt) {
 
 `update`メソッドでは、進行状況を0から1の間でループさせます。このスクリプトで重要な点は、進行バーを適切にリサイズするために、`width`と`rect`を変更する必要があることです。
 
-`width`を変更すると、フィルイメージが大きくなります。また、`rect`を変更することで、表示されるテクスチャの部分のみを表示し、表示されるテクスチャを伸ばさないようにします。[こちら][8]は`rect`のAPIリファレンスです。
-
-[1]: https://playcanvas.com/editor/scene/547906
-[2]: /user-manual/user-interface/elements/
-[3]: /user-manual/user-interface/screens/
-[8]: https://api.playcanvas.com/engine/classes/ElementComponent.html#rect
+`width`を変更すると、フィルイメージが大きくなります。また、`rect`を変更することで、表示されるテクスチャの部分のみを表示し、表示されるテクスチャを伸ばさないようにします。[こちら](https://api.playcanvas.com/engine/classes/ElementComponent.html#rect)は`rect`のAPIリファレンスです。

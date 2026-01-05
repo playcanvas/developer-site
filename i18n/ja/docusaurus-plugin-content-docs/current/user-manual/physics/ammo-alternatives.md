@@ -16,6 +16,4 @@ ammo.jsはおそらく最も人気があり、よく知られたJavaScript物理
 
 現時点で、p2.jsエンジンのPlayCanvasインテグレーションが唯一存在しますが、同様の手法を使用して他のエンジン用の追加インテグレーションを簡単に作成できます。
 
-2018年12月、Nvidiaは[PhysX][1]物理エンジンをオープンソース化しました。現時点ではPhysXのJS/WASMポートはありませんが、Bullet/ammo.jsと比較して最も競争力がある物理ランタイムかもしれません。Webポートが利用可能になると、上記の表に追加されます。
-
-[1]: https://github.com/NVIDIAGameWorks/PhysX
+2018年12月、Nvidiaは[PhysX](https://github.com/NVIDIAGameWorks/PhysX)物理エンジンをオープンソース化しました。現時点ではPhysXのJS/WASMポートはありませんが、Bullet/ammo.jsと比較して最も競争力がある物理ランタイムかもしれません。Webポートが利用可能になると、上記の表に追加されます。

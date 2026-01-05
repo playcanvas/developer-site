@@ -8,22 +8,20 @@ Due to the extra information that needs to be stored per checkpoint to support t
 
 See it in action below for all supported items. The `[=]` in the top left of the node means that a Checkpoint has been made but with no changes to the item.
 
-More information on using the Graph View can be found [here][graph-view].
+More information on using the Graph View can be found [here](/user-manual/editor/version-control/graph-view/).
 
 ### Entity Item History
 
-![Entity Item History](/img/user-manual/version-control/item-history/entity-item-history.gif)
+![Entity Item History](/img/user-manual/editor/version-control/item-history/entity-item-history.gif)
 
 ### Asset Item History
 
-![Asset Item History](/img/user-manual/version-control/item-history/asset-item-history.gif)
+![Asset Item History](/img/user-manual/editor/version-control/item-history/asset-item-history.gif)
 
 ### Project Settings Item History
 
-![Project Settings Item History](/img/user-manual/version-control/item-history/project-item-history.gif)
+![Project Settings Item History](/img/user-manual/editor/version-control/item-history/project-item-history.gif)
 
 ### Scene Item History
 
-![Scene Item History](/img/user-manual/version-control/item-history/scene-item-history.gif)
-
-[graph-view]: /user-manual/editor/version-control/graph-view/
+![Scene Item History](/img/user-manual/editor/version-control/item-history/scene-item-history.gif)

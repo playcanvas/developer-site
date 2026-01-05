@@ -176,7 +176,113 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: 'category',
+          label: 'Assets',
+          key: 'editor-assets',
+          link: {
+            type: 'doc',
+            id: 'user-manual/editor/assets/index',
+          },
+          items: [
+            'user-manual/editor/assets/asset-panel',
+            'user-manual/editor/assets/importing',
+            {
+              type: 'category',
+              label: 'Import Pipeline',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/assets/import-pipeline/index',
+              },
+              items: [
+                'user-manual/editor/assets/import-pipeline/import-hierarchy',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Asset Inspectors',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/assets/inspectors/index',
+              },
+              items: [
+                'user-manual/editor/assets/inspectors/animation',
+                'user-manual/editor/assets/inspectors/audio',
+                'user-manual/editor/assets/inspectors/css',
+                'user-manual/editor/assets/inspectors/cubemap',
+                'user-manual/editor/assets/inspectors/font',
+                'user-manual/editor/assets/inspectors/gsplat',
+                'user-manual/editor/assets/inspectors/html',
+                'user-manual/editor/assets/inspectors/json',
+                'user-manual/editor/assets/inspectors/material',
+                'user-manual/editor/assets/inspectors/render',
+                'user-manual/editor/assets/inspectors/shader',
+                'user-manual/editor/assets/inspectors/sprite',
+                'user-manual/editor/assets/inspectors/template',
+                'user-manual/editor/assets/inspectors/text',
+                'user-manual/editor/assets/inspectors/texture',
+                'user-manual/editor/assets/inspectors/texture-atlas',
+                'user-manual/editor/assets/inspectors/wasm',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Asset Store',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/assets/asset-store/index',
+              },
+              items: [
+                'user-manual/editor/assets/asset-store/sketchfab',
+              ],
+            },
+            'user-manual/editor/assets/viewers',
+          ],
+        },
         'user-manual/editor/realtime-collaboration',
+        {
+          type: 'category',
+          label: 'Working with Scenes',
+          link: {
+            type: 'doc',
+            id: 'user-manual/editor/scenes/index',
+          },
+          items: [
+            'user-manual/editor/scenes/managing-scenes',
+            {
+              type: 'category',
+              label: 'Components',
+              link: {
+                type: 'doc',
+                id: 'user-manual/editor/scenes/components/index',
+              },
+              items: [
+                'user-manual/editor/scenes/components/anim',
+                'user-manual/editor/scenes/components/animation',
+                'user-manual/editor/scenes/components/audiolistener',
+                'user-manual/editor/scenes/components/button',
+                'user-manual/editor/scenes/components/camera',
+                'user-manual/editor/scenes/components/collision',
+                'user-manual/editor/scenes/components/element',
+                'user-manual/editor/scenes/components/gsplat',
+                'user-manual/editor/scenes/components/layoutchild',
+                'user-manual/editor/scenes/components/layoutgroup',
+                'user-manual/editor/scenes/components/light',
+                'user-manual/editor/scenes/components/model',
+                'user-manual/editor/scenes/components/particlesystem',
+                'user-manual/editor/scenes/components/render',
+                'user-manual/editor/scenes/components/rigidbody',
+                'user-manual/editor/scenes/components/screen',
+                'user-manual/editor/scenes/components/script',
+                'user-manual/editor/scenes/components/scrollbar',
+                'user-manual/editor/scenes/components/scrollview',
+                'user-manual/editor/scenes/components/sound',
+                'user-manual/editor/scenes/components/sprite',
+              ],
+            },
+            'user-manual/editor/scenes/loading-scenes',
+          ],
+        },
         {
           type: 'category',
           label: 'Scripting',
@@ -286,7 +392,7 @@ const sidebars = {
       label: 'PlayCanvas React',
       link: {
         type: 'doc',
-        id: 'user-manual/playcanvas-react/index',
+        id: 'user-manual/react/index',
       },
       items: [
         {
@@ -295,50 +401,50 @@ const sidebars = {
           key: 'react-getting-started',
           link: {
             type: 'doc',
-            id: 'user-manual/playcanvas-react/getting-started/index',
+            id: 'user-manual/react/getting-started/index',
           },
           items: [
-            'user-manual/playcanvas-react/getting-started/installation',
+            'user-manual/react/getting-started/installation',
           ]
         },
-        'user-manual/playcanvas-react/building-a-scene',
+        'user-manual/react/building-a-scene',
         {
           type: 'category',
           label: 'Guide',
           link: {
             type: 'doc',
-            id: 'user-manual/playcanvas-react/guide/index',
+            id: 'user-manual/react/guide/index',
           },
           items: [
-            'user-manual/playcanvas-react/guide/interactivity',
-            'user-manual/playcanvas-react/guide/loading-assets',
-            'user-manual/playcanvas-react/guide/modifying-glb-models',
-            'user-manual/playcanvas-react/guide/physics',
-            'user-manual/playcanvas-react/guide/materials'
+            'user-manual/react/guide/interactivity',
+            'user-manual/react/guide/loading-assets',
+            'user-manual/react/guide/modifying-glb-models',
+            'user-manual/react/guide/physics',
+            'user-manual/react/guide/materials'
           ]
         },
         {
           type: 'category',
           label: 'API',
           items: [
-            'user-manual/playcanvas-react/api/application',
-            'user-manual/playcanvas-react/api/entity',
-            'user-manual/playcanvas-react/api/gltf',
-            'user-manual/playcanvas-react/api/modify',
+            'user-manual/react/api/application',
+            'user-manual/react/api/entity',
+            'user-manual/react/api/gltf',
+            'user-manual/react/api/modify',
             {
               type: 'category',
               label: 'Components',
               key: 'react-api-components',
               items: [
-                'user-manual/playcanvas-react/api/anim',
-                'user-manual/playcanvas-react/api/camera',
-                'user-manual/playcanvas-react/api/collision',
-                'user-manual/playcanvas-react/api/environment',
-                'user-manual/playcanvas-react/api/gsplat',
-                'user-manual/playcanvas-react/api/light',
-                'user-manual/playcanvas-react/api/render',
-                'user-manual/playcanvas-react/api/rigidbody',
-                'user-manual/playcanvas-react/api/script',
+                'user-manual/react/api/anim',
+                'user-manual/react/api/camera',
+                'user-manual/react/api/collision',
+                'user-manual/react/api/environment',
+                'user-manual/react/api/gsplat',
+                'user-manual/react/api/light',
+                'user-manual/react/api/render',
+                'user-manual/react/api/rigidbody',
+                'user-manual/react/api/script',
               ]
             },
             {
@@ -347,15 +453,15 @@ const sidebars = {
               key: 'react-api-hooks',
               link: {
                 type: 'doc',
-                id: 'user-manual/playcanvas-react/api/hooks/index',
+                id: 'user-manual/react/api/hooks/index',
               },
               items: [
-                'user-manual/playcanvas-react/api/hooks/use-app',
-                'user-manual/playcanvas-react/api/hooks/use-app-event',
-                'user-manual/playcanvas-react/api/hooks/use-asset',
-                'user-manual/playcanvas-react/api/hooks/use-material',
-                'user-manual/playcanvas-react/api/hooks/use-parent',
-                'user-manual/playcanvas-react/api/hooks/use-physics',
+                'user-manual/react/api/hooks/use-app',
+                'user-manual/react/api/hooks/use-app-event',
+                'user-manual/react/api/hooks/use-asset',
+                'user-manual/react/api/hooks/use-material',
+                'user-manual/react/api/hooks/use-parent',
+                'user-manual/react/api/hooks/use-physics',
               ]
             }
           ]
@@ -428,94 +534,17 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Scenes',
-      link: {
-        type: 'doc',
-        id: 'user-manual/scenes/index',
-      },
-      items: [
-        {
-          type: 'category',
-          label: 'Components',
-          link: {
-            type: 'doc',
-            id: 'user-manual/scenes/components/index',
-          },
-          items: [
-            'user-manual/scenes/components/anim',
-            'user-manual/scenes/components/animation',
-            'user-manual/scenes/components/audiolistener',
-            'user-manual/scenes/components/button',
-            'user-manual/scenes/components/camera',
-            'user-manual/scenes/components/collision',
-            'user-manual/scenes/components/element',
-            'user-manual/scenes/components/gsplat',
-            'user-manual/scenes/components/layout-child',
-            'user-manual/scenes/components/layout-group',
-            'user-manual/scenes/components/light',
-            'user-manual/scenes/components/model',
-            'user-manual/scenes/components/particlesystem',
-            'user-manual/scenes/components/render',
-            'user-manual/scenes/components/rigidbody',
-            'user-manual/scenes/components/screen',
-            'user-manual/scenes/components/script',
-            'user-manual/scenes/components/scrollbar',
-            'user-manual/scenes/components/scrollview',
-            'user-manual/scenes/components/sound',
-            'user-manual/scenes/components/sprite',
-          ],
-        },
-        'user-manual/scenes/loading-scenes',
-        'user-manual/scenes/managing-scenes',
-      ],
-    },
-    {
-      type: 'category',
       label: 'Assets',
+      key: 'common-assets',
       link: {
         type: 'doc',
         id: 'user-manual/assets/index',
       },
       items: [
-        {
-          type: 'category',
-          label: 'Types',
-          link: {
-            type: 'doc',
-            id: 'user-manual/assets/types/index',
-          },
-          items: [
-            'user-manual/assets/types/animation',
-            'user-manual/assets/types/audio',
-            'user-manual/assets/types/css',
-            'user-manual/assets/types/cubemap',
-            'user-manual/assets/types/font',
-            'user-manual/assets/types/gsplat',
-            'user-manual/assets/types/html',
-            'user-manual/assets/types/json',
-            'user-manual/assets/types/material',
-            'user-manual/assets/types/render',
-            'user-manual/assets/types/shader',
-            'user-manual/assets/types/sprite',
-            'user-manual/assets/types/template',
-            'user-manual/assets/types/text',
-            'user-manual/assets/types/texture',
-            'user-manual/assets/types/texture-atlas',
-            'user-manual/assets/types/wasm',
-          ],
-        },
-        'user-manual/assets/importing',
-        {
-          type: 'category',
-          label: 'Import Pipeline',
-          link: {
-            type: 'doc',
-            id: 'user-manual/assets/import-pipeline/index',
-          },
-          items: [
-            'user-manual/assets/import-pipeline/import-hierarchy',
-          ],
-        },
+        'user-manual/assets/asset-registry',
+        'user-manual/assets/preloading',
+        'user-manual/assets/loading-unloading',
+        'user-manual/assets/supported-formats',
         {
           type: 'category',
           label: 'Models',
@@ -529,20 +558,7 @@ const sidebars = {
             'user-manual/assets/models/units',
           ],
         },
-        {
-          type: 'category',
-          label: 'Asset Store',
-          link: {
-            type: 'doc',
-            id: 'user-manual/assets/asset-store/index',
-          },
-          items: [
-            'user-manual/assets/asset-store/sketchfab',
-          ],
-        },
         'user-manual/assets/finding',
-        'user-manual/assets/preloading-and-streaming',
-        'user-manual/assets/viewers',
       ],
     },
     {

@@ -2,7 +2,7 @@
 title: Screens
 ---
 
-[Screenコンポーネント][1]は、ユーザーインターフェースが構築されるエリアを定義します。その主な役割は、スクリーンの内容（エレメントコンポーネントを持つ子エンティティ）がどのようにレンダリングされるかを決定することです。
+[Screenコンポーネント](/user-manual/editor/scenes/components/screen)は、ユーザーインターフェースが構築されるエリアを定義します。その主な役割は、スクリーンの内容（エレメントコンポーネントを持つ子エンティティ）がどのようにレンダリングされるかを決定することです。
 
 ## スクリーンスペースまたはワールドスペース
 
@@ -54,5 +54,3 @@ With a value of 1 the decrease in vertical resolution makes the button too small
 
 ![Scale Blend 0.5](/img/user-manual/user-interface/screens/scale-blend-0.5.png)
 With a value of 0.5 the two changes are balanced and the button stays the same size
-
-[1]: /user-manual/scenes/components/screen

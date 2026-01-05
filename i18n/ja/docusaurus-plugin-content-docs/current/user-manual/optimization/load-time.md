@@ -10,7 +10,7 @@ title: ロード時間の最適化
 * 特定のテクスチャイメージをダウンサンプリングする機会を探してください。例えば、小さいグラフィカルオブジェクトに使用される 2048x2048 のテクスチャは、1024x1024 または512x512 でほぼ同じように見える場合があります。
 * 非同期で読み込むことができるアセットを事前にロードしないでください。例えば、ゲームの開始時にすぐにゲームミュージックを再生する必要がない場合は、Inspector パネルでそのアセットの Preload オプションをオフにすることを検討してください。
 * プリフィルター (Prefiltered) されたキューブマップを持っていて、スカイボックスの最上位ミップマップを表示していない場合、6つの面画像の preload をすべてオフにすることができます。
-* ランタイム時に Templates をインスタンス化しない場合、アセットのプリロードのチェックを外してください。それらは必要ありません。（詳細については、「[Template Assets をロードする必要があるのはいつですか？][1]」を参照してください）。
+* ランタイム時に Templates をインスタンス化しない場合、アセットのプリロードのチェックを外してください。それらは必要ありません。（詳細については、「[Template Assets をロードする必要があるのはいつですか？](/user-manual/editor/templates/#when-do-i-need-to-load-template-assets)」を参照してください）。
 * インポートされたモデルに必要な頂点属性のみを持たせるようにしてください。たとえば、モデルに第2 UV セットがあるが使用していない場合、またはすべてが白い頂点カラーしかない場合は、モデリングアプリケーションに戻ってそれらの属性を削除してください。
 * Google Chrome Dev Tools の Networking パネル (または他のブラウザのそれに相当するもの) を使用して、サイズでロードされたアセットをソートし、目立つものを見つけてください。使用されていないアセットまたは重複するアセットを削除することができます。
 * PlayCanvas の組み込み物理エンジンを使用すると、379KB の追加ダウンロードコストが発生します。非常に単純な問題を解決するために物理エンジンを使用している場合は、ダウンロードペナルティを被らない代替ソリューションを採用することを検討してください。
@@ -20,7 +20,7 @@ title: ロード時間の最適化
 
 上記のガイドラインを超えて、ユーザーが新しいものとやりとりできるようにロードを複数の段階に分けることで、ユーザーを維持することができます。
 
-[Virtual Voodoo][2] を例として、ほとんどのアプリケーションがブラウザ体験で利用する「典型的な」シーケンスを示すことができます。
+[Virtual Voodoo](https://playcanv.as/p/tRUfwVg1/) を例として、ほとんどのアプリケーションがブラウザ体験で利用する「典型的な」シーケンスを示すことができます。
 
 ゲームには3つのフェーズがあります。
 
@@ -28,7 +28,7 @@ title: ロード時間の最適化
 2. タイトルスクリーンとキャラクターカスタマイズ
 3. メインゲーム
 
-![Virtual Voodoo Phases][3]
+![Virtual Voodoo Phases](/img/user-manual/optimization/loading/virtual-voodoo-phases.jpg)
 
 ローダーフェーズは、最初の PlayCanvas シーンであるタイトルスクリーンとキャラクターカスタマイズに必要なアセットをロードします。これには、UI、キャラクターモデル、アセットなどが含まれます。
 
@@ -36,7 +36,7 @@ title: ロード時間の最適化
 
 ただし、ユーザーがアセットのロードが完了する前に開始ボタンを押した場合は、ボタンに進行状況バーが表示されます。バーが100%に達すると、ゲームは自動的にメインゲームに移行します。
 
-![Virtual Voodoo Assets Not Ready][4]
+![Virtual Voodoo Assets Not Ready](/img/user-manual/optimization/loading/virtual-voodoo-assets-not-ready.gif)
 
 アセットを段階的にロードし、定期的にユーザーが新しいものとやりとりおよび/または見ることができるようにすることで、ロード時間が長い場合でも、ユーザーは参加し続けることができます。
 
@@ -48,10 +48,4 @@ title: ロード時間の最適化
 
 以下は、キャラクターの輪郭線を完全に読み込むまでのプレースホルダーとして、キャラクターのシルエットを使用する例です。シルエットのプレースホルダーはファイルサイズが小さいため、プリロードシーケンスの一部として使用できます。また、アプリケーション内の他のキャラクターでも再利用できます。
 
-![Lazy Load Character][5]
-
-[1]: /user-manual/editor/templates/#when-do-i-need-to-load-template-assets
-[2]: https://playcanv.as/p/tRUfwVg1/
-[3]: /img/user-manual/optimization/loading/virtual-voodoo-phases.jpg
-[4]: /img/user-manual/optimization/loading/virtual-voodoo-assets-not-ready.gif
-[5]: /img/user-manual/optimization/loading/character-load.gif
+![Lazy Load Character](/img/user-manual/optimization/loading/character-load.gif)

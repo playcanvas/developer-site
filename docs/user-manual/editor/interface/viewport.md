@@ -20,7 +20,7 @@ You can also use the camera menu to select any of the camera Entities in your sc
 
 ![Gizmos](/img/user-manual/editor/viewport/gizmos.jpg)
 
-The 3-Colored Axis you can see in the screenshot above is called a [Gizmo][4]. This is used to manipulate the transform matrix of the selected Entity. There are three types of Gizmo: Translate (with arrows on the ends of the axes); Rotate (which is made up of three colored rings) and Scale (with cubes on the ends of the axes).
+The 3-Colored Axis you can see in the screenshot above is called a [Gizmo](/user-manual/glossary#gizmo). This is used to manipulate the transform matrix of the selected Entity. There are three types of Gizmo: Translate (with arrows on the ends of the axes); Rotate (which is made up of three colored rings) and Scale (with cubes on the ends of the axes).
 
 ## Render Mode {#render-mode}
 
@@ -35,5 +35,3 @@ It allows you to toggle wireframe rendering:
 You can also visualize your scene in various debug render modes. This restricts the rendered scene to just show albedo, normals, AO, emission and more.
 
 ![Viewport Render Modes](/img/user-manual/editor/viewport/render-modes.png)
-
-[4]: /user-manual/glossary#gizmo

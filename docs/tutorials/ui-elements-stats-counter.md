@@ -8,9 +8,9 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/5019
     <iframe src="https://playcanv.as/p/XVLr9TWc/" title="User Interface - Stats Counter" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*How to use buttons, progress bars and interact with elements. See the [full scene][1].*
+*How to use buttons, progress bars and interact with elements. See the [full scene](https://playcanvas.com/editor/scene/547905).*
 
-In this tutorial we are going to use the built-in [Elements][2] to create a few simple widgets that allow you to increase a stat by clicking on plus / minus buttons.
+In this tutorial we are going to use the built-in [Elements](/user-manual/user-interface/elements/) to create a few simple widgets that allow you to increase a stat by clicking on plus / minus buttons.
 
 For each stat we need a minus button, a plus button, a progress bar and some text to show the current stat value.
 
@@ -22,7 +22,7 @@ This is what our UI looks like in the Hierarchy:
 
 ## Screen setup
 
-First we start by adding a new 2D [Screen][3]. This is what our Screen looks like:
+First we start by adding a new 2D [Screen](/user-manual/user-interface/screens/). This is what our Screen looks like:
 
 ![Screen](/img/tutorials/ui/stats/screen.png)
 
@@ -32,7 +32,7 @@ Since it's a 2D screen we have ticked Screen Space. Our Reference Resolution is 
 
 For each stat we will create a different Group Element. This allows us to treat sub-elements of the Group to be anchored to the Group edges and allows us to treat each stat as a separate widget.
 
-We will only examine the Boost stat - the others are exactly the same. This is that the `stats-boost` Entity looks like in the viewport:
+We will only examine the Boost stat - the others are exactly the same. This is what the `stats-boost` Entity looks like in the viewport:
 
 ![Boost](/img/tutorials/ui/stats/boost-editor.png)
 
@@ -57,7 +57,7 @@ Our group has the following child Elements:
 
 ## Scripts
 
-We have a script on each button to allow us to change their texture based on hover states. This is similar to the script found in [this tutorial][9]. We also have a script to handle our progress bar. There is more info on progress bars in [this tutorial][10].
+We have a script on each button to allow us to change their texture based on hover states. This is similar to the script found in [this tutorial](/tutorials/ui-elements-buttons/). We also have a script to handle our progress bar. There is more info on progress bars in [this tutorial](/tutorials/ui-elements-progress/).
 
 The main script that handles the interactions for each stat is `uiStats`:
 
@@ -148,9 +148,3 @@ UiStats.prototype.setValue = function (value) {
 </Tabs>
 
 In this script we find our child elements and when the plus or minus buttons are clicked we increase / decrease the stat and update the progress bar and its text.
-
-[1]: https://playcanvas.com/editor/scene/547905
-[2]: /user-manual/user-interface/elements/
-[3]: /user-manual/user-interface/screens/
-[9]: /tutorials/ui-elements-buttons/
-[10]: /tutorials/ui-elements-progress/

@@ -20,13 +20,13 @@ Frame Buffer Picking - クリックしてグレーのシェイプを選択する
 
 ---
 
-[このチュートリアルのプロジェクト][1]をエディタから試すことができます。
+[このチュートリアルのプロジェクト](https://playcanvas.com/project/405856)をエディタから試すことができます。
 
 このチュートリアルでは、マウスのクリックなどのアクションで3Dシーン内のエンティティを選択する方法について2つの方法を説明します。
 
 ## コリジョンピッキング
 
-コリジョンベースのピッキングでは、ピックする必要がある各エンティティに対して、Collisionコンポーネントにシェイプを追加します。次に、マウスクリック位置から画面内にレイを発射し、[raycastFirst()][2] メソッドを使用して、コリジョンコンポーネントに当たるかどうかを確認します。もし当たれば、そのエンティティが「選択された」とします。
+コリジョンベースのピッキングでは、ピックする必要がある各エンティティに対して、Collisionコンポーネントにシェイプを追加します。次に、マウスクリック位置から画面内にレイを発射し、[raycastFirst()](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastfirst) メソッドを使用して、コリジョンコンポーネントに当たるかどうかを確認します。もし当たれば、そのエンティティが「選択された」とします。
 
 ```javascript
 var PickerRaycast = pc.createScript('pickerRaycast');
@@ -54,7 +54,7 @@ PickerRaycast.prototype.onSelect = function (e) {
 
 ## フレームバッファーピッキング
 
-フレームバッファーベースのピックは[pc.Picker][3]を使用してシーンを内部バッファーにレンダリングします。マウスがクリックされた場合、マウスの位置のバッファーの色が使用され、どのメッシュインスタンスが選択されたかが決定されます。これは、コリジョンベースの方法と比べていくつかの利点と欠点があります。
+フレームバッファーベースのピックは[pc.Picker](https://api.playcanvas.com/engine/classes/Picker.html)を使用してシーンを内部バッファーにレンダリングします。マウスがクリックされた場合、マウスの位置のバッファーの色が使用され、どのメッシュインスタンスが選択されたかが決定されます。これは、コリジョンベースの方法と比べていくつかの利点と欠点があります。
 
 利点:
 
@@ -144,7 +144,3 @@ PickerFramebuffer.prototype.onSelect = function (event) {
     }
 };
 ```
-
-[1]: https://playcanvas.com/project/405856
-[2]: https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastfirst
-[3]: https://api.playcanvas.com/engine/classes/Picker.html

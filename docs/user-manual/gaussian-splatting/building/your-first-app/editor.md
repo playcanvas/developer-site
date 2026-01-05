@@ -28,7 +28,7 @@ First, let's create a new PlayCanvas project:
 4. Enter a name like "My First Splat"
 5. Click **CREATE** to create the project
 
-PlayCanvas takes you to the new project's dashboard. Click the **EDITOR** button and the Editor opens with a ba scene.
+PlayCanvas takes you to the new project's dashboard. Click the **EDITOR** button and the Editor opens with a blank scene.
 
 ## Preparing the Scene
 

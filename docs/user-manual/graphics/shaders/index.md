@@ -2,7 +2,7 @@
 title: Shaders
 ---
 
-When you import your 3D models into PlayCanvas, by default, they will use our [Physical Material][1]. This is a versatile material type that can cover a lot of your rendering needs.
+When you import your 3D models into PlayCanvas, by default, they will use our [Physical Material](/user-manual/graphics/physical-rendering/physical-materials/). This is a versatile material type that can cover a lot of your rendering needs.
 
 However, you will often want to perform special effects or special cases for your materials. To do this you will need to write a custom shader. In this case, you need to use `ShaderMaterial`.
 

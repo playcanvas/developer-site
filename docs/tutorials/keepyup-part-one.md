@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 1" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*You can find the [full project here][3]*
+*You can find the [full project here](https://playcanvas.com/project/406050)*
 
 In this series of tutorials we're going to show you how a complete game is made using PlayCanvas. We've made a simple "Keepy Up" game where the object is to click or tap on the soccer ball to keep it in the air.
 
@@ -71,7 +71,4 @@ The Audio Entity has more sound components attached to it. This Entity is for pl
 
 The UI Entity is the parent of several other Entities, one for each screen that is used for the user interface of the game. We'll cover the UI Entity in Part 5.
 
-[Part 2][2] covers the main game script.
-
-[2]: /tutorials/keepyup-part-two/
-[3]: https://playcanvas.com/project/406050
+[Part 2](/tutorials/keepyup-part-two/) covers the main game script.

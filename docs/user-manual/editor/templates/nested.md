@@ -10,7 +10,7 @@ This allows you to structure complex Template hierarchies with a lot of versatil
 
 Let's use the following Template Instance as an example:
 
-![Nested Example](/img/user-manual/templates/nested.png)
+![Nested Example](/img/user-manual/editor/templates/nested.png)
 
 In this example Tree is a Template that consists of Branches which are instances of the Branch Template. Each Branch Template consists of instances of the Apple Template.
 

@@ -8,9 +8,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
     <iframe src="https://playcanv.as/p/XVLr9TWc/" title="User Interface - Stats Counter" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*ボタンやプログレスバーの使い方と要素とインタラクトする方法。[フルシーン][1]を参照してください。*
+*ボタンやプログレスバーの使い方と要素とインタラクトする方法。[フルシーン](https://playcanvas.com/editor/scene/547905)を参照してください。*
 
-このチュートリアルでは組み込みの[Element][2]を使用して、プラス/マイナスボタンをクリックすることでカウンターを増やす簡単なウィジェットを作成します。
+このチュートリアルでは組み込みの[Element](/user-manual/user-interface/elements/)を使用して、プラス/マイナスボタンをクリックすることでカウンターを増やす簡単なウィジェットを作成します。
 
 各カウンターには、マイナスボタン、プラスボタン、プログレスバー、現在のカウントを表示するテキストが必要です。
 
@@ -22,7 +22,7 @@ UIの構造は次のようになります。
 
 ## スクリーンの設定
 
-まず、新しい2D [Screen][3]を追加します。画面は次のようになります。
+まず、新しい2D [Screen](/user-manual/user-interface/screens/)を追加します。画面は次のようになります。
 
 ![Screen](/img/tutorials/ui/stats/screen.png)
 
@@ -57,7 +57,7 @@ Boostカウンターを開きます - 他のエンティティも同じ構成で
 
 ## スクリプト
 
-各ボタンには、ホバー状態に基づいてテクスチャを変更できるようにするスクリプトがあります。これは、[このチュートリアル][9]で見つかるスクリプトに似ています。また、プログレスバーを処理するスクリプトがあります。プログレスバーに関する詳細は、[このチュートリアル][10]を参照してください。
+各ボタンには、ホバー状態に基づいてテクスチャを変更できるようにするスクリプトがあります。これは、[このチュートリアル](/tutorials/ui-elements-buttons/)で見つかるスクリプトに似ています。また、プログレスバーを処理するスクリプトがあります。プログレスバーに関する詳細は、[このチュートリアル](/tutorials/ui-elements-progress/)を参照してください。
 
 各統計値のやり取りを処理するメインスクリプトは`uiStats`です。
 
@@ -97,9 +97,3 @@ UiStats.prototype.setValue = function (value) {
 ```
 
 このスクリプトでは、子要素を検索し、プラスまたはマイナスボタンがクリックされたときに統計値を増減させ、プログレスバーとそのテキストを更新するようになります。
-
-[1]: https://playcanvas.com/editor/scene/547905
-[2]: /user-manual/user-interface/elements/
-[3]: /user-manual/user-interface/screens/
-[9]: /tutorials/ui-elements-buttons/
-[10]: /tutorials/ui-elements-progress/

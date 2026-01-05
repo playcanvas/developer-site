@@ -49,11 +49,9 @@ Note that on a Mac, CMD should be used instead of CTRL.
 | Scale                 | Activate the scale gizmo in the 3D view                              | 3                              |
 | World / Local         | Switch between local and world space gizmos                          | L                              |
 | Toggle All Panels     | Hides or shows all the panels to maximize the 3D view                | SPACE                          |
-| Bake                  | Re-bake lighting using the [Run-time Lightmapper][1]                 | CTRL + B                       |
+| Bake                  | Re-bake lighting using the [Run-time Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps)                 | CTRL + B                       |
 | Previous Selection    | Select previously selected items                                     | SHIFT + Z                      |
 | Undo                  | Undo the last action                                                 | CTRL + Z                       |
 | Redo                  | Redo the last action                                                 | CTRL + Y<br />CTRL + SHIFT + Z |
 | How do I...?          | Toggle search toolbar for mini-tutorials                             | CTRL + SPACE                   |
 | Show Controls         | Display the Editor controls                                          | SHIFT + ?                      |
-
-[1]: /user-manual/graphics/lighting/runtime-lightmaps

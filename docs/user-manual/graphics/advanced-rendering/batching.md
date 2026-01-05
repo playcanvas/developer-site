@@ -2,7 +2,7 @@
 title: Batching
 ---
 
-Batching is the process of combining multiple mesh instances together into a single mesh instance, so that they can all be rendered in a single GPU draw call. PlayCanvas provides a handy feature on the [Model][7], [Sprite][9] and [Element][10] components that lets you assign these components to batch groups which give the engine hints on how to combine meshes to reduce the overall draw call count.
+Batching is the process of combining multiple mesh instances together into a single mesh instance, so that they can all be rendered in a single GPU draw call. PlayCanvas provides a handy feature on the [Model](/user-manual/editor/scenes/components/model), [Sprite](/user-manual/editor/scenes/components/sprite) and [Element](/user-manual/editor/scenes/components/element) components that lets you assign these components to batch groups which give the engine hints on how to combine meshes to reduce the overall draw call count.
 
 There are a variety of rules which the engine will apply to see if mesh instances are able to be combined. The primary rule is that all mesh instances must share the same material.
 
@@ -21,7 +21,7 @@ The use of batching is currently not compatible with [runtime lightmaps](/user-m
 
 ![Creating Batch Groups](/img/user-manual/optimization/batching/batch-groups.jpg)
 
-Batch Groups can be created from the Batch Groups section of the [scene settings panel][6]. Each batch group has a number of properties that are used to give the engine hints about how to create batches from this batch group.
+Batch Groups can be created from the Batch Groups section of the [scene settings panel](/user-manual/editor/interface/settings/batch-groups/). Each batch group has a number of properties that are used to give the engine hints about how to create batches from this batch group.
 
 ### Batch Group Properties
 
@@ -68,7 +68,7 @@ if (element.batchGroupId)
 
 ![Western Scene](/img/user-manual/optimization/batching/western-scene.jpg)
 
-In this scene we have created a static environment from 7 separate model files, some of which are repeated in the scene. For example, the road tile is used to in 50 entities to create the long road through the center of the scene.
+In this scene we have created a static environment from 7 separate model files, some of which are repeated in the scene. For example, the road tile is used in 50 entities to create the long road through the center of the scene.
 
 ![Western Animation](/img/user-manual/optimization/batching/western-animation-all.gif)
 
@@ -82,10 +82,4 @@ In this animation we have created 4 batch groups for the buildings, the cacti, t
 
 - **Batch Group** - A named group, created in the Editor, that defines some hints on how mesh instances should be combined. Components are assigned to a batch group
 - **Batch** - An engine object created at runtime which is the set of mesh instances that are rendered in a single draw call. A batch group may result in multiple batches depending on the properties of the mesh instances that are added to the batch group.
-- **Batch Manager** - The programmatic interface for creating and updating batches at runtime. See [API documentation][8].
-
-[6]: /user-manual/editor/interface/settings/batch-groups/
-[7]: /user-manual/scenes/components/model
-[8]: https://api.playcanvas.com/engine/classes/BatchManager.html
-[9]: /user-manual/scenes/components/sprite
-[10]: /user-manual/scenes/components/element
+- **Batch Manager** - The programmatic interface for creating and updating batches at runtime. See [API documentation](https://api.playcanvas.com/engine/classes/BatchManager.html).

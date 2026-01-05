@@ -4,7 +4,7 @@ tags: [animation, entities]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/452634/BDFB7E-image-75.jpg"
 ---
 
-エンティティや、2点の間の任意の値をアニメートすることがよくあります。これはトゥイーンと呼ばれ、その目的のためにトゥイーンライブラリを作成しました。ライブラリは [https://github.com/playcanvas/playcanvas-tween][1] にあります。
+エンティティや、2点の間の任意の値をアニメートすることがよくあります。これはトゥイーンと呼ばれ、その目的のためにトゥイーンライブラリを作成しました。ライブラリは [https://github.com/playcanvas/playcanvas-tween](https://github.com/playcanvas/playcanvas-tween) にあります。
 
 ライブラリを使用するには、単に`tween.js`ファイルをあなたのプロジェクトにアップロードしてください。これにより、以下のようにEntityのプロパティ(位置、回転、スケールなど)をトゥイーンできるようになります。
 
@@ -18,7 +18,7 @@ entity.tween(entity.getLocalPosition()).to({x: 10, y: 0, z: 0}, 1, pc.SineOut);
     <iframe src="https://playcanv.as/b/wEftzstB/" title="Using the Tween library" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-この例の[Project][2]と[Editor][3]へのリンクです。
+この例の[Project](https://playcanvas.com/project/452634/overview/using-the-tween-library)と[Editor](https://playcanvas.com/editor/scene/491504)へのリンクです。
 
 上記を得るために以下を行います：
 
@@ -37,7 +37,7 @@ this.entity
     <iframe src="https://playcanv.as/b/H8553dGa/" title="Tween Local Rotation" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-この例の[プロジェクト][2]と[エディタ][4]へのリンクを貼ります。
+この例の[プロジェクト](https://playcanvas.com/project/452634/overview/using-the-tween-library)と[エディタ](https://playcanvas.com/editor/scene/491558)へのリンクを貼ります。
 
 これを行うには、以下のようにします。
 
@@ -56,7 +56,7 @@ this.entity
     <iframe src="https://playcanv.as/b/ndTiHCpD/" title="Tween Local Scale" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-この例の[Project][2]と[Editor][5]へのリンクです。
+この例の[Project](https://playcanvas.com/project/452634/overview/using-the-tween-library)と[Editor](https://playcanvas.com/editor/scene/491585)へのリンクです。
 
 これを行うには、以下のようにします。
 
@@ -75,7 +75,7 @@ this.entity
     <iframe src="https://playcanv.as/b/aoRYsYrc/" title="Tween Material Color" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-この例の[プロジェクト][2]と[エディタ][6]へのリンクを貼ります。
+この例の[プロジェクト](https://playcanvas.com/project/452634/overview/using-the-tween-library)と[エディタ](https://playcanvas.com/editor/scene/491559)へのリンクを貼ります。
 
 これを行うには、以下のようにします。
 
@@ -94,11 +94,4 @@ this.app
     .start();
 ```
 
-ここでもう一度、Tweenライブラリは [https://github.com/playcanvas/playcanvas-tween][1] で利用できます。
-
-[1]: https://github.com/playcanvas/playcanvas-tween
-[2]: https://playcanvas.com/project/452634/overview/using-the-tween-library
-[3]: https://playcanvas.com/editor/scene/491504
-[4]: https://playcanvas.com/editor/scene/491558
-[5]: https://playcanvas.com/editor/scene/491585
-[6]: https://playcanvas.com/editor/scene/491559
+ここでもう一度、Tweenライブラリは [https://github.com/playcanvas/playcanvas-tween](https://github.com/playcanvas/playcanvas-tween) で利用できます。

@@ -3,13 +3,13 @@ title: Physically Based Rendering
 ---
 
 ![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  
-*Star-Lord Model by [Joachim Coppens][2]*
+*Star-Lord Model by [Joachim Coppens](https://www.joachimcoppens.com/)*
 
 Physically based rendering (PBR) is a combination of artist workflow, measured physical properties and material shaders that work together to bring order and consistency to graphics rendering. Using the underlying physical principles of how light and surfaces interact we can create predictable visuals which work in all lighting conditions without special cases.
 
 ## Fundamental Principles
 
-Below, we'll try and summarize the basic principles behind how physically based shaders calculate the lighting. In the next sections we'll cover in more detail the specifics of how physically based rendering can be used with in PlayCanvas.
+Below, we'll try and summarize the basic principles behind how physically based shaders calculate the lighting. In the next sections we'll cover in more detail the specifics of how physically based rendering can be used within PlayCanvas.
 
 ## Diffuse & Specular
 
@@ -30,7 +30,7 @@ The joy of PBR is that energy conservation is included in the shader, so as an a
 
 One thing that's new with PBR versus older shading models is thinking about what a material is made of in order to determine its behavior. The main thing we consider here is whether the material is a conductor (usually a metal) or an insulator (a non-metal).
 
-The reason this is important is it determines many factors about how the material responds to light. For example, metals are generally reflective (between 60%-90%) where as non-metals are not (0%-20%). Secondly, reflections on non-metals are usually white where as metals will usually reflect the same color as the diffuse.
+The reason this is important is it determines many factors about how the material responds to light. For example, metals are generally reflective (between 60%-90%) whereas non-metals are not (0%-20%). Secondly, reflections on non-metals are usually white whereas metals will usually reflect the same color as the diffuse.
 
 Because of these differences one of the PBR workflows includes a **metalness** property which makes this stuff simple by defining a material as either a metal, or a non-metal. More on metalness workflow in the following sections.
 
@@ -46,10 +46,6 @@ Finally onto microsurface. Generally, 3D artists are familiar with the idea of n
 
 Some PBR systems use Roughness, some use Glossiness, they are the same thing. Roughness is the inverse of Glossiness and vice versa. If you want to convert from one to the other, simply invert the texture or value.
 
-[Next: Physical Materials][6]
+[Next: Physical Materials](/user-manual/graphics/physical-rendering/physical-materials)
 
-*More reading is available in the great Marmoset Toolbag's [PBR Theory][5] article.*
-
-[2]: https://www.joachimcoppens.com/
-[5]: https://www.marmoset.co/toolbag/learn/pbr-theory
-[6]: /user-manual/graphics/physical-rendering/physical-materials
+*More reading is available in the great Marmoset Toolbag's [PBR Theory](https://www.marmoset.co/toolbag/learn/pbr-theory) article.*

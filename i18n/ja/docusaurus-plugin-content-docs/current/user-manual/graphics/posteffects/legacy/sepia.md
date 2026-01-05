@@ -16,6 +16,4 @@ title: セピアエフェクト
 
 * **Amount**: エフェクトの強度を設定します。0から1の間の値を取ります。
 
-ポストエフェクトスクリプトは[GitHub][3]で入手できます。
-
-[3]: https://github.com/playcanvas/engine/blob/main/scripts/posteffects/posteffect-sepia.js
+ポストエフェクトスクリプトは[GitHub](https://github.com/playcanvas/engine/blob/main/scripts/posteffects/posteffect-sepia.js)で入手できます。

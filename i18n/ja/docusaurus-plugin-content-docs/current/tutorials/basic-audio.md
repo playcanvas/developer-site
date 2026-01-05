@@ -16,15 +16,15 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 
 PlayCanvasの基本的なオーディオシステムは二つのコンポーネントタイプを中心に構成されています。
 
-[Sound][1]コンポーネントは、Wave、MP3、またはOgg Vorbisファイルなどのオーディオアセットを再生します。サウンドコンポーネントは、シーン内のスピーカーのようなものです。シーンには、複数のサウンドコンポーネントと、それぞれが複数のサウンドを再生することができることがあります。
+[Sound](/user-manual/editor/scenes/components/sound)コンポーネントは、Wave、MP3、またはOgg Vorbisファイルなどのオーディオアセットを再生します。サウンドコンポーネントは、シーン内のスピーカーのようなものです。シーンには、複数のサウンドコンポーネントと、それぞれが複数のサウンドを再生することができることがあります。
 
 各Soundコンポーネントは、複数のスロットで構成されています。各スロットには名前があり、再生する特定のサウンドを定義します。Soundコンポーネントに複数のスロットを設定してそれぞれを互いに独立して再生させることができます。
 
-[AudioListener][2] コンポーネントはSoundがどのように聞こえるかを定めます。AudioListenerコンポーネントはシーン内のマイクのようなものです。一度にアクティブにできるAudioListenerは一つのみです。
+[AudioListener](/user-manual/editor/scenes/components/audiolistener) コンポーネントはSoundがどのように聞こえるかを定めます。AudioListenerコンポーネントはシーン内のマイクのようなものです。一度にアクティブにできるAudioListenerは一つのみです。
 
 ## シーンの設定
 
-エディターでこのチュートリアルの[ヒエラルキー][3]をご覧ください。シーンのメインのエンティティは次の通りです：
+エディターでこのチュートリアルの[ヒエラルキー](https://playcanvas.com/editor/scene/440098)をご覧ください。シーンのメインのエンティティは次の通りです：
 
 ### プレイボット (Playbot)
 
@@ -60,7 +60,7 @@ PlayCanvasの基本的なオーディオシステムは二つのコンポーネ�
 
 ### アセット (Asset)
 
-各スロットには、異なるスロットから異なるAudioアセットを再生するためのアセットピッカーがあります。Audioアセットのアップロード方法については、[アセットのインポート][4]を参照してください。
+各スロットには、異なるスロットから異なるAudioアセットを再生するためのアセットピッカーがあります。Audioアセットのアップロード方法については、[アセットのインポート](/user-manual/editor/assets/importing)を参照してください。
 
 :::note
 
@@ -93,8 +93,3 @@ AudioListenerを作成するには、リスナーを表すエンティティを�
 一度に使用できるAudioListenerは一つです。最後に作成されたAudioListenerコンポーネントが有効になります。
 
 :::
-
-[1]: /user-manual/scenes/components/sound
-[2]: /user-manual/scenes/components/audiolistener
-[3]: https://playcanvas.com/editor/scene/440098
-[4]: /user-manual/assets/importing

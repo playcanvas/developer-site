@@ -4,7 +4,7 @@ title: ammo.jsのAPIを呼び出す方法
 
 PlayCanvas の ammo.js 連携により、ammo.js API のすべての機能が公開されるわけではありません。ただし、PlayCanvas スクリプトから直接 ammo.js API を呼び出すことができます。
 
-現在、PlayCanvas は ammo.js の [このビルド][1] を使用しています。このビルドが公開する API は [こちら][2] で確認できます。ammo.js の公式ドキュメントはありませんが、[Bullet Physics User Guide][3] を参照してください。
+現在、PlayCanvas は ammo.js の [このビルド](https://github.com/kripken/ammo.js/commit/dcab07bf0e7f2b4b64c01dc45da846344c8f50be) を使用しています。このビルドが公開する API は [こちら](https://github.com/kripken/ammo.js/blob/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/ammo.idl) で確認できます。ammo.js の公式ドキュメントはありませんが、[Bullet Physics User Guide](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) を参照してください。
 
 ## ジョイント・コンストレイント (Joint Constraints)
 
@@ -133,7 +133,7 @@ PointToPointConstraint.prototype.update = function(dt) {
 };
 ```
 
-ammo.jsを使用したすべての制約タイプを実装したプロジェクトは、[こちら][4]で見つけることができます。
+ammo.jsを使用したすべての制約タイプを実装したプロジェクトは、[こちら](https://playcanvas.com/project/618829/overview/physics-constraints)で見つけることができます。
 
 ## 連続衝突検出 (Continuous Collision Detection)
 
@@ -177,7 +177,7 @@ Ccd.prototype.initialize = function() {
 };
 ```
 
-[こちら][5]でCCDを実装したプロジェクトを見つけることができます。
+[こちら](https://playcanvas.com/project/447023/overview/physics-with-ccd)でCCDを実装したプロジェクトを見つけることができます。
 
 これらは、ammo.js APIを直接使用する例のほんの一部です。これを利用すると、他の機能も実装することができます。
 
@@ -185,9 +185,3 @@ Ccd.prototype.initialize = function() {
 * Soft body simulation
 * Cloth simulation
 * Vehicles
-
-[1]: https://github.com/kripken/ammo.js/commit/dcab07bf0e7f2b4b64c01dc45da846344c8f50be
-[2]: https://github.com/kripken/ammo.js/blob/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/ammo.idl
-[3]: https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf
-[4]: https://playcanvas.com/project/618829/overview/physics-constraints
-[5]: https://playcanvas.com/project/447023/overview/physics-with-ccd

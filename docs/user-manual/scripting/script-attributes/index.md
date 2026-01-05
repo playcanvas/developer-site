@@ -2,7 +2,7 @@
 title: Script Attributes
 ---
 
-Script Attributes are a powerful feature in PlayCanvas that define the public, configurable interface of your scripts. They allow you to expose specific parameters that can be easily tweaked, either programmatically when instantiating or configuring scripts in code or visually within the [PlayCanvas Editor](../../editor/index.md). This means you can write a script once, and then easily adjust its behavior and properties for different instances or by different team members.
+Script Attributes are a powerful feature in PlayCanvas that define the public, configurable interface of your scripts. They allow you to expose specific parameters that can be easily tweaked, either programmatically when instantiating or configuring scripts in code, or visually within the [PlayCanvas Editor](../../editor/index.md). This means you can write a script once, and then easily adjust its behavior and properties for different instances or by different team members.
 
 ## Why Use Script Attributes?
 
@@ -20,7 +20,7 @@ When you declare an attribute in your script, you are essentially defining a pro
 * **In Code:** You can set the values of these attributes when you add a script to a Script Component or at runtime via script instance properties.
 * **In the Editor:** The PlayCanvas Editor parses your script file and creates corresponding UI controls (like number fields, checkboxes, color pickers, asset pickers, etc.) in the Inspector. These controls allow you to set the values for the attributes on each specific instance of your script.
 
-For example, a `speed` attribute in a rotation script could be exposed. In the Editor, this would appear as a number field. Programmatically, you could set `this.speed = 5;` in an `initialize` method or `entity.script.myScript.speed = 5;` when setting up an entity. This allows you to set different rotation speeds for different spinning objects, all using the same underlying script logic, configured either visually or through code.
+For example, you could expose a `speed` attribute in a rotation script. In the Editor, this would appear as a number field. Programmatically, you could set `this.speed = 5;` in an `initialize` method or `entity.script.myScript.speed = 5;` when setting up an entity. This allows you to set different rotation speeds for different spinning objects, all using the same underlying script logic, configured either visually or through code.
 
 ## Two Systems: ESM and Classic
 

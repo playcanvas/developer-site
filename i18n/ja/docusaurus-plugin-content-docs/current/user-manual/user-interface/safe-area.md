@@ -6,7 +6,7 @@ title: セーフエリア
 
 <img loading="lazy" src="/img/user-manual/user-interface/safe-area/iphone-notch.png" />
 
-(Image Original: Rafael Fernandez, Modified version:PlayCanvas, [CC BY-SA 4.0][cc-by-sa-40], via Wikimedia Commons)
+(Image Original: Rafael Fernandez, Modified version:PlayCanvas, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons)
 
 開発中にノッチで隠れるかもしれないユーザーに必要な情報を考慮する必要があります。
 
@@ -20,9 +20,9 @@ title: セーフエリア
 
 ## セーフエリア
 
-開発者を支援するために、これらのデバイス上のブラウザでは、CSS内の[環境変数][env-mdn]をサポートしています。これは、ノッチやナビゲーションバーが占める領域内で要素を配置するための値を返すものです。これを「セーフエリア」と呼びます。
+開発者を支援するために、これらのデバイス上のブラウザでは、CSS内の[環境変数](https://developer.mozilla.org/en-US/docs/Web/CSS/env())をサポートしています。これは、ノッチやナビゲーションバーが占める領域内で要素を配置するための値を返すものです。これを「セーフエリア」と呼びます。
 
-当社は、そのCSS値を取り、UIグループエレメントのマージンをリサイズすることでその値を適用する再利用可能なスクリプトを持つ[プロジェクト][safe-area-project]を提供しています。
+当社は、そのCSS値を取り、UIグループエレメントのマージンをリサイズすることでその値を適用する再利用可能なスクリプトを持つ[プロジェクト](https://playcanvas.com/project/828118/overview/mobile-ui-safe-areas)を提供しています。
 
 <img loading="lazy" src="/img/user-manual/user-interface/safe-area/mobile-view-safe-area.png" width="500" />
 
@@ -43,7 +43,3 @@ title: セーフエリア
 デバッグ設定は、起動タブでライブアップデートで編集できます。
 
 <img loading="lazy" src="/img/user-manual/user-interface/safe-area/debug-config-runtime.gif" width="500" />
-
-[env-mdn]: https://developer.mozilla.org/en-US/docs/Web/CSS/env()
-[safe-area-project]: https://playcanvas.com/project/828118/overview/mobile-ui-safe-areas
-[cc-by-sa-40]: https://creativecommons.org/licenses/by-sa/4.0

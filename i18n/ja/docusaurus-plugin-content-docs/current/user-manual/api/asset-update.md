@@ -80,6 +80,4 @@ curl -H "Authorization: Bearer {accessToken}" -X PUT -F 'pow2={pow2}' -F 'file=@
 
 ## レート制限
 
-This route uses an [assets][1] rate limit.
-
-[1]: /user-manual/api#rate-limiting
+This route uses an [assets](/user-manual/api#rate-limiting) rate limit.

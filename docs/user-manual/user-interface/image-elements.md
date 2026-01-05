@@ -6,7 +6,7 @@ The image Element is used to display a texture or a solid color. Image Elements 
 
 ## Tinting
 
-Each image Element has a color property. If no texture is applied, the image element will simply be a colored rectangle. If a texture is applied, this color will be used to tint the texture. This let's you create color variations using only a single grayscale texture.
+Each image Element has a color property. If no texture is applied, the image element will simply be a colored rectangle. If a texture is applied, this color will be used to tint the texture. This lets you create color variations using only a single grayscale texture.
 
 ![Tinting](/img/user-manual/user-interface/image-element/image-tinted.png)
 

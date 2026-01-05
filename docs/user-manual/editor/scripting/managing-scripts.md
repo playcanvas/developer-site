@@ -30,7 +30,7 @@ You can bring scripts into your PlayCanvas project from external sources:
     2. Drag the file(s) directly from your file explorer/finder into the desired folder in the PlayCanvas Editor's Asset Panel.
     3. The Editor will upload and process the script, making it available as a Script Asset.
 * **Importing Scripts from the PlayCanvas Asset Store:**
-    1. Open the [Asset Store](../../assets/asset-store/index.md) (accessible via a button in the Asset Panel header).
+    1. Open the [Asset Store](../assets/asset-store/index.md) (accessible via a button in the Asset Panel header).
     2. Browse or apply the SCRIPT filter.
     3. Once you find a script/package you want, click to view its details and select IMPORT.
     4. The imported script(s) will appear in your Asset Panel, typically within a new folder named after the Asset Store package. These are now regular Script Assets you can manage and use.

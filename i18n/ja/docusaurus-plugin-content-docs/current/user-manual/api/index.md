@@ -62,7 +62,7 @@ curl -H "Authorization: Bearer nesgdxhiqe7hylfilr6ss1rds0gq1uj8" https://playcan
 
 ### branch_id {#branch_id}
 
-これは[バージョン管理][5]パネルで見つかり、選択してコピーできます。
+これは[バージョン管理](/user-manual/editor/version-control/)パネルで見つかり、選択してコピーできます。
 
 ![Branch ID](/img/user-manual/api/branch-id.png)
 
@@ -140,5 +140,3 @@ APIの呼び出し回数を調整するために、次のヘッダがレスポ�
 | `X-RateLimit-Reset`     | The time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time). |
 
 レート制限を超過すると、 `429 Too Many Requests`ステータスコードを受け取ります。制限が解除されるまで、新しいリクエストを続けることはできません。
-
-[5]: /user-manual/editor/version-control/

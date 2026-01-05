@@ -2,16 +2,16 @@
 title: ライトマッピング
 ---
 
-[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][13]
+[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*
 
-上の画像の結果を得るためにこれらのテクニックを使用する[最終シーン][13]と[プロジェクト][14]へのリンクです：外部HDRライトマップ(このページで説明します)、[アンビエントオクルージョン][12]、HDR Cubemapは、[Image Based Lighting][11]技法を使用したBox Projectionで適用され、現実的な反射を実現します。
+上の画像の結果を得るためにこれらのテクニックを使用する[最終シーン](https://playcanv.as/p/zdkARz26/)と[プロジェクト](https://playcanvas.com/project/446587/overview/archviz-example)へのリンクです：外部HDRライトマップ(このページで説明します)、[アンビエントオクルージョン](/user-manual/graphics/lighting/ambient-occlusion/)、HDR Cubemapは、[Image Based Lighting](/user-manual/graphics/physical-rendering/image-based-lighting/)技法を使用したBox Projectionで適用され、現実的な反射を実現します。
 
 ## 概要 {#overview}
 
 ライトマップ生成は静的シーンの照明情報を事前に計算し、多くの場合マテリアルに適用されるテクスチャに格納する処理です。これはライトソースや形状の多くが静的または環境に使用されている場合にシーンを照らす効率的な方法です。
 
-PlayCanvasでは、シーン内でライトマップを使用する２つの方法を提供しています：サードパーティツールを使用した**外部ライトマップ生成**と、アプリケーションが実行している間または読み込み中にエンジンによって自動的に生成される[**ランタイムライトマッピング**][0]です。
+PlayCanvasでは、シーン内でライトマップを使用する２つの方法を提供しています：サードパーティツールを使用した**外部ライトマップ生成**と、アプリケーションが実行している間または読み込み中にエンジンによって自動的に生成される[**ランタイムライトマッピング**](/user-manual/graphics/lighting/runtime-lightmaps/)です。
 
 このページでは、外部ツールからライトマップをレンダリングする際の詳細とベストプラクティスについて説明します。
 
@@ -96,10 +96,4 @@ UVの三角形は重なり合わないようにして、各ピクセルがジオ
 
 ガンマ補正、トーンマッピング、露出 は、シーンに必要な特徴と色を加えることのできる良い設定です。
 
-上記のテクニックを使った[例][13]や、[プロジェクト][14]を使うことができます。
-
-[0]: /user-manual/graphics/lighting/runtime-lightmaps/
-[11]: /user-manual/graphics/physical-rendering/image-based-lighting/
-[12]: /user-manual/graphics/lighting/ambient-occlusion/
-[13]: https://playcanv.as/p/zdkARz26/
-[14]: https://playcanvas.com/project/446587/overview/archviz-example
+上記のテクニックを使った[例](https://playcanv.as/p/zdkARz26/)や、[プロジェクト](https://playcanvas.com/project/446587/overview/archviz-example)を使うことができます。

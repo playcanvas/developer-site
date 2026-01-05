@@ -8,7 +8,7 @@ title: プロジェクト設定
 
 [ツールバー](../toolbar) または [ビューポート](../viewport) の「歯車」アイコンをクリックして [インスペクター](../inspector) に設定を読み込みます。
 
-![Settings](/img/user-manual/editor/toolbar/settings.png)
+![Settings](/img/user-manual/editor/interface/toolbar/settings.png)
 
 ## 設定カテゴリ概要
 
