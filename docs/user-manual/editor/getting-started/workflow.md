@@ -26,4 +26,4 @@ Using web standard Javascript attach custom behaviors to your entities. Add inte
 
 ![publish](/img/user-manual/introduction/workflow-publish.jpg)
 
-When you application is ready for sharing a simple one-click publish will get your application live on the internet hosted by PlayCanvas for free. Alternatively download your application for self-hosting on your own web server.
+When your application is ready for sharing a simple one-click publish will get your application live on the internet hosted by PlayCanvas for free. Alternatively download your application for self-hosting on your own web server.

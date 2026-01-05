@@ -20,7 +20,7 @@ Attributes define per-vertex input data, and can only be used in the vertex shad
 attribute vec2 aUv0;
 ```
 
-The attribute names must match the names specified in the `attributes` property when creating the [ShaderMaterial][1].
+The attribute names must match the names specified in the `attributes` property when creating the [ShaderMaterial](/user-manual/graphics/shaders/).
 
 :::note
 
@@ -44,6 +44,42 @@ Currently, our uniform system supports only simple types, including `float`, `in
 
 :::
 
+### Precision Qualifiers
+
+PlayCanvas automatically sets `highp` precision (when supported by the device) for the following types:
+
+- `float`
+- `int` (also applies to `uint`)
+- `usampler2D` (unsigned integer textures)
+- `isampler2D` (signed integer textures)
+- `sampler2DShadow`
+- `samplerCubeShadow`
+- `sampler2DArray`
+
+The following sampler types do **not** have default precision set:
+
+- `sampler2D`
+- `sampler3D`
+- `samplerCube`
+
+If you need `highp` precision for these types, you must specify it manually. This is particularly important when sampling from floating-point textures (e.g., `RGBA32F`) where full 32-bit precision is required. Without `highp`, sampled values may lose precision. Note that `highp` is not applied to standard samplers by default due to potential performance impact on mobile GPUs.
+
+To apply precision to all samplers of a type:
+
+```glsl
+precision highp sampler2D;
+
+uniform sampler2D hdrTextureA;
+uniform sampler2D hdrTextureB;
+```
+
+To apply precision to a single uniform:
+
+```glsl
+uniform highp sampler2D hdrTexture;
+uniform sampler2D ldrTexture;
+```
+
 ### Varyings
 
 Varyings are used to pass values from the vertex shader to the fragment shader. They must be declared using standard GLSL syntax:
@@ -57,5 +93,3 @@ varying vec2 uv0;
 The `in`/`out` syntax (introduced in GLSL 3.3+) is not supported.
 
 :::
-
-[1]: /user-manual/graphics/shaders/

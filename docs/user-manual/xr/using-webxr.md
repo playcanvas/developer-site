@@ -14,7 +14,7 @@ if (app.xr.supported) {
 
 ## Starting an XR Session
 
-To start XR session, you can use method on the Camera Component or [XrManager][2] on the Application. To start an XR session, you need to provide CameraComponent and provide the type of XR session, reference space, and optional object with additional arguments:
+To start XR session, you can use method on the Camera Component or [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html) on the Application. To start an XR session, you need to provide CameraComponent and provide the type of XR session, reference space, and optional object with additional arguments:
 
 ```javascript
 app.xr.start(entity.camera, pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
@@ -56,7 +56,7 @@ Exiting XR can be triggered in various ways. You can trigger an exit of XR from 
 app.xr.end();
 ```
 
-Also, the user might exit XR via some external process like the back button in the browser. [XrManager][2] will fire events associated with the session `end`:
+Also, the user might exit XR via some external process like the back button in the browser. [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html) will fire events associated with the session `end`:
 
 ```javascript
 app.xr.on('end', () => {
@@ -103,5 +103,3 @@ Position, orientation and rays of different XR objects: input sources, tracked m
 ## Why can't I enable XR mode automatically?
 
 Entering WebXR is required by browsers to be triggered by a *user action*. That means that it must be in response to a key press, a mouse click or a touch event. For that reason, there is no way to enter XR immediately on loading a page.
-
-[2]: https://api.playcanvas.com/engine/classes/XrManager.html

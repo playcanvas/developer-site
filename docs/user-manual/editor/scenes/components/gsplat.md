@@ -1,0 +1,22 @@
+---
+title: GSplat
+---
+
+The GSplat Component enables an entity to render a 3D Gaussian Splat.
+
+![GSplat Component](/img/user-manual/editor/scenes/components/component-gsplat.png)
+
+## Properties
+
+| Property | Description |
+|----------|-------------|
+| Asset    | The GSplat asset to be rendered by this GSplat Component. Only a single GSplat asset can be assigned to a GSplat Component. |
+| Layers   | The [layers](/user-manual/graphics/layers) to render this element into. |
+
+## See Also
+
+- [Gaussian Splatting](/user-manual/gaussian-splatting) - Learn more about 3D Gaussian Splats
+
+## Scripting Interface
+
+You can control a GSplat Component's properties using a [Script Component](script.md). The GSplat Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/GSplatComponent.html).

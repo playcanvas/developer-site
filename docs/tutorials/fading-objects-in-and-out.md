@@ -6,7 +6,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4365
 
 import Link from '@docusaurus/Link';
 
-Sample showing how to fade a model in and out using on a per model basis.
+Sample showing how to fade a model in and out on a per model basis.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/kvToWplO/" title="Fading objects in and out" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

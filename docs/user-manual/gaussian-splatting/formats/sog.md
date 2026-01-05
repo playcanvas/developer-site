@@ -18,11 +18,11 @@ A SOG dataset is a set of images plus a metadata file:
 | `meta.json`          | Scene metadata and filenames        | —                |
 | `means_l.webp`       | Positions – lower 8 bits (RGB)      | R,G,B            |
 | `means_u.webp`       | Positions – upper 8 bits (RGB)      | R,G,B            |
-| `quats.webp`         | Orientation – compressed quaternion | R,G,B,A          |
 | `scales.webp`        | Per-axis sizes via codebook         | R,G,B            |
+| `quats.webp`         | Orientation – compressed quaternion | R,G,B,A          |
 | `sh0.webp`           | Base color (DC) + opacity           | R,G,B,A          |
+| `shN_centroids.webp` | SH palette coefficients (optional)  | R,G,B            |
 | `shN_labels.webp`    | Indices into SH palette (optional)  | R,G              |
-| `shN_centroids.webp` | SH palette coefficients (optional)  | RGBA             |
 
 :::note[Image formats]
 
@@ -91,18 +91,18 @@ interface Meta {
   };
 
   sh0: {
-    codebook: number[];    // 256 floats; maps quantized DC to linear color (§3.4)
+    codebook: number[];    // 256 floats; DC coefficients for gamma-space color (§3.4)
     files: ["sh0.webp"];
   };
 
   // Present only if higher-order SH exist:
   shN?: {
     count: number;         // Palette size (up to 65536)
-    bands: number;         // Number of SH bands (1..3). DC (=band 1) lives in sh0.
+    bands: number;         // Number of SH bands (1..3). DC (=band 0) lives in sh0.
     codebook: number[];    // 256 floats; shared for all AC coefficients (§3.5)
     files: [
-      "shN_labels.webp",   // Per-gaussian palette index (0..count-1)
-      "shN_centroids.webp" // Palette of AC coefficients as pixels (§3.5)
+      "shN_centroids.webp",// Palette of AC coefficients as pixels (§3.5)
+      "shN_labels.webp"    // Per-gaussian palette index (0..count-1)
     ];
   };
 }
@@ -110,9 +110,10 @@ interface Meta {
 
 :::note
 
-* All codebooks contain linear-space values, not sRGB.
+* The scales codebook contains linear-space values. The sh0 and shN codebooks contain gamma-space DC coefficients.
 * Image data **must** be treated as raw 8-bit integers (no gamma conversion).
 * Unless otherwise stated, channels not mentioned are ignored.
+* Filenames in `files` arrays are arbitrary, but the order is significant.
 
 :::
 
@@ -206,10 +207,10 @@ Interpretation (e.g., principal axis standard deviations vs. full extents) follo
 
 `sh0` holds the **DC (l=0)** SH coefficient per color channel and **alpha**:
 
-* **R,G,B** are 0..255 indices into `sh0.codebook` (linear domain).
+* **R,G,B** are 0..255 indices into `sh0.codebook`.
 * **A** is the **opacity** in `[0,1]` (i.e., `sh0.a / 255`).
 
-To convert the DC coefficient to **linear RGB** contribution:
+To convert the DC coefficient to **gamma-space RGB** color:
 
 ```ts
 // SH_C0 = Y_0^0 = 1 / (2 * sqrt(pi))
@@ -221,24 +222,14 @@ const b = 0.5 + meta.sh0.codebook[sh0.b] * SH_C0;
 const a = sh0.a / 255;
 ```
 
-> **Color space.** Values are **linear**. If you output to sRGB, apply the usual transfer after shading/compositing.
-
 ### 3.5 Higher-order SH (optional)
 
-> `shN_labels.webp`, `shN_centroids.webp`
+> `shN_centroids.webp`, `shN_labels.webp`
 
 If present, higher-order (AC) SH coefficients are stored via a palette:
 
 * `shN.count` ∈ **\[1,64k]** number of entries.
 * `shN.bands` ∈ **\[1,3]** number of bands per entry.
-
-#### Labels
-
-* `shN_labels.webp` stores a **16-bit index** per gaussian with range (0..count-1).
-
-```ts
-const index = shN_labels.r + (shN_labels.g << 8);
-```
 
 #### Centroids (palette)
 
@@ -247,7 +238,7 @@ const index = shN_labels.r + (shN_labels.g << 8);
 
 The texture width is dependent on the number of bands:
 
-| Bands | Coefficients | Texure width (pixels) |
+| Bands | Coefficients | Texture width (pixels) |
 |---|---|---|
 | 1 | 3 | 64 * 3 = 96 |
 | 2 | 8 | 64 * 8 = 512 |
@@ -257,8 +248,16 @@ Calculating the pixel location for spherical harmonic entry n and coefficient c:
 
 ```ts
 const coeffs = [3, 8, 15];
-const u = (n % 64) * coeffs[bands] + c;
+const u = (n % 64) * coeffs[bands - 1] + c;
 const v = Math.floor(n / 64);
+```
+
+#### Labels
+
+* `shN_labels.webp` stores a **16-bit index** per gaussian with range (0..count-1).
+
+```ts
+const index = shN_labels.r + (shN_labels.g << 8);
 ```
 
 ---
@@ -288,7 +287,7 @@ const v = Math.floor(n / 64);
     "count": 128,
     "bands": 3,
     "codebook": [/* 256 floats */],
-    "files": ["shN_labels.webp", "shN_centroids.webp"]
+    "files": ["shN_centroids.webp", "shN_labels.webp"]
   }
 }
 ```

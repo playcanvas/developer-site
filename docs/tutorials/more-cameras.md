@@ -10,7 +10,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 
 *Click to focus, then press `space` to zoom in and out, press `left arrow` and `right arrow` to switch to the left and right cameras*
 
-The [Basic Cameras][1] tutorial walks you through creating a camera Entity and adding it to your Scene. For a single static camera, no scripting is required. But for a more dynamic and interactive camera or for more advanced usage you might want to attach a script Component and program the camera behavior yourself.
+The [Basic Cameras](/tutorials/basic-cameras/) tutorial walks you through creating a camera Entity and adding it to your Scene. For a single static camera, no scripting is required. But for a more dynamic and interactive camera or for more advanced usage you might want to attach a script Component and program the camera behavior yourself.
 
 ## Altering Attributes
 
@@ -108,8 +108,8 @@ With the final two nested `if(){}` constructs we gradually change the fov values
 
 With the line `this.entity.camera.fov = fov` we `set()` the fov camera attribute to the new value.
 
-Notice that when you are zoomed out the top and bottom cubes are at the edges of the screen, this matches our expectation from the [PlayCanvas Editor scene][3] where the cubes sit next to the
-top and bottom sides of the camera [frustum][2]
+Notice that when you are zoomed out the top and bottom cubes are at the edges of the screen, this matches our expectation from the [PlayCanvas Editor scene](https://playcanvas.com/editor/scene/440116) where the cubes sit next to the
+top and bottom sides of the camera [frustum](https://en.wikipedia.org/wiki/Frustum)
 
 ## Current Camera
 
@@ -210,12 +210,8 @@ CameraManager.prototype.update = function(dt) {
 
 In this sample, pressing the arrow keys sets the current camera to be a left or right camera Entity (from those that are in the currently loaded Scene) and the space key activates the central camera.
 
-We initially  create a function to find the camera entity we want by name - with the `findByName()` function applied to the parent entity of this script (given that the cameras are located there, there is no need to use `this.app.root.findByName()` to search through all the entities in the Scene).
+We initially create a function to find the camera entity we want by name - with the `findByName()` function applied to the parent entity of this script (given that the cameras are located there, there is no need to use `this.app.root.findByName()` to search through all the entities in the Scene).
 
-We set up an object containing the names of the camera Entities that correspond to the arrow and space keys [(see the Editor scene)][3].
+We set up an object containing the names of the camera Entities that correspond to the arrow and space keys [(see the Editor scene)](https://playcanvas.com/editor/scene/440116).
 
 Next we loop through the keys and if one was pressed then we find the entity by its name, and we set it to be the current camera using the `setCamera()` function we defined early in the script which disables the current active camera, then finds the new camera to activate.
-
-[1]: /tutorials/basic-cameras/
-[2]: https://en.wikipedia.org/wiki/Frustum
-[3]: https://playcanvas.com/editor/scene/440116

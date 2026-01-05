@@ -14,17 +14,17 @@ PlayCanvasはパーティクルシステムの作成と編集のための包括�
 
 エディターの3Dビューで、選択されていないパーティクルシステムは、次のアイコンで表されます。
 
-![Particle system icon](/img/user-manual/graphics/particles/particle_system_icon.png)
+![Particle system icon](/img/user-manual/graphics/particles/particle-system-icon.png)
 
 新しいパーティクルシステムを作成するには、新しいエンティティを作成し、ParticleSystemコンポーネントを追加します。エディターメニューには、次のアイテムがあり、これを1つのステップで実行できます。
 
-![Particle system creation](/img/user-manual/graphics/particles/particle_system_create.png)
+![Particle system creation](/img/user-manual/graphics/particles/particle-system-create.png)
 
 デフォルトの設定を使用して新しく作成されたパーティクルシステムは、次のようになります。
 
-![Default particle system](/img/user-manual/graphics/particles/particle_system_default.gif)
+![Default particle system](/img/user-manual/graphics/particles/particle-system-default.gif)
 
-ParticleSystemコンポーネントインターフェースを介してパーティクルシステムを構成するには、[こちら][4]を参照してください。
+ParticleSystemコンポーネントインターフェースを介してパーティクルシステムを構成するには、[こちら](/user-manual/editor/scenes/components/particlesystem)を参照してください。
 
 ## スクリプトでパーティクルシステムをトリガー
 
@@ -37,8 +37,4 @@ this.entity.particlesystem.play();
 
 ## ソフトパーティクル (Soft Particles)
 
-ソフトパーティクルは、シーンジオメトリと交差する場所近くでフェードアウトするパーティクルのことを意味します。[```depthSoftening```][5]を使用してSoftパーティクルを有効にした場合は、パーティクルを描画するカメラに[Depthマップ][6]レンダリングを有効にする必要があります。
-
-[4]: /user-manual/scenes/components/particlesystem
-[5]: https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html#depthsoftening
-[6]: /user-manual/graphics/cameras/depth-layer
+ソフトパーティクルは、シーンジオメトリと交差する場所近くでフェードアウトするパーティクルのことを意味します。[```depthSoftening```](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html#depthsoftening)を使用してSoftパーティクルを有効にした場合は、パーティクルを描画するカメラに[Depthマップ](/user-manual/graphics/cameras/depth-layer)レンダリングを有効にする必要があります。

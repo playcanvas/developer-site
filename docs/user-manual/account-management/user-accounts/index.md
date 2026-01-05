@@ -10,7 +10,7 @@ Creating a free PlayCanvas account opens up a world of possibilities for buildin
 
 - 🛠️ **Access the [PlayCanvas Editor](../../editor/)** - Build 3D apps using a powerful, visual interface.
 
-But not everyone opts to use the PlayCanvas Editor - perhaps you prefer to use the [PlayCanvas Engine](../../engine/) directly, or [PlayCanvas Web Components](../../web-components/) or [PlayCanvas React](../../playcanvas-react/) instead. Does it still make sense to create a PlayCanvas account? Absolutely! And here's why:
+But not everyone opts to use the PlayCanvas Editor - perhaps you prefer to use the [PlayCanvas Engine](../../engine/) directly, or [PlayCanvas Web Components](../../web-components/) or [PlayCanvas React](../../react/) instead. Does it still make sense to create a PlayCanvas account? Absolutely! And here's why:
 
 - 🔍 **Explore and learn** - Browse scripts and assets in thousands of public Editor projects to learn and find inspiration
 - ⚙️ **Generate Assets** - Use the Editor's asset processing capabilities to generate assets for use in any PlayCanvas-based project

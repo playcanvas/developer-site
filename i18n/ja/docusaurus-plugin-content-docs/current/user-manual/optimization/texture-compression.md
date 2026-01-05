@@ -6,7 +6,7 @@ title: テクスチャ圧縮
 
 エディタには、テクスチャに対して Basis を使用して、損失がある圧縮スキームを適用して VRAM 使用量を劇的に減らす機能があります。
 
-[Basis][1] は「超圧縮」されたテクスチャフォーマットです。これは、ランタイムでネイティブにサポートされているハードウェア圧縮フォーマットに変換できる、プラットフォーム非依存の損失のあるブロック圧縮フォーマットです。対応するトランスコードフォーマットは、可能な場合は ASTC、DXT、ETC2、ETC、PVR、ATC の順で選択されます。
+[Basis](https://github.com/BinomialLLC/basis_universal) は「超圧縮」されたテクスチャフォーマットです。これは、ランタイムでネイティブにサポートされているハードウェア圧縮フォーマットに変換できる、プラットフォーム非依存の損失のあるブロック圧縮フォーマットです。対応するトランスコードフォーマットは、可能な場合は ASTC、DXT、ETC2、ETC、PVR、ATC の順で選択されます。
 
 次のようなTextureアセットがあるとします。
 
@@ -24,7 +24,7 @@ title: テクスチャ圧縮
 
 <a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.jpg" alt="Brick texture compression comparison" /></a>
 
-以下は、MacとChromeで PlayCanvas のキューブを Basis [ETCモード][2] で比較したものと、[圧縮していないもの][3]です。
+以下は、MacとChromeで PlayCanvas のキューブを Basis [ETCモード](https://playcanv.as/p/j8rsh3eO/) で比較したものと、[圧縮していないもの](https://playcanv.as/p/nAW3WkW8/)です。
 
 <a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.jpg" alt="PlayCanvas cube compression comparison" /></a>
 
@@ -41,7 +41,7 @@ title: テクスチャ圧縮
 
 <img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/enable-basis-texture-compression.gif" alt="Enabling Basis Texture Compression" width="400" />
 
-BasisのWASMモジュールは、プリロードダウンロードサイズに追加で253KBのgzip圧縮データを追加しますが、それはレガシーのテクスチャ圧縮フォーマットのファイルを使用する場合と比較してテクスチャサイズの節約によって相殺されるはずです（[下記参照][4]）。
+BasisのWASMモジュールは、プリロードダウンロードサイズに追加で253KBのgzip圧縮データを追加しますが、それはレガシーのテクスチャ圧縮フォーマットのファイルを使用する場合と比較してテクスチャサイズの節約によって相殺されるはずです（[下記参照](#legacy-texture-compression)）。
 
 テクスチャから Basis 圧縮を削除する方法は次のとおりです。
 
@@ -94,8 +94,3 @@ Legacy Texture Compression オプションを使用するには、テクスチ�
 2. Basis を有効にして使用します。
 
 <img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/migrate-legacy-to-basis.gif" alt="Migrate from Legacy to Basis" width="400" />
-
-[1]: https://github.com/BinomialLLC/basis_universal
-[2]: https://playcanv.as/p/j8rsh3eO/
-[3]: https://playcanv.as/p/nAW3WkW8/
-[4]: #legacy-texture-compression

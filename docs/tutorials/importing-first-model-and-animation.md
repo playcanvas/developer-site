@@ -16,7 +16,7 @@ In this tutorial, we will be taking you through adding your first animated model
 
 ## Getting our example assets
 
-For this, we will be using Kenney's Animated Characters assets pack which can be downloaded from [their site][kenney-site].
+For this, we will be using Kenney's Animated Characters assets pack which can be downloaded from [their site](https://www.kenney.nl/assets/animated-characters-1).
 
 ![](/img/tutorials/importing-first-model-and-animation/kenney-site.jpg)
 
@@ -112,7 +112,7 @@ The graph asset can have multiple states and each state can be assigned an anima
 
 ![](/img/tutorials/importing-first-model-and-animation/anim-state-graph.png)
 
-For the purposes of this tutorial, we will just be focusing on a single state and single animation. More documentation and tutorials for animation can be found [here][animation-documentation].
+For the purposes of this tutorial, we will just be focusing on a single state and single animation. More documentation and tutorials for animation can be found [here](/user-manual/animation/).
 
 To add the graph to our model, we select the template Entity instance in the scene and add an Anim Component in the inspector.
 
@@ -125,6 +125,3 @@ In the Anim Component, we assign it our Anim State Graph asset and the states in
 And that's it! We've successfully imported our first model and looping animation into PlayCanvas!
 
 ![](/img/tutorials/importing-first-model-and-animation/preview.gif)
-
-[kenney-site]: https://www.kenney.nl/assets/animated-characters-1
-[animation-documentation]: /user-manual/animation/

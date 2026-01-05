@@ -6,7 +6,7 @@ title: ブランチを利用したワークフロー
 
 ## 機能ベース (Feature) ブランチ
 
-![Feature branches](/img/user-manual/version-control/branch-workflows/feature-branches.png)
+![Feature branches](/img/user-manual/editor/version-control/branch-workflows/feature-branches.png)
 
 機能ベースのワークフローでは、開発中の各機能はメインブランチから新しいブランチを作成して開始します。そして、機能の開発作業はあなたの機能ブランチで行います。機能が完成したら、メインブランチからの新しい変更をあなたのブランチにマージします。マスターからの変更があなたの機能に影響を及ぼしていないことを最終的に確認し、その後あなたの機能ブランチをメインブランチにマージします。
 
@@ -14,7 +14,7 @@ title: ブランチを利用したワークフロー
 
 製品サイクルがアプリケーションの番号付きバージョンを出荷する機能を持つ場合、各バージョンに対して長期間のテストが必要な場合などは、リリースブランチワークフローを使用することを選択するかもしれません。
 
-![Release branches](/img/user-manual/version-control/branch-workflows/release-branches.png)
+![Release branches](/img/user-manual/editor/version-control/branch-workflows/release-branches.png)
 
 このワークフローでは、新しい機能はメインブランチにマージされ、バージョンをリリースする準備ができるたびに、リリースしているバージョンの名前を付けた新しいブランチを取ります。このリリースブランチからビルドが公開され、リリースに必要な修正はリリースブランチに追加されます。リリースが準備できたら、修正をマスターに戻してマージし、次のリリースの開発を続けます。
 
@@ -22,6 +22,6 @@ title: ブランチを利用したワークフロー
 
 あなたのアプリケーションが長期間にわたって更新される製品で、例えば、毎週新しいリリースがある場合など、継続的デリバリーワークフローを使用することを希望するかもしれません。
 
-![Continuous Delivery](/img/user-manual/version-control/branch-workflows/continuous-delivery.png)
+![Continuous Delivery](/img/user-manual/editor/version-control/branch-workflows/continuous-delivery.png)
 
 継続的デリバリーでは、各リリースに対してブランチを持つのではなく、複数の長期間存在するブランチがアプリケーションのリリース準備に使用されます。例えば、新しい機能はメインブランチにマージされ、全ての機能がマージされるたびにメインブランチは"staging"(ステージング)という名前のブランチにマージされます。ステージングからビルドが生成され、それがテスト環境に公開されてテストが実行されます。必要な修正はメインブランチに施され、その後再度ステージングにマージされます。ステージングが準備完了と判断されたら、それは"prod"(プロダクション)と呼ばれる別のブランチにマージされます。プロダクションからビルドが生成され、これが本番環境に公開されます。

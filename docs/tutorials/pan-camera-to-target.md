@@ -6,7 +6,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/6938
 
 import Link from '@docusaurus/Link';
 
-An example shows how to focus a camera on target location
+An example showing how to focus a camera on a target location
 
 Credit: https://playcanvas.com/user/lexxik
 

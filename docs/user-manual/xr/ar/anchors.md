@@ -2,7 +2,7 @@
 title: Anchors
 ---
 
-Anchors provide the ability to create a point in 3D space that can be updated to match an ever-evolving understanding of the real world by the underlying the AR system. This allows for the placement of virtual objects in relation to the real world that feel planted in the user's environment.
+Anchors provide the ability to create a point in 3D space that can be updated to match an ever-evolving understanding of the real world by the underlying AR system. This allows for the placement of virtual objects in relation to the real world that feel planted in the user's environment.
 
 Each anchor is represented as a position and orientation and can be created from an arbitrary point as well as in relation to a hit test result that will make it more reliable.
 
@@ -44,7 +44,7 @@ app.xr.anchors.create(position, rotation, (err, anchor) => {
 });
 ```
 
-Or for more reliable tracking, an anchor can be created from the [Hit Test Result][1].
+Or for more reliable tracking, an anchor can be created from the [Hit Test Result](/user-manual/xr/ar/hit-testing/#anchors).
 
 ## Anchor {#anchor}
 
@@ -124,5 +124,3 @@ if (anchor.persistent) {
     });
 }
 ```
-
-[1]: /user-manual/xr/ar/hit-testing/#anchors

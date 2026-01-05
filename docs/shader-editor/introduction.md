@@ -35,9 +35,6 @@ void func_unpackNormal(in vec3 usr_rawNormal, out vec3 usr_unpackedNormal) {
 
 ### Next steps
 
-Learn more about Shader Editor in general in the [Overview][3] section.
+Learn more about Shader Editor in general in the [Overview](/shader-editor/overview) section.
 
-Find out more about the window layout in the [Window Layout][4] section.
-
-[3]: /shader-editor/overview
-[4]: /shader-editor/window-layout
+Find out more about the window layout in the [Window Layout](/shader-editor/window-layout) section.

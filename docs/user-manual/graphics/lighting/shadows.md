@@ -2,9 +2,9 @@
 title: Shadows
 ---
 
-Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows, can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene. See [Lightmaps][4].
+Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps](/user-manual/graphics/lighting/lightmapping).
 
-![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3_shadows.jpg)
+![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3-shadows.jpg)
 
 The PlayCanvas engine implements a shadowing algorithm called shadow mapping. It is completely cross-platform and so is guaranteed to work on both mobile and the desktop.
 
@@ -14,7 +14,7 @@ The PlayCanvas engine implements a shadowing algorithm called shadow mapping. It
 
 By default, shadow casting is disabled in PlayCanvas. You have to explicitly enable it yourself. Fortunately, enabling shadows is easy. First of all, identify which lights in your scene you want to cast shadows. Select the lights in the Hierarchy to edit their properties in the Inspector panel. Every light has a 'Cast Shadows' option. Simply check this option for the light to generate shadows for shadow casting graphical objects in your scene.
 
-![Model Component](/img/user-manual/scenes/components/component-model.png)
+![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
 
 Now you need to specify which graphical objects in your scene cast and receive shadows. By default, all render and model components cast and receive shadows. To modify these properties, select the entity in the Hierarchy, locate the render or model component in the Inspector and uncheck the 'Cast Shadows' or 'Receive Shadows' option as required.
 
@@ -34,11 +34,11 @@ Number of cascades represents the number of view frustum subdivisions, and can b
 
 A screenshot showing a single shadow cascade.
 
-![One cascade](/img/user-manual/graphics/lighting/shadows/shadow_cascades_1.jpg)
+![One cascade](/img/user-manual/graphics/lighting/shadows/shadow-cascades-1.jpg)
 
 A screenshot showing four shadow cascades.
 
-![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow_cascades_4.jpg)
+![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow-cascades-4.jpg)
 
 ### Distribution of cascades {#distribution-of-cascades}
 
@@ -46,7 +46,7 @@ The distribution of subdivision of the camera frustum for individual shadow casc
 
 ## Tuning Shadows {#tuning-shadows}
 
-The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. The following properties can be found in the [Light Component][2] UI.
+The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. The following properties can be found in the [Light Component](/user-manual/editor/scenes/components/light) UI.
 
 ### Shadow Distance {#shadow-distance}
 
@@ -68,7 +68,7 @@ Shadow mapping can be prone to rendering artifacts that can look very ugly. If y
 
 ### Normal Offset Bias {#normal-offset-bias}
 
-'Shadow acne' artifacts are a big problem and the shadow bias can eliminate them quite effectively. Unfortunately, this always introduces some level of 'Peter Panning', the phenomenon where shadows make a object appear to be floating in mid-air.
+'Shadow acne' artifacts are a big problem and the shadow bias can eliminate them quite effectively. Unfortunately, this always introduces some level of 'Peter Panning', the phenomenon where shadows make an object appear to be floating in mid-air.
 
 The Normal Offset Bias solves this problem. In addition to using the depth bias, we can avoid both shadow acne and Peter Panning by making small tweaks to the UV coordinates used in the shadow map look-up. A fragment's position is offset along its geometric normal. This "Normal Offset" technique yields vastly superior results to a constant shadow bias only approach.
 
@@ -76,7 +76,7 @@ The Normal Offset Bias solves this problem. In addition to using the depth bias,
 
 The outline of a shadow is called the penumbra. This is a transition from dark to light which gives shadows a soft edge. Softening shadow edges is the default in PlayCanvas but you can change this setting if you wish to achieve hard edged shadows. See below for a comparison of soft and hard edged shadows:
 
-![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard_vs_soft.jpg)
+![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
 
 Soft shadows are achieved by performing more samples of the shadow map on the GPU. The algorithm used is called Percentage Closest Filtering or PCF for short. This algorithm reads 9 localized samples (a 3 by 3 matrix) from the shadow map instead of just one as is used for hard shadows.
 
@@ -87,9 +87,6 @@ The shadow sampling type is specified per light and so the option can be found i
 Enabling shadows has performance implications:
 
 * For each shadow casting directional or spot light, the scene must be rendered once into a shadow map every frame. Omni light shadows are far more expensive since the scene is rendered six times per light (the shadow map is stored as a 6-sided cube map). Rendering the scene into shadow maps places load on both the CPU and the GPU.
-* Using a greater shadow map resolution with generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
+* Using a greater shadow map resolution will generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
 * Selecting soft shadows (PCF3x3) for the shadow sample type on a shadow receiving material is more expensive on the GPU versus the hard shadows option.
-* If your shadows are from static parts of the environment consider using [lightmaps][4] to bake shadows into textures.
-
-[2]: /user-manual/scenes/components/light
-[4]: /user-manual/graphics/lighting/lightmapping
+* If your shadows are from static parts of the environment consider using [lightmaps](/user-manual/graphics/lighting/lightmapping) to bake shadows into textures.

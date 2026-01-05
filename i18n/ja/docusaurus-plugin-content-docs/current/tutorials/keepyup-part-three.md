@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 3" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*[完成されたプロジェクトはこちら][4]です。先に[その1][1]と[その2][2] を読んでください。*
+*[完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です。先に[その1](/tutorials/keepyup-part-one/)と[その2](/tutorials/keepyup-part-two/) を読んでください。*
 
 ## ゲームスクリプトと入力
 
@@ -260,9 +260,4 @@ if (lenSqr < this.ballRadius*this.ballRadius) {
 
 タップした位置の3D点を取したら、それがボールと重なっているかどうかをテストします。ここでは、二乗半径を、タップとボールの間の距離の二乗値に対してテストします。これにより、テストするたびに時間のかかる平方根オペレーションを行わずにすみます。
 
-タップがボールに当たると、タップが発生した場所のボールからの距離を渡し、ボールスクリプトで`tap(dx, dy)` 関数を呼び出します。これは[パート4][3]で使用します。
-
-[1]: /tutorials/keepyup-part-one/
-[2]: /tutorials/keepyup-part-two/
-[3]: /tutorials/keepyup-part-four/
-[4]: https://playcanvas.com/project/406050
+タップがボールに当たると、タップが発生した場所のボールからの距離を渡し、ボールスクリプトで`tap(dx, dy)` 関数を呼び出します。これは[パート4](/tutorials/keepyup-part-four/)で使用します。

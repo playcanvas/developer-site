@@ -12,7 +12,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 
 このコントローラのシーン設定は重要です。キャラクターは、スクリプトがアタッチされた上にRigidBodyとCollisionコンポーネントを持つ必要があります。また、このスクリプトは、カメラエンティティをプレイヤーの子としてインスペクタに手動で設定することもできます。カメラエンティティが存在しない場合、新しいエンティティが作成されます。
 
-[Tutorial Project][1]で全シーン設定を確認してください。
+[Tutorial Project](https://playcanvas.com/project/405842)で全シーン設定を確認してください。
 
 以下のスクリプトは、以下の機能を実行します。
 
@@ -20,7 +20,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 * マウスの入力からカメラエンティティを更新する
 * 重力を適用してプレイヤーエンティティをシーン内で移動する
 
-注意:プレーヤーの速度は直接設定されず、[`applyForce`][3]を使用して力を加えることで移動されます。
+注意:プレーヤーの速度は直接設定されず、[`applyForce`](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyforce)を使用して力を加えることで移動されます。
 
 RigidBodyコンポーネントでは、以下の値がエディタインスペクタに設定されています。
 
@@ -143,6 +143,3 @@ FirstPersonMovement.prototype._createCamera = function () {
     this.camera.translateLocal(0, 0.5, 0);
 };
 ```
-
-[1]: https://playcanvas.com/project/405842
-[3]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyforce

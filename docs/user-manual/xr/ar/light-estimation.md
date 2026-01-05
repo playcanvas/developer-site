@@ -6,7 +6,7 @@ In AR, the real world can have complex illumination and various environments. Fo
 
 * **Directional light** (the most prominent), its rotation, intensity and color.
 * **Ambient light** in the form of L3 spherical harmonics.
-* **Reflections** in the form of a cube map ([currently not integrated][1]).
+* **Reflections** in the form of a cube map ([currently not integrated](https://github.com/playcanvas/engine/issues/6070)).
 
 ## Support
 
@@ -86,6 +86,4 @@ void addAmbient(vec3 worldNormal) {
 
 ## Reflections
 
-WebXR Light Estimation provides an estimation of the environment reflection in form of a cube map, but [at the moment][1] it is not integrated into PlayCanvas Engine.
-
-[1]: https://github.com/playcanvas/engine/issues/6070
+WebXR Light Estimation provides an estimation of the environment reflection in form of a cube map, but [at the moment](https://github.com/playcanvas/engine/issues/6070) it is not integrated into PlayCanvas Engine.

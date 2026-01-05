@@ -81,7 +81,7 @@ If invoices are not reaching your inbox, please check your spam folder.
 
 Your historical invoices are available to download on `playcanvas.com`. Visit your account page and scroll to the `Invoices` section. You should see something similar to this:
 
-![Billing History](/img/user-manual/billing/invoices.png)
+![Billing History](/img/user-manual/account-management/billing/invoices.png)
 
 ### How do I update my details on my invoices?
 

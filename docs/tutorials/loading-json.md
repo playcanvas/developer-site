@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
     <iframe src="https://playcanv.as/p/cHnXIXoN/" title="Loading JSON Data" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-[This project][1] shows you how to load JSON data in two ways. First, from an asset in the project. Second, over HTTP from a remote server.
+[This project](https://playcanvas.com/project/405827) shows you how to load JSON data in two ways. First, from an asset in the project. Second, over HTTP from a remote server.
 
 ## Loading JSON from an asset
 
@@ -62,7 +62,7 @@ Game.attributes.add('characterData', {
 Game.prototype.parseCharacterData = function (data) {
     var names = [];
 
-    // Read the character data from the JSON asset return a list of names
+    // Read the character data from the JSON asset and return a list of names
     var characters = data.characters;
     for (var i = 0; i < characters.length; i++) {
         var character = characters[i];
@@ -299,7 +299,7 @@ Game.prototype.initDisplay = function () {
 Game.prototype.parseCharacterData = function (data) {
     var names = [];
 
-    // Read the character data from the JSON asset return a list of names
+    // Read the character data from the JSON asset and return a list of names
     var characters = data.characters;
     for (var i = 0; i < characters.length; i++) {
         var character = characters[i];
@@ -322,6 +322,4 @@ Game.prototype.loadJsonFromRemote = function (url, callback) {
 </TabItem>
 </Tabs>
 
-Try [the project][1] for yourself.
-
-[1]: https://playcanvas.com/project/405827
+Try [the project](https://playcanvas.com/project/405827) for yourself.

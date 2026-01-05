@@ -8,9 +8,9 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/5019
     <iframe src="https://playcanv.as/p/nbMbtAGH/" title="User Interface - Leaderboard" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*A leaderboard using Element components. See the [full scene][1].*
+*A leaderboard using Element components. See the [full scene](https://playcanvas.com/editor/scene/547907).*
 
-This tutorial demonstrates how to create a simple leaderboard using the built-in [Elements][2]. The leaderboard is filled programmatically with data that come from a JSON asset.
+This tutorial demonstrates how to create a simple leaderboard using the built-in [Elements](/user-manual/user-interface/elements/). The leaderboard is filled programmatically with data that come from a JSON asset.
 
 ## Hierarchy
 
@@ -18,13 +18,13 @@ This is what our UI looks like in the hierarchy:
 
 ![Hierarchy](/img/tutorials/ui/leaderboard/hierarchy.png)
 
-As you can see we have a 2D [Screen][3], two Elements to show the title and sub title and two Image Elements which are going to be used as the backgrounds and panels for our leaderboard data. Under `Your Score` we are going to show the player's position in the leaderboard and under `Leaderboard` we will show the rest.
+As you can see we have a 2D [Screen](/user-manual/user-interface/screens/), two Elements to show the title and sub title and two Image Elements which are going to be used as the backgrounds and panels for our leaderboard data. Under `Your Score` we are going to show the player's position in the leaderboard and under `Leaderboard` we will show the rest.
 
 You will also notice a disabled Entity called `Entry Template`. This is a template that we will use for each row of the template. We will clone that template for each leaderboard entry that exists in our JSON asset and add each clone under the respective panel.
 
 ## Screen setup
 
-Our [screen][3] is set up like so:
+Our [screen](/user-manual/user-interface/screens/) is set up like so:
 
 ![Screen](/img/tutorials/ui/leaderboard/screen.png)
 
@@ -236,7 +236,3 @@ Leaderboard.prototype.load = function (callback) {
 
 </TabItem>
 </Tabs>
-
-[1]: https://playcanvas.com/editor/scene/547907
-[2]: /user-manual/user-interface/elements/
-[3]: /user-manual/user-interface/screens/

@@ -2,9 +2,9 @@
 title: Communication with web pages
 ---
 
-One the key advantages of using PlayCanvas and WebGL over other plugins or cross-compiled engines is the ability to interact directly between your application and the surrounding webpage. In this page we'll talk about some common ways of interfacing your PlayCanvas application with a web page or web application.
+One of the key advantages of using PlayCanvas and WebGL over other plugins or cross-compiled engines is the ability to interact directly between your application and the surrounding webpage. In this page we'll talk about some common ways of interfacing your PlayCanvas application with a web page or web application.
 
-There are two ways you may find your PlayCanvas application communicating with the surrounding Web page. First, you may have embedded your application in a iframe in a page. Second you may be serving your own HTML page which loads an PlayCanvas page. These two methods require very different ways of communicating between web page and application.
+There are two ways you may find your PlayCanvas application communicating with the surrounding Web page. First, you may have embedded your application in a iframe in a page. Second you may be serving your own HTML page which loads a PlayCanvas page. These two methods require very different ways of communicating between web page and application.
 
 ## Defining an API
 
@@ -98,9 +98,9 @@ Method one defines a global function which can be called anywhere in your page t
 
 Embedding a PlayCanvas application in an iframe is a quick and easy way to get your PlayCanvas content in a page. It also means that you can make use of our optimized hosting and don't need to worry about serving all the PlayCanvas content. However, the downside is that you can not call javascript functions in the PlayCanvas application directly from the hosting page because they are running on different pages.
 
-To communicate between a parent page and an iframe you will need to use the [postMessage][1] javascript API to send data between your page and the PlayCanvas application.
+To communicate between a parent page and an iframe you will need to use the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) javascript API to send data between your page and the PlayCanvas application.
 
-In your host page, use the iframeless URL for the iframe. The default publish link has the build in an iframe to include the social sharing bar at the bottom. This can cause problems with [postMessage][1] as there are now two iframes to communicate through.
+In your host page, use the iframeless URL for the iframe. The default publish link has the build in an iframe to include the social sharing bar at the bottom. This can cause problems with [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) as there are now two iframes to communicate through.
 
 If you add `/e` after `https://playcanv.as` in the URL, this will give you a version of the build without the iframe and social sharing bar.
 
@@ -185,7 +185,7 @@ When you download your PlayCanvas application for self-hosting. This is the inde
 </html>
 ```
 
-It is absolutely possible and even recommended, that you modify start from this page as the basis of your web page and you can modify it to add any additional content that is required for you page.
+It is absolutely possible and even recommended, that you start from this page as the basis of your web page and you can modify it to add any additional content that is required for your page.
 
 When it comes to communicating with your PlayCanvas application, for example from a button push. You can call the APIs we defined above directly from your script. There is no need for the `postMessage` calls.
 
@@ -225,5 +225,3 @@ For example:
 </body>
 </html>
 ```
-
-[1]: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage

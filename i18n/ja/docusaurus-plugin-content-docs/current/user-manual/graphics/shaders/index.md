@@ -2,7 +2,7 @@
 title: シェーダー
 ---
 
-3DモデルをPlayCanvasにインポートすると、デフォルトで当社の[Physical Material][1]が使用されます。これは、レンダリングの多くのニーズをカバーできる多用途なマテリアルタイプです。
+3DモデルをPlayCanvasにインポートすると、デフォルトで当社の[Physical Material](/user-manual/graphics/physical-rendering/physical-materials/)が使用されます。これは、レンダリングの多くのニーズをカバーできる多用途なマテリアルタイプです。
 
 しかし、マテリアルに特殊効果や特殊なケースを適用したいと思うことがよくあります。これを行うには、カスタムシェーダーを記述する必要があります。この場合、`ShaderMaterial`を使用する必要があります。
 
@@ -205,5 +205,3 @@ pc.Tracing.set(pc.TRACEID_SHADER_ALLOC, true);
 ![sRGB](/img/user-manual/graphics/shaders/shader-log.png)
 
 詳細については、[ShaderMaterial APIドキュメント](https://api.playcanvas.com/engine/classes/ShaderMaterial.html)を参照してください。
-
-[1]: /user-manual/graphics/physical-rendering/physical-materials/

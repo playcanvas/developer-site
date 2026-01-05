@@ -10,7 +10,7 @@ POST https://playcanvas.com/api/apps/download
 
 ## Description
 
-This will allow you to download an app which you can self host on your own server. The request will start an export job and the job details will be returned in the response. You can [poll the job by id][2] until its status is either 'complete' or 'error'. When the job is done, its data will contain a URL to download the exported app.
+This will allow you to download an app which you can self host on your own server. The request will start an export job and the job details will be returned in the response. You can [poll the job by id](/user-manual/api/job-get) until its status is either 'complete' or 'error'. When the job is done, its data will contain a URL to download the exported app.
 
 ## Example
 
@@ -77,7 +77,4 @@ Status: 201 Created
 
 ## Rate Limiting
 
-This route uses a [strict][1] rate limit.
-
-[1]: /user-manual/api#rate-limiting
-[2]: /user-manual/api/job-get
+This route uses a [strict](/user-manual/api#rate-limiting) rate limit.

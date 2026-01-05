@@ -16,15 +16,15 @@ In this tutorial we have placed a robot in the middle of the scene with a tank r
 
 The basic audio system in PlayCanvas centers on two Component types.
 
-The [Sound][1] Component plays audio assets like Wave, MP3 or Ogg Vorbis files. Imagine Sound Components like loudspeakers in the scene. There can be many Sound Components in the scene each playing multiple sounds.
+The [Sound](/user-manual/editor/scenes/components/sound) Component plays audio assets like Wave, MP3 or Ogg Vorbis files. Imagine Sound Components like loudspeakers in the scene. There can be many Sound Components in the scene each playing multiple sounds.
 
 Each Sound component comprises of a number of slots. Each slot has a name and defines a specific sound to be played. You can have multiple slots on a Sound component each playing independently from each other.
 
-The [AudioListener][2] Component determines how a Sound is heard. Imagine AudioListener Components like a microphone in the scene. There can only be one active AudioListener at a time.
+The [AudioListener](/user-manual/editor/scenes/components/audiolistener) Component determines how a Sound is heard. Imagine AudioListener Components like a microphone in the scene. There can only be one active AudioListener at a time.
 
 ## Scene Setup
 
-You should look at the [Hierarchy][3] for this tutorial yourself in the Editor. These are the main Entities in the Scene:
+You should look at the [Hierarchy](https://playcanvas.com/editor/scene/440098) for this tutorial yourself in the Editor. These are the main Entities in the Scene:
 
 ### Playbot
 
@@ -60,7 +60,7 @@ If this is checked it means that the sound will be heard relative to the positio
 
 ### Asset
 
-Each slot has an Asset picker which allows you to play different audio assets from different slots. See [importing assets][4] for details on how to upload audio assets.
+Each slot has an Asset picker which allows you to play different audio assets from different slots. See [importing assets](/user-manual/editor/assets/importing) for details on how to upload audio assets.
 
 :::note
 
@@ -93,8 +93,3 @@ To create an AudioListener, select the Entity you wish to represent the listener
 You can only have one AudioListener at a time. The last AudioListener Component that is created will be the active one.
 
 :::
-
-[1]: /user-manual/scenes/components/sound
-[2]: /user-manual/scenes/components/audiolistener
-[3]: https://playcanvas.com/editor/scene/440098
-[4]: /user-manual/assets/importing

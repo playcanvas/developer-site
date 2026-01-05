@@ -27,6 +27,7 @@
     "raycast",
     "particles",
     "facebook",
+    "gaussiansplatting",
     "monetization",
     "html",
     "vr",
@@ -441,6 +442,24 @@
       ],
       "thumb": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/433323/373838-image-75.jpg",
       "filename": "frames-per-sec-fps-counter"
+    },
+    {
+      "title": "3D Gaussian Splat Annotations",
+      "tags": [
+        "gaussiansplatting",
+        "tutorial"
+      ],
+      "thumb": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1444720/AC20A8-image-75.jpg",
+      "filename": "gaussian-splat-annotations"
+    },
+    {
+      "title": "3D Gaussian Splat Physics and Relighting",
+      "tags": [
+        "gaussiansplatting",
+        "tutorial"
+      ],
+      "thumb": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1358087/92BB65-image-75.jpg",
+      "filename": "gaussian-splat-physics-and-relighting"
     },
     {
       "title": "Google H5 Ads Beta Monetization",

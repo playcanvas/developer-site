@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
     <iframe src="https://playcanv.as/p/BqhCi6oy/" title="Creating a Music Visualizer" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*Find out more by forking the [full project][1].*
+*Find out more by forking the [full project](https://playcanvas.com/project/405891).*
 
 This tutorial teaches you how to create a Music Visualizer application in WebGL using PlayCanvas. We're going to take an audio stream extra frequency data and then render that data into a PlayCanvas canvas.
 
@@ -97,7 +97,7 @@ Analyser.prototype.update = function(dt) {
 
 Let's take a closer look at the code here.
 
-First we get hold of the `context`. This is the applications instance of an [`AudioContext`][2]. We use this to create a new [`AnalyserNode`][3] which is part of the Web Audio API the standard across all modern browsers. The `AnalyserNode` let's us access the raw data of the audio every frame as an array of values. It has a couple of properties `smoothingTimeConstant` determines whether the data sampling is smoothed over time. `0` means no smoothing, `1` means super-smooth. And `fftSize` this determines how many samples the analyser node will generate. It must be a power of two, the higher it is the more detailed and the more expensive for your CPU.
+First we get hold of the `context`. This is the applications instance of an [`AudioContext`](https://developer.mozilla.org/en/docs/Web/API/AudioContext). We use this to create a new [`AnalyserNode`](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode) which is part of the Web Audio API the standard across all modern browsers. The `AnalyserNode` lets us access the raw data of the audio every frame as an array of values. It has a couple of properties `smoothingTimeConstant` determines whether the data sampling is smoothed over time. `0` means no smoothing, `1` means super-smooth. And `fftSize` this determines how many samples the analyser node will generate. It must be a power of two, the higher it is the more detailed and the more expensive for your CPU.
 
 You can access the data from the `AnalyserNode` as integers, in a `Uint8Array` or as floats, in a `Float32Array`. In this demo we use floats, so we allocate two `Float32Arrays` each one needs to be half as big as `fftSize`.
 
@@ -253,9 +253,9 @@ Visualizer.prototype.renderData = function (data, color, scale, offset) {
 </TabItem>
 </Tabs>
 
-The visualizer script takes all the data from the analyser and renders it as line graph using the [`this.app.renderLines`][4] API.
+The visualizer script takes all the data from the analyser and renders it as line graph using the [`this.app.renderLines`](https://api.playcanvas.com/engine/classes/AppBase.html#renderlines) API.
 
-In our setup we are allocating a load of vectors to use in for the lines. We need 2 for every point of data (for the start and end of the lines). Then we are setting up some scale factors to make sure the lines all appear on the screen. The `AnalyserNode` contains a min and max value of decibels that the data can contain. I've found this isn't particular accurate (I definitely got values outside of this range) but it forms a good basis for normalizing the data.
+In our setup we are allocating a load of vectors to use in for the lines. We need 2 for every point of data (for the start and end of the lines). Then we are setting up some scale factors to make sure the lines all appear on the screen. The `AnalyserNode` contains a min and max value of decibels that the data can contain. I've found this isn't particularly accurate (I definitely got values outside of this range) but it forms a good basis for normalizing the data.
 
 The `renderData` function loops through all the data and sets one of our pre-allocated vectors to be the start at the current point and finish at the next point.
 
@@ -264,8 +264,3 @@ In our update loop we render the graphs for both the Frequency Data and the Time
 ## More ideas?
 
 This is just a taster of how you can visualize your music. Why not try scaling 3D bars, adjusting colors and brightness in time to the music? Hook up the visualizer to SoundCloud and let users pick tracks? There are loads of possibilities.
-
-[1]: https://playcanvas.com/project/405891
-[2]: https://developer.mozilla.org/en/docs/Web/API/AudioContext
-[3]: https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode
-[4]: https://api.playcanvas.com/engine/classes/AppBase.html#renderlines

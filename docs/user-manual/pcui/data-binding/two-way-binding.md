@@ -18,7 +18,7 @@ import { TextInput, BindingTwoWay } from '@playcanvas/pcui';
 import '@playcanvas/pcui/styles';
 ```
 
-Then create a new observer for a an object which contains a text string.
+Then create a new observer for an object which contains a text string.
 
 ```javascript
 const observer = new Observer({

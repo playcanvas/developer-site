@@ -2,7 +2,7 @@
 title: Text Elements
 ---
 
-The Text Element is used to display a string of text using a [font asset][1].
+The Text Element is used to display a string of text using a [font asset](/user-manual/editor/assets/inspectors/font).
 
 ## Text
 
@@ -44,7 +44,7 @@ Or by enabling it in the Editor:
 
 You can check the 'Localized' checkbox to localize the text of the Text Element. If this is enabled then, instead of the text, you specify the localization key for the Text Element which will be used to get the localized text from the localization assets.
 
-Read more about localization [here][11].
+Read more about localization [here](/user-manual/user-interface/localization).
 
 ## Auto-size
 
@@ -82,7 +82,7 @@ Increase Line Height to increase line spacing:
 
 ## Spacing
 
-The spacing property increase the distance between characters in a string. Fonts define the ideal distance to move the cursor forward for each character. The spacing property is a multiplier to this distance.
+The spacing property increases the distance between characters in a string. Fonts define the ideal distance to move the cursor forward for each character. The spacing property is a multiplier to this distance.
 
 ![Spacing](/img/user-manual/user-interface/text-element/spacing.png)
 
@@ -92,11 +92,8 @@ The Color property allows you to tint the string to the color of your choice.
 
 ![Tinted](/img/user-manual/user-interface/text-element/tinted.png)
 
-## Tranparency
+## Transparency
 
 The Opacity property allows you to set the transparency of the string
 
 ![Transparent](/img/user-manual/user-interface/text-element/transparent.png)
-
-[1]: /user-manual/assets/types/font
-[11]: /user-manual/user-interface/localization

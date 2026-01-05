@@ -52,6 +52,4 @@ curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/jobs/{
 
 ## レート制限
 
-このルートは[通常][1]のレート制限を使用します。
-
-[1]: /user-manual/api#rate-limiting
+このルートは[通常](/user-manual/api#rate-limiting)のレート制限を使用します。

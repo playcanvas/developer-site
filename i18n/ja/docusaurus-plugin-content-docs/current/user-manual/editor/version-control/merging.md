@@ -2,7 +2,7 @@
 title: マージとコンフリクトの解決
 ---
 
-マージは、2つのブランチで行われた作業を組み合わせるプロセスです。マージは、[ブランチのドキュメント][1]で説明されているブランチベースのワークフローの自然な部分です。
+マージは、2つのブランチで行われた作業を組み合わせるプロセスです。マージは、[ブランチのドキュメント](/user-manual/editor/version-control/branches)で説明されているブランチベースのワークフローの自然な部分です。
 
 ## 2つのブランチのマージ
 
@@ -12,22 +12,22 @@ PlayCanvasでは、マージは2つの異なるブランチから2つのチェ�
 
 ### マージの例
 
-![Merging checkpoints](/img/user-manual/version-control/merging/merging-checkpoints-1.png)
+![Merging checkpoints](/img/user-manual/editor/version-control/merging/merging-checkpoints-1.png)
 *Changes Y & Z are not included in merge result C and **are lost**.*
 
-![Merging checkpoints](/img/user-manual/version-control/merging/merging-checkpoints-2.png)
+![Merging checkpoints](/img/user-manual/editor/version-control/merging/merging-checkpoints-2.png)
 *By default PlayCanvas creates a new checkpoint in the destination branch of a merge, so changes Y are included*
 
-![Merging checkpoints](/img/user-manual/version-control/merging/merging-checkpoints-3.png)
+![Merging checkpoints](/img/user-manual/editor/version-control/merging/merging-checkpoints-3.png)
 *If changes Z are required, create a checkpoint in the source branch before starting the merge.*
 
 ## マージの開始
 
-![Start merge](/img/user-manual/version-control/merging/start-merge.png)
+![Start merge](/img/user-manual/editor/version-control/merging/start-merge.png)
 
 マージを開始するには、現在のブランチをマージしたいブランチに切り替えます。次に、マージしたいブランチを選択して、ブランチのドロップダウンメニューから「現在のブランチにマージ」を選択します。
 
-![Merge dialog](/img/user-manual/version-control/merging/merge-dialog.png)
+![Merge dialog](/img/user-manual/editor/version-control/merging/merge-dialog.png)
 
 マージを開始する前にいくつかのオプションがあります。
 
@@ -52,12 +52,10 @@ PlayCanvasでは、マージは2つの異なるブランチから2つのチェ�
 
 ### コンフリクトマネージャー
 
-![Conflict Manager](/img/user-manual/version-control/merging/conflict-manager.jpg)
+![Conflict Manager](/img/user-manual/editor/version-control/merging/conflict-manager.jpg)
 
 コンフリクトマネージャーには、左側に競合する各リソースが表示され、選択された各リソースについて、オリジナルバージョン(Base)と各ブランチのバージョンの比較が表示されます。競合した各プロパティについて、受け入れるバージョンを選択できます。すべてのリソースのすべてのプロパティが解決されたら、「マージを完了」ボタンをクリックして、マージを終了し、新しいチェックポイントを作成します。
 
-![Resolved Conflicts](/img/user-manual/version-control/merging/conflicts-resolved.jpg)
+![Resolved Conflicts](/img/user-manual/editor/version-control/merging/conflicts-resolved.jpg)
 
 コンフリクトマネージャーとマージが進行中の間、現在のブランチは他のユーザーからのさらなる編集をロックします。これにより、競合の解決が完了するときにマージによって変更が上書きされるのを防ぎます。別のユーザーがマージに必要なブランチをブロックしている場合、エディタから彼らのマージを強制的に終了することができます。
-
-[1]: /user-manual/editor/version-control/branches

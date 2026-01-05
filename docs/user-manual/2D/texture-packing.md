@@ -4,7 +4,7 @@ title: Using Texture Packers
 
 ## What is texture packing?
 
-It's common to find sprites or UI images bundled as separate images. Texture packing is combining those separate images into a single [texture atlas][texture-atlas].
+It's common to find sprites or UI images bundled as separate images. Texture packing is combining those separate images into a single [texture atlas](/user-manual/editor/assets/inspectors/texture-atlas/).
 
 This has several advantages including:
 
@@ -17,7 +17,7 @@ Here are some texture packing tools that are compatible with PlayCanvas.
 
 ### TexturePacker Online (free)
 
-([Website][texture-packer-online])
+([Website](https://www.codeandweb.com/tp-online))
 
 A free browser tool that is able to do the basics of texture packing.
 
@@ -31,9 +31,9 @@ A free browser tool that is able to do the basics of texture packing.
 
 ### Texture Packer tool
 
-([Website][texture-packer-tool])
+([Website](https://www.codeandweb.com/texturepacker))
 
-TexturePacker is a paid tool for download that has many more features and options for creating texture atlases. These include more control over the layout of the sprites/UI images and being able to set up [9 slicing][9-slicing].
+TexturePacker is a paid tool for download that has many more features and options for creating texture atlases. These include more control over the layout of the sprites/UI images and being able to set up [9 slicing](/user-manual/2D/slicing/).
 
 ![](/img/user-manual/2D/texture-packer/texture-packer-tool-steps.png)
 
@@ -45,7 +45,7 @@ Basic steps:
 
 ## Creating frames in Sprite Editor
 
-Once you have uploaded the texture atlas file into the Editor and created a [texture atlas asset][texture-atlas], open the Sprite Editor.
+Once you have uploaded the texture atlas file into the Editor and created a [texture atlas asset](/user-manual/editor/assets/inspectors/texture-atlas/), open the Sprite Editor.
 
 ![](/img/user-manual/2D/texture-packer/playcanvas-sprite-editor.png)
 
@@ -58,8 +58,3 @@ When updating the texture atlas later in development, as long as the sprite file
 - Sprites that have been removed on the atlas will have their frames removed.
 - Sprites that have been added on the atlas will have new frames added to the end of the list.
 - Existing sprites will have their frames updated.
-
-[texture-atlas]: /user-manual/assets/types/texture-atlas/
-[texture-packer-online]: https://www.codeandweb.com/tp-online
-[texture-packer-tool]: https://www.codeandweb.com/texturepacker
-[9-slicing]: /user-manual/2D/slicing/

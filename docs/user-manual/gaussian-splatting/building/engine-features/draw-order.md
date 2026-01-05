@@ -24,6 +24,6 @@ By default, the PlayCanvas Engine does not support "global sorting" across multi
 
 ## Depth Buffer Considerations
 
-GSplatComponents do not write to the depth buffer during rendering. This limitation means you cannot use functionality that relies on reading back or leveraging depth buffer data in your application. For example, a Depth of Field post effect, which typically required the depth buffer, would not generally be compatible with splat rendering.
+GSplatComponents do not write to the depth buffer during rendering. This limitation means you cannot use functionality that relies on reading back or leveraging depth buffer data in your application. For example, a Depth of Field post effect, which typically requires the depth buffer, would not generally be compatible with splat rendering.
 
 As a workaround, you can generate a mesh-based approximation of your splat and render it to the depth buffer in a separate layer (without writing to the framebuffer). This technique allows depth-dependent effects while maintaining the visual quality of the Gaussian splat rendering.

@@ -6,7 +6,7 @@ title: Webコンポーネントの使用
 
 ## 開始点
 
-`index.html`という新しいファイルを作成し、[WebコンポーネントのボイラープレートHTML](/user-manual/web-components/getting-started/#boilerplate-html)をそこにコピーすることから始めます。
+`index.html`という新しいファイルを作成し、[WebコンポーネントのボイラープレートHTML](/user-manual/web-components/getting-started/#ボイラープレートhtml)をそこにコピーすることから始めます。
 
 次に、[`<pc-app>`](/user-manual/web-components/tags/pc-app)および[`<pc-scene>`](/user-manual/web-components/tags/pc-scene)要素を使用して、アプリケーションの基本構造をHTMLの`body`に追加しましょう。
 

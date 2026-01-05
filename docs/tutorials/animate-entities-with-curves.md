@@ -6,7 +6,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4381
 
 import Link from '@docusaurus/Link';
 
-Sample showing use of curves to do basic animation with curves.
+Sample showing use of curves to do basic animation.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/cp3OGFrJ/" title="Animate entities with curves" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

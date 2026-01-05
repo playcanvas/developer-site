@@ -9,4 +9,4 @@ keywords: script, code, create, javascript, behavior
 
 You can use JavaScript to control the behavior of entities. Select any entity, add a script component and create a new script asset.
 
-[Learn more](https://developer.playcanvas.com/user-manual/scripting/editor-users/managing-scripts/)
+[Learn more](https://developer.playcanvas.com/user-manual/editor/scripting/managing-scripts/)

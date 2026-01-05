@@ -7,7 +7,7 @@ Controls default behavior for imported assets.
 
 :::note
 
-These settings affect only you and global for the whole project.
+These settings affect only you and are global for the whole project.
 
 :::
 

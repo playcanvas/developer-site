@@ -2,14 +2,14 @@
 title: Depth Layer
 ---
 
-Some rendering techniques require access to the depth or the color buffer of the scene for a specific camera. The Depth Layer is a special layer, which can be added to the `layers` property of a camera. The [`order`][4] of the layers defines at which point during the rendering, the depth or the color buffer is captured. The captured buffers can then be used in the following layers of the camera.
+Some rendering techniques require access to the depth or the color buffer of the scene for a specific camera. The Depth Layer is a special layer, which can be added to the `layers` property of a camera. The [`order`](/user-manual/graphics/layers/#choosing-the-layer-order) of the layers defines at which point during the rendering, the depth or the color buffer is captured. The captured buffers can then be used in the following layers of the camera.
 
 Typically, those buffers are captured after all opaque layers are rendered and can be used in following transparent layers or post-processing.
 
 Additionally, to capture these buffers, the capture needs to be enabled on a CameraComponent from a script:
 
-- [```requestSceneColorMap```][0] to request a color map
-- [```requestSceneDepthMap```][1] to request a depth map
+- [```requestSceneColorMap```](https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenecolormap) to request a color map
+- [```requestSceneDepthMap```](https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenedepthmap) to request a depth map
 
 ## Buffer access
 
@@ -69,13 +69,6 @@ The color map in CameraFrame contains linear HDR values (no gamma correction nee
 
 These engine examples demonstrate the rendering of both the depth and the color map, and also custom shaders allowing their use:
 
-- GrabPass demonstrates the use of the color buffer: [`GrabPass`][2]
-- GroundFog demonstrates the use of the depth buffer: [`GroundFog`][3]
-- Dispersion demonstrates refraction and chromatic dispersion using the scene color texture: [`Dispersion`][5]
-
-[0]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenecolormap
-[1]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenedepthmap
-[2]: https://playcanvas.github.io/#/shaders/grab-pass
-[3]: https://playcanvas.github.io/#/shaders/ground-fog
-[4]: /user-manual/graphics/layers/#choosing-the-layer-order
-[5]: https://playcanvas.github.io/#/materials/dispersion
+- GrabPass demonstrates the use of the color buffer: [`GrabPass`](https://playcanvas.github.io/#/shaders/grab-pass)
+- GroundFog demonstrates the use of the depth buffer: [`GroundFog`](https://playcanvas.github.io/#/shaders/ground-fog)
+- Dispersion demonstrates refraction and chromatic dispersion using the scene color texture: [`Dispersion`](https://playcanvas.github.io/#/materials/dispersion)

@@ -6,7 +6,7 @@ title: サードパーティアセットサイト
 
 時には独自のユニークなアセットを作成することが重要ですが、完全にオーダーメイドのアセットを作るのはコストや時間がかかりすぎることもあります。そこで、私たちはすべてのタイプの無料または有料のアセットを入手できる場所のリンクとリソースのリストをまとめました。
 
-このページについて他に提案がある場合は[フォーラム][1]でお知らせください。
+このページについて他に提案がある場合は[フォーラム](https://forum.playcanvas.com/)でお知らせください。
 
 ## アセットマーケットプレイス
 
@@ -30,9 +30,5 @@ title: サードパーティアセットサイト
 
 アセットをプロシージャルに生成するためのツールが利用可能です。ここでは、優れた例をいくつか紹介します。
 
-* [Sound FX Generator][2]
-* [Spacescape Skybox Generator][3]
-
-[1]: https://forum.playcanvas.com/
-[2]: https://www.bfxr.net/
-[3]: http://alexcpeterson.com/spacescape
+* [Sound FX Generator](https://www.bfxr.net/)
+* [Spacescape Skybox Generator](http://alexcpeterson.com/spacescape)

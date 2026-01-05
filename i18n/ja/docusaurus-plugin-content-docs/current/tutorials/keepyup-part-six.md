@@ -8,13 +8,13 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 6" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*[完成されたプロジェクトはこちら][11]です。先に[その1][1], [その2][2], [その3][3], [その4][4], [その5][5]を読んでください。*
+*[完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です。先に[その1](/tutorials/keepyup-part-one/), [その2](/tutorials/keepyup-part-two/), [その3](/tutorials/keepyup-part-three/), [その4](/tutorials/keepyup-part-four/), [その5](/tutorials/keepyup-part-five/)を読んでください。*
 
 ## ユーザーインターフェース
 
 ゲームのユーザーインターフェースはユーザが最初に触れるものですが、開発の際には後回しにされがちです。優れたユーザーインターフェースは、ゲームに個性を与えるだけでなく、ゲームをプレイすることができる人数に影響を与えます。
 
-PlayCanvasではユーザインタフェースは[Screen Component][7]と[Element Component][8]を使用して構築されます。詳細は [ユーザマニュアル][6]でご確認ください
+PlayCanvasではユーザインタフェースは[Screen Component](/user-manual/editor/scenes/components/screen/)と[Element Component](/user-manual/editor/scenes/components/element/)を使用して構築されます。詳細は [ユーザマニュアル](/user-manual/user-interface/)でご確認ください
 
 ### ユーザーインターフェイスのエンティティ
 
@@ -79,14 +79,4 @@ UiMenu.prototype.start = function (e) {
 
 ## ゲーム完成
 
-シリーズの最後に到達しました！PlayCanvasを使用してゲームを構成および構築する方法について説明をしました。チュートリアルに関するご意見は[フォーラム][8]から連絡ください。
-
-[1]: /tutorials/keepyup-part-one/
-[2]: /tutorials/keepyup-part-two/
-[3]: /tutorials/keepyup-part-three/
-[4]: /tutorials/keepyup-part-four/
-[5]: /tutorials/keepyup-part-five/
-[6]: /user-manual/user-interface/
-[7]: /user-manual/scenes/components/screen/
-[8]: /user-manual/scenes/components/element/
-[11]: https://playcanvas.com/project/406050
+シリーズの最後に到達しました！PlayCanvasを使用してゲームを構成および構築する方法について説明をしました。チュートリアルに関するご意見は[フォーラム](https://forum.playcanvas.com)から連絡ください。

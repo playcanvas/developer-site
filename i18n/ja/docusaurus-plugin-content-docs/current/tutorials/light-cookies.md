@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/409
     <iframe src="https://playcanv.as/p/AGtssoOU/" title="Light Cookies" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-[完成されたプロジェクト][1]をフォークして詳細をご確認ください。
+[完成されたプロジェクト](https://playcanvas.com/project/409793/overview/example-light-cookies)をフォークして詳細をご確認ください。
 
 シアターでの視覚効果は、シーン全体に影を落とす形状のマスクを用いることで作り出すことがよくあります。これらのマスクを「クッカリス」または「クッキー」と呼びます。PlayCanvasを使用してWebGL上にライトクッキーを作成するには、Lightコンポーネントにテクスチャまたはキューブマップを適用します。ライトクッキーは、スポットライトおよびオムニライトに適用できます。
 
@@ -34,5 +34,3 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/409
 **トーチ** - トーチやヘッドライトは、表面を均等に照らすのではなく、明るさと暗さが「カウスティック」なエリアがあります。ライトクッキーを使用してこの効果を作成できます。
 
 ![Torch Light](/img/tutorials/intermediate/light-cookies/torch-cookie.jpg)
-
-[1]: https://playcanvas.com/project/409793/overview/example-light-cookies

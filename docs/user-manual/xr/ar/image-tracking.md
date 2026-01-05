@@ -10,7 +10,7 @@ You can check if image tracking is supported by the system:
 
 ```javascript
 if (app.xr.imageTracking.supported) {
-    // image tracking are supported
+    // image tracking is supported
 }
 
 app.xr.on('start', () => {
@@ -113,6 +113,6 @@ trackedImage.on('tracked', () => {
 });
 
 trackedImage.on('untracked', () => {
-    // image is no longed actively tracked
+    // image is no longer actively tracked
 });
 ```

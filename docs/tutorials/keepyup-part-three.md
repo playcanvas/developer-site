@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 3" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*You can find the [full project here][4]. If you haven't see [Part 1][1] and [Part 2][2] read them first.*
+*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't see [Part 1](/tutorials/keepyup-part-one/) and [Part 2](/tutorials/keepyup-part-two/) read them first.*
 
 ## The Game script & Input
 
@@ -494,9 +494,4 @@ if (lenSqr < this.ballRadius*this.ballRadius) {
 
 Once we have the the 3D point where we've just tapped, we test to see if it is overlapping with the ball. You'll see here we are testing the radius squared against the distance between the tap and the ball squared. This prevents us doing a slow Square Root operation every time we test.
 
-If the tap has hit the ball, we call the `tap(dx, dy)` function on the ball script we pass in the distance from the ball where the tap occurred. We'll use that in the [Part 4][3].
-
-[1]: /tutorials/keepyup-part-one/
-[2]: /tutorials/keepyup-part-two/
-[3]: /tutorials/keepyup-part-four/
-[4]: https://playcanvas.com/project/406050
+If the tap has hit the ball, we call the `tap(dx, dy)` function on the ball script we pass in the distance from the ball where the tap occurred. We'll use that in the [Part 4](/tutorials/keepyup-part-four/).

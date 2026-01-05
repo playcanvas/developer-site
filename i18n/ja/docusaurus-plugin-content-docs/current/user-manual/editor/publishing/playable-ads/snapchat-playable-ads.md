@@ -2,17 +2,17 @@
 title: Snapchatプレイアブル広告
 ---
 
-PlayCanvasは、[公式の外部ツール][2]を通じて、Snapchat Playable Adフォーマットと要件をサポートしています。
+PlayCanvasは、[公式の外部ツール](https://github.com/playcanvas/playcanvas-rest-api-tools#converting-a-project-into-a-single-html-file)を通じて、Snapchat Playable Adフォーマットと要件をサポートしています。
 
-SnapchatのPlayable Adでは、[MRAID 2.0 API][mraid-api]標準が使用され、広告用のアセットは`index.html`に埋め込むのではなく、外部に置く必要があります。
+SnapchatのPlayable Adでは、[MRAID 2.0 API](https://www.iab.com/guidelines/mraid/)標準が使用され、広告用のアセットは`index.html`に埋め込むのではなく、外部に置く必要があります。
 
 外部アセットは、唯一の名前が付けられたフォルダに置かれる必要があります(このツールが対応しているため)。このため、SnapchatのCDNサーバーにアップロードされます。
 
-このツールには[GitHub][2]のドキュメントにあるいくつかの制限があるため、注意してください。
+このツールには[GitHub](https://github.com/playcanvas/playcanvas-rest-api-tools#converting-a-project-into-a-single-html-file)のドキュメントにあるいくつかの制限があるため、注意してください。
 
 ## サンプルプロジェクト
 
-[Cube Jumpプロジェクト][5]は、Snapchat Playable Adフォーマットにエクスポートできる状態になっており、期待されるHTML出力は[こちら][6]からダウンロードできます。
+[Cube Jumpプロジェクト](https://playcanvas.com/project/796932/overview/cube-jump-snapchat-ad)は、Snapchat Playable Adフォーマットにエクスポートできる状態になっており、期待されるHTML出力は[こちら](pathname:///downloads/sc-playable-ad-cube-jump.zip)からダウンロードできます。
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/e/p/X1nwbUGA/" title="Cube Jump Playable Ad" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
@@ -26,7 +26,7 @@ SnapchatのPlayable Adでは、[MRAID 2.0 API][mraid-api]標準が使用され�
 
 これは、Base64エンコード前にアセットに約~3MBの余裕があることを意味します。
 
-画像をできるだけ小さく保ち、[TinyPNG][4]のようなツールを使用してさらにファイルサイズを縮小するようにしましょう。
+画像をできるだけ小さく保ち、[TinyPNG](https://tinypng.com/)のようなツールを使用してさらにファイルサイズを縮小するようにしましょう。
 
 ## Playable Ad のチェックリスト
 
@@ -38,7 +38,7 @@ Snapchatの広告ネットワークは、ユーザーに提供するときに独
 
 ## エクスポートの方法
 
-GitHubリポジトリのREADMEにある[セットアップ手順][7]に従ってください。
+GitHubリポジトリのREADMEにある[セットアップ手順](https://github.com/playcanvas/playcanvas-rest-api-tools#setup)に従ってください。
 
 ### ドライランテスト
 
@@ -60,7 +60,7 @@ Snapchatにはまだ公式のテストツールがありませんので、Snapch
     }
 ```
 
-`folder_name`はユニークな文字列でなければなりません。この目的のため、[GUIDジェネレータ][guid-generator]からランダムなGUIDを使用するか、Snapchatの代表者から使用する必要がある特定の文字列を受け取る必要があります。
+`folder_name`はユニークな文字列でなければなりません。この目的のため、[GUIDジェネレータ](https://www.guidgenerator.com/)からランダムなGUIDを使用するか、Snapchatの代表者から使用する必要がある特定の文字列を受け取る必要があります。
 
 そして、以下のコマンドを実行します。
 
@@ -68,11 +68,11 @@ Snapchatにはまだ公式のテストツールがありませんので、Snapch
 npm run one-page
 ```
 
-詳細なオプションとコマンドの詳細は、'[プロジェクトを単一のHTMLファイルに変換する][2]'のReadmeセクションで確認できます。
+詳細なオプションとコマンドの詳細は、'[プロジェクトを単一のHTMLファイルに変換する](https://github.com/playcanvas/playcanvas-rest-api-tools#converting-a-project-into-a-single-html-file)'のReadmeセクションで確認できます。
 
-デバイス上で広告をテストするには、Androidアプリ[Creative Preview][creative-preview]を使用しますが、広告をhttpsサーバーにホストする必要があります。
+デバイス上で広告をテストするには、Androidアプリ[Creative Preview](https://play.google.com/store/apps/details?id=com.google.android.apps.audition&hl=en_GB&gl=US)を使用しますが、広告をhttpsサーバーにホストする必要があります。
 
-私たちのお勧めの方法は、[ローカルホスト][host-locally]をホストし、アプリがアクセスできるように[ngrok][ngrok]を使用することです。
+私たちのお勧めの方法は、[ローカルホスト](/user-manual/editor/publishing/web/self-hosting/#running-a-downloaded-build)をホストし、アプリがアクセスできるように[ngrok](https://ngrok.com/)を使用することです。
 
 <img loading="lazy" src="/img/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/ngrok.png" width="600" />
 
@@ -99,14 +99,3 @@ npm run one-page
 ```
 
 その後、ZIPファイルをSnapchatの代表に渡して、広告ネットワークにアップロードすることができます。
-
-[2]: https://github.com/playcanvas/playcanvas-rest-api-tools#converting-a-project-into-a-single-html-file
-[4]: https://tinypng.com/
-[5]: https://playcanvas.com/project/796932/overview/cube-jump-snapchat-ad
-[6]: pathname:///downloads/sc-playable-ad-cube-jump.zip
-[7]: https://github.com/playcanvas/playcanvas-rest-api-tools#setup
-[mraid-api]: https://www.iab.com/guidelines/mraid/
-[guid-generator]: https://www.guidgenerator.com/
-[creative-preview]: https://play.google.com/store/apps/details?id=com.google.android.apps.audition&hl=en_GB&gl=US
-[host-locally]: /user-manual/editor/publishing/web/self-hosting/#running-a-downloaded-build
-[ngrok]: https://ngrok.com/

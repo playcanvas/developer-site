@@ -8,9 +8,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
     <iframe src="https://playcanv.as/p/CmcIlmPb/" title="Terrain Generation from Heightmap" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-このプロジェクトでは[`pc.Mesh`][1] API を使用して、ハイトマップ (Height) テクスチャから地形を手続き的に生成し、テクスチャを施しました。
+このプロジェクトでは[`pc.Mesh`](https://api.playcanvas.com/engine/classes/Mesh.html) API を使用して、ハイトマップ (Height) テクスチャから地形を手続き的に生成し、テクスチャを施しました。
 
-[チュートリアルプロジェクト][2]のエディターからお試しください。
+[チュートリアルプロジェクト](https://playcanvas.com/project/406046)のエディターからお試しください。
 
 以下のスクリプトは、地形生成を行います。
 
@@ -163,6 +163,3 @@ Terrain.prototype.createTerrainFromHeightMap = function (img, subdivisions) {
     return mesh;
 };
 ```
-
-[1]: https://api.playcanvas.com/engine/classes/Mesh.html
-[2]: https://playcanvas.com/project/406046

@@ -16,6 +16,4 @@ At the top of the pane are controls for filtering the list of nodes:
 | O            | Toggle to show only output nodes.         |
 | Filter Entry | Filter the list of nodes further by name. |
 
-For more information on using the Nodes Pane to create nodes, see the [Graph Editor][2] documentation.
-
-[2]: /shader-editor/window-layout/graph-editor
+For more information on using the Nodes Pane to create nodes, see the [Graph Editor](/shader-editor/window-layout/graph-editor) documentation.

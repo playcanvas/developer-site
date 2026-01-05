@@ -43,7 +43,7 @@ Note many of the programs listed above for modeling also allow texture painting.
 
 ## General Considerations for Mesh Construction
 
-Regardless which modeling application you are using, there a number of things to be aware of when building 3D scenes intended for PlayCanvas.
+Regardless which modeling application you are using, there are a number of things to be aware of when building 3D scenes intended for PlayCanvas.
 
 - Meshes can be skinned to up to 256 bones.
 - NURBS meshes will be converted to triangle meshes on conversion to the PlayCanvas native format.
@@ -125,7 +125,7 @@ Assigning a Bitmap map to this slot activates per-pixel glossiness on the materi
 
 #### Self-Illumination
 
-Assigning a Bitmap map to this slot enables emissive mapping in the PlayCanvas material. An emissive map can be full RGB (you are not limited to greyscale) and will essentially be added to the result of lighting a surface. So a black pixel in a emissive map will result add nothing to a pixel's value.  Anything else will increase a pixel's luminosity.
+Assigning a Bitmap map to this slot enables emissive mapping in the PlayCanvas material. An emissive map can be full RGB (you are not limited to greyscale) and will essentially be added to the result of lighting a surface. So a black pixel in an emissive map will add nothing to a pixel's value.  Anything else will increase a pixel's luminosity.
 
 #### Opacity
 
