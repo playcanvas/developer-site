@@ -7,7 +7,7 @@ sidebar_position: 3
 
 The Material Inspector is where a material's settings are configured.
 
-To access a material's inspector, select it in the [Assets Pane][2].
+To access a material's inspector, select it in the [Assets Pane](/shader-editor/window-layout/assets-pane).
 
 There are three sections: Basic, Render States and Parameters.
 
@@ -19,7 +19,7 @@ There are three sections: Basic, Render States and Parameters.
 
 ### Render States
 
-- Blend Mode - The type of blend mode. See [here][3] for more details.
+- Blend Mode - The type of blend mode. See [here](https://api.playcanvas.com/engine/classes/Material.html#blendtype) for more details.
 - Alpha Test - (Not yet supported). Specify the alpha test value.
 - Cull Mode - Face culling mode.
 - Depth Test - Enable depth testing during rendering.
@@ -30,6 +30,3 @@ There are three sections: Basic, Render States and Parameters.
 ### Parameters
 
 The parameters section lists the parameter nodes placed on the graph. The names and types are taken from the graph nodes themselves.
-
-[2]: /shader-editor/window-layout/assets-pane
-[3]: https://api.playcanvas.com/engine/classes/Material.html#blendtype

@@ -10,9 +10,9 @@ POST https://playcanvas.com/api/projects/:id/export
 
 ## Description
 
-This will allow you to download a zip archive of your entire project. You can import that archive from your Projects Dashboard to create a new Project from that archive. More about importing projects [here][3].
+This will allow you to download a zip archive of your entire project. You can import that archive from your Projects Dashboard to create a new Project from that archive. More about importing projects [here](/user-manual/editor/projects/backup-archiving#restoring-projects).
 
-The request will start an archive job and the job details will be returned in the response. You can [poll the job by id][2] until its status is either 'complete' or 'error'. When the job is done, its data will contain a URL to download the project archive.
+The request will start an archive job and the job details will be returned in the response. You can [poll the job by id](/user-manual/api/job-get) until its status is either 'complete' or 'error'. When the job is done, its data will contain a URL to download the project archive.
 
 ## Example
 
@@ -61,8 +61,4 @@ Status: 201 Created
 
 ## Rate Limiting
 
-This route uses a [strict][1] rate limit.
-
-[1]: /user-manual/api#rate-limiting
-[2]: /user-manual/api/job-get
-[3]: /user-manual/editor/projects/backup-archiving#restoring-projects
+This route uses a [strict](/user-manual/api#rate-limiting) rate limit.

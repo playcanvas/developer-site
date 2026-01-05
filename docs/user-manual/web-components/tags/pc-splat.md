@@ -21,6 +21,7 @@ When rendering splat-based scenes, it is recommended to set `antialias` and `hig
 | `asset` | String | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
 | `cast-shadows` | Flag | - | Whether the splat component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `unified` | Flag | - | Enables global sorting and LOD streaming for the splat. Can only be set when the component is disabled. |
 
 </div>
 

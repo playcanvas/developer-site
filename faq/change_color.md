@@ -11,4 +11,4 @@ Every surface on a 3D model is rendered using a **material**. The material defin
 
 You can create a new material and drag and drop it on your model or you can select its existing materials and edit their properties in the Inspector.
 
-[Learn more](https://developer.playcanvas.com/user-manual/assets/materials/)
+[Learn more](https://developer.playcanvas.com/user-manual/assets/types/material/)

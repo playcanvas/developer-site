@@ -6,12 +6,7 @@ title: プロジェクトの公開方法
 
 ## PlayCanvasゲームはどこで公開できますか？
 
-* [ウェブ][1]
-* [モバイル][2]
-* [デスクトップ][3]
-* [プレイアブル広告][4]
-
-[1]: /user-manual/editor/publishing/web
-[2]: /user-manual/editor/publishing/mobile
-[3]: /user-manual/editor/publishing/desktop
-[4]: /user-manual/editor/publishing/playable-ads
+* [ウェブ](/user-manual/editor/publishing/web)
+* [モバイル](/user-manual/editor/publishing/mobile)
+* [デスクトップ](/user-manual/editor/publishing/desktop)
+* [プレイアブル広告](/user-manual/editor/publishing/playable-ads)

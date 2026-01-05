@@ -16,7 +16,7 @@ These modes affect how selections work and what you see in the viewport.
 In centers mode:
 
 - Gaussians are overlaid with a blue dot at their center.
-- Selections apply to all gaussian centers independent of their screen depth.
+- Selections apply to all Gaussian centers independent of their screen depth.
 - Centers are colored depending on their selection state. By default, blue is used for unselected Gaussians and yellow for selected Gaussians.
 - You can control the size that centers are rendered in the VIEW OPTIONS panel.
 

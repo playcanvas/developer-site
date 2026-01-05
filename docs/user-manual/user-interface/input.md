@@ -2,7 +2,7 @@
 title: Input
 ---
 
-The user can interact with [Element][1] components, by enabling the `useInput` field on the Element component:
+The user can interact with [Element](/user-manual/editor/scenes/components/element/) components, by enabling the `useInput` field on the Element component:
 
 ![Use Input](/img/user-manual/assets/fonts/use-input.png)
 
@@ -196,5 +196,3 @@ TouchFix.prototype.initialize = function() {
 
 </TabItem>
 </Tabs>
-
-[1]: /user-manual/scenes/components/element/

@@ -21,6 +21,7 @@ title: <pc-splat>
 | `asset` | String | - | Gaussian splatアセットID (`gsplat`タイプのアセットを参照する必要があります) |
 | `cast-shadows` | Flag | - | スプラットコンポーネントが影を落とすかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `unified` | Flag | - | スプラットのグローバルソートとLODストリーミングを有効にします。コンポーネントが無効の場合にのみ設定できます。 |
 
 </div>
 

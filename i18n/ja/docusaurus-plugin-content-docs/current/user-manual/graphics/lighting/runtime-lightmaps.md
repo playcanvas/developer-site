@@ -25,7 +25,7 @@ PlayCanvasは、ライトマップの生成に便利なソリューションを�
 
 :::note
 
-[バッチ処理][11]を使用している場合、ランタイムライトマップが適用されません。なぜなら、各ライトマップオブジェクトが独自のライトマップテクスチャを必要とするためです。
+[バッチ処理](/user-manual/graphics/advanced-rendering/batching)を使用している場合、ランタイムライトマップが適用されません。なぜなら、各ライトマップオブジェクトが独自のライトマップテクスチャを必要とするためです。
 
 :::
 
@@ -47,7 +47,7 @@ PlayCanvasは、ライトマップの生成に便利なソリューションを�
 
 ![Light Component Shadow Settings](/img/user-manual/graphics/lighting/lightmapping/editor-light-shadows.png)
 
-ライトマップライトは、ダイナミックライトと同じ **Shadows** 設定を使用しますが、影の計算はライトマップの生成時に一度だけ行われます。このため、ライトマップライトで影が有効になっている場合、コストはずっと少なくなります。詳細は[Shadows][4]ページを参照してください。なお、ベイクについてはShadow Cascadeのオプションは無視されます。
+ライトマップライトは、ダイナミックライトと同じ **Shadows** 設定を使用しますが、影の計算はライトマップの生成時に一度だけ行われます。このため、ライトマップライトで影が有効になっている場合、コストはずっと少なくなります。詳細は[Shadows](/user-manual/graphics/lighting/shadows)ページを参照してください。なお、ベイクについてはShadow Cascadeのオプションは無視されます。
 
 ### ソフトディレクショナルライト {#soft-directional-light}
 
@@ -64,9 +64,9 @@ PlayCanvasは、ライトマップの生成に便利なソリューションを�
 
 ## 環境ライトのベイク {#baking-an-environment-light}
 
-PlayCanvasは2種類の環境ライティングをサポートしています: [Ambient Color][14]と[Skybox][15]です。これらは、デフォルトではランタイムで両方とも適用されています。
+PlayCanvasは2種類の環境ライティングをサポートしています: [Ambient Color](/user-manual/editor/interface/settings/rendering/)と[Skybox](/user-manual/editor/interface/settings/rendering/)です。これらは、デフォルトではランタイムで両方とも適用されています。
 
-ランタイム環境ライトの適用の制限事項は、**Ambient Occlusion**の欠如です。代替案として、環境ライトをライトマップにベイクすることができ、その際にAmbient Occlusionも含まれます。これは、グローバル設定の[Lightmapping][16]セクションで構成できます。
+ランタイム環境ライトの適用の制限事項は、**Ambient Occlusion**の欠如です。代替案として、環境ライトをライトマップにベイクすることができ、その際にAmbient Occlusionも含まれます。これは、グローバル設定の[Lightmapping](/user-manual/editor/interface/settings/lightmapping/)セクションで構成できます。
 
 **Ambient Bake**が有効になっている場合、環境ライトの貢献はAmbient Occlusionを含むライトマップにベイクされます。**Samples**設定は、ベイクのパフォーマンスに影響を与え、できるだけ低く設定する必要があります (5-20)。
 
@@ -127,7 +127,7 @@ Soft Directional Lightや環境ライトのベイキングの場合、ベイク�
 
 ## 自動アンラップ (Auto-Unwrapping) とUV1の生成 {#auto-unwrapping-and-uv1-generation}
 
-ライトマップは、Modelアセットの2番目の **UV座標(UV1)** を使用して常に適用されます。最良の結果を得るには、PlayCanvasにアップロードする前に3Dコンテンツツールからモデルに2番目のUVセットを追加することをお勧めします。ライトマップに適したUVについては、[UVマッピング][9]セクションを参照してください。
+ライトマップは、Modelアセットの2番目の **UV座標(UV1)** を使用して常に適用されます。最良の結果を得るには、PlayCanvasにアップロードする前に3Dコンテンツツールからモデルに2番目のUVセットを追加することをお勧めします。ライトマップに適したUVについては、[UVマッピング](/user-manual/graphics/lighting/lightmapping/#uv-mapping)セクションを参照してください。
 
 モデルにUV1セットがない場合、PlayCanvasエディターは自動的にアンラップしてUV1座標を生成します。
 
@@ -140,10 +140,3 @@ Soft Directional Lightや環境ライトのベイキングの場合、ベイク�
 警告を修正するには、Modelアセットを選択して**パイプライン**セクションを開きます。 **Auto-Unwrapping** ボタンをクリックし、進行状況バーが完了するまで待ちます。自動アンラップは、Modelアセットを編集します。そのため、ソースからモデルを再インポートする場合(たとえば、新しいFBXをアップロードする場合)は、事前に計算されたUV1が失われます。アップロードされたモデルにUV1がない場合は、モデルを再度自動アンラップする必要があります。
 
 **パディング (padding)** オプションは、アンラップが発生するときのセクション間のスペースを決定します。ライトが存在してはいけない場所に光が見える場合は、パディングを増やしてライトブリーディングを減らすことができます。
-
-[4]: /user-manual/graphics/lighting/shadows
-[9]: /user-manual/graphics/lighting/lightmapping/#uv-mapping
-[11]: /user-manual/graphics/advanced-rendering/batching
-[14]: /user-manual/editor/interface/settings/rendering/
-[15]: /user-manual/editor/interface/settings/rendering/
-[16]: /user-manual/editor/interface/settings/lightmapping/

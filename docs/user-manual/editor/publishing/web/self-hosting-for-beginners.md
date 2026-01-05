@@ -10,7 +10,7 @@ In general you can separate a web application into 3 parts: Server-side, Client-
 
 ### Server-side Code
 
-When a user opens a link in their web browser the browser sends a request to a server somewhere on the internet asking for an HTML page. At its simplest this is a page of text that sits on a hard disk on the web server and is set back over the internet to the browser.
+When a user opens a link in their web browser the browser sends a request to a server somewhere on the internet asking for an HTML page. At its simplest this is a page of text that sits on a hard disk on the web server and is sent back over the internet to the browser.
 
 For web pages which are documents for displaying text or images this works very well. But in order to provide a level of interactivity often a server will do some processing after receiving the request and then **render** a page of HTML including the results of that processing.
 
@@ -31,7 +31,7 @@ For example, in PHP you could show the current date and time, inside your page.
 </html>
 ```
 
-This PHP code creates an HTML page like below and send it to the browser to display.
+This PHP code creates an HTML page like below and sends it to the browser to display.
 
 ```html
 <html>
@@ -77,7 +77,7 @@ We have designed the PlayCanvas hosting to be optimized for serving your PlayCan
 
 ## Self-hosting PlayCanvas Applications
 
-We have a more [detailed page][1] about self-hosting a PlayCanvas application. But in summary, to self-host you need to provide the three parts of the web stack described above.
+We have a more [detailed page](/user-manual/editor/publishing/web/self-hosting/) about self-hosting a PlayCanvas application. But in summary, to self-host you need to provide the three parts of the web stack described above.
 
 ### Server
 
@@ -119,5 +119,3 @@ Here's a list of content types used in PlayCanvas applications:
 ### Client
 
 The client-side code is everything you have written as part of your PlayCanvas application. When the browser loads the `index.html` file it will start your PlayCanvas application and run all the client-side code that you have written.
-
-[1]: /user-manual/editor/publishing/web/self-hosting/

@@ -14,7 +14,7 @@ Click on the floor to move.
 
 :::
 
-The complete project including matchmaking can be found [here][1].
+The complete project including matchmaking can be found [here](https://playcanvas.com/project/926999/).
 
 Photon (also known as PUN) is used in many games and has a JavaScript SDK available for HTML5 games.
 
@@ -29,7 +29,7 @@ Photon is for free for projects with up to 20 online players (CCU).
 
 ### PlayCanvas Project
 
-We start by forking the [tutorial project here][2].
+We start by forking the [tutorial project here](https://playcanvas.com/project/954410/).
 
 ![Empty Project](/img/tutorials/multiplayer-photon/1.png)
 
@@ -37,7 +37,7 @@ We start by forking the [tutorial project here][2].
 
 Account registration is required to use the SDK and view documentation.
 
-Create your Photon account [here][4] - (Photon Engine).
+Create your Photon account [here](https://www.photonengine.com/) - (Photon Engine).
 
 #### Create a new app
 
@@ -105,7 +105,7 @@ The multiplayer implementation will do the following:
 3. Create or Join a room
 4. Synchronize other players' actions and movement
 
-The [API reference][14] and [glossary][15] are available on Photon's site.
+The [API reference](https://doc-api.photonengine.com/en/javascript/current/Photon.LoadBalancing.LoadBalancingClient.html) and [glossary](https://doc.photonengine.com/ja-jp/quantum/v1/reference/glossary) are available on Photon's site.
 
 ### Using Photon with PlayCanvas
 
@@ -832,7 +832,7 @@ Player.prototype.update = function (dt) {
 </TabItem>
 </Tabs>
 
-- **this.app.fire** [communication][22] between scripts.
+- **this.app.fire** [communication](/user-manual/scripting/events/) between scripts.
 
 ### Done
 
@@ -842,11 +842,4 @@ You can now play multiplayer in Photon!
 
 You can create a room using Photon and synchronize the positions of players with each other.
 
-Although this project was only a simple real-time communication between players, you can also create a project that includes matchmaking. For the full project, including room creation and room listings, please [click here][1] .
-
-[1]: https://playcanvas.com/project/926999/
-[2]: https://playcanvas.com/project/954410/
-[4]: https://www.photonengine.com/
-[14]: https://doc-api.photonengine.com/en/javascript/current/Photon.LoadBalancing.LoadBalancingClient.html
-[15]: https://doc.photonengine.com/ja-jp/quantum/v1/reference/glossary
-[22]: /user-manual/scripting/events/
+Although this project was only a simple real-time communication between players, you can also create a project that includes matchmaking. For the full project, including room creation and room listings, please [click here](https://playcanvas.com/project/926999/) .

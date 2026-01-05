@@ -2,7 +2,7 @@
 title: ハンドトラッキング
 ---
 
-プラットフォームが[WebXR Hand Input][1]をサポートしている場合、入力ソースは関連する手データを持つことができます。これは[XrHand][2]として公開され、アプリケーション開発者が使用できるように、手首、指、関節、指先、そして手がトラッキングを失ったり回復したりするのを検出するためのイベントなど、[XrFinger][3]と[XrJoint][4]の形式でデータが提供されます。
+プラットフォームが[WebXR Hand Input](https://immersive-web.github.io/webxr-hand-input/)をサポートしている場合、入力ソースは関連する手データを持つことができます。これは[XrHand](https://api.playcanvas.com/engine/classes/XrHand.html)として公開され、アプリケーション開発者が使用できるように、手首、指、関節、指先、そして手がトラッキングを失ったり回復したりするのを検出するためのイベントなど、[XrFinger](https://api.playcanvas.com/engine/classes/XrFinger.html)と[XrJoint](https://api.playcanvas.com/engine/classes/XrJoint.html)の形式でデータが提供されます。
 
 <img loading="lazy" src="/img/user-manual/xr/cube-hands.webp" alt="立方体プリミティブを使用したハンドトラッキング" width="512" />
 
@@ -46,12 +46,6 @@ for (let i = 0; i < joints.length; i++) {
 
 ## スキニング
 
-手のスキニングされたメッシュを使用できます。例として、[このプロジェクト][5]を確認できます。
+手のスキニングされたメッシュを使用できます。例として、[このプロジェクト](https://playcanvas.com/project/771952/overview/webxr-realistic-hands)を確認できます。
 
 <img loading="lazy" src="/img/user-manual/xr/skinned-hands.webp" alt="スキニングされたメッシュを使用したハンドトラッキング" width="512" />
-
-[1]: https://immersive-web.github.io/webxr-hand-input/
-[2]: https://api.playcanvas.com/engine/classes/XrHand.html
-[3]: https://api.playcanvas.com/engine/classes/XrFinger.html
-[4]: https://api.playcanvas.com/engine/classes/XrJoint.html
-[5]: https://playcanvas.com/project/771952/overview/webxr-realistic-hands

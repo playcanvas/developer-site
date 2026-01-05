@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
     <iframe src="https://playcanv.as/p/BM93v05L/" title="Animated Textures" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*[フルプロジェクト][1]を見てください*
+*[フルプロジェクト](https://playcanvas.com/project/405882)を見てください*
 
 マテリアルをアニメーション化することは非常に有用です。ここで示されている例は、テクスチャをスクロールさせて動きをシミュレートするものです。
 
@@ -39,5 +39,3 @@ ScrollingTexture.prototype.update = function(dt) {
 オフセットを一時的なベクトル `tmp` に計算します。これは単純に `speed * timeStep` です。次に、このオフセットをDiffuseマップとNormalマップのoffsetプロパティに追加します。これは `diffuseMapOffset` と `normalMapOffset` プロパティを変更することによって行います。これらの値は `pc.Vec2` であり、テクスチャを表面にマッピングするために使用されるUV座標をシフトします。他のマップ（例：Emissive）を使用している場合は、これらのオフセットプロパティも更新する必要があります。最後に、変更をシェーダーに反映させるために `material.update()` を呼び出します。
 
 これは、マテリアルのオフセットを変更してテクスチャをスクロールさせるためのシンプルで直接的な方法です。ただし、このコードには1つの欠点があります。それは、実際のマテリアルのプロパティが変更されることです。したがって、同じマテリアルを使用してシーン内の複数のモデルがある場合、すべてが影響を受けます。
-
-[1]: https://playcanvas.com/project/405882

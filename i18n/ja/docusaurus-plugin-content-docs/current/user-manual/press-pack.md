@@ -8,7 +8,5 @@ PlayCanvasを宣伝や広告素材に使用する人々のためにプレスパ�
 
 ![](/img/user-manual/press-pack/press-pack-preview.png)
 
-[ダウンロードZIP (44.5MB)][download-link]
+[ダウンロードZIP (44.5MB)](pathname:///downloads/playcanvas-press-pack.zip)
 最終更新日: 2022年8月15日
-
-[download-link]: pathname:///downloads/playcanvas-press-pack.zip

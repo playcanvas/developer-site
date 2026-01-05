@@ -20,7 +20,7 @@ Within the viewport use the mouse to drag the outline of a Frame, then use the g
 
 #### Frames
 
-Frames are a defined region on a Texture Atlas. A frame has a name, a position and size and a border. The border is used to define the edges of the 9-slicing region. See the [9-slicing documentation][7] for more information.
+Frames are a defined region on a Texture Atlas. A frame has a name, a position and size and a border. The border is used to define the edges of the 9-slicing region. See the [9-slicing documentation](/user-manual/2D/slicing/) for more information.
 
 ## Inspector
 
@@ -43,7 +43,7 @@ Then set the values for Offset and Spacing. Offset is the number of pixels to mo
 
 Finally set the pivot for all newly generated frames, the pivot determines the position and rotation point of the sprite. It is specified as a proportion of the width and height.
 
-Once all your settings are chose, click the **Generate Frames** button to create your frames.
+Once all your settings are chosen, click the **Generate Frames** button to create your frames.
 
 ### Frame Inspector
 
@@ -65,7 +65,7 @@ The Inspector lets you modify the Position, Size and Border properties of the fr
 
 ![Sprite Inspector](/img/user-manual/2D/sprite-editor/sprite-inspector.jpg)
 
-The Sprite Inspector is visible when a Sprite Asset is selected. This inspector is used to edit the properties of one or more Sprites. See the [Sprite Asset][6] for more details on the properties.
+The Sprite Inspector is visible when a Sprite Asset is selected. This inspector is used to edit the properties of one or more Sprites. See the [Sprite Asset](/user-manual/editor/assets/inspectors/sprite/) for more details on the properties.
 
 Click the **Add Frames to Sprite Asset** button to enter the Sprite Edit Mode. In this mode, you can select multiple frames from the Frame Panel or Viewport and add them to the Sprite. Click the **Add Selected Frames** to add the frames to your Sprite.
 
@@ -73,13 +73,10 @@ Using the Sprite Inspector you can also re-order the Frames in your Sprite, or d
 
 ## Frames Panel
 
-The Frames Panel let's you select and delete Frames from the Texture Atlas
+The Frames Panel lets you select and delete Frames from the Texture Atlas
 
 ## Asset Panel
 
 The Asset Panel shows you all the Sprite Assets that have been created from the current Texture Atlas. You can select Sprite Assets from this panel.
 
 *Artwork created by [PixelBoy](https://twitter.com/2pblog1)*
-
-[6]: /user-manual/assets/types/sprite/
-[7]: /user-manual/2D/slicing/

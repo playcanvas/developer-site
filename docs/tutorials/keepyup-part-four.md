@@ -8,11 +8,11 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 4" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*You can find the [full project here][6]. If you haven't see [Part 1][1], [Part 2][2] and [Part 3][3] read them first.*
+*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't see [Part 1](/tutorials/keepyup-part-one/), [Part 2](/tutorials/keepyup-part-two/) and [Part 3](/tutorials/keepyup-part-three/) read them first.*
 
 ## The Football
 
-The football is the center of attention in our Keepy Up game. It responds to player input, it responds to the environment (well, gravity), it makes sounds. It's probably the most complicated part of the game. Fortunately, we're going to explain all the bits to your as simply as we can.
+The football is the center of attention in our Keepy Up game. It responds to player input, it responds to the environment (well, gravity), it makes sounds. It's probably the most complicated part of the game. Fortunately, we're going to explain all the bits to you as simply as we can.
 
 ## ball.js
 
@@ -359,7 +359,7 @@ Third, the script attribute is a great way to link a script to an Entity or an A
 
 For those of you with some basic vector maths knowledge this `update()` loop of the ball should be simple, but for everyone else we'll explain a little about simulating a ball in a video game.
 
-A simple way to simulate something in video game is to give that object an acceleration, a velocity and a position. Every time step (or frame) the acceleration (which the rate of change velocity) changes the velocity and the velocity (which is the rate of change of position) changes the position. Then you draw your object at the new position.
+A simple way to simulate something in video game is to give that object an acceleration, a velocity and a position. Every time step (or frame) the acceleration (which is the rate of change of velocity) changes the velocity and the velocity (which is the rate of change of position) changes the position. Then you draw your object at the new position.
 
 You can influence the position of your object in one of three ways.
 
@@ -403,16 +403,10 @@ Finally, for a nice effect we add rotate the ball by the angular speed value usi
 
 #### Responding to input
 
-You may remember from [Part 2][2] that the `input.js` script checked to see if an input has hit the ball and if so it calls the `tap()` method. The `tap()` method defined above applies a direct change to the velocity and the angular speed of the ball. We use a couple of our script attributes `this.speedMult` and `this.angMult` to multiple the new velocity and angular speed to match our expectations of the gameplay.
+You may remember from [Part 2](/tutorials/keepyup-part-two/) that the `input.js` script checked to see if an input has hit the ball and if so it calls the `tap()` method. The `tap()` method defined above applies a direct change to the velocity and the angular speed of the ball. We use a couple of our script attributes `this.speedMult` and `this.angMult` to multiply the new velocity and angular speed to match our expectations of the gameplay.
 
-We also use the tap method to trigger a particle dust cloud at the point of impact and play a sound effect. We'll talk about particle and sounds in [Part 5][4].
+We also use the tap method to trigger a particle dust cloud at the point of impact and play a sound effect. We'll talk about particle and sounds in [Part 5](/tutorials/keepyup-part-five/).
 
 ## Summary
 
-The ball script runs a simply physical simulation to make the ball fall under gravity and respond to taps. It also listens for game events to know when to pause and reset. Finally, it interacts with some other systems to show particle effects and play sounds.
-
-[1]: /tutorials/keepyup-part-one/
-[2]: /tutorials/keepyup-part-two/
-[3]: /tutorials/keepyup-part-three/
-[4]: /tutorials/keepyup-part-five/
-[6]: https://playcanvas.com/project/406050
+The ball script runs a simple physical simulation to make the ball fall under gravity and respond to taps. It also listens for game events to know when to pause and reset. Finally, it interacts with some other systems to show particle effects and play sounds.

@@ -3,7 +3,7 @@ title: 物理ベースレンダリング (PBR)
 ---
 
 ![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  
-*Star-Lordモデル [Joachim Coppens][2]*
+*Star-Lordモデル [Joachim Coppens](https://www.joachimcoppens.com/)*
 
 物理ベースレンダリング(PBR)では、一貫性のあるグラフィクスレンダリングが、アーティストによるマテリアル作成、計測された物理的プロパティとマテリアルシェーダの組み合わせによって実現されます。光源と物体表面との関係をあらわす物理原則を適応することで、どのような照明環境でも特別な処理をすることなく自然な描画を行うことができます。
 
@@ -46,10 +46,6 @@ PBRの古いシェーディングモデルと比較して、マテリアルが�
 
 一部のPBRシステムは、ラフネスまたはグロスネスを使用していますが、これらは同じものです。ラフネスはグロスネスの逆数であり、逆も同じです。変換する場合は、テクスチャーまたは値を反転すればよいです。
 
-[物理的マテリアルに続く][6]
+[物理的マテリアルに続く](/user-manual/graphics/physical-rendering/physical-materials)
 
-*さらに詳しい説明は、Marmoset Toolbagの[PBR Theory][5]という素晴らしい記事を参照してください。*
-
-[2]: https://www.joachimcoppens.com/
-[5]: https://www.marmoset.co/toolbag/learn/pbr-theory
-[6]: /user-manual/graphics/physical-rendering/physical-materials
+*さらに詳しい説明は、Marmoset Toolbagの[PBR Theory](https://www.marmoset.co/toolbag/learn/pbr-theory)という素晴らしい記事を参照してください。*

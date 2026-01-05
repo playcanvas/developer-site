@@ -6,7 +6,7 @@ ARでは、現実世界は複雑な照明や様々な環境を持つことがあ
 
 * **指向性ライト**（最も顕著なもの）、その回転、強度、色。
 * **環境光**（L3球面調和関数形式）。
-* **反射**（キューブマップ形式）([現在未統合][1]）。
+* **反射**（キューブマップ形式）([現在未統合](https://github.com/playcanvas/engine/issues/6070)）。
 
 ## サポート
 
@@ -86,6 +86,4 @@ void addAmbient(vec3 worldNormal) {
 
 ## 反射
 
-WebXR Light Estimationは、環境反射の推定をキューブマップ形式で提供しますが、[現時点では][1] PlayCanvas Engineには統合されていません。
-
-[1]: https://github.com/playcanvas/engine/issues/6070
+WebXR Light Estimationは、環境反射の推定をキューブマップ形式で提供しますが、[現時点では](https://github.com/playcanvas/engine/issues/6070) PlayCanvas Engineには統合されていません。

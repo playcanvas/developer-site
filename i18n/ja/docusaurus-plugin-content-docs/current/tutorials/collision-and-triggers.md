@@ -10,7 +10,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 
 *RigidBodyが互いに衝突すると、衝突音が再生され、トリガーボリュームが形状をリセットします。*
 
-このチュートリアルでは、剛体物理、衝突検出、およびトリガーボリュームの基本を紹介します。これらの概念を探索するために、[チュートリアルプロジェクト][1]をご覧ください。
+このチュートリアルでは、剛体物理、衝突検出、およびトリガーボリュームの基本を紹介します。これらの概念を探索するために、[チュートリアルプロジェクト](https://playcanvas.com/project/405871)をご覧ください。
 
 ## Collisionコンポーネント
 
@@ -38,9 +38,9 @@ Rigid Body (剛体) は、ゲーム世界における物理的なオブジェク
 
 シーン内で剛体を作成するには、エンティティを選択し、 *RigidBody* コンポーネントと *Collision* コンポーネントを追加します。デフォルトでは、これにより **static box** の剛体が作成されます。 *RigidBody*  コンポーネントには、オブジェクトのプロパティを調整するために使用できるさまざまなオプションが提供されています。
 
-![rigidbody component](/img/user-manual/scenes/components/component-rigid-body-dynamic.png)
+![rigidbody component](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
 
-各プロパティの詳細については、[*RigidBody*のドキュメント][5]を参照してください。
+各プロパティの詳細については、[*RigidBody*のドキュメント](/user-manual/editor/scenes/components/rigidbody/)を参照してください。
 
 このデモでは、重要なプロパティは **Type** です。3つのオプションのうち1つを選択できます。
 
@@ -91,7 +91,7 @@ this.entity.collision.on('triggerenter', this.onTriggerEnter, this);
 
 注意してください、三番目の引数の ```this``` は、イベントリスナーで使用される「スコープ」を表します。通常、現在のスクリプトオブジェクトを三番目の引数として追加することで、イベントリスナー内の ```this``` の値が同じスクリプトオブジェクトを参照するようにします。
 
-このコードの2番目の部分は、イベントを処理する関数であり、 ```onTriggerEnter``` です。トリガーが入力されると、この関数が呼び出され、トリガーボリュームに入る[```Entity```][8]オブジェクトが渡されます。
+このコードの2番目の部分は、イベントを処理する関数であり、 ```onTriggerEnter``` です。トリガーが入力されると、この関数が呼び出され、トリガーボリュームに入る[```Entity```](https://api.playcanvas.com/engine/classes/Entity.html)オブジェクトが渡されます。
 
 この場合、トリガーが発火したときに、貫通するエンティティをスタート地点にリセットし、その速度をリセットします。
 
@@ -133,7 +133,3 @@ Collider.prototype.onCollisionStart = function (result) {
 ```initialize``` メソッドでは、イベントリスナーを設定し、その後、イベントハンドラーで他のエンティティが **rigidbody** コンポーネントを持っているかどうかをチェックします（これはトリガーボリュームに入ったときにサウンドが再生されるのを避けるためです）。そして、"hit" サウンドエフェクトを再生します。したがって、コライダースクリプトがアタッチされたエンティティが他の剛体と衝突するたびに、ヒット音が再生されます。
 
 以上がPlayCanvasでの衝突とトリガーの処理方法です。
-
-[1]: https://playcanvas.com/project/405871
-[5]: /user-manual/scenes/components/rigidbody/
-[8]: https://api.playcanvas.com/engine/classes/Entity.html

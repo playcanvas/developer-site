@@ -8,7 +8,7 @@ Anim events can be used to trigger event listeners during the playback of an ani
 
 To create a new event, select the animation asset in the asset panel which you'd like to create an event for. You should then see the `+ EVENT` button in the asset inspector as shown below:
 
-![Animation Asset With Event](/img/user-manual/anim/animation_asset_with_events.png)
+![Animation Asset With Event](/img/user-manual/animation/animation-asset-with-events.png)
 
 Each event has the following modifiable properties:
 

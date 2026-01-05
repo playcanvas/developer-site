@@ -20,13 +20,13 @@ Frame Buffer Picking - click to select a grey shape. The red shapes are set to b
 
 ---
 
-Try it from the Editor in the [tutorial project.][1]
+Try it from the Editor in the [tutorial project.](https://playcanvas.com/project/405856)
 
-This tutorial describes to methods of selecting an Entity from the 3D scene, for example, on the click of the mouse.
+This tutorial describes two methods of selecting an Entity from the 3D scene, for example, on the click of the mouse.
 
 ## Collision Picking
 
-Collision based picking uses the collision components to add a shape to each Entity that needs to be picked. Then we use the [raycastFirst()][2] method in the rigidbody system to fire a ray from the mouse click position into the screen to see if it hits a collision component. If it does, that Entity is "selected".
+Collision based picking uses the collision components to add a shape to each Entity that needs to be picked. Then we use the [raycastFirst()](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastfirst) method in the rigidbody system to fire a ray from the mouse click position into the screen to see if it hits a collision component. If it does, that Entity is "selected".
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -94,7 +94,7 @@ PickerRaycast.prototype.onSelect = function (e) {
 
 ## Frame Buffer Picking
 
-Frame buffer based picking uses the [pc.Picker][3] class to render the scene to a internal buffer. When the mouse is clicked the color of the buffer at the mouse location is used to determine which mesh instance was selected. This has some advantages and disadvantages over the collision based method.
+Frame buffer based picking uses the [pc.Picker](https://api.playcanvas.com/engine/classes/Picker.html) class to render the scene to a internal buffer. When the mouse is clicked the color of the buffer at the mouse location is used to determine which mesh instance was selected. This has some advantages and disadvantages over the collision based method.
 
 Advantages include:
 
@@ -275,7 +275,3 @@ PickerFramebuffer.prototype.onSelect = function (event) {
 
 </TabItem>
 </Tabs>
-
-[1]: https://playcanvas.com/project/405856
-[2]: https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastfirst
-[3]: https://api.playcanvas.com/engine/classes/Picker.html

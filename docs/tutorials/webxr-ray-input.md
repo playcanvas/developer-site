@@ -12,7 +12,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4604
 
 This is a WebXR experience that provides interaction between UI and XR input source, such as: laser pointer; gaze; touch screen. Supports desktop, mobile, Oculus Browser, Google Cardboard™, Google Daydream™, Samsung Gear VR™ and other VR/AR headsets.
 
-Let's have a look at the source of the [tutorial project][1].
+Let's have a look at the source of the [tutorial project](https://playcanvas.com/project/460449/overview/webvr-ray-input).
 
 ## Entering VR/AR
 
@@ -33,7 +33,7 @@ button.element.on('click', function() {
 
 In this project, we have `xr.js` which is added to the Root entity. It manages VR and AR UI buttons, reacts to XR availability changes and XR session state changes.
 
-To read more about the direct PlayCanvas API for WebXR, please refer to the [User Manual][2].
+To read more about the direct PlayCanvas API for WebXR, please refer to the [User Manual](/user-manual/xr/using-webxr/).
 
 ## XR Input Types
 
@@ -51,7 +51,7 @@ The system for the tracked input sources consists of two files:
 
 #### `controllers.js`
 
-This tracks added input sources using [XrInput][4] and makes instances of controller entities for them. For example:
+This tracks added input sources using [XrInput](https://api.playcanvas.com/engine/classes/XrInput.html) and makes instances of controller entities for them. For example:
 
 ```javascript
 app.xr.input.on('add', function (inputSource) {
@@ -61,7 +61,7 @@ app.xr.input.on('add', function (inputSource) {
 
 #### `controller.js`
 
-This is attached to each entity that represents an input source and has the original [XrInputSource][5] associated with it. When an input source can be gripped, it will enable the child entity for the visual model for a controller.
+This is attached to each entity that represents an input source and has the original [XrInputSource](https://api.playcanvas.com/engine/classes/XrInputSource.html) associated with it. When an input source can be gripped, it will enable the child entity for the visual model for a controller.
 
 On each update, it will position and rotate the entity based on the input source position and rotation:
 
@@ -75,11 +75,11 @@ if (inputSource.grip) {
 
 ## UI
 
-3D UI is created using [Button][6] and [Element][7] components. Using combination of both, we can create interactive buttons in 3D space.
+3D UI is created using [Button](https://api.playcanvas.com/engine/classes/ButtonComponent.html) and [Element](https://api.playcanvas.com/engine/classes/ElementComponent.html) components. Using a combination of both, we can create interactive buttons in 3D space.
 
-Creating a 3D UI for an XR environment is exactly the same as creating a 3D UI for mouse/touch interaction in a non-XR environment. Read more on creating [User Interfaces][3].
+Creating a 3D UI for an XR environment is exactly the same as creating a 3D UI for mouse/touch interaction in a non-XR environment. Read more on creating [User Interfaces](/user-manual/user-interface/).
 
-By default, each XrInputSource has an `elementInput` property enabled. This means it will interact with Button components just like mouse or touch input, but using its associated 3D ray. Each input source has a ray that has an [origin][8] and a [direction][9]. In this tutorial, we visualize an input source's ray:
+By default, each XrInputSource has an `elementInput` property enabled. This means it will interact with Button components just like mouse or touch input, but using its associated 3D ray. Each input source has a ray that has an [origin](https://api.playcanvas.com/engine/classes/XrInputSource.html#getorigin) and a [direction](https://api.playcanvas.com/engine/classes/XrInputSource.html#getdirection). In this tutorial, we visualize an input source's ray:
 
 ```javascript
 // set starting point of ray
@@ -93,7 +93,7 @@ app.renderLine(vecA, vecB, color);
 
 ## UI Interaction
 
-In this tutorial, we have two types of buttons: Rotate (button-rotate.js) and Color (button-color.js) buttons. When rotate button is [clicked][10], it will set the rotation speed of a cube:
+In this tutorial, we have two types of buttons: Rotate (button-rotate.js) and Color (button-color.js) buttons. When rotate button is [clicked](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click), it will set the rotation speed of a cube:
 
 ```javascript
 entity.button.on('click', function() {
@@ -104,14 +104,3 @@ entity.button.on('click', function() {
 When the color button is clicked, we change the diffuse color of each mesh instance of a cube model.
 
 This UI interaction is agnostic to input source: either it originates from VR handheld devices; gaze input of mobile VR; on-screen touch in an AR environment; as well as classic mouse and touch. So creating truly multi-platform applications and testing is easy.
-
-[1]: https://playcanvas.com/project/460449/overview/webvr-ray-input
-[2]: /user-manual/xr/using-webxr/
-[3]: /user-manual/user-interface/
-[4]: https://api.playcanvas.com/engine/classes/XrInput.html
-[5]: https://api.playcanvas.com/engine/classes/XrInputSource.html
-[6]: https://api.playcanvas.com/engine/classes/ButtonComponent.html
-[7]: https://api.playcanvas.com/engine/classes/ElementComponent.html
-[8]: https://api.playcanvas.com/engine/classes/XrInputSource.html#getorigin
-[9]: https://api.playcanvas.com/engine/classes/XrInputSource.html#getdirection
-[10]: https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click

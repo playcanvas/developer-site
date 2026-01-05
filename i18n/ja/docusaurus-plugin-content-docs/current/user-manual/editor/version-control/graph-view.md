@@ -8,17 +8,17 @@ title: Graph View
 
 バージョンコントロールパネル ( Version Control Panel) では、選択したブランチの最新のチェックポイントのシンプルなリストが表示されますが、グラフビューでは、チェックポイント、ブランチ、およびマージを含む、全体のバージョンコントロールグラフのより大きな(拡張可能な)ビューが表示されます。
 
-![](/img/user-manual/version-control/graph-view/overview.png)
+![](/img/user-manual/editor/version-control/graph-view/overview.png)
 
 ## グラフビューの起動
 
 グラフビュー (Graph View) にアクセスするには、バージョンコントロールパネルのトップメニューにある「グラフ」ボタンをクリック(現在のエディターブランチの場合)するか、ブランチメニュードロップダウンの「バージョンコントロールグラフ」エントリをクリックします。
 
-![](/img/user-manual/version-control/graph-view/access-buttons.png)
+![](/img/user-manual/editor/version-control/graph-view/access-buttons.png)
 
 ## グラフノード
 
-![](/img/user-manual/version-control/graph-view/commit-node.png)
+![](/img/user-manual/editor/version-control/graph-view/commit-node.png)
 
 グラフノードには、次の情報が含まれます。
 
@@ -28,41 +28,41 @@ title: Graph View
 
 ## グラフノードコンテキストメニュー
 
-![](/img/user-manual/version-control/graph-view/context-menu.png)
+![](/img/user-manual/editor/version-control/graph-view/context-menu.png)
 
 ノードをクリックすると、ノードとアクセス許可に応じて、以下のいずれかの選択肢に対応するコンテキストメニューが開きます。
 
-- **変更の表示 (View Changes)** - このチェックポイントと直前のチェックポイントの間にDiff Viewを起動します。 ([詳細][view-changes])
+- **変更の表示 (View Changes)** - このチェックポイントと直前のチェックポイントの間にDiff Viewを起動します。 ([詳細](/user-manual/editor/version-control/changes/))
 
 - **比較選択 (Select for Compare)** - 比較するペアの最初のチェックポイントを選択します。
 
 - **選択の比較 (Compare with Selected)** - 現在のノードと、 'Select for Compare'を通じてマークされたノードとの間にDiff Viewを起動します。
 
-![](/img/user-manual/version-control/graph-view/compare-checkpoints-example.gif)
+![](/img/user-manual/editor/version-control/graph-view/compare-checkpoints-example.gif)
 
-- **新しいブランチ (New Branch)** - 選択したチェックポイントから新しいブランチを作成します。 ([詳細][new-branch])
+- **新しいブランチ (New Branch)** - 選択したチェックポイントから新しいブランチを作成します。 ([詳細](/user-manual/editor/version-control/branches/#creating-a-new-branch))
 
 - **データのコピー (Copy Data)** - 変更がなく、切り捨てられていないチェックポイントデータ(チェックポイントGUID、ブランチID、チェックポイントメッセージなど)をJSON形式でクリップボードにコピーします。
 
-- **復元 (Restore)**(現在のエディタブランチの場合のみ)- ブランチの状態を選択したチェックポイントの状態に復元します。 ([詳細][restore-checkpoint])
+- **復元 (Restore)**(現在のエディタブランチの場合のみ)- ブランチの状態を選択したチェックポイントの状態に復元します。 ([詳細](/user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint))
 
-- **ハードリセット (Hard Reset)**(現在のエディタブランチの場合のみ)- 選択したチェックポイントにハードリセットを実行します。 ([詳細][hard-reset])
+- **ハードリセット (Hard Reset)**(現在のエディタブランチの場合のみ)- 選択したチェックポイントにハードリセットを実行します。 ([詳細](/user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint))
 
 ## 拡張可能なノード
 
-![](/img/user-manual/version-control/graph-view/node-expand.png)
+![](/img/user-manual/editor/version-control/graph-view/node-expand.png)
 
 最初に、グラフビューは、各ブランチから最大20のチェックポイント、および合計60のチェックポイントを表示します。
 
 ノードの右上隅にある三角形は、追加の入力または出力エッジ(ブランチやマージなど)を持っていることを意味し、 'ノードの展開'コンテキストメニューエントリを介して展開できます。
 
-![](/img/user-manual/version-control/graph-view/node-expand-example.gif)
+![](/img/user-manual/editor/version-control/graph-view/node-expand-example.gif)
 
 ## クローズされたブランチ
 
 グラフには、常にマージ結果チェックポイントの両方の親を表示できるように、閉じたブランチのチェックポイントも含まれます。ブランチ名の後に[X]が付いています。
 
-![](/img/user-manual/version-control/graph-view/closed-branches.png)
+![](/img/user-manual/editor/version-control/graph-view/closed-branches.png)
 
 ## グラフノードレイアウトロジック
 
@@ -81,8 +81,3 @@ title: Graph View
 各ブランチの色は、Graph Viewを起動したブランチに依存せず、常に同じです。
 
 グラフビューでは、スクロールホイールでズームイン/ズームアウト、クリックアンドドラッグでパンすることができます。
-
-[view-changes]: /user-manual/editor/version-control/changes/
-[new-branch]: /user-manual/editor/version-control/branches/#creating-a-new-branch
-[restore-checkpoint]: /user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint
-[hard-reset]: /user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint

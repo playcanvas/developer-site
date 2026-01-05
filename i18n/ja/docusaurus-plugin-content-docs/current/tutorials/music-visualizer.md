@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
     <iframe src="https://playcanv.as/p/BqhCi6oy/" title="Creating a Music Visualizer" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*[完成されたプロジェクト][1]をフォークして詳細をご確認ください。*
+*[完成されたプロジェクト](https://playcanvas.com/project/405891)をフォークして詳細をご確認ください。*
 
 このチュートリアルでは、PlayCanvasを使用して、WebGLのオーディオビジュアライザアプリケーションを作成する方法を説明します。オーディオストリームの余分な周波数データを取得し、PlayCanvasキャンバスにそのデータをレンダリングします。
 
@@ -48,7 +48,7 @@ Analyser.prototype.update = function(dt) {
 
 ここでコードを詳しく見てみましょう。
 
-まず、`context`を取得します。これは[`AudioContext`][2]のアプリケーションインスタンスです。これは、最新ブラウザの標準であるWeb Audio APIに含まれる[`AnalyserNode`][3] を新規で作成するために使用します。`AnalyserNode`により、フレーム毎にオーディオの生のデータに値の配列としてアクセスすることが可能になります。いくつかの`smoothingTimeConstant`プロパティにより、データサンプリングが時間と共に平滑化されるかどうかを決定します。`0`の場合は平滑化されません。`1`は非常に滑らかになります。`fftSize`は、アナライザノードが生成するサンプル数を定義します。これは2の累乗である必要があります。高いく設定するほど綿密になり、CPUに負荷がかかります。
+まず、`context`を取得します。これは[`AudioContext`](https://developer.mozilla.org/en/docs/Web/API/AudioContext)のアプリケーションインスタンスです。これは、最新ブラウザの標準であるWeb Audio APIに含まれる[`AnalyserNode`](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode) を新規で作成するために使用します。`AnalyserNode`により、フレーム毎にオーディオの生のデータに値の配列としてアクセスすることが可能になります。いくつかの`smoothingTimeConstant`プロパティにより、データサンプリングが時間と共に平滑化されるかどうかを決定します。`0`の場合は平滑化されません。`1`は非常に滑らかになります。`fftSize`は、アナライザノードが生成するサンプル数を定義します。これは2の累乗である必要があります。高いく設定するほど綿密になり、CPUに負荷がかかります。
 
 `AnalyserNode`からデータには、整数の`Uint8Array`または浮動小数点数の`Float32Array`としてアクセスできます。このデモでは、浮動小数点数を使用しているため、`fftSize`の半分の大きさでそれぞれ2つの`Float32Array`を割り当てる必要があります。
 
@@ -122,7 +122,7 @@ Visualizer.prototype.renderData = function (data, color, scale, offset) {
 };
 ```
 
-ビジュアライザースクリプトは、すべてのアナライザーからのデータを取得し、[`this.app.renderLines`][4] APIを使用して直線グラフとしてレンダリングします。
+ビジュアライザースクリプトは、すべてのアナライザーからのデータを取得し、[`this.app.renderLines`](https://api.playcanvas.com/engine/classes/AppBase.html#renderlines) APIを使用して直線グラフとしてレンダリングします。
 
 設定では、線に使用するベクターを割り当てています。各データの点に対して2つ必要です(線の開始と終了)。その後、すべての線が画面に表示されることを確認するためにいくつかのスケールファクタを設定します。`AnalyserNode`にはデータに含むことができるデシベルの最小値と最大値が含まれています。これは必ず正確ではないようですが(この範囲外の値を取得しました)、データを正規化するための良い基礎となります。
 
@@ -133,8 +133,3 @@ updateループでは、周波数データ (Frequency)および 時間領域 (Ti
 ## その他のアイデアは?
 
 音楽の視覚化の方法を一部紹介させていただきました。音楽に合わせて3Dバーのスケーリングや色や明るさの調整を行うこともできます。SoundCloudにビジュアライザを繋げてユーザに選択させる方法もあります。可能性はたくさんあります。
-
-[1]: https://playcanvas.com/project/405891
-[2]: https://developer.mozilla.org/en/docs/Web/API/AudioContext
-[3]: https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode
-[4]: https://api.playcanvas.com/engine/classes/AppBase.html#renderlines

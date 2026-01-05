@@ -2,9 +2,9 @@
 title: シャドウ
 ---
 
-シャドウはゲームにリアリズムを追加する優れた方法です。しかし、ダイナミック(リアルタイム)シャドウは、高コストでランタイムパフォーマンスが低下する可能性があります。シーンに静的なシャドウを追加するよりも性能が高い方法については、[ライトマップ][4]をご覧ください。
+シャドウはゲームにリアリズムを追加する優れた方法です。しかし、ダイナミック(リアルタイム)シャドウは、高コストでランタイムパフォーマンスが低下する可能性があります。シーンに静的なシャドウを追加するよりも性能が高い方法については、[ライトマップ](/user-manual/graphics/lighting/lightmapping)をご覧ください。
 
-![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3_shadows.jpg)
+![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3-shadows.jpg)
 
 PlayCanvasエンジンは、シャドウマッピングと呼ばれるシャドウのアルゴリズムを実装しています。完全にクロスプラットフォームであり、モバイルおよびデスクトップの両方で動作することが保証されています。
 
@@ -14,7 +14,7 @@ PlayCanvasエンジンは、シャドウマッピングと呼ばれるシャド�
 
 デフォルトでは、PlayCanvasではシャドウキャストは無効になっています。自分で明示的に有効にする必要があります。幸いなことに、シャドウの有効化は簡単です。まず、シーンでシャドウをキャストするライトを特定します。 Hierarchyでライトを選択し、Inspectorパネルでプロパティを編集します。各ライトには「Cast Shadows」というオプションがあります。このオプションをチェックすると、シーン内のシャドウキャストグラフィカルオブジェクトにシャドウが生成されます。
 
-![Model Component](/img/user-manual/scenes/components/component-model.png)
+![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
 
 次に、シーン内のどのグラフィカルオブジェクトがシャドウをキャストおよび受信するかを指定する必要があります。デフォルトでは、すべてのレンダリングおよびModelコンポーネントがシャドウをキャストおよび受信します。これらのプロパティを変更するには、Hierarchyでエンティティを選択し、InspectorでRenderコンポーネントまたはModelコンポーネントを検索し、「Cast Shadows」と「Receive Shadows」オプションを必要に応じてオフにします。
 
@@ -34,11 +34,11 @@ PlayCanvasエンジンは、シャドウマッピングと呼ばれるシャド�
 
 単一のシャドウカスケードを示すスクリーンショット。
 
-![One cascade](/img/user-manual/graphics/lighting/shadows/shadow_cascades_1.jpg)
+![One cascade](/img/user-manual/graphics/lighting/shadows/shadow-cascades-1.jpg)
 
 4つのシャドウカスケードを示すスクリーンショット。
 
-![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow_cascades_4.jpg)
+![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow-cascades-4.jpg)
 
 ### カスケードの分布 {#distribution-of-cascades}
 
@@ -46,7 +46,7 @@ PlayCanvasエンジンは、シャドウマッピングと呼ばれるシャド�
 
 ## シャドウの調整 {#tuning-shadows}
 
-PlayCanvasが使用するシャドウマッピング技術には有限の解像度しかありません。そのため、できるだけ見栄え良くするために、いくつかの値を調整する必要があります。次のプロパティは、[Lightコンポーネント][2]のUIで見つけることができます。
+PlayCanvasが使用するシャドウマッピング技術には有限の解像度しかありません。そのため、できるだけ見栄え良くするために、いくつかの値を調整する必要があります。次のプロパティは、[Lightコンポーネント](/user-manual/editor/scenes/components/light)のUIで見つけることができます。
 
 ### シャドウ距離 {#shadow-distance}
 
@@ -76,7 +76,7 @@ PlayCanvasが使用するシャドウマッピング技術には有限の解像�
 
 シャドウのアウトラインをペナンブラと呼びます。これは、シャドウを柔らかいエッジで与えます。シ
 
-![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard_vs_soft.jpg)
+![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
 
 ソフトシャドウはシャドウマップ上のサンプルをより多くGPUで取ることによって実現されています。使用されているアルゴリズムはPercentage Closest FilteringあるいはPCFと省略されて呼ばれています。このアルゴリズムはシャドウマップ内の一つのサンプルだけを読むのではなく、(3x3のマトリクスで)9個のサンプルを読み込んで使用します。
 
@@ -89,7 +89,4 @@ PlayCanvasが使用するシャドウマッピング技術には有限の解像�
 * 指向性またはスポットライトを落とすそれぞれの影のために、すべてのフレームで一度シーンをシャドウマップにレンダリングする必要があります。ポイントライトの場合はシーンがライトごとに6回レンダリングされるので(シャドウマップが6面のキューブマップとして保存される)、負荷が大きくなります。シャドウマップの中にシーンをレンダリングすると、CPUとGPUの両方に負荷を加えます。
 * シャドウマップの解像度を上げるとより鮮明な影を生成しますが、GPUはより多くのシャドウマップピクセルを埋める必要があり、フレームレートに影響を与える可能性があります。
 * 影を受けるマテリアルのシャドウサンプルタイプとしてソフトシャドウ(PCF3x3)を選択すると、ハードシャドウのオプションを使用した場合よりも、GPUに負荷がかかります。
-* 影が環境の静的な部分から発生している場合は、[ライトマップ][4]を使用してテクスチャに影をbakeすることを検討してください。
-
-[2]: /user-manual/scenes/components/light
-[4]: /user-manual/graphics/lighting/lightmapping
+* 影が環境の静的な部分から発生している場合は、[ライトマップ](/user-manual/graphics/lighting/lightmapping)を使用してテクスチャに影をbakeすることを検討してください。

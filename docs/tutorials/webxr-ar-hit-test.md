@@ -6,7 +6,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/6724
 
 import Link from '@docusaurus/Link';
 
-Example of how to use WebXR Hit Test API. That allows to hit test real world geometry.
+Example of how to use the WebXR Hit Test API. This allows you to hit test real-world geometry.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/Kjol3uRS/" title="WebXR AR: Hit Test" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

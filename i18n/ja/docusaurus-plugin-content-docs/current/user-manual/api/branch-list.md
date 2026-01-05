@@ -43,7 +43,7 @@ Authorization: Bearer {accessToken}
       "id": string,
       "projectId": int,
       "name": "Branch Name",
-      "createdAt": data,
+      "createdAt": date,
       "closed": bool,
       "latestCheckpointId": string,
       "user": {
@@ -71,6 +71,4 @@ Authorization: Bearer {accessToken}
 
 ## レート制限
 
-このルートは[通常][1]のレート制限を使用します。
-
-[1]: /user-manual/api#rate-limiting
+このルートは[通常](/user-manual/api#rate-limiting)のレート制限を使用します。

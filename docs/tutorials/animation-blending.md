@@ -136,6 +136,4 @@ AnimationBlending.prototype.setState = function (state) {
 
 From this point, you are able to add more and more animations to the animation component and start scripting much more complex animation state charts.
 
-See [the full Scene here][2]
-
-[2]: https://playcanvas.com/editor/scene/440156
+See [the full Scene here](https://playcanvas.com/editor/scene/440156)

@@ -30,7 +30,7 @@ CHAT ボタンを選択すると、チャットパネルが展開され、Editor
 
 ![Chat](/img/user-manual/editor/realtime-collaboration/chat.gif)
 
-チャットメッセージのブラウザ通知は、[設定](interface/settings/editor.md#settings)で切り替えることができます。
+チャットメッセージのブラウザ通知は、[設定](interface/settings/editor.md)で切り替えることができます。
 
 :::tip
 

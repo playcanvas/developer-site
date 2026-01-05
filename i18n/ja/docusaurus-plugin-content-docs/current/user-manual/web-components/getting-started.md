@@ -59,7 +59,7 @@ npm install playcanvas @playcanvas/web-components --save-dev
 
 :::
 
-## ボイラープレートHTML
+## ボイラープレートHTML {#ボイラープレートhtml}
 
 最小限のボイラープレートHTMLファイルでどのように見えるか見てみましょう。
 

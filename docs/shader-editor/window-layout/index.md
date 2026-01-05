@@ -9,16 +9,9 @@ Shader Editor comprises a number of sub-windows or panes. The panes are highligh
 
 | Pane                | Description                                                       |
 | ------------------- | ----------------------------------------------------------------- |
-| [Info Pane][2]      | Shows information for the UI element under the mouse cursor.      |
-| [Nodes Pane][3]     | Lists the built-in nodes available when constructing graphs.      |
-| [Inspector Pane][4] | Shows details of the currently selected item.                     |
-| [Assets Pane][5]    | Is where the project’s graphs, materials, and textures appear.    |
-| [Graph Editor][6]   | Shows the selected graph and is where nodes and edges are edited. |
-| [Preview Pane][7]   | Displays a preview of the currently selected graph or material.   |
-
-[2]: /shader-editor/window-layout/info-pane
-[3]: /shader-editor/window-layout/nodes-pane
-[4]: /shader-editor/window-layout/inspector-pane
-[5]: /shader-editor/window-layout/assets-pane
-[6]: /shader-editor/window-layout/graph-editor
-[7]: /shader-editor/window-layout/preview-pane
+| [Info Pane](/shader-editor/window-layout/info-pane)      | Shows information for the UI element under the mouse cursor.      |
+| [Nodes Pane](/shader-editor/window-layout/nodes-pane)     | Lists the built-in nodes available when constructing graphs.      |
+| [Inspector Pane](/shader-editor/window-layout/inspector-pane) | Shows details of the currently selected item.                     |
+| [Assets Pane](/shader-editor/window-layout/assets-pane)    | Is where the project’s graphs, materials, and textures appear.    |
+| [Graph Editor](/shader-editor/window-layout/graph-editor)   | Shows the selected graph and is where nodes and edges are edited. |
+| [Preview Pane](/shader-editor/window-layout/preview-pane)   | Displays a preview of the currently selected graph or material.   |

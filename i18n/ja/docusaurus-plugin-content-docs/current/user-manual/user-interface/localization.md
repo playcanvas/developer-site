@@ -34,7 +34,7 @@ JSONアセットは次のようになります。
 
 JSONファイルの`info`部分ので異なるロケールを指定することができます。`messages`セクションには、それぞれのローカライズされたフレーズのキーバリューのペアが含まれています。キーはそのフレーズの識別子で、テキストはそのキーの翻訳テキストです。
 
-PlayCanvasは各ロケールの複数形もサポートしています。各フレーズの複数形を指定するためには、単一の文字列の代わりに、各複数形の文字列の配列を渡す必要があります。各言語の複数形は[ここ][1]で見つけることができます。各配列要素はその言語の複数形に対応します。たとえば英語の場合は次のようになります。
+PlayCanvasは各ロケールの複数形もサポートしています。各フレーズの複数形を指定するためには、単一の文字列の代わりに、各複数形の文字列の配列を渡す必要があります。各言語の複数形は[ここ](https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html)で見つけることができます。各配列要素はその言語の複数形に対応します。たとえば英語の場合は次のようになります。
 
 ```json
 "key plural": [
@@ -56,7 +56,7 @@ PlayCanvasは各ロケールの複数形もサポートしています。各フ�
 ]
 ```
 
-各言語のルールについては、[ここ][1]の言語表を参照してください。
+各言語のルールについては、[ここ](https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html)の言語表を参照してください。
 
 ローカライズJSONアセットを作成したら、エディタ設定のローカライゼーションの下に追加する必要があります。
 
@@ -70,7 +70,7 @@ PlayCanvasは各ロケールの複数形もサポートしています。各フ�
 
 異なるロケールでは、数字のフォーマット方法について異なるルールがあります。例えば、英語（イギリスとアメリカ）では `1000000` を `1,000,000` とフォーマットし、オランダ語では小数点でフォーマットします `1.000.000`。
 
-JavaScriptはロケールコードに基づいてこのフォーマットを行う組み込み関数、[`Number.protoype.toLocaleString()`][5]を提供しています。
+JavaScriptはロケールコードに基づいてこのフォーマットを行う組み込み関数、[`Number.protoype.toLocaleString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)を提供しています。
 
 使用例:
 
@@ -97,19 +97,19 @@ console.log(localeNumberString);
 
 ### タイ語
 
-テキストエレメントでタイ語のテキストのワードラッピングを正しく動作させるためには、翻訳者が単語の間に [zero width characters (Unicode U+200B)][7] を追加する必要があります。
+テキストエレメントでタイ語のテキストのワードラッピングを正しく動作させるためには、翻訳者が単語の間に [zero width characters (Unicode U+200B)](https://en.wikipedia.org/wiki/Zero-width_space) を追加する必要があります。
 
 タイ語には単語の間にスペースがなく、同じグリフの連続が文脈によって異なる単語の組み合わせに分割されることがあります。
 
-タイ語のテキストを計算上正しく分割することはまだ[未解決の問題][6]であり、通常はランタイムで行うには費用がかかる辞書ベースのアプローチを使用します。
+タイ語のテキストを計算上正しく分割することはまだ[未解決の問題](http://www.thai-language.com/ref/breaking-words)であり、通常はランタイムで行うには費用がかかる辞書ベースのアプローチを使用します。
 
-[thai-language.comサイトには辞書ベースのアプローチを使用した別のツール][8]もあり、既存のテキストを使用して単語の間にゼロ幅文字を追加することができます。
+[thai-language.comサイトには辞書ベースのアプローチを使用した別のツール](http://www.thai-language.com/?nav=zwsp)もあり、既存のテキストを使用して単語の間にゼロ幅文字を追加することができます。
 
 ### 右から左の言語
 
-右から左に書く言語には、[この例のプロジェクト][10]で見つけることができるサポートするための追加スクリプトが必要です。
+右から左に書く言語には、[この例のプロジェクト](/tutorials/right-to-left-language-support/)で見つけることができるサポートするための追加スクリプトが必要です。
 
-例のプロジェクトには、「Rtl Support」というフォルダがあり、プロジェクトに[コピーして貼り付ける][11]必要があります。
+例のプロジェクトには、「Rtl Support」というフォルダがあり、プロジェクトに[コピーして貼り付ける](/user-manual/editor/assets/asset-panel/#copy-and-paste-between-projects)必要があります。
 
 ![](/img/user-manual/user-interface/localization/rtl-asset-folder.png)
 
@@ -121,18 +121,7 @@ console.log(localeNumberString);
 
 スクリプト内のキーからテキストを取得するには、次のAPIを使用します。
 
-- [pc.I18n#getText][3] 複数形のリスト内の非複数形または最初のテキスト文字列を取得するためのAPI
-- [pc.I18n#getPluralText][4] 数字に基づいて複数形のテキスト文字列を取得するためのAPI
+- [pc.I18n#getText](https://api.playcanvas.com/engine/classes/I18n.html#gettext) 複数形のリスト内の非複数形または最初のテキスト文字列を取得するためのAPI
+- [pc.I18n#getPluralText](https://api.playcanvas.com/engine/classes/I18n.html#getpluralText) 数字に基づいて複数形のテキスト文字列を取得するためのAPI
 
-ローカライゼーションのための完全なエンジンAPIリファレンスについては、[このページ][2]を参照してください。
-
-[1]: https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html
-[2]: https://api.playcanvas.com/engine/classes/I18n.html
-[3]: https://api.playcanvas.com/engine/classes/I18n.html#gettext
-[4]: https://api.playcanvas.com/engine/classes/I18n.html#getpluralText
-[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
-[6]: http://www.thai-language.com/ref/breaking-words
-[7]: https://en.wikipedia.org/wiki/Zero-width_space
-[8]: http://www.thai-language.com/?nav=zwsp
-[10]: /tutorials/right-to-left-language-support/
-[11]: /user-manual/editor/interface/assets/#copy-and-paste-between-projects
+ローカライゼーションのための完全なエンジンAPIリファレンスについては、[このページ](https://api.playcanvas.com/engine/classes/I18n.html)を参照してください。

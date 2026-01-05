@@ -32,7 +32,7 @@ export function Demo() {
     );
 }
 
-Let's build a simple Gaussian splat application step by step using [PlayCanvas React](/user-manual/playcanvas-react). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.
+Let's build a simple Gaussian splat application step by step using [PlayCanvas React](/user-manual/react). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.
 
 ## Starting Point
 

@@ -2,7 +2,7 @@
 title: テキスト要素
 ---
 
-`Text Element` は、[フォントアセット][1]を使用して文字列を表示するために使われます。
+`Text Element` は、[フォントアセット](/user-manual/editor/assets/inspectors/font)を使用して文字列を表示するために使われます。
 
 ## テキスト
 
@@ -44,7 +44,7 @@ entity.element.enableMarkup = true;
 
 'Localized' チェックボックスをチェックすることで、`Text Element` のテキストをローカライズできます。これが有効になっている場合、テキストの代わりに、`Text Element` のローカライゼーションキーを指定します。これはローカライゼーションアセットからローカライズされたテキストを取得するために使用されます。
 
-ローカライゼーションの詳細については[こちら][11]をご覧ください。
+ローカライゼーションの詳細については[こちら](/user-manual/user-interface/localization)をご覧ください。
 
 ## 自動サイズ調整
 
@@ -97,6 +97,3 @@ Color プロパティは、文字列をお好みの色にティントするこ�
 Opacity プロパティは、文字列の透明度を設定できます
 
 ![透明](/img/user-manual/user-interface/text-element/transparent.png)
-
-[1]: /user-manual/assets/types/font
-[11]: /user-manual/user-interface/localization
