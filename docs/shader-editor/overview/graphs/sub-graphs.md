@@ -25,6 +25,4 @@ The adder Sub Graph can then be placed as a node itself in another graph:
 
 ![Place Sub Graph](/img/shader-editor/overview-graph-place-sub-graph.gif)
 
-For more information on how to edit graphs see the [Graph Editor][4] documentation.
-
-[4]: /shader-editor/window-layout/graph-editor
+For more information on how to edit graphs see the [Graph Editor](/shader-editor/window-layout/graph-editor) documentation.

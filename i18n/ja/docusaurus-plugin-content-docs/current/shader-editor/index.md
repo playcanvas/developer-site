@@ -7,10 +7,6 @@ __シェーダーエディター__ ユーザーマニュアルへようこそ。
 
 このマニュアルには、以下の内容が記載されています
 
-- [はじめに][1]
-- [概要][2]
-- [ウィンドウの配置][3]
-
-[1]: /shader-editor/introduction
-[2]: /shader-editor/overview
-[3]: /shader-editor/window-layout
+- [はじめに](/shader-editor/introduction)
+- [概要](/shader-editor/overview)
+- [ウィンドウの配置](/shader-editor/window-layout)
