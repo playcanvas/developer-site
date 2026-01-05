@@ -16,7 +16,7 @@ thumb: /img/tutorials/importing-first-model-and-animation/thumbnail.jpg
 
 ## サンプルアセットの入手
 
-[Kenney Animated Characters アセットパック][kenney-site]を使用します。
+[Kenney Animated Characters アセットパック](https://www.kenney.nl/assets/animated-characters-1)を使用します。
 
 ![](/img/tutorials/importing-first-model-and-animation/kenney-site.jpg)
 
@@ -112,7 +112,7 @@ Anim State Graphアセットは、アセットパネルで右クリックし、'
 
 ![](/img/tutorials/importing-first-model-and-animation/anim-state-graph.png)
 
-このチュートリアルでは、単一のステートと単一のアニメーションに焦点を当てます。アニメーションに関する詳細なドキュメントやチュートリアルは  [こちら][animation-documentation]で確認できます。
+このチュートリアルでは、単一のステートと単一のアニメーションに焦点を当てます。アニメーションに関する詳細なドキュメントやチュートリアルは  [こちら](/user-manual/animation/)で確認できます。
 
 モデルにグラフを追加するためには、シーン内のテンプレートエンティティインスタンスを選択し、インスペクターにてAnimコンポーネントを追加します。
 
@@ -125,6 +125,3 @@ Animコンポーネントでは、Anim State Graphアセットを割り当て、
 以上です！最初のモデルとループアニメーションをPlayCanvasに正常にインポートしました！
 
 ![](/img/tutorials/importing-first-model-and-animation/preview.gif)
-
-[kenney-site]: https://www.kenney.nl/assets/animated-characters-1
-[animation-documentation]: /user-manual/animation/

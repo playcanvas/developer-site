@@ -16,11 +16,11 @@ Facebookにログインしてあなたの写真を3D彫刻で表示しましょ�
 
 PlayCanvasは、WebGLベースのFacebookゲームやアプリケーションを構築するための理想的なパートナーです。Facebookは、ゲームに対して大規模なオーディエンスを見つけるのに最適な場所であり、PlayCanvasはWeb向けに最適化された高速でパフォーマンスの良いゲームを作成することができます。
 
-このチュートリアルでは、Facebook APIをPlayCanvasアプリケーションに統合する方法を紹介します。Facebook APIにアクセスできるようになると、さまざまな可能性があります。例えば、友達とゲームを共有したり、Facebookにストーリーを投稿したりなどです。[チュートリアルプロジェクト][5]をご覧ください。
+このチュートリアルでは、Facebook APIをPlayCanvasアプリケーションに統合する方法を紹介します。Facebook APIにアクセスできるようになると、さまざまな可能性があります。例えば、友達とゲームを共有したり、Facebookにストーリーを投稿したりなどです。[チュートリアルプロジェクト](https://playcanvas.com/project/405897)をご覧ください。
 
 ## Facebookプラグイン
 
-[GitHub上][1]で利用可能なFacebookの統合をサポートするプラグインがあります。これにより、FacebookのJavaScript SDKを読み込む作業が簡略化されます。シーン内のエンティティにプラグインスクリプト `lib/facebook-setup.js` をアタッチし、`fb:init` イベントをリッスンするだけで、APIが利用可能になります。詳しい手順は[GitHubのページ][1]でご確認ください。
+[GitHub上](https://github.com/playcanvas/playcanvas-facebook)で利用可能なFacebookの統合をサポートするプラグインがあります。これにより、FacebookのJavaScript SDKを読み込む作業が簡略化されます。シーン内のエンティティにプラグインスクリプト `lib/facebook-setup.js` をアタッチし、`fb:init` イベントをリッスンするだけで、APIが利用可能になります。詳しい手順は[GitHubのページ](https://github.com/playcanvas/playcanvas-facebook)でご確認ください。
 
 ```javascript
   this.app.on("fb:init", function () {
@@ -257,7 +257,7 @@ FB.api(path, function (lists) {
 });
 ```
 
-このコードのこのセクションでは、Facebook APIを使用して彼らの[Graph API][2]にアクセスしています。この場合、ログインしたユーザーから写真のリストを読み込み、それぞれの写真に対してクエリを実行して画像のURLを取得しています。
+このコードのこのセクションでは、Facebook APIを使用して彼らの[Graph API](https://developers.facebook.com/docs/graph-api)にアクセスしています。この場合、ログインしたユーザーから写真のリストを読み込み、それぞれの写真に対してクエリを実行して画像のURLを取得しています。
 
 URLを取得したら、新しい `texture` アセットを作成し、画像を読み込みます。
 
@@ -290,9 +290,4 @@ FacePhoto.prototype.createPhoto = function(texture) {
 
 このチュートリアルでは、PlayCanvasアプリケーション内からFacebook APIを読み込み、Facebookのデータにアクセスする方法を紹介しています。Facebook APIを使用して試してみることはまだまだたくさんあります。例えば、ゲームイベントが発生したときにFacebookストーリーを共有するようにしてみたり、ユーザーの友達リストを使用して友達とのゲームに挑戦するように誘ったりすることができます。
 
-私たちのゲームSWOOOPでは、これらのいくつかを実際に表示しています。[Facebook][4]でぜひお試しください。
-
-[1]: https://github.com/playcanvas/playcanvas-facebook
-[2]: https://developers.facebook.com/docs/graph-api
-[4]: https://apps.facebook.com/swooop-playcanvas/
-[5]: https://playcanvas.com/project/405897
+私たちのゲームSWOOOPでは、これらのいくつかを実際に表示しています。[Facebook](https://apps.facebook.com/swooop-playcanvas/)でぜひお試しください。

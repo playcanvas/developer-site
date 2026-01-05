@@ -2,11 +2,11 @@
 title: ユーザーインターフェースの基礎
 ---
 
-PlayCanvasではユーザインタフェースは2つのエレメントから構築されています。[Screenコンポーネント][1]はすべてのユーザインターフェースエレメントを含む領域を記述し、[Elementコンポーネント][2]を持つ複数のエンティティはヒエラルキーのScreen Entityの下に添付されます。Screenは、ユーザインタフェースの領域とそれがどのようにレンダリングされるかを(2Dまたは3D世界で)定義します。Elementsはインタフェースのイメージ (Image) とテキスト (Text)コンポーネントを構成します。
+PlayCanvasではユーザインタフェースは2つのエレメントから構築されています。[Screenコンポーネント](/user-manual/user-interface/screens)はすべてのユーザインターフェースエレメントを含む領域を記述し、[Elementコンポーネント](/user-manual/user-interface/elements)を持つ複数のエンティティはヒエラルキーのScreen Entityの下に添付されます。Screenは、ユーザインタフェースの領域とそれがどのようにレンダリングされるかを(2Dまたは3D世界で)定義します。Elementsはインタフェースのイメージ (Image) とテキスト (Text)コンポーネントを構成します。
 
 ## レイアウトとポジショニング
 
-Elementコンポーネントをスクリーンの一部として使用するエンティティと通常のエンティティの大きな違いの1つは、それらが親に対して配置される方法です。Elementコンポーネントには、最終的な位置が計算される方法を変更する２つのプロパティがあります。`anchor`プロパティは子が親に対してどのように配置されるかを決定し、`pivot`プロパティはelementの中心点がどこにあるかを決定します。詳細は[Element][3]ページでご確認ください。
+Elementコンポーネントをスクリーンの一部として使用するエンティティと通常のエンティティの大きな違いの1つは、それらが親に対して配置される方法です。Elementコンポーネントには、最終的な位置が計算される方法を変更する２つのプロパティがあります。`anchor`プロパティは子が親に対してどのように配置されるかを決定し、`pivot`プロパティはelementの中心点がどこにあるかを決定します。詳細は[Element](/user-manual/user-interface/elements)ページでご確認ください。
 
 ## Draw Order
 
@@ -16,19 +16,12 @@ Elementコンポーネントをスクリーンの一部として使用するエ�
 
 ## エレメントの9スライス化
 
-9スライス（または9パッチ）は、ビットマップグラフィックスから拡張可能なユーザーインターフェイスエレメントを作成するためのグラフィカルなテクニックです。テクスチャアトラスとスプライトアセットを使用して9スライスを設定できます。[こちら][5]を読んでください。
+9スライス（または9パッチ）は、ビットマップグラフィックスから拡張可能なユーザーインターフェイスエレメントを作成するためのグラフィカルなテクニックです。テクスチャアトラスとスプライトアセットを使用して9スライスを設定できます。[こちら](/user-manual/2D/slicing)を読んでください。
 
 ## Input
 
-UIエレメントの入力を処理する別の方法があります。`pc.ElementInput`のインスタンスは、通常は`this.app.elementInput`としてアクセス可能なApplicationオブジェクトで提供されます。これにより、elementコンポーネント上で直接入力をリッスンすることができます。例：`this.entity.element.on('click', ...)`。詳細は[Input][4]ページでご確認ください。
+UIエレメントの入力を処理する別の方法があります。`pc.ElementInput`のインスタンスは、通常は`this.app.elementInput`としてアクセス可能なApplicationオブジェクトで提供されます。これにより、elementコンポーネント上で直接入力をリッスンすることができます。例：`this.entity.element.on('click', ...)`。詳細は[Input](/user-manual/user-interface/input)ページでご確認ください。
 
 ## ローカライゼーション (Localization)
 
-PlayCanvasには、ローカライズされたText Elementsをサポートする組み込みのローカライズシステムがあります。[こちら][6]をご覧ください。
-
-[1]: /user-manual/user-interface/screens
-[2]: /user-manual/user-interface/elements
-[3]: /user-manual/user-interface/elements
-[4]: /user-manual/user-interface/input
-[5]: /user-manual/2D/slicing
-[6]: /user-manual/user-interface/localization
+PlayCanvasには、ローカライズされたText Elementsをサポートする組み込みのローカライズシステムがあります。[こちら](/user-manual/user-interface/localization)をご覧ください。

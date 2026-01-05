@@ -4,7 +4,7 @@ title: Calling the ammo.js API
 
 The PlayCanvas integration with ammo.js does not expose the full capability of the ammo.js API. However, it is possible to call the ammo.js API directly from your PlayCanvas scripts.
 
-PlayCanvas currently uses [this build][1] of ammo.js. The API exposed by this build can be found [here][2]. Although there is no official documentation for ammo.js, you can refer to the [Bullet Physics User Guide][3] to learn more.
+PlayCanvas currently uses [this build](https://github.com/kripken/ammo.js/commit/dcab07bf0e7f2b4b64c01dc45da846344c8f50be) of ammo.js. The API exposed by this build can be found [here](https://github.com/kripken/ammo.js/blob/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/ammo.idl). Although there is no official documentation for ammo.js, you can refer to the [Bullet Physics User Guide](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) to learn more.
 
 ## Joint Constraints
 
@@ -290,7 +290,7 @@ PointToPointConstraint.prototype.update = function(dt) {
 </TabItem>
 </Tabs>
 
-You can find a project that implements all of the constraint types from ammo.js [here][4].
+You can find a project that implements all of the constraint types from ammo.js [here](https://playcanvas.com/project/618829/overview/physics-constraints).
 
 ## Continuous Collision Detection
 
@@ -384,7 +384,7 @@ Ccd.prototype.initialize = function() {
 </TabItem>
 </Tabs>
 
-You can find a project that implements CCD [here][5].
+You can find a project that implements CCD [here](https://playcanvas.com/project/447023/overview/physics-with-ccd).
 
 These are just two examples of using the ammo.js API directly. You can also use it to implement additional things like:
 
@@ -392,9 +392,3 @@ These are just two examples of using the ammo.js API directly. You can also use 
 - Soft body simulation
 - Cloth simulation
 - Vehicles
-
-[1]: https://github.com/kripken/ammo.js/commit/dcab07bf0e7f2b4b64c01dc45da846344c8f50be
-[2]: https://github.com/kripken/ammo.js/blob/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/ammo.idl
-[3]: https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf
-[4]: https://playcanvas.com/project/618829/overview/physics-constraints
-[5]: https://playcanvas.com/project/447023/overview/physics-with-ccd

@@ -64,7 +64,7 @@ entity.translateLocal(0、0、1);
 
 エンティティの向きを設定するには、絶対回転を設定するか、増分回転を適用することができます。
 
-絶対回転は、[オイラー角][1]または[クォータニオン][2]を使用して行うことができます。回転のこれらの2つの数学的表現に関するWikipediaの説明は少し分かりにくいですが、基本的な考え方は簡単です。以下が重要な事実です。
+絶対回転は、[オイラー角](https://en.wikipedia.org/wiki/Euler_angles)または[クォータニオン](https://en.wikipedia.org/wiki/Quaternion)を使用して行うことができます。回転のこれらの2つの数学的表現に関するWikipediaの説明は少し分かりにくいですが、基本的な考え方は簡単です。以下が重要な事実です。
 
 ### Euler Angles
 
@@ -137,6 +137,3 @@ entity.setLocalScale(s, s, s);
 ```
 
 現在、ワールド空間でエンティティのスケールを設定することはできません。
-
-[1]: https://en.wikipedia.org/wiki/Euler_angles
-[2]: https://en.wikipedia.org/wiki/Quaternion

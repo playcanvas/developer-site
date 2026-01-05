@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4097
     <iframe src="https://playcanv.as/p/AGtssoOU/" title="Light Cookies" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-Find out more by forking the [full project][1].
+Find out more by forking the [full project](https://playcanvas.com/project/409793/overview/example-light-cookies).
 
 In theatre it is common to create visual effects on stage by using shape masks to cast shadows across the scene. These masks are called "cucoloris" or "cookies". Creating a light cookie in WebGL using PlayCanvas is achieved using a texture or a cubemap that is applied to the Light Component. Light Cookies are applicable to spot lights and omni lights.
 
@@ -34,5 +34,3 @@ For an omni light the cookie needs to be a cubemap so that it can be projected i
 **Torches** - Torches and headlights don't light a surface evenly instead they have light and dark "caustic" areas. You can use a light cookie to create this effect.
 
 ![Torch Light](/img/tutorials/intermediate/light-cookies/torch-cookie.jpg)
-
-[1]: https://playcanvas.com/project/409793/overview/example-light-cookies

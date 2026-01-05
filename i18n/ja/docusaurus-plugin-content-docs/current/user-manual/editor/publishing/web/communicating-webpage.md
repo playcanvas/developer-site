@@ -50,9 +50,9 @@ app.fire("score:set", 10);
 
 PlayCanvasアプリケーションをiframeに埋め込むことは、すばやく簡単にページにPlayCanvasコンテンツを取り込む方法です。また、最適化されたホスティングを利用できるため、すべてのPlayCanvasコンテンツを提供する必要がないことも意味します。ただし、欠点として、異なるページで実行されるため、ホスティングページからPlayCanvasアプリケーションのJavaScript関数を直接呼び出すことはできません。
 
-親ページとiframe間で通信するには、[postMessage][1]のJavaScript APIを使用して、ページとPlayCanvasアプリケーション間でデータを送信する必要があります。
+親ページとiframe間で通信するには、[postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)のJavaScript APIを使用して、ページとPlayCanvasアプリケーション間でデータを送信する必要があります。
 
-ホストページでは、iframeレスのURLを使用してください。デフォルトのパブリッシュリンクには、ソーシャル共有バーを含めるためのiframeが組み込まれています。これは、[postMessage][1]の問題が発生する可能性があるためです
+ホストページでは、iframeレスのURLを使用してください。デフォルトのパブリッシュリンクには、ソーシャル共有バーを含めるためのiframeが組み込まれています。これは、[postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)の問題が発生する可能性があるためです
 
 iframeとソーシャル共有バーを含まないバージョンのビルドを取得するためには、URLの `https://playcanv.as` の後に`/e`を追加します。
 
@@ -151,5 +151,3 @@ PlayCanvasアプリケーションをセルフホストする場合、これが�
 </body>
 </html>
 ```
-
-[1]: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage

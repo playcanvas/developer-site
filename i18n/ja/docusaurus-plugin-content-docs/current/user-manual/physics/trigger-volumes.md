@@ -4,7 +4,7 @@ title: トリガーボリューム
 
 トリガーボリュームは、RigidBodyがボリューム内に入ったり出たりしたときにイベントを発生させることができる静的な衝突形状です。 これは、サッカーの試合で目標が達成されたときや、レースカーがゴールラインに到達したときを検出するのに役立ちます。
 
-トリガーボリュームを作成するには、エンティティに[Collisionコンポーネント][1]を追加して、その形状を設定します。トリガーボリュームエンティティにはRigidBodyコンポーネントを追加しないでください。
+トリガーボリュームを作成するには、エンティティに[Collisionコンポーネント](/user-manual/editor/scenes/components/collision)を追加して、その形状を設定します。トリガーボリュームエンティティにはRigidBodyコンポーネントを追加しないでください。
 
 ![Trigger Volume](/img/user-manual/physics/trigger-volume.png)
 
@@ -23,5 +23,3 @@ TriggerVolume.prototype.initialize = function() {
     });
 };
 ```
-
-[1]: /user-manual/editor/scenes/components/collision

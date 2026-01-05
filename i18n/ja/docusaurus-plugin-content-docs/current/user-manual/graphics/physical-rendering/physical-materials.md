@@ -22,7 +22,7 @@ PBRは、アセットまたはワークフローの作成に2つの異なる方�
 
 **Specular**ワークフローでは、反射光の色と強度を決定するスペキュラ値またはスペキュラマップを設定します。
 
-[Marmoset Toolbag blog][5]にこの二つの方法の違いがわかりやすく説明されています。
+[Marmoset Toolbag blog](https://marmoset.co/posts/pbr-texture-conversion/)にこの二つの方法の違いがわかりやすく説明されています。
 
 それではマテリアル設定に進んでいきましょう。
 
@@ -85,6 +85,3 @@ Diffuseカラーは **アルベド** や **ベースカラー** と呼ばれる�
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/Q28EwTwQ/" title="Physical Materials - All" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
-
-[5]: https://marmoset.co/posts/pbr-texture-conversion/
-[6]: /user-manual/graphics/physical-rendering/image-based-lighting/

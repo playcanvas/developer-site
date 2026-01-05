@@ -2,16 +2,16 @@
 title: Lightmapping
 ---
 
-[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][13]
+[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*
 
-Here is the link to [final scene][13] and [project][14] that uses these techniques to achieve results in image above: External HDR Lightmaps (described in this page below), [Ambient Occlusion][12] and HDR Cubemap applied using Box Projection using [Image Based Lighting][11] technique to achieve realistic reflections.
+Here is the link to [final scene](https://playcanv.as/p/zdkARz26/) and [project](https://playcanvas.com/project/446587/overview/archviz-example) that uses these techniques to achieve results in image above: External HDR Lightmaps (described in this page below), [Ambient Occlusion](/user-manual/graphics/lighting/ambient-occlusion/) and HDR Cubemap applied using Box Projection using [Image Based Lighting](/user-manual/graphics/physical-rendering/image-based-lighting/) technique to achieve realistic reflections.
 
 ## Overview {#overview}
 
 Lightmap generation is the process of pre-calculating lighting information for a static scene and storing it in textures which are then applied on materials. This is an efficient way of lighting a scene if many of the light sources and geometry are static or environmental.
 
-PlayCanvas offers two ways to use lightmaps in your scene: **External lightmap generation** using a 3rd-party tool and [**Runtime Lightmapping**][0] that can be generated automatically by the Engine on loading or later while application is running.
+PlayCanvas offers two ways to use lightmaps in your scene: **External lightmap generation** using a 3rd-party tool and [**Runtime Lightmapping**](/user-manual/graphics/lighting/runtime-lightmaps/) that can be generated automatically by the Engine on loading or later while application is running.
 
 This page gives details and best practices on rendering lightmaps from external tools.
 
@@ -96,10 +96,4 @@ At this stage you have your geometry with a second UV channel (UV1) and HDR ligh
 
 Gamma correction, tone mapping and exposure - are good settings that you will want to play with to get the desired look and color for your scene.
 
-You can [explore the example][13] that uses the techniques described above and also its [project][14].
-
-[0]: /user-manual/graphics/lighting/runtime-lightmaps/
-[11]: /user-manual/graphics/physical-rendering/image-based-lighting/
-[12]: /user-manual/graphics/lighting/ambient-occlusion/
-[13]: https://playcanv.as/p/zdkARz26/
-[14]: https://playcanvas.com/project/446587/overview/archviz-example
+You can [explore the example](https://playcanv.as/p/zdkARz26/) that uses the techniques described above and also its [project](https://playcanvas.com/project/446587/overview/archviz-example).

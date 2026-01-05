@@ -12,7 +12,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 
 PlayCanvasエンジンでのキーボード操作は`pc.Keyboard`オブジェクトで提供されます。Keyboardオブジェクトは、キーが押されているかどうかを確認するなど、一般的なキーボード操作のための単純なインタフェースを提供します。また、キーコードや文字コードの処理に関するさまざまなクロスブラウザー問題を解決します。
 
-[チュートリアルプロジェクト][1]のキーボード入力シーンをご確認ください。チュートリアルのコードはこちらです。
+[チュートリアルプロジェクト](https://playcanvas.com/project/405804/overview/tutorial-basic-keyboard-input)のキーボード入力シーンをご確認ください。チュートリアルのコードはこちらです。
 
 ```javascript
 var KeyboardHandler = pc.createScript('keyboardHandler');
@@ -120,7 +120,7 @@ KeyboardHandler.prototype.onKeyUp = function (event) {
 * `pc.EVENT_KEYDOWN`
 * `pc.EVENT_KEYUP`
 
-[DOM][3]キーボードイベントは、さまざまなブラウザーで異なる方法で実装されているため、PlayCanvas Engineでは、すべての場所で同じコードを使用できるように、`pc.Keyboard`オブジェクト上のイベントを提供します。 キーボードイベントが発生すると、イベントハンドラーに`pc.KeyboardEvent`オブジェクトが渡され、そのオブジェクトには押されたキーのキーコードが含まれます。
+[DOM](/user-manual/glossary#dom)キーボードイベントは、さまざまなブラウザーで異なる方法で実装されているため、PlayCanvas Engineでは、すべての場所で同じコードを使用できるように、`pc.Keyboard`オブジェクト上のイベントを提供します。 キーボードイベントが発生すると、イベントハンドラーに`pc.KeyboardEvent`オブジェクトが渡され、そのオブジェクトには押されたキーのキーコードが含まれます。
 
 on()には第3引数があり、これはスクリプトインスタンス自体、つまり`this`です。 on()の第3引数は、イベントコールバック関数での `this` として使用されるため、ここで正しいオブジェクトに設定されていないといけません。
 
@@ -132,8 +132,4 @@ on()には第3引数があり、これはスクリプトインスタンス自体
 
 ## 試してみよう
 
-こちらの[こちら][2]でフルスクリーン表示して、矢印キーをタップしてホールドする際の挙動とスペースバーをタップしてホールドする際の挙動を比較してみてください。
-
-[1]: https://playcanvas.com/project/405804/overview/tutorial-basic-keyboard-input
-[2]: https://playcanv.as/p/rFZGQWCi/
-[3]: /user-manual/glossary#dom
+こちらの[こちら](https://playcanv.as/p/rFZGQWCi/)でフルスクリーン表示して、矢印キーをタップしてホールドする際の挙動とスペースバーをタップしてホールドする際の挙動を比較してみてください。

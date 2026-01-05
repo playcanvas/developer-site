@@ -2,7 +2,7 @@
 title: バッチング
 ---
 
-バッチング (Batching) とは、複数のメッシュインスタンスを1つのメッシュインスタンスに結合することで、すべてを1回のGPUドローコールでレンダリングできるようにするプロセスです。 PlayCanvasは、[Model][7]、[Sprite][9]、および[Element][10]コンポーネントに便利な機能を提供し、これらのコンポーネントをBatch Groupに割り当てることができます。これにより、エンジンがメッシュを結合して総ドローコール数を減らす方法に関するヒントを与えることができます。
+バッチング (Batching) とは、複数のメッシュインスタンスを1つのメッシュインスタンスに結合することで、すべてを1回のGPUドローコールでレンダリングできるようにするプロセスです。 PlayCanvasは、[Model](/user-manual/editor/scenes/components/model)、[Sprite](/user-manual/editor/scenes/components/sprite)、および[Element](/user-manual/editor/scenes/components/element)コンポーネントに便利な機能を提供し、これらのコンポーネントをBatch Groupに割り当てることができます。これにより、エンジンがメッシュを結合して総ドローコール数を減らす方法に関するヒントを与えることができます。
 
 メッシュインスタンスを組み合わせることができるか、エンジンが確認するためのルールが多数存在しています。最初のルールは、すべてのメッシュインスタンスが同じマテリアルを共有する必要があるというものです。
 
@@ -21,7 +21,7 @@ title: バッチング
 
 ![Creating Batch Groups](/img/user-manual/optimization/batching/batch-groups.jpg)
 
-Batch Groupは、[シーン設定パネル][6]のBatch Groupセクションから作成できます。各Batch Groupには、このBatch Groupからバッチを作成する方法に関するエンジンのヒントに使用されるいくつかのプロパティがあります。
+Batch Groupは、[シーン設定パネル](/user-manual/editor/interface/settings/batch-groups/)のBatch Groupセクションから作成できます。各Batch Groupには、このBatch Groupからバッチを作成する方法に関するエンジンのヒントに使用されるいくつかのプロパティがあります。
 
 ### Batch Groupのプロパティ
 
@@ -82,10 +82,4 @@ if (element.batchGroupId)
 
 * **Batch Group** - エディターで作成された名前付きグループで、メッシュインスタンスの結合方法に関するヒントを定義します。コンポーネントはBatch Groupに割り当てられます。
 * **Batch** - レンダリングされるメッシュインスタンスのセットである、ランタイムで作成されるエンジンオブジェクト。Batch Groupには、バッチに追加されるメッシュインスタンスのプロパティに応じて、複数のバッチが作成される可能性があります。
-* **Batch Manager** - ランタイムでバッチを作成および更新するプログラムのインターフェイス。[APIドキュメント][8]を参照してください。
-
-[6]: /user-manual/editor/interface/settings/batch-groups/
-[7]: /user-manual/editor/scenes/components/model
-[8]: https://api.playcanvas.com/engine/classes/BatchManager.html
-[9]: /user-manual/editor/scenes/components/sprite
-[10]: /user-manual/editor/scenes/components/element
+* **Batch Manager** - ランタイムでバッチを作成および更新するプログラムのインターフェイス。[APIドキュメント](https://api.playcanvas.com/engine/classes/BatchManager.html)を参照してください。

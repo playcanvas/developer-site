@@ -44,7 +44,7 @@ You can see the summary of the overrides by selecting the root of the Template I
 
 ![Overrides](/img/user-manual/editor/templates/override.png)
 
-Also notice the different color of the label of the field that has been overridden. You can also see a more detailed list of all the overrides by clicking View Diff. See [Overrides Diff View][4] for more information.
+Also notice the different color of the label of the field that has been overridden. You can also see a more detailed list of all the overrides by clicking View Diff. See [Overrides Diff View](/user-manual/editor/templates/diff) for more information.
 
 If you hover over the colored label of the overridden field you can view more details about that specific override:
 
@@ -56,7 +56,7 @@ To apply an override you can click APPLY in the tooltip shown when you hover ove
 
 To apply multiple overrides select the root of the Template Instance and click Apply All on the Entity Inspector. You can also right click on the root of the Template Instance and select Template &rarr; Apply To Template.
 
-Alternatively you can open the [Override Diff View][4] and apply overrides from there too.
+Alternatively you can open the [Override Diff View](/user-manual/editor/templates/diff) and apply overrides from there too.
 
 Any overrides you apply to the Template Asset will propagate to other instances of the Template Asset in any scene that these might be.
 
@@ -72,7 +72,7 @@ To revert a specific override, click REVERT in the tooltip shown when you hover 
 
 To revert all overrides select the root of the Template Instance and click Revert All on the Entity Inspector.
 
-Alternatively you can open the [Override Diff View][4] and revert overrides from there too.
+Alternatively you can open the [Override Diff View](/user-manual/editor/templates/diff) and revert overrides from there too.
 
 ### More details on Overrides {#more-details-on-overrides}
 
@@ -101,5 +101,3 @@ Templates store the Entity hierarchy and data, similar to scenes. When a templat
 At runtime, the Template instance is not linked to the asset and you can reduce the download size by not preloading/loading the asset.
 
 You only need Template assets to be loaded if you are instantiating instances at runtime.
-
-[4]: /user-manual/editor/templates/diff

@@ -81,6 +81,4 @@ AnimationBlending.prototype.setState = function (state) {
 
 ここから、Animationコンポーネントにさらに多くのアニメーションを追加し、より複雑なアニメーションステートチャートをスクリプト化できます。
 
-[こちらでシーンの内容をすべて表示できます][2]
-
-[2]: https://playcanvas.com/editor/scene/440156
+[こちらでシーンの内容をすべて表示できます](https://playcanvas.com/editor/scene/440156)

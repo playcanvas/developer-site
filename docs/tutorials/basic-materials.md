@@ -58,6 +58,4 @@ You'll see something that looks a little like this:
 
 Try modifying the **Tiling** and **Offset** properties to affect the way the texture is wrapped around the cube.
 
-Take a look at the user manual section on [Physical Materials][8] for more depth on setting up materials.
-
-[8]: /user-manual/graphics/physical-rendering/physical-materials/
+Take a look at the user manual section on [Physical Materials](/user-manual/graphics/physical-rendering/physical-materials/) for more depth on setting up materials.

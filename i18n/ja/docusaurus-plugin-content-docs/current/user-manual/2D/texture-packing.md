@@ -4,7 +4,7 @@ title: テクスチャパッキング
 
 ## テクスチャパッキングとは
 
-スプライトやUI画像を別々のイメージとしてバンドルすることは一般的です。テクスチャパッキングはこれらの別々の画像を[テクスチャアトラス][texture-atlas]に統合することです。
+スプライトやUI画像を別々のイメージとしてバンドルすることは一般的です。テクスチャパッキングはこれらの別々の画像を[テクスチャアトラス](/user-manual/editor/assets/inspectors/texture-atlas/)に統合することです。
 
 これには以下の利点があります。
 
@@ -17,7 +17,7 @@ PlayCanvasと互換性のあるいくつかのテクスチャパッキングツ�
 
 ### TexturePacker Online (無料)
 
-([ウェブサイト][texture-packer-online])
+([ウェブサイト](https://www.codeandweb.com/tp-online))
 
 TexturePacker Onlineはブラウザで動作する無料のツールで、テクスチャパッキングの基本機能を実行できます。
 
@@ -31,9 +31,9 @@ TexturePacker Onlineはブラウザで動作する無料のツールで、テク
 
 ### Texture Packer ツール
 
-([ウェブサイト][texture-packer-tool])
+([ウェブサイト](https://www.codeandweb.com/texturepacker))
 
-TexturePackerはダウンロードできる有料ツールで、テクスチャアトラス作成に多くの機能とオプションがあります。スプライト/UI画像のレイアウトについてのより多くの制御機能や[9スライス][9-slicing]を設定することができます。
+TexturePackerはダウンロードできる有料ツールで、テクスチャアトラス作成に多くの機能とオプションがあります。スプライト/UI画像のレイアウトについてのより多くの制御機能や[9スライス](/user-manual/2D/slicing/)を設定することができます。
 
 ![](/img/user-manual/2D/texture-packer/texture-packer-tool-steps.png)
 
@@ -45,7 +45,7 @@ TexturePackerはダウンロードできる有料ツールで、テクスチャ�
 
 ## スプライトエディタ内でのフレーム作成
 
-テクスチャアトラスファイルをエディタにアップロードして、[Texture Atlasアセット][texture-atlas]を作成したら、スプライトエディタを開きます。
+テクスチャアトラスファイルをエディタにアップロードして、[Texture Atlasアセット](/user-manual/editor/assets/inspectors/texture-atlas/)を作成したら、スプライトエディタを開きます。
 
 ![](/img/user-manual/2D/texture-packer/playcanvas-sprite-editor.png)
 
@@ -58,8 +58,3 @@ TexturePackerはダウンロードできる有料ツールで、テクスチャ�
 - アトラスから削除されたスプライトは、そのフレームが削除されます。
 - アトラスに追加されたスプライトは、リストの末尾に新しいフレームが追加されます。
 - 既存のスプライトは、そのフレームが更新されます。
-
-[texture-atlas]: /user-manual/editor/assets/inspectors/texture-atlas/
-[texture-packer-online]: https://www.codeandweb.com/tp-online
-[texture-packer-tool]: https://www.codeandweb.com/texturepacker
-[9-slicing]: /user-manual/2D/slicing/

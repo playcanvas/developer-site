@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1005
     <iframe src="https://playcanv.as/p/8ZQaDGf8/" title="User Interface - Text Input" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-[Click here to see the project][project-link].
+[Click here to see the project](https://playcanvas.com/project/1005906/overview/ui-text-input).
 
 ## Overview
 
@@ -36,7 +36,7 @@ This doesn't support 3D elements.
 
 ## How to install
 
-Open the [example project][project-link], right click on the folder 'ui-input' and click on 'Copy'.
+Open the [example project](https://playcanvas.com/project/1005906/overview/ui-text-input), right click on the folder 'ui-input' and click on 'Copy'.
 ![](/img/tutorials/ui-text-input/copy-folder.gif)
 
 Open your project, right click in the assets panel and click on 'Paste'
@@ -67,5 +67,3 @@ Finally, launch the scene to test.
 ## Advanced: How to style
 
 The library uses a neutral color style for the HTML input element. If you want to change the style to better suit your application, you can modify the CSS in 'ui-input-library.js' in function `createInputDom`.
-
-[project-link]: https://playcanvas.com/project/1005906/overview/ui-text-input

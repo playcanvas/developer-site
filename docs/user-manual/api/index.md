@@ -62,7 +62,7 @@ When opening a scene in the Editor, the scene id is in the URL.
 
 ### branch_id {#branch_id}
 
-This is found in the [version control][5] panel and can be selected and copied.
+This is found in the [version control](/user-manual/editor/version-control/) panel and can be selected and copied.
 
 ![Branch ID](/img/user-manual/api/branch-id.png)
 
@@ -140,5 +140,3 @@ The response will contain the following headers to help you regulate how often y
 | `X-RateLimit-Reset`     | The time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time). |
 
 If you exceed the rate limit you will get a `429 Too Many Requests` status code. You will have to wait for the current window to reset in order to continue making requests.
-
-[5]: /user-manual/editor/version-control/

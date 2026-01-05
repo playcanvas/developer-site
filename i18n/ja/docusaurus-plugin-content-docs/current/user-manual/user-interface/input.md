@@ -2,7 +2,7 @@
 title: Input
 ---
 
-ユーザは、Elementコンポーネントの `useInput`フィールドを有効にすることで、[Element][1]コンポーネントとインタラクトできます。
+ユーザは、Elementコンポーネントの `useInput`フィールドを有効にすることで、[Element](/user-manual/editor/scenes/components/element/)コンポーネントとインタラクトできます。
 
 ![Use Input](/img/user-manual/assets/fonts/use-input.png)
 
@@ -133,5 +133,3 @@ TouchFix.prototype.initialize = function() {
     }
 };
 ```
-
-[1]: /user-manual/editor/scenes/components/element/

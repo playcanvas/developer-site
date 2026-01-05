@@ -46,7 +46,7 @@ BasicMaterialは削除されました。同等の機能を実現するには、�
 
 #### Shader Material
 
-もし、エラー`Material class cannot be instantiated, use ShaderMaterial instead`を受け取った場合、これは代わりに[ShaderMaterial][1]を使用するようにコードを修正する必要があることを示しています。エンジンシェーダーが[リニアワークフロー][2]を使用するようになったため、[フラグメントシェーダー][3]で最終ガンマ補正を適用するために`gammaCorrectOutput`がどのように使用されているかに注意してください。
+もし、エラー`Material class cannot be instantiated, use ShaderMaterial instead`を受け取った場合、これは代わりに[ShaderMaterial](/user-manual/graphics/shaders/)を使用するようにコードを修正する必要があることを示しています。エンジンシェーダーが[リニアワークフロー](/user-manual/graphics/linear-workflow/)を使用するようになったため、[フラグメントシェーダー](/user-manual/graphics/shaders/#fragment-shader)で最終ガンマ補正を適用するために`gammaCorrectOutput`がどのように使用されているかに注意してください。
 
 #### テクスチャへのレンダリング
 
@@ -100,7 +100,3 @@ StandardMaterialのティントオプションは混乱を招き、一貫性が�
 * [2.2.0](https://github.com/playcanvas/engine/releases/tag/v2.2.0)
 * [2.3.0](https://github.com/playcanvas/engine/releases/tag/v2.3.0)
 * [2.4.0](https://github.com/playcanvas/engine/releases/tag/v2.4.0)
-
-[1]: /user-manual/graphics/shaders/
-[2]: /user-manual/graphics/linear-workflow/
-[3]: /user-manual/graphics/shaders/#fragment-shader

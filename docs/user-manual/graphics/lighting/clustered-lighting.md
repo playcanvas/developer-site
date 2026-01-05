@@ -96,7 +96,7 @@ The main advantage of using manual subdivision is the level of detail that can b
 
 ### Shadows Type {#shadows-type}
 
-All lights that cast shadows use the same shadow type. This allows you to globally set the shadow softness and related performance impact. The supported options are PCF1, PCF3, and PCF5. For more information, see the [Shadows][shadows] page.
+All lights that cast shadows use the same shadow type. This allows you to globally set the shadow softness and related performance impact. The supported options are PCF1, PCF3, and PCF5. For more information, see the [Shadows](/user-manual/graphics/lighting/shadows/#soft-shadows-vs-hard-shadows) page.
 
 ## Limitations {#limitations}
 
@@ -110,7 +110,7 @@ Internally, a light index is stored using 8 bits, so the maximum number of visib
 
 ## Render Debug Grid {#render-debug-grid}
 
-To help with debugging and tuning performance with Clustered Lighting, you can assign the [Layer][pc-layer-api] ID to render to the [debugLayer of LightingParams][pc-lighting-debug-layer-api]. e.g
+To help with debugging and tuning performance with Clustered Lighting, you can assign the [Layer](https://api.playcanvas.com/engine/classes/Layer.html) ID to render to the [debugLayer of LightingParams](https://api.playcanvas.com/engine/classes/LightingParams.html#debuglayer). e.g
 
 ```javascript
 // Assuming being in a script type
@@ -123,7 +123,3 @@ And to stop rendering, assign `undefined` to the `debugLayer` property:
 // Assuming being in a script type
 this.app.scene.lighting.debugLayer = undefined;
 ```
-
-[shadows]: /user-manual/graphics/lighting/shadows/#soft-shadows-vs-hard-shadows
-[pc-layer-api]: https://api.playcanvas.com/engine/classes/Layer.html
-[pc-lighting-debug-layer-api]: https://api.playcanvas.com/engine/classes/LightingParams.html#debuglayer

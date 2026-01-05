@@ -4,7 +4,7 @@ title: Trigger Volumes
 
 Trigger volumes are static collision shapes which can fire events whenever a rigid body enters or leaves their volume. They can be useful to determine when a goal has been scored in a football match or when a race car has reached the finish line.
 
-To create a trigger volume, add a [collision component][1] to an entity and configure its shape. Do not add a rigidbody component to your trigger volume entity.
+To create a trigger volume, add a [collision component](/user-manual/editor/scenes/components/collision) to an entity and configure its shape. Do not add a rigidbody component to your trigger volume entity.
 
 ![Trigger Volume](/img/user-manual/physics/trigger-volume.png)
 
@@ -52,5 +52,3 @@ TriggerVolume.prototype.initialize = function() {
 
 </TabItem>
 </Tabs>
-
-[1]: /user-manual/editor/scenes/components/collision

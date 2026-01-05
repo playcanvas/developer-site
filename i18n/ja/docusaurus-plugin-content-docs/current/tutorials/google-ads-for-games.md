@@ -6,9 +6,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889
 
 このチュートリアルのリンク
 
-- [Flappy Bird Demo][flappy-bird-ads-demo]
-- [Tutorial template project][tutorial-template-start]
-- [Google H5 Games Ads Documentation][google-afg-docs]
+- [Flappy Bird Demo](https://playcanvas.com/project/877568/overview/google-h5-ads-demo)
+- [Tutorial template project](https://playcanvas.com/project/889095/overview/google-h5-ad-tutorial-start)
+- [Google H5 Games Ads Documentation](https://developers.google.com/ad-placement/)
 
 ## イントロダクション
 
@@ -18,7 +18,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889
 
 インタースティシャル広告は、プレイのセッション間(例えば 'ゲームオーバー' からメインメニューに戻るなど)に表示される広告です。テレビ番組のコマーシャルブレイクのようなものです。
 
-[Flappy Bird の例][flappy-bird-ads-demo]では、プレイヤーが死んでメインメニューに戻って再度プレイするときに広告が表示されます。
+[Flappy Bird の例](https://playcanvas.com/project/877568/overview/google-h5-ads-demo)では、プレイヤーが死んでメインメニューに戻って再度プレイするときに広告が表示されます。
 
 ![](/img/tutorials/google-afg/flappy-bird-demo-interstitial-ad.gif)
 
@@ -28,7 +28,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889
 
 ![](/img/tutorials/google-afg/flappy-bird-demo-rewarded-ad.gif)
 
-チュートリアルでは、[Google H5 Ad Tutorial (Start)][tutorial-template-start]プロジェクトをフォークして、少しずつ広告SDKライブラリと機能を追加していきます。
+チュートリアルでは、[Google H5 Ad Tutorial (Start)](https://playcanvas.com/project/889095/overview/google-h5-ad-tutorial-start)プロジェクトをフォークして、少しずつ広告SDKライブラリと機能を追加していきます。
 
 最終的には、以下のようになり、ボタンのクリックでインタースティシャル広告とリワード広告を呼び出し、リフレッシュボタンでリワード広告が表示されるかどうかを確認できます(後述)。
 
@@ -38,11 +38,11 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889
 
 ## 設定
 
-Google H5 Games Adsを使用するには、[Google Adsenseアカウント][google-adsense]を作成して、広告統合用の[Publisher ID][google-publisher-id]を取得する必要があります。
+Google H5 Games Adsを使用するには、[Google Adsenseアカウント](https://www.google.com/adsense/start/)を作成して、広告統合用の[Publisher ID](https://support.google.com/adsense/answer/105516?hl=en)を取得する必要があります。
 
-また、Google H5 Games Ads の[ポリシー][google-afg-policies]を確認し、[こちら][google-afg-signup]からベータ版にサインアップする必要があります。
+また、Google H5 Games Ads の[ポリシー](https://support.google.com/publisherpolicies/answer/11975916)を確認し、[こちら](https://developers.google.com/ad-placement/docs/beta)からベータ版にサインアップする必要があります。
 
-[Google H5 Ad Tutorial (Start)][tutorial-template-start]プロジェクトのダッシュボードページに移動し、「フォーク」をクリックして、プロジェクトを確認してみましょう。
+[Google H5 Ad Tutorial (Start)](https://playcanvas.com/project/889095/overview/google-h5-ad-tutorial-start)プロジェクトのダッシュボードページに移動し、「フォーク」をクリックして、プロジェクトを確認してみましょう。
 
 これは、`ui-controller.js`スクリプトに広告を表示するためのボタンクリックコールバックを追加する準備が整ったシンプルなプロジェクトです。
 
@@ -75,7 +75,7 @@ UiController.prototype.initialize = function() {
 };
 ```
 
-まず、Google SDKの統合ファイルを追加していきます。これは、[Flappy Birdプロジェクト][flappy-bird-ads-demo]から「Google H5 Games Ads」フォルダをコピーして、チュートリアルプロジェクトのフォークに貼り付けることで行います。
+まず、Google SDKの統合ファイルを追加していきます。これは、[Flappy Birdプロジェクト](https://playcanvas.com/project/877568/overview/google-h5-ads-demo)から「Google H5 Games Ads」フォルダをコピーして、チュートリアルプロジェクトのフォークに貼り付けることで行います。
 
 ![](/img/tutorials/google-afg/copy-afg-folder.gif)
 
@@ -85,9 +85,9 @@ UiController.prototype.initialize = function() {
 
 中身を見てみましょう。
 
-[`afg-integration.js`][afg-integration.js]は、GoogleのSDKをページに追加し、ユーザーに広告が配信される間隔を設定します。この間隔は必要に応じて変更できます。チュートリアルでは、実際の広告ではなくプレースホルダーを表示するためにテストモードを有効にしています。
+[`afg-integration.js`](https://playcanvas.com/editor/code/877568?tabs=67299908)は、GoogleのSDKをページに追加し、ユーザーに広告が配信される間隔を設定します。この間隔は必要に応じて変更できます。チュートリアルでは、実際の広告ではなくプレースホルダーを表示するためにテストモードを有効にしています。
 
-`ca-pub-XXXXXXXXX`を、Google Adsenseから取得した[Publisher ID][google-publisher-id]に置き換える必要があります。
+`ca-pub-XXXXXXXXX`を、Google Adsenseから取得した[Publisher ID](https://support.google.com/adsense/answer/105516?hl=en)に置き換える必要があります。
 
 ```javascript
 // https://developers.google.com/ad-placement/docs/example
@@ -111,7 +111,7 @@ UiController.prototype.initialize = function() {
 })();
 ```
 
-[`afg-setup.js`][afg-setup.js]は、広告の取り扱いを少し簡単にするためのラッパーです。GoogleのSDKを設定し、広告が表示される前にゲームを一時停止し、その後に再開するためのヘルパー関数を追加します。
+[`afg-setup.js`](https://playcanvas.com/editor/code/877568?tabs=67301236)は、広告の取り扱いを少し簡単にするためのラッパーです。GoogleのSDKを設定し、広告が表示される前にゲームを一時停止し、その後に再開するためのヘルパー関数を追加します。
 
 これには以下が含まれます。
 
@@ -217,7 +217,7 @@ this.interstitialAdButtonEntity.button.on('click', function(e) {
 // ...
 ```
 
-ここでは、まずGoogle SDKが準備ができているかどうかを確認し、`adBreak`を呼び出します。これはGoogle SDK自体が公開している関数です。詳細なドキュメントとオプションは[彼らのサイト][adbreak-docs]で見つけることができます。例として、以下を使用します。
+ここでは、まずGoogle SDKが準備ができているかどうかを確認し、`adBreak`を呼び出します。これはGoogle SDK自体が公開している関数です。詳細なドキュメントとオプションは[彼らのサイト](https://developers.google.com/ad-placement/apis/adbreak)で見つけることができます。例として、以下を使用します。
 
 - Google SDKドキュメントからこれらのタイプの1つである`type`
 - 報告用にH5 Games Adsで任意の名前を使用できる`name`
@@ -344,7 +344,7 @@ var onRefresh = function () {
 
 `adDismissed`コールバックでは、報酬が与えられないため、報酬ボタンエンティティが無効になっていることを確認します。
 
-`adBreakDone`には、コールバックを指定する必要がありますが、この場合はデモでは使用していないため、emptyになっています。しかし、[`placementInfo`オブジェクトには][adbreakdone-docs]、エラーメッセージなどの広告に関する情報が含まれており、デバッグに便利です。
+`adBreakDone`には、コールバックを指定する必要がありますが、この場合はデモでは使用していないため、emptyになっています。しかし、[`placementInfo`オブジェクトには](https://developers.google.com/ad-placement/apis/adbreak#adbreakdone_and_placementinfo)、エラーメッセージなどの広告に関する情報が含まれており、デバッグに便利です。
 
 次に、報酬広告ボタンが押されたときに広告を表示する必要があります。ボタンのクリックイベントのコールバックに、次のコードを追加します。
 
@@ -443,23 +443,10 @@ UiController.prototype.initialize = function() {
 
 以上が、H5ゲームやアプリケーションのGoogleのH5 Games Adsの統合の基本になります！
 
-[完成したプロジェクトはこちら][tutorial-template-finished]で、GoogleのH5 Games Ads SDKとAPIの詳細情報は[こちらのサイト][google-afg-docs]で入手できます。
+[完成したプロジェクトはこちら](https://playcanvas.com/project/889020/overview/google-h5-ad-tutorial-finished)で、GoogleのH5 Games Ads SDKとAPIの詳細情報は[こちらのサイト](https://developers.google.com/ad-placement/)で入手できます。
 
 :::warning
 
 重要：チュートリアルではテストモードを使用していたため、実際の広告は表示されませんでした。製品用にテストモードを無効にするときは、リリースする国のプライバシー/クッキーポリシー、GDPRを含めて準拠していることを確認してください。通常、これは何らかの形でのクッキー同意の実装を意味します。
 
 :::
-
-[flappy-bird-ads-demo]: https://playcanvas.com/project/877568/overview/google-h5-ads-demo
-[tutorial-template-start]: https://playcanvas.com/project/889095/overview/google-h5-ad-tutorial-start
-[tutorial-template-finished]: https://playcanvas.com/project/889020/overview/google-h5-ad-tutorial-finished
-[google-afg-docs]: https://developers.google.com/ad-placement/
-[adbreak-docs]: https://developers.google.com/ad-placement/apis/adbreak
-[adbreakdone-docs]: https://developers.google.com/ad-placement/apis/adbreak#adbreakdone_and_placementinfo
-[google-afg-policies]: https://support.google.com/publisherpolicies/answer/11975916
-[google-afg-signup]: https://developers.google.com/ad-placement/docs/beta
-[google-adsense]: https://www.google.com/adsense/start/
-[google-publisher-id]: https://support.google.com/adsense/answer/105516?hl=en
-[afg-integration.js]: https://playcanvas.com/editor/code/877568?tabs=67299908
-[afg-setup.js]: https://playcanvas.com/editor/code/877568?tabs=67301236

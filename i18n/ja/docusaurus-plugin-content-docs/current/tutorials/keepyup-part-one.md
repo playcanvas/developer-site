@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 1" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*[完成されたプロジェクトはこちら][3]です*
+*[完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です*
 
 このチュートリアルでは、PlayCanvasを使って一本の完全なゲームを作る流れを説明します。"Keepy Up"という、ボールをタッチかクリックし続けることでボールを滞空させ続けるゲームを作りましたのでそれを、題材として説明します。
 
@@ -71,7 +71,4 @@ Audioエンティティにはいくつかのサウンドコンポーネントが
 
 UIエンティティはいくつかのエンティティの親エンティティです。子エンティティは、それぞれがゲームのある画面でのユーザインタフェースです。UIエンティティについてはチュートリアルその5で説明します。
 
-[チュートリアルその2][2]ではメインのゲームスクリプトについて説明します。
-
-[2]: /tutorials/keepyup-part-two/
-[3]: https://playcanvas.com/project/406050
+[チュートリアルその2](/tutorials/keepyup-part-two/)ではメインのゲームスクリプトについて説明します。

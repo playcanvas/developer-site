@@ -2,15 +2,15 @@
 title: Facebookプレイアブル広告
 ---
 
-PlayCanvasは、[公式の外部ツール][2]を通じて[Facebook Playable Ad][1]フォーマットと要件をサポートしています。
+PlayCanvasは、[公式の外部ツール](https://github.com/playcanvas/playcanvas-rest-api-tools)を通じて[Facebook Playable Ad](https://www.facebook.com/business/ads/playable-ad-format)フォーマットと要件をサポートしています。
 
 ![Facebook Playable Ads](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ads.gif)
 
-ツールは、構成オプションを通じて、片方が2MB(無圧縮)HTMLファイル、もう片方が5MB(無圧縮)ZIPフォーマットの両方を作成できます。Facebook Playable Adの全仕様は、[ヘルプセンター][4]で見つけることができます。
+ツールは、構成オプションを通じて、片方が2MB(無圧縮)HTMLファイル、もう片方が5MB(無圧縮)ZIPフォーマットの両方を作成できます。Facebook Playable Adの全仕様は、[ヘルプセンター](https://www.facebook.com/business/help/412951382532338)で見つけることができます。
 
 ## サンプルプロジェクト
 
-[Cube Jumpプロジェクト][5]は、Facebook Playable Adフォーマットにエクスポートする準備ができており、[HTML出力の期待される結果はこちら][6]にあります。
+[Cube Jumpプロジェクト](https://playcanvas.com/project/354998/overview/cube-jump-playable-ad-for-fb)は、Facebook Playable Adフォーマットにエクスポートする準備ができており、[HTML出力の期待される結果はこちら](pathname:///downloads/fb-playable-ad-cube-jump-html.zip)にあります。
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/e/p/Hywjl9Bh/" title="Cube Jump Playable Ad" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
@@ -24,7 +24,7 @@ PlayCanvasは、[公式の外部ツール][2]を通じて[Facebook Playable Ad][
 
 つまり、単一のHTMLフォーマットの場合、これはアセットに対して圧縮されていないとわかる\~500KBを残して、Base64文字列にエンコードされる前の状態です。ZIP フォーマットの場合は、圧縮されていない状態のアセットに対して約\~3MBが残っています。
 
-画像をできるだけ小さく保ち、[TinyPNG][7]のようなツールを使用してさらにファイルサイズを縮小するようにしましょう。
+画像をできるだけ小さく保ち、[TinyPNG](https://tinypng.com/)のようなツールを使用してさらにファイルサイズを縮小するようにしましょう。
 
 ## Playable Ad のチェックリスト
 
@@ -32,7 +32,7 @@ PlayCanvasは、[公式の外部ツール][2]を通じて[Facebook Playable Ad][
 
 ## エクスポートの方法
 
-GitHubリポジトリのREADMEにある[セットアップ手順][8]に従ってください。
+GitHubリポジトリのREADMEにある[セットアップ手順](https://github.com/playcanvas/playcanvas-rest-api-tools#setup)に従ってください。
 
 ### 単独HTML
 
@@ -64,11 +64,11 @@ GitHubリポジトリのREADMEにある[セットアップ手順][8]に従って
 npm run one-page
 ```
 
-詳しいオプションやコマンドの詳細は、'[プロジェクトを単一のHTMLファイルに変換する][9]'というセクションのREADMEで確認できます。
+詳しいオプションやコマンドの詳細は、'[プロジェクトを単一のHTMLファイルに変換する](https://github.com/playcanvas/playcanvas-rest-api-tools#converting-a-project-into-a-single-html-file)'というセクションのREADMEで確認できます。
 
 ### テスト方法
 
-Facebook広告を作成する手順[こちら][10]に従い、広告用のファイルがアップロードされるタイミングで、マネージャー内でテストすることができます。
+Facebook広告を作成する手順[こちら](https://www.facebook.com/business/help/338940216641734)に従い、広告用のファイルがアップロードされるタイミングで、マネージャー内でテストすることができます。
 
 ![Test Ad](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ad-tester.jpg)
 
@@ -77,13 +77,3 @@ Facebook広告を作成する手順[こちら][10]に従い、広告用のファ
 Facebookはまた、デバイス上でのテストも管理者を介して許可していますが、最初に広告を公開する必要があります。これはFacebookの奇妙な制限ですが、現時点では必要です。
 
 ![Preview Ad](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ad-preview-device.jpg)
-
-[1]: https://www.facebook.com/business/ads/playable-ad-format
-[2]: https://github.com/playcanvas/playcanvas-rest-api-tools
-[4]: https://www.facebook.com/business/help/412951382532338
-[5]: https://playcanvas.com/project/354998/overview/cube-jump-playable-ad-for-fb
-[6]: pathname:///downloads/fb-playable-ad-cube-jump-html.zip
-[7]: https://tinypng.com/
-[8]: https://github.com/playcanvas/playcanvas-rest-api-tools#setup
-[9]: https://github.com/playcanvas/playcanvas-rest-api-tools#converting-a-project-into-a-single-html-file
-[10]: https://www.facebook.com/business/help/338940216641734

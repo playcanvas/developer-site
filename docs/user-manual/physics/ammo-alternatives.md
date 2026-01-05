@@ -16,6 +16,4 @@ As it happens, there are several alternatives to ammo.js:
 
 While there is currently only one existing PlayCanvas integration for the p2.js engine, it should be straightforward to create additional integrations for the other engines listed using a similar approach.
 
-In December 2018, Nvidia open sourced the [PhysX][1] physics engine. While there is no JS/WASM port of PhysX yet, it is perhaps the most competitive physics runtime compared to Bullet/ammo.js. When a web port becomes available, it will be added to the table above.
-
-[1]: https://github.com/NVIDIAGameWorks/PhysX
+In December 2018, Nvidia open sourced the [PhysX](https://github.com/NVIDIAGameWorks/PhysX) physics engine. While there is no JS/WASM port of PhysX yet, it is perhaps the most competitive physics runtime compared to Bullet/ammo.js. When a web port becomes available, it will be added to the table above.

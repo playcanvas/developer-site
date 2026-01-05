@@ -44,7 +44,7 @@ app.xr.anchors.create(position, rotation, (err, anchor) => {
 });
 ```
 
-または、より信頼性の高いトラッキングのために、アンカーは[Hit Test Result][1]から作成できます。
+または、より信頼性の高いトラッキングのために、アンカーは[Hit Test Result](/user-manual/xr/ar/hit-testing/#anchors)から作成できます。
 
 ## アンカー {#anchor}
 
@@ -124,5 +124,3 @@ if (anchor.persistent) {
     });
 }
 ```
-
-[1]: /user-manual/xr/ar/hit-testing/#anchors

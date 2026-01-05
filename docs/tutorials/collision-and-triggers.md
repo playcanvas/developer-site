@@ -10,7 +10,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 
 *Rigidbodies collide with each other, a sound is played on a collision and a trigger volume resets the shapes.*
 
-This tutorial introduces the basics of rigid-body physics, collision detection and trigger volumes. Have a look at the [tutorial project][1].
+This tutorial introduces the basics of rigid-body physics, collision detection and trigger volumes. Have a look at the [tutorial project](https://playcanvas.com/project/405871).
 
 ## The Collision Component
 
@@ -39,7 +39,7 @@ To create a rigid body in your Scene, pick an Entity and add a *rigidbody* compo
 
 ![rigidbody component](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
 
-For details on each property take a look at the [*rigidbody* documentation][5].
+For details on each property take a look at the [*rigidbody* documentation](/user-manual/editor/scenes/components/rigidbody/).
 
 For this demo, the important property is the **Type**. You can pick one of three options:
 
@@ -123,7 +123,7 @@ this.entity.collision.on('triggerenter', this.onTriggerEnter, this);
 
 Notice, the third argument, ```this```, which is the 'scope' that will be used in the event listener. Usually, you'll want to add the current Script Object as the third argument so that the value of ```this``` in the event listener is that same Script Object.
 
-The second part of this code is the function which handles the event, ```onTriggerEnter```. When the trigger is entered, this function is called and passed the [```Entity```][8] object entering the trigger volume.
+The second part of this code is the function which handles the event, ```onTriggerEnter```. When the trigger is entered, this function is called and passed the [```Entity```](https://api.playcanvas.com/engine/classes/Entity.html) object entering the trigger volume.
 
 In this case, when the trigger is fired, we reset the penetrating Entity back up to the position it started in, and reset its velocities.
 
@@ -193,7 +193,3 @@ Collider.prototype.onCollisionStart = function (result) {
 In the ```initialize``` method we set up the event listener, and then in the event handler we check to see if the other entity has a **rigidbody** component (this is to avoid playing a sound when we enter a trigger volume) and then we play the "hit" sound effect. So now, every time an Entity with the collider script attached collides with another rigid body, it will play the hit sound.
 
 And that's all there is to handling Collisions and Triggers in PlayCanvas.
-
-[1]: https://playcanvas.com/project/405871
-[5]: /user-manual/editor/scenes/components/rigidbody/
-[8]: https://api.playcanvas.com/engine/classes/Entity.html

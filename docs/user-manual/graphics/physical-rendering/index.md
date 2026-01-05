@@ -3,7 +3,7 @@ title: Physically Based Rendering
 ---
 
 ![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  
-*Star-Lord Model by [Joachim Coppens][2]*
+*Star-Lord Model by [Joachim Coppens](https://www.joachimcoppens.com/)*
 
 Physically based rendering (PBR) is a combination of artist workflow, measured physical properties and material shaders that work together to bring order and consistency to graphics rendering. Using the underlying physical principles of how light and surfaces interact we can create predictable visuals which work in all lighting conditions without special cases.
 
@@ -46,10 +46,6 @@ Finally onto microsurface. Generally, 3D artists are familiar with the idea of n
 
 Some PBR systems use Roughness, some use Glossiness, they are the same thing. Roughness is the inverse of Glossiness and vice versa. If you want to convert from one to the other, simply invert the texture or value.
 
-[Next: Physical Materials][6]
+[Next: Physical Materials](/user-manual/graphics/physical-rendering/physical-materials)
 
-*More reading is available in the great Marmoset Toolbag's [PBR Theory][5] article.*
-
-[2]: https://www.joachimcoppens.com/
-[5]: https://www.marmoset.co/toolbag/learn/pbr-theory
-[6]: /user-manual/graphics/physical-rendering/physical-materials
+*More reading is available in the great Marmoset Toolbag's [PBR Theory](https://www.marmoset.co/toolbag/learn/pbr-theory) article.*

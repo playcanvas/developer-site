@@ -2,7 +2,7 @@
 title: Merging and resolving conflicts
 ---
 
-Merging is the process by which you combine work that has been performed in one branch with work that has been performed in another branch. Merging is a natural part of the branch based workflow described in the [branches documentation][1].
+Merging is the process by which you combine work that has been performed in one branch with work that has been performed in another branch. Merging is a natural part of the branch based workflow described in the [branches documentation](/user-manual/editor/version-control/branches).
 
 ## Merging two branches
 
@@ -59,5 +59,3 @@ The conflict manager shows each resource that is in conflict on the left, and fo
 ![Resolved Conflicts](/img/user-manual/editor/version-control/merging/conflicts-resolved.jpg)
 
 While the conflict manager and the merge is in progress your current branch is locked to further edits from other users. This prevents changes being overwritten by your merge when you finish resolving the conflicts. If another user has blocked a branch you need with a merge, you can forcibly end their merge from the editor.
-
-[1]: /user-manual/editor/version-control/branches

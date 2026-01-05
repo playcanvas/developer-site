@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 4" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-* [完成されたプロジェクトはこちら][6]です。先に[その1][1], [その2][2], [その3][3]を読んでください。*
+* [完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です。先に[その1](/tutorials/keepyup-part-one/), [その2](/tutorials/keepyup-part-two/), [その3](/tutorials/keepyup-part-three/)を読んでください。*
 
 ## サッカーボール
 
@@ -224,16 +224,10 @@ this.entity.setLocalPosition(p);
 
 #### 入力に反応する
 
-[その2][2]で説明したとおり、 `input.js`スクリプトは入力がボールに当たったかどうかを確認して、当たった場合は`tap()`メソッドを呼び出します。上記で定義された`tap()`メソッドは、ボールの速度と角速度に直接変更を適用します。`this.speedMult` や `this.angMult`などのいくつかのスクリプト属性を使用して新しい速度および角速度を掛けて、ゲームプレイに合わせます。
+[その2](/tutorials/keepyup-part-two/)で説明したとおり、 `input.js`スクリプトは入力がボールに当たったかどうかを確認して、当たった場合は`tap()`メソッドを呼び出します。上記で定義された`tap()`メソッドは、ボールの速度と角速度に直接変更を適用します。`this.speedMult` や `this.angMult`などのいくつかのスクリプト属性を使用して新しい速度および角速度を掛けて、ゲームプレイに合わせます。
 
-インパクトの点で埃のパーティクルと効果音の再生をトリガーするためにもタップメソッドを使用します。パーティクルと音声については[その5][4]で説明します。
+インパクトの点で埃のパーティクルと効果音の再生をトリガーするためにもタップメソッドを使用します。パーティクルと音声については[その5](/tutorials/keepyup-part-five/)で説明します。
 
 ## まとめ
 
 ボールスクリプトは、重力下でのボールの落下や、タップへの反応を可能にするため、単純な物理シミュレーションを実行します。また、ゲームイベントにリッスンして、一時停止やリセットを行います。最後に、他のシステムと相互作用してパーティクルエフェクトの表示や音声の再生を行います。
-
-[1]: /tutorials/keepyup-part-one/
-[2]: /tutorials/keepyup-part-two/
-[3]: /tutorials/keepyup-part-three/
-[4]: /tutorials/keepyup-part-five/
-[6]: https://playcanvas.com/project/406050

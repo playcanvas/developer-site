@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 2" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*You can find the [full project here][16]. If you haven't seen [Part 1][1] read it first.*
+*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't seen [Part 1](/tutorials/keepyup-part-one/) read it first.*
 
 ## Material Setup
 
@@ -20,7 +20,7 @@ A Material is a type of asset in PlayCanvas that describes the way that the surf
 
 ### Cubemap
 
-Before we jump into the materials, we're going to set up our cubemap asset. A cubemap is an asset that consists of 6 textures on the faces of a cube. You can think of this as the far off environment of your scene. The PlayCanvas Physical materials can use a cubemap to do Image Based Lighting. This uses the colors in the cubemap to light materials in the scene. For example in our scene the cubemap has a blue sky and a green grass surface. So our ball will be lit blue from above and green from below. [Read more][7] in our documentation.
+Before we jump into the materials, we're going to set up our cubemap asset. A cubemap is an asset that consists of 6 textures on the faces of a cube. You can think of this as the far off environment of your scene. The PlayCanvas Physical materials can use a cubemap to do Image Based Lighting. This uses the colors in the cubemap to light materials in the scene. For example in our scene the cubemap has a blue sky and a green grass surface. So our ball will be lit blue from above and green from below. [Read more](/user-manual/editor/assets/inspectors/cubemap/) in our documentation.
 
 ![Cubemap](/img/tutorials/beginner/keepyup-part-two/cubemap-preview.jpg)
 
@@ -30,7 +30,7 @@ To set up a cubemap, first create a Cubemap asset from the New Asset menu, assig
 
 ![Football](/img/tutorials/beginner/keepyup-part-two/ball-material.jpg)
 
-The football is a 3D model that we imported from the [PlayCanvas Asset Library][2]. The football materials will mostly be set up for you but you may need to make some simple changes. Lets look at each map used by the football
+The football is a 3D model that we imported from the [PlayCanvas Asset Library](https://store.playcanvas.com/). The football materials will mostly be set up for you but you may need to make some simple changes. Lets look at each map used by the football
 
 ### Diffuse
 
@@ -48,7 +48,7 @@ We're going to jump quickly to the Environment section as this is needed to see 
 
 ![Specular](/img/tutorials/beginner/keepyup-part-two/ball-spec.jpg)
 
-The specular section determines how the material interacts with lights. There are two "workflows" for specular, the "Metalness workflow" and the "Specular workflow", you can find more information in our [documentation][6]. For the football we are using Metalness, so be sure to check the "Use Metalness" box. Our football is not made of metal, so we slide the metalness slider all the way down to 0. Then we use the glossiness slider to set our rough/smooth the material should be. We've set this to about halfway which gives a nice shine to the ball, but not completely smooth.
+The specular section determines how the material interacts with lights. There are two "workflows" for specular, the "Metalness workflow" and the "Specular workflow", you can find more information in our [documentation](/user-manual/graphics/physical-rendering/physical-materials/). For the football we are using Metalness, so be sure to check the "Use Metalness" box. Our football is not made of metal, so we slide the metalness slider all the way down to 0. Then we use the glossiness slider to set our rough/smooth the material should be. We've set this to about halfway which gives a nice shine to the ball, but not completely smooth.
 
 ### Normal
 
@@ -78,11 +78,4 @@ The overlay material is even simpler than the backdrop. In this case all we are 
 
 ![Emissive](/img/tutorials/beginner/keepyup-part-two/overlay-emissive.jpg)
 
-Continue on to [Part 3][15].
-
-[1]: /tutorials/keepyup-part-one/
-[2]: https://store.playcanvas.com/
-[6]: /user-manual/graphics/physical-rendering/physical-materials/
-[7]: /user-manual/editor/assets/inspectors/cubemap/
-[15]: /tutorials/keepyup-part-three/
-[16]: https://playcanvas.com/project/406050
+Continue on to [Part 3](/tutorials/keepyup-part-three/).

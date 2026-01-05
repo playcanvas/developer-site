@@ -16,7 +16,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 
 PlayCanvasのエンジンでは、`pc.Mouse`オブジェクトが提供されており、マウスが移動したときやマウスボタンが押されたときに検出するためのシンプルなインターフェイスを提供します。また、マウス座標の処理におけるブラウザ間での一貫性の問題を解決することができます。
 
-[tutorial project][1]を見てみましょう。次に、mouse.jsのコードを示します。
+[tutorial project](https://playcanvas.com/project/405819/overview/tutorial-basic-mouse-input)を見てみましょう。次に、mouse.jsのコードを示します。
 
 ```javascript
 var Mouse = pc.createScript('mouse');
@@ -82,7 +82,7 @@ Mouse.prototype.onMouseDown = function (event) {
 
 ### マウスにアクセスする
 
-マウスの制御は`pc.Mouse`オブジェクトによって管理されます。[フレームワーク][2]は、[application app][3]上でこれのインスタンスを提供します。このインスタンスは、すべてのスクリプトオブジェクトで次のように利用できます：
+マウスの制御は`pc.Mouse`オブジェクトによって管理されます。[フレームワーク](/user-manual/glossary#framework)は、[application app](/user-manual/glossary#application)上でこれのインスタンスを提供します。このインスタンスは、すべてのスクリプトオブジェクトで次のように利用できます：
 
 ```javascript
 this.app.mouse
@@ -114,7 +114,7 @@ this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.onMouseDown, this);
 * `pc.EVENT_MOUSEMOVE` - マウスが動かされたときに発火します。
 * `pc.EVENT_MOUSEMOVE` - マウスが動いたときに発生する
 
-ブラウザでのマウス入力は、通常、ページのDOM内の要素に対する[DOM][4]イベントをリスニングすることで実装されます。問題は、異なるブラウザがイベントを微妙に異なる方法で実装し、異なる値を提供することです。コードの記述を簡略化するために、PlayCanvasエンジンでは、イベントハンドラをDOM要素ではなくPlayCanvasのマウスハンドラにバインドすることができます。エンジンは、イベントが発火するときに、すべてのブラウザで一貫性のある`pc.MouseEvent`オブジェクトを提供します。もし元のDOMイベントが必要な場合は、`pc.MouseEvent`の`event`プロパティとして利用可能です。
+ブラウザでのマウス入力は、通常、ページのDOM内の要素に対する[DOM](/user-manual/glossary#dom)イベントをリスニングすることで実装されます。問題は、異なるブラウザがイベントを微妙に異なる方法で実装し、異なる値を提供することです。コードの記述を簡略化するために、PlayCanvasエンジンでは、イベントハンドラをDOM要素ではなくPlayCanvasのマウスハンドラにバインドすることができます。エンジンは、イベントが発火するときに、すべてのブラウザで一貫性のある`pc.MouseEvent`オブジェクトを提供します。もし元のDOMイベントが必要な場合は、`pc.MouseEvent`の`event`プロパティとして利用可能です。
 
 ### マウスの移動
 
@@ -133,10 +133,4 @@ this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.onMouseDown, this);
 
 ### 試してみよう
 
-全画面でのチュートリアルは[こちら][5]から、またはページの上部からお試しください。マウスを動かしてキューブを移動させ、左、中央、右のマウスボタンをクリックしてキューブの色を変更してみてください。
-
-[1]: https://playcanvas.com/project/405819/overview/tutorial-basic-mouse-input
-[2]: /user-manual/glossary#framework
-[3]: /user-manual/glossary#application
-[4]: /user-manual/glossary#dom
-[5]: https://playcanv.as/p/MHIdZgaj/
+全画面でのチュートリアルは[こちら](https://playcanv.as/p/MHIdZgaj/)から、またはページの上部からお試しください。マウスを動かしてキューブを移動させ、左、中央、右のマウスボタンをクリックしてキューブの色を変更してみてください。

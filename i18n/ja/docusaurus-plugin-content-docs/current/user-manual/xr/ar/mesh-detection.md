@@ -108,7 +108,7 @@ app.xr.meshDetection.on('add', (xrMesh) => {
 
 XrMeshはさまざまな現実世界のオブジェクトを表すことができ、そのプロパティ`XrMesh.label`を使用して、それが何を表しているかを特定するのに役立ちます。
 
-これらのラベルは、`floor`、`wall`、`door`、`window`、`table`、`screen`、`global mesh`、`other`、`more`のいずれかです。このリストは決定的ではなく、プラットフォームは適切だと判断するあらゆるものを報告できますが、[セマンティックラベルのリスト][1]はこちらにあります。
+これらのラベルは、`floor`、`wall`、`door`、`window`、`table`、`screen`、`global mesh`、`other`、`more`のいずれかです。このリストは決定的ではなく、プラットフォームは適切だと判断するあらゆるものを報告できますが、[セマンティックラベルのリスト](https://github.com/immersive-web/semantic-labels/blob/master/labels.json)はこちらにあります。
 
 ## 変更
 
@@ -119,5 +119,3 @@ xrMesh.on('change', () => {
     // 頂点、インデックス、および/またはラベルが変更されました
 });
 ```
-
-[1]: https://github.com/immersive-web/semantic-labels/blob/master/labels.json

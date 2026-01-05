@@ -10,9 +10,9 @@ POST https://playcanvas.com/api/projects/:id/export
 
 ## 説明
 
-これにより、プロジェクト全体のzipアーカイブをダウンロードできます。ダウンロード後、Projects Dashboardからそのアーカイブをインポートして、そのアーカイブから新しいプロジェクトを作成できます。プロジェクトのインポートに関する詳細は[こちら][3]をご覧ください。
+これにより、プロジェクト全体のzipアーカイブをダウンロードできます。ダウンロード後、Projects Dashboardからそのアーカイブをインポートして、そのアーカイブから新しいプロジェクトを作成できます。プロジェクトのインポートに関する詳細は[こちら](/user-manual/editor/projects/backup-archiving#restoring-projects)をご覧ください。
 
-リクエストはアーカイブジョブを開始し、ジョブの詳細がレスポンスで返されます。[idによってジョブの状態をポーリング][2]し、状態が「完了」または「エラー」になるまで待機することができます。ジョブが完了すると、そのデータにはプロジェクトアーカイブをダウンロードするURLが含まれます。
+リクエストはアーカイブジョブを開始し、ジョブの詳細がレスポンスで返されます。[idによってジョブの状態をポーリング](/user-manual/api/job-get)し、状態が「完了」または「エラー」になるまで待機することができます。ジョブが完了すると、そのデータにはプロジェクトアーカイブをダウンロードするURLが含まれます。
 
 ## 例
 
@@ -61,8 +61,4 @@ curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json
 
 ## レート制限
 
-このルートは[strict][1]なレート制限を使用します。
-
-[1]: /user-manual/api#rate-limiting
-[2]: /user-manual/api/job-get
-[3]: /user-manual/editor/projects/backup-archiving#restoring-projects
+このルートは[strict](/user-manual/api#rate-limiting)なレート制限を使用します。

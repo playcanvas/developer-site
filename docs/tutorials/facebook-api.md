@@ -16,11 +16,11 @@ Log in with Facebook to see your photos in a 3D sculpture.
 
 PlayCanvas is a perfect partner for building WebGL Facebook games and applications. Facebook is a great place to find a large audience for your games and PlayCanvas lets you create fast and performant games that are optimized for the web.
 
-In this tutorial we'll show you how to integrate the Facebook API into your PlayCanvas application. Once you have access to the Facebook API there are many possibilities. For example, sharing games with friends, posting stories to Facebook and more. Check out the [tutorial project][5].
+In this tutorial we'll show you how to integrate the Facebook API into your PlayCanvas application. Once you have access to the Facebook API there are many possibilities. For example, sharing games with friends, posting stories to Facebook and more. Check out the [tutorial project](https://playcanvas.com/project/405897).
 
 ## Facebook Plugin
 
-There is a plugin to help you integrate Facebook available [on github][1]. This simplifies the work of loading the Facebook javascript SDK. Just attach the plugin script `lib/facebook-setup.js` to an entity in your scene and listen for the `fb:init` event and you'll know the API is ready. More instruction are available on the [github page][1].
+There is a plugin to help you integrate Facebook available [on github](https://github.com/playcanvas/playcanvas-facebook). This simplifies the work of loading the Facebook javascript SDK. Just attach the plugin script `lib/facebook-setup.js` to an entity in your scene and listen for the `fb:init` event and you'll know the API is ready. More instruction are available on the [github page](https://github.com/playcanvas/playcanvas-facebook).
 
 ```javascript
   this.app.on("fb:init", function () {
@@ -439,7 +439,7 @@ FB.api(path, (lists) => {
 });
 ```
 
-In this section of code we are using the Facebook API to access their [Graph API][2]. In this case, we're loading a list of photos from the logged in user, and then querying each photo to get the URL of the image.
+In this section of code we are using the Facebook API to access their [Graph API](https://developers.facebook.com/docs/graph-api). In this case, we're loading a list of photos from the logged in user, and then querying each photo to get the URL of the image.
 
 Once we have the URL, we create a new `texture` asset and we load the image.
 
@@ -472,9 +472,4 @@ Finally, once we have loaded the texture asset, we create a new Photo entity and
 
 This tutorial shows you how you can load the Facebook API and access Facebook data from within your PlayCanvas application. There are loads more things for you to try using the Facebook API. For example, try sharing Facebook Stories when game events occur, like breaking a high score. Or use the user's friend list to get them to challenge their friends to a game.
 
-Our game SWOOOP shows some of these in action. Try it on [Facebook][4] now.
-
-[1]: https://github.com/playcanvas/playcanvas-facebook
-[2]: https://developers.facebook.com/docs/graph-api
-[4]: https://apps.facebook.com/swooop-playcanvas/
-[5]: https://playcanvas.com/project/405897
+Our game SWOOOP shows some of these in action. Try it on [Facebook](https://apps.facebook.com/swooop-playcanvas/) now.

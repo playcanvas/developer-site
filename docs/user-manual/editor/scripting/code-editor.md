@@ -6,7 +6,7 @@ The Code Editor is an online real-time collaborative editor that allows you to e
 
 ## Opening The Code Editor
 
-You can open the Code Editor from inside the [PlayCanvas Editor][2] by pressing Ctrl + I. You can also click on this toolbar icon:
+You can open the Code Editor from inside the [PlayCanvas Editor](/user-manual/editor/) by pressing Ctrl + I. You can also click on this toolbar icon:
 
 ![Code Editor Toolbar](/img/user-manual/scripting/code-editor-toolbar.png)
 
@@ -34,11 +34,11 @@ Each open asset has a corresponding tab in the tab view. You can rearrange tabs 
 
 ### Text Editor
 
-Here you can actually edit the contents of your assets. The editor uses [Monaco][4] which is the same text editor library used by Visual Studio Code.
+Here you can actually edit the contents of your assets. The editor uses [Monaco](https://github.com/Microsoft/monaco-editor) which is the same text editor library used by Visual Studio Code.
 
 In addition, the editor supports auto-complete. When you type a letter or hit Ctrl+Space you will see a list of auto-complete suggestions.
 
-The editor will also lint your JavaScript code. This means that while you type your code the editor will scan your code for possible errors or suspicious usage. This is done with the help of [JSHint][13], which also supports special comments which control its behavior. For a list of these special comments check out the [docs][14].
+The editor will also lint your JavaScript code. This means that while you type your code the editor will scan your code for possible errors or suspicious usage. This is done with the help of [JSHint](https://jshint.com/), which also supports special comments which control its behavior. For a list of these special comments check out the [docs](https://jshint.com/docs/).
 
 ### Collaborators
 
@@ -95,7 +95,7 @@ If you want to replace a match enter the text you want to replace it with in the
 
 You can also find a term by searching in all your assets. To do this hit Ctrl + Shift + F to bring up the Find in Files panel on the bottom. Like before enter your search term and hit Enter. This will open up a new tab where the search results will be displayed:
 
-On the left side of the input fields there are various search options. These allow you to search using a regular expression, do a case-sensitive search or search for whole words. If you would like to learn and experiment more with regex, then [RegExr][10] is great site with cheat sheets, examples and an online editor for testing regex expressions.
+On the left side of the input fields there are various search options. These allow you to search using a regular expression, do a case-sensitive search or search for whole words. If you would like to learn and experiment more with regex, then [RegExr](https://regexr.com/) is great site with cheat sheets, examples and an online editor for testing regex expressions.
 
 ![Find in Files](/img/user-manual/scripting/find-in-files-results.png)
 
@@ -132,9 +132,3 @@ Holding down Alt and clicking left mouse button will add another cursor to the e
 Holding down Alt + Shift and dragging left mouse button will create a rectangular selection which is useful for selecting and editing columns of text.
 
 ![Rectangular Selection](/img/user-manual/scripting/code-editor-rectangular-selection.gif)
-
-[2]: /user-manual/editor/
-[4]: https://github.com/Microsoft/monaco-editor
-[10]: https://regexr.com/
-[13]: https://jshint.com/
-[14]: https://jshint.com/docs/

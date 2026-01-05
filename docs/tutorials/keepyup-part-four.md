@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 4" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*You can find the [full project here][6]. If you haven't see [Part 1][1], [Part 2][2] and [Part 3][3] read them first.*
+*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't see [Part 1](/tutorials/keepyup-part-one/), [Part 2](/tutorials/keepyup-part-two/) and [Part 3](/tutorials/keepyup-part-three/) read them first.*
 
 ## The Football
 
@@ -403,16 +403,10 @@ Finally, for a nice effect we add rotate the ball by the angular speed value usi
 
 #### Responding to input
 
-You may remember from [Part 2][2] that the `input.js` script checked to see if an input has hit the ball and if so it calls the `tap()` method. The `tap()` method defined above applies a direct change to the velocity and the angular speed of the ball. We use a couple of our script attributes `this.speedMult` and `this.angMult` to multiply the new velocity and angular speed to match our expectations of the gameplay.
+You may remember from [Part 2](/tutorials/keepyup-part-two/) that the `input.js` script checked to see if an input has hit the ball and if so it calls the `tap()` method. The `tap()` method defined above applies a direct change to the velocity and the angular speed of the ball. We use a couple of our script attributes `this.speedMult` and `this.angMult` to multiply the new velocity and angular speed to match our expectations of the gameplay.
 
-We also use the tap method to trigger a particle dust cloud at the point of impact and play a sound effect. We'll talk about particle and sounds in [Part 5][4].
+We also use the tap method to trigger a particle dust cloud at the point of impact and play a sound effect. We'll talk about particle and sounds in [Part 5](/tutorials/keepyup-part-five/).
 
 ## Summary
 
 The ball script runs a simple physical simulation to make the ball fall under gravity and respond to taps. It also listens for game events to know when to pause and reset. Finally, it interacts with some other systems to show particle effects and play sounds.
-
-[1]: /tutorials/keepyup-part-one/
-[2]: /tutorials/keepyup-part-two/
-[3]: /tutorials/keepyup-part-three/
-[4]: /tutorials/keepyup-part-five/
-[6]: https://playcanvas.com/project/406050

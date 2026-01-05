@@ -4,7 +4,7 @@ title: Layout Groups
 
 Layout Groupコンポーネントは、子エレメントの位置とサイズの自動設定に使用します。子エレメントを縦横の列やグリッドに揃えるのにも使用できます。このコンポーネントでは直接の子全てにレイアウトルールが適用されるため、1つのレイアウト子コンポネント上でレイアウトグループルールを上書きできます。
 
-Layout Groupコンポーネントは、[グリッド][10]、[縦列][11]または [横列][12]の固定幅等、一般的なレイアウトの生成に使用できます。
+Layout Groupコンポーネントは、[グリッド](/user-manual/user-interface/layout-groups#grid)、[縦列](/user-manual/user-interface/layout-groups#vertical-leaderboard)または [横列](/user-manual/user-interface/layout-groups#horizontal-buttons)の固定幅等、一般的なレイアウトの生成に使用できます。
 
 ## レイアウトグループを作成する {#creating-a-layout-group}
 
@@ -93,7 +93,3 @@ WidthフィッティングプロパティとHeightフィッティングプロパ
 このボタンの行は、グリッドを設定するためにラップ設定が有効化されたレイアウトグループを使用してレイアウトされています。レイアウトグループがアタッチされているグループエレメントは、2列のグリッドを生成するために強制的にラップするように正しい幅（ボタンの幅 + スペーシング）に設定されています。水平レイアウトは、グリッドが列ではなく行で埋まることを意味し、アライメントプロパティは`[0.5, 1]`に設定されているため、どんな"緩い"要素（要素が1つだけの行）もX軸で中央に配置されます。
 
 ![Setup](/img/user-manual/user-interface/layout-groups/grid-setup.jpg)
-
-[10]: /user-manual/user-interface/layout-groups#grid
-[11]: /user-manual/user-interface/layout-groups#vertical-leaderboard
-[12]: /user-manual/user-interface/layout-groups#horizontal-buttons

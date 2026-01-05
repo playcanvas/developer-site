@@ -16,9 +16,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 
 簡単なゲームや製品の場合は、すべてのアセットをエディターでセットアップし、アプリケーションが開始する前にそれらがプリロードされ、あなたのアプリケーションはうまく動作します。
 
-より高度な製品の場合、アセットにアクセスし、参照を変更し、プロパティを変更し、アプリケーションがより速くロードできるようにストリームデータを動的に読み込むことができるようにしたい場合があります。必要なときにアセットをロードするだけです。そのために、[`AssetRegistry`][1]を使用します。
+より高度な製品の場合、アセットにアクセスし、参照を変更し、プロパティを変更し、アプリケーションがより速くロードできるようにストリームデータを動的に読み込むことができるようにしたい場合があります。必要なときにアセットをロードするだけです。そのために、[`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html)を使用します。
 
-このチュートリアルでは、レンダリングコンポーネント上のモデルをキーを押して切り替える小さなシーンを構築して、ロードされていない3番目のモデルを動的にロードします。完成した[プロジェクトはここにあります][3]。
+このチュートリアルでは、レンダリングコンポーネント上のモデルをキーを押して切り替える小さなシーンを構築して、ロードされていない3番目のモデルを動的にロードします。完成した[プロジェクトはここにあります](https://playcanvas.com/project/406036)。
 
 ## セットアップ
 
@@ -29,11 +29,11 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 * シーンにレンダーエンティティが追加され、モデル**A**がRenderコンポーネントに割り当てられています。
 * レンダーエンティティにScriptコンポーネントが追加され、 `update_asset.js` という新しいスクリプトが作成されます。
 
-[Aモデル][5]、[Bモデル][6]、[Cモデル][7]をダウンロードし、プロジェクトにアップロードしてください。ファイル名がA.dae、B.dae、C.daeになっていることを確認してください。アセット名に影響を与えるためです。
+[Aモデル](pathname:///downloads/tutorials/A.dae)、[Bモデル](pathname:///downloads/tutorials/B.dae)、[Cモデル](pathname:///downloads/tutorials/C.dae)をダウンロードし、プロジェクトにアップロードしてください。ファイル名がA.dae、B.dae、C.daeになっていることを確認してください。アセット名に影響を与えるためです。
 
 ## アセットレジストリ
 
-[`pc.AssetRegistry`][1]はすべてのスクリプトで`this.app.assets`として利用できます。レジストリには、ロードされたかどうかに関係なく、プロジェクトに追加されたすべての実行時アセットの詳細が格納されます。アセットレジストリを使用して、アプリケーションで必要なアセットを検索します。
+[`pc.AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html)はすべてのスクリプトで`this.app.assets`として利用できます。レジストリには、ロードされたかどうかに関係なく、プロジェクトに追加されたすべての実行時アセットの詳細が格納されます。アセットレジストリを使用して、アプリケーションで必要なアセットを検索します。
 
 この場合、スクリプト属性`a`、`b`、`c`を宣言して、エディターでアセットに割り当てます。それらは自動的にスクリプトで利用可能になります。
 
@@ -57,7 +57,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
     }
 ```
 
-このプロジェクトでは**A**と**B**のアセットが**プリロード**されています。つまり、ロード画面中にこれらのアセットがダウンロードされます。アプリケーションを開始してすぐに使用できるようになります。アセットがロードされると、ロードされたリソースには`asset.resource`という名前が付けられ、[Renderコンポーネントアセットプロパティ][8]にアセットを割り当てることができます。`asset.loaded`が`false`であれば、アセットはロードされていません。
+このプロジェクトでは**A**と**B**のアセットが**プリロード**されています。つまり、ロード画面中にこれらのアセットがダウンロードされます。アプリケーションを開始してすぐに使用できるようになります。アセットがロードされると、ロードされたリソースには`asset.resource`という名前が付けられ、[Renderコンポーネントアセットプロパティ](https://api.playcanvas.com/engine/classes/RenderComponent.html#asset)にアセットを割り当てることができます。`asset.loaded`が`false`であれば、アセットはロードされていません。
 
 <img loading="lazy" src="/img/tutorials/using_assets/using-assets-a-preload.png" width="360" />
 
@@ -205,10 +205,3 @@ this.app.assets.load(asset);
 ```
 
 `asset.ready()`メソッドはアセットが読み込まれるとすぐにそのコールバックを呼びます。また、アセットがすでに読み込まれている場合、すぐにそれを呼び出します。アセットがすでに読み込まれている場合、 `app.assets.load()`は何もしません。
-
-[1]: https://api.playcanvas.com/engine/classes/AssetRegistry.html
-[3]: https://playcanvas.com/project/406036
-[5]: pathname:///downloads/tutorials/A.dae
-[6]: pathname:///downloads/tutorials/B.dae
-[7]: pathname:///downloads/tutorials/C.dae
-[8]: https://api.playcanvas.com/engine/classes/RenderComponent.html#asset

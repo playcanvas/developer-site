@@ -8,19 +8,19 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1007
     <iframe src="https://playcanv.as/p/kvE0iJWc/" title="Touchscreen Joypad Controls" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-[Click here to see the project][project-link].
+[Click here to see the project](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls).
 
 ## Overview
 
 This tutorial shares a Touchscreen Joypad library that can be installed and customized for any project that needs touch screen controls.
 
-We recommend reading about the [PlayCanvas UI system][playcanvas-ui] if you have not used it before as it is used to render and position the controls for this library.
+We recommend reading about the [PlayCanvas UI system](/user-manual/user-interface/) if you have not used it before as it is used to render and position the controls for this library.
 
 ![](/img/tutorials/touchscreen-joypad-controls/preview.gif)
 
 ## How to install
 
-Open the [example project][project-link], right click on the folder 'touch-joypad' and click on 'Copy'.
+Open the [example project](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls), right click on the folder 'touch-joypad' and click on 'Copy'.
 ![](/img/tutorials/touchscreen-joypad-controls/copy-folder.gif)
 
 Open your project, right click in the assets panel and click on 'Paste'
@@ -35,7 +35,7 @@ In the folder we've just pasted, open the 'templates' folder and there will be 4
 
 For this example, let's use the 'Left Half Touch Joystick' template.
 
-Create a 2D screen Entity and [add the template][add-template-docs] as a child of the screen Entity.
+Create a 2D screen Entity and [add the template](/user-manual/editor/templates/#adding-templates-in-your-scene) as a child of the screen Entity.
 
 ![](/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.gif)
 
@@ -49,9 +49,9 @@ The joystick is made of three Entities:
 
 The input area will listen for touch and mouse (for debugging purposes) events and also stops the propagation of the event.
 
-This means that any UI Elements under this and any [pc.Mouse][pc-app-mouse-api] or [pc.Touch][pc-app-touch-api] events will not be fired if this area is interacted with first.
+This means that any UI Elements under this and any [pc.Mouse](https://api.playcanvas.com/engine/classes/Mouse.html) or [pc.Touch](https://api.playcanvas.com/engine/classes/Touch.html) events will not be fired if this area is interacted with first.
 
-As the input area is an UI Element, it can be positioned, sized and anchored specifically for your needs via the [UI system layout][elements-manual].
+As the input area is an UI Element, it can be positioned, sized and anchored specifically for your needs via the [UI system layout](/user-manual/user-interface/elements/).
 
 It also has the 'touchJoystick' which has all the logic and attributes for the joystick. Each attribute has tooltips describing what they are for with some more details below.
 
@@ -98,15 +98,15 @@ var joystick = window.touchJoypad.sticks['joystick0'];
 console.log('X: ' + joystick.x + ', Y: ' + joystick.y);
 ```
 
-[In the demo][project-link], the camera is controlled by the right joystick and you can see how it gets and uses the values in the [script here][orbit-camera-joypad-input-script].
+[In the demo](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls), the camera is controlled by the right joystick and you can see how it gets and uses the values in the [script here](https://playcanvas.com/editor/code/1007506?tabs=111433673).
 
 ## Adding your buttons
 
-Buttons are fixed position UI Elements on the screen. There is a template for button in the 'templates' folder and [should be added][add-template-docs] as a child of the screen Entity.
+Buttons are fixed position UI Elements on the screen. There is a template for button in the 'templates' folder and [should be added](/user-manual/editor/templates/#adding-templates-in-your-scene) as a child of the screen Entity.
 
 ![](/img/tutorials/touchscreen-joypad-controls/adding-button.gif)
 
-As they are UI Elements, they can be positioned, sized and anchored specifically for your needs via the [UI system layout][elements-manual].
+As they are UI Elements, they can be positioned, sized and anchored specifically for your needs via the [UI system layout](/user-manual/user-interface/elements/).
 
 Like the joysticks, they have an identifier so they can be accessed in code from the global Javascript object `window.touchJoypad.buttons` with the following API.
 
@@ -129,13 +129,4 @@ var buttons = window.touchJoypad.buttons
 console.log('Was pressed: ' + buttons.wasPressed('button0'));
 ```
 
-[In the demo][project-link], the character is controlled by the left joystick and buttons. You can see how it gets and uses the buttons in the [script here][player-controller-script] to play attack animations.
-
-[project-link]: https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls
-[playcanvas-ui]: /user-manual/user-interface/
-[add-template-docs]: /user-manual/editor/templates/#adding-templates-in-your-scene
-[pc-app-mouse-api]: https://api.playcanvas.com/engine/classes/Mouse.html
-[pc-app-touch-api]: https://api.playcanvas.com/engine/classes/Touch.html
-[elements-manual]: /user-manual/user-interface/elements/
-[orbit-camera-joypad-input-script]: https://playcanvas.com/editor/code/1007506?tabs=111433673
-[player-controller-script]: https://playcanvas.com/editor/code/1007506?tabs=111432679
+[In the demo](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls), the character is controlled by the left joystick and buttons. You can see how it gets and uses the buttons in the [script here](https://playcanvas.com/editor/code/1007506?tabs=111432679) to play attack animations.

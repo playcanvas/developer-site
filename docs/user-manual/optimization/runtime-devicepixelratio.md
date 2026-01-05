@@ -16,7 +16,7 @@ This can be problematic on devices such as low or mid-tier mobile devices where 
 
 Ideally, we want the best of both worlds where users on high-tier devices will render at the highest quality but users on lower-tier devices will reduce the ratio to maintain a playable frame rate.
 
-The Device pixel ratio can be changed at runtime via the property [`pc.GraphicsDevice#maxPixelRatio`][4]:
+The Device pixel ratio can be changed at runtime via the property [`pc.GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio):
 
 ```javascript
 const device = pc.Application.getApplication().graphicsDevice;
@@ -42,7 +42,7 @@ The string will have something similar to the following:
 ANGLE (NVIDIA GeForce GTX 1050 Direct3D11 vs_5_0 ps_5_0)
 ```
 
-Benchmarks for different GPU cards can be found on [Video Card Benchmark][5] and [Notebook Check Smartphone and Tablet list][6] to help gauge each GPU's capability. However, given the sheer number of GPU cards available, this can be extremely difficult to assess the device capabilities.
+Benchmarks for different GPU cards can be found on [Video Card Benchmark](https://www.videocardbenchmark.net/GPU_mega_page.html) and [Notebook Check Smartphone and Tablet list](https://www.notebookcheck.net/Smartphone-Graphics-Cards-Benchmark-List.149363.0.html) to help gauge each GPU's capability. However, given the sheer number of GPU cards available, this can be extremely difficult to assess the device capabilities.
 
 An example for mobile can be found below (correct at time of writing Thu 30 Jul 2020):
 
@@ -73,7 +73,3 @@ function isLowQualityGPU() {
 ```
 
 We also recommend to have an option in the application for the user to be able to switch between quality levels. This allows them to choose the level that they are comfortable with and also be able to lower the quality in favor of using lower device resources and extending battery life.
-
-[4]: https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio
-[5]: https://www.videocardbenchmark.net/GPU_mega_page.html
-[6]: https://www.notebookcheck.net/Smartphone-Graphics-Cards-Benchmark-List.149363.0.html

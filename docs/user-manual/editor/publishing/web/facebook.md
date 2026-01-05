@@ -2,13 +2,13 @@
 title: Facebook
 ---
 
-[Facebook][1] is an excellent place to publish PlayCanvas games in order to reach an enormous audience. Publishing games from PlayCanvas to Facebook is straightforward.
+[Facebook](https://facebook.com) is an excellent place to publish PlayCanvas games in order to reach an enormous audience. Publishing games from PlayCanvas to Facebook is straightforward.
 
 ## How to publish to Facebook
 
 **1.** Publish your game to PlayCanvas. (You can also publish self-hosted games to Facebook, it will be a similar process to below)
 
-**2.** Visit the [Facebook Developer Portal][2] and create a new Facebook App for your game.
+**2.** Visit the [Facebook Developer Portal](https://developers.facebook.com/) and create a new Facebook App for your game.
 
 **3.** When requested choose **Facebook Canvas** as the type of application
 
@@ -35,6 +35,3 @@ Adding this URL as your website URL is required because of the way PlayCanvas ho
 **7.** You can test your game by visiting the App URL listed in the Settings page
 
 ![App URL](/img/user-manual/editor/publishing/web/facebook/app-url.jpg)
-
-[1]: https://facebook.com
-[2]: https://developers.facebook.com/

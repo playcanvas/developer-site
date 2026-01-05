@@ -6,7 +6,7 @@ title: 9-slicing
 
 ![9 Sliced Button](/img/user-manual/2D/9-slicing/9-sliced-labelled.jpg)
 
-In the image above you can see the 9 areas that a defined using the Texture Atlas editing features of the [Sprite Editor][2]. When added to a scene using either a [Sprite Component][3] or an [Image Element Component][4], the image can be resized using the width and height properties of the component. Each area is scaled using the following rules:
+In the image above you can see the 9 areas that a defined using the Texture Atlas editing features of the [Sprite Editor](/user-manual/2D/sprite-editor). When added to a scene using either a [Sprite Component](/user-manual/editor/scenes/components/sprite) or an [Image Element Component](/user-manual/editor/scenes/components/element), the image can be resized using the width and height properties of the component. Each area is scaled using the following rules:
 
 * **Center** - stretch or tile both horizontally and vertically
 * **Top, Bottom** - stretch or tile horizontally only
@@ -44,7 +44,3 @@ Sprite Assets can have one of three Render Modes.
 ![Tiled Render Mode](/img/user-manual/2D/9-slicing/tiled-resize.gif)
 
 *Tiled* Render Mode is similar to *Sliced* mode except instead of stretching the sections repeat in a tiled manner. The center tiles horizontally and vertically; the left and right tile vertically; the top and bottom tile horizontally and the corners do not tile at all.
-
-[2]: /user-manual/2D/sprite-editor
-[3]: /user-manual/editor/scenes/components/sprite
-[4]: /user-manual/editor/scenes/components/element

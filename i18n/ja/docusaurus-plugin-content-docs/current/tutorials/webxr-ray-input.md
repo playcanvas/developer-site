@@ -12,7 +12,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/460
 
 これは、レーザーポインターや視線、タッチスクリーンなどのUIとXR入力ソース (Input Source)との間のインタラクションを提供するWebXR体験です。デスクトップ、モバイル、Oculus Browser、Google CardboardTM、Google DaydreamTM、Samsung Gear VRTM、その他のVR/ARヘッドセットをサポートしています。
 
-[チュートリアル][1]プロジェクトのソースを見てみましょう。
+[チュートリアル](https://playcanvas.com/project/460449/overview/webvr-ray-input)プロジェクトのソースを見てみましょう。
 
 ## VR/ARへの入り方
 
@@ -33,7 +33,7 @@ button.element.on('click', function() {
 
 このプロジェクトでは、ルートエンティティに追加される `xr.js` があります。これは、VRとARのUIボタンを管理し、XR可用性の変更やXRセッション状態の変更に反応します。
 
-WebXRのPlayCanvas APIの詳細については、[ユーザーマニュアル][2]を参照してください。
+WebXRのPlayCanvas APIの詳細については、[ユーザーマニュアル](/user-manual/xr/using-webxr/)を参照してください。
 
 ## XR入力タイプ
 
@@ -51,7 +51,7 @@ WebXRのPlayCanvas APIの詳細については、[ユーザーマニュアル][2
 
 #### `controllers.js`
 
-これは、[XrInput][4]を使用して追加された入力ソースを追跡し、それらのためのコントローラーエンティティのインスタンスを作成します。例:
+これは、[XrInput](https://api.playcanvas.com/engine/classes/XrInput.html)を使用して追加された入力ソースを追跡し、それらのためのコントローラーエンティティのインスタンスを作成します。例:
 
 ```javascript
 app.xr.input.on('add', function (inputSource) {
@@ -61,7 +61,7 @@ app.xr.input.on('add', function (inputSource) {
 
 #### `controller.js`
 
-これは、それに関連付けられている元の[XrInputSource][5]を持つ各エンティティにアタッチされ、入力ソース自体と関連付けられています。入力ソースが握れる場合、コントローラーのビジュアルモデルの子エンティティを有効にします。
+これは、それに関連付けられている元の[XrInputSource](https://api.playcanvas.com/engine/classes/XrInputSource.html)を持つ各エンティティにアタッチされ、入力ソース自体と関連付けられています。入力ソースが握れる場合、コントローラーのビジュアルモデルの子エンティティを有効にします。
 
 各更新では、入力ソースの位置と回転に基づいてエンティティを位置決めし、回転します。
 
@@ -75,11 +75,11 @@ if (inputSource.grip) {
 
 ## UI
 
-3D UIは、[Button][6]と[Element][7]コンポーネントを使用して作成されます。両方を組み合わせることで、3D空間でインタラクティブなボタンを作成することができます。
+3D UIは、[Button](https://api.playcanvas.com/engine/classes/ButtonComponent.html)と[Element](https://api.playcanvas.com/engine/classes/ElementComponent.html)コンポーネントを使用して作成されます。両方を組み合わせることで、3D空間でインタラクティブなボタンを作成することができます。
 
-XR環境のための3D UIの作成方法は、ノンXR環境でのマウス/タッチのインタラクションの3D UIの作成方法とまったく同じです。[ユーザーインターフェース][3]の作成については、もっと読むことができます。
+XR環境のための3D UIの作成方法は、ノンXR環境でのマウス/タッチのインタラクションの3D UIの作成方法とまったく同じです。[ユーザーインターフェース](/user-manual/user-interface/)の作成については、もっと読むことができます。
 
-デフォルトでは、各XrInputSourceには`elementInput`プロパティが有効になっています。これは、関連付けられた3Dレイを使用して、マウスまたはタッチ入力と同様にButtonコンポーネントと相互作用することを意味します。各入力ソースには、[origin][8]と[direction][9]を持つレイがあります。このチュートリアルでは、入力ソースのレイを可視化しています。
+デフォルトでは、各XrInputSourceには`elementInput`プロパティが有効になっています。これは、関連付けられた3Dレイを使用して、マウスまたはタッチ入力と同様にButtonコンポーネントと相互作用することを意味します。各入力ソースには、[origin](https://api.playcanvas.com/engine/classes/XrInputSource.html#getorigin)と[direction](https://api.playcanvas.com/engine/classes/XrInputSource.html#getdirection)を持つレイがあります。このチュートリアルでは、入力ソースのレイを可視化しています。
 
 ```javascript
 // set starting point of ray
@@ -93,7 +93,7 @@ app.renderLine(vecA, vecB, color);
 
 ## UIインタラクション
 
-このチュートリアルでは、Rotate(button-rotate.js)とColor(button-color.js)の2種類のボタンがあります。回転ボタンを[クリック][10]すると、キューブの回転速度が設定されます。
+このチュートリアルでは、Rotate(button-rotate.js)とColor(button-color.js)の2種類のボタンがあります。回転ボタンを[クリック](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click)すると、キューブの回転速度が設定されます。
 
 ```javascript
 entity.button.on('click', function() {
@@ -104,14 +104,3 @@ entity.button.on('click', function() {
 色のボタンをクリックすると、キューブモデルの各メッシュインスタンスの拡散色が変更されます。
 
 このUIインタラクションは、入力ソースに対して不偏です。つまり、VRのハンドヘルドデバイス、モバイルVRのGaze入力、AR環境の画面上のタッチ、そしてクラシックなマウスとタッチのいずれからでも発生します。したがって、真にマルチプラットフォームアプリケーションを作成し、テストすることが容易です。
-
-[1]: https://playcanvas.com/project/460449/overview/webvr-ray-input
-[2]: /user-manual/xr/using-webxr/
-[3]: /user-manual/user-interface/
-[4]: https://api.playcanvas.com/engine/classes/XrInput.html
-[5]: https://api.playcanvas.com/engine/classes/XrInputSource.html
-[6]: https://api.playcanvas.com/engine/classes/ButtonComponent.html
-[7]: https://api.playcanvas.com/engine/classes/ElementComponent.html
-[8]: https://api.playcanvas.com/engine/classes/XrInputSource.html#getorigin
-[9]: https://api.playcanvas.com/engine/classes/XrInputSource.html#getdirection
-[10]: https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click
