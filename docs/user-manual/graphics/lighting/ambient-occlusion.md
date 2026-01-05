@@ -39,5 +39,5 @@ Simply upload texture in Editor and apply it on Ambient Occlusion slot on materi
 
 You can [explore example](https://playcanv.as/p/zdkARz26/) that uses global Ambient Occlusion described above and its [project](https://playcanvas.com/project/446587/overview/archviz-example).
 
-[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][6]  
+[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)  
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*

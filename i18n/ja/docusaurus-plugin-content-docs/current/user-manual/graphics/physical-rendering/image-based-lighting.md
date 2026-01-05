@@ -57,6 +57,6 @@ CubeMapは6面で構成され、各面は立方体の正方形の面を表しま
 
 CubeMap Box Projectionを使用したシーンの[例](https://playcanv.as/p/zdkARz26/)と[プロジェクト](https://playcanvas.com/project/446587/overview/archviz-example)です。窓に映る木の床の反射と天井に映る僅かな反射や、右の壁の金属のPlayCanvasロゴに映る部屋の反射をご確認ください。これは動的なエフェクトであり、非常に現実的な反射を作成し、アーティストが部屋の環境をどのように映し出すか制御することを可能にします。
 
-[![Environment Box Projection Mapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][7]
+[![Environment Box Projection Mapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
 
 このシーンのライティングはライトマップとAOテクスチャとBox投影IBL(反射)を使用して実装されています。

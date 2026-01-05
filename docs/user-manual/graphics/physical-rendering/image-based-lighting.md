@@ -57,6 +57,6 @@ This technique changes the projection of environment map which allows to specify
 
 Here is an [example](https://playcanv.as/p/zdkARz26/) and [project](https://playcanvas.com/project/446587/overview/archviz-example) of the scene using CubeMap Box Projection. Notice the reflection on the wooden floor from the windows and the subtle reflection on the ceiling, as well as the reflection of the room on the metal PlayCanvas logo on the wall on the right. This is a dynamic effect and can provide very realistic reflections and control to the artist of how surfaces reflect the room environment.
 
-[![Environment Box Projection Mapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][7]
+[![Environment Box Projection Mapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
 
 The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections).

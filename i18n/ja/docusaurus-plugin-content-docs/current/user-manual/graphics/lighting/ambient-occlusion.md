@@ -39,5 +39,5 @@ Editorでテクスチャをアップロードし、マテリアルのAmbient Occ
 
 上で説明したグローバルアンビエントオクルージョンを使用する[例](https://playcanv.as/p/zdkARz26/)やその[project](https://playcanvas.com/project/446587/overview/archviz-example)をご確認ください。
 
-[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][6]  
+[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)  
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*

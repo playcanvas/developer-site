@@ -2,7 +2,7 @@
 title: Lightmapping
 ---
 
-[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][13]
+[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*
 
 Here is the link to [final scene](https://playcanv.as/p/zdkARz26/) and [project](https://playcanvas.com/project/446587/overview/archviz-example) that uses these techniques to achieve results in image above: External HDR Lightmaps (described in this page below), [Ambient Occlusion](/user-manual/graphics/lighting/ambient-occlusion/) and HDR Cubemap applied using Box Projection using [Image Based Lighting](/user-manual/graphics/physical-rendering/image-based-lighting/) technique to achieve realistic reflections.
