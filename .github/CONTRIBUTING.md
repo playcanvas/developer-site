@@ -38,7 +38,7 @@ The content layout for the User Manual mirrors the folder layout in [`docs/user-
 
 Tutorials are grouped by tags that are listed at the top of each tutorial page in the metadata. The list of tags can be found on the left of our [tutorials page](https://developer.playcanvas.com/tutorials/).
 
-Use [reference style links](https://www.markdownguide.org/basic-syntax/#reference-style-links) (except for images) and minimize the use of HTML as much as possible. HTML usage is limited to:
+Use inline links (`[link text](url)`) and minimize the use of HTML as much as possible. HTML usage is limited to:
 
 - `<iframe>` for PlayCanvas project builds
 - `<img>` to adjust sizes of images
@@ -74,15 +74,7 @@ For any JavaScript code, please refer to the [PlayCanvas style guide](https://gi
 
 ### Hyperlinks
 
-Historically, links have been placed at the bottom of a page:
-
-```markdown
-[link text][1]
-
-[1]: https://example.com
-```
-
-However, we now recommend using the inline `[link text](url)` format.
+Use the inline `[link text](url)` format for all links.
 
 ### Other files
 
