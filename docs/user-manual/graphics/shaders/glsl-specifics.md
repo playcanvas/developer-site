@@ -20,7 +20,7 @@ Attributes define per-vertex input data, and can only be used in the vertex shad
 attribute vec2 aUv0;
 ```
 
-The attribute names must match the names specified in the `attributes` property when creating the [ShaderMaterial][1].
+The attribute names must match the names specified in the `attributes` property when creating the [ShaderMaterial](/user-manual/graphics/shaders/).
 
 :::note
 
@@ -93,5 +93,3 @@ varying vec2 uv0;
 The `in`/`out` syntax (introduced in GLSL 3.3+) is not supported.
 
 :::
-
-[1]: /user-manual/graphics/shaders/

@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
     <iframe src="https://playcanv.as/p/6wt5T87E/" title="Video Textures" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-[このチュートリアルのプロジェクト][1]をエディタから試すことができます。
+[このチュートリアルのプロジェクト](https://playcanvas.com/project/405850)をエディタから試すことができます。
 
 このプロジェクトは、テクスチャとランタイムを作成し、ビデオファイルをダウンロードして再生し、ビデオをテクスチャにレンダリングします。このテクスチャは、モデルに適用され、シーンで使用されます。
 
@@ -107,5 +107,3 @@ VideoTexture.prototype.update = function(dt) {
     this.videoTexture.upload();
 };
 ```
-
-[1]: https://playcanvas.com/project/405850

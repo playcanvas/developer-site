@@ -6,7 +6,7 @@ By default, when you launch your PlayCanvas app from the Editor, it will use the
 
 * To test your project against the latest dev build of the engine to test a new feature or bug fix, or detect any potential regressions before an upcoming engine release.
 * To temporarily step back to a previous stable engine version to mitigate a regression in the current stable build.
-* To develop and debug against your own fork of the [engine repo on GitHub][1].
+* To develop and debug against your own fork of the [engine repo on GitHub](https://github.com/playcanvas/engine).
 
 :::important[Loading the Correct Engine: Module vs UMD]
 
@@ -47,7 +47,7 @@ To launch with Debug mode enabled, use:
 
 ### Launch with a Previous Stable Engine
 
-Previous stable builds of the PlayCanvas engine are archived on code.playcanvas.com. You can find all of the previous releases on [GitHub][2]. The engine is named with the following convention:
+Previous stable builds of the PlayCanvas engine are archived on code.playcanvas.com. You can find all of the previous releases on [GitHub](https://github.com/playcanvas/engine/releases). The engine is named with the following convention:
 
 ```none
     playcanvas-<major>.<minor>.<patch>.js
@@ -92,6 +92,3 @@ To use this engine in the launch page, edit the URL to:
 ```none
     https://launch.playcanvas.com/<scene_id>?use_local_engine=http://localhost:51000/playcanvas.js
 ```
-
-[1]: https://github.com/playcanvas/engine
-[2]: https://github.com/playcanvas/engine/releases

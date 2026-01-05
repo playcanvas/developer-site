@@ -6,7 +6,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/6919
 
 import Link from '@docusaurus/Link';
 
-Learn how to render world space UI over the top of the world
+Learn how to render world space UI over the top of the world.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/0Ycgs0n7/" title="World space UI rendering on top" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

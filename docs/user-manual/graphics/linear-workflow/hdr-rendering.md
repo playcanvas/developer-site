@@ -24,9 +24,9 @@ These settings can be configured based on the rendering mode.
 
 ### HDR (High Dynamic Range)
 
-For HDR rendering, the goal is to preserve HDR colour information:
+For HDR rendering, the goal is to preserve HDR color information:
 
-- **toneMapping**: Set to `TONEMAP_LINEAR` to maintain HDR colours.
+- **toneMapping**: Set to `TONEMAP_LINEAR` to maintain HDR colors.
 - **gammaCorrection**: Disable by setting to `GAMMA_NONE`.
 - Ensure that a compatible HDR pixel format is used for the render target. This format can be obtained using the `GraphicsDevice.getRenderableHdrFormat()` API.
 

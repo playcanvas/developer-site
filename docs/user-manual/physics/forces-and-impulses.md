@@ -4,7 +4,7 @@ title: Forces and Impulses
 
 Dynamic rigid bodies move in response to forces and impulses. A force is applied to a body over a period of time whereas an impulse is a force that is applied in an instant.
 
-To apply a force or an impulse to a rigid body, you must use the [pc.RigidBodyComponent scripting API][1].
+To apply a force or an impulse to a rigid body, you must use the [pc.RigidBodyComponent scripting API](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html).
 
 Let's consider a couple of examples. If you want to push a heavy weight across the floor, you would apply a force over an amount of time:
 
@@ -27,5 +27,3 @@ MyScript.prototype.update = function(dt) {
     }
 };
 ```
-
-[1]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html

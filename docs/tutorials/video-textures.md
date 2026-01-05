@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
     <iframe src="https://playcanv.as/p/6wt5T87E/" title="Video Textures" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-Try it from the Editor in the [tutorial project.][1]
+Try it from the Editor in the [tutorial project.](https://playcanvas.com/project/405850)
 
 This project creates a texture and runtime, downloads and plays a video file and renders the video into the texture. This texture is then applied to a model and used in the scene.
 
@@ -220,5 +220,3 @@ VideoTexture.prototype.update = function(dt) {
 
 </TabItem>
 </Tabs>
-
-[1]: https://playcanvas.com/project/405850

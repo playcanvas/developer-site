@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
     <iframe src="https://playcanv.as/p/nbMbtAGH/" title="User Interface - Leaderboard" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*Elementコンポーネントを使用しているリーダーボード。[フルシーン][1]を参照してください。*
+*Elementコンポーネントを使用しているリーダーボード。[フルシーン](https://playcanvas.com/editor/scene/547907)を参照してください。*
 
 このチュートリアルでは、ビルトインの[Elements] [2]を使用して、シンプルなリーダーボードを作成する方法を説明します。リーダーボードは、JSONアセットから取得したデータでプログラムによって動的に埋められます。
 
@@ -18,13 +18,13 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
 
 ![Hierarchy](/img/tutorials/ui/leaderboard/hierarchy.png)
 
-私たちは2Dの[Screen][3]を持っており、タイトルとサブタイトルを表示するための2つの要素、およびリーダーボードデータの背景とパネルとして使用される2つのイメージ要素があります。 `Your Score` の下には、プレイヤーのリーダーボード内での位置を表示し、`Leaderboard` の下にはその他の情報を表示します。
+私たちは2Dの[Screen](/user-manual/user-interface/screens/)を持っており、タイトルとサブタイトルを表示するための2つの要素、およびリーダーボードデータの背景とパネルとして使用される2つのイメージ要素があります。 `Your Score` の下には、プレイヤーのリーダーボード内での位置を表示し、`Leaderboard` の下にはその他の情報を表示します。
 
 また、 `Entry Template` という無効化されたエンティティもあります。これは、テンプレートの各行に使用するものです。JSONアセット内に存在する各リーダーボードエントリに対して、そのテンプレートをクローンし、各クローンを対応するパネルの下に追加します。
 
 ## スクリーンの設定
 
-[スクリーン][3]は次のように設定されています。
+[スクリーン](/user-manual/user-interface/screens/)は次のように設定されています。
 
 ![Screen](/img/tutorials/ui/leaderboard/screen.png)
 
@@ -149,7 +149,3 @@ Leaderboard.prototype.load = function (callback) {
     this.app.assets.load(asset);
 };
 ```
-
-[1]: https://playcanvas.com/editor/scene/547907
-[2]: /user-manual/user-interface/elements/
-[3]: /user-manual/user-interface/screens/

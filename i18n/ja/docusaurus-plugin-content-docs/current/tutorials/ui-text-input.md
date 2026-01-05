@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/100
     <iframe src="https://playcanv.as/p/8ZQaDGf8/" title="User Interface - Text Input" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-[ここをクリックしてプロジェクトを見る][project-link].
+[ここをクリックしてプロジェクトを見る](https://playcanvas.com/project/1005906/overview/ui-text-input).
 
 ## 概要
 
@@ -36,7 +36,7 @@ HTML入力要素を使用することで、Webページ上でのユーザーが�
 
 ## インストール方法
 
-Open the [example project][project-link], right click on the folder 'ui-input' and click on 'Copy'.
+Open the [example project](https://playcanvas.com/project/1005906/overview/ui-text-input), right click on the folder 'ui-input' and click on 'Copy'.
 ![](/img/tutorials/ui-text-input/copy-folder.gif)
 
 Open your project, right click in the assets panel and click on 'Paste'
@@ -67,5 +67,3 @@ ElementエンティティにScriptコンポーネントを追加し、スクリ�
 ## 高度な使い方: スタイルの設定方法
 
 このライブラリでは、HTMLのinput要素に対して中立的なカラースタイルが使用されています。アプリケーションに合わせてスタイルを変更したい場合は、'ui-input-library.js' の`createInputDom`関数内のCSSを変更することができます。
-
-[project-link]: https://playcanvas.com/project/1005906/overview/ui-text-input

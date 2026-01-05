@@ -33,7 +33,7 @@ const graph = new Graph(schema, {
 })
 ```
 
-The text property defines the display text of the context menu item. The action property tells the graph that this context menu item should fire an `ADD_NODE` action when it is selected. The other properties define the type of node that will be created when this item is selected. The node type references one of the node keys defined in the graphs schema. The attributes object defines the initial values of any editable attributes that exist in that nodes schema. The name attribute will also show up in the header for the node.
+The text property defines the display text of the context menu item. The action property tells the graph that this context menu item should fire an `ADD_NODE` action when it is selected. The other properties define the type of node that will be created when this item is selected. The node type references one of the node keys defined in the graphs schema. The attributes object defines the initial values of any editable attributes that exist in that node's schema. The name attribute will also show up in the header for the node.
 
 Context menus can also be added to nodes and edges by including contextMenu properties in their schemas as follows:
 

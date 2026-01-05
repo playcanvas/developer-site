@@ -16,6 +16,4 @@ sidebar_position: 2
 | O | 出力ノードのみ表示 |
 | フィルター | ノードのリストを名前でさらに絞り込みます。 |
 
-ノードペインを使ってノードを作成する方法については、[グラフエディター][2]のドキュメントを参照してください。
-
-[2]: /shader-editor/window-layout/graph-editor
+ノードペインを使ってノードを作成する方法については、[グラフエディター](/shader-editor/window-layout/graph-editor)のドキュメントを参照してください。

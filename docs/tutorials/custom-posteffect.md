@@ -242,8 +242,8 @@ Remember to parse the script so that the Editor knows about the script's attribu
 
 To see your watercolor effect in action, you need to apply it to a camera in your scene:
 
-* Create a new entity with a [camera component](/user-manual/scenes/components/camera) if you haven't already.
-* Add a [script component](/user-manual/scenes/components/script) to the camera entity and assign the watercolor script to it.
+* Create a new entity with a [camera component](/user-manual/editor/scenes/components/camera) if you haven't already.
+* Add a [script component](/user-manual/editor/scenes/components/script) to the camera entity and assign the watercolor script to it.
 * Assign the `watercolor.vert` and `watercolor.frag` shader assets to the corresponding attributes in the watercolor script component.
 
 Now, when you play your scene, you should see the watercolor effect applied, giving your scene a soft, artistic look.

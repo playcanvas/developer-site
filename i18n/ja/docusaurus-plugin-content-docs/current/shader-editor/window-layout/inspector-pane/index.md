@@ -9,12 +9,7 @@ sidebar_position: 3
 
 次のインスペクターがあります:
 
-- [グラフ][1]
-- [ノード][2]
-- [マテリアル][3]
-- [テクスチャ][4]
-
-[1]: /shader-editor/window-layout/inspector-pane/graph-inspector
-[2]: /shader-editor/window-layout/inspector-pane/node-inspector
-[3]: /shader-editor/window-layout/inspector-pane/material-inspector
-[4]: /shader-editor/window-layout/inspector-pane/texture-inspector
+- [グラフ](/shader-editor/window-layout/inspector-pane/graph-inspector)
+- [ノード](/shader-editor/window-layout/inspector-pane/node-inspector)
+- [マテリアル](/shader-editor/window-layout/inspector-pane/material-inspector)
+- [テクスチャ](/shader-editor/window-layout/inspector-pane/texture-inspector)

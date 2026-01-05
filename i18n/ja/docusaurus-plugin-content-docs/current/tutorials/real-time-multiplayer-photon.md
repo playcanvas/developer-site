@@ -14,7 +14,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/926
 
 :::
 
-[このリンク][1]からマッチメイキングを含む完全なプロジェクトを参照できます。
+[このリンク](https://playcanvas.com/project/926999/)からマッチメイキングを含む完全なプロジェクトを参照できます。
 
 Photon(PUNとしても知られる)は多くのゲームで使用され、HTML5ゲーム用のJavaScript SDKが利用可能です。
 
@@ -29,7 +29,7 @@ Photon(PUNとしても知られる)は多くのゲームで使用され、HTML5�
 
 ### PlayCanvasプロジェクト
 
-[tutorial project here][2]をフォークして開始します。
+[tutorial project here](https://playcanvas.com/project/954410/)をフォークして開始します。
 
 ![Empty Project](/img/tutorials/multiplayer-photon/1.png)
 
@@ -37,7 +37,7 @@ Photon(PUNとしても知られる)は多くのゲームで使用され、HTML5�
 
 SDKの使用とドキュメンテーションの閲覧にはアカウントの登録が必要です。
 
-[こちら][4]からPhotonアカウントを作成してください。
+[こちら](https://www.photonengine.com/)からPhotonアカウントを作成してください。
 
 #### 新しいアプリを作成
 
@@ -105,7 +105,7 @@ SDKをエディタのアセットにドラッグ&ドロップしてください�
 3. ルームの作成または参加
 4. 他のプレイヤーの動作と移動の同期
 
-[APIリファレンス][14]と[用語集][15]は、Photonのサイトで利用可能です。
+[APIリファレンス](https://doc-api.photonengine.com/en/javascript/current/Photon.LoadBalancing.LoadBalancingClient.html)と[用語集](https://doc.photonengine.com/ja-jp/quantum/v1/reference/glossary)は、Photonのサイトで利用可能です。
 
 ### PlayCanvasでPhotonを使用
 
@@ -480,7 +480,7 @@ Player.prototype.update = function (dt) {
 };
 ```
 
-- **this.app.fire** は、スクリプト間の [通信][22]に使用されます。
+- **this.app.fire** は、スクリプト間の [通信](/user-manual/scripting/events/)に使用されます。
 
 ### 完成
 
@@ -490,11 +490,4 @@ Photonを使用してマルチプレイヤーをプレイできるようにな�
 
 Photonを使ってルームを作成し、プレイヤーの位置を同期できます。
 
-このプロジェクトはプレイヤー間のシンプルなリアルタイム通信でしたが、マッチメイキングを含むプロジェクトも作成できます。ルームの作成やリスト表示を含む完全なプロジェクトについては、  [こちら][1]をクリックしてください。
-
-[1]: https://playcanvas.com/project/926999/
-[2]: https://playcanvas.com/project/954410/
-[4]: https://www.photonengine.com/
-[14]: https://doc-api.photonengine.com/en/javascript/current/Photon.LoadBalancing.LoadBalancingClient.html
-[15]: https://doc.photonengine.com/ja-jp/quantum/v1/reference/glossary
-[22]: /user-manual/scripting/events/
+このプロジェクトはプレイヤー間のシンプルなリアルタイム通信でしたが、マッチメイキングを含むプロジェクトも作成できます。ルームの作成やリスト表示を含む完全なプロジェクトについては、  [こちら](https://playcanvas.com/project/926999/)をクリックしてください。

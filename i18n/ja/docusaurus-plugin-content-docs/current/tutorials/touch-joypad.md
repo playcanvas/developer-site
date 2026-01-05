@@ -8,19 +8,19 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/100
     <iframe src="https://playcanv.as/p/kvE0iJWc/" title="Touchscreen Joypad Controls" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-[プロジェクトのリンク][project-link]をクリックしてください。
+[プロジェクトのリンク](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls)をクリックしてください。
 
 ## 概要
 
 このチュートリアルでは、タッチスクリーン操作を必要とするプロジェクトにインストールしてカスタマイズできるTouchscreen Joypadライブラリを共有します。
 
-このライブラリでは、[PlayCanvas UI system][playcanvas-ui]が使用されているため、その前に使用したことがない場合は、UIシステムについて読むことをお勧めします。
+このライブラリでは、[PlayCanvas UI system](/user-manual/user-interface/)が使用されているため、その前に使用したことがない場合は、UIシステムについて読むことをお勧めします。
 
 ![](/img/tutorials/touchscreen-joypad-controls/preview.gif)
 
 ## インストール方法
 
-Open the [example project][project-link], right click on the folder 'touch-joypad' and click on 'Copy'.
+Open the [example project](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls), right click on the folder 'touch-joypad' and click on 'Copy'.
 ![](/img/tutorials/touchscreen-joypad-controls/copy-folder.gif)
 
 Open your project, right click in the assets panel and click on 'Paste'
@@ -35,7 +35,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 この例では、'Left Half Touch Joystick'テンプレートを使用しましょう。
 
-2DスクリーンのEntityを作成し、[テンプレートを子として追加][add-template-docs]します。
+2DスクリーンのEntityを作成し、[テンプレートを子として追加](/user-manual/editor/templates/#adding-templates-in-your-scene)します。
 
 ![](/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.gif)
 
@@ -49,9 +49,9 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 入力領域は、タッチおよびマウス(デバッグ目的)イベントをリッスンし、イベントの伝播を停止します。
 
-つまり、この領域よりも下にあるUIエレメントおよび[pc.Mouse][pc-app-mouse-api]または[pc.Touch][pc-app-touch-api]イベントは、最初にこのエリアが操作された場合には発生しなくなります。
+つまり、この領域よりも下にあるUIエレメントおよび[pc.Mouse](https://api.playcanvas.com/engine/classes/Mouse.html)または[pc.Touch](https://api.playcanvas.com/engine/classes/Touch.html)イベントは、最初にこのエリアが操作された場合には発生しなくなります。
 
-入力領域はUIエレメントであるため、[UIシステムレイアウト][elements-manual]を使用して、必要に応じて位置、サイズ、およびアンカーを特定することができます。
+入力領域はUIエレメントであるため、[UIシステムレイアウト](/user-manual/user-interface/elements/)を使用して、必要に応じて位置、サイズ、およびアンカーを特定することができます。
 
 また、ジョイスティックに必要なすべてのロジックと属性を持つ'touchJoystick'があります。各属性には、詳細が記載されたツールチップがあります。
 
@@ -98,15 +98,15 @@ var joystick = window.touchJoypad.sticks['joystick0'];
 console.log('X: ' + joystick.x + ', Y: ' + joystick.y);
 ```
 
-[デモ][project-link]では、カメラは右ジョイスティックによって制御されており、[こちらのスクリプト][orbit-camera-joypad-input-script]で値を取得して使用しているのがわかります。
+[デモ](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls)では、カメラは右ジョイスティックによって制御されており、[こちらのスクリプト](https://playcanvas.com/editor/code/1007506?tabs=111433673)で値を取得して使用しているのがわかります。
 
 ## ボタンの追加
 
-ボタンは画面上の固定位置のUIエレメントです。'templates'フォルダにボタンのテンプレートがあり、[子として追加][add-template-docs]する必要があります。
+ボタンは画面上の固定位置のUIエレメントです。'templates'フォルダにボタンのテンプレートがあり、[子として追加](/user-manual/editor/templates/#adding-templates-in-your-scene)する必要があります。
 
 ![](/img/tutorials/touchscreen-joypad-controls/adding-button.gif)
 
-UIエレメントであるため、[UIシステムレイアウト][elements-manual]を使用して、必要に応じて位置、サイズ、およびアンカーを特定することができます。
+UIエレメントであるため、[UIシステムレイアウト](/user-manual/user-interface/elements/)を使用して、必要に応じて位置、サイズ、およびアンカーを特定することができます。
 
 ジョイスティックと同様に、識別子があるため、グローバルJavascriptオブジェクト`window.touchJoypad.buttons`からコードでアクセスできます。以下は、APIです。
 
@@ -129,13 +129,4 @@ var buttons = window.touchJoypad.buttons
 console.log('Was pressed: ' + buttons.wasPressed('button0'));
 ```
 
-[このデモ][project-link]では、キャラクターは左のジョイスティックとボタンで制御されています。[ここで][player-controller-script]スクリプトを確認すると、攻撃アニメーションを再生する方法がわかります。
-
-[project-link]: https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls
-[playcanvas-ui]: /user-manual/user-interface/
-[add-template-docs]: /user-manual/editor/templates/#adding-templates-in-your-scene
-[pc-app-mouse-api]: https://api.playcanvas.com/engine/classes/Mouse.html
-[pc-app-touch-api]: https://api.playcanvas.com/engine/classes/Touch.html
-[elements-manual]: /user-manual/user-interface/elements/
-[orbit-camera-joypad-input-script]: https://playcanvas.com/editor/code/1007506?tabs=111433673
-[player-controller-script]: https://playcanvas.com/editor/code/1007506?tabs=111432679
+[このデモ](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls)では、キャラクターは左のジョイスティックとボタンで制御されています。[ここで](https://playcanvas.com/editor/code/1007506?tabs=111432679)スクリプトを確認すると、攻撃アニメーションを再生する方法がわかります。

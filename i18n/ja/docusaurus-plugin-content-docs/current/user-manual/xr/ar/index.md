@@ -6,7 +6,7 @@ PlayCanvasは、WebXR APIを通じて、また人気のあるARフレームワ�
 
 ## プラットフォーム
 
-AR機能は、Android Chrome Browser、Meta Quest Browser、Magic Leap Helio、Samsung Internet、Microsoft Edgeなど、多くのブラウザで利用できます。さらに、[8th Wall][3]や[Zappar][4]のようなフレームワークは、Safariを含むほとんどのモバイルブラウザでARコンテンツを体験することを可能にします。
+AR機能は、Android Chrome Browser、Meta Quest Browser、Magic Leap Helio、Samsung Internet、Microsoft Edgeなど、多くのブラウザで利用できます。さらに、[8th Wall](/user-manual/xr/ar/8th-wall-integration/)や[Zappar](/user-manual/xr/ar/zappar-integration/)のようなフレームワークは、Safariを含むほとんどのモバイルブラウザでARコンテンツを体験することを可能にします。
 
 :::note
 
@@ -45,6 +45,3 @@ app.xr.end();
 ## スターターキット
 
 PlayCanvasは、あなたとあなたのAR体験をより迅速に立ち上げるのに役立ついくつかの「Starter Kit」プロジェクトを提供しています。新しいプロジェクトを作成する際に、ダイアログから最適なテンプレートを選択するだけです。
-
-[3]: /user-manual/xr/ar/8th-wall-integration/
-[4]: /user-manual/xr/ar/zappar-integration/

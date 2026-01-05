@@ -4,7 +4,7 @@ title: Layout Groups
 
 The Layout Group Component is used to automatically set the position and size of child Elements. A Layout Group Component can be used to align child elements into vertical or horizontal columns or a grid. A Layout Group Component applies the layout rules to all its direct children, you can override the Layout Group rules on a single child using a Layout Child Component.
 
-The Layout Group Component can be used to generate common layouts, for example, a [grid][10], a fixed width [vertical column][11], or [horizontal row][12].
+The Layout Group Component can be used to generate common layouts, for example, a [grid](/user-manual/user-interface/layout-groups#grid), a fixed width [vertical column](/user-manual/user-interface/layout-groups#vertical-leaderboard), or [horizontal row](/user-manual/user-interface/layout-groups#horizontal-buttons).
 
 ## Creating a Layout Group {#creating-a-layout-group}
 
@@ -16,7 +16,7 @@ Add a Layout Group by adding the LayoutGroup Component to an existing Element En
 
 ### Orientation {#orientation}
 
-Set the `Orientation` to Horizontal to organize your layout from left-to-right or right-to-left. Or Vertical to organize your layout top-to-bottom or bottom-to-top
+Set the `Orientation` to Horizontal to organize your layout from left-to-right or right-to-left. Or Vertical to organize your layout top-to-bottom or bottom-to-top.
 
 ### Reverse {#reverse}
 
@@ -93,7 +93,3 @@ This row of buttons is laid out using a Horizontal Layout Group with some Spacin
 This row of buttons is laid out using a Layout Group with the Wrap setting enabled to set up a grid. The Group Element the Layout Group is attached to is set to the correct width (button width + spacing) to force the wrap to generate a two column grid. The Horizontal layout means that the grid fills in rows not columns and the Alignment property is set to `[0.5, 1]` which means that any "loose" elements (a row with only one element) will be centered in the X axis.
 
 ![Setup](/img/user-manual/user-interface/layout-groups/grid-setup.jpg)
-
-[10]: /user-manual/user-interface/layout-groups#grid
-[11]: /user-manual/user-interface/layout-groups#vertical-leaderboard
-[12]: /user-manual/user-interface/layout-groups#horizontal-buttons

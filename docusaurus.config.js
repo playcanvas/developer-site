@@ -6,6 +6,7 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
+import pluginLlms from './utils/plugins/docusaurus-plugin-llms.mjs';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -64,6 +65,34 @@ const config = {
         { from: ['/user-manual/graphics/posteffects/hue_saturation/'], to: '/user-manual/graphics/posteffects/legacy/hue_saturation/' },
         { from: ['/user-manual/graphics/posteffects/sepia/'], to: '/user-manual/graphics/posteffects/legacy/sepia/' },
         { from: ['/user-manual/graphics/posteffects/vignette/'], to: '/user-manual/graphics/posteffects/legacy/vignette/' },
+        // Assets section reorganization - types moved to editor/assets/inspectors
+        { from: ['/user-manual/assets/types/'], to: '/user-manual/editor/assets/inspectors/' },
+        { from: ['/user-manual/assets/types/animation/'], to: '/user-manual/editor/assets/inspectors/animation/' },
+        { from: ['/user-manual/assets/types/audio/'], to: '/user-manual/editor/assets/inspectors/audio/' },
+        { from: ['/user-manual/assets/types/css/'], to: '/user-manual/editor/assets/inspectors/css/' },
+        { from: ['/user-manual/assets/types/cubemap/'], to: '/user-manual/editor/assets/inspectors/cubemap/' },
+        { from: ['/user-manual/assets/types/font/'], to: '/user-manual/editor/assets/inspectors/font/' },
+        { from: ['/user-manual/assets/types/gsplat/'], to: '/user-manual/editor/assets/inspectors/gsplat/' },
+        { from: ['/user-manual/assets/types/html/'], to: '/user-manual/editor/assets/inspectors/html/' },
+        { from: ['/user-manual/assets/types/json/'], to: '/user-manual/editor/assets/inspectors/json/' },
+        { from: ['/user-manual/assets/types/material/'], to: '/user-manual/editor/assets/inspectors/material/' },
+        { from: ['/user-manual/assets/types/render/'], to: '/user-manual/editor/assets/inspectors/render/' },
+        { from: ['/user-manual/assets/types/shader/'], to: '/user-manual/editor/assets/inspectors/shader/' },
+        { from: ['/user-manual/assets/types/sprite/'], to: '/user-manual/editor/assets/inspectors/sprite/' },
+        { from: ['/user-manual/assets/types/template/'], to: '/user-manual/editor/assets/inspectors/template/' },
+        { from: ['/user-manual/assets/types/text/'], to: '/user-manual/editor/assets/inspectors/text/' },
+        { from: ['/user-manual/assets/types/texture/'], to: '/user-manual/editor/assets/inspectors/texture/' },
+        { from: ['/user-manual/assets/types/texture-atlas/'], to: '/user-manual/editor/assets/inspectors/texture-atlas/' },
+        { from: ['/user-manual/assets/types/wasm/'], to: '/user-manual/editor/assets/inspectors/wasm/' },
+        // Other assets pages moved to editor
+        { from: ['/user-manual/assets/importing/'], to: '/user-manual/editor/assets/importing/' },
+        { from: ['/user-manual/assets/import-pipeline/'], to: '/user-manual/editor/assets/import-pipeline/' },
+        { from: ['/user-manual/assets/import-pipeline/import-hierarchy/'], to: '/user-manual/editor/assets/import-pipeline/import-hierarchy/' },
+        { from: ['/user-manual/assets/asset-store/'], to: '/user-manual/editor/assets/asset-store/' },
+        { from: ['/user-manual/assets/asset-store/sketchfab/'], to: '/user-manual/editor/assets/asset-store/sketchfab/' },
+        { from: ['/user-manual/assets/viewers/'], to: '/user-manual/editor/assets/viewers/' },
+        // Preloading renamed
+        { from: ['/user-manual/assets/preloading-and-streaming/'], to: '/user-manual/assets/preloading/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en
@@ -76,14 +105,21 @@ const config = {
           redirects.push(redirect);
         }
 
-        if (existingPath.includes('/user-manual/scenes/')) {
-          const redirect = existingPath.replace('/user-manual/scenes/', '/user-manual/packs/');
+        if (existingPath.includes('/user-manual/editor/scenes/')) {
+          // Redirect from old /user-manual/scenes/ path
+          const redirect = existingPath.replace('/user-manual/editor/scenes/', '/user-manual/scenes/');
           redirects.push(redirect);
+          // Redirect from legacy /user-manual/packs/ path
+          const packRedirect = existingPath.replace('/user-manual/editor/scenes/', '/user-manual/packs/');
+          redirects.push(packRedirect);
         }
 
-        if (existingPath.includes('/user-manual/editor/interface/assets')) {
-          const redirect = existingPath.replace('/user-manual/editor/interface/assets', '/user-manual/editor/assets');
-          redirects.push(redirect);
+        // Redirect old hyphenated component names to new names matching the Editor
+        if (existingPath.includes('/user-manual/editor/scenes/components/layoutgroup')) {
+          redirects.push(existingPath.replace('layoutgroup', 'layout-group'));
+        }
+        if (existingPath.includes('/user-manual/editor/scenes/components/layoutchild')) {
+          redirects.push(existingPath.replace('layoutchild', 'layout-child'));
         }
 
         if (existingPath.includes('/user-manual/editor/interface/hierarchy')) {
@@ -138,10 +174,17 @@ const config = {
           redirects.push(redirect);
         }
 
+        // Redirect old playcanvas-react paths to react
+        if (existingPath.includes('/user-manual/react/')) {
+          const redirect = existingPath.replace('/user-manual/react/', '/user-manual/playcanvas-react/');
+          redirects.push(redirect);
+        }
+
         return redirects;
       }
     }],
-    'docusaurus-plugin-sass'
+    'docusaurus-plugin-sass',
+    pluginLlms
   ],
 
   presets: [

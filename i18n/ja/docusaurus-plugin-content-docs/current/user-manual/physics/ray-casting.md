@@ -55,8 +55,6 @@ Raycast.prototype.doRaycast = function (screenX, screenY) {
 };
 ```
 
-レイキャスティングを使用してエンティティを選択するプロジェクトは[こちら][1]。
+レイキャスティングを使用してエンティティを選択するプロジェクトは[こちら](https://playcanvas.com/project/410547/overview/entity-picking-using-physics)。
 
 レイキャスティングには他の用途もあります。エンティティはレイキャストを発射することで環境を調査できます。たとえば、エンティティが地面に置かれていることを判断するために、エンティティを直接下方向に発射し、環境と交差するかどうかを確認できます。
-
-[1]: https://playcanvas.com/project/410547/overview/entity-picking-using-physics

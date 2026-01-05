@@ -21,7 +21,7 @@ Every free Organization includes:
 
 ## Organization Plans
 
-You can also purchase an [Organization Plan][1] which includes additional features:
+You can also purchase an [Organization Plan](https://playcanvas.com/plans) which includes additional features:
 
 - **Unlimited private projects** - Keep your work confidential during development
 - **Additional storage space** - More room for assets and project data
@@ -63,5 +63,3 @@ To start using Organizations:
 | Branding | PlayCanvas branding | Removable |
 | API Access | Limited | Full REST API |
 | Support | Standard | Priority (with plan) |
-
-[1]: https://playcanvas.com/plans

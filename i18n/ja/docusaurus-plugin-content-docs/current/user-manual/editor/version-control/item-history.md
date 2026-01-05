@@ -8,22 +8,20 @@ title: プロジェクト内の履歴管理
 
 サポートされているすべてのアイテムについて、下記で実行例をご覧ください。ノードの左上に表示される `[=]` は、チェックポイントが作成されていることを意味しますが、アイテムに変更は加えられていないことを示します。
 
-Graph View の詳細については、[こちら][graph-view]をご覧ください。
+Graph View の詳細については、[こちら](/user-manual/editor/version-control/graph-view/)をご覧ください。
 
 ### エンティティの履歴
 
-![Entity Item History](/img/user-manual/version-control/item-history/entity-item-history.gif)
+![Entity Item History](/img/user-manual/editor/version-control/item-history/entity-item-history.gif)
 
 ### アセットの履歴
 
-![Asset Item History](/img/user-manual/version-control/item-history/asset-item-history.gif)
+![Asset Item History](/img/user-manual/editor/version-control/item-history/asset-item-history.gif)
 
 ### プロジェクト設定の履歴
 
-![Project Settings Item History](/img/user-manual/version-control/item-history/project-item-history.gif)
+![Project Settings Item History](/img/user-manual/editor/version-control/item-history/project-item-history.gif)
 
 ### シーンの履歴
 
-![Scene Item History](/img/user-manual/version-control/item-history/scene-item-history.gif)
-
-[graph-view]: /user-manual/editor/version-control/graph-view/
+![Scene Item History](/img/user-manual/editor/version-control/item-history/scene-item-history.gif)

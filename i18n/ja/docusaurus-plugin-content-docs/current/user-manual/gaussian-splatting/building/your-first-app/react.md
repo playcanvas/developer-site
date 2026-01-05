@@ -2,7 +2,7 @@
 title: PlayCanvas React の使用
 ---
 
-[PlayCanvas React](/user-manual/playcanvas-react) を使用して、シンプルな Gaussian Splat アプリケーションを段階的に構築しましょう。インタラクティブな3Dおもちゃの猫のスプラットを回転させられるシーンを作成します。
+[PlayCanvas React](/user-manual/react) を使用して、シンプルな Gaussian Splat アプリケーションを段階的に構築しましょう。インタラクティブな3Dおもちゃの猫のスプラットを回転させられるシーンを作成します。
 
 ## 開始点
 

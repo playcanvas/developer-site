@@ -6,7 +6,7 @@ With the trend of mobile devices having full device screens, a notch or cut out 
 
 <img loading="lazy" src="/img/user-manual/user-interface/safe-area/iphone-notch.png" />
 
-(Image Original: Rafael Fernandez, Modified version:PlayCanvas, [CC BY-SA 4.0][cc-by-sa-40], via Wikimedia Commons)
+(Image Original: Rafael Fernandez, Modified version:PlayCanvas, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons)
 
 Developers will need to be mindful of any essential information that is needed for the user which could be hidden by the notch during development.
 
@@ -20,9 +20,9 @@ However, when opened on a mobile device such as the iPhone X, the 'Left' text is
 
 ## Safe Area
 
-To help developers, browsers on the these devices do support [environment variables][env-mdn] in CSS to return values for positioning elements within an area that is occupied by the notch or navigation bar. This is known as a 'safe area'.
+To help developers, browsers on these devices do support [environment variables](https://developer.mozilla.org/en-US/docs/Web/CSS/env()) in CSS to return values for positioning elements within an area that is occupied by the notch or navigation bar. This is known as a 'safe area'.
 
-We have a [project with a reusable script][safe-area-project] that takes those CSS values and applies them to an UI Group Element entity via resizing the margins.
+We have a [project with a reusable script](https://playcanvas.com/project/828118/overview/mobile-ui-safe-areas) that takes those CSS values and applies them to an UI Group Element entity via resizing the margins.
 
 <img loading="lazy" src="/img/user-manual/user-interface/safe-area/mobile-view-safe-area.png" width="500" />
 
@@ -43,7 +43,3 @@ To help with development, a debug setting can be enabled to simulate a safe area
 The debug config can be edited with live updates in the launch tab too.
 
 <img loading="lazy" src="/img/user-manual/user-interface/safe-area/debug-config-runtime.gif" width="500" />
-
-[env-mdn]: https://developer.mozilla.org/en-US/docs/Web/CSS/env()
-[safe-area-project]: https://playcanvas.com/project/828118/overview/mobile-ui-safe-areas
-[cc-by-sa-40]: https://creativecommons.org/licenses/by-sa/4.0

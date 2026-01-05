@@ -39,9 +39,9 @@ entity.addComponent("render", {
 this.app.root.addChild(entity);
 ```
 
-An Entity on it's own doesn't do much, so you will need to add Components in order to add functionality to your Entity. You can use the `addComponent` method of the Entity to create and add a new Component to the Entity.
+An Entity on its own doesn't do much, so you will need to add Components in order to add functionality to your Entity. You can use the `addComponent` method of the Entity to create and add a new Component to the Entity.
 
-Each Component type has different properties that can be passed in on the data object, see the [Component's documentation][1] for more detail about which properties are available. The `data` argument can be left out and default values will be used.
+Each Component type has different properties that can be passed in on the data object, see the [Component's documentation](/user-manual/editor/scenes/components/) for more detail about which properties are available. The `data` argument can be left out and default values will be used.
 
 ## Removing Components
 
@@ -263,7 +263,4 @@ EntityCreator.prototype.spawnCube = function () {
 
 This is a complete Entity script which you can see in action at the top of the tutorial. It continually creates and destroys new Entities with a Model Component attached.
 
-See [the full scene here][2].
-
-[1]: /user-manual/scenes/components/
-[2]: https://playcanvas.com/editor/scene/440341
+See [the full scene here](https://playcanvas.com/editor/scene/440341).

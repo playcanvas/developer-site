@@ -14,7 +14,7 @@ if (app.xr.supported) {
 
 ## XR セッションの開始
 
-XRセッションを開始するには、Camera Component のメソッド、またはアプリケーションの [XrManager][2] を使用できます。XRセッションを開始するには、CameraComponent を指定し、XRセッションのタイプ、参照空間、および追加の引数を持つオプションのオブジェクトを提供する必要があります：
+XRセッションを開始するには、Camera Component のメソッド、またはアプリケーションの [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html) を使用できます。XRセッションを開始するには、CameraComponent を指定し、XRセッションのタイプ、参照空間、および追加の引数を持つオプションのオブジェクトを提供する必要があります：
 
 ```javascript
 app.xr.start(entity.camera, pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
@@ -56,7 +56,7 @@ XRの終了はさまざまな方法でトリガーできます。コードから
 app.xr.end();
 ```
 
-また、ユーザーはブラウザの戻るボタンのような外部プロセスを介してXRを終了する場合があります。[XrManager][2] はセッションの `end` に関連するイベントを発火します：
+また、ユーザーはブラウザの戻るボタンのような外部プロセスを介してXRを終了する場合があります。[XrManager](https://api.playcanvas.com/engine/classes/XrManager.html) はセッションの `end` に関連するイベントを発火します：
 
 ```javascript
 app.xr.on('end', () => {
@@ -103,5 +103,3 @@ XRでプレゼンテーションを行う場合、カメラの位置と向きは
 ## なぜ XR モードを自動的に有効にできないのですか？
 
 WebXR への進入は、ブラウザによって*ユーザーアクション*によってトリガーされる必要があります。つまり、キー入力、マウスクリック、またはタッチイベントに応答する必要があります。そのため、ページを読み込むとすぐにXRに入る方法はありません。
-
-[2]: https://api.playcanvas.com/engine/classes/XrManager.html

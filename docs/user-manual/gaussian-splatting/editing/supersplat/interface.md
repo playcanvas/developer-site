@@ -6,7 +6,7 @@ The SuperSplat Editor's interface appears as follows:
 
 ![supersplat-interface](/img/user-manual/gaussian-splatting/editing/supersplat/interface-overview.png)
 
-The key elements of the interface are labelled:
+The key elements of the interface are labeled:
 
 ## Menu Bar
 

@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
     <iframe src="https://playcanv.as/p/cHnXIXoN/" title="Loading JSON Data" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-[このプロジェクト][1] で、JSON データを二つの方法で読み込む方法を紹介します。一つ目はプロジェクト内のアセットから直接、二つ目はリモートサーバーから HTTP で読み込みます。
+[このプロジェクト](https://playcanvas.com/project/405827) で、JSON データを二つの方法で読み込む方法を紹介します。一つ目はプロジェクト内のアセットから直接、二つ目はリモートサーバーから HTTP で読み込みます。
 
 ## アセットから JSON を読み込む
 
@@ -156,6 +156,4 @@ Game.prototype.loadJsonFromRemote = function (url, callback) {
 };
 ```
 
-[このプロジェクト][1] からお試しください。
-
-[1]: https://playcanvas.com/project/405827
+[このプロジェクト](https://playcanvas.com/project/405827) からお試しください。

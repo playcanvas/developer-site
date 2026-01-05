@@ -8,8 +8,8 @@ title: Depthレイヤー
 
 さらに、これらのバッファをキャプチャするには、スクリプトからCameraComponentでキャプチャを有効にする必要があります:
 
-- [```requestSceneColorMap```][0] Colorマップをリクエストする
-- [```requestSceneDepthMap```][1] Depthマップをリクエストする
+- [```requestSceneColorMap```](https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenecolormap) Colorマップをリクエストする
+- [```requestSceneDepthMap```](https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenedepthmap) Depthマップをリクエストする
 
 ## バッファのアクセス
 
@@ -24,9 +24,3 @@ title: Depthレイヤー
 
 - GrabPass はColorバッファの使用を示します:[`GrabPass`] [2]
 - GroundFog はDepthバッファの使用を示します:[`GroundFog`] [3]
-
-[0]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenecolormap
-[1]: https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenedepthmap
-[2]: https://playcanvas.github.io/#/shaders/grab-pass
-[3]: https://playcanvas.github.io/#/shaders/ground-fog
-[4]: /user-manual/graphics/layers/#choosing-the-layer-order

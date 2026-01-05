@@ -2,7 +2,7 @@
 title: Plane Detection
 ---
 
-Very similar to [Mesh Detection][1], Plane Detection provides access to planes that estimate real-world surfaces.
+Very similar to [Mesh Detection](/user-manual/xr/ar/mesh-detection/), Plane Detection provides access to planes that estimate real-world surfaces.
 
 Each plane can represent a surface with optionally available labels, such as: `wall`, `floor`, `table`, etc.
 
@@ -128,7 +128,7 @@ app.xr.planeDetection.on('add', (xrPlane) => {
 
 An XrPlane can represent various real-world objects and a label can help to identify what it represents using its property `XrPlane.label`.
 
-These labels can be any of: `floor`, `wall`, `door`, `window`, `table`, `screen`, `global mesh`, `other` and more. Here is a [list of semantic labels][2], although this list is not definitive and the platform can report anything it feels fit.
+These labels can be any of: `floor`, `wall`, `door`, `window`, `table`, `screen`, `global mesh`, `other` and more. Here is a [list of semantic labels](https://github.com/immersive-web/semantic-labels/blob/master/labels.json), although this list is not definitive and the platform can report anything it feels fit.
 
 ## Changes
 
@@ -139,6 +139,3 @@ xrPlane.on('change', () => {
     // points and/or label have been changed
 });
 ```
-
-[1]: /user-manual/xr/ar/mesh-detection/
-[2]: https://github.com/immersive-web/semantic-labels/blob/master/labels.json

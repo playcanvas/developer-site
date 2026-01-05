@@ -16,7 +16,7 @@ Phase 3 of this tutorial is still incomplete
 
 In this tutorial, we will give an introduction to PlayCanvas and take you through making a complete game, end to end with PlayCanvas.
 
-This was recorded for [JS GameDev Summit][js-gamedev-summit] and the video is hosted on [GitNation][git-nation].
+This was recorded for [JS GameDev Summit](https://jsgamedev.com/) and the video is hosted on [GitNation](https://portal.gitnation.org/contents/playcanvas-end-to-end-the-quick-version).
 
 Play below! Try to get as many food items as you can before the timer runs out! Use WASD for movement.
 
@@ -50,16 +50,8 @@ Play below! Try to get as many food items as you can before the timer runs out! 
 
 ## リンクとリソース
 
-* [プレゼンテーションスライドPDF][presentation-pdf]
-* [Food Run - 完全なPlayCanvasプロジェクト][food-run-complete]
-* [Food Run - スターターフェーズ1 PlayCanvasプロジェクト][food-run-starter]
-* [Food Run - スターターフェーズ2 PlayCanvasプロジェクト][food-run-phase-2]
-* [Food Run - スターターフェーズ3 PlayCanvasプロジェクト][food-run-phase-3]
-
-[js-gamedev-summit]: https://jsgamedev.com/
-[git-nation]: https://portal.gitnation.org/contents/playcanvas-end-to-end-the-quick-version
-[food-run-starter]: https://playcanvas.com/project/910590/overview/food-run-starter-kit
-[food-run-phase-2]: https://playcanvas.com/project/910606/overview/food-run--phase-2
-[food-run-phase-3]: https://playcanvas.com/project/910630/overview/food-run--phase-3
-[food-run-complete]: https://playcanvas.com/project/898163/overview/food-run--full-project
-[presentation-pdf]: pathname:///downloads/playcanvas-crash-course-make-a-game.pdf
+* [プレゼンテーションスライドPDF](pathname:///downloads/playcanvas-crash-course-make-a-game.pdf)
+* [Food Run - 完全なPlayCanvasプロジェクト](https://playcanvas.com/project/898163/overview/food-run--full-project)
+* [Food Run - スターターフェーズ1 PlayCanvasプロジェクト](https://playcanvas.com/project/910590/overview/food-run-starter-kit)
+* [Food Run - スターターフェーズ2 PlayCanvasプロジェクト](https://playcanvas.com/project/910606/overview/food-run--phase-2)
+* [Food Run - スターターフェーズ3 PlayCanvasプロジェクト](https://playcanvas.com/project/910630/overview/food-run--phase-3)

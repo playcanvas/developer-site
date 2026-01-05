@@ -22,7 +22,7 @@ PlayCanvasの**ブランチ**は、他のシステムのブランチと同じよ
 
 マージは他のVCSと同様に機能します。ただし、PlayCanvasでは、マージが *チェックポイント間で* 行われるため、チェックポイントでコミットしていない変更はマージに含まれないという点が重要です。PlayCanvasはマージの宛先ブランチに自動的にチェックポイントを作成することで、マージ時に誤って変更が失われるのを防ぎます。
 
-詳細については、[チェックポイント][1]、[ブランチ][2]、[マージ][3]の個別のページをご覧ください。
+詳細については、[チェックポイント](/user-manual/editor/version-control/checkpoints)、[ブランチ](/user-manual/editor/version-control/branches)、[マージ](/user-manual/editor/version-control/merging)の個別のページをご覧ください。
 
 ## バージョン管理がストレージに及ぼす影響
 
@@ -34,14 +34,7 @@ PlayCanvasの**ブランチ**は、他のシステムのブランチと同じよ
 
 残念ながら、以下の場合を除いて、ブランチまたはチェックポイントを削除することはできません。
 
-- [Hard reset to a checkpoint][4]
-- [Deleting a branch][5]
+- [Hard reset to a checkpoint](/user-manual/editor/version-control/checkpoints/#hard-reset-to-a-checkpoint)
+- [Deleting a branch](/user-manual/editor/version-control/branches/#deleting-a-branch)
 
-ストレージスペースが必要な場合は、[support@playcanvas.jp][6]までメールでお問い合わせください。ほとんどの場合、追加料金なしでストレージ割り当てを増やすことが可能です。
-
-[1]: /user-manual/editor/version-control/checkpoints
-[2]: /user-manual/editor/version-control/branches
-[3]: /user-manual/editor/version-control/merging
-[4]: /user-manual/editor/version-control/checkpoints/#hard-reset-to-a-checkpoint
-[5]: /user-manual/editor/version-control/branches/#deleting-a-branch
-[6]: mailto:support@playcanvas.com
+ストレージスペースが必要な場合は、[support@playcanvas.jp](mailto:support@playcanvas.com)までメールでお問い合わせください。ほとんどの場合、追加料金なしでストレージ割り当てを増やすことが可能です。

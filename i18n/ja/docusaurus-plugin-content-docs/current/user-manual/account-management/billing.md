@@ -81,7 +81,7 @@ Personalプランのサブスクリプションは、月額自動更新サブス
 
 過去の請求書は`playcanvas.com`からダウンロードできます。アカウントページにアクセスし、`Invoices`セクションまでスクロールしてください。次のような表示が見られるはずです。
 
-![Billing History](/img/user-manual/billing/invoices.png)
+![Billing History](/img/user-manual/account-management/billing/invoices.png)
 
 ### 請求書の詳細を更新するにはどうすればよいですか？
 

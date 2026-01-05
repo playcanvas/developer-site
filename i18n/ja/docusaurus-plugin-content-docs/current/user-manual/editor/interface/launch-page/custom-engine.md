@@ -6,7 +6,7 @@ title: カスタムエンジンの使用
 
 * 新しい機能やバグ修正をテストするために、最新の開発ビルドのエンジンでプロジェクトをテストし、次のエンジンリリース前に潜在的なリグレッションを検出するため。
 * 現在の安定ビルドに見つかったリグレッションを緩和するために、一時的に以前の安定エンジンバージョンに戻るため。
-* [GitHub][1]上のエンジンリポジトリの自分自身のフォークで開発およびデバッグするため。
+* [GitHub](https://github.com/playcanvas/engine)上のエンジンリポジトリの自分自身のフォークで開発およびデバッグするため。
 
 :::important[正しいエンジンのロード: モジュール vs UMD]
 
@@ -47,7 +47,7 @@ launchページのURLを編集して、次の文字列を末尾に追加しま�
 
 ### 以前の安定エンジンで起動
 
-PlayCanvasエンジンの前の安定したビルドはcode.playcanvas.comにアーカイブされています。過去のすべてのリリースは[GitHub][2]で見つけることができます。エンジンは次の規則に従って命名されています。
+PlayCanvasエンジンの前の安定したビルドはcode.playcanvas.comにアーカイブされています。過去のすべてのリリースは[GitHub](https://github.com/playcanvas/engine/releases)で見つけることができます。エンジンは次の規則に従って命名されています。
 
 ```none
     playcanvas-<major>.<minor>.<patch>.js
@@ -92,6 +92,3 @@ GitHubでEngineリポジトリをフォークした場合、自身でEngineを�
 ```none
     https://launch.playcanvas.com/<scene_id>?use_local_engine=http://localhost:51000/playcanvas.js
 ```
-
-[1]: https://github.com/playcanvas/engine
-[2]: https://github.com/playcanvas/engine/releases

@@ -36,7 +36,7 @@ PlayCanvasに公開するには、2つの単純な手順が必要です。
   * *Concatenate Scripts*: PlayCanvasスクリプトを1つのJavaScriptファイルにまとめるには、これをチェックしてください。
   * *Minify Scripts*: PlayCanvasスクリプトを最小化してファイルサイズを縮小するには、これをチェックしてください。
   * *Generate Source Map*: ビルドにソースマップを含めます。これはデバッグに役立つことがありますが、通常はアプリの本番バージョンを公開する際に無効になります。
-  * *Optimize Scene Format*: シーンJSONを最大50％まで圧縮します。詳細は[こちら][6]で確認できます。
+  * *Optimize Scene Format*: シーンJSONを最大50％まで圧縮します。詳細は[こちら](/user-manual/optimization/optimizing-scene-format)で確認できます。
 
 ![Select scenes](/img/user-manual/editor/publishing/dialog-publish-build-scenes.png)
 
@@ -66,5 +66,3 @@ PlayCanvasに公開するには、2つの単純な手順が必要です。
 :::
 
 ビルドを公開する際に初めて、自動的に主ビルドになります。その後のビルドについては、いつ主ビルドに割り当てるかを選択できます。これにより、ビルドを公開してテストし、最終的にオーディエンスに公開する前に確認できます。
-
-[6]: /user-manual/optimization/optimizing-scene-format

@@ -6,7 +6,7 @@ Texture data is stored in a device's video memory (or VRAM). It is important to 
 
 The Editor has the ability to apply lossy compression schemes to your textures to dramatically reduce the amount of VRAM used using Basis.
 
-[Basis][1] is a 'super-compressed' texture format. It's a platform independent lossy block compression format that can be transcoded to the natively supported hardware compression format at runtime. Supported transcode formats are ASTC, DXT, ETC2, ETC, PVR and ATC (selected in that order where available).
+[Basis](https://github.com/BinomialLLC/basis_universal) is a 'super-compressed' texture format. It's a platform independent lossy block compression format that can be transcoded to the natively supported hardware compression format at runtime. Supported transcode formats are ASTC, DXT, ETC2, ETC, PVR and ATC (selected in that order where available).
 
 Consider this texture asset:
 
@@ -24,7 +24,7 @@ Below is a side by side comparison of the brick texture on Mac with Chrome:
 
 <a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.jpg" alt="Brick texture compression comparison" /></a>
 
-Here is another example of the PlayCanvas cube [with Basis (ETC mode)][2] and [without][3] on Mac with Chrome:
+Here is another example of the PlayCanvas cube [with Basis (ETC mode)](https://playcanv.as/p/j8rsh3eO/) and [without](https://playcanv.as/p/nAW3WkW8/) on Mac with Chrome:
 
 <a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.jpg" alt="PlayCanvas cube compression comparison" /></a>
 
@@ -41,7 +41,7 @@ Once the texture has been imported into the Editor, select it and scroll down in
 
 <img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/enable-basis-texture-compression.gif" alt="Enabling Basis Texture Compression" width="400" />
 
-The Basis WASM module will add 253KB of extra gzipped data to the preload download size but that should be offset by the texture size savings compared to using the legacy texture compression format files ([see below][4]).
+The Basis WASM module will add 253KB of extra gzipped data to the preload download size but that should be offset by the texture size savings compared to using the legacy texture compression format files ([see below](#legacy-texture-compression)).
 
 To remove Basis compression from a texture:
 
@@ -79,7 +79,7 @@ To use the Legacy Texture Compression options, select the texture and scroll dow
 
 <img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/enable-legacy-texture-compression.gif" alt="Enabling Legacy Texture Compression" width="400" />
 
-To remove a or several formats:
+To remove one or several formats:
 
 1. Untick all the formats you wish to remove.
 2. Click on Compress Legacy.
@@ -94,8 +94,3 @@ If you have a project that is already using the Legacy Texture Compression forma
 2. Enable and use Basis.
 
 <img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/migrate-legacy-to-basis.gif" alt="Migrate from Legacy to Basis" width="400" />
-
-[1]: https://github.com/BinomialLLC/basis_universal
-[2]: https://playcanv.as/p/j8rsh3eO/
-[3]: https://playcanv.as/p/nAW3WkW8/
-[4]: #legacy-texture-compression

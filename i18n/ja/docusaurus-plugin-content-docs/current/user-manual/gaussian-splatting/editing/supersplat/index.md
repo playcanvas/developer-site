@@ -6,13 +6,25 @@ title: SuperSplat
 
 ![SuperSplat Interface](/img/user-manual/gaussian-splatting/supersplat-interface.png)
 
-## はじめに
+## 動画チュートリアル
+
+### SuperSplat入門
 
 SuperSplatの基本を学ぶには、この動画による入門が最適です。
 
 <div className="iframe-container">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/MwzaEM2I55I" title="SuperSplat Basics" allowfullscreen></iframe>
 </div>
+
+### 詳細チュートリアル
+
+SuperSplatのより包括的なガイドについては、この詳細なチュートリアルをご覧ください。
+
+<div className="iframe-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/J37rTieKgJ8" title="SuperSplat In-Depth Tutorial" allowfullscreen></iframe>
+</div>
+
+## はじめに
 
 ### SuperSplatへのアクセス
 

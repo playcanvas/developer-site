@@ -9,12 +9,7 @@ The information shown depends on the type of asset selected.
 
 There are inspectors for the following:
 
-- [Graphs][1]
-- [Nodes][2]
-- [Materials][3]
-- [Textures][4]
-
-[1]: /shader-editor/window-layout/inspector-pane/graph-inspector
-[2]: /shader-editor/window-layout/inspector-pane/node-inspector
-[3]: /shader-editor/window-layout/inspector-pane/material-inspector
-[4]: /shader-editor/window-layout/inspector-pane/texture-inspector
+- [Graphs](/shader-editor/window-layout/inspector-pane/graph-inspector)
+- [Nodes](/shader-editor/window-layout/inspector-pane/node-inspector)
+- [Materials](/shader-editor/window-layout/inspector-pane/material-inspector)
+- [Textures](/shader-editor/window-layout/inspector-pane/texture-inspector)
