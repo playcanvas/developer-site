@@ -213,5 +213,3 @@ And Each created shader will be logged in the browser console, where you can ins
 ![sRGB](/img/user-manual/graphics/shaders/shader-log.png)
 
 For further information, refer to the [ShaderMaterial API documentation](https://api.playcanvas.com/engine/classes/ShaderMaterial.html).
-
-[1]: /user-manual/graphics/physical-rendering/physical-materials/
