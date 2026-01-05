@@ -300,6 +300,95 @@ const workgroupSize = 64;
 compute.setupDispatch(numElements / workgroupSize);
 ```
 
+## Indirect Dispatch
+
+Indirect dispatch allows one compute shader to generate dispatch parameters for another compute shader, enabling fully GPU-driven workloads without CPU readback. This is useful for:
+
+- Variable workload sizes determined on the GPU
+- Tile-based processing where tile counts are computed dynamically
+- GPU culling followed by processing only visible elements
+
+### Reserving Dispatch Slots
+
+The device provides a built-in buffer for indirect dispatch parameters. Reserve slots each frame:
+
+```javascript
+const slot = device.getIndirectDispatchSlot();
+```
+
+Each slot holds three 32-bit unsigned integers representing the x, y, and z workgroup counts. The maximum number of slots is controlled by `device.maxIndirectDispatchCount` (default: 256).
+
+### Writing Dispatch Parameters
+
+Pass the indirect buffer to your compute shader so it can write dispatch parameters. In your bind group format:
+
+```javascript
+new pc.BindStorageBufferFormat('indirectBuffer', pc.SHADERSTAGE_COMPUTE)
+```
+
+In WGSL, define a struct matching the indirect dispatch layout and write the parameters:
+
+```wgsl
+struct DispatchIndirectArgs {
+    x: u32,
+    y: u32,
+    z: u32
+};
+
+@group(0) @binding(0) var<storage, read_write> indirectBuffer: array<DispatchIndirectArgs>;
+@group(0) @binding(1) var<uniform> uniforms: Uniforms; // Contains slot index
+
+@compute @workgroup_size(1)
+fn main() {
+    // Compute workload size dynamically
+    let workloadSize = calculateWorkload();
+    
+    // Write dispatch parameters to the slot
+    indirectBuffer[uniforms.slot].x = workloadSize;
+    indirectBuffer[uniforms.slot].y = 1u;
+    indirectBuffer[uniforms.slot].z = 1u;
+}
+```
+
+### Using Indirect Dispatch
+
+Configure the second compute shader to read dispatch parameters from the buffer using `setupIndirectDispatch`:
+
+```javascript
+// Reserve a slot for this frame
+const slot = device.getIndirectDispatchSlot();
+
+// First pass: compute shader writes dispatch parameters
+prepareCompute.setParameter('indirectBuffer', device.indirectDispatchBuffer);
+prepareCompute.setParameter('slot', slot);
+prepareCompute.setupDispatch(1, 1, 1);
+device.computeDispatch([prepareCompute]);
+
+// Second pass: dispatch using parameters from the buffer
+processCompute.setupIndirectDispatch(slot);
+device.computeDispatch([processCompute]);
+```
+
+:::note
+
+When using the device's built-in indirect buffer, `setupIndirectDispatch` must be called each frame because slots are only valid for the current frame.
+
+:::
+
+### Custom Indirect Buffers
+
+For advanced use cases like complex scheduling outside of rendering frames, you can provide your own storage buffer:
+
+```javascript
+// Create a custom buffer for indirect dispatch
+const customBuffer = new pc.StorageBuffer(device, 3 * 4, pc.BUFFERUSAGE_INDIRECT);
+
+// Use custom buffer for indirect dispatch
+compute.setupIndirectDispatch(0, customBuffer);
+```
+
+When using a custom buffer, you manage its lifetime and contents—no frame validation is performed.
+
 ## Reading Data Back to CPU
 
 To read results from a storage buffer back to the CPU:
@@ -371,3 +460,4 @@ Explore these live examples demonstrating various compute shader use cases:
 - [Vertex Update](https://playcanvas.github.io/#/compute/vertex-update) - Modify mesh vertex buffers in real-time
 - [Edge Detect](https://playcanvas.github.io/#/compute/edge-detect) - Image processing with edge detection
 - [Indirect Draw](https://playcanvas.github.io/#/compute/indirect-draw) - GPU-driven rendering with indirect draw calls
+- [Indirect Dispatch](https://playcanvas.github.io/#/compute/indirect-dispatch) - GPU-driven compute dispatch with depth-based tile classification
