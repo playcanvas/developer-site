@@ -7,7 +7,7 @@
 3. Read the writing standards below.
 4. Keep PRs simple and focused - one PR per feature with a screenshot of the changes on the site. [Example PR](https://github.com/playcanvas/developer-site/pull/624).
 5. Make a Pull Request.
-7. Happy Days! 🎉
+6. Happy Days! 🎉
 
 ### Tips
 
