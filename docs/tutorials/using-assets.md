@@ -16,9 +16,9 @@ Click to focus, hold and release SPACEBAR to switch between two A and B models. 
 
 For simple games and products you will set up all your assets in the Editor, they will be preloaded before your application starts, and your app will just work.
 
-For more advanced products you may wish to access your assets in code, change references, modify properties and also stream data in so that your application can load more quickly. Only loading the assets as they are needed. To do this you'll use the [`AssetRegistry`][1].
+For more advanced products you may wish to access your assets in code, change references, modify properties and also stream data in so that your application can load more quickly. Only loading the assets as they are needed. To do this you'll use the [`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html).
 
-In this tutorial, we'll build a small scene which lets you swap the model on a render component by pressing a key. We'll also dynamically load a third model that is not preloaded. You can see the completed [project here][3].
+In this tutorial, we'll build a small scene which lets you swap the model on a render component by pressing a key. We'll also dynamically load a third model that is not preloaded. You can see the completed [project here](https://playcanvas.com/project/406036).
 
 ## Setup
 
@@ -29,11 +29,11 @@ The project is set up as follows:
 * A render Entity is added to the scene and the model **A** is assigned to the render component.
 * A script component is added to the render Entity and a new script is created called `update_asset.js`.
 
-Download the [A model][5], [B model][6] and [C model][7] and upload them to your project. Ensure that the files are named A.dae, B.dae and C.dae as this will influence the asset names.
+Download the [A model](pathname:///downloads/tutorials/A.dae), [B model](pathname:///downloads/tutorials/B.dae) and [C model](pathname:///downloads/tutorials/C.dae) and upload them to your project. Ensure that the files are named A.dae, B.dae and C.dae as this will influence the asset names.
 
 ## The AssetRegistry
 
-The [`pc.AssetRegistry`][1] is available in all scripts as `this.app.assets`. The registry is populated with the details of all the runtime assets added to your project whether they are loaded or not. Use the Asset Registry to find the assets you need in your application.
+The [`pc.AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html) is available in all scripts as `this.app.assets`. The registry is populated with the details of all the runtime assets added to your project whether they are loaded or not. Use the Asset Registry to find the assets you need in your application.
 
 In this case we've declared three script attributes `a`, `b` and `c` which are assigned to assets in the Editor. Then they are automatically available in our script.
 
@@ -57,7 +57,7 @@ In this case we've declared three script attributes `a`, `b` and `c` which are a
     }
 ```
 
-The **A** and **B** assets are marked as **preload** in this project. This means that during the loading screen, these assets are downloaded. They will be ready to use as soon as your application starts. When an asset is loaded, the loaded resource is available as `asset.resource` and we can assign the asset to the [render component asset property][8]. If `asset.loaded` is `false`, then the asset isn't loaded.
+The **A** and **B** assets are marked as **preload** in this project. This means that during the loading screen, these assets are downloaded. They will be ready to use as soon as your application starts. When an asset is loaded, the loaded resource is available as `asset.resource` and we can assign the asset to the [render component asset property](https://api.playcanvas.com/engine/classes/RenderComponent.html#asset). If `asset.loaded` is `false`, then the asset isn't loaded.
 
 <img loading="lazy" src="/img/tutorials/using_assets/using-assets-a-preload.png" width="360" />
 
@@ -286,10 +286,3 @@ this.app.assets.load(asset);
 ```
 
 The `asset.ready()` method will call it's callback as soon as the asset is loaded, if the asset is already loaded, it will call it straight away. `app.assets.load()` does nothing if the asset is already loaded.
-
-[1]: https://api.playcanvas.com/engine/classes/AssetRegistry.html
-[3]: https://playcanvas.com/project/406036
-[5]: pathname:///downloads/tutorials/A.dae
-[6]: pathname:///downloads/tutorials/B.dae
-[7]: pathname:///downloads/tutorials/C.dae
-[8]: https://api.playcanvas.com/engine/classes/RenderComponent.html#asset

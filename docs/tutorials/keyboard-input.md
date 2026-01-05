@@ -14,7 +14,7 @@ Keyboard handling in the PlayCanvas engine is provided by the `pc.Keyboard` obje
 for common keyboard operations like checking if a key is pressed or held down. It also takes away the various cross-browser problems with
 handling keycodes and charcodes.
 
-Take a look at the keyboard input Scene in the [tutorials project][1]. Here is the code for the tutorial:
+Take a look at the keyboard input Scene in the [tutorials project](https://playcanvas.com/project/405804/overview/tutorial-basic-keyboard-input). Here is the code for the tutorial:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -221,7 +221,7 @@ The second method of handling key presses is to listen for events. Two keyboard 
 * `pc.EVENT_KEYDOWN`
 * `pc.EVENT_KEYUP`
 
-[DOM][3] keyboard events are implemented differently on different browsers so the PlayCanvas Engine provides events on the `pc.Keyboard` object so you can use the same code everywhere. When the keyboard events are fired the event handler is passed a `pc.KeyboardEvent` object which contains the key code of the key that was pressed on released.
+[DOM](/user-manual/glossary#dom) keyboard events are implemented differently on different browsers so the PlayCanvas Engine provides events on the `pc.Keyboard` object so you can use the same code everywhere. When the keyboard events are fired the event handler is passed a `pc.KeyboardEvent` object which contains the key code of the key that was pressed on released.
 
 Notice we are also passing a third argument to on(), which is `this` or the Script Instance itself. The third argument to on() is used as `this` in the event callbacks, so we need to pass it in here, otherwise it won't be set to the correct object.
 
@@ -233,8 +233,4 @@ Note, you should always use the enumeration `pc.KEY_*` rather than using numeric
 
 ## Try it out
 
-Try it out in full screen [here][2] or at the top of the page. Compare tapping and holding the arrow keys, and tapping and holding the spacebar.
-
-[1]: https://playcanvas.com/project/405804/overview/tutorial-basic-keyboard-input
-[2]: https://playcanv.as/p/rFZGQWCi/
-[3]: /user-manual/glossary#dom
+Try it out in full screen [here](https://playcanv.as/p/rFZGQWCi/) or at the top of the page. Compare tapping and holding the arrow keys, and tapping and holding the spacebar.

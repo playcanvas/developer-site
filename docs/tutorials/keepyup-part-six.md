@@ -8,13 +8,13 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 6" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*You can find the [full project here][11]. If you haven't see [Part 1][1], [Part 2][2], [Part 3][3], [Part 4][4] and [Part 5][5] read them first.*
+*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't see [Part 1](/tutorials/keepyup-part-one/), [Part 2](/tutorials/keepyup-part-two/), [Part 3](/tutorials/keepyup-part-three/), [Part 4](/tutorials/keepyup-part-four/) and [Part 5](/tutorials/keepyup-part-five/) read them first.*
 
 ## User Interface
 
 The user interface of a game is the first thing you see and often it's the last thing people think about when making a game. But a good user interface will not only give your game a great style. It can actively affect the number of people who can play your game.
 
-User Interfaces are built in PlayCanvas using the [Screen Component][7] and the [Element Component][8]. There are more details in the [user manual][6]
+User Interfaces are built in PlayCanvas using the [Screen Component](/user-manual/editor/scenes/components/screen/) and the [Element Component](/user-manual/editor/scenes/components/element/). There are more details in the [user manual](/user-manual/user-interface/)
 
 ### User Interface Entities
 
@@ -137,14 +137,4 @@ We repeat similar behavior in the other two UI scripts where we listen for game 
 
 ## Game Complete
 
-Congratulations on reaching the end of the series! We hope you've learned a lot about how you can structure and build a game using PlayCanvas. If you have any feedback on the tutorial, please get in touch on our [forum][8].
-
-[1]: /tutorials/keepyup-part-one/
-[2]: /tutorials/keepyup-part-two/
-[3]: /tutorials/keepyup-part-three/
-[4]: /tutorials/keepyup-part-four/
-[5]: /tutorials/keepyup-part-five/
-[6]: /user-manual/user-interface/
-[7]: /user-manual/editor/scenes/components/screen/
-[8]: /user-manual/editor/scenes/components/element/
-[11]: https://playcanvas.com/project/406050
+Congratulations on reaching the end of the series! We hope you've learned a lot about how you can structure and build a game using PlayCanvas. If you have any feedback on the tutorial, please get in touch on our [forum](/user-manual/editor/scenes/components/element/).

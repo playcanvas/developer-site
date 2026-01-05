@@ -12,7 +12,7 @@ thumb: /img/tutorials/crash-course/crash-course-thumbnail.jpg
 
 In this tutorial, we will give an introduction to PlayCanvas and take you through making a complete game, end to end with PlayCanvas.
 
-This was recorded for [JS GameDev Summit][js-gamedev-summit] and the video is hosted on [GitNation][git-nation].
+This was recorded for [JS GameDev Summit](https://jsgamedev.com/) and the video is hosted on [GitNation](https://portal.gitnation.org/contents/playcanvas-end-to-end-the-quick-version).
 
 Play below! Try to get as many food items as you can before the timer runs out! Use WASD for movement.
 
@@ -52,16 +52,8 @@ Phase 3 of this tutorial is still incomplete
 
 ## Links and resources
 
-* [Presentation slides PDF][presentation-pdf]
-* [Food Run - Complete PlayCanvas project][food-run-complete]
-* [Food Run - Starter Phase 1 PlayCanvas project][food-run-starter]
-* [Food Run - Starter Phase 2 PlayCanvas project][food-run-phase-2]
-* [Food Run - Starter Phase 3 PlayCanvas project][food-run-phase-3]
-
-[js-gamedev-summit]: https://jsgamedev.com/
-[git-nation]: https://portal.gitnation.org/contents/playcanvas-end-to-end-the-quick-version
-[food-run-starter]: https://playcanvas.com/project/910590/overview/food-run-starter-kit
-[food-run-phase-2]: https://playcanvas.com/project/910606/overview/food-run--phase-2
-[food-run-phase-3]: https://playcanvas.com/project/910630/overview/food-run--phase-3
-[food-run-complete]: https://playcanvas.com/project/898163/overview/food-run--full-project
-[presentation-pdf]: pathname:///downloads/playcanvas-crash-course-make-a-game.pdf
+* [Presentation slides PDF](pathname:///downloads/playcanvas-crash-course-make-a-game.pdf)
+* [Food Run - Complete PlayCanvas project](https://playcanvas.com/project/898163/overview/food-run--full-project)
+* [Food Run - Starter Phase 1 PlayCanvas project](https://playcanvas.com/project/910590/overview/food-run-starter-kit)
+* [Food Run - Starter Phase 2 PlayCanvas project](https://playcanvas.com/project/910606/overview/food-run--phase-2)
+* [Food Run - Starter Phase 3 PlayCanvas project](https://playcanvas.com/project/910630/overview/food-run--phase-3)

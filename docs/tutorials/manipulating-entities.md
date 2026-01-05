@@ -64,7 +64,7 @@ entity.translateLocal(0, 0, 1);
 
 To set an Entity's orientation you can either set an absolute rotation, or apply an incremental rotation.
 
-Setting absolute rotations can be done using either [Euler angles][1] or [quaternions][2]. The Wikipedia explanations of these two mathematical representations of rotation are a little hard to follow but the basics are easy to understand. Here are the important facts:
+Setting absolute rotations can be done using either [Euler angles](https://en.wikipedia.org/wiki/Euler_angles) or [quaternions](https://en.wikipedia.org/wiki/Quaternion). The Wikipedia explanations of these two mathematical representations of rotation are a little hard to follow but the basics are easy to understand. Here are the important facts:
 
 ### Euler Angles
 
@@ -137,6 +137,3 @@ entity.setLocalScale(s, s, s);
 ```
 
 Note that you cannot currently set the Entity's scale in world space.
-
-[1]: https://en.wikipedia.org/wiki/Euler_angles
-[2]: https://en.wikipedia.org/wiki/Quaternion

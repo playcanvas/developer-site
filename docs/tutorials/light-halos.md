@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
     <iframe src="https://playcanv.as/p/rnIUbXws/" title="Light Halos" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-Find out more by forking the [full project][4].
+Find out more by forking the [full project](https://playcanvas.com/project/406040).
 
 This simple effect is great for adding atmosphere to your scene. Add a glow to a light source or an emissive texture to give the effect of a dusty or foggy atmosphere or simulate the effect of looking at a bright light.
 
@@ -69,7 +69,7 @@ if (this.unidirectional) {
 }
 ```
 
-We're using the `setParameter` method on the [pc.MeshInstance][5] to set a value for the fragment shader to use. This is currently an undocumented feature in the engine (you won't find it on the link to the developer docs). The reason for this is because it relies on knowing exactly the name of the uniform variable in the shader. These values might change and this API might change in the future. But it's pretty useful, because it lets you override a single value in a shader just for that mesh instance. In this case, it's important because all the glows use the same material, but we will want a different value for the opacity for each instance of the glow.
+We're using the `setParameter` method on the [pc.MeshInstance](https://api.playcanvas.com/engine/classes/MeshInstance.html) to set a value for the fragment shader to use. This is currently an undocumented feature in the engine (you won't find it on the link to the developer docs). The reason for this is because it relies on knowing exactly the name of the uniform variable in the shader. These values might change and this API might change in the future. But it's pretty useful, because it lets you override a single value in a shader just for that mesh instance. In this case, it's important because all the glows use the same material, but we will want a different value for the opacity for each instance of the glow.
 
 Here's the complete listing:
 
@@ -199,7 +199,4 @@ Halo.prototype.update = function(dt) {
 </TabItem>
 </Tabs>
 
-That's it. A simple but pretty effect to add to your scene. Take a look at the [project][4] for more information.
-
-[4]: https://playcanvas.com/project/406040
-[5]: https://api.playcanvas.com/engine/classes/MeshInstance.html
+That's it. A simple but pretty effect to add to your scene. Take a look at the [project](https://playcanvas.com/project/406040) for more information.

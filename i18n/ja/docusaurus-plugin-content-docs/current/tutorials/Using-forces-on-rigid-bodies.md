@@ -25,7 +25,7 @@ if (app.keyboard.isPressed(pc.KEY_F) ) {
 }
 ```
 
-ユーザーがFキーを押すと、[`applyForce(x, y, z)`][1]を介して、グローバルy軸に沿った力がアクセスされたエンティティに適用されます。また、力ベクトルの適用ポイントも設定できます。
+ユーザーがFキーを押すと、[`applyForce(x, y, z)`](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyforce)を介して、グローバルy軸に沿った力がアクセスされたエンティティに適用されます。また、力ベクトルの適用ポイントも設定できます。
 
 ### インパルス (Impulses)
 
@@ -35,7 +35,7 @@ if (app.keyboard.isPressed(pc.KEY_LEFT) ) {
 }
 ```
 
-[`applyImpulse(x, y, z)`][2]を介して、キューブにx軸のインパルスを与えて、瞬時の速度変化を与えます。
+[`applyImpulse(x, y, z)`](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyimpulse)を介して、キューブにx軸のインパルスを与えて、瞬時の速度変化を与えます。
 
 ### トルク (Torques)
 
@@ -45,7 +45,7 @@ if (app.keyboard.isPressed(pc.KEY_W) ) {
 }
 ```
 
-[トルク](https://en.wikipedia.org/wiki/Torque) (回転力)は、[`applyTorque(x, y, z)`][3]を介してエンティティに適用されます。
+[トルク](https://en.wikipedia.org/wiki/Torque) (回転力)は、[`applyTorque(x, y, z)`](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applytorque)を介してエンティティに適用されます。
 
 ### トルクインパルス (TorqueImpulses)
 
@@ -53,19 +53,19 @@ if (app.keyboard.isPressed(pc.KEY_W) ) {
 this.entity.rigidbody.applyTorqueImpulse(x, y, z)
 ```
 
-瞬間的な角速度の変化は、[`applyTorqueImpulse(x, y, z)`][4]を介して適用されます。これは、上記のデモのコードでは使用されませんでした。
+瞬間的な角速度の変化は、[`applyTorqueImpulse(x, y, z)`](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applytorqueimpulse)を介して適用されます。これは、上記のデモのコードでは使用されませんでした。
 
 ## RigidBodyの移動
 
 RigidyBodyを移動するには、上記のメソッドを使用して線形力と回転力(トルク)を適用します。オブジェクトが衝突する場合、直接位置や速度を変更することは避けるべきであり、これによりシミュレーションが上書きされ、特にオブジェクトが衝突する場合に奇妙な効果が生じる可能性があります。
 
-ただし、必要な場合は、`entity.rigidbody.linearVelocity`または`entity.rigidbody.angularVelocity`に新しい '[pc.Vec3][5]'の値を直接割り当てることで、速度を上書きできます。
+ただし、必要な場合は、`entity.rigidbody.linearVelocity`または`entity.rigidbody.angularVelocity`に新しい '[pc.Vec3](https://api.playcanvas.com/engine/classes/Vec3.html)'の値を直接割り当てることで、速度を上書きできます。
 
-RigidBodyの詳細については、[CollisionのAPIページ][6]、[pcの名前空間ページ][7]、[一人称視点の移動][8]、[Collisionのチュートリアル][9]を参照してください。
+RigidBodyの詳細については、[CollisionのAPIページ](https://api.playcanvas.com/engine/classes/CollisionComponent.html)、[pcの名前空間ページ](https://api.playcanvas.com/engine/)、[一人称視点の移動](/tutorials/first-person-movement/)、[Collisionのチュートリアル](/tutorials/collision-and-triggers/)を参照してください。
 
 ## 一般的なセットアップ
 
-スポットライト、キューブ(モデル、剛体、衝突、スクリプトコンポーネントを持つエンティティ)、フロア(モデル、剛体、衝突コンポーネントを持つ)を含む基本シーンをセットアップしました。立方体の剛体は動的に設定され、フロアの剛体は静的に設定されました。それぞれの箱に対していくつかのマテリアルを作成し、拡散色を変更して視覚的に見やすくしました。SpotLightとDynamicBodyの両方で "キャストシャドウ"オプションをアクティブにしました。完全な 'usingForces'シーンとコードについては、[このPlayCanvasアプリ][10]で確認できます。
+スポットライト、キューブ(モデル、剛体、衝突、スクリプトコンポーネントを持つエンティティ)、フロア(モデル、剛体、衝突コンポーネントを持つ)を含む基本シーンをセットアップしました。立方体の剛体は動的に設定され、フロアの剛体は静的に設定されました。それぞれの箱に対していくつかのマテリアルを作成し、拡散色を変更して視覚的に見やすくしました。SpotLightとDynamicBodyの両方で "キャストシャドウ"オプションをアクティブにしました。完全な 'usingForces'シーンとコードについては、[このPlayCanvasアプリ](https://playcanvas.com/project/405828/overview/tutorial-forces--impulses)で確認できます。
 
 ## 制限と制御
 
@@ -182,14 +182,3 @@ DynamicBody.prototype.reset = function () {
     this.entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
 };
 ```
-
-[1]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyforce
-[2]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applyimpulse
-[3]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applytorque
-[4]: https://api.playcanvas.com/engine/classes/RigidBodyComponent.html#applytorqueimpulse
-[5]: https://api.playcanvas.com/engine/classes/Vec3.html
-[6]: https://api.playcanvas.com/engine/classes/CollisionComponent.html
-[7]: https://api.playcanvas.com/engine/
-[8]: /tutorials/first-person-movement/
-[9]: /tutorials/collision-and-triggers/
-[10]: https://playcanvas.com/project/405828/overview/tutorial-forces--impulses

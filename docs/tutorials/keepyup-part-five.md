@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 5" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*You can find the [full project here][9]. If you haven't see [Part 1][1], [Part 2][2], [Part 3][3] and [Part 4][4] read them first.*
+*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't see [Part 1](/tutorials/keepyup-part-one/), [Part 2](/tutorials/keepyup-part-two/), [Part 3](/tutorials/keepyup-part-three/) and [Part 4](/tutorials/keepyup-part-four/) read them first.*
 
 ## Audio & Particles
 
@@ -54,11 +54,4 @@ In this code we restart the one shot particle effect by calling `reset()` and `p
 
 Using the Local Velocity graph in the Particle Effect editor, the particle effect is set up to fire away from the direction it is facing i.e. the particles move along the positive z axis.
 
-Continue on to [Part 6][6].
-
-[1]: /tutorials/keepyup-part-one/
-[2]: /tutorials/keepyup-part-two/
-[3]: /tutorials/keepyup-part-three/
-[4]: /tutorials/keepyup-part-four/
-[6]: /tutorials/keepyup-part-six/
-[9]: https://playcanvas.com/project/406050
+Continue on to [Part 6](/tutorials/keepyup-part-six/).

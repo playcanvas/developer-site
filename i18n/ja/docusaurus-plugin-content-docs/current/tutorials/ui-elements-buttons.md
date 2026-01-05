@@ -8,11 +8,11 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
     <iframe src="https://playcanv.as/p/jpRiV53D/" title="User Interface - Buttons" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*ElementとButtonコンポーネントを使用したシンプルなボタン。[完全なシーン][1]を参照してください。*
+*ElementとButtonコンポーネントを使用したシンプルなボタン。[完全なシーン](https://playcanvas.com/editor/scene/547900)を参照してください。*
 
-アプリケーションのユーザーインターフェースを構築する場合、ほとんどの場合、ボタンを作成する必要があります。このチュートリアルでは、組み込みの[要素][2]を使用してそれを達成する方法を示します。
+アプリケーションのユーザーインターフェースを構築する場合、ほとんどの場合、ボタンを作成する必要があります。このチュートリアルでは、組み込みの[要素](/user-manual/user-interface/elements/)を使用してそれを達成する方法を示します。
 
-この[シーン][1]では、次のように階層が設定された2D [スクリーン][3]を作成しました。
+この[シーン](https://playcanvas.com/editor/scene/547900)では、次のように階層が設定された2D [スクリーン](/user-manual/user-interface/screens/)を作成しました。
 
 ![Hierarchy](/img/tutorials/ui/buttons/hierarchy.png)
 
@@ -130,7 +130,7 @@ ButtonLogic.prototype.initialize = function() {
 
 このスクリプトは、シーン内のボタンエンティティにアタッチされています。
 
-ボタンコンポーネントには、マウスとタッチ入力の両方に対して機能するコールバック関数を登録できる[`クリックイベント`][click-event-api] があります。
+ボタンコンポーネントには、マウスとタッチ入力の両方に対して機能するコールバック関数を登録できる[`クリックイベント`](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click) があります。
 
 ```javascript
 this.entity.button.on('click', function(event) {
@@ -138,13 +138,8 @@ this.entity.button.on('click', function(event) {
 }, this);
 ```
 
-`mouseenter` と `mouseleave` など、他のリッスンできるイベントもあります。完全なリストは[APIドキュメント][click-event-api]にあります。
+`mouseenter` と `mouseleave` など、他のリッスンできるイベントもあります。完全なリストは[APIドキュメント](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click)にあります。
 
 これらのイベントは、ElementコンポーネントでUse Inputが有効になっている場合にのみ発生するため、インスペクタでそれがチェックされていることを確認してください。
 
 <img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.png" width="300" />
-
-[1]: https://playcanvas.com/editor/scene/547900
-[2]: /user-manual/user-interface/elements/
-[3]: /user-manual/user-interface/screens/
-[click-event-api]: https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click

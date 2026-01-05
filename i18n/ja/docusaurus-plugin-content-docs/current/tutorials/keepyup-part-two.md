@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 2" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*[完成されたプロジェクトはこちら][16]です。先に[その1][1]を読んでください。*
+*[完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です。先に[その1](/tutorials/keepyup-part-one/)を読んでください。*
 
 ## マテリアルの設定
 
@@ -20,7 +20,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 
 ### キューブマップ (Cubemap)
 
-マテリアルについて話し始める前に、キューブマップの設定をします。キューブマップとは、立方体のそれぞれの面に貼られた6枚のテクスチャからなるアセットです。これはシーンの遠方にある背景として処理されます。PlayCanvasの物理的マテリアルは、キューブマップを画像ベースのライティングに使用することができます。このライティングは、キューブマップの色をシーン内のマテリアルを照らす明かりとして使います。例えば、このゲームのシーンでは、キューブマップは青い空と緑の草の地面です。そのため、ゲーム内のぼーるは上からは青い光で、下からは緑の光で照らされます。[詳しくはドキュメントを参照してください][7]。
+マテリアルについて話し始める前に、キューブマップの設定をします。キューブマップとは、立方体のそれぞれの面に貼られた6枚のテクスチャからなるアセットです。これはシーンの遠方にある背景として処理されます。PlayCanvasの物理的マテリアルは、キューブマップを画像ベースのライティングに使用することができます。このライティングは、キューブマップの色をシーン内のマテリアルを照らす明かりとして使います。例えば、このゲームのシーンでは、キューブマップは青い空と緑の草の地面です。そのため、ゲーム内のぼーるは上からは青い光で、下からは緑の光で照らされます。[詳しくはドキュメントを参照してください](/user-manual/editor/assets/inspectors/cubemap/)。
 
 ![Cubemap](/img/tutorials/beginner/keepyup-part-two/cubemap-preview.jpg)
 
@@ -30,7 +30,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 
 ![Football](/img/tutorials/beginner/keepyup-part-two/ball-material.jpg)
 
-サッカーボールは[PlayCanvasアセットライブラリ][2]からインポートした3Dモデルです。footballマテリアルはすでに設定済みですが、いくつか単純な調整が必要になるかもしれません。サッカーボールに使われているそれぞれのテクスチャを確認してみましょう。
+サッカーボールは[PlayCanvasアセットライブラリ](https://store.playcanvas.com/)からインポートした3Dモデルです。footballマテリアルはすでに設定済みですが、いくつか単純な調整が必要になるかもしれません。サッカーボールに使われているそれぞれのテクスチャを確認してみましょう。
 
 ### ディフューズ (Diffuse)
 
@@ -48,7 +48,7 @@ Diffuseマップは表面の色を決めます。このゲームでは黒と白�
 
 ![Specular](/img/tutorials/beginner/keepyup-part-two/ball-spec.jpg)
 
-specular（鏡面）セクションはマテリアルがどのように照明と相互作用するかを決定します。specularには、「Metalnessワークフロー」と「Specularワークフロー」の2つの「ワークフロー」があります。詳細は[ドキュメント][6]をご確認ください。サッカーボールではMetalnessを使用しているので、「Use Metalness」チェックボックスをオンにしてください。サッカーボールは金属製でないので、metalnessスライダーを0になるようスライドさせます。次に、光沢スライダーを使用してマテリアルの滑らかさを設定します。ボールが滑らか過ぎず、ちょうど良い光沢になるよう約半分の位置に設定します。
+specular（鏡面）セクションはマテリアルがどのように照明と相互作用するかを決定します。specularには、「Metalnessワークフロー」と「Specularワークフロー」の2つの「ワークフロー」があります。詳細は[ドキュメント](/user-manual/graphics/physical-rendering/physical-materials/)をご確認ください。サッカーボールではMetalnessを使用しているので、「Use Metalness」チェックボックスをオンにしてください。サッカーボールは金属製でないので、metalnessスライダーを0になるようスライドさせます。次に、光沢スライダーを使用してマテリアルの滑らかさを設定します。ボールが滑らか過ぎず、ちょうど良い光沢になるよう約半分の位置に設定します。
 
 ### 法線 (Normal)
 
@@ -78,11 +78,4 @@ Emissiveマップは、表面の色を設定して、まるでその色の光を
 
 ![Emissive](/img/tutorials/beginner/keepyup-part-two/overlay-emissive.jpg)
 
-[その3][15]に進む。
-
-[1]: /tutorials/keepyup-part-one/
-[2]: https://store.playcanvas.com/
-[6]: /user-manual/graphics/physical-rendering/physical-materials/
-[7]: /user-manual/editor/assets/inspectors/cubemap/
-[15]: /tutorials/keepyup-part-three/
-[16]: https://playcanvas.com/project/406050
+[その3](/tutorials/keepyup-part-three/)に進む。

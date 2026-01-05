@@ -8,11 +8,11 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/5019
     <iframe src="https://playcanv.as/p/jpRiV53D/" title="User Interface - Buttons" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-*Simple buttons using Element and Button components. See the [full scene][1].*
+*Simple buttons using Element and Button components. See the [full scene](https://playcanvas.com/editor/scene/547900).*
 
-When building a UI for your application you will almost certainly need to create buttons. This tutorial demonstrates how you can achieve that using the built-in [Elements][2].
+When building a UI for your application you will almost certainly need to create buttons. This tutorial demonstrates how you can achieve that using the built-in [Elements](/user-manual/user-interface/elements/).
 
-In this [scene][1] we have created a 2D [Screen][3] that looks like this in the hierarchy:
+In this [scene](https://playcanvas.com/editor/scene/547900) we have created a 2D [Screen](/user-manual/user-interface/screens/) that looks like this in the hierarchy:
 
 ![Hierarchy](/img/tutorials/ui/buttons/hierarchy.png)
 
@@ -172,7 +172,7 @@ ButtonLogic.prototype.initialize = function() {
 
 This script is attached to the button entities in the scene.
 
-The Button component has a [`click` event][click-event-api] against which a callback function can be registered that works for both mouse and touch input.
+The Button component has a [`click` event](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click) against which a callback function can be registered that works for both mouse and touch input.
 
 ```javascript
 this.entity.button.on('click', function(event) {
@@ -180,13 +180,8 @@ this.entity.button.on('click', function(event) {
 }, this);
 ```
 
-There are other events that can be listened to such as `mouseenter` and `mouseleave`. A full list can be found in the [API documentation][click-event-api].
+There are other events that can be listened to such as `mouseenter` and `mouseleave`. A full list can be found in the [API documentation](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click).
 
 These events will only fire if Use Input is enabled on the Element component so make sure that has been ticked in the inspector.
 
 <img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.png" width="300" />
-
-[1]: https://playcanvas.com/editor/scene/547900
-[2]: /user-manual/user-interface/elements/
-[3]: /user-manual/user-interface/screens/
-[click-event-api]: https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click

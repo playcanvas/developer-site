@@ -8,7 +8,7 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 5" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-* [完成されたプロジェクトはこちら][9]です。先に[その1][1], [その2][2], [その3][3], [その4][4]を読んでください。*
+* [完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です。先に[その1](/tutorials/keepyup-part-one/), [その2](/tutorials/keepyup-part-two/), [その3](/tutorials/keepyup-part-three/), [その4](/tutorials/keepyup-part-four/)を読んでください。*
 
 ## オーディオとパーティクル
 
@@ -54,11 +54,4 @@ this.impactEffect.lookAt(this.entity.getPosition());
 
 パーティクルエフェクト (Particle Effect)のエディターでLocal Velocityグラフを使用して、パーティクルエフェクトが向いている方向から離れて発射するように設定します。例：パーティクルは正のz軸に沿って移動します。
 
-[パート6][6]に進んでください。
-
-[1]: /tutorials/keepyup-part-one/
-[2]: /tutorials/keepyup-part-two/
-[3]: /tutorials/keepyup-part-three/
-[4]: /tutorials/keepyup-part-four/
-[6]: /tutorials/keepyup-part-six/
-[9]: https://playcanvas.com/project/406050
+[パート6](/tutorials/keepyup-part-six/)に進んでください。
