@@ -392,7 +392,7 @@ const sidebars = {
       label: 'PlayCanvas React',
       link: {
         type: 'doc',
-        id: 'user-manual/playcanvas-react/index',
+        id: 'user-manual/react/index',
       },
       items: [
         {
@@ -401,50 +401,50 @@ const sidebars = {
           key: 'react-getting-started',
           link: {
             type: 'doc',
-            id: 'user-manual/playcanvas-react/getting-started/index',
+            id: 'user-manual/react/getting-started/index',
           },
           items: [
-            'user-manual/playcanvas-react/getting-started/installation',
+            'user-manual/react/getting-started/installation',
           ]
         },
-        'user-manual/playcanvas-react/building-a-scene',
+        'user-manual/react/building-a-scene',
         {
           type: 'category',
           label: 'Guide',
           link: {
             type: 'doc',
-            id: 'user-manual/playcanvas-react/guide/index',
+            id: 'user-manual/react/guide/index',
           },
           items: [
-            'user-manual/playcanvas-react/guide/interactivity',
-            'user-manual/playcanvas-react/guide/loading-assets',
-            'user-manual/playcanvas-react/guide/modifying-glb-models',
-            'user-manual/playcanvas-react/guide/physics',
-            'user-manual/playcanvas-react/guide/materials'
+            'user-manual/react/guide/interactivity',
+            'user-manual/react/guide/loading-assets',
+            'user-manual/react/guide/modifying-glb-models',
+            'user-manual/react/guide/physics',
+            'user-manual/react/guide/materials'
           ]
         },
         {
           type: 'category',
           label: 'API',
           items: [
-            'user-manual/playcanvas-react/api/application',
-            'user-manual/playcanvas-react/api/entity',
-            'user-manual/playcanvas-react/api/gltf',
-            'user-manual/playcanvas-react/api/modify',
+            'user-manual/react/api/application',
+            'user-manual/react/api/entity',
+            'user-manual/react/api/gltf',
+            'user-manual/react/api/modify',
             {
               type: 'category',
               label: 'Components',
               key: 'react-api-components',
               items: [
-                'user-manual/playcanvas-react/api/anim',
-                'user-manual/playcanvas-react/api/camera',
-                'user-manual/playcanvas-react/api/collision',
-                'user-manual/playcanvas-react/api/environment',
-                'user-manual/playcanvas-react/api/gsplat',
-                'user-manual/playcanvas-react/api/light',
-                'user-manual/playcanvas-react/api/render',
-                'user-manual/playcanvas-react/api/rigidbody',
-                'user-manual/playcanvas-react/api/script',
+                'user-manual/react/api/anim',
+                'user-manual/react/api/camera',
+                'user-manual/react/api/collision',
+                'user-manual/react/api/environment',
+                'user-manual/react/api/gsplat',
+                'user-manual/react/api/light',
+                'user-manual/react/api/render',
+                'user-manual/react/api/rigidbody',
+                'user-manual/react/api/script',
               ]
             },
             {
@@ -453,15 +453,15 @@ const sidebars = {
               key: 'react-api-hooks',
               link: {
                 type: 'doc',
-                id: 'user-manual/playcanvas-react/api/hooks/index',
+                id: 'user-manual/react/api/hooks/index',
               },
               items: [
-                'user-manual/playcanvas-react/api/hooks/use-app',
-                'user-manual/playcanvas-react/api/hooks/use-app-event',
-                'user-manual/playcanvas-react/api/hooks/use-asset',
-                'user-manual/playcanvas-react/api/hooks/use-material',
-                'user-manual/playcanvas-react/api/hooks/use-parent',
-                'user-manual/playcanvas-react/api/hooks/use-physics',
+                'user-manual/react/api/hooks/use-app',
+                'user-manual/react/api/hooks/use-app-event',
+                'user-manual/react/api/hooks/use-asset',
+                'user-manual/react/api/hooks/use-material',
+                'user-manual/react/api/hooks/use-parent',
+                'user-manual/react/api/hooks/use-physics',
               ]
             }
           ]

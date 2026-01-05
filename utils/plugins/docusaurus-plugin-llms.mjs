@@ -283,7 +283,7 @@ Generated: ${new Date().toISOString().split('T')[0]}
 - Getting Started: ${baseUrl}/user-manual/getting-started/
 - PlayCanvas Editor: ${baseUrl}/user-manual/editor/
 - PlayCanvas Engine: ${baseUrl}/user-manual/engine/
-- PlayCanvas React: ${baseUrl}/user-manual/playcanvas-react/
+- PlayCanvas React: ${baseUrl}/user-manual/react/
 - Web Components: ${baseUrl}/user-manual/web-components/
 - Scripting: ${baseUrl}/user-manual/scripting/
 - Gaussian Splatting: ${baseUrl}/user-manual/gaussian-splatting/
@@ -308,7 +308,7 @@ Generated: ${new Date().toISOString().split('T')[0]}
     const subcategoryOrder = {
         'User Manual': [
             'index', 'getting-started', 'account-management',
-            'engine', 'editor', 'playcanvas-react', 'web-components',
+            'engine', 'editor', 'react', 'web-components',
             'ecs', 'assets', 'scripting', 'graphics', 'gaussian-splatting',
             'animation', 'physics', '2D', 'user-interface', 'xr',
             'optimization', 'api', 'pcui', 'glossary', 'press-pack'

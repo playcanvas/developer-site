@@ -10,7 +10,7 @@ PlayCanvas内におけるユーザーアカウントは、あなた個人のス�
 
 - 🛠️ **[PlayCanvas Editor](../../editor/)にアクセス** - 強力なビジュアルインターフェースを使用して3Dアプリを構築できます。
 
-しかし、誰もがPlayCanvas Editorを使用することを選ぶわけではありません。おそらく、[PlayCanvas Engine](../../engine/)を直接使用したり、[PlayCanvas Web Components](../../web-components/)や[PlayCanvas React](../../playcanvas-react/)を使用したいと考えるかもしれません。それでもPlayCanvasアカウントを作成する意味はあるでしょうか？もちろんです！その理由は次のとおりです。
+しかし、誰もがPlayCanvas Editorを使用することを選ぶわけではありません。おそらく、[PlayCanvas Engine](../../engine/)を直接使用したり、[PlayCanvas Web Components](../../web-components/)や[PlayCanvas React](../../react/)を使用したいと考えるかもしれません。それでもPlayCanvasアカウントを作成する意味はあるでしょうか？もちろんです！その理由は次のとおりです。
 
 - 🔍 **探索と学習** - 何千もの公開されているEditorプロジェクトでスクリプトやアセットを閲覧し、学習し、インスピレーションを得ることができます。
 - ⚙️ **アセットの生成** - Editorのアセット処理機能を使用して、PlayCanvasベースのプロジェクトで使用するアセットを生成できます。

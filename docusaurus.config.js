@@ -174,6 +174,12 @@ const config = {
           redirects.push(redirect);
         }
 
+        // Redirect old playcanvas-react paths to react
+        if (existingPath.includes('/user-manual/react/')) {
+          const redirect = existingPath.replace('/user-manual/react/', '/user-manual/playcanvas-react/');
+          redirects.push(redirect);
+        }
+
         return redirects;
       }
     }],
