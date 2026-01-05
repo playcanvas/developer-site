@@ -79,4 +79,4 @@ UiMenu.prototype.start = function (e) {
 
 ## ゲーム完成
 
-シリーズの最後に到達しました！PlayCanvasを使用してゲームを構成および構築する方法について説明をしました。チュートリアルに関するご意見は[フォーラム](/user-manual/editor/scenes/components/element/)から連絡ください。
+シリーズの最後に到達しました！PlayCanvasを使用してゲームを構成および構築する方法について説明をしました。チュートリアルに関するご意見は[フォーラム](https://forum.playcanvas.com)から連絡ください。

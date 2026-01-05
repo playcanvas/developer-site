@@ -137,4 +137,4 @@ We repeat similar behavior in the other two UI scripts where we listen for game 
 
 ## Game Complete
 
-Congratulations on reaching the end of the series! We hope you've learned a lot about how you can structure and build a game using PlayCanvas. If you have any feedback on the tutorial, please get in touch on our [forum](/user-manual/editor/scenes/components/element/).
+Congratulations on reaching the end of the series! We hope you've learned a lot about how you can structure and build a game using PlayCanvas. If you have any feedback on the tutorial, please get in touch on our [forum](https://forum.playcanvas.com).
