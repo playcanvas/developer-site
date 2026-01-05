@@ -96,7 +96,7 @@ Clustered Lightingシェーダーは、サポートされるすべてのライ�
 
 ### シャドウタイプ {#shadows-type}
 
-影を投影する全てのライトは同じシャドウタイプを使用します。これにより、シャドウのソフトネスと関連するパフォーマンス影響をグローバルに設定することができます。サポートされているオプションはPCF1、PCF3、PCF5です。詳細は、[Shadows][shadows]ページをご覧ください。
+影を投影する全てのライトは同じシャドウタイプを使用します。これにより、シャドウのソフトネスと関連するパフォーマンス影響をグローバルに設定することができます。サポートされているオプションはPCF1、PCF3、PCF5です。詳細は、[Shadows](/user-manual/graphics/lighting/shadows/#soft-shadows-vs-hard-shadows)ページをご覧ください。
 
 ## 制限事項 {#limitations}
 
@@ -110,7 +110,7 @@ Clustered Lightingシェーダーは、サポートされるすべてのライ�
 
 ## デバッググリッドのレンダリング {#render-debug-grid}
 
-クラスタードライティングのデバッグとパフォーマンスチューニングを支援するために、[Layer][pc-layer-api] IDにレンダーするレイヤーを[LightingParamsの debugLayer][pc-lighting-debug-layer-api] に割り当てます。
+クラスタードライティングのデバッグとパフォーマンスチューニングを支援するために、[Layer](https://api.playcanvas.com/engine/classes/Layer.html) IDにレンダーするレイヤーを[LightingParamsの debugLayer](https://api.playcanvas.com/engine/classes/LightingParams.html#debuglayer) に割り当てます。
 
 ```javascript
 // Assuming being in a script type
@@ -123,7 +123,3 @@ this.app.scene.lighting.debugLayer = this.app.scene.layers.getLayerByName("World
 // Assuming being in a script type
 this.app.scene.lighting.debugLayer = undefined;
 ```
-
-[shadows]: /user-manual/graphics/lighting/shadows/#soft-shadows-vs-hard-shadows
-[pc-layer-api]: https://api.playcanvas.com/engine/classes/Layer.html
-[pc-lighting-debug-layer-api]: https://api.playcanvas.com/engine/classes/LightingParams.html#debuglayer

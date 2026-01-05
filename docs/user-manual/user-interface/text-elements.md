@@ -2,7 +2,7 @@
 title: Text Elements
 ---
 
-The Text Element is used to display a string of text using a [font asset][1].
+The Text Element is used to display a string of text using a [font asset](/user-manual/editor/assets/inspectors/font).
 
 ## Text
 
@@ -44,7 +44,7 @@ Or by enabling it in the Editor:
 
 You can check the 'Localized' checkbox to localize the text of the Text Element. If this is enabled then, instead of the text, you specify the localization key for the Text Element which will be used to get the localized text from the localization assets.
 
-Read more about localization [here][11].
+Read more about localization [here](/user-manual/user-interface/localization).
 
 ## Auto-size
 
@@ -97,6 +97,3 @@ The Color property allows you to tint the string to the color of your choice.
 The Opacity property allows you to set the transparency of the string
 
 ![Transparent](/img/user-manual/user-interface/text-element/transparent.png)
-
-[1]: /user-manual/editor/assets/inspectors/font
-[11]: /user-manual/user-interface/localization

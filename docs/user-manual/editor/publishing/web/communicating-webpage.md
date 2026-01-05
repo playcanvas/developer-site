@@ -98,9 +98,9 @@ Method one defines a global function which can be called anywhere in your page t
 
 Embedding a PlayCanvas application in an iframe is a quick and easy way to get your PlayCanvas content in a page. It also means that you can make use of our optimized hosting and don't need to worry about serving all the PlayCanvas content. However, the downside is that you can not call javascript functions in the PlayCanvas application directly from the hosting page because they are running on different pages.
 
-To communicate between a parent page and an iframe you will need to use the [postMessage][1] javascript API to send data between your page and the PlayCanvas application.
+To communicate between a parent page and an iframe you will need to use the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) javascript API to send data between your page and the PlayCanvas application.
 
-In your host page, use the iframeless URL for the iframe. The default publish link has the build in an iframe to include the social sharing bar at the bottom. This can cause problems with [postMessage][1] as there are now two iframes to communicate through.
+In your host page, use the iframeless URL for the iframe. The default publish link has the build in an iframe to include the social sharing bar at the bottom. This can cause problems with [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) as there are now two iframes to communicate through.
 
 If you add `/e` after `https://playcanv.as` in the URL, this will give you a version of the build without the iframe and social sharing bar.
 
@@ -225,5 +225,3 @@ For example:
 </body>
 </html>
 ```
-
-[1]: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage

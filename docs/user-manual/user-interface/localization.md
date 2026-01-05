@@ -34,7 +34,7 @@ The JSON asset looks like so:
 
 You can specify a different locale in the `info` part of the JSON file. The `messages` section contains key - value pairs for each localized phrase. The key is the identifier for that phrase and the text is the translated text for that key.
 
-PlayCanvas also supports plural forms for each locale. To specify plural forms for each phrase you need to pass an array of strings for each plural form instead of a single string. Each language has different plural forms which you can find [here][1]. Each array element corresponds to a plural form for that language. For example for English:
+PlayCanvas also supports plural forms for each locale. To specify plural forms for each phrase you need to pass an array of strings for each plural form instead of a single string. Each language has different plural forms which you can find [here](https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html). Each array element corresponds to a plural form for that language. For example for English:
 
 ```json
 "key plural": [
@@ -56,7 +56,7 @@ For Arabic:
 ]
 ```
 
-Refer to the language tables [here][1] to determine the rules for each language.
+Refer to the language tables [here](https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html) to determine the rules for each language.
 
 After you have created your localization JSON assets you need to add them to the Editor Settings under LOCALIZATION.
 
@@ -70,7 +70,7 @@ To test your localization you can change the `Locale` field under the Editor Set
 
 Different locales will have different rules on how numbers should be formatted. For example, English (UK and US) would format `1000000` as `1,000,000` and Dutch would format with a decimal instead `1.000.000`.
 
-JavaScript provides a built in function to do this formatting based on the locale code, [`Number.protoype.toLocaleString()`][5].
+JavaScript provides a built in function to do this formatting based on the locale code, [`Number.protoype.toLocaleString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString).
 
 An example of usage:
 
@@ -97,19 +97,19 @@ There are some languages that require specific workflows or considerations that 
 
 ### Thai
 
-For word wrapping to work correctly in UI Text Elements with Thai text, [zero width characters (Unicode U+200B)][7] need be added between words by the translators.
+For word wrapping to work correctly in UI Text Elements with Thai text, [zero width characters (Unicode U+200B)](https://en.wikipedia.org/wiki/Zero-width_space) need be added between words by the translators.
 
 The Thai language has no spaces between words and the same run of glyphs can be split into different combinations of words depending on the context of the sentence.
 
-Being able to split Thai text correctly computationally is still an [unsolved problem][6] and usually done via a dictionary based approach which can be expensive to do at runtime.
+Being able to split Thai text correctly computationally is still an [unsolved problem](http://www.thai-language.com/ref/breaking-words) and usually done via a dictionary based approach which can be expensive to do at runtime.
 
-The [thai-language.com site also has a separate tool][8] to add the zero width characters between words using a dictionary based approach if you have existing text.
+The [thai-language.com site also has a separate tool](http://www.thai-language.com/?nav=zwsp) to add the zero width characters between words using a dictionary based approach if you have existing text.
 
 ### Right to left Languages
 
-Right to left languages will need extra scripts for support that can be found in this [example project][10].
+Right to left languages will need extra scripts for support that can be found in this [example project](/tutorials/right-to-left-language-support/).
 
-In the example project, there is a folder called 'Rtl Support' that needs to be [copied and pasted][11] into your project.
+In the example project, there is a folder called 'Rtl Support' that needs to be [copied and pasted](/user-manual/editor/assets/asset-panel/#copy-and-paste-between-projects) into your project.
 
 ![](/img/user-manual/user-interface/localization/rtl-asset-folder.png)
 
@@ -121,18 +121,7 @@ In the folder, there is Script Type called 'RtlElement' which should be added to
 
 To retrieve the text from a key in script, use the APIs:
 
-- [pc.I18n#getText][3] To retrieve a non-plural or first text string in a plural list
-- [pc.I18n#getPluralText][4] To retrieve a plural text string based on the number
+- [pc.I18n#getText](https://api.playcanvas.com/engine/classes/I18n.html#gettext) To retrieve a non-plural or first text string in a plural list
+- [pc.I18n#getPluralText](https://api.playcanvas.com/engine/classes/I18n.html#getpluraltext) To retrieve a plural text string based on the number
 
-For the complete engine API reference for localization see [this page][2].
-
-[1]: https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html
-[2]: https://api.playcanvas.com/engine/classes/I18n.html
-[3]: https://api.playcanvas.com/engine/classes/I18n.html#gettext
-[4]: https://api.playcanvas.com/engine/classes/I18n.html#getpluraltext
-[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
-[6]: http://www.thai-language.com/ref/breaking-words
-[7]: https://en.wikipedia.org/wiki/Zero-width_space
-[8]: http://www.thai-language.com/?nav=zwsp
-[10]: /tutorials/right-to-left-language-support/
-[11]: /user-manual/editor/assets/asset-panel/#copy-and-paste-between-projects
+For the complete engine API reference for localization see [this page](https://api.playcanvas.com/engine/classes/I18n.html).

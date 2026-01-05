@@ -8,7 +8,7 @@ title: プロジェクト内の履歴管理
 
 サポートされているすべてのアイテムについて、下記で実行例をご覧ください。ノードの左上に表示される `[=]` は、チェックポイントが作成されていることを意味しますが、アイテムに変更は加えられていないことを示します。
 
-Graph View の詳細については、[こちら][graph-view]をご覧ください。
+Graph View の詳細については、[こちら](/user-manual/editor/version-control/graph-view/)をご覧ください。
 
 ### エンティティの履歴
 
@@ -25,5 +25,3 @@ Graph View の詳細については、[こちら][graph-view]をご覧くださ�
 ### シーンの履歴
 
 ![Scene Item History](/img/user-manual/editor/version-control/item-history/scene-item-history.gif)
-
-[graph-view]: /user-manual/editor/version-control/graph-view/

@@ -32,7 +32,7 @@ title: Graph View
 
 ノードをクリックすると、ノードとアクセス許可に応じて、以下のいずれかの選択肢に対応するコンテキストメニューが開きます。
 
-- **変更の表示 (View Changes)** - このチェックポイントと直前のチェックポイントの間にDiff Viewを起動します。 ([詳細][view-changes])
+- **変更の表示 (View Changes)** - このチェックポイントと直前のチェックポイントの間にDiff Viewを起動します。 ([詳細](/user-manual/editor/version-control/changes/))
 
 - **比較選択 (Select for Compare)** - 比較するペアの最初のチェックポイントを選択します。
 
@@ -40,13 +40,13 @@ title: Graph View
 
 ![](/img/user-manual/editor/version-control/graph-view/compare-checkpoints-example.gif)
 
-- **新しいブランチ (New Branch)** - 選択したチェックポイントから新しいブランチを作成します。 ([詳細][new-branch])
+- **新しいブランチ (New Branch)** - 選択したチェックポイントから新しいブランチを作成します。 ([詳細](/user-manual/editor/version-control/branches/#creating-a-new-branch))
 
 - **データのコピー (Copy Data)** - 変更がなく、切り捨てられていないチェックポイントデータ(チェックポイントGUID、ブランチID、チェックポイントメッセージなど)をJSON形式でクリップボードにコピーします。
 
-- **復元 (Restore)**(現在のエディタブランチの場合のみ)- ブランチの状態を選択したチェックポイントの状態に復元します。 ([詳細][restore-checkpoint])
+- **復元 (Restore)**(現在のエディタブランチの場合のみ)- ブランチの状態を選択したチェックポイントの状態に復元します。 ([詳細](/user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint))
 
-- **ハードリセット (Hard Reset)**(現在のエディタブランチの場合のみ)- 選択したチェックポイントにハードリセットを実行します。 ([詳細][hard-reset])
+- **ハードリセット (Hard Reset)**(現在のエディタブランチの場合のみ)- 選択したチェックポイントにハードリセットを実行します。 ([詳細](/user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint))
 
 ## 拡張可能なノード
 
@@ -81,8 +81,3 @@ title: Graph View
 各ブランチの色は、Graph Viewを起動したブランチに依存せず、常に同じです。
 
 グラフビューでは、スクロールホイールでズームイン/ズームアウト、クリックアンドドラッグでパンすることができます。
-
-[view-changes]: /user-manual/editor/version-control/changes/
-[new-branch]: /user-manual/editor/version-control/branches/#creating-a-new-branch
-[restore-checkpoint]: /user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint
-[hard-reset]: /user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint

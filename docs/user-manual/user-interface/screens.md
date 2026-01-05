@@ -2,7 +2,7 @@
 title: Screens
 ---
 
-The [Screen Component][1] defines the area that the User Interface is built inside. Its primary responsibility is to determine how the contents of the Screen (child Entities with Element components) are rendered.
+The [Screen Component](/user-manual/editor/scenes/components/screen) defines the area that the User Interface is built inside. Its primary responsibility is to determine how the contents of the Screen (child Entities with Element components) are rendered.
 
 ## Screen space or world space
 
@@ -54,5 +54,3 @@ With a value of 1 the decrease in vertical resolution makes the button too small
 
 ![Scale Blend 0.5](/img/user-manual/user-interface/screens/scale-blend-0.5.png)
 With a value of 0.5 the two changes are balanced and the button stays the same size
-
-[1]: /user-manual/editor/scenes/components/screen

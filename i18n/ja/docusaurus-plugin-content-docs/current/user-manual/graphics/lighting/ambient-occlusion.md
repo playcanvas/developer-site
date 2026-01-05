@@ -13,7 +13,7 @@ AOマップは、異なるスケールの場合があります。例えば、モ
 
 ## レンダリンググローバルAO
 
-AOのレンダリングは、一般的な3Dモデリングとarchvizツールを使用して行うことができます。 [Lightmapping Section][0]に記述されているLightmapのレンダリングと事実上同じです。
+AOのレンダリングは、一般的な3Dモデリングとarchvizツールを使用して行うことができます。 [Lightmapping Section](/user-manual/graphics/lighting/lightmapping/)に記述されているLightmapのレンダリングと事実上同じです。
 
 特別なマテリアルがすべてのジオメトリに適用され、それによってAOのように見えるように塗りつぶされるため、いくつかの小さな違いがあり、テクスチャへのレンダリング中に異なる設定が行われます。
 
@@ -25,7 +25,7 @@ VRayを使用した3D's Maxでは、**VRayDirt**タイプと**Ambient Occlusion*
 
 ![3D's Max VRay Render Settings: Override mtl](/img/user-manual/graphics/lighting/lightmapping/3ds-max-vray-override-mtl.png)
 
-次に、このデータをテクスチャに取り込む必要があります。3D's Maxでは、[Render To Texture][3]を使用して行います。ライトマッピングレンダリング時と同じですが、**出力**オプションは**VRayCompleteMap**を使用する必要があります。
+次に、このデータをテクスチャに取り込む必要があります。3D's Maxでは、[Render To Texture](/user-manual/graphics/lighting/lightmapping#render-to-texture)を使用して行います。ライトマッピングレンダリング時と同じですが、**出力**オプションは**VRayCompleteMap**を使用する必要があります。
 
 AO Textureは非常に詳細な情報を格納する必要はなく、視覚的にはテクスチャ圧縮アーティファクトの悪影響はあまりありません。そのため、JPEGは経済的で適切な形式です。
 
@@ -37,12 +37,7 @@ Editorでテクスチャをアップロードし、マテリアルのAmbient Occ
 
 ## 例
 
-上で説明したグローバルアンビエントオクルージョンを使用する[例][6]やその[project][7]をご確認ください。
+上で説明したグローバルアンビエントオクルージョンを使用する[例](https://playcanv.as/p/zdkARz26/)やその[project](https://playcanvas.com/project/446587/overview/archviz-example)をご確認ください。
 
 [![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)][6]  
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*
-
-[0]: /user-manual/graphics/lighting/lightmapping/
-[3]: /user-manual/graphics/lighting/lightmapping#render-to-texture
-[6]: https://playcanv.as/p/zdkARz26/
-[7]: https://playcanvas.com/project/446587/overview/archviz-example

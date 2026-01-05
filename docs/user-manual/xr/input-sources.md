@@ -2,13 +2,13 @@
 title: Input Sources
 ---
 
-An [XrInputSource][1] represents an input mechanism that allows the user to interact with a virtual world. Those include but are not limited to handheld controllers, optically tracked hands, gaze-based input methods, and touch screens. However, an input source is not explicitly associated with traditional gamepads, mice or keyboards.
+An [XrInputSource](https://api.playcanvas.com/engine/classes/XrInputSource.html) represents an input mechanism that allows the user to interact with a virtual world. Those include but are not limited to handheld controllers, optically tracked hands, gaze-based input methods, and touch screens. However, an input source is not explicitly associated with traditional gamepads, mice or keyboards.
 
 <img loading="lazy" src="/img/user-manual/xr/controllers.webp" alt="Controller models with a Ray" width="720" />
 
 ## Accessing Input Sources
 
-A list of input sources is available on the [XrInput][2] manager which is created by the [XrManager][3]:
+A list of input sources is available on the [XrInput](https://api.playcanvas.com/engine/classes/XrInput.html) manager which is created by the [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html):
 
 ```javascript
 const inputSources = app.xr.input.inputSources;
@@ -111,7 +111,7 @@ if (inputSource.grip) {
 
 ## GamePad
 
-If the platform supports the [WebXR Gamepads Module][4], then an input source might have an associated [GamePad][5] object with it, which provides access to its buttons, triggers, axes and other input hardware states:
+If the platform supports the [WebXR Gamepads Module](https://www.w3.org/TR/webxr-gamepads-module-1/), then an input source might have an associated [GamePad](https://w3c.github.io/gamepad/) object with it, which provides access to its buttons, triggers, axes and other input hardware states:
 
 ```javascript
 const gamepad = inputSource.gamepad;
@@ -124,11 +124,11 @@ if (gamepad) {
 
 ## Hands
 
-Check out the dedicated page for [Hand Tracking][7].
+Check out the dedicated page for [Hand Tracking](/user-manual/xr/hand-tracking/).
 
 ## Profiles
 
-Each input source might have a list of strings describing a type of input source, which is described in a [profile registry][6]. Based on this, you can figure out what type of model to render for a handheld device or what capabilities it might have. Additionally, the profile registry lists gamepad mapping details, such as buttons and axes.
+Each input source might have a list of strings describing a type of input source, which is described in a [profile registry](https://github.com/immersive-web/webxr-input-profiles/tree/master/packages/registry). Based on this, you can figure out what type of model to render for a handheld device or what capabilities it might have. Additionally, the profile registry lists gamepad mapping details, such as buttons and axes.
 
 ```javascript
 if (inputSource.profiles.includes('oculus-touch-v2')) {
@@ -162,11 +162,3 @@ entity.button.on('selectstart', (evt) => {
     // this button is selected by evt.inputSource
 });
 ```
-
-[1]: https://api.playcanvas.com/engine/classes/XrInputSource.html
-[2]: https://api.playcanvas.com/engine/classes/XrInput.html
-[3]: https://api.playcanvas.com/engine/classes/XrManager.html
-[4]: https://www.w3.org/TR/webxr-gamepads-module-1/
-[5]: https://w3c.github.io/gamepad/
-[6]: https://github.com/immersive-web/webxr-input-profiles/tree/master/packages/registry
-[7]: /user-manual/xr/hand-tracking/

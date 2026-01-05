@@ -22,7 +22,7 @@ You cannot delete a checkpoint, but you can restore a previous checkpoint. Resto
 
 Merging works in a similar way to other VCSs. However, in PlayCanvas it's important to note that merging occurs *between checkpoints* so any changes that you have not committed in a checkpoint will not be included in your merge. PlayCanvas automatically creates checkpoints in the destination branch of a merge to prevent you accidentally losing changes when merging.
 
-More details can be found on the specific pages for [checkpoints][1], [branches][2], and [merging][3].
+More details can be found on the specific pages for [checkpoints](/user-manual/editor/version-control/checkpoints), [branches](/user-manual/editor/version-control/branches), and [merging](/user-manual/editor/version-control/merging).
 
 ## How Version Control Affects Your Storage
 
@@ -34,14 +34,7 @@ Creating a branch from a checkpoint makes a copy of the project state at that ch
 
 Unfortunately, it is not possible to delete branches or checkpoints except in these specific cases:
 
-- [Hard reset to a checkpoint][4]
-- [Deleting a branch][5]
+- [Hard reset to a checkpoint](/user-manual/editor/version-control/checkpoints/#hard-reset-to-a-checkpoint)
+- [Deleting a branch](/user-manual/editor/version-control/branches/#deleting-a-branch)
 
-If you need more storage space, please email us at [support@playcanvas.com][6]. In most cases, we can increase your storage allowance with no extra charge.
-
-[1]: /user-manual/editor/version-control/checkpoints
-[2]: /user-manual/editor/version-control/branches
-[3]: /user-manual/editor/version-control/merging
-[4]: /user-manual/editor/version-control/checkpoints/#hard-reset-to-a-checkpoint
-[5]: /user-manual/editor/version-control/branches/#deleting-a-branch
-[6]: mailto:support@playcanvas.com
+If you need more storage space, please email us at [support@playcanvas.com](mailto:support@playcanvas.com). In most cases, we can increase your storage allowance with no extra charge.

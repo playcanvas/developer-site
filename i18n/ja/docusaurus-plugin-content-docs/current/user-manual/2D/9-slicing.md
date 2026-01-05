@@ -6,7 +6,7 @@ title: 9スライス
 
 ![9 Sliced Button](/img/user-manual/2D/9-slicing/9-sliced-labelled.jpg)
 
-上の画像では、[スプライトエディター][2]のテクスチャアトラスの編集機能を用いて定義される9つのエリアが表示されています。[Spriteコンポーネント][3]または[Image Elementコンポーネント][4]を使用してシーンに追加すると、コンポーネントの幅と高さプロパティを使用して画像のサイズを変更できます。各領域は以下の規則に従って拡大・縮小します。
+上の画像では、[スプライトエディター](/user-manual/2D/sprite-editor)のテクスチャアトラスの編集機能を用いて定義される9つのエリアが表示されています。[Spriteコンポーネント](/user-manual/editor/scenes/components/sprite)または[Image Elementコンポーネント](/user-manual/editor/scenes/components/element)を使用してシーンに追加すると、コンポーネントの幅と高さプロパティを使用して画像のサイズを変更できます。各領域は以下の規則に従って拡大・縮小します。
 
 * **Center** - 水平・垂直どちらもストレッチまたはタイル表示
 * **Top, Bottom** - 水平方向のみストレッチまたはタイル表示
@@ -44,7 +44,3 @@ Spriteアセットには、3つの描画モードがあります。
 ![Tiled Render Mode](/img/user-manual/2D/9-slicing/tiled-resize.gif)
 
 *Tiled* 描画モードは *Sliced*に似ていますが、セクションが伸びる代わりに、タイル状に繰り返します。中心は水平および垂直にタイル状になり、左右は垂直にタイル状になり、上下は水平にタイル状になり、角は全くタイル状になりません。
-
-[2]: /user-manual/2D/sprite-editor
-[3]: /user-manual/editor/scenes/components/sprite
-[4]: /user-manual/editor/scenes/components/element

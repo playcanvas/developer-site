@@ -24,7 +24,7 @@ A newly created particle system with the default settings looks like this:
 
 ![Default particle system](/img/user-manual/graphics/particles/particle-system-default.gif)
 
-To configure the particle system via the particle system component interface, consult the reference [here][4].
+To configure the particle system via the particle system component interface, consult the reference [here](/user-manual/editor/scenes/components/particlesystem).
 
 ## Triggering a Particle System in Script
 
@@ -37,8 +37,4 @@ this.entity.particlesystem.play();
 
 ## Soft Particles
 
-Soft particles are particles that are faded out near their intersections with scene geometry. If soft particles are enabled by using [```depthSoftening```][5], the camera which renders the particles needs to have a [Depth Map][6] rendering enabled.
-
-[4]: /user-manual/editor/scenes/components/particlesystem
-[5]: https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html#depthsoftening
-[6]: /user-manual/graphics/cameras/depth-layer
+Soft particles are particles that are faded out near their intersections with scene geometry. If soft particles are enabled by using [```depthSoftening```](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html#depthsoftening), the camera which renders the particles needs to have a [Depth Map](/user-manual/graphics/cameras/depth-layer) rendering enabled.

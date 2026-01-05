@@ -12,6 +12,4 @@ And the same image with the effect applied:
 
 ![Image with effect](/img/user-manual/graphics/posteffects/with-fxaa.png)
 
-Find the post-processing effect script on [GitHub][3].
-
-[3]: https://github.com/playcanvas/engine/blob/main/scripts/posteffects/posteffect-fxaa.js
+Find the post-processing effect script on [GitHub](https://github.com/playcanvas/engine/blob/main/scripts/posteffects/posteffect-fxaa.js).

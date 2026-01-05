@@ -32,7 +32,7 @@ A graph node will contain the following information:
 
 Clicking on a node will open up the context menu for some or all following options depending on the node and access permissions:
 
-- **View Changes** - Launch a Diff View between this checkpoint and its immediate predecessor. ([More details][view-changes])
+- **View Changes** - Launch a Diff View between this checkpoint and its immediate predecessor. ([More details](/user-manual/editor/version-control/changes/))
 
 - **Select for Compare** - Select the first checkpoint of a pair to be compared.
 
@@ -40,13 +40,13 @@ Clicking on a node will open up the context menu for some or all following optio
 
 ![](/img/user-manual/editor/version-control/graph-view/compare-checkpoints-example.gif)
 
-- **New Branch** - Create a new branch from the selected checkpoint. ([More details][new-branch])
+- **New Branch** - Create a new branch from the selected checkpoint. ([More details](/user-manual/editor/version-control/branches/#creating-a-new-branch))
 
 - **Copy Data** - Copies full (non-truncated) checkpoint data in JSON format to the clipboard such as the checkpoint GUID, the branch id, checkpoint message etc.
 
-- **Restore** (only available for the current Editor branch) - Restore the branch state to that of the selected checkpoint. ([More details][restore-checkpoint])
+- **Restore** (only available for the current Editor branch) - Restore the branch state to that of the selected checkpoint. ([More details](/user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint))
 
-- **Hard Reset** (only available for the current Editor branch) - Perform a Hard Reset to the selected checkpoint. ([More details][hard-reset])
+- **Hard Reset** (only available for the current Editor branch) - Perform a Hard Reset to the selected checkpoint. ([More details](/user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint))
 
 ## Expandable Nodes
 
@@ -81,8 +81,3 @@ The color of an edge helps to easily identify its direction, because it always m
 The color of each branch remains the same whenever you open the Graph View and does not depend on which branch was selected to launch it.
 
 The Graph View supports zooming in and out with the scroll wheel and panning via click and drag.
-
-[view-changes]: /user-manual/editor/version-control/changes/
-[new-branch]: /user-manual/editor/version-control/branches/#creating-a-new-branch
-[restore-checkpoint]: /user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint
-[hard-reset]: /user-manual/editor/version-control/checkpoints/#restoring-a-checkpoint

@@ -2,7 +2,7 @@
 title: Shadows
 ---
 
-Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps][4].
+Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps](/user-manual/graphics/lighting/lightmapping).
 
 ![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3-shadows.jpg)
 
@@ -46,7 +46,7 @@ The distribution of subdivision of the camera frustum for individual shadow casc
 
 ## Tuning Shadows {#tuning-shadows}
 
-The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. The following properties can be found in the [Light Component][2] UI.
+The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. The following properties can be found in the [Light Component](/user-manual/editor/scenes/components/light) UI.
 
 ### Shadow Distance {#shadow-distance}
 
@@ -89,7 +89,4 @@ Enabling shadows has performance implications:
 * For each shadow casting directional or spot light, the scene must be rendered once into a shadow map every frame. Omni light shadows are far more expensive since the scene is rendered six times per light (the shadow map is stored as a 6-sided cube map). Rendering the scene into shadow maps places load on both the CPU and the GPU.
 * Using a greater shadow map resolution will generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
 * Selecting soft shadows (PCF3x3) for the shadow sample type on a shadow receiving material is more expensive on the GPU versus the hard shadows option.
-* If your shadows are from static parts of the environment consider using [lightmaps][4] to bake shadows into textures.
-
-[2]: /user-manual/editor/scenes/components/light
-[4]: /user-manual/graphics/lighting/lightmapping
+* If your shadows are from static parts of the environment consider using [lightmaps](/user-manual/graphics/lighting/lightmapping) to bake shadows into textures.

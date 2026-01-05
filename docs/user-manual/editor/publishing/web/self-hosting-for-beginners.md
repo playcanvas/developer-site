@@ -77,7 +77,7 @@ We have designed the PlayCanvas hosting to be optimized for serving your PlayCan
 
 ## Self-hosting PlayCanvas Applications
 
-We have a more [detailed page][1] about self-hosting a PlayCanvas application. But in summary, to self-host you need to provide the three parts of the web stack described above.
+We have a more [detailed page](/user-manual/editor/publishing/web/self-hosting/) about self-hosting a PlayCanvas application. But in summary, to self-host you need to provide the three parts of the web stack described above.
 
 ### Server
 
@@ -119,5 +119,3 @@ Here's a list of content types used in PlayCanvas applications:
 ### Client
 
 The client-side code is everything you have written as part of your PlayCanvas application. When the browser loads the `index.html` file it will start your PlayCanvas application and run all the client-side code that you have written.
-
-[1]: /user-manual/editor/publishing/web/self-hosting/

@@ -170,6 +170,4 @@ void main (void) {
 
 ## Example
 
-You can check out [this example][1] that renders a quad in front of a camera with depth sensing applied with a similar shader as described above.
-
-[1]: https://playcanvas.github.io/#/xr/ar-camera-depth
+You can check out [this example](https://playcanvas.github.io/#/xr/ar-camera-depth) that renders a quad in front of a camera with depth sensing applied with a similar shader as described above.

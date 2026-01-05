@@ -44,7 +44,7 @@ Templateアセットに変更を加えるには、まずエディタにそのイ
 
 ![Overrides](/img/user-manual/editor/templates/override.png)
 
-また、オーバーライドされたフィールドのラベルの色が異なることにも注目してください。オーバーライドの詳細なリストを表示するには、[Overrides Diff View][4]をクリックしてください。
+また、オーバーライドされたフィールドのラベルの色が異なることにも注目してください。オーバーライドの詳細なリストを表示するには、[Overrides Diff View](/user-manual/editor/templates/diff)をクリックしてください。
 
 オーバーライドされたフィールドのカラー・ラベルにマウスを重ねると、そのオーバーライドに関する詳細を表示することができます。
 
@@ -56,7 +56,7 @@ Templateアセットに変更を加えるには、まずエディタにそのイ
 
 複数のオーバーライドを適用するには、テンプレートインスタンスのルートを選択し、エンティティインスペクターでApply Allをクリックします。また、テンプレートインスタンスのルートを右クリックし、Template &rarr; Apply To Templateを選択することもできます。
 
-また、[Overrides Diff View][4]を開いてそこでオーバーライドを適用することもできます。
+また、[Overrides Diff View](/user-manual/editor/templates/diff)を開いてそこでオーバーライドを適用することもできます。
 
 Templateアセットに適用するオーバーライドは、そのTemplateアセットの他のインスタンスにも反映されます。
 
@@ -72,7 +72,7 @@ Templateアセットに適用するオーバーライドは、そのTemplateア�
 
 すべてのオーバーライドを元に戻すには、テンプレートインスタンスのルートを選択し、エンティティインスペクターでRevert Allをクリックします。
 
-また、[Overrides Diff View][4]を開いて、そこからオーバーライドを元に戻すこともできます。
+また、[Overrides Diff View](/user-manual/editor/templates/diff)を開いて、そこからオーバーライドを元に戻すこともできます。
 
 ### オーバーライドの詳細 {#more-details-on-overrides}
 
@@ -101,5 +101,3 @@ this.app.root.addChild(instance);
 実行時に、テンプレートインスタンスはアセットにリンクされていないため、アセットのプリロード/ロードを行わないことによりダウンロードサイズを減らすことができます。
 
 テンプレートのインスタンスを実行時にインスタンス化する場合にのみ、Templateアセットをロードする必要があります。
-
-[4]: /user-manual/editor/templates/diff

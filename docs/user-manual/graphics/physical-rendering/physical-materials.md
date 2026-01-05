@@ -10,7 +10,7 @@ First a note about Cubemaps and Workflows
 
 ## Image Based Lighting
 
-[First up IBL][6], because inevitably you'll jump into the Editor and create Materials and wonder why your materials don't look the like the samples below. **Physical Materials with an HDR Prefiltered CubeMap look great!**
+[First up IBL](/user-manual/graphics/physical-rendering/image-based-lighting/), because inevitably you'll jump into the Editor and create Materials and wonder why your materials don't look the like the samples below. **Physical Materials with an HDR Prefiltered CubeMap look great!**
 
 ## Metalness and Specular Workflow
 
@@ -22,7 +22,7 @@ The **metalness** workflow involves setting a metalness value or creating a meta
 
 The **specular** workflow involves setting a specular value or creating a specular map which determines the color and intensity of the reflected light for your material.
 
-There is a good explanation of the differences on the [Marmoset Toolbag blog][5].
+There is a good explanation of the differences on the [Marmoset Toolbag blog](https://marmoset.co/posts/pbr-texture-conversion/).
 
 On to materials...
 
@@ -85,6 +85,3 @@ There are many other additional properties to investigate that can be used to ma
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/Q28EwTwQ/" title="Physical Materials - All" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
-
-[5]: https://marmoset.co/posts/pbr-texture-conversion/
-[6]: /user-manual/graphics/physical-rendering/image-based-lighting/

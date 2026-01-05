@@ -2,13 +2,13 @@
 title: 入力ソース
 ---
 
-[XrInputSource][1]は、ユーザーが仮想世界と対話できるようにする入力メカニズムを表します。これらには、ハンドヘルドコントローラー、光学的に追跡される手、視線ベースの入力方法、タッチスクリーンが含まれますが、これらに限定されません。ただし、入力ソースは従来のゲームパッド、マウス、またはキーボードとは明示的に関連付けられていません。
+[XrInputSource](https://api.playcanvas.com/engine/classes/XrInputSource.html)は、ユーザーが仮想世界と対話できるようにする入力メカニズムを表します。これらには、ハンドヘルドコントローラー、光学的に追跡される手、視線ベースの入力方法、タッチスクリーンが含まれますが、これらに限定されません。ただし、入力ソースは従来のゲームパッド、マウス、またはキーボードとは明示的に関連付けられていません。
 
 <img loading="lazy" src="/img/user-manual/xr/controllers.webp" alt="レイを持つコントローラーモデル" width="720" />
 
 ## 入力ソースへのアクセス
 
-入力ソースのリストは、[XrManager][3]によって作成される[XrInput][2]マネージャーで利用可能です。
+入力ソースのリストは、[XrManager](https://api.playcanvas.com/engine/classes/XrManager.html)によって作成される[XrInput](https://api.playcanvas.com/engine/classes/XrInput.html)マネージャーで利用可能です。
 
 ```javascript
 const inputSources = app.xr.input.inputSources;
@@ -111,7 +111,7 @@ if (inputSource.grip) {
 
 ## ゲームパッド
 
-プラットフォームが[WebXR Gamepads Module][4]をサポートしている場合、入力ソースには関連する[GamePad][5]オブジェクトが含まれることがあり、これによりボタン、トリガー、軸、その他の入力ハードウェアの状態にアクセスできます。
+プラットフォームが[WebXR Gamepads Module](https://www.w3.org/TR/webxr-gamepads-module-1/)をサポートしている場合、入力ソースには関連する[GamePad](https://w3c.github.io/gamepad/)オブジェクトが含まれることがあり、これによりボタン、トリガー、軸、その他の入力ハードウェアの状態にアクセスできます。
 
 ```javascript
 const gamepad = inputSource.gamepad;
@@ -124,11 +124,11 @@ if (gamepad) {
 
 ## ハンド
 
-[ハンドトラッキング][7]の専用ページをご覧ください。
+[ハンドトラッキング](/user-manual/xr/hand-tracking/)の専用ページをご覧ください。
 
 ## プロファイル
 
-各入力ソースには、[プロファイルレジストリ][6]に記述されている入力ソースのタイプを説明する文字列のリストが含まれる場合があります。これに基づいて、ハンドヘルドデバイスにどのようなモデルをレンダリングするか、またはどのような機能を備えているかを判断できます。さらに、プロファイルレジストリには、ボタンや軸などのゲームパッドのマッピング詳細がリストされています。
+各入力ソースには、[プロファイルレジストリ](https://github.com/immersive-web/webxr-input-profiles/tree/master/packages/registry)に記述されている入力ソースのタイプを説明する文字列のリストが含まれる場合があります。これに基づいて、ハンドヘルドデバイスにどのようなモデルをレンダリングするか、またはどのような機能を備えているかを判断できます。さらに、プロファイルレジストリには、ボタンや軸などのゲームパッドのマッピング詳細がリストされています。
 
 ```javascript
 if (inputSource.profiles.includes('oculus-touch-v2')) {
@@ -162,11 +162,3 @@ entity.button.on('selectstart', (evt) => {
     // このボタンはevt.inputSourceによって選択されました
 });
 ```
-
-[1]: https://api.playcanvas.com/engine/classes/XrInputSource.html
-[2]: https://api.playcanvas.com/engine/classes/XrInput.html
-[3]: https://api.playcanvas.com/engine/classes/XrManager.html
-[4]: https://www.w3.org/TR/webxr-gamepads-module-1/
-[5]: https://w3c.github.io/gamepad/
-[6]: https://github.com/immersive-web/webxr-input-profiles/tree/master/packages/registry
-[7]: /user-manual/xr/hand-tracking/

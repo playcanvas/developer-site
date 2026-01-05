@@ -14,13 +14,13 @@ const picker = new pc.Picker(app, width, height, depth);
 
 The basic workflow involves three steps:
 
-1. **Prepare** - Render the pick buffer by calling [`prepare(camera, scene, layers)`][1] once per frame (or only when the camera or scene changes)
-2. **Resize** - Adjust picker resolution if needed using [`resize(width, height)`][2]
-3. **Query** - Get picked mesh instances asynchronously using [`getSelectionAsync(x, y, width, height)`][3]
+1. **Prepare** - Render the pick buffer by calling [`prepare(camera, scene, layers)`](https://api.playcanvas.com/engine/classes/Picker.html#prepare) once per frame (or only when the camera or scene changes)
+2. **Resize** - Adjust picker resolution if needed using [`resize(width, height)`](https://api.playcanvas.com/engine/classes/Picker.html#resize)
+3. **Query** - Get picked mesh instances asynchronously using [`getSelectionAsync(x, y, width, height)`](https://api.playcanvas.com/engine/classes/Picker.html#getSelectionAsync)
 
-The picker uses an asynchronous API to read pixel data without blocking the rendering thread, ensuring smooth frame rates even when picking. When you're done with the picker, call [`destroy()`][5] to clean up GPU resources.
+The picker uses an asynchronous API to read pixel data without blocking the rendering thread, ensuring smooth frame rates even when picking. When you're done with the picker, call [`destroy()`](https://api.playcanvas.com/engine/classes/Picker.html#destroy) to clean up GPU resources.
 
-For complete API documentation, see the [Picker API reference][0].
+For complete API documentation, see the [Picker API reference](https://api.playcanvas.com/engine/classes/Picker.html).
 
 ## Depth Support
 
@@ -34,7 +34,7 @@ When depth picking is enabled, the picker captures depth values along with mesh 
 
 ## World Position Picking
 
-When depth picking is enabled, you can use [`getWorldPointAsync(x, y)`][4] to get the 3D world position at screen coordinates:
+When depth picking is enabled, you can use [`getWorldPointAsync(x, y)`](https://api.playcanvas.com/engine/classes/Picker.html#getWorldPointAsync) to get the 3D world position at screen coordinates:
 
 ```javascript
 picker.getWorldPointAsync(x, y).then((worldPoint) => {
@@ -76,20 +76,11 @@ The trade-off is reduced precision - very small objects may be missed at lower r
 
 The picker fully supports Gaussian Splat instances with the same API as regular meshes. You can pick splat instances by their mesh instance ID and, with depth enabled, determine exact 3D positions on splat surfaces.
 
-This enables interactive applications like placing markers on splats, measuring distances, or selecting individual splat entities in complex scenes. See the [Gaussian Splatting Picking example][6] for a complete demonstration.
+This enables interactive applications like placing markers on splats, measuring distances, or selecting individual splat entities in complex scenes. See the [Gaussian Splatting Picking example](https://playcanvas.github.io/#gaussian-splatting/picking) for a complete demonstration.
 
 ## Examples
 
 These engine examples demonstrate the picker in action:
 
-- [**Area Picker**][7] - Shows how to pick mesh instances in rectangular screen regions with visual feedback
-- [**Gaussian Splatting Picking**][6] - Demonstrates picking splat instances and using world position picking to place markers on splat surfaces
-
-[0]: https://api.playcanvas.com/engine/classes/Picker.html
-[1]: https://api.playcanvas.com/engine/classes/Picker.html#prepare
-[2]: https://api.playcanvas.com/engine/classes/Picker.html#resize
-[3]: https://api.playcanvas.com/engine/classes/Picker.html#getSelectionAsync
-[4]: https://api.playcanvas.com/engine/classes/Picker.html#getWorldPointAsync
-[5]: https://api.playcanvas.com/engine/classes/Picker.html#destroy
-[6]: https://playcanvas.github.io/#gaussian-splatting/picking
-[7]: https://playcanvas.github.io/#/graphics/area-picker
+- [**Area Picker**](https://playcanvas.github.io/#/graphics/area-picker) - Shows how to pick mesh instances in rectangular screen regions with visual feedback
+- [**Gaussian Splatting Picking**](https://playcanvas.github.io/#gaussian-splatting/picking) - Demonstrates picking splat instances and using world position picking to place markers on splat surfaces

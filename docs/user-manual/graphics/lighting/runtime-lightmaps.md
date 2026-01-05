@@ -25,7 +25,7 @@ However, a disadvantage of runtime lightmap generation is that currently we do n
 
 :::note
 
-The use of [batching][11] is not compatible with runtime lightmaps, as each lightmapped object requires its own unique lightmap texture.
+The use of [batching](/user-manual/graphics/advanced-rendering/batching) is not compatible with runtime lightmaps, as each lightmapped object requires its own unique lightmap texture.
 
 :::
 
@@ -47,7 +47,7 @@ Note that a light can't have both **Bake Lightmap** and **Affect Lightmapped** e
 
 ![Light Component Shadow Settings](/img/user-manual/graphics/lighting/lightmapping/editor-light-shadows.png)
 
-Lightmap lights use the same **Shadows** setting as dynamic lights, except the shadow calculations are done once, when generating the lightmaps. This way, it is much cheaper to enable shadows on lightmap lights. For more information, see the [Shadows][4] page. Note that the Shadow Cascade options are ignored for baking.
+Lightmap lights use the same **Shadows** setting as dynamic lights, except the shadow calculations are done once, when generating the lightmaps. This way, it is much cheaper to enable shadows on lightmap lights. For more information, see the [Shadows](/user-manual/graphics/lighting/shadows) page. Note that the Shadow Cascade options are ignored for baking.
 
 ### Soft Directional Light {#soft-directional-light}
 
@@ -64,9 +64,9 @@ The following images show the difference between hard shadows and soft shadows. 
 
 ## Baking an Environment Light {#baking-an-environment-light}
 
-PlayCanvas supports two types of environment lighting: [Ambient Color][14] and [Skybox][15]. By default, these are both applied at runtime.
+PlayCanvas supports two types of environment lighting: [Ambient Color](/user-manual/editor/interface/settings/rendering/) and [Skybox](/user-manual/editor/interface/settings/rendering/). By default, these are both applied at runtime.
 
-A limitation of runtime environment light application is the lack of **Ambient Occlusion**. As an alternative, the environment light can be baked into the lightmap, including Ambient Occlusion. This can be configured in the [Lightmapping][16] section of the global settings.
+A limitation of runtime environment light application is the lack of **Ambient Occlusion**. As an alternative, the environment light can be baked into the lightmap, including Ambient Occlusion. This can be configured in the [Lightmapping](/user-manual/editor/interface/settings/lightmapping/) section of the global settings.
 
 If **Ambient Bake** is enabled, the contribution of the environment light will be baked to the lightmaps, including this Ambient Occlusion. Note that the **Samples** setting affects the baking performance and should be set as low as possible (5-20).
 
@@ -127,7 +127,7 @@ For example, consider a plane that is 1x1 unit (meter) in size. If the Global Si
 
 ## Auto-Unwrapping and UV1 Generation {#auto-unwrapping-and-uv1-generation}
 
-Lightmaps are always applied using the second set of **UV coordinates (UV1)** on the model asset. For the best results, we recommend that you add a second UV set from the 3D content tool to your model, before you upload it to PlayCanvas. For more information about lightmap friendly UV's, see the [UV Mapping][9] section.
+Lightmaps are always applied using the second set of **UV coordinates (UV1)** on the model asset. For the best results, we recommend that you add a second UV set from the 3D content tool to your model, before you upload it to PlayCanvas. For more information about lightmap friendly UV's, see the [UV Mapping](/user-manual/graphics/lighting/lightmapping/#uv-mapping) section.
 
 If your model doesn't have a UV1 set, the PlayCanvas Editor can automatically unwrap and generate UV1 co-ordinates for the model.
 
@@ -140,10 +140,3 @@ If your model is missing a UV1 map, you will see a warning in the Model Componen
 To fix the warning, select the model asset and open the **Pipeline** section. Click the **Auto-Unwrap** button and wait for the progress bar to complete. Auto-unwrap will edit the model asset, so if you re-import the model from the source (e.g. upload a new FBX) the precomputed UV1 will be lost. If the uploaded model has no UV1, you will need to auto-unwrap the model again.
 
 The **Padding** option determines the space between sections when unwrapping occurs. If you see light bleeding (i.e. light that shouldn't be in the lightmap), you can increase the padding to reduce bleeding.
-
-[4]: /user-manual/graphics/lighting/shadows
-[9]: /user-manual/graphics/lighting/lightmapping/#uv-mapping
-[11]: /user-manual/graphics/advanced-rendering/batching
-[14]: /user-manual/editor/interface/settings/rendering/
-[15]: /user-manual/editor/interface/settings/rendering/
-[16]: /user-manual/editor/interface/settings/lightmapping/

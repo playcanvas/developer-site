@@ -71,6 +71,4 @@ This endpoint uses a slightly different pagination method. If a response contain
 
 ## Rate Limiting
 
-This route uses a [normal][1] rate limit.
-
-[1]: /user-manual/api#rate-limiting
+This route uses a [normal](/user-manual/api#rate-limiting) rate limit.

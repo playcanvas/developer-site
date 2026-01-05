@@ -51,7 +51,7 @@ PlayCanvas applications are created with a set of default layers. You should lea
 ![Default Layers](/img/user-manual/graphics/layers/default-layers.jpg)
 
 1. **World (Opaque)** - Used to render components that are not transparent and most opaque component meshes.
-1. **Depth (Opaque)** - Used to capture the color or the depth buffer of the scene, see [Depth Layer][7].
+1. **Depth (Opaque)** - Used to capture the color or the depth buffer of the scene, see [Depth Layer](/user-manual/graphics/cameras/depth-layer).
 1. **Skybox (Opaque)** - Used to render the skybox. It is rendered after the World (Opaque) to reduce overdraw.
 1. **World (Transparent)** - Used to render components that are transparent and other transparent component meshes.
 1. **Immediate (Opaque)** - Used to render immediate mode meshes. e.g. `app.renderLine()`.
@@ -101,5 +101,3 @@ When you add an additional camera, these are the recommended steps:
 1. Set the priority of new and existing cameras to control the order in which they render.
 2. Set up the layers of the newly created camera to specify which layers it renders. For example you might render a top down map camera and only want Terrain and Building layers in it, but not Characters.
 3. If your camera renders into a texture, use a script to assign a render target to the `renderTarget` property of the camera.
-
-[7]: /user-manual/graphics/cameras/depth-layer

@@ -108,7 +108,7 @@ app.xr.meshDetection.on('add', (xrMesh) => {
 
 XrMesh can represent various real-world objects and a label can help to identify what it represents using its property `XrMesh.label`.
 
-These labels can be any of: `floor`, `wall`, `door`, `window`, `table`, `screen`, `global mesh`, `other`, and `more`. Here is a [list of semantic labels][1], although this list is not definitive and the platform can report anything it feels fit.
+These labels can be any of: `floor`, `wall`, `door`, `window`, `table`, `screen`, `global mesh`, `other`, and `more`. Here is a [list of semantic labels](https://github.com/immersive-web/semantic-labels/blob/master/labels.json), although this list is not definitive and the platform can report anything it feels fit.
 
 ## Changes
 
@@ -119,5 +119,3 @@ xrMesh.on('change', () => {
     // vertices, indices and/or label has been changed
 });
 ```
-
-[1]: https://github.com/immersive-web/semantic-labels/blob/master/labels.json

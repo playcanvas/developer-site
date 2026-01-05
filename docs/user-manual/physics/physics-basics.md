@@ -2,9 +2,9 @@
 title: Physics Basics
 ---
 
-PlayCanvas incorporates a very powerful physics engine called [ammo.js][1]. This is a browser port of the open source C++ Bullet physics engine.
+PlayCanvas incorporates a very powerful physics engine called [ammo.js](https://github.com/kripken/ammo.js). This is a browser port of the open source C++ Bullet physics engine.
 
-PlayCanvas provides the [rigidbody][2] and [collision][3] components to set up physics simulations.
+PlayCanvas provides the [rigidbody](/user-manual/editor/scenes/components/rigidbody/) and [collision](/user-manual/editor/scenes/components/collision/) components to set up physics simulations.
 
 ## Enabling Physics {#enabling-physics}
 
@@ -14,9 +14,9 @@ You can import ammo.js modules into your project using the import button on the 
 
 ![Physics Settings](/img/user-manual/physics/physics-settings.png)
 
-This will import the default build of ammo.js provided by PlayCanvas. However please note it is possible to compile your own version of ammo.js and add it to your project instead. For more information see [this page][11].
+This will import the default build of ammo.js provided by PlayCanvas. However please note it is possible to compile your own version of ammo.js and add it to your project instead. For more information see [this page](/user-manual/editor/assets/inspectors/wasm/).
 
-For details on migrating legacy projects to the latest ammo.js see [this page][10].
+For details on migrating legacy projects to the latest ammo.js see [this page](/user-manual/physics/physics-migration/).
 
 ## Gravity {#gravity}
 
@@ -46,7 +46,7 @@ The collision component specifies the physical shape of the body. Note that a ri
 - Cylinder
 - Mesh
 - Cone
-- [Compound][12]
+- [Compound](/user-manual/physics/compound-shapes/)
 
 ## Creating a Static Ground {#creating-a-static-ground}
 
@@ -123,10 +123,3 @@ This script simply animates the box along the world x-axis using a sine function
 ## Teleporting Dynamic Bodies {#teleporting-dynamic-bodies}
 
 Although you can use the standard entity transformation function with kinematic bodies, this is not allowed for dynamic bodies. When creating a dynamic rigid body, you pass the responsibility for setting the position and orientation of that entity to the physics engine. This means that if you try to update the position or orientation of an entity in a script using the pc.Entity API, the functions will not have an effect. Instead, you must call the teleport function on the rigid body component which explicitly notifies the physics engine you want to momentarily update a rigid body's position and/or orientation.
-
-[1]: https://github.com/kripken/ammo.js
-[2]: /user-manual/editor/scenes/components/rigidbody/
-[3]: /user-manual/editor/scenes/components/collision/
-[10]: /user-manual/physics/physics-migration/
-[11]: /user-manual/editor/assets/inspectors/wasm/
-[12]: /user-manual/physics/compound-shapes/

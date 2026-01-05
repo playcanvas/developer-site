@@ -16,7 +16,7 @@ Device pixel ratioは、ハードウェア画面上の物理ピクセルと論�
 
 理想的には、ハイエンドデバイスのユーザーは最高品質でレンダリングし、ローエンドデバイスのユーザーはプレイ可能なフレームレートを維持するために比率を減らす、という両方の良いとこ取りをしたいと考えています。
 
-Device pixel ratioは、プロパティ[`pc.GraphicsDevice#maxPixelRatio`][4]を介して実行時に変更できます。
+Device pixel ratioは、プロパティ[`pc.GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio)を介して実行時に変更できます。
 
 ```javascript
 const device = pc.Application.getApplication().graphicsDevice;
@@ -42,7 +42,7 @@ GPUに関する情報を取得するには、プロパティ`pc.GraphicsDevice#u
 ANGLE (NVIDIA GeForce GTX 1050 Direct3D11 vs_5_0 ps_5_0)
 ```
 
-異なるGPUカードのベンチマークは、[Video Card Benchmark][5] および [Notebook Check Smartphone and Tablet list][6] で見つけることができ、各GPUの能力を測るのに役立ちます。しかし、利用可能なGPUカードの数が非常に多いため、デバイスの能力を評価するのは非常に困難です。
+異なるGPUカードのベンチマークは、[Video Card Benchmark](https://www.videocardbenchmark.net/GPU_mega_page.html) および [Notebook Check Smartphone and Tablet list](https://www.notebookcheck.net/Smartphone-Graphics-Cards-Benchmark-List.149363.0.html) で見つけることができ、各GPUの能力を測るのに役立ちます。しかし、利用可能なGPUカードの数が非常に多いため、デバイスの能力を評価するのは非常に困難です。
 
 モバイルの例を以下に示します（執筆時点の2020年7月30日木曜日の情報に基づいています）。
 
@@ -73,7 +73,3 @@ function isLowQualityGPU() {
 ```
 
 また、ユーザーが品質レベルを切り替えられるオプションをアプリケーションに設けることを推奨します。これにより、ユーザーは快適なレベルを選択でき、また、デバイスリソースの使用を抑え、バッテリー寿命を延ばすために品質を下げることができます。
-
-[4]: https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio
-[5]: https://www.videocardbenchmark.net/GPU_mega_page.html
-[6]: https://www.notebookcheck.net/Smartphone-Graphics-Cards-Benchmark-List.149363.0.html

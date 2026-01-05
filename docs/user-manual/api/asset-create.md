@@ -115,6 +115,4 @@ Status: 201
 
 ## Rate Limiting
 
-This route uses an [assets][1] rate limit.
-
-[1]: /user-manual/api#rate-limiting
+This route uses an [assets](/user-manual/api#rate-limiting) rate limit.

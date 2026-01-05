@@ -2,13 +2,13 @@
 title: Facebook
 ---
 
-[Facebook][1]から大勢のユーザにPlayCanvasゲームを公開することができます。PlayCanvasからFacebookにゲームを公開するのは簡単です。
+[Facebook](https://facebook.com)から大勢のユーザにPlayCanvasゲームを公開することができます。PlayCanvasからFacebookにゲームを公開するのは簡単です。
 
 ## Facebookへの公開方法
 
 **1.** PlayCanvasにゲームを公開します。(また、セルフホスティングされたゲームをFacebookに公開することもできます。以下のようなプロセスになります。)
 
-**2.** [Facebook Developer Portal][2] からゲーム用に新しいFacebook Appを作成します。
+**2.** [Facebook Developer Portal](https://developers.facebook.com/) からゲーム用に新しいFacebook Appを作成します。
 
 **3.** 提案されたら、アプリケーションタイプとして**Facebook Canvas**を選択
 
@@ -35,6 +35,3 @@ PlayCanvasのゲームのホスティング方法、また、FacebookがAPIへ�
 **7.** SettingsページにリストされているApp URLからゲームの検証を行うことができます。
 
 ![App URL](/img/user-manual/editor/publishing/web/facebook/app-url.jpg)
-
-[1]: https://facebook.com
-[2]: https://developers.facebook.com/

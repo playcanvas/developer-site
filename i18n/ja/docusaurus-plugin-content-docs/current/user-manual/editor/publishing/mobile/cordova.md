@@ -2,13 +2,13 @@
 title: Apache Cordova
 ---
 
-[Apache Cordova][1]はオープンソースのモバイル開発フレームワークです。標準のウェブ技術であるHTML5、CSS3、JavaScriptを使用して、クロスプラットフォーム開発ができます。アプリケーションは、各プラットフォームに対してターゲットとされたラッパーで実行され、センサー、データ、ネットワークステータスなど、各デバイスの機能にアクセスするための標準準拠のAPIバインディングに依存します。
+[Apache Cordova](https://cordova.apache.org/)はオープンソースのモバイル開発フレームワークです。標準のウェブ技術であるHTML5、CSS3、JavaScriptを使用して、クロスプラットフォーム開発ができます。アプリケーションは、各プラットフォームに対してターゲットとされたラッパーで実行され、センサー、データ、ネットワークステータスなど、各デバイスの機能にアクセスするための標準準拠のAPIバインディングに依存します。
 
 Cordovaを使用してPlayCanvasアプリをネイティブにラッピングすることができます。その後、iOS App StoreやAndroidのGoogle Playに公開することができます。Cordovaは、macOSやWindowsと互換性がある実行可能ファイルを生成することもできます。
 
 ## Cordovaのインストール
 
-はじめるには、コンピュータにCordovaを[インストールする手順][2]に従ってください。
+はじめるには、コンピュータにCordovaを[インストールする手順](https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli)に従ってください。
 
 ## プロジェクトの作成
 
@@ -66,7 +66,7 @@ iOS向けにアプリをビルドするには、Cordova iOSプラットフォー
 cordova platform add ios
 ```
 
-バージョンが `6.0.0` 以上であることを確認してください。これは、バージョン `6.0.0` でラッパーがUIWebViewからWKWebViewにアップグレードされ、パフォーマンスが向上するためです。[Cordovaのブログ][10]で詳細を読み取ってください。
+バージョンが `6.0.0` 以上であることを確認してください。これは、バージョン `6.0.0` でラッパーがUIWebViewからWKWebViewにアップグレードされ、パフォーマンスが向上するためです。[Cordovaのブログ](https://cordova.apache.org/announcements/2020/06/01/cordova-ios-release-6.0.0.html)で詳細を読み取ってください。
 
 CordovaベースのPlayCanvasアプリを実行しようとすると、クロスオリジンHTTPリクエストに関するいくつかのエラー/例外に遭遇することがあります。これを修正するには、プロジェクトの`config.xml`に次の内容を追加します。
 
@@ -106,13 +106,3 @@ cordova run ios
     ![Xcode Run button](/img/user-manual/editor/publishing/cordova/xcode-run.png)
 
 アプリに満足したら、[App Store Connect] [14]に出荷することができます。
-
-[1]: https://cordova.apache.org/
-[2]: https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli
-[3]: https://playcanv.as/p/JERg21J8/
-[4]: https://cordova.apache.org/docs/en/latest/config_ref/images.html
-[9]: https://apps.apple.com/us/app/xcode/id497799835?mt=12
-[10]: https://cordova.apache.org/announcements/2020/06/01/cordova-ios-release-6.0.0.html
-[14]: https://developer.apple.com/app-store-connect/
-[rest-api-tools-readme]: https://github.com/playcanvas/playcanvas-rest-api-tools#cordova-publish
-[rest-api-tools-setup]: https://github.com/playcanvas/playcanvas-rest-api-tools#setup

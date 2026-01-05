@@ -12,7 +12,7 @@ title: エディターAPI
 
 このAPIは、安定版ではなく将来的に変更される可能性がありますが、現在の状態から大きく変更されることはないでしょう。
 
-The Editor APIは[GitHub][github-repo]でオープンソース化されています。APIのドキュメントは[こちら][github-api]で見つけることができます。
+The Editor APIは[GitHub](https://github.com/playcanvas/editor-api)でオープンソース化されています。APIのドキュメントは[こちら](https://api.playcanvas.com/editor/)で見つけることができます。
 
 ## 自動化の例
 
@@ -33,17 +33,17 @@ Editor API コード:
 
 ## エディタの機能の拡張
 
-エディターに追加の機能を追加し、カスタムインタフェース(ボタンの追加など)を作成することができます。これは、ブラウザー拡張または[ユーザースクリプト][user-scripts]などで実行することができます。
+エディターに追加の機能を追加し、カスタムインタフェース(ボタンの追加など)を作成することができます。これは、ブラウザー拡張または[ユーザースクリプト](https://en.wikipedia.org/wiki/Userscript)などで実行することができます。
 
 これら2つのうち、よりアクセスしやすいのはユーザースクリプトで、エディタの上にカスタムコードを実行することができます。
 
-以下には、[Viewport][viewport]にボタンが追加され、ボックスをシーンにランダムに配置する例があります。
+以下には、[Viewport](/user-manual/editor/interface/viewport)にボタンが追加され、ボックスをシーンにランダムに配置する例があります。
 
 ![](/img/user-manual/editor/editor-api/generate-random-boxes.gif)
 
-PlayCanvas チームは現在、[Violentmonkey][violentmonkey]オープンソースブラウザーエクステンションを使用してユーザースクリプトを管理しています。
+PlayCanvas チームは現在、[Violentmonkey](https://violentmonkey.github.io/)オープンソースブラウザーエクステンションを使用してユーザースクリプトを管理しています。
 
-ブラウザー拡張をインストールしたら、簡単にカスタムコードを追加できます。手順については、[Violentmonkeyのドキュメント][violentmonkey-docs]を参照してください。
+ブラウザー拡張をインストールしたら、簡単にカスタムコードを追加できます。手順については、[Violentmonkeyのドキュメント](https://violentmonkey.github.io/guide/creating-a-userscript/)を参照してください。
 
 上記のユーザースクリプトのコードは次のとおりです。
 
@@ -122,7 +122,7 @@ PlayCanvas チームは現在、[Violentmonkey][violentmonkey]オープンソー
 
 スクリプトの重要な部分を解説します。
 
-スクリプトの最上部には、他のユーザーとスクリプトを共有する場合の情報ヘッダーがあります。重要な行は、スクリプトがロードされるURLを制御する `@match` 属性です。このケースでは、任意のPlayCanvasシーンにロードされるように設定されています。これをどのように変更するかの詳細は、[Violentmonkeyのドキュメンテーション][violentmonkey-matching]で見つけることができます。
+スクリプトの最上部には、他のユーザーとスクリプトを共有する場合の情報ヘッダーがあります。重要な行は、スクリプトがロードされるURLを制御する `@match` 属性です。このケースでは、任意のPlayCanvasシーンにロードされるように設定されています。これをどのように変更するかの詳細は、[Violentmonkeyのドキュメンテーション](https://violentmonkey.github.io/api/matching/)で見つけることができます。
 
 ```javascript
 // ==UserScript==
@@ -143,7 +143,7 @@ PlayCanvas チームは現在、[Violentmonkey][violentmonkey]オープンソー
     editor.once('load', () => createButton());
 ```
 
-作成されるボタンは、エディタも使用している[PCUI][pcui]フレームワークライブラリからのものです。また、ボタンをアタッチするためのビューポートDOMを取得するために、いくつかのプライベートAPIを使用しています。
+作成されるボタンは、エディタも使用している[PCUI](https://github.com/playcanvas/pcui)フレームワークライブラリからのものです。また、ボタンをアタッチするためのビューポートDOMを取得するために、いくつかのプライベートAPIを使用しています。
 
 ```javascript
     function createButton() {
@@ -168,12 +168,3 @@ PlayCanvas チームは現在、[Violentmonkey][violentmonkey]オープンソー
         });
     }
 ```
-
-[github-api]: https://api.playcanvas.com/editor/
-[github-repo]: https://github.com/playcanvas/editor-api
-[user-scripts]: https://en.wikipedia.org/wiki/Userscript
-[viewport]: /user-manual/editor/interface/viewport
-[violentmonkey]: https://violentmonkey.github.io/
-[violentmonkey-docs]: https://violentmonkey.github.io/guide/creating-a-userscript/
-[violentmonkey-matching]: https://violentmonkey.github.io/api/matching/
-[pcui]: https://github.com/playcanvas/pcui
