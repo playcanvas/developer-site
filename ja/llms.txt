@@ -7,7 +7,7 @@ For the complete documentation content, see: https://developer.playcanvas.com/ll
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 548
-Generated: 2026-01-06
+Generated: 2026-01-09
 
 ## Recommended Entry Points
 
@@ -29,7 +29,6 @@ Generated: 2026-01-06
 - https://developer.playcanvas.com/user-manual/getting-started/community/ - Join the PlayCanvas Community
 - https://developer.playcanvas.com/user-manual/getting-started/made-with-playcanvas/ - Made with PlayCanvas
 - https://developer.playcanvas.com/user-manual/getting-started/open-source/ - Open Source Mission
-- https://developer.playcanvas.com/user-manual/getting-started/supported-browsers/ - Supported Browsers
 
 ### Account Management
 - https://developer.playcanvas.com/user-manual/account-management/ - Account Management
@@ -47,6 +46,7 @@ Generated: 2026-01-06
 - https://developer.playcanvas.com/user-manual/engine/migrations/ - Engine Migrations
 - https://developer.playcanvas.com/user-manual/engine/running-in-node/ - Running the Engine in Node.js
 - https://developer.playcanvas.com/user-manual/engine/standalone/ - Using the Engine Standalone
+- https://developer.playcanvas.com/user-manual/engine/supported-browsers/ - Supported Browsers
 
 ### Editor
 - https://developer.playcanvas.com/user-manual/editor/ - PlayCanvas Editor
