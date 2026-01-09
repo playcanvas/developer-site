@@ -29159,7 +29159,22 @@ You can also define a sensible range of values using the `@range` tag:
 speed = 10;
 ```
 
-This tells the Editor that the value should be within 0 - 10. The Editor will create a numerical slider mapped to this range.
+This tells the Editor that the value should be within 0 - 10.
+
+The `@range` tag supports two formats:
+
+- `@range [min, max]` - Constrains the value between minimum and maximum. The Editor displays a slider.
+- `@range [min]` - Constrains the value to a minimum only (no upper limit). The Editor displays a numeric input without a slider.
+
+For example, to create an attribute that must be non-negative but has no upper limit:
+
+```javascript
+/** 
+ * @attribute
+ * @range [0]
+ */
+positiveValue = 1;
+```
 
 [Image: Attribute Constraint]
 
