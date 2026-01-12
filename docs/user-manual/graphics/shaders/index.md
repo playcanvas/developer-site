@@ -213,7 +213,3 @@ And Each created shader will be logged in the browser console, where you can ins
 ![sRGB](/img/user-manual/graphics/shaders/shader-log.png)
 
 For further information, refer to the [ShaderMaterial API documentation](https://api.playcanvas.com/engine/classes/ShaderMaterial.html).
-
-### Compute shaders
-
-Compute shaders are currently supported by the engine when using WebGPU, but their integration is still evolving. Full documentation will be provided as the system matures and stabilizes. In the meantime, we recommend studying the available engine examples, which demonstrate how compute shaders can be written, dispatched, and used within the current framework.
