@@ -6,7 +6,7 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 548
+Total Documents: 550
 Generated: 2026-01-12
 
 ## Recommended Entry Points
@@ -311,8 +311,10 @@ Generated: 2026-01-12
 - https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/sepia/ - Sepia Effect
 - https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/vignette/ - Vignette Effect
 - https://developer.playcanvas.com/user-manual/graphics/shaders/ - Shaders
+- https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders/ - Compute Shaders
 - https://developer.playcanvas.com/user-manual/graphics/shaders/glsl-specifics/ - GLSL Specifics
 - https://developer.playcanvas.com/user-manual/graphics/shaders/migrations/ - Shader Chunk Migrations
+- https://developer.playcanvas.com/user-manual/graphics/shaders/preprocessor/ - Shader Preprocessor
 - https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-specifics/ - WGSL Specifics
 
 ### Gaussian Splatting
