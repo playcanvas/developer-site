@@ -28,6 +28,72 @@ By doing this you will no longer see warning messages in the console.
 
 The following tables break down the chunk changes by Engine release.
 
+### *Engine v2.15*
+
+#### Gaussian Splat Shader Customization
+
+The `gsplatCustomizeVS` shader chunk has been deprecated and replaced with `gsplatModifyVS`. The new chunk provides a more efficient API that uses rotation quaternion and scale vector instead of covariance matrices. See [PR #8246](https://github.com/playcanvas/engine/pull/8246) for details.
+
+| Old (`gsplatCustomizeVS`) | New (`gsplatModifyVS`) |
+| --- | --- |
+| `modifyCenter(inout vec3 center)` | `modifySplatCenter(inout vec3 center)` |
+| `modifyCovariance(originalCenter, modifiedCenter, inout covA, inout covB)` | `modifySplatRotationScale(originalCenter, modifiedCenter, inout rotation, inout scale)` |
+| `modifyColor(center, inout color)` | `modifySplatColor(center, inout color)` |
+
+Helper function changes:
+
+| Old | New |
+| --- | --- |
+| `gsplatApplyUniformScale(covA, covB, scale)` | `scale *= factor` (direct multiplication) |
+| `gsplatExtractSize(covA, covB)` | `gsplatGetSizeFromScale(scale)` |
+| `gsplatMakeRound(covA, covB, radius)` | `gsplatMakeSpherical(scale, radius)` |
+
+**Migration example (GLSL):**
+
+Before:
+
+```glsl
+void modifyCenter(inout vec3 center) {
+    center.y += 1.0;
+}
+
+void modifyCovariance(vec3 originalCenter, vec3 modifiedCenter, inout vec3 covA, inout vec3 covB) {
+    gsplatApplyUniformScale(covA, covB, 2.0);
+}
+
+void modifyColor(vec3 center, inout vec4 color) {
+    color.rgb *= 0.5;
+}
+```
+
+After:
+
+```glsl
+void modifySplatCenter(inout vec3 center) {
+    center.y += 1.0;
+}
+
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
+    scale *= 2.0;
+}
+
+void modifySplatColor(vec3 center, inout vec4 color) {
+    color.rgb *= 0.5;
+}
+```
+
+**JavaScript usage:**
+
+```javascript
+// Before
+gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatCustomizeVS', customShader);
+
+// After
+gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
+```
+
+---
+
 ### *Engine v2.6*
 
 #### Internal engine chunks
