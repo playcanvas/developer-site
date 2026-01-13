@@ -671,8 +671,10 @@ const sidebars = {
             id: 'user-manual/graphics/shaders/index',
           },
           items: [
+            'user-manual/graphics/shaders/preprocessor',
             'user-manual/graphics/shaders/glsl-specifics',
             'user-manual/graphics/shaders/wgsl-specifics',
+            'user-manual/graphics/shaders/compute-shaders',
             'user-manual/graphics/shaders/migrations',
           ],
         },
