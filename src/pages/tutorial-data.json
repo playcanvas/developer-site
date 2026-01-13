@@ -462,6 +462,15 @@
       "filename": "gaussian-splat-physics-and-relighting"
     },
     {
+      "title": "3D Gaussian Splat Statues",
+      "tags": [
+        "gaussiansplatting",
+        "tutorial"
+      ],
+      "thumb": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1224723/266D9C-image-75.jpg",
+      "filename": "gaussian-splat-statues"
+    },
+    {
       "title": "Google H5 Ads Beta Monetization",
       "tags": [
         "scripts",
@@ -1265,7 +1274,7 @@
       "filename": "video-textures"
     },
     {
-      "title": "Vignette Abberation",
+      "title": "Vignette Aberration",
       "tags": [
         "tutorial",
         "posteffects"
