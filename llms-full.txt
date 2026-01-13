@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 550
-Generated: 2026-01-12
+Total Documents: 551
+Generated: 2026-01-13
 
 ================================================================================
 
@@ -1679,6 +1679,17 @@ URL: https://developer.playcanvas.com/tutorials/gaussian-splat-physics-and-relig
 Tags: gaussiansplatting, tutorial
 
 Post office courtyard in the Austrian town of Mödling. This app demonstrates SOG compression, shadow casting, dynamic relighting and physics. The splat was scanned by Christoph Schindelar. Press 'N' to enter Night Mode!
+
+[Interactive Demo]
+
+--------------------------------------------------------------------------------
+
+## 3D Gaussian Splat Statues
+
+URL: https://developer.playcanvas.com/tutorials/gaussian-splat-statues/
+Tags: gaussiansplatting, tutorial
+
+A 3D Gaussian Splat statue gallery featuring custom shaders and post effects that create beautiful transitions between each piece.
 
 [Interactive Demo]
 

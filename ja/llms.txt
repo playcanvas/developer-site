@@ -6,8 +6,8 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 550
-Generated: 2026-01-12
+Total Documents: 551
+Generated: 2026-01-13
 
 ## Recommended Entry Points
 
@@ -512,6 +512,7 @@ Generated: 2026-01-12
 - https://developer.playcanvas.com/tutorials/frames-per-sec-fps-counter/ - Frames Per Sec (FPS) counter
 - https://developer.playcanvas.com/tutorials/gaussian-splat-annotations/ - 3D Gaussian Splat Annotations
 - https://developer.playcanvas.com/tutorials/gaussian-splat-physics-and-relighting/ - 3D Gaussian Splat Physics and Relighting
+- https://developer.playcanvas.com/tutorials/gaussian-splat-statues/ - 3D Gaussian Splat Statues
 - https://developer.playcanvas.com/tutorials/google-ads-for-games/ - Google H5 Ads Beta Monetization
 - https://developer.playcanvas.com/tutorials/htmlcss---live-updates/ - HTML/CSS - Live Updates
 - https://developer.playcanvas.com/tutorials/htmlcss-ui/ - HTML/CSS UI
