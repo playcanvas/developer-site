@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 551
-Generated: 2026-01-13
+Total Documents: 552
+Generated: 2026-01-14
 
 ================================================================================
 
@@ -1690,6 +1690,17 @@ URL: https://developer.playcanvas.com/tutorials/gaussian-splat-statues/
 Tags: gaussiansplatting, tutorial
 
 A 3D Gaussian Splat statue gallery featuring custom shaders and post effects that create beautiful transitions between each piece.
+
+[Interactive Demo]
+
+--------------------------------------------------------------------------------
+
+## 3D Gaussian Splat Streaming LOD
+
+URL: https://developer.playcanvas.com/tutorials/gaussian-splat-streaming-lod/
+Tags: gaussiansplatting, tutorial
+
+An example project showing how to use PlayCanvas' streaming LOD format based on [SOG](/user-manual/gaussian-splatting/formats/sog) (Spatially Ordered Gaussians). The environment being streamed is the Church of Saints Peter and Paul.
 
 [Interactive Demo]
 
