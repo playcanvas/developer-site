@@ -423,11 +423,13 @@ import {
 The library uses abstract file system interfaces for maximum flexibility:
 
 **Reading:**
+
 - `UrlReadFileSystem` - Read from URLs (browser/Node.js)
 - `MemoryReadFileSystem` - Read from in-memory buffers
 - `ZipReadFileSystem` - Read from ZIP archives
 
 **Writing:**
+
 - `MemoryFileSystem` - Write to in-memory buffers
 - `ZipFileSystem` - Write to ZIP archives
 

@@ -423,11 +423,13 @@ import {
 ライブラリは最大限の柔軟性のために抽象ファイルシステムインターフェースを使用します：
 
 **読み取り:**
+
 - `UrlReadFileSystem` - URLからの読み取り（ブラウザ/Node.js）
 - `MemoryReadFileSystem` - インメモリバッファからの読み取り
 - `ZipReadFileSystem` - ZIPアーカイブからの読み取り
 
 **書き込み:**
+
 - `MemoryFileSystem` - インメモリバッファへの書き込み
 - `ZipFileSystem` - ZIPアーカイブへの書き込み
 
