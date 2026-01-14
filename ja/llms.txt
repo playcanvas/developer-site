@@ -338,7 +338,7 @@ Generated: 2026-01-14
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/recommended-tools/ - Recommended Tools
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/taking-photos/ - Taking Photos
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/ - Editing and Publishing Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/splat-transform/ - SplatTransform CLI Tool
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/splat-transform/ - SplatTransform
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/ - SuperSplat
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/camera-controls/ - Camera Controls
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/data-panel/ - Data Panel
