@@ -471,6 +471,15 @@
       "filename": "gaussian-splat-statues"
     },
     {
+      "title": "3D Gaussian Splat Streaming LOD",
+      "tags": [
+        "gaussiansplatting",
+        "tutorial"
+      ],
+      "thumb": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1408991/3CA651-image-75.jpg",
+      "filename": "gaussian-splat-streaming-lod"
+    },
+    {
       "title": "Google H5 Ads Beta Monetization",
       "tags": [
         "scripts",
