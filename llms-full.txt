@@ -18957,52 +18957,54 @@ SuperSplat continues to evolve with new features and improvements. Stay updated 
 
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/camera-controls/
 
-SuperSplat provides intuitive camera controls for navigating the 3D view, supporting mouse, touch, and keyboard inputs.
+SuperSplat provides intuitive camera controls for navigating the 3D view, supporting mouse, touch, and keyboard inputs. There are two control modes: **Orbit** (default) and **Fly**.
+
+- **Orbit mode** - Camera rotates around a focal point. Best for inspecting objects from all angles.
+- **Fly mode** - Camera moves freely through the scene. Best for navigating large environments.
+
+Press **V** to toggle between modes, or use the WASD keys to automatically switch to fly mode.
 
 ## Mouse Controls
 
-| Action | Control | Alternatives |
-|--------|---------|--------------|
-| **Orbit** | Left Mouse Button + Drag | Right Mouse Button + Ctrl/Shift + Drag |
-| **Zoom** | Mouse wheel scroll | Middle Mouse Button + Drag<br/>Right Mouse Button + Alt + Drag |
-| **Pan** | Right Mouse Button + Drag | |
-| **Set Orbit Point** | Double-click in 3D view | |
+| Action | Orbit Mode | Fly Mode |
+|--------|------------|----------|
+| Left drag | Orbit around focal point | Look around |
+| Middle drag | Zoom | Zoom |
+| Right drag | Pan | Pan |
+| Right + Ctrl/Shift drag | Orbit | Look around |
+| Right + Alt drag | Zoom | Zoom |
+| Mouse wheel | Zoom | Move forward/backward |
+| Mouse wheel + Shift | Pan (trackpad) | — |
+| Double-click | Set focal point | Set focal point (switches to orbit) |
 
 ## Touch Controls
 
-| Action | Control |
-|--------|---------|
-| **Orbit** | Single finger drag |
-| **Pan** | Two-finger drag |
-| **Zoom** | Two-finger pinch/spread |
+| Action | Orbit Mode | Fly Mode |
+|--------|------------|----------|
+| Single finger drag | Orbit | Look around |
+| Two-finger drag | Pan | — |
+| Two-finger pinch/spread | Zoom | Move forward/backward |
 
 ## Keyboard Controls
 
 | Key | Action |
 |-----|--------|
-| **Arrow Keys** | Fly-through navigation (Up/Down/Left/Right) |
-| **Shift + Arrows** | 10× faster fly speed |
-| **Ctrl/Alt + Arrows** | 0.1× slower fly speed (fine control) |
+| **W/A/S/D** | Fly forward/left/backward/right |
+| **Q/E** | Fly down/up |
+| **Shift** | 10× faster fly speed |
+| **Ctrl** | 0.1× slower fly speed |
+| **V** | Toggle between orbit and fly modes |
+| **C** | Reset camera to default position |
 | **F** | Focus camera on selection |
-| **M** | Toggle camera visualization mode |
-| **Space** | Toggle splat overlay visibility |
-| **G** | Toggle grid visibility |
 
 ## Camera Settings
 
-Access advanced camera settings through the **View Options** panel (gear icon):
+Access camera settings through the **View Options** panel (gear icon):
 
-### Field of View (FOV)
-
-- **Range:** 10° - 120°
-- **Default:** 60°
-- Adjusts the camera's viewing angle
-
-### Fly Speed
-
-- **Range:** 0.1 - 30
-- **Default:** 5
-- Controls the speed of arrow key navigation
+| Setting | Range | Default | Description |
+|---------|-------|---------|-------------|
+| **Field of View** | 10° - 120° | 75° | Camera viewing angle |
+| **Fly Speed** | 0.1 - 30 | 1 | Speed of WASD navigation |
 
 --------------------------------------------------------------------------------
 
@@ -19250,10 +19252,10 @@ SuperSplat works with several file formats for Gaussian Splat scenes:
 | ------ | ------ | ------ | ----------- |
 | `.ply` | ✅ | ✅ | Standard PLY format - most common interchange format, widely supported but heavyweight |
 | `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
-| `.splat` | ✅ | ✅ | Compressed splat format (antimatter15) - less efficient than compressed PLY |
+| `.sog` | ✅ | ✅ | Bundled super-compressed format (a zip file containing `meta.json` and `.webp` textures). Recommended for runtime applications |
+| `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](../splat-transform.md) CLI tool to export |
+| `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
 | `.lcc` | ✅ | ❌ | XGRIDS proprietary format which contains multiple levels-of-detail. Imports the highest LOD that contains less than 20 million Gaussians |
-| `.sog` | ✅ | ❌ | Bundled super-compressed format - export not yet supported ([GitHub issue](https://github.com/playcanvas/supersplat/issues/543)). Use [SplatTransform](../splat-transform.md) CLI tool to export |
-| `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures) - export not yet supported. Use [SplatTransform](../splat-transform.md) CLI tool to export |
 | `.html` / `.zip` | ❌ | ✅ | Standalone HTML viewer app - embeds compressed splat data for web sharing |
 
 :::warning
@@ -19264,7 +19266,7 @@ Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY fi
 
 ## Importing Splats
 
-SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.lcc`, `.sog` (bundled) and `meta.json` (unbundled SOG) formats.
+SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.lcc`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
 
 There are four ways to load a Gaussian Splat file:
 
