@@ -37,9 +37,9 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 | **W/A/S/D** | Fly forward/left/backward/right |
 | **Q/E** | Fly down/up |
 | **Shift** | 10× faster fly speed |
-| **Ctrl** | 0.1× slower fly speed |
+| **Alt** | 0.1× slower fly speed |
 | **V** | Toggle between orbit and fly modes |
-| **C** | Reset camera to default position |
+| **Shift + F** | Reset camera to default position |
 | **F** | Focus camera on selection |
 
 ## Camera Settings

@@ -17,7 +17,7 @@ The panel consists of three main sections:
 The panel is located at the bottom of the interface and is collapsed by default.
 
 :::tip
-The panel can be toggled open/closed by pressing the **D** key or by clicking the panel header.
+The panel can be toggled open/closed by pressing **Ctrl + D** (or **Cmd + D** on Mac) or by clicking the panel header.
 :::
 
 ## Data Selector
