@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 552
-Generated: 2026-01-15
+Generated: 2026-01-16
 
 ================================================================================
 
@@ -22459,11 +22459,18 @@ These settings can be configured based on the rendering mode.
 
 ### HDR (High Dynamic Range)
 
-For HDR rendering, the goal is to preserve HDR color information:
+For HDR rendering with post-processing effects like bloom, use the `CameraFrame` class (see below) which handles the HDR pipeline automatically.
+
+:::warning
+While `gammaCorrection` can be set to `GAMMA_NONE` directly on the camera, this will cause the entire scene to appear too dark on standard displays, as linear values are written directly without gamma encoding. Only use this for advanced custom pipelines where the output is rendered to an intermediate HDR texture that will be tonemapped and gamma-corrected in a subsequent pass.
+:::
+
+For manual HDR setup without `CameraFrame`:
 
 - **toneMapping**: Set to `TONEMAP_LINEAR` to maintain HDR colors.
-- **gammaCorrection**: Disable by setting to `GAMMA_NONE`.
-- Ensure that a compatible HDR pixel format is used for the render target. This format can be obtained using the `GraphicsDevice.getRenderableHdrFormat()` API.
+- **gammaCorrection**: Set to `GAMMA_NONE` only if rendering to an intermediate HDR render target.
+- Ensure a compatible HDR pixel format is used. This format can be obtained using the `GraphicsDevice.getRenderableHdrFormat()` API.
+- Apply tonemapping and gamma correction in a subsequent pass before displaying.
 
 ### HDR Display Output
 
