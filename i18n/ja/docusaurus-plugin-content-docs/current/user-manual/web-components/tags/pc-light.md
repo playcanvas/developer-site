@@ -23,7 +23,7 @@ title: <pc-light>
 | `intensity` | Number | `"1"` | ライトの強度乗数 |
 | `normal-offset-bias` | Number | `"0.05"` | シャドウレンダリング用の法線オフセットバイアス |
 | `outer-cone-angle` | Number | `"45"` | 外側コーン角度（度単位、スポットライト用） |
-| `penumbra-falloff` | Number | `"2"` | PCSSシャドウの半影減衰率 |
+| `penumbra-falloff` | Number | `"1"` | PCSSシャドウの半影減衰率 |
 | `penumbra-size` | Number | `"1"` | PCSSシャドウの半影サイズ |
 | `range` | Number | `"10"` | ライトの有効距離 |
 | `shadow-bias` | Number | `"0.2"` | 影の深度バイアス |

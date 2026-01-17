@@ -23,7 +23,7 @@ The `<pc-light>` tag is used to define a light component.
 | `intensity` | Number | `"1"` | Light intensity multiplier |
 | `normal-offset-bias` | Number | `"0.05"` | Normal offset bias for shadow rendering |
 | `outer-cone-angle` | Number | `"45"` | Outer cone angle in degrees (for spot lights) |
-| `penumbra-falloff` | Number | `"2"` | PCSS shadow penumbra falloff rate |
+| `penumbra-falloff` | Number | `"1"` | PCSS shadow penumbra falloff rate |
 | `penumbra-size` | Number | `"1"` | PCSS shadow penumbra size |
 | `range` | Number | `"10"` | Light range distance |
 | `shadow-bias` | Number | `"0.2"` | Shadow depth bias |
