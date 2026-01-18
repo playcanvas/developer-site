@@ -18,8 +18,10 @@ The Editor's main toolbar can be found on the left, vertical edge of the Editor.
 | ![Redo](/img/user-manual/editor/interface/toolbar/redo.png) | **Redo** | Redo the last operation. |
 | ![Bake](/img/user-manual/editor/interface/toolbar/lightmapper.png) | **Lightmapper** | Access the [Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps) bake and auto-rebake controls. |
 | ![Code Editor](/img/user-manual/editor/interface/toolbar/code-editor.png) | **Code Editor** | Open the [Code Editor](/user-manual/editor/scripting/code-editor). |
-| ![Publish](/img/user-manual/editor/interface/toolbar/publish.png) | **Publish** | [Publish a build](/user-manual/editor/publishing/web/playcanvas-hosting#publishing-a-new-build) of your project. |
+| ![Publish](/img/user-manual/editor/interface/toolbar/publish.png) | **Publish / Download** | [Publish a build](/user-manual/editor/publishing/web/playcanvas-hosting#publishing-a-new-build) or download your project. |
+| ![GitHub](/img/user-manual/editor/interface/toolbar/github.png) | **GitHub** | Report issues on [GitHub](https://github.com/playcanvas/editor/issues). |
+| ![Discord](/img/user-manual/editor/interface/toolbar/discord.png) | **Discord** | Join the PlayCanvas [Discord server](https://discord.gg/RSaMRzg). |
+| ![Forum](/img/user-manual/editor/interface/toolbar/forum.png) | **Forum** | Ask for help on the [forum](https://forum.playcanvas.com). |
 | ![How Do I](/img/user-manual/editor/interface/toolbar/how-do-i.png) | **How Do I...?** | Toggle the 'How Do I...?' help widget in the [Viewport](../viewport). |
 | ![Controls](/img/user-manual/editor/interface/toolbar/controls.png) | **Controls** | Show the list of [controls and keyboard shortcuts](../keyboard-shortcuts) supported by the Editor. |
-| ![Feedback](/img/user-manual/editor/interface/toolbar/feedback.png) | **Feedback** | Visit the [forum](https://forum.playcanvas.com/t/playcanvas-editor-feedback) to leave feedback about the Editor. |
 | ![Settings](/img/user-manual/editor/interface/toolbar/settings.png) | **Settings** | Load Editor and Scene Settings into the [Inspector](../inspector). |
