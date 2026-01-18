@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 552
-Generated: 2026-01-17
+Generated: 2026-01-18
 
 ================================================================================
 
@@ -12386,10 +12386,12 @@ The Editor's main toolbar can be found on the left, vertical edge of the Editor.
 | [Image: Redo] | **Redo** | Redo the last operation. |
 | [Image: Bake] | **Lightmapper** | Access the [Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps) bake and auto-rebake controls. |
 | [Image: Code Editor] | **Code Editor** | Open the [Code Editor](/user-manual/editor/scripting/code-editor). |
-| [Image: Publish] | **Publish** | [Publish a build](/user-manual/editor/publishing/web/playcanvas-hosting#publishing-a-new-build) of your project. |
+| [Image: Publish] | **Publish / Download** | [Publish a build](/user-manual/editor/publishing/web/playcanvas-hosting#publishing-a-new-build) or download your project. |
+| [Image: GitHub] | **GitHub** | Report issues on [GitHub](https://github.com/playcanvas/editor/issues). |
+| [Image: Discord] | **Discord** | Join the PlayCanvas [Discord server](https://discord.gg/RSaMRzg). |
+| [Image: Forum] | **Forum** | Ask for help on the [forum](https://forum.playcanvas.com). |
 | [Image: How Do I] | **How Do I...?** | Toggle the 'How Do I...?' help widget in the [Viewport](../viewport). |
 | [Image: Controls] | **Controls** | Show the list of [controls and keyboard shortcuts](../keyboard-shortcuts) supported by the Editor. |
-| [Image: Feedback] | **Feedback** | Visit the [forum](https://forum.playcanvas.com/t/playcanvas-editor-feedback) to leave feedback about the Editor. |
 | [Image: Settings] | **Settings** | Load Editor and Scene Settings into the [Inspector](../inspector). |
 
 --------------------------------------------------------------------------------
