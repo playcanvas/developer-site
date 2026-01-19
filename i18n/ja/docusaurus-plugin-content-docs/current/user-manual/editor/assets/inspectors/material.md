@@ -2,216 +2,287 @@
 title: Material
 ---
 
-3Dモデルのすべての表面は、マテリアルを使用してレンダリングされます。マテリアルは、色、光沢、凹凸など、表面の特性を定義します。
+マテリアルアセットは、レンダリング時のサーフェスの視覚的な外観を定義します。PlayCanvasは物理ベースレンダリング(PBR)を使用して、ライティングに正しく反応するリアルなマテリアルを作成します。マテリアルは、滑らかなプラスチックから粗い木材、光沢のある金属まで、幅広いサーフェスを表現できます。
 
-PlayCanvasでは、マテリアルはプロパティをまとめたアセットタイプです。デフォルトでは、物理的なマテリアルを表します。これにより、滑らかなプラスチックから粗い木材、傷だらけの金属まで、さまざまな種類の視覚効果を作成するために使用できる基本的なプロパティが公開されます。
+## インスペクター
 
-以前のフォンマテリアルタイプもサポートしています。
+[アセットパネル](/user-manual/editor/interface/assets)でマテリアルアセットを選択し、[インスペクター](/user-manual/editor/interface/inspector)で表示できます。
 
-## マテリアルのインポート {#importing-materials}
+![Material Inspector](/img/user-manual/editor/assets/inspectors/material/inspector.png)
 
-PlayCanvasに3Dモデル(例:FBXまたはCOLLADA)ファイルをアップロードすると、マテリアルが自動的にインポートされます。マテリアルは、3Dモデリングツール内に存在するプロパティと同じプロパティで生成されます。埋め込みメディア(FBXのみ)を使用してアップロードする場合は、関連するすべてのテクスチャマップが自動的に設定されます。
+マテリアルインスペクターは折りたたみ可能なセクションに分かれており、各セクションでマテリアルの外観の異なる側面を制御します。
 
-## 新しいマテリアルの作成 {#creating-new-materials}
+## テクスチャトランスフォーム
 
-PlayCanvas Editorインターフェイスから直接新しいマテリアルを作成できます。
+すべてのテクスチャマップのUVオフセット、タイリング、回転を制御します。
 
-![Create Material](/img/user-manual/assets/materials/create-asset-menu.jpg)
+![Texture Transform](/img/user-manual/editor/assets/inspectors/material/texture-transform.png)
 
-これにより、新しいマテリアルアセットが作成され、画面の右側にマテリアルインスペクターが開きます。
+| プロパティ | 説明 |
+|----------|-------------|
+| Apply To All Maps | 有効にすると、以下のオフセット、タイリング、回転の値がマテリアル内のすべてのテクスチャマップに適用されます。無効にすると、各マップに個別のトランスフォーム設定ができます。 |
+| Offset | テクスチャマップに適用するUVオフセット (U, V)。 |
+| Tiling | テクスチャマップに適用するUVスケール/タイリング (U, V)。 |
+| Rotation | テクスチャマップに適用する回転角度(度)。 |
 
-## マテリアルの選択 {#selecting-a-material}
+## アンビエント
 
-![Model Inspector](/img/user-manual/assets/materials/model-inspector-simple.jpg)
+マテリアルがアンビエントライティングとアンビエントオクルージョンにどのように反応するかを制御します。
 
-マテリアルを編集するには、まず選択する必要があります。これにより、マテリアルインスペクターが表示されます。
+![Ambient](/img/user-manual/editor/assets/inspectors/material/ambient.png)
 
-マテリアルをアセットパネルで選択することもできます。また、モデルインスペクターやModel Componentからもマテリアルを選択できます。
+| プロパティ | 説明 |
+|----------|-------------|
+| Ambient Occlusion | 事前にベイクされたアンビエントオクルージョンデータを含むテクスチャ。暗い領域はアンビエントライトを受けにくくなります。 |
+| UV Channel | AOテクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Color Channel | AO値を読み取るテクスチャチャンネル (R, G, B, または A)。 |
+| Occlude Specular | AOがスペキュラー反射にどのように影響するかを制御: Off、Multiply、またはGloss Based。 |
+| Vertex Color | テクスチャの代わりに頂点カラーをアンビエントオクルージョンに使用。 |
+| Color | シーンのグローバルアンビエントカラーと乗算されるアンビエントティントカラー。 |
+| Intensity | アンビエントオクルージョン効果の強度 (0-1)。 |
 
-マテリアルのプレビューアイコンをクリックすると、マテリアルインスペクターに移動します。
+## ディフューズ
 
-## マテリアルの割り当て {#assigning-materials}
+動的光源によって照らされたときのマテリアルの基本色を制御します。
 
-![Model Component](/img/user-manual/assets/materials/model.png)
+![Diffuse](/img/user-manual/editor/assets/inspectors/material/diffuse.png)
 
-Modelアセットのどこにどのマテリアルを割り当てるかを変更することができます。また、Model Componentを持つ特定のEntityのマテリアルをカスタマイズすることもできます。
+| プロパティ | 説明 |
+|----------|-------------|
+| Diffuse | ピクセルごとの色を定義するディフューズ/アルベドテクスチャ。 |
+| UV Channel | ディフューズテクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Color Channel | 読み取るテクスチャチャンネル (R, G, B, A, または RGB)。 |
+| Vertex Color | テクスチャの代わりに頂点カラーをディフューズに使用。 |
+| Color | ディフューズカラー。テクスチャが設定されている場合、これがテクスチャをティントします。 |
 
-Model Componentを持つEntityを選択すると、2つのボタンが表示されます - アセットマテリアルとEntityマテリアル。
+## スペキュラー
 
-![Model Inspector Free Slot](/img/user-manual/assets/materials/model-inspector-free-slot.jpg)
+マテリアルのスペキュラーハイライトと反射率を制御します。スペキュラーセクションは2つのワークフローをサポートしています: メタルネスとスペキュラー。
 
-Asset Materialsをクリックすると、Modelアセットが選択されます。アセットパネルからもModelアセットを選択できます。モデルインスペクターには、モデルのメッシュと各々に割り当てられたマテリアルが表示されます。Xボタンを使用してマテリアルをクリアでき、空きスロットをクリックして新しいマテリアルを割り当てることができます。
+![Specular](/img/user-manual/editor/assets/inspectors/material/specular.png)
 
-アセットパネルからマテリアルアセットをドラッグアンドドロップして、マテリアルスロットにドロップすることもできます。
+### 共通プロパティ
 
-エンティティマテリアルをクリックすると、まずカスタマイズするメッシュインスタンスを選択するよう求められます。
+| プロパティ | 説明 |
+|----------|-------------|
+| Enable GGX Specular | ブラッシュドメタルなどのマテリアル用の異方性サポート付きGGXスペキュラーレスポンスを有効にします。 |
+| Anisotropy | ピクセルごとの異方性方向を定義するテクスチャ (GGXが有効な場合に表示)。 |
+| Anisotropy Intensity | 異方性効果の強度 (0-1)。 |
+| Anisotropy Rotation | 異方性方向の回転角度(度)。 |
+| Use Metalness | メタルネスワークフロー(PBR)とスペキュラーワークフロー(レガシー)を切り替えます。 |
 
-![Select Mesh Instance](/img/user-manual/assets/materials/select.png)
+### メタルネスワークフロー
 
-メッシュインスタンスを選択した後、Model Componentに新しいマテリアルピッカーが表示されます。
+Use Metalnessが有効な場合:
 
-![Selected Mesh Instance](/img/user-manual/assets/materials/selected.png)
+| プロパティ | 説明 |
+|----------|-------------|
+| Metalness | ピクセルごとのメタルネスを定義するテクスチャ。白 (1) は金属、黒 (0) は非金属。 |
+| Vertex Color | テクスチャの代わりに頂点カラーをメタルネスに使用。 |
+| Metalness | メタルネス係数 (0-1)。テクスチャがある場合は乗算されます。 |
+| Use Specular Color and Factor | 非金属領域の追加スペキュラーカラー制御を有効にします。 |
+| Specular | スペキュラーカラーテクスチャ (Use Specular Colorが有効な場合に表示)。 |
+| Specularity Factor | ピクセルごとのスペキュラリティ係数用テクスチャ。 |
 
-その後、この特定のエンティティに別のマテリアルを選択できます。
+### スペキュラーワークフロー
 
-![Select Different Material](/img/user-manual/assets/materials/overridden.png)
+Use Metalnessが無効な場合:
 
-## マテリアルの編集 {#editing-a-material}
+| プロパティ | 説明 |
+|----------|-------------|
+| Specular | ハイライトカラーを定義するスペキュラーカラーテクスチャ。 |
+| Vertex Color | テクスチャの代わりに頂点カラーをスペキュラーに使用。 |
+| Tint | 有効にすると、以下のカラーがスペキュラーテクスチャをティントします。 |
+| Color | スペキュラーハイライトカラー。 |
 
-![Material Inspector](/img/user-manual/assets/materials/material-inspector.jpg)
+### 光沢度
 
-マテリアルを選択した後、そのプロパティを編集できます。
+| プロパティ | 説明 |
+|----------|-------------|
+| Glossiness | ピクセルごとの光沢度/滑らかさを定義するテクスチャ。 |
+| Vertex Color | テクスチャの代わりに頂点カラーを光沢度に使用。 |
+| Glossiness | 光沢度/シャイニネス値 (0-100)。値が高いほど鋭い反射を作成します。 |
+| Invert | グロスマップをラフネスマップとして扱います(値を反転)。 |
 
-## マテリアルマップ  {#material-maps}
+## エミッシブ
 
-![Material Map Slot](/img/user-manual/assets/materials/material-map-slot.jpg)
+マテリアルサーフェスからの発光を制御します。
 
-マテリアルの編集には、上記ページで詳細に説明されているさまざまなスロットにテクスチャマップを作成および割り当てることが多く含まれます。
+![Emissive](/img/user-manual/editor/assets/inspectors/material/emissive.png)
 
-ほとんどのテクスチャマップスロットで利用可能ないくつかのオプションがあります。
+| プロパティ | 説明 |
+|----------|-------------|
+| Emissive | ピクセルごとの発光色を定義するテクスチャ。 |
+| UV Channel | エミッシブテクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Color Channel | 読み取るテクスチャチャンネル (R, G, B, A, または RGB)。 |
+| Vertex Color | テクスチャの代わりに頂点カラーを発光に使用。 |
+| Color | エミッシブカラー。テクスチャが設定されている場合、これがテクスチャをティントします。 |
+| Intensity | エミッシブカラーの乗数。1以上の値でオーバーブライト/ブルーム効果を作成します。 |
+
+## オパシティ
+
+マテリアルの透明度とアルファテストを制御します。
+
+![Opacity](/img/user-manual/editor/assets/inspectors/material/opacity.png)
+
+| プロパティ | 説明 |
+|----------|-------------|
+| Blend Type | マテリアルが背景とどのようにブレンドされるか: None (不透明)、Alpha、Additive、Additive Alpha、Screen、Premultiplied Alpha、Multiply、Modulate 2x、Min、Max。 |
+| Opacity | ピクセルごとの不透明度を定義するテクスチャ。 |
+| UV Channel | オパシティテクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Color Channel | 不透明度を読み取るテクスチャチャンネル (R, G, B, または A)。 |
+| Vertex Color | テクスチャの代わりに頂点カラーを不透明度に使用。 |
+| Intensity | 全体的な不透明度 (0-1)。0は完全に透明、1は完全に不透明。 |
+| Alpha Test | アルファ値がこの閾値以下のピクセルは破棄されます (0-1)。 |
+| Alpha To Coverage | 順序に依存しない透明性のためのアルファトゥカバレッジを有効にします (MSAAが必要)。 |
+| Opacity Fades Specular | 有効にすると、不透明度はスペキュラー反射もフェードさせます。ガラスのようなマテリアルでは無効にします。 |
+| Opacity Dither | 不透明度のディザリングパターン: None、Bayer 8、またはBlue Noise。 |
+| Opacity Shadow Dither | シャドウ不透明度のディザリングパターン。 |
+| Alpha Fade | Opacity Fades Specularが無効なマテリアルのフェード係数 (0-1)。 |
+
+## ノーマル
+
+ノーマルマッピングによるサーフェスディテールを制御します。
+
+![Normals](/img/user-manual/editor/assets/inspectors/material/normals.png)
 
-### Textureアセット {#texture-asset}
+| プロパティ | 説明 |
+|----------|-------------|
+| Normals | ピクセルごとのサーフェス方向を定義するノーマルマップテクスチャ。 |
+| UV Channel | ノーマルテクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Bumpiness | ノーマルマップ効果の強度 (0-2)。0は効果なし、1は標準、2は誇張。 |
+
+## 視差
+
+高さマッピングを使用してサーフェスに深さの錯覚を追加します。ノーマルマップの設定が必要です。
+
+![Parallax](/img/user-manual/editor/assets/inspectors/material/parallax.png)
 
-最初にTextureアセットをアップロードしてください。PlayCanvasはTextureアセットを作成します。これらをマテリアルのスロットに割り当てることができます。
+| プロパティ | 説明 |
+|----------|-------------|
+| Heightmap | 高さマップテクスチャ。白は高い領域、黒は低い領域を表します。 |
+| UV Channel | 高さテクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Color Channel | 高さを読み取るテクスチャチャンネル (R, G, B, または A)。 |
+| Strength | 視差効果の強度 (0-2)。 |
+
+## クリアコート
 
-### ColorまたはTint Color {#color-or-tint-color}
+透明なコーティング(カーペイントやラッカー仕上げの木材など)をシミュレートする二次スペキュラーレイヤーを追加します。
 
-いくつかのマップスロットは、テクスチャマップがなくても単色にすることができます。また、テクスチャが割り当てられている場合は、tint colorをサポートするスロットもあります。tint colorが有効になっている場合、tint colorは、テクスチャマップスロットの色に乗算されます。
+![Clear Coat](/img/user-manual/editor/assets/inspectors/material/clearcoat.png)
 
-### Channel {#channel}
-
-一部のマップでは、単一のグレースケール値、つまり0.0 -> 1.0が必要です。この場合、使用するテクスチャのチャンネルを選択できます。 **RGB** は、すべての3つのチャンネルを使用することを意味します。**R**、 **G**、または **B** は、赤、緑、または青チャンネルのみが使用されることを意味します。
-
-### Offset & Tiling
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/offset-tiling.jpg" width="300" />
-
-| プロパティ名          | 説明 |
-|-------------------|-------------|
-| Apply to all Maps | オフセットとタイリングの値を個々のマップに適用するには、これをチェックを外します。 |
-| Offset            | このマテリアルで参照される最初のUVチャネルに適用するUおよびVのオフセット。 |
-| Tiling            | このマテリアルで参照される最初のUVチャネルに適用されるUおよびVのスケール。 |
-
-### Ambient
-
-Ambientプロパティは、マテリアルが周囲光でどのように表示されるかを決定します。
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/ambient.jpg" width="300" />
-
-| プロパティ名   | 説明 |
-|------------|-------------|
-| Tint       | マテリアルカラーとシーンのグローバルのAmbientカラーを掛け合わせるには、これをチェックします。 |
-| Color      | シーンのグローバルのAmbientカラーを乗算するtintカラーです。 |
-| AO Texture | プリベイクされたAmbient Occlusionを含むAmbient Occlusionマップです。 |
-
-### ディフューズ (Diffuse)
-
-Diffuseプロパティは、マテリアルがシーン内の動的な光源から放射される拡散光をどのように反射するかを定義します。
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/diffuse.jpg" width="300" />
-
-| プロパティ名   | 説明 |
-|------------|-------------|
-| テクスチャ (Texture)    | ピクセルごとのDiffuseマテリアルカラーを指定するDiffuseマップです。Diffuseマップが設定されていない場合、Diffuseカラーが代わりに使用されます。 |
-| Tint       | チェックを入れると、マテリアルのDiffuseマップをDiffuseカラーで調節できます。 |
-| Color      | Diffuseマップが設定されていない場合、これがマテリアルのDiffuseカラーとなります。Diffuseマップが設定されており、tintが有効になっている場合には、この設定された色でマテリアルのDiffuseマップを調整できます。 |
-
-### スペキュラーマップ (Specular)
-
-Specularプロパティは、Specularハイライト（光沢）の色を定義します。
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/specular.jpg" width="300" />
-
-| プロパティ名      | 説明 |
-|---------------|-------------|
-| Use Metalness | SpecularとMetalnessのワークフローを切り替えます。 |
-| Specular Map  | ピクセルごとのSpecularカラーを指定するSpecularマップです。Specularマップが設定されていない場合、Specularカラーが代わりに使用されます。 |
-| Tint          | チェックを入れると、マテリアルのSpecularマップをSpecularカラーで調節できます。 |
-| Color         | Specularマップが設定されていない場合、マテリアルのSpecularカラーになります。Speculaマップが設定され、tintが有効になっている場合には、この設定された色でマテリアルのSpecularマップを調整できます。 |
-| Metalness Map | [Metalnessを使用する場合のみ]このマップは、ピクセルあたりのMetalness値を指定します。1の値はメタル（金属）であり、0の値はノンメタル（非金属）です。 |
-| Gloss Map     | ピクセルごとのShininess値を指定するGlossマップです。GlossマップはShininessプロパティによって調整されます。 |
-| 光沢度 (Glossiness)    | 表面の滑らかさを決定する値です。Shininessの値が小さい場合、表面は荒く、鏡面反射のハイライトは広範囲にわたります。Shininessの値が大きい場合、表面は滑らかで、より集中した鏡面反射のハイライトが現れます（表面が磨かれて光沢が出るという意味）。 |
-
-### エミッシブ (Emissive)
-
-Emissiveプロパティは、マテリアルの発光を制御します。（反射する光とは異なります）
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/emissive.jpg" width="300" />
-
-| プロパティ名   | 説明 |
-|------------|-------------|
-| テクスチャ (Texture)    | ピクセルごとのEmissiveカラーを指定するEmissiveマップです。Emissiveマップが設定されていない場合、Emissiveカラーが代わりに使用されます。 |
-| Tint       | チェックを入れると、マテリアルのEmissiveマップをEmissiveカラーで調節できます。 |
-| Color      | Emissiveマップが設定されていない場合、これはマテリアルのEmissiveカラーとなります。Emissiveマップが設定され、tintが有効になっている場合、この設定された色でマテリアルのEmissiveマップを調整できます。 |
-| インテンシティ (Intensity)  | 特に明るいEmissiveマテリアルに対してさらに明るい効果を加えることができるEmissiveカラーの乗数です。 |
-
-### Opacity
-
-Opacityは、透明度のレベルを設定します。
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/opacity.jpg" width="300" />
-
-| プロパティ名   | 説明 |
-|------------|-------------|
-| テクスチャ (Texture)    | ピクセルごとの不透明度を指定するOpacityマップです。Opacityマップは、'Amount'プロパティによって調整できます。 |
-| インテンシティ (Intensity)  | マテリアルの不透明度です。これは 0（完全に透明）から 1（完全に不透明）の値です。デフォルトは1です。 |
-
-### Normals
-
-Normalマップを指定するためにこれを使用します（これらは凹凸性を決定します - PlayCanvasでは、HeightマップではなくNormalマップを使用する必要があります）。
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/normals.jpg" width="300" />
-
-| プロパティ名   | 説明 |
-|------------|-------------|
-| Bumpiness  | 適用されるNormalマップの強度です。これは 0（Normalマップの影響がない）から 2（Normalマップは大きく影響）の値です。デフォルトは1です。 |
-| テクスチャ (Texture)    | ピクセルごとの表面のNormalを指定するNormalマップです。Normalマップは 'Bumpiness' プロパティで調整できます。 |
-
-### Parallax
-
-Parallaxマップは、表面に視差を与えることでNormalマップにさらなるリアルな感覚を加えます。Parallaxオプションは、マテリアルにNormalマップを設定した場合にのみ有効になります。
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/parallax.jpg" width="300" />
-
-| プロパティ名    | 説明 |
-|-------------|-------------|
-| Height Map  | ピクセルごとのParallax効果を指定するHeightマップ。白は最高の高さで、黒はゼロです。  |
-| Strength    | Parallax効果の強度（0から2の間の値、デフォルトは1） |
-
-### 環境マップ (Environment)
-
-Environmentプロパティは、マテリアルが環境をどのように反射するかを決定します。
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/environment.jpg" width="300" />
-
-| プロパティ名            | 説明 |
-|---------------------|-------------|
-| Sphere Map          | 環境反射を近似するSphere Mapテクスチャアセット。Sphere Mapが設定されている場合、Cube Mapプロパティは非表示になります（これらのプロパティは相互に排他的です）。 |
-| Cube Map            | 環境反射を近似するCube Mapテクスチャアセット（Sphereマップよりも高い精度）です。Cube Mapが設定されている場合、Sphere Mapプロパティは非表示になります（これらのプロパティは相互に排他的だからです）。 |
-| Reflectivity        | マテリアルから反射される光の部分を決定する要素。この値はデフォルトで1（全反射）になります。 |
-| Refraction          | マテリアルを通過する光の部分を決定する要素。 |
-| Index of Refraction | マテリアルを通過する光の歪みの量を決定します。 |
-
-### Light Map
-
-Light Mapには事前にベイクされたDiffuse Lightingが含まれています。Light Mapの使用は、実行時に行われる動的なライトの計算を事前に計算できるため、最適化と考えられます。
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/lightmap.jpg" width="300" />
-
-| プロパティ名   | 説明 |
-|------------|-------------|
-| テクスチャ (Texture)    | プリベイクされたDiffuse Lightingを含むLight Mapテクスチャです。Light Mapを使用するには、2つのUVセットを持つメッシュにマテリアルを適用する必要があります。Light Mapは2番目のUVセットを使用します。 |
-
-### その他のレンダリング状態
-
-その他のレンダリング状態を使用して、マテリアルでメッシュをレンダリングする方法を追加で制御できます。
-
-<img loading="lazy" src="/img/user-manual/assets/types/material/other.jpg" width="300" />
-
-| プロパティ名        | 説明 |
-|-----------------|-------------|
-| Depth Test      | チェックされている場合、マテリアルを持つメッシュがレンダリングされるとき、ピクセルごとにチェックが行われ、ピクセルがエンジンのDepth Testに合格するかどうかが決定されます。デフォルトでは、ピクセルは既にDepthバッファにあるものと同じかそれ以下のz深度を持たなければなりません。つまり、メッシュはそれが前に何もない場合にのみ表示されます。チェックが外されている場合、メッシュはDepthバッファにすでにあるものに関係なくレンダリングされます。デフォルトではオンです。 |
-| Depth Write     | チェックされた場合、マテリアルを含むメッシュがレンダリングされると、その深度情報はDepthバッファーに書き込まれます。これにより、後続のメッシュがレンダリングされると、このマテリアルでレンダリングされたメッシュに対してDepthテストされます。デフォルトはオンです。 |
-| Cull            | オプションは次のとおりです。<ul> <li>None: 前面と背面の両方がレンダリングされます。</li> <li>Front Faces: 前面がレンダリングされ、背面はレンダリングされません。</li> <li>Back Faces: 背面がレンダリングされ、前面はレンダリングされません。これがデフォルトです。</li> </ul> PlayCanvasでは、反時計回りの頂点の巻き方が前面の三角形を指定すると規定しています。背面のカリングは、背面のピクセルが頻繁に上書きされる（凸メッシュの場合）ため、パフォーマンス向上に役立つことが多いです。 |
-| Blend Type      | オプションは次のとおりです。<ul> <li>None: メッシュは不透明です。これがデフォルトです。</li> <li>Normal: メッシュは透明で、ステンドグラスのようです。</li> <li>Additive: メッシュの色がフレームバッファにすでにレンダリングされているものに加えられます。</li> <li>Pre-multiply: Normal'ブレンドと同様ですが、このマテリアルでレンダリングされるメッシュの色がすでにそのアルファ値で調整されていると想定されます。</li><li>Multiply: レンダリング時に、メッシュの色がフレームバッファにすでにレンダリングされたものと乗算されます。</li></ul> |
-| Shadow Sampling | オプションは: <ul><li>Hard</li><li>PCF 3x3</li></ul>  |
+| プロパティ | 説明 |
+|----------|-------------|
+| Clear Coat Factor | クリアコートレイヤーの強度 (0-1)。0に設定すると無効になります。 |
+| Clear Coat | ピクセルごとのクリアコート強度を定義するテクスチャ。 |
+| UV Channel | クリアコートテクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Vertex Color | 頂点カラーをクリアコート強度に使用。 |
+| Vertex Color Channel | 使用する頂点カラーチャンネル (R, G, B, または A)。 |
+| Clear Coat Gloss | ピクセルごとのクリアコート光沢度を定義するテクスチャ。 |
+| Glossiness | クリアコートレイヤーの滑らかさ (0-1)。 |
+| Invert | グロスマップをラフネスマップとして扱います。 |
+| Clear Coat Normals | クリアコートレイヤー用のノーマルマップ (オレンジピール効果など)。 |
+| Bumpiness | クリアコートノーマルマップの強度 (0-2)。 |
+
+## シーン
+
+布地や類似のマテリアル用のソフトでベルベットのような反射を追加します。
+
+![Sheen](/img/user-manual/editor/assets/inspectors/material/sheen.png)
+
+| プロパティ | 説明 |
+|----------|-------------|
+| Use Sheen | シーンスペキュラー効果を有効にします。 |
+| Sheen | ピクセルごとのシーンカラーを定義するテクスチャ。 |
+| UV Channel | シーンテクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Vertex Color | 頂点カラーをシーンに使用。 |
+| Color | シーンティントカラー。 |
+| Sheen Glossiness | ピクセルごとのシーン光沢度を定義するテクスチャ。 |
+| Glossiness | シーン効果の滑らかさ (0-1)。 |
+| Invert | グロスマップをラフネスマップとして扱います。 |
+
+## 屈折
+
+ガラスや水などの透明なマテリアルを通過する光の屈折を制御します。
+
+![Refraction](/img/user-manual/editor/assets/inspectors/material/refraction.png)
+
+| プロパティ | 説明 |
+|----------|-------------|
+| Dynamic Refractions | グラブパスを使用したリアルタイム屈折を有効にします。 |
+| Refraction | ピクセルごとの屈折強度を定義するテクスチャ。 |
+| UV Channel | 屈折テクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Vertex Color | 頂点カラーを屈折強度に使用。 |
+| Refraction | マテリアルを通過する光の量 (0-1)。 |
+| Index Of Refraction | 光の歪みを制御。1.0 / IORとして表されます。一般的な値: ガラス ~0.67、水 ~0.75。 |
+| Dispersion | 色収差(色分離)の強度。0は分散なし。 |
+| Thickness | ピクセルごとのマテリアル厚さを定義するテクスチャ。 |
+| Scale | 厚さの乗数。光の吸収量に影響します。 |
+| Attenuation | マテリアルボリュームを通過する光の吸収色。 |
+| Attenuation Distance | 光が完全に吸収される距離。 |
+
+## イリデッセンス
+
+シャボン玉、油膜、甲虫の殻などに見られる虹色の色変化を作成します。
+
+![Iridescence](/img/user-manual/editor/assets/inspectors/material/iridescence.png)
+
+| プロパティ | 説明 |
+|----------|-------------|
+| Use Iridescence | イリデッセント回折効果を有効にします。 |
+| Iridescence | ピクセルごとのイリデッセンス強度を定義するテクスチャ。 |
+| UV Channel | イリデッセンステクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
+| Iridescence | イリデッセンス効果の強度 (0-1)。 |
+| Iridescence Thickness | ピクセルごとの薄膜厚さを定義するテクスチャ。 |
+| Thickness Minimum | 薄膜の最小厚さ(ナノメートル単位)。 |
+| Thickness Maximum | 薄膜の最大厚さ(ナノメートル単位)。 |
+| Index of Refraction | 薄膜レイヤーの屈折率。 |
+
+## 環境
+
+キューブマップまたはスフィアマップを使用した環境反射を制御します。
+
+![Environment](/img/user-manual/editor/assets/inspectors/material/environment.png)
+
+| プロパティ | 説明 |
+|----------|-------------|
+| Sphere Map | 環境反射用のスフィアマップテクスチャ (Cube Mapと相互排他)。 |
+| Cube Map | 環境反射用のキューブマップテクスチャ。設定されていない場合、シーンのスカイボックスが使用されます。 |
+| Reflectivity | 環境反射の可視性 (0-1)。 |
+| Projection | キューブマップ投影モード: NormalまたはBox。 |
+| Center | ボックス投影の中心点 (X, Y, Z)。 |
+| Half Extents | ボックス投影ボリュームの半分のサイズ (W, H, D)。 |
+
+## ライトマップ
+
+ライトマップテクスチャから事前ベイクされたライティングを適用します。
+
+![Lightmap](/img/user-manual/editor/assets/inspectors/material/lightmap.png)
+
+| プロパティ | 説明 |
+|----------|-------------|
+| Lightmap | 事前ベイクされたディフューズライティングを含むライトマップテクスチャ。 |
+| UV Channel | ライトマップのサンプリングに使用するUVセット (通常、ユニークなUVにはUV1)。 |
+| Color Channel | 読み取るテクスチャチャンネル (R, G, B, A, または RGB)。 |
+| Vertex Color | テクスチャの代わりに頂点カラーをライトマップデータに使用。 |
+
+## その他
+
+追加のレンダー状態制御。
+
+![Other](/img/user-manual/editor/assets/inspectors/material/other.png)
+
+| プロパティ | 説明 |
+|----------|-------------|
+| Depth Test | 有効にすると、深度テストをパスした場合のみピクセルがレンダリングされます(前に何もない場合)。 |
+| Depth Write | 有効にすると、マテリアルは深度バッファに書き込みます。 |
+| Cull Mode | カリングする面: None (両面レンダリング)、Back Faces (デフォルト)、またはFront Faces。 |
+| Use Fog | このマテリアルにシーンのフォグ設定を適用。 |
+| Use Lighting | このマテリアルに動的ライティングを適用。 |
+| Use Skybox | 環境反射にシーンのスカイボックスを使用。 |
+| Use Tonemap | このマテリアルにトーンマッピングを適用。 |
+| Vertex Color Gamma | 頂点カラーをガンマ空間 (sRGB) 値として解釈。 |
+
+:::tip
+スクリプトでこのアセットを使用するには、[Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。プログラムによるマテリアル作成については、[StandardMaterial API](https://api.playcanvas.com/engine/classes/StandardMaterial.html)を参照してください。
+:::
