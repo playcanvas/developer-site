@@ -63,7 +63,7 @@ We can't see anything rendered yet though - we need to load assets and add a cam
 
 :::warning Performance Optimization
 
-We've disabled `antialias` in the graphics device options for optimal splat rendering performance. This setting helps reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
+We've disabled `antialias` in the graphics device options for optimal splat rendering performance. This setting helps reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../performance.md) guide.
 
 :::
 

@@ -49,6 +49,6 @@ Check out the [Global Sorting example](https://playcanvas.vercel.app/#/gaussian-
 ## See Also
 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
-- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/engine-features/draw-order)
-- [LOD Streaming](/user-manual/gaussian-splatting/building/engine-features/lod-streaming)
+- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order)
+- [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming)
 - [Global Sorting Example](https://playcanvas.vercel.app/#/gaussian-splatting/global-sorting)

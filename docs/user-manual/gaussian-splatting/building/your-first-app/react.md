@@ -53,7 +53,7 @@ This creates an empty 3D scene with optimal settings for web applications. Howev
 
 :::warning Performance Optimization
 
-We've configured the `Application` with `graphicsDeviceOptions={{ antialias: false }}` for optimal splat rendering performance. Setting `antialias` to `false` reduces the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
+We've configured the `Application` with `graphicsDeviceOptions={{ antialias: false }}` for optimal splat rendering performance. Setting `antialias` to `false` reduces the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../performance.md) guide.
 
 :::
 

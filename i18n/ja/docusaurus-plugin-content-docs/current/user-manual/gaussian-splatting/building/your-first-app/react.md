@@ -34,7 +34,7 @@ export default function App() {
 
 :::warning パフォーマンス最適化
 
-最適なスプラットレンダリングパフォーマンスのために、`Application` を `graphicsDeviceOptions={{ antialias: false }}` で設定しました。`antialias` を `false` に設定すると、Gaussian Splat レンダリングの主要なボトルネックであるフラグメント処理の負荷が軽減されます。[パフォーマンス](../engine-features/performance.md)ガイドで詳細をご覧ください。
+最適なスプラットレンダリングパフォーマンスのために、`Application` を `graphicsDeviceOptions={{ antialias: false }}` で設定しました。`antialias` を `false` に設定すると、Gaussian Splat レンダリングの主要なボトルネックであるフラグメント処理の負荷が軽減されます。[パフォーマンス](../performance.md)ガイドで詳細をご覧ください。
 
 :::
 

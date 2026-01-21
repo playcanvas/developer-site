@@ -42,7 +42,7 @@ Let's make some small modifications to the project to get started:
 
 :::info Performance Optimization
 
-We uncheck **Anti-Alias** and **Device Pixel Ratio** to reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. This helps to achieve optimal splat rendering performance. Learn more in the [Performance](../engine-features/performance.md) guide.
+We uncheck **Anti-Alias** and **Device Pixel Ratio** to reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. This helps to achieve optimal splat rendering performance. Learn more in the [Performance](../performance.md) guide.
 
 :::
 

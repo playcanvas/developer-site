@@ -21,7 +21,7 @@ This creates an empty 3D scene. However, we can't see anything rendered yet. For
 
 :::warning Performance Optimization
 
-We've disabled `antialias` and `high-resolution` on the `<pc-app>` element for optimal splat rendering performance. These settings help reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
+We've disabled `antialias` and `high-resolution` on the `<pc-app>` element for optimal splat rendering performance. These settings help reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../performance.md) guide.
 
 :::
 
