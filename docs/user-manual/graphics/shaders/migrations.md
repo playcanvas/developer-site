@@ -28,6 +28,42 @@ By doing this you will no longer see warning messages in the console.
 
 The following tables break down the chunk changes by Engine release.
 
+### *Engine v2.16*
+
+#### Gaussian Splat Accessor Function Renames
+
+The gsplat shader accessor functions have been renamed for API consistency. All functions now use the `getXXX()` naming pattern.
+
+| Old | New |
+| --- | --- |
+| `readCenter(source)` | `getCenter(source)` |
+| `readColor(source)` | `getColor(source)` |
+
+**Note:** `getCenter()` must be called before `getRotation()`, `getScale()`, or `getColor()` as it loads shared data used by the other functions.
+
+Affected chunks:
+
+- `src/scene/shader-lib/glsl/chunks/gsplat/vert/gsplat.js`
+- `src/scene/shader-lib/wgsl/chunks/gsplat/vert/gsplat.js`
+
+**Migration example (GLSL):**
+
+Before:
+
+```glsl
+vec3 center = readCenter(source);
+vec4 color = readColor(source);
+```
+
+After:
+
+```glsl
+vec3 center = getCenter(source);
+vec4 color = getColor(source);
+```
+
+---
+
 ### *Engine v2.15*
 
 #### Gaussian Splat Shader Customization
