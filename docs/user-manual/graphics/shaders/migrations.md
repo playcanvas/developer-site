@@ -42,6 +42,7 @@ The gsplat shader accessor functions have been renamed for API consistency. All 
 **Note:** `getCenter()` must be called before `getRotation()`, `getScale()`, or `getColor()` as it loads shared data used by the other functions.
 
 Affected chunks:
+
 - `src/scene/shader-lib/glsl/chunks/gsplat/vert/gsplat.js`
 - `src/scene/shader-lib/wgsl/chunks/gsplat/vert/gsplat.js`
 
