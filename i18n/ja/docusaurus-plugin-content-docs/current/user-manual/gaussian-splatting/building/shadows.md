@@ -4,7 +4,7 @@ title: 影
 
 Gaussian Splatsは、シーン内のメッシュやその他のサーフェスに影を落とすことができます。
 
-**[ライブデモを見る](https://playcanvas.github.io/#/gaussian-splatting/shadows)** - スプラットの影の動作を確認できます。
+**[ライブデモを見る](https://playcanvas.github.io/#/gaussian-splatting/simple)** - スプラットの影の動作を確認できます。
 
 ![スプラットの影](/img/user-manual/gaussian-splatting/splat-shadows.png)
 
