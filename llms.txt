@@ -6,8 +6,8 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 553
-Generated: 2026-01-21
+Total Documents: 551
+Generated: 2026-01-22
 
 ## Recommended Entry Points
 
@@ -321,15 +321,13 @@ Generated: 2026-01-21
 ### Gaussian Splatting
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/ - Gaussian Splatting
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/ - Building Splat-based Apps
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/ - Engine Features
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/custom-shaders/ - Custom Shaders
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/draw-order/ - Draw Order and Sorting
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/global-sorting/ - Global Sorting
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/lod-streaming/ - LOD Streaming
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/performance/ - Performance
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/picking/ - Picking
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/shadows/ - Shadows
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/streaming-lod-editor/ - Streaming LOD using Editor
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/ - Custom Shaders
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/draw-order/ - Draw Order and Sorting
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/global-sorting/ - Global Sorting
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/ - LOD Streaming
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/ - Performance
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/picking/ - Picking
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/shadows/ - Shadows
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/ - Your First Splat App
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/editor/ - Using the Editor
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/engine/ - Using the Engine API

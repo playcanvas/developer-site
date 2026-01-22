@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 553
-Generated: 2026-01-21
+Total Documents: 551
+Generated: 2026-01-22
 
 ================================================================================
 
@@ -16944,25 +16944,9 @@ This section shows how you can build Gaussian splat-based apps using PlayCanvas.
 
 --------------------------------------------------------------------------------
 
-## Engine Features
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/
-
-The PlayCanvas Engine includes a powerful, high-performance renderer for Gaussian Splats. This section covers a number of topics related to the capabilities of this renderer.
-
-## The GSplatComponent
-
-The [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html) is what grants PlayCanvas apps the ability to render 3D Gaussian Splats. To use it:
-
-1. Create an Entity
-2. Add a GSplatComponent to it
-3. Set a GSplat Asset on the component
-
---------------------------------------------------------------------------------
-
 ## Custom Shaders
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/custom-shaders/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/
 
 The PlayCanvas Engine supports custom shaders for Gaussian Splats, allowing you to create advanced visual effects and customize the rendering behavior beyond the standard implementation.
 
@@ -17267,7 +17251,7 @@ Here are some examples demonstrating different custom shader techniques:
 
 ## Draw Order and Sorting
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/draw-order/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/draw-order/
 
 ## How Gaussians Are Sorted
 
@@ -17285,7 +17269,7 @@ GSplatComponents are rendered back to front based on their bounding boxes, and e
 
 :::info Global sorting
 
-By default, the PlayCanvas Engine does not support "global sorting" across multiple GSplatComponents (where all Gaussians from all components would be sorted together). However, you can enable [Global Sorting](/user-manual/gaussian-splatting/building/engine-features/global-sorting), a beta feature that allows all Gaussians from multiple components to be sorted together, eliminating visibility and popping artifacts.
+By default, the PlayCanvas Engine does not support "global sorting" across multiple GSplatComponents (where all Gaussians from all components would be sorted together). However, you can enable [Global Sorting](/user-manual/gaussian-splatting/building/global-sorting), a beta feature that allows all Gaussians from multiple components to be sorted together, eliminating visibility and popping artifacts.
 
 :::
 
@@ -17299,7 +17283,7 @@ As a workaround, you can generate a mesh-based approximation of your splat and r
 
 ## Global Sorting
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/global-sorting/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/global-sorting/
 
 Global Sorting is a rendering feature that allows multiple Gaussian splat components in a scene to be sorted together, eliminating visibility and popping artifacts when splat components overlap.
 
@@ -17348,15 +17332,15 @@ Check out the [Global Sorting example](https://playcanvas.vercel.app/#/gaussian-
 ## See Also
 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
-- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/engine-features/draw-order)
-- [LOD Streaming](/user-manual/gaussian-splatting/building/engine-features/lod-streaming)
+- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order)
+- [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming)
 - [Global Sorting Example](https://playcanvas.vercel.app/#/gaussian-splatting/global-sorting)
 
 --------------------------------------------------------------------------------
 
 ## LOD Streaming
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/lod-streaming/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/
 
 LOD (Level of Detail) Streaming enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail based on the camera's distance. This feature dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
 
@@ -17377,20 +17361,6 @@ LOD streaming works by:
 
 This approach allows you to render massive splat scenes that would otherwise be impossible due to memory constraints.
 
-## Enabling LOD Streaming
-
-To enable LOD streaming, set the [`unified`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#unified) property to `true` on your GSplat component and load a streaming LOD format asset:
-
-```javascript
-entity.gsplat.unified = true;
-```
-
-:::note
-
-The `unified` property can only be changed when the component is disabled.
-
-:::
-
 ## Creating LOD Streaming Data
 
 To use LOD streaming, you need to generate the streaming format from multiple splat files with different levels of detail. The tool takes your pre-generated LOD files and creates an optimized streaming format.
@@ -17407,8 +17377,22 @@ You must create the different LOD levels yourself (LOD 0 = highest detail, highe
 
 Explore these live examples to see LOD streaming in action:
 
-- [LOD Streaming (Basic)](https://playcanvas.vercel.app/#/gaussian-splatting/lod-streaming) - Demonstrates basic LOD streaming with different detail levels
-- [LOD Streaming with Spherical Harmonics](https://playcanvas.vercel.app/#/gaussian-splatting/lod-streaming-sh) - Shows LOD streaming with spherical harmonic data
+- [LOD Streaming (Basic)](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming) - Demonstrates basic LOD streaming with different detail levels
+- [LOD Streaming with Spherical Harmonics](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming-sh) - Shows LOD streaming with spherical harmonic data
+
+## Enabling LOD Streaming
+
+To enable LOD streaming, set the [`unified`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#unified) property to `true` on your GSplat component and load a streaming LOD format asset:
+
+```javascript
+entity.gsplat.unified = true;
+```
+
+:::note
+
+The `unified` property can only be changed when the component is disabled.
+
+:::
 
 ## Controlling LOD Behavior
 
@@ -17440,6 +17424,62 @@ const gsplatSettings = app.scene.gsplat;
 // (See API documentation for available properties)
 ```
 
+## Using LOD Streaming in the Editor
+
+Native support for LOD streaming in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable streaming LOD functionality in your Editor projects.
+
+### Sample Project
+
+We've created a sample project that demonstrates how to use streaming LOD with Gaussian splats in the PlayCanvas Editor:
+
+**[Church of Saints Peter and Paul](https://playcanvas.com/project/1408991/overview/church-of-saints-peter-and-paul)**
+
+This project showcases a large-scale Gaussian splat scene with LOD streaming, including custom reveal shader effects.
+
+### Using the Streamed GSplat Script
+
+The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable LOD streaming:
+
+#### Setup Steps
+
+1. Add the script to an Entity in your scene
+2. Configure the `splatUrl` property to point to an externally hosted LOD splat format file
+
+:::note External Hosting
+
+Currently, the LOD splat data needs to be hosted externally (not as an Editor asset). This limitation will be removed in the future when native Editor support for streaming LOD format is added.
+
+:::
+
+#### Quality Settings
+
+The `streamed-gsplat.mjs` script provides four different quality/performance presets, allowing you to specify:
+
+- Which LOD levels to load
+- At what distances each LOD level should be displayed
+
+These settings enable fine-tuned control over the balance between visual quality and rendering performance, making it easy to optimize for different target platforms and devices.
+
+### Custom Shader Effects
+
+The sample project also demonstrates how to create custom shader effects for Gaussian splats. It includes scripts from the [PlayCanvas Engine GSplat Scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm/gsplat) repository.
+
+Specifically, the project uses the [Reveal Radial](https://github.com/playcanvas/engine/blob/main/scripts/esm/gsplat/reveal-radial.mjs) shader effect (along with its base class) to create an animated reveal of the splat scene. This effect:
+
+- Creates radial waves emanating from a center point
+- First shows small colored dots progressively
+- Then lifts particles up with a highlight effect before settling to their original state
+
+This demonstrates the flexibility of the PlayCanvas Engine's shader system for creating compelling visual effects with Gaussian splats.
+
+### Future Editor Improvements
+
+As native Editor support for streaming LOD is added, the following improvements are planned:
+
+- **Direct Asset Import**: Upload LOD splat files directly as Editor assets (no external hosting needed)
+- **Visual Configuration**: Configure LOD settings through the Editor UI instead of script properties
+- **Preview in Editor**: View and test streaming LOD behavior directly in the Editor viewport
+
 ## Benefits
 
 - **Better Performance**: LOD streaming reduces memory usage and improves rendering performance for large scenes
@@ -17453,14 +17493,14 @@ const gsplatSettings = app.scene.gsplat;
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
 - [SplatTransform CLI Tool](/user-manual/gaussian-splatting/editing/splat-transform)
 - [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
-- [Streaming LOD using Editor](/user-manual/gaussian-splatting/building/streaming-lod-editor)
-- [Global Sorting](/user-manual/gaussian-splatting/building/engine-features/global-sorting)
+- [Global Sorting](/user-manual/gaussian-splatting/building/global-sorting)
+- [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)
 
 --------------------------------------------------------------------------------
 
 ## Performance
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/performance/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/
 
 Rendering splats can be expensive on both the CPU and GPU. Here are some strategies to achieve good performance:
 
@@ -17491,104 +17531,208 @@ Both settings help reduce the fragment processing load, which is the primary bot
 
 ## Picking
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/picking/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/picking/
 
 The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/classes/Picker.html) which can query the mesh instance rendered at a specified pixel. The picker works with splats in the same way that it does for meshes.
 
-Check out the [Engine Splat Picking Example](https://playcanvas.github.io/#/gaussian-splatting/picking) to see how it's done.
+**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/picking)** - See splat picking in action with interactive selection and world position detection.
+
+## Setting Up the Picker
+
+To pick splats, create a Picker instance with depth enabled (third parameter set to `true`):
+
+```javascript
+// Create a picker with depth buffer support for world position detection
+const picker = new pc.Picker(app, 1, 1, true);
+```
+
+The depth buffer is required if you want to retrieve the 3D world position of the picked point, not just identify which object was clicked.
+
+## Preparing for Picking
+
+Before querying the picker, you must render the ID texture by calling `prepare()`:
+
+```javascript
+// Get the layer containing your splats
+const worldLayer = app.scene.layers.getLayerByName('World');
+
+// Render the picking buffer
+picker.prepare(camera.camera, app.scene, [worldLayer]);
+```
+
+For better performance, you can resize the picker to use a lower resolution:
+
+```javascript
+// Use quarter resolution for faster picking
+const pickerScale = 0.25;
+picker.resize(canvas.clientWidth * pickerScale, canvas.clientHeight * pickerScale);
+
+// Scale the pick coordinates accordingly
+const scaledX = mouseX * pickerScale;
+const scaledY = mouseY * pickerScale;
+```
+
+## Identifying Picked Objects
+
+Use `getSelectionAsync()` to get the mesh instances at a screen position:
+
+```javascript
+const meshInstances = await picker.getSelectionAsync(x, y, 1, 1);
+if (meshInstances.length > 0) {
+    const meshInstance = meshInstances[0];
+    // Find the entity that owns this mesh instance
+    const pickedEntity = findEntityByMeshInstance(meshInstance);
+}
+```
+
+To match a mesh instance to its owning GSplat entity, compare against the `gsplat.instance.meshInstance` property:
+
+```javascript
+// Find entity with matching mesh instance
+const entity = entities.find(e => e.gsplat.instance.meshInstance === meshInstance);
+```
+
+## Getting World Position
+
+Use `getWorldPointAsync()` to get the 3D world position of a picked point:
+
+```javascript
+const worldPoint = await picker.getWorldPointAsync(x, y);
+if (worldPoint) {
+    // worldPoint is a Vec3 containing the 3D position
+    console.log('Picked position:', worldPoint.x, worldPoint.y, worldPoint.z);
+}
+```
+
+## Complete Example
+
+Here's a typical picking workflow combining object identification and world position:
+
+```javascript
+const handlePick = async (mouseX, mouseY) => {
+    // Use lower resolution for performance
+    const pickerScale = 0.25;
+    picker.resize(canvas.clientWidth * pickerScale, canvas.clientHeight * pickerScale);
+
+    // Prepare the picker
+    const worldLayer = app.scene.layers.getLayerByName('World');
+    picker.prepare(camera.camera, app.scene, [worldLayer]);
+
+    const x = mouseX * pickerScale;
+    const y = mouseY * pickerScale;
+
+    // Get the world position
+    const worldPoint = await picker.getWorldPointAsync(x, y);
+    if (!worldPoint) return;
+
+    // Get the picked object
+    const meshInstances = await picker.getSelectionAsync(x, y, 1, 1);
+    if (meshInstances.length === 0) return;
+
+    const meshInstance = meshInstances[0];
+
+    // Find the gsplat entity that owns this mesh instance
+    const entity = splatEntities.find(
+        e => e.gsplat.instance.meshInstance === meshInstance
+    );
+
+    if (entity) {
+        // Convert world position to entity's local space if needed
+        const localPos = entity.getWorldTransform()
+            .clone()
+            .invert()
+            .transformPoint(worldPoint);
+
+        console.log('Picked entity:', entity.name);
+        console.log('Local position:', localPos);
+    }
+};
+
+// Handle mouse clicks
+app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
+    handlePick(event.x, event.y);
+});
+
+// Handle touch events
+app.touch.on(pc.EVENT_TOUCHSTART, (event) => {
+    const touch = event.touches[0];
+    handlePick(touch.x, touch.y);
+});
+```
+
+## Debugging
+
+The picker exposes its internal buffers which can be useful for debugging:
+
+```javascript
+// Display the color buffer (object IDs)
+if (picker.colorBuffer) {
+    app.drawTexture(0.55, -0.77, 0.2, 0.2, picker.colorBuffer);
+}
+
+// Display the depth buffer
+if (picker.depthBuffer) {
+    app.drawTexture(0.77, -0.77, 0.2, 0.2, picker.depthBuffer);
+}
+```
 
 --------------------------------------------------------------------------------
 
 ## Shadows
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/engine-features/shadows/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/shadows/
 
-Splats can cast shadows onto meshes (see the GSplatComponent's [castShadows](https://api.playcanvas.com/engine/classes/GSplatComponent.html#castshadows) property).
+Gaussian Splats can cast shadows onto meshes and other surfaces in your scene.
+
+**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/simple)** - See splat shadows in action.
 
 [Image: Splat Shadows]
 
-View the [Splat Shadows Engine Example](https://playcanvas.github.io/#/gaussian-splatting/simple).
+## Enabling Shadow Casting
 
-Splats cannot directly receive shadows (although you can fake it with an invisible mesh that approximates the splat that is written to the depth buffer).
+To enable shadow casting on a GSplat component, set the [castShadows](https://api.playcanvas.com/engine/classes/GSplatComponent.html#castshadows) property:
 
---------------------------------------------------------------------------------
+```javascript
+entity.gsplat.castShadows = true;
+```
 
-## Streaming LOD using Editor
+Or when creating the component:
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/streaming-lod-editor/
+```javascript
+entity.addComponent('gsplat', {
+    asset: splatAsset,
+    castShadows: true
+});
+```
 
-The PlayCanvas Engine supports [LOD Streaming](/user-manual/gaussian-splatting/building/engine-features/lod-streaming) for Gaussian splats. Native support for this feature in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable streaming LOD functionality in your Editor projects.
+You'll also need a light with shadow casting enabled:
 
-## Sample Project
+```javascript
+entity.light.castShadows = true;
+```
 
-We've created a sample project that demonstrates how to use streaming LOD with Gaussian splats in the PlayCanvas Editor:
+## Shadow Quality
 
-**[Church of Saints Peter and Paul](https://playcanvas.com/project/1408991/overview/church-of-saints-peter-and-paul)**
+For better shadow quality, you can adjust the alpha clip threshold on the global GSplat material. This controls how transparent splats contribute to shadows:
 
-This project showcases a large-scale Gaussian splat scene with LOD streaming, including custom reveal shader effects.
+```javascript
+app.scene.gsplat.material.setParameter('alphaClip', 0.4);
+app.scene.gsplat.material.update();
+```
 
-## Using the Streamed GSplat Script
+Lower values include more semi-transparent splats in the shadow, while higher values create sharper but potentially incomplete shadows.
 
-The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable LOD streaming:
+:::note
 
-### Setup Steps
-
-1. Add the script to an Entity in your scene
-2. Configure the `splatUrl` property to point to an externally hosted LOD splat format file
-
-:::info Creating LOD Format
-
-To generate the required LOD streaming format, see the [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format) section in the SplatTransform documentation.
+The `alphaClip` parameter is a temporary measure. A more official API for controlling shadow quality is planned for a future release.
 
 :::
 
-:::note External Hosting
+## Receiving Shadows
 
-Currently, the LOD splat data needs to be hosted externally (not as an Editor asset). This limitation will be removed in the future when native Editor support for streaming LOD format is added.
+Splats cannot directly receive shadows from other objects. However, you can work around this limitation by using a shadow catcher - an invisible mesh that approximates the splat's shape and writes to the depth buffer to receive shadows.
 
-:::
-
-### Quality Settings
-
-The `streamed-gsplat.mjs` script provides four different quality/performance presets, allowing you to specify:
-
-- Which LOD levels to load
-- At what distances each LOD level should be displayed
-
-These settings enable fine-tuned control over the balance between visual quality and rendering performance, making it easy to optimize for different target platforms and devices.
-
-## Custom Shader Effects
-
-The sample project also demonstrates how to create custom shader effects for Gaussian splats. It includes scripts from the [PlayCanvas Engine GSplat Scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm/gsplat) repository.
-
-### Reveal Effect Example
-
-Specifically, the project uses the [Reveal Radial](https://github.com/playcanvas/engine/blob/main/scripts/esm/gsplat/reveal-radial.mjs) shader effect (along with its base class) to create an animated reveal of the splat scene. This effect:
-
-- Creates radial waves emanating from a center point
-- First shows small colored dots progressively
-- Then lifts particles up with a highlight effect before settling to their original state
-
-This demonstrates the flexibility of the PlayCanvas Engine's shader system for creating compelling visual effects with Gaussian splats.
-
-## Future Improvements
-
-As native Editor support for streaming LOD is added, the following improvements are planned:
-
-- **Direct Asset Import**: Upload LOD splat files directly as Editor assets (no external hosting needed)
-- **Visual Configuration**: Configure LOD settings through the Editor UI instead of script properties
-- **Preview in Editor**: View and test streaming LOD behavior directly in the Editor viewport
-
-Stay tuned for updates as these features are rolled out!
-
-## See Also
-
-- [LOD Streaming](/user-manual/gaussian-splatting/building/engine-features/lod-streaming)
-- [Global Sorting](/user-manual/gaussian-splatting/building/engine-features/global-sorting)
-- [SplatTransform CLI Tool](/user-manual/gaussian-splatting/editing/splat-transform)
-- [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
-- [Custom Shaders](/user-manual/gaussian-splatting/building/engine-features/custom-shaders)
-- [Sample Project: Church of Saints Peter and Paul](https://playcanvas.com/project/1408991/overview/church-of-saints-peter-and-paul)
+See [3DGS with Physics and Relighting](https://playcanvas.com/project/1358087/overview/3dgs-with-physics-and-relighting) for an example of this technique in action.
 
 --------------------------------------------------------------------------------
 
@@ -17684,7 +17828,7 @@ Let's make some small modifications to the project to get started:
 
 :::info Performance Optimization
 
-We uncheck **Anti-Alias** and **Device Pixel Ratio** to reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. This helps to achieve optimal splat rendering performance. Learn more in the [Performance](../engine-features/performance.md) guide.
+We uncheck **Anti-Alias** and **Device Pixel Ratio** to reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. This helps to achieve optimal splat rendering performance. Learn more in the [Performance](../performance.md) guide.
 
 :::
 
@@ -17829,7 +17973,7 @@ We can't see anything rendered yet though - we need to load assets and add a cam
 
 :::warning Performance Optimization
 
-We've disabled `antialias` in the graphics device options for optimal splat rendering performance. This setting helps reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
+We've disabled `antialias` in the graphics device options for optimal splat rendering performance. This setting helps reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../performance.md) guide.
 
 :::
 
@@ -18029,7 +18173,7 @@ This creates an empty 3D scene with optimal settings for web applications. Howev
 
 :::warning Performance Optimization
 
-We've configured the `Application` with `graphicsDeviceOptions={{ antialias: false }}` for optimal splat rendering performance. Setting `antialias` to `false` reduces the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
+We've configured the `Application` with `graphicsDeviceOptions={{ antialias: false }}` for optimal splat rendering performance. Setting `antialias` to `false` reduces the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../performance.md) guide.
 
 :::
 
@@ -18135,7 +18279,7 @@ This creates an empty 3D scene. However, we can't see anything rendered yet. For
 
 :::warning Performance Optimization
 
-We've disabled `antialias` and `high-resolution` on the `<pc-app>` element for optimal splat rendering performance. These settings help reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../engine-features/performance.md) guide.
+We've disabled `antialias` and `high-resolution` on the `<pc-app>` element for optimal splat rendering performance. These settings help reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../performance.md) guide.
 
 :::
 
