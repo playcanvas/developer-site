@@ -63,7 +63,7 @@ window.addEventListener('resize', () => app.resizeCanvas());
 
 :::warning パフォーマンスの最適化
 
-最適なsplatレンダリングパフォーマンスのために、グラフィックデバイスオプションで`antialias`を無効にしました。この設定は、Gaussian splatレンダリングにおける主要なボトルネックであるフラグメント処理の負荷を軽減するのに役立ちます。[パフォーマンス](../engine-features/performance.md)ガイドで詳細をご覧ください。
+最適なsplatレンダリングパフォーマンスのために、グラフィックデバイスオプションで`antialias`を無効にしました。この設定は、Gaussian splatレンダリングにおける主要なボトルネックであるフラグメント処理の負荷を軽減するのに役立ちます。[パフォーマンス](../performance.md)ガイドで詳細をご覧ください。
 
 :::
 

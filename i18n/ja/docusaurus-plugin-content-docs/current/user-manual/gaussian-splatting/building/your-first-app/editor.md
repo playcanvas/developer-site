@@ -42,7 +42,7 @@ PlayCanvasは新しいプロジェクトのダッシュボードに移動しま�
 
 :::info パフォーマンス最適化
 
-**Anti-Alias** と **Device Pixel Ratio** のチェックを外すことで、Gaussian splat レンダリングの主要なボトルネックであるフラグメント処理の負荷を軽減します。これにより、最適な splat レンダリングパフォーマンスを実現できます。詳細については、[パフォーマンス](../engine-features/performance.md) ガイドをご覧ください。
+**Anti-Alias** と **Device Pixel Ratio** のチェックを外すことで、Gaussian splat レンダリングの主要なボトルネックであるフラグメント処理の負荷を軽減します。これにより、最適な splat レンダリングパフォーマンスを実現できます。詳細については、[パフォーマンス](../performance.md) ガイドをご覧ください。
 
 :::
 
