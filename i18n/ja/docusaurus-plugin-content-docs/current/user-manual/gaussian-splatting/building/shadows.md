@@ -28,7 +28,7 @@ entity.addComponent('gsplat', {
 シャドウキャスティングが有効なライトも必要です：
 
 ```javascript
-light.light.castShadows = true;
+entity.light.castShadows = true;
 ```
 
 ## 影の品質
