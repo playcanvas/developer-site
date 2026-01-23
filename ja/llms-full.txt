@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 551
-Generated: 2026-01-22
+Generated: 2026-01-23
 
 ================================================================================
 
@@ -29061,7 +29061,7 @@ Before you begin, make sure you have:
 The fastest way to get started is with our scaffolding tool:
 
 ```bash
-npm create playcanvas@latest -t react-ts
+npm create playcanvas@latest -- -t react-ts
 ```
 
 This creates a new project with everything set up and ready to go. You can also try our [online playground](https://playcanvas-react.vercel.app/new) to experiment without installing anything locally.
@@ -29081,7 +29081,7 @@ URL: https://developer.playcanvas.com/user-manual/react/getting-started/installa
 The recommended way to get started is to use the official PlayCanvas scaffolding tool, and follow the prompts.
 
 ```bash
-npm create playcanvas@latest -t react-ts
+npm create playcanvas@latest -- -t react-ts
 ```
 
 This creates a new project with everything set up and ready to go. If you've followed the prompts, you'll have a new PlayCanvas React project running in your browser.
