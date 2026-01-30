@@ -11,6 +11,7 @@ PlayCanvas does not itself provide a tool to convert photogrammetry into a Gauss
 | [**Polycam**](https://poly.cam/) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
 | [**Luma AI**](https://lumalabs.ai/app) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
 | [**COLMAP**](https://colmap.github.io/) | Advanced | Win, Linux, macOS | Free | ✔️ | Camera Poses | |
+| [**Lichtfeld Studio**](https://lichtfeld.io/) | Advanced | Win, Linux | Free | ✔️ | Camera Poses + Training + Editing | CUDA GPU |
 | [**RealityScan**](https://www.realityscan.com/) | Advanced | Win | Free* | ❌ | Camera Poses | CUDA GPU |
 | [**Postshot**](https://www.jawset.com/) | Advanced | Win | Paid | ❌ | Camera Poses + Training | CUDA GPU |
 | [**Brush**](https://github.com/ArthurBrussee/brush) | Advanced | Win, Linux, macOS, Web | Free | ✔️ | Camera Poses + Training | |
@@ -62,6 +63,9 @@ Open source research framework for training various splat models. Features comma
 
 [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) (Windows, Linux)  
 Original reference implementation from the 3D Gaussian Splatting paper. Has a dependency on COLMAP. Provides research-grade quality, CUDA acceleration, full parameter control, though requires complex setup and is best used for experimentation.
+
+[**Lichtfeld Studio**](https://lichtfeld.io/) (Windows, Linux)  
+Free and open-source desktop application to train, edit, and render 3D Gaussian Splats. Includes an editing suite with transform, crop, and selection tools. Supports COLMAP-based datasets for training and can export PLY for interchange. Requires an NVIDIA GPU with CUDA 12.8+.
 
 ## Outputting a PLY File
 
