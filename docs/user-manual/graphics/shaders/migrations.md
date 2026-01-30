@@ -36,31 +36,25 @@ The gsplat shader accessor functions have been renamed for API consistency. All 
 
 | Old | New |
 | --- | --- |
-| `readCenter(source)` | `getCenter(source)` |
-| `readColor(source)` | `getColor(source)` |
+| `readCenter(source)` | `getCenter()` |
+| `readColor(source)` | `getColor()` |
 
-**Note:** `getCenter()` must be called before `getRotation()`, `getScale()`, or `getColor()` as it loads shared data used by the other functions.
+**Note:** `getCenter()` must be called before `getRotation()`, `getScale()`, or `getColor()` as it loads shared data used by the other functions. The `source` parameter is no longer required.
 
 Affected chunks:
 
 - `src/scene/shader-lib/glsl/chunks/gsplat/vert/gsplat.js`
 - `src/scene/shader-lib/wgsl/chunks/gsplat/vert/gsplat.js`
 
-**Migration example (GLSL):**
+#### gsplatCustomizeVS chunk removed
 
-Before:
+The `gsplatCustomizeVS` shader chunk has been removed in v2.16. It was deprecated in v2.15 in favor of `gsplatModifyVS`. Any code still using `gsplatCustomizeVS` will now trigger a warning that the chunk has been removed.
 
-```glsl
-vec3 center = readCenter(source);
-vec4 color = readColor(source);
-```
+The old covariance-based helper functions (`gsplatExtractSize`, `gsplatApplyUniformScale`, `gsplatMakeRound`) have also been removed from `gsplatHelpers.js`.
 
-After:
+**Migration:**
 
-```glsl
-vec3 center = getCenter(source);
-vec4 color = getColor(source);
-```
+Users must migrate to `gsplatModifyVS` as documented in the v2.15 migration guide below. See the [v2.15 migration guide](#engine-v215) for complete migration instructions.
 
 ---
 
