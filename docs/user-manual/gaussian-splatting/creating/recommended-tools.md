@@ -11,7 +11,7 @@ PlayCanvas does not itself provide a tool to convert photogrammetry into a Gauss
 | [**Polycam**](https://poly.cam/) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
 | [**Luma AI**](https://lumalabs.ai/app) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
 | [**COLMAP**](https://colmap.github.io/) | Advanced | Win, Linux, macOS | Free | ✔️ | Camera Poses | |
-| [**Lichtfeld Studio**](https://lichtfeld.io/) | Advanced | Win, Linux | Free | ✔️ | Camera Poses + Training + Editing | CUDA GPU |
+| [**Lichtfeld Studio**](https://lichtfeld.io/) | Advanced | Win, Linux | Free | ✔️ | Camera Poses + Training | CUDA GPU |
 | [**RealityScan**](https://www.realityscan.com/) | Advanced | Win | Free* | ❌ | Camera Poses | CUDA GPU |
 | [**Postshot**](https://www.jawset.com/) | Advanced | Win | Paid | ❌ | Camera Poses + Training | CUDA GPU |
 | [**Brush**](https://github.com/ArthurBrussee/brush) | Advanced | Win, Linux, macOS, Web | Free | ✔️ | Camera Poses + Training | |
