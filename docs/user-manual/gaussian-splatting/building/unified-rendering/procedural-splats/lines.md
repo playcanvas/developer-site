@@ -152,7 +152,7 @@ See the [Procedural Shapes example](https://playcanvas.github.io/#/gaussian-spla
 
 The script is available in the PlayCanvas Engine repository:
 
-```
+```text
 scripts/esm/gsplat/gsplat-lines.mjs
 ```
 

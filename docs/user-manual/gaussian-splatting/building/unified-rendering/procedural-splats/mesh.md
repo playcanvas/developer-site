@@ -125,7 +125,7 @@ See the [Procedural Mesh example](https://playcanvas.github.io/#/gaussian-splatt
 
 The script is available in the PlayCanvas Engine repository:
 
-```
+```text
 scripts/esm/gsplat/gsplat-mesh.mjs
 ```
 
