@@ -122,6 +122,31 @@ For source, if `streams` is omitted, format streams are automatically bound with
 
 For destination, `streams` is required and specifies which streams to write to.
 
+### Different Resource Sizes
+
+The source and destination resources can have different numbers of splats. The `process()` function executes once for each **destination** splat. The current destination splat index is available via `splat.index`:
+
+```glsl
+void process() {
+    uint destIndex = splat.index;  // Current destination splat index
+    
+    // Calculate which source splat to read from
+    uint sourceIndex = destIndex * 2;  // Example: sample every other splat
+    setSplat(sourceIndex);
+    vec3 srcPos = getCenter();
+    
+    // Write to destination
+    writePosition(vec4(srcPos, 1.0));
+}
+```
+
+You can also read from any source splat using `load{StreamName}WithIndex()` without changing the current splat context.
+
+This enables operations like:
+- Copying data from a larger source to a smaller destination (downsampling)
+- Generating destination splats from sampled source data
+- Mapping between resources with different splat counts
+
 ## Shader Functions
 
 ### Reading (Source)
