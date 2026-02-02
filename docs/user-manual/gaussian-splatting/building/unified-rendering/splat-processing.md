@@ -150,6 +150,17 @@ This enables operations like:
 
 ## Shader Functions
 
+### Built-in Uniforms
+
+The following uniforms are automatically available in processing shaders:
+
+| Uniform | Type | Description |
+|---------|------|-------------|
+| `srcNumSplats` | `uint` | Number of splats in source resource |
+| `dstNumSplats` | `uint` | Number of splats in destination resource |
+
+Padding pixels (where `splat.index >= dstNumSplats`) are automatically skipped by the processor.
+
 ### Reading (Source)
 
 When source streams aren't specified, the processor provides:
