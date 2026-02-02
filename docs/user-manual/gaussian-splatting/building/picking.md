@@ -8,7 +8,7 @@ The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/
 
 ## Unified vs Non-Unified Mode
 
-GSplat components can operate in unified or non-unified rendering mode (see [Unified Splat Rendering](./unified-rendering/) for details). The picking behavior differs between these modes:
+GSplat components can operate in unified or non-unified rendering mode (see [Unified Splat Rendering](../unified-rendering/) for details). The picking behavior differs between these modes:
 
 - **Unified mode**: Picking returns the `GSplatComponent` directly.
 - **Non-unified mode**: Picking returns a mesh instance, which you then match to find the owning entity.
