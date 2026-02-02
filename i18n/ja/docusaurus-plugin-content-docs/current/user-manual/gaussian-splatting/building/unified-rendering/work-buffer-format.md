@@ -103,6 +103,7 @@ app.scene.gsplat.format.addExtraStreams([
 ```
 
 Common stream formats:
+
 - `PIXELFORMAT_R32U` - Single unsigned integer (e.g., component IDs)
 - `PIXELFORMAT_RGBA8` - 4 bytes (e.g., packed data)
 - `PIXELFORMAT_RGBA16F` - 4 half floats (e.g., custom attributes)
@@ -166,6 +167,7 @@ entity.gsplat.deleteParameter('uComponentId');
 ```
 
 Supported uniform types:
+
 - Numbers (int, float, uint)
 - Arrays (vec2, vec3, vec4, mat4, etc.)
 - `Texture` objects
@@ -203,6 +205,7 @@ See [Splat Data Format - Shader Access](/user-manual/gaussian-splatting/building
 ## Live Example
 
 See the [LOD Instances example](https://playcanvas.github.io/#/gaussian-splatting/lod-instances) which demonstrates:
+
 - Adding a `splatId` stream to the work buffer
 - Writing component IDs during copy using `setWorkBufferModifier()`
 - Passing uniforms with `setParameter()`

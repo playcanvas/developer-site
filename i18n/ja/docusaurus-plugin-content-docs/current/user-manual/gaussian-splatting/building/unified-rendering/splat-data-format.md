@@ -50,6 +50,7 @@ For each stream, two load functions are generated:
 | `load{StreamName}WithIndex(index)` | Reads directly from a specific index |
 
 For example, a stream named `dataCenter` generates:
+
 - `loadDataCenter()` - reads using current splat index
 - `loadDataCenterWithIndex(index)` - reads from specified index
 
@@ -120,6 +121,7 @@ if (texture) {
 ```
 
 Common stream formats:
+
 - `PIXELFORMAT_RGBA8` - 4 bytes (e.g., packed flags or tint colors)
 - `PIXELFORMAT_RGBA16F` - 4 half floats (e.g., custom attributes)
 - `PIXELFORMAT_RGBA32F` - 4 floats (e.g., high precision data)
@@ -135,6 +137,7 @@ Streams cannot be removed once added.
 When creating [procedural splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) with `GSplatContainer`, you need to explicitly create and configure a format. PlayCanvas provides built-in formats for common cases, and you can also create custom formats with your own streams and shader code.
 
 See [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) for details on:
+
 - Built-in formats (`createDefaultFormat`, `createSimpleFormat`)
 - Creating custom formats with custom streams
 - Writing shader code to read your custom data
@@ -144,6 +147,7 @@ See [Procedural Splats](/user-manual/gaussian-splatting/building/unified-renderi
 The work buffer has its own format for storing intermediate splat data during unified rendering. You can add extra streams to it for customization during copy and render operations.
 
 See [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) for details on:
+
 - Adding extra streams to the work buffer
 - Customizing the copy operation with `setWorkBufferModifier()`
 - Writing and reading custom data

@@ -48,7 +48,6 @@ To enable LOD streaming, set the [`unified`](https://api.playcanvas.com/engine/c
 entity.gsplat.unified = true;
 ```
 
-
 ## Controlling LOD Behavior
 
 You can control and fine-tune LOD streaming using the following APIs:

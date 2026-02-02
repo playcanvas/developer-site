@@ -40,7 +40,6 @@ Set the `unified` property to `true` on your GSplat components:
 entity.gsplat.unified = true;
 ```
 
-
 ## Learn More
 
 For detailed information about unified rendering architecture and its features, see:

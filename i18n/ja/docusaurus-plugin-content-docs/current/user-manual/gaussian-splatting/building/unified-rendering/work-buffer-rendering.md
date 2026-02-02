@@ -199,6 +199,7 @@ const glslModifier = `
 ## Live Example
 
 See the [LOD Instances example](https://playcanvas.github.io/#/gaussian-splatting/lod-instances) which demonstrates:
+
 - Reading component IDs written during copy
 - Looking up colors from a texture
 - Applying per-component tinting with animated colors
