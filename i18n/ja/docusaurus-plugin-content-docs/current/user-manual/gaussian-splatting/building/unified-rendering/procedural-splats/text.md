@@ -1,67 +1,67 @@
 ---
-title: Text to Splats
+title: テキストからスプラットへ
 ---
 
-The `GsplatText` script renders text as Gaussian splats, with one splat per non-transparent pixel. This creates text labels that integrate seamlessly with splat-based scenes.
+`GsplatText`スクリプトは、非透明ピクセルごとに1つのスプラットとしてテキストをGaussian splatsでレンダリングします。これにより、スプラットベースのシーンにシームレスに統合されるテキストラベルが作成されます。
 
-:::info Beta Feature
+:::info ベータ機能
 
-GsplatText is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+GsplatTextは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
 
 :::
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
 
 :::
 
-## Overview
+## 概要
 
-`GsplatText` is a Script component that:
+`GsplatText`は以下を行うScriptコンポーネントです：
 
-- Renders text to a canvas using standard CSS fonts
-- Creates one splat per visible pixel
-- Displays text on the XZ plane (Y=0)
-- Supports fill color, stroke, and custom fonts
+- 標準CSSフォントを使用してキャンバスにテキストをレンダリング
+- 可視ピクセルごとに1つのスプラットを作成
+- XZ平面（Y=0）にテキストを表示
+- フィルカラー、ストローク、カスタムフォントをサポート
 
-Use the entity's transform to scale and position the text in your scene.
+エンティティのトランスフォームを使用して、シーン内でテキストをスケールおよび配置します。
 
-## Basic Usage
+## 基本的な使い方
 
 ```javascript
-// Import the script
+// スクリプトをインポート
 const { GsplatText } = await import('path/to/gsplat-text.mjs');
 
-// Add script component to an entity
+// エンティティにスクリプトコンポーネントを追加
 entity.addComponent('script');
 const textSplat = entity.script.create(GsplatText);
 
-// Configure text
+// テキストを設定
 textSplat.text = 'Hello World';
 textSplat.fontSize = 64;
 textSplat.fillStyle = '#ffffff';
 
-// Position and scale using entity transform
+// エンティティのトランスフォームを使用して配置とスケール
 entity.setLocalPosition(0, 0, 0);
 entity.setLocalScale(0.15, 0.15, 0.15);
 ```
 
-## Attributes
+## 属性
 
-| Attribute | Type | Default | Description |
+| 属性 | 型 | デフォルト | 説明 |
 |-----------|------|---------|-------------|
-| `text` | string | `''` | The text string to render |
-| `fontSize` | number | `64` | Font size in pixels |
-| `fontFamily` | string | `'sans-serif'` | CSS font family |
-| `fillStyle` | string | `'#ffffff'` | Text fill color (CSS color string) |
-| `strokeStyle` | string | `'rgba(0,0,0,0)'` | Stroke color (CSS color string) |
-| `strokeWidth` | number | `0` | Stroke width in pixels |
-| `padding` | number | `0` | Padding around text in pixels |
+| `text` | string | `''` | レンダリングするテキスト文字列 |
+| `fontSize` | number | `64` | ピクセル単位のフォントサイズ |
+| `fontFamily` | string | `'sans-serif'` | CSSフォントファミリー |
+| `fillStyle` | string | `'#ffffff'` | テキストのフィルカラー（CSSカラー文字列） |
+| `strokeStyle` | string | `'rgba(0,0,0,0)'` | ストロークカラー（CSSカラー文字列） |
+| `strokeWidth` | number | `0` | ピクセル単位のストローク幅 |
+| `padding` | number | `0` | ピクセル単位のテキスト周りのパディング |
 
-## Styling Examples
+## スタイリングの例
 
-### Basic White Text
+### 基本的な白いテキスト
 
 ```javascript
 textSplat.text = 'Score: 100';
@@ -69,7 +69,7 @@ textSplat.fontSize = 48;
 textSplat.fillStyle = '#ffffff';
 ```
 
-### Outlined Text
+### アウトライン付きテキスト
 
 ```javascript
 textSplat.text = 'GAME OVER';
@@ -79,7 +79,7 @@ textSplat.strokeStyle = '#000000';
 textSplat.strokeWidth = 3;
 ```
 
-### Custom Font
+### カスタムフォント
 
 ```javascript
 textSplat.text = 'Fancy Text';
@@ -87,50 +87,50 @@ textSplat.fontFamily = 'Georgia, serif';
 textSplat.fontSize = 56;
 ```
 
-## Automatic Updates
+## 自動更新
 
-The script automatically rebuilds when any attribute changes. Simply modify the properties and the splats update on the next frame.
+スクリプトは任意の属性が変更されると自動的にリビルドします。プロパティを変更するだけで、スプラットは次のフレームで更新されます。
 
 ```javascript
-// Update text at runtime
+// 実行時にテキストを更新
 textSplat.text = 'New Score: 200';
 ```
 
-## Coordinate System
+## 座標系
 
-Like [GsplatImage](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image), text is rendered on the XZ plane:
+[GsplatImage](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)と同様に、テキストはXZ平面にレンダリングされます：
 
-- **X axis**: Left to right
-- **Z axis**: Top to bottom (text reads correctly when viewed from +Y)
-- **Y axis**: Always 0
+- **X軸**：左から右
+- **Z軸**：上から下（+Yから見た時にテキストが正しく読める）
+- **Y軸**：常に0
 
-The text is sized to fit in a 1x1 unit area, scaled by the entity's transform.
+テキストは1x1ユニットの領域に収まるようにサイズ調整され、エンティティのトランスフォームでスケールされます。
 
-## Performance Considerations
+## パフォーマンスの考慮事項
 
-The number of splats depends on:
+スプラット数は以下に依存します：
 
-- Font size (larger = more pixels)
-- Text length
-- Stroke width (adds more pixels)
+- フォントサイズ（大きい = より多くのピクセル）
+- テキストの長さ
+- ストローク幅（より多くのピクセルを追加）
 
-For labels with many characters or large font sizes, the splat count can be significant.
+多くの文字を持つラベルや大きなフォントサイズの場合、スプラット数は大きくなる可能性があります。
 
-## Live Example
+## ライブサンプル
 
-See the [Procedural Shapes example](https://playcanvas.github.io/#/gaussian-splatting/procedural-shapes) which demonstrates using `GsplatText` for dimension labels in a CAD-style visualization.
+CADスタイルの可視化で寸法ラベルに`GsplatText`を使用する方法を示す[Procedural Shapesサンプル](https://playcanvas.github.io/#/gaussian-splatting/procedural-shapes)を参照してください。
 
-## Script Location
+## スクリプトの場所
 
-The script is available in the PlayCanvas Engine repository:
+スクリプトはPlayCanvas Engineリポジトリで利用可能です：
 
 ```text
 scripts/esm/gsplat/gsplat-text.mjs
 ```
 
-## See Also
+## 関連項目
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Mesh to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
-- [Image to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [Lines and Shapes](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
+- [メッシュからスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
+- [画像からスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
+- [線と形状](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)

@@ -1,48 +1,48 @@
 ---
-title: Splat Rendering Architecture
+title: スプラットレンダリングアーキテクチャ
 ---
 
-PlayCanvas supports two rendering modes for Gaussian splats: **Unified** and **Non-unified**. Understanding these modes helps you choose the right approach for your application.
+PlayCanvasは、Gaussian splatsに対して2つのレンダリングモードをサポートしています：**統合**と**非統合**。これらのモードを理解することで、アプリケーションに適したアプローチを選択できます。
 
-## Unified vs Non-unified Rendering
+## 統合 vs 非統合レンダリング
 
-### Non-unified Mode
+### 非統合モード
 
-In non-unified mode, each GSplat component is rendered independently:
+非統合モードでは、各GSplatコンポーネントは独立してレンダリングされます：
 
-- Splats within each component are sorted separately
-- Components are rendered based on their bounding box order
-- Simple setup with no additional overhead
-- **Limitation**: Visual artifacts occur when splat components overlap
+- 各コンポーネント内のスプラットは個別にソートされます
+- コンポーネントはバウンディングボックスの順序に基づいてレンダリングされます
+- 追加のオーバーヘッドなしでシンプルなセットアップ
+- **制限**：スプラットコンポーネントが重なると視覚的なアーティファクトが発生
 
-This mode is suitable for simple scenes with a single splat or non-overlapping splats.
+このモードは、単一のスプラットまたは重ならないスプラットを持つシンプルなシーンに適しています。
 
-### Unified Mode
+### 統合モード
 
-In unified mode, all GSplat components share a common rendering pipeline:
+統合モードでは、すべてのGSplatコンポーネントが共通のレンダリングパイプラインを共有します：
 
-- All splats from all components are copied to a shared **work buffer**
-- Splats are sorted globally across all components
-- Eliminates artifacts when splats overlap
-- Enables advanced features like [procedural splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/), [LOD streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming), and [GPU processing](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)
+- すべてのコンポーネントのすべてのスプラットが共有**ワークバッファ**にコピーされます
+- スプラットはすべてのコンポーネント間でグローバルにソートされます
+- スプラットが重なる際のアーティファクトを排除
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)、[LODストリーミング](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming)、[GPU処理](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)などの高度な機能を有効化
 
-**Unified mode is recommended** for most applications, especially when:
+**統合モードは**、特に以下の場合にほとんどのアプリケーションで推奨されます：
 
-- Multiple splat components may overlap
-- You need consistent depth sorting across components
-- You want to use advanced features
+- 複数のスプラットコンポーネントが重なる可能性がある
+- コンポーネント間で一貫した深度ソートが必要
+- 高度な機能を使用したい
 
-## Enabling Unified Mode
+## 統合モードの有効化
 
-Set the `unified` property to `true` on your GSplat components:
+GSplatコンポーネントで`unified`プロパティを`true`に設定します：
 
 ```javascript
 entity.gsplat.unified = true;
 ```
 
-## Learn More
+## 詳細を学ぶ
 
-For detailed information about unified rendering architecture and its features, see:
+統合レンダリングアーキテクチャとその機能の詳細については、以下を参照してください：
 
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/) - Architecture details and global sorting
-- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order) - How splats are sorted for rendering
+- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/) - アーキテクチャの詳細とグローバルソート
+- [描画順序とソート](/user-manual/gaussian-splatting/building/draw-order) - レンダリングのためのスプラットのソート方法

@@ -1,151 +1,151 @@
 ---
-title: LOD Streaming
+title: LODストリーミング
 ---
 
-LOD (Level of Detail) Streaming enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail based on the camera's distance. This feature dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
+LOD（Level of Detail）ストリーミングは、カメラの距離に基づいて適切な詳細レベルを動的にロードすることで、大規模なGaussian splatシーンの効率的なレンダリングを可能にします。この機能により、大規模なスプラットシーンのメモリ使用量を大幅に削減し、レンダリングパフォーマンスを向上させます。
 
-:::info Beta Feature
+:::info ベータ機能
 
-LOD Streaming is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+LODストリーミングは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
 
 :::
 
-## How It Works
+## 仕組み
 
-LOD streaming works by:
+LODストリーミングは以下のように動作します：
 
-1. Pre-generating multiple versions of your splat at different detail levels
-2. Organizing them into an octree structure for efficient streaming
-3. Dynamically loading and unloading detail levels based on camera distance
-4. Rendering only the appropriate level of detail for each region of the scene
+1. スプラットの複数のバージョンを異なる詳細レベルで事前生成
+2. 効率的なストリーミングのためにオクツリー構造に整理
+3. カメラ距離に基づいて詳細レベルを動的にロードおよびアンロード
+4. シーンの各領域に適切な詳細レベルのみをレンダリング
 
-This approach allows you to render massive splat scenes that would otherwise be impossible due to memory constraints.
+このアプローチにより、メモリ制約により不可能だった大規模なスプラットシーンをレンダリングできます。
 
-## Creating LOD Streaming Data
+## LODストリーミングデータの作成
 
-To use LOD streaming, you need to generate the streaming format from multiple splat files with different levels of detail. The tool takes your pre-generated LOD files and creates an optimized streaming format.
+LODストリーミングを使用するには、異なる詳細レベルを持つ複数のスプラットファイルからストリーミング形式を生成する必要があります。ツールは事前生成されたLODファイルを受け取り、最適化されたストリーミング形式を作成します。
 
-See the [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions on how to create the required `lod-meta.json` format.
+必要な`lod-meta.json`形式の作成方法の詳細については、SplatTransformドキュメントの[LOD形式の生成](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)セクションを参照してください。
 
 :::tip
 
-You must create the different LOD levels yourself (LOD 0 = highest detail, higher numbers = lower detail). The tool organizes these into a streaming-optimized format but doesn't create the simplified versions.
+異なるLODレベルは自分で作成する必要があります（LOD 0 = 最高詳細、数字が大きいほど詳細が低い）。ツールはこれらをストリーミング最適化形式に整理しますが、簡略化バージョンは作成しません。
 
 :::
 
-## Live Examples
+## ライブサンプル
 
-Explore these live examples to see LOD streaming in action:
+LODストリーミングの動作を確認するには、以下のライブサンプルを参照してください：
 
-- [LOD Streaming (Basic)](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming) - Demonstrates basic LOD streaming with different detail levels
-- [LOD Streaming with Spherical Harmonics](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming-sh) - Shows LOD streaming with spherical harmonic data
+- [LODストリーミング（基本）](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming) - 異なる詳細レベルでの基本的なLODストリーミングを示します
+- [球面調和関数付きLODストリーミング](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming-sh) - 球面調和データを含むLODストリーミングを示します
 
-## Enabling LOD Streaming
+## LODストリーミングの有効化
 
-To enable LOD streaming, set the [`unified`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#unified) property to `true` on your GSplat component and load a streaming LOD format asset:
+LODストリーミングを有効にするには、GSplatコンポーネントの[`unified`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#unified)プロパティを`true`に設定し、ストリーミングLOD形式アセットをロードします：
 
 ```javascript
 entity.gsplat.unified = true;
 ```
 
-## Controlling LOD Behavior
+## LOD動作の制御
 
-You can control and fine-tune LOD streaming using the following APIs:
+以下のAPIを使用してLODストリーミングを制御および微調整できます：
 
-### Component-Level Control
+### コンポーネントレベルの制御
 
-Use the [`lodDistances`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#loddistances) property to set the distance thresholds for switching between LOD levels:
+[`lodDistances`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#loddistances)プロパティを使用して、LODレベル間の切り替え距離しきい値を設定します：
 
 ```javascript
-// Set LOD distance thresholds (in world units)
+// LOD距離しきい値を設定（ワールド単位）
 entity.gsplat.lodDistances = [10, 20, 40, 80];
 ```
 
-### Scene-Level Control
+### シーンレベルの制御
 
-The [`Scene.gsplat`](https://api.playcanvas.com/engine/classes/Scene.html#gsplat) property provides access to scene-wide settings for unified gsplat rendering. This includes options for:
+[`Scene.gsplat`](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)プロパティは、統合gsplatレンダリングのシーン全体の設定へのアクセスを提供します。これには以下のオプションが含まれます：
 
-- Performance tuning parameters
-- Debug visualization settings
-- Memory management controls
-- Stream loading behavior
+- パフォーマンスチューニングパラメータ
+- デバッグ可視化設定
+- メモリ管理制御
+- ストリームロード動作
 
 ```javascript
-// Access scene-level gsplat settings
+// シーンレベルのgsplat設定にアクセス
 const gsplatSettings = app.scene.gsplat;
 
-// Configure settings as needed
-// (See API documentation for available properties)
+// 必要に応じて設定を構成
+// （利用可能なプロパティについてはAPIドキュメントを参照）
 ```
 
-## Using LOD Streaming in the Editor
+## エディターでのLODストリーミングの使用
 
-Native support for LOD streaming in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable streaming LOD functionality in your Editor projects.
+PlayCanvas EditorでのLODストリーミングのネイティブサポートは近い将来追加される予定です。それまでの間、Editorプロジェクトでストリーミングロード機能を有効にするには、スクリプト内でEngine APIを使用できます。
 
-### Sample Project
+### サンプルプロジェクト
 
-We've created a sample project that demonstrates how to use streaming LOD with Gaussian splats in the PlayCanvas Editor:
+PlayCanvas EditorでGaussian splatsとストリーミングLODを使用する方法を示すサンプルプロジェクトを作成しました：
 
 **[Church of Saints Peter and Paul](https://playcanvas.com/project/1408991/overview/church-of-saints-peter-and-paul)**
 
-This project showcases a large-scale Gaussian splat scene with LOD streaming, including custom reveal shader effects.
+このプロジェクトは、カスタムリビールシェーダーエフェクトを含むLODストリーミングを使用した大規模なGaussian splatシーンを紹介しています。
 
-### Using the Streamed GSplat Script
+### Streamed GSplatスクリプトの使用
 
-The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable LOD streaming:
+サンプルプロジェクトには、LODストリーミングを有効にするために任意のエンティティに追加できる`streamed-gsplat.mjs`スクリプトが含まれています：
 
-#### Setup Steps
+#### セットアップ手順
 
-1. Add the script to an Entity in your scene
-2. Configure the `splatUrl` property to point to an externally hosted LOD splat format file
+1. シーン内のエンティティにスクリプトを追加
+2. `splatUrl`プロパティを外部でホストされているLODスプラット形式ファイルを指すように設定
 
-:::note External Hosting
+:::note 外部ホスティング
 
-Currently, the LOD splat data needs to be hosted externally (not as an Editor asset). This limitation will be removed in the future when native Editor support for streaming LOD format is added.
+現在、LODスプラットデータは外部でホストする必要があります（Editorアセットとしてではなく）。この制限は、ストリーミングLOD形式のネイティブEditorサポートが追加される将来に解除される予定です。
 
 :::
 
-#### Quality Settings
+#### 品質設定
 
-The `streamed-gsplat.mjs` script provides four different quality/performance presets, allowing you to specify:
+`streamed-gsplat.mjs`スクリプトは4つの異なる品質/パフォーマンスプリセットを提供し、以下を指定できます：
 
-- Which LOD levels to load
-- At what distances each LOD level should be displayed
+- ロードするLODレベル
+- 各LODレベルをどの距離で表示するか
 
-These settings enable fine-tuned control over the balance between visual quality and rendering performance, making it easy to optimize for different target platforms and devices.
+これらの設定により、視覚品質とレンダリングパフォーマンスのバランスを細かく制御でき、異なるターゲットプラットフォームやデバイスに対して簡単に最適化できます。
 
-### Custom Shader Effects
+### カスタムシェーダーエフェクト
 
-The sample project also demonstrates how to create custom shader effects for Gaussian splats. It includes scripts from the [PlayCanvas Engine GSplat Scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm/gsplat) repository.
+サンプルプロジェクトでは、Gaussian splats用のカスタムシェーダーエフェクトの作成方法も示しています。[PlayCanvas Engine GSplat Scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm/gsplat)リポジトリからのスクリプトが含まれています。
 
-Specifically, the project uses the [Reveal Radial](https://github.com/playcanvas/engine/blob/main/scripts/esm/gsplat/reveal-radial.mjs) shader effect (along with its base class) to create an animated reveal of the splat scene. This effect:
+具体的には、プロジェクトは[Reveal Radial](https://github.com/playcanvas/engine/blob/main/scripts/esm/gsplat/reveal-radial.mjs)シェーダーエフェクト（およびその基底クラス）を使用して、スプラットシーンのアニメーションリビールを作成しています。このエフェクトは：
 
-- Creates radial waves emanating from a center point
-- First shows small colored dots progressively
-- Then lifts particles up with a highlight effect before settling to their original state
+- 中心点から発する放射状の波を作成
+- 最初に小さな色付きドットを徐々に表示
+- 次にハイライトエフェクトでパーティクルを持ち上げてから元の状態に落ち着かせる
 
-This demonstrates the flexibility of the PlayCanvas Engine's shader system for creating compelling visual effects with Gaussian splats.
+これは、Gaussian splatsで魅力的な視覚効果を作成するためのPlayCanvas Engineのシェーダーシステムの柔軟性を示しています。
 
-### Future Editor Improvements
+### 将来のエディター改善
 
-As native Editor support for streaming LOD is added, the following improvements are planned:
+ストリーミングLODのネイティブEditorサポートが追加されると、以下の改善が計画されています：
 
-- **Direct Asset Import**: Upload LOD splat files directly as Editor assets (no external hosting needed)
-- **Visual Configuration**: Configure LOD settings through the Editor UI instead of script properties
-- **Preview in Editor**: View and test streaming LOD behavior directly in the Editor viewport
+- **直接アセットインポート**：LODスプラットファイルをEditorアセットとして直接アップロード（外部ホスティング不要）
+- **ビジュアル設定**：スクリプトプロパティではなくEditor UIを通じてLOD設定を構成
+- **エディターでのプレビュー**：Editorビューポートで直接ストリーミングLOD動作を表示およびテスト
 
-## Benefits
+## メリット
 
-- **Better Performance**: LOD streaming reduces memory usage and improves rendering performance for large scenes
-- **Scalability**: Enables rendering of much larger Gaussian splat scenes by dynamically loading appropriate detail levels
-- **Flexibility**: Provides fine-grained control over LOD distances and streaming behavior
-- **Optimized Loading**: Only loads the data needed for the current view
+- **パフォーマンス向上**：LODストリーミングは大規模シーンのメモリ使用量を削減し、レンダリングパフォーマンスを向上
+- **スケーラビリティ**：適切な詳細レベルを動的にロードすることで、はるかに大規模なGaussian splatシーンのレンダリングを可能に
+- **柔軟性**：LOD距離とストリーミング動作の細かい制御を提供
+- **最適化されたロード**：現在のビューに必要なデータのみをロード
 
-## See Also
+## 関連項目
 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
-- [SplatTransform CLI Tool](/user-manual/gaussian-splatting/editing/splat-transform)
-- [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
-- [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)
+- [SplatTransform CLIツール](/user-manual/gaussian-splatting/editing/splat-transform)
+- [LOD形式の生成](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
+- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [カスタムシェーダー](/user-manual/gaussian-splatting/building/custom-shaders)

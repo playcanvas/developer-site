@@ -1,52 +1,52 @@
 ---
-title: Splat Processing
+title: スプラット処理
 ---
 
-`GSplatProcessor` enables GPU-based processing of Gaussian Splat data using custom shader code. It reads from source texture streams and writes results to destination streams, enabling operations like painting, selection, deletion, and custom data transforms.
+`GSplatProcessor`は、カスタムシェーダーコードを使用したGaussian SplatデータのGPUベースの処理を可能にします。ソーステクスチャストリームから読み取り、結果を宛先ストリームに書き込むことで、ペイント、選択、削除、カスタムデータ変換などの操作を可能にします。
 
-:::info Beta Feature
+:::info ベータ機能
 
-Splat Processing is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+スプラット処理は現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
 
 :::
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
 
 :::
 
-## Overview
+## 概要
 
-Gaussian Splats store per-splat attributes (position, rotation, scale, color) in texture streams. Additional custom streams can be added using extra streams on the [splat data format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format).
+Gaussian Splatsは、スプラットごとの属性（位置、回転、スケール、色）をテクスチャストリームに格納します。追加のカスタムストリームは、[スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)の追加ストリームを使用して追加できます。
 
-`GSplatProcessor` provides a way to modify this data on the GPU:
+`GSplatProcessor`は、GPU上でこのデータを変更する方法を提供します：
 
-- **Read** from source streams using generated load functions
-- **Write** to destination streams using generated write functions
-- **Process** all splats in parallel on the GPU
+- 生成されたロード関数を使用してソースストリームから**読み取り**
+- 生成された書き込み関数を使用して宛先ストリームに**書き込み**
+- GPU上ですべてのスプラットを並列で**処理**
 
-This is useful for:
+これは以下のような用途に便利です：
 
-- Painting/coloring splats based on brush position
-- Marking splats for selection or deletion
-- Transforming splat data
-- Custom per-splat effects
+- ブラシ位置に基づくスプラットのペイント/色付け
+- 選択または削除のためのスプラットのマーキング
+- スプラットデータの変換
+- カスタムのスプラットごとのエフェクト
 
-## Basic Usage
+## 基本的な使い方
 
-### 1. Create the Processor
+### 1. プロセッサの作成
 
-Create a processor by specifying the source (where to read splat data from), destination (which streams to write to), and the shader code that processes each splat:
+ソース（スプラットデータの読み取り元）、宛先（書き込み先のストリーム）、各スプラットを処理するシェーダーコードを指定してプロセッサを作成します：
 
 ```javascript
 const processor = new pc.GSplatProcessor(
     app.graphicsDevice,
-    { component: entity.gsplat },                           // source
-    { component: entity.gsplat, streams: ['customColor'] }, // destination
+    { component: entity.gsplat },                           // ソース
+    { component: entity.gsplat, streams: ['customColor'] }, // 宛先
     {
         processGLSL: `
-            uniform vec4 uBrushSphere;  // xyz = position, w = radius
+            uniform vec4 uBrushSphere;  // xyz = 位置, w = 半径
             uniform vec4 uBrushColor;
 
             void process() {
@@ -77,161 +77,162 @@ const processor = new pc.GSplatProcessor(
 );
 ```
 
-### 2. Set Parameters and Execute
+### 2. パラメータの設定と実行
 
-Set uniforms for the processing shader, then execute to process all splats:
+処理シェーダーのユニフォームを設定し、すべてのスプラットを処理するために実行します：
 
 ```javascript
-// Set uniforms for the processing shader
+// 処理シェーダーのユニフォームを設定
 processor.setParameter('uBrushSphere', [x, y, z, radius]);
 processor.setParameter('uBrushColor', [1, 0, 0, 1]);
 
-// Execute the processing pass
+// 処理パスを実行
 processor.process();
 ```
 
-## Constructor
+## コンストラクタ
 
 ```javascript
 new pc.GSplatProcessor(device, source, destination, options)
 ```
 
-**Parameters:**
+**パラメータ：**
 
-| Parameter | Type | Description |
+| パラメータ | 型 | 説明 |
 |-----------|------|-------------|
-| `device` | GraphicsDevice | The graphics device |
-| `source` | GSplatProcessorBinding | Source data binding |
-| `destination` | GSplatProcessorBinding | Destination data binding |
-| `options.processGLSL` | string | GLSL shader code (required for WebGL) |
-| `options.processWGSL` | string | WGSL shader code (required for WebGPU) |
+| `device` | GraphicsDevice | グラフィックスデバイス |
+| `source` | GSplatProcessorBinding | ソースデータバインディング |
+| `destination` | GSplatProcessorBinding | 宛先データバインディング |
+| `options.processGLSL` | string | GLSLシェーダーコード（WebGLに必要） |
+| `options.processWGSL` | string | WGSLシェーダーコード（WebGPUに必要） |
 
 ### GSplatProcessorBinding
 
 ```typescript
 {
-    resource?: GSplatResourceBase,  // Direct resource reference
-    component?: GSplatComponent,    // Component (resource resolved automatically)
-    streams?: string[]              // Stream names to bind
+    resource?: GSplatResourceBase,  // 直接のリソース参照
+    component?: GSplatComponent,    // コンポーネント（リソースは自動的に解決）
+    streams?: string[]              // バインドするストリーム名
 }
 ```
 
-If instance streams (`GSPLAT_STREAM_INSTANCE`) are used, `component` must be specified to access those per-component textures.
+インスタンスストリーム（`GSPLAT_STREAM_INSTANCE`）を使用する場合、コンポーネントごとのテクスチャにアクセスするために`component`を指定する必要があります。
 
-For source, if `streams` is omitted, format streams are automatically bound with the standard `getCenter()`, `getColor()`, `getRotation()`, `getScale()` functions. When source and destination resources are different, all streams from the source can be read. When they are the same resource, streams being written to cannot be read from.
+ソースについて、`streams`が省略された場合、フォーマットストリームは標準の`getCenter()`、`getColor()`、`getRotation()`、`getScale()`関数で自動的にバインドされます。ソースと宛先のリソースが異なる場合、ソースからすべてのストリームを読み取ることができます。同じリソースの場合、書き込み先のストリームは読み取れません。
 
-For destination, `streams` is required and specifies which streams to write to.
+宛先については、`streams`が必要で、書き込み先のストリームを指定します。
 
-### Different Resource Sizes
+### 異なるリソースサイズ
 
-The source and destination resources can have different numbers of splats. The `process()` function executes once for each **destination** splat. The current destination splat index is available via `splat.index`:
+ソースと宛先のリソースは異なる数のスプラットを持つことができます。`process()`関数は各**宛先**スプラットに対して1回実行されます。現在の宛先スプラットインデックスは`splat.index`で利用できます：
 
 ```glsl
 void process() {
-    uint destIndex = splat.index;  // Current destination splat index
+    uint destIndex = splat.index;  // 現在の宛先スプラットインデックス
     
-    // Calculate which source splat to read from
-    uint sourceIndex = destIndex * 2;  // Example: sample every other splat
+    // どのソーススプラットから読み取るかを計算
+    uint sourceIndex = destIndex * 2;  // 例：1つおきのスプラットをサンプル
     setSplat(sourceIndex);
     vec3 srcPos = getCenter();
     
-    // Write to destination
+    // 宛先に書き込む
     writePosition(vec4(srcPos, 1.0));
 }
 ```
 
-You can also read from any source splat using `load{StreamName}WithIndex()` without changing the current splat context.
+現在のスプラットコンテキストを変更せずに、`load{StreamName}WithIndex()`を使用して任意のソーススプラットから読み取ることもできます。
 
-This enables operations like:
-- Copying data from a larger source to a smaller destination (downsampling)
-- Generating destination splats from sampled source data
-- Mapping between resources with different splat counts
+これにより、以下のような操作が可能になります：
 
-## Shader Functions
+- より大きなソースからより小さな宛先へのデータコピー（ダウンサンプリング）
+- サンプリングされたソースデータから宛先スプラットの生成
+- 異なるスプラット数を持つリソース間のマッピング
 
-### Reading (Source)
+## シェーダー関数
 
-When source streams aren't specified, the processor provides:
+### 読み取り（ソース）
 
-| Function | Return | Description |
+ソースストリームが指定されていない場合、プロセッサは以下を提供します：
+
+| 関数 | 戻り値 | 説明 |
 |----------|--------|-------------|
-| `getCenter()` | `vec3` | Splat position (must be called first) |
-| `getColor()` | `vec4` | Splat color |
-| `getRotation()` | `vec4` | Rotation quaternion |
-| `getScale()` | `vec3` | Splat scale |
+| `getCenter()` | `vec3` | スプラットの位置（最初に呼び出す必要がある） |
+| `getColor()` | `vec4` | スプラットの色 |
+| `getRotation()` | `vec4` | 回転クォータニオン |
+| `getScale()` | `vec3` | スプラットのスケール |
 
-### Reading from Different Indices
+### 異なるインデックスからの読み取り
 
-By default, each splat reads its own data. To read from a different splat, use `setSplat(index)`:
+デフォルトでは、各スプラットは自身のデータを読み取ります。異なるスプラットから読み取るには、`setSplat(index)`を使用します：
 
 ```glsl
-// GLSL - Read from neighbor splat
+// GLSL - 隣接するスプラットから読み取る
 setSplat(neighborIndex);
 vec3 neighborPos = getCenter();
 vec4 neighborColor = getColor();
 ```
 
-Each load function also has a `WithIndex` variant for direct index access:
+各ロード関数には、直接インデックスアクセス用の`WithIndex`バリアントもあります：
 
 ```glsl
-// GLSL - Read specific stream from another index
+// GLSL - 別のインデックスから特定のストリームを読み取る
 vec4 otherCenter = loadDataCenterWithIndex(neighborIndex);
 ```
 
-This is useful for algorithms that need to compare or combine data from multiple splats.
+これは、複数のスプラットからのデータを比較または結合する必要があるアルゴリズムに便利です。
 
-### Writing (Destination)
+### 書き込み（宛先）
 
-For each destination stream, a write function is generated: `write{StreamName}(value)`.
+宛先ストリームごとに、書き込み関数が生成されます：`write{StreamName}(value)`。
 
-For example, a stream named `customColor` generates `writeCustomColor(vec4 value)`.
+例えば、`customColor`という名前のストリームは`writeCustomColor(vec4 value)`を生成します。
 
 ## API
 
 ### setParameter(name, value)
 
-Sets a shader uniform parameter.
+シェーダーユニフォームパラメータを設定します。
 
 ```javascript
-// Scalar
+// スカラー
 processor.setParameter('uRadius', 0.5);
 
-// Vector (as array)
+// ベクトル（配列として）
 processor.setParameter('uBrushPos', [x, y, z]);
 
-// Texture
+// テクスチャ
 processor.setParameter('uBrushTex', brushTexture);
 ```
 
 ### getParameter(name)
 
-Gets a previously set parameter value.
+以前に設定したパラメータ値を取得します。
 
 ### deleteParameter(name)
 
-Removes a parameter.
+パラメータを削除します。
 
 ### process()
 
-Executes the processing pass, reading from source and writing to destination.
+処理パスを実行し、ソースから読み取り、宛先に書き込みます。
 
 ### destroy()
 
-Releases all GPU resources. Call when done with the processor.
+すべてのGPUリソースを解放します。プロセッサの使用が終了したら呼び出します。
 
 ### blendState
 
-Property for setting blend state (useful for accumulative effects like additive painting):
+ブレンドステートを設定するためのプロパティ（加算ペイントのような累積エフェクトに便利）：
 
 ```javascript
 processor.blendState = pc.BlendState.ADDBLEND;
 ```
 
-## Use Cases
+## ユースケース
 
-### Painting
+### ペイント
 
-Paint splats within a brush radius with a color:
+ブラシ半径内のスプラットを色でペイント：
 
 ```glsl
 void process() {
@@ -246,9 +247,9 @@ void process() {
 }
 ```
 
-### Selection
+### 選択
 
-Mark splats inside an AABB as selected:
+AABB内のスプラットを選択済みとしてマーク：
 
 ```glsl
 void process() {
@@ -259,9 +260,9 @@ void process() {
 }
 ```
 
-### Deletion (Visibility)
+### 削除（可視性）
 
-Mark splats as invisible:
+スプラットを非表示としてマーク：
 
 ```glsl
 void process() {
@@ -271,14 +272,14 @@ void process() {
 }
 ```
 
-## Live Examples
+## ライブサンプル
 
-- [Paint example](https://playcanvas.github.io/#/gaussian-splatting/paint) - Demonstrates painting splats with a brush
-- [Editor example](https://playcanvas.github.io/#/gaussian-splatting/editor) - Demonstrates selection, deletion, and cloning
+- [Paintサンプル](https://playcanvas.github.io/#/gaussian-splatting/paint) - ブラシでスプラットをペイントするデモ
+- [Editorサンプル](https://playcanvas.github.io/#/gaussian-splatting/editor) - 選択、削除、クローンのデモ
 
-## See Also
+## 関連項目
 
 - [GSplatProcessor API](https://api.playcanvas.com/engine/classes/GSplatProcessor.html)
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
+- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)

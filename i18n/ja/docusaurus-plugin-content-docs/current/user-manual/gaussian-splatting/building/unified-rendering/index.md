@@ -1,45 +1,45 @@
 ---
-title: Unified Splat Rendering
+title: 統合スプラットレンダリング
 ---
 
-Unified Splat Rendering is the recommended rendering mode for Gaussian splats in PlayCanvas. It enables global sorting across multiple splat components and provides access to advanced features like procedural splats, LOD streaming, and GPU-based splat processing.
+統合スプラットレンダリングは、PlayCanvasにおけるGaussian splatsの推奨レンダリングモードです。複数のスプラットコンポーネント間でグローバルソートを可能にし、プロシージャルスプラット、LODストリーミング、GPUベースのスプラット処理などの高度な機能へのアクセスを提供します。
 
-:::info Beta Feature
+:::info ベータ機能
 
-Unified Splat Rendering is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+統合スプラットレンダリングは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
 
 :::
 
-## The Problem
+## 問題点
 
-Without unified rendering, multiple GSplat components are rendered independently. Each component's splats are sorted separately, and the components themselves are rendered based on their bounding boxes. This approach can lead to:
+統合レンダリングがない場合、複数のGSplatコンポーネントは独立してレンダリングされます。各コンポーネントのスプラットは個別にソートされ、コンポーネント自体はバウンディングボックスに基づいてレンダリングされます。このアプローチは以下の問題を引き起こす可能性があります：
 
-- **Visibility artifacts** when splat components overlap
-- **Popping effects** as the camera moves and component render order changes
-- **Incorrect depth sorting** between splats from different components
+- スプラットコンポーネントが重なる際の**可視性のアーティファクト**
+- カメラが移動しコンポーネントのレンダリング順序が変わる際の**ポッピングエフェクト**
+- 異なるコンポーネントのスプラット間での**不正な深度ソート**
 
-## The Solution: Unified Rendering
+## 解決策：統合レンダリング
 
-Unified rendering solves these issues by using a shared rendering pipeline with **work buffers**. All splats from all components are sorted together in a single unified sort, ensuring correct rendering order across the entire scene.
+統合レンダリングは、**ワークバッファ**を使用した共有レンダリングパイプラインによってこれらの問題を解決します。すべてのコンポーネントのすべてのスプラットが単一の統合ソートで一緒にソートされ、シーン全体で正しいレンダリング順序が保証されます。
 
-## Architecture Overview
+## アーキテクチャの概要
 
-The unified rendering pipeline consists of data storage and operations:
+統合レンダリングパイプラインは、データストレージと操作で構成されます：
 
 ```mermaid
 flowchart LR
-    subgraph Resources[GSplat Resources]
-        Loaded[Loaded Splats<br/>ply/sog/LOD]
-        Container[GSplatContainer<br/>procedural]
+    subgraph Resources[GSplat リソース]
+        Loaded[ロードされたスプラット<br/>ply/sog/LOD]
+        Container[GSplatContainer<br/>プロシージャル]
     end
     
-    Copy([Copy])
+    Copy([コピー])
     
-    WorkBuffer[Work Buffer<br/>per camera/layer]
+    WorkBuffer[ワークバッファ<br/>カメラ/レイヤーごと]
     
-    Sort([Sort])
+    Sort([ソート])
     
-    Render([Render])
+    Render([レンダリング])
     
     Loaded --> Copy
     Container --> Copy
@@ -48,52 +48,52 @@ flowchart LR
     Sort --> Render
 ```
 
-### GSplat Resources
+### GSplatリソース
 
-GSplat resources are the source data for splats. They come in two forms:
+GSplatリソースはスプラットのソースデータです。2つの形式があります：
 
-1. **Loaded splats**: Imported from files (`.ply`, `.sog`) or streamed via [LOD streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming)
-2. **Procedural splats**: Created programmatically using [GSplatContainer](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
+1. **ロードされたスプラット**：ファイル（`.ply`、`.sog`）からインポートされるか、[LODストリーミング](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming)経由でストリーミングされます
+2. **プロシージャルスプラット**：[GSplatContainer](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)を使用してプログラムで作成されます
 
-Each resource stores splat data in GPU textures according to a [data format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format).
+各リソースは[データフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)に従ってGPUテクスチャにスプラットデータを格納します。
 
-### Work Buffers
+### ワークバッファ
 
-Work buffers are automatically created for each camera/layer combination that renders GSplat components in unified mode. They serve as an intermediate storage where:
+ワークバッファは、統合モードでGSplatコンポーネントをレンダリングする各カメラ/レイヤーの組み合わせに対して自動的に作成されます。以下のための中間ストレージとして機能します：
 
-1. All splat data from visible components is **copied** into the work buffer
-2. Splats are **globally sorted** by depth relative to the camera
-3. The sorted data is ready for rendering
+1. 可視コンポーネントのすべてのスプラットデータがワークバッファに**コピー**される
+2. スプラットはカメラに対する深度で**グローバルソート**される
+3. ソートされたデータはレンダリングの準備が整う
 
-This architecture enables features that require access to all splats together, such as global sorting and cross-component effects.
+このアーキテクチャにより、グローバルソートやクロスコンポーネントエフェクトなど、すべてのスプラットへのアクセスを必要とする機能が可能になります。
 
-### Camera Render
+### カメラレンダリング
 
-When a camera renders a layer containing unified GSplat components, it draws the sorted splats from the work buffer. This ensures correct depth ordering regardless of how many splat components exist or how they overlap.
+カメラが統合GSplatコンポーネントを含むレイヤーをレンダリングすると、ワークバッファからソートされたスプラットを描画します。これにより、スプラットコンポーネントがいくつ存在するか、またはどのように重なっているかに関係なく、正しい深度順序が保証されます。
 
-## Live Example
+## ライブサンプル
 
-Check out the [Global Sorting example](https://playcanvas.github.io/#/gaussian-splatting/global-sorting) which demonstrates the difference between unified and non-unified rendering. The example allows you to toggle unified mode on and off to observe how it eliminates artifacts when rendering multiple overlapping splat components.
+統合レンダリングと非統合レンダリングの違いを示す[Global Sortingサンプル](https://playcanvas.github.io/#/gaussian-splatting/global-sorting)をご覧ください。このサンプルでは、統合モードのオンとオフを切り替えて、複数の重なり合うスプラットコンポーネントをレンダリングする際にアーティファクトがどのように排除されるかを観察できます。
 
-## Benefits
+## メリット
 
-- **Improved Visual Quality**: Eliminates artifacts when rendering multiple overlapping splat components
-- **Consistent Rendering**: Maintains correct depth sorting regardless of camera position
-- **Better Scene Composition**: Enables complex scenes with many splat components
-- **Advanced Features**: Unlocks procedural splats, LOD streaming, and GPU processing
+- **視覚品質の向上**：複数の重なり合うスプラットコンポーネントをレンダリングする際のアーティファクトを排除
+- **一貫したレンダリング**：カメラ位置に関係なく正しい深度ソートを維持
+- **より良いシーン構成**：多くのスプラットコンポーネントを持つ複雑なシーンを可能に
+- **高度な機能**：プロシージャルスプラット、LODストリーミング、GPU処理をアンロック
 
-## Unified Rendering Features
+## 統合レンダリング機能
 
-The following features are available when using unified mode:
+統合モード使用時に利用可能な機能：
 
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format) - Custom texture formats for splat data
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) - Create splats programmatically
-- [LOD Streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming) - Dynamic level-of-detail loading
-- [Splat Processing](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing) - GPU-based splat manipulation
+- [スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format) - スプラットデータのカスタムテクスチャフォーマット
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) - プログラムによるスプラットの作成
+- [LODストリーミング](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming) - 動的な詳細レベルのロード
+- [スプラット処理](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing) - GPUベースのスプラット操作
 
-## See Also
+## 関連項目
 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
-- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order)
-- [Splat Rendering Architecture](/user-manual/gaussian-splatting/building/rendering-architecture)
-- [Global Sorting Example](https://playcanvas.github.io/#/gaussian-splatting/global-sorting)
+- [描画順序とソート](/user-manual/gaussian-splatting/building/draw-order)
+- [スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/building/rendering-architecture)
+- [Global Sortingサンプル](https://playcanvas.github.io/#/gaussian-splatting/global-sorting)

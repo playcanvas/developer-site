@@ -1,37 +1,37 @@
 ---
-title: Splat Data Format
+title: スプラットデータフォーマット
 ---
 
-`GSplatFormat` describes how splat data is stored in GPU textures and generates the shader code needed to read that data. It defines texture streams (name and pixel format) and shader code for extracting splat attributes.
+`GSplatFormat`は、スプラットデータがGPUテクスチャにどのように格納されるかを記述し、そのデータを読み取るために必要なシェーダーコードを生成します。テクスチャストリーム（名前とピクセルフォーマット）とスプラット属性を抽出するためのシェーダーコードを定義します。
 
-:::info Beta Feature
+:::info ベータ機能
 
-Splat Data Format is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+スプラットデータフォーマットは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
 
 :::
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
 
 :::
 
-## Overview
+## 概要
 
-GSplat data is stored in GPU textures called **streams**. Each stream has a name and pixel format (e.g., `PIXELFORMAT_RGBA32F`). The `GSplatFormat` defines these streams and the shader code that reads splat attributes from them.
+GSplatデータは**ストリーム**と呼ばれるGPUテクスチャに格納されます。各ストリームには名前とピクセルフォーマット（例：`PIXELFORMAT_RGBA32F`）があります。`GSplatFormat`はこれらのストリームと、そこからスプラット属性を読み取るシェーダーコードを定義します。
 
-## Shader Access
+## シェーダーアクセス
 
-The format generates shader functions to read splat data from texture streams. These functions use a global `splat` struct that identifies which splat to read.
+フォーマットは、テクスチャストリームからスプラットデータを読み取るシェーダー関数を生成します。これらの関数は、どのスプラットを読み取るかを識別するグローバルな`splat`構造体を使用します。
 
-### Current Splat Index
+### 現在のスプラットインデックス
 
-By default, each splat reads its own data. To read from a different splat, use `setSplat(index)`:
+デフォルトでは、各スプラットは自身のデータを読み取ります。別のスプラットから読み取るには、`setSplat(index)`を使用します：
 
 ```glsl
 // GLSL
-setSplat(otherIndex);  // Set the splat index for subsequent reads
-vec3 pos = getCenter(); // Now reads from otherIndex
+setSplat(otherIndex);  // 後続の読み取りのためにスプラットインデックスを設定
+vec3 pos = getCenter(); // otherIndexから読み取る
 ```
 
 ```wgsl
@@ -40,22 +40,22 @@ setSplat(otherIndex);
 let pos = getCenter();
 ```
 
-### Load Functions
+### ロード関数
 
-For each stream, two load functions are generated:
+各ストリームに対して、2つのロード関数が生成されます：
 
-| Function | Description |
+| 関数 | 説明 |
 |----------|-------------|
-| `load{StreamName}()` | Reads from current `splat.uv` (set by `setSplat()`) |
-| `load{StreamName}WithIndex(index)` | Reads directly from a specific index |
+| `load{StreamName}()` | 現在の`splat.uv`（`setSplat()`で設定）から読み取る |
+| `load{StreamName}WithIndex(index)` | 指定されたインデックスから直接読み取る |
 
-For example, a stream named `dataCenter` generates:
+例えば、`dataCenter`という名前のストリームは以下を生成します：
 
-- `loadDataCenter()` - reads using current splat index
-- `loadDataCenterWithIndex(index)` - reads from specified index
+- `loadDataCenter()` - 現在のスプラットインデックスを使用して読み取る
+- `loadDataCenterWithIndex(index)` - 指定されたインデックスから読み取る
 
 ```glsl
-// GLSL - Read from specific index without changing current splat
+// GLSL - 現在のスプラットを変更せずに特定のインデックスから読み取る
 vec4 otherCenter = loadDataCenterWithIndex(neighborIndex);
 ```
 
@@ -64,98 +64,98 @@ vec4 otherCenter = loadDataCenterWithIndex(neighborIndex);
 let otherCenter = loadDataCenterWithIndex(neighborIndex);
 ```
 
-This is useful when you need to access neighbor splats or compare data across multiple splats.
+これは、隣接するスプラットにアクセスしたり、複数のスプラット間でデータを比較する必要がある場合に便利です。
 
-## Format for Loaded Resources
+## ロードされたリソースのフォーマット
 
-When you load a gsplat resource (PLY, SOG, or LOD format), the format is **automatically created** based on the file's data. You don't need to create or configure it manually.
+gsplatリソース（PLY、SOG、またはLODフォーマット）をロードすると、フォーマットはファイルのデータに基づいて**自動的に作成**されます。手動で作成または設定する必要はありません。
 
-### Accessing the Format
+### フォーマットへのアクセス
 
-You can access the format through the resource:
+リソースを通じてフォーマットにアクセスできます：
 
 ```javascript
 const format = entity.gsplat.resource.format;
 ```
 
-### Adding Extra Streams to Resources
+### リソースへの追加ストリームの追加
 
-You can add extra streams to a resource's format to store custom per-splat data. Each stream has a **storage type** that determines how textures are allocated:
+カスタムのスプラットごとのデータを格納するために、リソースのフォーマットに追加ストリームを追加できます。各ストリームには、テクスチャがどのように割り当てられるかを決定する**ストレージタイプ**があります：
 
-| Storage Type | Description |
+| ストレージタイプ | 説明 |
 |-------------|-------------|
-| `GSPLAT_STREAM_RESOURCE` | Texture is shared across all component instances using this resource (default) |
-| `GSPLAT_STREAM_INSTANCE` | Texture is created per gsplat component instance |
+| `GSPLAT_STREAM_RESOURCE` | テクスチャはこのリソースを使用するすべてのコンポーネントインスタンス間で共有される（デフォルト） |
+| `GSPLAT_STREAM_INSTANCE` | テクスチャはgsplatコンポーネントインスタンスごとに作成される |
 
-#### Resource-Level Streams
+#### リソースレベルのストリーム
 
-Use `GSPLAT_STREAM_RESOURCE` (or omit `storage`) when the data is the same for all instances of a resource:
+データがリソースのすべてのインスタンスで同じ場合は、`GSPLAT_STREAM_RESOURCE`を使用します（または`storage`を省略します）：
 
 ```javascript
-// Add a stream shared across all instances
+// すべてのインスタンス間で共有されるストリームを追加
 resource.format.addExtraStreams([
     { name: 'customData', format: pc.PIXELFORMAT_RGBA8 }
 ]);
 
-// Access the shared texture
+// 共有テクスチャにアクセス
 const texture = resource.streams.getTexture('customData');
 ```
 
-#### Instance-Level Streams
+#### インスタンスレベルのストリーム
 
-Use `GSPLAT_STREAM_INSTANCE` when each component instance needs its own texture data:
+各コンポーネントインスタンスが独自のテクスチャデータを必要とする場合は、`GSPLAT_STREAM_INSTANCE`を使用します：
 
 ```javascript
-// Add a per-instance stream
+// インスタンスごとのストリームを追加
 resource.format.addExtraStreams([
     { name: 'instanceTint', format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE }
 ]);
 
-// Access the instance texture via the component
+// コンポーネント経由でインスタンステクスチャにアクセス
 const texture = entity.gsplat.getInstanceTexture('instanceTint');
 if (texture) {
     const data = texture.lock();
-    // Fill texture data per splat...
+    // スプラットごとのテクスチャデータを埋める...
     texture.unlock();
 }
 ```
 
-Common stream formats:
+一般的なストリームフォーマット：
 
-- `PIXELFORMAT_RGBA8` - 4 bytes (e.g., packed flags or tint colors)
-- `PIXELFORMAT_RGBA16F` - 4 half floats (e.g., custom attributes)
-- `PIXELFORMAT_RGBA32F` - 4 floats (e.g., high precision data)
+- `PIXELFORMAT_RGBA8` - 4バイト（例：パックされたフラグやティントカラー）
+- `PIXELFORMAT_RGBA16F` - 4つのhalf float（例：カスタム属性）
+- `PIXELFORMAT_RGBA32F` - 4つのfloat（例：高精度データ）
 
 :::note
 
-Streams cannot be removed once added.
+ストリームは一度追加すると削除できません。
 
 :::
 
-## Format for Procedural Splats
+## プロシージャルスプラットのフォーマット
 
-When creating [procedural splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) with `GSplatContainer`, you need to explicitly create and configure a format. PlayCanvas provides built-in formats for common cases, and you can also create custom formats with your own streams and shader code.
+`GSplatContainer`で[プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)を作成する場合、フォーマットを明示的に作成して設定する必要があります。PlayCanvasは一般的なケース用のビルトインフォーマットを提供しており、独自のストリームとシェーダーコードでカスタムフォーマットを作成することもできます。
 
-See [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) for details on:
+詳細については[プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)を参照してください：
 
-- Built-in formats (`createDefaultFormat`, `createSimpleFormat`)
-- Creating custom formats with custom streams
-- Writing shader code to read your custom data
+- ビルトインフォーマット（`createDefaultFormat`、`createSimpleFormat`）
+- カスタムストリームを持つカスタムフォーマットの作成
+- カスタムデータを読み取るシェーダーコードの作成
 
-## Work Buffer Format
+## ワークバッファフォーマット
 
-The work buffer has its own format for storing intermediate splat data during unified rendering. You can add extra streams to it for customization during copy and render operations.
+ワークバッファには、統合レンダリング中の中間スプラットデータを格納するための独自のフォーマットがあります。コピーおよびレンダリング操作中のカスタマイズのために追加ストリームを追加できます。
 
-See [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) for details on:
+詳細については[ワークバッファフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format)を参照してください：
 
-- Adding extra streams to the work buffer
-- Customizing the copy operation with `setWorkBufferModifier()`
-- Writing and reading custom data
+- ワークバッファへの追加ストリームの追加
+- `setWorkBufferModifier()`によるコピー操作のカスタマイズ
+- カスタムデータの書き込みと読み取り
 
-## See Also
+## 関連項目
 
 - [GSplatFormat API](https://api.playcanvas.com/engine/classes/GSplatFormat.html)
-- [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - Customizing the copy operation
-- [Work Buffer Rendering](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) - Customizing the render operation
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) - Creating splats programmatically
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [ワークバッファフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - コピー操作のカスタマイズ
+- [ワークバッファレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) - レンダリング操作のカスタマイズ
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) - プログラムによるスプラットの作成
+- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)

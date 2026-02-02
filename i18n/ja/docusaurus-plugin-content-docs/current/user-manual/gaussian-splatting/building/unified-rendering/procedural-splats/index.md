@@ -1,105 +1,105 @@
 ---
-title: Procedural Splats
+title: プロシージャルスプラット
 ---
 
-`GSplatContainer` enables you to create Gaussian splat data programmatically rather than loading it from files. This is useful for dynamic visualizations, procedural effects, and converting other data types to splats.
+`GSplatContainer`を使用すると、ファイルからロードするのではなく、プログラムでGaussian splatデータを作成できます。これは、動的な可視化、プロシージャルエフェクト、他のデータ型をスプラットに変換する場合に便利です。
 
-:::info Beta Feature
+:::info ベータ機能
 
-Procedural Splats is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+プロシージャルスプラットは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
 
 :::
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
 
 :::
 
-## Overview
+## 概要
 
-`GSplatContainer` is a container for procedural splat data that you fill from CPU. It works with a `GSplatFormat` that defines the texture streams and how to read splat attributes. Note that [GSplatProcessor](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing) also allows writing to containers on the GPU.
+`GSplatContainer`は、CPUから埋めるプロシージャルスプラットデータのコンテナです。テクスチャストリームとスプラット属性の読み取り方法を定義する`GSplatFormat`と連携します。[GSplatProcessor](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)を使用してGPU上でコンテナに書き込むこともできます。
 
-Key characteristics:
+主な特性：
 
-- **Fixed size**: Capacity is set at creation and cannot be changed
-- **CPU-populated**: You fill texture data from JavaScript
-- **GPU-populated**: You can also write texture data on the GPU via [GSplatProcessor](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)
-- **Format-driven**: Uses `GSplatFormat` to define data layout and shader code
+- **固定サイズ**：容量は作成時に設定され、変更できません
+- **CPU入力**：JavaScriptからテクスチャデータを埋めます
+- **GPU入力**：[GSplatProcessor](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)経由でGPU上でテクスチャデータを書き込むこともできます
+- **フォーマット駆動**：`GSplatFormat`を使用してデータレイアウトとシェーダーコードを定義
 
-## Splat Data Format
+## スプラットデータフォーマット
 
-Unlike loaded resources where the format is automatic, procedural splats require you to create a format explicitly. PlayCanvas provides built-in formats for common use cases.
+フォーマットが自動的に設定されるロードされたリソースとは異なり、プロシージャルスプラットではフォーマットを明示的に作成する必要があります。PlayCanvasは一般的なユースケース用のビルトインフォーマットを提供しています。
 
-### Built-in Formats
+### ビルトインフォーマット
 
-#### Default Format
+#### デフォルトフォーマット
 
-`GSplatFormat.createDefaultFormat(device)` creates a format with full splat data:
+`GSplatFormat.createDefaultFormat(device)`は、完全なスプラットデータを持つフォーマットを作成します：
 
-| Stream | Format | Content |
+| ストリーム | フォーマット | 内容 |
 |--------|--------|---------|
-| `dataColor` | RGBA16F | Color (r, g, b, a) as half floats |
-| `dataCenter` | RGBA32F | Position (x, y, z) as floats |
-| `dataScale` | RGBA16F | Scale (x, y, z) as half floats |
-| `dataRotation` | RGBA16F | Rotation quaternion (x, y, z, w) as half floats |
+| `dataColor` | RGBA16F | 色（r, g, b, a）をhalf floatとして |
+| `dataCenter` | RGBA32F | 位置（x, y, z）をfloatとして |
+| `dataScale` | RGBA16F | スケール（x, y, z）をhalf floatとして |
+| `dataRotation` | RGBA16F | 回転クォータニオン（x, y, z, w）をhalf floatとして |
 
 ```javascript
 const format = pc.GSplatFormat.createDefaultFormat(device);
 ```
 
-#### Simple Format
+#### シンプルフォーマット
 
-`GSplatFormat.createSimpleFormat(device)` creates a lightweight format for uniform-scale splats without rotation:
+`GSplatFormat.createSimpleFormat(device)`は、回転なしの均一スケールスプラット用の軽量フォーマットを作成します：
 
-| Stream | Format | Content |
+| ストリーム | フォーマット | 内容 |
 |--------|--------|---------|
-| `dataCenter` | RGBA32F | Position (x, y, z) + uniform size in w |
-| `dataColor` | RGBA16F | Color (r, g, b, a) as half floats |
+| `dataCenter` | RGBA32F | 位置（x, y, z）+ wに均一サイズ |
+| `dataColor` | RGBA16F | 色（r, g, b, a）をhalf floatとして |
 
 ```javascript
 const format = pc.GSplatFormat.createSimpleFormat(device);
 ```
 
-This format is ideal for the [helper scripts](#helper-scripts) like `GsplatMesh`, `GsplatImage`, and `GsplatLines`.
+このフォーマットは、`GsplatMesh`、`GsplatImage`、`GsplatLines`などの[ヘルパースクリプト](#ヘルパースクリプト)に最適です。
 
-### Custom Formats
+### カスタムフォーマット
 
-For advanced use cases, you can create custom formats with your own streams and shader code.
+高度なユースケースでは、独自のストリームとシェーダーコードでカスタムフォーマットを作成できます。
 
-#### Constructor
+#### コンストラクタ
 
 ```javascript
 const format = new pc.GSplatFormat(device, streams, options);
 ```
 
-**Parameters:**
+**パラメータ：**
 
-- `device` - The graphics device
-- `streams` - Array of stream descriptors: `{ name: string, format: number }`
-- `options.readGLSL` - GLSL shader code (required for WebGL)
-- `options.readWGSL` - WGSL shader code (required for WebGPU)
+- `device` - グラフィックスデバイス
+- `streams` - ストリーム記述子の配列：`{ name: string, format: number }`
+- `options.readGLSL` - GLSLシェーダーコード（WebGLに必要）
+- `options.readWGSL` - WGSLシェーダーコード（WebGPUに必要）
 
-#### Required Shader Functions
+#### 必須のシェーダー関数
 
-Your read code must define these four functions:
+読み取りコードでは、以下の4つの関数を定義する必要があります：
 
-| Function | Return Type | Description |
+| 関数 | 戻り値の型 | 説明 |
 |----------|-------------|-------------|
-| `getCenter()` | `vec3` | Splat position in local space |
-| `getColor()` | `vec4` | Splat color (r, g, b, a) |
-| `getScale()` | `vec3` | Splat scale (x, y, z) |
-| `getRotation()` | `vec4` | Rotation quaternion (x, y, z, w) |
+| `getCenter()` | `vec3` | ローカル空間でのスプラット位置 |
+| `getColor()` | `vec4` | スプラットの色（r, g, b, a） |
+| `getScale()` | `vec3` | スプラットのスケール（x, y, z） |
+| `getRotation()` | `vec4` | 回転クォータニオン（x, y, z, w） |
 
-`getCenter()` always executes first. You can use it to execute shared functionality, for example sample stream textures and store values in global variables for use in other functions.
+`getCenter()`は常に最初に実行されます。共有機能を実行するために使用できます。例えば、ストリームテクスチャをサンプリングし、他の関数で使用するために値をグローバル変数に格納します。
 
-#### Load Functions
+#### ロード関数
 
-For each stream, the format generates a load function named `load{StreamName}()` (with the first letter capitalized). For example, a stream named `data` generates `loadData()`.
+各ストリームに対して、フォーマットは`load{StreamName}()`という名前のロード関数を生成します（最初の文字は大文字）。例えば、`data`という名前のストリームは`loadData()`を生成します。
 
-#### Example: Custom Format with Tint Uniforms
+#### 例：ティントユニフォームを持つカスタムフォーマット
 
-This example creates a format with a single RGBA8 texture and custom uniforms for per-instance color gradients:
+この例では、単一のRGBA8テクスチャとインスタンスごとのカラーグラデーション用のカスタムユニフォームを持つフォーマットを作成します：
 
 ```javascript
 const format = new pc.GSplatFormat(device, [
@@ -108,10 +108,10 @@ const format = new pc.GSplatFormat(device, [
     readGLSL: `
         uniform vec3 uTint;
         uniform vec3 uTint2;
-        vec4 splatData;  // Global variable to avoid sampling texture twice
+        vec4 splatData;  // テクスチャを2回サンプリングしないためのグローバル変数
 
         vec3 getCenter() {
-            // getCenter always executes first - sample texture here
+            // getCenterは常に最初に実行される - ここでテクスチャをサンプリング
             splatData = loadData();
             return (splatData.rgb - 0.5) * 5.0;
         }
@@ -127,10 +127,10 @@ const format = new pc.GSplatFormat(device, [
     readWGSL: `
         uniform uTint: vec3f;
         uniform uTint2: vec3f;
-        var<private> splatData: vec4f;  // Global variable to avoid sampling texture twice
+        var<private> splatData: vec4f;  // テクスチャを2回サンプリングしないためのグローバル変数
 
         fn getCenter() -> vec3f {
-            // getCenter always executes first - sample texture here
+            // getCenterは常に最初に実行される - ここでテクスチャをサンプリング
             splatData = loadData();
             return (splatData.rgb - 0.5) * 5.0;
         }
@@ -146,66 +146,66 @@ const format = new pc.GSplatFormat(device, [
 });
 ```
 
-## Basic Usage
+## 基本的な使い方
 
-### 1. Create a Format
+### 1. フォーマットの作成
 
-Use a built-in format or create a custom one:
+ビルトインフォーマットを使用するか、カスタムフォーマットを作成します：
 
 ```javascript
-// Simple format for uniform-scale splats (no rotation)
+// 均一スケールスプラット用のシンプルフォーマット（回転なし）
 const format = pc.GSplatFormat.createSimpleFormat(device);
 
-// Or default format with full splat data
+// または完全なスプラットデータを持つデフォルトフォーマット
 const format = pc.GSplatFormat.createDefaultFormat(device);
 ```
 
-### 2. Create the Container
+### 2. コンテナの作成
 
 ```javascript
 const maxSplats = 1000;
 const container = new pc.GSplatContainer(device, maxSplats, format);
 ```
 
-### 3. Fill Texture Data
+### 3. テクスチャデータの入力
 
-Lock textures, fill with data, then unlock:
+テクスチャをロックし、データを入力してからアンロックします：
 
 ```javascript
-// Get textures by stream name
+// ストリーム名でテクスチャを取得
 const centerTex = container.getTexture('dataCenter');
 const colorTex = container.getTexture('dataColor');
 
-// Lock for writing
-const centerData = centerTex.lock();  // Float32Array for RGBA32F
-const colorData = colorTex.lock();    // Uint16Array for RGBA16F
+// 書き込み用にロック
+const centerData = centerTex.lock();  // RGBA32F用のFloat32Array
+const colorData = colorTex.lock();    // RGBA16F用のUint16Array
 
-// Fill data for each splat
+// 各スプラットのデータを入力
 for (let i = 0; i < numSplats; i++) {
-    // Center position (x, y, z) + size in w
+    // 中心位置（x, y, z）+ wにサイズ
     centerData[i * 4 + 0] = x;
     centerData[i * 4 + 1] = y;
     centerData[i * 4 + 2] = z;
     centerData[i * 4 + 3] = size;
 
-    // Color as half-floats (use FloatPacking helper)
+    // half-floatとしての色（FloatPackingヘルパーを使用）
     colorData[i * 4 + 0] = pc.FloatPacking.float2Half(r);
     colorData[i * 4 + 1] = pc.FloatPacking.float2Half(g);
     colorData[i * 4 + 2] = pc.FloatPacking.float2Half(b);
     colorData[i * 4 + 3] = pc.FloatPacking.float2Half(a);
 }
 
-// Unlock when done
+// 完了したらアンロック
 centerTex.unlock();
 colorTex.unlock();
 ```
 
-### 4. Set Centers and Bounding Box
+### 4. 中心とバウンディングボックスの設定
 
-The container needs center positions for sorting and a bounding box for culling:
+コンテナはソート用の中心位置とカリング用のバウンディングボックスが必要です：
 
 ```javascript
-// Fill centers array (xyz per splat, Float32Array)
+// 中心配列を入力（スプラットごとにxyz、Float32Array）
 const centers = container.centers;
 for (let i = 0; i < numSplats; i++) {
     centers[i * 3 + 0] = x;
@@ -213,68 +213,68 @@ for (let i = 0; i < numSplats; i++) {
     centers[i * 3 + 2] = z;
 }
 
-// Set bounding box
+// バウンディングボックスを設定
 container.aabb = new pc.BoundingBox(
     new pc.Vec3(centerX, centerY, centerZ),
     new pc.Vec3(halfExtentX, halfExtentY, halfExtentZ)
 );
 ```
 
-### 5. Update and Add to Scene
+### 5. 更新とシーンへの追加
 
 ```javascript
-// Update container with number of splats to render (can be less than maxSplats)
+// レンダリングするスプラット数でコンテナを更新（maxSplats以下可能）
 container.update(numSplats);
 
-// Add to scene via gsplat component
+// gsplatコンポーネント経由でシーンに追加
 entity.addComponent('gsplat', {
     resource: container,
     unified: true
 });
 ```
 
-`numSplats` can be less than or equal to `maxSplats`, allowing only part of the container to be used for rendering.
+`numSplats`は`maxSplats`以下にでき、コンテナの一部のみをレンダリングに使用できます。
 
-## Updating Splat Data
+## スプラットデータの更新
 
-To update splat data after creation:
+作成後にスプラットデータを更新するには：
 
-1. Lock the texture, modify data, unlock
-2. If centers changed, update `container.centers`
-3. Call `container.update(numSplats, centersUpdated)`
+1. テクスチャをロックし、データを変更し、アンロック
+2. 中心が変更された場合、`container.centers`を更新
+3. `container.update(numSplats, centersUpdated)`を呼び出す
 
 ```javascript
-// Update color texture
+// カラーテクスチャを更新
 const colorTex = container.getTexture('dataColor');
 const colorData = colorTex.lock();
-// ... modify colorData ...
+// ... colorDataを変更 ...
 colorTex.unlock();
 
-// Update count (centersUpdated=false if centers didn't change)
+// カウントを更新（中心が変更されていない場合はcentersUpdated=false）
 container.update(numSplats, false);
 ```
 
-## Helper Scripts
+## ヘルパースクリプト
 
-PlayCanvas provides ready-to-use scripts that wrap `GSplatContainer` for common use cases:
+PlayCanvasは、一般的なユースケース用に`GSplatContainer`をラップした使用可能なスクリプトを提供しています：
 
-| Script | Description |
+| スクリプト | 説明 |
 |--------|-------------|
-| [GsplatMesh](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh) | Convert mesh geometry to splats |
-| [GsplatImage](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image) | Render images as splats (one per pixel) |
-| [GsplatLines](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines) | Draw lines, arrows, and bounding boxes |
-| [GsplatText](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text) | Render text as splats |
+| [GsplatMesh](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh) | メッシュジオメトリをスプラットに変換 |
+| [GsplatImage](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image) | 画像をスプラットとしてレンダリング（ピクセルごとに1つ） |
+| [GsplatLines](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines) | 線、矢印、バウンディングボックスを描画 |
+| [GsplatText](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text) | テキストをスプラットとしてレンダリング |
 
-These scripts handle the container creation and data population for you.
+これらのスクリプトは、コンテナの作成とデータの入力を処理します。
 
-## Live Example
+## ライブサンプル
 
-See the [Procedural Instanced example](https://playcanvas.github.io/#/gaussian-splatting/procedural-instanced) which demonstrates creating a custom `GSplatContainer` with a custom format and per-instance shader uniforms.
+カスタム`GSplatContainer`をカスタムフォーマットとインスタンスごとのシェーダーユニフォームで作成する方法を示す[Procedural Instancedサンプル](https://playcanvas.github.io/#/gaussian-splatting/procedural-instanced)を参照してください。
 
-## See Also
+## 関連項目
 
 - [GSplatContainer API](https://api.playcanvas.com/engine/classes/GSplatContainer.html)
 - [GSplatFormat API](https://api.playcanvas.com/engine/classes/GSplatFormat.html)
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Splat Processing](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
+- [スプラット処理](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)
+- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)

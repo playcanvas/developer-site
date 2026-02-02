@@ -1,50 +1,50 @@
 ---
-title: Lines and Shapes
+title: 線と形状
 ---
 
-The `GsplatLines` script renders line-based debug primitives using Gaussian splats. It supports lines, arrows, and axis-aligned bounding boxes (AABBs), making it useful for CAD-style visualizations and debugging.
+`GsplatLines`スクリプトは、Gaussian splatsを使用して線ベースのデバッグプリミティブをレンダリングします。線、矢印、軸揃えバウンディングボックス（AABB）をサポートし、CADスタイルの可視化やデバッグに便利です。
 
-:::info Beta Feature
+:::info ベータ機能
 
-GsplatLines is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+GsplatLinesは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
 
 :::
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
 
 :::
 
-## Overview
+## 概要
 
-`GsplatLines` is a Script component that:
+`GsplatLines`は以下を行うScriptコンポーネントです：
 
-- Creates splat-based lines, arrows, and wireframe boxes
-- Supports gradient colors along lines
-- Uses a handle system for adding/removing primitives
-- Automatically rebuilds when primitives change
+- スプラットベースの線、矢印、ワイヤーフレームボックスを作成
+- 線に沿ったグラデーションカラーをサポート
+- プリミティブの追加/削除のためのハンドルシステムを使用
+- プリミティブが変更されると自動的にリビルド
 
-## Basic Usage
+## 基本的な使い方
 
 ```javascript
-// Import the script
+// スクリプトをインポート
 const { GsplatLines } = await import('path/to/gsplat-lines.mjs');
 
-// Add script component to an entity
+// エンティティにスクリプトコンポーネントを追加
 entity.addComponent('script');
 const lines = entity.script.create(GsplatLines);
 
-// Add primitives
+// プリミティブを追加
 const lineHandle = lines.addLine(
     new pc.Vec3(0, 0, 0),
     new pc.Vec3(1, 1, 1),
-    new pc.Color(1, 0, 0),  // Start color (red)
-    new pc.Color(0, 0, 1),  // End color (blue)
-    0.05                     // Thickness
+    new pc.Color(1, 0, 0),  // 開始色（赤）
+    new pc.Color(0, 0, 1),  // 終了色（青）
+    0.05                     // 太さ
 );
 
-// Remove later if needed
+// 必要に応じて後で削除
 lines.removePrimitive(lineHandle);
 ```
 
@@ -52,7 +52,7 @@ lines.removePrimitive(lineHandle);
 
 ### addLine(start, end, startColor, endColor, thickness)
 
-Adds a line with gradient color from start to end.
+開始から終了までのグラデーションカラーを持つ線を追加します。
 
 ```javascript
 const handle = lines.addLine(
@@ -66,7 +66,7 @@ const handle = lines.addLine(
 
 ### addLineSimple(start, end, color, thickness)
 
-Adds a line with a single color.
+単一の色を持つ線を追加します。
 
 ```javascript
 const handle = lines.addLineSimple(
@@ -79,7 +79,7 @@ const handle = lines.addLineSimple(
 
 ### addArrow(start, end, color, thickness, headSize?)
 
-Adds an arrow with a pyramid-shaped head.
+ピラミッド形のヘッドを持つ矢印を追加します。
 
 ```javascript
 const handle = lines.addArrow(
@@ -87,13 +87,13 @@ const handle = lines.addArrow(
     new pc.Vec3(0, 1, 0),
     new pc.Color(0, 1, 0),
     0.02,
-    0.1  // Optional head size (default: thickness * 9)
+    0.1  // オプションのヘッドサイズ（デフォルト：thickness * 9）
 );
 ```
 
 ### addAABB(min, max, color, thickness)
 
-Adds an axis-aligned bounding box as a wireframe.
+ワイヤーフレームとして軸揃えバウンディングボックスを追加します。
 
 ```javascript
 const handle = lines.addAABB(
@@ -106,59 +106,59 @@ const handle = lines.addAABB(
 
 ### removePrimitive(handle)
 
-Removes a primitive by its handle.
+ハンドルによってプリミティブを削除します。
 
 ```javascript
-const removed = lines.removePrimitive(handle);  // Returns true if found
+const removed = lines.removePrimitive(handle);  // 見つかった場合はtrueを返す
 ```
 
 ### clear()
 
-Removes all primitives.
+すべてのプリミティブを削除します。
 
 ```javascript
 lines.clear();
 ```
 
-### primitiveCount (read-only)
+### primitiveCount（読み取り専用）
 
-Returns the number of primitives.
+プリミティブの数を返します。
 
 ```javascript
 console.log(`${lines.primitiveCount} primitives`);
 ```
 
-## How It Works
+## 仕組み
 
-Lines are rendered as a series of splats placed along the line path:
+線は線のパスに沿って配置された一連のスプラットとしてレンダリングされます：
 
-- Splat count is based on line length and thickness
-- Splats are evenly distributed along the line
-- Color is interpolated from start to end
-- Arrows use 5 lines (main shaft + 4 pyramid edges)
-- AABBs use 12 lines (one per edge)
+- スプラット数は線の長さと太さに基づく
+- スプラットは線に沿って均等に分布
+- 色は開始から終了まで補間
+- 矢印は5本の線を使用（メインシャフト + 4つのピラミッドエッジ）
+- AABBは12本の線を使用（エッジごとに1本）
 
-## Use Cases
+## ユースケース
 
-- **CAD-style annotations**: Dimension lines, measurement arrows
-- **Debug visualization**: Bounding boxes, direction indicators
-- **Scene decoration**: Wireframe overlays, guides
+- **CADスタイルのアノテーション**：寸法線、測定矢印
+- **デバッグ可視化**：バウンディングボックス、方向インジケーター
+- **シーンデコレーション**：ワイヤーフレームオーバーレイ、ガイド
 
-## Live Example
+## ライブサンプル
 
-See the [Procedural Shapes example](https://playcanvas.github.io/#/gaussian-splatting/procedural-shapes) which demonstrates CAD-style dimension annotations on a Gaussian splat scene.
+Gaussian splatシーンでCADスタイルの寸法アノテーションを示す[Procedural Shapesサンプル](https://playcanvas.github.io/#/gaussian-splatting/procedural-shapes)を参照してください。
 
-## Script Location
+## スクリプトの場所
 
-The script is available in the PlayCanvas Engine repository:
+スクリプトはPlayCanvas Engineリポジトリで利用可能です：
 
 ```text
 scripts/esm/gsplat/gsplat-lines.mjs
 ```
 
-## See Also
+## 関連項目
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Mesh to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
-- [Image to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [Text to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
+- [メッシュからスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
+- [画像からスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
+- [テキストからスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)

@@ -1,43 +1,43 @@
 ---
-title: Mesh to Splats
+title: メッシュからスプラットへ
 ---
 
-The `GsplatMesh` script converts mesh geometry into Gaussian splats. It extracts triangles from render components and generates uniformly distributed splats across the mesh surface using triangle rasterization.
+`GsplatMesh`スクリプトは、メッシュジオメトリをGaussian splatsに変換します。レンダーコンポーネントから三角形を抽出し、三角形ラスタライズを使用してメッシュ表面に均一に分布したスプラットを生成します。
 
-:::info Beta Feature
+:::info ベータ機能
 
-GsplatMesh is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+GsplatMeshは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
 
 :::
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
 
 :::
 
-## Overview
+## 概要
 
-`GsplatMesh` is a Script component that:
+`GsplatMesh`は以下を行うScriptコンポーネントです：
 
-- Extracts triangles from mesh instances in an entity hierarchy
-- Rasterizes each triangle to generate splat positions
-- Uses material colors (emissive or diffuse) for splat colors
-- Creates a [GSplatContainer](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) internally
+- エンティティ階層のメッシュインスタンスから三角形を抽出
+- 各三角形をラスタライズしてスプラット位置を生成
+- マテリアルの色（エミッシブまたはディフューズ）をスプラットの色に使用
+- 内部で[GSplatContainer](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)を作成
 
-This is useful for converting 3D models to splat representations for stylized rendering effects.
+これは、スタイライズされたレンダリングエフェクトのために3DモデルをスプラTT表現に変換する場合に便利です。
 
-## Basic Usage
+## 基本的な使い方
 
 ```javascript
-// Import the script
+// スクリプトをインポート
 const { GsplatMesh } = await import('path/to/gsplat-mesh.mjs');
 
-// Add script component to an entity
+// エンティティにスクリプトコンポーネントを追加
 entity.addComponent('script');
 const meshSplat = entity.script.create(GsplatMesh);
 
-// Build splats from another entity's mesh hierarchy
+// 別のエンティティのメッシュ階層からスプラットをビルド
 meshSplat.buildFromEntity(sourceEntity, {
     splatSize: 0.02,
     recursive: true
@@ -48,90 +48,90 @@ meshSplat.buildFromEntity(sourceEntity, {
 
 ### buildFromEntity(entity, options)
 
-Builds splats from an entity's mesh hierarchy.
+エンティティのメッシュ階層からスプラットをビルドします。
 
-**Parameters:**
+**パラメータ：**
 
-| Parameter | Type | Default | Description |
+| パラメータ | 型 | デフォルト | 説明 |
 |-----------|------|---------|-------------|
-| `entity` | Entity | - | The entity to extract meshes from |
-| `options.splatSize` | number | 0.01 | Size of each splat and spacing between them |
-| `options.recursive` | boolean | true | Whether to recursively search children |
-| `options.margin` | number | 0.65 | Margin factor relative to splatSize |
+| `entity` | Entity | - | メッシュを抽出するエンティティ |
+| `options.splatSize` | number | 0.01 | 各スプラットのサイズとそれらの間隔 |
+| `options.recursive` | boolean | true | 子を再帰的に検索するかどうか |
+| `options.margin` | number | 0.65 | splatSizeに対するマージン係数 |
 
-**Splat Size:** Smaller values create more splats for higher density coverage. The spacing between splats is based on this size.
+**スプラットサイズ：** より小さい値は、より高密度のカバレッジのためにより多くのスプラットを作成します。スプラット間の間隔はこのサイズに基づきます。
 
-**Margin:** Controls the distance from triangle edges where no splats are placed. Use 0 for no margin (splats extend to edges), or higher values to avoid overlap artifacts at shared triangle edges.
+**マージン：** スプラットが配置されない三角形エッジからの距離を制御します。マージンなし（スプラットがエッジまで拡張）の場合は0を使用し、共有三角形エッジでのオーバーラップアーティファクトを避けるにはより高い値を使用します。
 
 ### clear()
 
-Removes all splats and destroys the internal container.
+すべてのスプラットを削除し、内部コンテナを破棄します。
 
 ```javascript
 meshSplat.clear();
 ```
 
-### splatCount (read-only)
+### splatCount（読み取り専用）
 
-Returns the current number of splats.
+現在のスプラット数を返します。
 
 ```javascript
 console.log(`Generated ${meshSplat.splatCount} splats`);
 ```
 
-## Color Extraction
+## 色の抽出
 
-The script extracts colors from materials in this order:
+スクリプトは以下の順序でマテリアルから色を抽出します：
 
-1. **Emissive color** (if non-zero)
-2. **Diffuse color** (fallback)
-3. **White** (default for non-StandardMaterial)
+1. **エミッシブカラー**（ゼロでない場合）
+2. **ディフューズカラー**（フォールバック）
+3. **白**（非StandardMaterialのデフォルト）
 
-For transparent materials, the opacity is also extracted and halved to compensate for overlap.
+透明なマテリアルの場合、オパシティも抽出され、オーバーラップを補正するために半分にされます。
 
-## Transform Handling
+## トランスフォームの処理
 
-Splats are generated in the **local space** of the entity that has the `GsplatMesh` script. The script:
+スプラットは`GsplatMesh`スクリプトを持つエンティティの**ローカル空間**で生成されます。スクリプトは：
 
-1. Gets the world transform of the source entity
-2. Computes the inverse to transform mesh vertices to local space
-3. Generates splats in that local space
+1. ソースエンティティのワールドトランスフォームを取得
+2. メッシュ頂点をローカル空間に変換するための逆行列を計算
+3. そのローカル空間でスプラットを生成
 
-This means you can use the entity's transform (position, rotation, scale) to place the splat representation in your scene.
+これは、エンティティのトランスフォーム（位置、回転、スケール）を使用してシーン内にスプラット表現を配置できることを意味します。
 
-## Sharing Containers
+## コンテナの共有
 
-The generated `GSplatContainer` can be shared across multiple gsplat components:
+生成された`GSplatContainer`は複数のgsplatコンポーネント間で共有できます：
 
 ```javascript
-// Build splats
+// スプラットをビルド
 meshSplat.buildFromEntity(sourceEntity, { splatSize: 0.05 });
 
-// Get the container
+// コンテナを取得
 const container = meshSplat.entity.gsplat.resource;
 
-// Share with other entities
+// 他のエンティティと共有
 anotherEntity.addComponent('gsplat', {
     resource: container,
     unified: true
 });
 ```
 
-## Live Example
+## ライブサンプル
 
-See the [Procedural Mesh example](https://playcanvas.github.io/#/gaussian-splatting/procedural-mesh) which demonstrates converting a terrain scene with animated clouds to splat representation.
+アニメーションする雲を持つ地形シーンをスプラット表現に変換する方法を示す[Procedural Meshサンプル](https://playcanvas.github.io/#/gaussian-splatting/procedural-mesh)を参照してください。
 
-## Script Location
+## スクリプトの場所
 
-The script is available in the PlayCanvas Engine repository:
+スクリプトはPlayCanvas Engineリポジトリで利用可能です：
 
 ```text
 scripts/esm/gsplat/gsplat-mesh.mjs
 ```
 
-## See Also
+## 関連項目
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Image to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [Lines and Shapes](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
-- [Text to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
+- [画像からスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
+- [線と形状](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
+- [テキストからスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)

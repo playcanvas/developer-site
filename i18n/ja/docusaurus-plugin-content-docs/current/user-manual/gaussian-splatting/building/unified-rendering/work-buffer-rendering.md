@@ -1,39 +1,39 @@
 ---
-title: Work Buffer Rendering
+title: ワークバッファレンダリング
 ---
 
-The render operation draws sorted splats from the work buffer. You can customize this globally to apply effects, read custom data written during copy, or modify how all splats appear.
+レンダリング操作は、ワークバッファからソートされたスプラットを描画します。エフェクトを適用したり、コピー中に書き込まれたカスタムデータを読み取ったり、すべてのスプラットの表示方法を変更したりするために、これをグローバルにカスタマイズできます。
 
-:::info Beta Feature
+:::info ベータ機能
 
-Work Buffer Rendering customization is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+ワークバッファレンダリングのカスタマイズは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
 
 :::
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
 
 :::
 
-## Pipeline Overview
+## パイプラインの概要
 
-After splats are copied to the work buffer and sorted, the **Render** operation draws them:
+スプラットがワークバッファにコピーされソートされた後、**レンダリング**操作がそれらを描画します：
 
 ```mermaid
 flowchart LR
-    subgraph Resources[GSplat Resources]
-        Loaded[Loaded Splats]
+    subgraph Resources[GSplat リソース]
+        Loaded[ロードされたスプラット]
         Container[GSplatContainer]
     end
     
-    Copy([Copy])
+    Copy([コピー])
     
-    WorkBuffer[Work Buffer]
+    WorkBuffer[ワークバッファ]
     
-    Sort([Sort])
+    Sort([ソート])
     
-    Render([Render])
+    Render([レンダリング])
     
     Loaded --> Copy
     Container --> Copy
@@ -44,11 +44,11 @@ flowchart LR
     style Render stroke:#09f,stroke-width:3px
 ```
 
-Unlike the copy modifier (per-component), the render modifier is **global** and applies to all splats rendered from the work buffer.
+コピーモディファイア（コンポーネントごと）とは異なり、レンダリングモディファイアは**グローバル**であり、ワークバッファからレンダリングされるすべてのスプラットに適用されます。
 
-## Customizing the Render Operation
+## レンダリング操作のカスタマイズ
 
-Use `getShaderChunks()` on the scene's gsplat material to set the `gsplatModifyVS` shader chunk:
+シーンのgsplatマテリアルで`getShaderChunks()`を使用して、`gsplatModifyVS`シェーダーチャンクを設定します：
 
 ```javascript
 const glslModifier = `
@@ -56,7 +56,7 @@ const glslModifier = `
     void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
-        // Apply global color grading
+        // グローバルカラーグレーディングを適用
         color.rgb = pow(color.rgb, vec3(0.8));
     }
 `;
@@ -75,21 +75,21 @@ app.scene.gsplat.material.getShaderChunks('wgsl').set('gsplatModifyVS', wgslModi
 app.scene.gsplat.material.update();
 ```
 
-### Modifier Functions
+### モディファイア関数
 
-Your modifier code must implement three functions:
+モディファイアコードは3つの関数を実装する必要があります：
 
-| Function | Purpose |
+| 関数 | 目的 |
 |----------|---------|
-| `modifySplatCenter(inout vec3 center)` | Modify splat position |
-| `modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale)` | Modify rotation and scale |
-| `modifySplatColor(vec3 center, inout vec4 color)` | Modify color based on work buffer data |
+| `modifySplatCenter(inout vec3 center)` | スプラットの位置を変更 |
+| `modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale)` | 回転とスケールを変更 |
+| `modifySplatColor(vec3 center, inout vec4 color)` | ワークバッファデータに基づいて色を変更 |
 
-`modifySplatCenter` always executes first. You can use it to sample extra streams and store values in global variables, or execute code shared between the three functions.
+`modifySplatCenter`は常に最初に実行されます。追加ストリームをサンプリングして値をグローバル変数に格納したり、3つの関数間で共有されるコードを実行したりするために使用できます。
 
-### Removing the Modifier
+### モディファイアの削除
 
-To remove customization and restore default rendering:
+カスタマイズを削除してデフォルトのレンダリングに戻すには：
 
 ```javascript
 app.scene.gsplat.material.getShaderChunks('glsl').delete('gsplatModifyVS');
@@ -97,11 +97,11 @@ app.scene.gsplat.material.getShaderChunks('wgsl').delete('gsplatModifyVS');
 app.scene.gsplat.material.update();
 ```
 
-## Reading Extra Stream Data
+## 追加ストリームデータの読み取り
 
-If you added extra streams to the [work buffer format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) and wrote data during the copy operation, you can read it during rendering using load functions.
+[ワークバッファフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format)に追加ストリームを追加し、コピー操作中にデータを書き込んだ場合、ロード関数を使用してレンダリング中にそれを読み取ることができます。
 
-For each extra stream, a load function is generated: `load{StreamName}()`. For example, a stream named `splatId` generates `loadSplatId()`:
+追加ストリームごとに、ロード関数が生成されます：`load{StreamName}()`。例えば、`splatId`という名前のストリームは`loadSplatId()`を生成します：
 
 ```javascript
 const glslModifier = `
@@ -111,39 +111,39 @@ const glslModifier = `
     void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
-        // Read component ID written during copy
+        // コピー中に書き込まれたコンポーネントIDを読み取る
         uint id = loadSplatId().r;
         
-        // Look up color from texture based on component ID
+        // コンポーネントIDに基づいてテクスチャから色をルックアップ
         vec3 tintColor = texelFetch(uColorLookup, ivec2(int(id), 0), 0).rgb;
         color.rgb *= tintColor;
     }
 `;
 ```
 
-### Generated Load Functions
+### 生成されたロード関数
 
-For each extra stream, two load functions are generated:
+追加ストリームごとに、2つのロード関数が生成されます：
 
-| Function | Description |
+| 関数 | 説明 |
 |----------|-------------|
-| `load{StreamName}()` | Reads from current splat |
-| `load{StreamName}WithIndex(index)` | Reads from a specific splat index |
+| `load{StreamName}()` | 現在のスプラットから読み取る |
+| `load{StreamName}WithIndex(index)` | 特定のスプラットインデックスから読み取る |
 
-The return type depends on the stream's pixel format:
+戻り値の型はストリームのピクセルフォーマットに依存します：
 
-- **Float formats** (e.g., `PIXELFORMAT_RGBA32F`, `PIXELFORMAT_RGBA16F`) → `vec4`
-- **Unsigned integer formats** (e.g., `PIXELFORMAT_R32U`) → `uvec4`
-- **Signed integer formats** → `ivec4`
+- **浮動小数点フォーマット**（例：`PIXELFORMAT_RGBA32F`、`PIXELFORMAT_RGBA16F`）→ `vec4`
+- **符号なし整数フォーマット**（例：`PIXELFORMAT_R32U`）→ `uvec4`
+- **符号付き整数フォーマット** → `ivec4`
 
-Examples:
+例：
 
-| Stream Name | Load Functions |
+| ストリーム名 | ロード関数 |
 |-------------|----------------|
-| `splatId` | `loadSplatId()`, `loadSplatIdWithIndex(index)` → `uvec4` |
-| `customData` | `loadCustomData()`, `loadCustomDataWithIndex(index)` → `vec4` |
+| `splatId` | `loadSplatId()`、`loadSplatIdWithIndex(index)` → `uvec4` |
+| `customData` | `loadCustomData()`、`loadCustomDataWithIndex(index)` → `vec4` |
 
-To read multiple attributes from a different index, use `setSplat(index)` to change the current splat:
+異なるインデックスから複数の属性を読み取るには、`setSplat(index)`を使用して現在のスプラットを変更します：
 
 ```glsl
 setSplat(otherIndex);
@@ -151,61 +151,61 @@ uint otherId = loadSplatId().r;
 vec4 otherData = loadCustomData();
 ```
 
-## Passing Uniforms
+## ユニフォームの受け渡し
 
-Use `setParameter()` on the scene's gsplat material to pass uniform values:
+シーンのgsplatマテリアルで`setParameter()`を使用してユニフォーム値を渡します：
 
 ```javascript
-// Create a color lookup texture
+// カラールックアップテクスチャを作成
 const colorTexture = new pc.Texture(device, {
     width: 256,
     height: 1,
     format: pc.PIXELFORMAT_RGBA32F,
-    // ... other options
+    // ... その他のオプション
 });
 
-// Pass texture to the render shader
+// レンダリングシェーダーにテクスチャを渡す
 app.scene.gsplat.material.setParameter('uColorLookup', colorTexture);
 ```
 
-## Use Cases
+## ユースケース
 
-### Per-Component Coloring
+### コンポーネントごとの色付け
 
-Combined with [work buffer format customization](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format), you can identify which component each splat belongs to and apply unique colors:
+[ワークバッファフォーマットのカスタマイズ](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format)と組み合わせることで、各スプラットがどのコンポーネントに属するかを識別し、ユニークな色を適用できます：
 
-1. During copy: Write component ID to an extra stream
-2. During render: Read the ID and look up a color from a texture
+1. コピー中：追加ストリームにコンポーネントIDを書き込む
+2. レンダリング中：IDを読み取り、テクスチャから色をルックアップ
 
 ```javascript
 const glslModifier = `
     uniform sampler2D uColorLookup;
-    uint componentId;  // Global variable accessible by all modifier functions
+    uint componentId;  // すべてのモディファイア関数からアクセス可能なグローバル変数
 
     void modifySplatCenter(inout vec3 center) {
-        // Read ID from work buffer (can be used in other functions)
+        // ワークバッファからIDを読み取る（他の関数で使用可能）
         componentId = loadSplatId().r;
     }
     void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
-        // Look up color from texture based on component ID
+        // コンポーネントIDに基づいてテクスチャから色をルックアップ
         vec3 tintColor = texelFetch(uColorLookup, ivec2(int(componentId), 0), 0).rgb;
         color.rgb *= tintColor;
     }
 `;
 ```
 
-## Live Example
+## ライブサンプル
 
-See the [LOD Instances example](https://playcanvas.github.io/#/gaussian-splatting/lod-instances) which demonstrates:
+以下を示す[LOD Instancesサンプル](https://playcanvas.github.io/#/gaussian-splatting/lod-instances)を参照してください：
 
-- Reading component IDs written during copy
-- Looking up colors from a texture
-- Applying per-component tinting with animated colors
+- コピー中に書き込まれたコンポーネントIDの読み取り
+- テクスチャからの色のルックアップ
+- アニメーション色によるコンポーネントごとのティンティングの適用
 
-## See Also
+## 関連項目
 
-- [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - Customizing the copy operation
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [ワークバッファフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - コピー操作のカスタマイズ
+- [スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
+- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)

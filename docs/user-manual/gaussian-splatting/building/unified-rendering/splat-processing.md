@@ -143,6 +143,7 @@ void process() {
 You can also read from any source splat using `load{StreamName}WithIndex()` without changing the current splat context.
 
 This enables operations like:
+
 - Copying data from a larger source to a smaller destination (downsampling)
 - Generating destination splats from sampled source data
 - Mapping between resources with different splat counts
