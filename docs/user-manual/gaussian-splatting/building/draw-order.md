@@ -16,9 +16,9 @@ Because the sorting occurs asynchronously, you may notice some visual lag if the
 
 GSplatComponents are rendered back to front based on their bounding boxes, and each component's Gaussians are sorted independently within that component.
 
-:::info Global sorting
+:::info Unified Rendering
 
-By default, the PlayCanvas Engine does not support "global sorting" across multiple GSplatComponents (where all Gaussians from all components would be sorted together). However, you can enable [Global Sorting](/user-manual/gaussian-splatting/building/global-sorting), a beta feature that allows all Gaussians from multiple components to be sorted together, eliminating visibility and popping artifacts.
+By default, the PlayCanvas Engine does not support "global sorting" across multiple GSplatComponents (where all Gaussians from all components would be sorted together). However, you can enable [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/), a beta feature that allows all Gaussians from multiple components to be sorted together, eliminating visibility and popping artifacts.
 
 :::
 

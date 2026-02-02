@@ -8,6 +8,8 @@ title: パフォーマンス
 
 シーン内のGaussianの数に注意してください。すべてのGaussianはフレームごとにカメラの深度でソートされるためです。特定のGSplatアセットに含まれるGaussianの数は、[SuperSplat Editor](https://superspl.at/editor)にある[SPLAT DATA Panel](https://github.com/playcanvas/supersplat/wiki/Inspecting-Splat-Data)を使用して確認できます。不要なGaussianをPLYファイルからトリミングするには、SuperSplatを使用してください。
 
+大規模なシーンの場合は、[LOD Streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming)の使用を検討してください。これはカメラの距離に基づいて適切な詳細レベルを動的にロードします。これにより、最も重要な場所での視覚的品質を維持しながら、任意の時点でアクティブなGaussianの数を大幅に削減できます。
+
 ## フィルレートに関する考慮事項
 
 3D Gaussian Splattingは、フィルレート（フラグメント操作）の観点から特にコストがかかります。これは以下の理由によります:
