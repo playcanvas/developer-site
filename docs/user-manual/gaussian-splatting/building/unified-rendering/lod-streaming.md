@@ -48,12 +48,6 @@ To enable LOD streaming, set the [`unified`](https://api.playcanvas.com/engine/c
 entity.gsplat.unified = true;
 ```
 
-:::note
-
-The `unified` property can only be changed when the component is disabled.
-
-:::
-
 ## Controlling LOD Behavior
 
 You can control and fine-tune LOD streaming using the following APIs:
@@ -153,5 +147,5 @@ As native Editor support for streaming LOD is added, the following improvements 
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
 - [SplatTransform CLI Tool](/user-manual/gaussian-splatting/editing/splat-transform)
 - [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
-- [Global Sorting](/user-manual/gaussian-splatting/building/global-sorting)
+- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
 - [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)

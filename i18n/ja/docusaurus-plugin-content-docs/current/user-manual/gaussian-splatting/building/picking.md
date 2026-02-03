@@ -2,9 +2,16 @@
 title: ピッキング
 ---
 
-PlayCanvas Engine は、指定されたピクセルでレンダリングされたメッシュインスタンスをクエリできる[Picker API](https://api.playcanvas.com/engine/classes/Picker.html)を提供します。ピッカーは、メッシュの場合と同じ方法でスプラットと連携します。
+PlayCanvas Engine は、指定されたピクセルでレンダリングされたオブジェクトをクエリできる[Picker API](https://api.playcanvas.com/engine/classes/Picker.html)を提供します。ピッカーは、メッシュの場合と同じ方法でスプラットと連携します。
 
 **[ライブデモを見る](https://playcanvas.github.io/#/gaussian-splatting/picking)** - インタラクティブな選択とワールド位置検出によるスプラットピッキングの動作を確認できます。
+
+## Unified モードと Non-Unified モード
+
+GSplat コンポーネントは Unified または Non-Unified レンダリングモードで動作できます（詳細は[統合スプラットレンダリング](../unified-rendering/)を参照）。ピッキングの動作はこれらのモード間で異なります：
+
+- **Unified モード**：ピッキングは `GSplatComponent` を直接返します。
+- **Non-Unified モード**：ピッキングはメッシュインスタンスを返し、それを使用して所有するエンティティを見つけます。
 
 ## Picker のセットアップ
 
@@ -16,6 +23,24 @@ const picker = new pc.Picker(app, 1, 1, true);
 ```
 
 深度バッファは、クリックされたオブジェクトを識別するだけでなく、ピッキングされたポイントの3Dワールド位置を取得する場合に必要です。
+
+### Unified モードのセットアップ
+
+Unified モードを使用する場合、シーンの gsplat マネージャーで ID トラッキングを有効にする必要があります。これはスプラットをレンダリングする前に行う必要があります：
+
+```javascript
+// Unified ピッキング用に gsplat ID を有効化
+app.scene.gsplat.enableIds = true;
+```
+
+また、gsplat コンポーネントを `unified: true` で作成することを確認してください：
+
+```javascript
+entity.addComponent('gsplat', {
+    asset: splatAsset,
+    unified: true
+});
+```
 
 ## ピッキングの準備
 
@@ -43,27 +68,38 @@ const scaledY = mouseY * pickerScale;
 
 ## ピッキングされたオブジェクトの識別
 
-`getSelectionAsync()` を使用して、スクリーン位置のメッシュインスタンスを取得します：
+`getSelectionAsync()` を使用して、スクリーン位置でピッキングされたオブジェクトを取得します。戻り値はレンダリングモードによって異なります。
+
+### Unified モード
+
+Unified モードでは、ピッカーは `GSplatComponent` を直接返します：
+
+```javascript
+const selection = await picker.getSelectionAsync(x, y, 1, 1);
+if (selection.length > 0) {
+    // Unified モードでは、selection には GSplatComponent インスタンスが含まれます
+    const gsplatComponent = selection[0];
+    // このコンポーネントを所有するエンティティを見つける
+    const entity = entities.find(e => e.gsplat === gsplatComponent);
+}
+```
+
+### Non-Unified モード
+
+Non-Unified モードでは、ピッカーはメッシュインスタンスを返します：
 
 ```javascript
 const meshInstances = await picker.getSelectionAsync(x, y, 1, 1);
 if (meshInstances.length > 0) {
     const meshInstance = meshInstances[0];
-    // このメッシュインスタンスを所有するエンティティを見つける
-    const pickedEntity = findEntityByMeshInstance(meshInstance);
+    // 一致するメッシュインスタンスを持つエンティティを見つける
+    const entity = entities.find(e => e.gsplat.instance.meshInstance === meshInstance);
 }
-```
-
-メッシュインスタンスを所有する GSplat エンティティに一致させるには、`gsplat.instance.meshInstance` プロパティと比較します：
-
-```javascript
-// 一致するメッシュインスタンスを持つエンティティを見つける
-const entity = entities.find(e => e.gsplat.instance.meshInstance === meshInstance);
 ```
 
 ## ワールド位置の取得
 
-`getWorldPointAsync()` を使用して、ピッキングされたポイントの3Dワールド位置を取得します：
+`getWorldPointAsync()` を使用して、ピッキングされたポイントの3Dワールド位置を取得します。これは両方のモードで同じように動作します：
 
 ```javascript
 const worldPoint = await picker.getWorldPointAsync(x, y);
@@ -73,11 +109,90 @@ if (worldPoint) {
 }
 ```
 
-## 完全なサンプル
+## 完全なサンプル（Unified モード）
 
-オブジェクト識別とワールド位置を組み合わせた一般的なピッキングワークフローは次のとおりです：
+Unified モードの一般的なピッキングワークフローは次のとおりです：
 
 ```javascript
+// Unified ピッキング用に ID トラッキングを有効化
+app.scene.gsplat.enableIds = true;
+
+// Unified モードでスプラットエンティティを作成
+const splat = new pc.Entity('splat');
+splat.addComponent('gsplat', {
+    asset: splatAsset,
+    unified: true
+});
+app.root.addChild(splat);
+
+// 深度サポート付きでピッカーを作成
+const picker = new pc.Picker(app, 1, 1, true);
+
+const handlePick = async (mouseX, mouseY) => {
+    // パフォーマンスのために低解像度を使用
+    const pickerScale = 0.25;
+    picker.resize(canvas.clientWidth * pickerScale, canvas.clientHeight * pickerScale);
+
+    // ピッカーを準備
+    const worldLayer = app.scene.layers.getLayerByName('World');
+    picker.prepare(camera.camera, app.scene, [worldLayer]);
+
+    const x = mouseX * pickerScale;
+    const y = mouseY * pickerScale;
+
+    // ワールド位置を取得
+    const worldPoint = await picker.getWorldPointAsync(x, y);
+    if (!worldPoint) return;
+
+    // ピッキングされたオブジェクトを取得
+    const selection = await picker.getSelectionAsync(x, y, 1, 1);
+    if (selection.length === 0) return;
+
+    // Unified モードでは、selection には GSplatComponent が直接含まれます
+    const gsplatComponent = selection[0];
+
+    // このコンポーネントを所有するエンティティを見つける
+    const entity = splatEntities.find(e => e.gsplat === gsplatComponent);
+
+    if (entity) {
+        // 必要に応じてワールド位置をエンティティのローカル空間に変換
+        const localPos = entity.getWorldTransform()
+            .clone()
+            .invert()
+            .transformPoint(worldPoint);
+
+        console.log('ピッキングされたエンティティ:', entity.name);
+        console.log('ローカル位置:', localPos);
+    }
+};
+
+// マウスクリックを処理
+app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
+    handlePick(event.x, event.y);
+});
+
+// タッチイベントを処理
+app.touch.on(pc.EVENT_TOUCHSTART, (event) => {
+    const touch = event.touches[0];
+    handlePick(touch.x, touch.y);
+});
+```
+
+## 完全なサンプル（Non-Unified モード）
+
+Non-Unified モードの一般的なピッキングワークフローは次のとおりです：
+
+```javascript
+// スプラットエンティティを作成（Non-Unified がデフォルト）
+const splat = new pc.Entity('splat');
+splat.addComponent('gsplat', {
+    asset: splatAsset
+});
+app.root.addChild(splat);
+
+// 深度サポート付きでピッカーを作成
+const picker = new pc.Picker(app, 1, 1, true);
+
 const handlePick = async (mouseX, mouseY) => {
     // パフォーマンスのために低解像度を使用
     const pickerScale = 0.25;

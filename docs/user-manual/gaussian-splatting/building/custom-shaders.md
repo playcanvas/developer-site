@@ -4,15 +4,17 @@ title: Custom Shaders
 
 The PlayCanvas Engine supports custom shaders for Gaussian Splats, allowing you to create advanced visual effects and customize the rendering behavior beyond the standard implementation.
 
+:::note Non-Unified Rendering Only
+
+This page covers shader customization for **non-unified rendering** (when `entity.gsplat.unified = false`). Each component has its own material that can be customized independently.
+
+For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) which provides similar customization capabilities through a global render modifier.
+
+:::
+
 ## Introduction
 
-There are two ways to customize Gaussian Splat rendering with shaders:
-
-1. **Shader Chunk Customization (Recommended)** - Override the `gsplatModifyVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
-
-2. **Full Shader Replacement** - Replace the entire vertex and fragment shaders for complete control. This provides maximum flexibility but requires understanding the full shader implementation.
-
-Most use cases can be accomplished with shader chunk customization, which is covered in detail below.
+Override the `gsplatModifyVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
 
 **[View Live Example](https://playcanvas.vercel.app/#/gaussian-splatting/multi-splat)** - See shader chunk customization in action with animated splats.
 
@@ -51,7 +53,7 @@ void modifySplatCenter(inout vec3 center) {
 
 ### modifySplatRotationScale
 
-Modify the splat size and shape by adjusting the rotation quaternion and scale vector. This is more efficient than working with covariance matrices directly.
+Modify the splat size and shape by adjusting the rotation quaternion and scale vector.
 
 **GLSL:**
 
@@ -287,16 +289,8 @@ scale = vec3(0.0);
 
 ## Examples
 
-Here are some examples demonstrating different custom shader techniques:
+Here are some examples demonstrating custom shader techniques:
 
 ### Animation Effects
 
-[**Simple Sinusoidal Animation**](https://playcanvas.github.io/#/gaussian-splatting/multi-splat) - **Uses Shader Chunk Customization** - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.
-
-### Transition Effects
-
-[**3D Gaussian Splat Statues**](https://playcanvas.com/project/1224723/overview/3d-gaussian-splat-statues) - **Uses Full Shader Replacement** - Uses custom shaders to transition splats on and off screen via a hot, plasma-type effect. This showcases how custom shaders can create dramatic visual transitions and material effects.
-
-### Lighting and Relighting
-
-[**3DGS with Physics and Relighting**](https://playcanvas.com/project/1358087/overview/3dgs-with-physics-and-relighting) - **Uses Full Shader Replacement** - Uses custom shaders to relight a splat to implement a night mode with multiple moving point light sources. This example demonstrates advanced lighting techniques and how to dynamically modify splat appearance based on scene lighting conditions.
+[**Simple Sinusoidal Animation**](https://playcanvas.github.io/#/gaussian-splatting/multi-splat) - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.
