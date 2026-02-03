@@ -28,6 +28,36 @@ By doing this you will no longer see warning messages in the console.
 
 The following tables break down the chunk changes by Engine release.
 
+### *Engine v2.16*
+
+#### Gaussian Splat Accessor Function Renames
+
+The gsplat shader accessor functions have been renamed for API consistency. All functions now use the `getXXX()` naming pattern.
+
+| Old | New |
+| --- | --- |
+| `readCenter(source)` | `getCenter()` |
+| `readColor(source)` | `getColor()` |
+
+**Note:** `getCenter()` must be called before `getRotation()`, `getScale()`, or `getColor()` as it loads shared data used by the other functions. The `source` parameter is no longer required.
+
+Affected chunks:
+
+- `src/scene/shader-lib/glsl/chunks/gsplat/vert/gsplat.js`
+- `src/scene/shader-lib/wgsl/chunks/gsplat/vert/gsplat.js`
+
+#### gsplatCustomizeVS chunk removed
+
+The `gsplatCustomizeVS` shader chunk has been removed in v2.16. It was deprecated in v2.15 in favor of `gsplatModifyVS`. Any code still using `gsplatCustomizeVS` will now trigger a warning that the chunk has been removed.
+
+The old covariance-based helper functions (`gsplatExtractSize`, `gsplatApplyUniformScale`, `gsplatMakeRound`) have also been removed from `gsplatHelpers.js`.
+
+**Migration:**
+
+Users must migrate to `gsplatModifyVS` as documented in the v2.15 migration guide below. See the [v2.15 migration guide](#engine-v215) for complete migration instructions.
+
+---
+
 ### *Engine v2.15*
 
 #### Gaussian Splat Shader Customization
