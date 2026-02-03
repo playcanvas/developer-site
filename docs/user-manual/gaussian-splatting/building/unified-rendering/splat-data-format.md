@@ -82,6 +82,12 @@ const format = entity.gsplat.resource.format;
 
 You can add extra streams to a resource's format to store custom per-splat data. Each stream has a **storage type** that determines how textures are allocated:
 
+:::note
+
+Extra streams are not supported for LOD streaming resources. LOD resources dynamically load and unload data as needed, and custom extra streams cannot be preserved across these operations.
+
+:::
+
 | Storage Type | Description |
 |-------------|-------------|
 | `GSPLAT_STREAM_RESOURCE` | Texture is shared across all component instances using this resource (default) |
