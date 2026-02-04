@@ -423,6 +423,27 @@ Using `immediate: true` has a performance impact as it forces an early command b
 
 Compute shaders support the same [shader preprocessor](/user-manual/graphics/shaders/preprocessor) as vertex and fragment shaders, including `#define`, `#ifdef`, `#if`, `#include`, and more.
 
+### Built-in Includes
+
+The engine provides built-in shader chunks that are automatically available in compute shaders:
+
+| Include | Description |
+|---------|-------------|
+| `halfTypesCS` | Half-precision type aliases (`half`, `half2`, etc.) that resolve to f16 when supported, f32 otherwise. See [Half-Precision Types](/user-manual/graphics/shaders/wgsl-specifics#half-precision-types). |
+
+Example:
+
+```wgsl
+#include "halfTypesCS"
+
+@compute @workgroup_size(64, 1, 1)
+fn main(@builtin(global_invocation_id) global_id: vec3u) {
+    // Use half types for calculations
+    var color: half3 = half3(1.0, 0.5, 0.0);
+    // ...
+}
+```
+
 ### Defines and Includes
 
 Use `cdefines` to pass defines and `cincludes` to provide include content:
