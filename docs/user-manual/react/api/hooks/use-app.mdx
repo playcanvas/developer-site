@@ -14,13 +14,16 @@ function MyComponent() {
   
   // Access application properties
   console.log('Scene:', app.scene)
-  console.log('Camera:', app.scene.camera)
+  
+  // Cameras are components on entities, so look them up from the root
+  const cameras = app.root.findComponents('camera')
+  console.log('Cameras:', cameras)
   
   return null
 }
 ```
 
-A reference to the app gives you access to the scene, camera, systems, etc.
+A reference to the app gives you access to the scene, root entity, systems, assets, events, etc.
 
 ## Application context
 
