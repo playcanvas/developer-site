@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">&lt;Camera/&gt; | PlayCanvas Developer Site</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://developer.playcanvas.com/ja/img/playcanvas-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://developer.playcanvas.com/ja/img/playcanvas-social-card.jpg"><meta data-rh="true" property="og:url" content="https://developer.playcanvas.com/ja/user-manual/react/api/camera/"><meta data-rh="true" property="og:locale" content="ja"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ja"><meta data-rh="true" name="docsearch:language" content="ja"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="&lt;Camera/&gt; | PlayCanvas Developer Site"><meta data-rh="true" name="description" content="Documentation for the Camera component"><meta data-rh="true" property="og:description" content="Documentation for the Camera component"><link data-rh="true" rel="icon" href="/ja/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.playcanvas.com/ja/user-manual/react/api/camera/"><link data-rh="true" rel="alternate" href="https://developer.playcanvas.com/user-manual/react/api/camera/" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.playcanvas.com/ja/user-manual/react/api/camera/" hreflang="ja"><link data-rh="true" rel="alternate" href="https://developer.playcanvas.com/user-manual/react/api/camera/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://69QRBNV3NH-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PlayCanvas React","item":"https://developer.playcanvas.com/ja/user-manual/react/"},{"@type":"ListItem","position":2,"name":"<Camera/>","item":"https://developer.playcanvas.com/ja/user-manual/react/api/camera"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="PlayCanvas Developer Site" href="/ja/opensearch.xml"><link rel="stylesheet" href="/ja/assets/css/styles.a706e4a8.css">
-<script src="/ja/assets/js/runtime~main.2d7c495b.js" defer="defer"></script>
+<script src="/ja/assets/js/runtime~main.8335a675.js" defer="defer"></script>
 <script src="/ja/assets/js/main.bc52ae4d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -23,8 +23,16 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="properties">Properties<a href="#properties" class="hash-link" aria-label="Properties への直接リンク" title="Properties への直接リンク" translate="no">​</a></h2>
 <div class="api-docs-definition"><div class="api-docs-properties"><table><thead><tr><th>Name</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td><code>gammaCorrection<!-- -->?</code></td><td><div class="type-cell"><code>number</code><div class="type-description">Sets the gamma correction to apply when rendering the scene. Can be:
 
-- GAMMA_NONE
-- GAMMA_SRGB
+- GAMMA_SRGB: Output is gamma-encoded for standard sRGB displays. This is the
+  default and recommended setting for all normal rendering.
+- GAMMA_NONE: Output remains in linear space. This is only intended for advanced
+  HDR pipelines where the output is rendered to an intermediate HDR texture that will be
+  tonemapped and gamma-corrected in a subsequent pass.
+
+**Warning**: Setting `GAMMA_NONE` will cause the entire scene (including UI) to appear
+too dark on standard displays, as linear values are written directly without gamma
+encoding. For HDR rendering with post-processing, use CameraFrame which handles
+this automatically.
 
 Defaults to GAMMA_SRGB.
 Gets the gamma correction used when rendering the scene.</div></div></td><td><code>-</code></td></tr><tr><td><code>toneMapping<!-- -->?</code></td><td><div class="type-cell"><code>number</code><div class="type-description">Sets the tonemapping transform to apply to the rendered color buffer. Can be:
