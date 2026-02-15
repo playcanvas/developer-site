@@ -64,7 +64,7 @@
     "@docusaurus/module-type-aliases": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
     "markdownlint-cli2": "^0.20.0",
-    "marked": "^17.0.1"
+    "marked": "^17.0.2"
   },
   "browserslist": {
     "production": [
