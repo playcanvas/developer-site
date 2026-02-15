@@ -34,7 +34,7 @@ Content-Type: application/json
 
 ## パラメーター
 
-| 名前                   | タイプ     | 必須 | 説明                                                                                                          |
+| 名前                   | タイプ     | Required | 説明                                                                                                          |
 | ---------------------- | -------- | :------: | -------------------------------------------------------------------------------------------------------------------- |
 | `name`                 | `string` | ✔️      | The name of the new branch. Must be non-empty and cannot exceed 1000 characters.                                     |
 | `projectId`            | `number` | ✔️      | The id of the project.                                                                                               |
