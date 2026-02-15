@@ -34,7 +34,7 @@ Content-Type: application/json
 
 ## パラメーター
 
-| 名前          | タイプ     | 必須 | 説明                                                                      |
+| 名前          | タイプ     | Required | 説明                                                                      |
 | ------------- | -------- | :------: | -------------------------------------------------------------------------------- |
 | `projectId`   | `number` | ✔️      | The id of the project.                                                           |
 | `branchId`    | `string` | ✔️      | The id of the branch.                                                            |
