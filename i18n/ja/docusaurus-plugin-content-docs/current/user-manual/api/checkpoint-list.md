@@ -27,7 +27,7 @@ Authorization: Bearer {accessToken}
 
 ## パラメーター
 
-| 名前       | タイプ     | 必須 | 説明                                                                                           |
+| 名前       | タイプ     | Required | 説明                                                                                           |
 | ---------- | -------- | :------: | ----------------------------------------------------------------------------------------------------- |
 | `branchId` | `string` | ✔️      | The id of the branch.                                                                                 |
 | `limit`    | `number` |          | The maximum number of checkpoints to return. Cannot exceed 50.                                        |
