@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 561
+Total Documents: 565
 Generated: 2026-02-15
 
 ================================================================================
@@ -7794,6 +7794,88 @@ This route uses an [assets](/user-manual/api#rate-limiting) rate limit.
 
 --------------------------------------------------------------------------------
 
+## Branches - Create branch
+
+URL: https://developer.playcanvas.com/user-manual/api/branch-create/
+
+## Route URL
+
+```none
+POST https://playcanvas.com/api/branches
+```
+
+## Description
+
+Create a new branch from an existing branch and optionally from a specific checkpoint.
+
+## Example
+
+```none
+curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"projectId": {projectId}, "name": "My New Branch", "sourceBranchId": "{sourceBranchId}"}' "https://playcanvas.com/api/branches"
+```
+
+HTTP Request
+
+```text
+POST https://playcanvas.com/api/branches
+Authorization: Bearer {accessToken}
+Content-Type: application/json
+
+{
+    "projectId": {projectId},
+    "name": "My New Branch",
+    "sourceBranchId": "{sourceBranchId}"
+}
+```
+
+## Parameters
+
+| Name                   | Type     | Required | Description                                                                                                          |
+| ---------------------- | -------- | :------: | -------------------------------------------------------------------------------------------------------------------- |
+| `name`                 | `string` | ✔️      | The name of the new branch. Must be non-empty and cannot exceed 1000 characters.                                     |
+| `projectId`            | `number` | ✔️      | The id of the project.                                                                                               |
+| `sourceBranchId`       | `string` | ✔️      | The id of the branch to create the new branch from.                                                                  |
+| `sourceCheckpointId`   | `string` |          | The id of the checkpoint to create the new branch from. Must belong to the source branch. If not specified, the latest checkpoint of the source branch will be used. |
+
+## Response Schema
+
+```none
+Status: 201 Created
+```
+
+```json
+{
+    "id": string,
+    "projectId": int,
+    "name": string,
+    "createdAt": date,
+    "closed": bool,
+    "permanent": bool,
+    "latestCheckpointId": string,
+    "user": {
+        "id": int,
+        "fullName": string,
+        "username": string
+    }
+}
+```
+
+## Errors
+
+| Code | Description                                        |
+| ---- | -------------------------------------------------- |
+| 400  | Invalid request / branch name already exists       |
+| 401  | Unauthorized                                       |
+| 403  | Forbidden                                          |
+| 404  | Project not found / Branch not found               |
+| 429  | Too many requests                                  |
+
+## Rate Limiting
+
+This route uses a [normal](/user-manual/api#rate-limiting) rate limit.
+
+--------------------------------------------------------------------------------
+
 ## Branches - List branches
 
 URL: https://developer.playcanvas.com/user-manual/api/branch-list/
@@ -7863,6 +7945,226 @@ This endpoint uses a slightly different pagination method. If a response contain
 | 401  | Unauthorized      |
 | 403  | Forbidden         |
 | 404  | Project not found |
+| 429  | Too many requests |
+
+## Rate Limiting
+
+This route uses a [normal](/user-manual/api#rate-limiting) rate limit.
+
+--------------------------------------------------------------------------------
+
+## Checkpoints - Create checkpoint
+
+URL: https://developer.playcanvas.com/user-manual/api/checkpoint-create/
+
+## Route URL
+
+```none
+POST https://playcanvas.com/api/checkpoints
+```
+
+## Description
+
+Create a new checkpoint for a branch. A checkpoint captures the current state of a branch so that it can be restored later.
+
+## Example
+
+```none
+curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"projectId": {projectId}, "branchId": "{branchId}", "description": "My checkpoint"}' "https://playcanvas.com/api/checkpoints"
+```
+
+HTTP Request
+
+```text
+POST https://playcanvas.com/api/checkpoints
+Authorization: Bearer {accessToken}
+Content-Type: application/json
+
+{
+    "projectId": {projectId},
+    "branchId": "{branchId}",
+    "description": "My checkpoint"
+}
+```
+
+## Parameters
+
+| Name          | Type     | Required | Description                                                                      |
+| ------------- | -------- | :------: | -------------------------------------------------------------------------------- |
+| `projectId`   | `number` | ✔️      | The id of the project.                                                           |
+| `branchId`    | `string` | ✔️      | The id of the branch.                                                            |
+| `description` | `string` | ✔️      | A description for the checkpoint. Must be non-empty and cannot exceed 10,000 characters. |
+
+## Response Schema
+
+```none
+Status: 201 Created
+```
+
+```json
+{
+    "id": string,
+    "user": {
+        "id": int,
+        "fullName": string,
+        "username": string
+    },
+    "createdAt": date,
+    "description": string
+}
+```
+
+## Errors
+
+| Code | Description        |
+| ---- | ------------------ |
+| 400  | Invalid request    |
+| 401  | Unauthorized       |
+| 403  | Forbidden          |
+| 404  | Project not found / Branch not found |
+| 429  | Too many requests  |
+
+## Rate Limiting
+
+This route uses a [normal](/user-manual/api#rate-limiting) rate limit.
+
+--------------------------------------------------------------------------------
+
+## Checkpoints - Get checkpoint
+
+URL: https://developer.playcanvas.com/user-manual/api/checkpoint-get/
+
+## Route URL
+
+```none
+GET https://playcanvas.com/api/checkpoints/:id
+```
+
+## Description
+
+Get a checkpoint by its id.
+
+## Example
+
+```none
+curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/checkpoints/{id}"
+```
+
+HTTP Request
+
+```text
+GET https://playcanvas.com/api/checkpoints/{id}
+Authorization: Bearer {accessToken}
+```
+
+## Parameters
+
+| Name | Type     | Description              |
+| ---- | -------- | ------------------------ |
+| `id` | `string` | The id of the checkpoint. |
+
+## Response Schema
+
+```none
+Status: 200
+```
+
+```json
+{
+    "id": string,
+    "user": {
+        "id": int,
+        "fullName": string,
+        "username": string
+    },
+    "createdAt": date,
+    "description": string
+}
+```
+
+## Errors
+
+| Code | Description          |
+| ---- | -------------------- |
+| 401  | Unauthorized         |
+| 403  | Forbidden            |
+| 404  | Checkpoint not found |
+| 429  | Too many requests    |
+
+## Rate Limiting
+
+This route uses a [normal](/user-manual/api#rate-limiting) rate limit.
+
+--------------------------------------------------------------------------------
+
+## Checkpoints - List checkpoints
+
+URL: https://developer.playcanvas.com/user-manual/api/checkpoint-list/
+
+## Route URL
+
+```none
+GET https://playcanvas.com/api/branches/:branchId/checkpoints
+```
+
+## Description
+
+Get a list of checkpoints for a branch, sorted by newest first.
+
+## Example
+
+```none
+curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/branches/{branchId}/checkpoints"
+```
+
+HTTP Request
+
+```text
+GET https://playcanvas.com/api/branches/{branchId}/checkpoints
+Authorization: Bearer {accessToken}
+```
+
+## Parameters
+
+| Name       | Type     | Required | Description                                                                                           |
+| ---------- | -------- | :------: | ----------------------------------------------------------------------------------------------------- |
+| `branchId` | `string` | ✔️      | The id of the branch.                                                                                 |
+| `limit`    | `number` |          | The maximum number of checkpoints to return. Cannot exceed 50.                                        |
+| `skip`     | `string` |          | A checkpoint id. The result will only contain checkpoints that were created before this checkpoint.    |
+
+## Response Schema
+
+```none
+Status: 200
+```
+
+```json
+{
+    "result": [{
+        "id": string,
+        "user": {
+            "id": int,
+            "fullName": string,
+            "username": string
+        },
+        "createdAt": date,
+        "description": string
+    }, ...],
+    "pagination": {
+        "hasMore": bool
+    }
+}
+```
+
+This endpoint uses a slightly different pagination method. If a response contains the value `hasMore: true` then additional results are available. Use the `skip` query parameter with the id of the last received checkpoint to receive more results.
+
+## Errors
+
+| Code | Description       |
+| ---- | ----------------- |
+| 401  | Unauthorized      |
+| 403  | Forbidden         |
+| 404  | Branch not found  |
 | 429  | Too many requests |
 
 ## Rate Limiting
