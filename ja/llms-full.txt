@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 565
-Generated: 2026-02-15
+Generated: 2026-02-17
 
 ================================================================================
 
@@ -22676,6 +22676,9 @@ Readers **must** unzip and then resolve files using `meta.json` exactly as for t
 ```ts
 interface Meta {
   version: 2;              // File format version (integer)
+  asset?: {                // Optional tool/version metadata
+    generator?: string;    // e.g. "splat-transform v1.2.3"
+  };
   count: number;           // Number of gaussians (<= W*H of the images)
   antialias: boolean;      // True iff scene was trained with anti-aliasing
 
@@ -22715,7 +22718,7 @@ interface Meta {
 
 :::note
 
-* The scales codebook contains linear-space values. The sh0 and shN codebooks contain gamma-space DC coefficients.
+* The scales codebook contains linear-space values. The sh0 codebook contains gamma-space DC coefficients. The shN codebook contains gamma-space AC coefficients.
 * Image data **must** be treated as raw 8-bit integers (no gamma conversion).
 * Unless otherwise stated, channels not mentioned are ignored.
 * Filenames in `files` arrays are arbitrary, but the order is significant.
@@ -22865,6 +22868,36 @@ const v = Math.floor(n / 64);
 const index = shN_labels.r + (shN_labels.g << 8);
 ```
 
+#### Decoding
+
+Each centroid pixel's **R,G,B** channels are **codebook indices** (0..255) into the shared `shN.codebook`. The three channels correspond to the three color channels of the SH coefficient.
+
+To decode the full set of AC SH coefficients for a single gaussian:
+
+```ts
+const coeffs = [3, 8, 15];
+const shCoeffs = coeffs[meta.shN.bands - 1];        // coefficients per color channel
+const codebook = meta.shN.codebook;                  // 256 shared float entries
+
+// 1. Look up this gaussian's palette entry
+const label = shN_labels.r + (shN_labels.g << 8);
+
+// 2. For each coefficient, read RGB from the centroids pixel and map through the codebook
+for (let c = 0; c < shCoeffs; c++) {
+    const u = (label % 64) * shCoeffs + c;
+    const v = Math.floor(label / 64);
+
+    // pixel (u, v) in shN_centroids.webp
+    const r = centroidsPixel(u, v).r;
+    const g = centroidsPixel(u, v).g;
+    const b = centroidsPixel(u, v).b;
+
+    sh_channel0[c] = codebook[r];  // SH AC coefficient for color channel 0
+    sh_channel1[c] = codebook[g];  // SH AC coefficient for color channel 1
+    sh_channel2[c] = codebook[b];  // SH AC coefficient for color channel 2
+}
+```
+
 ---
 
 ## 4. Example `meta.json`
@@ -22872,6 +22905,7 @@ const index = shN_labels.r + (shN_labels.g << 8);
 ```json
 {
   "version": 2,
+  "asset": { "generator": "splat-transform v1.2.3" },
   "count": 187543,
   "antialias": true,
   "means": {
@@ -22889,7 +22923,7 @@ const index = shN_labels.r + (shN_labels.g << 8);
     "files": ["sh0.webp"]
   },
   "shN": {
-    "count": 128,
+    "count": 65536,
     "bands": 3,
     "codebook": [/* 256 floats */],
     "files": ["shN_centroids.webp", "shN_labels.webp"]
