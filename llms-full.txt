@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 565
-Generated: 2026-02-17
+Generated: 2026-02-19
 
 ================================================================================
 
@@ -7128,7 +7128,8 @@ Status: 200
     "views": int,
     "completed_at": date,
     "created_at": date,
-    "modified_at": date
+    "modified_at": date,
+    "url": string
 }
 ```
 
@@ -7201,7 +7202,8 @@ Status: 200
     "views": int,
     "completed_at": date,
     "created_at": date,
-    "modified_at": date
+    "modified_at": date,
+    "url": string
   }, ... ],
   "pagination": {
      ...
@@ -7275,7 +7277,8 @@ Status: 200
     "views": int,
     "completed_at": date,
     "created_at": date,
-    "modified_at": date
+    "modified_at": date,
+    "url": string
 }
 ```
 
