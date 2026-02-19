@@ -50,7 +50,8 @@ Status: 200
     "views": int,
     "completed_at": date,
     "created_at": date,
-    "modified_at": date
+    "modified_at": date,
+    "url": string
   }, ... ],
   "pagination": {
      ...

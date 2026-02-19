@@ -50,7 +50,8 @@ curl -H "Authorization: Bearer {accessToken}" https://playcanvas.com/api/project
     "views": int,
     "completed_at": date,
     "created_at": date,
-    "modified_at": date
+    "modified_at": date,
+    "url": string
   }, ... ],
   "pagination": {
      ...
