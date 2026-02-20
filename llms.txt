@@ -7,7 +7,7 @@ For the complete documentation content, see: https://developer.playcanvas.com/ll
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 565
-Generated: 2026-02-19
+Generated: 2026-02-20
 
 ## Recommended Entry Points
 
@@ -106,7 +106,7 @@ Generated: 2026-02-19
 - https://developer.playcanvas.com/user-manual/editor/interface/toolbar/ - Toolbar
 - https://developer.playcanvas.com/user-manual/editor/interface/viewport/ - Viewport
 - https://developer.playcanvas.com/user-manual/editor/projects/ - Projects
-- https://developer.playcanvas.com/user-manual/editor/projects/backup-archiving/ - Backup and Archiving
+- https://developer.playcanvas.com/user-manual/editor/projects/backup-and-export/ - Backup and Export
 - https://developer.playcanvas.com/user-manual/editor/projects/creating/ - Creating Projects
 - https://developer.playcanvas.com/user-manual/editor/projects/dashboard/ - Project Dashboard
 - https://developer.playcanvas.com/user-manual/editor/projects/dev-logs/ - Dev Logs
@@ -455,7 +455,7 @@ Generated: 2026-02-19
 - https://developer.playcanvas.com/user-manual/api/checkpoint-get/ - Checkpoints - Get checkpoint
 - https://developer.playcanvas.com/user-manual/api/checkpoint-list/ - Checkpoints - List checkpoints
 - https://developer.playcanvas.com/user-manual/api/job-get/ - Jobs - Get job
-- https://developer.playcanvas.com/user-manual/api/project-archive/ - Projects - Archive project
+- https://developer.playcanvas.com/user-manual/api/project-export/ - Projects - Export project
 - https://developer.playcanvas.com/user-manual/api/scene-list/ - Scenes - List scenes
 - https://developer.playcanvas.com/user-manual/api/splat-publish/ - Splat Publishing
 

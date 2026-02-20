@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 565
-Generated: 2026-02-19
+Generated: 2026-02-20
 
 ================================================================================
 
@@ -8234,9 +8234,9 @@ This route uses a [normal](/user-manual/api#rate-limiting) rate limit.
 
 --------------------------------------------------------------------------------
 
-## Projects - Archive project
+## Projects - Export project
 
-URL: https://developer.playcanvas.com/user-manual/api/project-archive/
+URL: https://developer.playcanvas.com/user-manual/api/project-export/
 
 ## Route URL
 
@@ -8246,9 +8246,9 @@ POST https://playcanvas.com/api/projects/:id/export
 
 ## Description
 
-This will allow you to download a zip archive of your entire project. You can import that archive from your Projects Dashboard to create a new Project from that archive. More about importing projects [here](/user-manual/editor/projects/backup-archiving#restoring-projects).
+This will allow you to download a zip export of your entire project. You can import that export from your Projects Dashboard to create a new project from it. More about importing projects [here](/user-manual/editor/projects/backup-and-export#restoring-projects).
 
-The request will start an archive job and the job details will be returned in the response. You can [poll the job by id](/user-manual/api/job-get) until its status is either 'complete' or 'error'. When the job is done, its data will contain a URL to download the project archive.
+The request will start an export job and the job details will be returned in the response. You can [poll the job by id](/user-manual/api/job-get) until its status is either 'complete' or 'error'. When the job is done, its data will contain a URL to download the project export.
 
 ## Example
 
@@ -12835,7 +12835,7 @@ Projects are the foundation for everything you create in the PlayCanvas Editor. 
 
 ### Advanced Management
 
-- **[Backup and Archiving](backup-archiving)** - Protecting your projects with backups and archives.
+- **[Backup and Export](backup-and-export)** - Protecting your projects with backups and exports.
 - **[Ownership and Transfers](ownership-transfers)** - Transferring projects between users and organizations.
 
 ## Quick Actions
@@ -12849,9 +12849,9 @@ Once you understand the basics of project management, you can:
 
 --------------------------------------------------------------------------------
 
-## Backup and Archiving
+## Backup and Export
 
-URL: https://developer.playcanvas.com/user-manual/editor/projects/backup-archiving/
+URL: https://developer.playcanvas.com/user-manual/editor/projects/backup-and-export/
 
 Protecting your PlayCanvas projects with regular backups is essential for safeguarding against accidental deletion, malicious actions, or data loss. This section covers all the methods available for backing up and restoring your projects.
 
@@ -12871,22 +12871,22 @@ Regular backups protect against:
 
 The simplest way to create a backup is to fork your own project. Forking is [covered comprehensively](creating.md#fork-an-existing-project) earlier in this section.
 
-### 2. Archiving (via playcanvas.com)
+### 2. Exporting (via playcanvas.com)
 
-Archive files provide complete project backups that can be stored offline and imported later.
+Export files provide complete project backups that can be stored offline and imported later.
 
 #### From the Projects List
 
-[Image: Export Archive]
+[Image: Export Project]
 
-To export a project archive:
+To export a project:
 
 1. Ensure you are logged in
 2. Visit the User Page that owns the project you wish to export
 3. Locate the project in the project list
 4. Click the down arrow next to the right of the project name
 5. Select **"Export Project"**
-6. Wait for the archive to be generated
+6. Wait for the export to be generated
 7. Click **DOWNLOAD** to download the zip file
 
 :::danger
@@ -12899,7 +12899,7 @@ Exported projects **do not** include:
 
 :::
 
-### 3. Archiving (via REST API)
+### 3. Exporting (via REST API)
 
 For automated and advanced backup scenarios, use the PlayCanvas REST API.
 
@@ -12912,7 +12912,7 @@ For automated and advanced backup scenarios, use the PlayCanvas REST API.
 
 #### Using the API
 
-The [Project Archive API](/user-manual/api/project-archive/) allows you to:
+The [Project Export API](/user-manual/api/project-export/) allows you to:
 
 ```bash
 # Export a project via REST API
@@ -12925,7 +12925,7 @@ curl -H "Authorization: Bearer {accessToken}" \
 
 #### Automation Tools
 
-PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/playcanvas-rest-api-tools#archiving-a-project) to simplify automated backups:
+PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/playcanvas-rest-api-tools#exporting-a-project) to simplify automated backups:
 
 - Command-line interface for easy scripting
 - Support for multiple projects
@@ -12934,15 +12934,15 @@ PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/
 
 ## Restoring Projects {#restoring-projects}
 
-### From Archive Files
+### From Export Files
 
-[Image: Import Archive]
+[Image: Import Project]
 
-To restore a project from an archive:
+To restore a project from an export:
 
 1. Go to your [Projects Dashboard](https://playcanvas.com/projects)
 2. Click **"Import Project"** on the left side
-3. Select your archive ZIP file
+3. Select your export ZIP file
 4. Choose a name for the restored project
 5. Wait for the import to complete
 
@@ -12972,16 +12972,16 @@ Establish a consistent backup routine:
 📅 **Daily Backups** (for active development):
 
 - Fork projects before major changes
-- Export archives for critical milestones
+- Create exports for critical milestones
 
 📅 **Weekly Backups** (for ongoing projects):
 
-- Create comprehensive archive exports
+- Create comprehensive project exports
 - Test restore procedures periodically
 
 📆 **Monthly Backups** (for stable projects):
 
-- Full project archives with documentation
+- Full project exports with documentation
 - Long-term storage planning
 
 ### Backup Storage
@@ -13013,7 +13013,7 @@ Store your backups securely:
 Coordinate backups with your [version control workflow](../version-control/index.md):
 
 - **Branch-specific Backups**: Export different branches separately
-- **Release Backups**: Archive every stable release
+- **Release Backups**: Export every stable release
 - **Feature Backups**: Backup before merging major features
 
 ### Automated Workflows
