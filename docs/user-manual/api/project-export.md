@@ -1,5 +1,5 @@
 ---
-title: Projects - Archive project
+title: Projects - Export project
 ---
 
 ## Route URL
@@ -10,9 +10,9 @@ POST https://playcanvas.com/api/projects/:id/export
 
 ## Description
 
-This will allow you to download a zip archive of your entire project. You can import that archive from your Projects Dashboard to create a new Project from that archive. More about importing projects [here](/user-manual/editor/projects/backup-archiving#restoring-projects).
+This will allow you to download a zip export of your entire project. You can import that export from your Projects Dashboard to create a new project from it. More about importing projects [here](/user-manual/editor/projects/backup-and-export#restoring-projects).
 
-The request will start an archive job and the job details will be returned in the response. You can [poll the job by id](/user-manual/api/job-get) until its status is either 'complete' or 'error'. When the job is done, its data will contain a URL to download the project archive.
+The request will start an export job and the job details will be returned in the response. You can [poll the job by id](/user-manual/api/job-get) until its status is either 'complete' or 'error'. When the job is done, its data will contain a URL to download the project export.
 
 ## Example
 

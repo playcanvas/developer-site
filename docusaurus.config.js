@@ -93,6 +93,8 @@ const config = {
         { from: ['/user-manual/assets/viewers/'], to: '/user-manual/editor/assets/viewers/' },
         // Preloading renamed
         { from: ['/user-manual/assets/preloading-and-streaming/'], to: '/user-manual/assets/preloading/' },
+        { from: ['/user-manual/api/project-archive/'], to: '/user-manual/api/project-export/' },
+        { from: ['/user-manual/editor/projects/backup-archiving/'], to: '/user-manual/editor/projects/backup-and-export/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en
