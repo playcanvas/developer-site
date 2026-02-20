@@ -1,5 +1,5 @@
 ---
-title: Backup and Archiving
+title: Backup and Export
 ---
 
 Protecting your PlayCanvas projects with regular backups is essential for safeguarding against accidental deletion, malicious actions, or data loss. This section covers all the methods available for backing up and restoring your projects.
@@ -20,22 +20,22 @@ Regular backups protect against:
 
 The simplest way to create a backup is to fork your own project. Forking is [covered comprehensively](creating.md#fork-an-existing-project) earlier in this section.
 
-### 2. Archiving (via playcanvas.com)
+### 2. Exporting (via playcanvas.com)
 
-Archive files provide complete project backups that can be stored offline and imported later.
+Export files provide complete project backups that can be stored offline and imported later.
 
 #### From the Projects List
 
-![Export Archive](/img/user-manual/editor/projects/export-project.png)
+![Export Project](/img/user-manual/editor/projects/export-project.png)
 
-To export a project archive:
+To export a project:
 
 1. Ensure you are logged in
 2. Visit the User Page that owns the project you wish to export
 3. Locate the project in the project list
 4. Click the down arrow next to the right of the project name
 5. Select **"Export Project"**
-6. Wait for the archive to be generated
+6. Wait for the export to be generated
 7. Click **DOWNLOAD** to download the zip file
 
 :::danger
@@ -48,7 +48,7 @@ Exported projects **do not** include:
 
 :::
 
-### 3. Archiving (via REST API)
+### 3. Exporting (via REST API)
 
 For automated and advanced backup scenarios, use the PlayCanvas REST API.
 
@@ -61,7 +61,7 @@ For automated and advanced backup scenarios, use the PlayCanvas REST API.
 
 #### Using the API
 
-The [Project Archive API](/user-manual/api/project-archive/) allows you to:
+The [Project Export API](/user-manual/api/project-export/) allows you to:
 
 ```bash
 # Export a project via REST API
@@ -74,7 +74,7 @@ curl -H "Authorization: Bearer {accessToken}" \
 
 #### Automation Tools
 
-PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/playcanvas-rest-api-tools#archiving-a-project) to simplify automated backups:
+PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/playcanvas-rest-api-tools#exporting-a-project) to simplify automated backups:
 
 - Command-line interface for easy scripting
 - Support for multiple projects
@@ -83,15 +83,15 @@ PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/
 
 ## Restoring Projects {#restoring-projects}
 
-### From Archive Files
+### From Export Files
 
-![Import Archive](/img/user-manual/editor/projects/import-project.png)
+![Import Project](/img/user-manual/editor/projects/import-project.png)
 
-To restore a project from an archive:
+To restore a project from an export:
 
 1. Go to your [Projects Dashboard](https://playcanvas.com/projects)
 2. Click **"Import Project"** on the left side
-3. Select your archive ZIP file
+3. Select your export ZIP file
 4. Choose a name for the restored project
 5. Wait for the import to complete
 
@@ -121,16 +121,16 @@ Establish a consistent backup routine:
 📅 **Daily Backups** (for active development):
 
 - Fork projects before major changes
-- Export archives for critical milestones
+- Create exports for critical milestones
 
 📅 **Weekly Backups** (for ongoing projects):
 
-- Create comprehensive archive exports
+- Create comprehensive project exports
 - Test restore procedures periodically
 
 📆 **Monthly Backups** (for stable projects):
 
-- Full project archives with documentation
+- Full project exports with documentation
 - Long-term storage planning
 
 ### Backup Storage
@@ -162,7 +162,7 @@ Store your backups securely:
 Coordinate backups with your [version control workflow](../version-control/index.md):
 
 - **Branch-specific Backups**: Export different branches separately
-- **Release Backups**: Archive every stable release
+- **Release Backups**: Export every stable release
 - **Feature Backups**: Backup before merging major features
 
 ### Automated Workflows

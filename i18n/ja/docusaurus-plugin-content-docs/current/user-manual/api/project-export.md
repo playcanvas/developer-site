@@ -1,5 +1,5 @@
 ---
-title: プロジェクト - Archive project
+title: プロジェクト - Export project
 ---
 
 ## ルートURL
@@ -10,9 +10,9 @@ POST https://playcanvas.com/api/projects/:id/export
 
 ## 説明
 
-これにより、プロジェクト全体のzipアーカイブをダウンロードできます。ダウンロード後、Projects Dashboardからそのアーカイブをインポートして、そのアーカイブから新しいプロジェクトを作成できます。プロジェクトのインポートに関する詳細は[こちら](/user-manual/editor/projects/backup-archiving#restoring-projects)をご覧ください。
+これにより、プロジェクト全体のzipエクスポートをダウンロードできます。ダウンロード後、Projects Dashboardからそのエクスポートをインポートして、新しいプロジェクトを作成できます。プロジェクトのインポートに関する詳細は[こちら](/user-manual/editor/projects/backup-and-export#restoring-projects)をご覧ください。
 
-リクエストはアーカイブジョブを開始し、ジョブの詳細がレスポンスで返されます。[idによってジョブの状態をポーリング](/user-manual/api/job-get)し、状態が「完了」または「エラー」になるまで待機することができます。ジョブが完了すると、そのデータにはプロジェクトアーカイブをダウンロードするURLが含まれます。
+リクエストはエクスポートジョブを開始し、ジョブの詳細がレスポンスで返されます。[idによってジョブの状態をポーリング](/user-manual/api/job-get)し、状態が「完了」または「エラー」になるまで待機することができます。ジョブが完了すると、そのデータにはプロジェクトエクスポートをダウンロードするURLが含まれます。
 
 ## 例
 
