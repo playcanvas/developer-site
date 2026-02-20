@@ -24,7 +24,7 @@ curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json
 
 | 名前        | タイプ     | Required | 説明                                                                |
 | ----------- | -------- | :------: | -------------------------------------------------------------------------- |
-| `projectId` | `number` | ✔️      | The id of the project.                                                     |
+| `id`        | `number` | ✔️      | The id of the project.                                                     |
 | `branch_id` | `string` |          | The id of the branch. If no id is specified, the main branch will be used. |
 
 ## レスポンススキーマ
