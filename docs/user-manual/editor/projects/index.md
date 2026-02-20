@@ -21,7 +21,7 @@ Projects are the foundation for everything you create in the PlayCanvas Editor. 
 
 ### Advanced Management
 
-- **[Backup and Archiving](backup-archiving)** - Protecting your projects with backups and archives.
+- **[Backup and Export](backup-and-export)** - Protecting your projects with backups and exports.
 - **[Ownership and Transfers](ownership-transfers)** - Transferring projects between users and organizations.
 
 ## Quick Actions
