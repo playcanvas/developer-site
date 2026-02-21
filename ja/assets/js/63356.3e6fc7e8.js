@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdeveloper_playcanvas_com=globalThis.webpackChunkdeveloper_playcanvas_com||[]).push([[63356],{63356(e,a,c){c.d(a,{createInfoServices:()=>l.v});var l=c(2963);c(808)}}]);
