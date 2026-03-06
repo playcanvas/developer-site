@@ -179,6 +179,48 @@ struct Particle {
 var<storage, read> particles: array<Particle>;
 ```
 
+### Half-Precision Types
+
+When the device supports 16-bit floating-point operations (`device.supportsShaderF16`), shaders can use native WGSL half-precision types for improved performance and reduced memory bandwidth:
+
+| Native WGSL Type | Description |
+|------------------|-------------|
+| `f16` | 16-bit float scalar |
+| `vec2h`, `vec3h`, `vec4h` | 16-bit float vectors |
+| `mat2x2h`, `mat3x3h`, `mat4x4h` | 16-bit float matrices |
+
+For convenience, PlayCanvas provides type aliases that automatically resolve to f16 types when supported, or fall back to f32 types when not:
+
+| Alias | f16 Supported | f16 Not Supported |
+|-------|---------------|-------------------|
+| `half` | `f16` | `f32` |
+| `half2` | `vec2<f16>` | `vec2f` |
+| `half3` | `vec3<f16>` | `vec3f` |
+| `half4` | `vec4<f16>` | `vec4f` |
+| `half2x2` | `mat2x2<f16>` | `mat2x2f` |
+| `half3x3` | `mat3x3<f16>` | `mat3x3f` |
+| `half4x4` | `mat4x4<f16>` | `mat4x4f` |
+
+These aliases are automatically included in vertex and fragment shaders. For compute shaders, include them with `#include "halfTypesCS"`.
+
+Example usage:
+
+```wgsl
+// Use half types for intermediate calculations
+var color: half3 = half3(1.0, 0.5, 0.0);
+var intensity: half = half(0.8);
+var result: half3 = color * intensity;
+
+// Convert back to f32 when needed (e.g., for output)
+output.color = vec4f(vec3f(result), 1.0);
+```
+
+:::note
+
+When `device.supportsShaderF16` is true, the engine automatically adds the `enable f16;` directive and defines `CAPS_SHADER_F16` for conditional compilation. WGSL requires explicit type conversions between f16 and f32—use constructors like `half3(vec3fValue)` or `vec3f(half3Value)` to convert between precisions.
+
+:::
+
 ### Varyings
 
 Varyings are used to pass values from the vertex shader to the fragment shader. Declare them in both vertex and fragment shader using this simplified syntax:
