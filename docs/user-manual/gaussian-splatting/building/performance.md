@@ -50,13 +50,14 @@ The budget system accounts for all GSplat assets in the scene, including both LO
 
 ### LOD Distances
 
-LOD distances control at which camera distances each level of detail is selected. These are configured per GSplat component:
+LOD distance thresholds are controlled by two properties per GSplat component:
 
 ```javascript
-entity.gsplat.lodDistances = [5, 10, 20, 40, 80, 160];
+entity.gsplat.lodBaseDistance = 5;  // distance for the first LOD transition
+entity.gsplat.lodMultiplier = 2;   // multiplier between successive thresholds
 ```
 
-Each value represents the distance threshold for transitioning to the next LOD level. Smaller values result in higher quality at close range but faster degradation with distance.
+`lodBaseDistance` sets how far from the camera the first quality reduction occurs. `lodMultiplier` controls how quickly quality drops with distance — each subsequent LOD level transitions at this factor times the previous level's distance. Lower values keep higher quality at distance; higher values switch to coarser LODs sooner. LOD distances are also automatically compensated for the camera's field of view — a wider FOV makes objects appear smaller on screen, so LOD switches to coarser levels sooner.
 
 ### LOD Range Limits
 
