@@ -363,6 +363,10 @@ node --max-old-space-size=32000 node_modules/.bin/splat-transform \
   output/lod-meta.json \
   --filter-nan \
   --filter-harmonics 0
+
+# LCCファイルから直接LODストリーミング形式を生成
+# (LCCファイルには複数のLODレベルが既に含まれています)
+splat-transform scene.lcc output/lod-meta.json
 ```
 
 **ヒント:**
