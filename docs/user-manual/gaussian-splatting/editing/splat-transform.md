@@ -105,8 +105,8 @@ SplatTransform detects file format based on extension. Supported formats are sho
 | ------ | ----- | ------ | ----------- |
 | `.ply` | ✅ | ✅ | Standard PLY format |
 | `.sog` | ✅ | ✅ | Bundled super-compressed format (recommended) |
-| `meta.json` | ✅ | ✅ | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** end with `meta.json` |
-| `lod-meta.json` | ❌ | ✅ | LOD streaming format with octree structure for progressive loading. Output filename **must** end with `lod-meta.json` |
+| `meta.json` | ✅ | ✅ | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** be `meta.json` |
+| `lod-meta.json` | ❌ | ✅ | LOD streaming format with octree structure for progressive loading. Output filename **must** be `lod-meta.json` |
 | `.compressed.ply` | ✅ | ✅ | Compressed PLY format (auto-detected and decompressed on read) |
 | `.lcc` | ✅ | ❌ | LCC file format (XGRIDS) |
 | `.ksplat` | ✅ | ❌ | Compressed splat format (mkkellogg format) |
@@ -340,7 +340,7 @@ The output filename determines the format. These are **not** arbitrary names:
 - **`lod-meta.json`** — generates LOD streaming format (multiple SOG chunks with an octree structure for progressive loading)
 - **`meta.json`** — generates unbundled SOG format (a single SOG file, no streaming)
 
-The output path must end with exactly `lod-meta.json` or `meta.json`. For example: `output/lod-meta.json`, `my-scene/lod-meta.json`.
+The output filename must be exactly `lod-meta.json` or `meta.json` — only the directory path before it can vary. For example: `output/lod-meta.json`, `my-scene/lod-meta.json`.
 
 :::
 
@@ -378,6 +378,8 @@ node --max-old-space-size=32000 node_modules/.bin/splat-transform \
 
 # Generate LOD streaming format directly from an LCC file
 # (LCC files already contain multiple LOD levels)
+# Note: the output filename must be exactly lod-meta.json for streaming LOD,
+# or meta.json for a single unbundled SOG file
 splat-transform scene.lcc output/lod-meta.json
 ```
 
