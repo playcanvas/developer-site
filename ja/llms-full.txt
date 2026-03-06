@@ -21472,6 +21472,10 @@ node --max-old-space-size=32000 node_modules/.bin/splat-transform \
   output/lod-meta.json \
   --filter-nan \
   --filter-harmonics 0
+
+# Generate LOD streaming format directly from an LCC file
+# (LCC files already contain multiple LOD levels)
+splat-transform scene.lcc output/lod-meta.json
 ```
 
 **Tips:**
