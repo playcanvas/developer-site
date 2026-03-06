@@ -105,7 +105,8 @@ SplatTransform detects file format based on extension. Supported formats are sho
 | ------ | ----- | ------ | ----------- |
 | `.ply` | ✅ | ✅ | Standard PLY format |
 | `.sog` | ✅ | ✅ | Bundled super-compressed format (recommended) |
-| `meta.json` | ✅ | ✅ | Unbundled super-compressed format (accompanied by `.webp` textures) |
+| `meta.json` | ✅ | ✅ | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** end with `meta.json` |
+| `lod-meta.json` | ❌ | ✅ | LOD streaming format with octree structure for progressive loading. Output filename **must** end with `lod-meta.json` |
 | `.compressed.ply` | ✅ | ✅ | Compressed PLY format (auto-detected and decompressed on read) |
 | `.lcc` | ✅ | ❌ | LCC file format (XGRIDS) |
 | `.ksplat` | ✅ | ❌ | Compressed splat format (mkkellogg format) |
@@ -331,6 +332,17 @@ splat-transform \
 The LOD (Level of Detail) format enables efficient streaming and rendering of large gaussian splat scenes. The tool takes multiple pre-generated LOD files as input and generates an optimized streaming format with an octree structure for optimal download performance.
 
 **Note:** The tool does NOT create the LOD levels themselves - you must supply multiple LOD files with progressively fewer gaussians (LOD 0 = highest detail, higher numbers = lower detail).
+
+:::warning Output Filename Requirements
+
+The output filename determines the format. These are **not** arbitrary names:
+
+- **`lod-meta.json`** — generates LOD streaming format (multiple SOG chunks with an octree structure for progressive loading)
+- **`meta.json`** — generates unbundled SOG format (a single SOG file, no streaming)
+
+The output path must end with exactly `lod-meta.json` or `meta.json`. For example: `output/lod-meta.json`, `my-scene/lod-meta.json`.
+
+:::
 
 ```bash
 # Generate LOD streaming format from multiple input files
