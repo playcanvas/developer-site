@@ -54,12 +54,14 @@ You can control and fine-tune LOD streaming using the following APIs:
 
 ### Component-Level Control
 
-Use the [`lodDistances`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#loddistances) property to set the distance thresholds for switching between LOD levels:
+Use [`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodBaseDistance) and [`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodMultiplier) to control LOD distance thresholds. Thresholds follow a geometric progression: `lodBaseDistance * lodMultiplier^i`:
 
 ```javascript
-// Set LOD distance thresholds (in world units)
-entity.gsplat.lodDistances = [10, 20, 40, 80];
+entity.gsplat.lodBaseDistance = 10;  // distance for the first LOD transition
+entity.gsplat.lodMultiplier = 2;    // each successive threshold is 2x farther
 ```
+
+The default multiplier of 2 gives perceptually uniform transitions under perspective projection. The system also compensates for camera FOV automatically.
 
 ### Scene-Level Control
 
