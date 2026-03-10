@@ -33,20 +33,23 @@ entity.light.castShadows = true;
 
 ## Shadow Quality
 
-For better shadow quality, you can adjust the alpha clip threshold on the global GSplat material. This controls how transparent splats contribute to shadows:
+For better shadow quality, you can adjust the alpha clip threshold. This controls how transparent splats contribute to shadows — lower values include more semi-transparent splats in the shadow, while higher values create sharper but potentially incomplete shadows.
+
+### Unified Mode
+
+In unified rendering mode, set the alpha clip threshold on the global GSplat settings:
 
 ```javascript
-app.scene.gsplat.material.setParameter('alphaClip', 0.4);
-app.scene.gsplat.material.update();
+app.scene.gsplat.alphaClip = 0.4;
 ```
 
-Lower values include more semi-transparent splats in the shadow, while higher values create sharper but potentially incomplete shadows.
+### Non-Unified Mode
 
-:::note
+In non-unified mode, set the alpha clip threshold directly on the component's material:
 
-The `alphaClip` parameter is a temporary measure. A more official API for controlling shadow quality is planned for a future release.
-
-:::
+```javascript
+entity.gsplat.material.setParameter('alphaClip', 0.4);
+```
 
 ## Receiving Shadows
 
