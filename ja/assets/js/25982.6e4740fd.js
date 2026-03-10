@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdeveloper_playcanvas_com=globalThis.webpackChunkdeveloper_playcanvas_com||[]).push([[25982],{25982(e,a,c){c.d(a,{createPacketServices:()=>l.$});var l=c(96527);c(6902)}}]);
