@@ -50,7 +50,7 @@
     "clsx": "^2.1.1",
     "docusaurus-plugin-sass": "^0.2.6",
     "leva": "^0.10.1",
-    "playcanvas": "^2.16.1",
+    "playcanvas": "^2.17.0",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
     "react": "^19.2.4",
@@ -63,8 +63,8 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
-    "markdownlint-cli2": "^0.20.0",
-    "marked": "^17.0.2"
+    "markdownlint-cli2": "^0.21.0",
+    "marked": "^17.0.4"
   },
   "browserslist": {
     "production": [
