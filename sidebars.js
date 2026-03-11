@@ -732,6 +732,7 @@ const sidebars = {
             'user-manual/graphics/advanced-rendering/multi-draw',
             'user-manual/graphics/advanced-rendering/multiple-render-targets',
             'user-manual/graphics/advanced-rendering/indirect-drawing',
+            'user-manual/graphics/advanced-rendering/html-in-canvas',
           ],
         },
       ],
