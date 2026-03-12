@@ -426,6 +426,10 @@ const sidebars = {
         {
           type: 'category',
           label: 'API',
+          link: {
+            type: 'doc',
+            id: 'user-manual/react/api/index',
+          },
           items: [
             'user-manual/react/api/application',
             'user-manual/react/api/entity',
