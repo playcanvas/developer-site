@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 565
-Generated: 2026-03-10
+Total Documents: 566
+Generated: 2026-03-12
 
 ================================================================================
 
@@ -29987,6 +29987,47 @@ But less talking, more doing. Here are some examples of what you can build with 
 - [API Reference](https://playcanvas-react.vercel.app/docs/api) - Complete component documentation
 
 Explore the [official documentation](https://playcanvas-react.vercel.app/docs) or browse the [GitHub repository](https://github.com/playcanvas/react) for more.
+
+--------------------------------------------------------------------------------
+
+## API
+
+URL: https://developer.playcanvas.com/user-manual/react/api/
+
+PlayCanvas React provides a declarative, component-based API for building 3D applications. The API is organized into core components, engine components and hooks.
+
+## Core
+
+- **[``](./application)** - Root component that initializes the PlayCanvas engine and provides a rendering context
+- **[``](./entity)** - Fundamental scene graph building block with position, rotation and scale
+- **[``](./gltf)** - Load and instantiate GLB/GLTF scenes
+- **[`<Modify.*>`](./modify)** - Declaratively modify entities and components inside an imported GLB
+
+## Components
+
+Components add behavior to entities. Nest them inside an `` to attach the corresponding PlayCanvas component.
+
+- **[``](./anim)** - State-based animation
+- **[``](./align)** - Alignment helper
+- **[``](./camera)** - Camera and viewport
+- **[``](./collision)** - Physics collision shapes
+- **[``](./environment)** - Scene environment and skybox
+- **[``](./gsplat)** - Gaussian splat rendering
+- **[``](./light)** - Directional, point and spot lights
+- **[``](./render)** - Mesh rendering (primitives and assets)
+- **[``](./rigidbody)** - Physics rigid bodies
+- **[``](./script)** - Custom script components
+
+## Hooks
+
+React hooks for integrating with the PlayCanvas engine lifecycle. See the [Hooks overview](./hooks/) for usage patterns and best practices.
+
+- **[useApp](./hooks/use-app)** - Access the PlayCanvas Application instance
+- **[useParent](./hooks/use-parent)** - Get the parent Entity from context
+- **[useAsset](./hooks/use-asset)** - Load any type of PlayCanvas asset
+- **[useAppEvent](./hooks/use-app-event)** - Subscribe to application events
+- **[useMaterial](./hooks/use-material)** - Create and manage materials
+- **[usePhysics](./hooks/use-physics)** - Access physics context and state
 
 --------------------------------------------------------------------------------
 
