@@ -1,3 +1,4 @@
+import { Entity } from '@playcanvas/react';
 import { useModel } from '@playcanvas/react/hooks';
 import { Gltf } from '@playcanvas/react';
 
@@ -14,7 +15,10 @@ export const ModelLoading = () => {
   // If the asset is not loaded, return null
   if (!asset) return null;
 
-  // If the asset is loaded, render it with Gltf
-  return <Gltf asset={asset} key={asset.id} />;
+  // Match the original example framing so the shared staging camera starts outside the model.
+  return (
+    <Entity position={[0, -0.5, 0]} scale={[0.1, 0.1, 0.1]}>
+      <Gltf asset={asset} key={asset.id} />
+    </Entity>
+  );
 };
-
