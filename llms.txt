@@ -7,7 +7,7 @@ For the complete documentation content, see: https://developer.playcanvas.com/ll
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 566
-Generated: 2026-03-13
+Generated: 2026-03-26
 
 ## Recommended Entry Points
 
