@@ -22,9 +22,10 @@ curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json
 
 | Name                    | Type       | Required | Description                                                                                                                                                           |
 | ----------------------- | ---------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `project_id`            | `number`   | ✔️      | The id of the project.                                                                                                                                                |
-| `name`                  | `string`   | ✔️      | The name of the app. Must be less than 1000 characters.                                                                                                               |
-| `scenes`                | `number[]` | ✔️      | A list of scene ids to be included in the app. When you specify scenes then the first scene in the list will be used as the initial scene of the application.         |
+| `project_id`            | `number`   | ✔️       | The id of the project.                                                                                                                                               |
+| `name`                  | `string`   | ✔️       | The name of the app. Must be less than 1000 characters.                                                                                                              |
+| `scenes`                | `number[]` | ✔️       | A list of scene ids to be included in the app. When you specify scenes then the first scene in the list will be used as the initial scene of the application.        |
+| `engine_version`        | `string`   | ✔️       | Set it to a Engine version string ([full list of releases](https://github.com/playcanvas/engine/releases)).                                                          |
 | `branch_id`             | `string`   |          | The id of the branch. If no id is specified the main branch will be used.                                                                                             |
 | `description`           | `string`   |          | The description of the app. Must be less than 10,000 characters.                                                                                                      |
 | `version`               | `string`   |          | The version of the app. Can be a string up to 20 characters.                                                                                                          |
@@ -33,7 +34,6 @@ curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json
 | `scripts_minify`        | `boolean`  |          | Set it to true if you want scripts to be minified. Defaults to true.                                                                                                  |
 | `scripts_sourcemaps`    | `boolean`  |          | Set it to true if you want script sourcemaps to be generated. Defaults to false.                                                                                      |
 | `optimize_scene_format` | `boolean`  |          | Set it to true if you want scenes to be in an optimized format (see [Optimize Scene Format](/user-manual/optimization/optimizing-scene-format) for more information). |
-| `engine_version`        | `string`   |          | Set it to a Engine version string ([full list of releases](https://github.com/playcanvas/engine/releases)) if a specific version is needed for the app. Defaults to the latest Editor supported major version depending on your project.              |
 
 ## Response Schema
 
