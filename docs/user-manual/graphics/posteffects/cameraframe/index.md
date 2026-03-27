@@ -43,9 +43,9 @@ Extend the `CameraFrame` by adding effects to the final compose pass only. This 
 
 **Best for:** Simple screen-space effects, color adjustments, quick prototyping.
 
-### [Extending RenderPassCameraFrame Class](extending-class)
+### [Extending FramePassCameraFrame Class](extending-class)
 
-Extend the `CameraFrame` by adding custom render passes. This allows you to integrate additional rendering techniques while leveraging built-in effects.
+Extend the `CameraFrame` by adding custom frame passes. This allows you to integrate additional rendering techniques while leveraging built-in effects.
 
 **Best for:** Multi-pass effects, advanced integrations, processing intermediate results.
 
