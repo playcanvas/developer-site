@@ -470,6 +470,15 @@ const sidebars = {
             }
           ]
         },
+        {
+          type: 'category',
+          label: 'Examples',
+          link: {
+            type: 'doc',
+            id: 'user-manual/react/examples/index',
+          },
+          items: []
+        },
         
       ],
     },
