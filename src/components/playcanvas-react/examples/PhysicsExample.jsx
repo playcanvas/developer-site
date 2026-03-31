@@ -17,6 +17,17 @@ const SHAPES = Array.from({ length: NUM_SHAPES }, () => ({
   type: Math.random() > 0.2 ? 'sphere' : 'capsule'
 }));
 
+const SSAO_SETTINGS = {
+  blurEnabled: true,
+  intensity: 0.5,
+  minAngle: 10,
+  power: 6,
+  radius: 30,
+  samples: 12,
+  scale: 1,
+  type: 'lighting'
+};
+
 const direction = new Vec3();
 const swirl = new Vec3();
 const impulse = new Vec3();
@@ -29,6 +40,7 @@ class MoverScript extends PcScript {
   update(dt) {
     const delta = Math.min(0.1, dt);
 
+    // Pull each body back toward the center while pushing it sideways.
     direction.copy(this.entity.getLocalPosition()).normalize();
     swirl.cross(direction, Vec3.RIGHT).scale(0.4);
 
@@ -67,6 +79,7 @@ class FollowPointerScript extends PcScript {
         return;
       }
 
+      // Project the pointer onto a plane in front of the camera.
       const distance = this.activeCamera.entity.getPosition().z;
       this.activeCamera.screenToWorld(point.x, point.y, distance, this.pointer);
     };
@@ -99,10 +112,10 @@ const ShapeCollider = ({ children, hide = false, material, scale = 1, type = 'sp
 
 const PhysicsScene = () => {
   const app = useApp();
-  const { asset: envAtlas } = useEnvAtlas('/assets/helipad.png');
+  const { asset: envAtlas } = useEnvAtlas('/assets/environment.png');
   const materialA = useMaterial({ diffuse: '#c0a0a0', emissive: 'red' });
-  const materialB = useMaterial({});
-  const materialC = useMaterial({});
+  const materialB = useMaterial({ diffuse: '#f2f2f2' });
+  const materialC = useMaterial({ diffuse: '#ffffff' });
 
   useEffect(() => {
     const rigidbodySystem = app.systems.rigidbody;
@@ -126,13 +139,17 @@ const PhysicsScene = () => {
 
   return (
     <Entity>
-      <Environment envAtlas={envAtlas} exposure={1.1} showSkybox={false} />
+      <Environment envAtlas={envAtlas} showSkybox={false} skyboxIntensity={1} />
 
       <Entity name="camera" position={[0, 0, 20]}>
         <Camera clearColor="#ffbfbf" fov={32.5} />
-        <StaticPostEffects ssao={{ type: 'lighting' }} />
+        <StaticPostEffects
+          lighting={{ exposure: 1.21, skyBoxIntensity: 1.02 }}
+          ssao={SSAO_SETTINGS}
+        />
       </Entity>
 
+      {/* This invisible kinematic sphere lets the pointer push nearby bodies. */}
       <ShapeCollider hide type="sphere">
         <Script script={FollowPointerScript} />
         <RigidBody type="kinematic" />
