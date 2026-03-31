@@ -473,6 +473,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Examples',
+          key: 'react-examples',
           link: {
             type: 'doc',
             id: 'user-manual/react/examples/index',
