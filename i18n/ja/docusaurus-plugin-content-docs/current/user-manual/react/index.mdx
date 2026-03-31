@@ -18,34 +18,38 @@ import TabItem from '@theme/TabItem';
   <a href="https://github.com/playcanvas/react" className='foreground underline' target="_blank">GitHub で表示 ↗</a>
 </div>
 
+## 例
+
+細かい説明はひとまず置いて、まずは触ってみましょう。PlayCanvas React で試せる例をいくつか紹介します。
+
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
-  <a href="https://playcanvas-react.vercel.app/examples/splats">
-    <img
-      src="/img/user-manual/react/splats.jpg"
-      alt="Gaussian Splats の例"
-      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
-    />
-  </a>
-  <a href="https://playcanvas-react.vercel.app/examples/model-viewer">
-    <img
-      src="/img/user-manual/react/render.png"
-      alt="3D モデルビューアの例"
-      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
-    />
-  </a>
-  <a href="https://playcanvas-react.vercel.app/examples/physics">
+  <a
+    href="/ja/user-manual/react/examples/physics"
+    style={{ display: 'block', color: 'inherit', textDecoration: 'none' }}
+  >
     <img
       src="/img/user-manual/react/physics.png"
-      alt="物理エンジンの例"
-      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+      alt="物理の例"
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
     />
+    <div style={{ marginTop: '12px' }}>
+      <div style={{ fontWeight: 700 }}>物理</div>
+      <div style={{ opacity: 0.8 }}>無重力空間で剛体の動きを試せます。</div>
+    </div>
   </a>
-  <a href="https://stackblitz.com/edit/pc-react-tick-tock?file=src%2FScene.tsx">
+  <a
+    href="https://stackblitz.com/edit/pc-react-tick-tock?file=src%2FScene.tsx"
+    style={{ display: 'block', color: 'inherit', textDecoration: 'none' }}
+  >
     <img
       src="/img/user-manual/react/clock.png"
       alt="時計の例"
-      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', transition: 'transform 0.2s', cursor: 'pointer' }}
+      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
     />
+    <div style={{ marginTop: '12px' }}>
+      <div style={{ fontWeight: 700 }}>Clock</div>
+      <div style={{ opacity: 0.8 }}>StackBlitz でシンプルなテンプレートを開けます。</div>
+    </div>
   </a>
 </div>
 

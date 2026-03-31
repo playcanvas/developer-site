@@ -470,6 +470,18 @@ const sidebars = {
             }
           ]
         },
+        {
+          type: 'category',
+          label: 'Examples',
+          key: 'react-examples',
+          link: {
+            type: 'doc',
+            id: 'user-manual/react/examples/index',
+          },
+          items: [
+            'user-manual/react/examples/physics',
+          ]
+        },
         
       ],
     },
