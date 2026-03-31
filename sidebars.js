@@ -477,7 +477,9 @@ const sidebars = {
             type: 'doc',
             id: 'user-manual/react/examples/index',
           },
-          items: []
+          items: [
+            'user-manual/react/examples/physics',
+          ]
         },
         
       ],
