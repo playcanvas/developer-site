@@ -6,7 +6,7 @@ The most flexible approach is to implement completely custom render passes that 
 
 ## Overview
 
-This approach does not use `CameraFrame` at all. Instead, you create your own render passes and assign them directly to the camera's `renderPasses` array. This is ideal when you need complete control or want to implement a custom post-processing pipeline.
+This approach does not use `CameraFrame` at all. Instead, you create your own render passes and assign them directly to the camera's `framePasses` array. This is ideal when you need complete control or want to implement a custom post-processing pipeline.
 
 ## Example: Simple Tint Render Pass
 
@@ -79,7 +79,7 @@ const tintPass = new RenderPassTint(device, renderTarget.colorBuffer);
 tintPass.init(camera.renderTarget);
 
 // Assign passes to the camera
-camera.renderPasses = [scenePass, tintPass];
+camera.framePasses = [scenePass, tintPass];
 ```
 
 ## Multi-Pass Example
@@ -115,7 +115,7 @@ const blurVPass = new RenderPassBlurVertical(device, rt2.colorBuffer);
 blurVPass.init(camera.renderTarget); // Final output
 
 // Set the pass chain
-camera.renderPasses = [scenePass, blurHPass, blurVPass];
+camera.framePasses = [scenePass, blurHPass, blurVPass];
 ```
 
 ## Resources

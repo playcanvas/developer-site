@@ -1,26 +1,26 @@
 ---
-title: Extending RenderPassCameraFrame Class
+title: Extending FramePassCameraFrame Class
 ---
 
-For more advanced customization, you can extend the `RenderPassCameraFrame` class to add custom render passes or modify the rendering pipeline. This approach gives you full control over the pass creation and ordering while still leveraging the built-in CameraFrame effects.
+For more advanced customization, you can extend the `FramePassCameraFrame` class to add custom passes or modify the rendering pipeline. This approach gives you full control over the pass creation and ordering while still leveraging the built-in CameraFrame effects.
 
 ## Overview
 
-By extending `RenderPassCameraFrame`, you can:
+By extending `FramePassCameraFrame`, you can:
 
-- Add custom render passes to the pipeline
+- Add custom passes to the pipeline
 - Modify or replace existing passes
 - Control the order of pass execution
 - Access intermediate textures from the rendering pipeline
 
 ## Example: Adding a Custom Render Pass
 
-This example demonstrates how to extend the `RenderPassCameraFrame` class to insert a custom render pass into the rendering pipeline. By overriding the `createPasses()` method, you can add your own processing step that operates on the scene texture. The `collectPasses()` method then controls where in the pipeline your custom pass executes—in this case, right before the final compose pass. This is useful when you need to apply custom effects that require their own render pass, such as edge detection, custom blur effects, or any processing that needs intermediate render targets.
+This example demonstrates how to extend the `FramePassCameraFrame` class to insert a custom render pass into the rendering pipeline. By overriding the `createPasses()` method, you can add your own processing step that operates on the scene texture. The `collectPasses()` method then controls where in the pipeline your custom pass executes—in this case, right before the final compose pass. This is useful when you need to apply custom effects that require their own render pass, such as edge detection, custom blur effects, or any processing that needs intermediate render targets.
 
 ```javascript
 import * as pc from 'playcanvas';
 
-class CustomRenderPassCameraFrame extends pc.RenderPassCameraFrame {
+class CustomFramePassCameraFrame extends pc.FramePassCameraFrame {
     createPasses(options) {
         // Call the base implementation to create standard passes
         super.createPasses(options);
@@ -46,7 +46,7 @@ class CustomRenderPassCameraFrame extends pc.RenderPassCameraFrame {
 // Use your custom class by extending CameraFrame
 class MyCameraFrame extends pc.CameraFrame {
     createRenderPass() {
-        return new CustomRenderPassCameraFrame(this.app, this, this.cameraComponent, this.options);
+        return new CustomFramePassCameraFrame(this.app, this, this.cameraComponent, this.options);
     }
 }
 
