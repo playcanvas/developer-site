@@ -32,51 +32,6 @@ This creates a new project with everything set up and ready to go. You can also 
 
 ## Next Steps
 
-Ready to dive in? Start with the [installation guide](./installation) to set up your development environment, then explore one of these hands-on next steps:
-
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
-  <a
-    href="../building-a-scene"
-    style={{ display: 'block', color: 'inherit', textDecoration: 'none' }}
-  >
-    <img
-      src="/img/user-manual/react/render.png"
-      alt="Building a Scene"
-      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
-    />
-    <div style={{ marginTop: '12px' }}>
-      <div style={{ fontWeight: 700 }}>Building a Scene</div>
-      <div style={{ opacity: 0.8 }}>Create your first 3D scene with entities, cameras, and rendering.</div>
-    </div>
-  </a>
-  <a
-    href="../examples/physics"
-    style={{ display: 'block', color: 'inherit', textDecoration: 'none' }}
-  >
-    <img
-      src="/img/user-manual/react/physics.png"
-      alt="Physics Example"
-      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
-    />
-    <div style={{ marginTop: '12px' }}>
-      <div style={{ fontWeight: 700 }}>Physics</div>
-      <div style={{ opacity: 0.8 }}>Interact with rigid bodies moving in zero gravity.</div>
-    </div>
-  </a>
-  <a
-    href="https://playcanvas-react.vercel.app/new"
-    style={{ display: 'block', color: 'inherit', textDecoration: 'none' }}
-  >
-    <img
-      src="/img/user-manual/react/clock.png"
-      alt="StackBlitz Template"
-      style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
-    />
-    <div style={{ marginTop: '12px' }}>
-      <div style={{ fontWeight: 700 }}>StackBlitz Template</div>
-      <div style={{ opacity: 0.8 }}>Start from a ready-to-run PlayCanvas React project in the browser.</div>
-    </div>
-  </a>
-</div>
+Ready to dive in? Start with the [installation guide](./installation) to set up your development environment, then follow the [building a scene](../building-a-scene) tutorial to build your first 3D application.
 
 For more advanced topics and examples, explore the complete [PlayCanvas React documentation](https://playcanvas-react.vercel.app/docs) and [example gallery](https://playcanvas-react.vercel.app/examples).
