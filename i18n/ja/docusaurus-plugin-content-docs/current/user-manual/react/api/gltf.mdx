@@ -1,0 +1,80 @@
+---
+description: Gltf コンポーネントのドキュメント
+---
+
+# `<Gltf/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application, Entity } from '@playcanvas/react';
+import { GltfModifyExample } from './gltf-modify-example';
+import GltfModifyExampleSource from '!!raw-loader!./gltf-modify-example.jsx';
+
+`<Gltf/>` コンポーネントは GLB シーンをロードしてインスタンス化し、React からその階層を操作できるようにします。デフォルトでモデルをレンダリングし、ファイル内のすべての Entity のキャッシュを構築し、`<Modify.*>` ルールを調整することでインポートされたコンテンツを宣言的に変更できます。
+
+全体像については [GLB モデルの変更ガイド](../../guide/modifying-glb-models) を参照してください。
+
+## 使い方
+
+[`useModel`](../hooks/use-asset) で GLB をロードし、`<Gltf/>` に Asset を渡します。コンポーネントがインスタンス化を処理します:
+
+```tsx copy
+import { useModel } from '@playcanvas/react/hooks';
+import { Entity, Gltf } from '@playcanvas/react';
+
+export function Statue() {
+  const { asset } = useModel('/assets/statue.glb');
+  if (!asset) return null;
+
+  return (
+    <Entity name="Statue">
+      <Gltf asset={asset} key={asset.id} />
+    </Entity>
+  );
+}
+```
+
+### ライブ例
+
+このデモでは、モデルのレンダースタイルを変更するコントロールを追加しています。Render Component を持つすべてのノードをターゲットにし、レンダースタイルをリアクティブに変更します。
+
+<CodeExample
+  label="Control GLB rendering and render components"
+  filename="gltf-modify-example.jsx"
+  code={GltfModifyExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[2, 1, 2]}
+      useControls={true}
+      exposure={3}
+    >
+      <Entity name="Statue" scale={[0.1, 0.1, 0.1]} position={[0, -0.5, 0]}>
+        <GltfModifyExample />
+      </Entity>
+    </Staging>
+  </Application>
+</CodeExample>
+
+### データのみのインスタンス化
+
+シーン階層だけが必要な場合（例えばコライダーの生成やクエリの実行時など）は `render={false}` を設定します。少なくとも 1 つの `<Modify.Node>` 子を含んでいれば、`<Gltf/>` は引き続き GLB をインスタンス化します。
+
+```tsx copy
+<Gltf asset={asset} key={asset.id} render={false}>
+  <Modify.Node path="**">
+    <Collision type="mesh" />
+  </Modify.Node>
+</Gltf>
+```
+
+## プロパティ
+
+```tsx asTypedoc
+import { Gltf } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Gltf>;
+export default $;
+```

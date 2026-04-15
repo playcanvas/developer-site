@@ -1,0 +1,37 @@
+---
+description: Align コンポーネントのドキュメント
+hide_sidebar: true
+---
+
+# `<Align/>`
+
+`<Align/>` コンポーネントは、親に対して Entity の位置を相対的に配置するシンプルなコンテナです。原点からオフセットされた 3D Asset を使用する際に便利です。Asset を地面に置いたり、カメラに合わせたりしたいだけの場合に活用できます。
+
+`<Align/>` コンポーネントは次の Props を受け付けます: `top`、`bottom`、`left`、`right`、`front`、`back`。
+
+## 使い方
+
+この例では、Asset を親 Entity の右下に配置します。
+
+```jsx copy
+import { Entity } from '@playcanvas/react'
+import { Align, Render } from '@playcanvas/react/components'
+
+export default function Scene() {
+  return (
+    <Entity>
+      <Align bottom right>
+        <Render type="box" />
+      </Align>
+    </Entity>
+  )
+}
+```
+
+## プロパティ
+
+```tsx asTypedoc
+import { Align } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Align>;
+export default $;
+```

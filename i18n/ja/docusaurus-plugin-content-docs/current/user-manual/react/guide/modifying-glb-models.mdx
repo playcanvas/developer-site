@@ -1,0 +1,367 @@
+---
+title: GLB モデルの変更
+description: "Gltf コンポーネントでロード済み GLB を検査・カスタマイズ: Entity のトラバース、ライトの削除、マテリアルの調整、React での物理追加。"
+---
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application, Entity } from '@playcanvas/react';
+import { GltfBasic } from './components/gltf-basic';
+import GltfBasicSource from '!!raw-loader!./components/gltf-basic.jsx';
+import { GltfRemoveLights } from './components/gltf-remove-lights';
+import GltfRemoveLightsSource from '!!raw-loader!./components/gltf-remove-lights.jsx';
+
+3D モデルは通常、スタンドアロンの Asset として提供されます。ブラックボックスのように感じることがあり、小さな調整でも面倒です。DCC ツールを再度開き、変更を加え、エクスポートし、モデルが更新されるたびに繰り返す必要があります。
+
+コードでモデルを検査したり調整したりする必要があるシナリオは多数あります。ソース GLB に不要なライトが含まれているかもしれません。カーコンフィギュレーターを構築していて、React の state からヘッドライトの Emissive 強度を制御する必要があるかもしれません。あるいは、モデル内のすべてのメッシュに物理 Component を追加したい場合もあります。
+
+## `<Gltf>` コンポーネント
+
+`<Gltf>` コンポーネントは GLB モデルのレンダリングとカスタマイズをワンストップで行えます。`<Render>` と同じように動作しますが、モデルの内部階層を公開します。
+
+```tsx
+import { useModel } from '@playcanvas/react/hooks';
+import { Gltf } from '@playcanvas/react';
+
+const GltfModel = () => {
+  const { asset } = useModel('model.glb');
+  return <Gltf asset={asset} key={asset.id} />;
+};
+```
+
+<CodeExample
+  label="Rendering a GLB model with Gltf"
+  code={GltfBasicSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[2, 1, 2]}
+      useControls={true}
+      exposure={3}
+    >
+      <Entity name="model" scale={[0.1, 0.1, 0.1]} position={[0, -0.5, 0]}>
+        <GltfBasic />
+      </Entity>
+    </Staging>
+  </Application>
+</CodeExample>
+
+## GLB モデルの変更
+
+`<Modify>` コンポーネントで GLB モデルを変更できます。階層内のサブノードを選択し、各マッチに更新を適用します。Component の追加、削除、調整、さらには新しい Entity の挿入も可能です。
+
+モデルの手にライトをアタッチする例:
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  {/* Body 配下の Arm 配下の Hand 子を選択 */}
+  <Modify.Node path="Body.Arm.Hand">
+    <Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
+
+`<Modify.Node>` はどのノードを変更するかを識別する `path` Prop を受け付けます。この例では `"Body"` 配下の `"Arm"` 配下の `"Hand"` ノードをターゲットにしています。
+
+## 適切なノードの検索
+
+path Prop はノード選択用の glob ライクなパターンを受け付けます。これにより、複数の Component を一度に選択できます。例えば、モデル内の `"Body"` ノード配下のすべての `"Hand"` を選択したい場合、ワイルドカードパターンを使用できます:
+
+```tsx
+{/* モデルをロード */}
+<Gltf asset={asset} key={asset.id}>
+  {/* Body ノード配下のすべての hand ノードを選択 */}
+  <Modify.Node path="Body.**.Hand">
+    {/* 各 hand にライトを追加 */}
+    <Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
+
+Component タイプでノードを選択することもできます。例えば `"Light"` Component を持つすべてのノードを選択するには `"[light]"` パターンを使用します:
+
+```tsx
+{/* モデルをロード */}
+<Gltf asset={asset} key={asset.id}>
+  {/* Body ノード配下の Light Component を持つすべてのノードを選択 */}
+  <Modify.Node path="Body.**[light]">
+    {/* マッチした各ライトを調整 */}
+    <Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
+
+GLB 内のノードを変更するには、パスパターンを使用して見つける必要があります。最も一般的なパターンは以下の通りです:
+
+- **完全パス**: `"Body.Arm.Hand"` - 特定のノードパスを選択
+- **単一ワイルドカード**: `"Body.*"` - Body の直接の子をすべて選択
+- **マルチレベルワイルドカード**: `"Body.**"` - Body 配下の任意の深さのすべての子孫を選択
+- **全ノード**: `"**"` - 階層内のすべてのノードを選択
+- **Component フィルタ**: `"**[light]"` - Light Component を持つすべてのノードを選択
+- **組み合わせ**: `"Head.*[light]"` - Light Component を持つ Head の直接の子をすべて選択
+
+述語関数を使用してノードをマッチさせることもできます:
+
+```tsx
+<Modify.Node path={(entity) => entity.name.includes('Weapon')}>
+  <Modify.Render castShadows />
+</Modify.Node>
+```
+
+## Component と Entity の追加
+
+GLB 内の特定のノードに新しい Component や Entity を追加できます。アニメーションのアタッチ、物理の追加、階層への新しい要素の挿入に便利です。
+
+### 物理の追加
+
+GLB 内の特定のメッシュに Collision と Rigidbody コンポーネントを追加できます:
+
+```tsx
+import { Gltf, Modify } from '@playcanvas/react';
+import { Collision, Rigidbody } from '@playcanvas/react/components';
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Body.Mesh">
+    <Collision type="box" />
+    <Rigidbody type="dynamic" mass={10} />
+  </Modify.Node>
+</Gltf>
+```
+
+これにより、パス `"Body.Mesh"` で見つかったメッシュに物理 Component が追加されます。このメッシュは物理シミュレーションに参加するようになります。
+
+### アニメーションの追加
+
+モデルのスケルトンにアニメーション Component をアタッチする必要がある場合、スケルトンのルートノードを見つけて `<Anim>` コンポーネントを追加します:
+
+```tsx
+import { Gltf, Modify } from '@playcanvas/react';
+import { Anim } from '@playcanvas/react/components';
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Root">
+    <Anim asset={asset} clip="Walk" loop />
+  </Modify.Node>
+</Gltf>
+```
+
+パス `"Root"` は GLB のルートノードを選択します。モデルの構造によって調整が必要な場合があります。一般的な名前は `"Root"`、`"Scene"`、またはスケルトンルート Entity の名前です。
+
+### 新しい Entity の追加
+
+GLB 内のノードの子として完全に新しい Entity を追加することもできます:
+
+```tsx
+import { Gltf, Modify } from '@playcanvas/react';
+import { Entity, Light } from '@playcanvas/react/components';
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Head">
+    <Entity name="HelmetLight" position={[0, 0.5, 0]}>
+      <Light type="omni" color="yellow" intensity={3} />
+    </Entity>
+  </Modify.Node>
+</Gltf>
+```
+
+## 既存 Component の変更
+
+既存の Component を削除せずにプロパティを変更できます。変更は既存の Component プロパティにマージされます。
+
+### Component の削除
+
+GLB に不要なライトやその他の Component が含まれている場合があります。ノードを選択して `remove` Prop を使用することで簡単に削除できます。
+
+```tsx
+import { Gltf, Modify } from '@playcanvas/react';
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="**[light]">
+    <Modify.Light remove />
+  </Modify.Node>
+</Gltf>
+```
+
+`path="**[light]"` パターンは階層内のどこにでもある Light Component を持つすべてのノードを見つけます。`remove` Prop はそれらのノードから Component を削除します。
+
+<CodeExample
+  label="Removing all lights from a GLB"
+  code={GltfRemoveLightsSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[2, 1, 2]}
+      useControls={true}
+      exposure={3}
+    >
+      <Entity name="model" scale={[0.1, 0.1, 0.1]} position={[0, -0.5, 0]}>
+        <GltfRemoveLights />
+      </Entity>
+    </Staging>
+  </Application>
+</CodeExample>
+
+### ライトプロパティの変更
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Headlight">
+    <Modify.Light color="red" intensity={2} />
+  </Modify.Node>
+</Gltf>
+```
+
+`"Headlight"` という名前のノードを見つけ、他のすべてのライトプロパティを維持したまま、ライトの色と強度を更新します。
+
+### Render プロパティの更新
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Body[render]">
+    <Modify.Render castShadows receiveShadows />
+  </Modify.Node>
+</Gltf>
+```
+
+`[render]` フィルタは Render Component を持つノードを選択します。これにより、ボディメッシュのシャドウキャストとシャドウレシーブが有効になります。
+
+### 関数による更新
+
+関数を使用して現在の値に基づいてプロパティを更新することもできます:
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="**[light]">
+    <Modify.Light intensity={(val) => (val || 1) * 2} />
+  </Modify.Node>
+</Gltf>
+```
+
+これは GLB 内のすべてのライトの強度を、現在の値に関係なく 2 倍にします。
+
+## useEntity による Entity の検索
+
+GLB 階層内の Entity をプログラム的に操作する必要がある場合があります。`useEntity` フックを使用すると、現在の親コンテキストに対して相対的に Entity を検索できます。`<Modify.Node>` の子として Component を追加し、同じサブツリー内の他の Entity を見つける必要がある場合に特に便利です。
+
+```tsx
+import { Gltf, Modify, useEntity } from '@playcanvas/react';
+import { Entity, Light } from '@playcanvas/react/components';
+
+function HandGlow() {
+  // 現在の親に対して相対的に 'Hand' Entity を検索
+  const handEntity = useEntity('Hand');
+  
+  if (!handEntity) return null;
+  
+  // 手にグローエフェクトを追加
+  return (
+    <Entity name="HandGlow" position={[0, 0.1, 0]}>
+      <Light type="omni" color="cyan" intensity={2} />
+    </Entity>
+  );
+}
+
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Arm">
+    <HandGlow />
+  </Modify.Node>
+</Gltf>
+```
+
+この例では、`useEntity('Hand')` は `"Arm"` ノードに対して相対的に `"Hand"` という名前の子を検索します。フックは Entity が見つかればそれを返し、見つからなければ `null` を返します。
+
+### パスパターンの使用
+
+`useEntity` は `<Modify.Node>` と同じパスパターンをサポートします:
+
+```tsx
+function FindMultipleLights() {
+  // ライトを持つすべての直接の子を検索
+  const lights = useEntity('*[light]');
+  
+  if (!lights || !Array.isArray(lights)) return null;
+  
+  return (
+    <>
+      {lights.map((light, index) => (
+        <Entity key={index} name={`LightMarker_${index}`}>
+          {/* 各ライトにマーカーを追加 */}
+        </Entity>
+      ))}
+    </>
+  );
+}
+```
+
+ワイルドカードを使用すると、`useEntity` はマッチする Entity の配列を返します。完全パスを使用すると、単一の Entity を返します。
+
+### 述語関数の使用
+
+カスタムロジックに基づいて Entity を検索する関数も使用できます:
+
+```tsx
+function FindWeapons() {
+  // 名前に "Weapon" を含むすべての Entity を検索
+  const weapons = useEntity((entity, metadata) => 
+    entity.name.includes('Weapon')
+  );
+  
+  if (!weapons) return null;
+  
+  const weaponArray = Array.isArray(weapons) ? weapons : [weapons];
+  
+  return (
+    <>
+      {weaponArray.map((weapon, index) => (
+        <Entity key={index} name={`WeaponEffect_${index}`}>
+          <Light type="omni" color="red" intensity={1} />
+        </Entity>
+      ))}
+    </>
+  );
+}
+```
+
+述語関数は Entity とそのメタデータを受け取り、Component の存在、名前パターン、カスタムプロパティなど、任意の基準に基づいてマッチさせることができます。
+
+注意: `useEntity` は `<Gltf>` または `<Modify.Node>` の子であるコンポーネント内でのみ動作します。現在の親コンテキストに対して相対的に検索するため、変更しているサブツリー内の Entity を見つけるのに最適です。
+
+## 複数の変更
+
+同じ GLB に複数の変更を適用できます。各 `<Modify.Node>` ルールは独立しており、マッチするノードに適用されます:
+
+```tsx
+<Gltf asset={asset} key={asset.id}>
+  {/* 元のライトをすべて削除 */}
+  <Modify.Node path="**[light]">
+    <Modify.Light remove />
+  </Modify.Node>
+
+  {/* すべてのメッシュにシャドウキャストを追加 */}
+  <Modify.Node path="**[render]">
+    <Modify.Render castShadows receiveShadows />
+  </Modify.Node>
+
+  {/* 頭に新しいライトを追加 */}
+  <Modify.Node path="Head">
+    <Entity name="HeadLight">
+      <Light type="omni" color="cyan" intensity={2} />
+    </Entity>
+  </Modify.Node>
+</Gltf>
+```
+
+複数のルールが同じノードの同じ Component を変更しようとする場合、最も具体的なパスが優先されます。これにより、一般的なルールを設定し、特定のルールでオーバーライドできます。
+
+## 関連
+
+- [Asset のロード](../loading-assets/) - GLB Asset のロード方法
+- [Anim Component](../../api/anim) - アニメーション Component リファレンス
+- [Collision Component](../../api/collision) - 物理コリジョンリファレンス

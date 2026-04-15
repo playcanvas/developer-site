@@ -1,0 +1,50 @@
+---
+description: Light コンポーネントのドキュメント
+---
+
+# `<Light/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { LightExample } from './light-example';
+import LightExampleSource from '!!raw-loader!./light-example.jsx';
+
+`<Light/>` コンポーネントは Entity がライトを発光できるようにします。すべての [`<Render/>`](../render) コンポーネントがそのライトで照らされます。[`<Entity/>`](../entity) にアタッチすると、Entity のトランスフォームを使用してライトの位置と向きを設定できます。ライトはディレクショナル、オムニ、スポットのいずれかです。
+
+## 使い方
+
+`<Light/>` を [`<Entity/>`](../entity) にアタッチするだけで、その Entity の位置と回転からライトが発光します。
+
+```tsx
+<Entity>
+  <Light type="directional" intensity={10} />
+</Entity>
+```
+
+<CodeExample
+  label="Control light properties"
+  code={LightExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={false}
+      useGrid={true}
+      camera={[3, 3, 3]}
+      useControls={true}
+      useShadow={true}
+    >
+      <LightExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+PlayCanvas ドキュメントの [Lights](https://api.playcanvas.com/engine/classes/LightComponent.html) で詳細を確認できます。
+
+## プロパティ
+
+```tsx asTypedoc
+import { Light } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Light>;
+export default $;
+```

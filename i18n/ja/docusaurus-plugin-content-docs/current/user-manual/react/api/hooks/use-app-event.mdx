@@ -1,0 +1,160 @@
+---
+description: PlayCanvas アプリケーションイベントをサブスクライブする
+---
+
+# `useAppEvent`
+
+`useAppEvent` フックを使用すると、適切な TypeScript 型付けと自動クリーンアップを備えた PlayCanvas アプリケーションイベントにサブスクライブできます。ビルトインイベントとカスタムイベントの両方をサポートしています。
+
+## 基本的な使い方
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+function MyComponent() {
+  useAppEvent('update', (dt) => {
+    console.log('Frame time:', dt)
+  })
+  
+  useAppEvent('prerender', () => {
+    console.log('Pre-rendering')
+  })
+  
+  return null
+}
+```
+
+## パラメータ
+
+- **event** (`TEventName`) - サブスクライブするイベント名
+- **callback** (`TEventMap[TEventName]`) - イベント発火時に実行するコールバック関数
+
+## ビルトインイベント
+
+### Update イベント
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+function UpdateHandler() {
+  useAppEvent('update', (dt) => {
+    // dt は前のフレームからのデルタタイム
+    console.log('Delta time:', dt)
+    
+    // 更新ロジックをここに記述
+    // 毎フレーム実行されます
+  })
+  
+  return null
+}
+```
+
+### Render イベント
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+function RenderHandler() {
+  useAppEvent('prerender', () => {
+    console.log('About to render frame')
+    // プリレンダーロジック
+  })
+  
+  useAppEvent('postrender', () => {
+    console.log('Finished rendering frame')
+    // ポストレンダーロジック
+  })
+  
+  return null
+}
+```
+
+## カスタムイベント
+
+TypeScript でカスタムイベント型を定義できます:
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+// カスタムイベントマップを定義
+interface MyEventMap {
+  levelComplete: (level: number, score: number) => void
+  playerDeath: (position: [number, number, number]) => void
+  itemCollected: (itemId: string, quantity: number) => void
+}
+
+function GameEventHandler() {
+  useAppEvent<MyEventMap>('levelComplete', (level, score) => {
+    console.log(`Level ${level} completed with score ${score}`)
+  })
+  
+  useAppEvent<MyEventMap>('playerDeath', (position) => {
+    console.log('Player died at position:', position)
+  })
+  
+  useAppEvent<MyEventMap>('itemCollected', (itemId, quantity) => {
+    console.log(`Collected ${quantity} of item ${itemId}`)
+  })
+  
+  return null
+}
+```
+
+## イベントの発火
+
+カスタムイベントを発火するには、app インスタンスへのアクセスが必要です:
+
+```jsx copy
+import { useAppEvent, useApp } from '@playcanvas/react/hooks'
+
+function EventFirer() {
+  const app = useApp()
+  
+  useAppEvent('update', (dt) => {
+    // カスタムイベントを発火
+    app.fire('levelComplete', 1, 1000)
+    app.fire('playerDeath', [0, 0, 0])
+    app.fire('itemCollected', 'coin', 1)
+  })
+  
+  return null
+}
+```
+
+## 入力処理
+
+```jsx copy
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+interface InputEvents {
+  keyDown: (key: string) => void
+  keyUp: (key: string) => void
+  mouseClick: (x: number, y: number) => void
+  mouseMove: (x: number, y: number) => void
+}
+
+function InputHandler() {
+  useAppEvent<InputEvents>('keyDown', (key) => {
+    console.log('Key pressed:', key)
+  })
+  
+  useAppEvent<InputEvents>('keyUp', (key) => {
+    console.log('Key released:', key)
+  })
+  
+  useAppEvent<InputEvents>('mouseClick', (x, y) => {
+    console.log('Mouse clicked at:', x, y)
+  })
+  
+  useAppEvent<InputEvents>('mouseMove', (x, y) => {
+    console.log('Mouse moved to:', x, y)
+  })
+  
+  return null
+}
+```
+
+## 関連
+
+- [useApp](../use-app) - Application インスタンスにアクセスする
+- [Application Events](https://api.playcanvas.com/engine/classes/Application.html#events) - PlayCanvas アプリケーションイベントのドキュメント

@@ -1,0 +1,44 @@
+---
+description: Collision コンポーネントのドキュメント
+---
+
+# `<Collision/>`
+
+`<Collision/>` コンポーネントは、PlayCanvas の [Collision Component](https://api.playcanvas.com/engine/classes/CollisionComponent.html) を [Entity](../entity) にアタッチします。
+
+Collision Component を持つ他の Entity とのコリジョン検出に参加できるようになります。物理シミュレーション、トリガーゾーン、オブジェクトの交差を検出する必要があるその他のゲームプレイメカニクスに便利です。
+
+:::note
+`sync-ammo` をインストールし、`<Application usePhysics/>` で Application の物理を有効にしてください。
+:::
+
+## 使い方
+
+Collision コンポーネントは、Render コンポーネントと同じ方法で Entity にアタッチします。物理を使用するには、同じ `Entity` に `Rigidbody` コンポーネントもアタッチする必要があり、おそらく `Render` コンポーネントも必要です。
+
+```jsx copy
+import { Application, Entity } from '@playcanvas/react'
+import { Collision, Rigidbody, Render } from '@playcanvas/react/components'
+
+export default function Scene() {
+  return (
+    <Application usePhysics>
+      <Entity>
+        <Collision type="box" />
+        <Rigidbody type="dynamic" mass={12} />
+        <Render type="box" />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+PlayCanvas ドキュメントの [Collision Components](https://api.playcanvas.com/engine/classes/CollisionComponent.html) で詳細を確認できます。物理での Collision コンポーネントの使用については [Rigidbody](./rigidbody.mdx) コンポーネントも参照してください。
+
+## プロパティ
+
+```tsx asTypedoc
+import { Collision } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Collision>;
+export default $;
+```

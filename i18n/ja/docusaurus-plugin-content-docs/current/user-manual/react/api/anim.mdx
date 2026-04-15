@@ -1,0 +1,38 @@
+---
+description: Anim コンポーネントのドキュメント
+---
+
+# `<Anim/>`
+
+`Anim` コンポーネントは、[Entity](../entity) のアニメーション再生を有効にします。アニメーション Asset からアニメーションクリップを再生し、その再生を制御できます。
+
+## 使い方
+
+```jsx copy
+import { Entity } from '@playcanvas/react'
+import { Anim, Render } from '@playcanvas/react/components'
+import { useModel } from '@playcanvas/react/hooks'
+
+const AnimatingDinosaur = (props) => {
+  const { asset } = useModel('/dinosaur.glb')
+
+  if (!asset) return null
+
+  return (
+    <Entity {...props}>
+      <Render type="asset" asset={asset} />
+      <Anim asset={asset} clip="Walk" loop />
+    </Entity>
+  )
+}
+```
+
+PlayCanvas ドキュメントの [Anim Component](https://api.playcanvas.com/engine/classes/AnimComponent.html) で詳細を確認できます。
+
+## プロパティ
+
+```tsx asTypedoc
+import { Anim } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Anim>;
+export default $;
+```

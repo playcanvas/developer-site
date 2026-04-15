@@ -1,0 +1,95 @@
+---
+description: 物理コンテキストと状態にアクセスする
+---
+
+# `usePhysics`
+
+`usePhysics` フックは物理エンジンの状態に関する情報を提供します。物理が有効か、ロード済みか、物理関連のエラーを処理できます。
+
+PlayCanvas React は物理エンジンを遅延ロード・インスタンス化するため、事前にコンテンツをレンダリングできます。`usePhysics` は物理エンジンの状態をリアクティブに確認するメカニズムを提供します。
+
+物理システムについての詳細は [物理ガイド](../../../guide/physics) や [Rigidbody](../../rigidbody)、[Collision](../../collision) コンポーネントを参照してください。
+
+## 使い方
+
+### 条件付きレンダリング
+
+```jsx copy
+import { usePhysics } from '@playcanvas/react/hooks'
+
+function PhysicsInfo() {
+  const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics()
+
+  if (!isPhysicsLoaded) return null
+  
+  return (<Entity>
+    <Rigidbody type="box" />
+    <Collision type="box" />
+    <Render type="box" />
+  </Entity>)
+}
+```
+
+### 安全な物理 Component の作成
+
+```jsx copy
+import { usePhysics } from '@playcanvas/react/hooks'
+
+function SafePhysicsEntity() {
+  const { isPhysicsEnabled, isPhysicsLoaded } = usePhysics()
+  
+  return (
+    <Entity>
+      <Render type="box" />
+      {isPhysicsEnabled && isPhysicsLoaded && (
+        <>
+          <Collision type="box" />
+          <Rigidbody type="dynamic" mass={5} />
+        </>
+      )}
+    </Entity>
+  )
+}
+```
+
+### フォールバック付き物理
+
+```jsx copy
+import { usePhysics } from '@playcanvas/react/hooks'
+
+function PhysicsWithFallback() {
+  const { isPhysicsEnabled, isPhysicsLoaded } = usePhysics()
+  
+  if (isPhysicsEnabled && isPhysicsLoaded) {
+    return (
+      <Entity>
+        <Collision type="box" />
+        <Rigidbody type="dynamic" mass={10} />
+        <Render type="box" />
+      </Entity>
+    )
+  }
+  
+  // 物理なしのフォールバック
+  return (
+    <Entity>
+      <Render type="box" />
+    </Entity>
+  )
+}
+```
+
+## プロパティ
+
+```tsx asTypedoc
+import { usePhysics } from '@playcanvas/react/hooks'
+type $ = ReturnType<typeof usePhysics>
+export default $;
+```
+
+## 関連
+
+- [useApp](../use-app) - Application インスタンスにアクセスする
+- [Collision Component](../../collision) - Collision コンポーネントの作成
+- [Rigidbody Component](../../rigidbody) - Rigidbody コンポーネントの作成
+- [Application Component](../../application) - usePhysics Prop で物理を有効化
