@@ -139,7 +139,7 @@ import { useMaterial } from '@playcanvas/react/hooks';
 
 export function RenderTexture() {
   const { asset, loading, error } = useTexture('texture.jpg');
-  const material = useMaterial({ map: asset.resource });
+  const material = useMaterial({ diffuseMap: asset?.resource });
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
