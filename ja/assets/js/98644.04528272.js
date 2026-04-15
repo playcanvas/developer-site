@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkdeveloper_playcanvas_com=globalThis.webpackChunkdeveloper_playcanvas_com||[]).push([[98644],{98644(e,a,c){c.d(a,{createArchitectureServices:()=>l.S});var l=c(85877);c(6902)}}]);
