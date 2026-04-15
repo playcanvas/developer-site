@@ -93,12 +93,6 @@ You may want to edit certain details that appear on your invoices such as:
 
 To do this, visit the account page for your subscribed account (remembering that Organizations have their own account page). Navigate to the Billing Info section and hit the Edit link. Fill out the payment details form and hit 'PAY NOW'.
 
-:::note
-
-While the button says 'PAY NOW', editing the details of an existing subscription will not trigger a payment straight away. You will be billed as normal on the next billing date and the invoice will show the updated details.
-
-:::
-
 ### How is billing for Organization accounts calculated?
 
 The day you subscribe to an Organization account is your monthly billing date. So if you subscribe on 10th July, you will be billed on that date with subsequent billing dates as 10th August, 10th September and so on.
