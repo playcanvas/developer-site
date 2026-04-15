@@ -1,0 +1,72 @@
+---
+description: Environment コンポーネントのドキュメント
+---
+
+# `<Environment/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { EnvironmentExample } from './environment-example';
+import EnvironmentExampleSource from '!!raw-loader!./environment-example.jsx';
+
+`<Environment/>` コンポーネントは、シーンの環境ライティングとスカイボックスを設定するために使用します。グローバルライティングやシーン全体に影響するその他のエフェクトを簡単にセットアップできます。
+
+`<Environment/>` コンポーネントをシーンに配置すると、以下のことができます:
+
+- シーンの背景テクスチャを設定する
+- リアルな環境反射のための Image-Based Lighting (IBL) を提供する
+- スカイドームのプロパティ、回転、スケール、位置を制御する
+- 露出、輝度、その他のグローバルライティングパラメータを管理する
+
+## 使い方
+
+`<Environment/>` コンポーネントを [`<Application/>`](../application) 内に配置し、シーンに追加します。HDR またはエンバイロメントアトラスをロードしてコンポーネントに提供する必要があります。
+
+:::tip
+
+**シーン全体で `<Environment/>` コンポーネントは 1 つだけ必要です**。同じ `<Application/>` 内で複数の `<Environment/>` コンポーネントを使用すると警告が発生します。
+
+:::
+
+HDR をロードしてスカイボックスとして設定するだけです。[HDRI Haven](https://hdrihaven.com/) で優れた HDR 画像を見つけることができます。
+
+```jsx copy
+const EnvironmentExample = () => {
+  const { asset: skybox } = useTexture('/env.hdr')
+
+  return (
+      <Environment skybox={skybox} />
+      {/* シーンの残りの部分... */}
+  )
+}
+```
+
+このコンポーネントはシーン全体に影響するため、1 回だけ使用してください。露出、輝度、その他のグローバルライティングパラメータを指定できます。詳細は[プロパティ](#プロパティ)セクションを参照してください。
+
+`<Environment/>` コンポーネントを使用してドームエフェクトを作成することもできます。グラウンドプレーンを持つよりリアルな環境を作成するのに便利です。ドームのスケール、位置、回転、その他のプロパティを指定できます。
+
+<CodeExample
+  label="Switch between different environment atlases and exposure settings"
+  filename="environment-example.jsx"
+  code={EnvironmentExampleSource}
+  showDemo>
+  <Application>
+    <Staging
+        useLight={false}
+        useShadow={true}
+        camera={[3, 0.2, 3]}
+        useControls={true}
+        sceneOffset={[0, 0, 0]}
+    >
+      <EnvironmentExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## プロパティ
+
+```tsx asTypedoc
+import { Environment } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Environment>;
+export default $;
+```

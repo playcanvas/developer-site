@@ -1,18 +1,18 @@
 ---
-description: Documentation for the Assets hook
+description: Asset フックのドキュメント
 ---
 
 # Asset Hooks
 
-PlayCanvas React provides hooks for loading and managing different assets. These hooks simplify the process of loading assets and allow you to handle loading and error states.
+PlayCanvas React は、さまざまな Asset を読み込み・管理するためのフックを提供します。これらのフックは Asset の読み込みを簡素化し、読み込み中やエラー状態を扱えるようにします。
 
-The general signature of every hook looks something like the following.
+各フックの一般的なシグネチャは、次のような形です。
 
 ```tsx
 const { asset, loading, error } = useModel(src, props);
 ```
 
-Where `src` is the URL of the asset and `props` are additional properties to pass to the asset loader.
+`src` は Asset の URL、`props` は Asset ローダーに渡す追加のプロパティです。
 
 ```tsx copy filename="render-glb.tsx"
 import { useModel } from '@playcanvas/react/hooks';
@@ -28,9 +28,9 @@ export function RenderAsset() {
 }
 ```
 
-## Loading Progress
+## 読み込み進捗
 
-The `useAsset` hook supports loading progress via the `subscribe` callback. This is useful if you want to show a loading indicator or update a progress bar. Not all asset types return a progress value during load, so this is not guaranteed to be available for all asset types.
+`useAsset` フックは、`subscribe` コールバックで読み込み進捗をサポートします。読み込みインジケーターやプログレスバーを表示したい場合に便利です。すべての Asset タイプが読み込み中に進捗値を返すわけではないため、すべてのタイプで利用できるとは限りません。
 
 ```tsx copy filename="render-splat.tsx"
 import { useSplat } from '@playcanvas/react/hooks';
@@ -55,28 +55,28 @@ export function RenderSplat() {
 }
 ```
 
-### All Hooks
+### すべてのフック
 
-The following hooks are available:
+次のフックが利用できます。
 
-- [`useModel`](#usemodel) - Load a 3D model asset
-- [`useSplat`](#usesplat) - Load a Gaussian Splat asset
-- [`useTexture`](#usetexture) - Load a texture asset
-- [`useEnvAtlas`](#useenvatlas) - Load an environment atlas texture
-- [`useAsset`](#useasset) - Generic hook for loading any type of asset
+- [`useModel`](#usemodel) — 3D モデル Asset を読み込む
+- [`useSplat`](#usesplat) — Gaussian Splat Asset を読み込む
+- [`useTexture`](#usetexture) — テクスチャ Asset を読み込む
+- [`useEnvAtlas`](#useenvatlas) — 環境アトラステクスチャを読み込む
+- [`useAsset`](#useasset) — 任意のタイプの Asset を読み込む汎用フック
 
 ## API
 
-This is the full response of an asset hook.
+Asset フックの完全な戻り値は次のとおりです。
 
 ```tsx asTypedoc
 import type { AssetResult } from '@playcanvas/react/hooks';
 export default AssetResult;
-````
+```
 
 ## useModel
 
-A specialized hook for loading 3D model assets (GLB/GLTF). Pass the source URL of the model file and any additional properties to pass to the asset loader and use the resulting asset in the `<Render/>` component.
+3D モデル Asset（GLB/GLTF）を読み込むための専用フックです。モデルファイルのソース URL と、Asset ローダーに渡す追加のプロパティを指定し、得られた Asset を `<Render/>` コンポーネントで使います。
 
 ```tsx copy filename="render-model.tsx"
 import { useModel } from '@playcanvas/react/hooks';
@@ -92,11 +92,11 @@ export function RenderModel() {
 }
 ```
 
-### Draco Decoding
+### Draco デコード
 
-The `useModel` hook also supports Draco decoding out of the box with zero configuration. @playcanvas/react will use the latest version of the Draco decoder ([1.5.7](https://github.com/google/draco?tab=readme-ov-file#version-157-release)) and lazy load it from the Google CDN.
+`useModel` フックは、追加設定なしで Draco デコードにも対応しています。@playcanvas/react は最新版の Draco デコーダー（[1.5.7](https://github.com/google/draco?tab=readme-ov-file#version-157-release)）を使用し、Google CDN から遅延読み込みします。
 
-Alternatively if you want to self-host the library you can manually configure the decoder using `dracoInitialize`.
+ライブラリを自前でホストする場合は、`dracoInitialize` を使ってデコーダーを手動で設定できます。
 
 ```tsx copy filename="render-draco.tsx"
 import { dracoInitialize } from 'playcanvas';
@@ -110,7 +110,7 @@ dracoInitialize({
 
 ## useSplat
 
-A specialized hook for loading Gaussian Splat assets. Pass the source URL of the splat file and any additional properties to pass to the asset loader and use the resulting asset in the [`<GSplat/>`](../../gsplat) component.
+Gaussian Splat Asset を読み込むための専用フックです。splat ファイルのソース URL と、Asset ローダーに渡す追加のプロパティを指定し、得られた Asset を [`<GSplat/>`](../../gsplat) コンポーネントで使います。
 
 ```tsx copy filename="render-splat.tsx"
 import { useSplat } from '@playcanvas/react/hooks';
@@ -127,11 +127,11 @@ export function RenderSplat() {
 }
 ```
 
-See the [`<GSplat/>`](../../gsplat) component for more information.
+詳しくは [`<GSplat/>`](../../gsplat) コンポーネントを参照してください。
 
 ## useTexture
 
-A specialized hook for loading texture assets. Pass the source URL of the texture file and any additional properties to pass to the asset loader and use the resulting asset in any component that accepts a texture.
+テクスチャ Asset を読み込むための専用フックです。テクスチャファイルのソース URL と、Asset ローダーに渡す追加のプロパティを指定し、テクスチャを受け取れる任意のコンポーネントで使います。
 
 ```tsx copy filename="render-texture.tsx"
 import { useTexture } from '@playcanvas/react/hooks';
@@ -149,11 +149,11 @@ export function RenderTexture() {
 }
 ```
 
-See the [useMaterial](../use-material) hook and [Render](../../render) component for more information.
+詳しくは [useMaterial](../use-material) フックと [Render](../../render) コンポーネントを参照してください。
 
 ## useEnvAtlas
 
-A specialized hook for loading environment atlas textures. Pass the source URL of the texture file and any additional properties to pass to the asset loader and use the resulting asset in the [`<Environment/>`](../../environment) component.
+環境アトラステクスチャを読み込むための専用フックです。テクスチャファイルのソース URL と、Asset ローダーに渡す追加のプロパティを指定し、得られた Asset を [`<Environment/>`](../../environment) コンポーネントで使います。
 
 ```tsx copy filename="render-env-atlas.tsx"
 import { useEnvAtlas } from '@playcanvas/react/hooks';
@@ -170,15 +170,15 @@ export function RenderEnvAtlas() {
 }
 ```
 
-See the [Environment](../../environment) component for more information.
+詳しくは [Environment](../../environment) コンポーネントを参照してください。
 
 ## useFont
 
-Text in PlayCanvas is rendered using Signed-Distance-Fields (SDFs), so you'll need to convert your ttf fonts into the appropriate format before loading them.
+PlayCanvas ではテキストが Signed-Distance-Fields（SDF）でレンダリングされるため、読み込む前に ttf フォントを適切な形式に変換する必要があります。
 
-If you're using Vite or Rollup there's an official plugin to convert ttf files for you at build time. Check out the [@playcanvas/rollup](https://www.npmjs.com/package/@playcanvas/plugin) for more information.
+Vite や Rollup を使う場合、ビルド時に ttf を変換する公式プラグインがあります。詳しくは [@playcanvas/rollup](https://www.npmjs.com/package/@playcanvas/plugin) を参照してください。
 
-You can import a ttf using the `?sdf` query parameter which will automatically convert it into an SDF texture at build time.
+`?sdf` クエリパラメータで ttf をインポートすると、ビルド時に自動的に SDF テクスチャに変換されます。
 
 ```tsx copy filename="render-font.tsx"
 
@@ -199,7 +199,7 @@ export function InconsolataFont() {
 
 ## useAsset
 
-This is a generic hook for loading any type of asset. You can use it to load any asset type that PlayCanvas supports which is sometimes useful if you need to load an asset dynamically.
+任意のタイプの Asset を読み込む汎用フックです。PlayCanvas がサポートする任意の Asset タイプの読み込みに使え、動的に Asset を読み込む必要がある場合に便利です。
 
 ```tsx copy filename="use-dynamic-asset.tsx"
 import { useAsset } from '@playcanvas/react/hooks';

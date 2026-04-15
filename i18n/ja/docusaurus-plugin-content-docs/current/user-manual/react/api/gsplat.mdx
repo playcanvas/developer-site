@@ -1,0 +1,46 @@
+---
+description: GSplat コンポーネントのドキュメント
+---
+
+# `<GSplat/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { GSplatExample } from './gsplat-example';
+import GSplatExampleSource from '!!raw-loader!./gsplat-example.jsx';
+
+`<GSplat>` コンポーネントは [Gaussian Splats](https://api.playcanvas.com/engine/classes/GSplatComponent.html) をレンダリングするために使用します。Gaussian Splats は高品質な 3D コンテンツをキャプチャしてレンダリングする新しい手法です。シーンの形状とライティングを非常に高品質な結果で捉えます。
+
+`useSplat` フックは ply や sog ファイル、またはエンジンがロードできるその他のファイルを受け付けます。
+
+## 使い方
+
+[`useSplat`](../../api/hooks/use-asset#usesplat) フックで Gaussian Splat Asset をロードし、`<GSplat>` コンポーネントでレンダリングできます。
+
+```tsx
+const { asset } = useSplat('/assets/toy-cat.sog');
+<GSplat asset={asset} />
+```
+
+<CodeExample
+  label="Load and render a Gaussian Splat"
+  filename="gsplat-example.jsx"
+  code={GSplatExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging useLight={false} useGrid={false} camera={[2, 1, 2]} useControls={true}>
+      <GSplatExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+PlayCanvas ドキュメントの [GSplat Component](https://api.playcanvas.com/engine/classes/GSplatComponent.html) で詳細を確認できます。
+
+## プロパティ
+
+```tsx asTypedoc
+import { GSplat } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof GSplat>;
+export default $;
+```

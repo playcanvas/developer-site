@@ -1,24 +1,24 @@
 ---
-title: Splat Publishing
-description: "SuperSplat publish flow via REST: signed S3 upload URL, direct file upload, and processing job endpoints with bearer authentication."
+title: スプラットの公開
+description: "REST 経由の SuperSplat 公開フロー：署名付き S3 アップロード URL、直接ファイルアップロード、Bearer 認証付きの処理ジョブエンドポイント。"
 unlisted: true
 ---
 
-#### Overview
+#### 概要
 
-Publish a splat (e.g., .ply or .sog) to the SuperSplat platform using a direct AWS S3 upload using signed URL + publish flow.
+スプラット（例：`.ply` または `.sog`）を、署名付き URL と公開フローを用いた AWS S3 への直接アップロードで SuperSplat プラットフォームに公開します。
 
-The flow consists of three main steps:
+フローは主に次の 3 ステップで構成されます。
 
-1. **Request a signed upload URL** from the backend.
-2. **Upload the file** directly to S3 using that signed URL.
-3. **Start the processing job** by calling the backend API.
+1. **バックエンドから署名付きアップロード URL を取得する**
+2. **その署名付き URL を使ってファイルを S3 に直接アップロードする**
+3. **バックエンド API を呼び出して処理ジョブを開始する**
 
-All API requests must include a valid Bearer token in the `Authorization` header. Check [this document](https://developer.playcanvas.com/user-manual/api/#:~:text=You%20can%20generate%20an%20Access,you%20your%20new%20access%20token) to read about allocating a token.
+すべての API リクエストには、`Authorization` ヘッダーに有効な Bearer トークンを含める必要があります。トークンの取得方法は[このドキュメント](https://developer.playcanvas.com/user-manual/api/#:~:text=You%20can%20generate%20an%20Access,you%20your%20new%20access%20token)を参照してください。
 
-### Routes
+### ルート
 
-#### Get Signed URL for AWS S3 upload
+#### AWS S3 アップロード用の署名付き URL を取得
 
 ```none
 POST https://playcanvas.com/api/upload/signed-url
@@ -32,7 +32,7 @@ Response
 { "signedUrl": "string", "s3Key": "string" }
 ```
 
-Example:
+例：
 
 ```javascript
 const response = await fetch(`https://playcanvas.com/api/upload/signed-url`, {
@@ -47,7 +47,7 @@ const response = await fetch(`https://playcanvas.com/api/upload/signed-url`, {
 });
 ```
 
-#### Upload to AWS S3 using signed url
+#### 署名付き URL を使った AWS S3 へのアップロード
 
 ```none
 PUT "signedUrl"
@@ -57,7 +57,7 @@ Response
 { "signedUrl": "string", "s3Key": "string" }
 ```
 
-Example:
+例：
 
 ```javascript
 const uploadResponse = await fetch(signedUrl, {
@@ -69,7 +69,7 @@ const uploadResponse = await fetch(signedUrl, {
 });
 ```
 
-#### Start processing
+#### 処理の開始
 
 ```none
 POST https://playcanvas.com/api/splats/publish
@@ -122,7 +122,7 @@ Response (Splat data)
 }
 ```
 
-Example:
+例：
 
 ```javascript
 const response = await fetch(`https://playcanvas.com/api/splats/publish`, {
@@ -142,7 +142,7 @@ const response = await fetch(`https://playcanvas.com/api/splats/publish`, {
 });
 ```
 
-Sample response
+レスポンスの例
 
 ```json
 {
@@ -171,9 +171,9 @@ Sample response
 }
 ```
 
-Status - 201 Success
+ステータス — 201 成功
 
-#### Check the status of uploaded splat
+#### アップロードしたスプラットの状態を確認
 
 ```none
 GET https://playcanvas.com/api/splats/{ID}
@@ -190,18 +190,18 @@ Response (Splat)
 }
 ```
 
-Example:
+例：
 
 ```javascript
 const response = await fetch(`https://playcanvas.com/api/splats/1000`)
 ```
 
-Errors
+エラー
 
-| Code | Description |
+| コード | 説明 |
 |------|-------------|
-| 400  | Bad request / invalid payload / over storage allowance |
-| 401  | Unauthorized (missing/invalid token) |
-| 403  | Forbidden |
-| 404  | Resource not found (e.g., sceneId) |
-| 5xx  | Server/S3 error during upload or finalize |
+| 400  | 不正なリクエスト／無効なペイロード／ストレージ上限超過 |
+| 401  | 未認証（トークンがない、または無効） |
+| 403  | 禁止 |
+| 404  | リソースが見つからない（例：`sceneId`） |
+| 5xx  | アップロードまたは確定処理中のサーバー／S3 エラー |

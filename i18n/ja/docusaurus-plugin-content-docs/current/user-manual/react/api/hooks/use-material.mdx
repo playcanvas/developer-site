@@ -1,5 +1,5 @@
 ---
-description: Create and manage PlayCanvas materials
+description: PlayCanvas のマテリアルを作成・管理する
 ---
 
 # `useMaterial`
@@ -11,14 +11,14 @@ import { useMaterial } from '@playcanvas/react/hooks';
 import MaterialExampleSource from '!!raw-loader!./material-example.jsx';
 import { MaterialExample } from './material-example.jsx';
 
-The `useMaterial` hook allows you to create and manage a PlayCanvas [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance. Create a material with the hook and apply it to a [`<Render/>`](../../render) component.
+`useMaterial` フックは、PlayCanvas の [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) インスタンスを作成・管理できます。フックでマテリアルを作成し、[`<Render/>`](../../render) コンポーネントに適用します。
 
-## Usage
+## 使い方
 
-You can create a material with the hook and apply it to a [`<Render/>`](../../render) component and update material properties dynamically.
+フックでマテリアルを作成し、[`<Render/>`](../../render) に適用し、マテリアルのプロパティを動的に更新できます。
 
 <CodeExample
-  label="Set material properties dynamically"
+  label="マテリアルのプロパティを動的に設定"
   filename="material-example.jsx"
   code={MaterialExampleSource}
   showDemo
@@ -36,12 +36,12 @@ You can create a material with the hook and apply it to a [`<Render/>`](../../re
   </Application>
 </CodeExample>
 
-## Parameters
+## パラメータ
 
-The hooks accepts an object with the following properties that closely match those of the [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) class.
+フックは、[`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) クラスのプロパティに近い形のオブジェクトを受け取ります。
 
 <details>
-  <summary><b>Parameters</b></summary>
+  <summary><b>パラメータ</b></summary>
   <p>
   ```tsx asTypedoc
   import { useMaterial } from '@playcanvas/react/hooks'
@@ -51,9 +51,9 @@ The hooks accepts an object with the following properties that closely match tho
   </p>
 </details>
 
-## Returns
+## 戻り値
 
-The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) instance which can be applied to a [`Render`](../../render) component.
+フックは [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) インスタンスを返します。[`Render`](../../render) コンポーネントに適用できます。
 
 ```tsx asTypedoc
 import { StandardMaterial } from 'playcanvas'
@@ -64,11 +64,11 @@ import { StandardMaterial } from 'playcanvas'
 export default StandardMaterial;
 ```
 
-## Further examples
+## さらなる例
 
-### Advanced Properties
+### 高度なプロパティ
 
-The `StandardMaterial` accepts many different properties which can be found [here](https://api.playcanvas.com/engine/classes/StandardMaterial.html).
+`StandardMaterial` は多くのプロパティを受け付けます。一覧は[こちら](https://api.playcanvas.com/engine/classes/StandardMaterial.html)です。
 
 ```jsx copy
 import { useMaterial } from '@playcanvas/react/hooks'
@@ -92,9 +92,9 @@ function AdvancedMaterial() {
 }
 ```
 
-### Material with Textures
+### テクスチャ付きマテリアル
 
-You can use textures with the material by loading them with the [`useTexture`](../use-asset#usetexture) hook.
+[`useTexture`](../use-asset#usetexture) フックでテクスチャを読み込み、マテリアルと組み合わせられます。
 
 ```jsx copy
 import { useMaterial } from '@playcanvas/react/hooks'
@@ -118,9 +118,9 @@ function TexturedMaterialExample() {
 }
 ```
 
-### Material Sharing
+### マテリアルの共有
 
-You can easily share materials between multiple render components:
+複数の render コンポーネント間でマテリアルを簡単に共有できます。
 
 ```jsx copy
 import { useMaterial } from '@playcanvas/react/hooks'
@@ -142,8 +142,8 @@ function SharedMaterial() {
 }
 ```
 
-## Related
+## 関連
 
-- [useTexture](../use-asset#usetexture) - Load texture assets
-- [Render Component](../../render) - Use materials with render components
-- [StandardMaterial API](https://api.playcanvas.com/engine/classes/StandardMaterial.html) - PlayCanvas material documentation
+- [useTexture](../use-asset#usetexture) — テクスチャ Asset の読み込み
+- [Render コンポーネント](../../render) — render コンポーネントでマテリアルを使う
+- [StandardMaterial API](https://api.playcanvas.com/engine/classes/StandardMaterial.html) — PlayCanvas のマテリアルドキュメント
