@@ -145,16 +145,18 @@ export function ModelWithCustomLoading() {
 読み込みフックは、Asset を段階的に読み込む簡単な仕組みも提供します。まずはすぐにレンダリングし、あとから高品質なコンテンツを続けて読み込めます。
 
 ```tsx title="progressive-loading.tsx"
-import { Entity, Render } from '@playcanvas/react/components';
+import { Entity } from '@playcanvas/react';
+import { GSplat } from '@playcanvas/react/components';
+import { useSplat } from '@playcanvas/react/hooks';
 
-// A component that displays a model with a custom loading state
+// 段階的読み込みでスプラットを表示するコンポーネント
 export function ProgressiveAsset() {
-  const { asset: low } = useModel('./low-quality-model.sog'); // load the low quality asset
-  const { asset: high } = useModel(low && './high-quality-model.sog'); // load the high quality asset, when the low quality is loaded
+  const { asset: low } = useSplat('./low-quality-model.sog'); // 低品質 Asset を読み込む
+  const { asset: high } = useSplat(low && './high-quality-model.sog'); // 低品質がロードされたら高品質 Asset を読み込む
   
   if (!low && !high ) return null;
 
-  return <Gsplat asset={high || low} />
+  return <GSplat asset={high || low} />
 }
 ```
 

@@ -107,11 +107,11 @@ Response (Splat data)
   "hash": "string",
   "title": "string",
   "description": "string",
-  "format": "compressed.ply | sog"
+  "format": "compressed.ply | sog",
   "version": "string",
   "release_notes": "string",
   "thumbnails": number,
-  "size": number
+  "size": number,
   "views": number, 
   "comments": number, 
   "starred": number, 
