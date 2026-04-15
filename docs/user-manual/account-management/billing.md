@@ -91,7 +91,7 @@ You may want to edit certain details that appear on your invoices such as:
 * Billing Address
 * Tax ID
 
-To do this, visit the account page for your subscribed account (remembering that Organizations have their own account page). Navigate to the Billing Info section and hit the Edit link. Fill out the payment details form and hit 'PAY NOW'.
+To do this, visit the account page for your subscribed account (remembering that Organizations have their own account page). Navigate to the Billing Info section and hit the Edit link. Fill out the payment details form and hit 'UPDATE CARD'.
 
 ### How is billing for Organization accounts calculated?
 
