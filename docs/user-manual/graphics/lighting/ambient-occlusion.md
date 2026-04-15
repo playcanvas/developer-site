@@ -1,5 +1,6 @@
 ---
 title: Ambient Occlusion
+description: Bake ambient occlusion textures in DCC tools, upload them, and multiply diffuse and specular ambient lighting.
 ---
 
 Ambient Occlusion is a technique to approximate how much light gets onto the surface based on its occlusion by the environment.

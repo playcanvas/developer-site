@@ -1,5 +1,6 @@
 ---
 title: File Handling
+description: How Shader Editor stores projects in the browser IndexedDB, plus saving, loading, and exporting Shader Packs with generated runtime shader code.
 sidebar_position: 5
 ---
 

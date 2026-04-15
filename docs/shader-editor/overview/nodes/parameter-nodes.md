@@ -1,5 +1,6 @@
 ---
 title: Parameter Nodes
+description: Parameter nodes for runtime-configurable material values and how they appear in the Material Inspector in Shader Editor.
 sidebar_position: 1
 ---
 

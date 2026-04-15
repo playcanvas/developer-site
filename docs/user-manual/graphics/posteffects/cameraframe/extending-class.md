@@ -1,5 +1,6 @@
 ---
 title: Extending RenderPassCameraFrame Class
+description: Extend RenderPassCameraFrame to insert passes, reorder work, and tap intermediate scene textures in the HDR stack.
 ---
 
 For more advanced customization, you can extend the `RenderPassCameraFrame` class to add custom render passes or modify the rendering pipeline. This approach gives you full control over the pass creation and ordering while still leveraging the built-in CameraFrame effects.

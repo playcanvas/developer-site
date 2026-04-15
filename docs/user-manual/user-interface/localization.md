@@ -1,5 +1,6 @@
 ---
 title: Localization
+description: Author JSON localization assets in Editor settings and bind translated keys to Text Element content.
 ---
 
 This page describes how to localize your Text Elements to different languages.

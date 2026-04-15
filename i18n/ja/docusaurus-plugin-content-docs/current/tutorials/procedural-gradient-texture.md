@@ -2,6 +2,7 @@
 title: 'プロシージャルグラデーションテクスチャ'
 tags: [textures, rendering, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/708598/6E96B8-image-75.jpg
+description: コードでグラデーションテクスチャを生成しマテリアルに適用し、ビットマップをインポートせず滑らかな色のランプを得ます。
 ---
 
 import Link from '@docusaurus/Link';

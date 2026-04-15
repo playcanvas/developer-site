@@ -1,5 +1,6 @@
 ---
 title: Changing Scenes
+description: Load and swap scenes at runtime using the documented scene loading flow for menus, levels, and hubs.
 tags: [loading,scenes,basics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437633/BCF404-image-75.jpg
 ---

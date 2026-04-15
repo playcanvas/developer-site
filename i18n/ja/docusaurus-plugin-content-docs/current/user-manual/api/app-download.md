@@ -1,5 +1,6 @@
 ---
 title: アプリ - Download app
+description: POST apps/downloadでセルフホスト可能なアプリのエクスポートジョブを開始し、完了までjobsをポーリングしてパッケージ化されたアプリのダウンロードURLを取得します。
 ---
 
 ## ルートURL

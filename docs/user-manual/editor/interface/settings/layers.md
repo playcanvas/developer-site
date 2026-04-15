@@ -1,5 +1,6 @@
 ---
 title: Layers Settings
+description: Manage rendering layers that control which objects are drawn together and in what order.
 sidebar_label: Layers
 ---
 

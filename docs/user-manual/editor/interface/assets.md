@@ -1,5 +1,6 @@
 ---
 title: Assets Panel
+description: Assets panel guide to folders search filters drag-and-drop cross-project copy and reference checks that keep imported media discoverable across large projects.
 ---
 
 The Assets Panel manages all of the Assets that are available in your project. From here, you can create, upload, delete, inspect and edit any Asset.

@@ -1,5 +1,6 @@
 ---
 title: <pc-asset>
+description: "pc-asset要素のリファレンス: URLまたはidで読み込むAssetの宣言、型、プリロード、他のタグが読み込んだリソースをどう使うかです。"
 ---
 
 `<pc-asset>`タグは、アセットを定義するために使用されます。

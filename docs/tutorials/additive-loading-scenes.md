@@ -1,5 +1,6 @@
 ---
 title: Additive Loading Scenes
+description: Additively load another scene on top of the current one so hubs and streamed levels layer without a full world swap.
 tags: [loading,scenes]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/685077/E32FB5-image-75.jpg
 ---

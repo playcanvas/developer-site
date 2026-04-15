@@ -1,5 +1,6 @@
 ---
 title: Multiple Render Targets
+description: Configure multiple render targets, shared attachments rules, and shader output to several color buffers at once.
 ---
 
 The multiple render targets feature allows you to simultaneously render to multiple textures. This manual page explores implementation, configuration, and an example use case of multiple render targets.

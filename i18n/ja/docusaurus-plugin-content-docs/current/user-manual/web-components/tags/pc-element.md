@@ -1,5 +1,6 @@
 ---
 title: <pc-element>
+description: "pc-element要素のリファレンス: スクリーン空間のUIテキスト、画像、グループをPlayCanvasのElement Componentとレイアウトに対応付けます。"
 ---
 
 `<pc-element>`タグは、要素コンポーネントを定義するために使用されます。

@@ -1,5 +1,6 @@
 ---
 title: FXAAエフェクト
+description: 高速フルスクリーンアンチエイリアシング向けのレガシー FXAA Script と、エンジン posteffect-fxaa 実装の場所です。
 ---
 
 Fast Approximateアンチエイリアシング(FXAA)はNVIDIAが考案したアンチエイリアスの手法です。これによりシーンに簡単かつ高速なアンチエイリアシングを適応することができます。

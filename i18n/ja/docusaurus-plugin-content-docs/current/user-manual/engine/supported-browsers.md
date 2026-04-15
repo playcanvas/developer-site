@@ -1,5 +1,6 @@
 ---
 title: サポートされているブラウザ
+description: PlayCanvasに必要な最小ブラウザバージョン。Chrome、Safari、Firefox、Edge、Opera、およびWebGL 2.0とWebGPUのサポートについて説明します。
 ---
 
 PlayCanvas Engineは[WebGL 2.0](https://en.wikipedia.org/wiki/WebGL#WebGL_2)をサポートするブラウザが必要です。最小ブラウザバージョンは以下の通りです:

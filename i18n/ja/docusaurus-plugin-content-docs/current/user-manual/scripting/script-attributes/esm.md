@@ -1,5 +1,6 @@
 ---
 title: ESM リファレンス
+description: ESM Script Attributesの完全リファレンス。対応する型、デコレーター、条件付き表示をすべて解説します。
 ---
 
 :::note

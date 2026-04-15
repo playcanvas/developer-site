@@ -1,5 +1,6 @@
 ---
 title: <pc-entity>
+description: "Reference for the pc-entity element: names, transforms, hierarchy rules, and which child component tags are valid under an entity."
 ---
 
 The `<pc-entity>` tag is used to define an entity.

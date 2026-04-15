@@ -1,5 +1,6 @@
 ---
 title: Sub Graphs
+description: Sub graphs for reusable shader functionality with input and output nodes, nesting rules, and avoiding cyclic references between graphs.
 sidebar_position: 2
 ---
 

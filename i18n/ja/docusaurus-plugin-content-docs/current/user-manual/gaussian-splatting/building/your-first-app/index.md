@@ -1,5 +1,6 @@
 ---
 title: 初めての Splat アプリ
+description: "初めてのPlayCanvas splatアプリを構築する道筋：Engine、Editor、React、またはWeb Componentsのチュートリアル（おもちゃの猫のデモ付き）。"
 ---
 
 初めての Gaussian splat アプリケーション構築へようこそ！このセクションでは、ユーザーが回転、パン、ズームできる、可愛らしいおもちゃの猫の splat を読み込むシンプルなアプリケーションを作成するためのステップバイステップのチュートリアルを提供します。

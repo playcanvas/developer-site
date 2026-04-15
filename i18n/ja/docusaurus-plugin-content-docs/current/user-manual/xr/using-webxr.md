@@ -1,5 +1,6 @@
 ---
 title: PlayCanvas で WebXR を使用する
+description: WebXRのサポートを検出し、ユーザー入力からVRとARセッションを開始し、カメラComponentとXrManagerでセッションを設定します。
 ---
 
 ## サポート

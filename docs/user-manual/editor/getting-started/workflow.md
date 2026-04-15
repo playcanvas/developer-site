@@ -1,5 +1,6 @@
 ---
 title: The Editor Workflow
+description: Summarizes the end-to-end PlayCanvas workflow from importing assets and scene building through scripting to publishing your app.
 ---
 
 Building 3D web apps with the PlayCanvas Editor is easy.

@@ -2,6 +2,7 @@
 title: '物理を使ったエンティティの配置'
 tags: [input, physics, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437836/9F4675-image-75.jpg
+description: 地面への raycast でクリックしたワールド位置に物理が有効なプロップをスポーンし、新しいボディが正しくコリジョンします。
 ---
 
 import Link from '@docusaurus/Link';

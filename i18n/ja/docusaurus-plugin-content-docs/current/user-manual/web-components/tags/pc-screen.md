@@ -1,5 +1,6 @@
 ---
 title: <pc-screen>
+description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリーン空間、解像度、スケールモード、子のpc-element階層です。"
 ---
 
 `<pc-screen>`タグは、スクリーンコンポーネントを定義するために使用されます。

@@ -1,5 +1,6 @@
 ---
 title: Device Pixel Ratio
+description: ランタイムで maxPixelRatio を変更し、さまざまな端末でシャープなレンダリングとフィルレート制限のバランスを取ります。
 ---
 
 Device pixel ratioは、ハードウェア画面上の物理ピクセルと論理ピクセル（画面の物理サイズに関連し、CSS解像度とも呼ばれる）の比率です。

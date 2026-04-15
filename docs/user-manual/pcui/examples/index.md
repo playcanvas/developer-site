@@ -1,5 +1,6 @@
 ---
 title: Examples
+description: Live PCUI examples gallery with embedded demos and links to source in the PCUI GitHub repository for copy-paste experimentation.
 ---
 
 Here are some simple examples demonstrating the various PCUI elements:

@@ -1,5 +1,6 @@
 ---
 title: Asset Store
+description: Browse the PlayCanvas Asset Store from the Editor, choose PlayCanvas Sketchfab or My Assets stores, search, filter, and import items into your project.
 ---
 
 The PlayCanvas Asset Store is a library of free assets that you can use in your projects. It contains 3D models, fonts, scripts and more.

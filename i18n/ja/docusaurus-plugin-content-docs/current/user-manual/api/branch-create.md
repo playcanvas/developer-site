@@ -1,5 +1,6 @@
 ---
 title: ブランチ - Create branch
+description: POST /api/branchesでソースブランチとオプションのチェックポイントから新しいプロジェクトブランチを作成し、JSONボディと例を含みます。
 ---
 
 ## ルートURL

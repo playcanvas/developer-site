@@ -1,5 +1,6 @@
 ---
 title: 'Physics with CCD'
+description: Enable continuous collision detection on rigidbodies so fast projectiles do not tunnel through thin colliders between steps.
 tags: [physics, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/447023/525467-image-75.jpg
 ---

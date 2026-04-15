@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: "Start here for PlayCanvas React: learning path for install, first scene, asset loading, and prerequisites such as Node and React basics."
 ---
 
 Welcome to PlayCanvas React! This section will guide you through setting up your first 3D React application and teach you the fundamental concepts you need to build interactive 3D experiences.

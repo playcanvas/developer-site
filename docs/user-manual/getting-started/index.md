@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Choose the right PlayCanvas product for you -- Engine, Editor, React, or Web Components -- and start building interactive 3D web apps.
 ---
 
 ## What is PlayCanvas?

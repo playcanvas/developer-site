@@ -1,5 +1,6 @@
 ---
 title: ESM Reference
+description: Complete reference for ESM Script Attributes including all supported types, decorators, and conditional visibility.
 ---
 
 :::note

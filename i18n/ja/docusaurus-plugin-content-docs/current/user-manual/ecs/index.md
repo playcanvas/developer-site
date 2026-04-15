@@ -1,6 +1,7 @@
 ---
 title: エンティティ・コンポーネント・システム（ECS）
 sidebar_label: エンティティ・コンポーネント・システム
+description: PlayCanvas が Entity、Component、System を使ってアプリケーション内のオブジェクトと挙動をどう整理するかを説明します。
 ---
 
 PlayCanvas は、アプリケーション内のオブジェクトを整理・管理するために **エンティティ・コンポーネント・システム（ECS）** を使用します。

@@ -1,5 +1,6 @@
 ---
 title: Toolbar
+description: Toolbar buttons from menus and gizmos through snap focus history lightmapper code editor publish downloads community links help overlays and settings access.
 ---
 
 The Editor's main toolbar can be found on the left, vertical edge of the Editor. You can access many common operations via the toolbar. Here is a list of the functionality available:

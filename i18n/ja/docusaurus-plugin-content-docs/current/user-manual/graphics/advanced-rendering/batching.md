@@ -1,5 +1,6 @@
 ---
 title: バッチング
+description: "バッチグループがメッシュインスタンスをまとめてドローコールを削減：Editorの設定、静的と動的のルール、制限です。"
 ---
 
 バッチング (Batching) とは、複数のメッシュインスタンスを1つのメッシュインスタンスに結合することで、すべてを1回のGPUドローコールでレンダリングできるようにするプロセスです。 PlayCanvasは、[Model](/user-manual/editor/scenes/components/model)、[Sprite](/user-manual/editor/scenes/components/sprite)、および[Element](/user-manual/editor/scenes/components/element)コンポーネントに便利な機能を提供し、これらのコンポーネントをBatch Groupに割り当てることができます。これにより、エンジンがメッシュを結合して総ドローコール数を減らす方法に関するヒントを与えることができます。

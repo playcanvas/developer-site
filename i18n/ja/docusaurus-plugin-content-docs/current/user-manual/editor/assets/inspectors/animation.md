@@ -1,5 +1,6 @@
 ---
 title: Animation
+description: Asset Inspector から Template またはモデル上でアニメーションをプレビューし、グラフのプレビューを確認し、実験的なアニメーションインポート品質を調整します。
 ---
 
 Animationアセットは、3Dモデルで単一のアニメーションを再生するために使用されます。アニメーションは、アニメーションデータを含む3Dシーン(FBXファイルなど)をアップロードすることによってインポートされます。アニメーションデータは、[アセットパイプライン](/user-manual/glossary#asset-pipeline)によってアップロードされたファイルから抽出され、ゲームで使用するための[ターゲットアセット](/user-manual/glossary#target-asset)が作成されます。

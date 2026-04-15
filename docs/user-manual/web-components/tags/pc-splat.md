@@ -1,5 +1,6 @@
 ---
 title: <pc-splat>
+description: "Reference for the pc-splat element: render Gaussian splat assets with attributes for splat data sources, quality, and scene integration."
 ---
 
 The `<pc-splat>` tag is used to define a splat component for rendering 3D Gaussian Splats.

@@ -2,6 +2,7 @@
 title: リアルタイムマルチプレイヤー
 tags: [multiplayer, networking]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406048/507186-image-75.jpg"
+description: Node.js の Socket.io サーバーを立ち上げ、ブラウザ間でプレイヤーの transform を同期し、ホスト型 SDK なしでカスタムマルチプレイを実現します。
 ---
 
 :::note

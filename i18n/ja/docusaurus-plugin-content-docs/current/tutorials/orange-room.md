@@ -2,6 +2,7 @@
 title: 'オレンジルーム'
 tags: [vr, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/345310/BKST60-image-75.jpg
+description: 動的反射とベイクした HDR ライトマップを備えた室内 archviz サンプルを探り、リアルなライティングとマテリアルを学びます。
 ---
 
 import Link from '@docusaurus/Link';

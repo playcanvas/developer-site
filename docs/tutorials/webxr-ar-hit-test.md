@@ -1,5 +1,6 @@
 ---
 title: 'WebXR AR: Hit Test'
+description: Cast rays into real-world geometry with the WebXR hit-test API to anchor virtual objects on detected floors and tables.
 tags: [camera, ar, tutorial, raycast]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/672464/DAC6E9-image-75.jpg
 ---

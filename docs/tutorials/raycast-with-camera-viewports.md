@@ -1,5 +1,6 @@
 ---
 title: 'Raycast with Camera Viewports'
+description: Convert pointer coordinates into per-camera rays when using split viewports so picking hits the correct 3D region in each pane.
 tags: [input, camera, physics, raycast, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/964118/E9A5F1-image-75.jpg
 ---

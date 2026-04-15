@@ -1,5 +1,6 @@
 ---
 title: Script Lifecycle
+description: Understand initialize, postInitialize, update, postUpdate, and destroy -- the lifecycle methods called on every PlayCanvas script.
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,5 +1,6 @@
 ---
 title: 'Detecting a double tap'
+description: Recognize double-tap gestures on touchscreens separately from single taps for mobile-friendly interactions.
 tags: [touch, input, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436531/38B52B-image-75.jpg
 ---

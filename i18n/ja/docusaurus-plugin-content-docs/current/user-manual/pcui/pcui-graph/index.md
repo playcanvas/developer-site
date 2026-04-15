@@ -1,5 +1,6 @@
 ---
 title: PCUI Graph
+description: "ブラウザでノードベースのグラフ向けの PCUI Graph：目的、PCUI との関係、スタンドアロンパッケージとドキュメントの場所。"
 ---
 
 ![PCUI Graph バナー](/img/user-manual/pcui/pcui-graph-banner.png)

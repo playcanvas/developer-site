@@ -1,5 +1,6 @@
 ---
 title: Glossary
+description: Definitions of key PlayCanvas terms including Entity, Component, Asset, Scene, Material, Script, and more.
 ---
 
 Here is an overview of some of the terms we use to describe the PlayCanvas Engine and Tools.

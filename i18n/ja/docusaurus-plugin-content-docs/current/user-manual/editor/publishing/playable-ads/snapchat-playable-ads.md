@@ -1,5 +1,6 @@
 ---
 title: Snapchatプレイアブル広告
+description: MRAID ベースの Snapchat エクスポート、外部アセット配置、zip テストモード、Snapchat の CTA 配線要件を説明します。
 ---
 
 PlayCanvasは、[公式の外部ツール](https://github.com/playcanvas/playcanvas-rest-api-tools#converting-a-project-into-a-single-html-file)を通じて、Snapchat Playable Adフォーマットと要件をサポートしています。

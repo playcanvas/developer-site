@@ -1,5 +1,6 @@
 ---
 title: Snapchat Playable Ad
+description: Explains MRAID-based Snapchat exports, external asset layout, zip testing modes, and snapchat CTA wiring requirements.
 ---
 
 PlayCanvas supports the Snapchat Playable Ad format and requirements via an [official external tool on GitHub](https://github.com/playcanvas/playcanvas-rest-api-tools#converting-a-project-into-a-single-html-file).

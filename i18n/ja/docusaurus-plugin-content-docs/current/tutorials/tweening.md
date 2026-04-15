@@ -2,6 +2,7 @@
 title: Tweenライブラリの使用方法
 tags: [animation, entities]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/452634/BDFB7E-image-75.jpg"
+description: playcanvas-tweenのヘルパーとイージングカーブでEntityのトランスフォームや値を時間経過でアニメートし、手動のlerpに頼りません。
 ---
 
 エンティティや、2点の間の任意の値をアニメートすることがよくあります。これはトゥイーンと呼ばれ、その目的のためにトゥイーンライブラリを作成しました。ライブラリは [https://github.com/playcanvas/playcanvas-tween](https://github.com/playcanvas/playcanvas-tween) にあります。

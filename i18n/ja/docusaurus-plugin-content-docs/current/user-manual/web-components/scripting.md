@@ -1,5 +1,6 @@
 ---
 title: スクリプトで動作を追加する
+description: pc-moduleとpc-scriptタグでPlayCanvas ScriptクラスをEntityにアタッチし、ESモジュールを読み込み、Web Componentsに振る舞いを接続します。
 ---
 
 スクリプトは、PlayCanvas Web Components アプリのエンティティにカスタム動作を追加します。

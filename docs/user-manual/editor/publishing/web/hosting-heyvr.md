@@ -1,5 +1,6 @@
 ---
 title: Hosting on heyVR.io
+description: Covers uploading a self-hosted web zip to heyVR, review, and optional SDK features for WebXR monetization and engagement.
 ---
 
 [heyVR.io](https://heyvr.io) is a publishing platform for WebXR games, giving you access to a global audience of hundreds of thousands of players across multiple devices. It offers a wide range of ready-to-use gameplay features to enhance your players' experience and enable you to start earning from your game through in-game content sales and advertisements.

@@ -1,5 +1,6 @@
 ---
 title: Image Tracking
+description: "Tracking real-world images in AR with PlayCanvas: reference images, estimated size, pose updates, and runtime support checks."
 ---
 
 Image Tracking provides the ability to track real-world images using the provided image samples and their estimated size. The underlying CV system will estimate image position and orientation and tracking status.

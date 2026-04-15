@@ -1,5 +1,6 @@
 ---
 title: <pc-camera>
+description: "Reference for the pc-camera element: projection, clear options, render order, and attributes that map to the engine camera component."
 ---
 
 The `<pc-camera>` tag is used to define a camera component.

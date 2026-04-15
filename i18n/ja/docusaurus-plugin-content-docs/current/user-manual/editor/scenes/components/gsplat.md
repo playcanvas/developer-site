@@ -1,5 +1,6 @@
 ---
 title: GSplat
+description: PlayCanvas の GSplat Component は Entity から 3D Gaussian splat の Asset をレンダリングし、splat を表示するレンダーレイヤーを選びます。
 ---
 
 GSplatコンポーネントは、エンティティが3Dガウシアンスプラットをレンダリングできるようにします。

@@ -1,5 +1,6 @@
 ---
 title: Viewport
+description: Use viewport cameras gizmos and render modes from wireframe to material debug views like albedo normals or emission to validate lighting before shipping.
 ---
 
 ![Viewport](/img/user-manual/editor/viewport/viewport.jpg)

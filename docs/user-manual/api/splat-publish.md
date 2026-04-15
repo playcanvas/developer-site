@@ -1,5 +1,6 @@
 ---
 title: Splat Publishing
+description: "SuperSplat publish flow via REST: signed S3 upload URL, direct file upload, and processing job endpoints with bearer authentication."
 unlisted: true
 ---
 

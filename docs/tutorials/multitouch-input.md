@@ -1,5 +1,6 @@
 ---
 title: 'Multitouch input'
+description: Track every active touch point and visualize multitouch gestures by drawing lines between fingers on the screen.
 tags: [touch, input, mobile, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437474/C0A0E1-image-75.jpg
 ---

@@ -1,5 +1,6 @@
 ---
 title: User Interface
+description: Choose Screen and Element components for in-canvas UI or HTML and CSS, with performance trade-offs.
 ---
 
 User Interfaces present a unique challenge for graphical applications. There are several options for building User Interfaces in PlayCanvas.

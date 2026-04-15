@@ -1,5 +1,6 @@
 ---
 title: Open Source Mission
+description: Learn about PlayCanvas open source projects on GitHub and how to contribute code, report bugs, and support the community.
 ---
 
 ## Mission Statement

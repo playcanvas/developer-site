@@ -1,5 +1,6 @@
 ---
 title: Organizationの作成
+description: ダッシュボードまたはプロフィールから新しいPlayCanvas Organizationを作成する手順です。
 ---
 
 Organizationを作成する方法はいくつかあります。あなたが所属しているOrganizationのは、以下のようにあなたのプロフィールの名前の隣に表示されます:

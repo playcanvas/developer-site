@@ -1,5 +1,6 @@
 ---
 title: 2D
+description: Build 2D games with sprites, texture atlases, and the Sprite Editor on top of the PlayCanvas engine.
 ---
 
 The PlayCanvas Engine is designed to make creating 3D games and applications fast and simple. However, we also support a number of great features for creating 2D games. With PlayCanvas' 2D features you get all the benefits of a powerful 3D engine but for 2D games.

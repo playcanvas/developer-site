@@ -1,5 +1,6 @@
 ---
 title: CSS
+description: CSS assets store stylesheet code editable from the Editor; the inspector shows a read-only preview with no extra configurable fields.
 ---
 
 A CSS asset contains CSS code. You can create a new CSS asset in the Editor or by uploading a file with a `.css` extension.

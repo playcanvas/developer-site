@@ -1,6 +1,7 @@
 ---
 title: 概要
 sidebar_position: 1.1
+description: Shader Editor におけるグラフ、ノード、マテリアル、テクスチャ、ファイル操作、ワークフロー関係の概要です。
 ---
 
 シェーダーエディターで作成されるエフェクトは、[グラフ](/shader-editor/overview/graphs)とその[ノード](/shader-editor/overview/nodes)、[マテリアル](/shader-editor/overview/materials)、および[テクスチャ](/shader-editor/overview/textures)の組み合わせです。

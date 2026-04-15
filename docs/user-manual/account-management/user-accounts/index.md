@@ -1,5 +1,6 @@
 ---
 title: User Accounts
+description: Create and manage your PlayCanvas user account to access the Editor, explore public projects, and join the community.
 ---
 
 Your user account is your personal space within PlayCanvas. This section covers creating, managing and configuring your account.

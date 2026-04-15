@@ -1,5 +1,6 @@
 ---
 title: Light Halos
+description: Build a billboarded glowing halo plane that fades when viewed edge-on to fake foggy air and bright lamp glare around lights.
 tags: [lighting]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406040/2TX0AO-image-75.jpg
 ---

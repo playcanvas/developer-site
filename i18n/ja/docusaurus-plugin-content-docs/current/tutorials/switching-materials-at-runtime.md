@@ -2,6 +2,7 @@
 title: '実行時のマテリアル切り替え'
 tags: [materials, assets, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437442/709ED5-image-75.jpg
+description: コードで Render Component のマテリアル Asset を差し替え、メッシュの Entity を複製せずに色、シェーダー、スキンを変えます。
 ---
 
 import Link from '@docusaurus/Link';

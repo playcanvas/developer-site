@@ -1,5 +1,6 @@
 ---
 title: Merging and resolving conflicts
+description: Starts merges between checkpoints resolves conflicts in PlayCanvas merge tooling and covers checkpoint-first options safely.
 ---
 
 Merging is the process by which you combine work that has been performed in one branch with work that has been performed in another branch. Merging is a natural part of the branch based workflow described in the [branches documentation](/user-manual/editor/version-control/branches).

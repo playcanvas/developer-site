@@ -1,5 +1,6 @@
 ---
 title: Ray Casting
+description: Cast rays through the scene for picking and hit tests from camera and mouse or touch positions.
 ---
 
 The PlayCanvas physics engine allows you to perform ray casts. A ray cast is a query that determines if a straight line between two arbitrary 3D points intersects with a rigid body.

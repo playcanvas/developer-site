@@ -1,5 +1,6 @@
 ---
 title: Screen
+description: PlayCanvas Screen component defines screen-space or world-space UI regions, resolution scaling, priority, and the root for Element children.
 ---
 
 The Screen Component defines the area and rendering of a user interface. Children added to a Screen Component should all have an Element Component.

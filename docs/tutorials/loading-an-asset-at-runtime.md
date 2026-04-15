@@ -1,5 +1,6 @@
 ---
 title: 'Loading an asset at runtime'
+description: Load a single asset on demand so unused resources stay off the initial preload list until your script requests them.
 tags: [loading, assets, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439122/FA68B8-image-75.jpg
 ---

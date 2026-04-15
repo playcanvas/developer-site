@@ -1,5 +1,6 @@
 ---
 title: Lightmapping Settings
+description: Lightmapping panel settings for global lightmap resolution multipliers bake modes filtering ambient bakes and occlusion tweaks stored per active project branch.
 sidebar_label: Lightmapping
 ---
 

@@ -2,6 +2,7 @@
 title: 'ショックウェーブ'
 tags: [tutorial, posteffects]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/440868/136A8D-image-75.jpg
+description: ポストエフェクトのシェーダーでフレームバッファに放射状のショックウェーブ歪みを加え、衝撃やシネマティックなカメラの脈動に使います。
 ---
 
 import Link from '@docusaurus/Link';

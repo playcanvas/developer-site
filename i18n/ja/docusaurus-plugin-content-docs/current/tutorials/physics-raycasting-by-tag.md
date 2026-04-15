@@ -2,6 +2,7 @@
 title: 'タグによる物理レイキャスティング'
 tags: [input, physics, raycast, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691309/22953E-image-75.jpg
+description: Entity のタグで物理 raycast のヒットをフィルタし、誤ったコライダーを無視して意図したオブジェクトだけをピッキングします。
 ---
 
 import Link from '@docusaurus/Link';

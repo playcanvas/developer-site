@@ -1,5 +1,6 @@
 ---
 title: Splatsの表示
+description: "PlayCanvas Model ViewerでGaussian splatsをプレビュー：対応形式、操作、編集や統合前のスプラットの確認方法です。"
 ---
 
 Gaussian splatを作成したら、編集やプロジェクトへの統合に進む前に、それをプレビューして評価したいと思うでしょう。**PlayCanvas Model Viewer**は、完全なPlayCanvasプロジェクトをセットアップすることなく、splatファイルを素早く表示し、検査するための便利な方法を提供します。

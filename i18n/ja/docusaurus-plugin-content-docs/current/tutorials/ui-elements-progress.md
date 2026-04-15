@@ -2,6 +2,7 @@
 title: UI - プログレスバー
 tags: [ui]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501979/49D69A-image-75.jpg"
+description: ネストしたElementとアンカーで塗りつぶし可能なプログレスバーを作り、空から満杯まで時間とともにアニメートします。
 ---
 
 <div className="iframe-container">

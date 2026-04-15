@@ -1,5 +1,6 @@
 ---
 title: Camera Controls
+description: "SuperSplat navigation: orbit and fly modes, mouse, touch, and keyboard shortcuts for inspecting and moving through splat scenes."
 ---
 
 SuperSplat provides intuitive camera controls for navigating the 3D view, supporting mouse, touch, and keyboard inputs. There are two control modes: **Orbit** (default) and **Fly**.

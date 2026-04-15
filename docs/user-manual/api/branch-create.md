@@ -1,5 +1,6 @@
 ---
 title: Branches - Create branch
+description: Create a new project branch from a source branch and optional checkpoint using POST /api/branches with JSON body and examples.
 ---
 
 ## Route URL

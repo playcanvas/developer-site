@@ -2,6 +2,7 @@
 title: '平面ミラー反射'
 tags: [rendering, shaders, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/717166/FEA6FF-image-75.jpg
+description: 反射用のシェーダーパスで Scene を平面に投影し、鏡や水面の平面反射をレンダリングします。
 ---
 
 import Link from '@docusaurus/Link';

@@ -1,6 +1,7 @@
 ---
 title: はじめに 
 sidebar_position: 1
+description: "Shader Editor の紹介です。ビジュアルグラフを GPU シェーダープログラムにコンパイルする Web ベースのノードグラフツールで、マテリアルとエフェクト向けです。"
 ---
 
 ## シェーダーエディターとは何ですか？

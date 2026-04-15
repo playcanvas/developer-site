@@ -1,5 +1,6 @@
 ---
 title: スプラットの作成
+description: "フォトグラメトリからGaussian splatsがどう作られるか：Structure from Motionと、スプラットを追加・削除・調整する反復トレーニングです。"
 ---
 
 Gaussian Splatsは、フォトグラメトリから再構築された3Dシーンです。このフォトグラメトリは、写真やビデオから抽出された個々のフレームである場合があります。また、例えば[Blender](https://www.blender.org/)のような3Dパッケージによって画像がレンダリングされる「合成」である場合もあります。

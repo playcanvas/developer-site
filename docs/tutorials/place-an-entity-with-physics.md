@@ -1,5 +1,6 @@
 ---
 title: 'Place an entity with physics'
+description: Spawn physics-enabled props at clicked world positions using raycasts against the ground so new bodies collide correctly.
 tags: [input, physics, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437836/9F4675-image-75.jpg
 ---

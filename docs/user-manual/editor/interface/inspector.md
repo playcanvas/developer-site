@@ -1,5 +1,6 @@
 ---
 title: Inspector Panel
+description: Inspector tips for entity and asset attributes covering gizmos, live runtime tweaks, typed copy paste, multiselect batches, and undo integration.
 ---
 
 ![Inspector Panel](/img/user-manual/editor/inspector/inspector.png)

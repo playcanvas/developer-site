@@ -1,5 +1,6 @@
 ---
 title: Scenes - List scenes
+description: "List all scenes in a project for a given branch id using GET projects/:projectId/scenes with authentication and response schema."
 ---
 
 ## Route URL

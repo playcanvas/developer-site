@@ -1,5 +1,6 @@
 ---
 title: Shadows
+description: Enable shadow mapping, tune cast and receive flags, and use cascaded directional shadows to reduce aliasing.
 ---
 
 Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps](/user-manual/graphics/lighting/lightmapping).

@@ -1,6 +1,7 @@
 ---
 title: ノード
 sidebar_position: 2
+description: "ポートを持つ共通ノード構造と、Shader Editor の3カテゴリ: input nodes、output nodes、transform nodes。"
 ---
 
 Shader Editorではさまざまなタイプのノードがサポートされていますが、すべてのノードは以下の構造を持っています。

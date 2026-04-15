@@ -1,5 +1,6 @@
 ---
 title: アセット - Get Asset File
+description: ブランチのファイル名で特定のAssetファイルバリアントを取得し、URLパターン、認証、レスポンス処理を含みます。
 ---
 
 ## ルートURL

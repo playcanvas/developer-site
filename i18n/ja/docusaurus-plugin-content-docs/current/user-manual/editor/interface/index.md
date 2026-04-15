@@ -1,5 +1,6 @@
 ---
 title: エディターインターフェース
+description: ツールバー、Hierarchy、Inspector、ビューポート、Assets パネルをラベル付きで俯瞰し、各主要エリアの詳細ドキュメントへリンクします。
 ---
 
 ![エディターインターフェース](/img/user-manual/editor/interface/editor-interface.png)

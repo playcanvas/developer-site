@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Performance
+description: Diagnose slow WebGL from GPU blacklists, SwiftShader, Firefox blocks, and dual-GPU selection on Windows.
 ---
 
 Here are some tips to help you uncover common performance problems.

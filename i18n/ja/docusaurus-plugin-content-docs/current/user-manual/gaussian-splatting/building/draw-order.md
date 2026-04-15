@@ -1,5 +1,6 @@
 ---
 title: 描画順序とソート
+description: GSplat Componentがスプラットをどうソートするか、複数Componentのレンダリング、深度バッファの制限、統合レンダリングとの連携を説明します。
 ---
 
 ## Gaussianのソート方法

@@ -1,5 +1,6 @@
 ---
 title: Loading and Unloading
+description: Dynamically load and unload assets at runtime to manage memory and stream content on demand.
 ---
 
 PlayCanvas provides APIs to dynamically load and unload assets at runtime. This gives you fine-grained control over memory usage and allows you to stream content as needed.

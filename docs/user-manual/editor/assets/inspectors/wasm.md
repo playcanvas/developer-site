@@ -1,5 +1,6 @@
 ---
 title: WASM Module
+description: Wasm Module assets wire Emscripten binaries to matching glue and optional asm fallback scripts with naming requirements shown in the Inspector.
 ---
 
 Wasm Modules (also known as WebAssembly Modules) contain compiled executable code for the web.

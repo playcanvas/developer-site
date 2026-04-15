@@ -1,5 +1,6 @@
 ---
 title: はじめに
+description: npm から PCUI をインストールし、Component とスタイルをインポートし、ライブラリと React パッケージで最小プロジェクトを構築します。
 ---
 
 始める前に、[Node.js](https://nodejs.org/) 18以降がインストールされていることを確認してください。

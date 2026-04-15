@@ -1,5 +1,6 @@
 ---
 title: Trigger Volumes
+description: Static trigger volumes that fire enter and leave events when rigid bodies pass through, with example scripts.
 ---
 
 Trigger volumes are static collision shapes which can fire events whenever a rigid body enters or leaves their volume. They can be useful to determine when a goal has been scored in a football match or when a race car has reached the finish line.

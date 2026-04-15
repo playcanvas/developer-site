@@ -1,5 +1,6 @@
 ---
 title: Creating a Music Visualizer
+description: Pipe Web Audio analyser frequency data into a PlayCanvas script to animate bars or graphs that react to playing music in real time.
 tags: [audio]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405891/L2JCV3-image-75.jpg
 ---

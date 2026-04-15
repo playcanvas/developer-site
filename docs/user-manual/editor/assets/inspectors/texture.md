@@ -1,5 +1,6 @@
 ---
 title: Texture
+description: Covers how images import into texture assets, format conversions and POT resizing, and Inspector fields for filtering, wrapping, mipmaps, and preview.
 ---
 
 A texture is an image that can be assigned to a [material](/user-manual/editor/assets/inspectors/material) and then applied to a graphical primitive.

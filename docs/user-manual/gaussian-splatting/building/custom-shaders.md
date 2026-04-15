@@ -1,5 +1,6 @@
 ---
 title: Custom Shaders
+description: "Customize non-unified GSplat rendering with the gsplatModifyVS shader chunk: API reference, GLSL and WGSL examples, and live demo links."
 ---
 
 The PlayCanvas Engine supports custom shaders for Gaussian Splats, allowing you to create advanced visual effects and customize the rendering behavior beyond the standard implementation.

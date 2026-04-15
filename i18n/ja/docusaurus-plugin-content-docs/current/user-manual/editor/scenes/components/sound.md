@@ -1,5 +1,6 @@
 ---
 title: Sound
+description: PlayCanvas の Sound Component は、音量、ピッチ、ループ、リスナーへの任意の 3D 距離減衰付きで 1 つ以上のオーディオスロットを再生します。
 ---
 
 Soundコンポーネントは、オーディオサンプルの再生を制御します。

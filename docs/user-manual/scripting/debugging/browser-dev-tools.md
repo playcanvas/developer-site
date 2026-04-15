@@ -1,5 +1,6 @@
 ---
 title: Browser Dev Tools
+description: Use Chrome and Firefox developer tools to set breakpoints, inspect variables, and step through your PlayCanvas scripts.
 ---
 
 In order to create scripts for PlayCanvas, it is vital that you know how to access and use your browser's development tools.

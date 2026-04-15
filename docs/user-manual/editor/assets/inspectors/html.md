@@ -1,5 +1,6 @@
 ---
 title: HTML
+description: HTML assets hold page or partial markup editable from the Editor; the inspector provides a read-only formatted preview without extra properties.
 ---
 
 An HTML asset contains HTML code. The code can either be a full HTML page or just partial HTML. You can create a new HTML asset in the Editor or by uploading a file with an `.html` extension.

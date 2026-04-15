@@ -1,5 +1,6 @@
 ---
 title: 'WebXR 360 Image'
+description: View an equirectangular 360 photo inside VR with WebXR so users can look around an immersive spherical backdrop.
 tags: [vr, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/434266/3B51C6-image-75.jpg
 ---

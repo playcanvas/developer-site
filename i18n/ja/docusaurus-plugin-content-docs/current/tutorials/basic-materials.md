@@ -2,6 +2,7 @@
 title: マテリアルの基本設定
 tags: [materials,basics]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/KM6GIE-image-75.jpg"
+description: マテリアルを作成してメッシュに割り当て、プリミティブで色と物理ベースシェーディングを段階的に調整します。
 ---
 
 マテリアルは、3Dモデルの表面の外観を定義するものです。最も単純な場合、マテリアルはポリゴンの色を設定します。最も複雑な場合、マテリアルは海の表面やガラスを通過する光の振る舞いなどをシミュレートすることができます。

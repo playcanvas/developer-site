@@ -1,5 +1,6 @@
 ---
 title: 'Static Batching'
+description: Merge static meshes into fewer draw calls with batching to cut CPU overhead while keeping non-moving geometry efficient.
 tags: [rendering, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/520389/C1E49E-image-75.jpg
 ---

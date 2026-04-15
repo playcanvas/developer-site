@@ -1,5 +1,6 @@
 ---
 title: Textures
+description: Adding textures to a Shader Editor project via drag-and-drop and referencing them inside graphs from the Assets Pane.
 sidebar_position: 4
 ---
 

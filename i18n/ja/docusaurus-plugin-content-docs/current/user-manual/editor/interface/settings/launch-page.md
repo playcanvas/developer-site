@@ -1,6 +1,7 @@
 ---
 title: 起動ページ設定
 sidebar_label: Launch Page
+description: Editor の Launch ページ向けに、解像度、フィルモード、透明なキャンバスなどブラウザの機能を設定します。
 ---
 
 PlayCanvas エディターからプロジェクトを実行する際に使用されるブラウザ機能を制御します。

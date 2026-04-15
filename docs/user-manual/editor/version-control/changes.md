@@ -1,5 +1,6 @@
 ---
 title: View Changes
+description: Opens read-only diff views between your live branch state and checkpoints before merges checkpoints or idle review.
 ---
 
 It is possible to view the difference between the current state of the project and a checkpoint using the View Changes options. A useful feature to run before starting a merge or taking a checkpoint. Or just to check on the state of the project since you last logged in.

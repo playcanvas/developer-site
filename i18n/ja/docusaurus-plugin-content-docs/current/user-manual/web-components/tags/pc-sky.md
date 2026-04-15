@@ -1,5 +1,6 @@
 ---
 title: <pc-sky>
+description: "pc-sky要素のリファレンス: Sceneの背景向けに、cubemapまたはequirectangular Assetからのイメージベースライティングとスカイボックスです。"
 ---
 
 `<pc-sky>`タグは、スカイコンポーネントを定義するために使用されます。

@@ -1,6 +1,7 @@
 ---
 title: ウィンドウの配置
 sidebar_position: 1.2
+description: Info、Nodes、Inspector、Assets、グラフ編集、マテリアルプレビューなど、主要ペインによる Shader Editor のウィンドウレイアウトです。
 ---
 
 シェーダーエディターはいくつかのサブウィンドウまたはペインで構成されています。以下でペインについてハイライトし、それぞれの簡単な説明をします。

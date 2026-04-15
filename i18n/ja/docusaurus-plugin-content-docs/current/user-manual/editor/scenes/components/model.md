@@ -1,5 +1,6 @@
 ---
 title: Model (Legacy)
+description: 非推奨のレガシー Model Component はプリミティブまたは単一の model Asset をレンダリングします。新規作業には Render Component を推奨します。
 ---
 
 :::warning

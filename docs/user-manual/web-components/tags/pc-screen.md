@@ -1,5 +1,6 @@
 ---
 title: <pc-screen>
+description: "Reference for the pc-screen element: 2D screen space for UI elements, resolution, scale modes, and child pc-element hierarchies."
 ---
 
 The `<pc-screen>` tag is used to define a screen component.

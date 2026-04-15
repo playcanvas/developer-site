@@ -1,5 +1,6 @@
 ---
 title: Your First App
+description: Walks through building a simple 3D PlayCanvas Editor project from a new scene to materials, scripts, movement, and publishing.
 ---
 
 Developing applications in the PlayCanvas Editor is easy and fun. Let's spend a few minutes learning the basics. We'll recreate the following simple 3D app:

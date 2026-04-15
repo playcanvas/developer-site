@@ -1,5 +1,6 @@
 ---
 title: アプリ - Get project apps
+description: "GET projects/:projectId/appsでPlayCanvasプロジェクトの公開アプリをすべて一覧し、クエリパラメータとレスポンススキーマの詳細を扱います。"
 ---
 
 ## ルートURL

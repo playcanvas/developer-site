@@ -1,5 +1,6 @@
 ---
 title: Switch Full Scene
+description: Load and swap entire scene hierarchies at runtime using the documented scene loading flow for level transitions.
 tags: [loading,scenes]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691996/707412-image-75.jpg
 ---

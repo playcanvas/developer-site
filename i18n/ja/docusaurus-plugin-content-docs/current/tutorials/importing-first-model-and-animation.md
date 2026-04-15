@@ -2,6 +2,7 @@
 title: 最初のモデルとアニメーションのインポート方法
 tags: [animation,basics]
 thumb: /img/tutorials/importing-first-model-and-animation/thumbnail.jpg
+description: リグ付きキャラクターをインポートし、Animation Component を設定し、パッケージされたサンプル Asset のクリップを再生します。
 ---
 
 <div className="iframe-container">

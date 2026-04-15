@@ -1,5 +1,6 @@
 ---
 title: 'Physics raycasting by tag'
+description: Filter physics raycast hits by entity tags so picking ignores the wrong colliders and only selects intended objects.
 tags: [input, physics, raycast, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691309/22953E-image-75.jpg
 ---

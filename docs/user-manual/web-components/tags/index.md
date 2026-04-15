@@ -1,5 +1,6 @@
 ---
 title: Tag Reference
+description: Alphabetical index of PlayCanvas Web Component tags with short summaries linking to full attribute and usage documentation for each element.
 ---
 
 Here is a complete list of the tags that are available in PlayCanvas Web Components.

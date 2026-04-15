@@ -1,5 +1,6 @@
 ---
 title: Entity Picking
+description: Compare collision picking and framebuffer picking to select 3D entities when the user clicks the scene.
 tags: [raycast,basics,physics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405856/DS51PO-image-75.jpg
 ---

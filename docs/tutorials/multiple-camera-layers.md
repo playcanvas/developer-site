@@ -1,5 +1,6 @@
 ---
 title: 'Multiple Camera Layers'
+description: Combine multiple cameras and render layers to mix screen-space UI with world-space elements in one PlayCanvas scene.
 tags: [rendering, camera, ui, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/593374/DF6C72-image-75.jpg
 ---

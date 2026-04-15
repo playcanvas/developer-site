@@ -1,5 +1,6 @@
 ---
 title: Components
+description: Add cameras, lights, physics, scripts, and other behavior to Entities using PlayCanvas Components.
 ---
 
 A **[`Component`](https://api.playcanvas.com/engine/classes/Component.html)** adds data and behavior to an Entity.

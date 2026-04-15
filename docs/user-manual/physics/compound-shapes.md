@@ -1,5 +1,6 @@
 ---
 title: Compound Shapes
+description: Combine primitive collision shapes on child entities into compound colliders for dynamic rigid bodies.
 ---
 
 Compound shapes are custom collision shapes created out of multiple primitive shapes ([full list of shapes here](/user-manual/physics/physics-basics/#rigid-bodies)). This allows you to have more complex collision shapes without using a custom mesh model.

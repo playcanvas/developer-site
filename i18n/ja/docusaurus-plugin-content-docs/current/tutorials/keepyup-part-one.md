@@ -2,6 +2,7 @@
 title: シンプルなゲームの作成 - パート1
 tags: [games]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
+description: Keepy Up シリーズを Scene のヒエラルキー、ロードマップのトピック、サンプルのサッカーゲームの構成で始めます。
 ---
 
 <div className="iframe-container">

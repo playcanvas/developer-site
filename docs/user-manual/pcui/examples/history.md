@@ -1,5 +1,6 @@
 ---
 title: History
+description: PCUI history example with slider and progress bar, demonstrating undo and redo stacks tied to observer-backed UI state.
 ---
 
 In this example you can interact with the input slider to update the progress bar. Any actions you make can be undone / redone using the history buttons.

@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Learn the basic structure and core concepts of PlayCanvas scripts including script types, attributes, and entity attachment.
 ---
 
 This guide covers the basic structure and concepts you need to understand when writing PlayCanvas scripts, whether you're using the modern ESM approach or the classic system.

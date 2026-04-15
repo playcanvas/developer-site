@@ -1,5 +1,6 @@
 ---
 title: Capabilities
+description: Supported WebXR modules in PlayCanvas, including anchors, depth, hand tracking, hit testing, mesh and plane detection, and related features.
 ---
 
 WebXR exposes various capabilities and new APIs through Modules, which are integrated into the PlayCanvas Engine for ease of use.

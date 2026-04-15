@@ -1,5 +1,6 @@
 ---
 title: ハンドトラッキング
+description: "PlayCanvasでのWebXRハンド入力: XrHandのジョイントと指、ジョイントデータから手のビジュアルを組み立て、トラッキング喪失や復帰イベントです。"
 ---
 
 プラットフォームが[WebXR Hand Input](https://immersive-web.github.io/webxr-hand-input/)をサポートしている場合、入力ソースは関連する手データを持つことができます。これは[XrHand](https://api.playcanvas.com/engine/classes/XrHand.html)として公開され、アプリケーション開発者が使用できるように、手首、指、関節、指先、そして手がトラッキングを失ったり回復したりするのを検出するためのイベントなど、[XrFinger](https://api.playcanvas.com/engine/classes/XrFinger.html)と[XrJoint](https://api.playcanvas.com/engine/classes/XrJoint.html)の形式でデータが提供されます。

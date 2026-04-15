@@ -1,5 +1,6 @@
 ---
 title: Basic Audio
+description: Use sound and listener components so positional 3D audio follows moving sources relative to the listener entity.
 tags: [audio,basics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405821/V89N1G-image-75.jpg
 ---

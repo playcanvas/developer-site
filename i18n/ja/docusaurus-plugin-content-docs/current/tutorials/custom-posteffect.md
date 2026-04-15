@@ -2,6 +2,7 @@
 title: カスタムポストエフェクト
 tags: [posteffects]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406045/ABC61F-image-75.jpg"
+description: シェーダーとカスタムポストエフェクトで、最終フレームバッファに水彩ぼかしと紙の粒状感を重ねます。
 ---
 
 In this tutorial, you'll learn how to create a custom watercolor post effect in PlayCanvas that applies a softening filter and a paper grain texture to your scene. By the end of this guide, you'll have a visually appealing watercolor effect that you can apply to any 3D scene.

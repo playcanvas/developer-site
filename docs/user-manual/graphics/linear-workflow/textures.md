@@ -1,5 +1,6 @@
 ---
 title: Textures
+description: Mark color textures as sRGB in assets and code, including procedural targets, so sampling stays physically correct.
 ---
 
 ### sRGB Texture Handling  

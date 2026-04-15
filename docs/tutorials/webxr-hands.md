@@ -1,5 +1,6 @@
 ---
 title: 'WebXR Hands'
+description: Read WebXR hand-tracking joint poses and mirror finger motion in the scene for natural direct manipulation without controllers.
 tags: [input, vr, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/705931/2507B5-image-75.jpg
 ---

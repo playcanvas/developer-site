@@ -1,5 +1,6 @@
 ---
 title: Billing
+description: Frequently asked questions about PlayCanvas subscription plans, payments, invoices, and plan changes.
 ---
 
 Welcome to the Billing FAQ that lists the common questions relating to your PlayCanvas subscription.

@@ -1,5 +1,6 @@
 ---
 title: Texture Atlas
+description: Texture Atlas assets define named frames with rectangles pivots and borders atop a texture plus shared texture settings for sprite workflows.
 ---
 
 A Texture Atlas asset is a texture asset with additional data which describes 'Frames' inside the texture. Frames are regions defined in the texture as a rectangle with a 'pivot' point which sets the positional and rotational center of the frame.

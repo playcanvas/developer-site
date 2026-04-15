@@ -1,5 +1,6 @@
 ---
 title: ブラウザ開発ツール
+description: Chrome と Firefox の開発者ツールでブレークポイントを設定し、変数を検査し、PlayCanvas の Script をステップ実行します。
 ---
 
 PlayCanvasのスクリプトを作成するためには、ブラウザの開発ツールにアクセスして使用する方法を知っていることが重要です。

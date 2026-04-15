@@ -1,5 +1,6 @@
 ---
 title: Optimization
+description: Why and how to optimize load time, frame rate, CPU, GPU load, and memory in PlayCanvas applications.
 ---
 
 Optimization is a critical part of developing a PlayCanvas application. It can mean the difference between a great user experience and a terrible one.

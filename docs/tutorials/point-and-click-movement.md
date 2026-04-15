@@ -1,5 +1,6 @@
 ---
 title: 'Point and click movement'
+description: Move a character or object toward clicked ground positions using screen-to-world raycasts for simple navigation.
 tags: [touch, input, mouse, raycast, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/461494/9F45F6-image-75.jpg
 ---

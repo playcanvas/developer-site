@@ -1,5 +1,6 @@
 ---
 title: Building a Scene
+description: Hands-on tutorial building a lit scene with pc-app and pc-scene, adding a camera, light, mesh, and understanding the element hierarchy.
 ---
 
 Let's build a simple 3D scene step by step using PlayCanvas Web Components. We'll create a basic scene with a lit sphere.

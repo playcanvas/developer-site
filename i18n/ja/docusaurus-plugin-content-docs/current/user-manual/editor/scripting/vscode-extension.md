@@ -1,5 +1,6 @@
 ---
 title: VS Code拡張機能
+description: 同期したローカル編集、コラボレーションの表示、TypeScript 対応の Script のために PlayCanvas の VS Code 拡張をインストールして使います。
 ---
 
 PlayCanvas VS Code Extension は、PlayCanvas Editor のテキストベースアセットを扱うための強力でリアルタイムな編集環境を提供します。IntelliSense、ソース管理、GitHub Copilot、AI を活用したワークフローといった最新ツールを好む開発者向けに設計されており、この拡張機能は VS Code と PlayCanvas プロジェクトを直接統合します。

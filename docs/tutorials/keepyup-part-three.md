@@ -1,5 +1,6 @@
 ---
 title: Making a Simple Game - Part 3
+description: Walk through the root game and input scripts that drive taps, scoring, and overall flow in Keepy Up.
 tags: [games]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg
 ---

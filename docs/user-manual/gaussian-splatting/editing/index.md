@@ -1,5 +1,6 @@
 ---
 title: Editing and Publishing Splats
+description: "Why edit splats before production, SuperSplat versus splat-transform workflows, and when to use visual versus CLI tooling."
 ---
 
 Raw Gaussian Splat files often need editing and optimization before they're ready for production use. This process involves removing unwanted elements, compressing file sizes, and optimizing performance for real-time rendering in PlayCanvas.

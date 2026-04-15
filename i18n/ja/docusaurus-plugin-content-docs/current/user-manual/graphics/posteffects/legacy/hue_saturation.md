@@ -1,5 +1,6 @@
 ---
 title: 色相・彩度エフェクト
+description: レガシーの色相・彩度 Script エフェクトのコントロールと、huesaturation ポストエフェクトソースの GitHub リンクです。
 ---
 
 色相 (Hue) 彩度 (Saturation) エフェクトは、レンダリングされたイメージの色相と彩度を変更できます。

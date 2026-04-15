@@ -1,5 +1,6 @@
 ---
 title: Types of VR experiences
+description: "VR reference spaces for room-scale and seated experiences: choosing XRSPACE values and matching them to device movement capabilities."
 ---
 
 Different types of VR experiences can have different reference spaces. Reference spaces are coordinate systems used to define the positions and orientations of objects and users within a VR environment. They allow the application to understand and manage spatial relationships in a consistent manner. Refer to the `XRSPACE` constants for more information:

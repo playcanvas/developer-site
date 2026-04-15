@@ -2,6 +2,7 @@
 title: 'カーブを使ったエンティティのアニメーション'
 tags: [animation, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438191/53A10A-image-75.jpg
+description: フルな Anim State Graph を組まずに、アニメーションカーブで Entity の動きを制御する簡単なスクリプト移動です。
 ---
 
 import Link from '@docusaurus/Link';

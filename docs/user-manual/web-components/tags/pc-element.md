@@ -1,5 +1,6 @@
 ---
 title: <pc-element>
+description: "Reference for the pc-element element: screen-space UI text, images, and groups mapped to PlayCanvas Element components and layout."
 ---
 
 The `<pc-element>` tag is used to define an element component.

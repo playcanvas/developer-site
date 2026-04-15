@@ -1,5 +1,6 @@
 ---
 title: Units
+description: Configure scene units in Blender, Maya, or 3DS Max so models export at the correct scale for PlayCanvas.
 ---
 
 PlayCanvas scenes generally treat 1 unit as 1 meter.

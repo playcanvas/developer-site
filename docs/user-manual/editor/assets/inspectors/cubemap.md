@@ -1,5 +1,6 @@
 ---
 title: Cubemap
+description: Build six-face cubemap assets for skyboxes and reflections by importing images, creating assets in the panel, and assigning faces in the Inspector.
 ---
 
 Cubemaps are a special type of texture asset. They are formed from 6 texture assets where each texture represents the face of a cube. They typically have two uses:

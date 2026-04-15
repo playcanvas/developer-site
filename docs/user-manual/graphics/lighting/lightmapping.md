@@ -1,5 +1,6 @@
 ---
 title: Lightmapping
+description: Bake lightmaps in external tools like 3ds Max and VRay, then import textures and follow linear gamma best practices.
 ---
 
 [![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
