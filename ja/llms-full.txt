@@ -8400,7 +8400,7 @@ Example:
 const response = await fetch(`https://playcanvas.com/api/upload/signed-url`, {
     method: 'POST',
     body: JSON.stringify({
-        filename: filename
+        fileName: filename
     }),
     headers: {
         'Authorization': `Bearer ${token}`,
@@ -8469,11 +8469,11 @@ Response (Splat data)
   "hash": "string",
   "title": "string",
   "description": "string",
-  "format": "compressed.ply | sog"
+  "format": "compressed.ply | sog",
   "version": "string",
   "release_notes": "string",
   "thumbnails": number,
-  "size": number
+  "size": number,
   "views": number, 
   "comments": number, 
   "starred": number, 
@@ -8508,28 +8508,28 @@ Sample response
 
 ```json
 {
-  comments = 0
-  completedAt = null
-  createdAt = '2025-10-21T12:42:13.331Z'
-  currentVersion = 1
-  description = 'Some Description'
-  featuredWeight = 0
-  format = ''
-  hash = '982a2820'
-  hasThumbnails = false
-  id = 50
-  listed = true
-  modifiedAt = '2025-10-21T12:42:13.331Z'
-  releaseNotes = null
-  size = 0
-  starred = 0
-  tags = (0) []
-  task = {status: 'running', message: ''}
-  title = 'Some Title'
-  url = 'https://superspl.at/view?id=982a2820'
-  userId = 7
-  version = 0
-  views = 0
+  "comments": 0,
+  "completedAt": null,
+  "createdAt": "2025-10-21T12:42:13.331Z",
+  "currentVersion": 1,
+  "description": "Some Description",
+  "featuredWeight": 0,
+  "format": "",
+  "hash": "982a2820",
+  "hasThumbnails": false,
+  "id": 50,
+  "listed": true,
+  "modifiedAt": "2025-10-21T12:42:13.331Z",
+  "releaseNotes": null,
+  "size": 0,
+  "starred": 0,
+  "tags": [],
+  "task": { "status": "running", "message": "" },
+  "title": "Some Title",
+  "url": "https://superspl.at/view?id=982a2820",
+  "userId": 7,
+  "version": 0,
+  "views": 0
 }
 ```
 
@@ -30595,7 +30595,7 @@ URL: https://developer.playcanvas.com/user-manual/react/api/hooks/use-app/
 
 The `useApp` hook provides access to the PlayCanvas [Application](https://api.playcanvas.com/engine/classes/Application.html) instance from within your React components. It's a convenient way to get information about the app state, fire events, and more.
 
-```jsx copy title="./my-component.jsx" copy
+```jsx copy title="./my-component.jsx"
 
 function MyComponent() {
   const app = useApp()
@@ -30629,12 +30629,9 @@ The hook only relies on the `` component for context, so without one it will thr
 
 ```tsx asTypedoc
 
-type $ = {
-  /**
-   * The PlayCanvas Application instance
-   */
-  app: Application
-}
+/**
+ * The PlayCanvas Application instance
+ */
 
 ```
 
@@ -30770,7 +30767,7 @@ A specialized hook for loading texture assets. Pass the source URL of the textur
 ```tsx copy filename="render-texture.tsx"
 
   const { asset, loading, error } = useTexture('texture.jpg');
-  const material = useMaterial({ map: asset.resource });
+  const material = useMaterial({ diffuseMap: asset?.resource });
 
   if (loading) return ;
   if (error) return ;
@@ -30882,12 +30879,9 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 
 ```tsx asTypedoc
 
-type $ = {
-  /**
-   * The PlayCanvas StandardMaterial instance
-   */
-  material: StandardMaterial
-}
+/**
+ * The PlayCanvas StandardMaterial instance
+ */
 
 ```
 
@@ -31000,12 +30994,9 @@ function MyComponent() {
 
 ```tsx asTypedoc
 
-type $ = {
-  /**
-   * The PlayCanvas Entity instance
-   */
-  parent: Entity
-}
+/**
+ * The parent PlayCanvas Entity instance
+ */
 
 ```
 
@@ -31868,10 +31859,10 @@ The loading hooks also provide a simple mechanic to progressively load assets, s
 
 ```tsx title="progressive-loading.tsx"
 
-// A component that displays a model with a custom loading state
+// A component that displays a splat with progressive loading
 
-  const { asset: low } = useModel('./low-quality-model.sog'); // load the low quality asset
-  const { asset: high } = useModel(low && './high-quality-model.sog'); // load the high quality asset, when the low quality is loaded
+  const { asset: low } = useSplat('./low-quality-model.sog'); // load the low quality asset
+  const { asset: high } = useSplat(low && './high-quality-model.sog'); // load the high quality asset, when the low quality is loaded
   
   if (!low && !high ) return null;
 
