@@ -1,5 +1,6 @@
 ---
 title: Safe Area
+description: Keep UI clear of notches and home bars on phones by applying CSS safe-area values to group margins.
 ---
 
 With the trend of mobile devices having full device screens, a notch or cut out in the display is used to make room for the ear piece speaker and front facing camera (see below for the iPhone X).

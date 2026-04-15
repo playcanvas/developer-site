@@ -1,5 +1,6 @@
 ---
 title: アセットレジストリ
+description: AssetRegistry API を使って、PlayCanvas アプリケーションの実行時に Asset の検索、読み込み、管理を行います。
 ---
 
 [`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html) は、PlayCanvas でアセットを管理するための中心的なシステムです。アプリケーションで利用可能なすべてのアセットのコレクションを保持し、アセットの検索、読み込み、管理を行うためのメソッドを提供します。

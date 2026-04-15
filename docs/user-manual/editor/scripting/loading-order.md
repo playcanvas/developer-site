@@ -1,5 +1,6 @@
 ---
 title: Script Loading Order
+description: Contrasts ESM imports with classic preload ordering, drag-reorder UI, dynamic loads, and publish-time concatenation behavior.
 ---
 
 ## ESM Scripts

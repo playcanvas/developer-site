@@ -1,5 +1,6 @@
 ---
 title: XR
+description: "Overview of WebXR AR and VR in PlayCanvas: platforms, capabilities, session setup, and links to AR, VR, and integration guides."
 ---
 
 ![VR View](/img/user-manual/xr/vr-view.png)

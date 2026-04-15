@@ -1,5 +1,6 @@
 ---
 title: 'VHS/CRT Post Effect'
+description: Stack scanlines, roll, and color bleed in a fullscreen pass to mimic noisy VHS and curved CRT monitor presentation.
 tags: [tutorial, posteffects]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/373076/0WJ6Y8-image-75.jpg
 ---

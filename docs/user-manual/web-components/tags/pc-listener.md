@@ -1,5 +1,6 @@
 ---
 title: <pc-listener>
+description: "Reference for the pc-listener element: positional audio listener placement and settings for 3D sound relative to the active camera."
 ---
 
 The `<pc-listener>` tag is used to define a listener component.

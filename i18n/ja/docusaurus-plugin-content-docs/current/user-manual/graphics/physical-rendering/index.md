@@ -1,5 +1,6 @@
 ---
 title: 物理ベースレンダリング (PBR)
+description: "PlayCanvas における PBR の基礎：diffuse と specular、エネルギー保存、metalness、一貫したマテリアル。"
 ---
 
 ![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  

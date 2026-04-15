@@ -1,5 +1,6 @@
 ---
 title: <pc-sounds>
+description: "pc-sounds要素のリファレンス: pc-soundスロットと共有オーディオ設定をEntity上でまとめるサウンドComponentのコンテナです。"
 ---
 
 `<pc-sounds>`タグはサウンドコンポーネントを定義するために使用されます。

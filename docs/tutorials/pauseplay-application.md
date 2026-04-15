@@ -1,5 +1,6 @@
 ---
 title: 'Pause/Play application'
+description: Pause and resume gameplay by toggling Application timeScale so physics, animations, and time-based logic freeze together.
 tags: [tutorial, time]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437707/9D3648-image-75.jpg
 ---

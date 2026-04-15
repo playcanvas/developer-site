@@ -2,6 +2,7 @@
 title: シンプルなゲームの作成 - パート2
 tags: [games]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
+description: Physical マテリアルと cubemap を設定し、ボール、地面、背景に image-based lighting を適用します。
 ---
 
 <div className="iframe-container">

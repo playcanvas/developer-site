@@ -1,6 +1,7 @@
 ---
 title: SOGフォーマット
 sidebar_label: SOG
+description: "SOG（Spatially Ordered Gaussians）の仕様：WebPテクスチャ、meta.jsonの構成、量子化、bundledとunbundledのファイルです。"
 ---
 
 **SOG (Spatially Ordered Gaussians)** は、3D Gaussian Splatデータのコンパクトなコンテナです。量子化（本質的に非可逆）による高い圧縮を実現し、通常、同等のPLYファイルよりも**約15～20倍小さい**ファイルを生成します。

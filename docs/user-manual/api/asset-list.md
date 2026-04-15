@@ -1,5 +1,6 @@
 ---
 title: Assets - List assets
+description: Paginated listing of all assets in a project branch via GET with skip and limit parameters, plus response shape and examples.
 ---
 
 ## Route URL

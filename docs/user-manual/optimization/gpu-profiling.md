@@ -1,5 +1,6 @@
 ---
 title: GPU Profiling
+description: Capture WebGL or WebGPU frames with native GPU profilers on desktop and Android for deeper GPU insight.
 ---
 
 This section explains how to use native GPU profilers to capture and analyze WebGL or WebGPU frames, enabling debugging and performance profiling of GPU operations.

@@ -2,6 +2,7 @@
 title: カメラの基本操作
 tags: [camera,basics]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/KM6GIE-image-75.jpg"
+description: Camera Entity を追加して Scene を画面にレンダリングし、表示に必要な最低限のエディタ設定を学びます。
 ---
 
 ## カメラエンティティ

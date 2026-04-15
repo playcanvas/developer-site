@@ -1,5 +1,6 @@
 ---
 title: 物理の基本
+description: ammo.js を有効化し、重力と単位を設定し、Bullet 物理用に rigidbody と collision の Component を構成します。
 ---
 
 PlayCanvasには、[ammo.js](https://github.com/kripken/ammo.js)という非常に強力な物理エンジンが組み込まれています。これは、オープンソースのC++ Bullet物理エンジンのブラウザポートです。

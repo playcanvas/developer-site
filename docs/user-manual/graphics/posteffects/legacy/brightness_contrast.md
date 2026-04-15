@@ -1,5 +1,6 @@
 ---
 title: Brightness-Contrast Effect
+description: "Legacy brightness and contrast script effect: parameter ranges and GitHub source for the camera post pipeline."
 ---
 
 The brightness-contrast effect allows you to modify the brightness and contrast of the rendered image.

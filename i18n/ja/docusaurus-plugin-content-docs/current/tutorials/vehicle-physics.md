@@ -2,6 +2,7 @@
 title: 'Vehicle Physics'
 tags: [collision, vr, physics, tutorial, raycast]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/643289/28741D-image-75.jpg"
+description: Ammoのレイキャストホイール、サスペンション、ステアリングで車輪付き車両を動かし、デスクトップ、モバイル、WebXRで動作させます。
 ---
 
 import Link from '@docusaurus/Link';

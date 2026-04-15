@@ -1,5 +1,6 @@
 ---
 title: 'Vehicle Physics'
+description: Drive a wheeled vehicle with Ammo raycast wheels, suspension, and steering that works on desktop, mobile, and WebXR.
 tags: [collision, vr, physics, tutorial, raycast]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/643289/28741D-image-75.jpg
 ---

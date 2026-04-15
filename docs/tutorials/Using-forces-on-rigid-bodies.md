@@ -1,5 +1,6 @@
 ---
 title: Forces and Impulses
+description: Apply forces, impulses, and torques to dynamic rigidbodies and tune damping and mass for responsive physics-driven motion.
 tags: [physics, collision]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405828/95F429-image-75.jpg
 ---

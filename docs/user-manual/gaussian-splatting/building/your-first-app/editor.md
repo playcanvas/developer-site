@@ -1,5 +1,6 @@
 ---
 title: Using the Editor
+description: "Step-by-step: create a splat scene in the PlayCanvas Editor, import assets, and publish an interactive orbitable splat project."
 ---
 
 Let's build a simple Gaussian splat application step by step using the [PlayCanvas Editor](/user-manual/editor). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.

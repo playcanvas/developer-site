@@ -1,5 +1,6 @@
 ---
 title: Lights
+description: "Directional, omni, and spot lights in the Editor: gizmos, shadows, cookies, and practical lighting combinations."
 ---
 
 In the real world, the environment around you is lit from many sources. The Sun, street lights, TV screens and so on. In a PlayCanvas scene, you have the ability to set up a number of different types of light sources and the shape of the light source to approximate the different types of light we find in reality.

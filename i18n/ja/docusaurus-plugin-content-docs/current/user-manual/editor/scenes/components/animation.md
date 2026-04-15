@@ -1,5 +1,6 @@
 ---
 title: Animation (Legacy)
+description: 非推奨のレガシー Animation Component はモデルにアニメーション Asset を割り当てます。state graph には Anim Component を使います。
 ---
 
 :::warning

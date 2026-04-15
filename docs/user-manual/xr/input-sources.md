@@ -1,5 +1,6 @@
 ---
 title: Input Sources
+description: Using XR input sources for controllers, tracked hands, gaze, and touch, including listing sources and handling transient input in PlayCanvas.
 ---
 
 An [XrInputSource](https://api.playcanvas.com/engine/classes/XrInputSource.html) represents an input mechanism that allows the user to interact with a virtual world. Those include but are not limited to handheld controllers, optically tracked hands, gaze-based input methods, and touch screens. However, an input source is not explicitly associated with traditional gamepads, mice or keyboards.

@@ -1,5 +1,6 @@
 ---
 title: Playable Ads
+description: Lists supported networks and links for exporting PlayCanvas projects as Facebook and Snapchat playable ads.
 ---
 
 We are currently supporting the following playable ad networks:

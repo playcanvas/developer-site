@@ -2,6 +2,7 @@
 title: シーン上のエンティティの選択
 tags: [raycast,basics,physics]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405856/DS51PO-image-75.jpg"
+description: コリジョンピッキングとフレームバッファピッキングを比較し、ユーザーが Scene をクリックしたときに 3D Entity を選択します。
 ---
 
 Collision Picking - クリックしてシェイプを選択する

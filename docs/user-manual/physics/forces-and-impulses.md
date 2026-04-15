@@ -1,5 +1,6 @@
 ---
 title: Forces and Impulses
+description: Apply continuous forces and one-frame impulses to dynamic rigid bodies using RigidBodyComponent APIs.
 ---
 
 Dynamic rigid bodies move in response to forces and impulses. A force is applied to a body over a period of time whereas an impulse is a force that is applied in an instant.

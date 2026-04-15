@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: High-level overview of graphs, nodes, materials, textures, file handling, and workflow relationships in Shader Editor.
 sidebar_position: 1.1
 ---
 

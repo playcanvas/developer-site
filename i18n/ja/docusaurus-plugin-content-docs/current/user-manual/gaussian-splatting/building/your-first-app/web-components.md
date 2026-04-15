@@ -1,5 +1,6 @@
 ---
 title: Webコンポーネントの使用
+description: "ステップバイステップ：pc-app、pc-scene、pc-asset、splat要素とパフォーマンス重視の設定でスプラットビューアを構築します。"
 ---
 
 [PlayCanvas Webコンポーネント](/user-manual/web-components)を使用して、簡単なGaussian splatアプリケーションをステップバイステップで構築しましょう。回転できるインタラクティブな3Dの猫のオモチャのスプラットがあるシーンを作成します。

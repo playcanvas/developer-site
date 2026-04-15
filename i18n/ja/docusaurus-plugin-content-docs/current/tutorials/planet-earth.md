@@ -2,6 +2,7 @@
 title: '惑星地球'
 tags: [textures, rendering, materials, shaders, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/419706/12261C-image-75.jpg
+description: Earth のテクスチャ、マテリアル、シェーダーで球体をシェーディングし、リアルタイムで様式化した惑星体を表現します。
 ---
 
 import Link from '@docusaurus/Link';

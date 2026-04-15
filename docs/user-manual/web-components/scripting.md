@@ -1,5 +1,6 @@
 ---
 title: Adding Behavior with Scripts
+description: Attach PlayCanvas Script classes to entities with pc-module and pc-script tags, load ES modules, and wire behaviors into Web Components.
 ---
 
 Scripts add custom behaviors to entities in your PlayCanvas Web Components app.

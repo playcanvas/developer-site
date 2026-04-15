@@ -1,5 +1,6 @@
 ---
 title: Nested Templates
+description: Explains composing templates inside templates and how overrides propagate when you apply changes at different hierarchy levels.
 ---
 
 PlayCanvas also supports Nested Templates. These are Templates that have instances of other Templates as children. For example imagine a Tree Template where each fruit is another Template.

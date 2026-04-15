@@ -1,5 +1,6 @@
 ---
 title: '3D Gaussian Splat Streaming LOD'
+description: Stream huge Gaussian splat scenes with spatial LOD and SOG ordering so large environments load progressively.
 tags: [gaussiansplatting, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1408991/3CA651-image-75.jpg
 ---

@@ -1,5 +1,6 @@
 ---
 title: Communication with web pages
+description: Patterns for letting a parent page script talk to PlayCanvas whether the app runs in an iframe or first-party HTML shell.
 ---
 
 One of the key advantages of using PlayCanvas and WebGL over other plugins or cross-compiled engines is the ability to interact directly between your application and the surrounding webpage. In this page we'll talk about some common ways of interfacing your PlayCanvas application with a web page or web application.

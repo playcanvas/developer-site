@@ -1,5 +1,6 @@
 ---
 title: 用語集
+description: Entity、Component、Asset、Scene、Material、Scriptなど、主要なPlayCanvas用語の定義です。
 ---
 
 以下、PlayCanvas エンジンおよびツールで使用する用語の概要です。

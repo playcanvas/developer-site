@@ -1,5 +1,6 @@
 ---
 title: ヒエラルキーパネル (Hierarchy)
+description: Hierarchy のテクニック。スマート検索、Entity のライフサイクル、親の付け替え、変換の複製、シーンをまたいだ貼り付け、フォルダパスが一致するときの Asset の再マッチングを扱います。
 ---
 
 ![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.png)

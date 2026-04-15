@@ -1,5 +1,6 @@
 ---
 title: 'Right to left language support'
+description: Adapt Element component text and layout scripts for right-to-left languages such as Arabic with correct alignment flow.
 tags: [ui, tutorial, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/764309/A62C41-image-75.jpg
 ---

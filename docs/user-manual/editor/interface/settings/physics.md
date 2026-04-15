@@ -1,5 +1,6 @@
 ---
 title: Physics Settings
+description: Physics settings for installing Ammo from the store controlling global gravity on rigid bodies and understanding why simulation stays off without the library.
 sidebar_label: Physics
 ---
 

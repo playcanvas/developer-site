@@ -1,5 +1,6 @@
 ---
 title: GoNative
+description: Describes using GoNative to generate a native WebView app from your hosted PlayCanvas URL plus plugin integrations.
 ---
 
 [GoNative](https://gonative.io/) is a paid third party service that can take a URL and create a native mobile application that uses a native WebView to run on mobile in a few clicks.

@@ -1,5 +1,6 @@
 ---
 title: 単位
+description: Blender、Maya、または 3DS Max でシーンの単位を設定し、モデルが PlayCanvas 向けに正しいスケールでエクスポートされるようにします。
 ---
 
 PlayCanvasのシーンでは、一般的に1ユニットを1メートルとして扱います。

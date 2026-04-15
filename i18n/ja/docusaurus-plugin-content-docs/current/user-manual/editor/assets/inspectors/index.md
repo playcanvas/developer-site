@@ -1,5 +1,6 @@
 ---
 title: アセットインスペクター
+description: Asset の Inspector パネルのリファレンス。プリロードや除外など共通のヘッダー項目と、各 Asset タイプの Inspector ページへのリンクを含みます。
 ---
 
 [アセットパネル](/user-manual/editor/assets/asset-panel)でアセットを選択すると、そのプロパティがインスペクターに表示されます。各アセットタイプには、独自の設定可能なプロパティがあります。

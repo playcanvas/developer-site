@@ -1,5 +1,6 @@
 ---
 title: テキスト要素
+description: フォント、シンプルなカラーマークアップ、配置、ローカライズされた文字列キーを使ったテキスト要素を設定します。
 ---
 
 `Text Element` は、[フォントアセット](/user-manual/editor/assets/inspectors/font)を使用して文字列を表示するために使われます。

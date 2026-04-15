@@ -1,5 +1,6 @@
 ---
 title: Using Texture Packers
+description: Use third-party texture packers to build atlases compatible with PlayCanvas for fewer loads and batching.
 ---
 
 ## What is texture packing?

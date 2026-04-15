@@ -1,5 +1,6 @@
 ---
 title: Animation (Legacy)
+description: PlayCanvas legacy Animation component (deprecated) assigns animation assets to a model; use the Anim component for state graphs.
 ---
 
 :::warning

@@ -1,5 +1,6 @@
 ---
 title: AR
+description: "PlayCanvasでのWebXR拡張現実: モバイルとHMDのサポート、透過カメラのセットアップ、サードパーティARフレームワーク連携です。"
 ---
 
 PlayCanvasは、WebXR APIを通じて、また人気のあるARフレームワークとの統合を通じて、モバイルおよびHMDデバイス向けの拡張現実（AR）アプリケーションを作成できます。

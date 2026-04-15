@@ -1,5 +1,6 @@
 ---
 title: Hue-Saturation Effect
+description: Legacy hue and saturation script effect controls plus GitHub link for the huesaturation post effect source.
 ---
 
 The hue-saturation effect allows you to modify the hue and saturation of the rendered image.

@@ -1,5 +1,6 @@
 ---
 title: Apps - Get project apps
+description: "List all published apps for a PlayCanvas project via GET projects/:projectId/apps with query parameters and response schema details."
 ---
 
 ## Route URL

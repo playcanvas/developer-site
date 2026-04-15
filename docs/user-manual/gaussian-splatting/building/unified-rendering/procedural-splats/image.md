@@ -1,5 +1,6 @@
 ---
 title: Image to Splats
+description: "GsplatImage script: convert a texture into splats on the XZ plane with one splat per non-transparent pixel for stylized displays (beta)."
 ---
 
 The `GsplatImage` script renders an image as Gaussian splats, with one splat per non-transparent pixel. This creates a unique visual effect where images appear as point-based representations.

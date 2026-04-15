@@ -1,5 +1,6 @@
 ---
 title: Picking
+description: "Use the PlayCanvas Picker with splats in unified and non-unified modes: setup, depth picking, and code examples."
 ---
 
 The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/classes/Picker.html) which can query the object rendered at a specified pixel. The picker works with splats in the same way that it does for meshes.

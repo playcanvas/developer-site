@@ -1,5 +1,6 @@
 ---
 title: Launch Page Settings
+description: Configure browser features like resolution, fill mode, and transparent canvas for the Editor Launch page.
 sidebar_label: Launch Page
 ---
 

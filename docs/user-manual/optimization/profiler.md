@@ -1,5 +1,6 @@
 ---
 title: Profiler
+description: Use the built-in Profiler overlay for frame stats, update and render timings, and the app launch timeline.
 ---
 
 PlayCanvas provides a real-time profiler to assist in diagnosing performance problems.

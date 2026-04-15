@@ -1,5 +1,6 @@
 ---
 title: Template
+description: Template prefab inspector shows an interactive draggable 3D preview of the hierarchy without editable fields beyond standard asset metadata.
 ---
 
 A Template (also called a Prefab) is an asset that contains a piece of an Entity hierarchy. It has a root Entity and can have any number of children. A Template is a reusable Entity that you can instantiate dynamically at runtime or place multiple instances of it in your Scene. When you change the Template asset, all instances of the Template will also change.

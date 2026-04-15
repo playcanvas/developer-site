@@ -1,5 +1,6 @@
 ---
 title: 'Advance loading screen'
+description: Customize the loading screen with project image assets so branding and splash art show while the app initializes.
 tags: [loading, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/458028/1A9054-image-75.jpg
 ---

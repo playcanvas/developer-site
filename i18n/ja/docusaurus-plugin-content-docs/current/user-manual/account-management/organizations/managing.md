@@ -1,5 +1,6 @@
 ---
 title: Organizationの管理
+description: Organizationの権限を設定し、シート割り当てを管理し、オーナーと管理者のロールを扱います。
 ---
 
 ### 権限 (Permissions) {#permissions}

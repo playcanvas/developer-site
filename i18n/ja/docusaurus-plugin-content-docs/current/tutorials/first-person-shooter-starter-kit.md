@@ -2,6 +2,7 @@
 title: 'ファーストパーソンシューター スターターキット'
 tags: [input, camera, tutorial, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/626211/62AB30-image-75.jpg
+description: ジャンプとナビゲーションで一人称操作を拡張し、FPS 風移動プロトタイプの出発点にします。
 ---
 
 import Link from '@docusaurus/Link';

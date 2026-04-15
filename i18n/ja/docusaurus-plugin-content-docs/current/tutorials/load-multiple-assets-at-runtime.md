@@ -2,6 +2,7 @@
 title: '実行時に複数のアセットを読み込む'
 tags: [loading, assets, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439131/AC1AEB-image-75.jpg
+description: Scene 開始前にすべてのファイルをプリロードせず、起動後に PlayCanvas の Asset API で複数の Asset を読み込みます。
 ---
 
 import Link from '@docusaurus/Link';

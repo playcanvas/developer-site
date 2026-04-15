@@ -1,5 +1,6 @@
 ---
 title: PlayCanvas Engine
+description: npmで公開されたオープンソースのJavaScript/TypeScript製3Dエンジンで、完全なTypeScript宣言と包括的なサンプルが付属します。
 ---
 
 PlayCanvas Engine は、PlayCanvasアプリケーションを動かすランタイムフレームワークです。JavaScriptで書かれており、[GitHub](https://github.com/playcanvas/engine)でMITライセンスの下でオープンソース化されています。[NPMレジストリ](https://www.npmjs.com/package/playcanvas)で公開されており、完全なTypeScript宣言が同梱されています。また、包括的な[コード例](https://playcanvas.github.io/)が付属しています。

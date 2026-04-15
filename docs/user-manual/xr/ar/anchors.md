@@ -1,5 +1,6 @@
 ---
 title: Anchors
+description: "WebXR anchors in PlayCanvas: creating stable world-locked points, persistence, hit-test-linked anchors, and session feature flags."
 ---
 
 Anchors provide the ability to create a point in 3D space that can be updated to match an ever-evolving understanding of the real world by the underlying AR system. This allows for the placement of virtual objects in relation to the real world that feel planted in the user's environment.

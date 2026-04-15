@@ -1,5 +1,6 @@
 ---
 title: Supported Formats
+description: Complete list of file formats supported by PlayCanvas for 3D models, textures, audio, fonts, and other asset types.
 ---
 
 PlayCanvas supports a wide variety of file formats for different asset types. This page lists the formats that can be used in your projects.

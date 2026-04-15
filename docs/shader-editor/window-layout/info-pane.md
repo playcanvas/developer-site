@@ -1,5 +1,6 @@
 ---
 title: Info Pane
+description: The Info Pane shows contextual help for whichever Shader Editor user interface element is currently under the mouse cursor.
 sidebar_position: 1
 ---
 

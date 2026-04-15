@@ -1,5 +1,6 @@
 ---
 title: Shader Chunk Migrations
+description: Per-release shader chunk changes, console warnings for overrides, and how to set shaderChunksVersion after updates.
 ---
 
 ## Introduction

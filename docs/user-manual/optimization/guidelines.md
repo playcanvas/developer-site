@@ -1,5 +1,6 @@
 ---
 title: General Guidelines
+description: General tuning tips for scripts, draw calls, batching, shaders, lighting, textures, and post effects.
 ---
 
 Here are some tips and hints on how to achieve good performance in your PlayCanvas app.

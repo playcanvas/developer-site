@@ -1,5 +1,6 @@
 ---
 title: DOM Overlay
+description: "DOM Overlay for monoscopic AR: overlaying HTML and CSS UI on the camera view, root elements, and checking feature support in PlayCanvas."
 ---
 
 When using mono screen displays for AR sessions, you can use regular HTML and CSS for the UI. This API provides the ability to overlay DOM elements over the AR application screen.

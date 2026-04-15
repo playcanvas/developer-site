@@ -2,6 +2,7 @@
 title: 'Draco圧縮GLBの読み込み'
 tags: [rendering, assets, tutorial, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/730372/61CE32-image-75.jpg
+description: 適切なパイプラインで Draco 圧縮の GLB モデルを PlayCanvas で読み込み、メッシュを小さく保ちつつレンダリングを壊しません。
 ---
 
 import Link from '@docusaurus/Link';

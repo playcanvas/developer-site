@@ -1,5 +1,6 @@
 ---
 title: Engine API の使用
+description: "ステップバイステップ：PlayCanvas Engine APIでスプラットを読み込み、ES modules、カメラ操作、最小限のHTMLとJavaScript構成です。"
 ---
 
 [PlayCanvas Engine](/user-manual/engine) を直接使用して、シンプルなGaussian splatアプリケーションをステップバイステップで構築しましょう。回転させることができるインタラクティブな3Dおもちゃの猫のsplatがあるシーンを作成します。

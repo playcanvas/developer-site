@@ -1,5 +1,6 @@
 ---
 title: ブランチ - List branches
+description: "GET projects/:projectId/branchesでPlayCanvasプロジェクトのオープンなブランチを一覧し、認証とレスポンスフィールドの参照を扱います。"
 ---
 
 ## ルートURL

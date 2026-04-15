@@ -1,5 +1,6 @@
 ---
 title: Rendering Settings
+description: Rendering Project Settings controlling sky clustered lights shadows exposure fog mesh sketch overlays and resolution defaults shared with everyone on branch.
 sidebar_label: Rendering
 ---
 

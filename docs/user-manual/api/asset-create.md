@@ -1,5 +1,6 @@
 ---
 title: Assets - Create asset
+description: Create script, HTML, CSS, text, shader, or JSON assets via POST /api/assets with supported types, body fields, and examples.
 ---
 
 ## Route URL

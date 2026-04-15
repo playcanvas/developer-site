@@ -1,5 +1,6 @@
 ---
 title: Anim
+description: PlayCanvas の Anim Component は、anim state graph とアニメーション Asset を接続し、Entity 階層上でスケルタルアニメーションを駆動します。
 ---
 
 Animコンポーネントは、Animstategraphアセットとその必要なアニメーションアセットを1つのエンティティに接続するために使用されます。

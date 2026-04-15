@@ -1,5 +1,6 @@
 ---
 title: Light Cookies
+description: Apply texture or cubemap cookies to spot and omni lights to project masks, grids, and colored glass-style lighting effects.
 tags: [lighting]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/409793/19BDEF-image-75.jpg
 ---

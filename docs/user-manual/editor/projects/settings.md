@@ -1,5 +1,6 @@
 ---
 title: Project Settings
+description: Adjusts branding artwork visibility descriptions domains and other metadata controlling how a project appears and behaves.
 ---
 
 The Project Settings allow you to configure various aspects of your project including basic information, privacy settings, and branding options.

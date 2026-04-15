@@ -1,5 +1,6 @@
 ---
 title: REST API
+description: "PlayCanvas REST API overview: beta status, HTTPS and bearer token auth, endpoint index, and how to call the API from your tools."
 ---
 
 :::warning

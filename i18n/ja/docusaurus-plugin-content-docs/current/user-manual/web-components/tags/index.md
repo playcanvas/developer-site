@@ -1,5 +1,6 @@
 ---
 title: タグリファレンス
+description: PlayCanvas Web Componentのタグをアルファベット順に一覧し、各要素の属性と使い方の詳細ドキュメントへ短い要約でリンクします。
 ---
 
 以下は、PlayCanvas Web Components で利用可能なタグの完全なリストです。

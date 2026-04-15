@@ -1,5 +1,6 @@
 ---
 title: ピッキング
+description: "統合モードと非統合モードのスプラットでPlayCanvas Pickerを使う設定、深度ピッキング、コード例です。"
 ---
 
 PlayCanvas Engine は、指定されたピクセルでレンダリングされたオブジェクトをクエリできる[Picker API](https://api.playcanvas.com/engine/classes/Picker.html)を提供します。ピッカーは、メッシュの場合と同じ方法でスプラットと連携します。

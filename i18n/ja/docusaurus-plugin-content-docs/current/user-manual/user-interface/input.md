@@ -1,5 +1,6 @@
 ---
 title: Input
+description: 要素の入力を有効にし、ElementInputをアプリで初期化し、UIのクリック、ホバー、タッチを処理します。
 ---
 
 ユーザは、Elementコンポーネントの `useInput`フィールドを有効にすることで、[Element](/user-manual/editor/scenes/components/element/)コンポーネントとインタラクトできます。

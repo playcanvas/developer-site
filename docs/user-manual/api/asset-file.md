@@ -1,5 +1,6 @@
 ---
 title: Assets - Get Asset File
+description: Fetch a specific asset file variant by filename for a branch, including URL pattern, authentication, and response handling.
 ---
 
 ## Route URL

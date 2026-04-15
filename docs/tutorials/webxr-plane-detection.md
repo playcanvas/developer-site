@@ -1,5 +1,6 @@
 ---
 title: 'WebXR: Plane Detection'
+description: Subscribe to WebXR plane detection updates to visualize floor and table estimates for anchoring content to real surfaces.
 tags: [camera, ar, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/782753/602922-image-75.jpg
 ---

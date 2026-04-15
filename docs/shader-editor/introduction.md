@@ -1,5 +1,6 @@
 ---
 title: Introduction
+description: "Introduction to Shader Editor: a web-based node graph tool that compiles visual graphs into GPU shader programs for materials and effects."
 sidebar_position: 1
 ---
 

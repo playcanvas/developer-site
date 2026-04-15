@@ -1,5 +1,6 @@
 ---
 title: Optimizing WebXR applications
+description: "Performance guidance for WebXR: frame rate, stereo rendering cost, draw calls, batching, lightmaps, and mobile AR tracking overhead."
 ---
 
 ## Introduction

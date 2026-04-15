@@ -1,5 +1,6 @@
 ---
 title: GSplat
+description: PlayCanvas GSplat component renders a 3D Gaussian splat asset from the entity and chooses which render layers the splat appears on.
 ---
 
 The GSplat Component enables an entity to render a 3D Gaussian Splat.

@@ -1,5 +1,6 @@
 ---
 title: Using WebXR in PlayCanvas
+description: Detect WebXR support, start VR and AR sessions from user input, and configure sessions with the camera component and XrManager.
 ---
 
 ## Support

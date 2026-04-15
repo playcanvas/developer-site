@@ -1,5 +1,6 @@
 ---
 title: User Interface - Progress Bar
+description: Create a fillable progress bar with nested Elements and anchors that animate from empty to full over time.
 tags: [ui]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501979/49D69A-image-75.jpg
 ---

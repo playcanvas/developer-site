@@ -1,5 +1,6 @@
 ---
 title: The PLY Format
+description: "PLY format for 3D Gaussian splats: header layout, vertex properties, binary versus ASCII, and how training tools encode splat fields."
 sidebar_label: PLY
 ---
 

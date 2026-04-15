@@ -1,5 +1,6 @@
 ---
 title: Zappar Integration
+description: "Zappar Universal AR with PlayCanvas: supported browsers, getting started, starter projects, and tracking templates for AR scenes."
 ---
 
 Zappar offers an [Universal AR SDK with PlayCanvas integration](https://zap.works/universal-ar/playcanvas/), including image, face and instant world tracking features. Their SDK supports Chrome for Android and Safari 11.3+ for iOS, reaching billions of users worldwide.

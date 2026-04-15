@@ -1,5 +1,6 @@
 ---
 title: Console Logging
+description: Debug PlayCanvas scripts with console.log, console.warn, console.error, and other browser console methods.
 ---
 
 import Tabs from '@theme/Tabs';

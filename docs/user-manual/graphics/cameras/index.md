@@ -1,5 +1,6 @@
 ---
 title: Cameras
+description: Add cameras, choose orthographic or perspective projection, and configure viewports for split-screen and picture-in-picture.
 ---
 
 Cameras are responsible for rendering a scene to the screen. You need at least one camera in your scene to see anything. When you create a new scene in PlayCanvas, it is automatically populated with a single camera (along with a directional light).

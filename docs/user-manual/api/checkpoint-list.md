@@ -1,5 +1,6 @@
 ---
 title: Checkpoints - List checkpoints
+description: "List checkpoints for a branch newest-first via GET branches/:branchId/checkpoints with pagination notes and example curl calls."
 ---
 
 ## Route URL

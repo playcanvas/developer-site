@@ -1,5 +1,6 @@
 ---
 title: Assets - Delete asset
+description: Permanently delete an asset on a branch via the REST API, with warnings about checkpoints and required branch query parameters.
 ---
 
 ## Route URL

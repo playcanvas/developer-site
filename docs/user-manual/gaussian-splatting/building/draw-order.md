@@ -1,5 +1,6 @@
 ---
 title: Draw Order and Sorting
+description: "How GSplat components sort splats, render multiple components, depth buffer limits, and interaction with unified rendering."
 ---
 
 ## How Gaussians Are Sorted

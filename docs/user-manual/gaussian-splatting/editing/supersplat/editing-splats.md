@@ -1,5 +1,6 @@
 ---
 title: Editing Splats
+description: "SuperSplat edit modes (centers versus rings), selection tools, overlays, and workflows for cleaning and modifying splats."
 ---
 
 ## Edit Modes

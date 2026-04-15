@@ -1,5 +1,6 @@
 ---
 title: Button
+description: PlayCanvas Button component builds UI buttons under Screen and Element with tint or sprite-change transitions and input hit areas.
 ---
 
 The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen](screen.md) and [Element](element.md) Components.

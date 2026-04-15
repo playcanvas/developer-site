@@ -2,6 +2,7 @@
 title: Facebook API
 tags: [facebook]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405897/26D1D2-image-75.jpg"
+description: PlayCanvas で Facebook ログインと Graph API 呼び出しを組み込み、ソーシャル機能や写真連動体験に使います。
 ---
 
 <div className="iframe-container">

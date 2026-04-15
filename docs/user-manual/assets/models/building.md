@@ -1,5 +1,6 @@
 ---
 title: Building Models
+description: Create 3D models for PlayCanvas in Blender, Maya, 3DS Max, or other tools using the recommended GLB format.
 ---
 
 Building art and animations for PlayCanvas can be done using almost any of the many 3D modeling programs available. For example: Blender, SketchUp, Autodesk 3D Studio Max or Autodesk Maya.

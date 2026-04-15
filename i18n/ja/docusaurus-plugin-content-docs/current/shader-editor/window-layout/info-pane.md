@@ -1,6 +1,7 @@
 ---
 title: インフォペイン
 sidebar_position: 1
+description: マウス下の Shader Editor UI 要素に応じたコンテキストヘルプを表示する Info Pane です。
 ---
 
 ![Info Pane](/img/shader-editor/info-pane.png)

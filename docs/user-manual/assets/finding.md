@@ -1,5 +1,6 @@
 ---
 title: Third-party Asset Sites
+description: Free and paid sources for 3D models, textures, sound effects, and music to use in your PlayCanvas projects.
 ---
 
 ## Where can I get 3D models/Sound FX/Music for PlayCanvas?

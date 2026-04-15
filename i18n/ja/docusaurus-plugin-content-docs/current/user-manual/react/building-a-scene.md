@@ -1,5 +1,6 @@
 ---
 title: シーンの構築
+description: "PlayCanvas React でシーンを構築するステップバイステップチュートリアル: アプリシェル、カメラ、ライト、入力、モデル、ステージングをライブ埋め込み例付きで解説します。"
 ---
 
 import { Application, Entity } from '@playcanvas/react';

@@ -1,5 +1,6 @@
 ---
 title: Video Textures
+description: Stream HTML video frames into a dynamic texture each tick and map it onto meshes for in-world screens and animated billboards.
 tags: [video, textures]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405850/WEKRBI-image-75.jpg
 ---

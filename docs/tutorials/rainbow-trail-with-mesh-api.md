@@ -1,5 +1,6 @@
 ---
 title: 'Rainbow Trail with Mesh API'
+description: Build a rainbow ribbon trail by updating mesh vertices and colors with the Mesh API for dynamic GPU-driven geometry.
 tags: [rendering, shaders, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/733569/6226C8-image-75.jpg
 ---

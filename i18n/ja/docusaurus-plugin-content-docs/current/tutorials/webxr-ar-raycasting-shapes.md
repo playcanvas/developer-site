@@ -2,6 +2,7 @@
 title: 'WebXR AR Raycasting Shapes'
 tags: [input, ar, tutorial]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/884783/E2030C-image-75.jpg"
+description: ARセッション中にPlayCanvasのメッシュにレイキャストし、パススルーカメラ表示と並んで仮想シェイプのタップが効くようにします。
 ---
 
 import Link from '@docusaurus/Link';

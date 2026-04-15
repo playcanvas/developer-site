@@ -1,5 +1,6 @@
 ---
 title: Self-hosting for beginners
+description: High-level beginner primer on client, server, and static pieces of web apps so self-hosted PlayCanvas builds make sense.
 ---
 
 This document is aimed at people who are complete beginners to web programming and describes at high level how the different parts of a web application combine to serve PlayCanvas applications, or other web pages to a user's browser.

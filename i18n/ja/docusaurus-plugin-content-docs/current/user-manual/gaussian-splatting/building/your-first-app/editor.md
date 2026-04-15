@@ -1,5 +1,6 @@
 ---
 title: エディターの使用
+description: "ステップバイステップ：PlayCanvas Editorでスプラットシーンを作成し、Assetをインポートして、インタラクティブに軌道回転できるスプラットプロジェクトを公開します。"
 ---
 
 [PlayCanvas Editor](/user-manual/editor) を使って、シンプルな Gaussian splat アプリケーションを段階的に構築しましょう。インタラクティブな3Dの猫のオモチャの Splat を回転させられるシーンを作成します。

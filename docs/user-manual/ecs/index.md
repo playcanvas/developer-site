@@ -1,5 +1,6 @@
 ---
 title: Entity Component System (ECS)
+description: How PlayCanvas uses Entities, Components, and Systems to organize objects and behavior in your application.
 sidebar_label: Entity Component System
 ---
 

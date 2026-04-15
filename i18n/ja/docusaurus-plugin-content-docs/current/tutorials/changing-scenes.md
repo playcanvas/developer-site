@@ -2,6 +2,7 @@
 title: 'シーンの切り替え'
 tags: [loading,scenes,basics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437633/BCF404-image-75.jpg
+description: ドキュメント化された Scene 読み込みフローで、メニューやレベル、ハブのためにランタイムで Scene を読み込み・切り替えます。
 ---
 
 import Link from '@docusaurus/Link';

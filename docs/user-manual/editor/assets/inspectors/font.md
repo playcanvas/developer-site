@@ -1,5 +1,6 @@
 ---
 title: Font
+description: Font assets from TTF and similar formats convert to SDF atlases; configure intensity, character presets, ranges, and regenerate after edits.
 ---
 
 A Font asset contains an image with all the characters of the font that the user chose to include, and data related to how each character should be displayed. Font assets are used to render text using an [Element](/user-manual/editor/scenes/components/element/) component of type Text. To render text, add an Element Component to an Entity set its type to Text and drag and drop the Font asset to the Font slot of the Element Component.

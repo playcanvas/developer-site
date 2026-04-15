@@ -1,5 +1,6 @@
 ---
 title: <pc-module>
+description: "Reference for the pc-module element: load Wasm modules for scripts or plugins and associate them with PlayCanvas script components."
 ---
 
 The `<pc-module>` tag is used to load a WebAssembly module.

@@ -1,5 +1,6 @@
 ---
 title: Screens
+description: Screen space versus world space rendering, resolutions, and scaling for PlayCanvas UI screens.
 ---
 
 The [Screen Component](/user-manual/editor/scenes/components/screen) defines the area that the User Interface is built inside. Its primary responsibility is to determine how the contents of the Screen (child Entities with Element components) are rendered.

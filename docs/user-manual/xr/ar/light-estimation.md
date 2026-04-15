@@ -1,5 +1,6 @@
 ---
 title: Light Estimation
+description: "Real-world light estimation for AR in PlayCanvas: directional and ambient probes, spherical harmonics, and matching virtual shading to the scene."
 ---
 
 In AR, the real world can have complex illumination and various environments. For better immersion and the ability to blend between the real and the virtual world, virtual objects can be shaded and illuminated based on Light Estimation data, such as:

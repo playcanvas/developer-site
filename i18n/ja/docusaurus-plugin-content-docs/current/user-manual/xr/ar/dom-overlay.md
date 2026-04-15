@@ -1,5 +1,6 @@
 ---
 title: DOM Overlay
+description: "単眼AR向けDOM Overlay: カメラ映像上にHTMLとCSSのUIを重ねる、ルート要素、PlayCanvasでの機能サポートの確認です。"
 ---
 
 ARセッションでモノスクリーンディスプレイを使用する場合、UIには通常のHTMLとCSSを使用できます。このAPIは、ARアプリケーション画面上にDOM要素をオーバーレイする機能を提供します。

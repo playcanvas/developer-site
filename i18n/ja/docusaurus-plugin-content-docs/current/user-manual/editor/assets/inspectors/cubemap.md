@@ -1,5 +1,6 @@
 ---
 title: Cubemap
+description: 画像をインポートし、パネルで Asset を作成し、Inspector で各面を割り当てて、スカイボックスと反射用の 6 面 Cubemap Asset を構築します。
 ---
 
 キューブマップ (Cubemap) はTextureアセットの一種で、1つのキューブのそれぞれの面を表す6つのTextureアセットから構成されます。通常は以下の2つの用途があります。

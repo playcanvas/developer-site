@@ -1,5 +1,6 @@
 ---
 title: Text
+description: Text assets store plain strings such as dialogue or config; the inspector displays a read-only content preview with no specialist properties.
 ---
 
 A Text asset is used for storing plain text data. It's versatile and can be used for various purposes such as storing dialogue, configuration data, or any other textual information.

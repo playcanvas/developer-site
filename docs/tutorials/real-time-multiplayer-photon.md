@@ -1,5 +1,6 @@
 ---
 title: Real-time Multiplayer with Photon
+description: Integrate Photon networking for authoritative movement, matchmaking, and room joins from a PlayCanvas HTML5 client.
 tags: [multiplayer, networking]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/926999/90AE0A-image-75.jpg
 ---

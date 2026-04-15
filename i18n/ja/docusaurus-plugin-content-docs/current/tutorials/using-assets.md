@@ -2,6 +2,7 @@
 title: アセットレジストリの使用方法
 tags: [loading, assets, basics]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406036/U2FYM6-image-75.jpg"
+description: レジストリから実行時にAssetを検索、参照、ストリーミングし、すべてのファイルをエディターのプリロードだけに頼りません。
 ---
 
 <div className="iframe-container">

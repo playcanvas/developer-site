@@ -1,5 +1,6 @@
 ---
 title: Material Inspector
+description: The Material Inspector for basic metadata, render states such as blend and cull, and exposed graph parameter values.
 sidebar_position: 3
 ---
 

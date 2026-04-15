@@ -1,6 +1,7 @@
 ---
 title: マテリアルグラフ
 sidebar_position: 1
+description: Material グラフと Material Node。emissive、albedo、normals、specular、alpha、clear coat の入力ポートを含みます。
 ---
 
 マテリアルグラフは、マテリアルの外観を定義し、(現時点では)1つのマテリアルノードを含む必要があります。

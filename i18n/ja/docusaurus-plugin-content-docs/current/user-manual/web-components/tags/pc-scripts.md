@@ -1,5 +1,6 @@
 ---
 title: <pc-scripts>
+description: "pc-scripts要素のリファレンス: 複数のpc-script子をまとめ、共有のScript設定を持つScript Componentのコンテナです。"
 ---
 
 `<pc-scripts>`タグは、スクリプトコンポーネントを定義するために使用されます。

@@ -1,5 +1,6 @@
 ---
 title: Script
+description: PlayCanvas Script component attaches JavaScript or TypeScript scripts to run on an entity for load, update, and custom gameplay logic.
 ---
 
 The Script Component enables an entity to run user-supplied scripts. In this way, the user can write scripts (using JavaScript or TypeScript) that run when the entity is instantiated and updated on a per-frame basis.

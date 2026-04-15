@@ -1,5 +1,6 @@
 ---
 title: Code Editor
+description: Describes opening Monaco-based collaborative editing, file tabs, autocomplete, JSHint linting, shortcuts, and version control hooks.
 ---
 
 The Code Editor is an online real-time collaborative editor that allows you to edit your Script assets and also all the other text based assets like JSON, HTML, CSS etc.

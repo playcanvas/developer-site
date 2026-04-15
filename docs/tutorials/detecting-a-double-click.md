@@ -1,5 +1,6 @@
 ---
 title: 'Detecting a double click'
+description: Detect double-clicks with timing logic and use them to move the camera or trigger actions on desktop browsers.
 tags: [input, mouse, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436526/A98DD2-image-75.jpg
 ---

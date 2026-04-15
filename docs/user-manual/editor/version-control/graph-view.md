@@ -1,5 +1,6 @@
 ---
 title: Graph View
+description: Navigates the expandable checkpoint graph comparing nodes restoring hard resetting and copying metadata from version history.
 ---
 
 ## Overview

@@ -1,5 +1,6 @@
 ---
 title: Shadows
+description: "Enable shadow casting from Gaussian splats onto meshes: API properties, lights, and tuning shadow quality for splat scenes."
 ---
 
 Gaussian Splats can cast shadows onto meshes and other surfaces in your scene.

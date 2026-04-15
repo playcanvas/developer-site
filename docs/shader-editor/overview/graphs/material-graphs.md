@@ -1,5 +1,6 @@
 ---
 title: Material Graphs
+description: Material graphs and the Material Node, including input ports for emissive, albedo, normals, specular, alpha, and clear coat.
 sidebar_position: 1
 ---
 

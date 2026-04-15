@@ -2,6 +2,7 @@
 title: シーンの完全な切り替え
 tags: [loading,scenes]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691996/707412-image-75.jpg"
+description: ドキュメント化された Scene の読み込みフローを使い、ランタイムで Scene ヒエラルキー全体を読み込み差し替え、レベル遷移に使います。
 ---
 
 import Link from '@docusaurus/Link';

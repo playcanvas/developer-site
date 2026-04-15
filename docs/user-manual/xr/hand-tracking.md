@@ -1,5 +1,6 @@
 ---
 title: Hand Tracking
+description: "WebXR hand input in PlayCanvas: XrHand joints and fingers, building hand visuals from joint data, and tracking loss or restoration events."
 ---
 
 If the platform supports [WebXR Hand Input](https://immersive-web.github.io/webxr-hand-input/), then an input source can have associated hand data, which is exposed as an [XrHand](https://api.playcanvas.com/engine/classes/XrHand.html), and its data in the form of [XrFinger](https://api.playcanvas.com/engine/classes/XrFinger.html)s and [XrJoint](https://api.playcanvas.com/engine/classes/XrJoint.html)s for an application developer to use, such as wrist, fingers, joints, tips and events for detecting when hands lose/restore tracking.

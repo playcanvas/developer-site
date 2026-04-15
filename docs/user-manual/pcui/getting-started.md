@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Install PCUI from npm, import components and styles, and set up a minimal project with the library and its React package.
 ---
 
 Before you begin, make sure you have [Node.js](https://nodejs.org/) 18 or later installed.

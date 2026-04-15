@@ -1,5 +1,6 @@
 ---
 title: プロジェクト - Export project
+description: "POST projects/:id/export でプロジェクト全体の ZIP エクスポートジョブを開始し、jobs をポーリングしてダウンロード可能なアーカイブのリンクとインポート時の注意事項を取得します。"
 ---
 
 ## ルートURL

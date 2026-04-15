@@ -1,5 +1,6 @@
 ---
 title: Facebook
+description: Steps through Facebook Canvas app setup for PlayCanvas games including secure canvas URLs and required developer settings.
 ---
 
 [Facebook](https://facebook.com) is an excellent place to publish PlayCanvas games in order to reach an enormous audience. Publishing games from PlayCanvas to Facebook is straightforward.

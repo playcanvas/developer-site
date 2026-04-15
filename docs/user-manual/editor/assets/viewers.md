@@ -1,5 +1,6 @@
 ---
 title: Asset Viewers
+description: Open models and textures in separate viewer tabs to inspect hierarchies, morphs, animations, and texture details with the Model Viewer and Texture Tool.
 ---
 
 Some of the assets have viewer tools that can help inspect them more closely. Assets that can be viewed in these will have the option to 'Open in Viewer' in the inspector and context menu.

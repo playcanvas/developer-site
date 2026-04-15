@@ -1,6 +1,7 @@
 ---
 title: マテリアル
 sidebar_position: 3
+description: マテリアルがマテリアルグラフ、パラメータ、レンダーステートを組み合わせ、1 つの基底グラフから複数のシェーダー派生を作る方法です。
 ---
 
 マテリアルは、マテリアルグラフ、パラメータの値、および[レンダリング状態](/shader-editor/window-layout/inspector-pane/material-inspector)を組み合わせます。

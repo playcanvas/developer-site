@@ -1,5 +1,6 @@
 ---
 title: Input
+description: Enable element input, initialize ElementInput with the app, and handle clicks, hovers, and touch on UI.
 ---
 
 The user can interact with [Element](/user-manual/editor/scenes/components/element/) components, by enabling the `useInput` field on the Element component:

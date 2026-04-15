@@ -1,5 +1,6 @@
 ---
 title: Model (Legacy)
+description: PlayCanvas legacy Model component (deprecated) renders primitives or a single model asset; prefer the Render component for new work.
 ---
 
 :::warning

@@ -1,5 +1,6 @@
 ---
 title: GLSL Specifics
+description: Rules for GLSL attributes, uniforms, varyings, and versioning so PlayCanvas can wire resources and transpile to WGSL.
 ---
 
 GLSL shaders used by the PlayCanvas engine must satisfy certain requirements. These requirements allow the engine to correctly integrate shaders, ensuring they receive the necessary resources such as attributes, uniforms, and varyings. Following these rules also allows us to automatically process the shader for slightly different requirements when transpiling to WGSL for use with WebGPU.

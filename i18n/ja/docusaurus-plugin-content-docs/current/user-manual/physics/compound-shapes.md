@@ -1,5 +1,6 @@
 ---
 title: Compound
+description: 子 Entity のプリミティブなコリジョンシェイプを組み合わせ、動的な rigid body 用の compound コライダーを作ります。
 ---
 
 複合形状 (Compound) とは、複数のプリミティブ形状（[形状のリストはこちら](/user-manual/physics/physics-basics/#rigid-bodies)）から作られたカスタムコリジョン形状です。これにより、カスタムメッシュモデルを使用せずに、より複雑なコリジョン形状を作成できます。

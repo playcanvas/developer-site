@@ -1,5 +1,6 @@
 ---
 title: PlayCanvas Editor
+description: PlayCanvas の Web Editor を紹介します。ライブテスト、共同編集、バージョン管理、ビジュアル編集、Script、Asset のワークフロー、Web またはネイティブへのエクスポートを扱います。
 ---
 
 ## 概要

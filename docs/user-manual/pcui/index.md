@@ -1,5 +1,6 @@
 ---
 title: PCUI
+description: Introduction to PCUI, the PlayCanvas UI framework used by the Editor and tools, and how to adopt it in your own web projects.
 ---
 
 ![PCUI splash](/img/user-manual/pcui/pcui-banner.jpg)

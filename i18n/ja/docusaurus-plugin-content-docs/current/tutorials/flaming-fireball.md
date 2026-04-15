@@ -2,6 +2,7 @@
 title: '炎の火の玉'
 tags: [particles, input, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439385/DECA7B-image-75.jpg
+description: ポインターに追従するパーティクルの火球で、簡単な魔法の投射物と軌跡エフェクトを作ります。
 ---
 
 import Link from '@docusaurus/Link';

@@ -1,5 +1,6 @@
 ---
 title: <pc-model>
+description: "Reference for the pc-model element: load and instance GLB or model assets on an entity with import settings and render integration."
 ---
 
 The `<pc-model>` tag is used to define an entity that instantiates a 3D model from a GLB file.

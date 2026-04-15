@@ -1,5 +1,6 @@
 ---
 title: <pc-sky>
+description: "Reference for the pc-sky element: image-based lighting and skyboxes from cubemap or equirectangular assets for scene backgrounds."
 ---
 
 The `<pc-sky>` tag is used to define a sky component.

@@ -2,6 +2,7 @@
 title: 'Tutorial: Plasma Shader Chunk'
 tags: [shaders, tutorial]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/453304/09CE3A-image-75.jpg"
+description: Shadertoy風のプラズマ効果をマテリアルのシェーダーチャンクに移植し、アニメーションするGLSLがエンジンのライティングで表面色を駆動するようにします。
 ---
 
 import Link from '@docusaurus/Link';

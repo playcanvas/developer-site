@@ -1,5 +1,6 @@
 ---
 title: Splat ファイル形式
+description: 編集とWeb配信向けにPLYとSOGのスプラット形式を比較し、サイズと品質のトレードオフ、代表的な変換ワークフローを説明します。
 ---
 
 PlayCanvasは、3D Gaussian Splatデータ用に2つの形式をサポートしています。

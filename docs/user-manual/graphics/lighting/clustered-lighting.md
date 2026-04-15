@@ -1,5 +1,6 @@
 ---
 title: Clustered Lighting
+description: Clustered lighting stores lights in a grid so many omni and spot lights, shadows, and cookies stay GPU-friendly.
 ---
 
 :::note

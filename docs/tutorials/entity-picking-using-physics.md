@@ -1,5 +1,6 @@
 ---
 title: 'Entity picking using physics'
+description: Cast physics raycasts from the pointer to hit colliders and select entities under the cursor in 3D.
 tags: [input, physics, tutorial, raycast]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/410547/4B3EC7-image-75.jpg
 ---

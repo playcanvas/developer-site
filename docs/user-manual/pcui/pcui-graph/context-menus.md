@@ -1,5 +1,6 @@
 ---
 title: Context Menus
+description: "Context menus in PCUI Graph for canvas, nodes, and edges: defining menu items, actions, and wiring ADD_NODE and related graph actions."
 ---
 
 It is possible to create context menus on your graph which display when right clicking various graph items. There are three types of context menus; background, node and edge. You can define a set of actions which will display in each of these menus and each action item in the menu will fire an action event when selected.

@@ -1,6 +1,7 @@
 ---
 title: テクスチャインスペクター
 sidebar_position: 4
+description: Assets Pane で選択したテクスチャ Asset の名前と設定を行う Texture Inspector です。
 ---
 
 ![Texture Inspector](/img/shader-editor/inspector-pane-texture.png)

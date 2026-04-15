@@ -1,5 +1,6 @@
 ---
 title: はじめに
+description: npm から @playcanvas/pcui-graph をインストールし、PCUI の前提条件と、アプリケーションにグラフを埋め込む初期設定です。
 ---
 
 ## NPMからのインストール

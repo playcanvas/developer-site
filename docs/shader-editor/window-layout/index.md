@@ -1,5 +1,6 @@
 ---
 title: Window Layout
+description: Shader Editor window layout with the main panes for info, nodes, inspector, assets, graph editing, and material preview.
 sidebar_position: 1.2
 ---
 

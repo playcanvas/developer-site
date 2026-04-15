@@ -1,5 +1,6 @@
 ---
 title: Controlling Lights
+description: Toggle lights and adjust color and intensity from scripts for simple runtime lighting changes in your scene.
 tags: [lighting]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405812/9D487A-image-75.jpg
 ---

@@ -1,5 +1,6 @@
 ---
 title: Checkpoints - Get checkpoint
+description: Retrieve a single checkpoint record by id from the REST API for version history inspection or automation workflows.
 ---
 
 ## Route URL

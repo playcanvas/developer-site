@@ -1,5 +1,6 @@
 ---
 title: Launch Page
+description: Launch Page basics with Editor live-link refreshes dual-tab testing tips and loading the same preview URL on phones after signing in or scanning a QR code.
 ---
 
 The Editor's Viewport is where you visually construct your application. From there, you can press the Launch button to open the Launch Page and actually _run_ your application.

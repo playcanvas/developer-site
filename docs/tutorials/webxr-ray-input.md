@@ -1,5 +1,6 @@
 ---
 title: WebXR UI Interaction
+description: Point WebXR laser pointers or gaze at screen-space UI and handle clicks across desktop, mobile, and headset browsers.
 tags: [vr, ar, input, ui]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/460449/314C07-image-75.jpg
 ---

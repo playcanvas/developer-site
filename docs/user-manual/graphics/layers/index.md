@@ -1,5 +1,6 @@
 ---
 title: Layers
+description: Customize render order and visibility with layers, layer composition, opaque and transparent sub-layers, and sort modes.
 ---
 
 ## Layers Overview {#layers-overview}

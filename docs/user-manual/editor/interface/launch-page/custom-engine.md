@@ -1,5 +1,6 @@
 ---
 title: Using a Custom Engine
+description: Custom engine URLs for dev stable historic or forked builds including module versus UMD picks when blending ESM scripts with classic createScript projects.
 ---
 
 By default, when you launch your PlayCanvas app from the Editor, it will use the latest stable build of the engine. Sometimes, there may be a reason why you may want to run your app with a different build of the engine. For example:

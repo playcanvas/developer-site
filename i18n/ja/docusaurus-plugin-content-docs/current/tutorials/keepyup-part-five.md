@@ -2,6 +2,7 @@
 title: シンプルなゲームの作成 - パート5
 tags: [games]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
+description: BGM、ヒットのスティング、パーティクル演出を追加し、タップ、ミス、ゲームフィールを強化します。
 ---
 
 <div className="iframe-container">

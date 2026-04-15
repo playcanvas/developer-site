@@ -1,5 +1,6 @@
 ---
 title: 'Tutorial: Shop User Interface'
+description: Compose a shop screen with layout groups, buttons, sprites, and atlases to list items and purchase affordances cleanly.
 tags: [ui, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/559492/CBFB0A-image-75.jpg
 ---

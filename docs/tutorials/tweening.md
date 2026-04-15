@@ -1,5 +1,6 @@
 ---
 title: Using the Tween library
+description: Animate entity transforms and values over time with the playcanvas-tween helpers and easing curves instead of manual lerps.
 tags: [animation, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/452634/BDFB7E-image-75.jpg
 ---

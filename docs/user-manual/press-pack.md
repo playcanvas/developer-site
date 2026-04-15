@@ -1,5 +1,6 @@
 ---
 title: Press Pack
+description: Download official PlayCanvas logos, promotional images, and videos for use in your marketing materials.
 ---
 
 We offer a press pack for people to use when promoting or advertising PlayCanvas within their materials.

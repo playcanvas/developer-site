@@ -1,5 +1,6 @@
 ---
 title: Updating ammo.js
+description: Migrate from legacy built-in ammo.js to the latest wasm build using Scene Settings import and migration steps.
 ---
 
 ### Introduction

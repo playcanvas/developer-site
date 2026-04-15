@@ -1,5 +1,6 @@
 ---
 title: よくある質問
+description: Component、Script、マテリアル、Light、Cubemap、Entity、プリミティブ、Camera、シェーダーの追加手順や、日常的な PlayCanvas Editor の設定に関する FAQ 形式の解説です。
 ---
 
 

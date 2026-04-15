@@ -1,5 +1,6 @@
 ---
 title: Custom Render Passes
+description: Build custom RenderPass-based post stacks on the camera without CameraFrame for full manual pipeline control.
 ---
 
 The most flexible approach is to implement completely custom render passes that work independently from `CameraFrame`. This gives you full control over the rendering pipeline and allows you to build a custom post-processing stack from scratch.

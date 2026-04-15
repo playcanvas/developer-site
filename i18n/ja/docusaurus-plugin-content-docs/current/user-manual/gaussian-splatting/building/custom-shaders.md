@@ -1,5 +1,6 @@
 ---
 title: カスタムシェーダー
+description: "非統合GSplatレンダリングをgsplatModifyVSシェーダーチャンクでカスタマイズ。APIリファレンス、GLSLとWGSLの例、ライブデモへのリンクです。"
 ---
 
 PlayCanvas Engineは、Gaussian Splats用のカスタムシェーダーをサポートしており、高度な視覚効果を作成し、標準実装を超えたレンダリング動作をカスタマイズできます。

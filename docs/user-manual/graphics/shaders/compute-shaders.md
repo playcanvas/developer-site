@@ -1,5 +1,6 @@
 ---
 title: Compute Shaders
+description: "WebGPU-only compute shaders: device checks, WGSL cshader definitions, bind groups, and general-purpose GPU work."
 ---
 
 Compute shaders are programs that run general-purpose computations on the GPU, independent of the rendering pipeline. Unlike vertex and fragment shaders, compute shaders are not tied to geometry or pixels—they operate on arbitrary data, making them ideal for tasks such as particle simulation, image processing, physics calculations, and procedural content generation.

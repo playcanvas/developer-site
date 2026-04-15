@@ -1,5 +1,6 @@
 ---
 title: Sepia Effect
+description: Legacy sepia script effect amount and GitHub reference for the sepia post-processing camera script.
 ---
 
 The Sepia effect makes the image look like an old photograph.

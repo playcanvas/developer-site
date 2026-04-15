@@ -1,5 +1,6 @@
 ---
 title: PlayCanvas Web Components
+description: "Declarative 3D with custom HTML elements wrapping the PlayCanvas engine: concepts, tag overview, and links to tutorials and reference."
 ---
 
 PlayCanvas Web Components are a powerful set of custom HTML elements that make it incredibly easy to embed interactive 3D content directly into your web pages. Built on modern web standards, these components bridge the gap between traditional web development and 3D graphics, allowing you to create immersive experiences with simple HTML markup.

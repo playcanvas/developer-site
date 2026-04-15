@@ -1,5 +1,6 @@
 ---
 title: Nodes Pane
+description: The Nodes Pane lists built-in shader nodes by category with filters for input, transform, and output node types.
 sidebar_position: 2
 ---
 

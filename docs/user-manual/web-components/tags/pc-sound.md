@@ -1,5 +1,6 @@
 ---
 title: <pc-sound>
+description: "Reference for the pc-sound element: positional or non-positional audio clips, volume, pitch, autoplay rules, and asset references."
 ---
 
 The `<pc-sound>` tag is used to define a sound.
