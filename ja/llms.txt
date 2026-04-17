@@ -6,7 +6,7 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 566
+Total Documents: 567
 Generated: 2026-04-17
 
 ## Recommended Entry Points
@@ -279,6 +279,7 @@ Generated: 2026-04-17
 - https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/ - Advanced Rendering
 - https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/batching/ - Batching
 - https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/hardware-instancing/ - Hardware Instancing
+- https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/html-in-canvas/ - HTML-in-Canvas
 - https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/indirect-drawing/ - Indirect Drawing
 - https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multi-draw/ - Multi-Draw
 - https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multiple-render-targets/ - Multiple Render Targets
