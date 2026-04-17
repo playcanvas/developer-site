@@ -1,5 +1,6 @@
 ---
 title: 'Third Person Controller'
+description: Follow a controllable character with a chase camera while handling input and physics for a basic third-person movement rig.
 tags: [input, camera, physics, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/705595/FA7C28-image-75.jpg
 ---

@@ -1,5 +1,6 @@
 ---
 title: Runtime Lightmaps
+description: Bake HDR lightmaps at runtime, mix baked and dynamic lights, and configure lights for rebaking in your app.
 ---
 
 ![Sponza](/img/user-manual/graphics/lighting/lightmapping/sponza.jpg)

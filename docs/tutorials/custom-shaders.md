@@ -1,5 +1,6 @@
 ---
 title: Custom Shaders
+description: Use ShaderMaterial for dissolve and edge effects with custom shaders that run on both WebGL and WebGPU backends.
 tags: [shaders, materials]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406044/4J2JX2-image-75.jpg
 ---

@@ -1,5 +1,6 @@
 ---
 title: 'World space UI rendering on top'
+description: Layer world-space Element panels so UI quads draw after opaque geometry and stay readable over busy 3D scenes.
 tags: [rendering, ui, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691979/606E3E-image-75.jpg
 ---

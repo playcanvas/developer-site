@@ -1,5 +1,6 @@
 ---
 title: Sprite
+description: PlayCanvas の Sprite Component は、ティント、不透明度、9-slice、バッチング、レイヤー、描画順を備えたシンプルまたはアニメーション付きスプライトアトラスのフレームをレンダリングします。
 ---
 
 Spriteコンポーネントは、[Spriteアセット](/user-manual/editor/assets/inspectors/sprite)をシーンにレンダリングおよびアニメーションさせます。

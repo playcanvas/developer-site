@@ -1,5 +1,6 @@
 ---
 title: Indirect Drawing
+description: WebGPU indirect draw slots, GPU buffer parameters, compute-driven culling, and per-frame slot allocation rules.
 ---
 
 Indirect drawing is a GPU-driven rendering technique where draw call parameters (such as vertex count, instance count, etc.) are stored in GPU buffer memory rather than being specified directly by the CPU. This allows compute shaders to dynamically generate or modify rendering parameters, enabling more efficient GPU-driven rendering workflows.

@@ -1,5 +1,6 @@
 ---
 title: <pc-light>
+description: "Reference for the pc-light element: light types, color, intensity, shadows, and attributes for directional, spot, and omni lights."
 ---
 
 The `<pc-light>` tag is used to define a light component.

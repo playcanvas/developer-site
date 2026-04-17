@@ -1,5 +1,6 @@
 ---
 title: 'WebXR 360 Video'
+description: Play omnidirectional video in a WebXR session so headset users can rotate freely while the clip streams around them.
 tags: [vr, video, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/434444/6E87E1-image-75.jpg
 ---

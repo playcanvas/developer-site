@@ -1,5 +1,6 @@
 ---
 title: GoNative
+description: ホストした PlayCanvas の URL からネイティブ WebView アプリを GoNative で生成する方法とプラグイン統合について説明します。
 ---
 
 [GoNative](https://gonative.io/)は有料のサードパーティーサービスで、URLを取得して、数回のクリックでネイティブWebビューを使用するネイティブモバイルアプリを作成できます。

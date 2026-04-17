@@ -1,5 +1,6 @@
 ---
 title: MiniStats
+description: 開発中に Launch から MiniStats を有効化し、draw call、フレーム時間、CPU または GPU のグラフを表示します。
 ---
 
 MiniStatsは、アプリケーションの主要なパフォーマンス統計情報を軽量なグラフィカルで表示するツールです。ドローコール数、フレームタイム、CPU負荷、および（サポートされている場合は）GPU負荷を表示します。

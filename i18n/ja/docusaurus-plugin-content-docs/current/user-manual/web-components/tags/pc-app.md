@@ -1,5 +1,6 @@
 ---
 title: <pc-app>
+description: "pc-app要素のリファレンス: PlayCanvasのApplicationを初期化し、グラフィックスオプション、およびSceneとEntityのルートコンテナです。"
 ---
 
 `<pc-app>`タグは、PlayCanvas アプリケーションのルート要素です。PlayCanvas アプリケーションを初期化し、シーンのコンテナを提供するために使用されます。

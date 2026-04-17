@@ -1,5 +1,6 @@
 ---
 title: Audio Listener
+description: PlayCanvas Audio Listener component sets the 3D listener position so positional sound from Sound components is heard relative to it.
 ---
 
 The Audio Listener Component specifies the listener's position in 3D space. All 3D audio playback will be relative to this position.

@@ -2,6 +2,7 @@
 title: 'ステートグラフを使わないアニメーション'
 tags: [animation, tutorial, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/841793/1ED6A8-image-75.jpg
+description: Anim State Graph なしで Script からアニメーションクリップを再生・制御する、シンプルな再生とテスト向けの内容です。
 ---
 
 import Link from '@docusaurus/Link';

@@ -1,5 +1,6 @@
 ---
 title: Scripting
+description: Write scripts in JavaScript to add interactivity, handle input, and control game logic in PlayCanvas.
 ---
 
 Scripts are the heart of interactivity in PlayCanvas. They're reusable pieces of code that you attach to Entities to define behaviors, handle user input, manage game logic, and bring your projects to life.

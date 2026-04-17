@@ -1,5 +1,6 @@
 ---
 title: Override Diff View
+description: Uses Override Diff View to inspect template overrides individually apply them to parent templates or revert unwanted changes.
 ---
 
 The Override Diff View shows a detailed list of all the Template Overrides for a Template Instance. In here you can compare the overridden value to the value in the Template Asset and you can select which overrides to apply or revert.

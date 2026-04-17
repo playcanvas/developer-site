@@ -1,5 +1,6 @@
 ---
 title: ランタイムライトマップ
+description: ランタイムで HDR ライトマップをベイクし、ベイクと動的ライトを混在させ、アプリで再ベイク用にライトを設定します。
 ---
 
 ![Sponza](/img/user-manual/graphics/lighting/lightmapping/sponza.jpg)

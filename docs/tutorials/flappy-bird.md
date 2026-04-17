@@ -1,5 +1,6 @@
 ---
 title: 'Flappy Bird'
+description: Recreate Flappy Bird-style tap flight with pipes and scoring as a compact PlayCanvas gameplay sample.
 tags: [games, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/8/375389/23PRTL-image-75.jpg
 ---

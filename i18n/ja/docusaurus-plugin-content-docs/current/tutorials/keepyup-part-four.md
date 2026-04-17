@@ -2,6 +2,7 @@
 title: シンプルなゲームの作成 - パート4
 tags: [games]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
+description: 物理、コリジョン、オーディオのフックを備えたサッカーボールの Entity を深掘りし、コアとなるインタラクティブオブジェクトとします。
 ---
 
 <div className="iframe-container">

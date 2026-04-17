@@ -1,5 +1,6 @@
 ---
 title: スタイリング
+description: グラフコンストラクタの defaultStyles を上書きして PCUI Graph の見た目をカスタマイズ。背景、ノード、canvas のクロームです。
 ---
 
 グラフは、デフォルトのスタイルプロパティを上書きすることでスタイリングできます。これは、graphコンストラクターにoptionsオブジェクトの一部として渡されるdefaultStylesを変更することで実現できます。

@@ -1,5 +1,6 @@
 ---
 title: Nodes
+description: "Common node structure with ports and the three categories in Shader Editor: input nodes, output nodes, and transform nodes."
 sidebar_position: 2
 ---
 

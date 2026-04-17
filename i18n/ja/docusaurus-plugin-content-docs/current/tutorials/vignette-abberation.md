@@ -2,6 +2,7 @@
 title: 'ビネット・収差'
 tags: [tutorial, posteffects]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/440854/0F743E-image-75.jpg
+description: ポストプロセスパスでビネットで画像端を暗くし、色チャンネルを分けることで微妙な色収差を加えます。
 ---
 
 import Link from '@docusaurus/Link';

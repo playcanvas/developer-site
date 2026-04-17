@@ -1,5 +1,6 @@
 ---
 title: More Cameras
+description: Script camera components to change FOV, position, and active camera at runtime for zooming, cuts, and multi-camera setups.
 tags: [basics, camera]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405835/E7331A-image-75.jpg
 ---

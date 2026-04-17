@@ -1,5 +1,6 @@
 ---
 title: Sound
+description: PlayCanvas Sound component plays one or more audio slots with volume, pitch, looping, and optional 3D distance falloff to listeners.
 ---
 
 The Sound Component controls playback of audio samples.

@@ -1,5 +1,6 @@
 ---
 title: Input Settings
+description: Enable or disable keyboard, mouse, touch, and gamepad input handling in your PlayCanvas application.
 sidebar_label: Input
 ---
 

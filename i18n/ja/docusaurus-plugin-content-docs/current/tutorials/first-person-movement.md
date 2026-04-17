@@ -2,6 +2,7 @@
 title: 一人称視点での移動方法
 tags: [input, camera]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405842/JLWRE0-image-75.jpg"
+description: Rigidbody の力、マウスルック、任意の子 Camera リグで一人称移動を実装します。
 ---
 
 <div className="iframe-container">

@@ -1,5 +1,6 @@
 ---
 title: FXAA Effect
+description: Legacy FXAA script for fast full-screen anti-aliasing and where to find the engine posteffect-fxaa implementation.
 ---
 
 Fast Approximate Anti-Aliasing (FXAA) is an anti-aliasing algorithm created by NVIDIA. It provides an easy and fast way to add anti-aliasing to your scene.

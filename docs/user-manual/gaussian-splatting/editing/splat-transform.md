@@ -1,5 +1,6 @@
 ---
 title: SplatTransform
+description: "SplatTransform CLI and library: convert between splat formats, transform and filter data, merge scenes, and generate LOD metadata."
 ---
 
 [SplatTransform](https://github.com/playcanvas/splat-transform) is an open source library and CLI tool for converting and editing Gaussian splats. Whether you need to convert between formats, apply transformations, or analyze splat data, SplatTransform provides the tools developers need for precise control over their Gaussian splat workflows. The library is platform-agnostic and can be used in both Node.js and browser environments.

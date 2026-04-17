@@ -1,6 +1,7 @@
 ---
 title: アセットインポート設定
 sidebar_label: Asset Import
+description: PlayCanvas Editor にインポートする Asset の、既定の上書き動作とテクスチャサイズの上限を設定します。
 ---
 
 インポートされたアセットの既定の挙動を制御します。

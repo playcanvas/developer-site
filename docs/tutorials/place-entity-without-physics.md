@@ -1,5 +1,6 @@
 ---
 title: 'Place entity without physics'
+description: Instantiate decorative entities at clicked ground positions using math and raycasts without adding rigidbody simulation.
 tags: [input, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437894/2D9F7B-image-75.jpg
 ---

@@ -1,5 +1,6 @@
 ---
 title: 開始
+description: npmからPlayCanvas Web Componentsをインストールし、エンジン用のimport mapを設定し、要素を登録して最小のHTML例を埋め込みます。
 ---
 
 始める前に、[Node.js](https://nodejs.org/) 18以降がインストールされていることを確認してください。

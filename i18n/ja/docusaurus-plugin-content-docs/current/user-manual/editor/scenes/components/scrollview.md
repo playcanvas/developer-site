@@ -1,5 +1,6 @@
 ---
 title: Scroll View
+description: PlayCanvas の Scroll View Component は、UI コンテンツ用にマスク付き慣性スクロールのビューポートを作り、任意で横・縦のバーを付けられます。
 ---
 
 Scroll Viewコンポーネントは、ユーザーインターフェース内のスクロール可能な領域を定義します。Scroll Viewは[Scrollbar](scrollbar.md)コンポーネントを介してスクロールできます。

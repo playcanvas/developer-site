@@ -1,5 +1,6 @@
 ---
 title: Graph Editor
+description: The Graph Editor workspace for creating, connecting, moving, and deleting nodes while editing the selected shader graph.
 sidebar_position: 5
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Creating Organizations
+description: Step-by-step guide to creating a new PlayCanvas Organization from the dashboard or your profile.
 ---
 
 There are various ways to create an Organization. Any organizations you are part of will appear next to your name on your profile like so:

@@ -1,5 +1,6 @@
 ---
 title: 力と衝撃
+description: RigidBodyComponent の API で、動的な rigid body に継続的な力と 1 フレームのインパルスを適用します。
 ---
 
 ダイナミックなRigidBodyは力 (Force) や衝撃 (Impulse) に応答して移動します。力は一定の時間内にRigidBodyに加えられるのに対して、衝撃は瞬間的に加えられる力です。

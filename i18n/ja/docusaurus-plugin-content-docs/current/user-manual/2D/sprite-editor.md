@@ -1,5 +1,6 @@
 ---
 title: スプライトエディター
+description: Sprite Editorでアトラスのフレーム、境界、スプライトを定義し、2DとUIのレンダリングに使います。
 ---
 
 スプライトエディターは、Texture AtlasアセットとSpriteアセットの作成、編集に使われます。

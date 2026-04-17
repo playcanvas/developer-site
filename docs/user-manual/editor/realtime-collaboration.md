@@ -1,5 +1,6 @@
 ---
 title: Real-time Collaboration
+description: Collaboration UX for presence avatars, project chat, teammate camera frustums, hierarchy selection markers, and highlighted models picked by other users.
 ---
 
 Real-time collaboration is at the heart of the PlayCanvas Editor. This brings a number of benefits:

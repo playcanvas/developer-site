@@ -1,5 +1,6 @@
 ---
 title: Model (Legacy)
+description: 非推奨のレガシー Model Component はプリミティブまたは単一の model Asset をレンダリングします。新規作業には Render Component を推奨します。
 ---
 
 :::warning
@@ -41,4 +42,4 @@ Modelコンポーネントを使用すると、エンティティにプリミテ
 
 ## マテリアルのカスタマイズ
 
-モデルのマテリアルをカスタマイズする方法については、[こちら](/user-manual/editor/assets/inspectors/material/#assigning-materials)を参照してください。
+モデルのマテリアルをカスタマイズする方法については、[こちら](/user-manual/editor/assets/inspectors/material/)を参照してください。

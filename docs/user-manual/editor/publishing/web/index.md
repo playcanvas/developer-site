@@ -1,5 +1,6 @@
 ---
 title: Web
+description: Compares web publishing options like PlayCanvas hosting, self-hosting, Facebook Canvas, and heyVR distribution.
 ---
 
 PlayCanvas games are actually web pages and as such, are most at home in the browser. When publishing on the web, you have a number of options:

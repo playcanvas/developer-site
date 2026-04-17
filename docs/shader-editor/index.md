@@ -1,5 +1,6 @@
 ---
 title: Shader Editor
+description: The Shader Editor user manual home page with navigation to introduction, overview, and window layout topics.
 sidebar_position: 0.5
 ---
 

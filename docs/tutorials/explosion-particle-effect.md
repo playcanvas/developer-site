@@ -1,5 +1,6 @@
 ---
 title: 'Explosion Particle Effect'
+description: Layer particle emitters with camera shake to sell an explosion impact and debris burst in real time.
 tags: [particles, camera, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439297/80EDE5-image-75.jpg
 ---

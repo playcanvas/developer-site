@@ -1,5 +1,6 @@
 ---
 title: Schema
+description: "Defining a PCUI Graph schema: node and edge types, numeric keys, connection rules, and structuring large graphs maintainably."
 ---
 
 The schema object is used to define what type of graph you will be initializing. More specifically, it defines which nodes your graph can contain and how those nodes can be connected together with edges.

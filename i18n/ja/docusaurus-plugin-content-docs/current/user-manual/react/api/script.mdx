@@ -1,0 +1,73 @@
+---
+description: Script コンポーネントのドキュメント
+---
+
+# `<Script/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { ScriptExample } from './script-example';
+import ScriptExampleSource from '!!raw-loader!./script-example.jsx';
+
+`<Script/>` コンポーネントは [`<Entity/>`](../entity) に動作を追加するシンプルな命令的方法を提供します。
+
+これは [物理](../../guide/physics)、アニメーション、[インタラクティビティ](../../guide/interactivity) など、パフォーマンス上の理由で React の Props 更新をバイパスしたい場合に便利です。React の外でエンジンの更新ループにフックでき、パフォーマンスクリティカルなコードに役立ちます。PlayCanvas Editor プロジェクトの既存の Script も活用できます。
+
+Script についての詳細はエンジンドキュメントの [Script](/user-manual/scripting/) を参照してください。
+
+## 使い方
+
+`Script` コンポーネントは PlayCanvas の [Script](https://api.playcanvas.com/engine/classes/Script.html) クラスを継承するクラスを受け取り、`Entity` にアタッチします。追加の Props は Script クラスに直接渡され、クラスのプロパティとして使用できます。
+
+```tsx
+import { Script } from '@playcanvas/react/components'
+import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs'
+
+return <Script script={CameraControls} />
+```
+
+次の例では、Entity に `SpinMe` Script を追加し、毎フレーム Entity を回転させます。
+
+<CodeExample
+  label="Script component with rotation behavior"
+  code={ScriptExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[3, 3, 3]}
+      useControls={true}
+    >
+      <ScriptExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+既存の Script を使用することも、独自の Script を作成することも、エンジンリポジトリの [既存 Script](https://github.com/playcanvas/engine/tree/main/scripts/esm) を利用することもできます。
+
+:::tip
+PlayCanvas エンジンにはプロジェクトで使用できる便利な Script が多数含まれています。**[こちら](https://github.com/playcanvas/engine/tree/main/scripts/esm)で確認できます**。
+:::
+
+ESM Script の構造については [Script ドキュメント](/user-manual/scripting/esm-scripts) で詳しく学べます。
+
+## プロパティ
+
+```tsx asTypedoc
+import { Script as PcScript } from 'playcanvas'
+type SubclassOf<T> = new (...args: any[]) => T;
+type $ = {
+  /**
+   * The Script class to attach to the entity
+   */
+  script: SubclassOf<PcScript>;
+  /**
+   * Additional props that will be passed to the script instance as attributes
+   */
+  [key: string]: unknown;
+}
+export default $;
+```

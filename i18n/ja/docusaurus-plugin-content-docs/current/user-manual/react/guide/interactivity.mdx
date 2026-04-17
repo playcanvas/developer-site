@@ -1,0 +1,102 @@
+---
+title: インタラクティビティ
+description: "PlayCanvas React における入力とインタラクティビティ：Entity へのポインターイベント、Script、アプリイベント、リアクティブな 3D UI のパターン。"
+---
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample'
+import { Application, Entity } from '@playcanvas/react'
+import { Camera, Light } from '@playcanvas/react/components'
+import { Interactivity as InteractivityExample } from './components/interactivity'
+import InteractivitySource from '!!raw-loader!./components/interactivity.jsx'
+import { Scripting as ScriptingExample } from './components/scripting'
+import ScriptingSource from '!!raw-loader!./components/scripting.jsx'
+import { AppEvents as AppEventsExample } from './components/app-events'
+import AppEventsSource from '!!raw-loader!./components/app-events.jsx'
+
+Scene ができたら、インタラクティブにしたくなるはずです。用途に応じて、いくつかの方法があります。
+
+### ポインターイベント
+
+`Entity` にポインターイベントを付与すると、ユーザー操作に応答できます。リアクティブに入力を扱う簡単な方法です。
+
+:::tip
+
+ポインターイベントはバブルします。親の `Entity` にイベントを付ければ、React ツリーを通じて伝播します。
+
+:::
+
+クリックで色が変わる球体を作ってみましょう。
+
+<CodeExample label="ポインターイベントの使用" filename="interactivity.jsx" code={InteractivitySource} showDemo>
+    <Application>
+        <Staging>
+            <InteractivityExample />
+        </Staging>
+    </Application>
+</CodeExample>
+
+Entity は、DOM の Pointer Events API に近い挙動で、次のポインターイベントをサポートします。
+
+- `onPointerUp`
+- `onPointerDown`
+- `onPointerOver`
+- `onPointerOut`
+- `onClick`
+
+### `Script` コンポーネント
+
+`Script` コンポーネントは、`Entity` に独自の振る舞いを追加する便利な方法です。任意の ESM 形式の PlayCanvas [Script](https://api.playcanvas.com/engine/classes/Script.html) を `Entity` に取り付けられます。インタラクティビティやアニメーション、React のレンダーループ外で行いたい処理に適しています。
+
+ESM 形式の PlayCanvas [Script](https://api.playcanvas.com/engine/classes/Script.html) を `<Script>` コンポーネントの `script` Prop に渡します。
+
+<CodeExample label="Script でキューブを回転" filename="scripting.jsx" code={ScriptingSource} showDemo>
+    <Application>
+        <Staging>
+            <ScriptingExample />
+        </Staging>
+    </Application>
+</CodeExample>
+
+PlayCanvas の Script は `Script` クラスを拡張した ESM モジュールです。既存の Script や自作、エンジンリポジトリの[既存 Script](https://github.com/playcanvas/engine/tree/main/scripts/esm)も利用できます。
+
+:::tip
+
+毎フレームアニメーションさせたい場合は、React ツリーを再レンダリングするより `<Script>` コンポーネントの方が一般的にパフォーマンスに有利です。ただし Script が Entity の Props を上書きすることもあります。
+
+:::
+
+詳しくは[ドキュメントの Script](/user-manual/scripting/)を参照してください。
+
+### Application イベント
+
+より React らしい方法として、`useAppEvent` フックがあります。PlayCanvas のアプリケーションイベントを、適切な TypeScript の型付きで購読できます。組み込みイベントと、コールバックのシグネチャが決まったカスタムイベントの両方に対応します。
+
+次の例では、`useAppEvent` で `update` イベントを購読し、カプセルを回転させます。
+
+<CodeExample label="useAppEvent でカプセルを回転" filename="app-events.jsx" code={AppEventsSource} showDemo>
+    <Application>
+        <Staging>
+            <AppEventsExample />
+        </Staging>
+    </Application>
+</CodeExample>
+
+フックできるアプリケーションイベントは複数あり、それぞれコールバックのシグネチャが決まっています。利用可能なイベントは [Engine の Application API](https://api.playcanvas.com/engine/classes/Application.html) を確認してください。
+
+`app.fire` メソッドで独自のイベントを発火することもできます。
+
+```jsx
+import { useAppEvent } from '@playcanvas/react/hooks'
+
+const MyComponent = () => {
+  useAppEvent('myEvent', (message) => {
+    console.log('My event fired.', message);
+  });
+}
+
+app.fire('myEvent', 'Hello, world!');
+```
+
+## 次のステップ
+
+インタラクティビティについて学んだら、[物理](../physics)と[マテリアル](../materials)へ進んでください。

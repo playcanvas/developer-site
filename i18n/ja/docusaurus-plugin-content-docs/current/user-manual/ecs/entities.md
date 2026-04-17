@@ -1,5 +1,6 @@
 ---
 title: エンティティ
+description: Entity の作成、親子付け、有効化、管理。PlayCanvas Scene の基本的な構成要素です。
 ---
 
 **[Entity](https://api.playcanvas.com/engine/classes/Entity.html)** は、PlayCanvas シーンの基本的な構成要素です。

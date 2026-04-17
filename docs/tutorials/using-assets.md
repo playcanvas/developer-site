@@ -1,5 +1,6 @@
 ---
 title: Using the Asset Registry
+description: Find, reference, and stream assets from the registry at runtime instead of relying solely on editor preloads for every file.
 tags: [loading, assets, basics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406036/U2FYM6-image-75.jpg
 ---

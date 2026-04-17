@@ -2,6 +2,7 @@
 title: シーンの追加読み込み
 tags: [loading,scenes]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/685077/E32FB5-image-75.jpg"
+description: 現在の Scene に別 Scene を加算的に読み込み、ハブやストリーミングレベルをワールド全体の差し替えなしで重ねます。
 ---
 
 import Link from '@docusaurus/Link';

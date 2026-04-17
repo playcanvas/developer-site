@@ -1,5 +1,6 @@
 ---
 title: Image Elements
+description: Display textures or solid colors with tint and opacity, and optional custom materials on image elements.
 ---
 
 The image Element is used to display a texture or a solid color. Image Elements can be used as the basis for other more complex user interface components such as buttons.

@@ -1,5 +1,6 @@
 ---
 title: Sketchfab
+description: Sketchfab アカウントを Editor に接続し、認証して PlayCanvas を離れずに Sketchfab ストアからモデルをインポートします。
 ---
 
 Asset Storeは、3D、VR、ARコンテンツの公開、共有、発見のための人気のオンラインプラットフォームである[Sketchfab](https://sketchfab.com/)と統合されています。この統合により、Editorを離れることなく、何千もの無料の高品質な3Dモデルにアクセスできます。

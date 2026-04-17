@@ -426,6 +426,10 @@ const sidebars = {
         {
           type: 'category',
           label: 'API',
+          link: {
+            type: 'doc',
+            id: 'user-manual/react/api/index',
+          },
           items: [
             'user-manual/react/api/application',
             'user-manual/react/api/entity',
@@ -732,6 +736,7 @@ const sidebars = {
             'user-manual/graphics/advanced-rendering/multi-draw',
             'user-manual/graphics/advanced-rendering/multiple-render-targets',
             'user-manual/graphics/advanced-rendering/indirect-drawing',
+            'user-manual/graphics/advanced-rendering/html-in-canvas',
           ],
         },
       ],

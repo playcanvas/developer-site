@@ -1,5 +1,6 @@
 ---
 title: Audio
+description: Audio asset inspector for browser-supported sound formats with duration metadata and built-in playback controls to audition clips before use.
 ---
 
 Audio assets are sound files which can be played back using the [Sound Component](/user-manual/editor/scenes/components/sound/).

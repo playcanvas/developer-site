@@ -1,5 +1,6 @@
 ---
 title: Creating Splats
+description: "How Gaussian splats are created from photogrammetry: structure-from-motion and iterative training that adds, removes, and adjusts splats."
 ---
 
 Gaussian Splats are 3D scenes that have been reconstructed from photogrammetry. This photogrammetry can be photographs or individual frames extracted from video. It can also be 'synthetic', where images are rendered by 3D packages such as [Blender](https://www.blender.org/), for example.

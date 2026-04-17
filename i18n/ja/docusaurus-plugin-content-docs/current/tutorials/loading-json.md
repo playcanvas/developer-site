@@ -2,6 +2,7 @@
 title: JSONデータの読み込み
 tags: [loading]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405827/G8YF23-image-75.jpg"
+description: バンドルされた Asset またはリモート URL の HTTP から JSON を読み込み、ランタイムで PlayCanvas の Script 内でパースします。
 ---
 
 <div className="iframe-container">

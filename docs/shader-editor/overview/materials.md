@@ -1,5 +1,6 @@
 ---
 title: Materials
+description: How materials combine material graphs, parameters, and render states to create multiple shader variations from one underlying graph.
 sidebar_position: 3
 ---
 

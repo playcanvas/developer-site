@@ -1,5 +1,6 @@
 ---
 title: LOD Streaming
+description: "LOD streaming for large splat scenes: octree layout, generating lod-meta data, examples, and beta performance guidance."
 ---
 
 LOD (Level of Detail) Streaming enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail based on the camera's distance. This feature dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.

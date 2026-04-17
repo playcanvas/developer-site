@@ -1,5 +1,6 @@
 ---
 title: アプリ - Get primary app
+description: プロジェクトIDでプライマリの公開アプリのメタデータをGETし、PlayCanvas REST APIでベアラー認証を使います。
 ---
 
 ## ルートURL

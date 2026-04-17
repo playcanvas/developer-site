@@ -1,5 +1,6 @@
 ---
 title: Gaussian Splatting
+description: "Overview of 3D Gaussian Splatting in PlayCanvas: capture, viewing, editing, and building web apps with photorealistic splat scenes."
 ---
 
 3D Gaussian Splatting is a revolutionary technique for capturing, representing, and rendering photorealistic 3D scenes. Unlike traditional polygonal meshes, Gaussian Splatting uses millions of small, semi-transparent elliptical splats to reconstruct detailed environments with exceptional visual fidelity.

@@ -1,5 +1,6 @@
 ---
 title: XR のサポート
+description: "Web Components向けのWebXRセットアップ: XR ScriptをAssetとして読み込み、カメラを設定し、セッションUIを追加し、HTTPSまたはlocalhostでページを配信します。"
 ---
 
 PlayCanvas Web Components を使用すると、アプリケーションに Virtual Reality (VR) および Augmented Reality (AR) のサポートを簡単に追加できます。

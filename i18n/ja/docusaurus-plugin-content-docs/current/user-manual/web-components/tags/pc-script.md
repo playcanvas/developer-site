@@ -1,5 +1,6 @@
 ---
 title: <pc-script>
+description: "pc-script要素のリファレンス: 単一のScript AssetまたはクラスをEntityにアタッチし、順序とHTMLでの属性の接続を扱います。"
 ---
 
 `<pc-script>`タグはスクリプトを定義するために使用されます。

@@ -1,5 +1,6 @@
 ---
 title: Workflow
+description: End-to-end workflow from creating materials in Shader Editor to exporting Shader Packs and using them in a runtime application.
 sidebar_position: 6
 ---
 

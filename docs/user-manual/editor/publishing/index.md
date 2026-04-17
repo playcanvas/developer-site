@@ -1,5 +1,6 @@
 ---
 title: Publishing
+description: Maps PlayCanvas publishing paths across web browsers, mobile wrappers, desktop packaging, and playable ad networks.
 ---
 
 Once you have built your game, you will no doubt want to publish it and allow people to enjoy its majesty! PlayCanvas makes things very easy for you to target just about any operating system or app store.

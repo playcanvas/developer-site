@@ -1,5 +1,6 @@
 ---
 title: PlayCanvasホスティング
+description: playcanvas.com へのビルド公開、プライマリビルドの選択、ミニファイやソースマップなどのビルドオプション設定を説明します。
 ---
 
 あなたのゲームを公開する最も速くて簡単な方法は、playcanvas.comに公開することです。

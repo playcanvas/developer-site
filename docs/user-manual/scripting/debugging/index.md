@@ -1,5 +1,6 @@
 ---
 title: Debugging
+description: Tools and techniques for finding and fixing bugs in your PlayCanvas scripts using browser developer tools.
 ---
 
 Debugging is essential for identifying and fixing issues in your PlayCanvas scripts. When your code doesn't behave as expected, these tools and techniques will help you quickly find and resolve problems.

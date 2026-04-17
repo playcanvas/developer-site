@@ -1,5 +1,6 @@
 ---
 title: Managing Organizations
+description: Configure Organization permissions, manage seat allocation, and handle owner and administrator roles.
 ---
 
 ### Permissions {#permissions}

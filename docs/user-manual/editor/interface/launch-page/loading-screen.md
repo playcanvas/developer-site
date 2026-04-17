@@ -1,5 +1,6 @@
 ---
 title: Loading Screen
+description: Loading screen customization via generated or selected scripts that render DOM UI through application start including how to hide overlays once boot completes.
 ---
 
 All newly created PlayCanvas projects use the default loading screen:

@@ -1,5 +1,6 @@
 ---
 title: Basic Mouse Input
+description: Use the Mouse API to read movement, button presses, and consistent screen coordinates across browsers for interactive controls.
 tags: [mouse, input]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405819/2DF062-image-75.jpg
 ---

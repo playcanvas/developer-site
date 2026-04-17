@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting
+description: Fix Editor versus Launcher brightness gaps under Engine V1 or V2 by reconciling gamma tone mapping on scene viewport and cameras plus sRGB texture audits.
 ---
 
 This is a list compiled of all the most commonly asked questions and answers for the Editor powered by Engine V2 for projects running Engine V1 or V2.

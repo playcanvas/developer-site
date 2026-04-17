@@ -1,5 +1,6 @@
 ---
 title: Events
+description: "PCUI Graph event API: subscribing with on(), node and edge lifecycle events, and handling graph edits from user interaction."
 ---
 
 After creating a graph, you can register a callback for various events. This is achieved using the graph's [on function](https://api.playcanvas.com/pcui-graph/classes/Graph.html#on). The following events are supported:

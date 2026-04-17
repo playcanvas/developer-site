@@ -1,5 +1,6 @@
 ---
 title: Customizing the Compose Shader
+description: Override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass.
 ---
 
 The simplest way to add custom post-effects is by customizing the final compose pass, where all effects are combined and rendered to the backbuffer. This approach is ideal when you don't need additional render passes and want to modify the final output.

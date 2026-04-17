@@ -1,5 +1,6 @@
 ---
 title: Checkpoints - Create checkpoint
+description: Capture the current branch state with POST /api/checkpoints for later restore, including description field and example request body.
 ---
 
 ## Route URL

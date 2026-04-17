@@ -1,5 +1,6 @@
 ---
 title: Layout Group
+description: PlayCanvas の Layout Group Component は、パディング、間隔、折り返し付きの水平または垂直レイアウトで子の Element Entity を自動配置します。
 ---
 
 LayoutGroupコンポーネントは、エンティティが子Elementコンポーネントのサイズと位置を指定できるようにします。

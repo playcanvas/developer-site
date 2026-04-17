@@ -1,0 +1,142 @@
+---
+description: Modify ヘルパーのドキュメント
+---
+
+# `<Modify.*>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { GltfModifyExample } from './gltf-modify-example';
+import GltfModifyExampleSource from '!!raw-loader!./gltf-modify-example.jsx';
+
+`<Modify>` は GLB 内の Entity と Component を編集するための宣言的ルールを提供します。[`<Gltf/>`](../gltf) の中に `<Modify.Node>` 要素を配置してインポートされた階層の一部にマッチさせ、ヘルパーサブコンポーネントを使用して見つかったものを調整します。
+
+このシステムでは以下のことができます:
+
+- ファイルシステムライクなパスまたは述語関数を使用して Entity をマッチさせる
+- 既存の Light、Render、Camera Component に新しい Props をマージする
+- Component を削除したり、Entity の子を完全に置き換える
+- ルール内にインラインで新しい子 Entity を追加する
+
+これらのプリミティブを使った実践的なシナリオについては [GLB モデルの変更ガイド](../../guide/modifying-glb-models) で解説しています。
+
+## `<Modify.Node>`
+
+`<Modify.Node>` はルールの適用先を定義します。`path` Prop を使用して、名前、Component フィルタ、ワイルドカード（`*` と `**`）、または述語関数で Entity をターゲットにします。
+
+```tsx copy
+<Gltf asset={asset} key={asset.id}>
+  <Modify.Node path="Interior.**[light]">
+    <Modify.Light intensity={(current = 1) => current * 0.5} />
+  </Modify.Node>
+</Gltf>
+```
+
+`clearChildren` を設定すると、独自の子を追加する前にクリーンな状態から開始します:
+
+```tsx copy
+<Modify.Node path="Accessories" clearChildren>
+  <Entity name="Spoiler">
+    <Render type="torus" />
+  </Entity>
+</Modify.Node>
+```
+
+`<Modify.Node>` 内にネストした `Modify.*` 以外の要素は、各マッチの子としてクローンされ追加されます。
+
+### パスヘルパー
+
+- `Body.FrontBumper` — 完全一致。
+- `Body.*` — 直接の子。
+- `Body.**` — `Body` 配下の任意の深さ。
+- `**[render]` — Render Component を持つ任意の Entity。
+- `(entity) => entity.name.startsWith('Wheel')` — 述語関数。
+
+## Component 修飾子
+
+ノードルール内で修飾子ヘルパーを使用して既存の Component を変更できます。各ヘルパーは直接値、アップデータ関数、`remove` フラグをサポートしています。
+
+```tsx copy
+<Modify.Node path="**[light]">
+  <Modify.Light color="cyan" intensity={2} />
+</Modify.Node>
+
+<Modify.Node path="**[render]">
+  <Modify.Render
+    castShadows={(value = false) => !value}
+    receiveShadows
+  />
+</Modify.Node>
+
+<Modify.Node path="Cabin.Camera">
+  <Modify.Camera remove />
+</Modify.Node>
+```
+
+マッチするすべての Entity が評価されますが、複数のルールが同じ Component を対象とする場合、最も具体的なパスが優先されます。
+
+### 関数による更新
+
+現在の値に基づいて Props をマージするために関数を渡します:
+
+```tsx copy
+<Modify.Light intensity={(current = 1) => current * 1.5} />
+```
+
+GLB に含まれる値に対して相対的に値を調整したい場合にこのパターンを使用します。
+
+## ライブ例
+
+以下のインタラクティブデモは `<Gltf/>` と `<Modify.Node>` を組み合わせてレンダリング動作を制御します。チェックボックスを切り替えて Component ルールの効果を確認してください。`Render visuals` を無効にして、データのみモードでもルールが実行されることを確認してみてください。
+
+<CodeExample
+  label="Modify render components inside a GLB"
+  filename="gltf-modify-example.jsx"
+  code={GltfModifyExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useGrid
+      useShadow
+      camera={[2, 1, 2]}
+      exposure={3}
+    >
+      <GltfModifyExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## プロパティ
+
+### `<Modify.Node/>`
+
+```tsx asTypedoc
+import { Modify } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Modify.Node>;
+export default $;
+```
+
+### `<Modify.Light/>`
+
+```tsx asTypedoc
+import { Modify } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Modify.Light>;
+export default $;
+```
+
+### `<Modify.Render/>`
+
+```tsx asTypedoc
+import { Modify } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Modify.Render>;
+export default $;
+```
+
+### `<Modify.Camera/>`
+
+```tsx asTypedoc
+import { Modify } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Modify.Camera>;
+export default $;
+```

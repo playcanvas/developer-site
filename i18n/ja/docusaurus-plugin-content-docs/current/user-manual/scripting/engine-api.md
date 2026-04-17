@@ -1,5 +1,6 @@
 ---
 title: Engine APIの呼び出し
+description: Script で Entity、transform、入力、Asset、物理を扱うための PlayCanvas Engine の主要なクラスとパターンです。
 ---
 
 PlayCanvasスクリプトを記述する際、[PlayCanvas Engine API](https://api.playcanvas.com/engine/)を操作することになります。このページでは、スクリプトで最も頻繁に使用する重要なクラスとパターンについて説明します。

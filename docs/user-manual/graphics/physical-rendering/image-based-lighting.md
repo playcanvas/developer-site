@@ -1,5 +1,6 @@
 ---
 title: Image Based Lighting
+description: Image-based lighting with HDR cubemaps, prefiltering for roughness, and authoring environment maps for realistic PBR.
 ---
 
 To get best results with Physically Based Rendering in PlayCanvas you can use the technique called Image Based Lighting or IBL, it allows you to use pre-rendered image data as source information for ambient and reflection light.

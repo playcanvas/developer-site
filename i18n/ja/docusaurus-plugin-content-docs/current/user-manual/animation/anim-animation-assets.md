@@ -1,5 +1,6 @@
 ---
 title: Animationアセット 
+description: FBX変換によるキーフレームアニメーションアセットと、animコンポーネント経由でanimstategraphにどうリンクするかです。
 ---
 
 ![Animation Assets](/img/user-manual/animation/animation-assets.png)

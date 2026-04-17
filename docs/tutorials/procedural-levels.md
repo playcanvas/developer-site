@@ -1,5 +1,6 @@
 ---
 title: Procedural Levels
+description: Clone editor-authored tile entities onto a grid with random selection to assemble simple procedural levels at runtime.
 tags: [procedural]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405864/A3MSWE-image-75.jpg
 ---

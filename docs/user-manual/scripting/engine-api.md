@@ -1,5 +1,6 @@
 ---
 title: Calling the Engine API
+description: Essential PlayCanvas Engine classes and patterns for working with entities, transforms, input, assets, and physics in scripts.
 ---
 
 When writing PlayCanvas scripts, you're working with the [PlayCanvas Engine API](https://api.playcanvas.com/engine/). This page covers the essential classes and patterns you'll use most often in your scripts.

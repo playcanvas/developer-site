@@ -1,5 +1,6 @@
 ---
 title: Asset Import Settings
+description: Configure default overwrite behavior and texture size limits for assets imported into the PlayCanvas Editor.
 sidebar_label: Asset Import
 ---
 

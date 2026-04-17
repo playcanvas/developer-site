@@ -1,5 +1,6 @@
 ---
 title: Project Dashboard
+description: Tour of the project dashboard actions for editor launch dev log watch settings access and team hooks from the overview UI.
 ---
 
 The Project Dashboard is the control center for your project, providing access to all major project functions and information.

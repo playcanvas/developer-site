@@ -1,5 +1,6 @@
 ---
 title: Asset Inspectors
+description: Reference for asset Inspector panels including shared header fields like preload and exclude plus links to each asset type inspector page.
 ---
 
 When you select an asset in the [Assets Panel](/user-manual/editor/assets/asset-panel), its properties are displayed in the Inspector. Each asset type has its own set of configurable properties.

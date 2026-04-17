@@ -1,5 +1,6 @@
 ---
 title: Graphs
+description: What shader graphs are, how nodes and edges compile to programs, and the two graph types with links to deeper documentation.
 sidebar_position: 1
 ---
 

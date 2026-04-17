@@ -1,5 +1,6 @@
 ---
 title: User Home
+description: Your PlayCanvas User Home page displays your profile, projects, and public activity.
 ---
 
 Once you have created your user account, you can visit your User Home page. The URL for this page will be of the form:

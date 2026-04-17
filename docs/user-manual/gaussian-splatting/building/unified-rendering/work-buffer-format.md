@@ -1,5 +1,6 @@
 ---
 title: Work Buffer Format
+description: "Work buffer format in unified rendering: copy stage customization, streams, and how data flows from resources into the work buffer (beta)."
 ---
 
 The work buffer format defines the data streams available in the work buffer and how splat data is copied from resources. You can customize the copy operation to transform splats and write additional per-component data.

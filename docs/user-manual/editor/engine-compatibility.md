@@ -1,5 +1,6 @@
 ---
 title: Engine Compatibility
+description: Engine V1 versus V2 coverage, switching with checkpoints, launcher toggles, and gamma tonemap viewport plus sRGB texture migration notes for scripts.
 ---
 
 ## Introduction

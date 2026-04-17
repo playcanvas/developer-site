@@ -1,5 +1,6 @@
 ---
 title: Platforms
+description: WebXR hardware and browser requirements with a tested platform matrix for VR, AR, and capabilities on Quest, mobile, PCVR, and Vision Pro.
 ---
 
 WebXR has specific hardware and software requirements. It utilizes device features such as camera sensors, gyroscope, accelerometer, CPU/GPU, CV techniques, as well as OS-level and browser support.

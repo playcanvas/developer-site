@@ -2,6 +2,7 @@
 title: アニメーションステートグラフのブレンディング
 tags: [animation,basics]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405874/A8B1FE-image-75.jpg"
+description: Anim State Graph でアニメーションクリップをブレンドし、idle、walk、punch などのサイクルを滑らかに遷移させます。
 ---
 
 <div className='iframe-container'>

@@ -1,5 +1,6 @@
 ---
 title: ESM Scripts
+description: Write PlayCanvas scripts using modern ES Module syntax with static imports, classes, and improved tooling support.
 ---
 
 ESM Scripts use modern ES Module syntax and provide the recommended way to write PlayCanvas scripts. They offer better code organization, static imports, improved bundling, and a more familiar development experience for modern JavaScript developers.

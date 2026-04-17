@@ -1,5 +1,6 @@
 ---
 title: Projects
+description: Maps project administration topics from creation through dashboard settings teamwork dev logs exports and ownership transfers.
 ---
 
 ## Overview

@@ -1,5 +1,6 @@
 ---
 title: Basic Cameras
+description: Add camera entities so your scene renders to the screen and learn the minimum editor setup for a visible view.
 tags: [camera,basics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/KM6GIE-image-75.jpg
 ---

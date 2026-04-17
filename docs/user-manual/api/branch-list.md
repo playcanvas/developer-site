@@ -1,5 +1,6 @@
 ---
 title: Branches - List branches
+description: "List open branches for a PlayCanvas project via GET projects/:projectId/branches with authentication and response field reference."
 ---
 
 ## Route URL

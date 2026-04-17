@@ -1,0 +1,149 @@
+---
+description: PlayCanvas のマテリアルを作成・管理する
+---
+
+# `useMaterial`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application, Entity } from '@playcanvas/react';
+import { Render } from '@playcanvas/react/components';
+import { useMaterial } from '@playcanvas/react/hooks';
+import MaterialExampleSource from '!!raw-loader!./material-example.jsx';
+import { MaterialExample } from './material-example.jsx';
+
+`useMaterial` フックは、PlayCanvas の [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) インスタンスを作成・管理できます。フックでマテリアルを作成し、[`<Render/>`](../../render) コンポーネントに適用します。
+
+## 使い方
+
+フックでマテリアルを作成し、[`<Render/>`](../../render) に適用し、マテリアルのプロパティを動的に更新できます。
+
+<CodeExample
+  label="マテリアルのプロパティを動的に設定"
+  filename="material-example.jsx"
+  code={MaterialExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[3, 1, 3]}
+      useControls={true}
+    >
+      <MaterialExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## パラメータ
+
+フックは、[`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) クラスのプロパティに近い形のオブジェクトを受け取ります。
+
+<details>
+  <summary><b>パラメータ</b></summary>
+  <p>
+  ```tsx asTypedoc
+  import { useMaterial } from '@playcanvas/react/hooks'
+  type $ = Parameters<typeof useMaterial>[0];
+  export default $;
+  ```
+  </p>
+</details>
+
+## 戻り値
+
+フックは [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) インスタンスを返します。[`Render`](../../render) コンポーネントに適用できます。
+
+```tsx asTypedoc
+import { StandardMaterial } from 'playcanvas'
+
+/**
+ * The PlayCanvas StandardMaterial instance
+ */
+export default StandardMaterial;
+```
+
+## さらなる例
+
+### 高度なプロパティ
+
+`StandardMaterial` は多くのプロパティを受け付けます。一覧は[こちら](https://api.playcanvas.com/engine/classes/StandardMaterial.html)です。
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function AdvancedMaterial() {
+  const material = useMaterial({
+    diffuse: 'purple',
+    opacity: 0.9,
+    metalness: 0.3,
+    roughness: 0.4,
+    emissive: 'yellow',
+    emissiveIntensity: 0.2,
+    specular: 'white',
+    shininess: 50,
+    reflectivity: 0.8,
+    clearCoat: 0.5,
+    clearCoatRoughness: 0.1
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+### テクスチャ付きマテリアル
+
+[`useTexture`](../use-asset#usetexture) フックでテクスチャを読み込み、マテリアルと組み合わせられます。
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+import { useTexture } from '@playcanvas/react/hooks'
+
+function TexturedMaterialExample() {
+  const { asset: diffuseMap } = useTexture('diffuse.jpg')
+  const { asset: normalMap } = useTexture('normal.jpg')
+  const { asset: roughnessMap } = useTexture('roughness.jpg')
+  
+  const material = useMaterial({
+    diffuseMap: diffuseMap?.resource,
+    normalMap: normalMap?.resource,
+    roughnessMap: roughnessMap?.resource,
+    diffuse: 'white',
+    metalness: 0.5,
+    roughness: 0.5
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+### マテリアルの共有
+
+複数の render コンポーネント間でマテリアルを簡単に共有できます。
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function SharedMaterial() {
+  const material = useMaterial({
+    diffuse: 'orange',
+    metalness: 0.7,
+    roughness: 0.3
+  })
+  
+  return (
+    <div>
+      <Render type="box" material={material} />
+      <Render type="sphere" material={material} />
+      <Render type="cylinder" material={material} />
+    </div>
+  )
+}
+```
+
+## 関連
+
+- [useTexture](../use-asset#usetexture) — テクスチャ Asset の読み込み
+- [Render コンポーネント](../../render) — render コンポーネントでマテリアルを使う
+- [StandardMaterial API](https://api.playcanvas.com/engine/classes/StandardMaterial.html) — PlayCanvas のマテリアルドキュメント

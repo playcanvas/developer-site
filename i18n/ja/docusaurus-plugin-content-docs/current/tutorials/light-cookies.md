@@ -2,6 +2,7 @@
 title: ライトクッキーの設定
 tags: [lighting]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/409793/19BDEF-image-75.jpg"
+description: spot と omni ライトにテクスチャまたは cubemap の cookie を適用し、マスク、グリッド、色付きガラス風のライティング効果を投影します。
 ---
 
 <div className="iframe-container">

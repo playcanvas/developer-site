@@ -1,5 +1,6 @@
 ---
 title: PlayCanvas用の3Dモデル作成
+description: 推奨の GLB 形式を用いて、Blender、Maya、3DS Max などのツールで PlayCanvas 向けの 3D モデルを作成します。
 ---
 
 PlayCanvasではアートやアニメーションの構築は、ほとんど全ての利用可能な3Dモデリングプログラムを使用して行うことができます。例：Blender、SketchUp、Autodesk 3D Studio Max、Autodesk Maya。

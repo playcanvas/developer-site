@@ -1,5 +1,6 @@
 ---
 title: Assets - Update asset
+description: "Update text-based asset file contents with PUT /api/assets/:id for supported script, HTML, CSS, JSON, shader, and text types."
 ---
 
 ## Route URL

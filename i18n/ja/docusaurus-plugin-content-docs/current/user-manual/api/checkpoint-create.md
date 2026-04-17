@@ -1,5 +1,6 @@
 ---
 title: チェックポイント - Create checkpoint
+description: POST /api/checkpointsで現在のブランチ状態を後から復元できるよう記録し、descriptionフィールドとリクエストボディの例を含みます。
 ---
 
 ## ルートURL

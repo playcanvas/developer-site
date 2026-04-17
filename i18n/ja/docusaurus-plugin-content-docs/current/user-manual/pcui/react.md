@@ -1,5 +1,6 @@
 ---
 title: React
+description: "PCUI の React ラッパーの使い方：@playcanvas/pcui/react からのインポート、スタイルのバンドル、JSX アプリでの Component のレンダリング。"
 ---
 
 PCUIコンポーネントはReactアプリケーションで直接使用できます。Reactパッケージからコンポーネントをインポートし、`.jsx`ファイルで次のように使用します。

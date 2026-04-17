@@ -1,5 +1,6 @@
 ---
 title: Editor API
+description: Beta Editor API examples using DevTools or Violentmonkey scripts to automate entities and extend UI atop the evolving open-source editor-api repository.
 ---
 
 :::warning

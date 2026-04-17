@@ -1,5 +1,6 @@
 ---
 title: 'WebXR AR Raycasting Shapes'
+description: Raycast against PlayCanvas meshes during an AR session so taps on virtual shapes work alongside the passthrough camera view.
 tags: [input, ar, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/884783/E2030C-image-75.jpg
 ---

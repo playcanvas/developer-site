@@ -1,5 +1,6 @@
 ---
 title: <pc-script>
+description: "Reference for the pc-script element: attach a single script asset or class to an entity with ordering and attribute wiring in HTML."
 ---
 
 The `<pc-script>` tag is used to define a script.

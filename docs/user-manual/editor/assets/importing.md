@@ -1,5 +1,6 @@
 ---
 title: Uploading and Importing
+description: Upload assets via drag and drop in the Editor, replace files by matching filename, and migrate older JSON model output to GLB in project settings.
 ---
 
 ## Creating New Assets

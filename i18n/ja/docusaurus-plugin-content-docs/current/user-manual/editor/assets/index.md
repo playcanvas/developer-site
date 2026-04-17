@@ -1,5 +1,6 @@
 ---
 title: アセット
+description: PlayCanvas Editor の Asset 管理の概要。Assets パネル、アップロード、インポートパイプライン、Inspector、Asset Store、専用ビューアを扱います。
 ---
 
 PlayCanvas エディタは、プロジェクト用の完全なアセット管理システムを提供します。このセクションでは、エディタでのアセットの操作方法（インポート、整理、設定など）について説明します。

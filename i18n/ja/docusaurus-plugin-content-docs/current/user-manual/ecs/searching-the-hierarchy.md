@@ -1,5 +1,6 @@
 ---
 title: 階層の検索
+description: PlayCanvas の階層検索 API で、名前、タグ、パス、またはカスタムコールバックにより実行時に Entity を検索します。
 ---
 
 ## 名前で検索

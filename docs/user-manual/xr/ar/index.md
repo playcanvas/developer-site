@@ -1,5 +1,6 @@
 ---
 title: AR
+description: "Augmented reality with WebXR in PlayCanvas: mobile and HMD support, transparent camera setup, and third-party AR framework integrations."
 ---
 
 PlayCanvas lets you create Augmented Reality (AR) applications for mobile and HMD devices through the WebXR API, as well as through integrations with popular AR frameworks.

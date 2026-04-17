@@ -2,6 +2,7 @@
 title: 'Tutorial: Layout Groups'
 tags: [ui, tutorial]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/553515/D4C290-image-75.jpg"
+description: Layout Group と子のレイアウトルールでボタンとパネルを配置し、レスポンシブな PlayCanvas の UI フローを構築します。
 ---
 
 import Link from '@docusaurus/Link';

@@ -1,5 +1,6 @@
 ---
 title: 'Rotating Objects with Mouse'
+description: Orbit or spin an object by mapping mouse drag deltas in screen space to rotation quaternions or euler angles each frame.
 tags: [touch, input, mouse, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/442490/AD8ABB-image-75.jpg
 ---

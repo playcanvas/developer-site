@@ -1,5 +1,6 @@
 ---
 title: <pc-particles>
+description: "Reference for the pc-particles element: configure particle emitters, textures, blending, and simulation parameters in markup."
 ---
 
 The `<pc-particles>` tag is used to define a particle system.

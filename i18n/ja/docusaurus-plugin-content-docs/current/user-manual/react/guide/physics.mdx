@@ -1,0 +1,101 @@
+---
+title: 物理
+description: "PlayCanvas React で ammo.js 物理を有効にする: sync-ammo のインストール、Application usePhysics、剛体、コリジョン、遅延 WASM ロード。"
+---
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application, Entity } from '@playcanvas/react'
+import { Camera } from '@playcanvas/react/components'
+import { BasicPhysics } from './components/basic-physics';
+import BasicPhysicsSource from '!!raw-loader!./components/basic-physics.jsx'
+
+PlayCanvas は堅牢な [物理システム](/user-manual/physics/) を搭載しています。重力、コリジョン、力、制約を含む 3D 空間でのオブジェクトのリアルなシミュレーションを可能にします。物理システムは [ammo.js](https://github.com/kripken/ammo.js) 物理エンジンで動作します。
+
+## はじめに
+
+PlayCanvas は物理エンジンとして ammo.js を使用します。ammo.js は WASM ライブラリで、React では遅延ロードされます。これにより、必要な時だけ ammo.js を配信し、バンドルサイズを抑えることができます。ammo.js がロードされる前にコンテンツをレンダリングしたり、ユーザーインタラクションの結果としてのみ物理が必要な場合にも対応できます。いずれにしても、ammo.js の遅延ロードにより、コンテンツを素早くレンダリングできます。
+
+物理システムを使用するには、`sync-ammo` 依存関係をインストールする必要があります。
+
+```bash
+npm install sync-ammo
+```
+
+また、ルートの `<Application/>` コンポーネントに `<Application usePhysics/>` Prop を追加する必要があります。
+
+:::tip
+
+PlayCanvas React は `<Application usePhysics/>` Prop が設定されている場合にのみ ammo.js をロードします。
+
+:::
+
+```jsx
+<Application usePhysics>
+  <Entity>
+    <Rigidbody type="box" />
+  </Entity>
+</Application>
+```
+
+## 使い方
+
+Entity に `RigidBody` と `Collision` コンポーネントを追加することで、物理シミュレーションに参加させることができます。以下の例では、静的な地面、落下する球、落下するボックスを作成しています。
+
+<CodeExample
+  label="Objects falling under gravity"
+  filename="basic-physics.jsx"
+  code={BasicPhysicsSource}
+  showDemo
+>
+    <Application usePhysics>
+      <Staging 
+        camera={[4, 3, 4]} 
+        useGrid={true} 
+        useControls={true}
+        useShadow={true}
+      >
+        <BasicPhysics />
+      </Staging>
+    </Application>
+</CodeExample>
+
+### 物理プロパティ
+
+[`<RigidBody/>`](../../api/rigidbody) と [`<Collision/>`](../../api/collision) コンポーネントのさまざまなプロパティを変更して物理挙動をカスタマイズできます。詳細は [物理ドキュメント](/user-manual/physics/) を参照してください。
+
+```jsx
+<RigidBody 
+  type="dynamic"
+  mass={1}                // オブジェクトの質量
+  linearDamping={0.1}     // 移動の空気抵抗
+  angularDamping={0.1}    // 回転の空気抵抗
+  friction={0.5}          // 表面摩擦
+  restitution={0.3}       // 反発係数（0 = 反発なし、1 = 完全反発）
+/>
+```
+
+```jsx
+<Collision 
+  type="box"
+  halfExtents={[1, 1, 1]} // ボックスコリジョンのサイズ
+  radius={0.5}            // 球/シリンダーコリジョンの半径
+  height={2}              // カプセル/シリンダーコリジョンの高さ
+/>
+```
+
+## `usePhysics` フック
+
+物理エンジンは遅延インスタンス化されるため、リアクティブな方法でこれを処理する必要があります。そこで `usePhysics` フックの出番です。
+
+```jsx
+import { usePhysics } from '@playcanvas/react/hooks';
+
+const PhysicsStatus = () => {
+  const { isPhysicsEnabled, isPhysicsLoaded, physicsError } = usePhysics();
+  // ...
+};
+```
+
+`usePhysics` フックは物理エンジンの状態に関する情報を提供します。[`usePhysics`](../../api/hooks/use-physics) フックの詳細は API リファレンスを参照してください。
+
+PlayCanvas の物理についての詳細は [PlayCanvas 物理](/user-manual/physics/) ドキュメントを参照してください。

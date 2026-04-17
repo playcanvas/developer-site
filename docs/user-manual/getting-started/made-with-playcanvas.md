@@ -1,5 +1,6 @@
 ---
 title: Made with PlayCanvas
+description: Showcase of games and interactive experiences built with PlayCanvas by developers around the world.
 ---
 
 Below is our showcase video of some of the best WebGL browser games and experiences made with PlayCanvas.

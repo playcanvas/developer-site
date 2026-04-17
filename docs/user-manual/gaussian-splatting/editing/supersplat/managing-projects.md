@@ -1,5 +1,6 @@
 ---
 title: Managing Projects
+description: "SuperSplat .ssproj projects: save and reload edits, share state, ZIP structure, and collaboration via project files."
 ---
 
 SuperSplat supports the `.ssproj` file format, allowing you to save and reload your work, preserving all settings and animations. This format provides an efficient way to manage projects, share work, and continue editing at a later time.

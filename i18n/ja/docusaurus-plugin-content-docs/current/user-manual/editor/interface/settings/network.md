@@ -1,6 +1,7 @@
 ---
 title: ネットワーク設定
 sidebar_label: Network
+description: PlayCanvas アプリケーションの Asset 読み込みの再試行動作とネットワークのタイムアウトを設定します。
 ---
 
 アセット読み込みのリトライ動作を設定します。

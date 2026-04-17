@@ -1,5 +1,6 @@
 ---
 title: 'Shockwave'
+description: Add a radial shockwave distortion to the framebuffer with a post-effect shader for impacts and cinematic camera pulses.
 tags: [tutorial, posteffects]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/440868/136A8D-image-75.jpg
 ---

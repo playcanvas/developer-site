@@ -1,0 +1,65 @@
+---
+description: Rigidbody コンポーネントのドキュメント
+---
+
+# `<Rigidbody/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { RigidbodyExample } from './rigidbody-example';
+import RigidbodyExampleSource from '!!raw-loader!./rigidbody-example.jsx';
+
+`<Rigidbody/>` コンポーネントは [`<Entity/>`](../entity) に質量、速度、摩擦などの物理プロパティを付与し、グローバル物理シミュレーションとの対話を可能にします。`<Rigidbody/>` を持つ `<Entity/>` は重力、力、トルク、その他の物理挙動に反応します。
+
+PlayCanvas の物理システムの仕組みについては [物理ドキュメント](/user-manual/physics/) を、React 固有の詳細については [React の物理](/user-manual/react/guide/physics) ガイドを参照してください。
+
+## はじめに
+
+:::tip
+
+PlayCanvas で物理を使用するには ammo.js と `<Application usePhysics/>` の有効化が必要です。アプリ内で `npm i sync-ammo` を実行してください。
+
+:::
+
+`<Rigidbody/>` コンポーネントを使用するには、`sync-ammo` 依存関係をインストールし、ルートの [`<Application/>`](../application) コンポーネントに [`<Application usePhysics/>`](../application) Prop を設定する必要があります。これにより物理システムが有効になり、Entity が物理シミュレーションと対話できるようになります。
+
+詳細は [React の物理](/user-manual/react/guide/physics) ガイドを参照してください。
+
+## 使い方
+
+[`<Entity/>`](../entity) に `<Rigidbody/>` コンポーネントを追加します。剛体の形状を定義するために [`<Collision/>`](../collision) コンポーネントも Entity に追加する必要があります。
+
+```jsx
+<Application usePhysics>
+  <Entity>
+    <Rigidbody type="box" />
+  </Entity>
+</Application>
+```
+
+<CodeExample
+  label="Interactive Physics Example"
+  filename="rigidbody-example.jsx"
+  code={RigidbodyExampleSource}
+  showDemo>
+  <Application usePhysics>
+    <Staging
+      camera={[4, 3, 4]}
+      useGrid={true}
+      useControls={true}
+      useShadow={true}
+      >
+      <RigidbodyExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+PlayCanvas ドキュメントの [RigidBody Component](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) で詳細を確認できます。
+
+## プロパティ
+
+```tsx asTypedoc
+import { RigidBody } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof RigidBody>;
+export default $;
+```

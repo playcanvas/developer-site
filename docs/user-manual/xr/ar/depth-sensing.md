@@ -1,5 +1,6 @@
 ---
 title: Depth Sensing
+description: "WebXR depth sensing in PlayCanvas for occlusion and scene interaction: GPU and CPU paths, textures, and configuring depth session options."
 ---
 
 In the MR context, immersion is achieved by visual and logical interaction of virtual objects with the real world. This is achieved by many techniques including Depth Occlusion, particles interacting with the world, 3D scanning and more.

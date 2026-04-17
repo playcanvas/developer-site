@@ -1,5 +1,6 @@
 ---
 title: Searching the Hierarchy
+description: Find entities at runtime by name, tag, path, or custom callback using the PlayCanvas hierarchy search API.
 ---
 
 ## By Name

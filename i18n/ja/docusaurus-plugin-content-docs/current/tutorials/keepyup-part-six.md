@@ -2,6 +2,7 @@
 title: シンプルなゲームの作成 - パート6
 tags: [games]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
+description: Screen と Element Component と状態切り替えで、メニュー、ゲーム中、ゲームオーバー UI を構築します。
 ---
 
 <div className="iframe-container">

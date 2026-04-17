@@ -1,5 +1,6 @@
 ---
 title: Animation Assets 
+description: Keyframe animation assets from FBX conversion and how they link to animstategraphs through the anim component.
 ---
 
 ![Animation Assets](/img/user-manual/animation/animation-assets.png)

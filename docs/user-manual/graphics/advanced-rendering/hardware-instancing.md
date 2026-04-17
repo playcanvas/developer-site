@@ -1,5 +1,6 @@
 ---
 title: Hardware Instancing
+description: Hardware instancing formats, MeshInstance buffers, shader chunks, and live engine examples for repeated meshes.
 ---
 
 Hardware instancing is a rendering technique which allows the GPU to render multiple identical meshes in a small number of draw calls. Each instance of the mesh can have a different limited amount of state (for example, position, rotation, scale, or color). It's a technique suitable for drawing objects such as trees, bullets, particles, or any repeated geometry.

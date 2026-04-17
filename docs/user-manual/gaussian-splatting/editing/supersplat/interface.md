@@ -1,5 +1,6 @@
 ---
 title: Interface Overview
+description: "Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, toolbar, and core panels for editing splats."
 ---
 
 The SuperSplat Editor's interface appears as follows:

@@ -1,5 +1,6 @@
 ---
 title: 'Smooth camera movement'
+description: Ease the camera between positions and orientations each frame using vector lerp and quaternion slerp for cinematic motion.
 tags: [camera, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437461/2E89D4-image-75.jpg
 ---

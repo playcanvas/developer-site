@@ -1,5 +1,6 @@
 ---
 title: Import and Export
+description: "SuperSplat import and export formats: PLY, compressed PLY, SOG, SPLAT, viewers, and choosing formats for web or archival use."
 ---
 
 SuperSplat's import and export capabilities are essential for working with Gaussian Splat data throughout your entire workflow. Import allows you to bring in splat scenes from various capture tools and formats for editing, cleanup, and optimization. Once your editing work is complete, export enables you to save your refined splats in the optimal format for your target platform - whether that's a compressed format for web deployment, a full-quality PLY for archival, or a standalone HTML viewer for easy sharing. This flexibility ensures SuperSplat can integrate seamlessly into any Gaussian Splat production pipeline.

@@ -2,6 +2,7 @@
 title: '複合物理シェイプ'
 tags: [physics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/688146/E92618-image-75.jpg
+description: 複雑なインポートメッシュ向けに、複数のコリジョンシェイプを 1 つの compound rigidbody にまとめて正確な物理にします。
 ---
 
 import Link from '@docusaurus/Link';

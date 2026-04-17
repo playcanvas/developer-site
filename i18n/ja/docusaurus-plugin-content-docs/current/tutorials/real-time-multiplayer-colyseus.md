@@ -2,6 +2,7 @@
 title: Colyseusを使ったリアルタイムマルチプレイヤー
 tags: [multiplayer, networking]
 thumb: "https://avatars.githubusercontent.com/u/28384334?s=300&v=4"
+description: PlayCanvas を Colyseus サーバーに接続し、シンプルなクリック移動デモでルーム状態の同期、メッセージング、マッチメイキングを行います。
 ---
 
 <div className="iframe-container">

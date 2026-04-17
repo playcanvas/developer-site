@@ -2,6 +2,7 @@
 title: カメラのさらなる活用
 tags: [basics, camera]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405835/E7331A-image-75.jpg"
+description: Script で Camera Component の FOV、位置、アクティブなカメラをランタイムで変更し、ズーム、カット、マルチカメラ構成に使います。
 ---
 
 <div className="iframe-container">

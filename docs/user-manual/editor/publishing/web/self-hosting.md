@@ -1,5 +1,6 @@
 ---
 title: Self-hosting
+description: Shows how to embed a hosted build with iframes or download a zip and deploy static files on your own web server.
 ---
 
 There are two options for self-hosting a PlayCanvas application on your own domain.

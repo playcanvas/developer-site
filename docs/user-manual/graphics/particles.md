@@ -1,5 +1,6 @@
 ---
 title: Particles
+description: Create and tune particle systems in the Editor, start them from scripts, and use soft particles with scene depth.
 ---
 
 PlayCanvas provides comprehensive support for creating and editing particle systems.

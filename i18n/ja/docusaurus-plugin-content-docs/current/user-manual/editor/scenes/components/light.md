@@ -1,5 +1,6 @@
 ---
 title: Light
+description: PlayCanvas の Light Component は、色、強度、範囲、減衰、エリア形状、ライトマップオプション付きの directional、omni、または spot ライトを追加します。
 ---
 
 Lightコンポーネントは、エンティティに動的な光源をアタッチします。「Type」プロパティは、アタッチされる光源の種類と利用可能な他のプロパティを決定します。

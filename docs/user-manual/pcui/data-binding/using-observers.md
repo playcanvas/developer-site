@@ -1,5 +1,6 @@
 ---
 title: Using Observers
+description: "Binding PCUI elements to Observer state: simple label and text input flows and how updates propagate through the observer model."
 ---
 
 A simple use case is shown below.

@@ -1,5 +1,6 @@
 ---
 title: Splatsの編集
+description: SuperSplatの編集モード（centersとrings）、選択ツール、オーバーレイ、スプラットのクリーニングと変更のワークフローです。
 ---
 
 ## 編集モード

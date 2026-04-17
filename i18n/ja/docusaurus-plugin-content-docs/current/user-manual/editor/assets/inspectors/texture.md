@@ -1,5 +1,6 @@
 ---
 title: Texture
+description: 画像がテクスチャ Asset にどうインポートされるか、形式変換と POT へのリサイズ、およびフィルター、ラップ、ミップマップ、プレビューの Inspector 項目を説明します。
 ---
 
 テクスチャとは、[マテリアル](/user-manual/editor/assets/inspectors/material)に割り当てられ、グラフィカルなプリミティブに適用される画像のことです。

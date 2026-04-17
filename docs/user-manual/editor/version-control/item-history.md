@@ -1,5 +1,6 @@
 ---
 title: Item History
+description: Shows per-entity asset scene and settings checkpoint timelines available for items edited after the Item History rollout date.
 ---
 
 Checkpoint history is available for every item in the project so you can easily view the changes in the Checkpoints.

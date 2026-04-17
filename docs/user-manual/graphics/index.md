@@ -1,5 +1,6 @@
 ---
 title: Graphics
+description: "Overview of PlayCanvas rendering: WebGL and WebGPU backends, PBR, lighting, HDR, post effects, and key graphics features."
 ---
 
 PlayCanvas incorporates an advanced graphics engine that delivers high-performance 3D rendering on the web. The engine provides both [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) and [WebGPU](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API) support, ensuring compatibility across all modern browsers while offering cutting-edge graphics capabilities.

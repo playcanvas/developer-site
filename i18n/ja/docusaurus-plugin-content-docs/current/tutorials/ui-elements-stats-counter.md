@@ -2,6 +2,7 @@
 title: UI - カウンター
 tags: [ui]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501978/12B6CE-image-75.jpg"
+description: プラスとマイナスボタンをプログレス表示と組み合わせ、ステータスを増やしUIでリアルタイムの数値を表示します。
 ---
 
 <div className="iframe-container">

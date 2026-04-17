@@ -1,5 +1,6 @@
 ---
 title: 'Locking the mouse'
+description: Request pointer lock on click to capture the mouse for first-person look, hiding the cursor while movement drives the camera.
 tags: [input, camera, mouse, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438440/941913-image-75.jpg
 ---

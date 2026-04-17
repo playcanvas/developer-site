@@ -1,5 +1,6 @@
 ---
 title: Loading JSON Data
+description: Load JSON from a bundled asset or over HTTP from a remote URL and parse it inside your PlayCanvas scripts at runtime.
 tags: [loading]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405827/G8YF23-image-75.jpg
 ---

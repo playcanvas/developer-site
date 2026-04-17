@@ -1,5 +1,6 @@
 ---
 title: Engine Migrations
+description: Breaking changes and migration instructions for each major PlayCanvas Engine release.
 ---
 
 The PlayCanvas Engine is continually evolving, and its updates occasionally introduce breaking changes that require users to adapt their scripts.

@@ -1,5 +1,6 @@
 ---
 title: Shader Chunk Migrations
+description: リリースごとのシェーダーチャンクの変更、オーバーライドのコンソール警告、更新後の shaderChunksVersion の設定方法です。
 ---
 
 ## イントロダクション

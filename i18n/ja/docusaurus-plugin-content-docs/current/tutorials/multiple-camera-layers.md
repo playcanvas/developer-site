@@ -2,6 +2,7 @@
 title: 'Multiple Camera Layers'
 tags: [rendering, camera, ui, tutorial]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/593374/DF6C72-image-75.jpg"
+description: 複数のカメラとレンダリングレイヤーを組み合わせ、1 つの PlayCanvas の Scene でスクリーン空間の UI とワールド空間の要素を混在させます。
 ---
 
 import Link from '@docusaurus/Link';

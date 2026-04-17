@@ -1,5 +1,6 @@
 ---
 title: Assets Pane
+description: The Assets Pane for browsing graphs, materials, and textures plus create, delete, filter, and texture import actions in Shader Editor.
 sidebar_position: 4
 ---
 

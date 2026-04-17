@@ -1,5 +1,6 @@
 ---
 title: <pc-splat>
+description: "pc-splat要素のリファレンス: Gaussian splat Assetをレンダリングし、splatデータのソース、品質、Scene連携向けの属性を扱います。"
 ---
 
 `<pc-splat>`タグは、3D Gaussian Splatsをレンダリングするためのスプラットコンポーネントを定義するために使用されます。

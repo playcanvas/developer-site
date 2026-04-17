@@ -1,5 +1,6 @@
 ---
 title: Apache Cordova
+description: Cordova プロジェクトのセットアップ、PlayCanvas ビルドの www へのコピー、iOS のオーディオ制限と PlayCanvas ツールのリンクを扱います。
 ---
 
 [Apache Cordova](https://cordova.apache.org/)はオープンソースのモバイル開発フレームワークです。標準のウェブ技術であるHTML5、CSS3、JavaScriptを使用して、クロスプラットフォーム開発ができます。アプリケーションは、各プラットフォームに対してターゲットとされたラッパーで実行され、センサー、データ、ネットワークステータスなど、各デバイスの機能にアクセスするための標準準拠のAPIバインディングに依存します。

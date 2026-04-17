@@ -1,5 +1,6 @@
 ---
 title: XR
+description: "PlayCanvasにおけるWebXRのARとVRの概要: プラットフォーム、機能、セッションのセットアップ、AR、VR、連携ガイドへのリンクです。"
 ---
 
 ![VRビュー](/img/user-manual/xr/vr-view.png)

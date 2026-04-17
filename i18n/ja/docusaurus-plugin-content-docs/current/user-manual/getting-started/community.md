@@ -1,6 +1,7 @@
 ---
 title: PlayCanvasコミュニティに参加しよう
 sidebar_label: コミュニティに参加
+description: Discord、Forum、Reddit、X、LinkedInでPlayCanvas開発者とつながり、ヘルプ、ニュース、インスピレーションを得ます。
 ---
 
 PlayCanvasを最大限に活用するために、私たちのコミュニティへの参加をお勧めします！

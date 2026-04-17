@@ -1,0 +1,150 @@
+---
+title: コンセプト
+description: "PlayCanvas React のコアコンセプト: Application と Entity コンポーネント、Asset、Script、レンダーパイプライン、ラッパーからエンジンへのマッピング。"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+PlayCanvas React は PlayCanvas エンジンの薄いラッパーです。エンジン API 上のシンプルで宣言的なインターフェースであり、エンジンのすべての機能に加えて、使いやすくするためのいくつかの追加機能を提供します。エンジンでできることは、PlayCanvas React でもできます。
+
+## Application
+
+`Application` は PlayCanvas React アプリケーションのルートコンポーネントです。エンジンを初期化し、レンダリングコンテキストを提供します。アプリに単一のキャンバスがある場合、それは `Application` コンポーネントに対応します。
+
+`<Application />` にはシーンを設定するための多くのプロパティがあります。フィルモードと解像度モードを設定してキャンバスのウィンドウへのフィット方法を制御し、その他のプロパティでグラフィックスデバイスを制御できます。
+
+```jsx
+<Application>
+  {/* シーンのコンテンツ */}
+</Application>
+```
+
+`Application` コンポーネントの詳細は [API ドキュメント](https://playcanvas-react.vercel.app/docs/api/application) を参照してください。
+
+## 基本
+
+エンジン自体は **Entity Component System** を使用しています。これは多くのゲームエンジンで使用されている一般的なアーキテクチャで、動作をデータから分離します。ECS は React の宣言的な性質と非常に相性が良く、理解しやすく保守しやすい方法でシーンを構造化できます。
+
+シンプルな例を見てみましょう。PlayCanvas React でカメラを作るには、`Camera` コンポーネントと `Entity` が必要です。Camera を Entity に追加します。Entity は位置と回転を持ち、シーン内でカメラを動かすことができ、Camera コンポーネントはレンダリングに必要な機能を提供します。React と JavaScript の両方でどのように行うか見てみましょう。
+
+<Tabs>
+  <TabItem label='React' value='react'>
+
+  ```jsx title="app.jsx"
+  <Application>
+    <Entity name='camera' position={[0, 0, 5]}>
+      <Camera />
+    </Entity>
+  </Application>
+  ```
+
+  </TabItem>
+  <TabItem label='JavaScript' value='javascript'>
+
+  ```js title="app.js"
+  const app = new Application();
+  app.init();
+
+  const camera = new Entity('camera');
+  camera.setPosition(0, 0, 5);
+  camera.create('camera')
+  app.root.addChild(camera);
+  app.start();
+  ```
+
+  </TabItem>
+</Tabs>
+
+## Component
+
+Entity に複数の Component をアタッチでき、それぞれが異なる機能を提供します。幅広い Component が利用可能で、エンジンで使用できる Component は PlayCanvas React でも使用できます。
+
+- **Lights**（ディレクショナル、ポイント、スポット）
+- **Cameras**（パースペクティブ、オーソグラフィック）
+- **Render**（球、ボックス、シリンダー、コーン、プレーンなど）
+- **RigidBody**（RigidBody、Collision）
+- **Collision**（Collision）
+- **Anim**（アニメーション、スキニング）
+- **Gsplat**（Gsplat）
+- **Screen**（Screen）
+- **RigidBody**（RigidBody）
+- **Anim**（アニメーション、スキニング）
+
+基本的な PlayCanvas React アプリの構造を見たところで、最もよく使われる Component をいくつか見てみましょう。
+
+## カメラ
+
+シーンを表示するにはカメラが必要です。PlayCanvas React では、`Entity` コンポーネントをコンテナとして使用し、`Camera` のようなコンポーネントの動作をアタッチします:
+
+```jsx
+import { Application, Entity } from '@playcanvas/react'
+import { Camera } from '@playcanvas/react/components'
+
+export default function App() {
+  return (
+    <Application>
+      <Entity name="camera" position={[0, 0, 5]}>
+        <Camera />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+Z 軸正方向に 5 ユニットの位置にカメラ Entity を追加しました。デフォルトでは、カメラは Z 軸負方向を向いているため、原点を見ています。レンダリングされたシーンはソリッドグレー（カメラのクリアカラー）を表示します。
+
+## ライト
+
+シーンを照らすためにディレクショナルライトを追加しましょう:
+
+```jsx
+import { Application, Entity } from '@playcanvas/react'
+import { Camera, Light } from '@playcanvas/react/components'
+
+export default function App() {
+  return (
+    <Application>
+      <Entity name="camera" position={[0, 0, 5]}>
+        <Camera />
+      </Entity>
+      <Entity name="light" rotation={[45, 45, 0]}>
+        <Light type="directional" />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+ライトは角度をつけて回転されており、オブジェクトにより興味深いシェーディングを作成します。
+
+## プリミティブ
+
+`Render` コンポーネントを使用してシーンに球を追加しましょう:
+
+```jsx
+import { Application, Entity } from '@playcanvas/react'
+import { Camera, Light, Render } from '@playcanvas/react/components'
+
+export default function App() {
+  return (
+    <Application>
+      <Entity name="camera" position={[0, 0, 5]}>
+        <Camera />
+      </Entity>
+      <Entity name="light" rotation={[45, 45, 0]}>
+        <Light type="directional" />
+      </Entity>
+      <Entity name="sphere">
+        <Render type="sphere" />
+      </Entity>
+    </Application>
+  )
+}
+```
+
+画面の中央に白い球が表示されるはずです！
+
+## 次のステップ
+
+基本を学んだので、次は [インタラクティビティ](./interactivity)、[Asset の管理](./loading-assets) 方法、プロジェクトでの [物理](./physics) の使い方を学びましょう。これらの基本を押さえれば、最初のプロジェクトを構築する準備は万端です！

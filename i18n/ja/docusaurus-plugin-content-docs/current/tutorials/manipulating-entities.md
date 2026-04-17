@@ -2,6 +2,7 @@
 title: エンティティ操作
 tags: [basics]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/KM6GIE-image-75.jpg"
+description: ローカルとワールドの transform を編集して Entity を移動・回転・スケールし、子どものヒエラルキーがどう運動を継承するかを理解します。
 ---
 
 このチュートリアルでは、エンティティの位置 (Position) 、向き (Orientation) 、スケール (Scale) を変更する方法を紹介します。

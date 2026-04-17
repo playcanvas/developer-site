@@ -1,5 +1,6 @@
 ---
 title: アプリ - Get app
+description: PlayCanvas REST APIからIDで単一の公開アプリを取得し、curl例、パラメータ、JSONレスポンスフィールドを含みます。
 ---
 
 ## ルートURL

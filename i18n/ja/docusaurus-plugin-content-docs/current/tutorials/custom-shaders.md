@@ -2,6 +2,7 @@
 title: カスタムシェーダー
 tags: [シェーダー, マテリアル]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406044/4J2JX2-image-75.jpg
+description: WebGL と WebGPU の両バックエンドで動くカスタムシェーダーで、ShaderMaterial によるディゾルブやエッジエフェクトです。
 ---
 
 <div className="iframe-container">

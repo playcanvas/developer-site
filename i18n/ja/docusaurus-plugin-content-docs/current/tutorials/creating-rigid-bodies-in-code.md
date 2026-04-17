@@ -2,6 +2,7 @@
 title: 'コードでリジッドボディを作成'
 tags: [animation, physics, tutorial, procedural]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/442322/BABA92-image-75.jpg
+description: Script のみでコリジョンと Rigidbody Component を持つ Entity を生成し、手続き的な物理オブジェクトを作ります。
 ---
 
 import Link from '@docusaurus/Link';

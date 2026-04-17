@@ -1,5 +1,6 @@
 ---
 title: Checkpoints
+description: Creates restores and hard-resets permanent snapshots explaining graph implications and what cannot be undone after hard reset.
 ---
 
 A checkpoint is a snapshot of your project at a point in time. It contains the complete set of data for your project so that you can restore this state at any point in the future. Checkpoints are similar to *commits* in other version control systems. Checkpoints are identified by a unique id number and a description that you enter at the time you create the checkpoint.

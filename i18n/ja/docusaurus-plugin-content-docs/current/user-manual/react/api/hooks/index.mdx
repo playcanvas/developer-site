@@ -1,0 +1,76 @@
+---
+title: フック
+description: PlayCanvas 統合のための React フック
+---
+
+PlayCanvas React は、PlayCanvas の機能を React アプリケーションに簡単に統合できる包括的な React フックセットを提供します。これらのフックは複雑なライフサイクル管理を処理し、クリーンで React に適した API を提供します。
+
+## 利用可能なフック
+
+### コアフック
+
+- **[useApp](./use-app)** - PlayCanvas Application インスタンスにアクセスする
+- **[useParent](./use-parent)** - コンテキストから親 Entity を取得する
+
+### Asset ロードフック
+
+- **[useAsset](./use-asset)** - 任意の種類の PlayCanvas Asset をロードする
+- **[useModel](./use-asset#usemodel)** - 3D モデル (GLB/GLTF) をロードする
+- **[useTexture](./use-asset#usetexture)** - テクスチャ Asset をロードする
+- **[useSplat](./use-asset#usesplat)** - Gaussian Splat Asset をロードする
+- **[useEnvAtlas](./use-asset#useenvatlas)** - エンバイロメントアトラステクスチャをロードする
+- **[useFont](./use-asset#usefont)** - フォント Asset をロードする
+
+### イベントとアニメーションフック
+
+- **[useAppEvent](./use-app-event)** - PlayCanvas アプリケーションイベントをサブスクライブする
+
+### マテリアルと物理フック
+
+- **[useMaterial](./use-material)** - マテリアルを作成・管理する
+- **[usePhysics](./use-physics)** - 物理コンテキストと状態にアクセスする
+
+## 使用パターン
+
+ほとんどのフックは一貫したパターンに従います:
+
+```jsx
+import { useApp, useAsset } from '@playcanvas/react/hooks'
+
+function MyComponent() {
+  const app = useApp()
+  const { asset, loading, error } = useAsset('model.glb', 'container')
+  
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
+  
+  return <Container asset={asset} />
+}
+```
+
+## コンテキスト要件
+
+多くのフックは特定の React コンテキストが利用可能である必要があります:
+
+- **useApp** はコンポーネントツリーに `<Application>` コンポーネントが必要です
+- **useParent** はコンポーネントツリーに `<Entity>` コンポーネントが必要です
+- **usePhysics** は Application で物理が有効になっている必要があります
+
+## TypeScript サポート
+
+すべてのフックは TypeScript で完全に型付けされており、優れた IntelliSense サポートを提供します。フックは PlayCanvas エンジンの型から自動的に型を推論します。
+
+```tsx
+// PlayCanvas の型で完全に型付けされています
+const app = useApp() // Application
+const entity = useParent() // Entity
+const { asset } = useAsset('texture.jpg', 'texture') // Asset | null
+```
+
+## ベストプラクティス
+
+1. Asset フックを使用する際は **常にロード状態を確認** してください
+2. より良いユーザー体験のために **エラーを適切にハンドリング** してください
+3. ユースケースに応じた **適切なフックを使用** してください
+4. **サブスクリプションのクリーンアップ** はフックによって自動的に処理されます
+5. **React のルールに従ってください** - フックはコンポーネントのトップレベルでのみ呼び出す必要があります

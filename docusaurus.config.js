@@ -35,6 +35,13 @@ const config = {
     locales: ['en', 'ja']
   },
 
+  future: {
+    faster: true,
+    v4: {
+      removeLegacyPostBuildHeadAttribute: true,
+    },
+  },
+
   markdown: {
     mermaid: true,
   },

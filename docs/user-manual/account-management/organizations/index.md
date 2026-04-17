@@ -1,5 +1,6 @@
 ---
 title: Organizations
+description: Team workspaces for managing multiple users, projects, and permissions in PlayCanvas.
 ---
 
 Organizations offer a way for businesses and large projects to manage many users. They provide enhanced collaboration features, permissions management, and team coordination tools.

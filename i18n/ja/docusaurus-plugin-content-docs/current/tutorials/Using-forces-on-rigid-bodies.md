@@ -2,6 +2,7 @@
 title: 力と衝撃
 tags: [physics, collision]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405828/95F429-image-75.jpg"
+description: 動的なRigidbodyに力、インパルス、トルクを適用し、減衰と質量を調整して応答性の高い物理駆動の動きにします。
 ---
 
 <div className='iframe-container'>

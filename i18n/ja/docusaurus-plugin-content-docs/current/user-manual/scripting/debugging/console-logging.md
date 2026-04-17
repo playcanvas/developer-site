@@ -1,5 +1,6 @@
 ---
 title: コンソールロギング
+description: console.log、console.warn、console.error などブラウザのコンソールで PlayCanvas の Script をデバッグします。
 ---
 
 import Tabs from '@theme/Tabs';

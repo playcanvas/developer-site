@@ -1,5 +1,6 @@
 ---
 title: ammo.jsの更新
+description: Scene Settings のインポートとマイグレーション手順で、レガシーの組み込み ammo.js から最新の wasm ビルドへ移行します。
 ---
 
 ### イントロダクション

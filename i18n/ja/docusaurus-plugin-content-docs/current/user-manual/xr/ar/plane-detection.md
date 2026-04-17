@@ -1,5 +1,6 @@
 ---
 title: Plane Detection
+description: "PlayCanvasでのAR平面検出: 床や壁などラベル付きサーフェス、ジオメトリへのアクセス、平面とメッシュ検出の比較です。"
 ---
 
 [Mesh Detection](/user-manual/xr/ar/mesh-detection/)と非常によく似ており、Plane Detectionは現実世界の表面を推定するプレーンへのアクセスを提供します。

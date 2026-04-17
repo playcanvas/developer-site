@@ -3,6 +3,7 @@ title: '360度見回しカメラ'
 id: 360-lookaround-camera
 tags: [input, camera, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438216/3B51C6-image-75.jpg
+description: マウスとタッチでカメラを回転させ、パノラマや一人称風に Scene を見回します。
 ---
 
 import Link from '@docusaurus/Link';

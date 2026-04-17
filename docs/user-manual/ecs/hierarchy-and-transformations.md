@@ -1,5 +1,6 @@
 ---
 title: Hierarchy and Transformations
+description: Parent-child entity hierarchies with local and world-space position, rotation, and scale transforms.
 sidebar_label: Hierarchy & Transforms
 ---
 

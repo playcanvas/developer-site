@@ -1,5 +1,6 @@
 ---
 title: Apps - Download app
+description: POST apps/download starts a self-hostable app export job; poll jobs until complete to retrieve the packaged app download URL.
 ---
 
 ## Route URL

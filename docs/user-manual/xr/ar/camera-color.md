@@ -1,5 +1,6 @@
 ---
 title: Camera Color
+description: Accessing the AR camera color texture in PlayCanvas for pass-through compositing, session options, and runtime support checks.
 ---
 
 In AR, the rendered image is projected over the reconstructed camera texture on the pass-through device types. This texture can be accessed by the application.

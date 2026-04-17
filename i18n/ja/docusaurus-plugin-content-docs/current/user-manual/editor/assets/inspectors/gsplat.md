@@ -1,5 +1,6 @@
 ---
 title: GSplat
+description: GSplat Asset Inspector は、PLY または SOG の splat データについて形式、splat 数、球面調和のバンド、軸平行バウンディングのメタデータをまとめます。
 ---
 
 GSplatアセットには3D Gaussian Splatデータが含まれています。PlayCanvasは[PLY](/user-manual/gaussian-splatting/formats/ply)ファイル（Compressed PLYを含む）および[SOG](/user-manual/gaussian-splatting/formats/sog)ファイルからのGSplatデータのインポートをサポートしています。

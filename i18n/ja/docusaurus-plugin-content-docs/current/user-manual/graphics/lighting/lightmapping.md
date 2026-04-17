@@ -1,5 +1,6 @@
 ---
 title: ライトマッピング
+description: 3ds Max や VRay など外部ツールでライトマップをベイクし、テクスチャをインポートして linear／gamma のベストプラクティスに従います。
 ---
 
 [![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)

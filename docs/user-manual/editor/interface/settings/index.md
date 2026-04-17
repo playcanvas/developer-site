@@ -1,5 +1,6 @@
 ---
 title: Project Settings
+description: Project Settings map for engine import physics rendering lightmaps batches launch localization network layers plus private editor panels opened from the cog.
 ---
 
 Project Settings control how your project runs and how the Editor behaves for your team. They include engine/runtime configuration (rendering, physics, input, network), asset import defaults, and Editor preferences. Some settings apply only to you (session or user-specific), while most affect all collaborators on the current branch.

@@ -1,5 +1,6 @@
 ---
 title: Custom Post Effects
+description: Author shaders and a custom post effect that applies watercolor blur and paper grain over the final framebuffer.
 tags: [posteffects]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406045/ABC61F-image-75.jpg
 ---

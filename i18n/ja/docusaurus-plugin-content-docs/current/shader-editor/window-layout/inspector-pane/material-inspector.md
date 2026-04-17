@@ -1,6 +1,7 @@
 ---
 title: マテリアルインスペクター
 sidebar_position: 3
+description: 基本メタデータ、blend や cull などのレンダーステート、公開されたグラフパラメータ値を扱う Material Inspector です。
 ---
 
 ![Material Inspector](/img/shader-editor/inspector-pane-material.png)

@@ -1,5 +1,6 @@
 ---
 title: はじめに
+description: PlayCanvas Scriptの基本構造とコア概念、Scriptの種類、属性、Entityへの付与について学びます。
 ---
 
 このガイドでは、モダンなESMアプローチでもクラシックシステムでも、PlayCanvasスクリプトを書く際に理解しておくべき基本構造と概念を説明します。

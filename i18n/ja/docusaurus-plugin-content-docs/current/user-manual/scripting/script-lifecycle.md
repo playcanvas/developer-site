@@ -1,5 +1,6 @@
 ---
 title: スクリプトのライフサイクル
+description: initialize、postInitialize、update、postUpdate、destroy — 各PlayCanvas Scriptで呼ばれるライフサイクルメソッドを理解します。
 ---
 
 import Tabs from '@theme/Tabs';

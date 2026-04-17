@@ -1,5 +1,6 @@
 ---
 title: Compound Physics Shapes
+description: Combine multiple collision shapes into one compound rigidbody for accurate physics on complex imported meshes.
 tags: [physics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/688146/E92618-image-75.jpg
 ---

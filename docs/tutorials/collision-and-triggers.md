@@ -1,5 +1,6 @@
 ---
 title: Collision and Triggers
+description: Use collision shapes with rigidbodies for physical contacts and trigger volumes for overlap events without blocking motion.
 tags: [collision, physics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405871/0D7E2F-image-75.jpg
 ---

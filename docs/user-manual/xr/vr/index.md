@@ -1,5 +1,6 @@
 ---
 title: VR
+description: "Virtual reality with WebXR in PlayCanvas: supported platforms, project settings, starting VR sessions, and links to VR-specific topics."
 ---
 
 ![VR View](/img/user-manual/xr/vr-view.png)

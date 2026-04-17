@@ -1,5 +1,6 @@
 ---
 title: <pc-rigidbody>
+description: "pc-rigidbody要素のリファレンス: rigid bodyの種類、質量、摩擦、反発、コリジョンComponentとの連携です。"
 ---
 
 `<pc-rigidbody>`タグは、リジッドボディコンポーネントを定義するために使用されます。

@@ -1,5 +1,6 @@
 ---
 title: Assets
+description: Overview of PlayCanvas Editor asset management covering the Assets panel, uploads, import pipeline, inspectors, Asset Store, and dedicated viewers.
 ---
 
 The PlayCanvas Editor provides a complete asset management system for your project. This section covers how to work with assets in the Editor, including importing, organizing, and configuring them.

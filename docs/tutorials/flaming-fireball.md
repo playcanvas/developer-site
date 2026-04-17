@@ -1,5 +1,6 @@
 ---
 title: 'Flaming fireball'
+description: Drive a particle fireball that follows the pointer for a simple magical projectile and trail effect.
 tags: [particles, input, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439385/DECA7B-image-75.jpg
 ---

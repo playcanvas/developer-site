@@ -1,5 +1,6 @@
 ---
 title: アカウントの作成
+description: メール、Google、またはGitHubでPlayCanvasにサインアップし、プロフィール設定を完了します。
 ---
 
 PlayCanvasコミュニティに参加するには、新しいアカウントを作成することを強くお勧めします。[https://playcanvas.com](https://playcanvas.com)の右上にある**サインアップ**をクリックしてください。

@@ -1,5 +1,6 @@
 ---
 title: PlayCanvas用の3Dモデルのエクスポート
+description: Blender、Maya、または 3DS Max から GLB または FBX 形式で 3D モデルをエクスポートし、PlayCanvas にインポートします。
 ---
 
 PlayCanvasは、glTFバイナリ(GLB)、FBX、OBJ、3DS、COLLADA(DAE)の以下の形式の3Dコンテンツをインポートできます。 GLBはオープンソースの標準規格であり、エディターで非常によくサポートされているため、GLBの使用を強くお勧めします。

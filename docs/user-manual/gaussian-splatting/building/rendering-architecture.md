@@ -1,5 +1,6 @@
 ---
 title: Splat Rendering Architecture
+description: "Unified versus non-unified GSplat rendering in PlayCanvas: trade-offs, when to use each mode, and how to enable unified rendering."
 ---
 
 PlayCanvas supports two rendering modes for Gaussian splats: **Unified** and **Non-unified**. Understanding these modes helps you choose the right approach for your application.

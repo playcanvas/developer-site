@@ -1,5 +1,6 @@
 ---
 title: Loading Scenes
+description: Learn to call SceneRegistry changeScene and additive load APIs, split hierarchy versus settings loads, and detect completion with callbacks or events.
 ---
 
 This page covers how to load scenes programmatically and different approaches for using scenes in your projects.

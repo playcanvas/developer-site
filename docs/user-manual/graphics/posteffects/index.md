@@ -1,5 +1,6 @@
 ---
 title: Post Effects
+description: Compare modern CameraFrame HDR post-processing with legacy script effects and find links to individual filters.
 ---
 
 PlayCanvas supports adding post-processing effects to your projects. Post effects modify the final rendered image and provide an easy way to add visual flair to your application.

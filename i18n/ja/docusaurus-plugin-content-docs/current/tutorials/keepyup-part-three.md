@@ -2,6 +2,7 @@
 title: シンプルなゲームの作成 - パート3
 tags: [games]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
+description: Keepy Up でタップ、スコア、全体の流れを駆動するルートのゲームと入力 Script を順に追います。
 ---
 
 <div className="iframe-container">

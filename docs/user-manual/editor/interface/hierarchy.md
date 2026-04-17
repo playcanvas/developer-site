@@ -1,5 +1,6 @@
 ---
 title: Hierarchy Panel
+description: Hierarchy techniques for smart search entity lifecycle reparent transforms duplication and cross-scene paste with asset rematching when folder paths align.
 ---
 
 ![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.png)

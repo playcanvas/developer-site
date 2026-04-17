@@ -1,5 +1,6 @@
 ---
 title: ESMスクリプト
+description: 静的 import、クラス、改善されたツール対応で、モダンな ES Module 構文を使って PlayCanvas の Script を書きます。
 ---
 
 ESMスクリプトは、モダンなESモジュール構文を使用し、PlayCanvasスクリプトの推奨される記述方法です。より良いコード構成、静的インポート、バンドル最適化、そしてモダンなJavaScript開発者にとって馴染みのある開発体験を提供します。

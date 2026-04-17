@@ -1,5 +1,6 @@
 ---
 title: Projects - Export project
+description: "Start a full project ZIP export job via POST projects/:id/export, then poll jobs for the downloadable archive link and import notes."
 ---
 
 ## Route URL

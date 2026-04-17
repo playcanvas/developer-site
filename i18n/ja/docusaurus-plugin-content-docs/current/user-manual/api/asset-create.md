@@ -1,5 +1,6 @@
 ---
 title: アセット - Create asset
+description: POST /api/assetsでScript、HTML、CSS、テキスト、シェーダー、またはJSONのAssetを作成し、対応タイプ、ボディフィールド、例を扱います。
 ---
 
 ## ルートURL

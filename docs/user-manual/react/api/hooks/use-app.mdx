@@ -6,7 +6,7 @@ description: Access the PlayCanvas Application instance
 
 The `useApp` hook provides access to the PlayCanvas [Application](https://api.playcanvas.com/engine/classes/Application.html) instance from within your React components. It's a convenient way to get information about the app state, fire events, and more.
 
-```jsx copy title="./my-component.jsx" copy
+```jsx copy title="./my-component.jsx"
 import { useApp } from '@playcanvas/react/hooks'
 
 function MyComponent() {
@@ -57,13 +57,11 @@ export const App = () => <Application>
 
 ```tsx asTypedoc
 import { Application } from 'playcanvas'
-type $ = {
-  /**
-   * The PlayCanvas Application instance
-   */
-  app: Application
-}
-export default $;
+
+/**
+ * The PlayCanvas Application instance
+ */
+export default Application;
 ```
 
 ## Related

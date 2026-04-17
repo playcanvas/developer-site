@@ -1,5 +1,6 @@
 ---
 title: Making a Simple Game - Part 6
+description: Build menu, in-game, and game-over UI with Screen and Element components and state switching.
 tags: [games]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg
 ---

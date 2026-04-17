@@ -1,5 +1,6 @@
 ---
 title: Localization Settings
+description: Localization panel usage for registering JSON translation assets creating starter files and how keys map to UI strings before runtime language swap logic.
 sidebar_label: Localization
 ---
 

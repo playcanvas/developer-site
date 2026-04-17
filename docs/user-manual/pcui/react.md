@@ -1,5 +1,6 @@
 ---
 title: React
+description: "Using PCUI React wrappers: importing from @playcanvas/pcui/react, bundling styles, and rendering components in JSX applications."
 ---
 
 PCUI components can be used directly in React applications. Import the components from the React package and use them in your `.jsx` files as follows:

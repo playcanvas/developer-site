@@ -1,5 +1,6 @@
 ---
 title: HDR Rendering
+description: HDR camera settings, tone mapping and gamma options, and using CameraFrame for bloom-friendly floating-point rendering.
 ---
 
 High Dynamic Range (HDR) rendering significantly enhances visual realism in computer graphics by capturing and displaying a broader spectrum of light and color. This technique ensures that both the brightest highlights and the deepest shadows retain their details, offering a more lifelike representation of scenes. One notable advantage of HDR rendering is its ability to produce physically based bloom effects, where intense light sources naturally bleed into surrounding areas, mimicking real-world camera and eye behavior. Additionally, HDR rendering facilitates more accurate reflections and refractions, as it allows for light values that exceed the standard displayable range, resulting in visuals that are both striking and true to life.

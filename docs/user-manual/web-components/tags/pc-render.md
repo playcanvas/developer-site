@@ -1,5 +1,6 @@
 ---
 title: <pc-render>
+description: "Reference for the pc-render element: primitive or mesh rendering, materials, layers, and cast or receive shadow settings on entities."
 ---
 
 The `<pc-render>` tag is used to define a render component that renders a 3D primitive.

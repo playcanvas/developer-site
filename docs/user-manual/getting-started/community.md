@@ -1,5 +1,6 @@
 ---
 title: Join the PlayCanvas Community
+description: Connect with PlayCanvas developers on Discord, the Forum, Reddit, X, and LinkedIn for help, news, and inspiration.
 sidebar_label: Join the Community
 ---
 

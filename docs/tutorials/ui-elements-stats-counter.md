@@ -1,5 +1,6 @@
 ---
 title: User Interface - Stats Counter
+description: Combine plus and minus buttons with progress visuals to increment stats and show live numeric readouts in the UI.
 tags: [ui]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501978/12B6CE-image-75.jpg
 ---

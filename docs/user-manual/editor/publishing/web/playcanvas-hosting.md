@@ -1,5 +1,6 @@
 ---
 title: PlayCanvas Hosting
+description: Explains publishing builds to playcanvas.com, choosing primary builds, and configuring build options like minification and maps.
 ---
 
 The fastest, easiest, most convenient way to publish your game is to publish it to playcanvas.com.

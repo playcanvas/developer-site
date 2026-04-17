@@ -1,5 +1,6 @@
 ---
 title: ビューポート (Viewport)
+description: ワイヤーフレームからアルベド、法線、エミッションなどのマテリアルデバッグビューまで、ビューポートのカメラ、ギズモ、レンダーモードを使ってリリース前にライティングを検証します。
 ---
 
 ![Viewport](/img/user-manual/editor/viewport/viewport.jpg)
