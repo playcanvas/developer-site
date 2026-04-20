@@ -1,0 +1,38 @@
+---
+description: "`<Entity>` コンポーネントは PlayCanvas React アプリケーションの基本的な構成要素です。"
+---
+
+# `<Entity/>`
+
+`<Entity/>` コンポーネントは React アプリケーションの基本的な構成要素です。シーングラフ階層のノードを表し、子として他の Entity を含めることができ、動作や外観を定義する Component も持つことができます。
+
+```jsx copy
+import { Entity } from '@playcanvas/react'
+
+export default function Scene() {
+  return (
+    <Entity>
+      <Entity name="child" />
+      <Entity name="other-child">
+        <Entity name="nested-child" />
+      </Entity>
+    </Entity>
+  )
+}
+```
+
+`<Entity/>` はトランスフォームノードであり、位置、回転、スケールを持ちます。単体では動作を持ちません。レンダリングや物理への反応、カメラとしての動作を行うには、Component を使用して動作を追加する必要があります。
+
+:::tip
+
+`<Entity/>` 単体では動作を持ちません。`<Entity/>` に Component を追加することで動作を付与できます。Component は PlayCanvas における動作の構成要素です。
+
+:::
+
+## プロパティ
+
+```tsx asTypedoc
+import { Entity } from '@playcanvas/react'
+type $ = React.ComponentProps<typeof Entity>;
+export default $;
+```

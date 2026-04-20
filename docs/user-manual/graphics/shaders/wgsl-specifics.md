@@ -1,5 +1,6 @@
 ---
 title: WGSL Specifics
+description: "Simplified WGSL declarations without manual bind groups: how PlayCanvas assigns bindings and integrates resources."
 ---
 
 WGSL shaders used by the PlayCanvas engine must satisfy certain requirements. These requirements allow the engine to correctly integrate shaders, ensuring they receive the necessary resources such as attributes, uniforms, and varyings.

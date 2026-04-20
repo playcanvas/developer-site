@@ -1,5 +1,6 @@
 ---
 title: Inspector Pane
+description: The Inspector Pane shows graph, node, material, or texture details depending on what is selected in Shader Editor.
 sidebar_position: 3
 ---
 

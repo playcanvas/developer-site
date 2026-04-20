@@ -1,5 +1,6 @@
 ---
 title: Linear Workflow
+description: "Linear color workflow across the engine: linear shader math, sRGB inputs, and LDR versus HDR shader outputs."
 ---
 
 In modern rendering engines, a linear workflow is essential for achieving physically accurate lighting and color representation. This approach ensures that all calculations, from shading to post-processing, occur in a linear color space, preventing errors introduced by gamma-compressed textures or incorrect blending. By working in linear space and applying gamma correction only at the final output stage, we maintain consistency across lighting, textures, and effects, resulting in more realistic and predictable visuals.

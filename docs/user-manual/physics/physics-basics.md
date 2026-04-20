@@ -1,5 +1,6 @@
 ---
 title: Physics Basics
+description: Enable ammo.js, set gravity and units, and configure rigidbody and collision components for Bullet physics.
 ---
 
 PlayCanvas incorporates a very powerful physics engine called [ammo.js](https://github.com/kripken/ammo.js). This is a browser port of the open source C++ Bullet physics engine.

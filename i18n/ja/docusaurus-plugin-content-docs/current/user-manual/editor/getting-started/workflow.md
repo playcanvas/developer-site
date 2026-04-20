@@ -1,5 +1,6 @@
 ---
 title: PlayCanvasのワークフロー
+description: Asset のインポートと Scene の構築から Script、公開まで、PlayCanvas のエンドツーエンドのワークフローをまとめます。
 ---
 
 PlayCanvas Editor を使って 3D ウェブアプリを構築するのは簡単です。

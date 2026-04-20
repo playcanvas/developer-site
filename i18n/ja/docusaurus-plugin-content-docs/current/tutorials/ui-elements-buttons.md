@@ -2,6 +2,7 @@
 title: UI - ボタン
 tags: [ui]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501973/ED1B35-image-75.jpg"
+description: Screen上のElementとButtonコンポーネントでクリック可能なボタンを作り、ホバー、押下、ナビゲーション状態のイベントを接続します。
 ---
 
 <div className="iframe-container">

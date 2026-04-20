@@ -1,5 +1,6 @@
 ---
 title: Using the Engine Standalone
+description: Build PlayCanvas applications without the Editor using npm, a CDN, or a direct script include.
 ---
 
 import Tabs from '@theme/Tabs';

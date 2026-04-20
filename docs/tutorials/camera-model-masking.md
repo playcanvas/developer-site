@@ -1,5 +1,6 @@
 ---
 title: 'Camera model masking'
+description: Use camera and light mask groups so specific lights and views only affect chosen models in layered scenes.
 tags: [rendering, camera, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436772/B47904-image-75.jpg
 ---

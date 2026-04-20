@@ -1,5 +1,6 @@
 ---
 title: Element
+description: PlayCanvas Element component defines 2D UI group, image, or text elements with anchors, pivot, and sizing under a Screen hierarchy.
 ---
 
 The Element Component is used to build user interfaces made up of 2D components such as images and text when in a hierarchy with a Screen Component ancestor. The Element Component provides layout properties such as anchors and a pivot point.

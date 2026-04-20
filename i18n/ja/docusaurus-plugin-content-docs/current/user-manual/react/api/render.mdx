@@ -1,0 +1,53 @@
+---
+description: Render コンポーネントのドキュメント
+---
+
+# `<Render/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { RenderBox } from './render-box';
+import RenderBoxSource from '!!raw-loader!./render-box.jsx';
+
+`<Render/>` コンポーネントは [`<Entity/>`](../entity) が 3D Asset またはプリミティブ形状を表示できるようにします。`<Render/>` コンポーネントを [`<Entity/>`](../entity) に追加すると、Entity に `RenderComponent` が追加されます。`type` Prop でレンダリングするプリミティブ形状を選択できます。
+
+<CodeExample
+  label="Render a primitive shape"
+  filename="render-box.jsx"
+  code={RenderBoxSource}
+  showDemo>
+  <Application>
+    <Staging camera={[2, 0.75, 2]} useGrid={true} useControls={true} >
+      <RenderBox />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## Asset のレンダリング
+
+URL からロードした 3D モデルをレンダリングするには、asset タイプを使用して `asset` Prop に直接 Asset を渡します。Asset のロードについての詳細は [Asset ロードガイド](../../guide/loading-assets) を参照してください。
+
+```jsx copy
+import { Render } from '@playcanvas/react/components'
+import { useModel } from '@playcanvas/react/hooks'
+
+const RenderModel = () => {
+  const { asset } = useModel('model.glb')
+
+  if (!asset) return null
+
+  return <Entity>
+    <Render type="asset" asset={asset} />
+  </Entity>
+}
+```
+
+PlayCanvas ドキュメントの [Render Component](https://api.playcanvas.com/engine/classes/RenderComponent.html) で詳細を確認できます。
+
+## プロパティ
+
+```tsx asTypedoc
+import { Render } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Render>;
+export default $;
+```

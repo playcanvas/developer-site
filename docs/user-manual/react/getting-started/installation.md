@@ -1,5 +1,6 @@
 ---
 title: Installation
+description: Install PlayCanvas React with npm create playcanvas, TypeScript template notes, and manual setup steps for npm packages and Vite.
 ---
 
 import Tabs from '@theme/Tabs';

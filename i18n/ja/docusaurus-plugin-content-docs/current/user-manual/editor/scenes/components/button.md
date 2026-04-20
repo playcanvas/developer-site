@@ -1,5 +1,6 @@
 ---
 title: Button
+description: PlayCanvas の Button Component は、Screen と Element の下で UI ボタンを構築し、ティントやスプライト切り替えのトランジションと入力ヒット領域を提供します。
 ---
 
 Buttonコンポーネントは、[Screen](screen.md)コンポーネントと[Element](element.md)コンポーネントで使用するユーザーインターフェイスボタンを作成するための便利なショートカットです。

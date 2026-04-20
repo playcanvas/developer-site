@@ -1,5 +1,6 @@
 ---
 title: Node Inspector
+description: The Node Inspector edits properties for whichever node is currently selected in the Graph Editor workspace.
 sidebar_position: 2
 ---
 

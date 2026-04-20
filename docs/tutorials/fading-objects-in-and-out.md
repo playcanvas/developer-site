@@ -1,5 +1,6 @@
 ---
 title: 'Fading objects in and out'
+description: Animate material opacity so individual models fade in and out without duplicating geometry or materials.
 tags: [materials, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436566/440B17-image-75.jpg
 ---

@@ -1,5 +1,6 @@
 ---
 title: Camera
+description: PlayCanvas の Camera Component は、投影、クリッピング、レイヤー、トーンマッピング、ビューポート、grab pass などを備えた Entity から Scene をレンダリングします。
 ---
 
 Cameraコンポーネントは、特定の視点からシーンをレンダリングするための機能を提供します。

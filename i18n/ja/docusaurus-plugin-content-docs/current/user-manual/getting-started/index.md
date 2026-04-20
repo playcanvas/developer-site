@@ -1,5 +1,6 @@
 ---
 title: はじめに
+description: 用途に合うPlayCanvas製品（Engine、Editor、React、またはWeb Components）を選び、インタラクティブな3D Webアプリを構築します。
 ---
 
 ## PlayCanvasとは？

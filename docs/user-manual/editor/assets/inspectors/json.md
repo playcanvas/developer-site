@@ -1,5 +1,6 @@
 ---
 title: JSON
+description: JSON assets store structured configuration or game data; the inspector shows syntax-formatted previews without additional editable properties.
 ---
 
 [JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.

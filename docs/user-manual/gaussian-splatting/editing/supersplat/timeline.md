@@ -1,5 +1,6 @@
 ---
 title: Timeline
+description: "SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, and exporting animated camera paths."
 ---
 
 The Timeline panel allows you to create camera animations for your Gaussian Splat scenes. You can set keyframes to define camera positions and movements, creating smooth animated transitions that can be played back in the editor.

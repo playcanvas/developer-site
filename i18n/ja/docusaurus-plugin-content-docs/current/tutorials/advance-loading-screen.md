@@ -2,6 +2,7 @@
 title: '高度なローディング画面'
 tags: [loading, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/458028/1A9054-image-75.jpg
+description: プロジェクトの画像 Asset でローディング画面をカスタマイズし、アプリ初期化中にブランディングやスプラッシュを表示します。
 ---
 
 import Link from '@docusaurus/Link';

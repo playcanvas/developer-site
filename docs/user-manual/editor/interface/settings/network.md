@@ -1,5 +1,6 @@
 ---
 title: Network Settings
+description: Configure asset loading retry behavior and network timeout settings for your PlayCanvas application.
 sidebar_label: Network
 ---
 

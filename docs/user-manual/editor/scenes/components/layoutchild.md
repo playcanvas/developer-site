@@ -1,5 +1,6 @@
 ---
 title: Layout Child
+description: PlayCanvas Layout Child component overrides Layout Group rules for one UI element with min or max sizes, fit proportions, or exclusion.
 ---
 
 The LayoutChild Component enables an element that is controlled by a LayoutGroup Component to override the default behavior of the Layout Group.

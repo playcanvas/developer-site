@@ -1,5 +1,6 @@
 ---
 title: パフォーマンスのトラブルシューティング
+description: GPU ブラックリスト、SwiftShader、Firefox のブロック、Windows のデュアル GPU 選択から遅い WebGL を診断します。
 ---
 
 以下はよくあるパフォーマンスの問題を解決するためのヒントです。

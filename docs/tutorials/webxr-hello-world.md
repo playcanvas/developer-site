@@ -1,5 +1,6 @@
 ---
 title: 'WebXR Hello World'
+description: Enter immersive VR from a minimal scene with a WebXR-ready camera rig and session lifecycle hooks you can extend.
 tags: [vr, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/433339/4FCAA6-image-75.jpg
 ---

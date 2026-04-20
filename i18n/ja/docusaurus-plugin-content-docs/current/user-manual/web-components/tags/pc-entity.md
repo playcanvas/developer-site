@@ -1,5 +1,6 @@
 ---
 title: <pc-entity>
+description: "pc-entity要素のリファレンス: 名前、変換、階層のルール、Entity下で有効な子のComponentタグです。"
 ---
 
 `<pc-entity>`タグはエンティティを定義するために使用されます。

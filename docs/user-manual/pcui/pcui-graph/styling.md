@@ -1,5 +1,6 @@
 ---
 title: Styling
+description: Customizing PCUI Graph appearance by overriding defaultStyles in the graph constructor for backgrounds, nodes, and canvas chrome.
 ---
 
 You can style your graph by overriding its default style properties. This can be achieved by modifying the defaultStyles passed in as part of an options object to the graph constructor.

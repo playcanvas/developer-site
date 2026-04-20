@@ -1,5 +1,6 @@
 ---
 title: Lighting
+description: How dynamic runtime lighting compares to baked lightmaps and when to use each approach in PlayCanvas scenes.
 ---
 
 Lighting a scene is the process of calculating the color or shading of a pixel render to the screen based on the material properties of the surface and the light sources that are applied to that material.

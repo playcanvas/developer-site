@@ -1,5 +1,6 @@
 ---
 title: MiniStats
+description: Enable MiniStats from Launch for draw calls, frame time, and CPU or GPU graphs during development.
 ---
 
 MiniStats is a lightweight graphical overlay that displays real-time performance metrics for your PlayCanvas application. It provides essential statistics including draw call count, frame time, CPU load, and GPU load, helping you identify performance bottlenecks during development.

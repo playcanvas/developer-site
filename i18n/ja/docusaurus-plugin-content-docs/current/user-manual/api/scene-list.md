@@ -1,5 +1,6 @@
 ---
 title: シーン - List scenes
+description: "認証とレスポンススキーマ付きで GET projects/:projectId/scenes を使い、指定した branch id のプロジェクト内の全 Scene を一覧します。"
 ---
 
 ## ルートURL

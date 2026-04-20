@@ -1,5 +1,6 @@
 ---
 title: Graph Inspector
+description: The Graph Inspector for naming graphs, setting labels, and creating new materials from the selected graph in the Assets Pane.
 sidebar_position: 1
 ---
 

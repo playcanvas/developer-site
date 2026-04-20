@@ -1,5 +1,6 @@
 ---
 title: Legacy Post Effects
+description: Attach legacy script post effects to camera entities, order passes, and fetch ready-made effects from the engine repo.
 ---
 
 PlayCanvas provides legacy script-based post effects that are still supported and functional. While many of these effects now have newer, more performant replacements in [CameraFrame](/user-manual/graphics/posteffects/cameraframe), they remain available for use.

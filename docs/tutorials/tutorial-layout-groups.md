@@ -1,5 +1,6 @@
 ---
 title: 'Tutorial: Layout Groups'
+description: Arrange buttons and panels with Layout Group and child layout rules to build responsive PlayCanvas UI flows.
 tags: [ui, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/553515/D4C290-image-75.jpg
 ---

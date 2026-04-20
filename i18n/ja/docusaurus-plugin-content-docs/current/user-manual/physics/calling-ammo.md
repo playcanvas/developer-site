@@ -1,5 +1,6 @@
 ---
 title: ammo.jsのAPIを呼び出す方法
+description: 組み込みの PlayCanvas の物理 Component を超えるジョイントや機能のために、ammo.js と Bullet API を直接呼び出します。
 ---
 
 PlayCanvas の ammo.js 連携により、ammo.js API のすべての機能が公開されるわけではありません。ただし、PlayCanvas スクリプトから直接 ammo.js API を呼び出すことができます。

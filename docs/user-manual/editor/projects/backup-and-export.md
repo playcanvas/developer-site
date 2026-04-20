@@ -1,5 +1,6 @@
 ---
 title: Backup and Export
+description: Compares forks exports scheduled downloads REST backups storage caps and restores while noting what exports omit from projects.
 ---
 
 Protecting your PlayCanvas projects with regular backups is essential for safeguarding against accidental deletion, malicious actions, or data loss. This section covers all the methods available for backing up and restoring your projects.

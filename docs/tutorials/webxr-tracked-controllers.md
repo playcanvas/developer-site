@@ -1,5 +1,6 @@
 ---
 title: 'WebXR Tracked Controllers'
+description: Follow six-DoF controllers in VR with starter code for poses, buttons, and haptics inside a PlayCanvas WebXR template.
 tags: [input, vr, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/457917/EF3EDA-image-75.jpg
 ---

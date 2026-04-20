@@ -1,5 +1,6 @@
 ---
 title: Font
+description: TTF などの Font Asset は SDF アトラスに変換されます。強度、文字プリセット、範囲を設定し、編集後に再生成します。
 ---
 
 Fontアセットには、ユーザーが含めることを選択したフォントのすべての文字が含まれる画像と、各文字がどのように表示されるかに関連するデータが含まれています。Fontアセットは、テキストをレンダリングするためにTextタイプのElement Componentを使用します。テキストをレンダリングするには、エンティティに[Element](/user-manual/editor/scenes/components/element/)コンポーネントを追加し、そのタイプをTextに設定し、フォントアセットをElement ComponentのFontスロットにドラッグアンドドロップします。

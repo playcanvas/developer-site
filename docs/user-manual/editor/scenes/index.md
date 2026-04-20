@@ -1,5 +1,6 @@
 ---
 title: Working with Scenes
+description: Scenes hub explaining entities, components, and scene-wide settings, with links for managing scene files, component types, and runtime scene loading.
 ---
 
 A **Scene** is the foundation of your PlayCanvas application. It defines the 3D world that users will experience, containing all the entities, components and settings that make up your game or interactive experience.

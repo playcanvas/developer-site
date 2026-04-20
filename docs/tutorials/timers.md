@@ -1,5 +1,6 @@
 ---
 title: 'Timers'
+description: Extend the engine with one-shot timers that fire callbacks after delays while respecting global pause via time scale.
 tags: [tutorial, time]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691984/71DABB-image-75.jpg
 ---

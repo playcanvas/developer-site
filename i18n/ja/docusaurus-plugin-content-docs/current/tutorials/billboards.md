@@ -2,6 +2,7 @@
 title: 'ビルボード'
 tags: [rendering, camera, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/353938/4RTOLK-image-75.jpg
+description: 木やフレア、スプライトなど、常にカメラ正面を向く平面を維持します。
 ---
 
 import Link from '@docusaurus/Link';

@@ -1,5 +1,6 @@
 ---
 title: Common Questions
+description: FAQ-style steps for adding components scripts materials lights cubemaps entities primitives cameras shaders and everyday PlayCanvas Editor setup questions.
 ---
 
 

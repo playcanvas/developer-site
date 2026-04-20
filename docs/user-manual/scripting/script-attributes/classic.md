@@ -1,5 +1,6 @@
 ---
 title: Classic Reference
+description: Reference for Classic Script Attributes including type declarations and Editor integration for legacy scripts.
 ---
 
 :::note

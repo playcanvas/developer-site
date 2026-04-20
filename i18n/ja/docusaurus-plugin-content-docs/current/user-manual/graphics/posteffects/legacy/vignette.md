@@ -1,5 +1,6 @@
 ---
 title: ビネットエフェクト
+description: エッジを暗くするレガシーのビネット offset と darkness コントロール、およびビネット Script の GitHub リンクです。
 ---
 
 写真撮影や光学において、[ビネット効果](https://en.wikipedia.org/wiki/Vignetting)とは、中心部に比べて画像の周辺部の明るさや彩度が低下することです。この効果は、視聴者の目をフレームの中心に向けるために使用することができます。

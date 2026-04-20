@@ -1,5 +1,6 @@
 ---
 title: Hit Testing
+description: "AR hit testing in PlayCanvas: ray intersections with real-world geometry, reliability, and placing virtual objects that align with the scene."
 ---
 
 In an AR/MR context, the interaction of virtual world objects with the real world is achieved by many techniques. Hit Testing allows one to pick a point in space by probing real-world geometry that is estimated using the underlying AR system.

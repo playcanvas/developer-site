@@ -1,5 +1,6 @@
 ---
 title: Dev Logs
+description: Posts project updates previews publishing gating and discoverability across dashboard feeds and the public PlayCanvas feed.
 ---
 
 Development Logs (or Dev Logs for short) are a powerful feature for communicating project updates, milestones, and news with your team and community. They help track progress and keep stakeholders informed about your project's development.

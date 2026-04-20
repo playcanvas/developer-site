@@ -2,6 +2,7 @@
 title: '解像度スケーリング'
 tags: [mobile, rendering, resolution, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/708300/702D33-image-75.jpg
+description: 内部の 3D 解像度をパフォーマンス向けにスケールし、ワールドとオーバーレイのレンダリングパスを分けてシャープなスクリーン空間 UI を保ちます。
 ---
 
 import Link from '@docusaurus/Link';

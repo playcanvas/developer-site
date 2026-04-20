@@ -2,6 +2,7 @@
 title: 'WebXR: Plane Detection'
 tags: [camera, ar, tutorial]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/782753/602922-image-75.jpg"
+description: WebXR平面検出の更新を購読し、床やテーブルの推定を可視化して実際の面にコンテンツをアンカーします。
 ---
 
 import Link from '@docusaurus/Link';

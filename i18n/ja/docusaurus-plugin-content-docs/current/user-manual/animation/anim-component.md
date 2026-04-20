@@ -1,5 +1,6 @@
 ---
 title: Animコンポーネント
+description: animstategraphとアニメーションアセットをEntityに接続するanimコンポーネントのエディターガイドです。
 ---
 
 [Animコンポーネント](/user-manual/editor/scenes/components/anim/)の使用方法についてはこちらをクリックしてください。

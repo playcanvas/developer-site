@@ -1,5 +1,6 @@
 ---
 title: First Person Movement
+description: Implement first-person movement with rigidbody forces, mouse look, and an optional child camera rig.
 tags: [input, camera]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405842/JLWRE0-image-75.jpg
 ---

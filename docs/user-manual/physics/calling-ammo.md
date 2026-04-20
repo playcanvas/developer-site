@@ -1,5 +1,6 @@
 ---
 title: Calling the ammo.js API
+description: Call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components.
 ---
 
 The PlayCanvas integration with ammo.js does not expose the full capability of the ammo.js API. However, it is possible to call the ammo.js API directly from your PlayCanvas scripts.

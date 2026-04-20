@@ -1,5 +1,6 @@
 ---
 title: Engine Settings
+description: Choose which PlayCanvas Engine version to use when launching, publishing, or downloading your Editor project.
 sidebar_label: Engine
 ---
 

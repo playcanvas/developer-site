@@ -2,6 +2,7 @@
 title: '爆発パーティクルエフェクト'
 tags: [particles, camera, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439297/80EDE5-image-75.jpg
+description: カメラシェイクとパーティクルエミッタを重ね、リアルタイムで爆発の衝撃と破片を表現します。
 ---
 
 import Link from '@docusaurus/Link';

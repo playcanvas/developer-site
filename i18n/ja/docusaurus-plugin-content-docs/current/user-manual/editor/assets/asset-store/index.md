@@ -1,5 +1,6 @@
 ---
 title: アセットストア
+description: Editor から PlayCanvas Asset Store を閲覧し、PlayCanvas、Sketchfab、または My Assets のストアを選び、検索・フィルターしてプロジェクトにアイテムをインポートします。
 ---
 
 PlayCanvas Asset Storeは、プロジェクトで使用できる無料のアセットのライブラリです。3Dモデル、フォント、スクリプトなどが含まれています。

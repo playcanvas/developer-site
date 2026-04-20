@@ -1,5 +1,6 @@
 ---
 title: Sprite Editor
+description: Use the Sprite Editor to define atlas frames, borders, and sprites for 2D and UI rendering.
 ---
 
 The Sprite Editor is used to edit both Texture Atlas assets and Sprite assets. It is also used to create Sprite Assets.

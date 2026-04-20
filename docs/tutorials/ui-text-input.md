@@ -1,5 +1,6 @@
 ---
 title: User Interface - Text Input
+description: Overlay an HTML text input on the canvas for OS-native typing, copy-paste, and IME support tied to PlayCanvas UI focus.
 tags: [ui]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1005906/36C2AF-image-75.jpg
 ---

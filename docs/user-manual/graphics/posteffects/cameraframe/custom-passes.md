@@ -1,12 +1,13 @@
 ---
 title: Custom Render Passes
+description: Build custom RenderPass-based post stacks on the camera without CameraFrame for full manual pipeline control.
 ---
 
 The most flexible approach is to implement completely custom render passes that work independently from `CameraFrame`. This gives you full control over the rendering pipeline and allows you to build a custom post-processing stack from scratch.
 
 ## Overview
 
-This approach does not use `CameraFrame` at all. Instead, you create your own render passes and assign them directly to the camera's `renderPasses` array. This is ideal when you need complete control or want to implement a custom post-processing pipeline.
+This approach does not use `CameraFrame` at all. Instead, you create your own render passes and assign them directly to the camera's `framePasses` array. This is ideal when you need complete control or want to implement a custom post-processing pipeline.
 
 ## Example: Simple Tint Render Pass
 
@@ -79,7 +80,7 @@ const tintPass = new RenderPassTint(device, renderTarget.colorBuffer);
 tintPass.init(camera.renderTarget);
 
 // Assign passes to the camera
-camera.renderPasses = [scenePass, tintPass];
+camera.framePasses = [scenePass, tintPass];
 ```
 
 ## Multi-Pass Example
@@ -115,7 +116,7 @@ const blurVPass = new RenderPassBlurVertical(device, rt2.colorBuffer);
 blurVPass.init(camera.renderTarget); // Final output
 
 // Set the pass chain
-camera.renderPasses = [scenePass, blurHPass, blurVPass];
+camera.framePasses = [scenePass, blurHPass, blurVPass];
 ```
 
 ## Resources

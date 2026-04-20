@@ -1,0 +1,51 @@
+---
+description: Camera コンポーネントのドキュメント
+---
+
+# `<Camera/>`
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { CameraExample } from './camera-example';
+import CameraExampleSource from '!!raw-loader!./camera-example.jsx';
+
+シーンにカメラがなければ、何もレンダリングされません。`<Camera/>` コンポーネントは [`<Entity/>`](../entity) がそのパースペクティブからシーンをレンダリングできるようにします。Entity の位置と回転を設定してカメラの視点を制御します。
+
+## 使い方
+
+`<Camera/>` を [`<Entity/>`](../entity) にアタッチすると、その Entity の位置と回転からシーンをレンダリングします。
+
+```tsx
+<Entity>
+  <Camera clearColor="red" />
+</Entity>
+```
+
+この例では、シーン内の 2 つの異なるカメラを切り替えています。それぞれ独自のプロパティを持っています。
+
+<CodeExample
+  label="Switch between camera types"
+  code={CameraExampleSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      useCamera={false}
+    >
+      <CameraExample />
+    </Staging>
+  </Application>
+</CodeExample>
+
+PlayCanvas ドキュメントの [Camera Component](https://api.playcanvas.com/engine/classes/CameraComponent.html) で詳細を確認できます。
+
+## プロパティ
+
+```tsx asTypedoc
+import { Camera } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Camera>;
+export default $;
+```

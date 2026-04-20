@@ -1,5 +1,6 @@
 ---
 title: Shader
+description: Shader assets hold GLSL from new asset or upload; edit in the Script Editor and view a read-only code preview in the Inspector.
 ---
 
 A Shader asset contains GLSL code for custom rendering effects. You can create a new Shader asset by clicking New Shader in the Asset Panel or by uploading a file with an extension of `.vert`, `.frag`, or `.glsl`.

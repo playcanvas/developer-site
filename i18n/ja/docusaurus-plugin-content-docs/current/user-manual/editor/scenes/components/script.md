@@ -1,5 +1,6 @@
 ---
 title: Script
+description: PlayCanvas の Script Component は、load、update、カスタムゲームプレイロジックのために Entity 上で動かす JavaScript または TypeScript の Script をアタッチします。
 ---
 
 Scriptコンポーネントは、エンティティがユーザー提供のスクリプトを実行することを可能にします。これにより、ユーザーはJavaScriptまたはTypeScriptを使用してスクリプトを作成し、エンティティがインスタンス化されたときやフレームごとに更新されるときに実行できます。

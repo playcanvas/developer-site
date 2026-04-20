@@ -1,5 +1,6 @@
 ---
 title: Plane Detection
+description: "AR plane detection in PlayCanvas: labeled surfaces such as floors and walls, geometry access, and comparing planes to mesh detection."
 ---
 
 Very similar to [Mesh Detection](/user-manual/xr/ar/mesh-detection/), Plane Detection provides access to planes that estimate real-world surfaces.

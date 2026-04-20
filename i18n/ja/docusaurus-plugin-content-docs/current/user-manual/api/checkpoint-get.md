@@ -1,5 +1,6 @@
 ---
 title: チェックポイント - Get checkpoint
+description: REST APIからIDで単一のチェックポイントレコードを取得し、バージョン履歴の確認や自動化ワークフローに使います。
 ---
 
 ## ルートURL

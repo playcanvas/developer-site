@@ -1,5 +1,6 @@
 ---
 title: Facebook API
+description: Integrate Facebook login and Graph API calls in PlayCanvas for social features and photo-driven experiences.
 tags: [facebook]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405897/26D1D2-image-75.jpg
 ---

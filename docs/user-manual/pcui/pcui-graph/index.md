@@ -1,5 +1,6 @@
 ---
 title: PCUI Graph
+description: "PCUI Graph for node-based graphs in the browser: purpose, relationship to PCUI, and where to find the standalone package and docs."
 ---
 
 ![PCUI Graph Banner](/img/user-manual/pcui/pcui-graph-banner.png)

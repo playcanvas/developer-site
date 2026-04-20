@@ -1,5 +1,6 @@
 ---
 title: インスペクターパネル (Inspector)
+description: Entity と Asset の属性向けの Inspector のヒント。ギズモ、実行時のライブ調整、型付きコピー＆ペースト、複数選択の一括操作、Undo との連携を扱います。
 ---
 
 ![Inspector Panel](/img/user-manual/editor/inspector/inspector.png)

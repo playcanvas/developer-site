@@ -1,5 +1,6 @@
 ---
 title: Team Management
+description: Invites collaborators sets read write admin permissions and manages membership rules for shared PlayCanvas editor projects.
 ---
 
 Effective team management is crucial for collaborative development in PlayCanvas. This section covers how to add team members, manage permissions, and coordinate with your development team.

@@ -1,5 +1,6 @@
 ---
 title: Using the Engine API
+description: "Step-by-step: load a splat with the PlayCanvas Engine API, ES modules, camera controls, and a minimal HTML and JavaScript setup."
 ---
 
 Let's build a simple Gaussian splat application step by step using the [PlayCanvas Engine](/user-manual/engine) directly. We'll create a scene with an interactive 3D toy cat splat that you can rotate around.

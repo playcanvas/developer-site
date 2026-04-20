@@ -1,5 +1,6 @@
 ---
 title: Shader Preprocessor
+description: C-style defines, includes, and ifdef chains applied to GLSL, WGSL, and compute shaders before compilation.
 ---
 
 Before shaders are compiled, PlayCanvas applies a C-style preprocessor to the source code. This allows you to manage shader variations, conditionally include code, and inject values. The preprocessor works with GLSL, WGSL, and compute shaders.

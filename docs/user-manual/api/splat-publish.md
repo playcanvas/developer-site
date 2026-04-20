@@ -1,5 +1,6 @@
 ---
 title: Splat Publishing
+description: "SuperSplat publish flow via REST: signed S3 upload URL, direct file upload, and processing job endpoints with bearer authentication."
 unlisted: true
 ---
 
@@ -37,7 +38,7 @@ Example:
 const response = await fetch(`https://playcanvas.com/api/upload/signed-url`, {
     method: 'POST',
     body: JSON.stringify({
-        filename: filename
+        fileName: filename
     }),
     headers: {
         'Authorization': `Bearer ${token}`,
@@ -106,11 +107,11 @@ Response (Splat data)
   "hash": "string",
   "title": "string",
   "description": "string",
-  "format": "compressed.ply | sog"
+  "format": "compressed.ply | sog",
   "version": "string",
   "release_notes": "string",
   "thumbnails": number,
-  "size": number
+  "size": number,
   "views": number, 
   "comments": number, 
   "starred": number, 
@@ -145,28 +146,28 @@ Sample response
 
 ```json
 {
-  comments = 0
-  completedAt = null
-  createdAt = '2025-10-21T12:42:13.331Z'
-  currentVersion = 1
-  description = 'Some Description'
-  featuredWeight = 0
-  format = ''
-  hash = '982a2820'
-  hasThumbnails = false
-  id = 50
-  listed = true
-  modifiedAt = '2025-10-21T12:42:13.331Z'
-  releaseNotes = null
-  size = 0
-  starred = 0
-  tags = (0) []
-  task = {status: 'running', message: ''}
-  title = 'Some Title'
-  url = 'https://superspl.at/view?id=982a2820'
-  userId = 7
-  version = 0
-  views = 0
+  "comments": 0,
+  "completedAt": null,
+  "createdAt": "2025-10-21T12:42:13.331Z",
+  "currentVersion": 1,
+  "description": "Some Description",
+  "featuredWeight": 0,
+  "format": "",
+  "hash": "982a2820",
+  "hasThumbnails": false,
+  "id": 50,
+  "listed": true,
+  "modifiedAt": "2025-10-21T12:42:13.331Z",
+  "releaseNotes": null,
+  "size": 0,
+  "starred": 0,
+  "tags": [],
+  "task": { "status": "running", "message": "" },
+  "title": "Some Title",
+  "url": "https://superspl.at/view?id=982a2820",
+  "userId": 7,
+  "version": 0,
+  "views": 0
 }
 ```
 

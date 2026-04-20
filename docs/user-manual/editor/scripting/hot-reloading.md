@@ -1,5 +1,6 @@
 ---
 title: Hot Reloading
+description: Explains implementing swap to reload scripts live without full refresh and how to migrate listeners and state safely.
 ---
 
 When you are iterating on a complex project it can be frustrating to have to do a full page refresh every time you make a change to a script. Especially if it takes you a long time to get to the point where you are testing your code. That is where hot-swapping of code comes in.

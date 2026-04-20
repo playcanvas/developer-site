@@ -1,5 +1,6 @@
 ---
 title: Splat Data Format
+description: "GSplatFormat and GPU texture streams: how splat attributes are stored, shader access, and customizing splat data layout (beta)."
 ---
 
 `GSplatFormat` describes how splat data is stored in GPU textures and generates the shader code needed to read that data. It defines texture streams (name and pixel format) and shader code for extracting splat attributes.

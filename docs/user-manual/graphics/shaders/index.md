@@ -1,5 +1,6 @@
 ---
 title: Shaders
+description: Author ShaderMaterial with paired GLSL and WGSL, declare attributes, and integrate with the engine shader system.
 ---
 
 When you import your 3D models into PlayCanvas, by default, they will use our [Physical Material](/user-manual/graphics/physical-rendering/physical-materials/). This is a versatile material type that can cover a lot of your rendering needs.

@@ -1,5 +1,6 @@
 ---
 title: Webページとの通信
+description: iframe かファーストパーティの HTML シェルかにかかわらず、親ページの Script が PlayCanvas とやり取りするためのパターンです。
 ---
 
 PlayCanvasとWebGLを使う最大の利点の一つは、アプリケーションと周囲のWebページとの間に直接的にやり取りできることです。このページでは、PlayCanvasアプリケーションとWebページまたはWebアプリケーションを接続する一般的な方法について説明します。

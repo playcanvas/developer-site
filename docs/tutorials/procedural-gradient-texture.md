@@ -1,5 +1,6 @@
 ---
 title: 'Procedural Gradient Texture'
+description: Generate a gradient texture in code and apply it to materials instead of importing a bitmap for smooth color ramps.
 tags: [textures, rendering, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/708598/6E96B8-image-75.jpg
 ---

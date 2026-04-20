@@ -1,5 +1,6 @@
 ---
 title: Billing
+description: Frequently asked questions about PlayCanvas subscription plans, payments, invoices, and plan changes.
 ---
 
 Welcome to the Billing FAQ that lists the common questions relating to your PlayCanvas subscription.
@@ -91,13 +92,7 @@ You may want to edit certain details that appear on your invoices such as:
 * Billing Address
 * Tax ID
 
-To do this, visit the account page for your subscribed account (remembering that Organizations have their own account page). Navigate to the Billing Info section and hit the Edit link. Fill out the payment details form and hit 'PAY NOW'.
-
-:::note
-
-While the button says 'PAY NOW', editing the details of an existing subscription will not trigger a payment straight away. You will be billed as normal on the next billing date and the invoice will show the updated details.
-
-:::
+To do this, visit the account page for your subscribed account (remembering that Organizations have their own account page). Navigate to the Billing Info section and hit the Edit link. Fill out the payment details form and hit 'UPDATE CARD'.
 
 ### How is billing for Organization accounts calculated?
 

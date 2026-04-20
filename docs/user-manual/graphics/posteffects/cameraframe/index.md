@@ -1,5 +1,6 @@
 ---
 title: Modern Post Processing
+description: "CameraFrame HDR stack: bloom, SSAO, TAA, depth of field, grading, examples, and customization entry points."
 ---
 
 PlayCanvas offers modern post-processing workflows that provide visually advanced and performant implementations. The primary approach uses the [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) class for HDR post-processing with built-in effects, but you can also create fully custom render passes for complete control.
@@ -43,9 +44,9 @@ Extend the `CameraFrame` by adding effects to the final compose pass only. This 
 
 **Best for:** Simple screen-space effects, color adjustments, quick prototyping.
 
-### [Extending RenderPassCameraFrame Class](extending-class)
+### [Extending FramePassCameraFrame Class](extending-class)
 
-Extend the `CameraFrame` by adding custom render passes. This allows you to integrate additional rendering techniques while leveraging built-in effects.
+Extend the `CameraFrame` by adding custom frame passes. This allows you to integrate additional rendering techniques while leveraging built-in effects.
 
 **Best for:** Multi-pass effects, advanced integrations, processing intermediate results.
 

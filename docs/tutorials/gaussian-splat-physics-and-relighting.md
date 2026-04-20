@@ -1,5 +1,6 @@
 ---
 title: '3D Gaussian Splat Physics and Relighting'
+description: Combine SOG splats with shadows, dynamic relighting, and physics for walkable real-world scanned spaces.
 tags: [gaussiansplatting, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1358087/92BB65-image-75.jpg
 ---

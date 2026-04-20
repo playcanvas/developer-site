@@ -2,6 +2,7 @@
 title: 'HTML/CSS UI'
 tags: [html, ui, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/443090/3B31E1-image-75.jpg
+description: 標準の HTML と CSS でレイヤー化した HUD とメニューを構築し、WebGL キャンバス上に合成します。
 ---
 
 import Link from '@docusaurus/Link';

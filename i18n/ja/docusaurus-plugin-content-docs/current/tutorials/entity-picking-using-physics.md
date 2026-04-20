@@ -2,6 +2,7 @@
 title: '物理を使ったエンティティのピッキング'
 tags: [input, physics, tutorial, raycast]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/410547/4B3EC7-image-75.jpg
+description: ポインターから物理レイキャストを飛ばし、3D でカーソル下の Entity を選択します。
 ---
 
 import Link from '@docusaurus/Link';

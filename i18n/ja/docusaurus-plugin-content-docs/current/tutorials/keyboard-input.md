@@ -2,6 +2,7 @@
 title: キーボード入力の基礎
 tags: [input]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405804/513097-image-75.jpg"
+description: Keyboard API でキー押下と長押しを検出し、ゲームプレイの操作や簡単なインタラクションに使います。
 ---
 
 <div className="iframe-container">

@@ -1,5 +1,6 @@
 ---
 title: Scene Picker
+description: Select meshes and splats from screen coordinates with the Picker API, async reads, and optional depth-based world positions.
 ---
 
 The Picker class provides a way to select mesh instances from screen coordinates by clicking or touching the screen. It works by rendering the scene from a camera's viewpoint to an offscreen buffer with unique ID colors, allowing efficient identification of clicked objects. The picker supports both regular meshes and Gaussian Splats, and works across WebGL2 and WebGPU backends.

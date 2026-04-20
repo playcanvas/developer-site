@@ -1,5 +1,6 @@
 ---
 title: 'Loading Circle UI'
+description: Implement a radial loading spinner UI with materials and animation for clear feedback while content streams in.
 tags: [materials, ui, animation, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/705273/8B52B3-image-75.jpg
 ---

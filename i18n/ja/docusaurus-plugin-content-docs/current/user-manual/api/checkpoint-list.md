@@ -1,5 +1,6 @@
 ---
 title: チェックポイント - List checkpoints
+description: "GET branches/:branchId/checkpointsでブランチのチェックポイントを新しい順に一覧し、ページネーションの注意とcurlの例を扱います。"
 ---
 
 ## ルートURL

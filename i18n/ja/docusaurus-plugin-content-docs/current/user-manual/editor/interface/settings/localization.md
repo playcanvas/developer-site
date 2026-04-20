@@ -1,6 +1,7 @@
 ---
 title: ローカライゼーション設定
 sidebar_label: Localization
+description: Localization パネルの使い方。JSON の翻訳 Asset の登録、スターターファイルの作成、実行時の言語切り替えロジックの前にキーが UI の文字列にどう対応するかを説明します。
 ---
 
 複数言語対応のための JSON ファイルを管理します。

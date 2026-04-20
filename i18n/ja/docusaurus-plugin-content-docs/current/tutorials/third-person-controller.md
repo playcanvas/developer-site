@@ -2,6 +2,7 @@
 title: '三人称コントローラー'
 tags: [input, camera, physics, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/705595/FA7C28-image-75.jpg
+description: チェイスカメラで操作可能なキャラクターを追従し、入力と物理を扱う基本的なサードパーソン移動のリグを作ります。
 ---
 
 import Link from '@docusaurus/Link';

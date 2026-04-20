@@ -2,6 +2,7 @@
 title: プログラムでのステージの生成
 tags: [procedural]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405864/A3MSWE-image-75.jpg"
+description: エディタで作ったタイルの Entity をグリッド上にランダム選択で複製し、ランタイムでシンプルなプロシージャルレベルを組み立てます。
 ---
 
 <div className="iframe-container">

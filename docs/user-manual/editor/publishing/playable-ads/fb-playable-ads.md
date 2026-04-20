@@ -1,5 +1,6 @@
 ---
 title: Facebook Playable Ad
+description: Documents the REST API tool export settings, size budgeting, and checklists for Facebook single-file or zip playable ads.
 ---
 
 PlayCanvas supports the [Facebook Playable Ad](https://www.facebook.com/business/ads/playable-ad-format) formats and requirements via an [official external tool on GitHub](https://github.com/playcanvas/playcanvas-rest-api-tools).

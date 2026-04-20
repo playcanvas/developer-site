@@ -1,5 +1,6 @@
 ---
 title: <pc-module>
+description: "pc-module要素のリファレンス: Scriptやプラグイン用にWasmモジュールを読み込み、PlayCanvasのScript Componentに関連付けます。"
 ---
 
 `<pc-module>`タグはWebAssemblyモジュールをロードするために使用されます。

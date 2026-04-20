@@ -1,5 +1,6 @@
 ---
 title: Render
+description: Render Asset Inspector は、読み取り専用のメッシュ統計、頂点属性、圧縮、および元のコンテナ GLB Asset へのリンクを表示します。
 ---
 
 Render アセットには、インポートされた3Dモデルファイル（GLBやFBXなど）から抽出された3Dメッシュデータが含まれます。3Dモデルの形状と構造を定義し、[Render Component](/user-manual/editor/scenes/components/render/)によってシーン内にジオメトリを表示するために使用されます。

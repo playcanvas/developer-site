@@ -1,5 +1,6 @@
 ---
 title: Editor Settings
+description: Personal editor preference panels for grid snap zoom grab passes preview clip gamma tonemap fog icons locale chat alerts duplicates and lightmapper auto rebake.
 sidebar_label: Editor
 ---
 

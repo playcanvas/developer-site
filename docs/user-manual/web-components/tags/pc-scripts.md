@@ -1,5 +1,6 @@
 ---
 title: <pc-scripts>
+description: "Reference for the pc-scripts element: script component container grouping multiple pc-script children and shared script settings."
 ---
 
 The `<pc-scripts>` tag is used to define a scripts component.

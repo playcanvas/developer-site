@@ -1,6 +1,7 @@
 ---
 title: エンジン設定
 sidebar_label: Engine
+description: Editor プロジェクトの起動、公開、ダウンロード時に使う PlayCanvas Engine のバージョンを選びます。
 ---
 
 起動、公開、ビルドのダウンロード時に使用する PlayCanvas エンジンのバージョンを設定します。

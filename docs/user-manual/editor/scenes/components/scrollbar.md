@@ -1,5 +1,6 @@
 ---
 title: Scrollbar
+description: PlayCanvas Scrollbar component provides a draggable handle Element that drives scroll position for an associated Scroll View component.
 ---
 
 The Scrollbar Component defines a scrolling control for a [Scroll View](scrollview.md) Component.

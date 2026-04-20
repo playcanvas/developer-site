@@ -1,5 +1,6 @@
 ---
 title: Facebook
+description: PlayCanvas ゲーム向けの Facebook Canvas アプリ設定を順に案内し、安全な Canvas URL と必要な開発者設定を扱います。
 ---
 
 [Facebook](https://facebook.com)から大勢のユーザにPlayCanvasゲームを公開することができます。PlayCanvasからFacebookにゲームを公開するのは簡単です。

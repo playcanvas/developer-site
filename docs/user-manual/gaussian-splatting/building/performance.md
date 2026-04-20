@@ -1,5 +1,6 @@
 ---
 title: Performance
+description: "Performance tips for splat scenes: splat counts, fill rate, scene settings, LOD streaming budgets, and optimization strategies."
 ---
 
 Rendering splats can be expensive on both the CPU and GPU. Here are some strategies to achieve good performance:

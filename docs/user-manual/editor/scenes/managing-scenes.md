@@ -1,5 +1,6 @@
 ---
 title: Managing Scenes
+description: Use the Scenes dialog from the menu or toolbar to filter lists, create, duplicate, open, and delete scene files across your PlayCanvas project.
 ---
 
 The Scenes dialog allows you to create, open, duplicate and delete scenes in your project.

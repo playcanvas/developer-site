@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Install PlayCanvas Web Components from npm, configure import maps for the engine, register elements, and embed a minimal HTML example.
 ---
 
 Before you begin, make sure you have [Node.js](https://nodejs.org/) 18 or later installed.

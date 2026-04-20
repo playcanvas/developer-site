@@ -1,5 +1,6 @@
 ---
 title: Light
+description: PlayCanvas Light component adds directional, omni, or spot lights with color, intensity, range, falloff, area shapes, and lightmap options.
 ---
 
 The Light Component attaches a dynamic light source to the Entity. The 'Type' property determines what kind of light is attached and what other properties are available.

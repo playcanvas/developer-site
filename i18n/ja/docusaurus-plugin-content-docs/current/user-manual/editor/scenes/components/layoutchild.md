@@ -1,5 +1,6 @@
 ---
 title: Layout Child
+description: PlayCanvas の Layout Child Component は、1 つの UI 要素について Layout Group のルールを上書きし、最小・最大サイズ、フィット比率、除外を設定します。
 ---
 
 LayoutChildコンポーネントは、LayoutGroupコンポーネントによって制御されるエレメントが、Layout Groupのデフォルト動作をオーバーライドすることを可能にします。

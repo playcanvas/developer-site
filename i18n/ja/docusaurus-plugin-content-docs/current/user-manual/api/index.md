@@ -1,5 +1,6 @@
 ---
 title: REST API
+description: "PlayCanvas REST APIの概要: ベータ状態、HTTPSとベアラートークン認証、エンドポイント一覧、ツールからAPIを呼び出す方法です。"
 ---
 
 :::warning

@@ -1,5 +1,6 @@
 ---
 title: Render
+description: PlayCanvas の Render Component は、マテリアル、シャドウ、ライトマップ、バッチング、レイヤー、スキニング付きでメッシュプリミティブまたは render Asset を描画します。
 ---
 
 Renderコンポーネントは、エンティティがプリミティブ形状またはレンダーアセットをレンダリングすることを可能にします。

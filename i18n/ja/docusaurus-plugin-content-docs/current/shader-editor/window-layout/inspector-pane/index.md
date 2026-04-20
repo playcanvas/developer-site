@@ -1,6 +1,7 @@
 ---
 title: インスペクターペイン
 sidebar_position: 3
+description: Shader Editor で選択中の項目に応じて、グラフ・ノード・マテリアル・テクスチャの詳細を表示する Inspector Pane です。
 ---
 
 インスペクターペイン (Inspector Pane) では、現在選択されているアイテムの詳細が表示されます。

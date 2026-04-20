@@ -1,5 +1,6 @@
 ---
 title: 'WebXR Controller/Hand Models'
+description: Load WebXR input profile meshes for controllers and hands so tracked hardware matches each vendor silhouette in VR.
 tags: [input, vr, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/706679/B12FF3-image-75.jpg
 ---

@@ -1,5 +1,6 @@
 ---
 title: Audio
+description: ブラウザがサポートする音声形式向けのオーディオ Asset Inspector。長さのメタデータと、使用前にクリップを試聴する組み込み再生コントロールを備えます。
 ---
 
 Audioアセットは、[Sound Component](/user-manual/editor/scenes/components/sound/)を使用して再生できる音声ファイルです。

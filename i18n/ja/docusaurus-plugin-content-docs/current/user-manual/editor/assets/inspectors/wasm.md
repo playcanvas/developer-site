@@ -1,5 +1,6 @@
 ---
 title: WASM Module
+description: Wasm Module Asset は Emscripten のバイナリを対応する glue と、任意の asm フォールバック Script に接続します。命名要件は Inspector に表示されます。
 ---
 
 Wasmモジュール(WebAssemblyモジュールとも呼ばれます)には、Web向けにコンパイルされた実行可能コードが含まれています。

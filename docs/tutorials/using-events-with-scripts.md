@@ -1,5 +1,6 @@
 ---
 title: 'Using events with scripts'
+description: Decouple scripts by firing and listening for custom events on entities or the application for modular gameplay messaging.
 tags: [events, tutorial, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437673/ED3EC5-image-75.jpg
 ---

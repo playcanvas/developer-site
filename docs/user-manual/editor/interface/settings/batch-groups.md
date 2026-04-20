@@ -1,5 +1,6 @@
 ---
 title: Batch Group Settings
+description: Create and configure Batch Groups to combine meshes into fewer draw calls for better rendering performance.
 sidebar_label: Batch Groups
 ---
 

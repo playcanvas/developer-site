@@ -1,5 +1,6 @@
 ---
 title: Components
+description: Explore PlayCanvas entity components that add behavior such as rendering, physics, audio, UI, and scripting to your scene.
 ---
 
 A component encapsulates functionality that can be added to or removed from entities. For example, a component might enable an entity to play sound, render a 3D model or run a script.

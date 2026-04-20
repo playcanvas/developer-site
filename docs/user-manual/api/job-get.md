@@ -1,5 +1,6 @@
 ---
 title: Jobs - Get job
+description: Poll asynchronous export and download jobs by id until status is complete or error, reading result URLs from job payload data.
 ---
 
 ## Route URL

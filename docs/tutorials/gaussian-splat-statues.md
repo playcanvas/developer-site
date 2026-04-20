@@ -1,5 +1,6 @@
 ---
 title: '3D Gaussian Splat Statues'
+description: Present a gallery of Gaussian splat statues with custom shaders and post effects between exhibit transitions.
 tags: [gaussiansplatting, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1224723/266D9C-image-75.jpg
 ---

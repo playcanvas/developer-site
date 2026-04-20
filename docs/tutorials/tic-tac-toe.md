@@ -1,5 +1,6 @@
 ---
 title: 'Tic Tac Toe'
+description: Implement a playable 3D tic-tac-toe board with turn handling, win detection, and UI feedback in a small sample game.
 tags: [games, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/671439/C24512-image-75.jpg
 ---

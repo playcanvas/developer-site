@@ -2,6 +2,7 @@
 title: 'モバイルUIセーフエリア'
 tags: [ui, tutorial, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/828118/9F85DB-image-75.jpg
+description: ノッチや角丸デバイスのセーフエリア内にスクリーン UI を配置し、コントロールをシステムバーやハードウェアの切り欠きから避けます。
 ---
 
 import Link from '@docusaurus/Link';

@@ -1,5 +1,6 @@
 ---
 title: Model (Legacy)
+description: PlayCanvas legacy Model component (deprecated) renders primitives or a single model asset; prefer the Render component for new work.
 ---
 
 :::warning
@@ -41,4 +42,4 @@ You can control a Model Component's properties using a [Script Component](script
 
 ## Customizing Materials
 
-You can learn how to customize the materials of your model [here](/user-manual/editor/assets/inspectors/material/#assigning-materials).
+You can learn how to customize the materials of your model [here](/user-manual/editor/assets/inspectors/material/).

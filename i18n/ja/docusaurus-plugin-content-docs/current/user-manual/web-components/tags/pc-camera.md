@@ -1,5 +1,6 @@
 ---
 title: <pc-camera>
+description: "pc-camera要素のリファレンス: 投影、クリアオプション、レンダーオーダー、エンジンのカメラComponentに対応する属性です。"
 ---
 
 `<pc-camera>`タグはカメラコンポーネントを定義するために使用されます。

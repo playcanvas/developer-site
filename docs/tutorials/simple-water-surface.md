@@ -1,5 +1,6 @@
 ---
 title: 'Simple water surface'
+description: Approximate a stylized water plane with scrolling normals and fresnel-tinted materials for simple reflective surfaces.
 tags: [rendering, materials, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438476/6F2C27-image-75.jpg
 ---

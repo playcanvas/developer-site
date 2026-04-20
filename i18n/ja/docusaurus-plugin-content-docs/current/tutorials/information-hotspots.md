@@ -2,6 +2,7 @@
 title: '情報ホットスポット'
 tags: [rendering, camera, raycast, tutorial, input]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438515/CA0481-image-75.jpg
+description: 3D ビューにクリック可能なホットスポットを配置し、raycast とスクリーンオーバーレイで情報パネルを開きます。
 ---
 
 import Link from '@docusaurus/Link';

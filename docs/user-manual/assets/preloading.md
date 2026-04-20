@@ -1,5 +1,6 @@
 ---
 title: Preloading
+description: Configure asset preloading to ensure essential resources are ready before your PlayCanvas application starts.
 ---
 
 On the web, it's critical to get users into your application as soon as possible. The PlayCanvas asset system provides preloading to ensure essential assets are ready before your application starts.

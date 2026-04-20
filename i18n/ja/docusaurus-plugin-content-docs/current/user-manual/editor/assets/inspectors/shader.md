@@ -1,5 +1,6 @@
 ---
 title: Shader
+description: Shader Asset は新規 Asset またはアップロードから GLSL を保持します。Script Editor で編集し、Inspector で読み取り専用のコードプレビューを表示します。
 ---
 
 Shader アセットには、カスタムレンダリングエフェクト用のGLSLコードが含まれています。アセットパネルでNew Shaderをクリックするか、`.vert`、`.frag`、または`.glsl`拡張子のファイルをアップロードすることで、新しいShaderアセットを作成できます。

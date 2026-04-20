@@ -1,5 +1,6 @@
 ---
 title: The SOG Format
+description: "SOG (Spatially Ordered Gaussians) specification: WebP textures, meta.json layout, quantization, and bundled versus unbundled files."
 sidebar_label: SOG
 ---
 

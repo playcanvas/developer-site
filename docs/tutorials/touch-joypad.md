@@ -1,5 +1,6 @@
 ---
 title: Touchscreen Joypad Controls
+description: Add a customizable on-screen twin-stick style joypad with PlayCanvas UI elements for mobile character control.
 tags: [input,ui]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1007506/2F5E56-image-75.jpg
 ---

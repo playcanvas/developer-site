@@ -1,5 +1,6 @@
 ---
 title: Screen
+description: PlayCanvas の Screen Component は、スクリーン空間またはワールド空間の UI 領域、解像度スケール、優先度、子 Element のルートを定義します。
 ---
 
 Screenコンポーネントは、ユーザーインターフェースの領域とレンダリングを定義します。Screenコンポーネントに追加された子要素はすべてElementコンポーネントを持つ必要があります。

@@ -1,5 +1,6 @@
 ---
 title: <pc-rigidbody>
+description: "Reference for the pc-rigidbody element: rigid body type, mass, friction, restitution, and integration with collision components."
 ---
 
 The `<pc-rigidbody>` tag is used to define a rigidbody component.

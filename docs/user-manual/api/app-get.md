@@ -1,5 +1,6 @@
 ---
 title: Apps - Get app
+description: Retrieve a single published app by id from the PlayCanvas REST API, including curl example, parameters, and JSON response fields.
 ---
 
 ## Route URL

@@ -1,5 +1,6 @@
 ---
 title: コンポーネント
+description: PlayCanvas の Component を使って、Camera、Light、物理、Script などの挙動を Entity に追加します。
 ---
 
 **[Component](https://api.playcanvas.com/engine/classes/Component.html)** は、エンティティにデータや振る舞いを追加します。

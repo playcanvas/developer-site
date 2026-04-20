@@ -1,5 +1,6 @@
 ---
 title: Account Management
+description: Manage your PlayCanvas user account, organizations, team permissions, and billing subscriptions.
 ---
 
 Welcome to Account Management! This section covers everything you need to know about managing your PlayCanvas account, from initial setup to advanced Organization features.

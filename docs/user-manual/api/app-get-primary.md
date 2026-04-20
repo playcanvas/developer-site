@@ -1,5 +1,6 @@
 ---
 title: Apps - Get primary app
+description: GET the primary published app metadata for a project by project id using bearer authentication on the PlayCanvas REST API.
 ---
 
 ## Route URL

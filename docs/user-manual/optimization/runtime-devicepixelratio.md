@@ -1,5 +1,6 @@
 ---
 title: Device Pixel Ratio
+description: Change maxPixelRatio at runtime to balance sharp rendering against fill-rate limits on varied devices.
 ---
 
 Device pixel ratio is the ratio between the physical pixels on the hardware screen and the logical pixels (related to the physical size of the screen, also known as CSS resolution).

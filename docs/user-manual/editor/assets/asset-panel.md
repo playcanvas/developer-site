@@ -1,5 +1,6 @@
 ---
 title: Assets Panel
+description: Use the Assets Panel to organize folders, upload and create assets, open text assets in the Script Editor, and inspect properties.
 ---
 
 The Assets Panel manages all of the Assets that are available in your project. From here, you can create, upload, delete, inspect and edit any Asset.

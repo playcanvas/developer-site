@@ -1,5 +1,6 @@
 ---
 title: Mesh to Splats
+description: "GsplatMesh script: rasterize mesh triangles into uniformly distributed splats using render-component geometry for stylized splat models (beta)."
 ---
 
 The `GsplatMesh` script converts mesh geometry into Gaussian splats. It extracts triangles from render components and generates uniformly distributed splats across the mesh surface using triangle rasterization.

@@ -2,6 +2,7 @@
 title: 'Multiple Viewport Rendering'
 tags: [rendering, camera, tutorial]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/443666/FA3675-image-75.jpg"
+description: 各カメラの矩形を調整してキャンバスを分割し、ピクチャーインピクチャーや分割画面のビューポートにします。
 ---
 
 import Link from '@docusaurus/Link';

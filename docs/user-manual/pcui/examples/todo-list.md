@@ -1,5 +1,6 @@
 ---
 title: Todo List
+description: "Interactive todo list PCUI example: add items, toggle completion, filter by status, with full React sample code and Storybook embed."
 ---
 
 The todo list below allows you to add items to the list, toggle their 'done' status and filter items by that status.

@@ -2,6 +2,7 @@
 title: クラッシュコース - ゲーム作成入門
 tags: [games,basics,physics,ui]
 thumb: /img/tutorials/crash-course/crash-course-thumbnail.jpg
+description: 動画とプレイ可能なデモ付きで、物理、UI、主要ワークフローを網羅した PlayCanvas ゲーム制作の流れをたどります。
 ---
 
 <iframe src="https://www.youtube.com/embed/9zqHlbW9XWE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

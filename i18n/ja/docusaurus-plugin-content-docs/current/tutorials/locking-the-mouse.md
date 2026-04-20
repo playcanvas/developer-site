@@ -2,6 +2,7 @@
 title: 'マウスのロック'
 tags: [input, camera, mouse, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438440/941913-image-75.jpg
+description: クリックで pointer lock を要求し、マウスを取得してファーストパーソン視点にし、移動でカメラを動かす間はカーソルを非表示にします。
 ---
 
 import Link from '@docusaurus/Link';

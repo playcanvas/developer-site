@@ -1,0 +1,226 @@
+---
+description: Asset フックのドキュメント
+---
+
+# Asset Hooks
+
+PlayCanvas React は、さまざまな Asset を読み込み・管理するためのフックを提供します。これらのフックは Asset の読み込みを簡素化し、読み込み中やエラー状態を扱えるようにします。
+
+各フックの一般的なシグネチャは、次のような形です。
+
+```tsx
+const { asset, loading, error } = useModel(src, props);
+```
+
+`src` は Asset の URL、`props` は Asset ローダーに渡す追加のプロパティです。
+
+```tsx copy filename="render-glb.tsx"
+import { useModel } from '@playcanvas/react/hooks';
+
+export function RenderAsset() {
+    const { asset, loading, error } = useModel('model.glb');
+
+    if (loading) return <LoadingSpinner />;
+    if (error) return <ErrorMessage message={error} />;
+    if (!asset) return null;
+
+    return <Render asset={asset} />;
+}
+```
+
+## 読み込み進捗
+
+`useAsset` フックは、`subscribe` コールバックで読み込み進捗をサポートします。読み込みインジケーターやプログレスバーを表示したい場合に便利です。すべての Asset タイプが読み込み中に進捗値を返すわけではないため、すべてのタイプで利用できるとは限りません。
+
+```tsx copy filename="render-splat.tsx"
+import { useSplat } from '@playcanvas/react/hooks';
+
+export function RenderSplat() {
+  const [progress, setProgress] = useState(0);
+  const { asset, loading, error, subscribe } = useSplat('splat.ply');
+
+  // Subscribe to loading progress
+  useEffect(() => {
+    const unsubscribe = subscribe(({ progress }) => setProgress(progress));
+    return () => unsubscribe();
+  }, [subscribe]);
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage message={error} />;
+  if (!asset) return null;
+
+  return (<Entity>
+    <GSplat asset={asset} />
+  </Entity>);
+}
+```
+
+### すべてのフック
+
+次のフックが利用できます。
+
+- [`useModel`](#usemodel) — 3D モデル Asset を読み込む
+- [`useSplat`](#usesplat) — Gaussian Splat Asset を読み込む
+- [`useTexture`](#usetexture) — テクスチャ Asset を読み込む
+- [`useEnvAtlas`](#useenvatlas) — 環境アトラステクスチャを読み込む
+- [`useAsset`](#useasset) — 任意のタイプの Asset を読み込む汎用フック
+
+## API
+
+Asset フックの完全な戻り値は次のとおりです。
+
+```tsx asTypedoc
+import type { AssetResult } from '@playcanvas/react/hooks';
+export default AssetResult;
+```
+
+## useModel
+
+3D モデル Asset（GLB/GLTF）を読み込むための専用フックです。モデルファイルのソース URL と、Asset ローダーに渡す追加のプロパティを指定し、得られた Asset を `<Render/>` コンポーネントで使います。
+
+```tsx copy filename="render-model.tsx"
+import { useModel } from '@playcanvas/react/hooks';
+
+export function RenderModel() {
+  const { asset, loading, error } = useModel('model.glb');
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage message={error} />;
+  if (!asset) return null;
+
+  return <Render asset={asset} />;
+}
+```
+
+### Draco デコード
+
+`useModel` フックは、追加設定なしで Draco デコードにも対応しています。@playcanvas/react は最新版の Draco デコーダー（[1.5.7](https://github.com/google/draco?tab=readme-ov-file#version-157-release)）を使用し、Google CDN から遅延読み込みします。
+
+ライブラリを自前でホストする場合は、`dracoInitialize` を使ってデコーダーを手動で設定できます。
+
+```tsx copy filename="render-draco.tsx"
+import { dracoInitialize } from 'playcanvas';
+
+dracoInitialize({
+  jsUrl: '/draco_decoder.js',
+  wasmUrl: '/draco_decoder.wasm',
+  lazyInit: true
+});
+```
+
+## useSplat
+
+Gaussian Splat Asset を読み込むための専用フックです。splat ファイルのソース URL と、Asset ローダーに渡す追加のプロパティを指定し、得られた Asset を [`<GSplat/>`](../../gsplat) コンポーネントで使います。
+
+```tsx copy filename="render-splat.tsx"
+import { useSplat } from '@playcanvas/react/hooks';
+
+export function RenderSplat() {
+  const { asset, loading, error } = useSplat('splat.ply');
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage message={error} />;
+  if (!asset) return null;
+
+  return (<Entity>
+    <GSplat asset={asset} />
+  </Entity>);
+}
+```
+
+詳しくは [`<GSplat/>`](../../gsplat) コンポーネントを参照してください。
+
+## useTexture
+
+テクスチャ Asset を読み込むための専用フックです。テクスチャファイルのソース URL と、Asset ローダーに渡す追加のプロパティを指定し、テクスチャを受け取れる任意のコンポーネントで使います。
+
+```tsx copy filename="render-texture.tsx"
+import { useTexture } from '@playcanvas/react/hooks';
+import { useMaterial } from '@playcanvas/react/hooks';
+
+export function RenderTexture() {
+  const { asset, loading, error } = useTexture('texture.jpg');
+  const material = useMaterial({ diffuseMap: asset?.resource });
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage message={error} />;
+  if (!asset) return null;
+
+  return <Render type="box" material={material} />;
+}
+```
+
+詳しくは [useMaterial](../use-material) フックと [Render](../../render) コンポーネントを参照してください。
+
+## useEnvAtlas
+
+環境アトラステクスチャを読み込むための専用フックです。テクスチャファイルのソース URL と、Asset ローダーに渡す追加のプロパティを指定し、得られた Asset を [`<Environment/>`](../../environment) コンポーネントで使います。
+
+```tsx copy filename="render-env-atlas.tsx"
+import { useEnvAtlas } from '@playcanvas/react/hooks';
+import { Environment } from '@playcanvas/react/components';
+
+export function RenderEnvAtlas() {
+  const { asset, loading, error } = useEnvAtlas('env.jpg');
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage message={error} />;
+  if (!asset) return null;
+
+  return <Environment envAtlas={asset} />;
+}
+```
+
+詳しくは [Environment](../../environment) コンポーネントを参照してください。
+
+## useFont
+
+PlayCanvas ではテキストが Signed-Distance-Fields（SDF）でレンダリングされるため、読み込む前に ttf フォントを適切な形式に変換する必要があります。
+
+Vite や Rollup を使う場合、ビルド時に ttf を変換する公式プラグインがあります。詳しくは [@playcanvas/rollup](https://www.npmjs.com/package/@playcanvas/plugin) を参照してください。
+
+`?sdf` クエリパラメータで ttf をインポートすると、ビルド時に自動的に SDF テクスチャに変換されます。
+
+```tsx copy filename="render-font.tsx"
+
+// Use the @playcanvas/rollup plugin to convert the ttf file into an SDF texture at build time.
+import inconsolata from "@assets/fonts/inconsolata.ttf?sdf";
+import { useFont } from '@playcanvas/react/hooks';
+
+export function InconsolataFont() {
+  const { asset, loading, error } = useFont(inconsolata);
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage message={error} />;
+  if (!asset) return null;
+
+  return asset;
+}
+```
+
+## useAsset
+
+任意のタイプの Asset を読み込む汎用フックです。PlayCanvas がサポートする任意の Asset タイプの読み込みに使え、動的に Asset を読み込む必要がある場合に便利です。
+
+```tsx copy filename="use-dynamic-asset.tsx"
+import { useAsset } from '@playcanvas/react/hooks';
+
+const assetTypeToLoadType = {
+    'ply': useSplat,
+    'jpg': useTexture,
+    'png': useTexture,
+    'glb': useModel,
+    'gltf': useModel,
+}
+
+export function useDynamicAsset(src: string, props: Record<string, unknown> = {}) {
+
+  const mimeType = src.split('.').pop();
+  const loadType = assetTypeToLoadType[mimeType];
+
+  if (!loadType) {
+    throw new Error(`Unsupported asset type: ${mimeType}`);
+  }
+
+  return useAsset(src, loadType, props);
+}
+```

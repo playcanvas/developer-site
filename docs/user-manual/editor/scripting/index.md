@@ -1,5 +1,6 @@
 ---
 title: Scripting
+description: Surveys editor scripting tools such as script assets, import maps, the code editor, VS Code extension, hot reload, and load order.
 ---
 
 The PlayCanvas Editor provides a tightly integrated environment for writing and managing scripts. This section covers the Editor-specific tools and workflows that will enhance your scripting experience.

@@ -1,5 +1,6 @@
 ---
 title: Creating Projects
+description: Creates projects from starter kits or forks walks privacy rules and explains duplicating projects for templates or backups.
 ---
 
 You can create Editor projects in two ways:

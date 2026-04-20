@@ -1,5 +1,6 @@
 ---
 title: Multi-Draw
+description: Single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent.
 ---
 
 Multi-draw is a rendering technique that lets the engine submit multiple sub-draws with a single API call. Multiple geometries are combined into a single Mesh and rendered through a single MeshInstance, with each sub-draw targeting a different portion of the combined geometry. This reduces CPU overhead and improves performance when rendering many sub-meshes that share the same material and render state.

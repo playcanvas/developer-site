@@ -1,5 +1,6 @@
 ---
 title: インターフェースの概要
+description: "SuperSplatのUIツアー：メニューバー、Sceneマネージャー、ビューポート、ビューキューブ、ツールバー、スプラット編集の主要パネルです。"
 ---
 
 SuperSplat Editorのインターフェースは以下のようになります。

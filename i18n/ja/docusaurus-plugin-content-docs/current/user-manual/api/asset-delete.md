@@ -1,5 +1,6 @@
 ---
 title: アセット - Create asset
+description: REST APIでブランチ上のAssetを永続的に削除し、チェックポイントに関する警告と必須のブランチクエリパラメータを説明します。
 ---
 
 ## ルートURL

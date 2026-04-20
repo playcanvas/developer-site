@@ -1,5 +1,6 @@
 ---
 title: Splat File Formats
+description: "Compare PLY and SOG splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows."
 ---
 
 PlayCanvas supports two formats for 3D Gaussian Splat data:

@@ -1,0 +1,112 @@
+---
+title: マテリアル
+description: React で useMaterial により StandardMaterial を作成し、Render に適用し、テクスチャとプロパティ調整を例で組み合わせる。
+---
+
+import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
+import { Application } from '@playcanvas/react';
+import { Materials } from './components/materials';
+import MaterialsSource from '!!raw-loader!./components/materials.jsx';
+import { MaterialTextures } from './components/material-textures';
+import MaterialTexturesSource from '!!raw-loader!./components/material-textures.jsx';
+
+マテリアルは 3D グラフィックスの基本です。ライトで照らされたときの 3D オブジェクトの見た目と性質を定義します。
+
+React では [`useMaterial`](../../api/hooks/use-material) フックで [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) インスタンスを扱い、[`<Render/>`](../../api/render) に適用します。
+
+```jsx copy filename="use-material.jsx"
+import { useMaterial } from '@playcanvas/react/hooks'
+
+export const RedBox = () => {
+  const material = useMaterial({ diffuse: 'red' });
+  return (
+    <Entity>
+      <Render type="box" material={material} />
+    </Entity>
+  )
+}
+```
+
+下の例では、`useMaterial` でマテリアルを作成し `Render` コンポーネントに適用しています。また `Entity` に `onClick` を付け、キューブをクリックしたときにマテリアルのプロパティを変えます。
+
+<CodeExample
+  label="キューブをクリックしてマテリアルのプロパティを変更"
+  filename="materials.jsx"
+  code={MaterialsSource}
+  showDemo
+  showControls={false}
+>
+    <Application>
+        <Staging 
+          useControls={true} 
+          useShadow={true}
+          useGrid={true}
+          camera={[2, 1, 2]} 
+        >
+            <Materials />
+        </Staging>
+    </Application>
+</CodeExample>
+
+### 基本プロパティ
+
+フックは [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) クラスのプロパティに近いオブジェクトを受け取ります。[`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) インスタンスを返すので、[`<Render/>`](../../api/render) に適用できます。
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+
+function BasicMaterialExample() {
+  const material = useMaterial({
+    diffuse: 'blue',       // Base color
+    opacity: 0.7,          // Transparency (0-1)
+    metalness: 0.8,        // Metallic property (0-1)
+    roughness: 0.2,        // Surface roughness (0-1)
+    emissive: 'green',     // Emissive color
+    emissiveIntensity: 0.5 // Emissive strength
+  })
+  
+  return <Render type="box" material={material} />
+}
+```
+
+### テクスチャ
+
+[`useTexture`](../../api/hooks/use-asset#usetexture) フックでテクスチャを読み込み、マテリアルと組み合わせられます。異なるテクスチャセットの切り替えや、マテリアルプロパティの調整を試してください。
+
+```jsx copy
+import { useMaterial } from '@playcanvas/react/hooks'
+import { useTexture } from '@playcanvas/react/hooks'
+
+function TexturedMaterialExample() {
+  const { asset: diffuseMap } = useTexture('diffuse.jpg')
+  const material = useMaterial({ diffuseMap })
+
+  return <Render type="box" material={material} />
+}
+```
+
+<CodeExample
+  label="異なるマテリアルセットを切り替える"
+  filename="material-textures.jsx"
+  code={MaterialTexturesSource}
+  showDemo
+>
+  <Application>
+    <Staging
+      useLight={true}
+      useShadow={true}
+      useGrid={true}
+      camera={[1.5, 0.75, 1.5]}
+      useControls={true}
+    >
+      <MaterialTextures />
+    </Staging>
+  </Application>
+</CodeExample>
+
+## 関連
+
+- [useMaterial](../../api/hooks/use-material)
+- [useTexture](../../api/hooks/use-asset#usetexture)
+- [Light](../../api/light)
+- [Render](../../api/render)

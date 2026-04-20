@@ -1,5 +1,6 @@
 ---
 title: Real-time Multiplayer with Colyseus
+description: Wire PlayCanvas to a Colyseus server for room state sync, messaging, and matchmaking in a simple click-to-move demo.
 tags: [multiplayer, networking]
 thumb: https://avatars.githubusercontent.com/u/28384334?s=300&v=4
 ---

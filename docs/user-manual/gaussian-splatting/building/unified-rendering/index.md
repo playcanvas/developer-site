@@ -1,5 +1,6 @@
 ---
 title: Unified Splat Rendering
+description: "Unified splat rendering in PlayCanvas: global sorting, work buffers, beta status, and links to advanced pipeline features."
 ---
 
 Unified Splat Rendering is the recommended rendering mode for Gaussian splats in PlayCanvas. It enables global sorting across multiple splat components and provides access to advanced features like procedural splats, LOD streaming, and GPU-based splat processing.

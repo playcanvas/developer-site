@@ -2,6 +2,7 @@
 title: 'カメラをターゲットにパンする'
 tags: [input, camera, animation, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/693889/B745F1-image-75.jpg
+description: カメラをワールド空間のターゲットへ滑らかに移動・照準し、クリックやイベントで Scene 内の重要な位置をフレームに収めます。
 ---
 
 import Link from '@docusaurus/Link';

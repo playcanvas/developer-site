@@ -1,5 +1,6 @@
 ---
 title: クラシックリファレンス
+description: Classic Script Attributesのリファレンス。型宣言とレガシーScript向けのEditor連携を扱います。
 ---
 
 :::note

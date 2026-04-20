@@ -1,5 +1,6 @@
 ---
 title: Splat Processing
+description: "GSplatProcessor for GPU splat processing: custom shaders, read-write streams, and use cases like painting and selection (beta)."
 ---
 
 `GSplatProcessor` enables GPU-based processing of Gaussian Splat data using custom shader code. It reads from source texture streams and writes results to destination streams, enabling operations like painting, selection, deletion, and custom data transforms.

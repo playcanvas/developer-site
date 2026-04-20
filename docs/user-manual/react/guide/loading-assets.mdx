@@ -1,5 +1,6 @@
 ---
 title: Loading Assets
+description: Load models, textures, splats, fonts, and environments with useAsset-family hooks, progress handling, and Gltf usage patterns.
 ---
 
 import { CodeExample, Staging } from '@site/src/components/playcanvas-react/CodeExample';
@@ -144,16 +145,18 @@ export function ModelWithCustomLoading() {
 The loading hooks also provide a simple mechanic to progressively load assets, so you can prioritize rendering quickly following up with high quality content later.
 
 ```tsx title="progressive-loading.tsx"
-import { Entity, Render } from '@playcanvas/react/components';
+import { Entity } from '@playcanvas/react';
+import { GSplat } from '@playcanvas/react/components';
+import { useSplat } from '@playcanvas/react/hooks';
 
-// A component that displays a model with a custom loading state
+// A component that displays a splat with progressive loading
 export function ProgressiveAsset() {
-  const { asset: low } = useModel('./low-quality-model.sog'); // load the low quality asset
-  const { asset: high } = useModel(low && './high-quality-model.sog'); // load the high quality asset, when the low quality is loaded
+  const { asset: low } = useSplat('./low-quality-model.sog'); // load the low quality asset
+  const { asset: high } = useSplat(low && './high-quality-model.sog'); // load the high quality asset, when the low quality is loaded
   
   if (!low && !high ) return null;
 
-  return <Gsplat asset={high || low} />
+  return <GSplat asset={high || low} />
 }
 ```
 

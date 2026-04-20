@@ -2,6 +2,7 @@
 title: オーディオビジュアライザーの作成
 tags: [audio]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405891/L2JCV3-image-75.jpg"
+description: Web Audio の analyser の周波数データを PlayCanvas の Script に流し込み、再生中の音楽にリアルタイムで反応するバーやグラフをアニメーションします。
 ---
 
 <div className="iframe-container">

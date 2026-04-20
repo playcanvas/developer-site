@@ -1,5 +1,6 @@
 ---
 title: Render
+description: PlayCanvas Render component draws mesh primitives or a render asset with materials, shadows, lightmaps, batching, layers, and skinning.
 ---
 
 The Render Component enables an entity to render a primitive shape or a render asset.

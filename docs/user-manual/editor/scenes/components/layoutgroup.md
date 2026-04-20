@@ -1,5 +1,6 @@
 ---
 title: Layout Group
+description: PlayCanvas Layout Group component auto-arranges child Element entities in horizontal or vertical layouts with padding, spacing, and wrap.
 ---
 
 The LayoutGroup Component enables an entity to specify the size and position of child Element Components.

@@ -1,5 +1,6 @@
 ---
 title: VR
+description: "PlayCanvasでのWebXRバーチャルリアリティ: 対応プラットフォーム、プロジェクト設定、VRセッションの開始、VR固有トピックへのリンクです。"
 ---
 
 ![VRビュー](/img/user-manual/xr/vr-view.png)

@@ -1,0 +1,71 @@
+---
+description: PlayCanvas Application インスタンスにアクセスする
+---
+
+# `useApp`
+
+`useApp` フックは React コンポーネント内から PlayCanvas の [Application](https://api.playcanvas.com/engine/classes/Application.html) インスタンスにアクセスする手段を提供します。アプリの状態情報の取得、イベントの発火などに便利です。
+
+```jsx copy title="./my-component.jsx"
+import { useApp } from '@playcanvas/react/hooks'
+
+function MyComponent() {
+  const app = useApp()
+  
+  // Application のプロパティにアクセス
+  console.log('Scene:', app.scene)
+  
+  // カメラは Entity 上の Component なので、ルートから検索します
+  const cameras = app.root.findComponents('camera')
+  console.log('Cameras:', cameras)
+  
+  return null
+}
+```
+
+app への参照により、Scene、ルート Entity、システム、Asset、イベントなどにアクセスできます。
+
+## Application コンテキスト
+
+このフックは `<Application/>` コンポーネントのコンテキストのみに依存するため、コンテキストがない場合はエラーをスローします。`<Application/>` の子であるコンポーネント内から呼び出してください。
+
+```jsx title="🚫 No <Application> context"
+// NG - useApp が <Application> の外にあります
+export const Wrong = () => {
+  const app = useApp();
+  return (
+    <Application>
+      <Scene/>
+    </Application>
+  )
+}
+```
+
+```jsx copy title="✅ Correct <Application> context"
+// OK！ `useApp` は <Application> コンテキスト内にあります
+const Correct = () => {
+  const app = useApp();
+  return <Scene />;
+}
+
+export const App = () => <Application>
+  <Correct/>
+  </Application>
+```
+
+## プロパティ
+
+```tsx asTypedoc
+import { Application } from 'playcanvas'
+
+/**
+ * The PlayCanvas Application instance
+ */
+export default Application;
+```
+
+## 関連
+
+- [Application Component](../../application) - アプリコンテキストを提供するコンポーネント
+- [useParent](../use-parent) - 親 Entity にアクセスする
+- [useAppEvent](../use-app-event) - アプリケーションイベントをサブスクライブする

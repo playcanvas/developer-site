@@ -1,5 +1,6 @@
 ---
 title: Real Time Multiplayer
+description: Stand up a Node.js Socket.io server and synchronize player transforms across browsers for custom multiplayer without a hosted SDK.
 tags: [multiplayer, networking]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406048/507186-image-75.jpg
 ---

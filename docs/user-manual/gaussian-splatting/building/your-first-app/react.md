@@ -1,5 +1,6 @@
 ---
 title: Using PlayCanvas React
+description: "Step-by-step: build a splat viewer with PlayCanvas React components, hooks, and camera controls using the toy cat example."
 ---
 
 import { Application, Entity } from '@playcanvas/react'

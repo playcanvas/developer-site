@@ -2,6 +2,7 @@
 title: 'WebXR: AR Image Tracking'
 tags: [camera, ar, tutorial]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/739875/A3DDF5-image-75.jpg"
+description: ARで印刷された参照画像をトラッキングし、WebXR image-tracking extensionで3Dコンテンツをその姿勢に合わせます。
 ---
 
 import Link from '@docusaurus/Link';

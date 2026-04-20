@@ -1,5 +1,6 @@
 ---
 title: アセット - List assets
+description: GETのskipとlimitでプロジェクトブランチ内のすべてのAssetをページ分割一覧し、レスポンスの形と例を含みます。
 ---
 
 ## ルートURL

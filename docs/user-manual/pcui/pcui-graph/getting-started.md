@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Install @playcanvas/pcui-graph from npm, prerequisites with PCUI, and initial setup for embedding a graph in your application.
 ---
 
 ## Installing from NPM

@@ -1,5 +1,6 @@
 ---
 title: 'Basic touch input'
+description: Handle touch events to drag and move on-screen objects for a minimal mobile-first interaction sample.
 tags: [touch, input, basics, mobile, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438010/E61079-image-75.jpg
 ---

@@ -1,5 +1,6 @@
 ---
 title: シェーダー
+description: 対になる GLSL と WGSL で ShaderMaterial を記述し、attribute を宣言してエンジンのシェーダーシステムに統合します。
 ---
 
 3DモデルをPlayCanvasにインポートすると、デフォルトで当社の[Physical Material](/user-manual/graphics/physical-rendering/physical-materials/)が使用されます。これは、レンダリングの多くのニーズをカバーできる多用途なマテリアルタイプです。

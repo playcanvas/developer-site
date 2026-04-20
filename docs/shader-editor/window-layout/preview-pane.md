@@ -1,5 +1,6 @@
 ---
 title: Preview Pane
+description: Previewing graphs and materials with orbit controls, lighting, HDR environments, custom models, shapes, and the preview toolbar.
 sidebar_position: 6
 ---
 

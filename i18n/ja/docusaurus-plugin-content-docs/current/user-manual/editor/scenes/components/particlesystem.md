@@ -1,5 +1,6 @@
 ---
 title: Particle System
+description: PlayCanvas の Particle System Component は、発生率、寿命、ループ、ライティング、レンダーモード、トレイル、コリジョンを備えた 3D パーティクルを放出します。
 ---
 
 Particle Systemコンポーネントは、3D空間内でパーティクルエミッターを指定します。

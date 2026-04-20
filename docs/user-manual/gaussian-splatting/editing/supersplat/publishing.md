@@ -1,5 +1,6 @@
 ---
 title: Publishing
+description: "Publish splats to superspl.at or export a self-hosted SuperSplat viewer HTML package with account and hosting steps."
 ---
 
 SuperSplat provides two ways to share your splat scenes with the world:

@@ -1,6 +1,7 @@
 ---
 title: テクスチャ
 sidebar_position: 4
+description: ドラッグアンドドロップで Shader Editor プロジェクトにテクスチャを追加し、Assets Pane からグラフ内で参照する方法です。
 ---
 
 テクスチャは、シェーダーエディタ内で比較的静的なアセットです。

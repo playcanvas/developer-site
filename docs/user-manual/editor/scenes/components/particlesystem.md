@@ -1,5 +1,6 @@
 ---
 title: Particle System
+description: PlayCanvas Particle System component emits 3D particles with rates, lifetimes, looping, lighting, rendering modes, trails, and collisions.
 ---
 
 The Particle System Component specifies a particle emitter in 3D space.

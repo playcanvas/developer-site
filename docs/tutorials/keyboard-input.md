@@ -1,5 +1,6 @@
 ---
 title: Basic Keyboard Input
+description: Use the Keyboard API to detect key presses and held keys for gameplay actions and simple interactions.
 tags: [input]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405804/513097-image-75.jpg
 ---

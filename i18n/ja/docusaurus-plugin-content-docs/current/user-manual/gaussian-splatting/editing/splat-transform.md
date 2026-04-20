@@ -1,5 +1,6 @@
 ---
 title: SplatTransform
+description: "SplatTransformのCLIとライブラリ：スプラット形式の相互変換、データの変換とフィルタ、Sceneのマージ、LODメタデータの生成です。"
 ---
 
 [SplatTransform](https://github.com/playcanvas/splat-transform) は、Gaussian splats の変換と編集のためのオープンソースライブラリおよびCLIツールです。フォーマット間の変換、変換の適用、スプラットデータの分析など、SplatTransform は開発者が Gaussian splat ワークフローを正確に制御するために必要なツールを提供します。このライブラリはプラットフォームに依存せず、Node.jsとブラウザの両方の環境で使用できます。

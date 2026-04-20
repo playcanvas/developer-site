@@ -1,5 +1,6 @@
 ---
 title: <pc-scene>
+description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ、アンビエント設定、レンダリング用にEntityをマウントする場所です。"
 ---
 
 `<pc-scene>`タグは、シーンを定義するために使用されます。

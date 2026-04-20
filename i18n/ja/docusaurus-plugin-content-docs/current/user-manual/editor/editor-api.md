@@ -1,5 +1,6 @@
 ---
 title: エディターAPI
+description: ベータの Editor API の例。DevTools や Violentmonkey の Script で Entity を自動化し、進化するオープンソースの editor-api リポジトリ上で UI を拡張します。
 ---
 
 :::warning

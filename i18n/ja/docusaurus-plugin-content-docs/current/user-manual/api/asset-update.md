@@ -1,5 +1,6 @@
 ---
 title: アセット - Update asset
+description: "PUT /api/assets/:idでテキストベースのAssetファイル内容を更新し、対応するScript、HTML、CSS、JSON、シェーダー、テキストタイプを扱います。"
 ---
 
 ## ルートURL

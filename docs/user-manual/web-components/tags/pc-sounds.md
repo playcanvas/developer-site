@@ -1,5 +1,6 @@
 ---
 title: <pc-sounds>
+description: "Reference for the pc-sounds element: sound component container that groups pc-sound slots and shared audio settings on an entity."
 ---
 
 The `<pc-sounds>` tag is used to define a sound component.

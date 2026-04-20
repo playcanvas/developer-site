@@ -1,5 +1,6 @@
 ---
 title: Engineをスタンドアロンで使用する
+description: Editorを使わず、npm、CDN、または直接スクリプト読み込みでPlayCanvasアプリケーションを構築します。
 ---
 
 import Tabs from '@theme/Tabs';

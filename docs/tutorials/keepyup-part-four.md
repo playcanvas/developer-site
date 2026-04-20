@@ -1,5 +1,6 @@
 ---
 title: Making a Simple Game - Part 4
+description: Deep dive the football entity with physics, collisions, and audio hooks as the core interactive object.
 tags: [games]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg
 ---

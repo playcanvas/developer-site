@@ -1,5 +1,6 @@
 ---
 title: Procedural Splats
+description: "GSplatContainer procedural splats: CPU and GPU population, built-in formats, and integration with GSplatFormat and processors (beta)."
 ---
 
 `GSplatContainer` enables you to create Gaussian splat data programmatically rather than loading it from files. This is useful for dynamic visualizations, procedural effects, and converting other data types to splats.

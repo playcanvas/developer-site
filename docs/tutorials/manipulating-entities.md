@@ -1,5 +1,6 @@
 ---
 title: Manipulating Entities
+description: Move, rotate, and scale entities by editing local and world transforms and understanding how child hierarchies inherit motion.
 tags: [basics]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/KM6GIE-image-75.jpg
 ---

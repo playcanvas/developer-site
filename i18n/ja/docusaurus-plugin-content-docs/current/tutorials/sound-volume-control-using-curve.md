@@ -2,6 +2,7 @@
 title: 'カーブを使ったサウンド音量制御'
 tags: [audio, tutorial]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436116/1F5514-image-75.jpg
+description: サンプルしたカーブデータでサウンドスロットの音量を駆動し、線形なコード調整ではなくオーサリングしたランプに音量が従います。
 ---
 
 import Link from '@docusaurus/Link';

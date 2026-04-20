@@ -1,5 +1,6 @@
 ---
 title: クラスタードライティング
+description: クラスタードライティングはライトをグリッドに格納し、多数の omni および spot ライト、シャドウ、cookies を GPU に優しく保ちます。
 ---
 
 :::note

@@ -2,6 +2,7 @@
 title: 'glTF GLBの読み込み'
 tags: [rendering, assets, tutorial, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/730738/0641C2-image-75.jpg
+description: glTF の GLB ファイルをランタイムでバイナリ Asset として読み込み、得られたモデルインスタンスを PlayCanvas の Scene ヒエラルキーに追加します。
 ---
 
 import Link from '@docusaurus/Link';

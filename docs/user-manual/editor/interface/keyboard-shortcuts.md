@@ -1,5 +1,6 @@
 ---
 title: Controls and Keyboard Shortcuts
+description: Editor mouse camera controls, viewport modifier keys, and common accelerators such as launch duplicate transform gizmos frame selection and deletion shortcuts.
 sidebar_label: Controls & Keyboard Shortcuts
 ---
 

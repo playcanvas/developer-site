@@ -1,5 +1,6 @@
 ---
 title: Importing your first Model and Animation
+description: Import a rigged character, set up animation components, and play clips from packaged example assets.
 tags: [animation,basics]
 thumb: /img/tutorials/importing-first-model-and-animation/thumbnail.jpg
 ---
