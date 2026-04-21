@@ -6,8 +6,8 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 569
-Generated: 2026-04-20
+Total Documents: 570
+Generated: 2026-04-21
 
 ## Recommended Entry Points
 
@@ -327,6 +327,7 @@ Generated: 2026-04-20
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/ - Building Splat-based Apps
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/ - Custom Shaders
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/draw-order/ - Draw Order and Sorting
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/fisheye/ - Fisheye Rendering
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/ - Performance
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/picking/ - Picking
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/rendering-architecture/ - Splat Rendering Architecture
