@@ -860,6 +860,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/building/draw-order',
             'user-manual/gaussian-splatting/building/picking',
             'user-manual/gaussian-splatting/building/shadows',
+            'user-manual/gaussian-splatting/building/fisheye',
             'user-manual/gaussian-splatting/building/custom-shaders',
             'user-manual/gaussian-splatting/building/performance',
           ],
