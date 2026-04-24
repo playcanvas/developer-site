@@ -21,6 +21,10 @@ if (device.supportsCompute) {
 }
 ```
 
+## WGSL 言語拡張
+
+ブラウザが任意の WGSL 機能（例: [線形ワーカー / 呼び出しインデックス](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension)、サブグループ、半精度 float）を公開している場合、エンジンは対応する `device.supports*` フラグと `CAPS_*` プリプロセッサ定義を設定します。一覧と注意点は [WGSL の詳細 — 言語拡張](/user-manual/graphics/shaders/wgsl-specifics#wgsl-language-extensions) を参照してください。
+
 ## コンピュートシェーダーの作成
 
 コンピュートシェーダーは、WGSLコードを使用して`Shader`クラスで作成されます。シェーダー定義には、コンピュートシェーダーソース（`cshader`）、バインドグループフォーマット、およびオプションでユニフォームバッファフォーマットが含まれます。

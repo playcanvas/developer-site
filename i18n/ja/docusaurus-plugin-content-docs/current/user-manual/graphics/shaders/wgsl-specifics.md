@@ -180,7 +180,7 @@ struct Particle {
 var<storage, read> particles: array<Particle>;
 ```
 
-### 半精度型
+### 半精度型 {#half-precision-types}
 
 デバイスが16ビット浮動小数点演算をサポートしている場合（`device.supportsShaderF16`）、シェーダーはネイティブWGSL半精度型を使用してパフォーマンスを向上させ、メモリ帯域幅を削減できます：
 
@@ -275,7 +275,7 @@ pcPrimitiveIndex  // サポート時
 
 :::note
 
-`primitiveIndex` / `pcPrimitiveIndex`組み込み変数は、`device.supportsPrimitiveIndex`がtrueの場合にのみ利用可能です。この機能はWebGPU専用です（WebGL2では利用不可）。機能がサポートされている場合、エンジンは必要な`enable primitive_index;` WGSLディレクティブを自動的に追加し、条件付きコンパイル用のシェーダー定義`CAPS_PRIMITIVE_INDEX`が利用可能になります。
+`primitiveIndex` / `pcPrimitiveIndex` 組み込み変数は、`device.supportsPrimitiveIndex` が true の場合にのみ利用可能です。この機能は WebGPU 専用です（WebGL2 では利用不可）。`enable primitive_index;` および `CAPS_PRIMITIVE_INDEX` については [WGSL 言語拡張](#wgsl-language-extensions) を参照してください。
 
 :::
 
@@ -321,3 +321,58 @@ fragDepth: @builtin(frag_depth)
 整数テクスチャへのレンダリング（`vec4f`以外の出力フォーマット）のサポートはまだ利用できませんが、将来追加される予定です。
 
 :::
+
+### WGSL 言語拡張 {#wgsl-language-extensions}
+
+デバイス作成時に、エンジンは `navigator.gpu.wgslLanguageFeatures` を読み取り、任意の言語機能用に必要な `enable …;` および `requires …;` ディレクティブを生成される WGSL に付加します。シェーダー側では、対応する `CAPS_*` 定義（`Shader` 定義の `vertexDefines` / `fragmentDefines` / `cdefines` とマージ）で分岐できます。
+
+- **`device.supportsShaderF16`**
+  - **エンジンが注入:** `enable f16;`
+  - **プリプロセッサ定義:** `CAPS_SHADER_F16`
+  - **シェーダー段階:** 頂点、フラグメント、コンピュート
+  - **説明:** 本ページの [半精度型](#half-precision-types) および、エンジンが付与する `half` / `half2` などのエイリアス
+- **`device.supportsPrimitiveIndex`**
+  - **エンジンが注入:** `enable primitive_index;`
+  - **プリプロセッサ定義:** `CAPS_PRIMITIVE_INDEX`
+  - **シェーダー段階:** フラグメント
+  - **説明:** 簡略 API では、対応端末向けに `FragmentInput` の `primitiveIndex` およびグローバル `pcPrimitiveIndex`
+- **`device.supportsSubgroups`**
+  - **エンジンが注入:** `enable subgroups;`
+  - **プリプロセッサ定義:** `CAPS_SUBGROUPS`
+  - **シェーダー段階:** フラグメントとコンピュート
+  - **説明:** サブグループ組み込み（`subgroupBroadcast` 等）。`device.supportsSubgroupUniformity` 専用の `requires` / `enable` は追加されず、subgroups 機能と合わせて扱う
+- **`device.supportsSubgroupId`**
+  - **エンジンが注入:** `requires subgroup_id;`
+  - **プリプロセッサ定義:** `CAPS_SUBGROUP_ID`
+  - **シェーダー段階:** その `Shader` 定義に応じ、エンジンが WGSL へコンパイルする段階（使用する各段階向けのモジュール）
+  - **説明:** ワークグループ内の `subgroup_id` / `num_subgroups` 組み込み
+- **`device.supportsLinearIndexing`**
+  - **エンジンが注入:** `requires linear_indexing;`（**コンピュート** エントリのモジュールのみ。頂点・フラグメントには入れない）
+  - **プリプロセッサ定義:** `CAPS_LINEAR_INDEXING`
+  - **シェーダー段階:** コンピュート
+  - **説明:** `global_invocation_index` / `workgroup_index`。解説: [WebGPU 147-148](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension)
+- **`device.supportsStorageTextureRead`**
+  - **エンジンが注入:** *なし* — ストレージテクスチャを読む場合は、WGSL 内に `requires readonly_and_readwrite_storage_textures;` を自前で記述
+  - **プリプロセッサ定義:** `CAPS_STORAGE_TEXTURE_READ`（デバイスがストレージテクスチャの読み取りに対応しているときに有効。コードパス分岐用）
+  - **シェーダー段階:** 機能を使う場合にコンピュート
+  - **説明:** エンジンは能力の宣言のみ。`requires` は必ず筆者が書く想定
+
+使用例（コンピュート）— `CAPS_LINEAR_INDEXING` があるときは線形のワークグループ番号を使い、なければ従来の方法で求めます。
+
+```wgsl
+@compute @workgroup_size(64, 1, 1)
+fn main(
+    @builtin(global_invocation_id) global_id: vec3u,
+    @builtin(num_workgroups) nwg: vec3u,
+#ifdef CAPS_LINEAR_INDEXING
+    @builtin(workgroup_index) flat_wg: u32,
+#endif
+) {
+#ifdef CAPS_LINEAR_INDEXING
+    let wg = flat_wg;
+#else
+    let wg = global_id.x; // 1D ディスパッチ; 2D/3D は必要に応じて拡張
+#endif
+    _ = wg;
+}
+```

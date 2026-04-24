@@ -180,7 +180,7 @@ struct Particle {
 var<storage, read> particles: array<Particle>;
 ```
 
-### Half-Precision Types
+### Half-Precision Types {#half-precision-types}
 
 When the device supports 16-bit floating-point operations (`device.supportsShaderF16`), shaders can use native WGSL half-precision types for improved performance and reduced memory bandwidth:
 
@@ -275,7 +275,7 @@ pcPrimitiveIndex  // when supported
 
 :::note
 
-The `primitiveIndex` / `pcPrimitiveIndex` built-in is only available when `device.supportsPrimitiveIndex` is true. This feature is WebGPU-only (not available on WebGL2). When the feature is supported, the engine automatically adds the required `enable primitive_index;` WGSL directive and the shader define `CAPS_PRIMITIVE_INDEX` is available for conditional compilation.
+The `primitiveIndex` / `pcPrimitiveIndex` built-in is only available when `device.supportsPrimitiveIndex` is true. This feature is WebGPU-only (not available on WebGL2). See [WGSL language extensions](#wgsl-language-extensions) for `enable primitive_index;` and `CAPS_PRIMITIVE_INDEX`.
 
 :::
 
@@ -321,3 +321,58 @@ Example:
 Support for rendering to integer textures (output format other than `vec4f`) is not available yet, and will be added in the future.
 
 :::
+
+### WGSL language extensions {#wgsl-language-extensions}
+
+At device creation, the engine reads `navigator.gpu.wgslLanguageFeatures` and adds the necessary `enable …;` and `requires …;` directives to generated WGSL so shaders can use optional language features. Your shader source can branch on the matching `CAPS_*` defines (merged with your own `vertexDefines`, `fragmentDefines`, and `cdefines` on the `Shader` definition, where applicable).
+
+- **`device.supportsShaderF16`**
+  - **Engine injects:** `enable f16;`
+  - **Preprocessor define:** `CAPS_SHADER_F16`
+  - **Shader stages:** vertex, fragment, and compute
+  - **Details:** [Half-precision types](#half-precision-types) on this page, plus the engine’s `half` / `half2` / … aliases
+- **`device.supportsPrimitiveIndex`**
+  - **Engine injects:** `enable primitive_index;`
+  - **Preprocessor define:** `CAPS_PRIMITIVE_INDEX`
+  - **Shader stages:** fragment
+  - **Details:** Simplified API exposes `primitiveIndex` on `FragmentInput` and the global `pcPrimitiveIndex` when the device supports the feature
+- **`device.supportsSubgroups`**
+  - **Engine injects:** `enable subgroups;`
+  - **Preprocessor define:** `CAPS_SUBGROUPS`
+  - **Shader stages:** fragment and compute
+  - **Details:** Subgroup builtins (`subgroupBroadcast`, `subgroupAdd`, …). `device.supportsSubgroupUniformity` does not add a separate `requires` or `enable` line; the driver uses it together with the subgroups feature
+- **`device.supportsSubgroupId`**
+  - **Engine injects:** `requires subgroup_id;`
+  - **Preprocessor define:** `CAPS_SUBGROUP_ID`
+  - **Shader stages:** whatever stages the engine compiles that shader module to as WGSL (typically all relevant stages in your `Shader` definition)
+  - **Details:** `subgroup_id` and `num_subgroups` built-ins in workgroups
+- **`device.supportsLinearIndexing`**
+  - **Engine injects:** `requires linear_indexing;` (compute **module** entries only, not vertex/fragment)
+  - **Preprocessor define:** `CAPS_LINEAR_INDEXING`
+  - **Shader stages:** compute
+  - **Details:** `global_invocation_index` and `workgroup_index`; see the [WebGPU 147-148](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension) overview
+- **`device.supportsStorageTextureRead`**
+  - **Engine injects:** *(none)* — add `requires readonly_and_readwrite_storage_textures;` in your own WGSL if you read from storage textures
+  - **Preprocessor define:** `CAPS_STORAGE_TEXTURE_READ` (set when the device can load from storage textures; use to share code paths)
+  - **Shader stages:** compute, when you use the feature
+  - **Details:** The engine only advertises the capability; the `requires` line is author-written so usage stays explicit
+
+Example (compute) — use a linear workgroup index when `CAPS_LINEAR_INDEXING` is set, otherwise fall back to manual layout math:
+
+```wgsl
+@compute @workgroup_size(64, 1, 1)
+fn main(
+    @builtin(global_invocation_id) global_id: vec3u,
+    @builtin(num_workgroups) nwg: vec3u,
+#ifdef CAPS_LINEAR_INDEXING
+    @builtin(workgroup_index) flat_wg: u32,
+#endif
+) {
+#ifdef CAPS_LINEAR_INDEXING
+    let wg = flat_wg;
+#else
+    let wg = global_id.x; // 1D dispatch; extend for 2D/3D as needed
+#endif
+    _ = wg;
+}
+```
