@@ -368,10 +368,6 @@ const config = {
                 label: 'YouTube',
                 href: 'https://www.youtube.com/@playcanvas',
               },
-              {
-                label: 'Report a Vulnerability',
-                to: '/user-manual/security/',
-              },
             ],
           }
         ],
