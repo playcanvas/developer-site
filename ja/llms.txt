@@ -6,8 +6,8 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 570
-Generated: 2026-04-29
+Total Documents: 571
+Generated: 2026-05-05
 
 ## Recommended Entry Points
 
@@ -484,6 +484,7 @@ Generated: 2026-04-29
 - https://developer.playcanvas.com/user-manual/glossary/ - Glossary
 - https://developer.playcanvas.com/user-manual/press-pack/ - Press Pack
 - https://developer.playcanvas.com/user-manual/ - Welcome
+- https://developer.playcanvas.com/user-manual/security/ - Security
 ## Tutorials
 
 - https://developer.playcanvas.com/tutorials/360-lookaround-camera/ - 360 lookaround camera
