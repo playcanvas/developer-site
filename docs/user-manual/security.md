@@ -53,7 +53,7 @@ When reporting a vulnerability, please:
 For functional bugs, feature requests, and general questions, please use the appropriate channel instead:
 
 - **Engine, Editor, or other open source bugs** — file an issue on the relevant [GitHub repository](https://github.com/playcanvas).
-- **Account, billing, or platform questions** — see [Account Management](../account-management/index.md).
+- **Account, billing, or platform questions** — see [Account Management](account-management/index.md).
 - **Help and discussion** — visit the [Forum](https://forum.playcanvas.com) or [Discord](https://discord.gg/RSaMRzg).
 
 Thank you for helping keep PlayCanvas and its users safe.
