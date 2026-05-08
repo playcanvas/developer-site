@@ -1,6 +1,6 @@
 ---
 title: Creating Splats
-description: "How to create a Gaussian splat: capture source imagery, choose a tool, and let it run Structure from Motion and training to produce a PLY."
+description: "How to create a Gaussian splat: capture source imagery, choose a tool, and let it run Structure from Motion and training to produce a PLY file."
 ---
 
 A Gaussian splat is reconstructed from a set of images that cover your subject from many viewpoints. Those images can be photographs, frames extracted from a video, or a combination of the two.
