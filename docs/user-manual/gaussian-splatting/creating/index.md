@@ -21,7 +21,7 @@ Creating a splat in PlayCanvas-friendly form is a three-step process:
 
 ## Inside the pipeline
 
-Whichever tool you choose, what happens under the hood is broadly the same two stages.
+Whichever tool you choose, what happens under the hood is broadly the same, in two stages.
 
 ### 1. Structure from Motion (SfM)
 
