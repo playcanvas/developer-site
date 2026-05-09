@@ -20,10 +20,9 @@ const config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'playcanvas', // Usually your GitHub org/user name.
-  projectName: 'developer.playcanvas.com', // Usually your repo name.
+  // GitHub Pages deployment config (used by docusaurus deploy and the gh-pages workflow).
+  organizationName: 'playcanvas',
+  projectName: 'developer-site',
 
   trailingSlash: true,
 
@@ -233,10 +232,8 @@ const config = {
               }
             }]
           ],
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/playcanvas/developer.playcanvas.com/tree/dev/',
+            'https://github.com/playcanvas/developer-site/tree/main/',
         },
         blog: false,
         theme: {
@@ -255,7 +252,6 @@ const config = {
         indexName: 'developer-playcanvas',
         contextualSearch: true,
       },
-      // Replace with your project's social card
       image: 'img/playcanvas-social-card.jpg',
       navbar: {
         title: 'PlayCanvas Docs',
