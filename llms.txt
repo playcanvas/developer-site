@@ -307,7 +307,7 @@ Generated: 2026-05-09
 - https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/ - Modern Post Processing
 - https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/compose-shader/ - Customizing the Compose Shader
 - https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/custom-passes/ - Custom Render Passes
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/extending-class/ - Extending RenderPassCameraFrame Class
+- https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/extending-class/ - Extending FramePassCameraFrame Class
 - https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/ - Legacy Post Effects
 - https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/bloom/ - Bloom Effect
 - https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/brightness_contrast/ - Brightness-Contrast Effect

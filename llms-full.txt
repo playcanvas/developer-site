@@ -26273,7 +26273,7 @@ Here's a complete example showing how to add a pixelation effect:
 ```javascript
 
 // Override compose shader chunks before creating CameraFrame
-const shaderChunks = pc.ShaderChunks.get(graphicsDevice, pc.SHADERLANGUAGE_GLSL);
+const shaderChunks = ShaderChunks.get(graphicsDevice, SHADERLANGUAGE_GLSL);
 
 shaderChunks.set('composeDeclarationsPS', `
     uniform float pixelSize;
@@ -26286,7 +26286,7 @@ shaderChunks.set('composeMainEndPS', `
 `);
 
 // For WebGPU, also set WGSL chunks
-const wgslChunks = pc.ShaderChunks.get(graphicsDevice, pc.SHADERLANGUAGE_WGSL);
+const wgslChunks = ShaderChunks.get(graphicsDevice, SHADERLANGUAGE_WGSL);
 wgslChunks.set('composeDeclarationsPS', `
     uniform pixelSize: f32;
 `);
@@ -26297,7 +26297,7 @@ wgslChunks.set('composeMainEndPS', `
 `);
 
 // Now create the CameraFrame
-const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
+const cameraFrame = new CameraFrame(app, cameraEntity.camera);
 cameraFrame.update();
 
 // Set the custom uniform value
@@ -26343,19 +26343,29 @@ Here's a complete example of a custom render pass that tints the scene:
 
 ```javascript
 
-class RenderPassTint extends pc.RenderPassShaderQuad {
+    Color,
+    PIXELFORMAT_RGBA8,
+    RenderPassForward,
+    RenderPassShaderQuad,
+    RenderTarget,
+    SEMANTIC_POSITION,
+    ShaderUtils,
+    Texture
+} from 'playcanvas';
+
+class RenderPassTint extends RenderPassShaderQuad {
     constructor(device, sourceTexture) {
         super(device);
         this.sourceTexture = sourceTexture;
-        this.tint = pc.Color.WHITE.clone();
+        this.tint = Color.WHITE.clone();
         
         this.shader = this.createShader();
     }
     
     createShader() {
-        return pc.ShaderUtils.createShader(this.device, {
+        return ShaderUtils.createShader(this.device, {
             uniqueName: 'TintShader',
-            attributes: { aPosition: pc.SEMANTIC_POSITION },
+            attributes: { aPosition: SEMANTIC_POSITION },
             vertexChunk: 'quadVS',
             
             fragmentGLSL: `
@@ -26399,7 +26409,7 @@ To use custom render passes without `CameraFrame`:
 
 ```javascript
 // Create your scene render pass (renders the 3D scene)
-const scenePass = new pc.RenderPassForward(device, composition, scene, renderer);
+const scenePass = new RenderPassForward(device, composition, scene, renderer);
 scenePass.init(renderTarget);
 
 // Create your custom post-processing pass
@@ -26416,29 +26426,29 @@ Here's an example of chaining multiple custom passes:
 
 ```javascript
 // Create render targets
-const rt1 = new pc.RenderTarget({
-    colorBuffer: new pc.Texture(device, {
+const rt1 = new RenderTarget({
+    colorBuffer: new Texture(device, {
         width: 1920, height: 1080,
-        format: pc.PIXELFORMAT_RGBA8
+        format: PIXELFORMAT_RGBA8
     })
 });
 
-const rt2 = new pc.RenderTarget({
-    colorBuffer: new pc.Texture(device, {
+const rt2 = new RenderTarget({
+    colorBuffer: new Texture(device, {
         width: 1920, height: 1080,
-        format: pc.PIXELFORMAT_RGBA8
+        format: PIXELFORMAT_RGBA8
     })
 });
 
 // Create scene pass
-const scenePass = new pc.RenderPassForward(device, composition, scene, renderer);
+const scenePass = new RenderPassForward(device, composition, scene, renderer);
 scenePass.init(rt1);
 
-// Create blur pass (horizontal)
+// RenderPassBlurHorizontal and RenderPassBlurVertical are illustrative custom
+// passes you'd define yourself, similar to RenderPassTint above
 const blurHPass = new RenderPassBlurHorizontal(device, rt1.colorBuffer);
 blurHPass.init(rt2);
 
-// Create blur pass (vertical)
 const blurVPass = new RenderPassBlurVertical(device, rt2.colorBuffer);
 blurVPass.init(camera.renderTarget); // Final output
 
@@ -26470,11 +26480,11 @@ This approach is ideal for:
 
 --------------------------------------------------------------------------------
 
-## Extending RenderPassCameraFrame Class
+## Extending FramePassCameraFrame Class
 
 URL: https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/extending-class/
 
-For more advanced customization, you can extend the `FramePassCameraFrame` class to add custom passes or modify the rendering pipeline. This approach gives you full control over the pass creation and ordering while still leveraging the built-in CameraFrame effects.
+For more advanced customization, you can extend the `FramePassCameraFrame` class to add custom passes or modify the rendering pipeline, and wire it in by overriding [`CameraFrame.createRenderPass`](https://api.playcanvas.com/engine/classes/CameraFrame.html#createrenderpass). This approach gives you full control over the pass creation and ordering while still leveraging the built-in [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) effects.
 
 ## Overview
 
@@ -26491,7 +26501,7 @@ This example demonstrates how to extend the `FramePassCameraFrame` class to inse
 
 ```javascript
 
-class CustomFramePassCameraFrame extends pc.FramePassCameraFrame {
+class CustomFramePassCameraFrame extends FramePassCameraFrame {
     createPasses(options) {
         // Call the base implementation to create standard passes
         super.createPasses(options);
@@ -26515,7 +26525,7 @@ class CustomFramePassCameraFrame extends pc.FramePassCameraFrame {
 }
 
 // Use your custom class by extending CameraFrame
-class MyCameraFrame extends pc.CameraFrame {
+class MyCameraFrame extends CameraFrame {
     createRenderPass() {
         return new CustomFramePassCameraFrame(this.app, this, this.cameraComponent, this.options);
     }
