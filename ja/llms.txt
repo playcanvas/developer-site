@@ -617,7 +617,7 @@ Generated: 2026-05-09
 - https://developer.playcanvas.com/tutorials/vehicle-physics/ - Vehicle Physics
 - https://developer.playcanvas.com/tutorials/vhscrt-post-effect/ - VHS/CRT Post Effect
 - https://developer.playcanvas.com/tutorials/video-textures/ - Video Textures
-- https://developer.playcanvas.com/tutorials/vignette-abberation/ - Vignette Aberration
+- https://developer.playcanvas.com/tutorials/vignette-aberration/ - Vignette Aberration
 - https://developer.playcanvas.com/tutorials/warp-a-sprite-with-glsl/ - Warp a Sprite with GLSL
 - https://developer.playcanvas.com/tutorials/webxr-360-image/ - WebXR 360 Image
 - https://developer.playcanvas.com/tutorials/webxr-360-video/ - WebXR 360 Video

@@ -5501,7 +5501,7 @@ This script performs the following functions:
 
 ## Vignette Aberration
 
-URL: https://developer.playcanvas.com/tutorials/vignette-abberation/
+URL: https://developer.playcanvas.com/tutorials/vignette-aberration/
 Tags: tutorial, posteffects
 
 [Interactive Demo]
