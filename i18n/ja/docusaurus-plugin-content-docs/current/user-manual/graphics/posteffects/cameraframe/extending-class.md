@@ -3,7 +3,7 @@ title: FramePassCameraFrame クラスの拡張
 description: FramePassCameraFrame を拡張してパスを挿入し、処理順を並べ替え、HDR スタック内の中間シーンテクスチャを利用します。
 ---
 
-より高度なカスタマイズとして、`FramePassCameraFrame` クラスを拡張してカスタムレンダーパスを追加したり、レンダリングパイプラインを変更したりできます。この方法では、組み込みの CameraFrame エフェクトを活かしつつ、パス生成と実行順を細かく制御できます。
+より高度なカスタマイズとして、`FramePassCameraFrame` クラスを拡張してカスタムレンダーパスを追加したり、レンダリングパイプラインを変更したりできます。サブクラスは [`CameraFrame.createRenderPass`](https://api.playcanvas.com/engine/classes/CameraFrame.html#createrenderpass) をオーバーライドして組み込みます。この方法では、組み込みの [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) エフェクトを活かしつつ、パス生成と実行順を細かく制御できます。
 
 ## 概要
 
