@@ -51,6 +51,9 @@ const config = {
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
+        // Retired Facebook docs (the Facebook Canvas web games platform was discontinued)
+        { from: ['/tutorials/facebook-api/'], to: '/tutorials/' },
+        { from: ['/user-manual/editor/publishing/web/facebook/'], to: '/user-manual/editor/publishing/web/' },
         { from: ['/user-manual/billing/'], to: '/user-manual/account-management/billing/' },
         { from: ['/user-manual/faq/'], to: '/user-manual/editor/faq/' },
         { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },

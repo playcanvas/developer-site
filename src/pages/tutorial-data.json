@@ -26,7 +26,6 @@
     "mouse",
     "raycast",
     "particles",
-    "facebook",
     "gaussiansplatting",
     "monetization",
     "html",
@@ -376,14 +375,6 @@
       ],
       "thumb": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439297/80EDE5-image-75.jpg",
       "filename": "explosion-particle-effect"
-    },
-    {
-      "title": "Facebook API",
-      "tags": [
-        "facebook"
-      ],
-      "thumb": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405897/26D1D2-image-75.jpg",
-      "filename": "facebook-api"
     },
     {
       "title": "Fading objects in and out",

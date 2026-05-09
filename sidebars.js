@@ -350,7 +350,6 @@ const sidebars = {
                 'user-manual/editor/publishing/web/self-hosting-for-beginners',
                 'user-manual/editor/publishing/web/communicating-webpage',
                 'user-manual/editor/publishing/web/hosting-cdn',
-                'user-manual/editor/publishing/web/facebook',
                 'user-manual/editor/publishing/web/hosting-heyvr',
               ],
             },
