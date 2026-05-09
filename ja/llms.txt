@@ -613,7 +613,7 @@ Generated: 2026-05-09
 - https://developer.playcanvas.com/tutorials/ui-text-input/ - User Interface - Text Input
 - https://developer.playcanvas.com/tutorials/using-assets/ - Using the Asset Registry
 - https://developer.playcanvas.com/tutorials/using-events-with-scripts/ - Using events with scripts
-- https://developer.playcanvas.com/tutorials/using-forces-on-rigid-bodies/ - Forces and Impulses
+- https://developer.playcanvas.com/tutorials/Using-forces-on-rigid-bodies/ - Forces and Impulses
 - https://developer.playcanvas.com/tutorials/vehicle-physics/ - Vehicle Physics
 - https://developer.playcanvas.com/tutorials/vhscrt-post-effect/ - VHS/CRT Post Effect
 - https://developer.playcanvas.com/tutorials/video-textures/ - Video Textures

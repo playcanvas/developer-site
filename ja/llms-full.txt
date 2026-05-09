@@ -5345,7 +5345,7 @@ Sample showing how to communicate between scripts using events.
 
 ## Forces and Impulses
 
-URL: https://developer.playcanvas.com/tutorials/using-forces-on-rigid-bodies/
+URL: https://developer.playcanvas.com/tutorials/Using-forces-on-rigid-bodies/
 Tags: physics, collision
 
 [Interactive Demo]
