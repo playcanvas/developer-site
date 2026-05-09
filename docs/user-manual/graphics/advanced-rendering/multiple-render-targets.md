@@ -45,21 +45,21 @@ const renderTarget = new pc.RenderTarget({
 });
 ```
 
-Create a camera which will be used to render to MRT:
+Create a camera entity which will be used to render to MRT:
 
 ```javascript
-const camera = new pc.Entity('MRTCamera');
-camera.addComponent('camera', {
+const entity = new pc.Entity('MRTCamera');
+entity.addComponent('camera', {
     // set its priority to make it render before the main camera each frame
     priority: -1,
 
     // this camera renders into MRT
     renderTarget: renderTarget
 });
-app.root.addChild(camera);
+app.root.addChild(entity);
 
 // set the camera to use a custom shader pass called MyMRT
-camera.camera.setShaderPass('MyMRT');
+entity.camera.setShaderPass('MyMRT');
 ```
 
 ### Standard Materials

@@ -45,21 +45,21 @@ const renderTarget = new pc.RenderTarget({
 });
 ```
 
-MRTにレンダリングするために使用するカメラを作成します。
+MRTにレンダリングするために使用するカメラエンティティを作成します。
 
 ```javascript
-const camera = new pc.Entity('MRTCamera');
-camera.addComponent('camera', {
+const entity = new pc.Entity('MRTCamera');
+entity.addComponent('camera', {
     // メインカメラより前に各フレームをレンダリングするように優先度を設定します
     priority: -1,
 
     // このカメラはMRTにレンダリングします
     renderTarget: renderTarget
 });
-app.root.addChild(camera);
+app.root.addChild(entity);
 
 // カメラがMyMRTというカスタムシェーダーパスを使用するように設定します
-camera.camera.setShaderPass('MyMRT');
+entity.camera.setShaderPass('MyMRT');
 ```
 
 ### 標準マテリアル
