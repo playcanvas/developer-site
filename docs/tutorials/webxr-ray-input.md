@@ -40,9 +40,9 @@ To read more about the direct PlayCanvas API for WebXR, please refer to the [Use
 
 The level of fidelity for input devices can be broken into the following groups (DOF == Degrees of Freedom):
 
-* **Gaze** - The default type which has no position and orientation of its own, and is based on the orientation of the head mounted display. Simply put - it is always facing forwards in the direction the user is facing. This is the fallback input for inline (non-immersive) WebXR sessions on devices without spatial tracking.
+* **Gaze** - The default type which has no position and orientation of its own, and is based on the orientation of the head mounted display. Simply put - it is always facing forwards in the direction the user is facing. This is used on 3DoF devices that don't provide positional tracking, and as a fallback for inline (non-immersive) WebXR sessions.
 * **Screen** - Touch based input source, which is possible in AR. For example, on mobile devices with touch screens.
-* **Tracked Pointer** - Input source which has a tracked rotation and an optionally tracked position in space. This is usually a grippable device, and is associated with hands, either as hand controllers or tracked hands itself. Modern VR/AR controllers (Meta Quest Touch, HTC Vive, and others) all surface here.
+* **Tracked Pointer** - Input source which has a tracked rotation and an optionally tracked position in space. This is usually a grippable device, and is associated with hands, either as hand controllers or tracked hands itself. Modern VR/AR controllers (Meta Quest Touch, HTC Vive controllers, and others) all surface here.
 
 Every input source has a ray with an origin where it starts and a direction in which it is pointing. WebXR input source implementation in PlayCanvas supports all input source types without any extra work from a developer. If an input source is grippable, then we can render its model based on the provided position and rotation.
 
