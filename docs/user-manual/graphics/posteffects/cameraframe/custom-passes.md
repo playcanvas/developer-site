@@ -14,21 +14,30 @@ This approach does not use `CameraFrame` at all. Instead, you create your own re
 Here's a complete example of a custom render pass that tints the scene:
 
 ```javascript
-import * as pc from 'playcanvas';
+import {
+    Color,
+    PIXELFORMAT_RGBA8,
+    RenderPassForward,
+    RenderPassShaderQuad,
+    RenderTarget,
+    SEMANTIC_POSITION,
+    ShaderUtils,
+    Texture
+} from 'playcanvas';
 
-class RenderPassTint extends pc.RenderPassShaderQuad {
+class RenderPassTint extends RenderPassShaderQuad {
     constructor(device, sourceTexture) {
         super(device);
         this.sourceTexture = sourceTexture;
-        this.tint = pc.Color.WHITE.clone();
+        this.tint = Color.WHITE.clone();
         
         this.shader = this.createShader();
     }
     
     createShader() {
-        return pc.ShaderUtils.createShader(this.device, {
+        return ShaderUtils.createShader(this.device, {
             uniqueName: 'TintShader',
-            attributes: { aPosition: pc.SEMANTIC_POSITION },
+            attributes: { aPosition: SEMANTIC_POSITION },
             vertexChunk: 'quadVS',
             
             fragmentGLSL: `
@@ -72,7 +81,7 @@ To use custom render passes without `CameraFrame`:
 
 ```javascript
 // Create your scene render pass (renders the 3D scene)
-const scenePass = new pc.RenderPassForward(device, composition, scene, renderer);
+const scenePass = new RenderPassForward(device, composition, scene, renderer);
 scenePass.init(renderTarget);
 
 // Create your custom post-processing pass
@@ -89,29 +98,29 @@ Here's an example of chaining multiple custom passes:
 
 ```javascript
 // Create render targets
-const rt1 = new pc.RenderTarget({
-    colorBuffer: new pc.Texture(device, {
+const rt1 = new RenderTarget({
+    colorBuffer: new Texture(device, {
         width: 1920, height: 1080,
-        format: pc.PIXELFORMAT_RGBA8
+        format: PIXELFORMAT_RGBA8
     })
 });
 
-const rt2 = new pc.RenderTarget({
-    colorBuffer: new pc.Texture(device, {
+const rt2 = new RenderTarget({
+    colorBuffer: new Texture(device, {
         width: 1920, height: 1080,
-        format: pc.PIXELFORMAT_RGBA8
+        format: PIXELFORMAT_RGBA8
     })
 });
 
 // Create scene pass
-const scenePass = new pc.RenderPassForward(device, composition, scene, renderer);
+const scenePass = new RenderPassForward(device, composition, scene, renderer);
 scenePass.init(rt1);
 
-// Create blur pass (horizontal)
+// RenderPassBlurHorizontal and RenderPassBlurVertical are illustrative custom
+// passes you'd define yourself, similar to RenderPassTint above
 const blurHPass = new RenderPassBlurHorizontal(device, rt1.colorBuffer);
 blurHPass.init(rt2);
 
-// Create blur pass (vertical)
 const blurVPass = new RenderPassBlurVertical(device, rt2.colorBuffer);
 blurVPass.init(camera.renderTarget); // Final output
 

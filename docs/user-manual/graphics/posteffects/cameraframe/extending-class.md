@@ -1,9 +1,9 @@
 ---
-title: Extending RenderPassCameraFrame Class
-description: Extend RenderPassCameraFrame to insert passes, reorder work, and tap intermediate scene textures in the HDR stack.
+title: Extending FramePassCameraFrame Class
+description: Extend FramePassCameraFrame to insert passes, reorder work, and tap intermediate scene textures in the HDR stack.
 ---
 
-For more advanced customization, you can extend the `FramePassCameraFrame` class to add custom passes or modify the rendering pipeline. This approach gives you full control over the pass creation and ordering while still leveraging the built-in CameraFrame effects.
+For more advanced customization, you can extend the `FramePassCameraFrame` class to add custom passes or modify the rendering pipeline, and wire it in by overriding [`CameraFrame.createRenderPass`](https://api.playcanvas.com/engine/classes/CameraFrame.html#createrenderpass). This approach gives you full control over the pass creation and ordering while still leveraging the built-in [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) effects.
 
 ## Overview
 
@@ -19,9 +19,9 @@ By extending `FramePassCameraFrame`, you can:
 This example demonstrates how to extend the `FramePassCameraFrame` class to insert a custom render pass into the rendering pipeline. By overriding the `createPasses()` method, you can add your own processing step that operates on the scene texture. The `collectPasses()` method then controls where in the pipeline your custom pass executes—in this case, right before the final compose pass. This is useful when you need to apply custom effects that require their own render pass, such as edge detection, custom blur effects, or any processing that needs intermediate render targets.
 
 ```javascript
-import * as pc from 'playcanvas';
+import { CameraFrame, FramePassCameraFrame } from 'playcanvas';
 
-class CustomFramePassCameraFrame extends pc.FramePassCameraFrame {
+class CustomFramePassCameraFrame extends FramePassCameraFrame {
     createPasses(options) {
         // Call the base implementation to create standard passes
         super.createPasses(options);
@@ -45,7 +45,7 @@ class CustomFramePassCameraFrame extends pc.FramePassCameraFrame {
 }
 
 // Use your custom class by extending CameraFrame
-class MyCameraFrame extends pc.CameraFrame {
+class MyCameraFrame extends CameraFrame {
     createRenderPass() {
         return new CustomFramePassCameraFrame(this.app, this, this.cameraComponent, this.options);
     }
