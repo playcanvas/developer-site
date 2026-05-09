@@ -23,7 +23,7 @@ import { CameraFrame, FramePassCameraFrame } from 'playcanvas';
 
 class CustomFramePassCameraFrame extends FramePassCameraFrame {
     createPasses(options) {
-A        // Call the base implementation to create standard passes
+        // Call the base implementation to create standard passes
         super.createPasses(options);
         
         // Add your custom render pass
