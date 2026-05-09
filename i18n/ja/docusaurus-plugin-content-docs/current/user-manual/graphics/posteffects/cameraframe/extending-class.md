@@ -1,13 +1,13 @@
 ---
-title: RenderPassCameraFrame クラスの拡張
-description: RenderPassCameraFrame を拡張してパスを挿入し、処理順を並べ替え、HDR スタック内の中間シーンテクスチャを利用します。
+title: FramePassCameraFrame クラスの拡張
+description: FramePassCameraFrame を拡張してパスを挿入し、処理順を並べ替え、HDR スタック内の中間シーンテクスチャを利用します。
 ---
 
-より高度なカスタマイズとして、`RenderPassCameraFrame` クラスを拡張してカスタムレンダーパスを追加したり、レンダリングパイプラインを変更したりできます。この方法では、組み込みの CameraFrame エフェクトを活かしつつ、パス生成と実行順を細かく制御できます。
+より高度なカスタマイズとして、`FramePassCameraFrame` クラスを拡張してカスタムレンダーパスを追加したり、レンダリングパイプラインを変更したりできます。この方法では、組み込みの CameraFrame エフェクトを活かしつつ、パス生成と実行順を細かく制御できます。
 
 ## 概要
 
-`RenderPassCameraFrame` を拡張すると、次のことができます。
+`FramePassCameraFrame` を拡張すると、次のことができます。
 
 - パイプラインにカスタムレンダーパスを追加する
 - 既存のパスを変更または置き換える
@@ -16,12 +16,12 @@ description: RenderPassCameraFrame を拡張してパスを挿入し、処理順
 
 ## 例：カスタムレンダーパスの追加
 
-この例では、`RenderPassCameraFrame` クラスを拡張してレンダリングパイプラインにカスタムレンダーパスを挿入する方法を示します。`createPasses()` メソッドをオーバーライドすると、シーンテクスチャを対象とする独自の処理ステップを追加できます。`collectPasses()` メソッドでは、カスタムパスがパイプラインのどこで実行されるかを制御します。この例では最終の compose パスの直前に挿入しています。エッジ検出、カスタムブラー、中間レンダーターゲットが必要な処理など、独自のレンダーパスが要るエフェクトに便利です。
+この例では、`FramePassCameraFrame` クラスを拡張してレンダリングパイプラインにカスタムレンダーパスを挿入する方法を示します。`createPasses()` メソッドをオーバーライドすると、シーンテクスチャを対象とする独自の処理ステップを追加できます。`collectPasses()` メソッドでは、カスタムパスがパイプラインのどこで実行されるかを制御します。この例では最終の compose パスの直前に挿入しています。エッジ検出、カスタムブラー、中間レンダーターゲットが必要な処理など、独自のレンダーパスが要るエフェクトに便利です。
 
 ```javascript
 import * as pc from 'playcanvas';
 
-class CustomRenderPassCameraFrame extends pc.RenderPassCameraFrame {
+class CustomFramePassCameraFrame extends pc.FramePassCameraFrame {
     createPasses(options) {
         // Call the base implementation to create standard passes
         super.createPasses(options);
@@ -47,7 +47,7 @@ class CustomRenderPassCameraFrame extends pc.RenderPassCameraFrame {
 // Use your custom class by extending CameraFrame
 class MyCameraFrame extends pc.CameraFrame {
     createRenderPass() {
-        return new CustomRenderPassCameraFrame(this.app, this, this.cameraComponent, this.options);
+        return new CustomFramePassCameraFrame(this.app, this, this.cameraComponent, this.options);
     }
 }
 
