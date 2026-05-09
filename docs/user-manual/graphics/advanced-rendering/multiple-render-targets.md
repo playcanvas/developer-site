@@ -50,11 +50,9 @@ Create a camera entity which will be used to render to MRT:
 ```javascript
 const entity = new pc.Entity('MRTCamera');
 entity.addComponent('camera', {
-    // set its priority to make it render before the main camera each frame
+    // negative priority => rendered before the main camera each frame
     priority: -1,
-
-    // this camera renders into MRT
-    renderTarget: renderTarget
+    renderTarget
 });
 app.root.addChild(entity);
 
