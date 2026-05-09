@@ -64,36 +64,33 @@ entity.camera.setShaderPass('MyMRT');
 
 ### 標準マテリアル
 
-[`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html)を使用して複数のレンダーターゲット (MRT) にレンダリングする場合、追加のカラーバッファに値を出力するために`outputPS`シェーダーチャンクをオーバーライドします。プロジェクトが対象とするシェーダー言語ごとにチャンクを用意してください — WebGL2にはGLSL、WebGPUにはWGSLです。
-
-GLSLの出力チャンク:
-
-```glsl
-#ifdef MYMRT_PASS
-    // ワールド法線をターゲット1に出力
-    pcFragColor1 = vec4(litArgs_worldNormal * 0.5 + 0.5, 1.0);
-
-    // グロスをターゲット2に出力
-    pcFragColor2 = vec4(vec3(litArgs_gloss), 1.0);
-#endif
-```
-
-WGSLの出力チャンク:
-
-```wgsl
-#ifdef MYMRT_PASS
-    // ワールド法線をターゲット1に出力
-    output.color1 = vec4f(litArgs_worldNormal * 0.5 + 0.5, 1.0);
-
-    // グロスをターゲット2に出力
-    output.color2 = vec4f(vec3f(litArgs_gloss), 1.0);
-#endif
-```
-
-[`Material.getShaderChunks`](https://api.playcanvas.com/engine/classes/Material.html#getshaderchunks)を使って、MRTでレンダリングしたいすべてのメッシュインスタンスのマテリアルにチャンクを適用します。
+[`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html)を使用して複数のレンダーターゲット (MRT) にレンダリングする場合、追加のカラーバッファに値を出力するために`outputPS`シェーダーチャンクをオーバーライドします。プロジェクトが対象とするシェーダー言語ごとにチャンクを用意してください — WebGL2にはGLSL、WebGPUにはWGSLです。[`Material.getShaderChunks`](https://api.playcanvas.com/engine/classes/Material.html#getshaderchunks)を使って、両方のチャンクを対象エンティティのレンダーコンポーネントのすべてのマテリアルに適用します。
 
 ```javascript
-const renders = entity.findComponents('render');
+// GLSL出力チャンク（WebGL2で使用）
+const glslChunk = `
+    #ifdef MYMRT_PASS
+        // ワールド法線をターゲット1に出力
+        pcFragColor1 = vec4(litArgs_worldNormal * 0.5 + 0.5, 1.0);
+
+        // グロスをターゲット2に出力
+        pcFragColor2 = vec4(vec3(litArgs_gloss), 1.0);
+    #endif
+`;
+
+// WGSL出力チャンク（WebGPUで使用）
+const wgslChunk = `
+    #ifdef MYMRT_PASS
+        // ワールド法線をターゲット1に出力
+        output.color1 = vec4f(litArgs_worldNormal * 0.5 + 0.5, 1.0);
+
+        // グロスをターゲット2に出力
+        output.color2 = vec4f(vec3f(litArgs_gloss), 1.0);
+    #endif
+`;
+
+// `targetEntity`は、MRTを通してレンダリングしたいマテリアルを持つエンティティ（または階層のルート）です
+const renders = targetEntity.findComponents('render');
 renders.forEach((render) => {
     render.meshInstances.forEach((meshInstance) => {
         const material = meshInstance.material;

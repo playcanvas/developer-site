@@ -64,36 +64,33 @@ entity.camera.setShaderPass('MyMRT');
 
 ### Standard Materials
 
-When rendering using [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) into Multiple Render Targets (MRT), override the `outputPS` shader chunk to direct values to the additional color buffers. Supply the chunk for each shader language your project targets — GLSL for WebGL2, WGSL for WebGPU.
-
-GLSL output chunk:
-
-```glsl
-#ifdef MYMRT_PASS
-    // output world normal to target 1
-    pcFragColor1 = vec4(litArgs_worldNormal * 0.5 + 0.5, 1.0);
-
-    // output gloss to target 2
-    pcFragColor2 = vec4(vec3(litArgs_gloss), 1.0);
-#endif
-```
-
-WGSL output chunk:
-
-```wgsl
-#ifdef MYMRT_PASS
-    // output world normal to target 1
-    output.color1 = vec4f(litArgs_worldNormal * 0.5 + 0.5, 1.0);
-
-    // output gloss to target 2
-    output.color2 = vec4f(vec3f(litArgs_gloss), 1.0);
-#endif
-```
-
-Apply the chunks to the materials of every mesh instance you want rendered through MRT, using [`Material.getShaderChunks`](https://api.playcanvas.com/engine/classes/Material.html#getshaderchunks):
+When rendering using [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) into Multiple Render Targets (MRT), override the `outputPS` shader chunk to direct values to the additional color buffers. Supply the chunk for each shader language your project targets — GLSL for WebGL2, WGSL for WebGPU. Apply both to every material in your target entity's render components, using [`Material.getShaderChunks`](https://api.playcanvas.com/engine/classes/Material.html#getshaderchunks):
 
 ```javascript
-const renders = entity.findComponents('render');
+// GLSL output chunk (used on WebGL2)
+const glslChunk = `
+    #ifdef MYMRT_PASS
+        // output world normal to target 1
+        pcFragColor1 = vec4(litArgs_worldNormal * 0.5 + 0.5, 1.0);
+
+        // output gloss to target 2
+        pcFragColor2 = vec4(vec3(litArgs_gloss), 1.0);
+    #endif
+`;
+
+// WGSL output chunk (used on WebGPU)
+const wgslChunk = `
+    #ifdef MYMRT_PASS
+        // output world normal to target 1
+        output.color1 = vec4f(litArgs_worldNormal * 0.5 + 0.5, 1.0);
+
+        // output gloss to target 2
+        output.color2 = vec4f(vec3f(litArgs_gloss), 1.0);
+    #endif
+`;
+
+// `targetEntity` is the entity (or hierarchy root) whose materials you want rendered through MRT
+const renders = targetEntity.findComponents('render');
 renders.forEach((render) => {
     render.meshInstances.forEach((meshInstance) => {
         const material = meshInstance.material;
