@@ -5,13 +5,13 @@ description: Configure multiple render targets, shared attachments rules, and sh
 
 The multiple render targets feature allows you to simultaneously render to multiple textures. This manual page explores implementation, configuration, and an example use case of multiple render targets.
 
-MRT is supported on every device PlayCanvas runs on (WebGL2 and WebGPU). To detect the number of color attachments you can use on the current device, check `pc.GraphicsDevice.maxColorAttachments`. Typically, 8 attachments are supported.
+MRT is supported on every device PlayCanvas runs on (WebGL2 and WebGPU). To detect the number of color attachments you can use on the current device, check [`GraphicsDevice.maxColorAttachments`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxcolorattachments). Typically, 8 attachments are supported.
 
 Multiple render targets have the following restrictions:
 
 - All color attachments of a multiple render target must have the same width and height.
-- All color attachments are cleared to the same value, specified using `pc.CameraComponent.clearColor`.
-- All color attachments use the same write mask and alpha blend mode, as specified using `pc.BlendState`.
+- All color attachments are cleared to the same value, specified using [`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor).
+- All color attachments use the same write mask and alpha blend mode, as specified using [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html).
 
 ## How to use MRT
 
@@ -64,7 +64,7 @@ camera.camera.setShaderPass('MyMRT');
 
 ### Standard Materials
 
-When rendering using `StandardMaterial` into Multiple Render Targets (MRT), override the `outputPS` shader chunk to direct values to the additional color buffers. Supply the chunk for each shader language your project targets — GLSL for WebGL2, WGSL for WebGPU.
+When rendering using [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) into Multiple Render Targets (MRT), override the `outputPS` shader chunk to direct values to the additional color buffers. Supply the chunk for each shader language your project targets — GLSL for WebGL2, WGSL for WebGPU.
 
 GLSL output chunk:
 
@@ -90,7 +90,7 @@ WGSL output chunk:
 #endif
 ```
 
-Apply the chunks to the materials of every mesh instance you want rendered through MRT:
+Apply the chunks to the materials of every mesh instance you want rendered through MRT, using [`Material.getShaderChunks`](https://api.playcanvas.com/engine/classes/Material.html#getshaderchunks):
 
 ```javascript
 const renders = entity.findComponents('render');
@@ -108,9 +108,9 @@ The chunks above only write to color targets 1 and 2 — target 0 (`pcFragColor0
 
 ### Custom Shaders
 
-When using a fully custom fragment shader instead of `StandardMaterial`, write the desired values directly to `pcFragColor0`...`pcFragColor7` in GLSL or `output.color0`...`output.color7` in WGSL.
+When using a fully custom fragment shader instead of [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html), write the desired values directly to `pcFragColor0`...`pcFragColor7` in GLSL or `output.color0`...`output.color7` in WGSL.
 
-To restrict the modification to a specific camera, gate it behind the shader pass define for that camera. The define is the upper-cased pass name with `_PASS` appended, so `setShaderPass('MyMRT')` enables `MYMRT_PASS` in your shader.
+To restrict the modification to a specific camera, gate it behind the shader pass define for that camera. The define is the upper-cased pass name with `_PASS` appended, so [`setShaderPass('MyMRT')`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setshaderpass) enables `MYMRT_PASS` in your shader.
 
 ## Example
 
