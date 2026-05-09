@@ -116,11 +116,11 @@ const rt2 = new RenderTarget({
 const scenePass = new RenderPassForward(device, composition, scene, renderer);
 scenePass.init(rt1);
 
-// Create blur pass (horizontal)
+// RenderPassBlurHorizontal and RenderPassBlurVertical are illustrative custom
+// passes you'd define yourself, similar to RenderPassTint above
 const blurHPass = new RenderPassBlurHorizontal(device, rt1.colorBuffer);
 blurHPass.init(rt2);
 
-// Create blur pass (vertical)
 const blurVPass = new RenderPassBlurVertical(device, rt2.colorBuffer);
 blurVPass.init(camera.renderTarget); // Final output
 
