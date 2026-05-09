@@ -6,7 +6,7 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 571
+Total Documents: 569
 Generated: 2026-05-09
 
 ## Recommended Entry Points
@@ -123,7 +123,6 @@ Generated: 2026-05-09
 - https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/ - Snapchat Playable Ad
 - https://developer.playcanvas.com/user-manual/editor/publishing/web/ - Web
 - https://developer.playcanvas.com/user-manual/editor/publishing/web/communicating-webpage/ - Communication with web pages
-- https://developer.playcanvas.com/user-manual/editor/publishing/web/facebook/ - Facebook
 - https://developer.playcanvas.com/user-manual/editor/publishing/web/hosting-cdn/ - Hosting using a CDN
 - https://developer.playcanvas.com/user-manual/editor/publishing/web/hosting-heyvr/ - Hosting on heyVR.io
 - https://developer.playcanvas.com/user-manual/editor/publishing/web/playcanvas-hosting/ - PlayCanvas Hosting
@@ -522,7 +521,6 @@ Generated: 2026-05-09
 - https://developer.playcanvas.com/tutorials/entity-picking-using-physics/ - Entity picking using physics
 - https://developer.playcanvas.com/tutorials/entity-picking-without-physics/ - Entity picking without physics
 - https://developer.playcanvas.com/tutorials/explosion-particle-effect/ - Explosion Particle Effect
-- https://developer.playcanvas.com/tutorials/facebook-api/ - Facebook API
 - https://developer.playcanvas.com/tutorials/fading-objects-in-and-out/ - Fading objects in and out
 - https://developer.playcanvas.com/tutorials/first-person-movement/ - First Person Movement
 - https://developer.playcanvas.com/tutorials/first-person-shooter-starter-kit/ - First Person Shooter Starter Kit
