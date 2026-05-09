@@ -18,10 +18,10 @@ You can inject custom shader code by overriding shader chunks before creating th
 Here's a complete example showing how to add a pixelation effect:
 
 ```javascript
-import * as pc from 'playcanvas';
+import { CameraFrame, ShaderChunks, SHADERLANGUAGE_GLSL, SHADERLANGUAGE_WGSL } from 'playcanvas';
 
 // Override compose shader chunks before creating CameraFrame
-const shaderChunks = pc.ShaderChunks.get(graphicsDevice, pc.SHADERLANGUAGE_GLSL);
+const shaderChunks = ShaderChunks.get(graphicsDevice, SHADERLANGUAGE_GLSL);
 
 shaderChunks.set('composeDeclarationsPS', `
     uniform float pixelSize;
@@ -34,7 +34,7 @@ shaderChunks.set('composeMainEndPS', `
 `);
 
 // For WebGPU, also set WGSL chunks
-const wgslChunks = pc.ShaderChunks.get(graphicsDevice, pc.SHADERLANGUAGE_WGSL);
+const wgslChunks = ShaderChunks.get(graphicsDevice, SHADERLANGUAGE_WGSL);
 wgslChunks.set('composeDeclarationsPS', `
     uniform pixelSize: f32;
 `);
@@ -45,7 +45,7 @@ wgslChunks.set('composeMainEndPS', `
 `);
 
 // Now create the CameraFrame
-const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
+const cameraFrame = new CameraFrame(app, cameraEntity.camera);
 cameraFrame.update();
 
 // Set the custom uniform value
