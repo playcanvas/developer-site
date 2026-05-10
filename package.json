@@ -15,11 +15,11 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/playcanvas/developer.playcanvas.com/issues"
+    "url": "https://github.com/playcanvas/developer-site/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/playcanvas/developer.playcanvas.com.git"
+    "url": "https://github.com/playcanvas/developer-site.git"
   },
   "scripts": {
     "docusaurus": "docusaurus",
