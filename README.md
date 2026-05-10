@@ -4,7 +4,7 @@ This is the source repository for the [PlayCanvas Developer Site](https://develo
 
 ## How to build
 
-Building the site requires an installation of Node.js 18+.
+Building the site requires an installation of Node.js 22+.
 
 ```sh
 cd developer.playcanvas.com
