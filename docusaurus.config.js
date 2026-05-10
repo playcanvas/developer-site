@@ -260,7 +260,7 @@ const config = {
         title: 'PlayCanvas Docs',
         logo: {
           alt: 'PlayCanvas Logo',
-          src: 'img/playcanvas.png',
+          src: 'img/playcanvas.webp',
         },
         items: [
           {
