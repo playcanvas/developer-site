@@ -62,7 +62,7 @@ app.on('update', () => {
 
 ## Resources
 
-- [Custom Compose Shader Example](https://playcanvas.vercel.app/#/graphics/custom-compose-shader) - Complete working demonstration
+- [Custom Compose Shader Example](https://playcanvas.github.io/#/graphics/custom-compose-shader) - Complete working demonstration
 
 ## Use Cases
 

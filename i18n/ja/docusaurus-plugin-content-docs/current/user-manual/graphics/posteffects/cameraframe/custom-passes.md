@@ -130,7 +130,7 @@ camera.framePasses = [scenePass, blurHPass, blurVPass];
 
 ## 参考資料
 
-- [Render Pass の例](https://playcanvas.vercel.app/#/graphics/render-pass) — カスタムレンダーパスの完全なデモ
+- [Render Pass の例](https://playcanvas.github.io/#/graphics/render-pass) — カスタムレンダーパスの完全なデモ
 
 ## 用途
 

@@ -17,7 +17,7 @@ For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-spl
 
 Override the `gsplatModifyVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
 
-**[View Live Example](https://playcanvas.vercel.app/#/gaussian-splatting/multi-splat)** - See shader chunk customization in action with animated splats.
+**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/multi-splat)** - See shader chunk customization in action with animated splats.
 
 ## API Reference
 
