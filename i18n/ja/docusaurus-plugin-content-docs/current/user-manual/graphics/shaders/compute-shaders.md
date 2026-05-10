@@ -434,7 +434,7 @@ storageBuffer.read(0, undefined, resultData, true).then((data) => {
 
 | インクルード | 説明 |
 |-------------|------|
-| `halfTypesCS` | 半精度型エイリアス（`half`、`half2`など）。サポートされている場合はf16に、そうでない場合はf32に解決されます。[半精度型](/user-manual/graphics/shaders/wgsl-specifics#半精度型)を参照。 |
+| `halfTypesCS` | 半精度型エイリアス（`half`、`half2`など）。サポートされている場合はf16に、そうでない場合はf32に解決されます。[半精度型](/user-manual/graphics/shaders/wgsl-specifics#half-precision-types)を参照。 |
 
 例：
 
