@@ -86,7 +86,7 @@ You can then use these defines within the shader for conditional logic:
 
 This system enables flexible shader variation without requiring multiple shader files, making it easier to customize rendering for different materials.
 
-### Shader Pass Defines {#renderpass-defines}
+### Shader Pass Defines {#shader-pass-defines}
 
 The engine provides some defines automatically, allowing integration with shader passes. Common built-in shader pass defines include:
 
