@@ -80,7 +80,7 @@ material.setDefine('FIRETYPE', 'RED');
 
 ### レンダーパスの定義 {#renderpass-defines}
 
-エンジンは一部の定義を自動的に提供し、レンダーパスとの統合を可能にします。デフォルトでは、異なるレンダーパスに特化したコードを記述できるように、これら3つの定義のいずれかが提供されます。
+エンジンは一部の定義を自動的に提供し、レンダーパスとの統合を可能にします。一般的な組み込みのレンダーパス定義には、次のものがあります。
 
 ```glsl
 // 通常のフォワードパスで色をレンダリングするために定義されます
@@ -91,13 +91,16 @@ material.setDefine('FIRETYPE', 'RED');
 #define SHADOW_PASS
 
 // `Picker`クラスがメッシュインスタンスIDをレンダリングするために使用するレンダーパスのために定義されます
-#define SHADOW_PICK 
+#define PICK_PASS
+
+// ピッカーの深度サポートが有効な場合、PICK_PASSに加えて定義されます
+#define DEPTH_PICK_PASS
 ```
 
 [`CameraComponent.setShaderPass`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setshaderpass)を使用して作成されたカスタムレンダーパスを使用する場合、対応する定義が自動的に生成されます。例：
 
 ```javascript
-camera.setRenderPass('custom');
+camera.setShaderPass('custom');
 ```
 
 これにより、以下の定義がシェーダーに追加されます。
