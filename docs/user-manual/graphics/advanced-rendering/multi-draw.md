@@ -33,9 +33,9 @@ When `supportsMultiDraw` is false, the engine automatically falls back to an int
 
 ## Live Examples
 
-- [Multi-Draw](https://playcanvas.vercel.app/#/graphics/multi-draw) - Terrain rendering with dynamic patch culling
-- [Multi-Draw Instanced](https://playcanvas.vercel.app/#/graphics/multi-draw-instanced) - Different geometries with instancing (WebGPU only)
-- [Multi-Draw Instanced Multi-Platform](https://playcanvas.vercel.app/#/graphics/multi-draw-instanced-multi-platform) - Cross-platform instanced multi-draw
+- [Multi-Draw](https://playcanvas.github.io/#/graphics/multi-draw) - Terrain rendering with dynamic patch culling
+- [Multi-Draw Instanced](https://playcanvas.github.io/#/graphics/multi-draw-instanced) - Different geometries with instancing (WebGPU only)
+- [Multi-Draw Instanced Multi-Platform](https://playcanvas.github.io/#/graphics/multi-draw-instanced-multi-platform) - Cross-platform instanced multi-draw
 
 ## Basic Multi-Draw
 

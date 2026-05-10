@@ -11,10 +11,10 @@ Note that all instances are submitted for rendering by the GPU with no camera fr
 
 ## Live Examples
 
-- [Basic Instancing](https://playcanvas.vercel.app/#/graphics/instancing-basic) - Demonstrates default Mat4 instancing format with StandardMaterial
-- [Custom Instancing](https://playcanvas.vercel.app/#/graphics/instancing-custom) - Shows custom vertex format with shader chunks override
-- [GLB Instancing](https://playcanvas.vercel.app/#/graphics/instancing-glb) - Uses EXT_mesh_gpu_instancing extension in GLB files
-- [Gooch Instancing](https://playcanvas.vercel.app/#/graphics/instancing-gooch) - Full custom ShaderMaterial with instancing support
+- [Basic Instancing](https://playcanvas.github.io/#/graphics/instancing-basic) - Demonstrates default Mat4 instancing format with StandardMaterial
+- [Custom Instancing](https://playcanvas.github.io/#/graphics/instancing-custom) - Shows custom vertex format with shader chunks override
+- [GLB Instancing](https://playcanvas.github.io/#/graphics/instancing-glb) - Uses EXT_mesh_gpu_instancing extension in GLB files
+- [Gooch Instancing](https://playcanvas.github.io/#/graphics/instancing-gooch) - Full custom ShaderMaterial with instancing support
 
 ## Basic Instancing with Default Format
 

@@ -28,11 +28,11 @@ For Editor users, a ready-to-use script is available. See [CameraFrame in the Ed
 
 ## Examples
 
-- [HDR with Bloom and LUT](https://playcanvas.vercel.app/#/graphics/hdr) - Demonstrates HDR bloom and color lookup table effects
-- [Post-Processing](https://playcanvas.vercel.app/#/graphics/post-processing) - Shows multiple effects including bloom, grading, vignette, fringing, and TAA
-- [Ambient Occlusion](https://playcanvas.vercel.app/#/graphics/ambient-occlusion) - Demonstrates SSAO implementation
-- [Depth of Field](https://playcanvas.vercel.app/#/graphics/depth-of-field) - Demonstrates depth of field effect
-- [Temporal Anti-Aliasing](https://playcanvas.vercel.app/#/graphics/taa) - Demonstrates TAA implementation
+- [HDR with Bloom and LUT](https://playcanvas.github.io/#/graphics/hdr) - Demonstrates HDR bloom and color lookup table effects
+- [Post-Processing](https://playcanvas.github.io/#/graphics/post-processing) - Shows multiple effects including bloom, grading, vignette, fringing, and TAA
+- [Ambient Occlusion](https://playcanvas.github.io/#/graphics/ambient-occlusion) - Demonstrates SSAO implementation
+- [Depth of Field](https://playcanvas.github.io/#/graphics/depth-of-field) - Demonstrates depth of field effect
+- [Temporal Anti-Aliasing](https://playcanvas.github.io/#/graphics/taa) - Demonstrates TAA implementation
 
 ## Custom Post Processing
 

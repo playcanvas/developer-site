@@ -17,7 +17,7 @@ PlayCanvas Engineは、Gaussian Splats用のカスタムシェーダーをサポ
 
 `gsplatModifyVS`シェーダーチャンクをオーバーライドして、スプラットの位置、サイズ、色をカスタマイズします。これにより、コアシェーダー機能はそのままに、関連する部分のみをオーバーライドできます。
 
-**[ライブサンプルを見る](https://playcanvas.vercel.app/#/gaussian-splatting/multi-splat)** - アニメーションスプラットでシェーダーチャンクのカスタマイズを実際に見てください。
+**[ライブサンプルを見る](https://playcanvas.github.io/#/gaussian-splatting/multi-splat)** - アニメーションスプラットでシェーダーチャンクのカスタマイズを実際に見てください。
 
 ## APIリファレンス
 

@@ -33,9 +33,9 @@ if (app.graphicsDevice.supportsMultiDraw) {
 
 ## ライブサンプル
 
-- [マルチドロー](https://playcanvas.vercel.app/#/graphics/multi-draw) - 動的パッチカリングを使用した地形レンダリング
-- [マルチドローインスタンス](https://playcanvas.vercel.app/#/graphics/multi-draw-instanced) - インスタンシングを使用した異なるジオメトリ（WebGPUのみ）
-- [マルチドローインスタンス マルチプラットフォーム](https://playcanvas.vercel.app/#/graphics/multi-draw-instanced-multi-platform) - クロスプラットフォームのインスタンス化マルチドロー
+- [マルチドロー](https://playcanvas.github.io/#/graphics/multi-draw) - 動的パッチカリングを使用した地形レンダリング
+- [マルチドローインスタンス](https://playcanvas.github.io/#/graphics/multi-draw-instanced) - インスタンシングを使用した異なるジオメトリ（WebGPUのみ）
+- [マルチドローインスタンス マルチプラットフォーム](https://playcanvas.github.io/#/graphics/multi-draw-instanced-multi-platform) - クロスプラットフォームのインスタンス化マルチドロー
 
 ## 基本的なマルチドロー
 
