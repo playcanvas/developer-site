@@ -26626,26 +26626,29 @@ You can then use these defines within the shader for conditional logic:
 
 This system enables flexible shader variation without requiring multiple shader files, making it easier to customize rendering for different materials.
 
-### RenderPass Defines {#renderpass-defines}
+### Shader Pass Defines {#shader-pass-defines}
 
-The engine provides some defines automatically, allowing integration with render passes. By default, one of these three defines is provided to allow you to write code specific to different render passes:
+The engine provides some defines automatically, allowing integration with shader passes. Common built-in shader pass defines include:
 
 ```glsl
-// Defined for normal forward passes rendering colors
+// Defined for normal forward shader passes rendering colors
 #define FORWARD_PASS
 
-// Defined for shadow rendering passes
+// Defined for shadow shader passes
 // Shader output specifics may depend on the shadow type used
 #define SHADOW_PASS
 
-// Defined for the render pass used by the `Picker` class to render mesh instance IDs
-#define SHADOW_PICK 
+// Defined for the shader pass used by the `Picker` class to render mesh instance IDs
+#define PICK_PASS
+
+// Defined in addition to PICK_PASS when picker depth support is enabled
+#define DEPTH_PICK_PASS
 ```
 
-If you use a custom render pass, created using [`CameraComponent.setShaderPass`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setshaderpass), a matching define is automatically generated. For example:
+If you use a custom shader pass, configured using [`CameraComponent.setShaderPass`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setshaderpass), a matching define is automatically generated. For example:
 
 ```javascript
-camera.setRenderPass('custom');
+camera.setShaderPass('custom');
 ```
 
 This results in the following define being added to the shader:
