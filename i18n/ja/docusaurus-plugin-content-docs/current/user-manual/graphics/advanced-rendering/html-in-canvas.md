@@ -1,5 +1,6 @@
 ---
 title: HTML-in-Canvas
+description: ライブのHTMLとCSSをWebGLテクスチャとしてレンダリングし、スタイリング、ヒットテスト、アクセシビリティを完全サポートします。フォールバック戦略も解説します。
 ---
 
 HTML-in-Canvas allows you to render live HTML and CSS content directly as WebGL textures. This enables styled text, interactive UI panels, forms, and other DOM content to appear on surfaces within a 3D scene — complete with accessibility, internationalization, and full CSS styling support.
