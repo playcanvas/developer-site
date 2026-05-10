@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
-import UserManualImage from '@site/static/img/playcanvas-user-manual.png';
-import TutorialsImage from '@site/static/img/playcanvas-tutorials.png';
-import ApiReferenceImage from '@site/static/img/playcanvas-api-reference.png';
+import UserManualImage from '@site/static/img/playcanvas-user-manual.webp';
+import TutorialsImage from '@site/static/img/playcanvas-tutorials.webp';
+import ApiReferenceImage from '@site/static/img/playcanvas-api-reference.webp';
 import Link from '@docusaurus/Link';
 
 import Translate from '@docusaurus/Translate';
