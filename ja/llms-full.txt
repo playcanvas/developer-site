@@ -17093,7 +17093,7 @@ For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-spl
 
 Override the `gsplatModifyVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
 
-**[View Live Example](https://playcanvas.vercel.app/#/gaussian-splatting/multi-splat)** - See shader chunk customization in action with animated splats.
+**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/multi-splat)** - See shader chunk customization in action with animated splats.
 
 ## API Reference
 
@@ -23773,10 +23773,10 @@ Note that all instances are submitted for rendering by the GPU with no camera fr
 
 ## Live Examples
 
-- [Basic Instancing](https://playcanvas.vercel.app/#/graphics/instancing-basic) - Demonstrates default Mat4 instancing format with StandardMaterial
-- [Custom Instancing](https://playcanvas.vercel.app/#/graphics/instancing-custom) - Shows custom vertex format with shader chunks override
-- [GLB Instancing](https://playcanvas.vercel.app/#/graphics/instancing-glb) - Uses EXT_mesh_gpu_instancing extension in GLB files
-- [Gooch Instancing](https://playcanvas.vercel.app/#/graphics/instancing-gooch) - Full custom ShaderMaterial with instancing support
+- [Basic Instancing](https://playcanvas.github.io/#/graphics/instancing-basic) - Demonstrates default Mat4 instancing format with StandardMaterial
+- [Custom Instancing](https://playcanvas.github.io/#/graphics/instancing-custom) - Shows custom vertex format with shader chunks override
+- [GLB Instancing](https://playcanvas.github.io/#/graphics/instancing-glb) - Uses EXT_mesh_gpu_instancing extension in GLB files
+- [Gooch Instancing](https://playcanvas.github.io/#/graphics/instancing-gooch) - Full custom ShaderMaterial with instancing support
 
 ## Basic Instancing with Default Format
 
@@ -24258,9 +24258,9 @@ When `supportsMultiDraw` is false, the engine automatically falls back to an int
 
 ## Live Examples
 
-- [Multi-Draw](https://playcanvas.vercel.app/#/graphics/multi-draw) - Terrain rendering with dynamic patch culling
-- [Multi-Draw Instanced](https://playcanvas.vercel.app/#/graphics/multi-draw-instanced) - Different geometries with instancing (WebGPU only)
-- [Multi-Draw Instanced Multi-Platform](https://playcanvas.vercel.app/#/graphics/multi-draw-instanced-multi-platform) - Cross-platform instanced multi-draw
+- [Multi-Draw](https://playcanvas.github.io/#/graphics/multi-draw) - Terrain rendering with dynamic patch culling
+- [Multi-Draw Instanced](https://playcanvas.github.io/#/graphics/multi-draw-instanced) - Different geometries with instancing (WebGPU only)
+- [Multi-Draw Instanced Multi-Platform](https://playcanvas.github.io/#/graphics/multi-draw-instanced-multi-platform) - Cross-platform instanced multi-draw
 
 ## Basic Multi-Draw
 
@@ -26054,11 +26054,11 @@ For Editor users, a ready-to-use script is available. See [CameraFrame in the Ed
 
 ## Examples
 
-- [HDR with Bloom and LUT](https://playcanvas.vercel.app/#/graphics/hdr) - Demonstrates HDR bloom and color lookup table effects
-- [Post-Processing](https://playcanvas.vercel.app/#/graphics/post-processing) - Shows multiple effects including bloom, grading, vignette, fringing, and TAA
-- [Ambient Occlusion](https://playcanvas.vercel.app/#/graphics/ambient-occlusion) - Demonstrates SSAO implementation
-- [Depth of Field](https://playcanvas.vercel.app/#/graphics/depth-of-field) - Demonstrates depth of field effect
-- [Temporal Anti-Aliasing](https://playcanvas.vercel.app/#/graphics/taa) - Demonstrates TAA implementation
+- [HDR with Bloom and LUT](https://playcanvas.github.io/#/graphics/hdr) - Demonstrates HDR bloom and color lookup table effects
+- [Post-Processing](https://playcanvas.github.io/#/graphics/post-processing) - Shows multiple effects including bloom, grading, vignette, fringing, and TAA
+- [Ambient Occlusion](https://playcanvas.github.io/#/graphics/ambient-occlusion) - Demonstrates SSAO implementation
+- [Depth of Field](https://playcanvas.github.io/#/graphics/depth-of-field) - Demonstrates depth of field effect
+- [Temporal Anti-Aliasing](https://playcanvas.github.io/#/graphics/taa) - Demonstrates TAA implementation
 
 ## Custom Post Processing
 
@@ -26146,7 +26146,7 @@ app.on('update', () => {
 
 ## Resources
 
-- [Custom Compose Shader Example](https://playcanvas.vercel.app/#/graphics/custom-compose-shader) - Complete working demonstration
+- [Custom Compose Shader Example](https://playcanvas.github.io/#/graphics/custom-compose-shader) - Complete working demonstration
 
 ## Use Cases
 
@@ -26290,7 +26290,7 @@ camera.framePasses = [scenePass, blurHPass, blurVPass];
 
 ## Resources
 
-- [Render Pass Example](https://playcanvas.vercel.app/#/graphics/render-pass) - Complete demonstration of custom render passes
+- [Render Pass Example](https://playcanvas.github.io/#/graphics/render-pass) - Complete demonstration of custom render passes
 
 ## Use Cases
 
