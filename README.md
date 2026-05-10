@@ -36,7 +36,7 @@ Tutorials are regular markdown files and can be edited directly. However, if you
 
 ## Update FAQ
 
-The User Manual on the developer site has a FAQ page which can be found at `docs/user-manual/faq.md`. This is the only Markdown file that is generated from other files (located in the `faq` directory). If you would like to add additional FAQs, check them in to the `faq` directory and to regenerate `docs/user-manual/faq.md` run:
+The User Manual on the developer site has a FAQ page which can be found at `docs/user-manual/editor/faq.md`. This is the only Markdown file that is generated from other files (located in the `faq` directory). If you would like to add additional FAQs, check them in to the `faq` directory and to regenerate `docs/user-manual/editor/faq.md` run:
 
 ```sh
 npm run faq
