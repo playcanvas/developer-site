@@ -31068,13 +31068,13 @@ The hooks accepts an object with the following properties that closely match tho
 
 <details>
   <summary><b>Parameters</b></summary>
-  <p>
-  ```tsx asTypedoc
-  import { useMaterial } from '@playcanvas/react/hooks'
-  type $ = Parameters<typeof useMaterial>[0];
-  export default $;
-  ```
-  </p>
+
+```tsx asTypedoc
+
+type $ = Parameters<typeof useMaterial>[0];
+
+```
+
 </details>
 
 ## Returns
