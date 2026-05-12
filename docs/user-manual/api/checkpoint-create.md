@@ -1,6 +1,6 @@
 ---
 title: Checkpoints - Create checkpoint
-description: Capture the current branch state with POST /api/checkpoints for later restore, including description field and example request body.
+description: Start an asynchronous checkpoint creation job with POST /api/checkpoints, then poll the returned job until the checkpoint is created.
 ---
 
 ## Route URL
@@ -11,7 +11,9 @@ POST https://playcanvas.com/api/checkpoints
 
 ## Description
 
-Create a new checkpoint for a branch. A checkpoint captures the current state of a branch so that it can be restored later.
+Start a job to create a new checkpoint for a branch. A checkpoint captures the current state of a branch so that it can be restored later.
+
+The request will return job details immediately. You can [poll the job by id](/user-manual/api/job-get) until its status is either `complete` or `error`. When the job is complete, its data will contain the created checkpoint.
 
 ## Example
 
@@ -46,6 +48,30 @@ Content-Type: application/json
 ```none
 Status: 201 Created
 ```
+
+```json
+{
+    "id": int,
+    "created_at": date,
+    "modified_at": date,
+    "status": "running" | "complete" | "error",
+    "messages": list of strings,
+    "data": {
+        "type": "checkpoint_create",
+        "project_id": int,
+        "branch_id": string,
+        "user_id": int,
+        "user": {
+            "id": int,
+            "fullName": string,
+            "username": string
+        },
+        "description": string
+    }
+}
+```
+
+When the job is complete, the `data` field contains the created checkpoint:
 
 ```json
 {
