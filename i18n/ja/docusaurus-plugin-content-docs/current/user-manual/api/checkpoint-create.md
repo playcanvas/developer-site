@@ -1,6 +1,6 @@
 ---
 title: チェックポイント - Create checkpoint
-description: POST /api/checkpointsで現在のブランチ状態を後から復元できるよう記録し、descriptionフィールドとリクエストボディの例を含みます。
+description: POST /api/checkpointsで非同期のチェックポイント作成ジョブを開始し、返されたジョブをポーリングして作成完了を確認します。
 ---
 
 ## ルートURL
@@ -11,7 +11,9 @@ POST https://playcanvas.com/api/checkpoints
 
 ## 説明
 
-ブランチの新しいチェックポイントを作成します。チェックポイントはブランチの現在の状態をキャプチャし、後で復元できるようにします。
+ブランチの新しいチェックポイントを作成するジョブを開始します。チェックポイントはブランチの現在の状態をキャプチャし、後で復元できるようにします。
+
+リクエストはジョブの詳細をすぐに返します。ステータスが `complete` または `error` になるまで、[ジョブを id でポーリング](/user-manual/api/job-get)できます。ジョブが完了すると、`data` に作成されたチェックポイントが含まれます。
 
 ## 例
 
@@ -46,6 +48,30 @@ Content-Type: application/json
 ```none
 ステータス: 201 Created
 ```
+
+```json
+{
+    "id": int,
+    "created_at": date,
+    "modified_at": date,
+    "status": "running" | "complete" | "error",
+    "messages": list of strings,
+    "data": {
+        "type": "checkpoint_create",
+        "project_id": int,
+        "branch_id": string,
+        "user_id": int,
+        "user": {
+            "id": int,
+            "fullName": string,
+            "username": string
+        },
+        "description": string
+    }
+}
+```
+
+ジョブが完了すると、`data` フィールドには作成されたチェックポイントが含まれます。
 
 ```json
 {
