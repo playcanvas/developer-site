@@ -51,3 +51,4 @@ When documentation in `docs` is updated, translate the affected files to Japanes
 Submit a PR with both the updated English content and the new Japanese translations.
 
 **Note:** We welcome PRs to fix any translation errors or improvements in the localized documentation. AI translation isn't perfect, and community contributions help ensure accuracy!
+Documentation update.
