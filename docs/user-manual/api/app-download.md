@@ -1,6 +1,6 @@
 ---
 title: Apps - Download app
-description: POST apps/download starts a self-hostable app or npm project export job; poll jobs until complete to retrieve the packaged export download URL.
+description: POST apps/download starts an app export job in static, npm, or web lens format; poll jobs until complete to retrieve the packaged export download URL.
 ---
 
 ## Route URL
@@ -13,12 +13,12 @@ POST https://playcanvas.com/api/apps/download
 
 This will allow you to download an app which you can self host on your own server. The request will start an export job and the job details will be returned in the response. You can [poll the job by id](/user-manual/api/job-get) until its status is either 'complete' or 'error'. When the job is done, its data will contain a URL to download the exported app.
 
-Set `npm_project` to `true` to download the app as a Vite-based npm project instead of the standard static self-hostable package.
+Use `format` to choose the package type. Omit it or set it to `static` for the standard self-hostable package, set it to `npm` for a Vite-based npm project, or set it to `web_lens` for a Lens Studio web lens package. The `web_lens` format is available to super users only.
 
 ## Example
 
 ```none
-curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"project_id": 9999999, "scenes": [9999999], "name": "My App", "npm_project": true}' "https://playcanvas.com/api/apps/download"
+curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"project_id": 9999999, "scenes": [9999999], "name": "My App", "format": "npm"}' "https://playcanvas.com/api/apps/download"
 ```
 
 ## Parameters
@@ -36,7 +36,7 @@ curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json
 | `scripts_minify`        | `boolean`  |          | Set it to true if you want scripts to be minified. Defaults to true.                                                                                                  |
 | `scripts_sourcemaps`    | `boolean`  |          | Set it to true if you want script sourcemaps to be generated. Defaults to false.                                                                                      |
 | `optimize_scene_format` | `boolean`  |          | Set it to true if you want scenes to be in an optimized format (see [Optimize Scene Format](/user-manual/optimization/optimizing-scene-format) for more information). |
-| `npm_project`           | `boolean`  |          | Set it to true to export a Vite-based npm project instead of the standard static self-hostable package.                                                               |
+| `format`                | `string`   |          | Export package type: `static`, `npm`, or `web_lens`. Defaults to `static`. The `web_lens` format is available to super users only.                                   |
 | `engine_version`        | `string`   |          | Set it to a Engine version string ([full list of releases](https://github.com/playcanvas/engine/releases)) if a specific version is needed for the app. Defaults to the latest Editor supported major version depending on your project.              |
 
 ## Response Schema
@@ -55,7 +55,7 @@ Status: 201 Created
         "concatenate": boolean,
         "branch_id": string,
         "optimize_scene_format": boolean,
-        "npm_project": boolean,
+        "format": "static" | "npm" | "web_lens",
         "minify": boolean,
         "name": string,
         "sourcemaps": boolean,
