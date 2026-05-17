@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 569
-Generated: 2026-05-15
+Generated: 2026-05-17
 
 ================================================================================
 
@@ -28237,7 +28237,7 @@ The following sections outline key aspects of writing WGSL shaders for PlayCanva
 
 In standard WGSL (WebGPU Shading Language), declaring uniforms, attributes, and varyings requires explicitly specifying a `@group` and `@binding` index for each resource. This can be verbose and error-prone, especially for common patterns.
 
-To improve usability and streamline shader development, we adopt a simplified syntax similar to GLSL. In this model, you do not need to specify `@group` or `@binding` attributes manually—these are automatically assigned and managed by the engine based on a predefined layout.
+To improve usability and streamline shader development, we adopt a simplified syntax similar to GLSL. In this model, you must not specify `@group` or `@binding` attributes manually—the engine strips any such annotations during shader processing and reassigns bindings based on a predefined layout.
 
 #### Example Comparison
 
@@ -28382,7 +28382,44 @@ var colorMap: texture_2d<uff>;
 let data: vec4f = textureLoad(colorMap, uv, 0);
 ```
 
-This extension allows the engine to correctly interpret the texture’s sampling capabilities and bind it accordingly.
+This extension allows the engine to correctly interpret the texture's sampling capabilities and bind it accordingly. Under the hood, the engine rewrites `texture_2d<uff>` to `texture_2d<f32>` in the emitted WGSL and generates a `BindTextureFormat` with `SAMPLETYPE_UNFILTERABLE_FLOAT` automatically.
+
+##### Pairing `uff` with a sampler
+
+`uff` textures can also be paired with a `sampler` declaration so you can use `textureSampleLevel`, `textureGather`, or the unfiltered form of `textureSample`. This is the standard pattern for reading a depth render target as a raw float (for example, hierarchical-Z, depth-aware blur, or screen-space ambient occlusion).
+
+```wgsl
+var srcDepth: texture_2d<uff>;
+var srcDepthSampler: sampler;
+
+// Single-tap sampled read at an explicit mip level.
+let z = textureSampleLevel(srcDepth, srcDepthSampler, uv, 0.0).r;
+
+// 2x2 gather (returns the r channel of four adjacent texels).
+let four = textureGather(0, srcDepth, srcDepthSampler, uv);
+```
+
+:::note
+
+When pairing `uff` with a sampler, the `pc.Texture` you bind must have a **non-filtering** sampler configuration (typically `minFilter: FILTER_NEAREST`, `magFilter: FILTER_NEAREST`, and a `*_NEAREST` mip filter). Filtering samplers are only valid against filterable-float textures, and WebGPU will reject the bind group at draw time if you pair a filtering sampler with an unfilterable-float texture.
+
+:::
+
+##### Choosing how to bind a depth texture
+
+Depth textures (any `pc.PIXELFORMAT_DEPTH*` format) cannot be sampled as plain `texture_2d<f32>` on WebGPU unless the device exposes the optional `float32-filterable` feature. Pick the right declaration based on what you need to do:
+
+| Use case                                                       | WGSL declaration    | Sampler                                                                  |
+| -------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------ |
+| Shadow comparison (`textureSampleCompare*`)                    | `texture_depth_2d`  | `sampler_comparison`                                                     |
+| Raw depth as float, no filtering (HZB, SSAO, depth-aware blur) | `texture_2d<uff>`   | non-filtering `sampler`, or no sampler with `textureLoad`                |
+| Filtered linear depth                                          | `texture_2d<f32>`   | filtering `sampler` — requires the `float32-filterable` device feature   |
+
+:::note
+
+The bind group format is derived from your shader's resource declarations. Mutating `meshBindGroupFormat` on a `Shader` instance after creation has no effect — shader processing regenerates it from the source. To control the sample type, declare the texture with `uff` (or another sample-type-specific WGSL form) rather than overriding the bind group format afterwards.
+
+:::
 
 :::note
 
