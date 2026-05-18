@@ -111,6 +111,29 @@ this.app.assets.on('load', (asset) => {
 });
 ```
 
+## Configuring Retries
+
+Asset loads are automatically retried on failure to make applications more resilient to transient network errors (e.g. slow CDNs, brief connectivity drops). By default, the engine retries each failed request up to **5 times** with exponential backoff (200ms, 400ms, 800ms, 1600ms, 3200ms, capped at 5000ms).
+
+You can change this globally for all asset types:
+
+```javascript
+// Override the default retry count
+this.app.loader.enableRetry(3);
+
+// Disable retries entirely - load failures are reported immediately
+this.app.loader.disableRetry();
+```
+
+Or configure retries per asset type:
+
+```javascript
+// Only retry texture loads more aggressively
+this.app.loader.getHandler('texture').maxRetries = 10;
+```
+
+Editor projects can also override the default count via the [Network Settings](../editor/interface/settings/network.md) panel.
+
 ## Unloading Assets
 
 To free memory, you can unload assets that are no longer needed:
