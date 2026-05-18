@@ -15,7 +15,7 @@ The `CameraFrame` enables advanced rendering techniques including:
 - **Temporal Anti-Aliasing (TAA)** - Reduces visual artifacts by smoothing jagged edges over time
 - **Vignette** - Darkens or lightens the image edges to draw attention to the center
 - **Color Grading** - Adjusts brightness, contrast, saturation, and color tint for stylistic effects
-- **Color LUT** - Apply color lookup tables for advanced color transformations
+- **Color LUT** - Apply color lookup tables for advanced color transformations. See [HDR Rendering > Color LUT](/user-manual/graphics/linear-workflow/hdr-rendering/#color-lut) for details.
 - **Fringing** - Chromatic aberration effect that simulates color channel separation
 - **Tone Mapping** - Controls how HDR colors are mapped to displayable range
 - **Sharpness** - Enhances image sharpness to counteract blurriness from TAA or upscaling
