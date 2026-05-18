@@ -81,6 +81,48 @@ material.emissiveIntensity = 50;
 
 For more detailed information, refer to the CameraFrame [API documentation](https://api.playcanvas.com/engine/classes/CameraFrame.html).
 
+### Color LUT {#color-lut}
+
+`CameraFrame` supports color grading via a 3D Color Lookup Table (LUT). The LUT is a 2D "horizontal strip" texture representing an unwrapped 3D LUT, in the same format used by Unreal Engine: for an N×N×N 3D LUT the texture is N²×N pixels (a 16×16×16 LUT is 256×16, a 32×32×32 LUT is 1024×32). HALD LUTs and Unity-style LUTs use different layouts and are not compatible.
+
+Start from the neutral identity LUT below — applying it to a scene produces no change — and modify it in an image editor to create your own grade:
+
+![Neutral identity LUT (256x16)](/img/user-manual/graphics/linear-workflow/lut-neutral.png)
+
+An example of an aggressive modification — strong red push, with green and blue heavily reduced:
+
+![Cherry LUT example (256x16)](/img/user-manual/graphics/linear-workflow/lut-cherry.png)
+
+The LUT texture must be loaded with the following settings — LUTs are authored in sRGB display space and the engine relies on hardware sRGB sampling, so a misconfigured texture produces visibly wrong colors:
+
+- `srgb: true` — the LUT is sRGB-encoded
+- `mipmaps: false` — sampled at LOD 0 only
+- `minfilter: 'linear'`, `magfilter: 'linear'` — bilinear filtering between LUT entries prevents banding
+
+```javascript
+const lutAsset = new pc.Asset(
+    'colorLut',
+    'texture',
+    { url: 'path/to/lut.png' },
+    {
+        srgb: true,
+        mipmaps: false,
+        minfilter: 'linear'
+    }
+);
+app.assets.add(lutAsset);
+lutAsset.ready(() => {
+    cameraFrame.colorLUT.texture = lutAsset.resource;
+    cameraFrame.colorLUT.intensity = 1.0;
+    cameraFrame.update();
+});
+app.assets.load(lutAsset);
+```
+
+If any of the texture settings above are wrong, the engine emits a debug-build warning naming the specific properties to change (this check is stripped from release builds).
+
+LUTs can be authored by taking a screenshot of the scene, applying color adjustments in an image editor such as Photoshop, dragging those adjustments onto the neutral identity LUT, and exporting the result as a PNG. In the PlayCanvas Editor, set the texture asset's **sRGB** flag on, **Mipmaps** off, and **Filter** to **Linear**.
+
 ## CameraFrame in the Editor
 
 There is a `CameraScript` [available here](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs) for the PlayCanvas Editor project. This script integrates `CameraFrame` functionality directly into the Editor's Inspector, making it easy to set up and configure cameras with advanced rendering features.

@@ -74,6 +74,48 @@ material.emissiveIntensity = 50;
 
 詳細については、CameraFrameの[APIドキュメント](https://api.playcanvas.com/engine/classes/CameraFrame.html)を参照してください。
 
+### カラー LUT {#color-lut}
+
+`CameraFrame` は、3D カラールックアップテーブル（LUT）によるカラーグレーディングをサポートします。LUT は、Unreal Engine と同じ形式で 3D LUT を 2D の「水平ストリップ」テクスチャに展開したものです。N×N×N の 3D LUT の場合、テクスチャは N²×N ピクセルになります（16×16×16 LUT は 256×16、32×32×32 LUT は 1024×32）。HALD LUT や Unity 形式の LUT はレイアウトが異なるため互換性がありません。
+
+以下の中立な恒等 LUT を出発点にしてください — シーンに適用しても変化はありません — そして画像エディタで編集して独自のグレーディングを作成します：
+
+![中立な恒等 LUT (256x16)](/img/user-manual/graphics/linear-workflow/lut-neutral.png)
+
+積極的な調整の例 — 赤を強く押し上げ、緑と青を大きく抑制したもの：
+
+![チェリー LUT の例 (256x16)](/img/user-manual/graphics/linear-workflow/lut-cherry.png)
+
+LUT テクスチャは以下の設定で読み込む必要があります。LUT は sRGB ディスプレイ空間でオーサリングされており、エンジンはハードウェアの sRGB サンプリングに依存しているため、設定が間違っているとカラーが目に見えて崩れます：
+
+- `srgb: true` — LUT は sRGB エンコードされている
+- `mipmaps: false` — LOD 0 のみでサンプリングされる
+- `minfilter: 'linear'`、`magfilter: 'linear'` — LUT エントリ間のバイリニアフィルタリングによるバンディングの防止
+
+```javascript
+const lutAsset = new pc.Asset(
+    'colorLut',
+    'texture',
+    { url: 'path/to/lut.png' },
+    {
+        srgb: true,
+        mipmaps: false,
+        minfilter: 'linear'
+    }
+);
+app.assets.add(lutAsset);
+lutAsset.ready(() => {
+    cameraFrame.colorLUT.texture = lutAsset.resource;
+    cameraFrame.colorLUT.intensity = 1.0;
+    cameraFrame.update();
+});
+app.assets.load(lutAsset);
+```
+
+上記のテクスチャ設定のいずれかが誤っている場合、エンジンはデバッグビルドで変更すべきプロパティを示す警告を発します（リリースビルドではこのチェックは削除されます）。
+
+LUT は、シーンのスクリーンショットを撮り、Photoshop などの画像エディタで色調整を行い、それらの調整を中立な恒等 LUT にドラッグしてから PNG として書き出すことでオーサリングできます。PlayCanvas Editor では、テクスチャアセットの **sRGB** フラグをオン、**Mipmaps** をオフ、**Filter** を **Linear** に設定してください。
+
 ## エディターでのCameraFrame {#cameraframe-in-the-editor}
 
 PlayCanvas Editorプロジェクト用の`CameraScript`が[こちら](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs)で利用可能です。このスクリプトは`CameraFrame`の機能をエディターのInspectorに直接統合し、高度なレンダリング機能を備えたカメラのセットアップと設定を容易にします。
