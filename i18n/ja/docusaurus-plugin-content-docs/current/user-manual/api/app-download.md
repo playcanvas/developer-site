@@ -13,83 +13,7 @@ POST https://playcanvas.com/api/apps/download
 
 自分のサーバーでセルフホストすることができるアプリをダウンロードできます。リクエストによりエクスポートジョブが開始され、ジョブの詳細がレスポンスで返されます。[idを指定してジョブをポール](/user-manual/api/job-get)して、そのステータスが「完了」または「エラー」になるまで待ちます。ジョブが完了すると、そのデータにはエクスポートされたアプリをダウンロードするためのURLが含まれます。
 
-`format`でパッケージタイプを選択します。省略するか`static`に設定すると標準のセルフホスト用パッケージ、`npm`に設定するとViteベースのnpmプロジェクトとしてエクスポートされます。
-
-## NPMプロジェクト構造
-
-`format`が`npm`の場合、ダウンロードされるプロジェクトは、プロジェクト内のスクリプトに応じて次のいずれかの構造になります。生成されたアプリ設定とシーンデータは、ローカル開発中に監視できるように`src/data/`に配置され、ランタイムアセットと静的ファイルは`public/`に残ります。
-
-### クラシックスクリプト
-
-```text
-src/
-  main.mjs
-  bootstrap/
-    settings.js
-    modules.js
-    start.js
-    loading.js
-  scripts/
-    *.js
-  data/
-    config.json
-    scenes/
-      *.json
-public/
-  assets/
-  thumbs/
-  manifest.json
-  styles.css
-```
-
-### ESMスクリプト
-
-```text
-src/
-  main.mjs
-  bootstrap/
-    index.mjs
-    settings.mjs
-    modules.mjs
-    start.mjs
-    loading.mjs
-  scripts/
-    *.mjs
-  data/
-    config.json
-    scenes/
-      *.json
-public/
-  assets/
-  thumbs/
-  manifest.json
-  styles.css
-```
-
-### クラシックおよびESMスクリプト
-
-```text
-src/
-  main.mjs
-  bootstrap/
-    index.mjs
-    settings.mjs
-    modules.mjs
-    start.mjs
-    loading.mjs
-  scripts/
-    *.mjs
-    *.js
-  data/
-    config.json
-    scenes/
-      *.json
-public/
-  assets/
-  thumbs/
-  manifest.json
-  styles.css
-```
+`format`でパッケージタイプを選択します。省略するか`static`に設定すると標準のセルフホスト用パッケージ、`npm`に設定するとViteベースのnpmプロジェクトとしてエクスポートされます。利用可能なダウンロード形式と[NPMプロジェクト構造](/user-manual/editor/projects/exporting#npm-project-structure)の詳細については、[プロジェクトのエクスポート](/user-manual/editor/projects/exporting#download-formats)を参照してください。
 
 ## 例
 
@@ -112,7 +36,7 @@ curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json
 | `scripts_minify`        | `boolean`  |          | Set it to true if you want scripts to be minified. Defaults to true.                                                                                                  |
 | `scripts_sourcemaps`    | `boolean`  |          | Set it to true if you want script sourcemaps to be generated. Defaults to false.                                                                                      |
 | `optimize_scene_format` | `boolean`  |          | Set it to true if you want scenes to be in an optimized format (see [Optimize Scene Format](/user-manual/optimization/optimizing-scene-format) for more information). |
-| `format`                | `string`   |          | エクスポートするパッケージタイプ: `static`または`npm`。デフォルトは`static`です。                                                                                      |
+| `format`                | `string`   |          | エクスポートするパッケージタイプ: `static`または`npm`。デフォルトは`static`です。[プロジェクトのエクスポート](/user-manual/editor/projects/exporting#download-formats)を参照してください。 |
 | `engine_version`        | `string`   |          | Set it to a Engine version string ([full list of releases](https://github.com/playcanvas/engine/releases)) if a specific version is needed for the app.               |
 
 ## レスポンススキーマ

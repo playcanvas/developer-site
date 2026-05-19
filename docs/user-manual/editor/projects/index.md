@@ -19,6 +19,7 @@ Projects are the foundation for everything you create in the PlayCanvas Editor. 
 - **[Project Settings](settings)** - Configure your project's name, description, privacy, and branding.
 - **[Team Management](team-management)** - Adding collaborators and managing permissions.
 - **[Development Logs](dev-logs)** - Using dev logs for project updates and team communication.
+- **[Exporting Projects](exporting)** - Download app packages and choose static or npm export formats.
 
 ### Advanced Management
 

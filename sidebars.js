@@ -122,6 +122,7 @@ const sidebars = {
             'user-manual/editor/projects/settings',
             'user-manual/editor/projects/team-management',
             'user-manual/editor/projects/dev-logs',
+            'user-manual/editor/projects/exporting',
             'user-manual/editor/projects/backup-and-export',
             'user-manual/editor/projects/ownership-transfers',
           ],
