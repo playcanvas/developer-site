@@ -14,7 +14,7 @@ PlayCanvas does not itself provide a tool to convert photogrammetry into a Gauss
 | [**COLMAP**](https://colmap.github.io/) | Advanced | Win, Linux, macOS | Free | ✔️ | Camera Poses | |
 | [**RealityScan**](https://www.realityscan.com/) | Medium | Win | Free* | ❌ | Camera Poses | CUDA GPU |
 | [**Postshot**](https://www.jawset.com/) | Medium | Win | Paid | ❌ | Camera Poses + Training | CUDA GPU |
-| [**Lichtfeld Studio**](https://lichtfeld.io/) | Medium | Win, Linux | Free | ✔️ | Camera Poses + Training | CUDA GPU |
+| [**Lichtfeld Studio**](https://lichtfeld.io/) | Medium | Win, Linux | Free source / Paid installer | ✔️ | Camera Poses + Training | CUDA GPU |
 | [**Brush**](https://github.com/ArthurBrussee/brush) | Medium | Win, Linux, macOS, Android, Web | Free | ✔️ | Training | |
 | [**nerfstudio**](https://docs.nerf.studio/) | Advanced | Win, Linux, macOS | Free | ✔️ | Research/Training | |
 | [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) | Advanced | Win, Linux | Free | ✔️ | Research/Reference | CUDA GPU |
@@ -54,7 +54,7 @@ Desktop application for camera alignment and sparse point cloud generation, whic
 Commercial desktop application for creating Gaussian splats with advanced features. Provides on-device processing, quick results, and a user-friendly interface. Requires a CUDA-enabled GPU.
 
 [**Lichtfeld Studio**](https://lichtfeld.io/) (Windows, Linux)  
-Free and open-source desktop application to train, edit, and render 3D Gaussian Splats. Includes an editing suite with transform, crop, and selection tools. Supports COLMAP-based datasets for training and can export PLY for interchange. Requires an NVIDIA GPU with CUDA 12.8+.
+Open-source desktop application to train, edit, and render 3D Gaussian Splats. Includes an editing suite with transform, crop, and selection tools. Supports COLMAP-based datasets for training and can export PLY for interchange. Requires an NVIDIA GPU with CUDA 12.8+.
 
 [**Brush**](https://github.com/ArthurBrussee/brush) (Windows, Linux, macOS, Android, Web)  
 Open source, cross-platform engine with broad device compatibility. Uses WebGPU-based rendering, offers real-time training visualization, has no CUDA dependency, supports browsers, and works on mobile devices. It expects existing camera poses from COLMAP or Nerfstudio-format datasets; it does not generate camera poses itself.
