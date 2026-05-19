@@ -76,7 +76,7 @@ material.emissiveIntensity = 50;
 
 ### カラー LUT {#color-lut}
 
-`CameraFrame` は、3D カラールックアップテーブル（LUT）によるカラーグレーディングをサポートします。LUT は、Unreal Engine と同じ形式で 3D LUT を 2D の「水平ストリップ」テクスチャに展開したものです。N×N×N の 3D LUT の場合、テクスチャは N²×N ピクセルになります（16×16×16 LUT は 256×16、32×32×32 LUT は 1024×32）。HALD LUT や Unity 形式の LUT はレイアウトが異なるため互換性がありません。
+`CameraFrame` は、3D カラールックアップテーブル（LUT）によるカラーグレーディングをサポートします。LUT は、Unreal Engine と同じレイアウトで 16×16×16 の 3D LUT を 2D の「水平ストリップ」テクスチャに展開した **256×16** のテクスチャである必要があります。青軸に沿って 16 個の水平スライスが並び、各スライスは赤を X 軸、緑を Y 軸にマッピングします。HALD LUT や Unity 形式の LUT はレイアウトが異なるため互換性がありません。
 
 以下の中立な恒等 LUT を出発点にしてください — シーンに適用しても変化はありません — そして画像エディタで編集して独自のグレーディングを作成します：
 
@@ -115,6 +115,21 @@ app.assets.load(lutAsset);
 上記のテクスチャ設定のいずれかが誤っている場合、エンジンはデバッグビルドで変更すべきプロパティを示す警告を発します（リリースビルドではこのチェックは削除されます）。
 
 LUT は、シーンのスクリーンショットを撮り、Photoshop などの画像エディタで色調整を行い、それらの調整を中立な恒等 LUT にドラッグしてから PNG として書き出すことでオーサリングできます。PlayCanvas Editor では、テクスチャアセットの **sRGB** フラグをオン、**Mipmaps** をオフ、**Filter** を **Linear** に設定してください。
+
+#### 2 つの LUT をクロスフェードする
+
+2 つのグレード間でトランジション（昼 → 夜、場所 A → 場所 B など）を行うために、LUT スロットはオプションの 2 つ目のテクスチャとブレンド係数をサポートします。両方の LUT が同時にサンプリングされ、2 つのグレーディング結果がリニア空間でクロスフェードされます：
+
+```javascript
+cameraFrame.colorLUT.texture  = lutDayAsset.resource;
+cameraFrame.colorLUT.texture2 = lutNightAsset.resource;
+cameraFrame.colorLUT.intensity  = 1; // 元の色に対する LUT 1 の強度
+cameraFrame.colorLUT.intensity2 = 1; // 元の色に対する LUT 2 の強度
+cameraFrame.colorLUT.blend = 0;      // 0 = LUT 1 のみ、1 = LUT 2 のみ。これをアニメーションさせてフェードします
+cameraFrame.update();
+```
+
+2 つ目のテクスチャは、1 つ目と同じサイズおよびフィルタリングの要件を満たす必要があります。`texture2` が `null` の場合は単一 LUT のパスが使用され、`intensity2` と `blend` の値は無視されます。
 
 ## エディターでのCameraFrame {#cameraframe-in-the-editor}
 
