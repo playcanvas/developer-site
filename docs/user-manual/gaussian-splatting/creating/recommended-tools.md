@@ -48,7 +48,7 @@ Select **Gaussian Splat** on export from Luma and extract the PLY file from the 
 These tools offer more control and customization than consumer capture apps while keeping setup manageable for professional workflows:
 
 [**RealityScan**](https://www.realityscan.com/) (Windows)  
-Desktop application for camera alignment and sparse point cloud generation, which become the foundation for splat training in tools like PostShot. Requires a CUDA-enabled GPU.
+Desktop application for camera alignment and sparse point cloud generation, which become the foundation for splat training in tools like Postshot. Requires a CUDA-enabled GPU.
 
 [**Postshot**](https://www.jawset.com/) (Windows)  
 Commercial desktop application for creating Gaussian splats with advanced features. Provides on-device processing, quick results, and a user-friendly interface. Requires a CUDA-enabled GPU.
