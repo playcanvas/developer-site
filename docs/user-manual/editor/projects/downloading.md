@@ -1,9 +1,9 @@
 ---
-title: Exporting Projects
-description: Explains PlayCanvas project download formats for self-hosted apps, including static and npm export layouts.
+title: Downloading Projects
+description: Explains PlayCanvas project download formats for self-hosted apps, including static and npm package layouts.
 ---
 
-PlayCanvas projects can be downloaded as self-hostable application packages. These exports contain the files needed to run your app outside PlayCanvas hosting, not the full editable project history.
+PlayCanvas projects can be downloaded as self-hostable application packages. Downloaded packages contain the files needed to run your app outside PlayCanvas hosting, not the full editable project history.
 
 For project backups that can be imported back into PlayCanvas, see [Backup and Export](backup-and-export.md).
 
