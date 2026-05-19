@@ -21,7 +21,7 @@ When the download format is `static`, the downloaded project is a self-contained
 
 Static downloads also use different layouts depending on the script types in the source project.
 
-### Static Projects with Classic Scripts
+### Classic Scripts {#static-projects-with-classic-scripts}
 
 ```text
 index.html
@@ -44,7 +44,7 @@ files/
 
 Classic script concatenation options may also add `__game-scripts.js` and source maps. These optional files do not change the script-type layout.
 
-### Static Projects with ESM Scripts
+### ESM Scripts {#static-projects-with-esm-scripts}
 
 In ESM static downloads, `index.html` loads `js/index.mjs` as the module entry point.
 
@@ -65,7 +65,7 @@ files/
         *
 ```
 
-### Static Projects with Classic and ESM Scripts
+### Mixed Scripts {#static-projects-with-classic-and-esm-scripts}
 
 Mixed static downloads use the ESM-style layout. The generated module entry point also loads the classic `.js` scripts.
 
@@ -89,6 +89,12 @@ files/
 
 ## NPM Project Structure {#npm-project-structure}
 
+:::info[Work in progress]
+
+The `npm` download format is currently in active development. Package layouts and generated file names may change.
+
+:::
+
 When the download format is `npm`, the downloaded project uses one of these layouts depending on the script types in the source project. Generated app config and scene data are placed in `src/data/` so they can be watched during local development, while runtime assets and static files remain in `public/`.
 
 ### File Names and Conflicts
@@ -107,7 +113,7 @@ Asset and folder names are sanitized for filesystem use, but they are not conver
 
 The following examples show the package structure created for projects that contain only classic scripts, only ESM scripts, or both script types.
 
-### Projects with Classic Scripts
+### Classic Scripts {#projects-with-classic-scripts}
 
 ```text
 src/
@@ -130,7 +136,7 @@ public/
   styles.css
 ```
 
-### Projects with ESM Scripts
+### ESM Scripts {#projects-with-esm-scripts}
 
 ```text
 src/
@@ -154,7 +160,7 @@ public/
   styles.css
 ```
 
-### Projects with Classic and ESM Scripts
+### Mixed Scripts {#projects-with-classic-and-esm-scripts}
 
 ```text
 src/
