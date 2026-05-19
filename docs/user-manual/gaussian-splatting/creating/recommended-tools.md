@@ -51,7 +51,7 @@ These tools offer more control and customization but require technical knowledge
 Open source Structure-from-Motion (SfM) pipeline for camera alignment and sparse point cloud generation. Provides cross-platform compatibility, high-quality reconstruction, command-line and GUI interfaces, and serves as the foundation for splat training in many workflows. Particularly valuable for users on non-Windows systems.
 
 [**RealityScan**](https://www.realityscan.com/) (Windows)  
-Desktop application for camera alignment and sparse point cloud generation, which become the foundation for splat training in tools like PostShot. Free for commercial use for individuals and companies with less than $1 million USD in annual gross revenue. Requires a CUDA-enabled GPU.
+Desktop application for camera alignment and sparse point cloud generation, which become the foundation for splat training in tools like PostShot. Requires a CUDA-enabled GPU.
 
 [**Postshot**](https://www.jawset.com/) (Windows)  
 Commercial desktop application for creating Gaussian splats with advanced features. Provides on-device processing, quick results, and a user-friendly interface. Requires a CUDA-enabled GPU.
