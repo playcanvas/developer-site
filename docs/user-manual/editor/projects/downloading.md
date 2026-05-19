@@ -19,6 +19,20 @@ The REST [Download app](/user-manual/api/app-download) endpoint uses the `format
 
 When the download format is `npm`, the downloaded project uses one of these layouts depending on the scripts in the project. Generated app config and scene data are placed in `src/data/` so they can be watched during local development, while runtime assets and static files remain in `public/`.
 
+### File Names and Conflicts
+
+:::note
+
+NPM downloads may rename scene, asset, and folder files to make paths filesystem-safe and unique. Use the generated config paths rather than assuming Editor names map directly to downloaded filenames.
+
+:::
+
+Scene JSON files are named from the scene display name. Names are lowercased, non-`a-z` or `0-9` characters become hyphens, repeated hyphens are collapsed, and leading or trailing hyphens are removed. For example, `Main Scene` becomes `main-scene.json` and `100% Scene` becomes `100-scene.json`.
+
+If a scene name is empty or only contains punctuation, the file uses `scene-{sceneId}.json`. If multiple scenes would use the same filename, the scene id is appended before `.json`, for example a conflicting `Main Scene` with id `101` becomes `main-scene-101.json`.
+
+Asset and folder names are sanitized for filesystem use, but they are not converted to lowercase hyphenated names. Conflicts are resolved per folder by appending `.{id}` before the extension, for example `image.2.png`, `image.1.1.png`, or `Folder.10`. Generated config paths are updated to the final filenames.
+
 ### Classic Scripts
 
 ```text
