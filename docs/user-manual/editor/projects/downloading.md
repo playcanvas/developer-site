@@ -15,9 +15,81 @@ Use `npm` for a Vite-based npm project. This is the right choice when you want t
 
 The REST [Download app](/user-manual/api/app-download) endpoint uses the `format` parameter to select either `static` or `npm`.
 
+## Static Project Structure {#static-project-structure}
+
+When the download format is `static`, the downloaded project is a self-contained web build for direct web-server hosting. Serve the extracted folder over HTTP or HTTPS; opening `index.html` from a `file://` URL is not supported.
+
+Static downloads also use different layouts depending on the script types in the source project.
+
+### Static Projects with Classic Scripts
+
+```text
+index.html
+playcanvas-stable.min.js
+__settings__.js
+__modules__.js
+__start__.js
+__loading__.js
+config.json
+{sceneId}.json
+manifest.json
+styles.css
+logo.png
+files/
+  assets/
+    {assetId}/
+      {revision}/
+        *
+```
+
+Classic script concatenation options may also add `__game-scripts.js` and source maps. These optional files do not change the script-type layout.
+
+### Static Projects with ESM Scripts
+
+In ESM static downloads, `index.html` loads `js/index.mjs` as the module entry point.
+
+```text
+index.html
+config.json
+{sceneId}.json
+manifest.json
+styles.css
+logo.png
+js/
+  index.mjs
+  *.mjs
+files/
+  assets/
+    {assetId}/
+      {revision}/
+        *
+```
+
+### Static Projects with Classic and ESM Scripts
+
+Mixed static downloads use the ESM-style layout. The generated module entry point also loads the classic `.js` scripts.
+
+```text
+index.html
+config.json
+{sceneId}.json
+manifest.json
+styles.css
+logo.png
+js/
+  index.mjs
+  *.mjs
+  *.js
+files/
+  assets/
+    {assetId}/
+      {revision}/
+        *
+```
+
 ## NPM Project Structure {#npm-project-structure}
 
-When the download format is `npm`, the downloaded project uses one of these layouts depending on the scripts in the project. Generated app config and scene data are placed in `src/data/` so they can be watched during local development, while runtime assets and static files remain in `public/`.
+When the download format is `npm`, the downloaded project uses one of these layouts depending on the script types in the source project. Generated app config and scene data are placed in `src/data/` so they can be watched during local development, while runtime assets and static files remain in `public/`.
 
 ### File Names and Conflicts
 
@@ -33,7 +105,9 @@ If a scene name is empty or only contains punctuation, the file uses `scene-{sce
 
 Asset and folder names are sanitized for filesystem use, but they are not converted to lowercase hyphenated names. Conflicts are resolved per folder by appending `.{id}` before the extension, for example `image.2.png`, `image.1.1.png`, or `Folder.10`. Generated config paths are updated to the final filenames.
 
-### Classic Scripts
+The following examples show the package structure created for projects that contain only classic scripts, only ESM scripts, or both script types.
+
+### Projects with Classic Scripts
 
 ```text
 src/
@@ -56,7 +130,7 @@ public/
   styles.css
 ```
 
-### ESM Scripts
+### Projects with ESM Scripts
 
 ```text
 src/
@@ -80,7 +154,7 @@ public/
   styles.css
 ```
 
-### Classic and ESM Scripts
+### Projects with Classic and ESM Scripts
 
 ```text
 src/
