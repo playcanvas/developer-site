@@ -15,6 +15,82 @@ This will allow you to download an app which you can self host on your own serve
 
 Use `format` to choose the package type. Omit it or set it to `static` for the standard self-hostable package, or set it to `npm` for a Vite-based npm project.
 
+## NPM Project Structure
+
+When `format` is `npm`, the downloaded project uses one of these layouts depending on the scripts in the project. Generated app config and scene data are placed in `src/data/` so they can be watched during local development, while runtime assets and static files remain in `public/`.
+
+### Classic Scripts
+
+```text
+src/
+  main.mjs
+  bootstrap/
+    settings.js
+    modules.js
+    start.js
+    loading.js
+  scripts/
+    *.js
+  data/
+    config.json
+    scenes/
+      *.json
+public/
+  assets/
+  thumbs/
+  manifest.json
+  styles.css
+```
+
+### ESM Scripts
+
+```text
+src/
+  main.mjs
+  bootstrap/
+    index.mjs
+    settings.mjs
+    modules.mjs
+    start.mjs
+    loading.mjs
+  scripts/
+    *.mjs
+  data/
+    config.json
+    scenes/
+      *.json
+public/
+  assets/
+  thumbs/
+  manifest.json
+  styles.css
+```
+
+### Classic and ESM Scripts
+
+```text
+src/
+  main.mjs
+  bootstrap/
+    index.mjs
+    settings.mjs
+    modules.mjs
+    start.mjs
+    loading.mjs
+  scripts/
+    *.mjs
+    *.js
+  data/
+    config.json
+    scenes/
+      *.json
+public/
+  assets/
+  thumbs/
+  manifest.json
+  styles.css
+```
+
 ## Example
 
 ```none
