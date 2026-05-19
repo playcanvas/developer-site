@@ -43,12 +43,9 @@ Select **Gaussian Splat** on export from Luma and extract the PLY file from the 
 
 :::
 
-## Advanced/Pro Tools
+## Medium/Pro Tools
 
-These tools offer more control and customization but require technical knowledge and are suitable for professional workflows:
-
-[**COLMAP**](https://colmap.github.io/) (Windows, Linux, macOS)  
-Open source Structure-from-Motion (SfM) pipeline for camera alignment and sparse point cloud generation. Provides cross-platform compatibility, high-quality reconstruction, command-line and GUI interfaces, and serves as the foundation for splat training in many workflows. Particularly valuable for users on non-Windows systems.
+These tools offer more control and customization than consumer capture apps while keeping setup manageable for professional workflows:
 
 [**RealityScan**](https://www.realityscan.com/) (Windows)  
 Desktop application for camera alignment and sparse point cloud generation, which become the foundation for splat training in tools like PostShot. Requires a CUDA-enabled GPU.
@@ -56,17 +53,24 @@ Desktop application for camera alignment and sparse point cloud generation, whic
 [**Postshot**](https://www.jawset.com/) (Windows)  
 Commercial desktop application for creating Gaussian splats with advanced features. Provides on-device processing, quick results, and a user-friendly interface. Requires a CUDA-enabled GPU.
 
+[**Lichtfeld Studio**](https://lichtfeld.io/) (Windows, Linux)  
+Free and open-source desktop application to train, edit, and render 3D Gaussian Splats. Includes an editing suite with transform, crop, and selection tools. Supports COLMAP-based datasets for training and can export PLY for interchange. Requires an NVIDIA GPU with CUDA 12.8+.
+
 [**Brush**](https://github.com/ArthurBrussee/brush) (Windows, Linux, macOS, Android, Web)  
 Open source, cross-platform engine with broad device compatibility. Uses WebGPU-based rendering, offers real-time training visualization, has no CUDA dependency, supports browsers, and works on mobile devices. It expects existing camera poses from COLMAP or Nerfstudio-format datasets; it does not generate camera poses itself.
+
+## Advanced/Technical Tools
+
+These tools are flexible low-level or research-oriented workflows for users comfortable with more complex setup and command-line tools:
+
+[**COLMAP**](https://colmap.github.io/) (Windows, Linux, macOS)  
+Open source Structure-from-Motion (SfM) pipeline for camera alignment and sparse point cloud generation. Provides cross-platform compatibility, high-quality reconstruction, command-line and GUI interfaces, and serves as the foundation for splat training in many workflows. Particularly valuable for users on non-Windows systems.
 
 [**nerfstudio**](https://docs.nerf.studio/) (Windows, Linux, macOS)  
 Open source research framework for training various splat models. Features command-line interface, multiple model types, highly customizable settings, research-oriented approach, and active development community.
 
 [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) (Windows, Linux)  
 Original reference implementation from the 3D Gaussian Splatting paper. Has a dependency on COLMAP. Provides research-grade quality, CUDA acceleration, full parameter control, though requires complex setup and is best used for experimentation.
-
-[**Lichtfeld Studio**](https://lichtfeld.io/) (Windows, Linux)  
-Free and open-source desktop application to train, edit, and render 3D Gaussian Splats. Includes an editing suite with transform, crop, and selection tools. Supports COLMAP-based datasets for training and can export PLY for interchange. Requires an NVIDIA GPU with CUDA 12.8+.
 
 ## Outputting a PLY File
 
