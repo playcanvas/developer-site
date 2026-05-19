@@ -15,7 +15,7 @@ PlayCanvas does not itself provide a tool to convert photogrammetry into a Gauss
 | [**RealityScan**](https://www.realityscan.com/) | Medium | Win | Free* | ❌ | Camera Poses | CUDA GPU |
 | [**Postshot**](https://www.jawset.com/) | Medium | Win | Paid | ❌ | Camera Poses + Training | CUDA GPU |
 | [**Lichtfeld Studio**](https://lichtfeld.io/) | Medium | Win, Linux | Free | ✔️ | Camera Poses + Training | CUDA GPU |
-| [**Brush**](https://github.com/ArthurBrussee/brush) | Medium | Win, Linux, macOS, Web | Free | ✔️ | Training | |
+| [**Brush**](https://github.com/ArthurBrussee/brush) | Medium | Win, Linux, macOS, Android, Web | Free | ✔️ | Training | |
 | [**nerfstudio**](https://docs.nerf.studio/) | Advanced | Win, Linux, macOS | Free | ✔️ | Research/Training | |
 | [**INRIA Tools**](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) | Advanced | Win, Linux | Free | ✔️ | Research/Reference | CUDA GPU |
 
