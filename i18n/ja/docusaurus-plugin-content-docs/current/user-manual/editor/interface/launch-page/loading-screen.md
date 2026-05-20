@@ -109,7 +109,7 @@ Base64 の Data URI は、画像をテキストとしてエンコードしたも
 
 ```javascript
 pc.script.createLoadingScreen((app) => {
-    const LOGO_IMAGE = 'data:image/png;base64,iVBORw0KGgo...';
+    const LOGO_IMAGE = "data:image/png;base64,iVBORw0KGgo...";
 
     const wrapper = document.createElement('div');
     wrapper.style.position = "absolute";
@@ -121,7 +121,7 @@ pc.script.createLoadingScreen((app) => {
     document.body.appendChild(wrapper);
 
     const logo = document.createElement('img');
-    logo.alt = '';
+    logo.alt = "";
     logo.src = LOGO_IMAGE;
     logo.style.width = "240px";
     wrapper.appendChild(logo);
