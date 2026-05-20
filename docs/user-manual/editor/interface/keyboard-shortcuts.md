@@ -42,7 +42,7 @@ Note that on a Mac, CMD should be used instead of CTRL.
 | Duplicate Entity      | Duplicates the selected entity and all children                      | CTRL + D                       |
 | Rename Entity / Asset | Focuses on name field of the selected entity or asset                | N or F2                        |
 | Copy Entity / Asset   | Copy the current entity/asset selection                              | CTRL + C                       |
-| Paste Entity / Asset  | Paste copied entity/asset under the currently selected entity/folder | CTRL + P                       |
+| Paste Entity / Asset  | Paste copied entity/asset under the currently selected entity/folder | CTRL + V                       |
 | Delete                | Delete the current selection                                         | DELETE<br />CTRL + BACKSPACE   |
 | Frame Selection       | Focus on the current entity selection in the 3D view                 | F                              |
 | Translate             | Activate the translate gizmo in the 3D view                          | 1                              |
