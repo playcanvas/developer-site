@@ -110,6 +110,7 @@ Base64 の Data URI は、画像をテキストとしてエンコードしたも
 ```javascript
 pc.script.createLoadingScreen((app) => {
     const LOGO_IMAGE = 'data:image/png;base64,iVBORw0KGgo...';
+    const LOGO_ALT = '製品名または会社名';
 
     const wrapper = document.createElement('div');
     wrapper.style.position = 'absolute';
@@ -121,7 +122,7 @@ pc.script.createLoadingScreen((app) => {
     document.body.appendChild(wrapper);
 
     const logo = document.createElement('img');
-    logo.alt = 'Logo';
+    logo.alt = LOGO_ALT;
     logo.src = LOGO_IMAGE;
     logo.style.width = '240px';
     wrapper.appendChild(logo);
@@ -134,11 +135,13 @@ pc.script.createLoadingScreen((app) => {
 
 この方法で画像を埋め込むとローディング画面スクリプトのサイズが大きくなるため、画像は小さく保ち、大きな背景画像には使用しないでください。
 
+`LOGO_ALT` には画像に表示されている製品名または会社名を設定してください。画像が純粋に装飾目的の場合は、代わりに空文字列を使用します。
+
 Base64 の Data URI を使って画像をローディング画面に直接埋め込むプロジェクト例については、[Base64 ローディング画面画像チュートリアル](/tutorials/advance-loading-screen/)を参照してください。
 
 #### その他の画像ソース
 
-プロジェクトアセットは、表示が遅れても問題ない補助的な装飾画像であれば使用できますが、すぐに表示する必要がある画像には最適ではありません。ローディング画面スクリプトは非常に早い段階で実行され、アプリケーションが完全に初期化および設定される前に動きます。`app.assets` のような初期化済みアプリに依存する Engine API はすぐには使用できず、`preload:start` やアセットレジストリのイベントを待つと、画像が表示されるまでに目に見える遅延が発生することがあります。
+プロジェクトアセットは、表示が遅れても問題ない補助的な装飾画像であれば使用できますが、すぐに表示する必要がある画像には最適ではありません。ローディング画面スクリプトは非常に早い段階で実行され、アプリケーションが完全に初期化および設定される前に動きます。`app.assets` レジストリ自体は存在しますが、必要なプロジェクトアセットのレコードはアプリの設定が完了するまで利用できない場合があり、`preload:start` やアセットレジストリのイベントを待つと、画像が表示されるまでに目に見える遅延が発生することがあります。
 
 相対パスもおすすめしません。Editor では、アセットはローディング画面スクリプトの隣にある単純なパスではなく、API で生成された URL を通して配信されます。相対 URL は Launch Page、公開ビルド、ダウンロードまたはセルフホストしたビルドで異なる挙動になる可能性があります。
 

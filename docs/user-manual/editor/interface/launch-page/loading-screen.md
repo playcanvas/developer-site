@@ -110,6 +110,7 @@ To create one:
 ```javascript
 pc.script.createLoadingScreen((app) => {
     const LOGO_IMAGE = 'data:image/png;base64,iVBORw0KGgo...';
+    const LOGO_ALT = 'Your product or company name';
 
     const wrapper = document.createElement('div');
     wrapper.style.position = 'absolute';
@@ -121,7 +122,7 @@ pc.script.createLoadingScreen((app) => {
     document.body.appendChild(wrapper);
 
     const logo = document.createElement('img');
-    logo.alt = 'Logo';
+    logo.alt = LOGO_ALT;
     logo.src = LOGO_IMAGE;
     logo.style.width = '240px';
     wrapper.appendChild(logo);
@@ -134,11 +135,13 @@ pc.script.createLoadingScreen((app) => {
 
 Embedding images this way increases the loading screen script size, so keep the image small and avoid using this technique for large background art.
 
+Set `LOGO_ALT` to the product or company name shown in the image. If the image is purely decorative, use an empty string instead.
+
 For a project example that embeds images directly in a loading screen with Base64 data URIs, see the [Base64 Loading Screen Images tutorial](/tutorials/advance-loading-screen/).
 
 #### Other Image Sources
 
-Project assets are still possible for non-critical decorative images where delayed appearance is acceptable, but they are not the best choice for images that need to appear immediately. The loading screen script runs very early, before the application has been fully initialized and configured. Engine APIs that depend on the initialized app, such as `app.assets`, are not immediately usable, and waiting for `preload:start` or asset registry events can add a visible delay before the image appears.
+Project assets are still possible for non-critical decorative images where delayed appearance is acceptable, but they are not the best choice for images that need to appear immediately. The loading screen script runs very early, before the application has been fully initialized and configured. The `app.assets` registry exists, but the project asset records you need may not be available until the app has been configured, and waiting for `preload:start` or asset registry events can add a visible delay before the image appears.
 
 Relative paths are also not recommended. In the Editor, assets are served through API-generated URLs, not simple paths next to the loading screen script. A relative URL can behave differently between the Launch Page, published builds, and downloaded or self-hosted builds.
 
