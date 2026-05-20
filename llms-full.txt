@@ -31,12 +31,12 @@ Full documentation for Loading Scenes is now in the [User Manual](/user-manual/e
 
 --------------------------------------------------------------------------------
 
-## Advance loading screen
+## Base64 Loading Screen Images
 
 URL: https://developer.playcanvas.com/tutorials/advance-loading-screen/
 Tags: loading, tutorial
 
-Project sample showing how to use project image assets in the loading screen.
+Project sample showing how to embed Base64 data URI images directly in the loading screen.
 
 [Interactive Demo]
 
@@ -12111,6 +12111,58 @@ pc.script.createLoadingScreen((app) => {
     });
 });
 ```
+
+### Adding Images
+
+A custom loading screen is normal DOM content, so you can add images with standard HTML and CSS. For branding images that should appear as soon as the loading screen is shown, the recommended approach is to embed the image as a Base64 data URI in the loading screen script.
+
+#### Recommended: Base64 Data URIs
+
+A Base64 data URI is an image encoded as text, for example `data:image/png;base64,...`. Since the data is already in the loading screen script, the browser does not need to wait for the PlayCanvas asset registry or make a separate request before it can display the image.
+
+To create one:
+
+1. Export and compress the image first. Keep logos and splash images as small as practical.
+2. Convert the image with an in-browser tool that keeps files local, such as [img64](https://www.img64.dev/), or use your team's preferred local encoder.
+3. Copy the full `data:image/...;base64,...` string into the loading screen script.
+4. Assign that string directly to `img.src`, or use it in CSS with `background-image: url("...")`.
+
+```javascript
+pc.script.createLoadingScreen((app) => {
+    const LOGO_IMAGE = "data:image/png;base64,iVBORw0KGgo...";
+
+    const wrapper = document.createElement('div');
+    wrapper.style.position = "absolute";
+    wrapper.style.inset = "0";
+    wrapper.style.display = "flex";
+    wrapper.style.alignItems = "center";
+    wrapper.style.justifyContent = "center";
+    wrapper.style.backgroundColor = "#232323";
+    document.body.appendChild(wrapper);
+
+    const logo = document.createElement('img');
+    logo.alt = "";
+    logo.src = LOGO_IMAGE;
+    logo.style.width = "240px";
+    wrapper.appendChild(logo);
+
+    app.once('start', () => {
+        document.body.removeChild(wrapper);
+    });
+});
+```
+
+Embedding images this way increases the loading screen script size, so keep the image small and avoid using this technique for large background art.
+
+For a project example that embeds images directly in a loading screen with Base64 data URIs, see the [Base64 Loading Screen Images tutorial](/tutorials/advance-loading-screen/).
+
+#### Other Image Sources
+
+Project assets are still possible for non-critical decorative images where delayed appearance is acceptable, but they are not the best choice for images that need to appear immediately. The loading screen script runs very early, before the application has been fully initialized and configured. The `app.assets` registry exists, but the project asset records you need may not be available until the app has been configured, and waiting for `preload:start` or asset registry events can add a visible delay before the image appears.
+
+Relative paths are also not recommended. In the Editor, assets are served through API-generated URLs, not simple paths next to the loading screen script. A relative URL can behave differently between the Launch Page, published builds, and downloaded or self-hosted builds.
+
+Hosted or CDN URLs can also work. Use the full URL directly in `img.src` or CSS `background-image`, and make sure the hosting, caching, and cross-origin behavior match your deployment requirements.
 
 Feel free to get creative! Use whatever HTML and CSS you like to create the loading screen of your dreams.
 

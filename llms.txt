@@ -489,7 +489,7 @@ Generated: 2026-05-20
 
 - https://developer.playcanvas.com/tutorials/360-lookaround-camera/ - 360 lookaround camera
 - https://developer.playcanvas.com/tutorials/additive-loading-scenes/ - Additive Loading Scenes
-- https://developer.playcanvas.com/tutorials/advance-loading-screen/ - Advance loading screen
+- https://developer.playcanvas.com/tutorials/advance-loading-screen/ - Base64 Loading Screen Images
 - https://developer.playcanvas.com/tutorials/anim-blending/ - Anim State Graph Blending
 - https://developer.playcanvas.com/tutorials/animate-entities-with-curves/ - Animate entities with curves
 - https://developer.playcanvas.com/tutorials/animated-textures/ - Animated Textures
