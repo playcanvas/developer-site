@@ -61,7 +61,8 @@
       "filename": "additive-loading-scenes"
     },
     {
-      "title": "Advance loading screen",
+      "title": "Base64 Loading Screen Images",
+      "description": "Customize the loading screen with embedded Base64 images so branding and splash art show while the app initializes.",
       "tags": [
         "loading",
         "tutorial"
