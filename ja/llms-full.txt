@@ -9967,7 +9967,7 @@ Enabled by default on new projects, imported models and animations will create G
 
 ### Import Hierarchy {#import-hierarchy}
 
-Only available if using [Convert to GLB](#convert-to-glb) option. When a model file is imported, a template asset is created that contains the full hierarchy of the model as entities allowing to you to manipulate them directly in the Editor. See more information about this feature [here](/user-manual/editor/assets/import-pipeline/import-hierarchy/).
+Only available if using [Convert to GLB](#convert-to-glb) option. When a model file is imported, a template asset is created that contains the full hierarchy of the model as entities allowing you to manipulate them directly in the Editor. See more information about this feature [here](/user-manual/editor/assets/import-pipeline/import-hierarchy/).
 
 ### Mesh Compression {#mesh-compression}
 
