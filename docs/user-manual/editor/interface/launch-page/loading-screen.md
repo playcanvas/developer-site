@@ -110,7 +110,6 @@ To create one:
 ```javascript
 pc.script.createLoadingScreen((app) => {
     const LOGO_IMAGE = 'data:image/png;base64,iVBORw0KGgo...';
-    const LOGO_ALT = 'Your product or company name';
 
     const wrapper = document.createElement('div');
     wrapper.style.position = 'absolute';
@@ -122,7 +121,7 @@ pc.script.createLoadingScreen((app) => {
     document.body.appendChild(wrapper);
 
     const logo = document.createElement('img');
-    logo.alt = LOGO_ALT;
+    logo.alt = '';
     logo.src = LOGO_IMAGE;
     logo.style.width = '240px';
     wrapper.appendChild(logo);
@@ -134,8 +133,6 @@ pc.script.createLoadingScreen((app) => {
 ```
 
 Embedding images this way increases the loading screen script size, so keep the image small and avoid using this technique for large background art.
-
-Set `LOGO_ALT` to the product or company name shown in the image. If the image is purely decorative, use an empty string instead.
 
 For a project example that embeds images directly in a loading screen with Base64 data URIs, see the [Base64 Loading Screen Images tutorial](/tutorials/advance-loading-screen/).
 

@@ -110,7 +110,6 @@ Base64 の Data URI は、画像をテキストとしてエンコードしたも
 ```javascript
 pc.script.createLoadingScreen((app) => {
     const LOGO_IMAGE = 'data:image/png;base64,iVBORw0KGgo...';
-    const LOGO_ALT = '製品名または会社名';
 
     const wrapper = document.createElement('div');
     wrapper.style.position = 'absolute';
@@ -122,7 +121,7 @@ pc.script.createLoadingScreen((app) => {
     document.body.appendChild(wrapper);
 
     const logo = document.createElement('img');
-    logo.alt = LOGO_ALT;
+    logo.alt = '';
     logo.src = LOGO_IMAGE;
     logo.style.width = '240px';
     wrapper.appendChild(logo);
@@ -134,8 +133,6 @@ pc.script.createLoadingScreen((app) => {
 ```
 
 この方法で画像を埋め込むとローディング画面スクリプトのサイズが大きくなるため、画像は小さく保ち、大きな背景画像には使用しないでください。
-
-`LOGO_ALT` には画像に表示されている製品名または会社名を設定してください。画像が純粋に装飾目的の場合は、代わりに空文字列を使用します。
 
 Base64 の Data URI を使って画像をローディング画面に直接埋め込むプロジェクト例については、[Base64 ローディング画面画像チュートリアル](/tutorials/advance-loading-screen/)を参照してください。
 
