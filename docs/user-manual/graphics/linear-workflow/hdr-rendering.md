@@ -83,7 +83,7 @@ For more detailed information, refer to the CameraFrame [API documentation](http
 
 ### Color LUT {#color-lut}
 
-`CameraFrame` supports color grading via a 3D Color Lookup Table (LUT). The LUT is a 2D "horizontal strip" texture representing an unwrapped 3D LUT, in the same format used by Unreal Engine: for an N×N×N 3D LUT the texture is N²×N pixels (a 16×16×16 LUT is 256×16, a 32×32×32 LUT is 1024×32). HALD LUTs and Unity-style LUTs use different layouts and are not compatible.
+`CameraFrame` supports color grading via a 3D Color Lookup Table (LUT). The LUT must be a **256×16** 2D "horizontal strip" texture representing an unwrapped 16×16×16 3D LUT in Unreal Engine layout: 16 horizontal slices along the blue axis, each slice mapping red to the X-axis and green to the Y-axis. HALD LUTs and Unity-style LUTs use different layouts and are not compatible.
 
 Start from the neutral identity LUT below — applying it to a scene produces no change — and modify it in an image editor to create your own grade:
 
@@ -122,6 +122,21 @@ app.assets.load(lutAsset);
 If any of the texture settings above are wrong, the engine emits a debug-build warning naming the specific properties to change (this check is stripped from release builds).
 
 LUTs can be authored by taking a screenshot of the scene, applying color adjustments in an image editor such as Photoshop, dragging those adjustments onto the neutral identity LUT, and exporting the result as a PNG. In the PlayCanvas Editor, set the texture asset's **sRGB** flag on, **Mipmaps** off, and **Filter** to **Linear**.
+
+#### Crossfading between two LUTs
+
+For transitions between two graded looks (day → night, location A → location B, etc.) the LUT slot supports an optional second texture and a blend factor. Both LUTs are sampled at the same time and the two graded results are crossfaded in linear space:
+
+```javascript
+cameraFrame.colorLUT.texture  = lutDayAsset.resource;
+cameraFrame.colorLUT.texture2 = lutNightAsset.resource;
+cameraFrame.colorLUT.intensity  = 1; // strength of LUT 1 against the original
+cameraFrame.colorLUT.intensity2 = 1; // strength of LUT 2 against the original
+cameraFrame.colorLUT.blend = 0;      // 0 = only LUT 1, 1 = only LUT 2, animate this for a fade
+cameraFrame.update();
+```
+
+The second texture must satisfy the same size and filtering requirements as the first. When `texture2` is `null`, the single-LUT path is used and the `intensity2` / `blend` values are ignored.
 
 ## CameraFrame in the Editor
 
