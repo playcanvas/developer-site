@@ -352,17 +352,6 @@ Generated: 2026-05-21
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/recommended-tools/ - Recommended Tools
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/taking-photos/ - Taking Photos
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/ - Editing and Publishing Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/splat-transform/ - SplatTransform
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/ - SuperSplat
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/camera-controls/ - Camera Controls
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/data-panel/ - Data Panel
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/editing-splats/ - Editing Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/import-export/ - Import and Export
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/interface/ - Interface Overview
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/managing-projects/ - Managing Projects
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/publishing/ - Publishing
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/rendering/ - Rendering Media
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/timeline/ - Timeline
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ - Splat File Formats
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply/ - The PLY Format
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/ - The SOG Format
@@ -485,6 +474,19 @@ Generated: 2026-05-21
 - https://developer.playcanvas.com/user-manual/press-pack/ - Press Pack
 - https://developer.playcanvas.com/user-manual/ - Welcome
 - https://developer.playcanvas.com/user-manual/security/ - Security
+- https://developer.playcanvas.com/user-manual/splat-transform/ - SplatTransform
+### Supersplat
+- https://developer.playcanvas.com/user-manual/supersplat/ - SuperSplat
+- https://developer.playcanvas.com/user-manual/supersplat/camera-controls/ - Camera Controls
+- https://developer.playcanvas.com/user-manual/supersplat/data-panel/ - Data Panel
+- https://developer.playcanvas.com/user-manual/supersplat/editing-splats/ - Editing Splats
+- https://developer.playcanvas.com/user-manual/supersplat/import-export/ - Import and Export
+- https://developer.playcanvas.com/user-manual/supersplat/interface/ - Interface Overview
+- https://developer.playcanvas.com/user-manual/supersplat/managing-projects/ - Managing Projects
+- https://developer.playcanvas.com/user-manual/supersplat/publishing/ - Publishing
+- https://developer.playcanvas.com/user-manual/supersplat/rendering/ - Rendering Media
+- https://developer.playcanvas.com/user-manual/supersplat/timeline/ - Timeline
+
 ## Tutorials
 
 - https://developer.playcanvas.com/tutorials/360-lookaround-camera/ - 360 lookaround camera

@@ -18387,7 +18387,7 @@ This approach allows you to render massive splat scenes that would otherwise be 
 
 To use LOD streaming, you need to generate the streaming format from multiple splat files with different levels of detail. The tool takes your pre-generated LOD files and creates an optimized streaming format.
 
-See the [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions on how to create the required `lod-meta.json` format.
+See the [Generating LOD Format](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions on how to create the required `lod-meta.json` format.
 
 :::tip
 
@@ -18509,8 +18509,8 @@ As native Editor support for streaming LOD is added, the following improvements 
 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
-- [SplatTransform CLI Tool](/user-manual/gaussian-splatting/editing/splat-transform)
-- [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
+- [SplatTransform CLI Tool](/user-manual/splat-transform)
+- [Generating LOD Format](/user-manual/splat-transform#generating-lod-format)
 - [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
 - [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)
 
@@ -21347,7 +21347,7 @@ Generated splat files typically have several issues that need addressing:
 
 PlayCanvas provides both visual and command-line tools for editing Gaussian Splats:
 
-### [SuperSplat Editor](supersplat)
+### [SuperSplat Editor](/user-manual/supersplat/)
 
 The **SuperSplat Editor** is a powerful, browser-based visual editor designed specifically for interactive splat editing. It's perfect for:
 
@@ -21357,7 +21357,7 @@ The **SuperSplat Editor** is a powerful, browser-based visual editor designed sp
 - Creating camera animations and flythroughs
 - Publishing splats to the web
 
-### [splat-transform CLI](splat-transform)
+### [SplatTransform CLI](/user-manual/splat-transform/)
 
 The **splat-transform CLI** is a command-line tool for batch processing and automated transformations. It excels at:
 
@@ -21366,1395 +21366,6 @@ The **splat-transform CLI** is a command-line tool for batch processing and auto
 - Automated filtering and optimization
 - Integration into build pipelines
 - Combining and merging splat files
-
---------------------------------------------------------------------------------
-
-## SplatTransform
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/splat-transform/
-
-[SplatTransform](https://github.com/playcanvas/splat-transform) is an open source library and CLI tool for converting and editing Gaussian splats. Whether you need to convert between formats, apply transformations, or analyze splat data, SplatTransform provides the tools developers need for precise control over their Gaussian splat workflows. The library is platform-agnostic and can be used in both Node.js and browser environments.
-
-:::note Open Source
-
-SplatTransform is [open-sourced under an MIT license on GitHub](https://github.com/playcanvas/splat-transform)
-
-:::
-
-## Why Use SplatTransform?
-
-SplatTransform solves important problems developers face when working with Gaussian splats:
-
-🔄 **Broad Format Support** — seamlessly convert between PLY, SPLAT, KSPLAT, SOG and even CSV  
-🛠️ **Powerful Transformations** — translate, rotate, and scale your splats with precision  
-🧹 **Smart Filtering** — remove NaN values, filter by properties, and strip unnecessary data  
-📊 **Statistical Analysis** — generate per-column statistics for data analysis  
-📦 **Scene Merging** — combine multiple splat files into a merged scene  
-⚡ **Production Ready** — optimized for maximum performance  
-🆓 **Open Source** — completely free and available on GitHub
-
-## Installation
-
-Install or update to the latest version:
-
-```bash
-npm install -g @playcanvas/splat-transform
-```
-
-For library usage, install as a dependency:
-
-```bash
-npm install @playcanvas/splat-transform
-```
-
-Verify your CLI installation:
-
-```bash
-splat-transform --version
-```
-
-## Basic Usage
-
-The general syntax for SplatTransform is:
-
-```bash
-splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
-```
-
-**Key points:**
-
-- Input files become the working set; ACTIONS are applied in order
-- The last file is the output; actions after it modify the final result
-- Use `null` as output to discard file output (useful with `--summary`)
-
-### Format Conversion
-
-Convert between commonly used splat formats with simple commands:
-
-```bash
-# Simple format conversion
-splat-transform input.ply output.csv
-
-# Convert from .splat format
-splat-transform input.splat output.ply
-
-# Convert from .ksplat format
-splat-transform input.ksplat output.ply
-
-# Convert to compressed PLY
-splat-transform input.ply output.compressed.ply
-
-# Uncompress a compressed PLY back to standard PLY
-# (compressed .ply is detected automatically on read)
-splat-transform input.compressed.ply output.ply
-
-# Convert to SOG bundled format
-splat-transform input.ply output.sog
-
-# Convert to SOG unbundled format
-splat-transform input.ply output/meta.json
-
-# Convert from SOG (bundled) back to PLY
-splat-transform scene.sog restored.ply
-
-# Convert from SOG (unbundled folder) back to PLY
-splat-transform output/meta.json restored.ply
-
-# Convert to standalone HTML viewer (bundled, single file)
-splat-transform input.ply output.html
-
-# Convert to unbundled HTML viewer (separate CSS, JS, and SOG files)
-splat-transform -U input.ply output.html
-
-# Convert to HTML viewer with custom settings
-splat-transform -E settings.json input.ply output.html
-```
-
-SplatTransform detects file format based on extension. Supported formats are shown below:
-
-| Format | Input | Output | Description |
-| ------ | ----- | ------ | ----------- |
-| `.ply` | ✅ | ✅ | Standard PLY format |
-| `.sog` | ✅ | ✅ | Bundled super-compressed format (recommended) |
-| `meta.json` | ✅ | ✅ | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** be `meta.json` |
-| `lod-meta.json` | ❌ | ✅ | LOD streaming format with octree structure for progressive loading. Output filename **must** be `lod-meta.json` |
-| `.compressed.ply` | ✅ | ✅ | Compressed PLY format (auto-detected and decompressed on read) |
-| `.lcc` | ✅ | ❌ | LCC file format (XGRIDS) |
-| `.ksplat` | ✅ | ❌ | Compressed splat format (mkkellogg format) |
-| `.splat` | ✅ | ❌ | Compressed splat format (antimatter15 format) |
-| `.spz` | ✅ | ❌ | Compressed splat format (Niantic format) |
-| `.mjs` | ✅ | ❌ | Generate a scene using an mjs script (Beta) |
-| `.csv` | ❌ | ✅ | Comma-separated values spreadsheet |
-| `.html` | ❌ | ✅ | HTML viewer app (single-page or unbundled) based on SOG |
-
-## Actions
-
-Actions can be repeated and applied in any order to transform and filter your splats:
-
-```none
--t, --translate        <x,y,z>          Translate splats by (x, y, z)
--r, --rotate           <x,y,z>          Rotate splats by Euler angles (x, y, z) in degrees
--s, --scale            <factor>         Uniformly scale splats by factor
--H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
--N, --filter-nan                        Remove Gaussians with NaN or Inf values
--B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
--S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
--V, --filter-value     <name,cmp,value> Keep splats where <name> <cmp> <value>
-                                          cmp ∈ {lt,lte,gt,gte,eq,neq}
--p, --params           <key=val,...>    Pass parameters to .mjs generator script
--l, --lod              <n>              Specify the level of detail of this model, n >= 0
--m, --summary                           Print per-column statistics to stdout
-```
-
-## Global Options
-
-```none
--h, --help                              Show this help and exit
--v, --version                           Show version and exit
--q, --quiet                             Suppress non-error output
--w, --overwrite                         Overwrite output file if it exists
--i, --iterations       <n>              Iterations for SOG SH compression (more=better). Default: 10
--L, --list-gpus                         List all available GPU adapters and exit
--g, --gpu              <n|cpu>          Select device for SOG compression: GPU adapter index | 'cpu'
--E, --viewer-settings  <settings.json>  HTML viewer settings JSON file
--U, --unbundled                         Generate unbundled HTML viewer with separate files
--O, --lod-select       <n,n,...>        Comma-separated LOD levels to read from LCC input
--C, --lod-chunk-count  <n>              Approx number of Gaussians per LOD chunk in K. Default: 512
--X, --lod-chunk-extent <n>              Approx size of an LOD chunk in world units (m). Default: 16
-```
-
-:::note
-
-See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `-E` option.
-
-:::
-
-## Transformations
-
-### Apply Spatial Transformations
-
-Transform your splats during conversion with intuitive command-line options:
-
-```bash
-# Scale and translate
-splat-transform bunny.ply -s 0.5 -t 0,0,10 bunny_scaled.ply
-
-# Rotate by 90 degrees around Y axis
-splat-transform input.ply -r 0,90,0 output.ply
-
-# Chain multiple transformations
-splat-transform input.ply -s 2 -t 1,0,0 -r 0,0,45 output.ply
-```
-
-## Filtering and Optimization
-
-### Smart Filtering
-
-Remove unwanted data and optimize your splats for production:
-
-```bash
-# Remove entries containing NaN and Inf
-splat-transform input.ply --filter-nan output.ply
-
-# Filter by opacity values (keep only splats with opacity > 0.5)
-splat-transform input.ply -V opacity,gt,0.5 output.ply
-
-# Strip spherical harmonic bands higher than 2
-splat-transform input.ply --filter-harmonics 2 output.ply
-```
-
-## Scene Merging
-
-Combine multiple splat files into a single scene with individual transformations:
-
-```bash
-# Combine multiple files with different transforms
-splat-transform -w cloudA.ply -r 0,90,0 cloudB.ply -s 2 merged.compressed.ply
-
-# Apply final transformations to combined result
-splat-transform input1.ply input2.ply output.ply -t 0,0,10 -s 0.5
-```
-
-## Statistical Summary
-
-Generate per-column statistics for data analysis or validation:
-
-```bash
-# Print summary, then write output
-splat-transform input.ply --summary output.ply
-
-# Print summary without writing a file (discard output)
-splat-transform input.ply -m null
-
-# Print summary before and after a transform
-splat-transform input.ply --summary -s 0.5 --summary output.ply
-```
-
-The summary includes min, max, median, mean, stdDev, nanCount and infCount for each column in the data.
-
-## CSV Export for Data Analysis
-
-One of SplatTransform's most powerful features is CSV export, enabling data science workflows:
-
-```bash
-# Export splat data to CSV
-splat-transform scene.ply data.csv
-
-# Pre-filter before exporting for analysis
-splat-transform input.ply --filter-nan -V opacity,gt,0.1 analysis.csv
-```
-
-### Why CSV Export Matters
-
-- **Spreadsheet Analysis** — Import directly into Excel, Google Sheets, or any data analysis tool
-- **Statistical Insights** — Calculate distributions, correlations, and quality metrics
-- **Custom Filtering** — Use spreadsheet formulas to identify outliers or segment data
-- **Visualization** — Create charts and graphs to understand splat data patterns
-- **Integration** — Feed splat data into machine learning pipelines or custom workflows
-
-CSV export transforms your splats from opaque binary files into readable, analyzable datasets perfect for research and optimization.
-
-## Device Selection for SOG Compression
-
-When compressing to SOG format, you can control which device (GPU or CPU) performs the compression:
-
-```bash
-# List available GPU adapters
-splat-transform --list-gpus
-
-# Let WebGPU automatically choose the best GPU (default behavior)
-splat-transform input.ply output.sog
-
-# Explicitly select a GPU adapter by index
-splat-transform -g 0 input.ply output.sog  # Use first listed adapter
-splat-transform -g 1 input.ply output.sog  # Use second listed adapter
-
-# Use CPU for compression instead (much slower but always available)
-splat-transform -g cpu input.ply output.sog
-```
-
-:::note
-
-When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `-L` to list available adapters with their indices and names. The order and availability of adapters depends on your system and GPU drivers.
-
-:::
-
-:::warning
-
-CPU compression can be significantly slower than GPU compression (often 5-10x slower). Use CPU mode only if GPU drivers are unavailable or problematic.
-
-:::
-
-## Generators (Beta)
-
-Generator scripts can be used to synthesize gaussian splat data. This allows you to procedurally create splat scenes using JavaScript:
-
-```bash
-splat-transform gen-grid.mjs -p width=10,height=10,scale=10,color=0.1 scenes/grid.ply -w
-```
-
-See the [example generator scripts](https://github.com/playcanvas/splat-transform/tree/main/generators) in the GitHub repository for more details.
-
-## Common Workflows
-
-### Production Optimization Pipeline
-
-```bash
-# Clean, limit spherical harmonic bands, and apply a scale for production
-splat-transform raw_capture.ply \
-  --filter-nan \
-  --filter-harmonics 2 \
-  -s 0.8 \
-  production/capture.sog
-```
-
-### Format Migration
-
-```bash
-# Convert existing KSPLAT assets to PlayCanvas SOG
-for file in *.ksplat; do
-  splat-transform "$file" "${file%.ksplat}.sog"
-done
-```
-
-### Quality Analysis
-
-```bash
-# Export for quality analysis in spreadsheet
-splat-transform scene.ply \
-  --filter-nan \
-  -V opacity,gt,0.05 \
-  quality_analysis.csv
-```
-
-### Multi-Scene Composition
-
-```bash
-# Combine multiple scenes with precise positioning
-splat-transform \
-  environment.ply -t 0,0,0 \
-  character.ply -t 2,0,1 -r 0,180,0 \
-  props.ply -t -3,0,2 -s 1.2 \
-  complete_scene.ply
-```
-
-### Generating LOD Format
-
-The LOD (Level of Detail) format enables efficient streaming and rendering of large gaussian splat scenes. The tool takes multiple pre-generated LOD files as input and generates an optimized streaming format with an octree structure for optimal download performance.
-
-**Note:** The tool does NOT create the LOD levels themselves - you must supply multiple LOD files with progressively fewer gaussians (LOD 0 = highest detail, higher numbers = lower detail).
-
-:::warning Output Filename Requirements
-
-The output filename determines the format. These are **not** arbitrary names:
-
-- **`lod-meta.json`** — generates LOD streaming format (multiple SOG chunks with an octree structure for progressive loading)
-- **`meta.json`** — generates unbundled SOG format (a single SOG file, no streaming)
-
-The output filename must be exactly `lod-meta.json` or `meta.json` — only the directory path before it can vary. For example: `output/lod-meta.json`, `my-scene/lod-meta.json`.
-
-:::
-
-```bash
-# Generate LOD streaming format from multiple input files
-# Each input file represents a different detail level (LOD 0 is highest quality)
-splat-transform \
-  lod0.ply -l 0 \
-  lod1.ply -l 1 \
-  lod2.ply -l 2 \
-  lod3.ply -l 3 \
-  output/lod-meta.json \
-  --filter-nan \
-  --filter-harmonics 0
-
-# Generate LOD with custom chunk settings for better performance
-splat-transform \
-  -C 1024 \
-  -X 32 \
-  lod0.ply -l 0 \
-  lod1.ply -l 1 \
-  lod2.ply -l 2 \
-  output/lod-meta.json \
-  --filter-nan
-
-# For very large scenes, increase Node.js memory allocation
-node --max-old-space-size=32000 node_modules/.bin/splat-transform \
-  lod0.ply -l 0 \
-  lod1.ply -l 1 \
-  lod2.ply -l 2 \
-  lod3.ply -l 3 \
-  output/lod-meta.json \
-  --filter-nan \
-  --filter-harmonics 0
-
-# Generate LOD streaming format directly from an LCC file
-# (LCC files already contain multiple LOD levels)
-# Note: the output filename must be exactly lod-meta.json for streaming LOD,
-# or meta.json for a single unbundled SOG file
-splat-transform scene.lcc output/lod-meta.json
-```
-
-**Tips:**
-
-- Use `--filter-nan` to remove invalid gaussians before processing
-- Use `--filter-harmonics 0` to reduce file size if color detail is less critical
-- Use `-C` to control the number of generated SOG files containing splats
-- Use `-X` to control the size of each node. Increase for very large scenes to avoid generating a huge number of nodes to manage
-- For very large scenes, use Node's `--max-old-space-size` flag to give it more memory
-
-## Getting Help
-
-Get help for any command:
-
-```bash
-# General help
-splat-transform --help
-
-# Get version information
-splat-transform --version
-```
-
-For issues, feature requests, or contributions, visit the [GitHub repository](https://github.com/playcanvas/splat-transform). The project welcomes bug reports and pull requests from the community.
-
-## Library Usage
-
-SplatTransform exposes a programmatic API for reading, processing, and writing Gaussian splat data.
-
-### Basic Import
-
-```typescript
-
-    readFile,
-    writeFile,
-    getInputFormat,
-    getOutputFormat,
-    DataTable,
-    processDataTable
-} from '@playcanvas/splat-transform';
-```
-
-### Key Exports
-
-| Export | Description |
-| ------ | ----------- |
-| `readFile` | Read splat data from various formats |
-| `writeFile` | Write splat data to various formats |
-| `getInputFormat` | Detect input format from filename |
-| `getOutputFormat` | Detect output format from filename |
-| `DataTable`, `Column` | Core data structures for splat data |
-| `combine` | Merge multiple DataTables into one |
-| `transform` | Apply spatial transformations |
-| `processDataTable` | Apply a sequence of processing actions |
-| `computeSummary` | Generate statistical summary of data |
-
-### File System Abstractions
-
-The library uses abstract file system interfaces for maximum flexibility:
-
-**Reading:**
-
-- `UrlReadFileSystem` - Read from URLs (browser/Node.js)
-- `MemoryReadFileSystem` - Read from in-memory buffers
-- `ZipReadFileSystem` - Read from ZIP archives
-
-**Writing:**
-
-- `MemoryFileSystem` - Write to in-memory buffers
-- `ZipFileSystem` - Write to ZIP archives
-
-### Example: Reading and Processing
-
-```typescript
-
-    readFile,
-    writeFile,
-    getInputFormat,
-    getOutputFormat,
-    processDataTable,
-    UrlReadFileSystem,
-    MemoryFileSystem
-} from '@playcanvas/splat-transform';
-
-// Read a PLY file from URL
-const fileSystem = new UrlReadFileSystem();
-const inputFormat = getInputFormat('scene.ply');
-
-const dataTables = await readFile({
-    filename: 'https://example.com/scene.ply',
-    inputFormat,
-    options: { iterations: 10 },
-    params: [],
-    fileSystem
-});
-
-// Apply transformations
-const processed = processDataTable(dataTables[0], [
-    { kind: 'scale', value: 0.5 },
-    { kind: 'translate', value: new Vec3(0, 1, 0) },
-    { kind: 'filterNaN' }
-]);
-
-// Write to in-memory buffer
-const memFs = new MemoryFileSystem();
-const outputFormat = getOutputFormat('output.ply', {});
-
-await writeFile({
-    filename: 'output.ply',
-    outputFormat,
-    dataTable: processed,
-    options: {}
-}, memFs);
-
-// Get the output data
-const outputBuffer = memFs.files.get('output.ply');
-```
-
-### Processing Actions
-
-The `processDataTable` function accepts an array of actions:
-
-```typescript
-type ProcessAction =
-    | { kind: 'translate'; value: Vec3 }
-    | { kind: 'rotate'; value: Vec3 }       // Euler angles in degrees
-    | { kind: 'scale'; value: number }
-    | { kind: 'filterNaN' }
-    | { kind: 'filterByValue'; columnName: string; comparator: Comparator; value: number }
-    | { kind: 'filterBands'; value: 0 | 1 | 2 | 3 }
-    | { kind: 'filterBox'; min: Vec3; max: Vec3 }
-    | { kind: 'filterSphere'; center: Vec3; radius: number }
-    | { kind: 'lod'; value: number }
-    | { kind: 'summary' };
-
-type Comparator = 'lt' | 'lte' | 'gt' | 'gte' | 'eq' | 'neq';
-```
-
-### Custom Logging
-
-Configure the logger for your environment:
-
-```typescript
-
-logger.setLogger({
-    log: console.log,
-    warn: console.warn,
-    error: console.error,
-    debug: console.debug,
-    progress: (text) => process.stdout.write(text),
-    output: console.log
-});
-
-logger.setQuiet(true); // Suppress non-error output
-```
-
---------------------------------------------------------------------------------
-
-## SuperSplat
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/
-
-[SuperSplat](https://superspl.at/editor) is PlayCanvas's free, [open-source](https://github.com/playcanvas/supersplat) Gaussian Splat editor designed specifically for production workflows. It runs entirely in the browser with no downloads required, making it accessible from anywhere.
-
-[Image: SuperSplat Interface]
-
-## Video Tutorials
-
-### Introduction to SuperSplat
-
-A great way to learn the basics on SuperSplat is to watch this video introduction:
-
-[Interactive Demo]
-
-### In-Depth Tutorial
-
-For a more comprehensive guide to using SuperSplat, check out this in-depth tutorial:
-
-[Interactive Demo]
-
-## Getting Started
-
-### Accessing SuperSplat
-
-1. **Open your browser** - Navigate to [superspl.at/editor](https://superspl.at/editor)
-2. **Load your PLY file** - Drag and drop or use the File menu
-3. **Begin editing** - Use the interface controls to navigate and edit
-
-### System Requirements
-
-- **Modern web browser** - Chrome, Firefox, Safari, or Edge
-- **WebGL 2.0 support** - Available in all modern browsers
-- **GPU acceleration** - Recommended for large splat files
-- **No installation** - Everything runs in the browser
-
-SuperSplat continues to evolve with new features and improvements. Stay updated with the latest releases and join the community to share your creations and learn from others.
-
---------------------------------------------------------------------------------
-
-## Camera Controls
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/camera-controls/
-
-SuperSplat provides intuitive camera controls for navigating the 3D view, supporting mouse, touch, and keyboard inputs. There are two control modes: **Orbit** (default) and **Fly**.
-
-- **Orbit mode** - Camera rotates around a focal point. Best for inspecting objects from all angles.
-- **Fly mode** - Camera moves freely through the scene. Best for navigating large environments.
-
-Press **V** to toggle between modes, or use the WASD keys to automatically switch to fly mode.
-
-## Mouse Controls
-
-| Action | Orbit Mode | Fly Mode |
-|--------|------------|----------|
-| Left drag | Orbit around focal point | Look around |
-| Middle drag | Zoom | Zoom |
-| Right drag | Pan | Pan |
-| Right + Ctrl/Shift drag | Orbit | Look around |
-| Right + Alt drag | Zoom | Zoom |
-| Mouse wheel | Zoom | Move forward/backward |
-| Mouse wheel + Shift | Pan (trackpad) | — |
-| Double-click | Set focal point | Set focal point (switches to orbit) |
-
-## Touch Controls
-
-| Action | Orbit Mode | Fly Mode |
-|--------|------------|----------|
-| Single finger drag | Orbit | Look around |
-| Two-finger drag | Pan | — |
-| Two-finger pinch/spread | Zoom | Move forward/backward |
-
-## Keyboard Controls
-
-| Key | Action |
-|-----|--------|
-| **W/A/S/D** | Fly forward/left/backward/right |
-| **Q/E** | Fly down/up |
-| **Shift** | 10× faster fly speed |
-| **Alt** | 0.1× slower fly speed |
-| **V** | Toggle between orbit and fly modes |
-| **Shift + F** | Reset camera to default position |
-| **F** | Focus camera on selection |
-
-## Camera Settings
-
-Access camera settings through the **View Options** panel (gear icon):
-
-| Setting | Range | Default | Description |
-|---------|-------|---------|-------------|
-| **Field of View** | 10° - 120° | 75° | Camera viewing angle |
-| **Fly Speed** | 0.1 - 30 | 1 | Speed of WASD navigation |
-
---------------------------------------------------------------------------------
-
-## Data Panel
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/data-panel/
-
-The SPLAT DATA panel provides statistical visualization and analysis tools for understanding the distribution of data properties across your Gaussian splats. It displays an interactive histogram that allows you to view and select splats based on their attribute values.
-
-[Image: SPLAT DATA Panel]
-
-## Overview
-
-The panel consists of three main sections:
-
-1. **Data Selector** - Choose which splat attribute to visualize
-2. **Histogram Display** - Interactive visualization of the selected data distribution  
-3. **Statistics** - Total counts for splat states
-
-The panel is located at the bottom of the interface and is collapsed by default.
-
-:::tip
-The panel can be toggled open/closed by pressing **Ctrl + D** (or **Cmd + D** on Mac) or by clicking the panel header.
-:::
-
-## Data Selector
-
-The dropdown menu allows you to select from various splat properties for visualization:
-
-| Property | Category | Description | Range/Calculation |
-|----------|----------|-------------|-------------------|
-| X | Position | Position coordinate along the X axis | - |
-| Y | Position | Position coordinate along the Y axis | - |
-| Z | Position | Position coordinate along the Z axis | - |
-| Scale X | Scale | Size of the Gaussian along the X axis | - |
-| Scale Y | Scale | Size of the Gaussian along the Y axis | - |
-| Scale Z | Scale | Size of the Gaussian along the Z axis | - |
-| Red | Color | Red channel intensity | 0-1 |
-| Green | Color | Green channel intensity | 0-1 |
-| Blue | Color | Blue channel intensity | 0-1 |
-| Hue | Color | Color hue | 0-360° |
-| Saturation | Color | Color saturation | 0-1 |
-| Value | Color | Color brightness/value | 0-1 |
-| Opacity | Color | Transparency of each splat | 0-1 |
-| Distance | Derived | Distance from the origin (0,0,0) | √(x² + y² + z²) |
-| Volume | Derived | Calculated volume of each Gaussian | scale_x × scale_y × scale_z |
-| Surface Area | Derived | Approximate surface area | scale_x² + scale_y² + scale_z² |
-
-## Histogram Visualization
-
-The histogram displays the distribution of the selected property across all non-deleted splats in the scene, with blue bars representing unselected splats and yellow bars representing selected splats. Locked and deleted splats are not shown in the histogram.
-
-### Interactive Features
-
-**Hover Information** - Hover over any histogram bar to see a tooltip displaying:
-
-- **value** - The data value for this bin
-- **cnt** - Total count of splats in this bin  
-- **percentage** - Percentage of total splats
-- **sel** - Number of selected splats in this bin
-
-**Selection by Range** - Click and drag on the histogram to highlight a range of values. A dashed yellow rectangle will appear showing your selection. Release to select all splats within that value range. Note that locked and deleted splats cannot be selected through the histogram.
-
-Use modifier keys to control the selection operation:
-
-| Modifier Key | Action | Description |
-|--------------|--------|-------------|
-| None | New Selection | Replaces the current selection with the histogram range |
-| Shift | Add to Selection | Adds the histogram range to the existing selection |
-| Ctrl | Remove from Selection | Removes the histogram range from the existing selection |
-
-**Log Scale** - Enable the Log Scale checkbox to view the histogram with a logarithmic Y-axis. This is useful when data has a wide range of values, when most splats cluster around certain values with few outliers, or when you want to better visualize the distribution of sparse data.
-
-## Statistics (Totals)
-
-The bottom section displays real-time statistics about the current splat:
-
-| Statistic | Description |
-|-----------|-------------|
-| Splats | Total number of non-deleted splats |
-| Selected | Number of currently selected splats |
-| Locked | Number of locked splats |
-| Deleted | Number of deleted splats |
-
-These values update automatically when splats are selected, deselected, locked, unlocked, deleted, or reset.
-
-## Use Cases
-
-**Finding Outliers** - Select a property like "Distance" or "Opacity", look for isolated bars at the extremes, then click and drag to select those ranges for examination or deletion.
-
-**Color-Based Selection** - Choose "Hue", "Saturation", or "Value" and select a range to isolate splats of similar colors, useful for separating objects by color in the scene.
-
-**Size-Based Selection** - Select "Volume" or "Surface Area", enable "Log Scale" for better visualization, then select ranges to find problematic splats for cleanup or adjustment.
-
-**Quality Control** - Review the distribution of properties to check if opacity is reasonable, verify scale values are within expected ranges, and identify areas that may need cleanup.
-
-## Tips
-
-- Keep the panel collapsed when not in use to improve editor performance
-- Check different properties to understand your data better  
-- Use histogram selection together with other selection tools for precise control
-- Understanding your splat distribution helps with optimization and quality improvements
-
-## Technical Notes
-
-### Data Transformations
-
-Some properties are transformed for visualization to ensure the histogram displays human-readable values rather than the internal storage format:
-
-| Property Type | Transformation |
-|---------------|----------------|
-| Scale values | Exponentiated: exp(value) |
-| Color values (RGB) | Converted from spherical harmonics: 0.5 + value × 0.28209479177387814 |
-| Opacity | Sigmoid function: 1 / (1 + exp(-value)) |
-
-### Suppressed Properties
-
-The following properties are not available for histogram visualization: **state** (internal state flag), **transform** (internal transformation data), and **f_rest_0** through **f_rest_44** (higher-order spherical harmonic coefficients).
-
---------------------------------------------------------------------------------
-
-## Editing Splats
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/editing-splats/
-
-## Edit Modes
-
-SuperSplat functions in one of two **_edit modes_**:
-
-- Centers Mode
-- Rings Mode
-
-These modes affect how selections work and what you see in the viewport.
-
-### Centers Mode
-
-In centers mode:
-
-- Gaussians are overlaid with a blue dot at their center.
-- Selections apply to all Gaussian centers independent of their screen depth.
-- Centers are colored depending on their selection state. By default, blue is used for unselected Gaussians and yellow for selected Gaussians.
-- You can control the size that centers are rendered in the VIEW OPTIONS panel.
-
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 53" src="/img/user-manual/gaussian-splatting/editing/supersplat/centers-mode.png" />
-
-### Rings Mode
-
-In rings mode:
-
-- Gaussians are overlaid with a ring at their outer boundary.
-- Selections apply to the top-most layer of gaussian rings only.
-- Selected Gaussians are colored yellow (by default).
-
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 58" src="/img/user-manual/gaussian-splatting/editing/supersplat/rings-mode.png" />
-
-### Disabling the Overlay
-
-The mode overlay can be disabled entirely (using space bar shortcut), so neither dots nor rings are displayed.
-
-However, please note that the selection behavior is still determined by the active mode.
-
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 48" src="/img/user-manual/gaussian-splatting/editing/supersplat/disable-overlay.png" />
-
-## Selecting and Deleting Splats
-
-Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. To help with this, there are 8 selection tools available:
-
-<div class="no-wrap-first-col">
-
-| Tool | Description |
-|------|-------------|
-| [Image: Picker Select] **Picker Select** | Click to select a single splat, or click + drag to create a rectangular selection area. This is the default selection tool. |
-| [Image: Lasso Select] **Lasso Select** | Click and drag to draw a freeform shape. Splats within the shape's outline will be selected. This is a 2D screen-space selection tool. |
-| [Image: Polygon Select] **Polygon Select** | Click to place points that define the vertices of a polygon. Double-click to close the shape. Splats within the polygon will be selected. This is useful for precise selections with straight edges. |
-| [Image: Brush Select] **Brush Select** | Click and drag to paint a selection using a circular brush. Adjust the brush size with the `[` (decrease) and `]` (increase) keys. Ideal for organic selection work. |
-| [Image: Flood Select] **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold slider (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters) that appear isolated in the scene. |
-| [Image: Eyedropper Select] **Eyedropper Select** | Click on the viewport to select splats based on color similarity. A threshold slider (0-1) controls the sensitivity of the color matching. This tool is useful for selecting groups of splats that share similar colors. |
-| [Image: Sphere Select] **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center. Use the translate gizmo to move the sphere, and adjust the radius value in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. |
-| [Image: Box Select] **Box Select** | Creates a 3D rectangular volume for volumetric selection. Double-click anywhere in the scene to position the box center. Use the translate gizmo to move the box, and adjust the dimensions (LenX, LenY, LenZ) in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. This is ideal for selecting splats within a specific region of 3D space. |
-
-</div>
-
-### Selection Modifiers
-
-All 2D selection tools (Picker, Lasso, Polygon, Brush, Flood, Eyedropper) support modifier keys to control how the selection is applied:
-
-| Modifier | Action |
-|----------|--------|
-| **None** | Replace the current selection with the new selection |
-| **Shift** | Add to the current selection |
-| **Ctrl / Cmd** | Remove from the current selection |
-
-The 3D selection tools (Sphere Select, Box Select) have **Set**, **Add**, and **Remove** buttons in their toolbar instead of using modifier keys.
-
-### Deleting Splats
-
-Once you are happy with your selection, you can delete it with the **Delete** key.
-
-## Transforming Splats
-
-SuperSplat can translate, rotate and scale splats. To do this, select a splat in the Scene Manager and activate one of the gizmos via the horizontal icon bar.
-
-To achieve fine grain control over the transform of the selected splat, you can use the TRANSFORM panel (below the SCENE MANAGER panel).
-
-To set the origin of the currently active gizmo, double click anywhere in the 3D view.
-
-## Measuring and Rescaling Splats
-
-SuperSplat provides a measurement tool to help you measure distances within your splat scene and rescale it based on real-world measurements. This is accessible via the Measurement icon in the bottom toolbar.
-
-**To use the measurement tool:**
-
-1. Click the Measurement icon in the bottom toolbar to activate the tool.
-2. Click in the Viewport to place the first marker.
-3. Click again to place the second marker.
-4. Click on either marker to activate the translation gizmo and tweak its location.
-5. The length between the two markers is displayed in a popup above the bottom toolbar.
-
-**To rescale the scene:**
-
-- Edit the length value in the popup to rescale the entire scene based on that modified length.
-
-**Keyboard shortcuts:**
-
-- Press `Delete` to remove the placed markers.
-- Press `Escape` to deactivate the Measurement tool.
-
-## Merging Splats
-
-It is possible to merge multiple `.ply` files together and output a single, combined `.ply` file. Simply load any number of `.ply` files into Scene Manager, perform whatever transformations and edits you require, and then save the result via the `File` > `Save` menu item.
-
---------------------------------------------------------------------------------
-
-## Import and Export
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/import-export/
-
-SuperSplat's import and export capabilities are essential for working with Gaussian Splat data throughout your entire workflow. Import allows you to bring in splat scenes from various capture tools and formats for editing, cleanup, and optimization. Once your editing work is complete, export enables you to save your refined splats in the optimal format for your target platform - whether that's a compressed format for web deployment, a full-quality PLY for archival, or a standalone HTML viewer for easy sharing. This flexibility ensures SuperSplat can integrate seamlessly into any Gaussian Splat production pipeline.
-
-## Supported File Formats {#supported-file-formats}
-
-SuperSplat works with several file formats for Gaussian Splat scenes:
-
-| Format | Import | Export | Description |
-| ------ | ------ | ------ | ----------- |
-| `.ply` | ✅ | ✅ | Standard PLY format - most common interchange format, widely supported but heavyweight |
-| `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
-| `.sog` | ✅ | ✅ | Bundled super-compressed format (a zip file containing `meta.json` and `.webp` textures). Recommended for runtime applications |
-| `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](../splat-transform.md) CLI tool to export |
-| `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
-| `.lcc` | ✅ | ❌ | XGRIDS proprietary format which contains multiple levels-of-detail. Imports the highest LOD that contains less than 20 million Gaussians |
-| `.html` / `.zip` | ❌ | ✅ | Standalone HTML viewer app - embeds compressed splat data for web sharing |
-
-:::warning
-
-Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY file types will fail to import.
-
-:::
-
-## Importing Splats
-
-SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.lcc`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
-
-There are four ways to load a Gaussian Splat file:
-
-1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc` or unbundled SOG), drag the parent folder containing those files.
-2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system.
-3. **Direct file opening** - If you have installed SuperSplat as a PWA, you can double-click a splat file in File Explorer (Windows) or Finder (macOS).
-4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<PLY_URL>`. For example:
-
-    https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply
-
-    This is particularly useful for sharing splats with others on social platforms like X and LinkedIn.
-
-### Importing PLY Sequences {#ply-sequences}
-
-SuperSplat supports importing sequences of PLY files to create splat animations. This allows you to view animated Gaussian Splats where each PLY file represents a single frame in the animation.
-
-To import a PLY sequence:
-
-1. Ensure your PLY files follow a naming convention with sequential frame numbers appended, such as:
-   - `animation_0001.ply`
-   - `animation_0002.ply`
-   - `animation_0003.ply`
-   - etc.
-
-2. Load the sequence into SuperSplat by either:
-   - **Dragging and dropping** all the PLY files from your file system into SuperSplat
-   - **Dragging and dropping** a folder containing the PLY files onto SuperSplat
-   - Using **File > Import** and selecting multiple PLY files
-
-Once loaded, SuperSplat will automatically recognize the sequence and enable the [Timeline](timeline.md) panel, allowing you to:
-
-- Step through frames using the arrow buttons
-- Play the animation using the play button
-- Scrub through the animation using the timeline slider
-
-:::note
-
-PLY sequences are memory-intensive since each frame loads a complete splat scene. For optimal performance, consider the file sizes and number of frames when working with animated splats.
-
-:::
-
-## Exporting Splats
-
-To export your currently loaded scene, open the `File` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
-
-For information about exporting and hosting HTML viewers for your splats, see the [Publishing](publishing.md#self-hosting-the-supersplat-viewer) guide.
-
---------------------------------------------------------------------------------
-
-## Interface Overview
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/interface/
-
-The SuperSplat Editor's interface appears as follows:
-
-[Image: supersplat-interface]
-
-The key elements of the interface are labeled:
-
-## Menu Bar
-
-The Menu Bar gives you access to the most commonly used functions in the SuperSplat Editor.
-
-* **File Menu:** Load and save your projects. Import and export to/from popular file formats.
-* **Select Menu:** Perform common selection based operations on your loaded scene.
-* **Render Menu:** Render an image or a video of your currently loaded scene.
-* **Help Menu:** Access developer resources related to SuperSplat.
-
-### Scene Manager
-
-The Scene Manager allows you to manage multiple loaded Gaussian Splat scenes (typically loaded from imported PLY files). You can also use this panel to set the transform of the selected scene.
-
-### Viewport
-
-The 3D viewport where you can visually edit your scenes. The viewport has a 2D grid to help orient yourself in the scene. By default, the grid lies in the XZ plane (with the world Y axis pointing upwards). The X axis is colored red and the Z axis is blue. Major grid divisions occur at 1 meter intervals (and smaller grid divisions are at 10cm intervals).
-
-### View Cube
-
-The View Cube is a gizmo that gives added control over the viewport camera. You can click on any of the circles to switch to an orthographic view of the scene from one of six directions. This can make it easier to make accurate selections in certain circumstances.
-
-### Right Toolbar
-
-This vertical toolbar contains icons related to splat visualization, camera controls and application settings.
-
-### Bottom Toolbar
-
-This horizontal toolbar contains icons related to undo/redo, splat selection and transformation.
-
-### Animation Timeline
-
-The Timeline allows you to create and delete keyframes for the viewport camera. It also allows you to play back (or scrub through) the animation you have configured.
-
-### Histogram Panel
-
-This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics.
-
---------------------------------------------------------------------------------
-
-## Managing Projects
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/managing-projects/
-
-SuperSplat supports the `.ssproj` file format, allowing you to save and reload your work, preserving all settings and animations. This format provides an efficient way to manage projects, share work, and continue editing at a later time.
-
-## Features of `.ssproj` Files
-
-* Full Project Save: Stores all relevant project data, including app settings, timeline settings and more.
-* Easy Reloading: Load a saved project file to restore the exact state of your work.
-* Portability: Share `.ssproj` files with others to collaborate on projects.
-
-## Saving a Project
-
-To save your current work as a `.ssproj` file:
-
-* Open the `File` menu.
-* Select `Save As`.
-* Choose a location and enter a name for your project.
-* Click Save. Your project will be stored as a `.ssproj` file.
-
-## Loading a Project
-
-To load a previously saved `.ssproj` file:
-
-* Open the `File` menu.
-* Select `Open`.
-* Browse to the `.ssproj` file you wish to open.
-* Click `Open`. SuperSplat will restore your project to its last saved state.
-
-## File Structure
-
-The `.ssproj` format is actually a ZIP archive containing:
-
-* A JSON-based file that stores project-specific metadata, such as app settings and timeline settings.
-* One or more uncompressed `.ply` files (these are listed in the `Scenes` panel on load).
-
-## Best Practices
-
-* Save Regularly: To prevent data loss, save your project frequently.
-* Use Versioning: When working on major changes, save multiple versions of your project to avoid accidental overwrites.
-* Backup Your Files: Store backups of important `.ssproj` files in a cloud storage service or external drive.
-
-By utilizing the `.ssproj` format, SuperSplat users can efficiently manage and share their projects, enhancing workflow and collaboration.
-
---------------------------------------------------------------------------------
-
-## Publishing
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/publishing/
-
-SuperSplat provides two ways to share your splat scenes with the world:
-
-1. **Publishing to SuperSplat** - Host your splats on [superspl.at](https://superspl.at) for easy sharing
-2. **Self-Hosting the SuperSplat Viewer** - Export a standalone HTML viewer to host anywhere
-
-## Publishing to SuperSplat
-
-The SuperSplat Editor allows you to publish your splat scenes to the web at [https://superspl.at/](https://superspl.at/).
-
-[Image: SuperSplat Website]
-
-### Ensuring you are Logged In
-
-Publishing splats requires you to be logged in.
-
-Before you begin, you must have [created a PlayCanvas account](/user-manual/account-management/user-accounts/account-creation) and be logged in at [playcanvas.com](https://playcanvas.com). You must then also log in at [superspl.at](https://superspl.at) (via the `Login` button in the top right). Verify you are logged in by checking that your account avatar is displayed in the top right of the page on [superspl.at](https://superspl.at).
-
-### Publishing your Splats
-
-To publish your splat:
-
-1. Open the `File` menu.
-2. Select `Publish`.
-3. Fill out the options in the Publish dialog:
-
-   [Image: Publish Settings]
-
-   | Option | Description |
-   |--------|-------------|
-   | **Publish to** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
-   | **Title** | A short title that will appear below your splat's thumbnail once it is published |
-   | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
-   | **Listed** | If checked, the splat will be returned in searches on the SuperSplat website. If unchecked, the splat will only be discoverable by anyone who has the link |
-   | **Start Position** | The starting position to use for the viewer's camera:<br/>• **Default**: The viewer does its best to pick a suitable start point<br/>• **Current Viewport**: Use the current camera position as set in the SuperSplat Editor's viewport<br/>• **1st Camera Frame**: Use the first camera's position as defined by the first frame of the Timeline |
-   | **Animation** | The animation to apply to the viewer's camera:<br/>• **None**: No animation<br/>• **Track**: Animate the camera using keyframes set on the SuperSplat Editor's Timeline |
-   | **Background** | The background color of the viewer |
-   | **Field of View** | The vertical field of view of the viewer's camera in degrees |
-   | **SH Bands** | The number of spherical harmonics bands to be written out to the published compressed PLY file |
-
-4. Select `Publish`.
-
-:::note
-
-It may take several minutes to compress your splat to SOG format during the publishing process, so be patient! ⏳
-
-:::
-
-Once the publish process is complete, a modal dialog will show with the URL of your published splat. Copy it and share it with whoever you like.
-
-### Managing your Published Splats
-
-After publishing splats to [superspl.at](https://superspl.at), you can manage them by visiting your [Manage page](https://superspl.at/manage). From here, you can perform the following actions on each published splat:
-
-| Action | Description |
-|--------|-------------|
-| **Edit Title** | Update the splat's main title |
-| **Edit Description** | Update the description shown on the splat's viewer page |
-| **List/Unlist** | Toggle whether the splat appears in public searches on the SuperSplat website |
-| **Delete** | Permanently remove the splat from superspl.at (this cannot be undone) |
-
-## Self-Hosting the SuperSplat Viewer
-
-The viewer used on the SuperSplat website is [open source](https://github.com/playcanvas/supersplat-viewer) and can be directly exported by the SuperSplat Editor should you wish to self-host your splat content. This viewer runs in any web browser with easy-to-use camera controls and even supports AR and VR visualization for devices that support WebXR.
-
-### Exporting the HTML Viewer
-
-To export your splat as an HTML viewer:
-
-1. Open the `File` > `Export` submenu.
-2. Select `Viewer App…`.
-
-### Export Options
-
-The viewer export can be configured via several options:
-
-[Image: Viewer Export]
-
-| Option | Description |
-|--------|-------------|
-| **Export Type** | Controls the format of the exported viewer:<br/>• **HTML**: A single-page `.html` file where the splat is Base64 encoded and embedded directly into the file. Very convenient since everything is packed into a single file that can be double-clicked to run in your browser using the `file://` protocol. However, the base64 encoding means it will be roughly 30% larger than the ZIP Package format, and browsers impose different limits on the maximum size (below 32MB should load everywhere, but above this you could encounter problems)<br/>• **ZIP Package**: A zip file containing the viewer `.html` file and a separate `.compressed.ply` containing the splat. Smaller, loads faster and guaranteed to load everywhere. However, it will only load over `http://`, so you will need to run a local web server (e.g. Node's [`serve`](https://www.npmjs.com/package/serve) or Python's [`SimpleHTTPServer`](https://docs.python.org/2/library/simplehttpserver.html)) |
-| **Start Position** | The starting position to use for the viewer's camera:<br/>• **Default**: The viewer does its best to pick a suitable start point<br/>• **Current Viewport**: Use the current camera position as set in the SuperSplat Editor's viewport<br/>• **1st Camera Frame**: Use the first camera's position as defined by the first frame of the Timeline |
-| **Animation** | The animation to apply to the viewer's camera:<br/>• **None**: No animation<br/>• **Track**: Animate the camera using keyframes set on the SuperSplat Editor's Timeline |
-| **Background** | The background color of the viewer |
-| **Field of View** | The vertical field of view of the viewer's camera in degrees |
-| **SH Bands** | The number of spherical harmonics bands to be written out to the published compressed PLY file |
-
-### Web Hosting for the HTML Viewer
-
-Once exported, you can host the HTML Viewer file somewhere to make it accessible. One easy option is to use GitHub Pages:
-
-1. Create a new repository on [GitHub](https://github.com).
-2. Add the exported HTML file (and the `.compressed.ply` file if you exported the viewer as a ZIP package).
-3. Visit your repository's `Settings` page. Select `Pages` on the left. Ensure `Source` is set to `Deploy from a branch` and set `Branch` to `main` and hit `Save`.
-4. It will take a few moments for your viewer to be published. The URL will be in the form:
-
-   `https://<github-username>.github.io/<repository-name>/<html-filename>`
-
---------------------------------------------------------------------------------
-
-## Rendering Media
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/rendering/
-
-SuperSplat enables you to render high-quality images and videos directly from your 3D Gaussian Splats. Whether you want to create a single frame for social media, showcase your creations with animated videos, embed them on your website, or keep them locally, this guide will help you get started.
-
-:::important
-
-Both images and videos are rendered entirely locally on your device. No render data or splat information is uploaded to any external server.
-
-:::
-
-## Getting Started
-
-To render from your splat:
-
-1. Open your splat in the [SuperSplat Editor](https://superspl.at/editor).
-2. Position your camera for the desired view (for images) or set up camera animations on the [Timeline](timeline.md) (for videos).
-3. Click the `Render` menu in the menu bar and select either `Image` or `Video`.
-
-## Image Rendering
-
-Image rendering creates a single high-quality frame from your current camera position.
-
-### Image Settings
-
-When you select `Image` from the Render menu, a dialog will appear with settings to customize your image:
-
-- **Preset:** Choose from the following preset options:
-  - `Current` (default) - Uses the current viewport resolution
-  - `HD` - `1920x1080` resolution
-  - `QHD` - `2560x1440` resolution  
-  - `4K` - `3840x2160` resolution
-  - `Custom` - Allows manual resolution selection
-- **Resolution:** Only active when `Custom` preset is selected. Allows you to specify custom width and height values.
-- **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays.
-- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the image.
-
-### Rendering the Image
-
-Once you've configured your settings:
-
-1. Click the `Render` button.
-2. The image will be rendered at the current camera position.
-3. On completion, your image will auto-download.
-
-## Video Rendering
-
-Video rendering creates an animated sequence using camera animations from the Timeline.
-
-### Video Settings
-
-When you select `Video` from the Render menu, a dialog will appear with several settings to customize your video:
-
-- **Resolution:** Choose from the following resolutions:
-  - `960x540`
-  - `1280x720`
-  - `1920x1080` (default)
-  - `2560x1440`
-  - `3840x2160`
-- **Format:** Choose the output video format:
-  - `MP4` (default) - Most widely compatible format, ideal for general use
-  - `WebM` - Open format, excellent for web use
-  - `MOV` - Apple QuickTime format, ideal for professional video editing workflows
-  - `MKV` - Flexible open container format supporting various codecs
-- **Codec:** Choose the video codec for compression. Available options depend on the selected format:
-  - For MP4 and MOV: `H.264` (default), `H.265/HEVC`
-  - For WebM: `VP9` (default), `AV1`
-  - For MKV: `H.264` (default), `H.265/HEVC`, `VP9`, `AV1`
-- **Frame Rate:** Choose from the following frame rates:
-  - `12 fps`
-  - `15 fps`
-  - `24 fps`
-  - `25 fps`
-  - `30 fps` (default)
-  - `48 fps`
-  - `60 fps`
-  - `120 fps`
-- **Bitrate:** Adjust the quality of your video by choosing a higher or lower bitrate. Options are:
-  - `Low`
-  - `Medium`
-  - `High` (default)
-  - `Ultra`
-- **Frame Range:** Specify the start and end frames from the Timeline to include in your video. By default, the entire Timeline is rendered.
-- **Portrait Mode:** If checked, the resolution will be flipped to be vertical. This is useful if you intend your video to be viewed in portrait on mobile.
-- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the video.
-
-### Rendering the Video
-
-Once you've configured your settings:
-
-1. Click the `Render` button.
-2. The Timeline pointer will animate through all frames until video encoding is complete.
-3. On completion, your video will auto-download.
-
-:::tip Browser Recommendation for Video Rendering
-
-We recommend using a Chromium-based browser (Chrome, Edge, Opera, etc.) for rendering videos. Browsers that support the [FileSystem API](https://caniuse.com/native-filesystem-api) will ask you to pick a destination filename and will then stream out the file during the encoding process instead of having to do it in memory. This allows for the recording of much larger videos without running into memory limitations.
-
-:::
-
-## Tips for Best Results
-
-- **For Images:** Position your camera carefully and consider the composition before rendering. Higher resolutions will provide more detail for print or web use.
-- **For Videos:** Before rendering, ensure your Timeline animations are smooth and camera movements are polished.
-- **For Social Media:** Portrait-mode renders often yield better engagement on mobile platforms.
-- **Debug Overlays:** Use the debug overlay option when you need to show splat data for educational or technical presentations.
-
-Happy Rendering! 🎬📸
-
---------------------------------------------------------------------------------
-
-## Timeline
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/supersplat/timeline/
-
-The Timeline panel allows you to create camera animations for your Gaussian Splat scenes. You can set keyframes to define camera positions and movements, creating smooth animated transitions that can be played back in the editor.
-
-[Image: Timeline Panel]
-
-## Timeline Controls
-
-The Timeline panel includes the following controls:
-
-- **Play/Stop button** - Play or stop the animation playback
-- **Next/Previous Key buttons** - Jump to the next or previous keyframe
-- **Add Key button (`+`)** - Create a new keyframe at the current timeline position
-- **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
-- **Timeline slider** - Scrub through the animation by dragging the playhead (which displays the current frame number)
-- **FPS setting** - Set the frames per second for the animation
-- **Timeline length** - Set the total duration of the animation in frames
-- **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
-
-## Creating Keyframes
-
-To create a camera animation keyframe:
-
-1. Position the timeline playhead at the desired frame (by clicking on the timeline or using the frame counter)
-2. Move and orient the viewport camera to the desired position
-3. Click the `+` (Add Keyframe) button on the Timeline
-
-The keyframe will appear as a yellow diamond on the timeline at the current frame position. Keyframes store the camera's position and rotation at that moment in time.
-
-## Importing Camera Poses as Keyframes
-
-SuperSplat can import camera poses from [COLMAP](https://colmap.github.io/) reconstructions to automatically create timeline keyframes. This feature allows you to recreate the approximate camera path that was used during the original scanning of your Gaussian Splat scene.
-
-To import camera poses:
-
-1. Obtain the [`images.txt`](https://colmap.github.io/format.html#images-txt) file from your COLMAP reconstruction output
-2. In SuperSplat, select **File > Import** (or drag and drop the `images.txt` file)
-3. SuperSplat will create keyframes from the camera poses in the file
-
-Each camera pose in the `images.txt` file will be placed as a keyframe on sequential frames of the timeline, in the order they appear in the file. This creates an animation that follows the original capture path.
-
-:::note
-
-The `images.txt` file contains camera poses expressed as quaternions and translation vectors in COLMAP's coordinate system. SuperSplat automatically converts these to the appropriate camera positions and orientations for the timeline.
-
-:::
-
-## Editing Keyframes
-
-Once keyframes are created, you can modify them in two ways:
-
-### Changing Keyframe Timing
-
-Click and drag the yellow diamond keyframes along the timeline to adjust when each camera position occurs in your animation.
-
-### Updating Camera Position/Rotation
-
-To change the camera position or rotation stored in an existing keyframe:
-
-1. Move the playhead to the frame containing the keyframe you want to update
-2. Adjust the viewport camera to the new desired position and rotation
-3. Click the `+` (Add Key) button - this will overwrite the existing keyframe with the updated camera values
-
-## Deleting Keyframes
-
-To delete a keyframe:
-
-1. Move the playhead to the frame containing the keyframe you want to delete
-2. Click the `-` (Remove Key) button
-
-## Configuring Timeline Settings
-
-### Frames Per Second (FPS)
-
-The FPS setting controls the playback speed of your animation. Available FPS values are:
-
-- **1 FPS** - Very slow, single frame per second
-- **6 FPS** - Low frame rate
-- **12 FPS** - Medium frame rate
-- **24 FPS** - Standard film frame rate
-- **30 FPS** - Common video frame rate
-- **60 FPS** - Smooth, high frame rate playback
-
-### Timeline Length
-
-You can set the total duration of your animation by adjusting the timeline length setting. This defines how many frames your animation spans and determines when the animation loops back to the beginning.
-
-### Smoothness
-
-The Smoothness setting controls how the camera interpolates between keyframes. This value ranges from 0 to 1:
-
-- **0** - Linear interpolation, creating direct straight-line motion between keyframes
-- **1** - Maximum smooth interpolation, creating more curved, cinematic camera movements
-- **Values in between** - Blend between linear and smooth interpolation
-
-Adjusting smoothness allows you to control the feel of your camera animation, from mechanical and precise to flowing and organic.
-
-## Playing Animations
-
-Use the play button to preview your animation. The camera will interpolate between keyframes based on your smoothness setting, creating fluid motion. The animation will loop continuously from the first frame back to the beginning.
-
-### Animation Looping
-
-The animation automatically loops from the last frame back to the first frame. To create seamless loops, it's important to avoid setting a keyframe on both the first and last frames of the timeline, as this will cause a sudden snap when the animation loops.
-
-:::tip[Best Practice for Smooth Loops]
-
-Instead of placing keyframes on both the first and last frames, place your final keyframe before the last frame and let the animation interpolate smoothly back to the beginning.
-
-For example, with a 100-frame timeline:
-
-- **Good:** Set keyframes at frames 0, 10, 20, 30, 40, 50, 60, 70, 80, 90
-  - The animation smoothly interpolates from frame 90 back to frame 0
-- **Avoid:** Setting keyframes at frames 0, 10, 20, ... 90, 100
-  - This causes a snap/jerk when looping from frame 100 back to frame 0
-
-This technique allows the camera to smoothly transition from your last keyframe back to the starting position, creating a seamless loop.
-
-:::
-
-## Saving Timeline Animations
-
-:::important
-
-Timeline animations are only preserved when you save your project as an `.ssproj` file. The timeline configuration is not saved when exporting to PLY or other splat formats.
-
-See [Managing Projects](managing-projects.md) for more information on saving and loading SuperSplat project files.
-
-:::
 
 --------------------------------------------------------------------------------
 
@@ -22792,7 +21403,7 @@ Compressed format optimized for web delivery. 15-20× smaller than PLY with loss
 ## Workflow
 
 1. Train and edit with **PLY**
-2. Convert to **SOG** for production using [SplatTransform](../editing/splat-transform.md)
+2. Convert to **SOG** for production using [SplatTransform](/user-manual/splat-transform/)
 3. Deploy SOG files for optimal performance
 
 --------------------------------------------------------------------------------
@@ -22902,8 +21513,8 @@ The PLY format serves as the lingua franca of the 3DGS ecosystem:
 ### Universal Compatibility
 
 - **Training Software**: Brush, nerfstudio, Postshot
-- **Editors**: [SuperSplat Editor](../editing/supersplat/index.md)
-- **Converters**: [SplatTransform](../editing/splat-transform.md)
+- **Editors**: [SuperSplat Editor](/user-manual/supersplat/)
+- **Converters**: [SplatTransform](/user-manual/splat-transform/)
 - **Viewers**: [SuperSplat Viewer](https://github.com/playcanvas/supersplat-viewer), [Model Viewer](https://github.com/playcanvas/model-viewer)
 
 ### Cross-Platform Workflow
@@ -22937,7 +21548,7 @@ While PLY is excellent for source and interchange purposes, it has significant l
 
 :::tip
 
-Convert your PLYs to a more efficient run-time format using the [SplatTransform](../editing/splat-transform.md) tool. We currently recommend Self-Organizing Gaussians (AKA SOGS) to achieve the best compression ratios and fastest loading times.
+Convert your PLYs to a more efficient run-time format using the [SplatTransform](/user-manual/splat-transform/) tool. We currently recommend Self-Organizing Gaussians (AKA SOGS) to achieve the best compression ratios and fastest loading times.
 
 :::
 
@@ -34807,6 +33418,1395 @@ For functional bugs, feature requests, and general questions, please use the app
 - **Help and discussion** — visit the [Forum](https://forum.playcanvas.com) or [Discord](https://discord.gg/RSaMRzg).
 
 Thank you for helping keep PlayCanvas and its users safe.
+
+--------------------------------------------------------------------------------
+
+## SplatTransform
+
+URL: https://developer.playcanvas.com/user-manual/splat-transform/
+
+[SplatTransform](https://github.com/playcanvas/splat-transform) is an open source library and CLI tool for converting and editing Gaussian splats. Whether you need to convert between formats, apply transformations, or analyze splat data, SplatTransform provides the tools developers need for precise control over their Gaussian splat workflows. The library is platform-agnostic and can be used in both Node.js and browser environments.
+
+:::note Open Source
+
+SplatTransform is [open-sourced under an MIT license on GitHub](https://github.com/playcanvas/splat-transform)
+
+:::
+
+## Why Use SplatTransform?
+
+SplatTransform solves important problems developers face when working with Gaussian splats:
+
+🔄 **Broad Format Support** — seamlessly convert between PLY, SPLAT, KSPLAT, SOG and even CSV  
+🛠️ **Powerful Transformations** — translate, rotate, and scale your splats with precision  
+🧹 **Smart Filtering** — remove NaN values, filter by properties, and strip unnecessary data  
+📊 **Statistical Analysis** — generate per-column statistics for data analysis  
+📦 **Scene Merging** — combine multiple splat files into a merged scene  
+⚡ **Production Ready** — optimized for maximum performance  
+🆓 **Open Source** — completely free and available on GitHub
+
+## Installation
+
+Install or update to the latest version:
+
+```bash
+npm install -g @playcanvas/splat-transform
+```
+
+For library usage, install as a dependency:
+
+```bash
+npm install @playcanvas/splat-transform
+```
+
+Verify your CLI installation:
+
+```bash
+splat-transform --version
+```
+
+## Basic Usage
+
+The general syntax for SplatTransform is:
+
+```bash
+splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
+```
+
+**Key points:**
+
+- Input files become the working set; ACTIONS are applied in order
+- The last file is the output; actions after it modify the final result
+- Use `null` as output to discard file output (useful with `--summary`)
+
+### Format Conversion
+
+Convert between commonly used splat formats with simple commands:
+
+```bash
+# Simple format conversion
+splat-transform input.ply output.csv
+
+# Convert from .splat format
+splat-transform input.splat output.ply
+
+# Convert from .ksplat format
+splat-transform input.ksplat output.ply
+
+# Convert to compressed PLY
+splat-transform input.ply output.compressed.ply
+
+# Uncompress a compressed PLY back to standard PLY
+# (compressed .ply is detected automatically on read)
+splat-transform input.compressed.ply output.ply
+
+# Convert to SOG bundled format
+splat-transform input.ply output.sog
+
+# Convert to SOG unbundled format
+splat-transform input.ply output/meta.json
+
+# Convert from SOG (bundled) back to PLY
+splat-transform scene.sog restored.ply
+
+# Convert from SOG (unbundled folder) back to PLY
+splat-transform output/meta.json restored.ply
+
+# Convert to standalone HTML viewer (bundled, single file)
+splat-transform input.ply output.html
+
+# Convert to unbundled HTML viewer (separate CSS, JS, and SOG files)
+splat-transform -U input.ply output.html
+
+# Convert to HTML viewer with custom settings
+splat-transform -E settings.json input.ply output.html
+```
+
+SplatTransform detects file format based on extension. Supported formats are shown below:
+
+| Format | Input | Output | Description |
+| ------ | ----- | ------ | ----------- |
+| `.ply` | ✅ | ✅ | Standard PLY format |
+| `.sog` | ✅ | ✅ | Bundled super-compressed format (recommended) |
+| `meta.json` | ✅ | ✅ | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** be `meta.json` |
+| `lod-meta.json` | ❌ | ✅ | LOD streaming format with octree structure for progressive loading. Output filename **must** be `lod-meta.json` |
+| `.compressed.ply` | ✅ | ✅ | Compressed PLY format (auto-detected and decompressed on read) |
+| `.lcc` | ✅ | ❌ | LCC file format (XGRIDS) |
+| `.ksplat` | ✅ | ❌ | Compressed splat format (mkkellogg format) |
+| `.splat` | ✅ | ❌ | Compressed splat format (antimatter15 format) |
+| `.spz` | ✅ | ❌ | Compressed splat format (Niantic format) |
+| `.mjs` | ✅ | ❌ | Generate a scene using an mjs script (Beta) |
+| `.csv` | ❌ | ✅ | Comma-separated values spreadsheet |
+| `.html` | ❌ | ✅ | HTML viewer app (single-page or unbundled) based on SOG |
+
+## Actions
+
+Actions can be repeated and applied in any order to transform and filter your splats:
+
+```none
+-t, --translate        <x,y,z>          Translate splats by (x, y, z)
+-r, --rotate           <x,y,z>          Rotate splats by Euler angles (x, y, z) in degrees
+-s, --scale            <factor>         Uniformly scale splats by factor
+-H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
+-N, --filter-nan                        Remove Gaussians with NaN or Inf values
+-B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
+-S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
+-V, --filter-value     <name,cmp,value> Keep splats where <name> <cmp> <value>
+                                          cmp ∈ {lt,lte,gt,gte,eq,neq}
+-p, --params           <key=val,...>    Pass parameters to .mjs generator script
+-l, --lod              <n>              Specify the level of detail of this model, n >= 0
+-m, --summary                           Print per-column statistics to stdout
+```
+
+## Global Options
+
+```none
+-h, --help                              Show this help and exit
+-v, --version                           Show version and exit
+-q, --quiet                             Suppress non-error output
+-w, --overwrite                         Overwrite output file if it exists
+-i, --iterations       <n>              Iterations for SOG SH compression (more=better). Default: 10
+-L, --list-gpus                         List all available GPU adapters and exit
+-g, --gpu              <n|cpu>          Select device for SOG compression: GPU adapter index | 'cpu'
+-E, --viewer-settings  <settings.json>  HTML viewer settings JSON file
+-U, --unbundled                         Generate unbundled HTML viewer with separate files
+-O, --lod-select       <n,n,...>        Comma-separated LOD levels to read from LCC input
+-C, --lod-chunk-count  <n>              Approx number of Gaussians per LOD chunk in K. Default: 512
+-X, --lod-chunk-extent <n>              Approx size of an LOD chunk in world units (m). Default: 16
+```
+
+:::note
+
+See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `-E` option.
+
+:::
+
+## Transformations
+
+### Apply Spatial Transformations
+
+Transform your splats during conversion with intuitive command-line options:
+
+```bash
+# Scale and translate
+splat-transform bunny.ply -s 0.5 -t 0,0,10 bunny_scaled.ply
+
+# Rotate by 90 degrees around Y axis
+splat-transform input.ply -r 0,90,0 output.ply
+
+# Chain multiple transformations
+splat-transform input.ply -s 2 -t 1,0,0 -r 0,0,45 output.ply
+```
+
+## Filtering and Optimization
+
+### Smart Filtering
+
+Remove unwanted data and optimize your splats for production:
+
+```bash
+# Remove entries containing NaN and Inf
+splat-transform input.ply --filter-nan output.ply
+
+# Filter by opacity values (keep only splats with opacity > 0.5)
+splat-transform input.ply -V opacity,gt,0.5 output.ply
+
+# Strip spherical harmonic bands higher than 2
+splat-transform input.ply --filter-harmonics 2 output.ply
+```
+
+## Scene Merging
+
+Combine multiple splat files into a single scene with individual transformations:
+
+```bash
+# Combine multiple files with different transforms
+splat-transform -w cloudA.ply -r 0,90,0 cloudB.ply -s 2 merged.compressed.ply
+
+# Apply final transformations to combined result
+splat-transform input1.ply input2.ply output.ply -t 0,0,10 -s 0.5
+```
+
+## Statistical Summary
+
+Generate per-column statistics for data analysis or validation:
+
+```bash
+# Print summary, then write output
+splat-transform input.ply --summary output.ply
+
+# Print summary without writing a file (discard output)
+splat-transform input.ply -m null
+
+# Print summary before and after a transform
+splat-transform input.ply --summary -s 0.5 --summary output.ply
+```
+
+The summary includes min, max, median, mean, stdDev, nanCount and infCount for each column in the data.
+
+## CSV Export for Data Analysis
+
+One of SplatTransform's most powerful features is CSV export, enabling data science workflows:
+
+```bash
+# Export splat data to CSV
+splat-transform scene.ply data.csv
+
+# Pre-filter before exporting for analysis
+splat-transform input.ply --filter-nan -V opacity,gt,0.1 analysis.csv
+```
+
+### Why CSV Export Matters
+
+- **Spreadsheet Analysis** — Import directly into Excel, Google Sheets, or any data analysis tool
+- **Statistical Insights** — Calculate distributions, correlations, and quality metrics
+- **Custom Filtering** — Use spreadsheet formulas to identify outliers or segment data
+- **Visualization** — Create charts and graphs to understand splat data patterns
+- **Integration** — Feed splat data into machine learning pipelines or custom workflows
+
+CSV export transforms your splats from opaque binary files into readable, analyzable datasets perfect for research and optimization.
+
+## Device Selection for SOG Compression
+
+When compressing to SOG format, you can control which device (GPU or CPU) performs the compression:
+
+```bash
+# List available GPU adapters
+splat-transform --list-gpus
+
+# Let WebGPU automatically choose the best GPU (default behavior)
+splat-transform input.ply output.sog
+
+# Explicitly select a GPU adapter by index
+splat-transform -g 0 input.ply output.sog  # Use first listed adapter
+splat-transform -g 1 input.ply output.sog  # Use second listed adapter
+
+# Use CPU for compression instead (much slower but always available)
+splat-transform -g cpu input.ply output.sog
+```
+
+:::note
+
+When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `-L` to list available adapters with their indices and names. The order and availability of adapters depends on your system and GPU drivers.
+
+:::
+
+:::warning
+
+CPU compression can be significantly slower than GPU compression (often 5-10x slower). Use CPU mode only if GPU drivers are unavailable or problematic.
+
+:::
+
+## Generators (Beta)
+
+Generator scripts can be used to synthesize gaussian splat data. This allows you to procedurally create splat scenes using JavaScript:
+
+```bash
+splat-transform gen-grid.mjs -p width=10,height=10,scale=10,color=0.1 scenes/grid.ply -w
+```
+
+See the [example generator scripts](https://github.com/playcanvas/splat-transform/tree/main/generators) in the GitHub repository for more details.
+
+## Common Workflows
+
+### Production Optimization Pipeline
+
+```bash
+# Clean, limit spherical harmonic bands, and apply a scale for production
+splat-transform raw_capture.ply \
+  --filter-nan \
+  --filter-harmonics 2 \
+  -s 0.8 \
+  production/capture.sog
+```
+
+### Format Migration
+
+```bash
+# Convert existing KSPLAT assets to PlayCanvas SOG
+for file in *.ksplat; do
+  splat-transform "$file" "${file%.ksplat}.sog"
+done
+```
+
+### Quality Analysis
+
+```bash
+# Export for quality analysis in spreadsheet
+splat-transform scene.ply \
+  --filter-nan \
+  -V opacity,gt,0.05 \
+  quality_analysis.csv
+```
+
+### Multi-Scene Composition
+
+```bash
+# Combine multiple scenes with precise positioning
+splat-transform \
+  environment.ply -t 0,0,0 \
+  character.ply -t 2,0,1 -r 0,180,0 \
+  props.ply -t -3,0,2 -s 1.2 \
+  complete_scene.ply
+```
+
+### Generating LOD Format
+
+The LOD (Level of Detail) format enables efficient streaming and rendering of large gaussian splat scenes. The tool takes multiple pre-generated LOD files as input and generates an optimized streaming format with an octree structure for optimal download performance.
+
+**Note:** The tool does NOT create the LOD levels themselves - you must supply multiple LOD files with progressively fewer gaussians (LOD 0 = highest detail, higher numbers = lower detail).
+
+:::warning Output Filename Requirements
+
+The output filename determines the format. These are **not** arbitrary names:
+
+- **`lod-meta.json`** — generates LOD streaming format (multiple SOG chunks with an octree structure for progressive loading)
+- **`meta.json`** — generates unbundled SOG format (a single SOG file, no streaming)
+
+The output filename must be exactly `lod-meta.json` or `meta.json` — only the directory path before it can vary. For example: `output/lod-meta.json`, `my-scene/lod-meta.json`.
+
+:::
+
+```bash
+# Generate LOD streaming format from multiple input files
+# Each input file represents a different detail level (LOD 0 is highest quality)
+splat-transform \
+  lod0.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  lod3.ply -l 3 \
+  output/lod-meta.json \
+  --filter-nan \
+  --filter-harmonics 0
+
+# Generate LOD with custom chunk settings for better performance
+splat-transform \
+  -C 1024 \
+  -X 32 \
+  lod0.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  output/lod-meta.json \
+  --filter-nan
+
+# For very large scenes, increase Node.js memory allocation
+node --max-old-space-size=32000 node_modules/.bin/splat-transform \
+  lod0.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  lod3.ply -l 3 \
+  output/lod-meta.json \
+  --filter-nan \
+  --filter-harmonics 0
+
+# Generate LOD streaming format directly from an LCC file
+# (LCC files already contain multiple LOD levels)
+# Note: the output filename must be exactly lod-meta.json for streaming LOD,
+# or meta.json for a single unbundled SOG file
+splat-transform scene.lcc output/lod-meta.json
+```
+
+**Tips:**
+
+- Use `--filter-nan` to remove invalid gaussians before processing
+- Use `--filter-harmonics 0` to reduce file size if color detail is less critical
+- Use `-C` to control the number of generated SOG files containing splats
+- Use `-X` to control the size of each node. Increase for very large scenes to avoid generating a huge number of nodes to manage
+- For very large scenes, use Node's `--max-old-space-size` flag to give it more memory
+
+## Getting Help
+
+Get help for any command:
+
+```bash
+# General help
+splat-transform --help
+
+# Get version information
+splat-transform --version
+```
+
+For issues, feature requests, or contributions, visit the [GitHub repository](https://github.com/playcanvas/splat-transform). The project welcomes bug reports and pull requests from the community.
+
+## Library Usage
+
+SplatTransform exposes a programmatic API for reading, processing, and writing Gaussian splat data.
+
+### Basic Import
+
+```typescript
+
+    readFile,
+    writeFile,
+    getInputFormat,
+    getOutputFormat,
+    DataTable,
+    processDataTable
+} from '@playcanvas/splat-transform';
+```
+
+### Key Exports
+
+| Export | Description |
+| ------ | ----------- |
+| `readFile` | Read splat data from various formats |
+| `writeFile` | Write splat data to various formats |
+| `getInputFormat` | Detect input format from filename |
+| `getOutputFormat` | Detect output format from filename |
+| `DataTable`, `Column` | Core data structures for splat data |
+| `combine` | Merge multiple DataTables into one |
+| `transform` | Apply spatial transformations |
+| `processDataTable` | Apply a sequence of processing actions |
+| `computeSummary` | Generate statistical summary of data |
+
+### File System Abstractions
+
+The library uses abstract file system interfaces for maximum flexibility:
+
+**Reading:**
+
+- `UrlReadFileSystem` - Read from URLs (browser/Node.js)
+- `MemoryReadFileSystem` - Read from in-memory buffers
+- `ZipReadFileSystem` - Read from ZIP archives
+
+**Writing:**
+
+- `MemoryFileSystem` - Write to in-memory buffers
+- `ZipFileSystem` - Write to ZIP archives
+
+### Example: Reading and Processing
+
+```typescript
+
+    readFile,
+    writeFile,
+    getInputFormat,
+    getOutputFormat,
+    processDataTable,
+    UrlReadFileSystem,
+    MemoryFileSystem
+} from '@playcanvas/splat-transform';
+
+// Read a PLY file from URL
+const fileSystem = new UrlReadFileSystem();
+const inputFormat = getInputFormat('scene.ply');
+
+const dataTables = await readFile({
+    filename: 'https://example.com/scene.ply',
+    inputFormat,
+    options: { iterations: 10 },
+    params: [],
+    fileSystem
+});
+
+// Apply transformations
+const processed = processDataTable(dataTables[0], [
+    { kind: 'scale', value: 0.5 },
+    { kind: 'translate', value: new Vec3(0, 1, 0) },
+    { kind: 'filterNaN' }
+]);
+
+// Write to in-memory buffer
+const memFs = new MemoryFileSystem();
+const outputFormat = getOutputFormat('output.ply', {});
+
+await writeFile({
+    filename: 'output.ply',
+    outputFormat,
+    dataTable: processed,
+    options: {}
+}, memFs);
+
+// Get the output data
+const outputBuffer = memFs.files.get('output.ply');
+```
+
+### Processing Actions
+
+The `processDataTable` function accepts an array of actions:
+
+```typescript
+type ProcessAction =
+    | { kind: 'translate'; value: Vec3 }
+    | { kind: 'rotate'; value: Vec3 }       // Euler angles in degrees
+    | { kind: 'scale'; value: number }
+    | { kind: 'filterNaN' }
+    | { kind: 'filterByValue'; columnName: string; comparator: Comparator; value: number }
+    | { kind: 'filterBands'; value: 0 | 1 | 2 | 3 }
+    | { kind: 'filterBox'; min: Vec3; max: Vec3 }
+    | { kind: 'filterSphere'; center: Vec3; radius: number }
+    | { kind: 'lod'; value: number }
+    | { kind: 'summary' };
+
+type Comparator = 'lt' | 'lte' | 'gt' | 'gte' | 'eq' | 'neq';
+```
+
+### Custom Logging
+
+Configure the logger for your environment:
+
+```typescript
+
+logger.setLogger({
+    log: console.log,
+    warn: console.warn,
+    error: console.error,
+    debug: console.debug,
+    progress: (text) => process.stdout.write(text),
+    output: console.log
+});
+
+logger.setQuiet(true); // Suppress non-error output
+```
+
+--------------------------------------------------------------------------------
+
+## SuperSplat
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/
+
+[SuperSplat](https://superspl.at/editor) is PlayCanvas's free, [open-source](https://github.com/playcanvas/supersplat) Gaussian Splat editor designed specifically for production workflows. It runs entirely in the browser with no downloads required, making it accessible from anywhere.
+
+[Image: SuperSplat Interface]
+
+## Video Tutorials
+
+### Introduction to SuperSplat
+
+A great way to learn the basics on SuperSplat is to watch this video introduction:
+
+[Interactive Demo]
+
+### In-Depth Tutorial
+
+For a more comprehensive guide to using SuperSplat, check out this in-depth tutorial:
+
+[Interactive Demo]
+
+## Getting Started
+
+### Accessing SuperSplat
+
+1. **Open your browser** - Navigate to [superspl.at/editor](https://superspl.at/editor)
+2. **Load your PLY file** - Drag and drop or use the File menu
+3. **Begin editing** - Use the interface controls to navigate and edit
+
+### System Requirements
+
+- **Modern web browser** - Chrome, Firefox, Safari, or Edge
+- **WebGL 2.0 support** - Available in all modern browsers
+- **GPU acceleration** - Recommended for large splat files
+- **No installation** - Everything runs in the browser
+
+SuperSplat continues to evolve with new features and improvements. Stay updated with the latest releases and join the community to share your creations and learn from others.
+
+--------------------------------------------------------------------------------
+
+## Camera Controls
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/camera-controls/
+
+SuperSplat provides intuitive camera controls for navigating the 3D view, supporting mouse, touch, and keyboard inputs. There are two control modes: **Orbit** (default) and **Fly**.
+
+- **Orbit mode** - Camera rotates around a focal point. Best for inspecting objects from all angles.
+- **Fly mode** - Camera moves freely through the scene. Best for navigating large environments.
+
+Press **V** to toggle between modes, or use the WASD keys to automatically switch to fly mode.
+
+## Mouse Controls
+
+| Action | Orbit Mode | Fly Mode |
+|--------|------------|----------|
+| Left drag | Orbit around focal point | Look around |
+| Middle drag | Zoom | Zoom |
+| Right drag | Pan | Pan |
+| Right + Ctrl/Shift drag | Orbit | Look around |
+| Right + Alt drag | Zoom | Zoom |
+| Mouse wheel | Zoom | Move forward/backward |
+| Mouse wheel + Shift | Pan (trackpad) | — |
+| Double-click | Set focal point | Set focal point (switches to orbit) |
+
+## Touch Controls
+
+| Action | Orbit Mode | Fly Mode |
+|--------|------------|----------|
+| Single finger drag | Orbit | Look around |
+| Two-finger drag | Pan | — |
+| Two-finger pinch/spread | Zoom | Move forward/backward |
+
+## Keyboard Controls
+
+| Key | Action |
+|-----|--------|
+| **W/A/S/D** | Fly forward/left/backward/right |
+| **Q/E** | Fly down/up |
+| **Shift** | 10× faster fly speed |
+| **Alt** | 0.1× slower fly speed |
+| **V** | Toggle between orbit and fly modes |
+| **Shift + F** | Reset camera to default position |
+| **F** | Focus camera on selection |
+
+## Camera Settings
+
+Access camera settings through the **View Options** panel (gear icon):
+
+| Setting | Range | Default | Description |
+|---------|-------|---------|-------------|
+| **Field of View** | 10° - 120° | 75° | Camera viewing angle |
+| **Fly Speed** | 0.1 - 30 | 1 | Speed of WASD navigation |
+
+--------------------------------------------------------------------------------
+
+## Data Panel
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/data-panel/
+
+The SPLAT DATA panel provides statistical visualization and analysis tools for understanding the distribution of data properties across your Gaussian splats. It displays an interactive histogram that allows you to view and select splats based on their attribute values.
+
+[Image: SPLAT DATA Panel]
+
+## Overview
+
+The panel consists of three main sections:
+
+1. **Data Selector** - Choose which splat attribute to visualize
+2. **Histogram Display** - Interactive visualization of the selected data distribution  
+3. **Statistics** - Total counts for splat states
+
+The panel is located at the bottom of the interface and is collapsed by default.
+
+:::tip
+The panel can be toggled open/closed by pressing **Ctrl + D** (or **Cmd + D** on Mac) or by clicking the panel header.
+:::
+
+## Data Selector
+
+The dropdown menu allows you to select from various splat properties for visualization:
+
+| Property | Category | Description | Range/Calculation |
+|----------|----------|-------------|-------------------|
+| X | Position | Position coordinate along the X axis | - |
+| Y | Position | Position coordinate along the Y axis | - |
+| Z | Position | Position coordinate along the Z axis | - |
+| Scale X | Scale | Size of the Gaussian along the X axis | - |
+| Scale Y | Scale | Size of the Gaussian along the Y axis | - |
+| Scale Z | Scale | Size of the Gaussian along the Z axis | - |
+| Red | Color | Red channel intensity | 0-1 |
+| Green | Color | Green channel intensity | 0-1 |
+| Blue | Color | Blue channel intensity | 0-1 |
+| Hue | Color | Color hue | 0-360° |
+| Saturation | Color | Color saturation | 0-1 |
+| Value | Color | Color brightness/value | 0-1 |
+| Opacity | Color | Transparency of each splat | 0-1 |
+| Distance | Derived | Distance from the origin (0,0,0) | √(x² + y² + z²) |
+| Volume | Derived | Calculated volume of each Gaussian | scale_x × scale_y × scale_z |
+| Surface Area | Derived | Approximate surface area | scale_x² + scale_y² + scale_z² |
+
+## Histogram Visualization
+
+The histogram displays the distribution of the selected property across all non-deleted splats in the scene, with blue bars representing unselected splats and yellow bars representing selected splats. Locked and deleted splats are not shown in the histogram.
+
+### Interactive Features
+
+**Hover Information** - Hover over any histogram bar to see a tooltip displaying:
+
+- **value** - The data value for this bin
+- **cnt** - Total count of splats in this bin  
+- **percentage** - Percentage of total splats
+- **sel** - Number of selected splats in this bin
+
+**Selection by Range** - Click and drag on the histogram to highlight a range of values. A dashed yellow rectangle will appear showing your selection. Release to select all splats within that value range. Note that locked and deleted splats cannot be selected through the histogram.
+
+Use modifier keys to control the selection operation:
+
+| Modifier Key | Action | Description |
+|--------------|--------|-------------|
+| None | New Selection | Replaces the current selection with the histogram range |
+| Shift | Add to Selection | Adds the histogram range to the existing selection |
+| Ctrl | Remove from Selection | Removes the histogram range from the existing selection |
+
+**Log Scale** - Enable the Log Scale checkbox to view the histogram with a logarithmic Y-axis. This is useful when data has a wide range of values, when most splats cluster around certain values with few outliers, or when you want to better visualize the distribution of sparse data.
+
+## Statistics (Totals)
+
+The bottom section displays real-time statistics about the current splat:
+
+| Statistic | Description |
+|-----------|-------------|
+| Splats | Total number of non-deleted splats |
+| Selected | Number of currently selected splats |
+| Locked | Number of locked splats |
+| Deleted | Number of deleted splats |
+
+These values update automatically when splats are selected, deselected, locked, unlocked, deleted, or reset.
+
+## Use Cases
+
+**Finding Outliers** - Select a property like "Distance" or "Opacity", look for isolated bars at the extremes, then click and drag to select those ranges for examination or deletion.
+
+**Color-Based Selection** - Choose "Hue", "Saturation", or "Value" and select a range to isolate splats of similar colors, useful for separating objects by color in the scene.
+
+**Size-Based Selection** - Select "Volume" or "Surface Area", enable "Log Scale" for better visualization, then select ranges to find problematic splats for cleanup or adjustment.
+
+**Quality Control** - Review the distribution of properties to check if opacity is reasonable, verify scale values are within expected ranges, and identify areas that may need cleanup.
+
+## Tips
+
+- Keep the panel collapsed when not in use to improve editor performance
+- Check different properties to understand your data better  
+- Use histogram selection together with other selection tools for precise control
+- Understanding your splat distribution helps with optimization and quality improvements
+
+## Technical Notes
+
+### Data Transformations
+
+Some properties are transformed for visualization to ensure the histogram displays human-readable values rather than the internal storage format:
+
+| Property Type | Transformation |
+|---------------|----------------|
+| Scale values | Exponentiated: exp(value) |
+| Color values (RGB) | Converted from spherical harmonics: 0.5 + value × 0.28209479177387814 |
+| Opacity | Sigmoid function: 1 / (1 + exp(-value)) |
+
+### Suppressed Properties
+
+The following properties are not available for histogram visualization: **state** (internal state flag), **transform** (internal transformation data), and **f_rest_0** through **f_rest_44** (higher-order spherical harmonic coefficients).
+
+--------------------------------------------------------------------------------
+
+## Editing Splats
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/editing-splats/
+
+## Edit Modes
+
+SuperSplat functions in one of two **_edit modes_**:
+
+- Centers Mode
+- Rings Mode
+
+These modes affect how selections work and what you see in the viewport.
+
+### Centers Mode
+
+In centers mode:
+
+- Gaussians are overlaid with a blue dot at their center.
+- Selections apply to all Gaussian centers independent of their screen depth.
+- Centers are colored depending on their selection state. By default, blue is used for unselected Gaussians and yellow for selected Gaussians.
+- You can control the size that centers are rendered in the VIEW OPTIONS panel.
+
+<img width="1224" alt="Screenshot 2025-01-06 at 08 51 53" src="/img/user-manual/gaussian-splatting/editing/supersplat/centers-mode.png" />
+
+### Rings Mode
+
+In rings mode:
+
+- Gaussians are overlaid with a ring at their outer boundary.
+- Selections apply to the top-most layer of gaussian rings only.
+- Selected Gaussians are colored yellow (by default).
+
+<img width="1224" alt="Screenshot 2025-01-06 at 08 51 58" src="/img/user-manual/gaussian-splatting/editing/supersplat/rings-mode.png" />
+
+### Disabling the Overlay
+
+The mode overlay can be disabled entirely (using space bar shortcut), so neither dots nor rings are displayed.
+
+However, please note that the selection behavior is still determined by the active mode.
+
+<img width="1224" alt="Screenshot 2025-01-06 at 08 51 48" src="/img/user-manual/gaussian-splatting/editing/supersplat/disable-overlay.png" />
+
+## Selecting and Deleting Splats
+
+Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. To help with this, there are 8 selection tools available:
+
+<div class="no-wrap-first-col">
+
+| Tool | Description |
+|------|-------------|
+| [Image: Picker Select] **Picker Select** | Click to select a single splat, or click + drag to create a rectangular selection area. This is the default selection tool. |
+| [Image: Lasso Select] **Lasso Select** | Click and drag to draw a freeform shape. Splats within the shape's outline will be selected. This is a 2D screen-space selection tool. |
+| [Image: Polygon Select] **Polygon Select** | Click to place points that define the vertices of a polygon. Double-click to close the shape. Splats within the polygon will be selected. This is useful for precise selections with straight edges. |
+| [Image: Brush Select] **Brush Select** | Click and drag to paint a selection using a circular brush. Adjust the brush size with the `[` (decrease) and `]` (increase) keys. Ideal for organic selection work. |
+| [Image: Flood Select] **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold slider (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters) that appear isolated in the scene. |
+| [Image: Eyedropper Select] **Eyedropper Select** | Click on the viewport to select splats based on color similarity. A threshold slider (0-1) controls the sensitivity of the color matching. This tool is useful for selecting groups of splats that share similar colors. |
+| [Image: Sphere Select] **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center. Use the translate gizmo to move the sphere, and adjust the radius value in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. |
+| [Image: Box Select] **Box Select** | Creates a 3D rectangular volume for volumetric selection. Double-click anywhere in the scene to position the box center. Use the translate gizmo to move the box, and adjust the dimensions (LenX, LenY, LenZ) in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. This is ideal for selecting splats within a specific region of 3D space. |
+
+</div>
+
+### Selection Modifiers
+
+All 2D selection tools (Picker, Lasso, Polygon, Brush, Flood, Eyedropper) support modifier keys to control how the selection is applied:
+
+| Modifier | Action |
+|----------|--------|
+| **None** | Replace the current selection with the new selection |
+| **Shift** | Add to the current selection |
+| **Ctrl / Cmd** | Remove from the current selection |
+
+The 3D selection tools (Sphere Select, Box Select) have **Set**, **Add**, and **Remove** buttons in their toolbar instead of using modifier keys.
+
+### Deleting Splats
+
+Once you are happy with your selection, you can delete it with the **Delete** key.
+
+## Transforming Splats
+
+SuperSplat can translate, rotate and scale splats. To do this, select a splat in the Scene Manager and activate one of the gizmos via the horizontal icon bar.
+
+To achieve fine grain control over the transform of the selected splat, you can use the TRANSFORM panel (below the SCENE MANAGER panel).
+
+To set the origin of the currently active gizmo, double click anywhere in the 3D view.
+
+## Measuring and Rescaling Splats
+
+SuperSplat provides a measurement tool to help you measure distances within your splat scene and rescale it based on real-world measurements. This is accessible via the Measurement icon in the bottom toolbar.
+
+**To use the measurement tool:**
+
+1. Click the Measurement icon in the bottom toolbar to activate the tool.
+2. Click in the Viewport to place the first marker.
+3. Click again to place the second marker.
+4. Click on either marker to activate the translation gizmo and tweak its location.
+5. The length between the two markers is displayed in a popup above the bottom toolbar.
+
+**To rescale the scene:**
+
+- Edit the length value in the popup to rescale the entire scene based on that modified length.
+
+**Keyboard shortcuts:**
+
+- Press `Delete` to remove the placed markers.
+- Press `Escape` to deactivate the Measurement tool.
+
+## Merging Splats
+
+It is possible to merge multiple `.ply` files together and output a single, combined `.ply` file. Simply load any number of `.ply` files into Scene Manager, perform whatever transformations and edits you require, and then save the result via the `File` > `Save` menu item.
+
+--------------------------------------------------------------------------------
+
+## Import and Export
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/import-export/
+
+SuperSplat's import and export capabilities are essential for working with Gaussian Splat data throughout your entire workflow. Import allows you to bring in splat scenes from various capture tools and formats for editing, cleanup, and optimization. Once your editing work is complete, export enables you to save your refined splats in the optimal format for your target platform - whether that's a compressed format for web deployment, a full-quality PLY for archival, or a standalone HTML viewer for easy sharing. This flexibility ensures SuperSplat can integrate seamlessly into any Gaussian Splat production pipeline.
+
+## Supported File Formats {#supported-file-formats}
+
+SuperSplat works with several file formats for Gaussian Splat scenes:
+
+| Format | Import | Export | Description |
+| ------ | ------ | ------ | ----------- |
+| `.ply` | ✅ | ✅ | Standard PLY format - most common interchange format, widely supported but heavyweight |
+| `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
+| `.sog` | ✅ | ✅ | Bundled super-compressed format (a zip file containing `meta.json` and `.webp` textures). Recommended for runtime applications |
+| `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](/user-manual/splat-transform/) CLI tool to export |
+| `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
+| `.lcc` | ✅ | ❌ | XGRIDS proprietary format which contains multiple levels-of-detail. Imports the highest LOD that contains less than 20 million Gaussians |
+| `.html` / `.zip` | ❌ | ✅ | Standalone HTML viewer app - embeds compressed splat data for web sharing |
+
+:::warning
+
+Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY file types will fail to import.
+
+:::
+
+## Importing Splats
+
+SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.lcc`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
+
+There are four ways to load a Gaussian Splat file:
+
+1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc` or unbundled SOG), drag the parent folder containing those files.
+2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system.
+3. **Direct file opening** - If you have installed SuperSplat as a PWA, you can double-click a splat file in File Explorer (Windows) or Finder (macOS).
+4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<PLY_URL>`. For example:
+
+    https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply
+
+    This is particularly useful for sharing splats with others on social platforms like X and LinkedIn.
+
+### Importing PLY Sequences {#ply-sequences}
+
+SuperSplat supports importing sequences of PLY files to create splat animations. This allows you to view animated Gaussian Splats where each PLY file represents a single frame in the animation.
+
+To import a PLY sequence:
+
+1. Ensure your PLY files follow a naming convention with sequential frame numbers appended, such as:
+   - `animation_0001.ply`
+   - `animation_0002.ply`
+   - `animation_0003.ply`
+   - etc.
+
+2. Load the sequence into SuperSplat by either:
+   - **Dragging and dropping** all the PLY files from your file system into SuperSplat
+   - **Dragging and dropping** a folder containing the PLY files onto SuperSplat
+   - Using **File > Import** and selecting multiple PLY files
+
+Once loaded, SuperSplat will automatically recognize the sequence and enable the [Timeline](timeline.md) panel, allowing you to:
+
+- Step through frames using the arrow buttons
+- Play the animation using the play button
+- Scrub through the animation using the timeline slider
+
+:::note
+
+PLY sequences are memory-intensive since each frame loads a complete splat scene. For optimal performance, consider the file sizes and number of frames when working with animated splats.
+
+:::
+
+## Exporting Splats
+
+To export your currently loaded scene, open the `File` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
+
+For information about exporting and hosting HTML viewers for your splats, see the [Publishing](publishing.md#self-hosting-the-supersplat-viewer) guide.
+
+--------------------------------------------------------------------------------
+
+## Interface Overview
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/interface/
+
+The SuperSplat Editor's interface appears as follows:
+
+[Image: supersplat-interface]
+
+The key elements of the interface are labeled:
+
+## Menu Bar
+
+The Menu Bar gives you access to the most commonly used functions in the SuperSplat Editor.
+
+* **File Menu:** Load and save your projects. Import and export to/from popular file formats.
+* **Select Menu:** Perform common selection based operations on your loaded scene.
+* **Render Menu:** Render an image or a video of your currently loaded scene.
+* **Help Menu:** Access developer resources related to SuperSplat.
+
+### Scene Manager
+
+The Scene Manager allows you to manage multiple loaded Gaussian Splat scenes (typically loaded from imported PLY files). You can also use this panel to set the transform of the selected scene.
+
+### Viewport
+
+The 3D viewport where you can visually edit your scenes. The viewport has a 2D grid to help orient yourself in the scene. By default, the grid lies in the XZ plane (with the world Y axis pointing upwards). The X axis is colored red and the Z axis is blue. Major grid divisions occur at 1 meter intervals (and smaller grid divisions are at 10cm intervals).
+
+### View Cube
+
+The View Cube is a gizmo that gives added control over the viewport camera. You can click on any of the circles to switch to an orthographic view of the scene from one of six directions. This can make it easier to make accurate selections in certain circumstances.
+
+### Right Toolbar
+
+This vertical toolbar contains icons related to splat visualization, camera controls and application settings.
+
+### Bottom Toolbar
+
+This horizontal toolbar contains icons related to undo/redo, splat selection and transformation.
+
+### Animation Timeline
+
+The Timeline allows you to create and delete keyframes for the viewport camera. It also allows you to play back (or scrub through) the animation you have configured.
+
+### Histogram Panel
+
+This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics.
+
+--------------------------------------------------------------------------------
+
+## Managing Projects
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/managing-projects/
+
+SuperSplat supports the `.ssproj` file format, allowing you to save and reload your work, preserving all settings and animations. This format provides an efficient way to manage projects, share work, and continue editing at a later time.
+
+## Features of `.ssproj` Files
+
+* Full Project Save: Stores all relevant project data, including app settings, timeline settings and more.
+* Easy Reloading: Load a saved project file to restore the exact state of your work.
+* Portability: Share `.ssproj` files with others to collaborate on projects.
+
+## Saving a Project
+
+To save your current work as a `.ssproj` file:
+
+* Open the `File` menu.
+* Select `Save As`.
+* Choose a location and enter a name for your project.
+* Click Save. Your project will be stored as a `.ssproj` file.
+
+## Loading a Project
+
+To load a previously saved `.ssproj` file:
+
+* Open the `File` menu.
+* Select `Open`.
+* Browse to the `.ssproj` file you wish to open.
+* Click `Open`. SuperSplat will restore your project to its last saved state.
+
+## File Structure
+
+The `.ssproj` format is actually a ZIP archive containing:
+
+* A JSON-based file that stores project-specific metadata, such as app settings and timeline settings.
+* One or more uncompressed `.ply` files (these are listed in the `Scenes` panel on load).
+
+## Best Practices
+
+* Save Regularly: To prevent data loss, save your project frequently.
+* Use Versioning: When working on major changes, save multiple versions of your project to avoid accidental overwrites.
+* Backup Your Files: Store backups of important `.ssproj` files in a cloud storage service or external drive.
+
+By utilizing the `.ssproj` format, SuperSplat users can efficiently manage and share their projects, enhancing workflow and collaboration.
+
+--------------------------------------------------------------------------------
+
+## Publishing
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/publishing/
+
+SuperSplat provides two ways to share your splat scenes with the world:
+
+1. **Publishing to SuperSplat** - Host your splats on [superspl.at](https://superspl.at) for easy sharing
+2. **Self-Hosting the SuperSplat Viewer** - Export a standalone HTML viewer to host anywhere
+
+## Publishing to SuperSplat
+
+The SuperSplat Editor allows you to publish your splat scenes to the web at [https://superspl.at/](https://superspl.at/).
+
+[Image: SuperSplat Website]
+
+### Ensuring you are Logged In
+
+Publishing splats requires you to be logged in.
+
+Before you begin, you must have [created a PlayCanvas account](/user-manual/account-management/user-accounts/account-creation) and be logged in at [playcanvas.com](https://playcanvas.com). You must then also log in at [superspl.at](https://superspl.at) (via the `Login` button in the top right). Verify you are logged in by checking that your account avatar is displayed in the top right of the page on [superspl.at](https://superspl.at).
+
+### Publishing your Splats
+
+To publish your splat:
+
+1. Open the `File` menu.
+2. Select `Publish`.
+3. Fill out the options in the Publish dialog:
+
+   [Image: Publish Settings]
+
+   | Option | Description |
+   |--------|-------------|
+   | **Publish to** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
+   | **Title** | A short title that will appear below your splat's thumbnail once it is published |
+   | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
+   | **Listed** | If checked, the splat will be returned in searches on the SuperSplat website. If unchecked, the splat will only be discoverable by anyone who has the link |
+   | **Start Position** | The starting position to use for the viewer's camera:<br/>• **Default**: The viewer does its best to pick a suitable start point<br/>• **Current Viewport**: Use the current camera position as set in the SuperSplat Editor's viewport<br/>• **1st Camera Frame**: Use the first camera's position as defined by the first frame of the Timeline |
+   | **Animation** | The animation to apply to the viewer's camera:<br/>• **None**: No animation<br/>• **Track**: Animate the camera using keyframes set on the SuperSplat Editor's Timeline |
+   | **Background** | The background color of the viewer |
+   | **Field of View** | The vertical field of view of the viewer's camera in degrees |
+   | **SH Bands** | The number of spherical harmonics bands to be written out to the published compressed PLY file |
+
+4. Select `Publish`.
+
+:::note
+
+It may take several minutes to compress your splat to SOG format during the publishing process, so be patient! ⏳
+
+:::
+
+Once the publish process is complete, a modal dialog will show with the URL of your published splat. Copy it and share it with whoever you like.
+
+### Managing your Published Splats
+
+After publishing splats to [superspl.at](https://superspl.at), you can manage them by visiting your [Manage page](https://superspl.at/manage). From here, you can perform the following actions on each published splat:
+
+| Action | Description |
+|--------|-------------|
+| **Edit Title** | Update the splat's main title |
+| **Edit Description** | Update the description shown on the splat's viewer page |
+| **List/Unlist** | Toggle whether the splat appears in public searches on the SuperSplat website |
+| **Delete** | Permanently remove the splat from superspl.at (this cannot be undone) |
+
+## Self-Hosting the SuperSplat Viewer
+
+The viewer used on the SuperSplat website is [open source](https://github.com/playcanvas/supersplat-viewer) and can be directly exported by the SuperSplat Editor should you wish to self-host your splat content. This viewer runs in any web browser with easy-to-use camera controls and even supports AR and VR visualization for devices that support WebXR.
+
+### Exporting the HTML Viewer
+
+To export your splat as an HTML viewer:
+
+1. Open the `File` > `Export` submenu.
+2. Select `Viewer App…`.
+
+### Export Options
+
+The viewer export can be configured via several options:
+
+[Image: Viewer Export]
+
+| Option | Description |
+|--------|-------------|
+| **Export Type** | Controls the format of the exported viewer:<br/>• **HTML**: A single-page `.html` file where the splat is Base64 encoded and embedded directly into the file. Very convenient since everything is packed into a single file that can be double-clicked to run in your browser using the `file://` protocol. However, the base64 encoding means it will be roughly 30% larger than the ZIP Package format, and browsers impose different limits on the maximum size (below 32MB should load everywhere, but above this you could encounter problems)<br/>• **ZIP Package**: A zip file containing the viewer `.html` file and a separate `.compressed.ply` containing the splat. Smaller, loads faster and guaranteed to load everywhere. However, it will only load over `http://`, so you will need to run a local web server (e.g. Node's [`serve`](https://www.npmjs.com/package/serve) or Python's [`SimpleHTTPServer`](https://docs.python.org/2/library/simplehttpserver.html)) |
+| **Start Position** | The starting position to use for the viewer's camera:<br/>• **Default**: The viewer does its best to pick a suitable start point<br/>• **Current Viewport**: Use the current camera position as set in the SuperSplat Editor's viewport<br/>• **1st Camera Frame**: Use the first camera's position as defined by the first frame of the Timeline |
+| **Animation** | The animation to apply to the viewer's camera:<br/>• **None**: No animation<br/>• **Track**: Animate the camera using keyframes set on the SuperSplat Editor's Timeline |
+| **Background** | The background color of the viewer |
+| **Field of View** | The vertical field of view of the viewer's camera in degrees |
+| **SH Bands** | The number of spherical harmonics bands to be written out to the published compressed PLY file |
+
+### Web Hosting for the HTML Viewer
+
+Once exported, you can host the HTML Viewer file somewhere to make it accessible. One easy option is to use GitHub Pages:
+
+1. Create a new repository on [GitHub](https://github.com).
+2. Add the exported HTML file (and the `.compressed.ply` file if you exported the viewer as a ZIP package).
+3. Visit your repository's `Settings` page. Select `Pages` on the left. Ensure `Source` is set to `Deploy from a branch` and set `Branch` to `main` and hit `Save`.
+4. It will take a few moments for your viewer to be published. The URL will be in the form:
+
+   `https://<github-username>.github.io/<repository-name>/<html-filename>`
+
+--------------------------------------------------------------------------------
+
+## Rendering Media
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/rendering/
+
+SuperSplat enables you to render high-quality images and videos directly from your 3D Gaussian Splats. Whether you want to create a single frame for social media, showcase your creations with animated videos, embed them on your website, or keep them locally, this guide will help you get started.
+
+:::important
+
+Both images and videos are rendered entirely locally on your device. No render data or splat information is uploaded to any external server.
+
+:::
+
+## Getting Started
+
+To render from your splat:
+
+1. Open your splat in the [SuperSplat Editor](https://superspl.at/editor).
+2. Position your camera for the desired view (for images) or set up camera animations on the [Timeline](timeline.md) (for videos).
+3. Click the `Render` menu in the menu bar and select either `Image` or `Video`.
+
+## Image Rendering
+
+Image rendering creates a single high-quality frame from your current camera position.
+
+### Image Settings
+
+When you select `Image` from the Render menu, a dialog will appear with settings to customize your image:
+
+- **Preset:** Choose from the following preset options:
+  - `Current` (default) - Uses the current viewport resolution
+  - `HD` - `1920x1080` resolution
+  - `QHD` - `2560x1440` resolution  
+  - `4K` - `3840x2160` resolution
+  - `Custom` - Allows manual resolution selection
+- **Resolution:** Only active when `Custom` preset is selected. Allows you to specify custom width and height values.
+- **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays.
+- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the image.
+
+### Rendering the Image
+
+Once you've configured your settings:
+
+1. Click the `Render` button.
+2. The image will be rendered at the current camera position.
+3. On completion, your image will auto-download.
+
+## Video Rendering
+
+Video rendering creates an animated sequence using camera animations from the Timeline.
+
+### Video Settings
+
+When you select `Video` from the Render menu, a dialog will appear with several settings to customize your video:
+
+- **Resolution:** Choose from the following resolutions:
+  - `960x540`
+  - `1280x720`
+  - `1920x1080` (default)
+  - `2560x1440`
+  - `3840x2160`
+- **Format:** Choose the output video format:
+  - `MP4` (default) - Most widely compatible format, ideal for general use
+  - `WebM` - Open format, excellent for web use
+  - `MOV` - Apple QuickTime format, ideal for professional video editing workflows
+  - `MKV` - Flexible open container format supporting various codecs
+- **Codec:** Choose the video codec for compression. Available options depend on the selected format:
+  - For MP4 and MOV: `H.264` (default), `H.265/HEVC`
+  - For WebM: `VP9` (default), `AV1`
+  - For MKV: `H.264` (default), `H.265/HEVC`, `VP9`, `AV1`
+- **Frame Rate:** Choose from the following frame rates:
+  - `12 fps`
+  - `15 fps`
+  - `24 fps`
+  - `25 fps`
+  - `30 fps` (default)
+  - `48 fps`
+  - `60 fps`
+  - `120 fps`
+- **Bitrate:** Adjust the quality of your video by choosing a higher or lower bitrate. Options are:
+  - `Low`
+  - `Medium`
+  - `High` (default)
+  - `Ultra`
+- **Frame Range:** Specify the start and end frames from the Timeline to include in your video. By default, the entire Timeline is rendered.
+- **Portrait Mode:** If checked, the resolution will be flipped to be vertical. This is useful if you intend your video to be viewed in portrait on mobile.
+- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the video.
+
+### Rendering the Video
+
+Once you've configured your settings:
+
+1. Click the `Render` button.
+2. The Timeline pointer will animate through all frames until video encoding is complete.
+3. On completion, your video will auto-download.
+
+:::tip Browser Recommendation for Video Rendering
+
+We recommend using a Chromium-based browser (Chrome, Edge, Opera, etc.) for rendering videos. Browsers that support the [FileSystem API](https://caniuse.com/native-filesystem-api) will ask you to pick a destination filename and will then stream out the file during the encoding process instead of having to do it in memory. This allows for the recording of much larger videos without running into memory limitations.
+
+:::
+
+## Tips for Best Results
+
+- **For Images:** Position your camera carefully and consider the composition before rendering. Higher resolutions will provide more detail for print or web use.
+- **For Videos:** Before rendering, ensure your Timeline animations are smooth and camera movements are polished.
+- **For Social Media:** Portrait-mode renders often yield better engagement on mobile platforms.
+- **Debug Overlays:** Use the debug overlay option when you need to show splat data for educational or technical presentations.
+
+Happy Rendering! 🎬📸
+
+--------------------------------------------------------------------------------
+
+## Timeline
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/timeline/
+
+The Timeline panel allows you to create camera animations for your Gaussian Splat scenes. You can set keyframes to define camera positions and movements, creating smooth animated transitions that can be played back in the editor.
+
+[Image: Timeline Panel]
+
+## Timeline Controls
+
+The Timeline panel includes the following controls:
+
+- **Play/Stop button** - Play or stop the animation playback
+- **Next/Previous Key buttons** - Jump to the next or previous keyframe
+- **Add Key button (`+`)** - Create a new keyframe at the current timeline position
+- **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
+- **Timeline slider** - Scrub through the animation by dragging the playhead (which displays the current frame number)
+- **FPS setting** - Set the frames per second for the animation
+- **Timeline length** - Set the total duration of the animation in frames
+- **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
+
+## Creating Keyframes
+
+To create a camera animation keyframe:
+
+1. Position the timeline playhead at the desired frame (by clicking on the timeline or using the frame counter)
+2. Move and orient the viewport camera to the desired position
+3. Click the `+` (Add Keyframe) button on the Timeline
+
+The keyframe will appear as a yellow diamond on the timeline at the current frame position. Keyframes store the camera's position and rotation at that moment in time.
+
+## Importing Camera Poses as Keyframes
+
+SuperSplat can import camera poses from [COLMAP](https://colmap.github.io/) reconstructions to automatically create timeline keyframes. This feature allows you to recreate the approximate camera path that was used during the original scanning of your Gaussian Splat scene.
+
+To import camera poses:
+
+1. Obtain the [`images.txt`](https://colmap.github.io/format.html#images-txt) file from your COLMAP reconstruction output
+2. In SuperSplat, select **File > Import** (or drag and drop the `images.txt` file)
+3. SuperSplat will create keyframes from the camera poses in the file
+
+Each camera pose in the `images.txt` file will be placed as a keyframe on sequential frames of the timeline, in the order they appear in the file. This creates an animation that follows the original capture path.
+
+:::note
+
+The `images.txt` file contains camera poses expressed as quaternions and translation vectors in COLMAP's coordinate system. SuperSplat automatically converts these to the appropriate camera positions and orientations for the timeline.
+
+:::
+
+## Editing Keyframes
+
+Once keyframes are created, you can modify them in two ways:
+
+### Changing Keyframe Timing
+
+Click and drag the yellow diamond keyframes along the timeline to adjust when each camera position occurs in your animation.
+
+### Updating Camera Position/Rotation
+
+To change the camera position or rotation stored in an existing keyframe:
+
+1. Move the playhead to the frame containing the keyframe you want to update
+2. Adjust the viewport camera to the new desired position and rotation
+3. Click the `+` (Add Key) button - this will overwrite the existing keyframe with the updated camera values
+
+## Deleting Keyframes
+
+To delete a keyframe:
+
+1. Move the playhead to the frame containing the keyframe you want to delete
+2. Click the `-` (Remove Key) button
+
+## Configuring Timeline Settings
+
+### Frames Per Second (FPS)
+
+The FPS setting controls the playback speed of your animation. Available FPS values are:
+
+- **1 FPS** - Very slow, single frame per second
+- **6 FPS** - Low frame rate
+- **12 FPS** - Medium frame rate
+- **24 FPS** - Standard film frame rate
+- **30 FPS** - Common video frame rate
+- **60 FPS** - Smooth, high frame rate playback
+
+### Timeline Length
+
+You can set the total duration of your animation by adjusting the timeline length setting. This defines how many frames your animation spans and determines when the animation loops back to the beginning.
+
+### Smoothness
+
+The Smoothness setting controls how the camera interpolates between keyframes. This value ranges from 0 to 1:
+
+- **0** - Linear interpolation, creating direct straight-line motion between keyframes
+- **1** - Maximum smooth interpolation, creating more curved, cinematic camera movements
+- **Values in between** - Blend between linear and smooth interpolation
+
+Adjusting smoothness allows you to control the feel of your camera animation, from mechanical and precise to flowing and organic.
+
+## Playing Animations
+
+Use the play button to preview your animation. The camera will interpolate between keyframes based on your smoothness setting, creating fluid motion. The animation will loop continuously from the first frame back to the beginning.
+
+### Animation Looping
+
+The animation automatically loops from the last frame back to the first frame. To create seamless loops, it's important to avoid setting a keyframe on both the first and last frames of the timeline, as this will cause a sudden snap when the animation loops.
+
+:::tip[Best Practice for Smooth Loops]
+
+Instead of placing keyframes on both the first and last frames, place your final keyframe before the last frame and let the animation interpolate smoothly back to the beginning.
+
+For example, with a 100-frame timeline:
+
+- **Good:** Set keyframes at frames 0, 10, 20, 30, 40, 50, 60, 70, 80, 90
+  - The animation smoothly interpolates from frame 90 back to frame 0
+- **Avoid:** Setting keyframes at frames 0, 10, 20, ... 90, 100
+  - This causes a snap/jerk when looping from frame 100 back to frame 0
+
+This technique allows the camera to smoothly transition from your last keyframe back to the starting position, creating a seamless loop.
+
+:::
+
+## Saving Timeline Animations
+
+:::important
+
+Timeline animations are only preserved when you save your project as an `.ssproj` file. The timeline configuration is not saved when exporting to PLY or other splat formats.
+
+See [Managing Projects](managing-projects.md) for more information on saving and loading SuperSplat project files.
+
+:::
 
 --------------------------------------------------------------------------------
 
