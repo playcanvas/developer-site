@@ -19,7 +19,7 @@ Generated splat files typically have several issues that need addressing:
 
 PlayCanvas provides both visual and command-line tools for editing Gaussian Splats:
 
-### [SuperSplat Editor](supersplat)
+### [SuperSplat Editor](/user-manual/supersplat/)
 
 The **SuperSplat Editor** is a powerful, browser-based visual editor designed specifically for interactive splat editing. It's perfect for:
 
@@ -29,7 +29,7 @@ The **SuperSplat Editor** is a powerful, browser-based visual editor designed sp
 - Creating camera animations and flythroughs
 - Publishing splats to the web
 
-### [splat-transform CLI](splat-transform)
+### [SplatTransform CLI](/user-manual/splat-transform/)
 
 The **splat-transform CLI** is a command-line tool for batch processing and automated transformations. It excels at:
 

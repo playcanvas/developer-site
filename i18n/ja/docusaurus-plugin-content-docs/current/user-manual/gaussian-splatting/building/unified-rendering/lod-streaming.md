@@ -26,7 +26,7 @@ LODストリーミングは以下のように動作します：
 
 LODストリーミングを使用するには、異なる詳細レベルを持つ複数のスプラットファイルからストリーミング形式を生成する必要があります。ツールは事前生成されたLODファイルを受け取り、最適化されたストリーミング形式を作成します。
 
-必要な`lod-meta.json`形式の作成方法の詳細については、SplatTransformドキュメントの[LOD形式の生成](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)セクションを参照してください。
+必要な`lod-meta.json`形式の作成方法の詳細については、SplatTransformドキュメントの[LOD形式の生成](/user-manual/splat-transform#generating-lod-format)セクションを参照してください。
 
 :::tip
 
@@ -146,7 +146,7 @@ PlayCanvas EditorでGaussian splatsとストリーミングLODを使用する方
 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
-- [SplatTransform CLIツール](/user-manual/gaussian-splatting/editing/splat-transform)
-- [LOD形式の生成](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
+- [SplatTransform CLIツール](/user-manual/splat-transform)
+- [LOD形式の生成](/user-manual/splat-transform#generating-lod-format)
 - [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)
 - [カスタムシェーダー](/user-manual/gaussian-splatting/building/custom-shaders)

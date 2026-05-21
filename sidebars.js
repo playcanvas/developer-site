@@ -531,6 +531,26 @@ const sidebars = {
       ],
     },
     {
+      type: 'category',
+      label: 'SuperSplat',
+      link: {
+        type: 'doc',
+        id: 'user-manual/supersplat/index',
+      },
+      items: [
+        'user-manual/supersplat/interface',
+        'user-manual/supersplat/import-export',
+        'user-manual/supersplat/managing-projects',
+        'user-manual/supersplat/camera-controls',
+        'user-manual/supersplat/editing-splats',
+        'user-manual/supersplat/data-panel',
+        'user-manual/supersplat/timeline',
+        'user-manual/supersplat/rendering',
+        'user-manual/supersplat/publishing',
+      ],
+    },
+    'user-manual/splat-transform',
+    {
       type: 'html',
       value: '<div class="sidebar-section-header">Common Topics</div>',
     },
@@ -787,36 +807,7 @@ const sidebars = {
           ],
         },
         'user-manual/gaussian-splatting/viewing',
-        {
-          type: 'category',
-          label: 'Editing and Publishing Splats',
-          link: {
-            type: 'doc',
-            id: 'user-manual/gaussian-splatting/editing/index',
-          },
-          items: [
-            {
-              type: 'category',
-              label: 'SuperSplat',
-              link: {
-                type: 'doc',
-                id: 'user-manual/gaussian-splatting/editing/supersplat/index',
-              },
-              items: [
-                'user-manual/gaussian-splatting/editing/supersplat/interface',
-                'user-manual/gaussian-splatting/editing/supersplat/import-export',
-                'user-manual/gaussian-splatting/editing/supersplat/managing-projects',
-                'user-manual/gaussian-splatting/editing/supersplat/camera-controls',
-                'user-manual/gaussian-splatting/editing/supersplat/editing-splats',
-                'user-manual/gaussian-splatting/editing/supersplat/data-panel',
-                'user-manual/gaussian-splatting/editing/supersplat/timeline',
-                'user-manual/gaussian-splatting/editing/supersplat/rendering',
-                'user-manual/gaussian-splatting/editing/supersplat/publishing',
-              ],
-            },
-            'user-manual/gaussian-splatting/editing/splat-transform',
-          ],
-        },
+        'user-manual/gaussian-splatting/editing/index',
         {
           type: 'category',
           label: 'Building Splat Applications',

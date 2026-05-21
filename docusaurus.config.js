@@ -104,6 +104,19 @@ const config = {
         { from: ['/user-manual/assets/preloading-and-streaming/'], to: '/user-manual/assets/preloading/' },
         { from: ['/user-manual/api/project-archive/'], to: '/user-manual/api/project-export/' },
         { from: ['/user-manual/editor/projects/backup-archiving/'], to: '/user-manual/editor/projects/backup-and-export/' },
+        // SplatTransform promoted from gaussian-splatting/editing/splat-transform/ to top-level Core Products
+        { from: ['/user-manual/gaussian-splatting/editing/splat-transform/'], to: '/user-manual/splat-transform/' },
+        // SuperSplat promoted from gaussian-splatting/editing/supersplat/ to top-level Core Products
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/'], to: '/user-manual/supersplat/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/interface/'], to: '/user-manual/supersplat/interface/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/import-export/'], to: '/user-manual/supersplat/import-export/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/managing-projects/'], to: '/user-manual/supersplat/managing-projects/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/camera-controls/'], to: '/user-manual/supersplat/camera-controls/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/editing-splats/'], to: '/user-manual/supersplat/editing-splats/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/data-panel/'], to: '/user-manual/supersplat/data-panel/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/timeline/'], to: '/user-manual/supersplat/timeline/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/rendering/'], to: '/user-manual/supersplat/rendering/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/publishing/'], to: '/user-manual/supersplat/publishing/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en

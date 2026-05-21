@@ -26,7 +26,7 @@ This approach allows you to render massive splat scenes that would otherwise be 
 
 To use LOD streaming, you need to generate the streaming format from multiple splat files with different levels of detail. The tool takes your pre-generated LOD files and creates an optimized streaming format.
 
-See the [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions on how to create the required `lod-meta.json` format.
+See the [Generating LOD Format](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions on how to create the required `lod-meta.json` format.
 
 :::tip
 
@@ -148,7 +148,7 @@ As native Editor support for streaming LOD is added, the following improvements 
 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
-- [SplatTransform CLI Tool](/user-manual/gaussian-splatting/editing/splat-transform)
-- [Generating LOD Format](/user-manual/gaussian-splatting/editing/splat-transform#generating-lod-format)
+- [SplatTransform CLI Tool](/user-manual/splat-transform)
+- [Generating LOD Format](/user-manual/splat-transform#generating-lod-format)
 - [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
 - [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)
