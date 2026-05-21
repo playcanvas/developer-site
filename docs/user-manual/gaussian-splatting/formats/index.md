@@ -33,5 +33,5 @@ Compressed format optimized for web delivery. 15-20× smaller than PLY with loss
 ## Workflow
 
 1. Train and edit with **PLY**
-2. Convert to **SOG** for production using [SplatTransform](../editing/splat-transform.md)
+2. Convert to **SOG** for production using [SplatTransform](/user-manual/splat-transform/)
 3. Deploy SOG files for optimal performance

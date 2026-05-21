@@ -33,5 +33,5 @@ Gaussian splatデータの業界標準です。非圧縮、高精度、普遍的
 ## ワークフロー
 
 1. **PLY**でトレーニングと編集を行う
-2. [SplatTransform](../editing/splat-transform.md)を使用して、本番用に**SOG**に変換する
+2. [SplatTransform](/user-manual/splat-transform/)を使用して、本番用に**SOG**に変換する
 3. 最適なパフォーマンスを得るためにSOGファイルをデプロイする

@@ -14,7 +14,7 @@ SuperSplat は、Gaussian Splat シーンのいくつかのファイル形式に
 | `.ply` | ✅ | ✅ | 標準PLY形式 - 最も一般的な交換フォーマット、広くサポートされていますが大容量 |
 | `.compressed.ply` | ✅ | ✅ | 圧縮PLY形式 - 非圧縮PLYよりもはるかに小さく、データを量子化。[詳細](https://blog.playcanvas.com/compressing-gaussian-splats/) |
 | `.sog` | ✅ | ✅ | バンドル超圧縮形式（`meta.json` と `.webp` テクスチャを含むzipファイル）。ランタイムアプリケーションに推奨 |
-| `meta.json` | ✅ | ❌ | アンバンドル超圧縮形式（`.webp` テクスチャを伴う）。エクスポートには[SplatTransform](../splat-transform.md) CLIツールを使用 |
+| `meta.json` | ✅ | ❌ | アンバンドル超圧縮形式（`.webp` テクスチャを伴う）。エクスポートには[SplatTransform](/user-manual/splat-transform/) CLIツールを使用 |
 | `.splat` | ✅ | ✅ | レガシー圧縮スプラット形式 (antimatter15) - 圧縮PLYよりも効率が劣る |
 | `.lcc` | ✅ | ❌ | 複数のレベル・オブ・ディテールを含むXGRIDSプロプライエタリー形式。2000万ガウシアン未満を含む最上位LODをインポートします |
 | `.html` / `.zip` | ❌ | ✅ | スタンドアロンHTMLビューアアプリ - Web共有用に圧縮されたスプラットデータを埋め込み |

@@ -105,8 +105,8 @@ The PLY format serves as the lingua franca of the 3DGS ecosystem:
 ### Universal Compatibility
 
 - **Training Software**: Brush, nerfstudio, Postshot
-- **Editors**: [SuperSplat Editor](../editing/supersplat/index.md)
-- **Converters**: [SplatTransform](../editing/splat-transform.md)
+- **Editors**: [SuperSplat Editor](/user-manual/supersplat/)
+- **Converters**: [SplatTransform](/user-manual/splat-transform/)
 - **Viewers**: [SuperSplat Viewer](https://github.com/playcanvas/supersplat-viewer), [Model Viewer](https://github.com/playcanvas/model-viewer)
 
 ### Cross-Platform Workflow
@@ -140,6 +140,6 @@ While PLY is excellent for source and interchange purposes, it has significant l
 
 :::tip
 
-Convert your PLYs to a more efficient run-time format using the [SplatTransform](../editing/splat-transform.md) tool. We currently recommend Self-Organizing Gaussians (AKA SOGS) to achieve the best compression ratios and fastest loading times.
+Convert your PLYs to a more efficient run-time format using the [SplatTransform](/user-manual/splat-transform/) tool. We currently recommend Self-Organizing Gaussians (AKA SOGS) to achieve the best compression ratios and fastest loading times.
 
 :::
