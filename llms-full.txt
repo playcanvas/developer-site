@@ -34390,7 +34390,7 @@ In centers mode:
 - Centers are colored depending on their selection state. By default, blue is used for unselected Gaussians and yellow for selected Gaussians.
 - You can control the size that centers are rendered in the VIEW OPTIONS panel.
 
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 53" src="/img/user-manual/gaussian-splatting/editing/supersplat/centers-mode.png" />
+<img width="1224" alt="Screenshot 2025-01-06 at 08 51 53" src="/img/user-manual/supersplat/editor/centers-mode.png" />
 
 ### Rings Mode
 
@@ -34400,7 +34400,7 @@ In rings mode:
 - Selections apply to the top-most layer of gaussian rings only.
 - Selected Gaussians are colored yellow (by default).
 
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 58" src="/img/user-manual/gaussian-splatting/editing/supersplat/rings-mode.png" />
+<img width="1224" alt="Screenshot 2025-01-06 at 08 51 58" src="/img/user-manual/supersplat/editor/rings-mode.png" />
 
 ### Disabling the Overlay
 
@@ -34408,7 +34408,7 @@ The mode overlay can be disabled entirely (using space bar shortcut), so neither
 
 However, please note that the selection behavior is still determined by the active mode.
 
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 48" src="/img/user-manual/gaussian-splatting/editing/supersplat/disable-overlay.png" />
+<img width="1224" alt="Screenshot 2025-01-06 at 08 51 48" src="/img/user-manual/supersplat/editor/disable-overlay.png" />
 
 ## Selecting and Deleting Splats
 
