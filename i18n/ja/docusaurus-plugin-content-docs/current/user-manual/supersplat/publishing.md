@@ -12,7 +12,7 @@ SuperSplatは、スプラットシーンを世界と共有するための2つの
 
 SuperSplat Editor を使用すると、スプラットシーンをウェブに [https://superspl.at/](https://superspl.at/) で公開できます。
 
-![SuperSplat Website](/img/user-manual/gaussian-splatting/editing/supersplat/supersplat-website.png)
+![SuperSplat Website](/img/user-manual/supersplat/editor/supersplat-website.png)
 
 ### ログイン状態の確認
 
@@ -76,7 +76,7 @@ SuperSplatウェブサイトで使用されているビューアは[オープン
 
 ビューアのエクスポートは、いくつかのオプションで設定できます。
 
-![ビューアのエクスポート](/img/user-manual/gaussian-splatting/editing/supersplat/viewer-export.png)
+![ビューアのエクスポート](/img/user-manual/supersplat/viewer/viewer-export.png)
 
 | オプション | 説明 |
 |--------|-------------|
