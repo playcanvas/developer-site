@@ -9,7 +9,7 @@ Some assets don't need to be imported before they can be used. For example a PNG
 
 ## Asset Import {#asset-import}
 
-When a source asset is uploaded, PlayCanvas starts an import task to perform this import process on our server.
+When a source asset is uploaded, PlayCanvas starts an asset import task to perform this import process on our server.
 
 There are a variety of options available to tune the behavior of the import pipeline to suit your needs.
 
