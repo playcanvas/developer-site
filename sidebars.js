@@ -594,7 +594,18 @@ const sidebars = {
         'user-manual/supersplat/convert',
       ],
     },
-    'user-manual/splat-transform',
+    {
+      type: 'category',
+      label: 'SplatTransform',
+      link: {
+        type: 'doc',
+        id: 'user-manual/splat-transform/index',
+      },
+      items: [
+        'user-manual/splat-transform/collision',
+        'user-manual/splat-transform/docker',
+      ],
+    },
     {
       type: 'html',
       value: '<div class="sidebar-section-header">Common Topics</div>',
