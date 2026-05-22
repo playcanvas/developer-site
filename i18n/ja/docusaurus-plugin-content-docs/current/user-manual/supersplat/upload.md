@@ -1,5 +1,5 @@
 ---
-title: Direct Upload
+title: ダイレクトアップロード
 description: "完成済みのスプラットファイルを、SuperSplat Editorを開かずに直接superspl.atへアップロードします。"
 ---
 

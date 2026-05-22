@@ -1,5 +1,5 @@
 ---
-title: Cameras
+title: カメラ
 description: "SuperSplat Studioで公開済みスプラットの開始カメラを1つ以上定義します — 位置、ターゲット、視野角。"
 ---
 

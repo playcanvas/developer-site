@@ -1,5 +1,5 @@
 ---
-title: Animations
+title: アニメーション
 description: "公開済みスプラットで自動再生されるキーフレーム化カメラアニメーションを作成します。SuperSplat Studioでのループ動作と補間を含みます。"
 ---
 

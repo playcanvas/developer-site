@@ -1,5 +1,5 @@
 ---
-title: Skybox & Background
+title: スカイボックスと背景
 description: "SuperSplat Studioで公開済みスプラットの背景色を設定するか、エクイレクタンギュラースカイボックスをアップロードします。"
 ---
 

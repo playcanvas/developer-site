@@ -1,5 +1,5 @@
 ---
-title: Convert
+title: 変換
 description: "superspl.at/convertでブラウザ上でスプラットを変換・トランスフォーム — splat-transform CLIのウェブフロントエンドです。"
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Post Effects
+title: ポストエフェクト
 description: "SuperSplat Studioで公開済みスプラットにシャープネス、ブルーム、カラーグレーディング、ビネット、フリンジング、トーンマッピング、高精度レンダリングを適用します。"
 ---
 

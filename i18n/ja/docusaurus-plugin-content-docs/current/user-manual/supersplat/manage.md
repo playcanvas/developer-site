@@ -1,5 +1,5 @@
 ---
-title: Manage
+title: 管理
 description: "superspl.atのManageページで、公開済みスプラットの一覧表示、編集、共有、削除を行い、Studioで開くこともできます。"
 ---
 

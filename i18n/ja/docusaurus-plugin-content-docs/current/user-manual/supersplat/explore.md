@@ -1,5 +1,5 @@
 ---
-title: Explore
+title: 探索
 description: "superspl.atで公開スプラットを閲覧・発見する：並べ替え、期間や特徴によるフィルタ、検索、クリエイターのプロファイルへのアクセス。"
 ---
 

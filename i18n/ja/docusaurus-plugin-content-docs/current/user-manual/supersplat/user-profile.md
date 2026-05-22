@@ -1,5 +1,5 @@
 ---
-title: User Profile
+title: ユーザープロファイル
 description: "クリエイターの公開SuperSplatページ：アバター、自己紹介、ソーシャルリンク、公開スプラットのグリッドを閲覧します。"
 ---
 
