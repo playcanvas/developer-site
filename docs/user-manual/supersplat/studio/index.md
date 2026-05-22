@@ -11,7 +11,7 @@ Studio writes its output as a single JSON document — [Experience Settings](/us
 
 ## Launching Studio
 
-Studio runs at a YouTube-Studio-style URL: **`https://superspl.at/scene/<hash>/studio`**. Only the splat's owner (or a platform admin) can open it; for anyone else the URL 404s.
+Studio runs at **`https://superspl.at/scene/<hash>/studio`**. Only the splat's owner can open it; for anyone else the URL 404s.
 
 There are two ways to get there:
 

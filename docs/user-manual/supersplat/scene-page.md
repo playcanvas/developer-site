@@ -79,7 +79,7 @@ Some download targets are produced on demand â€” the dialog shows a **Preparingâ
 
 ## Comments
 
-Below the viewer is the comments section. Anyone signed in can post a comment; the splat's owner and platform admins can delete any comment.
+Below the viewer is the comments section. Anyone signed in can post a comment; the splat's owner can delete any comment.
 
 - Each comment shows the commenter's avatar, username, timestamp, and sanitized HTML body.
 - Comments can be liked individually (the per-comment star icon).
