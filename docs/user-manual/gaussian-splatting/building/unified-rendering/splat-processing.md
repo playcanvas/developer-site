@@ -130,12 +130,12 @@ The source and destination resources can have different numbers of splats. The `
 ```glsl
 void process() {
     uint destIndex = splat.index;  // Current destination splat index
-    
+
     // Calculate which source splat to read from
     uint sourceIndex = destIndex * 2;  // Example: sample every other splat
     setSplat(sourceIndex);
     vec3 srcPos = getCenter();
-    
+
     // Write to destination
     writePosition(vec4(srcPos, 1.0));
 }
@@ -286,8 +286,13 @@ void process() {
 
 ## Live Examples
 
-- [Paint example](https://playcanvas.github.io/#/gaussian-splatting/paint) - Demonstrates painting splats with a brush
-- [Editor example](https://playcanvas.github.io/#/gaussian-splatting/editor) - Demonstrates selection, deletion, and cloning
+- Paint example - Demonstrates painting splats with a brush
+
+<EngineExample id="gaussian-splatting/paint" title="Paint example" />
+
+- Editor example - Demonstrates selection, deletion, and cloning
+
+<EngineExample id="gaussian-splatting/editor" title="Editor example" />
 
 ## See Also
 

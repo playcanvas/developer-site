@@ -147,7 +147,9 @@ Lines are rendered as a series of splats placed along the line path:
 
 ## Live Example
 
-See the [Procedural Shapes example](https://playcanvas.github.io/#/gaussian-splatting/procedural-shapes) which demonstrates CAD-style dimension annotations on a Gaussian splat scene.
+See the Procedural Shapes example which demonstrates CAD-style dimension annotations on a Gaussian splat scene.
+
+<EngineExample id="gaussian-splatting/procedural-shapes" title="Procedural Shapes example" />
 
 ## Script Location
 

@@ -5,7 +5,9 @@ description: "Use the PlayCanvas Picker with splats in unified and non-unified m
 
 The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/classes/Picker.html) which can query the object rendered at a specified pixel. The picker works with splats in the same way that it does for meshes.
 
-**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/picking)** - See splat picking in action with interactive selection and world position detection.
+**View Live Example** - See splat picking in action with interactive selection and world position detection.
+
+<EngineExample id="gaussian-splatting/picking" title="View Live Example" />
 
 ## Unified vs Non-Unified Mode
 

@@ -27,21 +27,21 @@ flowchart LR
         Loaded[ロードされたスプラット]
         Container[GSplatContainer]
     end
-    
+
     Copy([コピー])
-    
+
     WorkBuffer[ワークバッファ]
-    
+
     Sort([ソート])
-    
+
     Render([レンダリング])
-    
+
     Loaded --> Copy
     Container --> Copy
     Copy --> WorkBuffer
     WorkBuffer --> Sort
     Sort --> Render
-    
+
     style Copy stroke:#f90,stroke-width:3px
 ```
 
@@ -72,7 +72,7 @@ entity.gsplat.setWorkBufferModifier({
             // すべてのスプラットを上にオフセット
             center.y += 1.0;
         }
-        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                        inout vec4 rotation, inout vec3 scale) {}
         void modifySplatColor(vec3 center, inout vec4 color) {
             // スプラットを赤くティント
@@ -83,7 +83,7 @@ entity.gsplat.setWorkBufferModifier({
         fn modifySplatCenter(center: ptr<function, vec3f>) {
             (*center).y += 1.0;
         }
-        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, 
+        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
                                      rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
         fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
             *color = vec4f((*color).rgb * vec3f(1.0, 0.5, 0.5), (*color).a);
@@ -132,7 +132,7 @@ entity.gsplat.setWorkBufferModifier({
         uniform uint uComponentId;
 
         void modifySplatCenter(inout vec3 center) {}
-        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                        inout vec4 rotation, inout vec3 scale) {}
         void modifySplatColor(vec3 center, inout vec4 color) {
             // splatIdストリームにコンポーネントIDを書き込む
@@ -143,7 +143,7 @@ entity.gsplat.setWorkBufferModifier({
         uniform uComponentId: u32;
 
         fn modifySplatCenter(center: ptr<function, vec3f>) {}
-        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, 
+        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
                                      rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
         fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
             writeSplatId(vec4u(uniform.uComponentId, 0u, 0u, 0u));
@@ -205,7 +205,9 @@ vec4 otherColor = getColor();
 
 ## ライブサンプル
 
-以下を示す[LOD Instancesサンプル](https://playcanvas.github.io/#/gaussian-splatting/lod-instances)を参照してください：
+以下を示すLOD Instancesサンプルを参照してください：
+
+<EngineExample id="gaussian-splatting/lod-instances" title="LOD Instancesサンプル" />
 
 - ワークバッファへの`splatId`ストリームの追加
 - `setWorkBufferModifier()`を使用したコピー中のコンポーネントIDの書き込み

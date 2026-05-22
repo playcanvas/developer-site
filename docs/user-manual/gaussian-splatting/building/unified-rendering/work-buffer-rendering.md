@@ -27,21 +27,21 @@ flowchart LR
         Loaded[Loaded Splats]
         Container[GSplatContainer]
     end
-    
+
     Copy([Copy])
-    
+
     WorkBuffer[Work Buffer]
-    
+
     Sort([Sort])
-    
+
     Render([Render])
-    
+
     Loaded --> Copy
     Container --> Copy
     Copy --> WorkBuffer
     WorkBuffer --> Sort
     Sort --> Render
-    
+
     style Render stroke:#09f,stroke-width:3px
 ```
 
@@ -54,7 +54,7 @@ Use `getShaderChunks()` on the scene's gsplat material to set the `gsplatModifyV
 ```javascript
 const glslModifier = `
     void modifySplatCenter(inout vec3 center) {}
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
         // Apply global color grading
@@ -64,7 +64,7 @@ const glslModifier = `
 
 const wgslModifier = `
     fn modifySplatCenter(center: ptr<function, vec3f>) {}
-    fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, 
+    fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
                                  rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
     fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
         *color = vec4f(pow((*color).rgb, vec3f(0.8)), (*color).a);
@@ -109,12 +109,12 @@ const glslModifier = `
     uniform sampler2D uColorLookup;
 
     void modifySplatCenter(inout vec3 center) {}
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
         // Read component ID written during copy
         uint id = loadSplatId().r;
-        
+
         // Look up color from texture based on component ID
         vec3 tintColor = texelFetch(uColorLookup, ivec2(int(id), 0), 0).rgb;
         color.rgb *= tintColor;
@@ -187,7 +187,7 @@ const glslModifier = `
         // Read ID from work buffer (can be used in other functions)
         componentId = loadSplatId().r;
     }
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
         // Look up color from texture based on component ID
@@ -199,7 +199,9 @@ const glslModifier = `
 
 ## Live Example
 
-See the [LOD Instances example](https://playcanvas.github.io/#/gaussian-splatting/lod-instances) which demonstrates:
+See the LOD Instances example which demonstrates:
+
+<EngineExample id="gaussian-splatting/lod-instances" title="LOD Instances example" />
 
 - Reading component IDs written during copy
 - Looking up colors from a texture

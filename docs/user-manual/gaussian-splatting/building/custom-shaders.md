@@ -17,7 +17,9 @@ For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-spl
 
 Override the `gsplatModifyVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
 
-**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/multi-splat)** - See shader chunk customization in action with animated splats.
+**View Live Example** - See shader chunk customization in action with animated splats.
+
+<EngineExample id="gaussian-splatting/multi-splat" title="View Live Example" />
 
 ## API Reference
 
@@ -294,4 +296,4 @@ Here are some examples demonstrating custom shader techniques:
 
 ### Animation Effects
 
-[**Simple Sinusoidal Animation**](https://playcanvas.github.io/#/gaussian-splatting/multi-splat) - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.
+**Simple Sinusoidal Animation** - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.

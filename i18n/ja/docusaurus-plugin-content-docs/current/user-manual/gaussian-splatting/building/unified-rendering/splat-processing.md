@@ -130,12 +130,12 @@ new pc.GSplatProcessor(device, source, destination, options)
 ```glsl
 void process() {
     uint destIndex = splat.index;  // 現在の宛先スプラットインデックス
-    
+
     // どのソーススプラットから読み取るかを計算
     uint sourceIndex = destIndex * 2;  // 例：1つおきのスプラットをサンプル
     setSplat(sourceIndex);
     vec3 srcPos = getCenter();
-    
+
     // 宛先に書き込む
     writePosition(vec4(srcPos, 1.0));
 }
@@ -286,8 +286,13 @@ void process() {
 
 ## ライブサンプル
 
-- [Paintサンプル](https://playcanvas.github.io/#/gaussian-splatting/paint) - ブラシでスプラットをペイントするデモ
-- [Editorサンプル](https://playcanvas.github.io/#/gaussian-splatting/editor) - 選択、削除、クローンのデモ
+- Paintサンプル - ブラシでスプラットをペイントするデモ
+
+<EngineExample id="gaussian-splatting/paint" title="Paintサンプル" />
+
+- Editorサンプル - 選択、削除、クローンのデモ
+
+<EngineExample id="gaussian-splatting/editor" title="Editorサンプル" />
 
 ## 関連項目
 

@@ -62,7 +62,9 @@ app.on('update', () => {
 
 ## 参考資料
 
-- [Custom Compose Shader の例](https://playcanvas.github.io/#/graphics/custom-compose-shader) — 動作する完全なデモ
+- Custom Compose Shader の例 — 動作する完全なデモ
+
+<EngineExample id="graphics/custom-compose-shader" title="Custom Compose Shader の例" />
 
 ## 用途
 

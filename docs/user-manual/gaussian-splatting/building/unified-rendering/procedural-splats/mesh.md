@@ -120,7 +120,9 @@ anotherEntity.addComponent('gsplat', {
 
 ## Live Example
 
-See the [Procedural Mesh example](https://playcanvas.github.io/#/gaussian-splatting/procedural-mesh) which demonstrates converting a terrain scene with animated clouds to splat representation.
+See the Procedural Mesh example which demonstrates converting a terrain scene with animated clouds to splat representation.
+
+<EngineExample id="gaussian-splatting/procedural-mesh" title="Procedural Mesh example" />
 
 ## Script Location
 

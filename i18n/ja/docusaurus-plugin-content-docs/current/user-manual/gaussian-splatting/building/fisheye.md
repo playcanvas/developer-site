@@ -7,7 +7,9 @@ PlayCanvas は、Gaussian スプラットと無限スカイボックスに対す
 
 ![強い魚眼プロジェクションでレンダリングされた Gaussian スプラットシーン](/img/user-manual/gaussian-splatting/fisheye-ultra-wide.png)
 
-**[ライブデモを見る](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming)** - 設定パネルを開き、`fisheye` スライダーを `0` から `1` までドラッグしてください。`cameraFov` を高い値にしたり、異なる HDRI 環境と組み合わせたりして、スカイドームやタイニープラネットの見た目を再現してみてください。
+**ライブデモを見る** - 設定パネルを開き、`fisheye` スライダーを `0` から `1` までドラッグしてください。`cameraFov` を高い値にしたり、異なる HDRI 環境と組み合わせたりして、スカイドームやタイニープラネットの見た目を再現してみてください。
+
+<EngineExample id="gaussian-splatting/lod-streaming" title="ライブデモを見る" />
 
 ## 概要
 

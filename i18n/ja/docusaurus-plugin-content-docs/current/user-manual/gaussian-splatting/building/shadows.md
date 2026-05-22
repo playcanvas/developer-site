@@ -5,7 +5,9 @@ description: "Gaussian splatsからメッシュへのシャドウキャストを
 
 Gaussian Splatsは、シーン内のメッシュやその他のサーフェスに影を落とすことができます。
 
-**[ライブデモを見る](https://playcanvas.github.io/#/gaussian-splatting/simple)** - スプラットの影の動作を確認できます。
+**ライブデモを見る** - スプラットの影の動作を確認できます。
+
+<EngineExample id="gaussian-splatting/simple" title="ライブデモを見る" />
 
 ![スプラットの影](/img/user-manual/gaussian-splatting/splat-shadows.png)
 

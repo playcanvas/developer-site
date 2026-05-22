@@ -38,8 +38,13 @@ You must create the different LOD levels yourself (LOD 0 = highest detail, highe
 
 Explore these live examples to see LOD streaming in action:
 
-- [LOD Streaming (Basic)](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming) - Demonstrates basic LOD streaming with different detail levels
-- [LOD Streaming with Spherical Harmonics](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming-sh) - Shows LOD streaming with spherical harmonic data
+- LOD Streaming (Basic) - Demonstrates basic LOD streaming with different detail levels
+
+<EngineExample id="gaussian-splatting/lod-streaming" title="LOD Streaming (Basic)" />
+
+- LOD Streaming with Spherical Harmonics - Shows LOD streaming with spherical harmonic data
+
+<EngineExample id="gaussian-splatting/lod-streaming-sh" title="LOD Streaming with Spherical Harmonics" />
 
 ## Enabling LOD Streaming
 

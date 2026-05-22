@@ -5,7 +5,9 @@ description: "Enable shadow casting from Gaussian splats onto meshes: API proper
 
 Gaussian Splats can cast shadows onto meshes and other surfaces in your scene.
 
-**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/simple)** - See splat shadows in action.
+**View Live Example** - See splat shadows in action.
+
+<EngineExample id="gaussian-splatting/simple" title="View Live Example" />
 
 ![Splat Shadows](/img/user-manual/gaussian-splatting/splat-shadows.png)
 

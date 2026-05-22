@@ -109,4 +109,6 @@ renders.forEach((render) => {
 
 ## 例
 
-完全に動作するサンプルがエンジンの例にあります: [Multiple Render Targets](https://playcanvas.github.io/#/graphics/multi-render-targets) は、カスタムシェーダーパスを通してチェス盤をレンダリングし、ワールド法線とグロスを追加のカラーターゲットに書き込んで、それぞれを画面上に別々のテクスチャとして表示します。
+完全に動作するサンプルがエンジンの例にあります: Multiple Render Targets は、カスタムシェーダーパスを通してチェス盤をレンダリングし、ワールド法線とグロスを追加のカラーターゲットに書き込んで、それぞれを画面上に別々のテクスチャとして表示します。
+
+<EngineExample id="graphics/multi-render-targets" title="Multiple Render Targets" />

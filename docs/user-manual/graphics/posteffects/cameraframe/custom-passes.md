@@ -30,33 +30,33 @@ class RenderPassTint extends RenderPassShaderQuad {
         super(device);
         this.sourceTexture = sourceTexture;
         this.tint = Color.WHITE.clone();
-        
+
         this.shader = this.createShader();
     }
-    
+
     createShader() {
         return ShaderUtils.createShader(this.device, {
             uniqueName: 'TintShader',
             attributes: { aPosition: SEMANTIC_POSITION },
             vertexChunk: 'quadVS',
-            
+
             fragmentGLSL: `
                 uniform sampler2D sourceTexture;
                 uniform vec3 tint;
                 varying vec2 uv0;
-                
+
                 void main() {
                     vec4 color = texture2D(sourceTexture, uv0);
                     gl_FragColor = vec4(color.rgb * tint, color.a);
                 }
             `,
-            
+
             fragmentWGSL: `
                 var sourceTexture: texture_2d<f32>;
                 var sourceTextureSampler: sampler;
                 uniform tint: vec3f;
                 varying uv0: vec2f;
-                
+
                 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
                     var output: FragmentOutput;
                     let color: vec4f = textureSample(sourceTexture, sourceTextureSampler, uv0);
@@ -66,7 +66,7 @@ class RenderPassTint extends RenderPassShaderQuad {
             `
         });
     }
-    
+
     execute() {
         this.device.scope.resolve('sourceTexture').setValue(this.sourceTexture);
         this.device.scope.resolve('tint').setValue([this.tint.r, this.tint.g, this.tint.b]);
@@ -130,7 +130,9 @@ camera.framePasses = [scenePass, blurHPass, blurVPass];
 
 ## Resources
 
-- [Render Pass Example](https://playcanvas.github.io/#/graphics/render-pass) - Complete demonstration of custom render passes
+- Render Pass Example - Complete demonstration of custom render passes
+
+<EngineExample id="graphics/render-pass" title="Render Pass Example" />
 
 ## Use Cases
 

@@ -27,21 +27,21 @@ flowchart LR
         Loaded[ロードされたスプラット]
         Container[GSplatContainer]
     end
-    
+
     Copy([コピー])
-    
+
     WorkBuffer[ワークバッファ]
-    
+
     Sort([ソート])
-    
+
     Render([レンダリング])
-    
+
     Loaded --> Copy
     Container --> Copy
     Copy --> WorkBuffer
     WorkBuffer --> Sort
     Sort --> Render
-    
+
     style Render stroke:#09f,stroke-width:3px
 ```
 
@@ -54,7 +54,7 @@ flowchart LR
 ```javascript
 const glslModifier = `
     void modifySplatCenter(inout vec3 center) {}
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
         // グローバルカラーグレーディングを適用
@@ -64,7 +64,7 @@ const glslModifier = `
 
 const wgslModifier = `
     fn modifySplatCenter(center: ptr<function, vec3f>) {}
-    fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, 
+    fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
                                  rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
     fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
         *color = vec4f(pow((*color).rgb, vec3f(0.8)), (*color).a);
@@ -109,12 +109,12 @@ const glslModifier = `
     uniform sampler2D uColorLookup;
 
     void modifySplatCenter(inout vec3 center) {}
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
         // コピー中に書き込まれたコンポーネントIDを読み取る
         uint id = loadSplatId().r;
-        
+
         // コンポーネントIDに基づいてテクスチャから色をルックアップ
         vec3 tintColor = texelFetch(uColorLookup, ivec2(int(id), 0), 0).rgb;
         color.rgb *= tintColor;
@@ -187,7 +187,7 @@ const glslModifier = `
         // ワークバッファからIDを読み取る（他の関数で使用可能）
         componentId = loadSplatId().r;
     }
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
         // コンポーネントIDに基づいてテクスチャから色をルックアップ
@@ -199,7 +199,9 @@ const glslModifier = `
 
 ## ライブサンプル
 
-以下を示す[LOD Instancesサンプル](https://playcanvas.github.io/#/gaussian-splatting/lod-instances)を参照してください：
+以下を示すLOD Instancesサンプルを参照してください：
+
+<EngineExample id="gaussian-splatting/lod-instances" title="LOD Instancesサンプル" />
 
 - コピー中に書き込まれたコンポーネントIDの読み取り
 - テクスチャからの色のルックアップ
