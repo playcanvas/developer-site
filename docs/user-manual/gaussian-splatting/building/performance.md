@@ -7,7 +7,7 @@ Rendering splats can be expensive on both the CPU and GPU. Here are some strateg
 
 ## Limit Gaussian Count
 
-Be mindful of the number of Gaussians in your scene since every Gaussian is sorted on camera depth every frame. You can check the number contained within a particular GSplat asset by using the [SPLAT DATA Panel](https://github.com/playcanvas/supersplat/wiki/Inspecting-Splat-Data) in the [SuperSplat Editor](https://superspl.at/editor). Use SuperSplat to trim unwanted Gaussians from your PLY files.
+Be mindful of the number of Gaussians in your scene since every Gaussian is sorted on camera depth every frame. You can check the number contained within a particular GSplat asset by using the [SPLAT DATA Panel](/user-manual/supersplat/editor/data-panel/) in the [SuperSplat Editor](/user-manual/supersplat/editor/). Use SuperSplat to trim unwanted Gaussians from your PLY files.
 
 For large scenes, consider using [LOD Streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming) which dynamically loads appropriate levels of detail based on camera distance. This significantly reduces the number of active Gaussians at any given time while maintaining visual quality where it matters most.
 

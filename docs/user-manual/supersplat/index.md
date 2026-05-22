@@ -1,43 +1,76 @@
 ---
 title: SuperSplat
-description: "SuperSplat browser editor overview: open-source splat editing in the web, videos, requirements, and getting started at superspl.at."
+description: "SuperSplat is PlayCanvas's editing and publishing platform for 3D Gaussian Splats — edit, upload, manage, curate, share, and discover splat scenes on superspl.at."
 ---
 
-[SuperSplat](https://superspl.at/editor) is PlayCanvas's free, [open-source](https://github.com/playcanvas/supersplat) Gaussian Splat editor designed specifically for production workflows. It runs entirely in the browser with no downloads required, making it accessible from anywhere.
+[SuperSplat](https://superspl.at) is PlayCanvas's editing and publishing platform for 3D Gaussian Splats. It takes a raw splat capture all the way from cleanup to a polished, shareable scene with cameras, animations, annotations, post effects, and collision — viewable in any modern browser.
 
-![SuperSplat Interface](/img/user-manual/gaussian-splatting/supersplat-interface.png)
+The platform is made up of several pieces. Some you'll use as a creator, some your visitors use to view what you've made, and some are general-purpose utilities.
 
-## Video Tutorials
+```mermaid
+flowchart LR
+    PLY([Raw splat<br/>PLY / SOG / ...])
+    Editor([Editor])
+    Upload([Direct Upload])
+    Manage([Manage])
+    Studio([Studio])
+    Scene([Scene page])
+    Explore([Explore])
+    Viewer([Viewer<br/>embed / self-host])
+    Convert([Convert])
 
-### Introduction to SuperSplat
+    PLY --> Editor --> Manage
+    PLY --> Upload --> Manage
+    Convert -.-> Editor
+    Convert -.-> Upload
+    Manage --> Studio --> Manage
+    Manage --> Scene
+    Scene --> Explore
+    Scene --> Viewer
+```
 
-A great way to learn the basics on SuperSplat is to watch this video introduction:
+:::tip You can skip the Editor
 
-<div className="iframe-container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/MwzaEM2I55I" title="SuperSplat Basics" allowfullscreen></iframe>
-</div>
+If you already have a clean splat file, you don't need to use the Editor. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or on your [Manage page](manage)) to publish straight to the platform.
 
-### In-Depth Tutorial
+:::
 
-For a more comprehensive guide to using SuperSplat, check out this in-depth tutorial:
+## The platform
 
-<div className="iframe-container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/J37rTieKgJ8" title="SuperSplat In-Depth Tutorial" allowfullscreen></iframe>
-</div>
+| Surface | What it is | Where it lives |
+|---------|------------|----------------|
+| **[Editor](editor/)** | Browser-based editor for cleaning, cropping, color-adjusting, and animating splats. Publishes to superspl.at. | [superspl.at/editor](https://superspl.at/editor) |
+| **[Direct Upload](upload)** | Publish an already-clean splat file without opening the Editor. | The orange **Upload Splat** button on [superspl.at](https://superspl.at) |
+| **[Manage](manage)** | Your splat library: edit title/description, change visibility, choose downloadable + license, delete, open in Studio. | [superspl.at/manage](https://superspl.at/manage) |
+| **[Studio](studio/)** | Curate the published viewing experience: cameras, animations, annotations, post effects, skybox, collision. YouTube-Studio-style per-scene URL. | `superspl.at/scene/<hash>/studio` |
+| **[Scene page](scene-page)** | Public page for a published splat: embedded viewer, share, embed, download, comments, likes, suggested splats. | `superspl.at/scene/<hash>` |
+| **[Explore](explore)** | Public gallery with sort, time, feature filters, and search. The superspl.at home page. | [superspl.at](https://superspl.at) |
+| **[User Profile](user-profile)** | A user's public page: avatar, bio, social links, their published splats. | `superspl.at/user?id=<username>` |
+| **[Viewer](viewer/)** | The open-source web viewer that powers scene pages and Editor HTML exports. Embed in your own page or self-host. | npm `@playcanvas/supersplat-viewer`, [GitHub](https://github.com/playcanvas/supersplat-viewer) |
+| **[Convert](convert)** | Web frontend to the [splat-transform](/user-manual/splat-transform/) CLI: convert formats, transform, and filter in the browser. | [superspl.at/convert](https://superspl.at/convert) |
 
-## Getting Started
+## Open source vs hosted
 
-### Accessing SuperSplat
+SuperSplat is built on open foundations, with a hosted platform layered on top.
 
-1. **Open your browser** - Navigate to [superspl.at/editor](https://superspl.at/editor)
-2. **Load your PLY file** - Drag and drop or use the File menu
-3. **Begin editing** - Use the interface controls to navigate and edit
+| Component | Source | License |
+|-----------|--------|---------|
+| Editor | [playcanvas/supersplat](https://github.com/playcanvas/supersplat) | MIT |
+| Viewer | [playcanvas/supersplat-viewer](https://github.com/playcanvas/supersplat-viewer) | MIT |
+| splat-transform (powers Convert) | [playcanvas/splat-transform](https://github.com/playcanvas/splat-transform) | MIT |
+| Studio, Manage, Explore, Scene page, Convert UI, the publish/scene API | hosted by PlayCanvas on superspl.at | proprietary |
 
-### System Requirements
+You can take the Editor's HTML export, or the Viewer npm package, and host published splats entirely on your own infrastructure if you prefer — see [Self-Hosting the Viewer](viewer/self-hosting).
 
-- **Modern web browser** - Chrome, Firefox, Safari, or Edge
-- **WebGL 2.0 support** - Available in all modern browsers
-- **GPU acceleration** - Recommended for large splat files
-- **No installation** - Everything runs in the browser
+## Accounts
 
-SuperSplat continues to evolve with new features and improvements. Stay updated with the latest releases and join the community to share your creations and learn from others.
+A free PlayCanvas account is required to **publish splats** to superspl.at, **comment** on splats, and **like** splats. Browsing the [Explore](explore) page and viewing public [scene pages](scene-page) is anonymous. See [Account Creation](/user-manual/account-management/user-accounts/account-creation) to get started.
+
+## What's next?
+
+A typical first-time workflow:
+
+1. [Open the Editor](editor/) and load your PLY, or skip to step 2 if you already have a clean file.
+2. [Publish](editor/publishing) (from the Editor) or [Upload](upload) directly. The splat appears on your [Manage page](manage).
+3. [Open it in Studio](studio/) and add cameras, animations, annotations, post effects, a skybox, or collision.
+4. Share the [scene page](scene-page) URL, or [embed the Viewer](viewer/embedding) in your own site.

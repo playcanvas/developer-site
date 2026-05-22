@@ -1,9 +1,12 @@
 ---
 title: Editing and Publishing Splats
-description: "Why edit splats before production, SuperSplat versus splat-transform workflows, and when to use visual versus CLI tooling."
+description: "Edit, publish, curate, share, and discover Gaussian Splats with the SuperSplat platform — and use the splat-transform CLI for scripted workflows."
 ---
 
-Raw Gaussian Splat files often need editing and optimization before they're ready for production use. This process involves removing unwanted elements, compressing file sizes, and optimizing performance for real-time rendering in PlayCanvas.
+Raw Gaussian Splat files often need editing and optimization before they're ready for production use — removing unwanted elements, compressing file sizes, and tuning the viewing experience. PlayCanvas provides two complementary toolsets:
+
+- **The [SuperSplat](/user-manual/supersplat/) platform** — visual, browser-based, hosted at [superspl.at](https://superspl.at). The end-to-end home for editing, publishing, managing, curating, sharing, and discovering splats.
+- **The [splat-transform](/user-manual/splat-transform/) CLI** — open-source command-line tool for scripted, reproducible conversions and batch processing.
 
 ## Why Edit Gaussian Splats?
 
@@ -15,26 +18,27 @@ Generated splat files typically have several issues that need addressing:
 - **Poor performance** - Suboptimal splat distribution affecting frame rates
 - **Visual artifacts** - Rendering glitches that need manual cleanup
 
-## Editing Tools Overview
+## The SuperSplat platform
 
-PlayCanvas provides both visual and command-line tools for editing Gaussian Splats:
+[SuperSplat](/user-manual/supersplat/) covers the whole lifecycle of a splat from raw capture to a polished, shareable scene:
 
-### [SuperSplat Editor](/user-manual/supersplat/)
+- **[Editor](/user-manual/supersplat/editor/)** — open-source, browser-based editor for cleaning, cropping, color-adjusting, and animating splats. Publishes to superspl.at.
+- **[Direct Upload](/user-manual/supersplat/upload)** — skip the Editor and publish a finished splat file directly with the orange **Upload Splat** button on the home page.
+- **[Manage](/user-manual/supersplat/manage)** — your library: edit metadata, change visibility, choose downloadable + license, delete, open in Studio.
+- **[Studio](/user-manual/supersplat/studio/)** — curate the published viewing experience: cameras, animations, annotations, post effects, skybox, collision.
+- **[Scene page](/user-manual/supersplat/scene-page)** — the public page where visitors view, share, embed, like, comment on, and (if you allow it) download your splat.
+- **[Explore](/user-manual/supersplat/explore)** — the public gallery of every shared splat, with sort, time, feature filters, and search.
+- **[Viewer](/user-manual/supersplat/viewer/)** — the open-source web viewer that powers scene pages, exportable as a single-file HTML or embeddable via the `@playcanvas/supersplat-viewer` npm package.
+- **[Convert](/user-manual/supersplat/convert)** — in-browser format conversion and transforms (translate / rotate / scale / filters), powered by splat-transform.
 
-The **SuperSplat Editor** is a powerful, browser-based visual editor designed specifically for interactive splat editing. It's perfect for:
+## SplatTransform CLI
 
-- Manual cleanup and artistic editing
-- Removing unwanted background elements
-- Fine-tuning splat positioning and colors
-- Creating camera animations and flythroughs
-- Publishing splats to the web
-
-### [SplatTransform CLI](/user-manual/splat-transform/)
-
-The **splat-transform CLI** is a command-line tool for batch processing and automated transformations. It excels at:
+The [splat-transform CLI](/user-manual/splat-transform/) is the right choice when you need:
 
 - Scripted, reproducible transformations
-- Batch processing multiple files
+- Batch processing across many files
 - Automated filtering and optimization
 - Integration into build pipelines
-- Combining and merging splat files
+- Combining and merging splat files programmatically
+
+Both the Convert page and the splat-transform CLI use the same underlying library, so anything you can do interactively in Convert you can also automate from the command line.

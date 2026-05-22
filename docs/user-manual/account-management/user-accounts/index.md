@@ -15,7 +15,7 @@ But not everyone opts to use the PlayCanvas Editor - perhaps you prefer to use t
 
 - 🔍 **Explore and learn** - Browse scripts and assets in thousands of public Editor projects to learn and find inspiration
 - ⚙️ **Generate Assets** - Use the Editor's asset processing capabilities to generate assets for use in any PlayCanvas-based project
-- ✨ **Publish Gaussian Splats** - Upload and share your splats using [SuperSplat](https://playcanvas.com/products/supersplat)
+- ✨ **Publish, like, and comment on Gaussian Splats** - A PlayCanvas account is required to publish splats to [SuperSplat](/user-manual/supersplat/), like splats, and post comments. Browsing the public [Explore](/user-manual/supersplat/explore) gallery and viewing public scene pages is anonymous.
 - 👥 **Community participation** - Star, follow and comment on the projects of other PlayCanvas community members
 - 🔔 **Stay Informed** - Creating an account allows us to notify you of exciting updates related to the entire PlayCanvas platform
 

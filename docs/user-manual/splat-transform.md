@@ -11,6 +11,12 @@ SplatTransform is [open-sourced under an MIT license on GitHub](https://github.c
 
 :::
 
+:::tip Prefer a web UI?
+
+The [SuperSplat Convert page](/user-manual/supersplat/convert) at [superspl.at/convert](https://superspl.at/convert) is the web frontend to splat-transform. It runs the same conversions and transforms in your browser via WebAssembly — no installation required. Use the web UI for one-off conversions and the CLI below for scripted or batch workflows.
+
+:::
+
 ## Why Use SplatTransform?
 
 SplatTransform solves important problems developers face when working with Gaussian splats:
