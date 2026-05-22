@@ -6,8 +6,8 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 570
-Generated: 2026-05-21
+Total Documents: 588
+Generated: 2026-05-22
 
 ## Recommended Entry Points
 
@@ -477,15 +477,33 @@ Generated: 2026-05-21
 - https://developer.playcanvas.com/user-manual/splat-transform/ - SplatTransform
 ### Supersplat
 - https://developer.playcanvas.com/user-manual/supersplat/ - SuperSplat
-- https://developer.playcanvas.com/user-manual/supersplat/camera-controls/ - Camera Controls
-- https://developer.playcanvas.com/user-manual/supersplat/data-panel/ - Data Panel
-- https://developer.playcanvas.com/user-manual/supersplat/editing-splats/ - Editing Splats
-- https://developer.playcanvas.com/user-manual/supersplat/import-export/ - Import and Export
-- https://developer.playcanvas.com/user-manual/supersplat/interface/ - Interface Overview
-- https://developer.playcanvas.com/user-manual/supersplat/managing-projects/ - Managing Projects
-- https://developer.playcanvas.com/user-manual/supersplat/publishing/ - Publishing
-- https://developer.playcanvas.com/user-manual/supersplat/rendering/ - Rendering Media
-- https://developer.playcanvas.com/user-manual/supersplat/timeline/ - Timeline
+- https://developer.playcanvas.com/user-manual/supersplat/convert/ - Convert
+- https://developer.playcanvas.com/user-manual/supersplat/editor/ - SuperSplat Editor
+- https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls/ - Camera Controls
+- https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel/ - Data Panel
+- https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats/ - Editing Splats
+- https://developer.playcanvas.com/user-manual/supersplat/editor/import-export/ - Import and Export
+- https://developer.playcanvas.com/user-manual/supersplat/editor/interface/ - Interface Overview
+- https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects/ - Managing Projects
+- https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/ - Publishing
+- https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/ - Rendering Media
+- https://developer.playcanvas.com/user-manual/supersplat/editor/timeline/ - Timeline
+- https://developer.playcanvas.com/user-manual/supersplat/explore/ - Explore
+- https://developer.playcanvas.com/user-manual/supersplat/manage/ - Manage
+- https://developer.playcanvas.com/user-manual/supersplat/scene-page/ - Scene Page
+- https://developer.playcanvas.com/user-manual/supersplat/studio/ - SuperSplat Studio
+- https://developer.playcanvas.com/user-manual/supersplat/studio/animations/ - Animations
+- https://developer.playcanvas.com/user-manual/supersplat/studio/annotations/ - Annotations
+- https://developer.playcanvas.com/user-manual/supersplat/studio/cameras/ - Cameras
+- https://developer.playcanvas.com/user-manual/supersplat/studio/collision/ - Collision
+- https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings/ - Experience Settings
+- https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects/ - Post Effects
+- https://developer.playcanvas.com/user-manual/supersplat/studio/skybox/ - Skybox & Background
+- https://developer.playcanvas.com/user-manual/supersplat/upload/ - Direct Upload
+- https://developer.playcanvas.com/user-manual/supersplat/user-profile/ - User Profile
+- https://developer.playcanvas.com/user-manual/supersplat/viewer/ - SuperSplat Viewer
+- https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding/ - Embedding the Viewer
+- https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting/ - Self-Hosting the Viewer
 
 ## Tutorials
 
