@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 588
+Total Documents: 590
 Generated: 2026-05-22
 
 ================================================================================
@@ -33442,11 +33442,11 @@ Thank you for helping keep PlayCanvas and its users safe.
 
 URL: https://developer.playcanvas.com/user-manual/splat-transform/
 
-[SplatTransform](https://github.com/playcanvas/splat-transform) is an open source library and CLI tool for converting and editing Gaussian splats. Whether you need to convert between formats, apply transformations, or analyze splat data, SplatTransform provides the tools developers need for precise control over their Gaussian splat workflows. The library is platform-agnostic and can be used in both Node.js and browser environments.
+[SplatTransform](https://github.com/playcanvas/splat-transform) is an open source library and CLI tool for converting and editing Gaussian splats. Whether you need to convert between formats, apply transformations, filter data, generate collision volumes, or analyze splat statistics, SplatTransform gives developers precise control over their Gaussian splat workflows. The library is platform-agnostic and runs in both Node.js and browser environments.
 
 :::note Open Source
 
-SplatTransform is [open-sourced under an MIT license on GitHub](https://github.com/playcanvas/splat-transform)
+SplatTransform is [open-sourced under an MIT license on GitHub](https://github.com/playcanvas/splat-transform).
 
 :::
 
@@ -33458,15 +33458,18 @@ The [SuperSplat Convert page](/user-manual/supersplat/convert) at [superspl.at/c
 
 ## Why Use SplatTransform?
 
-SplatTransform solves important problems developers face when working with Gaussian splats:
+SplatTransform solves the problems developers face when working with Gaussian splats:
 
-🔄 **Broad Format Support** — seamlessly convert between PLY, SPLAT, KSPLAT, SOG and even CSV  
+🔄 **Broad Format Support** — read PLY, Compressed PLY, SOG, SPZ, SPLAT, KSPLAT and LCC; write PLY, Compressed PLY, SOG, SPZ, GLB, CSV, HTML Viewer, LOD, Voxel and WebP image  
 🛠️ **Powerful Transformations** — translate, rotate, and scale your splats with precision  
-🧹 **Smart Filtering** — remove NaN values, filter by properties, and strip unnecessary data  
-📊 **Statistical Analysis** — generate per-column statistics for data analysis  
-📦 **Scene Merging** — combine multiple splat files into a merged scene  
-⚡ **Production Ready** — optimized for maximum performance  
-🆓 **Open Source** — completely free and available on GitHub
+🧹 **Smart Filtering** — strip NaN/Inf, filter by value, box, sphere, harmonic band, or floater contribution, and keep only the connected cluster around a seed point  
+📐 **Decimation & Reordering** — simplify via progressive pairwise merging, and reorder by Morton code for spatial locality  
+🧱 **Collision Generation** — voxelize a scene into a sparse octree and emit a `.collision.glb` mesh ready for runtime physics  
+🖼️ **Image Rendering** — render a scene to a lossless WebP from a configurable camera view  
+📊 **Statistical Analysis** — generate per-column statistics for data analysis or test validation  
+📦 **Scene Merging** — combine multiple splat files into a single merged scene  
+⚙️ **Generators** — procedurally synthesize splat data with JavaScript generator scripts  
+🆓 **Open Source** — MIT licensed and freely available on GitHub
 
 ## Installation
 
@@ -33488,7 +33491,9 @@ Verify your CLI installation:
 splat-transform --version
 ```
 
-## Basic Usage
+For running on a backend with Docker (including GPU/Vulkan setup), see the [Docker Backend](/user-manual/splat-transform/docker) guide.
+
+## CLI Usage
 
 The general syntax for SplatTransform is:
 
@@ -33500,11 +33505,177 @@ splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
 
 - Input files become the working set; ACTIONS are applied in order
 - The last file is the output; actions after it modify the final result
-- Use `null` as output to discard file output (useful with `--summary`)
+- Use `null` as the output to discard file output (useful with `--summary` for analysis-only runs)
+
+## Supported Formats
+
+SplatTransform detects file format from the file extension:
+
+| Format            | Input | Output | Description                                                                                                                                          |
+| ----------------- | ----- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.ply`            | ✅    | ✅     | Standard PLY format                                                                                                                                  |
+| `.sog`            | ✅    | ✅     | Bundled super-compressed format (recommended)                                                                                                        |
+| `meta.json`       | ✅    | ✅     | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** be `meta.json`                                         |
+| `.compressed.ply` | ✅    | ✅     | Compressed PLY format (auto-detected and decompressed on read)                                                                                       |
+| `.spz`            | ✅    | ✅     | Compressed splat format (Niantic format, v2–4)                                                                                                       |
+| `.lcc`            | ✅    | ❌     | LCC file format (XGRIDS)                                                                                                                             |
+| `.ksplat`         | ✅    | ❌     | Compressed splat format (mkkellogg format)                                                                                                           |
+| `.splat`          | ✅    | ❌     | Compressed splat format (antimatter15 format)                                                                                                        |
+| `.mjs`            | ✅    | ❌     | Generate a scene using an mjs script (Beta)                                                                                                          |
+| `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension    |
+| `.csv`            | ❌    | ✅     | Comma-separated values spreadsheet                                                                                                                   |
+| `.html`           | ❌    | ✅     | HTML viewer app (single-page or unbundled) based on SOG                                                                                              |
+| `.voxel.json`     | ❌    | ✅     | Sparse voxel octree for collision detection. See the [Collision Mesh](/user-manual/splat-transform/collision) guide. Output filename must end with `.voxel.json` (the prefix is up to you, e.g. `room.voxel.json`) |
+| `lod-meta.json`   | ❌    | ✅     | Multi-level-of-detail SOG bundle (accompanied by per-LOD `.sog` chunks). Output filename **must** be `lod-meta.json`                                 |
+| `.webp`           | ❌    | ✅     | Lossless WebP image rendered from a camera view via GPU rasterizer                                                                                   |
+| `null`            | ❌    | ✅     | Discard output (useful with `--summary` for analysis-only runs)                                                                                      |
+
+## Actions
+
+Actions execute in the order specified and can be repeated. Any action may appear after any input or output file:
+
+```none
+-t, --translate        <x,y,z>          Translate Gaussians by (x, y, z)
+-r, --rotate           <x,y,z>          Rotate Gaussians by Euler angles (x, y, z), in degrees
+-s, --scale            <factor>         Uniformly scale Gaussians by factor
+-H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
+-N, --filter-nan                        Remove Gaussians with NaN values and most Inf values;
+                                          retains +Infinity in opacity and -Infinity in scale_*
+-B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
+-S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
+-V, --filter-value     <name,cmp,value> Keep Gaussians where <name> <cmp> <value>
+                                          cmp ∈ {lt,lte,gt,gte,eq,neq}
+                                          opacity, scale_*, f_dc_* use transformed values
+                                          (linear opacity 0-1, linear scale, linear color 0-1).
+                                          Append _raw for raw PLY values (e.g. opacity_raw).
+-F, --decimate         <n|n%>           Simplify to n Gaussians via progressive pairwise merging.
+                                          Use n% to keep a percentage of Gaussians.
+-G, --filter-floaters  [size,op,min]    Remove Gaussians not contributing to any solid voxel.
+                                          Evaluates each Gaussian at occupied voxel centers.
+                                          Default: size=0.05, opacity=0.1, min=0.004 (1/255).
+                                          Bare flag (no value) uses all defaults.
+-D, --filter-cluster   [res,op,min]     Keep only the connected cluster at --seed-pos.
+                                          GPU-voxelizes at coarse resolution (res world units/voxel).
+                                          Default: res=1.0, opacity=0.999, min=0.1.
+                                          Bare flag (no value) uses all defaults.
+-p, --params           <key=val,...>    Pass parameters to .mjs generator script
+-l, --lod              <n>              Tag the Gaussians with LOD level n (n >= 0)
+-m, --summary                           Print per-column statistics to stdout
+-M, --morton-order                      Reorder Gaussians by Morton code (Z-order curve)
+```
+
+## General Options
+
+```none
+-h, --help                              Show this help and exit
+-v, --version                           Show version and exit
+-q, --quiet                             Suppress non-error output
+    --verbose                           Show debug-level diagnostics
+    --mem                               Show memory usage in progress output
+    --tty                               Interactive bar rendering (default on a TTY; --no-tty to disable)
+-w, --overwrite                         Overwrite output file if it exists
+```
+
+## GPU Options
+
+Used by SOG compression and GPU voxelization (`--filter-cluster`, `--filter-floaters`, `.voxel.json` output).
+
+```none
+-L, --list-gpus                         List available GPU adapters and exit
+-g, --gpu              <n|cpu>          Device for GPU operations: GPU adapter index | 'cpu'
+                                          ('cpu' disables GPU and is incompatible with
+                                          GPU-only features like --filter-cluster)
+```
+
+## SOG Compression Options
+
+Apply when writing `.sog`, `meta.json`, `lod-meta.json`, or `.html` outputs.
+
+```none
+-i, --iterations       <n>              Iterations for SH compression (more=better). Default: 10
+```
+
+## SPZ Output Options
+
+Apply when writing `.spz` outputs.
+
+```none
+    --spz-version      <3|4>            The SPZ format version to write. Default: 4
+```
+
+## HTML Viewer Output Options
+
+Apply when writing `.html` outputs.
+
+```none
+-E, --viewer-settings  <settings.json>  HTML viewer settings JSON file
+-U, --unbundled                         Generate unbundled HTML viewer with separate files
+```
+
+:::note
+
+See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `-E` option.
+
+:::
+
+## LCC Input Options
+
+Apply when reading `.lcc` files.
+
+```none
+-O, --lod-select       <n,n,...>        Comma-separated LOD levels to read from LCC input
+```
+
+## LOD Output Options
+
+Apply when writing `lod-meta.json` (multi-LOD streaming SOG bundle).
+
+```none
+-C, --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
+-X, --lod-chunk-extent <n>              Approximate size of an LOD chunk in world units (m). Default: 16
+```
+
+## Voxel Output Options
+
+Apply when writing `.voxel.json` (sparse voxel octree for collision detection). See the [Collision Mesh](/user-manual/splat-transform/collision) guide for a deep dive on each step and tuning.
+
+```none
+    --voxel-params     [size,opacity]   Voxel size and opacity threshold. Default: 0.05,0.1
+    --voxel-external-fill [size]        Seal exterior voxels via boundary flood fill (interior scenes).
+                                          [size] (world units) is the dilation distance applied
+                                          before the flood fill to bridge small wall gaps.
+                                          --seed-pos is used to verify the volume is enclosed at
+                                          the seed; the fill is skipped if the seed is reachable
+                                          from outside.
+                                          Default size: 1.6
+    --voxel-floor-fill [size]           Fill each column upward from bottom until hitting solid (exterior scenes).
+                                          Optional size (world units): only patch XZ areas surrounded by floor
+                                          within 2*size; large empty exterior areas are left alone.
+                                          Default size: 1.6
+    --voxel-carve      [h,r]            Carve navigable space using capsule flood fill from seed.
+                                          Default: height=1.6, radius=0.2
+    --seed-pos         <x,y,z>          Seed position for voxel fill/carve and --filter-cluster.
+                                          Default: 0,0,0
+-K, --collision-mesh   [smooth|faces]   Generate collision mesh (.collision.glb). Default: smooth
+```
+
+## Image Output Options
+
+Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer).
+
+```none
+    --camera           <x,y,z>          Camera position in world space. Default: 2,1,-2
+    --look-at          <x,y,z>          Camera target point. Default: 0,0,0
+    --up               <x,y,z>          World up vector. Default: 0,1,0
+    --fov              <degrees>        Vertical field of view in degrees. Default: 60
+    --resolution       <WxH>            Output resolution, e.g. 1920x1080. Default: 1280x720
+    --near             <n>              Near clip distance. Default: 0.2 (matches reference 3DGS)
+    --background       <r,g,b[,a]>      Background color in [0,1]. Default: 0,0,0,1
+```
+
+## Examples
 
 ### Format Conversion
-
-Convert between commonly used splat formats with simple commands:
 
 ```bash
 # Simple format conversion
@@ -33543,72 +33714,12 @@ splat-transform -U input.ply output.html
 
 # Convert to HTML viewer with custom settings
 splat-transform -E settings.json input.ply output.html
+
+# Export to CSV for spreadsheet analysis
+splat-transform scene.ply data.csv
 ```
 
-SplatTransform detects file format based on extension. Supported formats are shown below:
-
-| Format | Input | Output | Description |
-| ------ | ----- | ------ | ----------- |
-| `.ply` | ✅ | ✅ | Standard PLY format |
-| `.sog` | ✅ | ✅ | Bundled super-compressed format (recommended) |
-| `meta.json` | ✅ | ✅ | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** be `meta.json` |
-| `lod-meta.json` | ❌ | ✅ | LOD streaming format with octree structure for progressive loading. Output filename **must** be `lod-meta.json` |
-| `.compressed.ply` | ✅ | ✅ | Compressed PLY format (auto-detected and decompressed on read) |
-| `.lcc` | ✅ | ❌ | LCC file format (XGRIDS) |
-| `.ksplat` | ✅ | ❌ | Compressed splat format (mkkellogg format) |
-| `.splat` | ✅ | ❌ | Compressed splat format (antimatter15 format) |
-| `.spz` | ✅ | ❌ | Compressed splat format (Niantic format) |
-| `.mjs` | ✅ | ❌ | Generate a scene using an mjs script (Beta) |
-| `.csv` | ❌ | ✅ | Comma-separated values spreadsheet |
-| `.html` | ❌ | ✅ | HTML viewer app (single-page or unbundled) based on SOG |
-
-## Actions
-
-Actions can be repeated and applied in any order to transform and filter your splats:
-
-```none
--t, --translate        <x,y,z>          Translate splats by (x, y, z)
--r, --rotate           <x,y,z>          Rotate splats by Euler angles (x, y, z) in degrees
--s, --scale            <factor>         Uniformly scale splats by factor
--H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
--N, --filter-nan                        Remove Gaussians with NaN or Inf values
--B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
--S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
--V, --filter-value     <name,cmp,value> Keep splats where <name> <cmp> <value>
-                                          cmp ∈ {lt,lte,gt,gte,eq,neq}
--p, --params           <key=val,...>    Pass parameters to .mjs generator script
--l, --lod              <n>              Specify the level of detail of this model, n >= 0
--m, --summary                           Print per-column statistics to stdout
-```
-
-## Global Options
-
-```none
--h, --help                              Show this help and exit
--v, --version                           Show version and exit
--q, --quiet                             Suppress non-error output
--w, --overwrite                         Overwrite output file if it exists
--i, --iterations       <n>              Iterations for SOG SH compression (more=better). Default: 10
--L, --list-gpus                         List all available GPU adapters and exit
--g, --gpu              <n|cpu>          Select device for SOG compression: GPU adapter index | 'cpu'
--E, --viewer-settings  <settings.json>  HTML viewer settings JSON file
--U, --unbundled                         Generate unbundled HTML viewer with separate files
--O, --lod-select       <n,n,...>        Comma-separated LOD levels to read from LCC input
--C, --lod-chunk-count  <n>              Approx number of Gaussians per LOD chunk in K. Default: 512
--X, --lod-chunk-extent <n>              Approx size of an LOD chunk in world units (m). Default: 16
-```
-
-:::note
-
-See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `-E` option.
-
-:::
-
-## Transformations
-
-### Apply Spatial Transformations
-
-Transform your splats during conversion with intuitive command-line options:
+### Transformations
 
 ```bash
 # Scale and translate
@@ -33621,11 +33732,7 @@ splat-transform input.ply -r 0,90,0 output.ply
 splat-transform input.ply -s 2 -t 1,0,0 -r 0,0,45 output.ply
 ```
 
-## Filtering and Optimization
-
-### Smart Filtering
-
-Remove unwanted data and optimize your splats for production:
+### Filtering
 
 ```bash
 # Remove entries containing NaN and Inf
@@ -33636,11 +33743,15 @@ splat-transform input.ply -V opacity,gt,0.5 output.ply
 
 # Strip spherical harmonic bands higher than 2
 splat-transform input.ply --filter-harmonics 2 output.ply
+
+# Simplify to 50000 splats via progressive pairwise merging
+splat-transform input.ply --decimate 50000 output.ply
+
+# Simplify to 25% of original splat count
+splat-transform input.ply -F 25% output.ply
 ```
 
-## Scene Merging
-
-Combine multiple splat files into a single scene with individual transformations:
+### Scene Merging
 
 ```bash
 # Combine multiple files with different transforms
@@ -33650,9 +33761,9 @@ splat-transform -w cloudA.ply -r 0,90,0 cloudB.ply -s 2 merged.compressed.ply
 splat-transform input1.ply input2.ply output.ply -t 0,0,10 -s 0.5
 ```
 
-## Statistical Summary
+### Statistical Summary
 
-Generate per-column statistics for data analysis or validation:
+Generate per-column statistics for data analysis or test validation:
 
 ```bash
 # Print summary, then write output
@@ -33667,29 +33778,46 @@ splat-transform input.ply --summary -s 0.5 --summary output.ply
 
 The summary includes min, max, median, mean, stdDev, nanCount and infCount for each column in the data.
 
-## CSV Export for Data Analysis
+### Generators (Beta)
 
-One of SplatTransform's most powerful features is CSV export, enabling data science workflows:
+Generator scripts synthesize Gaussian splat data procedurally. See the [example generator scripts](https://github.com/playcanvas/splat-transform/tree/main/generators) in the GitHub repository for more.
 
 ```bash
-# Export splat data to CSV
-splat-transform scene.ply data.csv
-
-# Pre-filter before exporting for analysis
-splat-transform input.ply --filter-nan -V opacity,gt,0.1 analysis.csv
+splat-transform gen-grid.mjs -p width=10,height=10,scale=10,color=0.1 scenes/grid.ply -w
 ```
 
-### Why CSV Export Matters
+### Voxel Pipeline (Collision)
 
-- **Spreadsheet Analysis** — Import directly into Excel, Google Sheets, or any data analysis tool
-- **Statistical Insights** — Calculate distributions, correlations, and quality metrics
-- **Custom Filtering** — Use spreadsheet formulas to identify outliers or segment data
-- **Visualization** — Create charts and graphs to understand splat data patterns
-- **Integration** — Feed splat data into machine learning pipelines or custom workflows
+The voxel format stores a sparse voxel octree for collision detection (`.voxel.json` + `.voxel.bin`). Pass `-K` to also emit a `.collision.glb` mesh derived from the voxel grid. The recommended pipeline:
 
-CSV export transforms your splats from opaque binary files into readable, analyzable datasets perfect for research and optimization.
+```bash
+splat-transform input.ply \
+    --filter-cluster --seed-pos x,y,z \
+    [--voxel-external-fill | --voxel-floor-fill] [--voxel-carve] \
+    [-K [smooth|faces]] \
+    output.voxel.json
+```
 
-## Device Selection for SOG Compression
+For a step-by-step walkthrough of each option (with illustrations) and full interior/exterior recipes, see the [Collision Mesh](/user-manual/splat-transform/collision) guide.
+
+### Image Rendering
+
+Render a splat scene to a lossless WebP image from a given camera view. Rendering runs on the GPU.
+
+```bash
+# Default 1280x720 render
+splat-transform input.ply view.webp
+
+# Custom camera and resolution
+splat-transform input.ply view.webp \
+    --camera 2,1,-2 --look-at 0,0,0 \
+    --fov 50 --resolution 1920x1080
+
+# Transparent background
+splat-transform input.ply view.webp --background 0,0,0,0
+```
+
+### Device Selection for SOG Compression
 
 When compressing to SOG format, you can control which device (GPU or CPU) performs the compression:
 
@@ -33710,7 +33838,7 @@ splat-transform -g cpu input.ply output.sog
 
 :::note
 
-When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `-L` to list available adapters with their indices and names. The order and availability of adapters depends on your system and GPU drivers.
+When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `-L` to list available adapters with their indices and names. The order and availability of adapters depend on your system and GPU drivers. Use `-g <index>` to select a specific adapter, or `-g cpu` to force CPU computation.
 
 :::
 
@@ -33719,16 +33847,6 @@ When `-g` is not specified, WebGPU automatically selects the best available GPU.
 CPU compression can be significantly slower than GPU compression (often 5-10x slower). Use CPU mode only if GPU drivers are unavailable or problematic.
 
 :::
-
-## Generators (Beta)
-
-Generator scripts can be used to synthesize gaussian splat data. This allows you to procedurally create splat scenes using JavaScript:
-
-```bash
-splat-transform gen-grid.mjs -p width=10,height=10,scale=10,color=0.1 scenes/grid.ply -w
-```
-
-See the [example generator scripts](https://github.com/playcanvas/splat-transform/tree/main/generators) in the GitHub repository for more details.
 
 ## Common Workflows
 
@@ -33755,7 +33873,7 @@ done
 ### Quality Analysis
 
 ```bash
-# Export for quality analysis in spreadsheet
+# Export for quality analysis in a spreadsheet
 splat-transform scene.ply \
   --filter-nan \
   -V opacity,gt,0.05 \
@@ -33773,11 +33891,11 @@ splat-transform \
   complete_scene.ply
 ```
 
-### Generating LOD Format
+### Generating LOD Format {#generating-lod-format}
 
-The LOD (Level of Detail) format enables efficient streaming and rendering of large gaussian splat scenes. The tool takes multiple pre-generated LOD files as input and generates an optimized streaming format with an octree structure for optimal download performance.
+The LOD (Level of Detail) format enables efficient streaming and rendering of large Gaussian splat scenes. The tool takes multiple pre-generated LOD files as input and generates an optimized streaming format with an octree structure for progressive download.
 
-**Note:** The tool does NOT create the LOD levels themselves - you must supply multiple LOD files with progressively fewer gaussians (LOD 0 = highest detail, higher numbers = lower detail).
+**Note:** The tool does NOT create the LOD levels themselves — you must supply multiple LOD files with progressively fewer Gaussians (LOD 0 = highest detail, higher numbers = lower detail).
 
 :::warning Output Filename Requirements
 
@@ -33824,22 +33942,18 @@ node --max-old-space-size=32000 node_modules/.bin/splat-transform \
 
 # Generate LOD streaming format directly from an LCC file
 # (LCC files already contain multiple LOD levels)
-# Note: the output filename must be exactly lod-meta.json for streaming LOD,
-# or meta.json for a single unbundled SOG file
 splat-transform scene.lcc output/lod-meta.json
 ```
 
 **Tips:**
 
-- Use `--filter-nan` to remove invalid gaussians before processing
-- Use `--filter-harmonics 0` to reduce file size if color detail is less critical
+- Use `--filter-nan` to remove invalid Gaussians before processing
+- Use `--filter-harmonics 0` to reduce file size if colour detail is less critical
 - Use `-C` to control the number of generated SOG files containing splats
 - Use `-X` to control the size of each node. Increase for very large scenes to avoid generating a huge number of nodes to manage
 - For very large scenes, use Node's `--max-old-space-size` flag to give it more memory
 
 ## Getting Help
-
-Get help for any command:
 
 ```bash
 # General help
@@ -33870,17 +33984,22 @@ SplatTransform exposes a programmatic API for reading, processing, and writing G
 
 ### Key Exports
 
-| Export | Description |
-| ------ | ----------- |
-| `readFile` | Read splat data from various formats |
-| `writeFile` | Write splat data to various formats |
-| `getInputFormat` | Detect input format from filename |
-| `getOutputFormat` | Detect output format from filename |
-| `DataTable`, `Column` | Core data structures for splat data |
-| `combine` | Merge multiple DataTables into one |
-| `transform` | Apply spatial transformations |
-| `processDataTable` | Apply a sequence of processing actions |
-| `computeSummary` | Generate statistical summary of data |
+| Export             | Description                                                                  |
+| ------------------ | ---------------------------------------------------------------------------- |
+| `readFile`         | Read splat data from various formats                                         |
+| `writeFile`        | Write splat data to various formats                                          |
+| `getInputFormat`   | Detect input format from filename                                            |
+| `getOutputFormat`  | Detect output format from filename                                           |
+| `DataTable`, `Column` | Core data structures for splat data                                       |
+| `combine`          | Merge multiple `DataTable`s into one                                         |
+| `convertToSpace`   | Convert a `DataTable` between coordinate spaces                              |
+| `processDataTable` | Apply a sequence of processing actions                                       |
+| `computeSummary`   | Generate statistical summary of data                                         |
+| `sortMortonOrder`  | Sort indices by Morton code for spatial locality                             |
+| `sortByVisibility` | Sort indices by visibility score for filtering                               |
+| `writeVoxel`       | Write sparse voxel octree files                                              |
+| `writeImage`       | Render a camera view to a lossless WebP image (requires GPU)                 |
+| `renderSplats`     | Lower-level renderer returning the raw RGBA byte buffer                      |
 
 ### File System Abstractions
 
@@ -33958,11 +34077,22 @@ type ProcessAction =
     | { kind: 'filterBands'; value: 0 | 1 | 2 | 3 }
     | { kind: 'filterBox'; min: Vec3; max: Vec3 }
     | { kind: 'filterSphere'; center: Vec3; radius: number }
+    | { kind: 'filterFloaters'; voxelResolution?: number; opacityCutoff?: number; minContribution?: number } // GPU
+    | { kind: 'filterCluster'; voxelResolution?: number; seed?: Vec3; opacityCutoff?: number; minContribution?: number } // GPU
+    | { kind: 'decimate'; count: number | null; percent: number | null }
+    | { kind: 'param'; name: string; value: string }
     | { kind: 'lod'; value: number }
-    | { kind: 'summary' };
+    | { kind: 'summary' }
+    | { kind: 'mortonOrder' };
 
 type Comparator = 'lt' | 'lte' | 'gt' | 'gte' | 'eq' | 'neq';
 ```
+
+:::note
+
+`filterFloaters` and `filterCluster` require a GPU device — pass `createDevice` via the `ProcessOptions` argument to `processDataTable`.
+
+:::
 
 ### Custom Logging
 
@@ -33981,6 +34111,449 @@ logger.setLogger({
 
 logger.setQuiet(true); // Suppress non-error output
 ```
+
+--------------------------------------------------------------------------------
+
+## Collision Mesh Generation
+
+URL: https://developer.playcanvas.com/user-manual/splat-transform/collision/
+
+This guide explains how to generate collision data from a Gaussian splat scene using [splat-transform](/user-manual/splat-transform/). It covers both **voxel generation** (a sparse voxel octree, `.voxel.json` + `.voxel.bin`) and **mesh generation** (`.collision.glb`) suitable for runtime collision detection.
+
+For uploading or generating voxel collision through the SuperSplat web UI instead of the CLI, see [Studio → Collision](/user-manual/supersplat/studio/collision).
+
+## Overview
+
+Two outputs are produced from the same voxelization pass:
+
+- **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](/user-manual/supersplat/viewer/) for runtime collision detection.
+- **`.collision.glb`** — triangulated mesh built from the voxel grid (only when `-K` / `--collision-mesh` is passed).
+
+A typical pipeline runs four stages, with the latter two being optional depending on the scene type:
+
+```none
+input splat ──► filter-cluster ──► voxelize ──► fill ──► carve ──► [collision mesh]
+```
+
+## Step 1: Isolating the scene with `--filter-cluster`
+
+Splats often contain stray floaters and disconnected geometry far from the scene of interest. `--filter-cluster` GPU-voxelizes the input at a coarse resolution and keeps only the connected component containing `--seed-pos`.
+
+```bash
+splat-transform input.ply --filter-cluster --seed-pos 0,1,0 output.voxel.json
+```
+
+| Input | Cluster Filtered Result |
+| --- | --- |
+| [Image: original] | [Image: filtered] |
+
+:::tip Standalone use
+
+`--filter-cluster` is a general-purpose filter and can be used on its own to extract just the focus area of a scene — no voxel output required. Pipe it directly to a splat format such as `.ply` or `.sog`:
+
+```bash
+splat-transform input.ply --filter-cluster --seed-pos 0,1,0 cluster.ply
+```
+
+:::
+
+### Cluster options
+
+```none
+-D, --filter-cluster [res,op,min]
+```
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `res` | `1.0` | Voxel size (world units) for the coarse clustering grid. Larger = faster, more permissive about gaps. |
+| `op` | `0.999` | Opacity threshold above which a voxel is considered solid. |
+| `min` | `0.1` | Minimum Gaussian contribution at a cluster voxel center required to keep a splat. |
+
+## Step 2: Voxelization
+
+Voxelization is implicitly enabled by the output filename extension: when the output path ends in `.voxel.json`, splat-transform voxelizes the scene into a sparse voxel grid. This is the "raw" voxel output — every subsequent step in this guide layers on top of it.
+
+```bash
+splat-transform input.ply output.voxel.json
+```
+
+[Image: voxelized-raw: bare voxel grid produced by the voxelization pass]
+
+### Voxel options
+
+```none
+--voxel-params [size,opacity]
+```
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `size` | `0.05` | Voxel edge length in world units. Smaller = higher fidelity, larger files, slower fills. |
+| `opacity` | `0.1` | Minimum splat opacity required to mark a voxel solid. |
+
+## Step 3: Sealing the shell
+
+After voxelization, the surface is typically a thin shell with holes. Filling closes those holes so carve (the next step) has a watertight volume to flood. Two complementary options are available — one for indoor/enclosed scenes, one for outdoor/grounded scenes. They are not normally combined.
+
+### Rooms — `--voxel-external-fill`
+
+For room scans, where you want a closed interior volume that carve can flood. (The flag name reflects what it does internally: it floods the *exterior* void so the *interior* remains the carvable region.) The pass:
+
+1. Dilates the solid grid by `[size]` world units (converted internally to a voxel half-extent) to bridge small holes in the walls.
+2. Flood-fills empty space inward from the bounding-box boundary — every voxel reachable from outside is marked as exterior.
+3. Marks the exterior region as solid in the output, leaving only the enclosed interior as empty space for carve.
+
+`--seed-pos` is used as a sanity check: if the seed ends up reachable from outside (i.e. the volume isn't actually enclosed at the seed), the fill is skipped and the original grid is returned.
+
+```bash
+splat-transform input.ply output.voxel.json --voxel-external-fill --seed-pos 0,1,0
+```
+
+```none
+--voxel-external-fill [size]
+```
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `size` | `1.6` | Dilation distance (world units) used to seal small wall gaps before flood-filling the exterior. Increase if walls have noisy holes the fill leaks through. |
+
+### Outdoor scenes — `--voxel-floor-fill`
+
+For outdoor scans, terrain, or objects on a ground plane. The pass walks each XZ column upward from the bottom of the bounding box until it hits a solid voxel, marking everything below as solid. This produces a ground volume even when the scan only captured the surface.
+
+```bash
+splat-transform input.ply output.voxel.json --voxel-floor-fill
+```
+
+[Image: floor-fill: cross-section of terrain before/after, showing solid mass below the surface]
+
+```none
+--voxel-floor-fill [size]
+```
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `size` | `1.6` | Restricts patching to XZ columns surrounded by floor within `2*size`. Large empty exterior areas are left alone, so this won't accidentally fill the sky. |
+
+### Choosing
+
+| Scene type             | Fill                    |
+| ---------------------- | ----------------------- |
+| Rooms                  | `--voxel-external-fill` |
+| Outdoor scenes         | `--voxel-floor-fill`    |
+| Single object in space | (skip both)             |
+
+## Step 4: Carving navigable space (`--voxel-carve`)
+
+Flood-fills a capsule volume from `--seed-pos`, marking voxels the capsule can reach as *navigable*. Once the shell has been sealed (Step 3), carve produces the actual walkable region used at runtime. Carving removes unnecessary detail and results in smoother runtime collisions and smaller files.
+
+```bash
+splat-transform input.ply output.voxel.json --voxel-carve --seed-pos 0,1,0
+```
+
+| Original | Carved |
+| --- | --- |
+| [Image: original] | [Image: carved] |
+
+The capsule must fit at the seed position. If carve produces no output, the seed is likely inside solid geometry or the capsule is too large to fit.
+
+### Carve options
+
+```none
+--voxel-carve [h,r]
+```
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `h` | `1.6` | Capsule height (world units), roughly the agent height. `0` disables carve. |
+| `r` | `0.2` | Capsule radius (world units), roughly the agent radius. |
+
+## Step 5: Generating the collision mesh (`-K` / `--collision-mesh`)
+
+```none
+-K, --collision-mesh [smooth|faces]
+```
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| shape | `smooth` | `smooth` = marching-cubes mesh with coplanar merge (lower triangle count, natural contours). `faces` = watertight axis-aligned voxel faces (higher triangle count, exactly matches the voxel volume). |
+
+| Voxel | Smooth Mesh | Faces Mesh |
+| --- | --- | --- |
+| [Image: voxels] | [Image: smooth] | [Image: faces] |
+
+### `smooth` (default)
+
+A smoothed mesh fitted to the voxel surface. Lower triangle count, more natural contours, suitable for character collision.
+
+### `faces`
+
+A watertight mesh built from the exposed voxel faces — every face is axis-aligned to the voxel grid. Higher triangle count but exactly matches the voxel volume; useful when collision must agree with raycasts against the voxel data.
+
+## Reference: `--seed-pos`
+
+`--seed-pos` is a shared input consumed by several stages of the pipeline:
+
+- `--filter-cluster` — picks the connected component containing this point.
+- `--voxel-external-fill` — sanity check; if the seed ends up reachable from outside, the fill is skipped.
+- `--voxel-carve` — flood origin for the capsule.
+
+| Flag | Parameters | Default | Description |
+| --- | --- | --- | --- |
+| `--seed-pos` | `x,y,z` | `0,0,0` | World-space seed point used by `--filter-cluster`, `--voxel-external-fill`, and `--voxel-carve`. |
+
+## Full examples
+
+### Interior room scan
+
+```bash
+splat-transform room.ply \
+    --filter-cluster --seed-pos 0,1,0 \
+    room.voxel.json --voxel-external-fill --voxel-carve -K
+```
+
+### Exterior terrain
+
+```bash
+splat-transform terrain.ply \
+    --filter-cluster --seed-pos 0,0,0 \
+    terrain.voxel.json --voxel-floor-fill -K
+```
+
+### High-fidelity voxel-face mesh
+
+```bash
+splat-transform input.ply \
+    output.voxel.json --voxel-params 0.025,0.1 -K faces
+```
+
+## Troubleshooting
+
+- **Carve produces nothing.** `--seed-pos` is inside solid geometry, or the capsule (`h,r`) doesn't fit at the seed. Move the seed or shrink the capsule.
+- **`--voxel-external-fill` leaks through walls.** Increase its `size`, or lower the voxel `opacity` so thin walls are marked solid.
+- **Carve leaks into adjacent rooms.** Walls are too thin or have gaps. Lower voxel `size` for higher resolution, or increase `--voxel-external-fill` size.
+- **Collision mesh is too dense.** Use `-K smooth` (default), or coarsen `--voxel-params` size.
+- **`--filter-cluster` selects the wrong cluster.** Move `--seed-pos` into the cluster you want, or increase its `res` to bridge intentional gaps.
+
+## See also
+
+- [splat-transform CLI reference](/user-manual/splat-transform/) — full option reference including Voxel Output Options.
+- [Docker Backend](/user-manual/splat-transform/docker) — running the GPU-only voxel/collision features in a container.
+- [Studio → Collision](/user-manual/supersplat/studio/collision) — uploading or generating voxel collision through the SuperSplat web UI.
+
+--------------------------------------------------------------------------------
+
+## Docker Backend
+
+URL: https://developer.playcanvas.com/user-manual/splat-transform/docker/
+
+This guide explains how to run [splat-transform](/user-manual/splat-transform/) as a containerised backend service on a Linux host with an NVIDIA GPU.
+
+## When you need this
+
+`splat-transform` is a Node.js CLI and the published npm package runs anywhere Node 22+ runs — Docker is not strictly required.
+
+A few features are **GPU-only** and will not run without WebGPU:
+
+- `--filter-cluster` and `--filter-floaters`.
+- `.voxel.json` output and `-K` / `--collision-mesh` (see the [Collision Mesh](/user-manual/splat-transform/collision) guide).
+
+A few are **GPU-accelerated but optional**:
+
+- SOG / `meta.json` / `lod-meta.json` / `.html` viewer output (see [SOG Compression Options](/user-manual/splat-transform/#sog-compression-options)). The only step inside this writer that uses the GPU is k-means clustering of spherical-harmonic coefficients, so:
+  - Inputs **without** SH bands (e.g. `.splat`, SH-stripped PLYs, or anything piped through `-H 0` / `--filter-harmonics 0`) write SOG fully on the CPU.
+  - Inputs **with** SH bands work on the CPU too via `-g cpu`, but SH clustering is roughly 5-10x slower without a GPU.
+
+All GPU paths go through WebGPU, which on Linux is implemented over Vulkan. That sets the host and container requirements below.
+
+If you don't need the GPU-only features and you're happy paying the CPU cost for SH compression (or your inputs have no SH), skip to the [CPU-only variant](#cpu-only-variant).
+
+## Host prerequisites (outside Docker)
+
+These must be configured on the host machine — they cannot be installed from inside a container, because the container reuses the host's NVIDIA driver and Vulkan ICD.
+
+1. **NVIDIA GPU** with a driver that exposes a Vulkan ICD (most consumer drivers do; some headless cloud drivers do not by default).
+2. **Docker Engine** with the **[NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)** installed and configured. This is what makes `--gpus all` work and what projects the host's NVIDIA driver libraries (including the Vulkan ICD JSON) into the container at runtime.
+3. **(Optional) `vulkan-tools` on the host** — useful for sanity-checking the driver from outside Docker (e.g. `vulkaninfo --summary` on the host before launching containers). The container brings its own Vulkan loader via the `vulkan-tools` apt package installed in the Dockerfile below.
+
+### AWS GPU instances
+
+On AWS GPU instances (`g4dn`, `g5`, `g6`, etc.) running Amazon Linux 2023 the default driver is the *compute-only* Tesla driver and does not include Vulkan. To use any of the WebGPU paths you need to install the **NVIDIA GRID Driver v19.2 or newer** on the host — the GRID driver ships the Vulkan ICD that the Tesla driver lacks.
+
+NVIDIA hosts the GRID installer in an S3 bucket, so the EC2 instance role must have the `AmazonS3ReadOnlyAccess` policy attached.
+
+Update and reboot first:
+
+```bash
+sudo dnf update -y
+sudo reboot
+```
+
+After the reboot, install the driver and reboot again:
+
+```bash
+sudo aws s3 cp --recursive s3://ec2-linux-nvidia-drivers/grid-19.2/ .   # installs v580.x.x
+sudo chmod +x NVIDIA-Linux-x86_64*.run
+sudo ./NVIDIA-Linux-x86_64*.run
+sudo reboot
+```
+
+Install the Vulkan loader, tools, and `libXext` (which `vulkaninfo` links against):
+
+```bash
+sudo dnf install vulkan vulkan-tools libXext
+```
+
+Verify the driver and Vulkan ICD from the host:
+
+```bash
+nvidia-smi             # driver version, GPU model
+vulkaninfo --summary   # NVIDIA Vulkan ICD with a physical device
+```
+
+This is host/OS level — it cannot be done from inside the container. The Dockerfile in the next section assumes the driver and Vulkan packages are already installed on the host.
+
+## Minimal Dockerfile
+
+A minimal multi-stage Dockerfile that installs the published CLI on top of an NVIDIA CUDA + Vulkan base image:
+
+```dockerfile
+# syntax=docker/dockerfile:1.4
+
+# Pull Node.js from the official image rather than piping a remote
+# install script to bash.
+FROM node:22-slim AS node
+
+FROM nvidia/cuda:12.8.1-devel-ubuntu22.04
+
+# Expose compute + graphics + utility caps so the NVIDIA Container Toolkit
+# projects the host's NVIDIA driver libraries and Vulkan ICD into the
+# container at runtime.
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        vulkan-tools \
+        libgl1 libglvnd0 libglx0 libegl1 libxext6 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Bring in Node.js and npm from the official image.
+COPY --from=node /usr/local/bin/ /usr/local/bin/
+COPY --from=node /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
+
+RUN npm install -g @playcanvas/splat-transform
+
+RUN useradd --create-home --uid 2000 splat
+USER splat
+WORKDIR /work
+
+ENTRYPOINT ["splat-transform"]
+```
+
+A few notes on what each part is doing:
+
+- `nvidia/cuda:...-devel-ubuntu22.04` — gives you a CUDA-aware base image that the NVIDIA Container Toolkit recognises. The CUDA toolkit itself is not used by `splat-transform`; we just need a base where `--gpus all` projects the host's NVIDIA driver and Vulkan ICD correctly.
+- `NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility` — `graphics` is the important one; without it the toolkit will not mount the Vulkan ICD.
+- `vulkan-tools` — provides `vulkaninfo` (useful for debugging) and pulls in the Vulkan loader the container needs.
+- `libgl1`, `libglvnd0`, `libglx0`, `libegl1`, `libxext6` — runtime libraries Vulkan/EGL drivers depend on.
+- `node:22-slim` stage + `COPY --from=node` — provides Node.js and npm without piping a third-party install script to `bash`.
+- `npm install -g @playcanvas/splat-transform` — installs the published CLI on the `PATH`.
+- The non-root `splat` user is a good default for batch workers and means files written into a host-mounted directory aren't owned by root.
+
+## Build and run
+
+Build the image:
+
+```bash
+docker build -t splat-transform .
+```
+
+Run a conversion, mounting the current directory as `/work`:
+
+```bash
+docker run --rm --gpus all -v "$PWD":/work splat-transform \
+    input.ply output.sog
+```
+
+The image runs as a non-root user (UID 2000), so any files written into a host-mounted directory will be owned by UID 2000 rather than your host user, and the container will fail to write at all if the host directory isn't writable by UID 2000. The portable fix is to pass `--user "$(id -u):$(id -g)"`:
+
+```bash
+docker run --rm --gpus all --user "$(id -u):$(id -g)" \
+    -v "$PWD":/work splat-transform input.ply output.sog
+```
+
+The remaining examples omit `--user` for brevity — add it to any invocation that mounts a host directory.
+
+Any normal `splat-transform` invocation works — see the [CLI reference](/user-manual/splat-transform/) for the full CLI surface. For example:
+
+```bash
+# GPU SOG compression
+docker run --rm --gpus all -v "$PWD":/work splat-transform \
+    -i 20 input.ply output.sog
+
+# Voxel + collision mesh
+docker run --rm --gpus all -v "$PWD":/work splat-transform \
+    room.ply --filter-cluster --seed-pos 0,1,0 \
+    --voxel-external-fill --voxel-carve \
+    -K room.voxel.json
+```
+
+## Verifying GPU access
+
+Two quick checks confirm the GPU is visible.
+
+List GPU adapters via the CLI:
+
+```bash
+docker run --rm --gpus all splat-transform --list-gpus
+```
+
+You should see at least one Vulkan adapter named after your GPU (e.g. `NVIDIA L4`, `Tesla T4`).
+
+Sanity-check Vulkan directly:
+
+```bash
+docker run --rm --gpus all --entrypoint vulkaninfo splat-transform --summary
+```
+
+`vulkaninfo` should print a `GPU0` section with an NVIDIA `driverID`. If this fails, the host setup (driver / NVIDIA Container Toolkit / Vulkan ICD) is the problem, not the image.
+
+## CPU-only variant
+
+If you don't need the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `-K`) you can skip the GPU setup entirely and use a much smaller base image. SOG / `meta.json` / `lod-meta.json` / `.html` outputs still work in this image — the SH compression step falls back to CPU:
+
+```dockerfile
+FROM node:22-slim
+RUN npm install -g @playcanvas/splat-transform
+WORKDIR /work
+ENTRYPOINT ["splat-transform"]
+```
+
+Run it without `--gpus`:
+
+```bash
+docker run --rm -v "$PWD":/work splat-transform input.ply output.ply
+```
+
+Unlike the GPU image, `node:22-slim` runs as root by default, so without `--user` the files written into a bind-mounted host directory will be owned by root on the host. Pass `--user "$(id -u):$(id -g)"` (as described in [Build and run](#build-and-run)), or add a non-root `USER` line to the Dockerfile if this image is for shared use.
+
+If you keep the GPU image but want to force CPU mode for a single run, pass `-g cpu`:
+
+```bash
+docker run --rm -v "$PWD":/work splat-transform -g cpu input.ply output.sog
+```
+
+Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `-K`). CPU-side SH compression also runs roughly 5-10x slower than GPU.
+
+## Troubleshooting
+
+- **`--list-gpus` reports no adapters.** The Vulkan ICD is not reaching the container. Check that you ran with `--gpus all`, that `NVIDIA_DRIVER_CAPABILITIES` includes `graphics`, and that the NVIDIA Container Toolkit is installed and configured on the host.
+- **`vulkaninfo` reports `Could not find a Vulkan ICD`.** The host NVIDIA driver does not expose Vulkan. On AWS, switch from the Tesla driver to the GRID driver (v19.2+) and reinstall, then install `vulkan vulkan-tools libXext` on the host.
+- **`vulkaninfo` segfaults or fails to load `libXext.so.6`.** `libxext6` is missing from the image — make sure the `apt-get install` line in the Dockerfile includes it (and on AWS, that `libXext` is also installed on the host).
+- **`docker: Error response from daemon: could not select device driver "" with capabilities: [[gpu]]`.** The NVIDIA Container Toolkit is not installed or the Docker daemon has not picked up its config. Reinstall the toolkit and restart Docker.
+- **Outputs in the bind-mounted directory aren't owned by my host user.** The container's default user (UID 2000 in the GPU image, root in the slim image) doesn't match your host UID. Pass `--user "$(id -u):$(id -g)"` to `docker run` to align them, or `chown` the output directory to the container UID before mounting.
+- **`Permission denied` writing to the bind-mounted directory.** The container's default user has no write access to the host directory. Use `--user "$(id -u):$(id -g)"`, or `chown` the host directory so the container user can write.
+- **`splat-transform: command not found` inside the container.** Make sure `npm install -g @playcanvas/splat-transform` ran successfully during the build. The default entrypoint already invokes the binary, so `docker run <image> --help` should work without specifying `splat-transform`.
 
 --------------------------------------------------------------------------------
 
