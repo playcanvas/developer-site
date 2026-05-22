@@ -1835,7 +1835,7 @@ Let's open the model folder and drag the FBX file into our project assets panel.
 
 This will import the file into our project and the PlayCanvas Editor will create materials, container, render assets and most importantly, a template asset.
 
-If you are importing FBXs into an existing project, please make sure you have the following settings ticked in the Project Settings -> Asset Tasks.
+If you are importing FBXs into an existing project, please make sure you have the following settings ticked in the Project Settings -> Asset Import.
 
 ## Adding the model Template to the scene
 
@@ -6524,9 +6524,9 @@ URL: https://developer.playcanvas.com/user-manual/animation/anim-animation-asset
 
 Animation assets are the animation keyframe data that’s used to drive animations of a model in PlayCanvas. They are linked to an animstategraph asset via an entity's anim component.
 
-The anim component currently supports animation assets that have been imported into a PlayCanvas project from .FBX files using the `Convert to GLB` asset tasks settings option.
+The anim component currently supports animation assets that have been imported into a PlayCanvas project from .FBX files using the `Convert to GLB` setting in Project Settings > Asset Import.
 
-[Image: Asset Tasks]
+[Image: Asset Import]
 
 --------------------------------------------------------------------------------
 
@@ -9906,9 +9906,9 @@ Some assets are uploaded in source format and need to be converted into a "targe
 
 Some assets don't need to be imported before they can be used. For example a PNG image can be used as a texture immediately.
 
-## Asset Tasks {#asset-tasks}
+## Asset Import {#asset-import}
 
-When a source asset is uploaded, PlayCanvas starts an Asset Task to perform this import process on our server.
+When a source asset is uploaded, PlayCanvas starts an asset import task to perform this import process on our server.
 
 There are a variety of options available to tune the behavior of the import pipeline to suit your needs.
 
@@ -10011,7 +10011,7 @@ Open the 'Project Settings'
 
 <img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/project-settings.png" width="480" />
 
-Scroll down to 'Asset Tasks' and enable 'Import Hierarchy':
+Scroll down to 'Asset Import' and enable 'Import Hierarchy':
 
 <img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/asset-tasks.png" width="360" />
 
@@ -10087,9 +10087,9 @@ If you would like to migrate assets to the GLB format, please go to 'Project Set
 
 <img loading="lazy" src="/img/user-manual/assets/importing/project-settings.png" alt="Project settings" width="300" />
 
-Open 'Asset Tasks' and tick 'Convert to GLB'.
+Open 'Asset Import' and tick 'Convert to GLB'.
 
-<img loading="lazy" src="/img/user-manual/assets/importing/asset-tasks.png" alt="Asset tasks settings" width="400" />
+<img loading="lazy" src="/img/user-manual/assets/importing/asset-tasks.png" alt="Asset Import settings" width="400" />
 
 And finally reimport the model and/or animation file (via drag and drop or the 'Upload' menu option) to create the GLB asset.
 
@@ -10198,7 +10198,7 @@ This is an experimental feature. Please let us know your feedback in the [forums
 
 When importing animations, there are settings that can be tweaked to adjust the animation quality against the file size.
 
-They can be found in the Project Settings under Asset Tasks.
+They can be found in the Project Settings under Asset Import.
 
 [Image: Animation Import Settings]
 
@@ -11030,7 +11030,7 @@ GIF, TGA, BMP and TIF image types will be converted to JPG or PNG on import. If 
 
 HDR and EXR are [high dynamic range formats](https://en.wikipedia.org/wiki/High-dynamic-range_imaging) formats. Images of these types are converted to PNG on import and marked as being stored in RGBM format. RGBM essentially stores a multiplier for RGB values in the PNG's alpha channel, enabling the compression of an HDR format into a low dynamic range format.
 
-By default, imported images will be resized to the nearest power of two. For example, an image that is 323x414 will be resized to 256x512 on import. This is done because the graphics engine cannot utilize mipmapping with non-power of two textures. However, this behavior can be overridden by disabling the 'Textures POT' setting in the Asset Tasks panel before importing a non-power of two texture.
+By default, imported images will be resized to the nearest power of two. For example, an image that is 323x414 will be resized to 256x512 on import. This is done because the graphics engine cannot utilize mipmapping with non-power of two textures. However, this behavior can be overridden by disabling the 'Textures POT' setting in the Asset Import panel before importing a non-power of two texture.
 
 ## Texture Properties
 
