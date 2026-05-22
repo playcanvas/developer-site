@@ -7,7 +7,7 @@ Some assets are uploaded in source format and need to be converted into a "targe
 
 Some assets don't need to be imported before they can be used. For example a PNG image can be used as a texture immediately.
 
-## Asset Import {#asset-tasks}
+## Asset Import {#asset-import}
 
 When a source asset is uploaded, PlayCanvas starts an import task to perform this import process on our server.
 
