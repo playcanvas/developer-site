@@ -5,7 +5,7 @@ description: "Add voxel collision to a published splat so visitors can walk thro
 
 By default, splats in the viewer have no physical presence — the camera flies right through them. The **Collision** section in [Studio](/user-manual/supersplat/studio/) attaches a **voxel** representation of the scene to your splat so the viewer can collide against it. With collision attached, your splat becomes **walkable** — visitors can navigate it on foot rather than just orbit around it. The [Explore](/user-manual/supersplat/explore) page also surfaces walkable scenes via its `walkable` feature filter.
 
-{/* TODO: media — /img/user-manual/supersplat/studio/collision-voxels.png — the collision upload section */}
+<!-- TODO: media — /img/user-manual/supersplat/studio/collision-voxels.png — the collision upload section -->
 
 ## What is voxel collision?
 

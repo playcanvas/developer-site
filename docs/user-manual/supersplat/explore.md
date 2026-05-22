@@ -7,7 +7,7 @@ The [Explore page](https://superspl.at) is the public-facing home of SuperSplat 
 
 Browsing Explore is **anonymous** — no PlayCanvas account is required. An account becomes useful when you want to [like](/user-manual/supersplat/scene-page/#likes), [comment](/user-manual/supersplat/scene-page/#comments), or [publish your own splats](/user-manual/supersplat/upload).
 
-{/* TODO: media — /img/user-manual/supersplat/explore-page.png — the Explore grid */}
+<!-- TODO: media — /img/user-manual/supersplat/explore-page.png — the Explore grid -->
 
 ## The grid
 
@@ -63,7 +63,7 @@ The top-nav search bar adds a `q=` parameter that matches against splat **title*
 
 > Most-liked walkable splats published in the last month whose title or description mentions "museum."
 
-{/* TODO: media — /video/user-manual/supersplat/explore-infinite-scroll.mp4 — gallery scrolling and loading more cards */}
+<!-- TODO: media — /video/user-manual/supersplat/explore-infinite-scroll.mp4 — gallery scrolling and loading more cards -->
 
 ## Creator profiles
 

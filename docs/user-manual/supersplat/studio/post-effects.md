@@ -7,7 +7,7 @@ The **Post Effects** panel in [Studio](/user-manual/supersplat/studio/) controls
 
 The panel also contains two related global controls: a **Tonemapping** dropdown that shapes how high-dynamic-range output maps to display intensity, and a **High Precision Rendering** toggle that switches the viewer to a more accurate (but more expensive) rendering pipeline.
 
-{/* TODO: media — /img/user-manual/supersplat/studio/post-effects-panel.png — the Post Effects panel expanded */}
+<!-- TODO: media — /img/user-manual/supersplat/studio/post-effects-panel.png — the Post Effects panel expanded -->
 
 ## Effect sections
 

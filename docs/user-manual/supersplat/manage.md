@@ -7,7 +7,7 @@ The [Manage page](https://superspl.at/manage) is your splat library on superspl.
 
 You must be signed in with a PlayCanvas account to access Manage. See [Account Creation](/user-manual/account-management/user-accounts/account-creation).
 
-{/* TODO: media — /img/user-manual/supersplat/manage-page.png — the Manage page table with several splats */}
+<!-- TODO: media — /img/user-manual/supersplat/manage-page.png — the Manage page table with several splats -->
 
 ## The list view
 
@@ -37,7 +37,7 @@ The **Upload Splat** button in the page header opens the Upload dialog. See [Dir
 
 Pick **Edit** from a row's Actions menu to open the **Edit Splat** dialog.
 
-{/* TODO: media — /img/user-manual/supersplat/edit-splat-dialog.png — the Edit Splat dialog */}
+<!-- TODO: media — /img/user-manual/supersplat/edit-splat-dialog.png — the Edit Splat dialog -->
 
 | Field | Description |
 |-------|-------------|

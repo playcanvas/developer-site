@@ -7,7 +7,7 @@ The **scene page** at `https://superspl.at/scene/<hash>` is the public face of a
 
 Visitors can browse a scene page without a PlayCanvas account. An account is required to **like** the splat or **leave a comment**.
 
-{/* TODO: media — /img/user-manual/supersplat/scene-page.png — a scene page with the viewer, sidebar metadata, and action buttons */}
+<!-- TODO: media — /img/user-manual/supersplat/scene-page.png — a scene page with the viewer, sidebar metadata, and action buttons -->
 
 ## What visitors see
 

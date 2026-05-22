@@ -9,7 +9,7 @@ Profiles are linked from the **author chip** that appears on every [scene page](
 
 Browsing a profile is anonymous; no PlayCanvas account is required.
 
-{/* TODO: media — /img/user-manual/supersplat/user-profile.png — a creator's profile page with avatar, bio, and a grid of their splats */}
+<!-- TODO: media — /img/user-manual/supersplat/user-profile.png — a creator's profile page with avatar, bio, and a grid of their splats -->
 
 ## What's shown
 

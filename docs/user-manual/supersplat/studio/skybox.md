@@ -5,7 +5,7 @@ description: "Set a background color or upload an equirectangular skybox for a p
 
 The **Skybox** and **Background** controls in [Studio](/user-manual/supersplat/studio/) let you set what fills the space *around* your splat in the viewer. The simplest option is a flat background color; for environment scenes you can also upload an equirectangular skybox image.
 
-{/* TODO: media — /img/user-manual/supersplat/studio/skybox-upload.png — the skybox upload dialog and preview */}
+<!-- TODO: media — /img/user-manual/supersplat/studio/skybox-upload.png — the skybox upload dialog and preview -->
 
 ## Background color
 

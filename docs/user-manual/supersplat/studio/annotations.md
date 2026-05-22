@@ -5,7 +5,7 @@ description: "Add 3D-positioned text hotspots to a published splat — visitors 
 
 **Annotations** are 3D-positioned text hotspots you place on your published splat in [Studio](/user-manual/supersplat/studio/). On the viewer side, each annotation shows up as a marker visitors can click; clicking it fades the camera to a curated pose and surfaces a title and body of text. Use them to call out features, narrate a story, or give a self-guided tour of the scene.
 
-{/* TODO: media — /img/user-manual/supersplat/studio/annotations-panel.png — the Annotations panel with a list of annotations and a selected one in the viewport */}
+<!-- TODO: media — /img/user-manual/supersplat/studio/annotations-panel.png — the Annotations panel with a list of annotations and a selected one in the viewport -->
 
 ## Annotation properties
 
@@ -30,7 +30,7 @@ The general flow is:
 
 You can reorder annotations in the list panel — the order controls how visitors step through them on the viewer.
 
-{/* TODO: media — /video/user-manual/supersplat/studio/annotation-flythrough.mp4 — visitor navigating between hotspots */}
+<!-- TODO: media — /video/user-manual/supersplat/studio/annotation-flythrough.mp4 — visitor navigating between hotspots -->
 
 ## How visitors use them
 

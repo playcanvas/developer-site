@@ -5,7 +5,7 @@ description: "Define one or more starting cameras for a published splat — posi
 
 The **Cameras** panel in [Studio](/user-manual/supersplat/studio/) defines one or more named cameras for your published splat. Each camera has an initial **position**, a **target** (the point the camera looks at), and a **field of view**. Visitors land on one of these cameras when they open your [scene page](/user-manual/supersplat/scene-page); [annotations](/user-manual/supersplat/studio/annotations) and [animation tracks](/user-manual/supersplat/studio/animations) can reference a camera by its place in the list.
 
-{/* TODO: media — /img/user-manual/supersplat/studio/cameras-panel.png — the Cameras panel with a list of cameras */}
+<!-- TODO: media — /img/user-manual/supersplat/studio/cameras-panel.png — the Cameras panel with a list of cameras -->
 
 ## The Cameras panel
 

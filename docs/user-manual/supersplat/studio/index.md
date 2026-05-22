@@ -7,7 +7,7 @@ description: "Studio curates the viewing experience for a published splat: camer
 
 Studio writes its output as a single JSON document — [Experience Settings](/user-manual/supersplat/studio/experience-settings) — that the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) reads at runtime. That same JSON is what gets bundled into a self-hosted HTML export.
 
-{/* TODO: media — /img/user-manual/supersplat/studio/launching-studio.png — the Studio layout */}
+<!-- TODO: media — /img/user-manual/supersplat/studio/launching-studio.png — the Studio layout -->
 
 ## Launching Studio
 
@@ -46,7 +46,7 @@ Each tool section has its own page:
 
 Edits are not auto-saved. The header surfaces a **Save** action that pushes your full Experience Settings JSON to the server.
 
-{/* TODO: media — /video/user-manual/supersplat/studio/save-flow.mp4 — dirty-state indicator → Save → viewer reload */}
+<!-- TODO: media — /video/user-manual/supersplat/studio/save-flow.mp4 — dirty-state indicator → Save → viewer reload -->
 
 A few things to know about the save flow:
 

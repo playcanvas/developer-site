@@ -7,7 +7,7 @@ The [Convert page](https://superspl.at/convert) is a browser-based tool for conv
 
 Convert runs **entirely in the browser** using WebAssembly. Your splats are never uploaded to a server; everything happens locally and downloads back to your machine when you're done.
 
-{/* TODO: media — /img/user-manual/supersplat/convert/convert-ui.png — the Convert page with files added and actions queued */}
+<!-- TODO: media — /img/user-manual/supersplat/convert/convert-ui.png — the Convert page with files added and actions queued -->
 
 ## When to use Convert vs the CLI
 
@@ -75,7 +75,7 @@ When you click **Convert & Download**:
 3. After conversion, a per-column statistics table appears (total Gaussians, min/max/mean per attribute).
 4. The output file auto-downloads to your machine.
 
-{/* TODO: media — /video/user-manual/supersplat/convert/action-chain.mp4 — file drop → action queue → download */}
+<!-- TODO: media — /video/user-manual/supersplat/convert/action-chain.mp4 — file drop → action queue → download -->
 
 ## See also
 

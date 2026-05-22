@@ -7,7 +7,7 @@ The **Animations** section in [Studio](/user-manual/supersplat/studio/) lets you
 
 A track can be set to auto-play when a visitor opens the [scene page](/user-manual/supersplat/scene-page), turning your splat into a cinematic flythrough.
 
-{/* TODO: media — /video/user-manual/supersplat/studio/animation-playback.mp4 — camera track playing in the viewer */}
+<!-- TODO: media — /video/user-manual/supersplat/studio/animation-playback.mp4 — camera track playing in the viewer -->
 
 ## Track properties
 
