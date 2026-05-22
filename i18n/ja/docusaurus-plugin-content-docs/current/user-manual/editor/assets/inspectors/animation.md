@@ -25,7 +25,7 @@ Animationアセットは、3Dモデルで単一のアニメーションを再生
 
 アニメーションをインポートする際には、ファイルサイズに対してアニメーション品質を調整するために微調整できる設定があります。
 
-これらは、プロジェクト設定のAsset Tasksの下で見つけることができます。
+これらは、プロジェクト設定のAsset Importの下で見つけることができます。
 
 ![Animation Import Settings](/img/user-manual/assets/animation/animation-import-settings.png)
 
