@@ -6,7 +6,9 @@ unlisted: true
 
 #### 概要
 
-スプラット（例：`.ply` または `.sog`）を、署名付き URL と公開フローを用いた AWS S3 への直接アップロードで SuperSplat プラットフォームに公開します。
+スプラット（例：`.ply` または `.sog`）を、[SuperSplatプラットフォーム](/user-manual/supersplat/)にプログラム的に公開します — [Editorの公開ダイアログ](/user-manual/supersplat/editor/publishing)とsuperspl.atの[Direct Upload](/user-manual/supersplat/upload)フローが使うのと同じバックエンドです。公開後、スプラットはユーザーの[Manageページ](/user-manual/supersplat/manage)に表示され、[Studio](/user-manual/supersplat/studio/)で開いて視聴体験をキュレーションできます。
+
+publish呼び出しの`settings`フィールドは[Experience Settings](/user-manual/supersplat/studio/experience-settings) JSON — Studioが書き、[SuperSplat Viewer](/user-manual/supersplat/viewer/)が読むのと同じコントラクト — を運びます。完全なスキーマはそちらのリファレンスを参照してください。
 
 フローは主に次の 3 ステップで構成されます。
 
