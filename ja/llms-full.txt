@@ -35108,7 +35108,7 @@ Pick **Delete** from a row's Actions menu. A confirmation dialog asks you to con
 
 ## Opening a splat in Studio
 
-The **Open in Studio** button in the Edit Splat dialog's preview card launches [Studio](/user-manual/supersplat/studio/) for the chosen splat. Studio's URL follows a YouTube-Studio-style pattern: `superspl.at/scene/<hash>/studio`. Only the splat's owner (or a platform admin) can open Studio for it.
+The **Open in Studio** button in the Edit Splat dialog's preview card launches [Studio](/user-manual/supersplat/studio/) for the chosen splat. Studio's URL is `superspl.at/scene/<hash>/studio`. Only the splat's owner can open Studio for it.
 
 ## See also
 
@@ -35196,7 +35196,7 @@ Some download targets are produced on demand — the dialog shows a **Preparing�
 
 ## Comments
 
-Below the viewer is the comments section. Anyone signed in can post a comment; the splat's owner and platform admins can delete any comment.
+Below the viewer is the comments section. Anyone signed in can post a comment; the splat's owner can delete any comment.
 
 - Each comment shows the commenter's avatar, username, timestamp, and sanitized HTML body.
 - Comments can be liked individually (the per-comment star icon).
@@ -35231,7 +35231,7 @@ Studio writes its output as a single JSON document — [Experience Settings](/us
 
 ## Launching Studio
 
-Studio runs at a YouTube-Studio-style URL: **`https://superspl.at/scene/<hash>/studio`**. Only the splat's owner (or a platform admin) can open it; for anyone else the URL 404s.
+Studio runs at **`https://superspl.at/scene/<hash>/studio`**. Only the splat's owner can open it; for anyone else the URL 404s.
 
 There are two ways to get there:
 
@@ -35799,7 +35799,7 @@ Browsing a profile is anonymous; no PlayCanvas account is required.
 | **Social links** | Links to any external profiles the creator has added (X, LinkedIn, personal site, etc.). |
 | **Splat grid** | Every **Public** splat the creator has published, using the same card UI as [Explore](/user-manual/supersplat/explore). Click any card to open its [scene page](/user-manual/supersplat/scene-page). |
 
-Unlisted splats are not shown on the public profile — only the creator and platform admins can see those, via the [Manage page](/user-manual/supersplat/manage).
+Unlisted splats are not shown on the public profile — only the creator can see those, via the [Manage page](/user-manual/supersplat/manage).
 
 ## See also
 
