@@ -86,7 +86,7 @@ SplatTransform detects file format from the file extension:
 | `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension    |
 | `.csv`            | ❌    | ✅     | Comma-separated values spreadsheet                                                                                                                   |
 | `.html`           | ❌    | ✅     | HTML viewer app (single-page or unbundled) based on SOG                                                                                              |
-| `.voxel.json`     | ❌    | ✅     | Sparse voxel octree for collision detection. See the [Collision Mesh](/user-manual/splat-transform/collision) guide. Output filename **must** be `.voxel.json` |
+| `.voxel.json`     | ❌    | ✅     | Sparse voxel octree for collision detection. See the [Collision Mesh](/user-manual/splat-transform/collision) guide. Output filename must end with `.voxel.json` (the prefix is up to you, e.g. `room.voxel.json`) |
 | `lod-meta.json`   | ❌    | ✅     | Multi-level-of-detail SOG bundle (accompanied by per-LOD `.sog` chunks). Output filename **must** be `lod-meta.json`                                 |
 | `.webp`           | ❌    | ✅     | Lossless WebP image rendered from a camera view via GPU rasterizer                                                                                   |
 | `null`            | ❌    | ✅     | Discard output (useful with `--summary` for analysis-only runs)                                                                                      |
