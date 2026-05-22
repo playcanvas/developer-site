@@ -75,7 +75,7 @@ Pick **Delete** from a row's Actions menu. A confirmation dialog asks you to con
 
 ## Opening a splat in Studio
 
-The **Open in Studio** button in the Edit Splat dialog's preview card launches [Studio](/user-manual/supersplat/studio/) for the chosen splat. Studio's URL follows a YouTube-Studio-style pattern: `superspl.at/scene/<hash>/studio`. Only the splat's owner (or a platform admin) can open Studio for it.
+The **Open in Studio** button in the Edit Splat dialog's preview card launches [Studio](/user-manual/supersplat/studio/) for the chosen splat. Studio's URL is `superspl.at/scene/<hash>/studio`. Only the splat's owner can open Studio for it.
 
 ## See also
 

@@ -20,7 +20,7 @@ Browsing a profile is anonymous; no PlayCanvas account is required.
 | **Social links** | Links to any external profiles the creator has added (X, LinkedIn, personal site, etc.). |
 | **Splat grid** | Every **Public** splat the creator has published, using the same card UI as [Explore](/user-manual/supersplat/explore). Click any card to open its [scene page](/user-manual/supersplat/scene-page). |
 
-Unlisted splats are not shown on the public profile — only the creator and platform admins can see those, via the [Manage page](/user-manual/supersplat/manage).
+Unlisted splats are not shown on the public profile — only the creator can see those, via the [Manage page](/user-manual/supersplat/manage).
 
 ## See also
 
