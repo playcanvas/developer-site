@@ -7,7 +7,7 @@ description: "スプラットシーンのパフォーマンスのヒント：ス
 
 ## Gaussian数の制限
 
-シーン内のGaussian数に注意してください。すべてのGaussianは毎フレームカメラの深度でソートされます。特定のGSplatアセットに含まれる数は、[SuperSplat Editor](https://superspl.at/editor)の[SPLAT DATA Panel](https://github.com/playcanvas/supersplat/wiki/Inspecting-Splat-Data)を使用して確認できます。SuperSplatを使用して、PLYファイルから不要なGaussianをトリミングしてください。
+シーン内のGaussian数に注意してください。すべてのGaussianは毎フレームカメラの深度でソートされます。特定のGSplatアセットに含まれる数は、[SuperSplat Editor](/user-manual/supersplat/editor/)の[SPLAT DATA Panel](/user-manual/supersplat/editor/data-panel/)を使用して確認できます。SuperSplatを使用して、PLYファイルから不要なGaussianをトリミングしてください。
 
 大規模なシーンでは、カメラ距離に基づいて適切な詳細レベルを動的にロードする[LODストリーミング](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming)の使用を検討してください。これにより、最も重要な場所で視覚品質を維持しながら、任意の時点でアクティブなGaussian数を大幅に削減できます。
 

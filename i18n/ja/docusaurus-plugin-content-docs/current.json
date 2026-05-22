@@ -235,6 +235,18 @@
     "message": "SuperSplat",
     "description": "The label for category SuperSplat in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Editor": {
+    "message": "エディタ",
+    "description": "The label for category Editor in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Studio": {
+    "message": "スタジオ",
+    "description": "The label for category Studio in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Viewer": {
+    "message": "ビューア",
+    "description": "The label for category Viewer in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.Rendering Splats": {
     "message": "スプラットのレンダリング",
     "description": "The label for category Rendering Splats in sidebar userManualSidebar"

@@ -1,43 +1,76 @@
 ---
 title: SuperSplat
-description: "SuperSplatブラウザエディタの概要：Web上のオープンソースのスプラット編集、動画、要件、superspl.atでの始め方です。"
+description: "SuperSplatはPlayCanvasの3Dガウシアンスプラット向け編集・公開プラットフォームです。superspl.atでスプラットシーンの編集、アップロード、管理、キュレーション、共有、発見ができます。"
 ---
 
-[SuperSplat](https://superspl.at/editor)は、PlayCanvasの無料の[オープンソース](https://github.com/playcanvas/supersplat) Gaussian Splatエディターで、プロダクションワークフロー向けに特別に設計されています。ダウンロード不要でブラウザ上で完全に動作するため、どこからでもアクセス可能です。
+[SuperSplat](https://superspl.at)はPlayCanvasの3Dガウシアンスプラット向け編集・公開プラットフォームです。生のスプラットキャプチャを、クリーンアップから、カメラ、アニメーション、注釈、ポストエフェクト、コリジョンを備えた洗練された共有可能なシーンへと仕上げ、最新のブラウザで誰でも視聴できる状態にします。
 
-![SuperSplat Interface](/img/user-manual/supersplat/editor/supersplat-interface.png)
+このプラットフォームは複数のコンポーネントで構成されています。クリエイターとして使うもの、訪問者が作品を視聴するために使うもの、そして汎用のユーティリティがあります。
 
-## 動画チュートリアル
+```mermaid
+flowchart LR
+    PLY([Raw splat<br/>PLY / SOG / ...])
+    Editor([Editor])
+    Upload([Direct Upload])
+    Manage([Manage])
+    Studio([Studio])
+    Scene([Scene page])
+    Explore([Explore])
+    Viewer([Viewer<br/>embed / self-host])
+    Convert([Convert])
 
-### SuperSplat入門
+    PLY --> Editor --> Manage
+    PLY --> Upload --> Manage
+    Convert -.-> Editor
+    Convert -.-> Upload
+    Manage --> Studio --> Manage
+    Manage --> Scene
+    Scene --> Explore
+    Scene --> Viewer
+```
 
-SuperSplatの基本を学ぶには、この動画による入門が最適です。
+:::tip Editorを省略することもできます
 
-<div className="iframe-container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/MwzaEM2I55I" title="SuperSplat Basics" allowfullscreen></iframe>
-</div>
+すでにクリーンなスプラットファイルをお持ちの場合、Editorを使う必要はありません。[superspl.atのホームページ](https://superspl.at)（または[Manageページ](manage)）にあるオレンジ色の**Upload Splat**ボタンを押すと、プラットフォームに直接公開できます。
 
-### 詳細チュートリアル
+:::
 
-SuperSplatのより包括的なガイドについては、この詳細なチュートリアルをご覧ください。
+## プラットフォーム
 
-<div className="iframe-container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/J37rTieKgJ8" title="SuperSplat In-Depth Tutorial" allowfullscreen></iframe>
-</div>
+| サーフェス | 概要 | 場所 |
+|---------|------------|----------------|
+| **[Editor](editor/)** | スプラットをクリーンアップ、クロップ、色調整、アニメーション化するブラウザベースのエディタ。superspl.atに公開できます。 | [superspl.at/editor](https://superspl.at/editor) |
+| **[Direct Upload](upload)** | Editorを開かずに、すでにクリーンなスプラットファイルを公開します。 | [superspl.at](https://superspl.at)のオレンジ色の**Upload Splat**ボタン |
+| **[Manage](manage)** | あなたのスプラットライブラリ：タイトルや説明の編集、公開範囲の変更、ダウンロード可否とライセンスの選択、削除、Studioで開く操作ができます。 | [superspl.at/manage](https://superspl.at/manage) |
+| **[Studio](studio/)** | 公開後の視聴体験をキュレーションします：カメラ、アニメーション、注釈、ポストエフェクト、スカイボックス、コリジョン。YouTube Studio風のシーンごとのURLを持ちます。 | `superspl.at/scene/<hash>/studio` |
+| **[Scene page](scene-page)** | 公開済みスプラットの公開ページ：埋め込みビューア、シェア、埋め込み、ダウンロード、コメント、いいね、おすすめスプラット。 | `superspl.at/scene/<hash>` |
+| **[Explore](explore)** | ソート、期間、特集フィルタと検索を備えた公開ギャラリー。superspl.atのホームページです。 | [superspl.at](https://superspl.at) |
+| **[User Profile](user-profile)** | ユーザーの公開ページ：アバター、自己紹介、ソーシャルリンク、公開済みスプラット。 | `superspl.at/user?id=<username>` |
+| **[Viewer](viewer/)** | シーンページとEditorのHTMLエクスポートを動かしているオープンソースのウェブビューア。自分のページに埋め込むか、セルフホストできます。 | npm `@playcanvas/supersplat-viewer`、[GitHub](https://github.com/playcanvas/supersplat-viewer) |
+| **[Convert](convert)** | [splat-transform](/user-manual/splat-transform/) CLIのウェブフロントエンド：ブラウザ上で形式変換、トランスフォーム、フィルタを実行します。 | [superspl.at/convert](https://superspl.at/convert) |
 
-## はじめに
+## オープンソース vs ホスト型
 
-### SuperSplatへのアクセス
+SuperSplatはオープンな基盤の上に、ホスト型プラットフォームを重ねた構成になっています。
 
-1. **ブラウザを開く** - [superspl.at/editor](https://superspl.at/editor)にアクセスします
-2. **PLYファイルを読み込む** - ドラッグアンドドロップするか、ファイルメニューを使用します
-3. **編集を開始する** - インターフェースコントロールを使用してナビゲートおよび編集します
+| コンポーネント | ソース | ライセンス |
+|-----------|--------|---------|
+| Editor | [playcanvas/supersplat](https://github.com/playcanvas/supersplat) | MIT |
+| Viewer | [playcanvas/supersplat-viewer](https://github.com/playcanvas/supersplat-viewer) | MIT |
+| splat-transform（Convertの実装基盤） | [playcanvas/splat-transform](https://github.com/playcanvas/splat-transform) | MIT |
+| Studio、Manage、Explore、Scene page、Convert UI、publish/scene API | PlayCanvasがsuperspl.atでホスト | プロプライエタリ |
 
-### システム要件
+EditorのHTMLエクスポートやViewerのnpmパッケージを使って、公開済みスプラットを自前のインフラだけでホストすることも可能です。詳細は[ビューアのセルフホスティング](viewer/self-hosting)を参照してください。
 
-- **モダンなウェブブラウザ** - Chrome、Firefox、Safari、またはEdge
-- **WebGL 2.0のサポート** - すべてのモダンなブラウザで利用可能
-- **GPUアクセラレーション** - 大容量のスプラットファイルに推奨
-- **インストール不要** - すべてブラウザで動作します
+## アカウント
 
-SuperSplatは新機能と改善を伴い進化を続けています。最新のリリースで更新情報を確認し、コミュニティに参加してあなたの作品を共有し、他の人から学びましょう。
+superspl.atへの**スプラットの公開**、スプラットへの**コメント**、スプラットへの**いいね**には、無料のPlayCanvasアカウントが必要です。[Explore](explore)ページの閲覧と公開[シーンページ](scene-page)の視聴は匿名で可能です。アカウント作成は[アカウント作成](/user-manual/account-management/user-accounts/account-creation)を参照してください。
+
+## 次のステップ
+
+典型的な初回ワークフローは次のとおりです：
+
+1. [Editorを開いて](editor/)PLYを読み込みます。すでにクリーンなファイルをお持ちの場合はステップ2に進みます。
+2. （Editorから）[公開](editor/publishing)するか、直接[アップロード](upload)します。スプラットは[Manageページ](manage)に表示されます。
+3. [Studioで開いて](studio/)、カメラ、アニメーション、注釈、ポストエフェクト、スカイボックス、コリジョンを追加します。
+4. [シーンページ](scene-page)のURLを共有するか、[Viewerを埋め込んで](viewer/embedding)自分のサイトに統合します。
