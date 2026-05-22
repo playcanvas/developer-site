@@ -37,7 +37,7 @@ description: リグ付きキャラクターをインポートし、Animation Com
 
 ![](/img/tutorials/importing-first-model-and-animation/importing-model-fbx.gif)
 
-既存のプロジェクトにFBXをインポートする場合は、Project Settings -> Asset Tasksで以下の設定を確認してください。
+既存のプロジェクトにFBXをインポートする場合は、Project Settings -> Asset Importで以下の設定を確認してください。
 
 ![](/img/tutorials/importing-first-model-and-animation/asset-tasks-settings.png)
 

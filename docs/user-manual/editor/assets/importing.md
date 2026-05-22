@@ -35,9 +35,9 @@ If you would like to migrate assets to the GLB format, please go to 'Project Set
 
 <img loading="lazy" src="/img/user-manual/assets/importing/project-settings.png" alt="Project settings" width="300" />
 
-Open 'Asset Tasks' and tick 'Convert to GLB'.
+Open 'Asset Import' and tick 'Convert to GLB'.
 
-<img loading="lazy" src="/img/user-manual/assets/importing/asset-tasks.png" alt="Asset tasks settings" width="400" />
+<img loading="lazy" src="/img/user-manual/assets/importing/asset-tasks.png" alt="Asset Import settings" width="400" />
 
 And finally reimport the model and/or animation file (via drag and drop or the 'Upload' menu option) to create the GLB asset.
 

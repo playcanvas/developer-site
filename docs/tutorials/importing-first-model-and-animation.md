@@ -37,7 +37,7 @@ This will import the file into our project and the PlayCanvas Editor will create
 
 ![](/img/tutorials/importing-first-model-and-animation/importing-model-fbx.gif)
 
-If you are importing FBXs into an existing project, please make sure you have the following settings ticked in the Project Settings -> Asset Tasks.
+If you are importing FBXs into an existing project, please make sure you have the following settings ticked in the Project Settings -> Asset Import.
 
 ![](/img/tutorials/importing-first-model-and-animation/asset-tasks-settings.png)
 
