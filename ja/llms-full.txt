@@ -35723,16 +35723,14 @@ You must be signed in with a PlayCanvas account to upload. See [Account Creation
 
 Drag and drop, or pick from your filesystem. The dialog accepts:
 
-| Extension | Description |
-|-----------|-------------|
-| `.ply` | Standard PLY (uncompressed) |
-| `.sog` | Bundled super-compressed format |
-| `.compressed.ply` | Compressed PLY (quantized) |
-| `.ksplat` | mkkellogg compressed splat format |
-| `.splat` | antimatter15 compressed splat format |
-| `.spz` | Niantic compressed splat format |
+| Format | File to upload | How it is validated |
+|--------|----------------|---------------------|
+| **PLY** | `.ply` | Starts with a PLY header and declares an ASCII or binary format. |
+| **SOG** | `.sog` | Contains one `meta.json` file and the expected SOG WebP payload files. |
+| **LOD streaming bundle (SSOG)** | `.zip` | Contains `lod-meta.json` and one or more SOG chunk folders. |
+| **LCC** | `.zip` | Contains exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
 
-The format is detected automatically from the file extension.
+The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, `.splat`, or `.spz` files directly; use the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform CLI](/user-manual/splat-transform/) to convert those first.
 
 :::note Maximum file size
 
@@ -35770,7 +35768,7 @@ From the Edit Splat view, you can:
 
 | Error | Cause |
 |-------|-------|
-| **Unrecognized format** | The file extension isn't in the supported list above. |
+| **Unrecognized format** | The file does not match one of the supported structures above. |
 | **File too large** | The file exceeds the 10 GB limit. |
 | **Upload failed** | Network interruption or a server-side issue. Try again; if the problem persists, check your connection. |
 
