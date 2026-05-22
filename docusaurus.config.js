@@ -107,16 +107,29 @@ const config = {
         // SplatTransform promoted from gaussian-splatting/editing/splat-transform/ to top-level Core Products
         { from: ['/user-manual/gaussian-splatting/editing/splat-transform/'], to: '/user-manual/splat-transform/' },
         // SuperSplat promoted from gaussian-splatting/editing/supersplat/ to top-level Core Products
+        // and then again nested into supersplat/editor/ as the platform now covers Editor, Studio,
+        // Viewer, Convert, etc. — see /user-manual/supersplat/
         { from: ['/user-manual/gaussian-splatting/editing/supersplat/'], to: '/user-manual/supersplat/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/interface/'], to: '/user-manual/supersplat/interface/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/import-export/'], to: '/user-manual/supersplat/import-export/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/managing-projects/'], to: '/user-manual/supersplat/managing-projects/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/camera-controls/'], to: '/user-manual/supersplat/camera-controls/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/editing-splats/'], to: '/user-manual/supersplat/editing-splats/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/data-panel/'], to: '/user-manual/supersplat/data-panel/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/timeline/'], to: '/user-manual/supersplat/timeline/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/rendering/'], to: '/user-manual/supersplat/rendering/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/publishing/'], to: '/user-manual/supersplat/publishing/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/interface/'], to: '/user-manual/supersplat/editor/interface/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/import-export/'], to: '/user-manual/supersplat/editor/import-export/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/managing-projects/'], to: '/user-manual/supersplat/editor/managing-projects/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/camera-controls/'], to: '/user-manual/supersplat/editor/camera-controls/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/editing-splats/'], to: '/user-manual/supersplat/editor/editing-splats/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/data-panel/'], to: '/user-manual/supersplat/editor/data-panel/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/timeline/'], to: '/user-manual/supersplat/editor/timeline/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/rendering/'], to: '/user-manual/supersplat/editor/rendering/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/publishing/'], to: '/user-manual/supersplat/editor/publishing/' },
+        // Editor pages moved from supersplat/<page>/ to supersplat/editor/<page>/ as part of
+        // restructuring the section into a full-platform overview (Editor + Studio + Viewer + Convert).
+        { from: ['/user-manual/supersplat/interface/'], to: '/user-manual/supersplat/editor/interface/' },
+        { from: ['/user-manual/supersplat/import-export/'], to: '/user-manual/supersplat/editor/import-export/' },
+        { from: ['/user-manual/supersplat/managing-projects/'], to: '/user-manual/supersplat/editor/managing-projects/' },
+        { from: ['/user-manual/supersplat/camera-controls/'], to: '/user-manual/supersplat/editor/camera-controls/' },
+        { from: ['/user-manual/supersplat/editing-splats/'], to: '/user-manual/supersplat/editor/editing-splats/' },
+        { from: ['/user-manual/supersplat/data-panel/'], to: '/user-manual/supersplat/editor/data-panel/' },
+        { from: ['/user-manual/supersplat/timeline/'], to: '/user-manual/supersplat/editor/timeline/' },
+        { from: ['/user-manual/supersplat/rendering/'], to: '/user-manual/supersplat/editor/rendering/' },
+        { from: ['/user-manual/supersplat/publishing/'], to: '/user-manual/supersplat/editor/publishing/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en

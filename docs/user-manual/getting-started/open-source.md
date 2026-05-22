@@ -39,7 +39,9 @@ Here are some of our key repositories:
 | [**editor**](https://github.com/playcanvas/editor) | Visual editing environment for building WebGL/WebGPU/WebXR applications | MIT |
 | [**react**](https://github.com/playcanvas/react) | React components for building declarative 3D scenes | MIT |
 | [**web-components**](https://github.com/playcanvas/web-components) | Web Components for standards-based 3D development | MIT |
-| [**supersplat**](https://github.com/playcanvas/supersplat) | 3D Gaussian Splat editor | MIT |
+| [**supersplat**](https://github.com/playcanvas/supersplat) | SuperSplat Editor — browser-based editor for 3D Gaussian Splats | MIT |
+| [**supersplat-viewer**](https://github.com/playcanvas/supersplat-viewer) | SuperSplat Viewer — open-source viewer for published splats, embeddable via npm | MIT |
+| [**splat-transform**](https://github.com/playcanvas/splat-transform) | CLI and library for converting, transforming, and analyzing splats | MIT |
 | [**model-viewer**](https://github.com/playcanvas/model-viewer) | glTF and 3D Gaussian Splat viewer | MIT |
 | [**pcui**](https://github.com/playcanvas/pcui) | Comprehensive UI library for building browser-based tools | MIT |
 

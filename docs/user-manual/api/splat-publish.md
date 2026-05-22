@@ -6,7 +6,9 @@ unlisted: true
 
 #### Overview
 
-Publish a splat (e.g., .ply or .sog) to the SuperSplat platform using a direct AWS S3 upload using signed URL + publish flow.
+Publish a splat (e.g., .ply or .sog) to the [SuperSplat platform](/user-manual/supersplat/) programmatically — the same backend used by the [Editor's Publish dialog](/user-manual/supersplat/editor/publishing) and the [Direct Upload](/user-manual/supersplat/upload) flow on superspl.at. Once published, the splat appears on the user's [Manage page](/user-manual/supersplat/manage) and can be opened in [Studio](/user-manual/supersplat/studio/) to curate its viewing experience.
+
+The `settings` field on the publish call carries the [Experience Settings](/user-manual/supersplat/studio/experience-settings) JSON — the same contract Studio writes and the [SuperSplat Viewer](/user-manual/supersplat/viewer/) reads. See that reference for the full schema.
 
 The flow consists of three main steps:
 
