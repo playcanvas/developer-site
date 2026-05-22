@@ -5,7 +5,7 @@ description: "Tour of the SuperSplat UI: menu bar, scene manager, viewport, view
 
 The SuperSplat Editor's interface appears as follows:
 
-![supersplat-interface](/img/user-manual/gaussian-splatting/editing/supersplat/interface-overview.png)
+![supersplat-interface](/img/user-manual/supersplat/editor/interface-overview.png)
 
 The key elements of the interface are labeled:
 
