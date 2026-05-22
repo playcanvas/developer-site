@@ -75,34 +75,9 @@ splat-transform input.ply output.voxel.json
 | `size` | `0.05` | Voxel edge length in world units. Smaller = higher fidelity, larger files, slower fills. |
 | `opacity` | `0.1` | Minimum splat opacity required to mark a voxel solid. |
 
-## Step 3: Carving navigable space (`--voxel-carve`)
+## Step 3: Sealing the shell
 
-Flood-fills a capsule volume from `--seed-pos`, marking voxels the capsule can reach as *navigable*. This produces the actual walkable region used at runtime, carved directly out of the raw voxel grid from Step 2. Carving the raw voxels removes unnecessary detail and results in smoother runtime collisions and smaller files.
-
-```bash
-splat-transform input.ply output.voxel.json --voxel-carve --seed-pos 0,1,0
-```
-
-| Original | Carved |
-| --- | --- |
-| ![original](/img/user-manual/splat-transform/voxels.webp) | ![carved](/img/user-manual/splat-transform/carved.webp) |
-
-The capsule must fit at the seed position. If carve produces no output, the seed is likely inside solid geometry or the capsule is too large to fit.
-
-### Carve options
-
-```none
---voxel-carve [h,r]
-```
-
-| Parameter | Default | Description |
-| --- | --- | --- |
-| `h` | `1.6` | Capsule height (world units), roughly the agent height. `0` disables carve. |
-| `r` | `0.2` | Capsule radius (world units), roughly the agent radius. |
-
-## Step 4: Sealing the shell
-
-After voxelization, the surface is typically a thin shell with holes. Filling closes those holes so carve has a watertight volume to flood. Two complementary options are available — one for indoor/enclosed scenes, one for outdoor/grounded scenes. They are not normally combined.
+After voxelization, the surface is typically a thin shell with holes. Filling closes those holes so carve (the next step) has a watertight volume to flood. Two complementary options are available — one for indoor/enclosed scenes, one for outdoor/grounded scenes. They are not normally combined.
 
 ### Rooms — `--voxel-external-fill`
 
@@ -139,12 +114,12 @@ splat-transform input.ply output.voxel.json --voxel-floor-fill
 ![floor-fill: cross-section of terrain before/after, showing solid mass below the surface](/img/user-manual/splat-transform/filled.webp)
 
 ```none
---voxel-floor-fill [radius]
+--voxel-floor-fill [size]
 ```
 
 | Parameter | Default | Description |
 | --- | --- | --- |
-| `radius` | `1.6` | Restricts patching to XZ columns surrounded by floor within `2*radius`. Large empty exterior areas are left alone, so this won't accidentally fill the sky. |
+| `size` | `1.6` | Restricts patching to XZ columns surrounded by floor within `2*size`. Large empty exterior areas are left alone, so this won't accidentally fill the sky. |
 
 ### Choosing
 
@@ -153,6 +128,31 @@ splat-transform input.ply output.voxel.json --voxel-floor-fill
 | Rooms                  | `--voxel-external-fill` |
 | Outdoor scenes         | `--voxel-floor-fill`    |
 | Single object in space | (skip both)             |
+
+## Step 4: Carving navigable space (`--voxel-carve`)
+
+Flood-fills a capsule volume from `--seed-pos`, marking voxels the capsule can reach as *navigable*. Once the shell has been sealed (Step 3), carve produces the actual walkable region used at runtime. Carving removes unnecessary detail and results in smoother runtime collisions and smaller files.
+
+```bash
+splat-transform input.ply output.voxel.json --voxel-carve --seed-pos 0,1,0
+```
+
+| Original | Carved |
+| --- | --- |
+| ![original](/img/user-manual/splat-transform/voxels.webp) | ![carved](/img/user-manual/splat-transform/carved.webp) |
+
+The capsule must fit at the seed position. If carve produces no output, the seed is likely inside solid geometry or the capsule is too large to fit.
+
+### Carve options
+
+```none
+--voxel-carve [h,r]
+```
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `h` | `1.6` | Capsule height (world units), roughly the agent height. `0` disables carve. |
+| `r` | `0.2` | Capsule radius (world units), roughly the agent radius. |
 
 ## Step 5: Generating the collision mesh (`-K` / `--collision-mesh`)
 
