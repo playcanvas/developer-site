@@ -34,7 +34,7 @@ Drag and drop, or pick from your filesystem. The dialog accepts:
 | **LOD streaming bundle (SSOG)** | `.zip` | Contains `lod-meta.json` and one or more SOG chunk folders. |
 | **LCC** | `.zip` | Contains exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
 
-The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, `.splat`, or `.spz` files directly. If you have a `.compressed.ply` file, convert it with the [splat-transform CLI](/user-manual/splat-transform/). If you have a `.ksplat`, `.splat`, or `.spz` file, convert it with the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform CLI](/user-manual/splat-transform/).
+The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, `.splat`, or `.spz` files directly; use the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform CLI](/user-manual/splat-transform/) to convert those first.
 
 :::note Maximum file size
 
