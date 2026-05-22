@@ -50,19 +50,33 @@ These flags are subject to change as the viewer evolves; check the [project READ
 
 The `settings` URL parameter points at an [Experience Settings](/user-manual/supersplat/studio/experience-settings) v2 document — the same JSON format [Studio](/user-manual/supersplat/studio/) saves whenever you hit Save. See the [Experience Settings reference](/user-manual/supersplat/studio/experience-settings) for the full schema, defaults, and migration notes.
 
-A minimal `settings.json` for a quick test:
+A complete minimal `settings.json` (every field the v2 schema requires, populated with the defaults the [Studio](/user-manual/supersplat/studio/) emits for a fresh scene):
 
 ```json
 {
-  "background": { "color": [0, 0, 0] },
+  "version": 2,
+  "tonemapping": "linear",
+  "highPrecisionRendering": false,
+  "background": {
+    "color": [0, 0, 0]
+  },
+  "postEffectSettings": {
+    "sharpness": { "enabled": false, "amount": 0 },
+    "bloom":     { "enabled": false, "intensity": 0.1, "blurLevel": 2 },
+    "grading":   { "enabled": false, "brightness": 1, "contrast": 1, "saturation": 1, "tint": [1, 1, 1] },
+    "vignette":  { "enabled": false, "intensity": 0.5, "inner": 0.3, "outer": 0.75, "curvature": 1 },
+    "fringing":  { "enabled": false, "intensity": 0.5 }
+  },
   "cameras": [
-    { "initial": { "position": [0, 1, -1], "target": [0, 0, 0], "fov": 60 } }
+    { "initial": { "position": [0, 1, -1], "target": [0, 0, 0], "fov": 75 } }
   ],
-  "animTracks": []
+  "animTracks": [],
+  "annotations": [],
+  "startMode": "default"
 }
 ```
 
-For full coverage of every field — post effects, annotations, animations, tonemapping, etc. — go to [Experience Settings](/user-manual/supersplat/studio/experience-settings).
+For full coverage of every field — post effects parameters, annotations, animation keyframes, tonemapping options, etc. — see the [Experience Settings](/user-manual/supersplat/studio/experience-settings) reference.
 
 ## Programmatic publishing
 

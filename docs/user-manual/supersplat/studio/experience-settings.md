@@ -66,7 +66,11 @@ type ExperienceSettings = {
         extras: Record<string, unknown>;
     }>;
 
+    // 'default'   — start at the first camera in `cameras`
+    // 'animTrack' — start by playing the first track in `animTracks`
+    // 'annotation' — start positioned at the first annotation's camera pose
     startMode: 'default' | 'animTrack' | 'annotation';
+
     hasStartPose?: boolean;
 };
 ```
@@ -91,7 +95,7 @@ A freshly-published splat is given a sensible default JSON:
 - **Tonemapping** `linear`, **high precision** off
 - **Background** `[0, 0, 0]` (black), no skybox
 - **Post effects** all disabled
-- **One camera** at position `[0, 0, 5]` looking at `[0, 0, 0]` with FOV `60`
+- **One camera** with FOV `75` — for environment-style scenes the default pose is position `[0, 2, 0]`, target `[2, 2, 0]`; for object-style scenes it's position `[2, 2, -2]`, target `[0, 0, 0]`
 - **No animation tracks** and **no annotations**
 - **Start mode** `default`
 

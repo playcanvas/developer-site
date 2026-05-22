@@ -15,7 +15,7 @@ Each track has the following properties:
 
 | Field | Description |
 |-------|-------------|
-| **Name** | A label to refer to the track from other settings (e.g. `startMode = 'animTrack'` uses the named track on load). |
+| **Name** | A display label for the track in the Studio UI. |
 | **Duration** | Length of the track in seconds. |
 | **Frame rate** | Frames per second the keyframe times are expressed in. |
 | **Loop mode** | `none` — play once and stop. `repeat` — loop seamlessly from end back to start. `pingpong` — play forward, then reverse, repeating. |
@@ -36,7 +36,7 @@ The keyframe list stores three parallel arrays (`position`, `target`, `fov`) and
 
 ## Auto-play on load
 
-Set the scene's **start mode** to `animTrack` and pick the track by name to make it play automatically when a visitor opens the scene page. Combined with a seamless `repeat` loop, this gives the impression of a hands-off showreel.
+Set the scene's **start mode** to `animTrack` to make the animation track play automatically when a visitor opens the scene page. Combined with a seamless `repeat` loop, this gives the impression of a hands-off showreel. When more than one track is defined, the first track in the list is the one that plays.
 
 ## Tip: smooth loops
 
