@@ -33,7 +33,7 @@ Click on any scene in the list to open it.
 
 ## Creating a New Scene
 
-1. Click the **+ ADD NEW SCENE** button at the bottom of the dialog.
+1. Click the **+ ADD NEW SCENE** button in the top-right of the dialog.
 2. Enter a name for your scene.
 3. Press **Enter** to create and open the new scene.
 
