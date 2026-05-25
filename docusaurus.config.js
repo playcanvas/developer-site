@@ -221,7 +221,8 @@ const config = {
       }
     }],
     'docusaurus-plugin-sass',
-    pluginLlms
+    pluginLlms,
+    'docusaurus-plugin-copy-page-button'
   ],
 
   presets: [
