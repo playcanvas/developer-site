@@ -19,7 +19,7 @@ Each component appears as a panel in the Inspector with a common header containi
 | Component Icon | Identifies the component type. |
 | Enable Toggle | Enable or disable the component. Disabled components do not run or render. |
 | Help | Opens the documentation for this component type. |
-| Actions Menu | Click the cog icon to access Copy, Paste, and Delete options. |
+| Actions Menu | Click the ellipsis (⋯) icon to access Copy, Paste, and Delete options. |
 
 ## Component Types
 
