@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const BASE = 'https://playcanvas-dev.vercel.app';
+const BASE = 'https://playcanvas.vercel.app';
 const GENERIC_TITLES = new Set([
     'live demo',
     'this example',
