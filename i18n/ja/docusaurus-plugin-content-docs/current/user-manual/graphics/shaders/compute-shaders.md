@@ -347,7 +347,7 @@ struct DispatchIndirectArgs {
 fn main() {
     // ワークロードサイズを動的に計算
     let workloadSize = calculateWorkload();
-    
+
     // ディスパッチパラメータをスロットに書き込み
     indirectBuffer[uniforms.slot].x = workloadSize;
     indirectBuffer[uniforms.slot].y = 1u;
@@ -480,10 +480,30 @@ const shader = new pc.Shader(device, {
 
 様々なコンピュートシェーダーのユースケースを示すライブサンプルを探索してください：
 
-- [Histogram](https://playcanvas.github.io/#/compute/histogram) - アトミック操作を使用した画像ヒストグラムの計算
-- [Texture Generation](https://playcanvas.github.io/#/compute/texture-gen) - コンピュートシェーダーでテクスチャを生成・変更
-- [Particles](https://playcanvas.github.io/#/compute/particles) - 衝突検出付きGPUベースのパーティクルシミュレーション
-- [Vertex Update](https://playcanvas.github.io/#/compute/vertex-update) - メッシュ頂点バッファのリアルタイム変更
-- [Edge Detect](https://playcanvas.github.io/#/compute/edge-detect) - エッジ検出による画像処理
-- [Indirect Draw](https://playcanvas.github.io/#/compute/indirect-draw) - 間接描画呼び出しによるGPU駆動レンダリング
-- [Indirect Dispatch](https://playcanvas.github.io/#/compute/indirect-dispatch) - 深度ベースのタイル分類によるGPU駆動コンピュートディスパッチ
+- Histogram - アトミック操作を使用した画像ヒストグラムの計算
+
+<EngineExample id="compute/histogram" title="Histogram" />
+
+- Texture Generation - コンピュートシェーダーでテクスチャを生成・変更
+
+<EngineExample id="compute/texture-gen" title="Texture Generation" />
+
+- Particles - 衝突検出付きGPUベースのパーティクルシミュレーション
+
+<EngineExample id="compute/particles" title="Particles" />
+
+- Vertex Update - メッシュ頂点バッファのリアルタイム変更
+
+<EngineExample id="compute/vertex-update" title="Vertex Update" />
+
+- Edge Detect - エッジ検出による画像処理
+
+<EngineExample id="compute/edge-detect" title="Edge Detect" />
+
+- Indirect Draw - 間接描画呼び出しによるGPU駆動レンダリング
+
+<EngineExample id="compute/indirect-draw" title="Indirect Draw" />
+
+- Indirect Dispatch - 深度ベースのタイル分類によるGPU駆動コンピュートディスパッチ
+
+<EngineExample id="compute/indirect-dispatch" title="Indirect Dispatch" />

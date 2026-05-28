@@ -347,7 +347,7 @@ struct DispatchIndirectArgs {
 fn main() {
     // Compute workload size dynamically
     let workloadSize = calculateWorkload();
-    
+
     // Write dispatch parameters to the slot
     indirectBuffer[uniforms.slot].x = workloadSize;
     indirectBuffer[uniforms.slot].y = 1u;
@@ -480,10 +480,30 @@ The `{WORKGROUP_SIZE}` placeholders are replaced with `64` before compilation. S
 
 Explore these live examples demonstrating various compute shader use cases:
 
-- [Histogram](https://playcanvas.github.io/#/compute/histogram) - Compute image histogram using atomic operations
-- [Texture Generation](https://playcanvas.github.io/#/compute/texture-gen) - Generate and modify textures with compute shaders
-- [Particles](https://playcanvas.github.io/#/compute/particles) - GPU-based particle simulation with collision detection
-- [Vertex Update](https://playcanvas.github.io/#/compute/vertex-update) - Modify mesh vertex buffers in real-time
-- [Edge Detect](https://playcanvas.github.io/#/compute/edge-detect) - Image processing with edge detection
-- [Indirect Draw](https://playcanvas.github.io/#/compute/indirect-draw) - GPU-driven rendering with indirect draw calls
-- [Indirect Dispatch](https://playcanvas.github.io/#/compute/indirect-dispatch) - GPU-driven compute dispatch with depth-based tile classification
+- Histogram - Compute image histogram using atomic operations
+
+<EngineExample id="compute/histogram" title="Histogram" />
+
+- Texture Generation - Generate and modify textures with compute shaders
+
+<EngineExample id="compute/texture-gen" title="Texture Generation" />
+
+- Particles - GPU-based particle simulation with collision detection
+
+<EngineExample id="compute/particles" title="Particles" />
+
+- Vertex Update - Modify mesh vertex buffers in real-time
+
+<EngineExample id="compute/vertex-update" title="Vertex Update" />
+
+- Edge Detect - Image processing with edge detection
+
+<EngineExample id="compute/edge-detect" title="Edge Detect" />
+
+- Indirect Draw - GPU-driven rendering with indirect draw calls
+
+<EngineExample id="compute/indirect-draw" title="Indirect Draw" />
+
+- Indirect Dispatch - GPU-driven compute dispatch with depth-based tile classification
+
+<EngineExample id="compute/indirect-dispatch" title="Indirect Dispatch" />

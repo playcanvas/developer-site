@@ -25,7 +25,7 @@ This is particularly challenging on the Web platform, as web applications typica
 * Start the MiniBrowser, specify url to your web application:
 
   ```bash
-  __XPC_METAL_CAPTURE_ENABLED=1 Tools/Scripts/run-minibrowser --release --url https://playcanvas.github.io/
+  __XPC_METAL_CAPTURE_ENABLED=1 Tools/Scripts/run-minibrowser --release --url https://playcanvas.vercel.app/
   ```
 
 * Configure the number of frames to capture from a separate command-line interface window. This defaults to 1.

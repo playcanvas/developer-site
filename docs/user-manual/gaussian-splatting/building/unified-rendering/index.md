@@ -33,15 +33,15 @@ flowchart LR
         Loaded[Loaded Splats<br/>ply/sog/LOD]
         Container[GSplatContainer<br/>procedural]
     end
-    
+
     Copy([Copy])
-    
+
     WorkBuffer[Work Buffer<br/>per camera/layer]
-    
+
     Sort([Sort])
-    
+
     Render([Render])
-    
+
     Loaded --> Copy
     Container --> Copy
     Copy --> WorkBuffer
@@ -74,7 +74,9 @@ When a camera renders a layer containing unified GSplat components, it draws the
 
 ## Live Example
 
-Check out the [Global Sorting example](https://playcanvas.github.io/#/gaussian-splatting/global-sorting) which demonstrates the difference between unified and non-unified rendering. The example allows you to toggle unified mode on and off to observe how it eliminates artifacts when rendering multiple overlapping splat components.
+Check out the Global Sorting example which demonstrates the difference between unified and non-unified rendering. The example allows you to toggle unified mode on and off to observe how it eliminates artifacts when rendering multiple overlapping splat components.
+
+<EngineExample id="gaussian-splatting/global-sorting" title="Global Sorting example" />
 
 ## Benefits
 
@@ -97,4 +99,4 @@ The following features are available when using unified mode:
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order)
 - [Splat Rendering Architecture](/user-manual/gaussian-splatting/building/rendering-architecture)
-- [Global Sorting Example](https://playcanvas.github.io/#/gaussian-splatting/global-sorting)
+- Global Sorting Example

@@ -34,4 +34,6 @@ const miniStats = new pc.MiniStats(app);
 
 利用可能なメソッドとプロパティの詳細については、[MiniStats APIリファレンス](https://api.playcanvas.com/engine/classes/MiniStats.html)を参照してください。
 
-Engine単独のコンテキストでMiniStatsが動作している様子を見るには、[Engine Examples Browser](https://playcanvas.github.io/)をご覧ください。
+Engine単独のコンテキストでMiniStatsが動作している様子を見るには、Engine Examples Browserをご覧ください。
+
+<EngineExample id="misc/mini-stats" title="MiniStats example" />

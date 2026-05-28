@@ -120,7 +120,9 @@ anotherEntity.addComponent('gsplat', {
 
 ## ライブサンプル
 
-アニメーションする雲を持つ地形シーンをスプラット表現に変換する方法を示す[Procedural Meshサンプル](https://playcanvas.github.io/#/gaussian-splatting/procedural-mesh)を参照してください。
+アニメーションする雲を持つ地形シーンをスプラット表現に変換する方法を示すProcedural Meshサンプルを参照してください。
+
+<EngineExample id="gaussian-splatting/procedural-mesh" title="Procedural Meshサンプル" />
 
 ## スクリプトの場所
 

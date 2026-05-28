@@ -77,11 +77,16 @@ const picker = new pc.Picker(
 
 Picker は通常のメッシュと同じ API で Gaussian Splat インスタンスを完全にサポートします。メッシュインスタンス ID でスプラットインスタンスをピックでき、深度を有効にすればスプラット表面の正確な 3D 位置も求められます。
 
-これにより、スプラット上にマーカーを置く、距離を測る、複雑なシーンで個々のスプラット Entity を選択するなどのインタラクティブな用途が可能になります。完全なデモは [Gaussian Splatting Picking の例](https://playcanvas.github.io/#gaussian-splatting/picking)を参照してください。
+これにより、スプラット上にマーカーを置く、距離を測る、複雑なシーンで個々のスプラット Entity を選択するなどのインタラクティブな用途が可能になります。完全なデモは Gaussian Splatting Picking の例を参照してください。
+
+<EngineExample id="gaussian-splatting/picking" title="Gaussian Splatting Picking の例" />
 
 ## 例
 
 次の Engine の例で Picker の動作を確認できます。
 
-- [**Area Picker**](https://playcanvas.github.io/#/graphics/area-picker) — 矩形の画面領域でメッシュインスタンスをピックし、視覚的フィードバックを表示します。
-- [**Gaussian Splatting Picking**](https://playcanvas.github.io/#gaussian-splatting/picking) — スプラットインスタンスのピッキングと、ワールド位置ピッキングでスプラット表面にマーカーを置く方法を示します。
+- **Area Picker** — 矩形の画面領域でメッシュインスタンスをピックし、視覚的フィードバックを表示します。
+
+<EngineExample id="graphics/area-picker" title="Area Picker" />
+
+- **Gaussian Splatting Picking** — スプラットインスタンスのピッキングと、ワールド位置ピッキングでスプラット表面にマーカーを置く方法を示します。

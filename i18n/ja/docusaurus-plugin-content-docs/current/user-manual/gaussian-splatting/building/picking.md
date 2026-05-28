@@ -5,7 +5,9 @@ description: "統合モードと非統合モードのスプラットでPlayCanva
 
 PlayCanvas Engine は、指定されたピクセルでレンダリングされたオブジェクトをクエリできる[Picker API](https://api.playcanvas.com/engine/classes/Picker.html)を提供します。ピッカーは、メッシュの場合と同じ方法でスプラットと連携します。
 
-**[ライブデモを見る](https://playcanvas.github.io/#/gaussian-splatting/picking)** - インタラクティブな選択とワールド位置検出によるスプラットピッキングの動作を確認できます。
+**ライブデモを見る** - インタラクティブな選択とワールド位置検出によるスプラットピッキングの動作を確認できます。
+
+<EngineExample id="gaussian-splatting/picking" title="ライブデモを見る" />
 
 ## Unified モードと Non-Unified モード
 

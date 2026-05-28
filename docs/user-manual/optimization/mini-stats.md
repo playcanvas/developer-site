@@ -98,8 +98,10 @@ const miniStats = new pc.MiniStats(app, {
 });
 ```
 
-For the complete API, refer to the [MiniStats API reference](https://api.playcanvas.com/engine/classes/MiniStats.html). See the [MiniStats example](https://playcanvas.github.io/#/misc/mini-stats) for a demonstration of customization options.
+For the complete API, refer to the [MiniStats API reference](https://api.playcanvas.com/engine/classes/MiniStats.html). See the MiniStats example for a demonstration of customization options.
+
+<EngineExample id="misc/mini-stats" title="MiniStats example" />
 
 ## See It In Action
 
-Visit the [Engine Examples Browser](https://playcanvas.github.io/) to see MiniStats in action. Try clicking on the overlay to cycle through the different display sizes and observe the detailed timing breakdowns.
+Visit the Engine Examples Browser to see MiniStats in action. Try clicking on the overlay to cycle through the different display sizes and observe the detailed timing breakdowns.

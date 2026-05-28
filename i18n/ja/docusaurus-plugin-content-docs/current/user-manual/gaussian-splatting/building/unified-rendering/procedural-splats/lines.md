@@ -147,7 +147,9 @@ console.log(`${lines.primitiveCount} primitives`);
 
 ## ライブサンプル
 
-Gaussian splatシーンでCADスタイルの寸法アノテーションを示す[Procedural Shapesサンプル](https://playcanvas.github.io/#/gaussian-splatting/procedural-shapes)を参照してください。
+Gaussian splatシーンでCADスタイルの寸法アノテーションを示すProcedural Shapesサンプルを参照してください。
+
+<EngineExample id="gaussian-splatting/procedural-shapes" title="Procedural Shapesサンプル" />
 
 ## スクリプトの場所
 

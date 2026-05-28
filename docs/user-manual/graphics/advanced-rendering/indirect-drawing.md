@@ -79,4 +79,6 @@ For detailed API documentation, refer to these PlayCanvas engine classes and met
 
 ## Live Example
 
-See the [Indirect Draw example](https://playcanvas.github.io/#/compute/indirect-draw) for a complete demonstration of indirect drawing with animated instance counts.
+See the Indirect Draw example for a complete demonstration of indirect drawing with animated instance counts.
+
+<EngineExample id="compute/indirect-draw" title="Indirect Draw example" />

@@ -108,13 +108,18 @@ Because the browser handles hit testing natively, `:hover` CSS pseudo-classes, f
 
 When `device.supportsHtmlTextures` is `false`, consider these approaches:
 
-- **DOM overlay** — Render the HTML panel as a fixed-position `<div>` on top of the canvas. Click handling works via standard DOM events. This is the approach used by the [HTML Texture Configurator](https://playcanvas.github.io/#/misc/html-texture-configurator) example.
-- **Canvas 2D rasterization** — Draw fallback content into a `<canvas>` element using the 2D context and use that as the texture source. This is the approach used by the [HTML Texture](https://playcanvas.github.io/#/misc/html-texture) example.
+- **DOM overlay** — Render the HTML panel as a fixed-position `<div>` on top of the canvas. Click handling works via standard DOM events. This is the approach used by the HTML Texture Configurator example.
+
+<EngineExample id="misc/html-texture-configurator" title="HTML Texture Configurator" />
+
+- **Canvas 2D rasterization** — Draw fallback content into a `<canvas>` element using the 2D context and use that as the texture source. This is the approach used by the HTML Texture example.
+
+<EngineExample id="misc/html-texture" title="HTML Texture" />
 
 ## Examples
 
-- [HTML Texture](https://playcanvas.github.io/#/misc/html-texture) — Renders live HTML content with CSS animations as a WebGL texture on a 3D cube. Falls back to a canvas-drawn placeholder when unsupported.
-- [HTML Texture Configurator](https://playcanvas.github.io/#/misc/html-texture-configurator) — A 3D product configurator with an interactive HTML UI panel rendered as a texture. Uses `getElementTransform` for click and hover hit testing. Falls back to a DOM overlay when unsupported.
+- HTML Texture — Renders live HTML content with CSS animations as a WebGL texture on a 3D cube. Falls back to a canvas-drawn placeholder when unsupported.
+- HTML Texture Configurator — A 3D product configurator with an interactive HTML UI panel rendered as a texture. Uses `getElementTransform` for click and hover hit testing. Falls back to a DOM overlay when unsupported.
 
 ## API Reference
 

@@ -62,7 +62,9 @@ app.on('update', () => {
 
 ## Resources
 
-- [Custom Compose Shader Example](https://playcanvas.github.io/#/graphics/custom-compose-shader) - Complete working demonstration
+- Custom Compose Shader Example - Complete working demonstration
+
+<EngineExample id="graphics/custom-compose-shader" title="Custom Compose Shader Example" />
 
 ## Use Cases
 

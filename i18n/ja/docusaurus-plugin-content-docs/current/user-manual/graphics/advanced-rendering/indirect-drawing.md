@@ -79,4 +79,6 @@ device.computeDispatch([compute], 'GenerateIndirectDraw');
 
 ## ライブサンプル
 
-アニメーションするインスタンス数での間接描画の完全なデモンストレーションについては、[間接描画のサンプル](https://playcanvas.github.io/#/compute/indirect-draw) を参照してください。
+アニメーションするインスタンス数での間接描画の完全なデモンストレーションについては、間接描画のサンプル を参照してください。
+
+<EngineExample id="compute/indirect-draw" title="間接描画のサンプル" />

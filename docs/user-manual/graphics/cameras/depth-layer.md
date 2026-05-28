@@ -70,6 +70,14 @@ The color map in CameraFrame contains linear HDR values (no gamma correction nee
 
 These engine examples demonstrate the rendering of both the depth and the color map, and also custom shaders allowing their use:
 
-- GrabPass demonstrates the use of the color buffer: [`GrabPass`](https://playcanvas.github.io/#/shaders/grab-pass)
-- GroundFog demonstrates the use of the depth buffer: [`GroundFog`](https://playcanvas.github.io/#/shaders/ground-fog)
-- Dispersion demonstrates refraction and chromatic dispersion using the scene color texture: [`Dispersion`](https://playcanvas.github.io/#/materials/dispersion)
+- GrabPass demonstrates the use of the color buffer: `GrabPass`
+
+<EngineExample id="shaders/grab-pass" title="GrabPass" />
+
+- GroundFog demonstrates the use of the depth buffer: `GroundFog`
+
+<EngineExample id="shaders/ground-fog" title="GroundFog" />
+
+- Dispersion demonstrates refraction and chromatic dispersion using the scene color texture: `Dispersion`
+
+<EngineExample id="materials/dispersion" title="Dispersion" />

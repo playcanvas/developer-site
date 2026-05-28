@@ -270,7 +270,9 @@ These scripts handle the container creation and data population for you.
 
 ## Live Example
 
-See the [Procedural Instanced example](https://playcanvas.github.io/#/gaussian-splatting/procedural-instanced) which demonstrates creating a custom `GSplatContainer` with a custom format and per-instance shader uniforms.
+See the Procedural Instanced example which demonstrates creating a custom `GSplatContainer` with a custom format and per-instance shader uniforms.
+
+<EngineExample id="gaussian-splatting/procedural-instanced" title="Procedural Instanced example" />
 
 ## See Also
 

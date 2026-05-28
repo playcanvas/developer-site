@@ -11,10 +11,21 @@ Note that all instances are submitted for rendering by the GPU with no camera fr
 
 ## Live Examples
 
-- [Basic Instancing](https://playcanvas.github.io/#/graphics/instancing-basic) - Demonstrates default Mat4 instancing format with StandardMaterial
-- [Custom Instancing](https://playcanvas.github.io/#/graphics/instancing-custom) - Shows custom vertex format with shader chunks override
-- [GLB Instancing](https://playcanvas.github.io/#/graphics/instancing-glb) - Uses EXT_mesh_gpu_instancing extension in GLB files
-- [Gooch Instancing](https://playcanvas.github.io/#/graphics/instancing-gooch) - Full custom ShaderMaterial with instancing support
+- Basic Instancing - Demonstrates default Mat4 instancing format with StandardMaterial
+
+<EngineExample id="graphics/instancing-basic" title="Basic Instancing" />
+
+- Custom Instancing - Shows custom vertex format with shader chunks override
+
+<EngineExample id="graphics/instancing-custom" title="Custom Instancing" />
+
+- GLB Instancing - Uses EXT_mesh_gpu_instancing extension in GLB files
+
+<EngineExample id="graphics/instancing-glb" title="GLB Instancing" />
+
+- Gooch Instancing - Full custom ShaderMaterial with instancing support
+
+<EngineExample id="graphics/instancing-gooch" title="Gooch Instancing" />
 
 ## Basic Instancing with Default Format
 

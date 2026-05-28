@@ -28,11 +28,25 @@ For Editor users, a ready-to-use script is available. See [CameraFrame in the Ed
 
 ## Examples
 
-- [HDR with Bloom and LUT](https://playcanvas.github.io/#/graphics/hdr) - Demonstrates HDR bloom and color lookup table effects
-- [Post-Processing](https://playcanvas.github.io/#/graphics/post-processing) - Shows multiple effects including bloom, grading, vignette, fringing, and TAA
-- [Ambient Occlusion](https://playcanvas.github.io/#/graphics/ambient-occlusion) - Demonstrates SSAO implementation
-- [Depth of Field](https://playcanvas.github.io/#/graphics/depth-of-field) - Demonstrates depth of field effect
-- [Temporal Anti-Aliasing](https://playcanvas.github.io/#/graphics/taa) - Demonstrates TAA implementation
+- HDR with Bloom and LUT - Demonstrates HDR bloom and color lookup table effects
+
+<EngineExample id="graphics/hdr" title="HDR with Bloom and LUT" />
+
+- Post-Processing - Shows multiple effects including bloom, grading, vignette, fringing, and TAA
+
+<EngineExample id="graphics/post-processing" title="Post-Processing" />
+
+- Ambient Occlusion - Demonstrates SSAO implementation
+
+<EngineExample id="graphics/ambient-occlusion" title="Ambient Occlusion" />
+
+- Depth of Field - Demonstrates depth of field effect
+
+<EngineExample id="graphics/depth-of-field" title="Depth of Field" />
+
+- Temporal Anti-Aliasing - Demonstrates TAA implementation
+
+<EngineExample id="graphics/taa" title="Temporal Anti-Aliasing" />
 
 ## Custom Post Processing
 

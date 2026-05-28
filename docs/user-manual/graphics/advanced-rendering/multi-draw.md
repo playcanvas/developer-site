@@ -33,9 +33,17 @@ When `supportsMultiDraw` is false, the engine automatically falls back to an int
 
 ## Live Examples
 
-- [Multi-Draw](https://playcanvas.github.io/#/graphics/multi-draw) - Terrain rendering with dynamic patch culling
-- [Multi-Draw Instanced](https://playcanvas.github.io/#/graphics/multi-draw-instanced) - Different geometries with instancing (WebGPU only)
-- [Multi-Draw Instanced Multi-Platform](https://playcanvas.github.io/#/graphics/multi-draw-instanced-multi-platform) - Cross-platform instanced multi-draw
+- Multi-Draw - Terrain rendering with dynamic patch culling
+
+<EngineExample id="graphics/multi-draw" title="Multi-Draw" />
+
+- Multi-Draw Instanced - Different geometries with instancing (WebGPU only)
+
+<EngineExample id="graphics/multi-draw-instanced" title="Multi-Draw Instanced" />
+
+- Multi-Draw Instanced Multi-Platform - Cross-platform instanced multi-draw
+
+<EngineExample id="graphics/multi-draw-instanced-multi-platform" title="Multi-Draw Instanced Multi-Platform" />
 
 ## Basic Multi-Draw
 

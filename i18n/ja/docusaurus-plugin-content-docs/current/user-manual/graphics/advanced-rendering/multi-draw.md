@@ -33,9 +33,17 @@ if (app.graphicsDevice.supportsMultiDraw) {
 
 ## ライブサンプル
 
-- [マルチドロー](https://playcanvas.github.io/#/graphics/multi-draw) - 動的パッチカリングを使用した地形レンダリング
-- [マルチドローインスタンス](https://playcanvas.github.io/#/graphics/multi-draw-instanced) - インスタンシングを使用した異なるジオメトリ（WebGPUのみ）
-- [マルチドローインスタンス マルチプラットフォーム](https://playcanvas.github.io/#/graphics/multi-draw-instanced-multi-platform) - クロスプラットフォームのインスタンス化マルチドロー
+- マルチドロー - 動的パッチカリングを使用した地形レンダリング
+
+<EngineExample id="graphics/multi-draw" title="マルチドロー" />
+
+- マルチドローインスタンス - インスタンシングを使用した異なるジオメトリ（WebGPUのみ）
+
+<EngineExample id="graphics/multi-draw-instanced" title="マルチドローインスタンス" />
+
+- マルチドローインスタンス マルチプラットフォーム - クロスプラットフォームのインスタンス化マルチドロー
+
+<EngineExample id="graphics/multi-draw-instanced-multi-platform" title="マルチドローインスタンス マルチプラットフォーム" />
 
 ## 基本的なマルチドロー
 

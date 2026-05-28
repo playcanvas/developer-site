@@ -74,6 +74,53 @@
   height: 100%;
 }
 
+.engine-example-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.engine-example-placeholder::before,
+.engine-example-placeholder::after {
+  position: absolute;
+  content: '';
+}
+
+.engine-example-placeholder::before {
+  inset: -1rem;
+  z-index: -2;
+  background-image: var(--engine-example-thumbnail);
+  background-position: center;
+  background-size: cover;
+  filter: blur(14px);
+  transform: scale(1.04);
+}
+
+.engine-example-placeholder::after {
+  inset: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.engine-example-title {
+  max-width: min(28rem, 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
 .navbar__logo {
   border-radius: 100%;
   overflow: hidden;
