@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 590
-Generated: 2026-05-27
+Generated: 2026-05-28
 
 ================================================================================
 
@@ -17067,7 +17067,7 @@ While the conflict manager and the merge is in progress your current branch is l
 
 URL: https://developer.playcanvas.com/user-manual/engine/
 
-The PlayCanvas Engine is the run-time framework that powers your PlayCanvas applications. It is written in JavaScript and is open sourced under an MIT license on [GitHub](https://github.com/playcanvas/engine). It is published on the [NPM registry](https://www.npmjs.com/package/playcanvas) and ships with full TypeScript declarations. It also comes with a comprehensive set of [code examples](https://playcanvas.github.io/).
+The PlayCanvas Engine is the run-time framework that powers your PlayCanvas applications. It is written in JavaScript and is open sourced under an MIT license on [GitHub](https://github.com/playcanvas/engine). It is published on the [NPM registry](https://www.npmjs.com/package/playcanvas) and ships with full TypeScript declarations. It also comes with a comprehensive set of code examples.
 
 As a developer, you have complete freedom as to how you use the Engine. The two options are:
 
@@ -17389,7 +17389,7 @@ For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-spl
 
 Override the `gsplatModifyVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
 
-**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/multi-splat)** - See shader chunk customization in action with animated splats.
+**View Live Example** - See shader chunk customization in action with animated splats.
 
 ## API Reference
 
@@ -17666,7 +17666,7 @@ Here are some examples demonstrating custom shader techniques:
 
 ### Animation Effects
 
-[**Simple Sinusoidal Animation**](https://playcanvas.github.io/#/gaussian-splatting/multi-splat) - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.
+**Simple Sinusoidal Animation** - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.
 
 --------------------------------------------------------------------------------
 
@@ -17710,7 +17710,7 @@ PlayCanvas supports a fisheye (barrel distortion) projection for Gaussian splats
 
 [Image: Gaussian splat scene rendered with a strong fisheye projection]
 
-**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming)** - Open the Settings panel and drag the `fisheye` slider from `0` to `1`. Try combining it with higher `cameraFov` values and different HDRI environments to reproduce the skydome and tiny-planet looks.
+**View Live Example** - Open the Settings panel and drag the `fisheye` slider from `0` to `1`. Try combining it with higher `cameraFov` values and different HDRI environments to reproduce the skydome and tiny-planet looks.
 
 ## What Is It?
 
@@ -17890,7 +17890,7 @@ URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/pi
 
 The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/classes/Picker.html) which can query the object rendered at a specified pixel. The picker works with splats in the same way that it does for meshes.
 
-**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/picking)** - See splat picking in action with interactive selection and world position detection.
+**View Live Example** - See splat picking in action with interactive selection and world position detection.
 
 ## Unified vs Non-Unified Mode
 
@@ -18205,7 +18205,7 @@ URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/sh
 
 Gaussian Splats can cast shadows onto meshes and other surfaces in your scene.
 
-**[View Live Example](https://playcanvas.github.io/#/gaussian-splatting/simple)** - See splat shadows in action.
+**View Live Example** - See splat shadows in action.
 
 [Image: Splat Shadows]
 
@@ -18294,15 +18294,15 @@ flowchart LR
         Loaded[Loaded Splats<br/>ply/sog/LOD]
         Container[GSplatContainer<br/>procedural]
     end
-    
+
     Copy([Copy])
-    
+
     WorkBuffer[Work Buffer<br/>per camera/layer]
-    
+
     Sort([Sort])
-    
+
     Render([Render])
-    
+
     Loaded --> Copy
     Container --> Copy
     Copy --> WorkBuffer
@@ -18335,7 +18335,7 @@ When a camera renders a layer containing unified GSplat components, it draws the
 
 ## Live Example
 
-Check out the [Global Sorting example](https://playcanvas.github.io/#/gaussian-splatting/global-sorting) which demonstrates the difference between unified and non-unified rendering. The example allows you to toggle unified mode on and off to observe how it eliminates artifacts when rendering multiple overlapping splat components.
+Check out the Global Sorting example which demonstrates the difference between unified and non-unified rendering. The example allows you to toggle unified mode on and off to observe how it eliminates artifacts when rendering multiple overlapping splat components.
 
 ## Benefits
 
@@ -18358,7 +18358,7 @@ The following features are available when using unified mode:
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order)
 - [Splat Rendering Architecture](/user-manual/gaussian-splatting/building/rendering-architecture)
-- [Global Sorting Example](https://playcanvas.github.io/#/gaussian-splatting/global-sorting)
+- Global Sorting Example
 
 --------------------------------------------------------------------------------
 
@@ -18401,8 +18401,9 @@ You must create the different LOD levels yourself (LOD 0 = highest detail, highe
 
 Explore these live examples to see LOD streaming in action:
 
-- [LOD Streaming (Basic)](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming) - Demonstrates basic LOD streaming with different detail levels
-- [LOD Streaming with Spherical Harmonics](https://playcanvas.github.io/#/gaussian-splatting/lod-streaming-sh) - Shows LOD streaming with spherical harmonic data
+- LOD Streaming (Basic) - Demonstrates basic LOD streaming with different detail levels
+
+- LOD Streaming with Spherical Harmonics - Shows LOD streaming with spherical harmonic data
 
 ## Enabling LOD Streaming
 
@@ -18789,7 +18790,7 @@ These scripts handle the container creation and data population for you.
 
 ## Live Example
 
-See the [Procedural Instanced example](https://playcanvas.github.io/#/gaussian-splatting/procedural-instanced) which demonstrates creating a custom `GSplatContainer` with a custom format and per-instance shader uniforms.
+See the Procedural Instanced example which demonstrates creating a custom `GSplatContainer` with a custom format and per-instance shader uniforms.
 
 ## See Also
 
@@ -18892,7 +18893,7 @@ The number of splats equals the number of non-transparent pixels in the image. F
 
 ## Live Example
 
-See the [Procedural Shapes example](https://playcanvas.github.io/#/gaussian-splatting/procedural-shapes) which demonstrates using `GsplatImage` to display textures as ground and wall decorations.
+See the Procedural Shapes example which demonstrates using `GsplatImage` to display textures as ground and wall decorations.
 
 ## Script Location
 
@@ -19059,7 +19060,7 @@ Lines are rendered as a series of splats placed along the line path:
 
 ## Live Example
 
-See the [Procedural Shapes example](https://playcanvas.github.io/#/gaussian-splatting/procedural-shapes) which demonstrates CAD-style dimension annotations on a Gaussian splat scene.
+See the Procedural Shapes example which demonstrates CAD-style dimension annotations on a Gaussian splat scene.
 
 ## Script Location
 
@@ -19199,7 +19200,7 @@ anotherEntity.addComponent('gsplat', {
 
 ## Live Example
 
-See the [Procedural Mesh example](https://playcanvas.github.io/#/gaussian-splatting/procedural-mesh) which demonstrates converting a terrain scene with animated clouds to splat representation.
+See the Procedural Mesh example which demonstrates converting a terrain scene with animated clouds to splat representation.
 
 ## Script Location
 
@@ -19338,7 +19339,7 @@ For labels with many characters or large font sizes, the splat count can be sign
 
 ## Live Example
 
-See the [Procedural Shapes example](https://playcanvas.github.io/#/gaussian-splatting/procedural-shapes) which demonstrates using `GsplatText` for dimension labels in a CAD-style visualization.
+See the Procedural Shapes example which demonstrates using `GsplatText` for dimension labels in a CAD-style visualization.
 
 ## Script Location
 
@@ -19658,12 +19659,12 @@ The source and destination resources can have different numbers of splats. The `
 ```glsl
 void process() {
     uint destIndex = splat.index;  // Current destination splat index
-    
+
     // Calculate which source splat to read from
     uint sourceIndex = destIndex * 2;  // Example: sample every other splat
     setSplat(sourceIndex);
     vec3 srcPos = getCenter();
-    
+
     // Write to destination
     writePosition(vec4(srcPos, 1.0));
 }
@@ -19814,8 +19815,9 @@ void process() {
 
 ## Live Examples
 
-- [Paint example](https://playcanvas.github.io/#/gaussian-splatting/paint) - Demonstrates painting splats with a brush
-- [Editor example](https://playcanvas.github.io/#/gaussian-splatting/editor) - Demonstrates selection, deletion, and cloning
+- Paint example - Demonstrates painting splats with a brush
+
+- Editor example - Demonstrates selection, deletion, and cloning
 
 ## See Also
 
@@ -19854,21 +19856,21 @@ flowchart LR
         Loaded[Loaded Splats]
         Container[GSplatContainer]
     end
-    
+
     Copy([Copy])
-    
+
     WorkBuffer[Work Buffer]
-    
+
     Sort([Sort])
-    
+
     Render([Render])
-    
+
     Loaded --> Copy
     Container --> Copy
     Copy --> WorkBuffer
     WorkBuffer --> Sort
     Sort --> Render
-    
+
     style Copy stroke:#f90,stroke-width:3px
 ```
 
@@ -19899,7 +19901,7 @@ entity.gsplat.setWorkBufferModifier({
             // Offset all splats upward
             center.y += 1.0;
         }
-        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                        inout vec4 rotation, inout vec3 scale) {}
         void modifySplatColor(vec3 center, inout vec4 color) {
             // Tint splats red
@@ -19910,7 +19912,7 @@ entity.gsplat.setWorkBufferModifier({
         fn modifySplatCenter(center: ptr<function, vec3f>) {
             (*center).y += 1.0;
         }
-        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, 
+        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
                                      rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
         fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
             *color = vec4f((*color).rgb * vec3f(1.0, 0.5, 0.5), (*color).a);
@@ -19959,7 +19961,7 @@ entity.gsplat.setWorkBufferModifier({
         uniform uint uComponentId;
 
         void modifySplatCenter(inout vec3 center) {}
-        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                        inout vec4 rotation, inout vec3 scale) {}
         void modifySplatColor(vec3 center, inout vec4 color) {
             // Write component ID to the splatId stream
@@ -19970,7 +19972,7 @@ entity.gsplat.setWorkBufferModifier({
         uniform uComponentId: u32;
 
         fn modifySplatCenter(center: ptr<function, vec3f>) {}
-        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, 
+        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
                                      rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
         fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
             writeSplatId(vec4u(uniform.uComponentId, 0u, 0u, 0u));
@@ -20032,7 +20034,7 @@ See [Splat Data Format - Shader Access](/user-manual/gaussian-splatting/building
 
 ## Live Example
 
-See the [LOD Instances example](https://playcanvas.github.io/#/gaussian-splatting/lod-instances) which demonstrates:
+See the LOD Instances example which demonstrates:
 
 - Adding a `splatId` stream to the work buffer
 - Writing component IDs during copy using `setWorkBufferModifier()`
@@ -20074,21 +20076,21 @@ flowchart LR
         Loaded[Loaded Splats]
         Container[GSplatContainer]
     end
-    
+
     Copy([Copy])
-    
+
     WorkBuffer[Work Buffer]
-    
+
     Sort([Sort])
-    
+
     Render([Render])
-    
+
     Loaded --> Copy
     Container --> Copy
     Copy --> WorkBuffer
     WorkBuffer --> Sort
     Sort --> Render
-    
+
     style Render stroke:#09f,stroke-width:3px
 ```
 
@@ -20101,7 +20103,7 @@ Use `getShaderChunks()` on the scene's gsplat material to set the `gsplatModifyV
 ```javascript
 const glslModifier = `
     void modifySplatCenter(inout vec3 center) {}
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
         // Apply global color grading
@@ -20111,7 +20113,7 @@ const glslModifier = `
 
 const wgslModifier = `
     fn modifySplatCenter(center: ptr<function, vec3f>) {}
-    fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, 
+    fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
                                  rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
     fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
         *color = vec4f(pow((*color).rgb, vec3f(0.8)), (*color).a);
@@ -20156,12 +20158,12 @@ const glslModifier = `
     uniform sampler2D uColorLookup;
 
     void modifySplatCenter(inout vec3 center) {}
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
         // Read component ID written during copy
         uint id = loadSplatId().r;
-        
+
         // Look up color from texture based on component ID
         vec3 tintColor = texelFetch(uColorLookup, ivec2(int(id), 0), 0).rgb;
         color.rgb *= tintColor;
@@ -20234,7 +20236,7 @@ const glslModifier = `
         // Read ID from work buffer (can be used in other functions)
         componentId = loadSplatId().r;
     }
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, 
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
                                    inout vec4 rotation, inout vec3 scale) {}
     void modifySplatColor(vec3 center, inout vec4 color) {
         // Look up color from texture based on component ID
@@ -20246,7 +20248,7 @@ const glslModifier = `
 
 ## Live Example
 
-See the [LOD Instances example](https://playcanvas.github.io/#/gaussian-splatting/lod-instances) which demonstrates:
+See the LOD Instances example which demonstrates:
 
 - Reading component IDs written during copy
 - Looking up colors from a texture
@@ -22699,10 +22701,13 @@ Note that all instances are submitted for rendering by the GPU with no camera fr
 
 ## Live Examples
 
-- [Basic Instancing](https://playcanvas.github.io/#/graphics/instancing-basic) - Demonstrates default Mat4 instancing format with StandardMaterial
-- [Custom Instancing](https://playcanvas.github.io/#/graphics/instancing-custom) - Shows custom vertex format with shader chunks override
-- [GLB Instancing](https://playcanvas.github.io/#/graphics/instancing-glb) - Uses EXT_mesh_gpu_instancing extension in GLB files
-- [Gooch Instancing](https://playcanvas.github.io/#/graphics/instancing-gooch) - Full custom ShaderMaterial with instancing support
+- Basic Instancing - Demonstrates default Mat4 instancing format with StandardMaterial
+
+- Custom Instancing - Shows custom vertex format with shader chunks override
+
+- GLB Instancing - Uses EXT_mesh_gpu_instancing extension in GLB files
+
+- Gooch Instancing - Full custom ShaderMaterial with instancing support
 
 ## Basic Instancing with Default Format
 
@@ -23051,13 +23056,14 @@ Because the browser handles hit testing natively, `:hover` CSS pseudo-classes, f
 
 When `device.supportsHtmlTextures` is `false`, consider these approaches:
 
-- **DOM overlay** — Render the HTML panel as a fixed-position `<div>` on top of the canvas. Click handling works via standard DOM events. This is the approach used by the [HTML Texture Configurator](https://playcanvas.github.io/#/misc/html-texture-configurator) example.
-- **Canvas 2D rasterization** — Draw fallback content into a `<canvas>` element using the 2D context and use that as the texture source. This is the approach used by the [HTML Texture](https://playcanvas.github.io/#/misc/html-texture) example.
+- **DOM overlay** — Render the HTML panel as a fixed-position `<div>` on top of the canvas. Click handling works via standard DOM events. This is the approach used by the HTML Texture Configurator example.
+
+- **Canvas 2D rasterization** — Draw fallback content into a `<canvas>` element using the 2D context and use that as the texture source. This is the approach used by the HTML Texture example.
 
 ## Examples
 
-- [HTML Texture](https://playcanvas.github.io/#/misc/html-texture) — Renders live HTML content with CSS animations as a WebGL texture on a 3D cube. Falls back to a canvas-drawn placeholder when unsupported.
-- [HTML Texture Configurator](https://playcanvas.github.io/#/misc/html-texture-configurator) — A 3D product configurator with an interactive HTML UI panel rendered as a texture. Uses `getElementTransform` for click and hover hit testing. Falls back to a DOM overlay when unsupported.
+- HTML Texture — Renders live HTML content with CSS animations as a WebGL texture on a 3D cube. Falls back to a canvas-drawn placeholder when unsupported.
+- HTML Texture Configurator — A 3D product configurator with an interactive HTML UI panel rendered as a texture. Uses `getElementTransform` for click and hover hit testing. Falls back to a DOM overlay when unsupported.
 
 ## API Reference
 
@@ -23146,7 +23152,7 @@ For detailed API documentation, refer to these PlayCanvas engine classes and met
 
 ## Live Example
 
-See the [Indirect Draw example](https://playcanvas.github.io/#/compute/indirect-draw) for a complete demonstration of indirect drawing with animated instance counts.
+See the Indirect Draw example for a complete demonstration of indirect drawing with animated instance counts.
 
 --------------------------------------------------------------------------------
 
@@ -23184,9 +23190,11 @@ When `supportsMultiDraw` is false, the engine automatically falls back to an int
 
 ## Live Examples
 
-- [Multi-Draw](https://playcanvas.github.io/#/graphics/multi-draw) - Terrain rendering with dynamic patch culling
-- [Multi-Draw Instanced](https://playcanvas.github.io/#/graphics/multi-draw-instanced) - Different geometries with instancing (WebGPU only)
-- [Multi-Draw Instanced Multi-Platform](https://playcanvas.github.io/#/graphics/multi-draw-instanced-multi-platform) - Cross-platform instanced multi-draw
+- Multi-Draw - Terrain rendering with dynamic patch culling
+
+- Multi-Draw Instanced - Different geometries with instancing (WebGPU only)
+
+- Multi-Draw Instanced Multi-Platform - Cross-platform instanced multi-draw
 
 ## Basic Multi-Draw
 
@@ -23518,7 +23526,7 @@ To restrict the modification to a specific camera, gate it behind the shader pas
 
 ## Example
 
-A full working sample is available in the engine examples: [Multiple Render Targets](https://playcanvas.github.io/#/graphics/multi-render-targets) renders a chess board through a custom shader pass that writes its world normal and gloss into additional color targets, displayed on screen as separate textures.
+A full working sample is available in the engine examples: Multiple Render Targets renders a chess board through a custom shader pass that writes its world normal and gloss into additional color targets, displayed on screen as separate textures.
 
 --------------------------------------------------------------------------------
 
@@ -23633,9 +23641,11 @@ The color map in CameraFrame contains linear HDR values (no gamma correction nee
 
 These engine examples demonstrate the rendering of both the depth and the color map, and also custom shaders allowing their use:
 
-- GrabPass demonstrates the use of the color buffer: [`GrabPass`](https://playcanvas.github.io/#/shaders/grab-pass)
-- GroundFog demonstrates the use of the depth buffer: [`GroundFog`](https://playcanvas.github.io/#/shaders/ground-fog)
-- Dispersion demonstrates refraction and chromatic dispersion using the scene color texture: [`Dispersion`](https://playcanvas.github.io/#/materials/dispersion)
+- GrabPass demonstrates the use of the color buffer: `GrabPass`
+
+- GroundFog demonstrates the use of the depth buffer: `GroundFog`
+
+- Dispersion demonstrates refraction and chromatic dispersion using the scene color texture: `Dispersion`
 
 --------------------------------------------------------------------------------
 
@@ -23717,14 +23727,15 @@ The trade-off is reduced precision - very small objects may be missed at lower r
 
 The picker fully supports Gaussian Splat instances with the same API as regular meshes. You can pick splat instances by their mesh instance ID and, with depth enabled, determine exact 3D positions on splat surfaces.
 
-This enables interactive applications like placing markers on splats, measuring distances, or selecting individual splat entities in complex scenes. See the [Gaussian Splatting Picking example](https://playcanvas.github.io/#gaussian-splatting/picking) for a complete demonstration.
+This enables interactive applications like placing markers on splats, measuring distances, or selecting individual splat entities in complex scenes. See the Gaussian Splatting Picking example for a complete demonstration.
 
 ## Examples
 
 These engine examples demonstrate the picker in action:
 
-- [**Area Picker**](https://playcanvas.github.io/#/graphics/area-picker) - Shows how to pick mesh instances in rectangular screen regions with visual feedback
-- [**Gaussian Splatting Picking**](https://playcanvas.github.io/#gaussian-splatting/picking) - Demonstrates picking splat instances and using world position picking to place markers on splat surfaces
+- **Area Picker** - Shows how to pick mesh instances in rectangular screen regions with visual feedback
+
+- **Gaussian Splatting Picking** - Demonstrates picking splat instances and using world position picking to place markers on splat surfaces
 
 --------------------------------------------------------------------------------
 
@@ -25037,11 +25048,15 @@ For Editor users, a ready-to-use script is available. See [CameraFrame in the Ed
 
 ## Examples
 
-- [HDR with Bloom and LUT](https://playcanvas.github.io/#/graphics/hdr) - Demonstrates HDR bloom and color lookup table effects
-- [Post-Processing](https://playcanvas.github.io/#/graphics/post-processing) - Shows multiple effects including bloom, grading, vignette, fringing, and TAA
-- [Ambient Occlusion](https://playcanvas.github.io/#/graphics/ambient-occlusion) - Demonstrates SSAO implementation
-- [Depth of Field](https://playcanvas.github.io/#/graphics/depth-of-field) - Demonstrates depth of field effect
-- [Temporal Anti-Aliasing](https://playcanvas.github.io/#/graphics/taa) - Demonstrates TAA implementation
+- HDR with Bloom and LUT - Demonstrates HDR bloom and color lookup table effects
+
+- Post-Processing - Shows multiple effects including bloom, grading, vignette, fringing, and TAA
+
+- Ambient Occlusion - Demonstrates SSAO implementation
+
+- Depth of Field - Demonstrates depth of field effect
+
+- Temporal Anti-Aliasing - Demonstrates TAA implementation
 
 ## Custom Post Processing
 
@@ -25129,7 +25144,7 @@ app.on('update', () => {
 
 ## Resources
 
-- [Custom Compose Shader Example](https://playcanvas.github.io/#/graphics/custom-compose-shader) - Complete working demonstration
+- Custom Compose Shader Example - Complete working demonstration
 
 ## Use Cases
 
@@ -25173,33 +25188,33 @@ class RenderPassTint extends RenderPassShaderQuad {
         super(device);
         this.sourceTexture = sourceTexture;
         this.tint = Color.WHITE.clone();
-        
+
         this.shader = this.createShader();
     }
-    
+
     createShader() {
         return ShaderUtils.createShader(this.device, {
             uniqueName: 'TintShader',
             attributes: { aPosition: SEMANTIC_POSITION },
             vertexChunk: 'quadVS',
-            
+
             fragmentGLSL: `
                 uniform sampler2D sourceTexture;
                 uniform vec3 tint;
                 varying vec2 uv0;
-                
+
                 void main() {
                     vec4 color = texture2D(sourceTexture, uv0);
                     gl_FragColor = vec4(color.rgb * tint, color.a);
                 }
             `,
-            
+
             fragmentWGSL: `
                 var sourceTexture: texture_2d<f32>;
                 var sourceTextureSampler: sampler;
                 uniform tint: vec3f;
                 varying uv0: vec2f;
-                
+
                 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
                     var output: FragmentOutput;
                     let color: vec4f = textureSample(sourceTexture, sourceTextureSampler, uv0);
@@ -25209,7 +25224,7 @@ class RenderPassTint extends RenderPassShaderQuad {
             `
         });
     }
-    
+
     execute() {
         this.device.scope.resolve('sourceTexture').setValue(this.sourceTexture);
         this.device.scope.resolve('tint').setValue([this.tint.r, this.tint.g, this.tint.b]);
@@ -25273,7 +25288,7 @@ camera.framePasses = [scenePass, blurHPass, blurVPass];
 
 ## Resources
 
-- [Render Pass Example](https://playcanvas.github.io/#/graphics/render-pass) - Complete demonstration of custom render passes
+- Render Pass Example - Complete demonstration of custom render passes
 
 ## Use Cases
 
@@ -26091,7 +26106,7 @@ struct DispatchIndirectArgs {
 fn main() {
     // Compute workload size dynamically
     let workloadSize = calculateWorkload();
-    
+
     // Write dispatch parameters to the slot
     indirectBuffer[uniforms.slot].x = workloadSize;
     indirectBuffer[uniforms.slot].y = 1u;
@@ -26224,13 +26239,19 @@ The `{WORKGROUP_SIZE}` placeholders are replaced with `64` before compilation. S
 
 Explore these live examples demonstrating various compute shader use cases:
 
-- [Histogram](https://playcanvas.github.io/#/compute/histogram) - Compute image histogram using atomic operations
-- [Texture Generation](https://playcanvas.github.io/#/compute/texture-gen) - Generate and modify textures with compute shaders
-- [Particles](https://playcanvas.github.io/#/compute/particles) - GPU-based particle simulation with collision detection
-- [Vertex Update](https://playcanvas.github.io/#/compute/vertex-update) - Modify mesh vertex buffers in real-time
-- [Edge Detect](https://playcanvas.github.io/#/compute/edge-detect) - Image processing with edge detection
-- [Indirect Draw](https://playcanvas.github.io/#/compute/indirect-draw) - GPU-driven rendering with indirect draw calls
-- [Indirect Dispatch](https://playcanvas.github.io/#/compute/indirect-dispatch) - GPU-driven compute dispatch with depth-based tile classification
+- Histogram - Compute image histogram using atomic operations
+
+- Texture Generation - Generate and modify textures with compute shaders
+
+- Particles - GPU-based particle simulation with collision detection
+
+- Vertex Update - Modify mesh vertex buffers in real-time
+
+- Edge Detect - Image processing with edge detection
+
+- Indirect Draw - GPU-driven rendering with indirect draw calls
+
+- Indirect Dispatch - GPU-driven compute dispatch with depth-based tile classification
 
 --------------------------------------------------------------------------------
 
@@ -27644,7 +27665,7 @@ This is particularly challenging on the Web platform, as web applications typica
 * Start the MiniBrowser, specify url to your web application:
 
   ```bash
-  __XPC_METAL_CAPTURE_ENABLED=1 Tools/Scripts/run-minibrowser --release --url https://playcanvas.github.io/
+  __XPC_METAL_CAPTURE_ENABLED=1 Tools/Scripts/run-minibrowser --release --url https://playcanvas.vercel.app/
   ```
 
 * Configure the number of frames to capture from a separate command-line interface window. This defaults to 1.
@@ -27884,11 +27905,11 @@ const miniStats = new pc.MiniStats(app, {
 });
 ```
 
-For the complete API, refer to the [MiniStats API reference](https://api.playcanvas.com/engine/classes/MiniStats.html). See the [MiniStats example](https://playcanvas.github.io/#/misc/mini-stats) for a demonstration of customization options.
+For the complete API, refer to the [MiniStats API reference](https://api.playcanvas.com/engine/classes/MiniStats.html). See the MiniStats example for a demonstration of customization options.
 
 ## See It In Action
 
-Visit the [Engine Examples Browser](https://playcanvas.github.io/) to see MiniStats in action. Try clicking on the overlay to cycle through the different display sizes and observe the detailed timing breakdowns.
+Visit the Engine Examples Browser to see MiniStats in action. Try clicking on the overlay to cycle through the different display sizes and observe the detailed timing breakdowns.
 
 --------------------------------------------------------------------------------
 
@@ -39191,7 +39212,7 @@ void main (void) {
 
 ## Example
 
-You can check out [this example](https://playcanvas.github.io/#/xr/ar-camera-depth) that renders a quad in front of a camera with depth sensing applied with a similar shader as described above.
+You can check out this example that renders a quad in front of a camera with depth sensing applied with a similar shader as described above.
 
 --------------------------------------------------------------------------------
 
