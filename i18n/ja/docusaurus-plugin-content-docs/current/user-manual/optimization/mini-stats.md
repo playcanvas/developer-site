@@ -34,6 +34,8 @@ const miniStats = new pc.MiniStats(app);
 
 利用可能なメソッドとプロパティの詳細については、[MiniStats APIリファレンス](https://api.playcanvas.com/engine/classes/MiniStats.html)を参照してください。
 
-Engine単独のコンテキストでMiniStatsが動作している様子を見るには、Engine Examples Browserをご覧ください。
+### サンプル
+
+以下のデモでは、エディター外で MiniStats を使用した例（カスタマイズオプションを含む）を確認できます。オーバーレイをクリックすると表示サイズを切り替え、CPU および GPU の詳細なタイミング内訳を表示できます。
 
 <EngineExample id="misc/mini-stats" title="MiniStats example" />

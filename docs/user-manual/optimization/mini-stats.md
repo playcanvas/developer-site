@@ -98,10 +98,10 @@ const miniStats = new pc.MiniStats(app, {
 });
 ```
 
-For the complete API, refer to the [MiniStats API reference](https://api.playcanvas.com/engine/classes/MiniStats.html). See the MiniStats example for a demonstration of customization options.
+For the complete API, refer to the [MiniStats API reference](https://api.playcanvas.com/engine/classes/MiniStats.html).
+
+### Example
+
+The demo below shows MiniStats outside the Editor, including customization options. Click the overlay to cycle through display sizes and view detailed CPU and GPU timing breakdowns.
 
 <EngineExample id="misc/mini-stats" title="MiniStats example" />
-
-## See It In Action
-
-Visit the Engine Examples Browser to see MiniStats in action. Try clicking on the overlay to cycle through the different display sizes and observe the detailed timing breakdowns.

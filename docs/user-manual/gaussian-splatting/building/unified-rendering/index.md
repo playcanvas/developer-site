@@ -99,4 +99,3 @@ The following features are available when using unified mode:
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order)
 - [Splat Rendering Architecture](/user-manual/gaussian-splatting/building/rendering-architecture)
-- Global Sorting Example

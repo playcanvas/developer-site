@@ -116,11 +116,6 @@ When `device.supportsHtmlTextures` is `false`, consider these approaches:
 
 <EngineExample id="misc/html-texture" title="HTML Texture" />
 
-## Examples
-
-- HTML Texture — Renders live HTML content with CSS animations as a WebGL texture on a 3D cube. Falls back to a canvas-drawn placeholder when unsupported.
-- HTML Texture Configurator — A 3D product configurator with an interactive HTML UI panel rendered as a texture. Uses `getElementTransform` for click and hover hit testing. Falls back to a DOM overlay when unsupported.
-
 ## API Reference
 
 - [GraphicsDevice.supportsHtmlTextures](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsHtmlTextures) — Detect HTML-in-Canvas support.
