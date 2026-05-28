@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { translate } from '@docusaurus/Translate';
 
 const BASE = 'https://playcanvas.vercel.app';
 const GENERIC_TITLES = new Set([
@@ -8,12 +9,19 @@ const GENERIC_TITLES = new Set([
     'view live example',
     'watch live demo',
     'ライブデモを見る',
+    'ライブサンプルを見る',
     'この例'
 ]);
 const ACRONYMS = /\b(Ar|Glb|Gpu|Hdr|Html|Lod|Lut|Taa|Vr|Webgl|Webgpu|Xr)\b/g;
 
-export default function EngineExample({ id, title = 'PlayCanvas engine example', buttonLabel = 'Click to load' }) {
+export default function EngineExample({ id, title = 'PlayCanvas engine example', buttonLabel }) {
     const [loaded, setLoaded] = useState(false);
+    const defaultButtonLabel = translate({
+        id: 'engineExample.clickToLoad',
+        message: 'Click to load',
+        description: 'Button label to load an embedded PlayCanvas engine example'
+    });
+    const resolvedButtonLabel = buttonLabel ?? defaultButtonLabel;
     const path = id?.replace(/^#?\//, '').replace(/^#/, '');
 
     if (!path) {
@@ -45,9 +53,9 @@ export default function EngineExample({ id, title = 'PlayCanvas engine example',
                     <button
                         type="button"
                         className="button button--primary"
-                        aria-label={`${buttonLabel}: ${label}`}
+                        aria-label={`${resolvedButtonLabel}: ${label}`}
                         onClick={() => setLoaded(true)}>
-                        {buttonLabel}
+                        {resolvedButtonLabel}
                     </button>
                 </div>
             )}

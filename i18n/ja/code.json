@@ -500,5 +500,9 @@
   "theme.contentVisibility.draftBanner.message": {
     "message": "このページは下書きです。開発環境でのみ表示され、本番環境のビルドには含まれません。",
     "description": "The draft content banner message"
+  },
+  "engineExample.clickToLoad": {
+    "message": "クリックして読み込む",
+    "description": "Button label to load an embedded PlayCanvas engine example"
   }
 }
