@@ -6,8 +6,8 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 590
-Generated: 2026-05-28
+Total Documents: 589
+Generated: 2026-05-29
 
 ## Recommended Entry Points
 
@@ -328,21 +328,15 @@ Generated: 2026-05-28
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/ - Custom Shaders
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/draw-order/ - Draw Order and Sorting
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/fisheye/ - Fisheye Rendering
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/ - LOD Streaming
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/ - Performance
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/picking/ - Picking
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/rendering-architecture/ - Splat Rendering Architecture
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/ - Procedural Splats
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/image/ - Image to Splats
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/lines/ - Lines and Shapes
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/mesh/ - Mesh to Splats
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/text/ - Text to Splats
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/shadows/ - Shadows
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/ - Unified Splat Rendering
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming/ - LOD Streaming
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/ - Procedural Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image/ - Image to Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines/ - Lines and Shapes
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh/ - Mesh to Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text/ - Text to Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format/ - Splat Data Format
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/splat-processing/ - Splat Processing
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format/ - Work Buffer Format
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering/ - Work Buffer Rendering
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/ - Your First Splat App
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/editor/ - Using the Editor
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/engine/ - Using the Engine API
@@ -355,6 +349,11 @@ Generated: 2026-05-28
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ - Splat File Formats
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply/ - The PLY Format
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/ - The SOG Format
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/ - Splat Rendering Architecture
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-data-format/ - Splat Data Format
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-processing/ - Splat Processing
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format/ - Work Buffer Format
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering/ - Work Buffer Rendering
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/viewing/ - Viewing Splats
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/what-is-gaussian-splatting/ - What is Gaussian Splatting?
 

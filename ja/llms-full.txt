@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 590
-Generated: 2026-05-28
+Total Documents: 589
+Generated: 2026-05-29
 
 ================================================================================
 
@@ -17381,7 +17381,7 @@ The PlayCanvas Engine supports custom shaders for Gaussian Splats, allowing you 
 
 This page covers shader customization for **non-unified rendering** (when `entity.gsplat.unified = false`). Each component has its own material that can be customized independently.
 
-For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) which provides similar customization capabilities through a global render modifier.
+For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) which provides similar customization capabilities through a global render modifier.
 
 :::
 
@@ -17686,13 +17686,7 @@ Because the sorting occurs asynchronously, you may notice some visual lag if the
 
 ## Multiple GSplatComponents
 
-GSplatComponents are rendered back to front based on their bounding boxes, and each component's Gaussians are sorted independently within that component.
-
-:::info Unified Rendering
-
-By default, the PlayCanvas Engine does not support "global sorting" across multiple GSplatComponents (where all Gaussians from all components would be sorted together). However, you can enable [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/), a beta feature that allows all Gaussians from multiple components to be sorted together, eliminating visibility and popping artifacts.
-
-:::
+When a scene contains multiple GSplatComponents, all of their Gaussians are sorted together in a single global sort, rather than each component being sorted independently and ordered by its bounding box. This global sorting produces correct depth ordering across components and eliminates visibility and popping artifacts when they overlap. See [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture) for details.
 
 ## Depth Buffer Considerations
 
@@ -17792,8 +17786,165 @@ app.scene.sky.fisheye = 1;
 
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
 - [Sky API](https://api.playcanvas.com/engine/classes/Sky.html)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
 - [Performance](/user-manual/gaussian-splatting/building/performance)
+
+--------------------------------------------------------------------------------
+
+## LOD Streaming
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/
+
+LOD (Level of Detail) Streaming enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail based on the camera's distance. This feature dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
+
+:::info Beta Feature
+
+LOD Streaming is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+
+:::
+
+## How It Works
+
+LOD streaming works by:
+
+1. Pre-generating multiple versions of your splat at different detail levels
+2. Organizing them into an octree structure for efficient streaming
+3. Dynamically loading and unloading detail levels based on camera distance
+4. Rendering only the appropriate level of detail for each region of the scene
+
+This approach allows you to render massive splat scenes that would otherwise be impossible due to memory constraints.
+
+## Creating LOD Streaming Data
+
+To use LOD streaming, you need to generate the streaming format from multiple splat files with different levels of detail. The tool takes your pre-generated LOD files and creates an optimized streaming format.
+
+See the [Generating LOD Format](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions on how to create the required `lod-meta.json` format.
+
+:::tip
+
+You must create the different LOD levels yourself (LOD 0 = highest detail, higher numbers = lower detail). The tool organizes these into a streaming-optimized format but doesn't create the simplified versions.
+
+:::
+
+## Live Examples
+
+Explore these live examples to see LOD streaming in action:
+
+- LOD Streaming (Basic) - Demonstrates basic LOD streaming with different detail levels
+
+- LOD Streaming with Spherical Harmonics - Shows LOD streaming with spherical harmonic data
+
+## Enabling LOD Streaming
+
+To enable LOD streaming, set the [`unified`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#unified) property to `true` on your GSplat component and load a streaming LOD format asset:
+
+```javascript
+entity.gsplat.unified = true;
+```
+
+## Controlling LOD Behavior
+
+You can control and fine-tune LOD streaming using the following APIs:
+
+### Component-Level Control
+
+Use [`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodBaseDistance) and [`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodMultiplier) to control LOD distance thresholds. Thresholds follow a geometric progression: `lodBaseDistance * lodMultiplier^i`:
+
+```javascript
+entity.gsplat.lodBaseDistance = 10;  // distance for the first LOD transition
+entity.gsplat.lodMultiplier = 2;    // each successive threshold is 2x farther
+```
+
+The default multiplier of 2 gives perceptually uniform transitions under perspective projection. The system also compensates for camera FOV automatically.
+
+### Scene-Level Control
+
+The [`Scene.gsplat`](https://api.playcanvas.com/engine/classes/Scene.html#gsplat) property provides access to scene-wide settings for unified gsplat rendering. This includes options for:
+
+- Performance tuning parameters
+- Debug visualization settings
+- Memory management controls
+- Stream loading behavior
+
+```javascript
+// Access scene-level gsplat settings
+const gsplatSettings = app.scene.gsplat;
+
+// Configure settings as needed
+// (See API documentation for available properties)
+```
+
+## Using LOD Streaming in the Editor
+
+Native support for LOD streaming in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable streaming LOD functionality in your Editor projects.
+
+### Sample Project
+
+We've created a sample project that demonstrates how to use streaming LOD with Gaussian splats in the PlayCanvas Editor:
+
+**[Church of Saints Peter and Paul](https://playcanvas.com/project/1408991/overview/church-of-saints-peter-and-paul)**
+
+This project showcases a large-scale Gaussian splat scene with LOD streaming, including custom reveal shader effects.
+
+### Using the Streamed GSplat Script
+
+The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable LOD streaming:
+
+#### Setup Steps
+
+1. Add the script to an Entity in your scene
+2. Configure the `splatUrl` property to point to an externally hosted LOD splat format file
+
+:::note External Hosting
+
+Currently, the LOD splat data needs to be hosted externally (not as an Editor asset). This limitation will be removed in the future when native Editor support for streaming LOD format is added.
+
+:::
+
+#### Quality Settings
+
+The `streamed-gsplat.mjs` script provides four different quality/performance presets, allowing you to specify:
+
+- Which LOD levels to load
+- At what distances each LOD level should be displayed
+
+These settings enable fine-tuned control over the balance between visual quality and rendering performance, making it easy to optimize for different target platforms and devices.
+
+### Custom Shader Effects
+
+The sample project also demonstrates how to create custom shader effects for Gaussian splats. It includes scripts from the [PlayCanvas Engine GSplat Scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm/gsplat) repository.
+
+Specifically, the project uses the [Reveal Radial](https://github.com/playcanvas/engine/blob/main/scripts/esm/gsplat/reveal-radial.mjs) shader effect (along with its base class) to create an animated reveal of the splat scene. This effect:
+
+- Creates radial waves emanating from a center point
+- First shows small colored dots progressively
+- Then lifts particles up with a highlight effect before settling to their original state
+
+This demonstrates the flexibility of the PlayCanvas Engine's shader system for creating compelling visual effects with Gaussian splats.
+
+### Future Editor Improvements
+
+As native Editor support for streaming LOD is added, the following improvements are planned:
+
+- **Direct Asset Import**: Upload LOD splat files directly as Editor assets (no external hosting needed)
+- **Visual Configuration**: Configure LOD settings through the Editor UI instead of script properties
+- **Preview in Editor**: View and test streaming LOD behavior directly in the Editor viewport
+
+## Benefits
+
+- **Better Performance**: LOD streaming reduces memory usage and improves rendering performance for large scenes
+- **Scalability**: Enables rendering of much larger Gaussian splat scenes by dynamically loading appropriate detail levels
+- **Flexibility**: Provides fine-grained control over LOD distances and streaming behavior
+- **Optimized Loading**: Only loads the data needed for the current view
+
+## See Also
+
+- [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
+- [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
+- [SplatTransform CLI Tool](/user-manual/splat-transform)
+- [Generating LOD Format](/user-manual/splat-transform#generating-lod-format)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
+- [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)
 
 --------------------------------------------------------------------------------
 
@@ -17807,7 +17958,7 @@ Rendering splats can be expensive on both the CPU and GPU. Here are some strateg
 
 Be mindful of the number of Gaussians in your scene since every Gaussian is sorted on camera depth every frame. You can check the number contained within a particular GSplat asset by using the [SPLAT DATA Panel](/user-manual/supersplat/editor/data-panel/) in the [SuperSplat Editor](/user-manual/supersplat/editor/). Use SuperSplat to trim unwanted Gaussians from your PLY files.
 
-For large scenes, consider using [LOD Streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming) which dynamically loads appropriate levels of detail based on camera distance. This significantly reduces the number of active Gaussians at any given time while maintaining visual quality where it matters most.
+For large scenes, consider using [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming) which dynamically loads appropriate levels of detail based on camera distance. This significantly reduces the number of active Gaussians at any given time while maintaining visual quality where it matters most.
 
 ## Fill Rate Considerations
 
@@ -17830,7 +17981,7 @@ Both settings help reduce the fragment processing load, which is the primary bot
 
 ## LOD Streaming Configuration
 
-When using [LOD Streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming), you have several options to control quality and performance. The recommended approach is to use the **global splat budget** which automatically manages LOD selection across all GSplat assets in your scene.
+When using [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming), you have several options to control quality and performance. The recommended approach is to use the **global splat budget** which automatically manages LOD selection across all GSplat assets in your scene.
 
 ### Global Splat Budget
 
@@ -17894,7 +18045,7 @@ The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/
 
 ## Unified vs Non-Unified Mode
 
-GSplat components can operate in unified or non-unified rendering mode (see [Unified Splat Rendering](../unified-rendering/) for details). The picking behavior differs between these modes:
+GSplat components can operate in unified or non-unified rendering mode (see [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture) for details). The picking behavior differs between these modes:
 
 - **Unified mode**: Picking returns the `GSplatComponent` directly.
 - **Non-unified mode**: Picking returns a mesh instance, which you then match to find the owning entity.
@@ -18148,379 +18299,9 @@ if (picker.depthBuffer) {
 
 --------------------------------------------------------------------------------
 
-## Splat Rendering Architecture
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/rendering-architecture/
-
-PlayCanvas supports two rendering modes for Gaussian splats: **Unified** and **Non-unified**. Understanding these modes helps you choose the right approach for your application.
-
-## Unified vs Non-unified Rendering
-
-### Non-unified Mode
-
-In non-unified mode, each GSplat component is rendered independently:
-
-- Splats within each component are sorted separately
-- Components are rendered based on their bounding box order
-- Simple setup with no additional overhead
-- **Limitation**: Visual artifacts occur when splat components overlap
-
-This mode is suitable for simple scenes with a single splat or non-overlapping splats.
-
-### Unified Mode
-
-In unified mode, all GSplat components share a common rendering pipeline:
-
-- All splats from all components are copied to a shared **work buffer**
-- Splats are sorted globally across all components
-- Eliminates artifacts when splats overlap
-- Enables advanced features like [procedural splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/), [LOD streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming), and [GPU processing](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)
-
-**Unified mode is recommended** for most applications, especially when:
-
-- Multiple splat components may overlap
-- You need consistent depth sorting across components
-- You want to use advanced features
-
-## Enabling Unified Mode
-
-Set the `unified` property to `true` on your GSplat components:
-
-```javascript
-entity.gsplat.unified = true;
-```
-
-## Learn More
-
-For detailed information about unified rendering architecture and its features, see:
-
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/) - Architecture details and global sorting
-- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order) - How splats are sorted for rendering
-
---------------------------------------------------------------------------------
-
-## Shadows
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/shadows/
-
-Gaussian Splats can cast shadows onto meshes and other surfaces in your scene.
-
-**View Live Example** - See splat shadows in action.
-
-[Image: Splat Shadows]
-
-## Enabling Shadow Casting
-
-To enable shadow casting on a GSplat component, set the [castShadows](https://api.playcanvas.com/engine/classes/GSplatComponent.html#castshadows) property:
-
-```javascript
-entity.gsplat.castShadows = true;
-```
-
-Or when creating the component:
-
-```javascript
-entity.addComponent('gsplat', {
-    asset: splatAsset,
-    castShadows: true
-});
-```
-
-You'll also need a light with shadow casting enabled:
-
-```javascript
-entity.light.castShadows = true;
-```
-
-## Shadow Quality
-
-For better shadow quality, you can adjust the alpha clip threshold. This controls how transparent splats contribute to shadows — lower values include more semi-transparent splats in the shadow, while higher values create sharper but potentially incomplete shadows.
-
-### Unified Mode
-
-In unified rendering mode, set the alpha clip threshold on the global GSplat settings:
-
-```javascript
-app.scene.gsplat.alphaClip = 0.4;
-```
-
-### Non-Unified Mode
-
-In non-unified mode, set the alpha clip threshold directly on the component's material:
-
-```javascript
-entity.gsplat.material.setParameter('alphaClip', 0.4);
-```
-
-## Receiving Shadows
-
-Splats cannot directly receive shadows from other objects. However, you can work around this limitation by using a shadow catcher - an invisible mesh that approximates the splat's shape and writes to the depth buffer to receive shadows.
-
-See [3DGS with Physics and Relighting](https://playcanvas.com/project/1358087/overview/3dgs-with-physics-and-relighting) for an example of this technique in action.
-
---------------------------------------------------------------------------------
-
-## Unified Splat Rendering
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/
-
-Unified Splat Rendering is the recommended rendering mode for Gaussian splats in PlayCanvas. It enables global sorting across multiple splat components and provides access to advanced features like procedural splats, LOD streaming, and GPU-based splat processing.
-
-:::info Beta Feature
-
-Unified Splat Rendering is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
-## The Problem
-
-Without unified rendering, multiple GSplat components are rendered independently. Each component's splats are sorted separately, and the components themselves are rendered based on their bounding boxes. This approach can lead to:
-
-- **Visibility artifacts** when splat components overlap
-- **Popping effects** as the camera moves and component render order changes
-- **Incorrect depth sorting** between splats from different components
-
-## The Solution: Unified Rendering
-
-Unified rendering solves these issues by using a shared rendering pipeline with **work buffers**. All splats from all components are sorted together in a single unified sort, ensuring correct rendering order across the entire scene.
-
-## Architecture Overview
-
-The unified rendering pipeline consists of data storage and operations:
-
-```mermaid
-flowchart LR
-    subgraph Resources[GSplat Resources]
-        Loaded[Loaded Splats<br/>ply/sog/LOD]
-        Container[GSplatContainer<br/>procedural]
-    end
-
-    Copy([Copy])
-
-    WorkBuffer[Work Buffer<br/>per camera/layer]
-
-    Sort([Sort])
-
-    Render([Render])
-
-    Loaded --> Copy
-    Container --> Copy
-    Copy --> WorkBuffer
-    WorkBuffer --> Sort
-    Sort --> Render
-```
-
-### GSplat Resources
-
-GSplat resources are the source data for splats. They come in two forms:
-
-1. **Loaded splats**: Imported from files (`.ply`, `.sog`) or streamed via [LOD streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming)
-2. **Procedural splats**: Created programmatically using [GSplatContainer](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-
-Each resource stores splat data in GPU textures according to a [data format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format).
-
-### Work Buffers
-
-Work buffers are automatically created for each camera/layer combination that renders GSplat components in unified mode. They serve as an intermediate storage where:
-
-1. All splat data from visible components is **copied** into the work buffer
-2. Splats are **globally sorted** by depth relative to the camera
-3. The sorted data is ready for rendering
-
-This architecture enables features that require access to all splats together, such as global sorting and cross-component effects.
-
-### Camera Render
-
-When a camera renders a layer containing unified GSplat components, it draws the sorted splats from the work buffer. This ensures correct depth ordering regardless of how many splat components exist or how they overlap.
-
-## Live Example
-
-Check out the Global Sorting example which demonstrates the difference between unified and non-unified rendering. The example allows you to toggle unified mode on and off to observe how it eliminates artifacts when rendering multiple overlapping splat components.
-
-## Benefits
-
-- **Improved Visual Quality**: Eliminates artifacts when rendering multiple overlapping splat components
-- **Consistent Rendering**: Maintains correct depth sorting regardless of camera position
-- **Better Scene Composition**: Enables complex scenes with many splat components
-- **Advanced Features**: Unlocks procedural splats, LOD streaming, and GPU processing
-
-## Unified Rendering Features
-
-The following features are available when using unified mode:
-
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format) - Custom texture formats for splat data
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) - Create splats programmatically
-- [LOD Streaming](/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming) - Dynamic level-of-detail loading
-- [Splat Processing](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing) - GPU-based splat manipulation
-
-## See Also
-
-- [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
-- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order)
-- [Splat Rendering Architecture](/user-manual/gaussian-splatting/building/rendering-architecture)
-
---------------------------------------------------------------------------------
-
-## LOD Streaming
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/lod-streaming/
-
-LOD (Level of Detail) Streaming enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail based on the camera's distance. This feature dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
-
-:::info Beta Feature
-
-LOD Streaming is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
-## How It Works
-
-LOD streaming works by:
-
-1. Pre-generating multiple versions of your splat at different detail levels
-2. Organizing them into an octree structure for efficient streaming
-3. Dynamically loading and unloading detail levels based on camera distance
-4. Rendering only the appropriate level of detail for each region of the scene
-
-This approach allows you to render massive splat scenes that would otherwise be impossible due to memory constraints.
-
-## Creating LOD Streaming Data
-
-To use LOD streaming, you need to generate the streaming format from multiple splat files with different levels of detail. The tool takes your pre-generated LOD files and creates an optimized streaming format.
-
-See the [Generating LOD Format](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions on how to create the required `lod-meta.json` format.
-
-:::tip
-
-You must create the different LOD levels yourself (LOD 0 = highest detail, higher numbers = lower detail). The tool organizes these into a streaming-optimized format but doesn't create the simplified versions.
-
-:::
-
-## Live Examples
-
-Explore these live examples to see LOD streaming in action:
-
-- LOD Streaming (Basic) - Demonstrates basic LOD streaming with different detail levels
-
-- LOD Streaming with Spherical Harmonics - Shows LOD streaming with spherical harmonic data
-
-## Enabling LOD Streaming
-
-To enable LOD streaming, set the [`unified`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#unified) property to `true` on your GSplat component and load a streaming LOD format asset:
-
-```javascript
-entity.gsplat.unified = true;
-```
-
-## Controlling LOD Behavior
-
-You can control and fine-tune LOD streaming using the following APIs:
-
-### Component-Level Control
-
-Use [`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodBaseDistance) and [`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodMultiplier) to control LOD distance thresholds. Thresholds follow a geometric progression: `lodBaseDistance * lodMultiplier^i`:
-
-```javascript
-entity.gsplat.lodBaseDistance = 10;  // distance for the first LOD transition
-entity.gsplat.lodMultiplier = 2;    // each successive threshold is 2x farther
-```
-
-The default multiplier of 2 gives perceptually uniform transitions under perspective projection. The system also compensates for camera FOV automatically.
-
-### Scene-Level Control
-
-The [`Scene.gsplat`](https://api.playcanvas.com/engine/classes/Scene.html#gsplat) property provides access to scene-wide settings for unified gsplat rendering. This includes options for:
-
-- Performance tuning parameters
-- Debug visualization settings
-- Memory management controls
-- Stream loading behavior
-
-```javascript
-// Access scene-level gsplat settings
-const gsplatSettings = app.scene.gsplat;
-
-// Configure settings as needed
-// (See API documentation for available properties)
-```
-
-## Using LOD Streaming in the Editor
-
-Native support for LOD streaming in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable streaming LOD functionality in your Editor projects.
-
-### Sample Project
-
-We've created a sample project that demonstrates how to use streaming LOD with Gaussian splats in the PlayCanvas Editor:
-
-**[Church of Saints Peter and Paul](https://playcanvas.com/project/1408991/overview/church-of-saints-peter-and-paul)**
-
-This project showcases a large-scale Gaussian splat scene with LOD streaming, including custom reveal shader effects.
-
-### Using the Streamed GSplat Script
-
-The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable LOD streaming:
-
-#### Setup Steps
-
-1. Add the script to an Entity in your scene
-2. Configure the `splatUrl` property to point to an externally hosted LOD splat format file
-
-:::note External Hosting
-
-Currently, the LOD splat data needs to be hosted externally (not as an Editor asset). This limitation will be removed in the future when native Editor support for streaming LOD format is added.
-
-:::
-
-#### Quality Settings
-
-The `streamed-gsplat.mjs` script provides four different quality/performance presets, allowing you to specify:
-
-- Which LOD levels to load
-- At what distances each LOD level should be displayed
-
-These settings enable fine-tuned control over the balance between visual quality and rendering performance, making it easy to optimize for different target platforms and devices.
-
-### Custom Shader Effects
-
-The sample project also demonstrates how to create custom shader effects for Gaussian splats. It includes scripts from the [PlayCanvas Engine GSplat Scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm/gsplat) repository.
-
-Specifically, the project uses the [Reveal Radial](https://github.com/playcanvas/engine/blob/main/scripts/esm/gsplat/reveal-radial.mjs) shader effect (along with its base class) to create an animated reveal of the splat scene. This effect:
-
-- Creates radial waves emanating from a center point
-- First shows small colored dots progressively
-- Then lifts particles up with a highlight effect before settling to their original state
-
-This demonstrates the flexibility of the PlayCanvas Engine's shader system for creating compelling visual effects with Gaussian splats.
-
-### Future Editor Improvements
-
-As native Editor support for streaming LOD is added, the following improvements are planned:
-
-- **Direct Asset Import**: Upload LOD splat files directly as Editor assets (no external hosting needed)
-- **Visual Configuration**: Configure LOD settings through the Editor UI instead of script properties
-- **Preview in Editor**: View and test streaming LOD behavior directly in the Editor viewport
-
-## Benefits
-
-- **Better Performance**: LOD streaming reduces memory usage and improves rendering performance for large scenes
-- **Scalability**: Enables rendering of much larger Gaussian splat scenes by dynamically loading appropriate detail levels
-- **Flexibility**: Provides fine-grained control over LOD distances and streaming behavior
-- **Optimized Loading**: Only loads the data needed for the current view
-
-## See Also
-
-- [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
-- [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
-- [SplatTransform CLI Tool](/user-manual/splat-transform)
-- [Generating LOD Format](/user-manual/splat-transform#generating-lod-format)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
-- [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)
-
---------------------------------------------------------------------------------
-
 ## Procedural Splats
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/
 
 `GSplatContainer` enables you to create Gaussian splat data programmatically rather than loading it from files. This is useful for dynamic visualizations, procedural effects, and converting other data types to splats.
 
@@ -18532,19 +18313,19 @@ Procedural Splats is currently in beta. If you encounter any issues, please repo
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
 ## Overview
 
-`GSplatContainer` is a container for procedural splat data that you fill from CPU. It works with a `GSplatFormat` that defines the texture streams and how to read splat attributes. Note that [GSplatProcessor](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing) also allows writing to containers on the GPU.
+`GSplatContainer` is a container for procedural splat data that you fill from CPU. It works with a `GSplatFormat` that defines the texture streams and how to read splat attributes. Note that [GSplatProcessor](/user-manual/gaussian-splatting/rendering-architecture/splat-processing) also allows writing to containers on the GPU.
 
 Key characteristics:
 
 - **Fixed size**: Capacity is set at creation and cannot be changed
 - **CPU-populated**: You fill texture data from JavaScript
-- **GPU-populated**: You can also write texture data on the GPU via [GSplatProcessor](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)
+- **GPU-populated**: You can also write texture data on the GPU via [GSplatProcessor](/user-manual/gaussian-splatting/rendering-architecture/splat-processing)
 - **Format-driven**: Uses `GSplatFormat` to define data layout and shader code
 
 ## Splat Data Format
@@ -18780,10 +18561,10 @@ PlayCanvas provides ready-to-use scripts that wrap `GSplatContainer` for common 
 
 | Script | Description |
 |--------|-------------|
-| [GsplatMesh](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh) | Convert mesh geometry to splats |
-| [GsplatImage](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image) | Render images as splats (one per pixel) |
-| [GsplatLines](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines) | Draw lines, arrows, and bounding boxes |
-| [GsplatText](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text) | Render text as splats |
+| [GsplatMesh](/user-manual/gaussian-splatting/building/procedural-splats/mesh) | Convert mesh geometry to splats |
+| [GsplatImage](/user-manual/gaussian-splatting/building/procedural-splats/image) | Render images as splats (one per pixel) |
+| [GsplatLines](/user-manual/gaussian-splatting/building/procedural-splats/lines) | Draw lines, arrows, and bounding boxes |
+| [GsplatText](/user-manual/gaussian-splatting/building/procedural-splats/text) | Render text as splats |
 
 These scripts handle the container creation and data population for you.
 
@@ -18795,15 +18576,15 @@ See the Procedural Instanced example which demonstrates creating a custom `GSpla
 
 - [GSplatContainer API](https://api.playcanvas.com/engine/classes/GSplatContainer.html)
 - [GSplatFormat API](https://api.playcanvas.com/engine/classes/GSplatFormat.html)
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Splat Processing](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [Splat Processing](/user-manual/gaussian-splatting/rendering-architecture/splat-processing)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
 
 --------------------------------------------------------------------------------
 
 ## Image to Splats
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/image/
 
 The `GsplatImage` script renders an image as Gaussian splats, with one splat per non-transparent pixel. This creates a unique visual effect where images appear as point-based representations.
 
@@ -18815,7 +18596,7 @@ GsplatImage is currently in beta. If you encounter any issues, please report the
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -18904,16 +18685,16 @@ scripts/esm/gsplat/gsplat-image.mjs
 
 ## See Also
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Mesh to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
-- [Lines and Shapes](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
-- [Text to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [Mesh to Splats](/user-manual/gaussian-splatting/building/procedural-splats/mesh)
+- [Lines and Shapes](/user-manual/gaussian-splatting/building/procedural-splats/lines)
+- [Text to Splats](/user-manual/gaussian-splatting/building/procedural-splats/text)
 
 --------------------------------------------------------------------------------
 
 ## Lines and Shapes
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/lines/
 
 The `GsplatLines` script renders line-based debug primitives using Gaussian splats. It supports lines, arrows, and axis-aligned bounding boxes (AABBs), making it useful for CAD-style visualizations and debugging.
 
@@ -18925,7 +18706,7 @@ GsplatLines is currently in beta. If you encounter any issues, please report the
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -19071,16 +18852,16 @@ scripts/esm/gsplat/gsplat-lines.mjs
 
 ## See Also
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Mesh to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
-- [Image to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [Text to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [Mesh to Splats](/user-manual/gaussian-splatting/building/procedural-splats/mesh)
+- [Image to Splats](/user-manual/gaussian-splatting/building/procedural-splats/image)
+- [Text to Splats](/user-manual/gaussian-splatting/building/procedural-splats/text)
 
 --------------------------------------------------------------------------------
 
 ## Mesh to Splats
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/mesh/
 
 The `GsplatMesh` script converts mesh geometry into Gaussian splats. It extracts triangles from render components and generates uniformly distributed splats across the mesh surface using triangle rasterization.
 
@@ -19092,7 +18873,7 @@ GsplatMesh is currently in beta. If you encounter any issues, please report them
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -19103,7 +18884,7 @@ This feature requires [unified rendering](/user-manual/gaussian-splatting/buildi
 - Extracts triangles from mesh instances in an entity hierarchy
 - Rasterizes each triangle to generate splat positions
 - Uses material colors (emissive or diffuse) for splat colors
-- Creates a [GSplatContainer](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) internally
+- Creates a [GSplatContainer](/user-manual/gaussian-splatting/building/procedural-splats/) internally
 
 This is useful for converting 3D models to splat representations for stylized rendering effects.
 
@@ -19211,16 +18992,16 @@ scripts/esm/gsplat/gsplat-mesh.mjs
 
 ## See Also
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Image to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [Lines and Shapes](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
-- [Text to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [Image to Splats](/user-manual/gaussian-splatting/building/procedural-splats/image)
+- [Lines and Shapes](/user-manual/gaussian-splatting/building/procedural-splats/lines)
+- [Text to Splats](/user-manual/gaussian-splatting/building/procedural-splats/text)
 
 --------------------------------------------------------------------------------
 
 ## Text to Splats
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/text/
 
 The `GsplatText` script renders text as Gaussian splats, with one splat per non-transparent pixel. This creates text labels that integrate seamlessly with splat-based scenes.
 
@@ -19232,7 +19013,7 @@ GsplatText is currently in beta. If you encounter any issues, please report them
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -19318,7 +19099,7 @@ textSplat.text = 'New Score: 200';
 
 ## Coordinate System
 
-Like [GsplatImage](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image), text is rendered on the XZ plane:
+Like [GsplatImage](/user-manual/gaussian-splatting/building/procedural-splats/image), text is rendered on the XZ plane:
 
 - **X axis**: Left to right
 - **Z axis**: Top to bottom (text reads correctly when viewed from +Y)
@@ -19350,914 +19131,71 @@ scripts/esm/gsplat/gsplat-text.mjs
 
 ## See Also
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Mesh to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
-- [Image to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [Lines and Shapes](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [Mesh to Splats](/user-manual/gaussian-splatting/building/procedural-splats/mesh)
+- [Image to Splats](/user-manual/gaussian-splatting/building/procedural-splats/image)
+- [Lines and Shapes](/user-manual/gaussian-splatting/building/procedural-splats/lines)
 
 --------------------------------------------------------------------------------
 
-## Splat Data Format
+## Shadows
 
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format/
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/shadows/
 
-`GSplatFormat` describes how splat data is stored in GPU textures and generates the shader code needed to read that data. It defines texture streams (name and pixel format) and shader code for extracting splat attributes.
+Gaussian Splats can cast shadows onto meshes and other surfaces in your scene.
 
-:::info Beta Feature
+**View Live Example** - See splat shadows in action.
 
-Splat Data Format is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+[Image: Splat Shadows]
 
-:::
+## Enabling Shadow Casting
 
-:::note
-
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
-
-:::
-
-## Overview
-
-GSplat data is stored in GPU textures called **streams**. Each stream has a name and pixel format (e.g., `PIXELFORMAT_RGBA32F`). The `GSplatFormat` defines these streams and the shader code that reads splat attributes from them.
-
-## Shader Access
-
-The format generates shader functions to read splat data from texture streams. These functions use a global `splat` struct that identifies which splat to read.
-
-### Current Splat Index
-
-By default, each splat reads its own data. To read from a different splat, use `setSplat(index)`:
-
-```glsl
-// GLSL
-setSplat(otherIndex);  // Set the splat index for subsequent reads
-vec3 pos = getCenter(); // Now reads from otherIndex
-```
-
-```wgsl
-// WGSL
-setSplat(otherIndex);
-let pos = getCenter();
-```
-
-### Load Functions
-
-For each stream, two load functions are generated:
-
-| Function | Description |
-|----------|-------------|
-| `load{StreamName}()` | Reads from current `splat.uv` (set by `setSplat()`) |
-| `load{StreamName}WithIndex(index)` | Reads directly from a specific index |
-
-For example, a stream named `dataCenter` generates:
-
-- `loadDataCenter()` - reads using current splat index
-- `loadDataCenterWithIndex(index)` - reads from specified index
-
-```glsl
-// GLSL - Read from specific index without changing current splat
-vec4 otherCenter = loadDataCenterWithIndex(neighborIndex);
-```
-
-```wgsl
-// WGSL
-let otherCenter = loadDataCenterWithIndex(neighborIndex);
-```
-
-This is useful when you need to access neighbor splats or compare data across multiple splats.
-
-## Format for Loaded Resources
-
-When you load a gsplat resource (PLY, SOG, or LOD format), the format is **automatically created** based on the file's data. You don't need to create or configure it manually.
-
-### Accessing the Format
-
-You can access the format through the resource:
+To enable shadow casting on a GSplat component, set the [castShadows](https://api.playcanvas.com/engine/classes/GSplatComponent.html#castshadows) property:
 
 ```javascript
-const format = entity.gsplat.resource.format;
+entity.gsplat.castShadows = true;
 ```
 
-### Adding Extra Streams to Resources
-
-You can add extra streams to a resource's format to store custom per-splat data. Each stream has a **storage type** that determines how textures are allocated:
-
-:::note
-
-Extra streams are not supported for LOD streaming resources. LOD resources dynamically load and unload data as needed, and custom extra streams cannot be preserved across these operations.
-
-:::
-
-| Storage Type | Description |
-|-------------|-------------|
-| `GSPLAT_STREAM_RESOURCE` | Texture is shared across all component instances using this resource (default) |
-| `GSPLAT_STREAM_INSTANCE` | Texture is created per gsplat component instance |
-
-#### Resource-Level Streams
-
-Use `GSPLAT_STREAM_RESOURCE` (or omit `storage`) when the data is the same for all instances of a resource:
+Or when creating the component:
 
 ```javascript
-// Add a stream shared across all instances
-resource.format.addExtraStreams([
-    { name: 'customData', format: pc.PIXELFORMAT_RGBA8 }
-]);
-
-// Access the shared texture
-const texture = resource.streams.getTexture('customData');
-```
-
-#### Instance-Level Streams
-
-Use `GSPLAT_STREAM_INSTANCE` when each component instance needs its own texture data:
-
-```javascript
-// Add a per-instance stream
-resource.format.addExtraStreams([
-    { name: 'instanceTint', format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE }
-]);
-
-// Access the instance texture via the component
-const texture = entity.gsplat.getInstanceTexture('instanceTint');
-if (texture) {
-    const data = texture.lock();
-    // Fill texture data per splat...
-    texture.unlock();
-}
-```
-
-Common stream formats:
-
-- `PIXELFORMAT_RGBA8` - 4 bytes (e.g., packed flags or tint colors)
-- `PIXELFORMAT_RGBA16F` - 4 half floats (e.g., custom attributes)
-- `PIXELFORMAT_RGBA32F` - 4 floats (e.g., high precision data)
-
-:::note
-
-Streams cannot be removed once added.
-
-:::
-
-## Format for Procedural Splats
-
-When creating [procedural splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) with `GSplatContainer`, you need to explicitly create and configure a format. PlayCanvas provides built-in formats for common cases, and you can also create custom formats with your own streams and shader code.
-
-See [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) for details on:
-
-- Built-in formats (`createDefaultFormat`, `createSimpleFormat`)
-- Creating custom formats with custom streams
-- Writing shader code to read your custom data
-
-## Work Buffer Format
-
-The work buffer has its own format for storing intermediate splat data during unified rendering. You can add extra streams to it for customization during copy and render operations.
-
-See [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) for details on:
-
-- Adding extra streams to the work buffer
-- Customizing the copy operation with `setWorkBufferModifier()`
-- Writing and reading custom data
-
-## See Also
-
-- [GSplatFormat API](https://api.playcanvas.com/engine/classes/GSplatFormat.html)
-- [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - Customizing the copy operation
-- [Work Buffer Rendering](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) - Customizing the render operation
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) - Creating splats programmatically
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
-
---------------------------------------------------------------------------------
-
-## Splat Processing
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/splat-processing/
-
-`GSplatProcessor` enables GPU-based processing of Gaussian Splat data using custom shader code. It reads from source texture streams and writes results to destination streams, enabling operations like painting, selection, deletion, and custom data transforms.
-
-:::info Beta Feature
-
-Splat Processing is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
-:::note
-
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
-
-:::
-
-## Overview
-
-Gaussian Splats store per-splat attributes (position, rotation, scale, color) in texture streams. Additional custom streams can be added using extra streams on the [splat data format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format).
-
-`GSplatProcessor` provides a way to modify this data on the GPU:
-
-- **Read** from source streams using generated load functions
-- **Write** to destination streams using generated write functions
-- **Process** all splats in parallel on the GPU
-
-This is useful for:
-
-- Painting/coloring splats based on brush position
-- Marking splats for selection or deletion
-- Transforming splat data
-- Custom per-splat effects
-
-## Basic Usage
-
-### 1. Create the Processor
-
-Create a processor by specifying the source (where to read splat data from), destination (which streams to write to), and the shader code that processes each splat:
-
-```javascript
-const processor = new pc.GSplatProcessor(
-    app.graphicsDevice,
-    { component: entity.gsplat },                           // source
-    { component: entity.gsplat, streams: ['customColor'] }, // destination
-    {
-        processGLSL: `
-            uniform vec4 uBrushSphere;  // xyz = position, w = radius
-            uniform vec4 uBrushColor;
-
-            void process() {
-                vec3 center = getCenter();
-                float dist = distance(center, uBrushSphere.xyz);
-                if (dist < uBrushSphere.w) {
-                    writeCustomColor(uBrushColor);
-                } else {
-                    writeCustomColor(vec4(0.0));
-                }
-            }
-        `,
-        processWGSL: `
-            uniform uBrushSphere: vec4f;
-            uniform uBrushColor: vec4f;
-
-            fn process() {
-                let center = getCenter();
-                let dist = distance(center, uniform.uBrushSphere.xyz);
-                if (dist < uniform.uBrushSphere.w) {
-                    writeCustomColor(uniform.uBrushColor);
-                } else {
-                    writeCustomColor(vec4f(0.0));
-                }
-            }
-        `
-    }
-);
-```
-
-### 2. Set Parameters and Execute
-
-Set uniforms for the processing shader, then execute to process all splats:
-
-```javascript
-// Set uniforms for the processing shader
-processor.setParameter('uBrushSphere', [x, y, z, radius]);
-processor.setParameter('uBrushColor', [1, 0, 0, 1]);
-
-// Execute the processing pass
-processor.process();
-```
-
-## Constructor
-
-```javascript
-new pc.GSplatProcessor(device, source, destination, options)
-```
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `device` | GraphicsDevice | The graphics device |
-| `source` | GSplatProcessorBinding | Source data binding |
-| `destination` | GSplatProcessorBinding | Destination data binding |
-| `options.processGLSL` | string | GLSL shader code (required for WebGL) |
-| `options.processWGSL` | string | WGSL shader code (required for WebGPU) |
-
-### GSplatProcessorBinding
-
-```typescript
-{
-    resource?: GSplatResourceBase,  // Direct resource reference
-    component?: GSplatComponent,    // Component (resource resolved automatically)
-    streams?: string[]              // Stream names to bind
-}
-```
-
-If instance streams (`GSPLAT_STREAM_INSTANCE`) are used, `component` must be specified to access those per-component textures.
-
-For source, if `streams` is omitted, format streams are automatically bound with the standard `getCenter()`, `getColor()`, `getRotation()`, `getScale()` functions. When source and destination resources are different, all streams from the source can be read. When they are the same resource, streams being written to cannot be read from.
-
-For destination, `streams` is required and specifies which streams to write to.
-
-### Different Resource Sizes
-
-The source and destination resources can have different numbers of splats. The `process()` function executes once for each **destination** splat. The current destination splat index is available via `splat.index`:
-
-```glsl
-void process() {
-    uint destIndex = splat.index;  // Current destination splat index
-
-    // Calculate which source splat to read from
-    uint sourceIndex = destIndex * 2;  // Example: sample every other splat
-    setSplat(sourceIndex);
-    vec3 srcPos = getCenter();
-
-    // Write to destination
-    writePosition(vec4(srcPos, 1.0));
-}
-```
-
-You can also read from any source splat using `load{StreamName}WithIndex()` without changing the current splat context.
-
-This enables operations like:
-
-- Copying data from a larger source to a smaller destination (downsampling)
-- Generating destination splats from sampled source data
-- Mapping between resources with different splat counts
-
-## Shader Functions
-
-### Built-in Uniforms
-
-The following uniforms are automatically available in processing shaders:
-
-| Uniform | Type | Description |
-|---------|------|-------------|
-| `srcNumSplats` | `uint` | Number of splats in source resource |
-| `dstNumSplats` | `uint` | Number of splats in destination resource |
-
-Padding pixels (where `splat.index >= dstNumSplats`) are automatically skipped by the processor.
-
-### Reading (Source)
-
-When source streams aren't specified, the processor provides:
-
-| Function | Return | Description |
-|----------|--------|-------------|
-| `getCenter()` | `vec3` | Splat position (must be called first) |
-| `getColor()` | `vec4` | Splat color |
-| `getRotation()` | `vec4` | Rotation quaternion |
-| `getScale()` | `vec3` | Splat scale |
-
-### Reading from Different Indices
-
-By default, each splat reads its own data. To read from a different splat, use `setSplat(index)`:
-
-```glsl
-// GLSL - Read from neighbor splat
-setSplat(neighborIndex);
-vec3 neighborPos = getCenter();
-vec4 neighborColor = getColor();
-```
-
-Each load function also has a `WithIndex` variant for direct index access:
-
-```glsl
-// GLSL - Read specific stream from another index
-vec4 otherCenter = loadDataCenterWithIndex(neighborIndex);
-```
-
-This is useful for algorithms that need to compare or combine data from multiple splats.
-
-### Writing (Destination)
-
-For each destination stream, a write function is generated: `write{StreamName}(value)`.
-
-For example, a stream named `customColor` generates `writeCustomColor(vec4 value)`.
-
-## API
-
-### setParameter(name, value)
-
-Sets a shader uniform parameter.
-
-```javascript
-// Scalar
-processor.setParameter('uRadius', 0.5);
-
-// Vector (as array)
-processor.setParameter('uBrushPos', [x, y, z]);
-
-// Texture
-processor.setParameter('uBrushTex', brushTexture);
-```
-
-### getParameter(name)
-
-Gets a previously set parameter value.
-
-### deleteParameter(name)
-
-Removes a parameter.
-
-### process()
-
-Executes the processing pass, reading from source and writing to destination.
-
-### destroy()
-
-Releases all GPU resources. Call when done with the processor.
-
-### blendState
-
-Property for setting blend state (useful for accumulative effects like additive painting):
-
-```javascript
-processor.blendState = pc.BlendState.ADDBLEND;
-```
-
-## Use Cases
-
-### Painting
-
-Paint splats within a brush radius with a color:
-
-```glsl
-void process() {
-    vec3 center = getCenter();
-    float dist = distance(center, uBrushPos.xyz);
-    if (dist < uBrushRadius) {
-        float falloff = 1.0 - (dist / uBrushRadius);
-        writeCustomColor(uBrushColor * falloff);
-    } else {
-        writeCustomColor(vec4(0.0));
-    }
-}
-```
-
-### Selection
-
-Mark splats inside an AABB as selected:
-
-```glsl
-void process() {
-    vec3 center = getCenter();
-    bool inside = all(greaterThan(center, uSelectionMin)) &&
-                  all(lessThan(center, uSelectionMax));
-    writeSelection(inside ? vec4(1.0) : vec4(0.0));
-}
-```
-
-### Deletion (Visibility)
-
-Mark splats as invisible:
-
-```glsl
-void process() {
-    vec3 center = getCenter();
-    float visible = distance(center, uDeletePos) > uDeleteRadius ? 1.0 : 0.0;
-    writeVisible(vec4(visible));
-}
-```
-
-## Live Examples
-
-- Paint example - Demonstrates painting splats with a brush
-
-- Editor example - Demonstrates selection, deletion, and cloning
-
-## See Also
-
-- [GSplatProcessor API](https://api.playcanvas.com/engine/classes/GSplatProcessor.html)
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
-
---------------------------------------------------------------------------------
-
-## Work Buffer Format
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format/
-
-The work buffer format defines the data streams available in the work buffer and how splat data is copied from resources. You can customize the copy operation to transform splats and write additional per-component data.
-
-:::info Beta Feature
-
-Work Buffer Format customization is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
-:::note
-
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
-
-:::
-
-## Pipeline Overview
-
-In unified rendering, splat data flows from resources through a **Copy** operation into the work buffer:
-
-```mermaid
-flowchart LR
-    subgraph Resources[GSplat Resources]
-        Loaded[Loaded Splats]
-        Container[GSplatContainer]
-    end
-
-    Copy([Copy])
-
-    WorkBuffer[Work Buffer]
-
-    Sort([Sort])
-
-    Render([Render])
-
-    Loaded --> Copy
-    Container --> Copy
-    Copy --> WorkBuffer
-    WorkBuffer --> Sort
-    Sort --> Render
-
-    style Copy stroke:#f90,stroke-width:3px
-```
-
-The Copy operation runs for each gsplat component and can be customized per-component using `setWorkBufferModifier()`.
-
-## Customizing the Copy Operation
-
-Use `setWorkBufferModifier()` on each gsplat component to customize how its splats are copied to the work buffer.
-
-### Modifier Functions
-
-Your modifier code must implement three functions:
-
-| Function | Purpose |
-|----------|---------|
-| `modifySplatCenter(inout vec3 center)` | Modify splat position |
-| `modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale)` | Modify rotation and scale |
-| `modifySplatColor(vec3 center, inout vec4 color)` | Modify color and write to extra streams |
-
-`modifySplatCenter` always executes first. You can use it to sample extra streams and store values in global variables, or execute code shared between the three functions.
-
-### Basic Example
-
-```javascript
-entity.gsplat.setWorkBufferModifier({
-    glsl: `
-        void modifySplatCenter(inout vec3 center) {
-            // Offset all splats upward
-            center.y += 1.0;
-        }
-        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
-                                       inout vec4 rotation, inout vec3 scale) {}
-        void modifySplatColor(vec3 center, inout vec4 color) {
-            // Tint splats red
-            color.rgb *= vec3(1.0, 0.5, 0.5);
-        }
-    `,
-    wgsl: `
-        fn modifySplatCenter(center: ptr<function, vec3f>) {
-            (*center).y += 1.0;
-        }
-        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
-                                     rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
-        fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
-            *color = vec4f((*color).rgb * vec3f(1.0, 0.5, 0.5), (*color).a);
-        }
-    `
+entity.addComponent('gsplat', {
+    asset: splatAsset,
+    castShadows: true
 });
 ```
 
-## Adding Extra Streams
-
-By default, the work buffer contains standard splat data (position, color, rotation, scale). You can add additional streams to store custom per-splat data:
+You'll also need a light with shadow casting enabled:
 
 ```javascript
-// Add a stream to store component IDs (R32U = unsigned int)
-app.scene.gsplat.format.addExtraStreams([
-    { name: 'splatId', format: pc.PIXELFORMAT_R32U }
-]);
+entity.light.castShadows = true;
 ```
 
-Common stream formats:
+## Shadow Quality
 
-- `PIXELFORMAT_R32U` - Single unsigned integer (e.g., component IDs)
-- `PIXELFORMAT_RGBA8` - 4 bytes (e.g., packed data)
-- `PIXELFORMAT_RGBA16F` - 4 half floats (e.g., custom attributes)
-- `PIXELFORMAT_RGBA32F` - 4 floats (e.g., high precision data)
+For better shadow quality, you can adjust the alpha clip threshold. This controls how transparent splats contribute to shadows — lower values include more semi-transparent splats in the shadow, while higher values create sharper but potentially incomplete shadows.
 
-:::note
+### Unified Mode
 
-Streams cannot be removed once added. The `GSPLAT_STREAM_INSTANCE` storage option is ignored for work buffer formats.
-
-:::
-
-## Writing to Extra Streams
-
-For each extra stream, a write function is generated: `write{StreamName}()`. For example, a stream named `splatId` generates `writeSplatId()`.
-
-:::note
-
-Each `setWorkBufferModifier` must write to **all** extra streams defined in the work buffer format. All components share the same work buffer format, so their modifiers must be consistent.
-
-:::
+In unified rendering mode, set the alpha clip threshold on the global GSplat settings:
 
 ```javascript
-entity.gsplat.setWorkBufferModifier({
-    glsl: `
-        uniform uint uComponentId;
-
-        void modifySplatCenter(inout vec3 center) {}
-        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
-                                       inout vec4 rotation, inout vec3 scale) {}
-        void modifySplatColor(vec3 center, inout vec4 color) {
-            // Write component ID to the splatId stream
-            writeSplatId(uvec4(uComponentId, 0u, 0u, 0u));
-        }
-    `,
-    wgsl: `
-        uniform uComponentId: u32;
-
-        fn modifySplatCenter(center: ptr<function, vec3f>) {}
-        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
-                                     rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
-        fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
-            writeSplatId(vec4u(uniform.uComponentId, 0u, 0u, 0u));
-        }
-    `
-});
+app.scene.gsplat.alphaClip = 0.4;
 ```
 
-## Passing Uniforms
+### Non-Unified Mode
 
-Use `setParameter()`, `getParameter()`, and `deleteParameter()` on the component to manage uniform values:
+In non-unified mode, set the alpha clip threshold directly on the component's material:
 
 ```javascript
-// Set a uniform
-entity.gsplat.setParameter('uComponentId', componentIndex);
-
-// Get a uniform value
-const id = entity.gsplat.getParameter('uComponentId');
-
-// Delete a uniform
-entity.gsplat.deleteParameter('uComponentId');
+entity.gsplat.material.setParameter('alphaClip', 0.4);
 ```
 
-Supported uniform types:
+## Receiving Shadows
 
-- Numbers (int, float, uint)
-- Arrays (vec2, vec3, vec4, mat4, etc.)
-- `Texture` objects
-- `StorageBuffer` objects
+Splats cannot directly receive shadows from other objects. However, you can work around this limitation by using a shadow catcher - an invisible mesh that approximates the splat's shape and writes to the depth buffer to receive shadows.
 
-## Reading Source Data
-
-In the copy modifier, you can read the original splat data using load functions generated from the [splat data format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format). For example, with the default format:
-
-- `loadDataColor()` - Returns `vec4` color
-- `loadDataCenter()` - Returns `vec4` position (xyz) + extra data (w)
-- `loadDataScale()` - Returns `vec4` scale
-- `loadDataRotation()` - Returns `vec4` rotation quaternion
-
-### Reading from Different Indices
-
-Each load function has a `WithIndex` variant to read from a specific splat index:
-
-```glsl
-// GLSL - Read neighbor splat data
-vec4 neighborCenter = loadDataCenterWithIndex(neighborIndex);
-```
-
-To read multiple attributes from the same different index, use `setSplat()` to change the current index:
-
-```glsl
-// GLSL - Read multiple attributes from another splat
-setSplat(otherIndex);
-vec3 otherPos = getCenter();
-vec4 otherColor = getColor();
-```
-
-See [Splat Data Format - Shader Access](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format#shader-access) for more details.
-
-## Live Example
-
-See the LOD Instances example which demonstrates:
-
-- Adding a `splatId` stream to the work buffer
-- Writing component IDs during copy using `setWorkBufferModifier()`
-- Passing uniforms with `setParameter()`
-
-## See Also
-
-- [Work Buffer Rendering](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) - Customizing the render operation
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
-
---------------------------------------------------------------------------------
-
-## Work Buffer Rendering
-
-URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering/
-
-The render operation draws sorted splats from the work buffer. You can customize this globally to apply effects, read custom data written during copy, or modify how all splats appear.
-
-:::info Beta Feature
-
-Work Buffer Rendering customization is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
-:::note
-
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
-
-:::
-
-## Pipeline Overview
-
-After splats are copied to the work buffer and sorted, the **Render** operation draws them:
-
-```mermaid
-flowchart LR
-    subgraph Resources[GSplat Resources]
-        Loaded[Loaded Splats]
-        Container[GSplatContainer]
-    end
-
-    Copy([Copy])
-
-    WorkBuffer[Work Buffer]
-
-    Sort([Sort])
-
-    Render([Render])
-
-    Loaded --> Copy
-    Container --> Copy
-    Copy --> WorkBuffer
-    WorkBuffer --> Sort
-    Sort --> Render
-
-    style Render stroke:#09f,stroke-width:3px
-```
-
-Unlike the copy modifier (per-component), the render modifier is **global** and applies to all splats rendered from the work buffer.
-
-## Customizing the Render Operation
-
-Use `getShaderChunks()` on the scene's gsplat material to set the `gsplatModifyVS` shader chunk:
-
-```javascript
-const glslModifier = `
-    void modifySplatCenter(inout vec3 center) {}
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
-                                   inout vec4 rotation, inout vec3 scale) {}
-    void modifySplatColor(vec3 center, inout vec4 color) {
-        // Apply global color grading
-        color.rgb = pow(color.rgb, vec3(0.8));
-    }
-`;
-
-const wgslModifier = `
-    fn modifySplatCenter(center: ptr<function, vec3f>) {}
-    fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
-                                 rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
-    fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
-        *color = vec4f(pow((*color).rgb, vec3f(0.8)), (*color).a);
-    }
-`;
-
-app.scene.gsplat.material.getShaderChunks('glsl').set('gsplatModifyVS', glslModifier);
-app.scene.gsplat.material.getShaderChunks('wgsl').set('gsplatModifyVS', wgslModifier);
-app.scene.gsplat.material.update();
-```
-
-### Modifier Functions
-
-Your modifier code must implement three functions:
-
-| Function | Purpose |
-|----------|---------|
-| `modifySplatCenter(inout vec3 center)` | Modify splat position |
-| `modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale)` | Modify rotation and scale |
-| `modifySplatColor(vec3 center, inout vec4 color)` | Modify color based on work buffer data |
-
-`modifySplatCenter` always executes first. You can use it to sample extra streams and store values in global variables, or execute code shared between the three functions.
-
-### Removing the Modifier
-
-To remove customization and restore default rendering:
-
-```javascript
-app.scene.gsplat.material.getShaderChunks('glsl').delete('gsplatModifyVS');
-app.scene.gsplat.material.getShaderChunks('wgsl').delete('gsplatModifyVS');
-app.scene.gsplat.material.update();
-```
-
-## Reading Extra Stream Data
-
-If you added extra streams to the [work buffer format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) and wrote data during the copy operation, you can read it during rendering using load functions.
-
-For each extra stream, a load function is generated: `load{StreamName}()`. For example, a stream named `splatId` generates `loadSplatId()`:
-
-```javascript
-const glslModifier = `
-    uniform sampler2D uColorLookup;
-
-    void modifySplatCenter(inout vec3 center) {}
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
-                                   inout vec4 rotation, inout vec3 scale) {}
-    void modifySplatColor(vec3 center, inout vec4 color) {
-        // Read component ID written during copy
-        uint id = loadSplatId().r;
-
-        // Look up color from texture based on component ID
-        vec3 tintColor = texelFetch(uColorLookup, ivec2(int(id), 0), 0).rgb;
-        color.rgb *= tintColor;
-    }
-`;
-```
-
-### Generated Load Functions
-
-For each extra stream, two load functions are generated:
-
-| Function | Description |
-|----------|-------------|
-| `load{StreamName}()` | Reads from current splat |
-| `load{StreamName}WithIndex(index)` | Reads from a specific splat index |
-
-The return type depends on the stream's pixel format:
-
-- **Float formats** (e.g., `PIXELFORMAT_RGBA32F`, `PIXELFORMAT_RGBA16F`) → `vec4`
-- **Unsigned integer formats** (e.g., `PIXELFORMAT_R32U`) → `uvec4`
-- **Signed integer formats** → `ivec4`
-
-Examples:
-
-| Stream Name | Load Functions |
-|-------------|----------------|
-| `splatId` | `loadSplatId()`, `loadSplatIdWithIndex(index)` → `uvec4` |
-| `customData` | `loadCustomData()`, `loadCustomDataWithIndex(index)` → `vec4` |
-
-To read multiple attributes from a different index, use `setSplat(index)` to change the current splat:
-
-```glsl
-setSplat(otherIndex);
-uint otherId = loadSplatId().r;
-vec4 otherData = loadCustomData();
-```
-
-## Passing Uniforms
-
-Use `setParameter()` on the scene's gsplat material to pass uniform values:
-
-```javascript
-// Create a color lookup texture
-const colorTexture = new pc.Texture(device, {
-    width: 256,
-    height: 1,
-    format: pc.PIXELFORMAT_RGBA32F,
-    // ... other options
-});
-
-// Pass texture to the render shader
-app.scene.gsplat.material.setParameter('uColorLookup', colorTexture);
-```
-
-## Use Cases
-
-### Per-Component Coloring
-
-Combined with [work buffer format customization](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format), you can identify which component each splat belongs to and apply unique colors:
-
-1. During copy: Write component ID to an extra stream
-2. During render: Read the ID and look up a color from a texture
-
-```javascript
-const glslModifier = `
-    uniform sampler2D uColorLookup;
-    uint componentId;  // Global variable accessible by all modifier functions
-
-    void modifySplatCenter(inout vec3 center) {
-        // Read ID from work buffer (can be used in other functions)
-        componentId = loadSplatId().r;
-    }
-    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
-                                   inout vec4 rotation, inout vec3 scale) {}
-    void modifySplatColor(vec3 center, inout vec4 color) {
-        // Look up color from texture based on component ID
-        vec3 tintColor = texelFetch(uColorLookup, ivec2(int(componentId), 0), 0).rgb;
-        color.rgb *= tintColor;
-    }
-`;
-```
-
-## Live Example
-
-See the LOD Instances example which demonstrates:
-
-- Reading component IDs written during copy
-- Looking up colors from a texture
-- Applying per-component tinting with animated colors
-
-## See Also
-
-- [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - Customizing the copy operation
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+See [3DGS with Physics and Relighting](https://playcanvas.com/project/1358087/overview/3dgs-with-physics-and-relighting) for an example of this technique in action.
 
 --------------------------------------------------------------------------------
 
@@ -21896,6 +20834,1000 @@ for (let c = 0; c < shCoeffs; c++) {
 * Additional optional properties may appear in future versions; readers **should** ignore unrecognized fields.
 
 ---
+
+--------------------------------------------------------------------------------
+
+## Splat Rendering Architecture
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/
+
+PlayCanvas renders Gaussian splats through a shared pipeline that sorts all splats from every GSplat component together. This global sorting ensures correct rendering order across the entire scene and provides access to advanced features like procedural splats, LOD streaming, and GPU-based splat processing.
+
+## Global Sorting
+
+All splats from all GSplat components are sorted together in a single global sort, rather than each component being sorted and ordered independently by its bounding box. Sorting everything together avoids:
+
+- **Visibility artifacts** when splat components overlap
+- **Popping effects** as the camera moves and component order changes
+- **Incorrect depth sorting** between splats from different components
+
+## Architecture Overview
+
+The rendering pipeline consists of data storage and operations:
+
+```mermaid
+flowchart LR
+    subgraph Resources[GSplat Resources]
+        Loaded[Loaded Splats<br/>ply/sog/LOD]
+        Container[GSplatContainer<br/>procedural]
+    end
+
+    Copy([Copy])
+
+    WorkBuffer[Work Buffer<br/>per camera/layer]
+
+    Sort([Sort])
+
+    Render([Render])
+
+    Loaded --> Copy
+    Container --> Copy
+    Copy --> WorkBuffer
+    WorkBuffer --> Sort
+    Sort --> Render
+```
+
+### GSplat Resources
+
+GSplat resources are the source data for splats. They come in two forms:
+
+1. **Loaded splats**: Imported from files (`.ply`, `.sog`) or streamed via [LOD streaming](/user-manual/gaussian-splatting/building/lod-streaming)
+2. **Procedural splats**: Created programmatically using [GSplatContainer](/user-manual/gaussian-splatting/building/procedural-splats/)
+
+Each resource stores splat data in GPU textures according to a [data format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format).
+
+### Work Buffers
+
+Work buffers are automatically created for each camera/layer combination that renders GSplat components. They serve as an intermediate storage where:
+
+1. All splat data from visible components is **copied** into the work buffer
+2. Splats are **globally sorted** by depth relative to the camera
+3. The sorted data is ready for rendering
+
+This architecture enables features that require access to all splats together, such as global sorting and cross-component effects.
+
+### Camera Render
+
+When a camera renders a layer containing GSplat components, it draws the sorted splats from the work buffer. This ensures correct depth ordering regardless of how many splat components exist or how they overlap.
+
+## Live Example
+
+The Global Sorting example demonstrates how sorting all splats together eliminates artifacts when rendering multiple overlapping splat components.
+
+## Benefits
+
+- **Improved Visual Quality**: Eliminates artifacts when rendering multiple overlapping splat components
+- **Consistent Rendering**: Maintains correct depth sorting regardless of camera position
+- **Better Scene Composition**: Enables complex scenes with many splat components
+- **Advanced Features**: Unlocks procedural splats, LOD streaming, and GPU processing
+
+## Advanced Features
+
+The following features build on this rendering pipeline:
+
+- [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format) - Custom texture formats for splat data
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/) - Create splats programmatically
+- [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming) - Dynamic level-of-detail loading
+- [Splat Processing](/user-manual/gaussian-splatting/rendering-architecture/splat-processing) - GPU-based splat manipulation
+
+## See Also
+
+- [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
+- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order)
+
+--------------------------------------------------------------------------------
+
+## Splat Data Format
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-data-format/
+
+`GSplatFormat` describes how splat data is stored in GPU textures and generates the shader code needed to read that data. It defines texture streams (name and pixel format) and shader code for extracting splat attributes.
+
+:::info Beta Feature
+
+Splat Data Format is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+
+:::
+
+:::note
+
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
+
+:::
+
+## Overview
+
+GSplat data is stored in GPU textures called **streams**. Each stream has a name and pixel format (e.g., `PIXELFORMAT_RGBA32F`). The `GSplatFormat` defines these streams and the shader code that reads splat attributes from them.
+
+## Shader Access
+
+The format generates shader functions to read splat data from texture streams. These functions use a global `splat` struct that identifies which splat to read.
+
+### Current Splat Index
+
+By default, each splat reads its own data. To read from a different splat, use `setSplat(index)`:
+
+```glsl
+// GLSL
+setSplat(otherIndex);  // Set the splat index for subsequent reads
+vec3 pos = getCenter(); // Now reads from otherIndex
+```
+
+```wgsl
+// WGSL
+setSplat(otherIndex);
+let pos = getCenter();
+```
+
+### Load Functions
+
+For each stream, two load functions are generated:
+
+| Function | Description |
+|----------|-------------|
+| `load{StreamName}()` | Reads from current `splat.uv` (set by `setSplat()`) |
+| `load{StreamName}WithIndex(index)` | Reads directly from a specific index |
+
+For example, a stream named `dataCenter` generates:
+
+- `loadDataCenter()` - reads using current splat index
+- `loadDataCenterWithIndex(index)` - reads from specified index
+
+```glsl
+// GLSL - Read from specific index without changing current splat
+vec4 otherCenter = loadDataCenterWithIndex(neighborIndex);
+```
+
+```wgsl
+// WGSL
+let otherCenter = loadDataCenterWithIndex(neighborIndex);
+```
+
+This is useful when you need to access neighbor splats or compare data across multiple splats.
+
+## Format for Loaded Resources
+
+When you load a gsplat resource (PLY, SOG, or LOD format), the format is **automatically created** based on the file's data. You don't need to create or configure it manually.
+
+### Accessing the Format
+
+You can access the format through the resource:
+
+```javascript
+const format = entity.gsplat.resource.format;
+```
+
+### Adding Extra Streams to Resources
+
+You can add extra streams to a resource's format to store custom per-splat data. Each stream has a **storage type** that determines how textures are allocated:
+
+:::note
+
+Extra streams are not supported for LOD streaming resources. LOD resources dynamically load and unload data as needed, and custom extra streams cannot be preserved across these operations.
+
+:::
+
+| Storage Type | Description |
+|-------------|-------------|
+| `GSPLAT_STREAM_RESOURCE` | Texture is shared across all component instances using this resource (default) |
+| `GSPLAT_STREAM_INSTANCE` | Texture is created per gsplat component instance |
+
+#### Resource-Level Streams
+
+Use `GSPLAT_STREAM_RESOURCE` (or omit `storage`) when the data is the same for all instances of a resource:
+
+```javascript
+// Add a stream shared across all instances
+resource.format.addExtraStreams([
+    { name: 'customData', format: pc.PIXELFORMAT_RGBA8 }
+]);
+
+// Access the shared texture
+const texture = resource.streams.getTexture('customData');
+```
+
+#### Instance-Level Streams
+
+Use `GSPLAT_STREAM_INSTANCE` when each component instance needs its own texture data:
+
+```javascript
+// Add a per-instance stream
+resource.format.addExtraStreams([
+    { name: 'instanceTint', format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE }
+]);
+
+// Access the instance texture via the component
+const texture = entity.gsplat.getInstanceTexture('instanceTint');
+if (texture) {
+    const data = texture.lock();
+    // Fill texture data per splat...
+    texture.unlock();
+}
+```
+
+Common stream formats:
+
+- `PIXELFORMAT_RGBA8` - 4 bytes (e.g., packed flags or tint colors)
+- `PIXELFORMAT_RGBA16F` - 4 half floats (e.g., custom attributes)
+- `PIXELFORMAT_RGBA32F` - 4 floats (e.g., high precision data)
+
+:::note
+
+Streams cannot be removed once added.
+
+:::
+
+## Format for Procedural Splats
+
+When creating [procedural splats](/user-manual/gaussian-splatting/building/procedural-splats/) with `GSplatContainer`, you need to explicitly create and configure a format. PlayCanvas provides built-in formats for common cases, and you can also create custom formats with your own streams and shader code.
+
+See [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/) for details on:
+
+- Built-in formats (`createDefaultFormat`, `createSimpleFormat`)
+- Creating custom formats with custom streams
+- Writing shader code to read your custom data
+
+## Work Buffer Format
+
+The work buffer has its own format for storing intermediate splat data during unified rendering. You can add extra streams to it for customization during copy and render operations.
+
+See [Work Buffer Format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) for details on:
+
+- Adding extra streams to the work buffer
+- Customizing the copy operation with `setWorkBufferModifier()`
+- Writing and reading custom data
+
+## See Also
+
+- [GSplatFormat API](https://api.playcanvas.com/engine/classes/GSplatFormat.html)
+- [Work Buffer Format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) - Customizing the copy operation
+- [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) - Customizing the render operation
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/) - Creating splats programmatically
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
+
+--------------------------------------------------------------------------------
+
+## Splat Processing
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-processing/
+
+`GSplatProcessor` enables GPU-based processing of Gaussian Splat data using custom shader code. It reads from source texture streams and writes results to destination streams, enabling operations like painting, selection, deletion, and custom data transforms.
+
+:::info Beta Feature
+
+Splat Processing is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+
+:::
+
+:::note
+
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
+
+:::
+
+## Overview
+
+Gaussian Splats store per-splat attributes (position, rotation, scale, color) in texture streams. Additional custom streams can be added using extra streams on the [splat data format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format).
+
+`GSplatProcessor` provides a way to modify this data on the GPU:
+
+- **Read** from source streams using generated load functions
+- **Write** to destination streams using generated write functions
+- **Process** all splats in parallel on the GPU
+
+This is useful for:
+
+- Painting/coloring splats based on brush position
+- Marking splats for selection or deletion
+- Transforming splat data
+- Custom per-splat effects
+
+## Basic Usage
+
+### 1. Create the Processor
+
+Create a processor by specifying the source (where to read splat data from), destination (which streams to write to), and the shader code that processes each splat:
+
+```javascript
+const processor = new pc.GSplatProcessor(
+    app.graphicsDevice,
+    { component: entity.gsplat },                           // source
+    { component: entity.gsplat, streams: ['customColor'] }, // destination
+    {
+        processGLSL: `
+            uniform vec4 uBrushSphere;  // xyz = position, w = radius
+            uniform vec4 uBrushColor;
+
+            void process() {
+                vec3 center = getCenter();
+                float dist = distance(center, uBrushSphere.xyz);
+                if (dist < uBrushSphere.w) {
+                    writeCustomColor(uBrushColor);
+                } else {
+                    writeCustomColor(vec4(0.0));
+                }
+            }
+        `,
+        processWGSL: `
+            uniform uBrushSphere: vec4f;
+            uniform uBrushColor: vec4f;
+
+            fn process() {
+                let center = getCenter();
+                let dist = distance(center, uniform.uBrushSphere.xyz);
+                if (dist < uniform.uBrushSphere.w) {
+                    writeCustomColor(uniform.uBrushColor);
+                } else {
+                    writeCustomColor(vec4f(0.0));
+                }
+            }
+        `
+    }
+);
+```
+
+### 2. Set Parameters and Execute
+
+Set uniforms for the processing shader, then execute to process all splats:
+
+```javascript
+// Set uniforms for the processing shader
+processor.setParameter('uBrushSphere', [x, y, z, radius]);
+processor.setParameter('uBrushColor', [1, 0, 0, 1]);
+
+// Execute the processing pass
+processor.process();
+```
+
+## Constructor
+
+```javascript
+new pc.GSplatProcessor(device, source, destination, options)
+```
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `device` | GraphicsDevice | The graphics device |
+| `source` | GSplatProcessorBinding | Source data binding |
+| `destination` | GSplatProcessorBinding | Destination data binding |
+| `options.processGLSL` | string | GLSL shader code (required for WebGL) |
+| `options.processWGSL` | string | WGSL shader code (required for WebGPU) |
+
+### GSplatProcessorBinding
+
+```typescript
+{
+    resource?: GSplatResourceBase,  // Direct resource reference
+    component?: GSplatComponent,    // Component (resource resolved automatically)
+    streams?: string[]              // Stream names to bind
+}
+```
+
+If instance streams (`GSPLAT_STREAM_INSTANCE`) are used, `component` must be specified to access those per-component textures.
+
+For source, if `streams` is omitted, format streams are automatically bound with the standard `getCenter()`, `getColor()`, `getRotation()`, `getScale()` functions. When source and destination resources are different, all streams from the source can be read. When they are the same resource, streams being written to cannot be read from.
+
+For destination, `streams` is required and specifies which streams to write to.
+
+### Different Resource Sizes
+
+The source and destination resources can have different numbers of splats. The `process()` function executes once for each **destination** splat. The current destination splat index is available via `splat.index`:
+
+```glsl
+void process() {
+    uint destIndex = splat.index;  // Current destination splat index
+
+    // Calculate which source splat to read from
+    uint sourceIndex = destIndex * 2;  // Example: sample every other splat
+    setSplat(sourceIndex);
+    vec3 srcPos = getCenter();
+
+    // Write to destination
+    writePosition(vec4(srcPos, 1.0));
+}
+```
+
+You can also read from any source splat using `load{StreamName}WithIndex()` without changing the current splat context.
+
+This enables operations like:
+
+- Copying data from a larger source to a smaller destination (downsampling)
+- Generating destination splats from sampled source data
+- Mapping between resources with different splat counts
+
+## Shader Functions
+
+### Built-in Uniforms
+
+The following uniforms are automatically available in processing shaders:
+
+| Uniform | Type | Description |
+|---------|------|-------------|
+| `srcNumSplats` | `uint` | Number of splats in source resource |
+| `dstNumSplats` | `uint` | Number of splats in destination resource |
+
+Padding pixels (where `splat.index >= dstNumSplats`) are automatically skipped by the processor.
+
+### Reading (Source)
+
+When source streams aren't specified, the processor provides:
+
+| Function | Return | Description |
+|----------|--------|-------------|
+| `getCenter()` | `vec3` | Splat position (must be called first) |
+| `getColor()` | `vec4` | Splat color |
+| `getRotation()` | `vec4` | Rotation quaternion |
+| `getScale()` | `vec3` | Splat scale |
+
+### Reading from Different Indices
+
+By default, each splat reads its own data. To read from a different splat, use `setSplat(index)`:
+
+```glsl
+// GLSL - Read from neighbor splat
+setSplat(neighborIndex);
+vec3 neighborPos = getCenter();
+vec4 neighborColor = getColor();
+```
+
+Each load function also has a `WithIndex` variant for direct index access:
+
+```glsl
+// GLSL - Read specific stream from another index
+vec4 otherCenter = loadDataCenterWithIndex(neighborIndex);
+```
+
+This is useful for algorithms that need to compare or combine data from multiple splats.
+
+### Writing (Destination)
+
+For each destination stream, a write function is generated: `write{StreamName}(value)`.
+
+For example, a stream named `customColor` generates `writeCustomColor(vec4 value)`.
+
+## API
+
+### setParameter(name, value)
+
+Sets a shader uniform parameter.
+
+```javascript
+// Scalar
+processor.setParameter('uRadius', 0.5);
+
+// Vector (as array)
+processor.setParameter('uBrushPos', [x, y, z]);
+
+// Texture
+processor.setParameter('uBrushTex', brushTexture);
+```
+
+### getParameter(name)
+
+Gets a previously set parameter value.
+
+### deleteParameter(name)
+
+Removes a parameter.
+
+### process()
+
+Executes the processing pass, reading from source and writing to destination.
+
+### destroy()
+
+Releases all GPU resources. Call when done with the processor.
+
+### blendState
+
+Property for setting blend state (useful for accumulative effects like additive painting):
+
+```javascript
+processor.blendState = pc.BlendState.ADDBLEND;
+```
+
+## Use Cases
+
+### Painting
+
+Paint splats within a brush radius with a color:
+
+```glsl
+void process() {
+    vec3 center = getCenter();
+    float dist = distance(center, uBrushPos.xyz);
+    if (dist < uBrushRadius) {
+        float falloff = 1.0 - (dist / uBrushRadius);
+        writeCustomColor(uBrushColor * falloff);
+    } else {
+        writeCustomColor(vec4(0.0));
+    }
+}
+```
+
+### Selection
+
+Mark splats inside an AABB as selected:
+
+```glsl
+void process() {
+    vec3 center = getCenter();
+    bool inside = all(greaterThan(center, uSelectionMin)) &&
+                  all(lessThan(center, uSelectionMax));
+    writeSelection(inside ? vec4(1.0) : vec4(0.0));
+}
+```
+
+### Deletion (Visibility)
+
+Mark splats as invisible:
+
+```glsl
+void process() {
+    vec3 center = getCenter();
+    float visible = distance(center, uDeletePos) > uDeleteRadius ? 1.0 : 0.0;
+    writeVisible(vec4(visible));
+}
+```
+
+## Live Examples
+
+- Paint example - Demonstrates painting splats with a brush
+
+- Editor example - Demonstrates selection, deletion, and cloning
+
+## See Also
+
+- [GSplatProcessor API](https://api.playcanvas.com/engine/classes/GSplatProcessor.html)
+- [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
+
+--------------------------------------------------------------------------------
+
+## Work Buffer Format
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format/
+
+The work buffer format defines the data streams available in the work buffer and how splat data is copied from resources. You can customize the copy operation to transform splats and write additional per-component data.
+
+:::info Beta Feature
+
+Work Buffer Format customization is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+
+:::
+
+:::note
+
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
+
+:::
+
+## Pipeline Overview
+
+In unified rendering, splat data flows from resources through a **Copy** operation into the work buffer:
+
+```mermaid
+flowchart LR
+    subgraph Resources[GSplat Resources]
+        Loaded[Loaded Splats]
+        Container[GSplatContainer]
+    end
+
+    Copy([Copy])
+
+    WorkBuffer[Work Buffer]
+
+    Sort([Sort])
+
+    Render([Render])
+
+    Loaded --> Copy
+    Container --> Copy
+    Copy --> WorkBuffer
+    WorkBuffer --> Sort
+    Sort --> Render
+
+    style Copy stroke:#f90,stroke-width:3px
+```
+
+The Copy operation runs for each gsplat component and can be customized per-component using `setWorkBufferModifier()`.
+
+## Customizing the Copy Operation
+
+Use `setWorkBufferModifier()` on each gsplat component to customize how its splats are copied to the work buffer.
+
+### Modifier Functions
+
+Your modifier code must implement three functions:
+
+| Function | Purpose |
+|----------|---------|
+| `modifySplatCenter(inout vec3 center)` | Modify splat position |
+| `modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale)` | Modify rotation and scale |
+| `modifySplatColor(vec3 center, inout vec4 color)` | Modify color and write to extra streams |
+
+`modifySplatCenter` always executes first. You can use it to sample extra streams and store values in global variables, or execute code shared between the three functions.
+
+### Basic Example
+
+```javascript
+entity.gsplat.setWorkBufferModifier({
+    glsl: `
+        void modifySplatCenter(inout vec3 center) {
+            // Offset all splats upward
+            center.y += 1.0;
+        }
+        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
+                                       inout vec4 rotation, inout vec3 scale) {}
+        void modifySplatColor(vec3 center, inout vec4 color) {
+            // Tint splats red
+            color.rgb *= vec3(1.0, 0.5, 0.5);
+        }
+    `,
+    wgsl: `
+        fn modifySplatCenter(center: ptr<function, vec3f>) {
+            (*center).y += 1.0;
+        }
+        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
+                                     rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
+        fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
+            *color = vec4f((*color).rgb * vec3f(1.0, 0.5, 0.5), (*color).a);
+        }
+    `
+});
+```
+
+## Adding Extra Streams
+
+By default, the work buffer contains standard splat data (position, color, rotation, scale). You can add additional streams to store custom per-splat data:
+
+```javascript
+// Add a stream to store component IDs (R32U = unsigned int)
+app.scene.gsplat.format.addExtraStreams([
+    { name: 'splatId', format: pc.PIXELFORMAT_R32U }
+]);
+```
+
+Common stream formats:
+
+- `PIXELFORMAT_R32U` - Single unsigned integer (e.g., component IDs)
+- `PIXELFORMAT_RGBA8` - 4 bytes (e.g., packed data)
+- `PIXELFORMAT_RGBA16F` - 4 half floats (e.g., custom attributes)
+- `PIXELFORMAT_RGBA32F` - 4 floats (e.g., high precision data)
+
+:::note
+
+Streams cannot be removed once added. The `GSPLAT_STREAM_INSTANCE` storage option is ignored for work buffer formats.
+
+:::
+
+## Writing to Extra Streams
+
+For each extra stream, a write function is generated: `write{StreamName}()`. For example, a stream named `splatId` generates `writeSplatId()`.
+
+:::note
+
+Each `setWorkBufferModifier` must write to **all** extra streams defined in the work buffer format. All components share the same work buffer format, so their modifiers must be consistent.
+
+:::
+
+```javascript
+entity.gsplat.setWorkBufferModifier({
+    glsl: `
+        uniform uint uComponentId;
+
+        void modifySplatCenter(inout vec3 center) {}
+        void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
+                                       inout vec4 rotation, inout vec3 scale) {}
+        void modifySplatColor(vec3 center, inout vec4 color) {
+            // Write component ID to the splatId stream
+            writeSplatId(uvec4(uComponentId, 0u, 0u, 0u));
+        }
+    `,
+    wgsl: `
+        uniform uComponentId: u32;
+
+        fn modifySplatCenter(center: ptr<function, vec3f>) {}
+        fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
+                                     rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
+        fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
+            writeSplatId(vec4u(uniform.uComponentId, 0u, 0u, 0u));
+        }
+    `
+});
+```
+
+## Passing Uniforms
+
+Use `setParameter()`, `getParameter()`, and `deleteParameter()` on the component to manage uniform values:
+
+```javascript
+// Set a uniform
+entity.gsplat.setParameter('uComponentId', componentIndex);
+
+// Get a uniform value
+const id = entity.gsplat.getParameter('uComponentId');
+
+// Delete a uniform
+entity.gsplat.deleteParameter('uComponentId');
+```
+
+Supported uniform types:
+
+- Numbers (int, float, uint)
+- Arrays (vec2, vec3, vec4, mat4, etc.)
+- `Texture` objects
+- `StorageBuffer` objects
+
+## Reading Source Data
+
+In the copy modifier, you can read the original splat data using load functions generated from the [splat data format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format). For example, with the default format:
+
+- `loadDataColor()` - Returns `vec4` color
+- `loadDataCenter()` - Returns `vec4` position (xyz) + extra data (w)
+- `loadDataScale()` - Returns `vec4` scale
+- `loadDataRotation()` - Returns `vec4` rotation quaternion
+
+### Reading from Different Indices
+
+Each load function has a `WithIndex` variant to read from a specific splat index:
+
+```glsl
+// GLSL - Read neighbor splat data
+vec4 neighborCenter = loadDataCenterWithIndex(neighborIndex);
+```
+
+To read multiple attributes from the same different index, use `setSplat()` to change the current index:
+
+```glsl
+// GLSL - Read multiple attributes from another splat
+setSplat(otherIndex);
+vec3 otherPos = getCenter();
+vec4 otherColor = getColor();
+```
+
+See [Splat Data Format - Shader Access](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format#shader-access) for more details.
+
+## Live Example
+
+See the LOD Instances example which demonstrates:
+
+- Adding a `splatId` stream to the work buffer
+- Writing component IDs during copy using `setWorkBufferModifier()`
+- Passing uniforms with `setParameter()`
+
+## See Also
+
+- [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) - Customizing the render operation
+- [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
+
+--------------------------------------------------------------------------------
+
+## Work Buffer Rendering
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering/
+
+The render operation draws sorted splats from the work buffer. You can customize this globally to apply effects, read custom data written during copy, or modify how all splats appear.
+
+:::info Beta Feature
+
+Work Buffer Rendering customization is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
+
+:::
+
+:::note
+
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
+
+:::
+
+## Pipeline Overview
+
+After splats are copied to the work buffer and sorted, the **Render** operation draws them:
+
+```mermaid
+flowchart LR
+    subgraph Resources[GSplat Resources]
+        Loaded[Loaded Splats]
+        Container[GSplatContainer]
+    end
+
+    Copy([Copy])
+
+    WorkBuffer[Work Buffer]
+
+    Sort([Sort])
+
+    Render([Render])
+
+    Loaded --> Copy
+    Container --> Copy
+    Copy --> WorkBuffer
+    WorkBuffer --> Sort
+    Sort --> Render
+
+    style Render stroke:#09f,stroke-width:3px
+```
+
+Unlike the copy modifier (per-component), the render modifier is **global** and applies to all splats rendered from the work buffer.
+
+## Customizing the Render Operation
+
+Use `getShaderChunks()` on the scene's gsplat material to set the `gsplatModifyVS` shader chunk:
+
+```javascript
+const glslModifier = `
+    void modifySplatCenter(inout vec3 center) {}
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
+                                   inout vec4 rotation, inout vec3 scale) {}
+    void modifySplatColor(vec3 center, inout vec4 color) {
+        // Apply global color grading
+        color.rgb = pow(color.rgb, vec3(0.8));
+    }
+`;
+
+const wgslModifier = `
+    fn modifySplatCenter(center: ptr<function, vec3f>) {}
+    fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f,
+                                 rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
+    fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
+        *color = vec4f(pow((*color).rgb, vec3f(0.8)), (*color).a);
+    }
+`;
+
+app.scene.gsplat.material.getShaderChunks('glsl').set('gsplatModifyVS', glslModifier);
+app.scene.gsplat.material.getShaderChunks('wgsl').set('gsplatModifyVS', wgslModifier);
+app.scene.gsplat.material.update();
+```
+
+### Modifier Functions
+
+Your modifier code must implement three functions:
+
+| Function | Purpose |
+|----------|---------|
+| `modifySplatCenter(inout vec3 center)` | Modify splat position |
+| `modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale)` | Modify rotation and scale |
+| `modifySplatColor(vec3 center, inout vec4 color)` | Modify color based on work buffer data |
+
+`modifySplatCenter` always executes first. You can use it to sample extra streams and store values in global variables, or execute code shared between the three functions.
+
+### Removing the Modifier
+
+To remove customization and restore default rendering:
+
+```javascript
+app.scene.gsplat.material.getShaderChunks('glsl').delete('gsplatModifyVS');
+app.scene.gsplat.material.getShaderChunks('wgsl').delete('gsplatModifyVS');
+app.scene.gsplat.material.update();
+```
+
+## Reading Extra Stream Data
+
+If you added extra streams to the [work buffer format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) and wrote data during the copy operation, you can read it during rendering using load functions.
+
+For each extra stream, a load function is generated: `load{StreamName}()`. For example, a stream named `splatId` generates `loadSplatId()`:
+
+```javascript
+const glslModifier = `
+    uniform sampler2D uColorLookup;
+
+    void modifySplatCenter(inout vec3 center) {}
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
+                                   inout vec4 rotation, inout vec3 scale) {}
+    void modifySplatColor(vec3 center, inout vec4 color) {
+        // Read component ID written during copy
+        uint id = loadSplatId().r;
+
+        // Look up color from texture based on component ID
+        vec3 tintColor = texelFetch(uColorLookup, ivec2(int(id), 0), 0).rgb;
+        color.rgb *= tintColor;
+    }
+`;
+```
+
+### Generated Load Functions
+
+For each extra stream, two load functions are generated:
+
+| Function | Description |
+|----------|-------------|
+| `load{StreamName}()` | Reads from current splat |
+| `load{StreamName}WithIndex(index)` | Reads from a specific splat index |
+
+The return type depends on the stream's pixel format:
+
+- **Float formats** (e.g., `PIXELFORMAT_RGBA32F`, `PIXELFORMAT_RGBA16F`) → `vec4`
+- **Unsigned integer formats** (e.g., `PIXELFORMAT_R32U`) → `uvec4`
+- **Signed integer formats** → `ivec4`
+
+Examples:
+
+| Stream Name | Load Functions |
+|-------------|----------------|
+| `splatId` | `loadSplatId()`, `loadSplatIdWithIndex(index)` → `uvec4` |
+| `customData` | `loadCustomData()`, `loadCustomDataWithIndex(index)` → `vec4` |
+
+To read multiple attributes from a different index, use `setSplat(index)` to change the current splat:
+
+```glsl
+setSplat(otherIndex);
+uint otherId = loadSplatId().r;
+vec4 otherData = loadCustomData();
+```
+
+## Passing Uniforms
+
+Use `setParameter()` on the scene's gsplat material to pass uniform values:
+
+```javascript
+// Create a color lookup texture
+const colorTexture = new pc.Texture(device, {
+    width: 256,
+    height: 1,
+    format: pc.PIXELFORMAT_RGBA32F,
+    // ... other options
+});
+
+// Pass texture to the render shader
+app.scene.gsplat.material.setParameter('uColorLookup', colorTexture);
+```
+
+## Use Cases
+
+### Per-Component Coloring
+
+Combined with [work buffer format customization](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format), you can identify which component each splat belongs to and apply unique colors:
+
+1. During copy: Write component ID to an extra stream
+2. During render: Read the ID and look up a color from a texture
+
+```javascript
+const glslModifier = `
+    uniform sampler2D uColorLookup;
+    uint componentId;  // Global variable accessible by all modifier functions
+
+    void modifySplatCenter(inout vec3 center) {
+        // Read ID from work buffer (can be used in other functions)
+        componentId = loadSplatId().r;
+    }
+    void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter,
+                                   inout vec4 rotation, inout vec3 scale) {}
+    void modifySplatColor(vec3 center, inout vec4 color) {
+        // Look up color from texture based on component ID
+        vec3 tintColor = texelFetch(uColorLookup, ivec2(int(componentId), 0), 0).rgb;
+        color.rgb *= tintColor;
+    }
+`;
+```
+
+## Live Example
+
+See the LOD Instances example which demonstrates:
+
+- Reading component IDs written during copy
+- Looking up colors from a texture
+- Applying per-component tinting with animated colors
+
+## See Also
+
+- [Work Buffer Format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) - Customizing the copy operation
+- [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
 
 --------------------------------------------------------------------------------
 
@@ -36482,7 +36414,7 @@ If you'd rather host the viewer's built files yourself and configure each instan
 | `noui` | Hide the viewer's built-in UI | _(off)_ |
 | `noanim` | Start with any animation track paused | _(off)_ |
 | `ministats` | Show runtime CPU/GPU performance graphs | _(off)_ |
-| `unified` | Force [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) | _(off)_ |
+| `unified` | Force [unified rendering](/user-manual/gaussian-splatting/rendering-architecture) | _(off)_ |
 | `aa` | Enable antialiasing (not supported in unified mode) | _(off)_ |
 
 These flags are subject to change as the viewer evolves; check the [project README](https://github.com/playcanvas/supersplat-viewer#readme) for the current set.
