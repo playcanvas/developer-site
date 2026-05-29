@@ -3,6 +3,9 @@ title: Splat Data Format
 description: "GSplatFormat and GPU texture streams: how splat attributes are stored, shader access, and customizing splat data layout (beta)."
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 `GSplatFormat` describes how splat data is stored in GPU textures and generates the shader code needed to read that data. It defines texture streams (name and pixel format) and shader code for extracting splat attributes.
 
 :::info Beta Feature
@@ -29,17 +32,24 @@ The format generates shader functions to read splat data from texture streams. T
 
 By default, each splat reads its own data. To read from a different splat, use `setSplat(index)`:
 
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
 ```glsl
-// GLSL
 setSplat(otherIndex);  // Set the splat index for subsequent reads
 vec3 pos = getCenter(); // Now reads from otherIndex
 ```
 
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
 ```wgsl
-// WGSL
 setSplat(otherIndex);
 let pos = getCenter();
 ```
+
+</TabItem>
+</Tabs>
 
 ### Load Functions
 
@@ -55,15 +65,23 @@ For example, a stream named `dataCenter` generates:
 - `loadDataCenter()` - reads using current splat index
 - `loadDataCenterWithIndex(index)` - reads from specified index
 
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
 ```glsl
-// GLSL - Read from specific index without changing current splat
+// Read from specific index without changing current splat
 vec4 otherCenter = loadDataCenterWithIndex(neighborIndex);
 ```
 
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
 ```wgsl
-// WGSL
 let otherCenter = loadDataCenterWithIndex(neighborIndex);
 ```
+
+</TabItem>
+</Tabs>
 
 This is useful when you need to access neighbor splats or compare data across multiple splats.
 
