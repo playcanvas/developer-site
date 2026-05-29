@@ -1,6 +1,6 @@
 ---
 title: Draw Order and Sorting
-description: "How GSplat components sort splats, render multiple components, depth buffer limits, and interaction with unified rendering."
+description: "How GSplat components sort splats, render multiple components, depth buffer limits, and global sorting across components."
 ---
 
 ## How Gaussians Are Sorted
@@ -15,13 +15,7 @@ Because the sorting occurs asynchronously, you may notice some visual lag if the
 
 ## Multiple GSplatComponents
 
-GSplatComponents are rendered back to front based on their bounding boxes, and each component's Gaussians are sorted independently within that component.
-
-:::info Unified Rendering
-
-By default, the PlayCanvas Engine does not support "global sorting" across multiple GSplatComponents (where all Gaussians from all components would be sorted together). However, you can enable [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/), a beta feature that allows all Gaussians from multiple components to be sorted together, eliminating visibility and popping artifacts.
-
-:::
+When a scene contains multiple GSplatComponents, all of their Gaussians are sorted together in a single global sort, rather than each component being sorted independently and ordered by its bounding box. This global sorting produces correct depth ordering across components and eliminates visibility and popping artifacts when they overlap. See [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture) for details.
 
 ## Depth Buffer Considerations
 

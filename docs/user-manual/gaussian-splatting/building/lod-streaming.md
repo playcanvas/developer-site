@@ -155,5 +155,5 @@ As native Editor support for streaming LOD is added, the following improvements 
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
 - [SplatTransform CLI Tool](/user-manual/splat-transform)
 - [Generating LOD Format](/user-manual/splat-transform#generating-lod-format)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
 - [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)

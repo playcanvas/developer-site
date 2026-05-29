@@ -153,5 +153,5 @@ PlayCanvas EditorでGaussian splatsとストリーミングLODを使用する方
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
 - [SplatTransform CLIツール](/user-manual/splat-transform)
 - [LOD形式の生成](/user-manual/splat-transform#generating-lod-format)
-- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)
 - [カスタムシェーダー](/user-manual/gaussian-splatting/building/custom-shaders)

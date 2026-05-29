@@ -13,13 +13,13 @@ description: "GPUスプラット処理向けGSplatProcessor：カスタムシェ
 
 :::note
 
-この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
+この機能は[スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)に基づいています。
 
 :::
 
 ## 概要
 
-Gaussian Splatsは、スプラットごとの属性（位置、回転、スケール、色）をテクスチャストリームに格納します。追加のカスタムストリームは、[スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)の追加ストリームを使用して追加できます。
+Gaussian Splatsは、スプラットごとの属性（位置、回転、スケール、色）をテクスチャストリームに格納します。追加のカスタムストリームは、[スプラットデータフォーマット](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)の追加ストリームを使用して追加できます。
 
 `GSplatProcessor`は、GPU上でこのデータを変更する方法を提供します：
 
@@ -297,6 +297,6 @@ void process() {
 ## 関連項目
 
 - [GSplatProcessor API](https://api.playcanvas.com/engine/classes/GSplatProcessor.html)
-- [スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [スプラットデータフォーマット](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)

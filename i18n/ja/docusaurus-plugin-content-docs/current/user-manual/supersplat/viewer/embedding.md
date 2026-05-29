@@ -41,7 +41,7 @@ console.log(js);
 | `noui` | ビューアの組み込みUIを非表示 | _(off)_ |
 | `noanim` | アニメーショントラックを一時停止状態で開始 | _(off)_ |
 | `ministats` | ランタイムのCPU/GPUパフォーマンスグラフを表示 | _(off)_ |
-| `unified` | [統一レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)を強制 | _(off)_ |
+| `unified` | [統一レンダリング](/user-manual/gaussian-splatting/rendering-architecture)を強制 | _(off)_ |
 | `aa` | アンチエイリアシングを有効化（unifiedモードでは非対応） | _(off)_ |
 
 これらのフラグはビューアの進化に伴って変更される可能性があります。現在のセットについては[プロジェクトREADME](https://github.com/playcanvas/supersplat-viewer#readme)を参照してください。

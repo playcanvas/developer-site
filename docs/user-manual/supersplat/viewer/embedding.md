@@ -41,7 +41,7 @@ If you'd rather host the viewer's built files yourself and configure each instan
 | `noui` | Hide the viewer's built-in UI | _(off)_ |
 | `noanim` | Start with any animation track paused | _(off)_ |
 | `ministats` | Show runtime CPU/GPU performance graphs | _(off)_ |
-| `unified` | Force [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) | _(off)_ |
+| `unified` | Force [unified rendering](/user-manual/gaussian-splatting/rendering-architecture) | _(off)_ |
 | `aa` | Enable antialiasing (not supported in unified mode) | _(off)_ |
 
 These flags are subject to change as the viewer evolves; check the [project README](https://github.com/playcanvas/supersplat-viewer#readme) for the current set.

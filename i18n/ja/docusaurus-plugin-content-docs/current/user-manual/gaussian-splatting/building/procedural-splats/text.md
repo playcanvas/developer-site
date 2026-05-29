@@ -13,7 +13,7 @@ GsplatTextは現在ベータ版です。問題が発生した場合は、[PlayCa
 
 :::note
 
-この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
+この機能は[スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)に基づいています。
 
 :::
 
@@ -99,7 +99,7 @@ textSplat.text = 'New Score: 200';
 
 ## 座標系
 
-[GsplatImage](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)と同様に、テキストはXZ平面にレンダリングされます：
+[GsplatImage](/user-manual/gaussian-splatting/building/procedural-splats/image)と同様に、テキストはXZ平面にレンダリングされます：
 
 - **X軸**：左から右
 - **Z軸**：上から下（+Yから見た時にテキストが正しく読める）
@@ -133,7 +133,7 @@ scripts/esm/gsplat/gsplat-text.mjs
 
 ## 関連項目
 
-- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [メッシュからスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
-- [画像からスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [線と形状](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [メッシュからスプラットへ](/user-manual/gaussian-splatting/building/procedural-splats/mesh)
+- [画像からスプラットへ](/user-manual/gaussian-splatting/building/procedural-splats/image)
+- [線と形状](/user-manual/gaussian-splatting/building/procedural-splats/lines)

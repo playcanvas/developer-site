@@ -91,5 +91,5 @@ app.scene.sky.fisheye = 1;
 
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
 - [Sky API](https://api.playcanvas.com/engine/classes/Sky.html)
-- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)
 - [パフォーマンス](/user-manual/gaussian-splatting/building/performance)

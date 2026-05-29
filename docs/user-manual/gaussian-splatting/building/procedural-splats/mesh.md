@@ -13,7 +13,7 @@ GsplatMesh is currently in beta. If you encounter any issues, please report them
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -24,7 +24,7 @@ This feature requires [unified rendering](/user-manual/gaussian-splatting/buildi
 - Extracts triangles from mesh instances in an entity hierarchy
 - Rasterizes each triangle to generate splat positions
 - Uses material colors (emissive or diffuse) for splat colors
-- Creates a [GSplatContainer](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) internally
+- Creates a [GSplatContainer](/user-manual/gaussian-splatting/building/procedural-splats/) internally
 
 This is useful for converting 3D models to splat representations for stylized rendering effects.
 
@@ -134,7 +134,7 @@ scripts/esm/gsplat/gsplat-mesh.mjs
 
 ## See Also
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Image to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [Lines and Shapes](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
-- [Text to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [Image to Splats](/user-manual/gaussian-splatting/building/procedural-splats/image)
+- [Lines and Shapes](/user-manual/gaussian-splatting/building/procedural-splats/lines)
+- [Text to Splats](/user-manual/gaussian-splatting/building/procedural-splats/text)

@@ -866,6 +866,20 @@ const sidebars = {
         'user-manual/gaussian-splatting/editing/index',
         {
           type: 'category',
+          label: 'Rendering Architecture',
+          link: {
+            type: 'doc',
+            id: 'user-manual/gaussian-splatting/rendering-architecture/index',
+          },
+          items: [
+            'user-manual/gaussian-splatting/rendering-architecture/splat-data-format',
+            'user-manual/gaussian-splatting/rendering-architecture/work-buffer-format',
+            'user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering',
+            'user-manual/gaussian-splatting/rendering-architecture/splat-processing',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Building Splat Applications',
           link: {
             type: 'doc',
@@ -886,41 +900,26 @@ const sidebars = {
                 'user-manual/gaussian-splatting/building/your-first-app/web-components',
               ],
             },
-            'user-manual/gaussian-splatting/building/rendering-architecture',
-            {
-              type: 'category',
-              label: 'Unified Splat Rendering',
-              link: {
-                type: 'doc',
-                id: 'user-manual/gaussian-splatting/building/unified-rendering/index',
-              },
-              items: [
-                'user-manual/gaussian-splatting/building/unified-rendering/splat-data-format',
-                'user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format',
-                'user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering',
-                {
-                  type: 'category',
-                  label: 'Procedural Splats',
-                  link: {
-                    type: 'doc',
-                    id: 'user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/index',
-                  },
-                  items: [
-                    'user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh',
-                    'user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image',
-                    'user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines',
-                    'user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text',
-                  ],
-                },
-                'user-manual/gaussian-splatting/building/unified-rendering/lod-streaming',
-                'user-manual/gaussian-splatting/building/unified-rendering/splat-processing',
-              ],
-            },
             'user-manual/gaussian-splatting/building/draw-order',
+            'user-manual/gaussian-splatting/building/lod-streaming',
             'user-manual/gaussian-splatting/building/picking',
             'user-manual/gaussian-splatting/building/shadows',
             'user-manual/gaussian-splatting/building/fisheye',
             'user-manual/gaussian-splatting/building/custom-shaders',
+            {
+              type: 'category',
+              label: 'Procedural Splats',
+              link: {
+                type: 'doc',
+                id: 'user-manual/gaussian-splatting/building/procedural-splats/index',
+              },
+              items: [
+                'user-manual/gaussian-splatting/building/procedural-splats/mesh',
+                'user-manual/gaussian-splatting/building/procedural-splats/image',
+                'user-manual/gaussian-splatting/building/procedural-splats/lines',
+                'user-manual/gaussian-splatting/building/procedural-splats/text',
+              ],
+            },
             'user-manual/gaussian-splatting/building/performance',
           ],
         },
