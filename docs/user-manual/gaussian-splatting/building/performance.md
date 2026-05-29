@@ -76,6 +76,45 @@ These settings are useful for:
 
 However, for typical rendering performance management, the global splat budget is more effective than LOD range limits. The budget automatically finds the right balance across all assets, while LOD range limits apply uniformly regardless of camera position or scene composition.
 
+### Fast Time to First Frame
+
+For large streamed scenes, you can display a rendered frame almost immediately by loading only the **lowest** (coarsest) level of detail first, then letting higher-detail levels stream in afterwards. This avoids waiting for high-quality data before anything appears on screen.
+
+The approach has two steps:
+
+1. When the GSplat asset is created, clamp the LOD range to the coarsest level only, so just the smallest amount of data loads first.
+2. Listen for the GSplat system's `frame:ready` event. Once the coarse data has loaded and rendered — and nothing is still loading — restore the full LOD range so higher-detail levels stream in based on camera distance.
+
+```javascript
+const gsplatSystem = app.systems.gsplat;
+
+// `entity` has a gsplat component using a loaded LOD-streaming asset
+const gsplat = entity.gsplat;
+
+// 1. Start with the lowest (coarsest) LOD only, for the fastest first frame
+const lodLevels = gsplat.resource?.octree?.lodLevels;
+if (lodLevels) {
+    const worstLod = lodLevels - 1;
+    app.scene.gsplat.lodRangeMin = worstLod;
+    app.scene.gsplat.lodRangeMax = worstLod;
+}
+
+// 2. Once the coarse data is loaded and rendered, open the LOD range back up
+//    so higher-detail levels stream in
+const onFrameReady = (camera, layer, ready, loadingCount) => {
+    if (ready && loadingCount === 0) {
+        gsplatSystem.off('frame:ready', onFrameReady);
+
+        // restore the full LOD range (0 = highest detail)
+        app.scene.gsplat.lodRangeMin = 0;
+        app.scene.gsplat.lodRangeMax = lodLevels - 1;
+    }
+};
+gsplatSystem.on('frame:ready', onFrameReady);
+```
+
+This technique is demonstrated in the live [LOD Streaming example](/user-manual/gaussian-splatting/building/lod-streaming#live-examples).
+
 ### Recommended Configuration
 
 For most applications:

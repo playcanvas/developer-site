@@ -454,9 +454,12 @@ splat-transform \
 
 ### Generating LOD Format {#generating-lod-format}
 
-The LOD (Level of Detail) format enables efficient streaming and rendering of large Gaussian splat scenes. The tool takes multiple pre-generated LOD files as input and generates an optimized streaming format with an octree structure for progressive download.
+The LOD (Level of Detail) format enables efficient streaming and rendering of large Gaussian splat scenes. SplatTransform builds an optimized streaming format with an octree structure for progressive download from a set of LOD levels, where each level has progressively fewer Gaussians (LOD 0 = highest detail, higher numbers = lower detail).
 
-**Note:** The tool does NOT create the LOD levels themselves — you must supply multiple LOD files with progressively fewer Gaussians (LOD 0 = highest detail, higher numbers = lower detail).
+You can obtain those LOD levels in two ways:
+
+- **Supply your own LOD files** — provide a separate splat file for each level, for example produced during training or exported from another tool.
+- **Generate them by decimating a single source** — use [`--decimate`](#actions) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately.
 
 :::warning Output Filename Requirements
 
@@ -480,6 +483,20 @@ splat-transform \
   output/lod-meta.json \
   --filter-nan \
   --filter-harmonics 0
+
+# Generate the lower-detail levels by decimating a single high-quality source
+# Step 1: create progressively smaller versions of the source splat
+splat-transform source.ply -F 50% lod1.ply
+splat-transform source.ply -F 25% lod2.ply
+splat-transform source.ply -F 10% lod3.ply
+# Step 2: bundle the full-detail source and the decimated levels into a streaming LOD format
+splat-transform \
+  source.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  lod3.ply -l 3 \
+  output/lod-meta.json \
+  --filter-nan
 
 # Generate LOD with custom chunk settings for better performance
 splat-transform \
@@ -508,6 +525,7 @@ splat-transform scene.lcc output/lod-meta.json
 
 **Tips:**
 
+- Use `--decimate` (`-F`) to generate lower LOD levels from a single high-quality source, instead of authoring each level separately
 - Use `--filter-nan` to remove invalid Gaussians before processing
 - Use `--filter-harmonics 0` to reduce file size if colour detail is less critical
 - Use `-C` to control the number of generated SOG files containing splats
