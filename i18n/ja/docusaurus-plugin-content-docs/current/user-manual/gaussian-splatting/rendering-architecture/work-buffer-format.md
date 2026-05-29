@@ -13,7 +13,7 @@ description: "統合レンダリングのワークバッファフォーマット
 
 :::note
 
-この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
+この機能は[スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)に基づいています。
 
 :::
 
@@ -176,7 +176,7 @@ entity.gsplat.deleteParameter('uComponentId');
 
 ## ソースデータの読み取り
 
-コピーモディファイアでは、[スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)から生成されたロード関数を使用して元のスプラットデータを読み取ることができます。デフォルトフォーマットの場合：
+コピーモディファイアでは、[スプラットデータフォーマット](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)から生成されたロード関数を使用して元のスプラットデータを読み取ることができます。デフォルトフォーマットの場合：
 
 - `loadDataColor()` - `vec4`の色を返す
 - `loadDataCenter()` - `vec4`の位置(xyz) + 追加データ(w)を返す
@@ -201,7 +201,7 @@ vec3 otherPos = getCenter();
 vec4 otherColor = getColor();
 ```
 
-詳細については[スプラットデータフォーマット - シェーダーアクセス](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format#shader-access)を参照してください。
+詳細については[スプラットデータフォーマット - シェーダーアクセス](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format#shader-access)を参照してください。
 
 ## ライブサンプル
 
@@ -215,6 +215,6 @@ vec4 otherColor = getColor();
 
 ## 関連項目
 
-- [ワークバッファレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) - レンダリング操作のカスタマイズ
-- [スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [ワークバッファレンダリング](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) - レンダリング操作のカスタマイズ
+- [スプラットデータフォーマット](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)

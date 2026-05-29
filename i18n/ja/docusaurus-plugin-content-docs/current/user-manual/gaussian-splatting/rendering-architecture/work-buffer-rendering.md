@@ -13,7 +13,7 @@ description: "ワークバッファからソート済みスプラットを描画
 
 :::note
 
-この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
+この機能は[スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)に基づいています。
 
 :::
 
@@ -100,7 +100,7 @@ app.scene.gsplat.material.update();
 
 ## 追加ストリームデータの読み取り
 
-[ワークバッファフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format)に追加ストリームを追加し、コピー操作中にデータを書き込んだ場合、ロード関数を使用してレンダリング中にそれを読み取ることができます。
+[ワークバッファフォーマット](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format)に追加ストリームを追加し、コピー操作中にデータを書き込んだ場合、ロード関数を使用してレンダリング中にそれを読み取ることができます。
 
 追加ストリームごとに、ロード関数が生成されます：`load{StreamName}()`。例えば、`splatId`という名前のストリームは`loadSplatId()`を生成します：
 
@@ -173,7 +173,7 @@ app.scene.gsplat.material.setParameter('uColorLookup', colorTexture);
 
 ### コンポーネントごとの色付け
 
-[ワークバッファフォーマットのカスタマイズ](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format)と組み合わせることで、各スプラットがどのコンポーネントに属するかを識別し、ユニークな色を適用できます：
+[ワークバッファフォーマットのカスタマイズ](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format)と組み合わせることで、各スプラットがどのコンポーネントに属するかを識別し、ユニークな色を適用できます：
 
 1. コピー中：追加ストリームにコンポーネントIDを書き込む
 2. レンダリング中：IDを読み取り、テクスチャから色をルックアップ
@@ -209,6 +209,6 @@ const glslModifier = `
 
 ## 関連項目
 
-- [ワークバッファフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - コピー操作のカスタマイズ
-- [スプラットデータフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [ワークバッファフォーマット](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) - コピー操作のカスタマイズ
+- [スプラットデータフォーマット](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)

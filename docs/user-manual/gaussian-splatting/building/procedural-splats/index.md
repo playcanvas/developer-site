@@ -13,19 +13,19 @@ Procedural Splats is currently in beta. If you encounter any issues, please repo
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
 ## Overview
 
-`GSplatContainer` is a container for procedural splat data that you fill from CPU. It works with a `GSplatFormat` that defines the texture streams and how to read splat attributes. Note that [GSplatProcessor](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing) also allows writing to containers on the GPU.
+`GSplatContainer` is a container for procedural splat data that you fill from CPU. It works with a `GSplatFormat` that defines the texture streams and how to read splat attributes. Note that [GSplatProcessor](/user-manual/gaussian-splatting/rendering-architecture/splat-processing) also allows writing to containers on the GPU.
 
 Key characteristics:
 
 - **Fixed size**: Capacity is set at creation and cannot be changed
 - **CPU-populated**: You fill texture data from JavaScript
-- **GPU-populated**: You can also write texture data on the GPU via [GSplatProcessor](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)
+- **GPU-populated**: You can also write texture data on the GPU via [GSplatProcessor](/user-manual/gaussian-splatting/rendering-architecture/splat-processing)
 - **Format-driven**: Uses `GSplatFormat` to define data layout and shader code
 
 ## Splat Data Format
@@ -261,10 +261,10 @@ PlayCanvas provides ready-to-use scripts that wrap `GSplatContainer` for common 
 
 | Script | Description |
 |--------|-------------|
-| [GsplatMesh](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh) | Convert mesh geometry to splats |
-| [GsplatImage](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image) | Render images as splats (one per pixel) |
-| [GsplatLines](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines) | Draw lines, arrows, and bounding boxes |
-| [GsplatText](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text) | Render text as splats |
+| [GsplatMesh](/user-manual/gaussian-splatting/building/procedural-splats/mesh) | Convert mesh geometry to splats |
+| [GsplatImage](/user-manual/gaussian-splatting/building/procedural-splats/image) | Render images as splats (one per pixel) |
+| [GsplatLines](/user-manual/gaussian-splatting/building/procedural-splats/lines) | Draw lines, arrows, and bounding boxes |
+| [GsplatText](/user-manual/gaussian-splatting/building/procedural-splats/text) | Render text as splats |
 
 These scripts handle the container creation and data population for you.
 
@@ -278,6 +278,6 @@ See the Procedural Instanced example which demonstrates creating a custom `GSpla
 
 - [GSplatContainer API](https://api.playcanvas.com/engine/classes/GSplatContainer.html)
 - [GSplatFormat API](https://api.playcanvas.com/engine/classes/GSplatFormat.html)
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Splat Processing](/user-manual/gaussian-splatting/building/unified-rendering/splat-processing)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [Splat Processing](/user-manual/gaussian-splatting/rendering-architecture/splat-processing)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)

@@ -13,7 +13,7 @@ GsplatMeshは現在ベータ版です。問題が発生した場合は、[PlayCa
 
 :::note
 
-この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
+この機能は[スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)に基づいています。
 
 :::
 
@@ -24,7 +24,7 @@ GsplatMeshは現在ベータ版です。問題が発生した場合は、[PlayCa
 - エンティティ階層のメッシュインスタンスから三角形を抽出
 - 各三角形をラスタライズしてスプラット位置を生成
 - マテリアルの色（エミッシブまたはディフューズ）をスプラットの色に使用
-- 内部で[GSplatContainer](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)を作成
+- 内部で[GSplatContainer](/user-manual/gaussian-splatting/building/procedural-splats/)を作成
 
 これは、スタイライズされたレンダリングエフェクトのために3DモデルをスプラTT表現に変換する場合に便利です。
 
@@ -134,7 +134,7 @@ scripts/esm/gsplat/gsplat-mesh.mjs
 
 ## 関連項目
 
-- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [画像からスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [線と形状](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
-- [テキストからスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [画像からスプラットへ](/user-manual/gaussian-splatting/building/procedural-splats/image)
+- [線と形状](/user-manual/gaussian-splatting/building/procedural-splats/lines)
+- [テキストからスプラットへ](/user-manual/gaussian-splatting/building/procedural-splats/text)

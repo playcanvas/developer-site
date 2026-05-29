@@ -13,7 +13,7 @@ GsplatLinesは現在ベータ版です。問題が発生した場合は、[PlayC
 
 :::note
 
-この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
+この機能は[スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)に基づいています。
 
 :::
 
@@ -161,7 +161,7 @@ scripts/esm/gsplat/gsplat-lines.mjs
 
 ## 関連項目
 
-- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [メッシュからスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
-- [画像からスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [テキストからスプラットへ](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [メッシュからスプラットへ](/user-manual/gaussian-splatting/building/procedural-splats/mesh)
+- [画像からスプラットへ](/user-manual/gaussian-splatting/building/procedural-splats/image)
+- [テキストからスプラットへ](/user-manual/gaussian-splatting/building/procedural-splats/text)

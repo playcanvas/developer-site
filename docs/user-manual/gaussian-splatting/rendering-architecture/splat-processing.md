@@ -13,13 +13,13 @@ Splat Processing is currently in beta. If you encounter any issues, please repor
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
 ## Overview
 
-Gaussian Splats store per-splat attributes (position, rotation, scale, color) in texture streams. Additional custom streams can be added using extra streams on the [splat data format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format).
+Gaussian Splats store per-splat attributes (position, rotation, scale, color) in texture streams. Additional custom streams can be added using extra streams on the [splat data format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format).
 
 `GSplatProcessor` provides a way to modify this data on the GPU:
 
@@ -297,6 +297,6 @@ void process() {
 ## See Also
 
 - [GSplatProcessor API](https://api.playcanvas.com/engine/classes/GSplatProcessor.html)
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)

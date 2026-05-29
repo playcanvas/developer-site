@@ -9,7 +9,7 @@ PlayCanvas Engineは、Gaussian Splats用のカスタムシェーダーをサポ
 
 このページは**非統合レンダリング**（`entity.gsplat.unified = false`の場合）のシェーダーカスタマイズについて説明します。各コンポーネントには独立してカスタマイズできる独自のマテリアルがあります。
 
-**統合レンダリング**については、グローバルレンダリングモディファイアを通じて同様のカスタマイズ機能を提供する[ワークバッファレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering)を参照してください。
+**統合レンダリング**については、グローバルレンダリングモディファイアを通じて同様のカスタマイズ機能を提供する[ワークバッファレンダリング](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering)を参照してください。
 
 :::
 

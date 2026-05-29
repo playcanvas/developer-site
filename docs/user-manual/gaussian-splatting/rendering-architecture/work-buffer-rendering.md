@@ -13,7 +13,7 @@ Work Buffer Rendering customization is currently in beta. If you encounter any i
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -100,7 +100,7 @@ app.scene.gsplat.material.update();
 
 ## Reading Extra Stream Data
 
-If you added extra streams to the [work buffer format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) and wrote data during the copy operation, you can read it during rendering using load functions.
+If you added extra streams to the [work buffer format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) and wrote data during the copy operation, you can read it during rendering using load functions.
 
 For each extra stream, a load function is generated: `load{StreamName}()`. For example, a stream named `splatId` generates `loadSplatId()`:
 
@@ -173,7 +173,7 @@ app.scene.gsplat.material.setParameter('uColorLookup', colorTexture);
 
 ### Per-Component Coloring
 
-Combined with [work buffer format customization](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format), you can identify which component each splat belongs to and apply unique colors:
+Combined with [work buffer format customization](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format), you can identify which component each splat belongs to and apply unique colors:
 
 1. During copy: Write component ID to an extra stream
 2. During render: Read the ID and look up a color from a texture
@@ -209,6 +209,6 @@ See the LOD Instances example which demonstrates:
 
 ## See Also
 
-- [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - Customizing the copy operation
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [Work Buffer Format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) - Customizing the copy operation
+- [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)

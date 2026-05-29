@@ -13,7 +13,7 @@ GsplatLines is currently in beta. If you encounter any issues, please report the
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -161,7 +161,7 @@ scripts/esm/gsplat/gsplat-lines.mjs
 
 ## See Also
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Mesh to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
-- [Image to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [Text to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text)
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [Mesh to Splats](/user-manual/gaussian-splatting/building/procedural-splats/mesh)
+- [Image to Splats](/user-manual/gaussian-splatting/building/procedural-splats/image)
+- [Text to Splats](/user-manual/gaussian-splatting/building/procedural-splats/text)

@@ -13,7 +13,7 @@ Work Buffer Format customization is currently in beta. If you encounter any issu
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -176,7 +176,7 @@ Supported uniform types:
 
 ## Reading Source Data
 
-In the copy modifier, you can read the original splat data using load functions generated from the [splat data format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format). For example, with the default format:
+In the copy modifier, you can read the original splat data using load functions generated from the [splat data format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format). For example, with the default format:
 
 - `loadDataColor()` - Returns `vec4` color
 - `loadDataCenter()` - Returns `vec4` position (xyz) + extra data (w)
@@ -201,7 +201,7 @@ vec3 otherPos = getCenter();
 vec4 otherColor = getColor();
 ```
 
-See [Splat Data Format - Shader Access](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format#shader-access) for more details.
+See [Splat Data Format - Shader Access](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format#shader-access) for more details.
 
 ## Live Example
 
@@ -215,6 +215,6 @@ See the LOD Instances example which demonstrates:
 
 ## See Also
 
-- [Work Buffer Rendering](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) - Customizing the render operation
-- [Splat Data Format](/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format)
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) - Customizing the render operation
+- [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)

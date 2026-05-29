@@ -1,6 +1,6 @@
 ---
 title: 描画順序とソート
-description: GSplat Componentがスプラットをどうソートするか、複数Componentのレンダリング、深度バッファの制限、統合レンダリングとの連携を説明します。
+description: GSplat Componentがスプラットをどうソートするか、複数Componentのレンダリング、深度バッファの制限、コンポーネント間のグローバルソートを説明します。
 ---
 
 ## Gaussianのソート方法
@@ -15,13 +15,7 @@ GSplatComponent内の個々のGaussianは、カメラの深度に基づいて奥
 
 ## 複数のGSplatComponent
 
-GSplatComponentはバウンディングボックスに基づいて奥から手前にレンダリングされ、各コンポーネントのGaussianはそのコンポーネント内で独立してソートされます。
-
-:::info 統合レンダリング
-
-デフォルトでは、PlayCanvas Engineは複数のGSplatComponent間での「グローバルソート」（すべてのコンポーネントのすべてのGaussianが一緒にソートされる）をサポートしていません。ただし、[統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)を有効にすることができます。これは、複数のコンポーネントのすべてのGaussianを一緒にソートし、可視性とポッピングのアーティファクトを排除するベータ機能です。
-
-:::
+シーンに複数のGSplatComponentが含まれる場合、各コンポーネントが個別にソートされバウンディングボックス順にレンダリングされるのではなく、すべてのGaussianが単一のグローバルソートで一緒にソートされます。このグローバルソートにより、コンポーネント間で正しい深度順序が得られ、重なり合う際の可視性とポッピングのアーティファクトが排除されます。詳細については、[スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)を参照してください。
 
 ## 深度バッファの考慮事項
 

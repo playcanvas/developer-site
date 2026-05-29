@@ -13,7 +13,7 @@ Splat Data Format is currently in beta. If you encounter any issues, please repo
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -141,9 +141,9 @@ Streams cannot be removed once added.
 
 ## Format for Procedural Splats
 
-When creating [procedural splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) with `GSplatContainer`, you need to explicitly create and configure a format. PlayCanvas provides built-in formats for common cases, and you can also create custom formats with your own streams and shader code.
+When creating [procedural splats](/user-manual/gaussian-splatting/building/procedural-splats/) with `GSplatContainer`, you need to explicitly create and configure a format. PlayCanvas provides built-in formats for common cases, and you can also create custom formats with your own streams and shader code.
 
-See [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) for details on:
+See [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/) for details on:
 
 - Built-in formats (`createDefaultFormat`, `createSimpleFormat`)
 - Creating custom formats with custom streams
@@ -153,7 +153,7 @@ See [Procedural Splats](/user-manual/gaussian-splatting/building/unified-renderi
 
 The work buffer has its own format for storing intermediate splat data during unified rendering. You can add extra streams to it for customization during copy and render operations.
 
-See [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) for details on:
+See [Work Buffer Format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) for details on:
 
 - Adding extra streams to the work buffer
 - Customizing the copy operation with `setWorkBufferModifier()`
@@ -162,7 +162,7 @@ See [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-render
 ## See Also
 
 - [GSplatFormat API](https://api.playcanvas.com/engine/classes/GSplatFormat.html)
-- [Work Buffer Format](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - Customizing the copy operation
-- [Work Buffer Rendering](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) - Customizing the render operation
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) - Creating splats programmatically
-- [Unified Splat Rendering](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [Work Buffer Format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) - Customizing the copy operation
+- [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) - Customizing the render operation
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/) - Creating splats programmatically
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)

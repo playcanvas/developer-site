@@ -9,7 +9,7 @@ The PlayCanvas Engine supports custom shaders for Gaussian Splats, allowing you 
 
 This page covers shader customization for **non-unified rendering** (when `entity.gsplat.unified = false`). Each component has its own material that can be customized independently.
 
-For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) which provides similar customization capabilities through a global render modifier.
+For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) which provides similar customization capabilities through a global render modifier.
 
 :::
 

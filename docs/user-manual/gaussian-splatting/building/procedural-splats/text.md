@@ -13,7 +13,7 @@ GsplatText is currently in beta. If you encounter any issues, please report them
 
 :::note
 
-This feature requires [unified rendering](/user-manual/gaussian-splatting/building/unified-rendering/) mode.
+This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
 
 :::
 
@@ -99,7 +99,7 @@ textSplat.text = 'New Score: 200';
 
 ## Coordinate System
 
-Like [GsplatImage](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image), text is rendered on the XZ plane:
+Like [GsplatImage](/user-manual/gaussian-splatting/building/procedural-splats/image), text is rendered on the XZ plane:
 
 - **X axis**: Left to right
 - **Z axis**: Top to bottom (text reads correctly when viewed from +Y)
@@ -133,7 +133,7 @@ scripts/esm/gsplat/gsplat-text.mjs
 
 ## See Also
 
-- [Procedural Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)
-- [Mesh to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/mesh)
-- [Image to Splats](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/image)
-- [Lines and Shapes](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines)
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/)
+- [Mesh to Splats](/user-manual/gaussian-splatting/building/procedural-splats/mesh)
+- [Image to Splats](/user-manual/gaussian-splatting/building/procedural-splats/image)
+- [Lines and Shapes](/user-manual/gaussian-splatting/building/procedural-splats/lines)

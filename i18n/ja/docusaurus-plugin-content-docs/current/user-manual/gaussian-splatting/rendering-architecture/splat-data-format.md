@@ -13,7 +13,7 @@ description: "GSplatFormatとGPUテクスチャストリーム：スプラット
 
 :::note
 
-この機能は[統合レンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)モードが必要です。
+この機能は[スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)に基づいています。
 
 :::
 
@@ -141,9 +141,9 @@ if (texture) {
 
 ## プロシージャルスプラットのフォーマット
 
-`GSplatContainer`で[プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)を作成する場合、フォーマットを明示的に作成して設定する必要があります。PlayCanvasは一般的なケース用のビルトインフォーマットを提供しており、独自のストリームとシェーダーコードでカスタムフォーマットを作成することもできます。
+`GSplatContainer`で[プロシージャルスプラット](/user-manual/gaussian-splatting/building/procedural-splats/)を作成する場合、フォーマットを明示的に作成して設定する必要があります。PlayCanvasは一般的なケース用のビルトインフォーマットを提供しており、独自のストリームとシェーダーコードでカスタムフォーマットを作成することもできます。
 
-詳細については[プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/)を参照してください：
+詳細については[プロシージャルスプラット](/user-manual/gaussian-splatting/building/procedural-splats/)を参照してください：
 
 - ビルトインフォーマット（`createDefaultFormat`、`createSimpleFormat`）
 - カスタムストリームを持つカスタムフォーマットの作成
@@ -153,7 +153,7 @@ if (texture) {
 
 ワークバッファには、統合レンダリング中の中間スプラットデータを格納するための独自のフォーマットがあります。コピーおよびレンダリング操作中のカスタマイズのために追加ストリームを追加できます。
 
-詳細については[ワークバッファフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format)を参照してください：
+詳細については[ワークバッファフォーマット](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format)を参照してください：
 
 - ワークバッファへの追加ストリームの追加
 - `setWorkBufferModifier()`によるコピー操作のカスタマイズ
@@ -162,7 +162,7 @@ if (texture) {
 ## 関連項目
 
 - [GSplatFormat API](https://api.playcanvas.com/engine/classes/GSplatFormat.html)
-- [ワークバッファフォーマット](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format) - コピー操作のカスタマイズ
-- [ワークバッファレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-rendering) - レンダリング操作のカスタマイズ
-- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/) - プログラムによるスプラットの作成
-- [統合スプラットレンダリング](/user-manual/gaussian-splatting/building/unified-rendering/)
+- [ワークバッファフォーマット](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) - コピー操作のカスタマイズ
+- [ワークバッファレンダリング](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) - レンダリング操作のカスタマイズ
+- [プロシージャルスプラット](/user-manual/gaussian-splatting/building/procedural-splats/) - プログラムによるスプラットの作成
+- [スプラットレンダリングアーキテクチャ](/user-manual/gaussian-splatting/rendering-architecture)
