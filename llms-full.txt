@@ -17970,12 +17970,6 @@ URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/pr
 
 `GSplatContainer` enables you to create Gaussian splat data programmatically rather than loading it from files. This is useful for dynamic visualizations, procedural effects, and converting other data types to splats.
 
-:::info Beta Feature
-
-Procedural Splats is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
 :::note
 
 This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
@@ -18252,12 +18246,6 @@ URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/pr
 
 The `GsplatImage` script renders an image as Gaussian splats, with one splat per non-transparent pixel. This creates a unique visual effect where images appear as point-based representations.
 
-:::info Beta Feature
-
-GsplatImage is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
 :::note
 
 This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
@@ -18361,12 +18349,6 @@ scripts/esm/gsplat/gsplat-image.mjs
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/lines/
 
 The `GsplatLines` script renders line-based debug primitives using Gaussian splats. It supports lines, arrows, and axis-aligned bounding boxes (AABBs), making it useful for CAD-style visualizations and debugging.
-
-:::info Beta Feature
-
-GsplatLines is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 
@@ -18529,12 +18511,6 @@ URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/pr
 
 The `GsplatMesh` script converts mesh geometry into Gaussian splats. It extracts triangles from render components and generates uniformly distributed splats across the mesh surface using triangle rasterization.
 
-:::info Beta Feature
-
-GsplatMesh is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
 :::note
 
 This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
@@ -18667,12 +18643,6 @@ scripts/esm/gsplat/gsplat-mesh.mjs
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/text/
 
 The `GsplatText` script renders text as Gaussian splats, with one splat per non-transparent pixel. This creates text labels that integrate seamlessly with splat-based scenes.
-
-:::info Beta Feature
-
-GsplatText is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 
@@ -20657,12 +20627,6 @@ URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-a
 
 `GSplatFormat` describes how splat data is stored in GPU textures and generates the shader code needed to read that data. It defines texture streams (name and pixel format) and shader code for extracting splat attributes.
 
-:::info Beta Feature
-
-Splat Data Format is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
 :::note
 
 This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
@@ -20804,12 +20768,6 @@ See [Work Buffer Format](/user-manual/gaussian-splatting/rendering-architecture/
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-processing/
 
 `GSplatProcessor` enables GPU-based processing of Gaussian Splat data using custom shader code. It reads from source texture streams and writes results to destination streams, enabling operations like painting, selection, deletion, and custom data transforms.
-
-:::info Beta Feature
-
-Splat Processing is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 
@@ -21105,12 +21063,6 @@ URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-a
 
 The work buffer format defines the data streams available in the work buffer and how splat data is copied from resources. You can customize the copy operation to transform splats and write additional per-component data.
 
-:::info Beta Feature
-
-Work Buffer Format customization is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
-
 :::note
 
 This feature builds on the [splat rendering architecture](/user-manual/gaussian-splatting/rendering-architecture).
@@ -21324,12 +21276,6 @@ See the LOD Instances example which demonstrates:
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering/
 
 The render operation draws sorted splats from the work buffer. You can customize this globally to apply effects, read custom data written during copy, or modify how all splats appear.
-
-:::info Beta Feature
-
-Work Buffer Rendering customization is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 
