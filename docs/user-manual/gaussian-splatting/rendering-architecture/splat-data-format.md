@@ -1,18 +1,12 @@
 ---
 title: Splat Data Format
-description: "GSplatFormat and GPU texture streams: how splat attributes are stored, shader access, and customizing splat data layout (beta)."
+description: "GSplatFormat and GPU texture streams: how splat attributes are stored, shader access, and customizing splat data layout."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 `GSplatFormat` describes how splat data is stored in GPU textures and generates the shader code needed to read that data. It defines texture streams (name and pixel format) and shader code for extracting splat attributes.
-
-:::info Beta Feature
-
-Splat Data Format is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 

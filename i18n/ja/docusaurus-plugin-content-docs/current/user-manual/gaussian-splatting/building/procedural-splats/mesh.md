@@ -1,15 +1,9 @@
 ---
 title: メッシュからスプラットへ
-description: "GsplatMesh Script：メッシュの三角形をラスタライズし、Render Componentのジオメトリから均一に分布したスプラットを生成します（ベータ）。"
+description: "GsplatMesh Script：メッシュの三角形をラスタライズし、Render Componentのジオメトリから均一に分布したスプラットを生成します。"
 ---
 
 `GsplatMesh`スクリプトは、メッシュジオメトリをGaussian splatsに変換します。レンダーコンポーネントから三角形を抽出し、三角形ラスタライズを使用してメッシュ表面に均一に分布したスプラットを生成します。
-
-:::info ベータ機能
-
-GsplatMeshは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
-
-:::
 
 :::note
 

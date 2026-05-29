@@ -1,15 +1,9 @@
 ---
 title: スプラット処理
-description: "GPUスプラット処理向けGSplatProcessor：カスタムシェーダー、読み書きストリーム、ペイントや選択などの用途（ベータ）。"
+description: "GPUスプラット処理向けGSplatProcessor：カスタムシェーダー、読み書きストリーム、ペイントや選択などの用途。"
 ---
 
 `GSplatProcessor`は、カスタムシェーダーコードを使用したGaussian SplatデータのGPUベースの処理を可能にします。ソーステクスチャストリームから読み取り、結果を宛先ストリームに書き込むことで、ペイント、選択、削除、カスタムデータ変換などの操作を可能にします。
-
-:::info ベータ機能
-
-スプラット処理は現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
-
-:::
 
 :::note
 

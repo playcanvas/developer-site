@@ -1,15 +1,9 @@
 ---
 title: 画像からスプラットへ
-description: "GsplatImage Script：テクスチャをXZ平面上のスプラットに変換し、非透明ピクセルごとに1スプラットとしてスタイル化表示します（ベータ）。"
+description: "GsplatImage Script：テクスチャをXZ平面上のスプラットに変換し、非透明ピクセルごとに1スプラットとしてスタイル化表示します。"
 ---
 
 `GsplatImage`スクリプトは、非透明ピクセルごとに1つのスプラットとして画像をGaussian splatsでレンダリングします。これにより、画像がポイントベースの表現として表示されるユニークな視覚効果が作成されます。
-
-:::info ベータ機能
-
-GsplatImageは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
-
-:::
 
 :::note
 

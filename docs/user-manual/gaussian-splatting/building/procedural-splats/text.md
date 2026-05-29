@@ -1,15 +1,9 @@
 ---
 title: Text to Splats
-description: "GsplatText script: render labels as splats from canvas text with fonts, stroke, and fill on the XZ plane in splat scenes (beta)."
+description: "GsplatText script: render labels as splats from canvas text with fonts, stroke, and fill on the XZ plane in splat scenes."
 ---
 
 The `GsplatText` script renders text as Gaussian splats, with one splat per non-transparent pixel. This creates text labels that integrate seamlessly with splat-based scenes.
-
-:::info Beta Feature
-
-GsplatText is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 

@@ -1,15 +1,9 @@
 ---
 title: プロシージャルスプラット
-description: "GSplatContainerのプロシージャルスプラット：CPUとGPUでの生成、組み込みフォーマット、GSplatFormatとプロセッサとの連携（ベータ）。"
+description: "GSplatContainerのプロシージャルスプラット：CPUとGPUでの生成、組み込みフォーマット、GSplatFormatとプロセッサとの連携。"
 ---
 
 `GSplatContainer`を使用すると、ファイルからロードするのではなく、プログラムでGaussian splatデータを作成できます。これは、動的な可視化、プロシージャルエフェクト、他のデータ型をスプラットに変換する場合に便利です。
-
-:::info ベータ機能
-
-プロシージャルスプラットは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
-
-:::
 
 :::note
 

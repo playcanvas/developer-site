@@ -1,15 +1,9 @@
 ---
 title: Image to Splats
-description: "GsplatImage script: convert a texture into splats on the XZ plane with one splat per non-transparent pixel for stylized displays (beta)."
+description: "GsplatImage script: convert a texture into splats on the XZ plane with one splat per non-transparent pixel for stylized displays."
 ---
 
 The `GsplatImage` script renders an image as Gaussian splats, with one splat per non-transparent pixel. This creates a unique visual effect where images appear as point-based representations.
-
-:::info Beta Feature
-
-GsplatImage is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 
