@@ -229,8 +229,7 @@ container.update(numSplats);
 
 // Add to scene via gsplat component
 entity.addComponent('gsplat', {
-    resource: container,
-    unified: true
+    resource: container
 });
 ```
 

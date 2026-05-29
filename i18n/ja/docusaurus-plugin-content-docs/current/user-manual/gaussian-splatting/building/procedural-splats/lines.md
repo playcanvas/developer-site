@@ -1,6 +1,6 @@
 ---
 title: 線と形状
-description: "GsplatLines Script：スプラットベースの線、矢印、AABBワイヤーフレーム。統合モードでのCAD風ビジュアライゼーションとデバッグに（ベータ）。"
+description: "GsplatLines Script：スプラットベースの線、矢印、AABBワイヤーフレーム。CAD風ビジュアライゼーションとデバッグに（ベータ）。"
 ---
 
 `GsplatLines`スクリプトは、Gaussian splatsを使用して線ベースのデバッグプリミティブをレンダリングします。線、矢印、軸揃えバウンディングボックス（AABB）をサポートし、CADスタイルの可視化やデバッグに便利です。

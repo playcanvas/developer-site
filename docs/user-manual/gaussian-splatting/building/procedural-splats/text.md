@@ -1,6 +1,6 @@
 ---
 title: Text to Splats
-description: "GsplatText script: render labels as splats from canvas text with fonts, stroke, and fill on the XZ plane in unified splat scenes (beta)."
+description: "GsplatText script: render labels as splats from canvas text with fonts, stroke, and fill on the XZ plane in splat scenes (beta)."
 ---
 
 The `GsplatText` script renders text as Gaussian splats, with one splat per non-transparent pixel. This creates text labels that integrate seamlessly with splat-based scenes.

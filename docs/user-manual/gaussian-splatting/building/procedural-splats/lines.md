@@ -1,6 +1,6 @@
 ---
 title: Lines and Shapes
-description: "GsplatLines script: splat-based lines, arrows, and AABB wireframes for CAD-style visualization and debugging in unified mode (beta)."
+description: "GsplatLines script: splat-based lines, arrows, and AABB wireframes for CAD-style visualization and debugging (beta)."
 ---
 
 The `GsplatLines` script renders line-based debug primitives using Gaussian splats. It supports lines, arrows, and axis-aligned bounding boxes (AABBs), making it useful for CAD-style visualizations and debugging.
