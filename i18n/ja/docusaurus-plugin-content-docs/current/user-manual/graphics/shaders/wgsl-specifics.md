@@ -393,6 +393,26 @@ fragDepth: @builtin(frag_depth)
   - **プリプロセッサ定義:** `CAPS_STORAGE_TEXTURE_READ`（デバイスがストレージテクスチャの読み取りに対応しているときに有効。コードパス分岐用）
   - **シェーダー段階:** 機能を使う場合にコンピュート
   - **説明:** エンジンは能力の宣言のみ。`requires` は必ず筆者が書く想定
+- **`device.supportsUnrestrictedPointerParameters`**
+  - **エンジンが注入:** `requires unrestricted_pointer_parameters;`
+  - **プリプロセッサ定義:** `CAPS_UNRESTRICTED_POINTER_PARAMETERS`
+  - **シェーダー段階:** 頂点・フラグメント・コンピュート
+  - **説明:** `storage`・`uniform`・`workgroup` アドレス空間のポインタを関数の引数として渡せるようにします
+- **`device.supportsPointerCompositeAccess`**
+  - **エンジンが注入:** `requires pointer_composite_access;`
+  - **プリプロセッサ定義:** `CAPS_POINTER_COMPOSITE_ACCESS`
+  - **シェーダー段階:** 頂点・フラグメント・コンピュート
+  - **説明:** 複合型へのポインタのデリファレンスの糖衣構文。`(*p).field` や `(*p)[i]` の代わりに `p.field` や `p[i]` と書けます
+- **`device.supportsPacked4x8IntegerDotProduct`**
+  - **エンジンが注入:** `requires packed_4x8_integer_dot_product;`
+  - **プリプロセッサ定義:** `CAPS_PACKED_4X8_INTEGER_DOT_PRODUCT`
+  - **シェーダー段階:** 頂点・フラグメント・コンピュート
+  - **説明:** 8ビットパック整数の内積向け DP4a 系の組み込み関数（`dot4U8Packed`、`dot4I8Packed`、および `pack4x{I,U}8`、`pack4x{I,U}8Clamp`、`unpack4x{I,U}8` ヘルパー）を公開します。量子化推論や整数中心のコンピュートに有用
+- **`device.supportsTextureAndSamplerLet`**
+  - **エンジンが注入:** `requires texture_and_sampler_let;`
+  - **プリプロセッサ定義:** `CAPS_TEXTURE_AND_SAMPLER_LET`
+  - **シェーダー段階:** 頂点・フラグメント・コンピュート
+  - **説明:** テクスチャ・サンプラー変数を `let` バインディングに代入できるようにします（バインドレス的な間接参照パターンへの準備）
 
 使用例（コンピュート）— `CAPS_LINEAR_INDEXING` があるときは線形のワークグループ番号を使い、なければ従来の方法で求めます。
 

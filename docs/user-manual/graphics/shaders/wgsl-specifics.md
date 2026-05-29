@@ -393,6 +393,26 @@ At device creation, the engine reads `navigator.gpu.wgslLanguageFeatures` and ad
   - **Preprocessor define:** `CAPS_STORAGE_TEXTURE_READ` (set when the device can load from storage textures; use to share code paths)
   - **Shader stages:** compute, when you use the feature
   - **Details:** The engine only advertises the capability; the `requires` line is author-written so usage stays explicit
+- **`device.supportsUnrestrictedPointerParameters`**
+  - **Engine injects:** `requires unrestricted_pointer_parameters;`
+  - **Preprocessor define:** `CAPS_UNRESTRICTED_POINTER_PARAMETERS`
+  - **Shader stages:** vertex, fragment, and compute
+  - **Details:** Allows passing pointers in the `storage`, `uniform`, and `workgroup` address spaces as function arguments
+- **`device.supportsPointerCompositeAccess`**
+  - **Engine injects:** `requires pointer_composite_access;`
+  - **Preprocessor define:** `CAPS_POINTER_COMPOSITE_ACCESS`
+  - **Shader stages:** vertex, fragment, and compute
+  - **Details:** Syntactic sugar for dereferencing pointers to composite types — write `p.field` and `p[i]` instead of `(*p).field` and `(*p)[i]`
+- **`device.supportsPacked4x8IntegerDotProduct`**
+  - **Engine injects:** `requires packed_4x8_integer_dot_product;`
+  - **Preprocessor define:** `CAPS_PACKED_4X8_INTEGER_DOT_PRODUCT`
+  - **Shader stages:** vertex, fragment, and compute
+  - **Details:** Exposes the DP4a-family built-ins (`dot4U8Packed`, `dot4I8Packed`, and the `pack4x{I,U}8`, `pack4x{I,U}8Clamp`, `unpack4x{I,U}8` helpers) for 8-bit packed integer dot products; useful for quantized inference and integer-heavy compute
+- **`device.supportsTextureAndSamplerLet`**
+  - **Engine injects:** `requires texture_and_sampler_let;`
+  - **Preprocessor define:** `CAPS_TEXTURE_AND_SAMPLER_LET`
+  - **Shader stages:** vertex, fragment, and compute
+  - **Details:** Allows assigning texture and sampler variables to `let` bindings (preparation for bindless-style indirection patterns)
 
 Example (compute) — use a linear workgroup index when `CAPS_LINEAR_INDEXING` is set, otherwise fall back to manual layout math:
 
