@@ -62,6 +62,8 @@ const config = {
         // Gaussian splatting: unified-rendering merged into the rendering-architecture page (now its own section)
         { from: ['/user-manual/gaussian-splatting/building/unified-rendering/'], to: '/user-manual/gaussian-splatting/rendering-architecture/' },
         { from: ['/user-manual/gaussian-splatting/building/rendering-architecture/'], to: '/user-manual/gaussian-splatting/rendering-architecture/' },
+        // Gaussian splatting: Draw Order and Sorting folded into the Renderers page
+        { from: ['/user-manual/gaussian-splatting/building/draw-order/'], to: '/user-manual/gaussian-splatting/rendering-architecture/renderers/' },
         // Gaussian splatting: pipeline-internals topics now live under the Rendering Architecture section
         { from: ['/user-manual/gaussian-splatting/building/unified-rendering/splat-data-format/'], to: '/user-manual/gaussian-splatting/rendering-architecture/splat-data-format/' },
         { from: ['/user-manual/gaussian-splatting/building/unified-rendering/work-buffer-format/'], to: '/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format/' },
