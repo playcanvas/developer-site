@@ -18194,8 +18194,7 @@ container.update(numSplats);
 
 // Add to scene via gsplat component
 entity.addComponent('gsplat', {
-    resource: container,
-    unified: true
+    resource: container
 });
 ```
 
@@ -18638,8 +18637,7 @@ const container = meshSplat.entity.gsplat.resource;
 
 // Share with other entities
 anotherEntity.addComponent('gsplat', {
-    resource: container,
-    unified: true
+    resource: container
 });
 ```
 
@@ -20783,7 +20781,7 @@ See [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-spla
 
 ## Work Buffer Format
 
-The work buffer has its own format for storing intermediate splat data during unified rendering. You can add extra streams to it for customization during copy and render operations.
+The work buffer has its own format for storing intermediate splat data during rendering. You can add extra streams to it for customization during copy and render operations.
 
 See [Work Buffer Format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) for details on:
 
@@ -21121,7 +21119,7 @@ This feature builds on the [splat rendering architecture](/user-manual/gaussian-
 
 ## Pipeline Overview
 
-In unified rendering, splat data flows from resources through a **Copy** operation into the work buffer:
+Splat data flows from resources through a **Copy** operation into the work buffer:
 
 ```mermaid
 flowchart LR
