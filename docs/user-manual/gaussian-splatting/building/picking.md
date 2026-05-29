@@ -1,6 +1,6 @@
 ---
 title: Picking
-description: "Use the PlayCanvas Picker with splats in unified and non-unified modes: setup, depth picking, and code examples."
+description: "Use the PlayCanvas Picker with Gaussian splats: ID setup, depth picking, retrieving world position, and code examples."
 ---
 
 The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/classes/Picker.html) which can query the object rendered at a specified pixel. The picker works with splats in the same way that it does for meshes.
@@ -8,13 +8,6 @@ The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/
 **View Live Example** - See splat picking in action with interactive selection and world position detection.
 
 <EngineExample id="gaussian-splatting/picking" title="View Live Example" />
-
-## Unified vs Non-Unified Mode
-
-GSplat components can operate in unified or non-unified rendering mode (see [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture) for details). The picking behavior differs between these modes:
-
-- **Unified mode**: Picking returns the `GSplatComponent` directly.
-- **Non-unified mode**: Picking returns a mesh instance, which you then match to find the owning entity.
 
 ## Setting Up the Picker
 
@@ -27,22 +20,11 @@ const picker = new pc.Picker(app, 1, 1, true);
 
 The depth buffer is required if you want to retrieve the 3D world position of the picked point, not just identify which object was clicked.
 
-### Unified Mode Setup
-
-When using unified mode, you must enable ID tracking on the scene's gsplat manager. This should be done before rendering any splats:
+You must also enable ID tracking on the scene's gsplat manager. This should be done before rendering any splats:
 
 ```javascript
-// Enable gsplat ID for unified picking
+// Enable gsplat IDs so the picker can identify splat components
 app.scene.gsplat.enableIds = true;
-```
-
-And ensure your gsplat components are created with `unified: true`:
-
-```javascript
-entity.addComponent('gsplat', {
-    asset: splatAsset,
-    unified: true
-});
 ```
 
 ## Preparing for Picking
@@ -71,38 +53,21 @@ const scaledY = mouseY * pickerScale;
 
 ## Identifying Picked Objects
 
-Use `getSelectionAsync()` to get the picked objects at a screen position. The return value differs based on the rendering mode.
-
-### Unified Mode
-
-In unified mode, the picker returns the `GSplatComponent` directly:
+Use `getSelectionAsync()` to get the picked objects at a screen position. The picker returns the `GSplatComponent` directly:
 
 ```javascript
 const selection = await picker.getSelectionAsync(x, y, 1, 1);
 if (selection.length > 0) {
-    // In unified mode, selection contains GSplatComponent instances
+    // selection contains GSplatComponent instances
     const gsplatComponent = selection[0];
     // Find the entity that owns this component
     const entity = entities.find(e => e.gsplat === gsplatComponent);
 }
 ```
 
-### Non-Unified Mode
-
-In non-unified mode, the picker returns mesh instances:
-
-```javascript
-const meshInstances = await picker.getSelectionAsync(x, y, 1, 1);
-if (meshInstances.length > 0) {
-    const meshInstance = meshInstances[0];
-    // Find entity with matching mesh instance
-    const entity = entities.find(e => e.gsplat.instance.meshInstance === meshInstance);
-}
-```
-
 ## Getting World Position
 
-Use `getWorldPointAsync()` to get the 3D world position of a picked point. This works the same for both modes:
+Use `getWorldPointAsync()` to get the 3D world position of a picked point:
 
 ```javascript
 const worldPoint = await picker.getWorldPointAsync(x, y);
@@ -112,81 +77,15 @@ if (worldPoint) {
 }
 ```
 
-## Complete Example (Unified Mode)
+## Complete Example
 
-Here's a typical picking workflow for unified mode:
+Here's a typical picking workflow:
 
 ```javascript
-// Enable ID tracking for unified picking
+// Enable ID tracking for splat picking
 app.scene.gsplat.enableIds = true;
 
-// Create splat entities with unified mode
-const splat = new pc.Entity('splat');
-splat.addComponent('gsplat', {
-    asset: splatAsset,
-    unified: true
-});
-app.root.addChild(splat);
-
-// Create picker with depth support
-const picker = new pc.Picker(app, 1, 1, true);
-
-const handlePick = async (mouseX, mouseY) => {
-    // Use lower resolution for performance
-    const pickerScale = 0.25;
-    picker.resize(canvas.clientWidth * pickerScale, canvas.clientHeight * pickerScale);
-
-    // Prepare the picker
-    const worldLayer = app.scene.layers.getLayerByName('World');
-    picker.prepare(camera.camera, app.scene, [worldLayer]);
-
-    const x = mouseX * pickerScale;
-    const y = mouseY * pickerScale;
-
-    // Get the world position
-    const worldPoint = await picker.getWorldPointAsync(x, y);
-    if (!worldPoint) return;
-
-    // Get the picked object
-    const selection = await picker.getSelectionAsync(x, y, 1, 1);
-    if (selection.length === 0) return;
-
-    // In unified mode, selection contains the GSplatComponent directly
-    const gsplatComponent = selection[0];
-
-    // Find the entity that owns this component
-    const entity = splatEntities.find(e => e.gsplat === gsplatComponent);
-
-    if (entity) {
-        // Convert world position to entity's local space if needed
-        const localPos = entity.getWorldTransform()
-            .clone()
-            .invert()
-            .transformPoint(worldPoint);
-
-        console.log('Picked entity:', entity.name);
-        console.log('Local position:', localPos);
-    }
-};
-
-// Handle mouse clicks
-app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
-    handlePick(event.x, event.y);
-});
-
-// Handle touch events
-app.touch.on(pc.EVENT_TOUCHSTART, (event) => {
-    const touch = event.touches[0];
-    handlePick(touch.x, touch.y);
-});
-```
-
-## Complete Example (Non-Unified Mode)
-
-Here's a typical picking workflow for non-unified mode:
-
-```javascript
-// Create splat entities (non-unified is the default)
+// Create a splat entity
 const splat = new pc.Entity('splat');
 splat.addComponent('gsplat', {
     asset: splatAsset
@@ -213,15 +112,14 @@ const handlePick = async (mouseX, mouseY) => {
     if (!worldPoint) return;
 
     // Get the picked object
-    const meshInstances = await picker.getSelectionAsync(x, y, 1, 1);
-    if (meshInstances.length === 0) return;
+    const selection = await picker.getSelectionAsync(x, y, 1, 1);
+    if (selection.length === 0) return;
 
-    const meshInstance = meshInstances[0];
+    // selection contains the GSplatComponent directly
+    const gsplatComponent = selection[0];
 
-    // Find the gsplat entity that owns this mesh instance
-    const entity = splatEntities.find(
-        e => e.gsplat.instance.meshInstance === meshInstance
-    );
+    // Find the entity that owns this component
+    const entity = splatEntities.find(e => e.gsplat === gsplatComponent);
 
     if (entity) {
         // Convert world position to entity's local space if needed

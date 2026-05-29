@@ -1,299 +1,137 @@
 ---
 title: Custom Shaders
-description: "Customize non-unified GSplat rendering with the gsplatModifyVS shader chunk: API reference, GLSL and WGSL examples, and live demo links."
+description: "Customize Gaussian splat rendering with the gsplatModifyVS shader chunk on the scene gsplat material: overridable functions, GLSL/WGSL, and a live example."
 ---
 
-The PlayCanvas Engine supports custom shaders for Gaussian Splats, allowing you to create advanced visual effects and customize the rendering behavior beyond the standard implementation.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-:::note Non-Unified Rendering Only
-
-This page covers shader customization for **non-unified rendering** (when `entity.gsplat.unified = false`). Each component has its own material that can be customized independently.
-
-For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) which provides similar customization capabilities through a global render modifier.
-
-:::
-
-## Introduction
-
-Override the `gsplatModifyVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
+The PlayCanvas Engine lets you customize how Gaussian Splats are rendered by overriding the `gsplatModifyVS` shader chunk. The chunk is set on the scene-wide gsplat material ([`app.scene.gsplat.material`](https://api.playcanvas.com/engine/classes/GSplatParams.html#material)), so a single custom shader applies to **all** splats in the scene.
 
 **View Live Example** - See shader chunk customization in action with animated splats.
 
 <EngineExample id="gaussian-splatting/multi-splat" title="View Live Example" />
 
-## API Reference
+## Overridable Functions
 
-The `gsplatModifyVS` shader chunk allows you to override three functions that customize how splats are rendered:
+The `gsplatModifyVS` chunk lets you override three functions in the splat vertex stage:
 
-### modifySplatCenter
+| Function | Purpose |
+| --- | --- |
+| `modifySplatCenter` | Transform the splat center position (model space) |
+| `modifySplatRotationScale` | Adjust the splat rotation quaternion and scale |
+| `modifySplatColor` | Transform the splat color and opacity |
 
-Transform the position of splat centers in model space.
-
-**GLSL:**
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
 
 ```glsl
-void modifySplatCenter(inout vec3 center)
+void modifySplatCenter(inout vec3 center);
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale);
+void modifySplatColor(vec3 center, inout vec4 color);
 ```
 
-**WGSL:**
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
 
 ```wgsl
-fn modifySplatCenter(center: ptr<function, vec3f>)
+fn modifySplatCenter(center: ptr<function, vec3f>);
+fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>);
+fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>);
 ```
 
-**Parameters:**
+</TabItem>
+</Tabs>
 
-- `center` - The splat center position in model space
+You only need to implement the functions you want to change.
 
-**Example:**
+## How the Example Works
+
+The live example above animates every splat with a sine-wave displacement and a golden color pulse. It comes together in three steps.
+
+**1. Write the shader chunk**, overriding the functions you need. The example animates using a `uTime` uniform:
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
 
 ```glsl
-// Offset all splats up by 1 unit
-void modifySplatCenter(inout vec3 center) {
-    center.y += 1.0;
-}
-```
-
-### modifySplatRotationScale
-
-Modify the splat size and shape by adjusting the rotation quaternion and scale vector.
-
-**GLSL:**
-
-```glsl
-void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale)
-```
-
-**WGSL:**
-
-```wgsl
-fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>)
-```
-
-**Parameters:**
-
-- `originalCenter` - The original splat center position before modification
-- `modifiedCenter` - The splat center position after `modifySplatCenter()` was applied
-- `rotation` - Quaternion (x, y, z, w) representing the splat's rotation
-- `scale` - Scale vector representing the splat's size in each axis
-
-**Example:**
-
-```glsl
-// Scale all splats by 2x
-void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
-    scale *= 2.0;
-}
-```
-
-### modifySplatColor
-
-Transform splat colors and opacity.
-
-**GLSL:**
-
-```glsl
-void modifySplatColor(vec3 center, inout vec4 color)
-```
-
-**WGSL:**
-
-```wgsl
-fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>)
-```
-
-**Parameters:**
-
-- `center` - The splat center position (after `modifySplatCenter()` was applied)
-- `color` - The splat color (RGBA)
-
-**Example:**
-
-```glsl
-// Darken all splats by 50%
-void modifySplatColor(vec3 center, inout vec4 color) {
-    color.rgb *= 0.5;
-}
-```
-
-## Usage Examples
-
-### Basic Setup
-
-To apply a custom shader chunk to a Gaussian Splat material:
-
-```javascript
-// Get the shader language for the current device
-const shaderLanguage = device.isWebGPU ? 'wgsl' : 'glsl';
-
-// Define your custom shader code
-const customShader = `
-    // Your shader functions here
-`;
-
-// Set the custom shader chunk override on the gsplat material
-gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
-
-// Update the material to recompile with the new shader
-gsplatMaterial.update();
-```
-
-### GLSL Example: Position and Color Animation
-
-```javascript
-const customShader = `
 uniform float uTime;
 
 void modifySplatCenter(inout vec3 center) {
-    // Create a wave effect based on height
     float heightIntensity = center.y * 0.2;
     center.x += sin(uTime * 5.0 + center.y) * 0.3 * heightIntensity;
 }
 
 void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
-    // No modification to size
+    // no modification
 }
 
-void modifySplatColor(vec3 center, inout vec4 color) {
-    // Add a golden tint to the wave peaks
+void modifySplatColor(vec3 center, inout vec4 clr) {
     float sineValue = abs(sin(uTime * 5.0 + center.y));
     vec3 gold = vec3(1.0, 0.85, 0.0);
     float blend = smoothstep(0.9, 1.0, sineValue);
-    color.rgb = mix(color.rgb, gold, blend);
+    clr.xyz = mix(clr.xyz, gold, blend);
 }
-`;
-
-// Set the custom shader chunk override on the gsplat material
-const shaderLanguage = app.graphicsDevice.isWebGPU ? 'wgsl' : 'glsl';
-gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
-gsplatMaterial.update();
-
-// Update the uniform each frame
-const uTime = app.graphicsDevice.scope.resolve('uTime');
-let time = 0;
-app.on('update', (dt) => {
-    time += dt;
-    uTime.setValue(time);
-});
 ```
 
-### WGSL Example: Position and Color Animation
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
 
-```javascript
-const customShader = `
+```wgsl
 uniform uTime: f32;
 
 fn modifySplatCenter(center: ptr<function, vec3f>) {
-    // Create a wave effect based on height
     let heightIntensity = (*center).y * 0.2;
     (*center).x += sin(uniform.uTime * 5.0 + (*center).y) * 0.3 * heightIntensity;
 }
 
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
-    // No modification to size
+    // no modification
 }
 
-fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
-    // Add a golden tint to the wave peaks
+fn modifySplatColor(center: vec3f, clr: ptr<function, vec4f>) {
     let sineValue = abs(sin(uniform.uTime * 5.0 + center.y));
     let gold = vec3f(1.0, 0.85, 0.0);
     let blend = smoothstep(0.9, 1.0, sineValue);
-    (*color) = vec4f(mix((*color).rgb, gold, blend), (*color).a);
+    (*clr) = vec4f(mix((*clr).xyz, gold, blend), (*clr).a);
 }
-`;
-
-// Set the custom shader chunk override on the gsplat material
-const shaderLanguage = app.graphicsDevice.isWebGPU ? 'wgsl' : 'glsl';
-gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
-gsplatMaterial.update();
 ```
 
-### Removing Custom Shaders
+</TabItem>
+</Tabs>
 
-To remove a custom shader and revert to default rendering:
+**2. Apply the chunk to the scene gsplat material**, then update the material so it recompiles. Setting both the GLSL and WGSL chunk covers WebGL and WebGPU devices:
 
 ```javascript
-// Remove the custom shader chunk override from the gsplat material
-const shaderLanguage = app.graphicsDevice.isWebGPU ? 'wgsl' : 'glsl';
-gsplatMaterial.getShaderChunks(shaderLanguage).delete('gsplatModifyVS');
-gsplatMaterial.update();
+const sceneMat = app.scene.gsplat.material;
+
+sceneMat.getShaderChunks('glsl').set('gsplatModifyVS', glslVertShader);
+sceneMat.getShaderChunks('wgsl').set('gsplatModifyVS', wgslVertShader);
+sceneMat.update();
 ```
 
-## Helper Functions
+**3. Drive any uniforms each frame:**
 
-The following helper functions are available in `modifySplatRotationScale()` for manipulating splat size and shape:
-
-### gsplatGetSizeFromScale
-
-Extract the current size of a splat from its scale vector.
-
-**GLSL:**
-
-```glsl
-float gsplatGetSizeFromScale(vec3 scale)
+```javascript
+let currentTime = 0;
+app.on('update', (dt) => {
+    currentTime += dt;
+    sceneMat.setParameter('uTime', currentTime);
+    sceneMat.update();
+});
 ```
 
-**WGSL:**
+## Removing a Custom Shader
 
-```wgsl
-fn gsplatGetSizeFromScale(scale: vec3f) -> f32
+To revert to default rendering, delete the chunk override and update the material:
+
+```javascript
+const sceneMat = app.scene.gsplat.material;
+sceneMat.getShaderChunks('glsl').delete('gsplatModifyVS');
+sceneMat.getShaderChunks('wgsl').delete('gsplatModifyVS');
+sceneMat.update();
 ```
 
-**Example:**
+## See Also
 
-```glsl
-// Clamp splat size to a specific range
-float size = gsplatGetSizeFromScale(scale);
-float newSize = clamp(size, 0.01, 0.5);
-scale *= newSize / size;
-```
-
-### gsplatMakeSpherical
-
-Make splats spherical with a specific radius.
-
-**GLSL:**
-
-```glsl
-void gsplatMakeSpherical(inout vec3 scale, float radius)
-```
-
-**WGSL:**
-
-```wgsl
-fn gsplatMakeSpherical(scale: ptr<function, vec3f>, radius: f32)
-```
-
-**Example:**
-
-```glsl
-// Make all splats perfectly spherical with uniform size
-float size = gsplatGetSizeFromScale(scale);
-gsplatMakeSpherical(scale, size * 0.5);
-
-// Or hide a splat by setting scale to zero
-scale = vec3(0.0);
-```
-
-### Direct Scale Manipulation
-
-Since the new API provides direct access to the scale vector, you can easily modify splat sizes:
-
-```glsl
-// Double the size of all splats
-scale *= 2.0;
-
-// Scale non-uniformly
-scale.x *= 2.0;  // Stretch horizontally
-
-// Hide a splat
-scale = vec3(0.0);
-```
-
-## Examples
-
-Here are some examples demonstrating custom shader techniques:
-
-### Animation Effects
-
-**Simple Sinusoidal Animation** - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.
+- [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) — customize the global render pass that draws the sorted splats
