@@ -454,9 +454,12 @@ splat-transform \
 
 ### LOD形式の生成 {#generating-lod-format}
 
-LOD (Level of Detail) 形式は、大きなガウシアンスプラットシーンの効率的なストリーミングとレンダリングを可能にします。このツールは、事前に生成された複数のLODファイルを入力として受け取り、プログレッシブダウンロードのためにオクツリー構造を持つ最適化されたストリーミング形式を生成します。
+LOD (Level of Detail) 形式は、大きなガウシアンスプラットシーンの効率的なストリーミングとレンダリングを可能にします。SplatTransformは、段階的にガウシアンが少なくなる一連のLODレベル（LOD 0 = 最高詳細、数字が大きいほど詳細度が低い）から、プログレッシブダウンロードのためにオクツリー構造を持つ最適化されたストリーミング形式を構築します。
 
-**注:** このツールはLODレベル自体を作成しません — 段階的にガウシアンが少なくなる複数のLODファイルを提供する必要があります（LOD 0 = 最高詳細、数字が大きいほど詳細度が低い）。
+LODレベルは次の2つの方法で用意できます：
+
+- **独自のLODファイルを用意する** — 各レベルごとに個別のスプラットファイルを提供します（例：トレーニング時に生成したものや、別のツールからエクスポートしたもの）。
+- **単一のソースをデシメートして生成する** — `--decimate`を使用して、1つの高品質な入力から詳細度の低いレベルを作成できます。各レベルを個別に用意する必要はありません。
 
 :::warning 出力ファイル名の要件
 
@@ -480,6 +483,20 @@ splat-transform \
   output/lod-meta.json \
   --filter-nan \
   --filter-harmonics 0
+
+# 単一の高品質ソースをデシメートして詳細度の低いレベルを生成
+# ステップ1: ソーススプラットの段階的に小さいバージョンを作成
+splat-transform source.ply -F 50% lod1.ply
+splat-transform source.ply -F 25% lod2.ply
+splat-transform source.ply -F 10% lod3.ply
+# ステップ2: フル詳細のソースとデシメートしたレベルをストリーミングLOD形式にまとめる
+splat-transform \
+  source.ply -l 0 \
+  lod1.ply -l 1 \
+  lod2.ply -l 2 \
+  lod3.ply -l 3 \
+  output/lod-meta.json \
+  --filter-nan
 
 # より良いパフォーマンスのためにカスタムチャンク設定でLODを生成
 splat-transform \
@@ -508,6 +525,7 @@ splat-transform scene.lcc output/lod-meta.json
 
 **ヒント:**
 
+- `--decimate`（`-F`）を使用して、各レベルを個別に用意する代わりに、1つの高品質ソースから詳細度の低いLODレベルを生成
 - `--filter-nan`を使用して、処理前に無効なガウシアンを削除
 - 色の詳細がそれほど重要でない場合は、`--filter-harmonics 0`を使用してファイルサイズを削減
 - `-C`を使用して、スプラットを含む生成されるSOGファイルの数を制御

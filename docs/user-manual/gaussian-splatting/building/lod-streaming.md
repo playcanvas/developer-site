@@ -1,15 +1,9 @@
 ---
 title: LOD Streaming
-description: "LOD streaming for large splat scenes: octree layout, generating lod-meta data, examples, and beta performance guidance."
+description: "LOD streaming for large splat scenes: octree layout, generating lod-meta data, examples, and performance guidance."
 ---
 
 LOD (Level of Detail) Streaming enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail based on the camera's distance. This feature dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
-
-:::info Beta Feature
-
-LOD Streaming is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 ## How It Works
 
@@ -24,15 +18,12 @@ This approach allows you to render massive splat scenes that would otherwise be 
 
 ## Creating LOD Streaming Data
 
-To use LOD streaming, you need to generate the streaming format from multiple splat files with different levels of detail. The tool takes your pre-generated LOD files and creates an optimized streaming format.
+To use LOD streaming, you need to generate the streaming format — an octree-based `lod-meta.json` structure that organizes multiple levels of detail for efficient streaming. There are two ways to obtain the LOD levels:
 
-See the [Generating LOD Format](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions on how to create the required `lod-meta.json` format.
+- **Provide your own LOD levels** — supply multiple splat files at progressively lower detail (LOD 0 = highest detail, higher numbers = lower detail), for example produced during training or exported separately.
+- **Generate them with SplatTransform** — use [SplatTransform](/user-manual/splat-transform) to decimate a single high-quality splat into lower-detail levels, so you don't have to author them yourself.
 
-:::tip
-
-You must create the different LOD levels yourself (LOD 0 = highest detail, higher numbers = lower detail). The tool organizes these into a streaming-optimized format but doesn't create the simplified versions.
-
-:::
+Once you have the LOD levels, SplatTransform bundles them into the streaming-optimized format. See the [Generating LOD Format](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions.
 
 ## Live Examples
 
@@ -48,11 +39,7 @@ Explore these live examples to see LOD streaming in action:
 
 ## Enabling LOD Streaming
 
-To enable LOD streaming, set the [`unified`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#unified) property to `true` on your GSplat component and load a streaming LOD format asset:
-
-```javascript
-entity.gsplat.unified = true;
-```
+LOD streaming is enabled simply by loading a streaming LOD format asset (`lod-meta.json`) onto a GSplat component — no additional configuration is required.
 
 ## Controlling LOD Behavior
 
@@ -71,7 +58,7 @@ The default multiplier of 2 gives perceptually uniform transitions under perspec
 
 ### Scene-Level Control
 
-The [`Scene.gsplat`](https://api.playcanvas.com/engine/classes/Scene.html#gsplat) property provides access to scene-wide settings for unified gsplat rendering. This includes options for:
+The [`Scene.gsplat`](https://api.playcanvas.com/engine/classes/Scene.html#gsplat) property provides access to scene-wide settings for gsplat rendering. This includes options for:
 
 - Performance tuning parameters
 - Debug visualization settings
@@ -85,6 +72,8 @@ const gsplatSettings = app.scene.gsplat;
 // Configure settings as needed
 // (See API documentation for available properties)
 ```
+
+The most important scene-level setting for LOD streaming is the global splat budget, which automatically balances detail across all GSplat assets to hit a target splat count. See [Global Splat Budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget) in the Performance section for details.
 
 ## Using LOD Streaming in the Editor
 

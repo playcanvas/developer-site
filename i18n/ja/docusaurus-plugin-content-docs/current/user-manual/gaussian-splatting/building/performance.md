@@ -75,6 +75,45 @@ app.scene.gsplat.lodRangeMax = 3; // LOD 3より低くはしない
 
 ただし、一般的なレンダリングパフォーマンス管理には、LOD範囲制限よりもグローバルスプラットバジェットの方が効果的です。バジェットはすべてのアセット間で適切なバランスを自動的に見つけますが、LOD範囲制限はカメラ位置やシーン構成に関係なく一律に適用されます。
 
+### 最初のフレームを高速に表示する
+
+大規模なストリーミングシーンでは、最初に**最も低い**（最も粗い）詳細レベルだけをロードし、その後により高い詳細レベルをストリーミングで読み込むことで、ほぼ即座にレンダリング結果を表示できます。これにより、何かが画面に表示される前に高品質データの読み込みを待つ必要がなくなります。
+
+この手法は2つのステップで構成されます：
+
+1. GSplatアセットの作成時に、LOD範囲を最も粗いレベルのみに制限し、最小限のデータだけが先にロードされるようにします。
+2. GSplatシステムの`frame:ready`イベントをリッスンします。粗いデータがロードされてレンダリングされ、かつ読み込み中のものがなくなったら、LOD範囲を元に戻し、カメラ距離に基づいてより高い詳細レベルがストリーミングされるようにします。
+
+```javascript
+const gsplatSystem = app.systems.gsplat;
+
+// `entity` は、ロード済みのLODストリーミングアセットを使用する gsplat コンポーネントを持ちます
+const gsplat = entity.gsplat;
+
+// 1. 最初のフレームを最速にするため、最も低い（最も粗い）LODのみで開始
+const lodLevels = gsplat.resource?.octree?.lodLevels;
+if (lodLevels) {
+    const worstLod = lodLevels - 1;
+    app.scene.gsplat.lodRangeMin = worstLod;
+    app.scene.gsplat.lodRangeMax = worstLod;
+}
+
+// 2. 粗いデータがロードされてレンダリングされたら、LOD範囲を元に戻して
+//    より高い詳細レベルをストリーミングする
+const onFrameReady = (camera, layer, ready, loadingCount) => {
+    if (ready && loadingCount === 0) {
+        gsplatSystem.off('frame:ready', onFrameReady);
+
+        // 完全なLOD範囲を復元（0 = 最高詳細）
+        app.scene.gsplat.lodRangeMin = 0;
+        app.scene.gsplat.lodRangeMax = lodLevels - 1;
+    }
+};
+gsplatSystem.on('frame:ready', onFrameReady);
+```
+
+この手法は、ライブの[LODストリーミングサンプル](/user-manual/gaussian-splatting/building/lod-streaming)で実演されています。
+
 ### 推奨設定
 
 ほとんどのアプリケーションでは：
