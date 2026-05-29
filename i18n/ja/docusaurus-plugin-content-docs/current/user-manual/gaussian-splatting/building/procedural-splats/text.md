@@ -1,15 +1,9 @@
 ---
 title: テキストからスプラットへ
-description: "GsplatText Script：Canvasテキストからラベルをスプラットとしてレンダリング。フォント、ストローク、塗りでXZ平面上に表示します（スプラットシーン、ベータ）。"
+description: "GsplatText Script：Canvasテキストからラベルをスプラットとしてレンダリング。フォント、ストローク、塗りでXZ平面上に表示します（スプラットシーン）。"
 ---
 
 `GsplatText`スクリプトは、非透明ピクセルごとに1つのスプラットとしてテキストをGaussian splatsでレンダリングします。これにより、スプラットベースのシーンにシームレスに統合されるテキストラベルが作成されます。
-
-:::info ベータ機能
-
-GsplatTextは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
-
-:::
 
 :::note
 

@@ -1,15 +1,9 @@
 ---
 title: Work Buffer Rendering
-description: "Customize the render pass that draws sorted splats from the work buffer: global effects and integration with copy data (beta)."
+description: "Customize the render pass that draws sorted splats from the work buffer: global effects and integration with copy data."
 ---
 
 The render operation draws sorted splats from the work buffer. You can customize this globally to apply effects, read custom data written during copy, or modify how all splats appear.
-
-:::info Beta Feature
-
-Work Buffer Rendering customization is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 

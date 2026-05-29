@@ -1,15 +1,9 @@
 ---
 title: Mesh to Splats
-description: "GsplatMesh script: rasterize mesh triangles into uniformly distributed splats using render-component geometry for stylized splat models (beta)."
+description: "GsplatMesh script: rasterize mesh triangles into uniformly distributed splats using render-component geometry for stylized splat models."
 ---
 
 The `GsplatMesh` script converts mesh geometry into Gaussian splats. It extracts triangles from render components and generates uniformly distributed splats across the mesh surface using triangle rasterization.
-
-:::info Beta Feature
-
-GsplatMesh is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 

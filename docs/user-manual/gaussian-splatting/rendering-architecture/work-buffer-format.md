@@ -1,15 +1,9 @@
 ---
 title: Work Buffer Format
-description: "Work buffer format: copy stage customization, streams, and how data flows from resources into the work buffer (beta)."
+description: "Work buffer format: copy stage customization, streams, and how data flows from resources into the work buffer."
 ---
 
 The work buffer format defines the data streams available in the work buffer and how splat data is copied from resources. You can customize the copy operation to transform splats and write additional per-component data.
-
-:::info Beta Feature
-
-Work Buffer Format customization is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 

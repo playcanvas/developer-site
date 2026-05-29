@@ -1,15 +1,9 @@
 ---
 title: Splat Processing
-description: "GSplatProcessor for GPU splat processing: custom shaders, read-write streams, and use cases like painting and selection (beta)."
+description: "GSplatProcessor for GPU splat processing: custom shaders, read-write streams, and use cases like painting and selection."
 ---
 
 `GSplatProcessor` enables GPU-based processing of Gaussian Splat data using custom shader code. It reads from source texture streams and writes results to destination streams, enabling operations like painting, selection, deletion, and custom data transforms.
-
-:::info Beta Feature
-
-Splat Processing is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 

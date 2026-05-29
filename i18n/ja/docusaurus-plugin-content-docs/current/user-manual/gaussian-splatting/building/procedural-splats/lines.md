@@ -1,15 +1,9 @@
 ---
 title: 線と形状
-description: "GsplatLines Script：スプラットベースの線、矢印、AABBワイヤーフレーム。CAD風ビジュアライゼーションとデバッグに（ベータ）。"
+description: "GsplatLines Script：スプラットベースの線、矢印、AABBワイヤーフレーム。CAD風ビジュアライゼーションとデバッグに。"
 ---
 
 `GsplatLines`スクリプトは、Gaussian splatsを使用して線ベースのデバッグプリミティブをレンダリングします。線、矢印、軸揃えバウンディングボックス（AABB）をサポートし、CADスタイルの可視化やデバッグに便利です。
-
-:::info ベータ機能
-
-GsplatLinesは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
-
-:::
 
 :::note
 

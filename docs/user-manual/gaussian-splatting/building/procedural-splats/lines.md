@@ -1,15 +1,9 @@
 ---
 title: Lines and Shapes
-description: "GsplatLines script: splat-based lines, arrows, and AABB wireframes for CAD-style visualization and debugging (beta)."
+description: "GsplatLines script: splat-based lines, arrows, and AABB wireframes for CAD-style visualization and debugging."
 ---
 
 The `GsplatLines` script renders line-based debug primitives using Gaussian splats. It supports lines, arrows, and axis-aligned bounding boxes (AABBs), making it useful for CAD-style visualizations and debugging.
-
-:::info Beta Feature
-
-GsplatLines is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 

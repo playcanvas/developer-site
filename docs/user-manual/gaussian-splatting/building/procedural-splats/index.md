@@ -1,15 +1,9 @@
 ---
 title: Procedural Splats
-description: "GSplatContainer procedural splats: CPU and GPU population, built-in formats, and integration with GSplatFormat and processors (beta)."
+description: "GSplatContainer procedural splats: CPU and GPU population, built-in formats, and integration with GSplatFormat and processors."
 ---
 
 `GSplatContainer` enables you to create Gaussian splat data programmatically rather than loading it from files. This is useful for dynamic visualizations, procedural effects, and converting other data types to splats.
-
-:::info Beta Feature
-
-Procedural Splats is currently in beta. If you encounter any issues, please report them on the [PlayCanvas Engine GitHub repository](https://github.com/playcanvas/engine/issues).
-
-:::
 
 :::note
 

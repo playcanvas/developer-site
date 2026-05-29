@@ -1,18 +1,12 @@
 ---
 title: スプラットデータフォーマット
-description: "GSplatFormatとGPUテクスチャストリーム：スプラット属性の格納、シェーダーからのアクセス、データレイアウトのカスタマイズ（ベータ）。"
+description: "GSplatFormatとGPUテクスチャストリーム：スプラット属性の格納、シェーダーからのアクセス、データレイアウトのカスタマイズ。"
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 `GSplatFormat`は、スプラットデータがGPUテクスチャにどのように格納されるかを記述し、そのデータを読み取るために必要なシェーダーコードを生成します。テクスチャストリーム（名前とピクセルフォーマット）とスプラット属性を抽出するためのシェーダーコードを定義します。
-
-:::info ベータ機能
-
-スプラットデータフォーマットは現在ベータ版です。問題が発生した場合は、[PlayCanvas Engine GitHubリポジトリ](https://github.com/playcanvas/engine/issues)で報告してください。
-
-:::
 
 :::note
 
