@@ -113,8 +113,7 @@ const container = meshSplat.entity.gsplat.resource;
 
 // 他のエンティティと共有
 anotherEntity.addComponent('gsplat', {
-    resource: container,
-    unified: true
+    resource: container
 });
 ```
 

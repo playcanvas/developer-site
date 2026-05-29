@@ -1,6 +1,6 @@
 ---
 title: Work Buffer Rendering
-description: "Customize the unified render pass that draws sorted splats from the work buffer: global effects and integration with copy data (beta)."
+description: "Customize the render pass that draws sorted splats from the work buffer: global effects and integration with copy data (beta)."
 ---
 
 The render operation draws sorted splats from the work buffer. You can customize this globally to apply effects, read custom data written during copy, or modify how all splats appear.

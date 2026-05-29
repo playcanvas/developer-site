@@ -1,6 +1,6 @@
 ---
 title: Work Buffer Format
-description: "Work buffer format in unified rendering: copy stage customization, streams, and how data flows from resources into the work buffer (beta)."
+description: "Work buffer format: copy stage customization, streams, and how data flows from resources into the work buffer (beta)."
 ---
 
 The work buffer format defines the data streams available in the work buffer and how splat data is copied from resources. You can customize the copy operation to transform splats and write additional per-component data.
@@ -19,7 +19,7 @@ This feature builds on the [splat rendering architecture](/user-manual/gaussian-
 
 ## Pipeline Overview
 
-In unified rendering, splat data flows from resources through a **Copy** operation into the work buffer:
+Splat data flows from resources through a **Copy** operation into the work buffer:
 
 ```mermaid
 flowchart LR

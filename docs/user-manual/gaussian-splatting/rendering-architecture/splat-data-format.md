@@ -169,7 +169,7 @@ See [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-spla
 
 ## Work Buffer Format
 
-The work buffer has its own format for storing intermediate splat data during unified rendering. You can add extra streams to it for customization during copy and render operations.
+The work buffer has its own format for storing intermediate splat data during rendering. You can add extra streams to it for customization during copy and render operations.
 
 See [Work Buffer Format](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format) for details on:
 
