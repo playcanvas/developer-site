@@ -87,4 +87,4 @@ The following features build on this rendering pipeline:
 ## See Also
 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
-- [Draw Order and Sorting](/user-manual/gaussian-splatting/building/draw-order)
+- [Renderers](/user-manual/gaussian-splatting/rendering-architecture/renderers)

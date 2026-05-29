@@ -876,6 +876,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/rendering-architecture/work-buffer-format',
             'user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering',
             'user-manual/gaussian-splatting/rendering-architecture/splat-processing',
+            'user-manual/gaussian-splatting/rendering-architecture/renderers',
           ],
         },
         {
@@ -900,7 +901,6 @@ const sidebars = {
                 'user-manual/gaussian-splatting/building/your-first-app/web-components',
               ],
             },
-            'user-manual/gaussian-splatting/building/draw-order',
             'user-manual/gaussian-splatting/building/lod-streaming',
             'user-manual/gaussian-splatting/building/picking',
             'user-manual/gaussian-splatting/building/shadows',

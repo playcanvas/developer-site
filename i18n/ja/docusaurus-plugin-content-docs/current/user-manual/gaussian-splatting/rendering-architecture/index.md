@@ -87,4 +87,4 @@ Global Sortingサンプルでは、すべてのスプラットを一緒にソー
 ## 関連項目
 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
-- [描画順序とソート](/user-manual/gaussian-splatting/building/draw-order)
+- [レンダラー](/user-manual/gaussian-splatting/rendering-architecture/renderers)
