@@ -17375,298 +17375,63 @@ This section shows how you can build Gaussian splat-based apps using PlayCanvas.
 
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/
 
-The PlayCanvas Engine supports custom shaders for Gaussian Splats, allowing you to create advanced visual effects and customize the rendering behavior beyond the standard implementation.
-
-:::note Non-Unified Rendering Only
-
-This page covers shader customization for **non-unified rendering** (when `entity.gsplat.unified = false`). Each component has its own material that can be customized independently.
-
-For **unified rendering**, see [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) which provides similar customization capabilities through a global render modifier.
-
-:::
-
-## Introduction
-
-Override the `gsplatModifyVS` shader chunk to customize splat position, size, and color. This allows you to override only the relevant parts of the shader while leaving the core shader functionality intact.
+The PlayCanvas Engine lets you customize how Gaussian Splats are rendered by overriding the `gsplatModifyVS` shader chunk. The chunk is set on the scene-wide gsplat material ([`app.scene.gsplat.material`](https://api.playcanvas.com/engine/classes/GSplatParams.html#material)), so a single custom shader applies to **all** splats in the scene.
 
 **View Live Example** - See shader chunk customization in action with animated splats.
 
-## API Reference
+## Overridable Functions
 
-The `gsplatModifyVS` shader chunk allows you to override three functions that customize how splats are rendered:
+The `gsplatModifyVS` chunk lets you override three functions in the splat vertex stage:
 
-### modifySplatCenter
+| Function | Purpose |
+| --- | --- |
+| `modifySplatCenter` | Transform the splat center position (model space) |
+| `modifySplatRotationScale` | Adjust the splat rotation quaternion and scale |
+| `modifySplatColor` | Transform the splat color and opacity |
 
-Transform the position of splat centers in model space.
+You only need to implement the functions you want to change.
 
-**GLSL:**
+## How the Example Works
 
-```glsl
-void modifySplatCenter(inout vec3 center)
-```
+The live example above animates every splat with a sine-wave displacement and a golden color pulse. It comes together in three steps.
 
-**WGSL:**
+**1. Write the shader chunk**, overriding the functions you need. The example animates using a `uTime` uniform:
 
-```wgsl
-fn modifySplatCenter(center: ptr<function, vec3f>)
-```
-
-**Parameters:**
-
-- `center` - The splat center position in model space
-
-**Example:**
-
-```glsl
-// Offset all splats up by 1 unit
-void modifySplatCenter(inout vec3 center) {
-    center.y += 1.0;
-}
-```
-
-### modifySplatRotationScale
-
-Modify the splat size and shape by adjusting the rotation quaternion and scale vector.
-
-**GLSL:**
-
-```glsl
-void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale)
-```
-
-**WGSL:**
-
-```wgsl
-fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>)
-```
-
-**Parameters:**
-
-- `originalCenter` - The original splat center position before modification
-- `modifiedCenter` - The splat center position after `modifySplatCenter()` was applied
-- `rotation` - Quaternion (x, y, z, w) representing the splat's rotation
-- `scale` - Scale vector representing the splat's size in each axis
-
-**Example:**
-
-```glsl
-// Scale all splats by 2x
-void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
-    scale *= 2.0;
-}
-```
-
-### modifySplatColor
-
-Transform splat colors and opacity.
-
-**GLSL:**
-
-```glsl
-void modifySplatColor(vec3 center, inout vec4 color)
-```
-
-**WGSL:**
-
-```wgsl
-fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>)
-```
-
-**Parameters:**
-
-- `center` - The splat center position (after `modifySplatCenter()` was applied)
-- `color` - The splat color (RGBA)
-
-**Example:**
-
-```glsl
-// Darken all splats by 50%
-void modifySplatColor(vec3 center, inout vec4 color) {
-    color.rgb *= 0.5;
-}
-```
-
-## Usage Examples
-
-### Basic Setup
-
-To apply a custom shader chunk to a Gaussian Splat material:
+**2. Apply the chunk to the scene gsplat material**, then update the material so it recompiles. Setting both the GLSL and WGSL chunk covers WebGL and WebGPU devices:
 
 ```javascript
-// Get the shader language for the current device
-const shaderLanguage = device.isWebGPU ? 'wgsl' : 'glsl';
+const sceneMat = app.scene.gsplat.material;
 
-// Define your custom shader code
-const customShader = `
-    // Your shader functions here
-`;
-
-// Set the custom shader chunk override on the gsplat material
-gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
-
-// Update the material to recompile with the new shader
-gsplatMaterial.update();
+sceneMat.getShaderChunks('glsl').set('gsplatModifyVS', glslVertShader);
+sceneMat.getShaderChunks('wgsl').set('gsplatModifyVS', wgslVertShader);
+sceneMat.update();
 ```
 
-### GLSL Example: Position and Color Animation
+**3. Drive any uniforms each frame:**
 
 ```javascript
-const customShader = `
-uniform float uTime;
-
-void modifySplatCenter(inout vec3 center) {
-    // Create a wave effect based on height
-    float heightIntensity = center.y * 0.2;
-    center.x += sin(uTime * 5.0 + center.y) * 0.3 * heightIntensity;
-}
-
-void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
-    // No modification to size
-}
-
-void modifySplatColor(vec3 center, inout vec4 color) {
-    // Add a golden tint to the wave peaks
-    float sineValue = abs(sin(uTime * 5.0 + center.y));
-    vec3 gold = vec3(1.0, 0.85, 0.0);
-    float blend = smoothstep(0.9, 1.0, sineValue);
-    color.rgb = mix(color.rgb, gold, blend);
-}
-`;
-
-// Set the custom shader chunk override on the gsplat material
-const shaderLanguage = app.graphicsDevice.isWebGPU ? 'wgsl' : 'glsl';
-gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
-gsplatMaterial.update();
-
-// Update the uniform each frame
-const uTime = app.graphicsDevice.scope.resolve('uTime');
-let time = 0;
+let currentTime = 0;
 app.on('update', (dt) => {
-    time += dt;
-    uTime.setValue(time);
+    currentTime += dt;
+    sceneMat.setParameter('uTime', currentTime);
+    sceneMat.update();
 });
 ```
 
-### WGSL Example: Position and Color Animation
+## Removing a Custom Shader
+
+To revert to default rendering, delete the chunk override and update the material:
 
 ```javascript
-const customShader = `
-uniform uTime: f32;
-
-fn modifySplatCenter(center: ptr<function, vec3f>) {
-    // Create a wave effect based on height
-    let heightIntensity = (*center).y * 0.2;
-    (*center).x += sin(uniform.uTime * 5.0 + (*center).y) * 0.3 * heightIntensity;
-}
-
-fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
-    // No modification to size
-}
-
-fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
-    // Add a golden tint to the wave peaks
-    let sineValue = abs(sin(uniform.uTime * 5.0 + center.y));
-    let gold = vec3f(1.0, 0.85, 0.0);
-    let blend = smoothstep(0.9, 1.0, sineValue);
-    (*color) = vec4f(mix((*color).rgb, gold, blend), (*color).a);
-}
-`;
-
-// Set the custom shader chunk override on the gsplat material
-const shaderLanguage = app.graphicsDevice.isWebGPU ? 'wgsl' : 'glsl';
-gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
-gsplatMaterial.update();
+const sceneMat = app.scene.gsplat.material;
+sceneMat.getShaderChunks('glsl').delete('gsplatModifyVS');
+sceneMat.getShaderChunks('wgsl').delete('gsplatModifyVS');
+sceneMat.update();
 ```
 
-### Removing Custom Shaders
+## See Also
 
-To remove a custom shader and revert to default rendering:
-
-```javascript
-// Remove the custom shader chunk override from the gsplat material
-const shaderLanguage = app.graphicsDevice.isWebGPU ? 'wgsl' : 'glsl';
-gsplatMaterial.getShaderChunks(shaderLanguage).delete('gsplatModifyVS');
-gsplatMaterial.update();
-```
-
-## Helper Functions
-
-The following helper functions are available in `modifySplatRotationScale()` for manipulating splat size and shape:
-
-### gsplatGetSizeFromScale
-
-Extract the current size of a splat from its scale vector.
-
-**GLSL:**
-
-```glsl
-float gsplatGetSizeFromScale(vec3 scale)
-```
-
-**WGSL:**
-
-```wgsl
-fn gsplatGetSizeFromScale(scale: vec3f) -> f32
-```
-
-**Example:**
-
-```glsl
-// Clamp splat size to a specific range
-float size = gsplatGetSizeFromScale(scale);
-float newSize = clamp(size, 0.01, 0.5);
-scale *= newSize / size;
-```
-
-### gsplatMakeSpherical
-
-Make splats spherical with a specific radius.
-
-**GLSL:**
-
-```glsl
-void gsplatMakeSpherical(inout vec3 scale, float radius)
-```
-
-**WGSL:**
-
-```wgsl
-fn gsplatMakeSpherical(scale: ptr<function, vec3f>, radius: f32)
-```
-
-**Example:**
-
-```glsl
-// Make all splats perfectly spherical with uniform size
-float size = gsplatGetSizeFromScale(scale);
-gsplatMakeSpherical(scale, size * 0.5);
-
-// Or hide a splat by setting scale to zero
-scale = vec3(0.0);
-```
-
-### Direct Scale Manipulation
-
-Since the new API provides direct access to the scale vector, you can easily modify splat sizes:
-
-```glsl
-// Double the size of all splats
-scale *= 2.0;
-
-// Scale non-uniformly
-scale.x *= 2.0;  // Stretch horizontally
-
-// Hide a splat
-scale = vec3(0.0);
-```
-
-## Examples
-
-Here are some examples demonstrating custom shader techniques:
-
-### Animation Effects
-
-**Simple Sinusoidal Animation** - Applies a simple shader to animate Gaussian color and position using a sine wave. This example demonstrates how to create dynamic, procedural motion effects by modifying splat properties in real-time.
+- [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) — customize the global render pass that draws the sorted splats
 
 --------------------------------------------------------------------------------
 
@@ -18045,13 +17810,6 @@ The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/
 
 **View Live Example** - See splat picking in action with interactive selection and world position detection.
 
-## Unified vs Non-Unified Mode
-
-GSplat components can operate in unified or non-unified rendering mode (see [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture) for details). The picking behavior differs between these modes:
-
-- **Unified mode**: Picking returns the `GSplatComponent` directly.
-- **Non-unified mode**: Picking returns a mesh instance, which you then match to find the owning entity.
-
 ## Setting Up the Picker
 
 To pick splats, create a Picker instance with depth enabled (third parameter set to `true`):
@@ -18063,22 +17821,11 @@ const picker = new pc.Picker(app, 1, 1, true);
 
 The depth buffer is required if you want to retrieve the 3D world position of the picked point, not just identify which object was clicked.
 
-### Unified Mode Setup
-
-When using unified mode, you must enable ID tracking on the scene's gsplat manager. This should be done before rendering any splats:
+You must also enable ID tracking on the scene's gsplat manager. This should be done before rendering any splats:
 
 ```javascript
-// Enable gsplat ID for unified picking
+// Enable gsplat IDs so the picker can identify splat components
 app.scene.gsplat.enableIds = true;
-```
-
-And ensure your gsplat components are created with `unified: true`:
-
-```javascript
-entity.addComponent('gsplat', {
-    asset: splatAsset,
-    unified: true
-});
 ```
 
 ## Preparing for Picking
@@ -18107,38 +17854,21 @@ const scaledY = mouseY * pickerScale;
 
 ## Identifying Picked Objects
 
-Use `getSelectionAsync()` to get the picked objects at a screen position. The return value differs based on the rendering mode.
-
-### Unified Mode
-
-In unified mode, the picker returns the `GSplatComponent` directly:
+Use `getSelectionAsync()` to get the picked objects at a screen position. The picker returns the `GSplatComponent` directly:
 
 ```javascript
 const selection = await picker.getSelectionAsync(x, y, 1, 1);
 if (selection.length > 0) {
-    // In unified mode, selection contains GSplatComponent instances
+    // selection contains GSplatComponent instances
     const gsplatComponent = selection[0];
     // Find the entity that owns this component
     const entity = entities.find(e => e.gsplat === gsplatComponent);
 }
 ```
 
-### Non-Unified Mode
-
-In non-unified mode, the picker returns mesh instances:
-
-```javascript
-const meshInstances = await picker.getSelectionAsync(x, y, 1, 1);
-if (meshInstances.length > 0) {
-    const meshInstance = meshInstances[0];
-    // Find entity with matching mesh instance
-    const entity = entities.find(e => e.gsplat.instance.meshInstance === meshInstance);
-}
-```
-
 ## Getting World Position
 
-Use `getWorldPointAsync()` to get the 3D world position of a picked point. This works the same for both modes:
+Use `getWorldPointAsync()` to get the 3D world position of a picked point:
 
 ```javascript
 const worldPoint = await picker.getWorldPointAsync(x, y);
@@ -18148,81 +17878,15 @@ if (worldPoint) {
 }
 ```
 
-## Complete Example (Unified Mode)
+## Complete Example
 
-Here's a typical picking workflow for unified mode:
+Here's a typical picking workflow:
 
 ```javascript
-// Enable ID tracking for unified picking
+// Enable ID tracking for splat picking
 app.scene.gsplat.enableIds = true;
 
-// Create splat entities with unified mode
-const splat = new pc.Entity('splat');
-splat.addComponent('gsplat', {
-    asset: splatAsset,
-    unified: true
-});
-app.root.addChild(splat);
-
-// Create picker with depth support
-const picker = new pc.Picker(app, 1, 1, true);
-
-const handlePick = async (mouseX, mouseY) => {
-    // Use lower resolution for performance
-    const pickerScale = 0.25;
-    picker.resize(canvas.clientWidth * pickerScale, canvas.clientHeight * pickerScale);
-
-    // Prepare the picker
-    const worldLayer = app.scene.layers.getLayerByName('World');
-    picker.prepare(camera.camera, app.scene, [worldLayer]);
-
-    const x = mouseX * pickerScale;
-    const y = mouseY * pickerScale;
-
-    // Get the world position
-    const worldPoint = await picker.getWorldPointAsync(x, y);
-    if (!worldPoint) return;
-
-    // Get the picked object
-    const selection = await picker.getSelectionAsync(x, y, 1, 1);
-    if (selection.length === 0) return;
-
-    // In unified mode, selection contains the GSplatComponent directly
-    const gsplatComponent = selection[0];
-
-    // Find the entity that owns this component
-    const entity = splatEntities.find(e => e.gsplat === gsplatComponent);
-
-    if (entity) {
-        // Convert world position to entity's local space if needed
-        const localPos = entity.getWorldTransform()
-            .clone()
-            .invert()
-            .transformPoint(worldPoint);
-
-        console.log('Picked entity:', entity.name);
-        console.log('Local position:', localPos);
-    }
-};
-
-// Handle mouse clicks
-app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
-    handlePick(event.x, event.y);
-});
-
-// Handle touch events
-app.touch.on(pc.EVENT_TOUCHSTART, (event) => {
-    const touch = event.touches[0];
-    handlePick(touch.x, touch.y);
-});
-```
-
-## Complete Example (Non-Unified Mode)
-
-Here's a typical picking workflow for non-unified mode:
-
-```javascript
-// Create splat entities (non-unified is the default)
+// Create a splat entity
 const splat = new pc.Entity('splat');
 splat.addComponent('gsplat', {
     asset: splatAsset
@@ -18249,15 +17913,14 @@ const handlePick = async (mouseX, mouseY) => {
     if (!worldPoint) return;
 
     // Get the picked object
-    const meshInstances = await picker.getSelectionAsync(x, y, 1, 1);
-    if (meshInstances.length === 0) return;
+    const selection = await picker.getSelectionAsync(x, y, 1, 1);
+    if (selection.length === 0) return;
 
-    const meshInstance = meshInstances[0];
+    // selection contains the GSplatComponent directly
+    const gsplatComponent = selection[0];
 
-    // Find the gsplat entity that owns this mesh instance
-    const entity = splatEntities.find(
-        e => e.gsplat.instance.meshInstance === meshInstance
-    );
+    // Find the entity that owns this component
+    const entity = splatEntities.find(e => e.gsplat === gsplatComponent);
 
     if (entity) {
         // Convert world position to entity's local space if needed
@@ -19177,20 +18840,10 @@ entity.light.castShadows = true;
 
 For better shadow quality, you can adjust the alpha clip threshold. This controls how transparent splats contribute to shadows — lower values include more semi-transparent splats in the shadow, while higher values create sharper but potentially incomplete shadows.
 
-### Unified Mode
-
-In unified rendering mode, set the alpha clip threshold on the global GSplat settings:
+Set the alpha clip threshold on the global GSplat settings:
 
 ```javascript
 app.scene.gsplat.alphaClip = 0.4;
-```
-
-### Non-Unified Mode
-
-In non-unified mode, set the alpha clip threshold directly on the component's material:
-
-```javascript
-entity.gsplat.material.setParameter('alphaClip', 0.4);
 ```
 
 ## Receiving Shadows
@@ -21030,18 +20683,6 @@ The format generates shader functions to read splat data from texture streams. T
 
 By default, each splat reads its own data. To read from a different splat, use `setSplat(index)`:
 
-```glsl
-// GLSL
-setSplat(otherIndex);  // Set the splat index for subsequent reads
-vec3 pos = getCenter(); // Now reads from otherIndex
-```
-
-```wgsl
-// WGSL
-setSplat(otherIndex);
-let pos = getCenter();
-```
-
 ### Load Functions
 
 For each stream, two load functions are generated:
@@ -21055,16 +20696,6 @@ For example, a stream named `dataCenter` generates:
 
 - `loadDataCenter()` - reads using current splat index
 - `loadDataCenterWithIndex(index)` - reads from specified index
-
-```glsl
-// GLSL - Read from specific index without changing current splat
-vec4 otherCenter = loadDataCenterWithIndex(neighborIndex);
-```
-
-```wgsl
-// WGSL
-let otherCenter = loadDataCenterWithIndex(neighborIndex);
-```
 
 This is useful when you need to access neighbor splats or compare data across multiple splats.
 
