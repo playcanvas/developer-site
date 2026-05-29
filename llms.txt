@@ -326,7 +326,6 @@ Generated: 2026-05-29
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/ - Gaussian Splatting
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/ - Building Splat-based Apps
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/ - Custom Shaders
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/draw-order/ - Draw Order and Sorting
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/fisheye/ - Fisheye Rendering
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/ - LOD Streaming
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/ - Performance
@@ -350,6 +349,7 @@ Generated: 2026-05-29
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply/ - The PLY Format
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/ - The SOG Format
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/ - Splat Rendering Architecture
+- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/renderers/ - Renderers
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-data-format/ - Splat Data Format
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-processing/ - Splat Processing
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format/ - Work Buffer Format
