@@ -25,7 +25,7 @@ PlayCanvas は、カスタムシェーダーの作成を簡素化し、WebGL (GL
 
 ## クロスプラットフォームシェーダーのサポート
 
-カスタムシェーダーがすべてのデバイスとブラウザで動作するようにするには、シェーダーの [GLSL](/user-manual/graphics/shaders/glsl-specifics/) と [WGSL](/user-manual/graphics/shaders/wgsl-specifics/) の両方のバージョンを提供する必要があります。
+カスタムシェーダーがすべてのデバイスとブラウザで動作するようにするには、シェーダーの [GLSL](/user-manual/graphics/shaders/glsl-specifics/) と [WGSL](/user-manual/graphics/shaders/wgsl-reflection/) の両方のバージョンを提供する必要があります。
 
 - **GLSL** (OpenGL Shading Language): WebGL で使用されます
 - **WGSL** (WebGPU Shading Language): WebGPU で使用されます

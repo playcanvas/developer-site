@@ -23,7 +23,7 @@ if (device.supportsCompute) {
 
 ## WGSL language extensions
 
-When the browser exposes optional WGSL features (for example [linear workgroup / invocation indexing](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension), subgroups, or half-float), the engine sets the matching `device.supports*` flags and `CAPS_*` preprocessor defines. For a full list and usage notes, see [WGSL language extensions](/user-manual/graphics/shaders/wgsl-specifics#wgsl-language-extensions).
+When the browser exposes optional WGSL features (for example [linear workgroup / invocation indexing](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension), subgroups, or half-float), the engine sets the matching `device.supports*` flags and `CAPS_*` preprocessor defines. For a full list and usage notes, see [WGSL language extensions](/user-manual/graphics/shaders/wgsl-capabilities#wgsl-language-extensions).
 
 ## Creating a Compute Shader
 
@@ -434,7 +434,7 @@ The engine provides built-in shader chunks that are automatically available in c
 
 | Include | Description |
 |---------|-------------|
-| `halfTypesCS` | Half-precision type aliases (`half`, `half2`, etc.) that resolve to f16 when supported, f32 otherwise. See [Half-Precision Types](/user-manual/graphics/shaders/wgsl-specifics#half-precision-types). |
+| `halfTypesCS` | Half-precision type aliases (`half`, `half2`, etc.) that resolve to f16 when supported, f32 otherwise. See [Half-Precision Types](/user-manual/graphics/shaders/wgsl-capabilities#half-precision-types). |
 
 Example:
 

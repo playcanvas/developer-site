@@ -59,6 +59,8 @@ const config = {
         { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },
         { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },
         { from: ['/user-manual/graphics/gaussian-splatting/'], to: '/user-manual/gaussian-splatting/' },
+        // WGSL Specifics renamed/split: shared resource reflection now lives on its own page
+        { from: ['/user-manual/graphics/shaders/wgsl-specifics/'], to: '/user-manual/graphics/shaders/wgsl-reflection/' },
         // Gaussian splatting: unified-rendering merged into the rendering-architecture page (now its own section)
         { from: ['/user-manual/gaussian-splatting/building/unified-rendering/'], to: '/user-manual/gaussian-splatting/rendering-architecture/' },
         { from: ['/user-manual/gaussian-splatting/building/rendering-architecture/'], to: '/user-manual/gaussian-splatting/rendering-architecture/' },
