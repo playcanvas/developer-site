@@ -6,8 +6,8 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 589
-Generated: 2026-05-29
+Total Documents: 591
+Generated: 2026-06-02
 
 ## Recommended Entry Points
 
@@ -320,7 +320,9 @@ Generated: 2026-05-29
 - https://developer.playcanvas.com/user-manual/graphics/shaders/glsl-specifics/ - GLSL Specifics
 - https://developer.playcanvas.com/user-manual/graphics/shaders/migrations/ - Shader Chunk Migrations
 - https://developer.playcanvas.com/user-manual/graphics/shaders/preprocessor/ - Shader Preprocessor
-- https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-specifics/ - WGSL Specifics
+- https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-capabilities/ - WGSL Capabilities
+- https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-reflection/ - WGSL Reflection
+- https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders/ - WGSL Vertex and Fragment Shaders
 
 ### Gaussian Splatting
 - https://developer.playcanvas.com/user-manual/gaussian-splatting/ - Gaussian Splatting
