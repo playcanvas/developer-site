@@ -25,7 +25,7 @@ PlayCanvas provides the [ShaderMaterial](https://api.playcanvas.com/engine/class
 
 ## Cross-Platform Shader Support
 
-To ensure your custom shaders work across all devices and browsers, you should provide both [GLSL](/user-manual/graphics/shaders/glsl-specifics/) and [WGSL](/user-manual/graphics/shaders/wgsl-specifics/) versions of your shaders:
+To ensure your custom shaders work across all devices and browsers, you should provide both [GLSL](/user-manual/graphics/shaders/glsl-specifics/) and [WGSL](/user-manual/graphics/shaders/wgsl-reflection/) versions of your shaders:
 
 - **GLSL** (OpenGL Shading Language): Used by WebGL
 - **WGSL** (WebGPU Shading Language): Used by WebGPU
