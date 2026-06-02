@@ -3,7 +3,7 @@ title: WGSL Reflection
 description: "Simplified WGSL declarations without manual bind groups: how PlayCanvas reflects resources from shader source and assigns bindings."
 ---
 
-PlayCanvas reflects resources directly from your WGSL shader source: you declare uniforms, textures, and storage buffers without `@group`/`@binding` indices, and the engine parses these declarations, builds the bind group format, and assigns the bindings automatically. This simplified syntax is used by vertex and fragment shaders.
+PlayCanvas reflects resources directly from your WGSL shader source: you declare uniforms, textures, and storage buffers without `@group`/`@binding` indices, and the engine parses these declarations, builds the bind group format, and assigns the bindings automatically. This simplified syntax is used by vertex, fragment, and compute shaders.
 
 The following sections outline how resources are declared and reflected. For the vertex/fragment-only constructs (attributes, varyings, and fragment outputs), see [WGSL Vertex and Fragment Shaders](/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders).
 
@@ -184,3 +184,19 @@ struct Particle {
 // particle storage buffer in read-only mode
 var<storage, read> particles: array<Particle>;
 ```
+
+### Storage Textures
+
+Storage textures let a shader write (and optionally read) texels directly, without a sampler. They are most commonly used as the output of a compute shader. Declare them with the simplified `texture_storage_*` syntax, specifying the format and the access mode:
+
+```wgsl
+// write-only storage texture (the common case for compute output)
+var outputTexture: texture_storage_2d<rgba8unorm, write>;
+
+// writing a texel
+textureStore(outputTexture, vec2i(global_id.xy), color);
+```
+
+The access mode can be `write`, `read`, or `read_write`. Reading from a storage texture (`read` / `read_write`) requires the `device.supportsStorageTextureRead` capability and an author-supplied `requires readonly_and_readwrite_storage_textures;` directive — see [WGSL Capabilities](/user-manual/graphics/shaders/wgsl-capabilities#wgsl-language-extensions).
+
+The texture you bind must be created with the `storage: true` option (see [Compute Shaders](/user-manual/graphics/shaders/compute-shaders)).
