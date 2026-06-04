@@ -73,3 +73,37 @@ export class PlayerController extends Script {
         // Use clamp function...
     }
 }
+```
+
+## Registering Scripts (Engine-only)
+
+In the Editor, ESM scripts are registered automatically when their `.mjs` asset is loaded. In an **engine-only** project there is no asset pipeline doing this for you, so you must register each script class with the application's [`ScriptRegistry`](https://api.playcanvas.com/engine/classes/ScriptRegistry.html) yourself before you can attach it to an entity by name.
+
+Use `registerScript` (or the registry's `add` method) to register the class:
+
+```javascript
+import { registerScript } from 'playcanvas';
+import { Rotator } from './rotator.mjs';
+
+// register the class with the application's script registry
+registerScript(Rotator, undefined, app);
+
+// equivalently:
+// app.scripts.add(Rotator);
+```
+
+The registry uses the class's static `scriptName` as its key. Once registered, you can add the script to any entity by that name — including procedurally, when cloning, or when instantiating templates:
+
+```javascript
+const entity = new pc.Entity();
+entity.addComponent('script');
+
+// attach the script by its registered name
+entity.script.create('rotator');
+```
+
+:::tip
+
+Registering by name is what makes **asynchronous and procedural workflows** possible — for example dynamically `import()`-ing a script module at runtime and registering it, or instantiating entities from templates that reference scripts by name. If you only ever pass the class reference directly to `entity.script.create(Rotator)`, registration is not strictly required, but name-based lookup will not be available.
+
+:::
