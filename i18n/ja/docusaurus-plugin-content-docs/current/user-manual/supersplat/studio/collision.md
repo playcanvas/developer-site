@@ -13,13 +13,13 @@ description: "公開済みスプラットにボクセルコリジョンを追加
 
 ボクセルコリジョンアセットは、スプラットの粗い低解像度のボックスベース再構築です — 訪問者が立てる面、寄りかかれる面、ぶつかって止まる面です。スプラット自体とは別アセットなので、ビジュアル品質ではなくランタイム物理向けに独立して最適化できます。
 
+![Scene AssetsパネルのCollisionセクション。Generateボタンを表示](/img/user-manual/supersplat/studio/voxel-collision.webp)
+
 通常、シーンごとに1度生成し、ベースのスプラットに大きな変更があった場合のみ再生成します。
 
 ## ボクセルコリジョンの生成
 
 コリジョンを追加する推奨方法は、Studio内で直接生成することです。**Scene Assets**パネルの**Collision**セクションには**Generate**ボタンがあり、公開済みのスプラットに対してサーバーサイドのボクサライザを実行します — ファイルを準備したりアップロードしたりする必要はありません。
-
-![Scene AssetsパネルのCollisionセクション。Generateボタンを表示](/img/user-manual/supersplat/studio/voxel-collision.webp)
 
 1. **Scene Assets**パネルを開き、**Collision**セクションを見つけます。
 2. **Generate**をクリックして**Generate Voxel Collision**ダイアログを開きます。
