@@ -21,6 +21,8 @@ You'll typically generate it once per scene and re-generate only if the underlyi
 
 The recommended way to add collision is to generate it directly in Studio. The **Collision** section of the **Scene Assets** panel has a **Generate** button that runs a server-side voxelizer against your published splat — no files to prepare or upload.
 
+![The Generate Voxel Collision dialog in Studio](/img/user-manual/supersplat/studio/generate-collision.webp)
+
 1. Open the **Scene Assets** panel and find the **Collision** section.
 2. Click **Generate** to open the **Generate Voxel Collision** dialog.
 3. Choose a **Scene type** — **Indoor**, **Outdoor** (the default), or **Object**. This tunes the voxelizer for the kind of space you're reconstructing.

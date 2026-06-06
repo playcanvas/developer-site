@@ -21,6 +21,8 @@ description: "公開済みスプラットにボクセルコリジョンを追加
 
 コリジョンを追加する推奨方法は、Studio内で直接生成することです。**Scene Assets**パネルの**Collision**セクションには**Generate**ボタンがあり、公開済みのスプラットに対してサーバーサイドのボクサライザを実行します — ファイルを準備したりアップロードしたりする必要はありません。
 
+![StudioのGenerate Voxel Collisionダイアログ](/img/user-manual/supersplat/studio/generate-collision.webp)
+
 1. **Scene Assets**パネルを開き、**Collision**セクションを見つけます。
 2. **Generate**をクリックして**Generate Voxel Collision**ダイアログを開きます。
 3. **Scene type**を選びます — **Indoor**、**Outdoor**（デフォルト）、**Object**のいずれか。再構築する空間の種類に合わせてボクサライザを調整します。
