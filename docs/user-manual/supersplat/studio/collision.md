@@ -9,8 +9,6 @@ By default, splats in the viewer have no physical presence — the camera flies 
 For walkable scenes to feel right, scale your splat so that **one unit equals one meter** before adding collision. In walk mode the camera uses a fixed head height of **1.8 m**, so if your scene isn't at real-world scale, it will feel too large or too small to move around in.
 :::
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/collision-voxels.png — the Collision section of the Scene Assets panel, showing the Generate button -->
-
 ## What is voxel collision?
 
 A voxel collision asset is a coarse, low-resolution box-based reconstruction of the splat — the surfaces visitors can stand on, lean against, or be stopped by. It's separate from the splat itself so it can be optimized independently for runtime physics rather than visual quality.
@@ -20,6 +18,8 @@ You'll typically generate it once per scene and re-generate only if the underlyi
 ## Generating voxel collision
 
 The recommended way to add collision is to generate it directly in Studio. The **Collision** section of the **Scene Assets** panel has a **Generate** button that runs a server-side voxelizer against your published splat — no files to prepare or upload.
+
+![The Collision section of the Scene Assets panel, showing the Generate button](/img/user-manual/supersplat/studio/voxel-collision.webp)
 
 1. Open the **Scene Assets** panel and find the **Collision** section.
 2. Click **Generate** to open the **Generate Voxel Collision** dialog.
