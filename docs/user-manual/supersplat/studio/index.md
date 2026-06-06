@@ -35,8 +35,6 @@ Studio reuses the SuperSplat editor shell:
   - **Assets** — scene-asset uploads, such as collision.
 - **Viewport** — live preview of how visitors will see the scene.
 
-All tool settings live in the left panel — there is no separate right-hand inspector.
-
 Each tool section has its own page:
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — initial pose, target, and field of view for one or more named cameras.
