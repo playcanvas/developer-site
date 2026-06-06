@@ -1,6 +1,6 @@
 ---
 title: SuperSplat Studio
-description: "Studioは公開済みスプラットの視聴体験をキュレーションします：カメラ、アニメーション、注釈、ポストエフェクト、スカイボックス、コリジョン。"
+description: "Studioは公開済みスプラットの視聴体験をキュレーションします：カメラ、注釈、ポストエフェクト、スカイボックス、コリジョン。"
 ---
 
 **SuperSplat Studio**は、すでに[公開](/user-manual/supersplat/editor/publishing)または[直接アップロード](/user-manual/supersplat/upload)したスプラットの視聴体験をキュレーションする場所です。公開済みシーンの上に開き、訪問者が[シーンページ](/user-manual/supersplat/scene-page)で見るすべて — カメラフレーミング、シーン上の注釈、ポストプロセッシングエフェクト、トーンマッピング、背景またはスカイボックス、ウォーカブルシーン用のコリジョンジオメトリ — を作成できます。

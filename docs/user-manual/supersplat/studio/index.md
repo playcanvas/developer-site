@@ -1,6 +1,6 @@
 ---
 title: SuperSplat Studio
-description: "Studio curates the viewing experience for a published splat: cameras, animations, annotations, post effects, skybox, and collision."
+description: "Studio curates the viewing experience for a published splat: cameras, annotations, post effects, skybox, and collision."
 ---
 
 **SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and lets you author everything a visitor sees on its [scene page](/user-manual/supersplat/scene-page): camera framing, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes.
