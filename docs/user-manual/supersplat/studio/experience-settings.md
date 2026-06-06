@@ -75,7 +75,7 @@ type ExperienceSettings = {
 };
 ```
 
-Each field corresponds to a panel or control in Studio — follow the cross-references for details.
+Most fields are authored in a Studio panel or control; the exception is `animTracks`, which comes from the SuperSplat Editor Timeline and is baked in at publish time. Follow the cross-references for details.
 
 | Field | Authored in |
 |-------|-------------|
@@ -83,9 +83,9 @@ Each field corresponds to a panel or control in Studio — follow the cross-refe
 | `background.color`, `background.skyboxUrl` | [Skybox & Background](/user-manual/supersplat/studio/skybox) |
 | `postEffectSettings` | [Post Effects](/user-manual/supersplat/studio/post-effects) |
 | `cameras` | [Cameras](/user-manual/supersplat/studio/cameras) |
-| `animTracks` | [Animations](/user-manual/supersplat/studio/animations) |
+| `animTracks` | [Editor Timeline](/user-manual/supersplat/editor/timeline) (baked in when publishing) |
 | `annotations` | [Annotations](/user-manual/supersplat/studio/annotations) |
-| `startMode`, `hasStartPose` | The Studio header / startup configuration |
+| `startMode`, `hasStartPose` | Initial values set when publishing from the Editor; adjustable via the Studio header / startup configuration |
 | Collision voxel data | Stored separately as a [Scene Asset](/user-manual/supersplat/studio/collision), not in this JSON |
 
 ## Defaults

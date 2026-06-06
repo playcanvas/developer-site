@@ -75,7 +75,7 @@ type ExperienceSettings = {
 };
 ```
 
-各フィールドはStudioのパネルやコントロールに対応します — 詳細はクロスリファレンスをたどってください。
+ほとんどのフィールドはStudioのパネルやコントロールで作成しますが、`animTracks`は例外で、SuperSplatエディターのタイムラインで作成され、公開時にベイクされます。詳細はクロスリファレンスをたどってください。
 
 | フィールド | 作成場所 |
 |-------|-------------|
@@ -83,9 +83,9 @@ type ExperienceSettings = {
 | `background.color`, `background.skyboxUrl` | [Skybox & Background](/user-manual/supersplat/studio/skybox) |
 | `postEffectSettings` | [Post Effects](/user-manual/supersplat/studio/post-effects) |
 | `cameras` | [Cameras](/user-manual/supersplat/studio/cameras) |
-| `animTracks` | [Animations](/user-manual/supersplat/studio/animations) |
+| `animTracks` | [エディターのタイムライン](/user-manual/supersplat/editor/timeline)（公開時にベイクされます） |
 | `annotations` | [Annotations](/user-manual/supersplat/studio/annotations) |
-| `startMode`, `hasStartPose` | Studioのヘッダ／スタートアップ設定 |
+| `startMode`, `hasStartPose` | エディターからの公開時に初期値が設定され、Studioのヘッダ／スタートアップ設定で調整できます |
 | コリジョンボクセルデータ | このJSONではなく、[シーンアセット](/user-manual/supersplat/studio/collision)として別に格納 |
 
 ## デフォルト

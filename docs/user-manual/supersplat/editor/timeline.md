@@ -1,6 +1,6 @@
 ---
 title: Timeline
-description: "SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, and exporting animated camera paths."
+description: "SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, and publishing animated camera paths that play on the scene page."
 ---
 
 The Timeline panel allows you to create camera animations for your Gaussian Splat scenes. You can set keyframes to define camera positions and movements, creating smooth animated transitions that can be played back in the editor.
@@ -118,6 +118,18 @@ For example, with a 100-frame timeline:
   - This causes a snap/jerk when looping from frame 100 back to frame 0
 
 This technique allows the camera to smoothly transition from your last keyframe back to the starting position, creating a seamless loop.
+
+:::
+
+## Publishing and Playback on the Scene Page
+
+The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](/user-manual/supersplat/editor/publishing) the splat with the publish dialog's **Animation** option set to **Track**. This bakes the keyframed camera path into the published scene and sets it to play on load.
+
+On the [scene page](/user-manual/supersplat/scene-page), the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
+
+:::note
+
+Camera animation tracks are authored here in the Editor Timeline — **not** in [SuperSplat Studio](/user-manual/supersplat/studio/), which only curates cameras, annotations, post effects, skybox, and collision. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](/user-manual/supersplat/studio/experience-settings).
 
 :::
 

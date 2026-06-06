@@ -15,7 +15,7 @@ description: "superspl.atに公開されたスプラットの公開ページ —
 
 ### 埋め込みビューア
 
-ビューアはオープンソースの[SuperSplat Viewer](/user-manual/supersplat/viewer/)で、iframe内でレンダリングされます。[Studio](/user-manual/supersplat/studio/)で設定したカメラ、アニメーション、注釈、ポストエフェクト、スカイボックス、コリジョンはすべてここに反映されます。訪問者はオービット、パン、ズーム、注釈間の移動、（コリジョンが設定されていれば）シーン内のウォークスルーが行えます。
+ビューアはオープンソースの[SuperSplat Viewer](/user-manual/supersplat/viewer/)で、iframe内でレンダリングされます。[Studio](/user-manual/supersplat/studio/)で設定したカメラ、注釈、ポストエフェクト、スカイボックス、コリジョンに加え、エディターから公開したカメラ[アニメーション](/user-manual/supersplat/editor/timeline)も、すべてここに反映されます。訪問者はオービット、パン、ズーム、注釈間の移動、（コリジョンが設定されていれば）シーン内のウォークスルーが行えます。
 
 ### サイドバーのメタデータ
 

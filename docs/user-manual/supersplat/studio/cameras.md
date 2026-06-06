@@ -3,7 +3,7 @@ title: Cameras
 description: "Define one or more starting cameras for a published splat — position, target, and field of view — in SuperSplat Studio."
 ---
 
-The **Cameras** panel in [Studio](/user-manual/supersplat/studio/) defines one or more cameras for your published splat. Each camera has an initial **position**, a **target** (the point the camera looks at), and a **field of view**. Visitors land on the **first** camera in the list when they open your [scene page](/user-manual/supersplat/scene-page) (unless an [animation track](/user-manual/supersplat/studio/animations) or [annotation](/user-manual/supersplat/studio/annotations) drives the start pose instead).
+The **Cameras** panel in [Studio](/user-manual/supersplat/studio/) defines one or more cameras for your published splat. Each camera has an initial **position**, a **target** (the point the camera looks at), and a **field of view**. Visitors land on the **first** camera in the list when they open your [scene page](/user-manual/supersplat/scene-page) (unless a [camera animation track](/user-manual/supersplat/editor/timeline) or [annotation](/user-manual/supersplat/studio/annotations) drives the start pose instead).
 
 <!-- TODO: media — /img/user-manual/supersplat/studio/cameras-panel.png — the Cameras panel with a list of cameras -->
 
@@ -23,11 +23,11 @@ A fresh scene starts with a single camera using sensible defaults — for enviro
 
 ## How cameras are used
 
-- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). [Animation tracks](/user-manual/supersplat/studio/animations) and [annotations](/user-manual/supersplat/studio/annotations) can override this via the scene's start mode.
+- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). A [camera animation track](/user-manual/supersplat/editor/timeline) or an [annotation](/user-manual/supersplat/studio/annotations) can override this via the scene's start mode.
 - **Annotation poses** — each [annotation](/user-manual/supersplat/studio/annotations) embeds its own camera pose that the viewer animates to when the annotation is selected. The annotation's pose is independent of the entries in the Cameras list.
 
 ## See also
 
-- [Animations](/user-manual/supersplat/studio/animations) — keyframed camera motion
+- [Camera animation (Timeline)](/user-manual/supersplat/editor/timeline) — keyframed camera motion, authored in the SuperSplat Editor
 - [Annotations](/user-manual/supersplat/studio/annotations) — 3D-positioned hotspots that can adopt a camera pose
 - [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract that stores the camera list

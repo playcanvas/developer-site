@@ -15,7 +15,7 @@ The page is split between an **embedded viewer** that fills most of the screen a
 
 ### The embedded viewer
 
-The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) rendered inside an iframe. The cameras, animations, annotations, post effects, skybox, and collision you configured in [Studio](/user-manual/supersplat/studio/) all apply here. Visitors can orbit, pan, zoom, navigate annotations, and (if collision is set up) walk through the scene.
+The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) rendered inside an iframe. The cameras, annotations, post effects, skybox, and collision you configured in [Studio](/user-manual/supersplat/studio/) — along with any camera [animation](/user-manual/supersplat/editor/timeline) published from the Editor — all apply here. Visitors can orbit, pan, zoom, navigate annotations, and (if collision is set up) walk through the scene.
 
 ### Sidebar metadata
 
