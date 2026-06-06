@@ -28,10 +28,12 @@ Studio is built for a desktop browser. On a phone or tablet you'll see a "Studio
 
 Studio reuses the SuperSplat editor shell:
 
-- **Header** — back button, scene name, save indicator.
-- **Left panel** — collapsible tool sections (Cameras, Annotations, Post Effects, Scene Assets, etc.).
+- **Header** — back button, scene name, **Import** / **Export** / **View** actions, and **Save**.
+- **Left panel** — a single panel organized into three tabs:
+  - **Scene** — grouped sections for *Look & Tone* (background, tonemapping, high-precision rendering), *Post Effects*, and *Cameras*.
+  - **Annotations** — the list of on-scene annotations.
+  - **Assets** — scene-asset uploads, such as collision.
 - **Viewport** — live preview of how visitors will see the scene.
-- **Right panel** — settings for whichever tool you've selected.
 
 Each tool section has its own page:
 
