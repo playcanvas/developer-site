@@ -129,7 +129,7 @@ On the [scene page](/user-manual/supersplat/scene-page), the open-source [SuperS
 
 :::note
 
-Camera animation tracks are authored here in the Editor Timeline — **not** in [SuperSplat Studio](/user-manual/supersplat/studio/), which only curates cameras, annotations, post effects, skybox, and collision. For the saved JSON shape of a track (`animTracks`, `loopMode`, `interpolation`, `startMode`), see [Experience Settings](/user-manual/supersplat/studio/experience-settings).
+Camera animation tracks are authored here in the Editor Timeline — **not** in [SuperSplat Studio](/user-manual/supersplat/studio/), which only curates cameras, annotations, post effects, skybox, and collision. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](/user-manual/supersplat/studio/experience-settings).
 
 :::
 

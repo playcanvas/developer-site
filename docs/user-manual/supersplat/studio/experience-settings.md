@@ -75,7 +75,7 @@ type ExperienceSettings = {
 };
 ```
 
-Each field corresponds to a panel or control in Studio — follow the cross-references for details.
+Most fields are authored in a Studio panel or control; the exception is `animTracks`, which comes from the SuperSplat Editor Timeline and is baked in at publish time. Follow the cross-references for details.
 
 | Field | Authored in |
 |-------|-------------|
