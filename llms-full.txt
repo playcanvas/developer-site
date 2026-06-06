@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 591
+Total Documents: 590
 Generated: 2026-06-06
 
 ================================================================================
@@ -34914,7 +34914,7 @@ By utilizing the `.ssproj` format, SuperSplat users can efficiently manage and s
 
 URL: https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/
 
-Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](/user-manual/supersplat/manage), gets a public [scene page](/user-manual/supersplat/scene-page), and can be opened in [Studio](/user-manual/supersplat/studio/) to curate the viewing experience (cameras, animations, annotations, post effects, skybox, collision).
+Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](/user-manual/supersplat/manage), gets a public [scene page](/user-manual/supersplat/scene-page), and can be opened in [Studio](/user-manual/supersplat/studio/) to curate the viewing experience (cameras, annotations, post effects, skybox, collision).
 
 :::tip Two ways to publish
 
@@ -34967,7 +34967,7 @@ Once the publish process is complete, a modal dialog will show with the URL of y
 ## What's next?
 
 - Your new splat now lives on the [Manage page](/user-manual/supersplat/manage) where you can edit its title, description, visibility, and downloadable license.
-- Open it in [Studio](/user-manual/supersplat/studio/) to add cameras, camera animations, annotations, post effects, a skybox, or collision geometry.
+- Open it in [Studio](/user-manual/supersplat/studio/) to add cameras, annotations, post effects, a skybox, or collision geometry.
 - Visitors browse to its [public scene page](/user-manual/supersplat/scene-page) to view, share, embed, like, and (if you allow it) download.
 
 --------------------------------------------------------------------------------
@@ -35206,6 +35206,18 @@ This technique allows the camera to smoothly transition from your last keyframe 
 
 :::
 
+## Publishing and Playback on the Scene Page
+
+The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](/user-manual/supersplat/editor/publishing) the splat with the publish dialog's **Animation** option set to **Track**. This bakes the keyframed camera path into the published scene and sets it to play on load.
+
+On the [scene page](/user-manual/supersplat/scene-page), the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
+
+:::note
+
+Camera animation tracks are authored here in the Editor Timeline — **not** in [SuperSplat Studio](/user-manual/supersplat/studio/), which only curates cameras, annotations, post effects, skybox, and collision. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](/user-manual/supersplat/studio/experience-settings).
+
+:::
+
 ## Saving Timeline Animations
 
 :::important
@@ -35396,7 +35408,7 @@ The page is split between an **embedded viewer** that fills most of the screen a
 
 ### The embedded viewer
 
-The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) rendered inside an iframe. The cameras, animations, annotations, post effects, skybox, and collision you configured in [Studio](/user-manual/supersplat/studio/) all apply here. Visitors can orbit, pan, zoom, navigate annotations, and (if collision is set up) walk through the scene.
+The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) rendered inside an iframe. The cameras, annotations, post effects, skybox, and collision you configured in [Studio](/user-manual/supersplat/studio/) — along with any camera [animation](/user-manual/supersplat/editor/timeline) published from the Editor — all apply here. Visitors can orbit, pan, zoom, navigate annotations, and (if collision is set up) walk through the scene.
 
 ### Sidebar metadata
 
@@ -35489,7 +35501,7 @@ A carousel near the bottom of the page recommends a handful of related splats. C
 
 URL: https://developer.playcanvas.com/user-manual/supersplat/studio/
 
-**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and lets you author everything a visitor sees on its [scene page](/user-manual/supersplat/scene-page): camera framing and animations, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes.
+**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and lets you curate much of what a visitor sees on its [scene page](/user-manual/supersplat/scene-page): camera framing, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes. (Camera animation is authored separately in the [Editor Timeline](/user-manual/supersplat/editor/timeline).)
 
 Studio writes its output as a single JSON document — [Experience Settings](/user-manual/supersplat/studio/experience-settings) — that the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) reads at runtime. That same JSON is what gets bundled into a self-hosted HTML export.
 
@@ -35520,7 +35532,6 @@ Studio reuses the SuperSplat editor shell:
 Each tool section has its own page:
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — initial pose, target, and field of view for one or more named cameras.
-- [Animations](/user-manual/supersplat/studio/animations) — keyframe-driven camera tracks that can auto-play on viewer load.
 - [Annotations](/user-manual/supersplat/studio/annotations) — 3D-positioned text hotspots that visitors can navigate between.
 - [Post Effects](/user-manual/supersplat/studio/post-effects) — sharpness, bloom, color grading, vignette, fringing, tonemapping, high-precision rendering.
 - [Skybox](/user-manual/supersplat/studio/skybox) — background color or full equirectangular skybox.
@@ -35545,55 +35556,6 @@ The Experience Settings JSON has a version number; the current schema is **v2**.
 - [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract Studio writes and the Viewer reads
 - [Viewer / embedding](/user-manual/supersplat/viewer/embedding) — how the published settings are consumed at runtime
 - [Scene page](/user-manual/supersplat/scene-page) — what visitors see after Studio changes are saved
-
---------------------------------------------------------------------------------
-
-## Animations
-
-URL: https://developer.playcanvas.com/user-manual/supersplat/studio/animations/
-
-The **Animations** section in [Studio](/user-manual/supersplat/studio/) lets you author one or more **animation tracks** that drive the viewer's camera through your scene. A track is a keyframed path — at each keyframe, the camera's **position**, **target**, and **field of view** are sampled. The viewer interpolates between keyframes at runtime.
-
-A track can be set to auto-play when a visitor opens the [scene page](/user-manual/supersplat/scene-page), turning your splat into a cinematic flythrough.
-
-## Track properties
-
-Each track has the following properties:
-
-| Field | Description |
-|-------|-------------|
-| **Name** | A display label for the track in the Studio UI. |
-| **Duration** | Length of the track in seconds. |
-| **Frame rate** | Frames per second the keyframe times are expressed in. |
-| **Loop mode** | `none` — play once and stop. `repeat` — loop seamlessly from end back to start. `pingpong` — play forward, then reverse, repeating. |
-| **Interpolation** | `step` — snap from keyframe to keyframe. `spline` — smooth curve between keyframes. |
-| **Smoothness** | A `0–1` blend applied to the spline interpolation. `0` is linear, `1` is maximally smooth. |
-| **Keyframes** | A list of `(time, { position, target, fov })` entries that define the animated camera path. |
-
-## Authoring a track
-
-The general flow is:
-
-1. Frame the camera in the viewport at the time-zero pose you want.
-2. Add a keyframe at `time = 0`.
-3. Scrub forward, reframe the camera, add the next keyframe — and so on.
-4. Pick a **loop mode** and an **interpolation** that matches the mood of the track.
-
-The keyframe list stores three parallel arrays (`position`, `target`, `fov`) and a `times` array; you don't normally edit these by hand, but if you're consuming the saved JSON externally see [Experience Settings](/user-manual/supersplat/studio/experience-settings) for the canonical shape.
-
-## Auto-play on load
-
-Set the scene's **start mode** to `animTrack` to make the animation track play automatically when a visitor opens the scene page. Combined with a seamless `repeat` loop, this gives the impression of a hands-off showreel. When more than one track is defined, the first track in the list is the one that plays.
-
-## Tip: smooth loops
-
-For a track that loops cleanly (`loopMode = repeat`), avoid placing keyframes on both the very first frame *and* the very last frame at the same pose — the spline will be flat there and the loop will appear to "snap" rather than continue smoothly. Instead, leave a small gap before the end of the track and let the interpolation carry the camera back to the start pose.
-
-## See also
-
-- [Cameras](/user-manual/supersplat/studio/cameras) — the initial cameras you can frame and reference
-- [Annotations](/user-manual/supersplat/studio/annotations) — annotations can pause a playing track when selected
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract that stores animation tracks
 
 --------------------------------------------------------------------------------
 
@@ -35637,7 +35599,7 @@ Set the scene's **start mode** to `annotation` if you'd like the viewer to land 
 ## See also
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — the camera poses annotations reference
-- [Animations](/user-manual/supersplat/studio/animations) — for cinematic flythroughs that don't need visitor interaction
+- [Camera animation (Timeline)](/user-manual/supersplat/editor/timeline) — for cinematic flythroughs that don't need visitor interaction
 - [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract that stores annotations
 
 --------------------------------------------------------------------------------
@@ -35646,7 +35608,7 @@ Set the scene's **start mode** to `annotation` if you'd like the viewer to land 
 
 URL: https://developer.playcanvas.com/user-manual/supersplat/studio/cameras/
 
-The **Cameras** panel in [Studio](/user-manual/supersplat/studio/) defines one or more cameras for your published splat. Each camera has an initial **position**, a **target** (the point the camera looks at), and a **field of view**. Visitors land on the **first** camera in the list when they open your [scene page](/user-manual/supersplat/scene-page) (unless an [animation track](/user-manual/supersplat/studio/animations) or [annotation](/user-manual/supersplat/studio/annotations) drives the start pose instead).
+The **Cameras** panel in [Studio](/user-manual/supersplat/studio/) defines one or more cameras for your published splat. Each camera has an initial **position**, a **target** (the point the camera looks at), and a **field of view**. Visitors land on the **first** camera in the list when they open your [scene page](/user-manual/supersplat/scene-page) (unless a [camera animation track](/user-manual/supersplat/editor/timeline) or [annotation](/user-manual/supersplat/studio/annotations) drives the start pose instead).
 
 ## The Cameras panel
 
@@ -35664,12 +35626,12 @@ A fresh scene starts with a single camera using sensible defaults — for enviro
 
 ## How cameras are used
 
-- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). [Animation tracks](/user-manual/supersplat/studio/animations) and [annotations](/user-manual/supersplat/studio/annotations) can override this via the scene's start mode.
+- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). A [camera animation track](/user-manual/supersplat/editor/timeline) or an [annotation](/user-manual/supersplat/studio/annotations) can override this via the scene's start mode.
 - **Annotation poses** — each [annotation](/user-manual/supersplat/studio/annotations) embeds its own camera pose that the viewer animates to when the annotation is selected. The annotation's pose is independent of the entries in the Cameras list.
 
 ## See also
 
-- [Animations](/user-manual/supersplat/studio/animations) — keyframed camera motion
+- [Camera animation (Timeline)](/user-manual/supersplat/editor/timeline) — keyframed camera motion, authored in the SuperSplat Editor
 - [Annotations](/user-manual/supersplat/studio/annotations) — 3D-positioned hotspots that can adopt a camera pose
 - [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract that stores the camera list
 
@@ -35807,7 +35769,7 @@ type ExperienceSettings = {
 };
 ```
 
-Each field corresponds to a panel or control in Studio — follow the cross-references for details.
+Most fields are authored in a Studio panel or control; the exception is `animTracks`, which comes from the SuperSplat Editor Timeline and is baked in at publish time. Follow the cross-references for details.
 
 | Field | Authored in |
 |-------|-------------|
@@ -35815,9 +35777,9 @@ Each field corresponds to a panel or control in Studio — follow the cross-refe
 | `background.color`, `background.skyboxUrl` | [Skybox & Background](/user-manual/supersplat/studio/skybox) |
 | `postEffectSettings` | [Post Effects](/user-manual/supersplat/studio/post-effects) |
 | `cameras` | [Cameras](/user-manual/supersplat/studio/cameras) |
-| `animTracks` | [Animations](/user-manual/supersplat/studio/animations) |
+| `animTracks` | [Editor Timeline](/user-manual/supersplat/editor/timeline) (baked in when publishing) |
 | `annotations` | [Annotations](/user-manual/supersplat/studio/annotations) |
-| `startMode`, `hasStartPose` | The Studio header / startup configuration |
+| `startMode`, `hasStartPose` | Initial values set when publishing from the Editor; adjustable via the Studio header / startup configuration |
 | Collision voxel data | Stored separately as a [Scene Asset](/user-manual/supersplat/studio/collision), not in this JSON |
 
 ## Defaults
