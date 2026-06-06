@@ -1,25 +1,34 @@
 ---
 title: Cameras
-description: "Define one or more starting cameras for a published splat — position, target, and field of view — in SuperSplat Studio."
+description: "Set the starting camera for a published splat — frame its position and target in the viewport and set the field of view — in SuperSplat Studio."
 ---
 
-The **Cameras** panel in [Studio](/user-manual/supersplat/studio/) defines one or more cameras for your published splat. Each camera has an initial **position**, a **target** (the point the camera looks at), and a **field of view**. Visitors land on the **first** camera in the list when they open your [scene page](/user-manual/supersplat/scene-page) (unless a [camera animation track](/user-manual/supersplat/editor/timeline) or [annotation](/user-manual/supersplat/studio/annotations) drives the start pose instead).
+The **Cameras** section — in the **Scene** tab of [Studio](/user-manual/supersplat/studio/)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](/user-manual/supersplat/scene-page) (unless a [camera animation track](/user-manual/supersplat/editor/timeline) or [annotation](/user-manual/supersplat/studio/annotations) drives the start pose instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
+
+:::note
+
+Studio currently supports a single camera. Support for multiple cameras is coming.
+
+:::
 
 <!-- TODO: media — /img/user-manual/supersplat/studio/cameras-panel.png — the Cameras panel with a list of cameras -->
 
-## The Cameras panel
+## Setting the camera
 
-The panel shows a list of cameras you've defined. Adding, removing, and reordering happens in this list; the right-hand inspector shows the inputs for the currently selected camera.
+The camera is listed as **Camera 1** with two actions:
 
-| Field | Description |
-|-------|-------------|
-| **Position** | World-space `[x, y, z]` of the camera. |
-| **Target** | World-space `[x, y, z]` the camera looks at. |
-| **Field of View** | Vertical FOV in degrees. |
+- **Go to** — flies the viewport to the camera's saved pose.
+- **Edit** — enters edit mode. While editing, orbit, pan, and zoom the viewport to frame the shot; the camera's **position** and **target** are captured from the current view. Click **Edit** again to exit.
+
+You set the camera's position and target by framing it in the viewport rather than typing coordinates — there are no numeric position/target inputs.
+
+## Lens (field of view)
+
+Below the camera list, the **Lens** control sets the **field of view** with a slider and a numeric input (in degrees). This is a single, global setting — it applies to the start camera and all annotation cameras. The default is **75°**.
 
 ## Defaults
 
-A fresh scene starts with a single camera using sensible defaults — for environment-style scenes the default is position `[0, 2, 0]`, target `[2, 2, 0]`, **75°** field of view; for object-style scenes the default is position `[2, 2, -2]`, target `[0, 0, 0]`, **75°** field of view. Tweak the values to frame your scene the way you want visitors to see it on first load.
+A fresh scene starts with a camera using sensible defaults — for environment-style scenes, position `[0, 2, 0]`, target `[2, 2, 0]`, **75°** field of view; for object-style scenes, position `[2, 2, -2]`, target `[0, 0, 0]`, **75°** field of view. Frame the viewport and use **Edit** to capture the pose — and adjust the **Lens** field of view — so your scene looks the way you want visitors to see it on first load.
 
 ## How cameras are used
 
