@@ -125,7 +125,7 @@ This technique allows the camera to smoothly transition from your last keyframe 
 
 The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](/user-manual/supersplat/editor/publishing) the splat with the publish dialog's **Animation** option set to **Track**. This bakes the keyframed camera path into the published scene and sets it to play on load.
 
-On the [scene page](/user-manual/supersplat/scene-page), the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) auto-plays the track when a visitor opens the scene, looping according to the track's loop mode — turning the splat into a hands-off cinematic flythrough.
+On the [scene page](/user-manual/supersplat/scene-page), the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
 
 :::note
 
