@@ -55,8 +55,6 @@ const config = {
         { from: ['/tutorials/facebook-api/'], to: '/tutorials/' },
         { from: ['/user-manual/editor/publishing/web/facebook/'], to: '/user-manual/editor/publishing/web/' },
         { from: ['/user-manual/billing/'], to: '/user-manual/account-management/billing/' },
-        // SuperSplat: camera animation is authored in the Editor Timeline, not Studio — page removed
-        { from: ['/user-manual/supersplat/studio/animations/'], to: '/user-manual/supersplat/editor/timeline/' },
         { from: ['/user-manual/faq/'], to: '/user-manual/editor/faq/' },
         { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },
         { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },
