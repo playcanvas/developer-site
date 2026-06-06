@@ -3,7 +3,7 @@ title: SuperSplat Studio
 description: "Studioは公開済みスプラットの視聴体験をキュレーションします：カメラ、アニメーション、注釈、ポストエフェクト、スカイボックス、コリジョン。"
 ---
 
-**SuperSplat Studio**は、すでに[公開](/user-manual/supersplat/editor/publishing)または[直接アップロード](/user-manual/supersplat/upload)したスプラットの視聴体験をキュレーションする場所です。公開済みシーンの上に開き、訪問者が[シーンページ](/user-manual/supersplat/scene-page)で見るすべて — カメラフレーミングとアニメーション、シーン上の注釈、ポストプロセッシングエフェクト、トーンマッピング、背景またはスカイボックス、ウォーカブルシーン用のコリジョンジオメトリ — を作成できます。
+**SuperSplat Studio**は、すでに[公開](/user-manual/supersplat/editor/publishing)または[直接アップロード](/user-manual/supersplat/upload)したスプラットの視聴体験をキュレーションする場所です。公開済みシーンの上に開き、訪問者が[シーンページ](/user-manual/supersplat/scene-page)で見るすべて — カメラフレーミング、シーン上の注釈、ポストプロセッシングエフェクト、トーンマッピング、背景またはスカイボックス、ウォーカブルシーン用のコリジョンジオメトリ — を作成できます。
 
 Studioは出力を単一のJSONドキュメント — [Experience Settings](/user-manual/supersplat/studio/experience-settings) — として書き出し、これをオープンソースの[SuperSplat Viewer](/user-manual/supersplat/viewer/)がランタイムで読み込みます。同じJSONがセルフホスト用のHTMLエクスポートにもバンドルされます。
 
@@ -36,7 +36,6 @@ StudioはSuperSplat editorのシェルを再利用しています：
 各ツールセクションには独自のページがあります：
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — 1つ以上の名前付きカメラの初期姿勢、ターゲット、視野角。
-- [Animations](/user-manual/supersplat/studio/animations) — ビューア読み込み時に自動再生できるキーフレーム駆動のカメラトラック。
 - [Annotations](/user-manual/supersplat/studio/annotations) — 訪問者が移動可能な、3D空間に配置されたテキストホットスポット。
 - [Post Effects](/user-manual/supersplat/studio/post-effects) — シャープネス、ブルーム、カラーグレーディング、ビネット、フリンジング、トーンマッピング、高精度レンダリング。
 - [Skybox](/user-manual/supersplat/studio/skybox) — 背景色またはフルのエクイレクタンギュラースカイボックス。

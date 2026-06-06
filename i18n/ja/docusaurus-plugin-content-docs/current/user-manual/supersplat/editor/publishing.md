@@ -3,7 +3,7 @@ title: 公開
 description: SuperSplat Editorからsuperspl.atへスプラットを公開して、Manageページに表示し、Studioで開けるようにします。
 ---
 
-SuperSplat Editorからの公開では、編集したスプラットを[superspl.at](https://superspl.at)にアップロードします。アップロードされたスプラットは[Manageページ](/user-manual/supersplat/manage)に表示され、公開[シーンページ](/user-manual/supersplat/scene-page)が割り当てられ、[Studio](/user-manual/supersplat/studio/)で開いて視聴体験（カメラ、アニメーション、注釈、ポストエフェクト、スカイボックス、コリジョン）をキュレーションできます。
+SuperSplat Editorからの公開では、編集したスプラットを[superspl.at](https://superspl.at)にアップロードします。アップロードされたスプラットは[Manageページ](/user-manual/supersplat/manage)に表示され、公開[シーンページ](/user-manual/supersplat/scene-page)が割り当てられ、[Studio](/user-manual/supersplat/studio/)で開いて視聴体験（カメラ、注釈、ポストエフェクト、スカイボックス、コリジョン）をキュレーションできます。
 
 :::tip 2つの公開方法
 
@@ -56,5 +56,5 @@ superspl.atに公開する代わりに（または併用して）自前のサー
 ## 次のステップ
 
 - 新しいスプラットは[Manageページ](/user-manual/supersplat/manage)に表示され、タイトル、説明、公開範囲、ダウンロード可否とライセンスを編集できます。
-- [Studio](/user-manual/supersplat/studio/)で開いて、カメラ、カメラアニメーション、注釈、ポストエフェクト、スカイボックス、コリジョンジオメトリを追加できます。
+- [Studio](/user-manual/supersplat/studio/)で開いて、カメラ、注釈、ポストエフェクト、スカイボックス、コリジョンジオメトリを追加できます。
 - 訪問者は公開[シーンページ](/user-manual/supersplat/scene-page)で表示、共有、埋め込み、いいね、コメント、（許可されていれば）ダウンロードを行えます。

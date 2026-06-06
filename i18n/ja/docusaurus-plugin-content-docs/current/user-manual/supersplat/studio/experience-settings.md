@@ -83,7 +83,7 @@ type ExperienceSettings = {
 | `background.color`, `background.skyboxUrl` | [Skybox & Background](/user-manual/supersplat/studio/skybox) |
 | `postEffectSettings` | [Post Effects](/user-manual/supersplat/studio/post-effects) |
 | `cameras` | [Cameras](/user-manual/supersplat/studio/cameras) |
-| `animTracks` | [Animations](/user-manual/supersplat/studio/animations) |
+| `animTracks` | [エディターのタイムライン](/user-manual/supersplat/editor/timeline)（公開時にベイクされます） |
 | `annotations` | [Annotations](/user-manual/supersplat/studio/annotations) |
 | `startMode`, `hasStartPose` | Studioのヘッダ／スタートアップ設定 |
 | コリジョンボクセルデータ | このJSONではなく、[シーンアセット](/user-manual/supersplat/studio/collision)として別に格納 |

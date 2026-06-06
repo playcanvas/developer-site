@@ -3,7 +3,7 @@ title: SuperSplat Studio
 description: "Studio curates the viewing experience for a published splat: cameras, animations, annotations, post effects, skybox, and collision."
 ---
 
-**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and lets you author everything a visitor sees on its [scene page](/user-manual/supersplat/scene-page): camera framing and animations, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes.
+**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and lets you author everything a visitor sees on its [scene page](/user-manual/supersplat/scene-page): camera framing, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes.
 
 Studio writes its output as a single JSON document — [Experience Settings](/user-manual/supersplat/studio/experience-settings) — that the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) reads at runtime. That same JSON is what gets bundled into a self-hosted HTML export.
 
@@ -36,7 +36,6 @@ Studio reuses the SuperSplat editor shell:
 Each tool section has its own page:
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — initial pose, target, and field of view for one or more named cameras.
-- [Animations](/user-manual/supersplat/studio/animations) — keyframe-driven camera tracks that can auto-play on viewer load.
 - [Annotations](/user-manual/supersplat/studio/annotations) — 3D-positioned text hotspots that visitors can navigate between.
 - [Post Effects](/user-manual/supersplat/studio/post-effects) — sharpness, bloom, color grading, vignette, fringing, tonemapping, high-precision rendering.
 - [Skybox](/user-manual/supersplat/studio/skybox) — background color or full equirectangular skybox.

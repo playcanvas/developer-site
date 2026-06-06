@@ -568,7 +568,6 @@ const sidebars = {
           },
           items: [
             'user-manual/supersplat/studio/cameras',
-            'user-manual/supersplat/studio/animations',
             'user-manual/supersplat/studio/annotations',
             'user-manual/supersplat/studio/post-effects',
             'user-manual/supersplat/studio/skybox',
