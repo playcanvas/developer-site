@@ -85,7 +85,7 @@ Most fields are authored in a Studio panel or control; the exception is `animTra
 | `cameras` | [Cameras](/user-manual/supersplat/studio/cameras) |
 | `animTracks` | [Editor Timeline](/user-manual/supersplat/editor/timeline) (baked in when publishing) |
 | `annotations` | [Annotations](/user-manual/supersplat/studio/annotations) |
-| `startMode`, `hasStartPose` | The Studio header / startup configuration |
+| `startMode`, `hasStartPose` | Initial values set when publishing from the Editor; adjustable via the Studio header / startup configuration |
 | Collision voxel data | Stored separately as a [Scene Asset](/user-manual/supersplat/studio/collision), not in this JSON |
 
 ## Defaults

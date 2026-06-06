@@ -3,7 +3,7 @@ title: SuperSplat Studio
 description: "Studio curates the viewing experience for a published splat: cameras, annotations, post effects, skybox, and collision."
 ---
 
-**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and lets you author everything a visitor sees on its [scene page](/user-manual/supersplat/scene-page): camera framing, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes.
+**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and lets you curate much of what a visitor sees on its [scene page](/user-manual/supersplat/scene-page): camera framing, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes. (Camera animation is authored separately in the [Editor Timeline](/user-manual/supersplat/editor/timeline).)
 
 Studio writes its output as a single JSON document — [Experience Settings](/user-manual/supersplat/studio/experience-settings) — that the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) reads at runtime. That same JSON is what gets bundled into a self-hosted HTML export.
 

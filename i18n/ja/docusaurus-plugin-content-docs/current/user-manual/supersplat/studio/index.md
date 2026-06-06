@@ -3,7 +3,7 @@ title: SuperSplat Studio
 description: "Studioは公開済みスプラットの視聴体験をキュレーションします：カメラ、注釈、ポストエフェクト、スカイボックス、コリジョン。"
 ---
 
-**SuperSplat Studio**は、すでに[公開](/user-manual/supersplat/editor/publishing)または[直接アップロード](/user-manual/supersplat/upload)したスプラットの視聴体験をキュレーションする場所です。公開済みシーンの上に開き、訪問者が[シーンページ](/user-manual/supersplat/scene-page)で見るすべて — カメラフレーミング、シーン上の注釈、ポストプロセッシングエフェクト、トーンマッピング、背景またはスカイボックス、ウォーカブルシーン用のコリジョンジオメトリ — を作成できます。
+**SuperSplat Studio**は、すでに[公開](/user-manual/supersplat/editor/publishing)または[直接アップロード](/user-manual/supersplat/upload)したスプラットの視聴体験をキュレーションする場所です。公開済みシーンの上に開き、訪問者が[シーンページ](/user-manual/supersplat/scene-page)で見るものの多く — カメラフレーミング、シーン上の注釈、ポストプロセッシングエフェクト、トーンマッピング、背景またはスカイボックス、ウォーカブルシーン用のコリジョンジオメトリ — を調整できます。（カメラアニメーションは別途[エディターのタイムライン](/user-manual/supersplat/editor/timeline)で作成します。）
 
 Studioは出力を単一のJSONドキュメント — [Experience Settings](/user-manual/supersplat/studio/experience-settings) — として書き出し、これをオープンソースの[SuperSplat Viewer](/user-manual/supersplat/viewer/)がランタイムで読み込みます。同じJSONがセルフホスト用のHTMLエクスポートにもバンドルされます。
 
