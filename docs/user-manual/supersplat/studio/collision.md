@@ -37,7 +37,7 @@ If collision already exists, the button reads **Regenerate**, and **Delete** rem
 The generator uses a default voxel size of **5 cm** (`0.05` units), which is a good fit for most scenes. To use a different voxel size, generate your collision with [splat-transform](/user-manual/splat-transform/) and upload the result — see [Uploading custom voxel collision](#uploading-custom-voxel-collision) below.
 :::
 
-## Uploading custom voxel collision
+## Uploading custom voxel collision {#uploading-custom-voxel-collision}
 
 Uploading is the option to reach for when you want **custom collision** — for example, when the **Generate** button doesn't produce exactly what you want and you've authored or tuned the voxel files yourself. You can produce a compatible pair with the [Convert](/user-manual/supersplat/convert) utility in the browser, or the [splat-transform](/user-manual/splat-transform/) CLI for scripted or batch workflows.
 

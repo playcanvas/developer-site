@@ -37,7 +37,7 @@ description: "公開済みスプラットにボクセルコリジョンを追加
 ジェネレータはデフォルトのボクセルサイズとして**5 cm**（`0.05`ユニット）を使用します。これはほとんどのシーンに適しています。別のボクセルサイズを使用したい場合は、[splat-transform](/user-manual/splat-transform/)でコリジョンを生成し、その結果をアップロードしてください — 下記の[カスタムボクセルコリジョンのアップロード](#uploading-custom-voxel-collision)を参照してください。
 :::
 
-## カスタムボクセルコリジョンのアップロード
+## カスタムボクセルコリジョンのアップロード {#uploading-custom-voxel-collision}
 
 アップロードは、**カスタムコリジョン**が必要なときに選ぶ方法です — たとえば、**Generate**ボタンでは望みどおりの結果が得られず、自分でボクセルファイルを作成または調整した場合などです。互換性のあるペアは、ブラウザで[Convert](/user-manual/supersplat/convert)ユーティリティを使うか、スクリプトやバッチ処理向けに[splat-transform](/user-manual/splat-transform/) CLIで生成できます。
 
