@@ -7,7 +7,7 @@ description: "superspl.atに公開されたスプラットの公開ページ —
 
 訪問者はPlayCanvasアカウントなしでシーンページを閲覧できます。スプラットへの**いいね**やコメント投稿にはアカウントが必要です。
 
-<!-- TODO: media — /img/user-manual/supersplat/scene-page.png — ビューア、サイドバーのメタデータ、アクションボタンを含むシーンページ -->
+![バンブルビースプラットのシーンページ — 埋め込みビューアと、メタデータおよびアクションのサイドバー](/img/user-manual/supersplat/scene-page.webp)
 
 ## 訪問者に表示されるもの
 
