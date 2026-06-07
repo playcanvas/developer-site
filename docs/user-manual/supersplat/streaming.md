@@ -7,12 +7,12 @@ When you [publish from the Editor](/user-manual/supersplat/editor/publishing) or
 
 ## How your splat is compressed
 
-The Gaussian count of your splat decides the format:
+Your splat's Gaussian count determines the format:
 
-- **Up to around 1 million Gaussians** — the splat is compressed to a single, non-streamed **`.sog`** file.
-- **More than about 1 million Gaussians** — the back end generates a set of **levels of detail (LODs)** using [splat-transform](/user-manual/splat-transform/), progressively halving the Gaussian count at each level (decimation). The LODs are compressed together into a **streamed SOG** bundle — a `lod-meta.json` index plus per-LOD `.sog` chunks. Larger splats produce more levels, so expect some extra back-end processing time after upload.
+- **Fewer than 1,000,000 Gaussians** — the splat is compressed to a single, non-streamed **`.sog`** file.
+- **1,000,000 Gaussians or more** — SuperSplat generates a set of **levels of detail (LODs)** using [splat-transform](/user-manual/splat-transform/), halving the Gaussian count at each level (decimation), and compresses them into a **streamed SOG** bundle: a `lod-meta.json` index plus per-LOD `.sog` chunks. Larger splats produce more levels, so expect some extra back-end processing time after upload.
 
-This is automatic, based on the size of your splat — there's nothing to configure.
+When you [directly upload](/user-manual/supersplat/upload) a PLY, this choice appears as an **Auto generate LODs** checkbox, ticked automatically at 1,000,000 Gaussians or more; you can override it before publishing. Splats uploaded as a pre-built LCC or SSOG archive are always streamed.
 
 ## Near-instant loads and the Gaussian budget
 
