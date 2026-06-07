@@ -9,11 +9,11 @@ The **Skybox** and **Background** controls in [Studio](/user-manual/supersplat/s
 
 ## Background color
 
-The **Background** section takes an RGB color in the `0–1` range, applied as a solid color behind the splat. It's used whenever no skybox is uploaded, and as the clear color even when a skybox is present (it shows through anywhere the skybox isn't visible).
+The **Background** control, in the **Scene** tab's *Look & Tone* section, takes an RGB color in the `0–1` range, applied as a solid color behind the splat. It's used whenever no skybox is uploaded, and as the clear color even when a skybox is present (it shows through anywhere the skybox isn't visible).
 
 ## Skybox image
 
-Open the **Scene Assets** section to find the Skybox controls. The upload dialog accepts `.webp`, `.jpg`, and `.png` images. For best results the image should be **equirectangular** — a 2:1 panoramic projection that maps cleanly onto the surrounding sphere.
+In [Studio](/user-manual/supersplat/studio/#launching-studio), open the **Assets** tab in the left panel to find the Skybox controls. The upload dialog accepts `.webp`, `.jpg`, and `.png` images. For best results the image should be **equirectangular** — a 2:1 panoramic projection that maps cleanly onto the surrounding sphere.
 
 Each scene can have one skybox. Uploading a new image replaces the previous one.
 

@@ -9,7 +9,7 @@ Studioは出力を単一のJSONドキュメント — [Experience Settings](/use
 
 <!-- TODO: media — /img/user-manual/supersplat/studio/launching-studio.png — Studioのレイアウト -->
 
-## Studioの起動
+## Studioの起動 {#launching-studio}
 
 Studioは**`https://superspl.at/scene/<hash>/studio`**で動作します。Studioを開けるのはスプラットのオーナーのみで、他のユーザーがURLにアクセスしても404になります。
 
@@ -30,9 +30,9 @@ StudioはSuperSplat editorのシェルを再利用しています：
 
 - **ヘッダ** — 戻るボタン、シーン名、**Import** / **Export** / **View** アクション、**Save**。
 - **左パネル** — 3つのタブで構成された単一のパネル：
-  - **Scene** — *Look & Tone*（背景、トーンマッピング、高精度レンダリング）、*Post Effects*、*Cameras* のセクションをまとめています。
+  - **Scene** — *Look & Tone*（背景色、トーンマッピング、高精度レンダリング）、*Post Effects*、*Cameras* のセクションをまとめています。
   - **Annotations** — シーン上の注釈のリスト。
-  - **Assets** — コリジョンなどのシーンアセットのアップロード。
+  - **Assets** — シーンアセットのアップロード：**Skybox**画像と**Collision**ジオメトリ。
 - **ビューポート** — 訪問者がシーンをどう見るかのライブプレビュー。
 
 各ツールセクションには独自のページがあります：
