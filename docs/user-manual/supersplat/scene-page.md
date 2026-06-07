@@ -7,11 +7,11 @@ The **scene page** at `https://superspl.at/scene/<hash>` is the public face of a
 
 Visitors can browse a scene page without a PlayCanvas account. An account is required to **like** the splat or **leave a comment**.
 
-![The scene page for a bumblebee splat — embedded viewer with a metadata and actions sidebar](/img/user-manual/supersplat/scene-page.webp)
-
 ## What visitors see
 
 The page is split between an **embedded viewer** that fills most of the screen and a **sidebar** with metadata and actions.
+
+![The scene page for a bumblebee splat — embedded viewer with a metadata and actions sidebar](/img/user-manual/supersplat/scene-page.webp)
 
 ### The embedded viewer
 
