@@ -13,7 +13,7 @@ The **Background** section takes an RGB color in the `0–1` range, applied as a
 
 ## Skybox image
 
-Open the **Scene Assets** section to find the Skybox controls. The upload dialog accepts `.webp`, `.jpg`, and `.png` images. For best results the image should be **equirectangular** — a 2:1 panoramic projection that maps cleanly onto the surrounding sphere.
+In [Studio](/user-manual/supersplat/studio/#launching-studio), open the **Assets** tab in the left panel to find the Skybox controls. The upload dialog accepts `.webp`, `.jpg`, and `.png` images. For best results the image should be **equirectangular** — a 2:1 panoramic projection that maps cleanly onto the surrounding sphere.
 
 Each scene can have one skybox. Uploading a new image replaces the previous one.
 

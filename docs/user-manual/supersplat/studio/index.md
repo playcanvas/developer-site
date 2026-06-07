@@ -9,7 +9,7 @@ Studio writes its output as a single JSON document — [Experience Settings](/us
 
 <!-- TODO: media — /img/user-manual/supersplat/studio/launching-studio.png — the Studio layout -->
 
-## Launching Studio
+## Launching Studio {#launching-studio}
 
 Studio runs at **`https://superspl.at/scene/<hash>/studio`**. Only the splat's owner can open it; for anyone else the URL 404s.
 

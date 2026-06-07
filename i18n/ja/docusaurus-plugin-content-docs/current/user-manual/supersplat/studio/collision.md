@@ -19,11 +19,11 @@ description: "公開済みスプラットにボクセルコリジョンを追加
 
 ## ボクセルコリジョンの生成
 
-コリジョンを追加する推奨方法は、Studio内で直接生成することです。**Scene Assets**パネルの**Collision**セクションには**Generate**ボタンがあり、公開済みのスプラットに対してサーバーサイドのボクサライザを実行します — ファイルを準備したりアップロードしたりする必要はありません。
+コリジョンを追加する推奨方法は、Studio内で直接生成することです。**Assets**タブの**Collision**セクションには**Generate**ボタンがあり、公開済みのスプラットに対してサーバーサイドのボクサライザを実行します — ファイルを準備したりアップロードしたりする必要はありません。
 
 ![StudioのGenerate Voxel Collisionダイアログ](/img/user-manual/supersplat/studio/generate-collision.webp)
 
-1. **Scene Assets**パネルを開き、**Collision**セクションを見つけます。
+1. スプラットを[Studio](/user-manual/supersplat/studio/#launching-studio)で開きます — スプラットのサムネイルをクリックしても*表示*されるだけなので、**Open in Studio**（Manageから）または**Edit in Studio**（シーンページから）を使用してください。次に、左パネルの**Assets**タブを選択し、**Collision**セクションを見つけます。
 2. **Generate**をクリックして**Generate Voxel Collision**ダイアログを開きます。
 3. **Scene type**を選びます — **Indoor**、**Outdoor**（デフォルト）、**Object**のいずれか。再構築する空間の種類に合わせてボクサライザを調整します。
 4. **Seed position**（**X**、**Y**、**Z**）を設定します。これはボクサライザが移動可能な空間を見つけるために外側へフラッドフィルしていく起点なので、訪問者が立てる場所に置く必要があります。フィールドには現在のビューポートカメラ位置があらかじめ入力されています — ダイアログを開く前に目的の位置にシーンを合わせるか、座標を手入力してください。
@@ -41,7 +41,7 @@ description: "公開済みスプラットにボクセルコリジョンを追加
 
 アップロードは、**カスタムコリジョン**が必要なときに選ぶ方法です — たとえば、**Generate**ボタンでは望みどおりの結果が得られず、自分でボクセルファイルを作成または調整した場合などです。互換性のあるペアは、ブラウザで[Convert](/user-manual/supersplat/convert)ユーティリティを使うか、スクリプトやバッチ処理向けに[splat-transform](/user-manual/splat-transform/) CLIで生成できます。
 
-1. **Scene Assets**パネルの**Collision**セクションで**Upload**をクリックし、**Upload Voxel Collision Pair**ダイアログを開きます。
+1. **Assets**タブで**Collision**セクションを開き、**Upload**をクリックして**Upload Voxel Collision Pair**ダイアログを開きます。
 2. コリジョンを記述するファイルペア — `.voxel.json`ファイルと、その相方の`.voxel.bin` — をドロップ（またはクリックして選択）します。まとめて追加することも、2ステップで追加することもできます。
 3. **Upload Voxel Pair**をクリックします。すでにコリジョンが存在する場合、ボタンは**Upload Override**になり、既存のものを置き換えます。
 

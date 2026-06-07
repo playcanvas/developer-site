@@ -9,7 +9,7 @@ Studioは出力を単一のJSONドキュメント — [Experience Settings](/use
 
 <!-- TODO: media — /img/user-manual/supersplat/studio/launching-studio.png — Studioのレイアウト -->
 
-## Studioの起動
+## Studioの起動 {#launching-studio}
 
 Studioは**`https://superspl.at/scene/<hash>/studio`**で動作します。Studioを開けるのはスプラットのオーナーのみで、他のユーザーがURLにアクセスしても404になります。
 
