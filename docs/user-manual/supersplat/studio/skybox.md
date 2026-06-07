@@ -9,7 +9,7 @@ The **Skybox** and **Background** controls in [Studio](/user-manual/supersplat/s
 
 ## Background color
 
-The **Background** section takes an RGB color in the `0–1` range, applied as a solid color behind the splat. It's used whenever no skybox is uploaded, and as the clear color even when a skybox is present (it shows through anywhere the skybox isn't visible).
+The **Background** control, in the **Scene** tab's *Look & Tone* section, takes an RGB color in the `0–1` range, applied as a solid color behind the splat. It's used whenever no skybox is uploaded, and as the clear color even when a skybox is present (it shows through anywhere the skybox isn't visible).
 
 ## Skybox image
 

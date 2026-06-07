@@ -30,9 +30,9 @@ Studio reuses the SuperSplat editor shell:
 
 - **Header** — back button, scene name, **Import** / **Export** / **View** actions, and **Save**.
 - **Left panel** — a single panel organized into three tabs:
-  - **Scene** — grouped sections for *Look & Tone* (background, tonemapping, high-precision rendering), *Post Effects*, and *Cameras*.
+  - **Scene** — grouped sections for *Look & Tone* (background color, tonemapping, high-precision rendering), *Post Effects*, and *Cameras*.
   - **Annotations** — the list of on-scene annotations.
-  - **Assets** — scene-asset uploads, such as collision.
+  - **Assets** — scene-asset uploads: the **Skybox** image and **Collision** geometry.
 - **Viewport** — live preview of how visitors will see the scene.
 
 Each tool section has its own page:
