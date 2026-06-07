@@ -15,7 +15,7 @@ Splats are shown as cards with a thumbnail, title, and author. Click a card to o
 
 The grid loads progressively as you scroll — the first page returns 32 splats (a 4×8 layout), and each subsequent page returns 16 (2×8). There's no "next page" button; just keep scrolling.
 
-## Sort, time, and feature filters
+## Sorting, filtering, and search
 
 Explore is driven entirely by URL parameters, so any filtered view is a shareable link.
 
@@ -44,7 +44,7 @@ Restricts the result set to splats published within a window.
 
 ### Feature filters (`?features=...`)
 
-Comma-separated list. Available filters include:
+Comma-separated list. The available filters are:
 
 | Value | Splats matching |
 |-------|-----------------|
