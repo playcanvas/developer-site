@@ -35919,13 +35919,7 @@ In [Studio](/user-manual/supersplat/studio/#launching-studio), open the **Assets
 
 Each scene can have one skybox. Uploading a new image replaces the previous one.
 
-| State | Meaning |
-|-------|---------|
-| **Uploading** | The image is being sent to the platform. |
-| **Complete** | The skybox is live for the next viewer reload. |
-| **Error** | Something went wrong — try the upload again, or check the file format. |
-
-The **Preview** dialog renders the uploaded skybox onto a temporary scene so you can sanity-check the mapping before saving.
+Before uploading, the dialog shows a 2:1 preview of the selected image so you can check it. The upload happens immediately, and the new skybox is live on the next viewer reload. If the file isn't a `.webp`, or the upload fails, the dialog shows an error message.
 
 ## When to use one or the other
 
