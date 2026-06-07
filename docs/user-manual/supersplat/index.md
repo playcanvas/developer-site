@@ -8,29 +8,27 @@ description: "SuperSplat is PlayCanvas's editing and publishing platform for 3D 
 The platform is made up of several pieces. Some you'll use as a creator, some your visitors use to view what you've made, and some are general-purpose utilities.
 
 ```mermaid
-flowchart LR
-    PLY([Raw splat<br/>PLY / SOG / ...])
-    Editor([Editor])
-    Upload([Direct Upload])
-    Manage([Manage])
-    Studio([Studio])
-    Scene([Scene page])
-    Explore([Explore])
-    Viewer([Viewer<br/>embed / self-host])
-    Convert([Convert])
-    Streaming([Streamed SOG / LOD])
+flowchart TB
+    subgraph you [You: create and publish]
+        direction LR
+        raw([Raw splat]) --> editor([Editor])
+        raw --> upload([Direct Upload])
+        editor --> manage([Manage])
+        upload --> manage
+        manage <--> studio([Studio])
+    end
 
-    PLY --> Editor --> Manage
-    PLY --> Upload --> Manage
-    Convert -.-> Editor
-    Convert -.-> Upload
-    Manage --> Studio --> Manage
-    Manage --> Scene
-    Scene --> Explore
-    Scene --> Viewer
-    Editor -.-> Streaming
-    Upload -.-> Streaming
-    Streaming -.-> Viewer
+    manage --> scene([Scene page])
+
+    subgraph visitors [Visitors: discover and view]
+        direction LR
+        explore([Explore]) --> scene
+        profile([User Profile]) --> scene
+        scene --> viewer([Viewer / embed])
+    end
+
+    convert([Convert]) -.-> editor
+    convert -.-> upload
 ```
 
 :::tip You can skip the Editor
