@@ -20,9 +20,7 @@ flowchart TB
         manage <--> studio([Studio])
     end
 
-    manage --> scene([Scene page])
-    manage -.->|embed / self-host| viewer([Viewer])
-    viewer -.->|powers| scene
+    manage --> scene(["Scene page (hosts Viewer)"])
 
     subgraph visitors [Visitors: discover and view]
         direction LR
