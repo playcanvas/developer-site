@@ -31,7 +31,7 @@ Upload Splatダイアログを開く方法は3つあります：
 |--------|----------------|---------------------|
 | **PLY** | `.ply` | PLYヘッダで始まり、ASCIIまたはバイナリのフォーマットを宣言していること。 |
 | **SOG** | `.sog` | 1つの`meta.json`ファイルと、期待されるSOGのWebPペイロードファイルを含むこと。 |
-| **LODストリーミングバンドル (SSOG)** | `.zip` | `lod-meta.json`と1つ以上のSOGチャンクフォルダを含むこと。 |
+| **LODストリーミングバンドル (SSOG)** | `.zip` | `lod-meta.json`と1つ以上のSOGチャンクフォルダを含むこと。[ストリーミングとパフォーマンス](/user-manual/supersplat/streaming)を参照してください。 |
 | **LCC** | `.zip` | 正確に1つの`.lcc`ファイルと、隣接する`index.bin`および`data.bin`ファイルを含むこと。 |
 
 ファイルの内容は選択後に検証されます。Direct Uploadは`.compressed.ply`、`.ksplat`、`.splat`、`.spz`ファイルを直接受け付けません。これらは[Convert](/user-manual/supersplat/convert)ユーティリティまたは[splat-transform CLI](/user-manual/splat-transform/)で先に変換してください。
