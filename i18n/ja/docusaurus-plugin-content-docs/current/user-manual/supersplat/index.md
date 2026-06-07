@@ -13,6 +13,8 @@ flowchart TB
         direction LR
         raw([Raw splat]) --> editor([Editor])
         raw --> upload([Direct Upload])
+        convert([Convert]) -.-> editor
+        convert -.-> upload
         editor --> manage([Manage])
         upload --> manage
         manage <--> studio([Studio])
@@ -27,9 +29,6 @@ flowchart TB
         explore([Explore]) --> scene
         profile([User Profile]) --> scene
     end
-
-    convert([Convert]) -.-> editor
-    convert -.-> upload
 ```
 
 :::tip Editorを省略することもできます
