@@ -9,7 +9,7 @@ SuperSplatの各クリエイターには`https://superspl.at/user?id=<username>`
 
 プロファイルの閲覧は匿名で可能で、PlayCanvasアカウントは不要です。
 
-<!-- TODO: media — /img/user-manual/supersplat/user-profile.png — アバター、自己紹介、スプラットのグリッドを表示したクリエイターのプロファイルページ -->
+![クリエイターのSuperSplatプロフィールページ — アバター、表示名、ソーシャルリンク、公開スプラットのグリッド](/img/user-manual/supersplat/user-profile.webp)
 
 ## 表示される内容
 
