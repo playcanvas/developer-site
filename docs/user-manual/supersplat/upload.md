@@ -11,7 +11,7 @@ This is the right path when:
 - You produced the splat in another tool — a training pipeline, a smartphone scanner, or via the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform](/user-manual/splat-transform/) CLI.
 - You want to publish quickly without round-tripping through the Editor.
 
-<!-- TODO: media — /img/user-manual/supersplat/upload-dialog.png — the Upload Splat dialog with a file dropped onto it -->
+![The Upload Splat dialog — a Publish-to selector and a click-or-drag file drop area](/img/user-manual/supersplat/upload.webp)
 
 ## Launching the Upload dialog
 
