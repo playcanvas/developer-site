@@ -60,9 +60,6 @@ The top-nav search bar adds a `q=` parameter that matches against splat **title*
 `https://superspl.at/?sort=likes&time=month&features=walkable&q=museum`
 
 > Most-liked walkable splats published in the last month whose title or description mentions "museum."
-
-<!-- TODO: media — /video/user-manual/supersplat/explore-infinite-scroll.mp4 — gallery scrolling and loading more cards -->
-
 ## Creator profiles
 
 Click a card's author chip to land on that user's [profile page](/user-manual/supersplat/user-profile) — a grid of every Public splat that user has shared, plus their avatar, bio, and social links.
