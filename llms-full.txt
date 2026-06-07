@@ -35951,6 +35951,8 @@ This is the right path when:
 - You produced the splat in another tool — a training pipeline, a smartphone scanner, or via the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform](/user-manual/splat-transform/) CLI.
 - You want to publish quickly without round-tripping through the Editor.
 
+[Image: The Upload Splat dialog — a Publish-to selector and a click-or-drag file drop area]
+
 ## Launching the Upload dialog
 
 There are three ways to open the Upload Splat dialog:
