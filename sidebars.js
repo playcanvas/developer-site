@@ -559,7 +559,6 @@ const sidebars = {
         },
         'user-manual/supersplat/upload',
         'user-manual/supersplat/manage',
-        'user-manual/supersplat/streaming',
         {
           type: 'category',
           label: 'Studio',
@@ -579,6 +578,7 @@ const sidebars = {
         'user-manual/supersplat/scene-page',
         'user-manual/supersplat/explore',
         'user-manual/supersplat/user-profile',
+        'user-manual/supersplat/streaming',
         {
           type: 'category',
           label: 'Viewer',
