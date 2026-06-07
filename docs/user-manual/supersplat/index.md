@@ -26,8 +26,8 @@ flowchart TB
 
     subgraph visitors [Visitors: discover and view]
         direction LR
-        explore([Explore]) --> scene
-        profile([User Profile]) --> scene
+        explore([Explore]) <--> scene
+        profile([User Profile]) <--> scene
     end
 ```
 
