@@ -51,8 +51,6 @@ Comma-separated list. Available filters include:
 | `walkable` | Splats with [collision](/user-manual/supersplat/studio/collision) — visitors can walk through them |
 | `downloadable` | Splats whose creators have enabled [downloads](/user-manual/supersplat/manage/#downloadable--license) |
 
-Feature filters available to you may vary depending on your account.
-
 ### Search (`?q=...`)
 
 The top-nav search bar adds a `q=` parameter that matches against splat **title** and **description**.
