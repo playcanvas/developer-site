@@ -11,10 +11,8 @@ The platform is made up of several pieces. Some you'll use as a creator, some yo
 flowchart TB
     subgraph you [You: create and publish]
         direction LR
-        raw([Raw splat]) --> editor([Editor])
+        raw([Splat file]) --> editor([Editor])
         raw --> upload([Direct Upload])
-        convert([Convert]) -.-> editor
-        convert -.-> upload
         editor --> manage([Manage])
         upload --> manage
         manage <--> studio([Studio])
