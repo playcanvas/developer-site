@@ -7,7 +7,7 @@ The [Explore page](https://superspl.at) is the public-facing home of SuperSplat 
 
 Browsing Explore is **anonymous** — no PlayCanvas account is required. An account becomes useful when you want to [like](/user-manual/supersplat/scene-page/#likes), [comment](/user-manual/supersplat/scene-page/#comments), or [publish your own splats](/user-manual/supersplat/upload).
 
-<!-- TODO: media — /img/user-manual/supersplat/explore-page.png — the Explore grid -->
+![The SuperSplat Explore page — a grid of public splats](/img/user-manual/supersplat/supersplat-explore.webp)
 
 ## The grid
 
