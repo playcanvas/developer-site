@@ -19,12 +19,13 @@ flowchart TB
     end
 
     manage --> scene([Scene page])
+    manage -.->|embed / self-host| viewer([Viewer])
+    viewer -.->|powers| scene
 
     subgraph visitors [Visitors: discover and view]
         direction LR
         explore([Explore]) --> scene
         profile([User Profile]) --> scene
-        scene --> viewer([Viewer / embed])
     end
 
     convert([Convert]) -.-> editor

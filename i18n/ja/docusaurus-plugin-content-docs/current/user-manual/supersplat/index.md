@@ -19,12 +19,13 @@ flowchart TB
     end
 
     manage --> scene([Scene page])
+    manage -.->|埋め込み / セルフホスト| viewer([Viewer])
+    viewer -.->|描画| scene
 
     subgraph visitors [訪問者：発見して閲覧]
         direction LR
         explore([Explore]) --> scene
         profile([User Profile]) --> scene
-        scene --> viewer([Viewer / embed])
     end
 
     convert([Convert]) -.-> editor
