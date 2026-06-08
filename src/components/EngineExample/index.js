@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { translate } from '@docusaurus/Translate';
 
-const BASE = 'https://playcanvas.vercel.app';
+const BASE = 'https://playcanvas.com/examples';
 const GENERIC_TITLES = new Set([
     'live demo',
     'this example',
