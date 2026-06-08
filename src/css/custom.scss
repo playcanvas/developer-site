@@ -294,6 +294,8 @@ html[data-theme='dark'] .navbar--github-link:before {
 
 /* Sidebar section headers */
 .sidebar-section-header {
+  --sidebar-section-accent-width: 3px;
+
   font-weight: 700;
   font-size: 0.78rem;
   text-transform: uppercase;
@@ -301,8 +303,9 @@ html[data-theme='dark'] .navbar--github-link:before {
   color: var(--ifm-color-emphasis-900); /* near-foreground, high contrast, stays neutral */
   margin: 1.5rem 0 0.5rem 0;
   padding: 0.25rem 0;
-  border-left: 3px solid var(--ifm-color-primary);
-  padding-left: calc(var(--ifm-menu-link-padding-horizontal) - 3px);
+  border-left: var(--sidebar-section-accent-width) solid var(--ifm-color-primary);
+  /* keep heading text aligned with the links below by subtracting the bar width */
+  padding-left: calc(var(--ifm-menu-link-padding-horizontal) - var(--sidebar-section-accent-width));
 }
 
 .sidebar-section-header:first-of-type {
