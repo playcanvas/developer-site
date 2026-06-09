@@ -131,7 +131,7 @@ Set the shadow type to VSM and tune it:
 entity.light.shadowType = pc.SHADOW_VSM_16F;
 
 // Optional tuning
-entity.light.vsmBlurSize = 11; // blur kernel size, odd 1-25
+entity.light.vsmBlurSize = 11; // blur kernel size, 1-25
 entity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // or pc.BLUR_BOX (cheaper)
 entity.light.vsmBias = 0.0025; // reduces shadow acne, 0-1
 ```
@@ -197,7 +197,7 @@ entity.light.shadowBlockerSamples = 16; // 0 disables contact hardening
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Select the light in the Hierarchy and set its **Shadow Type** to **PCSS** in the [Light Component](/user-manual/editor/scenes/components/light). **Penumbra Size** and **Penumbra Falloff** then appear there too; the sample counts are not currently exposed in the Light Component editor UI and must therefore be set in a script.
+Select the light in the Hierarchy and set its **Shadow Type** to **PCSS (Soft Shadows)** in the [Light Component](/user-manual/editor/scenes/components/light). **Penumbra Size** and **Penumbra Falloff** then appear there too; the sample counts are not currently exposed in the Light Component editor UI and must therefore be set in a script.
 
 </TabItem>
 <TabItem value="react" label="React">
