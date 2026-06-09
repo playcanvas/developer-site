@@ -21,12 +21,12 @@ PlayCanvas は、シャドウマッピングと呼ばれる技術を使用して
 
 ```javascript
 // ライトのシャドウキャストを有効にする
-lightEntity.light.castShadows = true;
+entity.light.castShadows = true;
 
-// render（および model）コンポーネントはデフォルトでシャドウをキャスト・受信します。
+// メッシュエンティティはデフォルトでシャドウをキャスト・受信します（render または model コンポーネント）。
 // 必要に応じてエンティティごとに切り替えます
-entity.render.castShadows = true;
-entity.render.receiveShadows = true;
+meshEntity.render.castShadows = true;
+meshEntity.render.receiveShadows = true;
 ```
 
 </TabItem>
@@ -88,7 +88,7 @@ Hierarchyでライトを選択し、その[Lightコンポーネント](/user-man
 
 ```javascript
 // SHADOW_PCF1_32F | SHADOW_PCF3_32F (default) | SHADOW_PCF5_32F
-lightEntity.light.shadowType = pc.SHADOW_PCF5_32F;
+entity.light.shadowType = pc.SHADOW_PCF5_32F;
 ```
 
 </TabItem>
@@ -130,12 +130,12 @@ import { SHADOW_PCF5_32F } from 'playcanvas';
 <TabItem value="engine" label="Engine">
 
 ```javascript
-lightEntity.light.shadowType = pc.SHADOW_VSM_16F;
+entity.light.shadowType = pc.SHADOW_VSM_16F;
 
 // 任意の調整
-lightEntity.light.vsmBlurSize = 11; // ブラーのカーネルサイズ、1-25 の奇数
-lightEntity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // または pc.BLUR_BOX（より低コスト）
-lightEntity.light.vsmBias = 0.0025; // シャドウアクネを軽減、0-1
+entity.light.vsmBlurSize = 11; // ブラーのカーネルサイズ、1-25 の奇数
+entity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // または pc.BLUR_BOX（より低コスト）
+entity.light.vsmBias = 0.0025; // シャドウアクネを軽減、0-1
 ```
 
 </TabItem>
@@ -185,13 +185,13 @@ PCSS は、デバイスが浮動小数点テクスチャへのレンダリング
 <TabItem value="engine" label="Engine">
 
 ```javascript
-lightEntity.light.shadowType = pc.SHADOW_PCSS_32F;
+entity.light.shadowType = pc.SHADOW_PCSS_32F;
 
 // 任意の微調整
-lightEntity.light.penumbraSize = 2; // ペナンブラの全体的なサイズ（柔らかさ）
-lightEntity.light.penumbraFalloff = 1; // 距離に応じて柔らかさが増す速さ、1 以上
-lightEntity.light.shadowSamples = 16; // フィルタサンプル数。多いほど滑らかでコスト増
-lightEntity.light.shadowBlockerSamples = 16; // 0 でコンタクトハードニングを無効化
+entity.light.penumbraSize = 2; // ペナンブラの全体的なサイズ（柔らかさ）
+entity.light.penumbraFalloff = 1; // 距離に応じて柔らかさが増す速さ、1 以上
+entity.light.shadowSamples = 16; // フィルタサンプル数。多いほど滑らかでコスト増
+entity.light.shadowBlockerSamples = 16; // 0 でコンタクトハードニングを無効化
 ```
 
 </TabItem>
@@ -226,7 +226,7 @@ import { SHADOW_PCSS_32F } from 'playcanvas';
 
 ## シャドウの調整 {#tuning-shadows}
 
-PlayCanvasが使用するシャドウマッピング技術には有限の解像度しかありません。そのため、できるだけ見栄え良くするために、いくつかの値を調整する必要があります。以下の各プロパティは、Editorの[Lightコンポーネント](/user-manual/editor/scenes/components/light)のUIで設定するか、コードでライトコンポーネント（`lightEntity.light.*`）に設定できます。
+PlayCanvasが使用するシャドウマッピング技術には有限の解像度しかありません。そのため、できるだけ見栄え良くするために、いくつかの値を調整する必要があります。以下の各プロパティは、Editorの[Lightコンポーネント](/user-manual/editor/scenes/components/light)のUIで設定するか、コードでライトコンポーネント（`entity.light.*`）に設定できます。
 
 ### シャドウ距離 {#shadow-distance}
 

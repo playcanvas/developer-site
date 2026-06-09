@@ -21,12 +21,12 @@ By default, shadow casting is disabled in PlayCanvas, so you have to explicitly 
 
 ```javascript
 // Enable shadow casting on a light
-lightEntity.light.castShadows = true;
+entity.light.castShadows = true;
 
-// Render (and model) components cast & receive shadows by default;
+// Mesh entities cast & receive shadows by default (render or model component);
 // toggle per entity as needed
-entity.render.castShadows = true;
-entity.render.receiveShadows = true;
+meshEntity.render.castShadows = true;
+meshEntity.render.receiveShadows = true;
 ```
 
 </TabItem>
@@ -88,7 +88,7 @@ Set the shadow type to a PCF variant:
 
 ```javascript
 // SHADOW_PCF1_32F | SHADOW_PCF3_32F (default) | SHADOW_PCF5_32F
-lightEntity.light.shadowType = pc.SHADOW_PCF5_32F;
+entity.light.shadowType = pc.SHADOW_PCF5_32F;
 ```
 
 </TabItem>
@@ -130,12 +130,12 @@ Set the shadow type to VSM and tune it:
 <TabItem value="engine" label="Engine">
 
 ```javascript
-lightEntity.light.shadowType = pc.SHADOW_VSM_16F;
+entity.light.shadowType = pc.SHADOW_VSM_16F;
 
 // Optional tuning
-lightEntity.light.vsmBlurSize = 11; // blur kernel size, odd 1-25
-lightEntity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // or pc.BLUR_BOX (cheaper)
-lightEntity.light.vsmBias = 0.0025; // reduces shadow acne, 0-1
+entity.light.vsmBlurSize = 11; // blur kernel size, odd 1-25
+entity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // or pc.BLUR_BOX (cheaper)
+entity.light.vsmBias = 0.0025; // reduces shadow acne, 0-1
 ```
 
 </TabItem>
@@ -185,13 +185,13 @@ Set the shadow type to PCSS and fine-tune it:
 <TabItem value="engine" label="Engine">
 
 ```javascript
-lightEntity.light.shadowType = pc.SHADOW_PCSS_32F;
+entity.light.shadowType = pc.SHADOW_PCSS_32F;
 
 // Optional fine-tuning
-lightEntity.light.penumbraSize = 2; // overall penumbra size (softness)
-lightEntity.light.penumbraFalloff = 1; // how fast softness grows with distance, >= 1
-lightEntity.light.shadowSamples = 16; // filter samples; higher = smoother, costlier
-lightEntity.light.shadowBlockerSamples = 16; // 0 disables contact hardening
+entity.light.penumbraSize = 2; // overall penumbra size (softness)
+entity.light.penumbraFalloff = 1; // how fast softness grows with distance, >= 1
+entity.light.shadowSamples = 16; // filter samples; higher = smoother, costlier
+entity.light.shadowBlockerSamples = 16; // 0 disables contact hardening
 ```
 
 </TabItem>
@@ -226,7 +226,7 @@ import { SHADOW_PCSS_32F } from 'playcanvas';
 
 ## Tuning Shadows {#tuning-shadows}
 
-The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. Each property below can be set in the [Light Component](/user-manual/editor/scenes/components/light) UI in the Editor, or on the light component in code (`lightEntity.light.*`).
+The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. Each property below can be set in the [Light Component](/user-manual/editor/scenes/components/light) UI in the Editor, or on the light component in code (`entity.light.*`).
 
 ### Shadow Distance {#shadow-distance}
 
