@@ -179,7 +179,7 @@ PCF produces a soft edge of constant width. Real shadows, however, are sharp whe
 
 :::note
 
-PCSS requires the device to support rendering to and linearly filtering floating-point textures. This is widely available on modern desktop GPUs, but it is not universal — particularly on older or low-end mobile devices. Where it is unsupported, the light automatically falls back to PCF, so it is always safe to enable PCSS. To detect support at runtime, check the `GraphicsDevice` properties `textureFloatRenderable` and `textureFloatFilterable`.
+PCSS requires the device to support rendering to and linearly filtering floating-point textures. This is widely available on modern desktop GPUs, but it is not universal — particularly on older or low-end mobile devices. Where it is unsupported, the light automatically falls back to PCF, so it is always safe to enable PCSS.
 
 :::
 
