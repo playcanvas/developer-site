@@ -79,7 +79,7 @@ The shadow sampling type is specified per light, so it can be set in the Light I
 
 ### PCF (Percentage-Closer Filtering) {#pcf}
 
-PCF is the default technique. It reads several localized samples from the shadow map — for example a 3×3 grid of 9 samples — and averages them to soften the edge by a fixed amount. Choose the kernel size with [`SHADOW_PCF1_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF1_32F.html) (a single sample, giving the hardest edge), [`SHADOW_PCF3_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF3_32F.html) (the default) or [`SHADOW_PCF5_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF5_32F.html); more samples produce softer edges at a higher GPU cost.
+PCF is the default technique. It reads several localized samples from the shadow map and averages them to soften the edge by a fixed amount. The kernel size controls the trade-off: 1×1 gives the hardest edge, 3×3 is the default, and 5×5 produces the softest edges — larger kernels sample more texels and cost more on the GPU.
 
 Set the shadow type to a PCF variant:
 
@@ -87,6 +87,7 @@ Set the shadow type to a PCF variant:
 <TabItem value="engine" label="Engine">
 
 ```javascript
+// SHADOW_PCF1_32F | SHADOW_PCF3_32F (default) | SHADOW_PCF5_32F
 lightEntity.light.shadowType = pc.SHADOW_PCF5_32F;
 ```
 
@@ -110,6 +111,7 @@ import { SHADOW_PCF5_32F } from 'playcanvas';
 <TabItem value="web-components" label="Web Components">
 
 ```html
+<!-- shadow-type: pcf1-32f | pcf3-32f | pcf5-32f -->
 <pc-entity>
   <pc-light type="directional" cast-shadows shadow-type="pcf5-32f"></pc-light>
 </pc-entity>
@@ -120,12 +122,12 @@ import { SHADOW_PCF5_32F } from 'playcanvas';
 
 ### VSM (Variance Shadow Maps) {#vsm}
 
-Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. VSM uses [`SHADOW_VSM_16F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_16F.html) or the higher-precision [`SHADOW_VSM_32F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_32F.html), and can exhibit light-bleeding artifacts in some scenes.
+Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. They are available in 16-bit and 32-bit precision variants (the latter being more precise), and can exhibit light-bleeding artifacts in some scenes.
 
-VSM is controlled by these light properties:
+VSM is controlled by these properties:
 
 * `vsmBlurSize` — the blur kernel size, an odd number from 1 to 25. Defaults to `11`.
-* `vsmBlurMode` — [`BLUR_GAUSSIAN`](https://api.playcanvas.com/engine/variables/BLUR_GAUSSIAN.html) (the default, smoother) or [`BLUR_BOX`](https://api.playcanvas.com/engine/variables/BLUR_BOX.html) (cheaper).
+* `vsmBlurMode` — the blur filter: Gaussian (the default, smoother) or box (cheaper).
 * `vsmBias` — bias used to reduce shadow acne, in the range 0 to 1. Defaults to `0.0025`.
 
 Set the shadow type to VSM and tune it:
