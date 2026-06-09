@@ -284,5 +284,6 @@ Enabling shadows has performance implications:
 
 * For each shadow casting directional or spot light, the scene must be rendered once into a shadow map every frame. Omni light shadows are far more expensive since the scene is rendered six times per light (the shadow map is stored as a 6-sided cube map). Rendering the scene into shadow maps places load on both the CPU and the GPU.
 * Using a greater shadow map resolution will generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
-* Selecting soft shadows (PCF3x3) for the shadow sample type on a shadow receiving material is more expensive on the GPU versus the hard shadows option.
+* The [shadow type](#shadow-type) affects cost: larger PCF kernels, VSM blurring, and especially PCSS (which takes many samples per pixel) are more expensive on the GPU than a hard, single-sample shadow.
+* For directional lights, each additional [shadow cascade](#shadow-cascades) may require shadow casters to be rendered into more than one shadow map, increasing cost.
 * If your shadows are from static parts of the environment consider using [lightmaps](/user-manual/graphics/lighting/lightmapping) to bake shadows into textures.
