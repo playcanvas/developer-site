@@ -3,6 +3,9 @@ title: Shadows
 description: Enable shadow mapping, tune cast and receive flags, and use cascaded directional shadows to reduce aliasing.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps](/user-manual/graphics/lighting/lightmapping).
 
 ![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3-shadows.jpg)
@@ -11,13 +14,60 @@ The PlayCanvas engine implements a shadowing algorithm called shadow mapping. It
 
 ## Enabling Shadows {#enabling-shadows}
 
-<img loading="lazy" src="/img/user-manual/graphics/lighting/shadows/light-shadow-options.png" width="480" />
+By default, shadow casting is disabled in PlayCanvas, so you have to explicitly enable it yourself. First, identify which lights in your scene should cast shadows — every light exposes a **Cast Shadows** option. You then choose which graphical objects cast and receive shadows: by default, all render and model components both cast and receive shadows, and you can toggle this per entity.
 
-By default, shadow casting is disabled in PlayCanvas. You have to explicitly enable it yourself. Fortunately, enabling shadows is easy. First of all, identify which lights in your scene you want to cast shadows. Select the lights in the Hierarchy to edit their properties in the Inspector panel. Every light has a 'Cast Shadows' option. Simply check this option for the light to generate shadows for shadow casting graphical objects in your scene.
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
 
-![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
+```javascript
+// Enable shadow casting on a light
+lightEntity.light.castShadows = true;
 
-Now you need to specify which graphical objects in your scene cast and receive shadows. By default, all render and model components cast and receive shadows. To modify these properties, select the entity in the Hierarchy, locate the render or model component in the Inspector and uncheck the 'Cast Shadows' or 'Receive Shadows' option as required.
+// Render (and model) components cast & receive shadows by default;
+// toggle per entity as needed
+entity.render.castShadows = true;
+entity.render.receiveShadows = true;
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Select a light in the Hierarchy and enable **Cast Shadows** in its [Light Component](/user-manual/editor/scenes/components/light).
+
+To control which objects participate, select an entity and toggle the **Cast Shadows** / **Receive Shadows** options on its [render](/user-manual/editor/scenes/components/render) or [model](/user-manual/editor/scenes/components/model) component.
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+// Enable shadow casting on a light
+<Entity name="light">
+  <Light type="directional" castShadows />
+</Entity>
+
+// Render components cast & receive shadows by default; toggle as needed
+<Entity>
+  <Render type="box" castShadows receiveShadows />
+</Entity>
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<!-- Enable shadow casting on a light -->
+<pc-entity>
+  <pc-light type="directional" cast-shadows></pc-light>
+</pc-entity>
+
+<!-- Render components cast & receive shadows by default; toggle as needed -->
+<pc-entity>
+  <pc-render type="box" cast-shadows receive-shadows></pc-render>
+</pc-entity>
+```
+
+</TabItem>
+</Tabs>
 
 ## Shadow Cascades {#shadow-cascades}
 
@@ -31,7 +81,7 @@ The following properties can be used to set up shadow cascades.
 
 ### Number of cascades {#number-of-cascades}
 
-Number of cascades represents the number of view frustum subdivisions, and can be 1, 2, 3 or 4. The default value of 1 represents a single shadow map.
+Number of cascades (`light.numCascades`) represents the number of view frustum subdivisions, and can be 1, 2, 3 or 4. The default value of 1 represents a single shadow map.
 
 A screenshot showing a single shadow cascade.
 
@@ -43,35 +93,35 @@ A screenshot showing four shadow cascades.
 
 ### Distribution of cascades {#distribution-of-cascades}
 
-The distribution of subdivision of the camera frustum for individual shadow cascades. A value in the range of 0 to 1 can be specified. A value of 0 represents a linear distribution and a value of 1 represents a logarithmic distribution. Visually, a higher value distributes more shadow map resolution to foreground objects, while a lower value distributes it to more distant objects.
+The distribution (`light.cascadeDistribution`) of subdivision of the camera frustum for individual shadow cascades. A value in the range of 0 to 1 can be specified. A value of 0 represents a linear distribution and a value of 1 represents a logarithmic distribution. Visually, a higher value distributes more shadow map resolution to foreground objects, while a lower value distributes it to more distant objects.
 
 ## Tuning Shadows {#tuning-shadows}
 
-The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. The following properties can be found in the [Light Component](/user-manual/editor/scenes/components/light) UI.
+The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. Each property below can be set in the [Light Component](/user-manual/editor/scenes/components/light) UI in the Editor, or on the light component in code (`lightEntity.light.*`).
 
 ### Shadow Distance {#shadow-distance}
 
-The shadow distance is the distance from the viewpoint beyond which directional light shadows are no longer rendered. The smaller this value, the crisper your shadows will be. The problem is that the viewer will be able to see the shadows suddenly appear as the viewpoint moves around the scene. Therefore, you should balance this value based on how far the player can see into the distance and generally what looks good.
+The shadow distance (`light.shadowDistance`) is the distance from the viewpoint beyond which directional light shadows are no longer rendered. The smaller this value, the crisper your shadows will be. The problem is that the viewer will be able to see the shadows suddenly appear as the viewpoint moves around the scene. Therefore, you should balance this value based on how far the player can see into the distance and generally what looks good.
 
 ### Shadow Intensity {#shadow-intensity}
 
-The intensity of the shadow, where 1 represents full intensity shadow cast by this light, and 0 represents no shadow.
+The intensity of the shadow (`light.shadowIntensity`), where 1 represents full intensity shadow cast by this light, and 0 represents no shadow.
 
 ![Shadow Intensity](/img/user-manual/graphics/lighting/shadows/shadow-intensity.gif)
 
 ### Shadow Resolution {#shadow-resolution}
 
-Every light casts shadows via a shadow map. This shadow map can have a resolution of 256x256, 512x512, 1024x1024 or 2048x2048 and this value is also set in the light component's interface. The higher the resolution, the crisper the shadows. However, higher resolution shadows are more expensive to render so be sure to balance performance against quality.
+Every light casts shadows via a shadow map. This shadow map (`light.shadowResolution`) can have a resolution of 256x256, 512x512, 1024x1024 or 2048x2048 and this value is also set in the light component's interface. The higher the resolution, the crisper the shadows. However, higher resolution shadows are more expensive to render so be sure to balance performance against quality.
 
 ### Shadow Bias {#shadow-bias}
 
-Shadow mapping can be prone to rendering artifacts that can look very ugly. If you notice bands of shadow or speckled patches where you do not expect, you should try tuning the shadow bias to resolve the problem.
+Shadow mapping can be prone to rendering artifacts that can look very ugly. If you notice bands of shadow or speckled patches where you do not expect, you should try tuning the shadow bias (`light.shadowBias`) to resolve the problem.
 
 ### Normal Offset Bias {#normal-offset-bias}
 
 'Shadow acne' artifacts are a big problem and the shadow bias can eliminate them quite effectively. Unfortunately, this always introduces some level of 'Peter Panning', the phenomenon where shadows make an object appear to be floating in mid-air.
 
-The Normal Offset Bias solves this problem. In addition to using the depth bias, we can avoid both shadow acne and Peter Panning by making small tweaks to the UV coordinates used in the shadow map look-up. A fragment's position is offset along its geometric normal. This "Normal Offset" technique yields vastly superior results to a constant shadow bias only approach.
+The Normal Offset Bias (`light.normalOffsetBias`) solves this problem. In addition to using the depth bias, we can avoid both shadow acne and Peter Panning by making small tweaks to the UV coordinates used in the shadow map look-up. A fragment's position is offset along its geometric normal. This "Normal Offset" technique yields vastly superior results to a constant shadow bias only approach.
 
 ## Soft Shadows vs Hard Shadows {#soft-shadows-vs-hard-shadows}
 
@@ -81,7 +131,7 @@ The outline of a shadow is called the penumbra. This is a transition from dark t
 
 Soft shadows are achieved by performing more samples of the shadow map on the GPU. The algorithm used is called Percentage Closest Filtering or PCF for short. This algorithm reads 9 localized samples (a 3 by 3 matrix) from the shadow map instead of just one as is used for hard shadows.
 
-The shadow sampling type is specified per light and so the option can be found in the Light Inspector.
+The shadow sampling type is specified per light, so the option can be found in the Light Inspector, or set in code via `light.shadowType` (for example `pc.SHADOW_PCF1`, `pc.SHADOW_PCF3` or `pc.SHADOW_PCF5`, where higher numbers sample more taps for softer edges).
 
 ## Performance Considerations {#performance-considerations}
 
