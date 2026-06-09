@@ -123,7 +123,7 @@ Shadow mapping can be prone to rendering artifacts that can look very ugly. If y
 
 The Normal Offset Bias (`light.normalOffsetBias`) solves this problem. In addition to using the depth bias, we can avoid both shadow acne and Peter Panning by making small tweaks to the UV coordinates used in the shadow map look-up. A fragment's position is offset along its geometric normal. This "Normal Offset" technique yields vastly superior results to a constant shadow bias only approach.
 
-## Soft Shadows vs Hard Shadows {#soft-shadows-vs-hard-shadows}
+## Shadow Type {#shadow-type}
 
 The outline of a shadow is called the penumbra. This is a transition from dark to light which gives shadows a soft edge. Softening shadow edges is the default in PlayCanvas but you can change this setting if you wish to achieve hard edged shadows. See below for a comparison of soft and hard edged shadows:
 
