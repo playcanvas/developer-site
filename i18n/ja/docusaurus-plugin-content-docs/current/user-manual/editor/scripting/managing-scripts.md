@@ -56,6 +56,12 @@ Script Asset 自体は、Script Component を介して Entity にアタッチさ
     ![Select Script](/img/user-manual/scripting/select-script.png)
     * 1つの Script Component に複数の Script Asset を追加できます。通常、それらのライフサイクルメソッド（initialize、update など）は「Scripts」配列に表示される順序で実行されますが、依存関係は postInitialize やイベントを使用して管理する方が適切です。
 
+:::note
+
+ここでスクリプトは*登録名*（コード内で `static scriptName`、クラシックスクリプトでは `pc.createScript('name')` で設定）で一覧表示されます。これはスクリプトアセットのファイル名とは異なる場合があります。詳細は [スクリプトパネルのコントロール](/user-manual/editor/scenes/components/script/#script-panel-controls) を参照してください。
+
+:::
+
 ## スクリプトの整理
 
 プロジェクトが大きくなると、スクリプトの数も増えます。適切な整理が不可欠です。
