@@ -124,12 +124,6 @@ import { SHADOW_PCF5_32F } from 'playcanvas';
 
 バリアンスシャドウマップは、事前にブラーをかけられる統計的な深度情報を格納し、Directional ライトのシャドウのような広い範囲に適した滑らかでソフトなエッジを生成します。16 ビットと 32 ビットの精度バリアントがあり（後者がより高精度）、一部のシーンではライトブリーディングのアーティファクトが発生することがあります。
 
-VSM は以下のプロパティで制御します。
-
-* `vsmBlurSize` — ブラーのカーネルサイズ。1 から 25 の奇数。既定値は `11`。
-* `vsmBlurMode` — ブラーフィルター: Gaussian（デフォルト、より滑らか）または box（より低コスト）。
-* `vsmBias` — シャドウアクネを軽減するためのバイアス。0 から 1 の範囲。既定値は `0.0025`。
-
 シャドウタイプを VSM に設定して調整します。
 
 <Tabs groupId="workflow" defaultValue="engine">
@@ -139,9 +133,9 @@ VSM は以下のプロパティで制御します。
 lightEntity.light.shadowType = pc.SHADOW_VSM_16F;
 
 // 任意の調整
-lightEntity.light.vsmBlurSize = 11;
-lightEntity.light.vsmBlurMode = pc.BLUR_GAUSSIAN;
-lightEntity.light.vsmBias = 0.0025;
+lightEntity.light.vsmBlurSize = 11; // ブラーのカーネルサイズ、1-25 の奇数
+lightEntity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // または pc.BLUR_BOX（より低コスト）
+lightEntity.light.vsmBias = 0.0025; // シャドウアクネを軽減、0-1
 ```
 
 </TabItem>
@@ -185,13 +179,6 @@ PCSS は、デバイスが浮動小数点テクスチャへのレンダリング
 
 :::
 
-PCSS の見た目とコストは、以下のライトプロパティで制御します。
-
-* `penumbraSize` — ペナンブラの全体的なサイズ、つまりシャドウがどれだけ柔らかくなれるか。既定値は `1`。
-* `penumbraFalloff` — 接触点からの距離に応じてシャドウがどれだけ速く柔らかくなるか（`1` 以上の値）。既定値は `1`。
-* `shadowSamples` — シャドウのフィルタリングに使用するサンプル数。値が大きいほど滑らかになりますが、GPU コストが増加します。既定値は `16`。
-* `shadowBlockerSamples` — コンタクトハードニングを駆動するキャスター・レシーバー間の距離を推定するために使用するサンプル数。`0` に設定するとコンタクトハードニングが無効になり、一定の柔らかさになります。既定値は `16`。
-
 シャドウタイプを PCSS に設定し、微調整します。
 
 <Tabs groupId="workflow" defaultValue="engine">
@@ -201,10 +188,10 @@ PCSS の見た目とコストは、以下のライトプロパティで制御し
 lightEntity.light.shadowType = pc.SHADOW_PCSS_32F;
 
 // 任意の微調整
-lightEntity.light.penumbraSize = 2;
-lightEntity.light.penumbraFalloff = 1;
-lightEntity.light.shadowSamples = 16;
-lightEntity.light.shadowBlockerSamples = 16;
+lightEntity.light.penumbraSize = 2; // ペナンブラの全体的なサイズ（柔らかさ）
+lightEntity.light.penumbraFalloff = 1; // 距離に応じて柔らかさが増す速さ、1 以上
+lightEntity.light.shadowSamples = 16; // フィルタサンプル数。多いほど滑らかでコスト増
+lightEntity.light.shadowBlockerSamples = 16; // 0 でコンタクトハードニングを無効化
 ```
 
 </TabItem>

@@ -124,12 +124,6 @@ import { SHADOW_PCF5_32F } from 'playcanvas';
 
 Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. They are available in 16-bit and 32-bit precision variants (the latter being more precise), and can exhibit light-bleeding artifacts in some scenes.
 
-VSM is controlled by these properties:
-
-* `vsmBlurSize` — the blur kernel size, an odd number from 1 to 25. Defaults to `11`.
-* `vsmBlurMode` — the blur filter: Gaussian (the default, smoother) or box (cheaper).
-* `vsmBias` — bias used to reduce shadow acne, in the range 0 to 1. Defaults to `0.0025`.
-
 Set the shadow type to VSM and tune it:
 
 <Tabs groupId="workflow" defaultValue="engine">
@@ -139,9 +133,9 @@ Set the shadow type to VSM and tune it:
 lightEntity.light.shadowType = pc.SHADOW_VSM_16F;
 
 // Optional tuning
-lightEntity.light.vsmBlurSize = 11;
-lightEntity.light.vsmBlurMode = pc.BLUR_GAUSSIAN;
-lightEntity.light.vsmBias = 0.0025;
+lightEntity.light.vsmBlurSize = 11; // blur kernel size, odd 1-25
+lightEntity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // or pc.BLUR_BOX (cheaper)
+lightEntity.light.vsmBias = 0.0025; // reduces shadow acne, 0-1
 ```
 
 </TabItem>
@@ -185,13 +179,6 @@ PCSS requires the device to support rendering to and linearly filtering floating
 
 :::
 
-The PCSS look and cost are controlled by these light properties:
-
-* `penumbraSize` — the overall size of the penumbra, i.e. how soft the shadows can become. Defaults to `1`.
-* `penumbraFalloff` — how quickly the shadow softens with distance from the contact point (a value `>= 1`). Defaults to `1`.
-* `shadowSamples` — the number of samples used to filter the shadow. Higher values look smoother but cost more on the GPU. Defaults to `16`.
-* `shadowBlockerSamples` — the number of samples used to estimate the caster-to-receiver distance that drives contact hardening. Set to `0` to disable contact hardening and use a constant softness. Defaults to `16`.
-
 Set the shadow type to PCSS and fine-tune it:
 
 <Tabs groupId="workflow" defaultValue="engine">
@@ -201,10 +188,10 @@ Set the shadow type to PCSS and fine-tune it:
 lightEntity.light.shadowType = pc.SHADOW_PCSS_32F;
 
 // Optional fine-tuning
-lightEntity.light.penumbraSize = 2;
-lightEntity.light.penumbraFalloff = 1;
-lightEntity.light.shadowSamples = 16;
-lightEntity.light.shadowBlockerSamples = 16;
+lightEntity.light.penumbraSize = 2; // overall penumbra size (softness)
+lightEntity.light.penumbraFalloff = 1; // how fast softness grows with distance, >= 1
+lightEntity.light.shadowSamples = 16; // filter samples; higher = smoother, costlier
+lightEntity.light.shadowBlockerSamples = 16; // 0 disables contact hardening
 ```
 
 </TabItem>
