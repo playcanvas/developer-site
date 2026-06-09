@@ -131,7 +131,7 @@ The outline of a shadow is called the penumbra. This is a transition from dark t
 
 Soft shadows are achieved by performing more samples of the shadow map on the GPU. The algorithm used is called Percentage Closest Filtering or PCF for short. This algorithm reads 9 localized samples (a 3 by 3 matrix) from the shadow map instead of just one as is used for hard shadows.
 
-The shadow sampling type is specified per light, so the option can be found in the Light Inspector, or set in code via `light.shadowType` (for example `pc.SHADOW_PCF1`, `pc.SHADOW_PCF3` or `pc.SHADOW_PCF5`, where higher numbers sample more taps for softer edges).
+The shadow sampling type is specified per light, so the option can be found in the Light Inspector, or set in code via `light.shadowType` (for example `pc.SHADOW_PCF1_32F`, `pc.SHADOW_PCF3_32F` or `pc.SHADOW_PCF5_32F`, where higher numbers sample more taps for softer edges).
 
 ### Contact-Hardening Soft Shadows (PCSS) {#contact-hardening-soft-shadows}
 
