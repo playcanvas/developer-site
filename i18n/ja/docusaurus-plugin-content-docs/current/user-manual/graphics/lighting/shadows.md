@@ -124,7 +124,7 @@ lightEntity.light.shadowBlockerSamples = 16;
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Hierarchy でライトを選択し、[Lightコンポーネント](/user-manual/editor/scenes/components/light)で **Shadow Type** を **PCSS** に設定します。**Penumbra Size** と **Penumbra Falloff** もそこに表示されます。サンプル数はスクリプトから設定します。
+Hierarchy でライトを選択し、[Lightコンポーネント](/user-manual/editor/scenes/components/light)で **Shadow Type** を **PCSS** に設定します。**Penumbra Size** と **Penumbra Falloff** もそこに表示されます。サンプル数は現在 Light Component のエディタ UI には公開されていないため、スクリプトで設定する必要があります。
 
 </TabItem>
 <TabItem value="react" label="React">
