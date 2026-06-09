@@ -71,15 +71,15 @@ To control which objects participate, select an entity and toggle the **Cast Sha
 
 ## Shadow Type {#shadow-type}
 
-The outline of a shadow is called the penumbra. This is a transition from dark to light which gives shadows a soft edge. Softening shadow edges is the default in PlayCanvas but you can change this setting if you wish to achieve hard edged shadows. See below for a comparison of soft and hard edged shadows:
-
-![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
-
-The shadow sampling type is specified per light, so it can be set in the Light Inspector or in code via `light.shadowType`. PlayCanvas offers three filtering techniques:
+The technique used to filter a light's shadows — trading off edge softness, quality, and performance — is set per light in the Light Inspector or in code via `light.shadowType`. PlayCanvas offers three filtering techniques:
 
 ### PCF (Percentage-Closer Filtering) {#pcf}
 
-PCF is the default technique. It reads several localized samples from the shadow map and averages them to soften the edge by a fixed amount. The kernel size controls the trade-off: 1×1 gives the hardest edge, 3×3 is the default, and 5×5 produces the softest edges — larger kernels sample more texels and cost more on the GPU.
+The outline of a shadow is called the penumbra: the transition from dark to light that gives a shadow its soft edge. PCF, the default technique, reads several localized samples from the shadow map and averages them to soften this edge by a fixed amount.
+
+![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
+
+The kernel size controls the trade-off: 1×1 gives the hardest edge, 3×3 is the default, and 5×5 produces the softest edges — larger kernels sample more texels and cost more on the GPU.
 
 Set the shadow type to a PCF variant:
 
