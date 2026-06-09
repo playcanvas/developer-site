@@ -1,6 +1,6 @@
 ---
 title: Shadows
-description: Enable shadow mapping, tune cast and receive flags, and use cascaded directional shadows to reduce aliasing.
+description: Enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS), and tune quality with cascades, resolution, and bias.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -240,7 +240,7 @@ The intensity of the shadow (`light.shadowIntensity`), where 1 represents full i
 
 ### Shadow Resolution {#shadow-resolution}
 
-Every light casts shadows via a shadow map. This shadow map (`light.shadowResolution`) can have a resolution of 256x256, 512x512, 1024x1024 or 2048x2048 and this value is also set in the light component's interface. The higher the resolution, the crisper the shadows. However, higher resolution shadows are more expensive to render so be sure to balance performance against quality.
+Every light casts shadows via a shadow map. This shadow map (`light.shadowResolution`) can range from 16x16 up to 4096x4096, and this value is also set in the light component's interface. The higher the resolution, the crisper the shadows. However, higher resolution shadows are more expensive to render so be sure to balance performance against quality.
 
 ### Shadow Bias {#shadow-bias}
 
