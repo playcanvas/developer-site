@@ -71,7 +71,7 @@ Hierarchyでライトを選択し、その[Lightコンポーネント](/user-man
 
 ## シャドウタイプ {#shadow-type}
 
-ライトのシャドウをフィルタリングする技術（エッジの柔らかさ、品質、パフォーマンスのトレードオフ）は、ライトごとに「Light Inspector（ライトインスペクター）」、またはコードで `light.shadowType` を介して設定します。PlayCanvas には3つのフィルタリング技術があります。
+ライトのシャドウをフィルタリングする技術（エッジの柔らかさ、品質、パフォーマンスのトレードオフ）は、ライトごとに選択します。PlayCanvas には3つのフィルタリング技術があります。
 
 ### PCF (Percentage-Closer Filtering) {#pcf}
 

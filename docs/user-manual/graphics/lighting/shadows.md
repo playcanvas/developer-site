@@ -71,7 +71,7 @@ To control which objects participate, select an entity and toggle the **Cast Sha
 
 ## Shadow Type {#shadow-type}
 
-The technique used to filter a light's shadows — trading off edge softness, quality, and performance — is set per light in the Light Inspector or in code via `light.shadowType`. PlayCanvas offers three filtering techniques:
+The technique used to filter a light's shadows — trading off edge softness, quality, and performance — is chosen per light. PlayCanvas offers three filtering techniques:
 
 ### PCF (Percentage-Closer Filtering) {#pcf}
 
