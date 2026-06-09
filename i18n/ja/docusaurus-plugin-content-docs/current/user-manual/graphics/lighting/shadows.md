@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 シャドウはゲームにリアリズムを追加する優れた方法です。しかし、ダイナミック(リアルタイム)シャドウは、高コストでランタイムパフォーマンスが低下する可能性があります。シーンに静的なシャドウを追加するよりも性能が高い方法については、[ライトマップ](/user-manual/graphics/lighting/lightmapping)をご覧ください。
 
-![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3-shadows.jpg)
+![Soft shadows using PCSS](/img/user-manual/graphics/lighting/shadows/pcss-shadows.webp)
 
 PlayCanvasエンジンは、シャドウマッピングと呼ばれるシャドウのアルゴリズムを実装しています。完全にクロスプラットフォームであり、モバイルおよびデスクトップの両方で動作することが保証されています。
 

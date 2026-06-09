@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps](/user-manual/graphics/lighting/lightmapping).
 
-![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3-shadows.jpg)
+![Soft shadows using PCSS](/img/user-manual/graphics/lighting/shadows/pcss-shadows.webp)
 
 The PlayCanvas engine implements a shadowing algorithm called shadow mapping. It is completely cross-platform and so is guaranteed to work on both mobile and the desktop.
 
