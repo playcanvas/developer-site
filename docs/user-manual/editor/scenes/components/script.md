@@ -18,7 +18,7 @@ Alternatively, you can drag a script asset from the Assets Panel onto the Script
 
 ![Add Script Dialog](/img/user-manual/editor/scenes/components/new-script.jpg)
 
-## Script Panel Controls
+## Script Panel Controls {#script-panel-controls}
 
 Each script added to the component displays as a collapsible panel with the following controls:
 
