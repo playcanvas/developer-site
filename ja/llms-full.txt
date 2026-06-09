@@ -15579,7 +15579,7 @@ Alternatively, you can drag a script asset from the Assets Panel onto the Script
 
 [Image: Add Script Dialog]
 
-## Script Panel Controls
+## Script Panel Controls {#script-panel-controls}
 
 Each script added to the component displays as a collapsible panel with the following controls:
 
@@ -15590,6 +15590,12 @@ Each script added to the component displays as a collapsible panel with the foll
 | Edit         | Opens the script in the Code Editor. |
 | Parse        | Re-parses the script to update its attributes. Use after modifying script attribute definitions. |
 | Remove       | Removes the script from the component (click the X button). |
+
+:::note
+
+The **Script Name** shown here is the script's *registered name*, defined in code by `static scriptName` for [ESM scripts](/user-manual/scripting/esm-scripts/) or by the argument to `pc.createScript('name')` for classic scripts. This is independent of the script asset's file name, so the two can differ — for example, a file named `annotation-manager.mjs` might register its script as `annotationManager`.
+
+:::
 
 ## Script Ordering
 
@@ -16400,6 +16406,12 @@ A Script Asset itself doesn't do anything until it's attached to an Entity via a
     * A dropdown/search box will appear. Start typing the name of your script, or browse the list, and select it.
     [Image: Select Script]
     * You can add multiple Script Assets to a single Script Component on an Entity. They will generally execute their lifecycle methods (like initialize, update) in the order they appear in the "Scripts" array, though dependencies are better managed using postInitialize or events.
+
+:::note
+
+Scripts are listed here by their *registered name* (set in code with `static scriptName`, or `pc.createScript('name')` for classic scripts), which may differ from the script asset's file name. See [Script Panel Controls](/user-manual/editor/scenes/components/script/#script-panel-controls) for details.
+
+:::
 
 ## Organizing Scripts
 
