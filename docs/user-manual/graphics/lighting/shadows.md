@@ -129,9 +129,19 @@ The outline of a shadow is called the penumbra. This is a transition from dark t
 
 ![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
 
-Soft shadows are achieved by performing more samples of the shadow map on the GPU. The algorithm used is called Percentage Closest Filtering or PCF for short. This algorithm reads 9 localized samples (a 3 by 3 matrix) from the shadow map instead of just one as is used for hard shadows.
+The shadow sampling type is specified per light, so it can be set in the Light Inspector or in code via `light.shadowType`. PlayCanvas offers three filtering techniques:
 
-The shadow sampling type is specified per light, so the option can be found in the Light Inspector, or set in code via `light.shadowType` (for example `pc.SHADOW_PCF1_32F`, `pc.SHADOW_PCF3_32F` or `pc.SHADOW_PCF5_32F`, where higher numbers sample more taps for softer edges).
+### PCF (Percentage-Closer Filtering) {#pcf}
+
+PCF is the default technique. It reads several localized samples from the shadow map — for example a 3×3 grid of 9 samples — and averages them to soften the edge by a fixed amount. Choose the kernel size with `pc.SHADOW_PCF1_32F` (a single sample, giving the hardest edge), `pc.SHADOW_PCF3_32F` (the default) or `pc.SHADOW_PCF5_32F`; more samples produce softer edges at a higher GPU cost.
+
+### VSM (Variance Shadow Maps) {#vsm}
+
+Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. Set the type to `pc.SHADOW_VSM_16F`, or the higher-precision `pc.SHADOW_VSM_32F`. VSM can exhibit light-bleeding artifacts in some scenes. Tune it with:
+
+* `light.vsmBlurSize` — the blur kernel size, an odd number from 1 to 25. Defaults to `11`.
+* `light.vsmBlurMode` — `pc.BLUR_GAUSSIAN` (the default, smoother) or `pc.BLUR_BOX` (cheaper).
+* `light.vsmBias` — bias used to reduce shadow acne, in the range 0 to 1. Defaults to `0.0025`.
 
 ### Contact-Hardening Soft Shadows (PCSS) {#contact-hardening-soft-shadows}
 
