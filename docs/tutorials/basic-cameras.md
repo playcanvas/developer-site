@@ -7,68 +7,66 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/
 
 ## Camera Entities
 
-To view the scene created by your PlayCanvas application a Camera Entity is used to render it to the screen.
+To view the scene created by your PlayCanvas application, a Camera Entity is used to render it to the screen. A camera is added to an Entity as a [Component](/user-manual/glossary#component).
 
-In order to run your Scene from the PlayCanvas Editor, you must add at least one active Camera Entity to your Scene.
+To run your Scene from the PlayCanvas Editor, you must have at least one enabled Camera Entity in your Scene.
 
 ## Creating a Camera Entity
 
-To create a new Camera Entity, you need to add a Camera [Component](/user-manual/glossary#component) to an Entity.
+The quickest way to add a camera is from the [Hierarchy](/user-manual/editor/interface/hierarchy) panel:
 
-* Select the root Entity of your Scene in the Entity Explorer
-* Create a new Entity by selecting *New Entity* from the *Entity* menu.
-* Add a Component by selecting *New Component* from *Component* menu
-* Choose *Camera* when you are prompted to choose which type of Component to create
+* Click the **+** (Add Entity) button at the top right of the Hierarchy panel — or right click an existing Entity.
+* Choose **Camera** from the menu.
 
-As making a Camera Entity is a common task there is a shortcut: Select *New Entity* -> *New Camera* in the *Entity* menu.
-This is equivalent to creating a new Entity and adding a Camera Component to it.
+This creates a new Entity with a Camera Component already attached.
+
+You can also add a camera to an Entity you already have: select the Entity, then in the [Inspector](/user-manual/editor/interface/inspector) click **Add Component** and choose **Camera**.
 
 ## Camera Properties
 
-Like all Components, the Camera Component has a set of properties which alter its behavior.
+Like all Components, the Camera Component has a set of properties that alter its behavior. The properties that matter most for getting a view on screen are described below. For the complete list, see the [Camera Component reference](/user-manual/editor/scenes/components/camera).
 
-### `Enabled`
+### Enabled
 
-If the enabled property is true, then the camera will render the scene to its rendering buffer when the Scene loads. Multiple cameras can be enabled at the same time. This is useful in situations where you want to implement a split-screen game or a mini-map, for example. The priority property determines the order in which the enabled cameras are rendered.
+If enabled, the camera renders the scene to its render target when the Scene loads. Multiple cameras can be enabled at the same time, which is useful for implementing a split-screen game or a mini-map, for example. The **Priority** property determines the order in which the enabled cameras are rendered.
 
-### `Clear Color Buffer`
+### Clear Color Buffer / Clear Color
 
-If this property is checked, before rendering the scene, the camera will erase whatever was previously in the camera's frame buffer (namely the previously rendered frame), and fills it with a clear color.
+If **Clear Color Buffer** is enabled, before rendering the scene the camera erases whatever was previously in its render target (the previously rendered frame) and fills it with the **Clear Color**.
 
-### `Clear Color`
+### Projection
 
-The color to which the frame buffer is cleared, providing that the Clear Color Buffer property has been checked.
+The projection type determines how the 3D scene is converted into the 2D view rendered to the page.
 
-### `Clear Depth Buffer`
+The **Perspective** projection is the most common type for games. Alternatively, **Orthographic** projection renders the scene without perspective, which is useful for 2D games. An orthographic camera uses an **Ortho Height** property in place of Field of View.
 
-If this property is checked, before rendering the scene, the camera will erase whatever was previously stored in the camera's depth buffer. Normally, this should be left checked but in certain circumstances, where you don't care about depth order when rendering the scene, it can be an optimization to disable it.
+### Field of View
 
-### `Projection`
-
-The projection type determines which type of matrix projection is used to convert the 3D scene in to the 2D view rendered to the page.
-
-The **perspective** projection is the most common type for games. Alternatively, you can use an **orthographic** projection, which renders the scene without perspective so is useful for 2D games.
-
-### `Field of View`
-
-The field of view of a camera determines how much of the scene the camera shows. It is measured in degrees (&deg;) so the default value of 45&deg; means that the top edge of the view to the bottom edge of the view form an arc of 45&deg; from the position of the camera
+The field of view of a perspective camera determines how much of the scene the camera shows. It is measured in degrees (&deg;), so the default value of 45&deg; means that the top edge of the view to the bottom edge form an arc of 45&deg; from the position of the camera.
 
 ![Field of view](/img/tutorials/basic-cameras/field-of-view.png)
 
-You can see in this diagram that because the `fov` value is independent of the width of the display a wide screen view (light blue) shows the same amount vertically but more horizontally than a narrow screen view (dark blue).
+Because the field of view is independent of the width of the display, a wide screen view (light blue) shows the same amount vertically but more horizontally than a narrow screen view (dark blue).
 
-### `Near Clip`
+### Near Clip / Far Clip
 
-The near clipping distance is the distance, in meters, from the camera before which nothing will be drawn.
+The near and far clip distances define the range, in camera space, within which geometry is drawn. Nothing closer to the camera than **Near Clip**, or further away than **Far Clip**, is rendered.
 
-### `Far Clip`
+### Priority
 
-The far clipping distance is the distance, in meters, from the camera after which nothing will be drawn.
+A number that determines the order in which cameras are rendered when more than one is enabled. Smaller numbers are higher priority and are rendered first.
 
-### `Priority`
+### Viewport
 
-This value is a number which determines the order in which a camera is rendered, if multiple cameras are enabled. Smaller numbers are higher priority and will be rendered first.
+The viewport is a rectangular area of the camera's render target, given as four normalized values (0 to 1) in the order **X, Y, Width, Height**, measured from the bottom left. So to limit the camera to rendering in the bottom-left quadrant of the screen, set the viewport to `0, 0, 0.5, 0.5`.
 
-### `Viewport`
+## Scripting Interface
 
-The viewport represents a rectangular area on the camera's rendering buffer. There are 4 values in the following format: Bottom Left X, Bottom Left Y, Width, Height. The values are normalized coordinates, where the rendering buffer, regardless of dimensions, is considered to be mapped in X and Y to 0..1. So to limit the camera to rendering in the bottom left quadrant of the screen, set the viewport to 0, 0, 0.5, 0.5.
+You can read and change any of these properties at runtime from a [Script Component](/user-manual/editor/scenes/components/script). See the [CameraComponent API](https://api.playcanvas.com/engine/classes/CameraComponent.html) for the full scripting interface.
+
+## See Also
+
+* [Camera Component reference](/user-manual/editor/scenes/components/camera) — the complete property list
+* [Orbit Camera](/tutorials/orbit-camera)
+* [First Person Movement](/tutorials/first-person-movement)
+* [Smooth Camera Movement](/tutorials/smooth-camera-movement)
