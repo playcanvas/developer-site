@@ -133,14 +133,14 @@ The shadow sampling type is specified per light, so it can be set in the Light I
 
 ### PCF (Percentage-Closer Filtering) {#pcf}
 
-PCF is the default technique. It reads several localized samples from the shadow map — for example a 3×3 grid of 9 samples — and averages them to soften the edge by a fixed amount. Choose the kernel size with `pc.SHADOW_PCF1_32F` (a single sample, giving the hardest edge), `pc.SHADOW_PCF3_32F` (the default) or `pc.SHADOW_PCF5_32F`; more samples produce softer edges at a higher GPU cost.
+PCF is the default technique. It reads several localized samples from the shadow map — for example a 3×3 grid of 9 samples — and averages them to soften the edge by a fixed amount. Choose the kernel size with [`SHADOW_PCF1_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF1_32F.html) (a single sample, giving the hardest edge), [`SHADOW_PCF3_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF3_32F.html) (the default) or [`SHADOW_PCF5_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF5_32F.html); more samples produce softer edges at a higher GPU cost.
 
 ### VSM (Variance Shadow Maps) {#vsm}
 
-Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. Set the type to `pc.SHADOW_VSM_16F`, or the higher-precision `pc.SHADOW_VSM_32F`. VSM can exhibit light-bleeding artifacts in some scenes. Tune it with:
+Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. Set the type to [`SHADOW_VSM_16F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_16F.html), or the higher-precision [`SHADOW_VSM_32F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_32F.html). VSM can exhibit light-bleeding artifacts in some scenes. Tune it with:
 
 * `light.vsmBlurSize` — the blur kernel size, an odd number from 1 to 25. Defaults to `11`.
-* `light.vsmBlurMode` — `pc.BLUR_GAUSSIAN` (the default, smoother) or `pc.BLUR_BOX` (cheaper).
+* `light.vsmBlurMode` — [`BLUR_GAUSSIAN`](https://api.playcanvas.com/engine/variables/BLUR_GAUSSIAN.html) (the default, smoother) or [`BLUR_BOX`](https://api.playcanvas.com/engine/variables/BLUR_BOX.html) (cheaper).
 * `light.vsmBias` — bias used to reduce shadow acne, in the range 0 to 1. Defaults to `0.0025`.
 
 ### Contact-Hardening Soft Shadows (PCSS) {#contact-hardening-soft-shadows}
@@ -186,12 +186,48 @@ import { SHADOW_PCSS_32F } from 'playcanvas';
 
 PCSS requires floating-point texture support on the device. Where that is unavailable, the light automatically falls back to PCF.
 
-You can fine-tune the look and cost of PCSS with the properties below. In code they are set on the light component (`light.penumbraSize`), as [React](/user-manual/react/) props, or as Web Components attributes (`penumbra-size`):
+You can fine-tune the look and cost of PCSS with the following properties:
 
 * `penumbraSize` — the overall size of the penumbra, i.e. how soft the shadows can become. Defaults to `1`.
 * `penumbraFalloff` — how quickly the shadow softens with distance from the contact point (a value `>= 1`). Defaults to `1`.
 * `shadowSamples` — the number of samples used to filter the shadow. Higher values look smoother but cost more on the GPU. Defaults to `16`.
 * `shadowBlockerSamples` — the number of samples used to estimate the caster-to-receiver distance that drives contact hardening. Set to `0` to disable contact hardening and use a constant softness. Defaults to `16`.
+
+Set them per entry point:
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+lightEntity.light.penumbraSize = 2;
+lightEntity.light.penumbraFalloff = 1;
+lightEntity.light.shadowSamples = 16;
+lightEntity.light.shadowBlockerSamples = 16;
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+When the light's shadow type is PCSS, **Penumbra Size** and **Penumbra Falloff** appear in the [Light Component](/user-manual/editor/scenes/components/light). The sample counts are set from a script.
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+<Light type="directional" castShadows shadowType={SHADOW_PCSS_32F}
+  penumbraSize={2} penumbraFalloff={1} shadowSamples={16} shadowBlockerSamples={16} />
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<pc-light type="directional" cast-shadows shadow-type="pcss-32f"
+  penumbra-size="2" penumbra-falloff="1" shadow-samples="16" shadow-blocker-samples="16"></pc-light>
+```
+
+</TabItem>
+</Tabs>
 
 ## Performance Considerations {#performance-considerations}
 
