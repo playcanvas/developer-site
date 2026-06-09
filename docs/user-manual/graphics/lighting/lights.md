@@ -19,12 +19,6 @@ There are three types of light in PlayCanvas:
 
 The most familiar light source to us is the Sun. Because the Sun is so far from Earth, light that hits the surface of our planet can be approximated as traveling in a single direction. In PlayCanvas, this type of light source is called a Directional light.
 
-When unselected, a directional light is represented by the following icon in the Editor's 3D view:
-
-![Directional light icon](/img/user-manual/graphics/lighting/lights/directional-icon.jpg)
-
-Click this icon to select the light in the Hierarchy and Inspector panels.
-
 A directional light lights an object like this:
 
 ![Directional light](/img/user-manual/graphics/lighting/lights/directional.jpg)
@@ -33,12 +27,6 @@ A directional light lights an object like this:
 
 Omni lights are light sources that emit light in all directions. An example of this type of light source is a candle and other examples can be seen in the [table](#use-cases) below.
 
-When unselected, an omni light is represented by the following icon in the Editor's 3D view:
-
-![Omni light icon](/img/user-manual/graphics/lighting/lights/point-icon.jpg)
-
-Click this icon to select the light in the Hierarchy and Inspector panels.
-
 An omni light lights an object like this:
 
 ![Omni light](/img/user-manual/graphics/lighting/lights/point.jpg)
@@ -46,12 +34,6 @@ An omni light lights an object like this:
 ### Spot Lights {#spot-lights}
 
 Spot lights, like omni lights, emit light in all directions. However, the light from the spot light is constrained to a cone shape.
-
-When unselected, a spot light is represented by the following icon in the Editor's 3D view:
-
-![Spot light icon](/img/user-manual/graphics/lighting/lights/spot-icon.jpg)
-
-Click this icon to select the light in the Hierarchy and Inspector panels.
 
 A spot light lights an object like this:
 

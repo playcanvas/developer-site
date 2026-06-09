@@ -19,12 +19,6 @@ PlayCanvasには3つの種類の光源があります。
 
 私たちにとって最も身近な光源は太陽です。太陽は地球から遠いため、地球の表面に当たる光は一方向から来たかのように近似することができます。PlayCanvasでは、このタイプの光源を「方向性(ディレクショナル)光」と呼びます。
 
-非選択時、方向性光は以下のアイコンでエディタの3Dビューに表示されます。
-
-![Directional light icon](/img/user-manual/graphics/lighting/lights/directional-icon.jpg)
-
-ヒエラルキーパネルとインスペクターパネルでライトを選択するには、このアイコンをクリックします。
-
 方向性光は以下のようにオブジェクトを照らします。
 
 ![Directional light](/img/user-manual/graphics/lighting/lights/directional.jpg)
@@ -33,12 +27,6 @@ PlayCanvasには3つの種類の光源があります。
 
 オムニライトは、すべての方向に光を発する光源です。このタイプの光源の例として、キャンドルやその他の例が以下の[table](#use-cases)に示されています。
 
-非選択時、オムニライトは以下のアイコンでエディタの3Dビューに表示されます。
-
-![Omni light icon](/img/user-manual/graphics/lighting/lights/point-icon.jpg)
-
-ヒエラルキーパネルとインスペクターパネルでライトを選択するには、このアイコンをクリックします。
-
 オムニライトは以下のようにオブジェクトを照らします。
 
 ![Omni light](/img/user-manual/graphics/lighting/lights/point.jpg)
@@ -46,12 +34,6 @@ PlayCanvasには3つの種類の光源があります。
 ### Spot Lights {#spot-lights}
 
 スポットライトもオムニライトと同様に、すべての方向に光を発します。ただし、スポットライトからの光は円錐形に制限されます。
-
-非選択時、スポットライトは以下のアイコンでエディターの3Dビューに表示されます。
-
-![Spot light icon](/img/user-manual/graphics/lighting/lights/spot-icon.jpg)
-
-ヒエラルキーパネルとインスペクターパネルでライトを選択するには、このアイコンをクリックします。
 
 スポットライトは以下のようにオブジェクトを照らします。
 

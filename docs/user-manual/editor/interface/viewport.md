@@ -23,6 +23,18 @@ You can also use the camera menu to select any of the camera Entities in your sc
 
 The 3-Colored Axis you can see in the screenshot above is called a [Gizmo](/user-manual/glossary#gizmo). This is used to manipulate the transform matrix of the selected Entity. There are three types of Gizmo: Translate (with arrows on the ends of the axes); Rotate (which is made up of three colored rings) and Scale (with cubes on the ends of the axes).
 
+## Entity Icons {#entity-icons}
+
+Some components have no visible geometry of their own, so the Editor draws an icon in the viewport to mark the Entity's position when it is not selected. Click an icon to select that Entity in the [Hierarchy](/user-manual/editor/interface/hierarchy) and [Inspector](/user-manual/editor/interface/inspector) panels.
+
+Lights are the most common example, with a distinct icon per light type:
+
+| Light type  | Icon |
+| ----------- | ---- |
+| Directional | ![Directional light icon](/img/user-manual/editor/viewport/directional-icon.jpg) |
+| Omni        | ![Omni light icon](/img/user-manual/editor/viewport/point-icon.jpg) |
+| Spot        | ![Spot light icon](/img/user-manual/editor/viewport/spot-icon.jpg) |
+
 ## Render Mode {#render-mode}
 
 You can modify the viewport render mode using this drop-down menu in the top-right of the viewport:
