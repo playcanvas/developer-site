@@ -81,13 +81,97 @@ Hierarchyでライトを選択し、その[Lightコンポーネント](/user-man
 
 PCF はデフォルトの技術です。シャドウマップから複数の局所的なサンプル（例えば 3×3 の9個のサンプル）を読み込んで平均し、エッジを一定量だけ柔らかくします。カーネルサイズは [`SHADOW_PCF1_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF1_32F.html)（単一サンプルで最も硬いエッジ）、[`SHADOW_PCF3_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF3_32F.html)（デフォルト）、[`SHADOW_PCF5_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF5_32F.html) で選択します。サンプル数が多いほどエッジは柔らかくなりますが、GPU コストが高くなります。
 
+シャドウタイプを PCF のいずれかに設定します。
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+lightEntity.light.shadowType = pc.SHADOW_PCF5_32F;
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+[Lightコンポーネント](/user-manual/editor/scenes/components/light)で **Shadow Type** を **Shadow Map PCF 1x1**、**3x3**、または **5x5** に設定します。
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+import { SHADOW_PCF5_32F } from 'playcanvas';
+
+<Entity name="light">
+  <Light type="directional" castShadows shadowType={SHADOW_PCF5_32F} />
+</Entity>
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<pc-entity>
+  <pc-light type="directional" cast-shadows shadow-type="pcf5-32f"></pc-light>
+</pc-entity>
+```
+
+</TabItem>
+</Tabs>
+
 ### VSM (Variance Shadow Maps) {#vsm}
 
-バリアンスシャドウマップは、事前にブラーをかけられる統計的な深度情報を格納し、Directional ライトのシャドウのような広い範囲に適した滑らかでソフトなエッジを生成します。タイプを [`SHADOW_VSM_16F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_16F.html)、またはより高精度な [`SHADOW_VSM_32F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_32F.html) に設定します。VSM は一部のシーンでライトブリーディングのアーティファクトが発生することがあります。以下で調整します。
+バリアンスシャドウマップは、事前にブラーをかけられる統計的な深度情報を格納し、Directional ライトのシャドウのような広い範囲に適した滑らかでソフトなエッジを生成します。VSM は [`SHADOW_VSM_16F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_16F.html) またはより高精度な [`SHADOW_VSM_32F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_32F.html) を使用し、一部のシーンではライトブリーディングのアーティファクトが発生することがあります。
 
-* `light.vsmBlurSize` — ブラーのカーネルサイズ。1 から 25 の奇数。既定値は `11`。
-* `light.vsmBlurMode` — [`BLUR_GAUSSIAN`](https://api.playcanvas.com/engine/variables/BLUR_GAUSSIAN.html)（デフォルト、より滑らか）または [`BLUR_BOX`](https://api.playcanvas.com/engine/variables/BLUR_BOX.html)（より低コスト）。
-* `light.vsmBias` — シャドウアクネを軽減するためのバイアス。0 から 1 の範囲。既定値は `0.0025`。
+VSM は以下のライトプロパティで制御します。
+
+* `vsmBlurSize` — ブラーのカーネルサイズ。1 から 25 の奇数。既定値は `11`。
+* `vsmBlurMode` — [`BLUR_GAUSSIAN`](https://api.playcanvas.com/engine/variables/BLUR_GAUSSIAN.html)（デフォルト、より滑らか）または [`BLUR_BOX`](https://api.playcanvas.com/engine/variables/BLUR_BOX.html)（より低コスト）。
+* `vsmBias` — シャドウアクネを軽減するためのバイアス。0 から 1 の範囲。既定値は `0.0025`。
+
+シャドウタイプを VSM に設定して調整します。
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+lightEntity.light.shadowType = pc.SHADOW_VSM_16F;
+
+// 任意の調整
+lightEntity.light.vsmBlurSize = 11;
+lightEntity.light.vsmBlurMode = pc.BLUR_GAUSSIAN;
+lightEntity.light.vsmBias = 0.0025;
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+[Lightコンポーネント](/user-manual/editor/scenes/components/light)で **Shadow Type** を **Variance Shadow Map (16bit)** または **(32bit)** に設定します。**VSM Blur Mode** と **VSM Blur Size** もそこに表示されます。
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+import { SHADOW_VSM_16F, BLUR_GAUSSIAN } from 'playcanvas';
+
+<Entity name="light">
+  <Light type="directional" castShadows shadowType={SHADOW_VSM_16F}
+    vsmBlurSize={11} vsmBlurMode={BLUR_GAUSSIAN} vsmBias={0.0025} />
+</Entity>
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<!-- vsm-blur-mode は現在属性として公開されていません -->
+<pc-entity>
+  <pc-light type="directional" cast-shadows shadow-type="vsm-16f"
+    vsm-blur-size="11" vsm-bias="0.0025"></pc-light>
+</pc-entity>
+```
+
+</TabItem>
+</Tabs>
 
 ### コンタクトハードニングソフトシャドウ (PCSS) {#contact-hardening-soft-shadows}
 

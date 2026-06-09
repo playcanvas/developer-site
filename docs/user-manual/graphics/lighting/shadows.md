@@ -81,13 +81,97 @@ The shadow sampling type is specified per light, so it can be set in the Light I
 
 PCF is the default technique. It reads several localized samples from the shadow map — for example a 3×3 grid of 9 samples — and averages them to soften the edge by a fixed amount. Choose the kernel size with [`SHADOW_PCF1_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF1_32F.html) (a single sample, giving the hardest edge), [`SHADOW_PCF3_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF3_32F.html) (the default) or [`SHADOW_PCF5_32F`](https://api.playcanvas.com/engine/variables/SHADOW_PCF5_32F.html); more samples produce softer edges at a higher GPU cost.
 
+Set the shadow type to a PCF variant:
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+lightEntity.light.shadowType = pc.SHADOW_PCF5_32F;
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Set **Shadow Type** to **Shadow Map PCF 1x1**, **3x3** or **5x5** in the [Light Component](/user-manual/editor/scenes/components/light).
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+import { SHADOW_PCF5_32F } from 'playcanvas';
+
+<Entity name="light">
+  <Light type="directional" castShadows shadowType={SHADOW_PCF5_32F} />
+</Entity>
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<pc-entity>
+  <pc-light type="directional" cast-shadows shadow-type="pcf5-32f"></pc-light>
+</pc-entity>
+```
+
+</TabItem>
+</Tabs>
+
 ### VSM (Variance Shadow Maps) {#vsm}
 
-Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. Set the type to [`SHADOW_VSM_16F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_16F.html), or the higher-precision [`SHADOW_VSM_32F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_32F.html). VSM can exhibit light-bleeding artifacts in some scenes. Tune it with:
+Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. VSM uses [`SHADOW_VSM_16F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_16F.html) or the higher-precision [`SHADOW_VSM_32F`](https://api.playcanvas.com/engine/variables/SHADOW_VSM_32F.html), and can exhibit light-bleeding artifacts in some scenes.
 
-* `light.vsmBlurSize` — the blur kernel size, an odd number from 1 to 25. Defaults to `11`.
-* `light.vsmBlurMode` — [`BLUR_GAUSSIAN`](https://api.playcanvas.com/engine/variables/BLUR_GAUSSIAN.html) (the default, smoother) or [`BLUR_BOX`](https://api.playcanvas.com/engine/variables/BLUR_BOX.html) (cheaper).
-* `light.vsmBias` — bias used to reduce shadow acne, in the range 0 to 1. Defaults to `0.0025`.
+VSM is controlled by these light properties:
+
+* `vsmBlurSize` — the blur kernel size, an odd number from 1 to 25. Defaults to `11`.
+* `vsmBlurMode` — [`BLUR_GAUSSIAN`](https://api.playcanvas.com/engine/variables/BLUR_GAUSSIAN.html) (the default, smoother) or [`BLUR_BOX`](https://api.playcanvas.com/engine/variables/BLUR_BOX.html) (cheaper).
+* `vsmBias` — bias used to reduce shadow acne, in the range 0 to 1. Defaults to `0.0025`.
+
+Set the shadow type to VSM and tune it:
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+lightEntity.light.shadowType = pc.SHADOW_VSM_16F;
+
+// Optional tuning
+lightEntity.light.vsmBlurSize = 11;
+lightEntity.light.vsmBlurMode = pc.BLUR_GAUSSIAN;
+lightEntity.light.vsmBias = 0.0025;
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Set **Shadow Type** to **Variance Shadow Map (16bit)** or **(32bit)** in the [Light Component](/user-manual/editor/scenes/components/light). **VSM Blur Mode** and **VSM Blur Size** then appear there too.
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+import { SHADOW_VSM_16F, BLUR_GAUSSIAN } from 'playcanvas';
+
+<Entity name="light">
+  <Light type="directional" castShadows shadowType={SHADOW_VSM_16F}
+    vsmBlurSize={11} vsmBlurMode={BLUR_GAUSSIAN} vsmBias={0.0025} />
+</Entity>
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<!-- vsm-blur-mode is not currently exposed as an attribute -->
+<pc-entity>
+  <pc-light type="directional" cast-shadows shadow-type="vsm-16f"
+    vsm-blur-size="11" vsm-bias="0.0025"></pc-light>
+</pc-entity>
+```
+
+</TabItem>
+</Tabs>
 
 ### Contact-Hardening Soft Shadows (PCSS) {#contact-hardening-soft-shadows}
 
