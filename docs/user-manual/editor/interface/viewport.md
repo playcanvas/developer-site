@@ -35,7 +35,6 @@ Some components have no visible geometry of their own, so the Editor draws an ic
 | [Light](/user-manual/editor/scenes/components/light) — spot | ![Spot light icon](/img/user-manual/editor/viewport/entity-icons/light-spot.png) |
 | [Script](/user-manual/editor/scenes/components/script) | ![Script icon](/img/user-manual/editor/viewport/entity-icons/script.png) |
 | [Animation](/user-manual/editor/scenes/components/animation) | ![Animation icon](/img/user-manual/editor/viewport/entity-icons/animation.png) |
-| Fallback (unrecognized component) | ![Unknown component icon](/img/user-manual/editor/viewport/entity-icons/unknown.png) |
 
 When an Entity has several of these components, the icon shown follows this priority order: camera, light, script, animation. Light icons are also tinted to match the light's color.
 
