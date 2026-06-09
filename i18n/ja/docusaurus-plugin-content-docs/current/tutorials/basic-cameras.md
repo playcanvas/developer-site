@@ -22,6 +22,10 @@ PlayCanvasエディターからシーンを実行するには、少なくとも1
 
 既存のエンティティにカメラを追加することもできます。エンティティを選択し、[Inspector](/user-manual/editor/interface/inspector)（インスペクター）で **Add Component** をクリックして **Camera** を選択します。
 
+以下の動画は、これらのボタンがエディタのどこにあるかを示しています。
+
+<video autoPlay muted loop controls src='/video/basic-cameras-add-camera.mp4' style={{width: '100%', height: 'auto'}} />
+
 ## カメラ・プロパティ
 
 他のすべてのコンポーネントと同様に、Cameraコンポーネントにはその動作を変更するプロパティのセットがあります。画面に表示を得るために最も重要なプロパティを以下に説明します。完全な一覧については、[Cameraコンポーネントのリファレンス](/user-manual/editor/scenes/components/camera)を参照してください。

@@ -22,6 +22,10 @@ This creates a new Entity with a Camera Component already attached.
 
 You can also add a camera to an Entity you already have: select the Entity, then in the [Inspector](/user-manual/editor/interface/inspector) click **Add Component** and choose **Camera**.
 
+The video below shows where these buttons are in the Editor:
+
+<video autoPlay muted loop controls src='/video/basic-cameras-add-camera.mp4' style={{width: '100%', height: 'auto'}} />
+
 ## Camera Properties
 
 Like all Components, the Camera Component has a set of properties that alter its behavior. The properties that matter most for getting a view on screen are described below. For the complete list, see the [Camera Component reference](/user-manual/editor/scenes/components/camera).
