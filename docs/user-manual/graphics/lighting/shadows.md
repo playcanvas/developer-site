@@ -6,11 +6,11 @@ description: Enable shadow mapping, tune cast and receive flags, and use cascade
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Shadows are a great way to add realism to your scenes.
+Shadows ground the objects in your scene, conveying depth and the spatial relationships between them while adding realism and visual polish.
 
 ![Soft shadows using PCSS](/img/user-manual/graphics/lighting/shadows/pcss-shadows.webp)
 
-The PlayCanvas engine implements a shadowing algorithm called shadow mapping. It is completely cross-platform and so is guaranteed to work on both mobile and the desktop.
+PlayCanvas renders real-time, dynamic shadows using a technique called shadow mapping, which is supported by every light type and works across all platforms, from desktop to mobile. This page covers how to enable shadows, choose which objects cast and receive them, and tune their quality — including shadow cascades and soft shadows.
 
 ## Enabling Shadows {#enabling-shadows}
 
