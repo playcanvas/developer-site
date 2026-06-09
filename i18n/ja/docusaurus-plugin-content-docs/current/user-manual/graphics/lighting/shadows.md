@@ -169,9 +169,9 @@ import { SHADOW_VSM_16F, BLUR_GAUSSIAN } from 'playcanvas';
 </TabItem>
 </Tabs>
 
-### コンタクトハードニングソフトシャドウ (PCSS) {#contact-hardening-soft-shadows}
+### PCSS (Percentage-Closer Soft Shadows) {#pcss}
 
-PCF は一定の幅のソフトなエッジを生成します。しかし実際のシャドウは、2つのオブジェクトが接する部分では鮮明で、キャスターがシャドウを受ける面から離れるにつれて柔らかくなります。PlayCanvas は **Percentage-Closer Soft Shadows (PCSS)** でこれを再現でき、シャドウのキャスターとレシーバー間の距離に基づいてペナンブラの幅を変化させます。
+PCF は一定の幅のソフトなエッジを生成します。しかし実際のシャドウは、2つのオブジェクトが接する部分では鮮明で、キャスターがシャドウを受ける面から離れるにつれて柔らかくなります。PCSS はこの*コンタクトハードニング*の挙動を再現し、シャドウのキャスターとレシーバー間の距離に基づいてペナンブラの幅を変化させます。
 
 :::note
 

@@ -169,9 +169,9 @@ import { SHADOW_VSM_16F, BLUR_GAUSSIAN } from 'playcanvas';
 </TabItem>
 </Tabs>
 
-### Contact-Hardening Soft Shadows (PCSS) {#contact-hardening-soft-shadows}
+### PCSS (Percentage-Closer Soft Shadows) {#pcss}
 
-PCF produces a soft edge of constant width. Real shadows, however, are sharp where two objects touch and soften as the caster moves further from the surface that receives the shadow. PlayCanvas can reproduce this with **Percentage-Closer Soft Shadows (PCSS)**, which varies the width of the penumbra based on the distance between the shadow caster and receiver.
+PCF produces a soft edge of constant width. Real shadows, however, are sharp where two objects touch and soften as the caster moves further from the surface that receives the shadow. PCSS reproduces this *contact-hardening* behavior, varying the width of the penumbra based on the distance between the shadow caster and receiver.
 
 :::note
 
