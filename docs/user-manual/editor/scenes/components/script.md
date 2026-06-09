@@ -30,6 +30,12 @@ Each script added to the component displays as a collapsible panel with the foll
 | Parse        | Re-parses the script to update its attributes. Use after modifying script attribute definitions. |
 | Remove       | Removes the script from the component (click the X button). |
 
+:::note
+
+The **Script Name** shown here is the script's *registered name*, defined in code by `static scriptName` for [ESM scripts](/user-manual/scripting/esm-scripts/) or by the argument to `pc.createScript('name')` for classic scripts. This is independent of the script asset's file name, so the two can differ — for example, a file named `annotation-manager.mjs` might register its script as `annotationManager`.
+
+:::
+
 ## Script Ordering
 
 When multiple scripts are attached to an entity, their order matters. Scripts are executed from top to bottom. You can reorder scripts by dragging and dropping them within the component.
