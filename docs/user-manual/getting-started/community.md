@@ -28,7 +28,7 @@ To join:
 :::tip[tips for posting]
 
 * An **Image & Video** post will perform much better than a **Text** post.
-* Try **crossposting** your PlayCanvas posts to related subreddits such as [WebGL](https://www.reddit.com/r/webgl/), [WebGPU](https://www.reddit.com/r/webgpu/) and [WebXR](https://www.reddit.com/r/WebXR/) - but always read each subreddit's rules first! To crosspost, select **Share** > **Crosspost** underneath your post.
+* Try **crossposting** your PlayCanvas posts to related subreddits such as [WebGL](https://www.reddit.com/r/webgl/), [WebGPU](https://www.reddit.com/r/webgpu/) and [WebXR](https://www.reddit.com/r/WebXR/) - but always read each subreddit's rules first! To crosspost, select **Share** > **Repost** underneath your post, then choose the target community.
 
 :::
 
