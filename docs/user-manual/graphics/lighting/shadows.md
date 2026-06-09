@@ -93,7 +93,11 @@ Variance shadow maps store statistical depth information that can be pre-blurred
 
 PCF produces a soft edge of constant width. Real shadows, however, are sharp where two objects touch and soften as the caster moves further from the surface that receives the shadow. PlayCanvas can reproduce this with **Percentage-Closer Soft Shadows (PCSS)**, which varies the width of the penumbra based on the distance between the shadow caster and receiver.
 
-PCSS requires floating-point texture support on the device. Where that is unavailable, the light automatically falls back to PCF.
+:::note
+
+PCSS requires the device to support rendering to and linearly filtering floating-point textures. This is widely available on modern desktop GPUs, but it is not universal — particularly on older or low-end mobile devices. Where it is unsupported, the light automatically falls back to PCF, so it is always safe to enable PCSS. To detect support at runtime, check the `GraphicsDevice` properties `textureFloatRenderable` and `textureFloatFilterable`.
+
+:::
 
 The PCSS look and cost are controlled by these light properties:
 
