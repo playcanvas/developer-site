@@ -1,16 +1,14 @@
 ---
 title: Shadows
-description: Enable shadow mapping, tune cast and receive flags, and use cascaded directional shadows to reduce aliasing.
+description: Enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS), and tune quality with cascades, resolution, and bias.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps](/user-manual/graphics/lighting/lightmapping).
+Shadows ground the objects in your scene, conveying depth and the spatial relationships between them while adding realism and visual polish.
 
-![Characters with shadow casting](/img/user-manual/graphics/lighting/shadows/doom3-shadows.jpg)
-
-The PlayCanvas engine implements a shadowing algorithm called shadow mapping. It is completely cross-platform and so is guaranteed to work on both mobile and the desktop.
+PlayCanvas renders real-time, dynamic shadows using a technique called shadow mapping, which is supported by every light type and works across all platforms, from desktop to mobile. This page covers how to enable shadows, choose which objects cast and receive them, pick a shadow type, and tune their quality.
 
 ## Enabling Shadows {#enabling-shadows}
 
@@ -21,12 +19,12 @@ By default, shadow casting is disabled in PlayCanvas, so you have to explicitly 
 
 ```javascript
 // Enable shadow casting on a light
-lightEntity.light.castShadows = true;
+entity.light.castShadows = true;
 
-// Render (and model) components cast & receive shadows by default;
+// Mesh entities cast & receive shadows by default (render or model component);
 // toggle per entity as needed
-entity.render.castShadows = true;
-entity.render.receiveShadows = true;
+meshEntity.render.castShadows = true;
+meshEntity.render.receiveShadows = true;
 ```
 
 </TabItem>
@@ -69,6 +67,191 @@ To control which objects participate, select an entity and toggle the **Cast Sha
 </TabItem>
 </Tabs>
 
+## Shadow Type {#shadow-type}
+
+The technique used to filter a light's shadows — trading off edge softness, quality, and performance — is chosen per light. PlayCanvas offers three filtering techniques:
+
+### PCF (Percentage-Closer Filtering) {#pcf}
+
+The outline of a shadow is called the penumbra: the transition from dark to light that gives a shadow its soft edge. PCF, the default technique, reads several localized samples from the shadow map and averages them to soften this edge by a fixed amount.
+
+![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
+
+The kernel size controls the trade-off: 1×1 gives the hardest edge, 3×3 is the default, and 5×5 produces the softest edges — larger kernels sample more texels and cost more on the GPU.
+
+Set the shadow type to a PCF variant:
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+// SHADOW_PCF1_32F | SHADOW_PCF3_32F (default) | SHADOW_PCF5_32F
+entity.light.shadowType = pc.SHADOW_PCF5_32F;
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Set **Shadow Type** to **Shadow Map PCF 1x1**, **3x3** or **5x5** in the [Light Component](/user-manual/editor/scenes/components/light).
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+import { SHADOW_PCF5_32F } from 'playcanvas';
+
+<Entity name="light">
+  <Light type="directional" castShadows shadowType={SHADOW_PCF5_32F} />
+</Entity>
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<!-- shadow-type: pcf1-32f | pcf3-32f | pcf5-32f -->
+<pc-entity>
+  <pc-light type="directional" cast-shadows shadow-type="pcf5-32f"></pc-light>
+</pc-entity>
+```
+
+</TabItem>
+</Tabs>
+
+### VSM (Variance Shadow Maps) {#vsm}
+
+Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. They are available in 16-bit and 32-bit precision variants (the latter being more precise), and can exhibit light-bleeding artifacts in some scenes.
+
+Set the shadow type to VSM and tune it:
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+entity.light.shadowType = pc.SHADOW_VSM_16F;
+
+// Optional tuning
+entity.light.vsmBlurSize = 11; // blur kernel size, 1-25
+entity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // or pc.BLUR_BOX (cheaper)
+entity.light.vsmBias = 0.0025; // reduces shadow acne, 0-1
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Set **Shadow Type** to **Variance Shadow Map (16bit)** or **(32bit)** in the [Light Component](/user-manual/editor/scenes/components/light). **VSM Blur Mode** and **VSM Blur Size** then appear there too.
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+import { SHADOW_VSM_16F, BLUR_GAUSSIAN } from 'playcanvas';
+
+<Entity name="light">
+  <Light type="directional" castShadows shadowType={SHADOW_VSM_16F}
+    vsmBlurSize={11} vsmBlurMode={BLUR_GAUSSIAN} vsmBias={0.0025} />
+</Entity>
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<!-- vsm-blur-mode is not currently exposed as an attribute -->
+<pc-entity>
+  <pc-light type="directional" cast-shadows shadow-type="vsm-16f"
+    vsm-blur-size="11" vsm-bias="0.0025"></pc-light>
+</pc-entity>
+```
+
+</TabItem>
+</Tabs>
+
+### PCSS (Percentage-Closer Soft Shadows) {#pcss}
+
+PCF produces a soft edge of constant width. Real shadows, however, are sharp where two objects touch and soften as the caster moves further from the surface that receives the shadow. PCSS reproduces this *contact-hardening* behavior, varying the width of the penumbra based on the distance between the shadow caster and receiver.
+
+![Soft shadows using PCSS](/img/user-manual/graphics/lighting/shadows/pcss-shadows.webp)
+
+:::note
+
+PCSS requires the device to support rendering to and linearly filtering floating-point textures. This is widely available on modern desktop GPUs, but it is not universal — particularly on older or low-end mobile devices. Where it is unsupported, the light automatically falls back to PCF, so it is always safe to enable PCSS.
+
+:::
+
+Set the shadow type to PCSS and fine-tune it:
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+entity.light.shadowType = pc.SHADOW_PCSS_32F;
+
+// Optional fine-tuning
+entity.light.penumbraSize = 2; // overall penumbra size (softness)
+entity.light.penumbraFalloff = 1; // how fast softness grows with distance, >= 1
+entity.light.shadowSamples = 16; // filter samples; higher = smoother, costlier
+entity.light.shadowBlockerSamples = 16; // 0 disables contact hardening
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Select the light in the Hierarchy and set its **Shadow Type** to **PCSS (Soft Shadows)** in the [Light Component](/user-manual/editor/scenes/components/light). **Penumbra Size** and **Penumbra Falloff** then appear there too; the sample counts are not currently exposed in the Light Component editor UI and must therefore be set in a script.
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+import { SHADOW_PCSS_32F } from 'playcanvas';
+
+<Entity name="light">
+  <Light type="directional" castShadows shadowType={SHADOW_PCSS_32F}
+    penumbraSize={2} penumbraFalloff={1} shadowSamples={16} shadowBlockerSamples={16} />
+</Entity>
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<pc-entity>
+  <pc-light type="directional" cast-shadows shadow-type="pcss-32f"
+    penumbra-size="2" penumbra-falloff="1" shadow-samples="16" shadow-blocker-samples="16"></pc-light>
+</pc-entity>
+```
+
+</TabItem>
+</Tabs>
+
+## Tuning Shadows {#tuning-shadows}
+
+The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. Each property below can be set in the [Light Component](/user-manual/editor/scenes/components/light) UI in the Editor, or on the light component in code (`entity.light.*`).
+
+### Shadow Distance {#shadow-distance}
+
+The shadow distance (`light.shadowDistance`) is the distance from the viewpoint beyond which directional light shadows are no longer rendered. The smaller this value, the crisper your shadows will be. The problem is that the viewer will be able to see the shadows suddenly appear as the viewpoint moves around the scene. Therefore, you should balance this value based on how far the player can see into the distance and generally what looks good.
+
+### Shadow Intensity {#shadow-intensity}
+
+The intensity of the shadow (`light.shadowIntensity`), where 1 represents full intensity shadow cast by this light, and 0 represents no shadow.
+
+![Shadow Intensity](/img/user-manual/graphics/lighting/shadows/shadow-intensity.gif)
+
+### Shadow Resolution {#shadow-resolution}
+
+Every light casts shadows via a shadow map. This shadow map (`light.shadowResolution`) can range from 16x16 up to 4096x4096, and this value is also set in the light component's interface. The higher the resolution, the crisper the shadows. However, higher resolution shadows are more expensive to render so be sure to balance performance against quality.
+
+### Shadow Bias {#shadow-bias}
+
+Shadow mapping can be prone to rendering artifacts that can look very ugly. If you notice bands of shadow or speckled patches where you do not expect, you should try tuning the shadow bias (`light.shadowBias`) to resolve the problem.
+
+### Normal Offset Bias {#normal-offset-bias}
+
+'Shadow acne' artifacts are a big problem and the shadow bias can eliminate them quite effectively. Unfortunately, this always introduces some level of 'Peter Panning', the phenomenon where shadows make an object appear to be floating in mid-air.
+
+The Normal Offset Bias (`light.normalOffsetBias`) solves this problem. In addition to using the depth bias, we can avoid both shadow acne and Peter Panning by making small tweaks to the UV coordinates used in the shadow map look-up. A fragment's position is offset along its geometric normal. This "Normal Offset" technique yields vastly superior results to a constant shadow bias only approach.
+
 ## Shadow Cascades {#shadow-cascades}
 
 When a directional shadow is used over a large area, it often exhibits aliasing, where a shadow near the camera has a low resolution. Capturing the shadow in a single shadow map requires very high and impractical resolution to improve this.
@@ -95,49 +278,12 @@ A screenshot showing four shadow cascades.
 
 The distribution (`light.cascadeDistribution`) of subdivision of the camera frustum for individual shadow cascades. A value in the range of 0 to 1 can be specified. A value of 0 represents a linear distribution and a value of 1 represents a logarithmic distribution. Visually, a higher value distributes more shadow map resolution to foreground objects, while a lower value distributes it to more distant objects.
 
-## Tuning Shadows {#tuning-shadows}
-
-The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. Each property below can be set in the [Light Component](/user-manual/editor/scenes/components/light) UI in the Editor, or on the light component in code (`lightEntity.light.*`).
-
-### Shadow Distance {#shadow-distance}
-
-The shadow distance (`light.shadowDistance`) is the distance from the viewpoint beyond which directional light shadows are no longer rendered. The smaller this value, the crisper your shadows will be. The problem is that the viewer will be able to see the shadows suddenly appear as the viewpoint moves around the scene. Therefore, you should balance this value based on how far the player can see into the distance and generally what looks good.
-
-### Shadow Intensity {#shadow-intensity}
-
-The intensity of the shadow (`light.shadowIntensity`), where 1 represents full intensity shadow cast by this light, and 0 represents no shadow.
-
-![Shadow Intensity](/img/user-manual/graphics/lighting/shadows/shadow-intensity.gif)
-
-### Shadow Resolution {#shadow-resolution}
-
-Every light casts shadows via a shadow map. This shadow map (`light.shadowResolution`) can have a resolution of 256x256, 512x512, 1024x1024 or 2048x2048 and this value is also set in the light component's interface. The higher the resolution, the crisper the shadows. However, higher resolution shadows are more expensive to render so be sure to balance performance against quality.
-
-### Shadow Bias {#shadow-bias}
-
-Shadow mapping can be prone to rendering artifacts that can look very ugly. If you notice bands of shadow or speckled patches where you do not expect, you should try tuning the shadow bias (`light.shadowBias`) to resolve the problem.
-
-### Normal Offset Bias {#normal-offset-bias}
-
-'Shadow acne' artifacts are a big problem and the shadow bias can eliminate them quite effectively. Unfortunately, this always introduces some level of 'Peter Panning', the phenomenon where shadows make an object appear to be floating in mid-air.
-
-The Normal Offset Bias (`light.normalOffsetBias`) solves this problem. In addition to using the depth bias, we can avoid both shadow acne and Peter Panning by making small tweaks to the UV coordinates used in the shadow map look-up. A fragment's position is offset along its geometric normal. This "Normal Offset" technique yields vastly superior results to a constant shadow bias only approach.
-
-## Soft Shadows vs Hard Shadows {#soft-shadows-vs-hard-shadows}
-
-The outline of a shadow is called the penumbra. This is a transition from dark to light which gives shadows a soft edge. Softening shadow edges is the default in PlayCanvas but you can change this setting if you wish to achieve hard edged shadows. See below for a comparison of soft and hard edged shadows:
-
-![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
-
-Soft shadows are achieved by performing more samples of the shadow map on the GPU. The algorithm used is called Percentage Closest Filtering or PCF for short. This algorithm reads 9 localized samples (a 3 by 3 matrix) from the shadow map instead of just one as is used for hard shadows.
-
-The shadow sampling type is specified per light, so the option can be found in the Light Inspector, or set in code via `light.shadowType` (for example `pc.SHADOW_PCF1`, `pc.SHADOW_PCF3` or `pc.SHADOW_PCF5`, where higher numbers sample more taps for softer edges).
-
 ## Performance Considerations {#performance-considerations}
 
 Enabling shadows has performance implications:
 
 * For each shadow casting directional or spot light, the scene must be rendered once into a shadow map every frame. Omni light shadows are far more expensive since the scene is rendered six times per light (the shadow map is stored as a 6-sided cube map). Rendering the scene into shadow maps places load on both the CPU and the GPU.
 * Using a greater shadow map resolution will generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
-* Selecting soft shadows (PCF3x3) for the shadow sample type on a shadow receiving material is more expensive on the GPU versus the hard shadows option.
+* The [shadow type](#shadow-type) affects cost: larger PCF kernels, VSM blurring, and especially PCSS (which takes many samples per pixel) are more expensive on the GPU than a hard, single-sample shadow.
+* For directional lights, each additional [shadow cascade](#shadow-cascades) may require shadow casters to be rendered into more than one shadow map, increasing cost.
 * If your shadows are from static parts of the environment consider using [lightmaps](/user-manual/graphics/lighting/lightmapping) to bake shadows into textures.

@@ -54,10 +54,12 @@ Lightコンポーネントは、エンティティに動的な光源をアタッ
 | Cascade Distribution  | Directionalのみ。シャドウカスケードの分布を制御します。範囲は0から1。Cascadesが1より大きい場合のみ表示されます。 |
 | Distance              | 影が見えなくなるカメラからの最大距離。 |
 | Shadow Intensity      | 影の暗さ。範囲は0（影なし）から1（完全に暗い）。 |
-| Shadow Type           | シャドウマッピングアルゴリズム。オプション：Shadow Map PCF 1x1、Shadow Map PCF 3x3、Shadow Map PCF 5x5、Variance Shadow Map (16bit)、Variance Shadow Map (32bit)。 |
+| Shadow Type           | シャドウマッピングアルゴリズム。オプション：Shadow Map PCF 1x1、Shadow Map PCF 3x3、Shadow Map PCF 5x5、Variance Shadow Map (16bit)、Variance Shadow Map (32bit)、PCSS (Soft Shadows)。 |
 | VSM Blur Mode         | VSMのみ。バリアンスシャドウマップのブラーアルゴリズム。オプション：Box、Gaussian。 |
 | VSM Blur Size         | VSMのみ。ブラーカーネルのサイズ。範囲は1から25。 |
 | VSM Bias              | VSMのみ。シャドウアーティファクトを軽減するためのバイアス値。 |
+| Penumbra Size         | PCSSのみ。ペナンブラの全体的なサイズで、シャドウがどれだけ柔らかくなれるかを制御します。 |
+| Penumbra Falloff      | PCSSのみ。接触点からの距離に応じてシャドウがどれだけ速く柔らかくなるか。 |
 | Shadow Bias           | PCFのみ。シャドウアクネアーティファクトを軽減するためのバイアス値。 |
 | Normal Offset Bias    | PCFのみ。ピーターパンニングアーティファクトを軽減するための法線方向オフセット。 |
 
