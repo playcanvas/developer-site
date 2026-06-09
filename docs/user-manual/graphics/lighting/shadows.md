@@ -93,58 +93,24 @@ Variance shadow maps store statistical depth information that can be pre-blurred
 
 PCF produces a soft edge of constant width. Real shadows, however, are sharp where two objects touch and soften as the caster moves further from the surface that receives the shadow. PlayCanvas can reproduce this with **Percentage-Closer Soft Shadows (PCSS)**, which varies the width of the penumbra based on the distance between the shadow caster and receiver.
 
-Set the light's shadow type to PCSS:
-
-<Tabs groupId="workflow" defaultValue="engine">
-<TabItem value="engine" label="Engine">
-
-```javascript
-lightEntity.light.shadowType = pc.SHADOW_PCSS_32F;
-```
-
-</TabItem>
-<TabItem value="editor" label="Editor">
-
-Select the light in the Hierarchy and set its **Shadow Type** to **PCSS** in the [Light Component](/user-manual/editor/scenes/components/light).
-
-</TabItem>
-<TabItem value="react" label="React">
-
-```jsx
-import { SHADOW_PCSS_32F } from 'playcanvas';
-
-<Entity name="light">
-  <Light type="directional" castShadows shadowType={SHADOW_PCSS_32F} />
-</Entity>
-```
-
-</TabItem>
-<TabItem value="web-components" label="Web Components">
-
-```html
-<pc-entity>
-  <pc-light type="directional" cast-shadows shadow-type="pcss-32f"></pc-light>
-</pc-entity>
-```
-
-</TabItem>
-</Tabs>
-
 PCSS requires floating-point texture support on the device. Where that is unavailable, the light automatically falls back to PCF.
 
-You can fine-tune the look and cost of PCSS with the following properties:
+The PCSS look and cost are controlled by these light properties:
 
 * `penumbraSize` — the overall size of the penumbra, i.e. how soft the shadows can become. Defaults to `1`.
 * `penumbraFalloff` — how quickly the shadow softens with distance from the contact point (a value `>= 1`). Defaults to `1`.
 * `shadowSamples` — the number of samples used to filter the shadow. Higher values look smoother but cost more on the GPU. Defaults to `16`.
 * `shadowBlockerSamples` — the number of samples used to estimate the caster-to-receiver distance that drives contact hardening. Set to `0` to disable contact hardening and use a constant softness. Defaults to `16`.
 
-Set them per entry point:
+Set the shadow type to PCSS and fine-tune it:
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
 
 ```javascript
+lightEntity.light.shadowType = pc.SHADOW_PCSS_32F;
+
+// Optional fine-tuning
 lightEntity.light.penumbraSize = 2;
 lightEntity.light.penumbraFalloff = 1;
 lightEntity.light.shadowSamples = 16;
@@ -154,22 +120,28 @@ lightEntity.light.shadowBlockerSamples = 16;
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-When the light's shadow type is PCSS, **Penumbra Size** and **Penumbra Falloff** appear in the [Light Component](/user-manual/editor/scenes/components/light). The sample counts are set from a script.
+Select the light in the Hierarchy and set its **Shadow Type** to **PCSS** in the [Light Component](/user-manual/editor/scenes/components/light). **Penumbra Size** and **Penumbra Falloff** then appear there too; the sample counts are set from a script.
 
 </TabItem>
 <TabItem value="react" label="React">
 
 ```jsx
-<Light type="directional" castShadows shadowType={SHADOW_PCSS_32F}
-  penumbraSize={2} penumbraFalloff={1} shadowSamples={16} shadowBlockerSamples={16} />
+import { SHADOW_PCSS_32F } from 'playcanvas';
+
+<Entity name="light">
+  <Light type="directional" castShadows shadowType={SHADOW_PCSS_32F}
+    penumbraSize={2} penumbraFalloff={1} shadowSamples={16} shadowBlockerSamples={16} />
+</Entity>
 ```
 
 </TabItem>
 <TabItem value="web-components" label="Web Components">
 
 ```html
-<pc-light type="directional" cast-shadows shadow-type="pcss-32f"
-  penumbra-size="2" penumbra-falloff="1" shadow-samples="16" shadow-blocker-samples="16"></pc-light>
+<pc-entity>
+  <pc-light type="directional" cast-shadows shadow-type="pcss-32f"
+    penumbra-size="2" penumbra-falloff="1" shadow-samples="16" shadow-blocker-samples="16"></pc-light>
+</pc-entity>
 ```
 
 </TabItem>
