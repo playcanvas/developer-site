@@ -133,6 +133,25 @@ Soft shadows are achieved by performing more samples of the shadow map on the GP
 
 The shadow sampling type is specified per light, so the option can be found in the Light Inspector, or set in code via `light.shadowType` (for example `pc.SHADOW_PCF1`, `pc.SHADOW_PCF3` or `pc.SHADOW_PCF5`, where higher numbers sample more taps for softer edges).
 
+### Contact-Hardening Soft Shadows (PCSS) {#contact-hardening-soft-shadows}
+
+PCF produces a soft edge of constant width. Real shadows, however, are sharp where two objects touch and soften as the caster moves further from the surface that receives the shadow. PlayCanvas can reproduce this with **Percentage-Closer Soft Shadows (PCSS)**, which varies the width of the penumbra based on the distance between the shadow caster and receiver.
+
+Select **PCSS** as the light's shadow type in the Inspector, or set it in code:
+
+```javascript
+lightEntity.light.shadowType = pc.SHADOW_PCSS_32F;
+```
+
+PCSS requires floating-point texture support on the device. Where that is unavailable, the light automatically falls back to PCF.
+
+The appearance and cost of PCSS are controlled by these light properties:
+
+* `light.penumbraSize` — the overall size of the penumbra, i.e. how soft the shadows can become. Defaults to `1`.
+* `light.penumbraFalloff` — how quickly the shadow softens with distance from the contact point (a value `>= 1`). Defaults to `1`.
+* `light.shadowSamples` — the number of samples used to filter the shadow. Higher values look smoother but cost more on the GPU. Defaults to `16`.
+* `light.shadowBlockerSamples` — the number of samples used to estimate the caster-to-receiver distance that drives contact hardening. Set to `0` to disable contact hardening and use a constant softness. Defaults to `16`.
+
 ## Performance Considerations {#performance-considerations}
 
 Enabling shadows has performance implications:
