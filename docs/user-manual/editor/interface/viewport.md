@@ -33,14 +33,11 @@ Some components have no visible geometry of their own, so the Editor draws an ic
 | [Light](/user-manual/editor/scenes/components/light) — directional | ![Directional light icon](/img/user-manual/editor/viewport/entity-icons/light-directional.png) |
 | [Light](/user-manual/editor/scenes/components/light) — omni | ![Omni light icon](/img/user-manual/editor/viewport/entity-icons/light-point.png) |
 | [Light](/user-manual/editor/scenes/components/light) — spot | ![Spot light icon](/img/user-manual/editor/viewport/entity-icons/light-spot.png) |
-| [Audio Listener](/user-manual/editor/scenes/components/audiolistener) | ![Audio listener icon](/img/user-manual/editor/viewport/entity-icons/audiolistener.png) |
-| [Sound](/user-manual/editor/scenes/components/sound) | ![Sound icon](/img/user-manual/editor/viewport/entity-icons/sound.png) |
-| [Particle System](/user-manual/editor/scenes/components/particlesystem) | ![Particle system icon](/img/user-manual/editor/viewport/entity-icons/particlesystem.png) |
 | [Script](/user-manual/editor/scenes/components/script) | ![Script icon](/img/user-manual/editor/viewport/entity-icons/script.png) |
 | [Animation](/user-manual/editor/scenes/components/animation) | ![Animation icon](/img/user-manual/editor/viewport/entity-icons/animation.png) |
 | Fallback (unrecognized component) | ![Unknown component icon](/img/user-manual/editor/viewport/entity-icons/unknown.png) |
 
-When an Entity has several of these components, the icon shown follows this priority order: camera, light, audio listener, sound, particle system, script, animation. Light icons are also tinted to match the light's color.
+When an Entity has several of these components, the icon shown follows this priority order: camera, light, script, animation. Light icons are also tinted to match the light's color.
 
 ## Render Mode {#render-mode}
 
