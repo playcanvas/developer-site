@@ -23,6 +23,21 @@ You can also use the camera menu to select any of the camera Entities in your sc
 
 The 3-Colored Axis you can see in the screenshot above is called a [Gizmo](/user-manual/glossary#gizmo). This is used to manipulate the transform matrix of the selected Entity. There are three types of Gizmo: Translate (with arrows on the ends of the axes); Rotate (which is made up of three colored rings) and Scale (with cubes on the ends of the axes).
 
+## Entity Icons {#entity-icons}
+
+Some components have no visible geometry of their own, so the Editor draws an icon in the viewport to mark the Entity's position when it is not selected. Click an icon to select that Entity in the [Hierarchy](/user-manual/editor/interface/hierarchy) and [Inspector](/user-manual/editor/interface/inspector) panels.
+
+| Component | Icon |
+| --------- | ---- |
+| [Camera](/user-manual/editor/scenes/components/camera) | ![Camera icon](/img/user-manual/editor/viewport/entity-icons/camera.png) |
+| [Light](/user-manual/editor/scenes/components/light) — directional | ![Directional light icon](/img/user-manual/editor/viewport/entity-icons/light-directional.png) |
+| [Light](/user-manual/editor/scenes/components/light) — omni | ![Omni light icon](/img/user-manual/editor/viewport/entity-icons/light-point.png) |
+| [Light](/user-manual/editor/scenes/components/light) — spot | ![Spot light icon](/img/user-manual/editor/viewport/entity-icons/light-spot.png) |
+| [Script](/user-manual/editor/scenes/components/script) | ![Script icon](/img/user-manual/editor/viewport/entity-icons/script.png) |
+| [Animation](/user-manual/editor/scenes/components/animation) | ![Animation icon](/img/user-manual/editor/viewport/entity-icons/animation.png) |
+
+When an Entity has several of these components, the icon shown follows this priority order: camera, light, script, animation. Light icons are also tinted to match the light's color.
+
 ## Render Mode {#render-mode}
 
 You can modify the viewport render mode using this drop-down menu in the top-right of the viewport:
