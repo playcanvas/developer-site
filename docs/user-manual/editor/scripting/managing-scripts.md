@@ -24,7 +24,7 @@ You can create new Script Assets directly within the Editor:
 
 :::tip
 
-The file extension you choose determines the type of script. A name without an extension (or ending in `.js`) creates a classic script, while a `.mjs` extension (e.g. `PlayerController.mjs`) creates a modern **ESM** script. ESM is the recommended approach for new projects — see [ESM Scripts](/user-manual/scripting/esm-scripts#creating-esm-scripts) for details.
+The file extension you choose determines the type of script. A name without an extension (or ending in `.js`) creates a classic script, while a `.mjs` extension (e.g. `PlayerController.mjs`) creates a modern **ESM** script. ESM is the recommended approach for new projects — see [ESM Scripts](/user-manual/scripting/esm-scripts/#creating-esm-scripts) for details.
 
 :::
 
