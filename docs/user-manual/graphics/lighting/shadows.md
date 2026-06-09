@@ -6,7 +6,7 @@ description: Enable shadow mapping, tune cast and receive flags, and use cascade
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Shadows are a great way to add realism to your games. However, dynamic (realtime) shadows can come with a significant runtime performance cost. For a more performant way of adding static shadows to your scene, see [Lightmaps](/user-manual/graphics/lighting/lightmapping).
+Shadows are a great way to add realism to your games.
 
 ![Soft shadows using PCSS](/img/user-manual/graphics/lighting/shadows/pcss-shadows.webp)
 
