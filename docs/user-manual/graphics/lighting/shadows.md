@@ -8,8 +8,6 @@ import TabItem from '@theme/TabItem';
 
 Shadows ground the objects in your scene, conveying depth and the spatial relationships between them while adding realism and visual polish.
 
-![Soft shadows using PCSS](/img/user-manual/graphics/lighting/shadows/pcss-shadows.webp)
-
 PlayCanvas renders real-time, dynamic shadows using a technique called shadow mapping, which is supported by every light type and works across all platforms, from desktop to mobile. This page covers how to enable shadows, choose which objects cast and receive them, pick a shadow type, and tune their quality.
 
 ## Enabling Shadows {#enabling-shadows}
@@ -172,6 +170,8 @@ import { SHADOW_VSM_16F, BLUR_GAUSSIAN } from 'playcanvas';
 ### PCSS (Percentage-Closer Soft Shadows) {#pcss}
 
 PCF produces a soft edge of constant width. Real shadows, however, are sharp where two objects touch and soften as the caster moves further from the surface that receives the shadow. PCSS reproduces this *contact-hardening* behavior, varying the width of the penumbra based on the distance between the shadow caster and receiver.
+
+![Soft shadows using PCSS](/img/user-manual/graphics/lighting/shadows/pcss-shadows.webp)
 
 :::note
 

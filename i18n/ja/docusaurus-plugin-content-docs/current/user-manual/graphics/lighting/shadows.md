@@ -8,8 +8,6 @@ import TabItem from '@theme/TabItem';
 
 シャドウはシーン内のオブジェクトを接地させ、奥行きやオブジェクト同士の空間的な関係を伝えることで、リアリズムと視覚的な完成度を高めます。
 
-![Soft shadows using PCSS](/img/user-manual/graphics/lighting/shadows/pcss-shadows.webp)
-
 PlayCanvas は、シャドウマッピングと呼ばれる技術を使用してリアルタイムの動的シャドウをレンダリングします。これはすべてのライトタイプでサポートされ、デスクトップからモバイルまですべてのプラットフォームで動作します。このページでは、シャドウを有効にする方法、どのオブジェクトがシャドウをキャスト／受信するかの選択、シャドウタイプの選択、そして品質の調整方法について説明します。
 
 ## シャドウの有効化 {#enabling-shadows}
@@ -172,6 +170,8 @@ import { SHADOW_VSM_16F, BLUR_GAUSSIAN } from 'playcanvas';
 ### PCSS (Percentage-Closer Soft Shadows) {#pcss}
 
 PCF は一定の幅のソフトなエッジを生成します。しかし実際のシャドウは、2つのオブジェクトが接する部分では鮮明で、キャスターがシャドウを受ける面から離れるにつれて柔らかくなります。PCSS はこの*コンタクトハードニング*の挙動を再現し、シャドウのキャスターとレシーバー間の距離に基づいてペナンブラの幅を変化させます。
+
+![Soft shadows using PCSS](/img/user-manual/graphics/lighting/shadows/pcss-shadows.webp)
 
 :::note
 
