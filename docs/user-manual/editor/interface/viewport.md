@@ -38,8 +38,6 @@ Some components have no visible geometry of their own, so the Editor draws an ic
 | [Particle System](/user-manual/editor/scenes/components/particlesystem) | ![Particle system icon](/img/user-manual/editor/viewport/entity-icons/particlesystem.png) |
 | [Script](/user-manual/editor/scenes/components/script) | ![Script icon](/img/user-manual/editor/viewport/entity-icons/script.png) |
 | [Animation](/user-manual/editor/scenes/components/animation) | ![Animation icon](/img/user-manual/editor/viewport/entity-icons/animation.png) |
-| [Collision](/user-manual/editor/scenes/components/collision) | ![Collision icon](/img/user-manual/editor/viewport/entity-icons/collision.png) |
-| [Rigid Body](/user-manual/editor/scenes/components/rigidbody) | ![Rigid body icon](/img/user-manual/editor/viewport/entity-icons/rigidbody.png) |
 | Fallback (unrecognized component) | ![Unknown component icon](/img/user-manual/editor/viewport/entity-icons/unknown.png) |
 
 When an Entity has several of these components, the icon shown follows this priority order: camera, light, audio listener, sound, particle system, script, animation. Light icons are also tinted to match the light's color.
