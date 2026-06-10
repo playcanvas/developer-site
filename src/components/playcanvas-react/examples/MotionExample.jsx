@@ -73,6 +73,21 @@ const MotionEntity = ({ children, animate: animateProps, ...props }) => {
 };
 
 /**
+ * Applies an animated motion value to the light's intensity every frame.
+ */
+class LightIntensityScript extends PcScript {
+  static scriptName = 'lightIntensity';
+
+  intensityMV = null;
+
+  update() {
+    if (this.entity.light && this.intensityMV) {
+      this.entity.light.intensity = this.intensityMV.get();
+    }
+  }
+}
+
+/**
  * A light whose intensity animates toward the `intensity` prop. A motion
  * value tweens the intensity and a script applies it to the light every frame.
  */
@@ -83,17 +98,9 @@ const MotionLight = ({ intensity = 1, type = 'directional', transition = { durat
     animate(intensityMV, intensity, transition);
   }, [intensity]);
 
-  class LightScript extends PcScript {
-    static scriptName = 'lightScript';
-
-    update() {
-      this.entity.light.intensity = intensityMV.get();
-    }
-  }
-
   return (
     <>
-      <Script script={LightScript} />
+      <Script script={LightIntensityScript} intensityMV={intensityMV} />
       <Light {...props} type={type} />
     </>
   );
@@ -108,9 +115,19 @@ class MouseRotatesEntity extends PcScript {
   initialize() {
     this.target = new Vec2();
     this.current = new Vec2();
-    this.app.mouse?.on(EVENT_MOUSEMOVE, (e) => {
-      this.target.set(e.x, e.y).mulScalar(2).subScalar(1).divScalar(20);
-    });
+    this.handleMouseMove = (e) => {
+      // Normalize the pointer position to [-1, 1] and map it to degrees
+      const canvas = this.app.graphicsDevice.canvas;
+      this.target.set(
+        (e.x / canvas.clientWidth) * 2 - 1,
+        (e.y / canvas.clientHeight) * 2 - 1
+      ).mulScalar(15);
+    };
+    this.app.mouse?.on(EVENT_MOUSEMOVE, this.handleMouseMove);
+  }
+
+  destroy() {
+    this.app.mouse?.off(EVENT_MOUSEMOVE, this.handleMouseMove);
   }
 
   update(dt) {
