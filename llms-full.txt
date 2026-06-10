@@ -23628,7 +23628,7 @@ The main advantage of using manual subdivision is the level of detail that can b
 
 ### Shadows Type {#shadows-type}
 
-All lights that cast shadows use the same shadow type. This allows you to globally set the shadow softness and related performance impact. The supported options are PCF1, PCF3, and PCF5. For more information, see the [Shadows](/user-manual/graphics/lighting/shadows/#shadow-type) page.
+All lights that cast shadows use the same shadow type. This allows you to globally set the shadow softness and related performance impact. The supported options are PCF1, PCF3, and PCF5. For more information, see the [Shadows](/user-manual/graphics/lighting/shadows/#shadow-types) page.
 
 ## Limitations {#limitations}
 
@@ -24000,9 +24000,9 @@ PlayCanvas renders real-time, dynamic shadows using a technique called shadow ma
 
 ## Enabling Shadows {#enabling-shadows}
 
-By default, shadow casting is disabled in PlayCanvas, so you have to explicitly enable it yourself. First, identify which lights in your scene should cast shadows — every light exposes a **Cast Shadows** option. You then choose which graphical objects cast and receive shadows: by default, all render and model components both cast and receive shadows, and you can toggle this per entity.
+By default, shadow casting is disabled in PlayCanvas, so you have to explicitly enable it yourself. First, identify which lights in your scene should cast shadows — every light exposes a **Cast Shadows** option. You then choose which graphical objects cast and receive shadows: by default, all render and model components both cast and receive shadows, and you can toggle this per entity. Gsplat components can also cast shadows — though not receive them — and for these, shadow casting is disabled by default.
 
-## Shadow Type {#shadow-type}
+## Shadow Types {#shadow-types}
 
 The technique used to filter a light's shadows — trading off edge softness, quality, and performance — is chosen per light. PlayCanvas offers three filtering techniques:
 
@@ -24054,31 +24054,15 @@ Set the shadow type to PCSS and fine-tune it:
 
 The shadow mapping technique used by PlayCanvas has only finite resolution. Therefore, you may need to tune some values to make them look as good as possible. Each property below can be set in the [Light Component](/user-manual/editor/scenes/components/light) UI in the Editor, or on the light component in code (`entity.light.*`).
 
-### Shadow Distance {#shadow-distance}
-
-The shadow distance (`light.shadowDistance`) is the distance from the viewpoint beyond which directional light shadows are no longer rendered. The smaller this value, the crisper your shadows will be. The problem is that the viewer will be able to see the shadows suddenly appear as the viewpoint moves around the scene. Therefore, you should balance this value based on how far the player can see into the distance and generally what looks good.
-
-### Shadow Intensity {#shadow-intensity}
-
-The intensity of the shadow (`light.shadowIntensity`), where 1 represents full intensity shadow cast by this light, and 0 represents no shadow.
-
-[Image: Shadow Intensity]
-
 ### Shadow Resolution {#shadow-resolution}
 
 Every light casts shadows via a shadow map. This shadow map (`light.shadowResolution`) can range from 16x16 up to 4096x4096, and this value is also set in the light component's interface. The higher the resolution, the crisper the shadows. However, higher resolution shadows are more expensive to render so be sure to balance performance against quality.
 
-### Shadow Bias {#shadow-bias}
+### Shadow Distance {#shadow-distance}
 
-Shadow mapping can be prone to rendering artifacts that can look very ugly. If you notice bands of shadow or speckled patches where you do not expect, you should try tuning the shadow bias (`light.shadowBias`) to resolve the problem.
+The shadow distance (`light.shadowDistance`) is the distance from the viewpoint beyond which directional light shadows are no longer rendered. The smaller this value, the crisper your shadows will be. The problem is that the viewer will be able to see the shadows suddenly appear as the viewpoint moves around the scene. Therefore, you should balance this value based on how far the player can see into the distance and generally what looks good.
 
-### Normal Offset Bias {#normal-offset-bias}
-
-'Shadow acne' artifacts are a big problem and the shadow bias can eliminate them quite effectively. Unfortunately, this always introduces some level of 'Peter Panning', the phenomenon where shadows make an object appear to be floating in mid-air.
-
-The Normal Offset Bias (`light.normalOffsetBias`) solves this problem. In addition to using the depth bias, we can avoid both shadow acne and Peter Panning by making small tweaks to the UV coordinates used in the shadow map look-up. A fragment's position is offset along its geometric normal. This "Normal Offset" technique yields vastly superior results to a constant shadow bias only approach.
-
-## Shadow Cascades {#shadow-cascades}
+### Shadow Cascades {#shadow-cascades}
 
 When a directional shadow is used over a large area, it often exhibits aliasing, where a shadow near the camera has a low resolution. Capturing the shadow in a single shadow map requires very high and impractical resolution to improve this.
 
@@ -24086,11 +24070,7 @@ Shadow cascades help to fix this problem by splitting the camera view frustum al
 
 Note that the number of shadow cascades has an effect on performance, as each shadow casting mesh might need to be rendered into more than a single shadow map.
 
-The following properties can be used to set up shadow cascades.
-
-### Number of cascades {#number-of-cascades}
-
-Number of cascades (`light.numCascades`) represents the number of view frustum subdivisions, and can be 1, 2, 3 or 4. The default value of 1 represents a single shadow map.
+The number of cascades (`light.numCascades`) represents the number of view frustum subdivisions, and can be 1, 2, 3 or 4. The default value of 1 represents a single shadow map.
 
 A screenshot showing a single shadow cascade.
 
@@ -24100,9 +24080,27 @@ A screenshot showing four shadow cascades.
 
 [Image: Four cascades]
 
-### Distribution of cascades {#distribution-of-cascades}
-
 The distribution (`light.cascadeDistribution`) of subdivision of the camera frustum for individual shadow cascades. A value in the range of 0 to 1 can be specified. A value of 0 represents a linear distribution and a value of 1 represents a logarithmic distribution. Visually, a higher value distributes more shadow map resolution to foreground objects, while a lower value distributes it to more distant objects.
+
+### Shadow Intensity {#shadow-intensity}
+
+The intensity of the shadow (`light.shadowIntensity`), where 1 represents full intensity shadow cast by this light, and 0 represents no shadow.
+
+[Image: Shadow Intensity]
+
+## Fixing Shadow Artifacts {#fixing-shadow-artifacts}
+
+Shadow mapping can be prone to rendering artifacts that can look very ugly. The properties below can help you eliminate them.
+
+### Shadow Bias {#shadow-bias}
+
+If you notice bands of shadow or speckled patches where you do not expect, you should try tuning the shadow bias (`light.shadowBias`) to resolve the problem.
+
+### Normal Offset Bias {#normal-offset-bias}
+
+'Shadow acne' artifacts are a big problem and the shadow bias can eliminate them quite effectively. Unfortunately, this always introduces some level of 'Peter Panning', the phenomenon where shadows make an object appear to be floating in mid-air.
+
+The Normal Offset Bias (`light.normalOffsetBias`) solves this problem. In addition to using the depth bias, we can avoid both shadow acne and Peter Panning by making small tweaks to the UV coordinates used in the shadow map look-up. A fragment's position is offset along its geometric normal. This "Normal Offset" technique yields vastly superior results to a constant shadow bias only approach.
 
 ## Performance Considerations {#performance-considerations}
 
@@ -24110,7 +24108,7 @@ Enabling shadows has performance implications:
 
 * For each shadow casting directional or spot light, the scene must be rendered once into a shadow map every frame. Omni light shadows are far more expensive since the scene is rendered six times per light (the shadow map is stored as a 6-sided cube map). Rendering the scene into shadow maps places load on both the CPU and the GPU.
 * Using a greater shadow map resolution will generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
-* The [shadow type](#shadow-type) affects cost: larger PCF kernels, VSM blurring, and especially PCSS (which takes many samples per pixel) are more expensive on the GPU than a hard, single-sample shadow.
+* The [shadow type](#shadow-types) affects cost: larger PCF kernels, VSM blurring, and especially PCSS (which takes many samples per pixel) are more expensive on the GPU than a hard, single-sample shadow.
 * For directional lights, each additional [shadow cascade](#shadow-cascades) may require shadow casters to be rendered into more than one shadow map, increasing cost.
 * If your shadows are from static parts of the environment consider using [lightmaps](/user-manual/graphics/lighting/lightmapping) to bake shadows into textures.
 
