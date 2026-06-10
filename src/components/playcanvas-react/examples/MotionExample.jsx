@@ -226,7 +226,7 @@ const MotionScene = () => {
         <h1
           style={{
             color: '#fff',
-            fontSize: '6rem',
+            fontSize: '3.5rem',
             fontWeight: 700,
             margin: 0,
             transition: 'all 0.3s',
