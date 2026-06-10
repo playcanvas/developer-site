@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 591
+Total Documents: 593
 Generated: 2026-06-10
 
 ================================================================================
@@ -30429,6 +30429,22 @@ You can also check out the [guide](../guide/) to learn about the different conce
 URL: https://developer.playcanvas.com/user-manual/react/examples/
 
 
+
+--------------------------------------------------------------------------------
+
+## Model Viewer
+
+URL: https://developer.playcanvas.com/user-manual/react/examples/model-viewer/
+
+A simple glb model viewer with environment lighting, a shadow catcher and auto-rotating orbit controls. Drag to orbit the camera around the model.
+
+--------------------------------------------------------------------------------
+
+## Motion
+
+URL: https://developer.playcanvas.com/user-manual/react/examples/motion/
+
+Hover over the capsule to see entities and lights animate with springs from the [Motion](https://motion.dev/) animation library. Motion values drive each entity's position, rotation and scale, while a script applies animated intensities to the lights.
 
 --------------------------------------------------------------------------------
 
