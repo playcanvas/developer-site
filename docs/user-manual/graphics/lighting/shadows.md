@@ -12,7 +12,7 @@ PlayCanvas renders real-time, dynamic shadows using a technique called shadow ma
 
 ## Enabling Shadows {#enabling-shadows}
 
-By default, shadow casting is disabled in PlayCanvas, so you have to explicitly enable it yourself. First, identify which lights in your scene should cast shadows — every light exposes a **Cast Shadows** option. You then choose which graphical objects cast and receive shadows: by default, all render and model components both cast and receive shadows, and you can toggle this per entity.
+By default, shadow casting is disabled in PlayCanvas, so you have to explicitly enable it yourself. First, identify which lights in your scene should cast shadows — every light exposes a **Cast Shadows** option. You then choose which graphical objects cast and receive shadows: by default, all render and model components both cast and receive shadows, and you can toggle this per entity. Gsplat components can also cast shadows — though not receive them — and for these, shadow casting is disabled by default.
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
@@ -25,6 +25,9 @@ entity.light.castShadows = true;
 // toggle per entity as needed
 meshEntity.render.castShadows = true;
 meshEntity.render.receiveShadows = true;
+
+// Gsplat entities can cast shadows too (off by default)
+splatEntity.gsplat.castShadows = true;
 ```
 
 </TabItem>
@@ -32,7 +35,7 @@ meshEntity.render.receiveShadows = true;
 
 Select a light in the Hierarchy and enable **Cast Shadows** in its [Light Component](/user-manual/editor/scenes/components/light).
 
-To control which objects participate, select an entity and toggle the **Cast Shadows** / **Receive Shadows** options on its [render](/user-manual/editor/scenes/components/render) or [model](/user-manual/editor/scenes/components/model) component.
+To control which objects participate, select an entity and toggle the **Cast Shadows** / **Receive Shadows** options on its [render](/user-manual/editor/scenes/components/render) or [model](/user-manual/editor/scenes/components/model) component, or enable **Cast Shadows** on its [gsplat](/user-manual/editor/scenes/components/gsplat) component.
 
 </TabItem>
 <TabItem value="react" label="React">
@@ -46,6 +49,11 @@ To control which objects participate, select an entity and toggle the **Cast Sha
 // Render components cast & receive shadows by default; toggle as needed
 <Entity>
   <Render type="box" castShadows receiveShadows />
+</Entity>
+
+// GSplat components can cast shadows too (off by default)
+<Entity>
+  <GSplat asset={splat} castShadows />
 </Entity>
 ```
 
@@ -62,12 +70,17 @@ To control which objects participate, select an entity and toggle the **Cast Sha
 <pc-entity>
   <pc-render type="box" cast-shadows receive-shadows></pc-render>
 </pc-entity>
+
+<!-- Splat components can cast shadows too (off by default) -->
+<pc-entity>
+  <pc-splat asset="my-splat" cast-shadows></pc-splat>
+</pc-entity>
 ```
 
 </TabItem>
 </Tabs>
 
-## Shadow Types {#shadow-type}
+## Shadow Types {#shadow-types}
 
 The technique used to filter a light's shadows — trading off edge softness, quality, and performance — is chosen per light. PlayCanvas offers three filtering techniques:
 
@@ -296,6 +309,6 @@ Enabling shadows has performance implications:
 
 * For each shadow casting directional or spot light, the scene must be rendered once into a shadow map every frame. Omni light shadows are far more expensive since the scene is rendered six times per light (the shadow map is stored as a 6-sided cube map). Rendering the scene into shadow maps places load on both the CPU and the GPU.
 * Using a greater shadow map resolution will generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
-* The [shadow type](#shadow-type) affects cost: larger PCF kernels, VSM blurring, and especially PCSS (which takes many samples per pixel) are more expensive on the GPU than a hard, single-sample shadow.
+* The [shadow type](#shadow-types) affects cost: larger PCF kernels, VSM blurring, and especially PCSS (which takes many samples per pixel) are more expensive on the GPU than a hard, single-sample shadow.
 * For directional lights, each additional [shadow cascade](#shadow-cascades) may require shadow casters to be rendered into more than one shadow map, increasing cost.
 * If your shadows are from static parts of the environment consider using [lightmaps](/user-manual/graphics/lighting/lightmapping) to bake shadows into textures.

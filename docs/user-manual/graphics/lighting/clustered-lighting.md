@@ -97,7 +97,7 @@ The main advantage of using manual subdivision is the level of detail that can b
 
 ### Shadows Type {#shadows-type}
 
-All lights that cast shadows use the same shadow type. This allows you to globally set the shadow softness and related performance impact. The supported options are PCF1, PCF3, and PCF5. For more information, see the [Shadows](/user-manual/graphics/lighting/shadows/#shadow-type) page.
+All lights that cast shadows use the same shadow type. This allows you to globally set the shadow softness and related performance impact. The supported options are PCF1, PCF3, and PCF5. For more information, see the [Shadows](/user-manual/graphics/lighting/shadows/#shadow-types) page.
 
 ## Limitations {#limitations}
 
