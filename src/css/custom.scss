@@ -315,3 +315,8 @@ html[data-theme='dark'] .navbar--github-link:before {
 [data-theme='dark'] .sidebar-section-header {
   color: var(--ifm-color-emphasis-1000);
 }
+
+/* Keep long sidebar labels on a single line regardless of OS/browser font metrics */
+.sidebar-item-nowrap > .menu__list-item-collapsible > .menu__link {
+  white-space: nowrap;
+}

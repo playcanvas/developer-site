@@ -488,6 +488,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'PlayCanvas Web Components',
+      className: 'sidebar-item-nowrap',
       link: {
         type: 'doc',
         id: 'user-manual/web-components/index',
