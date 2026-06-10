@@ -73,7 +73,7 @@ Hierarchyでライトを選択し、その[Lightコンポーネント](/user-man
 
 :::note
 
-[クラスタードライティング](/user-manual/graphics/lighting/clustered-lighting)が有効な場合（デフォルト）、ライトごとのシャドウタイプは Directional ライトにのみ適用されます。Spot ライトと Omni ライトはすべて、シーンのライティング設定で指定する単一の[シーン全体のシャドウタイプ](/user-manual/graphics/lighting/clustered-lighting#shadows-type)（PCF のみ）を共有します。
+[クラスタードライティング](/user-manual/graphics/lighting/clustered-lighting)が有効な場合（デフォルト）、ライトごとのシャドウタイプは Directional ライトにのみ適用されます。Spot ライトと Omni ライトはすべて、シーンのライティング設定で指定する単一の[シーン全体のシャドウタイプ](/user-manual/graphics/lighting/clustered-lighting/#shadows-type)（PCF のみ）を共有します。
 
 :::
 

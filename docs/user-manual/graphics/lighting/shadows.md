@@ -73,7 +73,7 @@ The technique used to filter a light's shadows — trading off edge softness, qu
 
 :::note
 
-With [clustered lighting](/user-manual/graphics/lighting/clustered-lighting) enabled (the default), the per-light shadow type only applies to directional lights. Spot and omni lights all share a single [scene-wide shadow type](/user-manual/graphics/lighting/clustered-lighting#shadows-type) (PCF only), set in the scene's lighting settings.
+With [clustered lighting](/user-manual/graphics/lighting/clustered-lighting) enabled (the default), the per-light shadow type only applies to directional lights. Spot and omni lights all share a single [scene-wide shadow type](/user-manual/graphics/lighting/clustered-lighting/#shadows-type) (PCF only), set in the scene's lighting settings.
 
 :::
 
