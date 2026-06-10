@@ -1,0 +1,20 @@
+---
+title: モデルビューア
+description: PlayCanvas Reactのライブサンプル — 環境ライティング、影、オービットコントロールを備えたglbモデルビューア。
+---
+
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+import ModelViewerExample from '@site/src/components/playcanvas-react/examples/ModelViewerExample';
+import ModelViewerExampleSource from '!!raw-loader!@site/src/components/playcanvas-react/examples/ModelViewerExample.jsx';
+
+環境ライティング、シャドウキャッチャー、自動回転するオービットコントロールを備えたシンプルなglbモデルビューアです。ドラッグしてモデルの周りでカメラを回転させてみましょう。
+
+<CodeExample
+  label="モデルビューア"
+  filename="ModelViewerExample.jsx"
+  code={ModelViewerExampleSource}
+  showControls={false}
+  showDemo
+>
+  <ModelViewerExample />
+</CodeExample>
