@@ -71,6 +71,12 @@ To control which objects participate, select an entity and toggle the **Cast Sha
 
 The technique used to filter a light's shadows — trading off edge softness, quality, and performance — is chosen per light. PlayCanvas offers three filtering techniques:
 
+:::note
+
+With [clustered lighting](/user-manual/graphics/lighting/clustered-lighting) enabled (the default), the per-light shadow type only applies to directional lights. Spot and omni lights all share a single [scene-wide shadow type](/user-manual/graphics/lighting/clustered-lighting#shadows-type) (PCF only), set in the scene's lighting settings.
+
+:::
+
 ### PCF (Percentage-Closer Filtering) {#pcf}
 
 The outline of a shadow is called the penumbra: the transition from dark to light that gives a shadow its soft edge. PCF, the default technique, reads several localized samples from the shadow map and averages them to soften this edge by a fixed amount.
@@ -121,6 +127,12 @@ import { SHADOW_PCF5_32F } from 'playcanvas';
 ### VSM (Variance Shadow Maps) {#vsm}
 
 Variance shadow maps store statistical depth information that can be pre-blurred, producing smooth soft edges that work well over large areas such as directional-light shadows. They are available in 16-bit and 32-bit precision variants (the latter being more precise), and can exhibit light-bleeding artifacts in some scenes.
+
+:::note
+
+VSM is only available for directional lights and non-clustered spot lights.
+
+:::
 
 Set the shadow type to VSM and tune it:
 
@@ -175,7 +187,9 @@ PCF produces a soft edge of constant width. Real shadows, however, are sharp whe
 
 :::note
 
-PCSS requires the device to support rendering to and linearly filtering floating-point textures. This is widely available on modern desktop GPUs, but it is not universal — particularly on older or low-end mobile devices. Where it is unsupported, the light automatically falls back to PCF, so it is always safe to enable PCSS.
+PCSS is only available for directional lights.
+
+PCSS also requires the device to support rendering to and linearly filtering floating-point textures. This is widely available on modern desktop GPUs, but it is not universal — particularly on older or low-end mobile devices. Where it is unsupported, the light automatically falls back to PCF, so it is always safe to enable PCSS.
 
 :::
 
