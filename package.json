@@ -53,6 +53,7 @@
     "docusaurus-plugin-sass": "^0.2.6",
     "js-yaml": "^4.2.0",
     "leva": "^0.10.1",
+    "motion": "^12.40.0",
     "playcanvas": "^2.19.6",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",

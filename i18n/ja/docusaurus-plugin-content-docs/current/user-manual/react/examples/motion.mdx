@@ -1,0 +1,20 @@
+---
+title: モーション
+description: PlayCanvas Reactのライブサンプル — Motionアニメーションライブラリのスプリングでエンティティとライトをアニメーション。
+---
+
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+import MotionExample from '@site/src/components/playcanvas-react/examples/MotionExample';
+import MotionExampleSource from '!!raw-loader!@site/src/components/playcanvas-react/examples/MotionExample.jsx';
+
+カプセルにホバーすると、[Motion](https://motion.dev/)アニメーションライブラリのスプリングでエンティティとライトがアニメーションします。モーション値が各エンティティの位置、回転、スケールを駆動し、スクリプトがアニメーションされた強度をライトに適用します。
+
+<CodeExample
+  label="Motionでアニメーション"
+  filename="MotionExample.jsx"
+  code={MotionExampleSource}
+  showControls={false}
+  showDemo
+>
+  <MotionExample />
+</CodeExample>

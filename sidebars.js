@@ -479,6 +479,8 @@ const sidebars = {
             id: 'user-manual/react/examples/index',
           },
           items: [
+            'user-manual/react/examples/model-viewer',
+            'user-manual/react/examples/motion',
             'user-manual/react/examples/physics',
           ]
         },

@@ -1,0 +1,20 @@
+---
+title: Motion
+description: Live PlayCanvas React example — animating entities and lights with springs from the Motion animation library.
+---
+
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+import MotionExample from '@site/src/components/playcanvas-react/examples/MotionExample';
+import MotionExampleSource from '!!raw-loader!@site/src/components/playcanvas-react/examples/MotionExample.jsx';
+
+Hover over the capsule to see entities and lights animate with springs from the [Motion](https://motion.dev/) animation library. Motion values drive each entity's position, rotation and scale, while a script applies animated intensities to the lights.
+
+<CodeExample
+  label="Animating with Motion"
+  filename="MotionExample.jsx"
+  code={MotionExampleSource}
+  showControls={false}
+  showDemo
+>
+  <MotionExample />
+</CodeExample>
