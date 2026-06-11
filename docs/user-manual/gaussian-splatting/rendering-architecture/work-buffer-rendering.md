@@ -82,6 +82,8 @@ Your modifier code must implement three functions:
 
 `modifySplatCenter` always executes first. You can use it to sample extra streams and store values in global variables, or execute code shared between the three functions.
 
+In addition to this vertex-stage modifier, the final splat color can also be customized per pixel using the `gsplatModifyPS` fragment chunk — see [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment).
+
 ### Removing the Modifier
 
 To remove customization and restore default rendering:

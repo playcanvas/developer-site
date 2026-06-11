@@ -1,12 +1,12 @@
 ---
-title: Custom Shaders
-description: "Customize Gaussian splat rendering with the gsplatModifyVS shader chunk on the scene gsplat material: overridable functions, GLSL/WGSL, and a live example."
+title: Vertex Stage
+description: "Customize Gaussian splat position, rotation, scale and color with the gsplatModifyVS shader chunk: overridable functions, GLSL/WGSL, and a live example."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The PlayCanvas Engine lets you customize how Gaussian Splats are rendered by overriding the `gsplatModifyVS` shader chunk. The chunk is set on the scene-wide gsplat material ([`app.scene.gsplat.material`](https://api.playcanvas.com/engine/classes/GSplatParams.html#material)), so a single custom shader applies to **all** splats in the scene.
+The `gsplatModifyVS` chunk customizes splats in the vertex stage. It runs **once per splat**, making it the right place to move, rotate, scale, hide or tint whole splats.
 
 **View Live Example** - See shader chunk customization in action with animated splats.
 
@@ -14,7 +14,7 @@ The PlayCanvas Engine lets you customize how Gaussian Splats are rendered by ove
 
 ## Overridable Functions
 
-The `gsplatModifyVS` chunk lets you override three functions in the splat vertex stage:
+The `gsplatModifyVS` chunk lets you override three functions:
 
 | Function | Purpose |
 | --- | --- |
@@ -121,17 +121,6 @@ app.on('update', (dt) => {
 });
 ```
 
-## Removing a Custom Shader
-
-To revert to default rendering, delete the chunk override and update the material:
-
-```javascript
-const sceneMat = app.scene.gsplat.material;
-sceneMat.getShaderChunks('glsl').delete('gsplatModifyVS');
-sceneMat.getShaderChunks('wgsl').delete('gsplatModifyVS');
-sceneMat.update();
-```
-
 ## See Also
 
-- [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) — customize the global render pass that draws the sorted splats
+- [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — per-pixel color modification
