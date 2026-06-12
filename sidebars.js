@@ -606,6 +606,7 @@ const sidebars = {
       },
       items: [
         'user-manual/splat-transform/collision',
+        'user-manual/splat-transform/voxel-format',
         'user-manual/splat-transform/docker',
       ],
     },

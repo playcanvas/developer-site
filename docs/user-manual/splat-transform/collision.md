@@ -11,7 +11,7 @@ For uploading or generating voxel collision through the SuperSplat web UI instea
 
 Two outputs are produced from the same voxelization pass:
 
-- **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](/user-manual/supersplat/viewer/) for runtime collision detection.
+- **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](/user-manual/supersplat/viewer/) for runtime collision detection. The on-disk structure is specified in the [Voxel Format](/user-manual/splat-transform/voxel-format) specification.
 - **`.collision.glb`** — triangulated mesh built from the voxel grid (only when `-K` / `--collision-mesh` is passed).
 
 A typical pipeline runs four stages, with the latter two being optional depending on the scene type:
@@ -223,6 +223,7 @@ splat-transform input.ply \
 
 ## See also
 
+- [Voxel Format](/user-manual/splat-transform/voxel-format) — the on-disk format of `.voxel.json` / `.voxel.bin` output.
 - [splat-transform CLI reference](/user-manual/splat-transform/) — full option reference including Voxel Output Options.
 - [Docker Backend](/user-manual/splat-transform/docker) — running the GPU-only voxel/collision features in a container.
 - [Studio → Collision](/user-manual/supersplat/studio/collision) — uploading or generating voxel collision through the SuperSplat web UI.
