@@ -18,7 +18,7 @@ There are two customization points, one per shader stage:
 
 **Use the [fragment stage](/user-manual/gaussian-splatting/building/custom-shaders/fragment)** when the effect needs to vary *across* a splat's footprint — for example when sampling a texture. It runs once per covered fragment, so it costs more on heavily overlapping splats.
 
-The two stages can be combined freely — implement either or both.
+The two stages can be combined freely — implement either or both. Per-splat values can also be passed from the vertex stage to the fragment stage using [varying streams](/user-manual/gaussian-splatting/building/custom-shaders/varyings) — for example to classify a splat once and pay per-pixel cost only where needed.
 
 ## Applying Chunks
 
@@ -56,5 +56,6 @@ sceneMat.update();
 
 - [Vertex Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/vertex) — move, scale and tint splats
 - [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — per-pixel color modification
+- [Varying Streams](/user-manual/gaussian-splatting/building/custom-shaders/varyings) — pass per-splat data from the vertex stage to the fragment stage
 - [Relighting](/user-manual/gaussian-splatting/building/relighting) — light splats using a proxy mesh, built on the fragment hook
 - [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) — customize the global render pass that draws the sorted splats

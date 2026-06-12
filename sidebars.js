@@ -920,6 +920,7 @@ const sidebars = {
               items: [
                 'user-manual/gaussian-splatting/building/custom-shaders/vertex',
                 'user-manual/gaussian-splatting/building/custom-shaders/fragment',
+                'user-manual/gaussian-splatting/building/custom-shaders/varyings',
               ],
             },
             'user-manual/gaussian-splatting/building/relighting',

@@ -124,3 +124,4 @@ app.on('update', (dt) => {
 ## See Also
 
 - [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — per-pixel color modification
+- [Varying Streams](/user-manual/gaussian-splatting/building/custom-shaders/varyings) — pass per-splat values computed here to the fragment stage

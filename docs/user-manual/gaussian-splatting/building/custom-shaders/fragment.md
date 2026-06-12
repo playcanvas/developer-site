@@ -110,4 +110,5 @@ For an effect that samples a screen-aligned texture at each fragment's screen po
 ## See Also
 
 - [Vertex Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/vertex) — move, scale and tint splats
+- [Varying Streams](/user-manual/gaussian-splatting/building/custom-shaders/varyings) — read per-splat values written by the vertex stage
 - [Relighting](/user-manual/gaussian-splatting/building/relighting) — light splats using a proxy mesh, built on this hook
