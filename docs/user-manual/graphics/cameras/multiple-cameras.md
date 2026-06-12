@@ -10,7 +10,7 @@ A scene can contain any number of cameras, and they compose into the final image
 
 This model supports a wide range of setups: split-screen multiplayer, picture-in-picture overlays such as minimaps and rear-view mirrors, UI rendered over the 3D scene, and live render-to-texture surfaces like security monitors and portals.
 
-<EngineExample id="camera/multi" title="Multi Camera" />
+<EngineExample id="graphics/multi-view" title="Multi View" />
 
 ## Viewports {#viewports}
 

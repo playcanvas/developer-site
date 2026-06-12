@@ -109,4 +109,6 @@ import { Script } from '@playcanvas/react/components';
 
 <EngineExample id="camera/fly" title="Fly Camera" />
 
+<EngineExample id="camera/multi" title="Multi Camera" />
+
 独自のカメラロジックを構築したい場合は、[Orbit Cameraチュートリアル](/tutorials/orbit-camera)で完全な実装を解説しています。

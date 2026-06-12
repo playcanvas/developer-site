@@ -109,4 +109,6 @@ See the script in action in the engine examples:
 
 <EngineExample id="camera/fly" title="Fly Camera" />
 
+<EngineExample id="camera/multi" title="Multi Camera" />
+
 For building your own custom camera logic instead, the [Orbit Camera tutorial](/tutorials/orbit-camera) walks through a complete implementation.

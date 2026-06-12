@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 このモデルは幅広い構成をサポートします。分割画面のマルチプレイヤー、ミニマップやバックミラーのようなピクチャインピクチャのオーバーレイ、3Dシーンの上に描画されるUI、監視モニターやポータルのようなレンダーテクスチャのサーフェスなどです。
 
-<EngineExample id="camera/multi" title="Multi Camera" />
+<EngineExample id="graphics/multi-view" title="Multi View" />
 
 ## ビューポート {#viewports}
 
