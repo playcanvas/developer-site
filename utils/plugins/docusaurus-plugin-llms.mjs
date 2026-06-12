@@ -267,7 +267,8 @@ function getCategoryFromPath(urlPath) {
 // that consumers can skip when a shorter context is needed)
 const OPTIONAL_SUBCATEGORIES = ['account-management', 'glossary', 'press-pack', 'security'];
 
-// User Manual subcategory order, matching sidebars.js
+// User Manual subcategory order, following sidebars.js (minus the
+// subcategories in OPTIONAL_SUBCATEGORIES, which render under '## Optional')
 const USER_MANUAL_ORDER = [
     'Overview',
     'getting-started',

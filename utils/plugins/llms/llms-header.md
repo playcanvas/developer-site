@@ -153,7 +153,7 @@ Custom scripts attach to an entity via a `<pc-scripts>` element wrapping one `<p
 
 ### 6. Versions
 
-The current stable engine version is shown in the metadata at the top of this file. PlayCanvas Engine 2.x is the current major version; prefer current API names from https://api.playcanvas.com/engine/ over deprecated 1.x-era patterns.
+If the metadata at the top of this file includes an Engine Version line, generate code against that release. PlayCanvas Engine 2.x is the current major version; prefer current API names from https://api.playcanvas.com/engine/ over deprecated 1.x-era patterns.
 
 ## Recommended Entry Points
 
