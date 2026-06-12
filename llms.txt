@@ -6,8 +6,8 @@ This file provides a structured overview of the PlayCanvas documentation.
 For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 593
-Generated: 2026-06-10
+Total Documents: 599
+Generated: 2026-06-12
 
 ## Recommended Entry Points
 
@@ -288,8 +288,14 @@ Generated: 2026-06-10
 - https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multi-draw/ - Multi-Draw
 - https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multiple-render-targets/ - Multiple Render Targets
 - https://developer.playcanvas.com/user-manual/graphics/cameras/ - Cameras
+- https://developer.playcanvas.com/user-manual/graphics/cameras/camera-controls/ - Camera Controls
+- https://developer.playcanvas.com/user-manual/graphics/cameras/clearing/ - Clearing
 - https://developer.playcanvas.com/user-manual/graphics/cameras/depth-layer/ - Depth Layer
+- https://developer.playcanvas.com/user-manual/graphics/cameras/multiple-cameras/ - Multiple Cameras
+- https://developer.playcanvas.com/user-manual/graphics/cameras/projection/ - Projection
 - https://developer.playcanvas.com/user-manual/graphics/cameras/scene-picker/ - Scene Picker
+- https://developer.playcanvas.com/user-manual/graphics/cameras/screen-and-world/ - Screen and World Coordinates
+- https://developer.playcanvas.com/user-manual/graphics/cameras/tone-mapping/ - Tone Mapping & Exposure
 - https://developer.playcanvas.com/user-manual/graphics/layers/ - Layers
 - https://developer.playcanvas.com/user-manual/graphics/lighting/ - Lighting
 - https://developer.playcanvas.com/user-manual/graphics/lighting/ambient-occlusion/ - Ambient Occlusion

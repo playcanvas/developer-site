@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 593
-Generated: 2026-06-10
+Total Documents: 599
+Generated: 2026-06-12
 
 ================================================================================
 
@@ -23145,39 +23145,99 @@ A full working sample is available in the engine examples: Multiple Render Targe
 
 URL: https://developer.playcanvas.com/user-manual/graphics/cameras/
 
-Cameras are responsible for rendering a scene to the screen. You need at least one camera in your scene to see anything. When you create a new scene in PlayCanvas, it is automatically populated with a single camera (along with a directional light).
+Cameras render your scene to the screen. A camera is simply an entity with a [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) attached — the scene is drawn from the entity's position and orientation, so you aim a camera by moving and rotating its entity just like any other. Cameras look down their local negative Z axis.
 
-## Creating a Camera
+You need at least one enabled camera in your scene to see anything. Beyond that single camera, there is a lot you can control: the [projection](projection.md) that maps the 3D scene to a 2D image, the [tone mapping](tone-mapping.md) that shapes the final colors, and how [multiple cameras](multiple-cameras.md) compose views for split-screen, overlays, and render-to-texture.
 
-In the Editor's 3D View, an unselected camera is represented with the following icon:
+## Creating a Camera {#creating-a-camera}
 
-[Image: Camera icon]
+## In This Section
 
-To create a new camera, simply create a new entity and add a camera component to it. For convenience, the Editor menu has an item that does this in a single step:
+* [Projection](projection.md) — perspective vs orthographic projection, field of view, clip planes and frustum culling.
+* [Clearing](clearing.md) — set the background color, make the canvas transparent, or disable clearing.
+* [Tone Mapping & Exposure](tone-mapping.md) — map HDR scene lighting to your display, with optional physical exposure controls.
+* [Multiple Cameras](multiple-cameras.md) — compose views with priorities, viewports, layers and render targets.
+* [Camera Controls](camera-controls.md) — add orbit, fly and first-person navigation with the engine's ready-made script.
+* [Screen and World Coordinates](screen-and-world.md) — convert between 2D screen positions and 3D world positions.
+* [Scene Picker](scene-picker.md) — accurately select the objects under a screen coordinate.
+* [Depth Layer](depth-layer.md) — give shaders access to the scene's color and depth buffers.
 
-[Image: Camera creation]
+## Going Further
 
-## Orthographic vs Perspective Projection
+* **Post-processing** — bloom, depth of field, SSAO, TAA, vignette and more are applied per camera. See [Post Effects](/user-manual/graphics/posteffects/).
+* **AR and VR** — a camera can drive an immersive WebXR session via [`startXr()`](https://api.playcanvas.com/engine/classes/CameraComponent.html#startxr). See the [XR section](/user-manual/xr/).
+* **Per-camera fog** — override the scene's fog settings on an individual camera with [`fog`](https://api.playcanvas.com/engine/classes/CameraComponent.html#fog).
+* **Custom projections** — supply [`calculateProjection`](https://api.playcanvas.com/engine/classes/CameraComponent.html#calculateprojection) and [`calculateTransform`](https://api.playcanvas.com/engine/classes/CameraComponent.html#calculatetransform) callbacks for advanced effects such as oblique projections and planar reflections.
+* **Tutorials** — try [Camera Following a Path](/tutorials/camera-following-a-path) and [Orbit Camera](/tutorials/orbit-camera).
 
-Cameras can have one of two types of projection: orthographic or perspective. Orthographic cameras define a parallel projection and are often used for 2D or isometric games.
+--------------------------------------------------------------------------------
 
-[Image: Orthographic camera]
+## Camera Controls
 
-More commonly used is the perspective projection. It more closely mimics how our eyes or cameras work.
+URL: https://developer.playcanvas.com/user-manual/graphics/cameras/camera-controls/
 
-[Image: Perspective camera]
+Most applications need some way for the user to move the camera. Rather than writing this from scratch, you can use the `CameraControls` script that ships with the engine at [`scripts/esm/camera-controls.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-controls.mjs). It provides production-quality navigation with a single script:
 
-## Controlling the Viewport
+* **Orbit** — left mouse drag rotates around a focus point, right mouse drag pans, and the mouse wheel zooms.
+* **Fly** — WASD keys move the camera freely while the mouse looks around.
+* **Touch and gamepad** — multi-touch gestures and gamepad input are supported out of the box.
 
-By default, a camera will render to the full width and height of its render target. However, there are circumstances where you might want to change this behavior. For example, perhaps you are writing a game that has a local multiplayer mode that requires split-screen rendering to show each player's viewpoint.
+Attach the script to a camera entity:
 
-For 2-player horizontal split screen, you would create two cameras and configure their viewports as follows:
+## Configuration {#configuration}
 
-[Image: Horizontal splitscreen]
+The script exposes a rich set of attributes. The most commonly used are:
 
-And for vertical split screen, you would configure the viewports as follows:
+| Attribute | Default | Description |
+| --- | --- | --- |
+| `enableOrbit` | `true` | Enable orbit controls |
+| `enableFly` | `true` | Enable fly controls |
+| `enablePan` | `true` | Enable panning |
+| `focusPoint` | `[0, 0, 0]` | The point the camera orbits around |
+| `rotateSpeed` | `0.2` | Rotation sensitivity |
+| `moveSpeed` | `10` | Fly movement speed (with `moveFastSpeed` and `moveSlowSpeed` variants) |
+| `zoomSpeed` | `0.001` | Zoom sensitivity |
+| `pitchRange` | `[-360, 360]` | Limits for the camera's pitch angle in degrees |
+| `zoomRange` | `[0.01, 0]` | Min/max zoom distance (a max of 0 means unlimited) |
 
-[Image: Vertical splitscreen]
+Damping attributes (`rotateDamping`, `moveDamping`, `zoomDamping`, `focusDamping`, all defaulting to `0.98`) control how smoothly motion eases out — 0 stops instantly. To create a pure orbit camera, disable fly; for a pure fly camera, disable orbit.
+
+## Examples {#examples}
+
+See the script in action in the engine examples:
+
+For building your own custom camera logic instead, the [Orbit Camera tutorial](/tutorials/orbit-camera) walks through a complete implementation.
+
+--------------------------------------------------------------------------------
+
+## Clearing
+
+URL: https://developer.playcanvas.com/user-manual/graphics/cameras/clearing/
+
+Before a camera renders the scene, it clears its render target — the screen, unless a [render target](multiple-cameras.md#render-targets) is assigned. You can control what gets cleared and to what color:
+
+```javascript
+camera.camera.clearColor = new pc.Color(0, 0, 0);
+
+camera.camera.clearColorBuffer = true;   // clear the color buffer (default: true)
+camera.camera.clearDepthBuffer = true;   // clear the depth buffer (default: true)
+camera.camera.clearStencilBuffer = true; // clear the stencil buffer (default: true)
+```
+
+The clear color is effectively the background color of your scene — though if your scene has a skybox, it covers the clear color entirely.
+
+## Transparent Backgrounds {#transparent-backgrounds}
+
+The clear color has an alpha channel, and the application's canvas supports transparency by default. This means a single camera can render the scene over the surrounding web page — useful for 3D product views, headers, and other embedded content:
+
+```javascript
+// The web page shows through wherever nothing is drawn
+camera.camera.clearColor = new pc.Color(0, 0, 0, 0);
+```
+
+## Disabling Clearing {#disabling-clearing}
+
+Disabling the clear flags keeps the existing contents of the render target, which is the building block for compositing several cameras into one image — see [Camera Stacking](multiple-cameras.md#camera-stacking).
 
 --------------------------------------------------------------------------------
 
@@ -23257,6 +23317,115 @@ These engine examples demonstrate the rendering of both the depth and the color 
 - GroundFog demonstrates the use of the depth buffer: `GroundFog`
 
 - Dispersion demonstrates refraction and chromatic dispersion using the scene color texture: `Dispersion`
+
+--------------------------------------------------------------------------------
+
+## Multiple Cameras
+
+URL: https://developer.playcanvas.com/user-manual/graphics/cameras/multiple-cameras/
+
+A scene can contain any number of cameras, and they compose into the final image according to a simple model: every enabled camera renders its [layers](#layers) into its [viewport](#viewports) of its render target (the screen, unless a [render target](#render-targets) is set), in order of `priority` — lower values render first.
+
+This model supports a wide range of setups: split-screen multiplayer, picture-in-picture overlays such as minimaps and rear-view mirrors, UI rendered over the 3D scene, and live render-to-texture surfaces like security monitors and portals.
+
+## Viewports {#viewports}
+
+By default, a camera renders to the full width and height of its render target. The `rect` property restricts rendering to a rectangle, specified as `[x, y, width, height]` in normalized 0–1 coordinates (the origin is the bottom-left corner).
+
+For 2-player horizontal split-screen, two cameras each take half the screen:
+
+[Image: Horizontal splitscreen]
+
+For vertical split-screen, stack the viewports instead — `[0, 0.5, 1, 0.5]` on top and `[0, 0, 1, 0.5]` below:
+
+[Image: Vertical splitscreen]
+
+A related property, `scissorRect`, clips rendering to a rectangle in the same normalized format without changing how the image is projected into the viewport.
+
+## Layers {#layers}
+
+Each camera renders only the [layers](/user-manual/graphics/layers) listed in its `layers` property, so different cameras can see entirely different subsets of the scene. Typical uses include a UI camera that renders only a UI layer over the game, a minimap camera that skips effects layers, and first-person weapon rendering. See the [Camera Model Masking tutorial](/tutorials/camera-model-masking) for a worked example.
+
+## Camera Stacking {#camera-stacking}
+
+When one camera renders on top of another — a picture-in-picture overlay, or a full-screen camera drawing a different set of layers — the later camera (higher `priority`) must not wipe out the earlier camera's image. Disable its [clear flags](clearing.md) as appropriate:
+
+```javascript
+// Render an overlay camera on top of the main view, in the bottom-right corner
+overlay.camera.priority = 1;
+overlay.camera.rect = new pc.Vec4(0.7, 0, 0.3, 0.3);
+overlay.camera.clearColorBuffer = true;  // overlay has its own background
+overlay.camera.clearDepthBuffer = true;  // don't depth-test against the main view
+
+// For a full-screen overlay that composites over the main view instead:
+// overlay.camera.clearColorBuffer = false;
+```
+
+## Render Targets {#render-targets}
+
+Instead of the screen, a camera can render into an offscreen texture by assigning a [RenderTarget](https://api.playcanvas.com/engine/classes/RenderTarget.html) to its `renderTarget` property. The resulting texture can then be applied to a material — for in-world screens, mirrors and portals — or processed further. See the engine's render-to-texture example:
+
+## Performance Considerations {#performance-considerations}
+
+* Every enabled camera renders its layers again — draw calls scale with the number of cameras. Restrict each camera's `layers` to the minimum it actually needs.
+* Reducing a camera's `rect` reduces the pixels it fills, but not the per-draw-call CPU cost of the objects it renders.
+* Per-camera [post-processing](/user-manual/graphics/posteffects/) runs once per camera, so effects on split-screen views multiply their GPU cost.
+* Render targets that are only needed occasionally (e.g. a static mirror) don't have to be updated every frame — disable the camera and enable it on demand.
+
+--------------------------------------------------------------------------------
+
+## Projection
+
+URL: https://developer.playcanvas.com/user-manual/graphics/cameras/projection/
+
+A camera's projection defines how the 3D scene is flattened onto a 2D image. PlayCanvas cameras support two projection types: perspective and orthographic.
+
+## Perspective Projection {#perspective}
+
+Perspective projection, the default, mimics how our eyes and physical cameras work: objects appear smaller the further away they are. The volume of space the camera can see — its frustum — is a truncated pyramid.
+
+[Image: Perspective camera]
+
+The shape of the frustum is controlled by the field of view (`fov`), an angle in degrees that defaults to 45. By default this angle is measured vertically; set `horizontalFov` to `true` to measure it horizontally instead. Larger values take in more of the scene, with a fisheye look at the extreme; smaller values have a zoomed-in, telephoto effect.
+
+## Orthographic Projection {#orthographic}
+
+Orthographic projection is a parallel projection: objects keep the same size on screen regardless of their distance from the camera. The frustum is a cuboid. It is often used for 2D and isometric games, as well as CAD-style visualizations.
+
+[Image: Orthographic camera]
+
+Since field of view does not apply, the size of the view is set with `orthoHeight`: half the height of the view volume in world units (defaults to 10). The width is derived from the aspect ratio.
+
+Set the projection type as follows:
+
+## Clip Planes {#clip-planes}
+
+The near and far clip planes cap the frustum at both ends, bounding the range of distances the camera can see. Anything closer than `nearClip` (default 0.1) or further than `farClip` (default 1000) is not rendered:
+
+```javascript
+camera.camera.nearClip = 0.5;
+camera.camera.farClip = 500;
+```
+
+:::note
+
+The ratio between the far and near clip planes determines how depth buffer precision is distributed across the scene. If the near plane is very small relative to the far plane, distant surfaces can be left with too little precision to be separated reliably, causing flickering known as z-fighting. To avoid it, set the near plane as large as your scene can tolerate and the far plane no larger than necessary.
+
+:::
+
+## Aspect Ratio {#aspect-ratio}
+
+By default, a camera's aspect ratio is computed automatically every frame from its render target and [viewport](multiple-cameras.md#viewports) (`aspectRatioMode` of [`ASPECT_AUTO`](https://api.playcanvas.com/engine/variables/ASPECT_AUTO.html)), so the image is never stretched as the canvas resizes. For special cases — such as rendering for a display with non-square pixels — set `aspectRatioMode` to [`ASPECT_MANUAL`](https://api.playcanvas.com/engine/variables/ASPECT_MANUAL.html) and assign `aspectRatio` yourself.
+
+## Frustum Culling {#frustum-culling}
+
+When frustum culling is enabled (`frustumCulling`, the default), the engine skips rendering any mesh instance whose bounding box falls completely outside the camera's frustum, which can dramatically reduce the number of draw calls in large scenes. Disable it only if you need everything submitted to the GPU regardless of visibility.
+
+The frustum itself is exposed as a [Frustum](https://api.playcanvas.com/engine/classes/Frustum.html) via the read-only `frustum` property, which you can query for custom visibility logic:
+
+```javascript
+const visible = camera.camera.frustum.containsPoint(entity.getPosition());
+```
 
 --------------------------------------------------------------------------------
 
@@ -23347,6 +23516,114 @@ These engine examples demonstrate the picker in action:
 - **Area Picker** - Shows how to pick mesh instances in rectangular screen regions with visual feedback
 
 - **Gaussian Splatting Picking** - Demonstrates picking splat instances and using world position picking to place markers on splat surfaces
+
+--------------------------------------------------------------------------------
+
+## Screen and World Coordinates
+
+URL: https://developer.playcanvas.com/user-manual/graphics/cameras/screen-and-world/
+
+A camera defines the mapping between the 3D world and the 2D screen, and the [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) exposes that mapping in both directions. This is the foundation for mouse picking, placing objects under the cursor, and anchoring 2D UI to 3D objects. The same code works in every workflow — these are runtime API calls made from your scripts.
+
+## Screen to World {#screen-to-world}
+
+[`screenToWorld(x, y, z)`](https://api.playcanvas.com/engine/classes/CameraComponent.html#screentoworld) converts a 2D screen position into a 3D world position. Since a single screen point corresponds to an entire ray of world positions, you also pass `z` — the distance from the camera at which you want the point.
+
+A common pattern is casting a ray from the mouse cursor into the scene, for example to intersect with physics or geometry:
+
+```javascript
+const from = camera.camera.screenToWorld(event.x, event.y, camera.camera.nearClip);
+const to = camera.camera.screenToWorld(event.x, event.y, camera.camera.farClip);
+
+// e.g. raycast against the physics world
+const result = app.systems.rigidbody.raycastFirst(from, to);
+if (result) {
+    console.log(`Hit: ${result.entity.name}`);
+}
+```
+
+Or placing an object at a fixed distance under the cursor:
+
+```javascript
+const pos = camera.camera.screenToWorld(event.x, event.y, 10); // 10 units from the camera
+entity.setPosition(pos);
+```
+
+## World to Screen {#world-to-screen}
+
+[`worldToScreen(worldCoord)`](https://api.playcanvas.com/engine/classes/CameraComponent.html#worldtoscreen) does the reverse: it projects a 3D world position to 2D screen coordinates. This is useful for positioning HTML elements or 2D UI over objects in the scene — name tags, health bars, waypoint markers:
+
+```javascript
+const screenPos = camera.camera.worldToScreen(entity.getPosition());
+
+// Position an absolutely-positioned HTML element over the entity,
+// accounting for the device pixel ratio
+const dpr = window.devicePixelRatio;
+htmlElement.style.left = `${screenPos.x / dpr}px`;
+htmlElement.style.top = `${screenPos.y / dpr}px`;
+```
+
+The returned `z` component holds the depth of the point. For perspective cameras, a negative `z` means the point is behind the camera — check it before showing the element.
+
+## Picking Objects {#picking}
+
+For selecting the exact mesh under the cursor, a ray cast is not always enough — it requires physics colliders and ignores per-pixel detail. The engine's [Picker](https://api.playcanvas.com/engine/classes/Picker.html) renders the scene to determine precisely which mesh instance occupies a screen coordinate. See [Scene Picker](scene-picker.md).
+
+--------------------------------------------------------------------------------
+
+## Tone Mapping & Exposure
+
+URL: https://developer.playcanvas.com/user-manual/graphics/cameras/tone-mapping/
+
+Lighting calculations happen in high dynamic range: the intensity of a pixel can far exceed what a standard display can show. Tone mapping is the final transform that compresses this HDR range into displayable colors, and it has a major impact on the look of your scene. In PlayCanvas, tone mapping is set per camera.
+
+## Tone Mapping {#tone-mapping}
+
+The available tone mapping curves are:
+
+* [`TONEMAP_LINEAR`](https://api.playcanvas.com/engine/variables/TONEMAP_LINEAR.html) — no compression; bright values simply clip at white. The default.
+* [`TONEMAP_FILMIC`](https://api.playcanvas.com/engine/variables/TONEMAP_FILMIC.html) — a classic filmic curve with gentle roll-off in the highlights.
+* [`TONEMAP_HEJL`](https://api.playcanvas.com/engine/variables/TONEMAP_HEJL.html) — a punchy, contrasty filmic approximation.
+* [`TONEMAP_ACES`](https://api.playcanvas.com/engine/variables/TONEMAP_ACES.html) — the Academy Color Encoding System curve, widely used for cinematic, photorealistic rendering.
+* [`TONEMAP_ACES2`](https://api.playcanvas.com/engine/variables/TONEMAP_ACES2.html) — a variant of ACES with a different balance of contrast and saturation.
+* [`TONEMAP_NEUTRAL`](https://api.playcanvas.com/engine/variables/TONEMAP_NEUTRAL.html) — compresses highlights while keeping hue and saturation shifts minimal; a good choice when accurate colors matter (e.g. product configurators).
+
+For physically based scenes with HDR lighting, `TONEMAP_ACES` or `TONEMAP_NEUTRAL` are usually the best starting points.
+
+:::note
+
+When post-processing is active via [CameraFrame](/user-manual/graphics/posteffects/cameraframe/), tone mapping is applied by the post-processing pipeline instead — set it on the `CameraFrame`'s rendering options rather than the camera.
+
+:::
+
+## Gamma Correction {#gamma-correction}
+
+After tone mapping, the camera's output is gamma-encoded for display on standard sRGB screens. This is controlled by `gammaCorrection`:
+
+* [`GAMMA_SRGB`](https://api.playcanvas.com/engine/variables/GAMMA_SRGB.html) — output is encoded for sRGB displays. The default and recommended setting for all normal rendering.
+* [`GAMMA_NONE`](https://api.playcanvas.com/engine/variables/GAMMA_NONE.html) — output remains in linear space. This is only intended for advanced HDR pipelines where the output is rendered to an intermediate HDR texture that is tone mapped and gamma-corrected in a subsequent pass. On a standard display, it makes the scene appear too dark.
+
+To understand why rendering is performed in linear space and gamma-encoded at the end, see [Linear Workflow](/user-manual/graphics/linear-workflow/).
+
+## Physical Exposure {#physical-exposure}
+
+By default, scene brightness is controlled by a simple `scene.exposure` multiplier. Alternatively, the camera can model the exposure of a physical camera using three properties familiar to photographers:
+
+```javascript
+app.scene.physicalUnits = true; // light intensities are now in physical units (lux)
+
+camera.camera.aperture = 16;        // f-stops — higher means less exposure (default: 16)
+camera.camera.shutter = 1 / 1000;   // seconds — longer means more exposure (default: 1/1000)
+camera.camera.sensitivity = 1000;   // ISO — higher means more exposure (default: 1000)
+```
+
+:::note
+
+`aperture`, `shutter` and `sensitivity` only take effect when `scene.physicalUnits` is `true`. When it is `false` (the default), `scene.exposure` is used instead.
+
+:::
+
+See it in action in the engine's physical units example:
 
 --------------------------------------------------------------------------------
 
