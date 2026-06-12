@@ -1,38 +1,82 @@
 ---
 title: カメラ
-description: カメラの追加、正射影と透視投影の選択、分割画面とピクチャインピクチャ向けビューポートの設定です。
+description: カメラの作成に加え、投影、トーンマッピング、マルチカメラレンダリング、カメラコントロール、座標変換を解説します。
 ---
 
-カメラは、シーンを画面にレンダリングする役割を担っています。何かを見るためには、シーンに少なくとも1つのカメラが必要です。PlayCanvasで新しいシーンを作成すると、1つのカメラ(および方向性のライト)が自動的に配置されます。
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-## カメラの作成
+カメラはシーンを画面にレンダリングします。カメラは [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) がアタッチされた単なるエンティティであり、シーンはそのエンティティの位置と向きからレンダリングされます。そのため、他のエンティティと同じように、エンティティを移動・回転させることでカメラの向きを変えられます。カメラはローカルの負のZ軸方向を向いています。
 
-エディタの3Dビューでは、選択されていないカメラは次のアイコンで表されます:
+何かを表示するには、シーンに少なくとも1つの有効なカメラが必要です。さらに、カメラでは多くのことを制御できます。3Dシーンを2D画像にマッピングする[投影](projection.md)、最終的な色を決定づける[トーンマッピング](tone-mapping.md)、そして分割画面・オーバーレイ・レンダーターゲットへの描画のために[複数のカメラ](multiple-cameras.md)でビューを合成する方法などです。
 
-![Camera icon](/img/user-manual/graphics/cameras/camera-icon.png)
+## カメラの作成 {#creating-a-camera}
 
-新しいカメラを作成するには、単に新しいエンティティを作成し、Cameraコンポーネントを追加してください。便利なため、エディタのメニューには1つのステップでこれを行う項目があります。
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+// Cameraコンポーネントを持つエンティティを作成する
+const camera = new pc.Entity('Camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.3, 0.3, 0.7)
+});
+app.root.addChild(camera);
+
+// エンティティを変換してカメラの向きを定める
+camera.setPosition(0, 5, 10);
+camera.lookAt(0, 0, 0);
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+新しいシーンには自動的にカメラエンティティが配置されます。別のカメラを作成するには、Entityメニューを使用します。これにより、[Cameraコンポーネント](/user-manual/editor/scenes/components/camera)を持つエンティティが1ステップで作成されます。
 
 ![Camera creation](/img/user-manual/graphics/cameras/camera-create.png)
 
-## 正投影と透視投影
+カメラのすべてのプロパティはインスペクターで編集できます。
 
-カメラには2つの投影タイプ、正投影と透視投影があります。正射法カメラは平行投影を定義し、2Dまたはアイソメトリックゲームによく使用されます。
+</TabItem>
+<TabItem value="react" label="React">
 
-![Orthographic camera](/img/user-manual/graphics/cameras/camera-orthographic.png)
+```jsx
+<Entity name="camera" position={[0, 5, 10]}>
+  <Camera clearColor="#4d4db3" />
+</Entity>
+```
 
-より一般的に使用されるのは透視投影です。これは、私たちの目やカメラがどのように機能するかをより近似します。
+利用可能なすべてのpropsは [`<Camera/>` コンポーネントリファレンス](/user-manual/react/api/camera)を参照してください。
 
-![Perspective camera](/img/user-manual/graphics/cameras/camera-perspective.png)
+</TabItem>
+<TabItem value="web-components" label="Web Components">
 
-## ビューポートの制御
+```html
+<pc-entity name="camera" position="0 5 10">
+  <pc-camera clear-color="0.3 0.3 0.7 1"></pc-camera>
+</pc-entity>
+```
 
-デフォルトでは、カメラはレンダリングターゲットの全幅と全高にレンダリングします。しかし、この振る舞いを変更したい場合もあります。たとえば、ローカルマルチプレイヤーモードがあるゲームを作成していて、各プレイヤーの視点を表示するために分割画面レンダリングが必要な場合などです。
+利用可能なすべての属性は [`<pc-camera>` タグリファレンス](/user-manual/web-components/tags/pc-camera)を参照してください。
 
-2プレイヤーの水平分割画面の場合、2つのカメラを作成し、それらのビューポートを次のように設定します。
+</TabItem>
+</Tabs>
 
-![Horizontal splitscreen](/img/user-manual/graphics/cameras/camera-horizontal-splitscreen.png)
+## このセクションの内容
 
-そして、垂直分割画面の場合は、次のようにビューポートを設定します。
+* [投影](projection.md) — 透視投影と正投影、視野角、クリップ面とフラスタムカリング。
+* [クリア](clearing.md) — 背景色の設定、キャンバスの透明化、クリアの無効化。
+* [トーンマッピングと露出](tone-mapping.md) — HDRのシーンライティングをディスプレイにマッピングし、必要に応じて物理ベースの露出を制御します。
+* [複数のカメラ](multiple-cameras.md) — 優先度、ビューポート、レイヤー、レンダーターゲットでビューを合成します。
+* [カメラコントロール](camera-controls.md) — エンジン付属のスクリプトで、オービット・フライ・一人称のナビゲーションを追加します。
+* [スクリーン座標とワールド座標](screen-and-world.md) — 2Dスクリーン位置と3Dワールド位置を相互に変換します。
+* [Scene Picker](scene-picker.md) — スクリーン座標の下にあるオブジェクトを正確に選択します。
+* [Depthレイヤー](depth-layer.md) — シーンのカラーバッファと深度バッファにシェーダーからアクセスします。
 
-![Vertical splitscreen](/img/user-manual/graphics/cameras/camera-vertical-splitscreen.png)
+## さらに先へ
+
+* **ポストプロセッシング** — ブルーム、被写界深度、SSAO、TAA、ビネットなどはカメラごとに適用されます。[ポストエフェクト](/user-manual/graphics/posteffects/)を参照してください。
+* **ARとVR** — カメラは [`startXr()`](https://api.playcanvas.com/engine/classes/CameraComponent.html#startxr) で没入型WebXRセッションを開始できます。[XRセクション](/user-manual/xr/)を参照してください。
+* **カメラごとのフォグ** — [`fog`](https://api.playcanvas.com/engine/classes/CameraComponent.html#fog) でシーンのフォグ設定を個々のカメラで上書きできます。
+* **カスタム投影** — [`calculateProjection`](https://api.playcanvas.com/engine/classes/CameraComponent.html#calculateprojection) と [`calculateTransform`](https://api.playcanvas.com/engine/classes/CameraComponent.html#calculatetransform) のコールバックを指定すると、斜投影や平面反射などの高度なエフェクトを実現できます。
+* **チュートリアル** — [Camera Following a Path](/tutorials/camera-following-a-path) と [Orbit Camera](/tutorials/orbit-camera) を試してみてください。

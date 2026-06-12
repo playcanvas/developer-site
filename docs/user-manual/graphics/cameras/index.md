@@ -1,38 +1,82 @@
 ---
 title: Cameras
-description: Add cameras, choose orthographic or perspective projection, and configure viewports for split-screen and picture-in-picture.
+description: Create cameras and explore projection, tone mapping, multi-camera rendering, camera controls, and coordinate conversion.
 ---
 
-Cameras are responsible for rendering a scene to the screen. You need at least one camera in your scene to see anything. When you create a new scene in PlayCanvas, it is automatically populated with a single camera (along with a directional light).
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-## Creating a Camera
+Cameras render your scene to the screen. A camera is simply an entity with a [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) attached — the scene is drawn from the entity's position and orientation, so you aim a camera by moving and rotating its entity just like any other. Cameras look down their local negative Z axis.
 
-In the Editor's 3D View, an unselected camera is represented with the following icon:
+You need at least one enabled camera in your scene to see anything. Beyond that single camera, there is a lot you can control: the [projection](projection.md) that maps the 3D scene to a 2D image, the [tone mapping](tone-mapping.md) that shapes the final colors, and how [multiple cameras](multiple-cameras.md) compose views for split-screen, overlays, and render-to-texture.
 
-![Camera icon](/img/user-manual/graphics/cameras/camera-icon.png)
+## Creating a Camera {#creating-a-camera}
 
-To create a new camera, simply create a new entity and add a camera component to it. For convenience, the Editor menu has an item that does this in a single step:
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+// Create an entity with a camera component
+const camera = new pc.Entity('Camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.3, 0.3, 0.7)
+});
+app.root.addChild(camera);
+
+// Aim the camera by transforming its entity
+camera.setPosition(0, 5, 10);
+camera.lookAt(0, 0, 0);
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+New scenes are automatically populated with a camera entity. To create another, use the Entity menu, which creates an entity with a [Camera Component](/user-manual/editor/scenes/components/camera) in a single step:
 
 ![Camera creation](/img/user-manual/graphics/cameras/camera-create.png)
 
-## Orthographic vs Perspective Projection
+All camera properties can then be edited in the Inspector.
 
-Cameras can have one of two types of projection: orthographic or perspective. Orthographic cameras define a parallel projection and are often used for 2D or isometric games.
+</TabItem>
+<TabItem value="react" label="React">
 
-![Orthographic camera](/img/user-manual/graphics/cameras/camera-orthographic.png)
+```jsx
+<Entity name="camera" position={[0, 5, 10]}>
+  <Camera clearColor="#4d4db3" />
+</Entity>
+```
 
-More commonly used is the perspective projection. It more closely mimics how our eyes or cameras work.
+See the [`<Camera/>` component reference](/user-manual/react/api/camera) for all available props.
 
-![Perspective camera](/img/user-manual/graphics/cameras/camera-perspective.png)
+</TabItem>
+<TabItem value="web-components" label="Web Components">
 
-## Controlling the Viewport
+```html
+<pc-entity name="camera" position="0 5 10">
+  <pc-camera clear-color="0.3 0.3 0.7 1"></pc-camera>
+</pc-entity>
+```
 
-By default, a camera will render to the full width and height of its render target. However, there are circumstances where you might want to change this behavior. For example, perhaps you are writing a game that has a local multiplayer mode that requires split-screen rendering to show each player's viewpoint.
+See the [`<pc-camera>` tag reference](/user-manual/web-components/tags/pc-camera) for all available attributes.
 
-For 2-player horizontal split screen, you would create two cameras and configure their viewports as follows:
+</TabItem>
+</Tabs>
 
-![Horizontal splitscreen](/img/user-manual/graphics/cameras/camera-horizontal-splitscreen.png)
+## In This Section
 
-And for vertical split screen, you would configure the viewports as follows:
+* [Projection](projection.md) — perspective vs orthographic projection, field of view, clip planes and frustum culling.
+* [Clearing](clearing.md) — set the background color, make the canvas transparent, or disable clearing.
+* [Tone Mapping & Exposure](tone-mapping.md) — map HDR scene lighting to your display, with optional physical exposure controls.
+* [Multiple Cameras](multiple-cameras.md) — compose views with priorities, viewports, layers and render targets.
+* [Camera Controls](camera-controls.md) — add orbit, fly and first-person navigation with the engine's ready-made script.
+* [Screen and World Coordinates](screen-and-world.md) — convert between 2D screen positions and 3D world positions.
+* [Scene Picker](scene-picker.md) — accurately select the objects under a screen coordinate.
+* [Depth Layer](depth-layer.md) — give shaders access to the scene's color and depth buffers.
 
-![Vertical splitscreen](/img/user-manual/graphics/cameras/camera-vertical-splitscreen.png)
+## Going Further
+
+* **Post-processing** — bloom, depth of field, SSAO, TAA, vignette and more are applied per camera. See [Post Effects](/user-manual/graphics/posteffects/).
+* **AR and VR** — a camera can drive an immersive WebXR session via [`startXr()`](https://api.playcanvas.com/engine/classes/CameraComponent.html#startxr). See the [XR section](/user-manual/xr/).
+* **Per-camera fog** — override the scene's fog settings on an individual camera with [`fog`](https://api.playcanvas.com/engine/classes/CameraComponent.html#fog).
+* **Custom projections** — supply [`calculateProjection`](https://api.playcanvas.com/engine/classes/CameraComponent.html#calculateprojection) and [`calculateTransform`](https://api.playcanvas.com/engine/classes/CameraComponent.html#calculatetransform) callbacks for advanced effects such as oblique projections and planar reflections.
+* **Tutorials** — try [Camera Following a Path](/tutorials/camera-following-a-path) and [Orbit Camera](/tutorials/orbit-camera).

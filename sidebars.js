@@ -714,8 +714,14 @@ const sidebars = {
             id: 'user-manual/graphics/cameras/index',
           },
           items: [
-            'user-manual/graphics/cameras/depth-layer',
+            'user-manual/graphics/cameras/projection',
+            'user-manual/graphics/cameras/clearing',
+            'user-manual/graphics/cameras/tone-mapping',
+            'user-manual/graphics/cameras/multiple-cameras',
+            'user-manual/graphics/cameras/camera-controls',
+            'user-manual/graphics/cameras/screen-and-world',
             'user-manual/graphics/cameras/scene-picker',
+            'user-manual/graphics/cameras/depth-layer',
           ],
         },
         {
