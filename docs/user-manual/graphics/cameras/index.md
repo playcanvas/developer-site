@@ -1,6 +1,6 @@
 ---
 title: Cameras
-description: Create cameras, control how they clear the screen, and explore projection, tone mapping, multi-camera rendering, and camera controls.
+description: Create cameras and explore projection, tone mapping, multi-camera rendering, camera controls, and coordinate conversion.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -61,20 +61,6 @@ See the [`<pc-camera>` tag reference](/user-manual/web-components/tags/pc-camera
 
 </TabItem>
 </Tabs>
-
-## Clearing the Render Target {#clearing}
-
-Before a camera renders the scene, it clears its render target. You can control what gets cleared and to what color:
-
-```javascript
-camera.camera.clearColor = new pc.Color(0, 0, 0);
-
-camera.camera.clearColorBuffer = true;   // clear the color buffer (default: true)
-camera.camera.clearDepthBuffer = true;   // clear the depth buffer (default: true)
-camera.camera.clearStencilBuffer = true; // clear the stencil buffer (default: true)
-```
-
-If your scene has a skybox, it covers the clear color entirely. Disabling the clear flags becomes useful when stacking several cameras on top of each other — see [Multiple Cameras](multiple-cameras.md#camera-stacking).
 
 ## In This Section
 

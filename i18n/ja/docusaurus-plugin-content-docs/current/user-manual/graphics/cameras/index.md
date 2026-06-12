@@ -1,6 +1,6 @@
 ---
 title: カメラ
-description: カメラの作成、画面クリアの制御に加え、投影、トーンマッピング、マルチカメラレンダリング、カメラコントロールを解説します。
+description: カメラの作成に加え、投影、トーンマッピング、マルチカメラレンダリング、カメラコントロール、座標変換を解説します。
 ---
 
 import Tabs from '@theme/Tabs';
@@ -61,20 +61,6 @@ camera.lookAt(0, 0, 0);
 
 </TabItem>
 </Tabs>
-
-## レンダーターゲットのクリア {#clearing}
-
-カメラはシーンをレンダリングする前に、レンダーターゲットをクリアします。何をどの色でクリアするかは制御できます:
-
-```javascript
-camera.camera.clearColor = new pc.Color(0, 0, 0);
-
-camera.camera.clearColorBuffer = true;   // カラーバッファをクリア（デフォルト: true）
-camera.camera.clearDepthBuffer = true;   // 深度バッファをクリア（デフォルト: true）
-camera.camera.clearStencilBuffer = true; // ステンシルバッファをクリア（デフォルト: true）
-```
-
-シーンにスカイボックスがある場合、クリアカラーは完全に覆われます。クリアフラグの無効化は、複数のカメラを重ねて描画する際に役立ちます。詳細は[複数のカメラ](multiple-cameras.md#camera-stacking)を参照してください。
 
 ## このセクションの内容
 
