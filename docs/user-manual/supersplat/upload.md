@@ -31,7 +31,7 @@ Drag and drop, or pick from your filesystem. The dialog accepts:
 |--------|----------------|---------------------|
 | **PLY** | `.ply` | Starts with a PLY header and declares an ASCII or binary format. |
 | **SOG** | `.sog` | Contains one `meta.json` file and the expected SOG WebP payload files. |
-| **LOD streaming bundle (SSOG)** | `.zip` | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](/user-manual/supersplat/streaming). |
+| **Streamed SOG bundle (SSOG)** | `.zip` | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](/user-manual/supersplat/streaming). |
 | **LCC** | `.zip` | Contains exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
 
 The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, `.splat`, or `.spz` files directly; use the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform CLI](/user-manual/splat-transform/) to convert those first.

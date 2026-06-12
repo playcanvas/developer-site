@@ -47,7 +47,7 @@ flowchart TB
 | **[Viewer](viewer/)** | シーンページとEditorのHTMLエクスポートを動かしているオープンソースのウェブビューア。自分のページに埋め込むか、セルフホストできます。 | npm `@playcanvas/supersplat-viewer`、[GitHub](https://github.com/playcanvas/supersplat-viewer) |
 | **[Convert](convert)** | [splat-transform](/user-manual/splat-transform/) CLIのウェブフロントエンド：ブラウザ上で形式変換、トランスフォーム、フィルタを実行します。 | [superspl.at/convert](https://superspl.at/convert) |
 
-舞台裏では、公開されたすべてのスプラットはSOG形式に圧縮され、大きなスプラット（100万ガウシアンを超えるもの）は、どのデバイスでも高速に読み込めるよう自動的にLODストリーミングされます — [ストリーミングとパフォーマンス](streaming)を参照してください。
+舞台裏では、公開されたすべてのスプラットはSOG形式に圧縮され、大きなスプラット（100万ガウシアンを超えるもの）は、どのデバイスでも高速に読み込めるよう自動的にStreamed SOGへ変換されます — [ストリーミングとパフォーマンス](streaming)を参照してください。
 
 ## オープンソース vs ホスト型
 

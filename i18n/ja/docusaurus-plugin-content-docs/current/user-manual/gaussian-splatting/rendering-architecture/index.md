@@ -3,7 +3,7 @@ title: スプラットレンダリングアーキテクチャ
 description: "PlayCanvasがGaussian splatsをレンダリングする仕組み：ワークバッファパイプライン、コンポーネント間のグローバルソート、高度な機能へのアクセスです。"
 ---
 
-PlayCanvasは、すべてのGSplatコンポーネントのすべてのスプラットを一緒にソートする共有パイプラインを通じてGaussian splatsをレンダリングします。このグローバルソートにより、シーン全体で正しいレンダリング順序が保証され、プロシージャルスプラット、LODストリーミング、GPUベースのスプラット処理などの高度な機能へのアクセスが提供されます。
+PlayCanvasは、すべてのGSplatコンポーネントのすべてのスプラットを一緒にソートする共有パイプラインを通じてGaussian splatsをレンダリングします。このグローバルソートにより、シーン全体で正しいレンダリング順序が保証され、プロシージャルスプラット、Streamed SOG、GPUベースのスプラット処理などの高度な機能へのアクセスが提供されます。
 
 ## グローバルソート
 
@@ -43,7 +43,7 @@ flowchart LR
 
 GSplatリソースはスプラットのソースデータです。2つの形式があります：
 
-1. **ロードされたスプラット**：ファイル（`.ply`、`.sog`）からインポートされるか、[LODストリーミング](/user-manual/gaussian-splatting/building/lod-streaming)経由でストリーミングされます
+1. **ロードされたスプラット**：ファイル（`.ply`、`.sog`）からインポートされるか、[Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming)経由でストリーミングされます
 2. **プロシージャルスプラット**：[GSplatContainer](/user-manual/gaussian-splatting/building/procedural-splats/)を使用してプログラムで作成されます
 
 各リソースは[データフォーマット](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format)に従ってGPUテクスチャにスプラットデータを格納します。
@@ -73,7 +73,7 @@ Global Sortingサンプルでは、すべてのスプラットを一緒にソー
 - **視覚品質の向上**：複数の重なり合うスプラットコンポーネントをレンダリングする際のアーティファクトを排除
 - **一貫したレンダリング**：カメラ位置に関係なく正しい深度ソートを維持
 - **より良いシーン構成**：多くのスプラットコンポーネントを持つ複雑なシーンを可能に
-- **高度な機能**：プロシージャルスプラット、LODストリーミング、GPU処理をアンロック
+- **高度な機能**：プロシージャルスプラット、Streamed SOG、GPU処理をアンロック
 
 ## 高度な機能
 
@@ -81,7 +81,7 @@ Global Sortingサンプルでは、すべてのスプラットを一緒にソー
 
 - [スプラットデータフォーマット](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format) - スプラットデータのカスタムテクスチャフォーマット
 - [プロシージャルスプラット](/user-manual/gaussian-splatting/building/procedural-splats/) - プログラムによるスプラットの作成
-- [LODストリーミング](/user-manual/gaussian-splatting/building/lod-streaming) - 動的な詳細レベルのロード
+- [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming) - 動的な詳細レベルのロード
 - [スプラット処理](/user-manual/gaussian-splatting/rendering-architecture/splat-processing) - GPUベースのスプラット操作
 
 ## 関連項目

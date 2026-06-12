@@ -1,49 +1,49 @@
 ---
-title: LOD Streaming
-description: "LOD streaming for large splat scenes: octree layout, generating lod-meta data, examples, and performance guidance."
+title: Streamed SOG
+description: "Streamed SOG for large splat scenes: spatial tree layout, generating lod-meta data, examples, and performance guidance."
 ---
 
-LOD (Level of Detail) Streaming enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail based on the camera's distance. This feature dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
+Streamed SOG enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail (LOD) based on the camera's distance. This dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
 
 ## How It Works
 
-LOD streaming works by:
+Streamed SOG works by:
 
 1. Pre-generating multiple versions of your splat at different detail levels
-2. Organizing them into an octree structure for efficient streaming
+2. Organizing them into a spatial tree structure for efficient streaming
 3. Dynamically loading and unloading detail levels based on camera distance
 4. Rendering only the appropriate level of detail for each region of the scene
 
 This approach allows you to render massive splat scenes that would otherwise be impossible due to memory constraints.
 
-## Creating LOD Streaming Data
+## Creating Streamed SOG Data
 
-To use LOD streaming, you need to generate the streaming format — an octree-based `lod-meta.json` structure that organizes multiple levels of detail for efficient streaming. There are two ways to obtain the LOD levels:
+To use Streamed SOG, you need to generate the format — a `lod-meta.json` spatial tree structure that organizes multiple levels of detail for efficient streaming (see the [Streamed SOG Format Specification](/user-manual/gaussian-splatting/formats/streamed-sog)). There are two ways to obtain the LOD levels:
 
 - **Provide your own LOD levels** — supply multiple splat files at progressively lower detail (LOD 0 = highest detail, higher numbers = lower detail), for example produced during training or exported separately.
 - **Generate them with SplatTransform** — use [SplatTransform](/user-manual/splat-transform) to decimate a single high-quality splat into lower-detail levels, so you don't have to author them yourself.
 
-Once you have the LOD levels, SplatTransform bundles them into the streaming-optimized format. See the [Generating LOD Format](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions.
+Once you have the LOD levels, SplatTransform bundles them into the Streamed SOG format. See the [Generating Streamed SOG](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions.
 
 ## Live Examples
 
-Explore these live examples to see LOD streaming in action:
+Explore these live examples to see Streamed SOG in action:
 
-- LOD Streaming (Basic) - Demonstrates basic LOD streaming with different detail levels
+- Streamed SOG (Basic) - Demonstrates basic streaming with different detail levels
 
-<EngineExample id="gaussian-splatting/lod-streaming" title="LOD Streaming (Basic)" />
+<EngineExample id="gaussian-splatting/lod-streaming" title="Streamed SOG (Basic)" />
 
-- LOD Streaming with Spherical Harmonics - Shows LOD streaming with spherical harmonic data
+- Streamed SOG with Spherical Harmonics - Shows streaming with spherical harmonic data
 
-<EngineExample id="gaussian-splatting/lod-streaming-sh" title="LOD Streaming with Spherical Harmonics" />
+<EngineExample id="gaussian-splatting/lod-streaming-sh" title="Streamed SOG with Spherical Harmonics" />
 
-## Enabling LOD Streaming
+## Enabling Streamed SOG
 
-LOD streaming is enabled simply by loading a streaming LOD format asset (`lod-meta.json`) onto a GSplat component — no additional configuration is required.
+Streaming is enabled simply by loading a Streamed SOG asset (`lod-meta.json`) onto a GSplat component — no additional configuration is required.
 
 ## Controlling LOD Behavior
 
-You can control and fine-tune LOD streaming using the following APIs:
+You can control and fine-tune streaming behavior using the following APIs:
 
 ### Component-Level Control
 
@@ -54,7 +54,7 @@ entity.gsplat.lodBaseDistance = 10;  // distance for the first LOD transition
 entity.gsplat.lodMultiplier = 2;    // each successive threshold is 2x farther
 ```
 
-The default multiplier of 2 gives perceptually uniform transitions under perspective projection. The system also compensates for camera FOV automatically.
+The multiplier defaults to 3 (and is clamped to a minimum of 1.2) — each LOD transition happens at three times the previous distance. The system also compensates for camera FOV automatically.
 
 ### Scene-Level Control
 
@@ -73,32 +73,32 @@ const gsplatSettings = app.scene.gsplat;
 // (See API documentation for available properties)
 ```
 
-The most important scene-level setting for LOD streaming is the global splat budget, which automatically balances detail across all GSplat assets to hit a target splat count. See [Global Splat Budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget) in the Performance section for details.
+The most important scene-level setting for Streamed SOG is the global splat budget, which automatically balances detail across all GSplat assets to hit a target splat count. See [Global Splat Budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget) in the Performance section for details.
 
-## Using LOD Streaming in the Editor
+## Using Streamed SOG in the Editor
 
-Native support for LOD streaming in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable streaming LOD functionality in your Editor projects.
+Native support for Streamed SOG in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable Streamed SOG functionality in your Editor projects.
 
 ### Sample Project
 
-We've created a sample project that demonstrates how to use streaming LOD with Gaussian splats in the PlayCanvas Editor:
+We've created a sample project that demonstrates how to use Streamed SOG with Gaussian splats in the PlayCanvas Editor:
 
 **[Church of Saints Peter and Paul](https://playcanvas.com/project/1408991/overview/church-of-saints-peter-and-paul)**
 
-This project showcases a large-scale Gaussian splat scene with LOD streaming, including custom reveal shader effects.
+This project showcases a large-scale Gaussian splat scene with Streamed SOG, including custom reveal shader effects.
 
 ### Using the Streamed GSplat Script
 
-The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable LOD streaming:
+The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable Streamed SOG:
 
 #### Setup Steps
 
 1. Add the script to an Entity in your scene
-2. Configure the `splatUrl` property to point to an externally hosted LOD splat format file
+2. Configure the `splatUrl` property to point to an externally hosted Streamed SOG file
 
 :::note External Hosting
 
-Currently, the LOD splat data needs to be hosted externally (not as an Editor asset). This limitation will be removed in the future when native Editor support for streaming LOD format is added.
+Currently, the Streamed SOG data needs to be hosted externally (not as an Editor asset). This limitation will be removed in the future when native Editor support for Streamed SOG is added.
 
 :::
 
@@ -125,15 +125,15 @@ This demonstrates the flexibility of the PlayCanvas Engine's shader system for c
 
 ### Future Editor Improvements
 
-As native Editor support for streaming LOD is added, the following improvements are planned:
+As native Editor support for Streamed SOG is added, the following improvements are planned:
 
-- **Direct Asset Import**: Upload LOD splat files directly as Editor assets (no external hosting needed)
+- **Direct Asset Import**: Upload Streamed SOG files directly as Editor assets (no external hosting needed)
 - **Visual Configuration**: Configure LOD settings through the Editor UI instead of script properties
-- **Preview in Editor**: View and test streaming LOD behavior directly in the Editor viewport
+- **Preview in Editor**: View and test streaming behavior directly in the Editor viewport
 
 ## Benefits
 
-- **Better Performance**: LOD streaming reduces memory usage and improves rendering performance for large scenes
+- **Better Performance**: Streamed SOG reduces memory usage and improves rendering performance for large scenes
 - **Scalability**: Enables rendering of much larger Gaussian splat scenes by dynamically loading appropriate detail levels
 - **Flexibility**: Provides fine-grained control over LOD distances and streaming behavior
 - **Optimized Loading**: Only loads the data needed for the current view
@@ -143,6 +143,7 @@ As native Editor support for streaming LOD is added, the following improvements 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
 - [SplatTransform CLI Tool](/user-manual/splat-transform)
-- [Generating LOD Format](/user-manual/splat-transform#generating-lod-format)
+- [Generating Streamed SOG](/user-manual/splat-transform#generating-lod-format)
+- [Streamed SOG Format Specification](/user-manual/gaussian-splatting/formats/streamed-sog)
 - [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
 - [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)
