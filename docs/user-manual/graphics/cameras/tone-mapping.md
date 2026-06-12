@@ -12,12 +12,12 @@ Lighting calculations happen in high dynamic range: the intensity of a pixel can
 
 The available tone mapping curves are:
 
-* `TONEMAP_LINEAR` — no compression; bright values simply clip at white. The default.
-* `TONEMAP_FILMIC` — a classic filmic curve with gentle roll-off in the highlights.
-* `TONEMAP_HEJL` — a punchy, contrasty filmic approximation.
-* `TONEMAP_ACES` — the Academy Color Encoding System curve, widely used for cinematic, photorealistic rendering.
-* `TONEMAP_ACES2` — a variant of ACES with a different balance of contrast and saturation.
-* `TONEMAP_NEUTRAL` — compresses highlights while keeping hue and saturation shifts minimal; a good choice when accurate colors matter (e.g. product configurators).
+* [`TONEMAP_LINEAR`](https://api.playcanvas.com/engine/variables/TONEMAP_LINEAR.html) — no compression; bright values simply clip at white. The default.
+* [`TONEMAP_FILMIC`](https://api.playcanvas.com/engine/variables/TONEMAP_FILMIC.html) — a classic filmic curve with gentle roll-off in the highlights.
+* [`TONEMAP_HEJL`](https://api.playcanvas.com/engine/variables/TONEMAP_HEJL.html) — a punchy, contrasty filmic approximation.
+* [`TONEMAP_ACES`](https://api.playcanvas.com/engine/variables/TONEMAP_ACES.html) — the Academy Color Encoding System curve, widely used for cinematic, photorealistic rendering.
+* [`TONEMAP_ACES2`](https://api.playcanvas.com/engine/variables/TONEMAP_ACES2.html) — a variant of ACES with a different balance of contrast and saturation.
+* [`TONEMAP_NEUTRAL`](https://api.playcanvas.com/engine/variables/TONEMAP_NEUTRAL.html) — compresses highlights while keeping hue and saturation shifts minimal; a good choice when accurate colors matter (e.g. product configurators).
 
 For physically based scenes with HDR lighting, `TONEMAP_ACES` or `TONEMAP_NEUTRAL` are usually the best starting points.
 
@@ -67,8 +67,8 @@ When post-processing is active via [CameraFrame](/user-manual/graphics/posteffec
 
 After tone mapping, the camera's output is gamma-encoded for display on standard sRGB screens. This is controlled by `gammaCorrection`:
 
-* `GAMMA_SRGB` — output is encoded for sRGB displays. The default and recommended setting for all normal rendering.
-* `GAMMA_NONE` — output remains in linear space. This is only intended for advanced HDR pipelines where the output is rendered to an intermediate HDR texture that is tone mapped and gamma-corrected in a subsequent pass. On a standard display, it makes the scene appear too dark.
+* [`GAMMA_SRGB`](https://api.playcanvas.com/engine/variables/GAMMA_SRGB.html) — output is encoded for sRGB displays. The default and recommended setting for all normal rendering.
+* [`GAMMA_NONE`](https://api.playcanvas.com/engine/variables/GAMMA_NONE.html) — output remains in linear space. This is only intended for advanced HDR pipelines where the output is rendered to an intermediate HDR texture that is tone mapped and gamma-corrected in a subsequent pass. On a standard display, it makes the scene appear too dark.
 
 To understand why rendering is performed in linear space and gamma-encoded at the end, see [Linear Workflow](/user-manual/graphics/linear-workflow/).
 

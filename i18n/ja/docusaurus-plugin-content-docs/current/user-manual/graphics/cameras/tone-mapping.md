@@ -12,12 +12,12 @@ import TabItem from '@theme/TabItem';
 
 利用可能なトーンマッピングカーブは次のとおりです:
 
-* `TONEMAP_LINEAR` — 圧縮なし。明るい値は単純に白でクリップされます。デフォルトです。
-* `TONEMAP_FILMIC` — ハイライトが緩やかにロールオフする、クラシックなフィルミックカーブ。
-* `TONEMAP_HEJL` — パンチが効いてコントラストの強いフィルミック近似。
-* `TONEMAP_ACES` — Academy Color Encoding Systemのカーブで、映画的でフォトリアルなレンダリングに広く使用されています。
-* `TONEMAP_ACES2` — コントラストと彩度のバランスが異なるACESのバリエーション。
-* `TONEMAP_NEUTRAL` — 色相と彩度の変化を最小限に抑えながらハイライトを圧縮します。正確な色再現が重要な場合（製品コンフィギュレーターなど）に適しています。
+* [`TONEMAP_LINEAR`](https://api.playcanvas.com/engine/variables/TONEMAP_LINEAR.html) — 圧縮なし。明るい値は単純に白でクリップされます。デフォルトです。
+* [`TONEMAP_FILMIC`](https://api.playcanvas.com/engine/variables/TONEMAP_FILMIC.html) — ハイライトが緩やかにロールオフする、クラシックなフィルミックカーブ。
+* [`TONEMAP_HEJL`](https://api.playcanvas.com/engine/variables/TONEMAP_HEJL.html) — パンチが効いてコントラストの強いフィルミック近似。
+* [`TONEMAP_ACES`](https://api.playcanvas.com/engine/variables/TONEMAP_ACES.html) — Academy Color Encoding Systemのカーブで、映画的でフォトリアルなレンダリングに広く使用されています。
+* [`TONEMAP_ACES2`](https://api.playcanvas.com/engine/variables/TONEMAP_ACES2.html) — コントラストと彩度のバランスが異なるACESのバリエーション。
+* [`TONEMAP_NEUTRAL`](https://api.playcanvas.com/engine/variables/TONEMAP_NEUTRAL.html) — 色相と彩度の変化を最小限に抑えながらハイライトを圧縮します。正確な色再現が重要な場合（製品コンフィギュレーターなど）に適しています。
 
 HDRライティングを使用する物理ベースのシーンでは、通常 `TONEMAP_ACES` または `TONEMAP_NEUTRAL` が最適な出発点です。
 
@@ -67,8 +67,8 @@ import { TONEMAP_ACES } from 'playcanvas';
 
 トーンマッピングの後、カメラの出力は標準的なsRGBディスプレイ向けにガンマエンコードされます。これは `gammaCorrection` で制御します:
 
-* `GAMMA_SRGB` — 出力はsRGBディスプレイ向けにエンコードされます。デフォルトであり、通常のレンダリングすべてに推奨される設定です。
-* `GAMMA_NONE` — 出力はリニア空間のままになります。これは、出力を中間HDRテクスチャにレンダリングし、後続のパスでトーンマッピングとガンマ補正を行う高度なHDRパイプラインのみを対象としています。標準的なディスプレイでは、シーンが暗く見えすぎてしまいます。
+* [`GAMMA_SRGB`](https://api.playcanvas.com/engine/variables/GAMMA_SRGB.html) — 出力はsRGBディスプレイ向けにエンコードされます。デフォルトであり、通常のレンダリングすべてに推奨される設定です。
+* [`GAMMA_NONE`](https://api.playcanvas.com/engine/variables/GAMMA_NONE.html) — 出力はリニア空間のままになります。これは、出力を中間HDRテクスチャにレンダリングし、後続のパスでトーンマッピングとガンマ補正を行う高度なHDRパイプラインのみを対象としています。標準的なディスプレイでは、シーンが暗く見えすぎてしまいます。
 
 レンダリングがリニア空間で行われ、最後にガンマエンコードされる理由については、[リニアワークフロー](/user-manual/graphics/linear-workflow/)を参照してください。
 

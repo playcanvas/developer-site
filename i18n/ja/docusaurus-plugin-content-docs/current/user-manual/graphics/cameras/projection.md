@@ -81,7 +81,7 @@ camera.camera.farClip = 500;
 
 ## アスペクト比 {#aspect-ratio}
 
-デフォルトでは、カメラのアスペクト比はレンダーターゲットと[ビューポート](multiple-cameras.md#viewports)から毎フレーム自動的に計算されるため（`aspectRatioMode` が `pc.ASPECT_AUTO`）、キャンバスのサイズが変わっても画像が引き伸ばされることはありません。非正方形ピクセルのディスプレイ向けにレンダリングするなどの特殊なケースでは、`aspectRatioMode` を `pc.ASPECT_MANUAL` に設定し、`aspectRatio` を自分で指定してください。
+デフォルトでは、カメラのアスペクト比はレンダーターゲットと[ビューポート](multiple-cameras.md#viewports)から毎フレーム自動的に計算されるため（`aspectRatioMode` が [`ASPECT_AUTO`](https://api.playcanvas.com/engine/variables/ASPECT_AUTO.html)）、キャンバスのサイズが変わっても画像が引き伸ばされることはありません。非正方形ピクセルのディスプレイ向けにレンダリングするなどの特殊なケースでは、`aspectRatioMode` を [`ASPECT_MANUAL`](https://api.playcanvas.com/engine/variables/ASPECT_MANUAL.html) に設定し、`aspectRatio` を自分で指定してください。
 
 ## フラスタムカリング {#frustum-culling}
 

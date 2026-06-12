@@ -81,7 +81,7 @@ The ratio between the far and near clip planes determines how depth buffer preci
 
 ## Aspect Ratio {#aspect-ratio}
 
-By default, a camera's aspect ratio is computed automatically every frame from its render target and [viewport](multiple-cameras.md#viewports) (`aspectRatioMode` of `pc.ASPECT_AUTO`), so the image is never stretched as the canvas resizes. For special cases — such as rendering for a display with non-square pixels — set `aspectRatioMode` to `pc.ASPECT_MANUAL` and assign `aspectRatio` yourself.
+By default, a camera's aspect ratio is computed automatically every frame from its render target and [viewport](multiple-cameras.md#viewports) (`aspectRatioMode` of [`ASPECT_AUTO`](https://api.playcanvas.com/engine/variables/ASPECT_AUTO.html)), so the image is never stretched as the canvas resizes. For special cases — such as rendering for a display with non-square pixels — set `aspectRatioMode` to [`ASPECT_MANUAL`](https://api.playcanvas.com/engine/variables/ASPECT_MANUAL.html) and assign `aspectRatio` yourself.
 
 ## Frustum Culling {#frustum-culling}
 
