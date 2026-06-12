@@ -74,23 +74,9 @@ A related property, `scissorRect`, clips rendering to a rectangle in the same no
 
 Each camera renders only the [layers](/user-manual/graphics/layers) listed in its `layers` property, so different cameras can see entirely different subsets of the scene. Typical uses include a UI camera that renders only a UI layer over the game, a minimap camera that skips effects layers, and first-person weapon rendering. See the [Camera Model Masking tutorial](/tutorials/camera-model-masking) for a worked example.
 
-## Clearing the Render Target {#clearing}
-
-Before a camera renders the scene, it clears its render target. You can control what gets cleared and to what color:
-
-```javascript
-camera.camera.clearColor = new pc.Color(0, 0, 0);
-
-camera.camera.clearColorBuffer = true;   // clear the color buffer (default: true)
-camera.camera.clearDepthBuffer = true;   // clear the depth buffer (default: true)
-camera.camera.clearStencilBuffer = true; // clear the stencil buffer (default: true)
-```
-
-If your scene has a skybox, it covers the clear color entirely. Disabling the clear flags is the building block for camera stacking, described next.
-
 ## Camera Stacking {#camera-stacking}
 
-When one camera renders on top of another — a picture-in-picture overlay, or a full-screen camera drawing a different set of layers — the later camera (higher `priority`) must not wipe out the earlier camera's image. Disable its clear flags as appropriate:
+When one camera renders on top of another — a picture-in-picture overlay, or a full-screen camera drawing a different set of layers — the later camera (higher `priority`) must not wipe out the earlier camera's image. Disable its [clear flags](clearing.md) as appropriate:
 
 ```javascript
 // Render an overlay camera on top of the main view, in the bottom-right corner

@@ -65,6 +65,7 @@ See the [`<pc-camera>` tag reference](/user-manual/web-components/tags/pc-camera
 ## In This Section
 
 * [Projection](projection.md) — perspective vs orthographic projection, field of view, clip planes and frustum culling.
+* [Clearing](clearing.md) — set the background color, make the canvas transparent, or disable clearing.
 * [Tone Mapping & Exposure](tone-mapping.md) — map HDR scene lighting to your display, with optional physical exposure controls.
 * [Multiple Cameras](multiple-cameras.md) — compose views with priorities, viewports, layers and render targets.
 * [Camera Controls](camera-controls.md) — add orbit, fly and first-person navigation with the engine's ready-made script.

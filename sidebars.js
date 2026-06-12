@@ -715,6 +715,7 @@ const sidebars = {
           },
           items: [
             'user-manual/graphics/cameras/projection',
+            'user-manual/graphics/cameras/clearing',
             'user-manual/graphics/cameras/tone-mapping',
             'user-manual/graphics/cameras/multiple-cameras',
             'user-manual/graphics/cameras/camera-controls',
