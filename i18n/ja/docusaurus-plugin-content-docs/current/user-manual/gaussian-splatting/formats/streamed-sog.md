@@ -59,7 +59,7 @@ interface Node {
     min: [number, number, number];   // AABBの最小値 [x, y, z]
     max: [number, number, number];   // AABBの最大値 [x, y, z]
   };
-  children?: Node[];           // 内部ノード: 子ノードの配列
+  children?: [Node, Node];     // 内部ノード: 常にちょうど2つの子ノード
   lods?: {
     [lodLevel: string]: {      // リーフノード: LODレベル → スプラット範囲のマップ
       file: number;            // filenamesへのインデックス
@@ -74,7 +74,7 @@ interface Node {
 
 ## 3. 空間ツリー
 
-`tree` はシーンの二分空間分割です。すべてのノードは軸並行境界ボックス（AABB）を持ち、**内部ノード**（`children` を持つ）または**リーフノード**（`lods` を持つ）のいずれかです。両方を持つことはありません。
+`tree` はシーンの二分空間分割です。すべてのノードは軸並行境界ボックス（AABB）を持ち、**内部ノード**（`children` を持つ。常にちょうど2つ）または**リーフノード**（`lods` を持つ）のいずれかです。両方を持つことはありません。
 
 * リーフの `bound` は、割り当てられたすべてのGaussianの完全な広がりを囲みます。Gaussianの中心位置だけでなく、回転・スケールされた楕円体で拡張された範囲です。
 * 内部ノードの `bound` は、子ノードのboundの和集合です。

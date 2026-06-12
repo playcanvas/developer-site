@@ -6,13 +6,13 @@ sidebar_label: Streamed SOG
 
 **Streamed SOG** splits a Gaussian splat scene into spatial chunks at multiple levels of detail (LOD). A viewer walks a spatial tree to decide which chunks and detail levels to load for the current camera, allowing very large scenes (tens of millions of Gaussians) to load progressively and stay interactive.
 
-You can create streamed SOG datasets with **[SplatTransform](https://github.com/playcanvas/splat-transform)** — see [Generating Streamed SOG](/user-manual/splat-transform/#generating-lod-format) for a step-by-step walkthrough. Individual chunks are standard [SOG](./sog.md) datasets.
+You can create Streamed SOG datasets with **[SplatTransform](https://github.com/playcanvas/splat-transform)** — see [Generating Streamed SOG](/user-manual/splat-transform/#generating-lod-format) for a step-by-step walkthrough. Individual chunks are standard [SOG](./sog.md) datasets.
 
 This document is the format specification. It describes **version 1**.
 
 ## 1. File set
 
-A streamed SOG dataset is a directory containing a single index file plus one subdirectory per chunk:
+A Streamed SOG dataset is a directory containing a single index file plus one subdirectory per chunk:
 
 ```none
 scene/
@@ -59,7 +59,7 @@ interface Node {
     min: [number, number, number];   // AABB minimum [x, y, z]
     max: [number, number, number];   // AABB maximum [x, y, z]
   };
-  children?: Node[];           // Interior node: array of child nodes
+  children?: [Node, Node];     // Interior node: exactly two child nodes
   lods?: {
     [lodLevel: string]: {      // Leaf node: map of LOD level → splat range
       file: number;            // Index into filenames
@@ -74,7 +74,7 @@ interface Node {
 
 ## 3. The spatial tree
 
-`tree` is a binary spatial subdivision of the scene. Every node carries an axis-aligned bounding box and is either an **interior node** (has `children`) or a **leaf node** (has `lods`) — never both.
+`tree` is a binary spatial subdivision of the scene. Every node carries an axis-aligned bounding box and is either an **interior node** (has `children`, always exactly two) or a **leaf node** (has `lods`) — never both.
 
 * A leaf's `bound` encloses the full extents of every Gaussian assigned to it — each Gaussian's position expanded by its rotated, scaled ellipsoid — not just the Gaussian centers.
 * An interior node's `bound` is the union of its children's bounds.
