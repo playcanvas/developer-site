@@ -59,7 +59,7 @@ import { TONEMAP_ACES } from 'playcanvas';
 
 :::note
 
-When post-processing is active via [CameraFrame](/user-manual/graphics/posteffects/), tone mapping is applied by the post-processing pipeline instead — set it on the `CameraFrame`'s rendering options rather than the camera.
+When post-processing is active via [CameraFrame](/user-manual/graphics/posteffects/cameraframe/), tone mapping is applied by the post-processing pipeline instead — set it on the `CameraFrame`'s rendering options rather than the camera.
 
 :::
 

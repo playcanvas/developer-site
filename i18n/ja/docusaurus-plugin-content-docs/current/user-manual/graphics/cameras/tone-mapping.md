@@ -59,7 +59,7 @@ import { TONEMAP_ACES } from 'playcanvas';
 
 :::note
 
-[CameraFrame](/user-manual/graphics/posteffects/) によるポストプロセッシングが有効な場合、トーンマッピングはポストプロセッシングパイプライン側で適用されます。カメラではなく `CameraFrame` のレンダリングオプションで設定してください。
+[CameraFrame](/user-manual/graphics/posteffects/cameraframe/) によるポストプロセッシングが有効な場合、トーンマッピングはポストプロセッシングパイプライン側で適用されます。カメラではなく `CameraFrame` のレンダリングオプションで設定してください。
 
 :::
 
