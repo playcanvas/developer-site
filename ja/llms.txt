@@ -1,669 +1,727 @@
 # PlayCanvas Developer Documentation
 
-> PlayCanvas is an open-source WebGL/WebGPU 3D game engine for creating interactive experiences and games that run in the browser.
+> PlayCanvas is an open-source WebGL/WebGPU 3D engine for building games, configurators, and interactive 3D experiences that run in any browser. It can be used via the browser-based PlayCanvas Editor, as a standalone engine from npm/CDN, through React components, or through Web Components.
 
-This file provides a structured overview of the PlayCanvas documentation.
-For the complete documentation content, see: https://developer.playcanvas.com/llms-full.txt
+This file is a structured overview of the PlayCanvas developer documentation.
+Complete documentation content: https://developer.playcanvas.com/llms-full.txt
+Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 599
+Engine Version: 2.19.6
+Total Documents: 452
 Generated: 2026-06-12
+
+## Instructions for Large Language Models
+
+When generating PlayCanvas code, follow these guidelines:
+
+### 1. Identify Which of the Four Workflows the User Is In
+
+PlayCanvas is used in four distinct ways. Do not mix patterns between them:
+
+1. **PlayCanvas Editor** (browser-based editor at https://playcanvas.com): gameplay code is written as scripts attached to entities. See https://developer.playcanvas.com/user-manual/editor/
+2. **Engine only** (code-first): `npm install playcanvas` or load from a CDN, then build the scene programmatically. See https://developer.playcanvas.com/user-manual/engine/
+3. **React**: `npm install @playcanvas/react playcanvas` for declarative scenes in JSX. See https://developer.playcanvas.com/user-manual/react/
+4. **Web Components**: `npm install playcanvas @playcanvas/web-components` for declarative scenes in plain HTML. See https://developer.playcanvas.com/user-manual/web-components/
+
+### 2. Editor Scripting: ESM Scripts vs Classic Scripts
+
+There are two script formats. ESM scripts are the modern, recommended format. Never blend the two syntaxes in one file.
+
+WRONG - mixing classic and ESM patterns:
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Rotate extends Script {
+    // WRONG: classic-style attribute declaration does not exist on ESM scripts
+    static attributes = { speed: { type: 'number', default: 10 } };
+
+    initialize() {
+        // WRONG: classic 'attr:' change events are NOT supported by ESM scripts
+        this.on('attr:speed', () => {});
+    }
+}
+```
+
+CORRECT - ESM script (file extension MUST be `.mjs` for the Editor to recognize it):
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Rotate extends Script {
+    static scriptName = 'rotate';
+
+    /** @attribute */
+    speed = 10;
+
+    initialize() {
+        // setup
+    }
+
+    update(dt) {
+        this.entity.rotate(0, this.speed * dt, 0);
+    }
+}
+```
+
+CORRECT - classic script (legacy but fully supported, plain `.js` files):
+
+```javascript
+var Rotate = pc.createScript('rotate');
+
+Rotate.attributes.add('speed', { type: 'number', default: 10 });
+
+Rotate.prototype.initialize = function () {
+    // setup
+};
+
+Rotate.prototype.update = function (dt) {
+    this.entity.rotate(0, this.speed * dt, 0);
+};
+```
+
+Key rules:
+
+- ESM scripts require the `.mjs` file extension and a `static scriptName` property.
+- ESM script attributes are class fields tagged with a `/** @attribute */` JSDoc comment, not `attributes.add()`.
+- ESM scripts do not support classic `attr:[name]` change events.
+
+### 3. Engine-Only Usage (npm or CDN)
+
+CORRECT - ES Modules with an import map (no build step):
+
+```html
+<script type="importmap">
+    {
+        "imports": {
+            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas/+esm"
+        }
+    }
+</script>
+<script type="module">
+    import * as pc from 'playcanvas';
+
+    // create graphics device, app, entities...
+</script>
+```
+
+Or with a bundler: `npm install playcanvas` then `import * as pc from 'playcanvas'`.
+
+### 4. React Usage
+
+```jsx
+import { Application, Entity } from '@playcanvas/react';
+import { Camera, Light, Render } from '@playcanvas/react/components';
+
+const App = () => (
+    <Application>
+        <Entity name="camera" position={[4, 1, 4]}>
+            <Camera />
+        </Entity>
+        <Entity name="light" rotation={[45, 45, 0]}>
+            <Light type="directional" />
+        </Entity>
+        <Entity name="ball">
+            <Render type="sphere" />
+        </Entity>
+    </Application>
+);
+```
+
+Hooks (e.g. `useModel`, `useEnvAtlas`) are imported from `@playcanvas/react/hooks`.
+
+### 5. Web Components Usage
+
+```html
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 45 0">
+            <pc-light type="directional"></pc-light>
+        </pc-entity>
+        <pc-entity name="ball">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+Custom scripts attach to an entity via a `<pc-scripts>` element wrapping one `<pc-script>` element per script.
+
+### 6. Versions
+
+If the metadata at the top of this file includes an Engine Version line, generate code against that release. PlayCanvas Engine 2.x is the current major version; prefer current API names from https://api.playcanvas.com/engine/ over deprecated 1.x-era patterns.
 
 ## Recommended Entry Points
 
-- Getting Started: https://developer.playcanvas.com/user-manual/getting-started/
-- PlayCanvas Editor: https://developer.playcanvas.com/user-manual/editor/
-- PlayCanvas Engine: https://developer.playcanvas.com/user-manual/engine/
-- PlayCanvas React: https://developer.playcanvas.com/user-manual/react/
-- Web Components: https://developer.playcanvas.com/user-manual/web-components/
-- Scripting: https://developer.playcanvas.com/user-manual/scripting/
-- Gaussian Splatting: https://developer.playcanvas.com/user-manual/gaussian-splatting/
-- Graphics: https://developer.playcanvas.com/user-manual/graphics/
-- Physics: https://developer.playcanvas.com/user-manual/physics/
-- XR (VR/AR): https://developer.playcanvas.com/user-manual/xr/
+- [Getting Started](https://developer.playcanvas.com/user-manual/getting-started/): Learn the platform, make a first project, and find your workflow.
+- [PlayCanvas Editor](https://developer.playcanvas.com/user-manual/editor/): The collaborative browser-based editor for building scenes, assets, and games.
+- [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine/): Using the open-source engine standalone from npm or a CDN.
+- [PlayCanvas React](https://developer.playcanvas.com/user-manual/react/): Declarative 3D scenes with @playcanvas/react components and hooks.
+- [Web Components](https://developer.playcanvas.com/user-manual/web-components/): Declarative 3D scenes in plain HTML with @playcanvas/web-components.
+- [Scripting](https://developer.playcanvas.com/user-manual/scripting/): Script lifecycle, attributes, events, and the ESM vs classic script formats.
+- [Gaussian Splatting](https://developer.playcanvas.com/user-manual/gaussian-splatting/): Rendering 3D Gaussian splats, formats, and building splat applications.
+- [Graphics](https://developer.playcanvas.com/user-manual/graphics/): Cameras, lighting, materials, shaders, and post effects.
+- [Physics](https://developer.playcanvas.com/user-manual/physics/): Rigid bodies, collision, triggers, and forces with the ammo.js integration.
+- [XR (VR/AR)](https://developer.playcanvas.com/user-manual/xr/): WebXR-based virtual and augmented reality.
+
+## Essential API
+
+The full API reference lives at https://api.playcanvas.com. Engine classes follow the pattern `https://api.playcanvas.com/engine/classes/<ClassName>.html`.
+
+### Application & Scene
+
+- [AppBase](https://api.playcanvas.com/engine/classes/AppBase.html): Base application class - manages the update loop, component systems, and asset registry.
+- [Application](https://api.playcanvas.com/engine/classes/Application.html): Convenience application class for engine-only (standalone) projects.
+- [Entity](https://api.playcanvas.com/engine/classes/Entity.html): Scene-graph node that components attach to; provides transform methods.
+- [Scene](https://api.playcanvas.com/engine/classes/Scene.html): Scene-level rendering settings such as skybox, fog, and ambient light.
+
+### Scripting
+
+- [Script](https://api.playcanvas.com/engine/classes/Script.html): Base class for ESM scripts with initialize/update lifecycle methods.
+- [ScriptComponent](https://api.playcanvas.com/engine/classes/ScriptComponent.html): Manages the scripts attached to an entity.
+
+### Components
+
+- [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html): Renders the scene from the entity's viewpoint.
+- [LightComponent](https://api.playcanvas.com/engine/classes/LightComponent.html): Directional, omni, or spot light source.
+- [RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html): Renders meshes, including primitive shapes and imported models.
+- [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html): Collision volume for physics and trigger events.
+- [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html): Static, dynamic, or kinematic physics body.
+- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html): Animation state graph playback and blending.
+- [ScreenComponent](https://api.playcanvas.com/engine/classes/ScreenComponent.html): Root of a 2D screen-space or world-space UI hierarchy.
+- [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html): UI image, text, or group element.
+- [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html): Positional and non-positional audio playback.
+- [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html): Renders 3D Gaussian splats.
+
+### Graphics & Assets
+
+- [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html): The default PBR material with diffuse, metalness, gloss, and emissive channels.
+- [Texture](https://api.playcanvas.com/engine/classes/Texture.html): GPU texture resource.
+- [GraphicsDevice](https://api.playcanvas.com/engine/classes/GraphicsDevice.html): WebGL/WebGPU rendering interface.
+- [Asset](https://api.playcanvas.com/engine/classes/Asset.html): A reference to a loadable resource such as a model, texture, or audio file.
+- [AssetRegistry](https://api.playcanvas.com/engine/classes/AssetRegistry.html): Loads and looks up assets at runtime (available as app.assets).
+
+### Math
+
+- [Vec3](https://api.playcanvas.com/engine/classes/Vec3.html): 3-dimensional vector.
+- [Quat](https://api.playcanvas.com/engine/classes/Quat.html): Quaternion rotation.
+- [Color](https://api.playcanvas.com/engine/classes/Color.html): RGBA color.
+
+### Input
+
+- [Keyboard](https://api.playcanvas.com/engine/classes/Keyboard.html): Keyboard input (available as app.keyboard).
+- [Mouse](https://api.playcanvas.com/engine/classes/Mouse.html): Mouse input (available as app.mouse).
+
+### Other API References
+
+- [Engine API](https://api.playcanvas.com/engine/): Full engine reference - rendering, physics, animation, sound, XR.
+- [Editor API](https://api.playcanvas.com/editor/): Scripting the PlayCanvas Editor itself.
+- [Web Components API](https://api.playcanvas.com/web-components/): Custom element reference.
+- [PCUI](https://api.playcanvas.com/pcui/) / [PCUI Graph](https://api.playcanvas.com/pcui-graph/): UI component library for tools and node-based editors.
+- [Observer](https://api.playcanvas.com/observer/): Reactive data observation and binding.
+- [SplatTransform](https://api.playcanvas.com/splat-transform/): Library and CLI for converting and editing Gaussian splats.
 
 ## User Manual
 
+- [Welcome](https://developer.playcanvas.com/user-manual/): PlayCanvas developer documentation covering the Editor, Engine API, scripting, graphics, physics, XR, and more.
 ### Getting Started
-- https://developer.playcanvas.com/user-manual/getting-started/ - Getting Started
-- https://developer.playcanvas.com/user-manual/getting-started/community/ - Join the PlayCanvas Community
-- https://developer.playcanvas.com/user-manual/getting-started/made-with-playcanvas/ - Made with PlayCanvas
-- https://developer.playcanvas.com/user-manual/getting-started/open-source/ - Open Source Mission
-
-### Account Management
-- https://developer.playcanvas.com/user-manual/account-management/ - Account Management
-- https://developer.playcanvas.com/user-manual/account-management/billing/ - Billing
-- https://developer.playcanvas.com/user-manual/account-management/organizations/ - Organizations
-- https://developer.playcanvas.com/user-manual/account-management/organizations/creating/ - Creating Organizations
-- https://developer.playcanvas.com/user-manual/account-management/organizations/managing/ - Managing Organizations
-- https://developer.playcanvas.com/user-manual/account-management/user-accounts/ - User Accounts
-- https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation/ - Creating Your Account
-- https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings/ - Account Settings
-- https://developer.playcanvas.com/user-manual/account-management/user-accounts/user-home/ - User Home
+- [Getting Started](https://developer.playcanvas.com/user-manual/getting-started/): Choose the right PlayCanvas product for you -- Engine, Editor, React, or Web Components -- and start building interactive 3D web apps.
+- [Join the PlayCanvas Community](https://developer.playcanvas.com/user-manual/getting-started/community/): Connect with PlayCanvas developers on Discord, the Forum, Reddit, X, and LinkedIn for help, news, and inspiration.
+- [Made with PlayCanvas](https://developer.playcanvas.com/user-manual/getting-started/made-with-playcanvas/): Showcase of games and interactive experiences built with PlayCanvas by developers around the world.
+- [Open Source Mission](https://developer.playcanvas.com/user-manual/getting-started/open-source/): Learn about PlayCanvas open source projects on GitHub and how to contribute code, report bugs, and support the community.
 
 ### Engine
-- https://developer.playcanvas.com/user-manual/engine/ - PlayCanvas Engine
-- https://developer.playcanvas.com/user-manual/engine/migrations/ - Engine Migrations
-- https://developer.playcanvas.com/user-manual/engine/running-in-node/ - Running the Engine in Node.js
-- https://developer.playcanvas.com/user-manual/engine/standalone/ - Using the Engine Standalone
-- https://developer.playcanvas.com/user-manual/engine/supported-browsers/ - Supported Browsers
+- [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine/): Open source JavaScript/TypeScript 3D engine published on npm with full TypeScript declarations and comprehensive examples.
+- [Engine Migrations](https://developer.playcanvas.com/user-manual/engine/migrations/): Breaking changes and migration instructions for each major PlayCanvas Engine release.
+- [Running the Engine in Node.js](https://developer.playcanvas.com/user-manual/engine/running-in-node/): Use the PlayCanvas Engine server-side in Node.js for multiplayer servers, asset processing tools, and unit testing.
+- [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone/): Build PlayCanvas applications without the Editor using npm, a CDN, or a direct script include.
+- [Supported Browsers](https://developer.playcanvas.com/user-manual/engine/supported-browsers/): Minimum browser versions required for PlayCanvas including Chrome, Safari, Firefox, Edge, and Opera with WebGL 2.0 and WebGPU support.
 
 ### Editor
-- https://developer.playcanvas.com/user-manual/editor/ - PlayCanvas Editor
-- https://developer.playcanvas.com/user-manual/editor/assets/ - Assets
-- https://developer.playcanvas.com/user-manual/editor/assets/asset-panel/ - Assets Panel
-- https://developer.playcanvas.com/user-manual/editor/assets/asset-store/ - Asset Store
-- https://developer.playcanvas.com/user-manual/editor/assets/asset-store/sketchfab/ - Sketchfab
-- https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline/ - Asset Import Pipeline
-- https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline/import-hierarchy/ - Import Hierarchy
-- https://developer.playcanvas.com/user-manual/editor/assets/importing/ - Uploading and Importing
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/ - Asset Inspectors
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation/ - Animation
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio/ - Audio
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/css/ - CSS
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/cubemap/ - Cubemap
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/font/ - Font
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/gsplat/ - GSplat
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/html/ - HTML
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/json/ - JSON
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/material/ - Material
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/render/ - Render
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/shader/ - Shader
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/sprite/ - Sprite
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/template/ - Template
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/text/ - Text
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture-atlas/ - Texture Atlas
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture/ - Texture
-- https://developer.playcanvas.com/user-manual/editor/assets/inspectors/wasm/ - WASM Module
-- https://developer.playcanvas.com/user-manual/editor/assets/viewers/ - Asset Viewers
-- https://developer.playcanvas.com/user-manual/editor/editor-api/ - Editor API
-- https://developer.playcanvas.com/user-manual/editor/engine-compatibility/ - Engine Compatibility
-- https://developer.playcanvas.com/user-manual/editor/faq/ - Common Questions
-- https://developer.playcanvas.com/user-manual/editor/getting-started/ - Getting Started
-- https://developer.playcanvas.com/user-manual/editor/getting-started/workflow/ - The Editor Workflow
-- https://developer.playcanvas.com/user-manual/editor/getting-started/your-first-app/ - Your First App
-- https://developer.playcanvas.com/user-manual/editor/interface/ - Editor Interface
-- https://developer.playcanvas.com/user-manual/editor/interface/assets/ - Assets Panel
-- https://developer.playcanvas.com/user-manual/editor/interface/hierarchy/ - Hierarchy Panel
-- https://developer.playcanvas.com/user-manual/editor/interface/inspector/ - Inspector Panel
-- https://developer.playcanvas.com/user-manual/editor/interface/keyboard-shortcuts/ - Controls and Keyboard Shortcuts
-- https://developer.playcanvas.com/user-manual/editor/interface/launch-page/ - Launch Page
-- https://developer.playcanvas.com/user-manual/editor/interface/launch-page/custom-engine/ - Using a Custom Engine
-- https://developer.playcanvas.com/user-manual/editor/interface/launch-page/loading-screen/ - Loading Screen
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/ - Project Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/asset-import/ - Asset Import Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/batch-groups/ - Batch Group Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/editor/ - Editor Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/engine/ - Engine Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/input/ - Input Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/launch-page/ - Launch Page Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/layers/ - Layers Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/lightmapping/ - Lightmapping Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/localization/ - Localization Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/network/ - Network Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/physics/ - Physics Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/settings/rendering/ - Rendering Settings
-- https://developer.playcanvas.com/user-manual/editor/interface/toolbar/ - Toolbar
-- https://developer.playcanvas.com/user-manual/editor/interface/viewport/ - Viewport
-- https://developer.playcanvas.com/user-manual/editor/projects/ - Projects
-- https://developer.playcanvas.com/user-manual/editor/projects/backup-and-export/ - Backup and Export
-- https://developer.playcanvas.com/user-manual/editor/projects/creating/ - Creating Projects
-- https://developer.playcanvas.com/user-manual/editor/projects/dashboard/ - Project Dashboard
-- https://developer.playcanvas.com/user-manual/editor/projects/dev-logs/ - Dev Logs
-- https://developer.playcanvas.com/user-manual/editor/projects/downloading/ - Downloading Projects
-- https://developer.playcanvas.com/user-manual/editor/projects/ownership-transfers/ - Ownership and Transfers
-- https://developer.playcanvas.com/user-manual/editor/projects/settings/ - Project Settings
-- https://developer.playcanvas.com/user-manual/editor/projects/team-management/ - Team Management
-- https://developer.playcanvas.com/user-manual/editor/publishing/ - Publishing
-- https://developer.playcanvas.com/user-manual/editor/publishing/desktop/ - Desktop
-- https://developer.playcanvas.com/user-manual/editor/publishing/mobile/ - Mobile
-- https://developer.playcanvas.com/user-manual/editor/publishing/mobile/cordova/ - Apache Cordova
-- https://developer.playcanvas.com/user-manual/editor/publishing/mobile/gonative/ - GoNative
-- https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads/ - Playable Ads
-- https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads/fb-playable-ads/ - Facebook Playable Ad
-- https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/ - Snapchat Playable Ad
-- https://developer.playcanvas.com/user-manual/editor/publishing/web/ - Web
-- https://developer.playcanvas.com/user-manual/editor/publishing/web/communicating-webpage/ - Communication with web pages
-- https://developer.playcanvas.com/user-manual/editor/publishing/web/hosting-cdn/ - Hosting using a CDN
-- https://developer.playcanvas.com/user-manual/editor/publishing/web/hosting-heyvr/ - Hosting on heyVR.io
-- https://developer.playcanvas.com/user-manual/editor/publishing/web/playcanvas-hosting/ - PlayCanvas Hosting
-- https://developer.playcanvas.com/user-manual/editor/publishing/web/self-hosting-for-beginners/ - Self-hosting for beginners
-- https://developer.playcanvas.com/user-manual/editor/publishing/web/self-hosting/ - Self-hosting
-- https://developer.playcanvas.com/user-manual/editor/realtime-collaboration/ - Real-time Collaboration
-- https://developer.playcanvas.com/user-manual/editor/scenes/ - Working with Scenes
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/ - Components
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/anim/ - Anim
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/animation/ - Animation (Legacy)
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener/ - Audio Listener
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/button/ - Button
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/camera/ - Camera
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/collision/ - Collision
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/element/ - Element
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/gsplat/ - GSplat
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild/ - Layout Child
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup/ - Layout Group
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/light/ - Light
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/model/ - Model (Legacy)
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/particlesystem/ - Particle System
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/render/ - Render
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/rigidbody/ - Rigid Body
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/screen/ - Screen
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/script/ - Script
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollbar/ - Scrollbar
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview/ - Scroll View
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/sound/ - Sound
-- https://developer.playcanvas.com/user-manual/editor/scenes/components/sprite/ - Sprite
-- https://developer.playcanvas.com/user-manual/editor/scenes/loading-scenes/ - Loading Scenes
-- https://developer.playcanvas.com/user-manual/editor/scenes/managing-scenes/ - Managing Scenes
-- https://developer.playcanvas.com/user-manual/editor/scripting/ - Scripting
-- https://developer.playcanvas.com/user-manual/editor/scripting/code-editor/ - Code Editor
-- https://developer.playcanvas.com/user-manual/editor/scripting/hot-reloading/ - Hot Reloading
-- https://developer.playcanvas.com/user-manual/editor/scripting/import-maps/ - Import Maps
-- https://developer.playcanvas.com/user-manual/editor/scripting/loading-order/ - Script Loading Order
-- https://developer.playcanvas.com/user-manual/editor/scripting/managing-scripts/ - Managing Your Scripts
-- https://developer.playcanvas.com/user-manual/editor/scripting/vscode-extension/ - VS Code Extension
-- https://developer.playcanvas.com/user-manual/editor/templates/ - Templates
-- https://developer.playcanvas.com/user-manual/editor/templates/diff/ - Override Diff View
-- https://developer.playcanvas.com/user-manual/editor/templates/nested/ - Nested Templates
-- https://developer.playcanvas.com/user-manual/editor/troubleshooting/ - Troubleshooting
-- https://developer.playcanvas.com/user-manual/editor/version-control/ - Version Control
-- https://developer.playcanvas.com/user-manual/editor/version-control/branch-workflows/ - Branch Workflows
-- https://developer.playcanvas.com/user-manual/editor/version-control/branches/ - Branches
-- https://developer.playcanvas.com/user-manual/editor/version-control/changes/ - View Changes
-- https://developer.playcanvas.com/user-manual/editor/version-control/checkpoints/ - Checkpoints
-- https://developer.playcanvas.com/user-manual/editor/version-control/graph-view/ - Graph View
-- https://developer.playcanvas.com/user-manual/editor/version-control/item-history/ - Item History
-- https://developer.playcanvas.com/user-manual/editor/version-control/merging/ - Merging and resolving conflicts
+- [PlayCanvas Editor](https://developer.playcanvas.com/user-manual/editor/): PlayCanvas web Editor tour covering live testing, collaboration, version control, visual editing, scripting, asset workflow, and export to web or native.
+- [Assets](https://developer.playcanvas.com/user-manual/editor/assets/): Overview of PlayCanvas Editor asset management covering the Assets panel, uploads, import pipeline, inspectors, Asset Store, and dedicated viewers.
+- [Assets Panel](https://developer.playcanvas.com/user-manual/editor/assets/asset-panel/): Use the Assets Panel to organize folders, upload and create assets, open text assets in the Script Editor, and inspect properties.
+- [Asset Store](https://developer.playcanvas.com/user-manual/editor/assets/asset-store/): Browse the PlayCanvas Asset Store from the Editor, choose PlayCanvas Sketchfab or My Assets stores, search, filter, and import items into your project.
+- [Sketchfab](https://developer.playcanvas.com/user-manual/editor/assets/asset-store/sketchfab/): Connect your Sketchfab account to the Editor to authenticate and import models from the Sketchfab store without leaving PlayCanvas.
+- [Asset Import Pipeline](https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline/): Configure the server-side asset import process that converts source files to runtime formats, including related asset search, preload defaults, and texture import options.
+- [Import Hierarchy](https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline/import-hierarchy/): Enable Import Hierarchy so models import as editable entity trees with linked materials, textures, animations, and templates for scene composition.
+- [Uploading and Importing](https://developer.playcanvas.com/user-manual/editor/assets/importing/): Upload assets via drag and drop in the Editor, replace files by matching filename, and migrate older JSON model output to GLB in project settings.
+- [Asset Inspectors](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/): Reference for asset Inspector panels including shared header fields like preload and exclude plus links to each asset type inspector page.
+- [Animation](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation/): Preview animations on templates or models from the asset inspector, explore graph previews, and tune experimental animation import quality settings.
+- [Audio](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio/): Audio asset inspector for browser-supported sound formats with duration metadata and built-in playback controls to audition clips before use.
+- [CSS](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/css/): CSS assets store stylesheet code editable from the Editor; the inspector shows a read-only preview with no extra configurable fields.
+- [Cubemap](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/cubemap/): Build six-face cubemap assets for skyboxes and reflections by importing images, creating assets in the panel, and assigning faces in the Inspector.
+- [Font](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/font/): Font assets from TTF and similar formats convert to SDF atlases; configure intensity, character presets, ranges, and regenerate after edits.
+- [GSplat](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/gsplat/): GSplat asset inspector summarizes PLY or SOG splat data including format, splat count, spherical harmonics bands, and axis-aligned bounds metadata.
+- [HTML](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/html/): HTML assets hold page or partial markup editable from the Editor; the inspector provides a read-only formatted preview without extra properties.
+- [JSON](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/json/): JSON assets store structured configuration or game data; the inspector shows syntax-formatted previews without additional editable properties.
+- [Material](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/material/): Material inspector reference for PBR settings from texture transforms through lighting response maps and rendering parameters in collapsible sections.
+- [Render](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/render/): Render asset inspector documents read-only mesh statistics, vertex attributes, compression, and links back to the source container GLB asset.
+- [Shader](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/shader/): Shader assets hold GLSL from new asset or upload; edit in the Script Editor and view a read-only code preview in the Inspector.
+- [Sprite](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/sprite/): Sprite inspector configures pixels per unit, render modes for simple sliced or tiled 9-slice behavior, and the backing texture atlas reference.
+- [Template](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/template/): Template prefab inspector shows an interactive draggable 3D preview of the hierarchy without editable fields beyond standard asset metadata.
+- [Text](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/text/): Text assets store plain strings such as dialogue or config; the inspector displays a read-only content preview with no specialist properties.
+- [Texture Atlas](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture-atlas/): Texture Atlas assets define named frames with rectangles pivots and borders atop a texture plus shared texture settings for sprite workflows.
+- [Texture](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture/): Covers how images import into texture assets, format conversions and POT resizing, and Inspector fields for filtering, wrapping, mipmaps, and preview.
+- [WASM Module](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/wasm/): Wasm Module assets wire Emscripten binaries to matching glue and optional asm fallback scripts with naming requirements shown in the Inspector.
+- [Asset Viewers](https://developer.playcanvas.com/user-manual/editor/assets/viewers/): Open models and textures in separate viewer tabs to inspect hierarchies, morphs, animations, and texture details with the Model Viewer and Texture Tool.
+- [Editor API](https://developer.playcanvas.com/user-manual/editor/editor-api/): Beta Editor API examples using DevTools or Violentmonkey scripts to automate entities and extend UI atop the evolving open-source editor-api repository.
+- [Engine Compatibility](https://developer.playcanvas.com/user-manual/editor/engine-compatibility/): Engine V1 versus V2 coverage, switching with checkpoints, launcher toggles, and gamma tonemap viewport plus sRGB texture migration notes for scripts.
+- [Common Questions](https://developer.playcanvas.com/user-manual/editor/faq/): FAQ-style steps for adding components scripts materials lights cubemaps entities primitives cameras shaders and everyday PlayCanvas Editor setup questions.
+- [Getting Started](https://developer.playcanvas.com/user-manual/editor/getting-started/): Introduces the editor getting-started docs for newcomers who need a fast path into the PlayCanvas Editor workflow.
+- [The Editor Workflow](https://developer.playcanvas.com/user-manual/editor/getting-started/workflow/): Summarizes the end-to-end PlayCanvas workflow from importing assets and scene building through scripting to publishing your app.
+- [Your First App](https://developer.playcanvas.com/user-manual/editor/getting-started/your-first-app/): Walks through building a simple 3D PlayCanvas Editor project from a new scene to materials, scripts, movement, and publishing.
+- [Editor Interface](https://developer.playcanvas.com/user-manual/editor/interface/): Quick labeled map of the toolbar, hierarchy, inspector, viewport, and assets panel with links to deeper docs for each main Editor workspace region.
+- [Assets Panel](https://developer.playcanvas.com/user-manual/editor/interface/assets/): Assets panel guide to folders search filters drag-and-drop cross-project copy and reference checks that keep imported media discoverable across large projects.
+- [Hierarchy Panel](https://developer.playcanvas.com/user-manual/editor/interface/hierarchy/): Hierarchy techniques for smart search entity lifecycle reparent transforms duplication and cross-scene paste with asset rematching when folder paths align.
+- [Inspector Panel](https://developer.playcanvas.com/user-manual/editor/interface/inspector/): Inspector tips for entity and asset attributes covering gizmos, live runtime tweaks, typed copy paste, multiselect batches, and undo integration.
+- [Controls and Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/editor/interface/keyboard-shortcuts/): Editor mouse camera controls, viewport modifier keys, and common accelerators such as launch duplicate transform gizmos frame selection and deletion shortcuts.
+- [Launch Page](https://developer.playcanvas.com/user-manual/editor/interface/launch-page/): Launch Page basics with Editor live-link refreshes dual-tab testing tips and loading the same preview URL on phones after signing in or scanning a QR code.
+- [Using a Custom Engine](https://developer.playcanvas.com/user-manual/editor/interface/launch-page/custom-engine/): Custom engine URLs for dev stable historic or forked builds including module versus UMD picks when blending ESM scripts with classic createScript projects.
+- [Loading Screen](https://developer.playcanvas.com/user-manual/editor/interface/launch-page/loading-screen/): Loading screen customization via generated or selected scripts that render DOM UI through application start including how to hide overlays once boot completes.
+- [Project Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/): Project Settings map for engine import physics rendering lightmaps batches launch localization network layers plus private editor panels opened from the cog.
+- [Asset Import Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/asset-import/): Configure default overwrite behavior and texture size limits for assets imported into the PlayCanvas Editor.
+- [Batch Group Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/batch-groups/): Create and configure Batch Groups to combine meshes into fewer draw calls for better rendering performance.
+- [Editor Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/editor/): Personal editor preference panels for grid snap zoom grab passes preview clip gamma tonemap fog icons locale chat alerts duplicates and lightmapper auto rebake.
+- [Engine Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/engine/): Choose which PlayCanvas Engine version to use when launching, publishing, or downloading your Editor project.
+- [Input Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/input/): Enable or disable keyboard, mouse, touch, and gamepad input handling in your PlayCanvas application.
+- [Launch Page Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/launch-page/): Configure browser features like resolution, fill mode, and transparent canvas for the Editor Launch page.
+- [Layers Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/layers/): Manage rendering layers that control which objects are drawn together and in what order.
+- [Lightmapping Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/lightmapping/): Lightmapping panel settings for global lightmap resolution multipliers bake modes filtering ambient bakes and occlusion tweaks stored per active project branch.
+- [Localization Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/localization/): Localization panel usage for registering JSON translation assets creating starter files and how keys map to UI strings before runtime language swap logic.
+- [Network Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/network/): Configure asset loading retry behavior and network timeout settings for your PlayCanvas application.
+- [Physics Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/physics/): Physics settings for installing Ammo from the store controlling global gravity on rigid bodies and understanding why simulation stays off without the library.
+- [Rendering Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/rendering/): Rendering Project Settings controlling sky clustered lights shadows exposure fog mesh sketch overlays and resolution defaults shared with everyone on branch.
+- [Toolbar](https://developer.playcanvas.com/user-manual/editor/interface/toolbar/): Toolbar buttons from menus and gizmos through snap focus history lightmapper code editor publish downloads community links help overlays and settings access.
+- [Viewport](https://developer.playcanvas.com/user-manual/editor/interface/viewport/): Use viewport cameras gizmos and render modes from wireframe to material debug views like albedo normals or emission to validate lighting before shipping.
+- [Projects](https://developer.playcanvas.com/user-manual/editor/projects/): Maps project administration topics from creation through dashboard settings teamwork dev logs exports and ownership transfers.
+- [Backup and Export](https://developer.playcanvas.com/user-manual/editor/projects/backup-and-export/): Compares forks exports scheduled downloads REST backups storage caps and restores while noting what exports omit from projects.
+- [Creating Projects](https://developer.playcanvas.com/user-manual/editor/projects/creating/): Creates projects from starter kits or forks walks privacy rules and explains duplicating projects for templates or backups.
+- [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard/): Tour of the project dashboard actions for editor launch dev log watch settings access and team hooks from the overview UI.
+- [Dev Logs](https://developer.playcanvas.com/user-manual/editor/projects/dev-logs/): Posts project updates previews publishing gating and discoverability across dashboard feeds and the public PlayCanvas feed.
+- [Downloading Projects](https://developer.playcanvas.com/user-manual/editor/projects/downloading/): Explains PlayCanvas project download formats for self-hosted apps, including static and npm package layouts.
+- [Ownership and Transfers](https://developer.playcanvas.com/user-manual/editor/projects/ownership-transfers/): Walks ownership transfer requests between users organizations and outlines owner-only controls deletion and access impacts.
+- [Project Settings](https://developer.playcanvas.com/user-manual/editor/projects/settings/): Adjusts branding artwork visibility descriptions domains and other metadata controlling how a project appears and behaves.
+- [Team Management](https://developer.playcanvas.com/user-manual/editor/projects/team-management/): Invites collaborators sets read write admin permissions and manages membership rules for shared PlayCanvas editor projects.
+- [Publishing](https://developer.playcanvas.com/user-manual/editor/publishing/): Maps PlayCanvas publishing paths across web browsers, mobile wrappers, desktop packaging, and playable ad networks.
+- [Desktop](https://developer.playcanvas.com/user-manual/editor/publishing/desktop/): Points to NW.js packaging to produce Windows macOS and Linux desktop executables from your PlayCanvas web application.
+- [Mobile](https://developer.playcanvas.com/user-manual/editor/publishing/mobile/): Introduces wrapping PlayCanvas web games into native store apps using Cordova, GoNative, or a local fullscreen WebView.
+- [Apache Cordova](https://developer.playcanvas.com/user-manual/editor/publishing/mobile/cordova/): Sets up a Cordova project, copies a PlayCanvas build into www, and covers iOS audio limits and PlayCanvas tooling links.
+- [GoNative](https://developer.playcanvas.com/user-manual/editor/publishing/mobile/gonative/): Describes using GoNative to generate a native WebView app from your hosted PlayCanvas URL plus plugin integrations.
+- [Playable Ads](https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads/): Lists supported networks and links for exporting PlayCanvas projects as Facebook and Snapchat playable ads.
+- [Facebook Playable Ad](https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads/fb-playable-ads/): Documents the REST API tool export settings, size budgeting, and checklists for Facebook single-file or zip playable ads.
+- [Snapchat Playable Ad](https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/): Explains MRAID-based Snapchat exports, external asset layout, zip testing modes, and snapchat CTA wiring requirements.
+- [Web](https://developer.playcanvas.com/user-manual/editor/publishing/web/): Compares web publishing options like PlayCanvas hosting, self-hosting, and heyVR distribution.
+- [Communication with web pages](https://developer.playcanvas.com/user-manual/editor/publishing/web/communicating-webpage/): Patterns for letting a parent page script talk to PlayCanvas whether the app runs in an iframe or first-party HTML shell.
+- [Hosting using a CDN](https://developer.playcanvas.com/user-manual/editor/publishing/web/hosting-cdn/): Configures downloaded builds for CDN delivery using ASSET_PREFIX, index paths, file splits, and required CORS headers.
+- [Hosting on heyVR.io](https://developer.playcanvas.com/user-manual/editor/publishing/web/hosting-heyvr/): Covers uploading a self-hosted web zip to heyVR, review, and optional SDK features for WebXR monetization and engagement.
+- [PlayCanvas Hosting](https://developer.playcanvas.com/user-manual/editor/publishing/web/playcanvas-hosting/): Explains publishing builds to playcanvas.com, choosing primary builds, and configuring build options like minification and maps.
+- [Self-hosting for beginners](https://developer.playcanvas.com/user-manual/editor/publishing/web/self-hosting-for-beginners/): High-level beginner primer on client, server, and static pieces of web apps so self-hosted PlayCanvas builds make sense.
+- [Self-hosting](https://developer.playcanvas.com/user-manual/editor/publishing/web/self-hosting/): Shows how to embed a hosted build with iframes or download a zip and deploy static files on your own web server.
+- [Real-time Collaboration](https://developer.playcanvas.com/user-manual/editor/realtime-collaboration/): Collaboration UX for presence avatars, project chat, teammate camera frustums, hierarchy selection markers, and highlighted models picked by other users.
+- [Working with Scenes](https://developer.playcanvas.com/user-manual/editor/scenes/): Scenes hub explaining entities, components, and scene-wide settings, with links for managing scene files, component types, and runtime scene loading.
+- [Components](https://developer.playcanvas.com/user-manual/editor/scenes/components/): Explore PlayCanvas entity components that add behavior such as rendering, physics, audio, UI, and scripting to your scene.
+- [Anim](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim/): PlayCanvas Anim component connects an anim state graph and animation assets to drive skeletal animation on an entity hierarchy.
+- [Animation (Legacy)](https://developer.playcanvas.com/user-manual/editor/scenes/components/animation/): PlayCanvas legacy Animation component (deprecated) assigns animation assets to a model; use the Anim component for state graphs.
+- [Audio Listener](https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener/): PlayCanvas Audio Listener component sets the 3D listener position so positional sound from Sound components is heard relative to it.
+- [Button](https://developer.playcanvas.com/user-manual/editor/scenes/components/button/): PlayCanvas Button component builds UI buttons under Screen and Element with tint or sprite-change transitions and input hit areas.
+- [Camera](https://developer.playcanvas.com/user-manual/editor/scenes/components/camera/): PlayCanvas Camera component renders the scene from the entity with projection, clipping, layers, tonemapping, viewport, and grab passes.
+- [Collision](https://developer.playcanvas.com/user-manual/editor/scenes/components/collision/): PlayCanvas Collision component assigns physics or trigger volumes such as box, sphere, capsule, cone, cylinder, mesh, or compound shapes.
+- [Element](https://developer.playcanvas.com/user-manual/editor/scenes/components/element/): PlayCanvas Element component defines 2D UI group, image, or text elements with anchors, pivot, and sizing under a Screen hierarchy.
+- [GSplat](https://developer.playcanvas.com/user-manual/editor/scenes/components/gsplat/): PlayCanvas GSplat component renders a 3D Gaussian splat asset from the entity and chooses which render layers the splat appears on.
+- [Layout Child](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild/): PlayCanvas Layout Child component overrides Layout Group rules for one UI element with min or max sizes, fit proportions, or exclusion.
+- [Layout Group](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup/): PlayCanvas Layout Group component auto-arranges child Element entities in horizontal or vertical layouts with padding, spacing, and wrap.
+- [Light](https://developer.playcanvas.com/user-manual/editor/scenes/components/light/): PlayCanvas Light component adds directional, omni, or spot lights with color, intensity, range, falloff, area shapes, and lightmap options.
+- [Model (Legacy)](https://developer.playcanvas.com/user-manual/editor/scenes/components/model/): PlayCanvas legacy Model component (deprecated) renders primitives or a single model asset; prefer the Render component for new work.
+- [Particle System](https://developer.playcanvas.com/user-manual/editor/scenes/components/particlesystem/): PlayCanvas Particle System component emits 3D particles with rates, lifetimes, looping, lighting, rendering modes, trails, and collisions.
+- [Render](https://developer.playcanvas.com/user-manual/editor/scenes/components/render/): PlayCanvas Render component draws mesh primitives or a render asset with materials, shadows, lightmaps, batching, layers, and skinning.
+- [Rigid Body](https://developer.playcanvas.com/user-manual/editor/scenes/components/rigidbody/): PlayCanvas Rigid Body component adds static, dynamic, or kinematic physics simulation to an entity when combined with a Collision shape.
+- [Screen](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen/): PlayCanvas Screen component defines screen-space or world-space UI regions, resolution scaling, priority, and the root for Element children.
+- [Script](https://developer.playcanvas.com/user-manual/editor/scenes/components/script/): PlayCanvas Script component attaches JavaScript or TypeScript scripts to run on an entity for load, update, and custom gameplay logic.
+- [Scrollbar](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollbar/): PlayCanvas Scrollbar component provides a draggable handle Element that drives scroll position for an associated Scroll View component.
+- [Scroll View](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview/): PlayCanvas Scroll View component creates a masked, inertial scrolling viewport for UI content with optional horizontal and vertical bars.
+- [Sound](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound/): PlayCanvas Sound component plays one or more audio slots with volume, pitch, looping, and optional 3D distance falloff to listeners.
+- [Sprite](https://developer.playcanvas.com/user-manual/editor/scenes/components/sprite/): PlayCanvas Sprite component renders simple or animated sprite atlas frames with tint, opacity, 9-slice, batching, layers, and draw order.
+- [Loading Scenes](https://developer.playcanvas.com/user-manual/editor/scenes/loading-scenes/): Learn to call SceneRegistry changeScene and additive load APIs, split hierarchy versus settings loads, and detect completion with callbacks or events.
+- [Managing Scenes](https://developer.playcanvas.com/user-manual/editor/scenes/managing-scenes/): Use the Scenes dialog from the menu or toolbar to filter lists, create, duplicate, open, and delete scene files across your PlayCanvas project.
+- [Scripting](https://developer.playcanvas.com/user-manual/editor/scripting/): Surveys editor scripting tools such as script assets, import maps, the code editor, VS Code extension, hot reload, and load order.
+- [Code Editor](https://developer.playcanvas.com/user-manual/editor/scripting/code-editor/): Describes opening Monaco-based collaborative editing, file tabs, autocomplete, JSHint linting, shortcuts, and version control hooks.
+- [Hot Reloading](https://developer.playcanvas.com/user-manual/editor/scripting/hot-reloading/): Explains implementing swap to reload scripts live without full refresh and how to migrate listeners and state safely.
+- [Import Maps](https://developer.playcanvas.com/user-manual/editor/scripting/import-maps/): Creates editor import maps to alias ESM module specifiers, use CDN packages, and understand limits like single active map.
+- [Script Loading Order](https://developer.playcanvas.com/user-manual/editor/scripting/loading-order/): Contrasts ESM imports with classic preload ordering, drag-reorder UI, dynamic loads, and publish-time concatenation behavior.
+- [Managing Your Scripts](https://developer.playcanvas.com/user-manual/editor/scripting/managing-scripts/): Creates organizes imports and assigns script assets to entities with practical editor Asset panel and Script component steps.
+- [VS Code Extension](https://developer.playcanvas.com/user-manual/editor/scripting/vscode-extension/): Installs and uses the PlayCanvas VS Code extension for synced local editing, collaboration cues, and TypeScript-aware scripts.
+- [Templates](https://developer.playcanvas.com/user-manual/editor/templates/): Covers template creation instances overrides applying changes and breaking instances for reusable entity prefabs in the Editor.
+- [Override Diff View](https://developer.playcanvas.com/user-manual/editor/templates/diff/): Uses Override Diff View to inspect template overrides individually apply them to parent templates or revert unwanted changes.
+- [Nested Templates](https://developer.playcanvas.com/user-manual/editor/templates/nested/): Explains composing templates inside templates and how overrides propagate when you apply changes at different hierarchy levels.
+- [Troubleshooting](https://developer.playcanvas.com/user-manual/editor/troubleshooting/): Fix Editor versus Launcher brightness gaps under Engine V1 or V2 by reconciling gamma tone mapping on scene viewport and cameras plus sRGB texture audits.
+- [Version Control](https://developer.playcanvas.com/user-manual/editor/version-control/): Relates PlayCanvas checkpoints branches merges storage usage to familiar Git concepts and built-in collaborative workflows.
+- [Branch Workflows](https://developer.playcanvas.com/user-manual/editor/version-control/branch-workflows/): Illustrates common patterns like feature branches release trains and staging to prod for teams using PlayCanvas version control.
+- [Branches](https://developer.playcanvas.com/user-manual/editor/version-control/branches/): Documents main branch current branch creation favorites search closing deletion and collaborator expectations for branch lines.
+- [View Changes](https://developer.playcanvas.com/user-manual/editor/version-control/changes/): Opens read-only diff views between your live branch state and checkpoints before merges checkpoints or idle review.
+- [Checkpoints](https://developer.playcanvas.com/user-manual/editor/version-control/checkpoints/): Creates restores and hard-resets permanent snapshots explaining graph implications and what cannot be undone after hard reset.
+- [Graph View](https://developer.playcanvas.com/user-manual/editor/version-control/graph-view/): Navigates the expandable checkpoint graph comparing nodes restoring hard resetting and copying metadata from version history.
+- [Item History](https://developer.playcanvas.com/user-manual/editor/version-control/item-history/): Shows per-entity asset scene and settings checkpoint timelines available for items edited after the Item History rollout date.
+- [Merging and resolving conflicts](https://developer.playcanvas.com/user-manual/editor/version-control/merging/): Starts merges between checkpoints resolves conflicts in PlayCanvas merge tooling and covers checkpoint-first options safely.
 
 ### React
-- https://developer.playcanvas.com/user-manual/react/ - PlayCanvas React
-- https://developer.playcanvas.com/user-manual/react/api/ - API
-- https://developer.playcanvas.com/user-manual/react/api/align/ - `<Align/>`
-- https://developer.playcanvas.com/user-manual/react/api/anim/ - `<Anim/>`
-- https://developer.playcanvas.com/user-manual/react/api/application/ - `<Application/>`
-- https://developer.playcanvas.com/user-manual/react/api/camera/ - `<Camera/>`
-- https://developer.playcanvas.com/user-manual/react/api/collision/ - `<Collision/>`
-- https://developer.playcanvas.com/user-manual/react/api/entity/ - `<Entity/>`
-- https://developer.playcanvas.com/user-manual/react/api/environment/ - `<Environment/>`
-- https://developer.playcanvas.com/user-manual/react/api/gltf/ - `<Gltf/>`
-- https://developer.playcanvas.com/user-manual/react/api/gsplat/ - `<GSplat/>`
-- https://developer.playcanvas.com/user-manual/react/api/hooks/ - Hooks
-- https://developer.playcanvas.com/user-manual/react/api/hooks/use-app-event/ - `useAppEvent`
-- https://developer.playcanvas.com/user-manual/react/api/hooks/use-app/ - `useApp`
-- https://developer.playcanvas.com/user-manual/react/api/hooks/use-asset/ - Asset Hooks
-- https://developer.playcanvas.com/user-manual/react/api/hooks/use-material/ - `useMaterial`
-- https://developer.playcanvas.com/user-manual/react/api/hooks/use-parent/ - `useParent`
-- https://developer.playcanvas.com/user-manual/react/api/hooks/use-physics/ - `usePhysics`
-- https://developer.playcanvas.com/user-manual/react/api/light/ - `<Light/>`
-- https://developer.playcanvas.com/user-manual/react/api/modify/ - `<Modify.*>`
-- https://developer.playcanvas.com/user-manual/react/api/render/ - `<Render/>`
-- https://developer.playcanvas.com/user-manual/react/api/rigidbody/ - `<Rigidbody/>`
-- https://developer.playcanvas.com/user-manual/react/api/script/ - `<Script/>`
-- https://developer.playcanvas.com/user-manual/react/building-a-scene/ - Building a Scene
-- https://developer.playcanvas.com/user-manual/react/examples/ - Examples
-- https://developer.playcanvas.com/user-manual/react/examples/model-viewer/ - Model Viewer
-- https://developer.playcanvas.com/user-manual/react/examples/motion/ - Motion
-- https://developer.playcanvas.com/user-manual/react/examples/physics/ - Physics
-- https://developer.playcanvas.com/user-manual/react/getting-started/ - Getting Started
-- https://developer.playcanvas.com/user-manual/react/getting-started/installation/ - Installation
-- https://developer.playcanvas.com/user-manual/react/guide/ - Concepts
-- https://developer.playcanvas.com/user-manual/react/guide/interactivity/ - Interactivity
-- https://developer.playcanvas.com/user-manual/react/guide/loading-assets/ - Loading Assets
-- https://developer.playcanvas.com/user-manual/react/guide/materials/ - Materials
-- https://developer.playcanvas.com/user-manual/react/guide/modifying-glb-models/ - Modifying GLB Models
-- https://developer.playcanvas.com/user-manual/react/guide/physics/ - Physics
-- https://developer.playcanvas.com/user-manual/react/guide/xr/ - XR
+- [PlayCanvas React](https://developer.playcanvas.com/user-manual/react/): Introduction to @playcanvas/react: declarative 3D in React, ECS alignment, documentation map, and links to guides and GitHub.
+- [API](https://developer.playcanvas.com/user-manual/react/api/): API reference for PlayCanvas React components and hooks
+- [`<Align/>`](https://developer.playcanvas.com/user-manual/react/api/align/): Documentation for the Align component
+- [`<Anim/>`](https://developer.playcanvas.com/user-manual/react/api/anim/): Documentation for the Anim component
+- [`<Application/>`](https://developer.playcanvas.com/user-manual/react/api/application/): The `Application` component is the root component for any PlayCanvas React application. It initializes and manages the canvas and PlayCanvas application instance.
+- [`<Camera/>`](https://developer.playcanvas.com/user-manual/react/api/camera/): Documentation for the Camera component
+- [`<Collision/>`](https://developer.playcanvas.com/user-manual/react/api/collision/): Documentation for the Collision component
+- [`<Entity/>`](https://developer.playcanvas.com/user-manual/react/api/entity/): The `Entity` component is the fundamental building block in PlayCanvas React applications.
+- [`<Environment/>`](https://developer.playcanvas.com/user-manual/react/api/environment/): Documentation for the Environment component
+- [`<Gltf/>`](https://developer.playcanvas.com/user-manual/react/api/gltf/): Documentation for the Gltf component
+- [`<GSplat/>`](https://developer.playcanvas.com/user-manual/react/api/gsplat/): Documentation for the GSplat component
+- [Hooks](https://developer.playcanvas.com/user-manual/react/api/hooks/): React hooks for PlayCanvas integration
+- [`useAppEvent`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-app-event/): Subscribe to PlayCanvas application events
+- [`useApp`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-app/): Access the PlayCanvas Application instance
+- [Asset Hooks](https://developer.playcanvas.com/user-manual/react/api/hooks/use-asset/): Documentation for the Assets hook
+- [`useMaterial`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-material/): Create and manage PlayCanvas materials
+- [`useParent`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-parent/): Access the parent Entity from React context
+- [`usePhysics`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-physics/): Access physics context and state
+- [`<Light/>`](https://developer.playcanvas.com/user-manual/react/api/light/): Documentation for the Light component
+- [`<Modify.*>`](https://developer.playcanvas.com/user-manual/react/api/modify/): Documentation for the Modify helpers
+- [`<Render/>`](https://developer.playcanvas.com/user-manual/react/api/render/): Documentation for the Render component
+- [`<Rigidbody/>`](https://developer.playcanvas.com/user-manual/react/api/rigidbody/): Documentation for the Rigidbody component
+- [`<Script/>`](https://developer.playcanvas.com/user-manual/react/api/script/): Documentation for the Script component
+- [Building a Scene](https://developer.playcanvas.com/user-manual/react/building-a-scene/): Step-by-step tutorial creating a PlayCanvas React scene: app shell, camera, lights, input, models, and staging with live embedded examples.
+- [Examples](https://developer.playcanvas.com/user-manual/react/examples/): Live, editable PlayCanvas React examples you can run and modify directly in the documentation.
+- [Model Viewer](https://developer.playcanvas.com/user-manual/react/examples/model-viewer/): Live PlayCanvas React example — a glb model viewer with environment lighting, shadows and orbit controls.
+- [Motion](https://developer.playcanvas.com/user-manual/react/examples/motion/): Live PlayCanvas React example — animating entities and lights with springs from the Motion animation library.
+- [Physics](https://developer.playcanvas.com/user-manual/react/examples/physics/): Live PlayCanvas React example — a cluster of rigid bodies disturbed by pointer movement in zero gravity.
+- [Getting Started](https://developer.playcanvas.com/user-manual/react/getting-started/): Start here for PlayCanvas React: learning path for install, first scene, asset loading, and prerequisites such as Node and React basics.
+- [Installation](https://developer.playcanvas.com/user-manual/react/getting-started/installation/): Install PlayCanvas React with npm create playcanvas, TypeScript template notes, and manual setup steps for npm packages and Vite.
+- [Concepts](https://developer.playcanvas.com/user-manual/react/guide/): Core PlayCanvas React concepts: Application and Entity components, assets, scripts, render pipeline, and how the wrapper maps to the engine.
+- [Interactivity](https://developer.playcanvas.com/user-manual/react/guide/interactivity/): Input and interactivity in PlayCanvas React: pointer events on entities, scripts, app events, and patterns for reactive 3D UI.
+- [Loading Assets](https://developer.playcanvas.com/user-manual/react/guide/loading-assets/): Load models, textures, splats, fonts, and environments with useAsset-family hooks, progress handling, and Gltf usage patterns.
+- [Materials](https://developer.playcanvas.com/user-manual/react/guide/materials/): Author StandardMaterial instances with useMaterial in React, apply them to Render, and combine textures and property tweaks in examples.
+- [Modifying GLB Models](https://developer.playcanvas.com/user-manual/react/guide/modifying-glb-models/): Inspect and customize loaded GLBs with the Gltf component: traverse entities, remove lights, tune materials, and add physics in React.
+- [Physics](https://developer.playcanvas.com/user-manual/react/guide/physics/): Enable ammo.js physics in PlayCanvas React: sync-ammo install, Application usePhysics, rigidbodies, collisions, and lazy WASM loading.
+- [XR](https://developer.playcanvas.com/user-manual/react/guide/xr/): WebXR with PlayCanvas React: XR scripts on cameras, controller visuals, session buttons, HTTPS, and VR or AR setup walkthroughs.
 
 ### Web Components
-- https://developer.playcanvas.com/user-manual/web-components/ - PlayCanvas Web Components
-- https://developer.playcanvas.com/user-manual/web-components/building-a-scene/ - Building a Scene
-- https://developer.playcanvas.com/user-manual/web-components/getting-started/ - Getting Started
-- https://developer.playcanvas.com/user-manual/web-components/scripting/ - Adding Behavior with Scripts
-- https://developer.playcanvas.com/user-manual/web-components/tags/ - Tag Reference
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-app/ - <pc-app>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset/ - <pc-asset>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera/ - <pc-camera>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision/ - <pc-collision>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-element/ - <pc-element>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity/ - <pc-entity>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-light/ - <pc-light>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-listener/ - <pc-listener>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/ - <pc-model>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-module/ - <pc-module>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-particles/ - <pc-particles>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-render/ - <pc-render>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigidbody/ - <pc-rigidbody>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene/ - <pc-scene>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen/ - <pc-screen>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/ - <pc-script>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-scripts/ - <pc-scripts>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky/ - <pc-sky>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/ - <pc-sound>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-sounds/ - <pc-sounds>
-- https://developer.playcanvas.com/user-manual/web-components/tags/pc-splat/ - <pc-splat>
-- https://developer.playcanvas.com/user-manual/web-components/xr/ - XR Support
+- [PlayCanvas Web Components](https://developer.playcanvas.com/user-manual/web-components/): Declarative 3D with custom HTML elements wrapping the PlayCanvas engine: concepts, tag overview, and links to tutorials and reference.
+- [Building a Scene](https://developer.playcanvas.com/user-manual/web-components/building-a-scene/): Hands-on tutorial building a lit scene with pc-app and pc-scene, adding a camera, light, mesh, and understanding the element hierarchy.
+- [Getting Started](https://developer.playcanvas.com/user-manual/web-components/getting-started/): Install PlayCanvas Web Components from npm, configure import maps for the engine, register elements, and embed a minimal HTML example.
+- [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting/): Attach PlayCanvas Script classes to entities with pc-module and pc-script tags, load ES modules, and wire behaviors into Web Components.
+- [Tag Reference](https://developer.playcanvas.com/user-manual/web-components/tags/): Alphabetical index of PlayCanvas Web Component tags with short summaries linking to full attribute and usage documentation for each element.
+- [<pc-app>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app/): Reference for the pc-app element: initializes the PlayCanvas Application, graphics options, and root container for scenes and entities.
+- [<pc-asset>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset/): Reference for the pc-asset element: declare assets to load by URL or id, types, preloading, and how other tags consume loaded resources.
+- [<pc-camera>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera/): Reference for the pc-camera element: projection, clear options, render order, and attributes that map to the engine camera component.
+- [<pc-collision>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision/): Reference for the pc-collision element: collision shapes and parameters for triggers, rigid bodies, and physics queries in declarative HTML.
+- [<pc-element>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element/): Reference for the pc-element element: screen-space UI text, images, and groups mapped to PlayCanvas Element components and layout.
+- [<pc-entity>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity/): Reference for the pc-entity element: names, transforms, hierarchy rules, and which child component tags are valid under an entity.
+- [<pc-light>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light/): Reference for the pc-light element: light types, color, intensity, shadows, and attributes for directional, spot, and omni lights.
+- [<pc-listener>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-listener/): Reference for the pc-listener element: positional audio listener placement and settings for 3D sound relative to the active camera.
+- [<pc-model>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/): Reference for the pc-model element: load and instance GLB or model assets on an entity with import settings and render integration.
+- [<pc-module>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-module/): Reference for the pc-module element: load Wasm modules for scripts or plugins and associate them with PlayCanvas script components.
+- [<pc-particles>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-particles/): Reference for the pc-particles element: configure particle emitters, textures, blending, and simulation parameters in markup.
+- [<pc-render>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render/): Reference for the pc-render element: primitive or mesh rendering, materials, layers, and cast or receive shadow settings on entities.
+- [<pc-rigidbody>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigidbody/): Reference for the pc-rigidbody element: rigid body type, mass, friction, restitution, and integration with collision components.
+- [<pc-scene>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene/): Reference for the pc-scene element: scene container inside pc-app, ambient settings, and where entities are mounted for rendering.
+- [<pc-screen>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen/): Reference for the pc-screen element: 2D screen space for UI elements, resolution, scale modes, and child pc-element hierarchies.
+- [<pc-script>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/): Reference for the pc-script element: attach a single script asset or class to an entity with ordering and attribute wiring in HTML.
+- [<pc-scripts>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scripts/): Reference for the pc-scripts element: script component container grouping multiple pc-script children and shared script settings.
+- [<pc-sky>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky/): Reference for the pc-sky element: image-based lighting and skyboxes from cubemap or equirectangular assets for scene backgrounds.
+- [<pc-sound>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/): Reference for the pc-sound element: positional or non-positional audio clips, volume, pitch, autoplay rules, and asset references.
+- [<pc-sounds>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sounds/): Reference for the pc-sounds element: sound component container that groups pc-sound slots and shared audio settings on an entity.
+- [<pc-splat>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-splat/): Reference for the pc-splat element: render Gaussian splat assets with attributes for splat data sources, quality, and scene integration.
+- [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr/): WebXR setup for Web Components: load XR scripts as assets, configure cameras, add session UI, and serve pages over HTTPS or localhost.
+
+### SuperSplat
+- [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat/): SuperSplat is PlayCanvas's editing and publishing platform for 3D Gaussian Splats — edit, upload, manage, curate, share, and discover splat scenes on superspl.at.
+- [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert/): Convert and transform splats in your browser at superspl.at/convert — the web frontend to the splat-transform CLI.
+- [SuperSplat Editor](https://developer.playcanvas.com/user-manual/supersplat/editor/): SuperSplat Editor: the open-source, browser-based editor for cleaning, optimizing, and animating 3D Gaussian Splats.
+- [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls/): SuperSplat navigation: orbit and fly modes, mouse, touch, and keyboard shortcuts for inspecting and moving through splat scenes.
+- [Data Panel](https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel/): SPLAT DATA panel: histograms and statistics for splat attributes, selection by property ranges, and keyboard shortcuts.
+- [Editing Splats](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats/): SuperSplat edit modes (centers versus rings), selection tools, overlays, and workflows for cleaning and modifying splats.
+- [Import and Export](https://developer.playcanvas.com/user-manual/supersplat/editor/import-export/): SuperSplat import and export formats: PLY, compressed PLY, SOG, SPLAT, viewers, and choosing formats for web or archival use.
+- [Interface Overview](https://developer.playcanvas.com/user-manual/supersplat/editor/interface/): Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, toolbar, and core panels for editing splats.
+- [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects/): SuperSplat .ssproj projects: save and reload edits, share state, ZIP structure, and collaboration via project files.
+- [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/): Publish a splat from the SuperSplat Editor to superspl.at so it lands on your Manage page and can be opened in Studio.
+- [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/): Render still images and videos from SuperSplat locally: presets, resolutions, codecs, and timeline-driven video output.
+- [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline/): SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, and publishing animated camera paths that play on the scene page.
+- [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore/): Browse and discover public splats on superspl.at: sort, filter by time and feature, search, and dig into a creator's profile.
+- [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage/): Use the Manage page on superspl.at to list, edit, share, and delete your published splats — and to open them in Studio.
+- [Scene Page](https://developer.playcanvas.com/user-manual/supersplat/scene-page/): The public page for a published splat on superspl.at — embedded viewer, share, embed, download, comments, likes, and suggested splats.
+- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming/): How SuperSplat compresses published splats to SOG, generates level-of-detail streaming for large scenes, and enforces a runtime Gaussian budget.
+- [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio/): Studio curates the viewing experience for a published splat: cameras, annotations, post effects, skybox, and collision.
+- [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations/): Add 3D-positioned text hotspots to a published splat — visitors can click through them to navigate the scene from one curated viewpoint to the next.
+- [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras/): Set the starting camera for a published splat — frame its position and target in the viewport and set the field of view — in SuperSplat Studio.
+- [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision/): Add voxel collision to a published splat so visitors can walk through it — generating it directly in Studio, or uploading custom voxel files.
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings/): The Experience Settings v2 JSON schema — the canonical contract between SuperSplat Studio (writer) and SuperSplat Viewer (reader).
+- [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects/): Apply sharpness, bloom, color grading, vignette, fringing, tonemapping, and high-precision rendering to a published splat in SuperSplat Studio.
+- [Skybox & Background](https://developer.playcanvas.com/user-manual/supersplat/studio/skybox/): Set a background color or upload an equirectangular skybox for a published splat in SuperSplat Studio.
+- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload/): Upload a ready-made splat file directly to superspl.at without opening the SuperSplat Editor.
+- [User Profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile/): Browse a creator's public SuperSplat page: avatar, bio, social links, and the grid of splats they've published.
+- [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/): The open-source web viewer that powers SuperSplat scene pages — and that you can embed in your own site or self-host.
+- [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding/): Embed the open-source SuperSplat Viewer in your own web app via the @playcanvas/supersplat-viewer npm package, URL parameters, or templating.
+- [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting/): Export your splat as a self-contained HTML viewer from the SuperSplat Editor and host it anywhere — GitHub Pages, your own web server, or shared as a single file.
+
+### Splat Transform
+- [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform/): SplatTransform CLI and library: convert between splat formats, transform and filter data, merge scenes, voxelize for collision, and render images.
+- [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision/): Generate sparse voxel octrees and collision meshes from Gaussian splats with splat-transform.
+- [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker/): Run splat-transform as a containerised backend on a Linux host with an NVIDIA GPU, including AWS GPU instances and a CPU-only variant.
 
 ### ECS
-- https://developer.playcanvas.com/user-manual/ecs/ - Entity Component System (ECS)
-- https://developer.playcanvas.com/user-manual/ecs/components/ - Components
-- https://developer.playcanvas.com/user-manual/ecs/entities/ - Entities
-- https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations/ - Hierarchy and Transformations
-- https://developer.playcanvas.com/user-manual/ecs/searching-the-hierarchy/ - Searching the Hierarchy
+- [Entity Component System (ECS)](https://developer.playcanvas.com/user-manual/ecs/): How PlayCanvas uses Entities, Components, and Systems to organize objects and behavior in your application.
+- [Components](https://developer.playcanvas.com/user-manual/ecs/components/): Add cameras, lights, physics, scripts, and other behavior to Entities using PlayCanvas Components.
+- [Entities](https://developer.playcanvas.com/user-manual/ecs/entities/): Create, parent, enable, and manage Entities -- the fundamental building blocks of a PlayCanvas scene.
+- [Hierarchy and Transformations](https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations/): Parent-child entity hierarchies with local and world-space position, rotation, and scale transforms.
+- [Searching the Hierarchy](https://developer.playcanvas.com/user-manual/ecs/searching-the-hierarchy/): Find entities at runtime by name, tag, path, or custom callback using the PlayCanvas hierarchy search API.
 
 ### Assets
-- https://developer.playcanvas.com/user-manual/assets/ - Assets
-- https://developer.playcanvas.com/user-manual/assets/asset-registry/ - Asset Registry
-- https://developer.playcanvas.com/user-manual/assets/finding/ - Third-party Asset Sites
-- https://developer.playcanvas.com/user-manual/assets/loading-unloading/ - Loading and Unloading
-- https://developer.playcanvas.com/user-manual/assets/models/ - Importing 3D Models
-- https://developer.playcanvas.com/user-manual/assets/models/building/ - Building Models
-- https://developer.playcanvas.com/user-manual/assets/models/exporting/ - Exporting Assets
-- https://developer.playcanvas.com/user-manual/assets/models/units/ - Units
-- https://developer.playcanvas.com/user-manual/assets/preloading/ - Preloading
-- https://developer.playcanvas.com/user-manual/assets/supported-formats/ - Supported Formats
+- [Assets](https://developer.playcanvas.com/user-manual/assets/): Understand how PlayCanvas manages assets and resources including models, textures, audio, and scripts.
+- [Asset Registry](https://developer.playcanvas.com/user-manual/assets/asset-registry/): Use the AssetRegistry API to find, load, and manage assets at runtime in your PlayCanvas application.
+- [Third-party Asset Sites](https://developer.playcanvas.com/user-manual/assets/finding/): Free and paid sources for 3D models, textures, sound effects, and music to use in your PlayCanvas projects.
+- [Loading and Unloading](https://developer.playcanvas.com/user-manual/assets/loading-unloading/): Dynamically load and unload assets at runtime to manage memory and stream content on demand.
+- [Importing 3D Models](https://developer.playcanvas.com/user-manual/assets/models/): Import GLB, FBX, COLLADA, and OBJ models into PlayCanvas and convert them into ready-to-use Templates and Render assets.
+- [Building Models](https://developer.playcanvas.com/user-manual/assets/models/building/): Create 3D models for PlayCanvas in Blender, Maya, 3DS Max, or other tools using the recommended GLB format.
+- [Exporting Assets](https://developer.playcanvas.com/user-manual/assets/models/exporting/): Export 3D models from Blender, Maya, or 3DS Max in GLB or FBX format for import into PlayCanvas.
+- [Units](https://developer.playcanvas.com/user-manual/assets/models/units/): Configure scene units in Blender, Maya, or 3DS Max so models export at the correct scale for PlayCanvas.
+- [Preloading](https://developer.playcanvas.com/user-manual/assets/preloading/): Configure asset preloading to ensure essential resources are ready before your PlayCanvas application starts.
+- [Supported Formats](https://developer.playcanvas.com/user-manual/assets/supported-formats/): Complete list of file formats supported by PlayCanvas for 3D models, textures, audio, fonts, and other asset types.
 
 ### Scripting
-- https://developer.playcanvas.com/user-manual/scripting/ - Scripting
-- https://developer.playcanvas.com/user-manual/scripting/application-lifecycle/ - Application Lifecycle
-- https://developer.playcanvas.com/user-manual/scripting/debugging/ - Debugging
-- https://developer.playcanvas.com/user-manual/scripting/debugging/browser-dev-tools/ - Browser Dev Tools
-- https://developer.playcanvas.com/user-manual/scripting/debugging/console-logging/ - Console Logging
-- https://developer.playcanvas.com/user-manual/scripting/engine-api/ - Calling the Engine API
-- https://developer.playcanvas.com/user-manual/scripting/esm-scripts/ - ESM Scripts
-- https://developer.playcanvas.com/user-manual/scripting/events/ - Events
-- https://developer.playcanvas.com/user-manual/scripting/getting-started/ - Getting Started
-- https://developer.playcanvas.com/user-manual/scripting/migration-guide/ - Migration Guide
-- https://developer.playcanvas.com/user-manual/scripting/script-attributes/ - Script Attributes
-- https://developer.playcanvas.com/user-manual/scripting/script-attributes/classic/ - Classic Reference
-- https://developer.playcanvas.com/user-manual/scripting/script-attributes/esm/ - ESM Reference
-- https://developer.playcanvas.com/user-manual/scripting/script-lifecycle/ - Script Lifecycle
+- [Scripting](https://developer.playcanvas.com/user-manual/scripting/): Write scripts in JavaScript to add interactivity, handle input, and control game logic in PlayCanvas.
+- [Application Lifecycle](https://developer.playcanvas.com/user-manual/scripting/application-lifecycle/): High-level flow diagram of a PlayCanvas application from initialization through the update loop.
+- [Debugging](https://developer.playcanvas.com/user-manual/scripting/debugging/): Tools and techniques for finding and fixing bugs in your PlayCanvas scripts using browser developer tools.
+- [Browser Dev Tools](https://developer.playcanvas.com/user-manual/scripting/debugging/browser-dev-tools/): Use Chrome and Firefox developer tools to set breakpoints, inspect variables, and step through your PlayCanvas scripts.
+- [Console Logging](https://developer.playcanvas.com/user-manual/scripting/debugging/console-logging/): Debug PlayCanvas scripts with console.log, console.warn, console.error, and other browser console methods.
+- [Calling the Engine API](https://developer.playcanvas.com/user-manual/scripting/engine-api/): Essential PlayCanvas Engine classes and patterns for working with entities, transforms, input, assets, and physics in scripts.
+- [ESM Scripts](https://developer.playcanvas.com/user-manual/scripting/esm-scripts/): Write PlayCanvas scripts using modern ES Module syntax with static imports, classes, and improved tooling support.
+- [Events](https://developer.playcanvas.com/user-manual/scripting/events/): Communicate between PlayCanvas scripts using the built-in event system with on, once, off, and fire methods.
+- [Getting Started](https://developer.playcanvas.com/user-manual/scripting/getting-started/): Learn the basic structure and core concepts of PlayCanvas scripts including script types, attributes, and entity attachment.
+- [Migration Guide](https://developer.playcanvas.com/user-manual/scripting/migration-guide/): Migrate your PlayCanvas project from Classic Scripts to the recommended ESM Scripts system step by step.
+- [Script Attributes](https://developer.playcanvas.com/user-manual/scripting/script-attributes/): Expose configurable parameters on your PlayCanvas scripts for use in the Editor Inspector or via code.
+- [Classic Reference](https://developer.playcanvas.com/user-manual/scripting/script-attributes/classic/): Reference for Classic Script Attributes including type declarations and Editor integration for legacy scripts.
+- [ESM Reference](https://developer.playcanvas.com/user-manual/scripting/script-attributes/esm/): Complete reference for ESM Script Attributes including all supported types, decorators, and conditional visibility.
+- [Script Lifecycle](https://developer.playcanvas.com/user-manual/scripting/script-lifecycle/): Understand initialize, postInitialize, update, postUpdate, and destroy -- the lifecycle methods called on every PlayCanvas script.
 
 ### Graphics
-- https://developer.playcanvas.com/user-manual/graphics/ - Graphics
-- https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/ - Advanced Rendering
-- https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/batching/ - Batching
-- https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/hardware-instancing/ - Hardware Instancing
-- https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/html-in-canvas/ - HTML-in-Canvas
-- https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/indirect-drawing/ - Indirect Drawing
-- https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multi-draw/ - Multi-Draw
-- https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multiple-render-targets/ - Multiple Render Targets
-- https://developer.playcanvas.com/user-manual/graphics/cameras/ - Cameras
-- https://developer.playcanvas.com/user-manual/graphics/cameras/camera-controls/ - Camera Controls
-- https://developer.playcanvas.com/user-manual/graphics/cameras/clearing/ - Clearing
-- https://developer.playcanvas.com/user-manual/graphics/cameras/depth-layer/ - Depth Layer
-- https://developer.playcanvas.com/user-manual/graphics/cameras/multiple-cameras/ - Multiple Cameras
-- https://developer.playcanvas.com/user-manual/graphics/cameras/projection/ - Projection
-- https://developer.playcanvas.com/user-manual/graphics/cameras/scene-picker/ - Scene Picker
-- https://developer.playcanvas.com/user-manual/graphics/cameras/screen-and-world/ - Screen and World Coordinates
-- https://developer.playcanvas.com/user-manual/graphics/cameras/tone-mapping/ - Tone Mapping & Exposure
-- https://developer.playcanvas.com/user-manual/graphics/layers/ - Layers
-- https://developer.playcanvas.com/user-manual/graphics/lighting/ - Lighting
-- https://developer.playcanvas.com/user-manual/graphics/lighting/ambient-occlusion/ - Ambient Occlusion
-- https://developer.playcanvas.com/user-manual/graphics/lighting/clustered-lighting/ - Clustered Lighting
-- https://developer.playcanvas.com/user-manual/graphics/lighting/lightmapping/ - Lightmapping
-- https://developer.playcanvas.com/user-manual/graphics/lighting/lights/ - Lights
-- https://developer.playcanvas.com/user-manual/graphics/lighting/runtime-lightmaps/ - Runtime Lightmaps
-- https://developer.playcanvas.com/user-manual/graphics/lighting/shadows/ - Shadows
-- https://developer.playcanvas.com/user-manual/graphics/linear-workflow/ - Linear Workflow
-- https://developer.playcanvas.com/user-manual/graphics/linear-workflow/hdr-rendering/ - HDR Rendering
-- https://developer.playcanvas.com/user-manual/graphics/linear-workflow/textures/ - Textures
-- https://developer.playcanvas.com/user-manual/graphics/particles/ - Particles
-- https://developer.playcanvas.com/user-manual/graphics/physical-rendering/ - Physically Based Rendering
-- https://developer.playcanvas.com/user-manual/graphics/physical-rendering/image-based-lighting/ - Image Based Lighting
-- https://developer.playcanvas.com/user-manual/graphics/physical-rendering/physical-materials/ - Physical Materials
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/ - Post Effects
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/ - Modern Post Processing
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/compose-shader/ - Customizing the Compose Shader
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/custom-passes/ - Custom Render Passes
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/extending-class/ - Extending FramePassCameraFrame Class
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/ - Legacy Post Effects
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/bloom/ - Bloom Effect
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/brightness_contrast/ - Brightness-Contrast Effect
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/fxaa/ - FXAA Effect
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/hue_saturation/ - Hue-Saturation Effect
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/sepia/ - Sepia Effect
-- https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/vignette/ - Vignette Effect
-- https://developer.playcanvas.com/user-manual/graphics/shaders/ - Shaders
-- https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders/ - Compute Shaders
-- https://developer.playcanvas.com/user-manual/graphics/shaders/glsl-specifics/ - GLSL Specifics
-- https://developer.playcanvas.com/user-manual/graphics/shaders/migrations/ - Shader Chunk Migrations
-- https://developer.playcanvas.com/user-manual/graphics/shaders/preprocessor/ - Shader Preprocessor
-- https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-capabilities/ - WGSL Capabilities
-- https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-reflection/ - WGSL Reflection
-- https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders/ - WGSL Vertex and Fragment Shaders
+- [Graphics](https://developer.playcanvas.com/user-manual/graphics/): Overview of PlayCanvas rendering: WebGL and WebGPU backends, PBR, lighting, HDR, post effects, and key graphics features.
+- [Advanced Rendering](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/): Section index for batching, instancing, multi-draw, indirect drawing, and multiple render targets in PlayCanvas.
+- [Batching](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/batching/): Batch groups merge mesh instances to cut draw calls: Editor setup, static versus dynamic rules, and limitations.
+- [Hardware Instancing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/hardware-instancing/): Hardware instancing formats, MeshInstance buffers, shader chunks, and live engine examples for repeated meshes.
+- [HTML-in-Canvas](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/html-in-canvas/): Render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies.
+- [Indirect Drawing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/indirect-drawing/): WebGPU indirect draw slots, GPU buffer parameters, compute-driven culling, and per-frame slot allocation rules.
+- [Multi-Draw](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multi-draw/): Single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent.
+- [Multiple Render Targets](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multiple-render-targets/): Configure multiple render targets, shared attachments rules, and shader output to several color buffers at once.
+- [Cameras](https://developer.playcanvas.com/user-manual/graphics/cameras/): Create cameras and explore projection, tone mapping, multi-camera rendering, camera controls, and coordinate conversion.
+- [Camera Controls](https://developer.playcanvas.com/user-manual/graphics/cameras/camera-controls/): Add orbit, fly, and pan navigation to any camera with the engine's ready-made camera-controls script, with mouse, touch, and gamepad support.
+- [Clearing](https://developer.playcanvas.com/user-manual/graphics/cameras/clearing/): Control how a camera clears its render target — set the background color, make the canvas transparent, or disable clearing entirely.
+- [Depth Layer](https://developer.playcanvas.com/user-manual/graphics/cameras/depth-layer/): Capture scene color and depth buffers on a camera layer for shaders, script requests, and correct linear or gamma scene color.
+- [Multiple Cameras](https://developer.playcanvas.com/user-manual/graphics/cameras/multiple-cameras/): Compose views from several cameras using priorities, viewports, layers, and render targets for split-screen, overlays, and more.
+- [Projection](https://developer.playcanvas.com/user-manual/graphics/cameras/projection/): Choose perspective or orthographic projection, set the field of view, and tune clip planes, aspect ratio, and frustum culling.
+- [Scene Picker](https://developer.playcanvas.com/user-manual/graphics/cameras/scene-picker/): Select meshes and splats from screen coordinates with the Picker API, async reads, and optional depth-based world positions.
+- [Screen and World Coordinates](https://developer.playcanvas.com/user-manual/graphics/cameras/screen-and-world/): Convert between 2D screen positions and 3D world positions with screenToWorld and worldToScreen for picking, placement, and UI.
+- [Tone Mapping & Exposure](https://developer.playcanvas.com/user-manual/graphics/cameras/tone-mapping/): Map HDR scene lighting to your display with per-camera tone mapping and gamma, plus optional physically based exposure controls.
+- [Layers](https://developer.playcanvas.com/user-manual/graphics/layers/): Customize render order and visibility with layers, layer composition, opaque and transparent sub-layers, and sort modes.
+- [Lighting](https://developer.playcanvas.com/user-manual/graphics/lighting/): How dynamic runtime lighting compares to baked lightmaps and when to use each approach in PlayCanvas scenes.
+- [Ambient Occlusion](https://developer.playcanvas.com/user-manual/graphics/lighting/ambient-occlusion/): Bake ambient occlusion textures in DCC tools, upload them, and multiply diffuse and specular ambient lighting.
+- [Clustered Lighting](https://developer.playcanvas.com/user-manual/graphics/lighting/clustered-lighting/): Clustered lighting stores lights in a grid so many omni and spot lights, shadows, and cookies stay GPU-friendly.
+- [Lightmapping](https://developer.playcanvas.com/user-manual/graphics/lighting/lightmapping/): Bake lightmaps in external tools like 3ds Max and VRay, then import textures and follow linear gamma best practices.
+- [Lights](https://developer.playcanvas.com/user-manual/graphics/lighting/lights/): Directional, omni, and spot lights in the Editor: gizmos, shadows, cookies, and practical lighting combinations.
+- [Runtime Lightmaps](https://developer.playcanvas.com/user-manual/graphics/lighting/runtime-lightmaps/): Bake HDR lightmaps at runtime, mix baked and dynamic lights, and configure lights for rebaking in your app.
+- [Shadows](https://developer.playcanvas.com/user-manual/graphics/lighting/shadows/): Enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS), and tune quality with cascades, resolution, and bias.
+- [Linear Workflow](https://developer.playcanvas.com/user-manual/graphics/linear-workflow/): Linear color workflow across the engine: linear shader math, sRGB inputs, and LDR versus HDR shader outputs.
+- [HDR Rendering](https://developer.playcanvas.com/user-manual/graphics/linear-workflow/hdr-rendering/): HDR camera settings, tone mapping and gamma options, and using CameraFrame for bloom-friendly floating-point rendering.
+- [Textures](https://developer.playcanvas.com/user-manual/graphics/linear-workflow/textures/): Mark color textures as sRGB in assets and code, including procedural targets, so sampling stays physically correct.
+- [Particles](https://developer.playcanvas.com/user-manual/graphics/particles/): Create and tune particle systems in the Editor, start them from scripts, and use soft particles with scene depth.
+- [Physically Based Rendering](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/): PBR fundamentals in PlayCanvas: diffuse and specular, energy conservation, metalness, and consistent materials.
+- [Image Based Lighting](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/image-based-lighting/): Image-based lighting with HDR cubemaps, prefiltering for roughness, and authoring environment maps for realistic PBR.
+- [Physical Materials](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/physical-materials/): Physical Material maps and parameters: metalness and specular workflows, IBL needs, and common texture slots.
+- [Post Effects](https://developer.playcanvas.com/user-manual/graphics/posteffects/): Compare modern CameraFrame HDR post-processing with legacy script effects and find links to individual filters.
+- [Modern Post Processing](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/): CameraFrame HDR stack: bloom, SSAO, TAA, depth of field, grading, examples, and customization entry points.
+- [Customizing the Compose Shader](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/compose-shader/): Override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass.
+- [Custom Render Passes](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/custom-passes/): Build custom RenderPass-based post stacks on the camera without CameraFrame for full manual pipeline control.
+- [Extending FramePassCameraFrame Class](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/extending-class/): Extend FramePassCameraFrame to insert passes, reorder work, and tap intermediate scene textures in the HDR stack.
+- [Legacy Post Effects](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/): Attach legacy script post effects to camera entities, order passes, and fetch ready-made effects from the engine repo.
+- [Bloom Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/bloom/): Legacy script bloom: intensity, threshold, blur, and links to the engine posteffect-bloom source on GitHub.
+- [Brightness-Contrast Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/brightness_contrast/): Legacy brightness and contrast script effect: parameter ranges and GitHub source for the camera post pipeline.
+- [FXAA Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/fxaa/): Legacy FXAA script for fast full-screen anti-aliasing and where to find the engine posteffect-fxaa implementation.
+- [Hue-Saturation Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/hue_saturation/): Legacy hue and saturation script effect controls plus GitHub link for the huesaturation post effect source.
+- [Sepia Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/sepia/): Legacy sepia script effect amount and GitHub reference for the sepia post-processing camera script.
+- [Vignette Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/vignette/): Legacy vignette offset and darkness controls to darken edges, with GitHub link for the vignette script.
+- [Shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/): Author ShaderMaterial with paired GLSL and WGSL, declare attributes, and integrate with the engine shader system.
+- [Compute Shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders/): WebGPU-only compute shaders: device checks, WGSL cshader definitions, bind groups, and general-purpose GPU work.
+- [GLSL Specifics](https://developer.playcanvas.com/user-manual/graphics/shaders/glsl-specifics/): Rules for GLSL attributes, uniforms, varyings, and versioning so PlayCanvas can wire resources and transpile to WGSL.
+- [Shader Chunk Migrations](https://developer.playcanvas.com/user-manual/graphics/shaders/migrations/): Per-release shader chunk changes, console warnings for overrides, and how to set shaderChunksVersion after updates.
+- [Shader Preprocessor](https://developer.playcanvas.com/user-manual/graphics/shaders/preprocessor/): C-style defines, includes, and ifdef chains applied to GLSL, WGSL, and compute shaders before compilation.
+- [WGSL Capabilities](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-capabilities/): Optional, device-gated WGSL features in PlayCanvas: half-precision types and WGSL language extensions, with their CAPS_* defines.
+- [WGSL Reflection](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-reflection/): Simplified WGSL declarations without manual bind groups: how PlayCanvas reflects resources from shader source and assigns bindings.
+- [WGSL Vertex and Fragment Shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders/): Vertex and fragment specific WGSL constructs in PlayCanvas: attributes, varyings, and fragment outputs.
 
 ### Gaussian Splatting
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/ - Gaussian Splatting
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/ - Building Splat-based Apps
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/ - Custom Shaders
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/fisheye/ - Fisheye Rendering
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/ - LOD Streaming
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/ - Performance
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/picking/ - Picking
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/ - Procedural Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/image/ - Image to Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/lines/ - Lines and Shapes
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/mesh/ - Mesh to Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/text/ - Text to Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/shadows/ - Shadows
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/ - Your First Splat App
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/editor/ - Using the Editor
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/engine/ - Using the Engine API
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/react/ - Using PlayCanvas React
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/web-components/ - Using Web Components
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/ - Creating Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/recommended-tools/ - Recommended Tools
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/taking-photos/ - Taking Photos
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/ - Editing and Publishing Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ - Splat File Formats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply/ - The PLY Format
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/ - The SOG Format
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/ - Splat Rendering Architecture
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/renderers/ - Renderers
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-data-format/ - Splat Data Format
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-processing/ - Splat Processing
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format/ - Work Buffer Format
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering/ - Work Buffer Rendering
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/viewing/ - Viewing Splats
-- https://developer.playcanvas.com/user-manual/gaussian-splatting/what-is-gaussian-splatting/ - What is Gaussian Splatting?
+- [Gaussian Splatting](https://developer.playcanvas.com/user-manual/gaussian-splatting/): Overview of 3D Gaussian Splatting in PlayCanvas: capture, viewing, editing, and building web apps with photorealistic splat scenes.
+- [Building Splat-based Apps](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/): Introduction to building Gaussian splat applications with PlayCanvas and links to deeper guides for integration and rendering.
+- [Custom Shaders](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/): Customize Gaussian splat rendering with the gsplatModifyVS shader chunk on the scene gsplat material: overridable functions, GLSL/WGSL, and a live example.
+- [Fisheye Rendering](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/fisheye/): Apply a fisheye projection to Gaussian splats and the infinite skybox for ultra-wide field of view and 'tiny planet' effects.
+- [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/): LOD streaming for large splat scenes: octree layout, generating lod-meta data, examples, and performance guidance.
+- [Performance](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/): Performance tips for splat scenes: splat counts, fill rate, scene settings, LOD streaming budgets, and optimization strategies.
+- [Picking](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/picking/): Use the PlayCanvas Picker with Gaussian splats: ID setup, depth picking, retrieving world position, and code examples.
+- [Procedural Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/): GSplatContainer procedural splats: CPU and GPU population, built-in formats, and integration with GSplatFormat and processors.
+- [Image to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/image/): GsplatImage script: convert a texture into splats on the XZ plane with one splat per non-transparent pixel for stylized displays.
+- [Lines and Shapes](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/lines/): GsplatLines script: splat-based lines, arrows, and AABB wireframes for CAD-style visualization and debugging.
+- [Mesh to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/mesh/): GsplatMesh script: rasterize mesh triangles into uniformly distributed splats using render-component geometry for stylized splat models.
+- [Text to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/text/): GsplatText script: render labels as splats from canvas text with fonts, stroke, and fill on the XZ plane in splat scenes.
+- [Shadows](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/shadows/): Enable shadow casting from Gaussian splats onto meshes: API properties, lights, and tuning shadow quality for splat scenes.
+- [Your First Splat App](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/): Choose a path to build your first PlayCanvas splat app: Engine, Editor, React, or Web Components tutorials with a toy cat demo.
+- [Using the Editor](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/editor/): Step-by-step: create a splat scene in the PlayCanvas Editor, import assets, and publish an interactive orbitable splat project.
+- [Using the Engine API](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/engine/): Step-by-step: load a splat with the PlayCanvas Engine API, ES modules, camera controls, and a minimal HTML and JavaScript setup.
+- [Using PlayCanvas React](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/react/): Step-by-step: build a splat viewer with PlayCanvas React components, hooks, and camera controls using the toy cat example.
+- [Using Web Components](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/web-components/): Step-by-step: build a splat viewer with pc-app, pc-scene, pc-asset, and splat elements plus performance-oriented app settings.
+- [Creating Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/): How to create a Gaussian splat: capture source imagery, choose a tool, and let it run Structure from Motion and training to produce a PLY file.
+- [Recommended Tools](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/recommended-tools/): Third-party tools to train and export Gaussian splats: comparison table, capture apps, and research pipelines PlayCanvas does not ship.
+- [Taking Photos](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/taking-photos/): Capture guidance for high-quality splat training: equipment choices, shooting technique, coverage, and how photo issues affect results.
+- [Editing and Publishing Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/): Edit, publish, curate, share, and discover Gaussian Splats with the SuperSplat platform — and use the splat-transform CLI for scripted workflows.
+- [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/): Compare PLY and SOG splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows.
+- [The PLY Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply/): PLY format for 3D Gaussian splats: header layout, vertex properties, binary versus ASCII, and how training tools encode splat fields.
+- [The SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/): SOG (Spatially Ordered Gaussians) specification: WebP textures, meta.json layout, quantization, and bundled versus unbundled files.
+- [Splat Rendering Architecture](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/): How PlayCanvas renders Gaussian splats: the work buffer pipeline, global sorting across components, and access to advanced features.
+- [Renderers](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/renderers/): Gaussian splat renderers in PlayCanvas: raster with CPU sorting vs experimental GPU sorting, selecting a renderer, sorting, and depth buffer limits.
+- [Splat Data Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-data-format/): GSplatFormat and GPU texture streams: how splat attributes are stored, shader access, and customizing splat data layout.
+- [Splat Processing](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-processing/): GSplatProcessor for GPU splat processing: custom shaders, read-write streams, and use cases like painting and selection.
+- [Work Buffer Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format/): Work buffer format: copy stage customization, streams, and how data flows from resources into the work buffer.
+- [Work Buffer Rendering](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering/): Customize the render pass that draws sorted splats from the work buffer: global effects and integration with copy data.
+- [Viewing Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/viewing/): Preview Gaussian splats in the PlayCanvas Model Viewer: supported formats, controls, and how to inspect splats before editing or integration.
+- [What is Gaussian Splatting?](https://developer.playcanvas.com/user-manual/gaussian-splatting/what-is-gaussian-splatting/): Explains Gaussian splat fundamentals: what a splat is, why Gaussians are used, and common real-world applications for photorealistic 3D capture.
 
 ### Animation
-- https://developer.playcanvas.com/user-manual/animation/ - Animation
-- https://developer.playcanvas.com/user-manual/animation/anim-animation-assets/ - Animation Assets
-- https://developer.playcanvas.com/user-manual/animation/anim-component/ - Anim Component
-- https://developer.playcanvas.com/user-manual/animation/anim-events/ - Anim Events
-- https://developer.playcanvas.com/user-manual/animation/anim-layer-masking/ - Anim Layer Masks
-- https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets/ - Animstategraph Assets
+- [Animation](https://developer.playcanvas.com/user-manual/animation/): State-based character animation with FBX clips, animstategraph assets, and the anim component workflow.
+- [Animation Assets](https://developer.playcanvas.com/user-manual/animation/anim-animation-assets/): Keyframe animation assets from FBX conversion and how they link to animstategraphs through the anim component.
+- [Anim Component](https://developer.playcanvas.com/user-manual/animation/anim-component/): Editor guide to the anim component for wiring animstategraphs and animation assets to entities.
+- [Anim Events](https://developer.playcanvas.com/user-manual/animation/anim-events/): Fire named animation events on specific frames and handle them from the anim component in scripts.
+- [Anim Layer Masks](https://developer.playcanvas.com/user-manual/animation/anim-layer-masking/): Create per-layer bone masks so different layers drive separate skeleton regions and blend together.
+- [Animstategraph Assets](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets/): Author animstategraph state machines for animation states, transitions, blending, layers, and parameters.
 
 ### Physics
-- https://developer.playcanvas.com/user-manual/physics/ - Physics
-- https://developer.playcanvas.com/user-manual/physics/ammo-alternatives/ - Alternatives to ammo.js
-- https://developer.playcanvas.com/user-manual/physics/calling-ammo/ - Calling the ammo.js API
-- https://developer.playcanvas.com/user-manual/physics/compound-shapes/ - Compound Shapes
-- https://developer.playcanvas.com/user-manual/physics/forces-and-impulses/ - Forces and Impulses
-- https://developer.playcanvas.com/user-manual/physics/physics-basics/ - Physics Basics
-- https://developer.playcanvas.com/user-manual/physics/physics-migration/ - Updating ammo.js
-- https://developer.playcanvas.com/user-manual/physics/ray-casting/ - Ray Casting
-- https://developer.playcanvas.com/user-manual/physics/trigger-volumes/ - Trigger Volumes
+- [Physics](https://developer.playcanvas.com/user-manual/physics/): Overview of PlayCanvas physics: rigid bodies, collision, forces, raycasting, and related simulation topics.
+- [Alternatives to ammo.js](https://developer.playcanvas.com/user-manual/physics/ammo-alternatives/): Survey of lighter 2D and 3D physics engines when ammo.js size or cost is too high for your project.
+- [Calling the ammo.js API](https://developer.playcanvas.com/user-manual/physics/calling-ammo/): Call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components.
+- [Compound Shapes](https://developer.playcanvas.com/user-manual/physics/compound-shapes/): Combine primitive collision shapes on child entities into compound colliders for dynamic rigid bodies.
+- [Forces and Impulses](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses/): Apply continuous forces and one-frame impulses to dynamic rigid bodies using RigidBodyComponent APIs.
+- [Physics Basics](https://developer.playcanvas.com/user-manual/physics/physics-basics/): Enable ammo.js, set gravity and units, and configure rigidbody and collision components for Bullet physics.
+- [Updating ammo.js](https://developer.playcanvas.com/user-manual/physics/physics-migration/): Migrate from legacy built-in ammo.js to the latest wasm build using Scene Settings import and migration steps.
+- [Ray Casting](https://developer.playcanvas.com/user-manual/physics/ray-casting/): Cast rays through the scene for picking and hit tests from camera and mouse or touch positions.
+- [Trigger Volumes](https://developer.playcanvas.com/user-manual/physics/trigger-volumes/): Static trigger volumes that fire enter and leave events when rigid bodies pass through, with example scripts.
 
 ### 2D
-- https://developer.playcanvas.com/user-manual/2D/ - 2D
-- https://developer.playcanvas.com/user-manual/2D/9-slicing/ - 9-slicing
-- https://developer.playcanvas.com/user-manual/2D/sprite-editor/ - Sprite Editor
-- https://developer.playcanvas.com/user-manual/2D/texture-packing/ - Using Texture Packers
+- [2D](https://developer.playcanvas.com/user-manual/2D/): Build 2D games with sprites, texture atlases, and the Sprite Editor on top of the PlayCanvas engine.
+- [9-slicing](https://developer.playcanvas.com/user-manual/2D/9-slicing/): Scale buttons and panels without distorted corners using nine-slice borders defined in texture atlas frames.
+- [Sprite Editor](https://developer.playcanvas.com/user-manual/2D/sprite-editor/): Use the Sprite Editor to define atlas frames, borders, and sprites for 2D and UI rendering.
+- [Using Texture Packers](https://developer.playcanvas.com/user-manual/2D/texture-packing/): Use third-party texture packers to build atlases compatible with PlayCanvas for fewer loads and batching.
 
 ### User Interface
-- https://developer.playcanvas.com/user-manual/user-interface/ - User Interface
-- https://developer.playcanvas.com/user-manual/user-interface/elements/ - Elements
-- https://developer.playcanvas.com/user-manual/user-interface/group-elements/ - Group Elements
-- https://developer.playcanvas.com/user-manual/user-interface/image-elements/ - Image Elements
-- https://developer.playcanvas.com/user-manual/user-interface/input/ - Input
-- https://developer.playcanvas.com/user-manual/user-interface/layout-groups/ - Layout Groups
-- https://developer.playcanvas.com/user-manual/user-interface/localization/ - Localization
-- https://developer.playcanvas.com/user-manual/user-interface/safe-area/ - Safe Area
-- https://developer.playcanvas.com/user-manual/user-interface/screens/ - Screens
-- https://developer.playcanvas.com/user-manual/user-interface/text-elements/ - Text Elements
-- https://developer.playcanvas.com/user-manual/user-interface/user-interface-basics/ - User Interface Basics
+- [User Interface](https://developer.playcanvas.com/user-manual/user-interface/): Choose Screen and Element components for in-canvas UI or HTML and CSS, with performance trade-offs.
+- [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements/): Anchor, pivot, and margin properties that position and size Element components relative to their parents.
+- [Group Elements](https://developer.playcanvas.com/user-manual/user-interface/group-elements/): Use group elements as empty containers to position and parent other UI elements in the hierarchy.
+- [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements/): Display textures or solid colors with tint and opacity, and optional custom materials on image elements.
+- [Input](https://developer.playcanvas.com/user-manual/user-interface/input/): Enable element input, initialize ElementInput with the app, and handle clicks, hovers, and touch on UI.
+- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups/): Automate child element placement with horizontal, vertical, or grid layouts using Layout Group components.
+- [Localization](https://developer.playcanvas.com/user-manual/user-interface/localization/): Author JSON localization assets in Editor settings and bind translated keys to Text Element content.
+- [Safe Area](https://developer.playcanvas.com/user-manual/user-interface/safe-area/): Keep UI clear of notches and home bars on phones by applying CSS safe-area values to group margins.
+- [Screens](https://developer.playcanvas.com/user-manual/user-interface/screens/): Screen space versus world space rendering, resolutions, and scaling for PlayCanvas UI screens.
+- [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements/): Configure text elements with fonts, simple color markup, alignment, and localized string keys.
+- [User Interface Basics](https://developer.playcanvas.com/user-manual/user-interface/user-interface-basics/): How Screen and Element entities combine for layout, draw order, 9-slicing, input, and localization basics.
 
 ### XR
-- https://developer.playcanvas.com/user-manual/xr/ - XR
-- https://developer.playcanvas.com/user-manual/xr/ar/ - AR
-- https://developer.playcanvas.com/user-manual/xr/ar/8th-wall-integration/ - 8th Wall Integration
-- https://developer.playcanvas.com/user-manual/xr/ar/anchors/ - Anchors
-- https://developer.playcanvas.com/user-manual/xr/ar/camera-color/ - Camera Color
-- https://developer.playcanvas.com/user-manual/xr/ar/depth-sensing/ - Depth Sensing
-- https://developer.playcanvas.com/user-manual/xr/ar/dom-overlay/ - DOM Overlay
-- https://developer.playcanvas.com/user-manual/xr/ar/hit-testing/ - Hit Testing
-- https://developer.playcanvas.com/user-manual/xr/ar/image-tracking/ - Image Tracking
-- https://developer.playcanvas.com/user-manual/xr/ar/light-estimation/ - Light Estimation
-- https://developer.playcanvas.com/user-manual/xr/ar/mesh-detection/ - Mesh Detection
-- https://developer.playcanvas.com/user-manual/xr/ar/plane-detection/ - Plane Detection
-- https://developer.playcanvas.com/user-manual/xr/ar/zappar-integration/ - Zappar Integration
-- https://developer.playcanvas.com/user-manual/xr/capabilities/ - Capabilities
-- https://developer.playcanvas.com/user-manual/xr/hand-tracking/ - Hand Tracking
-- https://developer.playcanvas.com/user-manual/xr/input-sources/ - Input Sources
-- https://developer.playcanvas.com/user-manual/xr/optimizing-webxr/ - Optimizing WebXR applications
-- https://developer.playcanvas.com/user-manual/xr/platforms/ - Platforms
-- https://developer.playcanvas.com/user-manual/xr/using-webxr/ - Using WebXR in PlayCanvas
-- https://developer.playcanvas.com/user-manual/xr/vr/ - VR
-- https://developer.playcanvas.com/user-manual/xr/vr/types-of-vr/ - Types of VR experiences
+- [XR](https://developer.playcanvas.com/user-manual/xr/): Overview of WebXR AR and VR in PlayCanvas: platforms, capabilities, session setup, and links to AR, VR, and integration guides.
+- [AR](https://developer.playcanvas.com/user-manual/xr/ar/): Augmented reality with WebXR in PlayCanvas: mobile and HMD support, transparent camera setup, and third-party AR framework integrations.
+- [8th Wall Integration](https://developer.playcanvas.com/user-manual/xr/ar/8th-wall-integration/): Using 8th Wall with PlayCanvas for web AR: official docs, starter projects on PlayCanvas, and world, image, and face tracking.
+- [Anchors](https://developer.playcanvas.com/user-manual/xr/ar/anchors/): WebXR anchors in PlayCanvas: creating stable world-locked points, persistence, hit-test-linked anchors, and session feature flags.
+- [Camera Color](https://developer.playcanvas.com/user-manual/xr/ar/camera-color/): Accessing the AR camera color texture in PlayCanvas for pass-through compositing, session options, and runtime support checks.
+- [Depth Sensing](https://developer.playcanvas.com/user-manual/xr/ar/depth-sensing/): WebXR depth sensing in PlayCanvas for occlusion and scene interaction: GPU and CPU paths, textures, and configuring depth session options.
+- [DOM Overlay](https://developer.playcanvas.com/user-manual/xr/ar/dom-overlay/): DOM Overlay for monoscopic AR: overlaying HTML and CSS UI on the camera view, root elements, and checking feature support in PlayCanvas.
+- [Hit Testing](https://developer.playcanvas.com/user-manual/xr/ar/hit-testing/): AR hit testing in PlayCanvas: ray intersections with real-world geometry, reliability, and placing virtual objects that align with the scene.
+- [Image Tracking](https://developer.playcanvas.com/user-manual/xr/ar/image-tracking/): Tracking real-world images in AR with PlayCanvas: reference images, estimated size, pose updates, and runtime support checks.
+- [Light Estimation](https://developer.playcanvas.com/user-manual/xr/ar/light-estimation/): Real-world light estimation for AR in PlayCanvas: directional and ambient probes, spherical harmonics, and matching virtual shading to the scene.
+- [Mesh Detection](https://developer.playcanvas.com/user-manual/xr/ar/mesh-detection/): Real-world mesh detection for AR: semantic meshes, transforms, physics and occlusion uses, and PlayCanvas APIs for mesh geometry.
+- [Plane Detection](https://developer.playcanvas.com/user-manual/xr/ar/plane-detection/): AR plane detection in PlayCanvas: labeled surfaces such as floors and walls, geometry access, and comparing planes to mesh detection.
+- [Zappar Integration](https://developer.playcanvas.com/user-manual/xr/ar/zappar-integration/): Zappar Universal AR with PlayCanvas: supported browsers, getting started, starter projects, and tracking templates for AR scenes.
+- [Capabilities](https://developer.playcanvas.com/user-manual/xr/capabilities/): Supported WebXR modules in PlayCanvas, including anchors, depth, hand tracking, hit testing, mesh and plane detection, and related features.
+- [Hand Tracking](https://developer.playcanvas.com/user-manual/xr/hand-tracking/): WebXR hand input in PlayCanvas: XrHand joints and fingers, building hand visuals from joint data, and tracking loss or restoration events.
+- [Input Sources](https://developer.playcanvas.com/user-manual/xr/input-sources/): Using XR input sources for controllers, tracked hands, gaze, and touch, including listing sources and handling transient input in PlayCanvas.
+- [Optimizing WebXR applications](https://developer.playcanvas.com/user-manual/xr/optimizing-webxr/): Performance guidance for WebXR: frame rate, stereo rendering cost, draw calls, batching, lightmaps, and mobile AR tracking overhead.
+- [Platforms](https://developer.playcanvas.com/user-manual/xr/platforms/): WebXR hardware and browser requirements with a tested platform matrix for VR, AR, and capabilities on Quest, mobile, PCVR, and Vision Pro.
+- [Using WebXR in PlayCanvas](https://developer.playcanvas.com/user-manual/xr/using-webxr/): Detect WebXR support, start VR and AR sessions from user input, and configure sessions with the camera component and XrManager.
+- [VR](https://developer.playcanvas.com/user-manual/xr/vr/): Virtual reality with WebXR in PlayCanvas: supported platforms, project settings, starting VR sessions, and links to VR-specific topics.
+- [Types of VR experiences](https://developer.playcanvas.com/user-manual/xr/vr/types-of-vr/): VR reference spaces for room-scale and seated experiences: choosing XRSPACE values and matching them to device movement capabilities.
 
 ### Optimization
-- https://developer.playcanvas.com/user-manual/optimization/ - Optimization
-- https://developer.playcanvas.com/user-manual/optimization/gpu-profiling/ - GPU Profiling
-- https://developer.playcanvas.com/user-manual/optimization/guidelines/ - General Guidelines
-- https://developer.playcanvas.com/user-manual/optimization/load-time/ - Optimizing Load Time
-- https://developer.playcanvas.com/user-manual/optimization/mini-stats/ - MiniStats
-- https://developer.playcanvas.com/user-manual/optimization/optimizing-scene-format/ - Optimize Scene Format
-- https://developer.playcanvas.com/user-manual/optimization/profiler/ - Profiler
-- https://developer.playcanvas.com/user-manual/optimization/runtime-devicepixelratio/ - Device Pixel Ratio
-- https://developer.playcanvas.com/user-manual/optimization/texture-compression/ - Texture Compression
-- https://developer.playcanvas.com/user-manual/optimization/troubleshooting-performance/ - Troubleshooting Performance
+- [Optimization](https://developer.playcanvas.com/user-manual/optimization/): Why and how to optimize load time, frame rate, CPU, GPU load, and memory in PlayCanvas applications.
+- [GPU Profiling](https://developer.playcanvas.com/user-manual/optimization/gpu-profiling/): Capture WebGL or WebGPU frames with native GPU profilers on desktop and Android for deeper GPU insight.
+- [General Guidelines](https://developer.playcanvas.com/user-manual/optimization/guidelines/): General tuning tips for scripts, draw calls, batching, shaders, lighting, textures, and post effects.
+- [Optimizing Load Time](https://developer.playcanvas.com/user-manual/optimization/load-time/): Speed up startup with image formats, texture sizes, preload choices, asset audits, gzip, and staged loading.
+- [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats/): Enable MiniStats from Launch for draw calls, frame time, and CPU or GPU graphs during development.
+- [Optimize Scene Format](https://developer.playcanvas.com/user-manual/optimization/optimizing-scene-format/): Publish option that compresses scene JSON for smaller gzipped downloads without changing runtime behavior.
+- [Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler/): Use the built-in Profiler overlay for frame stats, update and render timings, and the app launch timeline.
+- [Device Pixel Ratio](https://developer.playcanvas.com/user-manual/optimization/runtime-devicepixelratio/): Change maxPixelRatio at runtime to balance sharp rendering against fill-rate limits on varied devices.
+- [Texture Compression](https://developer.playcanvas.com/user-manual/optimization/texture-compression/): Reduce VRAM and download size with Basis texture compression and runtime transcoding in the Editor.
+- [Troubleshooting Performance](https://developer.playcanvas.com/user-manual/optimization/troubleshooting-performance/): Diagnose slow WebGL from GPU blacklists, SwiftShader, Firefox blocks, and dual-GPU selection on Windows.
 
 ### API
-- https://developer.playcanvas.com/user-manual/api/ - REST API
-- https://developer.playcanvas.com/user-manual/api/app-download/ - Apps - Download app
-- https://developer.playcanvas.com/user-manual/api/app-get-primary/ - Apps - Get primary app
-- https://developer.playcanvas.com/user-manual/api/app-get-project/ - Apps - Get project apps
-- https://developer.playcanvas.com/user-manual/api/app-get/ - Apps - Get app
-- https://developer.playcanvas.com/user-manual/api/asset-create/ - Assets - Create asset
-- https://developer.playcanvas.com/user-manual/api/asset-delete/ - Assets - Delete asset
-- https://developer.playcanvas.com/user-manual/api/asset-file/ - Assets - Get Asset File
-- https://developer.playcanvas.com/user-manual/api/asset-get/ - Assets - Get Asset
-- https://developer.playcanvas.com/user-manual/api/asset-list/ - Assets - List assets
-- https://developer.playcanvas.com/user-manual/api/asset-update/ - Assets - Update asset
-- https://developer.playcanvas.com/user-manual/api/branch-create/ - Branches - Create branch
-- https://developer.playcanvas.com/user-manual/api/branch-list/ - Branches - List branches
-- https://developer.playcanvas.com/user-manual/api/checkpoint-create/ - Checkpoints - Create checkpoint
-- https://developer.playcanvas.com/user-manual/api/checkpoint-get/ - Checkpoints - Get checkpoint
-- https://developer.playcanvas.com/user-manual/api/checkpoint-list/ - Checkpoints - List checkpoints
-- https://developer.playcanvas.com/user-manual/api/job-get/ - Jobs - Get job
-- https://developer.playcanvas.com/user-manual/api/project-export/ - Projects - Export project
-- https://developer.playcanvas.com/user-manual/api/scene-list/ - Scenes - List scenes
-- https://developer.playcanvas.com/user-manual/api/splat-publish/ - Splat Publishing
+- [REST API](https://developer.playcanvas.com/user-manual/api/): PlayCanvas REST API overview: beta status, HTTPS and bearer token auth, endpoint index, and how to call the API from your tools.
+- [Apps - Download app](https://developer.playcanvas.com/user-manual/api/app-download/): POST apps/download starts an app download job in static or npm format; poll jobs until complete to retrieve the packaged app download URL.
+- [Apps - Get primary app](https://developer.playcanvas.com/user-manual/api/app-get-primary/): GET the primary published app metadata for a project by project id using bearer authentication on the PlayCanvas REST API.
+- [Apps - Get project apps](https://developer.playcanvas.com/user-manual/api/app-get-project/): List all published apps for a PlayCanvas project via GET projects/:projectId/apps with query parameters and response schema details.
+- [Apps - Get app](https://developer.playcanvas.com/user-manual/api/app-get/): Retrieve a single published app by id from the PlayCanvas REST API, including curl example, parameters, and JSON response fields.
+- [Assets - Create asset](https://developer.playcanvas.com/user-manual/api/asset-create/): Create script, HTML, CSS, text, shader, or JSON assets via POST /api/assets with supported types, body fields, and examples.
+- [Assets - Delete asset](https://developer.playcanvas.com/user-manual/api/asset-delete/): Permanently delete an asset on a branch via the REST API, with warnings about checkpoints and required branch query parameters.
+- [Assets - Get Asset File](https://developer.playcanvas.com/user-manual/api/asset-file/): Fetch a specific asset file variant by filename for a branch, including URL pattern, authentication, and response handling.
+- [Assets - Get Asset](https://developer.playcanvas.com/user-manual/api/asset-get/): GET asset metadata by id and branch id: REST route, curl example, and fields returned for a single project asset.
+- [Assets - List assets](https://developer.playcanvas.com/user-manual/api/asset-list/): Paginated listing of all assets in a project branch via GET with skip and limit parameters, plus response shape and examples.
+- [Assets - Update asset](https://developer.playcanvas.com/user-manual/api/asset-update/): Update text-based asset file contents with PUT /api/assets/:id for supported script, HTML, CSS, JSON, shader, and text types.
+- [Branches - Create branch](https://developer.playcanvas.com/user-manual/api/branch-create/): Create a new project branch from a source branch and optional checkpoint using POST /api/branches with JSON body and examples.
+- [Branches - List branches](https://developer.playcanvas.com/user-manual/api/branch-list/): List open branches for a PlayCanvas project via GET projects/:projectId/branches with authentication and response field reference.
+- [Checkpoints - Create checkpoint](https://developer.playcanvas.com/user-manual/api/checkpoint-create/): Start an asynchronous checkpoint creation job with POST /api/checkpoints, then poll the returned job until the checkpoint is created.
+- [Checkpoints - Get checkpoint](https://developer.playcanvas.com/user-manual/api/checkpoint-get/): Retrieve a single checkpoint record by id from the REST API for version history inspection or automation workflows.
+- [Checkpoints - List checkpoints](https://developer.playcanvas.com/user-manual/api/checkpoint-list/): List checkpoints for a branch newest-first via GET branches/:branchId/checkpoints with pagination notes and example curl calls.
+- [Jobs - Get job](https://developer.playcanvas.com/user-manual/api/job-get/): Poll asynchronous export and download jobs by id until status is complete or error, reading result URLs from job payload data.
+- [Projects - Export project](https://developer.playcanvas.com/user-manual/api/project-export/): Start a full project ZIP export job via POST projects/:id/export, then poll jobs for the downloadable archive link and import notes.
+- [Scenes - List scenes](https://developer.playcanvas.com/user-manual/api/scene-list/): List all scenes in a project for a given branch id using GET projects/:projectId/scenes with authentication and response schema.
+- [Splat Publishing](https://developer.playcanvas.com/user-manual/api/splat-publish/): SuperSplat publish flow via REST: signed S3 upload URL, direct file upload, and processing job endpoints with bearer authentication.
 
 ### PCUI
-- https://developer.playcanvas.com/user-manual/pcui/ - PCUI
-- https://developer.playcanvas.com/user-manual/pcui/data-binding/ - Data Binding
-- https://developer.playcanvas.com/user-manual/pcui/data-binding/two-way-binding/ - Two Way Binding
-- https://developer.playcanvas.com/user-manual/pcui/data-binding/using-observers/ - Using Observers
-- https://developer.playcanvas.com/user-manual/pcui/examples/ - Examples
-- https://developer.playcanvas.com/user-manual/pcui/examples/history/ - History
-- https://developer.playcanvas.com/user-manual/pcui/examples/todo-list/ - Todo List
-- https://developer.playcanvas.com/user-manual/pcui/getting-started/ - Getting Started
-- https://developer.playcanvas.com/user-manual/pcui/pcui-graph/ - PCUI Graph
-- https://developer.playcanvas.com/user-manual/pcui/pcui-graph/context-menus/ - Context Menus
-- https://developer.playcanvas.com/user-manual/pcui/pcui-graph/events/ - Events
-- https://developer.playcanvas.com/user-manual/pcui/pcui-graph/getting-started/ - Getting Started
-- https://developer.playcanvas.com/user-manual/pcui/pcui-graph/schema/ - Schema
-- https://developer.playcanvas.com/user-manual/pcui/pcui-graph/styling/ - Styling
-- https://developer.playcanvas.com/user-manual/pcui/react/ - React
+- [PCUI](https://developer.playcanvas.com/user-manual/pcui/): Introduction to PCUI, the PlayCanvas UI framework used by the Editor and tools, and how to adopt it in your own web projects.
+- [Data Binding](https://developer.playcanvas.com/user-manual/pcui/data-binding/): PCUI data binding overview: synchronizing components with shared observer state and propagating UI updates across your interface.
+- [Two Way Binding](https://developer.playcanvas.com/user-manual/pcui/data-binding/two-way-binding/): Two-way observer bindings in PCUI so inputs and labels stay in sync, with a React example and Storybook embed walkthrough.
+- [Using Observers](https://developer.playcanvas.com/user-manual/pcui/data-binding/using-observers/): Binding PCUI elements to Observer state: simple label and text input flows and how updates propagate through the observer model.
+- [Examples](https://developer.playcanvas.com/user-manual/pcui/examples/): Live PCUI examples gallery with embedded demos and links to source in the PCUI GitHub repository for copy-paste experimentation.
+- [History](https://developer.playcanvas.com/user-manual/pcui/examples/history/): PCUI history example with slider and progress bar, demonstrating undo and redo stacks tied to observer-backed UI state.
+- [Todo List](https://developer.playcanvas.com/user-manual/pcui/examples/todo-list/): Interactive todo list PCUI example: add items, toggle completion, filter by status, with full React sample code and Storybook embed.
+- [Getting Started](https://developer.playcanvas.com/user-manual/pcui/getting-started/): Install PCUI from npm, import components and styles, and set up a minimal project with the library and its React package.
+- [PCUI Graph](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/): PCUI Graph for node-based graphs in the browser: purpose, relationship to PCUI, and where to find the standalone package and docs.
+- [Context Menus](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/context-menus/): Context menus in PCUI Graph for canvas, nodes, and edges: defining menu items, actions, and wiring ADD_NODE and related graph actions.
+- [Events](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/events/): PCUI Graph event API: subscribing with on(), node and edge lifecycle events, and handling graph edits from user interaction.
+- [Getting Started](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/getting-started/): Install @playcanvas/pcui-graph from npm, prerequisites with PCUI, and initial setup for embedding a graph in your application.
+- [Schema](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/schema/): Defining a PCUI Graph schema: node and edge types, numeric keys, connection rules, and structuring large graphs maintainably.
+- [Styling](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/styling/): Customizing PCUI Graph appearance by overriding defaultStyles in the graph constructor for backgrounds, nodes, and canvas chrome.
+- [React](https://developer.playcanvas.com/user-manual/pcui/react/): Using PCUI React wrappers: importing from @playcanvas/pcui/react, bundling styles, and rendering components in JSX applications.
 
-- https://developer.playcanvas.com/user-manual/glossary/ - Glossary
-- https://developer.playcanvas.com/user-manual/press-pack/ - Press Pack
-- https://developer.playcanvas.com/user-manual/ - Welcome
-- https://developer.playcanvas.com/user-manual/security/ - Security
-### Splat Transform
-- https://developer.playcanvas.com/user-manual/splat-transform/ - SplatTransform
-- https://developer.playcanvas.com/user-manual/splat-transform/collision/ - Collision Mesh Generation
-- https://developer.playcanvas.com/user-manual/splat-transform/docker/ - Docker Backend
+## Optional
 
-### Supersplat
-- https://developer.playcanvas.com/user-manual/supersplat/ - SuperSplat
-- https://developer.playcanvas.com/user-manual/supersplat/convert/ - Convert
-- https://developer.playcanvas.com/user-manual/supersplat/editor/ - SuperSplat Editor
-- https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls/ - Camera Controls
-- https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel/ - Data Panel
-- https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats/ - Editing Splats
-- https://developer.playcanvas.com/user-manual/supersplat/editor/import-export/ - Import and Export
-- https://developer.playcanvas.com/user-manual/supersplat/editor/interface/ - Interface Overview
-- https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects/ - Managing Projects
-- https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/ - Publishing
-- https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/ - Rendering Media
-- https://developer.playcanvas.com/user-manual/supersplat/editor/timeline/ - Timeline
-- https://developer.playcanvas.com/user-manual/supersplat/explore/ - Explore
-- https://developer.playcanvas.com/user-manual/supersplat/manage/ - Manage
-- https://developer.playcanvas.com/user-manual/supersplat/scene-page/ - Scene Page
-- https://developer.playcanvas.com/user-manual/supersplat/streaming/ - Streaming & Performance
-- https://developer.playcanvas.com/user-manual/supersplat/studio/ - SuperSplat Studio
-- https://developer.playcanvas.com/user-manual/supersplat/studio/annotations/ - Annotations
-- https://developer.playcanvas.com/user-manual/supersplat/studio/cameras/ - Cameras
-- https://developer.playcanvas.com/user-manual/supersplat/studio/collision/ - Collision
-- https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings/ - Experience Settings
-- https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects/ - Post Effects
-- https://developer.playcanvas.com/user-manual/supersplat/studio/skybox/ - Skybox & Background
-- https://developer.playcanvas.com/user-manual/supersplat/upload/ - Direct Upload
-- https://developer.playcanvas.com/user-manual/supersplat/user-profile/ - User Profile
-- https://developer.playcanvas.com/user-manual/supersplat/viewer/ - SuperSplat Viewer
-- https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding/ - Embedding the Viewer
-- https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting/ - Self-Hosting the Viewer
+Secondary content that most coding tasks will not need.
 
-## Tutorials
+### Account Management
+- [Account Management](https://developer.playcanvas.com/user-manual/account-management/): Manage your PlayCanvas user account, organizations, team permissions, and billing subscriptions.
+- [Billing](https://developer.playcanvas.com/user-manual/account-management/billing/): Frequently asked questions about PlayCanvas subscription plans, payments, invoices, and plan changes.
+- [Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/): Team workspaces for managing multiple users, projects, and permissions in PlayCanvas.
+- [Creating Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/creating/): Step-by-step guide to creating a new PlayCanvas Organization from the dashboard or your profile.
+- [Managing Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/managing/): Configure Organization permissions, manage seat allocation, and handle owner and administrator roles.
+- [User Accounts](https://developer.playcanvas.com/user-manual/account-management/user-accounts/): Create and manage your PlayCanvas user account to access the Editor, explore public projects, and join the community.
+- [Creating Your Account](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation/): Sign up for PlayCanvas using email, Google, or GitHub and complete your profile setup.
+- [Account Settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings/): Update your PlayCanvas profile, change your password, manage email preferences, and configure privacy settings.
+- [User Home](https://developer.playcanvas.com/user-manual/account-management/user-accounts/user-home/): Your PlayCanvas User Home page displays your profile, projects, and public activity.
 
-- https://developer.playcanvas.com/tutorials/360-lookaround-camera/ - 360 lookaround camera
-- https://developer.playcanvas.com/tutorials/additive-loading-scenes/ - Additive Loading Scenes
-- https://developer.playcanvas.com/tutorials/advance-loading-screen/ - Base64 Loading Screen Images
-- https://developer.playcanvas.com/tutorials/anim-blending/ - Anim State Graph Blending
-- https://developer.playcanvas.com/tutorials/animate-entities-with-curves/ - Animate entities with curves
-- https://developer.playcanvas.com/tutorials/animated-textures/ - Animated Textures
-- https://developer.playcanvas.com/tutorials/animation-blending/ - Animation Blending
-- https://developer.playcanvas.com/tutorials/animation-without-state-graph/ - Animation without State Graph
-- https://developer.playcanvas.com/tutorials/audio-effects/ - Audio Effects
-- https://developer.playcanvas.com/tutorials/basic-audio/ - Basic Audio
-- https://developer.playcanvas.com/tutorials/basic-cameras/ - Basic Cameras
-- https://developer.playcanvas.com/tutorials/basic-materials/ - Basic Materials
-- https://developer.playcanvas.com/tutorials/basic-touch-input/ - Basic touch input
-- https://developer.playcanvas.com/tutorials/billboards/ - Billboards
-- https://developer.playcanvas.com/tutorials/camera-following-a-path/ - Camera following a path
-- https://developer.playcanvas.com/tutorials/camera-model-masking/ - Camera model masking
-- https://developer.playcanvas.com/tutorials/capturing-a-screenshot/ - Capturing a screenshot
-- https://developer.playcanvas.com/tutorials/changing-scenes/ - Changing Scenes
-- https://developer.playcanvas.com/tutorials/changing-textures-at-runtime/ - Changing textures at runtime
-- https://developer.playcanvas.com/tutorials/collision-and-triggers/ - Collision and Triggers
-- https://developer.playcanvas.com/tutorials/compound-physics-shapes/ - Compound Physics Shapes
-- https://developer.playcanvas.com/tutorials/controlling-lights/ - Controlling Lights
-- https://developer.playcanvas.com/tutorials/crash-course/ - Crash Course - Make a Game
-- https://developer.playcanvas.com/tutorials/create-qr-code-at-runtime/ - Create QR Code at runtime
-- https://developer.playcanvas.com/tutorials/creating-rigid-bodies-in-code/ - Creating Rigid Bodies in Code
-- https://developer.playcanvas.com/tutorials/custom-posteffect/ - Custom Post Effects
-- https://developer.playcanvas.com/tutorials/custom-shaders/ - Custom Shaders
-- https://developer.playcanvas.com/tutorials/detecting-a-double-click/ - Detecting a double click
-- https://developer.playcanvas.com/tutorials/detecting-a-double-tap/ - Detecting a double tap
-- https://developer.playcanvas.com/tutorials/detecting-a-long-press/ - Detecting a long press
-- https://developer.playcanvas.com/tutorials/dynamic-ui-scroll-view/ - Dynamic UI Scroll View
-- https://developer.playcanvas.com/tutorials/entity-picking/ - Entity Picking
-- https://developer.playcanvas.com/tutorials/entity-picking-using-physics/ - Entity picking using physics
-- https://developer.playcanvas.com/tutorials/entity-picking-without-physics/ - Entity picking without physics
-- https://developer.playcanvas.com/tutorials/explosion-particle-effect/ - Explosion Particle Effect
-- https://developer.playcanvas.com/tutorials/fading-objects-in-and-out/ - Fading objects in and out
-- https://developer.playcanvas.com/tutorials/first-person-movement/ - First Person Movement
-- https://developer.playcanvas.com/tutorials/first-person-shooter-starter-kit/ - First Person Shooter Starter Kit
-- https://developer.playcanvas.com/tutorials/flaming-fireball/ - Flaming fireball
-- https://developer.playcanvas.com/tutorials/flappy-bird/ - Flappy Bird
-- https://developer.playcanvas.com/tutorials/frames-per-sec-fps-counter/ - Frames Per Sec (FPS) counter
-- https://developer.playcanvas.com/tutorials/gaussian-splat-annotations/ - 3D Gaussian Splat Annotations
-- https://developer.playcanvas.com/tutorials/gaussian-splat-physics-and-relighting/ - 3D Gaussian Splat Physics and Relighting
-- https://developer.playcanvas.com/tutorials/gaussian-splat-statues/ - 3D Gaussian Splat Statues
-- https://developer.playcanvas.com/tutorials/gaussian-splat-streaming-lod/ - 3D Gaussian Splat Streaming LOD
-- https://developer.playcanvas.com/tutorials/google-ads-for-games/ - Google H5 Ads Beta Monetization
-- https://developer.playcanvas.com/tutorials/htmlcss---live-updates/ - HTML/CSS - Live Updates
-- https://developer.playcanvas.com/tutorials/htmlcss-ui/ - HTML/CSS UI
-- https://developer.playcanvas.com/tutorials/importing-first-model-and-animation/ - Importing your first Model and Animation
-- https://developer.playcanvas.com/tutorials/information-hotspots/ - Information hotspots
-- https://developer.playcanvas.com/tutorials/keepyup-part-five/ - Making a Simple Game - Part 5
-- https://developer.playcanvas.com/tutorials/keepyup-part-four/ - Making a Simple Game - Part 4
-- https://developer.playcanvas.com/tutorials/keepyup-part-one/ - Making a Simple Game - Part 1
-- https://developer.playcanvas.com/tutorials/keepyup-part-six/ - Making a Simple Game - Part 6
-- https://developer.playcanvas.com/tutorials/keepyup-part-three/ - Making a Simple Game - Part 3
-- https://developer.playcanvas.com/tutorials/keepyup-part-two/ - Making a Simple Game - Part 2
-- https://developer.playcanvas.com/tutorials/keyboard-input/ - Basic Keyboard Input
-- https://developer.playcanvas.com/tutorials/light-cookies/ - Light Cookies
-- https://developer.playcanvas.com/tutorials/light-halos/ - Light Halos
-- https://developer.playcanvas.com/tutorials/load-assets-with-a-progress-bar/ - Load assets with a progress bar
-- https://developer.playcanvas.com/tutorials/load-multiple-assets-at-runtime/ - Load multiple assets at runtime
-- https://developer.playcanvas.com/tutorials/loading-an-asset-at-runtime/ - Loading an asset at runtime
-- https://developer.playcanvas.com/tutorials/loading-circle-ui/ - Loading Circle UI
-- https://developer.playcanvas.com/tutorials/loading-draco-compressed-glbs/ - Loading Draco Compressed GLBs
-- https://developer.playcanvas.com/tutorials/loading-gltf-glbs/ - Loading glTF GLBs
-- https://developer.playcanvas.com/tutorials/loading-json/ - Loading JSON Data
-- https://developer.playcanvas.com/tutorials/locking-the-mouse/ - Locking the mouse
-- https://developer.playcanvas.com/tutorials/manipulating-entities/ - Manipulating Entities
-- https://developer.playcanvas.com/tutorials/mobile-ui-safe-areas/ - Mobile UI Safe Areas
-- https://developer.playcanvas.com/tutorials/more-cameras/ - More Cameras
-- https://developer.playcanvas.com/tutorials/mouse-input/ - Basic Mouse Input
-- https://developer.playcanvas.com/tutorials/multiple-camera-layers/ - Multiple Camera Layers
-- https://developer.playcanvas.com/tutorials/multiple-viewport-rendering/ - Multiple Viewport Rendering
-- https://developer.playcanvas.com/tutorials/multitouch-input/ - Multitouch input
-- https://developer.playcanvas.com/tutorials/music-visualizer/ - Creating a Music Visualizer
-- https://developer.playcanvas.com/tutorials/orange-room/ - Orange Room
-- https://developer.playcanvas.com/tutorials/orbit-camera/ - Orbit camera
-- https://developer.playcanvas.com/tutorials/pan-camera-to-target/ - Pan Camera to Target
-- https://developer.playcanvas.com/tutorials/pauseplay-application/ - Pause/Play application
-- https://developer.playcanvas.com/tutorials/physics-raycasting-by-tag/ - Physics raycasting by tag
-- https://developer.playcanvas.com/tutorials/physics-with-ccd/ - Physics with CCD
-- https://developer.playcanvas.com/tutorials/place-an-entity-with-physics/ - Place an entity with physics
-- https://developer.playcanvas.com/tutorials/place-entity-without-physics/ - Place entity without physics
-- https://developer.playcanvas.com/tutorials/planar-mirror-reflection/ - Planar Mirror Reflection
-- https://developer.playcanvas.com/tutorials/planet-earth/ - Planet Earth
-- https://developer.playcanvas.com/tutorials/point-and-click-movement/ - Point and click movement
-- https://developer.playcanvas.com/tutorials/procedural-gradient-texture/ - Procedural Gradient Texture
-- https://developer.playcanvas.com/tutorials/procedural-levels/ - Procedural Levels
-- https://developer.playcanvas.com/tutorials/programmatically-creating/ - Programmatically Creating Entities
-- https://developer.playcanvas.com/tutorials/rainbow-trail-with-mesh-api/ - Rainbow Trail with Mesh API
-- https://developer.playcanvas.com/tutorials/raycast-with-camera-viewports/ - Raycast with Camera Viewports
-- https://developer.playcanvas.com/tutorials/real-time-multiplayer/ - Real Time Multiplayer
-- https://developer.playcanvas.com/tutorials/real-time-multiplayer-colyseus/ - Real-time Multiplayer with Colyseus
-- https://developer.playcanvas.com/tutorials/real-time-multiplayer-photon/ - Real-time Multiplayer with Photon
-- https://developer.playcanvas.com/tutorials/render-3d-world-to-ui/ - Render 3D World to UI
-- https://developer.playcanvas.com/tutorials/resolution-scaling/ - Resolution Scaling
-- https://developer.playcanvas.com/tutorials/right-to-left-language-support/ - Right to left language support
-- https://developer.playcanvas.com/tutorials/rotating-objects-with-mouse/ - Rotating Objects with Mouse
-- https://developer.playcanvas.com/tutorials/shockwave/ - Shockwave
-- https://developer.playcanvas.com/tutorials/simple-shape-raycasting/ - Simple shape raycasting
-- https://developer.playcanvas.com/tutorials/simple-water-surface/ - Simple water surface
-- https://developer.playcanvas.com/tutorials/smooth-camera-movement/ - Smooth camera movement
-- https://developer.playcanvas.com/tutorials/sound-volume-control-using-curve/ - Sound volume control using curve
-- https://developer.playcanvas.com/tutorials/space-rocks/ - Space Rocks!
-- https://developer.playcanvas.com/tutorials/static-batching/ - Static Batching
-- https://developer.playcanvas.com/tutorials/stencil-buffer---3d-magic-card/ - Stencil Buffer - 3D Magic Card
-- https://developer.playcanvas.com/tutorials/switch-full-scene/ - Switch Full Scene
-- https://developer.playcanvas.com/tutorials/switching-materials-at-runtime/ - Switching materials at runtime
-- https://developer.playcanvas.com/tutorials/terrain-generation/ - Terrain Generation from Heightmap
-- https://developer.playcanvas.com/tutorials/third-person-controller/ - Third Person Controller
-- https://developer.playcanvas.com/tutorials/tic-tac-toe/ - Tic Tac Toe
-- https://developer.playcanvas.com/tutorials/timers/ - Timers
-- https://developer.playcanvas.com/tutorials/touch-joypad/ - Touchscreen Joypad Controls
-- https://developer.playcanvas.com/tutorials/tutorial-layout-groups/ - Tutorial: Layout Groups
-- https://developer.playcanvas.com/tutorials/tutorial-normal-mapped-text/ - Tutorial: Normal Mapped Text
-- https://developer.playcanvas.com/tutorials/tutorial-plasma-shader-chunk/ - Tutorial: Plasma Shader Chunk
-- https://developer.playcanvas.com/tutorials/tutorial-shop-user-interface/ - Tutorial: Shop User Interface
-- https://developer.playcanvas.com/tutorials/tweening/ - Using the Tween library
-- https://developer.playcanvas.com/tutorials/ui-elements-buttons/ - User Interface - Buttons
-- https://developer.playcanvas.com/tutorials/ui-elements-leaderboard/ - User Interface - Leaderboard
-- https://developer.playcanvas.com/tutorials/ui-elements-progress/ - User Interface - Progress Bar
-- https://developer.playcanvas.com/tutorials/ui-elements-stats-counter/ - User Interface - Stats Counter
-- https://developer.playcanvas.com/tutorials/ui-text-input/ - User Interface - Text Input
-- https://developer.playcanvas.com/tutorials/using-assets/ - Using the Asset Registry
-- https://developer.playcanvas.com/tutorials/using-events-with-scripts/ - Using events with scripts
-- https://developer.playcanvas.com/tutorials/using-forces-on-rigid-bodies/ - Forces and Impulses
-- https://developer.playcanvas.com/tutorials/vehicle-physics/ - Vehicle Physics
-- https://developer.playcanvas.com/tutorials/vhscrt-post-effect/ - VHS/CRT Post Effect
-- https://developer.playcanvas.com/tutorials/video-textures/ - Video Textures
-- https://developer.playcanvas.com/tutorials/vignette-aberration/ - Vignette Aberration
-- https://developer.playcanvas.com/tutorials/warp-a-sprite-with-glsl/ - Warp a Sprite with GLSL
-- https://developer.playcanvas.com/tutorials/webxr-360-image/ - WebXR 360 Image
-- https://developer.playcanvas.com/tutorials/webxr-360-video/ - WebXR 360 Video
-- https://developer.playcanvas.com/tutorials/webxr-ar-dom-overlay/ - WebXR AR: DOM Overlay
-- https://developer.playcanvas.com/tutorials/webxr-ar-hit-test/ - WebXR AR: Hit Test
-- https://developer.playcanvas.com/tutorials/webxr-ar-image-tracking/ - WebXR: AR Image Tracking
-- https://developer.playcanvas.com/tutorials/webxr-ar-raycasting-shapes/ - WebXR AR Raycasting Shapes
-- https://developer.playcanvas.com/tutorials/webxr-controllerhand-models/ - WebXR Controller/Hand Models
-- https://developer.playcanvas.com/tutorials/webxr-hands/ - WebXR Hands
-- https://developer.playcanvas.com/tutorials/webxr-hello-world/ - WebXR Hello World
-- https://developer.playcanvas.com/tutorials/webxr-plane-detection/ - WebXR: Plane Detection
-- https://developer.playcanvas.com/tutorials/webxr-ray-input/ - WebXR UI Interaction
-- https://developer.playcanvas.com/tutorials/webxr-realistic-hands/ - WebXR Realistic Hands
-- https://developer.playcanvas.com/tutorials/webxr-tracked-controllers/ - WebXR Tracked Controllers
-- https://developer.playcanvas.com/tutorials/webxr-vr-lab/ - WebXR VR Lab
-- https://developer.playcanvas.com/tutorials/world-space-ui-rendering-on-top/ - World space UI rendering on top
-- https://developer.playcanvas.com/tutorials/world-to-ui-screen-space/ - World to UI Screen space
+- [Glossary](https://developer.playcanvas.com/user-manual/glossary/): Definitions of key PlayCanvas terms including Entity, Component, Asset, Scene, Material, Script, and more.
+- [Press Pack](https://developer.playcanvas.com/user-manual/press-pack/): Download official PlayCanvas logos, promotional images, and videos for use in your marketing materials.
+- [Security](https://developer.playcanvas.com/user-manual/security/): Report security vulnerabilities in PlayCanvas through Snap Inc.'s HackerOne bug bounty program. Learn about in-scope domains and responsible disclosure.
