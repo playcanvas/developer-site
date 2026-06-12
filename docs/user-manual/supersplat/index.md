@@ -8,25 +8,23 @@ description: "SuperSplat is PlayCanvas's editing and publishing platform for 3D 
 The platform is made up of several pieces. Some you'll use as a creator, some your visitors use to view what you've made, and some are general-purpose utilities.
 
 ```mermaid
-flowchart LR
-    PLY([Raw splat<br/>PLY / SOG / ...])
-    Editor([Editor])
-    Upload([Direct Upload])
-    Manage([Manage])
-    Studio([Studio])
-    Scene([Scene page])
-    Explore([Explore])
-    Viewer([Viewer<br/>embed / self-host])
-    Convert([Convert])
+flowchart TB
+    subgraph you [You: create and publish]
+        direction LR
+        raw([Splat file]) --> editor([Editor])
+        raw --> upload([Direct Upload])
+        editor --> manage([Manage])
+        upload --> manage
+        manage <--> studio([Studio])
+    end
 
-    PLY --> Editor --> Manage
-    PLY --> Upload --> Manage
-    Convert -.-> Editor
-    Convert -.-> Upload
-    Manage --> Studio --> Manage
-    Manage --> Scene
-    Scene --> Explore
-    Scene --> Viewer
+    manage --> scene(["Scene page (hosts Viewer)"])
+
+    subgraph visitors [Visitors: discover and view]
+        direction LR
+        explore([Explore]) <--> scene
+        profile([User Profile]) <--> scene
+    end
 ```
 
 :::tip You can skip the Editor
@@ -48,6 +46,8 @@ If you already have a clean splat file, you don't need to use the Editor. Hit th
 | **[User Profile](user-profile)** | A user's public page: avatar, bio, social links, their published splats. | `superspl.at/user?id=<username>` |
 | **[Viewer](viewer/)** | The open-source web viewer that powers scene pages and Editor HTML exports. Embed in your own page or self-host. | npm `@playcanvas/supersplat-viewer`, [GitHub](https://github.com/playcanvas/supersplat-viewer) |
 | **[Convert](convert)** | Web frontend to the [splat-transform](/user-manual/splat-transform/) CLI: convert formats, transform, and filter in the browser. | [superspl.at/convert](https://superspl.at/convert) |
+
+Behind the scenes, every published splat is compressed to the SOG format, and large splats (over 1 million Gaussians) are automatically LOD-streamed for fast loading on any device — see [Streaming & Performance](streaming).
 
 ## Open source vs hosted
 

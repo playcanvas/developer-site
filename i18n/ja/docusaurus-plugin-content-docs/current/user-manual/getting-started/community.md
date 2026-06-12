@@ -28,7 +28,7 @@ Redditは、PlayCanvasの作品を共有したり、質問したり、PlayCanvas
 :::tip[投稿のヒント]
 
 * **画像と動画**の投稿は、**テキスト**の投稿よりもはるかに良いパフォーマンスを発揮します。
-* [WebGL](https://www.reddit.com/r/webgl/)、[WebGPU](https://www.reddit.com/r/webgpu/)、[WebXR](https://www.reddit.com/r/WebXR/)などの関連subredditにPlayCanvasの投稿を**クロスポスト**してみてください。ただし、常に各subredditのルールを最初に読んでください！クロスポストするには、投稿の下にある**共有** > **クロスポスト**を選択します。
+* [WebGL](https://www.reddit.com/r/webgl/)、[WebGPU](https://www.reddit.com/r/webgpu/)、[WebXR](https://www.reddit.com/r/WebXR/)などの関連subredditにPlayCanvasの投稿を**クロスポスト**してみてください。ただし、常に各subredditのルールを最初に読んでください！クロスポストするには、投稿の下にある**共有** > **リポスト**を選択し、投稿先のコミュニティを選びます。
 
 :::
 

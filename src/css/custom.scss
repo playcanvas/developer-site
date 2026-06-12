@@ -294,23 +294,29 @@ html[data-theme='dark'] .navbar--github-link:before {
 
 /* Sidebar section headers */
 .sidebar-section-header {
-  font-weight: 600;
-  font-size: 0.85rem;
+  --sidebar-section-accent-width: 3px;
+
+  font-weight: 700;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--ifm-color-emphasis-600);
+  letter-spacing: 0.6px;
+  color: var(--ifm-color-emphasis-900); /* near-foreground, high contrast, stays neutral */
   margin: 1.5rem 0 0.5rem 0;
   padding: 0.25rem 0;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  padding-left: var(--ifm-menu-link-padding-horizontal);
+  border-left: var(--sidebar-section-accent-width) solid var(--ifm-color-primary);
+  /* keep heading text aligned with the links below by subtracting the bar width */
+  padding-left: calc(var(--ifm-menu-link-padding-horizontal) - var(--sidebar-section-accent-width));
 }
 
 .sidebar-section-header:first-of-type {
   margin-top: 0.75rem;
-  border-top: none;
 }
 
 [data-theme='dark'] .sidebar-section-header {
-  color: var(--ifm-color-emphasis-500);
-  border-top-color: var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-emphasis-1000);
+}
+
+/* Keep long sidebar labels on a single line regardless of OS/browser font metrics */
+.sidebar-item-nowrap > .menu__list-item-collapsible > .menu__link {
+  white-space: nowrap;
 }

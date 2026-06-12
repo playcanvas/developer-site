@@ -54,10 +54,12 @@ The Light Component attaches a dynamic light source to the Entity. The 'Type' pr
 | Cascade Distribution  | Directional only. Controls how the shadow cascades are distributed. Range is 0 to 1. Only shown when Cascades is greater than 1. |
 | Distance              | The maximum distance from the camera beyond which shadows are no longer visible. |
 | Shadow Intensity      | The darkness of the shadows. Range is 0 (no shadow) to 1 (fully dark). |
-| Shadow Type           | The shadow mapping algorithm. Options are: Shadow Map PCF 1x1, Shadow Map PCF 3x3, Shadow Map PCF 5x5, Variance Shadow Map (16bit), Variance Shadow Map (32bit). |
+| Shadow Type           | The shadow mapping algorithm. Options are: Shadow Map PCF 1x1, Shadow Map PCF 3x3, Shadow Map PCF 5x5, Variance Shadow Map (16bit), Variance Shadow Map (32bit), PCSS (Soft Shadows). |
 | VSM Blur Mode         | VSM only. The blur algorithm for variance shadow maps. Options are: Box, Gaussian. |
 | VSM Blur Size         | VSM only. The size of the blur kernel. Range is 1 to 25. |
 | VSM Bias              | VSM only. Bias value to reduce shadow artifacts. |
+| Penumbra Size         | PCSS only. The overall size of the penumbra, controlling how soft the shadows can become. |
+| Penumbra Falloff      | PCSS only. How quickly the shadow softens with distance from the contact point. |
 | Shadow Bias           | PCF only. Bias value to reduce shadow acne artifacts. |
 | Normal Offset Bias    | PCF only. Offset along normals to reduce peter-panning artifacts. |
 

@@ -1,15 +1,15 @@
 ---
 title: SuperSplat Studio
-description: "Studio curates the viewing experience for a published splat: cameras, animations, annotations, post effects, skybox, and collision."
+description: "Studio curates the viewing experience for a published splat: cameras, annotations, post effects, skybox, and collision."
 ---
 
-**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and lets you author everything a visitor sees on its [scene page](/user-manual/supersplat/scene-page): camera framing and animations, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes.
+**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and lets you curate much of what a visitor sees on its [scene page](/user-manual/supersplat/scene-page): camera framing, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes. (Camera animation is authored separately in the [Editor Timeline](/user-manual/supersplat/editor/timeline).)
 
 Studio writes its output as a single JSON document — [Experience Settings](/user-manual/supersplat/studio/experience-settings) — that the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) reads at runtime. That same JSON is what gets bundled into a self-hosted HTML export.
 
 <!-- TODO: media — /img/user-manual/supersplat/studio/launching-studio.png — the Studio layout -->
 
-## Launching Studio
+## Launching Studio {#launching-studio}
 
 Studio runs at **`https://superspl.at/scene/<hash>/studio`**. Only the splat's owner can open it; for anyone else the URL 404s.
 
@@ -28,15 +28,16 @@ Studio is built for a desktop browser. On a phone or tablet you'll see a "Studio
 
 Studio reuses the SuperSplat editor shell:
 
-- **Header** — back button, scene name, save indicator.
-- **Left panel** — collapsible tool sections (Cameras, Annotations, Post Effects, Scene Assets, etc.).
+- **Header** — back button, scene name, **Import** / **Export** / **View** actions, and **Save**.
+- **Left panel** — a single panel organized into three tabs:
+  - **Scene** — grouped sections for *Look & Tone* (background color, tonemapping, high-precision rendering), *Post Effects*, and *Cameras*.
+  - **Annotations** — the list of on-scene annotations.
+  - **Assets** — scene-asset uploads: the **Skybox** image and **Collision** geometry.
 - **Viewport** — live preview of how visitors will see the scene.
-- **Right panel** — settings for whichever tool you've selected.
 
 Each tool section has its own page:
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — initial pose, target, and field of view for one or more named cameras.
-- [Animations](/user-manual/supersplat/studio/animations) — keyframe-driven camera tracks that can auto-play on viewer load.
 - [Annotations](/user-manual/supersplat/studio/annotations) — 3D-positioned text hotspots that visitors can navigate between.
 - [Post Effects](/user-manual/supersplat/studio/post-effects) — sharpness, bloom, color grading, vignette, fringing, tonemapping, high-precision rendering.
 - [Skybox](/user-manual/supersplat/studio/skybox) — background color or full equirectangular skybox.

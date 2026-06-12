@@ -1,0 +1,20 @@
+---
+title: Model Viewer
+description: Live PlayCanvas React example — a glb model viewer with environment lighting, shadows and orbit controls.
+---
+
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+import ModelViewerExample from '@site/src/components/playcanvas-react/examples/ModelViewerExample';
+import ModelViewerExampleSource from '!!raw-loader!@site/src/components/playcanvas-react/examples/ModelViewerExample.jsx';
+
+A simple glb model viewer with environment lighting, a shadow catcher and auto-rotating orbit controls. Drag to orbit the camera around the model.
+
+<CodeExample
+  label="Model viewer"
+  filename="ModelViewerExample.jsx"
+  code={ModelViewerExampleSource}
+  showControls={false}
+  showDemo
+>
+  <ModelViewerExample />
+</CodeExample>

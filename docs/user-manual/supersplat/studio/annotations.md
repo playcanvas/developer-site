@@ -43,5 +43,5 @@ Set the scene's **start mode** to `annotation` if you'd like the viewer to land 
 ## See also
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — the camera poses annotations reference
-- [Animations](/user-manual/supersplat/studio/animations) — for cinematic flythroughs that don't need visitor interaction
+- [Camera animation (Timeline)](/user-manual/supersplat/editor/timeline) — for cinematic flythroughs that don't need visitor interaction
 - [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract that stores annotations

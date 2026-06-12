@@ -22,6 +22,12 @@ You can create new Script Assets directly within the Editor:
     ![New Script](/img/user-manual/scripting/new-script.png)
     * In the popup, provide a filename for your new script.
 
+:::tip
+
+The file extension you choose determines the type of script. A name without an extension (or ending in `.js`) creates a classic script, while a `.mjs` extension (e.g. `PlayerController.mjs`) creates a modern **ESM** script. ESM is the recommended approach for new projects — see [ESM Scripts](/user-manual/scripting/esm-scripts/#creating-esm-scripts) for details.
+
+:::
+
 ## Importing Scripts
 
 You can bring scripts into your PlayCanvas project from external sources:
@@ -49,6 +55,12 @@ A Script Asset itself doesn't do anything until it's attached to an Entity via a
     * A dropdown/search box will appear. Start typing the name of your script, or browse the list, and select it.
     ![Select Script](/img/user-manual/scripting/select-script.png)
     * You can add multiple Script Assets to a single Script Component on an Entity. They will generally execute their lifecycle methods (like initialize, update) in the order they appear in the "Scripts" array, though dependencies are better managed using postInitialize or events.
+
+:::note
+
+Scripts are listed here by their *registered name* (set in code with `static scriptName`, or `pc.createScript('name')` for classic scripts), which may differ from the script asset's file name. See [Script Panel Controls](/user-manual/editor/scenes/components/script/#script-panel-controls) for details.
+
+:::
 
 ## Organizing Scripts
 

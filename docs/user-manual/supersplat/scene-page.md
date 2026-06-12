@@ -7,15 +7,15 @@ The **scene page** at `https://superspl.at/scene/<hash>` is the public face of a
 
 Visitors can browse a scene page without a PlayCanvas account. An account is required to **like** the splat or **leave a comment**.
 
-<!-- TODO: media — /img/user-manual/supersplat/scene-page.png — a scene page with the viewer, sidebar metadata, and action buttons -->
-
 ## What visitors see
 
-The page is split between an **embedded viewer** that fills most of the screen and a **sidebar** with metadata and actions.
+The scene content is split between a central **embedded viewer** and a right-hand **sidebar** with metadata and actions.
+
+![The bumblebee splat's scene page — a central embedded viewer beside a sidebar of metadata and actions](/img/user-manual/supersplat/scene-page.webp)
 
 ### The embedded viewer
 
-The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) rendered inside an iframe. The cameras, animations, annotations, post effects, skybox, and collision you configured in [Studio](/user-manual/supersplat/studio/) all apply here. Visitors can orbit, pan, zoom, navigate annotations, and (if collision is set up) walk through the scene.
+The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) rendered inside an iframe. The cameras, annotations, post effects, skybox, and collision you configured in [Studio](/user-manual/supersplat/studio/) — along with any camera [animation](/user-manual/supersplat/editor/timeline) published from the Editor — all apply here. Visitors can orbit, pan, zoom, navigate annotations, and (if collision is set up) walk through the scene.
 
 ### Sidebar metadata
 

@@ -479,6 +479,8 @@ const sidebars = {
             id: 'user-manual/react/examples/index',
           },
           items: [
+            'user-manual/react/examples/model-viewer',
+            'user-manual/react/examples/motion',
             'user-manual/react/examples/physics',
           ]
         },
@@ -488,6 +490,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'PlayCanvas Web Components',
+      className: 'sidebar-item-nowrap',
       link: {
         type: 'doc',
         id: 'user-manual/web-components/index',
@@ -568,7 +571,6 @@ const sidebars = {
           },
           items: [
             'user-manual/supersplat/studio/cameras',
-            'user-manual/supersplat/studio/animations',
             'user-manual/supersplat/studio/annotations',
             'user-manual/supersplat/studio/post-effects',
             'user-manual/supersplat/studio/skybox',
@@ -579,6 +581,7 @@ const sidebars = {
         'user-manual/supersplat/scene-page',
         'user-manual/supersplat/explore',
         'user-manual/supersplat/user-profile',
+        'user-manual/supersplat/streaming',
         {
           type: 'category',
           label: 'Viewer',

@@ -3,7 +3,7 @@ title: Publishing
 description: "Publish a splat from the SuperSplat Editor to superspl.at so it lands on your Manage page and can be opened in Studio."
 ---
 
-Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](/user-manual/supersplat/manage), gets a public [scene page](/user-manual/supersplat/scene-page), and can be opened in [Studio](/user-manual/supersplat/studio/) to curate the viewing experience (cameras, animations, annotations, post effects, skybox, collision).
+Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](/user-manual/supersplat/manage), gets a public [scene page](/user-manual/supersplat/scene-page), and can be opened in [Studio](/user-manual/supersplat/studio/) to curate the viewing experience (cameras, annotations, post effects, skybox, collision).
 
 :::tip Two ways to publish
 
@@ -56,5 +56,5 @@ Once the publish process is complete, a modal dialog will show with the URL of y
 ## What's next?
 
 - Your new splat now lives on the [Manage page](/user-manual/supersplat/manage) where you can edit its title, description, visibility, and downloadable license.
-- Open it in [Studio](/user-manual/supersplat/studio/) to add cameras, camera animations, annotations, post effects, a skybox, or collision geometry.
+- Open it in [Studio](/user-manual/supersplat/studio/) to add cameras, annotations, post effects, a skybox, or collision geometry.
 - Visitors browse to its [public scene page](/user-manual/supersplat/scene-page) to view, share, embed, like, and (if you allow it) download.

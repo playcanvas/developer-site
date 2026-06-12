@@ -5,9 +5,9 @@ description: "Browse and discover public splats on superspl.at: sort, filter by 
 
 The [Explore page](https://superspl.at) is the public-facing home of SuperSplat — an infinite-scroll gallery of every **Public** splat published on the platform. It's where visitors discover scenes without needing an account.
 
-Browsing Explore is **anonymous** — no PlayCanvas account is required. An account becomes useful when you want to [like](/user-manual/supersplat/scene-page/#likes), [comment](/user-manual/supersplat/scene-page/#comments), or [publish your own splats](/user-manual/supersplat/upload).
+![The SuperSplat Explore page — a grid of public splats](/img/user-manual/supersplat/explore.webp)
 
-<!-- TODO: media — /img/user-manual/supersplat/explore-page.png — the Explore grid -->
+Browsing Explore is **anonymous** — no PlayCanvas account is required. An account becomes useful when you want to [like](/user-manual/supersplat/scene-page/#likes), [comment](/user-manual/supersplat/scene-page/#comments), or [publish your own splats](/user-manual/supersplat/upload).
 
 ## The grid
 
@@ -15,7 +15,7 @@ Splats are shown as cards with a thumbnail, title, and author. Click a card to o
 
 The grid loads progressively as you scroll — the first page returns 32 splats (a 4×8 layout), and each subsequent page returns 16 (2×8). There's no "next page" button; just keep scrolling.
 
-## Sort, time, and feature filters
+## Sorting, filtering, and search
 
 Explore is driven entirely by URL parameters, so any filtered view is a shareable link.
 
@@ -44,14 +44,12 @@ Restricts the result set to splats published within a window.
 
 ### Feature filters (`?features=...`)
 
-Comma-separated list. Available filters include:
+Comma-separated list. The available filters are:
 
 | Value | Splats matching |
 |-------|-----------------|
 | `walkable` | Splats with [collision](/user-manual/supersplat/studio/collision) — visitors can walk through them |
 | `downloadable` | Splats whose creators have enabled [downloads](/user-manual/supersplat/manage/#downloadable--license) |
-
-Feature filters available to you may vary depending on your account.
 
 ### Search (`?q=...`)
 
@@ -62,8 +60,6 @@ The top-nav search bar adds a `q=` parameter that matches against splat **title*
 `https://superspl.at/?sort=likes&time=month&features=walkable&q=museum`
 
 > Most-liked walkable splats published in the last month whose title or description mentions "museum."
-
-<!-- TODO: media — /video/user-manual/supersplat/explore-infinite-scroll.mp4 — gallery scrolling and loading more cards -->
 
 ## Creator profiles
 
