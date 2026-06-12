@@ -910,7 +910,20 @@ const sidebars = {
             'user-manual/gaussian-splatting/building/picking',
             'user-manual/gaussian-splatting/building/shadows',
             'user-manual/gaussian-splatting/building/fisheye',
-            'user-manual/gaussian-splatting/building/custom-shaders',
+            {
+              type: 'category',
+              label: 'Custom Shaders',
+              link: {
+                type: 'doc',
+                id: 'user-manual/gaussian-splatting/building/custom-shaders/index',
+              },
+              items: [
+                'user-manual/gaussian-splatting/building/custom-shaders/vertex',
+                'user-manual/gaussian-splatting/building/custom-shaders/fragment',
+                'user-manual/gaussian-splatting/building/custom-shaders/varyings',
+              ],
+            },
+            'user-manual/gaussian-splatting/building/relighting',
             {
               type: 'category',
               label: 'Procedural Splats',
