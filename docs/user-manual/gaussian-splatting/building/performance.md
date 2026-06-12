@@ -1,6 +1,6 @@
 ---
 title: Performance
-description: "Performance tips for splat scenes: splat counts, fill rate, scene settings, LOD streaming budgets, and optimization strategies."
+description: "Performance tips for splat scenes: splat counts, fill rate, scene settings, Streamed SOG budgets, and optimization strategies."
 ---
 
 Rendering splats can be expensive on both the CPU and GPU. Here are some strategies to achieve good performance:
@@ -9,7 +9,7 @@ Rendering splats can be expensive on both the CPU and GPU. Here are some strateg
 
 Be mindful of the number of Gaussians in your scene since every Gaussian is sorted on camera depth every frame. You can check the number contained within a particular GSplat asset by using the [SPLAT DATA Panel](/user-manual/supersplat/editor/data-panel/) in the [SuperSplat Editor](/user-manual/supersplat/editor/). Use SuperSplat to trim unwanted Gaussians from your PLY files.
 
-For large scenes, consider using [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming) which dynamically loads appropriate levels of detail based on camera distance. This significantly reduces the number of active Gaussians at any given time while maintaining visual quality where it matters most.
+For large scenes, consider using [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming) which dynamically loads appropriate levels of detail based on camera distance. This significantly reduces the number of active Gaussians at any given time while maintaining visual quality where it matters most.
 
 ## Fill Rate Considerations
 
@@ -30,13 +30,13 @@ Given the fragment-heavy nature of Gaussian splatting, these settings have a sig
 
 Both settings help reduce the fragment processing load, which is the primary bottleneck in 3DGS rendering.
 
-## LOD Streaming Configuration
+## Streamed SOG Configuration
 
-When using [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming), you have several options to control quality and performance. The recommended approach is to use the **global splat budget** which automatically manages LOD selection across all GSplat assets in your scene.
+When using [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming), you have several options to control quality and performance. The recommended approach is to use the **global splat budget** which automatically manages LOD selection across all GSplat assets in your scene.
 
 ### Global Splat Budget
 
-The global splat budget is the primary way to control rendering performance for LOD streaming. Set it via:
+The global splat budget is the primary way to control rendering performance for Streamed SOG. Set it via:
 
 ```javascript
 app.scene.gsplat.splatBudget = 4000000; // 4 million splats max
@@ -47,7 +47,7 @@ When a budget is set, the engine automatically adjusts LOD levels across all GSp
 - **Budget = 0**: Disables budget enforcement, using only distance-based LOD selection
 - **Budget > 0**: Enforces the specified maximum splat count across all GSplat assets
 
-The budget system accounts for all GSplat assets in the scene, including both LOD-streaming assets (with multiple detail levels) and fixed assets (single detail level).
+The budget system accounts for all GSplat assets in the scene, including both Streamed SOG assets (with multiple detail levels) and fixed assets (single detail level).
 
 ### LOD Distances
 
@@ -88,7 +88,7 @@ The approach has two steps:
 ```javascript
 const gsplatSystem = app.systems.gsplat;
 
-// `entity` has a gsplat component using a loaded LOD-streaming asset
+// `entity` has a gsplat component using a loaded Streamed SOG asset
 const gsplat = entity.gsplat;
 
 // 1. Start with the lowest (coarsest) LOD only, for the fastest first frame
@@ -113,7 +113,7 @@ const onFrameReady = (camera, layer, ready, loadingCount) => {
 gsplatSystem.on('frame:ready', onFrameReady);
 ```
 
-This technique is demonstrated in the live [LOD Streaming example](/user-manual/gaussian-splatting/building/lod-streaming#live-examples).
+This technique is demonstrated in the live [Streamed SOG example](/user-manual/gaussian-splatting/building/lod-streaming#live-examples).
 
 ### Recommended Configuration
 

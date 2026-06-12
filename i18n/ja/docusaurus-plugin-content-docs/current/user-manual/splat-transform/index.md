@@ -189,7 +189,7 @@ SOG圧縮および GPU ボクセル化（`--filter-cluster`、`--filter-floaters
 
 ## LOD出力オプション
 
-`lod-meta.json`（マルチLODストリーミングSOGバンドル）を書き込む際に適用されます。
+`lod-meta.json`（[Streamed SOG](/user-manual/gaussian-splatting/formats/streamed-sog)出力）を書き込む際に適用されます。
 
 ```none
 -C, --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
@@ -452,9 +452,9 @@ splat-transform \
   complete_scene.ply
 ```
 
-### LOD形式の生成 {#generating-lod-format}
+### Streamed SOGの生成 {#generating-lod-format}
 
-LOD (Level of Detail) 形式は、大きなガウシアンスプラットシーンの効率的なストリーミングとレンダリングを可能にします。SplatTransformは、段階的にガウシアンが少なくなる一連のLODレベル（LOD 0 = 最高詳細、数字が大きいほど詳細度が低い）から、プログレッシブダウンロードのためにオクツリー構造を持つ最適化されたストリーミング形式を構築します。
+[Streamed SOG](/user-manual/gaussian-splatting/formats/streamed-sog)形式は、大きなガウシアンスプラットシーンの効率的なストリーミングとレンダリングを可能にします。SplatTransformは、段階的にガウシアンが少なくなる一連のLOD (Level of Detail) レベル（LOD 0 = 最高詳細、数字が大きいほど詳細度が低い）から、プログレッシブダウンロードのために空間ツリー構造を持つ最適化されたストリーミング形式を構築します。
 
 LODレベルは次の2つの方法で用意できます：
 
@@ -465,7 +465,7 @@ LODレベルは次の2つの方法で用意できます：
 
 出力ファイル名がフォーマットを決定します。これらは**任意の名前ではありません**：
 
-- **`lod-meta.json`** — LODストリーミング形式を生成（プログレッシブローディング用のオクツリー構造を持つ複数のSOGチャンク）
+- **`lod-meta.json`** — Streamed SOG形式を生成（プログレッシブローディング用の空間ツリー構造を持つ複数のSOGチャンク）
 - **`meta.json`** — 非バンドル版SOG形式を生成（単一のSOGファイル、ストリーミングなし）
 
 出力ファイル名は正確に `lod-meta.json` または `meta.json` である必要があります。変更できるのはその前のディレクトリパスのみです。例：`output/lod-meta.json`、`my-scene/lod-meta.json`。
@@ -473,7 +473,7 @@ LODレベルは次の2つの方法で用意できます：
 :::
 
 ```bash
-# 複数の入力ファイルからLODストリーミング形式を生成
+# 複数の入力ファイルからStreamed SOG形式を生成
 # 各入力ファイルは異なる詳細レベルを表します（LOD 0は最高品質）
 splat-transform \
   lod0.ply -l 0 \
@@ -489,7 +489,7 @@ splat-transform \
 splat-transform source.ply -F 50% lod1.ply
 splat-transform source.ply -F 25% lod2.ply
 splat-transform source.ply -F 10% lod3.ply
-# ステップ2: フル詳細のソースとデシメートしたレベルをストリーミングLOD形式にまとめる
+# ステップ2: フル詳細のソースとデシメートしたレベルをStreamed SOG形式にまとめる
 splat-transform \
   source.ply -l 0 \
   lod1.ply -l 1 \
@@ -518,7 +518,7 @@ node --max-old-space-size=32000 node_modules/.bin/splat-transform \
   --filter-nan \
   --filter-harmonics 0
 
-# LCCファイルから直接LODストリーミング形式を生成
+# LCCファイルから直接Streamed SOG形式を生成
 # (LCCファイルには複数のLODレベルが既に含まれています)
 splat-transform scene.lcc output/lod-meta.json
 ```
