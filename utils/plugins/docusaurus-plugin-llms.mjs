@@ -1,6 +1,7 @@
 // utils/plugins/docusaurus-plugin-llms.mjs
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 
 /**
@@ -12,8 +13,8 @@ import yaml from 'js-yaml';
  * @param {Object} context - Docusaurus context
  * @param {Object} options - Plugin options
  * @param {string} [options.docsDir='docs'] - Path to docs directory relative to site root
- * @param {string[]} [options.excludeDirs=['shader-editor']] - Directories to exclude from
- *   LLM file generation (e.g., private or unlisted documentation sections)
+ * @param {string[]} [options.excludeDirs=['shader-editor', 'tutorials']] - Directories to exclude
+ *   from LLM file generation (e.g., private or unlisted documentation sections)
  * @param {boolean} [options.failOnError=false] - If true, build will fail when LLM file
  *   generation encounters an error. If false (default), errors are logged as warnings
  *   and the build continues. Set to true if LLM files are critical to your deployment.
@@ -22,7 +23,7 @@ export default function pluginLlms(context, options = {}) {
     const { siteDir, siteConfig } = context;
     const docsDir = path.join(siteDir, options.docsDir || 'docs');
     const baseUrl = siteConfig.url;
-    const excludeDirs = options.excludeDirs ?? ['shader-editor'];
+    const excludeDirs = options.excludeDirs ?? ['shader-editor', 'tutorials'];
     const failOnError = options.failOnError ?? false;
 
     return {
@@ -50,7 +51,8 @@ export default function pluginLlms(context, options = {}) {
                 processedDocs.sort((a, b) => a.urlPath.localeCompare(b.urlPath));
 
                 // Generate llms.txt (structured overview)
-                const llmsTxt = generateLlmsTxt(processedDocs, baseUrl);
+                const engineVersion = resolveEngineVersion(siteDir);
+                const llmsTxt = generateLlmsTxt(processedDocs, baseUrl, engineVersion);
                 const llmsTxtPath = path.join(outDir, 'llms.txt');
                 fs.writeFileSync(llmsTxtPath, llmsTxt, 'utf-8');
                 console.log(`[LLMs Plugin] Generated ${llmsTxtPath}`);
@@ -261,36 +263,142 @@ function getCategoryFromPath(urlPath) {
     return categoryMap[parts[0]] || parts[0];
 }
 
+// Subcategories rendered under '## Optional' (per the llms.txt spec, a section
+// that consumers can skip when a shorter context is needed)
+const OPTIONAL_SUBCATEGORIES = ['account-management', 'glossary', 'press-pack', 'security'];
+
+// User Manual subcategory order, following sidebars.js (minus the
+// subcategories in OPTIONAL_SUBCATEGORIES, which render under '## Optional')
+const USER_MANUAL_ORDER = [
+    'Overview',
+    'getting-started',
+    'engine', 'editor', 'react', 'web-components',
+    'supersplat', 'splat-transform',
+    'ecs', 'assets', 'scripting', 'graphics', 'gaussian-splatting',
+    'animation', 'physics', '2D', 'user-interface', 'xr',
+    'optimization', 'api', 'pcui'
+];
+
+/**
+ * Resolve the installed PlayCanvas engine version, or null if unavailable
+ */
+function resolveEngineVersion(siteDir) {
+    try {
+        const pkgPath = path.join(siteDir, 'node_modules', 'playcanvas', 'package.json');
+        return JSON.parse(fs.readFileSync(pkgPath, 'utf-8')).version || null;
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * Load the hand-written llms.txt header partial
+ */
+function loadHeaderTemplate() {
+    const templatePath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'llms', 'llms-header.md');
+    return fs.readFileSync(templatePath, 'utf-8').replace(/\r\n/g, '\n');
+}
+
+/**
+ * Substitute {{NAME}} placeholders, then drop any line with an unresolved
+ * placeholder (e.g. the engine version line when resolution failed)
+ */
+function applyTemplate(template, vars) {
+    const substituted = template.replace(/\{\{(\w+)\}\}/g, (match, name) => {
+        const value = vars[name];
+        return (value === null || value === undefined) ? match : String(value);
+    });
+    return substituted
+        .split('\n')
+        .filter(line => !/\{\{\w+\}\}/.test(line))
+        .join('\n');
+}
+
+/**
+ * Format a doc as an llms.txt list entry: - [Title](url): description
+ * (If per-page markdown variants are published later, the link target changes here.)
+ */
+function formatDocEntry(doc, baseUrl) {
+    const title = doc.title.replace(/\s+/g, ' ').replace(/[[\]]/g, '\\$&').trim();
+    let description = (doc.description || '').replace(/\s+/g, ' ').trim();
+    if (description.length > 300) {
+        description = `${description.slice(0, 300)}...`;
+    }
+    const link = `- [${title}](${baseUrl}${doc.urlPath})`;
+    return description ? `${link}: ${description}` : link;
+}
+
+/**
+ * Format a subcategory slug as a display name
+ */
+function formatSubcategoryName(subcat) {
+    // Acronyms that should be fully uppercased
+    const acronyms = new Set(['api', 'xr', '2d', 'ui', 'ecs', 'pcui']);
+    // Brand names with specific capitalization
+    const brandNames = { 'playcanvas': 'PlayCanvas', 'supersplat': 'SuperSplat' };
+    return subcat
+        .split('-')
+        .map((word) => {
+            const lower = word.toLowerCase();
+            if (acronyms.has(lower)) return word.toUpperCase();
+            if (brandNames[lower]) return brandNames[lower];
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(' ');
+}
+
+/**
+ * Render subcategory groups as lines: an H3 heading when a subcategory has
+ * multiple docs, then one list entry per doc
+ */
+function renderSubcategorySections(subcategories, order, baseUrl) {
+    const lines = [];
+
+    // Sort subcategories: use defined order if available, otherwise alphabetical
+    const sortedSubcats = Object.keys(subcategories).sort((a, b) => {
+        if (order) {
+            const indexA = order.indexOf(a);
+            const indexB = order.indexOf(b);
+            // Items in order come first, in their defined order
+            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+        }
+        // Fallback to alphabetical
+        return a.localeCompare(b);
+    });
+
+    for (const subcat of sortedSubcats) {
+        const subcatDocs = subcategories[subcat];
+
+        if (subcatDocs.length > 1) {
+            lines.push(`### ${formatSubcategoryName(subcat)}`);
+        }
+
+        for (const doc of subcatDocs) {
+            lines.push(formatDocEntry(doc, baseUrl));
+        }
+
+        if (subcatDocs.length > 1) {
+            lines.push('');
+        }
+    }
+
+    return lines;
+}
+
 /**
  * Generate the llms.txt file (structured overview)
  */
-function generateLlmsTxt(docs, baseUrl) {
+function generateLlmsTxt(docs, baseUrl, engineVersion) {
     const lines = [];
 
-    lines.push(`# PlayCanvas Developer Documentation
-
-> PlayCanvas is an open-source WebGL/WebGPU 3D game engine for creating interactive experiences and games that run in the browser.
-
-This file provides a structured overview of the PlayCanvas documentation.
-For the complete documentation content, see: ${baseUrl}/llms-full.txt
-
-Base URL: ${baseUrl}
-Total Documents: ${docs.length}
-Generated: ${new Date().toISOString().split('T')[0]}
-
-## Recommended Entry Points
-
-- Getting Started: ${baseUrl}/user-manual/getting-started/
-- PlayCanvas Editor: ${baseUrl}/user-manual/editor/
-- PlayCanvas Engine: ${baseUrl}/user-manual/engine/
-- PlayCanvas React: ${baseUrl}/user-manual/react/
-- Web Components: ${baseUrl}/user-manual/web-components/
-- Scripting: ${baseUrl}/user-manual/scripting/
-- Gaussian Splatting: ${baseUrl}/user-manual/gaussian-splatting/
-- Graphics: ${baseUrl}/user-manual/graphics/
-- Physics: ${baseUrl}/user-manual/physics/
-- XR (VR/AR): ${baseUrl}/user-manual/xr/
-`);
+    lines.push(applyTemplate(loadHeaderTemplate(), {
+        BASE_URL: baseUrl,
+        ENGINE_VERSION: engineVersion,
+        TOTAL_DOCS: String(docs.length),
+        DATE: new Date().toISOString().split('T')[0]
+    }));
 
     // Group by category
     const categories = {};
@@ -301,96 +409,41 @@ Generated: ${new Date().toISOString().split('T')[0]}
         categories[doc.category].push(doc);
     }
 
-    // Define category order
-    const categoryOrder = ['User Manual', 'Tutorials'];
-
-    // Define subcategory order to match sidebars.js
-    const subcategoryOrder = {
-        'User Manual': [
-            'index', 'getting-started', 'account-management',
-            'engine', 'editor', 'react', 'web-components',
-            'ecs', 'assets', 'scripting', 'graphics', 'gaussian-splatting',
-            'animation', 'physics', '2D', 'user-interface', 'xr',
-            'optimization', 'api', 'pcui', 'glossary', 'press-pack'
-        ]
-    };
-
-    // Output each category
-    for (const category of categoryOrder) {
-        if (!categories[category]) continue;
-
-        lines.push(`## ${category}\n`);
-
-        // Group by subcategory (second level path)
-        const subcategories = {};
-        for (const doc of categories[category]) {
-            const parts = doc.urlPath.split('/').filter(Boolean);
-            const subcat = parts.length > 1 ? parts[1] : 'Overview';
-            if (!subcategories[subcat]) {
-                subcategories[subcat] = [];
-            }
-            subcategories[subcat].push(doc);
+    // User Manual: group by subcategory (second level path), holding back
+    // secondary subcategories for the '## Optional' section
+    const mainSubcats = {};
+    const optionalSubcats = {};
+    for (const doc of categories['User Manual'] ?? []) {
+        const parts = doc.urlPath.split('/').filter(Boolean);
+        const subcat = parts.length > 1 ? parts[1] : 'Overview';
+        const target = OPTIONAL_SUBCATEGORIES.includes(subcat) ? optionalSubcats : mainSubcats;
+        if (!target[subcat]) {
+            target[subcat] = [];
         }
-
-        // Sort subcategories: use defined order if available, otherwise alphabetical
-        const order = subcategoryOrder[category];
-        const sortedSubcats = Object.keys(subcategories).sort((a, b) => {
-            if (order) {
-                const indexA = order.indexOf(a);
-                const indexB = order.indexOf(b);
-                // Items in order come first, in their defined order
-                if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-                if (indexA !== -1) return -1;
-                if (indexB !== -1) return 1;
-            }
-            // Fallback to alphabetical
-            return a.localeCompare(b);
-        });
-
-        for (const subcat of sortedSubcats) {
-            const subcatDocs = subcategories[subcat];
-
-            // Format subcategory name
-            // Acronyms that should be fully uppercased
-            const acronyms = new Set(['api', 'xr', '2d', 'ui', 'ecs', 'pcui']);
-            // Brand names with specific capitalization
-            const brandNames = { 'playcanvas': 'PlayCanvas' };
-            const subcatName = subcat
-                .split('-')
-                .map((word) => {
-                    const lower = word.toLowerCase();
-                    if (acronyms.has(lower)) return word.toUpperCase();
-                    if (brandNames[lower]) return brandNames[lower];
-                    return word.charAt(0).toUpperCase() + word.slice(1);
-                })
-                .join(' ');
-
-            if (subcatDocs.length > 1) {
-                lines.push(`### ${subcatName}`);
-            }
-
-            for (const doc of subcatDocs) {
-                lines.push(`- ${baseUrl}${doc.urlPath} - ${doc.title}`);
-            }
-
-            if (subcatDocs.length > 1) {
-                lines.push('');
-            }
-        }
+        target[subcat].push(doc);
     }
+
+    lines.push('## User Manual\n');
+    lines.push(...renderSubcategorySections(mainSubcats, USER_MANUAL_ORDER, baseUrl));
 
     // Add any remaining categories
     for (const category of Object.keys(categories)) {
-        if (categoryOrder.includes(category)) continue;
+        if (category === 'User Manual') continue;
 
         const docLinks = categories[category]
-            .map(doc => `- ${baseUrl}${doc.urlPath} - ${doc.title}`)
+            .map(doc => formatDocEntry(doc, baseUrl))
             .join('\n');
 
         lines.push(`## ${category}\n\n${docLinks}\n`);
     }
 
-    return lines.join('\n');
+    if (Object.keys(optionalSubcats).length > 0) {
+        lines.push('## Optional\n');
+        lines.push('Secondary content that most coding tasks will not need.\n');
+        lines.push(...renderSubcategorySections(optionalSubcats, OPTIONAL_SUBCATEGORIES, baseUrl));
+    }
+
+    return `${lines.join('\n').trimEnd()}\n`;
 }
 
 /**
