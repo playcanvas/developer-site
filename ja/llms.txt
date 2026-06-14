@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.6
 Total Documents: 452
-Generated: 2026-06-12
+Generated: 2026-06-14
 
 ## Instructions for Large Language Models
 
@@ -419,6 +419,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-collision>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision/): Reference for the pc-collision element: collision shapes and parameters for triggers, rigid bodies, and physics queries in declarative HTML.
 - [<pc-element>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element/): Reference for the pc-element element: screen-space UI text, images, and groups mapped to PlayCanvas Element components and layout.
 - [<pc-entity>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity/): Reference for the pc-entity element: names, transforms, hierarchy rules, and which child component tags are valid under an entity.
+- [<pc-gsplat>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat/): Reference for the pc-gsplat element: render Gaussian splat assets with attributes for the splat data source, shadows, and LOD tuning.
 - [<pc-light>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light/): Reference for the pc-light element: light types, color, intensity, shadows, and attributes for directional, spot, and omni lights.
 - [<pc-listener>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-listener/): Reference for the pc-listener element: positional audio listener placement and settings for 3D sound relative to the active camera.
 - [<pc-model>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/): Reference for the pc-model element: load and instance GLB or model assets on an entity with import settings and render integration.
@@ -433,7 +434,6 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-sky>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky/): Reference for the pc-sky element: image-based lighting and skyboxes from cubemap or equirectangular assets for scene backgrounds.
 - [<pc-sound>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/): Reference for the pc-sound element: positional or non-positional audio clips, volume, pitch, autoplay rules, and asset references.
 - [<pc-sounds>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sounds/): Reference for the pc-sounds element: sound component container that groups pc-sound slots and shared audio settings on an entity.
-- [<pc-splat>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-splat/): Reference for the pc-splat element: render Gaussian splat assets with attributes for splat data sources, quality, and scene integration.
 - [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr/): WebXR setup for Web Components: load XR scripts as assets, configure cameras, add session UI, and serve pages over HTTPS or localhost.
 
 ### SuperSplat

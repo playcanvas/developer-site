@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 452
-Generated: 2026-06-12
+Generated: 2026-06-14
 
 ================================================================================
 
@@ -13244,7 +13244,7 @@ We offer **four different approaches** to build the same app. Pick the one that 
 
 **Best for:** Web developers familiar with HTML and modern standards
 
-- **What:** Declarative HTML using `<pc-app>`, `<pc-entity>`, `<pc-splat>` tags
+- **What:** Declarative HTML using `<pc-app>`, `<pc-entity>`, `<pc-gsplat>` tags
 - **Files:** Single HTML file
 - **Pros:** No build tools needed, familiar HTML syntax, quick prototyping
 - **Cons:** Limited to web component capabilities
@@ -13813,7 +13813,7 @@ The camera controls script will allow you to:
 
 ## Adding the Splat
 
-Now let's add our toy cat splat to the scene using the [`<pc-splat>`](/user-manual/web-components/tags/pc-splat) element.
+Now let's add our toy cat splat to the scene using the [`<pc-gsplat>`](/user-manual/web-components/tags/pc-gsplat) element.
 
 ```html {11-13}
 <pc-app antialias="false" high-resolution="false">
@@ -13827,7 +13827,7 @@ Now let's add our toy cat splat to the scene using the [`<pc-splat>`](/user-manu
             </pc-scripts>
         </pc-entity>
         <pc-entity position="0 -0.7 0" rotation="0 0 180">
-            <pc-splat asset="toy"></pc-splat>
+            <pc-gsplat asset="toy"></pc-gsplat>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -13839,7 +13839,7 @@ We've positioned the splat slightly below the origin (-0.7 on the Y axis) and ro
 
 After completing the steps above, you should see an interactive 3D toy cat splat that you can orbit around, pan, and zoom!
 
-<CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
+<CodePenEmbed id="MYgGZax" title="<pc-gsplat> example" />
 
 :::tip Try it yourself
 
@@ -32033,6 +32033,7 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 | [`<pc-collision>`](pc-collision) | Defines a collision component used by triggers and rigid bodies. |
 | [`<pc-element>`](pc-element) | Defines a text, image or group user interface element. |
 | [`<pc-entity>`](pc-entity) | Defines an entity. |
+| [`<pc-gsplat>`](pc-gsplat) | Defines a gsplat component that renders 3D Gaussian Splats. |
 | [`<pc-light>`](pc-light) | Defines a light component. |
 | [`<pc-listener>`](pc-listener) | Defines a listener component. |
 | [`<pc-module>`](pc-module) | Defines a WebAssembly module. |
@@ -32046,7 +32047,6 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 | [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
 | [`<pc-sound>`](pc-sound) | Defines a single sound assigned to a sound component. |
 | [`<pc-sounds>`](pc-sounds) | Defines a sound component. |
-| [`<pc-splat>`](pc-splat) | Defines a splat component that renders 3D Gaussian Splats. |
 
 --------------------------------------------------------------------------------
 
@@ -32292,7 +32292,7 @@ The `<pc-entity>` tag is used to define an entity.
 
 * It must be a direct child of [`<pc-scene>`](../pc-scene) or another `<pc-entity>`.
 * It can have 0..n [`<pc-entity>`](../pc-entity) children.
-* It can optionally have one of each component type as children: [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-sounds>`](../pc-sounds), [`<pc-splat>`](../pc-splat).
+* It can optionally have one of each component type as children: [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-sounds>`](../pc-sounds).
 
 :::
 
@@ -32334,6 +32334,44 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-entity>` elements using the [EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-gsplat>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat/
+
+The `<pc-gsplat>` tag is used to define a gsplat component for rendering 3D Gaussian Splats.
+
+When rendering splat-based scenes, it is recommended to set `antialias` and `high-resolution` on your [`<pc-app>`](../pc-app) tag to `false` for best performance.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | String | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
+| `cast-shadows` | Flag | - | Whether the gsplat component casts shadows |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `lod-base-distance` | Number | `"5"` | Distance for the first LOD transition (LOD 0 to LOD 1). Splats closer than this use the highest-quality LOD. Minimum `0.1`. Only affects assets that contain LOD levels. |
+| `lod-multiplier` | Number | `"3"` | Multiplier between successive LOD distance thresholds, forming a geometric progression. Higher values switch to coarser LODs sooner. Minimum `1.2`. Only affects assets that contain LOD levels. |
+
+</div>
+
+## Example
+
+<CodePenEmbed id="MYgGZax" title="<pc-gsplat> example" />
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-gsplat>` elements using the [GSplatComponentElement API](https://api.playcanvas.com/web-components/classes/GSplatComponentElement.html).
 
 --------------------------------------------------------------------------------
 
@@ -32972,43 +33010,6 @@ The `<pc-sounds>` tag is used to define a sound component.
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-sounds>` elements using the [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html).
-
---------------------------------------------------------------------------------
-
-## <pc-splat>
-
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-splat/
-
-The `<pc-splat>` tag is used to define a splat component for rendering 3D Gaussian Splats.
-
-When rendering splat-based scenes, it is recommended to set `antialias` and `high-resolution` on your [`<pc-app>`](../pc-app) tag to `false` for best performance.
-
-:::note[Usage]
-
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
-
-:::
-
-## Attributes
-
-<div className="attribute-table">
-
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `asset` | String | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
-| `cast-shadows` | Flag | - | Whether the splat component casts shadows |
-| `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `unified` | Flag | - | Enables global sorting and LOD streaming for the splat. Can only be set when the component is disabled. |
-
-</div>
-
-## Example
-
-<CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
-
-## JavaScript Interface
-
-You can programmatically create and manipulate `<pc-splat>` elements using the [SplatComponentElement API](https://api.playcanvas.com/web-components/classes/SplatComponentElement.html).
 
 --------------------------------------------------------------------------------
 
