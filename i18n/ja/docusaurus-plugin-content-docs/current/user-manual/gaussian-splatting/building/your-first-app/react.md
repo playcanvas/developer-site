@@ -177,7 +177,7 @@ export default function App() {
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
-<CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
+<CodePenEmbed id="MYgGZax" title="<pc-gsplat> example" />
 
 :::tip 自分で試してみよう
 

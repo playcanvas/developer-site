@@ -89,7 +89,7 @@ The camera controls script will allow you to:
 
 ## Adding the Splat
 
-Now let's add our toy cat splat to the scene using the [`<pc-splat>`](/user-manual/web-components/tags/pc-splat) element.
+Now let's add our toy cat splat to the scene using the [`<pc-gsplat>`](/user-manual/web-components/tags/pc-gsplat) element.
 
 ```html {11-13}
 <pc-app antialias="false" high-resolution="false">
@@ -103,7 +103,7 @@ Now let's add our toy cat splat to the scene using the [`<pc-splat>`](/user-manu
             </pc-scripts>
         </pc-entity>
         <pc-entity position="0 -0.7 0" rotation="0 0 180">
-            <pc-splat asset="toy"></pc-splat>
+            <pc-gsplat asset="toy"></pc-gsplat>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -117,7 +117,7 @@ After completing the steps above, you should see an interactive 3D toy cat splat
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
-<CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
+<CodePenEmbed id="MYgGZax" title="<pc-gsplat> example" />
 
 :::tip Try it yourself
 

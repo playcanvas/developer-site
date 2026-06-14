@@ -89,7 +89,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 
 ## スプラットの追加
 
-次に、[`<pc-splat>`](/user-manual/web-components/tags/pc-splat)要素を使用して、猫のオモチャのスプラットをシーンに追加しましょう。
+次に、[`<pc-gsplat>`](/user-manual/web-components/tags/pc-gsplat)要素を使用して、猫のオモチャのスプラットをシーンに追加しましょう。
 
 ```html {11-13}
 <pc-app antialias="false" high-resolution="false">
@@ -103,7 +103,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
             </pc-scripts>
         </pc-entity>
         <pc-entity position="0 -0.7 0" rotation="0 0 180">
-            <pc-splat asset="toy"></pc-splat>
+            <pc-gsplat asset="toy"></pc-gsplat>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -117,7 +117,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 
 import CodePenEmbed from '@site/src/components/CodePenEmbed';
 
-<CodePenEmbed id="MYgGZax" title="<pc-splat> example" />
+<CodePenEmbed id="MYgGZax" title="<pc-gsplat> example" />
 
 :::tip 自分で試してみよう
 

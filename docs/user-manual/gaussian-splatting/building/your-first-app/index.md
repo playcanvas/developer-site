@@ -40,7 +40,7 @@ We offer **four different approaches** to build the same app. Pick the one that 
 
 **Best for:** Web developers familiar with HTML and modern standards
 
-- **What:** Declarative HTML using `<pc-app>`, `<pc-entity>`, `<pc-splat>` tags
+- **What:** Declarative HTML using `<pc-app>`, `<pc-entity>`, `<pc-gsplat>` tags
 - **Files:** Single HTML file
 - **Pros:** No build tools needed, familiar HTML syntax, quick prototyping
 - **Cons:** Limited to web component capabilities
