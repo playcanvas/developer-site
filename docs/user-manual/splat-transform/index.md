@@ -189,7 +189,7 @@ Apply when reading `.lcc` files.
 
 ## LOD Output Options
 
-Apply when writing `lod-meta.json` (multi-LOD streaming SOG bundle).
+Apply when writing `lod-meta.json` ([Streamed SOG](/user-manual/gaussian-splatting/formats/streamed-sog) output).
 
 ```none
 -C, --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
@@ -452,9 +452,9 @@ splat-transform \
   complete_scene.ply
 ```
 
-### Generating LOD Format {#generating-lod-format}
+### Generating Streamed SOG {#generating-lod-format}
 
-The LOD (Level of Detail) format enables efficient streaming and rendering of large Gaussian splat scenes. SplatTransform builds an optimized streaming format with an octree structure for progressive download from a set of LOD levels, where each level has progressively fewer Gaussians (LOD 0 = highest detail, higher numbers = lower detail).
+The [Streamed SOG](/user-manual/gaussian-splatting/formats/streamed-sog) format enables efficient streaming and rendering of large Gaussian splat scenes. SplatTransform builds an optimized streaming format with a spatial tree structure for progressive download from a set of LOD (Level of Detail) levels, where each level has progressively fewer Gaussians (LOD 0 = highest detail, higher numbers = lower detail).
 
 You can obtain those LOD levels in two ways:
 
@@ -465,7 +465,7 @@ You can obtain those LOD levels in two ways:
 
 The output filename determines the format. These are **not** arbitrary names:
 
-- **`lod-meta.json`** — generates LOD streaming format (multiple SOG chunks with an octree structure for progressive loading)
+- **`lod-meta.json`** — generates Streamed SOG format (multiple SOG chunks with a spatial tree structure for progressive loading)
 - **`meta.json`** — generates unbundled SOG format (a single SOG file, no streaming)
 
 The output filename must be exactly `lod-meta.json` or `meta.json` — only the directory path before it can vary. For example: `output/lod-meta.json`, `my-scene/lod-meta.json`.
@@ -473,7 +473,7 @@ The output filename must be exactly `lod-meta.json` or `meta.json` — only the 
 :::
 
 ```bash
-# Generate LOD streaming format from multiple input files
+# Generate Streamed SOG format from multiple input files
 # Each input file represents a different detail level (LOD 0 is highest quality)
 splat-transform \
   lod0.ply -l 0 \
@@ -489,7 +489,7 @@ splat-transform \
 splat-transform source.ply -F 50% lod1.ply
 splat-transform source.ply -F 25% lod2.ply
 splat-transform source.ply -F 10% lod3.ply
-# Step 2: bundle the full-detail source and the decimated levels into a streaming LOD format
+# Step 2: bundle the full-detail source and the decimated levels into Streamed SOG format
 splat-transform \
   source.ply -l 0 \
   lod1.ply -l 1 \
@@ -518,7 +518,7 @@ node --max-old-space-size=32000 node_modules/.bin/splat-transform \
   --filter-nan \
   --filter-harmonics 0
 
-# Generate LOD streaming format directly from an LCC file
+# Generate Streamed SOG format directly from an LCC file
 # (LCC files already contain multiple LOD levels)
 splat-transform scene.lcc output/lod-meta.json
 ```

@@ -606,6 +606,7 @@ const sidebars = {
       },
       items: [
         'user-manual/splat-transform/collision',
+        'user-manual/splat-transform/voxel-format',
         'user-manual/splat-transform/docker',
       ],
     },
@@ -859,6 +860,7 @@ const sidebars = {
           items: [
             'user-manual/gaussian-splatting/formats/ply',
             'user-manual/gaussian-splatting/formats/sog',
+            'user-manual/gaussian-splatting/formats/streamed-sog',
           ],
         },
         {

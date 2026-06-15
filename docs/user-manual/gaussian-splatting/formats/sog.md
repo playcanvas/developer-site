@@ -76,7 +76,7 @@ interface Meta {
     generator?: string;    // e.g. "splat-transform v1.2.3"
   };
   count: number;           // Number of gaussians (<= W*H of the images)
-  antialias: boolean;      // True iff scene was trained with anti-aliasing
+  antialias?: boolean;     // Optional. True iff scene was trained with anti-aliasing. Default: false
 
   means: {
     // Ranges for decoding *log-transformed* positions (see §3.1).
@@ -86,7 +86,7 @@ interface Meta {
   };
 
   scales: {
-    codebook: number[];    // 256 floats; see §3.3
+    codebook: number[];    // 256 floats (log-domain); see §3.3
     files: ["scales.webp"];
   };
 
@@ -114,7 +114,7 @@ interface Meta {
 
 :::note
 
-* The scales codebook contains linear-space values. The sh0 codebook contains gamma-space DC coefficients. The shN codebook contains gamma-space AC coefficients.
+* The scales codebook contains log-space values that must be passed through `exp()` to recover linear sizes (§3.3). The sh0 codebook contains gamma-space DC coefficients. The shN codebook contains gamma-space AC coefficients.
 * Image data **must** be treated as raw 8-bit integers (no gamma conversion).
 * Unless otherwise stated, channels not mentioned are ignored.
 * Filenames in `files` arrays are arbitrary, but the order is significant.
@@ -158,8 +158,10 @@ const p = {
 
 Quaternions are encoded with **3×8-bit components + 2-bit mode** (total **26 bits**) using the standard *smallest-three* scheme.
 
-* **R,G,B** store the three kept (signed) components, uniformly quantized to `[-√2/2, +√2/2]`.
-* **A** stores the **mode** in the range **252..255**. The mode is `A - 252` ∈ {0,1,2,3} and identifies which of the four components was the **largest by magnitude** (and therefore omitted from the stream and reconstructed).
+Quaternion components are ordered **(w, x, y, z)** throughout.
+
+* **R,G,B** store the three kept (signed) components in **(w, x, y, z)** order, uniformly quantized to `[-√2/2, +√2/2]`.
+* **A** stores the **mode** in the range **252..255**. The mode is `A - 252` ∈ {0,1,2,3} and identifies which of the four components — in **(w, x, y, z)** order — was the **largest by magnitude** (and therefore omitted from the stream and reconstructed): mode 0 = w, 1 = x, 2 = y, 3 = z.
 * Let `norm = Math.SQRT2` (i.e., √2).
 
 ```ts
@@ -170,19 +172,19 @@ const a = toComp(quats.r);
 const b = toComp(quats.g);
 const c = toComp(quats.b);
 
-const mode = quats.a - 252; // 0..3 (R,G,B,A is one of the four components)
+const mode = quats.a - 252; // 0..3 → omitted component is w, x, y or z respectively
 
 // Reconstruct the omitted component so that ||q|| = 1 and w.l.o.g. the omitted one is non-negative
 const t = a*a + b*b + c*c;
 const d = Math.sqrt(Math.max(0, 1 - t));
 
-// Place components according to mode
+// Place components according to mode; q is ordered [w, x, y, z]
 let q: [number, number, number, number];
 switch (mode) {
-    case 0: q = [d, a, b, c]; break; // omitted = x
-    case 1: q = [a, d, b, c]; break; // omitted = y
-    case 2: q = [a, b, d, c]; break; // omitted = z
-    case 3: q = [a, b, c, d]; break; // omitted = w
+    case 0: q = [d, a, b, c]; break; // omitted = w
+    case 1: q = [a, d, b, c]; break; // omitted = x
+    case 2: q = [a, b, d, c]; break; // omitted = y
+    case 3: q = [a, b, c, d]; break; // omitted = z
     default: throw new Error("Invalid quaternion mode");
 }
 ```
@@ -195,15 +197,15 @@ switch (mode) {
 
 > `scales.webp` (RGB via codebook)
 
-Per-axis sizes are **codebook indices**:
+Per-axis sizes are **codebook indices**. The codebook stores **log-domain** values, so decoding requires an exponential:
 
 ```ts
-const sx = meta.scales.codebook[scales.r]; // 0..255
-const sy = meta.scales.codebook[scales.g];
-const sz = meta.scales.codebook[scales.b];
+const sx = Math.exp(meta.scales.codebook[scales.r]); // r,g,b are 0..255
+const sy = Math.exp(meta.scales.codebook[scales.g]);
+const sz = Math.exp(meta.scales.codebook[scales.b]);
 ```
 
-Interpretation (e.g., principal axis standard deviations vs. full extents) follows the source training setup; values are in **scene units**.
+Interpretation (e.g., principal axis standard deviations vs. full extents) follows the source training setup; decoded (post-`exp`) values are in **scene units**.
 
 ### 3.4 Base color + opacity (DC)
 

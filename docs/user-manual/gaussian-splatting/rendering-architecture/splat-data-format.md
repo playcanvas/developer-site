@@ -97,7 +97,7 @@ You can add extra streams to a resource's format to store custom per-splat data.
 
 :::note
 
-Extra streams are not supported for LOD streaming resources. LOD resources dynamically load and unload data as needed, and custom extra streams cannot be preserved across these operations.
+Extra streams are not supported for Streamed SOG resources. These resources dynamically load and unload data as needed, and custom extra streams cannot be preserved across these operations.
 
 :::
 
