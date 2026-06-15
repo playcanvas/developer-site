@@ -11,9 +11,25 @@
     "message": "ユーザーマニュアル",
     "description": "Navbar item with label User Manual"
   },
-  "item.label.Tutorials": {
-    "message": "チュートリアル",
-    "description": "Navbar item with label Tutorials"
+  "item.label.Examples": {
+    "message": "例",
+    "description": "Navbar item with label Examples"
+  },
+  "item.label.Engine Examples": {
+    "message": "エンジンの例",
+    "description": "Navbar item with label Engine Examples"
+  },
+  "item.label.Editor Tutorials": {
+    "message": "エディターのチュートリアル",
+    "description": "Navbar item with label Editor Tutorials"
+  },
+  "item.label.React Examples": {
+    "message": "React の例",
+    "description": "Navbar item with label React Examples"
+  },
+  "item.label.Web Components Examples": {
+    "message": "Web Components の例",
+    "description": "Navbar item with label Web Components Examples"
   },
   "item.label.API": {
     "message": "API",

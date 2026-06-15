@@ -275,6 +275,14 @@
     "message": "例",
     "description": "The label for category Examples in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.link.Examples": {
+    "message": "例",
+    "description": "The label for link Examples in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.link.Tutorials": {
+    "message": "チュートリアル",
+    "description": "The label for link Tutorials in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.PCUI Graph": {
     "message": "PCUIグラフ",
     "description": "The label for category PCUI Graph in sidebar userManualSidebar"

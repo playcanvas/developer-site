@@ -316,9 +316,15 @@ const config = {
             path: '/user-manual',
           },
           {
-            to: '/tutorials/',
-            label: 'Tutorials',
+            type: 'dropdown',
+            label: 'Examples',
             position: 'left',
+            items: [
+              { label: 'Engine Examples', href: 'https://playcanvas.com/examples' },
+              { label: 'Editor Tutorials', to: '/tutorials/' },
+              { label: 'React Examples', to: '/user-manual/react/examples' },
+              { label: 'Web Components Examples', href: 'https://playcanvas.github.io/web-components/examples/' },
+            ],
           },
           {
             href: 'https://api.playcanvas.com',

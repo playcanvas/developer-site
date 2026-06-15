@@ -86,6 +86,7 @@ const sidebars = {
         'user-manual/engine/standalone',
         'user-manual/engine/running-in-node',
         'user-manual/engine/migrations',
+        { type: 'link', label: 'Examples', href: 'https://playcanvas.com/examples' },
       ],
     },
     {
@@ -385,6 +386,7 @@ const sidebars = {
         'user-manual/editor/engine-compatibility',
         'user-manual/editor/faq',
         'user-manual/editor/troubleshooting',
+        { type: 'link', label: 'Tutorials', href: '/tutorials/' },
       ],
     },
     {
@@ -531,6 +533,7 @@ const sidebars = {
             'user-manual/web-components/tags/pc-sounds',
           ],
         },
+        { type: 'link', label: 'Examples', href: 'https://playcanvas.github.io/web-components/examples/' },
       ],
     },
     {
