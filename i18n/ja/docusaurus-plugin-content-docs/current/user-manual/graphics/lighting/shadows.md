@@ -71,9 +71,9 @@ Hierarchyでライトを選択し、その[Lightコンポーネント](/user-man
   <pc-render type="box" cast-shadows receive-shadows></pc-render>
 </pc-entity>
 
-<!-- Splat コンポーネントもシャドウをキャストできます（デフォルトでは無効） -->
+<!-- Gsplat コンポーネントもシャドウをキャストできます（デフォルトでは無効） -->
 <pc-entity>
-  <pc-splat asset="my-splat" cast-shadows></pc-splat>
+  <pc-gsplat asset="my-splat" cast-shadows></pc-gsplat>
 </pc-entity>
 ```
 

@@ -9,7 +9,7 @@ The `<pc-entity>` tag is used to define an entity.
 
 * It must be a direct child of [`<pc-scene>`](../pc-scene) or another `<pc-entity>`.
 * It can have 0..n [`<pc-entity>`](../pc-entity) children.
-* It can optionally have one of each component type as children: [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-sounds>`](../pc-sounds), [`<pc-splat>`](../pc-splat).
+* It can optionally have one of each component type as children: [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-sounds>`](../pc-sounds).
 
 :::
 

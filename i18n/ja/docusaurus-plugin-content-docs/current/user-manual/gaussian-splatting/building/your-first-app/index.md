@@ -40,7 +40,7 @@ description: "初めてのPlayCanvas splatアプリを構築する道筋：Engin
 
 **最適：** HTMLと最新の標準に精通したWeb開発者
 
-- **内容：** `<pc-app>`、`<pc-entity>`、`<pc-splat>`タグを使用した宣言的HTML
+- **内容：** `<pc-app>`、`<pc-entity>`、`<pc-gsplat>`タグを使用した宣言的HTML
 - **ファイル：** 単一のHTMLファイル
 - **長所：** ビルドツール不要、慣れ親しんだHTML構文、迅速なプロトタイピング
 - **短所：** Webコンポーネントの機能に限定される

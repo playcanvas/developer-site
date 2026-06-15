@@ -71,9 +71,9 @@ To control which objects participate, select an entity and toggle the **Cast Sha
   <pc-render type="box" cast-shadows receive-shadows></pc-render>
 </pc-entity>
 
-<!-- Splat components can cast shadows too (off by default) -->
+<!-- Gsplat components can cast shadows too (off by default) -->
 <pc-entity>
-  <pc-splat asset="my-splat" cast-shadows></pc-splat>
+  <pc-gsplat asset="my-splat" cast-shadows></pc-gsplat>
 </pc-entity>
 ```
 
