@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 452
-Generated: 2026-06-14
+Total Documents: 454
+Generated: 2026-06-15
 
 ================================================================================
 
@@ -11914,47 +11914,47 @@ app.scene.sky.fisheye = 1;
 
 --------------------------------------------------------------------------------
 
-## LOD Streaming
+## Streamed SOG
 
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/
 
-LOD (Level of Detail) Streaming enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail based on the camera's distance. This feature dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
+Streamed SOG enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail (LOD) based on the camera's distance. This dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
 
 ## How It Works
 
-LOD streaming works by:
+Streamed SOG works by:
 
 1. Pre-generating multiple versions of your splat at different detail levels
-2. Organizing them into an octree structure for efficient streaming
+2. Organizing them into a spatial tree structure for efficient streaming
 3. Dynamically loading and unloading detail levels based on camera distance
 4. Rendering only the appropriate level of detail for each region of the scene
 
 This approach allows you to render massive splat scenes that would otherwise be impossible due to memory constraints.
 
-## Creating LOD Streaming Data
+## Creating Streamed SOG Data
 
-To use LOD streaming, you need to generate the streaming format — an octree-based `lod-meta.json` structure that organizes multiple levels of detail for efficient streaming. There are two ways to obtain the LOD levels:
+To use Streamed SOG, you need to generate the format — a `lod-meta.json` spatial tree structure that organizes multiple levels of detail for efficient streaming (see the [Streamed SOG Format Specification](/user-manual/gaussian-splatting/formats/streamed-sog)). There are two ways to obtain the LOD levels:
 
 - **Provide your own LOD levels** — supply multiple splat files at progressively lower detail (LOD 0 = highest detail, higher numbers = lower detail), for example produced during training or exported separately.
 - **Generate them with SplatTransform** — use [SplatTransform](/user-manual/splat-transform) to decimate a single high-quality splat into lower-detail levels, so you don't have to author them yourself.
 
-Once you have the LOD levels, SplatTransform bundles them into the streaming-optimized format. See the [Generating LOD Format](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions.
+Once you have the LOD levels, SplatTransform bundles them into the Streamed SOG format. See the [Generating Streamed SOG](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions.
 
 ## Live Examples
 
-Explore these live examples to see LOD streaming in action:
+Explore these live examples to see Streamed SOG in action:
 
-- LOD Streaming (Basic) - Demonstrates basic LOD streaming with different detail levels
+- Streamed SOG (Basic) - Demonstrates basic streaming with different detail levels
 
-- LOD Streaming with Spherical Harmonics - Shows LOD streaming with spherical harmonic data
+- Streamed SOG with Spherical Harmonics - Shows streaming with spherical harmonic data
 
-## Enabling LOD Streaming
+## Enabling Streamed SOG
 
-LOD streaming is enabled simply by loading a streaming LOD format asset (`lod-meta.json`) onto a GSplat component — no additional configuration is required.
+Streaming is enabled simply by loading a Streamed SOG asset (`lod-meta.json`) onto a GSplat component — no additional configuration is required.
 
 ## Controlling LOD Behavior
 
-You can control and fine-tune LOD streaming using the following APIs:
+You can control and fine-tune streaming behavior using the following APIs:
 
 ### Component-Level Control
 
@@ -11965,7 +11965,7 @@ entity.gsplat.lodBaseDistance = 10;  // distance for the first LOD transition
 entity.gsplat.lodMultiplier = 2;    // each successive threshold is 2x farther
 ```
 
-The default multiplier of 2 gives perceptually uniform transitions under perspective projection. The system also compensates for camera FOV automatically.
+The multiplier defaults to 3 (and is clamped to a minimum of 1.2) — each LOD transition happens at three times the previous distance. The system also compensates for camera FOV automatically.
 
 ### Scene-Level Control
 
@@ -11984,32 +11984,32 @@ const gsplatSettings = app.scene.gsplat;
 // (See API documentation for available properties)
 ```
 
-The most important scene-level setting for LOD streaming is the global splat budget, which automatically balances detail across all GSplat assets to hit a target splat count. See [Global Splat Budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget) in the Performance section for details.
+The most important scene-level setting for Streamed SOG is the global splat budget, which automatically balances detail across all GSplat assets to hit a target splat count. See [Global Splat Budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget) in the Performance section for details.
 
-## Using LOD Streaming in the Editor
+## Using Streamed SOG in the Editor
 
-Native support for LOD streaming in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable streaming LOD functionality in your Editor projects.
+Native support for Streamed SOG in the PlayCanvas Editor will be added in the near future. In the meantime, you can use the Engine API in scripts to enable Streamed SOG functionality in your Editor projects.
 
 ### Sample Project
 
-We've created a sample project that demonstrates how to use streaming LOD with Gaussian splats in the PlayCanvas Editor:
+We've created a sample project that demonstrates how to use Streamed SOG with Gaussian splats in the PlayCanvas Editor:
 
 **[Church of Saints Peter and Paul](https://playcanvas.com/project/1408991/overview/church-of-saints-peter-and-paul)**
 
-This project showcases a large-scale Gaussian splat scene with LOD streaming, including custom reveal shader effects.
+This project showcases a large-scale Gaussian splat scene with Streamed SOG, including custom reveal shader effects.
 
 ### Using the Streamed GSplat Script
 
-The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable LOD streaming:
+The sample project includes a `streamed-gsplat.mjs` script that can be added to any Entity to enable Streamed SOG:
 
 #### Setup Steps
 
 1. Add the script to an Entity in your scene
-2. Configure the `splatUrl` property to point to an externally hosted LOD splat format file
+2. Configure the `splatUrl` property to point to an externally hosted Streamed SOG file
 
 :::note External Hosting
 
-Currently, the LOD splat data needs to be hosted externally (not as an Editor asset). This limitation will be removed in the future when native Editor support for streaming LOD format is added.
+Currently, the Streamed SOG data needs to be hosted externally (not as an Editor asset). This limitation will be removed in the future when native Editor support for Streamed SOG is added.
 
 :::
 
@@ -12036,15 +12036,15 @@ This demonstrates the flexibility of the PlayCanvas Engine's shader system for c
 
 ### Future Editor Improvements
 
-As native Editor support for streaming LOD is added, the following improvements are planned:
+As native Editor support for Streamed SOG is added, the following improvements are planned:
 
-- **Direct Asset Import**: Upload LOD splat files directly as Editor assets (no external hosting needed)
+- **Direct Asset Import**: Upload Streamed SOG files directly as Editor assets (no external hosting needed)
 - **Visual Configuration**: Configure LOD settings through the Editor UI instead of script properties
-- **Preview in Editor**: View and test streaming LOD behavior directly in the Editor viewport
+- **Preview in Editor**: View and test streaming behavior directly in the Editor viewport
 
 ## Benefits
 
-- **Better Performance**: LOD streaming reduces memory usage and improves rendering performance for large scenes
+- **Better Performance**: Streamed SOG reduces memory usage and improves rendering performance for large scenes
 - **Scalability**: Enables rendering of much larger Gaussian splat scenes by dynamically loading appropriate detail levels
 - **Flexibility**: Provides fine-grained control over LOD distances and streaming behavior
 - **Optimized Loading**: Only loads the data needed for the current view
@@ -12054,7 +12054,8 @@ As native Editor support for streaming LOD is added, the following improvements 
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
 - [SplatTransform CLI Tool](/user-manual/splat-transform)
-- [Generating LOD Format](/user-manual/splat-transform#generating-lod-format)
+- [Generating Streamed SOG](/user-manual/splat-transform#generating-lod-format)
+- [Streamed SOG Format Specification](/user-manual/gaussian-splatting/formats/streamed-sog)
 - [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
 - [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)
 
@@ -12070,7 +12071,7 @@ Rendering splats can be expensive on both the CPU and GPU. Here are some strateg
 
 Be mindful of the number of Gaussians in your scene since every Gaussian is sorted on camera depth every frame. You can check the number contained within a particular GSplat asset by using the [SPLAT DATA Panel](/user-manual/supersplat/editor/data-panel/) in the [SuperSplat Editor](/user-manual/supersplat/editor/). Use SuperSplat to trim unwanted Gaussians from your PLY files.
 
-For large scenes, consider using [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming) which dynamically loads appropriate levels of detail based on camera distance. This significantly reduces the number of active Gaussians at any given time while maintaining visual quality where it matters most.
+For large scenes, consider using [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming) which dynamically loads appropriate levels of detail based on camera distance. This significantly reduces the number of active Gaussians at any given time while maintaining visual quality where it matters most.
 
 ## Fill Rate Considerations
 
@@ -12091,13 +12092,13 @@ Given the fragment-heavy nature of Gaussian splatting, these settings have a sig
 
 Both settings help reduce the fragment processing load, which is the primary bottleneck in 3DGS rendering.
 
-## LOD Streaming Configuration
+## Streamed SOG Configuration
 
-When using [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming), you have several options to control quality and performance. The recommended approach is to use the **global splat budget** which automatically manages LOD selection across all GSplat assets in your scene.
+When using [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming), you have several options to control quality and performance. The recommended approach is to use the **global splat budget** which automatically manages LOD selection across all GSplat assets in your scene.
 
 ### Global Splat Budget
 
-The global splat budget is the primary way to control rendering performance for LOD streaming. Set it via:
+The global splat budget is the primary way to control rendering performance for Streamed SOG. Set it via:
 
 ```javascript
 app.scene.gsplat.splatBudget = 4000000; // 4 million splats max
@@ -12108,7 +12109,7 @@ When a budget is set, the engine automatically adjusts LOD levels across all GSp
 - **Budget = 0**: Disables budget enforcement, using only distance-based LOD selection
 - **Budget > 0**: Enforces the specified maximum splat count across all GSplat assets
 
-The budget system accounts for all GSplat assets in the scene, including both LOD-streaming assets (with multiple detail levels) and fixed assets (single detail level).
+The budget system accounts for all GSplat assets in the scene, including both Streamed SOG assets (with multiple detail levels) and fixed assets (single detail level).
 
 ### LOD Distances
 
@@ -12149,7 +12150,7 @@ The approach has two steps:
 ```javascript
 const gsplatSystem = app.systems.gsplat;
 
-// `entity` has a gsplat component using a loaded LOD-streaming asset
+// `entity` has a gsplat component using a loaded Streamed SOG asset
 const gsplat = entity.gsplat;
 
 // 1. Start with the lowest (coarsest) LOD only, for the fastest first frame
@@ -12174,7 +12175,7 @@ const onFrameReady = (camera, layer, ready, loadingCount) => {
 gsplatSystem.on('frame:ready', onFrameReady);
 ```
 
-This technique is demonstrated in the live [LOD Streaming example](/user-manual/gaussian-splatting/building/lod-streaming#live-examples).
+This technique is demonstrated in the live [Streamed SOG example](/user-manual/gaussian-splatting/building/lod-streaming#live-examples).
 
 ### Recommended Configuration
 
@@ -14325,7 +14326,7 @@ Both the Convert page and the splat-transform CLI use the same underlying librar
 
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/
 
-PlayCanvas supports two formats for 3D Gaussian Splat data:
+PlayCanvas supports three formats for 3D Gaussian Splat data:
 
 ## [PLY Format](./ply.md) - Source & Interchange
 
@@ -14343,20 +14344,29 @@ Compressed format optimized for web delivery. 15-20× smaller than PLY with loss
 - **File size**: Small (compressed)
 - **Quality**: Visually optimized
 
+## [Streamed SOG Format](./streamed-sog.md) - Large-Scene Streaming
+
+SOG chunks organized into a spatial tree with multiple levels of detail. Viewers stream in only the chunks and detail levels needed for the current camera.
+
+- **Use for**: Very large scenes (tens of millions of Gaussians), progressive loading
+- **File size**: Small per chunk, loaded on demand
+- **Quality**: Visually optimized, view-dependent detail
+
 ## Quick Comparison
 
-| | PLY | SOG |
-|---|---|---|
-| **Size** | Large | Small (15-20× compression) |
-| **Quality** | Lossless | Lossy |
-| **Use** | Source/editing | Runtime/delivery |
-| **Speed** | Slow loading | Fast loading |
+| | PLY | SOG | Streamed SOG |
+|---|---|---|---|
+| **Size** | Large | Small (15-20× compression) | Small (SOG chunks, loaded on demand) |
+| **Quality** | Lossless | Lossy | Lossy, view-dependent detail |
+| **Use** | Source/editing | Runtime/delivery | Very large scenes |
+| **Speed** | Slow loading | Fast loading | Progressive streaming |
 
 ## Workflow
 
 1. Train and edit with **PLY**
 2. Convert to **SOG** for production using [SplatTransform](/user-manual/splat-transform/)
-3. Deploy SOG files for optimal performance
+3. For very large scenes, convert to **Streamed SOG** instead
+4. Deploy for optimal performance
 
 --------------------------------------------------------------------------------
 
@@ -14582,7 +14592,7 @@ interface Meta {
     generator?: string;    // e.g. "splat-transform v1.2.3"
   };
   count: number;           // Number of gaussians (<= W*H of the images)
-  antialias: boolean;      // True iff scene was trained with anti-aliasing
+  antialias?: boolean;     // Optional. True iff scene was trained with anti-aliasing. Default: false
 
   means: {
     // Ranges for decoding *log-transformed* positions (see §3.1).
@@ -14592,7 +14602,7 @@ interface Meta {
   };
 
   scales: {
-    codebook: number[];    // 256 floats; see §3.3
+    codebook: number[];    // 256 floats (log-domain); see §3.3
     files: ["scales.webp"];
   };
 
@@ -14620,7 +14630,7 @@ interface Meta {
 
 :::note
 
-* The scales codebook contains linear-space values. The sh0 codebook contains gamma-space DC coefficients. The shN codebook contains gamma-space AC coefficients.
+* The scales codebook contains log-space values that must be passed through `exp()` to recover linear sizes (§3.3). The sh0 codebook contains gamma-space DC coefficients. The shN codebook contains gamma-space AC coefficients.
 * Image data **must** be treated as raw 8-bit integers (no gamma conversion).
 * Unless otherwise stated, channels not mentioned are ignored.
 * Filenames in `files` arrays are arbitrary, but the order is significant.
@@ -14664,8 +14674,10 @@ const p = {
 
 Quaternions are encoded with **3×8-bit components + 2-bit mode** (total **26 bits**) using the standard *smallest-three* scheme.
 
-* **R,G,B** store the three kept (signed) components, uniformly quantized to `[-√2/2, +√2/2]`.
-* **A** stores the **mode** in the range **252..255**. The mode is `A - 252` ∈ {0,1,2,3} and identifies which of the four components was the **largest by magnitude** (and therefore omitted from the stream and reconstructed).
+Quaternion components are ordered **(w, x, y, z)** throughout.
+
+* **R,G,B** store the three kept (signed) components in **(w, x, y, z)** order, uniformly quantized to `[-√2/2, +√2/2]`.
+* **A** stores the **mode** in the range **252..255**. The mode is `A - 252` ∈ {0,1,2,3} and identifies which of the four components — in **(w, x, y, z)** order — was the **largest by magnitude** (and therefore omitted from the stream and reconstructed): mode 0 = w, 1 = x, 2 = y, 3 = z.
 * Let `norm = Math.SQRT2` (i.e., √2).
 
 ```ts
@@ -14676,19 +14688,19 @@ const a = toComp(quats.r);
 const b = toComp(quats.g);
 const c = toComp(quats.b);
 
-const mode = quats.a - 252; // 0..3 (R,G,B,A is one of the four components)
+const mode = quats.a - 252; // 0..3 → omitted component is w, x, y or z respectively
 
 // Reconstruct the omitted component so that ||q|| = 1 and w.l.o.g. the omitted one is non-negative
 const t = a*a + b*b + c*c;
 const d = Math.sqrt(Math.max(0, 1 - t));
 
-// Place components according to mode
+// Place components according to mode; q is ordered [w, x, y, z]
 let q: [number, number, number, number];
 switch (mode) {
-    case 0: q = [d, a, b, c]; break; // omitted = x
-    case 1: q = [a, d, b, c]; break; // omitted = y
-    case 2: q = [a, b, d, c]; break; // omitted = z
-    case 3: q = [a, b, c, d]; break; // omitted = w
+    case 0: q = [d, a, b, c]; break; // omitted = w
+    case 1: q = [a, d, b, c]; break; // omitted = x
+    case 2: q = [a, b, d, c]; break; // omitted = y
+    case 3: q = [a, b, c, d]; break; // omitted = z
     default: throw new Error("Invalid quaternion mode");
 }
 ```
@@ -14701,15 +14713,15 @@ switch (mode) {
 
 > `scales.webp` (RGB via codebook)
 
-Per-axis sizes are **codebook indices**:
+Per-axis sizes are **codebook indices**. The codebook stores **log-domain** values, so decoding requires an exponential:
 
 ```ts
-const sx = meta.scales.codebook[scales.r]; // 0..255
-const sy = meta.scales.codebook[scales.g];
-const sz = meta.scales.codebook[scales.b];
+const sx = Math.exp(meta.scales.codebook[scales.r]); // r,g,b are 0..255
+const sy = Math.exp(meta.scales.codebook[scales.g]);
+const sz = Math.exp(meta.scales.codebook[scales.b]);
 ```
 
-Interpretation (e.g., principal axis standard deviations vs. full extents) follows the source training setup; values are in **scene units**.
+Interpretation (e.g., principal axis standard deviations vs. full extents) follows the source training setup; decoded (post-`exp`) values are in **scene units**.
 
 ### 3.4 Base color + opacity (DC)
 
@@ -14844,11 +14856,170 @@ for (let c = 0; c < shCoeffs; c++) {
 
 --------------------------------------------------------------------------------
 
+## The Streamed SOG Format
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog/
+
+**Streamed SOG** splits a Gaussian splat scene into spatial chunks at multiple levels of detail (LOD). A viewer walks a spatial tree to decide which chunks and detail levels to load for the current camera, allowing very large scenes (tens of millions of Gaussians) to load progressively and stay interactive.
+
+You can create Streamed SOG datasets with **[SplatTransform](https://github.com/playcanvas/splat-transform)** — see [Generating Streamed SOG](/user-manual/splat-transform/#generating-lod-format) for a step-by-step walkthrough. Individual chunks are standard [SOG](./sog.md) datasets.
+
+This document is the format specification. It describes **version 1**.
+
+## 1. File set
+
+A Streamed SOG dataset is a directory containing a single index file plus one subdirectory per chunk:
+
+```none
+scene/
+├── lod-meta.json        # index: scene info + spatial tree (this spec)
+├── 0_0/                 # LOD 0, chunk 0 — unbundled SOG (meta.json + .webp textures)
+│   ├── meta.json
+│   └── *.webp
+├── 0_1/                 # LOD 0, chunk 1
+├── 1_0/                 # LOD 1, chunk 0
+├── …                    # one directory per {lod}_{chunk}
+└── env/                 # optional environment splats — unbundled SOG
+```
+
+* The index file is always named `lod-meta.json`. Loaders identify the format by this filename.
+* Each chunk is a standard **unbundled** [SOG](./sog.md) dataset (a `meta.json` plus WebP texture files). Bundled (single-archive) SOG chunks are not part of this format.
+* All paths in `lod-meta.json` are relative to the directory containing `lod-meta.json`.
+
+:::note[Chunk naming]
+
+The `{lod}_{chunk}/` directory naming is a convention of the writer. Readers **must** resolve chunk locations through the `filenames` array, not the naming pattern.
+
+:::
+
+---
+
+## 2. `lod-meta.json`
+
+```ts
+interface LodMeta {
+  version: 1;                  // File format version (integer)
+  asset?: {                    // Optional tool/version metadata
+    generator?: string;        // e.g. "splat-transform v2.5.2"
+  };
+  count: number;               // Total gaussians across all LOD levels (excludes environment)
+  counts: number[];            // Gaussians per LOD level; index = LOD level, length = lodLevels
+  lodLevels: number;           // Number of LOD levels
+  environment?: string;        // Relative path to the environment SOG's meta.json; omitted if none
+  filenames: string[];         // Relative paths to chunk SOG meta.json files, referenced by index
+  tree: Node;                  // Root of the spatial tree
+}
+
+interface Node {
+  bound: {
+    min: [number, number, number];   // AABB minimum [x, y, z]
+    max: [number, number, number];   // AABB maximum [x, y, z]
+  };
+  children?: [Node, Node];     // Interior node: exactly two child nodes
+  lods?: {
+    [lodLevel: string]: {      // Leaf node: map of LOD level → splat range
+      file: number;            // Index into filenames
+      offset: number;          // Index of the first splat within the chunk
+      count: number;           // Number of consecutive splats
+    };
+  };
+}
+```
+
+---
+
+## 3. The spatial tree
+
+`tree` is a binary spatial subdivision of the scene. Every node carries an axis-aligned bounding box and is either an **interior node** (has `children`, always exactly two) or a **leaf node** (has `lods`) — never both.
+
+* A leaf's `bound` encloses the full extents of every Gaussian assigned to it — each Gaussian's position expanded by its rotated, scaled ellipsoid — not just the Gaussian centers.
+* An interior node's `bound` is the union of its children's bounds.
+* Bounds are expressed in the same coordinate frame as the splat positions stored in the chunk SOG files.
+
+### 3.1 LOD levels
+
+LOD level `0` is the highest detail; higher levels are progressively coarser. A leaf's `lods` object is keyed by the decimal string form of the LOD level (`"0"` … `"lodLevels - 1"`). A missing key means the leaf has no splats at that level.
+
+All LOD levels of a leaf cover the same spatial region — a viewer selects exactly one level per leaf based on, for example, distance to camera.
+
+### 3.2 Chunk references
+
+Each `lods` entry addresses a contiguous run of splats within one chunk:
+
+* `file` is an index into the top-level `filenames` array.
+* `offset` and `count` select splats `[offset, offset + count)` in the chunk's storage order (splat indices, not bytes). In the chunk's SOG textures, storage order is row-major pixel order, so splat `i` lives at pixel `(i % W, floor(i / W))`.
+
+A chunk file's contents are exactly the concatenation of the leaf runs that reference it: the runs are non-overlapping and cover the chunk completely. Within each run, splats are sorted in Morton order for spatial locality; no ordering holds across run boundaries. A chunk only ever contains splats of a single LOD level.
+
+---
+
+## 4. Environment
+
+The optional `environment` field points to a standard unbundled [SOG](./sog.md) dataset containing splats that are not part of the LOD/chunk streaming scheme — typically far-field background such as sky. A viewer **should** load and render the environment unconditionally, independent of the spatial tree.
+
+---
+
+## 5. Precision
+
+Non-integer numbers in `lod-meta.json` are quantized to 7 significant digits (approximately 32-bit float precision).
+
+---
+
+## 6. Example `lod-meta.json`
+
+A two-level scene with an environment, split into one interior node with two leaves:
+
+```json
+{
+  "version": 1,
+  "asset": { "generator": "splat-transform v2.5.2" },
+  "count": 1500000,
+  "counts": [1000000, 500000],
+  "lodLevels": 2,
+  "environment": "env/meta.json",
+  "filenames": [
+    "0_0/meta.json",
+    "1_0/meta.json"
+  ],
+  "tree": {
+    "bound": { "min": [-10, 0, -10], "max": [10, 5, 10] },
+    "children": [
+      {
+        "bound": { "min": [-10, 0, -10], "max": [0.5, 5, 10] },
+        "lods": {
+          "0": { "file": 0, "offset": 0, "count": 600000 },
+          "1": { "file": 1, "offset": 0, "count": 300000 }
+        }
+      },
+      {
+        "bound": { "min": [0.5, 0, -10], "max": [10, 4.5, 10] },
+        "lods": {
+          "0": { "file": 0, "offset": 600000, "count": 400000 },
+          "1": { "file": 1, "offset": 300000, "count": 200000 }
+        }
+      }
+    ]
+  }
+}
+```
+
+---
+
+## 7. Versioning & compatibility
+
+* Files conforming to this specification have `version: 1`. Readers **should** reject files with a greater major version.
+* Files produced before the format was versioned omit `version`, `asset`, `count` and `counts`, and may contain `"environment": null`. Readers that wish to support them **should** treat a missing `version` as pre-release and `environment: null` as no environment.
+* Unknown fields **should** be ignored, allowing minor additive evolution without a version bump.
+
+---
+
+--------------------------------------------------------------------------------
+
 ## Splat Rendering Architecture
 
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/
 
-PlayCanvas renders Gaussian splats through a shared pipeline that sorts all splats from every GSplat component together. This global sorting ensures correct rendering order across the entire scene and provides access to advanced features like procedural splats, LOD streaming, and GPU-based splat processing.
+PlayCanvas renders Gaussian splats through a shared pipeline that sorts all splats from every GSplat component together. This global sorting ensures correct rendering order across the entire scene and provides access to advanced features like procedural splats, Streamed SOG, and GPU-based splat processing.
 
 ## Global Sorting
 
@@ -14888,7 +15059,7 @@ flowchart LR
 
 GSplat resources are the source data for splats. They come in two forms:
 
-1. **Loaded splats**: Imported from files (`.ply`, `.sog`) or streamed via [LOD streaming](/user-manual/gaussian-splatting/building/lod-streaming)
+1. **Loaded splats**: Imported from files (`.ply`, `.sog`) or streamed via [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming)
 2. **Procedural splats**: Created programmatically using [GSplatContainer](/user-manual/gaussian-splatting/building/procedural-splats/)
 
 Each resource stores splat data in GPU textures according to a [data format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format).
@@ -14916,7 +15087,7 @@ The Global Sorting example demonstrates how sorting all splats together eliminat
 - **Improved Visual Quality**: Eliminates artifacts when rendering multiple overlapping splat components
 - **Consistent Rendering**: Maintains correct depth sorting regardless of camera position
 - **Better Scene Composition**: Enables complex scenes with many splat components
-- **Advanced Features**: Unlocks procedural splats, LOD streaming, and GPU processing
+- **Advanced Features**: Unlocks procedural splats, Streamed SOG, and GPU processing
 
 ## Advanced Features
 
@@ -14924,7 +15095,7 @@ The following features build on this rendering pipeline:
 
 - [Splat Data Format](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format) - Custom texture formats for splat data
 - [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/) - Create splats programmatically
-- [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming) - Dynamic level-of-detail loading
+- [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming) - Dynamic level-of-detail loading
 - [Splat Processing](/user-manual/gaussian-splatting/rendering-architecture/splat-processing) - GPU-based splat manipulation
 
 ## See Also
@@ -15063,7 +15234,7 @@ You can add extra streams to a resource's format to store custom per-splat data.
 
 :::note
 
-Extra streams are not supported for LOD streaming resources. LOD resources dynamically load and unload data as needed, and custom extra streams cannot be preserved across these operations.
+Extra streams are not supported for Streamed SOG resources. These resources dynamically load and unload data as needed, and custom extra streams cannot be preserved across these operations.
 
 :::
 
@@ -27981,7 +28152,7 @@ Apply when reading `.lcc` files.
 
 ## LOD Output Options
 
-Apply when writing `lod-meta.json` (multi-LOD streaming SOG bundle).
+Apply when writing `lod-meta.json` ([Streamed SOG](/user-manual/gaussian-splatting/formats/streamed-sog) output).
 
 ```none
 -C, --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
@@ -28244,9 +28415,9 @@ splat-transform \
   complete_scene.ply
 ```
 
-### Generating LOD Format {#generating-lod-format}
+### Generating Streamed SOG {#generating-lod-format}
 
-The LOD (Level of Detail) format enables efficient streaming and rendering of large Gaussian splat scenes. SplatTransform builds an optimized streaming format with an octree structure for progressive download from a set of LOD levels, where each level has progressively fewer Gaussians (LOD 0 = highest detail, higher numbers = lower detail).
+The [Streamed SOG](/user-manual/gaussian-splatting/formats/streamed-sog) format enables efficient streaming and rendering of large Gaussian splat scenes. SplatTransform builds an optimized streaming format with a spatial tree structure for progressive download from a set of LOD (Level of Detail) levels, where each level has progressively fewer Gaussians (LOD 0 = highest detail, higher numbers = lower detail).
 
 You can obtain those LOD levels in two ways:
 
@@ -28257,7 +28428,7 @@ You can obtain those LOD levels in two ways:
 
 The output filename determines the format. These are **not** arbitrary names:
 
-- **`lod-meta.json`** — generates LOD streaming format (multiple SOG chunks with an octree structure for progressive loading)
+- **`lod-meta.json`** — generates Streamed SOG format (multiple SOG chunks with a spatial tree structure for progressive loading)
 - **`meta.json`** — generates unbundled SOG format (a single SOG file, no streaming)
 
 The output filename must be exactly `lod-meta.json` or `meta.json` — only the directory path before it can vary. For example: `output/lod-meta.json`, `my-scene/lod-meta.json`.
@@ -28265,7 +28436,7 @@ The output filename must be exactly `lod-meta.json` or `meta.json` — only the 
 :::
 
 ```bash
-# Generate LOD streaming format from multiple input files
+# Generate Streamed SOG format from multiple input files
 # Each input file represents a different detail level (LOD 0 is highest quality)
 splat-transform \
   lod0.ply -l 0 \
@@ -28281,7 +28452,7 @@ splat-transform \
 splat-transform source.ply -F 50% lod1.ply
 splat-transform source.ply -F 25% lod2.ply
 splat-transform source.ply -F 10% lod3.ply
-# Step 2: bundle the full-detail source and the decimated levels into a streaming LOD format
+# Step 2: bundle the full-detail source and the decimated levels into Streamed SOG format
 splat-transform \
   source.ply -l 0 \
   lod1.ply -l 1 \
@@ -28310,7 +28481,7 @@ node --max-old-space-size=32000 node_modules/.bin/splat-transform \
   --filter-nan \
   --filter-harmonics 0
 
-# Generate LOD streaming format directly from an LCC file
+# Generate Streamed SOG format directly from an LCC file
 # (LCC files already contain multiple LOD levels)
 splat-transform scene.lcc output/lod-meta.json
 ```
@@ -28497,7 +28668,7 @@ For uploading or generating voxel collision through the SuperSplat web UI instea
 
 Two outputs are produced from the same voxelization pass:
 
-- **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](/user-manual/supersplat/viewer/) for runtime collision detection.
+- **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](/user-manual/supersplat/viewer/) for runtime collision detection. The on-disk structure is specified in the [Voxel Format](/user-manual/splat-transform/voxel-format) specification.
 - **`.collision.glb`** — triangulated mesh built from the voxel grid (only when `-K` / `--collision-mesh` is passed).
 
 A typical pipeline runs four stages, with the latter two being optional depending on the scene type:
@@ -28707,6 +28878,7 @@ splat-transform input.ply \
 
 ## See also
 
+- [Voxel Format](/user-manual/splat-transform/voxel-format) — the on-disk format of `.voxel.json` / `.voxel.bin` output.
 - [splat-transform CLI reference](/user-manual/splat-transform/) — full option reference including Voxel Output Options.
 - [Docker Backend](/user-manual/splat-transform/docker) — running the GPU-only voxel/collision features in a container.
 - [Studio → Collision](/user-manual/supersplat/studio/collision) — uploading or generating voxel collision through the SuperSplat web UI.
@@ -28928,6 +29100,176 @@ Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster
 
 --------------------------------------------------------------------------------
 
+## Voxel Format
+
+URL: https://developer.playcanvas.com/user-manual/splat-transform/voxel-format/
+
+This document specifies version 1.1 of the **voxel** format. It describes the on-disk structure written by [splat-transform](/user-manual/splat-transform/) when the output path ends in `.voxel.json` and consumed by runtimes such as the [SuperSplat Viewer](/user-manual/supersplat/viewer/) for collision detection and raycasts.
+
+The format stores a solid/empty voxelization of a Gaussian splat scene as a sparse voxel octree (SVO) in the Laine–Karras node layout: a JSON header describing the grid, plus a compact binary file holding the tree.
+
+For a step-by-step guide to generating this format (voxelization, exterior fill, nav carving, collision meshes), see the [Collision Mesh](/user-manual/splat-transform/collision) guide.
+
+## File set
+
+A voxel dataset is a pair of files with a shared stem, plus an optional collision mesh:
+
+```none
+scene.voxel.json       # header: bounds, resolution, tree statistics (this spec)
+scene.voxel.bin        # binary octree data (nodes + leafData)
+scene.collision.glb    # optional triangle mesh extracted from the voxels
+```
+
+- The header is always named `*.voxel.json`. Writers and readers derive the binary filename by replacing the `.voxel.json` suffix with `.voxel.bin`; the header does not reference it explicitly.
+- The `.collision.glb` (written only when collision mesh generation is requested) is a standard glTF binary and is not described further here.
+
+## `*.voxel.json`
+
+```ts
+interface VoxelMeta {
+    version: string;             // file format version, decimal string, e.g. "1.1"
+    asset?: {
+        generator?: string;      // tool/version that produced the file, e.g. "splat-transform v2.5.2"
+    };
+    gridBounds: {                // AABB of the voxel grid, aligned to 4-voxel block boundaries
+        min: number[];           // [x, y, z] — world position of the min corner of voxel (0, 0, 0)
+        max: number[];           // [x, y, z]
+    };
+    sceneBounds: {               // AABB of the source Gaussians (informational)
+        min: number[];
+        max: number[];
+    };
+    voxelResolution: number;     // edge length of one voxel, world units
+    leafSize: number;            // voxels per leaf-block edge; always 4
+    treeDepth: number;           // subdivision levels from the root cube down to leaf blocks (>= 1)
+    numInteriorNodes: number;    // number of interior nodes in `nodes`
+    numMixedLeaves: number;      // number of mixed leaves in `nodes`
+    nodeCount: number;           // total uint32 entries in the `nodes` array
+    leafDataCount: number;       // total uint32 entries in the `leafData` array (= 2 * numMixedLeaves)
+}
+```
+
+- `gridBounds` is the authoritative frame for the voxel data: voxel `(vx, vy, vz)` occupies the world-space box from `gridBounds.min + (vx, vy, vz) · voxelResolution` to `gridBounds.min + (vx+1, vy+1, vz+1) · voxelResolution`. Each axis spans a whole number of 4×4×4-voxel blocks: `nb = round((max − min) / (4 · voxelResolution))`.
+- `sceneBounds` records the bounds of the source Gaussian scene (each Gaussian's position expanded by its rotated, scaled extents at the renderer's sigma cutoff). It is informational; depending on fill/carve/crop options, `gridBounds` may be larger or smaller than `sceneBounds`.
+- `nodeCount` = `numInteriorNodes` + `numMixedLeaves` + the number of solid leaves (not stored separately).
+
+### Coordinate space
+
+All bounds are expressed in the PlayCanvas engine's coordinate frame — the frame the splat scene renders in. This differs from the source PLY's coordinate frame by the engine's standard splat import transform (a 180° rotation about the Z axis).
+
+## `*.voxel.bin`
+
+The binary file is two concatenated little-endian `uint32` arrays with no header or padding:
+
+| Offset (bytes) | Length (bytes) | Contents |
+| --- | --- | --- |
+| `0` | `nodeCount * 4` | `nodes` array |
+| `nodeCount * 4` | `leafDataCount * 4` | `leafData` array |
+
+The total file size is exactly `(nodeCount + leafDataCount) * 4` bytes. A scene with no solid voxels has `nodeCount = 0`, `leafDataCount = 0` and an empty binary file.
+
+## The octree
+
+The tree subdivides a cube of `2^treeDepth` blocks per axis (each block being `leafSize`³ = 4×4×4 voxels), anchored at `gridBounds.min`. Where the per-axis block counts are not equal powers of two, the root cube extends beyond `gridBounds.max`; that excess region is always empty (such octants are simply absent from their parents' child masks).
+
+Nodes at depth `treeDepth` are **leaf blocks** covering 4×4×4 voxels. `nodes[0]` is the root.
+
+### Octant numbering
+
+An interior node's eight octants are numbered by axis halves, X least significant:
+
+```none
+oct = x | (y << 1) | (z << 2)    // x, y, z = 0 for the lower half, 1 for the upper half
+```
+
+This matches Morton order: the path from the root to a leaf block at block coordinates `(bx, by, bz)` consumes the coordinates' bits from most to least significant — at depth `d` (root = 0), `oct = ((bx >> s) & 1) | (((by >> s) & 1) << 1) | (((bz >> s) & 1) << 2)` where `s = treeDepth − 1 − d`.
+
+### Node words
+
+Each entry of `nodes` is one `uint32`, decoded as follows (test in order):
+
+| Condition | Node kind | Meaning |
+| --- | --- | --- |
+| `word == 0xFF000000` | **Solid leaf** | The node's entire volume is solid. No children, no leaf data. May appear at any depth (a collapsed fully-solid subtree). |
+| `(word >>> 24) == 0` | **Mixed leaf** | `word` is an index `i` into `leafData` pairs: the node's voxel mask is `leafData[2i]` (lo) and `leafData[2i + 1]` (hi). Only appears at depth `treeDepth`. |
+| otherwise | **Interior** | `childMask = word >>> 24` (8 bits, one per octant); `firstChild = word & 0xFFFFFF` (index into `nodes`). |
+
+The two leaf encodings are unambiguous:
+
+- An interior node always has at least one child, so its `childMask` is never `0` — a zero top byte uniquely identifies a mixed leaf.
+- Nodes are emitted in breadth-first order with children always following their parent, so an interior node's `firstChild` is never `0` — `0xFF000000` uniquely identifies a solid leaf.
+
+### Children
+
+An interior node's present children (set bits of `childMask`) are stored contiguously starting at `nodes[firstChild]`, ordered by ascending octant index. The child for octant `oct` (when `childMask & (1 << oct)` is set) is at:
+
+```none
+nodes[firstChild + popcount(childMask & ((1 << oct) - 1))]
+```
+
+A clear bit in `childMask` means that octant's entire volume is empty; no node is stored for it.
+
+### Mixed-leaf voxel masks
+
+A mixed leaf's 4×4×4 = 64 voxels are stored as a 64-bit occupancy mask split across two `uint32`s. For the voxel at local coordinates `(lx, ly, lz)`, each in `[0, 4)`:
+
+```none
+bit = lx + (ly << 2) + (lz << 4)
+solid = bit < 32 ? (lo >>> bit) & 1 : (hi >>> (bit - 32)) & 1
+```
+
+`leafData[2i]` holds bits 0–31 (`lo`), `leafData[2i + 1]` holds bits 32–63 (`hi`). A set bit means the voxel is solid. A mixed leaf's mask is never all-zero or all-one — such blocks are encoded as an absent octant or a solid leaf instead.
+
+### Query domain
+
+Queries outside `gridBounds` are outside the format's domain, and the appropriate convention depends on the use case. Navigation/collision consumers (e.g. the [SuperSplat Viewer](/user-manual/supersplat/viewer/)) treat out-of-grid space as **solid**; outputs produced with the nav options (exterior fill, floor fill, carve) rely on this — the writer crops away fully-solid blocks beyond the navigable region precisely because the runtime treats everything outside the grid as solid anyway.
+
+## Limits
+
+`firstChild` and the mixed-leaf `leafData` index are 24-bit values, capping the format at 16,777,216 node entries and 16,777,216 mixed leaves. The writer fails with an error rather than exceed either limit.
+
+## Example `*.voxel.json`
+
+A 32 × 14 × 32-block grid at 5 cm resolution (block size 0.2):
+
+```json
+{
+    "version": "1.1",
+    "asset": {
+        "generator": "splat-transform v2.5.2"
+    },
+    "gridBounds": {
+        "min": [-3.2, -0.2, -3.2],
+        "max": [3.2, 2.6, 3.2]
+    },
+    "sceneBounds": {
+        "min": [-3.13, -0.08, -3.07],
+        "max": [3.11, 2.49, 3.08]
+    },
+    "voxelResolution": 0.05,
+    "leafSize": 4,
+    "treeDepth": 5,
+    "numInteriorNodes": 1201,
+    "numMixedLeaves": 5678,
+    "nodeCount": 9232,
+    "leafDataCount": 11356
+}
+```
+
+## Versioning & compatibility
+
+- `version` is a decimal `"major.minor"` string. Files conforming to this specification have `version: "1.1"`. Readers should reject files with a greater major version.
+- **1.0 → 1.1**: version 1.0 files store bounds and voxel data in the source PLY coordinate frame; 1.1 voxelizes in the PlayCanvas engine frame (see [Coordinate space](#coordinate-space)). The binary layout is unchanged.
+- The `asset` block was added after 1.1 shipped and may be absent from older 1.1 files.
+- Unknown fields should be ignored, allowing minor additive evolution without a version bump.
+
+## See also
+
+- [Collision Mesh](/user-manual/splat-transform/collision) — generating voxel and collision data with splat-transform.
+- [splat-transform CLI reference](/user-manual/splat-transform/) — full option reference including Voxel Output Options.
+
+--------------------------------------------------------------------------------
+
 ## SuperSplat
 
 URL: https://developer.playcanvas.com/user-manual/supersplat/
@@ -28976,7 +29318,7 @@ If you already have a clean splat file, you don't need to use the Editor. Hit th
 | **[Viewer](viewer/)** | The open-source web viewer that powers scene pages and Editor HTML exports. Embed in your own page or self-host. | npm `@playcanvas/supersplat-viewer`, [GitHub](https://github.com/playcanvas/supersplat-viewer) |
 | **[Convert](convert)** | Web frontend to the [splat-transform](/user-manual/splat-transform/) CLI: convert formats, transform, and filter in the browser. | [superspl.at/convert](https://superspl.at/convert) |
 
-Behind the scenes, every published splat is compressed to the SOG format, and large splats (over 1 million Gaussians) are automatically LOD-streamed for fast loading on any device — see [Streaming & Performance](streaming).
+Behind the scenes, every published splat is compressed to the SOG format, and large splats (over 1 million Gaussians) are automatically converted to Streamed SOG for fast loading on any device — see [Streaming & Performance](streaming).
 
 ## Open source vs hosted
 
@@ -30191,20 +30533,20 @@ A carousel near the bottom of the page recommends a handful of related splats. C
 
 URL: https://developer.playcanvas.com/user-manual/supersplat/streaming/
 
-When you [publish from the Editor](/user-manual/supersplat/editor/publishing) or [directly upload](/user-manual/supersplat/upload) a splat, SuperSplat compresses it to the **SOG** family of formats for fast delivery. Large splats are automatically given **level-of-detail (LOD) streaming** so they load quickly and run smoothly on any device.
+When you [publish from the Editor](/user-manual/supersplat/editor/publishing) or [directly upload](/user-manual/supersplat/upload) a splat, SuperSplat compresses it to the **SOG** family of formats for fast delivery. Large splats are automatically converted to **Streamed SOG** so they load quickly and run smoothly on any device.
 
 ## How your splat is compressed
 
 Your splat's Gaussian count determines the format:
 
 - **Fewer than 1 million Gaussians** — the splat is compressed to a single, non-streamed **`.sog`** file.
-- **1 million Gaussians or more** — SuperSplat generates a set of **levels of detail (LODs)** using [splat-transform](/user-manual/splat-transform/), halving the Gaussian count at each level (decimation), and compresses them into a **streamed SOG** bundle: a `lod-meta.json` index plus per-LOD `.sog` chunks. Larger splats produce more levels, so expect some extra back-end processing time after upload.
+- **1 million Gaussians or more** — SuperSplat generates a set of **levels of detail (LODs)** using [splat-transform](/user-manual/splat-transform/), halving the Gaussian count at each level (decimation), and compresses them into a **Streamed SOG** bundle: a `lod-meta.json` index plus per-LOD `.sog` chunks. Larger splats produce more levels, so expect some extra back-end processing time after upload.
 
 When you [directly upload](/user-manual/supersplat/upload) a PLY, this choice appears as an **Auto generate LODs** checkbox, ticked automatically at 1 million Gaussians or more; you can override it before publishing. Splats uploaded as a pre-built LCC or SSOG archive are always streamed.
 
 ## Near-instant loads and the Gaussian budget
 
-A streamed SOG loads **progressively**: the viewer shows the scene as soon as the lowest level of detail is ready, then fills in finer detail as it streams in. This gives near-instant time-to-first-frame even for very large scenes.
+A Streamed SOG splat loads **progressively**: the viewer shows the scene as soon as the lowest level of detail is ready, then fills in finer detail as it streams in. This gives near-instant time-to-first-frame even for very large scenes.
 
 At runtime the viewer enforces a **Gaussian budget** — a cap on how many Gaussians are drawn at once — so the scene stays within a sensible amount of memory and renders at a good frame rate. The budget depends on the device and the viewer's **Performance Mode** setting (a toggle in the viewer's settings menu):
 
@@ -30217,7 +30559,7 @@ As the camera moves, the viewer raises and lowers the level of detail across the
 
 ## Bringing your own LODs
 
-Advanced users can skip the automatic step and supply a pre-built streamed SOG:
+Advanced users can skip the automatic step and supply a pre-built Streamed SOG bundle:
 
 - Generate one with the [splat-transform](/user-manual/splat-transform/) CLI (use `--decimate` to build the LOD levels), then [directly upload](/user-manual/supersplat/upload) the resulting bundle.
 - Or produce LOD-capable output from the [Convert](/user-manual/supersplat/convert) utility.
@@ -30225,8 +30567,8 @@ Advanced users can skip the automatic step and supply a pre-built streamed SOG:
 ## See also
 
 - [Direct Upload](/user-manual/supersplat/upload) — upload a ready-made splat
-- [splat-transform](/user-manual/splat-transform/) — generate streamed SOG / LOD bundles yourself
-- [LOD streaming (developer guide)](/user-manual/gaussian-splatting/building/lod-streaming) — using LOD streaming in your own PlayCanvas apps
+- [splat-transform](/user-manual/splat-transform/) — generate Streamed SOG bundles yourself
+- [Streamed SOG (developer guide)](/user-manual/gaussian-splatting/building/lod-streaming) — using Streamed SOG in your own PlayCanvas apps
 
 --------------------------------------------------------------------------------
 
@@ -30696,7 +31038,7 @@ Drag and drop, or pick from your filesystem. The dialog accepts:
 |--------|----------------|---------------------|
 | **PLY** | `.ply` | Starts with a PLY header and declares an ASCII or binary format. |
 | **SOG** | `.sog` | Contains one `meta.json` file and the expected SOG WebP payload files. |
-| **LOD streaming bundle (SSOG)** | `.zip` | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](/user-manual/supersplat/streaming). |
+| **Streamed SOG bundle (SSOG)** | `.zip` | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](/user-manual/supersplat/streaming). |
 | **LCC** | `.zip` | Contains exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
 
 The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, `.splat`, or `.spz` files directly; use the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform CLI](/user-manual/splat-transform/) to convert those first.

@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.6
-Total Documents: 452
-Generated: 2026-06-14
+Total Documents: 454
+Generated: 2026-06-15
 
 ## Instructions for Large Language Models
 
@@ -452,7 +452,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore/): Browse and discover public splats on superspl.at: sort, filter by time and feature, search, and dig into a creator's profile.
 - [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage/): Use the Manage page on superspl.at to list, edit, share, and delete your published splats — and to open them in Studio.
 - [Scene Page](https://developer.playcanvas.com/user-manual/supersplat/scene-page/): The public page for a published splat on superspl.at — embedded viewer, share, embed, download, comments, likes, and suggested splats.
-- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming/): How SuperSplat compresses published splats to SOG, generates level-of-detail streaming for large scenes, and enforces a runtime Gaussian budget.
+- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming/): How SuperSplat compresses published splats to SOG, generates Streamed SOG for large scenes, and enforces a runtime Gaussian budget.
 - [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio/): Studio curates the viewing experience for a published splat: cameras, annotations, post effects, skybox, and collision.
 - [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations/): Add 3D-positioned text hotspots to a published splat — visitors can click through them to navigate the scene from one curated viewpoint to the next.
 - [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras/): Set the starting camera for a published splat — frame its position and target in the viewport and set the field of view — in SuperSplat Studio.
@@ -470,6 +470,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform/): SplatTransform CLI and library: convert between splat formats, transform and filter data, merge scenes, voxelize for collision, and render images.
 - [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision/): Generate sparse voxel octrees and collision meshes from Gaussian splats with splat-transform.
 - [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker/): Run splat-transform as a containerised backend on a Linux host with an NVIDIA GPU, including AWS GPU instances and a CPU-only variant.
+- [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format/): Voxel format specification: the on-disk structure of .voxel.json / .voxel.bin sparse voxel octrees written by splat-transform.
 
 ### ECS
 - [Entity Component System (ECS)](https://developer.playcanvas.com/user-manual/ecs/): How PlayCanvas uses Entities, Components, and Systems to organize objects and behavior in your application.
@@ -565,8 +566,8 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Building Splat-based Apps](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/): Introduction to building Gaussian splat applications with PlayCanvas and links to deeper guides for integration and rendering.
 - [Custom Shaders](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/): Customize Gaussian splat rendering with the gsplatModifyVS shader chunk on the scene gsplat material: overridable functions, GLSL/WGSL, and a live example.
 - [Fisheye Rendering](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/fisheye/): Apply a fisheye projection to Gaussian splats and the infinite skybox for ultra-wide field of view and 'tiny planet' effects.
-- [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/): LOD streaming for large splat scenes: octree layout, generating lod-meta data, examples, and performance guidance.
-- [Performance](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/): Performance tips for splat scenes: splat counts, fill rate, scene settings, LOD streaming budgets, and optimization strategies.
+- [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/): Streamed SOG for large splat scenes: spatial tree layout, generating lod-meta data, examples, and performance guidance.
+- [Performance](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/): Performance tips for splat scenes: splat counts, fill rate, scene settings, Streamed SOG budgets, and optimization strategies.
 - [Picking](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/picking/): Use the PlayCanvas Picker with Gaussian splats: ID setup, depth picking, retrieving world position, and code examples.
 - [Procedural Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/): GSplatContainer procedural splats: CPU and GPU population, built-in formats, and integration with GSplatFormat and processors.
 - [Image to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/image/): GsplatImage script: convert a texture into splats on the XZ plane with one splat per non-transparent pixel for stylized displays.
@@ -583,9 +584,10 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Recommended Tools](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/recommended-tools/): Third-party tools to train and export Gaussian splats: comparison table, capture apps, and research pipelines PlayCanvas does not ship.
 - [Taking Photos](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/taking-photos/): Capture guidance for high-quality splat training: equipment choices, shooting technique, coverage, and how photo issues affect results.
 - [Editing and Publishing Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/): Edit, publish, curate, share, and discover Gaussian Splats with the SuperSplat platform — and use the splat-transform CLI for scripted workflows.
-- [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/): Compare PLY and SOG splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows.
+- [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/): Compare PLY, SOG and Streamed SOG splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows.
 - [The PLY Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply/): PLY format for 3D Gaussian splats: header layout, vertex properties, binary versus ASCII, and how training tools encode splat fields.
 - [The SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/): SOG (Spatially Ordered Gaussians) specification: WebP textures, meta.json layout, quantization, and bundled versus unbundled files.
+- [The Streamed SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog/): Streamed SOG specification: lod-meta.json layout, spatial tree, LOD chunk references, and environment splats.
 - [Splat Rendering Architecture](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/): How PlayCanvas renders Gaussian splats: the work buffer pipeline, global sorting across components, and access to advanced features.
 - [Renderers](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/renderers/): Gaussian splat renderers in PlayCanvas: raster with CPU sorting vs experimental GPU sorting, selecting a renderer, sorting, and depth buffer limits.
 - [Splat Data Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-data-format/): GSplatFormat and GPU texture streams: how splat attributes are stored, shader access, and customizing splat data layout.
