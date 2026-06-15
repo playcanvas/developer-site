@@ -61,11 +61,11 @@ entity.gsplat.lodDistances = [5, 10, 20, 40, 80, 160];
 
 ### LOD範囲制限
 
-`lodRangeMin`と`lodRangeMax`設定は、使用可能なLODレベルを制限します：
+gsplatコンポーネントの`lodRangeMin`と`lodRangeMax`設定は、そのスプラットが使用可能なLODレベルを制限します：
 
 ```javascript
-app.scene.gsplat.lodRangeMin = 0; // 最高品質のLODを許可
-app.scene.gsplat.lodRangeMax = 3; // LOD 3より低くはしない
+entity.gsplat.lodRangeMin = 0; // 最高品質のLODを許可
+entity.gsplat.lodRangeMax = 3; // LOD 3より低くはしない
 ```
 
 これらの設定は以下の場合に役立ちます：
@@ -73,7 +73,7 @@ app.scene.gsplat.lodRangeMax = 3; // LOD 3より低くはしない
 - **ダウンロードの削減**：インターネット接続が遅いデバイスでは、`lodRangeMin`を高く設定することで、最高品質（かつ最大サイズ）のLODファイルのダウンロードを防ぐことができます
 - **メモリ制約**：LOD範囲を制限することで、特定の詳細レベルの読み込みを避け、メモリ使用量を削減できます
 
-ただし、一般的なレンダリングパフォーマンス管理には、LOD範囲制限よりもグローバルスプラットバジェットの方が効果的です。バジェットはすべてのアセット間で適切なバランスを自動的に見つけますが、LOD範囲制限はカメラ位置やシーン構成に関係なく一律に適用されます。
+ただし、一般的なレンダリングパフォーマンス管理には、LOD範囲制限よりもグローバルスプラットバジェットの方が効果的です。バジェットはすべてのアセット間で適切なバランスを自動的に見つけますが、LOD範囲制限はカメラ位置やシーン構成に関係なくアセットごとに適用されます。
 
 ### 最初のフレームを高速に表示する
 
@@ -94,8 +94,8 @@ const gsplat = entity.gsplat;
 const lodLevels = gsplat.resource?.octree?.lodLevels;
 if (lodLevels) {
     const worstLod = lodLevels - 1;
-    app.scene.gsplat.lodRangeMin = worstLod;
-    app.scene.gsplat.lodRangeMax = worstLod;
+    gsplat.lodRangeMin = worstLod;
+    gsplat.lodRangeMax = worstLod;
 }
 
 // 2. 粗いデータがロードされてレンダリングされたら、LOD範囲を元に戻して
@@ -105,8 +105,8 @@ const onFrameReady = (camera, layer, ready, loadingCount) => {
         gsplatSystem.off('frame:ready', onFrameReady);
 
         // 完全なLOD範囲を復元（0 = 最高詳細）
-        app.scene.gsplat.lodRangeMin = 0;
-        app.scene.gsplat.lodRangeMax = lodLevels - 1;
+        gsplat.lodRangeMin = 0;
+        gsplat.lodRangeMax = lodLevels - 1;
     }
 };
 gsplatSystem.on('frame:ready', onFrameReady);

@@ -62,11 +62,11 @@ entity.gsplat.lodMultiplier = 2;   // multiplier between successive thresholds
 
 ### LOD Range Limits
 
-The `lodRangeMin` and `lodRangeMax` settings restrict which LOD levels can be used:
+The `lodRangeMin` and `lodRangeMax` settings on a gsplat component restrict which LOD levels that splat can use:
 
 ```javascript
-app.scene.gsplat.lodRangeMin = 0; // Allow highest quality LOD
-app.scene.gsplat.lodRangeMax = 3; // Never go lower than LOD 3
+entity.gsplat.lodRangeMin = 0; // Allow highest quality LOD
+entity.gsplat.lodRangeMax = 3; // Never go lower than LOD 3
 ```
 
 These settings are useful for:
@@ -74,7 +74,7 @@ These settings are useful for:
 - **Reducing downloads**: On devices with slow internet connections, setting a higher `lodRangeMin` prevents downloading the highest quality (and largest) LOD files
 - **Memory constraints**: Limiting LOD range reduces memory usage by avoiding loading of certain detail levels
 
-However, for typical rendering performance management, the global splat budget is more effective than LOD range limits. The budget automatically finds the right balance across all assets, while LOD range limits apply uniformly regardless of camera position or scene composition.
+However, for typical rendering performance management, the global splat budget is more effective than LOD range limits. The budget automatically finds the right balance across all assets, while LOD range limits apply per asset regardless of camera position or scene composition.
 
 ### Fast Time to First Frame
 
@@ -95,8 +95,8 @@ const gsplat = entity.gsplat;
 const lodLevels = gsplat.resource?.octree?.lodLevels;
 if (lodLevels) {
     const worstLod = lodLevels - 1;
-    app.scene.gsplat.lodRangeMin = worstLod;
-    app.scene.gsplat.lodRangeMax = worstLod;
+    gsplat.lodRangeMin = worstLod;
+    gsplat.lodRangeMax = worstLod;
 }
 
 // 2. Once the coarse data is loaded and rendered, open the LOD range back up
@@ -106,8 +106,8 @@ const onFrameReady = (camera, layer, ready, loadingCount) => {
         gsplatSystem.off('frame:ready', onFrameReady);
 
         // restore the full LOD range (0 = highest detail)
-        app.scene.gsplat.lodRangeMin = 0;
-        app.scene.gsplat.lodRangeMax = lodLevels - 1;
+        gsplat.lodRangeMin = 0;
+        gsplat.lodRangeMax = lodLevels - 1;
     }
 };
 gsplatSystem.on('frame:ready', onFrameReady);
