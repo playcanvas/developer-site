@@ -7,7 +7,7 @@ Complete documentation content: https://developer.playcanvas.com/llms-full.txt
 Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
-Engine Version: 2.19.6
+Engine Version: 2.19.7
 Total Documents: 454
 Generated: 2026-06-17
 
