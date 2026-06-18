@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 454
-Generated: 2026-06-17
+Generated: 2026-06-18
 
 ================================================================================
 
@@ -409,67 +409,46 @@ If your question about billing is not answered on this page, please email [billi
 
 URL: https://developer.playcanvas.com/user-manual/account-management/organizations/
 
-Organizations offer a way for businesses and large projects to manage many users. They provide enhanced collaboration features, permissions management, and team coordination tools.
+An **Organization** is a shared account for teams. Instead of projects living under one person's personal account, they belong to the Organization, where an owner and any number of administrators manage projects, members, and permissions together. Organizations are available on the **Free plan**, with a paid plan when you need more.
 
-## What are Organizations?
+## What is an Organization?
 
-Organizations are team workspaces that allow multiple users to collaborate on projects with structured permissions and management controls.
+An Organization is a team-owned workspace rather than an individual login. A few things set it apart from a personal account:
 
-## Free Organization Features
+- **It isn't tied to one person.** You never log in *as* the Organization. Instead, you manage it through your own user account as its **owner** or an **administrator**.
+- **It has multiple administrators.** The owner can appoint any number of administrators, who can create and delete projects and manage members. Only the owner can delete the Organization itself.
+- **Projects belong to the team.** Projects are owned by the Organization, not by an individual, so they outlast any single member's account.
+- **Ownership can be transferred.** If the owner leaves the team, ownership can be handed to another user without disrupting any projects.
 
-Every free Organization includes:
+## Organizations vs. personal accounts
 
-- **Unlimited public projects** - No limit on public project creation
-- **Unlimited public team members** - Add as many collaborators as needed
-- **Project-based permissions** - Fine-grained control over who can access what
-- **Offline Archive & Restore** - Backup and restore project data
-- **Branding removal** - Ability to remove PlayCanvas branding from published apps
-- **REST API access** - Programmatic access to your projects and data
+The difference is about **who owns and administers the account**, not which plan you're on — an Organization can run on the Free plan just like a personal account.
 
-## Organization Plans
+| | Personal account | Organization |
+|---|---|---|
+| Owned by | One person (you) | The team or company |
+| Administrators | Just you | An owner plus any number of administrators |
+| Projects & members | You manage collaborators per project | Administrators manage projects and members centrally |
+| Best for | Individuals | Teams of any size |
 
-You can also purchase an [Organization Plan](https://playcanvas.com/plans) which includes additional features:
+## Plans
 
-- **Unlimited private projects** - Keep your work confidential during development
-- **Additional storage space** - More room for assets and project data
-- **Advanced team management** - Enhanced user administration tools
-- **Priority support** - Faster response times for technical issues
+Organizations work on the **Free plan**, which gives you the shared account and team administration described above, along with unlimited public projects.
 
-## When to Use Organizations
+Upgrade to the paid **Organization plan** when your team needs **private projects**, more storage (50 GB), and per-seat billing on a single invoice. Seats cost $50 each per month, can be added or removed at any time, and are prorated on your next billing date — see the [worked example](/user-manual/account-management/billing/#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ, and the [pricing page](https://playcanvas.com/plans) for the latest details.
 
-Organizations are ideal for:
+## When to use an Organization
 
-### Business Teams
+An Organization is a good fit when:
 
-- Companies developing commercial games or applications
-- Teams that need private project development
-- Organizations requiring formal permissions structure
+- Projects should belong to the team or company rather than an individual's personal account.
+- You want more than one administrator managing projects, members, and permissions.
+- You're working with others and want a shared workspace — even on the Free plan.
 
-### Large Projects
+## Getting started
 
-- Complex projects with multiple specialists
-- Long-term development efforts
-- Projects requiring role-based access control
-
-## Getting Started
-
-To start using Organizations:
-
-1. [Create an Organization](creating.md) - Set up your team workspace
-2. [Add team members](managing.md#seats) - Invite collaborators
-3. [Configure permissions](managing.md#permissions) - Set up access controls
-4. [Create team projects](managing.md#projects) - Start collaborative development
-
-## Organization vs Personal Accounts
-
-| Feature | Personal Account | Organization |
-|---------|------------------|--------------|
-| Private Projects | Limited | Unlimited (with plan) |
-| Team Members | Limited collaboration | Unlimited |
-| Permissions | Basic | Advanced role-based |
-| Branding | PlayCanvas branding | Removable |
-| API Access | Limited | Full REST API |
-| Support | Standard | Priority (with plan) |
+1. [Create an Organization](creating.md) — start a new Organization or convert an existing account.
+2. [Manage your Organization](managing.md) — handle [roles and permissions](managing.md#permissions), [seats](managing.md#seats), and [projects](managing.md#projects).
 
 --------------------------------------------------------------------------------
 
@@ -477,54 +456,54 @@ To start using Organizations:
 
 URL: https://developer.playcanvas.com/user-manual/account-management/organizations/creating/
 
-There are various ways to create an Organization. Any organizations you are part of will appear next to your name on your profile like so:
+There are two ways to create an Organization. Any Organizations you belong to appear next to your name on your profile:
 
 [Image: Profile Organizations]
 
-### Create from the dropdown menu
+## Create a new Organization
 
-The first way is to click on NEW ORGANIZATION in the top-right dropdown menu:
+Open the dropdown menu in the top-right corner and click **NEW ORGANIZATION**:
 
 [Image: Dropdown]
 
-This will bring up the following popup:
+This opens the following dialog:
 
 [Image: New Organization]
 
-Enter the name for the Organization and an Organization ID which is a string with only alphanumeric characters and dashes allowed. The default e-mail address is your own but you can change it to a different one.
+Enter a **name** for the Organization and an **Organization ID** (a string containing only alphanumeric characters and dashes). The email address defaults to your own, but you can change it. Click **CREATE** to finish — you'll be taken to the Organization's profile page.
 
-Click CREATE and that will take you to the profile page of the Organization.
+### Transfer existing projects into the Organization
 
-If you have existing projects (such as private projects on a Personal plan), you can transfer them to the Organization account by the following steps:
+If you already have projects — for example, private projects on a Personal plan — you can move them into the new Organization:
 
-* On your user account, [transfer all projects ownership](/user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers) to the Organization account.
-* On the Organization account, accept the project transfer requirements.
-* Cancel the Personal Plan (if you are on one) to downgrade to the Free plan. Please note, this will happen immediately, regardless of when you last paid.
-* [Add yourself to the projects as Admin](/user-manual/account-management/organizations/managing/#projects) on the Organization account.
+1. From your user account, [transfer ownership of the projects](/user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers) to the Organization.
+2. From the Organization account, accept the transfer.
+3. If you're on a Personal plan, cancel it to downgrade to Free. This takes effect immediately, regardless of when you last paid.
+4. [Add yourself to the projects as an administrator](/user-manual/account-management/organizations/managing/#projects) of the Organization.
 
-All the projects will now be under the Organization account with your user account as Admin for the projects.
+Your projects are now owned by the Organization, with your user account as an administrator on each.
 
-### Convert a user account into an Organization
+## Convert a user account into an Organization
 
-Another way to create an Organization is to convert your user account. You can do this by clicking CONVERT in your [account](/user-manual/account-management/user-accounts/settings/#convert-account-to-organization) page.
+Alternatively, you can convert an existing user account into an Organization. Click **CONVERT** on your [account settings](/user-manual/account-management/user-accounts/settings/#convert-account-to-organization) page:
 
 [Image: Convert Organization]
 
-This will bring up the following popup:
+This opens the following dialog:
 
 [Image: Convert Popup]
 
-Converting your user account into an Organization will mean that you will no longer be able to log in with this user account. For that reason you need to specify an owner for the new Organization.
+Because you can't log in *as* an Organization, converting an account means you'll no longer be able to log in with it. You must therefore nominate another user as the new **owner**.
 
 :::warning
 
-Make sure you can log in with the new owner's account.
+Make sure you can log in with the new owner's account before you convert.
 
 :::
 
-If you have subscribed for a paid plan, that plan will be cancelled unless you choose to subscribe to an Organization plan which is offered in the popup. The number of seats to purchase will be calculated for you automatically based on the number of users in your existing private projects.
+If the account is on a paid plan, that plan is cancelled unless you choose to subscribe to an Organization plan in the dialog. The number of seats to purchase is calculated automatically from the number of users across your existing private projects.
 
-After you convert your account, you will be logged out. Then log back in with the new owner's account and you will be able to access the converted account and all its projects.
+After converting, you'll be logged out. Log back in with the new owner's account to access the Organization and all its projects.
 
 --------------------------------------------------------------------------------
 
@@ -532,41 +511,51 @@ After you convert your account, you will be logged out. Then log back in with th
 
 URL: https://developer.playcanvas.com/user-manual/account-management/organizations/managing/
 
-### Permissions {#permissions}
+You manage an Organization from its account page. This is where the owner and administrators handle roles, seats, projects, and — if necessary — deleting the Organization.
 
-You can manage permissions of your Organization from its account page.
+## Roles and permissions {#permissions}
 
 [Image: permissions]
 
-Here you can see who is the Owner and the Administrators of the Organization. You can transfer ownership to a different user and add or remove Administrators.
+The account page shows the Organization's **owner** and its **administrators**. From here, the owner can transfer ownership to another user and add or remove administrators.
 
-Administrators can do everything the owner can do e.g. create and delete projects, except delete the Organization.
+Administrators can do everything the owner can — including creating and deleting projects — *except* delete the Organization itself. Only the owner can do that.
 
-### Seats {#seats}
+## Seats {#seats}
 
-To give a user a seat, add them to any private project that is owned by the organization. Public projects do not require seats.
+A **seat** is consumed when you add a user to one of the Organization's **private** projects. Public projects don't require seats, so you can have unlimited public collaborators at no cost.
 
 [Image: seats]
 
-You can see which users have access to your private projects and occupy your available seats. From here you can remove users which will remove them from all your projects, freeing up seats.
+This view lists every user with access to your private projects and the seats they occupy. Removing a user here removes them from all of the Organization's projects and frees up their seat.
 
-The Owner of the organization does not need to occupy a seat if they are not actively working on any projects. It is recommended to have at least one user who will occupy a seat, to be an Admin of the Organization so that they can create new projects and manage existing projects.
+The owner doesn't need to occupy a seat if they aren't actively working on projects. We recommend giving a seat to at least one administrator, so that someone can always create and manage projects.
+
+### Adding and removing seats
 
 [Image: upgrade]
 
-Here you can increase or decrease the number of seats for your Organization. This view is available if you have subscribed for an Organization plan.
+If you're subscribed to the Organization plan, you can increase or decrease the number of seats at any time. Seat changes are prorated on your next billing date — see the [worked example](/user-manual/account-management/billing/#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ.
 
-[Image: delete]
+## Projects {#projects}
 
-The Owner of the Organization can delete the Organization from here. This will completely erase the account and all its projects. This action cannot be reversed.
-
-### Projects {#projects}
-
-Administrators of the organization can add themselves to any project owned by the organization. On the account page, click on the drop down arrow on the right and then click on 'Add me as admin'.
+Administrators can add themselves to any project the Organization owns. On the account page, click the dropdown arrow to the right of a project and choose **Add me as admin**:
 
 [Image: add to project]
 
-From here, you can add other users to the project as usual.
+From there, you can add other users to the project as usual.
+
+## Deleting an Organization {#delete}
+
+[Image: delete]
+
+Only the owner can delete the Organization, from its account page.
+
+:::danger
+
+Deleting an Organization permanently erases the account and **all** of its projects. This action cannot be undone.
+
+:::
 
 --------------------------------------------------------------------------------
 

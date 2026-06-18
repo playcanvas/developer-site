@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.7
 Total Documents: 454
-Generated: 2026-06-17
+Generated: 2026-06-18
 
 ## Instructions for Large Language Models
 
@@ -716,9 +716,9 @@ Secondary content that most coding tasks will not need.
 ### Account Management
 - [Account Management](https://developer.playcanvas.com/user-manual/account-management/): Manage your PlayCanvas user account, organizations, team permissions, and billing subscriptions.
 - [Billing](https://developer.playcanvas.com/user-manual/account-management/billing/): Frequently asked questions about PlayCanvas subscription plans, payments, invoices, and plan changes.
-- [Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/): Team workspaces for managing multiple users, projects, and permissions in PlayCanvas.
-- [Creating Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/creating/): Step-by-step guide to creating a new PlayCanvas Organization from the dashboard or your profile.
-- [Managing Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/managing/): Configure Organization permissions, manage seat allocation, and handle owner and administrator roles.
+- [Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/): What a PlayCanvas Organization account is, how it differs from a personal account, and when your team should use one.
+- [Creating Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/creating/): How to create a PlayCanvas Organization from your profile, transfer existing projects into it, or convert a user account into an Organization.
+- [Managing Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/managing/): Manage an Organization's roles and permissions, allocate seats, add administrators to projects, and delete an Organization.
 - [User Accounts](https://developer.playcanvas.com/user-manual/account-management/user-accounts/): Create and manage your PlayCanvas user account to access the Editor, explore public projects, and join the community.
 - [Creating Your Account](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation/): Sign up for PlayCanvas using email, Google, or GitHub and complete your profile setup.
 - [Account Settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings/): Update your PlayCanvas profile, change your password, manage email preferences, and configure privacy settings.
