@@ -29,7 +29,7 @@ The difference is about **who owns and administers the account**, not which plan
 
 Organizations work on the **Free plan**, which gives you the shared account and team administration described above, along with unlimited public projects.
 
-Upgrade to the paid **Organization plan** when your team needs **private projects**, more storage (50 GB), and per-seat billing on a single invoice. Seats cost $50 each per month, can be added or removed at any time, and are prorated on your next billing date — see the [Billing FAQ](/user-manual/account-management/billing/) for a worked example and the [pricing page](https://playcanvas.com/plans) for the latest details.
+Upgrade to the paid **Organization plan** when your team needs **private projects**, more storage (50 GB), and per-seat billing on a single invoice. Seats cost $50 each per month, can be added or removed at any time, and are prorated on your next billing date — see the [worked example](/user-manual/account-management/billing/#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ, and the [pricing page](https://playcanvas.com/plans) for the latest details.
 
 ## When to use an Organization
 

@@ -27,7 +27,7 @@ The owner doesn't need to occupy a seat if they aren't actively working on proje
 
 ![upgrade](/img/user-manual/account-management/organizations/managing/upgrade.png)
 
-If you're subscribed to the Organization plan, you can increase or decrease the number of seats at any time. Seat changes are prorated on your next billing date — see the [Billing FAQ](/user-manual/account-management/billing/) for a worked example.
+If you're subscribed to the Organization plan, you can increase or decrease the number of seats at any time. Seat changes are prorated on your next billing date — see the [worked example](/user-manual/account-management/billing/#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ.
 
 ## Projects {#projects}
 
