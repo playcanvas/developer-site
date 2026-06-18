@@ -1,53 +1,53 @@
 ---
 title: Organizationの作成
-description: ダッシュボードまたはプロフィールから新しいPlayCanvas Organizationを作成する手順です。
+description: プロフィールから新しいPlayCanvas Organizationを作成する方法、既存のプロジェクトを移行する方法、ユーザーアカウントをOrganizationに変換する方法を説明します。
 ---
 
-Organizationを作成する方法はいくつかあります。あなたが所属しているOrganizationのは、以下のようにあなたのプロフィールの名前の隣に表示されます:
+Organizationを作成する方法は2つあります。所属しているOrganizationは、以下のようにプロフィールの名前の隣に表示されます:
 
 ![Profile Organizations](/img/user-manual/account-management/organizations/creating/organizations.jpg)
 
-### ドロップダウンメニューから作成する
+## 新しいOrganizationを作成する
 
-1つ目の方法は、右上のドロップダウンメニューから NEW ORGANIZATION をクリックすることです:
+右上のドロップダウンメニューを開き、**NEW ORGANIZATION** をクリックします:
 
 ![Dropdown](/img/user-manual/account-management/organizations/creating/dropdown.png)
 
-すると、以下のポップアップが表示されます:
+すると、以下のダイアログが表示されます:
 
 ![New Organization](/img/user-manual/account-management/organizations/creating/new-organization.jpg)
 
-Organizationの名前と、半角英数字とダッシュのみが使用可能な文字列であるOrganizationのIDを入力してください。デフォルトのメールアドレスはあなた自身のものですが、別のものに変更することができます。
+Organizationの**名前**と、**OrganizationのID**(半角英数字とダッシュのみが使用可能な文字列)を入力します。メールアドレスはデフォルトであなた自身のものになりますが、変更することもできます。**CREATE** をクリックすると作成が完了し、Organizationのプロフィールページに移動します。
 
-「CREATE」をクリックすると、その組織のプロフィールページに移動します。
+### 既存のプロジェクトをOrganizationに移行する
 
-既にプロジェクト(例えば、パーソナルプランでのプライベートプロジェクトなど)がある場合、以下の手順でOrganizationアカウントに移行できます:
+すでにプロジェクト(例えばパーソナルプランのプライベートプロジェクトなど)がある場合は、新しいOrganizationに移行できます:
 
-* 自分のアカウントで、[すべてのプロジェクトの所有権を移管](/user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers)します。
-* Organizationのアカウントで、プロジェクトの移管要件を承認します。
-* パーソナルプラン(利用中の場合)をキャンセルして、フリープランにダウングレードします。 ただし、これは最後に支払った日時にかかわらず、すぐに実行されます。
-* [Organizationのアカウントの管理者として自分をプロジェクトに追加](/user-manual/account-management/organizations/managing/#projects)します。
+1. 自分のユーザーアカウントから、[プロジェクトの所有権を移管](/user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers)してOrganizationに移します。
+2. Organizationアカウントで、移管を承認します。
+3. パーソナルプランを利用中の場合は、キャンセルしてフリープランにダウングレードします。これは最後に支払った日時にかかわらず、すぐに実行されます。
+4. [Organizationの管理者として自分をプロジェクトに追加](/user-manual/account-management/organizations/managing/#projects)します。
 
-これで、すべてのプロジェクトがOrganizationのアカウントの下にあり、プロジェクトの管理者としてあなたのユーザーアカウントが登録されます。
+これで、すべてのプロジェクトがOrganizationの所有となり、あなたのユーザーアカウントが各プロジェクトの管理者になります。
 
-### ユーザーアカウントをOrganizationのに変換する
+## ユーザーアカウントをOrganizationに変換する
 
-もう1つの方法は、ユーザーアカウントをOrganizationのに変換することです。[アカウント](/user-manual/account-management/user-accounts/settings/#convert-account-to-organization)ページでCONVERTをクリックすることで、これを行うことができます。
+別の方法として、既存のユーザーアカウントをOrganizationに変換することもできます。[アカウント設定](/user-manual/account-management/user-accounts/settings/#convert-account-to-organization)ページで **CONVERT** をクリックします:
 
 ![Convert Organization](/img/user-manual/account-management/organizations/creating/convert.png)
 
-すると、以下のポップアップが表示されます:
+すると、以下のダイアログが表示されます:
 
-![Convert Popup](/img/user-manual/account-management/organizations/creating/convert-popup.png))
+![Convert Popup](/img/user-manual/account-management/organizations/creating/convert-popup.png)
 
-ユーザーアカウントをOrganizationに変換すると、このユーザーアカウントでログインできなくなります。そのため、新しいOrganizationのオーナー (Owner)を指定する必要があります。
+Organizationとして直接ログインすることはできないため、アカウントを変換すると、そのアカウントではログインできなくなります。そのため、別のユーザーを新しい**オーナー (Owner)**として指定する必要があります。
 
 :::warning
 
-新しいオーナー (Owner)のアカウントでログインできることを確認してください。
+変換する前に、新しいオーナー (Owner)のアカウントでログインできることを確認してください。
 
 :::
 
-有料プランに登録している場合、このプランはキャンセルされますが、ポップアップで提供されるOrganizationのプランに登録するかを選択できます。既存のプライベートプロジェクトのユーザー数を基に、自動的に購入するシート数が計算されます。
+そのアカウントが有料プランの場合、ダイアログでOrganizationプランへの登録を選択しない限り、プランはキャンセルされます。購入するシート数は、既存のプライベートプロジェクトのユーザー数を基に自動的に計算されます。
 
-アカウントを変換したら、ログアウトします。次に、新しいオーナー (Owner)のアカウントでログインし、変換されたアカウントとそのすべてのプロジェクトにアクセスできます。
+変換後はログアウトされます。新しいオーナー (Owner)のアカウントで再度ログインすると、変換されたアカウントとそのすべてのプロジェクトにアクセスできます。

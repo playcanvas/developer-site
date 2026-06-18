@@ -1,66 +1,53 @@
 ---
 title: Organizations
-description: Team workspaces for managing multiple users, projects, and permissions in PlayCanvas.
+description: What a PlayCanvas Organization account is, how it differs from a personal account, and when your team should use one.
 ---
 
-Organizations offer a way for businesses and large projects to manage many users. They provide enhanced collaboration features, permissions management, and team coordination tools.
+An **Organization** is a shared account type built for businesses and teams. Instead of projects living under one person's personal account, they belong to the Organization, where an owner and any number of administrators manage members, permissions, and billing in one place.
 
-## What are Organizations?
+## What is an Organization?
 
-Organizations are team workspaces that allow multiple users to collaborate on projects with structured permissions and management controls.
+An Organization is a company-owned workspace rather than an individual login. A few things set it apart from a personal account:
 
-## Free Organization Features
+- **It isn't tied to one person.** You never log in *as* the Organization. Instead, you manage it through your own user account as its **owner** or an **administrator**.
+- **It has multiple administrators.** The owner can appoint any number of administrators, who can create and delete projects and manage members. Only the owner can delete the Organization itself.
+- **Ownership can be transferred.** If the owner leaves the team, ownership can be handed to another user without disrupting any projects.
+- **Billing is consolidated.** The Organization is billed per *seat* on a single invoice, which is convenient for businesses.
 
-Every free Organization includes:
+## Organizations vs. personal accounts
 
-- **Unlimited public projects** - No limit on public project creation
-- **Unlimited public team members** - Add as many collaborators as needed
-- **Project-based permissions** - Fine-grained control over who can access what
-- **Offline Archive & Restore** - Backup and restore project data
-- **Branding removal** - Ability to remove PlayCanvas branding from published apps
-- **REST API access** - Programmatic access to your projects and data
+An Organization differs from a personal account in how it's **owned, administered, and billed**, rather than in the core editor and engine features available to you. It adds shared ownership, multiple administrators, per-seat billing on a single invoice, and more storage — which is why it suits businesses and larger teams.
 
-## Organization Plans
+Creating private projects requires a paid plan, either Personal or Organization. On the free tier, all projects are public.
 
-You can also purchase an [Organization Plan](https://playcanvas.com/plans) which includes additional features:
+| | Personal account | Organization |
+|---|---|---|
+| Account model | Tied to one person's login | Shared account owned by the business |
+| Administrators | Just you | An owner plus any number of administrators |
+| Member permissions | You manage collaborators per project | Administrators manage members centrally, per project |
+| Billing | A single user subscription | Per seat, on one consolidated invoice |
+| Storage (paid plan) | 10 GB | 50 GB |
+| Best for | Individuals | Businesses and larger teams |
 
-- **Unlimited private projects** - Keep your work confidential during development
-- **Additional storage space** - More room for assets and project data
-- **Advanced team management** - Enhanced user administration tools
-- **Priority support** - Faster response times for technical issues
+## Pricing
 
-## When to Use Organizations
+The Organization plan costs **$50 per seat per month** and includes 50 GB of storage. You can add or remove seats at any time, and changes are prorated on your next billing date — see the [Billing FAQ](/user-manual/account-management/billing/) for a worked example. Visit the [pricing page](https://playcanvas.com/plans) for the latest details.
 
-Organizations are ideal for:
+:::note
 
-### Business Teams
+Businesses with annual revenue above $100,000 should choose an Organization. Individuals and smaller teams can use the Personal plan.
 
-- Companies developing commercial games or applications
-- Teams that need private project development
-- Organizations requiring formal permissions structure
+:::
 
-### Large Projects
+## When to use an Organization
 
-- Complex projects with multiple specialists
-- Long-term development efforts
-- Projects requiring role-based access control
+An Organization is the right choice when you have:
 
-## Getting Started
+- A business that owns projects independently of any single employee.
+- A team that needs more than one administrator managing members and permissions.
+- A preference for per-seat billing on a single, consolidated invoice.
 
-To start using Organizations:
+## Getting started
 
-1. [Create an Organization](creating.md) - Set up your team workspace
-2. [Add team members](managing.md#seats) - Invite collaborators
-3. [Configure permissions](managing.md#permissions) - Set up access controls
-4. [Create team projects](managing.md#projects) - Start collaborative development
-
-## Organization vs Personal Accounts
-
-| Feature | Personal Account | Organization |
-|---------|------------------|--------------|
-| Private Projects | Limited | Unlimited (with plan) |
-| Team Members | Limited collaboration | Unlimited |
-| Permissions | Basic | Advanced role-based |
-| Branding | PlayCanvas branding | Removable |
-| API Access | Limited | Full REST API |
-| Support | Standard | Priority (with plan) |
+1. [Create an Organization](creating.md) — start a new Organization or convert an existing account.
+2. [Manage your Organization](managing.md) — handle [roles and permissions](managing.md#permissions), [seats](managing.md#seats), and [projects](managing.md#projects).
