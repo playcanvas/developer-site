@@ -5,7 +5,7 @@ description: HDR の Camera 設定、トーンマッピングと gamma オプシ
 
 High Dynamic Range (HDR) レンダリングは、より広い範囲の光と色を捉えて表示することで、コンピュータグラフィックスにおける視覚的なリアリズムを大幅に向上させます。この技術により、最も明るいハイライトと最も深いシャドウの両方で詳細が保持され、より実物に近いシーンの表現が可能になります。HDR レンダリングの顕著な利点の1つは、物理ベースのブルーム効果を生成する能力です。これにより、強い光源が周囲の領域に自然ににじみ出し、現実世界のカメラや目の挙動を模倣します。さらに、HDR レンダリングは、標準的な表示可能範囲を超える光の値を可能にするため、より正確な反射と屈折を容易にし、印象的かつ実物に近いビジュアルを実現します。
 
-![HDR](/img/user-manual/graphics/linear-workflow/hdr.webp)
+![HDR](pathname:///img/user-manual/graphics/linear-workflow/hdr.webp)
 
 ## カメラ設定
 
@@ -80,11 +80,11 @@ material.emissiveIntensity = 50;
 
 以下の中立な恒等 LUT を出発点にしてください — シーンに適用しても変化はありません — そして画像エディタで編集して独自のグレーディングを作成します：
 
-![中立な恒等 LUT (256x16)](/img/user-manual/graphics/linear-workflow/lut-neutral.png)
+![中立な恒等 LUT (256x16)](pathname:///img/user-manual/graphics/linear-workflow/lut-neutral.png)
 
 積極的な調整の例 — 赤を強く押し上げ、緑と青を大きく抑制したもの：
 
-![チェリー LUT の例 (256x16)](/img/user-manual/graphics/linear-workflow/lut-cherry.png)
+![チェリー LUT の例 (256x16)](pathname:///img/user-manual/graphics/linear-workflow/lut-cherry.png)
 
 LUT テクスチャは以下の設定で読み込む必要があります。LUT は sRGB ディスプレイ空間でオーサリングされており、エンジンはハードウェアの sRGB サンプリングに依存しているため、設定が間違っているとカラーが目に見えて崩れます：
 
@@ -143,7 +143,7 @@ PlayCanvas Editorプロジェクト用の`CameraScript`が[こちら](https://gi
 
 この統合により、複雑なカメラエフェクトのセットアッププロセスが効率化され、PlayCanvas Editor内での全体的なワークフローが向上します。
 
-![CameraFrame Script](/img/user-manual/graphics/linear-workflow/camera-frame.png)
+![CameraFrame Script](pathname:///img/user-manual/graphics/linear-workflow/camera-frame.png)
 
 ## CameraFrameのヒント
 

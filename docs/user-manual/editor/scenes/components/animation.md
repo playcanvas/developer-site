@@ -11,7 +11,7 @@ The Animation Component is deprecated. It has been replaced by the [Anim](anim.m
 
 The Animation Component enables an entity to specify which animations can be applied to the model assigned to its Model Component.
 
-![Animation Component](/img/user-manual/editor/scenes/components/component-animation.png)
+![Animation Component](pathname:///img/user-manual/editor/scenes/components/component-animation.png)
 
 ## Properties
 

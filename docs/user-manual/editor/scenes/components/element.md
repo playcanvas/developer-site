@@ -11,19 +11,19 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 
 The group element provides just the layout properties of the Element Component.
 
-![Group Element](/img/user-manual/editor/scenes/components/component-element-group.png)
+![Group Element](pathname:///img/user-manual/editor/scenes/components/component-element-group.png)
 
 ## Image Element
 
 The image element displays an image using a texture asset, sprite asset, or a solid color.
 
-![Image Element](/img/user-manual/editor/scenes/components/component-element-image.png)
+![Image Element](pathname:///img/user-manual/editor/scenes/components/component-element-image.png)
 
 ## Text Element
 
 The text element renders a string of text using a [font asset](/user-manual/editor/assets/inspectors/font/).
 
-![Text Element](/img/user-manual/editor/scenes/components/component-element-text.png)
+![Text Element](pathname:///img/user-manual/editor/scenes/components/component-element-text.png)
 
 ## Common Component Properties
 

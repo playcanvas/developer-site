@@ -11,15 +11,15 @@ There are two ways to open the Scenes dialog:
 
 1. **Menu** - Click the PlayCanvas logo in the top-left corner and select **Scenes**.
 
-   ![Menu - Scenes option](/img/user-manual/editor/scenes/managing-scenes/menu-scenes.png)
+   ![Menu - Scenes option](pathname:///img/user-manual/editor/scenes/managing-scenes/menu-scenes.png)
 
 2. **Scene Name** - Click on the current scene name in the viewport toolbar.
 
-   ![Scene name in toolbar](/img/user-manual/editor/scenes/managing-scenes/scene-name-toolbar.png)
+   ![Scene name in toolbar](pathname:///img/user-manual/editor/scenes/managing-scenes/scene-name-toolbar.png)
 
 ## Scenes Dialog Overview
 
-![Scenes dialog](/img/user-manual/editor/scenes/managing-scenes/scenes-dialog.png)
+![Scenes dialog](pathname:///img/user-manual/editor/scenes/managing-scenes/scenes-dialog.png)
 
 The Scenes dialog displays all scenes in your project:
 
@@ -41,7 +41,7 @@ Click on any scene in the list to open it.
 
 Click the dropdown button on the right side of any scene to access additional actions:
 
-![Scene dropdown menu](/img/user-manual/editor/scenes/managing-scenes/scene-dropdown.png)
+![Scene dropdown menu](pathname:///img/user-manual/editor/scenes/managing-scenes/scene-dropdown.png)
 
 | Action | Description |
 |--------|-------------|

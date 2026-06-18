@@ -4,7 +4,7 @@ description: The Nodes Pane lists built-in shader nodes by category with filters
 sidebar_position: 2
 ---
 
-![Nodes Pane](/img/shader-editor/nodes-pane.png)
+![Nodes Pane](pathname:///img/shader-editor/nodes-pane.png)
 
 The Nodes Pane lists the built-in nodes available for constructing graphs. Nodes are grouped into sub-sections by category.
 

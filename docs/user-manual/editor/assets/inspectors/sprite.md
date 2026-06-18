@@ -7,7 +7,7 @@ A Sprite is a 2D graphic that can be rendered into a scene. A Sprite asset is a 
 
 ## Inspector
 
-![Sprite Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-sprite.png)
+![Sprite Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-sprite.png)
 
 ## Properties
 

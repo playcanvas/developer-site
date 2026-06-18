@@ -11,7 +11,7 @@ The Texture Atlas is used in combination with the [Sprite asset](/user-manual/ed
 
 ## Inspector
 
-![Texture Atlas](/img/user-manual/assets/texture-atlas/texture-atlas.jpg)
+![Texture Atlas](pathname:///img/user-manual/assets/texture-atlas/texture-atlas.jpg)
 
 ## Properties
 

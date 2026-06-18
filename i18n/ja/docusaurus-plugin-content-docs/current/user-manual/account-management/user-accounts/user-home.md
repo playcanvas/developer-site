@@ -17,6 +17,6 @@ https://playcanvas.com/user/<USERNAME>
 
 新しいユーザーホームページは以下のようになります：
 
-![ユーザーホームページ](/img/user-manual/account-management/user-accounts/user-home.png)
+![ユーザーホームページ](pathname:///img/user-manual/account-management/user-accounts/user-home.png)
 
 デフォルトでは、[エディタープロジェクト](../../editor/projects/index.md)のリストが表示されます。

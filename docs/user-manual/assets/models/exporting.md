@@ -5,7 +5,7 @@ description: Export 3D models from Blender, Maya, or 3DS Max in GLB or FBX forma
 
 PlayCanvas can import 3D content in the following formats: glTF binary (GLB), FBX, OBJ, 3DS and COLLADA (DAE). We strongly recommend you use GLB as it's an open source industry standard and very well supported in the Editor.
 
-![GLB Import Example](/img/user-manual/assets/models/building/glb-import.gif)  
+![GLB Import Example](pathname:///img/user-manual/assets/models/building/glb-import.gif)  
 *Model by Loïc Norgeot and mosquito scan by Geoffrey Marchal for [Sketchfab](https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1) licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)*
 
 If GLB is not available, then please use FBX as it is a robust and well tested interchange industry format.

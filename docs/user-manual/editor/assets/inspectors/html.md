@@ -9,7 +9,7 @@ To edit an HTML asset, right click on it in the Editor and select Edit.
 
 ## Inspector
 
-![HTML Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-html.png)
+![HTML Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-html.png)
 
 The HTML asset inspector displays a preview of the HTML code contained in the asset.
 

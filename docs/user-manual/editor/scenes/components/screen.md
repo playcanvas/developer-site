@@ -7,7 +7,7 @@ The Screen Component defines the area and rendering of a user interface. Childre
 
 See the [User Interface](/user-manual/user-interface) section for more details.
 
-![Screen Component](/img/user-manual/editor/scenes/components/component-screen.png)
+![Screen Component](pathname:///img/user-manual/editor/scenes/components/component-screen.png)
 
 ## Properties
 

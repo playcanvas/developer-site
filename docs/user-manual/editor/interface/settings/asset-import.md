@@ -14,7 +14,7 @@ These settings affect only you and are global for the whole project.
 
 Navigate to the `ASSET IMPORT` section and expand the panel:
 
-![Asset Import Settings](/img/user-manual/editor/interface/settings/asset-import.webp)
+![Asset Import Settings](pathname:///img/user-manual/editor/interface/settings/asset-import.webp)
 
 Here is a breakdown of the available settings:
 

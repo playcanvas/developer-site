@@ -6,7 +6,7 @@ description: 軌道操作、ライティング、HDR 環境、カスタムモデ
 
 プレビューペイン (Preview Pane) では、現在選択されているグラフやマテリアルを表示するペインであり、さまざまな照明環境や形状をサポートしています。
 
-![Preview Pane](/img/shader-editor/preview-pane.png)
+![Preview Pane](pathname:///img/shader-editor/preview-pane.png)
 
 | Action                     | 説明                                                       |
 | -------------------------- | ----------------------------------------------------------------- |
@@ -20,7 +20,7 @@ description: 軌道操作、ライティング、HDR 環境、カスタムモデ
 
 ツールバーでは、照明環境やプレビューの形状を制御する機能が提供されています。ツールバーは以下に示すように、各コントロールの番号が記載された状態で表示され、それぞれの簡単な説明が付いています。
 
-![Preview Pane Toolbar](/img/shader-editor/preview-pane-toolbar.png)
+![Preview Pane Toolbar](pathname:///img/shader-editor/preview-pane-toolbar.png)
 
 | コントロール | 説明                         |
 | -------- | ----------------------------------- |

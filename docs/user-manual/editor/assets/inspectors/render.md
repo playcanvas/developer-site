@@ -18,7 +18,7 @@ The Render asset inspector displays metadata about the mesh and its relationship
 
 ### Meta
 
-![Render Asset Inspector - Meta](/img/user-manual/editor/assets/inspectors/asset-inspector-render-meta.png)
+![Render Asset Inspector - Meta](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-render-meta.png)
 
 | Property | Description |
 |----------|-------------|
@@ -31,7 +31,7 @@ The Render asset inspector displays metadata about the mesh and its relationship
 
 ### Render
 
-![Render Asset Inspector - Render](/img/user-manual/editor/assets/inspectors/asset-inspector-render-render.png)
+![Render Asset Inspector - Render](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-render-render.png)
 
 | Property | Description |
 |----------|-------------|

@@ -14,7 +14,7 @@ PlayCanvas エディターからプロジェクトを実行する際に使用さ
 
 `LAUNCH PAGE` セクションに移動し、パネルを展開します。
 
-![Launch Page Settings](/img/user-manual/editor/interface/settings/launch-page.webp)
+![Launch Page Settings](pathname:///img/user-manual/editor/interface/settings/launch-page.webp)
 
 利用可能な設定は次のとおりです。
 

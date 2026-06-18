@@ -25,7 +25,7 @@ Text elements support a simple markup syntax that allows you to apply different 
 
 Assuming the base color of the text element is white, this will render as follows:
 
-![Text Markup](/img/user-manual/user-interface/text-element/text-markup.png)
+![Text Markup](pathname:///img/user-manual/user-interface/text-element/text-markup.png)
 
 :::tip
 
@@ -37,7 +37,7 @@ entity.element.enableMarkup = true;
 
 Or by enabling it in the Editor:
 
-![Enable Markup](/img/user-manual/user-interface/text-element/enable-markup.png)
+![Enable Markup](pathname:///img/user-manual/user-interface/text-element/enable-markup.png)
 
 :::
 
@@ -51,7 +51,7 @@ Read more about localization [here](/user-manual/user-interface/localization).
 
 By default a Text Element is set to automatically adjust its width and height to match the text string. You can disable this and specify the height and width of the element directly in the Editor panel.
 
-![Auto Size](/img/user-manual/user-interface/text-element/auto-size.png)
+![Auto Size](pathname:///img/user-manual/user-interface/text-element/auto-size.png)
 
 :::note
 
@@ -63,11 +63,11 @@ The height of the character is determined by the largest character present in th
 
 Text Elements have an additional tool to help with positioning which is the alignment. You will be used to how this property works from tools like Word Processes. In this case, rather than presets we expose a variable that can be altered. The alignment consists of two values `[X, Y]` each between 0 and 1. `[0,0]` is bottom left alignment, `[0.5,0.5]` is centered and `[1,1]` is top right.
 
-![Top Left](/img/user-manual/user-interface/text-element/alignment-bottom-left.png)
+![Top Left](pathname:///img/user-manual/user-interface/text-element/alignment-bottom-left.png)
 
-![Centered](/img/user-manual/user-interface/text-element/alignment-centered.png)
+![Centered](pathname:///img/user-manual/user-interface/text-element/alignment-centered.png)
 
-![Bottom Right](/img/user-manual/user-interface/text-element/alignment-top-right.png)
+![Bottom Right](pathname:///img/user-manual/user-interface/text-element/alignment-top-right.png)
 
 ## Font Size & Line Height
 
@@ -75,26 +75,26 @@ The font size property sets the rendered size of the font in Screen Component pi
 
 Equal Font Size and Line Height is the default:
 
-![Font Size Line Equal](/img/user-manual/user-interface/text-element/font-line-equal.png)
+![Font Size Line Equal](pathname:///img/user-manual/user-interface/text-element/font-line-equal.png)
 
 Increase Line Height to increase line spacing:
 
-![Font Size Line Spaced](/img/user-manual/user-interface/text-element/font-line-spaced.png)
+![Font Size Line Spaced](pathname:///img/user-manual/user-interface/text-element/font-line-spaced.png)
 
 ## Spacing
 
 The spacing property increases the distance between characters in a string. Fonts define the ideal distance to move the cursor forward for each character. The spacing property is a multiplier to this distance.
 
-![Spacing](/img/user-manual/user-interface/text-element/spacing.png)
+![Spacing](pathname:///img/user-manual/user-interface/text-element/spacing.png)
 
 ## Tinting
 
 The Color property allows you to tint the string to the color of your choice.
 
-![Tinted](/img/user-manual/user-interface/text-element/tinted.png)
+![Tinted](pathname:///img/user-manual/user-interface/text-element/tinted.png)
 
 ## Transparency
 
 The Opacity property allows you to set the transparency of the string
 
-![Transparent](/img/user-manual/user-interface/text-element/transparent.png)
+![Transparent](pathname:///img/user-manual/user-interface/text-element/transparent.png)

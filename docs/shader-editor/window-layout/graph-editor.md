@@ -6,7 +6,7 @@ sidebar_position: 5
 
 The Graph Editor displays the currently selected graph. This is where nodes are created, arranged, connected and deleted.
 
-![Graph Editor](/img/shader-editor/graph-editor.png)
+![Graph Editor](pathname:///img/shader-editor/graph-editor.png)
 
 | How To | |
 |---|---|

@@ -3,7 +3,7 @@ title: PCUI
 description: Editor とツールで使われる PlayCanvas の UI フレームワーク PCUI の紹介と、自前の Web プロジェクトへの導入方法です。
 ---
 
-![PCUI splash](/img/user-manual/pcui/pcui-banner.jpg)
+![PCUI splash](pathname:///img/user-manual/pcui/pcui-banner.jpg)
 
 PCUI は **P**lay**C**anvas **U**ser **I**nterface の略です。これは、すべての PlayCanvas ツールが構築されているフロントエンド フレームワークです。
 

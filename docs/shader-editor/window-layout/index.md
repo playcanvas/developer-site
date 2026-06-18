@@ -6,7 +6,7 @@ sidebar_position: 1.2
 
 Shader Editor comprises a number of sub-windows or panes. The panes are highlighted below and a brief description of each follows:
 
-![window-layout](/img/shader-editor/window-layout.png)
+![window-layout](pathname:///img/shader-editor/window-layout.png)
 
 | Pane                | Description                                                       |
 | ------------------- | ----------------------------------------------------------------- |

@@ -3,7 +3,7 @@ title: 物理ベースレンダリング (PBR)
 description: "PlayCanvas における PBR の基礎：diffuse と specular、エネルギー保存、metalness、一貫したマテリアル。"
 ---
 
-![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  
+![Star-Lord](pathname:///img/user-manual/graphics/physical-rendering/star-lord.jpg)  
 *Star-Lordモデル [Joachim Coppens](https://www.joachimcoppens.com/)*
 
 物理ベースレンダリング(PBR)では、一貫性のあるグラフィクスレンダリングが、アーティストによるマテリアル作成、計測された物理的プロパティとマテリアルシェーダの組み合わせによって実現されます。光源と物体表面との関係をあらわす物理原則を適応することで、どのような照明環境でも特別な処理をすることなく自然な描画を行うことができます。
@@ -18,7 +18,7 @@ description: "PlayCanvas における PBR の基礎：diffuse と specular、エ
 
 ## エネルギーの保全
 
-![Energy Conservation](/img/user-manual/graphics/physical-rendering/energy-conservation.jpg)
+![Energy Conservation](pathname:///img/user-manual/graphics/physical-rendering/energy-conservation.jpg)
 *Smooth surfaces have small bright patches, rough surfaces have large dim patches*
 
 物理的に正しいレンダリングの重要な要素は、エネルギーの保存です。拡散光と反射光がどちらも物体表面に投射される光から発生していることから考えると、拡散光と反射光を足しあわせた総量は、物体表面に投射された光の総量を上回ることはできません。この法則が現実世界で意味することは、物体表面の反射率が高ければ拡散光は非常に小さくなり、反対に拡散光が大きければ反射はあまり起こらないということになります。
@@ -27,7 +27,7 @@ description: "PlayCanvas における PBR の基礎：diffuse と specular、エ
 
 ## 金属と非金属
 
-![Metals & Non-metals](/img/user-manual/graphics/physical-rendering/materials.jpg)
+![Metals & Non-metals](pathname:///img/user-manual/graphics/physical-rendering/materials.jpg)
 
 PBRの古いシェーディングモデルと比較して、マテリアルがどのように作られたかを考えることで、マテリアルの振る舞いを決定するということが新しいことの1つです。ここで考慮する主な点は、マテリアルが導体（通常は金属）か絶縁体（非金属）かどうかです。
 

@@ -10,8 +10,8 @@ This makes it possible to create multiple variations of a Material Graph, all sh
 
 For example, given the following Material Shader:
 
-![Material Graph](/img/shader-editor/overview-materials-graph.png)
+![Material Graph](pathname:///img/shader-editor/overview-materials-graph.png)
 
 Multiple materials can be created, each with a different setting for the Vec3 Parameters:
 
-![Material Previews](/img/shader-editor/overview-materials-previews.png)
+![Material Previews](pathname:///img/shader-editor/overview-materials-previews.png)

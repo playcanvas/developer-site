@@ -7,11 +7,11 @@ description: "Legacy script bloom: intensity, threshold, blur, and links to the 
 
 Here is an image without bloom:
 
-![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](pathname:///img/user-manual/graphics/posteffects/without-effects.png)
 
 And the same image with bloom applied:
 
-![Image with effect](/img/user-manual/graphics/posteffects/with-bloom.png)
+![Image with effect](pathname:///img/user-manual/graphics/posteffects/with-bloom.png)
 
 The built-in bloom effect has the following attributes:
 

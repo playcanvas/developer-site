@@ -15,13 +15,13 @@ To create a new project:
 1. Log in to your PlayCanvas account and navigate to your [User Page](https://playcanvas.com/)
 2. Click the **NEW** button in the top right corner
 
-![New Project Button](/img/user-manual/editor/projects/new-project-button.png)
+![New Project Button](pathname:///img/user-manual/editor/projects/new-project-button.png)
 
 ### Selecting a Starter Kit
 
 All Editor projects are created based on a starter kit.
 
-![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
+![New Project Dialog](pathname:///img/user-manual/editor/projects/new-project-dialog.png)
 
 PlayCanvas offers several starter kits to get you started quickly:
 
@@ -58,7 +58,7 @@ To fork a project:
 3. Enter a name for your new project
 4. Click **FORK**
 
-![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.png)
+![Fork Project Button](pathname:///img/user-manual/editor/projects/fork-project-button.png)
 
 ### What Gets Forked
 

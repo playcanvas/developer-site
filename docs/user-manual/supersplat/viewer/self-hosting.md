@@ -16,7 +16,7 @@ To export your splat as an HTML viewer:
 
 The viewer export can be configured via several options:
 
-![Viewer Export](/img/user-manual/supersplat/viewer/viewer-export.png)
+![Viewer Export](pathname:///img/user-manual/supersplat/viewer/viewer-export.png)
 
 | Option | Description |
 |--------|-------------|

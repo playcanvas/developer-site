@@ -14,7 +14,7 @@ description: PlayCanvas Editor にインポートする Asset の、既定の上
 
 `ASSET IMPORT` セクションに移動し、パネルを展開します。
 
-![Asset Import Settings](/img/user-manual/editor/interface/settings/asset-import.webp)
+![Asset Import Settings](pathname:///img/user-manual/editor/interface/settings/asset-import.webp)
 
 利用可能な設定は次のとおりです。
 

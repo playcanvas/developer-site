@@ -4,7 +4,7 @@ description: The Info Pane shows contextual help for whichever Shader Editor use
 sidebar_position: 1
 ---
 
-![Info Pane](/img/shader-editor/info-pane.png)
+![Info Pane](pathname:///img/shader-editor/info-pane.png)
 
 The Info Pane shows helpful information for the UI element currently under the mouse cursor.
 

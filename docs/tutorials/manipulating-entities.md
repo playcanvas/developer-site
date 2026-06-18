@@ -19,7 +19,7 @@ An important part of understanding how to move and manipulate Entities is unders
 
 Here is a visual representation of the world-space coordinate system (left) and the local-space coordinate system (right) of an entity:
 
-![World and Local Coordinate Systems](/img/tutorials/world-and-local.png)
+![World and Local Coordinate Systems](pathname:///img/tutorials/world-and-local.png)
 
 ### Hierarchy
 

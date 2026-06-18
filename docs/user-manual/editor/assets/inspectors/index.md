@@ -9,7 +9,7 @@ When you select an asset in the [Assets Panel](/user-manual/editor/assets/asset-
 
 All asset inspectors display a common set of properties in the header section:
 
-![Common Asset Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common.png)
+![Common Asset Inspector Properties](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-common.png)
 
 | Property | Description |
 |----------|-------------|
@@ -27,7 +27,7 @@ All asset inspectors display a common set of properties in the header section:
 
 Script assets display additional properties:
 
-![Script Asset Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common-script.png)
+![Script Asset Inspector Properties](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-common-script.png)
 
 | Property | Description |
 |----------|-------------|
@@ -38,7 +38,7 @@ Script assets display additional properties:
 
 Assets imported from the [Asset Store](/user-manual/editor/assets/asset-store) display additional attribution properties:
 
-![Asset Store Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common-license.png)
+![Asset Store Inspector Properties](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-common-license.png)
 
 | Property | Description |
 |----------|-------------|

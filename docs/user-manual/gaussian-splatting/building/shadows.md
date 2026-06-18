@@ -9,7 +9,7 @@ Gaussian Splats can cast shadows onto meshes and other surfaces in your scene.
 
 <EngineExample id="gaussian-splatting/simple" title="View Live Example" />
 
-![Splat Shadows](/img/user-manual/gaussian-splatting/splat-shadows.png)
+![Splat Shadows](pathname:///img/user-manual/gaussian-splatting/splat-shadows.png)
 
 ## Enabling Shadow Casting
 

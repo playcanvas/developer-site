@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 デフォルトである透視投影は、私たちの目や実際のカメラの仕組みを模倣します。遠くにあるオブジェクトほど小さく見えます。カメラが見ることのできる空間の体積（フラスタム）は、四角錐台の形になります。
 
-![Perspective camera](/img/user-manual/graphics/cameras/camera-perspective.png)
+![Perspective camera](pathname:///img/user-manual/graphics/cameras/camera-perspective.png)
 
 フラスタムの形状は視野角（`fov`）で制御します。これは度単位の角度で、デフォルトは45です。デフォルトではこの角度は垂直方向に測られますが、`horizontalFov` を `true` に設定すると水平方向で測られます。値を大きくするとより広い範囲が映り、極端な場合は魚眼レンズのような見た目になります。値を小さくすると、ズームインした望遠レンズのような効果になります。
 
@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 
 正投影は平行投影です。オブジェクトはカメラからの距離に関係なく、画面上で同じ大きさを保ちます。フラスタムは直方体になります。2Dゲームやアイソメトリックゲーム、CADスタイルのビジュアライゼーションでよく使用されます。
 
-![Orthographic camera](/img/user-manual/graphics/cameras/camera-orthographic.png)
+![Orthographic camera](pathname:///img/user-manual/graphics/cameras/camera-orthographic.png)
 
 視野角は適用されないため、ビューのサイズは `orthoHeight` で設定します。これはワールド単位でのビューボリュームの高さの半分です（デフォルトは10）。幅はアスペクト比から導出されます。
 

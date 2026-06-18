@@ -9,11 +9,11 @@ The PlayCanvas Asset Store is a library of free assets that you can use in your 
 
 You can access the Asset Store from within the Editor by clicking the ASSET STORE button in the top-right of the [Assets Panel](../../interface/assets.md).
 
-![Asset Store Button](/img/user-manual/assets/asset-store/asset-store-button.png)
+![Asset Store Button](pathname:///img/user-manual/assets/asset-store/asset-store-button.png)
 
 The Asset Store will then open:
 
-![Asset Store](/img/user-manual/assets/asset-store/asset-store.png)
+![Asset Store](pathname:///img/user-manual/assets/asset-store/asset-store.png)
 
 ## Selecting a Store
 
@@ -29,13 +29,13 @@ There are three top-level Stores to choose from:
 
 To search the Store, simply enter a search term in the Search bar at the top. You can then filter and sort the search results using the Search Options:
 
-![Asset Store Search](/img/user-manual/assets/asset-store/asset-store-search.png)
+![Asset Store Search](pathname:///img/user-manual/assets/asset-store/asset-store-search.png)
 
 ## Importing Assets into your Project
 
 Select any store item in the search results to open its details page:
 
-![Asset Store Details](/img/user-manual/assets/asset-store/asset-store-details.png)
+![Asset Store Details](pathname:///img/user-manual/assets/asset-store/asset-store-details.png)
 
 On the details page you can:
 

@@ -29,7 +29,7 @@ description: Rigidbody 付きのコリジョンシェイプで物理接触し、
 
 トリガーボリュームを作成するには、単にエンティティに *Collision* コンポーネントを追加するだけです。このチュートリアルでは、斜面の下に大きなボックス形状のトリガーボリュームを追加して、落ちてくるオブジェクトをキャッチし、位置をリセットします。
 
-![Collisions & Triggers](/img/tutorials/collision/collision_and_triggers.jpg)
+![Collisions & Triggers](pathname:///img/tutorials/collision/collision_and_triggers.jpg)
 
 ランプの下にあるトリガーボリュームを青い外枠で表示しています。
 
@@ -39,7 +39,7 @@ Rigid Body (剛体) は、ゲーム世界における物理的なオブジェク
 
 シーン内で剛体を作成するには、エンティティを選択し、 *RigidBody* コンポーネントと *Collision* コンポーネントを追加します。デフォルトでは、これにより **static box** の剛体が作成されます。 *RigidBody*  コンポーネントには、オブジェクトのプロパティを調整するために使用できるさまざまなオプションが提供されています。
 
-![rigidbody component](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
+![rigidbody component](pathname:///img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
 
 各プロパティの詳細については、[*RigidBody*のドキュメント](/user-manual/editor/scenes/components/rigidbody/)を参照してください。
 
@@ -61,7 +61,7 @@ Rigid Body (剛体) は、ゲーム世界における物理的なオブジェク
 
 次に必要なのはトリガーです。
 
-![Trigger Entity](/img/tutorials/collision/trigger_setup.jpg)
+![Trigger Entity](pathname:///img/tutorials/collision/trigger_setup.jpg)
 
 このエンティティには*collision*コンポーネントがありますが、*rigidbody*がないためトリガーとして機能します。トリガーEntityには、コードが添付された*script*コンポーネントもあります。トリガーは、トリガーがアクティブになったときに何かが起こる場合のみ有用であるため、トリガーがアクティブになったときにf音声効果が再生されるように、いくつかのコードを追加する必要があります。
 

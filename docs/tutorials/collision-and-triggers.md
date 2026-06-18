@@ -28,7 +28,7 @@ The most important property of a *collision* component is its **Type**, this det
 
 To create a Trigger Volume all we need to do is add a *collision* component to an Entity. In this tutorial we're adding a large box-shaped Trigger Volume underneath the slope to catch the falling bodies and reset their position.
 
-![Collisions & Triggers](/img/tutorials/collision/collision_and_triggers.jpg)
+![Collisions & Triggers](pathname:///img/tutorials/collision/collision_and_triggers.jpg)
 
 You can see the trigger volume underneath the ramp displayed as a blue outline.
 
@@ -38,7 +38,7 @@ A rigid body is a physical presence in your game world. You can set it up with r
 
 To create a rigid body in your Scene, pick an Entity and add a *rigidbody* component and a *collision* component. By default you will create a **static box**. The *rigidbody* component has a multitude of options which you can use to tune the properties of your object.
 
-![rigidbody component](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
+![rigidbody component](pathname:///img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
 
 For details on each property take a look at the [*rigidbody* documentation](/user-manual/editor/scenes/components/rigidbody/).
 
@@ -60,7 +60,7 @@ You can see in the attribute panel, that it has *render*, *collision* and *rigid
 
 The next Entity we'll need is the trigger.
 
-![Trigger Entity](/img/tutorials/collision/trigger_setup.jpg)
+![Trigger Entity](pathname:///img/tutorials/collision/trigger_setup.jpg)
 
 With this Entity we have a *collision* component but no *rigidbody* so it acts as a trigger. The trigger Entity also has a *script* component with some code attached. Triggers are only useful if something happens when they are triggered, so we need to add some code to fire and listen for events when the trigger is activated.
 

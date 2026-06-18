@@ -5,7 +5,7 @@ description: Loading screen customization via generated or selected scripts that
 
 All newly created PlayCanvas projects use the default loading screen:
 
-![Default Loading Screen](/img/user-manual/editor/launch-page/loading-screen/loading-screen-default.webp)
+![Default Loading Screen](pathname:///img/user-manual/editor/launch-page/loading-screen/loading-screen-default.webp)
 
 It will be displayed in both the Launch Page and your published app.
 
@@ -13,11 +13,11 @@ It will be displayed in both the Launch Page and your published app.
 
 If you want to create a custom loading screen, load the Settings into the [Inspector](../../inspector) by clicking the 'cog' icon on the [Toolbar](../../toolbar) or in the [Viewport](../../viewport).
 
-![Settings](/img/user-manual/editor/interface/toolbar/settings.png)
+![Settings](pathname:///img/user-manual/editor/interface/toolbar/settings.png)
 
 Then, navigate to the `LOADING SCREEN` section:
 
-![Loading Screen Settings](/img/user-manual/editor/launch-page/loading-screen/loading-screen-settings.png)
+![Loading Screen Settings](pathname:///img/user-manual/editor/launch-page/loading-screen/loading-screen-settings.png)
 
 You have two options:
 

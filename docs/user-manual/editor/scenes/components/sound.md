@@ -5,7 +5,7 @@ description: PlayCanvas Sound component plays one or more audio slots with volum
 
 The Sound Component controls playback of audio samples.
 
-![Sound Component](/img/user-manual/editor/scenes/components/component-sound.png)
+![Sound Component](pathname:///img/user-manual/editor/scenes/components/component-sound.png)
 
 Each Sound Component contains "Slots" that are responsible for playing sounds. Each Slot can be assigned a different audio Asset, and can be played independently from the other Slots.
 

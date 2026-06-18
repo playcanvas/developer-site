@@ -17,7 +17,7 @@ Project owners have the following abilities (over and above what Admins are able
 
 ### From the Projects List
 
-![Transfer Ownership Menu](/img/user-manual/editor/projects/transfer-ownership.png)
+![Transfer Ownership Menu](pathname:///img/user-manual/editor/projects/transfer-ownership.png)
 
 To transfer ownership of a project:
 
@@ -28,7 +28,7 @@ To transfer ownership of a project:
 
 ### Transfer Dialog
 
-![Transfer Ownership Dialog](/img/user-manual/editor/projects/transfer-ownership-dialog.png)
+![Transfer Ownership Dialog](pathname:///img/user-manual/editor/projects/transfer-ownership-dialog.png)
 
 In the transfer dialog:
 
@@ -57,7 +57,7 @@ When you initiate a transfer:
 
 ### 2. Recipient Acceptance
 
-![Transfer Ownership Accept](/img/user-manual/editor/projects/accept-transfer.png)
+![Transfer Ownership Accept](pathname:///img/user-manual/editor/projects/accept-transfer.png)
 
 The recipient will see:
 

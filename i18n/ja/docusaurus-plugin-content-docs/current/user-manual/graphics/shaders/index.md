@@ -206,6 +206,6 @@ pc.Tracing.set(pc.TRACEID_SHADER_ALLOC, true);
 
 作成された各シェーダーはブラウザのコンソールにログとして記録され、そのソースコードを検査できます。例：
 
-![sRGB](/img/user-manual/graphics/shaders/shader-log.png)
+![sRGB](pathname:///img/user-manual/graphics/shaders/shader-log.png)
 
 詳細については、[ShaderMaterial APIドキュメント](https://api.playcanvas.com/engine/classes/ShaderMaterial.html)を参照してください。

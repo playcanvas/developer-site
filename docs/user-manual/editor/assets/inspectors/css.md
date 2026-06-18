@@ -9,7 +9,7 @@ To edit a CSS asset, right click on it in the Editor and select Edit.
 
 ## Inspector
 
-![CSS Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-css.png)
+![CSS Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-css.png)
 
 The CSS asset inspector displays a preview of the CSS code contained in the asset.
 

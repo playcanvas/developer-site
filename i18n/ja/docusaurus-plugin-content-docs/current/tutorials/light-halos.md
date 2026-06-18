@@ -21,7 +21,7 @@ description: billboard 化した光るハローの平面を作り、エッジオ
 
 最初に、ハロー用のテクスチャが必要です。この例では、Photoshopなどのアートプログラムで作成された非常にシンプルなぼやけたブロブを使用しました。
 
-![blob](/img/tutorials/intermediate/light-halos/blob.jpg)
+![blob](pathname:///img/tutorials/intermediate/light-halos/blob.jpg)
 
 このテクスチャはグローの基礎となります。
 
@@ -35,7 +35,7 @@ description: billboard 化した光るハローの平面を作り、エッジオ
 
 ## エンティティ
 
-![entities](/img/tutorials/intermediate/light-halos/entity-setup.jpg)
+![entities](pathname:///img/tutorials/intermediate/light-halos/entity-setup.jpg)
 
 ハローのエンティティのセットアップも簡単です。ハロースクリプト用の親エンティティと、それにアタッチされた平面プリミティブを持つ子エンティティがあります。この設計を採用する理由は、`entity.lookAt`を使用してハローの向きを設定するためにコードをシンプルにするためです。平面プリミティブは上向きを向いているため、子エンティティを作成し、この子エンティティに回転を適用して平面がカメラに正しく向かうようにします。
 

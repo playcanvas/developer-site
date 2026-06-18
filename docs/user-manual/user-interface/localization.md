@@ -90,7 +90,7 @@ Often you will find that different languages might require different fonts to be
 
 At runtime when the application switches to a different locale it will load the font Asset you defined for that locale.
 
-![Localized Fonts Inspector](/img/user-manual/user-interface/localization/localized-fonts-inspector.gif)
+![Localized Fonts Inspector](pathname:///img/user-manual/user-interface/localization/localized-fonts-inspector.gif)
 
 ## Language Notes
 
@@ -112,11 +112,11 @@ Right to left languages will need extra scripts for support that can be found in
 
 In the example project, there is a folder called 'Rtl Support' that needs to be [copied and pasted](/user-manual/editor/assets/asset-panel/#copy-and-paste-between-projects) into your project.
 
-![](/img/user-manual/user-interface/localization/rtl-asset-folder.png)
+![](pathname:///img/user-manual/user-interface/localization/rtl-asset-folder.png)
 
 In the folder, there is Script Type called 'RtlElement' which should be added to any Entity with a text element component that would be used to show right to left text.
 
-![](/img/user-manual/user-interface/localization/adding-rtl-script-type.png)
+![](pathname:///img/user-manual/user-interface/localization/adding-rtl-script-type.png)
 
 ## Engine
 

@@ -41,11 +41,11 @@ MyScript.attributes.add('names', {
 
 ## 属性をエディターに取り込む
 
-![Script Attributes](/img/user-manual/scripting/script-attributes.png)
+![Script Attributes](pathname:///img/user-manual/scripting/script-attributes.png)
 
 属性を宣言したら、エディターはスクリプト属性を公開するためにコードをパースする必要があります。属性が変更された場合は、パースボタンをクリックして属性を手動で更新する必要があります。
 
-![Parse Button](/img/user-manual/scripting/script-parse-button.png)
+![Parse Button](pathname:///img/user-manual/scripting/script-parse-button.png)
 
 ## コード内で属性にアクセスする
 

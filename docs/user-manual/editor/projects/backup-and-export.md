@@ -27,7 +27,7 @@ Export files provide complete project backups that can be stored offline and imp
 
 #### From the Projects List
 
-![Export Project](/img/user-manual/editor/projects/export-project.png)
+![Export Project](pathname:///img/user-manual/editor/projects/export-project.png)
 
 To export a project:
 
@@ -86,7 +86,7 @@ PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/
 
 ### From Export Files
 
-![Import Project](/img/user-manual/editor/projects/import-project.png)
+![Import Project](pathname:///img/user-manual/editor/projects/import-project.png)
 
 To restore a project from an export:
 

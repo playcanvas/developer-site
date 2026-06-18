@@ -5,7 +5,7 @@ description: PlayCanvas Camera component renders the scene from the entity with 
 
 The Camera Component enables an entity to render a scene from a certain viewpoint.
 
-![Camera Component](/img/user-manual/editor/scenes/components/component-camera.png)
+![Camera Component](pathname:///img/user-manual/editor/scenes/components/component-camera.png)
 
 ## Properties
 

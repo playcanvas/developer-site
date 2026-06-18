@@ -3,7 +3,7 @@ title: エディターインターフェース
 description: ツールバー、Hierarchy、Inspector、ビューポート、Assets パネルをラベル付きで俯瞰し、各主要エリアの詳細ドキュメントへリンクします。
 ---
 
-![エディターインターフェース](/img/user-manual/editor/interface/editor-interface.png)
+![エディターインターフェース](pathname:///img/user-manual/editor/interface/editor-interface.png)
 
 これはPlayCanvas Editorの主要なインターフェースです。主な領域にラベルが付いています。
 

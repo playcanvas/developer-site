@@ -97,7 +97,7 @@ app.xr.on('available:' + pc.XRTYPE_VR, (available) => {
 
 XRでプレゼンテーションを行う場合、カメラの位置と向きはXRセッションからのデータによって上書きされます。カメラにさらなる移動と回転を実装したい場合は、カメラの親エンティティを追加し、そのエンティティに操作を適用する必要があります。
 
-![Camera Offset](/img/user-manual/xr/using-webxr/camera-offset.jpg)
+![Camera Offset](pathname:///img/user-manual/xr/using-webxr/camera-offset.jpg)
 
 異なるXRオブジェクト（入力ソース、トラッキングされたメッシュ、トラッキングされた平面、トラッキングされた画像など）の位置、向き、およびレイは、ワールド空間で提供されます。
 

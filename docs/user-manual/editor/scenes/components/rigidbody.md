@@ -7,15 +7,15 @@ The Rigid Body Component enables an entity to participate in the scene's physics
 
 #### Static
 
-![Rigid Body Component (Static)](/img/user-manual/editor/scenes/components/component-rigid-body-static.png)
+![Rigid Body Component (Static)](pathname:///img/user-manual/editor/scenes/components/component-rigid-body-static.png)
 
 #### Dynamic
 
-![Rigid Body Component (Dynamic)](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
+![Rigid Body Component (Dynamic)](pathname:///img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
 
 #### Kinematic
 
-![Rigid Body Component (Kinematic)](/img/user-manual/editor/scenes/components/component-rigid-body-kinematic.png)
+![Rigid Body Component (Kinematic)](pathname:///img/user-manual/editor/scenes/components/component-rigid-body-kinematic.png)
 
 Note that you must add a [Collision Component](collision.md) to the same entity in order to define the shape of the rigid body. Otherwise, the Rigid Body Component has no effect and will not participate in the physics simulation.
 

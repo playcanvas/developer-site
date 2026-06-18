@@ -13,7 +13,7 @@ By default, a new PlayCanvas project does not include ammo.js modules. This is b
 
 You can import ammo.js modules into your project using the import button on the Scene Settings panel:
 
-![Physics Settings](/img/user-manual/physics/physics-settings.png)
+![Physics Settings](pathname:///img/user-manual/physics/physics-settings.png)
 
 This will import the default build of ammo.js provided by PlayCanvas. However please note it is possible to compile your own version of ammo.js and add it to your project instead. For more information see [this page](/user-manual/editor/assets/inspectors/wasm/).
 
@@ -53,7 +53,7 @@ The collision component specifies the physical shape of the body. Note that a ri
 
 Most of the time, you will want to create some kind of static physical environment. For example, a race track or a football pitch. The simplest example is a flat plane. PlayCanvas doesn't expose a plane-type collision primitive but it does provide a box primitive. Here is how to configure a 1 unit high 10x10 box that is a static rigid body:
 
-![Static Ground](/img/user-manual/physics/static-ground.png)
+![Static Ground](pathname:///img/user-manual/physics/static-ground.png)
 
 You could also set the collision component type to Mesh and assign a model asset if you want something more complex.
 
@@ -61,17 +61,17 @@ You could also set the collision component type to Mesh and assign a model asset
 
 Physics is all about movement so things get interesting when we create dynamic rigid bodies. Let's create a dynamic 1x1x1 box:
 
-![Dynamic Box](/img/user-manual/physics/dynamic-box.png)
+![Dynamic Box](pathname:///img/user-manual/physics/dynamic-box.png)
 
 The box has been rotated so that when it collides with the static ground, it will bounce in an interesting way:
 
-![Falling Box](/img/user-manual/physics/falling-box.gif)
+![Falling Box](pathname:///img/user-manual/physics/falling-box.gif)
 
 ## Creating Kinematic Bodies {#creating-kinematic-bodies}
 
 Sometimes, it can be useful to be able to explicitly control the motion of physical objects in your scene and have these objects exert an irresistible force on other physical objects. For example, imagine a moving platform that can carry the player across a level. To achieve this, you can set a rigid body's type to Kinematic. Let's create a kinematic box:
 
-![Kinematic Box](/img/user-manual/physics/kinematic-box.png)
+![Kinematic Box](pathname:///img/user-manual/physics/kinematic-box.png)
 
 The responsibility for animating kinematic bodies is on you, the developer. You will notice that the kinematic box shown above also has a script component with a script called movement.js assigned:
 
@@ -119,7 +119,7 @@ Movement.prototype.update = function(dt) {
 
 This script simply animates the box along the world x-axis using a sine function. You move kinematic bodies using the standard transformation functions on the entity like `setPosition`, `setRotation` and `setEulerAngles`. Now when we run the scene, the dynamic box falls on the kinematic box and is carried along on top of it:
 
-![Kinematic Box](/img/user-manual/physics/kinematic-box.gif)
+![Kinematic Box](pathname:///img/user-manual/physics/kinematic-box.gif)
 
 ## Teleporting Dynamic Bodies {#teleporting-dynamic-bodies}
 

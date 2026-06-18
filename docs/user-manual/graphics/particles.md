@@ -15,15 +15,15 @@ Note that particles are not physically simulated. They do not interact or collid
 
 In the Editor's 3D View, an unselected particle system is represented with the following icon:
 
-![Particle system icon](/img/user-manual/graphics/particles/particle-system-icon.png)
+![Particle system icon](pathname:///img/user-manual/graphics/particles/particle-system-icon.png)
 
 To create a new particle system, simply create a new entity and add a particle system component to it. For convenience, the Editor menu has an item that does this in a single step:
 
-![Particle system creation](/img/user-manual/graphics/particles/particle-system-create.png)
+![Particle system creation](pathname:///img/user-manual/graphics/particles/particle-system-create.png)
 
 A newly created particle system with the default settings looks like this:
 
-![Default particle system](/img/user-manual/graphics/particles/particle-system-default.gif)
+![Default particle system](pathname:///img/user-manual/graphics/particles/particle-system-default.gif)
 
 To configure the particle system via the particle system component interface, consult the reference [here](/user-manual/editor/scenes/components/particlesystem).
 

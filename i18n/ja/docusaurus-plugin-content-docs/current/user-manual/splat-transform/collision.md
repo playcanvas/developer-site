@@ -30,7 +30,7 @@ splat-transform input.ply --filter-cluster --seed-pos 0,1,0 output.voxel.json
 
 | 入力 | クラスタフィルタ結果 |
 | --- | --- |
-| ![original](/img/user-manual/splat-transform/input.webp) | ![filtered](/img/user-manual/splat-transform/filter-cluster.webp) |
+| ![original](pathname:///img/user-manual/splat-transform/input.webp) | ![filtered](pathname:///img/user-manual/splat-transform/filter-cluster.webp) |
 
 :::tip 単独での使用
 
@@ -62,7 +62,7 @@ splat-transform input.ply --filter-cluster --seed-pos 0,1,0 cluster.ply
 splat-transform input.ply output.voxel.json
 ```
 
-![voxelized-raw: bare voxel grid produced by the voxelization pass](/img/user-manual/splat-transform/voxels.webp)
+![voxelized-raw: bare voxel grid produced by the voxelization pass](pathname:///img/user-manual/splat-transform/voxels.webp)
 
 ### ボクセルオプション
 
@@ -111,7 +111,7 @@ splat-transform input.ply output.voxel.json --voxel-external-fill --seed-pos 0,1
 splat-transform input.ply output.voxel.json --voxel-floor-fill
 ```
 
-![floor-fill: cross-section of terrain before/after, showing solid mass below the surface](/img/user-manual/splat-transform/filled.webp)
+![floor-fill: cross-section of terrain before/after, showing solid mass below the surface](pathname:///img/user-manual/splat-transform/filled.webp)
 
 ```none
 --voxel-floor-fill [size]
@@ -139,7 +139,7 @@ splat-transform input.ply output.voxel.json --voxel-carve --seed-pos 0,1,0
 
 | 元 | カービング後 |
 | --- | --- |
-| ![original](/img/user-manual/splat-transform/voxels.webp) | ![carved](/img/user-manual/splat-transform/carved.webp) |
+| ![original](pathname:///img/user-manual/splat-transform/voxels.webp) | ![carved](pathname:///img/user-manual/splat-transform/carved.webp) |
 
 カプセルはシード位置にフィットしなければなりません。カービングで何も出力されない場合、シードが固体ジオメトリの中にあるか、カプセルが大きすぎてフィットしない可能性があります。
 
@@ -166,7 +166,7 @@ splat-transform input.ply output.voxel.json --voxel-carve --seed-pos 0,1,0
 
 | ボクセル | スムースメッシュ | フェイスメッシュ |
 | --- | --- | --- |
-| ![voxels](/img/user-manual/splat-transform/collision-voxels.webp) | ![smooth](/img/user-manual/splat-transform/smooth-mesh.webp) | ![faces](/img/user-manual/splat-transform/faces-mesh.webp) |
+| ![voxels](pathname:///img/user-manual/splat-transform/collision-voxels.webp) | ![smooth](pathname:///img/user-manual/splat-transform/smooth-mesh.webp) | ![faces](pathname:///img/user-manual/splat-transform/faces-mesh.webp) |
 
 ### `smooth`（デフォルト）
 

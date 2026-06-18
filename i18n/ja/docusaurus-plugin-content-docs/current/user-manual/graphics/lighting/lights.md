@@ -21,7 +21,7 @@ PlayCanvasには3つの種類の光源があります。
 
 方向性光は以下のようにオブジェクトを照らします。
 
-![Directional light](/img/user-manual/graphics/lighting/lights/directional.jpg)
+![Directional light](pathname:///img/user-manual/graphics/lighting/lights/directional.jpg)
 
 ### Omni Lights {#omni-lights}
 
@@ -29,7 +29,7 @@ PlayCanvasには3つの種類の光源があります。
 
 オムニライトは以下のようにオブジェクトを照らします。
 
-![Omni light](/img/user-manual/graphics/lighting/lights/point.jpg)
+![Omni light](pathname:///img/user-manual/graphics/lighting/lights/point.jpg)
 
 ### Spot Lights {#spot-lights}
 
@@ -37,7 +37,7 @@ PlayCanvasには3つの種類の光源があります。
 
 スポットライトは以下のようにオブジェクトを照らします。
 
-![Spot light](/img/user-manual/graphics/lighting/lights/spot.jpg)
+![Spot light](pathname:///img/user-manual/graphics/lighting/lights/spot.jpg)
 
 ## Light Shapes {#light-shapes}
 
@@ -64,7 +64,7 @@ PlayCanvasには3つの種類の光源があります。
 
 球体の光源形状は、指定された半径を持つ球形です。
 
-![Shapes](/img/user-manual/graphics/lighting/lights/shapes.jpg)
+![Shapes](pathname:///img/user-manual/graphics/lighting/lights/shapes.jpg)
 
 ## Use Cases {#use-cases}
 

@@ -4,7 +4,7 @@ description: The Node Inspector edits properties for whichever node is currently
 sidebar_position: 2
 ---
 
-![Node Inspector](/img/shader-editor/inspector-pane-node.png)
+![Node Inspector](pathname:///img/shader-editor/inspector-pane-node.png)
 
 The Node Inspector is where a node's settings are configured.
 

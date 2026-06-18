@@ -14,7 +14,7 @@ description: Editor プロジェクトの起動、公開、ダウンロード時
 
 `ENGINE` セクションに移動し、パネルを展開します。
 
-![Engine Settings](/img/user-manual/editor/interface/settings/engine.webp)
+![Engine Settings](pathname:///img/user-manual/editor/interface/settings/engine.webp)
 
 利用可能な設定は次のとおりです。
 

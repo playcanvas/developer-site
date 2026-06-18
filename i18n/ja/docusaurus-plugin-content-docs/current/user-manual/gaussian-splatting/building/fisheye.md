@@ -5,7 +5,7 @@ description: "Gaussian スプラットと無限スカイボックスに魚眼プ
 
 PlayCanvas は、Gaussian スプラットと無限スカイボックスに対する魚眼（樽型歪み）プロジェクションをサポートしています。これにより、超広角の視野、没入感のある 360° ビュー、そしてスタイライズされた「タイニープラネット」効果をレンダリングできます。通常のメッシュや UI は標準のレクティリニア（直線）プロジェクションのままレンダリングされます。
 
-![強い魚眼プロジェクションでレンダリングされた Gaussian スプラットシーン](/img/user-manual/gaussian-splatting/fisheye-ultra-wide.png)
+![強い魚眼プロジェクションでレンダリングされた Gaussian スプラットシーン](pathname:///img/user-manual/gaussian-splatting/fisheye-ultra-wide.png)
 
 **ライブデモを見る** - 設定パネルを開き、`fisheye` スライダーを `0` から `1` までドラッグしてください。`cameraFov` を高い値にしたり、異なる HDRI 環境と組み合わせたりして、スカイドームやタイニープラネットの見た目を再現してみてください。
 

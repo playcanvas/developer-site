@@ -4,7 +4,7 @@ description: The Texture Inspector for setting the name and configuration of tex
 sidebar_position: 4
 ---
 
-![Texture Inspector](/img/shader-editor/inspector-pane-texture.png)
+![Texture Inspector](pathname:///img/shader-editor/inspector-pane-texture.png)
 
 The Texture Inspector is where textures are configured.
 

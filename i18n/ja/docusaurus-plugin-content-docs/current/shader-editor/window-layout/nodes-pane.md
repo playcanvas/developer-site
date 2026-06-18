@@ -4,7 +4,7 @@ sidebar_position: 2
 description: 組み込みシェーダーノードをカテゴリ別に一覧し、input、transform、output のノード型でフィルターする Nodes Pane です。
 ---
 
-![Nodes Pane](/img/shader-editor/nodes-pane.png)
+![Nodes Pane](pathname:///img/shader-editor/nodes-pane.png)
 
 ノードペイン (Nodes Pane) は、グラフを構築するための組み込みノードをリスト表示します。ノードはカテゴリ別にサブセクションに分類されています。
 

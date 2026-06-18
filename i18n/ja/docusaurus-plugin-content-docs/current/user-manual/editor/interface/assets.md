@@ -5,7 +5,7 @@ description: Assets パネルのガイド。フォルダ、検索、フィルタ
 
 アセットパネルは、プロジェクトで利用可能なすべてのアセットを管理します。ここから、アセットの作成、アップロード、削除、検査、編集を行うことができます。
 
-![アセットパネル](/img/user-manual/editor/assets-panel.png)
+![アセットパネル](pathname:///img/user-manual/editor/assets-panel.png)
 
 アセットパネルは、プロジェクトのアセットを整理および管理するための強力な機能を提供します：
 

@@ -3,7 +3,7 @@ title: Hierarchy Panel
 description: Hierarchy techniques for smart search entity lifecycle reparent transforms duplication and cross-scene paste with asset rematching when folder paths align.
 ---
 
-![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.png)
+![Hierarchy Panel](pathname:///img/user-manual/editor/hierarchy/hierarchy-panel.png)
 
 The Hierarchy panel shows you a tree view of your entire Scene which is made up from a hierarchy of Entities. A Scene will always contain the Root Entity at the top of the tree. All the other Entities you see here on the right have been added by the developer.
 
@@ -29,13 +29,13 @@ Scale preservation works best when parent entities use uniform scaling. When non
 
 Near the top of the Hierarchy panel is a Search box which you can use to dynamically filter the content of the Entity tree.
 
-![Hierarchy Panel Search](/img/user-manual/editor/hierarchy/hierarchy-search.png)
+![Hierarchy Panel Search](pathname:///img/user-manual/editor/hierarchy/hierarchy-search.png)
 
 By default, the search will filter based on entity names with 'Smart Search' enabled. Smart Search is fuzzy, which means it matches names that are similar to the search string rather than exactly the same. This is useful if you can't quite remember the name of the Entity you are searching for.
 
 You can customize the search by clicking the magnifying glass:
 
-![Hierarchy Panel Search Options](/img/user-manual/editor/hierarchy/hierarchy-search-options.png)
+![Hierarchy Panel Search Options](pathname:///img/user-manual/editor/hierarchy/hierarchy-search-options.png)
 
 ## Duplicating Entities
 

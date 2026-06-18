@@ -30,7 +30,7 @@ splat-transform input.ply --filter-cluster --seed-pos 0,1,0 output.voxel.json
 
 | Input | Cluster Filtered Result |
 | --- | --- |
-| ![original](/img/user-manual/splat-transform/input.webp) | ![filtered](/img/user-manual/splat-transform/filter-cluster.webp) |
+| ![original](pathname:///img/user-manual/splat-transform/input.webp) | ![filtered](pathname:///img/user-manual/splat-transform/filter-cluster.webp) |
 
 :::tip Standalone use
 
@@ -62,7 +62,7 @@ Voxelization is implicitly enabled by the output filename extension: when the ou
 splat-transform input.ply output.voxel.json
 ```
 
-![voxelized-raw: bare voxel grid produced by the voxelization pass](/img/user-manual/splat-transform/voxels.webp)
+![voxelized-raw: bare voxel grid produced by the voxelization pass](pathname:///img/user-manual/splat-transform/voxels.webp)
 
 ### Voxel options
 
@@ -111,7 +111,7 @@ For outdoor scans, terrain, or objects on a ground plane. The pass walks each XZ
 splat-transform input.ply output.voxel.json --voxel-floor-fill
 ```
 
-![floor-fill: cross-section of terrain before/after, showing solid mass below the surface](/img/user-manual/splat-transform/filled.webp)
+![floor-fill: cross-section of terrain before/after, showing solid mass below the surface](pathname:///img/user-manual/splat-transform/filled.webp)
 
 ```none
 --voxel-floor-fill [size]
@@ -139,7 +139,7 @@ splat-transform input.ply output.voxel.json --voxel-carve --seed-pos 0,1,0
 
 | Original | Carved |
 | --- | --- |
-| ![original](/img/user-manual/splat-transform/voxels.webp) | ![carved](/img/user-manual/splat-transform/carved.webp) |
+| ![original](pathname:///img/user-manual/splat-transform/voxels.webp) | ![carved](pathname:///img/user-manual/splat-transform/carved.webp) |
 
 The capsule must fit at the seed position. If carve produces no output, the seed is likely inside solid geometry or the capsule is too large to fit.
 
@@ -166,7 +166,7 @@ The capsule must fit at the seed position. If carve produces no output, the seed
 
 | Voxel | Smooth Mesh | Faces Mesh |
 | --- | --- | --- |
-| ![voxels](/img/user-manual/splat-transform/collision-voxels.webp) | ![smooth](/img/user-manual/splat-transform/smooth-mesh.webp) | ![faces](/img/user-manual/splat-transform/faces-mesh.webp) |
+| ![voxels](pathname:///img/user-manual/splat-transform/collision-voxels.webp) | ![smooth](pathname:///img/user-manual/splat-transform/smooth-mesh.webp) | ![faces](pathname:///img/user-manual/splat-transform/faces-mesh.webp) |
 
 ### `smooth` (default)
 

@@ -3,7 +3,7 @@ title: VR
 description: "Virtual reality with WebXR in PlayCanvas: supported platforms, project settings, starting VR sessions, and links to VR-specific topics."
 ---
 
-![VR View](/img/user-manual/xr/vr-view.png)
+![VR View](pathname:///img/user-manual/xr/vr-view.png)
 
 PlayCanvas also lets you create Virtual Reality (VR) applications.
 

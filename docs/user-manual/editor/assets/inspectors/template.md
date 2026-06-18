@@ -9,7 +9,7 @@ For more information about working with Templates, see [Templates](/user-manual/
 
 ## Inspector
 
-{/*![Template Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-template.png)*/}
+{/*![Template Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-template.png)*/}
 
 The Template asset inspector displays an interactive 3D preview of the Template's entity hierarchy. You can rotate the preview by clicking and dragging.
 

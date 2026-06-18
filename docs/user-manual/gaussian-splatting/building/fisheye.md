@@ -5,7 +5,7 @@ description: "Apply a fisheye projection to Gaussian splats and the infinite sky
 
 PlayCanvas supports a fisheye (barrel distortion) projection for Gaussian splats and the infinite skybox. This lets you render ultra-wide fields of view, immersive 360° views, and stylized "tiny planet" effects, all while keeping regular meshes and UI rendering with the standard rectilinear projection.
 
-![Gaussian splat scene rendered with a strong fisheye projection](/img/user-manual/gaussian-splatting/fisheye-ultra-wide.png)
+![Gaussian splat scene rendered with a strong fisheye projection](pathname:///img/user-manual/gaussian-splatting/fisheye-ultra-wide.png)
 
 **View Live Example** - Open the Settings panel and drag the `fisheye` slider from `0` to `1`. Try combining it with higher `cameraFov` values and different HDRI environments to reproduce the skydome and tiny-planet looks.
 

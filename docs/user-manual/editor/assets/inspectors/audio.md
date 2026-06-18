@@ -15,7 +15,7 @@ MP3 is recommended as it offers good compression and [universal compatibility](h
 
 ## Inspector
 
-![Audio Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-audio.png)
+![Audio Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-audio.png)
 
 The Audio asset inspector displays audio information and provides playback controls to preview the sound.
 

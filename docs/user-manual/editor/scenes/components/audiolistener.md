@@ -5,7 +5,7 @@ description: PlayCanvas Audio Listener component sets the 3D listener position s
 
 The Audio Listener Component specifies the listener's position in 3D space. All 3D audio playback will be relative to this position.
 
-![Audio Listener Component](/img/user-manual/editor/scenes/components/component-audiolistener.png)
+![Audio Listener Component](pathname:///img/user-manual/editor/scenes/components/component-audiolistener.png)
 
 ## See Also
 

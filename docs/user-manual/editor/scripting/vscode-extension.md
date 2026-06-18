@@ -5,7 +5,7 @@ description: Installs and uses the PlayCanvas VS Code extension for synced local
 
 The PlayCanvas VS Code Extension provides a powerful, real-time editing environment for working with text-based assets from the PlayCanvas Editor. Designed for developers who prefer modern tooling such as IntelliSense, source control, GitHub Copilot, and AI-enabled workflows, the extension integrates VS Code directly with your PlayCanvas projects.
 
-![VS Code Extension Demo](/img/user-manual/scripting/vscode-demo.webp)
+![VS Code Extension Demo](pathname:///img/user-manual/scripting/vscode-demo.webp)
 
 The extension is fully [open-source on GitHub](https://github.com/playcanvas/vscode-extension) and licensed under MIT.
 

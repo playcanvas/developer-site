@@ -11,20 +11,20 @@ When authoring artwork for PlayCanvas, it is important to ensure you do so to th
 
 To ensure units are exported correctly from Blender, check that Scene Properties unit system is set to metric and that scale is set to 1.0:
 
-![Blender units](/img/user-manual/assets/models/units/blender-units.png)
+![Blender units](pathname:///img/user-manual/assets/models/units/blender-units.png)
 
 In addition, when exporting to FBX format, check that "Apply Scaling" is set to "FBX All":
 
-![Blender FBX Export](/img/user-manual/assets/models/units/blender-fbx-export.png)
+![Blender FBX Export](pathname:///img/user-manual/assets/models/units/blender-fbx-export.png)
 
 ### Autodesk 3D Studio Max
 
 To check or set working units in 3D Studio Max, open the Units Setup dialog and click the System Unit Setup button:
 
-![3DS Max units](/img/user-manual/assets/models/units/max-units.png)
+![3DS Max units](pathname:///img/user-manual/assets/models/units/max-units.png)
 
 ### Autodesk Maya
 
 To check or set working units in Maya, open the Preferences dialog:
 
-![Maya units](/img/user-manual/assets/models/units/maya-units.png)
+![Maya units](pathname:///img/user-manual/assets/models/units/maya-units.png)

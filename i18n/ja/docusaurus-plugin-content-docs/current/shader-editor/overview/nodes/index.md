@@ -6,7 +6,7 @@ description: "ポートを持つ共通ノード構造と、Shader Editor の3カ
 
 Shader Editorではさまざまなタイプのノードがサポートされていますが、すべてのノードは以下の構造を持っています。
 
-![Graph Editor Node](/img/shader-editor/graph-editor-node.png)
+![Graph Editor Node](pathname:///img/shader-editor/graph-editor-node.png)
 
 | ノードの構造 | |
 |---|---|

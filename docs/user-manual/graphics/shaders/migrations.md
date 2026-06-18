@@ -13,7 +13,7 @@ In order to help users migrate their existing custom shader chunks, this page li
 
 The debug version of the Engine will report any API changes to the runtime console when it detects overridden chunks. For example:
 
-![Console output](/img/user-manual/graphics/shader-chunk-migrations/console-warning.png)
+![Console output](pathname:///img/user-manual/graphics/shader-chunk-migrations/console-warning.png)
 
 Once an application's chunks have been updated to the latest API they must be flagged as such. For example, after updating a material's custom chunks to the latest engine release (say v2.8), specify this in the chunks object as follows:
 

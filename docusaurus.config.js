@@ -7,6 +7,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
 import pluginLlms from './utils/plugins/docusaurus-plugin-llms.mjs';
+import pluginDedupeStatic from './utils/plugins/docusaurus-plugin-dedupe-static.mjs';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -33,6 +34,13 @@ const config = {
     defaultLocale: 'en',
     locales: ['en', 'ja']
   },
+
+  // Shared static/ is copied only for the default locale. Non-default locales use
+  // pathname:// URLs in Markdown (see utils/migrate-static-paths-to-pathname.mjs).
+  staticDirectories:
+    (process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'en') === 'en'
+      ? ['static']
+      : [],
 
   future: {
     faster: true,
@@ -240,6 +248,7 @@ const config = {
     }],
     'docusaurus-plugin-sass',
     pluginLlms,
+    pluginDedupeStatic,
     'docusaurus-plugin-copy-page-button'
   ],
 

@@ -5,7 +5,7 @@ description: Enable Import Hierarchy so models import as editable entity trees w
 
 PlayCanvas supports importing models with their meshes as a hierarchy of entities in the scene. This allows you to edit the different meshes directly in the Editor. Components can be added, attach other entities, move/rotate/scale entities in the hierarchy etc.
 
-![Edit model hierarchy in the Editor](/img/user-manual/assets/import-pipeline/import-hierarchy/edit-hierarchy.gif)
+![Edit model hierarchy in the Editor](pathname:///img/user-manual/assets/import-pipeline/import-hierarchy/edit-hierarchy.gif)
 
 ## How to enable
 
@@ -29,11 +29,11 @@ A full tutorial on importing your first model and animation can be found [here](
 
 As an overview, when you drag the model file into the 'Assets Panel':
 
-![Drag Model into Assets Panel](/img/user-manual/assets/import-pipeline/import-hierarchy/import-model.gif)
+![Drag Model into Assets Panel](pathname:///img/user-manual/assets/import-pipeline/import-hierarchy/import-model.gif)
 
 The following assets will be created when imported:
 
-![Created Assets](/img/user-manual/assets/import-pipeline/import-hierarchy/created-assets.png)
+![Created Assets](pathname:///img/user-manual/assets/import-pipeline/import-hierarchy/created-assets.png)
 
 | Asset Type | Description |
 |------------|-------------|

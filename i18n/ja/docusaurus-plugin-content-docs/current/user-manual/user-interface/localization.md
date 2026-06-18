@@ -90,7 +90,7 @@ console.log(localeNumberString);
 
 ランタイム時にアプリケーションが異なるロケールに切り替えると、そのロケールに定義したフォントアセットが読み込まれます。
 
-![Localized Fonts Inspector](/img/user-manual/user-interface/localization/localized-fonts-inspector.gif)
+![Localized Fonts Inspector](pathname:///img/user-manual/user-interface/localization/localized-fonts-inspector.gif)
 
 ## 言語ノート
 
@@ -112,11 +112,11 @@ console.log(localeNumberString);
 
 例のプロジェクトには、「Rtl Support」というフォルダがあり、プロジェクトに[コピーして貼り付ける](/user-manual/editor/assets/asset-panel/#copy-and-paste-between-projects)必要があります。
 
-![](/img/user-manual/user-interface/localization/rtl-asset-folder.png)
+![](pathname:///img/user-manual/user-interface/localization/rtl-asset-folder.png)
 
 フォルダには、「RtlElement」というスクリプトタイプがあり、右から左に表示されるテキストに使用されるText Elementコンポーネントを持つエンティティに追加する必要があります。
 
-![](/img/user-manual/user-interface/localization/adding-rtl-script-type.png)
+![](pathname:///img/user-manual/user-interface/localization/adding-rtl-script-type.png)
 
 ## エンジン
 

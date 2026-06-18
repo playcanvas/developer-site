@@ -7,7 +7,7 @@ The Scroll View Component defines a scrollable area in a user interface. A Scrol
 
 See the [User Interface](/user-manual/user-interface) section for more details.
 
-![Scroll View Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
+![Scroll View Component](pathname:///img/user-manual/editor/scenes/components/component-scrollview.png)
 
 ## Properties
 

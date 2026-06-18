@@ -13,21 +13,21 @@ The REST API is currently in beta. This means we may change certain endpoints an
 
 You can only access the REST API via https. In order to access the REST API you need to use an Access Token. You can generate an Access Token by going to your Organization's Account page.
 
-![Account Tab](/img/user-manual/api/account-tab.png)
+![Account Tab](pathname:///img/user-manual/api/account-tab.png)
 
 In the API Tokens section click on Generate Token.
 
-![Generate Token](/img/user-manual/api/generate-token.png)
+![Generate Token](pathname:///img/user-manual/api/generate-token.png)
 
 Give your token a name and click the button to create your new token. A new window will appear showing you your new access token.
 
 Make sure you note that down because you will not be able to see the token once you close this window. This token is meant to be kept secret so do not share it with anyone other than your team (for example do not post this on forums).
 
-![New Token](/img/user-manual/api/new-token.png)
+![New Token](pathname:///img/user-manual/api/new-token.png)
 
 From your Account page you can also Revoke all the tokens you have generated or a specific one. You can also edit the name of a token.
 
-![Remove Token](/img/user-manual/api/remove-token.png)
+![Remove Token](pathname:///img/user-manual/api/remove-token.png)
 
 When you make calls to the API you must set the 'Authorization' header in your HTTP request to this value:
 
@@ -53,19 +53,19 @@ There are several common parameters that are used in each endpoint:
 
 This can be found in the URL on the project overview page.
 
-![Project ID](/img/user-manual/api/project-id.png)
+![Project ID](pathname:///img/user-manual/api/project-id.png)
 
 ### scenes {#scenes}
 
 When opening a scene in the Editor, the scene id is in the URL.
 
-![Scene ID](/img/user-manual/api/scene-id.png)
+![Scene ID](pathname:///img/user-manual/api/scene-id.png)
 
 ### branch_id {#branch_id}
 
 This is found in the [version control](/user-manual/editor/version-control/) panel and can be selected and copied.
 
-![Branch ID](/img/user-manual/api/branch-id.png)
+![Branch ID](pathname:///img/user-manual/api/branch-id.png)
 
 ## Response Format {#response-format}
 

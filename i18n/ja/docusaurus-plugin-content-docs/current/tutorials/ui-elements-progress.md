@@ -17,13 +17,13 @@ description: ネストしたElementとアンカーで塗りつぶし可能なプ
 
 UIの構造は次のようになります。
 
-![Hierarchy](/img/tutorials/ui/progressbar/hierarchy.png)
+![Hierarchy](pathname:///img/tutorials/ui/progressbar/hierarchy.png)
 
 ## スクリーンの設定
 
 [スクリーン](/user-manual/user-interface/screens/)は次のように設定されています。
 
-![Screen](/img/tutorials/ui/progressbar/screen.png)
+![Screen](pathname:///img/tutorials/ui/progressbar/screen.png)
 
 2Dスクリーンであるため、 `Screen Space` を選択しました。 `Reference Resolution` は、ターゲットとしている解像度です。この場合、1080 x 1920です。スケールモードとしてBlendを選択しているため、スクリーンは解像度の変更に適応します。また、スケールブレンドを1に設定しているため、スクリーンは高さの変更にのみ適応されます。
 
@@ -35,11 +35,11 @@ UIの構造は次のようになります。
 
 バックグラウンド画像は`Progress Bar`エンティティです。それには、プログレスバーの背景画像を表示する画像エレメントがあります。
 
-![Background Image](/img/tutorials/ui/progressbar/progress-bar-bg.png)
+![Background Image](pathname:///img/tutorials/ui/progressbar/progress-bar-bg.png)
 
 フィル画像は、`Fill Image`エンティティです。それは`Progress Bar`エンティティの子要素であり、プログレスバーのフィルを表示するImage Elementがあります。このイメージは、親バックグラウンド画像の左にアンカーが設定されているため、要素の幅を変更してプログレスバーを拡大できます。
 
-![Fill Image](/img/tutorials/ui/progressbar/progress-bar-fill.png)
+![Fill Image](pathname:///img/tutorials/ui/progressbar/progress-bar-fill.png)
 
 ## スクリプト (Script)
 

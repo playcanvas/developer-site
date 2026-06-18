@@ -15,7 +15,7 @@ MP3は圧縮率が高く、[互換性も優れている](https://caniuse.com/mp3
 
 ## Inspector
 
-![Audio Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-audio.png)
+![Audio Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-audio.png)
 
 Audio アセットインスペクターは、オーディオ情報を表示し、サウンドをプレビューするための再生コントロールを提供します。
 

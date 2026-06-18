@@ -19,7 +19,7 @@ Projects created before the introduction of wasm modules continue by default to 
 
 To check if your project is using the legacy version of ammo.js, navigate to the Scene Settings panel:
 
-![Physics Legacy Settings](/img/user-manual/physics/physics-legacy-settings.png)
+![Physics Legacy Settings](pathname:///img/user-manual/physics/physics-legacy-settings.png)
 
 If 'Enable Physics' does not appear, then the project is new and doesn't have the option of using the legacy built-in version of ammo.js.
 

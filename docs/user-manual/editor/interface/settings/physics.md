@@ -14,7 +14,7 @@ These settings affect all users on the currently active [branch](../../version-c
 
 Navigate to the `PHYSICS` section and expand the panel:
 
-![Physics Settings](/img/user-manual/editor/interface/settings/physics.webp)
+![Physics Settings](pathname:///img/user-manual/editor/interface/settings/physics.webp)
 
 Here is a breakdown of the available settings:
 

@@ -41,11 +41,11 @@ MyScript.attributes.add('names', {
 
 ## Getting Attributes into the Editor
 
-![Script Attributes](/img/user-manual/scripting/script-attributes.png)
+![Script Attributes](pathname:///img/user-manual/scripting/script-attributes.png)
 
 Once you've declared your attributes, the Editor needs to parse the code in order to expose the script attributes. If attributes have been changed, you need to manually refresh them by clicking the parse button.
 
-![Parse Button](/img/user-manual/scripting/script-parse-button.png)
+![Parse Button](pathname:///img/user-manual/scripting/script-parse-button.png)
 
 ## Accessing Attributes in Your Code
 

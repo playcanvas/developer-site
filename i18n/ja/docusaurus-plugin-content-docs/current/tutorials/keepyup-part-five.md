@@ -38,7 +38,7 @@ this.entity.sound.play("bounce");
 
 ### パーティクル (Particle)
 
-![Particles](/img/tutorials/beginner/keepyup-part-five/particle-bounce.gif)
+![Particles](pathname:///img/tutorials/beginner/keepyup-part-five/particle-bounce.gif)
 
 Keepy Upには一つのパーティクルエフェクトがあります。それは、ボールがタップされるたびにトリガーされるダストの雲です。ダストの雲は、非ループ効果であり、実行時に雲がボールから離れるように配置し回転させる必要があります。
 
@@ -51,7 +51,7 @@ this.impactEffect.lookAt(this.entity.getPosition());
 
 このコードでは、`reset()`と`play()`を呼ぶことでワンショットパーティクルエフェクトを再起動し、それがボールの中心に向かって指すように回転させます。
 
-![Curves](/img/tutorials/beginner/keepyup-part-five/particle-velocity-curves.jpg)
+![Curves](pathname:///img/tutorials/beginner/keepyup-part-five/particle-velocity-curves.jpg)
 
 パーティクルエフェクト (Particle Effect)のエディターでLocal Velocityグラフを使用して、パーティクルエフェクトが向いている方向から離れて発射するように設定します。例：パーティクルは正のz軸に沿って移動します。
 

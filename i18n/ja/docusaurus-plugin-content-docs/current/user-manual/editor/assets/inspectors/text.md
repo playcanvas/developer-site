@@ -9,7 +9,7 @@ Text アセットは、プレーンテキストデータを保存するために
 
 ## Inspector
 
-![Text Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-text.png)
+![Text Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-text.png)
 
 Text アセットインスペクターは、アセットに含まれるテキストコンテンツのプレビューを表示します。
 

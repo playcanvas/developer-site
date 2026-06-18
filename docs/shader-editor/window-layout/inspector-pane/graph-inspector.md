@@ -4,7 +4,7 @@ description: The Graph Inspector for naming graphs, setting labels, and creating
 sidebar_position: 1
 ---
 
-![Graph Inspector](/img/shader-editor/inspector-pane-graph.png)
+![Graph Inspector](pathname:///img/shader-editor/inspector-pane-graph.png)
 
 The Graph Inspector is where a graph's settings are configured.
 

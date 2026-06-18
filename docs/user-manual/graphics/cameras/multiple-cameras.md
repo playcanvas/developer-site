@@ -18,7 +18,7 @@ By default, a camera renders to the full width and height of its render target. 
 
 For 2-player horizontal split-screen, two cameras each take half the screen:
 
-![Horizontal splitscreen](/img/user-manual/graphics/cameras/camera-horizontal-splitscreen.png)
+![Horizontal splitscreen](pathname:///img/user-manual/graphics/cameras/camera-horizontal-splitscreen.png)
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
@@ -66,7 +66,7 @@ Select each camera in the Hierarchy and set its **Viewport** (X, Y, Width, Heigh
 
 For vertical split-screen, stack the viewports instead — `[0, 0.5, 1, 0.5]` on top and `[0, 0, 1, 0.5]` below:
 
-![Vertical splitscreen](/img/user-manual/graphics/cameras/camera-vertical-splitscreen.png)
+![Vertical splitscreen](pathname:///img/user-manual/graphics/cameras/camera-vertical-splitscreen.png)
 
 A related property, `scissorRect`, clips rendering to a rectangle in the same normalized format without changing how the image is projected into the viewport.
 

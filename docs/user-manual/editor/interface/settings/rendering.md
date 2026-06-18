@@ -14,7 +14,7 @@ These settings affect all users on the currently active [branch](../../version-c
 
 Navigate to the `RENDERING` section and expand the panel:
 
-![Rendering Settings](/img/user-manual/editor/interface/settings/rendering.webp)
+![Rendering Settings](pathname:///img/user-manual/editor/interface/settings/rendering.webp)
 
 Here is a breakdown of the available settings:
 

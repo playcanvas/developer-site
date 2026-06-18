@@ -13,7 +13,7 @@ For walkable scenes to feel right, scale your splat so that **one unit equals on
 
 A voxel collision asset is a coarse, low-resolution box-based reconstruction of the splat — the surfaces visitors can stand on, lean against, or be stopped by. It's separate from the splat itself so it can be optimized independently for runtime physics rather than visual quality.
 
-![A splat with its voxel collision shown via debug rendering](/img/user-manual/supersplat/studio/voxel-collision.webp)
+![A splat with its voxel collision shown via debug rendering](pathname:///img/user-manual/supersplat/studio/voxel-collision.webp)
 
 You'll typically generate it once per scene and re-generate only if the underlying splat changes significantly.
 
@@ -21,7 +21,7 @@ You'll typically generate it once per scene and re-generate only if the underlyi
 
 The recommended way to add collision is to generate it directly in Studio. The **Collision** section of the **Assets** tab has a **Generate** button that runs a server-side voxelizer against your published splat — no files to prepare or upload.
 
-![The Generate Voxel Collision dialog in Studio](/img/user-manual/supersplat/studio/generate-collision.webp)
+![The Generate Voxel Collision dialog in Studio](pathname:///img/user-manual/supersplat/studio/generate-collision.webp)
 
 1. Open the splat in [Studio](/user-manual/supersplat/studio/#launching-studio) — clicking the splat's thumbnail only *views* it, so use **Open in Studio** (from Manage) or **Edit in Studio** (from the scene page). Then select the **Assets** tab in the left panel and find the **Collision** section.
 2. Click **Generate** to open the **Generate Voxel Collision** dialog.

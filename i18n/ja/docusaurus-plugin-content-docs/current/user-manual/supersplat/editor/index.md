@@ -11,7 +11,7 @@ Editorを完全にスキップできます。[superspl.atのホームページ](
 
 :::
 
-![SuperSplat Interface](/img/user-manual/supersplat/editor/supersplat-interface.png)
+![SuperSplat Interface](pathname:///img/user-manual/supersplat/editor/supersplat-interface.png)
 
 ## 動画チュートリアル
 

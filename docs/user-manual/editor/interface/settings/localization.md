@@ -14,7 +14,7 @@ These settings affect all users on the currently active [branch](../../version-c
 
 Navigate to the `LOCALIZATION` section and expand the panel:
 
-![Localization Settings](/img/user-manual/editor/interface/settings/localization.webp)
+![Localization Settings](pathname:///img/user-manual/editor/interface/settings/localization.webp)
 
 Here is a breakdown of the available settings:
 

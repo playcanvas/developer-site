@@ -19,7 +19,7 @@ AR機能は、Android Chrome Browser、Meta Quest Browser、Magic Leap Helio、S
 
 PlayCanvasの組み込みARサポートを使用する場合、シーンのプライマリカメラのクリアカラーは、次のように透明である必要があります。
 
-![Transparent Clear Color](/img/user-manual/xr/ar/transparent-clear-color.png)
+![Transparent Clear Color](pathname:///img/user-manual/xr/ar/transparent-clear-color.png)
 
 ARセッションを開始するには、まずデバイスのサポートと利用可能性も確認する必要があります。その後、ボタンのクリックやその他の入力などのユーザー操作によって、ARセッションを開始できます。
 

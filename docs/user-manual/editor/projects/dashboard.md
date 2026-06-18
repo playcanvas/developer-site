@@ -5,7 +5,7 @@ description: Tour of the project dashboard actions for editor launch dev log wat
 
 The Project Dashboard is the control center for your project, providing access to all major project functions and information.
 
-![Dashboard](/img/user-manual/editor/projects/project-dashboard.png)
+![Dashboard](pathname:///img/user-manual/editor/projects/project-dashboard.png)
 
 ## Dashboard Overview
 
@@ -22,7 +22,7 @@ From the Project Dashboard you can:
 
 The Dashboard Header provides quick access to common project actions:
 
-![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.png)
+![Dashboard Header](pathname:///img/user-manual/editor/projects/dashboard-header.png)
 
 ### EDITOR Button
 

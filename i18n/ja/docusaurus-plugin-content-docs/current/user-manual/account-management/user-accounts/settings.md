@@ -5,7 +5,7 @@ description: PlayCanvasのプロフィールを更新し、パスワードを変
 
 アカウント設定ページでは、基本的なプロフィール情報から請求およびセキュリティ設定まで、すべての個人アカウント構成オプションにアクセスできます。ユーザーアカウント設定を表示するには、[https://playcanvas.com/account](https://playcanvas.com/account)に移動します。次のようになります。
 
-![アカウント設定](/img/user-manual/account-management/user-accounts/account-settings.png)
+![アカウント設定](pathname:///img/user-manual/account-management/user-accounts/account-settings.png)
 
 ## プロフィール画像
 

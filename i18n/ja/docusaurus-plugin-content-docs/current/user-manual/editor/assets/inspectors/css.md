@@ -9,7 +9,7 @@ CSSアセットを編集するには、エディターで右クリックしてEd
 
 ## Inspector
 
-![CSS Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-css.png)
+![CSS Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-css.png)
 
 CSS アセットインスペクターは、アセットに含まれるCSSコードのプレビューを表示します。
 

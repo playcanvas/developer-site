@@ -17,7 +17,7 @@ This tutorial demonstrates how to create a simple leaderboard using the built-in
 
 This is what our UI looks like in the hierarchy:
 
-![Hierarchy](/img/tutorials/ui/leaderboard/hierarchy.png)
+![Hierarchy](pathname:///img/tutorials/ui/leaderboard/hierarchy.png)
 
 As you can see we have a 2D [Screen](/user-manual/user-interface/screens/), two Elements to show the title and sub title and two Image Elements which are going to be used as the backgrounds and panels for our leaderboard data. Under `Your Score` we are going to show the player's position in the leaderboard and under `Leaderboard` we will show the rest.
 
@@ -27,7 +27,7 @@ You will also notice a disabled Entity called `Entry Template`. This is a templa
 
 Our [screen](/user-manual/user-interface/screens/) is set up like so:
 
-![Screen](/img/tutorials/ui/leaderboard/screen.png)
+![Screen](pathname:///img/tutorials/ui/leaderboard/screen.png)
 
 Since it's a 2D screen we have ticked Screen Space. Our Reference Resolution is the resolution that we are targeting - in this case it's 1080 x 1920. We choose Blend for Scale Mode so that our Screen adapts to resolution changes and we set Scale Blend to 1 so that the Screen will adapt only to height changes.
 
@@ -41,17 +41,17 @@ For each panel we have an Image element that shows its background. Under the pan
 
 This is what our template for each leaderboard row looks like in the hierarchy:
 
-![Entry Template](/img/tutorials/ui/leaderboard/template.png)
+![Entry Template](pathname:///img/tutorials/ui/leaderboard/template.png)
 
 It has four child Text Elements for displaying the Position in the leaderboard, the name of the player, the player's score and a label that says 'PTS'.
 
 The `Entry Template` itself is a Group Element:
 
-![Entry Template Attributes](/img/tutorials/ui/leaderboard/group.png)
+![Entry Template Attributes](pathname:///img/tutorials/ui/leaderboard/group.png)
 
 Notice how the Group Element has split horizontal anchors:
 
-![Split Anchors](/img/tutorials/ui/leaderboard/split-anchors.png)
+![Split Anchors](pathname:///img/tutorials/ui/leaderboard/split-anchors.png)
 
 The horizontal anchors are not equal (they are 0 and 1) which means that the Element will expand automatically to fill the entire horizontal area if the Screen is resized. We also have a horizontal margin of 50 pixels to allow a small gap from the edges - the margin can only be set when anchors are split.
 
@@ -61,25 +61,25 @@ Now let's look at the rest of the Group's children.
 
 Position is anchored to the left:
 
-![Position](/img/tutorials/ui/leaderboard/position.png)
+![Position](pathname:///img/tutorials/ui/leaderboard/position.png)
 
 ### Name
 
 Name is anchored to the left and moved a bit to the right:
 
-![Name](/img/tutorials/ui/leaderboard/name.png)
+![Name](pathname:///img/tutorials/ui/leaderboard/name.png)
 
 ### Score
 
 Score is anchored to the right
 
-![Score](/img/tutorials/ui/leaderboard/score.png)
+![Score](pathname:///img/tutorials/ui/leaderboard/score.png)
 
 ### Points
 
 Points are anchored to the right
 
-![Pts](/img/tutorials/ui/leaderboard/pts.png)
+![Pts](pathname:///img/tutorials/ui/leaderboard/pts.png)
 
 ## Script
 

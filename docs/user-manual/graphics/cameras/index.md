@@ -33,7 +33,7 @@ camera.lookAt(0, 0, 0);
 
 New scenes are automatically populated with a camera entity. To create another, use the Entity menu, which creates an entity with a [Camera Component](/user-manual/editor/scenes/components/camera) in a single step:
 
-![Camera creation](/img/user-manual/graphics/cameras/camera-create.png)
+![Camera creation](pathname:///img/user-manual/graphics/cameras/camera-create.png)
 
 All camera properties can then be edited in the Inspector.
 

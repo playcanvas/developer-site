@@ -3,7 +3,7 @@ title: Runtime Lightmaps
 description: Bake HDR lightmaps at runtime, mix baked and dynamic lights, and configure lights for rebaking in your app.
 ---
 
-![Sponza](/img/user-manual/graphics/lighting/lightmapping/sponza.jpg)
+![Sponza](pathname:///img/user-manual/graphics/lighting/lightmapping/sponza.jpg)
 *All the lighting in this scene is provided by lightmap textures*
 
 Lightmap generation is the process of pre-calculating lighting information for a static scene and storing it in textures, which are then applied on materials. This is an efficient and realistic way to light a scene if many of the light sources and geometry are static or environmental.
@@ -37,7 +37,7 @@ Each Light Component contains the following settings to enable lightmap baking. 
 - **Bake Lightmap** – When enabled, the light will bake lightmaps for any lightmapped model that is in range.
 - **Bake Direction** – Specifies whether light contributes to light direction information baking. This affects specularity results if the **Color and Direction** Lightmapping Mode is chosen in Scene Setting.
 
-![Light Component Settings](/img/user-manual/graphics/lighting/lightmapping/editor-lightmap-bake.png)
+![Light Component Settings](pathname:///img/user-manual/graphics/lighting/lightmapping/editor-lightmap-bake.png)
 
 There are two other options that modify the lights behavior: Affect Dynamic and Affect Lightmapped. These determine which models the light will affect at runtime. If either of these options are enabled, the light will operate at runtime and incur runtime cost.
 
@@ -46,7 +46,7 @@ There are two other options that modify the lights behavior: Affect Dynamic and 
 
 Note that a light can't have both **Bake Lightmap** and **Affect Lightmapped** enabled, as this would generate a lightmap for a model while the light adds the same lighting at runtime (i.e. the same work is done twice).
 
-![Light Component Shadow Settings](/img/user-manual/graphics/lighting/lightmapping/editor-light-shadows.png)
+![Light Component Shadow Settings](pathname:///img/user-manual/graphics/lighting/lightmapping/editor-light-shadows.png)
 
 Lightmap lights use the same **Shadows** setting as dynamic lights, except the shadow calculations are done once, when generating the lightmaps. This way, it is much cheaper to enable shadows on lightmap lights. For more information, see the [Shadows](/user-manual/graphics/lighting/shadows) page. Note that the Shadow Cascade options are ignored for baking.
 
@@ -57,11 +57,11 @@ By default, baked lights cast hard shadows. To improve the visual quality, a sof
 - **Bake Samples** – Specifies the number of samples used to bake the light into the lightmap. It defaults to 1 and has a maximum value of 255. The value affects the baking performance and should be set as low as possible (5-20).
 - **Bake Area** – Specifies the penumbra angle in degrees, allowing a soft shadow boundary.
 
-![Soft Directional Light Settings](/img/user-manual/graphics/lighting/lightmapping/editor-directional-light.png)
+![Soft Directional Light Settings](pathname:///img/user-manual/graphics/lighting/lightmapping/editor-directional-light.png)
 
 The following images show the difference between hard shadows and soft shadows. The Bake Samples is 15 and the Area is 10.
 
-![Hard and Soft Shadow Examples](/img/user-manual/graphics/lighting/lightmapping/shadows-hard-soft.png)
+![Hard and Soft Shadow Examples](pathname:///img/user-manual/graphics/lighting/lightmapping/shadows-hard-soft.png)
 
 ## Baking an Environment Light {#baking-an-environment-light}
 
@@ -71,25 +71,25 @@ A limitation of runtime environment light application is the lack of **Ambient O
 
 If **Ambient Bake** is enabled, the contribution of the environment light will be baked to the lightmaps, including this Ambient Occlusion. Note that the **Samples** setting affects the baking performance and should be set as low as possible (5-20).
 
-![Lightmapping Settings](/img/user-manual/graphics/lighting/lightmapping/lightmapping-settings-ambient-bake.png)
+![Lightmapping Settings](pathname:///img/user-manual/graphics/lighting/lightmapping/lightmapping-settings-ambient-bake.png)
 
 The following images show the effect of Ambient Color, with and without the Ambient Occlusion.
 
-![Ambient Color Examples](/img/user-manual/graphics/lighting/lightmapping/ambient-color.png)
+![Ambient Color Examples](pathname:///img/user-manual/graphics/lighting/lightmapping/ambient-color.png)
 
 ## Lightmap Filtering {#lightmap-filtering}
 
 For Soft Directional Light or Environment Light baking, a low number of samples is often used in order to improve the baking performance. This creates some banding artifacts, as you can see in the following image, which uses 15 samples.
 
-![Lightmap with 15 samples](/img/user-manual/graphics/lighting/lightmapping/lightmap-15-samples.png)
+![Lightmap with 15 samples](pathname:///img/user-manual/graphics/lighting/lightmapping/lightmap-15-samples.png)
 
 To improve the quality of lightmaps, a higher number of samples can be used. This results in the best quality possible, as you can see in the following image, which uses 100 samples.
 
-![Lightmap with 100 samples](/img/user-manual/graphics/lighting/lightmapping/lightmap-100-samples.png)
+![Lightmap with 100 samples](pathname:///img/user-manual/graphics/lighting/lightmapping/lightmap-100-samples.png)
 
 As a more performant alternative, the lightmap can be filtered using a smart bilateral blur for acceptable quality with greater performance. This can be seen in the following image, which uses 15 samples and has filtering enabled.
 
-![Lightmap with 15 samples and filtering](/img/user-manual/graphics/lighting/lightmapping/lightmap-filtering.png)
+![Lightmap with 15 samples and filtering](pathname:///img/user-manual/graphics/lighting/lightmapping/lightmap-filtering.png)
 
 Note that the filtering is done on the final baked lightmaps and can create some visible edges over the seams of unwrapped UVs, since the lightmap is not filtered across the seams. Therefore, filtering may not be suitable for every scene. To minimize the artifacts, you should have a good balance between a strong filter and a large number of samples.
 
@@ -97,9 +97,9 @@ Note that the filtering is done on the final baked lightmaps and can create some
 
 Each **Model** or **Render** component must have lightmapping enabled, in order for it to receive lightmaps. Lightmapping can be enabled in the component's properties, by checking the **Lightmapped** option.
 
-![Model Component Settings](/img/user-manual/graphics/lighting/lightmapping/model-settings.png)
+![Model Component Settings](pathname:///img/user-manual/graphics/lighting/lightmapping/model-settings.png)
 
-![Render Component Settings](/img/user-manual/graphics/lighting/lightmapping/render-settings.png)
+![Render Component Settings](pathname:///img/user-manual/graphics/lighting/lightmapping/render-settings.png)
 
 The **Cast Lightmap Shadows** option determines if the model casts shadows in the lightmap. You can see the resolution of the lightmap texture generated and there is also an option to apply a multiplier to the area of UV1 to affect its size. Lightmap size multipliers are discussed below.
 
@@ -124,7 +124,7 @@ For example, consider a plane that is 1x1 unit (meter) in size. If the Global Si
 
 **Mode** allows you to specify what data should be baked (e.g. Diffuse Color or Direction from pixel to light). Direction data is used to simulate simplistic specularity. Only a single direction can be baked, which leads to complexity when multiple lights overlap. Direction baking can be then set on individual lights as well.
 
-![Global Lightmapping Settings](/img/user-manual/graphics/lighting/lightmapping/lightmapping-settings.png)
+![Global Lightmapping Settings](pathname:///img/user-manual/graphics/lighting/lightmapping/lightmapping-settings.png)
 
 ## Auto-Unwrapping and UV1 Generation {#auto-unwrapping-and-uv1-generation}
 
@@ -132,11 +132,11 @@ Lightmaps are always applied using the second set of **UV coordinates (UV1)** on
 
 If your model doesn't have a UV1 set, the PlayCanvas Editor can automatically unwrap and generate UV1 co-ordinates for the model.
 
-![Model Component: UV1 Missing](/img/user-manual/graphics/lighting/lightmapping/model-uv1-missing.png)
+![Model Component: UV1 Missing](pathname:///img/user-manual/graphics/lighting/lightmapping/model-uv1-missing.png)
 
 If your model is missing a UV1 map, you will see a warning in the Model Component when you enable lightmapping.
 
-![Model Asset: Auto Unwrap Pipeline](/img/user-manual/graphics/lighting/lightmapping/auto-unwrap.jpg)
+![Model Asset: Auto Unwrap Pipeline](pathname:///img/user-manual/graphics/lighting/lightmapping/auto-unwrap.jpg)
 
 To fix the warning, select the model asset and open the **Pipeline** section. Click the **Auto-Unwrap** button and wait for the progress bar to complete. Auto-unwrap will edit the model asset, so if you re-import the model from the source (e.g. upload a new FBX) the precomputed UV1 will be lost. If the uploaded model has no UV1, you will need to auto-unwrap the model again.
 

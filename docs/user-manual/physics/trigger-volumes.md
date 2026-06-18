@@ -7,7 +7,7 @@ Trigger volumes are static collision shapes which can fire events whenever a rig
 
 To create a trigger volume, add a [collision component](/user-manual/editor/scenes/components/collision) to an entity and configure its shape. Do not add a rigidbody component to your trigger volume entity.
 
-![Trigger Volume](/img/user-manual/physics/trigger-volume.png)
+![Trigger Volume](pathname:///img/user-manual/physics/trigger-volume.png)
 
 To check whether a volume has been entered or exited by a rigid body based entity, you need a simple script:
 

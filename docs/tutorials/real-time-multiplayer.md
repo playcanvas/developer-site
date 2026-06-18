@@ -55,11 +55,11 @@ server.listen(PORT, () => {
 
 Glitch will automatically re-run the server every time you finish typing. Once you’ve copied this, you should get an error. Click on the `Logs` button at the bottom of the window to open up the server console. Here you can see any server output, as well as the errors. You should see `Error: Cannot find module 'socket.io'`.
 
-![Opening the log](/img/tutorials/multiplayer/glitch-error.png)
+![Opening the log](pathname:///img/tutorials/multiplayer/glitch-error.png)
 
 To include a package, go to `package.json` and click on the `Add Package` button on the top. Search for `socket.io`.
 
-![Adding a package](/img/tutorials/multiplayer/glitch-add-package.png)
+![Adding a package](pathname:///img/tutorials/multiplayer/glitch-add-package.png)
 
 Once `socket.io` has finished installing, the server will automatically restart and you should see `Server started on port 3000` in the log. Congratulations! You've successfully deployed a server!
 
@@ -71,15 +71,15 @@ This server will simply log a message every time someone connects. This should b
 
 Create a new project on PlayCanvas. We first need to include the Socket.io client JS library, as an external script. To do this. go to your project settings:
 
-![Project settings](/img/tutorials/multiplayer/project-settings.png)
+![Project settings](pathname:///img/tutorials/multiplayer/project-settings.png)
 
 Find and open 'External Scripts'.
 
-![External scripts settings](/img/tutorials/multiplayer/external_scripts_settings.png)
+![External scripts settings](pathname:///img/tutorials/multiplayer/external_scripts_settings.png)
 
 Change the value from 0 to 1 and add the CDN URL for the socket library from their [framework server](https://cdnjs.com/libraries/socket.io). In this case, we will be using version `4.8.1` as that is the latest at time of writing:
 
-![Project settings](/img/tutorials/multiplayer/added_socket_io_library.png)
+![Project settings](pathname:///img/tutorials/multiplayer/added_socket_io_library.png)
 
 ```none
 https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js

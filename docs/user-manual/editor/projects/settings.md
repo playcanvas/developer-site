@@ -5,7 +5,7 @@ description: Adjusts branding artwork visibility descriptions domains and other 
 
 The Project Settings allow you to configure various aspects of your project including basic information, privacy settings, and branding options.
 
-![Project Settings](/img/user-manual/editor/projects/project-settings.png)
+![Project Settings](pathname:///img/user-manual/editor/projects/project-settings.png)
 
 ## Accessing Project Settings
 
@@ -19,7 +19,7 @@ To access your project settings:
 ### Game Artwork
 
 <!--
-![Project Image Setting](/img/user-manual/dashboard/project-image.png)
+![Project Image Setting](pathname:///img/user-manual/dashboard/project-image.png)
 -->
 
 Assign a square 720x720 pixel image to represent your project. This image is used for:

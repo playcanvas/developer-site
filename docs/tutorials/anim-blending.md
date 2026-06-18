@@ -26,33 +26,33 @@ In order to add animations to a model, we must first create an animstategraph as
 
 When creating an animstategraph asset, you’ll be presented with its editor:
 
-![Initial Editor](/img/tutorials/anim_blending/initial_editor.png)
+![Initial Editor](pathname:///img/tutorials/anim_blending/initial_editor.png)
 
 By default, the animstategraph asset creates a single animation state called ‘Initial State’ which has a default transition from the START state to it. This means when the animstategraph first begins playing, it’ll immediately begin playing the Initial State. This can be renamed to Idle which is the name of the initial animation used in this tutorial. We can then right click the canvas and select `Add new state` to create another animation state in the graph. This state can be renamed to Punch:
 
-![New State](/img/tutorials/anim_blending/new_state.gif)
+![New State](pathname:///img/tutorials/anim_blending/new_state.gif)
 
 Next we must tell the state graph how and when it should move between the Idle and Punch animation states. This is achieved by creating transitions. Right click the Idle animation and select `Add transition` from the context menu, then select the Punch animation state. This will create a transition moving from the Idle state to the Punch state.
 
-![Add Transition](/img/tutorials/anim_blending/add_transition.gif)
+![Add Transition](pathname:///img/tutorials/anim_blending/add_transition.gif)
 
 Selecting this transition will show the transition inspector in the panel to the right. Here the duration of the transition can be set, which will determine how long the blend between the two animations should last. We’ll set this to 0.2 seconds.
 
 Next, we can set up a parameter which will determine when this transition can activate. First select the `+ parameter` on the parameters panel to the left. Then name this parameter `punch` and set it to the ‘Boolean’ type.
 
-![Add Parameter](/img/tutorials/anim_blending/add_parameter.png)
+![Add Parameter](pathname:///img/tutorials/anim_blending/add_parameter.png)
 
 This parameter can now be set as a condition for the transition we just created. Select this transition then select `New Condition` in the transition inspector.
 
 Set this transition to test against the newly created `punch` parameter and set the condition to ‘== true’ as follows:
 
-![Add Condition](/img/tutorials/anim_blending/add_condition.png)
+![Add Condition](pathname:///img/tutorials/anim_blending/add_condition.png)
 
 This will ensure that the transition from the Idle state to the Punch state only occurs once the punch parameter has been set to true.
 
 Lastly, we need to create one more transition moving back from Punch to Idle as follows:
 
-![Complete State Graph](/img/tutorials/anim_blending/complete_state_graph.png)
+![Complete State Graph](pathname:///img/tutorials/anim_blending/complete_state_graph.png)
 
 Here we have set it up with the same duration but its condition tests whether the punch parameter is no longer true.
 
@@ -62,17 +62,17 @@ Now with this complete animstategraph, we must connect it to animation assets an
 
 First, we must add the anim component to our chosen entity.
 
-![New Anim Component](/img/tutorials/anim_blending/new_anim_component.png)
+![New Anim Component](pathname:///img/tutorials/anim_blending/new_anim_component.png)
 
 Once created it’ll display a slot for the animstategraph asset we just created. Drag this in and it’ll display animation slots for each of the animation states present in it. In this case it’ll have slots for the Idle and Punch states. Fill these slots with the appropriate animation assets and the anim component will become playable:
 
-![Complete Anim Component](/img/tutorials/anim_blending/complete_anim_component.png)
+![Complete Anim Component](pathname:///img/tutorials/anim_blending/complete_anim_component.png)
 
 ## Keyboard Input
 
 With the animations fully set up, we now need to make it possible for users to interact with our system. This is where scripts come in! A script component is required to enable this behavior which will be written in the script `keyboard_controls.js`. You can see how it’s attached to the entity below:
 
-![Keyboard Input](/img/tutorials/anim_blending/keyboard_input.png)
+![Keyboard Input](pathname:///img/tutorials/anim_blending/keyboard_input.png)
 
 Remember that parameter `punch` that we set up before? This script will simply toggle that parameter on and off depending on whether the ‘P’ key is currently pressed and whether the character is currently punching:
 

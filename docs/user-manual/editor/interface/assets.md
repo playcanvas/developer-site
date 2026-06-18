@@ -5,7 +5,7 @@ description: Assets panel guide to folders search filters drag-and-drop cross-pr
 
 The Assets Panel manages all of the Assets that are available in your project. From here, you can create, upload, delete, inspect and edit any Asset.
 
-![Assets Panel](/img/user-manual/editor/assets-panel.png)
+![Assets Panel](pathname:///img/user-manual/editor/assets-panel.png)
 
 The Assets Panel provides powerful features for organizing and managing your project's assets, including:
 

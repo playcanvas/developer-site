@@ -5,7 +5,7 @@ description: Enable element input, initialize ElementInput with the app, and han
 
 The user can interact with [Element](/user-manual/editor/scenes/components/element/) components, by enabling the `useInput` field on the Element component:
 
-![Use Input](/img/user-manual/assets/fonts/use-input.png)
+![Use Input](pathname:///img/user-manual/assets/fonts/use-input.png)
 
 Also in order for that to work there must be an initialized instance of `pc.ElementInput` for `pc.Application#elementInput`. This is created automatically for you if you are using the Editor. If you are using the Engine only make sure to create an instance *before* the other input devices like `pc.Mouse` or `pc.TouchDevice` like so:
 

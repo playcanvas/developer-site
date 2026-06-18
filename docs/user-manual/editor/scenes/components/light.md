@@ -7,15 +7,15 @@ The Light Component attaches a dynamic light source to the Entity. The 'Type' pr
 
 #### Directional
 
-![Light Component (Directional)](/img/user-manual/editor/scenes/components/component-light-directional.png)
+![Light Component (Directional)](pathname:///img/user-manual/editor/scenes/components/component-light-directional.png)
 
 #### Omni
 
-![Light Component (Omni)](/img/user-manual/editor/scenes/components/component-light-omni.png)
+![Light Component (Omni)](pathname:///img/user-manual/editor/scenes/components/component-light-omni.png)
 
 #### Spot
 
-![Light Component (Spot)](/img/user-manual/editor/scenes/components/component-light-spot.png)
+![Light Component (Spot)](pathname:///img/user-manual/editor/scenes/components/component-light-spot.png)
 
 ## Properties
 

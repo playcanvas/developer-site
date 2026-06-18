@@ -38,7 +38,7 @@ this.entity.sound.play("bounce");
 
 ### Particles
 
-![Particles](/img/tutorials/beginner/keepyup-part-five/particle-bounce.gif)
+![Particles](pathname:///img/tutorials/beginner/keepyup-part-five/particle-bounce.gif)
 
 We have one particle effect in Keepy Up. It's a dust cloud that is triggered whenever the ball is tapped. The dust cloud is a non-looping effect and it needs to be positioned and rotated so that the cloud moves away from the ball when it runs.
 
@@ -51,7 +51,7 @@ this.impactEffect.lookAt(this.entity.getPosition());
 
 In this code we restart the one shot particle effect by calling `reset()` and `play()` and we position and rotate it so that it points towards the center of the ball.
 
-![Curves](/img/tutorials/beginner/keepyup-part-five/particle-velocity-curves.jpg)
+![Curves](pathname:///img/tutorials/beginner/keepyup-part-five/particle-velocity-curves.jpg)
 
 Using the Local Velocity graph in the Particle Effect editor, the particle effect is set up to fire away from the direction it is facing i.e. the particles move along the positive z axis.
 
