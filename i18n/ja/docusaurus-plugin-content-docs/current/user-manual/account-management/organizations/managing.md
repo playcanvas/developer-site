@@ -1,40 +1,50 @@
 ---
 title: Organizationの管理
-description: Organizationの権限を設定し、シート割り当てを管理し、オーナーと管理者のロールを扱います。
+description: Organizationのロールと権限の管理、シートの割り当て、プロジェクトへの管理者の追加、Organizationの削除について説明します。
 ---
 
-### 権限 (Permissions) {#permissions}
+Organizationは、そのアカウントページから管理します。このページでは、オーナーと管理者がロール、シート、プロジェクト、そして必要に応じてOrganizationの削除を扱います。
 
-Organizationのアカウントページから、Organizationの権限を管理することができます。
+## ロールと権限 {#permissions}
 
 ![permissions](/img/user-manual/account-management/organizations/managing/permissions.png)
 
-Organizationのオーナー (Owner) および管理者を確認することができます。他のユーザーに所有権を移譲したり、管理者を追加/削除することができます。
+アカウントページには、Organizationの**オーナー (Owner)**と**管理者 (Admin)**が表示されます。ここから、オーナーは他のユーザーに所有権を移譲したり、管理者を追加・削除したりできます。
 
-管理者 (Admin) は、オーナーができることすべて、たとえばプロジェクトの作成や削除をすることができますが、Organizationの削除だけはできません。
+管理者は、プロジェクトの作成や削除を含め、オーナーができることをすべて行えますが、Organization自体を削除することだけはできません。これはオーナーのみが行えます。
 
-### シート (Seats) {#seats}
+## シート (Seats) {#seats}
 
-ユーザー (User) にシートを与えるには、Organizationが所有する任意のプライベートプロジェクトにユーザーを追加します。パブリックプロジェクトはシートを必要としません。
+**シート**は、Organizationの**プライベート**プロジェクトにユーザーを追加すると消費されます。パブリックプロジェクトはシートを必要としないため、無制限のパブリック共同作業者を無料で持てます。
 
 ![seats](/img/user-manual/account-management/organizations/managing/seats.png)
 
-ここから、プライベートプロジェクトにアクセスできるユーザーと利用可能なシートを確認できます。ここから、ユーザーを削除して、すべてのプロジェクトから削除し、シートを空けることができます。
+このビューには、プライベートプロジェクトにアクセスできるすべてのユーザーと、占有しているシートが一覧表示されます。ここでユーザーを削除すると、そのユーザーはOrganizationのすべてのプロジェクトから削除され、シートが空きます。
 
-Organizationのオーナーは、いかなるプロジェクトにもアクセスしない場合、シートを占有する必要はありません。Organizationの管理者の一人が少なくとも一つのシートを占有していて、新しいプロジェクトを作成し、既存のプロジェクトを管理できるようにすることが望ましいです。
+オーナーは、プロジェクトで実際に作業していない場合、シートを占有する必要はありません。少なくとも一人の管理者にシートを割り当て、常に誰かがプロジェクトを作成・管理できるようにすることをおすすめします。
+
+### シートの追加と削除
 
 ![upgrade](/img/user-manual/account-management/organizations/managing/upgrade.png)
 
-ここでは、Organizationのシートの数を増減することができます。このビューは、Organizationプランに登録した場合に利用可能です。
+Organizationプランに登録している場合は、いつでもシート数を増減できます。シートの変更は次回の請求日に日割りで精算されます。請求に関するFAQの[計算例](/user-manual/account-management/billing/#how-is-billing-for-organization-accounts-calculated)をご覧ください。
 
-![delete](/img/user-manual/account-management/organizations/managing/delete.png)
+## プロジェクト {#projects}
 
-Organizationのオーナーはここから、Organizationを完全に削除することができます。これにより、アカウントおよびすべてのプロジェクトが完全に削除されます。この操作は取り消すことはできません。
-
-### プロジェクト {#projects}
-
-Organizationの管理者は、Organizationが所有する任意のプロジェクトに自分自身を追加することができます。アカウントページで、右側のドロップダウンアイコンをクリックし、 'Add me as admin' をクリックします。
+管理者は、Organizationが所有する任意のプロジェクトに自分自身を追加できます。アカウントページで、プロジェクトの右側にあるドロップダウンの矢印をクリックし、**Add me as admin** を選択します:
 
 ![add to project](/img/user-manual/account-management/organizations/managing/add-to-project.png)
 
-ここから、他のユーザーを通常通りプロジェクトに追加することができます。
+ここから、他のユーザーを通常通りプロジェクトに追加できます。
+
+## Organizationの削除 {#delete}
+
+![delete](/img/user-manual/account-management/organizations/managing/delete.png)
+
+Organizationを削除できるのはオーナーのみで、アカウントページから行います。
+
+:::danger
+
+Organizationを削除すると、アカウントと**すべての**プロジェクトが完全に消去されます。この操作は取り消せません。
+
+:::

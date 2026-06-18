@@ -1,40 +1,50 @@
 ---
 title: Managing Organizations
-description: Configure Organization permissions, manage seat allocation, and handle owner and administrator roles.
+description: Manage an Organization's roles and permissions, allocate seats, add administrators to projects, and delete an Organization.
 ---
 
-### Permissions {#permissions}
+You manage an Organization from its account page. This is where the owner and administrators handle roles, seats, projects, and — if necessary — deleting the Organization.
 
-You can manage permissions of your Organization from its account page.
+## Roles and permissions {#permissions}
 
 ![permissions](/img/user-manual/account-management/organizations/managing/permissions.png)
 
-Here you can see who is the Owner and the Administrators of the Organization. You can transfer ownership to a different user and add or remove Administrators.
+The account page shows the Organization's **owner** and its **administrators**. From here, the owner can transfer ownership to another user and add or remove administrators.
 
-Administrators can do everything the owner can do e.g. create and delete projects, except delete the Organization.
+Administrators can do everything the owner can — including creating and deleting projects — *except* delete the Organization itself. Only the owner can do that.
 
-### Seats {#seats}
+## Seats {#seats}
 
-To give a user a seat, add them to any private project that is owned by the organization. Public projects do not require seats.
+A **seat** is consumed when you add a user to one of the Organization's **private** projects. Public projects don't require seats, so you can have unlimited public collaborators at no cost.
 
 ![seats](/img/user-manual/account-management/organizations/managing/seats.png)
 
-You can see which users have access to your private projects and occupy your available seats. From here you can remove users which will remove them from all your projects, freeing up seats.
+This view lists every user with access to your private projects and the seats they occupy. Removing a user here removes them from all of the Organization's projects and frees up their seat.
 
-The Owner of the organization does not need to occupy a seat if they are not actively working on any projects. It is recommended to have at least one user who will occupy a seat, to be an Admin of the Organization so that they can create new projects and manage existing projects.
+The owner doesn't need to occupy a seat if they aren't actively working on projects. We recommend giving a seat to at least one administrator, so that someone can always create and manage projects.
+
+### Adding and removing seats
 
 ![upgrade](/img/user-manual/account-management/organizations/managing/upgrade.png)
 
-Here you can increase or decrease the number of seats for your Organization. This view is available if you have subscribed for an Organization plan.
+If you're subscribed to the Organization plan, you can increase or decrease the number of seats at any time. Seat changes are prorated on your next billing date — see the [worked example](/user-manual/account-management/billing/#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ.
 
-![delete](/img/user-manual/account-management/organizations/managing/delete.png)
+## Projects {#projects}
 
-The Owner of the Organization can delete the Organization from here. This will completely erase the account and all its projects. This action cannot be reversed.
-
-### Projects {#projects}
-
-Administrators of the organization can add themselves to any project owned by the organization. On the account page, click on the drop down arrow on the right and then click on 'Add me as admin'.
+Administrators can add themselves to any project the Organization owns. On the account page, click the dropdown arrow to the right of a project and choose **Add me as admin**:
 
 ![add to project](/img/user-manual/account-management/organizations/managing/add-to-project.png)
 
-From here, you can add other users to the project as usual.
+From there, you can add other users to the project as usual.
+
+## Deleting an Organization {#delete}
+
+![delete](/img/user-manual/account-management/organizations/managing/delete.png)
+
+Only the owner can delete the Organization, from its account page.
+
+:::danger
+
+Deleting an Organization permanently erases the account and **all** of its projects. This action cannot be undone.
+
+:::
