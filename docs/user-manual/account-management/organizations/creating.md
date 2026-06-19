@@ -1,53 +1,53 @@
 ---
 title: Creating Organizations
-description: Step-by-step guide to creating a new PlayCanvas Organization from the dashboard or your profile.
+description: How to create a PlayCanvas Organization from your profile, transfer existing projects into it, or convert a user account into an Organization.
 ---
 
-There are various ways to create an Organization. Any organizations you are part of will appear next to your name on your profile like so:
+There are two ways to create an Organization. Any Organizations you belong to appear next to your name on your profile:
 
 ![Profile Organizations](pathname:///img/user-manual/account-management/organizations/creating/organizations.jpg)
 
-### Create from the dropdown menu
+## Create a new Organization
 
-The first way is to click on NEW ORGANIZATION in the top-right dropdown menu:
+Open the dropdown menu in the top-right corner and click **NEW ORGANIZATION**:
 
 ![Dropdown](pathname:///img/user-manual/account-management/organizations/creating/dropdown.png)
 
-This will bring up the following popup:
+This opens the following dialog:
 
 ![New Organization](pathname:///img/user-manual/account-management/organizations/creating/new-organization.jpg)
 
-Enter the name for the Organization and an Organization ID which is a string with only alphanumeric characters and dashes allowed. The default e-mail address is your own but you can change it to a different one.
+Enter a **name** for the Organization and an **Organization ID** (a string containing only alphanumeric characters and dashes). The email address defaults to your own, but you can change it. Click **CREATE** to finish — you'll be taken to the Organization's profile page.
 
-Click CREATE and that will take you to the profile page of the Organization.
+### Transfer existing projects into the Organization
 
-If you have existing projects (such as private projects on a Personal plan), you can transfer them to the Organization account by the following steps:
+If you already have projects — for example, private projects on a Personal plan — you can move them into the new Organization:
 
-* On your user account, [transfer all projects ownership](/user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers) to the Organization account.
-* On the Organization account, accept the project transfer requirements.
-* Cancel the Personal Plan (if you are on one) to downgrade to the Free plan. Please note, this will happen immediately, regardless of when you last paid.
-* [Add yourself to the projects as Admin](/user-manual/account-management/organizations/managing/#projects) on the Organization account.
+1. From your user account, [transfer ownership of the projects](/user-manual/editor/projects/ownership-transfers#initiating-ownership-transfers) to the Organization.
+2. From the Organization account, accept the transfer.
+3. If you're on a Personal plan, cancel it to downgrade to Free. This takes effect immediately, regardless of when you last paid.
+4. [Add yourself to the projects as an administrator](/user-manual/account-management/organizations/managing/#projects) of the Organization.
 
-All the projects will now be under the Organization account with your user account as Admin for the projects.
+Your projects are now owned by the Organization, with your user account as an administrator on each.
 
-### Convert a user account into an Organization
+## Convert a user account into an Organization
 
-Another way to create an Organization is to convert your user account. You can do this by clicking CONVERT in your [account](/user-manual/account-management/user-accounts/settings/#convert-account-to-organization) page.
+Alternatively, you can convert an existing user account into an Organization. Click **CONVERT** on your [account settings](/user-manual/account-management/user-accounts/settings/#convert-account-to-organization) page:
 
 ![Convert Organization](pathname:///img/user-manual/account-management/organizations/creating/convert.png)
 
-This will bring up the following popup:
+This opens the following dialog:
 
 ![Convert Popup](pathname:///img/user-manual/account-management/organizations/creating/convert-popup.png)
 
-Converting your user account into an Organization will mean that you will no longer be able to log in with this user account. For that reason you need to specify an owner for the new Organization.
+Because you can't log in *as* an Organization, converting an account means you'll no longer be able to log in with it. You must therefore nominate another user as the new **owner**.
 
 :::warning
 
-Make sure you can log in with the new owner's account.
+Make sure you can log in with the new owner's account before you convert.
 
 :::
 
-If you have subscribed for a paid plan, that plan will be cancelled unless you choose to subscribe to an Organization plan which is offered in the popup. The number of seats to purchase will be calculated for you automatically based on the number of users in your existing private projects.
+If the account is on a paid plan, that plan is cancelled unless you choose to subscribe to an Organization plan in the dialog. The number of seats to purchase is calculated automatically from the number of users across your existing private projects.
 
-After you convert your account, you will be logged out. Then log back in with the new owner's account and you will be able to access the converted account and all its projects.
+After converting, you'll be logged out. Log back in with the new owner's account to access the Organization and all its projects.
