@@ -5,7 +5,7 @@ description: Posts project updates previews publishing gating and discoverabilit
 
 Development Logs (or Dev Logs for short) are a powerful feature for communicating project updates, milestones, and news with your team and community. They help track progress and keep stakeholders informed about your project's development.
 
-![Dev Log](pathname:///img/user-manual/editor/projects/dev-log.png)
+![Dev Log](/img/user-manual/editor/projects/dev-log.png)
 
 ## Understanding Dev Logs
 

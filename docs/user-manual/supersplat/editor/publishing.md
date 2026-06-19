@@ -13,7 +13,7 @@ You can also publish without using the Editor. Hit the orange **Upload Splat** b
 
 To self-host your own copy of the published viewer instead of (or in addition to) publishing to superspl.at, see [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting).
 
-![SuperSplat Website](pathname:///img/user-manual/supersplat/editor/supersplat-website.png)
+![SuperSplat Website](/img/user-manual/supersplat/editor/supersplat-website.png)
 
 ## Ensuring you are Logged In
 
@@ -29,7 +29,7 @@ To publish your splat:
 2. Select `Publish`.
 3. Fill out the options in the Publish dialog:
 
-   ![Publish Settings](pathname:///img/user-manual/supersplat/editor/publish-settings.png)
+   ![Publish Settings](/img/user-manual/supersplat/editor/publish-settings.png)
 
    | Option | Description |
    |--------|-------------|

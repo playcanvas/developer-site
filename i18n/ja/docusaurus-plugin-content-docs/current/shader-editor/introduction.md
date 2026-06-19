@@ -14,11 +14,11 @@ __シェーダーエディター__ では、直接シェーダープログラム
 
 たとえば、次のエフェクトでは、複数のサーフェスノーマルマップをアニメーション化し、それらを特殊効果の照明と組み合わせます:
 
-![sample effect](pathname:///img/shader-editor/sample-effect.gif)
+![sample effect](/img/shader-editor/sample-effect.gif)
 
 このエフェクトは、以下のグラフを含むいくつかのグラフで構成されています。このグラフは、ノーマルマップのノーマルを展開する役割を担っています:
 
-![sample graph](pathname:///img/shader-editor/sample-graph.png)
+![sample graph](/img/shader-editor/sample-graph.png)
 
 __シェーダーエディター__ は、このグラフをランタイムでGPU上で実行されるシェーダープログラムに変換します。
 

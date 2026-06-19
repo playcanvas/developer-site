@@ -16,14 +16,14 @@ Note that it is not valid (or possible) to connect Sub Graphs together in way th
 
 For example, this is a simple Sub Graph which adds two floats together:
 
-![Sub Graph Example](pathname:///img/shader-editor/overview-graph-sub-graph.png)
+![Sub Graph Example](/img/shader-editor/overview-graph-sub-graph.png)
 
 If this Sub Graph were named "adder" it would appear in the Assets Pane as follows:
 
-![Sub Graph Icon](pathname:///img/shader-editor/overview-graph-sub-graph-icon.png)
+![Sub Graph Icon](/img/shader-editor/overview-graph-sub-graph-icon.png)
 
 The adder Sub Graph can then be placed as a node itself in another graph:
 
-![Place Sub Graph](pathname:///img/shader-editor/overview-graph-place-sub-graph.gif)
+![Place Sub Graph](/img/shader-editor/overview-graph-place-sub-graph.gif)
 
 For more information on how to edit graphs see the [Graph Editor](/shader-editor/window-layout/graph-editor) documentation.

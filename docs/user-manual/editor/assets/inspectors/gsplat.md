@@ -13,7 +13,7 @@ The [SOG format](/user-manual/gaussian-splatting/formats/sog) is recommended for
 
 You can select a GSplat asset in the [Assets Panel](/user-manual/editor/interface/assets) and view it in the [Inspector](/user-manual/editor/interface/inspector).
 
-![GSplat Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-gsplat.png)
+![GSplat Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-gsplat.png)
 
 ## Properties
 

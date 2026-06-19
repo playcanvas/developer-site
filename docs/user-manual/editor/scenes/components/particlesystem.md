@@ -5,7 +5,7 @@ description: PlayCanvas Particle System component emits 3D particles with rates,
 
 The Particle System Component specifies a particle emitter in 3D space.
 
-![Particle System Component](pathname:///img/user-manual/editor/scenes/components/component-particlesystem.png)
+![Particle System Component](/img/user-manual/editor/scenes/components/component-particlesystem.png)
 
 ## Properties
 

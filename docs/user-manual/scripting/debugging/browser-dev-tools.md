@@ -11,11 +11,11 @@ Chrome, Firefox and other browsers have Developer Tools integrated directly into
 
 In order to debug your scripts, select the Sources tab in Developer Tools (Chrome). Open the 'navigator' by clicking the icon in the top left corner of the Sources pane. You should see something similar to what is shown below:
 
-![Debugger](pathname:///img/user-manual/scripting/debugging/chrome-debugger.png)
+![Debugger](/img/user-manual/scripting/debugging/chrome-debugger.png)
 
 In Firefox it looks like this:
 
-![Firefox](pathname:///img/user-manual/scripting/debugging/firefox-debugger.png)
+![Firefox](/img/user-manual/scripting/debugging/firefox-debugger.png)
 
 The navigator lists all of the scripts currently running in the active tab, including any PlayCanvas scripts that you have written. Find one of your scripts in the navigator and select it to open the source code. You are now able to set breakpoints and debug.
 

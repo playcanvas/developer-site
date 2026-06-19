@@ -5,7 +5,7 @@ description: "SPLAT DATA panel: histograms and statistics for splat attributes, 
 
 The SPLAT DATA panel provides statistical visualization and analysis tools for understanding the distribution of data properties across your Gaussian splats. It displays an interactive histogram that allows you to view and select splats based on their attribute values.
 
-![SPLAT DATA Panel](pathname:///img/user-manual/supersplat/editor/data-panel.png)
+![SPLAT DATA Panel](/img/user-manual/supersplat/editor/data-panel.png)
 
 ## Overview
 

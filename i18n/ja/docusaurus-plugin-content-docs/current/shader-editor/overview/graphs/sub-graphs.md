@@ -16,14 +16,14 @@ description: 再利用可能なシェーダー機能のための Sub graph。入
 
 たとえば、これは 2つの float を加算する簡単なサブグラフです。
 
-![Sub Graph Example](pathname:///img/shader-editor/overview-graph-sub-graph.png)
+![Sub Graph Example](/img/shader-editor/overview-graph-sub-graph.png)
 
 このサブグラフが「adder」という名前だった場合、アセットパネルに次のように表示されます。
 
-![Sub Graph Icon](pathname:///img/shader-editor/overview-graph-sub-graph-icon.png)
+![Sub Graph Icon](/img/shader-editor/overview-graph-sub-graph-icon.png)
 
 その後、adderサブグラフは他のグラフでノード自体として配置することができます。
 
-![Place Sub Graph](pathname:///img/shader-editor/overview-graph-place-sub-graph.gif)
+![Place Sub Graph](/img/shader-editor/overview-graph-place-sub-graph.gif)
 
 グラフの編集方法については、[グラフエディター](/shader-editor/window-layout/graph-editor)のドキュメントを参照してください。

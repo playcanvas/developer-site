@@ -30,7 +30,7 @@ The project is set up as follows:
 * A render Entity is added to the scene and the model **A** is assigned to the render component.
 * A script component is added to the render Entity and a new script is created called `update_asset.js`.
 
-Download the [A model](pathname:///downloads/tutorials/A.dae), [B model](pathname:///downloads/tutorials/B.dae) and [C model](pathname:///downloads/tutorials/C.dae) and upload them to your project. Ensure that the files are named A.dae, B.dae and C.dae as this will influence the asset names.
+Download the [A model](/downloads/tutorials/A.dae), [B model](/downloads/tutorials/B.dae) and [C model](/downloads/tutorials/C.dae) and upload them to your project. Ensure that the files are named A.dae, B.dae and C.dae as this will influence the asset names.
 
 ## The AssetRegistry
 

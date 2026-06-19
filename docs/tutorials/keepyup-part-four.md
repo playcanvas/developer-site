@@ -344,7 +344,7 @@ Ball.prototype.reset = function () {
 
 The first thing you'll notice at the top of the script are a set of script attributes that we've defined. Defining script attributes lets you expose values from your script into the editor. There are three very good reasons to do this.
 
-![Script Attributes](pathname:///img/tutorials/beginner/keepyup-part-four/ball-script-attributes.jpg)
+![Script Attributes](/img/tutorials/beginner/keepyup-part-four/ball-script-attributes.jpg)
 
 First, it lets you use the same script for many different Entities with different values. For example, you could have a script attribute which sets a color, and in the editor create a red, blue and green version of a entity just by modifying the script attribute.
 

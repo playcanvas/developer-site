@@ -19,7 +19,7 @@ You can create new Script Assets directly within the Editor:
 3. Create the Script:
     * Right-click within the desired folder (or the root of the Asset Panel).
     * Select New Asset > Script.  
-    ![New Script](pathname:///img/user-manual/scripting/new-script.png)
+    ![New Script](/img/user-manual/scripting/new-script.png)
     * In the popup, provide a filename for your new script.
 
 :::tip
@@ -53,7 +53,7 @@ A Script Asset itself doesn't do anything until it's attached to an Entity via a
 3. **Assign Your Script Asset(s) to the Script Component:**
     * The Script Component has an edit box (with the text + ADD SCRIPT). Click within the edit box to focus.
     * A dropdown/search box will appear. Start typing the name of your script, or browse the list, and select it.
-    ![Select Script](pathname:///img/user-manual/scripting/select-script.png)
+    ![Select Script](/img/user-manual/scripting/select-script.png)
     * You can add multiple Script Assets to a single Script Component on an Entity. They will generally execute their lifecycle methods (like initialize, update) in the order they appear in the "Scripts" array, though dependencies are better managed using postInitialize or events.
 
 :::note

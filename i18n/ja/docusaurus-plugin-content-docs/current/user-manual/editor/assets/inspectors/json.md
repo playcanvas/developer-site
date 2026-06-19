@@ -14,7 +14,7 @@ PlayCanvasでは、JSONアセットは様々な種類の構造化データを保
 
 ## Inspector
 
-![JSON Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-json.png)
+![JSON Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-json.png)
 
 JSON アセットインスペクターは、アセットに含まれるJSONデータのフォーマット済みプレビューを表示します。
 

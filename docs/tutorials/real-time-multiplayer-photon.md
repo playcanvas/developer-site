@@ -32,7 +32,7 @@ Photon is for free for projects with up to 20 online players (CCU).
 
 We start by forking the [tutorial project here](https://playcanvas.com/project/954410/).
 
-![Empty Project](pathname:///img/tutorials/multiplayer-photon/1.png)
+![Empty Project](/img/tutorials/multiplayer-photon/1.png)
 
 ### Photon account
 
@@ -44,7 +44,7 @@ Create your Photon account [here](https://www.photonengine.com/) - (Photon Engin
 
 Click **CREATE NEW APP** from the dashboard
 
-![Create New Application](pathname:///img/tutorials/multiplayer-photon/2.png)
+![Create New Application](/img/tutorials/multiplayer-photon/2.png)
 
 #### Select Photon Type and Application name
 
@@ -53,13 +53,13 @@ Enter the following
 - Photon Type: RealTime
 - Name: PlayCanvas-Photon etc.
 
-![Create Real Time Project](pathname:///img/tutorials/multiplayer-photon/3.png)
+![Create Real Time Project](/img/tutorials/multiplayer-photon/3.png)
 
 #### Copy of AppID
 
 Please make a note of this AppId, as you will need it in the future.
 
-![App Id](pathname:///img/tutorials/multiplayer-photon/4.png)
+![App Id](/img/tutorials/multiplayer-photon/4.png)
 
 ### Download SDK
 
@@ -67,19 +67,19 @@ Download the SDK from the dashboard.
 
 #### Click SDK from the dashboard
 
-![SDK](pathname:///img/tutorials/multiplayer-photon/5.png)
+![SDK](/img/tutorials/multiplayer-photon/5.png)
 
 #### Select RealTime JavaScript
 
-![JavaScript SDK](pathname:///img/tutorials/multiplayer-photon/6.png)
+![JavaScript SDK](/img/tutorials/multiplayer-photon/6.png)
 
 #### Click Download SDK
 
-![Download SDK](pathname:///img/tutorials/multiplayer-photon/7.png)
+![Download SDK](/img/tutorials/multiplayer-photon/7.png)
 
 #### Unzip the SDK
 
-![Unzip SDK](pathname:///img/tutorials/multiplayer-photon/8.png)
+![Unzip SDK](/img/tutorials/multiplayer-photon/8.png)
 
 The SDK will be downloaded in ZIP format, unzip it: `photon-javascript-sdk_vX-X-X-X` → `lib` → **`Photon-Javascript_SDK.min.js`**.
 
@@ -89,13 +89,13 @@ Import the SDK you have just downloaded into the PlayCanvas editor.
 
 #### Upload the SDK on the editor
 
-![Upload SDK](pathname:///img/tutorials/multiplayer-photon/9.jpg)
+![Upload SDK](/img/tutorials/multiplayer-photon/9.jpg)
 
 Drag and drop the SDK to the assets in the editor.
 
 #### Change Loading Type "Asset" to "Before Engine"
 
-![Change Loading Type](pathname:///img/tutorials/multiplayer-photon/10.png)
+![Change Loading Type](/img/tutorials/multiplayer-photon/10.png)
 
 ## Multiplayer implementation
 
@@ -235,13 +235,13 @@ PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
 
 Create a new script asset **photon-loadbalancing-playcanvas.js** and attach it to the Root entity in the Editor.
 
-![Root Entity - Inspector](pathname:///img/tutorials/multiplayer-photon/11.png)
+![Root Entity - Inspector](/img/tutorials/multiplayer-photon/11.png)
 
 #### Paste AppId into the script attribute
 
 Enter AppId as a script attribute.
 
-![Script Attributes](pathname:///img/tutorials/multiplayer-photon/12.png)
+![Script Attributes](/img/tutorials/multiplayer-photon/12.png)
 
 ```javascript
 this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient( this.wss ? 1 : 0, this.appId, this.appVersion );
@@ -301,7 +301,7 @@ PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
 
 If you successfully connect to the lobby by running connectToRegionMaster, JoinedLobby will be displayed in the log.
 
-![Console Log](pathname:///img/tutorials/multiplayer-photon/13.png)
+![Console Log](/img/tutorials/multiplayer-photon/13.png)
 
 ### Create or Join a room
 
@@ -431,7 +431,7 @@ PhotonLoadBalancingPlayCanvas.prototype.onActorLeave = function (actor) {
 };
 ```
 
-![Actor](pathname:///img/tutorials/multiplayer-photon/14.png)
+![Actor](/img/tutorials/multiplayer-photon/14.png)
 
 - **actor** contains `name`, `actorNr`, `isLocal`, and `userId`.
 - **onActorJoin** when a new user connects, you can get the joined actor.
@@ -439,7 +439,7 @@ PhotonLoadBalancingPlayCanvas.prototype.onActorLeave = function (actor) {
 
 If successful, the entity is added when the player joins.
 
-![Console log - Actors ](pathname:///img/tutorials/multiplayer-photon/15.png)
+![Console log - Actors ](/img/tutorials/multiplayer-photon/15.png)
 
 #### Player Movement
 
@@ -839,7 +839,7 @@ Player.prototype.update = function (dt) {
 
 You can now play multiplayer in Photon!
 
-![Project](pathname:///img/tutorials/multiplayer-photon/16.gif)
+![Project](/img/tutorials/multiplayer-photon/16.gif)
 
 You can create a room using Photon and synchronize the positions of players with each other.
 

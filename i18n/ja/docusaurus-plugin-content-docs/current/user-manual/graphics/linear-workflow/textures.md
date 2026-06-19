@@ -24,7 +24,7 @@ new pc.Asset(
 
 Editor で作業する際は、カラーテクスチャがインスペクターパネルで **sRGB** としてマークされていることを確認してください。これにより、エンジンがテクスチャを sRGB として正しく解釈し、linear スペースへの必要な変換を適用することが保証されます。
 
-![sRGB](pathname:///img/user-manual/graphics/linear-workflow/srgb-editor.png)
+![sRGB](/img/user-manual/graphics/linear-workflow/srgb-editor.png)
 
 #### **sRGBプロシージャルテクスチャ / レンダーターゲット**
 

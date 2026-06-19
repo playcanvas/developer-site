@@ -8,7 +8,7 @@ Material Graphs define the look of a material and must contain (for now) a singl
 
 For example, this is a simple Material Graph. The graph connects a constant color value to a Material Node's emissive field:
 
-![Material Graph Example](pathname:///img/shader-editor/overview-graph-material.png)
+![Material Graph Example](/img/shader-editor/overview-graph-material.png)
 
 As can be seen above, the Material Node has a number of input ports. Each port controls an aspect of the runtime lighting environment. The port details are as follows:
 

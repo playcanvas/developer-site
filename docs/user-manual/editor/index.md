@@ -5,7 +5,7 @@ description: PlayCanvas web Editor tour covering live testing, collaboration, ve
 
 The PlayCanvas Editor is a powerful, browser-based development environment for creating stunning 3D applications. No downloads, no installations—just open your browser and start building.
 
-![PlayCanvas Editor Interface](pathname:///img/user-manual/editor/interface/editor-interface.png)
+![PlayCanvas Editor Interface](/img/user-manual/editor/interface/editor-interface.png)
 
 ## Why Choose the PlayCanvas Editor?
 
@@ -28,13 +28,13 @@ Make a change, see it instantly. With [live editing](scripting/hot-reloading), y
 
 ### Real-time Collaboration
 
-![Collaboration in the Viewport](pathname:///img/user-manual/editor/realtime-collaboration/viewport-cameras.webp)
+![Collaboration in the Viewport](/img/user-manual/editor/realtime-collaboration/viewport-cameras.webp)
 
 Work together with your team in real-time. See where others are looking, what they're selecting, and chat directly within the Editor. Multiple developers, artists, and designers can build the same scene simultaneously—no merge conflicts, no stepping on each other's toes. [Learn more about collaboration →](realtime-collaboration)
 
 ### Professional Version Control
 
-![Version Control Graph](pathname:///img/user-manual/editor/version-control/graph-view/overview.png)
+![Version Control Graph](/img/user-manual/editor/version-control/graph-view/overview.png)
 
 PlayCanvas includes a complete [version control system](version-control) designed specifically for 3D projects:
 

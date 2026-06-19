@@ -214,6 +214,6 @@ pc.Tracing.set(pc.TRACEID_SHADER_ALLOC, true);
 
 And Each created shader will be logged in the browser console, where you can inspect its source code, for example:
 
-![sRGB](pathname:///img/user-manual/graphics/shaders/shader-log.png)
+![sRGB](/img/user-manual/graphics/shaders/shader-log.png)
 
 For further information, refer to the [ShaderMaterial API documentation](https://api.playcanvas.com/engine/classes/ShaderMaterial.html).

@@ -11,7 +11,7 @@ Zappar provides a [Getting Started with PlayCanvas](https://docs.zap.works/unive
 
 To get started with Zappar’s Universal AR SDK, first head to their [Zappar Universal AR Project](https://playcanvas.com/project/797342/overview/instant-tracking--particles) and fork it.
 
-![Zappar Universal AR](pathname:///img/user-manual/xr/ar/zappar-universal-ar.png)
+![Zappar Universal AR](/img/user-manual/xr/ar/zappar-universal-ar.png)
 
 Once there, add one of the Tracking Templates provided. Zappar provides:
 
@@ -21,6 +21,6 @@ Once there, add one of the Tracking Templates provided. Zappar provides:
 
 Drag any of these into your scene, ensure there are no other cameras and you are ready to go! If necessary, tweak the attributes of the script attached to the template camera:
 
-![Zappar AR Camera Settings](pathname:///img/user-manual/xr/ar/zappar-camera-settings.png)
+![Zappar AR Camera Settings](/img/user-manual/xr/ar/zappar-camera-settings.png)
 
 After these steps, you should be able to use Zappar's SDK without issues. For further information, refer to their [Getting Started With PlayCanvas](https://docs.zap.works/universal-ar/playcanvas/getting-started/) docs.

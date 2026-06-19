@@ -5,7 +5,7 @@ description: PlayCanvas の GSplat Component は Entity から 3D Gaussian splat
 
 GSplatコンポーネントは、エンティティが3Dガウシアンスプラットをレンダリングできるようにします。
 
-![GSplat Component](pathname:///img/user-manual/editor/scenes/components/component-gsplat.png)
+![GSplat Component](/img/user-manual/editor/scenes/components/component-gsplat.png)
 
 ## プロパティ
 

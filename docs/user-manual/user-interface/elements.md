@@ -11,29 +11,29 @@ These new properties give you plenty of control to layout your user interfaces, 
 
 ## Element Positioning {#element-positioning}
 
-![Element Guide](pathname:///img/user-manual/user-interface/elements/element-guide.png)
+![Element Guide](/img/user-manual/user-interface/elements/element-guide.png)
 
 ## Element Resizing {#element-resizing}
 
 To resize your Element activate the Resize gizmo or press '4':
 
-![Resize Gizmo Toolbar](pathname:///img/user-manual/user-interface/elements/gizmo-resize.png)
+![Resize Gizmo Toolbar](/img/user-manual/user-interface/elements/gizmo-resize.png)
 
 Then drag the corners around to adjust the size of the Element:
 
-![Resize Gizmo Viewport](pathname:///img/user-manual/user-interface/elements/gizmo-resize-viewport.png)
+![Resize Gizmo Viewport](/img/user-manual/user-interface/elements/gizmo-resize-viewport.png)
 
 ## Pivot {#pivot}
 
 The pivot property of an Element determines at which point the position, rotation and scale are calculated. The pivot is defined by two numbers between 0 and 1 which determine the pivot's position in the X and Y direction along the total width and height of the element. For example, `[0,0]` sets the pivot to the bottom left of the element, `[1,1]` sets the pivot to the top right of the element.
 
-![Pivot](pathname:///img/user-manual/user-interface/elements/pivot.png)
+![Pivot](/img/user-manual/user-interface/elements/pivot.png)
 
 ## Anchor {#anchor}
 
 The anchor property determines where the point or points on the parent that the Element's position is calculated from. The anchor value is specified by two points `[minX, minY]` and `[maxX, maxY]`. In the Editor this is displayed as 4 numbers: [minX, minY, maxX, maxY]
 
-![Anchor](pathname:///img/user-manual/user-interface/elements/anchor-editor.png)
+![Anchor](/img/user-manual/user-interface/elements/anchor-editor.png)
 
 For example, setting the anchor to `[0,0,0,0]` will anchor the element to the bottom left of its parent. The position of the element will set the offset from the bottom left of the parent
 
@@ -41,7 +41,7 @@ For example, setting the anchor to `[0,0,0,0]` will anchor the element to the bo
 
 Sometimes it is useful to anchor different edges of an Element to different places. For example, if you wish to make an Element that stretches to fill the screen whatever the resolution. You can do this by splitting the anchor's min and max values.
 
-![Split Anchor](pathname:///img/user-manual/user-interface/elements/split-anchor.png)
+![Split Anchor](/img/user-manual/user-interface/elements/split-anchor.png)
 
 In this image the Anchor is set to `[0,0,1,1]` so we are anchoring the edges of the element to the edges of the parent. Each edge has a margin of 50 pixels so the Element is fixed to fill the parent with 50 pixels from edge.
 

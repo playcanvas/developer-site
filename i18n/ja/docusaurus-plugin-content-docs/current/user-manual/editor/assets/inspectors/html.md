@@ -9,7 +9,7 @@ HTMLアセットを編集するには、エディターで右クリックしてE
 
 ## Inspector
 
-![HTML Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-html.png)
+![HTML Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-html.png)
 
 HTML アセットインスペクターは、アセットに含まれるHTMLコードのプレビューを表示します。
 

@@ -7,7 +7,7 @@ Scroll Viewコンポーネントは、ユーザーインターフェース内の
 
 詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
 
-![Scroll View Component](pathname:///img/user-manual/editor/scenes/components/component-scrollview.png)
+![Scroll View Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
 
 ## プロパティ
 

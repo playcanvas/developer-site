@@ -11,7 +11,7 @@ The Model Component is deprecated. It has been replaced by the [Render](render.m
 
 The Model Component enables an entity to render a primitive shape or a model asset.
 
-![Model Component](pathname:///img/user-manual/editor/scenes/components/component-model.png)
+![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
 
 ## Properties
 

@@ -14,7 +14,7 @@ These settings affect only you and are global for the whole project. They are 's
 
 Navigate to the `EDITOR` section and expand the panel:
 
-![Editor Settings](pathname:///img/user-manual/editor/interface/settings/editor.webp)
+![Editor Settings](/img/user-manual/editor/interface/settings/editor.webp)
 
 Here is a breakdown of the available settings:
 

@@ -13,7 +13,7 @@ There are some limitations to be aware of with the tool which can be found in th
 
 ## Example project
 
-The [Cube Jump project](https://playcanvas.com/project/796932/overview/cube-jump-snapchat-ad) is ready to be exported to the Snapchat Playable Ad format and the expected HTML output can be found [here](pathname:///downloads/sc-playable-ad-cube-jump.zip).
+The [Cube Jump project](https://playcanvas.com/project/796932/overview/cube-jump-snapchat-ad) is ready to be exported to the Snapchat Playable Ad format and the expected HTML output can be found [here](/downloads/sc-playable-ad-cube-jump.zip).
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/e/p/X1nwbUGA/" title="Cube Jump Playable Ad" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

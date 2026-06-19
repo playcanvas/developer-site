@@ -15,13 +15,13 @@ When building a UI for your application you will almost certainly need to create
 
 In this [scene](https://playcanvas.com/editor/scene/547900) we have created a 2D [Screen](/user-manual/user-interface/screens/) that looks like this in the hierarchy:
 
-![Hierarchy](pathname:///img/tutorials/ui/buttons/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/buttons/hierarchy.png)
 
 ## Screen setup
 
 Our screen is set up like so:
 
-![Screen](pathname:///img/tutorials/ui/buttons/screen.png)
+![Screen](/img/tutorials/ui/buttons/screen.png)
 
 Since it's a 2D screen we have ticked Screen Space. Our Reference Resolution is the resolution that we are targeting - in this case it's 1080 x 1920. We choose Blend for Scale Mode so that our Screen adapts to resolution changes and we set Scale Blend to 1 so that the Screen will adapt only to height changes.
 

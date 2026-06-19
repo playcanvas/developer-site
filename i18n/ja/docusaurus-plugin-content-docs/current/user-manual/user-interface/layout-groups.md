@@ -11,7 +11,7 @@ Layout Groupコンポーネントは、[グリッド](/user-manual/user-interfac
 
 Layout Groupコンポーネントを既存のエレメントエンティティに追加するとレイアウトグループが追加されます。
 
-![Create Layout Group](pathname:///img/user-manual/user-interface/layout-groups/create-layout-group.jpg)
+![Create Layout Group](/img/user-manual/user-interface/layout-groups/create-layout-group.jpg)
 
 ## レイアウトグループプロパティ {#layout-group-properties}
 
@@ -63,34 +63,34 @@ WidthフィッティングプロパティとHeightフィッティングプロパ
 
 レイアウトグループは、そのグループのルールを直接の子に適用します。これらのルールについて特定の子に上書きする場合は、上書きする子にLayoutChildコンポーネントを追加して行います。
 
-![Layout Child](pathname:///img/user-manual/user-interface/layout-groups/layout-child-max-width.jpg)
+![Layout Child](/img/user-manual/user-interface/layout-groups/layout-child-max-width.jpg)
 
 この例では、水平レイアウトが **Stretch** 幅フィッティングを使用して各ボタンを引き延ばし、平等にコンテナに収まるようにしています。中央のボタンにはLayout Childコンポーネントが `maxWidth` 64が設定されているため、引き延ばされません。
 
-![Layout Child Setup](pathname:///img/user-manual/user-interface/layout-groups/layout-child-setup.jpg)
+![Layout Child Setup](/img/user-manual/user-interface/layout-groups/layout-child-setup.jpg)
 
 ## レイアウトの例 {#example-layouts}
 
 ### 垂直のリーダーボード (Vertical Leaderboard) {#vertical-leaderboard}
 
-![Leaderboard](pathname:///img/user-manual/user-interface/layout-groups/leaderboard.jpg)
+![Leaderboard](/img/user-manual/user-interface/layout-groups/leaderboard.jpg)
 
 このリーダーボードは上部中央に揃えられた垂直の列として設定されています。幅フィッティング (Fitting) プロパティを使用して各アイテムの幅を最大に引き延ばします。パディング (Padding) プロパティとスペーシング (Spacing) プロパティを使用してセル同士の間にはっきりとギャップを残しています。
 
-![Leaderboard Setup](pathname:///img/user-manual/user-interface/layout-groups/leaderboard-setup.jpg)
+![Leaderboard Setup](/img/user-manual/user-interface/layout-groups/leaderboard-setup.jpg)
 
 ### 水平のボタン (Horizontal Buttons) {#horizontal-buttons}
 
-![Horizontal Buttons](pathname:///img/user-manual/user-interface/layout-groups/horizontal-layout.jpg)
+![Horizontal Buttons](/img/user-manual/user-interface/layout-groups/horizontal-layout.jpg)
 
 このボタンの列は、スペーシング (Spacing) とパディング (Padding) が設定された水平レイアウトグループ (Horizontal Layout Group) を使用して並べられており、ボタンが正しい幅に合うようにされています。幅 (Width) や高さ(Height) のフィッティングは使用されていません。
 
-![Horizontal Setup](pathname:///img/user-manual/user-interface/layout-groups/horizontal-setup.jpg)
+![Horizontal Setup](/img/user-manual/user-interface/layout-groups/horizontal-setup.jpg)
 
 ### グリッド (Grid) {#grid}
 
-![Grid](pathname:///img/user-manual/user-interface/layout-groups/grid-layout.jpg)
+![Grid](/img/user-manual/user-interface/layout-groups/grid-layout.jpg)
 
 このボタンの行は、グリッドを設定するためにラップ設定が有効化されたレイアウトグループを使用してレイアウトされています。レイアウトグループがアタッチされているグループエレメントは、2列のグリッドを生成するために強制的にラップするように正しい幅（ボタンの幅 + スペーシング）に設定されています。水平レイアウトは、グリッドが列ではなく行で埋まることを意味し、アライメントプロパティは`[0.5, 1]`に設定されているため、どんな"緩い"要素（要素が1つだけの行）もX軸で中央に配置されます。
 
-![Setup](pathname:///img/user-manual/user-interface/layout-groups/grid-setup.jpg)
+![Setup](/img/user-manual/user-interface/layout-groups/grid-setup.jpg)

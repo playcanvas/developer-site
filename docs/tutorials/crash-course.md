@@ -53,7 +53,7 @@ Phase 3 of this tutorial is still incomplete
 
 ## Links and resources
 
-* [Presentation slides PDF](pathname:///downloads/playcanvas-crash-course-make-a-game.pdf)
+* [Presentation slides PDF](/downloads/playcanvas-crash-course-make-a-game.pdf)
 * [Food Run - Complete PlayCanvas project](https://playcanvas.com/project/898163/overview/food-run--full-project)
 * [Food Run - Starter Phase 1 PlayCanvas project](https://playcanvas.com/project/910590/overview/food-run-starter-kit)
 * [Food Run - Starter Phase 2 PlayCanvas project](https://playcanvas.com/project/910606/overview/food-run--phase-2)

@@ -7,11 +7,11 @@ Device pixel ratio is the ratio between the physical pixels on the hardware scre
 
 Enabling Device Pixel Ratio on the Project settings will render the application at the native resolution of the screen which will make it look very crisp. However, that comes at a performance cost as now there are more pixels to fill and render each frame.
 
-![Project setting](pathname:///img/user-manual/optimization/device-pixel-ratio/device-pixel-ratio-setting.png)
+![Project setting](/img/user-manual/optimization/device-pixel-ratio/device-pixel-ratio-setting.png)
 
 Below is an example of the Model Viewer Starter Kit with device pixel ratio enabled and disabled. Click on the thumbnail to see the full size.
 
-![Device Pixel Ratio](pathname:///img/user-manual/optimization/device-pixel-ratio/device-pixel-ratio-closeup.jpg)
+![Device Pixel Ratio](/img/user-manual/optimization/device-pixel-ratio/device-pixel-ratio-closeup.jpg)
 
 This can be problematic on devices such as low or mid-tier mobile devices where they have high resolution screens but low graphics capability. This would lead to low frame rates if device pixel ratio is enabled due to fill rate limitations of the hardware.
 

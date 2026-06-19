@@ -7,11 +7,11 @@ The Sprite Editor is used to edit both Texture Atlas assets and Sprite assets. I
 
 To open the Sprite Editor, double-click on any Texture Atlas or Sprite asset in the Editor asset panel.
 
-![Sprite Editor](pathname:///img/user-manual/2D/sprite-editor/sprite-editor-highlights.jpg)
+![Sprite Editor](/img/user-manual/2D/sprite-editor/sprite-editor-highlights.jpg)
 
 ## Viewport
 
-![Viewport](pathname:///img/user-manual/2D/sprite-editor/viewport.jpg)
+![Viewport](/img/user-manual/2D/sprite-editor/viewport.jpg)
 
 The viewport in the Sprite Editor shows the currently selected Texture Atlas. Frames are shown as grey boxes on the texture atlas. The currently selected asset is shown with two sets of handles. green and blue. Green handles modify the frame's width and height, blue handles modify the frame's border property.
 
@@ -29,7 +29,7 @@ The inspector panel shows the properties of the currently selected item. The ins
 
 ### Texture Atlas Inspector
 
-![Texture Atlas Inspector](pathname:///img/user-manual/2D/sprite-editor/texture-atlas-inspector.jpg)
+![Texture Atlas Inspector](/img/user-manual/2D/sprite-editor/texture-atlas-inspector.jpg)
 
 The Texture Atlas Inspector allows you to automatically slice a texture atlas into a fixed grid.
 
@@ -48,7 +48,7 @@ Once all your settings are chosen, click the **Generate Frames** button to creat
 
 ### Frame Inspector
 
-![Frame Inspector](pathname:///img/user-manual/2D/sprite-editor/frame-inspector.jpg)
+![Frame Inspector](/img/user-manual/2D/sprite-editor/frame-inspector.jpg)
 
 The Frame Inspector lets you set the properties for an individual frame or group of frames. It is visible when you select one or more Frames. The Frame Inspector is also where you create a new Sprite from.
 
@@ -64,7 +64,7 @@ The Inspector lets you modify the Position, Size and Border properties of the fr
 
 ### Sprite Inspector
 
-![Sprite Inspector](pathname:///img/user-manual/2D/sprite-editor/sprite-inspector.jpg)
+![Sprite Inspector](/img/user-manual/2D/sprite-editor/sprite-inspector.jpg)
 
 The Sprite Inspector is visible when a Sprite Asset is selected. This inspector is used to edit the properties of one or more Sprites. See the [Sprite Asset](/user-manual/editor/assets/inspectors/sprite/) for more details on the properties.
 

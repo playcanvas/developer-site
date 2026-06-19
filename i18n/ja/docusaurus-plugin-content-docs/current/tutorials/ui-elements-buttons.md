@@ -15,13 +15,13 @@ description: Screen上のElementとButtonコンポーネントでクリック可
 
 この[シーン](https://playcanvas.com/editor/scene/547900)では、次のように階層が設定された2D [スクリーン](/user-manual/user-interface/screens/)を作成しました。
 
-![Hierarchy](pathname:///img/tutorials/ui/buttons/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/buttons/hierarchy.png)
 
 ## スクリーンの設定
 
 私たちのスクリーンは次のように設定されています。
 
-![Screen](pathname:///img/tutorials/ui/buttons/screen.png)
+![Screen](/img/tutorials/ui/buttons/screen.png)
 
 2Dスクリーンであるため、 `Screen Space` を選択しました。 `Reference Resolution` は、ターゲットとしている解像度です。この場合、1080 x 1920です。スケールモードとしてBlendを選択しているため、スクリーンは解像度の変更に適応します。また、スケールブレンドを1に設定しているため、スクリーンは高さの変更にのみ適応されます。
 

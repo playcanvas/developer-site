@@ -18,7 +18,7 @@ The Button Component can be used in two Transition Modes. *Sprite Change*, which
 
 ## Sprite Change Properties
 
-![Sprite Change Button](pathname:///img/user-manual/editor/scenes/components/component-button-sprite-change.png)
+![Sprite Change Button](/img/user-manual/editor/scenes/components/component-button-sprite-change.png)
 
 | Property        | Description |
 |-----------------|-------------|
@@ -31,7 +31,7 @@ The Button Component can be used in two Transition Modes. *Sprite Change*, which
 
 ## Tint Properties
 
-![Tint Button](pathname:///img/user-manual/editor/scenes/components/component-button-tint.png)
+![Tint Button](/img/user-manual/editor/scenes/components/component-button-tint.png)
 
 | Property      | Description |
 |---------------|-------------|

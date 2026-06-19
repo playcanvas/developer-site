@@ -7,7 +7,7 @@ description: ScreenとElement Componentでキャンバス内UIを選ぶか、HTM
 
 ## ScreenコンポーネントとElementコンポーネント(推奨)
 
-![Intro](pathname:///img/user-manual/user-interface/user-interface-intro-sq.png)
+![Intro](/img/user-manual/user-interface/user-interface-intro-sq.png)
 
 PlayCanvasは、WebGLキャンバスの内部で直接実行されるユーザインターフェイスシステムのビルディングブロックを構成できる２つのコンポーネントを実装しています。 [Screenコンポーネント](/user-manual/editor/scenes/components/screen)はユーザインタフェースコンテナであり、[Elementコンポーネント](/user-manual/editor/scenes/components/element)はユーザインタフェースのエレメントを追加するために使用されます。主な利点は、ゲームの他の部分と同じコンテキストでユーザインターフェイスが存在することです。これにより、アプリケーションとユーザインターフェイス間のインタラクションが可能になります。
 

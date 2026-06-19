@@ -30,7 +30,7 @@ In PlayCanvas your scene is described by a hierarchy of Entities. Each Entity is
 
 In our Keepy Up scene we have 7 top level Entities in the hierarchy.
 
-![Hierarchy](pathname:///img/tutorials/beginner/keepyup-part-one/hierarchy.jpg)
+![Hierarchy](/img/tutorials/beginner/keepyup-part-one/hierarchy.jpg)
 
 ### Camera Entity
 

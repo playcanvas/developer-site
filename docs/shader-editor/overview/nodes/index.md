@@ -6,7 +6,7 @@ sidebar_position: 2
 
 Shader Editor supports many types of nodes, but they all have the following structure:
 
-![Graph Editor Node](pathname:///img/shader-editor/graph-editor-node.png)
+![Graph Editor Node](/img/shader-editor/graph-editor-node.png)
 
 | Node structure |               |
 | -------------- | ------------- |

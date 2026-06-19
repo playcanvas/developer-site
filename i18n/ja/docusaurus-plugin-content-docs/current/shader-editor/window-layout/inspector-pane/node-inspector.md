@@ -4,7 +4,7 @@ sidebar_position: 2
 description: Graph Editor で選択中のノードのプロパティを編集する Node Inspector です。
 ---
 
-![Node Inspector](pathname:///img/shader-editor/inspector-pane-node.png)
+![Node Inspector](/img/shader-editor/inspector-pane-node.png)
 
 ノードインスペクターは、ノードの設定が構成される場所です。
 

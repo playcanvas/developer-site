@@ -5,6 +5,6 @@ description: PlayCanvas developer documentation covering the Editor, Engine API,
 
 Welcome to the PlayCanvas User Manual. Your exciting journey learning PlayCanvas begins now!
 
-![PlayCanvas Demos](pathname:///img/user-manual/playcanvas-demos.webp)
+![PlayCanvas Demos](/img/user-manual/playcanvas-demos.webp)
 
 Let's [get started](getting-started)!

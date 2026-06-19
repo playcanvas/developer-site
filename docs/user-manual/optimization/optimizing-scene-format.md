@@ -7,4 +7,4 @@ This is a publish option that can reduce the size of the scene files to approxim
 
 To enable, on the publish screen, tick 'Optimize Scene Format' and publish.
 
-![](pathname:///img/user-manual/optimization/optimizing-scene-format/optimize-scene-format-publish-dialog.png)
+![](/img/user-manual/optimization/optimizing-scene-format/optimize-scene-format-publish-dialog.png)

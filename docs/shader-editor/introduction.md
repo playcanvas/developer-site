@@ -14,11 +14,11 @@ Instead of writing shader programs directly, in __Shader Editor__ you construct 
 
 For example, the following effect animates multiple surface normal maps and combines them with special effect lighting:
 
-![sample effect](pathname:///img/shader-editor/sample-effect.gif)
+![sample effect](/img/shader-editor/sample-effect.gif)
 
 The effect is made up of various graphs, including the following one. This graph takes care of unpacking the normals in a normal map:
 
-![sample graph](pathname:///img/shader-editor/sample-graph.png)
+![sample graph](/img/shader-editor/sample-graph.png)
 
 __Shader Editor__ will convert this graph into a shader program, which is executed on a GPU at runtime:
 

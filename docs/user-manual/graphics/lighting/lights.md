@@ -21,7 +21,7 @@ The most familiar light source to us is the Sun. Because the Sun is so far from 
 
 A directional light lights an object like this:
 
-![Directional light](pathname:///img/user-manual/graphics/lighting/lights/directional.jpg)
+![Directional light](/img/user-manual/graphics/lighting/lights/directional.jpg)
 
 ### Omni Lights {#omni-lights}
 
@@ -29,7 +29,7 @@ Omni lights are light sources that emit light in all directions. An example of t
 
 An omni light lights an object like this:
 
-![Omni light](pathname:///img/user-manual/graphics/lighting/lights/point.jpg)
+![Omni light](/img/user-manual/graphics/lighting/lights/point.jpg)
 
 ### Spot Lights {#spot-lights}
 
@@ -37,7 +37,7 @@ Spot lights, like omni lights, emit light in all directions. However, the light 
 
 A spot light lights an object like this:
 
-![Spot light](pathname:///img/user-manual/graphics/lighting/lights/spot.jpg)
+![Spot light](/img/user-manual/graphics/lighting/lights/spot.jpg)
 
 ## Light Shapes {#light-shapes}
 
@@ -64,7 +64,7 @@ The disk light source shape is a round and flat light shape with a specified rad
 
 The sphere light source shape is ball shaped with a specified radius.
 
-![Shapes](pathname:///img/user-manual/graphics/lighting/lights/shapes.jpg)
+![Shapes](/img/user-manual/graphics/lighting/lights/shapes.jpg)
 
 ## Use Cases {#use-cases}
 

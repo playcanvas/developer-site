@@ -9,7 +9,7 @@ You can create a new Text asset in the Editor or by uploading a file with a `.tx
 
 ## Inspector
 
-![Text Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-text.png)
+![Text Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-text.png)
 
 The Text asset inspector displays a preview of the text content contained in the asset.
 

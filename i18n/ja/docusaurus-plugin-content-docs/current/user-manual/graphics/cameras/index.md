@@ -33,7 +33,7 @@ camera.lookAt(0, 0, 0);
 
 新しいシーンには自動的にカメラエンティティが配置されます。別のカメラを作成するには、Entityメニューを使用します。これにより、[Cameraコンポーネント](/user-manual/editor/scenes/components/camera)を持つエンティティが1ステップで作成されます。
 
-![Camera creation](pathname:///img/user-manual/graphics/cameras/camera-create.png)
+![Camera creation](/img/user-manual/graphics/cameras/camera-create.png)
 
 カメラのすべてのプロパティはインスペクターで編集できます。
 

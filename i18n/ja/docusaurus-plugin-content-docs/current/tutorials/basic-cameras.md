@@ -48,7 +48,7 @@ PlayCanvasエディターからシーンを実行するには、少なくとも1
 
 透視投影カメラの視野角（Field of View）は、カメラが表示するシーンの範囲を決定します。度（&deg;）で表され、デフォルト値の45&deg;は、ビューの上端から下端までがカメラの位置から45&deg;の弧を形成することを意味します。
 
-![Field of view](pathname:///img/tutorials/basic-cameras/field-of-view.png)
+![Field of view](/img/tutorials/basic-cameras/field-of-view.png)
 
 視野角はディスプレイの幅とは独立しているため、ワイドスクリーンのビュー（ライトブルー）は、狭いスクリーンのビュー（ダークブルー）と縦方向には同じ量を表示しますが、横方向にはより多くを表示します。
 

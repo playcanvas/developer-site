@@ -5,7 +5,7 @@ description: HDR camera settings, tone mapping and gamma options, and using Came
 
 High Dynamic Range (HDR) rendering significantly enhances visual realism in computer graphics by capturing and displaying a broader spectrum of light and color. This technique ensures that both the brightest highlights and the deepest shadows retain their details, offering a more lifelike representation of scenes. One notable advantage of HDR rendering is its ability to produce physically based bloom effects, where intense light sources naturally bleed into surrounding areas, mimicking real-world camera and eye behavior. Additionally, HDR rendering facilitates more accurate reflections and refractions, as it allows for light values that exceed the standard displayable range, resulting in visuals that are both striking and true to life.
 
-![HDR](pathname:///img/user-manual/graphics/linear-workflow/hdr.webp)
+![HDR](/img/user-manual/graphics/linear-workflow/hdr.webp)
 
 ## Camera Settings
 
@@ -87,11 +87,11 @@ For more detailed information, refer to the CameraFrame [API documentation](http
 
 Start from the neutral identity LUT below — applying it to a scene produces no change — and modify it in an image editor to create your own grade:
 
-![Neutral identity LUT (256x16)](pathname:///img/user-manual/graphics/linear-workflow/lut-neutral.png)
+![Neutral identity LUT (256x16)](/img/user-manual/graphics/linear-workflow/lut-neutral.png)
 
 An example of an aggressive modification — strong red push, with green and blue heavily reduced:
 
-![Cherry LUT example (256x16)](pathname:///img/user-manual/graphics/linear-workflow/lut-cherry.png)
+![Cherry LUT example (256x16)](/img/user-manual/graphics/linear-workflow/lut-cherry.png)
 
 The LUT texture must be loaded with the following settings — LUTs are authored in sRGB display space and the engine relies on hardware sRGB sampling, so a misconfigured texture produces visibly wrong colors:
 
@@ -150,7 +150,7 @@ There is a `CameraScript` [available here](https://github.com/playcanvas/engine/
 
 This integration streamlines the process of setting up complex camera effects and enhances the overall workflow within the PlayCanvas Editor.
 
-![CameraFrame Script](pathname:///img/user-manual/graphics/linear-workflow/camera-frame.png)
+![CameraFrame Script](/img/user-manual/graphics/linear-workflow/camera-frame.png)
 
 ## CameraFrame Tips
 

@@ -3,10 +3,10 @@ title: Animation Assets
 description: Keyframe animation assets from FBX conversion and how they link to animstategraphs through the anim component.
 ---
 
-![Animation Assets](pathname:///img/user-manual/animation/animation-assets.png)
+![Animation Assets](/img/user-manual/animation/animation-assets.png)
 
 Animation assets are the animation keyframe data that’s used to drive animations of a model in PlayCanvas. They are linked to an animstategraph asset via an entity's anim component.
 
 The anim component currently supports animation assets that have been imported into a PlayCanvas project from .FBX files using the `Convert to GLB` setting in Project Settings > Asset Import.
 
-![Asset Import](pathname:///img/user-manual/animation/asset-tasks.png)
+![Asset Import](/img/user-manual/animation/asset-tasks.png)

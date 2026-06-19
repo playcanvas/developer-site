@@ -5,7 +5,7 @@ description: "Browse and discover public splats on superspl.at: sort, filter by 
 
 The [Explore page](https://superspl.at) is the public-facing home of SuperSplat — an infinite-scroll gallery of every **Public** splat published on the platform. It's where visitors discover scenes without needing an account.
 
-![The SuperSplat Explore page — a grid of public splats](pathname:///img/user-manual/supersplat/explore.webp)
+![The SuperSplat Explore page — a grid of public splats](/img/user-manual/supersplat/explore.webp)
 
 Browsing Explore is **anonymous** — no PlayCanvas account is required. An account becomes useful when you want to [like](/user-manual/supersplat/scene-page/#likes), [comment](/user-manual/supersplat/scene-page/#comments), or [publish your own splats](/user-manual/supersplat/upload).
 

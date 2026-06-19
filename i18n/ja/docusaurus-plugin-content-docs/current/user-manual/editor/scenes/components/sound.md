@@ -5,7 +5,7 @@ description: PlayCanvas の Sound Component は、音量、ピッチ、ループ
 
 Soundコンポーネントは、オーディオサンプルの再生を制御します。
 
-![Sound Component](pathname:///img/user-manual/editor/scenes/components/component-sound.png)
+![Sound Component](/img/user-manual/editor/scenes/components/component-sound.png)
 
 Soundコンポーネントには、サウンドの再生を担当する「スロット」が含まれています。各スロットには異なるオーディオアセットを割り当てることができ、他のスロットとは独立して再生できます。
 

@@ -19,13 +19,13 @@ For each stat we need a minus button, a plus button, a progress bar and some tex
 
 This is what our UI looks like in the Hierarchy:
 
-![Hierarchy](pathname:///img/tutorials/ui/stats/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/stats/hierarchy.png)
 
 ## Screen setup
 
 First we start by adding a new 2D [Screen](/user-manual/user-interface/screens/). This is what our Screen looks like:
 
-![Screen](pathname:///img/tutorials/ui/stats/screen.png)
+![Screen](/img/tutorials/ui/stats/screen.png)
 
 Since it's a 2D screen we have ticked Screen Space. Our Reference Resolution is the resolution that we are targeting - in this case it's 1080 x 1920. We choose Blend for Scale Mode so that our Screen adapts to resolution changes and we set Scale Blend to 1 so that the Screen will adapt only to height changes.
 
@@ -35,17 +35,17 @@ For each stat we will create a different Group Element. This allows us to treat 
 
 We will only examine the Boost stat - the others are exactly the same. This is what the `stats-boost` Entity looks like in the viewport:
 
-![Boost](pathname:///img/tutorials/ui/stats/boost-editor.png)
+![Boost](/img/tutorials/ui/stats/boost-editor.png)
 
 And these are its attributes:
 
-![Boost Attributes](pathname:///img/tutorials/ui/stats/boost-attributes.png)
+![Boost Attributes](/img/tutorials/ui/stats/boost-attributes.png)
 
 As you can see it has a Group Element component with the appropriate size to contain all our elements and it's anchored to the bottom of the screen. It also has a Script Component with the script `uiStats` assigned to it. This script will allow us to handle interactions with the Elements of the group.
 
 This is what our group looks like in the Hierarchy:
 
-![Boost Hierarchy](pathname:///img/tutorials/ui/stats/boost-hierarchy.png)
+![Boost Hierarchy](/img/tutorials/ui/stats/boost-hierarchy.png)
 
 Our group has the following child Elements:
 

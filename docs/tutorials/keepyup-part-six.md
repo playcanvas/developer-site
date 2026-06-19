@@ -19,17 +19,17 @@ User Interfaces are built in PlayCanvas using the [Screen Component](/user-manua
 
 ### User Interface Entities
 
-![Hierarchy](pathname:///img/tutorials/beginner/keepyup-part-six/ui-hierarchy.jpg)
+![Hierarchy](/img/tutorials/beginner/keepyup-part-six/ui-hierarchy.jpg)
 
 We have divided our user interface up into the three game states: Menu, In Game and Game Over. Each state has an Screen Entity which is activated when the state is entered. We also have a Screen especially for the overlay. Because the overlay displays underneath the ball in the menu, we use a 3D Screen component to render the overlay in world space behind the ball.
 
 ### Images and Text
 
-![Image Element](pathname:///img/tutorials/beginner/keepyup-part-six/image-element.jpg)
+![Image Element](/img/tutorials/beginner/keepyup-part-six/image-element.jpg)
 
 Images and Text are added to the user interface using the Element Component. This Component can display images in the form of a texture asset or text in the form a font asset.
 
-![Image Attriubtes](pathname:///img/tutorials/beginner/keepyup-part-six/element-attr.jpg)
+![Image Attriubtes](/img/tutorials/beginner/keepyup-part-six/element-attr.jpg)
 
 ### User Interface script
 

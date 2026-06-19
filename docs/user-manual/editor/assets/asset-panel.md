@@ -5,7 +5,7 @@ description: Use the Assets Panel to organize folders, upload and create assets,
 
 The Assets Panel manages all of the Assets that are available in your project. From here, you can create, upload, delete, inspect and edit any Asset.
 
-![Assets Panel](pathname:///img/user-manual/editor/assets-panel.png)
+![Assets Panel](/img/user-manual/editor/assets-panel.png)
 
 ## Folder Hierarchy {#folder-hierarchy}
 
@@ -111,7 +111,7 @@ Note that copy and pasting assets does not overwrite existing assets with the sa
 
 Sometimes it's useful to know where assets are being used (or referenced) within a particular scene. If the Editor cannot detect any references for an asset, a small dot will be displayed on its thumbnail:
 
-![Unreferenced Asset](pathname:///img/user-manual/editor/assets-panel/unreferenced-asset.png)
+![Unreferenced Asset](/img/user-manual/editor/assets-panel/unreferenced-asset.png)
 
 :::warning
 
@@ -121,6 +121,6 @@ Note that the Editor cannot detect references to assets that are made in code. S
 
 If an asset does have references, you can check them via the References content menu item:
 
-![Asset References](pathname:///img/user-manual/editor/assets-panel/asset-references.png)
+![Asset References](/img/user-manual/editor/assets-panel/asset-references.png)
 
 Selecting a reference will load it into the Inspector panel.

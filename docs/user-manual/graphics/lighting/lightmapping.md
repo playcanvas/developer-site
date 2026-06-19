@@ -3,7 +3,7 @@ title: Lightmapping
 description: Bake lightmaps in external tools like 3ds Max and VRay, then import textures and follow linear gamma best practices.
 ---
 
-[![PlayCanvas Lightmapping](pathname:///img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
+[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*
 
 Here is the link to [final scene](https://playcanv.as/p/zdkARz26/) and [project](https://playcanvas.com/project/446587/overview/archviz-example) that uses these techniques to achieve results in image above: External HDR Lightmaps (described in this page below), [Ambient Occlusion](/user-manual/graphics/lighting/ambient-occlusion/) and HDR Cubemap applied using Box Projection using [Image Based Lighting](/user-manual/graphics/physical-rendering/image-based-lighting/) technique to achieve realistic reflections.
@@ -32,12 +32,12 @@ When rendering Lightmaps or CubeMaps they should be rendered in Linear Space to 
 
 In 3ds Max this option (Enable Gamma/LUT Correction) should be disabled and can be found in Preference Settings (Customize > Preferences):
 
-![3ds Max > Preferences > Linear Space](pathname:///img/user-manual/graphics/lighting/lightmapping/3ds-max-preferences.png)
+![3ds Max > Preferences > Linear Space](/img/user-manual/graphics/lighting/lightmapping/3ds-max-preferences.png)
 
 Then make sure Color Mapping is updated. It can be found in Render Settings (F10, or from Render to Texture window). Output should not be clamped, and not post-processed (Mode option), Linear Multiply should be used for linear color space.
 Here is a screenshot of what options should be set to what values, click the "Default" button to expand settings to "Expert":
 
-![3D's Max > Render Settings](pathname:///img/user-manual/graphics/lighting/lightmapping/3ds-max-render-settings-color-mapping.png)
+![3D's Max > Render Settings](/img/user-manual/graphics/lighting/lightmapping/3ds-max-render-settings-color-mapping.png)
 
 ## UV Mapping {#uv-mapping}
 
@@ -47,19 +47,19 @@ In order to apply a lightmap texture on geometry we need to unwrap it first. Her
 
 A smaller area of geometry is better. Try to minimize the area of triangles and eliminate non-visible triangles. A larger area will reduce lightmap detail, require larger textures and sometimes multiple assets.
 
-![Lightmapping Tips: Simple Geometry](pathname:///img/user-manual/graphics/lighting/lightmapping/uv-geometry.jpg)
+![Lightmapping Tips: Simple Geometry](/img/user-manual/graphics/lighting/lightmapping/uv-geometry.jpg)
 
 ### Consistent Texel Size {#consistent-texel-size}
 
 Keep texels in UV unstretched and consistent in size with other texels within same geometry. This is to ensure that level of detail in lightmap texture is consistent within the scene. Some variations of texel size could be applied when geometry will be seen from up close or in the far distance as required by artistic and optimization decisions.
 
-![Lightmapping Tips: UV Consistent Texel Size](pathname:///img/user-manual/graphics/lighting/lightmapping/uv-consistency.jpg)
+![Lightmapping Tips: UV Consistent Texel Size](/img/user-manual/graphics/lighting/lightmapping/uv-consistency.jpg)
 
 ### Non-overlapping UV {#non-overlapping-uv}
 
 Triangles in UV should not overlap to ensure each pixel has a unique position in 3D space on geometry so it can store its own illumination information appropriately. UV space for lightmaps is clamped, meaning that UV will be contained between 0.0 and 1.0 and will not tile outside.
 
-![Lightmapping Tips: Non-overlapping UV](pathname:///img/user-manual/graphics/lighting/lightmapping/uv-overlapping.jpg)
+![Lightmapping Tips: Non-overlapping UV](/img/user-manual/graphics/lighting/lightmapping/uv-overlapping.jpg)
 
 ## Other Tips {#other-tips}
 
@@ -71,7 +71,7 @@ To get good lightmap results we need to ensure that rendering is based only on d
 4. In the Render To Texture window (see below) set **Padding** to larger value.
 5. **Light can leak** from behind the geometry, add blocking geometry to prevent light.
 
-![Lightmapping Light Leaking](pathname:///img/user-manual/graphics/lighting/lightmapping/lightmapping-light-leak.jpg)
+![Lightmapping Light Leaking](/img/user-manual/graphics/lighting/lightmapping/lightmapping-light-leak.jpg)
 
 ## Render To Texture {#render-to-texture}
 
@@ -79,19 +79,19 @@ To get illumination data out of the modeling tool we want to render the light da
 
 In 3ds Max this is done using the Render To Texture window. Where Padding needs to be set to larger value; selected 2nd UV Channel; and Output profile depending on your renderer, in screenshot below `VRayRawTotalLightingMap` is used.
 
-![Render To Texture: PlayCanvas Lightmapping](pathname:///img/user-manual/graphics/lighting/lightmapping/3ds-max-render-to-texture-window.png)
+![Render To Texture: PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/3ds-max-render-to-texture-window.png)
 
 ## Noise {#noise}
 
 Depending on the quality and time of rendering in some situations the illumination data in the output might be not perfect and suffer from noise. This is easily solvable by applying some blur to the image that will not blur the edges in texture but will smoothen plain sections. In Photoshop this is done using Surface Blur filter:
 
-![Lightmapping: Photoshop > Surface Blur](pathname:///img/user-manual/graphics/lighting/lightmapping/lightmapping-surface-blur.jpg)
+![Lightmapping: Photoshop > Surface Blur](/img/user-manual/graphics/lighting/lightmapping/lightmapping-surface-blur.jpg)
 
 ## Upload to Editor {#upload-to-editor}
 
 At this stage you have your geometry with a second UV channel (UV1) and HDR lightmap textures and it is time to upload them to your PlayCanvas scene and setup the materials. This is done by dragging and dropping the files or using the upload button in the assets panel. After you've uploaded your geometry it will auto-generate materials. For each material that a lightmap is rendered for you need to set the lightmap texture. Simply select all required materials and drag'n'drop or pick lightmap texture for the Lightmap slot.
 
-![PlayCanvas Editor: Material Lightmap Texture Slot](pathname:///img/user-manual/graphics/lighting/lightmapping/lightmapping-material-slot.png)
+![PlayCanvas Editor: Material Lightmap Texture Slot](/img/user-manual/graphics/lighting/lightmapping/lightmapping-material-slot.png)
 
 ## Final remarks {#final-remarks}
 

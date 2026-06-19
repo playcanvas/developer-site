@@ -5,7 +5,7 @@ description: PlayCanvas Anim component connects an anim state graph and animatio
 
 The Anim Component is used to connect an animstategraph asset and all of its required animation assets to a single entity.
 
-![Anim Component](pathname:///img/user-manual/editor/scenes/components/component-anim.png)
+![Anim Component](/img/user-manual/editor/scenes/components/component-anim.png)
 
 ## Properties
 
@@ -21,7 +21,7 @@ The Anim Component is used to connect an animstategraph asset and all of its req
 
 After selecting an animstategraph asset, the Anim Component will display a list of animation asset slots organized by layer. There will be one slot for each animation state in every layer of the state graph asset (excluding START, END, and ANY states). This is where actual animation data is connected to the previously created state graph.
 
-![Anim Component With Graph](pathname:///img/user-manual/animation/anim-component-with-graph.png)
+![Anim Component With Graph](/img/user-manual/animation/anim-component-with-graph.png)
 
 Multiple Anim Components can use the same animstategraph asset, each with their own set of animation assets. After all animation state slots have been filled, the Anim Component will become playable. The animations can be played via script by calling `entity.anim.playing = true` or automatically if the Activate option is enabled.
 
@@ -29,7 +29,7 @@ Multiple Anim Components can use the same animstategraph asset, each with their 
 
 Each layer in the state graph can have an optional mask that limits which bones the layer's animations will affect. This is useful for scenarios like playing a walking animation on the lower body while playing a waving animation on the upper body.
 
-![Create Mask Button](pathname:///img/user-manual/animation/anim-component-create-mask.png)
+![Create Mask Button](/img/user-manual/animation/anim-component-create-mask.png)
 
 To create a mask for a layer, click the **CREATE MASK** button next to the layer name. This will open the mask inspector.
 
@@ -37,7 +37,7 @@ To create a mask for a layer, click the **CREATE MASK** button next to the layer
 
 The mask inspector displays a tree view of all bones in the model hierarchy. Each bone has a checkbox that determines whether the layer's animation will affect that bone.
 
-![Mask Inspector](pathname:///img/user-manual/animation/anim-mask-inspector.png)
+![Mask Inspector](/img/user-manual/animation/anim-mask-inspector.png)
 
 The mask inspector provides several controls:
 

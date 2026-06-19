@@ -5,7 +5,7 @@ description: Update your PlayCanvas profile, change your password, manage email 
 
 Your account settings page provides access to all your personal account configuration options, from basic profile information to billing and security settings. To view your user account settings, navigate to [https://playcanvas.com/account](https://playcanvas.com/account). You should see something like this:
 
-![Account Settings](pathname:///img/user-manual/account-management/user-accounts/account-settings.png)
+![Account Settings](/img/user-manual/account-management/user-accounts/account-settings.png)
 
 ## Profile Picture
 

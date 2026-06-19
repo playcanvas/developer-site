@@ -44,7 +44,7 @@ The `@attribute` tag above the `speed` member promotes it to an attribute. When 
 
 What this means in practice is that you can expose various members of a script to the Editor and create controls to edit their values at runtime.
 
-![Attribute](pathname:///img/user-manual/scripting/attribute-basic.png)
+![Attribute](/img/user-manual/scripting/attribute-basic.png)
 
 Because `speed` is simply a class member, you can access it as you would any other member.
 
@@ -56,11 +56,11 @@ update(dt) {
 
 ## Attributes in the Editor
 
-![Script Attributes](pathname:///img/user-manual/scripting/script-attributes.png)
+![Script Attributes](/img/user-manual/scripting/script-attributes.png)
 
 Once you've declared your attributes, the Editor needs to parse the code in order to expose the script attributes. If attributes have been changed, you need to manually refresh the attributes by clicking the parse button.
 
-![Parse Button](pathname:///img/user-manual/scripting/script-parse-button.png)
+![Parse Button](/img/user-manual/scripting/script-parse-button.png)
 
 When you expose an attribute to the Editor, you can also surface additional information that helps provide context and present more specific controls. This can help create a better user experience for your scripts.
 
@@ -79,7 +79,7 @@ speed = 2;
 
 In the Editor, this is available as a tooltip.
 
-![Attribute Description](pathname:///img/user-manual/scripting/attribute-description.png)
+![Attribute Description](/img/user-manual/scripting/attribute-description.png)
 
 ### Attribute Titles
 
@@ -190,7 +190,7 @@ For example, to create an attribute that must be non-negative but has no upper l
 positiveValue = 1;
 ```
 
-![Attribute Constraint](pathname:///img/user-manual/scripting/attribute-constraint.png)
+![Attribute Constraint](/img/user-manual/scripting/attribute-constraint.png)
 
 There are additional numerical constraints that help the Editor limit the set of possible values:
 
@@ -247,7 +247,7 @@ You must import `Vec2`/`Vec3`/`Vec4` from `playcanvas` for your attribute to par
 
 The vector attribute can be 2, 3, or 4 dimensions. The Editor will show a numerical input for each component, allowing you to set each one independently.
 
-![Attribute Vector](pathname:///img/user-manual/scripting/attribute-vec3.png)
+![Attribute Vector](/img/user-manual/scripting/attribute-vec3.png)
 
 ### Color Attribute
 
@@ -343,7 +343,7 @@ gradientStops;
 
 The `Color[]` declaration uses the [JSDoc type tag](https://jsdoc.app/tags-type) to declare that `gradientStops` is an array of `Color` values. The Editor will interpret it this way, creating a controller that allows you to set multiple `Color` values in a list.
 
-![Attribute Array](pathname:///img/user-manual/scripting/attribute-array.png)
+![Attribute Array](/img/user-manual/scripting/attribute-array.png)
 
 In your initialize or update loop, you can iterate over `gradientStops` as an array:
 
@@ -395,7 +395,7 @@ class MyScript extends Script {
 
 This uses the `Lights` object as an enumeration of possible values. The `@type {Lights}` indicates that `ambient` should only have a value listed in `Lights`. At author-time the Editor will generate a drop-down control using the Lights enumeration keys as labels (ON/OFF/UNKNOWN) and setting the corresponding value on `ambient`. An enumerator's values can only be numbers, strings, or booleans.
 
-![Attribute Enumerations](pathname:///img/user-manual/scripting/attribute-enum.png)
+![Attribute Enumerations](/img/user-manual/scripting/attribute-enum.png)
 
 ### Literal Union Types
 
@@ -632,4 +632,4 @@ class GameLogic extends Script {
 
 This creates an array of Enemy controls in the Editor, each with its own numerical controls for the sub-attributes.
 
-![Attribute Complex Arrays](pathname:///img/user-manual/scripting/attribute-complex-arrays.png)
+![Attribute Complex Arrays](/img/user-manual/scripting/attribute-complex-arrays.png)

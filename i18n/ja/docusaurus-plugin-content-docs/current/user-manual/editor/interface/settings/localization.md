@@ -14,7 +14,7 @@ description: Localization パネルの使い方。JSON の翻訳 Asset の登録
 
 `LOCALIZATION` セクションに移動し、パネルを展開します。
 
-![Localization Settings](pathname:///img/user-manual/editor/interface/settings/localization.webp)
+![Localization Settings](/img/user-manual/editor/interface/settings/localization.webp)
 
 利用可能な設定は次のとおりです。
 

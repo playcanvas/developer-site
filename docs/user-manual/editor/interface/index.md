@@ -3,7 +3,7 @@ title: Editor Interface
 description: Quick labeled map of the toolbar, hierarchy, inspector, viewport, and assets panel with links to deeper docs for each main Editor workspace region.
 ---
 
-![Editor Interface](pathname:///img/user-manual/editor/interface/editor-interface.png)
+![Editor Interface](/img/user-manual/editor/interface/editor-interface.png)
 
 This is the main interface to the PlayCanvas Editor. You can see labeled the main areas:
 

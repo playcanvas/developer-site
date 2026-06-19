@@ -5,4 +5,4 @@ description: Editor guide to the anim component for wiring animstategraphs and a
 
 Click here to learn how to use the [Anim Component](/user-manual/editor/scenes/components/anim/).
 
-![New Anim Component](pathname:///img/user-manual/animation/new-anim-component.png)
+![New Anim Component](/img/user-manual/animation/new-anim-component.png)

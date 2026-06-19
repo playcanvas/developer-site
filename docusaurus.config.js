@@ -6,17 +6,21 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
+import remarkPathnameStatic, { remarkRootStaticLinks } from './utils/plugins/remark-pathname-static.mjs';
 import pluginLlms from './utils/plugins/docusaurus-plugin-llms.mjs';
-import pluginDedupeStatic from './utils/plugins/docusaurus-plugin-dedupe-static.mjs';
+import pluginBuildSize from './utils/plugins/docusaurus-plugin-build-size.mjs';
+
+const siteUrl = 'https://developer.playcanvas.com';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'PlayCanvas Developer Site',
   tagline: 'Start learning PlayCanvas today!',
-  favicon: 'img/favicon.ico',
+  // Absolute URL: useBaseUrl leaves https:// URLs unchanged (#880).
+  favicon: `${siteUrl}/img/favicon.ico`,
 
   // Set the production url of your site here
-  url: 'https://developer.playcanvas.com',
+  url: siteUrl,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -35,8 +39,8 @@ const config = {
     locales: ['en', 'ja']
   },
 
-  // Shared static/ is copied only for the default locale. Non-default locales use
-  // pathname:// URLs in Markdown (see utils/migrate-static-paths-to-pathname.mjs).
+  // Shared static/ is copied only for the default locale. remark-pathname-static
+  // prefixes shared asset URLs at compile time so ja pages load from the site root.
   staticDirectories:
     (process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'en') === 'en'
       ? ['static']
@@ -248,7 +252,7 @@ const config = {
     }],
     'docusaurus-plugin-sass',
     pluginLlms,
-    pluginDedupeStatic,
+    pluginBuildSize,
     'docusaurus-plugin-copy-page-button'
   ],
 
@@ -260,7 +264,9 @@ const config = {
         docs: {
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
+          beforeDefaultRemarkPlugins: [remarkPathnameStatic],
           remarkPlugins: [
+            remarkRootStaticLinks,
             [remarkTypedoc, {
                typeResolver: ({ displayName, types, tags }) => {
 
@@ -309,12 +315,12 @@ const config = {
         indexName: 'developer-playcanvas',
         contextualSearch: true,
       },
-      image: 'img/playcanvas-social-card.jpg',
+      image: `${siteUrl}/img/playcanvas-social-card.jpg`,
       navbar: {
         title: 'PlayCanvas Docs',
         logo: {
           alt: 'PlayCanvas Logo',
-          src: 'img/playcanvas.webp',
+          src: `${siteUrl}/img/playcanvas.webp`,
         },
         items: [
           {

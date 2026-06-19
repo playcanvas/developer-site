@@ -97,7 +97,7 @@ app.xr.on('available:' + pc.XRTYPE_VR, (available) => {
 
 When you are presenting in XR, the position and orientation of the camera are overwritten by data from the XR session. If you want to implement additional movement and rotation of the camera, you should add a parent entity to your camera and apply your manipulations to that entity.
 
-![Camera Offset](pathname:///img/user-manual/xr/using-webxr/camera-offset.jpg)
+![Camera Offset](/img/user-manual/xr/using-webxr/camera-offset.jpg)
 
 Position, orientation and rays of different XR objects: input sources, tracked meshes, tracked planes, tracked images, and others, are provided in world space.
 

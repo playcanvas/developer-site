@@ -20,7 +20,7 @@ A cubemap is an asset that requires six texture assets as input. Therefore, in o
 
 You can create new cubemap assets directly from the PlayCanvas Editor interface. Use the Create Asset menu in the Asset panel.
 
-![Cubemap Creation](pathname:///img/user-manual/assets/cubemaps/cubemap-create.png)
+![Cubemap Creation](/img/user-manual/assets/cubemaps/cubemap-create.png)
 
 This creates a new cubemap Asset and opens up the Cubemap Editor on the right-hand side of the screen.
 
@@ -28,7 +28,7 @@ This creates a new cubemap Asset and opens up the Cubemap Editor on the right-ha
 
 To select a cubemap in order to edit it, select it in the Asset Panel. The easiest way to do this is to select the cubemap filter to narrow down the options for selection. Cubemaps are identified by cross-shaped thumbnails:
 
-![Cubemap Thumbnails](pathname:///img/user-manual/assets/cubemaps/cubemap-thumbnails.png)
+![Cubemap Thumbnails](/img/user-manual/assets/cubemaps/cubemap-thumbnails.png)
 
 When a cubemap is selected, it will be loaded into the Inspector panel on the right of the Editor.
 
@@ -36,7 +36,7 @@ When a cubemap is selected, it will be loaded into the Inspector panel on the ri
 
 Once you have a cubemap selected, you can edit its properties.
 
-![Cubemap Properties](pathname:///img/user-manual/assets/cubemaps/cubemap-properties.png)
+![Cubemap Properties](/img/user-manual/assets/cubemaps/cubemap-properties.png)
 
 ### Filtering
 
@@ -48,7 +48,7 @@ Anisotropy is a value between 1 and 16 that gives control over the quality of te
 
 ## Assigning Textures to Cubemaps
 
-![Cubemap Preview](pathname:///img/user-manual/assets/cubemaps/cubemap-preview.png)
+![Cubemap Preview](/img/user-manual/assets/cubemaps/cubemap-preview.png)
 
 The cubemap Preview panel displays the six faces of a cubemap flattened into the shape of a cross. Imagine a cardboard box that has been unfolded to lay flat. To construct a cubemap, simply drag texture assets from the Assets panel to the face slots in the Preview panel. You can also select a cubemap face slot and then select a texture asset from the Assets panel.
 
@@ -81,7 +81,7 @@ This technique allows you to use Environment Map such as CubeMap in order to sim
 
 The default Phong and Physical material types both have reflection properties. If you expand the Environment property section, you see the following:
 
-![Cubemap Material](pathname:///img/user-manual/assets/cubemaps/cubemap-material.png)
+![Cubemap Material](/img/user-manual/assets/cubemaps/cubemap-material.png)
 
 You can click the Empty slot to select a cubemap or drag and drop a cubemap asset from the asset panel into the cubemap slot.
 
@@ -108,7 +108,7 @@ This can be done via [PlayCanvas Texture Tool](https://playcanvas.com/texture-to
 7. Press 'Reproject' button to do the conversion to a cubemap.
 8. Press 'Export to PNG' or 'Export to HDR' to download the 6 individual cubemap face textures that are ready to be uploaded to PlayCanvas.
 
-![PlayCanvas Texture Tool](pathname:///img/user-manual/assets/cubemaps/playcanvas-texture-tool-convert.png)
+![PlayCanvas Texture Tool](/img/user-manual/assets/cubemaps/playcanvas-texture-tool-convert.png)
 
 Other tools that can also do this conversion include:
 

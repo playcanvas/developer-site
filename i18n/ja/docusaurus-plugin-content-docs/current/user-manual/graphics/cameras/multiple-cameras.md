@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 
 2プレイヤーの水平分割画面では、2つのカメラがそれぞれ画面の半分を使用します:
 
-![Horizontal splitscreen](pathname:///img/user-manual/graphics/cameras/camera-horizontal-splitscreen.png)
+![Horizontal splitscreen](/img/user-manual/graphics/cameras/camera-horizontal-splitscreen.png)
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
@@ -66,7 +66,7 @@ Hierarchyで各カメラを選択し、[Cameraコンポーネント](/user-manua
 
 垂直分割画面の場合は、代わりにビューポートを縦に積み重ねます。上が `[0, 0.5, 1, 0.5]`、下が `[0, 0, 1, 0.5]` です:
 
-![Vertical splitscreen](pathname:///img/user-manual/graphics/cameras/camera-vertical-splitscreen.png)
+![Vertical splitscreen](/img/user-manual/graphics/cameras/camera-vertical-splitscreen.png)
 
 関連するプロパティとして `scissorRect` があります。これは同じ正規化形式の矩形でレンダリングをクリップしますが、ビューポートへの投影方法は変更しません。
 

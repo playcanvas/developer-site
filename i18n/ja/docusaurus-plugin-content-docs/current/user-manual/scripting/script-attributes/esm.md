@@ -44,7 +44,7 @@ export class Rotator extends Script {
 
 これが実際に意味することは、スクリプトの様々なメンバーをエディターに公開し、それらの値を実行時に編集するためのコントロールを作成できるということです。
 
-![アトリビュート](pathname:///img/user-manual/scripting/attribute-basic.png)
+![アトリビュート](/img/user-manual/scripting/attribute-basic.png)
 
 `speed` は単なるクラスメンバーであるため、他のメンバーと同じようにアクセスできます。
 
@@ -56,11 +56,11 @@ update(dt) {
 
 ## エディターでのアトリビュート
 
-![スクリプト属性](pathname:///img/user-manual/scripting/script-attributes.png)
+![スクリプト属性](/img/user-manual/scripting/script-attributes.png)
 
 アトリビュートを宣言したら、エディターはスクリプトアトリビュートを公開するためにコードをパースする必要があります。アトリビュートが変更された場合、パースボタンをクリックしてアトリビュートを手動で更新する必要があります。
 
-![パースボタン](pathname:///img/user-manual/scripting/script-parse-button.png)
+![パースボタン](/img/user-manual/scripting/script-parse-button.png)
 
 アトリビュートをエディターに公開する際、コンテキストを提供し、より具体的なコントロールを提示するのに役立つ追加情報を表示することもできます。これにより、スクリプトのユーザーエクスペリエンスを向上させることができます。
 
@@ -79,7 +79,7 @@ speed = 2;
 
 エディターでは、これはツールチップとして利用できます。
 
-![アトリビュートの説明](pathname:///img/user-manual/scripting/attribute-description.png)
+![アトリビュートの説明](/img/user-manual/scripting/attribute-description.png)
 
 ### アトリビュートのタイトル
 
@@ -190,7 +190,7 @@ speed = 10;
 positiveValue = 1;
 ```
 
-![アトリビュートの制約](pathname:///img/user-manual/scripting/attribute-constraint.png)
+![アトリビュートの制約](/img/user-manual/scripting/attribute-constraint.png)
 
 エディターが可能な値のセットを制限するのに役立つ、追加の数値制約があります:
 
@@ -247,7 +247,7 @@ position = new Vec3();
 
 ベクトル属性は、2、3、または4次元にすることができます。エディターでは、各コンポーネントに数値入力が表示され、それぞれを独立して設定できます。
 
-![属性ベクトル](pathname:///img/user-manual/scripting/attribute-vec3.png)
+![属性ベクトル](/img/user-manual/scripting/attribute-vec3.png)
 
 ### Color属性
 
@@ -343,7 +343,7 @@ gradientStops;
 
 `Color[]`宣言は、[JSDoc type tag](https://jsdoc.app/tags-type)を使用して、`gradientStops`が`Color`値の配列であることを宣言します。エディターはこのように解釈し、リスト内で複数の`Color`値を設定できるコントローラを作成します。
 
-![属性配列](pathname:///img/user-manual/scripting/attribute-array.png)
+![属性配列](/img/user-manual/scripting/attribute-array.png)
 
 `initialize`または`update`ループで、`gradientStops`を配列として反復処理できます。
 
@@ -395,7 +395,7 @@ class MyScript extends Script {
 
 これは、`Lights`オブジェクトを可能な値の列挙型として使用しています。`@type {Lights}`は、`ambient`が`Lights`にリストされている値のみを持つべきであることを示します。オーサータイムで、エディターは`Lights`列挙型のキー（ON/OFF/UNKNOWN）をラベルとして使用し、`ambient`にそれに対応する値を設定するドロップダウンコントロールを生成します。列挙型の値は、数値、文字列、またはブール値のみである必要があります。
 
-![属性の列挙](pathname:///img/user-manual/scripting/attribute-enum.png)
+![属性の列挙](/img/user-manual/scripting/attribute-enum.png)
 
 ### リテラルユニオン型
 
@@ -632,4 +632,4 @@ class GameLogic extends Script {
 
 これにより、エディターにEnemyコントロールの配列が作成され、それぞれがサブ属性の独自の数値コントロールを持ちます。
 
-![Attribute Complex Arrays](pathname:///img/user-manual/scripting/attribute-complex-arrays.png)
+![Attribute Complex Arrays](/img/user-manual/scripting/attribute-complex-arrays.png)

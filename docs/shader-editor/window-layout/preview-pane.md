@@ -6,7 +6,7 @@ sidebar_position: 6
 
 The Preview Pane displays the currently selected graph or material and supports various lighting environments and shapes.
 
-![Preview Pane](pathname:///img/shader-editor/preview-pane.png)
+![Preview Pane](/img/shader-editor/preview-pane.png)
 
 | Action                     | Description                                                       |
 | -------------------------- | ----------------------------------------------------------------- |
@@ -20,7 +20,7 @@ The Preview Pane displays the currently selected graph or material and supports 
 
 The toolbar offers control over the lighting environment and preview shape. The toolbar is shown below with the controls numbered and a brief description of each.
 
-![Preview Pane Toolbar](pathname:///img/shader-editor/preview-pane-toolbar.png)
+![Preview Pane Toolbar](/img/shader-editor/preview-pane-toolbar.png)
 
 | Controls | Description                         |
 | -------- | ----------------------------------- |

@@ -5,7 +5,7 @@ description: PlayCanvas Script component attaches JavaScript or TypeScript scrip
 
 The Script Component enables an entity to run user-supplied scripts. In this way, the user can write scripts (using JavaScript or TypeScript) that run when the entity is instantiated and updated on a per-frame basis.
 
-![Script Component](pathname:///img/user-manual/editor/scenes/components/component-script.png)
+![Script Component](/img/user-manual/editor/scenes/components/component-script.png)
 
 ## Adding Scripts
 
@@ -16,7 +16,7 @@ To create a new script, click on the **Add Script** dropdown in the Script Compo
 
 Alternatively, you can drag a script asset from the Assets Panel onto the Script Component.
 
-![Add Script Dialog](pathname:///img/user-manual/editor/scenes/components/new-script.jpg)
+![Add Script Dialog](/img/user-manual/editor/scenes/components/new-script.jpg)
 
 ## Script Panel Controls {#script-panel-controls}
 

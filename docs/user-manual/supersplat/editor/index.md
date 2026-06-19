@@ -11,7 +11,7 @@ You can skip the Editor entirely. Hit the orange **Upload Splat** button on the 
 
 :::
 
-![SuperSplat Interface](pathname:///img/user-manual/supersplat/editor/supersplat-interface.png)
+![SuperSplat Interface](/img/user-manual/supersplat/editor/supersplat-interface.png)
 
 ## Video Tutorials
 

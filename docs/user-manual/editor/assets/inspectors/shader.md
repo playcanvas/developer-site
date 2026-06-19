@@ -9,7 +9,7 @@ To edit a Shader asset, right click on it in the Editor and select Edit.
 
 ## Inspector
 
-![Shader Asset Inspector](pathname:///img/user-manual/editor/assets/inspectors/asset-inspector-shader.png)
+![Shader Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-shader.png)
 
 The Shader asset inspector displays a preview of the GLSL shader code contained in the asset.
 

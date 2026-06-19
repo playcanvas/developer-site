@@ -14,7 +14,7 @@ description: ストアから Ammo をインストールする物理設定、Rigi
 
 `PHYSICS` セクションに移動し、パネルを展開します。
 
-![Physics Settings](pathname:///img/user-manual/editor/interface/settings/physics.webp)
+![Physics Settings](/img/user-manual/editor/interface/settings/physics.webp)
 
 利用可能な設定は次のとおりです。
 

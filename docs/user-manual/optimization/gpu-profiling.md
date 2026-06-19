@@ -48,7 +48,7 @@ This is particularly challenging on the Web platform, as web applications typica
 
 * Double-click this file to open it in Xcode, then click the Replay button in the dialog that appears. This enables you to inspect frame draw calls, analyze resources, debug shaders, and gather performance metrics.
 
-  ![Xcode](pathname:///img/user-manual/optimization/gpu-profiling/xcode-webgpu.png)
+  ![Xcode](/img/user-manual/optimization/gpu-profiling/xcode-webgpu.png)
 
 ## WebGL applications on macOS with Apple Silicon
 

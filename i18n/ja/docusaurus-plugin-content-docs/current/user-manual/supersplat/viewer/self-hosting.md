@@ -16,7 +16,7 @@ description: "SuperSplat Editorからスプラットを自己完結型のHTMLビ
 
 ビューアのエクスポートはいくつかのオプションで設定できます：
 
-![Viewer Export](pathname:///img/user-manual/supersplat/viewer/viewer-export.png)
+![Viewer Export](/img/user-manual/supersplat/viewer/viewer-export.png)
 
 | オプション | 説明 |
 |--------|-------------|

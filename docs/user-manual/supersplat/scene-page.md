@@ -11,7 +11,7 @@ Visitors can browse a scene page without a PlayCanvas account. An account is req
 
 The scene content is split between a central **embedded viewer** and a right-hand **sidebar** with metadata and actions.
 
-![The bumblebee splat's scene page — a central embedded viewer beside a sidebar of metadata and actions](pathname:///img/user-manual/supersplat/scene-page.webp)
+![The bumblebee splat's scene page — a central embedded viewer beside a sidebar of metadata and actions](/img/user-manual/supersplat/scene-page.webp)
 
 ### The embedded viewer
 

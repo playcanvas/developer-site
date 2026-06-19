@@ -4,7 +4,7 @@ description: The Material Inspector for basic metadata, render states such as bl
 sidebar_position: 3
 ---
 
-![Material Inspector](pathname:///img/shader-editor/inspector-pane-material.png)
+![Material Inspector](/img/shader-editor/inspector-pane-material.png)
 
 The Material Inspector is where a material's settings are configured.
 

@@ -14,7 +14,7 @@ These settings affect all users on the currently active [branch](../../version-c
 
 Navigate to the `BATCH GROUPS` section and expand the panel:
 
-![Batch Groups Settings](pathname:///img/user-manual/editor/interface/settings/batch-groups.webp)
+![Batch Groups Settings](/img/user-manual/editor/interface/settings/batch-groups.webp)
 
 Here is a breakdown of the available settings:
 

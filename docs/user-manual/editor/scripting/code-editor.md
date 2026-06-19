@@ -9,13 +9,13 @@ The Code Editor is an online real-time collaborative editor that allows you to e
 
 You can open the Code Editor from inside the [PlayCanvas Editor](/user-manual/editor/) by pressing Ctrl + I. You can also click on this toolbar icon:
 
-![Code Editor Toolbar](pathname:///img/user-manual/scripting/code-editor-toolbar.png)
+![Code Editor Toolbar](/img/user-manual/scripting/code-editor-toolbar.png)
 
 Alternatively you can double click on a text-based asset like a Script to open the Code Editor focused on that asset.
 
 ## Interface
 
-![Code Editor](pathname:///img/user-manual/scripting/code-editor.png)
+![Code Editor](/img/user-manual/scripting/code-editor.png)
 
 ### Menu
 
@@ -59,7 +59,7 @@ If you have unsaved changes the Revert option in the File menu will cancel these
 
 All the text editing features can be found using the command palette via Ctrl + Shift + P (Windows) or Cmd + Shift + P (Mac).
 
-![](pathname:///img/user-manual/scripting/command-palette.png)
+![](/img/user-manual/scripting/command-palette.png)
 
 ## Hot Keys
 
@@ -86,7 +86,7 @@ The editor supports various shortcuts to help you when editing code. You can fin
 
 You can search for text in a file by pressing Ctrl + F (Windows) or Cmd + F (Mac). This will open up the Find panel on the top right:
 
-![](pathname:///img/user-manual/scripting/monaco-find-panel.png)
+![](/img/user-manual/scripting/monaco-find-panel.png)
 
 Enter your search term here and press Enter. You can navigate between matches by continuously hitting Enter (or Shift + Enter to go backwards).
 
@@ -98,7 +98,7 @@ You can also find a term by searching in all your assets. To do this hit Ctrl + 
 
 On the left side of the input fields there are various search options. These allow you to search using a regular expression, do a case-sensitive search or search for whole words. If you would like to learn and experiment more with regex, then [RegExr](https://regexr.com/) is great site with cheat sheets, examples and an online editor for testing regex expressions.
 
-![Find in Files](pathname:///img/user-manual/scripting/find-in-files-results.png)
+![Find in Files](/img/user-manual/scripting/find-in-files-results.png)
 
 You can double click on a line in the search results to go that particular line in the asset.
 
@@ -106,13 +106,13 @@ You can double click on a line in the search results to go that particular line 
 
 You can quickly open an asset by hitting Ctrl + P (or Cmd + P on Mac) which will open a panel where you can search for the asset by its name. Start typing the name of the asset and the panel will perform a fuzzy search to find the asset you are looking for. Hit Enter to open the selected asset.
 
-![Go to Anything](pathname:///img/user-manual/scripting/go-to-anything.gif)
+![Go to Anything](/img/user-manual/scripting/go-to-anything.gif)
 
 ## Preferences
 
 You can edit your preferences by clicking on Edit -> Preferences. Here you can change the font size for the text editor and also edit other editor related options.
 
-![Preferences](pathname:///img/user-manual/scripting/preferences.png)
+![Preferences](/img/user-manual/scripting/preferences.png)
 
 ## Extra Tips
 
@@ -120,16 +120,16 @@ You can edit your preferences by clicking on Edit -> Preferences. Here you can c
 
 Highlighting a word in the code editor will highlight all other matches in the file which makes it easier to check where a variable or function is being used.
 
-![Quick Searching](pathname:///img/user-manual/scripting/code-editor-quick-searching.gif)
+![Quick Searching](/img/user-manual/scripting/code-editor-quick-searching.gif)
 
 ### Multiple Selection Editing
 
 Holding down Alt and clicking left mouse button will add another cursor to the editor. This allows you to quickly make the same changes in multiple areas of the file.
 
-![Multiple Selection Editing](pathname:///img/user-manual/scripting/code-editor-multiple-selection.gif)
+![Multiple Selection Editing](/img/user-manual/scripting/code-editor-multiple-selection.gif)
 
 ### Rectangular Selection
 
 Holding down Alt + Shift and dragging left mouse button will create a rectangular selection which is useful for selecting and editing columns of text.
 
-![Rectangular Selection](pathname:///img/user-manual/scripting/code-editor-rectangular-selection.gif)
+![Rectangular Selection](/img/user-manual/scripting/code-editor-rectangular-selection.gif)

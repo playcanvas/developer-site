@@ -7,11 +7,11 @@ description: エッジを暗くするレガシーのビネット offset と dark
 
 これはエフェクトをかけていない画像です。
 
-![Image without effect](pathname:///img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
 
 これがエフェクトを適用した同じ画像です。
 
-![Image with effect](pathname:///img/user-manual/graphics/posteffects/with-vignette.png)
+![Image with effect](/img/user-manual/graphics/posteffects/with-vignette.png)
 
 ビルドインのビネットエフェクトには次の属性があります：
 

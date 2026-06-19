@@ -5,7 +5,7 @@ description: Assets パネルでフォルダを整理し、Asset をアップロ
 
 アセットパネルは、プロジェクトで利用可能なすべてのアセットを管理します。ここから、アセットの作成、アップロード、削除、検査、編集を行うことができます。
 
-![アセットパネル](pathname:///img/user-manual/editor/assets-panel.png)
+![アセットパネル](/img/user-manual/editor/assets-panel.png)
 
 ## フォルダ階層 {#folder-hierarchy}
 
@@ -111,7 +111,7 @@ description: Assets パネルでフォルダを整理し、Asset をアップロ
 
 特定のシーン内でアセットがどこで使用（または参照）されているかを知ることが役立つ場合があります。エディタがアセットの参照を検出できない場合、サムネイルに小さなドットが表示されます：
 
-![未参照アセット](pathname:///img/user-manual/editor/assets-panel/unreferenced-asset.png)
+![未参照アセット](/img/user-manual/editor/assets-panel/unreferenced-asset.png)
 
 :::warning
 
@@ -121,6 +121,6 @@ description: Assets パネルでフォルダを整理し、Asset をアップロ
 
 アセットに参照がある場合は、参照コンテンツメニュー項目から確認できます：
 
-![アセット参照](pathname:///img/user-manual/editor/assets-panel/asset-references.png)
+![アセット参照](/img/user-manual/editor/assets-panel/asset-references.png)
 
 参照を選択すると、インスペクターパネルに読み込まれます。

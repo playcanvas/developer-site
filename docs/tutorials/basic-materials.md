@@ -15,13 +15,13 @@ Select the root Entity of your Scene. At the start this will be called "Root". I
 
 Select 'New Entity' -> 'Box' menu in the Hierarchy panel. This creates a new Box Entity in the Hierarchy.
 
-![New Box](pathname:///img/tutorials/beginner/basic-materials/new-box.jpg)
+![New Box](/img/tutorials/beginner/basic-materials/new-box.jpg)
 
 ## Step 2 - Create a new Material
 
 Create new material directly from the PlayCanvas Editor interface. In the Asset panel use the + button to open the New Asset menu and select Material.
 
-![Add Material](pathname:///img/tutorials/beginner/basic-materials/new-material.jpg)
+![Add Material](/img/tutorials/beginner/basic-materials/new-material.jpg)
 
 This creates a new Material Asset and brings up the Material Editor on the right-hand side of the screen. In the Material Editor rename the Material to "Box Material".
 
@@ -35,7 +35,7 @@ To change the color of the Material we will want to edit the *Diffuse* property 
 
 Select the material either by clicking on it in the asset panel. Or by selecting it from the property inspector when you select the box.
 
-![Diffuse Color](pathname:///img/tutorials/beginner/basic-materials/diffuse-panel.jpg)
+![Diffuse Color](/img/tutorials/beginner/basic-materials/diffuse-panel.jpg)
 
 You'll have to expand the Diffuse settings panel in the material editor in the right panel. Click on the color property to edit the diffuse color of the material.
 
@@ -45,9 +45,9 @@ Changing the color of the material is a good start, but you'll quickly want more
 
 Download & save these sample textures:
 
-![Sample Diffuse Map](pathname:///img/tutorials/beginner/basic-materials/proto_orange.png)
+![Sample Diffuse Map](/img/tutorials/beginner/basic-materials/proto_orange.png)
 
-![Sample Normal Map](pathname:///img/tutorials/beginner/basic-materials/proto_gray_n.png)
+![Sample Normal Map](/img/tutorials/beginner/basic-materials/proto_gray_n.png)
 
 Then upload them to your project by dragging the files into the Editor.
 
@@ -55,7 +55,7 @@ Once they're uploaded it's time to assign them to texture slots on the Material.
 
 You'll see something that looks a little like this:
 
-![Cube](pathname:///img/tutorials/beginner/basic-materials/diffuse_normal_cube.jpg)
+![Cube](/img/tutorials/beginner/basic-materials/diffuse_normal_cube.jpg)
 
 Try modifying the **Tiling** and **Offset** properties to affect the way the texture is wrapped around the cube.
 

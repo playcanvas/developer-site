@@ -11,7 +11,7 @@ You can add a component to an entity using the PlayCanvas Editor or by using the
 
 Each component appears as a panel in the Inspector with a common header containing the following controls:
 
-![Component Header](pathname:///img/user-manual/editor/scenes/components/component-header.png)
+![Component Header](/img/user-manual/editor/scenes/components/component-header.png)
 
 | Control | Description |
 |---------|-------------|

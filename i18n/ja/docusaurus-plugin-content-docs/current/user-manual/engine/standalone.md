@@ -108,7 +108,7 @@ PlayCanvas Engineでアプリケーションを構築する際に、エディタ
 
     これにより、`http://localhost:5173`でサーバーが起動します。ブラウザでこのURLにアクセスすると、以下が表示されます。
 
-    ![Spinning Cube](pathname:///img/user-manual/engine/standalone/spinning-cube.webp)
+    ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
 
     :::tip
 
@@ -189,7 +189,7 @@ PlayCanvas Engineでアプリケーションを構築する際に、エディタ
 
     これにより、サーバーが`http://localhost:5173`で起動します。ブラウザでこのURLにアクセスすると、以下が表示されます。
 
-    ![回転する立方体](pathname:///img/user-manual/engine/standalone/spinning-cube.webp)
+    ![回転する立方体](/img/user-manual/engine/standalone/spinning-cube.webp)
 
     :::tip
 
@@ -286,7 +286,7 @@ import * as pc from 'playcanvas';
 
     これにより、`http://localhost:3000` でサーバーが起動します。ブラウザでこのURLにアクセスすると、次の表示が表示されます:
 
-    ![回転するキューブ](pathname:///img/user-manual/engine/standalone/spinning-cube.webp)
+    ![回転するキューブ](/img/user-manual/engine/standalone/spinning-cube.webp)
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
@@ -374,7 +374,7 @@ import * as pc from 'playcanvas';
 
     これにより、`http://localhost:3000` でサーバーが起動します。ブラウザでこのURLにアクセスすると、次の表示が表示されます:
 
-    ![回転するキューブ](pathname:///img/user-manual/engine/standalone/spinning-cube.webp)
+    ![回転するキューブ](/img/user-manual/engine/standalone/spinning-cube.webp)
 
   </TabItem>
 </Tabs>

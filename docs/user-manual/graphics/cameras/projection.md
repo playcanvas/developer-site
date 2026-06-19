@@ -12,7 +12,7 @@ A camera's projection defines how the 3D scene is flattened onto a 2D image. Pla
 
 Perspective projection, the default, mimics how our eyes and physical cameras work: objects appear smaller the further away they are. The volume of space the camera can see — its frustum — is a truncated pyramid.
 
-![Perspective camera](pathname:///img/user-manual/graphics/cameras/camera-perspective.png)
+![Perspective camera](/img/user-manual/graphics/cameras/camera-perspective.png)
 
 The shape of the frustum is controlled by the field of view (`fov`), an angle in degrees that defaults to 45. By default this angle is measured vertically; set `horizontalFov` to `true` to measure it horizontally instead. Larger values take in more of the scene, with a fisheye look at the extreme; smaller values have a zoomed-in, telephoto effect.
 
@@ -20,7 +20,7 @@ The shape of the frustum is controlled by the field of view (`fov`), an angle in
 
 Orthographic projection is a parallel projection: objects keep the same size on screen regardless of their distance from the camera. The frustum is a cuboid. It is often used for 2D and isometric games, as well as CAD-style visualizations.
 
-![Orthographic camera](pathname:///img/user-manual/graphics/cameras/camera-orthographic.png)
+![Orthographic camera](/img/user-manual/graphics/cameras/camera-orthographic.png)
 
 Since field of view does not apply, the size of the view is set with `orthoHeight`: half the height of the view volume in world units (defaults to 10). The width is derived from the aspect ratio.
 

@@ -48,7 +48,7 @@ The **Perspective** projection is the most common type for games. Alternatively,
 
 The field of view of a perspective camera determines how much of the scene the camera shows. It is measured in degrees (&deg;), so the default value of 45&deg; means that the top edge of the view to the bottom edge form an arc of 45&deg; from the position of the camera.
 
-![Field of view](pathname:///img/tutorials/basic-cameras/field-of-view.png)
+![Field of view](/img/tutorials/basic-cameras/field-of-view.png)
 
 Because the field of view is independent of the width of the display, a wide screen view (light blue) shows the same amount vertically but more horizontally than a narrow screen view (dark blue).
 

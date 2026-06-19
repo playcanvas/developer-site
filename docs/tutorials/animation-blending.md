@@ -31,7 +31,7 @@ Let's examine how this is achieved via PlayCanvas...
 
 In order to apply an animation to a model, you add the animation component to your entity. Below is the configuration of the skinned character as displayed in PlayCanvas Editor.
 
-![Animated Entity](pathname:///img/tutorials/animation_blending.jpg)
+![Animated Entity](/img/tutorials/animation_blending.jpg)
 
 In the image you can see the animation component in the Inspector. There are 2 animation assets assigned: an 'idle' cycle and a 'punch' cycle. With the animation component configured this way, the behavior is that the first animation (the idle cycle) is played and because the looping option is set, it will continue to animate ad infinitum. However, we would like to achieve something a little more interesting:
 

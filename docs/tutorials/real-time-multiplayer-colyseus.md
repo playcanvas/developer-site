@@ -73,11 +73,11 @@ We can do that through a "external script" on PlayCanvas project settings.
 
 Open **"Menu" → "Settings"**:
 
-![settings](pathname:///img/tutorials/multiplayer-colyseus/settings.png)
+![settings](/img/tutorials/multiplayer-colyseus/settings.png)
 
 From the Settings panel, expand on **"External Scripts"**, and increase the number of **"URLs"**.
 
-![CDN](pathname:///img/tutorials/multiplayer-colyseus/ext_script.png)
+![CDN](/img/tutorials/multiplayer-colyseus/ext_script.png)
 
 In the new **"URL"** field, let's include the Colyseus JavaScript SDK, from a CDN:
 
@@ -243,7 +243,7 @@ For this demo, we need to create two objects in our Scene:
 
 Let's create a Plane with scale `8`.
 
-![Plane](pathname:///img/tutorials/multiplayer-colyseus/plane.jpg)
+![Plane](/img/tutorials/multiplayer-colyseus/plane.jpg)
 
 ### Creating the Player {#creating-the-player}
 
@@ -251,7 +251,7 @@ Let's create the Player capsule with scale `1`.
 
 Make sure to uncheck the `"Enabled"` property. We will not have any Player instances enabled until we have active connections with the server.
 
-![Player](pathname:///img/tutorials/multiplayer-colyseus/player.png)
+![Player](/img/tutorials/multiplayer-colyseus/player.png)
 
 ## Listening for State Changes {#listening-for-state-changes}
 
@@ -435,7 +435,7 @@ Colyseus comes with an optional monitoring panel that can be helpful during the 
 
 To view the monitor panel from your local server, go to `http://localhost:2567/colyseus`.
 
-![monitor](pathname:///img/tutorials/multiplayer-colyseus/monitor.png)
+![monitor](/img/tutorials/multiplayer-colyseus/monitor.png)
 
 You can see and interact with all spawned rooms and active client connections through this panel.
 

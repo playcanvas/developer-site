@@ -5,17 +5,17 @@ description: How to create a PlayCanvas Organization from your profile, transfer
 
 There are two ways to create an Organization. Any Organizations you belong to appear next to your name on your profile:
 
-![Profile Organizations](pathname:///img/user-manual/account-management/organizations/creating/organizations.jpg)
+![Profile Organizations](/img/user-manual/account-management/organizations/creating/organizations.jpg)
 
 ## Create a new Organization
 
 Open the dropdown menu in the top-right corner and click **NEW ORGANIZATION**:
 
-![Dropdown](pathname:///img/user-manual/account-management/organizations/creating/dropdown.png)
+![Dropdown](/img/user-manual/account-management/organizations/creating/dropdown.png)
 
 This opens the following dialog:
 
-![New Organization](pathname:///img/user-manual/account-management/organizations/creating/new-organization.jpg)
+![New Organization](/img/user-manual/account-management/organizations/creating/new-organization.jpg)
 
 Enter a **name** for the Organization and an **Organization ID** (a string containing only alphanumeric characters and dashes). The email address defaults to your own, but you can change it. Click **CREATE** to finish — you'll be taken to the Organization's profile page.
 
@@ -34,11 +34,11 @@ Your projects are now owned by the Organization, with your user account as an ad
 
 Alternatively, you can convert an existing user account into an Organization. Click **CONVERT** on your [account settings](/user-manual/account-management/user-accounts/settings/#convert-account-to-organization) page:
 
-![Convert Organization](pathname:///img/user-manual/account-management/organizations/creating/convert.png)
+![Convert Organization](/img/user-manual/account-management/organizations/creating/convert.png)
 
 This opens the following dialog:
 
-![Convert Popup](pathname:///img/user-manual/account-management/organizations/creating/convert-popup.png)
+![Convert Popup](/img/user-manual/account-management/organizations/creating/convert-popup.png)
 
 Because you can't log in *as* an Organization, converting an account means you'll no longer be able to log in with it. You must therefore nominate another user as the new **owner**.
 
