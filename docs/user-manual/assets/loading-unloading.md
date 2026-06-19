@@ -134,6 +134,28 @@ this.app.loader.getHandler('texture').maxRetries = 10;
 
 Editor projects can also override the default count via the [Network Settings](../editor/interface/settings/network.md) panel.
 
+## Limiting Concurrent Requests
+
+When an application loads a large number of assets at once, browsers can reject requests with `net::ERR_INSUFFICIENT_RESOURCES` once too many are in flight simultaneously. To guard against this, the engine limits the number of concurrent asset requests, queuing any beyond the limit and dispatching them as earlier requests complete.
+
+The default limit is **128**, which is safe across browsers while still saturating typical CDN throughput. You can change it globally:
+
+```javascript
+// Allow at most 50 asset requests to be in flight at once
+this.app.loader.maxConcurrentRequests = 50;
+
+// Disable throttling entirely - every request is sent immediately
+this.app.loader.maxConcurrentRequests = 0;
+```
+
+:::note
+
+This is a process-global limit (it applies to the shared HTTP layer, matching the browser's per-process resource limit), so with multiple applications on a page the last value set wins. It applies to all `XMLHttpRequest`-based loads, which covers the large majority of assets.
+
+:::
+
+Editor projects can also configure this via the [Network Settings](../editor/interface/settings/network.md) panel.
+
 ## Unloading Assets
 
 To free memory, you can unload assets that are no longer needed:
