@@ -44,7 +44,6 @@ Here are some of our key repositories:
 | [**splat-transform**](https://github.com/playcanvas/splat-transform) | CLI and library for converting, transforming, and analyzing splats | MIT |
 | [**model-viewer**](https://github.com/playcanvas/model-viewer) | glTF and 3D Gaussian Splat viewer | MIT |
 | [**pcui**](https://github.com/playcanvas/pcui) | Comprehensive UI library for building browser-based tools | MIT |
-| [**font-tools**](https://github.com/playcanvas/font-tools) | MSDF font-asset generator (web app, CLI and library) for text elements | MIT |
 
 :::tip
 
