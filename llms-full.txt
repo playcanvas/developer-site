@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 456
+Total Documents: 458
 Generated: 2026-06-21
 
 ================================================================================
@@ -23743,11 +23743,13 @@ Components add behavior to entities. Nest them inside an `` to attach the corres
 - **[``](./align)** - Alignment helper
 - **[``](./camera)** - Camera and viewport
 - **[``](./collision)** - Physics collision shapes
+- **[``](./element)** - 2D UI content (text, image or group)
 - **[``](./environment)** - Scene environment and skybox
 - **[``](./gsplat)** - Gaussian splat rendering
 - **[``](./light)** - Directional, point and spot lights
 - **[``](./render)** - Mesh rendering (primitives and assets)
 - **[``](./rigidbody)** - Physics rigid bodies
+- **[``](./screen)** - 2D UI screen (screen or world space)
 - **[``](./script)** - Custom script components
 
 ## Hooks
@@ -23921,6 +23923,36 @@ Learn more about [Collision Components](https://api.playcanvas.com/engine/classe
 ```tsx asTypedoc
 
 type $ = React.ComponentProps<typeof Collision>;
+
+```
+
+--------------------------------------------------------------------------------
+
+## `<Element/>`
+
+URL: https://developer.playcanvas.com/user-manual/react/api/element/
+
+# ``
+
+The `` component draws 2D UI content — text, an image, or an invisible group — on an [``](../entity). Elements live under a [``](../screen), which positions them in screen or world space. Set the `type` prop to `"text"`, `"image"` or `"group"`, and use `anchor` and `pivot` to control how the element is positioned and resized within its parent.
+
+## Usage
+
+Add an `` to an [``](../entity) that descends from a [``](../screen). For text, set `type="text"` and supply a font via `fontAsset` (load one with [`useFont`](../hooks/use-asset#usefont)).
+
+```tsx
+
+```
+
+The example below renders screen-space text. The font is an MSDF asset created with [font-tools](/user-manual/user-interface/fonts) and loaded with [`useFont`](../hooks/use-asset#usefont).
+
+Learn more about the [Element Component](https://api.playcanvas.com/engine/classes/ElementComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+
+type $ = React.ComponentProps<typeof Element>;
 
 ```
 
@@ -25067,6 +25099,37 @@ Learn more about the [RigidBody Component](https://api.playcanvas.com/engine/cla
 ```tsx asTypedoc
 
 type $ = React.ComponentProps<typeof RigidBody>;
+
+```
+
+--------------------------------------------------------------------------------
+
+## `<Screen/>`
+
+URL: https://developer.playcanvas.com/user-manual/react/api/screen/
+
+# ``
+
+The `` component turns an [``](../entity) into a 2D UI screen that lays out [``](../element) children. By default it renders in screen space (a 2D overlay), but it can also be placed in world space for in-scene UI. Use `referenceResolution` and `scaleMode` to control how the UI scales across different display sizes.
+
+## Usage
+
+Attach a `` to an [``](../entity), then nest entities carrying an [``](../element) to draw text or images.
+
+```tsx
+
+</Entity>
+```
+
+This example renders a centred line of screen-space text using a `` and a text [``](../element).
+
+Learn more about the [Screen Component](https://api.playcanvas.com/engine/classes/ScreenComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+
+type $ = React.ComponentProps<typeof Screen>;
 
 ```
 

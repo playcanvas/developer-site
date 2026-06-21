@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.7
-Total Documents: 456
+Total Documents: 458
 Generated: 2026-06-21
 
 ## Instructions for Large Language Models
@@ -376,6 +376,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [`<Application/>`](https://developer.playcanvas.com/user-manual/react/api/application/): The `Application` component is the root component for any PlayCanvas React application. It initializes and manages the canvas and PlayCanvas application instance.
 - [`<Camera/>`](https://developer.playcanvas.com/user-manual/react/api/camera/): Documentation for the Camera component
 - [`<Collision/>`](https://developer.playcanvas.com/user-manual/react/api/collision/): Documentation for the Collision component
+- [`<Element/>`](https://developer.playcanvas.com/user-manual/react/api/element/): Documentation for the Element component
 - [`<Entity/>`](https://developer.playcanvas.com/user-manual/react/api/entity/): The `Entity` component is the fundamental building block in PlayCanvas React applications.
 - [`<Environment/>`](https://developer.playcanvas.com/user-manual/react/api/environment/): Documentation for the Environment component
 - [`<Gltf/>`](https://developer.playcanvas.com/user-manual/react/api/gltf/): Documentation for the Gltf component
@@ -391,6 +392,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [`<Modify.*>`](https://developer.playcanvas.com/user-manual/react/api/modify/): Documentation for the Modify helpers
 - [`<Render/>`](https://developer.playcanvas.com/user-manual/react/api/render/): Documentation for the Render component
 - [`<Rigidbody/>`](https://developer.playcanvas.com/user-manual/react/api/rigidbody/): Documentation for the Rigidbody component
+- [`<Screen/>`](https://developer.playcanvas.com/user-manual/react/api/screen/): Documentation for the Screen component
 - [`<Script/>`](https://developer.playcanvas.com/user-manual/react/api/script/): Documentation for the Script component
 - [Building a Scene](https://developer.playcanvas.com/user-manual/react/building-a-scene/): Step-by-step tutorial creating a PlayCanvas React scene: app shell, camera, lights, input, models, and staging with live embedded examples.
 - [Examples](https://developer.playcanvas.com/user-manual/react/examples/): Live, editable PlayCanvas React examples you can run and modify directly in the documentation.
