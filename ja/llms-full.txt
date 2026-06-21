@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 455
+Total Documents: 456
 Generated: 2026-06-21
 
 ================================================================================
@@ -25273,6 +25273,10 @@ Less talking, more doing. Each example below runs live on the page and is fully 
     <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '6px' }}>Physics</div>
     <div style={{ opacity: 0.8 }}>Disturb a cluster of rigid bodies in zero gravity with the pointer.</div>
   </a>
+  <a className="card padding--md shadow--md" href="/user-manual/react/examples/text" style={{ color: 'inherit', textDecoration: 'none' }}>
+    <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '6px' }}>Text</div>
+    <div style={{ opacity: 0.8 }}>Render screen-space UI text with a Screen and a text Element, using an MSDF font from font-tools.</div>
+  </a>
 </div>
 
 Want to build something of your own? Spin up a full project in seconds with the [StackBlitz template](https://playcanvas-react.vercel.app/new), or browse the [interactive playground](https://playcanvas-react.vercel.app/examples) for more live examples.
@@ -25302,6 +25306,16 @@ Hover over the capsule to see entities and lights animate with springs from the 
 URL: https://developer.playcanvas.com/user-manual/react/examples/physics/
 
 Move the pointer through the scene to disturb a cluster of rigid bodies in zero gravity.
+
+--------------------------------------------------------------------------------
+
+## Text
+
+URL: https://developer.playcanvas.com/user-manual/react/examples/text/
+
+Render screen-space UI text by attaching a `Screen` to one entity and a text `Element` to a child entity. Both come from `@playcanvas/react/components`, and the font is an MSDF asset created with [font-tools](/user-manual/user-interface/fonts) and loaded with [`useFont`](/user-manual/react/api/hooks/use-asset#usefont).
+
+The demo renders [Source Sans 3](https://github.com/adobe-fonts/source-sans) (SIL Open Font License).
 
 --------------------------------------------------------------------------------
 

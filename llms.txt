@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.7
-Total Documents: 455
+Total Documents: 456
 Generated: 2026-06-21
 
 ## Instructions for Large Language Models
@@ -397,6 +397,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Model Viewer](https://developer.playcanvas.com/user-manual/react/examples/model-viewer/): Live PlayCanvas React example — a glb model viewer with environment lighting, shadows and orbit controls.
 - [Motion](https://developer.playcanvas.com/user-manual/react/examples/motion/): Live PlayCanvas React example — animating entities and lights with springs from the Motion animation library.
 - [Physics](https://developer.playcanvas.com/user-manual/react/examples/physics/): Live PlayCanvas React example — a cluster of rigid bodies disturbed by pointer movement in zero gravity.
+- [Text](https://developer.playcanvas.com/user-manual/react/examples/text/): Live PlayCanvas React example — render screen-space text with a Screen and a text Element using an MSDF font from font-tools.
 - [Getting Started](https://developer.playcanvas.com/user-manual/react/getting-started/): Start here for PlayCanvas React: learning path for install, first scene, asset loading, and prerequisites such as Node and React basics.
 - [Installation](https://developer.playcanvas.com/user-manual/react/getting-started/installation/): Install PlayCanvas React with npm create playcanvas, TypeScript template notes, and manual setup steps for npm packages and Vite.
 - [Concepts](https://developer.playcanvas.com/user-manual/react/guide/): Core PlayCanvas React concepts: Application and Entity components, assets, scripts, render pipeline, and how the wrapper maps to the engine.
