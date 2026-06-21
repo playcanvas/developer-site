@@ -1,0 +1,46 @@
+---
+description: Screen コンポーネントのドキュメント
+---
+
+# `<Screen/>`
+
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+import TextExample from '@site/src/components/playcanvas-react/examples/TextExample';
+import TextExampleSource from '!!raw-loader!@site/src/components/playcanvas-react/examples/TextExample.jsx';
+
+`<Screen/>` コンポーネントは [`<Entity/>`](../entity) を、[`<Element/>`](../element) の子要素をレイアウトする 2D UI スクリーンにします。デフォルトでは画面空間（2D オーバーレイ）でレンダリングされますが、シーン内 UI のためにワールド空間に配置することもできます。`referenceResolution` と `scaleMode` を使って、さまざまな表示サイズに合わせて UI をスケールする方法を制御します。
+
+## 使い方
+
+`<Screen/>` を [`<Entity/>`](../entity) にアタッチし、[`<Element/>`](../element) を持つエンティティをネストしてテキストや画像を描画します。
+
+```tsx
+<Entity name="screen">
+  <Screen referenceResolution={[1280, 720]} />
+  <Entity name="label">
+    <Element type="text" text="Hello, World!" />
+  </Entity>
+</Entity>
+```
+
+この例では、`<Screen/>` とテキストの [`<Element/>`](../element) を使って、中央揃えの画面空間テキストを表示します。
+
+<CodeExample
+  label="画面空間のテキスト"
+  filename="TextExample.jsx"
+  code={TextExampleSource}
+  showControls={false}
+  showDemo
+>
+  <TextExample />
+</CodeExample>
+
+PlayCanvas ドキュメントの [Screen Component](https://api.playcanvas.com/engine/classes/ScreenComponent.html) で詳細を確認できます。
+
+## プロパティ
+
+```tsx asTypedoc
+import { Screen } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Screen>;
+export default $;
+```

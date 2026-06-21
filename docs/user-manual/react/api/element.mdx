@@ -1,0 +1,50 @@
+---
+description: Documentation for the Element component
+---
+
+# `<Element/>`
+
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+import TextExample from '@site/src/components/playcanvas-react/examples/TextExample';
+import TextExampleSource from '!!raw-loader!@site/src/components/playcanvas-react/examples/TextExample.jsx';
+
+The `<Element/>` component draws 2D UI content — text, an image, or an invisible group — on an [`<Entity/>`](../entity). Elements live under a [`<Screen/>`](../screen), which positions them in screen or world space. Set the `type` prop to `"text"`, `"image"` or `"group"`, and use `anchor` and `pivot` to control how the element is positioned and resized within its parent.
+
+## Usage
+
+Add an `<Element/>` to an [`<Entity/>`](../entity) that descends from a [`<Screen/>`](../screen). For text, set `type="text"` and supply a font via `fontAsset` (load one with [`useFont`](../hooks/use-asset#usefont)).
+
+```tsx
+<Entity name="label">
+  <Element
+    type="text"
+    fontAsset={font}
+    text="Hello, World!"
+    fontSize={84}
+    anchor={[0.5, 0.5, 0.5, 0.5]}
+    pivot={[0.5, 0.5]}
+  />
+</Entity>
+```
+
+The example below renders screen-space text. The font is an MSDF asset created with [font-tools](/user-manual/user-interface/fonts) and loaded with [`useFont`](../hooks/use-asset#usefont).
+
+<CodeExample
+  label="Screen-space text"
+  filename="TextExample.jsx"
+  code={TextExampleSource}
+  showControls={false}
+  showDemo
+>
+  <TextExample />
+</CodeExample>
+
+Learn more about the [Element Component](https://api.playcanvas.com/engine/classes/ElementComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+import { Element } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Element>;
+export default $;
+```

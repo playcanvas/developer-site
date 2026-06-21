@@ -77,7 +77,7 @@ app.assets.load(asset);
 </TabItem>
 <TabItem value="react" label="React">
 
-[PlayCanvas React](/user-manual/react) では、font-tools は [`@playcanvas/rollup`](https://www.npmjs.com/package/@playcanvas/plugin) プラグインが提供するビルド時の `?sdf` 変換に対する、スタンドアロンの代替手段です。生成された `.json` を [`useFont`](/user-manual/react/api/hooks/use-asset#usefont) で読み込み、`<Screen>` 内のテキスト `<Element>` に割り当てます。
+[PlayCanvas React](/user-manual/react) では、font-tools は [`@playcanvas/rollup`](https://www.npmjs.com/package/@playcanvas/plugin) プラグインが提供するビルド時の `?sdf` 変換に対する、スタンドアロンの代替手段です。生成された `.json` を [`useFont`](/user-manual/react/api/hooks/use-asset#usefont) で読み込み、[`<Screen>`](/user-manual/react/api/screen) 内のテキスト [`<Element>`](/user-manual/react/api/element) に割り当てます。
 
 ```tsx
 import { Entity } from '@playcanvas/react';
