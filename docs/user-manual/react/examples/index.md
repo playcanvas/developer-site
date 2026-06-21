@@ -18,6 +18,10 @@ Less talking, more doing. Each example below runs live on the page and is fully 
     <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '6px' }}>Physics</div>
     <div style={{ opacity: 0.8 }}>Disturb a cluster of rigid bodies in zero gravity with the pointer.</div>
   </a>
+  <a className="card padding--md shadow--md" href="/user-manual/react/examples/text" style={{ color: 'inherit', textDecoration: 'none' }}>
+    <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '6px' }}>Text</div>
+    <div style={{ opacity: 0.8 }}>Render screen-space UI text with a Screen and a text Element, using an MSDF font from font-tools.</div>
+  </a>
 </div>
 
 Want to build something of your own? Spin up a full project in seconds with the [StackBlitz template](https://playcanvas-react.vercel.app/new), or browse the [interactive playground](https://playcanvas-react.vercel.app/examples) for more live examples.

@@ -484,6 +484,7 @@ const sidebars = {
             'user-manual/react/examples/model-viewer',
             'user-manual/react/examples/motion',
             'user-manual/react/examples/physics',
+            'user-manual/react/examples/text',
           ]
         },
         

@@ -1,0 +1,22 @@
+---
+title: テキスト
+description: PlayCanvas Reactのライブサンプル — font-toolsのMSDFフォントを使い、Screenとテキスト Element で画面空間にテキストを表示。
+---
+
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+import TextExample from '@site/src/components/playcanvas-react/examples/TextExample';
+import TextExampleSource from '!!raw-loader!@site/src/components/playcanvas-react/examples/TextExample.jsx';
+
+`Screen` を1つのエンティティに、テキストの `Element` を子エンティティにアタッチして、画面空間のUIテキストを表示します。どちらも `@playcanvas/react/components` から提供され、フォントは [font-tools](/user-manual/user-interface/fonts) で作成したMSDFアセットを [`useFont`](/user-manual/react/api/hooks/use-asset#usefont) で読み込みます。
+
+<CodeExample
+  label="画面空間のテキスト"
+  filename="TextExample.jsx"
+  code={TextExampleSource}
+  showControls={false}
+  showDemo
+>
+  <TextExample />
+</CodeExample>
+
+このデモは [Source Sans 3](https://github.com/adobe-fonts/source-sans)（SIL Open Font License）を使用しています。
