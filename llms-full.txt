@@ -30332,20 +30332,29 @@ Explore is driven entirely by URL parameters, so any filtered view is a shareabl
 
 | Value | Order |
 |-------|-------|
-| `likes` (default) | Most-liked first |
+| `trending` (default) | Splats gaining the most traction right now |
 | `newest` | Most recently published first |
 | `oldest` | Oldest first |
 | `views` | Most-viewed first |
+| `likes` | Most-liked first |
 | `largest` | Largest file size first |
 | `smallest` | Smallest file size first |
 
+**Trending** is the default view at [superspl.at](https://superspl.at). It ranks splats by a recency-weighted engagement score — recent likes and views count for the most (engagement from the past week or so carries the most weight), with likes weighted above views — and is refreshed periodically, so the page surfaces what's popular *now* rather than all-time favourites.
+
+:::note
+
+Trending already accounts for recency, so it ignores the **time window** below — that control is hidden while Trending is selected.
+
+:::
+
 ### Time window (`?time=...`)
 
-Restricts the result set to splats published within a window.
+Restricts the result set to splats published within a window. This applies to every sort **except `trending`** (the default), which always spans all time — selecting Trending hides the time control and clears any `?time=` value from the URL. For the other sorts the window defaults to `month` (the last 30 days).
 
 | Value | Window |
 |-------|--------|
-| `month` (default) | Last 30 days |
+| `month` | Last 30 days |
 | `day` | Last 24 hours |
 | `week` | Last 7 days |
 | `year` | Last 12 months |
