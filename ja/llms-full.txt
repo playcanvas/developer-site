@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 454
+Total Documents: 455
 Generated: 2026-06-21
 
 ================================================================================
@@ -4784,6 +4784,12 @@ URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/font/
 A Font asset contains an image with all the characters of the font that the user chose to include, and data related to how each character should be displayed. Font assets are used to render text using an [Element](/user-manual/editor/scenes/components/element/) component of type Text. To render text, add an Element Component to an Entity set its type to Text and drag and drop the Font asset to the Font slot of the Element Component.
 
 You can create a Font asset by uploading a font file ending in `.ttf`, `.ttc`, `.otf` or `.dfont`. We convert the uploaded font to a multi-channel signed distance field. This makes a font keep its details at various sizes so you only need to upload one font and use the same one for every size you want to display. The technique might work better for some fonts than others.
+
+:::tip Not using the Editor?
+
+Engine, React and Web Components projects can generate the same Font asset without the Editor using [font-tools](/user-manual/user-interface/fonts).
+
+:::
 
 Here are the properties that you can edit for a Font asset in the Editor:
 
@@ -31461,6 +31467,45 @@ Sizes and positioning for Elements that do not have a Screen behaves slightly di
 
 --------------------------------------------------------------------------------
 
+## Fonts
+
+URL: https://developer.playcanvas.com/user-manual/user-interface/fonts/
+
+A [Text Element](/user-manual/user-interface/text-elements) renders its string using a **Font asset** — a multi-channel signed distance field (MSDF) atlas made up of a `.json` file (glyph metrics) and one or more `.png` texture pages. Because the glyphs are stored as distance fields rather than fixed-size bitmaps, a single Font asset stays crisp at any size, so you only need one asset per typeface.
+
+This page covers the two ways to create a Font asset and how to load one in each runtime.
+
+## Creating a Font asset
+
+### In the Editor
+
+Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor and it is converted to an MSDF Font asset automatically. You choose which characters to include and tune the result, then click **Process Font** to regenerate. See the [Font asset inspector](/user-manual/editor/assets/inspectors/font) for the full list of options.
+
+### Without the Editor — font-tools
+
+If you are building with the Engine, React or Web Components — without the Editor — use [**font-tools**](https://github.com/playcanvas/font-tools) to generate the same `.json` + `.png` asset the Editor produces. There are two ways to use it:
+
+- **Web app** — Open [playcanvas.github.io/font-tools](https://playcanvas.github.io/font-tools/), drag in a TTF or OTF, choose a character set and glyph size, preview the result in live PlayCanvas text, and download the files. Everything runs in your browser — your font is never uploaded.
+- **Command line** — Generate an asset without leaving your terminal:
+
+  ```bash
+  npx @playcanvas/font-tools MyFont.ttf --charset latin-ext -o assets/fonts/myfont
+  ```
+
+  This writes `myfont.json` and `myfont.png` (large character sets spill onto additional pages: `myfont1.png`, `myfont2.png`, and so on).
+
+:::note Open Source
+
+font-tools is [open-sourced under an MIT license on GitHub](https://github.com/playcanvas/font-tools). See the README for the full list of CLI options and the JavaScript API for generating fonts programmatically.
+
+:::
+
+## Using a Font asset
+
+Keep the `.json` and its `.png` page(s) together, with the same base name — the loader derives the texture URLs from the JSON URL and fetches the pages automatically.
+
+--------------------------------------------------------------------------------
+
 ## Group Elements
 
 URL: https://developer.playcanvas.com/user-manual/user-interface/group-elements/
@@ -31944,7 +31989,7 @@ With a value of 0.5 the two changes are balanced and the button stays the same s
 
 URL: https://developer.playcanvas.com/user-manual/user-interface/text-elements/
 
-The Text Element is used to display a string of text using a [font asset](/user-manual/editor/assets/inspectors/font).
+The Text Element is used to display a string of text using a [font asset](/user-manual/editor/assets/inspectors/font). See [Fonts](/user-manual/user-interface/fonts) for how to create one — in the Editor or with the standalone font-tools.
 
 ## Text
 
@@ -32536,7 +32581,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
 | `lazy` | Flag | - | Whether to defer loading until first referenced or explicitly requested |
 | `src` | String | - | Path to the asset file |
-| `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
+| `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
 
 </div>
 

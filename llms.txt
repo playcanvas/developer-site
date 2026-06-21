@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.7
-Total Documents: 454
+Total Documents: 455
 Generated: 2026-06-21
 
 ## Instructions for Large Language Models
@@ -625,6 +625,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 ### User Interface
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface/): Choose Screen and Element components for in-canvas UI or HTML and CSS, with performance trade-offs.
 - [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements/): Anchor, pivot, and margin properties that position and size Element components relative to their parents.
+- [Fonts](https://developer.playcanvas.com/user-manual/user-interface/fonts/): Create the MSDF Font assets that text elements need — in the Editor, or with the standalone font-tools for Engine, React and Web Components projects.
 - [Group Elements](https://developer.playcanvas.com/user-manual/user-interface/group-elements/): Use group elements as empty containers to position and parent other UI elements in the hierarchy.
 - [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements/): Display textures or solid colors with tint and opacity, and optional custom materials on image elements.
 - [Input](https://developer.playcanvas.com/user-manual/user-interface/input/): Enable element input, initialize ElementInput with the app, and handle clicks, hovers, and touch on UI.
