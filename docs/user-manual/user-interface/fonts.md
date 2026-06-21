@@ -77,7 +77,7 @@ No loading code is required. Drag the Font asset onto the **Font** slot of a Tex
 </TabItem>
 <TabItem value="react" label="React">
 
-In [PlayCanvas React](/user-manual/react), font-tools is the standalone alternative to the build-time `?sdf` conversion offered by the [`@playcanvas/rollup`](https://www.npmjs.com/package/@playcanvas/plugin) plugin. Load the generated `.json` with [`useFont`](/user-manual/react/api/hooks/use-asset#usefont), then assign it to a text `<Element>` inside a `<Screen>`:
+In [PlayCanvas React](/user-manual/react), font-tools is the standalone alternative to the build-time `?sdf` conversion offered by the [`@playcanvas/rollup`](https://www.npmjs.com/package/@playcanvas/plugin) plugin. Load the generated `.json` with [`useFont`](/user-manual/react/api/hooks/use-asset#usefont), then assign it to a text [`<Element>`](/user-manual/react/api/element) inside a [`<Screen>`](/user-manual/react/api/screen):
 
 ```tsx
 import { Entity } from '@playcanvas/react';

@@ -1,0 +1,50 @@
+---
+description: Element コンポーネントのドキュメント
+---
+
+# `<Element/>`
+
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+import TextExample from '@site/src/components/playcanvas-react/examples/TextExample';
+import TextExampleSource from '!!raw-loader!@site/src/components/playcanvas-react/examples/TextExample.jsx';
+
+`<Element/>` コンポーネントは、[`<Entity/>`](../entity) 上に 2D UI コンテンツ（テキスト、画像、または不可視のグループ）を描画します。Element は [`<Screen/>`](../screen) の下に配置され、Screen がそれらを画面空間またはワールド空間に位置づけます。`type` プロパティを `"text"`、`"image"`、`"group"` のいずれかに設定し、`anchor` と `pivot` を使って親要素内での位置とサイズ変更の方法を制御します。
+
+## 使い方
+
+[`<Screen/>`](../screen) の子孫である [`<Entity/>`](../entity) に `<Element/>` を追加します。テキストの場合は `type="text"` を設定し、フォントを `fontAsset` で指定します（[`useFont`](../hooks/use-asset#usefont) で読み込みます）。
+
+```tsx
+<Entity name="label">
+  <Element
+    type="text"
+    fontAsset={font}
+    text="Hello, World!"
+    fontSize={84}
+    anchor={[0.5, 0.5, 0.5, 0.5]}
+    pivot={[0.5, 0.5]}
+  />
+</Entity>
+```
+
+以下の例は画面空間のテキストを表示します。フォントは [font-tools](/user-manual/user-interface/fonts) で作成し、[`useFont`](../hooks/use-asset#usefont) で読み込んだ MSDF アセットです。
+
+<CodeExample
+  label="画面空間のテキスト"
+  filename="TextExample.jsx"
+  code={TextExampleSource}
+  showControls={false}
+  showDemo
+>
+  <TextExample />
+</CodeExample>
+
+PlayCanvas ドキュメントの [Element Component](https://api.playcanvas.com/engine/classes/ElementComponent.html) で詳細を確認できます。
+
+## プロパティ
+
+```tsx asTypedoc
+import { Element } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Element>;
+export default $;
+```

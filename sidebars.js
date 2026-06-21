@@ -445,11 +445,13 @@ const sidebars = {
                 'user-manual/react/api/anim',
                 'user-manual/react/api/camera',
                 'user-manual/react/api/collision',
+                'user-manual/react/api/element',
                 'user-manual/react/api/environment',
                 'user-manual/react/api/gsplat',
                 'user-manual/react/api/light',
                 'user-manual/react/api/render',
                 'user-manual/react/api/rigidbody',
+                'user-manual/react/api/screen',
                 'user-manual/react/api/script',
               ]
             },
