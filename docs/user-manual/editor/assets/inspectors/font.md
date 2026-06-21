@@ -7,6 +7,12 @@ A Font asset contains an image with all the characters of the font that the user
 
 You can create a Font asset by uploading a font file ending in `.ttf`, `.ttc`, `.otf` or `.dfont`. We convert the uploaded font to a multi-channel signed distance field. This makes a font keep its details at various sizes so you only need to upload one font and use the same one for every size you want to display. The technique might work better for some fonts than others.
 
+:::tip Not using the Editor?
+
+Engine, React and Web Components projects can generate the same Font asset without the Editor using [font-tools](/user-manual/user-interface/fonts).
+
+:::
+
 Here are the properties that you can edit for a Font asset in the Editor:
 
 ![Font Asset](/img/user-manual/assets/fonts/font.png)

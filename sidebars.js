@@ -1001,6 +1001,7 @@ const sidebars = {
         'user-manual/user-interface/group-elements',
         'user-manual/user-interface/image-elements',
         'user-manual/user-interface/text-elements',
+        'user-manual/user-interface/fonts',
         'user-manual/user-interface/layout-groups',
         'user-manual/user-interface/input',
         'user-manual/user-interface/localization',
