@@ -20,7 +20,7 @@ description: "pc-asset要素のリファレンス: URLまたはidで読み込む
 | `id` | String | - | 他のタグがこのアセットを参照するために使用する一意の識別子 |
 | `lazy` | Flag | - | 最初に参照されるか、明示的に要求されるまでロードを延期するかどうか |
 | `src` | String | - | アセットファイルへのパス |
-| `type` | Enum | *inferred* | アセットタイプ：`"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
+| `type` | Enum | *inferred* | アセットタイプ：`"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
 
 </div>
 

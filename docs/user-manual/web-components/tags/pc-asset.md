@@ -20,7 +20,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
 | `lazy` | Flag | - | Whether to defer loading until first referenced or explicitly requested |
 | `src` | String | - | Path to the asset file |
-| `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
+| `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
 
 </div>
 

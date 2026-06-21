@@ -3,7 +3,7 @@ title: Text Elements
 description: Configure text elements with fonts, simple color markup, alignment, and localized string keys.
 ---
 
-The Text Element is used to display a string of text using a [font asset](/user-manual/editor/assets/inspectors/font).
+The Text Element is used to display a string of text using a [font asset](/user-manual/editor/assets/inspectors/font). See [Fonts](/user-manual/user-interface/fonts) for how to create one — in the Editor or with the standalone font-tools.
 
 ## Text
 
