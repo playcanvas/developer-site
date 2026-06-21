@@ -20,11 +20,13 @@ Components add behavior to entities. Nest them inside an `<Entity/>` to attach t
 - **[`<Align/>`](./align)** - Alignment helper
 - **[`<Camera/>`](./camera)** - Camera and viewport
 - **[`<Collision/>`](./collision)** - Physics collision shapes
+- **[`<Element/>`](./element)** - 2D UI content (text, image or group)
 - **[`<Environment/>`](./environment)** - Scene environment and skybox
 - **[`<GSplat/>`](./gsplat)** - Gaussian splat rendering
 - **[`<Light/>`](./light)** - Directional, point and spot lights
 - **[`<Render/>`](./render)** - Mesh rendering (primitives and assets)
 - **[`<Rigidbody/>`](./rigidbody)** - Physics rigid bodies
+- **[`<Screen/>`](./screen)** - 2D UI screen (screen or world space)
 - **[`<Script/>`](./script)** - Custom script components
 
 ## Hooks

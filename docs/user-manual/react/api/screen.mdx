@@ -1,0 +1,46 @@
+---
+description: Documentation for the Screen component
+---
+
+# `<Screen/>`
+
+import { CodeExample } from '@site/src/components/playcanvas-react/CodeExample';
+import TextExample from '@site/src/components/playcanvas-react/examples/TextExample';
+import TextExampleSource from '!!raw-loader!@site/src/components/playcanvas-react/examples/TextExample.jsx';
+
+The `<Screen/>` component turns an [`<Entity/>`](../entity) into a 2D UI screen that lays out [`<Element/>`](../element) children. By default it renders in screen space (a 2D overlay), but it can also be placed in world space for in-scene UI. Use `referenceResolution` and `scaleMode` to control how the UI scales across different display sizes.
+
+## Usage
+
+Attach a `<Screen/>` to an [`<Entity/>`](../entity), then nest entities carrying an [`<Element/>`](../element) to draw text or images.
+
+```tsx
+<Entity name="screen">
+  <Screen referenceResolution={[1280, 720]} />
+  <Entity name="label">
+    <Element type="text" text="Hello, World!" />
+  </Entity>
+</Entity>
+```
+
+This example renders a centred line of screen-space text using a `<Screen/>` and a text [`<Element/>`](../element).
+
+<CodeExample
+  label="Screen-space text"
+  filename="TextExample.jsx"
+  code={TextExampleSource}
+  showControls={false}
+  showDemo
+>
+  <TextExample />
+</CodeExample>
+
+Learn more about the [Screen Component](https://api.playcanvas.com/engine/classes/ScreenComponent.html) in the PlayCanvas documentation.
+
+## Properties
+
+```tsx asTypedoc
+import { Screen } from '@playcanvas/react/components'
+type $ = React.ComponentProps<typeof Screen>;
+export default $;
+```
