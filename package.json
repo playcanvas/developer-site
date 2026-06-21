@@ -46,7 +46,7 @@
     "@docusaurus/theme-live-codeblock": "^3.10.1",
     "@docusaurus/theme-mermaid": "^3.10.1",
     "@mdx-js/react": "^3.1.1",
-    "@playcanvas/react": "^0.11.4",
+    "@playcanvas/react": "^0.11.5",
     "@tanstack/react-query": "^5.101.0",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
