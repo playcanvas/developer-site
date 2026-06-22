@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.7
-Total Documents: 458
-Generated: 2026-06-21
+Total Documents: 463
+Generated: 2026-06-22
 
 ## Instructions for Large Language Models
 
@@ -418,11 +418,14 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Tag Reference](https://developer.playcanvas.com/user-manual/web-components/tags/): Alphabetical index of PlayCanvas Web Component tags with short summaries linking to full attribute and usage documentation for each element.
 - [<pc-app>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app/): Reference for the pc-app element: initializes the PlayCanvas Application, graphics options, and root container for scenes and entities.
 - [<pc-asset>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset/): Reference for the pc-asset element: declare assets to load by URL or id, types, preloading, and how other tags consume loaded resources.
+- [<pc-button>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button/): Reference for the pc-button element: interactive button component with tint and sprite transitions for hover, pressed, and inactive states.
 - [<pc-camera>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera/): Reference for the pc-camera element: projection, clear options, render order, and attributes that map to the engine camera component.
 - [<pc-collision>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision/): Reference for the pc-collision element: collision shapes and parameters for triggers, rigid bodies, and physics queries in declarative HTML.
 - [<pc-element>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element/): Reference for the pc-element element: screen-space UI text, images, and groups mapped to PlayCanvas Element components and layout.
 - [<pc-entity>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity/): Reference for the pc-entity element: names, transforms, hierarchy rules, and which child component tags are valid under an entity.
 - [<pc-gsplat>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat/): Reference for the pc-gsplat element: render Gaussian splat assets with attributes for the splat data source, shadows, and LOD tuning.
+- [<pc-layoutchild>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutchild/): Reference for the pc-layoutchild element: per-child layout constraints (min/max size and fit proportions) within a layout group.
+- [<pc-layoutgroup>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutgroup/): Reference for the pc-layoutgroup element: arranges child elements in horizontal or vertical layouts with spacing, padding, alignment, and fitting.
 - [<pc-light>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light/): Reference for the pc-light element: light types, color, intensity, shadows, and attributes for directional, spot, and omni lights.
 - [<pc-listener>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-listener/): Reference for the pc-listener element: positional audio listener placement and settings for 3D sound relative to the active camera.
 - [<pc-model>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/): Reference for the pc-model element: load and instance GLB or model assets on an entity with import settings and render integration.
@@ -434,6 +437,8 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-screen>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen/): Reference for the pc-screen element: 2D screen space for UI elements, resolution, scale modes, and child pc-element hierarchies.
 - [<pc-script>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/): Reference for the pc-script element: attach a single script asset or class to an entity with ordering and attribute wiring in HTML.
 - [<pc-scripts>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scripts/): Reference for the pc-scripts element: script component container grouping multiple pc-script children and shared script settings.
+- [<pc-scrollbar>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar/): Reference for the pc-scrollbar element: draggable scrollbar with orientation, handle size, and value, used to drive a scroll view.
+- [<pc-scrollview>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollview/): Reference for the pc-scrollview element: scrollable viewport with content, scrollbars, mouse-wheel support, and bounce/clamp/infinite modes.
 - [<pc-sky>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky/): Reference for the pc-sky element: image-based lighting and skyboxes from cubemap or equirectangular assets for scene backgrounds.
 - [<pc-sound>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/): Reference for the pc-sound element: positional or non-positional audio clips, volume, pitch, autoplay rules, and asset references.
 - [<pc-sounds>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sounds/): Reference for the pc-sounds element: sound component container that groups pc-sound slots and shared audio settings on an entity.

@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 458
-Generated: 2026-06-21
+Total Documents: 463
+Generated: 2026-06-22
 
 ================================================================================
 
@@ -32579,11 +32579,14 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 | --- | --- |
 | [`<pc-app>`](pc-app) | Defines the root element of your application. |
 | [`<pc-asset>`](pc-asset) | Defines an asset to be loaded by your application. |
+| [`<pc-button>`](pc-button) | Defines a button component. |
 | [`<pc-camera>`](pc-camera) | Defines a camera that is used to render the scene. |
 | [`<pc-collision>`](pc-collision) | Defines a collision component used by triggers and rigid bodies. |
 | [`<pc-element>`](pc-element) | Defines a text, image or group user interface element. |
 | [`<pc-entity>`](pc-entity) | Defines an entity. |
 | [`<pc-gsplat>`](pc-gsplat) | Defines a gsplat component that renders 3D Gaussian Splats. |
+| [`<pc-layoutchild>`](pc-layoutchild) | Defines a layout child component. |
+| [`<pc-layoutgroup>`](pc-layoutgroup) | Defines a layout group component. |
 | [`<pc-light>`](pc-light) | Defines a light component. |
 | [`<pc-listener>`](pc-listener) | Defines a listener component. |
 | [`<pc-module>`](pc-module) | Defines a WebAssembly module. |
@@ -32593,6 +32596,8 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 | [`<pc-scene>`](pc-scene) | Defines a scene. |
 | [`<pc-script>`](pc-script) | Defines a single script assigned to a script component. |
 | [`<pc-scripts>`](pc-scripts) | Defines a script component. |
+| [`<pc-scrollbar>`](pc-scrollbar) | Defines a scrollbar component. |
+| [`<pc-scrollview>`](pc-scrollview) | Defines a scroll view component. |
 | [`<pc-sky>`](pc-sky) | Defines an image-based skybox. |
 | [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
 | [`<pc-sound>`](pc-sound) | Defines a single sound assigned to a sound component. |
@@ -32655,10 +32660,15 @@ The `<pc-asset>` tag is used to define an asset.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
+| `atlas` | String | - | For `sprite` assets: the `id` of the `textureatlas` `<pc-asset>` this sprite reads from. The atlas must be declared before the sprite |
+| `data` | String | - | Inline JSON asset data. Used by texture atlases (frame definitions) and sprites |
+| `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
 | `lazy` | Flag | - | Whether to defer loading until first referenced or explicitly requested |
+| `pixels-per-unit` | Number | `"1"` | For `sprite` assets: number of pixels per world unit |
+| `render-mode` | Enum | `"simple"` | For `sprite` assets: `"simple"` \| `"sliced"` \| `"tiled"`. Use `"sliced"` for 9-slice panels |
 | `src` | String | - | Path to the asset file |
-| `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"text"` \| `"texture"` |
+| `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"sprite"` \| `"text"` \| `"texture"` \| `"textureatlas"` |
 
 </div>
 
@@ -32673,9 +32683,83 @@ The `<pc-asset>` tag is used to define an asset.
 </pc-app>
 ```
 
+Sprites are defined by a texture atlas (which holds the frame definitions) and one or more `sprite` assets that reference it. The atlas must be declared before any sprite that uses it:
+
+```html
+<pc-app>
+    
+    <pc-asset id="ui-sheet" type="textureatlas" src="assets/textures/ui.png"
+              data='{"frames":{"3":{"name":"panel","border":[10,10,10,10],"rect":[41,1,100,100],"pivot":[0.5,0.5]}}}'></pc-asset>
+    
+    <pc-asset id="panel" type="sprite" atlas="ui-sheet" frame-keys="3" render-mode="sliced"></pc-asset>
+</pc-app>
+```
+
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-asset>` elements using the [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-button>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-button/
+
+The `<pc-button>` tag is used to define a button component, which makes an element respond to pointer input with visual transitions.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* The entity must also have a [`<pc-element>`](../pc-element) (typically `type="image"`) with the `use-input` attribute set, so the button can receive pointer input.
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `active` | Boolean | `"true"` | Whether the button responds to input |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `fade-duration` | Number | `"0"` | Duration in milliseconds over which tint transitions are applied |
+| `hit-padding` | Vector4 | `"0 0 0 0"` | Expands the button's hit area as `left bottom right top` |
+| `hover-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown on hover (sprite transition mode) |
+| `hover-sprite-frame` | Number | `"0"` | Frame of the hover sprite |
+| `hover-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity on hover (tint transition mode) |
+| `image` | String | - | Reference (CSS selector, element id, or entity name) to the [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity |
+| `inactive-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown when inactive (sprite transition mode) |
+| `inactive-sprite-frame` | Number | `"0"` | Frame of the inactive sprite |
+| `inactive-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when inactive (tint transition mode) |
+| `pressed-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown when pressed (sprite transition mode) |
+| `pressed-sprite-frame` | Number | `"0"` | Frame of the pressed sprite |
+| `pressed-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when pressed (tint transition mode) |
+| `transition-mode` | Enum | `"tint"` | How the button reacts to hover/press: `"tint"` \| `"sprite"` |
+
+</div>
+
+## Example
+
+```html
+<pc-entity name="button">
+    
+    <pc-element type="image" width="190" height="45" use-input sprite-asset="blue-button"></pc-element>
+    <pc-button transition-mode="tint" hover-tint="0.8 0.8 0.8 1" pressed-tint="0.6 0.6 0.6 1"></pc-button>
+</pc-entity>
+```
+
+You can respond to clicks by listening for the `click` event on the underlying button component:
+
+```javascript
+const entity = document.querySelector('pc-entity[name="button"]').entity;
+entity.button.on('click', () => {
+    console.log('Button clicked!');
+});
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-button>` elements using the [ButtonComponentElement API](https://api.playcanvas.com/web-components/classes/ButtonComponentElement.html).
 
 --------------------------------------------------------------------------------
 
@@ -32788,11 +32872,17 @@ You can programmatically create and manipulate `<pc-collision>` elements using t
 
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-element/
 
-The `<pc-element>` tag is used to define an element component.
+The `<pc-element>` tag is used to define an element component. Element components are the building blocks of user interfaces and come in three types — `group`, `image`, and `text` — selected with the `type` attribute. Which attributes apply depends on the type.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
+
+:::
+
+:::note
+
+Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [`<pc-asset>`](../pc-asset)) or a texture, and can act as a `mask` to clip their descendants. Only text elements require a font `asset`.
 
 :::
 
@@ -32803,16 +32893,30 @@ The `<pc-element>` tag is used to define an element component.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `anchor` | Vector4 | `"0 0 0 1"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
-| `asset` | String | - | Font asset ID (must reference a `font` type asset) |
-| `auto-width` | Flag | - | Whether to automatically adjust width to fit content |
+| `asset` | String | - | Font asset ID (must reference a `font` type asset). Required for text elements only |
+| `auto-fit-height` | Flag | - | Reduce the font size (down to `min-font-size`) so text fits the element's height. Requires `auto-height="false"`. Text elements only |
+| `auto-fit-width` | Flag | - | Reduce the font size (down to `min-font-size`) so text fits the element's width. Requires `auto-width="false"`. Text elements only |
+| `auto-height` | Boolean | `"true"` | Whether to automatically adjust height to fit text content. Text elements only |
+| `auto-width` | Boolean | `"true"` | Whether to automatically adjust width to fit text content. Text elements only |
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `enable-markup` | Flag | - | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
-| `font-size` | Number | `"16"` | Font size in pixels |
-| `line-height` | Number | `"1.2"` | Line height multiplier |
+| `font-size` | Number | `"32"` | Font size in pixels |
+| `height` | Number | `"0"` | Height in pixels (0 for auto-sizing) |
+| `line-height` | Number | `"32"` | Line height in pixels |
+| `margin` | Vector4 | - | Insets the element from a split (stretched) anchor as `left bottom right top`. For point anchors, `width`/`height` govern size instead |
+| `mask` | Flag | - | Whether the element clips its descendants to its bounds. Image elements only |
+| `max-font-size` | Number | `"32"` | Largest font size used when auto-fitting |
+| `min-font-size` | Number | `"8"` | Smallest font size used when auto-fitting |
+| `opacity` | Number | `"1"` | Opacity, from 0 (transparent) to 1 (opaque) |
 | `pivot` | Vector2 | `"0.5 0.5"` | Pivot point as "X Y" values |
+| `pixels-per-unit` | Number | - | Pixels per unit used when rendering a sprite. Image elements only |
+| `sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
+| `sprite-frame` | Number | `"0"` | Frame index of the sprite to render. Image elements only |
 | `text` | String | - | Text content to display |
+| `texture-asset` | String | - | Texture [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `type` | Enum | `"group"` | Element type: `"group"` \| `"image"` \| `"text"` |
+| `use-input` | Flag | - | Whether the element receives pointer input. Required for [`<pc-button>`](../pc-button) and scroll-view interaction |
 | `width` | Number | `"0"` | Width in pixels (0 for auto-sizing) |
 | `wrap-lines` | Flag | - | Whether to wrap text lines |
 
@@ -32922,6 +33026,107 @@ When rendering splat-based scenes, it is recommended to set `antialias` and `hig
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-gsplat>` elements using the [GSplatComponentElement API](https://api.playcanvas.com/web-components/classes/GSplatComponentElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-layoutchild>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutchild/
+
+The `<pc-layoutchild>` tag is used to define a layout child component, which controls how an element is sized by its parent [`<pc-layoutgroup>`](../pc-layoutgroup).
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* That entity must itself be a child of an entity with a [`<pc-layoutgroup>`](../pc-layoutgroup).
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `exclude-from-layout` | Flag | - | Exclude this element from the layout so it takes up no space |
+| `fit-height-proportion` | Number | `"0"` | Proportion of the group's spare height this element takes when `height-fitting` stretches or shrinks |
+| `fit-width-proportion` | Number | `"0"` | Proportion of the group's spare width this element takes when `width-fitting` stretches or shrinks |
+| `max-height` | Number | - | Maximum height the element is laid out with (omit for no limit) |
+| `max-width` | Number | - | Maximum width the element is laid out with (omit for no limit) |
+| `min-height` | Number | `"0"` | Minimum height the element is laid out with |
+| `min-width` | Number | `"0"` | Minimum width the element is laid out with |
+
+</div>
+
+## Example
+
+```html
+<pc-entity>
+    <pc-element type="image" width="200" height="45"></pc-element>
+    <pc-layoutchild min-height="45" fit-width-proportion="1"></pc-layoutchild>
+</pc-entity>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-layoutchild>` elements using the [LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-layoutgroup>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutgroup/
+
+The `<pc-layoutgroup>` tag is used to define a layout group component, which automatically arranges its child element entities in a row or column.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* Child entities are laid out automatically. Add a [`<pc-layoutchild>`](../pc-layoutchild) to a child to control how it is sized within the group.
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `alignment` | Vector2 | `"0 1"` | Horizontal and vertical alignment of the child elements (each component 0 to 1) |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `height-fitting` | Enum | `"none"` | Fitting along the vertical axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
+| `orientation` | Enum | `"horizontal"` | Orientation of the layout: `"horizontal"` \| `"vertical"` |
+| `padding` | Vector4 | `"0 0 0 0"` | Padding around the group as `left bottom right top` |
+| `reverse-x` | Flag | - | Reverse the order of children along the horizontal axis |
+| `reverse-y` | Flag | - | Reverse the order of children along the vertical axis |
+| `spacing` | Vector2 | `"0 0"` | Spacing between children as `x y` |
+| `width-fitting` | Enum | `"none"` | Fitting along the horizontal axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
+| `wrap` | Flag | - | Whether children wrap onto a new line or column when they overflow the group |
+
+</div>
+
+## Example
+
+```html
+<pc-entity name="list">
+    <pc-element type="group" width="220" height="400"></pc-element>
+    <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 5" padding="10 10 10 10"></pc-layoutgroup>
+
+    <pc-entity name="item-1">
+        <pc-element type="image" width="200" height="45"></pc-element>
+        <pc-layoutchild></pc-layoutchild>
+    </pc-entity>
+    <pc-entity name="item-2">
+        <pc-element type="image" width="200" height="45"></pc-element>
+        <pc-layoutchild></pc-layoutchild>
+    </pc-entity>
+</pc-entity>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-layoutgroup>` elements using the [LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html).
 
 --------------------------------------------------------------------------------
 
@@ -33427,6 +33632,131 @@ The `<pc-scripts>` tag is used to define a scripts component.
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-scripts>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-scrollbar>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar/
+
+The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides a draggable handle that reports a position in the range 0 to 1.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It is referenced by a [`<pc-scrollview>`](../pc-scrollview) via its `horizontal-scrollbar` or `vertical-scrollbar` attribute.
+* Its `handle` attribute references the [`<pc-entity>`](../pc-entity) used as the draggable handle, whose image element should have `use-input` set.
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `handle` | String | - | Reference (CSS selector, element id, or entity name) to the [`<pc-entity>`](../pc-entity) used as the draggable handle |
+| `handle-size` | Number | `"0.5"` | Size of the handle relative to the size of the track (0 to 1) |
+| `orientation` | Enum | `"horizontal"` | Orientation of the scrollbar: `"horizontal"` \| `"vertical"` |
+| `value` | Number | `"0"` | Current position of the scrollbar (0 to 1) |
+
+</div>
+
+## Example
+
+```html
+<pc-entity name="scrollbar">
+    <pc-element type="image" anchor="1 0 1 1" width="20"></pc-element>
+    <pc-scrollbar orientation="vertical" handle-size="0.5" handle="#handle"></pc-scrollbar>
+
+    
+    <pc-entity name="handle" id="handle">
+        <pc-element type="image" anchor="0 1 1 1" use-input></pc-element>
+        <pc-button></pc-button>
+    </pc-entity>
+</pc-entity>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-scrollbar>` elements using the [ScrollbarComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollbarComponentElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-scrollview>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollview/
+
+The `<pc-scrollview>` tag is used to define a scroll view component, which lets the user scroll a larger content area within a clipped viewport.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It references its viewport, content, and scrollbar entities by CSS selector, element id, or entity name.
+* The viewport element should have its `mask` attribute set so the content is clipped to the scroll view's bounds.
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `bounce-amount` | Number | `"0.1"` | How far content bounces past its bounds when `scroll-mode="bounce"` (0 to 1) |
+| `content` | String | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
+| `horizontal` | Boolean | `"true"` | Whether horizontal scrolling is enabled |
+| `horizontal-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
+| `horizontal-scrollbar-visibility` | Enum | `"when-required"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
+| `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
+| `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
+| `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
+| `vertical` | Boolean | `"true"` | Whether vertical scrolling is enabled |
+| `vertical-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
+| `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
+
+</div>
+
+## Example
+
+```html
+<pc-entity name="scroll-view">
+    <pc-element type="group" width="230" height="400"></pc-element>
+    <pc-scrollview
+        horizontal="false"
+        vertical="true"
+        viewport="#viewport"
+        content="#content"
+        vertical-scrollbar="#v-scrollbar"></pc-scrollview>
+
+    
+    <pc-entity name="viewport" id="viewport">
+        <pc-element type="image" anchor="0 0 1 1" mask></pc-element>
+
+        
+        <pc-entity name="content" id="content">
+            <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="220" height="700" use-input></pc-element>
+        </pc-entity>
+    </pc-entity>
+
+    
+    <pc-entity name="v-scrollbar" id="v-scrollbar">
+        <pc-element type="image" anchor="1 0 1 1" width="20"></pc-element>
+        <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
+        <pc-entity name="handle" id="v-handle">
+            <pc-element type="image" anchor="0 1 1 1" use-input></pc-element>
+            <pc-button></pc-button>
+        </pc-entity>
+    </pc-entity>
+</pc-entity>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-scrollview>` elements using the [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html).
 
 --------------------------------------------------------------------------------
 
