@@ -28,6 +28,21 @@ material.chunks.APIVersion = pc.CHUNKAPI_1_55;
 
 次の表は、Engine リリースごとのチャンクの変更点をまとめたものです。
 
+### *Engine v2.20*
+
+#### MSDF テキストレンダリングの刷新
+
+`ElementComponent` のテキストで使用される `msdfPS` チャンクが刷新され、グリフを本来の(デザイナーが意図した)エッジでレンダリングし、距離フィールドの勾配からアンチエイリアスを行うようになりました。これにより、`f` の横棒など細い接合部を崩していた固定的な内側への収縮(erosion)が修正されました。詳細は [PR #8935](https://github.com/playcanvas/engine/pull/8935) を参照してください。
+
+この変更に伴い、エンジンは `font_pxrange` および `font_textureWidth` ユニフォームを設定しなくなり、`map()` ヘルパーがチャンクから削除されました。以前のリリースからコピーしたカスタムの `msdfPS` オーバーライドがこれらのユニフォームを参照している場合、それらの値が渡されなくなり(既定値の `0` となり、従来のスムージング計算でゼロ除算が発生します)、テキストが壊れたり表示されなくなったりします。
+
+影響を受けるチャンク:
+
+- `src/scene/shader-lib/glsl/chunks/common/frag/msdf.js`
+- `src/scene/shader-lib/wgsl/chunks/common/frag/msdf.js`
+
+**移行方法:** カスタムの `msdfPS` オーバーライドを最新のチャンクに合わせて更新してください。`font_pxrange`、`font_textureWidth`、`map()` への参照を削除し、新しいエッジ/アンチエイリアスのロジックを採用します。意図的なウェイト調整は、グローバルなしきい値のバイアスではなく、フォントごとの `font_sdfIntensity`(または `outlineThickness`)を使用してください。
+
 ### *Engine v2.6*
 
 #### Internal engine chunks

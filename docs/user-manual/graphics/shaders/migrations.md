@@ -29,6 +29,23 @@ By doing this you will no longer see warning messages in the console.
 
 The following tables break down the chunk changes by Engine release.
 
+### *Engine v2.20*
+
+#### MSDF text rendering reworked
+
+The `msdfPS` chunk used by `ElementComponent` text was reworked to render glyphs at their true (designer-intended) edge and to anti-alias from the gradient of the distance field, fixing a fixed inward erosion that broke thin junctions (e.g. the crossbar of an `f`). See [PR #8935](https://github.com/playcanvas/engine/pull/8935) for details.
+
+As part of this, the engine no longer sets the `font_pxrange` and `font_textureWidth` uniforms, and the `map()` helper was removed from the chunk. A custom `msdfPS` override copied from an earlier release that still references these uniforms will no longer receive their values (they default to `0`, producing a divide-by-zero in the old smoothing calculation), resulting in broken or invisible text.
+
+Affected chunks:
+
+- `src/scene/shader-lib/glsl/chunks/common/frag/msdf.js`
+- `src/scene/shader-lib/wgsl/chunks/common/frag/msdf.js`
+
+**Migration:** Update any custom `msdfPS` override against the latest chunk — remove references to `font_pxrange`, `font_textureWidth` and `map()`, and adopt the new edge/anti-aliasing logic. Deliberate weight adjustments should use the per-font `font_sdfIntensity` (or `outlineThickness`) rather than a global threshold bias.
+
+---
+
 ### *Engine v2.16*
 
 #### Gaussian Splat Accessor Function Renames
