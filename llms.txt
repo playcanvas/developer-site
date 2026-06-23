@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.7
-Total Documents: 464
+Total Documents: 469
 Generated: 2026-06-23
 
 ## Instructions for Large Language Models
@@ -573,7 +573,10 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 ### Gaussian Splatting
 - [Gaussian Splatting](https://developer.playcanvas.com/user-manual/gaussian-splatting/): Overview of 3D Gaussian Splatting in PlayCanvas: capture, viewing, editing, and building web apps with photorealistic splat scenes.
 - [Building Splat-based Apps](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/): Introduction to building Gaussian splat applications with PlayCanvas and links to deeper guides for integration and rendering.
-- [Custom Shaders](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/): Customize Gaussian splat rendering with the gsplatModifyVS shader chunk on the scene gsplat material: overridable functions, GLSL/WGSL, and a live example.
+- [Custom Shaders](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/): Customize Gaussian splat rendering with shader chunks on the scene gsplat material: vertex and fragment stage hooks, how to choose between them, and how to apply them.
+- [Fragment Stage](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/fragment/): Customize the final Gaussian splat fragment color with the gsplatModifyPS shader chunk: per-pixel color modification, GLSL/WGSL, and available shader inputs.
+- [Varying Streams](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/varyings/): Pass per-splat data from the gsplat vertex stage to the fragment stage using custom varying streams: API, generated set/get functions, and a live clipping example.
+- [Vertex Stage](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/vertex/): Customize Gaussian splat position, rotation, scale and color with the gsplatModifyVS shader chunk: overridable functions, GLSL/WGSL, and a live example.
 - [Fisheye Rendering](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/fisheye/): Apply a fisheye projection to Gaussian splats and the infinite skybox for ultra-wide field of view and 'tiny planet' effects.
 - [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/): Streamed SOG for large splat scenes: spatial tree layout, generating lod-meta data, examples, and performance guidance.
 - [Performance](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/performance/): Performance tips for splat scenes: splat counts, fill rate, scene settings, Streamed SOG budgets, and optimization strategies.
@@ -583,6 +586,8 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Lines and Shapes](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/lines/): GsplatLines script: splat-based lines, arrows, and AABB wireframes for CAD-style visualization and debugging.
 - [Mesh to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/mesh/): GsplatMesh script: rasterize mesh triangles into uniformly distributed splats using render-component geometry for stylized splat models.
 - [Text to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/text/): GsplatText script: render labels as splats from canvas text with fonts, stroke, and fill on the XZ plane in splat scenes.
+- [Relighting](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/relighting/): Relight Gaussian splat scenes with standard lights using a proxy mesh and the GsplatRelighting script: setup, lights, shadows and tuning.
+- [Render on Demand](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/render-on-demand/): Render Gaussian splats only when something changes: background streaming with autoRender disabled, the frame:request event, and on-demand rendering.
 - [Shadows](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/shadows/): Enable shadow casting from Gaussian splats onto meshes: API properties, lights, and tuning shadow quality for splat scenes.
 - [Your First Splat App](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/): Choose a path to build your first PlayCanvas splat app: Engine, Editor, React, or Web Components tutorials with a toy cat demo.
 - [Using the Editor](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/editor/): Step-by-step: create a splat scene in the PlayCanvas Editor, import assets, and publish an interactive orbitable splat project.
@@ -598,7 +603,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [The SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/): SOG (Spatially Ordered Gaussians) specification: WebP textures, meta.json layout, quantization, and bundled versus unbundled files.
 - [The Streamed SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog/): Streamed SOG specification: lod-meta.json layout, spatial tree, LOD chunk references, and environment splats.
 - [Splat Rendering Architecture](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/): How PlayCanvas renders Gaussian splats: the work buffer pipeline, global sorting across components, and access to advanced features.
-- [Renderers](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/renderers/): Gaussian splat renderers in PlayCanvas: raster with CPU sorting vs experimental GPU sorting, selecting a renderer, sorting, and depth buffer limits.
+- [Renderers](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/renderers/): Gaussian splat renderers in PlayCanvas: raster with CPU sorting vs GPU sorting, selecting a renderer, sorting, and depth buffer limits.
 - [Splat Data Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-data-format/): GSplatFormat and GPU texture streams: how splat attributes are stored, shader access, and customizing splat data layout.
 - [Splat Processing](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-processing/): GSplatProcessor for GPU splat processing: custom shaders, read-write streams, and use cases like painting and selection.
 - [Work Buffer Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format/): Work buffer format: copy stage customization, streams, and how data flows from resources into the work buffer.

@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 464
+Total Documents: 469
 Generated: 2026-06-23
 
 ================================================================================
@@ -11794,13 +11794,182 @@ This section shows how you can build Gaussian splat-based apps using PlayCanvas.
 
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/
 
-The PlayCanvas Engine lets you customize how Gaussian Splats are rendered by overriding the `gsplatModifyVS` shader chunk. The chunk is set on the scene-wide gsplat material ([`app.scene.gsplat.material`](https://api.playcanvas.com/engine/classes/GSplatParams.html#material)), so a single custom shader applies to **all** splats in the scene.
+The PlayCanvas Engine lets you customize how Gaussian Splats are rendered by overriding shader chunks. The chunks are set on the scene-wide gsplat material ([`app.scene.gsplat.material`](https://api.playcanvas.com/engine/classes/GSplatParams.html#material)), so a single custom shader applies to **all** splats in the scene.
+
+There are two customization points, one per shader stage:
+
+| Chunk | Stage | Runs | Purpose |
+| --- | --- | --- | --- |
+| [`gsplatModifyVS`](/user-manual/gaussian-splatting/building/custom-shaders/vertex) | Vertex | Once per splat | Modify splat position, rotation, scale, color and opacity |
+| [`gsplatModifyPS`](/user-manual/gaussian-splatting/building/custom-shaders/fragment) | Fragment | Once per covered pixel | Modify the final color and alpha of each splat fragment |
+
+## Choosing a Stage
+
+**Use the [vertex stage](/user-manual/gaussian-splatting/building/custom-shaders/vertex)** for anything that is uniform across a splat: moving, scaling, rotating, hiding splats, or tinting them based on their position. It runs once per splat, so it is the cheaper option and the only one that can change splat geometry.
+
+**Use the [fragment stage](/user-manual/gaussian-splatting/building/custom-shaders/fragment)** when the effect needs to vary *across* a splat's footprint — for example when sampling a texture. It runs once per covered fragment, so it costs more on heavily overlapping splats.
+
+The two stages can be combined freely — implement either or both. Per-splat values can also be passed from the vertex stage to the fragment stage using [varying streams](/user-manual/gaussian-splatting/building/custom-shaders/varyings) — for example to classify a splat once and pay per-pixel cost only where needed.
+
+## Applying Chunks
+
+Both chunks follow the same pattern: set the chunk source for each shader language (GLSL covers WebGL, WGSL covers WebGPU), then update the material to recompile:
+
+```javascript
+const sceneMat = app.scene.gsplat.material;
+
+sceneMat.getShaderChunks('glsl').set('gsplatModifyVS', glslChunk);
+sceneMat.getShaderChunks('wgsl').set('gsplatModifyVS', wgslChunk);
+sceneMat.update();
+```
+
+Custom uniforms declared by your chunks are driven through material parameters each frame:
+
+```javascript
+app.on('update', (dt) => {
+    sceneMat.setParameter('uTime', currentTime);
+    sceneMat.update();
+});
+```
+
+## Removing Chunks
+
+To revert to default rendering, delete the chunk override and update the material:
+
+```javascript
+const sceneMat = app.scene.gsplat.material;
+sceneMat.getShaderChunks('glsl').delete('gsplatModifyVS');
+sceneMat.getShaderChunks('wgsl').delete('gsplatModifyVS');
+sceneMat.update();
+```
+
+## See Also
+
+- [Vertex Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/vertex) — move, scale and tint splats
+- [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — per-pixel color modification
+- [Varying Streams](/user-manual/gaussian-splatting/building/custom-shaders/varyings) — pass per-splat data from the vertex stage to the fragment stage
+- [Relighting](/user-manual/gaussian-splatting/building/relighting) — light splats using a proxy mesh, built on the fragment hook
+- [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) — customize the global render pass that draws the sorted splats
+
+--------------------------------------------------------------------------------
+
+## Fragment Stage
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/fragment/
+
+The `gsplatModifyPS` chunk customizes the final splat color in the fragment stage. It runs **once per covered pixel**, so effects can vary smoothly across a splat's footprint — something the per-splat vertex stage cannot do.
+
+**View Live Example** - Each splat rendered as a ring of its own color, with a highlight wave.
+
+## Overridable Function
+
+The chunk overrides a single function:
+
+It is called in the forward pass after the gaussian falloff and opacity dither have been evaluated, just before the color is premultiplied and output:
+
+- `gaussianUV` — the fragment's position within the gaussian footprint: `(0,0)` at the splat center, length 1 at the edge where the splat is clipped. `dot(gaussianUV, gaussianUV)` gives the normalized squared radius used by the falloff.
+- `color` — `rgb` is the splat color, `a` is the final fragment alpha. Both can be modified; alpha changes affect the blending weight, enabling custom falloffs or per-pixel fades.
+
+## Available Inputs
+
+Inside the chunk you can also use:
+
+- `gl_FragCoord` (GLSL) / `pcPosition` (WGSL) — the fragment's framebuffer position in pixels
+- `uScreenSize` — engine-provided `vec4` uniform: `xy` = render target size, `zw` = inverse size
+- Your own uniforms and textures, declared in the chunk and driven via material parameters
+
+## Example
+
+This is the chunk used by the live example above. It renders each splat as a ring of its own color: `gaussianUV` provides the position within the splat footprint, and `fwidth` converts the requested ring width from pixels into footprint units, keeping the ring a constant screen-space width at any zoom:
+
+Apply it the same way as the vertex chunk, using the `gsplatModifyPS` key, and drive the uniforms via material parameters:
+
+```javascript
+const sceneMat = app.scene.gsplat.material;
+
+sceneMat.getShaderChunks('glsl').set('gsplatModifyPS', glslFragShader);
+sceneMat.getShaderChunks('wgsl').set('gsplatModifyPS', wgslFragShader);
+sceneMat.setParameter('uRingWidth', 1);
+sceneMat.setParameter('uRingAlpha', 0.25);
+sceneMat.update();
+```
+
+For an effect that samples a screen-aligned texture at each fragment's screen position, see [Relighting](/user-manual/gaussian-splatting/building/relighting) — it modulates splats by the lighting of a proxy mesh rendered to an offscreen texture.
+
+## See Also
+
+- [Vertex Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/vertex) — move, scale and tint splats
+- [Varying Streams](/user-manual/gaussian-splatting/building/custom-shaders/varyings) — read per-splat values written by the vertex stage
+- [Relighting](/user-manual/gaussian-splatting/building/relighting) — light splats using a proxy mesh, built on this hook
+
+--------------------------------------------------------------------------------
+
+## Varying Streams
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/varyings/
+
+Varying streams pass custom per-splat data from the [vertex stage](/user-manual/gaussian-splatting/building/custom-shaders/vertex) to the [fragment stage](/user-manual/gaussian-splatting/building/custom-shaders/fragment). A value is computed **once per splat** in the `gsplatModifyVS` chunk and read by every fragment of that splat in the `gsplatModifyPS` chunk.
+
+The typical use is classification: decide something about a splat once, then let the fragment stage pay per-pixel cost only where needed.
+
+**View Live Example** - Splats clipped by an animated box, with per-pixel clipping only on splats intersecting the box surface.
+
+## Adding Streams
+
+Streams are managed via [`app.scene.gsplat.varyings`](https://api.playcanvas.com/engine/classes/GSplatParams.html#varyings):
+
+```javascript
+app.scene.gsplat.varyings.add([
+    { name: 'clipState', type: pc.TYPE_UINT32, components: 1 }
+]);
+
+// later, to remove
+app.scene.gsplat.varyings.remove(['clipState']);
+```
+
+Supported types are `TYPE_FLOAT32`, `TYPE_INT32` and `TYPE_UINT32`, with 1 to 4 components.
+
+For each stream, two functions are generated and made available to your shader chunks:
+
+| Function | Available in | Purpose |
+| --- | --- | --- |
+| `set<Name>(value)` | `gsplatModifyVS` | Write the per-splat value (runs once per splat) |
+| `get<Name>()` | `gsplatModifyPS` | Read the per-splat value for the current fragment |
+
+Adding or removing streams rebuilds the gsplat shaders, so configure them at startup rather than toggling them at runtime.
+
+## Example
+
+The live example above clips splats by an animated world-space box. The vertex stage classifies each splat against the box once per splat: splats fully inside are clipped entirely, splats fully outside set a flag so their fragments skip all work, and only splats intersecting the box surface run the per-pixel test.
+
+**1. Write the per-splat value in the vertex stage chunk:**
+
+**2. Read it in the fragment stage chunk** and early-out before the expensive per-pixel work:
+
+Both chunks are applied to the scene gsplat material as usual, using the `gsplatModifyVS` and `gsplatModifyPS` keys.
+
+## Memory Considerations
+
+On some platforms each component is stored in per-splat video memory, so its size scales with the number of rendered splats. Keep the data as compact as possible - prefer fewer components, and consider bit-packing multiple small values into a single uint component instead of using separate streams.
+
+## See Also
+
+- [Vertex Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/vertex) — where the values are written
+- [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — where the values are read
+
+--------------------------------------------------------------------------------
+
+## Vertex Stage
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/custom-shaders/vertex/
+
+The `gsplatModifyVS` chunk customizes splats in the vertex stage. It runs **once per splat**, making it the right place to move, rotate, scale, hide or tint whole splats.
 
 **View Live Example** - See shader chunk customization in action with animated splats.
 
 ## Overridable Functions
 
-The `gsplatModifyVS` chunk lets you override three functions in the splat vertex stage:
+The `gsplatModifyVS` chunk lets you override three functions:
 
 | Function | Purpose |
 | --- | --- |
@@ -11837,20 +12006,10 @@ app.on('update', (dt) => {
 });
 ```
 
-## Removing a Custom Shader
-
-To revert to default rendering, delete the chunk override and update the material:
-
-```javascript
-const sceneMat = app.scene.gsplat.material;
-sceneMat.getShaderChunks('glsl').delete('gsplatModifyVS');
-sceneMat.getShaderChunks('wgsl').delete('gsplatModifyVS');
-sceneMat.update();
-```
-
 ## See Also
 
-- [Work Buffer Rendering](/user-manual/gaussian-splatting/rendering-architecture/work-buffer-rendering) — customize the global render pass that draws the sorted splats
+- [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — per-pixel color modification
+- [Varying Streams](/user-manual/gaussian-splatting/building/custom-shaders/varyings) — pass per-splat values computed here to the fragment stage
 
 --------------------------------------------------------------------------------
 
@@ -12159,11 +12318,11 @@ entity.gsplat.lodMultiplier = 2;   // multiplier between successive thresholds
 
 ### LOD Range Limits
 
-The `lodRangeMin` and `lodRangeMax` settings restrict which LOD levels can be used:
+The `lodRangeMin` and `lodRangeMax` settings on a gsplat component restrict which LOD levels that splat can use:
 
 ```javascript
-app.scene.gsplat.lodRangeMin = 0; // Allow highest quality LOD
-app.scene.gsplat.lodRangeMax = 3; // Never go lower than LOD 3
+entity.gsplat.lodRangeMin = 0; // Allow highest quality LOD
+entity.gsplat.lodRangeMax = 3; // Never go lower than LOD 3
 ```
 
 These settings are useful for:
@@ -12171,7 +12330,7 @@ These settings are useful for:
 - **Reducing downloads**: On devices with slow internet connections, setting a higher `lodRangeMin` prevents downloading the highest quality (and largest) LOD files
 - **Memory constraints**: Limiting LOD range reduces memory usage by avoiding loading of certain detail levels
 
-However, for typical rendering performance management, the global splat budget is more effective than LOD range limits. The budget automatically finds the right balance across all assets, while LOD range limits apply uniformly regardless of camera position or scene composition.
+However, for typical rendering performance management, the global splat budget is more effective than LOD range limits. The budget automatically finds the right balance across all assets, while LOD range limits apply per asset regardless of camera position or scene composition.
 
 ### Fast Time to First Frame
 
@@ -12192,8 +12351,8 @@ const gsplat = entity.gsplat;
 const lodLevels = gsplat.resource?.octree?.lodLevels;
 if (lodLevels) {
     const worstLod = lodLevels - 1;
-    app.scene.gsplat.lodRangeMin = worstLod;
-    app.scene.gsplat.lodRangeMax = worstLod;
+    gsplat.lodRangeMin = worstLod;
+    gsplat.lodRangeMax = worstLod;
 }
 
 // 2. Once the coarse data is loaded and rendered, open the LOD range back up
@@ -12203,8 +12362,8 @@ const onFrameReady = (camera, layer, ready, loadingCount) => {
         gsplatSystem.off('frame:ready', onFrameReady);
 
         // restore the full LOD range (0 = highest detail)
-        app.scene.gsplat.lodRangeMin = 0;
-        app.scene.gsplat.lodRangeMax = lodLevels - 1;
+        gsplat.lodRangeMin = 0;
+        gsplat.lodRangeMax = lodLevels - 1;
     }
 };
 gsplatSystem.on('frame:ready', onFrameReady);
@@ -13188,6 +13347,189 @@ scripts/esm/gsplat/gsplat-text.mjs
 - [Mesh to Splats](/user-manual/gaussian-splatting/building/procedural-splats/mesh)
 - [Image to Splats](/user-manual/gaussian-splatting/building/procedural-splats/image)
 - [Lines and Shapes](/user-manual/gaussian-splatting/building/procedural-splats/lines)
+
+--------------------------------------------------------------------------------
+
+## Relighting
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/relighting/
+
+Gaussian splat scenes are captured with their lighting baked in. Relighting lets you change that lighting at runtime — add a sun with soft shadows, place point lights, or swap the environment — by lighting a **proxy mesh** of the scene with standard lights and transferring that lighting onto the splats per pixel.
+
+**View Live Example** - A splat scene relit by an HDRI environment, a PCSS directional light and shadow-casting omni lights.
+
+## How It Works
+
+1. A simplified mesh approximating the splat scene (for example reconstructed from the splats, or the photogrammetry mesh) is placed on a dedicated layer, together with the lights that should light it.
+2. The `GsplatRelighting` script renders that layer from a camera matching the main camera into an offscreen texture: lit mesh color in RGB, and a mesh coverage mask in alpha.
+3. A [fragment stage](/user-manual/gaussian-splatting/building/custom-shaders/fragment) shader chunk modulates each splat fragment by the lighting sampled at its own screen position. Because the texture is screen-aligned with the main camera, no reprojection is needed and the lighting transfers per pixel.
+
+Splats not covered by the proxy mesh (such as the sky) are left untinted, or scaled by a separate background multiplier so they can follow the environment exposure.
+
+## Setup
+
+The technique is packaged in the [`GsplatRelighting`](https://github.com/playcanvas/engine/blob/main/scripts/esm/gsplat/gsplat-relighting.mjs) script. Attach it to the entity holding your main camera:
+
+```javascript
+
+camera.addComponent('script');
+const relighting = camera.script.create(GsplatRelighting, {
+    properties: {
+        blend: 0.5,
+        brightness: 1
+    }
+});
+```
+
+Place the proxy mesh on the relighting layer, with a material configured to write the coverage mask:
+
+```javascript
+const meshMaterial = new pc.StandardMaterial();
+meshMaterial.diffuse = new pc.Color(0.5, 0.5, 0.5);
+relighting.configureMaterial(meshMaterial);
+
+const meshEntity = meshAsset.resource.instantiateRenderEntity();
+meshEntity.findComponents('render').forEach((render) => {
+    render.layers = [relighting.layer.id];
+    render.meshInstances.forEach((meshInstance) => {
+        meshInstance.material = meshMaterial;
+    });
+});
+app.root.addChild(meshEntity);
+```
+
+Then add lights to the same layer — any standard lights work, including image based lighting, shadow-casting directional and omni lights:
+
+```javascript
+const light = new pc.Entity('sun');
+light.addComponent('light', {
+    type: 'directional',
+    layers: [relighting.layer.id],
+    castShadows: true
+});
+app.root.addChild(light);
+```
+
+## Script Attributes
+
+| Attribute | Default | Purpose |
+| --- | --- | --- |
+| `blend` | 1 | How much the mesh lighting affects the splats (0 = original splats, 1 = fully modulated) |
+| `brightness` | 2 | Brightness of the lighting when tinting; 2 compensates the 0.5 gray albedo of the proxy material |
+| `background` | 1 | Multiplier for splats not covered by the mesh (e.g. the sky), letting them follow environment exposure |
+| `textureScale` | 1 | Resolution of the lighting texture relative to the back buffer |
+| `layerName` | `'Relighting'` | Name of the layer for the proxy mesh and lights (created if missing) |
+| `priority` | -1 | Priority of the internal camera; keep below the main camera so the texture renders first |
+
+The lighting texture is available as `relighting.texture` (HDR where supported), for debugging or further processing.
+
+## Notes
+
+- The proxy mesh quality directly drives the result: where its silhouette diverges from the splat surface, lighting boundaries land in the wrong place. A closer-matching mesh is the main quality lever.
+- Lights that do not move can use [`SHADOWUPDATE_THISFRAME`](https://api.playcanvas.com/engine/variables/SHADOWUPDATE_THISFRAME.html) to render their shadow maps once instead of every frame — the live example does this for its omni lights.
+
+## See Also
+
+- [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders) — the shader chunk system this is built on
+- [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — the per-pixel hook used to apply the lighting
+
+--------------------------------------------------------------------------------
+
+## Render on Demand
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/render-on-demand/
+
+For scenes that are often static — a product viewer, a configurator, an inspection tool — you don't need to redraw every frame. PlayCanvas can render **on demand**: set [`app.autoRender`](https://api.playcanvas.com/engine/classes/AppBase.html#autorender) to `false` and only draw a frame when something actually changes, by setting [`app.renderNextFrame`](https://api.playcanvas.com/engine/classes/AppBase.html#rendernextframe). An idle scene then leaves the GPU idle. See [Render on Demand](/user-manual/optimization/guidelines) in the optimization guidelines for the general technique.
+
+Gaussian splats add one wrinkle: a large [streamed scene](/user-manual/gaussian-splatting/building/lod-streaming) keeps loading data and adjusting level of detail in the background. That work is **decoupled from rendering** — it runs every frame whether or not a frame is drawn — so the scene keeps streaming in while the app sits idle. The splat system tells you when that background work has produced something new worth drawing, via the `frame:request` event.
+
+## The basic pattern
+
+Disable automatic rendering and render whenever the splat system asks for it:
+
+```javascript
+app.autoRender = false;
+
+app.systems.gsplat.on('frame:request', () => {
+    app.renderNextFrame = true;
+});
+```
+
+`frame:request` is fired once per frame, before rendering, whenever splat streaming has produced new data a render would show (newly streamed detail) or an asynchronous sort result is ready to be applied. Handling it keeps a streaming scene converging to full detail without rendering every frame in between.
+
+## What raises `frame:request`, and what you render yourself
+
+`frame:request` covers **changes to the splat data itself** — the engine raises it for you. Changes that only affect how the *current* scene is presented do not, so you request those renders yourself:
+
+| Change | Raises `frame:request`? |
+| --- | --- |
+| Streaming progress (LOD detail loading in) | Yes — handled for you |
+| Splat budget, LOD distances / range | Yes — handled for you |
+| Camera movement | No — render it yourself |
+| Canvas / viewport resize | No — render it yourself |
+| Material parameters (e.g. alpha clipping) | No — render it yourself |
+| Shader animation (e.g. an animated reveal effect) | No — render it yourself |
+| Adding or removing a splat, camera, or layer | No — render it yourself |
+
+For anything in the "render it yourself" rows, set `app.renderNextFrame = true` when you make the change. For example, to keep a fly/orbit camera interactive, render whenever it has moved:
+
+```javascript
+const lastPos = new pc.Vec3();
+const lastRot = new pc.Quat();
+
+app.on('update', () => {
+    const pos = camera.getPosition();
+    const rot = camera.getRotation();
+    if (!pos.equals(lastPos) || !rot.equals(lastRot)) {
+        app.renderNextFrame = true;
+        lastPos.copy(pos);
+        lastRot.copy(rot);
+    }
+});
+```
+
+:::note
+Adding or removing cameras, layers, or gsplat components only registers on a **rendered** frame, so make sure at least one frame is rendered after such a change. This is why an app should keep rendering normally while the scene first loads (see below), and only switch to on-demand rendering once it is up and running.
+:::
+
+## Combining with fast time to first frame
+
+On-demand rendering pairs naturally with the [fast time to first frame](/user-manual/gaussian-splatting/building/performance#fast-time-to-first-frame) technique. While the scene is loading (and while any intro/reveal animation plays) you want to render every frame, then switch to on-demand once everything is in place:
+
+1. Leave `app.autoRender = true` while the scene loads its first frames.
+2. Wait for the splat system's `frame:ready` event to report that the scene is fully loaded, sorted and drawn.
+3. Switch to `app.autoRender = false` and drive rendering from `frame:request` plus your own camera / resize / setting changes.
+
+```javascript
+const gsplatSystem = app.systems.gsplat;
+
+const onFrameReady = (camera, layer, ready, loadingCount) => {
+    if (ready && loadingCount === 0) {
+        gsplatSystem.off('frame:ready', onFrameReady);
+
+        // the scene is fully shown — switch to on-demand rendering from here
+        app.autoRender = false;
+    }
+};
+gsplatSystem.on('frame:ready', onFrameReady);
+
+gsplatSystem.on('frame:request', () => {
+    app.renderNextFrame = true;
+});
+```
+
+`frame:ready` and `frame:request` are complementary: `frame:ready` tells you when a *rendered* frame is fully sorted and complete (useful for the initial display, and for capture workflows), while `frame:request` tells you when there is new streamed data worth drawing.
+
+## Live example
+
+This example renders a single (non-streamed) splat on demand: it stops drawing once the splat is shown and only renders again when the camera moves, the window resizes, or a setting changes.
+
+## See also
+
+- [Render on Demand (general)](/user-manual/optimization/guidelines)
+- [Performance](/user-manual/gaussian-splatting/building/performance) and [Fast Time to First Frame](/user-manual/gaussian-splatting/building/performance#fast-time-to-first-frame)
+- [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming)
+- [GSplatComponentSystem API](https://api.playcanvas.com/engine/classes/GSplatComponentSystem.html)
 
 --------------------------------------------------------------------------------
 
@@ -15148,28 +15490,22 @@ PlayCanvas provides more than one rendering pipeline — a *renderer* — for Ga
 
 ## Available Renderers
 
-### Raster with CPU Sorting (default)
+### Raster with CPU Sorting
 
 `GSPLAT_RENDERER_RASTER_CPU_SORT`
 
-- The default renderer, supported on both WebGL 2 and WebGPU.
+- Supported on both WebGL 2 and WebGPU, and automatically selected on WebGL devices.
 - Splats are sorted on the CPU in a background Web Worker, then rasterized.
 - Supports the full feature set, including XR rendering and shader customization.
 - Because sorting is asynchronous, very fast camera motion can briefly reveal slightly out-of-date ordering until the next sort completes.
 
-### Raster with GPU Sorting (experimental)
+### Raster with GPU Sorting
 
 `GSPLAT_RENDERER_RASTER_GPU_SORT`
 
-- **Experimental**, and **WebGPU only** — on WebGL devices it automatically falls back to CPU sorting.
+- **WebGPU only**, and automatically selected on WebGPU devices — on WebGL it falls back to CPU sorting.
 - Splats are culled and sorted on the GPU each frame, avoiding the Web Worker round-trip. This lowers sorting latency and scales better to large splat counts.
-- Has **limited functionality** and does not yet implement the full feature set. In particular, **XR rendering** and **shader customization** are not currently supported.
-
-:::info Experimental
-
-The GPU sorting renderer is experimental and missing some features (for example XR rendering and shader customization). Use the CPU sorting renderer if your application depends on those.
-
-:::
+- Supports the full feature set, including XR rendering and shader customization.
 
 ## Selecting a Renderer
 
@@ -15182,7 +15518,7 @@ app.scene.gsplat.renderer = pc.GSPLAT_RENDERER_RASTER_GPU_SORT;
 
 The available options are:
 
-- `pc.GSPLAT_RENDERER_AUTO` — *(default)* automatically selects the best renderer for the current device.
+- `pc.GSPLAT_RENDERER_AUTO` — *(default)* automatically selects the best renderer for the current device: GPU sorting on WebGPU, CPU sorting on WebGL.
 - `pc.GSPLAT_RENDERER_RASTER_CPU_SORT` — raster with CPU sorting.
 - `pc.GSPLAT_RENDERER_RASTER_GPU_SORT` — raster with GPU sorting (WebGPU only).
 
@@ -15943,6 +16279,8 @@ Your modifier code must implement three functions:
 | `modifySplatColor(vec3 center, inout vec4 color)` | Modify color based on work buffer data |
 
 `modifySplatCenter` always executes first. You can use it to sample extra streams and store values in global variables, or execute code shared between the three functions.
+
+In addition to this vertex-stage modifier, the final splat color can also be customized per pixel using the `gsplatModifyPS` fragment chunk — see [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment).
 
 ### Removing the Modifier
 
