@@ -28,6 +28,119 @@ material.chunks.APIVersion = pc.CHUNKAPI_1_55;
 
 次の表は、Engine リリースごとのチャンクの変更点をまとめたものです。
 
+### *Engine v2.20*
+
+#### MSDF テキストレンダリングの刷新
+
+`ElementComponent` のテキストで使用される `msdfPS` チャンクが刷新され、グリフを本来の(デザイナーが意図した)エッジでレンダリングし、距離フィールドの勾配からアンチエイリアスを行うようになりました。これにより、`f` の横棒など細い接合部を崩していた固定的な内側への収縮(erosion)が修正されました。詳細は [PR #8935](https://github.com/playcanvas/engine/pull/8935) を参照してください。
+
+この変更に伴い、エンジンは `font_pxrange` および `font_textureWidth` ユニフォームを設定しなくなり、`map()` ヘルパーがチャンクから削除されました。以前のリリースからコピーしたカスタムの `msdfPS` オーバーライドがこれらのユニフォームを参照している場合、それらの値が渡されなくなり(既定値の `0` となり、従来のスムージング計算でゼロ除算が発生します)、テキストが壊れたり表示されなくなったりします。
+
+影響を受けるチャンク:
+
+- `src/scene/shader-lib/glsl/chunks/common/frag/msdf.js`
+- `src/scene/shader-lib/wgsl/chunks/common/frag/msdf.js`
+
+**移行方法:** カスタムの `msdfPS` オーバーライドを最新のチャンクに合わせて更新してください。`font_pxrange`、`font_textureWidth`、`map()` への参照を削除し、新しいエッジ/アンチエイリアスのロジックを採用します。意図的なウェイト調整は、グローバルなしきい値のバイアスではなく、フォントごとの `font_sdfIntensity`(または `outlineThickness`)を使用してください。
+
+---
+
+### *Engine v2.16*
+
+#### Gaussian Splat アクセサ関数の名称変更
+
+gsplat シェーダーのアクセサ関数が、API の一貫性のために名称変更されました。すべての関数が `getXXX()` という命名パターンを使用するようになりました。
+
+| 旧 | 新 |
+| --- | --- |
+| `readCenter(source)` | `getCenter()` |
+| `readColor(source)` | `getColor()` |
+
+**注意:** `getCenter()` は、他の関数が使用する共有データを読み込むため、`getRotation()`、`getScale()`、`getColor()` よりも先に呼び出す必要があります。`source` パラメータは不要になりました。
+
+影響を受けるチャンク:
+
+- `src/scene/shader-lib/glsl/chunks/gsplat/vert/gsplat.js`
+- `src/scene/shader-lib/wgsl/chunks/gsplat/vert/gsplat.js`
+
+#### gsplatCustomizeVS チャンクの削除
+
+`gsplatCustomizeVS` シェーダーチャンクは v2.16 で削除されました。これは v2.15 で `gsplatModifyVS` の導入に伴い非推奨となっていたものです。`gsplatCustomizeVS` を引き続き使用しているコードは、チャンクが削除されたという警告が表示されるようになります。
+
+旧来の共分散ベースのヘルパー関数（`gsplatExtractSize`、`gsplatApplyUniformScale`、`gsplatMakeRound`）も `gsplatHelpers.js` から削除されました。
+
+**移行方法:**
+
+下記の v2.15 移行ガイドに記載されているとおり、`gsplatModifyVS` へ移行する必要があります。完全な移行手順については [v2.15 移行ガイド](#engine-v215) を参照してください。
+
+---
+
+### *Engine v2.15*
+
+#### Gaussian Splat シェーダーのカスタマイズ
+
+`gsplatCustomizeVS` シェーダーチャンクは非推奨となり、`gsplatModifyVS` に置き換えられました。新しいチャンクは、共分散行列の代わりに回転クォータニオンとスケールベクトルを使用する、より効率的な API を提供します。詳細は [PR #8246](https://github.com/playcanvas/engine/pull/8246) を参照してください。
+
+| 旧 (`gsplatCustomizeVS`) | 新 (`gsplatModifyVS`) |
+| --- | --- |
+| `modifyCenter(inout vec3 center)` | `modifySplatCenter(inout vec3 center)` |
+| `modifyCovariance(originalCenter, modifiedCenter, inout covA, inout covB)` | `modifySplatRotationScale(originalCenter, modifiedCenter, inout rotation, inout scale)` |
+| `modifyColor(center, inout color)` | `modifySplatColor(center, inout color)` |
+
+ヘルパー関数の変更:
+
+| 旧 | 新 |
+| --- | --- |
+| `gsplatApplyUniformScale(covA, covB, scale)` | `scale *= factor`（直接乗算） |
+| `gsplatExtractSize(covA, covB)` | `gsplatGetSizeFromScale(scale)` |
+| `gsplatMakeRound(covA, covB, radius)` | `gsplatMakeSpherical(scale, radius)` |
+
+**移行例 (GLSL):**
+
+変更前:
+
+```glsl
+void modifyCenter(inout vec3 center) {
+    center.y += 1.0;
+}
+
+void modifyCovariance(vec3 originalCenter, vec3 modifiedCenter, inout vec3 covA, inout vec3 covB) {
+    gsplatApplyUniformScale(covA, covB, 2.0);
+}
+
+void modifyColor(vec3 center, inout vec4 color) {
+    color.rgb *= 0.5;
+}
+```
+
+変更後:
+
+```glsl
+void modifySplatCenter(inout vec3 center) {
+    center.y += 1.0;
+}
+
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
+    scale *= 2.0;
+}
+
+void modifySplatColor(vec3 center, inout vec4 color) {
+    color.rgb *= 0.5;
+}
+```
+
+**JavaScript での使用例:**
+
+```javascript
+// 変更前
+gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatCustomizeVS', customShader);
+
+// 変更後
+gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShader);
+```
+
+---
+
 ### *Engine v2.6*
 
 #### Internal engine chunks
