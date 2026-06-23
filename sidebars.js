@@ -959,6 +959,7 @@ const sidebars = {
               ],
             },
             'user-manual/gaussian-splatting/building/performance',
+            'user-manual/gaussian-splatting/building/render-on-demand',
           ],
         },
       ],
