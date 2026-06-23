@@ -3239,6 +3239,28 @@ this.app.loader.getHandler('texture').maxRetries = 10;
 
 Editor projects can also override the default count via the [Network Settings](../editor/interface/settings/network.md) panel.
 
+## Limiting Concurrent Requests
+
+When an application loads a large number of assets at once, browsers can reject requests with `net::ERR_INSUFFICIENT_RESOURCES` once too many are in flight simultaneously. To guard against this, the engine limits the number of concurrent asset requests, queuing any beyond the limit and dispatching them as earlier requests complete.
+
+The default limit is **128**, which is safe across browsers while still saturating typical CDN throughput. You can change it globally:
+
+```javascript
+// Allow at most 50 asset requests to be in flight at once
+this.app.loader.maxConcurrentRequests = 50;
+
+// Disable throttling entirely - every request is sent immediately
+this.app.loader.maxConcurrentRequests = 0;
+```
+
+:::note
+
+This is a process-global limit (it applies to the shared HTTP layer, matching the browser's per-process resource limit), so with multiple applications on a page the last value set wins. It applies to all `XMLHttpRequest`-based loads, which covers the large majority of assets.
+
+:::
+
+Editor projects can also configure this via the [Network Settings](../editor/interface/settings/network.md) panel.
+
 ## Unloading Assets
 
 To free memory, you can unload assets that are no longer needed:
@@ -6950,7 +6972,7 @@ Here is a breakdown of the available settings:
 
 URL: https://developer.playcanvas.com/user-manual/editor/interface/settings/network/
 
-Configures network retry behavior for asset loading.
+Configures network behavior for asset loading.
 
 :::note
 
@@ -6969,10 +6991,12 @@ Here is a breakdown of the available settings:
 | Setting | Description |
 | --- | --- |
 | **Asset Retries** | The maximum number of times to retry loading an asset if it fails to load. If an asset request fails, it will be retried with exponential backoff. |
+| **Max Concurrent Requests** | The maximum number of asset requests allowed to be in flight at the same time. Additional requests are queued and sent as earlier ones complete. This prevents the browser from rejecting requests with `net::ERR_INSUFFICIENT_RESOURCES` when a large number of assets load at once. Defaults to 128; set to 0 to disable throttling. |
 
 ### Notes
 
 - A higher retry count improves resilience for poor connections, but can delay error reporting.
+- A lower concurrent request limit avoids resource-exhaustion errors on large preloads, but may slightly increase total load time; the default of 128 is a safe starting point.
 
 --------------------------------------------------------------------------------
 
@@ -21227,6 +21251,23 @@ By doing this you will no longer see warning messages in the console.
 ## Chunk changes
 
 The following tables break down the chunk changes by Engine release.
+
+### *Engine v2.20*
+
+#### MSDF text rendering reworked
+
+The `msdfPS` chunk used by `ElementComponent` text was reworked to render glyphs at their true (designer-intended) edge and to anti-alias from the gradient of the distance field, fixing a fixed inward erosion that broke thin junctions (e.g. the crossbar of an `f`). See [PR #8935](https://github.com/playcanvas/engine/pull/8935) for details.
+
+As part of this, the engine no longer sets the `font_pxrange` and `font_textureWidth` uniforms, and the `map()` helper was removed from the chunk. A custom `msdfPS` override copied from an earlier release that still references these uniforms will no longer receive their values (they default to `0`, producing a divide-by-zero in the old smoothing calculation), resulting in broken or invisible text.
+
+Affected chunks:
+
+- `src/scene/shader-lib/glsl/chunks/common/frag/msdf.js`
+- `src/scene/shader-lib/wgsl/chunks/common/frag/msdf.js`
+
+**Migration:** Update any custom `msdfPS` override against the latest chunk — remove references to `font_pxrange`, `font_textureWidth` and `map()`, and adopt the new edge/anti-aliasing logic. Deliberate weight adjustments should use the per-font `font_sdfIntensity` (or `outlineThickness`) rather than a global threshold bias.
+
+---
 
 ### *Engine v2.16*
 
