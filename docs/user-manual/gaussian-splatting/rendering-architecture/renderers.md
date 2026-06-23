@@ -1,34 +1,28 @@
 ---
 title: Renderers
-description: "Gaussian splat renderers in PlayCanvas: raster with CPU sorting vs experimental GPU sorting, selecting a renderer, sorting, and depth buffer limits."
+description: "Gaussian splat renderers in PlayCanvas: raster with CPU sorting vs GPU sorting, selecting a renderer, sorting, and depth buffer limits."
 ---
 
 PlayCanvas provides more than one rendering pipeline — a *renderer* — for Gaussian splats. The renderer determines how splats are sorted and rasterized. It is a scene-wide setting, and by default the engine selects the most appropriate renderer for the current device.
 
 ## Available Renderers
 
-### Raster with CPU Sorting (default)
+### Raster with CPU Sorting
 
 `GSPLAT_RENDERER_RASTER_CPU_SORT`
 
-- The default renderer, supported on both WebGL 2 and WebGPU.
+- Supported on both WebGL 2 and WebGPU, and automatically selected on WebGL devices.
 - Splats are sorted on the CPU in a background Web Worker, then rasterized.
 - Supports the full feature set, including XR rendering and shader customization.
 - Because sorting is asynchronous, very fast camera motion can briefly reveal slightly out-of-date ordering until the next sort completes.
 
-### Raster with GPU Sorting (experimental)
+### Raster with GPU Sorting
 
 `GSPLAT_RENDERER_RASTER_GPU_SORT`
 
-- **Experimental**, and **WebGPU only** — on WebGL devices it automatically falls back to CPU sorting.
+- **WebGPU only**, and automatically selected on WebGPU devices — on WebGL it falls back to CPU sorting.
 - Splats are culled and sorted on the GPU each frame, avoiding the Web Worker round-trip. This lowers sorting latency and scales better to large splat counts.
-- Has **limited functionality** and does not yet implement the full feature set. In particular, **XR rendering** and **shader customization** are not currently supported.
-
-:::info Experimental
-
-The GPU sorting renderer is experimental and missing some features (for example XR rendering and shader customization). Use the CPU sorting renderer if your application depends on those.
-
-:::
+- Supports the full feature set, including XR rendering and shader customization.
 
 ## Selecting a Renderer
 
@@ -41,7 +35,7 @@ app.scene.gsplat.renderer = pc.GSPLAT_RENDERER_RASTER_GPU_SORT;
 
 The available options are:
 
-- `pc.GSPLAT_RENDERER_AUTO` — *(default)* automatically selects the best renderer for the current device.
+- `pc.GSPLAT_RENDERER_AUTO` — *(default)* automatically selects the best renderer for the current device: GPU sorting on WebGPU, CPU sorting on WebGL.
 - `pc.GSPLAT_RENDERER_RASTER_CPU_SORT` — raster with CPU sorting.
 - `pc.GSPLAT_RENDERER_RASTER_GPU_SORT` — raster with GPU sorting (WebGPU only).
 
