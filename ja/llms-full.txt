@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 463
-Generated: 2026-06-22
+Total Documents: 464
+Generated: 2026-06-23
 
 ================================================================================
 
@@ -20210,92 +20210,40 @@ For further information, refer to the [ShaderMaterial API documentation](https:/
 
 --------------------------------------------------------------------------------
 
-## Compute Shaders
+## Compute Shaders Advanced
 
-URL: https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders/
+URL: https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders-advanced/
 
-Compute shaders are programs that run general-purpose computations on the GPU, independent of the rendering pipeline. Unlike vertex and fragment shaders, compute shaders are not tied to geometry or pixels—they operate on arbitrary data, making them ideal for tasks such as particle simulation, image processing, physics calculations, and procedural content generation.
+For most compute shaders, the simplified syntax described on the [Compute Shaders](/user-manual/graphics/shaders/compute-shaders) page is all you need — declare resources in WGSL and the engine reflects them automatically.
 
-:::warning
+This page covers **manual** control over bind groups, which remains fully supported. You provide a `computeBindGroupFormat` (and optionally `computeUniformBufferFormats`) describing the resources yourself, and write explicit `@group`/`@binding` indices in the WGSL. Reach for this when you need:
 
-Compute shaders are only supported on the **WebGPU** platform. They are not available when using WebGL.
+- precise control over the binding layout,
+- to interop with engine- or application-owned buffers at fixed bindings, or
+- to mix explicitly-bound resources with reflected ones.
+
+:::note
+
+Manual bind groups are not deprecated. If you have existing compute shaders that hand-author a `computeBindGroupFormat`, they continue to work unchanged — you can migrate them to the simplified syntax whenever convenient, or not at all.
 
 :::
 
-## Checking for Support
+## Bind Group Format
 
-Before using compute shaders, verify that the device supports them:
-
-```javascript
-if (device.supportsCompute) {
-    // Compute shaders are available
-}
-```
-
-## WGSL language extensions
-
-When the browser exposes optional WGSL features (for example [linear workgroup / invocation indexing](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension), subgroups, or half-float), the engine sets the matching `device.supports*` flags and `CAPS_*` preprocessor defines. For a full list and usage notes, see [WGSL language extensions](/user-manual/graphics/shaders/wgsl-capabilities#wgsl-language-extensions).
-
-## Creating a Compute Shader
-
-A compute shader is created using the `Shader` class with WGSL code. The shader definition includes the compute shader source (`cshader`), bind group format, and optionally uniform buffer formats.
-
-### Basic Shader Definition
+The `computeBindGroupFormat` defines what resources are available to the compute shader. When you supply it, write explicit `@group`/`@binding` indices in the WGSL to match. You can bind various types of resources:
 
 ```javascript
 const shader = new pc.Shader(device, {
     name: 'MyComputeShader',
     shaderLanguage: pc.SHADERLANGUAGE_WGSL,
-    cshader: `
-        @compute @workgroup_size(1, 1, 1)
-        fn main(@builtin(global_invocation_id) global_id: vec3u) {
-            // Compute shader logic here
-        }
-    `,
+    cshader: shaderCode,
     computeBindGroupFormat: new pc.BindGroupFormat(device, [
         // Resource bindings go here
     ])
 });
 ```
 
-By default, the engine expects the entry point function to be named `main`. You can use `computeEntryPoint` to specify a different function name, which also allows a single shader source to contain multiple entry points:
-
-```javascript
-const shaderSource = `
-    @compute @workgroup_size(64, 1, 1)
-    fn initParticles(@builtin(global_invocation_id) global_id: vec3u) {
-        // Initialize particles
-    }
-
-    @compute @workgroup_size(64, 1, 1)
-    fn updateParticles(@builtin(global_invocation_id) global_id: vec3u) {
-        // Update particles
-    }
-`;
-
-// Create separate shaders from the same source, each using a different entry point
-const initShader = new pc.Shader(device, {
-    name: 'InitParticles',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
-    cshader: shaderSource,
-    computeEntryPoint: 'initParticles',
-    // ...
-});
-
-const updateShader = new pc.Shader(device, {
-    name: 'UpdateParticles',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
-    cshader: shaderSource,
-    computeEntryPoint: 'updateParticles',
-    // ...
-});
-```
-
-### Bind Group Format
-
-The `computeBindGroupFormat` defines what resources are available to the compute shader. You can bind various types of resources:
-
-#### Storage Buffers
+### Storage Buffers
 
 Storage buffers allow read/write access to large amounts of data:
 
@@ -20314,7 +20262,7 @@ In WGSL, access storage buffers like this:
 @group(0) @binding(1) var<storage, read> spheres: array<vec4f>;
 ```
 
-#### Storage Textures
+### Storage Textures
 
 Storage textures allow the compute shader to write directly to a texture:
 
@@ -20331,7 +20279,7 @@ In WGSL:
 textureStore(outputTexture, vec2i(global_id.xy), color);
 ```
 
-#### Input Textures
+### Input Textures
 
 Input textures provide read-only texture data. The last parameter controls whether a sampler is included:
 
@@ -20362,7 +20310,7 @@ In compute shaders, use `textureSampleLevel` instead of `textureSample` because 
 
 :::
 
-#### Uniform Buffers
+### Uniform Buffers
 
 For passing uniform data to compute shaders, first define the uniform buffer format:
 
@@ -20413,6 +20361,115 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 }
 ```
 
+## Mixing Reflected and Manual Resources
+
+A caller-provided `computeBindGroupFormat` and the simplified (reflected) syntax can be used together in the same shader:
+
+- Resources you describe in `computeBindGroupFormat` use the bindings you give them, in **group 0**.
+- Any resources you declare with the simplified syntax (no `@group`/`@binding`) are still reflected — they are placed in a **separate bind group at index 1**.
+- Explicitly-bound (`@group`/`@binding`) declarations in the WGSL are left untouched.
+
+If you do **not** provide a `computeBindGroupFormat`, reflected resources are placed in group 0 instead (see [Compute Shaders](/user-manual/graphics/shaders/compute-shaders)).
+
+In all cases, values are assigned by name with `setParameter`, regardless of whether a resource is manually bound or reflected.
+
+## Examples
+
+The following examples use manually-authored bind group formats:
+
+--------------------------------------------------------------------------------
+
+## Compute Shaders
+
+URL: https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders/
+
+Compute shaders are programs that run general-purpose computations on the GPU, independent of the rendering pipeline. Unlike vertex and fragment shaders, compute shaders are not tied to geometry or pixels—they operate on arbitrary data, making them ideal for tasks such as particle simulation, image processing, physics calculations, and procedural content generation.
+
+:::warning
+
+Compute shaders are only supported on the **WebGPU** platform. They are not available when using WebGL.
+
+:::
+
+## Checking for Support
+
+Before using compute shaders, verify that the device supports them:
+
+```javascript
+if (device.supportsCompute) {
+    // Compute shaders are available
+}
+```
+
+## WGSL language extensions
+
+When the browser exposes optional WGSL features (for example [linear workgroup / invocation indexing](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension), subgroups, or half-float), the engine sets the matching `device.supports*` flags and `CAPS_*` preprocessor defines. For a full list and usage notes, see [WGSL language extensions](/user-manual/graphics/shaders/wgsl-capabilities#wgsl-language-extensions).
+
+## Creating a Compute Shader
+
+A compute shader is created using the `Shader` class with a WGSL `cshader` source. Declare the resources it uses — uniforms, storage buffers, textures, and storage textures — with the simplified WGSL syntax (no `@group`/`@binding`), and the engine reflects them from the source and builds the bind group automatically. See [WGSL Reflection](/user-manual/graphics/shaders/wgsl-reflection) for the full resource declaration syntax.
+
+### Basic Shader Definition
+
+```javascript
+const shader = new pc.Shader(device, {
+    name: 'MyComputeShader',
+    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    cshader: `
+        // resources declared with the simplified syntax are reflected automatically -
+        // no computeBindGroupFormat required
+        uniform count: u32;
+        var<storage, read_write> data: array<f32>;
+
+        @compute @workgroup_size(64, 1, 1)
+        fn main(@builtin(global_invocation_id) global_id: vec3u) {
+            let i = global_id.x;
+            if (i >= uniform.count) { return; }
+            data[i] = data[i] * 2.0;
+        }
+    `
+});
+```
+
+:::note
+
+If you need explicit control over bind groups — a hand-authored `computeBindGroupFormat`, explicit `@group`/`@binding` indices, or mixing manually-bound resources with reflected ones — see [Compute Shaders Advanced](/user-manual/graphics/shaders/compute-shaders-advanced).
+
+:::
+
+### Entry Points
+
+By default, the engine expects the entry point function to be named `main`. You can use `computeEntryPoint` to specify a different function name, which also allows a single shader source to contain multiple entry points:
+
+```javascript
+const shaderSource = `
+    @compute @workgroup_size(64, 1, 1)
+    fn initParticles(@builtin(global_invocation_id) global_id: vec3u) {
+        // Initialize particles
+    }
+
+    @compute @workgroup_size(64, 1, 1)
+    fn updateParticles(@builtin(global_invocation_id) global_id: vec3u) {
+        // Update particles
+    }
+`;
+
+// Create separate shaders from the same source, each using a different entry point
+const initShader = new pc.Shader(device, {
+    name: 'InitParticles',
+    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    cshader: shaderSource,
+    computeEntryPoint: 'initParticles'
+});
+
+const updateShader = new pc.Shader(device, {
+    name: 'UpdateParticles',
+    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    cshader: shaderSource,
+    computeEntryPoint: 'updateParticles'
+});
+```
+
 ## Creating a Compute Instance
 
 The `Compute` class represents an executable instance of a compute shader with its associated parameters:
@@ -20423,17 +20480,16 @@ const compute = new pc.Compute(device, shader, 'MyComputeInstance');
 
 ## Setting Parameters
 
-Use `setParameter` to bind resources and set uniform values:
+Use `setParameter` to bind resources and set uniform values. Resources are matched to the shader declarations by name:
 
 ```javascript
 // Bind a storage buffer
-compute.setParameter('particles', storageBuffer);
+compute.setParameter('data', storageBuffer);
 
 // Bind a texture
 compute.setParameter('inputTexture', texture);
 
 // Set uniform values
-compute.setParameter('time', 1.5);
 compute.setParameter('count', 1024);
 compute.setParameter('tint', [1.0, 0.5, 0.0, 1.0]);
 ```
@@ -20495,6 +20551,12 @@ compute2.setupDispatch(128, 128);
 device.computeDispatch([compute1, compute2], 'BatchedDispatch');
 ```
 
+:::note
+
+`device.computeDispatch` records into the current frame's command encoder, so it must be called **within the render frame** — typically from an `app.on('update', ...)` handler. Calling it from a bare `setTimeout` or a detached promise outside the frame is unreliable and may silently skip the dispatch.
+
+:::
+
 ### Workgroup Size
 
 The total number of invocations is `dispatchSize × workgroupSize`. For example, if you dispatch with `(width, height)` and your shader has `@workgroup_size(1, 1, 1)`, you get `width × height` invocations.
@@ -20536,13 +20598,7 @@ Each slot holds three 32-bit unsigned integers representing the x, y, and z work
 
 ### Writing Dispatch Parameters
 
-Pass the indirect buffer to your compute shader so it can write dispatch parameters. In your bind group format:
-
-```javascript
-new pc.BindStorageBufferFormat('indirectBuffer', pc.SHADERSTAGE_COMPUTE)
-```
-
-In WGSL, define a struct matching the indirect dispatch layout and write the parameters:
+Declare the indirect buffer in your compute shader (reflected automatically) and write the dispatch parameters into the reserved slot:
 
 ```wgsl
 struct DispatchIndirectArgs {
@@ -20551,8 +20607,8 @@ struct DispatchIndirectArgs {
     z: u32
 };
 
-@group(0) @binding(0) var<storage, read_write> indirectBuffer: array<DispatchIndirectArgs>;
-@group(0) @binding(1) var<uniform> uniforms: Uniforms; // Contains slot index
+var<storage, read_write> indirectBuffer: array<DispatchIndirectArgs>;
+uniform slot: u32; // slot index to write into
 
 @compute @workgroup_size(1)
 fn main() {
@@ -20560,9 +20616,9 @@ fn main() {
     let workloadSize = calculateWorkload();
 
     // Write dispatch parameters to the slot
-    indirectBuffer[uniforms.slot].x = workloadSize;
-    indirectBuffer[uniforms.slot].y = 1u;
-    indirectBuffer[uniforms.slot].z = 1u;
+    indirectBuffer[uniform.slot].x = workloadSize;
+    indirectBuffer[uniform.slot].y = 1u;
+    indirectBuffer[uniform.slot].z = 1u;
 }
 ```
 
@@ -20680,8 +20736,7 @@ const shader = new pc.Shader(device, {
     cdefines: new Map([
         ['{WORKGROUP_SIZE}', '64']
     ]),
-    cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL),
-    // ...
+    cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL)
 });
 ```
 
@@ -20691,15 +20746,15 @@ The `{WORKGROUP_SIZE}` placeholders are replaced with `64` before compilation. S
 
 Explore these live examples demonstrating various compute shader use cases:
 
+- Edge Detect - Image processing with edge detection
+
+- Particles - GPU-based particle simulation with collision detection
+
 - Histogram - Compute image histogram using atomic operations
 
 - Texture Generation - Generate and modify textures with compute shaders
 
-- Particles - GPU-based particle simulation with collision detection
-
 - Vertex Update - Modify mesh vertex buffers in real-time
-
-- Edge Detect - Image processing with edge detection
 
 - Indirect Draw - GPU-driven rendering with indirect draw calls
 
@@ -21780,7 +21835,7 @@ fn main(
 
 URL: https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-reflection/
 
-PlayCanvas reflects resources directly from your WGSL shader source: you declare uniforms, textures, and storage buffers without `@group`/`@binding` indices, and the engine parses these declarations, builds the bind group format, and assigns the bindings automatically. This simplified syntax is used by vertex and fragment shaders.
+PlayCanvas reflects resources directly from your WGSL shader source: you declare uniforms, textures, and storage buffers without `@group`/`@binding` indices, and the engine parses these declarations, builds the bind group format, and assigns the bindings automatically. This simplified syntax is used by vertex, fragment, and compute shaders.
 
 The following sections outline how resources are declared and reflected. For the vertex/fragment-only constructs (attributes, varyings, and fragment outputs), see [WGSL Vertex and Fragment Shaders](/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders).
 
@@ -21961,6 +22016,22 @@ struct Particle {
 // particle storage buffer in read-only mode
 var<storage, read> particles: array<Particle>;
 ```
+
+### Storage Textures
+
+Storage textures let a shader write (and optionally read) texels directly, without a sampler. They are most commonly used as the output of a compute shader. Declare them with the simplified `texture_storage_*` syntax, specifying the format and the access mode:
+
+```wgsl
+// write-only storage texture (the common case for compute output)
+var outputTexture: texture_storage_2d<rgba8unorm, write>;
+
+// writing a texel
+textureStore(outputTexture, vec2i(global_id.xy), color);
+```
+
+The access mode can be `write`, `read`, or `read_write`. Reading from a storage texture (`read` / `read_write`) requires the `device.supportsStorageTextureRead` capability and an author-supplied `requires readonly_and_readwrite_storage_textures;` directive — see [WGSL Capabilities](/user-manual/graphics/shaders/wgsl-capabilities#wgsl-language-extensions).
+
+The texture you bind must be created with the `storage: true` option (see [Compute Shaders](/user-manual/graphics/shaders/compute-shaders)).
 
 --------------------------------------------------------------------------------
 

@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.7
-Total Documents: 463
-Generated: 2026-06-22
+Total Documents: 464
+Generated: 2026-06-23
 
 ## Instructions for Large Language Models
 
@@ -561,7 +561,8 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Sepia Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/sepia/): Legacy sepia script effect amount and GitHub reference for the sepia post-processing camera script.
 - [Vignette Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/vignette/): Legacy vignette offset and darkness controls to darken edges, with GitHub link for the vignette script.
 - [Shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/): Author ShaderMaterial with paired GLSL and WGSL, declare attributes, and integrate with the engine shader system.
-- [Compute Shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders/): WebGPU-only compute shaders: device checks, WGSL cshader definitions, bind groups, and general-purpose GPU work.
+- [Compute Shaders Advanced](https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders-advanced/): Manual bind group control for WebGPU compute shaders: hand-authored computeBindGroupFormat, explicit bindings, and mixing with reflected resources.
+- [Compute Shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders/): WebGPU-only compute shaders: device checks, simplified WGSL resource declarations, dispatch, and general-purpose GPU work.
 - [GLSL Specifics](https://developer.playcanvas.com/user-manual/graphics/shaders/glsl-specifics/): Rules for GLSL attributes, uniforms, varyings, and versioning so PlayCanvas can wire resources and transpile to WGSL.
 - [Shader Chunk Migrations](https://developer.playcanvas.com/user-manual/graphics/shaders/migrations/): Per-release shader chunk changes, console warnings for overrides, and how to set shaderChunksVersion after updates.
 - [Shader Preprocessor](https://developer.playcanvas.com/user-manual/graphics/shaders/preprocessor/): C-style defines, includes, and ifdef chains applied to GLSL, WGSL, and compute shaders before compilation.
