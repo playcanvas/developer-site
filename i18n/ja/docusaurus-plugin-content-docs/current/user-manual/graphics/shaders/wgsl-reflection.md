@@ -1,11 +1,11 @@
 ---
-title: WGSL の詳細
-description: "手動の bind group なしの簡略化された WGSL 宣言：PlayCanvas がバインディングを割り当てリソースを統合する方法。"
+title: WGSL リフレクション
+description: "手動の bind group なしの簡略化された WGSL 宣言：PlayCanvas がシェーダーソースからリソースを反映しバインディングを割り当てる方法。"
 ---
 
-PlayCanvasエンジンで使用されるWGSLシェーダーは、特定の要件を満たす必要があります。これらの要件により、エンジンはシェーダーを正しく統合し、属性、ユニフォーム、バリイングなどの必要なリソースを確実に受け取ることができます。
+PlayCanvas は WGSL シェーダーのソースからリソースを直接反映（リフレクト）します。ユニフォーム、テクスチャ、ストレージバッファを `@group`/`@binding` インデックスなしで宣言すると、エンジンがこれらの宣言を解析し、バインドグループ形式を構築してバインディングを自動的に割り当てます。この簡略化された構文は、頂点・フラグメント・コンピュートシェーダーで使用されます。
 
-以下のセクションでは、PlayCanvas用のWGSLシェーダーを記述する際の主要な側面について説明します。
+以下のセクションでは、リソースの宣言と反映の方法を説明します。頂点／フラグメント固有の構文（属性、バリイング、フラグメント出力）については、[WGSL 頂点・フラグメントシェーダー](/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders) を参照してください。
 
 ### 簡略化されたシェーダーインターフェース構文
 
@@ -44,38 +44,6 @@ varying uv0: vec2f;
     // 本体
 }
 ```
-
-### 属性
-
-属性は頂点ごとの入力データを定義し、頂点シェーダーでのみ使用できます。以下の構文を使用して宣言する必要があります：
-
-```wgsl
-attribute aUv0: vec2f;
-```
-
-内部的には、`VertexInput`構造体が自動的に作成され、すべての属性が格納されます。属性はメイン関数に渡される構造体からアクセスできますが、グローバルスコープでもアクセスできます。
-
-```wgsl
-attribute aUv0: vec2f;
-
-@vertex fn vertexMain(input: VertexInput) -> VertexOutput {
-
-    // メイン関数に渡されたinputを使用してアクセス
-    var myUv1 = input.aUv0;
-
-    // グローバル変数としてもアクセス可能（他の関数内で特に便利）
-    var myUv2 = aUv0;
-}
-```
-
-`VertexInput`構造体の一部として、およびグローバルスコープでも、これらの組み込み属性が自動的に利用可能です：
-
-```wgsl
-vertexIndex: @builtin(vertex_index)
-instanceIndex: @builtin(instance_index)
-```
-
-属性名は、[ShaderMaterial](/user-manual/graphics/shaders/)を作成する際に`attributes`プロパティで指定した名前と一致する必要があります。
 
 ### ユニフォーム
 
@@ -217,219 +185,18 @@ struct Particle {
 var<storage, read> particles: array<Particle>;
 ```
 
-### 半精度型 {#half-precision-types}
+### ストレージテクスチャ
 
-デバイスが16ビット浮動小数点演算をサポートしている場合（`device.supportsShaderF16`）、シェーダーはネイティブWGSL半精度型を使用してパフォーマンスを向上させ、メモリ帯域幅を削減できます：
-
-| ネイティブWGSL型 | 説明 |
-|------------------|------|
-| `f16` | 16ビット浮動小数点スカラー |
-| `vec2h`, `vec3h`, `vec4h` | 16ビット浮動小数点ベクトル |
-| `mat2x2h`, `mat3x3h`, `mat4x4h` | 16ビット浮動小数点行列 |
-
-PlayCanvasは、サポートされている場合はf16型に、そうでない場合はf32型に自動的に解決される型エイリアスを提供します：
-
-| エイリアス | f16サポート時 | f16非サポート時 |
-|-----------|---------------|-----------------|
-| `half` | `f16` | `f32` |
-| `half2` | `vec2<f16>` | `vec2f` |
-| `half3` | `vec3<f16>` | `vec3f` |
-| `half4` | `vec4<f16>` | `vec4f` |
-| `half2x2` | `mat2x2<f16>` | `mat2x2f` |
-| `half3x3` | `mat3x3<f16>` | `mat3x3f` |
-| `half4x4` | `mat4x4<f16>` | `mat4x4f` |
-
-これらのエイリアスは頂点シェーダーとフラグメントシェーダーに自動的に含まれます。コンピュートシェーダーの場合は、`#include "halfTypesCS"`で含めます。
-
-使用例：
+ストレージテクスチャを使うと、シェーダーはサンプラーなしでテクセルを直接書き込み（および必要に応じて読み取り）できます。最も一般的にはコンピュートシェーダーの出力として使用されます。簡略化された`texture_storage_*`構文で、フォーマットとアクセスモードを指定して宣言します：
 
 ```wgsl
-// 中間計算にhalf型を使用
-var color: half3 = half3(1.0, 0.5, 0.0);
-var intensity: half = half(0.8);
-var result: half3 = color * intensity;
+// 書き込み専用ストレージテクスチャ（コンピュート出力の一般的なケース）
+var outputTexture: texture_storage_2d<rgba8unorm, write>;
 
-// 必要に応じてf32に変換（例：出力用）
-output.color = vec4f(vec3f(result), 1.0);
+// テクセルの書き込み
+textureStore(outputTexture, vec2i(global_id.xy), color);
 ```
 
-:::note
+アクセスモードは`write`、`read`、`read_write`のいずれかです。ストレージテクスチャの読み取り（`read` / `read_write`）には、`device.supportsStorageTextureRead`のサポートと、筆者が記述する`requires readonly_and_readwrite_storage_textures;`ディレクティブが必要です。[WGSL ケイパビリティ](/user-manual/graphics/shaders/wgsl-capabilities#wgsl-language-extensions)を参照してください。
 
-`device.supportsShaderF16`がtrueの場合、エンジンは自動的に`enable f16;`ディレクティブを追加し、条件付きコンパイル用に`CAPS_SHADER_F16`を定義します。WGSLではf16とf32間の明示的な型変換が必要です。精度間の変換には`half3(vec3fValue)`や`vec3f(half3Value)`などのコンストラクタを使用してください。
-
-:::
-
-### バリイング
-
-バリイングは、頂点シェーダーからフラグメントシェーダーに値を渡すために使用されます。頂点シェーダーとフラグメントシェーダーの両方で、以下の簡略化された構文を使用して宣言します：
-
-```wgsl
-varying texCoord: vec2f;
-```
-
-内部的には、これらは解析され、頂点シェーダーでは`VertexOutput`構造体に、フラグメントシェーダーでは`FragmentInput`構造体に格納されます。
-
-#### 頂点シェーダー
-
-`VertexOutput`構造体の一部として、これらの組み込み変数が自動的に利用可能です：
-
-```wgsl
-position: @builtin(position)
-```
-
-例：
-
-```wgsl
-varying texCoord: vec2f;
-
-@vertex fn vertexMain(input: VertexInput) -> VertexOutput {
-    var output: VertexOutput;
-    output.position = uniform.matrix_viewProjection * pos;
-    output.texCoord = vec2f(0.0, 1.0);
-    return output;
-}
-```
-
-#### フラグメントシェーダー
-
-`FragmentInput`構造体の一部として、これらの組み込み変数が自動的に利用可能です：
-
-```wgsl
-position: @builtin(position)            // 補間されたフラグメント位置
-frontFacing: @builtin(front_facing)     // 前面向き
-sampleIndex: @builtin(sample_index)     // MSAAのサンプルインデックス
-primitiveIndex: @builtin(primitive_index) // プリミティブインデックス（サポート時）
-```
-
-これらの組み込み変数は、以下の名前でグローバルスコープでも利用可能です：
-
-```wgsl
-pcPosition
-pcFrontFacing
-pcSampleIndex
-pcPrimitiveIndex  // サポート時
-```
-
-:::note
-
-`primitiveIndex` / `pcPrimitiveIndex` 組み込み変数は、`device.supportsPrimitiveIndex` が true の場合にのみ利用可能です。この機能は WebGPU 専用です（WebGL2 では利用不可）。`enable primitive_index;` および `CAPS_PRIMITIVE_INDEX` については [WGSL 言語拡張](#wgsl-language-extensions) を参照してください。
-
-:::
-
-例：
-
-```wgsl
-varying texCoord: vec2f;
-
-@fragment
-fn fragmentMain(input: FragmentInput) -> FragmentOutput {
-    var output: FragmentOutput;
-    output.color = vec4f(1.0);
-    return output;
-}
-```
-
-### フラグメントシェーダー出力
-
-フラグメントシェーダーは、フレームバッファのレンダーターゲット（カラーアタッチメント）に書き込まれる1つ以上のカラー出力を生成する責任があります。
-
-エンジンは`FragmentOutput`構造体を自動的に提供し、これには`color`、`color1`、`color2`などの定義済みvec4fフィールドのセットが含まれ、`GraphicsDevice.maxColorAttachments`で定義された制限までのすべての可能なカラーアタッチメントをカバーします。
-
-`FragmentOutput`構造体の一部として、これらの組み込み変数が自動的に利用可能です：
-
-```wgsl
-fragDepth: @builtin(frag_depth)
-```
-
-例：
-
-```wgsl
-@fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
-    var output: FragmentOutput;
-    output.color = vec4f(1.0);
-    output.color1 = vec4f(0.5);
-    output.fragDepth = 0.2;
-    return output;
-}
-```
-
-:::note
-
-整数テクスチャへのレンダリング（`vec4f`以外の出力フォーマット）のサポートはまだ利用できませんが、将来追加される予定です。
-
-:::
-
-### WGSL 言語拡張 {#wgsl-language-extensions}
-
-デバイス作成時に、エンジンは `navigator.gpu.wgslLanguageFeatures` を読み取り、任意の言語機能用に必要な `enable …;` および `requires …;` ディレクティブを生成される WGSL に付加します。シェーダー側では、対応する `CAPS_*` 定義（`Shader` 定義の `vertexDefines` / `fragmentDefines` / `cdefines` とマージ）で分岐できます。
-
-- **`device.supportsShaderF16`**
-  - **エンジンが注入:** `enable f16;`
-  - **プリプロセッサ定義:** `CAPS_SHADER_F16`
-  - **シェーダー段階:** 頂点、フラグメント、コンピュート
-  - **説明:** 本ページの [半精度型](#half-precision-types) および、エンジンが付与する `half` / `half2` などのエイリアス
-- **`device.supportsPrimitiveIndex`**
-  - **エンジンが注入:** `enable primitive_index;`
-  - **プリプロセッサ定義:** `CAPS_PRIMITIVE_INDEX`
-  - **シェーダー段階:** フラグメント
-  - **説明:** 簡略 API では、対応端末向けに `FragmentInput` の `primitiveIndex` およびグローバル `pcPrimitiveIndex`
-- **`device.supportsSubgroups`**
-  - **エンジンが注入:** `enable subgroups;`
-  - **プリプロセッサ定義:** `CAPS_SUBGROUPS`
-  - **シェーダー段階:** フラグメントとコンピュート
-  - **説明:** サブグループ組み込み（`subgroupBroadcast` 等）。`device.supportsSubgroupUniformity` 専用の `requires` / `enable` は追加されず、subgroups 機能と合わせて扱う
-- **`device.supportsSubgroupId`**
-  - **エンジンが注入:** `requires subgroup_id;`
-  - **プリプロセッサ定義:** `CAPS_SUBGROUP_ID`
-  - **シェーダー段階:** その `Shader` 定義に応じ、エンジンが WGSL へコンパイルする段階（使用する各段階向けのモジュール）
-  - **説明:** ワークグループ内の `subgroup_id` / `num_subgroups` 組み込み
-- **`device.supportsLinearIndexing`**
-  - **エンジンが注入:** `requires linear_indexing;`（**コンピュート** エントリのモジュールのみ。頂点・フラグメントには入れない）
-  - **プリプロセッサ定義:** `CAPS_LINEAR_INDEXING`
-  - **シェーダー段階:** コンピュート
-  - **説明:** `global_invocation_index` / `workgroup_index`。解説: [WebGPU 147-148](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension)
-- **`device.supportsStorageTextureRead`**
-  - **エンジンが注入:** *なし* — ストレージテクスチャを読む場合は、WGSL 内に `requires readonly_and_readwrite_storage_textures;` を自前で記述
-  - **プリプロセッサ定義:** `CAPS_STORAGE_TEXTURE_READ`（デバイスがストレージテクスチャの読み取りに対応しているときに有効。コードパス分岐用）
-  - **シェーダー段階:** 機能を使う場合にコンピュート
-  - **説明:** エンジンは能力の宣言のみ。`requires` は必ず筆者が書く想定
-- **`device.supportsUnrestrictedPointerParameters`**
-  - **エンジンが注入:** `requires unrestricted_pointer_parameters;`
-  - **プリプロセッサ定義:** `CAPS_UNRESTRICTED_POINTER_PARAMETERS`
-  - **シェーダー段階:** 頂点・フラグメント・コンピュート
-  - **説明:** `storage`・`uniform`・`workgroup` アドレス空間のポインタを関数の引数として渡せるようにします
-- **`device.supportsPointerCompositeAccess`**
-  - **エンジンが注入:** `requires pointer_composite_access;`
-  - **プリプロセッサ定義:** `CAPS_POINTER_COMPOSITE_ACCESS`
-  - **シェーダー段階:** 頂点・フラグメント・コンピュート
-  - **説明:** 複合型へのポインタのデリファレンスの糖衣構文。`(*p).field` や `(*p)[i]` の代わりに `p.field` や `p[i]` と書けます
-- **`device.supportsPacked4x8IntegerDotProduct`**
-  - **エンジンが注入:** `requires packed_4x8_integer_dot_product;`
-  - **プリプロセッサ定義:** `CAPS_PACKED_4X8_INTEGER_DOT_PRODUCT`
-  - **シェーダー段階:** 頂点・フラグメント・コンピュート
-  - **説明:** 8ビットパック整数の内積向け DP4a 系の組み込み関数（`dot4U8Packed`、`dot4I8Packed`、および `pack4x{I,U}8`、`pack4x{I,U}8Clamp`、`unpack4x{I,U}8` ヘルパー）を公開します。量子化推論や整数中心のコンピュートに有用
-- **`device.supportsTextureAndSamplerLet`**
-  - **エンジンが注入:** `requires texture_and_sampler_let;`
-  - **プリプロセッサ定義:** `CAPS_TEXTURE_AND_SAMPLER_LET`
-  - **シェーダー段階:** 頂点・フラグメント・コンピュート
-  - **説明:** テクスチャ・サンプラー変数を `let` バインディングに代入できるようにします（バインドレス的な間接参照パターンへの準備）
-
-使用例（コンピュート）— `CAPS_LINEAR_INDEXING` があるときは線形のワークグループ番号を使い、なければ従来の方法で求めます。
-
-```wgsl
-@compute @workgroup_size(64, 1, 1)
-fn main(
-    @builtin(global_invocation_id) global_id: vec3u,
-    @builtin(num_workgroups) nwg: vec3u,
-#ifdef CAPS_LINEAR_INDEXING
-    @builtin(workgroup_index) flat_wg: u32,
-#endif
-) {
-#ifdef CAPS_LINEAR_INDEXING
-    let wg = flat_wg;
-#else
-    let wg = global_id.x; // 1D ディスパッチ; 2D/3D は必要に応じて拡張
-#endif
-    _ = wg;
-}
-```
+バインドするテクスチャは`storage: true`オプションで作成する必要があります（[コンピュートシェーダー](/user-manual/graphics/shaders/compute-shaders)を参照）。

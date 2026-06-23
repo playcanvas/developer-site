@@ -1,6 +1,6 @@
 ---
 title: コンピュートシェーダー
-description: "WebGPU 専用の compute シェーダー：デバイスチェック、WGSL の cshader 定義、bind group、汎用 GPU 処理。"
+description: "WebGPU 専用の compute シェーダー：デバイスチェック、簡略化された WGSL リソース宣言、ディスパッチ、汎用 GPU 処理。"
 ---
 
 コンピュートシェーダーは、レンダリングパイプラインとは独立して、GPU上で汎用計算を実行するプログラムです。頂点シェーダーやフラグメントシェーダーとは異なり、コンピュートシェーダーはジオメトリやピクセルに縛られず、任意のデータを操作するため、パーティクルシミュレーション、画像処理、物理計算、プロシージャルコンテンツ生成などのタスクに理想的です。
@@ -23,11 +23,11 @@ if (device.supportsCompute) {
 
 ## WGSL 言語拡張
 
-ブラウザが任意の WGSL 機能（例: [線形ワーカー / 呼び出しインデックス](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension)、サブグループ、半精度 float）を公開している場合、エンジンは対応する `device.supports*` フラグと `CAPS_*` プリプロセッサ定義を設定します。一覧と注意点は [WGSL の詳細 — 言語拡張](/user-manual/graphics/shaders/wgsl-reflection#wgsl-language-extensions) を参照してください。
+ブラウザが任意の WGSL 機能（例: [線形ワーカー / 呼び出しインデックス](https://developer.chrome.com/blog/new-in-webgpu-147-148#wgsl_linear_indexing_extension)、サブグループ、半精度 float）を公開している場合、エンジンは対応する `device.supports*` フラグと `CAPS_*` プリプロセッサ定義を設定します。一覧と注意点は [WGSL 言語拡張](/user-manual/graphics/shaders/wgsl-capabilities#wgsl-language-extensions) を参照してください。
 
 ## コンピュートシェーダーの作成
 
-コンピュートシェーダーは、WGSLコードを使用して`Shader`クラスで作成されます。シェーダー定義には、コンピュートシェーダーソース（`cshader`）、バインドグループフォーマット、およびオプションでユニフォームバッファフォーマットが含まれます。
+コンピュートシェーダーは、WGSL の `cshader` ソースを使用して `Shader` クラスで作成します。使用するリソース（ユニフォーム、ストレージバッファ、テクスチャ、ストレージテクスチャ）を簡略化された WGSL 構文（`@group`/`@binding` なし）で宣言すると、エンジンがソースからそれらを反映し、バインドグループを自動的に構築します。リソース宣言構文の詳細は [WGSL リフレクション](/user-manual/graphics/shaders/wgsl-reflection) を参照してください。
 
 ### 基本的なシェーダー定義
 
@@ -36,16 +36,28 @@ const shader = new pc.Shader(device, {
     name: 'MyComputeShader',
     shaderLanguage: pc.SHADERLANGUAGE_WGSL,
     cshader: `
-        @compute @workgroup_size(1, 1, 1)
+        // 簡略化された構文で宣言されたリソースは自動的に反映されます -
+        // computeBindGroupFormat は不要です
+        uniform count: u32;
+        var<storage, read_write> data: array<f32>;
+
+        @compute @workgroup_size(64, 1, 1)
         fn main(@builtin(global_invocation_id) global_id: vec3u) {
-            // コンピュートシェーダーのロジックをここに記述
+            let i = global_id.x;
+            if (i >= uniform.count) { return; }
+            data[i] = data[i] * 2.0;
         }
-    `,
-    computeBindGroupFormat: new pc.BindGroupFormat(device, [
-        // リソースバインディングをここに記述
-    ])
+    `
 });
 ```
+
+:::note
+
+バインドグループを明示的に制御する必要がある場合（手動で記述する `computeBindGroupFormat`、明示的な `@group`/`@binding` インデックス、または手動バインドのリソースと反映されるリソースの混在）は、[コンピュートシェーダー（応用）](/user-manual/graphics/shaders/compute-shaders-advanced) を参照してください。
+
+:::
+
+### エントリポイント
 
 デフォルトでは、エンジンはエントリポイント関数の名前が`main`であることを期待します。`computeEntryPoint`を使用して別の関数名を指定することもでき、これにより単一のシェーダーソースに複数のエントリポイントを含めることもできます：
 
@@ -67,139 +79,15 @@ const initShader = new pc.Shader(device, {
     name: 'InitParticles',
     shaderLanguage: pc.SHADERLANGUAGE_WGSL,
     cshader: shaderSource,
-    computeEntryPoint: 'initParticles',
-    // ...
+    computeEntryPoint: 'initParticles'
 });
 
 const updateShader = new pc.Shader(device, {
     name: 'UpdateParticles',
     shaderLanguage: pc.SHADERLANGUAGE_WGSL,
     cshader: shaderSource,
-    computeEntryPoint: 'updateParticles',
-    // ...
+    computeEntryPoint: 'updateParticles'
 });
-```
-
-### バインドグループフォーマット
-
-`computeBindGroupFormat`は、コンピュートシェーダーで利用可能なリソースを定義します。様々なタイプのリソースをバインドできます：
-
-#### ストレージバッファ
-
-ストレージバッファは、大量のデータへの読み書きアクセスを可能にします：
-
-```javascript
-// 読み書き可能なストレージバッファ
-new pc.BindStorageBufferFormat('particles', pc.SHADERSTAGE_COMPUTE)
-
-// 読み取り専用のストレージバッファ
-new pc.BindStorageBufferFormat('spheres', pc.SHADERSTAGE_COMPUTE, true)
-```
-
-WGSLでは、ストレージバッファに以下のようにアクセスします：
-
-```wgsl
-@group(0) @binding(0) var<storage, read_write> particles: array<f32>;
-@group(0) @binding(1) var<storage, read> spheres: array<vec4f>;
-```
-
-#### ストレージテクスチャ
-
-ストレージテクスチャは、コンピュートシェーダーがテクスチャに直接書き込むことを可能にします：
-
-```javascript
-new pc.BindStorageTextureFormat('outTexture', pc.PIXELFORMAT_RGBA8, pc.TEXTUREDIMENSION_2D)
-```
-
-WGSLでは：
-
-```wgsl
-@group(0) @binding(0) var outputTexture: texture_storage_2d<rgba8unorm, write>;
-
-// テクスチャへの書き込み
-textureStore(outputTexture, vec2i(global_id.xy), color);
-```
-
-#### 入力テクスチャ
-
-入力テクスチャは読み取り専用のテクスチャデータを提供します。最後のパラメータはサンプラーを含めるかどうかを制御します：
-
-```javascript
-// サンプラーなしのテクスチャ（textureLoad用）
-new pc.BindTextureFormat('inputTexture', pc.SHADERSTAGE_COMPUTE, undefined, undefined, false)
-
-// サンプラー付きのテクスチャ（textureSampleLevel用）
-new pc.BindTextureFormat('inputTexture', pc.SHADERSTAGE_COMPUTE, undefined, undefined, true)
-```
-
-WGSLでは、サンプラーが含まれている場合、テクスチャ名に`_sampler`サフィックスを付けて使用します：
-
-```wgsl
-// サンプラーなし - 直接テクセルアクセスにtextureLoadを使用
-@group(0) @binding(0) var inputTexture: texture_2d<f32>;
-let color = textureLoad(inputTexture, position, 0);
-
-// サンプラー付き - フィルタリングされたサンプリングにtextureSampleLevelを使用
-@group(0) @binding(0) var inputTexture: texture_2d<f32>;
-@group(0) @binding(1) var inputTexture_sampler: sampler;
-let color = textureSampleLevel(inputTexture, inputTexture_sampler, uv, 0.0);
-```
-
-:::note
-
-コンピュートシェーダーでは、ミップレベル（LOD）を明示的に指定する必要があるため、`textureSample`の代わりに`textureSampleLevel`を使用してください。
-
-:::
-
-#### ユニフォームバッファ
-
-コンピュートシェーダーにユニフォームデータを渡すには、まずユニフォームバッファフォーマットを定義します：
-
-```javascript
-const uniformBufferFormat = new pc.UniformBufferFormat(device, [
-    new pc.UniformFormat('tint', pc.UNIFORMTYPE_VEC4),
-    new pc.UniformFormat('time', pc.UNIFORMTYPE_FLOAT),
-    new pc.UniformFormat('count', pc.UNIFORMTYPE_UINT)
-]);
-```
-
-次に、バインドグループとともにシェーダー定義に含めます：
-
-```javascript
-const shader = new pc.Shader(device, {
-    name: 'ComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
-    cshader: shaderCode,
-
-    // ユニフォームバッファフォーマットを割り当て
-    computeUniformBufferFormats: {
-        ub: uniformBufferFormat
-    },
-
-    // バインドグループにユニフォームバッファを含める
-    computeBindGroupFormat: new pc.BindGroupFormat(device, [
-        new pc.BindUniformBufferFormat('ub', pc.SHADERSTAGE_COMPUTE),
-        // ... その他のバインディング
-    ])
-});
-```
-
-WGSLでは：
-
-```wgsl
-struct ub_compute {
-    tint: vec4f,
-    time: f32,
-    count: u32
-}
-
-@group(0) @binding(0) var<uniform> ubCompute: ub_compute;
-
-@compute @workgroup_size(1, 1, 1)
-fn main(@builtin(global_invocation_id) global_id: vec3u) {
-    let t = ubCompute.time;
-    let c = ubCompute.count;
-}
 ```
 
 ## コンピュートインスタンスの作成
@@ -212,17 +100,16 @@ const compute = new pc.Compute(device, shader, 'MyComputeInstance');
 
 ## パラメータの設定
 
-`setParameter`を使用してリソースをバインドし、ユニフォーム値を設定します：
+`setParameter`を使用してリソースをバインドし、ユニフォーム値を設定します。リソースは名前によってシェーダーの宣言に対応付けられます：
 
 ```javascript
 // ストレージバッファをバインド
-compute.setParameter('particles', storageBuffer);
+compute.setParameter('data', storageBuffer);
 
 // テクスチャをバインド
 compute.setParameter('inputTexture', texture);
 
 // ユニフォーム値を設定
-compute.setParameter('time', 1.5);
 compute.setParameter('count', 1024);
 compute.setParameter('tint', [1.0, 0.5, 0.0, 1.0]);
 ```
@@ -284,6 +171,12 @@ compute2.setupDispatch(128, 128);
 device.computeDispatch([compute1, compute2], 'BatchedDispatch');
 ```
 
+:::note
+
+`device.computeDispatch` は現在のフレームのコマンドエンコーダに記録されるため、**レンダリングフレーム内**（通常は `app.on('update', ...)` ハンドラ内）で呼び出す必要があります。フレーム外（`setTimeout` や切り離された Promise など）から呼び出すと信頼できず、ディスパッチが暗黙的にスキップされることがあります。
+
+:::
+
 ### ワークグループサイズ
 
 総呼び出し回数は`dispatchSize × workgroupSize`です。例えば、`(width, height)`でディスパッチし、シェーダーが`@workgroup_size(1, 1, 1)`の場合、`width × height`回の呼び出しが行われます。
@@ -325,13 +218,7 @@ const slot = device.getIndirectDispatchSlot();
 
 ### ディスパッチパラメータの書き込み
 
-コンピュートシェーダーがディスパッチパラメータを書き込めるように、間接バッファを渡します。バインドグループフォーマットで：
-
-```javascript
-new pc.BindStorageBufferFormat('indirectBuffer', pc.SHADERSTAGE_COMPUTE)
-```
-
-WGSLでは、間接ディスパッチレイアウトに一致する構造体を定義し、パラメータを書き込みます：
+コンピュートシェーダー内で間接バッファを宣言し（自動的に反映されます）、予約したスロットにディスパッチパラメータを書き込みます。間接ディスパッチレイアウトに一致する構造体を定義します：
 
 ```wgsl
 struct DispatchIndirectArgs {
@@ -340,8 +227,8 @@ struct DispatchIndirectArgs {
     z: u32
 };
 
-@group(0) @binding(0) var<storage, read_write> indirectBuffer: array<DispatchIndirectArgs>;
-@group(0) @binding(1) var<uniform> uniforms: Uniforms; // スロットインデックスを含む
+var<storage, read_write> indirectBuffer: array<DispatchIndirectArgs>;
+uniform slot: u32; // 書き込み先のスロットインデックス
 
 @compute @workgroup_size(1)
 fn main() {
@@ -349,9 +236,9 @@ fn main() {
     let workloadSize = calculateWorkload();
 
     // ディスパッチパラメータをスロットに書き込み
-    indirectBuffer[uniforms.slot].x = workloadSize;
-    indirectBuffer[uniforms.slot].y = 1u;
-    indirectBuffer[uniforms.slot].z = 1u;
+    indirectBuffer[uniform.slot].x = workloadSize;
+    indirectBuffer[uniform.slot].y = 1u;
+    indirectBuffer[uniform.slot].z = 1u;
 }
 ```
 
@@ -434,7 +321,7 @@ storageBuffer.read(0, undefined, resultData, true).then((data) => {
 
 | インクルード | 説明 |
 |-------------|------|
-| `halfTypesCS` | 半精度型エイリアス（`half`、`half2`など）。サポートされている場合はf16に、そうでない場合はf32に解決されます。[半精度型](/user-manual/graphics/shaders/wgsl-reflection#half-precision-types)を参照。 |
+| `halfTypesCS` | 半精度型エイリアス（`half`、`half2`など）。サポートされている場合はf16に、そうでない場合はf32に解決されます。[半精度型](/user-manual/graphics/shaders/wgsl-capabilities#half-precision-types)を参照。 |
 
 例：
 
@@ -469,8 +356,7 @@ const shader = new pc.Shader(device, {
     cdefines: new Map([
         ['{WORKGROUP_SIZE}', '64']
     ]),
-    cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL),
-    // ...
+    cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL)
 });
 ```
 
@@ -480,6 +366,14 @@ const shader = new pc.Shader(device, {
 
 様々なコンピュートシェーダーのユースケースを示すライブサンプルを探索してください：
 
+- Edge Detect - エッジ検出による画像処理
+
+<EngineExample id="compute/edge-detect" title="Edge Detect" />
+
+- Particles - 衝突検出付きGPUベースのパーティクルシミュレーション
+
+<EngineExample id="compute/particles" title="Particles" />
+
 - Histogram - アトミック操作を使用した画像ヒストグラムの計算
 
 <EngineExample id="compute/histogram" title="Histogram" />
@@ -488,17 +382,9 @@ const shader = new pc.Shader(device, {
 
 <EngineExample id="compute/texture-gen" title="Texture Generation" />
 
-- Particles - 衝突検出付きGPUベースのパーティクルシミュレーション
-
-<EngineExample id="compute/particles" title="Particles" />
-
 - Vertex Update - メッシュ頂点バッファのリアルタイム変更
 
 <EngineExample id="compute/vertex-update" title="Vertex Update" />
-
-- Edge Detect - エッジ検出による画像処理
-
-<EngineExample id="compute/edge-detect" title="Edge Detect" />
 
 - Indirect Draw - 間接描画呼び出しによるGPU駆動レンダリング
 
