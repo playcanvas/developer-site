@@ -19,7 +19,7 @@ In centers mode:
 - Gaussians are overlaid with a blue dot at their center.
 - Selections apply to all Gaussian centers independent of their screen depth.
 - Centers are colored depending on their selection state. By default, blue is used for unselected Gaussians and yellow for selected Gaussians.
-- You can control the size that centers are rendered in the VIEW OPTIONS panel.
+- You can control the size that centers are rendered in the SETTINGS panel.
 
 <img width="1224" alt="Screenshot 2025-01-06 at 08 51 53" src="/img/user-manual/supersplat/editor/centers-mode.png" />
 

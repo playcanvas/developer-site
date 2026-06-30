@@ -19,7 +19,7 @@ SuperSplatは、以下の2つの**_編集モード_**のいずれかで動作し
 - Gaussiansは、その中心に青い点がオーバーレイ表示されます。
 - 選択はすべてのガウシアンの中心に適用され、スクリーンの深度とは無関係です。
 - 中心は選択状態に応じて色分けされます。デフォルトでは、未選択のGaussiansには青が、選択されたGaussiansには黄色が使用されます。
-- 中心がレンダリングされるサイズは、VIEW OPTIONSパネルで制御できます。
+- 中心がレンダリングされるサイズは、SETTINGSパネルで制御できます。
 
 <img width="1224" alt="Screenshot 2025-01-06 at 08 51 53" src="/img/user-manual/supersplat/editor/centers-mode.png" />
 
