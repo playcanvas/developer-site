@@ -45,7 +45,7 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 
 ## Camera Settings
 
-Access camera settings through the **View Options** panel (gear icon):
+Access camera settings through the **Settings** panel (gear icon):
 
 | Setting | Range | Default | Description |
 |---------|-------|---------|-------------|

@@ -32,7 +32,7 @@ The View Cube is a gizmo that gives added control over the viewport camera. You 
 
 ### Right Toolbar
 
-This vertical toolbar contains icons related to splat visualization, camera controls and application settings.
+This vertical toolbar contains icons related to splat visualization, camera controls and application settings. The gear icon opens the **Settings** panel, which holds view and render controls — colors, tonemapping, field of view, and grid and bound overlays — along with the [Language](#language) preference.
 
 ### Bottom Toolbar
 
@@ -45,3 +45,23 @@ The Timeline allows you to create and delete keyframes for the viewport camera. 
 ### Histogram Panel
 
 This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics.
+
+## Language
+
+SuperSplat's interface is available in several languages. By default it follows your browser's language — the **Automatic** setting — but you can choose a specific language from the **Language** dropdown at the top of the **Settings** panel (the gear icon in the [Right Toolbar](#right-toolbar)).
+
+Switching language takes effect immediately. There is no page reload, so your loaded scene and any unsaved work are preserved. Your choice is remembered across sessions until you change it again or switch back to **Automatic**.
+
+The following languages are supported:
+
+- English
+- Deutsch (German)
+- Español (Spanish)
+- Français (French)
+- 日本語 (Japanese)
+- 한국어 (Korean)
+- Português (Brasil) (Brazilian Portuguese)
+- Русский (Russian)
+- 中文 (简体) (Simplified Chinese)
+
+You can also pin a language for a shared link by adding a `?lng=` query parameter to the URL (for example, `?lng=ja`). This overrides both your saved choice and the browser default, which is useful when sharing a link that should always open in a particular language.
