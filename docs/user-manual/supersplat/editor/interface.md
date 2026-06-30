@@ -56,15 +56,15 @@ Switching language takes effect immediately. There is no page reload, so your lo
 
 The following languages are supported:
 
-- English — `en`
-- Deutsch (German) — `de`
-- Español (Spanish) — `es`
-- Français (French) — `fr`
-- 日本語 (Japanese) — `ja`
-- 한국어 (Korean) — `ko`
-- Português (Brasil) (Brazilian Portuguese) — `pt-BR`
-- Русский (Russian) — `ru`
-- 中文 (简体) (Simplified Chinese) — `zh-CN`
+* English — `en`
+* Deutsch (German) — `de`
+* Español (Spanish) — `es`
+* Français (French) — `fr`
+* 日本語 (Japanese) — `ja`
+* 한국어 (Korean) — `ko`
+* Português (Brasil) (Brazilian Portuguese) — `pt-BR`
+* Русский (Russian) — `ru`
+* 中文 (简体) (Simplified Chinese) — `zh-CN`
 
 :::tip Share a link in a specific language
 
