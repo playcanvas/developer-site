@@ -56,18 +56,18 @@ Switching language takes effect immediately. There is no page reload, so your lo
 
 The following languages are supported:
 
-- English
-- Deutsch (German)
-- Español (Spanish)
-- Français (French)
-- 日本語 (Japanese)
-- 한국어 (Korean)
-- Português (Brasil) (Brazilian Portuguese)
-- Русский (Russian)
-- 中文 (简体) (Simplified Chinese)
+- English — `en`
+- Deutsch (German) — `de`
+- Español (Spanish) — `es`
+- Français (French) — `fr`
+- 日本語 (Japanese) — `ja`
+- 한국어 (Korean) — `ko`
+- Português (Brasil) (Brazilian Portuguese) — `pt-BR`
+- Русский (Russian) — `ru`
+- 中文 (简体) (Simplified Chinese) — `zh-CN`
 
 :::tip Share a link in a specific language
 
-Add a `?lng=` query parameter to the URL (for example, `?lng=ja`) to pin the language for a shared link. This overrides both your saved choice and the browser default, so the link always opens in that language.
+Add a `?lng=` query parameter set to one of the language codes listed above (for example, `?lng=ja`) to pin the language for a shared link. This overrides both your saved choice and the browser default, so the link always opens in that language.
 
 :::
