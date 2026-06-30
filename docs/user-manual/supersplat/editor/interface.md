@@ -66,4 +66,8 @@ The following languages are supported:
 - Русский (Russian)
 - 中文 (简体) (Simplified Chinese)
 
-You can also pin a language for a shared link by adding a `?lng=` query parameter to the URL (for example, `?lng=ja`). This overrides both your saved choice and the browser default, which is useful when sharing a link that should always open in a particular language.
+:::tip Share a link in a specific language
+
+Add a `?lng=` query parameter to the URL (for example, `?lng=ja`) to pin the language for a shared link. This overrides both your saved choice and the browser default, so the link always opens in that language.
+
+:::
