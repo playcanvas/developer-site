@@ -32,7 +32,7 @@ The View Cube is a gizmo that gives added control over the viewport camera. You 
 
 ### Right Toolbar
 
-This vertical toolbar contains icons related to splat visualization, camera controls and application settings. The gear icon opens the **Settings** panel, which holds view and render controls — colors, tonemapping, field of view, and grid and bound overlays — along with the [Language](#language) preference.
+This vertical toolbar contains icons related to splat visualization, camera controls and application settings.
 
 ### Bottom Toolbar
 
