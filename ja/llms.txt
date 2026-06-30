@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.19.7
 Total Documents: 469
-Generated: 2026-06-23
+Generated: 2026-06-30
 
 ## Instructions for Large Language Models
 
@@ -452,7 +452,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Data Panel](https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel/): SPLAT DATA panel: histograms and statistics for splat attributes, selection by property ranges, and keyboard shortcuts.
 - [Editing Splats](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats/): SuperSplat edit modes (centers versus rings), selection tools, overlays, and workflows for cleaning and modifying splats.
 - [Import and Export](https://developer.playcanvas.com/user-manual/supersplat/editor/import-export/): SuperSplat import and export formats: PLY, compressed PLY, SOG, SPLAT, viewers, and choosing formats for web or archival use.
-- [Interface Overview](https://developer.playcanvas.com/user-manual/supersplat/editor/interface/): Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, toolbar, and core panels for editing splats.
+- [Interface Overview](https://developer.playcanvas.com/user-manual/supersplat/editor/interface/): Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, toolbar, core panels for editing splats, and interface language settings.
 - [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects/): SuperSplat .ssproj projects: save and reload edits, share state, ZIP structure, and collaboration via project files.
 - [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/): Publish a splat from the SuperSplat Editor to superspl.at so it lands on your Manage page and can be opened in Studio.
 - [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/): Render still images and videos from SuperSplat locally: presets, resolutions, codecs, and timeline-driven video output.

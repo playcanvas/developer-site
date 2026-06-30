@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 469
-Generated: 2026-06-23
+Generated: 2026-06-30
 
 ================================================================================
 
@@ -30108,7 +30108,7 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 
 ## Camera Settings
 
-Access camera settings through the **View Options** panel (gear icon):
+Access camera settings through the **Settings** panel (gear icon):
 
 | Setting | Range | Default | Description |
 |---------|-------|---------|-------------|
@@ -30255,7 +30255,7 @@ In centers mode:
 - Gaussians are overlaid with a blue dot at their center.
 - Selections apply to all Gaussian centers independent of their screen depth.
 - Centers are colored depending on their selection state. By default, blue is used for unselected Gaussians and yellow for selected Gaussians.
-- You can control the size that centers are rendered in the VIEW OPTIONS panel.
+- You can control the size that centers are rendered in the SETTINGS panel.
 
 <img width="1224" alt="Screenshot 2025-01-06 at 08 51 53" src="/img/user-manual/supersplat/editor/centers-mode.png" />
 
@@ -30433,9 +30433,11 @@ The SuperSplat Editor's interface appears as follows:
 
 [Image: supersplat-interface]
 
+## Interface Elements
+
 The key elements of the interface are labeled:
 
-## Menu Bar
+### Menu Bar
 
 The Menu Bar gives you access to the most commonly used functions in the SuperSplat Editor.
 
@@ -30471,6 +30473,36 @@ The Timeline allows you to create and delete keyframes for the viewport camera. 
 ### Histogram Panel
 
 This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics.
+
+## Language
+
+SuperSplat's interface is available in several languages. By default it follows your browser's language — the **Automatic** setting — but you can choose a specific language from the **Language** dropdown at the top of the **Settings** panel (the gear icon in the [Right Toolbar](#right-toolbar)).
+
+Switching language takes effect immediately. There is no page reload, so your loaded scene and any unsaved work are preserved. Your choice is remembered across sessions until you change it again or switch back to **Automatic**.
+
+The following languages are supported:
+
+* English — `en`
+* Deutsch (German) — `de`
+* Español (Spanish) — `es`
+* Français (French) — `fr`
+* 日本語 (Japanese) — `ja`
+* 한국어 (Korean) — `ko`
+* Português (Brasil) (Brazilian Portuguese) — `pt-BR`
+* Русский (Russian) — `ru`
+* 中文 (简体) (Simplified Chinese) — `zh-CN`
+
+:::tip Share a link in a specific language
+
+Add a `?lng=` query parameter set to one of the language codes listed above (for example, `?lng=ja`) to pin the language for a shared link. This overrides both your saved choice and the browser default, so the link always opens in that language.
+
+:::
+
+:::tip Missing your language?
+
+SuperSplat is [open source](https://github.com/playcanvas/supersplat), and its translations are plain JSON files under [`static/locales`](https://github.com/playcanvas/supersplat/tree/main/static/locales). [Open an issue](https://github.com/playcanvas/supersplat/issues) to request a new language, or open a pull request adding or improving a locale file.
+
+:::
 
 --------------------------------------------------------------------------------
 
