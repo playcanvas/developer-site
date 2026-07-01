@@ -55,7 +55,7 @@
     "js-yaml": "^5.2.0",
     "leva": "^0.10.1",
     "motion": "^12.42.2",
-    "playcanvas": "^2.20.4",
+    "playcanvas": "~2.19.7",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
     "react": "^19.2.7",
