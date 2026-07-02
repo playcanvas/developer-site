@@ -35,6 +35,20 @@ jobs:
     - name: Build
       run: npm run build
 
+    - name: Check build size and static deduplication
+      run: |
+        SIZE_MB=$(du -sm build | cut -f1)
+        echo "Total build size: ${SIZE_MB} MB"
+        for dir in img video downloads; do
+          if [ -d "build/ja/${dir}" ]; then
+            echo "::error::build/ja/${dir} should not exist (static assets must not be duplicated per locale)"
+            exit 1
+          fi
+        done
+        if [ "$SIZE_MB" -gt 950 ]; then
+          echo "::warning::Build size ${SIZE_MB} MB exceeds 950 MB GitHub Pages safety target (see issue #880)"
+        fi
+
   lint:
     name: Lint
     runs-on: ubuntu-latest

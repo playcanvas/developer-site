@@ -6,16 +6,19 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
+import remarkPathnameStatic, { remarkRootStaticLinks } from './utils/plugins/remark-pathname-static.mjs';
 import pluginLlms from './utils/plugins/docusaurus-plugin-llms.mjs';
+
+const siteUrl = process.env.SITE_URL ?? 'https://developer.playcanvas.com';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'PlayCanvas Developer Site',
   tagline: 'Start learning PlayCanvas today!',
-  favicon: 'img/favicon.ico',
+  favicon: `${siteUrl}/img/favicon.ico`,
 
   // Set the production url of your site here
-  url: 'https://developer.playcanvas.com',
+  url: siteUrl,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -33,6 +36,15 @@ const config = {
     defaultLocale: 'en',
     locales: ['en', 'ja']
   },
+
+  // Shared static/ is copied only for the default locale in production builds.
+  // remark-pathname-static prefixes shared doc asset URLs at compile time for ja pages.
+  // themeConfig favicon/image/logo use absolute URLs so useBaseUrl skips the /ja/ prefix.
+  staticDirectories:
+    process.env.NODE_ENV === 'development' ||
+    (process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'en') === 'en'
+      ? ['static']
+      : [],
 
   future: {
     faster: true,
@@ -251,7 +263,9 @@ const config = {
         docs: {
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
+          beforeDefaultRemarkPlugins: [remarkPathnameStatic],
           remarkPlugins: [
+            remarkRootStaticLinks,
             [remarkTypedoc, {
                typeResolver: ({ displayName, types, tags }) => {
 
@@ -300,12 +314,12 @@ const config = {
         indexName: 'developer-playcanvas',
         contextualSearch: true,
       },
-      image: 'img/playcanvas-social-card.jpg',
+      image: `${siteUrl}/img/playcanvas-social-card.jpg`,
       navbar: {
         title: 'PlayCanvas Docs',
         logo: {
           alt: 'PlayCanvas Logo',
-          src: 'img/playcanvas.webp',
+          src: `${siteUrl}/img/playcanvas.webp`,
         },
         items: [
           {
