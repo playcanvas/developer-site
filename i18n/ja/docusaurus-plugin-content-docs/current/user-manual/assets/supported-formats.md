@@ -103,6 +103,7 @@ GLB は 3D モデルの推奨フォーマットです。コンパクトで読み
 | WebAssembly | `.wasm` | コンパイル済みバイナリモジュール |
 | Binary | `.bin` | 生のバイナリデータ |
 | PLY | `.ply` | 3D Gaussian Splat データ |
+| glTF Binary | `.glb` | [KHR_gaussian_splatting](/user-manual/gaussian-splatting/formats/glb)拡張機能を使用した3D Gaussian Splatデータ |
 
 ## 関連項目
 

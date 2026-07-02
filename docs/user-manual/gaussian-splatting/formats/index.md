@@ -1,9 +1,9 @@
 ---
 title: Splat File Formats
-description: "Compare PLY, SOG and Streamed SOG splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows."
+description: "Compare PLY, SOG, Streamed SOG and GLB splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows."
 ---
 
-PlayCanvas supports three formats for 3D Gaussian Splat data:
+PlayCanvas supports four formats for 3D Gaussian Splat data:
 
 ## [PLY Format](./ply.md) - Source & Interchange
 
@@ -29,18 +29,27 @@ SOG chunks organized into a spatial tree with multiple levels of detail. Viewers
 - **File size**: Small per chunk, loaded on demand
 - **Quality**: Visually optimized, view-dependent detail
 
+## [GLB Format](./glb.md) - Standards-Based Interchange
+
+Binary glTF with the Khronos [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension. Splats travel through standard glTF pipelines and can be combined with regular mesh content.
+
+- **Use for**: Interoperability, standard glTF tooling and pipelines
+- **File size**: Large (uncompressed, similar to PLY)
+- **Quality**: Lossless
+
 ## Quick Comparison
 
-| | PLY | SOG | Streamed SOG |
-|---|---|---|---|
-| **Size** | Large | Small (15-20× compression) | Small (SOG chunks, loaded on demand) |
-| **Quality** | Lossless | Lossy | Lossy, view-dependent detail |
-| **Use** | Source/editing | Runtime/delivery | Very large scenes |
-| **Speed** | Slow loading | Fast loading | Progressive streaming |
+| | PLY | SOG | Streamed SOG | GLB |
+|---|---|---|---|---|
+| **Size** | Large | Small (15-20× compression) | Small (SOG chunks, loaded on demand) | Large |
+| **Quality** | Lossless | Lossy | Lossy, view-dependent detail | Lossless |
+| **Use** | Source/editing | Runtime/delivery | Very large scenes | glTF interchange |
+| **Speed** | Slow loading | Fast loading | Progressive streaming | Fast loading |
 
 ## Workflow
 
 1. Train and edit with **PLY**
 2. Convert to **SOG** for production using [SplatTransform](/user-manual/splat-transform/)
 3. For very large scenes, convert to **Streamed SOG** instead
-4. Deploy for optimal performance
+4. Use **GLB** when splats need to flow through standard glTF pipelines
+5. Deploy for optimal performance

@@ -83,7 +83,7 @@ SplatTransform detects file format from the file extension:
 | `.ksplat`         | ✅    | ❌     | Compressed splat format (mkkellogg format)                                                                                                           |
 | `.splat`          | ✅    | ❌     | Compressed splat format (antimatter15 format)                                                                                                        |
 | `.mjs`            | ✅    | ❌     | Generate a scene using an mjs script (Beta)                                                                                                          |
-| `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension    |
+| `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension, [loadable directly](/user-manual/gaussian-splatting/formats/glb) by the PlayCanvas Engine |
 | `.csv`            | ❌    | ✅     | Comma-separated values spreadsheet                                                                                                                   |
 | `.html`           | ❌    | ✅     | HTML viewer app (single-page or unbundled) based on SOG                                                                                              |
 | `.voxel.json`     | ❌    | ✅     | Sparse voxel octree for collision detection. See the [Collision Mesh](/user-manual/splat-transform/collision) guide. Output filename must end with `.voxel.json` (the prefix is up to you, e.g. `room.voxel.json`) |
