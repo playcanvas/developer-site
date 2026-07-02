@@ -35,6 +35,20 @@ jobs:
     - name: Build
       run: npm run build
 
+    # Shared static assets must only be emitted by the default-locale build;
+    # a localized build ships just its pages plus the small static-theme/
+    # assets (~60 MB total vs ~800 MB when duplication regresses). Guards the
+    # DOCUSAURUS_CURRENT_LOCALE-based dedup in docusaurus.config.js against
+    # regressing on a Docusaurus upgrade (see issue #880).
+    - name: Check static assets are not duplicated per locale
+      run: |
+        JA_SIZE_MB=$(du -sm build/ja | cut -f1)
+        echo "Total build size: $(du -sh build | cut -f1) (ja locale: ${JA_SIZE_MB} MB)"
+        if [ "$JA_SIZE_MB" -gt 200 ]; then
+          echo "::error::build/ja is ${JA_SIZE_MB} MB - shared static assets are being copied per locale again (see issue #880)"
+          exit 1
+        fi
+
   lint:
     name: Lint
     runs-on: ubuntu-latest

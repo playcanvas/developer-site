@@ -6,7 +6,18 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
+import remarkRootStaticUrls from './utils/plugins/remark-root-static-urls.mjs';
 import pluginLlms from './utils/plugins/docusaurus-plugin-llms.mjs';
+
+// A localized production build (e.g. `ja`) does not copy the ~500 MB shared
+// static/ folder into its output — pages reference the single copy emitted at
+// the site root by the default-locale build (see issue #880). Only the small
+// theme assets in static-theme/ (favicon, logo, social card), which Docusaurus
+// resolves against the locale baseUrl, are copied for every locale.
+// DOCUSAURUS_CURRENT_LOCALE is set per locale by `docusaurus build`.
+const localizedBuild =
+  process.env.NODE_ENV !== 'development' &&
+  (process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'en') !== 'en';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -33,6 +44,8 @@ const config = {
     defaultLocale: 'en',
     locales: ['en', 'ja']
   },
+
+  staticDirectories: localizedBuild ? ['static-theme'] : ['static', 'static-theme'],
 
   future: {
     faster: true,
@@ -251,6 +264,7 @@ const config = {
         docs: {
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
+          beforeDefaultRemarkPlugins: localizedBuild ? [remarkRootStaticUrls] : [],
           remarkPlugins: [
             [remarkTypedoc, {
                typeResolver: ({ displayName, types, tags }) => {
