@@ -133,5 +133,5 @@ Most format-bearing handlers participate in the parser registry: `model`, `textu
 
 - [`ResourceHandler` API Reference](https://api.playcanvas.com/engine/classes/ResourceHandler.html)
 - [`ResourceLoader` API Reference](https://api.playcanvas.com/engine/classes/ResourceLoader.html)
-- [Supported Formats](supported-formats)
-- [Loading and Unloading](loading-unloading)
+- [Supported Formats](supported-formats.md)
+- [Loading and Unloading](loading-unloading.md)

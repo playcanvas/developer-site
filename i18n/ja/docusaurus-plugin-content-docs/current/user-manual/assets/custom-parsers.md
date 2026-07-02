@@ -133,5 +133,5 @@ app.assets.load(asset);
 
 - [`ResourceHandler` API リファレンス](https://api.playcanvas.com/engine/classes/ResourceHandler.html)
 - [`ResourceLoader` API リファレンス](https://api.playcanvas.com/engine/classes/ResourceLoader.html)
-- [サポートされているフォーマット](supported-formats)
-- [読み込みと解放](loading-unloading)
+- [サポートされているフォーマット](supported-formats.md)
+- [読み込みと解放](loading-unloading.md)

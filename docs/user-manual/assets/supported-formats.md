@@ -106,10 +106,10 @@ For best browser compatibility, provide both MP3 and OGG versions of audio files
 
 ## Custom Formats
 
-The lists above cover the engine's built-in loaders, but they are not fixed: at runtime, custom parsers can add support for new file formats — or override the built-in ones — for most asset types. See [Custom Asset Parsers](custom-parsers).
+The lists above cover the engine's built-in loaders, but they are not fixed: at runtime, custom parsers can add support for new file formats — or override the built-in ones — for most asset types. See [Custom Asset Parsers](custom-parsers.md).
 
 ## See Also
 
 - [Models](models/index.md) - Preparing 3D models for PlayCanvas
 - [Asset Inspectors](/user-manual/editor/assets/inspectors/) - Configure asset properties in the Editor
-- [Custom Asset Parsers](custom-parsers) - Load custom file formats at runtime
+- [Custom Asset Parsers](custom-parsers.md) - Load custom file formats at runtime
