@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.5
 Total Documents: 469
-Generated: 2026-07-02
+Generated: 2026-07-03
 
 ## Instructions for Large Language Models
 
@@ -455,7 +455,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Interface Overview](https://developer.playcanvas.com/user-manual/supersplat/editor/interface/): Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, toolbar, core panels for editing splats, and interface language settings.
 - [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects/): SuperSplat .ssproj projects: save and reload edits, share state, ZIP structure, and collaboration via project files.
 - [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/): Publish a splat from the SuperSplat Editor to superspl.at so it lands on your Manage page and can be opened in Studio.
-- [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/): Render still images and videos from SuperSplat locally: presets, resolutions, codecs, and timeline-driven video output.
+- [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/): Render still images and videos from SuperSplat locally: presets, resolutions, codecs, 360° equirectangular output, and timeline-driven video.
 - [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline/): SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, and publishing animated camera paths that play on the scene page.
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore/): Browse and discover public splats on superspl.at: sort, filter by time and feature, search, and dig into a creator's profile.
 - [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage/): Use the Manage page on superspl.at to list, edit, share, and delete your published splats — and to open them in Studio.
