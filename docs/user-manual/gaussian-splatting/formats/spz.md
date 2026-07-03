@@ -20,12 +20,12 @@ This writes SPZ version 4 by default, which is the version the engine parser sup
 
 ## Loading in PlayCanvas
 
-The SPZ parser is not part of the engine — it ships as a script with the engine ([`scripts/esm/gsplat/spz-parser.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/gsplat/spz-parser.mjs)) and is registered with the `gsplat` resource handler by the application.
+The SPZ parser is not part of the engine — it ships as a script with the engine ([`scripts/esm/parsers/spz-parser.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/parsers/spz-parser.mjs)) and is registered with the `gsplat` resource handler by the application.
 
 The SPZ attribute streams are ZSTD compressed, so the parser also needs a ZSTD decompression WebAssembly module, registered the same way as the Draco module. A prebuilt module is available in the [engine repository](https://github.com/playcanvas/engine/tree/main/examples/assets/wasm/zstd).
 
 ```javascript
-import { SpzParser } from 'playcanvas/scripts/esm/gsplat/spz-parser.mjs';
+import { SpzParser } from 'playcanvas/scripts/esm/parsers/spz-parser.mjs';
 
 // the spz attribute streams are ZSTD compressed - register a decoder module
 pc.WasmModule.setConfig('ZstdDecoderModule', {
