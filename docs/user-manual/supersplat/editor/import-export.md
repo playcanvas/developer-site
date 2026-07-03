@@ -1,6 +1,6 @@
 ---
 title: Import and Export
-description: "SuperSplat import and export formats: PLY, compressed PLY, SOG, SPLAT, viewers, and choosing formats for web or archival use."
+description: "SuperSplat import and export formats: PLY, compressed PLY, SOG, SPLAT, SPZ, viewers, and choosing formats for web or archival use."
 ---
 
 SuperSplat's import and export capabilities are essential for working with Gaussian Splat data throughout your entire workflow. Import allows you to bring in splat scenes from various capture tools and formats for editing, cleanup, and optimization. Once your editing work is complete, export enables you to save your refined splats in the optimal format for your target platform - whether that's a compressed format for web deployment, a full-quality PLY for archival, or a standalone HTML viewer for easy sharing. This flexibility ensures SuperSplat can integrate seamlessly into any Gaussian Splat production pipeline.
@@ -16,6 +16,7 @@ SuperSplat works with several file formats for Gaussian Splat scenes:
 | `.sog` | ✅ | ✅ | Bundled super-compressed format (a zip file containing `meta.json` and `.webp` textures). Recommended for runtime applications |
 | `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](/user-manual/splat-transform/) CLI tool to export |
 | `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
+| `.spz` | ✅ | ✅ | Niantic compressed format. Exports as SPZ version 4 by default, with SPZ version 3 available for older readers |
 | `.lcc` | ✅ | ❌ | XGRIDS proprietary format which contains multiple levels-of-detail. Imports the highest LOD that contains less than 20 million Gaussians |
 | `.html` / `.zip` | ❌ | ✅ | Standalone HTML viewer app - embeds compressed splat data for web sharing |
 
@@ -27,7 +28,7 @@ Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY fi
 
 ## Importing Splats
 
-SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.lcc`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
+SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.spz`, `.lcc`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
 
 There are four ways to load a Gaussian Splat file:
 
@@ -72,5 +73,7 @@ PLY sequences are memory-intensive since each frame loads a complete splat scene
 ## Exporting Splats
 
 To export your currently loaded scene, open the `File` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
+
+Most formats let you choose how many spherical harmonic bands to include in the export dialog. When exporting to SPZ, you can also select the format version: **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
 
 For information about exporting and hosting HTML viewers for your splats, see [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting).
