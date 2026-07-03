@@ -22,7 +22,7 @@ splat-transform scene.ply scene.spz
 
 SPZパーサーはエンジン本体には含まれていません。エンジンに同梱されるスクリプト ([`scripts/esm/parsers/spz-parser.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/parsers/spz-parser.mjs)) として提供され、アプリケーションが`gsplat`リソースハンドラーに登録します。
 
-SPZの属性ストリームはZSTDで圧縮されているため、パーサーにはZSTD展開用のWebAssemblyモジュールも必要です。Dracoモジュールと同じ方法で登録します。ビルド済みのモジュールは[エンジンのリポジトリ](https://github.com/playcanvas/engine/tree/main/examples/assets/wasm/zstd)から入手できます。
+SPZの属性ストリームはZSTDで圧縮されているため、パーサーにはZSTD展開用のWebAssemblyモジュールの登録も必要です。ビルド済みのモジュールは[エンジンのリポジトリ](https://github.com/playcanvas/engine/tree/main/examples/assets/wasm/zstd)から入手できます。
 
 ```javascript
 import { SpzParser } from 'playcanvas/scripts/esm/parsers/spz-parser.mjs';
