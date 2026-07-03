@@ -1,9 +1,9 @@
 ---
 title: Splat File Formats
-description: "Compare PLY, SOG, Streamed SOG and GLB splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows."
+description: "Compare PLY, SOG, Streamed SOG, GLB and SPZ splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows."
 ---
 
-PlayCanvas supports four formats for 3D Gaussian Splat data:
+PlayCanvas supports five formats for 3D Gaussian Splat data:
 
 ## [PLY Format](./ply.md) - Source & Interchange
 
@@ -37,14 +37,22 @@ Binary glTF with the Khronos [KHR_gaussian_splatting](https://github.com/Khronos
 - **File size**: Large (uncompressed, similar to PLY)
 - **Quality**: Lossless
 
+## [SPZ Format](./spz.md) - Compressed Interchange
+
+[Niantic's](https://github.com/nianticlabs/spz) open source compressed splat format, roughly 10× smaller than PLY. Loaded via a parser script that ships with the engine.
+
+- **Use for**: Assets from the Niantic/Scaniverse ecosystem
+- **File size**: Small (compressed)
+- **Quality**: Visually optimized
+
 ## Quick Comparison
 
-| | PLY | SOG | Streamed SOG | GLB |
-|---|---|---|---|---|
-| **Size** | Large | Small (15-20× compression) | Small (SOG chunks, loaded on demand) | Large |
-| **Quality** | Lossless | Lossy | Lossy, view-dependent detail | Lossless |
-| **Use** | Source/editing | Runtime/delivery | Very large scenes | glTF interchange |
-| **Speed** | Slow loading | Fast loading | Progressive streaming | Fast loading |
+| | PLY | SOG | Streamed SOG | GLB | SPZ |
+|---|---|---|---|---|---|
+| **Size** | Large | Small (15-20× compression) | Small (SOG chunks, loaded on demand) | Large | Small (~10× compression) |
+| **Quality** | Lossless | Lossy | Lossy, view-dependent detail | Lossless | Lossy |
+| **Use** | Source/editing | Runtime/delivery | Very large scenes | glTF interchange | Niantic ecosystem |
+| **Speed** | Slow loading | Fast loading | Progressive streaming | Fast loading | Fast loading |
 
 ## Workflow
 
@@ -52,4 +60,5 @@ Binary glTF with the Khronos [KHR_gaussian_splatting](https://github.com/Khronos
 2. Convert to **SOG** for production using [SplatTransform](/user-manual/splat-transform/)
 3. For very large scenes, convert to **Streamed SOG** instead
 4. Use **GLB** when splats need to flow through standard glTF pipelines
-5. Deploy for optimal performance
+5. Load **SPZ** directly when assets come from tools like Scaniverse
+6. Deploy for optimal performance

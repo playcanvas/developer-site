@@ -874,6 +874,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/formats/sog',
             'user-manual/gaussian-splatting/formats/streamed-sog',
             'user-manual/gaussian-splatting/formats/glb',
+            'user-manual/gaussian-splatting/formats/spz',
           ],
         },
         {

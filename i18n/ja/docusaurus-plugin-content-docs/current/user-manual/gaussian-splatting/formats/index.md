@@ -1,9 +1,9 @@
 ---
 title: Splat ファイル形式
-description: 編集とWeb配信向けにPLY、SOG、Streamed SOG、GLBのスプラット形式を比較し、サイズと品質のトレードオフ、代表的な変換ワークフローを説明します。
+description: 編集とWeb配信向けにPLY、SOG、Streamed SOG、GLB、SPZのスプラット形式を比較し、サイズと品質のトレードオフ、代表的な変換ワークフローを説明します。
 ---
 
-PlayCanvasは、3D Gaussian Splatデータ用に4つの形式をサポートしています。
+PlayCanvasは、3D Gaussian Splatデータ用に5つの形式をサポートしています。
 
 ## [PLY 形式](./ply.md) - ソース & 交換用
 
@@ -37,14 +37,22 @@ Khronosの[KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/mai
 - **ファイルサイズ**: 大 (非圧縮、PLYと同程度)
 - **品質**: ロスレス
 
+## [SPZ 形式](./spz.md) - 圧縮交換用
+
+[Niantic](https://github.com/nianticlabs/spz)によるオープンソースの圧縮スプラット形式で、PLYの約10分の1のサイズです。エンジンに同梱されるパーサースクリプトで読み込みます。
+
+- **用途**: Niantic/Scaniverseエコシステムのアセット
+- **ファイルサイズ**: 小 (圧縮済み)
+- **品質**: 視覚的に最適化
+
 ## 簡易比較
 
-| | PLY | SOG | Streamed SOG | GLB |
-|---|---|---|---|---|
-| **サイズ** | 大 | 小 (15～20倍に圧縮) | 小 (SOGチャンク、オンデマンド読み込み) | 大 |
-| **品質** | ロスレス | ロッシー | ロッシー、視点依存の詳細度 | ロスレス |
-| **用途** | ソース/編集 | ランタイム/配信 | 非常に大きなシーン | glTF交換用 |
-| **速度** | 読み込みが遅い | 読み込みが速い | プログレッシブストリーミング | 読み込みが速い |
+| | PLY | SOG | Streamed SOG | GLB | SPZ |
+|---|---|---|---|---|---|
+| **サイズ** | 大 | 小 (15～20倍に圧縮) | 小 (SOGチャンク、オンデマンド読み込み) | 大 | 小 (約10倍に圧縮) |
+| **品質** | ロスレス | ロッシー | ロッシー、視点依存の詳細度 | ロスレス | ロッシー |
+| **用途** | ソース/編集 | ランタイム/配信 | 非常に大きなシーン | glTF交換用 | Nianticエコシステム |
+| **速度** | 読み込みが遅い | 読み込みが速い | プログレッシブストリーミング | 読み込みが速い | 読み込みが速い |
 
 ## ワークフロー
 
@@ -52,4 +60,5 @@ Khronosの[KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/mai
 2. [SplatTransform](/user-manual/splat-transform/)を使用して、本番用に**SOG**に変換する
 3. 非常に大きなシーンの場合は、代わりに**Streamed SOG**に変換する
 4. スプラットを標準的なglTFパイプラインで扱う必要がある場合は**GLB**を使用する
-5. 最適なパフォーマンスを得るためにデプロイする
+5. Scaniverseなどのツールで作成されたアセットは**SPZ**を直接読み込む
+6. 最適なパフォーマンスを得るためにデプロイする
