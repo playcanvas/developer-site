@@ -20,7 +20,11 @@ The Timeline panel includes the following controls:
 - **Timeline length** - Set the total duration of the animation in frames
 - **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
 
+:::tip[Keyboard Navigation]
+
 You can also navigate the timeline from the keyboard: press `,` or `.` to step to the previous or next frame, and `<` or `>` to jump to the previous or next keyframe.
+
+:::
 
 ## Creating Keyframes
 
@@ -52,7 +56,7 @@ The `images.txt` file contains camera poses expressed as quaternions and transla
 
 ## Editing Keyframes
 
-Once keyframes are created, you can modify them in the following ways. All keyframe edits can be undone and redone.
+Once keyframes are created, you can modify them in the following ways:
 
 ### Changing Keyframe Timing
 
@@ -69,6 +73,12 @@ To change the camera position or rotation stored in an existing keyframe:
 1. Move the playhead to the frame containing the keyframe you want to update
 2. Adjust the viewport camera to the new desired position and rotation
 3. Click the `+` (Add Key) button - this will overwrite the existing keyframe with the updated camera values
+
+:::note
+
+All keyframe operations - adding, removing, moving, and copying - can be undone with **Ctrl + Z** (or **Cmd + Z** on Mac) and redone with **Ctrl + Shift + Z** (or **Cmd + Shift + Z** on Mac).
+
+:::
 
 ## Deleting Keyframes
 
