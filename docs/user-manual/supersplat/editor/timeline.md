@@ -74,18 +74,18 @@ To change the camera position or rotation stored in an existing keyframe:
 2. Adjust the viewport camera to the new desired position and rotation
 3. Click the `+` (Add Key) button - this will overwrite the existing keyframe with the updated camera values
 
-:::note
-
-All keyframe operations - adding, removing, moving, and copying - can be undone with **Ctrl + Z** (or **Cmd + Z** on Mac) and redone with **Ctrl + Shift + Z** (or **Cmd + Shift + Z** on Mac).
-
-:::
-
 ## Deleting Keyframes
 
 To delete a keyframe:
 
 1. Move the playhead to the frame containing the keyframe you want to delete
 2. Click the `-` (Remove Key) button
+
+:::note
+
+All keyframe operations - adding, moving, copying, and removing - can be undone with **Ctrl + Z** (or **Cmd + Z** on Mac) and redone with **Ctrl + Shift + Z** (or **Cmd + Shift + Z** on Mac).
+
+:::
 
 ## Visualizing Keyframe Cameras
 
