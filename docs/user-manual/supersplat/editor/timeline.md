@@ -12,13 +12,15 @@ The Timeline panel allows you to create camera animations for your Gaussian Spla
 The Timeline panel includes the following controls:
 
 - **Play/Stop button** - Play or stop the animation playback
-- **Next/Previous Key buttons** - Jump to the next or previous keyframe
+- **Previous/Next Frame buttons** - Step one frame backward or forward. Hold **Shift** while clicking to jump to the previous or next keyframe instead
 - **Add Key button (`+`)** - Create a new keyframe at the current timeline position
 - **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
 - **Timeline slider** - Scrub through the animation by dragging the playhead (which displays the current frame number)
 - **FPS setting** - Set the frames per second for the animation
 - **Timeline length** - Set the total duration of the animation in frames
 - **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
+
+You can also navigate the timeline from the keyboard: press `,` or `.` to step to the previous or next frame, and `<` or `>` to jump to the previous or next keyframe.
 
 ## Creating Keyframes
 
@@ -50,11 +52,15 @@ The `images.txt` file contains camera poses expressed as quaternions and transla
 
 ## Editing Keyframes
 
-Once keyframes are created, you can modify them in two ways:
+Once keyframes are created, you can modify them in the following ways. All keyframe edits can be undone and redone.
 
 ### Changing Keyframe Timing
 
 Click and drag the yellow diamond keyframes along the timeline to adjust when each camera position occurs in your animation.
+
+### Copying Keyframes
+
+Hold **Shift** and drag a keyframe to copy it instead of moving it. A clone of the keyframe follows the pointer while you drag, and a copy is created at the frame where you release, leaving the original keyframe in place.
 
 ### Updating Camera Position/Rotation
 
@@ -70,6 +76,10 @@ To delete a keyframe:
 
 1. Move the playhead to the frame containing the keyframe you want to delete
 2. Click the `-` (Remove Key) button
+
+## Visualizing Keyframe Cameras
+
+To see where your keyframes place the camera in 3D space, enable the **Show Cameras** toggle in the **Settings** panel (the gear icon in the [Right Toolbar](interface.md#right-toolbar)). A wireframe camera gizmo is drawn in the viewport at each keyframe's stored position and orientation, making it easy to review your camera path at a glance. The state of the toggle is saved with your project.
 
 ## Configuring Timeline Settings
 
