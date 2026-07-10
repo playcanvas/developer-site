@@ -19,12 +19,20 @@ The Timeline panel includes the following controls:
 - **FPS setting** - Set the frames per second for the animation
 - **Timeline length** - Set the total duration of the animation in frames
 - **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
+- **Loop toggle** - Control whether the camera path loops. When enabled (the default), the animation wraps smoothly from the last keyframe back to the first; when disabled, the camera comes to rest on the last keyframe. See [Animation Looping](#animation-looping)
 
-:::tip[Keyboard Navigation]
+### Keyboard Shortcuts
 
-You can also navigate the timeline from the keyboard: press `,` or `.` to step to the previous or next frame, and `<` or `>` to jump to the previous or next keyframe.
+The timeline can also be driven from the keyboard:
 
-:::
+| Key | Action |
+| --- | ------ |
+| **Space** | Play/pause the animation |
+| `,` / `.` | Step to the previous/next frame |
+| `<` / `>` | Jump to the previous/next keyframe |
+| **Enter** | Add a keyframe at the current frame |
+| **Shift + Enter** | Remove the keyframe at the current frame |
+| **Ctrl + T** (or **Cmd + T** on Mac) | Toggle the Timeline panel |
 
 ## Creating Keyframes
 
@@ -32,7 +40,7 @@ To create a camera animation keyframe:
 
 1. Position the timeline playhead at the desired frame (by clicking on the timeline or using the frame counter)
 2. Move and orient the viewport camera to the desired position
-3. Click the `+` (Add Keyframe) button on the Timeline
+3. Click the `+` (Add Keyframe) button on the Timeline (or press **Enter**)
 
 The keyframe will appear as a yellow diamond on the timeline at the current frame position. Keyframes store the camera's position and rotation at that moment in time.
 
@@ -74,12 +82,14 @@ To change the camera position or rotation stored in an existing keyframe:
 2. Adjust the viewport camera to the new desired position and rotation
 3. Click the `+` (Add Key) button - this will overwrite the existing keyframe with the updated camera values
 
+Alternatively, hold **Ctrl** and click a keyframe diamond to overwrite it with the current view directly - no need to move the playhead first.
+
 ## Deleting Keyframes
 
 To delete a keyframe:
 
 1. Move the playhead to the frame containing the keyframe you want to delete
-2. Click the `-` (Remove Key) button
+2. Click the `-` (Remove Key) button (or press **Shift + Enter**)
 
 :::note
 
@@ -120,11 +130,18 @@ Adjusting smoothness allows you to control the feel of your camera animation, fr
 
 ## Playing Animations
 
-Use the play button to preview your animation. The camera will interpolate between keyframes based on your smoothness setting, creating fluid motion. The animation will loop continuously from the first frame back to the beginning.
+Use the play button (or press **Space**) to preview your animation. The camera will interpolate between keyframes based on your smoothness setting, creating fluid motion. With the Loop toggle enabled (the default), the animation loops continuously, wrapping from the last keyframe back to the first.
 
 ### Animation Looping
 
-The animation automatically loops from the last frame back to the first frame. To create seamless loops, it's important to avoid setting a keyframe on both the first and last frames of the timeline, as this will cause a sudden snap when the animation loops.
+The Loop toggle on the Timeline (next to the smoothness setting) controls what happens after the camera passes the final keyframe:
+
+- **Loop enabled (default)** - The camera path forms a closed loop: after the last keyframe, the camera smoothly interpolates back to the first keyframe over the remaining frames of the timeline
+- **Loop disabled** - The camera path stays open: the camera comes to rest on the last keyframe and holds that pose
+
+The state of the Loop toggle is saved with your project, and the camera path drawn by the **Show Cameras** toggle updates to show a closed or open curve accordingly.
+
+When looping is enabled, it's important to avoid setting a keyframe on both the first and last frames of the timeline, as this will cause a sudden snap when the animation loops.
 
 :::tip[Best Practice for Smooth Loops]
 
@@ -143,7 +160,7 @@ This technique allows the camera to smoothly transition from your last keyframe 
 
 ## Publishing and Playback on the Scene Page
 
-The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](/user-manual/supersplat/editor/publishing) the splat with the publish dialog's **Animation** option set to **Track**. This bakes the keyframed camera path into the published scene and sets it to play on load.
+The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](/user-manual/supersplat/editor/publishing) the splat with the publish dialog's **Animation** toggle enabled. This bakes the keyframed camera path into the published scene and sets it to play on load. The dialog's **Loop Mode** option is initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** if not - and controls whether the published animation plays once or loops in the viewer.
 
 On the [scene page](/user-manual/supersplat/scene-page), the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
 
