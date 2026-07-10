@@ -43,6 +43,7 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 
 - **Modern web browser** — Chrome, Firefox, Safari, or Edge
 - **WebGL 2.0 support** — Available in all modern browsers
+- **WebGPU support** — Only needed for SOG and standalone viewer exports (available in recent Chrome, Edge, and Safari)
 - **GPU acceleration** — Recommended for large splat files
 - **No installation** — Everything runs in the browser
 
