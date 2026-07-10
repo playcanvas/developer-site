@@ -35,7 +35,7 @@ In rings mode:
 
 ### Disabling the Overlay
 
-The mode overlay can be disabled entirely (using space bar shortcut), so neither dots nor rings are displayed.
+The mode overlay can be disabled entirely (by pressing **Tab**), so neither dots nor rings are displayed.
 
 However, please note that the selection behavior is still determined by the active mode.
 
