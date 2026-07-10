@@ -30673,15 +30673,21 @@ Image rendering creates a single high-quality frame from your current camera pos
 
 When you select `Image` from the Render menu, a dialog will appear with settings to customize your image:
 
-- **Preset:** Choose from the following preset options:
-  - `Current` (default) - Uses the current viewport resolution
-  - `HD` - `1920x1080` resolution
-  - `QHD` - `2560x1440` resolution  
-  - `4K` - `3840x2160` resolution
-  - `Custom` - Allows manual resolution selection
+- **Projection:** Choose the type of image to render:
+  - `Standard` (default) - A regular flat image rendered from the camera's point of view
+  - `360° Equirectangular` - A monoscopic 360° panorama capturing the full sphere around the camera's position
+- **Preset:** Choose the output resolution. Available options depend on the selected projection:
+  - For `Standard`:
+    - `Current` (default) - Uses the current viewport resolution
+    - `HD` - `1920x1080` resolution
+    - `QHD` - `2560x1440` resolution
+    - `4K` - `3840x2160` resolution
+    - `Custom` - Allows manual resolution selection
+  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048` and `Custom`
 - **Resolution:** Only active when `Custom` preset is selected. Allows you to specify custom width and height values.
 - **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays.
-- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the image.
+- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the image. Only available for `Standard` projection.
+- **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the image stays level and follows only the camera's heading. If unchecked, the camera's full orientation (including pitch) is baked into the image.
 
 ### Rendering the Image
 
@@ -30689,7 +30695,7 @@ Once you've configured your settings:
 
 1. Click the `Render` button.
 2. The image will be rendered at the current camera position.
-3. On completion, your image will auto-download.
+3. On completion, your image will auto-download as a lossless WebP (`.webp`) file.
 
 ## Video Rendering
 
@@ -30758,6 +30764,8 @@ Some things to keep in mind when rendering 360° video:
 - `MP4` and `MOV` videos are tagged with spherical video metadata, so YouTube, VR headsets and players like VLC automatically detect and play them as 360° video. `WebM` and `MKV` videos are not tagged, so some players may need to be told that the video is 360°.
 - `MP4` and `MOV` 360° videos are held in memory while rendering (the spherical metadata is added once encoding completes), so long renders at high resolution use more memory than standard renders.
 - A 360° render takes roughly six times longer than a standard render of the same length, because the scene is rendered once for each of the six directions around the camera for every output frame.
+
+You can render 360° still images in the same way: set the `Projection` option in the [Image Settings](#image-settings) dialog to `360° Equirectangular`. The panorama is captured from the current camera position and saved as a 2:1 equirectangular WebP image.
 
 ## Tips for Best Results
 
