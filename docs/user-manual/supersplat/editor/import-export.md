@@ -76,4 +76,10 @@ To export your currently loaded scene, open the `File` > `Export` submenu and se
 
 Most formats let you choose how many spherical harmonic bands to include in the export dialog. When exporting to SPZ, you can also select the format version: **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
 
+:::note
+
+Exporting to SOG (`.sog`) and exporting the standalone viewer (`.html` / `.zip`) require a browser with **WebGPU** support, as the SOG compression runs on the GPU. In a browser without WebGPU, these exports fail with the error: "This export requires WebGPU, which is not available in this browser. Please try a recent version of Chrome, Edge or Safari." All other export formats work in any WebGL 2.0 browser.
+
+:::
+
 For information about exporting and hosting HTML viewers for your splats, see [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting).
