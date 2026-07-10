@@ -30051,6 +30051,7 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 
 - **Modern web browser** — Chrome, Firefox, Safari, or Edge
 - **WebGL 2.0 support** — Available in all modern browsers
+- **WebGPU support** — Only needed for SOG and standalone viewer exports (available in recent Chrome, Edge, and Safari)
 - **GPU acceleration** — Recommended for large splat files
 - **No installation** — Everything runs in the browser
 
@@ -30450,6 +30451,12 @@ PLY sequences are memory-intensive since each frame loads a complete splat scene
 To export your currently loaded scene, open the `File` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
 
 Most formats let you choose how many spherical harmonic bands to include in the export dialog. When exporting to SPZ, you can also select the format version: **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
+
+:::note
+
+Exporting to SOG (`.sog`) and exporting the standalone viewer (`.html` / `.zip`) require a browser with **WebGPU** support, as the SOG compression runs on the GPU. In a browser without WebGPU, these exports fail with the error: "This export requires WebGPU, which is not available in this browser. Please try a recent version of Chrome, Edge or Safari." All other export formats work in any WebGL 2.0 browser.
+
+:::
 
 For information about exporting and hosting HTML viewers for your splats, see [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting).
 
@@ -32017,6 +32024,12 @@ To export your splat as an HTML viewer:
 1. Open the `File` > `Export` submenu in the SuperSplat Editor.
 2. Select `Viewer App…`.
 
+:::note
+
+Viewer export requires a browser with **WebGPU** support, as the embedded splat data is compressed to SOG on the GPU. In a browser without WebGPU, the export fails with the error: "This export requires WebGPU, which is not available in this browser. Please try a recent version of Chrome, Edge or Safari."
+
+:::
+
 ## Export Options
 
 The viewer export can be configured via several options:
@@ -32025,19 +32038,21 @@ The viewer export can be configured via several options:
 
 | Option | Description |
 |--------|-------------|
-| **Export Type** | Controls the format of the exported viewer:<br/>• **HTML**: A single-page `.html` file where the splat is Base64 encoded and embedded directly into the file. Very convenient since everything is packed into a single file that can be double-clicked to run in your browser using the `file://` protocol. However, the base64 encoding means it will be roughly 30% larger than the ZIP Package format, and browsers impose different limits on the maximum size (below 32MB should load everywhere, but above this you could encounter problems)<br/>• **ZIP Package**: A zip file containing the viewer `.html` file and a separate `.compressed.ply` containing the splat. Smaller, loads faster and guaranteed to load everywhere. However, it will only load over `http://`, so you will need to run a local web server (e.g. Node's [`serve`](https://www.npmjs.com/package/serve) or Python's [`http.server`](https://docs.python.org/3/library/http.server.html) (`python -m http.server`)) |
-| **Start Position** | The starting position to use for the viewer's camera:<br/>• **Default**: The viewer does its best to pick a suitable start point<br/>• **Current Viewport**: Use the current camera position as set in the SuperSplat Editor's viewport<br/>• **1st Camera Frame**: Use the first camera's position as defined by the first frame of the Timeline |
-| **Animation** | The animation to apply to the viewer's camera:<br/>• **None**: No animation<br/>• **Track**: Animate the camera using keyframes set on the SuperSplat Editor's Timeline |
-| **Background** | The background color of the viewer |
-| **Field of View** | The vertical field of view of the viewer's camera in degrees |
-| **SH Bands** | The number of spherical harmonics bands to be written out to the published compressed PLY file |
+| **Export Type** | Controls the format of the exported viewer:<br/>• **HTML**: A single-page `.html` file where the splat is compressed to SOG, Base64 encoded and embedded directly into the file. Very convenient since everything is packed into a single file that can be double-clicked to run in your browser using the `file://` protocol. However, the base64 encoding means it will be roughly 30% larger than the ZIP Package format, and browsers impose different limits on the maximum size (below 32MB should load everywhere, but above this you could encounter problems)<br/>• **ZIP Package**: A zip file containing the viewer app (`index.html`, `index.js`, `index.css` and `settings.json`) plus the splat data as a bundled SOG file (`index.sog`). Smaller, loads faster and guaranteed to load everywhere. However, it will only load over `http://`, so you will need to run a local web server (e.g. Node's [`serve`](https://www.npmjs.com/package/serve) or Python's [`http.server`](https://docs.python.org/3/library/http.server.html) (`python -m http.server`)) |
+| **Animation** | If enabled, the camera animation authored on the [Timeline](/user-manual/supersplat/editor/timeline) is included and plays when the viewer loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
+| **Loop Mode** | How an included camera animation plays back:<br/>• **None**: Play once and stop<br/>• **Repeat** (default): Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly |
+| **Background** | The background color of the viewer. Defaults to the Editor's current background color |
+| **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
+| **SH Bands** | The number of spherical harmonics bands to include in the exported splat data |
+
+The exported viewer's camera starts at the pose your viewport camera has at the moment you export, so frame your favorite view before exporting.
 
 ## Web Hosting for the HTML Viewer
 
 Once exported, you can host the HTML Viewer file somewhere to make it accessible. One easy option is to use GitHub Pages:
 
 1. Create a new repository on [GitHub](https://github.com).
-2. Add the exported HTML file (and the `.compressed.ply` file if you exported the viewer as a ZIP package).
+2. Add the exported HTML file (or, for a ZIP package, the extracted contents of the zip: `index.html`, `index.sog`, `index.js`, `index.css` and `settings.json`).
 3. Visit your repository's `Settings` page. Select `Pages` on the left. Ensure `Source` is set to `Deploy from a branch` and set `Branch` to `main` and hit `Save`.
 4. It will take a few moments for your viewer to be published. The URL will be in the form:
 
