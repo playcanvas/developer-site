@@ -33,17 +33,24 @@ To publish your splat:
 
    | Option | Description |
    |--------|-------------|
-   | **Publish to** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
+   | **Publish To** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
    | **Title** | A short title that will appear below your splat's thumbnail once it is published |
    | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
-   | **Listed** | If checked, the splat will be returned in searches on the SuperSplat website. If unchecked, the splat will only be discoverable by anyone who has the link |
-   | **Start Position** | The starting position to use for the viewer's camera:<br/>• **Default**: The viewer does its best to pick a suitable start point<br/>• **Current Viewport**: Use the current camera position as set in the SuperSplat Editor's viewport<br/>• **1st Camera Frame**: Use the first camera's position as defined by the first frame of the Timeline |
-   | **Animation** | The animation to apply to the viewer's camera:<br/>• **None**: No animation<br/>• **Track**: Animate the camera using keyframes set on the SuperSplat Editor's Timeline |
-   | **Background** | The background color of the viewer |
-   | **Field of View** | The vertical field of view of the viewer's camera in degrees |
-   | **SH Bands** | The number of spherical harmonics bands to be written out to the published compressed PLY file |
+   | **Background** | The background color of the viewer. Defaults to the Editor's current background color |
+   | **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
+   | **Animation** | If enabled, the camera animation authored on the [Timeline](timeline.md) is baked into the scene and plays when it loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
+   | **Loop Mode** | How an included camera animation plays back in the viewer:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
+   | **Generate LODs** | Generate levels of detail so the published splat is streamed progressively. Automatically enabled for scenes with 1 million or more splats that span a large area. See [Streaming & Performance](/user-manual/supersplat/streaming) |
 
 4. Select `Publish`.
+
+The published scene's camera starts at the pose your viewport camera has at the moment you publish, so frame your favorite view before opening the dialog.
+
+:::note
+
+New scenes are published unlisted - they are only discoverable by people who have the link. To make a splat appear in searches on the SuperSplat website, list it from your [Manage page](/user-manual/supersplat/manage) after publishing.
+
+:::
 
 :::note
 
@@ -52,6 +59,17 @@ It may take several minutes to compress your splat to SOG format during the publ
 :::
 
 Once the publish process is complete, a modal dialog will show with the URL of your published splat. Copy it and share it with whoever you like.
+
+## Republishing to an Existing Scene
+
+Setting **Publish To** to one of your existing scenes overwrites that scene in place, keeping its URL. In this mode, two toggles choose what gets replaced:
+
+| Option | Description |
+|--------|-------------|
+| **Override Model** | Replace the scene's splat model with the currently loaded scene |
+| **Override Animation** | Replace the scene's camera animation with the current Timeline animation |
+
+At least one of the two must be enabled to publish. Overriding only the animation is a quick way to update a published camera path without re-uploading (and re-compressing) the splat data itself.
 
 ## What's next?
 
