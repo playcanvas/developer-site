@@ -18,18 +18,7 @@ Gaussian Splatting excels at capturing real-world environments through photogram
 - **Volumetric representation** - Handle translucent materials, fine details, and complex lighting naturally
 - **Real-time rendering** - Optimized for interactive frame rates in web browsers
 
-## 3DGS in the Real World
-
-Developers are using PlayCanvas to deliver Gaussian Splat experiences across a growing range of industries:
-
-- **Retail and e-commerce** - Interactive product visualization for [2nd Swing](https://www.2ndswing.com/golf-clubs/drivers/ping-g440-max-driver/g440-max-dvr) and [Nood](https://nood.co.nz/pages/interactive-lounge), plus Shopify-ready product capture with [Doly](https://www.animl.ai/)
-- **Property and virtual tours** - Real estate showcases from [Mind Studio](https://studio.adnfamily.com/maquette-immersive) and video-to-3D tours from [SplatTour](https://splattour.com/)
-- **Culture and heritage** - Digital access to significant places through [CyArk](https://www.cyark.org/projects/civita-antigravity/overview) and the [Montreal Museum of Fine Arts](https://labs.dpt.co/article-3dgs.html)
-- **Film and content production** - Virtual scouting with [Prewatch](https://www.prewatch.io/) and reusable digital twins from [Solaya](https://solaya.ai/)
-- **Geospatial and environmental documentation** - Satellite-derived urban scenes from [Skyfall-GS](https://skyfall-gs.jayinnn.dev/) and coral reef scanning by [Wildflow](https://wildflow.ai/)
-- **Social experiences and storytelling** - Shared 3D memories with [Braintrance](https://www.braintrance.net/) and interactive narratives from [StorySplat](https://storysplat.com/)
-
-Explore many more projects in the [3D Gaussian Splatting section of Awesome PlayCanvas](https://github.com/playcanvas/awesome-playcanvas#3d-gaussian-splatting).
+See the [3D Gaussian Splatting section of Awesome PlayCanvas](https://github.com/playcanvas/awesome-playcanvas#3d-gaussian-splatting) for real-world projects built with PlayCanvas.
 
 ## PlayCanvas Gaussian Splatting Workflow
 
