@@ -68,7 +68,7 @@ The 2D selection tools support modifier keys to control how the selection is app
 |----------|--------|
 | **None** | Replace the current selection with the new selection |
 | **Shift** | Add to the current selection |
-| **Ctrl / Cmd** | Remove from the current selection |
+| **Ctrl** | Remove from the current selection |
 | **Shift + Ctrl** | Keep only splats that are in both the current selection and the new selection |
 
 **Intersect** is available with Picker, Lasso, Polygon, Brush, and Flood Select. Eyedropper Select supports **Set**, **Add**, and **Remove**, but not **Intersect**.

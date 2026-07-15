@@ -1,6 +1,6 @@
 ---
 title: Rendering Media
-description: "Render PNG, JPEG, and WebP still images or videos from SuperSplat locally, including 360° equirectangular output and timeline-driven video."
+description: "Render still images (PNG, JPEG, or WebP) and videos from SuperSplat locally, including 360° equirectangular output and timeline-driven video."
 ---
 
 SuperSplat enables you to render high-quality images and videos directly from your 3D Gaussian Splats. Whether you want to create a single frame for social media, showcase your creations with animated videos, embed them on your website, or keep them locally, this guide will help you get started.
