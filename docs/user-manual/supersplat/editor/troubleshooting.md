@@ -22,7 +22,7 @@ See [Selection and Cleanup](editing-splats.md) for selection operations and clea
 
 If any Gaussians are selected, Move, Rotate, Scale, and numeric Transform values affect only that selection. Choose **Select > None** to transform the whole active splat.
 
-If rotation or scaling moves content around an unexpected point, switch the origin control or double-click a visible surface to place the pivot. See [Transform, Measure, and Align](transforming-splats.md).
+If rotation or scaling moves content around an unexpected point, switch the origin control or double-click a visible surface to place the pivot. See [Transform, Measure and Align](transform-measure-align.md).
 
 ## Content Is Missing from an Export
 

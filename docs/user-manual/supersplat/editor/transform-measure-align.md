@@ -1,5 +1,5 @@
 ---
-title: Transform, Measure, and Align
+title: Transform, Measure and Align
 description: "Move, rotate, scale, measure, align, and merge whole splats or selected Gaussians in the SuperSplat Editor."
 ---
 

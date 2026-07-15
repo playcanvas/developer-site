@@ -121,4 +121,4 @@ For attribute-driven cleanup, use the [Splat Data panel](data-panel.md) to selec
 
 ## Next Step
 
-Continue to [Transform, Measure, and Align](transforming-splats.md) to transform selected Gaussians or whole splats, calibrate scale, align captures, and merge visible splats.
+Continue to [Transform, Measure and Align](transform-measure-align.md) to transform selected Gaussians or whole splats, calibrate scale, align captures and merge visible splats.

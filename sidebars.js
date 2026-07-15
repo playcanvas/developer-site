@@ -566,7 +566,7 @@ const sidebars = {
             'user-manual/supersplat/editor/scene-management',
             'user-manual/supersplat/editor/camera-controls',
             'user-manual/supersplat/editor/editing-splats',
-            'user-manual/supersplat/editor/transforming-splats',
+            'user-manual/supersplat/editor/transform-measure-align',
             'user-manual/supersplat/editor/color-and-appearance',
             'user-manual/supersplat/editor/data-panel',
             'user-manual/supersplat/editor/keyboard-shortcuts',

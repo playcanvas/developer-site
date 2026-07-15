@@ -48,7 +48,7 @@ A typical multi-splat workflow is:
 
 1. Import all captures.
 2. Use Solo mode to inspect and clean each splat independently.
-3. Use the [transform tools](transforming-splats.md) to position, rotate, and scale each splat.
+3. Use the [transform tools](transform-measure-align.md) to position, rotate and scale each splat.
 4. Show the splats together and check their alignment from several camera angles.
 5. Hide any splat that should not be included.
 6. Choose **File > Export > PLY** to combine the visible splats into one PLY file.

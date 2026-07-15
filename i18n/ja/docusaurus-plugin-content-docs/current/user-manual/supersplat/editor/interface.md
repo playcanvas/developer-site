@@ -39,7 +39,7 @@ SuperSplat Editorのインターフェースは以下のようになります。
 
 ### 下ツールバー
 
-この横型のツールバーには、元に戻す/やり直し、ガウシアンの選択ツール、Move、Rotate、Scale、Measure、座標空間、ピボットのコントロールが含まれています。[選択とクリーンアップ](editing-splats.md)および[変形、測定、位置合わせ](transforming-splats.md)を参照してください。
+この横型のツールバーには、元に戻す/やり直し、ガウシアンの選択ツール、Move、Rotate、Scale、Measure、座標空間、ピボットのコントロールが含まれています。[選択とクリーンアップ](editing-splats.md)および[変形、測定、位置合わせ](transform-measure-align.md)を参照してください。
 
 ### アニメーションタイムライン
 
