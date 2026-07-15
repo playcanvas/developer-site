@@ -60,7 +60,7 @@ Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. 
 
 </div>
 
-### Selection Modifiers
+### Selection Modifiers {#selection-modifiers}
 
 The 2D selection tools support modifier keys to control how the selection is applied:
 
@@ -79,7 +79,7 @@ The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **R
 
 ### Deleting Splats
 
-Once you are happy with your selection, you can delete it with the **Delete** key.
+Once you are happy with your selection, delete it with **Delete** or **Backspace**.
 
 ## Transforming Splats
 
@@ -107,9 +107,11 @@ SuperSplat provides a measurement tool to help you measure distances within your
 
 **Keyboard shortcuts:**
 
-- Press `Delete` to remove the placed markers.
+- Press `Delete` or `Backspace` to remove the placed markers.
 - Press `Escape` to deactivate the Measurement tool.
 
 ## Merging Splats
 
-It is possible to merge multiple `.ply` files together and output a single, combined `.ply` file. Simply load any number of `.ply` files into Scene Manager, perform whatever transformations and edits you require, and then save the result via the `File` > `Save` menu item.
+To merge multiple splat files into one `.ply`, load them into the Scene Manager and apply any required transforms or edits. Make sure every splat you want to include is visible, then choose **File > Export > PLY**. The export combines the visible splats into a single file.
+
+**File > Save** saves an editable `.ssproj` project instead; it does not export a merged PLY. See [Managing Projects](managing-projects.md) for details.

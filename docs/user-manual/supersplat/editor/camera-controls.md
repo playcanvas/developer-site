@@ -15,12 +15,16 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 | Action | Orbit Mode | Fly Mode |
 |--------|------------|----------|
 | Left drag | Orbit around focal point | Look around |
-| Middle drag | Zoom | Zoom |
+| Middle click | Set focal point | — |
+| Middle drag | Orbit around focal point | Zoom |
+| Shift + middle drag | Pan | Zoom |
+| Ctrl + middle drag | Zoom | Zoom |
 | Right drag | Pan | Pan |
 | Right + Ctrl/Shift drag | Orbit | Look around |
-| Right + Alt drag | Zoom | Zoom |
+| Right + Alt/Cmd drag | Zoom | Zoom |
 | Mouse wheel | Zoom | Move forward/backward |
-| Mouse wheel + Shift | Pan (trackpad) | — |
+| Mouse wheel + Shift | Pan | Pan |
+| Mouse wheel + Ctrl | Orbit | Look around |
 | Double-click | Set focal point | Set focal point (switches to orbit) |
 
 ## Touch Controls

@@ -1,13 +1,13 @@
 ---
 title: インポートとエクスポート
-description: "SuperSplatのインポートとエクスポート形式：PLY、SOG、SPLAT、SPZ、LCC/LCC2、マルチLOD読み込み、ビューア、Web向けとアーカイブ向けの選び方です。"
+description: "SuperSplatのインポートとエクスポート形式：PLY、SOG、SPLAT、KSPLAT、SPZ、LCC/LCC2、カメラポーズ、スタンドアロンビューアです。"
 ---
 
 SuperSplatのインポートおよびエクスポート機能は、ワークフロー全体を通じてGaussian Splatデータを扱うために不可欠です。インポートにより、さまざまなキャプチャツールや形式からスプラットシーンを読み込み、編集、クリーンアップ、最適化を行うことができます。編集作業が完了したら、エクスポートにより、ターゲットプラットフォームに最適な形式で洗練されたスプラットを保存できます - Web展開用の圧縮形式、アーカイブ用のフル品質PLY、または簡単に共有できるスタンドアロンHTMLビューアなど。この柔軟性により、SuperSplatはあらゆるGaussian Splat制作パイプラインにシームレスに統合できます。
 
 ## 対応ファイル形式 {#supported-file-formats}
 
-SuperSplat は、Gaussian Splat シーンのいくつかのファイル形式に対応しています。
+SuperSplatは、複数のGaussian Splatシーン形式に加えて、タイムラインキーフレーム作成用のCOLMAPおよびINRIAカメラポーズに対応しています。
 
 | 形式 | インポート | エクスポート | 説明 |
 | ------ | ------ | ------ | ----------- |
@@ -16,9 +16,13 @@ SuperSplat は、Gaussian Splat シーンのいくつかのファイル形式に
 | `.sog` | ✅ | ✅ | バンドル超圧縮形式（`meta.json` と `.webp` テクスチャを含むzipファイル）。ランタイムアプリケーションに推奨 |
 | `meta.json` | ✅ | ❌ | アンバンドル超圧縮形式（`.webp` テクスチャを伴う）。エクスポートには[SplatTransform](/user-manual/splat-transform/) CLIツールを使用 |
 | `.splat` | ✅ | ✅ | レガシー圧縮スプラット形式 (antimatter15) - 圧縮PLYよりも効率が劣る |
+| `.ksplat` | ✅ | ❌ | KSplat圧縮スプラット形式。インポートのみ対応 |
 | `.spz` | ✅ | ✅ | Niantic圧縮形式。エクスポートはデフォルトでSPZバージョン4、古いリーダー向けにSPZバージョン3も選択可能 |
 | `.lcc` / `.lcc2` | ✅ | ❌ | XGRIDSのプロプライエタリーなマルチLOD形式。SuperSplatが読み込む詳細レベルの選択を求めます |
-| `.html` / `.zip` | ❌ | ✅ | スタンドアロンHTMLビューアアプリ - Web共有用に圧縮されたスプラットデータを埋め込み |
+| `images.txt` | ✅ | ❌ | [COLMAP再構築](https://colmap.github.io/format.html#images-txt)のカメラポーズ。このファイルをインポートすると[タイムラインキーフレーム](timeline.md#importing-camera-poses-as-keyframes)が作成されますが、スプラットシーンは読み込まれません |
+| カメラポーズ`.json` | ✅ | ❌ | INRIA JSON形式のカメラポーズ。このファイルをインポートすると[タイムラインキーフレーム](timeline.md#importing-camera-poses-as-keyframes)が作成されますが、スプラットシーンは読み込まれません |
+| `.html` | ❌ | ✅ | 圧縮スプラットデータを1つのHTMLファイルに埋め込んだ自己完結型ビューアアプリ |
+| `.zip` | ❌ | ✅ | HTMLアプリと独立した`.compressed.ply`ファイルを含むビューアパッケージ |
 
 :::warning
 
@@ -28,7 +32,7 @@ SuperSplat は、Gaussian Splat シーンのいくつかのファイル形式に
 
 ## スプラットのインポート
 
-SuperSplat は、`.ply`、`.compressed.ply`、`.splat`、`.spz`、`.lcc`、`.lcc2`、`.sog` (バンドルSOG)、および `meta.json` (アンバンドルSOG) 形式の Gaussian Splat シーンをインポートできます。
+SuperSplatは、`.ply`、`.compressed.ply`、`.splat`、`.ksplat`、`.spz`、`.lcc`、`.lcc2`、`.sog`（バンドルSOG）、および`meta.json`（アンバンドルSOG）形式のGaussian Splatシーンをインポートできます。また、COLMAPの`images.txt`ファイルとINRIAカメラポーズ`.json`ファイルをインポートして、[カメラアニメーションのキーフレーム](timeline.md#importing-camera-poses-as-keyframes)を作成できます。
 
 Gaussian Splat ファイルを読み込む方法は4つあります。
 
