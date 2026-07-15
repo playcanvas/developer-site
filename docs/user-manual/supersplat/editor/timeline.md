@@ -118,6 +118,10 @@ The FPS setting controls the playback speed of your animation. Available FPS val
 
 You can set the total duration of your animation by adjusting the timeline length setting. This defines how many frames your animation spans and determines when the animation loops back to the beginning.
 
+If you shorten the timeline so that existing keyframes fall past its end, SuperSplat preserves those keyframes but excludes them from playback and interpolation. Their dimmed, error-colored markers are pinned just beyond the right edge of the timeline, and a tooltip identifies each keyframe's original frame number.
+
+To bring an out-of-range keyframe back into the animation, drag its pinned marker onto the timeline or increase **Total Frames** until the keyframe is in range again. Shortening the timeline also clamps the playhead to the new end, and previous/next keyframe navigation skips any out-of-range keys. To delete one of these keyframes, first drag it into range or temporarily increase **Total Frames**.
+
 ### Smoothness
 
 The Smoothness setting controls how the camera interpolates between keyframes. This value ranges from 0 to 1:

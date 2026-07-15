@@ -1,6 +1,6 @@
 ---
 title: Import and Export
-description: "SuperSplat import and export formats: PLY, compressed PLY, SOG, SPLAT, SPZ, viewers, and choosing formats for web or archival use."
+description: "SuperSplat import and export formats: PLY, SOG, SPLAT, SPZ, LCC/LCC2, multi-LOD loading, viewers, and choosing formats for web or archival use."
 ---
 
 SuperSplat's import and export capabilities are essential for working with Gaussian Splat data throughout your entire workflow. Import allows you to bring in splat scenes from various capture tools and formats for editing, cleanup, and optimization. Once your editing work is complete, export enables you to save your refined splats in the optimal format for your target platform - whether that's a compressed format for web deployment, a full-quality PLY for archival, or a standalone HTML viewer for easy sharing. This flexibility ensures SuperSplat can integrate seamlessly into any Gaussian Splat production pipeline.
@@ -17,7 +17,7 @@ SuperSplat works with several file formats for Gaussian Splat scenes:
 | `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](/user-manual/splat-transform/) CLI tool to export |
 | `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
 | `.spz` | ✅ | ✅ | Niantic compressed format. Exports as SPZ version 4 by default, with SPZ version 3 available for older readers |
-| `.lcc` | ✅ | ❌ | XGRIDS proprietary format which contains multiple levels-of-detail. Imports the highest LOD that contains less than 20 million Gaussians |
+| `.lcc` / `.lcc2` | ✅ | ❌ | XGRIDS proprietary multi-LOD formats. SuperSplat asks which level of detail to load |
 | `.html` / `.zip` | ❌ | ✅ | Standalone HTML viewer app - embeds compressed splat data for web sharing |
 
 :::warning
@@ -28,18 +28,26 @@ Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY fi
 
 ## Importing Splats
 
-SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.spz`, `.lcc`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
+SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
 
 There are four ways to load a Gaussian Splat file:
 
-1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc` or unbundled SOG), drag the parent folder containing those files.
+1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc`, `.lcc2`, or unbundled SOG), drag the parent folder containing those files.
 2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system.
 3. **Direct file opening** - If you have installed SuperSplat as a PWA, you can double-click a splat file in File Explorer (Windows) or Finder (macOS).
-4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<PLY_URL>`. For example:
+4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<SPLAT_URL>`. For example:
 
     https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply
 
     This is particularly useful for sharing splats with others on social platforms like X and LinkedIn.
+
+    URL loading also supports multi-file `.lcc`, `.lcc2`, and unbundled SOG scenes. Keep their related chunk or texture files at the relative paths referenced by the container.
+
+### Choosing a Level of Detail {#choosing-a-level-of-detail}
+
+When a file contains multiple levels of detail, SuperSplat displays a **Load Options** dialog before allocating the splats. The dialog lists each LOD and its splat count. It initially selects the most detailed level containing fewer than 20 million splats, helping large scenes avoid excessive memory use.
+
+Choose the LOD that fits your editing needs and available memory, then click **Load**. Lower-detail levels load faster and consume less memory. Click **Cancel** to stop the import without loading a level.
 
 ### Importing PLY Sequences {#ply-sequences}
 

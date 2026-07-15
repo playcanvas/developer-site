@@ -55,22 +55,27 @@ Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. 
 | ![Brush Select](/img/user-manual/supersplat/editor/select-brush.svg) **Brush Select** | Click and drag to paint a selection using a circular brush. Adjust the brush size with the `[` (decrease) and `]` (increase) keys. Ideal for organic selection work. |
 | ![Flood Select](/img/user-manual/supersplat/editor/select-flood.svg) **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold slider (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters) that appear isolated in the scene. |
 | ![Eyedropper Select](/img/user-manual/supersplat/editor/select-eyedropper.svg) **Eyedropper Select** | Click on the viewport to select splats based on color similarity. A threshold slider (0-1) controls the sensitivity of the color matching. This tool is useful for selecting groups of splats that share similar colors. |
-| ![Sphere Select](/img/user-manual/supersplat/editor/select-sphere.svg) **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center. Use the translate gizmo to move the sphere, and adjust the radius value in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. |
-| ![Box Select](/img/user-manual/supersplat/editor/select-box.svg) **Box Select** | Creates a 3D rectangular volume for volumetric selection. Double-click anywhere in the scene to position the box center. Use the translate gizmo to move the box, and adjust the dimensions (LenX, LenY, LenZ) in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. This is ideal for selecting splats within a specific region of 3D space. |
+| ![Sphere Select](/img/user-manual/supersplat/editor/select-sphere.svg) **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center, use the translate gizmo to move it, or enter its **Position** (X, Y, Z) numerically. Set its **Radius** in the toolbar. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. |
+| ![Box Select](/img/user-manual/supersplat/editor/select-box.svg) **Box Select** | Creates an axis-aligned 3D box for volumetric selection. Double-click anywhere in the scene to position the box center, use the translate gizmo to move it, or enter its **Position** (X, Y, Z) numerically. Enter its **Size** (X, Y, Z) in the toolbar. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. This is ideal for selecting splats within a specific region of 3D space. |
 
 </div>
 
 ### Selection Modifiers
 
-All 2D selection tools (Picker, Lasso, Polygon, Brush, Flood, Eyedropper) support modifier keys to control how the selection is applied:
+The 2D selection tools support modifier keys to control how the selection is applied:
 
 | Modifier | Action |
 |----------|--------|
 | **None** | Replace the current selection with the new selection |
 | **Shift** | Add to the current selection |
 | **Ctrl / Cmd** | Remove from the current selection |
+| **Shift + Ctrl** | Keep only splats that are in both the current selection and the new selection |
 
-The 3D selection tools (Sphere Select, Box Select) have **Set**, **Add**, and **Remove** buttons in their toolbar instead of using modifier keys.
+**Intersect** is available with Picker, Lasso, Polygon, Brush, and Flood Select. Eyedropper Select supports **Set**, **Add**, and **Remove**, but not **Intersect**.
+
+While Picker, Lasso, Polygon, Brush, or Flood Select is active, the cursor shows which operation the current modifier keys will apply. A plain crosshair means **Set**; a badge on the crosshair indicates **Add** (`+`), **Remove** (`−`), or **Intersect** (`∩`). The same feedback appears when selecting a value range in the [Splat Data panel](data-panel.md).
+
+The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **Remove**, and **Intersect** buttons in their toolbar instead of using modifier keys.
 
 ### Deleting Splats
 
