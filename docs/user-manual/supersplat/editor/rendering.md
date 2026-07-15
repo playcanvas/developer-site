@@ -116,10 +116,12 @@ We recommend using a Chromium-based browser (Chrome, Edge, Opera, etc.) for rend
 
 ### 360° Video Rendering
 
-Setting the `Projection` option to `360° Equirectangular` renders a monoscopic 360° video instead of a regular flat one. For every output frame, the full sphere around the camera's position on the [Timeline](timeline.md) is captured into a 2:1 equirectangular frame:
+Setting the `Projection` option to `360° Equirectangular` renders a monoscopic 360° video instead of a regular flat one. For every output frame, the full sphere around the camera's position on the [Timeline](timeline.md) is captured into a 2:1 equirectangular frame.
 
-<div className="iframe-container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/6oGjT8eubMc" title="SuperSplat 360 Video Example" allowFullScreen></iframe>
+YouTube's embedded player presents this 360° video as a flat video, so open the example on YouTube to drag the view, use your phone's motion controls or watch it in a headset:
+
+<div style={{textAlign: 'center', marginBottom: '2rem'}}>
+    <a className="button button--primary button--lg" href="https://www.youtube.com/watch?v=6oGjT8eubMc" target="_blank" rel="noopener noreferrer">▶&nbsp;&nbsp;Look around in 360° on YouTube</a>
 </div>
 
 Some things to keep in mind when rendering 360° video:

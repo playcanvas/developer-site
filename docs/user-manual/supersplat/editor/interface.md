@@ -16,14 +16,14 @@ The key elements of the interface are labeled:
 The Menu Bar gives you access to the most commonly used functions in the SuperSplat Editor.
 
 * **File Menu:** Load and save your projects. Import and export to/from popular file formats.
-* **Edit Menu:** Undo or redo changes, duplicate selected splats, or separate selected splats into a new scene.
+* **Edit Menu:** Undo or redo changes, or duplicate or separate selected Gaussians into a new splat.
 * **Select Menu:** Perform common selection based operations on your loaded scene.
 * **Render Menu:** Render an image or a video of your currently loaded scene.
 * **Help Menu:** Access developer resources related to SuperSplat.
 
 ### Scene Manager
 
-The Scene Manager allows you to manage multiple loaded Gaussian Splat scenes (typically loaded from imported PLY files). You can also use this panel to set the transform of the selected scene.
+The Scene Manager lists the imported splats in the project. Click a row to choose the active splat, use the eye icons or Solo mode to control visibility, and use the panel below it for precise transforms. See [Managing Splats](scene-management.md) for the complete workflow.
 
 ### Viewport
 
@@ -39,7 +39,7 @@ This vertical toolbar contains icons related to splat visualization, camera cont
 
 ### Bottom Toolbar
 
-This horizontal toolbar contains icons related to undo/redo, splat selection and transformation.
+This horizontal toolbar contains undo and redo, Gaussian selection tools, Move, Rotate, Scale, Measure, coordinate-space and pivot controls. See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
 
 ### Animation Timeline
 
@@ -47,7 +47,7 @@ The Timeline allows you to create and delete keyframes for the viewport camera. 
 
 ### Histogram Panel
 
-This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics.
+This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics. See the [Splat Data panel](data-panel.md).
 
 ## Settings and Preferences
 

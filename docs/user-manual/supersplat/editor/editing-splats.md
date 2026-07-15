@@ -1,7 +1,9 @@
 ---
-title: Editing Splats
-description: "SuperSplat edit modes (centers versus rings), selection tools, overlays, and workflows for cleaning and modifying splats."
+title: Selection and Cleanup
+description: "Select, lock, delete, restore, duplicate, and separate Gaussians while cleaning floaters and cropping splats in SuperSplat."
 ---
+
+Select a splat in the **Scene Manager** before editing it. Gaussian selection and cleanup operations apply only to that active splat, even when several splats are visible.
 
 ## Edit Modes
 
@@ -41,22 +43,22 @@ However, please note that the selection behavior is still determined by the acti
 
 <img width="1224" alt="Screenshot 2025-01-06 at 08 51 48" src="/img/user-manual/supersplat/editor/disable-overlay.png" />
 
-## Selecting and Deleting Splats
+## Selection Tools
 
-Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. To help with this, there are 8 selection tools available:
+Each Scene Manager row represents an imported splat, while the selection tools act on individual Gaussians within the active splat. Use these eight tools to crop a splat or remove unwanted Gaussians:
 
 <div class="no-wrap-first-col">
 
 | Tool | Description |
 |------|-------------|
-| ![Picker Select](/img/user-manual/supersplat/editor/select-picker.svg) **Picker Select** | Click to select a single splat, or click + drag to create a rectangular selection area. This is the default selection tool. |
-| ![Lasso Select](/img/user-manual/supersplat/editor/select-lasso.svg) **Lasso Select** | Click and drag to draw a freeform shape. Splats within the shape's outline will be selected. This is a 2D screen-space selection tool. |
-| ![Polygon Select](/img/user-manual/supersplat/editor/select-poly.svg) **Polygon Select** | Click to place points that define the vertices of a polygon. Press `Backspace` or `Delete` to remove the last placed point. Close the shape by clicking the first point, double-clicking, or pressing `Enter`. Splats within the polygon will be selected. This is useful for precise selections with straight edges. |
+| ![Picker Select](/img/user-manual/supersplat/editor/select-picker.svg) **Picker Select** | Click to select a single Gaussian, or click + drag to create a rectangular selection area. This is the default selection tool. |
+| ![Lasso Select](/img/user-manual/supersplat/editor/select-lasso.svg) **Lasso Select** | Click and drag to draw a freeform shape. Gaussians within the shape's outline will be selected. This is a 2D screen-space selection tool. |
+| ![Polygon Select](/img/user-manual/supersplat/editor/select-poly.svg) **Polygon Select** | Click to place points that define the vertices of a polygon. Press `Backspace` or `Delete` to remove the last placed point. Close the shape by clicking the first point, double-clicking, or pressing `Enter`. Gaussians within the polygon will be selected. This is useful for precise selections with straight edges. |
 | ![Brush Select](/img/user-manual/supersplat/editor/select-brush.svg) **Brush Select** | Click and drag to paint a selection using a circular brush. Adjust the brush size with the `[` (decrease) and `]` (increase) keys. Ideal for organic selection work. |
 | ![Flood Select](/img/user-manual/supersplat/editor/select-flood.svg) **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold slider (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters) that appear isolated in the scene. |
-| ![Eyedropper Select](/img/user-manual/supersplat/editor/select-eyedropper.svg) **Eyedropper Select** | Click on the viewport to select splats based on color similarity. A threshold slider (0-1) controls the sensitivity of the color matching. This tool is useful for selecting groups of splats that share similar colors. |
+| ![Eyedropper Select](/img/user-manual/supersplat/editor/select-eyedropper.svg) **Eyedropper Select** | Click on the viewport to select Gaussians based on color similarity. A threshold slider (0-1) controls the sensitivity of the color matching. This tool is useful for selecting groups of Gaussians that share similar colors. |
 | ![Sphere Select](/img/user-manual/supersplat/editor/select-sphere.svg) **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center, use the translate gizmo to move it, or enter its **Position** (X, Y, Z) numerically. Set its **Radius** in the toolbar. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. |
-| ![Box Select](/img/user-manual/supersplat/editor/select-box.svg) **Box Select** | Creates an axis-aligned 3D box for volumetric selection. Double-click anywhere in the scene to position the box center, use the translate gizmo to move it, or enter its **Position** (X, Y, Z) numerically. Enter its **Size** (X, Y, Z) in the toolbar. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. This is ideal for selecting splats within a specific region of 3D space. |
+| ![Box Select](/img/user-manual/supersplat/editor/select-box.svg) **Box Select** | Creates an axis-aligned 3D box for volumetric selection. Double-click anywhere in the scene to position the box center, use the translate gizmo to move it, or enter its **Position** (X, Y, Z) numerically. Enter its **Size** (X, Y, Z) in the toolbar. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. This is ideal for selecting Gaussians within a specific region of 3D space. |
 
 </div>
 
@@ -69,7 +71,7 @@ The 2D selection tools support modifier keys to control how the selection is app
 | **None** | Replace the current selection with the new selection |
 | **Shift** | Add to the current selection |
 | **Ctrl** | Remove from the current selection |
-| **Shift + Ctrl** | Keep only splats that are in both the current selection and the new selection |
+| **Shift + Ctrl** | Keep only Gaussians that are in both the current selection and the new selection |
 
 **Intersect** is available with Picker, Lasso, Polygon, Brush, and Flood Select. Eyedropper Select supports **Set**, **Add**, and **Remove**, but not **Intersect**.
 
@@ -77,41 +79,46 @@ While Picker, Lasso, Polygon, Brush, or Flood Select is active, the cursor shows
 
 The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **Remove**, and **Intersect** buttons in their toolbar instead of using modifier keys.
 
-### Deleting Splats
+## Lock, Delete, and Restore
 
-Once you are happy with your selection, delete it with **Delete** or **Backspace**.
+Use **Select > Lock** or press `H` to lock the selected Gaussians. Locking clears the selection and prevents those Gaussians from being selected or deleted. This is useful for protecting a finished area while you clean nearby geometry. Choose **Select > Unlock** or press `Shift + H` to unlock all locked Gaussians in the active splat.
 
-## Transforming Splats
+Delete selected Gaussians with **Select > Delete**, `Delete`, or `Backspace`. Deletion is non-destructive while you edit: use Undo to reverse the latest deletion, or choose **Select > Reset** to restore all deleted Gaussians in the active splat. Reset does not unlock locked Gaussians.
 
-SuperSplat can translate, rotate and scale splats. To do this, select a splat in the Scene Manager and activate one of the gizmos via the horizontal icon bar.
+Lock, unlock, delete, and reset operations are recorded in the edit history. Removing an entire row from the Scene Manager is different and cannot be undone.
 
-To achieve fine grain control over the transform of the selected splat, you can use the TRANSFORM panel (below the SCENE MANAGER panel).
+## Duplicate and Separate a Selection {#duplicate-and-separate-a-selection}
 
-To set the origin of the currently active gizmo, double click anywhere in the 3D view.
+When a Gaussian selection exists, the **Edit** menu provides two ways to turn it into another splat:
 
-## Measuring and Rescaling Splats
+- **Duplicate** copies the selected Gaussians into a new splat and keeps the originals unchanged.
+- **Separate** creates a new splat from the selected Gaussians and deletes them from the original splat.
 
-SuperSplat provides a measurement tool to help you measure distances within your splat scene and rescale it based on real-world measurements. This is accessible via the Measurement icon in the bottom toolbar.
+Both operations can be undone and are useful for giving one region its own transform, visibility, or [Color](color-and-appearance.md) settings.
 
-**To use the measurement tool:**
+## Cleanup Recipes
 
-1. Click the Measurement icon in the bottom toolbar to activate the tool.
-2. Click in the Viewport to place the first marker.
-3. Click again to place the second marker.
-4. Click on either marker to activate the translation gizmo and tweak its location.
-5. The length between the two markers is displayed in a popup above the bottom toolbar.
+### Remove Floaters
 
-**To rescale the scene:**
+1. Switch to **Rings** mode so selection stops at the topmost visible surface.
+2. Use Flood Select for an isolated patch, or Lasso, Brush, Sphere, or Box Select for a larger region.
+3. Rotate the camera and add to or remove from the selection until the intended geometry is isolated.
+4. Press `Delete` or `Backspace`.
+5. Inspect the result from several angles and use Undo if too much was removed.
 
-- Edit the length value in the popup to rescale the entire scene based on that modified length.
+### Crop a Splat
 
-**Keyboard shortcuts:**
+1. Select the region you want to keep with Box, Sphere, Lasso, or Polygon Select.
+2. Choose **Select > Invert**.
+3. Delete the inverted selection.
+4. Export the cleaned result, or save an `.ssproj` if you want to preserve the splat and project setup.
 
-- Press `Delete` or `Backspace` to remove the placed markers.
-- Press `Escape` to deactivate the Measurement tool.
+### Protect Finished Areas
 
-## Merging Splats
+Select a finished region and press `H` to lock it. Continue cleaning the remaining selectable Gaussians, then press `Shift + H` when you need to edit the protected region again.
 
-To merge multiple splat files into one `.ply`, load them into the Scene Manager and apply any required transforms or edits. Make sure every splat you want to include is visible, then choose **File > Export > PLY**. The export combines the visible splats into a single file.
+For attribute-driven cleanup, use the [Splat Data panel](data-panel.md) to select ranges such as low opacity or extreme scale values.
 
-**File > Save** saves an editable `.ssproj` project instead; it does not export a merged PLY. See [Managing Projects](managing-projects.md) for details.
+## Next Step
+
+Continue to [Transform, Measure and Align](transform-measure-align.md) to transform selected Gaussians or whole splats, calibrate scale, align captures and merge visible splats.
