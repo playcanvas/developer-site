@@ -18,7 +18,17 @@ Gaussian Splatting excels at capturing real-world environments through photogram
 - **Volumetric representation** - Handle translucent materials, fine details, and complex lighting naturally
 - **Real-time rendering** - Optimized for interactive frame rates in web browsers
 
+## 3DGS in the Real World
+
+Gaussian Splatting is being used across a growing range of industries. Popular applications include real estate, construction progress and site documentation, e-commerce product visualization, virtual tourism and cultural heritage preservation.
+
 See the [3D Gaussian Splatting section of Awesome PlayCanvas](https://github.com/playcanvas/awesome-playcanvas#3d-gaussian-splatting) for real-world projects built with PlayCanvas.
+
+:::tip[Add Your Project]
+
+Built a public 3DGS experience with PlayCanvas? Follow the [Awesome PlayCanvas contribution guidelines](https://github.com/playcanvas/awesome-playcanvas/blob/main/CONTRIBUTING.md) and open a pull request to add your site to the list.
+
+:::
 
 ## PlayCanvas Gaussian Splatting Workflow
 
