@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.5
-Total Documents: 469
+Total Documents: 474
 Generated: 2026-07-15
 
 ## Instructions for Large Language Models
@@ -449,14 +449,19 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert/): Convert and transform splats in your browser at superspl.at/convert — the web frontend to the splat-transform CLI.
 - [SuperSplat Editor](https://developer.playcanvas.com/user-manual/supersplat/editor/): SuperSplat Editor: the open-source, browser-based editor for cleaning, optimizing, and animating 3D Gaussian Splats.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls/): SuperSplat navigation: orbit and fly modes, mouse, touch, and keyboard shortcuts, plus the editable camera info overlay for precise camera placement.
+- [Color and Appearance](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance/): Adjust tint, temperature, saturation, brightness, tonal range, and transparency for imported splats in SuperSplat.
 - [Data Panel](https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel/): Use SuperSplat's Splat Data panel to inspect splat attributes, filter the histogram, select value ranges, and find outliers.
-- [Editing Splats](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats/): SuperSplat edit modes (centers versus rings), selection tools, overlays, and workflows for cleaning and modifying splats.
+- [Selection and Cleanup](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats/): Select, lock, delete, restore, duplicate, and separate Gaussians while cleaning floaters and cropping splats in SuperSplat.
 - [Import and Export](https://developer.playcanvas.com/user-manual/supersplat/editor/import-export/): SuperSplat import and export formats: PLY, SOG, SPLAT, KSPLAT, SPZ, LCC/LCC2, camera poses, and standalone viewers.
 - [Interface Overview](https://developer.playcanvas.com/user-manual/supersplat/editor/interface/): Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, toolbar, core panels, persistent settings, and interface language.
+- [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts/): Reference for SuperSplat Editor keyboard shortcuts covering navigation, selection, tools, panels, and the animation timeline.
 - [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects/): SuperSplat .ssproj projects: save and reload edits, share state, ZIP structure, and collaboration via project files.
 - [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/): Publish a splat from the SuperSplat Editor to superspl.at so it lands on your Manage page and can be opened in Studio.
 - [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/): Render still images (PNG, JPEG, or WebP) and videos from SuperSplat locally, including 360° equirectangular output and timeline-driven video.
+- [Managing Splats](https://developer.playcanvas.com/user-manual/supersplat/editor/scene-management/): Manage multiple imported splats in SuperSplat: select, show, solo, rename, remove, align, and merge them.
 - [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline/): SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, and publishing animated camera paths that play on the scene page.
+- [Transform, Measure and Align](https://developer.playcanvas.com/user-manual/supersplat/editor/transform-measure-align/): Move, rotate, scale, measure, align, and merge whole splats or selected Gaussians in the SuperSplat Editor.
+- [Troubleshooting](https://developer.playcanvas.com/user-manual/supersplat/editor/troubleshooting/): Resolve common SuperSplat Editor problems with imports, selection, transforms, exports, performance, saving, rendering, and publishing.
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore/): Browse and discover public splats on superspl.at: sort, filter by time and feature, search, and dig into a creator's profile.
 - [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage/): Use the Manage page on superspl.at to list, edit, share, and delete your published splats — and to open them in Studio.
 - [Scene Page](https://developer.playcanvas.com/user-manual/supersplat/scene-page/): The public page for a published splat on superspl.at — embedded viewer, share, embed, download, comments, likes, and suggested splats.
