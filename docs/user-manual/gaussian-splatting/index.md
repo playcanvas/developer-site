@@ -26,7 +26,7 @@ See the [3D Gaussian Splatting section of Awesome PlayCanvas](https://github.com
 
 :::tip[Add Your Project]
 
-Built a public 3DGS experience with PlayCanvas? Follow the [Awesome PlayCanvas contribution guidelines](https://github.com/playcanvas/awesome-playcanvas/blob/main/CONTRIBUTING.md) and open a pull request to add your site to the list.
+Built a public 3DGS experience with PlayCanvas? Open a pull request to add your site to the list.
 
 :::
 

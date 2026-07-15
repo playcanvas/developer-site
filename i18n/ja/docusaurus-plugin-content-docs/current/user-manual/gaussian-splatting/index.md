@@ -26,7 +26,7 @@ PlayCanvasで構築された実世界のプロジェクトについては、[Awe
 
 :::tip[プロジェクトを追加する]
 
-PlayCanvasを使用した公開3DGS体験を構築しましたか？[Awesome PlayCanvasのコントリビューションガイドライン](https://github.com/playcanvas/awesome-playcanvas/blob/main/CONTRIBUTING.md)に従い、プルリクエストを作成してサイトをリストに追加してください。
+PlayCanvasを使用した公開3DGS体験を構築しましたか？プルリクエストを作成してサイトをリストに追加してください。
 
 :::
 
