@@ -119,10 +119,6 @@ Picker、Lasso、Polygon、Brush、またはFlood Selectがアクティブな間
 
 属性に基づくクリーンアップには、[Splat Dataパネル](data-panel.md)を使用して、低い不透明度や極端なスケールなどの範囲を選択します。
 
-<span id="transforming-splats"></span>
-<span id="measuring-and-rescaling-splats"></span>
-<span id="merging-splats"></span>
-
 ## 次のステップ
 
 [変形、測定、位置合わせ](transforming-splats.md)に進み、選択したガウシアンまたはスプラット全体の変形、スケール調整、キャプチャの位置合わせ、表示中のスプラットの結合を行います。

@@ -119,10 +119,6 @@ Select a finished region and press `H` to lock it. Continue cleaning the remaini
 
 For attribute-driven cleanup, use the [Splat Data panel](data-panel.md) to select ranges such as low opacity or extreme scale values.
 
-<span id="transforming-splats"></span>
-<span id="measuring-and-rescaling-splats"></span>
-<span id="merging-splats"></span>
-
 ## Next Step
 
 Continue to [Transform, Measure, and Align](transforming-splats.md) to transform selected Gaussians or whole splats, calibrate scale, align captures, and merge visible splats.
