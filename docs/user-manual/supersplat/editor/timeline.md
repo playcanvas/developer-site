@@ -44,11 +44,13 @@ To create a camera animation keyframe:
 
 The keyframe will appear as a yellow diamond on the timeline at the current frame position. Keyframes store the camera's position and rotation at that moment in time.
 
-## Importing Camera Poses as Keyframes
+## Importing Camera Poses as Keyframes {#importing-camera-poses-as-keyframes}
 
-SuperSplat can import camera poses from [COLMAP](https://colmap.github.io/) reconstructions to automatically create timeline keyframes. This feature allows you to recreate the approximate camera path that was used during the original scanning of your Gaussian Splat scene.
+SuperSplat can import camera poses from [COLMAP](https://colmap.github.io/) reconstructions or INRIA camera pose JSON files to automatically create timeline keyframes. This allows you to recreate the approximate camera path used during the original capture of a Gaussian Splat scene.
 
-To import camera poses:
+### COLMAP `images.txt`
+
+To import COLMAP poses:
 
 1. Obtain the [`images.txt`](https://colmap.github.io/format.html#images-txt) file from your COLMAP reconstruction output
 2. In SuperSplat, select **File > Import** (or drag and drop the `images.txt` file)
@@ -61,6 +63,12 @@ Each camera pose in the `images.txt` file will be placed as a keyframe on sequen
 The `images.txt` file contains camera poses expressed as quaternions and translation vectors in COLMAP's coordinate system. SuperSplat automatically converts these to the appropriate camera positions and orientations for the timeline.
 
 :::
+
+### INRIA Camera Pose JSON
+
+SuperSplat also accepts a `.json` file containing an array of INRIA camera entries. Each entry must contain `position` and `rotation`; it can also include `id` or `img_name` for ordering and `fx`, `fy`, `width`, and `height` for calculating the field of view.
+
+Import the file using **File > Import** or drag it onto the Editor. SuperSplat sorts entries by `id`, or by a trailing number in `img_name`, and creates a keyframe for each entry. Use a filename other than `meta.json`, which SuperSplat reserves for unbundled SOG scenes.
 
 ## Editing Keyframes
 

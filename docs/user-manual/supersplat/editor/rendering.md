@@ -71,7 +71,7 @@ When you select `Video` from the Render menu, a dialog will appear with several 
   - `360° Equirectangular` - A monoscopic 360° video that can be viewed on YouTube, in VR headsets and in 360°-capable players like VLC
 - **Resolution:** Choose the output resolution. Available options depend on the selected projection:
   - For `Standard`: `960x540`, `1280x720`, `1920x1080` (default), `2560x1440`, `3840x2160`
-  - For `360° Equirectangular` (2:1 aspect ratio): `2048x1024`, `3840x1920` (default), `4096x2048`
+  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048`
 - **Format:** Choose the output video format:
   - `MP4` (default) - Most widely compatible format, ideal for general use
   - `WebM` - Open format, excellent for web use
