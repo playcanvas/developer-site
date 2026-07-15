@@ -1,6 +1,6 @@
 ---
 title: Rendering Media
-description: "Render WebP still images and videos from SuperSplat locally: presets, resolutions, codecs, 360° equirectangular output, and timeline-driven video."
+description: "Render still images (PNG, JPEG, or WebP) and videos from SuperSplat locally, including 360° equirectangular output and timeline-driven video."
 ---
 
 SuperSplat enables you to render high-quality images and videos directly from your 3D Gaussian Splats. Whether you want to create a single frame for social media, showcase your creations with animated videos, embed them on your website, or keep them locally, this guide will help you get started.
@@ -39,7 +39,12 @@ When you select `Image` from the Render menu, a dialog will appear with settings
     - `Custom` - Allows manual resolution selection
   - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048` and `Custom`
 - **Resolution:** Only active when `Custom` preset is selected. Allows you to specify custom width and height values.
-- **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays.
+- **Format:** Choose the output image format:
+  - `PNG` (default) - Lossless output with transparency support
+  - `JPEG` - Smaller, lossy output for photographs and sharing
+  - `WebP` - Lossless WebP output with transparency support
+- **Quality:** Only shown for `JPEG`. Set the JPEG quality from 1 to 100 (default 90).
+- **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays. This option is unavailable for JPEG, which does not support transparency.
 - **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the image. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the image stays level and follows only the camera's heading. If unchecked, the camera's full orientation (including pitch) is baked into the image.
 
@@ -49,7 +54,9 @@ Once you've configured your settings:
 
 1. Click the `Render` button.
 2. The image will be rendered at the current camera position.
-3. On completion, your image will auto-download as a lossless WebP (`.webp`) file.
+3. In browsers that support the File System Access API, choose a filename and location in the system save dialog. In other browsers, the image downloads automatically using the selected format's extension.
+
+The suggested filename uses the project name when one is set, otherwise the first visible splat's name, and finally `supersplat` if neither is available. Invalid filename characters are removed. You can change the name in the save dialog before writing the file.
 
 ## Video Rendering
 
@@ -99,7 +106,7 @@ Once you've configured your settings:
 
 1. Click the `Render` button.
 2. The Timeline pointer will animate through all frames until video encoding is complete.
-3. On completion, your video will auto-download.
+3. In browsers that support the File System Access API, choose a filename and location in the system save dialog. In other browsers, the video downloads automatically.
 
 :::tip Browser Recommendation for Video Rendering
 
@@ -121,7 +128,7 @@ Some things to keep in mind when rendering 360° video:
 - `MP4` and `MOV` 360° videos are held in memory while rendering (the spherical metadata is added once encoding completes), so long renders at high resolution use more memory than standard renders.
 - A 360° render takes roughly six times longer than a standard render of the same length, because the scene is rendered once for each of the six directions around the camera for every output frame.
 
-You can render 360° still images in the same way: set the `Projection` option in the [Image Settings](#image-settings) dialog to `360° Equirectangular`. The panorama is captured from the current camera position and saved as a 2:1 equirectangular WebP image.
+You can render 360° still images in the same way: set the `Projection` option in the [Image Settings](#image-settings) dialog to `360° Equirectangular`. The panorama is captured from the current camera position and saved as a 2:1 equirectangular image in the selected PNG, JPEG, or WebP format.
 
 ## Tips for Best Results
 

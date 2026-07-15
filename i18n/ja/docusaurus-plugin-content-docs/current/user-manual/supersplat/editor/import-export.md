@@ -1,6 +1,6 @@
 ---
 title: インポートとエクスポート
-description: "SuperSplatのインポートとエクスポート形式：PLY、圧縮PLY、SOG、SPLAT、SPZ、ビューア、Web向けとアーカイブ向けの選び方です。"
+description: "SuperSplatのインポートとエクスポート形式：PLY、SOG、SPLAT、SPZ、LCC/LCC2、マルチLOD読み込み、ビューア、Web向けとアーカイブ向けの選び方です。"
 ---
 
 SuperSplatのインポートおよびエクスポート機能は、ワークフロー全体を通じてGaussian Splatデータを扱うために不可欠です。インポートにより、さまざまなキャプチャツールや形式からスプラットシーンを読み込み、編集、クリーンアップ、最適化を行うことができます。編集作業が完了したら、エクスポートにより、ターゲットプラットフォームに最適な形式で洗練されたスプラットを保存できます - Web展開用の圧縮形式、アーカイブ用のフル品質PLY、または簡単に共有できるスタンドアロンHTMLビューアなど。この柔軟性により、SuperSplatはあらゆるGaussian Splat制作パイプラインにシームレスに統合できます。
@@ -17,7 +17,7 @@ SuperSplat は、Gaussian Splat シーンのいくつかのファイル形式に
 | `meta.json` | ✅ | ❌ | アンバンドル超圧縮形式（`.webp` テクスチャを伴う）。エクスポートには[SplatTransform](/user-manual/splat-transform/) CLIツールを使用 |
 | `.splat` | ✅ | ✅ | レガシー圧縮スプラット形式 (antimatter15) - 圧縮PLYよりも効率が劣る |
 | `.spz` | ✅ | ✅ | Niantic圧縮形式。エクスポートはデフォルトでSPZバージョン4、古いリーダー向けにSPZバージョン3も選択可能 |
-| `.lcc` | ✅ | ❌ | 複数のレベル・オブ・ディテールを含むXGRIDSプロプライエタリー形式。2000万ガウシアン未満を含む最上位LODをインポートします |
+| `.lcc` / `.lcc2` | ✅ | ❌ | XGRIDSのプロプライエタリーなマルチLOD形式。SuperSplatが読み込む詳細レベルの選択を求めます |
 | `.html` / `.zip` | ❌ | ✅ | スタンドアロンHTMLビューアアプリ - Web共有用に圧縮されたスプラットデータを埋め込み |
 
 :::warning
@@ -28,18 +28,26 @@ SuperSplat は、Gaussian Splat シーンのいくつかのファイル形式に
 
 ## スプラットのインポート
 
-SuperSplat は、`.ply`、`.compressed.ply`、`.splat`、`.spz`、`.lcc`、`.sog` (バンドルSOG)、および `meta.json` (アンバンドルSOG) 形式の Gaussian Splat シーンをインポートできます。
+SuperSplat は、`.ply`、`.compressed.ply`、`.splat`、`.spz`、`.lcc`、`.lcc2`、`.sog` (バンドルSOG)、および `meta.json` (アンバンドルSOG) 形式の Gaussian Splat シーンをインポートできます。
 
 Gaussian Splat ファイルを読み込む方法は4つあります。
 
-1. **ドラッグアンドドロップ** - ファイルシステムから SuperSplat のクライアントエリアに1つ以上のスプラットファイルをドラッグアンドドロップします。複数ファイル形式（`.lcc` やアンバンドルSOGなど）の場合は、それらのファイルを含む親フォルダーをドラッグします。
+1. **ドラッグアンドドロップ** - ファイルシステムから SuperSplat のクライアントエリアに1つ以上のスプラットファイルをドラッグアンドドロップします。複数ファイル形式（`.lcc`、`.lcc2`、アンバンドルSOGなど）の場合は、それらのファイルを含む親フォルダーをドラッグします。
 2. **ファイルメニュー** - `File` > `Import` を選択し、ファイルシステムから1つ以上のスプラットファイルを選択します。
 3. **直接ファイルを開く** - SuperSplat を PWA としてインストールしている場合、File Explorer (Windows) または Finder (macOS) でスプラットファイルをダブルクリックできます。
-4. **URL読み込み** - 次のような形式で `load` クエリパラメータを使用します: `https://superspl.at/editor?load=<PLY_URL>`。例：
+4. **URL読み込み** - 次のような形式で `load` クエリパラメータを使用します: `https://superspl.at/editor?load=<SPLAT_URL>`。例：
 
     https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply
 
     これは、X や LinkedIn のようなソーシャルプラットフォームで他の人とスプラットを共有するのに特に便利です。
+
+    URL読み込みは、複数ファイルで構成される`.lcc`、`.lcc2`、アンバンドルSOGシーンにも対応します。関連するチャンクまたはテクスチャファイルは、コンテナから参照される相対パスに配置してください。
+
+### 詳細レベルの選択 {#choosing-a-level-of-detail}
+
+ファイルに複数の詳細レベルが含まれる場合、SuperSplatはSplatsを割り当てる前に**Load Options**ダイアログを表示します。ダイアログには各LODとそのSplat数が一覧表示されます。初期状態では、2000万Splats未満で最も詳細なレベルが選択されるため、大きなシーンでの過剰なメモリ使用を避けられます。
+
+編集の目的と利用可能なメモリに合うLODを選択し、**Load**をクリックします。詳細度が低いレベルほど高速に読み込まれ、使用メモリも少なくなります。レベルを読み込まずにインポートを中止するには、**Cancel**をクリックします。
 
 ### PLYシーケンスのインポート {#ply-sequences}
 
