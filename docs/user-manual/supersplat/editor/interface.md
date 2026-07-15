@@ -55,7 +55,7 @@ Open the **Settings** panel from the gear icon in the [Right Toolbar](#right-too
 
 Loading an `.ssproj` project applies the view and camera settings saved in that project for the current session without replacing your stored preferences. Selecting **File > New** reapplies your preferences. To clear them and restore the factory settings, click **Reset to Defaults** at the bottom of the **Settings** panel. This also returns the interface language to **Automatic**.
 
-## Language
+### Language
 
 SuperSplat's interface is available in several languages. By default it follows your browser's language — the **Automatic** setting — but you can choose a specific language from the **Language** dropdown at the top of the **Settings** panel (the gear icon in the [Right Toolbar](#right-toolbar)).
 
