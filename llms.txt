@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.5
 Total Documents: 469
-Generated: 2026-07-10
+Generated: 2026-07-15
 
 ## Instructions for Large Language Models
 
@@ -451,11 +451,11 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls/): SuperSplat navigation: orbit and fly modes, mouse, touch, and keyboard shortcuts, plus the editable camera info overlay for precise camera placement.
 - [Data Panel](https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel/): SPLAT DATA panel: histograms and statistics for splat attributes, selection by property ranges, and keyboard shortcuts.
 - [Editing Splats](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats/): SuperSplat edit modes (centers versus rings), selection tools, overlays, and workflows for cleaning and modifying splats.
-- [Import and Export](https://developer.playcanvas.com/user-manual/supersplat/editor/import-export/): SuperSplat import and export formats: PLY, compressed PLY, SOG, SPLAT, SPZ, viewers, and choosing formats for web or archival use.
-- [Interface Overview](https://developer.playcanvas.com/user-manual/supersplat/editor/interface/): Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, toolbar, core panels for editing splats, and interface language settings.
+- [Import and Export](https://developer.playcanvas.com/user-manual/supersplat/editor/import-export/): SuperSplat import and export formats: PLY, SOG, SPLAT, SPZ, LCC/LCC2, multi-LOD loading, viewers, and choosing formats for web or archival use.
+- [Interface Overview](https://developer.playcanvas.com/user-manual/supersplat/editor/interface/): Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, toolbar, core panels, persistent settings, and interface language.
 - [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects/): SuperSplat .ssproj projects: save and reload edits, share state, ZIP structure, and collaboration via project files.
 - [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/): Publish a splat from the SuperSplat Editor to superspl.at so it lands on your Manage page and can be opened in Studio.
-- [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/): Render WebP still images and videos from SuperSplat locally: presets, resolutions, codecs, 360° equirectangular output, and timeline-driven video.
+- [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/): Render still images (PNG, JPEG, or WebP) and videos from SuperSplat locally, including 360° equirectangular output and timeline-driven video.
 - [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline/): SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, and publishing animated camera paths that play on the scene page.
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore/): Browse and discover public splats on superspl.at: sort, filter by time and feature, search, and dig into a creator's profile.
 - [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage/): Use the Manage page on superspl.at to list, edit, share, and delete your published splats — and to open them in Studio.

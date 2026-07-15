@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 469
-Generated: 2026-07-10
+Generated: 2026-07-15
 
 ================================================================================
 
@@ -30319,22 +30319,27 @@ Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. 
 | [Image: Brush Select] **Brush Select** | Click and drag to paint a selection using a circular brush. Adjust the brush size with the `[` (decrease) and `]` (increase) keys. Ideal for organic selection work. |
 | [Image: Flood Select] **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold slider (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters) that appear isolated in the scene. |
 | [Image: Eyedropper Select] **Eyedropper Select** | Click on the viewport to select splats based on color similarity. A threshold slider (0-1) controls the sensitivity of the color matching. This tool is useful for selecting groups of splats that share similar colors. |
-| [Image: Sphere Select] **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center. Use the translate gizmo to move the sphere, and adjust the radius value in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. |
-| [Image: Box Select] **Box Select** | Creates a 3D rectangular volume for volumetric selection. Double-click anywhere in the scene to position the box center. Use the translate gizmo to move the box, and adjust the dimensions (LenX, LenY, LenZ) in the toolbar. Click **Set** to replace the current selection, **Add** to add to the selection, or **Remove** to subtract from the selection. This is ideal for selecting splats within a specific region of 3D space. |
+| [Image: Sphere Select] **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center, use the translate gizmo to move it, or enter its **Position** (X, Y, Z) numerically. Set its **Radius** in the toolbar. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. |
+| [Image: Box Select] **Box Select** | Creates an axis-aligned 3D box for volumetric selection. Double-click anywhere in the scene to position the box center, use the translate gizmo to move it, or enter its **Position** (X, Y, Z) numerically. Enter its **Size** (X, Y, Z) in the toolbar. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. This is ideal for selecting splats within a specific region of 3D space. |
 
 </div>
 
 ### Selection Modifiers
 
-All 2D selection tools (Picker, Lasso, Polygon, Brush, Flood, Eyedropper) support modifier keys to control how the selection is applied:
+The 2D selection tools support modifier keys to control how the selection is applied:
 
 | Modifier | Action |
 |----------|--------|
 | **None** | Replace the current selection with the new selection |
 | **Shift** | Add to the current selection |
-| **Ctrl / Cmd** | Remove from the current selection |
+| **Ctrl** | Remove from the current selection |
+| **Shift + Ctrl** | Keep only splats that are in both the current selection and the new selection |
 
-The 3D selection tools (Sphere Select, Box Select) have **Set**, **Add**, and **Remove** buttons in their toolbar instead of using modifier keys.
+**Intersect** is available with Picker, Lasso, Polygon, Brush, and Flood Select. Eyedropper Select supports **Set**, **Add**, and **Remove**, but not **Intersect**.
+
+While Picker, Lasso, Polygon, Brush, or Flood Select is active, the cursor shows which operation the current modifier keys will apply. A plain crosshair means **Set**; a badge on the crosshair indicates **Add** (`+`), **Remove** (`−`), or **Intersect** (`∩`). The same feedback appears when selecting a value range in the [Splat Data panel](data-panel.md).
+
+The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **Remove**, and **Intersect** buttons in their toolbar instead of using modifier keys.
 
 ### Deleting Splats
 
@@ -30393,7 +30398,7 @@ SuperSplat works with several file formats for Gaussian Splat scenes:
 | `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](/user-manual/splat-transform/) CLI tool to export |
 | `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
 | `.spz` | ✅ | ✅ | Niantic compressed format. Exports as SPZ version 4 by default, with SPZ version 3 available for older readers |
-| `.lcc` | ✅ | ❌ | XGRIDS proprietary format which contains multiple levels-of-detail. Imports the highest LOD that contains less than 20 million Gaussians |
+| `.lcc` / `.lcc2` | ✅ | ❌ | XGRIDS proprietary multi-LOD formats. SuperSplat asks which level of detail to load |
 | `.html` / `.zip` | ❌ | ✅ | Standalone HTML viewer app - embeds compressed splat data for web sharing |
 
 :::warning
@@ -30404,18 +30409,26 @@ Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY fi
 
 ## Importing Splats
 
-SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.spz`, `.lcc`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
+SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
 
 There are four ways to load a Gaussian Splat file:
 
-1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc` or unbundled SOG), drag the parent folder containing those files.
+1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc`, `.lcc2`, or unbundled SOG), drag the parent folder containing those files.
 2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system.
 3. **Direct file opening** - If you have installed SuperSplat as a PWA, you can double-click a splat file in File Explorer (Windows) or Finder (macOS).
-4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<PLY_URL>`. For example:
+4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<SPLAT_URL>`. For example:
 
     https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply
 
     This is particularly useful for sharing splats with others on social platforms like X and LinkedIn.
+
+    URL loading also supports multi-file `.lcc`, `.lcc2`, and unbundled SOG scenes. Keep their related chunk or texture files at the relative paths referenced by the container.
+
+### Choosing a Level of Detail {#choosing-a-level-of-detail}
+
+When a file contains multiple levels of detail, SuperSplat displays a **Load Options** dialog before allocating the splats. The dialog lists each LOD and its splat count. It initially selects the most detailed level containing fewer than 20 million splats, helping large scenes avoid excessive memory use.
+
+Choose the LOD that fits your editing needs and available memory, then click **Load**. Lower-detail levels load faster and consume less memory. Click **Cancel** to stop the import without loading a level.
 
 ### Importing PLY Sequences {#ply-sequences}
 
@@ -30479,6 +30492,7 @@ The key elements of the interface are labeled:
 The Menu Bar gives you access to the most commonly used functions in the SuperSplat Editor.
 
 * **File Menu:** Load and save your projects. Import and export to/from popular file formats.
+* **Edit Menu:** Undo or redo changes, duplicate selected splats, or separate selected splats into a new scene.
 * **Select Menu:** Perform common selection based operations on your loaded scene.
 * **Render Menu:** Render an image or a video of your currently loaded scene.
 * **Help Menu:** Access developer resources related to SuperSplat.
@@ -30511,7 +30525,13 @@ The Timeline allows you to create and delete keyframes for the viewport camera. 
 
 This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics.
 
-## Language
+## Settings and Preferences
+
+Open the **Settings** panel from the gear icon in the [Right Toolbar](#right-toolbar). Changes to view, camera, and editing preferences are saved in your browser and restored the next time you open the Editor. These preferences include colors and tonemapping, camera field of view and control mode, spherical harmonic bands, centers and rings display, grid and bounds overlays, and other viewport options.
+
+Loading an `.ssproj` project applies the view and camera settings saved in that project for the current session without replacing your stored preferences. Selecting **File > New** reapplies your preferences. To clear them and restore the factory settings, click **Reset to Defaults** at the bottom of the **Settings** panel. This also returns the interface language to **Automatic**.
+
+### Language
 
 SuperSplat's interface is available in several languages. By default it follows your browser's language — the **Automatic** setting — but you can choose a specific language from the **Language** dropdown at the top of the **Settings** panel (the gear icon in the [Right Toolbar](#right-toolbar)).
 
@@ -30710,7 +30730,12 @@ When you select `Image` from the Render menu, a dialog will appear with settings
     - `Custom` - Allows manual resolution selection
   - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048` and `Custom`
 - **Resolution:** Only active when `Custom` preset is selected. Allows you to specify custom width and height values.
-- **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays.
+- **Format:** Choose the output image format:
+  - `PNG` (default) - Lossless output with transparency support
+  - `JPEG` - Smaller, lossy output for photographs and sharing
+  - `WebP` - Lossless WebP output with transparency support
+- **Quality:** Only shown for `JPEG`. Set the JPEG quality from 1 to 100 (default 90).
+- **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays. This option is unavailable for JPEG, which does not support transparency.
 - **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the image. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the image stays level and follows only the camera's heading. If unchecked, the camera's full orientation (including pitch) is baked into the image.
 
@@ -30720,7 +30745,9 @@ Once you've configured your settings:
 
 1. Click the `Render` button.
 2. The image will be rendered at the current camera position.
-3. On completion, your image will auto-download as a lossless WebP (`.webp`) file.
+3. In browsers that support the File System Access API, choose a filename and location in the system save dialog. In other browsers, the image downloads automatically using the selected format's extension.
+
+The suggested filename uses the project name when one is set, otherwise the first visible splat's name, and finally `supersplat` if neither is available. Invalid filename characters are removed. You can change the name in the save dialog before writing the file.
 
 ## Video Rendering
 
@@ -30770,7 +30797,7 @@ Once you've configured your settings:
 
 1. Click the `Render` button.
 2. The Timeline pointer will animate through all frames until video encoding is complete.
-3. On completion, your video will auto-download.
+3. In browsers that support the File System Access API, choose a filename and location in the system save dialog. In other browsers, the video downloads automatically.
 
 :::tip Browser Recommendation for Video Rendering
 
@@ -30790,7 +30817,7 @@ Some things to keep in mind when rendering 360° video:
 - `MP4` and `MOV` 360° videos are held in memory while rendering (the spherical metadata is added once encoding completes), so long renders at high resolution use more memory than standard renders.
 - A 360° render takes roughly six times longer than a standard render of the same length, because the scene is rendered once for each of the six directions around the camera for every output frame.
 
-You can render 360° still images in the same way: set the `Projection` option in the [Image Settings](#image-settings) dialog to `360° Equirectangular`. The panorama is captured from the current camera position and saved as a 2:1 equirectangular WebP image.
+You can render 360° still images in the same way: set the `Projection` option in the [Image Settings](#image-settings) dialog to `360° Equirectangular`. The panorama is captured from the current camera position and saved as a 2:1 equirectangular image in the selected PNG, JPEG, or WebP format.
 
 ## Tips for Best Results
 
@@ -30922,6 +30949,10 @@ The FPS setting controls the playback speed of your animation. Available FPS val
 ### Timeline Length
 
 You can set the total duration of your animation by adjusting the timeline length setting. This defines how many frames your animation spans and determines when the animation loops back to the beginning.
+
+If you shorten the timeline so that existing keyframes fall past its end, SuperSplat preserves those keyframes but excludes them from playback and interpolation. Their dimmed, error-colored markers are pinned just beyond the right edge of the timeline, and a tooltip identifies each keyframe's original frame number.
+
+To bring an out-of-range keyframe back into the animation, drag its pinned marker onto the timeline or increase **Total Frames** until the keyframe is in range again. Shortening the timeline also clamps the playhead to the new end, and previous/next keyframe navigation skips any out-of-range keys. To delete one of these keyframes, first drag it into range or temporarily increase **Total Frames**.
 
 ### Smoothness
 
