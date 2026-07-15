@@ -30079,12 +30079,16 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 | Action | Orbit Mode | Fly Mode |
 |--------|------------|----------|
 | Left drag | Orbit around focal point | Look around |
-| Middle drag | Zoom | Zoom |
+| Middle click | Set focal point | — |
+| Middle drag | Orbit around focal point | Zoom |
+| Shift + middle drag | Pan | Zoom |
+| Ctrl + middle drag | Zoom | Zoom |
 | Right drag | Pan | Pan |
 | Right + Ctrl/Shift drag | Orbit | Look around |
-| Right + Alt drag | Zoom | Zoom |
+| Right + Alt/Cmd drag | Zoom | Zoom |
 | Mouse wheel | Zoom | Move forward/backward |
-| Mouse wheel + Shift | Pan (trackpad) | — |
+| Mouse wheel + Shift | Pan | Pan |
+| Mouse wheel + Ctrl | Orbit | Look around |
 | Double-click | Set focal point | Set focal point (switches to orbit) |
 
 ## Touch Controls
@@ -30149,117 +30153,121 @@ This is handy for reproducing exact viewpoints - for example, returning to a pre
 
 URL: https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel/
 
-The SPLAT DATA panel provides statistical visualization and analysis tools for understanding the distribution of data properties across your Gaussian splats. It displays an interactive histogram that allows you to view and select splats based on their attribute values.
+The **Splat Data** panel visualizes the attribute values of the active splat as an interactive histogram. Use it to understand how values are distributed, find outliers, and select splats whose values fall within a particular range.
 
-[Image: SPLAT DATA Panel]
+[Image: The Splat Data panel showing its filters, property list, and histogram]
 
-## Overview
+## Opening the Panel
 
-The panel consists of three main sections:
+The panel opens at the bottom of the Editor and is collapsed by default. Open or close it by:
 
-1. **Data Selector** - Choose which splat attribute to visualize
-2. **Histogram Display** - Interactive visualization of the selected data distribution  
-3. **Statistics** - Total counts for splat states
+- Clicking **Splat Data** in the status bar.
+- Pressing **Ctrl + D** (or **Cmd + D** on macOS).
 
-The panel is located at the bottom of the interface and is collapsed by default.
+Drag the panel's top edge to change its height.
 
-:::tip
-The panel can be toggled open/closed by pressing **Ctrl + D** (or **Cmd + D** on Mac) or by clicking the panel header.
-:::
+## Choosing Which Splats and Property to Display
 
-## Data Selector
+The controls on the left determine which values are included in the histogram:
 
-The dropdown menu allows you to select from various splat properties for visualization:
+| Control | Description |
+|---------|-------------|
+| **Visible Splats Only** | Includes only splats inside the camera's current view. Splats outside the view are excluded. This is a view-frustum filter; it does not test whether another splat is in front of them. |
+| **Log Scale** | Uses a logarithmic vertical scale so bins with small counts remain visible alongside bins with large counts. This changes only the graph's vertical display, not the underlying values or selection. |
+| **All Properties** | Adds raw DC and spherical harmonic (SH) coefficients to the property list. The available SH entries depend on the bands contained in the active splat. |
 
-| Property | Category | Description | Range/Calculation |
-|----------|----------|-------------|-------------------|
-| X | Position | Position coordinate along the X axis | - |
-| Y | Position | Position coordinate along the Y axis | - |
-| Z | Position | Position coordinate along the Z axis | - |
-| Scale X | Scale | Size of the Gaussian along the X axis | - |
-| Scale Y | Scale | Size of the Gaussian along the Y axis | - |
-| Scale Z | Scale | Size of the Gaussian along the Z axis | - |
-| Red | Color | Red channel intensity | 0-1 |
-| Green | Color | Green channel intensity | 0-1 |
-| Blue | Color | Blue channel intensity | 0-1 |
-| Hue | Color | Color hue | 0-360° |
-| Saturation | Color | Color saturation | 0-1 |
-| Value | Color | Color brightness/value | 0-1 |
-| Opacity | Color | Transparency of each splat | 0-1 |
-| Distance | Derived | Distance from the origin (0,0,0) | √(x² + y² + z²) |
-| Volume | Derived | Calculated volume of each Gaussian | scale_x × scale_y × scale_z |
-| Surface Area | Derived | Approximate surface area | scale_x² + scale_y² + scale_z² |
+Select a row in the property list to display its distribution. The default properties are:
 
-## Histogram Visualization
+| Property | Description |
+|----------|-------------|
+| **Position X/Y/Z** | World-space position after applying scene and per-splat transforms. |
+| **Opacity** | Effective opacity, including the active Color panel transparency adjustment. |
+| **Red/Green/Blue** | Final color for the current camera direction, including spherical harmonics and Color panel adjustments. These histograms can change when the camera moves. |
+| **Scale X/Y/Z** | Decoded Gaussian scale along each local axis. |
+| **Quat W/X/Y/Z** | Components of the Gaussian's rotation quaternion. |
+| **Distance** | Distance from the world origin `(0, 0, 0)`. |
+| **Camera Depth** | Distance along the current camera's view direction. This histogram changes when the camera moves. |
+| **Volume** | `scale_x * scale_y * scale_z`. |
+| **Surface Area** | A relative size measure calculated as `scale_x² + scale_y² + scale_z²`. |
+| **Hue/Saturation/Value** | HSV components calculated from the final color for the current camera direction. |
 
-The histogram displays the distribution of the selected property across all non-deleted splats in the scene, with blue bars representing unselected splats and yellow bars representing selected splats. Locked and deleted splats are not shown in the histogram.
+With **All Properties** enabled, the list can also include:
 
-### Interactive Features
+| Property | Description |
+|----------|-------------|
+| **DC R/G/B** | Raw zeroth-order spherical harmonic color coefficients. These values do not include higher SH bands or Color panel adjustments. |
+| **R/G/B SH _n_** | Higher-order spherical harmonic coefficients, grouped by color channel. Only coefficients present in the source data are listed. |
 
-**Hover Information** - Hover over any histogram bar to see a tooltip displaying:
+Locked and deleted splats are always excluded from the histogram. Enable **Visible Splats Only** to exclude off-screen splats as well.
 
-- **value** - The data value for this bin
-- **cnt** - Total count of splats in this bin  
-- **percentage** - Percentage of total splats
-- **sel** - Number of selected splats in this bin
+## Reading the Histogram
 
-**Selection by Range** - Click and drag on the histogram to highlight a range of values. A dashed yellow rectangle will appear showing your selection. Release to select all splats within that value range. Note that locked and deleted splats cannot be selected through the histogram.
+The histogram uses the Editor's unselected and selected colors to show the two populations separately. By default, unselected splats are blue and selected splats are yellow.
 
-Use modifier keys to control the selection operation:
+Move the pointer across the histogram to inspect a value. The value appears beneath the pointer, while an overlay shows:
 
-| Modifier Key | Action | Description |
-|--------------|--------|-------------|
-| None | New Selection | Replaces the current selection with the histogram range |
-| Shift | Add to Selection | Adds the histogram range to the existing selection |
-| Ctrl | Remove from Selection | Removes the histogram range from the existing selection |
+- **Splats** - The number and percentage of included splats at that value.
+- **Selected** - How many of those splats are currently selected.
 
-**Log Scale** - Enable the Log Scale checkbox to view the histogram with a logarithmic Y-axis. This is useful when data has a wide range of values, when most splats cluster around certain values with few outliers, or when you want to better visualize the distribution of sparse data.
+When you drag across a range, the two values beneath the histogram mark the range boundaries and the overlay reports aggregate counts for the whole range.
 
-## Statistics (Totals)
+## Selecting a Value Range
 
-The bottom section displays real-time statistics about the current splat:
+Click and drag across the histogram to select all eligible splats in a value range. A highlighted rectangle shows the range before you release the pointer. Locked and deleted splats cannot be selected through the histogram.
+
+Hold modifier keys when releasing the pointer to control how the range is applied:
+
+| Modifier | Operation | Result |
+|----------|-----------|--------|
+| None | **Set** | Replace the current selection with the range. |
+| **Shift** | **Add** | Add the range to the current selection. |
+| **Ctrl** | **Remove** | Remove the range from the current selection. |
+| **Shift + Ctrl** | **Intersect** | Keep only splats that are in both the current selection and the range. |
+
+The pointer displays the active Set, Add, Remove, or Intersect operation while it is over the histogram. These operations match the modifiers used by the [2D selection tools](editing-splats.md#selection-modifiers).
+
+## Status Bar Totals
+
+The status bar below the panel reports the state of the active splat independently of the histogram's property and view filters:
 
 | Statistic | Description |
 |-----------|-------------|
-| Splats | Total number of non-deleted splats |
-| Selected | Number of currently selected splats |
-| Locked | Number of locked splats |
-| Deleted | Number of deleted splats |
+| **Splats** | Total number of non-deleted splats, including locked splats. |
+| **Selected** | Number of currently selected splats. |
+| **Locked** | Number of locked splats. |
+| **Deleted** | Number of deleted splats. |
 
-These values update automatically when splats are selected, deselected, locked, unlocked, deleted, or reset.
+These totals update when splats are selected, deselected, locked, unlocked, deleted, or reset.
 
-## Use Cases
+## Common Uses
 
-**Finding Outliers** - Select a property like "Distance" or "Opacity", look for isolated bars at the extremes, then click and drag to select those ranges for examination or deletion.
+### Finding Outliers
 
-**Color-Based Selection** - Choose "Hue", "Saturation", or "Value" and select a range to isolate splats of similar colors, useful for separating objects by color in the scene.
+Choose **Distance**, **Opacity**, **Volume**, or **Surface Area**, look for isolated bins at either end of the histogram, and select the relevant range for inspection or deletion. Enable **Log Scale** when a small number of outliers is hidden by much larger bins.
 
-**Size-Based Selection** - Select "Volume" or "Surface Area", enable "Log Scale" for better visualization, then select ranges to find problematic splats for cleanup or adjustment.
+### Selecting by Color
 
-**Quality Control** - Review the distribution of properties to check if opacity is reasonable, verify scale values are within expected ranges, and identify areas that may need cleanup.
+Choose **Hue**, **Saturation**, or **Value** and select a range to isolate similarly colored splats. Because these properties use the final view-dependent color, position the camera at the viewpoint that matters before making the selection.
 
-## Tips
+### Cleaning Only the Current View
 
-- Keep the panel collapsed when not in use to improve editor performance
-- Check different properties to understand your data better  
-- Use histogram selection together with other selection tools for precise control
-- Understanding your splat distribution helps with optimization and quality improvements
+Enable **Visible Splats Only** to restrict analysis and range selection to the camera's current view. Combine this with other selection tools when you need to refine the result spatially.
 
-## Technical Notes
+## Value Interpretation
 
-### Data Transformations
+The panel displays decoded or derived values rather than every value exactly as it is stored in the source file:
 
-Some properties are transformed for visualization to ensure the histogram displays human-readable values rather than the internal storage format:
-
-| Property Type | Transformation |
+| Property type | Interpretation |
 |---------------|----------------|
-| Scale values | Exponentiated: exp(value) |
-| Color values (RGB) | Converted from spherical harmonics: 0.5 + value × 0.28209479177387814 |
-| Opacity | Sigmoid function: 1 / (1 + exp(-value)) |
+| Position | World-space position after active transforms. |
+| Scale | Decoded Gaussian scale; logarithmic source values have already been exponentiated. |
+| Red/Green/Blue | Final color after evaluating available SH bands for the current view and applying Color panel adjustments. |
+| Hue/Saturation/Value | Calculated from the final color after clamping RGB to the `0-1` range. |
+| Opacity | Decoded opacity with the Color panel transparency adjustment applied. |
+| Quat W/X/Y/Z | Rotation quaternion; `W` is reconstructed in its non-negative canonical form. |
+| DC and SH | Raw coefficients exposed when **All Properties** is enabled. |
 
-### Suppressed Properties
-
-The following properties are not available for histogram visualization: **state** (internal state flag), **transform** (internal transformation data), and **f_rest_0** through **f_rest_44** (higher-order spherical harmonic coefficients).
+Internal `state` and `transform` properties are not available for histogram visualization.
 
 --------------------------------------------------------------------------------
 
@@ -30324,7 +30332,7 @@ Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. 
 
 </div>
 
-### Selection Modifiers
+### Selection Modifiers {#selection-modifiers}
 
 The 2D selection tools support modifier keys to control how the selection is applied:
 
@@ -30343,7 +30351,7 @@ The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **R
 
 ### Deleting Splats
 
-Once you are happy with your selection, you can delete it with the **Delete** key.
+Once you are happy with your selection, delete it with **Delete** or **Backspace**.
 
 ## Transforming Splats
 
@@ -30371,12 +30379,14 @@ SuperSplat provides a measurement tool to help you measure distances within your
 
 **Keyboard shortcuts:**
 
-- Press `Delete` to remove the placed markers.
+- Press `Delete` or `Backspace` to remove the placed markers.
 - Press `Escape` to deactivate the Measurement tool.
 
 ## Merging Splats
 
-It is possible to merge multiple `.ply` files together and output a single, combined `.ply` file. Simply load any number of `.ply` files into Scene Manager, perform whatever transformations and edits you require, and then save the result via the `File` > `Save` menu item.
+To merge multiple splat files into one `.ply`, load them into the Scene Manager and apply any required transforms or edits. Make sure every splat you want to include is visible, then choose **File > Export > PLY**. The export combines the visible splats into a single file.
+
+**File > Save** saves an editable `.ssproj` project instead; it does not export a merged PLY. See [Managing Projects](managing-projects.md) for details.
 
 --------------------------------------------------------------------------------
 
@@ -30388,7 +30398,7 @@ SuperSplat's import and export capabilities are essential for working with Gauss
 
 ## Supported File Formats {#supported-file-formats}
 
-SuperSplat works with several file formats for Gaussian Splat scenes:
+SuperSplat supports several Gaussian Splat scene formats, plus COLMAP and INRIA camera poses for creating timeline keyframes:
 
 | Format | Import | Export | Description |
 | ------ | ------ | ------ | ----------- |
@@ -30397,9 +30407,13 @@ SuperSplat works with several file formats for Gaussian Splat scenes:
 | `.sog` | ✅ | ✅ | Bundled super-compressed format (a zip file containing `meta.json` and `.webp` textures). Recommended for runtime applications |
 | `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](/user-manual/splat-transform/) CLI tool to export |
 | `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
+| `.ksplat` | ✅ | ❌ | KSplat compressed splat format. Import only |
 | `.spz` | ✅ | ✅ | Niantic compressed format. Exports as SPZ version 4 by default, with SPZ version 3 available for older readers |
 | `.lcc` / `.lcc2` | ✅ | ❌ | XGRIDS proprietary multi-LOD formats. SuperSplat asks which level of detail to load |
-| `.html` / `.zip` | ❌ | ✅ | Standalone HTML viewer app - embeds compressed splat data for web sharing |
+| `images.txt` | ✅ | ❌ | Camera poses from a [COLMAP reconstruction](https://colmap.github.io/format.html#images-txt). Importing the file creates [Timeline keyframes](timeline.md#importing-camera-poses-as-keyframes); it does not load a splat scene |
+| Camera pose `.json` | ✅ | ❌ | Camera poses in the INRIA JSON format. Importing the file creates [Timeline keyframes](timeline.md#importing-camera-poses-as-keyframes); it does not load a splat scene |
+| `.html` | ❌ | ✅ | Self-contained viewer app with the compressed splat data embedded in one HTML file |
+| `.zip` | ❌ | ✅ | Viewer package containing an HTML app and a separate `.compressed.ply` file |
 
 :::warning
 
@@ -30409,7 +30423,7 @@ Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY fi
 
 ## Importing Splats
 
-SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG) and `meta.json` (unbundled SOG) formats.
+SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.ksplat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG), and `meta.json` (unbundled SOG) formats. It can also import COLMAP `images.txt` and INRIA camera pose `.json` files to create [camera animation keyframes](timeline.md#importing-camera-poses-as-keyframes).
 
 There are four ways to load a Gaussian Splat file:
 
@@ -30762,7 +30776,7 @@ When you select `Video` from the Render menu, a dialog will appear with several 
   - `360° Equirectangular` - A monoscopic 360° video that can be viewed on YouTube, in VR headsets and in 360°-capable players like VLC
 - **Resolution:** Choose the output resolution. Available options depend on the selected projection:
   - For `Standard`: `960x540`, `1280x720`, `1920x1080` (default), `2560x1440`, `3840x2160`
-  - For `360° Equirectangular` (2:1 aspect ratio): `2048x1024`, `3840x1920` (default), `4096x2048`
+  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048`
 - **Format:** Choose the output video format:
   - `MP4` (default) - Most widely compatible format, ideal for general use
   - `WebM` - Open format, excellent for web use
@@ -30876,11 +30890,13 @@ To create a camera animation keyframe:
 
 The keyframe will appear as a yellow diamond on the timeline at the current frame position. Keyframes store the camera's position and rotation at that moment in time.
 
-## Importing Camera Poses as Keyframes
+## Importing Camera Poses as Keyframes {#importing-camera-poses-as-keyframes}
 
-SuperSplat can import camera poses from [COLMAP](https://colmap.github.io/) reconstructions to automatically create timeline keyframes. This feature allows you to recreate the approximate camera path that was used during the original scanning of your Gaussian Splat scene.
+SuperSplat can import camera poses from [COLMAP](https://colmap.github.io/) reconstructions or INRIA camera pose JSON files to automatically create timeline keyframes. This allows you to recreate the approximate camera path used during the original capture of a Gaussian Splat scene.
 
-To import camera poses:
+### COLMAP `images.txt`
+
+To import COLMAP poses:
 
 1. Obtain the [`images.txt`](https://colmap.github.io/format.html#images-txt) file from your COLMAP reconstruction output
 2. In SuperSplat, select **File > Import** (or drag and drop the `images.txt` file)
@@ -30893,6 +30909,12 @@ Each camera pose in the `images.txt` file will be placed as a keyframe on sequen
 The `images.txt` file contains camera poses expressed as quaternions and translation vectors in COLMAP's coordinate system. SuperSplat automatically converts these to the appropriate camera positions and orientations for the timeline.
 
 :::
+
+### INRIA Camera Pose JSON
+
+SuperSplat also accepts a `.json` file containing an array of INRIA camera entries. Each entry must contain `position` and `rotation`; it can also include `id` or `img_name` for ordering and `fx`, `fy`, `width`, and `height` for calculating the field of view.
+
+Import the file using **File > Import** or drag it onto the Editor. SuperSplat sorts entries by `id`, or by a trailing number in `img_name`, and creates a keyframe for each entry. Use a filename other than `meta.json`, which SuperSplat reserves for unbundled SOG scenes.
 
 ## Editing Keyframes
 
