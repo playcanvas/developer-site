@@ -16,14 +16,14 @@ The key elements of the interface are labeled:
 The Menu Bar gives you access to the most commonly used functions in the SuperSplat Editor.
 
 * **File Menu:** Load and save your projects. Import and export to/from popular file formats.
-* **Edit Menu:** Undo or redo changes, duplicate selected splats, or separate selected splats into a new scene.
+* **Edit Menu:** Undo or redo changes, or duplicate or separate selected Gaussians into a new splat.
 * **Select Menu:** Perform common selection based operations on your loaded scene.
 * **Render Menu:** Render an image or a video of your currently loaded scene.
 * **Help Menu:** Access developer resources related to SuperSplat.
 
 ### Scene Manager
 
-The Scene Manager allows you to manage multiple loaded Gaussian Splat scenes. Click a row to choose the active scene, use the eye icons or Solo mode to control visibility, and use the panel below it for precise transforms. See [Scene Management](scene-management.md) for the complete workflow.
+The Scene Manager lists the imported splats in the project. Click a row to choose the active splat, use the eye icons or Solo mode to control visibility, and use the panel below it for precise transforms. See [Managing Splats](scene-management.md) for the complete workflow.
 
 ### Viewport
 

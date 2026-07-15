@@ -44,7 +44,7 @@ For Picker, Lasso, Polygon, Brush, and Flood selections, hold `Shift` to add, `C
 
 | Action | Shortcut |
 |---|---|
-| Focus on selection or active scene | `F` |
+| Focus on selection or active splat | `F` |
 | Reset camera | `Shift + F` |
 | Toggle orbit/fly controls | `V` |
 | Fly forward/back/left/right | `W` / `S` / `A` / `D` |

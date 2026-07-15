@@ -1,9 +1,9 @@
 ---
 title: Selection and Cleanup
-description: "Select, lock, delete, restore, duplicate, and separate Gaussians while cleaning floaters and cropping splat scenes in SuperSplat."
+description: "Select, lock, delete, restore, duplicate, and separate Gaussians while cleaning floaters and cropping splats in SuperSplat."
 ---
 
-Select a scene in the **Scene Manager** before editing it. Gaussian selection and cleanup operations apply only to that active scene, even when several scenes are visible.
+Select a splat in the **Scene Manager** before editing it. Gaussian selection and cleanup operations apply only to that active splat, even when several splats are visible.
 
 ## Edit Modes
 
@@ -81,18 +81,18 @@ The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **R
 
 ## Lock, Delete, and Restore
 
-Use **Select > Lock** or press `H` to lock the selected Gaussians. Locking clears the selection and prevents those Gaussians from being selected or deleted. This is useful for protecting a finished area while you clean nearby geometry. Choose **Select > Unlock** or press `Shift + H` to unlock all locked Gaussians in the active scene.
+Use **Select > Lock** or press `H` to lock the selected Gaussians. Locking clears the selection and prevents those Gaussians from being selected or deleted. This is useful for protecting a finished area while you clean nearby geometry. Choose **Select > Unlock** or press `Shift + H` to unlock all locked Gaussians in the active splat.
 
-Delete selected Gaussians with **Select > Delete**, `Delete`, or `Backspace`. Deletion is non-destructive while you edit: use Undo to reverse the latest deletion, or choose **Select > Reset** to restore all deleted Gaussians in the active scene. Reset does not unlock locked Gaussians.
+Delete selected Gaussians with **Select > Delete**, `Delete`, or `Backspace`. Deletion is non-destructive while you edit: use Undo to reverse the latest deletion, or choose **Select > Reset** to restore all deleted Gaussians in the active splat. Reset does not unlock locked Gaussians.
 
 Lock, unlock, delete, and reset operations are recorded in the edit history. Removing an entire row from the Scene Manager is different and cannot be undone.
 
 ## Duplicate and Separate a Selection {#duplicate-and-separate-a-selection}
 
-When a Gaussian selection exists, the **Edit** menu provides two ways to turn it into another scene:
+When a Gaussian selection exists, the **Edit** menu provides two ways to turn it into another splat:
 
-- **Duplicate** copies the selected Gaussians into a new scene and keeps the originals unchanged.
-- **Separate** creates a new scene from the selected Gaussians and deletes them from the original scene.
+- **Duplicate** copies the selected Gaussians into a new splat and keeps the originals unchanged.
+- **Separate** creates a new splat from the selected Gaussians and deletes them from the original splat.
 
 Both operations can be undone and are useful for giving one region its own transform, visibility, or [Color](color-and-appearance.md) settings.
 
@@ -106,12 +106,12 @@ Both operations can be undone and are useful for giving one region its own trans
 4. Press `Delete` or `Backspace`.
 5. Inspect the result from several angles and use Undo if too much was removed.
 
-### Crop a Scene
+### Crop a Splat
 
 1. Select the region you want to keep with Box, Sphere, Lasso, or Polygon Select.
 2. Choose **Select > Invert**.
 3. Delete the inverted selection.
-4. Export the cleaned result, or save an `.ssproj` if you want to preserve the scene and project setup.
+4. Export the cleaned result, or save an `.ssproj` if you want to preserve the splat and project setup.
 
 ### Protect Finished Areas
 
@@ -121,12 +121,12 @@ For attribute-driven cleanup, use the [Splat Data panel](data-panel.md) to selec
 
 ## Transforming Splats {#transforming-splats}
 
-Move, Rotate, and Scale affect selected Gaussians when a selection exists, or the whole active scene when nothing is selected. See [Transform, Measure, and Align](transforming-splats.md) for gizmos, numeric transforms, pivots, and scene alignment.
+Move, Rotate, and Scale affect selected Gaussians when a selection exists, or the whole active splat when nothing is selected. See [Transform, Measure, and Align](transforming-splats.md) for gizmos, numeric transforms, pivots, and splat alignment.
 
 ## Measuring and Rescaling Splats {#measuring-and-rescaling-splats}
 
-The Measure tool can place two surface markers, report their distance, and uniformly rescale the active scene to a known length. See [Measure and Rescale a Scene](transforming-splats.md#measure-and-rescale-a-scene).
+The Measure tool can place two surface markers, report their distance, and uniformly rescale the active splat to a known length. See [Measure and Rescale a Splat](transforming-splats.md#measure-and-rescale-a-splat).
 
 ## Merging Splats {#merging-splats}
 
-Load and align multiple scenes, make the scenes to include visible, then choose **File > Export > PLY**. See [Merge Visible Scenes](transforming-splats.md#merge-visible-scenes). **File > Save** creates an editable `.ssproj` instead of a merged PLY.
+Load and align multiple splats, make the splats to include visible, then choose **File > Export > PLY**. See [Merge Visible Splats](transforming-splats.md#merge-visible-splats). **File > Save** creates an editable `.ssproj` instead of a merged PLY.
