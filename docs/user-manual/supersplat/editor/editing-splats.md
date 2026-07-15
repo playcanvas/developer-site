@@ -1,7 +1,9 @@
 ---
-title: Editing Splats
-description: "SuperSplat edit modes (centers versus rings), selection tools, overlays, and workflows for cleaning and modifying splats."
+title: Selection and Cleanup
+description: "Select, lock, delete, restore, duplicate, and separate Gaussians while cleaning floaters and cropping splat scenes in SuperSplat."
 ---
+
+Select a scene in the **Scene Manager** before editing it. Gaussian selection and cleanup operations apply only to that active scene, even when several scenes are visible.
 
 ## Edit Modes
 
@@ -41,7 +43,7 @@ However, please note that the selection behavior is still determined by the acti
 
 <img width="1224" alt="Screenshot 2025-01-06 at 08 51 48" src="/img/user-manual/supersplat/editor/disable-overlay.png" />
 
-## Selecting and Deleting Splats
+## Selection Tools
 
 Cropping splats or deleting unwanted Gaussians is a key function of SuperSplat. To help with this, there are 8 selection tools available:
 
@@ -77,41 +79,54 @@ While Picker, Lasso, Polygon, Brush, or Flood Select is active, the cursor shows
 
 The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **Remove**, and **Intersect** buttons in their toolbar instead of using modifier keys.
 
-### Deleting Splats
+## Lock, Delete, and Restore
 
-Once you are happy with your selection, delete it with **Delete** or **Backspace**.
+Use **Select > Lock** or press `H` to lock the selected Gaussians. Locking clears the selection and prevents those Gaussians from being selected or deleted. This is useful for protecting a finished area while you clean nearby geometry. Choose **Select > Unlock** or press `Shift + H` to unlock all locked Gaussians in the active scene.
 
-## Transforming Splats
+Delete selected Gaussians with **Select > Delete**, `Delete`, or `Backspace`. Deletion is non-destructive while you edit: use Undo to reverse the latest deletion, or choose **Select > Reset** to restore all deleted Gaussians in the active scene. Reset does not unlock locked Gaussians.
 
-SuperSplat can translate, rotate and scale splats. To do this, select a splat in the Scene Manager and activate one of the gizmos via the horizontal icon bar.
+Lock, unlock, delete, and reset operations are recorded in the edit history. Removing an entire row from the Scene Manager is different and cannot be undone.
 
-To achieve fine grain control over the transform of the selected splat, you can use the TRANSFORM panel (below the SCENE MANAGER panel).
+## Duplicate and Separate a Selection {#duplicate-and-separate-a-selection}
 
-To set the origin of the currently active gizmo, double click anywhere in the 3D view.
+When a Gaussian selection exists, the **Edit** menu provides two ways to turn it into another scene:
 
-## Measuring and Rescaling Splats
+- **Duplicate** copies the selected Gaussians into a new scene and keeps the originals unchanged.
+- **Separate** creates a new scene from the selected Gaussians and deletes them from the original scene.
 
-SuperSplat provides a measurement tool to help you measure distances within your splat scene and rescale it based on real-world measurements. This is accessible via the Measurement icon in the bottom toolbar.
+Both operations can be undone and are useful for giving one region its own transform, visibility, or [Color](color-and-appearance.md) settings.
 
-**To use the measurement tool:**
+## Cleanup Recipes
 
-1. Click the Measurement icon in the bottom toolbar to activate the tool.
-2. Click in the Viewport to place the first marker.
-3. Click again to place the second marker.
-4. Click on either marker to activate the translation gizmo and tweak its location.
-5. The length between the two markers is displayed in a popup above the bottom toolbar.
+### Remove Floaters
 
-**To rescale the scene:**
+1. Switch to **Rings** mode so selection stops at the topmost visible surface.
+2. Use Flood Select for an isolated patch, or Lasso, Brush, Sphere, or Box Select for a larger region.
+3. Rotate the camera and add to or remove from the selection until the intended geometry is isolated.
+4. Press `Delete` or `Backspace`.
+5. Inspect the result from several angles and use Undo if too much was removed.
 
-- Edit the length value in the popup to rescale the entire scene based on that modified length.
+### Crop a Scene
 
-**Keyboard shortcuts:**
+1. Select the region you want to keep with Box, Sphere, Lasso, or Polygon Select.
+2. Choose **Select > Invert**.
+3. Delete the inverted selection.
+4. Export the cleaned result, or save an `.ssproj` if you want to preserve the scene and project setup.
 
-- Press `Delete` or `Backspace` to remove the placed markers.
-- Press `Escape` to deactivate the Measurement tool.
+### Protect Finished Areas
 
-## Merging Splats
+Select a finished region and press `H` to lock it. Continue cleaning the remaining selectable Gaussians, then press `Shift + H` when you need to edit the protected region again.
 
-To merge multiple splat files into one `.ply`, load them into the Scene Manager and apply any required transforms or edits. Make sure every splat you want to include is visible, then choose **File > Export > PLY**. The export combines the visible splats into a single file.
+For attribute-driven cleanup, use the [Splat Data panel](data-panel.md) to select ranges such as low opacity or extreme scale values.
 
-**File > Save** saves an editable `.ssproj` project instead; it does not export a merged PLY. See [Managing Projects](managing-projects.md) for details.
+## Transforming Splats {#transforming-splats}
+
+Move, Rotate, and Scale affect selected Gaussians when a selection exists, or the whole active scene when nothing is selected. See [Transform, Measure, and Align](transforming-splats.md) for gizmos, numeric transforms, pivots, and scene alignment.
+
+## Measuring and Rescaling Splats {#measuring-and-rescaling-splats}
+
+The Measure tool can place two surface markers, report their distance, and uniformly rescale the active scene to a known length. See [Measure and Rescale a Scene](transforming-splats.md#measure-and-rescale-a-scene).
+
+## Merging Splats {#merging-splats}
+
+Load and align multiple scenes, make the scenes to include visible, then choose **File > Export > PLY**. See [Merge Visible Scenes](transforming-splats.md#merge-visible-scenes). **File > Save** creates an editable `.ssproj` instead of a merged PLY.

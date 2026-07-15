@@ -23,7 +23,7 @@ The Menu Bar gives you access to the most commonly used functions in the SuperSp
 
 ### Scene Manager
 
-The Scene Manager allows you to manage multiple loaded Gaussian Splat scenes (typically loaded from imported PLY files). You can also use this panel to set the transform of the selected scene.
+The Scene Manager allows you to manage multiple loaded Gaussian Splat scenes. Click a row to choose the active scene, use the eye icons or Solo mode to control visibility, and use the panel below it for precise transforms. See [Scene Management](scene-management.md) for the complete workflow.
 
 ### Viewport
 
@@ -39,7 +39,7 @@ This vertical toolbar contains icons related to splat visualization, camera cont
 
 ### Bottom Toolbar
 
-This horizontal toolbar contains icons related to undo/redo, splat selection and transformation.
+This horizontal toolbar contains undo and redo, Gaussian selection tools, Move, Rotate, Scale, Measure, coordinate-space and pivot controls. See [Selection and Cleanup](editing-splats.md) and [Transform, Measure, and Align](transforming-splats.md).
 
 ### Animation Timeline
 
@@ -47,7 +47,7 @@ The Timeline allows you to create and delete keyframes for the viewport camera. 
 
 ### Histogram Panel
 
-This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics.
+This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics. See the [Splat Data panel](data-panel.md).
 
 ## Settings and Preferences
 

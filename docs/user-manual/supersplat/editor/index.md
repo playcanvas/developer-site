@@ -51,4 +51,7 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 
 - Get oriented with the [Interface Overview](interface)
 - Learn the supported [Import and Export](import-export) formats
+- Clean a capture with [Selection and Cleanup](editing-splats), then use [Transform, Measure, and Align](transforming-splats) to prepare it
+- Work with multiple captures using [Scene Management](scene-management), and finish their look with [Color and Appearance](color-and-appearance)
+- Keep the [Keyboard Shortcuts](keyboard-shortcuts) reference nearby, or check [Troubleshooting](troubleshooting) when a workflow does not behave as expected
 - Once your splat is clean, [Publish](publishing) it to superspl.at to land on your [Manage page](../manage) and open it in [Studio](../studio/)
