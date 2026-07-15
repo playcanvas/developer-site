@@ -119,14 +119,10 @@ Picker、Lasso、Polygon、Brush、またはFlood Selectがアクティブな間
 
 属性に基づくクリーンアップには、[Splat Dataパネル](data-panel.md)を使用して、低い不透明度や極端なスケールなどの範囲を選択します。
 
-## Splatsの変形 {#transforming-splats}
+<span id="transforming-splats"></span>
+<span id="measuring-and-rescaling-splats"></span>
+<span id="merging-splats"></span>
 
-ガウシアンが選択されている場合、Move、Rotate、Scaleはその選択範囲に作用します。何も選択されていない場合は、アクティブスプラット全体に作用します。ギズモ、数値変形、ピボット、スプラットの位置合わせについては、[変形、測定、位置合わせ](transforming-splats.md)を参照してください。
+## 次のステップ
 
-## Splatsの測定とリスケール {#measuring-and-rescaling-splats}
-
-Measureツールでは、2つのサーフェスマーカーを配置して距離を表示し、既知の長さに合わせてアクティブスプラットを均一にリスケールできます。[スプラットの測定とリスケール](transforming-splats.md#スプラットの測定とリスケール)を参照してください。
-
-## Splatsのマージ {#merging-splats}
-
-複数のスプラットを読み込んで位置合わせし、含めるスプラットを表示して、**File > Export > PLY**を選択します。[表示中のスプラットの結合](transforming-splats.md#表示中のスプラットの結合)を参照してください。**File > Save**では、結合済みのPLYではなく編集可能な`.ssproj`が作成されます。
+[変形、測定、位置合わせ](transforming-splats.md)に進み、選択したガウシアンまたはスプラット全体の変形、スケール調整、キャプチャの位置合わせ、表示中のスプラットの結合を行います。

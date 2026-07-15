@@ -119,14 +119,10 @@ Select a finished region and press `H` to lock it. Continue cleaning the remaini
 
 For attribute-driven cleanup, use the [Splat Data panel](data-panel.md) to select ranges such as low opacity or extreme scale values.
 
-## Transforming Splats {#transforming-splats}
+<span id="transforming-splats"></span>
+<span id="measuring-and-rescaling-splats"></span>
+<span id="merging-splats"></span>
 
-Move, Rotate, and Scale affect selected Gaussians when a selection exists, or the whole active splat when nothing is selected. See [Transform, Measure, and Align](transforming-splats.md) for gizmos, numeric transforms, pivots, and splat alignment.
+## Next Step
 
-## Measuring and Rescaling Splats {#measuring-and-rescaling-splats}
-
-The Measure tool can place two surface markers, report their distance, and uniformly rescale the active splat to a known length. See [Measure and Rescale a Splat](transforming-splats.md#measure-and-rescale-a-splat).
-
-## Merging Splats {#merging-splats}
-
-Load and align multiple splats, make the splats to include visible, then choose **File > Export > PLY**. See [Merge Visible Splats](transforming-splats.md#merge-visible-splats). **File > Save** creates an editable `.ssproj` instead of a merged PLY.
+Continue to [Transform, Measure, and Align](transforming-splats.md) to transform selected Gaussians or whole splats, calibrate scale, align captures, and merge visible splats.
