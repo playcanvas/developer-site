@@ -56,6 +56,8 @@ Commercial desktop application for creating Gaussian splats with advanced featur
 [**LichtFeld Studio**](https://lichtfeld.io/) (Windows, Linux)  
 Open-source desktop application to train, edit, and render 3D Gaussian Splats. Includes an editing suite with transform, crop, and selection tools. Supports COLMAP-based datasets for training and can export PLY for interchange. Requires an NVIDIA GPU with CUDA 12.8+.
 
+Install the [SuperSplat Upload integration](/user-manual/supersplat/integrations/lichtfeld-studio) to publish directly from LichtFeld Studio.
+
 [**Brush**](https://github.com/ArthurBrussee/brush) (Windows, Linux, macOS, Android, Web)  
 Open source, cross-platform engine with broad device compatibility. Uses WebGPU-based rendering, offers real-time training visualization, has no CUDA dependency, supports browsers, and works on mobile devices. It expects existing camera poses from COLMAP or Nerfstudio-format datasets; it does not generate camera poses itself.
 

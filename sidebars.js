@@ -558,6 +558,17 @@ const sidebars = {
           ],
         },
         'user-manual/supersplat/upload',
+        {
+          type: 'category',
+          label: 'Integrations',
+          link: {
+            type: 'doc',
+            id: 'user-manual/supersplat/integrations/index',
+          },
+          items: [
+            'user-manual/supersplat/integrations/lichtfeld-studio',
+          ],
+        },
         'user-manual/supersplat/manage',
         {
           type: 'category',
