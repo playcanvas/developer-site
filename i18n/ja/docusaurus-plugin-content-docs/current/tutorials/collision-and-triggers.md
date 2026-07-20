@@ -6,7 +6,7 @@ description: Rigid Body付きのコリジョン形状で物理接触を処理し
 ---
 
 <div className="iframe-container">
-    <iframe src="https://playcanv.as/p/1Hj5fX2I/" title="Collision and Triggers" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowFullScreen></iframe>
+    <iframe loading="lazy" src="https://playcanv.as/p/1Hj5fX2I/" title="Collision and Triggers" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowFullScreen></iframe>
 </div>
 
 *剛体同士が衝突すると効果音が再生され、トリガーボリュームに入るとランプの上へ戻ります。*
