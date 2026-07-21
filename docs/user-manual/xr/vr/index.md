@@ -11,12 +11,6 @@ PlayCanvas also lets you create Virtual Reality (VR) applications.
 
 VR capabilities are available across various platforms: desktop (Chrome, Edge), mobile (Chrome, Samsung) and HMDs (Apple Vision Pro, Meta, Magic Leap, Pico).
 
-:::warning
-
-Due to an issue in WebKit on Apple Vision Pro, you must currently disable `Anti-Alias` in the Scene Settings of your project.
-
-:::
-
 ## Getting started with WebXR VR
 
 To start a VR session, device support and availability should be checked first. Then, on a user interaction such as a button click or other input, a VR session can be started:
