@@ -85,7 +85,7 @@ When creating shader definitions directly using `ShaderDefinitionUtils.createDef
 
 ## Restrictions
 
-- The render target must have exactly one color attachment. Dual-source blending cannot be combined with [Multiple Render Targets](./multiple-render-targets).
+- The render target must have exactly one color attachment. Dual-source blending cannot be combined with [Multiple Render Targets](/user-manual/graphics/advanced-rendering/multiple-render-targets).
 - Support is device-dependent, so always check `device.supportsDualSourceBlending` before assigning a secondary source blend factor.
 - Dual-source blending is selected independently for each material and draw call. Other materials in the same render pass do not need dual-source outputs.
 

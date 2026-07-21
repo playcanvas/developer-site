@@ -12,7 +12,7 @@ MRTは、PlayCanvasが動作するすべてのデバイス（WebGL2およびWebG
 - 複数のレンダーターゲットのすべてのカラーアタッチメントは、同じ幅と高さを持ちます。
 - すべてのカラーアタッチメントは、[`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor)を使用して指定された同じ値にクリアされます。
 - すべてのカラーアタッチメントは、[`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html)を使用して指定された同じ書き込みマスクとアルファブレンドモードを使用します。
-- [デュアルソースブレンディング](./dual-source-blending)にはカラーアタッチメントが 1 つだけ必要なため、MRT と組み合わせることはできません。
+- [デュアルソースブレンディング](/user-manual/graphics/advanced-rendering/dual-source-blending)にはカラーアタッチメントが 1 つだけ必要なため、MRT と組み合わせることはできません。
 
 ## MRTの使用方法
 
