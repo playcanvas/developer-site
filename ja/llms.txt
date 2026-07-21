@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.6
-Total Documents: 474
+Total Documents: 477
 Generated: 2026-07-21
 
 ## Instructions for Large Language Models
@@ -495,6 +495,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 ### Assets
 - [Assets](https://developer.playcanvas.com/user-manual/assets/): Understand how PlayCanvas manages assets and resources including models, textures, audio, and scripts.
 - [Asset Registry](https://developer.playcanvas.com/user-manual/assets/asset-registry/): Use the AssetRegistry API to find, load, and manage assets at runtime in your PlayCanvas application.
+- [Custom Asset Parsers](https://developer.playcanvas.com/user-manual/assets/custom-parsers/): Register custom file format parsers with the engine's resource handlers to load new asset formats or override the built-in ones.
 - [Third-party Asset Sites](https://developer.playcanvas.com/user-manual/assets/finding/): Free and paid sources for 3D models, textures, sound effects, and music to use in your PlayCanvas projects.
 - [Loading and Unloading](https://developer.playcanvas.com/user-manual/assets/loading-unloading/): Dynamically load and unload assets at runtime to manage memory and stream content on demand.
 - [Importing 3D Models](https://developer.playcanvas.com/user-manual/assets/models/): Import GLB, FBX, COLLADA, and OBJ models into PlayCanvas and convert them into ready-to-use Templates and Render assets.
@@ -603,9 +604,11 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Recommended Tools](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/recommended-tools/): Third-party tools to train and export Gaussian splats: comparison table, capture apps, and research pipelines PlayCanvas does not ship.
 - [Taking Photos](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/taking-photos/): Capture guidance for high-quality splat training: equipment choices, shooting technique, coverage, and how photo issues affect results.
 - [Editing and Publishing Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/editing/): Edit, publish, curate, share, and discover Gaussian Splats with the SuperSplat platform — and use the splat-transform CLI for scripted workflows.
-- [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/): Compare PLY, SOG and Streamed SOG splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows.
+- [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/): Compare PLY, SOG, Streamed SOG, GLB and SPZ splat formats for editing versus web delivery, size and quality trade-offs, and typical conversion workflows.
+- [The GLB Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/glb/): GLB format for 3D Gaussian splats: the KHR_gaussian_splatting glTF extension, attribute layout, engine loading via container assets, and conversion with SplatTransform.
 - [The PLY Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply/): PLY format for 3D Gaussian splats: header layout, vertex properties, binary versus ASCII, and how training tools encode splat fields.
 - [The SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog/): SOG (Spatially Ordered Gaussians) specification: WebP textures, meta.json layout, quantization, and bundled versus unbundled files.
+- [The SPZ Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/spz/): SPZ format for 3D Gaussian splats: Niantic's compressed splat format, loading in the engine via an external parser script, and conversion with SplatTransform.
 - [The Streamed SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog/): Streamed SOG specification: lod-meta.json layout, spatial tree, LOD chunk references, and environment splats.
 - [Splat Rendering Architecture](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/): How PlayCanvas renders Gaussian splats: the work buffer pipeline, global sorting across components, and access to advanced features.
 - [Renderers](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/renderers/): Gaussian splat renderers in PlayCanvas: raster with CPU sorting vs GPU sorting, selecting a renderer, sorting, and depth buffer limits.

@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 474
+Total Documents: 477
 Generated: 2026-07-21
 
 ================================================================================
@@ -3066,6 +3066,145 @@ this.app.assets.load(asset);
 
 --------------------------------------------------------------------------------
 
+## Custom Asset Parsers
+
+URL: https://developer.playcanvas.com/user-manual/assets/custom-parsers/
+
+Every asset type in PlayCanvas is loaded by a **resource handler** — one per asset type (`'texture'`, `'model'`, `'audio'` and so on). Within a handler, the individual file formats are handled by **parsers**: the texture handler, for example, has parsers for browser images, DDS, KTX2 and Basis. Handlers expose a public registry for these parsers, so you can add support for a new file format — or override a built-in one — without modifying the engine.
+
+:::note
+
+Custom parsers are available from **engine v2.21.0**. They are an engine runtime API: parsers run in your application at load time and do not affect the Editor's asset import pipeline.
+
+:::
+
+## How asset loading works
+
+When an asset is loaded, the [`ResourceLoader`](https://api.playcanvas.com/engine/classes/ResourceLoader.html) looks up the [`ResourceHandler`](https://api.playcanvas.com/engine/classes/ResourceHandler.html) registered for the asset's type. The handler then selects a parser by asking each registered parser, **newest-first**, whether it recognizes the resource:
+
+1. The handler builds a context describing the resource (its URL, file extension and so on)
+2. The most recently registered parser whose `canParse(context)` returns `true` is selected
+3. The parser's `load()` fetches the file and delivers its data
+4. The parser's `open()` converts that data into the runtime resource (a `Texture`, a `Model`, ...)
+
+Because selection is newest-first, a parser you register later takes precedence over the built-in ones for any resource it claims.
+
+## The parser contract
+
+A parser is a plain object or class instance with the following methods:
+
+```javascript
+class MyParser {
+    // return true if this parser handles the described resource
+    canParse(context) {
+        return context.ext === 'myformat';
+    }
+
+    // fetch the resource and deliver its raw data via callback(err, data)
+    load(url, callback, asset) {
+        this.handler.fetch(url, pc.Http.ResponseType.ARRAY_BUFFER, callback, asset);
+    }
+
+    // optional: convert the loaded data into the runtime resource
+    open(url, data, asset) {
+        return data;
+    }
+}
+```
+
+The `context` passed to `canParse` describes the resource being loaded:
+
+| Property   | Description                                                                  |
+| ---------- | ---------------------------------------------------------------------------- |
+| `url`      | The original resource URL, with any query string removed (or `null`)         |
+| `ext`      | The lower-cased file extension without the leading dot, for example `'tga'`  |
+| `basename` | The lower-cased file name, for example `'lod-meta.json'`                     |
+| `asset`    | The [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html) being loaded, if any |
+| `app`      | The running [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) |
+
+When a parser is registered, the handler assigns itself to the parser's `handler` property. This gives `load()` access to `this.handler.fetch(url, responseType, callback, asset)` — a helper that downloads the resource with the handler's retry settings and reuses pre-fetched data when available — as well as any handler state (for example `this.handler.app`).
+
+## Registering a parser
+
+Parsers are registered on the handler for their asset type:
+
+```javascript
+app.loader.getHandler('texture').addParser(new TgaParser());
+```
+
+Register parsers before starting any loads for that asset type. A registered parser can be removed again with `removeParser(parser)`, and the currently registered parsers can be inspected via the read-only `parsers` property.
+
+Since selection is newest-first, registering a parser that claims a format already covered by a built-in parser overrides the built-in — this works for specific extensions as well as for catch-all parsers.
+
+## Example: a TGA texture parser
+
+The engine does not load `.tga` files at runtime. A custom parser adds support:
+
+```javascript
+class TgaParser {
+    canParse(context) {
+        return context.ext === 'tga';
+    }
+
+    load(url, callback, asset) {
+        this.handler.fetch(url, pc.Http.ResponseType.ARRAY_BUFFER, callback, asset);
+    }
+
+    // texture parsers use an extended open signature: the handler passes the graphics
+    // device and the texture options derived from the asset's data
+    open(url, data, device, textureOptions) {
+        // decode the TGA file into RGBA8 pixels (using your decoder of choice)
+        const { width, height, pixels } = decodeTga(data);
+
+        const texture = new pc.Texture(device, {
+            name: url,
+            width: width,
+            height: height,
+            format: pc.PIXELFORMAT_RGBA8,
+            levels: [pixels],
+
+            // spread the asset-derived options last, so that asset settings
+            // (srgb, filtering, mipmaps, ...) override the defaults above
+            ...textureOptions
+        });
+
+        texture.upload();
+
+        return texture;
+    }
+}
+
+app.loader.getHandler('texture').addParser(new TgaParser());
+```
+
+With the parser registered, `.tga` files load like any other texture:
+
+```javascript
+const asset = new pc.Asset('picture', 'texture', { url: 'images/picture.tga' }, { srgb: true });
+app.assets.add(asset);
+app.assets.load(asset);
+```
+
+For a complete, runnable example of a custom **model** parser, see the engine's [OBJ parser](https://github.com/playcanvas/engine/blob/main/scripts/parsers/obj-model.js) and the [OBJ loader example](https://playcanvas.github.io/#/loaders/obj) that uses it.
+
+## Handler notes
+
+Most format-bearing handlers participate in the parser registry: `model`, `texture`, `material`, `gsplat`, `container`, `animation`, `animclip`, `animstategraph`, `template`, `audio`, `json`, `css`, `html`, `text`, `shader` and `binary`. A few details vary by asset type:
+
+- **texture** — parsers implement the extended `open(url, data, device, textureOptions)` shown above. The built-in browser image parser is a catch-all, so unknown extensions fall back to it unless your parser claims them.
+- **material** — the handler's asset binding (assigning texture assets referenced by the material data) applies to `StandardMaterial` produced by the built-in JSON parser; materials produced by custom parsers manage their own asset references.
+- **audio** — the sound manager is available to parsers as `this.handler.manager`; a custom parser can decode to an `AudioBuffer` and return it wrapped in a `pc.Sound`.
+- Handlers that compose other assets rather than parse file formats (`cubemap`, `font`, `sprite`, `textureatlas`) and special-purpose handlers (`bundle`, `script`, `folder`) do not consult registered parsers.
+
+## See Also
+
+- [`ResourceHandler` API Reference](https://api.playcanvas.com/engine/classes/ResourceHandler.html)
+- [`ResourceLoader` API Reference](https://api.playcanvas.com/engine/classes/ResourceLoader.html)
+- [Supported Formats](supported-formats.md)
+- [Loading and Unloading](loading-unloading.md)
+
+--------------------------------------------------------------------------------
+
 ## Third-party Asset Sites
 
 URL: https://developer.playcanvas.com/user-manual/assets/finding/
@@ -3774,11 +3913,18 @@ For best browser compatibility, provide both MP3 and OGG versions of audio files
 | WebAssembly | `.wasm` | Compiled binary modules |
 | Binary | `.bin` | Raw binary data |
 | PLY | `.ply` | 3D Gaussian Splat data |
+| glTF Binary | `.glb` | 3D Gaussian Splat data using the [KHR_gaussian_splatting](/user-manual/gaussian-splatting/formats/glb) extension |
+| SPZ | `.spz` | Compressed 3D Gaussian Splat data ([Niantic SPZ format](/user-manual/gaussian-splatting/formats/spz)), loaded via a parser script |
+
+## Custom Formats
+
+The lists above cover the engine's built-in loaders, but they are not fixed: at runtime, custom parsers can add support for new file formats — or override the built-in ones — for most asset types. See [Custom Asset Parsers](custom-parsers.md).
 
 ## See Also
 
 - [Models](models/index.md) - Preparing 3D models for PlayCanvas
 - [Asset Inspectors](/user-manual/editor/assets/inspectors/) - Configure asset properties in the Editor
+- [Custom Asset Parsers](custom-parsers.md) - Load custom file formats at runtime
 
 --------------------------------------------------------------------------------
 
@@ -14756,7 +14902,7 @@ Both the Convert page and the splat-transform CLI use the same underlying librar
 
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/
 
-PlayCanvas supports three formats for 3D Gaussian Splat data:
+PlayCanvas supports five formats for 3D Gaussian Splat data:
 
 ## [PLY Format](./ply.md) - Source & Interchange
 
@@ -14782,21 +14928,110 @@ SOG chunks organized into a spatial tree with multiple levels of detail. Viewers
 - **File size**: Small per chunk, loaded on demand
 - **Quality**: Visually optimized, view-dependent detail
 
+## [GLB Format](./glb.md) - Standards-Based Interchange
+
+Binary glTF with the Khronos [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension. Splats travel through standard glTF pipelines and can be combined with regular mesh content.
+
+- **Use for**: Interoperability, standard glTF tooling and pipelines
+- **File size**: Large (uncompressed, similar to PLY)
+- **Quality**: Lossless
+
+## [SPZ Format](./spz.md) - Compressed Interchange
+
+[Niantic's](https://github.com/nianticlabs/spz) open source compressed splat format, roughly 10× smaller than PLY. Loaded via a parser script that ships with the engine.
+
+- **Use for**: Assets from the Niantic/Scaniverse ecosystem
+- **File size**: Small (compressed)
+- **Quality**: Visually optimized
+
 ## Quick Comparison
 
-| | PLY | SOG | Streamed SOG |
-|---|---|---|---|
-| **Size** | Large | Small (15-20× compression) | Small (SOG chunks, loaded on demand) |
-| **Quality** | Lossless | Lossy | Lossy, view-dependent detail |
-| **Use** | Source/editing | Runtime/delivery | Very large scenes |
-| **Speed** | Slow loading | Fast loading | Progressive streaming |
+| | PLY | SOG | Streamed SOG | GLB | SPZ |
+|---|---|---|---|---|---|
+| **Size** | Large | Small (15-20× compression) | Small (SOG chunks, loaded on demand) | Large | Small (~10× compression) |
+| **Quality** | Lossless | Lossy | Lossy, view-dependent detail | Lossless | Lossy |
+| **Use** | Source/editing | Runtime/delivery | Very large scenes | glTF interchange | Niantic ecosystem |
+| **Speed** | Slow loading | Fast loading | Progressive streaming | Fast loading | Fast loading |
 
 ## Workflow
 
 1. Train and edit with **PLY**
 2. Convert to **SOG** for production using [SplatTransform](/user-manual/splat-transform/)
 3. For very large scenes, convert to **Streamed SOG** instead
-4. Deploy for optimal performance
+4. Use **GLB** when splats need to flow through standard glTF pipelines
+5. Load **SPZ** directly when assets come from tools like Scaniverse
+6. Deploy for optimal performance
+
+--------------------------------------------------------------------------------
+
+## The GLB Format
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/glb/
+
+**GLB** (binary [glTF](https://www.khronos.org/gltf/)) can store 3D Gaussian Splat data using the Khronos [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension. This makes splats first-class citizens of the glTF ecosystem: they travel through standard glTF pipelines and can live alongside regular meshes, materials and animations in a single file.
+
+You can create these files with **[SplatTransform](/user-manual/splat-transform/)** and load them directly with the PlayCanvas Engine.
+
+## How Splats Are Stored
+
+The extension stores each splat scene as a glTF mesh primitive with `POINTS` topology. Splat properties are supplied as vertex attributes:
+
+| Attribute | Type | Contents |
+| --------- | ---- | -------- |
+| `POSITION` | VEC3 | Splat center positions |
+| `KHR_gaussian_splatting:ROTATION` | VEC4 | Rotation quaternion (xyzw) |
+| `KHR_gaussian_splatting:SCALE` | VEC3 | Per-axis size in **linear** space |
+| `KHR_gaussian_splatting:OPACITY` | SCALAR | Opacity with sigmoid already applied |
+| `KHR_gaussian_splatting:SH_DEGREE_{d}_COEF_{n}` | VEC3 | Spherical harmonics coefficients (RGB per coefficient) |
+| `COLOR_0` | VEC4 | Optional fallback color for viewers without splat support |
+
+Some differences from the [PLY format](./ply.md) worth knowing about:
+
+- **Activated values**: scale is stored in linear space (PLY stores log-space) and opacity is post-sigmoid (PLY stores pre-sigmoid values).
+- **Coordinate system**: splat data uses the standard glTF coordinate system (+Y up), so unlike PLY files, no flip rotation is needed when placing the loaded splat in a scene.
+- **Fallback rendering**: viewers that don't understand the extension can still render the `COLOR_0` point cloud.
+
+## Creating GLB Files
+
+Convert any supported splat format using [SplatTransform](/user-manual/splat-transform/):
+
+```bash
+splat-transform scene.ply scene.glb
+```
+
+## Loading in PlayCanvas
+
+Splat GLB files load as **container** assets (like any other glTF content), not as `gsplat` assets:
+
+```javascript
+const asset = new pc.Asset('scene', 'container', { url: 'scene.glb' });
+app.assets.add(asset);
+app.assets.load(asset);
+
+asset.ready(() => {
+    // creates an entity hierarchy with gsplat components
+    const entity = asset.resource.instantiateRenderEntity();
+    app.root.addChild(entity);
+});
+```
+
+The container exposes the loaded splats as subordinate `gsplat` assets via `asset.resource.gsplats`, mirroring how renders and materials are exposed. Make sure your application registers the `GSplatComponentSystem`.
+
+## Engine Support Notes
+
+- Only the `ellipse` kernel (standard 3D Gaussian Splatting) is supported. Other kernels render as `ellipse` with a warning in debug builds.
+- The `sortingMethod` and `projection` properties are ignored — sorting is controlled by the engine's global [gsplat settings](https://api.playcanvas.com/engine/classes/GSplatParams.html).
+- The `KHR_gaussian_splatting_compression_spz_2` compression extension (still a draft) is not supported.
+
+## When to Use GLB
+
+GLB stores splat data uncompressed, so files are comparable in size to PLY. Use it when you need splats in standards-based glTF pipelines or combined with mesh content in a single asset.
+
+:::tip
+
+For web delivery, [SOG](./sog.md) remains the recommended format — it offers 15-20× compression and faster loading.
+
+:::
 
 --------------------------------------------------------------------------------
 
@@ -15283,6 +15518,69 @@ for (let c = 0; c < shCoeffs; c++) {
 * Additional optional properties may appear in future versions; readers **should** ignore unrecognized fields.
 
 ---
+
+--------------------------------------------------------------------------------
+
+## The SPZ Format
+
+URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/spz/
+
+**SPZ** is an open source compressed format for 3D Gaussian Splat data from [Niantic](https://github.com/nianticlabs/spz). It stores quantized splat attributes in ZSTD compressed streams, making files roughly 10× smaller than the PLY equivalent with virtually no perceptible loss in visual quality. It is the native format of apps like Scaniverse.
+
+You can create these files with **[SplatTransform](/user-manual/splat-transform/)** and load them with the PlayCanvas Engine using a parser script.
+
+## Creating SPZ Files
+
+Convert any supported splat format using [SplatTransform](/user-manual/splat-transform/):
+
+```bash
+splat-transform scene.ply scene.spz
+```
+
+This writes SPZ version 4 by default, which is the version the engine parser supports.
+
+## Loading in PlayCanvas
+
+The SPZ parser is not part of the engine — it ships as a script with the engine ([`scripts/esm/parsers/spz-parser.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/parsers/spz-parser.mjs)) and is registered with the `gsplat` resource handler by the application.
+
+The SPZ attribute streams are ZSTD compressed, so the parser also needs a ZSTD decompression WebAssembly module to be registered. A prebuilt module is available in the [engine repository](https://github.com/playcanvas/engine/tree/main/examples/assets/wasm/zstd).
+
+```javascript
+
+// the spz attribute streams are ZSTD compressed - register a decoder module
+pc.WasmModule.setConfig('ZstdDecoderModule', {
+    glueUrl: 'zstd.wasm.js',
+    wasmUrl: 'zstd.wasm.wasm'
+});
+
+// register the spz parser with the gsplat resource handler
+app.loader.getHandler('gsplat').addParser(new SpzParser(app));
+
+// spz files then load as regular gsplat assets
+const asset = new pc.Asset('scene', 'gsplat', { url: 'scene.spz' });
+app.assets.add(asset);
+app.assets.load(asset);
+```
+
+See the [simple-spz example](https://playcanvas.github.io/#/gaussian-splatting/simple-spz) for a complete setup.
+
+## Engine Support Notes
+
+- Only SPZ **version 4** is supported. Older gzip-based files (versions 1–3) are rejected — reconvert them with [SplatTransform](/user-manual/splat-transform/).
+- The splat data is kept in its quantized form in GPU memory (roughly 20 bytes per splat plus spherical harmonics) and dequantized in the shader, so GPU memory use is comparable to compressed PLY and SOG rather than uncompressed formats.
+- Spherical harmonics are supported up to 3 bands. Files with degree 4 harmonics load with the extra band ignored.
+- **Coordinate system**: splat data uses a +Y up coordinate system (like glTF), so unlike PLY files, no flip rotation is needed when placing the loaded splat in a scene.
+- The `antialiased` flag and vendor extensions are ignored.
+
+## When to Use SPZ
+
+Use SPZ when your splat assets already exist in this format — for example scans captured with Scaniverse or content from tools built around the Niantic ecosystem.
+
+:::tip
+
+For web delivery, [SOG](./sog.md) remains the recommended format — it offers stronger compression and faster loading, and is supported by the engine out of the box.
+
+:::
 
 --------------------------------------------------------------------------------
 
@@ -28656,7 +28954,7 @@ SplatTransform detects file format from the file extension:
 | `.ksplat`         | ✅    | ❌     | Compressed splat format (mkkellogg format)                                                                                                           |
 | `.splat`          | ✅    | ❌     | Compressed splat format (antimatter15 format)                                                                                                        |
 | `.mjs`            | ✅    | ❌     | Generate a scene using an mjs script (Beta)                                                                                                          |
-| `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension    |
+| `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension, [loadable directly](/user-manual/gaussian-splatting/formats/glb) by the PlayCanvas Engine |
 | `.csv`            | ❌    | ✅     | Comma-separated values spreadsheet                                                                                                                   |
 | `.html`           | ❌    | ✅     | HTML viewer app (single-page or unbundled) based on SOG                                                                                              |
 | `.voxel.json`     | ❌    | ✅     | Sparse voxel octree for collision detection. See the [Collision Mesh](/user-manual/splat-transform/collision) guide. Output filename must end with `.voxel.json` (the prefix is up to you, e.g. `room.voxel.json`) |
@@ -36608,12 +36906,6 @@ PlayCanvas also lets you create Virtual Reality (VR) applications.
 ## Platforms
 
 VR capabilities are available across various platforms: desktop (Chrome, Edge), mobile (Chrome, Samsung) and HMDs (Apple Vision Pro, Meta, Magic Leap, Pico).
-
-:::warning
-
-Due to an issue in WebKit on Apple Vision Pro, you must currently disable `Anti-Alias` in the Scene Settings of your project.
-
-:::
 
 ## Getting started with WebXR VR
 
