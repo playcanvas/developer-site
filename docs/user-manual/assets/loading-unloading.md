@@ -156,6 +156,23 @@ This is a process-global limit (it applies to the shared HTTP layer, matching th
 
 Editor projects can also configure this via the [Network Settings](../editor/interface/settings/network.md) panel.
 
+## Loading with Credentials
+
+By default, asset requests are sent without credentials. If your assets are served from an authenticated cross-origin host - one that requires cookies, client TLS certificates or HTTP authentication - enable credentials globally:
+
+```javascript
+// Send all asset requests with credentials
+this.app.loader.withCredentials = true;
+```
+
+Set this **before** preloading or loading any assets, so the requests pick it up. The server must respond with a non-wildcard `Access-Control-Allow-Origin` and `Access-Control-Allow-Credentials: true`, otherwise the browser blocks the response.
+
+:::note
+
+This is a process-global setting (it applies to the shared HTTP layer), so with multiple applications on a page the last value set wins. It applies to all `XMLHttpRequest`-based loads, which covers the large majority of assets.
+
+:::
+
 ## Unloading Assets
 
 To free memory, you can unload assets that are no longer needed:
