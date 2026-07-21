@@ -657,6 +657,7 @@ const sidebars = {
         'user-manual/assets/preloading',
         'user-manual/assets/loading-unloading',
         'user-manual/assets/supported-formats',
+        'user-manual/assets/custom-parsers',
         {
           type: 'category',
           label: 'Models',
