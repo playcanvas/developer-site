@@ -61,6 +61,11 @@ At device creation, the engine reads `navigator.gpu.wgslLanguageFeatures` and ad
   - **Preprocessor define:** `CAPS_PRIMITIVE_INDEX`
   - **Shader stages:** fragment
   - **Details:** Simplified API exposes `primitiveIndex` on `FragmentInput` and the global `pcPrimitiveIndex` when the device supports the feature
+- **`device.supportsDualSourceBlending`**
+  - **Engine injects:** `enable dual_source_blending;` for fragment shader variants whose blend state uses a secondary source factor
+  - **Preprocessor define:** `CAPS_DUAL_SOURCE_BLENDING`
+  - **Shader stages:** fragment
+  - **Details:** Provides a second fragment output for use as a blend factor; see [Dual-Source Blending](/user-manual/graphics/advanced-rendering/dual-source-blending)
 - **`device.supportsSubgroups`**
   - **Engine injects:** `enable subgroups;`
   - **Preprocessor define:** `CAPS_SUBGROUPS`
