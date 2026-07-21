@@ -103,6 +103,8 @@ For best browser compatibility, provide both MP3 and OGG versions of audio files
 | WebAssembly | `.wasm` | Compiled binary modules |
 | Binary | `.bin` | Raw binary data |
 | PLY | `.ply` | 3D Gaussian Splat data |
+| glTF Binary | `.glb` | 3D Gaussian Splat data using the [KHR_gaussian_splatting](/user-manual/gaussian-splatting/formats/glb) extension |
+| SPZ | `.spz` | Compressed 3D Gaussian Splat data ([Niantic SPZ format](/user-manual/gaussian-splatting/formats/spz)), loaded via a parser script |
 
 ## Custom Formats
 
