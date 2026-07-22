@@ -5,8 +5,8 @@ description: Creates editor import maps to alias ESM module specifiers, use CDN 
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Import Maps” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit the active import-map JSON and its ESM imports, confirm that only one import map remains active, then review the complete diff before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create or update the import-map JSON and dependent ESM script assets, launch the scene, and confirm that every aliased module loads without console errors.
 
 :::
 

@@ -3,6 +3,12 @@ title: Engine Migrations
 description: Breaking changes and migration instructions for each major PlayCanvas Engine release.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Upgrade the installed PlayCanvas version, replace the removed APIs listed for that migration, run with the debug Engine, and check for deprecation, shader, and rendering errors.
+
+:::
+
 The PlayCanvas Engine is continually evolving, and its updates occasionally introduce breaking changes that require users to adapt their scripts.
 
 This guide provides an overview of all major breaking changes across releases, offering users a helpful resource for migrating their code to newer versions.

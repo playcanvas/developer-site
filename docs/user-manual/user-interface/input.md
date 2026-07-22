@@ -5,7 +5,8 @@ description: Enable element input, initialize ElementInput with the app, and han
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Element, Button, Scroll View, and related UI Components, then inject mouse or touch input into the running application.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Enable element input, initialize ElementInput with the app, and handle clicks, hovers, and touch on UI; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Element, Button, Scroll View, and related UI Components, then inject mouse or touch input into the running application; capture the viewport and launched interface, exercising pointer input when relevant.
 
 :::
 

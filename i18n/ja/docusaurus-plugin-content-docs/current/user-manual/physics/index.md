@@ -5,7 +5,8 @@ description: "PlayCanvas の物理の概要：rigid body、コリジョン、力
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Physics 設定を有効化し、Collision と Rigidbody Component を作成、設定して、起動後のランタイム状態やログを確認できます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「物理演算」について、次の要件を満たしてください: PlayCanvas の物理の概要：rigid body、コリジョン、力、raycasting、関連するシミュレーションのトピック アプリケーションを起動して動作を実行し、位置、衝突、ランタイムログを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「物理演算」に必要な Collision、Rigidbody、スクリプトデータを設定し、次の要件を満たしてください: PlayCanvas の物理の概要：rigid body、コリジョン、力、raycasting、関連するシミュレーションのトピック。シーンを起動して動作を実行し、ランタイム状態またはログを確認してください。
 
 :::
 

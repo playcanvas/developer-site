@@ -5,8 +5,9 @@ description: "Legacy brightness and contrast script effect: parameter ranges and
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Brightness-Contrast Effect” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Brightness-Contrast Effect; required behavior and constraints: Legacy brightness and contrast script effect: parameter ranges and GitHub source for the camera post pipeline; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Brightness-Contrast Effect in the relevant script or shader assets so the result satisfies this requirement: legacy brightness and contrast script effect: parameter ranges and GitHub source for the camera post pipeline; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Brightness-Contrast Effect so the result satisfies this requirement: legacy brightness and contrast script effect: parameter ranges and GitHub source for the camera post pipeline; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

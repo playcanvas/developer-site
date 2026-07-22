@@ -3,6 +3,12 @@ title: Running the Engine in Node.js
 description: Use the PlayCanvas Engine server-side in Node.js for multiplayer servers, asset processing tools, and unit testing.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Run the Engine under Node.js for the required server, asset-processing, or test task, and identify any browser-only API used by the code; run the relevant build or tests and report console or runtime failures.
+
+:::
+
 [Node.js](https://nodejs.org/) is a cross-platform, open-source JavaScript runtime environment that can run on Windows, Linux, macOS, and more. It runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting.
 
 The PlayCanvas Engine fully supports running in Node.js. This can be useful for:

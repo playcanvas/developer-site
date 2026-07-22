@@ -5,8 +5,8 @@ description: Summarizes the end-to-end PlayCanvas workflow from importing assets
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the project scripts introduced by “The Editor Workflow” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Build the required scene, entities, Components, and assets in the open project, then launch and capture the application.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the scripts required by The Editor Workflow, review the complete diff and diagnostics, and leave the changes unpushed for approval.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Build the entities, Components, and assets required by The Editor Workflow, then launch the application and capture the completed result.
 
 :::
 

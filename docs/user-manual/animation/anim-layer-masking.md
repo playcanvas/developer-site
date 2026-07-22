@@ -5,7 +5,8 @@ description: Create per-layer bone masks so different layers drive separate skel
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect and modify Anim State Graph layers, including the layer masks used by animation states and transitions.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Create per-layer bone masks so different layers drive separate skeleton regions and blend together; launch the scene and verify playback, transitions, parameters, or event data.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect and modify Anim State Graph layers, including the layer masks used by animation states and transitions; launch the scene and verify playback, transitions, parameters, or event data.
 
 :::
 

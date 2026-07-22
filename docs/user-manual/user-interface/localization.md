@@ -5,6 +5,7 @@ description: Author JSON localization assets in Editor settings and bind transla
 
 :::ai
 
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Author JSON localization assets in Editor settings and bind translated keys to Text Element content; capture the viewport and launched interface, exercising pointer input when relevant.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload localization assets, configure localized Element Components, and launch the scene to capture each result.
 
 :::

@@ -5,7 +5,7 @@ description: Shows per-entity asset scene and settings checkpoint timelines avai
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect checkpoint details and compare checkpoints to trace when an entity, asset, or setting changed.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect checkpoint details and compare checkpoints to trace when an entity, asset, or setting changed; inspect status or the version-control graph to confirm the resulting project history.
 
 :::
 

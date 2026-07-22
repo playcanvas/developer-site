@@ -6,8 +6,8 @@ sidebar_label: Asset Import
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Asset Import Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Asset Import Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Asset Import Settings values in `.pc/settings.json` so the project satisfies this requirement: configure default overwrite behavior and texture size limits for assets imported into the PlayCanvas Editor; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Asset Import Settings values, change only those needed to satisfy this requirement: configure default overwrite behavior and texture size limits for assets imported into the PlayCanvas Editor; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

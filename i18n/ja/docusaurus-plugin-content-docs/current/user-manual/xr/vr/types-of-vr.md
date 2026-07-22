@@ -3,6 +3,12 @@ title: VR体験の種類
 description: "ルームスケールと着座体験向けのVR参照空間: XRSPACE値の選び方とデバイスの動きの能力への合わせ方です。"
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「VR体験の種類」について、次の要件を満たしてください: ルームスケールと着座体験向けのVR参照空間: XRSPACE値の選び方とデバイスの動きの能力への合わせ方であること 対応する XR セッションで実行し、記載された操作を試して、ランタイムログと観察結果を報告してください。
+
+:::
+
 異なる種類のVR体験では、異なる参照空間を使用できます。参照空間とは、VR環境内のオブジェクトやユーザーの位置と向きを定義するために使用される座標系です。これにより、アプリケーションは空間関係を一貫した方法で理解し、管理できます。`XRSPACE`定数で詳細を参照してください：
 
 * [`XRSPACE_BOUNDEDFLOOR`](https://api.playcanvas.com/engine/variables/XRSPACE_BOUNDEDFLOOR.html)

@@ -5,7 +5,8 @@ description: Fire named animation events on specific frames and handle them from
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read, add, update, and remove events on GLB animation assets.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Fire named animation events on specific frames and handle them from the anim component in scripts; launch the scene and verify playback, transitions, parameters, or event data.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read, add, update, and remove events on GLB animation assets; launch the scene and verify playback, transitions, parameters, or event data.
 
 :::
 

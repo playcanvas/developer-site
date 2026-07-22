@@ -5,7 +5,8 @@ description: Anchor, pivot, and margin properties that position and size Element
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “Elements”, then launch and capture the interface.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Elements; required behavior and constraints: Anchor, pivot, and margin properties that position and size Element components relative to their parents; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the Screen, Element, Sprite, or atlas data needed for Elements so it satisfies this requirement: anchor, pivot, and margin properties that position and size Element components relative to their parents; capture the viewport and launched interface.
 
 :::
 

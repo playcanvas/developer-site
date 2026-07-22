@@ -5,7 +5,7 @@ description: PlayCanvas の Sound Component は、音量、ピッチ、ループ
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Soundをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Soundをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
 
 :::
 

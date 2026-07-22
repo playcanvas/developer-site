@@ -5,6 +5,7 @@ description: Customize render order and visibility with layers, layer compositio
 
 :::ai
 
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Layers features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
 * **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query or modify project layers, configure Camera and Render Component layer assignments, and capture the result.
 
 :::

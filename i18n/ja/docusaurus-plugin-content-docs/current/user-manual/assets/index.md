@@ -5,7 +5,8 @@ description: PlayCanvas がモデル、テクスチャ、オーディオ、Scrip
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「アセット」に関連するプロジェクトアセットを一覧表示、アップロード、確認、変更、移動、複製、ダウンロード、削除できます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** `Asset` と `AssetRegistry` API を使用して、必要なリソースをランタイムで登録、ロード、アンロード、確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** プロジェクトのアセットを一覧表示し、依頼されたアップロード、移動、複製、再インポート、メタデータ変更だけを実行して、変更後のアセットレコードと参照を確認してください。
 
 :::
 

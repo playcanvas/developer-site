@@ -5,8 +5,9 @@ description: Use Chrome and Firefox developer tools to set breakpoints, inspect 
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Browser Dev Tools” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Use Chrome and Firefox developer tools to set breakpoints, inspect variables, and step through your PlayCanvas scripts; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Browser Dev Tools in the relevant script and text assets so it satisfies this requirement: use Chrome and Firefox developer tools to set breakpoints, inspect variables, and step through your PlayCanvas scripts; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for Browser Dev Tools so they satisfy this requirement: use Chrome and Firefox developer tools to set breakpoints, inspect variables, and step through your PlayCanvas scripts; launch the scene, exercise the behavior, and inspect console output or runtime state.
 
 :::
 

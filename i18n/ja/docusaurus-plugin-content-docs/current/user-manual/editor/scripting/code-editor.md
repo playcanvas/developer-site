@@ -5,8 +5,8 @@ description: Monaco ベースの共同編集、ファイルタブ、オートコ
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「コードエディター」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 診断を有効にしてマッピングされたスクリプトファイルを編集し、Source Control ですべての変更ファイルを確認して、承認されるまで Push しないでください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 依頼されたスクリプトアセットを作成、解析して対象エンティティにアタッチし、シーンを起動してコンソール出力とランタイム状態を確認してください。
 
 :::
 

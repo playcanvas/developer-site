@@ -5,7 +5,7 @@ description: Introduces wrapping PlayCanvas web games into native store apps usi
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List and inspect builds for “Mobile”, create published builds, or generate and save static and npm download builds.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List and inspect builds for “Mobile”, create published builds, or generate and save static and npm download builds; read the changed project state back and capture or launch the result when it is visual or interactive.
 
 :::
 

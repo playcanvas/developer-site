@@ -5,7 +5,7 @@ description: Navigates the expandable checkpoint graph comparing nodes restoring
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List branches and checkpoints, inspect checkpoint details, and compare checkpoints represented in the graph.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List branches and checkpoints, inspect checkpoint details, and compare checkpoints represented in the graph; inspect status or the version-control graph to confirm the resulting project history.
 
 :::
 

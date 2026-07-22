@@ -5,8 +5,8 @@ description: Explains implementing swap to reload scripts live without full refr
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Hot Reloading” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the script `swap` method, preserve required listeners and state, then review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and attach a script with a `swap` method, launch the scene, update the script, and confirm that listeners, attributes, and runtime state survive the hot reload.
 
 :::
 

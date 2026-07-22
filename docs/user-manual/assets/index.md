@@ -5,7 +5,8 @@ description: Understand how PlayCanvas manages assets and resources including mo
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, upload, inspect, modify, move, duplicate, download, or delete the project assets relevant to “Assets”.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Use the `Asset` and `AssetRegistry` APIs to register, load, unload, and inspect the requested resources at runtime.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List the project assets, perform only the requested upload, move, duplicate, reimport, or metadata change, then inspect the resulting asset record and references.
 
 :::
 

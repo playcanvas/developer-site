@@ -5,7 +5,7 @@ description: Preview animations on templates or models from the asset inspector,
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload or download Animation assets and read, add, update, or remove their animation events.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload or download Animation assets and read, add, update, or remove their animation events; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

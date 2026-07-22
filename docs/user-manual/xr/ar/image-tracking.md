@@ -3,6 +3,12 @@ title: Image Tracking
 description: "Tracking real-world images in AR with PlayCanvas: reference images, estimated size, pose updates, and runtime support checks."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Image Tracking; required behavior and constraints: Tracking real-world images in AR with PlayCanvas: reference images, estimated size, pose updates, and runtime support checks; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 Image Tracking provides the ability to track real-world images using the provided image samples and their estimated size. The underlying CV system will estimate image position and orientation and tracking status.
 
 ## Support

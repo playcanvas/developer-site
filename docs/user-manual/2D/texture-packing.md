@@ -5,7 +5,8 @@ description: Use third-party texture packers to build atlases compatible with Pl
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload textures, create Texture Atlas assets, configure atlas frames, and modify the Sprite assets that use them.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Use third-party texture packers to build atlases compatible with PlayCanvas for fewer loads and batching; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload textures, create Texture Atlas assets, configure atlas frames, and modify the Sprite assets that use them; capture the viewport and launched interface, exercising pointer input when relevant.
 
 :::
 

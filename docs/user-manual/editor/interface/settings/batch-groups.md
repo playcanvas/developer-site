@@ -6,8 +6,8 @@ sidebar_label: Batch Groups
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Batch Group Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Batch Group Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Batch Group Settings values in `.pc/settings.json` so the project satisfies this requirement: create and configure Batch Groups to combine meshes into fewer draw calls for better rendering performance; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Batch Group Settings values, change only those needed to satisfy this requirement: create and configure Batch Groups to combine meshes into fewer draw calls for better rendering performance; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

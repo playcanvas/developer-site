@@ -6,6 +6,7 @@ sidebar_label: Hierarchy & Transforms
 
 :::ai
 
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Create the requested parent-child hierarchy, change local and world position, rotation, or scale, and query the resulting transforms to confirm they remain correct.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect the entity hierarchy, reparent entities while preserving transforms, and modify position, rotation, or scale.
 
 :::

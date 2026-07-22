@@ -5,7 +5,8 @@ description: Combine primitive collision shapes on child entities into compound 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Compound Shapes; required behavior and constraints: Combine primitive collision shapes on child entities into compound colliders for dynamic rigid bodies; launch the application, exercise the behavior, and inspect positions, collisions, or runtime logs.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the Collision, Rigidbody, and script data needed for Compound Shapes so it satisfies this requirement: combine primitive collision shapes on child entities into compound colliders for dynamic rigid bodies; launch the scene, exercise the behavior, and inspect runtime state or logs.
 
 :::
 

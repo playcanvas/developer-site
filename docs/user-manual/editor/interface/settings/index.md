@@ -5,7 +5,7 @@ description: Project Settings map for engine import physics rendering lightmaps 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read and modify project-wide settings such as physics, rendering, layers, loading, input, and resolution.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read and modify project-wide settings such as physics, rendering, layers, loading, input, and resolution; read the changed values back and launch the project when they affect runtime behavior.
 
 :::
 

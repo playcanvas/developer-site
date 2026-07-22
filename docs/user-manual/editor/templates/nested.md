@@ -5,7 +5,7 @@ description: Explains composing templates inside templates and how overrides pro
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Instantiate nested Template assets and inspect, apply, revert, or unlink overrides on their instances.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Instantiate nested Template assets and inspect, apply, revert, or unlink overrides on their instances; read the changed project state back and capture or launch the result when it is visual or interactive.
 
 :::
 

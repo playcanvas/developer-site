@@ -5,7 +5,7 @@ description: Texture Atlas assets define named frames with rectangles pivots and
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create Texture Atlas assets from textures, configure their frames, and use them with Sprite assets in the open project.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create Texture Atlas assets from textures, configure their frames, and use them with Sprite assets in the open project; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

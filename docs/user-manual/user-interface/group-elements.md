@@ -5,7 +5,8 @@ description: Use group elements as empty containers to position and parent other
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “Group Elements”, then launch and capture the interface.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Use group elements as empty containers to position and parent other UI elements in the hierarchy; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the Screen, Element, Sprite, or atlas data needed for Group Elements so it satisfies this requirement: use group elements as empty containers to position and parent other UI elements in the hierarchy; capture the viewport and launched interface.
 
 :::
 

@@ -5,8 +5,8 @@ description: Introduces the editor getting-started docs for newcomers who need a
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the project scripts introduced by “Getting Started” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Build the required scene, entities, Components, and assets in the open project, then launch and capture the application.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the scripts required by Getting Started, review the complete diff and diagnostics, and leave the changes unpushed for approval.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Build the entities, Components, and assets required by Getting Started, then launch the application and capture the completed result.
 
 :::
 

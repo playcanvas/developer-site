@@ -5,7 +5,8 @@ description: HDR キューブマップによる image-based lighting、粗さ向
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「イメージベースドライティング(IBL)」向けに Material アセットとシーンのレンダリング設定を構成し、起動して表示結果をキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「イメージベースドライティング(IBL)」について、次の要件を満たしてください: HDR キューブマップによる image-based lighting、粗さ向けのプリフィルタ、リアルな PBR のための環境マップの作成であること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「イメージベースドライティング(IBL)」を設定し、次の要件を満たしてください: HDR キューブマップによる image-based lighting、粗さ向けのプリフィルタ、リアルな PBR のための環境マップの作成であること。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
 
 :::
 

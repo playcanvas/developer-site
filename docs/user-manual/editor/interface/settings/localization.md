@@ -6,8 +6,8 @@ sidebar_label: Localization
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Localization Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Localization Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Localization Settings values in `.pc/settings.json` so the project satisfies this requirement: localization panel usage for registering JSON translation assets creating starter files and how keys map to UI strings before runtime language swap logic; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Localization Settings values, change only those needed to satisfy this requirement: localization panel usage for registering JSON translation assets creating starter files and how keys map to UI strings before runtime language swap logic; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

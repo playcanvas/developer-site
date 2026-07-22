@@ -5,7 +5,8 @@ description: Image-based lighting with HDR cubemaps, prefiltering for roughness,
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Material assets and scene rendering settings for “Image Based Lighting”, then launch and capture the visual result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Image Based Lighting; required behavior and constraints: Image-based lighting with HDR cubemaps, prefiltering for roughness, and authoring environment maps for realistic PBR; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Image Based Lighting so the result satisfies this requirement: image-based lighting with HDR cubemaps, prefiltering for roughness, and authoring environment maps for realistic PBR; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

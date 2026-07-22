@@ -3,6 +3,12 @@ title: Mesh Detection
 description: "Real-world mesh detection for AR: semantic meshes, transforms, physics and occlusion uses, and PlayCanvas APIs for mesh geometry."
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Mesh Detection; required behavior and constraints: Real-world mesh detection for AR: semantic meshes, transforms, physics and occlusion uses, and PlayCanvas APIs for mesh geometry; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 Interaction between real-world and virtual objects is achieved via visual and logical interactions between the two. Mesh detection is an API that provides access to the representation of real-world geometry in the form of meshes. It can be used in a number of ways such as:
 
 * Virtual object physics within a real-world environment

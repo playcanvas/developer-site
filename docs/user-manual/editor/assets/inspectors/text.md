@@ -5,7 +5,7 @@ description: Text assets store plain strings such as dialogue or config; the ins
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit Text asset files locally in Pull/Push mode and review their diffs before syncing.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit Text asset files locally in Pull/Push mode and review their diffs before syncing; review the complete diff and diagnostics before Push.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Text asset text, update its asset metadata, and launch the project to verify the result.
 
 :::

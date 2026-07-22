@@ -5,7 +5,7 @@ description: Wasm Module Asset は Emscripten のバイナリを対応する glu
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトの WASM Module アセットをアップロード、確認、変更、移動、複製、ダウンロード、削除できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトの WASM Module アセットをアップロード、確認、変更、移動、複製、ダウンロード、削除してください。
 
 :::
 

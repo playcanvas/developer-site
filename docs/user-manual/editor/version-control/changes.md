@@ -5,7 +5,7 @@ description: Opens read-only diff views between your live branch state and check
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect version-control status and compare checkpoints to identify the project changes between two saved states.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect version-control status and compare checkpoints to identify the project changes between two saved states; inspect status or the version-control graph to confirm the resulting project history.
 
 :::
 

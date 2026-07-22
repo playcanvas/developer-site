@@ -5,7 +5,7 @@ description: Assets panel guide to folders search filters drag-and-drop cross-pr
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, search, select, upload, modify, move, duplicate, reimport, download, or delete assets shown in the Assets panel.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, search, select, upload, modify, move, duplicate, reimport, download, or delete assets shown in the Assets panel; read the changed project state back and capture or launch the result when it is visual or interactive.
 
 :::
 

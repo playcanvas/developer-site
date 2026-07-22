@@ -3,6 +3,12 @@ title: GPU Profiling
 description: Capture WebGL or WebGPU frames with native GPU profilers on desktop and Android for deeper GPU insight.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Capture WebGL or WebGPU frames with native GPU profilers on desktop and Android for deeper GPU insight; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+
+:::
+
 This section explains how to use native GPU profilers to capture and analyze WebGL or WebGPU frames, enabling debugging and performance profiling of GPU operations.
 
 This is particularly challenging on the Web platform, as web applications typically run within a sandboxed environment, which inherently limits compatibility and integration with native GPU profilers. This page outlines tested options available on certain platforms.

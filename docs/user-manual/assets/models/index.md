@@ -5,7 +5,7 @@ description: Import GLB, FBX, COLLADA, and OBJ models into PlayCanvas and conver
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, reimport, unwrap, download, or delete the Model assets used by “Importing 3D Models”.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload the model source, inspect the generated Template, Render, Material, and Texture assets, and confirm the imported hierarchy.
 
 :::
 

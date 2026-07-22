@@ -5,7 +5,8 @@ description: スプライト、テクスチャアトラス、Sprite EditorでPla
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Sprite と Texture Atlas アセットを管理し、Sprite Component を設定して、2D シーンを起動またはキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「2D」について、次の要件を満たしてください: スプライト、テクスチャアトラス、Sprite EditorでPlayCanvasエンジン上に2Dゲームを構築すること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Sprite と Texture Atlas アセットを管理し、Sprite Component を設定して、2D シーンを起動またはキャプチャしてください。
 
 :::
 

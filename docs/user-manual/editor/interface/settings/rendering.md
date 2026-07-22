@@ -6,8 +6,8 @@ sidebar_label: Rendering
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Rendering Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Rendering Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Rendering Settings values in `.pc/settings.json` so the project satisfies this requirement: rendering Project Settings controlling sky clustered lights shadows exposure fog mesh sketch overlays and resolution defaults shared with everyone on branch; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Rendering Settings values, change only those needed to satisfy this requirement: rendering Project Settings controlling sky clustered lights shadows exposure fog mesh sketch overlays and resolution defaults shared with everyone on branch; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

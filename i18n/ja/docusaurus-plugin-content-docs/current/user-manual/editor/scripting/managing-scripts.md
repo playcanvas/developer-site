@@ -5,8 +5,8 @@ description: エディターの Asset パネルと Script Component の手順で
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** スクリプトファイルをローカルで作成、名前変更、移動、編集できます。
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いている Editor プロジェクト内でスクリプトアセットを作成、編集、解析、アタッチできます。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** スクリプトファイルをローカルで作成、名前変更、移動、編集してください。 Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いている Editor プロジェクト内でスクリプトアセットを作成、編集、解析、アタッチしてください。 変更後のプロジェクト状態を再取得し、表示または操作に関係する場合はキャプチャまたは Launch で確認してください。
 
 :::
 

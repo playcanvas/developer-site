@@ -3,6 +3,12 @@ title: Optimizing Load Time
 description: Speed up startup with image formats, texture sizes, preload choices, asset audits, gzip, and staged loading.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Speed up startup with image formats, texture sizes, preload choices, asset audits, gzip, and staged loading; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+
+:::
+
 Optimizing isn't just related to improving frame rate. Fast load times are also critical. The faster your app loads, the more likely your users will stick around to experience it. Aim to have your app load in less than 5 seconds to prevent users from churning.
 
 Here are some tips to achieve super-fast load times:

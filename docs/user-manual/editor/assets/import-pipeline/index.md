@@ -5,7 +5,7 @@ description: Configure the server-side asset import process that converts source
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Reimport assets, unwrap UV1 coordinates, convert textures, and generate atlases, cubemaps, sprites, and bundles.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Reimport assets, unwrap UV1 coordinates, convert textures, and generate atlases, cubemaps, sprites, and bundles; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

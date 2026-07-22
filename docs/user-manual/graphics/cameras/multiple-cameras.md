@@ -5,7 +5,8 @@ description: Compose views from several cameras using priorities, viewports, lay
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Multiple Cameras; required behavior and constraints: Compose views from several cameras using priorities, viewports, layers, and render targets for split-screen, overlays, and more; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Multiple Cameras so the result satisfies this requirement: compose views from several cameras using priorities, viewports, layers, and render targets for split-screen, overlays, and more; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

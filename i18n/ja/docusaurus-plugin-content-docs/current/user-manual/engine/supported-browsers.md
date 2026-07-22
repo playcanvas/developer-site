@@ -3,6 +3,12 @@ title: サポートされているブラウザ
 description: PlayCanvasに必要な最小ブラウザバージョン。Chrome、Safari、Firefox、Edge、Opera、およびWebGL 2.0とWebGPUのサポートについて説明します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 最低対応バージョンのブラウザーでアプリケーションを実行し、WebGL 2.0 または WebGPU の初期化を確認して、ブラウザー固有のコンソールエラーや表示の問題を記録してください。
+
+:::
+
 PlayCanvas Engineは[WebGL 2.0](https://en.wikipedia.org/wiki/WebGL#WebGL_2)をサポートするブラウザが必要です。最小ブラウザバージョンは以下の通りです:
 
 | ブラウザ                                    | バージョン | Win | macOS | Linux | Chrome OS | Android | iOS |

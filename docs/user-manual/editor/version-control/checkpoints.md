@@ -5,7 +5,7 @@ description: Creates restores and hard-resets permanent snapshots explaining gra
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, create, inspect, restore, and compare checkpoints. Hard reset is destructive and should only be requested when you intend to discard later project history.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect version-control status, create or compare the requested checkpoint, confirm the resulting project history, and avoid restore or hard reset unless explicitly requested because later checkpoints may be unrecoverable.
 
 :::
 

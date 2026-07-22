@@ -5,7 +5,8 @@ description: "Overview of PlayCanvas physics: rigid bodies, collision, forces, r
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Physics features described here that match the requested outcome, and implement only those features; launch the application, exercise the behavior, and inspect positions, collisions, or runtime logs.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the Collision, Rigidbody, and script data needed for Physics so it satisfies this requirement: overview of PlayCanvas physics: rigid bodies, collision, forces, raycasting, and related simulation topics; launch the scene, exercise the behavior, and inspect runtime state or logs.
 
 :::
 

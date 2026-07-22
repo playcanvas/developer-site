@@ -5,8 +5,9 @@ description: "Batch groups merge mesh instances to cut draw calls: Editor setup,
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Batching” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Configure compatible static or dynamic Batch Groups, assign matching Model, Sprite, or Element Components, call `app.batcher.markGroupDirty` after changing batched content, and compare draw calls before and after.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit the script that changes `textureAsset` and calls `app.batcher.markGroupDirty`, then review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create static or dynamic Batch Groups, assign compatible Model, Sprite, or Element Components, launch the scene, and compare draw calls while confirming dynamic objects still move correctly.
 
 :::
 

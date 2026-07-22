@@ -5,8 +5,9 @@ description: Apply continuous forces and one-frame impulses to dynamic rigid bod
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the physics scripts used by “Forces and Impulses” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Apply continuous forces and one-frame impulses to dynamic rigid bodies using RigidBodyComponent APIs; launch the application, exercise the behavior, and inspect positions, collisions, or runtime logs.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the Forces and Impulses behavior in the relevant physics scripts so it satisfies this requirement: apply continuous forces and one-frame impulses to dynamic rigid bodies using RigidBodyComponent APIs; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the Collision, Rigidbody, and script data needed for Forces and Impulses so it satisfies this requirement: apply continuous forces and one-frame impulses to dynamic rigid bodies using RigidBodyComponent APIs; launch the scene, exercise the behavior, and inspect runtime state or logs.
 
 :::
 

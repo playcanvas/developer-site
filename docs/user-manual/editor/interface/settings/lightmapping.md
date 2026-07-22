@@ -6,8 +6,8 @@ sidebar_label: Lightmapping
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Lightmapping Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Lightmapping Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Lightmapping Settings values in `.pc/settings.json` so the project satisfies this requirement: lightmapping panel settings for global lightmap resolution multipliers bake modes filtering ambient bakes and occlusion tweaks stored per active project branch; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Lightmapping Settings values, change only those needed to satisfy this requirement: lightmapping panel settings for global lightmap resolution multipliers bake modes filtering ambient bakes and occlusion tweaks stored per active project branch; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

@@ -5,8 +5,9 @@ description: Essential PlayCanvas Engine classes and patterns for working with e
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Calling the Engine API” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Calling the Engine API; required behavior and constraints: Essential PlayCanvas Engine classes and patterns for working with entities, transforms, input, assets, and physics in scripts; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Calling the Engine API in the relevant script and text assets so it satisfies this requirement: essential PlayCanvas Engine classes and patterns for working with entities, transforms, input, assets, and physics in scripts; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for Calling the Engine API so they satisfy this requirement: essential PlayCanvas Engine classes and patterns for working with entities, transforms, input, assets, and physics in scripts; launch the scene, exercise the behavior, and inspect console output or runtime state.
 
 :::
 

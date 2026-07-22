@@ -5,7 +5,8 @@ description: Display textures or solid colors with tint and opacity, and optiona
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “Image Elements”, then launch and capture the interface.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Display textures or solid colors with tint and opacity, and optional custom materials on image elements; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the Screen, Element, Sprite, or atlas data needed for Image Elements so it satisfies this requirement: display textures or solid colors with tint and opacity, and optional custom materials on image elements; capture the viewport and launched interface.
 
 :::
 

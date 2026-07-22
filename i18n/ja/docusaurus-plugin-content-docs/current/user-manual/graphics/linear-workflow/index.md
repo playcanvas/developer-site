@@ -5,7 +5,8 @@ description: "エンジン全体の linear カラーワークフロー：linear 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「リニアワークフロー」向けに Material アセットとシーンのレンダリング設定を構成し、起動して表示結果をキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「リニアワークフロー」について、次の要件を満たしてください: エンジン全体の linear カラーワークフロー：linear なシェーダー演算、sRGB 入力、LDR と HDR のシェーダー出力の比較 アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「リニアワークフロー」を設定し、次の要件を満たしてください: エンジン全体の linear カラーワークフロー：linear なシェーダー演算、sRGB 入力、LDR と HDR のシェーダー出力の比較。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
 
 :::
 

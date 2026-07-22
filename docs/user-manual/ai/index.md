@@ -1,9 +1,19 @@
 ---
 title: AI Development
-description: Choose between the PlayCanvas VS Code Extension and Editor MCP Server for AI-assisted development workflows.
+description: Choose AI tools for PlayCanvas Engine code, project files, or direct Editor automation.
 ---
 
 AI coding assistants can work with PlayCanvas through project files or directly through the Editor. Choose the integration that matches the task.
+
+## Develop with the Engine
+
+Use [Developing with the Engine](./developing-with-engine.md) when an AI assistant is working in a standalone PlayCanvas Engine repository. It covers recommended command-line and visual clients, project context, browser verification, plugins, and official AI tool documentation.
+
+This workflow is best for:
+
+- Building applications that use the Engine from npm or a CDN
+- Editing and testing a local JavaScript or TypeScript codebase
+- Giving an assistant access to current Engine documentation and browser tooling
 
 ## Work with Project Files
 

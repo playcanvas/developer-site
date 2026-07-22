@@ -5,8 +5,9 @@ description: PlayCanvas Scriptに設定可能なパラメータを公開し、Ed
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「スクリプト属性」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「スクリプト属性」について、次の要件を満たしてください: PlayCanvas Scriptに設定可能なパラメータを公開し、EditorのInspectorまたはコードから利用すること アプリケーションを起動して変更した動作を実行し、コンソール出力またはランタイム状態を確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトとテキストアセットに「スクリプト属性」を実装し、次の要件を満たしてください: PlayCanvas Scriptに設定可能なパラメータを公開し、EditorのInspectorまたはコードから利用すること。Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「スクリプト属性」に必要なスクリプトを作成、アタッチ、設定し、次の要件を満たしてください: PlayCanvas Scriptに設定可能なパラメータを公開し、EditorのInspectorまたはコードから利用すること。シーンを起動して動作を実行し、コンソール出力またはランタイム状態を確認してください。
 
 :::
 

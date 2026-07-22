@@ -5,7 +5,7 @@ description: Use the Scenes dialog from the menu or toolbar to filter lists, cre
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, inspect, load, create, duplicate, and delete scenes in the project currently open in the Editor.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, inspect, load, create, duplicate, and delete scenes in the project currently open in the Editor; read the changed project state back and capture or launch the result when it is visual or interactive.
 
 :::
 

@@ -5,7 +5,7 @@ description: Web ブラウザ、モバイルラッパー、デスクトップパ
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「プロジェクトの公開方法」向けのビルドを一覧表示、確認、公開し、static または npm のダウンロードビルドを生成して保存できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「プロジェクトの公開方法」向けのビルドを一覧表示、確認、公開し、static または npm のダウンロードビルドを生成して保存してください。
 
 :::
 

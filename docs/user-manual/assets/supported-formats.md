@@ -5,7 +5,7 @@ description: Complete list of file formats supported by PlayCanvas for 3D models
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, upload, inspect, modify, move, duplicate, download, or delete the project assets relevant to “Supported Formats”.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload the requested source file, inspect the resulting asset type and processed files, and report whether the format imported successfully.
 
 :::
 

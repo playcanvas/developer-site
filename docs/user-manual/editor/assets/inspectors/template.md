@@ -5,7 +5,7 @@ description: Template prefab inspector shows an interactive draggable 3D preview
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Instantiate Template assets and inspect, apply, revert, or unlink overrides on their instances.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Instantiate Template assets and inspect, apply, revert, or unlink overrides on their instances; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

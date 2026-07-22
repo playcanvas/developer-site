@@ -5,7 +5,8 @@ description: Map HDR scene lighting to your display with per-camera tone mapping
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Map HDR scene lighting to your display with per-camera tone mapping and gamma, plus optional physically based exposure controls; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Tone Mapping & Exposure so the result satisfies this requirement: map HDR scene lighting to your display with per-camera tone mapping and gamma, plus optional physically based exposure controls; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

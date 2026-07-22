@@ -5,7 +5,8 @@ description: PlayCanvasにおけるバッチング、インスタンシング、
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「高度なレンダリング」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「高度なレンダリング」について、次の要件を満たしてください: PlayCanvasにおけるバッチング、インスタンシング、マルチドロー、間接描画、複数レンダーターゲットのセクションインデックスであること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「高度なレンダリング」を実装し、次の要件を満たしてください: PlayCanvasにおけるバッチング、インスタンシング、マルチドロー、間接描画、複数レンダーターゲットのセクションインデックスであること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「高度なレンダリング」を設定し、次の要件を満たしてください: PlayCanvasにおけるバッチング、インスタンシング、マルチドロー、間接描画、複数レンダーターゲットのセクションインデックスであること。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
 
 :::

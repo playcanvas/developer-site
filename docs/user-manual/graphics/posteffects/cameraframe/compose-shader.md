@@ -5,8 +5,9 @@ description: Override CameraFrame compose chunks to inject uniforms and pixel ef
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Customizing the Compose Shader” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Customizing the Compose Shader in the relevant script or shader assets so the result satisfies this requirement: override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Customizing the Compose Shader so the result satisfies this requirement: override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

@@ -72,15 +72,28 @@ const sidebars = {
     },
     {
       type: 'html',
-      value: '<div class="sidebar-section-header sidebar-section-header--ai">AI Tools</div>',
+      value: '<div class="sidebar-section-header sidebar-section-header--ai">AI</div>',
     },
     {
       type: 'doc',
       id: 'user-manual/ai/index',
       label: 'Overview',
     },
-    'user-manual/ai/vscode-extension',
-    'user-manual/ai/editor-mcp-server',
+    {
+      type: 'doc',
+      id: 'user-manual/ai/engine-development',
+      label: 'Engine Development',
+    },
+    {
+      type: 'doc',
+      id: 'user-manual/ai/vscode-extension',
+      label: 'VS Code Extension',
+    },
+    {
+      type: 'doc',
+      id: 'user-manual/ai/editor-mcp-server',
+      label: 'Editor MCP Server',
+    },
     {
       type: 'html',
       value: '<div class="sidebar-section-header">Core Products</div>',

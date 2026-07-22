@@ -3,6 +3,12 @@ title: Anchors
 description: "WebXR anchors in PlayCanvas: creating stable world-locked points, persistence, hit-test-linked anchors, and session feature flags."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Anchors; required behavior and constraints: WebXR anchors in PlayCanvas: creating stable world-locked points, persistence, hit-test-linked anchors, and session feature flags; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 Anchors provide the ability to create a point in 3D space that can be updated to match an ever-evolving understanding of the real world by the underlying AR system. This allows for the placement of virtual objects in relation to the real world that feel planted in the user's environment.
 
 Each anchor is represented as a position and orientation and can be created from an arbitrary point as well as in relation to a hit test result that will make it more reliable.

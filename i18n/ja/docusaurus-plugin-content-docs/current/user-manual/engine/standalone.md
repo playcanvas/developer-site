@@ -3,6 +3,12 @@ title: Engineをスタンドアロンで使用する
 description: Editorを使わず、npm、CDN、または直接スクリプト読み込みでPlayCanvasアプリケーションを構築します。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** このページの Vite/npm または import map のプロジェクトを作成してローカルで起動し、回転するボックスが表示され、ブラウザーコンソールにエラーがないことを確認してください。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

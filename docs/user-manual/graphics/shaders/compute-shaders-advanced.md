@@ -5,7 +5,8 @@ description: "Manual bind group control for WebGPU compute shaders: hand-authore
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the shader and script assets used by “Compute Shaders Advanced” locally in Pull/Push mode.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Compute Shaders Advanced; required behavior and constraints: Manual bind group control for WebGPU compute shaders: hand-authored computeBindGroupFormat, explicit bindings, and mixing with reflected resources; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Compute Shaders Advanced in the relevant script or shader assets so the result satisfies this requirement: manual bind group control for WebGPU compute shaders: hand-authored computeBindGroupFormat, explicit bindings, and mixing with reflected resources; review the complete diff and diagnostics before Push.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
 
 :::

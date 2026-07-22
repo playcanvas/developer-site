@@ -5,8 +5,8 @@ description: フルリロードなしで Script をライブリロードする s
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ホットリロード」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** スクリプトの `swap` メソッドを実装し、必要なリスナーと状態を保持して、Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** `swap` メソッドを持つスクリプトを作成してアタッチし、シーンを起動してスクリプトを更新し、リスナー、属性、ランタイム状態が hot reload 後も保持されることを確認してください。
 
 :::
 

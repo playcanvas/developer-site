@@ -5,8 +5,8 @@ description: Assets パネルでフォルダを整理し、Asset をアップロ
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** アセットをアップロード、移動、複製、置換、再インポート、ダウンロードできます。
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 確認済みのプロジェクトアセットを `.pc/assets` 内のローカル JSON ドキュメントとして公開できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** アセットをアップロード、移動、複製、置換、再インポート、ダウンロードしてください。 変更後のアセットメタデータ、レジストリの状態、参照を確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 確認済みのプロジェクトアセットを `.pc/assets` 内のローカル JSON ドキュメントとして公開してください。
 
 :::
 

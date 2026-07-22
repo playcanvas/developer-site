@@ -5,8 +5,8 @@ description: Use the Assets Panel to organize folders, upload and create assets,
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, move, duplicate, replace, reimport, and download assets.
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Expose reviewed project assets as local JSON documents under `.pc/assets`.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, move, duplicate, replace, reimport, and download assets; inspect the resulting asset metadata, registry state, and references.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Expose reviewed project assets as local JSON documents under `.pc/assets`; review the complete diff and diagnostics before Push.
 
 :::
 

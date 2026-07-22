@@ -5,7 +5,7 @@ description: Export 3D models from Blender, Maya, or 3DS Max in GLB or FBX forma
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, reimport, unwrap, download, or delete the Model assets used by “Exporting Assets”.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload the exported GLB or FBX, inspect the generated assets and import warnings, and confirm that geometry and materials survived export.
 
 :::
 

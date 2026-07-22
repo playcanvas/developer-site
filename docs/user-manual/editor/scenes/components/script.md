@@ -5,8 +5,8 @@ description: PlayCanvas Script component attaches JavaScript or TypeScript scrip
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add Script Components, attach parsed script assets, and configure their attributes.
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit script files locally before attaching them in the Editor.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add Script Components, attach parsed script assets, and configure their attributes; launch the scene and verify the Component through a screenshot, runtime state, or logs.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit script files locally before attaching them in the Editor; review the complete diff and diagnostics before Push.
 
 :::
 

@@ -5,7 +5,7 @@ description: Render asset inspector documents read-only mesh statistics, vertex 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete Render assets in the open project.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete Render assets in the open project; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

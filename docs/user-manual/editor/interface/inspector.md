@@ -5,7 +5,7 @@ description: Inspector tips for entity and asset attributes covering gizmos, liv
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Select and modify entities, components, materials, and project settings, with Editor undo and redo available for reviewable changes.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Select and modify entities, components, materials, and project settings, with Editor undo and redo available for reviewable changes; read the changed project state back and capture or launch the result when it is visual or interactive.
 
 :::
 

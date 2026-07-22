@@ -5,8 +5,9 @@ description: Single-call multi-submesh rendering, platform support, terrain-styl
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Multi-Draw” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Multi-Draw; required behavior and constraints: Single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Multi-Draw in the relevant script or shader assets so the result satisfies this requirement: single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Multi-Draw so the result satisfies this requirement: single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

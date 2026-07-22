@@ -5,7 +5,7 @@ description: Collaboration UX for presence avatars, project chat, teammate camer
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Use Pull/Push for external coding assistants that write project files. Realtime mode does not submit external changes made to closed files.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Use Pull/Push for external coding assistants that write project files. Realtime mode does not submit external changes made to closed files; review the complete diff and diagnostics before Push.
 
 :::
 

@@ -5,7 +5,7 @@ description: Documents main branch current branch creation favorites search clos
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, create, switch, open, close, and delete branches. Inspect status first and explicitly confirm destructive branch deletion.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, create, switch, open, close, and delete branches. Inspect status first and explicitly confirm destructive branch deletion; inspect status or the version-control graph to confirm the resulting project history.
 
 :::
 

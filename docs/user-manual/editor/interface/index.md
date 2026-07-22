@@ -5,7 +5,7 @@ description: Quick labeled map of the toolbar, hierarchy, inspector, viewport, a
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Drive the Hierarchy, Inspector, selection, transform gizmo, viewport, project settings, and Launch tools in the open Editor.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Drive the Hierarchy, Inspector, selection, transform gizmo, viewport, project settings, and Launch tools in the open Editor; read the changed project state back and capture or launch the result when it is visual or interactive.
 
 :::
 

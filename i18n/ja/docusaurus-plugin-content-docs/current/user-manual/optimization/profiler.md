@@ -3,6 +3,12 @@ title: プロファイラー
 description: 組み込みの Profiler オーバーレイでフレーム統計、update と render のタイミング、アプリ起動のタイムラインを確認します。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「プロファイラー」について、次の要件を満たしてください: 組み込みの Profiler オーバーレイでフレーム統計、update と render のタイミング、アプリ起動のタイムラインを確認すること 変更前後のプロファイラー、ロード、メモリ、またはフレーム時間の該当指標を測定してください。
+
+:::
+
 PlayCanvasには、パフォーマンスの問題を診断するためのリアルタイムプロファイラが用意されています。
 
 ![Profiler](/img/user-manual/optimization/profiler/profiler.png)

@@ -6,8 +6,8 @@ description: PlayCanvas Editor にインポートする Asset の、既定の上
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「アセットインポート設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「アセットインポート設定」設定を確認、変更できます。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** `.pc/settings.json` の「アセットインポート設定」に関係する値だけを編集し、次の要件を満たしてください: PlayCanvas Editor にインポートする Asset の、既定の上書き動作とテクスチャサイズの上限を設定すること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在の「アセットインポート設定」の値を読み取り、次の要件に必要な値だけを変更してください: PlayCanvas Editor にインポートする Asset の、既定の上書き動作とテクスチャサイズの上限を設定すること。値を再取得し、ランタイムに影響する場合はプロジェクトを起動してください。
 
 :::
 

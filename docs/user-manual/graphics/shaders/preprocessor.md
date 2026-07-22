@@ -5,7 +5,8 @@ description: C-style defines, includes, and ifdef chains applied to GLSL, WGSL, 
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the shader and script assets used by “Shader Preprocessor” locally in Pull/Push mode.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Shader Preprocessor; required behavior and constraints: C-style defines, includes, and ifdef chains applied to GLSL, WGSL, and compute shaders before compilation; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Shader Preprocessor in the relevant script or shader assets so the result satisfies this requirement: C-style defines, includes, and ifdef chains applied to GLSL, WGSL, and compute shaders before compilation; review the complete diff and diagnostics before Push.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
 
 :::

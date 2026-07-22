@@ -5,7 +5,7 @@ description: Covers how images import into texture assets, format conversions an
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, reimport, convert, and download Texture assets, or use a texture to create an atlas or cubemap.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, reimport, convert, and download Texture assets, or use a texture to create an atlas or cubemap; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

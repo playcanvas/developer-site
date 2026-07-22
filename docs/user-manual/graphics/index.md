@@ -5,8 +5,9 @@ description: "Overview of PlayCanvas rendering: WebGL and WebGPU backends, PBR, 
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Graphics” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Graphics features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Graphics in the relevant script or shader assets so the result satisfies this requirement: overview of PlayCanvas rendering: WebGL and WebGPU backends, PBR, lighting, HDR, post effects, and key graphics features; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Graphics so the result satisfies this requirement: overview of PlayCanvas rendering: WebGL and WebGPU backends, PBR, lighting, HDR, post effects, and key graphics features; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

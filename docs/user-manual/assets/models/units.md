@@ -5,7 +5,7 @@ description: Configure scene units in Blender, Maya, or 3DS Max so models export
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, reimport, unwrap, download, or delete the Model assets used by “Units”.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload the model, inspect its bounds and transform scale against PlayCanvas meter units, and reimport only after correcting a scale mismatch.
 
 :::
 

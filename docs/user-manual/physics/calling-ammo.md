@@ -5,8 +5,9 @@ description: Call ammo.js and Bullet APIs directly for joints and features beyon
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the physics scripts used by “Calling the ammo.js API” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components; launch the application, exercise the behavior, and inspect positions, collisions, or runtime logs.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the Calling the ammo.js API behavior in the relevant physics scripts so it satisfies this requirement: call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the Collision, Rigidbody, and script data needed for Calling the ammo.js API so it satisfies this requirement: call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components; launch the scene, exercise the behavior, and inspect runtime state or logs.
 
 :::
 

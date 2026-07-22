@@ -5,7 +5,7 @@ description: PlayCanvas web Editor tour covering live testing, collaboration, ve
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Let Codex, Claude Code, Cursor, and other MCP clients inspect and modify the open project, operate the viewport, launch the application, and verify the result.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect and modify the open project, operate the viewport, launch the application, and verify the result.
 
 :::
 

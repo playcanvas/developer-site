@@ -5,7 +5,7 @@ description: Entity、Component、シーン全体の設定を説明する Scene 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** シーン、エンティティ、コンポーネント、階層、シーン設定を管理し、ビューポートまたは実行中のアプリケーションで結果を検証できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** シーン、エンティティ、コンポーネント、階層、シーン設定を管理し、ビューポートまたは実行中のアプリケーションで結果を検証してください。
 
 :::
 

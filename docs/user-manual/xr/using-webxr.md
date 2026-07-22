@@ -3,6 +3,12 @@ title: Using WebXR in PlayCanvas
 description: Detect WebXR support, start VR and AR sessions from user input, and configure sessions with the camera component and XrManager.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Detect WebXR support, start VR and AR sessions from user input, and configure sessions with the camera component and XrManager; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 ## Support
 
 Browser support for WebXR is not (yet) universal. It can be checked as follows:

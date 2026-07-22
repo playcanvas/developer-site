@@ -5,7 +5,8 @@ description: Keyframe animation assets from FBX conversion and how they link to 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload or inspect Animation assets and read, add, update, or remove their animation events.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Load the requested Animation asset, map it to an animstategraph state, add any required animation events, and verify playback and event timing.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload or inspect Animation assets and read, add, update, or remove their animation events; launch the scene and verify playback, transitions, parameters, or event data.
 
 :::
 

@@ -5,8 +5,9 @@ description: Render live HTML and CSS into 3D scenes as GPU textures with full s
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “HTML-in-Canvas” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement HTML-in-Canvas in the relevant script or shader assets so the result satisfies this requirement: render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for HTML-in-Canvas so the result satisfies this requirement: render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

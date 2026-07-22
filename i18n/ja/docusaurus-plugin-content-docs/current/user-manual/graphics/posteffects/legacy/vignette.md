@@ -5,8 +5,9 @@ description: エッジを暗くするレガシーのビネット offset と dark
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ビネットエフェクト」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「ビネットエフェクト」について、次の要件を満たしてください: エッジを暗くするレガシーのビネット offset と darkness コントロール、およびビネット Script の GitHub リンクであること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「ビネットエフェクト」を実装し、次の要件を満たしてください: エッジを暗くするレガシーのビネット offset と darkness コントロール、およびビネット Script の GitHub リンクであること。Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「ビネットエフェクト」を設定し、次の要件を満たしてください: エッジを暗くするレガシーのビネット offset と darkness コントロール、およびビネット Script の GitHub リンクであること。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
 
 :::
 

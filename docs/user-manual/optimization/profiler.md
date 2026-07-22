@@ -3,6 +3,12 @@ title: Profiler
 description: Use the built-in Profiler overlay for frame stats, update and render timings, and the app launch timeline.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Use the built-in Profiler overlay for frame stats, update and render timings, and the app launch timeline; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+
+:::
+
 PlayCanvas provides a real-time profiler to assist in diagnosing performance problems.
 
 ![Profiler](/img/user-manual/optimization/profiler/profiler.png)

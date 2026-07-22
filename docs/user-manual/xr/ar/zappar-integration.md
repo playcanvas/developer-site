@@ -3,6 +3,12 @@ title: Zappar Integration
 description: "Zappar Universal AR with PlayCanvas: supported browsers, getting started, starter projects, and tracking templates for AR scenes."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Zappar Integration; required behavior and constraints: Zappar Universal AR with PlayCanvas: supported browsers, getting started, starter projects, and tracking templates for AR scenes; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 Zappar offers an [Universal AR SDK with PlayCanvas integration](https://zap.works/universal-ar/playcanvas/), including image, face and instant world tracking features. Their SDK supports Chrome for Android and Safari 11.3+ for iOS, reaching billions of users worldwide.
 
 ## Getting started with Zappar

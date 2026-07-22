@@ -6,8 +6,8 @@ description: Editor プロジェクトの起動、公開、ダウンロード時
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「エンジン設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「エンジン設定」設定を確認、変更できます。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** `.pc/settings.json` の「エンジン設定」に関係する値だけを編集し、次の要件を満たしてください: Editor プロジェクトの起動、公開、ダウンロード時に使う PlayCanvas Engine のバージョンを選びます。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在の「エンジン設定」の値を読み取り、次の要件に必要な値だけを変更してください: Editor プロジェクトの起動、公開、ダウンロード時に使う PlayCanvas Engine のバージョンを選びます。値を再取得し、ランタイムに影響する場合はプロジェクトを起動してください。
 
 :::
 

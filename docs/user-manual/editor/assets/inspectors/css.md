@@ -5,7 +5,7 @@ description: CSS assets store stylesheet code editable from the Editor; the insp
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit CSS asset files locally in Pull/Push mode and review their diffs before syncing.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit CSS asset files locally in Pull/Push mode and review their diffs before syncing; review the complete diff and diagnostics before Push.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite CSS asset text, update its asset metadata, and launch the project to verify the result.
 
 :::

@@ -5,6 +5,7 @@ description: Editor guide to the anim component for wiring animstategraphs and a
 
 :::ai
 
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Add an Anim Component, assign its animstategraph and animation assets, set the required parameters, and verify the intended transition.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add and configure Anim Components, assign state graphs and parameters, then launch the scene to verify transitions.
 
 :::

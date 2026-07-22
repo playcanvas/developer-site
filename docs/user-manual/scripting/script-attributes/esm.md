@@ -5,8 +5,9 @@ description: Complete reference for ESM Script Attributes including all supporte
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “ESM Reference” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Add the requested ESM Script attributes with the documented types, decorators, and visibility conditions, then verify their parsed values at runtime.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement ESM Reference in the relevant script and text assets so it satisfies this requirement: complete reference for ESM Script Attributes including all supported types, decorators, and conditional visibility; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for ESM Reference so they satisfy this requirement: complete reference for ESM Script Attributes including all supported types, decorators, and conditional visibility; launch the scene, exercise the behavior, and inspect console output or runtime state.
 
 :::
 

@@ -6,8 +6,8 @@ sidebar_label: Launch Page
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Launch Page Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Launch Page Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Launch Page Settings values in `.pc/settings.json` so the project satisfies this requirement: configure browser features like resolution, fill mode, and transparent canvas for the Editor Launch page; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Launch Page Settings values, change only those needed to satisfy this requirement: configure browser features like resolution, fill mode, and transparent canvas for the Editor Launch page; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

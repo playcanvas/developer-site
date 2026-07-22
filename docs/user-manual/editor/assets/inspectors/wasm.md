@@ -5,7 +5,7 @@ description: Wasm Module assets wire Emscripten binaries to matching glue and op
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete WASM Module assets in the open project.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete WASM Module assets in the open project; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

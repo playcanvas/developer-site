@@ -5,7 +5,7 @@ description: Upload assets via drag and drop in the Editor, replace files by mat
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload source files, reimport existing assets, and download their source or processed files.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload source files, reimport existing assets, and download their source or processed files; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

@@ -5,8 +5,9 @@ description: Migrate from legacy built-in ammo.js to the latest wasm build using
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the physics scripts used by “Updating ammo.js” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Migrate from legacy built-in ammo.js to the latest wasm build using Scene Settings import and migration steps; launch the application, exercise the behavior, and inspect positions, collisions, or runtime logs.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the Updating ammo.js behavior in the relevant physics scripts so it satisfies this requirement: migrate from legacy built-in ammo.js to the latest wasm build using Scene Settings import and migration steps; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the Collision, Rigidbody, and script data needed for Updating ammo.js so it satisfies this requirement: migrate from legacy built-in ammo.js to the latest wasm build using Scene Settings import and migration steps; launch the scene, exercise the behavior, and inspect runtime state or logs.
 
 :::
 

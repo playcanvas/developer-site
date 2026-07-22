@@ -5,8 +5,9 @@ description: Write PlayCanvas scripts using modern ES Module syntax with static 
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “ESM Scripts” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Write PlayCanvas scripts using modern ES Module syntax with static imports, classes, and improved tooling support; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement ESM Scripts in the relevant script and text assets so it satisfies this requirement: write PlayCanvas scripts using modern ES Module syntax with static imports, classes, and improved tooling support; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for ESM Scripts so they satisfy this requirement: write PlayCanvas scripts using modern ES Module syntax with static imports, classes, and improved tooling support; launch the scene, exercise the behavior, and inspect console output or runtime state.
 
 :::
 

@@ -5,7 +5,7 @@ description: PlayCanvas の GSplat Component は Entity から 3D Gaussian splat
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** GSplatをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** GSplatをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
 
 :::
 

@@ -5,8 +5,9 @@ description: Write scripts in JavaScript to add interactivity, handle input, and
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit PlayCanvas scripts as reviewed local files.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create, parse, or attach scripts and verify them in the running application.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Scripting features described here that match the requested outcome, and implement only those features; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit PlayCanvas scripts as reviewed local files; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create, parse, or attach scripts and verify them in the running application; launch the application, exercise the changed behavior, and inspect console output or runtime state.
 
 :::
 

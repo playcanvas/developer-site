@@ -5,7 +5,8 @@ description: Automate child element placement with horizontal, vertical, or grid
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “Layout Groups”, then launch and capture the interface.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Layout Groups; required behavior and constraints: Automate child element placement with horizontal, vertical, or grid layouts using Layout Group components; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the Screen, Element, Sprite, or atlas data needed for Layout Groups so it satisfies this requirement: automate child element placement with horizontal, vertical, or grid layouts using Layout Group components; capture the viewport and launched interface.
 
 :::
 

@@ -6,8 +6,8 @@ sidebar_label: Network
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Network Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Network Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Network Settings values in `.pc/settings.json` so the project satisfies this requirement: configure asset loading retry behavior and network timeout settings for your PlayCanvas application; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Network Settings values, change only those needed to satisfy this requirement: configure asset loading retry behavior and network timeout settings for your PlayCanvas application; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

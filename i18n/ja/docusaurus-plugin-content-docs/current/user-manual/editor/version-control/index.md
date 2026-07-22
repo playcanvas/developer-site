@@ -5,7 +5,7 @@ description: PlayCanvasのチェックポイント、ブランチ、マージ、
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** バージョン管理の状態を確認し、ブランチとチェックポイントを管理し、差分を調べ、マージのライフサイクルを操作できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** バージョン管理の状態を確認し、ブランチとチェックポイントを管理し、差分を調べ、マージのライフサイクルを操作してください。
 
 :::
 

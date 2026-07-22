@@ -5,8 +5,9 @@ description: Configure multiple render targets, shared attachments rules, and sh
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Multiple Render Targets” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Configure multiple render targets, shared attachments rules, and shader output to several color buffers at once; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Multiple Render Targets in the relevant script or shader assets so the result satisfies this requirement: configure multiple render targets, shared attachments rules, and shader output to several color buffers at once; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Multiple Render Targets so the result satisfies this requirement: configure multiple render targets, shared attachments rules, and shader output to several color buffers at once; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

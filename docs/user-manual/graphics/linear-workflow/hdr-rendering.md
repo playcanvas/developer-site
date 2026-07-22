@@ -5,7 +5,8 @@ description: HDR camera settings, tone mapping and gamma options, and using Came
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Material assets and scene rendering settings for “HDR Rendering”, then launch and capture the visual result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement HDR Rendering; required behavior and constraints: HDR camera settings, tone mapping and gamma options, and using CameraFrame for bloom-friendly floating-point rendering; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for HDR Rendering so the result satisfies this requirement: HDR camera settings, tone mapping and gamma options, and using CameraFrame for bloom-friendly floating-point rendering; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 
