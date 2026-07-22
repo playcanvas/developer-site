@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.6
-Total Documents: 477
+Total Documents: 479
 Generated: 2026-07-22
 
 ## Instructions for Large Language Models
@@ -480,9 +480,11 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting/): Export your splat as a self-contained HTML viewer from the SuperSplat Editor and host it anywhere — GitHub Pages, your own web server, or shared as a single file.
 
 ### Splat Transform
-- [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform/): SplatTransform CLI and library: convert between splat formats, transform and filter data, merge scenes, voxelize for collision, and render images.
+- [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform/): SplatTransform CLI and library: convert between splat formats, transform and filter data, merge scenes, generate streamed LODs, voxelize for collision, and render images.
 - [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision/): Generate sparse voxel octrees and collision meshes from Gaussian splats with splat-transform.
 - [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker/): Run splat-transform as a containerised backend on a Linux host with an NVIDIA GPU, including AWS GPU instances and a CPU-only variant.
+- [Library Usage](https://developer.playcanvas.com/user-manual/splat-transform/library/): Use splat-transform programmatically: the chunk-source pipeline for reading, processing, and writing Gaussian splat data in Node.js and the browser.
+- [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog/): Build multi-LOD Streamed SOG (lod-meta.json) with splat-transform: tag LOD levels, decimate a single source, tune chunking, and read Streamed SOG back.
 - [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format/): Voxel format specification: the on-disk structure of .voxel.json / .voxel.bin sparse voxel octrees written by splat-transform.
 
 ### ECS
