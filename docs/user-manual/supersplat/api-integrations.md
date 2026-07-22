@@ -48,7 +48,7 @@ SuperSplat creates the scene after the upload is completed. The scene may remain
 
 The same API supports both end-user integrations and custom automation:
 
-- The **LichtFeld Studio integration** exports PLY or SOG scenes and publishes them to SuperSplat with progress reporting and resumable uploads.
+- The [**SuperSplat plugin for LichtFeld Studio**](https://github.com/playcanvas/supersplat-lichtfeld-plugin) exports PLY or SOG scenes and publishes them to SuperSplat with progress reporting and resumable uploads.
 
 Clients can identify themselves through the optional `uploadClient` field:
 
