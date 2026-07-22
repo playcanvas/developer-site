@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 477
-Generated: 2026-07-21
+Generated: 2026-07-22
 
 ================================================================================
 
@@ -30554,7 +30554,7 @@ Select a row in the property list to display its distribution. The default prope
 | **Opacity** | Effective opacity, including the active Color panel transparency adjustment. |
 | **Red/Green/Blue** | Final color for the current camera direction, including spherical harmonics and Color panel adjustments. These histograms can change when the camera moves. |
 | **Scale X/Y/Z** | Decoded Gaussian scale along each local axis. |
-| **Quat W/X/Y/Z** | Components of the Gaussian's rotation quaternion. |
+| **Quaternion W/X/Y/Z** | Components of the Gaussian's rotation quaternion. |
 | **Distance** | Distance from the world origin `(0, 0, 0)`. |
 | **Camera Depth** | Distance along the current camera's view direction. This histogram changes when the camera moves. |
 | **Volume** | `scale_x * scale_y * scale_z`. |
@@ -30634,7 +30634,7 @@ The panel displays decoded or derived values rather than every value exactly as 
 | Red/Green/Blue | Final color after evaluating available SH bands for the current view and applying Color panel adjustments. |
 | Hue/Saturation/Value | Calculated from the final color after clamping RGB to the `0-1` range. |
 | Opacity | Decoded opacity with the Color panel transparency adjustment applied. |
-| Quat W/X/Y/Z | Rotation quaternion; `W` is reconstructed in its non-negative canonical form. |
+| Quaternion W/X/Y/Z | Rotation quaternion; `W` is reconstructed in its non-negative canonical form. |
 | DC and SH | Raw coefficients exposed when **All Properties** is enabled. |
 
 Internal `state` and `transform` properties are not available for histogram visualization.
@@ -30699,8 +30699,8 @@ Each Scene Manager row represents an imported splat, while the selection tools a
 | [Image: Brush Select] **Brush Select** | Click and drag to paint a selection using a circular brush. Adjust the brush size with the `[` (decrease) and `]` (increase) keys. Ideal for organic selection work. |
 | [Image: Flood Select] **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold slider (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters) that appear isolated in the scene. |
 | [Image: Eyedropper Select] **Eyedropper Select** | Click on the viewport to select Gaussians based on color similarity. A threshold slider (0-1) controls the sensitivity of the color matching. This tool is useful for selecting groups of Gaussians that share similar colors. |
-| [Image: Sphere Select] **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center, use the translate gizmo to move it, or enter its **Position** (X, Y, Z) numerically. Set its **Radius** in the toolbar. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. |
-| [Image: Box Select] **Box Select** | Creates an axis-aligned 3D box for volumetric selection. Double-click anywhere in the scene to position the box center, use the translate gizmo to move it, or enter its **Position** (X, Y, Z) numerically. Enter its **Size** (X, Y, Z) in the toolbar. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. This is ideal for selecting Gaussians within a specific region of 3D space. |
+| [Image: Sphere Select] **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center. Move and Scale buttons in the toolbar (or the `1` and `3` keys) switch the sphere's gizmo — dragging the scale gizmo's center handle changes the radius — or enter its **Position** (X, Y, Z) and **Radius** numerically. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. |
+| [Image: Box Select] **Box Select** | Creates a 3D box for volumetric selection. Double-click anywhere in the scene to position the box center. Move, Rotate, and Scale buttons in the toolbar (or the `1`, `2`, and `3` keys) switch the box's gizmo, so the box can be freely positioned, rotated, and resized — or enter its **Position** (X, Y, Z) and **Size** (X, Y, Z) numerically. While the rotate gizmo is active, the **Size** fields are replaced by **Rotation** fields (enter `0, 0, 0` to reset the orientation). Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. This is ideal for selecting Gaussians within a specific region of 3D space. |
 
 </div>
 
@@ -30719,7 +30719,7 @@ The 2D selection tools support modifier keys to control how the selection is app
 
 While Picker, Lasso, Polygon, Brush, or Flood Select is active, the cursor shows which operation the current modifier keys will apply. A plain crosshair means **Set**; a badge on the crosshair indicates **Add** (`+`), **Remove** (`−`), or **Intersect** (`∩`). The same feedback appears when selecting a value range in the [Splat Data panel](data-panel.md).
 
-The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **Remove**, and **Intersect** buttons in their toolbar instead of using modifier keys.
+The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **Remove**, and **Intersect** buttons in their toolbar instead of using modifier keys. Their volumes are transformed with the same gizmos as the transform tools: clicking the active gizmo mode button again hides the gizmo, the gizmo follows the local/world coordinate-space toggle, and volume edits are undoable while the tool is active.
 
 ## Lock, Delete, and Restore
 
@@ -30783,6 +30783,7 @@ SuperSplat supports several Gaussian Splat scene formats, plus COLMAP and INRIA 
 | `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
 | `.sog` | ✅ | ✅ | Bundled super-compressed format (a zip file containing `meta.json` and `.webp` textures). Recommended for runtime applications |
 | `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](/user-manual/splat-transform/) CLI tool to export |
+| `lod-meta.json` | ✅ | ❌ | [Streamed SOG](/user-manual/supersplat/streaming) bundle (accompanied by per-LOD `.sog` chunks). Use [SplatTransform](/user-manual/splat-transform/) CLI tool to export |
 | `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
 | `.ksplat` | ✅ | ❌ | KSplat compressed splat format. Import only |
 | `.spz` | ✅ | ✅ | Niantic compressed format. Exports as SPZ version 4 by default, with SPZ version 3 available for older readers |
@@ -30800,11 +30801,11 @@ Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY fi
 
 ## Importing Splats
 
-SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.ksplat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG), and `meta.json` (unbundled SOG) formats. It can also import COLMAP `images.txt` and INRIA camera pose `.json` files to create [camera animation keyframes](timeline.md#importing-camera-poses-as-keyframes).
+SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.ksplat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG), `meta.json` (unbundled SOG), and `lod-meta.json` (Streamed SOG) formats. It can also import COLMAP `images.txt` and INRIA camera pose `.json` files to create [camera animation keyframes](timeline.md#importing-camera-poses-as-keyframes).
 
 There are four ways to load a Gaussian Splat file:
 
-1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc`, `.lcc2`, or unbundled SOG), drag the parent folder containing those files.
+1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc`, `.lcc2`, unbundled SOG, or Streamed SOG), drag the parent folder containing those files.
 2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system.
 3. **Direct file opening** - If you have installed SuperSplat as a PWA, you can double-click a splat file in File Explorer (Windows) or Finder (macOS).
 4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<SPLAT_URL>`. For example:
@@ -30813,7 +30814,7 @@ There are four ways to load a Gaussian Splat file:
 
     This is particularly useful for sharing splats with others on social platforms like X and LinkedIn.
 
-    URL loading also supports multi-file `.lcc`, `.lcc2`, and unbundled SOG scenes. Keep their related chunk or texture files at the relative paths referenced by the container.
+    URL loading also supports multi-file `.lcc`, `.lcc2`, unbundled SOG, and Streamed SOG scenes. Keep their related chunk or texture files at the relative paths referenced by the container.
 
 ### Choosing a Level of Detail {#choosing-a-level-of-detail}
 
@@ -30894,7 +30895,7 @@ The Scene Manager lists the imported splats in the project. Click a row to choos
 
 ### Viewport
 
-The 3D viewport where you can visually edit your scenes. The viewport has a 2D grid to help orient yourself in the scene. By default, the grid lies in the XZ plane (with the world Y axis pointing upwards). The X axis is colored red and the Z axis is blue. Major grid divisions occur at 1 meter intervals (and smaller grid divisions are at 10cm intervals).
+The 3D viewport where you can visually edit your scenes. The viewport has a 2D grid to help orient yourself in the scene. By default, the grid lies in the XZ plane (with the world Y axis pointing upwards); the **Grid Plane** option in the **Settings** panel can place it on the XY or YZ plane instead. The X axis is colored red and the Z axis is blue. Major grid divisions occur at 1 meter intervals (and smaller grid divisions are at 10cm intervals).
 
 ### View Cube
 
@@ -30906,7 +30907,7 @@ This vertical toolbar contains icons related to splat visualization, camera cont
 
 ### Bottom Toolbar
 
-This horizontal toolbar contains undo and redo, Gaussian selection tools, Move, Rotate, Scale, Measure, coordinate-space and pivot controls. See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
+This horizontal toolbar contains undo and redo, Gaussian selection tools, Move, Rotate, Scale, Measure, Orient, coordinate-space and pivot controls. See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
 
 ### Animation Timeline
 
@@ -30981,7 +30982,7 @@ For Picker, Lasso, Polygon, Brush, and Flood selections, hold `Shift` to add, `C
 
 | Action | Shortcut |
 |---|---|
-| Move / Rotate / Scale | `1` / `2` / `3` |
+| Move / Rotate / Scale | `1` / `2` / `3` (while Box or Sphere Select is active, these switch the selection volume's gizmo instead) |
 | Picker / Lasso / Polygon | `R` / `L` / `P` |
 | Brush / Flood | `B` / `O` |
 | Eyedropper | `Ctrl + E` (`Cmd + E` on macOS) |
@@ -31018,7 +31019,7 @@ See [Camera Controls](camera-controls.md) for mouse, touch, fly, and view-cube c
 | Add keyframe | `Enter` |
 | Remove keyframe | `Shift + Enter` |
 
-Shortcuts are ignored while focus is in a text or numeric input. Some keys also have tool-specific behavior: for example, `Delete` removes a measurement marker while Measure is active, and removes the last unclosed Polygon point while drawing a polygon.
+Shortcuts are ignored while focus is in a text or numeric input. Some keys also have tool-specific behavior: for example, `Delete` removes a placed point while Measure or Orient is active, and removes the last unclosed Polygon point while drawing a polygon. While Measure or Orient is active, `F` frames the placed points instead of the selection.
 
 --------------------------------------------------------------------------------
 
@@ -31103,7 +31104,7 @@ To publish your splat:
 
    | Option | Description |
    |--------|-------------|
-   | **Publish To** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
+   | **Publish to** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
    | **Title** | A short title that will appear below your splat's thumbnail once it is published |
    | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
    | **Background** | The background color of the viewer. Defaults to the Editor's current background color |
@@ -31132,7 +31133,7 @@ Once the publish process is complete, a modal dialog will show with the URL of y
 
 ## Republishing to an Existing Scene
 
-Setting **Publish To** to one of your existing scenes overwrites that scene in place, keeping its URL. In this mode, two toggles choose what gets replaced:
+Setting **Publish to** to one of your existing scenes overwrites that scene in place, keeping its URL. In this mode, two toggles choose what gets replaced:
 
 | Option | Description |
 |--------|-------------|
@@ -31187,7 +31188,7 @@ When you select `Image` from the Render menu, a dialog will appear with settings
     - `QHD` - `2560x1440` resolution
     - `4K` - `3840x2160` resolution
     - `Custom` - Allows manual resolution selection
-  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048` and `Custom`
+  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048`, `7680x3840`, `8192x4096` and `Custom`
 - **Resolution:** Only active when `Custom` preset is selected. Allows you to specify custom width and height values.
 - **Format:** Choose the output image format:
   - `PNG` (default) - Lossless output with transparency support
@@ -31220,8 +31221,8 @@ When you select `Video` from the Render menu, a dialog will appear with several 
   - `Standard` (default) - A regular flat video rendered from the camera's point of view
   - `360° Equirectangular` - A monoscopic 360° video that can be viewed on YouTube, in VR headsets and in 360°-capable players like VLC
 - **Resolution:** Choose the output resolution. Available options depend on the selected projection:
-  - For `Standard`: `960x540`, `1280x720`, `1920x1080` (default), `2560x1440`, `3840x2160`
-  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048`
+  - For `Standard`: `960x540`, `1280x720`, `1920x1080` (default), `2560x1440`, `3840x2160`, `7680x4320`
+  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048`, `7680x3840`, `8192x4096`
 - **Format:** Choose the output video format:
   - `MP4` (default) - Most widely compatible format, ideal for general use
   - `WebM` - Open format, excellent for web use
@@ -31249,6 +31250,12 @@ When you select `Video` from the Render menu, a dialog will appear with several 
 - **Portrait Mode:** If checked, the resolution will be flipped to be vertical. This is useful if you intend your video to be viewed in portrait on mobile. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the video stays level and follows only the camera's heading, which is generally the most comfortable to watch. If unchecked, the camera's full orientation (including pitch) is baked into the video.
 - **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the video. Only available for `Standard` projection.
+
+:::note Resolution availability
+
+The dialog checks which resolutions your browser and device can actually encode with the current codec, frame rate, and bitrate. Unsupported resolutions are disabled in the dropdown and marked "Not supported", and if your current selection is unsupported the `Render` button is blocked with a message suggesting the highest supported lower resolution. High resolutions such as 8K are only available on hardware whose video encoder (and GPU texture size limit) can handle them; try a lower frame rate or bitrate, another codec or format, or a different browser if an option you need is unavailable.
+
+:::
 
 ### Rendering the Video
 
@@ -31364,7 +31371,7 @@ The Timeline panel allows you to create camera animations for your Gaussian Spla
 
 The Timeline panel includes the following controls:
 
-- **Play/Stop button** - Play or stop the animation playback
+- **Play/Pause button** - Play or pause the animation playback
 - **Previous/Next Frame buttons** - Step one frame backward or forward. Hold **Shift** while clicking to jump to the previous or next keyframe instead
 - **Add Key button (`+`)** - Create a new keyframe at the current timeline position
 - **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
@@ -31460,7 +31467,7 @@ All keyframe operations - adding, moving, copying, and removing - can be undone 
 
 ## Visualizing Keyframe Cameras
 
-To see where your keyframes place the camera in 3D space, enable the **Show Cameras** toggle in the **Settings** panel (the gear icon in the [Right Toolbar](interface.md#right-toolbar)). A wireframe camera gizmo is drawn in the viewport at each keyframe's stored position and orientation, making it easy to review your camera path at a glance. The state of the toggle is saved with your project.
+To see where your keyframes place the camera in 3D space, enable the **Show Camera Poses** toggle in the **Settings** panel (the gear icon in the [Right Toolbar](interface.md#right-toolbar)). A wireframe camera gizmo is drawn in the viewport at each keyframe's stored position and orientation, making it easy to review your camera path at a glance. The state of the toggle is saved with your project.
 
 ## Configuring Timeline Settings
 
@@ -31504,7 +31511,7 @@ The Loop toggle on the Timeline (next to the smoothness setting) controls what h
 - **Loop enabled (default)** - The camera path forms a closed loop: after the last keyframe, the camera smoothly interpolates back to the first keyframe over the remaining frames of the timeline
 - **Loop disabled** - The camera path stays open: the camera comes to rest on the last keyframe and holds that pose
 
-The state of the Loop toggle is saved with your project, and the camera path drawn by the **Show Cameras** toggle updates to show a closed or open curve accordingly.
+The state of the Loop toggle is saved with your project, and the camera path drawn by the **Show Camera Poses** toggle updates to show a closed or open curve accordingly.
 
 When looping is enabled, it's important to avoid setting a keyframe on both the first and last frames of the timeline, as this will cause a sudden snap when the animation loops.
 
@@ -31570,16 +31577,32 @@ Select the active splat, then choose a tool from the bottom toolbar:
 
 Drag the gizmo handles in the viewport. For precise values, edit **Position**, **Rotation**, and uniform **Scale** in the **Transform** panel below the Scene Manager. Transform operations can be undone and redone.
 
-Press `Shift + C` to switch the gizmo between world and local coordinate space.
+Gizmos start in the splat's local coordinate space. Press `Shift + C` (or the coordinate-space toggle in the bottom toolbar) to switch between local and world space.
 
 ## Position the Pivot
 
-The transform origin controls where rotation and scale are applied. The origin button in the bottom toolbar switches between:
+The pivot marks the transform origin — where rotation and scale are applied — and defines the splat's local coordinate frame:
 
-- **Splat origin**: the imported splat's transform origin.
-- **Bound center**: the center of the whole splat, or the center of the selected Gaussians when a selection exists.
+- While Move, Rotate, or Scale is active, double-click a visible surface to place the pivot at that point.
+- Click **Reset Pivot** in the bottom toolbar to return the pivot to the splat's origin and reset its orientation. `Shift`-click it to place the pivot at the bound center instead: the center of the whole splat, or of the selected Gaussians when a selection exists.
+- The [Orient tool](#orient-a-splat-to-the-grid) can set the pivot from a plane picked on the splat's surface.
 
-While Move, Rotate, or Scale is active, double-click a visible surface to place the pivot at that point. Moving the pivot does not move the splat until you use a transform control.
+Moving the pivot does not move the splat until you use a transform control. Pivot changes are undoable, and a custom pivot is saved with the project in `.ssproj` files.
+
+## Orient a Splat to the Grid {#orient-a-splat-to-the-grid}
+
+The Orient tool levels a mis-rotated splat — a Z-up import, a tilted capture, or an upside-down scan — by aligning a plane picked on its surface to the grid:
+
+1. Activate **Orient** in the bottom toolbar.
+2. Click three points on a surface that should be level, such as a floor or table top.
+3. Click a placed point and use its move gizmo to refine the position. `Delete` or `Backspace` removes the active point, **Clear** removes all of them, and `F` frames the points in the viewport.
+4. Press **Align to Grid**. The whole active splat rotates and translates so the picked plane lands exactly on the grid plane, pivoting around the picked points so the clicked region stays in place.
+
+The side of the plane facing the camera becomes up. If the result is upside down, orbit underneath the plane and press **Align to Grid** again. When the picked plane is within 3 degrees of one of the splat's own axes, the rotation snaps to that axis, so conventional Z-up imports produce exact quarter turns.
+
+Alignment applies to the whole active splat regardless of any Gaussian selection and is recorded as a single undoable operation. The grid is displayed while the tool is active, even if hidden. The target plane follows the **Grid Plane** setting in **Settings** (XZ by default, or XY/YZ).
+
+With three points placed, the pivot button in the bottom toolbar changes to **Set Pivot**. Instead of moving the splat, it stores the picked plane as the splat's pivot and local frame: local-space gizmos and the **Transform** panel then work in that frame. This is useful for transforming along a surface's own axes without rotating the splat itself.
 
 ## Align Multiple Splats
 
@@ -31591,7 +31614,7 @@ To align independently captured splats:
 4. Use Move, Rotate, and Scale, checking the result from more than one camera angle.
 5. Toggle visibility or use Solo mode to compare the splats.
 
-The grid uses meters, with major divisions at 1 m and minor divisions at 0.1 m. Enable bounds and dimensions in **Settings** when a numeric size check is useful.
+The grid uses meters, with major divisions at 1 m and minor divisions at 0.1 m. Enable **Show Bounding Box** and **Show Dimensions** in **Settings** when a numeric size check is useful.
 
 ## Measure and Rescale a Splat
 
@@ -31600,10 +31623,10 @@ The Measure tool reports the distance between two surface points and can rescale
 1. Activate **Measure** in the bottom toolbar.
 2. Click a surface to place the first marker, then click again to place the second.
 3. Click either marker and use its move gizmo to refine the position.
-4. Read the measured length in the toolbar above the bottom controls.
+4. Read the measured length in the toolbar above the bottom controls. With **Show Dimensions** enabled in **Settings**, the length is also labeled along the line in the viewport.
 5. To calibrate the splat, enter the real distance in that field. SuperSplat uniformly rescales the whole active splat around the midpoint of the two markers.
 
-`Delete` or `Backspace` removes the active marker while Measure is active. Press `Escape` to leave the tool. Changing the length is undoable.
+`Delete` or `Backspace` removes the active marker while Measure is active, and `F` frames the placed markers. Press `Escape` to leave the tool. Changing the length is undoable.
 
 ## Merge Visible Splats
 
@@ -31667,7 +31690,7 @@ See [Managing Projects](managing-projects.md) for the difference between saving,
 ## Publishing or Rendering Fails
 
 - Publishing requires you to be signed in to superspl.at with a PlayCanvas account.
-- Video codec support depends on the browser. Try another format from the Render dialog or use a current version of Chrome, Edge, Firefox, or Safari.
+- Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or use a current version of Chrome, Edge, Firefox, or Safari.
 - A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing.
 
 If the problem persists, open **Help > Log an Issue** in the Editor and include the browser version, operating system, source format, approximate Gaussian count, and the steps that reproduce the problem. You can also ask in the [SuperSplat Discord community](https://discord.gg/T3pnhRTTAY).

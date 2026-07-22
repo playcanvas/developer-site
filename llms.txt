@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.6
 Total Documents: 477
-Generated: 2026-07-21
+Generated: 2026-07-22
 
 ## Instructions for Large Language Models
 
@@ -460,7 +460,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/): Render still images (PNG, JPEG, or WebP) and videos from SuperSplat locally, including 360° equirectangular output and timeline-driven video.
 - [Managing Splats](https://developer.playcanvas.com/user-manual/supersplat/editor/scene-management/): Manage multiple imported splats in SuperSplat: select, show, solo, rename, remove, align, and merge them.
 - [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline/): SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, and publishing animated camera paths that play on the scene page.
-- [Transform, Measure and Align](https://developer.playcanvas.com/user-manual/supersplat/editor/transform-measure-align/): Move, rotate, scale, measure, align, and merge whole splats or selected Gaussians in the SuperSplat Editor.
+- [Transform, Measure and Align](https://developer.playcanvas.com/user-manual/supersplat/editor/transform-measure-align/): Move, rotate, scale, measure, orient, align, and merge whole splats or selected Gaussians in the SuperSplat Editor.
 - [Troubleshooting](https://developer.playcanvas.com/user-manual/supersplat/editor/troubleshooting/): Resolve common SuperSplat Editor problems with imports, selection, transforms, exports, performance, saving, rendering, and publishing.
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore/): Browse and discover public splats on superspl.at: sort, filter by time and feature, search, and dig into a creator's profile.
 - [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage/): Use the Manage page on superspl.at to list, edit, share, and delete your published splats — and to open them in Studio.
