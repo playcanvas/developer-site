@@ -32,7 +32,9 @@
     "paths": {
         "/v1/me": {
             "get": {
-                "tags": ["Account"],
+                "tags": [
+                    "Account"
+                ],
                 "summary": "Get the authenticated caller",
                 "description": "Returns the authenticated caller identity.",
                 "operationId": "getMe",
@@ -115,7 +117,9 @@
         },
         "/v1/splats": {
             "get": {
-                "tags": ["Splats"],
+                "tags": [
+                    "Splats"
+                ],
                 "summary": "List splats owned by the authenticated caller",
                 "description": "Returns a paginated list of splats owned by the authenticated user. The response uses `visibility`; there is no separate `listed` boolean in this API.",
                 "operationId": "listSplats",
@@ -125,7 +129,9 @@
                         "name": "limit",
                         "schema": {
                             "description": "Maximum number of splats to return.",
-                            "examples": [50],
+                            "examples": [
+                                50
+                            ],
                             "default": 50,
                             "type": "integer",
                             "minimum": 1,
@@ -138,7 +144,9 @@
                         "name": "skip",
                         "schema": {
                             "description": "Number of splats to skip.",
-                            "examples": [0],
+                            "examples": [
+                                0
+                            ],
                             "default": 0,
                             "type": "integer",
                             "minimum": 0,
@@ -244,7 +252,9 @@
         },
         "/v1/splats/{splatId}": {
             "get": {
-                "tags": ["Splats"],
+                "tags": [
+                    "Splats"
+                ],
                 "summary": "Get a splat owned by the authenticated caller",
                 "description": "Returns a single splat owned by the authenticated user. Newly completed uploads may return `status: \"processing\"` until processing finishes.",
                 "operationId": "getSplat",
@@ -257,7 +267,9 @@
                             "minLength": 1,
                             "maxLength": 100,
                             "description": "Opaque public splat id.",
-                            "examples": ["a1b2c3d4"]
+                            "examples": [
+                                "a1b2c3d4"
+                            ]
                         },
                         "required": true,
                         "description": "Opaque public splat id."
@@ -369,7 +381,9 @@
         },
         "/v1/splats/uploads": {
             "post": {
-                "tags": ["Uploads"],
+                "tags": [
+                    "Uploads"
+                ],
                 "summary": "Create a resumable splat upload",
                 "description": "Starts a multipart upload and returns a resumable upload session. `title` is optional; when omitted, PlayCanvas assigns a default title. New splats are unlisted by default. Use `softwareTools` to explicitly attribute catalogue software IDs to the created splat.",
                 "operationId": "createSplatUpload",
@@ -379,7 +393,9 @@
                         "name": "Idempotency-Key",
                         "schema": {
                             "description": "Optional key for retrying create-upload requests safely. Reusing the same key returns the existing upload session.",
-                            "examples": ["upload-garden-scan-2026-01-01"],
+                            "examples": [
+                                "upload-garden-scan-2026-01-01"
+                            ],
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 200
@@ -433,7 +449,9 @@
                                             "id": "lcc-studio",
                                             "version": "1.2.3"
                                         },
-                                        "softwareTools": ["lcc-studio"]
+                                        "softwareTools": [
+                                            "lcc-studio"
+                                        ]
                                     }
                                 }
                             }
@@ -588,7 +606,9 @@
         },
         "/v1/splats/uploads/{uploadId}": {
             "get": {
-                "tags": ["Uploads"],
+                "tags": [
+                    "Uploads"
+                ],
                 "summary": "Get a resumable upload session",
                 "description": "Returns upload session state and any parts already observed by the server. Use this to resume an interrupted upload.",
                 "operationId": "getSplatUpload",
@@ -601,7 +621,9 @@
                             "minLength": 1,
                             "maxLength": 200,
                             "description": "Opaque resumable upload session id.",
-                            "examples": ["upl_0123456789abcdef01234567"]
+                            "examples": [
+                                "upl_0123456789abcdef01234567"
+                            ]
                         },
                         "required": true,
                         "description": "Opaque resumable upload session id."
@@ -717,7 +739,9 @@
         },
         "/v1/splats/uploads/{uploadId}/part-upload-urls": {
             "post": {
-                "tags": ["Uploads"],
+                "tags": [
+                    "Uploads"
+                ],
                 "summary": "Create signed URLs for upload parts",
                 "description": "Returns signed URLs for the requested part numbers. Upload each file part to its URL with HTTP PUT, then keep the returned ETag for completion.",
                 "operationId": "createSplatUploadPartUrls",
@@ -730,7 +754,9 @@
                             "minLength": 1,
                             "maxLength": 200,
                             "description": "Opaque resumable upload session id.",
-                            "examples": ["upl_0123456789abcdef01234567"]
+                            "examples": [
+                                "upl_0123456789abcdef01234567"
+                            ]
                         },
                         "required": true,
                         "description": "Opaque resumable upload session id."
@@ -747,7 +773,10 @@
                                 "firstTwoParts": {
                                     "summary": "First two parts",
                                     "value": {
-                                        "parts": [1, 2]
+                                        "parts": [
+                                            1,
+                                            2
+                                        ]
                                     }
                                 }
                             }
@@ -899,7 +928,9 @@
         },
         "/v1/splats/uploads/{uploadId}/complete": {
             "post": {
-                "tags": ["Uploads"],
+                "tags": [
+                    "Uploads"
+                ],
                 "summary": "Complete a resumable upload and publish the splat",
                 "description": "Completes the multipart upload and creates a splat. Use the returned `splatId` to fetch the splat representation; it can remain `processing` while PlayCanvas prepares the final viewer assets.",
                 "operationId": "completeSplatUpload",
@@ -912,7 +943,9 @@
                             "minLength": 1,
                             "maxLength": 200,
                             "description": "Opaque resumable upload session id.",
-                            "examples": ["upl_0123456789abcdef01234567"]
+                            "examples": [
+                                "upl_0123456789abcdef01234567"
+                            ]
                         },
                         "required": true,
                         "description": "Opaque resumable upload session id."
@@ -1139,7 +1172,9 @@
                 "properties": {
                     "contentLength": {
                         "description": "Total source file size in bytes. Optional but strongly recommended; when provided, PlayCanvas can reject over-limit uploads before S3 multipart upload starts.",
-                        "examples": [125829120],
+                        "examples": [
+                            125829120
+                        ],
                         "anyOf": [
                             {
                                 "type": "integer",
@@ -1153,20 +1188,32 @@
                     },
                     "sourceFormat": {
                         "type": "string",
-                        "enum": ["ply", "sog", "ssog", "lcc"],
-                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
-                        "examples": ["ply"]
+                        "enum": [
+                            "ply",
+                            "sog",
+                            "spz",
+                            "ssog",
+                            "lcc"
+                        ],
+                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `spz` for SPZ files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
+                        "examples": [
+                            "ply"
+                        ]
                     },
                     "title": {
                         "description": "Optional display title for the splat. If omitted, PlayCanvas assigns a default title.",
-                        "examples": ["Garden scan"],
+                        "examples": [
+                            "Garden scan"
+                        ],
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 100
                     },
                     "description": {
                         "description": "Optional display description for the splat.",
-                        "examples": ["Back garden scan captured at dusk."],
+                        "examples": [
+                            "Back garden scan captured at dusk."
+                        ],
                         "type": "string",
                         "maxLength": 5000
                     },
@@ -1183,14 +1230,22 @@
                             "maxLength": 64,
                             "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
                             "description": "Software catalogue ID.",
-                            "examples": ["lcc-studio"]
+                            "examples": [
+                                "lcc-studio"
+                            ]
                         },
                         "description": "Optional software catalogue IDs to attribute to the created splat. Use the software catalogue endpoint to discover currently supported IDs; this field is not an OpenAPI enum because the catalogue may grow over time.",
-                        "examples": [["lcc-studio"]],
+                        "examples": [
+                            [
+                                "lcc-studio"
+                            ]
+                        ],
                         "uniqueItems": true
                     }
                 },
-                "required": ["sourceFormat"],
+                "required": [
+                    "sourceFormat"
+                ],
                 "additionalProperties": false,
                 "description": "Request body for creating a resumable splat upload session."
             },
@@ -1203,17 +1258,23 @@
                         "maxLength": 64,
                         "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
                         "description": "Stable lowercase identifier for the application or integration creating the upload, such as `lcc-studio`.",
-                        "examples": ["lcc-studio"]
+                        "examples": [
+                            "lcc-studio"
+                        ]
                     },
                     "version": {
                         "description": "Optional version of the upload client application.",
-                        "examples": ["1.2.3"],
+                        "examples": [
+                            "1.2.3"
+                        ],
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 64
                     }
                 },
-                "required": ["id"],
+                "required": [
+                    "id"
+                ],
                 "additionalProperties": false,
                 "description": "Client application details captured with the upload."
             },
@@ -1229,12 +1290,16 @@
                             "minimum": 1,
                             "maximum": 10000,
                             "description": "One-based part number in the multipart upload.",
-                            "examples": [1]
+                            "examples": [
+                                1
+                            ]
                         },
                         "description": "One-based part numbers to create signed upload URLs for. Calculate these by splitting the source file using the upload session `partSize`, and request only the parts you are ready to upload."
                     }
                 },
-                "required": ["parts"],
+                "required": [
+                    "parts"
+                ],
                 "additionalProperties": false,
                 "description": "Request body for creating signed URLs for explicit upload parts."
             },
@@ -1253,22 +1318,31 @@
                                     "minimum": 1,
                                     "maximum": 10000,
                                     "description": "One-based part number in the multipart upload.",
-                                    "examples": [1]
+                                    "examples": [
+                                        1
+                                    ]
                                 },
                                 "etag": {
                                     "type": "string",
                                     "minLength": 1,
                                     "description": "ETag returned by S3 after uploading this part.",
-                                    "examples": ["\"abc123\""]
+                                    "examples": [
+                                        "\"abc123\""
+                                    ]
                                 }
                             },
-                            "required": ["partNumber", "etag"],
+                            "required": [
+                                "partNumber",
+                                "etag"
+                            ],
                             "additionalProperties": false
                         },
                         "description": "Uploaded parts to commit. Include each uploaded part number and its S3 ETag."
                     }
                 },
-                "required": ["parts"],
+                "required": [
+                    "parts"
+                ],
                 "additionalProperties": false,
                 "description": "Request body for completing a resumable upload and queuing splat processing."
             },
@@ -1278,11 +1352,15 @@
                     "id": {
                         "type": "string",
                         "description": "Authenticated user id.",
-                        "examples": ["123"]
+                        "examples": [
+                            "123"
+                        ]
                     },
                     "username": {
                         "description": "Username, when available.",
-                        "examples": ["artist"],
+                        "examples": [
+                            "artist"
+                        ],
                         "anyOf": [
                             {
                                 "type": "string"
@@ -1293,7 +1371,9 @@
                         ]
                     }
                 },
-                "required": ["id"],
+                "required": [
+                    "id"
+                ],
                 "additionalProperties": {},
                 "description": "Authenticated caller identity."
             },
@@ -1305,7 +1385,9 @@
                         "description": "Human-readable error message."
                     }
                 },
-                "required": ["error"],
+                "required": [
+                    "error"
+                ],
                 "additionalProperties": {},
                 "description": "Error response."
             },
@@ -1341,11 +1423,18 @@
                                 "description": "Total matching splats owned by the caller."
                             }
                         },
-                        "required": ["skip", "limit", "total"],
+                        "required": [
+                            "skip",
+                            "limit",
+                            "total"
+                        ],
                         "additionalProperties": {}
                     }
                 },
-                "required": ["data", "pagination"],
+                "required": [
+                    "data",
+                    "pagination"
+                ],
                 "additionalProperties": {},
                 "description": "Paginated splat list."
             },
@@ -1355,29 +1444,46 @@
                     "id": {
                         "type": "string",
                         "description": "Public 8-character splat id.",
-                        "examples": ["a1b2c3d4"]
+                        "examples": [
+                            "a1b2c3d4"
+                        ]
                     },
                     "title": {
                         "type": "string",
                         "description": "Display title.",
-                        "examples": ["garden-scan"]
+                        "examples": [
+                            "garden-scan"
+                        ]
                     },
                     "description": {
                         "type": "string",
                         "description": "Display description.",
-                        "examples": [""]
+                        "examples": [
+                            ""
+                        ]
                     },
                     "status": {
                         "type": "string",
-                        "enum": ["processing", "completed", "failed"],
+                        "enum": [
+                            "processing",
+                            "completed",
+                            "failed"
+                        ],
                         "description": "Publish lifecycle state of the splat.",
-                        "examples": ["processing"]
+                        "examples": [
+                            "processing"
+                        ]
                     },
                     "visibility": {
                         "type": "string",
-                        "enum": ["listed", "unlisted"],
+                        "enum": [
+                            "listed",
+                            "unlisted"
+                        ],
                         "description": "Whether the splat is listed publicly or only reachable by direct link.",
-                        "examples": ["unlisted"]
+                        "examples": [
+                            "unlisted"
+                        ]
                     },
                     "format": {
                         "anyOf": [
@@ -1389,19 +1495,25 @@
                             }
                         ],
                         "description": "Published output format once processing completes. `null` while processing.",
-                        "examples": [null]
+                        "examples": [
+                            null
+                        ]
                     },
                     "size": {
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 25000000000,
                         "description": "Published splat size in bytes. Processing splats may report `0` until output is available.",
-                        "examples": [0]
+                        "examples": [
+                            0
+                        ]
                     },
                     "viewerUrl": {
                         "type": "string",
                         "description": "URL where the splat can be viewed.",
-                        "examples": ["https://superspl.at/scene/a1b2c3d4"]
+                        "examples": [
+                            "https://superspl.at/scene/a1b2c3d4"
+                        ]
                     },
                     "createdAt": {
                         "anyOf": [
@@ -1415,7 +1527,9 @@
                             }
                         ],
                         "description": "Creation timestamp.",
-                        "examples": ["2026-01-01T00:00:00.000Z"]
+                        "examples": [
+                            "2026-01-01T00:00:00.000Z"
+                        ]
                     },
                     "updatedAt": {
                         "anyOf": [
@@ -1429,7 +1543,9 @@
                             }
                         ],
                         "description": "Last update timestamp.",
-                        "examples": ["2026-01-01T00:00:00.000Z"]
+                        "examples": [
+                            "2026-01-01T00:00:00.000Z"
+                        ]
                     },
                     "completedAt": {
                         "anyOf": [
@@ -1443,7 +1559,9 @@
                             }
                         ],
                         "description": "Processing completion timestamp, or `null` while processing.",
-                        "examples": [null]
+                        "examples": [
+                            null
+                        ]
                     }
                 },
                 "required": [
@@ -1468,13 +1586,23 @@
                     "id": {
                         "type": "string",
                         "description": "Resumable upload session id.",
-                        "examples": ["upl_0123456789abcdef01234567"]
+                        "examples": [
+                            "upl_0123456789abcdef01234567"
+                        ]
                     },
                     "status": {
                         "type": "string",
-                        "enum": ["created", "uploading", "processing", "completed", "canceled"],
+                        "enum": [
+                            "created",
+                            "uploading",
+                            "processing",
+                            "completed",
+                            "canceled"
+                        ],
                         "description": "Lifecycle state of the resumable upload session. `processing` means the bytes have been committed and the splat is being finalized.",
-                        "examples": ["created"]
+                        "examples": [
+                            "created"
+                        ]
                     },
                     "contentLength": {
                         "anyOf": [
@@ -1488,23 +1616,37 @@
                             }
                         ],
                         "description": "Total source file size declared when creating the upload, or `null` when the client did not provide one.",
-                        "examples": [null]
+                        "examples": [
+                            null
+                        ]
                     },
                     "sourceFormat": {
                         "type": "string",
-                        "enum": ["ply", "sog", "ssog", "lcc"],
-                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
-                        "examples": ["ply"]
+                        "enum": [
+                            "ply",
+                            "sog",
+                            "spz",
+                            "ssog",
+                            "lcc"
+                        ],
+                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `spz` for SPZ files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
+                        "examples": [
+                            "ply"
+                        ]
                     },
                     "title": {
                         "type": "string",
                         "description": "Display title that will be used for the created splat.",
-                        "examples": ["garden-scan"]
+                        "examples": [
+                            "garden-scan"
+                        ]
                     },
                     "description": {
                         "type": "string",
                         "description": "Display description that will be used for the created splat.",
-                        "examples": [""]
+                        "examples": [
+                            ""
+                        ]
                     },
                     "softwareTools": {
                         "maxItems": 6,
@@ -1515,10 +1657,16 @@
                             "maxLength": 64,
                             "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
                             "description": "Software catalogue ID.",
-                            "examples": ["lcc-studio"]
+                            "examples": [
+                                "lcc-studio"
+                            ]
                         },
                         "description": "Optional software catalogue IDs to attribute to the created splat. Use the software catalogue endpoint to discover currently supported IDs; this field is not an OpenAPI enum because the catalogue may grow over time.",
-                        "examples": [["lcc-studio"]],
+                        "examples": [
+                            [
+                                "lcc-studio"
+                            ]
+                        ],
                         "uniqueItems": true
                     },
                     "partSize": {
@@ -1526,7 +1674,9 @@
                         "minimum": 1,
                         "maximum": 25000000000,
                         "description": "Server-chosen target size in bytes for each uploaded part. Use this to split the file into multipart upload ranges; the final part may be smaller.",
-                        "examples": [67108864]
+                        "examples": [
+                            67108864
+                        ]
                     },
                     "uploadedParts": {
                         "type": "array",
@@ -1538,22 +1688,31 @@
                                     "minimum": 1,
                                     "maximum": 10000,
                                     "description": "One-based part number in the multipart upload.",
-                                    "examples": [1]
+                                    "examples": [
+                                        1
+                                    ]
                                 },
                                 "etag": {
                                     "type": "string",
                                     "description": "ETag for the uploaded part.",
-                                    "examples": ["\"abc123\""]
+                                    "examples": [
+                                        "\"abc123\""
+                                    ]
                                 },
                                 "size": {
                                     "description": "Actual observed size of this uploaded part in bytes, when known. This is resume metadata, not the target chunk size.",
-                                    "examples": [67108864],
+                                    "examples": [
+                                        67108864
+                                    ],
                                     "type": "integer",
                                     "minimum": 0,
                                     "maximum": 25000000000
                                 }
                             },
-                            "required": ["partNumber", "etag"],
+                            "required": [
+                                "partNumber",
+                                "etag"
+                            ],
                             "additionalProperties": {}
                         },
                         "description": "Parts already observed by the server. Useful when resuming an interrupted upload."
@@ -1563,7 +1722,9 @@
                         "format": "date-time",
                         "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$",
                         "description": "When this upload session expires.",
-                        "examples": ["2026-01-01T00:00:00.000Z"]
+                        "examples": [
+                            "2026-01-01T00:00:00.000Z"
+                        ]
                     }
                 },
                 "required": [
@@ -1586,14 +1747,18 @@
                     "uploadId": {
                         "type": "string",
                         "description": "Resumable upload session id.",
-                        "examples": ["upl_0123456789abcdef01234567"]
+                        "examples": [
+                            "upl_0123456789abcdef01234567"
+                        ]
                     },
                     "partSize": {
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 25000000000,
                         "description": "Server-chosen target size in bytes for each uploaded part. Matches the upload session `partSize`.",
-                        "examples": [67108864]
+                        "examples": [
+                            67108864
+                        ]
                     },
                     "urls": {
                         "type": "array",
@@ -1605,28 +1770,42 @@
                                     "minimum": 1,
                                     "maximum": 10000,
                                     "description": "One-based part number in the multipart upload.",
-                                    "examples": [1]
+                                    "examples": [
+                                        1
+                                    ]
                                 },
                                 "url": {
                                     "type": "string",
                                     "description": "Signed URL. Upload the bytes for this part with an HTTP PUT.",
-                                    "examples": ["https://example-bucket.s3.amazonaws.com/uploads/part-1"]
+                                    "examples": [
+                                        "https://example-bucket.s3.amazonaws.com/uploads/part-1"
+                                    ]
                                 },
                                 "expiresAt": {
                                     "type": "string",
                                     "format": "date-time",
                                     "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$",
                                     "description": "When this signed URL expires.",
-                                    "examples": ["2026-01-01T00:20:00.000Z"]
+                                    "examples": [
+                                        "2026-01-01T00:20:00.000Z"
+                                    ]
                                 }
                             },
-                            "required": ["partNumber", "url", "expiresAt"],
+                            "required": [
+                                "partNumber",
+                                "url",
+                                "expiresAt"
+                            ],
                             "additionalProperties": {}
                         },
                         "description": "Signed URLs for the requested part numbers."
                     }
                 },
-                "required": ["uploadId", "partSize", "urls"],
+                "required": [
+                    "uploadId",
+                    "partSize",
+                    "urls"
+                ],
                 "additionalProperties": {},
                 "description": "Signed URLs for uploading multipart data."
             },
@@ -1636,7 +1815,9 @@
                     "uploadId": {
                         "type": "string",
                         "description": "Resumable upload session id.",
-                        "examples": ["upl_0123456789abcdef01234567"]
+                        "examples": [
+                            "upl_0123456789abcdef01234567"
+                        ]
                     },
                     "status": {
                         "type": "string",
@@ -1646,15 +1827,24 @@
                     "splatId": {
                         "type": "string",
                         "description": "Opaque public splat id. Use `GET /v1/splats/{splatId}` to retrieve the splat representation.",
-                        "examples": ["a1b2c3d4"]
+                        "examples": [
+                            "a1b2c3d4"
+                        ]
                     },
                     "editUrl": {
                         "type": "string",
                         "description": "URL where the creator can continue editing the splat after upload completion.",
-                        "examples": ["https://superspl.at/scene/a1b2c3d4/edit"]
+                        "examples": [
+                            "https://superspl.at/scene/a1b2c3d4/edit"
+                        ]
                     }
                 },
-                "required": ["uploadId", "status", "splatId", "editUrl"],
+                "required": [
+                    "uploadId",
+                    "status",
+                    "splatId",
+                    "editUrl"
+                ],
                 "additionalProperties": {},
                 "description": "Upload completion result. Use the returned `splatId` to fetch the splat representation."
             }
