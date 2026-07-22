@@ -53,6 +53,10 @@ Construct your 3D worlds using intuitive [transform gizmos](interface/viewport),
 
 Write scripts without leaving your browser. The built-in [code editor](scripting/code-editor) features syntax highlighting, intelligent autocomplete, and real-time error checking. For larger projects, use the [VS Code extension](scripting/vscode-extension) and develop locally with full IDE power.
 
+### AI-Assisted Editing
+
+Connect an AI assistant through the [Editor MCP Server](/user-manual/ai/editor-mcp-server/) to inspect and modify the open project, operate the viewport, launch the application, and verify changes through screenshots and runtime state.
+
 ### Powerful Asset Pipeline
 
 Import models, textures, audio, and more with a streamlined [asset pipeline](assets/import-pipeline). The Editor automatically optimizes your assets and handles format conversions. Organize everything in the [Assets Panel](assets/asset-panel) with folders, search, and filtering.

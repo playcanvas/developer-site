@@ -1,57 +1,101 @@
 ---
 title: VS Code Extension
-description: Installs and uses the PlayCanvas VS Code extension for synced local editing, collaboration cues, and TypeScript-aware scripts.
+description: Install the PlayCanvas VS Code Extension, choose a sync mode, manage project files, and resolve synchronization problems.
 ---
 
-The PlayCanvas VS Code Extension provides a powerful, real-time editing environment for working with text-based assets from the PlayCanvas Editor. Designed for developers who prefer modern tooling such as IntelliSense, source control, GitHub Copilot, and AI-enabled workflows, the extension integrates VS Code directly with your PlayCanvas projects.
+The PlayCanvas VS Code Extension maps text-based assets from a PlayCanvas project into a local workspace. You can edit scripts and shaders with VS Code or Cursor while the extension handles authentication, branches, type information, and synchronization with the Editor.
 
 ![VS Code Extension Demo](/img/user-manual/scripting/vscode-demo.webp)
 
-The extension is fully [open-source on GitHub](https://github.com/playcanvas/vscode-extension) and licensed under MIT.
+The extension is [open source on GitHub](https://github.com/playcanvas/vscode-extension) and licensed under MIT. For a workflow designed for external coding agents, see [Using AI with the VS Code Extension](/user-manual/ai/vscode-extension/).
 
-## Features
+## Install and Open a Project
 
-* **Realtime Asset Syncing**  
-  Changes made in VS Code are instantly reflected in the PlayCanvas Editor, without needing manual file uploads or page refreshes.
+1. Install [Visual Studio Code](https://code.visualstudio.com/download) or [Cursor](https://cursor.com/downloads).
+2. Install the PlayCanvas extension from the marketplace used by your editor:
+    - VS Code: [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=playcanvas.playcanvas)
+    - Cursor: [Open VSX](https://open-vsx.org/extension/playcanvas/playcanvas)
+3. Select the sign-in notification and authenticate with your PlayCanvas account.
+4. Open the Command Palette with `Ctrl`/`Cmd` + `Shift` + `P`.
+5. Run **PlayCanvas: Open Project** and follow the prompts to choose a project and branch.
 
-* **Live File Collaboration**  
-  See other collaborators who are editing the same file to avoid conflicts and improve team coordination.
+The Explorer shows the project's text assets. Open a script to use PlayCanvas-aware type checking, autocomplete, and inline API information. The **Collaborators** view shows who else is working in the project.
 
-* **Full Script Type Checking**  
-  Enjoy robust TypeScript-powered type checking, IntelliSense, and autocomplete for PlayCanvas script types.
+## Choose a Sync Mode
 
-* **Disk-Mapped File System**  
-  Your PlayCanvas project structure is mirrored locally, enabling deep integration with external tools, including AI-assisted development workflows.
+Set **PlayCanvas: Sync Mode** (`playcanvas.syncMode`) in Settings, then reload the window after changing it.
 
-* **Enhanced Developer Experience**  
-  Integrates tightly with VS Code’s full feature set: refactoring tools, Git integration, snippets, and extensions.
+| | Realtime | Pull/Push (Preview) |
+| --- | --- | --- |
+| Best for | Live collaborative editing | External tools and reviewed batches of changes |
+| Synchronization | As you type | Explicit Pull and Push |
+| Conflicts | Merged automatically | Resolved with a three-way merge |
+| Availability | Desktop and web | Desktop only |
 
-## Installation
+### Realtime Mode
 
-1. Install [Visual Studio Code](https://code.visualstudio.com/download).  
-2. Install the [PlayCanvas VS Code Extension](https://marketplace.visualstudio.com/items?itemName=playcanvas.playcanvas) from the VS Code Marketplace.  
-3. Sign in with your PlayCanvas account when prompted.  
-4. Open the Command Palette (`Ctrl`/`Cmd` + `P`) and run **“PlayCanvas: Open Project”** to link a PlayCanvas project.
+Realtime is the default mode.
 
-### Supported Editors
+- Changes to open files synchronize as you type.
+- Changes from collaborators appear in your open files automatically.
+- `Ctrl`/`Cmd` + `S` saves the asset in the PlayCanvas Editor.
+- Creating, deleting, renaming, or moving files in the Explorer updates the project.
+- `Ctrl`/`Cmd` + `Z` and `Ctrl`/`Cmd` + `Shift` + `Z` undo or redo only your own changes.
 
-| Editor  | Supported |
-| ------- | --------- |
-| VS Code | ✅        |
-| Cursor  | ✅        |
+Opening a file refreshes it from the server. If another application changes a closed file on disk, realtime mode leaves the local edit on disk but does not submit it. The extension shows a warning directing you to Pull/Push mode.
 
-## Using the Extension
+### Pull/Push Mode
 
-* **Open Project**  
-  Use the Command Palette and run **PlayCanvas: Open Project** to begin editing your project locally.
+Pull/Push keeps filesystem edits local until you choose to synchronize them. This is the correct mode for formatters, compilers, scripts, and AI coding assistants that may edit closed files.
 
-* **Edit**  
-  Modify scripts, shaders, and other text assets using the complete set of VS Code editing capabilities.
+1. Set **PlayCanvas: Sync Mode** to **Pull/Push** and reload the window.
+2. Open Source Control and select the **PlayCanvas** repository.
+3. Select **Pull** to establish the latest server state.
+4. Edit and save files normally. Local edits appear under **Changes**.
+5. Review the diffs, then select **Push**.
 
-* **Sync**  
-  All saved changes automatically sync to your PlayCanvas project in real time.
+The PlayCanvas status-bar item shows incoming, outgoing, and conflicted file counts. You can also run **PlayCanvas: Pull** or **PlayCanvas: Push** from the Command Palette.
 
-* **Collaboration**  
-  View other users editing the same file and pull the latest changes when needed.
+- Pull: `Ctrl`/`Cmd` + `Alt` + `Down`
+- Push: `Ctrl`/`Cmd` + `Alt` + `Up`
 
-Integrating VS Code with PlayCanvas provides a sophisticated environment tailored for advanced development workflows, giving developers the flexibility and tools needed to build complex and high-performance web-based applications.
+Push is fast-forward only. If the server changed since your last Pull, Push stops without overwriting it. Pull first, resolve any conflicts, and then Push again.
+
+### Resolve a Pull/Push Conflict
+
+Conflicted files appear under **Merge Changes**.
+
+1. Open the conflicted file.
+2. Use the merge editor or edit the `<<<<<<<`, `=======`, and `>>>>>>>` sections directly.
+3. Keep the intended result, remove all conflict markers, and save the file.
+4. Check that the file moved back to **Changes**, then Push.
+
+To abandon a local edit instead, select its discard action in Source Control. Discard restores the last synchronized version and asks for confirmation first.
+
+## Switch Branches
+
+Synchronize or discard your current work before switching branches. Run **PlayCanvas: Switch Branch** from the Command Palette and select the target branch. The workspace then represents that project branch.
+
+## Ignore Files
+
+Create `.pcignore` in the project root to exclude matching paths from the workspace. Its syntax follows `.gitignore`, including globs such as `*.ts` or `generated/**`.
+
+The extension re-reads `.pcignore` when it changes. Reload the project to refresh the files on disk after changing its rules.
+
+## Troubleshooting
+
+### External Changes Do Not Synchronize
+
+Pull/Push is available only in the desktop extension. Confirm that `playcanvas.syncMode` is `pullpush`, reload the window, and run Pull before editing with an external tool.
+
+### Push Is Blocked
+
+The remote project has changed. Run Pull, resolve any files under **Merge Changes**, and Push again.
+
+### Files Have Conflicting Paths
+
+Run **PlayCanvas: Show Path Collisions**. Rename the listed assets in the Editor so each asset maps to a unique filesystem path, then reload the project.
+
+### The Workspace Looks Stale
+
+Run **PlayCanvas: Reload Project**. If the problem continues, run **PlayCanvas: Report Issue** and include the steps that produced it.
