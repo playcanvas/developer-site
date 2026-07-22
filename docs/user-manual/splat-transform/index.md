@@ -152,7 +152,11 @@ Actions execute in the order specified and can be repeated. Any action may appea
 -m, --morton-order                      Reorder Gaussians by Morton code (Z-order curve)
 ```
 
-## General Options
+## CLI Options
+
+These options configure a run as a whole rather than operating on splat data — most groups apply only when reading or writing a specific format.
+
+### General Options
 
 ```none
 -h, --help                              Show this help and exit
@@ -164,7 +168,7 @@ Actions execute in the order specified and can be repeated. Any action may appea
 -w, --overwrite                         Overwrite output file if it exists
 ```
 
-## GPU Options
+### GPU Options
 
 Used by SOG compression and GPU voxelization (`--filter-cluster`, `--filter-floaters`, `.voxel.json` output).
 
@@ -175,7 +179,7 @@ Used by SOG compression and GPU voxelization (`--filter-cluster`, `--filter-floa
                                           GPU-only features like --filter-cluster)
 ```
 
-## SOG Compression Options
+### SOG Compression Options
 
 Apply when writing `.sog`, `meta.json`, `lod-meta.json`, or `.html` outputs.
 
@@ -184,7 +188,7 @@ Apply when writing `.sog`, `meta.json`, `lod-meta.json`, or `.html` outputs.
     --max-workers      <n>              Worker threads for SOG encoding (0 = inline/serial). Default: 4
 ```
 
-## SPZ Output Options
+### SPZ Output Options
 
 Apply when writing `.spz` outputs.
 
@@ -192,7 +196,7 @@ Apply when writing `.spz` outputs.
     --spz-version      <3|4>            The SPZ format version to write. Default: 4
 ```
 
-## HTML Viewer Output Options
+### HTML Viewer Output Options
 
 Apply when writing `.html` outputs.
 
@@ -207,7 +211,7 @@ See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supers
 
 :::
 
-## LOD Input Options
+### LOD Input Options
 
 Apply when reading `lod-meta.json`, `.lcc`, and `.lcc2` files.
 
@@ -215,7 +219,7 @@ Apply when reading `lod-meta.json`, `.lcc`, and `.lcc2` files.
 -L, --select-lod       <n,n,...>        Comma-separated LOD levels to read from streamed SOG / LCC / LCC2 input
 ```
 
-## LOD Output Options
+### LOD Output Options
 
 Apply when writing `lod-meta.json` ([Streamed SOG](/user-manual/gaussian-splatting/formats/streamed-sog) output).
 
@@ -226,7 +230,7 @@ Apply when writing `lod-meta.json` ([Streamed SOG](/user-manual/gaussian-splatti
 
 See [Generating Streamed SOG](/user-manual/splat-transform/streamed-sog) for an end-to-end walkthrough.
 
-## Voxel Output Options
+### Voxel Output Options
 
 Apply when writing `.voxel.json` (sparse voxel octree for collision detection). See the [Collision Mesh](/user-manual/splat-transform/collision) guide for a deep dive on each step and tuning.
 
@@ -251,7 +255,7 @@ Apply when writing `.voxel.json` (sparse voxel octree for collision detection). 
     --collision-mesh   [smooth|faces]   Generate collision mesh (.collision.glb). Default: smooth
 ```
 
-## Image Output Options
+### Image Output Options
 
 Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer).
 
