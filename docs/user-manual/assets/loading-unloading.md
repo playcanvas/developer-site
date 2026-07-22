@@ -5,8 +5,9 @@ description: Dynamically load and unload assets at runtime to manage memory and 
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts used for “Loading and Unloading” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those scripts, attach them to entities, and launch the scene to inspect logs and runtime state.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Dynamically load and unload assets at runtime to manage memory and stream content on demand; inspect the resulting asset metadata, registry state, and references.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Loading and Unloading in the relevant asset-management scripts so it satisfies this requirement: dynamically load and unload assets at runtime to manage memory and stream content on demand; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and attach the scripts needed for Loading and Unloading so they satisfy this requirement: dynamically load and unload assets at runtime to manage memory and stream content on demand; launch the scene and inspect asset registry state, references, and runtime logs.
 
 :::
 

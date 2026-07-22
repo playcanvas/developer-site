@@ -5,7 +5,8 @@ description: Create cameras and explore projection, tone mapping, multi-camera r
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Cameras features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Cameras so the result satisfies this requirement: create cameras and explore projection, tone mapping, multi-camera rendering, camera controls, and coordinate conversion; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

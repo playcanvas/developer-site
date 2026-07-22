@@ -5,7 +5,7 @@ description: GSplat asset inspector summarizes PLY or SOG splat data including f
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete GSplat assets in the open project.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete GSplat assets in the open project; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

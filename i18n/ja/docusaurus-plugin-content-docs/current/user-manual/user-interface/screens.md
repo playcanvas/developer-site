@@ -5,7 +5,8 @@ description: PlayCanvas UIのScreen向けに、スクリーン空間とワール
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Screen エンティティを作成し、Screen Component を追加、設定して、ビューポートや実行中のアプリケーションをキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「Screens」について、次の要件を満たしてください: PlayCanvas UIのScreen向けに、スクリーン空間とワールド空間のレンダリング、解像度、スケーリングを解説すること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Screen エンティティを作成し、Screen Component を追加、設定して、ビューポートや実行中のアプリケーションをキャプチャしてください。
 
 :::
 

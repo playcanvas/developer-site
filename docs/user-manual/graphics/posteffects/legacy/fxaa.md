@@ -5,8 +5,9 @@ description: Legacy FXAA script for fast full-screen anti-aliasing and where to 
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “FXAA Effect” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement FXAA Effect; required behavior and constraints: Legacy FXAA script for fast full-screen anti-aliasing and where to find the engine posteffect-fxaa implementation; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement FXAA Effect in the relevant script or shader assets so the result satisfies this requirement: legacy FXAA script for fast full-screen anti-aliasing and where to find the engine posteffect-fxaa implementation; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for FXAA Effect so the result satisfies this requirement: legacy FXAA script for fast full-screen anti-aliasing and where to find the engine posteffect-fxaa implementation; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

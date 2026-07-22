@@ -5,7 +5,7 @@ description: Editor から PlayCanvas Asset Store を閲覧し、PlayCanvas、Sk
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Asset Store を検索し、結果を確認して、選択したアセットをプロジェクトへインポートできます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Asset Store を検索し、結果を確認して、選択したアセットをプロジェクトへインポートしてください。
 
 :::
 

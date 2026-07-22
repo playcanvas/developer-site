@@ -5,7 +5,8 @@ description: "Directional, omni, and spot lights in the Editor: gizmos, shadows,
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Light Components and scene lighting settings, bake lightmaps where applicable, and capture the result.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Lights; required behavior and constraints: Directional, omni, and spot lights in the Editor: gizmos, shadows, cookies, and practical lighting combinations; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Lights so the result satisfies this requirement: directional, omni, and spot lights in the Editor: gizmos, shadows, cookies, and practical lighting combinations; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

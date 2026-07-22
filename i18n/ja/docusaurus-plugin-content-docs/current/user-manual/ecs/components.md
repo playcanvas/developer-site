@@ -5,7 +5,8 @@ description: PlayCanvas の Component を使って、Camera、Light、物理、S
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** エンティティへ Component を追加または削除し、プロパティを変更して結果のエンティティデータを確認できます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「コンポーネント」について、次の要件を満たしてください: PlayCanvas の Component を使って、Camera、Light、物理、Script などの挙動を Entity に追加すること 変更後の階層、Transform、Component データを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** エンティティへ Component を追加または削除し、プロパティを変更して結果のエンティティデータを確認してください。
 
 :::
 

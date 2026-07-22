@@ -5,7 +5,8 @@ description: Convert between 2D screen positions and 3D world positions with scr
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Convert between 2D screen positions and 3D world positions with screenToWorld and worldToScreen for picking, placement, and UI; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Screen and World Coordinates so the result satisfies this requirement: convert between 2D screen positions and 3D world positions with screenToWorld and worldToScreen for picking, placement, and UI; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

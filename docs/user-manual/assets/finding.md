@@ -5,8 +5,7 @@ description: Free and paid sources for 3D models, textures, sound effects, and m
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts used for “Third-party Asset Sites” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those scripts, attach them to entities, and launch the scene to inspect logs and runtime state.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload the asset selected from a third-party site, inspect the imported asset type and generated files, and confirm its project references before using it.
 
 :::
 

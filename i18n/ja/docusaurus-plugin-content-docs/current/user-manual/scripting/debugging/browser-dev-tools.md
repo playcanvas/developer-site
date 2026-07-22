@@ -5,8 +5,9 @@ description: Chrome と Firefox の開発者ツールでブレークポイント
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ブラウザ開発ツール」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「ブラウザ開発ツール」について、次の要件を満たしてください: Chrome と Firefox の開発者ツールでブレークポイントを設定し、変数を検査し、PlayCanvas の Script をステップ実行すること アプリケーションを起動して変更した動作を実行し、コンソール出力またはランタイム状態を確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトとテキストアセットに「ブラウザ開発ツール」を実装し、次の要件を満たしてください: Chrome と Firefox の開発者ツールでブレークポイントを設定し、変数を検査し、PlayCanvas の Script をステップ実行すること。Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ブラウザ開発ツール」に必要なスクリプトを作成、アタッチ、設定し、次の要件を満たしてください: Chrome と Firefox の開発者ツールでブレークポイントを設定し、変数を検査し、PlayCanvas の Script をステップ実行すること。シーンを起動して動作を実行し、コンソール出力またはランタイム状態を確認してください。
 
 :::
 

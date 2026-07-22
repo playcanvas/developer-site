@@ -5,8 +5,9 @@ description: "レガシーの Script ブルーム：intensity、threshold、blur
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「Bloom エフェクト」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「Bloom エフェクト」について、次の要件を満たしてください: レガシーの Script ブルーム：intensity、threshold、blur、および GitHub 上のエンジン posteffect-bloom ソースへのリンク アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「Bloom エフェクト」を実装し、次の要件を満たしてください: レガシーの Script ブルーム：intensity、threshold、blur、および GitHub 上のエンジン posteffect-bloom ソースへのリンク。Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「Bloom エフェクト」を設定し、次の要件を満たしてください: レガシーの Script ブルーム：intensity、threshold、blur、および GitHub 上のエンジン posteffect-bloom ソースへのリンク。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
 
 :::
 

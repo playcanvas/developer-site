@@ -5,7 +5,7 @@ description: PlayCanvas の Button Component は、Screen と Element の下で 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Buttonをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Buttonをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
 
 :::
 

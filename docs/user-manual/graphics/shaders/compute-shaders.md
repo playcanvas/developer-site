@@ -5,7 +5,8 @@ description: "WebGPU-only compute shaders: device checks, simplified WGSL resour
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the shader and script assets used by “Compute Shaders” locally in Pull/Push mode.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Compute Shaders; required behavior and constraints: WebGPU-only compute shaders: device checks, simplified WGSL resource declarations, dispatch, and general-purpose GPU work; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Compute Shaders in the relevant script or shader assets so the result satisfies this requirement: webGPU-only compute shaders: device checks, simplified WGSL resource declarations, dispatch, and general-purpose GPU work; review the complete diff and diagnostics before Push.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
 
 :::

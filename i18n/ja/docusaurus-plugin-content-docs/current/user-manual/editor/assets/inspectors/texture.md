@@ -5,7 +5,7 @@ description: 画像がテクスチャ Asset にどうインポートされるか
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture アセットをアップロード、再インポート、変換、ダウンロードし、Texture から Atlas や Cubemap を作成できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture アセットをアップロード、再インポート、変換、ダウンロードし、Texture から Atlas や Cubemap を作成してください。 変更後のアセットメタデータ、レジストリの状態、参照を確認してください。
 
 :::
 

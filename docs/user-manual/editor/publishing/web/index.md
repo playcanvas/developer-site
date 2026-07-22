@@ -5,7 +5,7 @@ description: Compares web publishing options like PlayCanvas hosting, self-hosti
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List and inspect builds for “Web”, create published builds, or generate and save static and npm download builds.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List and inspect builds for “Web”, create published builds, or generate and save static and npm download builds; read the changed project state back and capture or launch the result when it is visual or interactive.
 
 :::
 

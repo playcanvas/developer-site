@@ -5,7 +5,7 @@ description: Browse the PlayCanvas Asset Store from the Editor, choose PlayCanva
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Search the PlayCanvas Store, inspect results, and import a selected Store asset into the open project.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Search the PlayCanvas Store, inspect results, and import a selected Store asset into the open project; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

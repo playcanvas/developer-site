@@ -5,7 +5,8 @@ description: Bake lightmaps in external tools like 3ds Max and VRay, then import
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Unwrap UV1 coordinates and bake lighting for the whole scene or selected entities.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Bake lightmaps in external tools like 3ds Max and VRay, then import textures and follow linear gamma best practices; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Unwrap UV1 coordinates and bake lighting for the whole scene or selected entities; launch the application, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

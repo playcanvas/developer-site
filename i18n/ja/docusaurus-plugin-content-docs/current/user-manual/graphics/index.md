@@ -5,8 +5,9 @@ description: "PlayCanvasレンダリングの概要：WebGLとWebGPUバックエ
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「グラフィックス」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「グラフィックス」について、次の要件を満たしてください: PlayCanvasレンダリングの概要：WebGLとWebGPUバックエンド、PBR、ライティング、HDR、ポストエフェクト、主要なグラフィックス機能であること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「グラフィックス」を実装し、次の要件を満たしてください: PlayCanvasレンダリングの概要：WebGLとWebGPUバックエンド、PBR、ライティング、HDR、ポストエフェクト、主要なグラフィックス機能であること。Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「グラフィックス」を設定し、次の要件を満たしてください: PlayCanvasレンダリングの概要：WebGLとWebGPUバックエンド、PBR、ライティング、HDR、ポストエフェクト、主要なグラフィックス機能であること。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
 
 :::
 

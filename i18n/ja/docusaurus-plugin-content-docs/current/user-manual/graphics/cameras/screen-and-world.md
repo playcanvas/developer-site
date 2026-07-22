@@ -5,7 +5,8 @@ description: ピッキング、オブジェクト配置、UIのためにscreenTo
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Camera Component を作成、設定し、編集カメラをフォーカスして、シーンの起動やキャプチャで表示を確認できます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「スクリーン座標とワールド座標」について、次の要件を満たしてください: ピッキング、オブジェクト配置、UIのためにscreenToWorldとworldToScreenで2Dスクリーン位置と3Dワールド位置を相互変換すること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「スクリーン座標とワールド座標」を設定し、次の要件を満たしてください: ピッキング、オブジェクト配置、UIのためにscreenToWorldとworldToScreenで2Dスクリーン位置と3Dワールド位置を相互変換すること。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
 
 :::
 

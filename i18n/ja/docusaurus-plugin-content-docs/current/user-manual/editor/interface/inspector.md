@@ -5,7 +5,7 @@ description: Entity と Asset の属性向けの Inspector のヒント。ギズ
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** エンティティ、コンポーネント、マテリアル、プロジェクト設定を選択して変更できます。確認可能な変更には Editor の Undo/Redo を使用できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** エンティティ、コンポーネント、マテリアル、プロジェクト設定を選択して変更できます。確認可能な変更には Editor の Undo/Redo を使用してください。
 
 :::
 

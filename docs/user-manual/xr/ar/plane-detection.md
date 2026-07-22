@@ -3,6 +3,12 @@ title: Plane Detection
 description: "AR plane detection in PlayCanvas: labeled surfaces such as floors and walls, geometry access, and comparing planes to mesh detection."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Plane Detection; required behavior and constraints: AR plane detection in PlayCanvas: labeled surfaces such as floors and walls, geometry access, and comparing planes to mesh detection; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 Very similar to [Mesh Detection](/user-manual/xr/ar/mesh-detection/), Plane Detection provides access to planes that estimate real-world surfaces.
 
 Each plane can represent a surface with optionally available labels, such as: `wall`, `floor`, `table`, etc.

@@ -5,7 +5,8 @@ description: サードパーティのテクスチャパッカーでPlayCanvas互
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture をアップロードし、Texture Atlas アセットと Atlas Frame を作成、設定して、それを使用する Sprite アセットを変更できます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「テクスチャパッキング」について、次の要件を満たしてください: サードパーティのテクスチャパッカーでPlayCanvas互換のアトラスを作り、ロード回数を減らしてバッチングすること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture をアップロードし、Texture Atlas アセットと Atlas Frame を作成、設定して、それを使用する Sprite アセットを変更してください。 ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
 
 :::
 

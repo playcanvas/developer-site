@@ -5,8 +5,9 @@ description: "バッチグループがメッシュインスタンスをまとめ
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「バッチング」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 互換性のある静的または動的 Batch Group を設定し、同じ条件を満たす Model、Sprite、Element Component を割り当て、バッチ化された内容の変更後に `app.batcher.markGroupDirty` を呼び出して、変更前後のドローコール数を比較してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** `textureAsset` を変更して `app.batcher.markGroupDirty` を呼び出すスクリプトを編集し、Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 静的または動的 Batch Group を作成し、互換性のある Model、Sprite、Element Component を割り当ててシーンを起動し、動的オブジェクトが正しく動くことを確認しながらドローコール数を比較してください。
 
 :::
 

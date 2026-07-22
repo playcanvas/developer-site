@@ -5,8 +5,9 @@ description: "デバイス依存の任意の WGSL 機能：半精度型と WGSL 
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「WGSL ケイパビリティ」で使用する Shader と Script アセットを Pull/Push モードでローカル編集し、変更を確認できます。
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認できます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「WGSL ケイパビリティ」について、次の要件を満たしてください: デバイス依存の任意の WGSL 機能：半精度型と WGSL 言語拡張、およびそれらの CAPS_* 定義 アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「WGSL ケイパビリティ」を実装し、次の要件を満たしてください: デバイス依存の任意の WGSL 機能：半精度型と WGSL 言語拡張、およびそれらの CAPS_* 定義。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認してください。
 
 :::
 

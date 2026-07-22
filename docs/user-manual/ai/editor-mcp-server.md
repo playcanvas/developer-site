@@ -7,7 +7,7 @@ The [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-serv
 
 <div
   role="img"
-  aria-label="Editor MCP Server screenshot placeholder"
+  aria-label="Connected Editor MCP Server screenshot placeholder"
   style={{
     alignItems: 'center',
     aspectRatio: '16 / 9',
@@ -20,7 +20,7 @@ The [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-serv
     marginBottom: '1.5rem'
   }}
 >
-  Editor MCP Server screenshot
+  Connected Editor MCP Server screenshot
 </div>
 
 Your MCP client starts the local server, and the Editor connects to it. Every tool acts on the project currently open in that Editor; the server does not choose or administer PlayCanvas projects.
@@ -127,6 +127,24 @@ For scene or behavior changes, source inspection is not enough. Ask the assistan
 6. Stop the Launch instance when verification is complete.
 
 Allow pop-ups for the PlayCanvas Editor origin so the server can open the Launch window. It uses your existing PlayCanvas login session.
+
+<div
+  role="img"
+  aria-label="Editor viewport and launched application verification screenshot placeholder"
+  style={{
+    alignItems: 'center',
+    aspectRatio: '16 / 9',
+    background: 'var(--ifm-color-emphasis-100)',
+    border: '2px dashed var(--ifm-color-emphasis-300)',
+    borderRadius: 'var(--ifm-global-radius)',
+    color: 'var(--ifm-color-emphasis-600)',
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '1.5rem'
+  }}
+>
+  Viewport and Launch verification screenshot
+</div>
 
 ## Review or Recover
 

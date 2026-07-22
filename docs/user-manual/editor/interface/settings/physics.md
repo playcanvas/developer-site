@@ -6,8 +6,8 @@ sidebar_label: Physics
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Physics Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Physics Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Physics Settings values in `.pc/settings.json` so the project satisfies this requirement: physics settings for installing Ammo from the store controlling global gravity on rigid bodies and understanding why simulation stays off without the library; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Physics Settings values, change only those needed to satisfy this requirement: physics settings for installing Ammo from the store controlling global gravity on rigid bodies and understanding why simulation stays off without the library; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

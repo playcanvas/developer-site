@@ -5,6 +5,7 @@ description: Screen space versus world space rendering, resolutions, and scaling
 
 :::ai
 
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Screens; required behavior and constraints: Screen space versus world space rendering, resolutions, and scaling for PlayCanvas UI screens; capture the viewport and launched interface, exercising pointer input when relevant.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create screen entities, add and configure Screen Components, and capture the viewport or running application.
 
 :::

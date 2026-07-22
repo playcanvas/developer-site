@@ -3,6 +3,12 @@ title: Troubleshooting Performance
 description: Diagnose slow WebGL from GPU blacklists, SwiftShader, Firefox blocks, and dual-GPU selection on Windows.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Diagnose slow WebGL from GPU blacklists, SwiftShader, Firefox blocks, and dual-GPU selection on Windows; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+
+:::
+
 Here are some tips to help you uncover common performance problems.
 
 ## PlayCanvas and other WebGL applications run very slowly in Google Chrome

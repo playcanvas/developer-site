@@ -5,7 +5,8 @@ description: テクスチャアトラスのフレームで定義した9スライ
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 9-slicing 用の Sprite と Element Component を設定し、ビューポートや実行中のアプリケーションをキャプチャして拡縮を確認できます。
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「9スライス」について、次の要件を満たしてください: テクスチャアトラスのフレームで定義した9スライス境界で、角が歪まないようボタンやパネルをスケールすること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 9-slicing 用の Sprite と Element Component を設定し、ビューポートや実行中のアプリケーションをキャプチャして拡縮を確認してください。
 
 :::
 

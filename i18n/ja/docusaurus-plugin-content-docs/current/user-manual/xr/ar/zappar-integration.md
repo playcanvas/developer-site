@@ -3,6 +3,12 @@ title: Zappar
 description: "PlayCanvasでのZappar Universal AR: 対応ブラウザ、はじめに、スタータープロジェクト、AR Scene向けトラッキングテンプレートです。"
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「Zappar」について、次の要件を満たしてください: PlayCanvasでのZappar Universal AR: 対応ブラウザ、はじめに、スタータープロジェクト、AR Scene向けトラッキングテンプレートであること 対応する XR セッションで実行し、記載された操作を試して、ランタイムログと観察結果を報告してください。
+
+:::
+
 Zapparは、画像や顔、インスタントワールドトラッキング機能を含む[PlayCanvas統合のUniversal AR SDK](https://zap.works/universal-ar/playcanvas/)を提供しています。彼らのSDKは、Android用ChromeおよびiOS用のSafari 11.3+をサポートし、世界中の数十億人に届けることができます。
 
 ## Zapparの始め方

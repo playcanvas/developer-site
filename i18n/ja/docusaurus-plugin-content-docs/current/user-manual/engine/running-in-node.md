@@ -3,6 +3,12 @@ title: Node.jsでエンジンを実行する
 description: Node.jsでPlayCanvas Engineをサーバー側で使い、マルチプレイヤーサーバー、アセット処理ツール、単体テストに活用します。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 必要なサーバー、アセット処理、またはテストのタスクを Node.js 上の Engine で実行し、コードで使用されているブラウザー専用 API を特定してください。
+
+:::
+
 [Node.js](https://nodejs.org/)は、Windows、Linux、macOSなどで動作するクロスプラットフォームのオープンソースJavaScriptランタイム環境です。これはV8 JavaScriptエンジン上で動作し、ウェブブラウザの外部でJavaScriptコードを実行します。Node.jsを使用すると、開発者はJavaScriptでコマンドラインツールやサーバーサイドスクリプティングを作成できます。
 
 PlayCanvas EngineはNode.jsでの実行を完全にサポートしています。これは次のような場合に役立ちます。

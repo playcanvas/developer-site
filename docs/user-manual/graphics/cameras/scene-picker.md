@@ -5,8 +5,9 @@ description: Select meshes and splats from screen coordinates with the Picker AP
 
 :::ai
 
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Select meshes and splats from screen coordinates with the Picker API, async reads, and optional depth-based world positions; launch the application, capture the rendered result, and check the console for shader or rendering errors.
 - **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the camera scripts used by “Scene Picker” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Scene Picker so the result satisfies this requirement: select meshes and splats from screen coordinates with the Picker API, async reads, and optional depth-based world positions; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

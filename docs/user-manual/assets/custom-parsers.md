@@ -5,8 +5,9 @@ description: Register custom file format parsers with the engine's resource hand
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts used for “Custom Asset Parsers” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those scripts, attach them to entities, and launch the scene to inspect logs and runtime state.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Register custom file format parsers with the engine's resource handlers to load new asset formats or override the built-in ones; inspect the resulting asset metadata, registry state, and references.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Custom Asset Parsers in the relevant asset-management scripts so it satisfies this requirement: register custom file format parsers with the engine's resource handlers to load new asset formats or override the built-in ones; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and attach the scripts needed for Custom Asset Parsers so they satisfy this requirement: register custom file format parsers with the engine's resource handlers to load new asset formats or override the built-in ones; launch the scene and inspect asset registry state, references, and runtime logs.
 
 :::
 

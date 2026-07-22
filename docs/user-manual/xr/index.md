@@ -3,6 +3,12 @@ title: XR
 description: "Overview of WebXR AR and VR in PlayCanvas: platforms, capabilities, session setup, and links to AR, VR, and integration guides."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the XR features described here that match the requested outcome, and implement only those features; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 ![VR View](/img/user-manual/xr/vr-view.png)
 
 PlayCanvas lets you create [AR](/user-manual/xr/ar/) (Augmented Reality) and [VR](/user-manual/xr/vr/) (Virtual Reality) applications for a variety of devices based on the new WebXR API, as well as through external integrations.

@@ -6,8 +6,8 @@ sidebar_label: Layers
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Layers Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Layers Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Layers Settings values in `.pc/settings.json` so the project satisfies this requirement: manage rendering layers that control which objects are drawn together and in what order; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Layers Settings values, change only those needed to satisfy this requirement: manage rendering layers that control which objects are drawn together and in what order; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

@@ -5,7 +5,8 @@ description: How Screen and Element entities combine for layout, draw order, 9-s
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “User Interface Basics”, then launch and capture the interface.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement User Interface Basics; required behavior and constraints: How Screen and Element entities combine for layout, draw order, 9-slicing, input, and localization basics; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the Screen, Element, Sprite, or atlas data needed for User Interface Basics so it satisfies this requirement: how Screen and Element entities combine for layout, draw order, 9-slicing, input, and localization basics; capture the viewport and launched interface.
 
 :::
 

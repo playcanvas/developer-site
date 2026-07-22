@@ -5,7 +5,8 @@ description: "PBR fundamentals in PlayCanvas: diffuse and specular, energy conse
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Material assets and scene rendering settings for “Physically Based Rendering”, then launch and capture the visual result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Physically Based Rendering features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Physically Based Rendering so the result satisfies this requirement: PBR fundamentals in PlayCanvas: diffuse and specular, energy conservation, metalness, and consistent materials; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

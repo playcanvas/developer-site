@@ -5,7 +5,7 @@ description: Relates PlayCanvas checkpoints branches merges storage usage to fam
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect version-control status, manage branches and checkpoints, compare checkpoints, and complete the merge lifecycle for the open project.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect version-control status, manage branches and checkpoints, compare checkpoints, and complete the merge lifecycle for the open project; inspect status or the version-control graph to confirm the resulting project history.
 
 :::
 

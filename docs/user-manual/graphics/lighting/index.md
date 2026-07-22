@@ -5,7 +5,8 @@ description: How dynamic runtime lighting compares to baked lightmaps and when t
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Light Components and scene lighting settings, bake lightmaps where applicable, and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Lighting features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Lighting so the result satisfies this requirement: how dynamic runtime lighting compares to baked lightmaps and when to use each approach in PlayCanvas scenes; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

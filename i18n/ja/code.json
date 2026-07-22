@@ -1,4 +1,7 @@
 {
+  "theme.admonition.ai": {
+    "message": "エージェントに依頼"
+  },
   "theme.NotFound.title": {
     "message": "ページが見つかりません",
     "description": "The title of the 404 page"

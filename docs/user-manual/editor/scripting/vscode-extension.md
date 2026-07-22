@@ -5,7 +5,7 @@ description: Install the PlayCanvas VS Code Extension, choose a sync mode, manag
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Use **Pull/Push** mode for AI coding assistants that edit project files outside VS Code, keeping changes local until you review and push them.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Use **Pull/Push** mode for AI coding assistants that edit project files outside VS Code, keeping changes local until you review and push them; review the complete diff and diagnostics before Push.
 
 :::
 

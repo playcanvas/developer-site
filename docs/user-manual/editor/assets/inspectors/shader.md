@@ -5,7 +5,7 @@ description: Shader assets hold GLSL from new asset or upload; edit in the Scrip
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit Shader asset files locally in Pull/Push mode and review their diffs before syncing.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit Shader asset files locally in Pull/Push mode and review their diffs before syncing; review the complete diff and diagnostics before Push.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, update its asset metadata, and launch the project to verify the result.
 
 :::

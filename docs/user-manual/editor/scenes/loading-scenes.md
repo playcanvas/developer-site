@@ -5,7 +5,7 @@ description: Learn to call SceneRegistry changeScene and additive load APIs, spl
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review scene-loading scripts locally in Pull/Push mode.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review scene-loading scripts locally in Pull/Push mode; review the complete diff and diagnostics before Push.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and attach those scripts, list or load Editor scenes, and launch the application to inspect logs and runtime state.
 
 :::

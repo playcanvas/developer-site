@@ -3,6 +3,12 @@ title: Light Estimation
 description: "Real-world light estimation for AR in PlayCanvas: directional and ambient probes, spherical harmonics, and matching virtual shading to the scene."
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Light Estimation; required behavior and constraints: Real-world light estimation for AR in PlayCanvas: directional and ambient probes, spherical harmonics, and matching virtual shading to the scene; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 In AR, the real world can have complex illumination and various environments. For better immersion and the ability to blend between the real and the virtual world, virtual objects can be shaded and illuminated based on Light Estimation data, such as:
 
 * **Directional light** (the most prominent), its rotation, intensity and color.

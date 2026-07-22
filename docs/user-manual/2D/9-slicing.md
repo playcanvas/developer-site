@@ -5,6 +5,7 @@ description: Scale buttons and panels without distorted corners using nine-slice
 
 :::ai
 
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Scale buttons and panels without distorted corners using nine-slice borders defined in texture atlas frames; capture the viewport and launched interface, exercising pointer input when relevant.
 * **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Sprite and Element Components for 9-slicing, then capture the viewport or running application to verify scaling.
 
 :::

@@ -5,8 +5,9 @@ description: "CameraFrame HDR stack: bloom, SSAO, TAA, depth of field, grading, 
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Modern Post Processing” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Modern Post Processing features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Modern Post Processing in the relevant script or shader assets so the result satisfies this requirement: cameraFrame HDR stack: bloom, SSAO, TAA, depth of field, grading, examples, and customization entry points; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Modern Post Processing so the result satisfies this requirement: cameraFrame HDR stack: bloom, SSAO, TAA, depth of field, grading, examples, and customization entry points; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

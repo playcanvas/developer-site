@@ -3,6 +3,12 @@ title: Device Pixel Ratio
 description: Change maxPixelRatio at runtime to balance sharp rendering against fill-rate limits on varied devices.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Change maxPixelRatio at runtime to balance sharp rendering against fill-rate limits on varied devices; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+
+:::
+
 Device pixel ratio is the ratio between the physical pixels on the hardware screen and the logical pixels (related to the physical size of the screen, also known as CSS resolution).
 
 Enabling Device Pixel Ratio on the Project settings will render the application at the native resolution of the screen which will make it look very crisp. However, that comes at a performance cost as now there are more pixels to fill and render each frame.

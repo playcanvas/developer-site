@@ -5,7 +5,7 @@ description: Override Diff View でテンプレートのオーバーライドを
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** テンプレートのオーバーライド差分を確認し、選択したオーバーライドを適用または元に戻すことができます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** テンプレートのオーバーライド差分を確認し、選択したオーバーライドを適用または元に戻すことがしてください。
 
 :::
 

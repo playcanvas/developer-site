@@ -5,7 +5,8 @@ description: Entity の作成、親子付け、有効化、管理。PlayCanvas S
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在のシーンのエンティティを作成、確認、変更、複製、親変更、検索、削除できます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「エンティティ」について、次の要件を満たしてください: Entity の作成、親子付け、有効化、管理。PlayCanvas Scene の基本的な構成要素であること 変更後の階層、Transform、Component データを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在のシーンのエンティティを作成、確認、変更、複製、親変更、検索、削除してください。
 
 :::
 

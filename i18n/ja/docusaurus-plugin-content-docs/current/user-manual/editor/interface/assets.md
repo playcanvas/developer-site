@@ -5,7 +5,7 @@ description: Assets パネルのガイド。フォルダ、検索、フィルタ
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Assets Panel に表示されるアセットを一覧表示、検索、選択、アップロード、変更、移動、複製、再インポート、ダウンロード、削除できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Assets Panel に表示されるアセットを一覧表示、検索、選択、アップロード、変更、移動、複製、再インポート、ダウンロード、削除してください。 変更後のプロジェクト状態を再取得し、表示または操作に関係する場合はキャプチャまたは Launch で確認してください。
 
 :::
 

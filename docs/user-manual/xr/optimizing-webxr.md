@@ -3,6 +3,12 @@ title: Optimizing WebXR applications
 description: "Performance guidance for WebXR: frame rate, stereo rendering cost, draw calls, batching, lightmaps, and mobile AR tracking overhead."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Optimizing WebXR applications; required behavior and constraints: Performance guidance for WebXR: frame rate, stereo rendering cost, draw calls, batching, lightmaps, and mobile AR tracking overhead; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 ## Introduction
 
 A high and consistent frame rate is critical for making an enjoyable XR experience. When creating VR/AR content, it is more important than ever to test and optimize early and maintain the target frame rate throughout development.

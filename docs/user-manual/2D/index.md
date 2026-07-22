@@ -5,6 +5,7 @@ description: Build 2D games with sprites, texture atlases, and the Sprite Editor
 
 :::ai
 
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the 2D features described here that match the requested outcome, and implement only those features; capture the viewport and launched interface, exercising pointer input when relevant.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Manage Sprite and Texture Atlas assets, configure Sprite Components, and launch or capture the 2D scene.
 
 :::

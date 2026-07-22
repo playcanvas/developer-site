@@ -5,7 +5,7 @@ description: 画像をインポートし、パネルで Asset を作成し、Ins
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture から Cubemap アセットを作成し、アセットデータを変更して、シーンのレンダリングへ適用した結果を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture から Cubemap アセットを作成し、アセットデータを変更して、シーンのレンダリングへ適用した結果を確認してください。
 
 :::
 

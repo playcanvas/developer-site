@@ -5,7 +5,8 @@ description: ScreenとElement Componentでキャンバス内UIを選ぶか、HTM
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ユーザインターフェース」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「ユーザインターフェース」について、次の要件を満たしてください: ScreenとElement Componentでキャンバス内UIを選ぶか、HTMLとCSSを使うか、パフォーマンスのトレードオフを比較すること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ユーザインターフェース」に必要な Screen、Element、Sprite、または Atlas データを作成、設定し、次の要件を満たしてください: ScreenとElement Componentでキャンバス内UIを選ぶか、HTMLとCSSを使うか、パフォーマンスのトレードオフを比較すること。ビューポートと起動したインターフェースをキャプチャしてください。
 
 :::
 

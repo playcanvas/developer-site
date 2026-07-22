@@ -5,8 +5,9 @@ description: WebGPU indirect draw slots, GPU buffer parameters, compute-driven c
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Indirect Drawing” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Indirect Drawing; required behavior and constraints: WebGPU indirect draw slots, GPU buffer parameters, compute-driven culling, and per-frame slot allocation rules; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Indirect Drawing in the relevant script or shader assets so the result satisfies this requirement: webGPU indirect draw slots, GPU buffer parameters, compute-driven culling, and per-frame slot allocation rules; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Indirect Drawing so the result satisfies this requirement: webGPU indirect draw slots, GPU buffer parameters, compute-driven culling, and per-frame slot allocation rules; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

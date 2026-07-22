@@ -5,7 +5,8 @@ description: "Linear color workflow across the engine: linear shader math, sRGB 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Material assets and scene rendering settings for “Linear Workflow”, then launch and capture the visual result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Linear Workflow features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Linear Workflow so the result satisfies this requirement: linear color workflow across the engine: linear shader math, sRGB inputs, and LDR versus HDR shader outputs; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

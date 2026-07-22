@@ -5,8 +5,8 @@ description: 新しい Scene からマテリアル、Script、移動、公開ま
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「初めてのPlayCanvasアプリを作る」で扱うプロジェクトの Script を Pull/Push モードでローカル編集し、変更を確認できます。
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで必要なシーン、エンティティ、Component、アセットを構築し、アプリケーションを起動、キャプチャできます。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「初めてのPlayCanvasアプリを作る」に必要なスクリプトを実装し、完全な差分と診断を確認して、承認されるまで Push しないでください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「初めてのPlayCanvasアプリを作る」に必要なエンティティ、Component、アセットを構築し、アプリケーションを起動して完成した結果をキャプチャしてください。
 
 :::
 

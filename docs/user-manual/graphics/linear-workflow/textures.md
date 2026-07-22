@@ -5,7 +5,8 @@ description: Mark color textures as sRGB in assets and code, including procedura
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Material assets and scene rendering settings for “Textures”, then launch and capture the visual result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Mark color textures as sRGB in assets and code, including procedural targets, so sampling stays physically correct; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Textures so the result satisfies this requirement: mark color textures as sRGB in assets and code, including procedural targets, so sampling stays physically correct; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

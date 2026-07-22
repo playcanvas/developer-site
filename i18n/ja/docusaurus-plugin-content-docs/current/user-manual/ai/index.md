@@ -1,9 +1,19 @@
 ---
 title: AI 開発
-description: AI を活用した開発ワークフローに応じて、PlayCanvas VS Code Extension と Editor MCP Server を使い分けます。
+description: PlayCanvas Engine のコード、プロジェクトファイル、Editor の直接操作に適した AI ツールを選択します。
 ---
 
 AI コーディングアシスタントは、プロジェクトファイルまたは Editor を直接操作して PlayCanvas を扱えます。タスクに適した連携方法を選択してください。
+
+## Engine を使用して開発する
+
+AI アシスタントがスタンドアロンの PlayCanvas Engine リポジトリで作業する場合は、[Engine を使用した開発](./developing-with-engine.md)を参照してください。推奨されるコマンドラインおよびビジュアルクライアント、プロジェクトコンテキスト、ブラウザーでの検証、プラグイン、AI ツールの公式ドキュメントについて説明します。
+
+このワークフローは、次の用途に適しています。
+
+- npm または CDN から Engine を使用するアプリケーションを構築する
+- ローカルの JavaScript または TypeScript コードベースを編集、テストする
+- 最新の Engine ドキュメントやブラウザーツールをアシスタントから利用する
 
 ## プロジェクトファイルを操作する
 

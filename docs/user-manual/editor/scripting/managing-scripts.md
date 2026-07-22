@@ -5,8 +5,8 @@ description: Creates organizes imports and assigns script assets to entities wit
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Create, rename, move, and edit script files locally.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create, edit, parse, and attach script assets directly in the open Editor project.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Create, rename, move, and edit script files locally; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create, edit, parse, and attach script assets directly in the open Editor project; read the changed project state back and capture or launch the result when it is visual or interactive.
 
 :::
 

@@ -5,7 +5,7 @@ description: Font assets from TTF and similar formats convert to SDF atlases; co
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload Font assets, inspect or modify their asset data, replace references, and delete or download them from the open project.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload Font assets, inspect or modify their asset data, replace references, and delete or download them from the open project; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

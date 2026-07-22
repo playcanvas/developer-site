@@ -5,7 +5,7 @@ description: Covers template creation instances overrides applying changes and b
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Instantiate templates and inspect, apply, revert, or unlink instance overrides.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Instantiate templates and inspect, apply, revert, or unlink instance overrides; read the changed project state back and capture or launch the result when it is visual or interactive.
 
 :::
 

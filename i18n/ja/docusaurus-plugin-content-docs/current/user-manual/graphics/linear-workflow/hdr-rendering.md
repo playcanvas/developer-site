@@ -5,7 +5,8 @@ description: HDR の Camera 設定、トーンマッピングと gamma オプシ
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「HDRレンダリング」向けに Material アセットとシーンのレンダリング設定を構成し、起動して表示結果をキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「HDRレンダリング」について、次の要件を満たしてください: HDR の Camera 設定、トーンマッピングと gamma オプション、bloom に適した浮動小数点レンダリングの CameraFrame の使い方であること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「HDRレンダリング」を設定し、次の要件を満たしてください: HDR の Camera 設定、トーンマッピングと gamma オプション、bloom に適した浮動小数点レンダリングの CameraFrame の使い方であること。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
 
 :::
 

@@ -5,7 +5,8 @@ description: "Physical Material maps and parameters: metalness and specular work
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Material assets and scene rendering settings for “Physical Materials”, then launch and capture the visual result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Physical Materials; required behavior and constraints: Physical Material maps and parameters: metalness and specular workflows, IBL needs, and common texture slots; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Physical Materials so the result satisfies this requirement: physical Material maps and parameters: metalness and specular workflows, IBL needs, and common texture slots; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

@@ -5,7 +5,7 @@ description: Reference for asset Inspector panels including shared header fields
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete Asset Inspectors assets in the open project.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete Asset Inspectors assets in the open project; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

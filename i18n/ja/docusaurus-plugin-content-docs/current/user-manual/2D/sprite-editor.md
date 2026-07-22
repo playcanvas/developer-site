@@ -5,7 +5,7 @@ description: Sprite Editorでアトラスのフレーム、境界、スプライ
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture Atlas アセットと Frame を作成、設定し、Sprite アセットを変更して、シーン内の Sprite Component をキャプチャできます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture Atlas アセットと Frame を作成、設定し、Sprite アセットを変更して、シーン内の Sprite Component をキャプチャしてください。
 
 :::
 

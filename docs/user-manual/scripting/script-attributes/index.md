@@ -5,8 +5,9 @@ description: Expose configurable parameters on your PlayCanvas scripts for use i
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Script Attributes” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Script Attributes features described here that match the requested outcome, and implement only those features; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Script Attributes in the relevant script and text assets so it satisfies this requirement: expose configurable parameters on your PlayCanvas scripts for use in the Editor Inspector or via code; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for Script Attributes so they satisfy this requirement: expose configurable parameters on your PlayCanvas scripts for use in the Editor Inspector or via code; launch the scene, exercise the behavior, and inspect console output or runtime state.
 
 :::
 

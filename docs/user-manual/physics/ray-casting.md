@@ -5,8 +5,9 @@ description: Cast rays through the scene for picking and hit tests from camera a
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the physics scripts used by “Ray Casting” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement picking with `camera.screenToWorld` and `rigidbody.raycastFirst`, launch the application, click or touch a target, and verify that the nearest hit entity is reported.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit the ESM or classic ray-casting script that calls `camera.screenToWorld` and `rigidbody.raycastFirst`, then review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Attach the ray-casting script to a Camera, configure Collision and Rigidbody targets, launch the scene, inject mouse or touch input, and confirm the selected entity in the runtime logs.
 
 :::
 

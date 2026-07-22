@@ -5,8 +5,8 @@ description: Describes opening Monaco-based collaborative editing, file tabs, au
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Code Editor” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit the mapped script files with diagnostics enabled, review every changed file in Source Control, and leave the changes unpushed for approval.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse the requested script asset, attach it to the intended entity, launch the scene, and inspect console output and runtime state.
 
 :::
 

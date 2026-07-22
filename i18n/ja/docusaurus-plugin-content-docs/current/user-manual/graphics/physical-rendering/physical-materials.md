@@ -5,7 +5,8 @@ description: "Physical Material のマップとパラメータ：metalness と s
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「物理マテリアル」向けに Material アセットとシーンのレンダリング設定を構成し、起動して表示結果をキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「物理マテリアル」について、次の要件を満たしてください: Physical Material のマップとパラメータ：metalness と specular のワークフロー、IBL の要件、よく使うテクスチャスロット アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「物理マテリアル」を設定し、次の要件を満たしてください: Physical Material のマップとパラメータ：metalness と specular のワークフロー、IBL の要件、よく使うテクスチャスロット。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
 
 :::
 

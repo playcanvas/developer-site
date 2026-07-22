@@ -5,7 +5,7 @@ description: ツールバー、Hierarchy、Inspector、ビューポート、Asse
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いている Editor の Hierarchy、Inspector、選択、Transform Gizmo、Viewport、Project Settings、Launch ツールを操作できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いている Editor の Hierarchy、Inspector、選択、Transform Gizmo、Viewport、Project Settings、Launch ツールを操作してください。 変更後のプロジェクト状態を再取得し、表示または操作に関係する場合はキャプチャまたは Launch で確認してください。
 
 :::
 

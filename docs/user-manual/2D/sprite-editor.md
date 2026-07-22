@@ -5,7 +5,7 @@ description: Use the Sprite Editor to define atlas frames, borders, and sprites 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create Texture Atlas assets, configure their frames, modify Sprite assets, and capture Sprite Components in the scene.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create Texture Atlas assets, configure their frames, modify Sprite assets, and capture Sprite Components in the scene; capture the viewport and launched interface, exercising pointer input when relevant.
 
 :::
 

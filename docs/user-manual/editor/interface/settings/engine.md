@@ -6,8 +6,8 @@ sidebar_label: Engine
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Engine Settings” project values through `.pc/settings.json` in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Engine Settings” project settings in the project currently open in the Editor.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Engine Settings values in `.pc/settings.json` so the project satisfies this requirement: choose which PlayCanvas Engine version to use when launching, publishing, or downloading your Editor project; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Engine Settings values, change only those needed to satisfy this requirement: choose which PlayCanvas Engine version to use when launching, publishing, or downloading your Editor project; read the values back and launch the project when they affect runtime behavior.
 
 :::
 

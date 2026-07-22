@@ -5,6 +5,7 @@ description: State-based character animation with FBX clips, animstategraph asse
 
 :::ai
 
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Animation features described here that match the requested outcome, and implement only those features; launch the scene and verify playback, transitions, parameters, or event data.
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Manage Animation assets and state graphs, configure Anim Components, and launch the scene to verify playback.
 
 :::

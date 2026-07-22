@@ -5,7 +5,7 @@ description: Cordova、GoNative、またはローカルのフルスクリーン 
 
 :::ai
 
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「モバイル」向けのビルドを一覧表示、確認、公開し、static または npm のダウンロードビルドを生成して保存できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「モバイル」向けのビルドを一覧表示、確認、公開し、static または npm のダウンロードビルドを生成して保存してください。
 
 :::
 

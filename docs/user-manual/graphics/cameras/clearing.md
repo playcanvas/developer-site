@@ -5,7 +5,8 @@ description: Control how a camera clears its render target — set the backgroun
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Control how a camera clears its render target — set the background color, make the canvas transparent, or disable clearing entirely; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Clearing so the result satisfies this requirement: control how a camera clears its render target — set the background color, make the canvas transparent, or disable clearing entirely; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

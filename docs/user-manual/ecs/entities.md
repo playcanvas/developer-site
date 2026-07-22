@@ -5,7 +5,8 @@ description: Create, parent, enable, and manage Entities -- the fundamental buil
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create, inspect, modify, duplicate, reparent, search, or delete entities in the current scene.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Create, parent, enable, and manage Entities -- the fundamental building blocks of a PlayCanvas scene; query the resulting hierarchy, transforms, and Component data.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create, inspect, modify, duplicate, reparent, search, or delete entities in the current scene; query the resulting hierarchy, transforms, and Component data.
 
 :::
 

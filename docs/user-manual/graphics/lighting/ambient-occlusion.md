@@ -5,7 +5,8 @@ description: Bake ambient occlusion textures in DCC tools, upload them, and mult
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Light Components and scene lighting settings, bake lightmaps where applicable, and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Bake ambient occlusion textures in DCC tools, upload them, and multiply diffuse and specular ambient lighting; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Ambient Occlusion so the result satisfies this requirement: bake ambient occlusion textures in DCC tools, upload them, and multiply diffuse and specular ambient lighting; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

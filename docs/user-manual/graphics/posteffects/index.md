@@ -5,8 +5,9 @@ description: Compare modern CameraFrame HDR post-processing with legacy script e
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Post Effects” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Post Effects features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Post Effects in the relevant script or shader assets so the result satisfies this requirement: compare modern CameraFrame HDR post-processing with legacy script effects and find links to individual filters; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Post Effects so the result satisfies this requirement: compare modern CameraFrame HDR post-processing with legacy script effects and find links to individual filters; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

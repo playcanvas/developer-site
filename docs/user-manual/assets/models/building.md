@@ -5,7 +5,7 @@ description: Create 3D models for PlayCanvas in Blender, Maya, 3DS Max, or other
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, reimport, unwrap, download, or delete the Model assets used by “Building Models”.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload the exported GLB, inspect its hierarchy, Render and Material assets, and confirm that the model is complete before placing it in the scene.
 
 :::
 

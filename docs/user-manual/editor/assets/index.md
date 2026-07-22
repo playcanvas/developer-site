@@ -5,7 +5,7 @@ description: Overview of PlayCanvas Editor asset management covering the Assets 
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, create, and delete assets, configure material properties, instantiate templates, and import assets from the PlayCanvas Store.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, create, and delete assets, configure material properties, instantiate templates, and import assets from the PlayCanvas Store; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

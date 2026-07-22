@@ -5,8 +5,8 @@ description: Contrasts ESM imports with classic preload ordering, drag-reorder U
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Script Loading Order” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Update the relevant ESM imports or classic script preload order, then review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect the script assets and loading settings, apply the requested order, launch the scene, and confirm initialization order from runtime logs.
 
 :::
 

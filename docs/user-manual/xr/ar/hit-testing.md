@@ -3,6 +3,12 @@ title: Hit Testing
 description: "AR hit testing in PlayCanvas: ray intersections with real-world geometry, reliability, and placing virtual objects that align with the scene."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Hit Testing; required behavior and constraints: AR hit testing in PlayCanvas: ray intersections with real-world geometry, reliability, and placing virtual objects that align with the scene; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 In an AR/MR context, the interaction of virtual world objects with the real world is achieved by many techniques. Hit Testing allows one to pick a point in space by probing real-world geometry that is estimated using the underlying AR system.
 
 This can be used in various ways and one of the most common is placing a virtual object in space so that it feels planted in the real world.

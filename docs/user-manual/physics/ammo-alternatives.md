@@ -5,8 +5,9 @@ description: Survey of lighter 2D and 3D physics engines when ammo.js size or co
 
 :::ai
 
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the physics scripts used by “Alternatives to ammo.js” locally in Pull/Push mode.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Alternatives to ammo.js; required behavior and constraints: Survey of lighter 2D and 3D physics engines when ammo.js size or cost is too high for your project; launch the application, exercise the behavior, and inspect positions, collisions, or runtime logs.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the Alternatives to ammo.js behavior in the relevant physics scripts so it satisfies this requirement: survey of lighter 2D and 3D physics engines when ammo.js size or cost is too high for your project; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the Collision, Rigidbody, and script data needed for Alternatives to ammo.js so it satisfies this requirement: survey of lighter 2D and 3D physics engines when ammo.js size or cost is too high for your project; launch the scene, exercise the behavior, and inspect runtime state or logs.
 
 :::
 

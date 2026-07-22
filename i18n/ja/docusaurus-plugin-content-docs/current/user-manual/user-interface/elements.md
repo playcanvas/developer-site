@@ -5,7 +5,8 @@ description: Anchor、pivot、marginのプロパティで、親に対してEleme
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「Elements」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「Elements」について、次の要件を満たしてください: Anchor、pivot、marginのプロパティで、親に対してElement Componentの位置とサイズを決めます ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「Elements」に必要な Screen、Element、Sprite、または Atlas データを作成、設定し、次の要件を満たしてください: Anchor、pivot、marginのプロパティで、親に対してElement Componentの位置とサイズを決めます。ビューポートと起動したインターフェースをキャプチャしてください。
 
 :::
 

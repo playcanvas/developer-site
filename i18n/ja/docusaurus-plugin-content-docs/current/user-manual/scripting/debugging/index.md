@@ -5,7 +5,8 @@ description: ブラウザの開発者ツールを使って PlayCanvas の Script
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在のシーンを起動し、実行中のアプリケーションのキャプチャ、コンソールエラーの読み取り、ライブエンティティ状態の確認、キーボード、マウス、タッチ入力の送信を行えます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「デバッグ」について、次の要件を満たしてください: ブラウザの開発者ツールを使って PlayCanvas の Script のバグを見つけ修正するツールと手法であること アプリケーションを起動して変更した動作を実行し、コンソール出力またはランタイム状態を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在のシーンを起動し、実行中のアプリケーションのキャプチャ、コンソールエラーの読み取り、ライブエンティティ状態の確認、キーボード、マウス、タッチ入力の送信を行ってください。
 
 :::
 

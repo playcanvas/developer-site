@@ -5,7 +5,7 @@ description: Audio asset inspector for browser-supported sound formats with dura
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete Audio assets in the open project.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete Audio assets in the open project; inspect the resulting asset metadata, registry state, and references.
 
 :::
 

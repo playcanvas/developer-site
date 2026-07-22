@@ -5,8 +5,9 @@ description: Legacy vignette offset and darkness controls to darken edges, with 
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Vignette Effect” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Vignette Effect; required behavior and constraints: Legacy vignette offset and darkness controls to darken edges, with GitHub link for the vignette script; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Vignette Effect in the relevant script or shader assets so the result satisfies this requirement: legacy vignette offset and darkness controls to darken edges, with GitHub link for the vignette script; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Vignette Effect so the result satisfies this requirement: legacy vignette offset and darkness controls to darken edges, with GitHub link for the vignette script; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

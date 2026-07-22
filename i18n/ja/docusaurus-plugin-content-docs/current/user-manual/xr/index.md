@@ -3,6 +3,12 @@ title: XR
 description: "PlayCanvasにおけるWebXRのARとVRの概要: プラットフォーム、機能、セッションのセットアップ、AR、VR、連携ガイドへのリンクです。"
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「XR」について、次の要件を満たしてください: PlayCanvasにおけるWebXRのARとVRの概要: プラットフォーム、機能、セッションのセットアップ、AR、VR、連携ガイドへのリンクであること 対応する XR セッションで実行し、記載された操作を試して、ランタイムログと観察結果を報告してください。
+
+:::
+
 ![VRビュー](/img/user-manual/xr/vr-view.png)
 
 PlayCanvasでは、新しいWebXR APIに基づき、および外部統合を通じて、さまざまなデバイス向けの[AR](/user-manual/xr/ar/)（拡張現実）および[VR](/user-manual/xr/vr/)（仮想現実）アプリケーションを作成できます。

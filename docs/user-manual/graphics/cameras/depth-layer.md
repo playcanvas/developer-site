@@ -5,7 +5,8 @@ description: Capture scene color and depth buffers on a camera layer for shaders
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Capture scene color and depth buffers on a camera layer for shaders, script requests, and correct linear or gamma scene color; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Depth Layer so the result satisfies this requirement: capture scene color and depth buffers on a camera layer for shaders, script requests, and correct linear or gamma scene color; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

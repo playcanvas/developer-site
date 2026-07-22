@@ -5,7 +5,8 @@ description: Layout Group Componentで横、縦、グリッドのレイアウト
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「Layout Groups」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「Layout Groups」について、次の要件を満たしてください: Layout Group Componentで横、縦、グリッドのレイアウトを使い、子要素の配置を自動化すること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「Layout Groups」に必要な Screen、Element、Sprite、または Atlas データを作成、設定し、次の要件を満たしてください: Layout Group Componentで横、縦、グリッドのレイアウトを使い、子要素の配置を自動化すること。ビューポートと起動したインターフェースをキャプチャしてください。
 
 :::
 

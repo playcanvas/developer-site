@@ -5,8 +5,9 @@ description: Add orbit, fly, and pan navigation to any camera with the engine's 
 
 :::ai
 
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Add orbit, fly, and pan navigation to any camera with the engine's ready-made camera-controls script, with mouse, touch, and gamepad support; launch the application, capture the rendered result, and check the console for shader or rendering errors.
 * **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the camera scripts used by “Camera Controls” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Camera Controls so the result satisfies this requirement: add orbit, fly, and pan navigation to any camera with the engine's ready-made camera-controls script, with mouse, touch, and gamepad support; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

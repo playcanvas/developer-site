@@ -3,6 +3,12 @@ title: パフォーマンスのトラブルシューティング
 description: GPU ブラックリスト、SwiftShader、Firefox のブロック、Windows のデュアル GPU 選択から遅い WebGL を診断します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「パフォーマンスのトラブルシューティング」について、次の要件を満たしてください: GPU ブラックリスト、SwiftShader、Firefox のブロック、Windows のデュアル GPU 選択から遅い WebGL を診断すること 変更前後のプロファイラー、ロード、メモリ、またはフレーム時間の該当指標を測定してください。
+
+:::
+
 以下はよくあるパフォーマンスの問題を解決するためのヒントです。
 
 ## Google ChromeでPlayCanvasおよびその他のWebGLアプリケーションが非常に遅く実行される

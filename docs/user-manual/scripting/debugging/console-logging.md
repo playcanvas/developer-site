@@ -5,8 +5,9 @@ description: Debug PlayCanvas scripts with console.log, console.warn, console.er
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Console Logging” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Debug PlayCanvas scripts with console.log, console.warn, console.error, and other browser console methods; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Console Logging in the relevant script and text assets so it satisfies this requirement: debug PlayCanvas scripts with console.log, console.warn, console.error, and other browser console methods; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for Console Logging so they satisfy this requirement: debug PlayCanvas scripts with console.log, console.warn, console.error, and other browser console methods; launch the scene, exercise the behavior, and inspect console output or runtime state.
 
 :::
 

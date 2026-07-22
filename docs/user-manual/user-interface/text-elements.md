@@ -5,7 +5,8 @@ description: Configure text elements with fonts, simple color markup, alignment,
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “Text Elements”, then launch and capture the interface.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Create a Text Element with a font asset, configure markup, localization, alignment, sizing, spacing, and opacity, then capture the rendered interface.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create Screen and Text Element entities, assign the Font asset and localization key, configure markup and layout properties, then capture the Editor viewport and the launched interface.
 
 :::
 

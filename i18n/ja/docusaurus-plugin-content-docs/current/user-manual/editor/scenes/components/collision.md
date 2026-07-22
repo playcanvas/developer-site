@@ -5,7 +5,7 @@ description: PlayCanvas の Collision Component は、box、sphere、capsule、c
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Collisionをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Collisionをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
 
 :::
 

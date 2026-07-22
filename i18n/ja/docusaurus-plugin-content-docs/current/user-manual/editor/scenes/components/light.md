@@ -5,7 +5,7 @@ description: PlayCanvas の Light Component は、色、強度、範囲、減衰
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Lightをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Lightをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
 
 :::
 

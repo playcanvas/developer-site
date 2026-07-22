@@ -7,7 +7,7 @@ The PlayCanvas VS Code Extension exposes project text assets as local files, all
 
 <div
   role="img"
-  aria-label="VS Code Extension screenshot placeholder"
+  aria-label="VS Code Extension Pull and Push setup screenshot placeholder"
   style={{
     alignItems: 'center',
     aspectRatio: '16 / 9',
@@ -20,7 +20,7 @@ The PlayCanvas VS Code Extension exposes project text assets as local files, all
     marginBottom: '1.5rem'
   }}
 >
-  VS Code Extension screenshot
+  VS Code Extension Pull/Push setup screenshot
 </div>
 
 This guide uses Pull/Push mode so an assistant can edit any mapped text asset while you control when those edits reach the PlayCanvas project. Complete the [VS Code Extension setup](/user-manual/editor/scripting/vscode-extension/) before continuing.
@@ -64,6 +64,24 @@ The assistant's edits remain local. They do not affect the PlayCanvas project un
 4. Confirm that the assistant changed only the requested files and behavior.
 
 Use the discard action on a file to restore its last synchronized version. The extension asks for confirmation before discarding it.
+
+<div
+  role="img"
+  aria-label="VS Code Extension diff and conflict review screenshot placeholder"
+  style={{
+    alignItems: 'center',
+    aspectRatio: '16 / 9',
+    background: 'var(--ifm-color-emphasis-100)',
+    border: '2px dashed var(--ifm-color-emphasis-300)',
+    borderRadius: 'var(--ifm-global-radius)',
+    color: 'var(--ifm-color-emphasis-600)',
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '1.5rem'
+  }}
+>
+  Diff and conflict review screenshot
+</div>
 
 ## Synchronize with PlayCanvas
 

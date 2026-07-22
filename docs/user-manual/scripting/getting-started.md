@@ -5,8 +5,9 @@ description: Learn the basic structure and core concepts of PlayCanvas scripts i
 
 :::ai
 
-* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Getting Started” locally in Pull/Push mode.
-* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Create the page's basic ESM or Classic script, expose the requested attributes, attach it to an entity, and verify its behavior after launch.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Getting Started in the relevant script and text assets so it satisfies this requirement: learn the basic structure and core concepts of PlayCanvas scripts including script types, attributes, and entity attachment; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for Getting Started so they satisfy this requirement: learn the basic structure and core concepts of PlayCanvas scripts including script types, attributes, and entity attachment; launch the scene, exercise the behavior, and inspect console output or runtime state.
 
 :::
 

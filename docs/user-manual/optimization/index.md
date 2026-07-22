@@ -3,6 +3,12 @@ title: Optimization
 description: Why and how to optimize load time, frame rate, CPU, GPU load, and memory in PlayCanvas applications.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Optimization features described here that match the requested outcome, and implement only those features; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+
+:::
+
 Optimization is a critical part of developing a PlayCanvas application. It can mean the difference between a great user experience and a terrible one.
 
 :::tip

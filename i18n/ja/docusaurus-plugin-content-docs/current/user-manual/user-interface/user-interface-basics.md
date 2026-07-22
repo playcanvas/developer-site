@@ -5,7 +5,8 @@ description: ScreenとElementのEntityがレイアウト、描画順、9-slicing
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ユーザーインターフェースの基礎」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「ユーザーインターフェースの基礎」について、次の要件を満たしてください: ScreenとElementのEntityがレイアウト、描画順、9-slicing、入力、ローカライゼーションの基本でどう組み合わさるかを説明すること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ユーザーインターフェースの基礎」に必要な Screen、Element、Sprite、または Atlas データを作成、設定し、次の要件を満たしてください: ScreenとElementのEntityがレイアウト、描画順、9-slicing、入力、ローカライゼーションの基本でどう組み合わさるかを説明すること。ビューポートと起動したインターフェースをキャプチャしてください。
 
 :::
 

@@ -5,7 +5,7 @@ description: Illustrates common patterns like feature branches release trains an
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect status, list or create branches, switch branches, create checkpoints, and run supported merge workflows.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect status, list or create branches, switch branches, create checkpoints, and run supported merge workflows; inspect status or the version-control graph to confirm the resulting project history.
 
 :::
 

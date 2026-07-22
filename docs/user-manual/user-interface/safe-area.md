@@ -5,7 +5,8 @@ description: Keep UI clear of notches and home bars on phones by applying CSS sa
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “Safe Area”, then launch and capture the interface.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Keep UI clear of notches and home bars on phones by applying CSS safe-area values to group margins; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the Screen, Element, Sprite, or atlas data needed for Safe Area so it satisfies this requirement: keep UI clear of notches and home bars on phones by applying CSS safe-area values to group margins; capture the viewport and launched interface.
 
 :::
 

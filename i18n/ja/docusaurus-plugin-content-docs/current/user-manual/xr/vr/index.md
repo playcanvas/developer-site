@@ -3,6 +3,12 @@ title: VR
 description: "PlayCanvasでのWebXRバーチャルリアリティ: 対応プラットフォーム、プロジェクト設定、VRセッションの開始、VR固有トピックへのリンクです。"
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「VR」について、次の要件を満たしてください: PlayCanvasでのWebXRバーチャルリアリティ: 対応プラットフォーム、プロジェクト設定、VRセッションの開始、VR固有トピックへのリンクであること 対応する XR セッションで実行し、記載された操作を試して、ランタイムログと観察結果を報告してください。
+
+:::
+
 ![VRビュー](/img/user-manual/xr/vr-view.png)
 
 PlayCanvasもバーチャルリアリティ (VR) アプリケーションを作成できます。

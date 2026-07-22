@@ -5,7 +5,7 @@ description: PlayCanvas の Scroll View Component は、UI コンテンツ用に
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Scroll Viewをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Scroll Viewをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
 
 :::
 

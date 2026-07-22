@@ -5,7 +5,8 @@ description: Clustered lighting stores lights in a grid so many omni and spot li
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Light Components and scene lighting settings, bake lightmaps where applicable, and capture the result.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Clustered Lighting; required behavior and constraints: Clustered lighting stores lights in a grid so many omni and spot lights, shadows, and cookies stay GPU-friendly; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Clustered Lighting so the result satisfies this requirement: clustered lighting stores lights in a grid so many omni and spot lights, shadows, and cookies stay GPU-friendly; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
 
 :::
 

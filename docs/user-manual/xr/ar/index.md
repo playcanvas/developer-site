@@ -3,6 +3,12 @@ title: AR
 description: "Augmented reality with WebXR in PlayCanvas: mobile and HMD support, transparent camera setup, and third-party AR framework integrations."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the AR features described here that match the requested outcome, and implement only those features; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 PlayCanvas lets you create Augmented Reality (AR) applications for mobile and HMD devices through the WebXR API, as well as through integrations with popular AR frameworks.
 
 ## Platforms

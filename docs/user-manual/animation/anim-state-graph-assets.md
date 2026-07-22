@@ -5,7 +5,8 @@ description: Author animstategraph state machines for animation states, transiti
 
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect and modify animation graph layers, states, transitions, conditions, and parameters.
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Author animstategraph state machines for animation states, transitions, blending, layers, and parameters; launch the scene and verify playback, transitions, parameters, or event data.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect and modify animation graph layers, states, transitions, conditions, and parameters; launch the scene and verify playback, transitions, parameters, or event data.
 
 :::
 
