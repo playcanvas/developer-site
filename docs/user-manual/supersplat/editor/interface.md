@@ -27,7 +27,7 @@ The Scene Manager lists the imported splats in the project. Click a row to choos
 
 ### Viewport
 
-The 3D viewport where you can visually edit your scenes. The viewport has a 2D grid to help orient yourself in the scene. By default, the grid lies in the XZ plane (with the world Y axis pointing upwards). The X axis is colored red and the Z axis is blue. Major grid divisions occur at 1 meter intervals (and smaller grid divisions are at 10cm intervals).
+The 3D viewport where you can visually edit your scenes. The viewport has a 2D grid to help orient yourself in the scene. By default, the grid lies in the XZ plane (with the world Y axis pointing upwards); the **Grid Plane** option in the **Settings** panel can place it on the XY or YZ plane instead. The X axis is colored red and the Z axis is blue. Major grid divisions occur at 1 meter intervals (and smaller grid divisions are at 10cm intervals).
 
 ### View Cube
 
@@ -39,7 +39,7 @@ This vertical toolbar contains icons related to splat visualization, camera cont
 
 ### Bottom Toolbar
 
-This horizontal toolbar contains undo and redo, Gaussian selection tools, Move, Rotate, Scale, Measure, coordinate-space and pivot controls. See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
+This horizontal toolbar contains undo and redo, Gaussian selection tools, Move, Rotate, Scale, Measure, Orient, coordinate-space and pivot controls. See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
 
 ### Animation Timeline
 

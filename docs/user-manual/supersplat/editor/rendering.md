@@ -37,7 +37,7 @@ When you select `Image` from the Render menu, a dialog will appear with settings
     - `QHD` - `2560x1440` resolution
     - `4K` - `3840x2160` resolution
     - `Custom` - Allows manual resolution selection
-  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048` and `Custom`
+  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048`, `7680x3840`, `8192x4096` and `Custom`
 - **Resolution:** Only active when `Custom` preset is selected. Allows you to specify custom width and height values.
 - **Format:** Choose the output image format:
   - `PNG` (default) - Lossless output with transparency support
@@ -70,8 +70,8 @@ When you select `Video` from the Render menu, a dialog will appear with several 
   - `Standard` (default) - A regular flat video rendered from the camera's point of view
   - `360° Equirectangular` - A monoscopic 360° video that can be viewed on YouTube, in VR headsets and in 360°-capable players like VLC
 - **Resolution:** Choose the output resolution. Available options depend on the selected projection:
-  - For `Standard`: `960x540`, `1280x720`, `1920x1080` (default), `2560x1440`, `3840x2160`
-  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048`
+  - For `Standard`: `960x540`, `1280x720`, `1920x1080` (default), `2560x1440`, `3840x2160`, `7680x4320`
+  - For `360° Equirectangular` (2:1 aspect ratio): `1024x512`, `2048x1024`, `3840x1920` (default), `4096x2048`, `7680x3840`, `8192x4096`
 - **Format:** Choose the output video format:
   - `MP4` (default) - Most widely compatible format, ideal for general use
   - `WebM` - Open format, excellent for web use
@@ -99,6 +99,12 @@ When you select `Video` from the Render menu, a dialog will appear with several 
 - **Portrait Mode:** If checked, the resolution will be flipped to be vertical. This is useful if you intend your video to be viewed in portrait on mobile. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the video stays level and follows only the camera's heading, which is generally the most comfortable to watch. If unchecked, the camera's full orientation (including pitch) is baked into the video.
 - **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the video. Only available for `Standard` projection.
+
+:::note Resolution availability
+
+The dialog checks which resolutions your browser and device can actually encode with the current codec, frame rate, and bitrate. Unsupported resolutions are disabled in the dropdown and marked "Not supported", and if your current selection is unsupported the `Render` button is blocked with a message suggesting the highest supported lower resolution. High resolutions such as 8K are only available on hardware whose video encoder (and GPU texture size limit) can handle them; try a lower frame rate or bitrate, another codec or format, or a different browser if an option you need is unavailable.
+
+:::
 
 ### Rendering the Video
 
