@@ -12,7 +12,7 @@ For uploading or generating voxel collision through the SuperSplat web UI instea
 Two outputs are produced from the same voxelization pass:
 
 - **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](/user-manual/supersplat/viewer/) for runtime collision detection. The on-disk structure is specified in the [Voxel Format](/user-manual/splat-transform/voxel-format) specification.
-- **`.collision.glb`** — triangulated mesh built from the voxel grid (only when `-K` / `--collision-mesh` is passed).
+- **`.collision.glb`** — triangulated mesh built from the voxel grid (only when `--collision-mesh` is passed).
 
 A typical pipeline runs four stages, with the latter two being optional depending on the scene type:
 
@@ -45,7 +45,7 @@ splat-transform input.ply --filter-cluster --seed-pos 0,1,0 cluster.ply
 ### Cluster options
 
 ```none
--D, --filter-cluster [res,op,min]
+-C, --filter-cluster [res,op,min]
 ```
 
 | Parameter | Default | Description |
@@ -67,13 +67,14 @@ splat-transform input.ply output.voxel.json
 ### Voxel options
 
 ```none
---voxel-params [size,opacity]
+--voxel-size <n>
+--voxel-opacity <n>
 ```
 
-| Parameter | Default | Description |
+| Flag | Default | Description |
 | --- | --- | --- |
-| `size` | `0.05` | Voxel edge length in world units. Smaller = higher fidelity, larger files, slower fills. |
-| `opacity` | `0.1` | Minimum splat opacity required to mark a voxel solid. |
+| `--voxel-size` | `0.05` | Voxel edge length in world units. Smaller = higher fidelity, larger files, slower fills. |
+| `--voxel-opacity` | `0.1` | Minimum splat opacity required to mark a voxel solid. |
 
 ## Step 3: Sealing the shell
 
@@ -154,10 +155,10 @@ The capsule must fit at the seed position. If carve produces no output, the seed
 | `h` | `1.6` | Capsule height (world units), roughly the agent height. `0` disables carve. |
 | `r` | `0.2` | Capsule radius (world units), roughly the agent radius. |
 
-## Step 5: Generating the collision mesh (`-K` / `--collision-mesh`)
+## Step 5: Generating the collision mesh (`--collision-mesh`)
 
 ```none
--K, --collision-mesh [smooth|faces]
+--collision-mesh [smooth|faces]
 ```
 
 | Parameter | Default | Description |
@@ -195,7 +196,7 @@ A watertight mesh built from the exposed voxel faces — every face is axis-alig
 ```bash
 splat-transform room.ply \
     --filter-cluster --seed-pos 0,1,0 \
-    room.voxel.json --voxel-external-fill --voxel-carve -K
+    room.voxel.json --voxel-external-fill --voxel-carve --collision-mesh
 ```
 
 ### Exterior terrain
@@ -203,22 +204,22 @@ splat-transform room.ply \
 ```bash
 splat-transform terrain.ply \
     --filter-cluster --seed-pos 0,0,0 \
-    terrain.voxel.json --voxel-floor-fill -K
+    terrain.voxel.json --voxel-floor-fill --collision-mesh
 ```
 
 ### High-fidelity voxel-face mesh
 
 ```bash
 splat-transform input.ply \
-    output.voxel.json --voxel-params 0.025,0.1 -K faces
+    output.voxel.json --voxel-size 0.025 --collision-mesh faces
 ```
 
 ## Troubleshooting
 
 - **Carve produces nothing.** `--seed-pos` is inside solid geometry, or the capsule (`h,r`) doesn't fit at the seed. Move the seed or shrink the capsule.
-- **`--voxel-external-fill` leaks through walls.** Increase its `size`, or lower the voxel `opacity` so thin walls are marked solid.
-- **Carve leaks into adjacent rooms.** Walls are too thin or have gaps. Lower voxel `size` for higher resolution, or increase `--voxel-external-fill` size.
-- **Collision mesh is too dense.** Use `-K smooth` (default), or coarsen `--voxel-params` size.
+- **`--voxel-external-fill` leaks through walls.** Increase its `size`, or lower `--voxel-opacity` so thin walls are marked solid.
+- **Carve leaks into adjacent rooms.** Walls are too thin or have gaps. Lower `--voxel-size` for higher resolution, or increase `--voxel-external-fill` size.
+- **Collision mesh is too dense.** Use `--collision-mesh smooth` (default), or increase `--voxel-size`.
 - **`--filter-cluster` selects the wrong cluster.** Move `--seed-pos` into the cluster you want, or increase its `res` to bridge intentional gaps.
 
 ## See also
