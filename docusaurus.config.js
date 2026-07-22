@@ -312,7 +312,7 @@ const config = {
             spec: 'openapi/supersplat-v1.json',
             route: '/user-manual/api/supersplat/',
             layout: {
-              title: 'SuperSplat API',
+              title: 'SuperSplat API Reference',
               description:
                 'Reference documentation for uploading and managing SuperSplat scenes.',
             },
