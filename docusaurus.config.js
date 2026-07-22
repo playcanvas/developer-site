@@ -303,6 +303,27 @@ const config = {
         },
       }),
     ],
+    [
+      'redocusaurus',
+      {
+        specs: [
+          {
+            id: 'supersplat',
+            spec: 'openapi/supersplat-v1.json',
+            route: '/user-manual/api/supersplat/',
+            layout: {
+              title: 'SuperSplat API',
+              description:
+                'Reference documentation for uploading and managing SuperSplat scenes.',
+            },
+          },
+        ],
+        theme: {
+          primaryColor: '#ff8a3c',
+          primaryColorDark: '#ffb47a',
+        },
+      },
+    ],
   ],
 
   themeConfig:
@@ -440,7 +461,8 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['glsl', 'wgsl'],
+        // GLSL depends on C, which Redocusaurus' Prism provider does not preload.
+        additionalLanguages: ['c', 'glsl', 'wgsl'],
       },
     }),
 };

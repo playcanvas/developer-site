@@ -611,6 +611,7 @@ const sidebars = {
           ],
         },
         'user-manual/supersplat/convert',
+        'user-manual/supersplat/api-integrations',
       ],
     },
     {
@@ -1137,6 +1138,12 @@ const sidebars = {
         'user-manual/api/project-export',
         'user-manual/api/scene-list',
       ],
+    },
+    {
+      type: 'link',
+      label: 'SuperSplat API',
+      key: 'supersplat-api-reference',
+      href: '/user-manual/api/supersplat/',
     },
     {
       type: 'category',

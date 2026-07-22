@@ -46,6 +46,7 @@ If you already have a clean splat file, you don't need to use the Editor. Hit th
 | **[User Profile](user-profile)** | A user's public page: avatar, bio, social links, their published splats. | `superspl.at/user?id=<username>` |
 | **[Viewer](viewer/)** | The open-source web viewer that powers scene pages and Editor HTML exports. Embed in your own page or self-host. | npm `@playcanvas/supersplat-viewer`, [GitHub](https://github.com/playcanvas/supersplat-viewer) |
 | **[Convert](convert)** | Web frontend to the [splat-transform](/user-manual/splat-transform/) CLI: convert formats, transform, and filter in the browser. | [superspl.at/convert](https://superspl.at/convert) |
+| **[API & Integrations](api-integrations)** | Publish and inspect scenes from capture tools, training pipelines, and custom applications. | [API reference](/user-manual/api/supersplat/) |
 
 Behind the scenes, every published splat is compressed to the SOG format, and large splats (over 1 million Gaussians) are automatically converted to Streamed SOG for fast loading on any device — see [Streaming & Performance](streaming).
 

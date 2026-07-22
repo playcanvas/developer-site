@@ -60,6 +60,7 @@
     "raw-loader": "^4.0.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "redocusaurus": "^2.5.2",
     "sass": "^1.101.0",
     "sync-ammo": "^0.1.2",
     "ts-morph": "^28.0.0",
