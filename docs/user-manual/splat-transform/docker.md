@@ -12,7 +12,7 @@ This guide explains how to run [splat-transform](/user-manual/splat-transform/) 
 A few features are **GPU-only** and will not run without WebGPU:
 
 - `--filter-cluster` and `--filter-floaters`.
-- `.voxel.json` output and `-K` / `--collision-mesh` (see the [Collision Mesh](/user-manual/splat-transform/collision) guide).
+- `.voxel.json` output and `--collision-mesh` (see the [Collision Mesh](/user-manual/splat-transform/collision) guide).
 
 A few are **GPU-accelerated but optional**:
 
@@ -152,7 +152,7 @@ docker run --rm --gpus all -v "$PWD":/work splat-transform \
 docker run --rm --gpus all -v "$PWD":/work splat-transform \
     room.ply --filter-cluster --seed-pos 0,1,0 \
     --voxel-external-fill --voxel-carve \
-    -K room.voxel.json
+    --collision-mesh room.voxel.json
 ```
 
 ## Verifying GPU access
@@ -177,7 +177,7 @@ docker run --rm --gpus all --entrypoint vulkaninfo splat-transform --summary
 
 ## CPU-only variant
 
-If you don't need the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `-K`) you can skip the GPU setup entirely and use a much smaller base image. SOG / `meta.json` / `lod-meta.json` / `.html` outputs still work in this image — the SH compression step falls back to CPU:
+If you don't need the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`) you can skip the GPU setup entirely and use a much smaller base image. SOG / `meta.json` / `lod-meta.json` / `.html` outputs still work in this image — the SH compression step falls back to CPU:
 
 ```dockerfile
 FROM node:22-slim
@@ -200,7 +200,7 @@ If you keep the GPU image but want to force CPU mode for a single run, pass `-g 
 docker run --rm -v "$PWD":/work splat-transform -g cpu input.ply output.sog
 ```
 
-Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `-K`). CPU-side SH compression also runs roughly 5-10x slower than GPU.
+Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`). CPU-side SH compression also runs roughly 5-10x slower than GPU.
 
 ## Troubleshooting
 

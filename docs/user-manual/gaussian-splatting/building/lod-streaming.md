@@ -23,7 +23,7 @@ To use Streamed SOG, you need to generate the format — a `lod-meta.json` spati
 - **Provide your own LOD levels** — supply multiple splat files at progressively lower detail (LOD 0 = highest detail, higher numbers = lower detail), for example produced during training or exported separately.
 - **Generate them with SplatTransform** — use [SplatTransform](/user-manual/splat-transform) to decimate a single high-quality splat into lower-detail levels, so you don't have to author them yourself.
 
-Once you have the LOD levels, SplatTransform bundles them into the Streamed SOG format. See the [Generating Streamed SOG](/user-manual/splat-transform#generating-lod-format) section in the SplatTransform documentation for detailed instructions.
+Once you have the LOD levels, SplatTransform bundles them into the Streamed SOG format. See the [Generating Streamed SOG](/user-manual/splat-transform/streamed-sog) guide for detailed instructions.
 
 ## Live Examples
 
@@ -143,7 +143,7 @@ As native Editor support for Streamed SOG is added, the following improvements a
 - [GSplatComponent API](https://api.playcanvas.com/engine/classes/GSplatComponent.html)
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
 - [SplatTransform CLI Tool](/user-manual/splat-transform)
-- [Generating Streamed SOG](/user-manual/splat-transform#generating-lod-format)
+- [Generating Streamed SOG](/user-manual/splat-transform/streamed-sog)
 - [Streamed SOG Format Specification](/user-manual/gaussian-splatting/formats/streamed-sog)
 - [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture)
 - [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders)

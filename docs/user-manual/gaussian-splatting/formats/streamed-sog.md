@@ -6,7 +6,7 @@ sidebar_label: Streamed SOG
 
 **Streamed SOG** splits a Gaussian splat scene into spatial chunks at multiple levels of detail (LOD). A viewer walks a spatial tree to decide which chunks and detail levels to load for the current camera, allowing very large scenes (tens of millions of Gaussians) to load progressively and stay interactive.
 
-You can create Streamed SOG datasets with **[SplatTransform](https://github.com/playcanvas/splat-transform)** — see [Generating Streamed SOG](/user-manual/splat-transform/#generating-lod-format) for a step-by-step walkthrough. Individual chunks are standard [SOG](./sog.md) datasets.
+You can create Streamed SOG datasets with **[SplatTransform](https://github.com/playcanvas/splat-transform)** — see [Generating Streamed SOG](/user-manual/splat-transform/streamed-sog) for a step-by-step walkthrough. Individual chunks are standard [SOG](./sog.md) datasets.
 
 This document is the format specification. It describes **version 1**.
 
