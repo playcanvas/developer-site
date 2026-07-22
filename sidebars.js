@@ -630,6 +630,22 @@ const sidebars = {
     },
     {
       type: 'html',
+      value: '<div class="sidebar-section-header">AI</div>',
+    },
+    {
+      type: 'category',
+      label: 'AI Development',
+      link: {
+        type: 'doc',
+        id: 'user-manual/ai/index',
+      },
+      items: [
+        'user-manual/ai/vscode-extension',
+        'user-manual/ai/editor-mcp-server',
+      ],
+    },
+    {
+      type: 'html',
       value: '<div class="sidebar-section-header">Common Topics</div>',
     },
     {
