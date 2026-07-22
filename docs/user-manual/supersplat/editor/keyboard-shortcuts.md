@@ -26,7 +26,7 @@ For Picker, Lasso, Polygon, Brush, and Flood selections, hold `Shift` to add, `C
 
 | Action | Shortcut |
 |---|---|
-| Move / Rotate / Scale | `1` / `2` / `3` |
+| Move / Rotate / Scale | `1` / `2` / `3` (while Box or Sphere Select is active, these switch the selection volume's gizmo instead) |
 | Picker / Lasso / Polygon | `R` / `L` / `P` |
 | Brush / Flood | `B` / `O` |
 | Eyedropper | `Ctrl + E` (`Cmd + E` on macOS) |
@@ -63,4 +63,4 @@ See [Camera Controls](camera-controls.md) for mouse, touch, fly, and view-cube c
 | Add keyframe | `Enter` |
 | Remove keyframe | `Shift + Enter` |
 
-Shortcuts are ignored while focus is in a text or numeric input. Some keys also have tool-specific behavior: for example, `Delete` removes a measurement marker while Measure is active, and removes the last unclosed Polygon point while drawing a polygon.
+Shortcuts are ignored while focus is in a text or numeric input. Some keys also have tool-specific behavior: for example, `Delete` removes a placed point while Measure or Orient is active, and removes the last unclosed Polygon point while drawing a polygon. While Measure or Orient is active, `F` frames the placed points instead of the selection.
