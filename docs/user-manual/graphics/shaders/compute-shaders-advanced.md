@@ -3,6 +3,13 @@ title: Compute Shaders Advanced
 description: "Manual bind group control for WebGPU compute shaders: hand-authored computeBindGroupFormat, explicit bindings, and mixing with reflected resources."
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the shader and script assets used by “Compute Shaders Advanced” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
+
+:::
+
 For most compute shaders, the simplified syntax described on the [Compute Shaders](/user-manual/graphics/shaders/compute-shaders) page is all you need — declare resources in WGSL and the engine reflects them automatically.
 
 This page covers **manual** control over bind groups, which remains fully supported. You provide a `computeBindGroupFormat` (and optionally `computeUniformBufferFormats`) describing the resources yourself, and write explicit `@group`/`@binding` indices in the WGSL. Reach for this when you need:

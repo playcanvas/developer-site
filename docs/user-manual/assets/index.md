@@ -3,6 +3,12 @@ title: Assets
 description: Understand how PlayCanvas manages assets and resources including models, textures, audio, and scripts.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, upload, inspect, modify, move, duplicate, download, or delete the project assets relevant to “Assets”.
+
+:::
+
 Assets are the building blocks of your PlayCanvas application. They represent all the external resources your application needs, such as 3D models, textures, audio files, and scripts.
 
 ## Assets vs Resources

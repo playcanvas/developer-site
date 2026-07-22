@@ -4,6 +4,12 @@ sidebar_label: エンティティ・コンポーネント・システム
 description: PlayCanvas が Entity、Component、System を使ってアプリケーション内のオブジェクトと挙動をどう整理するかを説明します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** エンティティを作成、整理し、Component と Transform を設定して、現在のシーン階層を確認できます。
+
+:::
+
 PlayCanvas は、アプリケーション内のオブジェクトを整理・管理するために **エンティティ・コンポーネント・システム（ECS）** を使用します。
 
 この設計パターンでは:

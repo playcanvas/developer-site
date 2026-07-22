@@ -3,6 +3,13 @@ title: Custom Asset Parsers
 description: Register custom file format parsers with the engine's resource handlers to load new asset formats or override the built-in ones.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts used for “Custom Asset Parsers” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those scripts, attach them to entities, and launch the scene to inspect logs and runtime state.
+
+:::
+
 Every asset type in PlayCanvas is loaded by a **resource handler** — one per asset type (`'texture'`, `'model'`, `'audio'` and so on). Within a handler, the individual file formats are handled by **parsers**: the texture handler, for example, has parsers for browser images, DDS, KTX2 and Basis. Handlers expose a public registry for these parsers, so you can add support for a new file format — or override a built-in one — without modifying the engine.
 
 :::note

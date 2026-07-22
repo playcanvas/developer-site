@@ -4,6 +4,13 @@ description: Lightmapping panel settings for global lightmap resolution multipli
 sidebar_label: Lightmapping
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Lightmapping Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Lightmapping Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Controls baked lighting resolution, filtering, and ambient occlusion.
 
 :::note

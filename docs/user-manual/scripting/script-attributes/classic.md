@@ -3,6 +3,13 @@ title: Classic Reference
 description: Reference for Classic Script Attributes including type declarations and Editor integration for legacy scripts.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Classic Reference” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+
+:::
+
 :::note
 
 This page documents Script Attributes for the deprecated **Classic Scripts** system.

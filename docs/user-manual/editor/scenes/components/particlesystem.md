@@ -3,6 +3,12 @@ title: Particle System
 description: PlayCanvas Particle System component emits 3D particles with rates, lifetimes, looping, lighting, rendering modes, trails, and collisions.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Particle System Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Particle System Component specifies a particle emitter in 3D space.
 
 ![Particle System Component](/img/user-manual/editor/scenes/components/component-particlesystem.png)

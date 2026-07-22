@@ -4,6 +4,13 @@ description: Create and configure Batch Groups to combine meshes into fewer draw
 sidebar_label: Batch Groups
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Batch Group Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Batch Group Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Batch Groups combine multiple meshes into a single draw call to reduce CPU overhead and improve rendering performance.
 
 :::note

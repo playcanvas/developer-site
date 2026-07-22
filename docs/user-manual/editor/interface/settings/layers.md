@@ -4,6 +4,13 @@ description: Manage rendering layers that control which objects are drawn togeth
 sidebar_label: Layers
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Layers Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Layers Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Layers determine which objects are rendered together and in what order.
 
 :::note

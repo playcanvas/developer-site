@@ -3,6 +3,13 @@ title: グラフィックス
 description: "PlayCanvasレンダリングの概要：WebGLとWebGPUバックエンド、PBR、ライティング、HDR、ポストエフェクト、主要なグラフィックス機能です。"
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「グラフィックス」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 PlayCanvasは、ウェブ上で高性能な3Dレンダリングを提供する高度なグラフィックスエンジンを搭載しています。このエンジンは、[WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)と[WebGPU](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)の両方をサポートし、すべてのモダンブラウザでの互換性を確保しつつ、最先端のグラフィックス機能を提供します。
 
 ## グラフィックスエンジン バックエンド

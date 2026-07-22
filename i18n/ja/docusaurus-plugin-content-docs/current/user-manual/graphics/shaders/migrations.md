@@ -3,6 +3,13 @@ title: Shader Chunk Migrations
 description: リリースごとのシェーダーチャンクの変更、オーバーライドのコンソール警告、更新後の shaderChunksVersion の設定方法です。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「Shader Chunk Migrations」で使用する Shader と Script アセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認できます。
+
+:::
+
 ## イントロダクション
 
 PlayCanvas エンジンのマテリアルシェーダチャンクシステムは、より柔軟なマテリアルシステムをサポートするために、大幅な変更が加えられています。詳細については、[このページ](https://github.com/playcanvas/engine/issues/4250)を参照してください。

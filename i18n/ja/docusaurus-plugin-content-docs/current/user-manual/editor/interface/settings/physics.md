@@ -4,6 +4,13 @@ sidebar_label: Physics
 description: ストアから Ammo をインストールする物理設定、Rigid Body のグローバル重力、ライブラリがないとシミュレーションがオフのままになる理由について説明します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「物理設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「物理設定」設定を確認、変更できます。
+
+:::
+
 グローバルな物理シミュレーションの設定を制御します。
 
 :::note

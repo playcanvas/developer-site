@@ -3,6 +3,13 @@ title: ブライトネス・コントラストエフェクト
 description: "レガシーの明るさ・コントラスト Script エフェクト：パラメータ範囲とカメラポストパイプラインの GitHub ソース。"
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ブライトネス・コントラストエフェクト」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 ブライトネス (Brightness) とコントラスト (Contrast) エフェクトは、レンダリング後の画像の輝度とコントラストを調整します。
 
 これはエフェクトをかけていない画像です。

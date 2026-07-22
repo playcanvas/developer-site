@@ -3,6 +3,12 @@ title: シャドウ
 description: リアルタイムシャドウを有効化し、シャドウタイプ（PCF、VSM、PCSS）を選択し、カスケード、解像度、バイアスで品質を調整します。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Light Component とシーンの Lighting 設定を作成、構成し、必要に応じて Lightmap をベイクして結果をキャプチャできます。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

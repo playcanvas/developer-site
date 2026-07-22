@@ -3,6 +3,12 @@ title: 9スライス
 description: テクスチャアトラスのフレームで定義した9スライス境界で、角が歪まないようボタンやパネルをスケールします。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 9-slicing 用の Sprite と Element Component を設定し、ビューポートや実行中のアプリケーションをキャプチャして拡縮を確認できます。
+
+:::
+
 9スライス(9-slicing、9パッチとも呼ばれます)は、2Dグラフィックスにおいて、1つの画像を9つの領域に分割し、異なるサイズやアスペクト比で画像を表示する際に引き伸ばされるのを防ぐために、各領域を個別にスケーリングする技術です。
 
 ![9 Sliced Button](/img/user-manual/2D/9-slicing/9-sliced-labelled.jpg)

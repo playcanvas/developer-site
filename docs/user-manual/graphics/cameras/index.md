@@ -3,6 +3,12 @@ title: Cameras
 description: Create cameras and explore projection, tone mapping, multi-camera rendering, camera controls, and coordinate conversion.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

@@ -3,6 +3,13 @@ title: Script Lifecycle
 description: Understand initialize, postInitialize, update, postUpdate, and destroy -- the lifecycle methods called on every PlayCanvas script.
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Script Lifecycle” locally in Pull/Push mode.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

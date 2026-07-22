@@ -3,6 +3,12 @@ title: Text Elements
 description: Configure text elements with fonts, simple color markup, alignment, and localized string keys.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “Text Elements”, then launch and capture the interface.
+
+:::
+
 The Text Element is used to display a string of text using a [font asset](/user-manual/editor/assets/inspectors/font). See [Fonts](/user-manual/user-interface/fonts) for how to create one — in the Editor or with the standalone font-tools.
 
 ## Text

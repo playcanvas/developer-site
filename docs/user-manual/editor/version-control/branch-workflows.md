@@ -3,6 +3,12 @@ title: Branch Workflows
 description: Illustrates common patterns like feature branches release trains and staging to prod for teams using PlayCanvas version control.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect status, list or create branches, switch branches, create checkpoints, and run supported merge workflows.
+
+:::
+
 There are many different ways that you can use branches to suit your project needs. Below we describe a few methods that are commonly used for different types of project.
 
 ## Feature-based branches

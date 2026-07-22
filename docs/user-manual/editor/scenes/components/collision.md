@@ -3,6 +3,12 @@ title: Collision
 description: PlayCanvas Collision component assigns physics or trigger volumes such as box, sphere, capsule, cone, cylinder, mesh, or compound shapes.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Collision Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Collision Component assigns a collision volume to the entity. The component interface dynamically displays different attributes based on the 'Type' attribute.
 
 #### Box

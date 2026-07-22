@@ -3,6 +3,12 @@ title: Sprite Editor
 description: Use the Sprite Editor to define atlas frames, borders, and sprites for 2D and UI rendering.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create Texture Atlas assets, configure their frames, modify Sprite assets, and capture Sprite Components in the scene.
+
+:::
+
 The Sprite Editor is used to edit both Texture Atlas assets and Sprite assets. It is also used to create Sprite Assets.
 
 To open the Sprite Editor, double-click on any Texture Atlas or Sprite asset in the Editor asset panel.

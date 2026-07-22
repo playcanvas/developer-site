@@ -4,6 +4,13 @@ description: Choose which PlayCanvas Engine version to use when launching, publi
 sidebar_label: Engine
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Engine Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Engine Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Configure which PlayCanvas Engine version is used when launching, publishing, or downloading builds.
 
 :::note

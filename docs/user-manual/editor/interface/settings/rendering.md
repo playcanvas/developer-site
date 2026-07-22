@@ -4,6 +4,13 @@ description: Rendering Project Settings controlling sky clustered lights shadows
 sidebar_label: Rendering
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Rendering Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Rendering Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Controls lighting, resolution, and rendering features.
 
 :::note

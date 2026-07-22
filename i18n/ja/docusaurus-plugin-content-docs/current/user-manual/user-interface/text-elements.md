@@ -3,6 +3,12 @@ title: Text Elements
 description: フォント、簡易カラーマークアップ、配置、ローカライズされた文字列キーでテキスト要素を設定します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「Text Elements」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+
+:::
+
 テキストエレメント (Text Element) は、[font asset](/user-manual/editor/assets/inspectors/font)を使用してテキスト文字列を表示するために使用されます。Fontアセットの作成方法（Editorで、またはスタンドアロンの font-tools で）については [Fonts](/user-manual/user-interface/fonts) を参照してください。
 
 ## テキスト (Text)

@@ -4,6 +4,12 @@ description: Parent-child entity hierarchies with local and world-space position
 sidebar_label: Hierarchy & Transforms
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect the entity hierarchy, reparent entities while preserving transforms, and modify position, rotation, or scale.
+
+:::
+
 Entities can be arranged in a **parent-child hierarchy**. The `Entity` class inherits its transform capabilities from the [`GraphNode`](https://api.playcanvas.com/engine/classes/GraphNode.html) superclass.
 
 ## Key points

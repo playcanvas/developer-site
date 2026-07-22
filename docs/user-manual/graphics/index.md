@@ -3,6 +3,13 @@ title: Graphics
 description: "Overview of PlayCanvas rendering: WebGL and WebGPU backends, PBR, lighting, HDR, post effects, and key graphics features."
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Graphics” locally in Pull/Push mode.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+
+:::
+
 PlayCanvas incorporates an advanced graphics engine that delivers high-performance 3D rendering on the web. The engine provides both [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) and [WebGPU](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API) support, ensuring compatibility across all modern browsers while offering cutting-edge graphics capabilities.
 
 ## Graphics Engine Backends

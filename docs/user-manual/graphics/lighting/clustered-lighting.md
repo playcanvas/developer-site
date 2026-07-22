@@ -3,6 +3,12 @@ title: Clustered Lighting
 description: Clustered lighting stores lights in a grid so many omni and spot lights, shadows, and cookies stay GPU-friendly.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Light Components and scene lighting settings, bake lightmaps where applicable, and capture the result.
+
+:::
+
 :::note
 
 Clustered lighting is enabled by default from PlayCanvas Engine v1.56 onwards. The older lighting system will still be available in the Engine for the short term. However, we will deprecate it in a future minor release.

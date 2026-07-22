@@ -3,6 +3,13 @@ title: Bloom エフェクト
 description: "レガシーの Script ブルーム：intensity、threshold、blur、および GitHub 上のエンジン posteffect-bloom ソースへのリンク。"
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「Bloom エフェクト」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 [ブルーム (Bloom)](https://en.wikipedia.org/wiki/Bloom_(shader_effect))は現実世界のカメラが現実には存在しないものを写しだしてしまうアーティファクトを再現するために使うポストプロセスエフェクトです。このエフェクトは画像の明るい領域のエッジから漏れ広がる光のふちを描画し、非常に明るい光がそのシーンを撮影しているカメラの露出限界を超えている様子を表現します。
 
 次は、ブルームを適用していないイメージです。

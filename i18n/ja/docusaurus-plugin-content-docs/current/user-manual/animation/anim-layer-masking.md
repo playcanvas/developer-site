@@ -3,6 +3,12 @@ title: Animレイヤーマスク
 description: レイヤーごとのボーンマスクを作成し、異なるレイヤーがスケルトンの領域を分けて駆動しブレンドします。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Animation の State と Transition で使用する Layer Mask を含め、Anim State Graph の Layer を確認、変更できます。
+
+:::
+
 ゲームオブジェクトに複雑なアニメーション動作を作成する際、特定のアニメーションの再生を各オブジェクトのモデルの特定のボーンに分離することがしばしば必要です。これは、同時に複数のアクションを行う必要があるキャラクターをアニメーション化する際に特に役立ちます。PlayCanvasでは、Animコンポーネントの[アニメーションレイヤー](/user-manual/animation/anim-state-graph-assets/#layers)に対してマスクを作成することでこれを実現できます。
 
 ### マスクの作成

@@ -3,6 +3,13 @@ title: Asset Registry
 description: Use the AssetRegistry API to find, load, and manage assets at runtime in your PlayCanvas application.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts used for “Asset Registry” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those scripts, attach them to entities, and launch the scene to inspect logs and runtime state.
+
+:::
+
 The [`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html) is the central system for managing assets in PlayCanvas. It maintains a collection of all assets available to your application and provides methods to find, load, and manage them.
 
 ## Accessing the Registry

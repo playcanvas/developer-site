@@ -3,6 +3,13 @@ title: Bloom Effect
 description: "Legacy script bloom: intensity, threshold, blur, and links to the engine posteffect-bloom source on GitHub."
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Bloom Effect” locally in Pull/Push mode.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+
+:::
+
 [Bloom](https://en.wikipedia.org/wiki/Bloom_(shader_effect)) is a post-processing effect used to reproduce an imaging artifact of real-world cameras. The effect produces fringes (or feathers) of light extending from the borders of bright areas in an image, contributing to the illusion of an extremely bright light overwhelming the camera capturing the scene.
 
 Here is an image without bloom:

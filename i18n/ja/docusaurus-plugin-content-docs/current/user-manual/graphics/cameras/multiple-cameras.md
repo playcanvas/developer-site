@@ -3,6 +3,12 @@ title: 複数のカメラ
 description: 優先度、ビューポート、レイヤー、レンダーターゲットを使い、分割画面やオーバーレイなどに向けて複数カメラのビューを合成します。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Camera Component を作成、設定し、編集カメラをフォーカスして、シーンの起動やキャプチャで表示を確認できます。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

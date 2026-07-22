@@ -3,6 +3,12 @@ title: GSplat
 description: GSplat asset inspector summarizes PLY or SOG splat data including format, splat count, spherical harmonics bands, and axis-aligned bounds metadata.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete GSplat assets in the open project.
+
+:::
+
 A GSplat asset contains 3D Gaussian Splat data. PlayCanvas supports the import of GSplat data from [PLY](/user-manual/gaussian-splatting/formats/ply) files (including compressed PLY) and [SOG](/user-manual/gaussian-splatting/formats/sog) files.
 
 :::tip

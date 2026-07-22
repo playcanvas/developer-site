@@ -4,6 +4,13 @@ description: Configure default overwrite behavior and texture size limits for as
 sidebar_label: Asset Import
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Asset Import Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Asset Import Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Controls default behavior for imported assets.
 
 :::note

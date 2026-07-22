@@ -3,6 +3,13 @@ title: Getting Started
 description: Learn the basic structure and core concepts of PlayCanvas scripts including script types, attributes, and entity attachment.
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Getting Started” locally in Pull/Push mode.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+
+:::
+
 This guide covers the basic structure and concepts you need to understand when writing PlayCanvas scripts, whether you're using the modern ESM approach or the classic system.
 
 ## What is a Script?

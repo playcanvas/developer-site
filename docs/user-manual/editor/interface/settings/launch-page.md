@@ -4,6 +4,13 @@ description: Configure browser features like resolution, fill mode, and transpar
 sidebar_label: Launch Page
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Launch Page Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Launch Page Settings” project settings in the project currently open in the Editor.
+
+:::
+
 The **Launch Page** settings control browser-level features used when running your project from the PlayCanvas Editor.
 
 :::note

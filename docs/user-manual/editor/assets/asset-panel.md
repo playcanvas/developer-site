@@ -3,14 +3,12 @@ title: Assets Panel
 description: Use the Assets Panel to organize folders, upload and create assets, open text assets in the Script Editor, and inspect properties.
 ---
 
-<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage and VS Code structured project documents are released.
 :::ai
 
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, move, duplicate, replace, reimport, and download assets.
 - **[VS Code Extension](/user-manual/ai/vscode-extension/):** Expose reviewed project assets as local JSON documents under `.pc/assets`.
 
 :::
--->
 
 The Assets Panel manages all of the Assets that are available in your project. From here, you can create, upload, delete, inspect and edit any Asset.
 

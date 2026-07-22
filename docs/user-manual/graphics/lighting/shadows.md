@@ -3,6 +3,12 @@ title: Shadows
 description: Enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS), and tune quality with cascades, resolution, and bias.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Light Components and scene lighting settings, bake lightmaps where applicable, and capture the result.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

@@ -3,6 +3,12 @@ title: Searching the Hierarchy
 description: Find entities at runtime by name, tag, path, or custom callback using the PlayCanvas hierarchy search API.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, filter, fuzzy-search, or resolve entities by name, component, tag, or attached script.
+
+:::
+
 ## By Name
 
 ```javascript

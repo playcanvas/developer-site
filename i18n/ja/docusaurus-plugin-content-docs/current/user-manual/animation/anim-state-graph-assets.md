@@ -3,13 +3,11 @@ title: Animstategraphアセット
 description: アニメーション状態、トランジション、ブレンド、レイヤー、パラメーターのanimstategraphステートマシンを作成します。
 ---
 
-<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
 :::ai
 
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** アニメーショングラフのレイヤー、ステート、トランジション、条件、パラメーターを確認して変更できます。
 
 :::
--->
 
 Animstategraphアセットは、さまざまなアニメーション状態を整理するために使用されます。アニメーション状態は、モデルがアニメーションするさまざまな方法を表します。これらのアニメーション状態を定義し、各状態が再生されるタイミングや状態間のトランジション、およびブレンド方法を決定するために使用することができます。AnimStateGraphアセット自体は、実際のアニメーションアセットを格納したりリンクしたりするものではありません。代わりに、アニメーションアセットの組織化方法のテンプレートとして機能します。実際のアニメーションアセットは、[Anim Component](/user-manual/editor/scenes/components/anim/)を介してanimstategraphのアニメーション状態にリンクされます。
 

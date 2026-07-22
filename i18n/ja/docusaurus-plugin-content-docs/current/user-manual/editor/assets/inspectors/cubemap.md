@@ -3,6 +3,12 @@ title: Cubemap
 description: 画像をインポートし、パネルで Asset を作成し、Inspector で各面を割り当てて、スカイボックスと反射用の 6 面 Cubemap Asset を構築します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture から Cubemap アセットを作成し、アセットデータを変更して、シーンのレンダリングへ適用した結果を確認できます。
+
+:::
+
 キューブマップ (Cubemap) はTextureアセットの一種で、1つのキューブのそれぞれの面を表す6つのTextureアセットから構成されます。通常は以下の2つの用途があります。
 
 1. キューブマップは、シーンのスカイボックスを定義することができます。スカイボックスには、遠くにある風景の画像が含まれます。例えば、丘や山、空などです。

@@ -3,6 +3,12 @@ title: Tone Mapping & Exposure
 description: Map HDR scene lighting to your display with per-camera tone mapping and gamma, plus optional physically based exposure controls.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

@@ -3,6 +3,12 @@ title: Layout Group
 description: PlayCanvas Layout Group component auto-arranges child Element entities in horizontal or vertical layouts with padding, spacing, and wrap.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Layout Group Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The LayoutGroup Component enables an entity to specify the size and position of child Element Components.
 
 See the [Layout Groups](/user-manual/user-interface/layout-groups) section for more details.

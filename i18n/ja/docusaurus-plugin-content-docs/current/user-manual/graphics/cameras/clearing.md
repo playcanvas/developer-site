@@ -3,6 +3,12 @@ title: クリア
 description: カメラがレンダーターゲットをクリアする方法を制御します。背景色の設定、キャンバスの透明化、クリアの無効化を解説します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Camera Component を作成、設定し、編集カメラをフォーカスして、シーンの起動やキャプチャで表示を確認できます。
+
+:::
+
 カメラはシーンをレンダリングする前に、レンダーターゲットをクリアします。レンダーターゲットは、[レンダーターゲット](multiple-cameras.md#render-targets)が割り当てられていない限り、画面です。何をどの色でクリアするかは制御できます:
 
 ```javascript

@@ -3,6 +3,12 @@ title: Compound Shapes
 description: Combine primitive collision shapes on child entities into compound colliders for dynamic rigid bodies.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+
+:::
+
 Compound shapes are custom collision shapes created out of multiple primitive shapes ([full list of shapes here](/user-manual/physics/physics-basics/#rigid-bodies)). This allows you to have more complex collision shapes without using a custom mesh model.
 
 The main advantage is that you are able to have dynamic rigidbody collisions between compound shapes (shown below) which is not possible with mesh collision types.

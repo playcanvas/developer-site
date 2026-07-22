@@ -3,6 +3,13 @@ title: Compose シェーダーのカスタマイズ
 description: CameraFrame の compose チャンクを上書きして、最終フルスクリーン結合パスにユニフォームとピクセル効果を注入します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「Compose シェーダーのカスタマイズ」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 カスタムポストエフェクトを追加する最も簡単な方法は、すべてのエフェクトを合成してバックバッファへ出力する最終の compose パスをカスタマイズすることです。追加のレンダーパスが不要で、最終出力だけを変更したい場合に適しています。
 
 ## 概要

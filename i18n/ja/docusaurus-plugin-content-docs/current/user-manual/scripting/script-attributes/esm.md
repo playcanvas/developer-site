@@ -3,6 +3,13 @@ title: ESM リファレンス
 description: ESM Script Attributesの完全リファレンス。対応する型、デコレーター、条件付き表示をすべて解説します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ESM リファレンス」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+
+:::
+
 :::note
 
 このページでは、推奨される **ESM スクリプト** システムのスクリプト属性について説明します。

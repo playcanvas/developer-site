@@ -3,6 +3,13 @@ title: ammo.jsのAPIを呼び出す方法
 description: 組み込みの PlayCanvas の物理 Component を超えるジョイントや機能のために、ammo.js と Bullet API を直接呼び出します。
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ammo.jsのAPIを呼び出す方法」で使用する Physics Script を Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Physics 設定を有効化し、Collision と Rigidbody Component を作成、設定して、起動後のランタイム状態やログを確認できます。
+
+:::
+
 PlayCanvas の ammo.js 連携により、ammo.js API のすべての機能が公開されるわけではありません。ただし、PlayCanvas スクリプトから直接 ammo.js API を呼び出すことができます。
 
 現在、PlayCanvas は ammo.js の [このビルド](https://github.com/kripken/ammo.js/commit/dcab07bf0e7f2b4b64c01dc45da846344c8f50be) を使用しています。このビルドが公開する API は [こちら](https://github.com/kripken/ammo.js/blob/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/ammo.idl) で確認できます。ammo.js の公式ドキュメントはありませんが、[Bullet Physics User Guide](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) を参照してください。

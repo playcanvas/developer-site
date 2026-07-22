@@ -3,6 +3,12 @@ title: Layers
 description: Customize render order and visibility with layers, layer composition, opaque and transparent sub-layers, and sort modes.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query or modify project layers, configure Camera and Render Component layer assignments, and capture the result.
+
+:::
+
 ## Layers Overview {#layers-overview}
 
 Layers allow you to customize the render loop for your application. Using layers you can implement some advanced rendering features. For example:

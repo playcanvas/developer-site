@@ -3,6 +3,12 @@ title: Animationアセット
 description: FBX変換によるキーフレームアニメーションアセットと、animコンポーネント経由でanimstategraphにどうリンクするかです。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Animation アセットをアップロードまたは確認し、アニメーションイベントを確認、追加、更新、削除できます。
+
+:::
+
 ![Animation Assets](/img/user-manual/animation/animation-assets.png)
 
 Animationアセットは、PlayCanvasのモデルのアニメーションを動かすために使用されるキーフレームデータです。エンティティのAnimコンポーネントを介してAnimstategraphアセットにリンクされています。

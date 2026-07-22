@@ -3,6 +3,12 @@ title: ライティング
 description: 動的ランタイムライティングとベイク済みライトマップの比較と、PlayCanvas の Scene でそれぞれを使うタイミングです。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Light Component とシーンの Lighting 設定を作成、構成し、必要に応じて Lightmap をベイクして結果をキャプチャできます。
+
+:::
+
 シーンの照明は、表面のマテリアル特性と適用された光源に基づいて、画面にレンダリングされるピクセルの色やシェーディングを計算するプロセスです。
 
 PlayCanvasでは、照明は大きく「ダイナミックライト」と「ライトマップ」の2つに分けることができます。

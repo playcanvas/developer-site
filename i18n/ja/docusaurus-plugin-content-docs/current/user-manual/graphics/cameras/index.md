@@ -3,6 +3,12 @@ title: カメラ
 description: カメラの作成に加え、投影、トーンマッピング、マルチカメラレンダリング、カメラコントロール、座標変換を解説します。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Camera Component を作成、設定し、編集カメラをフォーカスして、シーンの起動やキャプチャで表示を確認できます。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

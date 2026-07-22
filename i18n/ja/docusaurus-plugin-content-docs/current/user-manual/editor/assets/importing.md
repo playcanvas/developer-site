@@ -3,13 +3,11 @@ title: アップロードとインポート
 description: Editor でドラッグ＆ドロップで Asset をアップロードし、ファイル名を一致させて置き換え、プロジェクト設定で古い JSON モデル出力を GLB に移行します。
 ---
 
-<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
 :::ai
 
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** ソースファイルをアップロードし、既存のアセットを再インポートし、ソースまたは処理済みファイルをダウンロードできます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** ソースファイルをアップロードし、既存のアセットを再インポートし、ソースまたは処理済みファイルをダウンロードできます。
 
 :::
--->
 
 ## 新しいアセットの作成
 

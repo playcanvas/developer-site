@@ -3,6 +3,12 @@ title: Physical Materials
 description: "Physical Material maps and parameters: metalness and specular workflows, IBL needs, and common texture slots."
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Material assets and scene rendering settings for “Physical Materials”, then launch and capture the visual result.
+
+:::
+
 To use Physically Based Rendering in PlayCanvas you will need to understand how the Physical Material is configured and what effect altering the various parameters will have.
 
 In this section we'll talk about the most useful properties of the material and you can see in the live demos how altering them affects the appearance of a material.

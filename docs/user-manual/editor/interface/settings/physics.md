@@ -4,6 +4,13 @@ description: Physics settings for installing Ammo from the store controlling glo
 sidebar_label: Physics
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Physics Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Physics Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Controls the global physics simulation settings.
 
 :::note

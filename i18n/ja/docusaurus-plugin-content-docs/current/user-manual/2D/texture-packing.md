@@ -3,6 +3,12 @@ title: テクスチャパッキング
 description: サードパーティのテクスチャパッカーでPlayCanvas互換のアトラスを作り、ロード回数を減らしてバッチングします。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture をアップロードし、Texture Atlas アセットと Atlas Frame を作成、設定して、それを使用する Sprite アセットを変更できます。
+
+:::
+
 ## テクスチャパッキングとは
 
 スプライトやUI画像を別々のイメージとしてバンドルすることは一般的です。テクスチャパッキングはこれらの別々の画像を[テクスチャアトラス](/user-manual/editor/assets/inspectors/texture-atlas/)に統合することです。

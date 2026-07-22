@@ -3,6 +3,12 @@ title: Sprite
 description: Sprite inspector configures pixels per unit, render modes for simple sliced or tiled 9-slice behavior, and the backing texture atlas reference.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create or modify Sprite assets and their frame data, then configure Sprite Components and capture the result.
+
+:::
+
 A Sprite is a 2D graphic that can be rendered into a scene. A Sprite asset is a reference to a [Texture Atlas](/user-manual/editor/assets/inspectors/texture-atlas) and a sequence of frames from that atlas. In this way a sprite can either represent a single image (taken out of the atlas) or a flip-book style animation (multiple frames from the atlas).
 
 ## Inspector

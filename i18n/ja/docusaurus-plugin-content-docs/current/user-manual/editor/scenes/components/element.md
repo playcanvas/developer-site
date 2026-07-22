@@ -3,6 +3,12 @@ title: Element
 description: PlayCanvas の Element Component は、Screen 階層の下でアンカー、ピボット、サイズ指定を持つ 2D UI のグループ、画像、テキストを定義します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Elementをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+
+:::
+
 Elementコンポーネントは、Screenコンポーネントを祖先に持つ階層内で、画像やテキストなどの2Dコンポーネントで構成されたユーザーインターフェースを構築するために使用されます。Elementコンポーネントはアンカーやピボットポイントなどのレイアウトプロパティを提供します。
 
 詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。

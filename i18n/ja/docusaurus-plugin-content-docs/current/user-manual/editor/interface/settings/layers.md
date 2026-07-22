@@ -4,6 +4,13 @@ sidebar_label: Layers
 description: どのオブジェクトをまとめて、どの順で描画するかを制御するレンダリングレイヤーを管理します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「レイヤー設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「レイヤー設定」設定を確認、変更できます。
+
+:::
+
 レイヤーは、どのオブジェクトが一緒に描画され、どの順序で描画されるかを決定します。
 
 :::note

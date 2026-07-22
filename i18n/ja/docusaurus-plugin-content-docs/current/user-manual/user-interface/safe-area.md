@@ -3,6 +3,12 @@ title: セーフエリア
 description: CSSのsafe-area値をグループのマージンに適用し、スマートフォンのノッチやホームバーからUIを避けます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「セーフエリア」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+
+:::
+
 モバイルデバイスがフルデバイススクリーンを持つ傾向にあるため、イヤースピーカーやフロントカメラ用のノッチやカットアウトがディスプレイに使用されるようになりました(iPhone Xの下を見てください)。
 
 <img loading="lazy" src="/img/user-manual/user-interface/safe-area/iphone-notch.png" />

@@ -3,6 +3,13 @@ title: はじめに
 description: PlayCanvas Scriptの基本構造とコア概念、Scriptの種類、属性、Entityへの付与について学びます。
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「はじめに」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+
+:::
+
 このガイドでは、モダンなESMアプローチでもクラシックシステムでも、PlayCanvasスクリプトを書く際に理解しておくべき基本構造と概念を説明します。
 
 ## スクリプトとは？

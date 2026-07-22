@@ -3,6 +3,12 @@ title: Item History
 description: Shows per-entity asset scene and settings checkpoint timelines available for items edited after the Item History rollout date.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect checkpoint details and compare checkpoints to trace when an entity, asset, or setting changed.
+
+:::
+
 Checkpoint history is available for every item in the project so you can easily view the changes in the Checkpoints.
 
 Due to the extra information that needs to be stored per checkpoint to support this feature, only checkpoints made after Mar 2, 2022 can be seen with Item History.

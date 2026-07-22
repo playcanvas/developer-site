@@ -3,6 +3,12 @@ title: Texture Atlas
 description: Texture Atlas assets define named frames with rectangles pivots and borders atop a texture plus shared texture settings for sprite workflows.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create Texture Atlas assets from textures, configure their frames, and use them with Sprite assets in the open project.
+
+:::
+
 A Texture Atlas asset is a texture asset with additional data which describes 'Frames' inside the texture. Frames are regions defined in the texture as a rectangle with a 'pivot' point which sets the positional and rotational center of the frame.
 
 Texture Atlases are created by right-clicking on a regular Texture asset and selecting **Create Atlas**, or by changing the default asset settings to enable [Create Atlases](/user-manual/editor/interface/settings/asset-import/).

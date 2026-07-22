@@ -3,6 +3,12 @@ title: Model (Legacy)
 description: PlayCanvas legacy Model component (deprecated) renders primitives or a single model asset; prefer the Render component for new work.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Model (Legacy) Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 :::warning
 
 The Model Component is deprecated. It has been replaced by the [Render](render.md) Component.

@@ -4,6 +4,13 @@ sidebar_label: Network
 description: PlayCanvas アプリケーションの Asset 読み込みの再試行動作とネットワークのタイムアウトを設定します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ネットワーク設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「ネットワーク設定」設定を確認、変更できます。
+
+:::
+
 アセット読み込みのネットワーク動作を設定します。
 
 :::note

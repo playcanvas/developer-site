@@ -3,6 +3,12 @@ title: Animation (Legacy)
 description: PlayCanvas legacy Animation component (deprecated) assigns animation assets to a model; use the Anim component for state graphs.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Animation (Legacy) Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 :::warning
 
 The Animation Component is deprecated. It has been replaced by the [Anim](anim.md) Component.

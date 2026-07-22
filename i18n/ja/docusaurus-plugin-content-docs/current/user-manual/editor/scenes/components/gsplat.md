@@ -3,6 +3,12 @@ title: GSplat
 description: PlayCanvas の GSplat Component は Entity から 3D Gaussian splat の Asset をレンダリングし、splat を表示するレンダーレイヤーを選びます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** GSplatをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+
+:::
+
 GSplatコンポーネントは、エンティティが3Dガウシアンスプラットをレンダリングできるようにします。
 
 ![GSplat Component](/img/user-manual/editor/scenes/components/component-gsplat.png)

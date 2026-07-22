@@ -3,6 +3,12 @@ title: User Interface
 description: Choose Screen and Element components for in-canvas UI or HTML and CSS, with performance trade-offs.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “User Interface”, then launch and capture the interface.
+
+:::
+
 User Interfaces present a unique challenge for graphical applications. There are several options for building User Interfaces in PlayCanvas.
 
 ## Screen and Element Components (Recommended)

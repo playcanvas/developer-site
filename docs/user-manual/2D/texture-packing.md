@@ -3,6 +3,12 @@ title: Using Texture Packers
 description: Use third-party texture packers to build atlases compatible with PlayCanvas for fewer loads and batching.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload textures, create Texture Atlas assets, configure atlas frames, and modify the Sprite assets that use them.
+
+:::
+
 ## What is texture packing?
 
 It's common to find sprites or UI images bundled as separate images. Texture packing is combining those separate images into a single [texture atlas](/user-manual/editor/assets/inspectors/texture-atlas/).

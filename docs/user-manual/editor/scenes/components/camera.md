@@ -3,6 +3,12 @@ title: Camera
 description: PlayCanvas Camera component renders the scene from the entity with projection, clipping, layers, tonemapping, viewport, and grab passes.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Camera Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Camera Component enables an entity to render a scene from a certain viewpoint.
 
 ![Camera Component](/img/user-manual/editor/scenes/components/component-camera.png)

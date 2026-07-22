@@ -3,6 +3,13 @@ title: Shader
 description: Shader Asset は新規 Asset またはアップロードから GLSL を保持します。Script Editor で編集し、Inspector で読み取り専用のコードプレビューを表示します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Shader アセットファイルを Pull/Push モードでローカル編集し、同期前に差分を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、メタデータを更新して、プロジェクトを起動して結果を確認できます。
+
+:::
+
 Shader アセットには、カスタムレンダリングエフェクト用のGLSLコードが含まれています。アセットパネルでNew Shaderをクリックするか、`.vert`、`.frag`、または`.glsl`拡張子のファイルをアップロードすることで、新しいShaderアセットを作成できます。
 
 Shaderアセットを編集するには、エディターで右クリックしてEditを選択します。

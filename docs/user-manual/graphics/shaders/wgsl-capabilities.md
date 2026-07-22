@@ -3,6 +3,13 @@ title: WGSL Capabilities
 description: "Optional, device-gated WGSL features in PlayCanvas: half-precision types and WGSL language extensions, with their CAPS_* defines."
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the shader and script assets used by “WGSL Capabilities” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
+
+:::
+
 This page covers optional WGSL features that depend on device support. The engine advertises each capability through a `device.supports*` flag and a matching `CAPS_*` preprocessor define, and (where applicable) injects the required `enable …;` / `requires …;` directive into the generated WGSL. These features apply across vertex, fragment, and compute shaders.
 
 ### Half-Precision Types {#half-precision-types}

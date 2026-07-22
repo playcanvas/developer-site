@@ -3,6 +3,13 @@ title: JSON
 description: JSON assets store structured configuration or game data; the inspector shows syntax-formatted previews without additional editable properties.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit JSON asset files locally in Pull/Push mode and review their diffs before syncing.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite JSON asset text, update its asset metadata, and launch the project to verify the result.
+
+:::
+
 [JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
 
 In PlayCanvas, JSON assets are used to store various types of structured data. Some example use cases are:

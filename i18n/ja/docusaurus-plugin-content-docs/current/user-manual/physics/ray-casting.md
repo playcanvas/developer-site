@@ -3,6 +3,13 @@ title: レイキャスティング
 description: Scene にレイを飛ばし、カメラやマウス／タッチ位置からピッキングとヒットテストを行います。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「レイキャスティング」で使用する Physics Script を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Physics 設定を有効化し、Collision と Rigidbody Component を作成、設定して、起動後のランタイム状態やログを確認できます。
+
+:::
+
 PlayCanvas物理エンジンを使用すると、レイキャストを実行できます。レイキャストは、2つの任意の3Dポイント間の直線がRigidBodyと交差するかどうかを判断するクエリです。
 
 レイキャスティングの用途の一つは、ユーザーが画面をタッチ/クリックしてエンティティを選択できる場所を選択することです。以下のスクリプトでは、画面のタッチ/クリック位置を介してカメラの位置からシーンにレイキャストを実行し、選択された最も近いRigidBodyを有効にしたエンティティを返します。

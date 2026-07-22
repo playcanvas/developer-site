@@ -3,6 +3,13 @@ title: Your First App
 description: Walks through building a simple 3D PlayCanvas Editor project from a new scene to materials, scripts, movement, and publishing.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the project scripts introduced by “Your First App” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Build the required scene, entities, Components, and assets in the open project, then launch and capture the application.
+
+:::
+
 Developing applications in the PlayCanvas Editor is easy and fun. Let's spend a few minutes learning the basics. We'll recreate the following simple 3D app:
 
 <div className="iframe-container">

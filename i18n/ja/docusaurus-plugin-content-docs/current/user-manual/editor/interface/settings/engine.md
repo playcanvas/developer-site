@@ -4,6 +4,13 @@ sidebar_label: Engine
 description: Editor プロジェクトの起動、公開、ダウンロード時に使う PlayCanvas Engine のバージョンを選びます。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「エンジン設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「エンジン設定」設定を確認、変更できます。
+
+:::
+
 起動、公開、ビルドのダウンロード時に使用する PlayCanvas エンジンのバージョンを設定します。
 
 :::note

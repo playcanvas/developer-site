@@ -3,6 +3,12 @@ title: クラスタードライティング
 description: クラスタードライティングはライトをグリッドに格納し、多数の omni および spot ライト、シャドウ、cookies を GPU に優しく保ちます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Light Component とシーンの Lighting 設定を作成、構成し、必要に応じて Lightmap をベイクして結果をキャプチャできます。
+
+:::
+
 :::note
 
 クラスタードライティングは、PlayCanvas Engine v1.56以降にデフォルトで有効になっています。古いライティングシステムは、しばらくの間Engineに残りますが、将来のマイナーリリースで廃止される予定です。

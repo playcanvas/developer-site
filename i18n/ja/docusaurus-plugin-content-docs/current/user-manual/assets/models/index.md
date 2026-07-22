@@ -3,6 +3,12 @@ title: 3Dモデルのインポート
 description: GLB、FBX、COLLADA、OBJ モデルを PlayCanvas にインポートし、すぐ使える Template と Render Asset に変換します。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「3Dモデルのインポート」で使用する Model アセットをアップロード、確認、再インポート、UV アンラップ、ダウンロード、削除できます。
+
+:::
+
 3Dモデルとアニメーションは、[Blender](https://www.blender.org/)、3D Studio Max、Mayaなどの[3Dモデリングアプリケーション](/user-manual/assets/models/building)からシーンファイルをアップロードすることで、PlayCanvasにインポートされます。
 
 PlayCanvasは、glTFバイナリ (GLB)、FBX、COLLADA、objなど、さまざまな形式をサポートしています。最良の結果を得るには、GLB形式の使用をお勧めします。

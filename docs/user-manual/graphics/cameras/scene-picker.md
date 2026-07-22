@@ -3,6 +3,13 @@ title: Scene Picker
 description: Select meshes and splats from screen coordinates with the Picker API, async reads, and optional depth-based world positions.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the camera scripts used by “Scene Picker” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+
+:::
+
 The Picker class provides a way to select mesh instances from screen coordinates by clicking or touching the screen. It works by rendering the scene from a camera's viewpoint to an offscreen buffer with unique ID colors, allowing efficient identification of clicked objects. The picker supports both regular meshes and Gaussian Splats, and works across WebGL2 and WebGPU backends.
 
 ## Basic Usage

@@ -3,6 +3,12 @@ title: Sound
 description: PlayCanvas Sound component plays one or more audio slots with volume, pitch, looping, and optional 3D distance falloff to listeners.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Sound Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Sound Component controls playback of audio samples.
 
 ![Sound Component](/img/user-manual/editor/scenes/components/component-sound.png)

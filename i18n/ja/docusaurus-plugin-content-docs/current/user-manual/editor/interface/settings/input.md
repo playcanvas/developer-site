@@ -4,6 +4,13 @@ sidebar_label: Input
 description: PlayCanvas アプリケーションでキーボード、マウス、タッチ、ゲームパッドの入力処理を有効または無効にします。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「入力設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「入力設定」設定を確認、変更できます。
+
+:::
+
 アプリケーションの入力デバイス処理を有効／無効にします。
 
 :::note

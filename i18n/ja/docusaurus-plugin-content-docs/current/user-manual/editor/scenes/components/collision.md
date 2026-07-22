@@ -3,6 +3,12 @@ title: Collision
 description: PlayCanvas の Collision Component は、box、sphere、capsule、cone、cylinder、mesh、compound などの物理またはトリガー体積を割り当てます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Collisionをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+
+:::
+
 Collisionコンポーネントは、エンティティにコリジョンボリュームを割り当てます。コンポーネントのインターフェースは「Type」属性に基づいて動的に異なる属性を表示します。
 
 #### Box

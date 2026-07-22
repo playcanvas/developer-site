@@ -3,6 +3,12 @@ title: Render
 description: PlayCanvas Render component draws mesh primitives or a render asset with materials, shadows, lightmaps, batching, layers, and skinning.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Render Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Render Component enables an entity to render a primitive shape or a render asset.
 
 ![Render Component](/img/user-manual/editor/scenes/components/component-render.png)

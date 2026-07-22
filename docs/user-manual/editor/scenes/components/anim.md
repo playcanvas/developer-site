@@ -3,6 +3,12 @@ title: Anim
 description: PlayCanvas Anim component connects an anim state graph and animation assets to drive skeletal animation on an entity hierarchy.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Anim Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Anim Component is used to connect an animstategraph asset and all of its required animation assets to a single entity.
 
 ![Anim Component](/img/user-manual/editor/scenes/components/component-anim.png)
