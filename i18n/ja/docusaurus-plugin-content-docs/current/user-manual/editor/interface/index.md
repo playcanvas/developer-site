@@ -3,6 +3,12 @@ title: エディターインターフェース
 description: ツールバー、Hierarchy、Inspector、ビューポート、Assets パネルをラベル付きで俯瞰し、各主要エリアの詳細ドキュメントへリンクします。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いている Editor の Hierarchy、Inspector、選択、Transform Gizmo、Viewport、Project Settings、Launch ツールを操作できます。
+
+:::
+
 ![エディターインターフェース](/img/user-manual/editor/interface/editor-interface.png)
 
 これはPlayCanvas Editorの主要なインターフェースです。主な領域にラベルが付いています。

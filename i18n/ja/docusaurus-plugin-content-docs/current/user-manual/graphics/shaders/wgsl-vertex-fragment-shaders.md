@@ -3,6 +3,13 @@ title: WGSL 頂点・フラグメントシェーダー
 description: "PlayCanvas における頂点・フラグメント固有の WGSL 構文：属性、バリイング、フラグメント出力。"
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「WGSL 頂点・フラグメントシェーダー」で使用する Shader と Script アセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認できます。
+
+:::
+
 このページでは、頂点シェーダーとフラグメントシェーダーに固有の WGSL 構文（属性、バリイング、フラグメント出力）について説明します。
 
 すべてのシェーダー段階で共有されるリソース（ユニフォーム、テクスチャ、ストレージバッファ。簡略化された構文で宣言され、バインドグループへ自動的に反映されます）については、[WGSL リフレクション](/user-manual/graphics/shaders/wgsl-reflection) を参照してください。

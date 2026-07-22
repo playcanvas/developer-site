@@ -3,6 +3,12 @@ title: トーンマッピングと露出
 description: カメラごとのトーンマッピングとガンマでHDRのシーンライティングをディスプレイにマッピングし、物理ベースの露出も制御します。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Camera Component を作成、設定し、編集カメラをフォーカスして、シーンの起動やキャプチャで表示を確認できます。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

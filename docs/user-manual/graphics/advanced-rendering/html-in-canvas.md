@@ -3,6 +3,13 @@ title: HTML-in-Canvas
 description: Render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “HTML-in-Canvas” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+
+:::
+
 HTML-in-Canvas allows you to render live HTML and CSS content directly as WebGL textures. This enables styled text, interactive UI panels, forms, and other DOM content to appear on surfaces within a 3D scene — complete with accessibility, internationalization, and full CSS styling support.
 
 :::note

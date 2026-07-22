@@ -3,6 +3,12 @@ title: Entities
 description: Create, parent, enable, and manage Entities -- the fundamental building blocks of a PlayCanvas scene.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create, inspect, modify, duplicate, reparent, search, or delete entities in the current scene.
+
+:::
+
 An **Entity** is the basic building block of your PlayCanvas scene ([`Entity`](https://api.playcanvas.com/engine/classes/Entity.html)).
 
 ## Key characteristics

@@ -3,4 +3,10 @@ title: Group Elements
 description: グループ要素を空のコンテナとして使い、階層内で他のUI要素を配置し親子関係を付けます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「Group Elements」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+
+:::
+
 グループエレメント (Group Elements)は、他のエレメントの親として使用できる空のElementコンポーネントです。この要素のサイズと位置を設定することができ、任意の子エレメントをグループに対して配置することができます。

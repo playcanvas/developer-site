@@ -3,6 +3,12 @@ title: Audio
 description: Audio asset inspector for browser-supported sound formats with duration metadata and built-in playback controls to audition clips before use.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete Audio assets in the open project.
+
+:::
+
 Audio assets are sound files which can be played back using the [Sound Component](/user-manual/editor/scenes/components/sound/).
 
 Any audio format that is supported by the web browser is supported by PlayCanvas. No processing is done to the audio file on import.

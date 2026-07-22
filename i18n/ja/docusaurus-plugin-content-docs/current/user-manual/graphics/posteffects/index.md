@@ -3,6 +3,13 @@ title: ポストエフェクト
 description: モダンな CameraFrame の HDR ポストプロセスとレガシーの Script エフェクトを比較し、各フィルターへのリンクを探します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ポストエフェクト」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 PlayCanvasでは、プロジェクトへのポストプロセッシングエフェクトを追加することができます。ポストエフェクトは最終的にレンダリングされるイメージを変更し、アプリケーションにビジュアル効果を簡単に追加する方法を提供します。
 
 ポストエフェクトは、[Camera](/user-manual/editor/scenes/components/camera) コンポーネントがアタッチされた Entity に追加できるスクリプトとして実装されています。カメラにポストエフェクトを追加するには、以下の手順を実行します。

@@ -4,6 +4,13 @@ sidebar_label: Asset Import
 description: PlayCanvas Editor にインポートする Asset の、既定の上書き動作とテクスチャサイズの上限を設定します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「アセットインポート設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「アセットインポート設定」設定を確認、変更できます。
+
+:::
+
 インポートされたアセットの既定の挙動を制御します。
 
 :::note

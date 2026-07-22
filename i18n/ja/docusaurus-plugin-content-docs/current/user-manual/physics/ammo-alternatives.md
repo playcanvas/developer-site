@@ -3,6 +3,13 @@ title: ammo.jsの以外の物理演算ライブラリ
 description: プロジェクトで ammo.js のサイズやコストが高すぎる場合の、より軽い 2D／3D 物理エンジンの調査です。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ammo.jsの以外の物理演算ライブラリ」で使用する Physics Script を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Physics 設定を有効化し、Collision と Rigidbody Component を作成、設定して、起動後のランタイム状態やログを確認できます。
+
+:::
+
 ammo.jsはおそらく最も人気があり、よく知られたJavaScript物理エンジンです。高度に汎用性が高く、高精度シミュレーションを生成することができます。しかし、性能やメモリ要件が非常に高いため、アプリケーションに最適な選択肢かどうかを調査する必要があります。たとえば、2Dゲームを作成している場合、2D物理エンジンの方が適しているかもしれません。
 
 実際、ammo.jsの代わりにはいくつかの選択肢があります。

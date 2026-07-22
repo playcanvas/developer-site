@@ -3,6 +3,13 @@ title: Batching
 description: "Batch groups merge mesh instances to cut draw calls: Editor setup, static versus dynamic rules, and limitations."
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Batching” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+
+:::
+
 Batching is the process of combining multiple mesh instances together into a single mesh instance, so that they can all be rendered in a single GPU draw call. PlayCanvas provides a handy feature on the [Model](/user-manual/editor/scenes/components/model), [Sprite](/user-manual/editor/scenes/components/sprite) and [Element](/user-manual/editor/scenes/components/element) components that lets you assign these components to batch groups which give the engine hints on how to combine meshes to reduce the overall draw call count.
 
 There are a variety of rules which the engine will apply to see if mesh instances are able to be combined. The primary rule is that all mesh instances must share the same material.

@@ -3,6 +3,13 @@ title: ブラウザ開発ツール
 description: Chrome と Firefox の開発者ツールでブレークポイントを設定し、変数を検査し、PlayCanvas の Script をステップ実行します。
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ブラウザ開発ツール」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+
+:::
+
 PlayCanvasのスクリプトを作成するためには、ブラウザの開発ツールにアクセスして使用する方法を知っていることが重要です。
 
 Chrome、Firefoxや他のブラウザでは、ブラウザに直接組み込まれているDeveloper Toolがあります。通常、Mac上でALT-CMD-I、WindowsではF12キーを押すことでアクセスすることができます。またはブラウザのメニューを使用して開発者ツールにアクセスすることができます。

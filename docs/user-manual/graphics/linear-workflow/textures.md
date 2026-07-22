@@ -3,6 +3,12 @@ title: Textures
 description: Mark color textures as sRGB in assets and code, including procedural targets, so sampling stays physically correct.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Material assets and scene rendering settings for “Textures”, then launch and capture the visual result.
+
+:::
+
 ### sRGB Texture Handling  
 
 Textures that represent colors, such as Diffuse, Emissive, Specular, and Sheen, are typically stored in sRGB space to maintain color accuracy and reduce banding. When used by the engine, these textures are automatically converted from sRGB to linear space for correct lighting calculations. This conversion is performed by the GPU efficiently at no extra cost, provided that the texture is created using an sRGB format.  

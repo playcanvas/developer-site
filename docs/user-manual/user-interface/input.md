@@ -3,6 +3,12 @@ title: Input
 description: Enable element input, initialize ElementInput with the app, and handle clicks, hovers, and touch on UI.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Element, Button, Scroll View, and related UI Components, then inject mouse or touch input into the running application.
+
+:::
+
 The user can interact with [Element](/user-manual/editor/scenes/components/element/) components, by enabling the `useInput` field on the Element component:
 
 ![Use Input](/img/user-manual/assets/fonts/use-input.png)

@@ -3,6 +3,13 @@ title: Updating ammo.js
 description: Migrate from legacy built-in ammo.js to the latest wasm build using Scene Settings import and migration steps.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the physics scripts used by “Updating ammo.js” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+
+:::
+
 ### Introduction
 
 PlayCanvas has added support for the latest version of ammo.js.

@@ -3,6 +3,13 @@ title: Brightness-Contrast Effect
 description: "Legacy brightness and contrast script effect: parameter ranges and GitHub source for the camera post pipeline."
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Brightness-Contrast Effect” locally in Pull/Push mode.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+
+:::
+
 The brightness-contrast effect allows you to modify the brightness and contrast of the rendered image.
 
 Here is an image without the effect:

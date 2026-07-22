@@ -3,6 +3,12 @@ title: Localization
 description: Author JSON localization assets in Editor settings and bind translated keys to Text Element content.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload localization assets, configure localized Element Components, and launch the scene to capture each result.
+
+:::
+
 This page describes how to localize your Text Elements to different languages.
 
 ## Localization Files

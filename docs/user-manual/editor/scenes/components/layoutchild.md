@@ -3,6 +3,12 @@ title: Layout Child
 description: PlayCanvas Layout Child component overrides Layout Group rules for one UI element with min or max sizes, fit proportions, or exclusion.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Layout Child Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The LayoutChild Component enables an element that is controlled by a LayoutGroup Component to override the default behavior of the Layout Group.
 
 See the [Layout Groups](/user-manual/user-interface/layout-groups) section for more details.

@@ -3,6 +3,12 @@ title: Layout Groups
 description: Layout Group Componentで横、縦、グリッドのレイアウトを使い、子要素の配置を自動化します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「Layout Groups」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+
+:::
+
 Layout Groupコンポーネントは、子エレメントの位置とサイズの自動設定に使用します。子エレメントを縦横の列やグリッドに揃えるのにも使用できます。このコンポーネントでは直接の子全てにレイアウトルールが適用されるため、1つのレイアウト子コンポネント上でレイアウトグループルールを上書きできます。
 
 Layout Groupコンポーネントは、[グリッド](/user-manual/user-interface/layout-groups#grid)、[縦列](/user-manual/user-interface/layout-groups#vertical-leaderboard)または [横列](/user-manual/user-interface/layout-groups#horizontal-buttons)の固定幅等、一般的なレイアウトの生成に使用できます。

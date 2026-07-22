@@ -3,6 +3,13 @@ title: Events
 description: Communicate between PlayCanvas scripts using the built-in event system with on, once, off, and fire methods.
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Events” locally in Pull/Push mode.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+
+:::
+
 Events are a useful way of communicating between scripts in order to respond to things that happen without checking every frame.
 
 Many PlayCanvas object types (such as script instances) have event handling support built-in, inherited from the Engine's [`EventHandler`](https://api.playcanvas.com/engine/classes/EventHandler.html) class. Event handling objects have the following methods:

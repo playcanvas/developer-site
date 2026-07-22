@@ -3,6 +3,13 @@ title: クラシックリファレンス
 description: Classic Script Attributesのリファレンス。型宣言とレガシーScript向けのEditor連携を扱います。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「クラシックリファレンス」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+
+:::
+
 :::note
 
 このページでは、非推奨の**クラシックスクリプト**システムにおけるスクリプト属性について説明します。

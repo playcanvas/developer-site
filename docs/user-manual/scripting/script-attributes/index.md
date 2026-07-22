@@ -3,6 +3,13 @@ title: Script Attributes
 description: Expose configurable parameters on your PlayCanvas scripts for use in the Editor Inspector or via code.
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Script Attributes” locally in Pull/Push mode.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+
+:::
+
 Script Attributes are a powerful feature in PlayCanvas that define the public, configurable interface of your scripts. They allow you to expose specific parameters that can be easily tweaked, either programmatically when instantiating or configuring scripts in code, or visually within the [PlayCanvas Editor](../../editor/index.md). This means you can write a script once, and then easily adjust its behavior and properties for different instances or by different team members.
 
 ## Why Use Script Attributes?

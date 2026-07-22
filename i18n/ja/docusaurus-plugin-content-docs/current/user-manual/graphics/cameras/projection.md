@@ -3,6 +3,12 @@ title: 投影
 description: 透視投影または正投影の選択、視野角の設定、クリップ面・アスペクト比・フラスタムカリングの調整を解説します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Camera Component を作成、設定し、編集カメラをフォーカスして、シーンの起動やキャプチャで表示を確認できます。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

@@ -3,6 +3,12 @@ title: Animation (Legacy)
 description: 非推奨のレガシー Animation Component はモデルにアニメーション Asset を割り当てます。state graph には Anim Component を使います。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Animation (Legacy)をエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+
+:::
+
 :::warning
 
 Animationコンポーネントは非推奨です。これは[Anim](anim.md)コンポーネントに置き換えられました。

@@ -3,6 +3,13 @@ title: Loading and Unloading
 description: Dynamically load and unload assets at runtime to manage memory and stream content on demand.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts used for “Loading and Unloading” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those scripts, attach them to entities, and launch the scene to inspect logs and runtime state.
+
+:::
+
 PlayCanvas provides APIs to dynamically load and unload assets at runtime. This gives you fine-grained control over memory usage and allows you to stream content as needed.
 
 ## Loading Assets

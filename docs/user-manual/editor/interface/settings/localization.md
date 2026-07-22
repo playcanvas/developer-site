@@ -4,6 +4,13 @@ description: Localization panel usage for registering JSON translation assets cr
 sidebar_label: Localization
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Localization Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Localization Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Manages the JSON files for supporting multiple languages.
 
 :::note

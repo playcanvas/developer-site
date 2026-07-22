@@ -3,6 +3,13 @@ title: WGSL ケイパビリティ
 description: "デバイス依存の任意の WGSL 機能：半精度型と WGSL 言語拡張、およびそれらの CAPS_* 定義。"
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「WGSL ケイパビリティ」で使用する Shader と Script アセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認できます。
+
+:::
+
 このページでは、デバイスのサポートに依存する任意の WGSL 機能について説明します。エンジンは各ケイパビリティを `device.supports*` フラグと対応する `CAPS_*` プリプロセッサ定義で公開し、必要に応じて `enable …;` / `requires …;` ディレクティブを生成される WGSL に注入します。これらの機能は頂点・フラグメント・コンピュートシェーダーにわたって利用できます。
 
 ### 半精度型 {#half-precision-types}

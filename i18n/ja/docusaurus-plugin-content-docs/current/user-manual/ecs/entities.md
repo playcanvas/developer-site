@@ -3,6 +3,12 @@ title: エンティティ
 description: Entity の作成、親子付け、有効化、管理。PlayCanvas Scene の基本的な構成要素です。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在のシーンのエンティティを作成、確認、変更、複製、親変更、検索、削除できます。
+
+:::
+
 **[Entity](https://api.playcanvas.com/engine/classes/Entity.html)** は、PlayCanvas シーンの基本的な構成要素です。
 
 ## 特徴

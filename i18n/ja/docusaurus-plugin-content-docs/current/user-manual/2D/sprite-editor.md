@@ -3,6 +3,12 @@ title: スプライトエディター
 description: Sprite Editorでアトラスのフレーム、境界、スプライトを定義し、2DとUIのレンダリングに使います。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture Atlas アセットと Frame を作成、設定し、Sprite アセットを変更して、シーン内の Sprite Component をキャプチャできます。
+
+:::
+
 スプライトエディターは、Texture AtlasアセットとSpriteアセットの作成、編集に使われます。
 
 スプライトエディターを開くには、エディターアセットパネル内の任意のTexture AtlasまたはSpriteアセットをダブルクリックします。

@@ -3,6 +3,13 @@ title: Extending FramePassCameraFrame Class
 description: Extend FramePassCameraFrame to insert passes, reorder work, and tap intermediate scene textures in the HDR stack.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Extending FramePassCameraFrame Class” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+
+:::
+
 For more advanced customization, you can extend the `FramePassCameraFrame` class to add custom passes or modify the rendering pipeline, and wire it in by overriding [`CameraFrame.createRenderPass`](https://api.playcanvas.com/engine/classes/CameraFrame.html#createrenderpass). This approach gives you full control over the pass creation and ordering while still leveraging the built-in [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) effects.
 
 ## Overview

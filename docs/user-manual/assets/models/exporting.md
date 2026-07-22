@@ -3,6 +3,12 @@ title: Exporting Assets
 description: Export 3D models from Blender, Maya, or 3DS Max in GLB or FBX format for import into PlayCanvas.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, reimport, unwrap, download, or delete the Model assets used by “Exporting Assets”.
+
+:::
+
 PlayCanvas can import 3D content in the following formats: glTF binary (GLB), FBX, OBJ, 3DS and COLLADA (DAE). We strongly recommend you use GLB as it's an open source industry standard and very well supported in the Editor.
 
 ![GLB Import Example](/img/user-manual/assets/models/building/glb-import.gif)  

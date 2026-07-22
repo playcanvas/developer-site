@@ -3,6 +3,13 @@ title: GLSL Specifics
 description: Rules for GLSL attributes, uniforms, varyings, and versioning so PlayCanvas can wire resources and transpile to WGSL.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the shader and script assets used by “GLSL Specifics” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
+
+:::
+
 GLSL shaders used by the PlayCanvas engine must satisfy certain requirements. These requirements allow the engine to correctly integrate shaders, ensuring they receive the necessary resources such as attributes, uniforms, and varyings. Following these rules also allows us to automatically process the shader for slightly different requirements when transpiling to WGSL for use with WebGPU.
 
 The following sections outline key aspects of writing GLSL shaders for PlayCanvas.

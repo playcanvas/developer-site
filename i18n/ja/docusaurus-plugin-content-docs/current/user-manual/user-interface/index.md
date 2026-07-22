@@ -3,6 +3,12 @@ title: ユーザインターフェース
 description: ScreenとElement Componentでキャンバス内UIを選ぶか、HTMLとCSSを使うか、パフォーマンスのトレードオフを比較します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ユーザインターフェース」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+
+:::
+
 ユーザインターフェイスは、グラフィカルアプリケーション固有の課題です。PlayCanvasにはユーザインタフェースを構築するためのいくつかのオプションがあります。
 
 ## ScreenコンポーネントとElementコンポーネント(推奨)

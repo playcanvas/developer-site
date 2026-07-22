@@ -3,6 +3,13 @@ title: コンピュートシェーダー（応用）
 description: "WebGPU コンピュートシェーダーのバインドグループ手動制御：手書きの computeBindGroupFormat、明示的なバインディング、反映リソースとの混在。"
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「コンピュートシェーダー（応用）」で使用する Shader と Script アセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認できます。
+
+:::
+
 ほとんどのコンピュートシェーダーでは、[コンピュートシェーダー](/user-manual/graphics/shaders/compute-shaders) のページで説明している簡略化された構文だけで十分です。WGSL でリソースを宣言すれば、エンジンが自動的に反映します。
 
 このページでは、バインドグループの **手動** 制御について説明します。これは現在も完全にサポートされています。リソースを記述する `computeBindGroupFormat`（および必要に応じて `computeUniformBufferFormats`）を自分で指定し、WGSL に明示的な `@group`/`@binding` インデックスを記述します。次のような場合に使用します：

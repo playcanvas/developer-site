@@ -3,6 +3,13 @@ title: Forces and Impulses
 description: Apply continuous forces and one-frame impulses to dynamic rigid bodies using RigidBodyComponent APIs.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the physics scripts used by “Forces and Impulses” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+
+:::
+
 Dynamic rigid bodies move in response to forces and impulses. A force is applied to a body over a period of time whereas an impulse is a force that is applied in an instant.
 
 To apply a force or an impulse to a rigid body, you must use the [pc.RigidBodyComponent scripting API](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html).

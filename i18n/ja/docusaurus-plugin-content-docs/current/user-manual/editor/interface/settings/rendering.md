@@ -4,6 +4,13 @@ sidebar_label: Rendering
 description: スカイ、クラスタードライト、シャドウ、露出、フォグ、メッシュスケッチ、オーバーレイ、解像度の既定値など、ブランチ上の全員に共有されるレンダリングのプロジェクト設定です。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「レンダリング設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「レンダリング設定」設定を確認、変更できます。
+
+:::
+
 ライティング、解像度、各種レンダリング機能を制御します。
 
 :::note

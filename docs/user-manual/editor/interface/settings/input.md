@@ -4,6 +4,13 @@ description: Enable or disable keyboard, mouse, touch, and gamepad input handlin
 sidebar_label: Input
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Input Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Input Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Enables or disables input device handling for the application.
 
 :::note

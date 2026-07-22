@@ -3,6 +3,12 @@ title: Input
 description: 要素の入力を有効にし、ElementInputをアプリで初期化し、UIのクリック、ホバー、タッチを処理します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Element、Button、Scroll View などの UI Component を設定し、実行中のアプリケーションへマウスやタッチ入力を送信できます。
+
+:::
+
 ユーザは、Elementコンポーネントの `useInput`フィールドを有効にすることで、[Element](/user-manual/editor/scenes/components/element/)コンポーネントとインタラクトできます。
 
 ![Use Input](/img/user-manual/assets/fonts/use-input.png)

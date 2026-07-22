@@ -3,6 +3,12 @@ title: Projection
 description: Choose perspective or orthographic projection, set the field of view, and tune clip planes, aspect ratio, and frustum culling.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

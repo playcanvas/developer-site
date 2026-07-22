@@ -3,6 +3,12 @@ title: 2D
 description: スプライト、テクスチャアトラス、Sprite EditorでPlayCanvasエンジン上に2Dゲームを構築します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Sprite と Texture Atlas アセットを管理し、Sprite Component を設定して、2D シーンを起動またはキャプチャできます。
+
+:::
+
 PlayCanvasエンジンは、3Dゲームやアプリを素早く簡単に作成するために設計されています。しかし、2Dゲームを作成するための多数の優れた機能もサポートしています。PlayCanvasの2D機能により、3Dエンジンの強力な利点を2Dゲームにも活用できます。
 
 ## 基本的な機能

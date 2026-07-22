@@ -3,6 +3,12 @@ title: Supported Formats
 description: Complete list of file formats supported by PlayCanvas for 3D models, textures, audio, fonts, and other asset types.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, upload, inspect, modify, move, duplicate, download, or delete the project assets relevant to “Supported Formats”.
+
+:::
+
 PlayCanvas supports a wide variety of file formats for different asset types. This page lists the formats that can be used in your projects.
 
 ## 3D Models

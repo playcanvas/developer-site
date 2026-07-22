@@ -3,6 +3,13 @@ title: Shader Preprocessor
 description: C-style defines, includes, and ifdef chains applied to GLSL, WGSL, and compute shaders before compilation.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the shader and script assets used by “Shader Preprocessor” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
+
+:::
+
 Before shaders are compiled, PlayCanvas applies a C-style preprocessor to the source code. This allows you to manage shader variations, conditionally include code, and inject values. The preprocessor works with GLSL, WGSL, and compute shaders.
 
 ## Preprocessor Directives

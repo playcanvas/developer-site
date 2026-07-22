@@ -3,6 +3,12 @@ title: Lighting
 description: How dynamic runtime lighting compares to baked lightmaps and when to use each approach in PlayCanvas scenes.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Light Components and scene lighting settings, bake lightmaps where applicable, and capture the result.
+
+:::
+
 Lighting a scene is the process of calculating the color or shading of a pixel render to the screen based on the material properties of the surface and the light sources that are applied to that material.
 
 In PlayCanvas, lighting can be broadly divided up into two basic categories: dynamic lights and lightmaps.

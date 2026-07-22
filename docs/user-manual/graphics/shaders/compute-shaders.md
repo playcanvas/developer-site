@@ -3,6 +3,13 @@ title: Compute Shaders
 description: "WebGPU-only compute shaders: device checks, simplified WGSL resource declarations, dispatch, and general-purpose GPU work."
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the shader and script assets used by “Compute Shaders” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
+
+:::
+
 Compute shaders are programs that run general-purpose computations on the GPU, independent of the rendering pipeline. Unlike vertex and fragment shaders, compute shaders are not tied to geometry or pixels—they operate on arbitrary data, making them ideal for tasks such as particle simulation, image processing, physics calculations, and procedural content generation.
 
 :::warning

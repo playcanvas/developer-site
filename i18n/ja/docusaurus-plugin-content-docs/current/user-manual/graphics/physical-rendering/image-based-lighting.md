@@ -3,6 +3,12 @@ title: イメージベースドライティング(IBL)
 description: HDR キューブマップによる image-based lighting、粗さ向けのプリフィルタ、リアルな PBR のための環境マップの作成です。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「イメージベースドライティング(IBL)」向けに Material アセットとシーンのレンダリング設定を構成し、起動して表示結果をキャプチャできます。
+
+:::
+
 PlayCanvasで物理ベースレンダリングを使用する際に最良の結果を得るには、イメージベースドライティングまたはIBLというテクニックを使用します。事前レンダリングされたイメージデータをアンビエントおよび反射光のソース情報として使用できます。
 
 このテクニックは、キューブを構成する6つのテクスチャ(面)で構成され、完全なサラウンドテクスチャカバレッジを持つ環境マップである[CubeMap](/user-manual/editor/assets/inspectors/cubemap/)に依存しています。

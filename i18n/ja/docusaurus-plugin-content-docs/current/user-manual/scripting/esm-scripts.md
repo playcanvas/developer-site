@@ -3,6 +3,13 @@ title: ESMスクリプト
 description: 静的 import、クラス、改善されたツール対応で、モダンな ES Module 構文を使って PlayCanvas の Script を書きます。
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ESMスクリプト」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+
+:::
+
 ESMスクリプトは、モダンなESモジュール構文を使用し、PlayCanvasスクリプトの推奨される記述方法です。より良いコード構成、静的インポート、バンドル最適化、そしてモダンなJavaScript開発者にとって馴染みのある開発体験を提供します。
 
 ## なぜESMスクリプトを選ぶのか？

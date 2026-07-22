@@ -3,6 +3,12 @@ title: ローカライゼーション
 description: Editorの設定でJSONのローカライゼーション Assetを作成し、翻訳キーをText Elementの内容にバインドします。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Localization アセットをアップロードし、ローカライズされた Element Component を設定して、シーンを起動し結果をキャプチャできます。
+
+:::
+
 テキストエレメントを異なる言語にローカライズする方法について説明します。
 
 ## ローカライゼーションファイル

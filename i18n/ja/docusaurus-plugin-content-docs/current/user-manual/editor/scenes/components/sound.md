@@ -3,6 +3,12 @@ title: Sound
 description: PlayCanvas の Sound Component は、音量、ピッチ、ループ、リスナーへの任意の 3D 距離減衰付きで 1 つ以上のオーディオスロットを再生します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Soundをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+
+:::
+
 Soundコンポーネントは、オーディオサンプルの再生を制御します。
 
 ![Sound Component](/img/user-manual/editor/scenes/components/component-sound.png)

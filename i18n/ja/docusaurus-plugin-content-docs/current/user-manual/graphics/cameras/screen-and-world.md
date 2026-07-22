@@ -3,6 +3,12 @@ title: スクリーン座標とワールド座標
 description: ピッキング、オブジェクト配置、UIのためにscreenToWorldとworldToScreenで2Dスクリーン位置と3Dワールド位置を相互変換します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Camera Component を作成、設定し、編集カメラをフォーカスして、シーンの起動やキャプチャで表示を確認できます。
+
+:::
+
 カメラは3Dワールドと2Dスクリーンの間のマッピングを定義しており、[CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) はそのマッピングを双方向で公開しています。これは、マウスピッキング、カーソル下へのオブジェクト配置、3Dオブジェクトへの2D UIの追従の基礎となります。これらはスクリプトから呼び出すランタイムAPIなので、どのワークフローでも同じコードが動作します。
 
 ## スクリーンからワールドへ {#screen-to-world}

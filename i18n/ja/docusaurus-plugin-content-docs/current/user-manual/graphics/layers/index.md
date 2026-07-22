@@ -3,6 +3,12 @@ title: レイヤー
 description: レイヤーでレンダリング順と表示を制御。レイヤー合成、不透明と透明のサブレイヤー、ソートモードです。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** プロジェクトの Layer を確認、変更し、Camera と Render Component の Layer 割り当てを設定して結果をキャプチャできます。
+
+:::
+
 ## レイヤーの概要 {#layers-overview}
 
 レイヤーを使用すると、アプリケーションのレンダーループをカスタマイズできます。レイヤーを使用すると、高度なレンダリング機能を実装できます。例えば:

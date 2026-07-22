@@ -3,6 +3,12 @@ title: Screen
 description: PlayCanvas Screen component defines screen-space or world-space UI regions, resolution scaling, priority, and the root for Element children.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Screen Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Screen Component defines the area and rendering of a user interface. Children added to a Screen Component should all have an Element Component.
 
 See the [User Interface](/user-manual/user-interface) section for more details.

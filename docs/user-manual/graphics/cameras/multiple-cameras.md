@@ -3,6 +3,12 @@ title: Multiple Cameras
 description: Compose views from several cameras using priorities, viewports, layers, and render targets for split-screen, overlays, and more.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Camera Components, focus the editing camera, and launch or capture the scene to verify the view.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

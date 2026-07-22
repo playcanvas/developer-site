@@ -3,6 +3,13 @@ title: PlayCanvasのワークフロー
 description: Asset のインポートと Scene の構築から Script、公開まで、PlayCanvas のエンドツーエンドのワークフローをまとめます。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「PlayCanvasのワークフロー」で扱うプロジェクトの Script を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで必要なシーン、エンティティ、Component、アセットを構築し、アプリケーションを起動、キャプチャできます。
+
+:::
+
 PlayCanvas Editor を使って 3D ウェブアプリを構築するのは簡単です。
 
 ## アセットの作成とアップロード

@@ -3,6 +3,13 @@ title: カメラコントロール
 description: エンジン付属のcamera-controlsスクリプトで、マウス・タッチ・ゲームパッド対応のオービット、フライ、パンのナビゲーションを任意のカメラに追加します。
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「カメラコントロール」で使用する Camera Script を Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Camera Component を作成、設定し、編集カメラをフォーカスして、シーンの起動やキャプチャで表示を確認できます。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

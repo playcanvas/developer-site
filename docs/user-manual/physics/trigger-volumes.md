@@ -3,6 +3,12 @@ title: Trigger Volumes
 description: Static trigger volumes that fire enter and leave events when rigid bodies pass through, with example scripts.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+
+:::
+
 Trigger volumes are static collision shapes which can fire events whenever a rigid body enters or leaves their volume. They can be useful to determine when a goal has been scored in a football match or when a race car has reached the finish line.
 
 To create a trigger volume, add a [collision component](/user-manual/editor/scenes/components/collision) to an entity and configure its shape. Do not add a rigidbody component to your trigger volume entity.

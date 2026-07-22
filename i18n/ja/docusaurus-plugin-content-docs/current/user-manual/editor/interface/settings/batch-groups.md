@@ -4,6 +4,13 @@ sidebar_label: Batch Groups
 description: Batch Group を作成・設定し、メッシュをまとめてドローコールを減らし、レンダリングのパフォーマンスを高めます。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「バッチグループ設定」のプロジェクト値を Pull/Push モードで `.pc/settings.json` から確認、編集できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Editor で現在開いているプロジェクトの 「バッチグループ設定」設定を確認、変更できます。
+
+:::
+
 バッチグループは、複数のメッシュを単一のドローコールにまとめ、CPU のオーバーヘッドを削減して描画性能を向上させます。
 
 :::note

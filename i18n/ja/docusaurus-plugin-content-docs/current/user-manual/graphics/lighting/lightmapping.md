@@ -3,13 +3,11 @@ title: ライトマッピング
 description: 3ds Max や VRay など外部ツールでライトマップをベイクし、テクスチャをインポートして linear／gamma のベストプラクティスに従います。
 ---
 
-<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
 :::ai
 
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** UV1 座標をアンラップし、シーン全体または選択したエンティティのライティングをベイクできます。
 
 :::
--->
 
 [![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*

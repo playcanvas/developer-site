@@ -3,6 +3,12 @@ title: Ambient Occlusion
 description: Bake ambient occlusion textures in DCC tools, upload them, and multiply diffuse and specular ambient lighting.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Light Components and scene lighting settings, bake lightmaps where applicable, and capture the result.
+
+:::
+
 Ambient Occlusion is a technique to approximate how much light gets onto the surface based on its occlusion by the environment.
 
 In PlayCanvas, ambient lighting is multiplied by the AO map, both diffuse and specular.

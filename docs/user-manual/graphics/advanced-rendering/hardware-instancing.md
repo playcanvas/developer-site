@@ -3,6 +3,13 @@ title: Hardware Instancing
 description: Hardware instancing formats, MeshInstance buffers, shader chunks, and live engine examples for repeated meshes.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and shaders used by “Hardware Instancing” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write the related text assets, configure Camera and rendering properties, then launch and capture the result.
+
+:::
+
 Hardware instancing is a rendering technique which allows the GPU to render multiple identical meshes in a small number of draw calls. Each instance of the mesh can have a different limited amount of state (for example, position, rotation, scale, or color). It's a technique suitable for drawing objects such as trees, bullets, particles, or any repeated geometry.
 
 Instancing is supported on all devices since PlayCanvas requires WebGL2 minimum, where instancing is a core feature.

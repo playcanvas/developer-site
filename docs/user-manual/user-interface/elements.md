@@ -3,6 +3,12 @@ title: Elements
 description: Anchor, pivot, and margin properties that position and size Element components relative to their parents.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the UI entities and Components used by “Elements”, then launch and capture the interface.
+
+:::
+
 Elements are the individual pieces that make up a user interface screen. A user interface element is added by attaching an Element component to an entity and adding that entity as a child or descendent of the Screen entity. An element that is part of a Screen differs from a regular entity in the way that its transform is calculated and hence the way that it is positioned on screen.
 
 In addition to the local position, rotation and scale which are used to calculate an entity's position relative to its parent, Element components also use the anchor, pivot and margin properties to determine, where the local position should be measured against, where the center point of the Element rectangle should be and the distance between the edges of the Element rectangle and the anchors.

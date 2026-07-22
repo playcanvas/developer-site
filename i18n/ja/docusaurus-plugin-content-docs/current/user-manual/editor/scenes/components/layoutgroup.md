@@ -3,6 +3,12 @@ title: Layout Group
 description: PlayCanvas の Layout Group Component は、パディング、間隔、折り返し付きの水平または垂直レイアウトで子の Element Entity を自動配置します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Layout Groupをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+
+:::
+
 LayoutGroupコンポーネントは、エンティティが子Elementコンポーネントのサイズと位置を指定できるようにします。
 
 詳細については[レイアウトグループ](/user-manual/user-interface/layout-groups)のセクションを参照してください。

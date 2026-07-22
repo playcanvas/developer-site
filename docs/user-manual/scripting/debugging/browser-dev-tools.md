@@ -3,6 +3,13 @@ title: Browser Dev Tools
 description: Use Chrome and Firefox developer tools to set breakpoints, inspect variables, and step through your PlayCanvas scripts.
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Browser Dev Tools” locally in Pull/Push mode.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+
+:::
+
 In order to create scripts for PlayCanvas, it is vital that you know how to access and use your browser's development tools.
 
 Chrome, Firefox and other browsers have Developer Tools integrated directly into the browser. You can usually access them by pressing F12 on Windows or ALT-CMD-I on Mac. Or use menu of a browser to access developer tools.

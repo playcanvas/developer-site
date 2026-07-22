@@ -3,6 +3,13 @@ title: Import Maps
 description: Creates editor import maps to alias ESM module specifiers, use CDN packages, and understand limits like single active map.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Import Maps” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+
+:::
+
 With ESM Scripts, you can use Import Maps to control how module specifiers are resolved in your project. Import Maps allow you to define aliases or remap module paths so you can write cleaner and more flexible imports, especially when working with shared libraries or internal tools.
 
 For example, instead of writing:

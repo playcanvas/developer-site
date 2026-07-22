@@ -3,6 +3,12 @@ title: Graph View
 description: Navigates the expandable checkpoint graph comparing nodes restoring hard resetting and copying metadata from version history.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List branches and checkpoints, inspect checkpoint details, and compare checkpoints represented in the graph.
+
+:::
+
 ## Overview
 
 The Version Control Graph makes it easy to track progress and merge history of the branches of a PlayCanvas project.

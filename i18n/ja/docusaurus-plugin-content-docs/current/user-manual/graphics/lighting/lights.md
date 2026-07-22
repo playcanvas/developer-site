@@ -3,6 +3,12 @@ title: ライト
 description: "Editor における Directional、omni、spot ライト：ギズモ、シャドウ、cookies、実践的なライティングの組み合わせ。"
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Light Component とシーンの Lighting 設定を作成、構成し、必要に応じて Lightmap をベイクして結果をキャプチャできます。
+
+:::
+
 現実世界では、周囲の環境は多くの光源から照らされています。太陽、街灯、テレビ画面などです。PlayCanvasのシーンでは、現実に見られるさまざまなタイプの光を近似するために、さまざまなタイプの光源と光源の形状を設定する能力を持っています。
 
 各種ライトタイプと光源形状の説明は以下の通りです。さらに、異なるライトタイプの組み合わせの例は、下記の[表](#use-cases)に示します。

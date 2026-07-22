@@ -3,6 +3,13 @@ title: Code Editor
 description: Describes opening Monaco-based collaborative editing, file tabs, autocomplete, JSHint linting, shortcuts, and version control hooks.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the scripts and text assets used by “Code Editor” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and parse those script assets, attach and configure them on entities, then launch the scene and inspect logs or runtime state.
+
+:::
+
 The Code Editor is an online real-time collaborative editor that allows you to edit your Script assets and also all the other text based assets like JSON, HTML, CSS etc.
 
 ## Opening The Code Editor

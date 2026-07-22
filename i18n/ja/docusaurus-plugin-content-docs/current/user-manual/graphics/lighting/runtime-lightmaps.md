@@ -3,6 +3,13 @@ title: ランタイムライトマップ
 description: ランタイムで HDR ライトマップをベイクし、ベイクと動的ライトを混在させ、アプリで再ベイク用にライトを設定します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Runtime Lightmap の Script を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Light Component とシーンの Lighting 設定を作成、構成し、必要に応じて Lightmap をベイクして結果をキャプチャできます。
+
+:::
+
 ![Sponza](/img/user-manual/graphics/lighting/lightmapping/sponza.jpg)
 *All the lighting in this scene is provided by lightmap textures*
 

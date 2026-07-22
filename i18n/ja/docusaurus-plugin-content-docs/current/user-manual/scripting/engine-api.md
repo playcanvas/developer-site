@@ -3,6 +3,13 @@ title: Engine APIの呼び出し
 description: Script で Entity、transform、入力、Asset、物理を扱うための PlayCanvas Engine の主要なクラスとパターンです。
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「Engine APIの呼び出し」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+
+:::
+
 PlayCanvasスクリプトを記述する際、[PlayCanvas Engine API](https://api.playcanvas.com/engine/)を操作することになります。このページでは、スクリプトで最も頻繁に使用する重要なクラスとパターンについて説明します。
 
 ## スクリプト開発者向けの主要クラス

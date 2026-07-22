@@ -3,13 +3,11 @@ title: Animstategraph Assets
 description: Author animstategraph state machines for animation states, transitions, blending, layers, and parameters.
 ---
 
-<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
 :::ai
 
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect and modify animation graph layers, states, transitions, conditions, and parameters.
 
 :::
--->
 
 Animstategraph assets are used to organize a set of different animation states, which are all the various ways in which a model might animate. It can be used to define each of these animation states, determine when each state should play and how states transition and therefore blend between one another. Animstategraph assets do not store or link to any real animation assets themselves, but rather act as a template for how animation assets should be organized. Actual animation assets are linked to the animstategraphs animation states through the [Anim Component](/user-manual/editor/scenes/components/anim/).
 

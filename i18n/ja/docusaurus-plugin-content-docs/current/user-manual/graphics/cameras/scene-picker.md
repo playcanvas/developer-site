@@ -3,6 +3,13 @@ title: シーンピッカー
 description: Picker API で画面座標からメッシュとスプラットを選択し、非同期読み取りと、任意で深度に基づくワールド座標を取得します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「シーンピッカー」で使用する Camera Script を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Camera Component を作成、設定し、編集カメラをフォーカスして、シーンの起動やキャプチャで表示を確認できます。
+
+:::
+
 `Picker` クラスは、画面をクリックまたはタッチした座標からメッシュインスタンスを選択する手段を提供します。カメラの視点からシーンをオフスクリーンバッファに一意の ID カラーでレンダリングすることで、クリックしたオブジェクトを効率よく識別します。Picker は通常のメッシュと Gaussian Splats の両方をサポートし、WebGL2 と WebGPU のバックエンドで動作します。
 
 ## 基本的な使い方

@@ -3,6 +3,12 @@ title: Image Elements
 description: テクスチャまたは単色をティントと不透明度で表示し、画像要素に任意のカスタムマテリアルを適用できます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「Image Elements」で使用する UI エンティティと Component を作成、設定し、インターフェースを起動してキャプチャできます。
+
+:::
+
 イメージエレメント (Image Element) は、テクスチャや単一の色を表示するために使用されます。イメージエレメントは、ボタンなどのより複雑なユーザーインターフェイスコンポーネントの基盤として使用できます。
 
 ## 着色 (Tinting)

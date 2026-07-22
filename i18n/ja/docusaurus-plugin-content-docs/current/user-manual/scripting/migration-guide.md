@@ -3,6 +3,13 @@ title: 移行ガイド
 description: PlayCanvasプロジェクトをClassic Scriptsから推奨のESM Scriptsへ、段階的に移行します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「移行ガイド」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+
+:::
+
 ESMスクリプトは、PlayCanvasアプリケーションの推奨される開発方法として、従来のクラシックスクリプト方式に取って代わります。クラシックスクリプトは既存プロジェクトで引き続き動作し、今後もサポートされますが、新しいプロジェクトではESM形式の使用を推奨します。
 
 ## 段階的な移行

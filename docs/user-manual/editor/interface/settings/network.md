@@ -4,6 +4,13 @@ description: Configure asset loading retry behavior and network timeout settings
 sidebar_label: Network
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Review and edit the “Network Settings” project values through `.pc/settings.json` in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Query and modify the “Network Settings” project settings in the project currently open in the Editor.
+
+:::
+
 Configures network behavior for asset loading.
 
 :::note

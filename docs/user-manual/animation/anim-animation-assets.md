@@ -3,6 +3,12 @@ title: Animation Assets
 description: Keyframe animation assets from FBX conversion and how they link to animstategraphs through the anim component.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload or inspect Animation assets and read, add, update, or remove their animation events.
+
+:::
+
 ![Animation Assets](/img/user-manual/animation/animation-assets.png)
 
 Animation assets are the animation keyframe data that’s used to drive animations of a model in PlayCanvas. They are linked to an animstategraph asset via an entity's anim component.

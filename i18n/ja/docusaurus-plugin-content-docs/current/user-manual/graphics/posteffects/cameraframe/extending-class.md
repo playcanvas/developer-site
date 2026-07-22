@@ -3,6 +3,13 @@ title: FramePassCameraFrame クラスの拡張
 description: FramePassCameraFrame を拡張してパスを挿入し、処理順を並べ替え、HDR スタック内の中間シーンテクスチャを利用します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「FramePassCameraFrame クラスの拡張」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 より高度なカスタマイズとして、`FramePassCameraFrame` クラスを拡張してカスタムパスを追加したり、レンダリングパイプラインを変更したりできます。サブクラスは [`CameraFrame.createRenderPass`](https://api.playcanvas.com/engine/classes/CameraFrame.html#createrenderpass) をオーバーライドして組み込みます。この方法では、組み込みの [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) エフェクトを活かしつつ、パス生成と実行順を細かく制御できます。
 
 ## 概要

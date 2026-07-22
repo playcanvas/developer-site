@@ -3,6 +3,12 @@ title: Fonts
 description: Create the MSDF Font assets that text elements need — in the Editor, or with the standalone font-tools for Engine, React and Web Components projects.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload Font assets, inspect or modify their asset data, replace references, and delete or download them from the open project.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

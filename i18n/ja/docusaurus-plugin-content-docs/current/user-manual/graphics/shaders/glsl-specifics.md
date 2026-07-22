@@ -3,6 +3,13 @@ title: GLSL の詳細
 description: GLSL の attribute、uniform、varying、バージョンのルール。PlayCanvas がリソースを接続し WGSL にトランスパイルできるようにします。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「GLSL の詳細」で使用する Shader と Script アセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認できます。
+
+:::
+
 PlayCanvas エンジンで使用される GLSL シェーダーは、特定の要件を満たす必要があります。これらの要件により、エンジンはシェーダーを正しく統合し、attributes、uniforms、varyings などの必要なリソースを確実に受け取れるようにします。これらの規則に従うことで、WebGPU で使用するために WGSL にトランスパイルする際に、わずかに異なる要件に対応できるようシェーダーを自動的に処理することもできます。
 
 以下のセクションでは、PlayCanvas 用の GLSL シェーダーを作成する上での主要な側面を概説します。

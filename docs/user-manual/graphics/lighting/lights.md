@@ -3,6 +3,12 @@ title: Lights
 description: "Directional, omni, and spot lights in the Editor: gizmos, shadows, cookies, and practical lighting combinations."
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Light Components and scene lighting settings, bake lightmaps where applicable, and capture the result.
+
+:::
+
 In the real world, the environment around you is lit from many sources. The Sun, street lights, TV screens and so on. In a PlayCanvas scene, you have the ability to set up a number of different types of light sources and the shape of the light source to approximate the different types of light we find in reality.
 
 Descriptions of each light type and light source shape are below and examples of different combinations of light types are given in the [table](#use-cases) below.

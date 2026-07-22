@@ -3,6 +3,13 @@ title: 力と衝撃
 description: RigidBodyComponent の API で、動的な rigid body に継続的な力と 1 フレームのインパルスを適用します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「力と衝撃」で使用する Physics Script を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Physics 設定を有効化し、Collision と Rigidbody Component を作成、設定して、起動後のランタイム状態やログを確認できます。
+
+:::
+
 ダイナミックなRigidBodyは力 (Force) や衝撃 (Impulse) に応答して移動します。力は一定の時間内にRigidBodyに加えられるのに対して、衝撃は瞬間的に加えられる力です。
 
 RigidBodyに力や衝撃を加えるには、[pc.RigidBodyComponent scripting API](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) を使用する必要があります。

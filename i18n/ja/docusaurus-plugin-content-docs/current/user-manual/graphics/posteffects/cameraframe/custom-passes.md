@@ -3,6 +3,13 @@ title: カスタムレンダーパス
 description: CameraFrame を使わずにカメラ上で RenderPass ベースのポストスタックを構築し、パイプラインを完全に手動制御します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「カスタムレンダーパス」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 最も柔軟なアプローチは、`CameraFrame` から独立して動作する完全カスタムのレンダーパスを実装することです。レンダリングパイプラインを完全に制御でき、ゼロからカスタムのポストプロセススタックを構築できます。
 
 ## 概要

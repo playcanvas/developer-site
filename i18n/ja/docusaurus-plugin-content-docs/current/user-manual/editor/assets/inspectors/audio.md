@@ -3,6 +3,12 @@ title: Audio
 description: ブラウザがサポートする音声形式向けのオーディオ Asset Inspector。長さのメタデータと、使用前にクリップを試聴する組み込み再生コントロールを備えます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトの Audio アセットをアップロード、確認、変更、移動、複製、ダウンロード、削除できます。
+
+:::
+
 Audioアセットは、[Sound Component](/user-manual/editor/scenes/components/sound/)を使用して再生できる音声ファイルです。
 
 Webブラウザでサポートされているすべてのオーディオ形式は、PlayCanvasでサポートされています。インポート時にオーディオファイルに対して処理は行われません。

@@ -3,6 +3,13 @@ title: アセットレジストリ
 description: AssetRegistry API を使って、PlayCanvas アプリケーションの実行時に Asset の検索、読み込み、管理を行います。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「アセットレジストリ」で使用するスクリプトを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトを作成、解析してエンティティへアタッチし、シーンを起動してログとランタイム状態を確認できます。
+
+:::
+
 [`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html) は、PlayCanvas でアセットを管理するための中心的なシステムです。アプリケーションで利用可能なすべてのアセットのコレクションを保持し、アセットの検索、読み込み、管理を行うためのメソッドを提供します。
 
 ## レジストリへのアクセス

@@ -3,6 +3,12 @@ title: Button
 description: PlayCanvas の Button Component は、Screen と Element の下で UI ボタンを構築し、ティントやスプライト切り替えのトランジションと入力ヒット領域を提供します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Buttonをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+
+:::
+
 Buttonコンポーネントは、[Screen](screen.md)コンポーネントと[Element](element.md)コンポーネントで使用するユーザーインターフェイスボタンを作成するための便利なショートカットです。
 
 Buttonコンポーネントは、2つのトランジションモードで使用できます。*Sprite Change* では、各ボタンの状態に異なるスプライトまたはフレームを使用します。*Tint* では、単一のスプライトを各状態で異なる色で着色します。

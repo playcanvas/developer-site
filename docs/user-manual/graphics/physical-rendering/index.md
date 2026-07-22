@@ -3,6 +3,12 @@ title: Physically Based Rendering
 description: "PBR fundamentals in PlayCanvas: diffuse and specular, energy conservation, metalness, and consistent materials."
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure Material assets and scene rendering settings for “Physically Based Rendering”, then launch and capture the visual result.
+
+:::
+
 ![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  
 *Star-Lord Model by [Joachim Coppens](https://www.joachimcoppens.com/)*
 

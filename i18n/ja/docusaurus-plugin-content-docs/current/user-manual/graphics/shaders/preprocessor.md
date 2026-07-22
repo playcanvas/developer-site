@@ -3,6 +3,13 @@ title: シェーダープリプロセッサ
 description: コンパイル前に GLSL、WGSL、コンピュートシェーダーへ適用される C スタイルの define、include、ifdef チェーン。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「シェーダープリプロセッサ」で使用する Shader と Script アセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認できます。
+
+:::
+
 シェーダーがコンパイルされる前に、PlayCanvas はソースコードに C スタイルのプリプロセッサを適用します。これにより、シェーダーのバリエーション管理、条件付きインクルード、値の注入が行えます。プリプロセッサは GLSL、WGSL、コンピュートシェーダーで動作します。
 
 ## プリプロセッサディレクティブ

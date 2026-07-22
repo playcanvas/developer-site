@@ -3,6 +3,13 @@ title: 色相・彩度エフェクト
 description: レガシーの色相・彩度 Script エフェクトのコントロールと、huesaturation ポストエフェクトソースの GitHub リンクです。
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「色相・彩度エフェクト」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 色相 (Hue) 彩度 (Saturation) エフェクトは、レンダリングされたイメージの色相と彩度を変更できます。
 
 これはエフェクトをかけていない画像です。

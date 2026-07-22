@@ -3,6 +3,13 @@ title: Alternatives to ammo.js
 description: Survey of lighter 2D and 3D physics engines when ammo.js size or cost is too high for your project.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the physics scripts used by “Alternatives to ammo.js” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Enable physics settings, create and configure Collision and Rigidbody Components, then launch and inspect runtime state or logs.
+
+:::
+
 ammo.js is perhaps the most popular and well known JavaScript physics engine. It is highly versatile and can generate high fidelity simulations. But it has quite high performance and memory requirements. Therefore, you should investigate whether it is indeed the best choice for your application. For example, if you are making a 2D game, a 2D physics engine might be more appropriate.
 
 As it happens, there are several alternatives to ammo.js:

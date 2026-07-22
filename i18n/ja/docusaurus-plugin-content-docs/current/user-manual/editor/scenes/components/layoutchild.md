@@ -3,6 +3,12 @@ title: Layout Child
 description: PlayCanvas の Layout Child Component は、1 つの UI 要素について Layout Group のルールを上書きし、最小・最大サイズ、フィット比率、除外を設定します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Layout Childをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認できます。
+
+:::
+
 LayoutChildコンポーネントは、LayoutGroupコンポーネントによって制御されるエレメントが、Layout Groupのデフォルト動作をオーバーライドすることを可能にします。
 
 詳細については[レイアウトグループ](/user-manual/user-interface/layout-groups)のセクションを参照してください。

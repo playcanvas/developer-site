@@ -3,6 +3,13 @@ title: ammo.jsの更新
 description: Scene Settings のインポートとマイグレーション手順で、レガシーの組み込み ammo.js から最新の wasm ビルドへ移行します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「ammo.jsの更新」で使用する Physics Script を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Physics 設定を有効化し、Collision と Rigidbody Component を作成、設定して、起動後のランタイム状態やログを確認できます。
+
+:::
+
 ### イントロダクション
 
 PlayCanvasはammo.jsの最新バージョンのサポートを追加しました。

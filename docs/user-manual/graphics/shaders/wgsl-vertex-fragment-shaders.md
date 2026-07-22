@@ -3,6 +3,13 @@ title: WGSL Vertex and Fragment Shaders
 description: "Vertex and fragment specific WGSL constructs in PlayCanvas: attributes, varyings, and fragment outputs."
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review the shader and script assets used by “WGSL Vertex and Fragment Shaders” locally in Pull/Push mode.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
+
+:::
+
 This page covers the WGSL constructs that are specific to vertex and fragment shaders: attributes, varyings, and fragment outputs.
 
 For resources that are shared across all shader stages — uniforms, textures, and storage buffers, declared with the simplified syntax and reflected into bind groups automatically — see [WGSL Reflection](/user-manual/graphics/shaders/wgsl-reflection).

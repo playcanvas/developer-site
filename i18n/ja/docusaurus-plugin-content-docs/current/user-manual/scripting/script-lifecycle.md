@@ -3,6 +3,13 @@ title: スクリプトのライフサイクル
 description: initialize、postInitialize、update、postUpdate、destroy — 各PlayCanvas Scriptで呼ばれるライフサイクルメソッドを理解します。
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「スクリプトのライフサイクル」で使用するスクリプトとテキストアセットを Pull/Push モードでローカル編集し、変更を確認できます。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象のスクリプトアセットを作成、解析し、エンティティへアタッチして設定した後、シーンを起動してログやランタイム状態を確認できます。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

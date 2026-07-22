@@ -3,13 +3,11 @@ title: Lightmapping
 description: Bake lightmaps in external tools like 3ds Max and VRay, then import textures and follow linear gamma best practices.
 ---
 
-<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
 :::ai
 
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Unwrap UV1 coordinates and bake lighting for the whole scene or selected entities.
 
 :::
--->
 
 [![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*

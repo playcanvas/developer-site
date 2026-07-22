@@ -3,13 +3,11 @@ title: Animイベント
 description: 特定のフレームで名前付きアニメーションイベントを発火し、Scriptのanimコンポーネントから処理します。
 ---
 
-<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
 :::ai
 
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** GLB アニメーションアセットのイベントを確認、追加、更新、削除できます。
 
 :::
--->
 
 Animイベントは、アニメーションの再生中にイベントリスナーをトリガーするために使用できます。各イベントは、それに添付されたアニメーションアセットの指定されたフレームに関連付けられています。アニメーションの再生がそのフレームに達すると、イベントは発生し、関連したイベントリスナーが呼び出されます。
 

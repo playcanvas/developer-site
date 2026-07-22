@@ -3,13 +3,11 @@ title: Downloading Projects
 description: Explains PlayCanvas project download formats for self-hosted apps, including static and npm package layouts.
 ---
 
-<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
 :::ai
 
 - **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create a static or npm download build, wait for it to finish, and save the archive to an explicit local path.
 
 :::
--->
 
 PlayCanvas projects can be downloaded as self-hostable application packages. Downloaded packages contain the files needed to run your app outside PlayCanvas hosting, not the full editable project history.
 

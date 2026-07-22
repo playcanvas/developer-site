@@ -3,6 +3,13 @@ title: 複数のレンダーターゲット
 description: 複数レンダーターゲットの設定、共有アタッチメントのルール、複数のカラーバッファへのシェーダー出力です。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「複数のレンダーターゲット」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 複数のレンダーターゲット機能を使用すると、複数のテクスチャに同時にレンダリングできます。このマニュアルページでは、複数のレンダーターゲットの実装、設定、および使用例について説明します。
 
 MRTは、PlayCanvasが動作するすべてのデバイス（WebGL2およびWebGPU）でサポートされています。現在のデバイスで使用できるカラーアタッチメントの数を検出するには、[`GraphicsDevice.maxColorAttachments`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxcolorattachments)を確認してください。通常、8つのアタッチメントがサポートされています。

@@ -3,6 +3,13 @@ title: 間接描画
 description: WebGPUの間接ドロースロット、GPUバッファパラメータ、コンピュート駆動のカリング、フレームごとのスロット割り当てルールです。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「間接描画」で使用する Script と Shader を Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 関連するテキストアセットを作成し、Camera とレンダリングのプロパティを設定して、結果を起動、キャプチャできます。
+
+:::
+
 間接描画は、描画呼び出しのパラメーター(頂点数、インスタンス数など)がCPUによって直接指定されるのではなく、GPUバッファメモリに格納されるGPU駆動のレンダリング手法です。これにより、コンピュートシェーダーがレンダリングパラメーターを動的に生成または変更できるようになり、より効率的なGPU駆動のレンダリングワークフローが可能になります。
 
 この機能は現在、**WebGPUでのみサポートされています** ([`GraphicsDevice.isWebGPU`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#iswebgpu)を使用してWebGPUの利用可能性を確認できます) 。他のプラットフォームでは無視されます。

@@ -3,6 +3,13 @@ title: WGSL リフレクション
 description: "手動の bind group なしの簡略化された WGSL 宣言：PlayCanvas がシェーダーソースからリソースを反映しバインディングを割り当てる方法。"
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「WGSL リフレクション」で使用する Shader と Script アセットを Pull/Push モードでローカル編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認できます。
+
+:::
+
 PlayCanvas は WGSL シェーダーのソースからリソースを直接反映（リフレクト）します。ユニフォーム、テクスチャ、ストレージバッファを `@group`/`@binding` インデックスなしで宣言すると、エンジンがこれらの宣言を解析し、バインドグループ形式を構築してバインディングを自動的に割り当てます。この簡略化された構文は、頂点・フラグメント・コンピュートシェーダーで使用されます。
 
 以下のセクションでは、リソースの宣言と反映の方法を説明します。頂点／フラグメント固有の構文（属性、バリイング、フラグメント出力）については、[WGSL 頂点・フラグメントシェーダー](/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders) を参照してください。

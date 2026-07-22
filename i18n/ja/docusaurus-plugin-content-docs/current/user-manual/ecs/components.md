@@ -3,6 +3,12 @@ title: コンポーネント
 description: PlayCanvas の Component を使って、Camera、Light、物理、Script などの挙動を Entity に追加します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** エンティティへ Component を追加または削除し、プロパティを変更して結果のエンティティデータを確認できます。
+
+:::
+
 **[Component](https://api.playcanvas.com/engine/classes/Component.html)** は、エンティティにデータや振る舞いを追加します。
 
 ## 例

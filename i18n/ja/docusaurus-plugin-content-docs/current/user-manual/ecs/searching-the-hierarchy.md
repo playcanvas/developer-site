@@ -3,6 +3,12 @@ title: 階層の検索
 description: PlayCanvas の階層検索 API で、名前、タグ、パス、またはカスタムコールバックにより実行時に Entity を検索します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 名前、Component、タグ、アタッチされた Script でエンティティを一覧表示、絞り込み、あいまい検索、解決できます。
+
+:::
+
 ## 名前で検索
 
 ```javascript
