@@ -3,6 +3,12 @@ title: ヒエラルキーパネル (Hierarchy)
 description: Hierarchy のテクニック。スマート検索、Entity のライフサイクル、親の付け替え、変換の複製、シーンをまたいだ貼り付け、フォルダパスが一致するときの Asset の再マッチングを扱います。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているシーン内のエンティティを検索、作成、複製、親変更、選択、変更、削除できます。
+
+:::
+
 ![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.png)
 
 ヒエラルキーパネルは、シーン全体のツリービューを表示し、エンティティの階層から構成されます。シーンには常にツリーのトップにあるルートエンティティが含まれます。ここに表示される他のすべてのエンティティは、開発者によって追加されたものです。

@@ -264,6 +264,7 @@ const config = {
         docs: {
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
+          admonitions: { keywords: ['ai'] },
           beforeDefaultRemarkPlugins: localizedBuild ? [remarkRootStaticUrls] : [],
           remarkPlugins: [
             [remarkTypedoc, {

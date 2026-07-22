@@ -3,6 +3,14 @@ title: Uploading and Importing
 description: Upload assets via drag and drop in the Editor, replace files by matching filename, and migrate older JSON model output to GLB in project settings.
 ---
 
+<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload source files, reimport existing assets, and download their source or processed files.
+
+:::
+-->
+
 ## Creating New Assets
 
 To upload an asset to PlayCanvas, follow these steps:

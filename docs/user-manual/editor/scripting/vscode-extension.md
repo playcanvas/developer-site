@@ -3,6 +3,12 @@ title: VS Code Extension
 description: Install the PlayCanvas VS Code Extension, choose a sync mode, manage project files, and resolve synchronization problems.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Use **Pull/Push** mode for AI coding assistants that edit project files outside VS Code, keeping changes local until you review and push them.
+
+:::
+
 The PlayCanvas VS Code Extension maps text-based assets from a PlayCanvas project into a local workspace. You can edit scripts and shaders with VS Code or Cursor while the extension handles authentication, branches, type information, and synchronization with the Editor.
 
 ![VS Code Extension Demo](/img/user-manual/scripting/vscode-demo.webp)

@@ -3,6 +3,14 @@ title: Asset Import Pipeline
 description: Configure the server-side asset import process that converts source files to runtime formats, including related asset search, preload defaults, and texture import options.
 ---
 
+<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Reimport assets, unwrap UV1 coordinates, convert textures, and generate atlases, cubemaps, sprites, and bundles.
+
+:::
+-->
+
 Some assets are uploaded in source format and need to be converted into a "target" format before they can be used in a game at runtime. This process is called *Importing*. For example, a 3D model can be uploaded as an FBX file, but must be converted into a PlayCanvas compatible model file before it can be loaded in the game.
 
 Some assets don't need to be imported before they can be used. For example a PNG image can be used as a texture immediately.

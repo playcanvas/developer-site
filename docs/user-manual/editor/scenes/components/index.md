@@ -3,6 +3,12 @@ title: Components
 description: Explore PlayCanvas entity components that add behavior such as rendering, physics, audio, UI, and scripting to your scene.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add, remove, and configure components on entities, then capture the viewport or launch the scene to verify the resulting behavior.
+
+:::
+
 A component encapsulates functionality that can be added to or removed from entities. For example, a component might enable an entity to play sound, render a 3D model or run a script.
 
 You can add a component to an entity using the PlayCanvas Editor or by using the Engine API. The properties exposed by components are listed in the [Inspector](/user-manual/editor/interface/inspector) when you select an Entity.

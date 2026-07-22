@@ -3,6 +3,13 @@ title: Scripting
 description: Write scripts in JavaScript to add interactivity, handle input, and control game logic in PlayCanvas.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit PlayCanvas scripts as reviewed local files.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create, parse, or attach scripts and verify them in the running application.
+
+:::
+
 Scripts are the heart of interactivity in PlayCanvas. They're reusable pieces of code that you attach to Entities to define behaviors, handle user input, manage game logic, and bring your projects to life.
 
 :::tip Using the Editor?

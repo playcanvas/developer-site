@@ -3,6 +3,12 @@ title: Managing Scenes
 description: Use the Scenes dialog from the menu or toolbar to filter lists, create, duplicate, open, and delete scene files across your PlayCanvas project.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, inspect, load, create, duplicate, and delete scenes in the project currently open in the Editor.
+
+:::
+
 The Scenes dialog allows you to create, open, duplicate and delete scenes in your project.
 
 ## Opening the Scenes Dialog

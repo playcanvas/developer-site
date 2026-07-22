@@ -3,6 +3,13 @@ title: スクリプティング
 description: JavaScriptでScriptを書き、インタラクティブ性、入力処理、ゲームロジックをPlayCanvasで制御します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** PlayCanvas のスクリプトをローカルファイルとして編集し、変更を確認できます。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** スクリプトを作成、解析、アタッチし、実行中のアプリケーションで検証できます。
+
+:::
+
 スクリプトは、PlayCanvas におけるインタラクティブ性の中心です。これは再利用可能なコードのパーツであり、エンティティにアタッチすることで、挙動の定義、ユーザー入力の処理、ゲームロジックの管理など、プロジェクトに命を吹き込みます。
 
 :::tip Editorをお使いですか？

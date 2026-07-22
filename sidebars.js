@@ -72,6 +72,17 @@ const sidebars = {
     },
     {
       type: 'html',
+      value: '<div class="sidebar-section-header sidebar-section-header--ai">AI Tools</div>',
+    },
+    {
+      type: 'doc',
+      id: 'user-manual/ai/index',
+      label: 'Overview',
+    },
+    'user-manual/ai/vscode-extension',
+    'user-manual/ai/editor-mcp-server',
+    {
+      type: 'html',
       value: '<div class="sidebar-section-header">Core Products</div>',
     },
     {
@@ -626,22 +637,6 @@ const sidebars = {
         'user-manual/splat-transform/voxel-format',
         'user-manual/splat-transform/docker',
         'user-manual/splat-transform/library',
-      ],
-    },
-    {
-      type: 'html',
-      value: '<div class="sidebar-section-header">AI</div>',
-    },
-    {
-      type: 'category',
-      label: 'AI Development',
-      link: {
-        type: 'doc',
-        id: 'user-manual/ai/index',
-      },
-      items: [
-        'user-manual/ai/vscode-extension',
-        'user-manual/ai/editor-mcp-server',
       ],
     },
     {

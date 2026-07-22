@@ -3,6 +3,12 @@ title: VS Code拡張機能
 description: PlayCanvas VS Code Extension をインストールし、同期モードの選択、プロジェクトファイルの管理、同期問題の解決を行います。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** VS Code の外部でプロジェクトファイルを編集する AI コーディングアシスタントには **Pull/Push** モードを使用し、変更を確認して Push するまでローカルに保持してください。
+
+:::
+
 PlayCanvas VS Code Extension は、PlayCanvas プロジェクトのテキストベースアセットをローカルワークスペースにマッピングします。VS Code または Cursor でスクリプトやシェーダーを編集しながら、認証、ブランチ、型情報、Editor との同期を拡張機能で管理できます。
 
 ![VS Code Extension Demo](/img/user-manual/scripting/vscode-demo.webp)

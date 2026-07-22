@@ -3,6 +3,12 @@ title: PlayCanvas Editor
 description: PlayCanvas web Editor tour covering live testing, collaboration, version control, visual editing, scripting, asset workflow, and export to web or native.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Let Codex, Claude Code, Cursor, and other MCP clients inspect and modify the open project, operate the viewport, launch the application, and verify the result.
+
+:::
+
 The PlayCanvas Editor is a powerful, browser-based development environment for creating stunning 3D applications. No downloads, no installations—just open your browser and start building.
 
 ![PlayCanvas Editor Interface](/img/user-manual/editor/interface/editor-interface.png)
@@ -52,10 +58,6 @@ Construct your 3D worlds using intuitive [transform gizmos](interface/viewport),
 ### Integrated Code Editor
 
 Write scripts without leaving your browser. The built-in [code editor](scripting/code-editor) features syntax highlighting, intelligent autocomplete, and real-time error checking. For larger projects, use the [VS Code extension](scripting/vscode-extension) and develop locally with full IDE power.
-
-### AI-Assisted Editing
-
-Connect an AI assistant through the [Editor MCP Server](/user-manual/ai/editor-mcp-server/) to inspect and modify the open project, operate the viewport, launch the application, and verify changes through screenshots and runtime state.
 
 ### Powerful Asset Pipeline
 

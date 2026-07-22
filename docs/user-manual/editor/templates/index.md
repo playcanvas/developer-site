@@ -3,6 +3,14 @@ title: Templates
 description: Covers template creation instances overrides applying changes and breaking instances for reusable entity prefabs in the Editor.
 ---
 
+<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Instantiate templates and inspect, apply, revert, or unlink instance overrides.
+
+:::
+-->
+
 Templates (or prefabs) allow you to speed up your development by creating Entities that are reusable. You can place multiple instances of a Template in your Scene and if you make any changes and apply them to the Template Asset, all instances of that Template will be updated.
 
 <div className="iframe-container">
