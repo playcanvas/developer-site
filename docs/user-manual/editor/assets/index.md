@@ -3,6 +3,12 @@ title: Assets
 description: Overview of PlayCanvas Editor asset management covering the Assets panel, uploads, import pipeline, inspectors, Asset Store, and dedicated viewers.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, create, and delete assets, configure material properties, instantiate templates, and import assets from the PlayCanvas Store.
+
+:::
+
 The PlayCanvas Editor provides a complete asset management system for your project. This section covers how to work with assets in the Editor, including importing, organizing, and configuring them.
 
 ## What You'll Learn

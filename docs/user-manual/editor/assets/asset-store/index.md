@@ -3,6 +3,12 @@ title: Asset Store
 description: Browse the PlayCanvas Asset Store from the Editor, choose PlayCanvas Sketchfab or My Assets stores, search, filter, and import items into your project.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Search the PlayCanvas Store, inspect results, and import a selected Store asset into the open project.
+
+:::
+
 The PlayCanvas Asset Store is a library of free assets that you can use in your projects. It contains 3D models, fonts, scripts and more.
 
 ## Accessing the Asset Store

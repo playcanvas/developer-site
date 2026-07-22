@@ -3,6 +3,14 @@ title: PlayCanvasホスティング
 description: playcanvas.com へのビルド公開、プライマリビルドの選択、ミニファイやソースマップなどのビルドオプション設定を説明します。
 ---
 
+<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 公開済みビルドを一覧表示、作成、確認、削除できます。
+
+:::
+-->
+
 あなたのゲームを公開する最も速くて簡単な方法は、playcanvas.comに公開することです。
 
 PlayCanvasに公開するには、2つの単純な手順が必要です。

@@ -3,6 +3,12 @@ title: Launch Page
 description: Launch Page basics with Editor live-link refreshes dual-tab testing tips and loading the same preview URL on phones after signing in or scanning a QR code.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Start and stop Launch, capture the running application, read console output, query live entity state, and inject keyboard, mouse, or touch input.
+
+:::
+
 The Editor's Viewport is where you visually construct your application. From there, you can press the Launch button to open the Launch Page and actually _run_ your application.
 
 ![Launch Button](/img/user-manual/editor/launch-page/launch-button.png)

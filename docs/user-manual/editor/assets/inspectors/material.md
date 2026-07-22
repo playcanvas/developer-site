@@ -3,6 +3,12 @@ title: Material
 description: Material inspector reference for PBR settings from texture transforms through lighting response maps and rendering parameters in collapsible sections.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Edit material colors and properties, then capture the viewport or running application to verify the appearance.
+
+:::
+
 A Material asset defines the visual appearance of a surface when rendered. PlayCanvas uses physically based rendering (PBR) to create realistic materials that respond correctly to lighting. Materials can represent a wide range of surfaces, from smooth plastic to rough wood to shiny metal.
 
 ## Inspector

@@ -3,6 +3,12 @@ title: Viewport
 description: Use viewport cameras gizmos and render modes from wireframe to material debug views like albedo normals or emission to validate lighting before shipping.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Frame entities, focus the editing camera, and capture the viewport for visual verification. Use its runtime tools when scripts, physics, or animation must be running.
+
+:::
+
 ![Viewport](/img/user-manual/editor/viewport/viewport.jpg)
 
 The viewport shows your scene as currently rendered. You can freely move around the scene by manipulating the Editor's current camera.

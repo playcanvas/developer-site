@@ -3,6 +3,14 @@ title: プロジェクトのダウンロード
 description: static形式とnpm形式のパッケージ構造を含め、セルフホスト用アプリのPlayCanvasプロジェクトダウンロード形式を説明します。
 ---
 
+<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** static または npm のダウンロードビルドを作成し、完了を待って、明示したローカルパスへアーカイブを保存できます。
+
+:::
+-->
+
 PlayCanvasプロジェクトは、セルフホスト可能なアプリケーションパッケージとしてダウンロードできます。ダウンロードされたパッケージには、PlayCanvas Hostingの外でアプリを実行するために必要なファイルが含まれますが、完全な編集可能なプロジェクト履歴は含まれません。
 
 PlayCanvasに再インポートできるプロジェクトバックアップについては、[バックアップとエクスポート](backup-and-export.md)を参照してください。

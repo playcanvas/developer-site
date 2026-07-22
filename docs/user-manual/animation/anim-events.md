@@ -3,6 +3,14 @@ title: Anim Events
 description: Fire named animation events on specific frames and handle them from the anim component in scripts.
 ---
 
+<!-- TODO: enable this AI block after editor-mcp-server feat/editor-driver-coverage is released.
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read, add, update, and remove events on GLB animation assets.
+
+:::
+-->
+
 Anim events can be used to trigger event listeners during the playback of an animation. Each event is associated with a specified frame of the animation asset it is attached to. When the playback of the animation reaches that frame, the event will fire and the associated event listener is called.
 
 ### Creating Events

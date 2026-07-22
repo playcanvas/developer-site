@@ -316,6 +316,39 @@ html[data-theme='dark'] .navbar--github-link:before {
   color: var(--ifm-color-emphasis-1000);
 }
 
+.theme-admonition-ai,
+.sidebar-section-header--ai {
+  background: linear-gradient(120deg, rgb(124 58 237 / 14%), rgb(6 182 212 / 18%), rgb(236 72 153 / 14%));
+  background-size: 200% 100%;
+  box-shadow: 0 0 1rem rgb(139 92 246 / 20%);
+  animation: ai-shimmer 4s ease-in-out infinite;
+}
+
+.theme-admonition-ai {
+  --ifm-alert-background-color: transparent;
+  --ifm-alert-border-color: transparent;
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
+
+  border: 1px solid rgb(139 92 246 / 60%);
+}
+
+.sidebar-section-header--ai {
+  color: #7c3aed;
+  border-left-color: #8b5cf6;
+}
+
+@keyframes ai-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-admonition-ai,
+  .sidebar-section-header--ai {
+    animation: none;
+  }
+}
+
 /* Keep long sidebar labels on a single line regardless of OS/browser font metrics */
 .sidebar-item-nowrap > .menu__list-item-collapsible > .menu__link {
   white-space: nowrap;
