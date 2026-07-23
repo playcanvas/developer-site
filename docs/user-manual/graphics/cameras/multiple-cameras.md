@@ -91,7 +91,7 @@ overlay.camera.clearDepthBuffer = true;  // don't depth-test against the main vi
 
 ## Render Targets {#render-targets}
 
-Instead of the screen, a camera can render into an offscreen texture by assigning a [RenderTarget](https://api.playcanvas.com/engine/classes/RenderTarget.html) to its `renderTarget` property. The resulting texture can then be applied to a material — for in-world screens, mirrors and portals — or processed further. See the engine's render-to-texture example:
+Instead of the screen, a camera can render into an offscreen texture by assigning a [RenderTarget](https://api.playcanvas.com/engine/classes/RenderTarget.html) to its `renderTarget` property. The resulting texture can then be applied to a material — for in-world screens, mirrors and portals — or processed further. See the [Render Targets](/user-manual/graphics/advanced-rendering/render-targets/) page for the full details, and the engine's render-to-texture example:
 
 <EngineExample id="graphics/render-to-texture" title="Render to Texture" />
 
