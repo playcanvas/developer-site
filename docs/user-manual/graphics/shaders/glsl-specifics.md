@@ -94,3 +94,9 @@ varying vec2 uv0;
 The `in`/`out` syntax (introduced in GLSL 3.3+) is not supported.
 
 :::
+
+### Dual-Source Fragment Outputs
+
+When a material's blend state uses a secondary source factor, write the primary color to `gl_FragColor` and the secondary blend value to `pcFragColorSecondary`. On WebGL 2, the engine enables `GL_EXT_blend_func_extended` and declares both outputs automatically.
+
+See [Dual-Source Blending](/user-manual/graphics/advanced-rendering/dual-source-blending) for capability detection, cross-platform shader code, and BlendState configuration.

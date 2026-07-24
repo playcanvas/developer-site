@@ -133,6 +133,12 @@ Example:
 }
 ```
 
+#### Dual-Source Outputs
+
+When a material's blend state uses a secondary source factor, write the primary color to `output.color` and the secondary blend value to `output.colorSecondary`. The engine generates both outputs at location 0 with the appropriate `@blend_src` attributes and enables the required WGSL extension.
+
+Dual-source blending requires exactly one color attachment. See [Dual-Source Blending](/user-manual/graphics/advanced-rendering/dual-source-blending) for capability detection and BlendState configuration.
+
 :::note
 
 Support for rendering to integer textures (output format other than `vec4f`) is not available yet, and will be added in the future.
