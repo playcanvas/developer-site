@@ -3,6 +3,9 @@ title: Shaders
 description: Author ShaderMaterial with paired GLSL and WGSL, declare attributes, and integrate with the engine shader system.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 When you import your 3D models into PlayCanvas, by default, they will use our [Physical Material](/user-manual/graphics/physical-rendering/physical-materials/). This is a versatile material type that can cover a lot of your rendering needs.
 
 However, you will often want to perform special effects or special cases for your materials. To do this you will need to write a custom shader. In this case, you need to use `ShaderMaterial`.
@@ -127,6 +130,9 @@ The engine provides predefined shader includes that handle common transformation
 
 For example:
 
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
 ```glsl
 // Includes transformation-related functionality provided by the engine.
 // - Automatically declares the `vertex_position` attribute.
@@ -168,11 +174,66 @@ void main(void)
 }
 ```
 
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+// Includes transformation-related functionality provided by the engine.
+// - Automatically declares the `vertex_position` attribute.
+// - Handles skinning and morphing if necessary.
+// - Adds the following uniforms:
+//   - `matrix_viewProjection`
+//   - `matrix_model`
+//   - `matrix_normal`
+// - Provides utility functions:
+//   - `getModelMatrix()`
+//   - `getLocalPosition()`
+#include "transformCoreVS"
+
+// Includes normal-related functionality provided by the engine.
+// - Automatically declares the `vertex_normal` attribute.
+// - Handles skinning and morphing if necessary.
+// - Provides utility functions:
+//   - `getNormalMatrix()`
+//   - `getLocalNormal()`
+#include "normalCoreVS"
+
+@vertex
+fn vertexMain(input: VertexInput) -> VertexOutput
+{
+    var output: VertexOutput;
+
+    // Retrieve the model matrix, accounting for skinning, morphing, or instancing.
+    let modelMatrix: mat4x4f = getModelMatrix();
+    let localPos: vec3f = getLocalPosition(vertex_position.xyz);
+    let worldPos: vec4f = modelMatrix * vec4f(localPos, 1.0);
+
+    // Retrieve the normal matrix and compute the world normal.
+    let normalMatrix: mat3x3f = getNormalMatrix(modelMatrix);
+    let localNormal: vec3f = getLocalNormal(vertex_normal);
+    let worldNormal: vec3f = normalize(normalMatrix * localNormal);
+
+    // Example: Apply simple wrap-around diffuse lighting using the world normal.
+    output.brightness = (dot(worldNormal, uniform.uLightDir) + 1.0) * 0.5;
+
+    // Transform the geometry.
+    output.position = uniform.matrix_viewProjection * worldPos;
+
+    return output;
+}
+```
+
+</TabItem>
+</Tabs>
+
 #### Fragment Shader {#fragment-shader}
 
 The engine provides predefined shader chunks you can include for common color processing effects such as gamma correction, tone mapping and fog. These includes ensure that colors are processed correctly according to the rendering settings.
 
 Example Usage
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
 
 ```glsl
 #include "gammaPS"       // Adds support for gamma correction of inputs and outputs
@@ -196,6 +257,38 @@ void main(void)
 }
 ```
 
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+#include "gammaPS"       // Adds support for gamma correction of inputs and outputs
+#include "tonemappingPS" // Adds support for tone mapping
+#include "fogPS"         // Adds support for fog effects
+
+@fragment
+fn fragmentMain(input: FragmentInput) -> FragmentOutput
+{
+    var output: FragmentOutput;
+
+    // Evaluate color in linear color space
+    let colorLinear: vec3f = ...;
+
+    // Apply fog if enabled
+    let fogged: vec3f = addFog(colorLinear);
+
+    // Apply tone mapping if enabled
+    let toneMapped: vec3f = toneMap(fogged);
+
+    // Apply gamma correction and output the final color
+    output.color = vec4f(gammaCorrectOutput(toneMapped), alpha);
+
+    return output;
+}
+```
+
+</TabItem>
+</Tabs>
+
 These functions are automatically configured based on the engine's settings, ensuring that color processing is consistent across different rendering conditions.
 
 :::note
@@ -203,6 +296,140 @@ These functions are automatically configured based on the engine's settings, ens
 For more complete examples, and also for details on how to implement instancing, refer to the engine examples.
 
 :::
+
+#### Shadow Pass {#shadow-pass}
+
+To allow meshes using your custom shader to cast shadows, the fragment shader needs to output data appropriate for the shadow type being rendered during the shadow pass. Include the engine-provided `shadowCasterPS` chunk when `SHADOW_PASS` is defined, and write the value returned by `getShadowOutput()` to the output color:
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
+```glsl
+#ifdef SHADOW_PASS
+    // Provides getShadowOutput(), which returns the data for the shadow type being rendered
+    #include "shadowCasterPS"
+#endif
+
+void main(void)
+{
+    #ifdef SHADOW_PASS
+
+        // output shadow data (alpha-tested materials can discard before this)
+        gl_FragColor = getShadowOutput();
+
+    #else
+
+        // normal color rendering
+        gl_FragColor = ...;
+
+    #endif
+}
+```
+
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+#ifdef SHADOW_PASS
+    // Provides getShadowOutput(), which returns the data for the shadow type being rendered
+    #include "shadowCasterPS"
+#endif
+
+@fragment
+fn fragmentMain(input: FragmentInput) -> FragmentOutput
+{
+    var output: FragmentOutput;
+
+    #ifdef SHADOW_PASS
+
+        // output shadow data (alpha-tested materials can discard before this)
+        output.color = getShadowOutput();
+
+    #else
+
+        // normal color rendering
+        output.color = ...;
+
+    #endif
+
+    return output;
+}
+```
+
+</TabItem>
+</Tabs>
+
+The same vertex shader is used when rendering shadows, so skinning, morphing and instancing handled by `transformCoreVS` work automatically. It is recommended to skip work not needed by shadow rendering (for example lighting) using `#ifndef SHADOW_PASS`, to make the shadow rendering faster. Note that some engine uniforms, such as `matrix_normal`, are not available during the shadow pass.
+
+Supported are all shadow types for directional lights, and PCF shadows for spot lights. Omni light shadows are not supported.
+
+:::note
+
+For a complete example, see the Shader Material Shadows example in the engine examples browser.
+
+:::
+
+#### Picker Pass {#picker-pass}
+
+To allow meshes using your custom shader to be identified by the [`Picker`](https://api.playcanvas.com/engine/classes/Picker.html), the fragment shader needs to output the mesh instance ID during the pick pass. Include the engine-provided `pickPS` chunk when `PICK_PASS` is defined, and write the value returned by `getPickOutput()` to the output color:
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
+```glsl
+#ifdef PICK_PASS
+    // Provides getPickOutput(), which returns the encoded ID of the mesh instance
+    #include "pickPS"
+#endif
+
+void main(void)
+{
+    #ifdef PICK_PASS
+
+        // output the mesh instance ID
+        gl_FragColor = getPickOutput();
+
+    #else
+
+        // normal color rendering
+        gl_FragColor = ...;
+
+    #endif
+}
+```
+
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+#ifdef PICK_PASS
+    // Provides getPickOutput(), which returns the encoded ID of the mesh instance
+    #include "pickPS"
+#endif
+
+@fragment
+fn fragmentMain(input: FragmentInput) -> FragmentOutput
+{
+    var output: FragmentOutput;
+
+    #ifdef PICK_PASS
+
+        // output the mesh instance ID
+        output.color = getPickOutput();
+
+    #else
+
+        // normal color rendering
+        output.color = ...;
+
+    #endif
+
+    return output;
+}
+```
+
+</TabItem>
+</Tabs>
 
 #### Generated Shaders {#generated-shaders}
 
