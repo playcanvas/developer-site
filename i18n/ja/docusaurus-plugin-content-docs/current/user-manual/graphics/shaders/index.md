@@ -3,6 +3,9 @@ title: シェーダー
 description: 対になる GLSL と WGSL で ShaderMaterial を記述し、attribute を宣言してエンジンのシェーダーシステムに統合します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 3DモデルをPlayCanvasにインポートすると、デフォルトで当社の[Physical Material](/user-manual/graphics/physical-rendering/physical-materials/)が使用されます。これは、レンダリングの多くのニーズをカバーできる多用途なマテリアルタイプです。
 
 しかし、マテリアルに特殊効果や特殊なケースを適用したいと思うことがよくあります。これを行うには、カスタムシェーダーを記述する必要があります。この場合、`ShaderMaterial`を使用する必要があります。
@@ -119,6 +122,9 @@ camera.setShaderPass('custom');
 
 例：
 
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
 ```glsl
 // エンジンが提供する変換関連の機能を含みます。
 // - `vertex_position`アトリビュートを自動的に宣言します。
@@ -160,11 +166,66 @@ void main(void)
 }
 ```
 
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+// エンジンが提供する変換関連の機能を含みます。
+// - `vertex_position`アトリビュートを自動的に宣言します。
+// - 必要に応じてスキニングとモーフィングを処理します。
+// - 以下のユニフォームを追加します：
+//   - `matrix_viewProjection`
+//   - `matrix_model`
+//   - `matrix_normal`
+// - ユーティリティ関数を提供します：
+//   - `getModelMatrix()`
+//   - `getLocalPosition()`
+#include "transformCoreVS"
+
+// エンジンが提供する法線関連の機能を含みます。
+// - `vertex_normal`アトリビュートを自動的に宣言します。
+// - 必要に応じてスキニングとモーフィングを処理します。
+// - ユーティリティ関数を提供します：
+//   - `getNormalMatrix()`
+//   - `getLocalNormal()`
+#include "normalCoreVS"
+
+@vertex
+fn vertexMain(input: VertexInput) -> VertexOutput
+{
+    var output: VertexOutput;
+
+    // スキニング、モーフィング、またはインスタンス化を考慮してモデル行列を取得します。
+    let modelMatrix: mat4x4f = getModelMatrix();
+    let localPos: vec3f = getLocalPosition(vertex_position.xyz);
+    let worldPos: vec4f = modelMatrix * vec4f(localPos, 1.0);
+
+    // 法線行列を取得し、ワールド法線を計算します。
+    let normalMatrix: mat3x3f = getNormalMatrix(modelMatrix);
+    let localNormal: vec3f = getLocalNormal(vertex_normal);
+    let worldNormal: vec3f = normalize(normalMatrix * localNormal);
+
+    // 例：ワールド法線を使用してシンプルなラップアラウンド拡散ライティングを適用します。
+    output.brightness = (dot(worldNormal, uniform.uLightDir) + 1.0) * 0.5;
+
+    // ジオメトリを変換します。
+    output.position = uniform.matrix_viewProjection * worldPos;
+
+    return output;
+}
+```
+
+</TabItem>
+</Tabs>
+
 #### フラグメントシェーダー {#fragment-shader}
 
 エンジンは、ガンマ補正、トーンマッピング、フォグなどの一般的な色処理効果のために含めることができる事前定義されたシェーダーチャンクを提供します。これらのインクルードにより、レンダリング設定に従って色が正しく処理されます。
 
 使用例
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
 
 ```glsl
 #include "gammaPS"       // 入出力のガンマ補正をサポートします
@@ -188,6 +249,38 @@ void main(void)
 }
 ```
 
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+#include "gammaPS"       // 入出力のガンマ補正をサポートします
+#include "tonemappingPS" // トーンマッピングをサポートします
+#include "fogPS"         // フォグ効果をサポートします
+
+@fragment
+fn fragmentMain(input: FragmentInput) -> FragmentOutput
+{
+    var output: FragmentOutput;
+
+    // リニアカラースペースで色を評価します
+    let colorLinear: vec3f = ...;
+
+    // 有効な場合はフォグを適用します
+    let fogged: vec3f = addFog(colorLinear);
+
+    // 有効な場合はトーンマッピングを適用します
+    let toneMapped: vec3f = toneMap(fogged);
+
+    // ガンマ補正を適用し、最終的な色を出力します
+    output.color = vec4f(gammaCorrectOutput(toneMapped), alpha);
+
+    return output;
+}
+```
+
+</TabItem>
+</Tabs>
+
 これらの関数はエンジンの設定に基づいて自動的に構成され、異なるレンダリング条件下でも色処理が一貫していることを保証します。
 
 :::note
@@ -199,6 +292,9 @@ void main(void)
 #### シャドウパス {#shadow-pass}
 
 カスタムシェーダーを使用するメッシュがシャドウをキャストできるようにするには、シャドウパス中に、レンダリングされるシャドウタイプに応じたデータをフラグメントシェーダーから出力する必要があります。`SHADOW_PASS`が定義されている場合にエンジン提供の`shadowCasterPS`チャンクをインクルードし、`getShadowOutput()`が返す値を出力カラーに書き込みます:
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
 
 ```glsl
 #ifdef SHADOW_PASS
@@ -222,7 +318,38 @@ void main(void)
 }
 ```
 
-WGSLでは、同等の処理は`output.color = getShadowOutput();`です。
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+#ifdef SHADOW_PASS
+    // レンダリングされるシャドウタイプに応じたデータを返すgetShadowOutput()を提供します
+    #include "shadowCasterPS"
+#endif
+
+@fragment
+fn fragmentMain(input: FragmentInput) -> FragmentOutput
+{
+    var output: FragmentOutput;
+
+    #ifdef SHADOW_PASS
+
+        // シャドウデータを出力します(アルファテストを行うマテリアルはこの前にdiscardできます)
+        output.color = getShadowOutput();
+
+    #else
+
+        // 通常のカラーレンダリング
+        output.color = ...;
+
+    #endif
+
+    return output;
+}
+```
+
+</TabItem>
+</Tabs>
 
 シャドウのレンダリングには同じ頂点シェーダーが使用されるため、`transformCoreVS`によって処理されるスキニング、モーフィング、インスタンス化は自動的に機能します。シャドウレンダリングに不要な処理（例えばライティング）は`#ifndef SHADOW_PASS`を使用してスキップすることをお勧めします。これによりシャドウのレンダリングが高速になります。また、`matrix_normal`などの一部のエンジンユニフォームは、シャドウパス中には利用できないことに注意してください。
 
@@ -237,6 +364,9 @@ WGSLでは、同等の処理は`output.color = getShadowOutput();`です。
 #### ピッカーパス {#picker-pass}
 
 カスタムシェーダーを使用するメッシュを[`Picker`](https://api.playcanvas.com/engine/classes/Picker.html)で識別できるようにするには、ピックパス中にメッシュインスタンスIDをフラグメントシェーダーから出力する必要があります。`PICK_PASS`が定義されている場合にエンジン提供の`pickPS`チャンクをインクルードし、`getPickOutput()`が返す値を出力カラーに書き込みます:
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
 
 ```glsl
 #ifdef PICK_PASS
@@ -259,6 +389,39 @@ void main(void)
     #endif
 }
 ```
+
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+#ifdef PICK_PASS
+    // メッシュインスタンスのエンコードされたIDを返すgetPickOutput()を提供します
+    #include "pickPS"
+#endif
+
+@fragment
+fn fragmentMain(input: FragmentInput) -> FragmentOutput
+{
+    var output: FragmentOutput;
+
+    #ifdef PICK_PASS
+
+        // メッシュインスタンスIDを出力します
+        output.color = getPickOutput();
+
+    #else
+
+        // 通常のカラーレンダリング
+        output.color = ...;
+
+    #endif
+
+    return output;
+}
+```
+
+</TabItem>
+</Tabs>
 
 #### 生成されたシェーダー {#generated-shaders}
 
