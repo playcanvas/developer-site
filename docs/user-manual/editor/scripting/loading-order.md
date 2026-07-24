@@ -3,6 +3,13 @@ title: Script Loading Order
 description: Contrasts ESM imports with classic preload ordering, drag-reorder UI, dynamic loads, and publish-time concatenation behavior.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Update the relevant ESM imports or classic script preload order, then review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect the script assets and loading settings, apply the requested order, launch the scene, and confirm initialization order from runtime logs.
+
+:::
+
 ## ESM Scripts
 
 ESM Scripts do not have an explicit loading order, and should not be relied upon to load in a specific order. Instead, you should use module import statements to declare dependencies between modules.

@@ -3,6 +3,13 @@ title: シーンの読み込み
 description: SceneRegistry の changeScene と加算ロード API の呼び出し、階層と設定の読み込みの切り分け、コールバックまたはイベントでの完了検知を学びます。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Scene Loading の Script を Pull/Push モードでローカル編集し、変更を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 対象の Script を作成、アタッチし、Editor の Scene を一覧表示または読み込んで、アプリケーションを起動しログとランタイム状態を確認してください。
+
+:::
+
 このページでは、シーンをプログラムで読み込む方法と、プロジェクトでシーンを使用するさまざまなアプローチについて説明します。
 
 主なアプローチは2つあります：シーンを完全に切り替える方法と、シーンを加算的に読み込む方法です。

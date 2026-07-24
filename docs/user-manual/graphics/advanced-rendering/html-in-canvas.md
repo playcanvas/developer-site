@@ -3,6 +3,14 @@ title: HTML-in-Canvas
 description: Render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement HTML-in-Canvas in the relevant script or shader assets so the result satisfies this requirement: render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for HTML-in-Canvas so the result satisfies this requirement: render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 HTML-in-Canvas allows you to render live HTML and CSS content directly as WebGL textures. This enables styled text, interactive UI panels, forms, and other DOM content to appear on surfaces within a 3D scene — complete with accessibility, internationalization, and full CSS styling support.
 
 :::note

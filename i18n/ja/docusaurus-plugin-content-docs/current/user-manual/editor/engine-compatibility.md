@@ -3,6 +3,12 @@ title: エンジン互換性
 description: Engine V1 と V2 の対応範囲、チェックポイントでの切り替え、ランチャーのトグル、ガンマとトーンマップのビューポート、および Script 向けの sRGB テクスチャ移行の注意点です。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Engine を手動で切り替える前に、チェックポイントを作成し、Script、Camera、Texture、設定を監査して、対象の Engine バージョンで Launch し、キャプチャーとログを比較します。
+
+:::
+
 ## はじめに
 
 Editorは、エンジンの主要な2つのリリースストリームをサポートしています。

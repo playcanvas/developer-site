@@ -3,6 +3,15 @@ title: スクリプト
 description: Script Asset、import map、コードエディター、VS Code 拡張、ホットリロード、読み込み順など、エディターのスクリプト関連ツールを概観します。
 ---
 
+:::ai
+
+AI アシスタントは、次の 2 つの方法で Editor のスクリプトを操作できます。
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Codex、Claude Code、Cursor などの MCP クライアントでスクリプトアセットを作成または編集し、実行中のアプリケーションで検証してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** ファイルベースのコーディングアシスタントで Pull/Push モードのスクリプトをローカル編集し、同期前にすべての変更を確認してください。
+
+:::
+
 PlayCanvas Editorは、スクリプトの作成と管理のための統合された環境を提供します。このセクションでは、スクリプト作成の体験を向上させるEditor固有のツールとワークフローについて説明します。
 
 :::tip まず基本を学びましょう

@@ -3,6 +3,12 @@ title: Third-party Asset Sites
 description: Free and paid sources for 3D models, textures, sound effects, and music to use in your PlayCanvas projects.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload the asset selected from a third-party site, inspect the imported asset type and generated files, and confirm its project references before using it.
+
+:::
+
 ## Where can I get 3D models/Sound FX/Music for PlayCanvas?
 
 Sometimes it's important to make your own unique assets, but sometimes a completely bespoke asset is too expensive or time-consuming to make. So we've gathered together a list of links and resources for places that you can get free or paid-for assets of all types.

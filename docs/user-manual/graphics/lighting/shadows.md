@@ -3,6 +3,13 @@ title: Shadows
 description: Enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS), and tune quality with cascades, resolution, and bias.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS), and tune quality with cascades, resolution, and bias; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Shadows so the result satisfies this requirement: enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS), and tune quality with cascades, resolution, and bias; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

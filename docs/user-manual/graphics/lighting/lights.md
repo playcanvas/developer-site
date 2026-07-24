@@ -3,6 +3,13 @@ title: Lights
 description: "Directional, omni, and spot lights in the Editor: gizmos, shadows, cookies, and practical lighting combinations."
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Lights; required behavior and constraints: Directional, omni, and spot lights in the Editor: gizmos, shadows, cookies, and practical lighting combinations; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Lights so the result satisfies this requirement: directional, omni, and spot lights in the Editor: gizmos, shadows, cookies, and practical lighting combinations; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 In the real world, the environment around you is lit from many sources. The Sun, street lights, TV screens and so on. In a PlayCanvas scene, you have the ability to set up a number of different types of light sources and the shape of the light source to approximate the different types of light we find in reality.
 
 Descriptions of each light type and light source shape are below and examples of different combinations of light types are given in the [table](#use-cases) below.

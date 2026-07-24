@@ -3,6 +3,12 @@ title: Rigid Body
 description: PlayCanvas の Rigid Body Component は、Collision 形状と組み合わせて Entity に static、dynamic、または kinematic の物理シミュレーションを追加します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Rigid Bodyをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
+
+:::
+
 Rigid Bodyコンポーネントを使用すると、エンティティがシーンの物理シミュレーションに参加できるようになります。これにより、エンティティの移動を現実的にシミュレートできます。コンポーネントインターフェースは、Typeに基づいて異なる属性を動的に表示します。
 
 #### Static

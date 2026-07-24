@@ -3,6 +3,12 @@ title: Checkpoints
 description: Creates restores and hard-resets permanent snapshots explaining graph implications and what cannot be undone after hard reset.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect version-control status, create or compare the requested checkpoint, confirm the resulting project history, and avoid restore or hard reset unless explicitly requested because later checkpoints may be unrecoverable.
+
+:::
+
 A checkpoint is a snapshot of your project at a point in time. It contains the complete set of data for your project so that you can restore this state at any point in the future. Checkpoints are similar to *commits* in other version control systems. Checkpoints are identified by a unique id number and a description that you enter at the time you create the checkpoint.
 
 ![Checkpoint](/img/user-manual/editor/version-control/checkpoint.jpg)

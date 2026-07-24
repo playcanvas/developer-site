@@ -3,6 +3,13 @@ title: HDR Rendering
 description: HDR camera settings, tone mapping and gamma options, and using CameraFrame for bloom-friendly floating-point rendering.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement HDR Rendering; required behavior and constraints: HDR camera settings, tone mapping and gamma options, and using CameraFrame for bloom-friendly floating-point rendering; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for HDR Rendering so the result satisfies this requirement: HDR camera settings, tone mapping and gamma options, and using CameraFrame for bloom-friendly floating-point rendering; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 High Dynamic Range (HDR) rendering significantly enhances visual realism in computer graphics by capturing and displaying a broader spectrum of light and color. This technique ensures that both the brightest highlights and the deepest shadows retain their details, offering a more lifelike representation of scenes. One notable advantage of HDR rendering is its ability to produce physically based bloom effects, where intense light sources naturally bleed into surrounding areas, mimicking real-world camera and eye behavior. Additionally, HDR rendering facilitates more accurate reflections and refractions, as it allows for light values that exceed the standard displayable range, resulting in visuals that are both striking and true to life.
 
 ![HDR](/img/user-manual/graphics/linear-workflow/hdr.webp)

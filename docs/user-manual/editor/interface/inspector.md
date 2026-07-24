@@ -3,6 +3,12 @@ title: Inspector Panel
 description: Inspector tips for entity and asset attributes covering gizmos, live runtime tweaks, typed copy paste, multiselect batches, and undo integration.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Select and modify entities, components, materials, and project settings, with Editor undo and redo available for reviewable changes; read the changed project state back and capture or launch the result when it is visual or interactive.
+
+:::
+
 ![Inspector Panel](/img/user-manual/editor/inspector/inspector.png)
 
 The Inspector panel shows attribute values for the currently selected item.

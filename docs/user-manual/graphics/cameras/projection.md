@@ -3,6 +3,13 @@ title: Projection
 description: Choose perspective or orthographic projection, set the field of view, and tune clip planes, aspect ratio, and frustum culling.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Choose perspective or orthographic projection, set the field of view, and tune clip planes, aspect ratio, and frustum culling; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Projection so the result satisfies this requirement: choose perspective or orthographic projection, set the field of view, and tune clip planes, aspect ratio, and frustum culling; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

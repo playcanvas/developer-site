@@ -3,6 +3,13 @@ title: Hot Reloading
 description: Explains implementing swap to reload scripts live without full refresh and how to migrate listeners and state safely.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the script `swap` method, preserve required listeners and state, then review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and attach a script with a `swap` method, launch the scene, update the script, and confirm that listeners, attributes, and runtime state survive the hot reload.
+
+:::
+
 When you are iterating on a complex project it can be frustrating to have to do a full page refresh every time you make a change to a script. Especially if it takes you a long time to get to the point where you are testing your code. That is where hot-swapping of code comes in.
 
 ## How to Use Hot-swapping

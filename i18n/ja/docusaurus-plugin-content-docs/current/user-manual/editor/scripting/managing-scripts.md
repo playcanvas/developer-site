@@ -3,6 +3,13 @@ title: あなたのスクリプトの管理
 description: エディターの Asset パネルと Script Component の手順で、作成、import の整理、Entity への Script Asset の割り当てを行います。
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** スクリプトファイルをローカルで作成、名前変更、移動、編集してください。 Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いている Editor プロジェクト内でスクリプトアセットを作成、編集、解析、アタッチしてください。 変更後のプロジェクト状態を再取得し、表示または操作に関係する場合はキャプチャまたは Launch で確認してください。
+
+:::
+
 PlayCanvas Editor では、JavaScript コードは Script Asset に格納されます。これらは、モデル、テクスチャ、マテリアルと同様に、プロジェクトの Asset Panel 内に保存される `.js` または `.mjs` ファイルです。これらの Script Asset を効果的に管理することは、整理され効率的なワークフローの鍵となります。このページでは、エディターインターフェースを使用してスクリプトを作成、整理、削除、インポート、および割り当てる方法について説明します。
 
 主な概念:

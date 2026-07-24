@@ -3,6 +3,12 @@ title: トラブルシューティング
 description: Engine V1 または V2 のとき、シーンビューポートとカメラのガンマ／トーンマッピングと sRGB テクスチャの確認を揃えて、Editor と Launcher の明るさの差を解消します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Scene、プロジェクト、Editor の設定、Camera、Texture、Editor ログを調査し、アプリケーションを Launch してキャプチャーしてから、ランタイムの出力とログを比較します。
+
+:::
+
 Engine V1またはV2を実行するプロジェクト向けのEngine V2を搭載したEditorに関する、よくある質問とその回答をまとめたリストです。
 
 ## 1. Engine V1とV2を搭載したEditorでは、シーンが明るく/暗く見える

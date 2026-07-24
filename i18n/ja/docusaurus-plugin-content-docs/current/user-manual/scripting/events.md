@@ -3,6 +3,14 @@ title: イベント
 description: 組み込みのイベントシステムの on、once、off、fire で PlayCanvas の Script 同士が通信します。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** `on`、`once`、`off`、`fire` で関連スクリプトを接続し、イベントフローを実行して、想定したタイミングでのみハンドラーが動作することを確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトとテキストアセットに「イベント」を実装し、次の要件を満たしてください: 組み込みのイベントシステムの on、once、off、fire で PlayCanvas の Script 同士が通信すること。Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「イベント」に必要なスクリプトを作成、アタッチ、設定し、次の要件を満たしてください: 組み込みのイベントシステムの on、once、off、fire で PlayCanvas の Script 同士が通信すること。シーンを起動して動作を実行し、コンソール出力またはランタイム状態を確認してください。
+
+:::
+
 イベントは、毎フレームチェックすることなく発生したことに応答するためにスクリプト間で通信する便利な方法です。
 
 イベントは、PlayCanvasの多くのオブジェクトタイプ（例えばスクリプトインスタンスなど）に組み込まれており、エンジンの[`EventHandler`](https://api.playcanvas.com/engine/classes/EventHandler.html)クラスから継承されたイベントハンドリングサポートがあります。イベントハンドリングオブジェクトには以下のメソッドがあります：

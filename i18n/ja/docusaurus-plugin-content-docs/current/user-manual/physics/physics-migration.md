@@ -3,6 +3,14 @@ title: ammo.jsの更新
 description: Scene Settings のインポートとマイグレーション手順で、レガシーの組み込み ammo.js から最新の wasm ビルドへ移行します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「ammo.jsの更新」について、次の要件を満たしてください: Scene Settings のインポートとマイグレーション手順で、レガシーの組み込み ammo.js から最新の wasm ビルドへ移行すること アプリケーションを起動して動作を実行し、位置、衝突、ランタイムログを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連する物理スクリプトに「ammo.jsの更新」の動作を実装し、次の要件を満たしてください: Scene Settings のインポートとマイグレーション手順で、レガシーの組み込み ammo.js から最新の wasm ビルドへ移行すること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ammo.jsの更新」に必要な Collision、Rigidbody、スクリプトデータを設定し、次の要件を満たしてください: Scene Settings のインポートとマイグレーション手順で、レガシーの組み込み ammo.js から最新の wasm ビルドへ移行すること。シーンを起動して動作を実行し、ランタイム状態またはログを確認してください。
+
+:::
+
 ### イントロダクション
 
 PlayCanvasはammo.jsの最新バージョンのサポートを追加しました。

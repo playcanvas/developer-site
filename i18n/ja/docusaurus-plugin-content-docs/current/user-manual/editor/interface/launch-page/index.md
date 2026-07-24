@@ -3,6 +3,12 @@ title: 起動ページ
 description: Launch Page の基本。Editor のライブリンク更新、2 タブでのテストのコツ、ログインまたは QR コード読み取り後にスマートフォンで同じプレビュー URL を開く方法です。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Launch を開始・停止し、実行中のアプリをキャプチャし、console ログとライブエンティティ状態を確認し、キーボード、マウス、タッチ入力を送信してください。
+
+:::
+
 エディターのビューポートは、アプリケーションを視覚的に構築する場所です。そこから「起動」ボタンを押すと、起動ページが開き、実際にアプリケーションを_実行_できます。
 
 ![起動ボタン](/img/user-manual/editor/launch-page/launch-button.png)

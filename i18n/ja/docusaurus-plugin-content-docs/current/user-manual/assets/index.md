@@ -3,6 +3,13 @@ title: アセット
 description: PlayCanvas がモデル、テクスチャ、オーディオ、Script を含む Asset とリソースをどのように管理するかを説明します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** `Asset` と `AssetRegistry` API を使用して、必要なリソースをランタイムで登録、ロード、アンロード、確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** プロジェクトのアセットを一覧表示し、依頼されたアップロード、移動、複製、再インポート、メタデータ変更だけを実行して、変更後のアセットレコードと参照を確認してください。
+
+:::
+
 アセットは、PlayCanvas アプリケーションの構成要素です。3D モデル、テクスチャ、オーディオファイル、スクリプトなど、アプリケーションに必要なすべての外部リソースを表します。
 
 ## アセットとリソースの違い

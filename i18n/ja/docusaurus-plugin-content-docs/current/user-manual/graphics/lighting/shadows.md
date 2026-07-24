@@ -3,6 +3,13 @@ title: シャドウ
 description: リアルタイムシャドウを有効化し、シャドウタイプ（PCF、VSM、PCSS）を選択し、カスケード、解像度、バイアスで品質を調整します。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「シャドウ」について、次の要件を満たしてください: リアルタイムシャドウを有効化し、シャドウタイプ（PCF、VSM、PCSS）を選択し、カスケード、解像度、バイアスで品質を調整すること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「シャドウ」を設定し、次の要件を満たしてください: リアルタイムシャドウを有効化し、シャドウタイプ（PCF、VSM、PCSS）を選択し、カスケード、解像度、バイアスで品質を調整すること。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

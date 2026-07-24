@@ -3,6 +3,12 @@ title: Scrollbar
 description: PlayCanvas Scrollbar component provides a draggable handle Element that drives scroll position for an associated Scroll View component.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Scrollbar Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Scrollbar Component defines a scrolling control for a [Scroll View](scrollview.md) Component.
 
 See the [User Interface](/user-manual/user-interface) section for more details.

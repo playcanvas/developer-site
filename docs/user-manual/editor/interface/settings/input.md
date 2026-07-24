@@ -4,6 +4,13 @@ description: Enable or disable keyboard, mouse, touch, and gamepad input handlin
 sidebar_label: Input
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit only the Input Settings values in `.pc/settings.json` so the project satisfies this requirement: enable or disable keyboard, mouse, touch, and gamepad input handling in your PlayCanvas application; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read the current Input Settings values, change only those needed to satisfy this requirement: enable or disable keyboard, mouse, touch, and gamepad input handling in your PlayCanvas application; read the values back and launch the project when they affect runtime behavior.
+
+:::
+
 Enables or disables input device handling for the application.
 
 :::note

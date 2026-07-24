@@ -3,6 +3,14 @@ title: WGSL Reflection
 description: "Simplified WGSL declarations without manual bind groups: how PlayCanvas reflects resources from shader source and assigns bindings."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement WGSL Reflection; required behavior and constraints: Simplified WGSL declarations without manual bind groups: how PlayCanvas reflects resources from shader source and assigns bindings; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement WGSL Reflection in the relevant script or shader assets so the result satisfies this requirement: simplified WGSL declarations without manual bind groups: how PlayCanvas reflects resources from shader source and assigns bindings; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
+
+:::
+
 PlayCanvas reflects resources directly from your WGSL shader source: you declare uniforms, textures, and storage buffers without `@group`/`@binding` indices, and the engine parses these declarations, builds the bind group format, and assigns the bindings automatically. This simplified syntax is used by vertex, fragment, and compute shaders.
 
 The following sections outline how resources are declared and reflected. For the vertex/fragment-only constructs (attributes, varyings, and fragment outputs), see [WGSL Vertex and Fragment Shaders](/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders).

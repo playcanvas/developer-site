@@ -3,6 +3,12 @@ title: インスペクターパネル (Inspector)
 description: Entity と Asset の属性向けの Inspector のヒント。ギズモ、実行時のライブ調整、型付きコピー＆ペースト、複数選択の一括操作、Undo との連携を扱います。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** エンティティ、コンポーネント、マテリアル、プロジェクト設定を選択して変更できます。確認可能な変更には Editor の Undo/Redo を使用してください。
+
+:::
+
 ![Inspector Panel](/img/user-manual/editor/inspector/inspector.png)
 
 インスペクターパネルでは、現在選択されているアイテムの属性値が表示されます。

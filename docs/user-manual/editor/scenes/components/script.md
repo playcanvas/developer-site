@@ -3,6 +3,13 @@ title: Script
 description: PlayCanvas Script component attaches JavaScript or TypeScript scripts to run on an entity for load, update, and custom gameplay logic.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add Script Components, attach parsed script assets, and configure their attributes; launch the scene and verify the Component through a screenshot, runtime state, or logs.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit script files locally before attaching them in the Editor; review the complete diff and diagnostics before Push.
+
+:::
+
 The Script Component enables an entity to run user-supplied scripts. In this way, the user can write scripts (using JavaScript or TypeScript) that run when the entity is instantiated and updated on a per-frame basis.
 
 ![Script Component](/img/user-manual/editor/scenes/components/component-script.png)

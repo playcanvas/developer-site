@@ -3,6 +3,13 @@ title: Linear Workflow
 description: "Linear color workflow across the engine: linear shader math, sRGB inputs, and LDR versus HDR shader outputs."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Linear Workflow features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Linear Workflow so the result satisfies this requirement: linear color workflow across the engine: linear shader math, sRGB inputs, and LDR versus HDR shader outputs; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 In modern rendering engines, a linear workflow is essential for achieving physically accurate lighting and color representation. This approach ensures that all calculations, from shading to post-processing, occur in a linear color space, preventing errors introduced by gamma-compressed textures or incorrect blending. By working in linear space and applying gamma correction only at the final output stage, we maintain consistency across lighting, textures, and effects, resulting in more realistic and predictable visuals.
 
 In engine v1, linear workflow was limited to `StandardMaterial`, but in engine v2, it is fully integrated across all shaders and rendering stages (including `ShaderMaterial`, UI rendering, particles, and every other element) ensuring consistent, physically accurate color processing throughout.

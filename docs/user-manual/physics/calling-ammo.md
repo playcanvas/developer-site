@@ -3,6 +3,14 @@ title: Calling the ammo.js API
 description: Call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components; launch the application, exercise the behavior, and inspect positions, collisions, or runtime logs.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the Calling the ammo.js API behavior in the relevant physics scripts so it satisfies this requirement: call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the Collision, Rigidbody, and script data needed for Calling the ammo.js API so it satisfies this requirement: call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components; launch the scene, exercise the behavior, and inspect runtime state or logs.
+
+:::
+
 The PlayCanvas integration with ammo.js does not expose the full capability of the ammo.js API. However, it is possible to call the ammo.js API directly from your PlayCanvas scripts.
 
 PlayCanvas currently uses [this build](https://github.com/kripken/ammo.js/commit/dcab07bf0e7f2b4b64c01dc45da846344c8f50be) of ammo.js. The API exposed by this build can be found [here](https://github.com/kripken/ammo.js/blob/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/ammo.idl). Although there is no official documentation for ammo.js, you can refer to the [Bullet Physics User Guide](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) to learn more.

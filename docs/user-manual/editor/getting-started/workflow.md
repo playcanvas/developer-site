@@ -3,6 +3,13 @@ title: The Editor Workflow
 description: Summarizes the end-to-end PlayCanvas workflow from importing assets and scene building through scripting to publishing your app.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement the scripts required by The Editor Workflow, review the complete diff and diagnostics, and leave the changes unpushed for approval.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Build the entities, Components, and assets required by The Editor Workflow, then launch the application and capture the completed result.
+
+:::
+
 Building 3D web apps with the PlayCanvas Editor is easy.
 
 ## Create and upload assets

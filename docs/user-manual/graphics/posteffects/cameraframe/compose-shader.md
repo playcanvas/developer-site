@@ -3,6 +3,14 @@ title: Customizing the Compose Shader
 description: Override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Customizing the Compose Shader in the relevant script or shader assets so the result satisfies this requirement: override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Customizing the Compose Shader so the result satisfies this requirement: override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 The simplest way to add custom post-effects is by customizing the final compose pass, where all effects are combined and rendered to the backbuffer. This approach is ideal when you don't need additional render passes and want to modify the final output.
 
 ## Overview

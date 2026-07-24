@@ -3,6 +3,13 @@ title: 物理の基本
 description: ammo.js を有効化し、重力と単位を設定し、Bullet 物理用に rigidbody と collision の Component を構成します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「物理の基本」について、次の要件を満たしてください: ammo.js を有効化し、重力と単位を設定し、Bullet 物理用に rigidbody と collision の Component を構成すること アプリケーションを起動して動作を実行し、位置、衝突、ランタイムログを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「物理の基本」に必要な Collision、Rigidbody、スクリプトデータを設定し、次の要件を満たしてください: ammo.js を有効化し、重力と単位を設定し、Bullet 物理用に rigidbody と collision の Component を構成すること。シーンを起動して動作を実行し、ランタイム状態またはログを確認してください。
+
+:::
+
 PlayCanvasには、[ammo.js](https://github.com/kripken/ammo.js)という非常に強力な物理エンジンが組み込まれています。これは、オープンソースのC++ Bullet物理エンジンのブラウザポートです。
 
 PlayCanvasには、物理シミュレーションをセットアップするための[RigidBody](/user-manual/editor/scenes/components/rigidbody/) および[Collision](/user-manual/editor/scenes/components/collision/) コンポーネントがあります。

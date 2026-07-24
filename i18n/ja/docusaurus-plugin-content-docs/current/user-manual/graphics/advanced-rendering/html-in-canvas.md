@@ -3,6 +3,14 @@ title: HTML-in-Canvas
 description: ライブのHTMLとCSSを3DシーンにGPUテクスチャとしてレンダリングし、スタイリング、ヒットテスト、アクセシビリティを完全サポートします。フォールバック戦略も解説します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「HTML-in-Canvas」について、次の要件を満たしてください: ライブのHTMLとCSSを3DシーンにGPUテクスチャとしてレンダリングし、スタイリング、ヒットテスト、アクセシビリティを完全サポートします。フォールバック戦略も解説すること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「HTML-in-Canvas」を実装し、次の要件を満たしてください: ライブのHTMLとCSSを3DシーンにGPUテクスチャとしてレンダリングし、スタイリング、ヒットテスト、アクセシビリティを完全サポートします。フォールバック戦略も解説すること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「HTML-in-Canvas」を設定し、次の要件を満たしてください: ライブのHTMLとCSSを3DシーンにGPUテクスチャとしてレンダリングし、スタイリング、ヒットテスト、アクセシビリティを完全サポートします。フォールバック戦略も解説すること。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+
+:::
+
 HTML-in-Canvas allows you to render live HTML and CSS content directly as WebGL textures. This enables styled text, interactive UI panels, forms, and other DOM content to appear on surfaces within a 3D scene — complete with accessibility, internationalization, and full CSS styling support.
 
 :::note

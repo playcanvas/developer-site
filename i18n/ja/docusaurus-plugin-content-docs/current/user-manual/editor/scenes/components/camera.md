@@ -3,6 +3,12 @@ title: Camera
 description: PlayCanvas の Camera Component は、投影、クリッピング、レイヤー、トーンマッピング、ビューポート、grab pass などを備えた Entity から Scene をレンダリングします。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Cameraをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
+
+:::
+
 Cameraコンポーネントは、特定の視点からシーンをレンダリングするための機能を提供します。
 
 ![Camera Component](/img/user-manual/editor/scenes/components/component-camera.png)

@@ -3,6 +3,12 @@ title: WASM Module
 description: Wasm Module assets wire Emscripten binaries to matching glue and optional asm fallback scripts with naming requirements shown in the Inspector.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete WASM Module assets in the open project; inspect the resulting asset metadata, registry state, and references.
+
+:::
+
 Wasm Modules (also known as WebAssembly Modules) contain compiled executable code for the web.
 
 A Wasm module comprises three parts:

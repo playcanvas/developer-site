@@ -3,6 +3,13 @@ title: 物理ベースレンダリング (PBR)
 description: "PlayCanvas における PBR の基礎：diffuse と specular、エネルギー保存、metalness、一貫したマテリアル。"
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「物理ベースレンダリング (PBR)」について、次の要件を満たしてください: PlayCanvas における PBR の基礎：diffuse と specular、エネルギー保存、metalness、一貫したマテリアル アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「物理ベースレンダリング (PBR)」を設定し、次の要件を満たしてください: PlayCanvas における PBR の基礎：diffuse と specular、エネルギー保存、metalness、一貫したマテリアル。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+
+:::
+
 ![Star-Lord](/img/user-manual/graphics/physical-rendering/star-lord.jpg)  
 *Star-Lordモデル [Joachim Coppens](https://www.joachimcoppens.com/)*
 

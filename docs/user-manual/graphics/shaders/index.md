@@ -3,6 +3,14 @@ title: Shaders
 description: Author ShaderMaterial with paired GLSL and WGSL, declare attributes, and integrate with the engine shader system.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Shaders features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Shaders in the relevant script or shader assets so the result satisfies this requirement: author ShaderMaterial with paired GLSL and WGSL, declare attributes, and integrate with the engine shader system; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
+
+:::
+
 When you import your 3D models into PlayCanvas, by default, they will use our [Physical Material](/user-manual/graphics/physical-rendering/physical-materials/). This is a versatile material type that can cover a lot of your rendering needs.
 
 However, you will often want to perform special effects or special cases for your materials. To do this you will need to write a custom shader. In this case, you need to use `ShaderMaterial`.

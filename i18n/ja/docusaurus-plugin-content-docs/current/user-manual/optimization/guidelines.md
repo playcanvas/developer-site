@@ -3,6 +3,13 @@ title: 一般的ガイドライン
 description: Script、draw call、バッチング、シェーダー、ライティング、テクスチャ、ポストエフェクト向けの一般的なチューニングのヒントです。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** アプリケーションをプロファイルし、スクリプト、ドローコール、バッチ、シェーダー、ライト、テクスチャ、ポストエフェクトの最大コストを特定して、最も影響の大きい問題を変更し、該当指標を比較してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Scene、Asset、設定を調査し、Profiler または MiniStats を有効にして Launch し、基準値をキャプチャーして、最も効果の高い Editor の変更後に同じビューを再度キャプチャーします。
+
+:::
+
 PlayCanvasアプリで最適なパフォーマンスを得るためのヒントをいくつか紹介します。
 
 ## JavaScript

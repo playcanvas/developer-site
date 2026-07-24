@@ -3,6 +3,12 @@ title: PlayCanvas Editor
 description: PlayCanvas の Web Editor を紹介します。ライブテスト、共同編集、バージョン管理、ビジュアル編集、Script、Asset のワークフロー、Web またはネイティブへのエクスポートを扱います。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Codex、Claude Code、Cursor などの MCP クライアントで、開いているプロジェクトの確認と変更、ビューポートの操作、アプリケーションの起動、結果の検証を行ってください。
+
+:::
+
 ## 概要
 
 PlayCanvas Editor は、プロジェクトを構成する[シーン](../glossary#scene)や[エンティティ](../glossary#entity)を作成・編集するために使用する視覚的な編集ツールです。

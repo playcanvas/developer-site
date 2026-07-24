@@ -3,6 +3,14 @@ title: シェーダー
 description: 対になる GLSL と WGSL で ShaderMaterial を記述し、attribute を宣言してエンジンのシェーダーシステムに統合します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「シェーダー」について、次の要件を満たしてください: 対になる GLSL と WGSL で ShaderMaterial を記述し、attribute を宣言してエンジンのシェーダーシステムに統合すること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「シェーダー」を実装し、次の要件を満たしてください: 対になる GLSL と WGSL で ShaderMaterial を記述し、attribute を宣言してエンジンのシェーダーシステムに統合すること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認してください。
+
+:::
+
 3DモデルをPlayCanvasにインポートすると、デフォルトで当社の[Physical Material](/user-manual/graphics/physical-rendering/physical-materials/)が使用されます。これは、レンダリングの多くのニーズをカバーできる多用途なマテリアルタイプです。
 
 しかし、マテリアルに特殊効果や特殊なケースを適用したいと思うことがよくあります。これを行うには、カスタムシェーダーを記述する必要があります。この場合、`ShaderMaterial`を使用する必要があります。

@@ -3,6 +3,12 @@ title: Render
 description: Render asset inspector documents read-only mesh statistics, vertex attributes, compression, and links back to the source container GLB asset.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload, inspect, modify, move, duplicate, download, or delete Render assets in the open project; inspect the resulting asset metadata, registry state, and references.
+
+:::
+
 A Render asset contains 3D mesh data extracted from imported 3D model files (such as GLB or FBX). It defines the shape and structure of 3D models and is used by the [Render Component](/user-manual/editor/scenes/components/render/) to display geometry in the scene.
 
 Render assets are primarily used for:

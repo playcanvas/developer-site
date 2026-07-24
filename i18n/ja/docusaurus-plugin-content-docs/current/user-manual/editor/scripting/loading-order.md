@@ -3,6 +3,13 @@ title: スクリプトのロード順序
 description: ESM の import とクラシックなプリロード順、ドラッグ並べ替え UI、動的読み込み、公開時の連結の挙動を対比します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連する ESM import または Classic Script の preload 順序を更新し、Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** スクリプトアセットとロード設定を確認し、依頼された順序を適用してシーンを起動し、ランタイムログから初期化順序を確認してください。
+
+:::
+
 ## ESMスクリプト
 
 ESMスクリプトには明示的なロード順序がなく、特定の順序でロードされることに依存すべきではありません。代わりに、モジュール間の依存関係を宣言するためにモジュールインポート文を使用する必要があります。

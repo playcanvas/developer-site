@@ -3,6 +3,13 @@ title: Particles
 description: Create and tune particle systems in the Editor, start them from scripts, and use soft particles with scene depth.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Create and tune particle systems in the Editor, start them from scripts, and use soft particles with scene depth; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure Particle System Components and their asset references, then launch or capture the effect.
+
+:::
+
 PlayCanvas provides comprehensive support for creating and editing particle systems.
 
 ## What is a Particle System?

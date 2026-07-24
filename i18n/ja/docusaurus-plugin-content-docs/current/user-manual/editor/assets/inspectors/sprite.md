@@ -3,6 +3,12 @@ title: Sprite
 description: Sprite Inspector は単位あたりピクセル、シンプルなスライスまたはタイルの 9-slice 向けレンダーモード、および参照するテクスチャアトラスを設定します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Sprite アセットとフレームデータを作成、変更し、Sprite Component を設定して結果をキャプチャしてください。
+
+:::
+
 スプライト (Sprite) は、シーンにレンダリングできる2Dグラフィックです。Spriteアセットは、[Texture Atlas](/user-manual/editor/assets/inspectors/texture-atlas)への参照と、そのアトラスからのフレームのシーケンスです。このように、スプライトはアトラスから取り出した単一の画像を表すことができる他、フリップブックスタイルのアニメーション（アトラスから複数のフレーム）を表すこともできます。
 
 ## Inspector

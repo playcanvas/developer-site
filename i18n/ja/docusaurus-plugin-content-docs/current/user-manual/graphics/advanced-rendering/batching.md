@@ -3,6 +3,14 @@ title: バッチング
 description: "バッチグループがメッシュインスタンスをまとめてドローコールを削減：Editorの設定、静的と動的のルール、制限です。"
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 互換性のある静的または動的 Batch Group を設定し、同じ条件を満たす Model、Sprite、Element Component を割り当て、バッチ化された内容の変更後に `app.batcher.markGroupDirty` を呼び出して、変更前後のドローコール数を比較してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** `textureAsset` を変更して `app.batcher.markGroupDirty` を呼び出すスクリプトを編集し、Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 静的または動的 Batch Group を作成し、互換性のある Model、Sprite、Element Component を割り当ててシーンを起動し、動的オブジェクトが正しく動くことを確認しながらドローコール数を比較してください。
+
+:::
+
 バッチング (Batching) とは、複数のメッシュインスタンスを1つのメッシュインスタンスに結合することで、すべてを1回のGPUドローコールでレンダリングできるようにするプロセスです。 PlayCanvasは、[Model](/user-manual/editor/scenes/components/model)、[Sprite](/user-manual/editor/scenes/components/sprite)、および[Element](/user-manual/editor/scenes/components/element)コンポーネントに便利な機能を提供し、これらのコンポーネントをBatch Groupに割り当てることができます。これにより、エンジンがメッシュを結合して総ドローコール数を減らす方法に関するヒントを与えることができます。
 
 メッシュインスタンスを組み合わせることができるか、エンジンが確認するためのルールが多数存在しています。最初のルールは、すべてのメッシュインスタンスが同じマテリアルを共有する必要があるというものです。

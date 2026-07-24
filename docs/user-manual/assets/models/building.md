@@ -3,6 +3,12 @@ title: Building Models
 description: Create 3D models for PlayCanvas in Blender, Maya, 3DS Max, or other tools using the recommended GLB format.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload the exported GLB, inspect its hierarchy, Render and Material assets, and confirm that the model is complete before placing it in the scene.
+
+:::
+
 Building art and animations for PlayCanvas can be done using almost any of the many 3D modeling programs available. For example: Blender, SketchUp, Autodesk 3D Studio Max or Autodesk Maya.
 
 PlayCanvas is designed to import content most faithfully via the open source glTF binary (GLB) format so, in general, if your modeling application supports GLB, PlayCanvas supports it too.

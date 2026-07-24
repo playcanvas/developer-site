@@ -3,6 +3,14 @@ title: Ray Casting
 description: Cast rays through the scene for picking and hit tests from camera and mouse or touch positions.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement picking with `camera.screenToWorld` and `rigidbody.raycastFirst`, launch the application, click or touch a target, and verify that the nearest hit entity is reported.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit the ESM or classic ray-casting script that calls `camera.screenToWorld` and `rigidbody.raycastFirst`, then review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Attach the ray-casting script to a Camera, configure Collision and Rigidbody targets, launch the scene, inject mouse or touch input, and confirm the selected entity in the runtime logs.
+
+:::
+
 The PlayCanvas physics engine allows you to perform ray casts. A ray cast is a query that determines if a straight line between two arbitrary 3D points intersects with a rigid body.
 
 One application of ray casting is picking, where the user can touch/click the screen and select an entity. Here is a script which performs a ray cast from the camera position into the scene through the screen touch/click position and returns the closest selected rigid body-enabled entity:

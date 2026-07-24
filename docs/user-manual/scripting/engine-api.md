@@ -3,6 +3,14 @@ title: Calling the Engine API
 description: Essential PlayCanvas Engine classes and patterns for working with entities, transforms, input, assets, and physics in scripts.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Calling the Engine API; required behavior and constraints: Essential PlayCanvas Engine classes and patterns for working with entities, transforms, input, assets, and physics in scripts; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Calling the Engine API in the relevant script and text assets so it satisfies this requirement: essential PlayCanvas Engine classes and patterns for working with entities, transforms, input, assets, and physics in scripts; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for Calling the Engine API so they satisfy this requirement: essential PlayCanvas Engine classes and patterns for working with entities, transforms, input, assets, and physics in scripts; launch the scene, exercise the behavior, and inspect console output or runtime state.
+
+:::
+
 When writing PlayCanvas scripts, you're working with the [PlayCanvas Engine API](https://api.playcanvas.com/engine/). This page covers the essential classes and patterns you'll use most often in your scripts.
 
 ## Key Classes for Script Writers

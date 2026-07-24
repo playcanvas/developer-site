@@ -3,6 +3,13 @@ title: Debugging
 description: Tools and techniques for finding and fixing bugs in your PlayCanvas scripts using browser developer tools.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Debugging features described here that match the requested outcome, and implement only those features; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Launch the current scene, capture the running application, read console errors, inspect live entity state, and inject keyboard, mouse, or touch input.
+
+:::
+
 Debugging is essential for identifying and fixing issues in your PlayCanvas scripts. When your code doesn't behave as expected, these tools and techniques will help you quickly find and resolve problems.
 
 ## Debugging Techniques

@@ -3,6 +3,12 @@ title: 入力ソース
 description: コントローラー、トラッキングされた手、視線、タッチ向けにXR入力ソースを使い、ソースの列挙とPlayCanvasでの一時的な入力の扱いを解説します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 利用可能な XR Input Source を列挙し、操作に必要なコントローラー、手、視線、タッチ、一時入力を処理して、対応セッションで入力イベントを確認してください。
+
+:::
+
 [XrInputSource](https://api.playcanvas.com/engine/classes/XrInputSource.html)は、ユーザーが仮想世界と対話できるようにする入力メカニズムを表します。これらには、ハンドヘルドコントローラー、光学的に追跡される手、視線ベースの入力方法、タッチスクリーンが含まれますが、これらに限定されません。ただし、入力ソースは従来のゲームパッド、マウス、またはキーボードとは明示的に関連付けられていません。
 
 <img loading="lazy" src="/img/user-manual/xr/controllers.webp" alt="レイを持つコントローラーモデル" width="720" />

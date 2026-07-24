@@ -3,6 +3,14 @@ title: クラシックリファレンス
 description: Classic Script Attributesのリファレンス。型宣言とレガシーScript向けのEditor連携を扱います。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 記載された型と Editor オプションで必要な Classic Script Attribute を追加し、ランタイムで解析された値を確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトとテキストアセットに「クラシックリファレンス」を実装し、次の要件を満たしてください: Classic Script Attributesのリファレンス。型宣言とレガシーScript向けのEditor連携を扱います。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「クラシックリファレンス」に必要なスクリプトを作成、アタッチ、設定し、次の要件を満たしてください: Classic Script Attributesのリファレンス。型宣言とレガシーScript向けのEditor連携を扱います。シーンを起動して動作を実行し、コンソール出力またはランタイム状態を確認してください。
+
+:::
+
 :::note
 
 このページでは、非推奨の**クラシックスクリプト**システムにおけるスクリプト属性について説明します。

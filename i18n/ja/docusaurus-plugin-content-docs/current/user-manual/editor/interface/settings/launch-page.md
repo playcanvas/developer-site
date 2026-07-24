@@ -4,6 +4,13 @@ sidebar_label: Launch Page
 description: Editor の Launch ページ向けに、解像度、フィルモード、透明なキャンバスなどブラウザの機能を設定します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** `.pc/settings.json` の「起動ページ設定」に関係する値だけを編集し、次の要件を満たしてください: Editor の Launch ページ向けに、解像度、フィルモード、透明なキャンバスなどブラウザの機能を設定すること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在の「起動ページ設定」の値を読み取り、次の要件に必要な値だけを変更してください: Editor の Launch ページ向けに、解像度、フィルモード、透明なキャンバスなどブラウザの機能を設定すること。値を再取得し、ランタイムに影響する場合はプロジェクトを起動してください。
+
+:::
+
 PlayCanvas エディターからプロジェクトを実行する際に使用されるブラウザ機能を制御します。
 
 :::note

@@ -3,6 +3,14 @@ title: Shader Chunk Migrations
 description: Per-release shader chunk changes, console warnings for overrides, and how to set shaderChunksVersion after updates.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Shader Chunk Migrations; required behavior and constraints: Per-release shader chunk changes, console warnings for overrides, and how to set shaderChunksVersion after updates; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Shader Chunk Migrations in the relevant script or shader assets so the result satisfies this requirement: per-release shader chunk changes, console warnings for overrides, and how to set shaderChunksVersion after updates; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read or overwrite Shader asset text, configure the entities that use it, and launch or capture the scene to verify rendering.
+
+:::
+
 ## Introduction
 
 The PlayCanvas Engine's material shader chunk system is undergoing substantial changes in order to support a more flexible material system. Please see [this page](https://github.com/playcanvas/engine/issues/4250) for more context.

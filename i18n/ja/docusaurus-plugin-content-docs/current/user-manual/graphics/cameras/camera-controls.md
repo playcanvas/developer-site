@@ -3,6 +3,14 @@ title: カメラコントロール
 description: エンジン付属のcamera-controlsスクリプトで、マウス・タッチ・ゲームパッド対応のオービット、フライ、パンのナビゲーションを任意のカメラに追加します。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「カメラコントロール」について、次の要件を満たしてください: エンジン付属のcamera-controlsスクリプトで、マウス・タッチ・ゲームパッド対応のオービット、フライ、パンのナビゲーションを任意のカメラに追加すること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「カメラコントロール」で使用する Camera Script を Pull/Push モードでローカル編集し、変更を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「カメラコントロール」を設定し、次の要件を満たしてください: エンジン付属のcamera-controlsスクリプトで、マウス・タッチ・ゲームパッド対応のオービット、フライ、パンのナビゲーションを任意のカメラに追加すること。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

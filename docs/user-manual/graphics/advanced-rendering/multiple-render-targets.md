@@ -3,6 +3,14 @@ title: Multiple Render Targets
 description: Configure multiple render targets, shared attachments rules, and shader output to several color buffers at once.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Configure multiple render targets, shared attachments rules, and shader output to several color buffers at once; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Multiple Render Targets in the relevant script or shader assets so the result satisfies this requirement: configure multiple render targets, shared attachments rules, and shader output to several color buffers at once; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Multiple Render Targets so the result satisfies this requirement: configure multiple render targets, shared attachments rules, and shader output to several color buffers at once; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 The multiple render targets feature allows you to simultaneously render to multiple textures. This manual page explores implementation, configuration, and an example use case of multiple render targets.
 
 MRT is supported on every device PlayCanvas runs on (WebGL2 and WebGPU). To detect the number of color attachments you can use on the current device, check [`GraphicsDevice.maxColorAttachments`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxcolorattachments). Typically, 8 attachments are supported.

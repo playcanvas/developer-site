@@ -3,6 +3,13 @@ title: Screens
 description: PlayCanvas UIのScreen向けに、スクリーン空間とワールド空間のレンダリング、解像度、スケーリングを解説します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「Screens」について、次の要件を満たしてください: PlayCanvas UIのScreen向けに、スクリーン空間とワールド空間のレンダリング、解像度、スケーリングを解説すること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Screen エンティティを作成し、Screen Component を追加、設定して、ビューポートや実行中のアプリケーションをキャプチャしてください。
+
+:::
+
 [Screenコンポーネント](/user-manual/editor/scenes/components/screen)は、ユーザーインターフェースが構築されるエリアを定義します。その主な役割は、スクリーンの内容（エレメントコンポーネントを持つ子エンティティ）がどのようにレンダリングされるかを決定することです。
 
 ## スクリーンスペースまたはワールドスペース

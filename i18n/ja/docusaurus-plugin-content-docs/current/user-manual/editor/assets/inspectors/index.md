@@ -3,6 +3,12 @@ title: アセットインスペクター
 description: Asset の Inspector パネルのリファレンス。プリロードや除外など共通のヘッダー項目と、各 Asset タイプの Inspector ページへのリンクを含みます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトの アセットインスペクター アセットをアップロード、確認、変更、移動、複製、ダウンロード、削除してください。
+
+:::
+
 [アセットパネル](/user-manual/editor/assets/asset-panel)でアセットを選択すると、そのプロパティがインスペクターに表示されます。各アセットタイプには、独自の設定可能なプロパティがあります。
 
 ## Common Properties

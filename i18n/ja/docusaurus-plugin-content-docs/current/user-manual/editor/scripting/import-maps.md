@@ -3,6 +3,13 @@ title: インポートマップ
 description: エディターの import map で ESM のモジュール指定子をエイリアスし、CDN パッケージを使い、単一の有効な map などの制限を理解します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 有効な import map の JSON と ESM import を編集し、有効な import map が 1 つだけであることを確認して、Push の前に完全な差分を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** import map の JSON と依存する ESM スクリプトアセットを作成または更新し、シーンを起動して、エイリアス化したすべてのモジュールがコンソールエラーなしで読み込まれることを確認してください。
+
+:::
+
 ESMスクリプトを使用すると、Import Mapsを使ってプロジェクト内のモジュール指定子を解決する方法を制御できます。Import Mapsを使用すると、エイリアスを定義したり、モジュールパスを再マッピングしたりできるため、特に共有ライブラリや内部ツールを扱う際に、よりクリーンで柔軟なインポートを作成できます。
 
 例えば、次のように記述する代わりに:

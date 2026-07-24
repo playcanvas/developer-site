@@ -3,6 +3,12 @@ title: ヒエラルキーを含むモデルのインポート
 description: Import Hierarchy を有効にすると、モデルが編集可能な Entity ツリーとしてインポートされ、リンクされたマテリアル、テクスチャ、アニメーション、Template が Scene 構成に使えます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** モデルのソースをアップロードし、インポートされた階層を確認して、生成されたアセットの移動やインポートデータ変更後の再インポートを行ってください。
+
+:::
+
 PlayCanvasでは、シーン内のエンティティ階層ごとにメッシュを持つモデルをインポートすることができます。これにより、エディタで異なるメッシュを直接編集することができます。コンポーネントを追加したり、他のエンティティをアタッチしたり、エンティティ階層内のエンティティを移動/回転/スケールしたりすることができます。
 
 ![Edit model hierarchy in the Editor](/img/user-manual/assets/import-pipeline/import-hierarchy/edit-hierarchy.gif)

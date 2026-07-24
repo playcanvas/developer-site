@@ -3,6 +3,13 @@ title: 初めてのPlayCanvasアプリを作る
 description: 新しい Scene からマテリアル、Script、移動、公開まで、シンプルな 3D の PlayCanvas Editor プロジェクトの作り方を順に説明します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 「初めてのPlayCanvasアプリを作る」に必要なスクリプトを実装し、完全な差分と診断を確認して、承認されるまで Push しないでください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「初めてのPlayCanvasアプリを作る」に必要なエンティティ、Component、アセットを構築し、アプリケーションを起動して完成した結果をキャプチャしてください。
+
+:::
+
 PlayCanvas Editorでアプリケーションを開発するのは簡単で楽しいです。基本を学ぶのに数分費やしましょう。以下のシンプルな3Dアプリを再現します。
 
 <div className="iframe-container">

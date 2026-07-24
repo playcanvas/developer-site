@@ -3,6 +3,12 @@ title: PlayCanvas Engine
 description: Open source JavaScript/TypeScript 3D engine published on npm with full TypeScript declarations and comprehensive examples.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the existing repository, choose the documented npm or CDN setup, implement the requested Engine change, and run the application in its real target environment.
+
+:::
+
 The PlayCanvas Engine is the run-time framework that powers your PlayCanvas applications. It is written in JavaScript and is open sourced under an MIT license on [GitHub](https://github.com/playcanvas/engine). It is published on the [NPM registry](https://www.npmjs.com/package/playcanvas) and ships with full TypeScript declarations. It also comes with a comprehensive set of code examples.
 
 <EngineExample title="PlayCanvas Engine Examples Browser" />

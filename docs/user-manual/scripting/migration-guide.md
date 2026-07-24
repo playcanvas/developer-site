@@ -3,6 +3,14 @@ title: Migration Guide
 description: Migrate your PlayCanvas project from Classic Scripts to the recommended ESM Scripts system step by step.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Migrate your PlayCanvas project from Classic Scripts to the recommended ESM Scripts system step by step; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Migration Guide in the relevant script and text assets so it satisfies this requirement: migrate your PlayCanvas project from Classic Scripts to the recommended ESM Scripts system step by step; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for Migration Guide so they satisfy this requirement: migrate your PlayCanvas project from Classic Scripts to the recommended ESM Scripts system step by step; launch the scene, exercise the behavior, and inspect console output or runtime state.
+
+:::
+
 ESM Scripts replace the older Classic Scripting system as the recommended way to develop PlayCanvas applications. Whilst classic scripts will continue to work in existing projects and will be supported for the foreseeable future, we recommend using the newer ESM format for your projects.
 
 ## Gradual Migration

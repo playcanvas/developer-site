@@ -3,6 +3,14 @@ title: Custom Render Passes
 description: Build custom RenderPass-based post stacks on the camera without CameraFrame for full manual pipeline control.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Build custom RenderPass-based post stacks on the camera without CameraFrame for full manual pipeline control; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Custom Render Passes in the relevant script or shader assets so the result satisfies this requirement: build custom RenderPass-based post stacks on the camera without CameraFrame for full manual pipeline control; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Custom Render Passes so the result satisfies this requirement: build custom RenderPass-based post stacks on the camera without CameraFrame for full manual pipeline control; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 The most flexible approach is to implement completely custom render passes that work independently from `CameraFrame`. This gives you full control over the rendering pipeline and allows you to build a custom post-processing stack from scratch.
 
 ## Overview

@@ -3,6 +3,14 @@ title: Hue-Saturation Effect
 description: Legacy hue and saturation script effect controls plus GitHub link for the huesaturation post effect source.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Hue-Saturation Effect; required behavior and constraints: Legacy hue and saturation script effect controls plus GitHub link for the huesaturation post effect source; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Hue-Saturation Effect in the relevant script or shader assets so the result satisfies this requirement: legacy hue and saturation script effect controls plus GitHub link for the huesaturation post effect source; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Hue-Saturation Effect so the result satisfies this requirement: legacy hue and saturation script effect controls plus GitHub link for the huesaturation post effect source; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 The hue-saturation effect allows you to modify the hue and saturation of the rendered image.
 
 Here is an image without the effect:

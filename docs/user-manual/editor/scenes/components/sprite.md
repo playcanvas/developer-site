@@ -3,6 +3,12 @@ title: Sprite
 description: PlayCanvas Sprite component renders simple or animated sprite atlas frames with tint, opacity, 9-slice, batching, layers, and draw order.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Sprite Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Sprite Component renders and animates [Sprite Assets](/user-manual/editor/assets/inspectors/sprite) into the scene.
 
 There are two types of sprite: Simple and Animated.

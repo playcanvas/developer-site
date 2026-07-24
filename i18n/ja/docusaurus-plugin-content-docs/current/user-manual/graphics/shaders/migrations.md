@@ -3,6 +3,14 @@ title: Shader Chunk Migrations
 description: リリースごとのシェーダーチャンクの変更、オーバーライドのコンソール警告、更新後の shaderChunksVersion の設定方法です。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「Shader Chunk Migrations」について、次の要件を満たしてください: リリースごとのシェーダーチャンクの変更、オーバーライドのコンソール警告、更新後の shaderChunksVersion の設定方法であること アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「Shader Chunk Migrations」を実装し、次の要件を満たしてください: リリースごとのシェーダーチャンクの変更、オーバーライドのコンソール警告、更新後の shaderChunksVersion の設定方法であること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認してください。
+
+:::
+
 ## イントロダクション
 
 PlayCanvas エンジンのマテリアルシェーダチャンクシステムは、より柔軟なマテリアルシステムをサポートするために、大幅な変更が加えられています。詳細については、[このページ](https://github.com/playcanvas/engine/issues/4250)を参照してください。

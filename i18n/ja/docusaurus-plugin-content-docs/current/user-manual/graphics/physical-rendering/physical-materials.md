@@ -3,6 +3,13 @@ title: 物理マテリアル
 description: "Physical Material のマップとパラメータ：metalness と specular のワークフロー、IBL の要件、よく使うテクスチャスロット。"
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「物理マテリアル」について、次の要件を満たしてください: Physical Material のマップとパラメータ：metalness と specular のワークフロー、IBL の要件、よく使うテクスチャスロット アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「物理マテリアル」を設定し、次の要件を満たしてください: Physical Material のマップとパラメータ：metalness と specular のワークフロー、IBL の要件、よく使うテクスチャスロット。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+
+:::
+
 PlayCanvasの物理ベースレンダリングを使用するには、物理マテリアルの構成方法を理解し、さまざまなパラメータを変更するとどのような効果があるかを理解する必要があります。
 
 このセクションでは、マテリアルの最も有用なプロパティについて説明し、ライブデモでそれらを変更するとマテリアルの外観がどのように変化するかを確認できます。

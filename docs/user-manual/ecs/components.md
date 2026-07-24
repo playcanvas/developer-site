@@ -3,6 +3,13 @@ title: Components
 description: Add cameras, lights, physics, scripts, and other behavior to Entities using PlayCanvas Components.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Add cameras, lights, physics, scripts, and other behavior to Entities using PlayCanvas Components; query the resulting hierarchy, transforms, and Component data.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Components on entities, modify their properties, and inspect the resulting entity data.
+
+:::
+
 A **[`Component`](https://api.playcanvas.com/engine/classes/Component.html)** adds data and behavior to an Entity.
 
 ## Examples

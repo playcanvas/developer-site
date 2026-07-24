@@ -3,6 +3,14 @@ title: Batching
 description: "Batch groups merge mesh instances to cut draw calls: Editor setup, static versus dynamic rules, and limitations."
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Configure compatible static or dynamic Batch Groups, assign matching Model, Sprite, or Element Components, call `app.batcher.markGroupDirty` after changing batched content, and compare draw calls before and after.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit the script that changes `textureAsset` and calls `app.batcher.markGroupDirty`, then review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create static or dynamic Batch Groups, assign compatible Model, Sprite, or Element Components, launch the scene, and compare draw calls while confirming dynamic objects still move correctly.
+
+:::
+
 Batching is the process of combining multiple mesh instances together into a single mesh instance, so that they can all be rendered in a single GPU draw call. PlayCanvas provides a handy feature on the [Model](/user-manual/editor/scenes/components/model), [Sprite](/user-manual/editor/scenes/components/sprite) and [Element](/user-manual/editor/scenes/components/element) components that lets you assign these components to batch groups which give the engine hints on how to combine meshes to reduce the overall draw call count.
 
 There are a variety of rules which the engine will apply to see if mesh instances are able to be combined. The primary rule is that all mesh instances must share the same material.

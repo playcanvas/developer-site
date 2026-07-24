@@ -3,6 +3,12 @@ title: Audio Listener
 description: PlayCanvas の Audio Listener Component は 3D リスナー位置を設定し、Sound Component からの定位音がそれを基準に聞こえるようにします。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Audio Listenerをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
+
+:::
+
 Audio Listenerコンポーネントは、リスナーの3D空間での位置を指定します。すべての3Dオーディオ再生はこの位置を基準に相対的に再生されます。
 
 ![Audio Listener Component](/img/user-manual/editor/scenes/components/component-audiolistener.png)

@@ -3,6 +3,15 @@ title: Scripting
 description: Surveys editor scripting tools such as script assets, import maps, the code editor, VS Code extension, hot reload, and load order.
 ---
 
+:::ai
+
+AI assistants can work with Editor scripts in two ways:
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create or edit script assets and verify them in a running application; read the changed project state back and capture or launch the result when it is visual or interactive.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit scripts locally in Pull/Push mode so you can review every change before syncing it.
+
+:::
+
 The PlayCanvas Editor provides a tightly integrated environment for writing and managing scripts. This section covers the Editor-specific tools and workflows that will enhance your scripting experience.
 
 :::tip Learn the Basics First

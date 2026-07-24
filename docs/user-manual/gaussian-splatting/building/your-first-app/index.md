@@ -3,6 +3,12 @@ title: Your First Splat App
 description: "Choose a path to build your first PlayCanvas splat app: Engine, Editor, React, or Web Components tutorials with a toy cat demo."
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Follow the Editor path in the open project: upload the splat and controls script, configure the scene, then launch, interact with, and capture the result.
+
+:::
+
 Welcome to building your first Gaussian splat application! This section provides step-by-step tutorials to create a simple application that loads a splat of a cute toy cat that users can orbit around, pan, and zoom.
 
 ## Choose Your Path

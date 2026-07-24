@@ -3,6 +3,14 @@ title: ammo.jsのAPIを呼び出す方法
 description: 組み込みの PlayCanvas の物理 Component を超えるジョイントや機能のために、ammo.js と Bullet API を直接呼び出します。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「ammo.jsのAPIを呼び出す方法」について、次の要件を満たしてください: 組み込みの PlayCanvas の物理 Component を超えるジョイントや機能のために、ammo.js と Bullet API を直接呼び出すること アプリケーションを起動して動作を実行し、位置、衝突、ランタイムログを確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連する物理スクリプトに「ammo.jsのAPIを呼び出す方法」の動作を実装し、次の要件を満たしてください: 組み込みの PlayCanvas の物理 Component を超えるジョイントや機能のために、ammo.js と Bullet API を直接呼び出すること。Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ammo.jsのAPIを呼び出す方法」に必要な Collision、Rigidbody、スクリプトデータを設定し、次の要件を満たしてください: 組み込みの PlayCanvas の物理 Component を超えるジョイントや機能のために、ammo.js と Bullet API を直接呼び出すること。シーンを起動して動作を実行し、ランタイム状態またはログを確認してください。
+
+:::
+
 PlayCanvas の ammo.js 連携により、ammo.js API のすべての機能が公開されるわけではありません。ただし、PlayCanvas スクリプトから直接 ammo.js API を呼び出すことができます。
 
 現在、PlayCanvas は ammo.js の [このビルド](https://github.com/kripken/ammo.js/commit/dcab07bf0e7f2b4b64c01dc45da846344c8f50be) を使用しています。このビルドが公開する API は [こちら](https://github.com/kripken/ammo.js/blob/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/ammo.idl) で確認できます。ammo.js の公式ドキュメントはありませんが、[Bullet Physics User Guide](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) を参照してください。

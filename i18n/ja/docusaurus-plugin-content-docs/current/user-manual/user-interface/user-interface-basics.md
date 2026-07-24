@@ -3,6 +3,13 @@ title: ユーザーインターフェースの基礎
 description: ScreenとElementのEntityがレイアウト、描画順、9-slicing、入力、ローカライゼーションの基本でどう組み合わさるかを説明します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「ユーザーインターフェースの基礎」について、次の要件を満たしてください: ScreenとElementのEntityがレイアウト、描画順、9-slicing、入力、ローカライゼーションの基本でどう組み合わさるかを説明すること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ユーザーインターフェースの基礎」に必要な Screen、Element、Sprite、または Atlas データを作成、設定し、次の要件を満たしてください: ScreenとElementのEntityがレイアウト、描画順、9-slicing、入力、ローカライゼーションの基本でどう組み合わさるかを説明すること。ビューポートと起動したインターフェースをキャプチャしてください。
+
+:::
+
 PlayCanvasではユーザインタフェースは2つのエレメントから構築されています。[Screenコンポーネント](/user-manual/user-interface/screens)はすべてのユーザインターフェースエレメントを含む領域を記述し、[Elementコンポーネント](/user-manual/user-interface/elements)を持つ複数のエンティティはヒエラルキーのScreen Entityの下に添付されます。Screenは、ユーザインタフェースの領域とそれがどのようにレンダリングされるかを(2Dまたは3D世界で)定義します。Elementsはインタフェースのイメージ (Image) とテキスト (Text)コンポーネントを構成します。
 
 ## レイアウトとポジショニング

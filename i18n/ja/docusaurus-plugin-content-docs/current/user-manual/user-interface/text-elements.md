@@ -3,6 +3,13 @@ title: Text Elements
 description: フォント、簡易カラーマークアップ、配置、ローカライズされた文字列キーでテキスト要素を設定します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Font アセットを使用する Text Element を作成し、マークアップ、ローカライズ、配置、サイズ、文字間隔、不透明度を設定して、表示結果をキャプチャしてください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Screen と Text Element エンティティを作成し、Font アセットとローカライズキーを割り当て、マークアップとレイアウトを設定して、Editor ビューポートと起動したインターフェースの両方をキャプチャしてください。
+
+:::
+
 テキストエレメント (Text Element) は、[font asset](/user-manual/editor/assets/inspectors/font)を使用してテキスト文字列を表示するために使用されます。Fontアセットの作成方法（Editorで、またはスタンドアロンの font-tools で）については [Fonts](/user-manual/user-interface/fonts) を参照してください。
 
 ## テキスト (Text)

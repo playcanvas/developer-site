@@ -3,6 +3,13 @@ title: Fonts
 description: テキスト要素が必要とするMSDF Fontアセットを作成します。Editorで、またはEngine・React・Web Componentsプロジェクト向けのスタンドアロンツール font-tools で作成できます。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「Fonts」について、次の要件を満たしてください: テキスト要素が必要とするMSDF Fontアセットを作成します。Editorで、またはEngine・React・Web Componentsプロジェクト向けのスタンドアロンツール font-tools で作成できます ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Font アセットをアップロードし、アセットデータの確認や変更、参照の置換、削除、ダウンロードを開いているプロジェクトで行ってください。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

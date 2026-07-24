@@ -3,6 +3,14 @@ title: Preloading
 description: Configure asset preloading to ensure essential resources are ready before your PlayCanvas application starts.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Configure asset preloading to ensure essential resources are ready before your PlayCanvas application starts; inspect the resulting asset metadata, registry state, and references.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Preloading in the relevant asset-management scripts so it satisfies this requirement: configure asset preloading to ensure essential resources are ready before your PlayCanvas application starts; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and attach the scripts needed for Preloading so they satisfy this requirement: configure asset preloading to ensure essential resources are ready before your PlayCanvas application starts; launch the scene and inspect asset registry state, references, and runtime logs.
+
+:::
+
 On the web, it's critical to get users into your application as soon as possible. The PlayCanvas asset system provides preloading to ensure essential assets are ready before your application starts.
 
 ## The Preload Flag

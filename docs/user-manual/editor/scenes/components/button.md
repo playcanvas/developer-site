@@ -3,6 +3,12 @@ title: Button
 description: PlayCanvas Button component builds UI buttons under Screen and Element with tint or sprite-change transitions and input hit areas.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Button Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen](screen.md) and [Element](element.md) Components.
 
 The Button Component can be used in two Transition Modes. *Sprite Change*, which uses a different sprite or frame for each button state or *Tint*, which tints a single sprite with a different color for each state.

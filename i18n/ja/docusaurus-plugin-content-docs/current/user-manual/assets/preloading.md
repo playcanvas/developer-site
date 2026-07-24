@@ -3,6 +3,14 @@ title: プリロード
 description: PlayCanvas アプリケーション起動前に必要なリソースが用意されるよう、Asset のプリロードを設定します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「プリロード」について、次の要件を満たしてください: PlayCanvas アプリケーション起動前に必要なリソースが用意されるよう、Asset のプリロードを設定すること 変更後のアセットメタデータ、レジストリの状態、参照を確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するアセット管理スクリプトに「プリロード」を実装し、次の要件を満たしてください: PlayCanvas アプリケーション起動前に必要なリソースが用意されるよう、Asset のプリロードを設定すること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「プリロード」に必要なスクリプトを作成してアタッチし、次の要件を満たしてください: PlayCanvas アプリケーション起動前に必要なリソースが用意されるよう、Asset のプリロードを設定すること。シーンを起動して、Asset Registry の状態、参照、ランタイムログを確認してください。
+
+:::
+
 Web では、ユーザーをできるだけ早くアプリケーションに誘導することが重要です。PlayCanvas のアセットシステムは、アプリケーション開始前に必要なアセットを確実に準備するためのプリロード機能を提供しています。
 
 ## プリロードフラグ

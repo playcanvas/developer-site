@@ -3,6 +3,14 @@ title: Runtime Lightmaps
 description: Bake HDR lightmaps at runtime, mix baked and dynamic lights, and configure lights for rebaking in your app.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Bake HDR lightmaps at runtime, mix baked and dynamic lights, and configure lights for rebaking in your app; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review runtime lightmap scripts locally in Pull/Push mode; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Runtime Lightmaps so the result satisfies this requirement: bake HDR lightmaps at runtime, mix baked and dynamic lights, and configure lights for rebaking in your app; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 ![Sponza](/img/user-manual/graphics/lighting/lightmapping/sponza.jpg)
 *All the lighting in this scene is provided by lightmap textures*
 

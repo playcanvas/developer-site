@@ -3,6 +3,13 @@ title: Assets
 description: Understand how PlayCanvas manages assets and resources including models, textures, audio, and scripts.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Use the `Asset` and `AssetRegistry` APIs to register, load, unload, and inspect the requested resources at runtime.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List the project assets, perform only the requested upload, move, duplicate, reimport, or metadata change, then inspect the resulting asset record and references.
+
+:::
+
 Assets are the building blocks of your PlayCanvas application. They represent all the external resources your application needs, such as 3D models, textures, audio files, and scripts.
 
 ## Assets vs Resources

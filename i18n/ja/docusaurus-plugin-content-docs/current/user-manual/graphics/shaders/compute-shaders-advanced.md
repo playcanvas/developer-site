@@ -3,6 +3,14 @@ title: コンピュートシェーダー（応用）
 description: "WebGPU コンピュートシェーダーのバインドグループ手動制御：手書きの computeBindGroupFormat、明示的なバインディング、反映リソースとの混在。"
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「コンピュートシェーダー（応用）」について、次の要件を満たしてください: WebGPU コンピュートシェーダーのバインドグループ手動制御：手書きの computeBindGroupFormat、明示的なバインディング、反映リソースとの混在 アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「コンピュートシェーダー（応用）」を実装し、次の要件を満たしてください: WebGPU コンピュートシェーダーのバインドグループ手動制御：手書きの computeBindGroupFormat、明示的なバインディング、反映リソースとの混在。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認してください。
+
+:::
+
 ほとんどのコンピュートシェーダーでは、[コンピュートシェーダー](/user-manual/graphics/shaders/compute-shaders) のページで説明している簡略化された構文だけで十分です。WGSL でリソースを宣言すれば、エンジンが自動的に反映します。
 
 このページでは、バインドグループの **手動** 制御について説明します。これは現在も完全にサポートされています。リソースを記述する `computeBindGroupFormat`（および必要に応じて `computeUniformBufferFormats`）を自分で指定し、WGSL に明示的な `@group`/`@binding` インデックスを記述します。次のような場合に使用します：

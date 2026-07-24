@@ -3,6 +3,14 @@ title: コンソールロギング
 description: console.log、console.warn、console.error などブラウザのコンソールで PlayCanvas の Script をデバッグします。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「コンソールロギング」について、次の要件を満たしてください: console.log、console.warn、console.error などブラウザのコンソールで PlayCanvas の Script をデバッグすること アプリケーションを起動して変更した動作を実行し、コンソール出力またはランタイム状態を確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトとテキストアセットに「コンソールロギング」を実装し、次の要件を満たしてください: console.log、console.warn、console.error などブラウザのコンソールで PlayCanvas の Script をデバッグすること。Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「コンソールロギング」に必要なスクリプトを作成、アタッチ、設定し、次の要件を満たしてください: console.log、console.warn、console.error などブラウザのコンソールで PlayCanvas の Script をデバッグすること。シーンを起動して動作を実行し、コンソール出力またはランタイム状態を確認してください。
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

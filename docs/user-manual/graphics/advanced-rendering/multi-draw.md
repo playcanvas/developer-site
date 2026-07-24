@@ -3,6 +3,14 @@ title: Multi-Draw
 description: Single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Multi-Draw; required behavior and constraints: Single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Multi-Draw in the relevant script or shader assets so the result satisfies this requirement: single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Multi-Draw so the result satisfies this requirement: single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 Multi-draw is a rendering technique that lets the engine submit multiple sub-draws with a single API call. Multiple geometries are combined into a single Mesh and rendered through a single MeshInstance, with each sub-draw targeting a different portion of the combined geometry. This reduces CPU overhead and improves performance when rendering many sub-meshes that share the same material and render state.
 
 ## Use Cases

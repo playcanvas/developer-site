@@ -3,6 +3,12 @@ title: Importing 3D Models
 description: Import GLB, FBX, COLLADA, and OBJ models into PlayCanvas and convert them into ready-to-use Templates and Render assets.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Upload the model source, inspect the generated Template, Render, Material, and Texture assets, and confirm the imported hierarchy.
+
+:::
+
 3D models and animations are imported into PlayCanvas by uploading scene files from a [3D modeling application](/user-manual/assets/models/building) such as [Blender](https://www.blender.org/), 3D Studio Max or Maya.
 
 PlayCanvas supports a wide variety of formats, such as glTF binary (GLB), FBX, COLLADA and obj. We recommend using the GLB format for best results.

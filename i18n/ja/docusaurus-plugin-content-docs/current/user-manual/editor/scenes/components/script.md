@@ -3,6 +3,13 @@ title: Script
 description: PlayCanvas の Script Component は、load、update、カスタムゲームプレイロジックのために Entity 上で動かす JavaScript または TypeScript の Script をアタッチします。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Script Component の追加、解析済みスクリプトアセットのアタッチ、属性の設定を行ってください。 シーンを起動し、スクリーンショット、ランタイム状態、またはログで Component を確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Editor へアタッチする前にスクリプトファイルをローカル編集してください。 Push の前に完全な差分と診断を確認してください。
+
+:::
+
 Scriptコンポーネントは、エンティティがユーザー提供のスクリプトを実行することを可能にします。これにより、ユーザーはJavaScriptまたはTypeScriptを使用してスクリプトを作成し、エンティティがインスタンス化されたときやフレームごとに更新されるときに実行できます。
 
 ![Script Component](/img/user-manual/editor/scenes/components/component-script.png)

@@ -3,6 +3,12 @@ title: Camera Color
 description: Accessing the AR camera color texture in PlayCanvas for pass-through compositing, session options, and runtime support checks.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Camera Color; required behavior and constraints: Accessing the AR camera color texture in PlayCanvas for pass-through compositing, session options, and runtime support checks; run it in a supported XR session, exercise the documented interaction, and report runtime logs and observed behavior.
+
+:::
+
 In AR, the rendered image is projected over the reconstructed camera texture on the pass-through device types. This texture can be accessed by the application.
 
 To request access to the camera color, the session should be started with an extra flag:

@@ -3,6 +3,12 @@ title: Override Diff View
 description: Uses Override Diff View to inspect template overrides individually apply them to parent templates or revert unwanted changes.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect template override differences and apply or revert selected overrides; read the changed project state back and capture or launch the result when it is visual or interactive.
+
+:::
+
 The Override Diff View shows a detailed list of all the Template Overrides for a Template Instance. In here you can compare the overridden value to the value in the Template Asset and you can select which overrides to apply or revert.
 
 ![Diff View](/img/user-manual/editor/templates/diff.png)

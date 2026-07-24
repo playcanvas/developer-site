@@ -3,6 +3,12 @@ title: Texture Atlas
 description: Texture Atlas Asset は、テクスチャ上に矩形・ピボット・ボーダーを持つ名前付きフレームと、Sprite ワークフロー向けの共通テクスチャ設定を定義します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture から Texture Atlas アセットを作成し、フレームを設定して、開いているプロジェクトの Sprite アセットで使用してください。 変更後のアセットメタデータ、レジストリの状態、参照を確認してください。
+
+:::
+
 テクスチャアトラス (Texture Atlas) とは、テクスチャ内の「フレーム」(Frames) を記述する補足データをともなうTextureアセットです。フレームは、テクスチャ内で定義された領域で「ピボット」(Pivot) ポイントのある長方形として表示されます。ピボットポイントはフレームの位置および回転の中心を設定します。
 
 テクスチャアトラスは、通常のテクスチャアセットを右クリックして**Create Atlas**を選択することで作成されます。またはデフォルトのアセットのインポート設定を変更し、[Create Atlases](/user-manual/editor/interface/settings/asset-import/)を有効化します。

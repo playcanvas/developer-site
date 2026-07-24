@@ -3,6 +3,13 @@ title: Compound
 description: 子 Entity のプリミティブなコリジョンシェイプを組み合わせ、動的な rigid body 用の compound コライダーを作ります。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「Compound」について、次の要件を満たしてください: 子 Entity のプリミティブなコリジョンシェイプを組み合わせ、動的な rigid body 用の compound コライダーを作ります アプリケーションを起動して動作を実行し、位置、衝突、ランタイムログを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「Compound」に必要な Collision、Rigidbody、スクリプトデータを設定し、次の要件を満たしてください: 子 Entity のプリミティブなコリジョンシェイプを組み合わせ、動的な rigid body 用の compound コライダーを作ります。シーンを起動して動作を実行し、ランタイム状態またはログを確認してください。
+
+:::
+
 複合形状 (Compound) とは、複数のプリミティブ形状（[形状のリストはこちら](/user-manual/physics/physics-basics/#rigid-bodies)）から作られたカスタムコリジョン形状です。これにより、カスタムメッシュモデルを使用せずに、より複雑なコリジョン形状を作成できます。
 
 最大の利点は、メッシュコリジョン形状では不可能な動的なRigidBodyのコリジョンをコンパウンド間で行えることです(下記のように表示)。

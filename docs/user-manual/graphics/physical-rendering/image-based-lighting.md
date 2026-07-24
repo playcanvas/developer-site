@@ -3,6 +3,13 @@ title: Image Based Lighting
 description: Image-based lighting with HDR cubemaps, prefiltering for roughness, and authoring environment maps for realistic PBR.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Image Based Lighting; required behavior and constraints: Image-based lighting with HDR cubemaps, prefiltering for roughness, and authoring environment maps for realistic PBR; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Image Based Lighting so the result satisfies this requirement: image-based lighting with HDR cubemaps, prefiltering for roughness, and authoring environment maps for realistic PBR; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 To get best results with Physically Based Rendering in PlayCanvas you can use the technique called Image Based Lighting or IBL, it allows you to use pre-rendered image data as source information for ambient and reflection light.
 
 This technique relies on [CubeMap](/user-manual/editor/assets/inspectors/cubemap/) - the environment map that is made of 6 textures (faces) forming a cube to have full surround texture coverage.

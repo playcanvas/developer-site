@@ -4,6 +4,13 @@ sidebar_label: 階層とトランスフォーム
 description: 親子 Entity の階層と、ローカル座標およびワールド座標での位置・回転・スケールの変換です。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 必要な親子階層を作成し、ローカルとワールドの位置、回転、スケールを変更して、変更後の Transform が正しいことを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** エンティティ階層を確認し、Transform を維持して親を変更し、位置、回転、スケールを変更してください。
+
+:::
+
 エンティティは **親子階層** に配置できます。`Entity` クラスは、[`GraphNode`](https://api.playcanvas.com/engine/classes/GraphNode.html) スーパークラスからトランスフォーム機能を継承しています。
 
 ## 要点

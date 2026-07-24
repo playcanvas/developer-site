@@ -3,6 +3,13 @@ title: アセットパネル
 description: Assets パネルでフォルダを整理し、Asset をアップロード・作成し、テキスト Asset を Script Editor で開き、プロパティを確認します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** アセットをアップロード、移動、複製、置換、再インポート、ダウンロードしてください。 変更後のアセットメタデータ、レジストリの状態、参照を確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 確認済みのプロジェクトアセットを `.pc/assets` 内のローカル JSON ドキュメントとして公開してください。
+
+:::
+
 アセットパネルは、プロジェクトで利用可能なすべてのアセットを管理します。ここから、アセットの作成、アップロード、削除、検査、編集を行うことができます。
 
 ![アセットパネル](/img/user-manual/editor/assets-panel.png)

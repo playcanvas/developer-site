@@ -3,6 +3,13 @@ title: Loading Scenes
 description: Learn to call SceneRegistry changeScene and additive load APIs, split hierarchy versus settings loads, and detect completion with callbacks or events.
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Edit and review scene-loading scripts locally in Pull/Push mode; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write and attach those scripts, list or load Editor scenes, and launch the application to inspect logs and runtime state.
+
+:::
+
 This page covers how to load scenes programmatically and different approaches for using scenes in your projects.
 
 There are two main approaches: changing scenes completely and loading scenes additively.

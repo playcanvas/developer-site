@@ -3,6 +3,12 @@ title: Scroll View
 description: PlayCanvas Scroll View component creates a masked, inertial scrolling viewport for UI content with optional horizontal and vertical bars.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Scroll View Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Scroll View Component defines a scrollable area in a user interface. A Scroll View can be scrolled via [Scrollbar](scrollbar.md) Components.
 
 See the [User Interface](/user-manual/user-interface) section for more details.

@@ -3,6 +3,12 @@ title: 機能
 description: PlayCanvasでサポートされるWebXRモジュール。アンカー、深度、ハンドトラッキング、ヒットテスト、メッシュと平面検出など関連機能を含みます。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 各対象デバイスでアプリケーションに必要な WebXR モジュールを検出し、対応機能だけを有効化して、結果の機能マトリクスを報告してください。
+
+:::
+
 WebXRは、さまざまな機能と新しいAPIをモジュールを通じて公開しており、これらは使いやすさのためにPlayCanvas Engineに統合されています。
 
 一部の機能は[VR](/user-manual/xr/vr/)または[AR](/user-manual/xr/ar/)で使用でき、一部はあらゆる没入型体験に共通です。

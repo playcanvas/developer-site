@@ -3,6 +3,13 @@ title: Depth Layer
 description: Capture scene color and depth buffers on a camera layer for shaders, script requests, and correct linear or gamma scene color.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Capture scene color and depth buffers on a camera layer for shaders, script requests, and correct linear or gamma scene color; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Depth Layer so the result satisfies this requirement: capture scene color and depth buffers on a camera layer for shaders, script requests, and correct linear or gamma scene color; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 Some rendering techniques require access to the depth or the color buffer of the scene for a specific camera. The Depth Layer is a special layer, which can be added to the `layers` property of a camera. The [`order`](/user-manual/graphics/layers/#choosing-the-layer-order) of the layers defines at which point during the rendering, the depth or the color buffer is captured. The captured buffers can then be used in the following layers of the camera.
 
 Typically, those buffers are captured after all opaque layers are rendered and can be used in following transparent layers or post-processing.

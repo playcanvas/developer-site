@@ -3,6 +3,12 @@ title: Rigid Body
 description: PlayCanvas Rigid Body component adds static, dynamic, or kinematic physics simulation to an entity when combined with a Collision shape.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Rigid Body Components, configure their properties on entities, and launch or capture the scene to verify them.
+
+:::
+
 The Rigid Body Component enables an entity to participate in the scene's physics simulation. This allows the movement of an entity to be simulated realistically. The component interface dynamically displays different attributes based on the 'Type' attribute.
 
 #### Static

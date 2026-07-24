@@ -3,6 +3,12 @@ title: Graph View
 description: 展開可能なチェックポイントグラフでノードを比較し、復元、ハードリセット、バージョン履歴からのメタデータのコピーを扱います。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** ブランチとチェックポイントを一覧表示し、チェックポイントの詳細確認とグラフ上のチェックポイント比較を行ってください。
+
+:::
+
 ## 概要
 
 バージョンコントロールグラフ (Version Control Graph) は、PlayCanvasプロジェクトのブランチの進捗状況やマージ履歴を追跡することが容易になります。

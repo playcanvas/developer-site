@@ -3,6 +3,13 @@ title: パーティクル
 description: Editor でパーティクルシステムを作成・調整し、Script から起動し、Scene の深度でソフトパーティクルを使います。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「パーティクル」について、次の要件を満たしてください: Editor でパーティクルシステムを作成・調整し、Script から起動し、Scene の深度でソフトパーティクルを使います アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Particle System Component と参照アセットを作成、設定し、エフェクトを起動またはキャプチャしてください。
+
+:::
+
 PlayCanvasはパーティクルシステムの作成と編集のための包括的なサポートを提供します。
 
 ## パーティクルシステム (ParticleSystem) とは？

@@ -3,6 +3,13 @@ title: Textures
 description: Mark color textures as sRGB in assets and code, including procedural targets, so sampling stays physically correct.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Mark color textures as sRGB in assets and code, including procedural targets, so sampling stays physically correct; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Textures so the result satisfies this requirement: mark color textures as sRGB in assets and code, including procedural targets, so sampling stays physically correct; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 ### sRGB Texture Handling  
 
 Textures that represent colors, such as Diffuse, Emissive, Specular, and Sheen, are typically stored in sRGB space to maintain color accuracy and reduce banding. When used by the engine, these textures are automatically converted from sRGB to linear space for correct lighting calculations. This conversion is performed by the GPU efficiently at no extra cost, provided that the texture is created using an sRGB format.  

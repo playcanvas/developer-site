@@ -3,6 +3,12 @@ title: Scrollbar
 description: PlayCanvas の Scrollbar Component は、関連する Scroll View Component のスクロール位置を駆動するドラッグ可能なハンドル Element を提供します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Scrollbarをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
+
+:::
+
 Scrollbarコンポーネントは、[Scroll View](scrollview.md)コンポーネント用のスクロールコントロールを定義します。
 
 詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。

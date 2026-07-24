@@ -3,6 +3,13 @@ title: Compound Shapes
 description: Combine primitive collision shapes on child entities into compound colliders for dynamic rigid bodies.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Compound Shapes; required behavior and constraints: Combine primitive collision shapes on child entities into compound colliders for dynamic rigid bodies; launch the application, exercise the behavior, and inspect positions, collisions, or runtime logs.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the Collision, Rigidbody, and script data needed for Compound Shapes so it satisfies this requirement: combine primitive collision shapes on child entities into compound colliders for dynamic rigid bodies; launch the scene, exercise the behavior, and inspect runtime state or logs.
+
+:::
+
 Compound shapes are custom collision shapes created out of multiple primitive shapes ([full list of shapes here](/user-manual/physics/physics-basics/#rigid-bodies)). This allows you to have more complex collision shapes without using a custom mesh model.
 
 The main advantage is that you are able to have dynamic rigidbody collisions between compound shapes (shown below) which is not possible with mesh collision types.

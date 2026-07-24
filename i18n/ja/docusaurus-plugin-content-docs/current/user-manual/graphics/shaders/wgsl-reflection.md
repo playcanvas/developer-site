@@ -3,6 +3,14 @@ title: WGSL リフレクション
 description: "手動の bind group なしの簡略化された WGSL 宣言：PlayCanvas がシェーダーソースからリソースを反映しバインディングを割り当てる方法。"
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「WGSL リフレクション」について、次の要件を満たしてください: 手動の bind group なしの簡略化された WGSL 宣言：PlayCanvas がシェーダーソースからリソースを反映しバインディングを割り当てる方法 アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「WGSL リフレクション」を実装し、次の要件を満たしてください: 手動の bind group なしの簡略化された WGSL 宣言：PlayCanvas がシェーダーソースからリソースを反映しバインディングを割り当てる方法。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認してください。
+
+:::
+
 PlayCanvas は WGSL シェーダーのソースからリソースを直接反映（リフレクト）します。ユニフォーム、テクスチャ、ストレージバッファを `@group`/`@binding` インデックスなしで宣言すると、エンジンがこれらの宣言を解析し、バインドグループ形式を構築してバインディングを自動的に割り当てます。この簡略化された構文は、頂点・フラグメント・コンピュートシェーダーで使用されます。
 
 以下のセクションでは、リソースの宣言と反映の方法を説明します。頂点／フラグメント固有の構文（属性、バリイング、フラグメント出力）については、[WGSL 頂点・フラグメントシェーダー](/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders) を参照してください。

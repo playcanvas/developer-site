@@ -3,6 +3,13 @@ title: Layout Groups
 description: Automate child element placement with horizontal, vertical, or grid layouts using Layout Group components.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Layout Groups; required behavior and constraints: Automate child element placement with horizontal, vertical, or grid layouts using Layout Group components; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the Screen, Element, Sprite, or atlas data needed for Layout Groups so it satisfies this requirement: automate child element placement with horizontal, vertical, or grid layouts using Layout Group components; capture the viewport and launched interface.
+
+:::
+
 The Layout Group Component is used to automatically set the position and size of child Elements. A Layout Group Component can be used to align child elements into vertical or horizontal columns or a grid. A Layout Group Component applies the layout rules to all its direct children, you can override the Layout Group rules on a single child using a Layout Child Component.
 
 The Layout Group Component can be used to generate common layouts, for example, a [grid](/user-manual/user-interface/layout-groups#grid), a fixed width [vertical column](/user-manual/user-interface/layout-groups#vertical-leaderboard), or [horizontal row](/user-manual/user-interface/layout-groups#horizontal-buttons).

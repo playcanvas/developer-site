@@ -3,6 +3,14 @@ title: スクリプト属性
 description: PlayCanvas Scriptに設定可能なパラメータを公開し、EditorのInspectorまたはコードから利用します。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「スクリプト属性」について、次の要件を満たしてください: PlayCanvas Scriptに設定可能なパラメータを公開し、EditorのInspectorまたはコードから利用すること アプリケーションを起動して変更した動作を実行し、コンソール出力またはランタイム状態を確認してください。
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトとテキストアセットに「スクリプト属性」を実装し、次の要件を満たしてください: PlayCanvas Scriptに設定可能なパラメータを公開し、EditorのInspectorまたはコードから利用すること。Push の前に完全な差分と診断を確認してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「スクリプト属性」に必要なスクリプトを作成、アタッチ、設定し、次の要件を満たしてください: PlayCanvas Scriptに設定可能なパラメータを公開し、EditorのInspectorまたはコードから利用すること。シーンを起動して動作を実行し、コンソール出力またはランタイム状態を確認してください。
+
+:::
+
 スクリプト属性は、PlayCanvasの強力な機能であり、スクリプトのパブリックで設定可能なインターフェースを定義します。これらを使用すると、コードでスクリプトをインスタンス化または設定する際にプログラムで、あるいは[PlayCanvas Editor](../../editor/index.md)内で視覚的に、簡単に調整できる特定のパラメーターを公開できます。これは、スクリプトを一度書けば、異なるインスタンスや異なるチームメンバーによって、その動作やプロパティを簡単に調整できることを意味します。
 
 ## スクリプト属性を使用する理由

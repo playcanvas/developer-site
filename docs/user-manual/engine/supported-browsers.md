@@ -3,6 +3,12 @@ title: Supported Browsers
 description: Minimum browser versions required for PlayCanvas including Chrome, Safari, Firefox, Edge, and Opera with WebGL 2.0 and WebGPU support.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Run the application in the minimum supported browser versions, verify WebGL 2.0 or WebGPU initialization, and record browser-specific console or rendering failures.
+
+:::
+
 The PlayCanvas Engine requires a browser with [WebGL 2.0](https://en.wikipedia.org/wiki/WebGL#WebGL_2) support. The minimum browser versions are:
 
 | Browser                                     | Version | Win | macOS | Linux | Chrome OS | Android | iOS |

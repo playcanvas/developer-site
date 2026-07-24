@@ -4,6 +4,13 @@ sidebar_label: Input
 description: PlayCanvas アプリケーションでキーボード、マウス、タッチ、ゲームパッドの入力処理を有効または無効にします。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** `.pc/settings.json` の「入力設定」に関係する値だけを編集し、次の要件を満たしてください: PlayCanvas アプリケーションでキーボード、マウス、タッチ、ゲームパッドの入力処理を有効または無効にすること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在の「入力設定」の値を読み取り、次の要件に必要な値だけを変更してください: PlayCanvas アプリケーションでキーボード、マウス、タッチ、ゲームパッドの入力処理を有効または無効にすること。値を再取得し、ランタイムに影響する場合はプロジェクトを起動してください。
+
+:::
+
 アプリケーションの入力デバイス処理を有効／無効にします。
 
 :::note

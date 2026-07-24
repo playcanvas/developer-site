@@ -3,6 +3,12 @@ title: PlayCanvas で WebXR を使用する
 description: WebXRのサポートを検出し、ユーザー入力からVRとARセッションを開始し、カメラComponentとXrManagerでセッションを設定します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「PlayCanvas で WebXR を使用する」について、次の要件を満たしてください: WebXRのサポートを検出し、ユーザー入力からVRとARセッションを開始し、カメラComponentとXrManagerでセッションを設定すること 対応する XR セッションで実行し、記載された操作を試して、ランタイムログと観察結果を報告してください。
+
+:::
+
 ## サポート
 
 WebXR のブラウザサポートは（まだ）普遍的ではありません。以下のように確認できます：

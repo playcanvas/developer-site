@@ -3,6 +3,14 @@ title: モダンなポストプロセス
 description: "CameraFrame HDR スタック：ブルーム、SSAO、TAA、被写界深度、グレーディング、例、およびカスタマイズの入口。"
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「モダンなポストプロセス」について、次の要件を満たしてください: CameraFrame HDR スタック：ブルーム、SSAO、TAA、被写界深度、グレーディング、例、およびカスタマイズの入口 アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「モダンなポストプロセス」を実装し、次の要件を満たしてください: CameraFrame HDR スタック：ブルーム、SSAO、TAA、被写界深度、グレーディング、例、およびカスタマイズの入口。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトで「モダンなポストプロセス」を設定し、次の要件を満たしてください: CameraFrame HDR スタック：ブルーム、SSAO、TAA、被写界深度、グレーディング、例、およびカスタマイズの入口。シーンを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+
+:::
+
 PlayCanvas では、視覚的に高度でパフォーマンスのよいモダンなポストプロセスのワークフローを提供しています。主な方法は、組み込みエフェクト付きの HDR ポストプロセスに [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) クラスを使うことですが、完全な制御のために独自のレンダーパスを作成することもできます。
 
 ## 機能

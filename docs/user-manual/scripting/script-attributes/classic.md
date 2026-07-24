@@ -3,6 +3,14 @@ title: Classic Reference
 description: Reference for Classic Script Attributes including type declarations and Editor integration for legacy scripts.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Add the requested Classic Script attributes with the documented types and Editor options, then verify their parsed values at runtime.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Classic Reference in the relevant script and text assets so it satisfies this requirement: reference for Classic Script Attributes including type declarations and Editor integration for legacy scripts; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for Classic Reference so they satisfy this requirement: reference for Classic Script Attributes including type declarations and Editor integration for legacy scripts; launch the scene, exercise the behavior, and inspect console output or runtime state.
+
+:::
+
 :::note
 
 This page documents Script Attributes for the deprecated **Classic Scripts** system.

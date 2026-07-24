@@ -3,6 +3,12 @@ title: PlayCanvas Hosting
 description: Explains publishing builds to playcanvas.com, choosing primary builds, and configuring build options like minification and maps.
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** List, create, inspect, and delete published builds; read the changed project state back and capture or launch the result when it is visual or interactive.
+
+:::
+
 The fastest, easiest, most convenient way to publish your game is to publish it to playcanvas.com.
 
 Publishing to PlayCanvas consists of two simple steps:

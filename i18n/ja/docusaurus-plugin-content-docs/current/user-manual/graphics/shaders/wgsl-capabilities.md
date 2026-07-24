@@ -3,6 +3,14 @@ title: WGSL ケイパビリティ
 description: "デバイス依存の任意の WGSL 機能：半精度型と WGSL 言語拡張、およびそれらの CAPS_* 定義。"
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「WGSL ケイパビリティ」について、次の要件を満たしてください: デバイス依存の任意の WGSL 機能：半精度型と WGSL 言語拡張、およびそれらの CAPS_* 定義 アプリケーションを起動して表示結果をキャプチャし、シェーダーまたはレンダリングのコンソールエラーを確認してください。
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** 関連するスクリプトまたはシェーダーアセットに「WGSL ケイパビリティ」を実装し、次の要件を満たしてください: デバイス依存の任意の WGSL 機能：半精度型と WGSL 言語拡張、およびそれらの CAPS_* 定義。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Shader アセットのテキストを読み取りまたは上書きし、それを使用するエンティティを設定して、シーンの起動やキャプチャでレンダリングを確認してください。
+
+:::
+
 このページでは、デバイスのサポートに依存する任意の WGSL 機能について説明します。エンジンは各ケイパビリティを `device.supports*` フラグと対応する `CAPS_*` プリプロセッサ定義で公開し、必要に応じて `enable …;` / `requires …;` ディレクティブを生成される WGSL に注入します。これらの機能は頂点・フラグメント・コンピュートシェーダーにわたって利用できます。
 
 ### 半精度型 {#half-precision-types}

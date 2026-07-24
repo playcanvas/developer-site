@@ -3,6 +3,14 @@ title: Legacy Post Effects
 description: Attach legacy script post effects to camera entities, order passes, and fetch ready-made effects from the engine repo.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Legacy Post Effects features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Legacy Post Effects in the relevant script or shader assets so the result satisfies this requirement: attach legacy script post effects to camera entities, order passes, and fetch ready-made effects from the engine repo; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Legacy Post Effects so the result satisfies this requirement: attach legacy script post effects to camera entities, order passes, and fetch ready-made effects from the engine repo; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 PlayCanvas provides legacy script-based post effects that are still supported and functional. While many of these effects now have newer, more performant replacements in [CameraFrame](/user-manual/graphics/posteffects/cameraframe), they remain available for use.
 
 ## Setup

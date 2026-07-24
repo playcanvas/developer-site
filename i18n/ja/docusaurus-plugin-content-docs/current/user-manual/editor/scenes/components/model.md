@@ -3,6 +3,12 @@ title: Model (Legacy)
 description: 非推奨のレガシー Model Component はプリミティブまたは単一の model Asset をレンダリングします。新規作業には Render Component を推奨します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Model (Legacy)をエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
+
+:::
+
 :::warning
 
 Modelコンポーネントは非推奨です。これは[Render](render.md)コンポーネントに置き換えられました。

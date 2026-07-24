@@ -3,6 +3,13 @@ title: ユーザインターフェース
 description: ScreenとElement Componentでキャンバス内UIを選ぶか、HTMLとCSSを使うか、パフォーマンスのトレードオフを比較します。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「ユーザインターフェース」について、次の要件を満たしてください: ScreenとElement Componentでキャンバス内UIを選ぶか、HTMLとCSSを使うか、パフォーマンスのトレードオフを比較すること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 「ユーザインターフェース」に必要な Screen、Element、Sprite、または Atlas データを作成、設定し、次の要件を満たしてください: ScreenとElement Componentでキャンバス内UIを選ぶか、HTMLとCSSを使うか、パフォーマンスのトレードオフを比較すること。ビューポートと起動したインターフェースをキャプチャしてください。
+
+:::
+
 ユーザインターフェイスは、グラフィカルアプリケーション固有の課題です。PlayCanvasにはユーザインタフェースを構築するためのいくつかのオプションがあります。
 
 ## ScreenコンポーネントとElementコンポーネント(推奨)

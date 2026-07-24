@@ -3,6 +3,14 @@ title: Console Logging
 description: Debug PlayCanvas scripts with console.log, console.warn, console.error, and other browser console methods.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Debug PlayCanvas scripts with console.log, console.warn, console.error, and other browser console methods; launch the application, exercise the changed behavior, and inspect console output or runtime state.
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Console Logging in the relevant script and text assets so it satisfies this requirement: debug PlayCanvas scripts with console.log, console.warn, console.error, and other browser console methods; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Write, attach, and configure the scripts needed for Console Logging so they satisfy this requirement: debug PlayCanvas scripts with console.log, console.warn, console.error, and other browser console methods; launch the scene, exercise the behavior, and inspect console output or runtime state.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

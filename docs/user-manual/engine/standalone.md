@@ -3,6 +3,12 @@ title: Using the Engine Standalone
 description: Build PlayCanvas applications without the Editor using npm, a CDN, or a direct script include.
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** Create the Vite/npm or import-map project shown here, start it locally, and verify that the rotating box renders without browser console errors.
+
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

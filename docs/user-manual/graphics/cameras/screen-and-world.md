@@ -3,6 +3,13 @@ title: Screen and World Coordinates
 description: Convert between 2D screen positions and 3D world positions with screenToWorld and worldToScreen for picking, placement, and UI.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Convert between 2D screen positions and 3D world positions with screenToWorld and worldToScreen for picking, placement, and UI; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Screen and World Coordinates so the result satisfies this requirement: convert between 2D screen positions and 3D world positions with screenToWorld and worldToScreen for picking, placement, and UI; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 A camera defines the mapping between the 3D world and the 2D screen, and the [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) exposes that mapping in both directions. This is the foundation for mouse picking, placing objects under the cursor, and anchoring 2D UI to 3D objects. The same code works in every workflow — these are runtime API calls made from your scripts.
 
 ## Screen to World {#screen-to-world}

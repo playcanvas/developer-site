@@ -3,6 +3,12 @@ title: Hierarchy Panel
 description: Hierarchy techniques for smart search entity lifecycle reparent transforms duplication and cross-scene paste with asset rematching when folder paths align.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Search, create, duplicate, reparent, select, modify, and delete entities in the open scene; read the changed project state back and capture or launch the result when it is visual or interactive.
+
+:::
+
 ![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.png)
 
 The Hierarchy panel shows you a tree view of your entire Scene which is made up from a hierarchy of Entities. A Scene will always contain the Root Entity at the top of the tree. All the other Entities you see here on the right have been added by the developer.

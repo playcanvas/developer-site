@@ -3,6 +3,13 @@ title: Clearing
 description: Control how a camera clears its render target — set the background color, make the canvas transparent, or disable clearing entirely.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Control how a camera clears its render target — set the background color, make the canvas transparent, or disable clearing entirely; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Clearing so the result satisfies this requirement: control how a camera clears its render target — set the background color, make the canvas transparent, or disable clearing entirely; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 Before a camera renders the scene, it clears its render target — the screen, unless a [render target](multiple-cameras.md#render-targets) is assigned. You can control what gets cleared and to what color:
 
 ```javascript

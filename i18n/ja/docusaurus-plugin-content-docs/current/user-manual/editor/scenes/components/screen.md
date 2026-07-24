@@ -3,6 +3,12 @@ title: Screen
 description: PlayCanvas の Screen Component は、スクリーン空間またはワールド空間の UI 領域、解像度スケール、優先度、子 Element のルートを定義します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Screenをエンティティへ追加または削除し、プロパティを設定して、シーンの起動やキャプチャで確認してください。
+
+:::
+
 Screenコンポーネントは、ユーザーインターフェースの領域とレンダリングを定義します。Screenコンポーネントに追加された子要素はすべてElementコンポーネントを持つ必要があります。
 
 詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。

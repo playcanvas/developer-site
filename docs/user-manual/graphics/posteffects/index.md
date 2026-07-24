@@ -3,6 +3,14 @@ title: Post Effects
 description: Compare modern CameraFrame HDR post-processing with legacy script effects and find links to individual filters.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Post Effects features described here that match the requested outcome, and implement only those features; launch the application, capture the rendered result, and check the console for shader or rendering errors.
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Implement Post Effects in the relevant script or shader assets so the result satisfies this requirement: compare modern CameraFrame HDR post-processing with legacy script effects and find links to individual filters; review the complete diff and diagnostics before Push.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Configure the open project for Post Effects so the result satisfies this requirement: compare modern CameraFrame HDR post-processing with legacy script effects and find links to individual filters; launch the scene, capture the rendered result, and check the console for shader or rendering errors.
+
+:::
+
 PlayCanvas supports adding post-processing effects to your projects. Post effects modify the final rendered image and provide an easy way to add visual flair to your application.
 
 PlayCanvas offers two approaches to post-processing:

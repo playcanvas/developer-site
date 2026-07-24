@@ -4,6 +4,13 @@ sidebar_label: Localization
 description: Localization パネルの使い方。JSON の翻訳 Asset の登録、スターターファイルの作成、実行時の言語切り替えロジックの前にキーが UI の文字列にどう対応するかを説明します。
 ---
 
+:::ai
+
+- **[VS Code Extension](/user-manual/ai/vscode-extension/):** `.pc/settings.json` の「ローカライゼーション設定」に関係する値だけを編集し、次の要件を満たしてください: Localization パネルの使い方。JSON の翻訳 Asset の登録、スターターファイルの作成、実行時の言語切り替えロジックの前にキーが UI の文字列にどう対応するかを説明すること。Push の前に完全な差分と診断を確認してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 現在の「ローカライゼーション設定」の値を読み取り、次の要件に必要な値だけを変更してください: Localization パネルの使い方。JSON の翻訳 Asset の登録、スターターファイルの作成、実行時の言語切り替えロジックの前にキーが UI の文字列にどう対応するかを説明すること。値を再取得し、ランタイムに影響する場合はプロジェクトを起動してください。
+
+:::
+
 複数言語対応のための JSON ファイルを管理します。
 
 :::note

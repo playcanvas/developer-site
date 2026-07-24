@@ -3,6 +3,13 @@ title: MiniStats
 description: 開発中に Launch から MiniStats を有効化し、draw call、フレーム時間、CPU または GPU のグラフを表示します。
 ---
 
+:::ai
+
+* **[Engine Development](/user-manual/ai/developing-with-engine/):** 「MiniStats」について、次の要件を満たしてください: 開発中に Launch から MiniStats を有効化し、draw call、フレーム時間、CPU または GPU のグラフを表示すること 変更前後のプロファイラー、ロード、メモリ、またはフレーム時間の該当指標を測定してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** MiniStats を有効にして Launch し、実行中のアプリケーションをキャプチャーして、対象を絞った Editor の変更後に同じビューを再度キャプチャーし、draw call とフレーム時間を比較します。
+
+:::
+
 MiniStatsは、アプリケーションの主要なパフォーマンス統計情報を軽量なグラフィカルで表示するツールです。ドローコール数、フレームタイム、CPU負荷、および（サポートされている場合は）GPU負荷を表示します。
 
 エディターユーザーは、起動ボタンメニューからMiniStatsパネルを有効にできます。

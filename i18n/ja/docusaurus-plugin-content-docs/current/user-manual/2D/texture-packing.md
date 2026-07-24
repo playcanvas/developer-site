@@ -3,6 +3,13 @@ title: テクスチャパッキング
 description: サードパーティのテクスチャパッカーでPlayCanvas互換のアトラスを作り、ロード回数を減らしてバッチングします。
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「テクスチャパッキング」について、次の要件を満たしてください: サードパーティのテクスチャパッカーでPlayCanvas互換のアトラスを作り、ロード回数を減らしてバッチングすること ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture をアップロードし、Texture Atlas アセットと Atlas Frame を作成、設定して、それを使用する Sprite アセットを変更してください。 ビューポートと起動したインターフェースをキャプチャし、必要に応じてポインター入力を実行してください。
+
+:::
+
 ## テクスチャパッキングとは
 
 スプライトやUI画像を別々のイメージとしてバンドルすることは一般的です。テクスチャパッキングはこれらの別々の画像を[テクスチャアトラス](/user-manual/editor/assets/inspectors/texture-atlas/)に統合することです。

@@ -3,6 +3,13 @@ title: Screens
 description: Screen space versus world space rendering, resolutions, and scaling for PlayCanvas UI screens.
 ---
 
+:::ai
+
+- **[Engine Development](/user-manual/ai/developing-with-engine/):** Implement Screens; required behavior and constraints: Screen space versus world space rendering, resolutions, and scaling for PlayCanvas UI screens; capture the viewport and launched interface, exercising pointer input when relevant.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create screen entities, add and configure Screen Components, and capture the viewport or running application.
+
+:::
+
 The [Screen Component](/user-manual/editor/scenes/components/screen) defines the area that the User Interface is built inside. Its primary responsibility is to determine how the contents of the Screen (child Entities with Element components) are rendered.
 
 ## Screen space or world space

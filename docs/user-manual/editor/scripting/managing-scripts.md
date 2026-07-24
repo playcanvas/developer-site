@@ -3,6 +3,13 @@ title: Managing Your Scripts
 description: Creates organizes imports and assigns script assets to entities with practical editor Asset panel and Script component steps.
 ---
 
+:::ai
+
+* **[VS Code Extension](/user-manual/ai/vscode-extension/):** Create, rename, move, and edit script files locally; review the complete diff and diagnostics before Push.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create, edit, parse, and attach script assets directly in the open Editor project; read the changed project state back and capture or launch the result when it is visual or interactive.
+
+:::
+
 In the PlayCanvas Editor, your JavaScript code lives in Script Assets. These are `.js` or `.mjs` files stored within your project's Asset panel, just like your models, textures, and materials. Effectively managing these Script Assets is key to an organized and efficient workflow. This page covers how to create, organize, delete, import, and assign scripts using the Editor interface.
 
 Key Concepts:

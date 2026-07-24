@@ -3,6 +3,12 @@ title: Texture
 description: 画像がテクスチャ Asset にどうインポートされるか、形式変換と POT へのリサイズ、およびフィルター、ラップ、ミップマップ、プレビューの Inspector 項目を説明します。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Texture アセットをアップロード、再インポート、変換、ダウンロードし、Texture から Atlas や Cubemap を作成してください。 変更後のアセットメタデータ、レジストリの状態、参照を確認してください。
+
+:::
+
 テクスチャとは、[マテリアル](/user-manual/editor/assets/inspectors/material)に割り当てられ、グラフィカルなプリミティブに適用される画像のことです。
 
 ## テクスチャのインポート
