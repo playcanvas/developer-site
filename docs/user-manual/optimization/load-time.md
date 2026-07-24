@@ -6,6 +6,7 @@ description: Speed up startup with image formats, texture sizes, preload choices
 :::ai
 
 * **[Engine Development](/user-manual/ai/developing-with-engine/):** Speed up startup with image formats, texture sizes, preload choices, asset audits, gzip, and staged loading; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Audit preload assets, bundles, texture sizes, scripts, and settings; change the highest-impact issue, then build or launch the project and compare the loading evidence.
 
 :::
 

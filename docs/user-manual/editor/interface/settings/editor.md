@@ -4,6 +4,12 @@ description: Personal editor preference panels for grid snap zoom grab passes pr
 sidebar_label: Editor
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Read and change personal Editor preferences in the `user`, `projectUser`, or `session` settings, then read them back and capture the viewport when the result is visual.
+
+:::
+
 By default, the Editor is configured with settings that should suit the majority of users. However, in some circumstances, you may wish to modify the default behavior of the Editor.
 
 :::note

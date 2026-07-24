@@ -6,6 +6,7 @@ description: General tuning tips for scripts, draw calls, batching, shaders, lig
 :::ai
 
 * **[Engine Development](/user-manual/ai/developing-with-engine/):** Profile the application, identify the largest cost across scripts, draw calls, batching, shaders, lighting, textures, or post effects, change the highest-impact issue, and compare the relevant metric; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect scenes, assets, and settings, launch with Profiler or MiniStats, capture a baseline, make the highest-impact Editor change, and capture the same view again.
 
 :::
 

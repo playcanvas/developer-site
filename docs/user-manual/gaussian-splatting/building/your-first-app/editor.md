@@ -3,6 +3,12 @@ title: Using the Editor
 description: "Step-by-step: create a splat scene in the PlayCanvas Editor, import assets, and publish an interactive orbitable splat project."
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** After opening the target project manually, clear the starter scene, update rendering settings, upload the SOG and controls script, configure the GSplat and Camera entities, then launch, interact with, and capture the result.
+
+:::
+
 Let's build a simple Gaussian splat application step by step using the [PlayCanvas Editor](/user-manual/editor). We'll create a scene with an interactive 3D toy cat splat that you can rotate around.
 
 :::tip

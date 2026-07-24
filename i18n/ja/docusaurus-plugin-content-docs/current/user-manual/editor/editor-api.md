@@ -3,6 +3,12 @@ title: エディターAPI
 description: ベータの Editor API の例。DevTools や Violentmonkey の Script で Entity を自動化し、進化するオープンソースの editor-api リポジトリ上で UI を拡張します。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Entity、Asset、設定、Scene の検索や変更など、一度限りのプロジェクト自動化には MCP を使用してください。カスタム Editor UI やブラウザー Script が必要な場合は Editor API を使用します。
+
+:::
+
 :::warning
 
 エディターAPI はベータ機能です。ライブプロジェクトで使用する際は注意してください。

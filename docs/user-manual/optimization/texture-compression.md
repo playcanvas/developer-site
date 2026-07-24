@@ -3,6 +3,12 @@ title: Texture Compression
 description: Reduce VRAM and download size with Basis texture compression and runtime transcoding in the Editor.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Add or remove Basis, DXT, ETC, or PVR variants on selected Texture assets, inspect the resulting asset data, then launch and capture the application to verify visual quality.
+
+:::
+
 Texture data is stored in a device's video memory (or VRAM). It is important to ensure that your application does not exhaust VRAM as this can cause undesirable things like browser tab crashes.
 
 The Editor has the ability to apply lossy compression schemes to your textures to dramatically reduce the amount of VRAM used using Basis.

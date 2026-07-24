@@ -3,6 +3,12 @@ title: ローディング画面
 description: 生成または選択した Script によるローディング画面のカスタマイズ。アプリケーション起動から DOM の UI をレンダリングし、起動完了後にオーバーレイを隠す方法を含みます。
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** ローディング画面の Script を作成または更新してプロジェクト設定に割り当て、アプリケーションを Launch してキャプチャーし、ロード中と完了後の状態を検証します。
+
+:::
+
 新しく作成されたPlayCanvasプロジェクトはすべて、デフォルトのローディング画面を使用します。
 
 ![Default Loading Screen](/img/user-manual/editor/launch-page/loading-screen/loading-screen-default.webp)

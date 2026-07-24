@@ -3,6 +3,12 @@ title: Troubleshooting
 description: Fix Editor versus Launcher brightness gaps under Engine V1 or V2 by reconciling gamma tone mapping on scene viewport and cameras plus sRGB texture audits.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect scene, project, and Editor settings, cameras, textures, and Editor logs; launch and capture the application, then compare runtime output and logs.
+
+:::
+
 This is a list compiled of all the most commonly asked questions and answers for the Editor powered by Engine V2 for projects running Engine V1 or V2.
 
 ## 1. My scene looks brighter/darker in the Editor when it was powered by Engine V1 vs V2

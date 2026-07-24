@@ -3,6 +3,12 @@ title: Sketchfab
 description: Connect your Sketchfab account to the Editor to authenticate and import models from the Sketchfab store without leaving PlayCanvas.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** After connecting your Sketchfab account, search downloadable models, inspect their details and licenses, import one into the open project, and verify the resulting assets.
+
+:::
+
 The Asset Store is integrated with [Sketchfab](https://sketchfab.com/), the popular online platform for publishing, sharing, and discovering 3D, VR, and AR content. This integration gives you access to thousands of free, high-quality 3D models without having to leave the Editor.
 
 ![Sketchfab Store](/img/user-manual/assets/asset-store/sketchfab-store.png)

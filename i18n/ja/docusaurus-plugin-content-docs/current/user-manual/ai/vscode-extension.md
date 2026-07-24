@@ -5,23 +5,7 @@ description: VS Code Extension の Pull/Push モードを通じて、PlayCanvas 
 
 PlayCanvas VS Code Extension は、プロジェクトのテキストアセットをローカルファイルとして公開します。これにより、VS Code、Cursor、またはターミナルで実行する AI コーディングアシスタントがファイルを確認、編集できます。
 
-<div
-  role="img"
-  aria-label="VS Code Extension の Pull と Push の設定画面のスクリーンショット用プレースホルダー"
-  style={{
-    alignItems: 'center',
-    aspectRatio: '16 / 9',
-    background: 'var(--ifm-color-emphasis-100)',
-    border: '2px dashed var(--ifm-color-emphasis-300)',
-    borderRadius: 'var(--ifm-global-radius)',
-    color: 'var(--ifm-color-emphasis-600)',
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1.5rem'
-  }}
->
-  VS Code Extension の Pull/Push 設定画面のスクリーンショット
-</div>
+<!-- screenshot: vs code extension pull/push setup -->
 
 このガイドでは Pull/Push モードを使用します。アシスタントがマッピングされたテキストアセットを編集し、PlayCanvas プロジェクトへ反映するタイミングをユーザーが管理できます。続行する前に、[VS Code Extension のセットアップ](/user-manual/editor/scripting/vscode-extension/)を完了してください。
 
@@ -65,23 +49,7 @@ Pull/Push は、VS Code と Cursor のデスクトップ拡張機能で利用で
 
 ファイルを最後に同期したバージョンへ戻すには、そのファイルの破棄アクションを使用します。破棄の前に確認が表示されます。
 
-<div
-  role="img"
-  aria-label="VS Code Extension で差分とコンフリクトを確認する画面のスクリーンショット用プレースホルダー"
-  style={{
-    alignItems: 'center',
-    aspectRatio: '16 / 9',
-    background: 'var(--ifm-color-emphasis-100)',
-    border: '2px dashed var(--ifm-color-emphasis-300)',
-    borderRadius: 'var(--ifm-global-radius)',
-    color: 'var(--ifm-color-emphasis-600)',
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1.5rem'
-  }}
->
-  差分とコンフリクトの確認画面のスクリーンショット
-</div>
+<!-- screenshot: vs code extension diff and conflict review -->
 
 ## PlayCanvas と同期する
 

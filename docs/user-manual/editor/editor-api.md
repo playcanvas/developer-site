@@ -3,6 +3,12 @@ title: Editor API
 description: Beta Editor API examples using DevTools or Violentmonkey scripts to automate entities and extend UI atop the evolving open-source editor-api repository.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Use MCP for one-off project automation such as finding and modifying entities, assets, settings, and scenes; use the Editor API when you need custom Editor UI or browser scripts.
+
+:::
+
 :::warning
 
 The Editor API is a beta feature. Please use caution when using on live projects.

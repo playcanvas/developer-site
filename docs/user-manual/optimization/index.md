@@ -6,6 +6,7 @@ description: Why and how to optimize load time, frame rate, CPU, GPU load, and m
 :::ai
 
 - **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Optimization features described here that match the requested outcome, and implement only those features; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect the open project and launched application, capture a Profiler or MiniStats baseline when useful, make the highest-impact Editor change, and capture the same view again.
 
 :::
 
