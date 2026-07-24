@@ -3,7 +3,7 @@ title: Multiple Render Targets
 description: Configure multiple render targets, shared attachments rules, and shader output to several color buffers at once.
 ---
 
-The multiple render targets feature allows you to simultaneously render to multiple textures. This manual page explores implementation, configuration, and an example use case of multiple render targets.
+The multiple render targets feature allows you to simultaneously render to multiple textures. This manual page explores implementation, configuration, and an example use case of multiple render targets. It builds on the concepts covered in [Render Targets](./render-targets.md).
 
 MRT is supported on every device PlayCanvas runs on (WebGL2 and WebGPU). To detect the number of color attachments you can use on the current device, check [`GraphicsDevice.maxColorAttachments`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxcolorattachments). Typically, 8 attachments are supported.
 
@@ -41,6 +41,7 @@ const renderTarget = new pc.RenderTarget({
     name: 'MRT',
     colorBuffers: [texture0, texture1, texture2],
     depth: true,
+    origin: pc.RENDERTARGET_ORIGIN_TOP,
     samples: 2
 });
 ```
