@@ -34,6 +34,7 @@
     "faq": "node faq.js",
     "faq-to-json": "node faq_to_json.js --dir faq --out ../editor/static/json/howdoi.json",
     "generate-tutorial-data": "node utils/generate-tutorial-data.mjs",
+    "sync:supersplat-api": "node utils/sync-supersplat-api.mjs",
     "lint": "markdownlint-cli2 docs i18n .github/CONTRIBUTING.md README.md",
     "preview-llms": "node utils/plugins/llms/preview.mjs"
   },
@@ -60,6 +61,7 @@
     "raw-loader": "^4.0.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "redocusaurus": "^2.5.2",
     "sass": "^1.101.0",
     "sync-ammo": "^0.1.2",
     "ts-morph": "^28.0.0",

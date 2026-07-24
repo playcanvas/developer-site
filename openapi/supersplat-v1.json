@@ -1,0 +1,1669 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "SuperSplat API",
+        "version": "1.0.0",
+        "description": "Use this API to upload Gaussian splat scenes and list the scenes owned by the authenticated user.\n\nTypical upload flow:\n\n1. Create a resumable upload session with a source format and optional display metadata.\n2. Request signed URLs for the part numbers you want to upload, then PUT the bytes to those URLs.\n3. Complete the upload with the uploaded part ETags. The splat is created immediately and may remain in `processing` while processing finishes."
+    },
+    "tags": [
+        {
+            "name": "Account",
+            "description": "Caller identity."
+        },
+        {
+            "name": "Splats",
+            "description": "List and inspect splats owned by the authenticated user."
+        },
+        {
+            "name": "Uploads",
+            "description": "Create and complete resumable splat uploads."
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://playcanvas.com/api/supersplat"
+        }
+    ],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "paths": {
+        "/v1/me": {
+            "get": {
+                "tags": ["Account"],
+                "summary": "Get the authenticated caller",
+                "description": "Returns the authenticated caller identity.",
+                "operationId": "getMe",
+                "responses": {
+                    "200": {
+                        "description": "Authenticated caller",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Me"
+                                },
+                                "examples": {
+                                    "currentUser": {
+                                        "summary": "Authenticated caller",
+                                        "value": {
+                                            "id": "123",
+                                            "username": "artist"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/splats": {
+            "get": {
+                "tags": ["Splats"],
+                "summary": "List splats owned by the authenticated caller",
+                "description": "Returns a paginated list of splats owned by the authenticated user. The response uses `visibility`; there is no separate `listed` boolean in this API.",
+                "operationId": "listSplats",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "description": "Maximum number of splats to return.",
+                            "examples": [50],
+                            "default": 50,
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 128
+                        },
+                        "description": "Maximum number of splats to return."
+                    },
+                    {
+                        "in": "query",
+                        "name": "skip",
+                        "schema": {
+                            "description": "Number of splats to skip.",
+                            "examples": [0],
+                            "default": 0,
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100000
+                        },
+                        "description": "Number of splats to skip."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Caller splats",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SplatList"
+                                },
+                                "examples": {
+                                    "ownedSplats": {
+                                        "summary": "Owned splats",
+                                        "value": {
+                                            "data": [
+                                                {
+                                                    "id": "a1b2c3d4",
+                                                    "title": "garden-scan",
+                                                    "description": "",
+                                                    "status": "processing",
+                                                    "visibility": "unlisted",
+                                                    "format": null,
+                                                    "size": 0,
+                                                    "viewerUrl": "https://superspl.at/scene/a1b2c3d4",
+                                                    "createdAt": "2026-01-01T00:00:00.000Z",
+                                                    "updatedAt": "2026-01-01T00:00:00.000Z",
+                                                    "completedAt": null
+                                                }
+                                            ],
+                                            "pagination": {
+                                                "skip": 0,
+                                                "limit": 50,
+                                                "total": 1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/splats/{splatId}": {
+            "get": {
+                "tags": ["Splats"],
+                "summary": "Get a splat owned by the authenticated caller",
+                "description": "Returns a single splat owned by the authenticated user. Newly completed uploads may return `status: \"processing\"` until processing finishes.",
+                "operationId": "getSplat",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "splatId",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 100,
+                            "description": "Opaque public splat id.",
+                            "examples": ["a1b2c3d4"]
+                        },
+                        "required": true,
+                        "description": "Opaque public splat id."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Splat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Splat"
+                                },
+                                "examples": {
+                                    "processingSplat": {
+                                        "summary": "Processing splat",
+                                        "value": {
+                                            "id": "a1b2c3d4",
+                                            "title": "garden-scan",
+                                            "description": "",
+                                            "status": "processing",
+                                            "visibility": "unlisted",
+                                            "format": null,
+                                            "size": 0,
+                                            "viewerUrl": "https://superspl.at/scene/a1b2c3d4",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z",
+                                            "completedAt": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Resource not found",
+                                        "value": {
+                                            "error": "Resource not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/splats/uploads": {
+            "post": {
+                "tags": ["Uploads"],
+                "summary": "Create a resumable splat upload",
+                "description": "Starts a multipart upload and returns a resumable upload session. `title` is optional; when omitted, PlayCanvas assigns a default title. New splats are unlisted by default. Use `softwareTools` to explicitly attribute catalogue software IDs to the created splat.",
+                "operationId": "createSplatUpload",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Idempotency-Key",
+                        "schema": {
+                            "description": "Optional key for retrying create-upload requests safely. Reusing the same key returns the existing upload session.",
+                            "examples": ["upload-garden-scan-2026-01-01"],
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200
+                        },
+                        "description": "Optional key for retrying create-upload requests safely. Reusing the same key returns the existing upload session."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUploadRequest"
+                            },
+                            "examples": {
+                                "recommendedPlyUpload": {
+                                    "summary": "Recommended PLY upload",
+                                    "description": "Create an upload session with a known file size.",
+                                    "value": {
+                                        "sourceFormat": "ply",
+                                        "contentLength": 125829120,
+                                        "title": "Garden scan"
+                                    }
+                                },
+                                "minimalPlyUpload": {
+                                    "summary": "Minimal PLY upload",
+                                    "description": "`contentLength` is optional when the file size is not available at create time.",
+                                    "value": {
+                                        "sourceFormat": "ply"
+                                    }
+                                },
+                                "uploadWithClient": {
+                                    "summary": "Upload with client metadata",
+                                    "value": {
+                                        "sourceFormat": "ply",
+                                        "contentLength": 125829120,
+                                        "title": "Garden scan",
+                                        "uploadClient": {
+                                            "id": "lcc-studio",
+                                            "version": "1.2.3"
+                                        }
+                                    }
+                                },
+                                "uploadWithSoftwareTools": {
+                                    "summary": "Upload with software attribution",
+                                    "value": {
+                                        "sourceFormat": "ply",
+                                        "contentLength": 125829120,
+                                        "title": "Garden scan",
+                                        "uploadClient": {
+                                            "id": "lcc-studio",
+                                            "version": "1.2.3"
+                                        },
+                                        "softwareTools": ["lcc-studio"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Existing upload session for the idempotency key",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadSession"
+                                },
+                                "examples": {
+                                    "existingUpload": {
+                                        "summary": "Existing upload session",
+                                        "value": {
+                                            "id": "upl_0123456789abcdef01234567",
+                                            "status": "created",
+                                            "contentLength": 125829120,
+                                            "sourceFormat": "ply",
+                                            "title": "Garden scan",
+                                            "description": "",
+                                            "partSize": 67108864,
+                                            "uploadedParts": [],
+                                            "expiresAt": "2026-01-01T00:00:00.000Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Upload session created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadSession"
+                                },
+                                "examples": {
+                                    "createdUpload": {
+                                        "summary": "Created upload session",
+                                        "value": {
+                                            "id": "upl_0123456789abcdef01234567",
+                                            "status": "created",
+                                            "contentLength": 125829120,
+                                            "sourceFormat": "ply",
+                                            "title": "Garden scan",
+                                            "description": "",
+                                            "partSize": 67108864,
+                                            "uploadedParts": [],
+                                            "expiresAt": "2026-01-01T00:00:00.000Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Invalid request",
+                                        "value": {
+                                            "error": "Invalid request"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "413": {
+                        "description": "Upload limit exceeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Upload too large",
+                                        "value": {
+                                            "error": "Upload size limit exceeded"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/splats/uploads/{uploadId}": {
+            "get": {
+                "tags": ["Uploads"],
+                "summary": "Get a resumable upload session",
+                "description": "Returns upload session state and any parts already observed by the server. Use this to resume an interrupted upload.",
+                "operationId": "getSplatUpload",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uploadId",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200,
+                            "description": "Opaque resumable upload session id.",
+                            "examples": ["upl_0123456789abcdef01234567"]
+                        },
+                        "required": true,
+                        "description": "Opaque resumable upload session id."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Upload session",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadSession"
+                                },
+                                "examples": {
+                                    "uploadSession": {
+                                        "summary": "Upload session",
+                                        "value": {
+                                            "id": "upl_0123456789abcdef01234567",
+                                            "status": "uploading",
+                                            "contentLength": 125829120,
+                                            "sourceFormat": "ply",
+                                            "title": "Garden scan",
+                                            "description": "",
+                                            "partSize": 67108864,
+                                            "uploadedParts": [
+                                                {
+                                                    "partNumber": 1,
+                                                    "etag": "\"abc123\"",
+                                                    "size": 67108864
+                                                }
+                                            ],
+                                            "expiresAt": "2026-01-01T00:00:00.000Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Resource not found",
+                                        "value": {
+                                            "error": "Resource not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/splats/uploads/{uploadId}/part-upload-urls": {
+            "post": {
+                "tags": ["Uploads"],
+                "summary": "Create signed URLs for upload parts",
+                "description": "Returns signed URLs for the requested part numbers. Upload each file part to its URL with HTTP PUT, then keep the returned ETag for completion.",
+                "operationId": "createSplatUploadPartUrls",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uploadId",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200,
+                            "description": "Opaque resumable upload session id.",
+                            "examples": ["upl_0123456789abcdef01234567"]
+                        },
+                        "required": true,
+                        "description": "Opaque resumable upload session id."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUploadPartUrlsRequest"
+                            },
+                            "examples": {
+                                "firstTwoParts": {
+                                    "summary": "First two parts",
+                                    "value": {
+                                        "parts": [1, 2]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Signed upload part URLs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadPartUrls"
+                                },
+                                "examples": {
+                                    "signedUrls": {
+                                        "summary": "Signed part URLs",
+                                        "value": {
+                                            "uploadId": "upl_0123456789abcdef01234567",
+                                            "partSize": 67108864,
+                                            "urls": [
+                                                {
+                                                    "partNumber": 1,
+                                                    "url": "https://example-bucket.s3.amazonaws.com/uploads/part-1",
+                                                    "expiresAt": "2026-01-01T00:20:00.000Z"
+                                                },
+                                                {
+                                                    "partNumber": 2,
+                                                    "url": "https://example-bucket.s3.amazonaws.com/uploads/part-2",
+                                                    "expiresAt": "2026-01-01T00:20:00.000Z"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Invalid request",
+                                        "value": {
+                                            "error": "Invalid request"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Resource not found",
+                                        "value": {
+                                            "error": "Resource not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Invalid upload state",
+                                        "value": {
+                                            "error": "Invalid upload state"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/splats/uploads/{uploadId}/complete": {
+            "post": {
+                "tags": ["Uploads"],
+                "summary": "Complete a resumable upload and publish the splat",
+                "description": "Completes the multipart upload and creates a splat. Use the returned `splatId` to fetch the splat representation; it can remain `processing` while PlayCanvas prepares the final viewer assets.",
+                "operationId": "completeSplatUpload",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uploadId",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200,
+                            "description": "Opaque resumable upload session id.",
+                            "examples": ["upl_0123456789abcdef01234567"]
+                        },
+                        "required": true,
+                        "description": "Opaque resumable upload session id."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CompleteUploadRequest"
+                            },
+                            "examples": {
+                                "uploadedPartEtags": {
+                                    "summary": "Uploaded part ETags",
+                                    "value": {
+                                        "parts": [
+                                            {
+                                                "partNumber": 1,
+                                                "etag": "\"abc123\""
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Upload was already completed",
+                        "headers": {
+                            "Location": {
+                                "description": "API URL for the created splat resource.",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "/api/supersplat/v1/splats/a1b2c3d4"
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CompleteUploadResponse"
+                                },
+                                "examples": {
+                                    "alreadyCompleted": {
+                                        "summary": "Already completed upload",
+                                        "value": {
+                                            "uploadId": "upl_0123456789abcdef01234567",
+                                            "status": "completed",
+                                            "splatId": "a1b2c3d4",
+                                            "editUrl": "https://superspl.at/scene/a1b2c3d4/edit"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Upload completed and splat queued for processing",
+                        "headers": {
+                            "Location": {
+                                "description": "API URL for the created splat resource.",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "/api/supersplat/v1/splats/a1b2c3d4"
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CompleteUploadResponse"
+                                },
+                                "examples": {
+                                    "queuedForProcessing": {
+                                        "summary": "Queued for processing",
+                                        "value": {
+                                            "uploadId": "upl_0123456789abcdef01234567",
+                                            "status": "completed",
+                                            "splatId": "a1b2c3d4",
+                                            "editUrl": "https://superspl.at/scene/a1b2c3d4/edit"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Invalid request",
+                                        "value": {
+                                            "error": "Invalid request"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Resource not found",
+                                        "value": {
+                                            "error": "Resource not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Invalid upload state",
+                                        "value": {
+                                            "error": "Invalid upload state"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "413": {
+                        "description": "Upload limit exceeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Upload too large",
+                                        "value": {
+                                            "error": "Upload size limit exceeded"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateUploadRequest": {
+                "type": "object",
+                "properties": {
+                    "contentLength": {
+                        "description": "Total source file size in bytes. Optional but strongly recommended; when provided, PlayCanvas can reject over-limit uploads before S3 multipart upload starts.",
+                        "examples": [125829120],
+                        "anyOf": [
+                            {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 25000000000
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "sourceFormat": {
+                        "type": "string",
+                        "enum": ["ply", "sog", "ssog", "lcc"],
+                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
+                        "examples": ["ply"]
+                    },
+                    "title": {
+                        "description": "Optional display title for the splat. If omitted, PlayCanvas assigns a default title.",
+                        "examples": ["Garden scan"],
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "description": {
+                        "description": "Optional display description for the splat.",
+                        "examples": ["Back garden scan captured at dusk."],
+                        "type": "string",
+                        "maxLength": 5000
+                    },
+                    "uploadClient": {
+                        "description": "Optional application details for the client creating the upload.",
+                        "$ref": "#/components/schemas/UploadClient"
+                    },
+                    "softwareTools": {
+                        "maxItems": 6,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 64,
+                            "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+                            "description": "Software catalogue ID.",
+                            "examples": ["lcc-studio"]
+                        },
+                        "description": "Optional software catalogue IDs to attribute to the created splat. Use the software catalogue endpoint to discover currently supported IDs; this field is not an OpenAPI enum because the catalogue may grow over time.",
+                        "examples": [["lcc-studio"]],
+                        "uniqueItems": true
+                    }
+                },
+                "required": ["sourceFormat"],
+                "additionalProperties": false,
+                "description": "Request body for creating a resumable splat upload session."
+            },
+            "UploadClient": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+                        "description": "Stable lowercase identifier for the application or integration creating the upload, such as `lcc-studio`.",
+                        "examples": ["lcc-studio"]
+                    },
+                    "version": {
+                        "description": "Optional version of the upload client application.",
+                        "examples": ["1.2.3"],
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64
+                    }
+                },
+                "required": ["id"],
+                "additionalProperties": false,
+                "description": "Client application details captured with the upload."
+            },
+            "CreateUploadPartUrlsRequest": {
+                "type": "object",
+                "properties": {
+                    "parts": {
+                        "minItems": 1,
+                        "maxItems": 100,
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 10000,
+                            "description": "One-based part number in the multipart upload.",
+                            "examples": [1]
+                        },
+                        "description": "One-based part numbers to create signed upload URLs for. Calculate these by splitting the source file using the upload session `partSize`, and request only the parts you are ready to upload."
+                    }
+                },
+                "required": ["parts"],
+                "additionalProperties": false,
+                "description": "Request body for creating signed URLs for explicit upload parts."
+            },
+            "CompleteUploadRequest": {
+                "type": "object",
+                "properties": {
+                    "parts": {
+                        "minItems": 1,
+                        "maxItems": 10000,
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "partNumber": {
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 10000,
+                                    "description": "One-based part number in the multipart upload.",
+                                    "examples": [1]
+                                },
+                                "etag": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "description": "ETag returned by S3 after uploading this part.",
+                                    "examples": ["\"abc123\""]
+                                }
+                            },
+                            "required": ["partNumber", "etag"],
+                            "additionalProperties": false
+                        },
+                        "description": "Uploaded parts to commit. Include each uploaded part number and its S3 ETag."
+                    }
+                },
+                "required": ["parts"],
+                "additionalProperties": false,
+                "description": "Request body for completing a resumable upload and queuing splat processing."
+            },
+            "Me": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Authenticated user id.",
+                        "examples": ["123"]
+                    },
+                    "username": {
+                        "description": "Username, when available.",
+                        "examples": ["artist"],
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "required": ["id"],
+                "additionalProperties": {},
+                "description": "Authenticated caller identity."
+            },
+            "ErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "Human-readable error message."
+                    }
+                },
+                "required": ["error"],
+                "additionalProperties": {},
+                "description": "Error response."
+            },
+            "SplatList": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Splat"
+                        },
+                        "description": "Splats owned by the authenticated user."
+                    },
+                    "pagination": {
+                        "type": "object",
+                        "properties": {
+                            "skip": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 100000,
+                                "description": "Number of splats skipped."
+                            },
+                            "limit": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 128,
+                                "description": "Maximum number of splats requested."
+                            },
+                            "total": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 100000000,
+                                "description": "Total matching splats owned by the caller."
+                            }
+                        },
+                        "required": ["skip", "limit", "total"],
+                        "additionalProperties": {}
+                    }
+                },
+                "required": ["data", "pagination"],
+                "additionalProperties": {},
+                "description": "Paginated splat list."
+            },
+            "Splat": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Public 8-character splat id.",
+                        "examples": ["a1b2c3d4"]
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Display title.",
+                        "examples": ["garden-scan"]
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Display description.",
+                        "examples": [""]
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": ["processing", "completed", "failed"],
+                        "description": "Publish lifecycle state of the splat.",
+                        "examples": ["processing"]
+                    },
+                    "visibility": {
+                        "type": "string",
+                        "enum": ["listed", "unlisted"],
+                        "description": "Whether the splat is listed publicly or only reachable by direct link.",
+                        "examples": ["unlisted"]
+                    },
+                    "format": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Published output format once processing completes. `null` while processing.",
+                        "examples": [null]
+                    },
+                    "size": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 25000000000,
+                        "description": "Published splat size in bytes. Processing splats may report `0` until output is available.",
+                        "examples": [0]
+                    },
+                    "viewerUrl": {
+                        "type": "string",
+                        "description": "URL where the splat can be viewed.",
+                        "examples": ["https://superspl.at/scene/a1b2c3d4"]
+                    },
+                    "createdAt": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time",
+                                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Creation timestamp.",
+                        "examples": ["2026-01-01T00:00:00.000Z"]
+                    },
+                    "updatedAt": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time",
+                                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Last update timestamp.",
+                        "examples": ["2026-01-01T00:00:00.000Z"]
+                    },
+                    "completedAt": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time",
+                                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Processing completion timestamp, or `null` while processing.",
+                        "examples": [null]
+                    }
+                },
+                "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "status",
+                    "visibility",
+                    "format",
+                    "size",
+                    "viewerUrl",
+                    "createdAt",
+                    "updatedAt",
+                    "completedAt"
+                ],
+                "additionalProperties": {},
+                "description": "Splat scene owned by the authenticated user."
+            },
+            "UploadSession": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Resumable upload session id.",
+                        "examples": ["upl_0123456789abcdef01234567"]
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": ["created", "uploading", "processing", "completed", "canceled"],
+                        "description": "Lifecycle state of the resumable upload session. `processing` means the bytes have been committed and the splat is being finalized.",
+                        "examples": ["created"]
+                    },
+                    "contentLength": {
+                        "anyOf": [
+                            {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 25000000000
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Total source file size declared when creating the upload, or `null` when the client did not provide one.",
+                        "examples": [null]
+                    },
+                    "sourceFormat": {
+                        "type": "string",
+                        "enum": ["ply", "sog", "ssog", "lcc"],
+                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
+                        "examples": ["ply"]
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Display title that will be used for the created splat.",
+                        "examples": ["garden-scan"]
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Display description that will be used for the created splat.",
+                        "examples": [""]
+                    },
+                    "softwareTools": {
+                        "maxItems": 6,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 64,
+                            "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+                            "description": "Software catalogue ID.",
+                            "examples": ["lcc-studio"]
+                        },
+                        "description": "Optional software catalogue IDs to attribute to the created splat. Use the software catalogue endpoint to discover currently supported IDs; this field is not an OpenAPI enum because the catalogue may grow over time.",
+                        "examples": [["lcc-studio"]],
+                        "uniqueItems": true
+                    },
+                    "partSize": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 25000000000,
+                        "description": "Server-chosen target size in bytes for each uploaded part. Use this to split the file into multipart upload ranges; the final part may be smaller.",
+                        "examples": [67108864]
+                    },
+                    "uploadedParts": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "partNumber": {
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 10000,
+                                    "description": "One-based part number in the multipart upload.",
+                                    "examples": [1]
+                                },
+                                "etag": {
+                                    "type": "string",
+                                    "description": "ETag for the uploaded part.",
+                                    "examples": ["\"abc123\""]
+                                },
+                                "size": {
+                                    "description": "Actual observed size of this uploaded part in bytes, when known. This is resume metadata, not the target chunk size.",
+                                    "examples": [67108864],
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 25000000000
+                                }
+                            },
+                            "required": ["partNumber", "etag"],
+                            "additionalProperties": {}
+                        },
+                        "description": "Parts already observed by the server. Useful when resuming an interrupted upload."
+                    },
+                    "expiresAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$",
+                        "description": "When this upload session expires.",
+                        "examples": ["2026-01-01T00:00:00.000Z"]
+                    }
+                },
+                "required": [
+                    "id",
+                    "status",
+                    "contentLength",
+                    "sourceFormat",
+                    "title",
+                    "description",
+                    "partSize",
+                    "uploadedParts",
+                    "expiresAt"
+                ],
+                "additionalProperties": {},
+                "description": "Resumable upload session state."
+            },
+            "UploadPartUrls": {
+                "type": "object",
+                "properties": {
+                    "uploadId": {
+                        "type": "string",
+                        "description": "Resumable upload session id.",
+                        "examples": ["upl_0123456789abcdef01234567"]
+                    },
+                    "partSize": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 25000000000,
+                        "description": "Server-chosen target size in bytes for each uploaded part. Matches the upload session `partSize`.",
+                        "examples": [67108864]
+                    },
+                    "urls": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "partNumber": {
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 10000,
+                                    "description": "One-based part number in the multipart upload.",
+                                    "examples": [1]
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "description": "Signed URL. Upload the bytes for this part with an HTTP PUT.",
+                                    "examples": ["https://example-bucket.s3.amazonaws.com/uploads/part-1"]
+                                },
+                                "expiresAt": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$",
+                                    "description": "When this signed URL expires.",
+                                    "examples": ["2026-01-01T00:20:00.000Z"]
+                                }
+                            },
+                            "required": ["partNumber", "url", "expiresAt"],
+                            "additionalProperties": {}
+                        },
+                        "description": "Signed URLs for the requested part numbers."
+                    }
+                },
+                "required": ["uploadId", "partSize", "urls"],
+                "additionalProperties": {},
+                "description": "Signed URLs for uploading multipart data."
+            },
+            "CompleteUploadResponse": {
+                "type": "object",
+                "properties": {
+                    "uploadId": {
+                        "type": "string",
+                        "description": "Resumable upload session id.",
+                        "examples": ["upl_0123456789abcdef01234567"]
+                    },
+                    "status": {
+                        "type": "string",
+                        "const": "completed",
+                        "description": "Upload session status after completion."
+                    },
+                    "splatId": {
+                        "type": "string",
+                        "description": "Opaque public splat id. Use `GET /v1/splats/{splatId}` to retrieve the splat representation.",
+                        "examples": ["a1b2c3d4"]
+                    },
+                    "editUrl": {
+                        "type": "string",
+                        "description": "URL where the creator can continue editing the splat after upload completion.",
+                        "examples": ["https://superspl.at/scene/a1b2c3d4/edit"]
+                    }
+                },
+                "required": ["uploadId", "status", "splatId", "editUrl"],
+                "additionalProperties": {},
+                "description": "Upload completion result. Use the returned `splatId` to fetch the splat representation."
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

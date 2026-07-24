@@ -611,6 +611,22 @@ const sidebars = {
           ],
         },
         'user-manual/supersplat/convert',
+        {
+          type: 'category',
+          label: 'API & Integrations',
+          link: {
+            type: 'doc',
+            id: 'user-manual/supersplat/api-integrations',
+          },
+          items: [
+            {
+              type: 'link',
+              label: 'API Reference',
+              key: 'supersplat-api-reference',
+              href: '/user-manual/api/supersplat/',
+            },
+          ],
+        },
       ],
     },
     {
