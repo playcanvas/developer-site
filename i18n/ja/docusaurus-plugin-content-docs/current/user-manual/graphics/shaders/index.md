@@ -196,6 +196,70 @@ void main(void)
 
 :::
 
+#### シャドウパス {#shadow-pass}
+
+カスタムシェーダーを使用するメッシュがシャドウをキャストできるようにするには、シャドウパス中に、レンダリングされるシャドウタイプに応じたデータをフラグメントシェーダーから出力する必要があります。`SHADOW_PASS`が定義されている場合にエンジン提供の`shadowCasterPS`チャンクをインクルードし、`getShadowOutput()`が返す値を出力カラーに書き込みます:
+
+```glsl
+#ifdef SHADOW_PASS
+    // レンダリングされるシャドウタイプに応じたデータを返すgetShadowOutput()を提供します
+    #include "shadowCasterPS"
+#endif
+
+void main(void)
+{
+    #ifdef SHADOW_PASS
+
+        // シャドウデータを出力します(アルファテストを行うマテリアルはこの前にdiscardできます)
+        gl_FragColor = getShadowOutput();
+
+    #else
+
+        // 通常のカラーレンダリング
+        gl_FragColor = ...;
+
+    #endif
+}
+```
+
+WGSLでは、同等の処理は`output.color = getShadowOutput();`です。
+
+シャドウのレンダリングには同じ頂点シェーダーが使用されるため、`transformCoreVS`によって処理されるスキニング、モーフィング、インスタンス化は自動的に機能します。シャドウレンダリングに不要な処理（例えばライティング）は`#ifndef SHADOW_PASS`を使用してスキップすることをお勧めします。これによりシャドウのレンダリングが高速になります。また、`matrix_normal`などの一部のエンジンユニフォームは、シャドウパス中には利用できないことに注意してください。
+
+サポートされているのは、ディレクショナルライトのすべてのシャドウタイプと、スポットライトのPCFシャドウです。オムニライトのシャドウはサポートされていません。
+
+:::note
+
+完全な例については、エンジンのサンプルブラウザのShader Material Shadowsの例を参照してください。
+
+:::
+
+#### ピッカーパス {#picker-pass}
+
+カスタムシェーダーを使用するメッシュを[`Picker`](https://api.playcanvas.com/engine/classes/Picker.html)で識別できるようにするには、ピックパス中にメッシュインスタンスIDをフラグメントシェーダーから出力する必要があります。`PICK_PASS`が定義されている場合にエンジン提供の`pickPS`チャンクをインクルードし、`getPickOutput()`が返す値を出力カラーに書き込みます:
+
+```glsl
+#ifdef PICK_PASS
+    // メッシュインスタンスのエンコードされたIDを返すgetPickOutput()を提供します
+    #include "pickPS"
+#endif
+
+void main(void)
+{
+    #ifdef PICK_PASS
+
+        // メッシュインスタンスIDを出力します
+        gl_FragColor = getPickOutput();
+
+    #else
+
+        // 通常のカラーレンダリング
+        gl_FragColor = ...;
+
+    #endif
+}
+```
+
 #### 生成されたシェーダー {#generated-shaders}
 
 生成されたシェーダーを検査する必要がある場合は、これをスクリプトに追加できます

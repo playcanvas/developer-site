@@ -204,6 +204,70 @@ For more complete examples, and also for details on how to implement instancing,
 
 :::
 
+#### Shadow Pass {#shadow-pass}
+
+To allow meshes using your custom shader to cast shadows, the fragment shader needs to output data appropriate for the shadow type being rendered during the shadow pass. Include the engine-provided `shadowCasterPS` chunk when `SHADOW_PASS` is defined, and write the value returned by `getShadowOutput()` to the output color:
+
+```glsl
+#ifdef SHADOW_PASS
+    // Provides getShadowOutput(), which returns the data for the shadow type being rendered
+    #include "shadowCasterPS"
+#endif
+
+void main(void)
+{
+    #ifdef SHADOW_PASS
+
+        // output shadow data (alpha-tested materials can discard before this)
+        gl_FragColor = getShadowOutput();
+
+    #else
+
+        // normal color rendering
+        gl_FragColor = ...;
+
+    #endif
+}
+```
+
+In WGSL, the equivalent is `output.color = getShadowOutput();`.
+
+The same vertex shader is used when rendering shadows, so skinning, morphing and instancing handled by `transformCoreVS` work automatically. It is recommended to skip work not needed by shadow rendering (for example lighting) using `#ifndef SHADOW_PASS`, to make the shadow rendering faster. Note that some engine uniforms, such as `matrix_normal`, are not available during the shadow pass.
+
+Supported are all shadow types for directional lights, and PCF shadows for spot lights. Omni light shadows are not supported.
+
+:::note
+
+For a complete example, see the Shader Material Shadows example in the engine examples browser.
+
+:::
+
+#### Picker Pass {#picker-pass}
+
+To allow meshes using your custom shader to be identified by the [`Picker`](https://api.playcanvas.com/engine/classes/Picker.html), the fragment shader needs to output the mesh instance ID during the pick pass. Include the engine-provided `pickPS` chunk when `PICK_PASS` is defined, and write the value returned by `getPickOutput()` to the output color:
+
+```glsl
+#ifdef PICK_PASS
+    // Provides getPickOutput(), which returns the encoded ID of the mesh instance
+    #include "pickPS"
+#endif
+
+void main(void)
+{
+    #ifdef PICK_PASS
+
+        // output the mesh instance ID
+        gl_FragColor = getPickOutput();
+
+    #else
+
+        // normal color rendering
+        gl_FragColor = ...;
+
+    #endif
+}
+```
+
 #### Generated Shaders {#generated-shaders}
 
 If you have a need to inspect the generated shaders, you can add this to your script
