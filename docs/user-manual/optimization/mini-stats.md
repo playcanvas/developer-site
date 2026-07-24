@@ -6,6 +6,7 @@ description: Enable MiniStats from Launch for draw calls, frame time, and CPU or
 :::ai
 
 - **[Engine Development](/user-manual/ai/developing-with-engine/):** Enable MiniStats from Launch for draw calls, frame time, and CPU or GPU graphs during development; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Launch with MiniStats enabled, capture the running application, make a targeted Editor change, then recapture the same view to compare draw calls and frame time.
 
 :::
 

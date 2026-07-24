@@ -3,6 +3,12 @@ title: テクスチャ圧縮
 description: Basis テクスチャ圧縮と Editor でのランタイムトランスコードで VRAM とダウンロードサイズを削減します。
 ---
 
+:::ai
+
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 選択した Texture Asset の Basis、DXT、ETC、PVR Variant を追加または削除し、生成された Asset データを確認してから、アプリケーションを Launch してキャプチャーし、見た目の品質を検証します。
+
+:::
+
 テクスチャデータは、デバイスのビデオメモリ(またはVRAM)に格納されます。ブラウザタブのクラッシュなど、望ましくないことが発生しないように、アプリケーションが VRAM を使い果たさないようにすることが重要です。
 
 エディタには、テクスチャに対して Basis を使用して、損失がある圧縮スキームを適用して VRAM 使用量を劇的に減らす機能があります。

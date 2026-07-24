@@ -6,6 +6,7 @@ description: Use the built-in Profiler overlay for frame stats, update and rende
 :::ai
 
 * **[Engine Development](/user-manual/ai/developing-with-engine/):** Use the built-in Profiler overlay for frame stats, update and render timings, and the app launch timeline; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Launch with Profiler enabled, capture its overlay and runtime logs, make a targeted Editor change, then relaunch and capture the same view for comparison.
 
 :::
 

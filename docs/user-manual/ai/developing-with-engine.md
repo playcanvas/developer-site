@@ -7,23 +7,7 @@ description: Use AI coding assistants, documentation, and browser tools to build
 
 PlayCanvas Engine applications are regular JavaScript or TypeScript projects, so any coding assistant that can read files, edit code, and run commands can work with them. Give the assistant the same Engine references and verification steps that a human contributor would use.
 
-<div
-  role="img"
-  aria-label="AI client editing a PlayCanvas Engine project screenshot placeholder"
-  style={{
-    alignItems: 'center',
-    aspectRatio: '16 / 9',
-    background: 'var(--ifm-color-emphasis-100)',
-    border: '2px dashed var(--ifm-color-emphasis-300)',
-    borderRadius: 'var(--ifm-global-radius)',
-    color: 'var(--ifm-color-emphasis-600)',
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1.5rem'
-  }}
->
-  AI client editing an Engine project screenshot
-</div>
+<!-- screenshot: ai client editing a playcanvas engine project -->
 
 If your code is stored in a PlayCanvas Editor project, use the [VS Code Extension](./vscode-extension.md) instead. Use the [Editor MCP Server](./editor-mcp-server.md) when the assistant also needs to modify scenes, entities, assets, or project settings.
 
@@ -105,23 +89,7 @@ Source inspection is not proof of interactive behavior. Before accepting the res
 5. For complex state, consider a development-only `window.snapshot()` that returns JSON-serializable data without exposing mutation methods.
 6. Fix and re-verify failed checks, test affected browsers or devices, and report anything that was not verified.
 
-<div
-  role="img"
-  aria-label="Browser runtime verification screenshot placeholder"
-  style={{
-    alignItems: 'center',
-    aspectRatio: '16 / 9',
-    background: 'var(--ifm-color-emphasis-100)',
-    border: '2px dashed var(--ifm-color-emphasis-300)',
-    borderRadius: 'var(--ifm-global-radius)',
-    color: 'var(--ifm-color-emphasis-600)',
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1.5rem'
-  }}
->
-  Browser runtime verification screenshot
-</div>
+<!-- screenshot: browser runtime verification -->
 
 ## Official AI Tool Documentation
 

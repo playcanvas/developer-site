@@ -6,6 +6,7 @@ description: Change maxPixelRatio at runtime to balance sharp rendering against 
 :::ai
 
 * **[Engine Development](/user-manual/ai/developing-with-engine/):** Change maxPixelRatio at runtime to balance sharp rendering against fill-rate limits on varied devices; measure the relevant profiler, loading, memory, or frame-time metric before and after the change.
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Update the project setting or script controlling `maxPixelRatio`, launch with MiniStats, and compare frame time and visual sharpness before and after the change.
 
 :::
 

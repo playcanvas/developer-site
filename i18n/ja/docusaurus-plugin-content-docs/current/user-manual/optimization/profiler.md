@@ -6,6 +6,7 @@ description: 組み込みの Profiler オーバーレイでフレーム統計、
 :::ai
 
 * **[Engine Development](/user-manual/ai/developing-with-engine/):** 「プロファイラー」について、次の要件を満たしてください: 組み込みの Profiler オーバーレイでフレーム統計、update と render のタイミング、アプリ起動のタイムラインを確認すること 変更前後のプロファイラー、ロード、メモリ、またはフレーム時間の該当指標を測定してください。
+* **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Profiler を有効にして Launch し、オーバーレイとランタイムログをキャプチャーして、対象を絞った Editor の変更後に同じビューを再度 Launch してキャプチャーします。
 
 :::
 

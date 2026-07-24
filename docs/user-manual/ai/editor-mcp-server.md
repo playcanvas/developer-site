@@ -5,23 +5,7 @@ description: Connect AI assistants to the PlayCanvas Editor to modify and verify
 
 The [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-server) connects AI assistants to an open PlayCanvas Editor session. It can modify project data and verify the result through the viewport or a running application.
 
-<div
-  role="img"
-  aria-label="Connected Editor MCP Server screenshot placeholder"
-  style={{
-    alignItems: 'center',
-    aspectRatio: '16 / 9',
-    background: 'var(--ifm-color-emphasis-100)',
-    border: '2px dashed var(--ifm-color-emphasis-300)',
-    borderRadius: 'var(--ifm-global-radius)',
-    color: 'var(--ifm-color-emphasis-600)',
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1.5rem'
-  }}
->
-  Connected Editor MCP Server screenshot
-</div>
+<img loading="lazy" src="/img/user-manual/ai/mcp.png" alt="Editor MCP Server connection panel" width="400" style={{ marginBottom: '1.5rem' }} />
 
 Your MCP client starts the local server, and the Editor connects to it. Every tool acts on the project currently open in that Editor; the server does not choose or administer PlayCanvas projects.
 
@@ -128,23 +112,7 @@ For scene or behavior changes, source inspection is not enough. Ask the assistan
 
 Allow pop-ups for the PlayCanvas Editor origin so the server can open the Launch window. It uses your existing PlayCanvas login session.
 
-<div
-  role="img"
-  aria-label="Editor viewport and launched application verification screenshot placeholder"
-  style={{
-    alignItems: 'center',
-    aspectRatio: '16 / 9',
-    background: 'var(--ifm-color-emphasis-100)',
-    border: '2px dashed var(--ifm-color-emphasis-300)',
-    borderRadius: 'var(--ifm-global-radius)',
-    color: 'var(--ifm-color-emphasis-600)',
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1.5rem'
-  }}
->
-  Viewport and Launch verification screenshot
-</div>
+<!-- screenshot: editor viewport and launched application verification -->
 
 ## Review or Recover
 

@@ -3,6 +3,12 @@ title: Engine Compatibility
 description: Engine V1 versus V2 coverage, switching with checkpoints, launcher toggles, and gamma tonemap viewport plus sRGB texture migration notes for scripts.
 ---
 
+:::ai
+
+- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Before switching engines manually, create a checkpoint, audit scripts, cameras, textures, and settings, launch with the target engine version, and compare captures and logs.
+
+:::
+
 ## Introduction
 
 The Editor supports two major release streams of the engine:
