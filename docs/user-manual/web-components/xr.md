@@ -68,27 +68,32 @@ Finally, you'll need to add some UI controls to allow the user to enter and exit
 Let's add event listeners to the buttons to trigger an XR session when the user clicks them.
 
 ```javascript
-document.addEventListener('DOMContentLoaded', async () => {
-    const appElement = await document.querySelector('pc-app').ready();
-    const app = appElement.app;
-    const xr = app.xr;
-    const camera = app.root.findComponent('camera');
+import { whenReady } from '@playcanvas/web-components';
 
-    document.getElementById('enterAR').addEventListener('click', () => {
-        xr.start(camera, 'immersive-ar', 'local-floor')
-    });
+const { app } = await whenReady('pc-app');
+const xr = app.xr;
+const camera = app.root.findComponent('camera');
 
-    document.getElementById('enterVR').addEventListener('click', () => {
-        xr.start(camera, 'immersive-vr', 'local-floor')
-    });
+document.getElementById('enterAR').addEventListener('click', () => {
+    xr.start(camera, 'immersive-ar', 'local-floor')
+});
 
-    window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && xr.active) {
-            xr.end();
-        }
-    });
+document.getElementById('enterVR').addEventListener('click', () => {
+    xr.start(camera, 'immersive-vr', 'local-floor')
+});
+
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && xr.active) {
+        xr.end();
+    }
 });
 ```
+
+:::note
+
+This snippet imports `whenReady` by package name, which requires `@playcanvas/web-components` to be listed in your page's import map. See [Programmatic Access](programmatic-access.md) for details.
+
+:::
 
 Most of the [Web Component examples](https://playcanvas.github.io/web-components/examples/) have integrated support for XR. Consult their source code to see how it's done.
 
