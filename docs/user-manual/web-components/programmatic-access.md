@@ -54,6 +54,8 @@ Each element exposes its engine counterpart through a property:
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
 | Component tags (`<pc-camera>`, `<pc-light>`, ...) | `component` | The corresponding [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
+These properties are typed non-null: once the element is ready, its engine object is guaranteed to exist.
+
 ## Targeting a Specific App
 
 Most pages contain a single `<pc-app>`, and `whenReady('pc-app')` finds it (the first one in document order). If your page hosts several apps, pass a selector to pick one:
@@ -65,14 +67,16 @@ const right = await whenReady('#right');
 
 ## Waiting on an Element You Already Hold
 
-Every asynchronously initializing element also has a `ready()` method that returns a promise resolving with the element itself. This is the primitive that `whenReady` builds on, and it is handy when you already hold a reference — for example, an element you just created:
+`whenReady` also accepts an element reference directly, which is handy when you already hold one — for example, an element you just created:
 
 ```javascript
 const appElement = document.createElement('pc-app');
 document.body.appendChild(appElement);
 
-await appElement.ready();
+const { app } = await whenReady(appElement);
 ```
+
+(Under the hood, every asynchronously initializing element has a `ready()` method that returns a promise resolving with the element itself — `whenReady` is a convenience wrapper around it.)
 
 ## TypeScript
 

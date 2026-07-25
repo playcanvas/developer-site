@@ -54,6 +54,8 @@ const { entity } = await whenReady('pc-entity[name="player"]');
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
 | コンポーネントタグ (`<pc-camera>`、`<pc-light>` など) | `component` | 対応する [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
+これらのプロパティは非 null として型付けされています。要素の準備が完了すれば、エンジンオブジェクトの存在が保証されます。
+
 ## 特定のアプリを対象にする
 
 ほとんどのページには `<pc-app>` が1つだけ含まれており、`whenReady('pc-app')` はそれ(ドキュメント順で最初のもの)を見つけます。ページに複数のアプリがある場合は、セレクターを渡して選択します。
@@ -65,14 +67,16 @@ const right = await whenReady('#right');
 
 ## すでに保持している要素を待つ
 
-非同期に初期化されるすべての要素には、要素自身とともに解決される Promise を返す `ready()` メソッドもあります。これは `whenReady` の基盤となるプリミティブであり、作成したばかりの要素など、すでに参照を保持している場合に便利です。
+`whenReady` には要素への参照を直接渡すこともできます。作成したばかりの要素など、すでに参照を保持している場合に便利です。
 
 ```javascript
 const appElement = document.createElement('pc-app');
 document.body.appendChild(appElement);
 
-await appElement.ready();
+const { app } = await whenReady(appElement);
 ```
+
+(内部的には、非同期に初期化されるすべての要素が、要素自身とともに解決される Promise を返す `ready()` メソッドを持っており、`whenReady` はその便利なラッパーです。)
 
 ## TypeScript
 
