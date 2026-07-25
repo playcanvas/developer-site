@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.6
-Total Documents: 479
-Generated: 2026-07-24
+Total Documents: 480
+Generated: 2026-07-25
 
 ## Instructions for Large Language Models
 
@@ -414,6 +414,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [PlayCanvas Web Components](https://developer.playcanvas.com/user-manual/web-components/): Declarative 3D with custom HTML elements wrapping the PlayCanvas engine: concepts, tag overview, and links to tutorials and reference.
 - [Building a Scene](https://developer.playcanvas.com/user-manual/web-components/building-a-scene/): Hands-on tutorial building a lit scene with pc-app and pc-scene, adding a camera, light, mesh, and understanding the element hierarchy.
 - [Getting Started](https://developer.playcanvas.com/user-manual/web-components/getting-started/): Install PlayCanvas Web Components from npm, configure import maps for the engine, register elements, and embed a minimal HTML example.
+- [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access/): Drive the engine from JavaScript: await element initialization with whenReady, access engine objects like AppBase and Entity, and target specific apps.
 - [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting/): Attach PlayCanvas Script classes to entities with pc-module and pc-script tags, load ES modules, and wire behaviors into Web Components.
 - [Tag Reference](https://developer.playcanvas.com/user-manual/web-components/tags/): Alphabetical index of PlayCanvas Web Component tags with short summaries linking to full attribute and usage documentation for each element.
 - [<pc-app>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app/): Reference for the pc-app element: initializes the PlayCanvas Application, graphics options, and root container for scenes and entities.
