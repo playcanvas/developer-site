@@ -68,27 +68,32 @@ XR スクリプトは、シーンのカメラを次のようにセットアッ�
 ユーザーがボタンをクリックしたときに XR セッションをトリガーするように、ボタンにイベントリスナーを追加しましょう。
 
 ```javascript
-document.addEventListener('DOMContentLoaded', async () => {
-    const appElement = await document.querySelector('pc-app').ready();
-    const app = appElement.app;
-    const xr = app.xr;
-    const camera = app.root.findComponent('camera');
+import { whenReady } from '@playcanvas/web-components';
 
-    document.getElementById('enterAR').addEventListener('click', () => {
-        xr.start(camera, 'immersive-ar', 'local-floor')
-    });
+const { app } = await whenReady('pc-app');
+const xr = app.xr;
+const camera = app.root.findComponent('camera');
 
-    document.getElementById('enterVR').addEventListener('click', () => {
-        xr.start(camera, 'immersive-vr', 'local-floor')
-    });
+document.getElementById('enterAR').addEventListener('click', () => {
+    xr.start(camera, 'immersive-ar', 'local-floor')
+});
 
-    window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && xr.active) {
-            xr.end();
-        }
-    });
+document.getElementById('enterVR').addEventListener('click', () => {
+    xr.start(camera, 'immersive-vr', 'local-floor')
+});
+
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && xr.active) {
+        xr.end();
+    }
 });
 ```
+
+:::note
+
+このスニペットはパッケージ名で `whenReady` をインポートしています。そのため、ページのインポートマップに `@playcanvas/web-components` を登録しておく必要があります。詳細は [プログラムによるアクセス](programmatic-access.md) を参照してください。
+
+:::
 
 ほとんどの [Web Component の例](https://playcanvas.github.io/web-components/examples/) には、XR のサポートが統合されています。それらのソースコードを参照して、どのように行われているかを確認してください。
 
