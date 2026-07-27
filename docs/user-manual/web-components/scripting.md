@@ -171,7 +171,7 @@ If the same script attribute is set both as a per-property attribute and in the 
 
 ### Accessing Scripts from JavaScript
 
-`<pc-script>` elements become *ready* once their script instance has been created. Use `whenReady()` (or the element's `ready()` promise) to wait for that, then access the live [`Script`](https://api.playcanvas.com/engine/classes/Script.html) instance via the `script` property:
+`<pc-script>` elements become *ready* once their script instance has been created. Use `whenReady()` (or the element's `ready()` promise) to wait for that, then access the live [`Script`](https://api.playcanvas.com/engine/classes/Script.html) instance via the `script` property. See [Programmatic Access](programmatic-access.md) for the full `whenReady` API:
 
 ```javascript
 import { whenReady } from '@playcanvas/web-components';

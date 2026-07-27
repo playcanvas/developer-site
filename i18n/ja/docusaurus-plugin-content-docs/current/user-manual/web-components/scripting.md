@@ -171,7 +171,7 @@ JSON内では、プレーンな数値配列がスクリプト属性の宣言さ�
 
 ### JavaScriptからスクリプトにアクセスする
 
-`<pc-script>` 要素は、そのスクリプトインスタンスが作成されると*準備完了*になります。`whenReady()`（または要素の `ready()` プロミス）でそれを待ってから、`script` プロパティを介してライブの [`Script`](https://api.playcanvas.com/engine/classes/Script.html) インスタンスにアクセスします。
+`<pc-script>` 要素は、そのスクリプトインスタンスが作成されると*準備完了*になります。`whenReady()`（または要素の `ready()` プロミス）でそれを待ってから、`script` プロパティを介してライブの [`Script`](https://api.playcanvas.com/engine/classes/Script.html) インスタンスにアクセスします。`whenReady` API の詳細は[プログラムによるアクセス](programmatic-access.md)を参照してください。
 
 ```javascript
 import { whenReady } from '@playcanvas/web-components';
