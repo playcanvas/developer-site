@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.6
-Total Documents: 480
-Generated: 2026-07-25
+Total Documents: 481
+Generated: 2026-07-27
 
 ## Instructions for Large Language Models
 
@@ -412,6 +412,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 
 ### Web Components
 - [PlayCanvas Web Components](https://developer.playcanvas.com/user-manual/web-components/): Declarative 3D with custom HTML elements wrapping the PlayCanvas engine: concepts, tag overview, and links to tutorials and reference.
+- [Attributes](https://developer.playcanvas.com/user-manual/web-components/attributes/): How PlayCanvas Web Component attributes parse values: shared defaults contract, booleans, numbers, enums, vectors, colors, and entity references.
 - [Building a Scene](https://developer.playcanvas.com/user-manual/web-components/building-a-scene/): Hands-on tutorial building a lit scene with pc-app and pc-scene, adding a camera, light, mesh, and understanding the element hierarchy.
 - [Getting Started](https://developer.playcanvas.com/user-manual/web-components/getting-started/): Install PlayCanvas Web Components from npm, configure import maps for the engine, register elements, and embed a minimal HTML example.
 - [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access/): Drive the engine from JavaScript: await element initialization with whenReady, access engine objects like AppBase and Entity, and target specific apps.
@@ -436,14 +437,14 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-rigidbody>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigidbody/): Reference for the pc-rigidbody element: rigid body type, mass, friction, restitution, and integration with collision components.
 - [<pc-scene>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene/): Reference for the pc-scene element: scene container inside pc-app, ambient settings, and where entities are mounted for rendering.
 - [<pc-screen>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen/): Reference for the pc-screen element: 2D screen space for UI elements, resolution, scale modes, and child pc-element hierarchies.
-- [<pc-script>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/): Reference for the pc-script element: attach a single script asset or class to an entity with ordering and attribute wiring in HTML.
+- [<pc-script>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/): Reference for the pc-script element: attach a single script class to an entity, configure script attributes per-property or as JSON.
 - [<pc-scripts>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scripts/): Reference for the pc-scripts element: script component container grouping multiple pc-script children and shared script settings.
 - [<pc-scrollbar>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar/): Reference for the pc-scrollbar element: draggable scrollbar with orientation, handle size, and value, used to drive a scroll view.
 - [<pc-scrollview>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollview/): Reference for the pc-scrollview element: scrollable viewport with content, scrollbars, mouse-wheel support, and bounce/clamp/infinite modes.
 - [<pc-sky>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky/): Reference for the pc-sky element: image-based lighting and skyboxes from cubemap or equirectangular assets for scene backgrounds.
 - [<pc-sound>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/): Reference for the pc-sound element: positional or non-positional audio clips, volume, pitch, autoplay rules, and asset references.
 - [<pc-sounds>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sounds/): Reference for the pc-sounds element: sound component container that groups pc-sound slots and shared audio settings on an entity.
-- [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr/): WebXR setup for Web Components: load XR scripts as assets, configure cameras, add session UI, and serve pages over HTTPS or localhost.
+- [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr/): WebXR setup for Web Components: load the engine's XR scripts, build a camera rig with xrSession, and start sessions by firing app events.
 
 ### SuperSplat
 - [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat/): SuperSplat is PlayCanvas's editing and publishing platform for 3D Gaussian Splats — edit, upload, manage, curate, share, and discover splat scenes on superspl.at.

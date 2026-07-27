@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 480
-Generated: 2026-07-25
+Total Documents: 481
+Generated: 2026-07-27
 
 ================================================================================
 
@@ -33725,6 +33725,107 @@ Jump right in with our [Getting Started Guide](getting-started.md) or explore th
 
 --------------------------------------------------------------------------------
 
+## Attributes
+
+URL: https://developer.playcanvas.com/user-manual/web-components/attributes/
+
+Every PlayCanvas Web Component is configured through HTML attributes. All attributes follow the same set of conventions, so once you have learned them, you can predict how any tag will behave.
+
+## The Shared Contract
+
+Every attribute obeys the same three rules:
+
+| Markup | Result |
+| --- | --- |
+| Attribute set to a valid value | The value is applied |
+| Attribute absent (or removed at runtime) | The engine default is applied |
+| Attribute set to an invalid value | A console warning describes the problem and the engine default is applied |
+
+The *Default* column in each tag's attribute table shows the value that applies when the attribute is absent. Because removing an attribute restores the default, you can freely toggle attributes at runtime (for example, from the browser's dev tools or with [`setAttribute()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute) and [`removeAttribute()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute)) and the scene updates reactively.
+
+Invalid values never reach the engine. Instead, you get a console warning naming the attribute and the expected format — keep the console open while authoring and typos surface immediately.
+
+## Booleans
+
+A boolean attribute is `true` when present with any value other than `"false"` — including the empty value of a bare attribute — and `false` when set to `"false"`:
+
+| Markup | Result |
+| --- | --- |
+| `cast-shadows` (bare presence) | `true` |
+| `cast-shadows="true"` (or any value other than `"false"`) | `true` |
+| `cast-shadows="false"` | `false` |
+| Attribute absent or removed | Engine default |
+
+```html
+
+<pc-light type="directional" cast-shadows></pc-light>
+
+<pc-scrollview horizontal="false"></pc-scrollview>
+```
+
+## Numbers
+
+Number attributes accept any finite number: integer, fractional, negative or scientific notation (`"1e3"`). Anything else — a value with units (`fov="60deg"`), an empty value (`intensity=""`) or `"Infinity"` — logs a warning and the default applies.
+
+```html
+<pc-camera fov="60" near-clip="0.1"></pc-camera>
+```
+
+## Enums
+
+Enum attributes accept one of a fixed set of names. An invalid name logs a warning that lists the valid names, then the default applies:
+
+```none
+Invalid value 'bogus' for attribute 'scroll-mode'. Valid values: clamp, bounce, infinite. Using 'bounce'.
+```
+
+Numeric engine constants are not accepted — the declarative layer is names-only. This also applies to the JavaScript API: enum-typed element properties (such as `scrollbar.orientation`) accept and return string names, never engine numeric constants.
+
+```html
+<pc-camera tonemap="aces"></pc-camera>
+```
+
+## Vectors
+
+Vector attributes take space-separated numbers — exactly as many as the type has components (2 for Vector2, 3 for Vector3, 4 for Vector4). Any amount of whitespace between components is fine. Commas are not part of the grammar and are rejected with a warning.
+
+```html
+<pc-entity position="0 1.5 0" scale="2 2 2"></pc-entity>
+```
+
+## Colors
+
+Color attributes accept any of three formats:
+
+| Format | Example |
+| --- | --- |
+| [CSS color name](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) | `clear-color="rebeccapurple"` |
+| Hex code (`#rgb`, `#rgba`, `#rrggbb` or `#rrggbbaa`) | `color="#f00"` or `color="#ff0000"` |
+| 3 or 4 space-separated numbers in the range 0 to 1 | `color="1 0.5 0.5"` or `color="1 0.5 0.5 0.5"` |
+
+```html
+<pc-camera clear-color="#f0f8ff"></pc-camera>
+<pc-light color="1 0.8 0.6"></pc-light>
+```
+
+## Entity References
+
+Some attributes reference another entity in the document — for example, [`<pc-button>`](tags/pc-button.md)'s `image`, [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle` and [`<pc-scrollview>`](tags/pc-scrollview.md)'s `viewport`, `content` and scrollbar attributes. A reference can be any of:
+
+* A CSS selector (e.g. `#my-id` or `pc-entity[name="Player"]`)
+* An element `id` (e.g. `my-id`)
+* An entity `name` (e.g. `Player`)
+
+```html
+<pc-scrollbar orientation="vertical" handle="#handle"></pc-scrollbar>
+```
+
+## Script Attributes
+
+Scripts declare their own attributes, so [`<pc-script>`](tags/pc-script.md) extends these conventions with per-property attributes that are parsed based on each script attribute's declared type. See [Adding Behavior with Scripts](scripting.md) for details.
+
+--------------------------------------------------------------------------------
+
 ## Building a Scene
 
 URL: https://developer.playcanvas.com/user-manual/web-components/building-a-scene/
@@ -33824,13 +33925,14 @@ You can install it (and the PlayCanvas Engine) as follows:
 npm install playcanvas @playcanvas/web-components --save-dev
 ```
 
-Next, in your HTML file, you will need an import map because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency):
+Next, in your HTML file, you will need an import map because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency). Mapping `@playcanvas/web-components` as well lets your own module scripts import the library's JavaScript API (such as `whenReady`):
 
 ```html
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "/node_modules/playcanvas/build/playcanvas.mjs"
+            "playcanvas": "/node_modules/playcanvas/build/playcanvas.mjs",
+            "@playcanvas/web-components": "/node_modules/@playcanvas/web-components/dist/pwc.mjs"
         }
     }
 </script>
@@ -33852,7 +33954,8 @@ Instead of loading the library from a local package, you can instead opt to load
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
+            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
+            "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
         }
     }
 </script>
@@ -33884,7 +33987,8 @@ Let's see how this looks in a minimal boilerplate HTML file:
         <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
+                    "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
                 }
             }
         </script>
@@ -33987,7 +34091,7 @@ const { app } = await whenReady(appElement);
 
 ## TypeScript
 
-The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (such as `pc-asset`) is a compile-time error.
+The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (such as `pc-module`) is a compile-time error.
 
 ## When to Use Scripts Instead
 
@@ -34062,17 +34166,75 @@ Let's update our script to accept a rotation speed as an attribute:
 }
 ```
 
-We can now pass configuration to our script using the `attributes` attribute:
+We can now configure the script simply by adding a `speed` attribute to the `<pc-script>` tag:
 
-```html {4-6}
+```html {4}
 <pc-entity name="fast spinning cube">
     <pc-render type="box"></pc-render>
     <pc-scripts>
-        <pc-script name="rotateScript" attributes='{
-            "speed": 180
-        }'></pc-script>
+        <pc-script name="rotateScript" speed="180"></pc-script>
     </pc-scripts>
 </pc-entity>
+```
+
+Any attribute on `<pc-script>` that is not part of the element's own API (`name`, `enabled`, `attributes` and standard HTML attributes such as `id` and `style`) maps to the script attribute of the same name. Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`).
+
+Values are parsed according to the type of the script's declared default value, following the same [value conventions](attributes.md) as every other element:
+
+| Script attribute type | Example markup |
+| --------------------- | -------------- |
+| Number                | `speed="180"` |
+| Boolean               | `enable-fly="false"` |
+| String                | `label="Hello"` |
+| Vec2 / Vec3 / Vec4    | `focus-point="0 1.75 0"` |
+| Color                 | `tint="#ff0000"` or `tint="1 0 0"` |
+| Quat                  | `orientation="0 90 0"` (Euler angles in degrees) |
+
+For example, here is the engine's `cameraControls` script configured entirely with per-property attributes:
+
+```html
+<pc-script name="cameraControls"
+           enable-fly="false"
+           focus-point="0 1.75 0"
+           zoom-range="2 15"></pc-script>
+```
+
+:::tip
+
+A typo in an attribute name logs a console warning — including a "did you mean" hint if you accidentally write a camelCase name like `focusPoint` instead of `focus-point`. Keep the console open while authoring.
+
+:::
+
+### Type Prefixes
+
+Number, boolean, vector and color values are inferred from the script's declared defaults. For cases where inference cannot help — referencing assets or entities, or setting an attribute whose default is `null` — prefix the value with an explicit type:
+
+| Prefix    | Example | Description |
+| --------- | ------- | ----------- |
+| `asset:`  | `asset:arial-font` | References a `<pc-asset>` by its `id` attribute |
+| `entity:` | `entity:#player` | References a `<pc-entity>` by CSS selector, element `id` or entity `name` |
+| `vec2:`   | `vec2:10 20` | A Vec2 from 2 space-separated numbers |
+| `vec3:`   | `vec3:10 20 30` | A Vec3 from 3 space-separated numbers |
+| `vec4:`   | `vec4:10 20 30 40` | A Vec4 from 4 space-separated numbers |
+| `color:`  | `color:1 0.5 0.5` | A Color from 3 (RGB) or 4 (RGBA) space-separated numbers in the range 0 to 1 |
+
+```html
+<pc-script name="myScript" font="asset:arial-font" target="entity:#player"></pc-script>
+```
+
+### The `attributes` JSON Attribute
+
+Per-property attributes cover flat, simply named script attributes. For everything else, the `attributes` attribute takes a JSON object:
+
+* **Nested structures** — arrays and objects that per-property attributes cannot express.
+* **Reserved names** — script attributes whose names collide with the element's own API or standard HTML attribute names (e.g. `title`, `name`, `enabled`, `id`, `style`).
+
+```html
+<pc-script name="annotation" attributes='{
+    "label": "1",
+    "title": "Cockpit Canopy",
+    "text": "Transparent canopy offering visibility and housing the pilot controls."
+}'></pc-script>
 ```
 
 :::important
@@ -34081,30 +34243,45 @@ The `attributes` attribute takes a JSON string. Because JSON requires properties
 
 :::
 
-### PlayCanvas-Specific Types for Script Attributes
-
-In addition to standard JavaScript types, you can configure script attributes using special PlayCanvas data types. When passing these values, you must supply them as strings formatted with a prefix followed by the required data. This ensures that the engine correctly interprets the attribute values.
-
-The expected format for each type is as follows:
-
-| PlayCanvas Data Type | Format Example                           | Description |
-| -------------------- | ---------------------------------------- | ----------- |
-| **Asset**            | `asset:your-asset-id`                    | References a `<pc-asset>`. Concatenate `asset:` with the asset's `id` attribute. |
-| **Entity**           | `entity:your-entity-id`                  | References a `<pc-entity>`. Concatenate `entity:` with the entity's `id` attribute. |
-| **Color**            | `color:255,200,100` or `color:255,200,100,255` | Specifies a color. Provide three comma-separated values (RGB) or four values (RGBA) prefixed by `color:`. |
-| **Vec2**             | `vec2:10,20`                             | Defines a two-dimensional vector. Concatenate `vec2:` with two comma-separated numbers. |
-| **Vec3**             | `vec3:10,20,30`                          | Defines a three-dimensional vector. Concatenate `vec3:` with three comma-separated numbers. |
-| **Vec4**             | `vec4:10,20,30,40`                       | Defines a four-dimensional vector. Concatenate `vec4:` with four comma-separated numbers. |
-
-Example Usage in HTML:
+Inside the JSON, a plain numeric array converts automatically to the script attribute's declared math type — a `Vec2`, `Vec3`, `Vec4` or `Color` default turns `[0, 1.75, 0]` into the right type:
 
 ```html
-<pc-script name="myScript" attributes='{
-    "speed": 180,
-    "targetColor": "color:255,100,50,255",
-    "velocity": "vec3:5,0,0"
+<pc-script name="cameraControls" attributes='{
+    "focusPoint": [0, 1.75, 0],
+    "pitchRange": [-90, 0]
 }'></pc-script>
 ```
+
+The [type prefixes](#type-prefixes) also work anywhere inside the JSON, including in nested arrays and objects:
+
+```html
+<pc-script name="xrMenu" attributes='{
+    "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
+    "fontAsset": "asset:arial-font"
+}'></pc-script>
+```
+
+### Precedence
+
+If the same script attribute is set both as a per-property attribute and in the `attributes` JSON, the per-property attribute always wins — at creation and whenever either changes at runtime. Removing a per-property attribute falls back to the JSON's value for that key (when present), otherwise to the script's default.
+
+### Accessing Scripts from JavaScript
+
+`<pc-script>` elements become *ready* once their script instance has been created. Use `whenReady()` (or the element's `ready()` promise) to wait for that, then access the live [`Script`](https://api.playcanvas.com/engine/classes/Script.html) instance via the `script` property. See [Programmatic Access](programmatic-access.md) for the full `whenReady` API:
+
+```javascript
+
+const scriptElement = await whenReady('pc-script');
+scriptElement.script.speed = 360;
+```
+
+You can also read and write script attributes as an object via the `scriptAttributes` property — no JSON strings required:
+
+```javascript
+scriptElement.scriptAttributes = { speed: 2, focusPoint: [0, 1.75, 0] };
+```
+
+Values are converted with the same rules as the `attributes` attribute: type prefixes are resolved and plain numeric arrays convert to the script attribute's declared math type.
 
 [Read more](/user-manual/scripting/script-attributes) about Script Attributes.
 
@@ -34119,6 +34296,8 @@ Before you set about writing your own scripts, check to see whether the function
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/
 
 Here is a complete list of the tags that are available in PlayCanvas Web Components.
+
+The attributes of every tag share the same value conventions: an absent (or removed) attribute means the engine default applies, and an invalid value logs a console warning and falls back to the default. See [Attributes](../attributes.md) for how booleans, numbers, enums, vectors and colors are written.
 
 | Tag | Description |
 | --- | --- |
@@ -34209,7 +34388,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `data` | String | - | Inline JSON asset data. Used by texture atlases (frame definitions) and sprites |
 | `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
-| `lazy` | Flag | - | Whether to defer loading until first referenced or explicitly requested |
+| `lazy` | Boolean | `"false"` | Whether to defer loading until first referenced or explicitly requested |
 | `pixels-per-unit` | Number | `"1"` | For `sprite` assets: number of pixels per world unit |
 | `render-mode` | Enum | `"simple"` | For `sprite` assets: `"simple"` \| `"sliced"` \| `"tiled"`. Use `"sliced"` for 9-slice panels |
 | `src` | String | - | Path to the asset file |
@@ -34329,7 +34508,7 @@ The `<pc-camera>` tag is used to define a camera component.
 | `clear-color` | Color | `"0.75 0.75 0.75 1"` | Background color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `clear-color-buffer` | Boolean | `"true"` | Controls whether the camera clears the color buffer |
 | `clear-depth-buffer` | Boolean | `"true"` | Controls whether the camera clears the depth buffer |
-| `clear-stencil-buffer` | Boolean | `"true"` | Controls whether the camera clears the stencil buffer |
+| `clear-stencil-buffer` | Boolean | `"false"` | Controls whether the camera clears the stencil buffer |
 | `cull-faces` | Boolean | `"true"` | Controls whether the camera culls faces |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `far-clip` | Number | `"1000"` | The far clipping plane distance |
@@ -34337,9 +34516,9 @@ The `<pc-camera>` tag is used to define a camera component.
 | `fov` | Number | `"45"` | Field of view in degrees |
 | `frustum-culling` | Boolean | `"true"` | Controls whether the camera uses frustum culling |
 | `gamma` | Enum | `"srgb"` | Color space: `"linear"` \| `"srgb"` |
-| `horizontal-fov` | Flag | - | Whether to use horizontal field of view instead of vertical |
+| `horizontal-fov` | Boolean | `"false"` | Whether to use horizontal field of view instead of vertical |
 | `near-clip` | Number | `"0.1"` | The near clipping plane distance |
-| `orthographic` | Flag | - | Whether to use orthographic projection instead of perspective |
+| `orthographic` | Boolean | `"false"` | Whether to use orthographic projection instead of perspective |
 | `ortho-height` | Number | `"10"` | Height of the orthographic projection |
 | `priority` | Number | `"0"` | Rendering priority of the camera |
 | `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
@@ -34381,12 +34560,12 @@ The `<pc-collision>` tag is used to define a collision component.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `axis` | Number | `"1"` | Axis for cylinder/capsule shapes (0=X, 1=Y, 2=Z) |
-| `convex-hull` | Flag | - | Whether to use a convex hull for mesh collision |
+| `convex-hull` | Boolean | `"false"` | Whether to use a convex hull for mesh collision |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `half-extents` | Vector3 | `"0.5 0.5 0.5"` | Half-extents for box collision as "X Y Z" values |
 | `height` | Number | `"2"` | Height for cylinder/capsule collision shapes |
 | `radius` | Number | `"0.5"` | Radius for sphere/cylinder/capsule collision shapes |
-| `type` | Enum | `"box"` | Collision shape: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"sphere"` |
+| `type` | Enum | `"box"` | Collision shape: `"box"` \| `"capsule"` \| `"compound"` \| `"cone"` \| `"cylinder"` \| `"mesh"` \| `"sphere"` |
 
 </div>
 
@@ -34427,7 +34606,7 @@ The `<pc-element>` tag is used to define an element component. Element component
 
 :::note
 
-Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [`<pc-asset>`](../pc-asset)) or a texture, and can act as a `mask` to clip their descendants. Only text elements require a font `asset`.
+Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [`<pc-asset>`](../pc-asset)) or a texture, and can act as a `mask` to clip their descendants. Only text elements require a `font-asset`.
 
 :::
 
@@ -34438,19 +34617,19 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `anchor` | Vector4 | `"0 0 0 1"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
-| `asset` | String | - | Font asset ID (must reference a `font` type asset). Required for text elements only |
-| `auto-fit-height` | Flag | - | Reduce the font size (down to `min-font-size`) so text fits the element's height. Requires `auto-height="false"`. Text elements only |
-| `auto-fit-width` | Flag | - | Reduce the font size (down to `min-font-size`) so text fits the element's width. Requires `auto-width="false"`. Text elements only |
+| `auto-fit-height` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's height. Requires `auto-height="false"`. Text elements only |
+| `auto-fit-width` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's width. Requires `auto-width="false"`. Text elements only |
 | `auto-height` | Boolean | `"true"` | Whether to automatically adjust height to fit text content. Text elements only |
 | `auto-width` | Boolean | `"true"` | Whether to automatically adjust width to fit text content. Text elements only |
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `enable-markup` | Flag | - | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
+| `enable-markup` | Boolean | `"false"` | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
+| `font-asset` | String | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
 | `font-size` | Number | `"32"` | Font size in pixels |
 | `height` | Number | `"0"` | Height in pixels (0 for auto-sizing) |
 | `line-height` | Number | `"32"` | Line height in pixels |
 | `margin` | Vector4 | - | Insets the element from a split (stretched) anchor as `left bottom right top`. For point anchors, `width`/`height` govern size instead |
-| `mask` | Flag | - | Whether the element clips its descendants to its bounds. Image elements only |
+| `mask` | Boolean | `"false"` | Whether the element clips its descendants to its bounds. Image elements only |
 | `max-font-size` | Number | `"32"` | Largest font size used when auto-fitting |
 | `min-font-size` | Number | `"8"` | Smallest font size used when auto-fitting |
 | `opacity` | Number | `"1"` | Opacity, from 0 (transparent) to 1 (opaque) |
@@ -34461,9 +34640,9 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `text` | String | - | Text content to display |
 | `texture-asset` | String | - | Texture [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `type` | Enum | `"group"` | Element type: `"group"` \| `"image"` \| `"text"` |
-| `use-input` | Flag | - | Whether the element receives pointer input. Required for [`<pc-button>`](../pc-button) and scroll-view interaction |
+| `use-input` | Boolean | `"false"` | Whether the element receives pointer input. Required for [`<pc-button>`](../pc-button) and scroll-view interaction |
 | `width` | Number | `"0"` | Width in pixels (0 for auto-sizing) |
-| `wrap-lines` | Flag | - | Whether to wrap text lines |
+| `wrap-lines` | Boolean | `"false"` | Whether to wrap text lines |
 
 </div>
 
@@ -34471,7 +34650,7 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 
 ```html
 <pc-entity>
-    <pc-element type="text" asset="arial" text="Hello, World!"></pc-element>
+    <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
  </pc-entity>
 ```
 
@@ -34506,7 +34685,7 @@ The `<pc-entity>` tag is used to define an entity.
 | `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
 | `rotation` | Vector3 | `"0 0 0"` | Local-space rotation as "X Y Z" Euler angles in degrees |
 | `scale` | Vector3 | `"1 1 1"` | Local-space scale as "X Y Z" values |
-| `tags` | String | - | Space-separated list of tags |
+| `tags` | String | - | Comma-separated list of tags |
 
 </div>
 
@@ -34522,10 +34701,21 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | `pointermove` | Fired when a pointer is moved over the entity. |
 | `pointerup` | Fired when a pointer is released from the entity. |
 
+You can also handle these events declaratively with inline `onpointer*` attributes. These are standard [inline event handlers](https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers#registering_onevent_handlers), compiled and run by the browser itself, so they behave exactly like `onclick` on any HTML element: setting the attribute (even at runtime) replaces the previous handler, removing it removes the handler, and within the handler `this` is the `<pc-entity>` element and `event` is the dispatched event.
+
+```html
+<pc-entity name="cube"
+           onpointerenter="this.entity.script.tweener.play(0)"
+           onpointerleave="this.entity.script.tweener.play(1)"
+           onpointerdown="this.entity.script.tweener.play(2)">
+    <pc-render type="box"></pc-render>
+</pc-entity>
+```
+
 ## Example
 
 ```html
-<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1 tag2">
+<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1,tag2">
     
 </pc-entity>
 ```
@@ -34557,7 +34747,7 @@ When rendering splat-based scenes, it is recommended to set `antialias` and `hig
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | String | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
-| `cast-shadows` | Flag | - | Whether the gsplat component casts shadows |
+| `cast-shadows` | Boolean | `"false"` | Whether the gsplat component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `lod-base-distance` | Number | `"5"` | Distance for the first LOD transition (LOD 0 to LOD 1). Splats closer than this use the highest-quality LOD. Minimum `0.1`. Only affects assets that contain LOD levels. |
 | `lod-multiplier` | Number | `"3"` | Multiplier between successive LOD distance thresholds, forming a geometric progression. Higher values switch to coarser LODs sooner. Minimum `1.2`. Only affects assets that contain LOD levels. |
@@ -34596,7 +34786,7 @@ The `<pc-layoutchild>` tag is used to define a layout child component, which con
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `exclude-from-layout` | Flag | - | Exclude this element from the layout so it takes up no space |
+| `exclude-from-layout` | Boolean | `"false"` | Exclude this element from the layout so it takes up no space |
 | `fit-height-proportion` | Number | `"0"` | Proportion of the group's spare height this element takes when `height-fitting` stretches or shrinks |
 | `fit-width-proportion` | Number | `"0"` | Proportion of the group's spare width this element takes when `width-fitting` stretches or shrinks |
 | `max-height` | Number | - | Maximum height the element is laid out with (omit for no limit) |
@@ -34645,11 +34835,11 @@ The `<pc-layoutgroup>` tag is used to define a layout group component, which aut
 | `height-fitting` | Enum | `"none"` | Fitting along the vertical axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
 | `orientation` | Enum | `"horizontal"` | Orientation of the layout: `"horizontal"` \| `"vertical"` |
 | `padding` | Vector4 | `"0 0 0 0"` | Padding around the group as `left bottom right top` |
-| `reverse-x` | Flag | - | Reverse the order of children along the horizontal axis |
-| `reverse-y` | Flag | - | Reverse the order of children along the vertical axis |
+| `reverse-x` | Boolean | `"false"` | Reverse the order of children along the horizontal axis |
+| `reverse-y` | Boolean | `"false"` | Reverse the order of children along the vertical axis |
 | `spacing` | Vector2 | `"0 0"` | Spacing between children as `x y` |
 | `width-fitting` | Enum | `"none"` | Fitting along the horizontal axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
-| `wrap` | Flag | - | Whether children wrap onto a new line or column when they overflow the group |
+| `wrap` | Boolean | `"false"` | Whether children wrap onto a new line or column when they overflow the group |
 
 </div>
 
@@ -34695,7 +34885,7 @@ The `<pc-light>` tag is used to define a light component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `cast-shadows` | Flag | - | Whether the light casts shadows |
+| `cast-shadows` | Boolean | `"false"` | Whether the light casts shadows |
 | `color` | Color | `"1 1 1"` | Light color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `inner-cone-angle` | Number | `"40"` | Inner cone angle in degrees (for spot lights) |
@@ -34953,10 +35143,10 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `cast-shadows` | Flag | - | Whether the component casts shadows |
+| `cast-shadows` | Boolean | `"true"` | Whether the component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `receive-shadows` | Flag | - | Whether the component receives shadows |
-| `type` | Enum | - | Primitive shape: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
+| `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
+| `type` | Enum | `"asset"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"`. The default, `"asset"`, renders a render asset instead of a primitive |
 
 </div>
 
@@ -35031,11 +35221,12 @@ The `<pc-scene>` tag is used to define the scene.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `fog` | Enum | - | Fog type: `"linear"` \| `"exp"` \| `"exp2"` |
-| `fog-color` | Color | - | Fog color as CSS color string or hex code |
-| `fog-density` | Number | - | Fog density for exponential fog types |
-| `fog-end` | Number | - | End distance for linear fog |
-| `fog-start` | Number | - | Start distance for linear fog |
+| `fog` | Enum | `"none"` | Fog type: `"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
+| `fog-color` | Color | `"1 1 1"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
+| `fog-density` | Number | `"0"` | Fog density for exponential fog types |
+| `fog-end` | Number | `"1000"` | End distance for linear fog |
+| `fog-start` | Number | `"0"` | Start distance for linear fog |
+| `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
 
 </div>
 
@@ -35073,13 +35264,13 @@ The `<pc-screen>` tag is used to define a screen component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `blend` | Flag | - | Whether to enable alpha blending |
+| `blend` | Boolean | `"false"` | Whether to enable alpha blending |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `priority` | Number | `"0"` | Rendering priority (0-255) |
 | `reference-resolution` | Vector2 | `"640 320"` | Reference resolution as "Width Height" values |
 | `resolution` | Vector2 | `"640 320"` | Screen resolution as "Width Height" values |
 | `scale-blend` | Number | `"0.5"` | Scale blending factor (0-1) |
-| `screen-space` | Flag | - | Whether to render in screen space |
+| `screen-space` | Boolean | `"false"` | Whether to render in screen space |
 
 </div>
 
@@ -35091,7 +35282,7 @@ The `<pc-screen>` tag is used to define a screen component.
     <pc-screen></pc-screen>
     
     <pc-entity>
-        <pc-element type="text" asset="arial" text="Hello, World!"></pc-element>
+        <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
     </pc-entity>
 </pc-entity>
 ```
@@ -35121,18 +35312,20 @@ The `<pc-script>` tag is used to define a script.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `attributes` | String | `""` | JSON string of script attributes |
+| `attributes` | String | `""` | JSON object of script attributes. Use it for nested structures and for script attribute names that collide with reserved HTML attribute names (e.g. `title`) |
 | `enabled` | Boolean | `"true"` | Enabled state of the script |
 | `name` | String | - | Script name (must match the script's `scriptName` property) |
 
 </div>
+
+In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
 
 ## Example
 
 ```html
 <pc-entity>
     <pc-scripts>
-        <pc-script name="myScript"></pc-script>
+        <pc-script name="myScript" speed="180" target-color="#ff6432"></pc-script>
     </pc-scripts>
 </pc-entity>
 ```
@@ -35140,6 +35333,8 @@ The `<pc-script>` tag is used to define a script.
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-script>` elements using the [ScriptElement API](https://api.playcanvas.com/web-components/classes/ScriptElement.html).
+
+The element becomes ready once its script instance has been created — await `whenReady('pc-script')` or the element's `ready()` promise. The live `Script` instance is then available via the `script` property, and script attributes can be read and written as an object via the `scriptAttributes` property.
 
 --------------------------------------------------------------------------------
 
@@ -35264,6 +35459,7 @@ The `<pc-scrollview>` tag is used to define a scroll view component, which lets 
 | `vertical` | Boolean | `"true"` | Whether vertical scrolling is enabled |
 | `vertical-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
 | `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
+| `viewport` | String | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
 
 </div>
 
@@ -35329,6 +35525,7 @@ The `<pc-sky>` tag is used to define a sky component.
 | `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range) |
 | `intensity` | Number | `"1"` | Sky brightness intensity |
 | `level` | Number | `"0"` | Mipmap level to use for rendering |
+| `lighting` | Boolean | `"false"` | Whether the skybox is used as a light source |
 | `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles |
 | `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values |
 | `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |
@@ -35369,11 +35566,11 @@ The `<pc-sound>` tag is used to define a sound.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | String | - | Audio asset ID (must reference an `audio` type asset) |
-| `auto-play` | Flag | - | Whether the sound plays automatically |
-| `duration` | Number | - | Duration of the sound in seconds |
-| `loop` | Flag | - | Whether the sound loops |
+| `auto-play` | Boolean | `"false"` | Whether the sound plays automatically |
+| `duration` | Number | - | Duration of the sound in seconds (omit to play the full clip) |
+| `loop` | Boolean | `"false"` | Whether the sound loops |
 | `name` | String | - | Name identifier for the sound slot |
-| `overlap` | Flag | - | Whether sounds can overlap when triggered multiple times |
+| `overlap` | Boolean | `"false"` | Whether sounds can overlap when triggered multiple times |
 | `pitch` | Number | `"1"` | Pitch multiplier (1 = normal pitch) |
 | `start-time` | Number | `"0"` | Start time offset in seconds |
 | `volume` | Number | `"1"` | Volume level (0-1) |
@@ -35417,7 +35614,7 @@ The `<pc-sounds>` tag is used to define a sound component.
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `max-distance` | Number | `"10000"` | Maximum distance for audio falloff |
 | `pitch` | Number | `"1"` | Pitch multiplier for all sounds in this component |
-| `positional` | Flag | - | Whether the sound is positional (3D spatial audio) |
+| `positional` | Boolean | `"false"` | Whether the sound is positional (3D spatial audio) |
 | `ref-distance` | Number | `"1"` | Reference distance for full volume |
 | `roll-off-factor` | Number | `"1"` | Falloff rate factor for distance attenuation |
 | `volume` | Number | `"1"` | Master volume for all sounds in this component |
@@ -35451,24 +35648,28 @@ PlayCanvas Web Components make it easy to add Virtual Reality (VR) and Augmented
 To enable XR support, you'll need:
 
 1. XR-specific scripts (provided by the [Engine NPM package](https://www.npmjs.com/package/playcanvas)).
-2. A camera entity with the appropriate scripts attached.
-3. UI for entering/exiting XR (WebXR requires a user gesture to start a session).
+2. A camera rig with the XR scripts attached.
+3. UI for entering XR (WebXR requires a user gesture to start a session).
 4. A secure context — serve your page over HTTPS (or `http://localhost` during development).
 
 ### XR Scripts
 
-Specify the following scripts using [`<pc-asset>`](../tags/pc-asset) elements:
+The engine ships a set of XR scripts in its `scripts/esm/xr` folder. Specify them using [`<pc-asset>`](tags/pc-asset.md) elements:
 
 ```html
-<pc-asset src="/node_modules/playcanvas/scripts/esm/xr-controllers.mjs"></pc-asset>
-<pc-asset src="/node_modules/playcanvas/scripts/esm/xr-navigation.mjs"></pc-asset>
+<pc-asset src="/node_modules/playcanvas/scripts/esm/xr/xr-controllers.mjs"></pc-asset>
+<pc-asset src="/node_modules/playcanvas/scripts/esm/xr/xr-menu.mjs"></pc-asset>
+<pc-asset src="/node_modules/playcanvas/scripts/esm/xr/xr-navigation.mjs"></pc-asset>
+<pc-asset src="/node_modules/playcanvas/scripts/esm/xr/xr-session.mjs"></pc-asset>
 ```
 
 Or, when using a CDN:
 
 ```html
-<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr-controllers.mjs"></pc-asset>
-<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr-navigation.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr/xr-controllers.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr/xr-menu.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr/xr-navigation.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr/xr-session.mjs"></pc-asset>
 ```
 
 :::note[CDN and import maps]
@@ -35477,54 +35678,76 @@ When loading XR scripts from a CDN, make sure your page’s import map also poin
 
 :::
 
-* [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-controllers.mjs) - Dynamically downloads and renders XR controller models (GLBs) for any detected XR controllers (including hands).
-* [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-navigation.mjs) - Implements basic teleportation navigation (via point and select actions).
+* [`xr-session.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-session.mjs) - Manages the WebXR session lifecycle: starts an AR or VR session in response to app events (`ar:start` and `vr:start` by default), ends it on `xr:end` or the Escape key, and handles camera rig transforms, AR transparency and cleanup automatically.
+* [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-controllers.mjs) - Dynamically downloads and renders XR controller models (GLBs) for any detected XR controllers (including hands).
+* [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-navigation.mjs) - Implements basic teleportation navigation (via point and select actions).
+* [`xr-menu.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-menu.mjs) - Shows an in-headset menu (via a palm-up gesture with hand tracking, or a controller button) whose items fire app events — ideal for an "Exit XR" button.
 
 ### Camera Setup
 
-The XR scripts require the scene's camera to be set up as follows:
+The XR scripts should be attached to a *parent* of the camera entity — `xrSession` moves the rig's root while the headset drives the camera itself:
 
 ```html
 
 <pc-entity name="camera root">
-    <pc-entity name="camera">
+    <pc-entity name="camera" position="0 1.7 5">
         <pc-camera></pc-camera>
     </pc-entity>
     <pc-scripts>
         <pc-script name="xrControllers"></pc-script>
+        <pc-script name="xrMenu" attributes='{
+            "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
+            "fontAsset": "asset:arial-font"
+        }'></pc-script>
         <pc-script name="xrNavigation"></pc-script>
+        <pc-script name="xrSession"></pc-script>
     </pc-scripts>
 </pc-entity>
 ```
 
-### UI for Entering/Exiting XR
+:::note
 
-Finally, you'll need to add some UI controls to allow the user to enter and exit XR mode. This is a WebXR-specific requirement, where a user gesture is required to activate an XR session. Let's create two simple buttons to trigger either an AR or VR session.
+`xrMenu` renders text, so it needs a `font` type [`<pc-asset>`](tags/pc-asset.md) declared alongside your other assets — the [examples](https://github.com/playcanvas/web-components/tree/main/examples) use `arial.json`:
+
+```html
+<pc-asset src="assets/fonts/arial.json" type="font" id="arial-font"></pc-asset>
+```
+
+It is configured through the `attributes` JSON (rather than per-property attributes) because `menuItems` is a nested array — see [Adding Behavior with Scripts](scripting.md).
+
+:::
+
+### UI for Entering XR
+
+Finally, you'll need some UI to allow the user to enter XR mode. This is a WebXR-specific requirement, where a user gesture is required to activate an XR session. Let's create two simple buttons:
 
 ```html
 <button id="enterAR">Enter AR</button>
 <button id="enterVR">Enter VR</button>
 ```
 
-Let's add event listeners to the buttons to trigger an XR session when the user clicks them.
+With `xrSession` on the camera rig, the buttons only need to fire the app events it listens for:
 
 ```javascript
 
 const { app } = await whenReady('pc-app');
-const xr = app.xr;
-const camera = app.root.findComponent('camera');
 
-document.getElementById('enterAR').addEventListener('click', () => {
-    xr.start(camera, 'immersive-ar', 'local-floor')
-});
+document.getElementById('enterAR').addEventListener('click', () => app.fire('ar:start'));
+document.getElementById('enterVR').addEventListener('click', () => app.fire('vr:start'));
+```
 
-document.getElementById('enterVR').addEventListener('click', () => {
-    xr.start(camera, 'immersive-vr', 'local-floor')
-});
+The event names are script attributes of `xrSession` (`start-ar-event`, `start-vr-event` and `end-event`), so you can rename them if they clash with events of your own. Ending a session needs no extra code: `xrSession` ends it when the `xr:end` event fires (the "Exit XR" menu item above) or when the user presses Escape.
 
-window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && xr.active) {
-        xr.end();
+You can also show each button only when the device supports that session type:
+
+```javascript
+
+const arButton = document.getElementById('enterAR');
+arButton.style.display = app.xr.isAvailable(XRTYPE_AR) ? 'block' : 'none';
+
+app.xr.on('available', (type, available) => {
+    if (type === XRTYPE_AR) {
+        arButton.style.display = available ? 'block' : 'none';
     }
 });
 ```
