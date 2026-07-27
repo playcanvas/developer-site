@@ -18,11 +18,11 @@ The `<pc-sound>` tag is used to define a sound.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | String | - | Audio asset ID (must reference an `audio` type asset) |
-| `auto-play` | Flag | - | Whether the sound plays automatically |
-| `duration` | Number | - | Duration of the sound in seconds |
-| `loop` | Flag | - | Whether the sound loops |
+| `auto-play` | Boolean | `"false"` | Whether the sound plays automatically |
+| `duration` | Number | - | Duration of the sound in seconds (omit to play the full clip) |
+| `loop` | Boolean | `"false"` | Whether the sound loops |
 | `name` | String | - | Name identifier for the sound slot |
-| `overlap` | Flag | - | Whether sounds can overlap when triggered multiple times |
+| `overlap` | Boolean | `"false"` | Whether sounds can overlap when triggered multiple times |
 | `pitch` | Number | `"1"` | Pitch multiplier (1 = normal pitch) |
 | `start-time` | Number | `"0"` | Start time offset in seconds |
 | `volume` | Number | `"1"` | Volume level (0-1) |

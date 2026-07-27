@@ -17,11 +17,12 @@ description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `fog` | Enum | - | フォグの種類：`"linear"` \| `"exp"` \| `"exp2"` |
-| `fog-color` | Color | - | CSSカラース文字列または16進数コードとしてのフォグの色 |
-| `fog-density` | Number | - | 指数フォグタイプの場合のフォグの密度 |
-| `fog-end` | Number | - | 線形フォグの終了距離 |
-| `fog-start` | Number | - | 線形フォグの開始距離 |
+| `fog` | Enum | `"none"` | フォグの種類：`"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
+| `fog-color` | Color | `"1 1 1"` | スペース区切りのRGB値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としてのフォグの色 |
+| `fog-density` | Number | `"0"` | 指数フォグタイプの場合のフォグの密度 |
+| `fog-end` | Number | `"1000"` | 線形フォグの終了距離 |
+| `fog-start` | Number | `"0"` | 線形フォグの開始距離 |
+| `gravity` | Vector3 | `"0 -9.81 0"` | 「X Y Z」値としてリジッドボディに適用される重力 |
 
 </div>
 

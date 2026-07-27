@@ -19,7 +19,7 @@ description: "pc-layoutchild要素のリファレンス: レイアウトグル�
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `exclude-from-layout` | Flag | - | この要素をレイアウトから除外し、スペースを取らないようにします |
+| `exclude-from-layout` | Boolean | `"false"` | この要素をレイアウトから除外し、スペースを取らないようにします |
 | `fit-height-proportion` | Number | `"0"` | `height-fitting` が stretch または shrink のとき、この要素が取るグループの余剰高さの割合 |
 | `fit-width-proportion` | Number | `"0"` | `width-fitting` が stretch または shrink のとき、この要素が取るグループの余剰幅の割合 |
 | `max-height` | Number | - | 要素がレイアウトされる最大の高さ（制限しない場合は省略） |

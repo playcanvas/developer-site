@@ -70,17 +70,75 @@ export class RotateScript extends Script {
 }
 ```
 
-これで、`attributes` 属性を使用してスクリプトに設定を渡すことができます。
+これで、`<pc-script>` タグに `speed` 属性を追加するだけでスクリプトを設定できます。
 
-```html {4-6}
+```html {4}
 <pc-entity name="高速回転するキューブ">
     <pc-render type="box"></pc-render>
     <pc-scripts>
-        <pc-script name="rotateScript" attributes='{
-            "speed": 180
-        }'></pc-script>
+        <pc-script name="rotateScript" speed="180"></pc-script>
     </pc-scripts>
 </pc-entity>
+```
+
+`<pc-script>` 上の、要素自身のAPI（`name`、`enabled`、`attributes`、および `id` や `style` などの標準HTML属性）に含まれない属性は、同名のスクリプト属性にマッピングされます。属性名はケバブケースで記述し、スクリプトのキャメルケースのプロパティ名にマッピングされます（例: `focus-point` → `focusPoint`）。
+
+値は、スクリプトが宣言したデフォルト値の型に従って解析され、他のすべての要素と同じ[値の規約](attributes.md)に従います。
+
+| スクリプト属性の型 | マークアップ例 |
+| --------------------- | -------------- |
+| Number                | `speed="180"` |
+| Boolean               | `enable-fly="false"` |
+| String                | `label="Hello"` |
+| Vec2 / Vec3 / Vec4    | `focus-point="0 1.75 0"` |
+| Color                 | `tint="#ff0000"` または `tint="1 0 0"` |
+| Quat                  | `orientation="0 90 0"`（オイラー角、度単位） |
+
+例えば、エンジンの `cameraControls` スクリプトをプロパティごとの属性だけで設定すると次のようになります。
+
+```html
+<pc-script name="cameraControls"
+           enable-fly="false"
+           focus-point="0 1.75 0"
+           zoom-range="2 15"></pc-script>
+```
+
+:::tip
+
+属性名のタイプミスはコンソール警告を出力します。`focus-point` の代わりに `focusPoint` のようなキャメルケースの名前を誤って書いた場合は、「もしかして」のヒントも表示されます。オーサリング中はコンソールを開いておきましょう。
+
+:::
+
+### 型プレフィックス
+
+Number、Boolean、ベクトル、カラーの値は、スクリプトが宣言したデフォルト値から型が推論されます。推論が役立たないケース — アセットやエンティティの参照、またはデフォルト値が `null` の属性の設定 — では、明示的な型のプレフィックスを値に付けます。
+
+| プレフィックス | 例 | 説明 |
+| --------- | ------- | ----------- |
+| `asset:`  | `asset:arial-font` | `<pc-asset>` をその `id` 属性で参照します |
+| `entity:` | `entity:#player` | `<pc-entity>` をCSSセレクター、要素の `id`、またはエンティティの `name` で参照します |
+| `vec2:`   | `vec2:10 20` | スペース区切りの2つの数値からVec2を生成します |
+| `vec3:`   | `vec3:10 20 30` | スペース区切りの3つの数値からVec3を生成します |
+| `vec4:`   | `vec4:10 20 30 40` | スペース区切りの4つの数値からVec4を生成します |
+| `color:`  | `color:1 0.5 0.5` | 0から1の範囲のスペース区切りの3つ（RGB）または4つ（RGBA）の数値からColorを生成します |
+
+```html
+<pc-script name="myScript" font="asset:arial-font" target="entity:#player"></pc-script>
+```
+
+### `attributes` JSON属性
+
+プロパティごとの属性は、フラットでシンプルな名前のスクリプト属性をカバーします。それ以外のケースでは、`attributes` 属性がJSONオブジェクトを取ります。
+
+* **ネストされた構造** — プロパティごとの属性では表現できない配列やオブジェクト。
+* **予約名** — 要素自身のAPIや標準HTML属性名（例: `title`、`name`、`enabled`、`id`、`style`）と衝突する名前のスクリプト属性。
+
+```html
+<pc-script name="annotation" attributes='{
+    "label": "1",
+    "title": "Cockpit Canopy",
+    "text": "Transparent canopy offering visibility and housing the pilot controls."
+}'></pc-script>
 ```
 
 :::important
@@ -89,30 +147,46 @@ export class RotateScript extends Script {
 
 :::
 
-### スクリプト属性のためのPlayCanvas固有の型
-
-標準のJavaScript型に加えて、特別なPlayCanvasデータ型を使用してスクリプト属性を設定できます。これらの値を渡す際は、プレフィックスとそれに続く必要なデータを付けてフォーマットされた文字列として提供する必要があります。これにより、エンジンが属性値を正しく解釈することが保証されます。
-
-各型の期待されるフォーマットは以下の通りです。
-
-| PlayCanvas データ型 | フォーマット例                           | 説明 |
-| -------------------- | ---------------------------------------- | ----------- |
-| **Asset**            | `asset:your-asset-id`                    | `<pc-asset>` を参照します。`asset:` とアセットの `id` 属性を連結します。 |
-| **Entity**           | `entity:your-entity-id`                  | `<pc-entity>` を参照します。`entity:` とエンティティの `id` 属性を連結します。 |
-| **Color**            | `color:255,200,100` or `color:255,200,100,255` | 色を指定します。`color:` をプレフィックスとして、コンマ区切りの3つの値（RGB）または4つの値（RGBA）を提供します。 |
-| **Vec2**             | `vec2:10,20`                             | 2次元ベクトルを定義します。`vec2:` と2つのコンマ区切りの数値を連結します。 |
-| **Vec3**             | `vec3:10,20,30`                          | 3次元ベクトルを定義します。`vec3:` と3つのコンマ区切りの数値を連結します。 |
-| **Vec4**             | `vec4:10,20,30,40`                       | 4次元ベクトルを定義します。`vec4:` と4つのコンマ区切りの数値を連結します。 |
-
-HTMLでの使用例:
+JSON内では、プレーンな数値配列がスクリプト属性の宣言された数学型に自動的に変換されます。デフォルト値が `Vec2`、`Vec3`、`Vec4`、`Color` であれば、`[0, 1.75, 0]` は適切な型になります。
 
 ```html
-<pc-script name="myScript" attributes='{
-    "speed": 180,
-    "targetColor": "color:255,100,50,255",
-    "velocity": "vec3:5,0,0"
+<pc-script name="cameraControls" attributes='{
+    "focusPoint": [0, 1.75, 0],
+    "pitchRange": [-90, 0]
 }'></pc-script>
 ```
+
+[型プレフィックス](#型プレフィックス)は、ネストされた配列やオブジェクトを含め、JSON内のどこでも機能します。
+
+```html
+<pc-script name="xrMenu" attributes='{
+    "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
+    "fontAsset": "asset:arial-font"
+}'></pc-script>
+```
+
+### 優先順位
+
+同じスクリプト属性がプロパティごとの属性と `attributes` JSONの両方で設定されている場合、プロパティごとの属性が常に優先されます — 作成時も、実行時にどちらかが変更されたときも同様です。プロパティごとの属性を削除すると、そのキーに対するJSONの値（存在する場合）に、なければスクリプトのデフォルト値にフォールバックします。
+
+### JavaScriptからスクリプトにアクセスする
+
+`<pc-script>` 要素は、そのスクリプトインスタンスが作成されると*準備完了*になります。`whenReady()`（または要素の `ready()` プロミス）でそれを待ってから、`script` プロパティを介してライブの [`Script`](https://api.playcanvas.com/engine/classes/Script.html) インスタンスにアクセスします。
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const scriptElement = await whenReady('pc-script');
+scriptElement.script.speed = 360;
+```
+
+また、`scriptAttributes` プロパティを介して、スクリプト属性をオブジェクトとして読み書きすることもできます — JSON文字列は不要です。
+
+```javascript
+scriptElement.scriptAttributes = { speed: 2, focusPoint: [0, 1.75, 0] };
+```
+
+値は `attributes` 属性と同じルールで変換されます。型プレフィックスは解決され、プレーンな数値配列はスクリプト属性の宣言された数学型に変換されます。
 
 スクリプト属性についての[詳細はこちら](/user-manual/scripting/script-attributes)。
 

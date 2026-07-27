@@ -32,6 +32,7 @@ The `<pc-scrollview>` tag is used to define a scroll view component, which lets 
 | `vertical` | Boolean | `"true"` | Whether vertical scrolling is enabled |
 | `vertical-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
 | `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
+| `viewport` | String | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
 
 </div>
 

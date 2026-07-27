@@ -17,10 +17,10 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `cast-shadows` | Flag | - | Whether the component casts shadows |
+| `cast-shadows` | Boolean | `"true"` | Whether the component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `receive-shadows` | Flag | - | Whether the component receives shadows |
-| `type` | Enum | - | Primitive shape: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
+| `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
+| `type` | Enum | `"asset"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"`. The default, `"asset"`, renders a render asset instead of a primitive |
 
 </div>
 

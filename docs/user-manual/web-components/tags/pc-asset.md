@@ -21,7 +21,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `data` | String | - | Inline JSON asset data. Used by texture atlases (frame definitions) and sprites |
 | `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
-| `lazy` | Flag | - | Whether to defer loading until first referenced or explicitly requested |
+| `lazy` | Boolean | `"false"` | Whether to defer loading until first referenced or explicitly requested |
 | `pixels-per-unit` | Number | `"1"` | For `sprite` assets: number of pixels per world unit |
 | `render-mode` | Enum | `"simple"` | For `sprite` assets: `"simple"` \| `"sliced"` \| `"tiled"`. Use `"sliced"` for 9-slice panels |
 | `src` | String | - | Path to the asset file |

@@ -14,13 +14,14 @@ You can install it (and the PlayCanvas Engine) as follows:
 npm install playcanvas @playcanvas/web-components --save-dev
 ```
 
-Next, in your HTML file, you will need an import map because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency):
+Next, in your HTML file, you will need an import map because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency). Mapping `@playcanvas/web-components` as well lets your own module scripts import the library's JavaScript API (such as `whenReady`):
 
 ```html
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "/node_modules/playcanvas/build/playcanvas.mjs"
+            "playcanvas": "/node_modules/playcanvas/build/playcanvas.mjs",
+            "@playcanvas/web-components": "/node_modules/@playcanvas/web-components/dist/pwc.mjs"
         }
     }
 </script>
@@ -42,7 +43,8 @@ Instead of loading the library from a local package, you can instead opt to load
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
+            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
+            "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
         }
     }
 </script>
@@ -74,7 +76,8 @@ Let's see how this looks in a minimal boilerplate HTML file:
         <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
+                    "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
                 }
             }
         </script>

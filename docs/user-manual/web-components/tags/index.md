@@ -5,6 +5,8 @@ description: Alphabetical index of PlayCanvas Web Component tags with short summ
 
 Here is a complete list of the tags that are available in PlayCanvas Web Components.
 
+The attributes of every tag share the same value conventions: an absent (or removed) attribute means the engine default applies, and an invalid value logs a console warning and falls back to the default. See [Attributes](../attributes.md) for how booleans, numbers, enums, vectors and colors are written.
+
 | Tag | Description |
 | --- | --- |
 | [`<pc-app>`](pc-app) | Defines the root element of your application. |

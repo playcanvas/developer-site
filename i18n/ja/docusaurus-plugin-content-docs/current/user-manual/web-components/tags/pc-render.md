@@ -17,10 +17,10 @@ description: "pc-render要素のリファレンス: プリミティブまたは�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `cast-shadows` | Flag | - | コンポーネントが影を落とすかどうか |
+| `cast-shadows` | Boolean | `"true"` | コンポーネントが影を落とすかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `receive-shadows` | Flag | - | コンポーネントが影を受け取るかどうか |
-| `type` | 列挙型 | - | プリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
+| `receive-shadows` | Boolean | `"true"` | コンポーネントが影を受け取るかどうか |
+| `type` | 列挙型 | `"asset"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"`。デフォルトの `"asset"` は、プリミティブの代わりにレンダーアセットをレンダリングします |
 
 </div>
 

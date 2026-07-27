@@ -23,11 +23,11 @@ description: "pc-layoutgroup要素のリファレンス: 子要素を水平ま�
 | `height-fitting` | Enum | `"none"` | 垂直軸方向のフィッティング: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
 | `orientation` | Enum | `"horizontal"` | レイアウトの向き: `"horizontal"` \| `"vertical"` |
 | `padding` | Vector4 | `"0 0 0 0"` | グループ周囲のパディングを `left bottom right top` で指定 |
-| `reverse-x` | Flag | - | 水平軸に沿って子の順序を反転します |
-| `reverse-y` | Flag | - | 垂直軸に沿って子の順序を反転します |
+| `reverse-x` | Boolean | `"false"` | 水平軸に沿って子の順序を反転します |
+| `reverse-y` | Boolean | `"false"` | 垂直軸に沿って子の順序を反転します |
 | `spacing` | Vector2 | `"0 0"` | 子同士の間隔を `x y` で指定 |
 | `width-fitting` | Enum | `"none"` | 水平軸方向のフィッティング: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
-| `wrap` | Flag | - | 子がグループからあふれたときに、新しい行または列に折り返すかどうか |
+| `wrap` | Boolean | `"false"` | 子がグループからあふれたときに、新しい行または列に折り返すかどうか |
 
 </div>
 

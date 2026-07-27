@@ -17,11 +17,12 @@ The `<pc-scene>` tag is used to define the scene.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `fog` | Enum | - | Fog type: `"linear"` \| `"exp"` \| `"exp2"` |
-| `fog-color` | Color | - | Fog color as CSS color string or hex code |
-| `fog-density` | Number | - | Fog density for exponential fog types |
-| `fog-end` | Number | - | End distance for linear fog |
-| `fog-start` | Number | - | Start distance for linear fog |
+| `fog` | Enum | `"none"` | Fog type: `"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
+| `fog-color` | Color | `"1 1 1"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
+| `fog-density` | Number | `"0"` | Fog density for exponential fog types |
+| `fog-end` | Number | `"1000"` | End distance for linear fog |
+| `fog-start` | Number | `"0"` | Start distance for linear fog |
+| `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
 
 </div>
 
