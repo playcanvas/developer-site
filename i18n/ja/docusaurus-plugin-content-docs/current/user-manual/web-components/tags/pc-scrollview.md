@@ -32,6 +32,7 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
 | `vertical` | Boolean | `"true"` | 垂直スクロールを有効にするかどうか |
 | `vertical-scrollbar` | String | - | 垂直 [`<pc-scrollbar>`](../pc-scrollbar) を保持する [`<pc-entity>`](../pc-entity) への参照 |
 | `vertical-scrollbar-visibility` | Enum | `"when-required"` | 垂直スクロールバーを表示するタイミング: `"always"` \| `"when-required"` |
+| `viewport` | String | - | ビューポートとして使用される [`<pc-entity>`](../pc-entity) への参照。コンテンツをスクロールビューの範囲にクリップします |
 
 </div>
 

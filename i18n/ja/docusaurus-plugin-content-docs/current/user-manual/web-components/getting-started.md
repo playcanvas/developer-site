@@ -14,13 +14,14 @@ PlayCanvas Web Componentsは、[NPM](https://www.npmjs.com/package/@playcanvas/w
 npm install playcanvas @playcanvas/web-components --save-dev
 ```
 
-次に、HTMLファイルでインポートマップが必要になります。これは、Web ComponentsがPlayCanvas Engine（外部依存関係）を見つけられるようにするためです。
+次に、HTMLファイルでインポートマップが必要になります。これは、Web ComponentsがPlayCanvas Engine（外部依存関係）を見つけられるようにするためです。`@playcanvas/web-components` もマッピングしておくと、独自のモジュールスクリプトからライブラリのJavaScript API（`whenReady` など）をインポートできます。
 
 ```html
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "/node_modules/playcanvas/build/playcanvas.mjs"
+            "playcanvas": "/node_modules/playcanvas/build/playcanvas.mjs",
+            "@playcanvas/web-components": "/node_modules/@playcanvas/web-components/dist/pwc.mjs"
         }
     }
 </script>
@@ -42,7 +43,8 @@ npm install playcanvas @playcanvas/web-components --save-dev
 <script type="importmap">
     {
         "imports": {
-            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
+            "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
+            "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
         }
     }
 </script>
@@ -74,7 +76,8 @@ npm install playcanvas @playcanvas/web-components --save-dev
         <script type="importmap">
             {
                 "imports": {
-                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"
+                    "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
+                    "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
                 }
             }
         </script>

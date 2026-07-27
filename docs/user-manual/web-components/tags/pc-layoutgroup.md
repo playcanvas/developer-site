@@ -23,11 +23,11 @@ The `<pc-layoutgroup>` tag is used to define a layout group component, which aut
 | `height-fitting` | Enum | `"none"` | Fitting along the vertical axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
 | `orientation` | Enum | `"horizontal"` | Orientation of the layout: `"horizontal"` \| `"vertical"` |
 | `padding` | Vector4 | `"0 0 0 0"` | Padding around the group as `left bottom right top` |
-| `reverse-x` | Flag | - | Reverse the order of children along the horizontal axis |
-| `reverse-y` | Flag | - | Reverse the order of children along the vertical axis |
+| `reverse-x` | Boolean | `"false"` | Reverse the order of children along the horizontal axis |
+| `reverse-y` | Boolean | `"false"` | Reverse the order of children along the vertical axis |
 | `spacing` | Vector2 | `"0 0"` | Spacing between children as `x y` |
 | `width-fitting` | Enum | `"none"` | Fitting along the horizontal axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
-| `wrap` | Flag | - | Whether children wrap onto a new line or column when they overflow the group |
+| `wrap` | Boolean | `"false"` | Whether children wrap onto a new line or column when they overflow the group |
 
 </div>
 

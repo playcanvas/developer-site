@@ -17,7 +17,7 @@ The `<pc-light>` tag is used to define a light component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `cast-shadows` | Flag | - | Whether the light casts shadows |
+| `cast-shadows` | Boolean | `"false"` | Whether the light casts shadows |
 | `color` | Color | `"1 1 1"` | Light color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `inner-cone-angle` | Number | `"40"` | Inner cone angle in degrees (for spot lights) |

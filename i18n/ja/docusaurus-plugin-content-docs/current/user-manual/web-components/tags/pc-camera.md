@@ -20,7 +20,7 @@ description: "pc-camera要素のリファレンス: 投影、クリアオプシ�
 | `clear-color` | Color | `"0.75 0.75 0.75 1"` | スペース区切りのRGBA値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としての背景色 |
 | `clear-color-buffer` | Boolean | `"true"` | カメラがカラーバッファをクリアするかどうかを制御します |
 | `clear-depth-buffer` | Boolean | `"true"` | カメラがデプスバッファをクリアするかどうかを制御します |
-| `clear-stencil-buffer` | Boolean | `"true"` | カメラがステンシルバッファをクリアするかどうかを制御します |
+| `clear-stencil-buffer` | Boolean | `"false"` | カメラがステンシルバッファをクリアするかどうかを制御します |
 | `cull-faces` | Boolean | `"true"` | カメラが面をカリングするかどうかを制御します |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `far-clip` | Number | `"1000"` | ファーカリングプレーンの距離 |
@@ -28,9 +28,9 @@ description: "pc-camera要素のリファレンス: 投影、クリアオプシ�
 | `fov` | Number | `"45"` | 視野角（度数） |
 | `frustum-culling` | Boolean | `"true"` | カメラがフラスタムカリングを使用するかどうかを制御します |
 | `gamma` | Enum | `"srgb"` | カラースペース: `"linear"` \| `"srgb"` |
-| `horizontal-fov` | Flag | - | 垂直視野角の代わりに水平視野角を使用するかどうか |
+| `horizontal-fov` | Boolean | `"false"` | 垂直視野角の代わりに水平視野角を使用するかどうか |
 | `near-clip` | Number | `"0.1"` | ニアクリッピングプレーンの距離 |
-| `orthographic` | Flag | - | パースペクティブ投影の代わりに正射影を使用するかどうか |
+| `orthographic` | Boolean | `"false"` | パースペクティブ投影の代わりに正射影を使用するかどうか |
 | `ortho-height` | Number | `"10"` | 正射影の高さ |
 | `priority` | Number | `"0"` | カメラのレンダリング優先度 |
 | `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |

@@ -24,7 +24,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 | `position` | Vector3 | `"0 0 0"` | 「X Y Z」値としてのローカル空間位置 |
 | `rotation` | Vector3 | `"0 0 0"` | 度単位の「X Y Z」オイラー角としてのローカル空間回転 |
 | `scale` | Vector3 | `"1 1 1"` | 「X Y Z」値としてのローカル空間スケール |
-| `tags` | String | - | スペース区切りのタグのリスト |
+| `tags` | String | - | コンマ区切りのタグのリスト |
 
 </div>
 
@@ -40,10 +40,21 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 | `pointermove` | ポインターがエンティティ上で移動したときに発生します。 |
 | `pointerup` | ポインターがエンティティから解放されたときに発生します。 |
 
+これらのイベントは、インラインの `onpointer*` 属性を使って宣言的に処理することもできます。これらは標準の[インラインイベントハンドラー](https://developer.mozilla.org/ja/docs/Web/Events/Event_handlers)であり、ブラウザ自身によってコンパイル・実行されるため、任意のHTML要素の `onclick` とまったく同じように動作します。属性を（実行時であっても）設定すると以前のハンドラーが置き換えられ、削除するとハンドラーが削除されます。ハンドラー内では、`this` は `<pc-entity>` 要素であり、`event` はディスパッチされたイベントです。
+
+```html
+<pc-entity name="cube"
+           onpointerenter="this.entity.script.tweener.play(0)"
+           onpointerleave="this.entity.script.tweener.play(1)"
+           onpointerdown="this.entity.script.tweener.play(2)">
+    <pc-render type="box"></pc-render>
+</pc-entity>
+```
+
 ## 例
 
 ```html
-<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1 tag2">
+<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1,tag2">
     <!-- 子エンティティとコンポーネントはここに入ります -->
 </pc-entity>
 ```

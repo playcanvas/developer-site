@@ -80,7 +80,7 @@ const { app } = await whenReady(appElement);
 
 ## TypeScript
 
-The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (such as `pc-asset`) is a compile-time error.
+The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (such as `pc-module`) is a compile-time error.
 
 ## When to Use Scripts Instead
 

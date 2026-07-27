@@ -80,7 +80,7 @@ const { app } = await whenReady(appElement);
 
 ## TypeScript
 
-このパッケージはすべてのタグを TypeScript の `HTMLElementTagNameMap` に登録しているため、要素のクエリは完全に型付けされます。`document.querySelector('pc-app')` は `AppElement | null` となり、`whenReady('pc-camera')` は `CameraComponentElement` に解決されます。非同期に初期化されない要素のタグ(`pc-asset` など)を渡すと、コンパイル時エラーになります。
+このパッケージはすべてのタグを TypeScript の `HTMLElementTagNameMap` に登録しているため、要素のクエリは完全に型付けされます。`document.querySelector('pc-app')` は `AppElement | null` となり、`whenReady('pc-camera')` は `CameraComponentElement` に解決されます。非同期に初期化されない要素のタグ(`pc-module` など)を渡すと、コンパイル時エラーになります。
 
 ## スクリプトを使うべき場面
 

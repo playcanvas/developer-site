@@ -24,7 +24,7 @@ The `<pc-entity>` tag is used to define an entity.
 | `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
 | `rotation` | Vector3 | `"0 0 0"` | Local-space rotation as "X Y Z" Euler angles in degrees |
 | `scale` | Vector3 | `"1 1 1"` | Local-space scale as "X Y Z" values |
-| `tags` | String | - | Space-separated list of tags |
+| `tags` | String | - | Comma-separated list of tags |
 
 </div>
 
@@ -40,10 +40,21 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | `pointermove` | Fired when a pointer is moved over the entity. |
 | `pointerup` | Fired when a pointer is released from the entity. |
 
+You can also handle these events declaratively with inline `onpointer*` attributes. These are standard [inline event handlers](https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers#registering_onevent_handlers), compiled and run by the browser itself, so they behave exactly like `onclick` on any HTML element: setting the attribute (even at runtime) replaces the previous handler, removing it removes the handler, and within the handler `this` is the `<pc-entity>` element and `event` is the dispatched event.
+
+```html
+<pc-entity name="cube"
+           onpointerenter="this.entity.script.tweener.play(0)"
+           onpointerleave="this.entity.script.tweener.play(1)"
+           onpointerdown="this.entity.script.tweener.play(2)">
+    <pc-render type="box"></pc-render>
+</pc-entity>
+```
+
 ## Example
 
 ```html
-<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1 tag2">
+<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1,tag2">
     <!-- Child entities and components go here -->
 </pc-entity>
 ```

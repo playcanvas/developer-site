@@ -22,7 +22,7 @@ description: "pc-sounds要素のリファレンス: pc-soundスロットと共�
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `max-distance` | Number | `"10000"` | オーディオ減衰の最大距離 |
 | `pitch` | Number | `"1"` | このコンポーネント内のすべてのサウンドのピッチ乗数 |
-| `positional` | Flag | - | サウンドが位置情報を持つか (3D空間オーディオ) |
+| `positional` | Boolean | `"false"` | サウンドが位置情報を持つか (3D空間オーディオ) |
 | `ref-distance` | Number | `"1"` | 最大音量の基準距離 |
 | `roll-off-factor` | Number | `"1"` | 距離減衰の減衰率ファクター |
 | `volume` | Number | `"1"` | このコンポーネント内のすべてのサウンドのマスターボリューム |

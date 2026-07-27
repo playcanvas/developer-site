@@ -17,7 +17,7 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `cast-shadows` | Flag | - | ライトが影を落とすかどうか |
+| `cast-shadows` | Boolean | `"false"` | ライトが影を落とすかどうか |
 | `color` | Color | `"1 1 1"` | スペース区切りのRGB値、16進数コード、または[名前付き色](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としてのライトの色 |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `inner-cone-angle` | Number | `"40"` | 内側コーン角度（度単位、スポットライト用） |

@@ -18,12 +18,12 @@ description: "pc-collision要素のリファレンス: トリガー、rigid body
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `axis` | Number | `"1"` | 円柱/カプセル形状の軸 (0=X, 1=Y, 2=Z) |
-| `convex-hull` | Flag | - | メッシュ衝突に凸包を使用するかどうか |
+| `convex-hull` | Boolean | `"false"` | メッシュ衝突に凸包を使用するかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `half-extents` | Vector3 | `"0.5 0.5 0.5"` | ボックス衝突の半範囲を「X Y Z」値で指定 |
 | `height` | Number | `"2"` | 円柱/カプセル衝突形状の高さ |
 | `radius` | Number | `"0.5"` | 球/円柱/カプセル衝突形状の半径 |
-| `type` | Enum | `"box"` | 衝突形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"sphere"` |
+| `type` | Enum | `"box"` | 衝突形状: `"box"` \| `"capsule"` \| `"compound"` \| `"cone"` \| `"cylinder"` \| `"mesh"` \| `"sphere"` |
 
 </div>
 

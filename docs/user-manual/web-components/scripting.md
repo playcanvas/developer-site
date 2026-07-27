@@ -70,17 +70,75 @@ export class RotateScript extends Script {
 }
 ```
 
-We can now pass configuration to our script using the `attributes` attribute:
+We can now configure the script simply by adding a `speed` attribute to the `<pc-script>` tag:
 
-```html {4-6}
+```html {4}
 <pc-entity name="fast spinning cube">
     <pc-render type="box"></pc-render>
     <pc-scripts>
-        <pc-script name="rotateScript" attributes='{
-            "speed": 180
-        }'></pc-script>
+        <pc-script name="rotateScript" speed="180"></pc-script>
     </pc-scripts>
 </pc-entity>
+```
+
+Any attribute on `<pc-script>` that is not part of the element's own API (`name`, `enabled`, `attributes` and standard HTML attributes such as `id` and `style`) maps to the script attribute of the same name. Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`).
+
+Values are parsed according to the type of the script's declared default value, following the same [value conventions](attributes.md) as every other element:
+
+| Script attribute type | Example markup |
+| --------------------- | -------------- |
+| Number                | `speed="180"` |
+| Boolean               | `enable-fly="false"` |
+| String                | `label="Hello"` |
+| Vec2 / Vec3 / Vec4    | `focus-point="0 1.75 0"` |
+| Color                 | `tint="#ff0000"` or `tint="1 0 0"` |
+| Quat                  | `orientation="0 90 0"` (Euler angles in degrees) |
+
+For example, here is the engine's `cameraControls` script configured entirely with per-property attributes:
+
+```html
+<pc-script name="cameraControls"
+           enable-fly="false"
+           focus-point="0 1.75 0"
+           zoom-range="2 15"></pc-script>
+```
+
+:::tip
+
+A typo in an attribute name logs a console warning — including a "did you mean" hint if you accidentally write a camelCase name like `focusPoint` instead of `focus-point`. Keep the console open while authoring.
+
+:::
+
+### Type Prefixes
+
+Number, boolean, vector and color values are inferred from the script's declared defaults. For cases where inference cannot help — referencing assets or entities, or setting an attribute whose default is `null` — prefix the value with an explicit type:
+
+| Prefix    | Example | Description |
+| --------- | ------- | ----------- |
+| `asset:`  | `asset:arial-font` | References a `<pc-asset>` by its `id` attribute |
+| `entity:` | `entity:#player` | References a `<pc-entity>` by CSS selector, element `id` or entity `name` |
+| `vec2:`   | `vec2:10 20` | A Vec2 from 2 space-separated numbers |
+| `vec3:`   | `vec3:10 20 30` | A Vec3 from 3 space-separated numbers |
+| `vec4:`   | `vec4:10 20 30 40` | A Vec4 from 4 space-separated numbers |
+| `color:`  | `color:1 0.5 0.5` | A Color from 3 (RGB) or 4 (RGBA) space-separated numbers in the range 0 to 1 |
+
+```html
+<pc-script name="myScript" font="asset:arial-font" target="entity:#player"></pc-script>
+```
+
+### The `attributes` JSON Attribute
+
+Per-property attributes cover flat, simply named script attributes. For everything else, the `attributes` attribute takes a JSON object:
+
+* **Nested structures** — arrays and objects that per-property attributes cannot express.
+* **Reserved names** — script attributes whose names collide with the element's own API or standard HTML attribute names (e.g. `title`, `name`, `enabled`, `id`, `style`).
+
+```html
+<pc-script name="annotation" attributes='{
+    "label": "1",
+    "title": "Cockpit Canopy",
+    "text": "Transparent canopy offering visibility and housing the pilot controls."
+}'></pc-script>
 ```
 
 :::important
@@ -89,30 +147,46 @@ The `attributes` attribute takes a JSON string. Because JSON requires properties
 
 :::
 
-### PlayCanvas-Specific Types for Script Attributes
-
-In addition to standard JavaScript types, you can configure script attributes using special PlayCanvas data types. When passing these values, you must supply them as strings formatted with a prefix followed by the required data. This ensures that the engine correctly interprets the attribute values.
-
-The expected format for each type is as follows:
-
-| PlayCanvas Data Type | Format Example                           | Description |
-| -------------------- | ---------------------------------------- | ----------- |
-| **Asset**            | `asset:your-asset-id`                    | References a `<pc-asset>`. Concatenate `asset:` with the asset's `id` attribute. |
-| **Entity**           | `entity:your-entity-id`                  | References a `<pc-entity>`. Concatenate `entity:` with the entity's `id` attribute. |
-| **Color**            | `color:255,200,100` or `color:255,200,100,255` | Specifies a color. Provide three comma-separated values (RGB) or four values (RGBA) prefixed by `color:`. |
-| **Vec2**             | `vec2:10,20`                             | Defines a two-dimensional vector. Concatenate `vec2:` with two comma-separated numbers. |
-| **Vec3**             | `vec3:10,20,30`                          | Defines a three-dimensional vector. Concatenate `vec3:` with three comma-separated numbers. |
-| **Vec4**             | `vec4:10,20,30,40`                       | Defines a four-dimensional vector. Concatenate `vec4:` with four comma-separated numbers. |
-
-Example Usage in HTML:
+Inside the JSON, a plain numeric array converts automatically to the script attribute's declared math type — a `Vec2`, `Vec3`, `Vec4` or `Color` default turns `[0, 1.75, 0]` into the right type:
 
 ```html
-<pc-script name="myScript" attributes='{
-    "speed": 180,
-    "targetColor": "color:255,100,50,255",
-    "velocity": "vec3:5,0,0"
+<pc-script name="cameraControls" attributes='{
+    "focusPoint": [0, 1.75, 0],
+    "pitchRange": [-90, 0]
 }'></pc-script>
 ```
+
+The [type prefixes](#type-prefixes) also work anywhere inside the JSON, including in nested arrays and objects:
+
+```html
+<pc-script name="xrMenu" attributes='{
+    "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
+    "fontAsset": "asset:arial-font"
+}'></pc-script>
+```
+
+### Precedence
+
+If the same script attribute is set both as a per-property attribute and in the `attributes` JSON, the per-property attribute always wins — at creation and whenever either changes at runtime. Removing a per-property attribute falls back to the JSON's value for that key (when present), otherwise to the script's default.
+
+### Accessing Scripts from JavaScript
+
+`<pc-script>` elements become *ready* once their script instance has been created. Use `whenReady()` (or the element's `ready()` promise) to wait for that, then access the live [`Script`](https://api.playcanvas.com/engine/classes/Script.html) instance via the `script` property. See [Programmatic Access](programmatic-access.md) for the full `whenReady` API:
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const scriptElement = await whenReady('pc-script');
+scriptElement.script.speed = 360;
+```
+
+You can also read and write script attributes as an object via the `scriptAttributes` property — no JSON strings required:
+
+```javascript
+scriptElement.scriptAttributes = { speed: 2, focusPoint: [0, 1.75, 0] };
+```
+
+Values are converted with the same rules as the `attributes` attribute: type prefixes are resolved and plain numeric arrays convert to the script attribute's declared math type.
 
 [Read more](/user-manual/scripting/script-attributes) about Script Attributes.
 

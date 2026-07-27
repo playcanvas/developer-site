@@ -19,7 +19,7 @@ The `<pc-layoutchild>` tag is used to define a layout child component, which con
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `exclude-from-layout` | Flag | - | Exclude this element from the layout so it takes up no space |
+| `exclude-from-layout` | Boolean | `"false"` | Exclude this element from the layout so it takes up no space |
 | `fit-height-proportion` | Number | `"0"` | Proportion of the group's spare height this element takes when `height-fitting` stretches or shrinks |
 | `fit-width-proportion` | Number | `"0"` | Proportion of the group's spare width this element takes when `width-fitting` stretches or shrinks |
 | `max-height` | Number | - | Maximum height the element is laid out with (omit for no limit) |
