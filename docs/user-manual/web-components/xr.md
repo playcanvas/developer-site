@@ -1,6 +1,6 @@
 ---
 title: XR Support
-description: "WebXR setup for Web Components: load XR scripts as assets, configure cameras, add session UI, and serve pages over HTTPS or localhost."
+description: "WebXR setup for Web Components: load the engine's XR scripts, build a camera rig with xrSession, and start sessions by firing app events."
 ---
 
 PlayCanvas Web Components make it easy to add Virtual Reality (VR) and Augmented Reality (AR) support to your applications.
@@ -10,24 +10,28 @@ PlayCanvas Web Components make it easy to add Virtual Reality (VR) and Augmented
 To enable XR support, you'll need:
 
 1. XR-specific scripts (provided by the [Engine NPM package](https://www.npmjs.com/package/playcanvas)).
-2. A camera entity with the appropriate scripts attached.
-3. UI for entering/exiting XR (WebXR requires a user gesture to start a session).
+2. A camera rig with the XR scripts attached.
+3. UI for entering XR (WebXR requires a user gesture to start a session).
 4. A secure context — serve your page over HTTPS (or `http://localhost` during development).
 
 ### XR Scripts
 
-Specify the following scripts using [`<pc-asset>`](../tags/pc-asset) elements:
+The engine ships a set of XR scripts in its `scripts/esm/xr` folder. Specify them using [`<pc-asset>`](tags/pc-asset.md) elements:
 
 ```html
-<pc-asset src="/node_modules/playcanvas/scripts/esm/xr-controllers.mjs"></pc-asset>
-<pc-asset src="/node_modules/playcanvas/scripts/esm/xr-navigation.mjs"></pc-asset>
+<pc-asset src="/node_modules/playcanvas/scripts/esm/xr/xr-controllers.mjs"></pc-asset>
+<pc-asset src="/node_modules/playcanvas/scripts/esm/xr/xr-menu.mjs"></pc-asset>
+<pc-asset src="/node_modules/playcanvas/scripts/esm/xr/xr-navigation.mjs"></pc-asset>
+<pc-asset src="/node_modules/playcanvas/scripts/esm/xr/xr-session.mjs"></pc-asset>
 ```
 
 Or, when using a CDN:
 
 ```html
-<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr-controllers.mjs"></pc-asset>
-<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr-navigation.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr/xr-controllers.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr/xr-menu.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr/xr-navigation.mjs"></pc-asset>
+<pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@latest/scripts/esm/xr/xr-session.mjs"></pc-asset>
 ```
 
 :::note[CDN and import maps]
@@ -36,55 +40,78 @@ When loading XR scripts from a CDN, make sure your page’s import map also poin
 
 :::
 
-* [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-controllers.mjs) - Dynamically downloads and renders XR controller models (GLBs) for any detected XR controllers (including hands).
-* [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr-navigation.mjs) - Implements basic teleportation navigation (via point and select actions).
+* [`xr-session.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-session.mjs) - Manages the WebXR session lifecycle: starts an AR or VR session in response to app events (`ar:start` and `vr:start` by default), ends it on `xr:end` or the Escape key, and handles camera rig transforms, AR transparency and cleanup automatically.
+* [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-controllers.mjs) - Dynamically downloads and renders XR controller models (GLBs) for any detected XR controllers (including hands).
+* [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-navigation.mjs) - Implements basic teleportation navigation (via point and select actions).
+* [`xr-menu.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-menu.mjs) - Shows an in-headset menu (via a palm-up gesture with hand tracking, or a controller button) whose items fire app events — ideal for an "Exit XR" button.
 
 ### Camera Setup
 
-The XR scripts require the scene's camera to be set up as follows:
+The XR scripts should be attached to a *parent* of the camera entity — `xrSession` moves the rig's root while the headset drives the camera itself:
 
 ```html
 <!-- Camera (with XR support) -->
 <pc-entity name="camera root">
-    <pc-entity name="camera">
+    <pc-entity name="camera" position="0 1.7 5">
         <pc-camera></pc-camera>
     </pc-entity>
     <pc-scripts>
         <pc-script name="xrControllers"></pc-script>
+        <pc-script name="xrMenu" attributes='{
+            "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
+            "fontAsset": "asset:arial-font"
+        }'></pc-script>
         <pc-script name="xrNavigation"></pc-script>
+        <pc-script name="xrSession"></pc-script>
     </pc-scripts>
 </pc-entity>
 ```
 
-### UI for Entering/Exiting XR
+:::note
 
-Finally, you'll need to add some UI controls to allow the user to enter and exit XR mode. This is a WebXR-specific requirement, where a user gesture is required to activate an XR session. Let's create two simple buttons to trigger either an AR or VR session.
+`xrMenu` renders text, so it needs a `font` type [`<pc-asset>`](tags/pc-asset.md) declared alongside your other assets — the [examples](https://github.com/playcanvas/web-components/tree/main/examples) use `arial.json`:
+
+```html
+<pc-asset src="assets/fonts/arial.json" type="font" id="arial-font"></pc-asset>
+```
+
+It is configured through the `attributes` JSON (rather than per-property attributes) because `menuItems` is a nested array — see [Adding Behavior with Scripts](scripting.md).
+
+:::
+
+### UI for Entering XR
+
+Finally, you'll need some UI to allow the user to enter XR mode. This is a WebXR-specific requirement, where a user gesture is required to activate an XR session. Let's create two simple buttons:
 
 ```html
 <button id="enterAR">Enter AR</button>
 <button id="enterVR">Enter VR</button>
 ```
 
-Let's add event listeners to the buttons to trigger an XR session when the user clicks them.
+With `xrSession` on the camera rig, the buttons only need to fire the app events it listens for:
 
 ```javascript
 import { whenReady } from '@playcanvas/web-components';
 
 const { app } = await whenReady('pc-app');
-const xr = app.xr;
-const camera = app.root.findComponent('camera');
 
-document.getElementById('enterAR').addEventListener('click', () => {
-    xr.start(camera, 'immersive-ar', 'local-floor')
-});
+document.getElementById('enterAR').addEventListener('click', () => app.fire('ar:start'));
+document.getElementById('enterVR').addEventListener('click', () => app.fire('vr:start'));
+```
 
-document.getElementById('enterVR').addEventListener('click', () => {
-    xr.start(camera, 'immersive-vr', 'local-floor')
-});
+The event names are script attributes of `xrSession` (`start-ar-event`, `start-vr-event` and `end-event`), so you can rename them if they clash with events of your own. Ending a session needs no extra code: `xrSession` ends it when the `xr:end` event fires (the "Exit XR" menu item above) or when the user presses Escape.
 
-window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && xr.active) {
-        xr.end();
+You can also show each button only when the device supports that session type:
+
+```javascript
+import { XRTYPE_AR, XRTYPE_VR } from 'playcanvas';
+
+const arButton = document.getElementById('enterAR');
+arButton.style.display = app.xr.isAvailable(XRTYPE_AR) ? 'block' : 'none';
+
+app.xr.on('available', (type, available) => {
+    if (type === XRTYPE_AR) {
+        arButton.style.display = available ? 'block' : 'none';
     }
 });
 ```
