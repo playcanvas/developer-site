@@ -382,15 +382,8 @@ const sidebars = {
             },
           ],
         },
-        {
-          type: 'category',
-          label: 'Editor API',
-          link: {
-            type: 'doc',
-            id: 'user-manual/editor/editor-api',
-          },
-          items: ['user-manual/editor/mcp-server'],
-        },
+        'user-manual/editor/editor-api',
+        'user-manual/editor/mcp-server',
         'user-manual/editor/engine-compatibility',
         'user-manual/editor/faq',
         'user-manual/editor/troubleshooting',
