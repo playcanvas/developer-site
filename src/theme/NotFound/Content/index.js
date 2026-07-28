@@ -10,7 +10,7 @@ const RedirectRoutes = ({ from, to }) => {
   useEffect(_ => {
     const match = pathname.match(from);
     if (match) {
-      const redirectTo = to.replace("$1", match[1]);
+      const redirectTo = to.replace("$1", encodeURIComponent(match[1]));
       window.location.href = redirectTo;
     }
 
