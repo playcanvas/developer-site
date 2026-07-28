@@ -28,7 +28,7 @@ npx codemod playcanvas-esm-scripts
 ```
 
 :::ai
-When applying the codemod to scripts in an Editor project, the **[Editor MCP Server](/user-manual/editor/mcp-server/)** can help migrate them in batches, check script attributes and references, and launch the project after each batch.
+For Editor projects, use **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** to run the codemod locally and review its changes before syncing, then use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to check script attributes and references and verify each batch in Launch.
 :::
 
 ## Known differences

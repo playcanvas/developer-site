@@ -28,7 +28,7 @@ npx codemod playcanvas-esm-scripts
 ```
 
 :::ai
-Editor プロジェクトのスクリプトに codemod を適用する場合、**[Editor MCP Server](/user-manual/editor/mcp-server/)** を使用すると、スクリプトをバッチ単位で移行し、スクリプト属性と参照を確認して、各バッチ後にプロジェクトを Launch できます。
+Editor プロジェクトでは、**[VS Code Extension の Pull/Push モード](/user-manual/editor/scripting/vscode-extension/)** で codemod をローカル実行し、変更内容を確認してから同期します。その後、**[Editor MCP Server](/user-manual/editor/mcp-server/)** でスクリプト属性と参照を確認し、各バッチを Launch で検証できます。
 :::
 
 ## 既知の違い

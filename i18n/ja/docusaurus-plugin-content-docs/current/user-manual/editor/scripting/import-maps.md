@@ -33,6 +33,10 @@ import config from 'utils/config.js';
 
 これでコード内で `import x from "math"` を呼び出すと、あなたのモジュールに解決されます。
 
+:::ai
+インポートエイリアスを変更する際、AI コーディングアシスタントは **[VS Code Extension の Pull/Push モード](/user-manual/editor/scripting/vscode-extension/)** を通じて、プロジェクト全体でそのエイリアスの使用箇所を更新できます。
+:::
+
 :::tip
 
 Import Mapsはnpmパッケージのショートハンドとしても使用できます。例えば、`"tweenjs": "https://esm.sh/tween.js"`を追加すると、CDN上のtween.jsに解決されます。
