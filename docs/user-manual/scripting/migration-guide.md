@@ -27,6 +27,10 @@ You can find the codemods in our [github repository](https://github.com/playcanv
 npx codemod playcanvas-esm-scripts
 ```
 
+:::ai
+When applying the codemod to scripts in an Editor project, the **[Editor MCP Server](/user-manual/editor/mcp-server/)** can help migrate them in batches, check script attributes and references, and launch the project after each batch.
+:::
+
 ## Known differences
 
 In general, ESM Scripts provide a more expressive and flexible way of creating projects. Whilst we have attempted to keep the migration process as seamless as possible, there are some notable differences that you should bear in mind.

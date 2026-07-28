@@ -27,6 +27,10 @@ ESMスクリプトは、PlayCanvasアプリケーションの推奨される開�
 npx codemod playcanvas-esm-scripts
 ```
 
+:::ai
+Editor プロジェクトのスクリプトに codemod を適用する場合、**[Editor MCP Server](/user-manual/editor/mcp-server/)** を使用すると、スクリプトをバッチ単位で移行し、スクリプト属性と参照を確認して、各バッチ後にプロジェクトを Launch できます。
+:::
+
 ## 既知の違い
 
 一般的に、ESMスクリプトはより表現力豊かで柔軟なプロジェクト作成を可能にします。移行プロセスは可能な限りシームレスに保たれていますが、いくつか重要な違いがあります。
