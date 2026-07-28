@@ -28,7 +28,7 @@ npx codemod playcanvas-esm-scripts
 ```
 
 :::ai
-The **[Editor MCP Server](/user-manual/editor/mcp-server/)** can accelerate larger Classic-to-ESM migrations by converting scripts incrementally, checking references and attributes, and launching the project after each batch to identify runtime errors.
+When applying the codemod to scripts in an Editor project, the **[Editor MCP Server](/user-manual/editor/mcp-server/)** can help migrate them in batches, check script attributes and references, and launch the project after each batch.
 :::
 
 ## Known differences

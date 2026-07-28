@@ -45,7 +45,7 @@ Editorは、エンジンの主要な2つのリリースストリームをサポ�
 <img src='/img/user-manual/editor/editor-v2/scripting-engine.png' width='300' />
 
 :::ai
-**[Editor MCP Server](/user-manual/editor/mcp-server/)** を使用すると、影響を受けるスクリプトの特定、非推奨 API の更新、各変更前後の Launch ログとキャプチャの比較を行い、Engine V2 への移行を支援できます。
+両方の Engine バージョンでスクリプトをテストする場合、**[Editor MCP Server](/user-manual/editor/mcp-server/)** を使用すると、影響を受けるスクリプトを特定し、変更を加えながらランタイムログとキャプチャを比較できます。
 :::
 
 #### ガンマとトーンマップ

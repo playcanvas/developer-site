@@ -28,7 +28,7 @@ npx codemod playcanvas-esm-scripts
 ```
 
 :::ai
-**[Editor MCP Server](/user-manual/editor/mcp-server/)** を使用すると、スクリプトを段階的に変換し、参照と属性を確認して、各バッチ後にプロジェクトを Launch してランタイムエラーを特定できるため、大規模なクラシックスクリプトから ESM スクリプトへの移行を効率化できます。
+Editor プロジェクトのスクリプトに codemod を適用する場合、**[Editor MCP Server](/user-manual/editor/mcp-server/)** を使用すると、スクリプトをバッチ単位で移行し、スクリプト属性と参照を確認して、各バッチ後にプロジェクトを Launch できます。
 :::
 
 ## 既知の違い

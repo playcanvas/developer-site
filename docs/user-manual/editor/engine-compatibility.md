@@ -45,7 +45,7 @@ Additionally, conditionally checking the Engine version at runtime will allow yo
 <img src='/img/user-manual/editor/editor-v2/scripting-engine.png' width='300' />
 
 :::ai
-The **[Editor MCP Server](/user-manual/editor/mcp-server/)** can assist with Engine V2 migration by finding affected scripts, updating deprecated APIs, and comparing launch logs and captures before and after each change.
+When testing scripts against both Engine versions, the **[Editor MCP Server](/user-manual/editor/mcp-server/)** can help identify affected scripts and compare runtime logs and captures as you make changes.
 :::
 
 #### Gamma and Tonemap
