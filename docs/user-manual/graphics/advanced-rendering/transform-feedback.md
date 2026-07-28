@@ -72,7 +72,7 @@ const shader = pc.TransformFeedback.createShader(device, vertexCode, 'movePartic
 const tf = new pc.TransformFeedback(mesh.vertexBuffer);
 ```
 
-The input buffer should be created with `BUFFER_GPUDYNAMIC` usage, which signals that the GPU writes it repeatedly. If it was created with another usage, the helper reallocates it.
+Create the input buffer with `BUFFER_GPUDYNAMIC` usage, which signals that the GPU writes it repeatedly.
 
 ### Step 3: Run It Each Frame
 
@@ -165,14 +165,6 @@ Do not mix standard attribute names with custom ones in the same transform feedb
 - **WebGL2 only.** There is no WebGPU path; use compute shaders there.
 - **Vertex formats must be interleaved**, or contain a single element.
 - **Separate mode limits each varying to 4 components** on baseline WebGL2 (`MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS` is only guaranteed to be 4), so plan what each buffer carries. Wider state needs more varyings, and therefore more buffers.
-- **A buffer written only by the GPU still needs initial data**, so that its storage is allocated before transform feedback writes to it:
-
-  ```javascript
-  const instances = new pc.VertexBuffer(device, format, count, {
-      usage: pc.BUFFER_GPUDYNAMIC,
-      data: new Float32Array(count * 4)   // required, even though the GPU fills it
-  });
-  ```
 
 ## API Reference
 
