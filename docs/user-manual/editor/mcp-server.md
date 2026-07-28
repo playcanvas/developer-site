@@ -5,8 +5,6 @@ description: Connect AI assistants to the PlayCanvas Editor to modify and verify
 
 The [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-server) connects AI assistants to an open PlayCanvas Editor session. It can modify project data and verify the result through the viewport or a running application.
 
-<img loading="lazy" src="/img/user-manual/editor/mcp.png" alt="Editor MCP Server connection panel" width="400" style={{ marginBottom: '1.5rem' }} />
-
 Your MCP client starts the local server, and the Editor connects to it. Every tool acts on the project currently open in that Editor; the server does not choose or administer PlayCanvas projects.
 
 ## Install the Server Once
@@ -59,6 +57,8 @@ For JSON-based clients on Windows, use `"command": "cmd"` and prepend `"/c"` to 
 1. Open a project in the PlayCanvas Editor.
 2. Select the **MCP** button at the bottom of the Editor toolbar.
 3. Check that the port is `52000` and select **Connect**.
+
+<img loading="lazy" src="/img/user-manual/editor/mcp.png" alt="Editor MCP Server connection panel" width="400" style={{ marginBottom: '1.5rem' }} />
 
 Keep the MCP client running while you use the connection. Only one Editor instance can connect to the server at a time, so disconnect another Editor before changing projects or browser tabs.
 

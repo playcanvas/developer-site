@@ -5,8 +5,6 @@ description: AI アシスタントを PlayCanvas Editor に接続し、MCP ツ�
 
 [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-server) は、AI アシスタントを開いている PlayCanvas Editor セッションに接続します。プロジェクトデータを変更し、ビューポートまたは実行中のアプリケーションで結果を検証できます。
 
-<img loading="lazy" src="/img/user-manual/editor/mcp.png" alt="Editor MCP Server の接続パネル" width="400" style={{ marginBottom: '1.5rem' }} />
-
 MCP クライアントがローカルサーバーを起動し、Editor がそのサーバーに接続します。すべてのツールは接続中の Editor で現在開かれているプロジェクトを操作します。サーバーから PlayCanvas プロジェクトの選択や管理は行いません。
 
 ## サーバーを一度インストールする
@@ -59,6 +57,8 @@ Windows の JSON ベースのクライアントでは、`"command": "cmd"` を�
 1. PlayCanvas Editor でプロジェクトを開きます。
 2. Editor ツールバーの下部にある **MCP** ボタンを選択します。
 3. ポートが `52000` であることを確認し、**Connect** を選択します。
+
+<img loading="lazy" src="/img/user-manual/editor/mcp.png" alt="Editor MCP Server の接続パネル" width="400" style={{ marginBottom: '1.5rem' }} />
 
 接続中は MCP クライアントを起動したままにします。同時にサーバーへ接続できる Editor インスタンスは 1 つだけです。プロジェクトまたはブラウザータブを変更する前に、別の Editor を切断してください。
 
