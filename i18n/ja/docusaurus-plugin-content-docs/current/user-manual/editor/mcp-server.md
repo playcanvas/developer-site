@@ -115,7 +115,7 @@ MCP 操作は Editor プロジェクトを直接変更するため、ローカ�
 
 このデモでは、アシスタントがレガシーの Engine V1 プロジェクトを監査し、PlayCanvas ドキュメントを参照して、チェックポイントを作成しながら Engine V2 と ESM Scripts に移行し、実行結果を検証する流れを示します。
 
-<video controls playsInline preload="metadata" src="/video/editor-mcp-legacy-migration.mp4" style={{ width: '100%', height: 'auto' }} />
+<video autoPlay muted loop controls playsInline src="/video/editor-mcp-legacy-migration.mp4" style={{ width: '100%', height: 'auto' }} />
 
 ## 確認または復旧する
 

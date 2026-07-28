@@ -114,7 +114,7 @@ Allow pop-ups for the PlayCanvas Editor origin so the server can open the Launch
 
 This demo shows an assistant auditing a legacy Engine V1 project, cross-referencing the PlayCanvas documentation, migrating it to Engine V2 and ESM Scripts with checkpoints, and verifying the running result.
 
-<video controls playsInline preload="metadata" src="/video/editor-mcp-legacy-migration.mp4" style={{ width: '100%', height: 'auto' }} />
+<video autoPlay muted loop controls playsInline src="/video/editor-mcp-legacy-migration.mp4" style={{ width: '100%', height: 'auto' }} />
 
 ## Review or Recover
 
