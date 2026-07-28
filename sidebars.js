@@ -84,6 +84,7 @@ const sidebars = {
       items: [
         'user-manual/engine/supported-browsers',
         'user-manual/engine/standalone',
+        'user-manual/engine/ai-development',
         'user-manual/engine/running-in-node',
         'user-manual/engine/migrations',
         { type: 'link', label: 'Examples', key: 'engine-examples', href: 'https://playcanvas.com/examples' },
