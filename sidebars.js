@@ -110,7 +110,6 @@ const sidebars = {
             'user-manual/editor/getting-started/your-first-app',
           ],
         },
-        'user-manual/editor/mcp-server',
         {
           type: 'category',
           label: 'Projects',
@@ -383,7 +382,15 @@ const sidebars = {
             },
           ],
         },
-        'user-manual/editor/editor-api',
+        {
+          type: 'category',
+          label: 'Editor API',
+          link: {
+            type: 'doc',
+            id: 'user-manual/editor/editor-api',
+          },
+          items: ['user-manual/editor/mcp-server'],
+        },
         'user-manual/editor/engine-compatibility',
         'user-manual/editor/faq',
         'user-manual/editor/troubleshooting',
