@@ -1,11 +1,11 @@
 ---
-title: Editor MCP Server
+title: MCP Server
 description: AI アシスタントを PlayCanvas Editor に接続し、MCP ツールを通じてプロジェクトを変更、検証します。
 ---
 
 [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-server) は、AI アシスタントを開いている PlayCanvas Editor セッションに接続します。プロジェクトデータを変更し、ビューポートまたは実行中のアプリケーションで結果を検証できます。
 
-<img loading="lazy" src="/img/user-manual/ai/mcp.png" alt="Editor MCP Server の接続パネル" width="400" style={{ marginBottom: '1.5rem' }} />
+<img loading="lazy" src="/img/user-manual/editor/mcp.png" alt="Editor MCP Server の接続パネル" width="400" style={{ marginBottom: '1.5rem' }} />
 
 MCP クライアントがローカルサーバーを起動し、Editor がそのサーバーに接続します。すべてのツールは接続中の Editor で現在開かれているプロジェクトを操作します。サーバーから PlayCanvas プロジェクトの選択や管理は行いません。
 
@@ -127,7 +127,7 @@ MCP 操作は Editor プロジェクトを直接変更するため、ローカ�
 
 ## VS Code Extension を使用する場合
 
-アシスタントがテキストベースアセットのみを編集し、PlayCanvas へ反映する前にファイルシステムの差分を確認したい場合は、[VS Code Extension のワークフロー](./vscode-extension.md)を使用します。Editor、シーン、アセット、ビューポート、ランタイムへ直接アクセスするタスクには MCP を使用します。
+アシスタントがテキストベースアセットのみを編集し、PlayCanvas へ反映する前にファイルシステムの差分を確認したい場合は、[VS Code Extension のワークフロー](/user-manual/editor/scripting/vscode-extension/)を使用します。Editor、シーン、アセット、ビューポート、ランタイムへ直接アクセスするタスクには MCP を使用します。
 
 ## トラブルシューティング
 
@@ -152,5 +152,3 @@ MCP ツールは、接続中の Editor で開いているプロジェクトを�
 サーバーは現在の Editor セッションを通じて操作し、エンティティ、アセット、ビルド、ブランチの削除やプロジェクト状態のリセットなど、破壊的な操作も実行できます。許可する前にこれらの操作を確認し、大きな変更の前にはチェックポイントを作成してください。
 
 :::
-
-利用可能な PlayCanvas の AI 連携を比較するには [AI 開発の概要](./index.md)に戻るか、Editor 全体のワークフローについて [PlayCanvas Editor ガイド](/user-manual/editor/)を参照してください。

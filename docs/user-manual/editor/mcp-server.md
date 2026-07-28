@@ -1,11 +1,11 @@
 ---
-title: Editor MCP Server
+title: MCP Server
 description: Connect AI assistants to the PlayCanvas Editor to modify and verify projects through MCP tools.
 ---
 
 The [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-server) connects AI assistants to an open PlayCanvas Editor session. It can modify project data and verify the result through the viewport or a running application.
 
-<img loading="lazy" src="/img/user-manual/ai/mcp.png" alt="Editor MCP Server connection panel" width="400" style={{ marginBottom: '1.5rem' }} />
+<img loading="lazy" src="/img/user-manual/editor/mcp.png" alt="Editor MCP Server connection panel" width="400" style={{ marginBottom: '1.5rem' }} />
 
 Your MCP client starts the local server, and the Editor connects to it. Every tool acts on the project currently open in that Editor; the server does not choose or administer PlayCanvas projects.
 
@@ -126,7 +126,7 @@ Do not ask the assistant to hard-reset, delete a branch, restore a checkpoint, o
 
 ## When to Use the VS Code Extension Instead
 
-Use the [VS Code Extension workflow](./vscode-extension.md) when the assistant only needs to edit text-based assets and you want to review filesystem diffs before pushing anything to PlayCanvas. Use MCP when the task needs direct Editor, scene, asset, viewport, or runtime access.
+Use the [VS Code Extension workflow](/user-manual/editor/scripting/vscode-extension/#use-with-ai-coding-assistants) when the assistant only needs to edit text-based assets and you want to review filesystem diffs before pushing anything to PlayCanvas. Use MCP when the task needs direct Editor, scene, asset, viewport, or runtime access.
 
 ## Troubleshooting
 
@@ -151,5 +151,3 @@ MCP tools always target the project open in the connected Editor. Disconnect, op
 The server acts through your current Editor session and can perform destructive operations such as deleting entities, assets, builds, or branches and resetting project state. Review these operations before allowing them and create a checkpoint before substantial changes.
 
 :::
-
-Return to the [AI Development overview](./index.md) to compare the available PlayCanvas AI integrations, or see the [PlayCanvas Editor guide](/user-manual/editor/) for the wider Editor workflow.

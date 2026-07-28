@@ -72,30 +72,6 @@ const sidebars = {
     },
     {
       type: 'html',
-      value: '<div class="sidebar-section-header sidebar-section-header--ai">AI</div>',
-    },
-    {
-      type: 'doc',
-      id: 'user-manual/ai/index',
-      label: 'Overview',
-    },
-    {
-      type: 'doc',
-      id: 'user-manual/ai/engine-development',
-      label: 'Engine Development',
-    },
-    {
-      type: 'doc',
-      id: 'user-manual/ai/vscode-extension',
-      label: 'VS Code Extension',
-    },
-    {
-      type: 'doc',
-      id: 'user-manual/ai/editor-mcp-server',
-      label: 'Editor MCP Server',
-    },
-    {
-      type: 'html',
       value: '<div class="sidebar-section-header">Core Products</div>',
     },
     {
@@ -108,6 +84,7 @@ const sidebars = {
       items: [
         'user-manual/engine/supported-browsers',
         'user-manual/engine/standalone',
+        'user-manual/engine/ai-development',
         'user-manual/engine/running-in-node',
         'user-manual/engine/migrations',
         { type: 'link', label: 'Examples', key: 'engine-examples', href: 'https://playcanvas.com/examples' },
@@ -134,6 +111,7 @@ const sidebars = {
             'user-manual/editor/getting-started/your-first-app',
           ],
         },
+        'user-manual/editor/mcp-server',
         {
           type: 'category',
           label: 'Projects',

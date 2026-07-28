@@ -3,12 +3,6 @@ title: Engine Compatibility
 description: Engine V1 versus V2 coverage, switching with checkpoints, launcher toggles, and gamma tonemap viewport plus sRGB texture migration notes for scripts.
 ---
 
-:::ai
-
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Before switching engines manually, create a checkpoint, audit scripts, cameras, textures, and settings, launch with the target engine version, and compare captures and logs.
-
-:::
-
 ## Introduction
 
 The Editor supports two major release streams of the engine:
@@ -25,6 +19,10 @@ You are free to switch between these at any time.
 This process will involve migration and updating of scripts given differences in our Engine API between Engine V1 and V2. All details regarding the engine changes can be found [here](/user-manual/engine/migrations)
 
 To initiate this navigate to the settings panel and click the `SWITCH TO ENGINE V2` button to convert your project to using Engine V2 (This will require a confirmation before converting). If you wish to switch back, there is a `SWITCH TO ENGINE V1` button in the same location for Project V2.
+
+:::ai
+The **[Editor MCP Server](/user-manual/editor/mcp-server/)** can checkpoint and audit the project before a manual Engine 2 switch, then compare runtime captures and logs afterward.
+:::
 
 :::important
 

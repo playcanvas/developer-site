@@ -3,14 +3,11 @@ title: アニメーション
 description: FBXクリップ、animstategraphアセット、animコンポーネントのワークフローによる状態ベースのキャラクターアニメーションです。
 ---
 
-:::ai
-
-- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「アニメーション」について、次の要件を満たしてください: FBXクリップ、animstategraphアセット、animコンポーネントのワークフローによる状態ベースのキャラクターアニメーションであること シーンを起動し、再生、遷移、パラメーター、イベントデータを確認してください。
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Animation アセットと State Graph を管理し、Anim Component を設定して、シーンを起動して再生を確認してください。
-
-:::
-
 PlayCanvasは、キャラクターモデルや他の任意のシーンオブジェクトモデルのアニメーションを作成するために使用できる、強力な状態ベースのアニメーションシステムを提供しています。ユーザーは、.FBXアニメーションアセットを使用できます。これらはアニメーションステートマシンを使用して整理し、シーンモデルのアニメーション動作を実行時に簡単に制御できます。
+
+:::ai
+**[AI 開発](/user-manual/engine/ai-development/)** または **[Editor MCP Server](/user-manual/editor/mcp-server/)** でアニメーションアセットとステートグラフを設定し、再生と遷移を検証できます。
+:::
 
 ## 概要
 

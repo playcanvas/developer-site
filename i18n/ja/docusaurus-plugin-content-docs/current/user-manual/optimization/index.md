@@ -3,14 +3,11 @@ title: 最適化
 description: PlayCanvas アプリケーションでロード時間、フレームレート、CPU、GPU 負荷、メモリを最適化する理由と方法です。
 ---
 
-:::ai
-
-- **[Engine Development](/user-manual/ai/developing-with-engine/):** 「最適化」について、次の要件を満たしてください: PlayCanvas アプリケーションでロード時間、フレームレート、CPU、GPU 負荷、メモリを最適化する理由と方法であること 変更前後のプロファイラー、ロード、メモリ、またはフレーム時間の該当指標を測定してください。
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** 開いているプロジェクトと Launch したアプリケーションを調査し、必要に応じて Profiler または MiniStats の基準値をキャプチャーし、最も効果の高い Editor の変更後に同じビューを再度キャプチャーします。
-
-:::
-
 最適化は、PlayCanvasアプリケーション開発の重要な部分です。それは、優れたユーザーエクスペリエンスとひどいユーザーエクスペリエンスの分かれ目となることがあります。
+
+:::ai
+**[AI 開発](/user-manual/engine/ai-development/)** または **[Editor MCP Server](/user-manual/editor/mcp-server/)** で基準値を取得し、変更後に同じランタイム指標を比較できます。
+:::
 
 :::tip
 

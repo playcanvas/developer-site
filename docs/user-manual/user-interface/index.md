@@ -3,14 +3,11 @@ title: User Interface
 description: Choose Screen and Element components for in-canvas UI or HTML and CSS, with performance trade-offs.
 ---
 
-:::ai
-
-- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the User Interface features described here that match the requested outcome, and implement only those features; capture the viewport and launched interface, exercising pointer input when relevant.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and configure the Screen, Element, Sprite, or atlas data needed for User Interface so it satisfies this requirement: choose Screen and Element components for in-canvas UI or HTML and CSS, with performance trade-offs; capture the viewport and launched interface.
-
-:::
-
 User Interfaces present a unique challenge for graphical applications. There are several options for building User Interfaces in PlayCanvas.
+
+:::ai
+Use **[AI Development](/user-manual/engine/ai-development/)** or the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to build the interface, launch it, and verify layout and input.
+:::
 
 ## Screen and Element Components (Recommended)
 

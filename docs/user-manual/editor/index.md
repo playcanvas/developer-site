@@ -3,13 +3,11 @@ title: PlayCanvas Editor
 description: PlayCanvas web Editor tour covering live testing, collaboration, version control, visual editing, scripting, asset workflow, and export to web or native.
 ---
 
-:::ai
-
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Inspect and modify the open project, operate the viewport, launch the application, and verify the result.
-
-:::
-
 The PlayCanvas Editor is a powerful, browser-based development environment for creating stunning 3D applications. No downloads, no installations—just open your browser and start building.
+
+:::ai
+The **[Editor MCP Server](/user-manual/editor/mcp-server/)** can modify the open project, launch it, and verify the result.
+:::
 
 ![PlayCanvas Editor Interface](/img/user-manual/editor/interface/editor-interface.png)
 

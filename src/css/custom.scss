@@ -316,8 +316,7 @@ html[data-theme='dark'] .navbar--github-link:before {
   color: var(--ifm-color-emphasis-1000);
 }
 
-.theme-admonition-ai,
-.sidebar-section-header--ai {
+.theme-admonition-ai {
   background: linear-gradient(120deg, rgb(124 58 237 / 14%), rgb(6 182 212 / 18%), rgb(236 72 153 / 14%));
   background-size: 200% 100%;
   box-shadow: 0 0 1rem rgb(139 92 246 / 20%);
@@ -329,12 +328,9 @@ html[data-theme='dark'] .navbar--github-link:before {
   --ifm-alert-border-color: transparent;
   --ifm-alert-foreground-color: var(--ifm-font-color-base);
 
+  padding: 0.65rem 0.85rem;
   border: 1px solid rgb(139 92 246 / 60%);
-}
-
-.sidebar-section-header--ai {
-  color: #7c3aed;
-  border-left-color: #8b5cf6;
+  border-left-width: var(--ifm-alert-border-left-width);
 }
 
 @keyframes ai-shimmer {
@@ -343,8 +339,7 @@ html[data-theme='dark'] .navbar--github-link:before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-admonition-ai,
-  .sidebar-section-header--ai {
+  .theme-admonition-ai {
     animation: none;
   }
 }

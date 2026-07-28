@@ -1,7 +1,5 @@
 ---
-title: Engine Development
-id: engine-development
-slug: developing-with-engine
+title: AI Development
 description: Use AI coding assistants, documentation, and browser tools to build and verify standalone PlayCanvas Engine applications.
 ---
 
@@ -9,7 +7,7 @@ PlayCanvas Engine applications are regular JavaScript or TypeScript projects, so
 
 <!-- screenshot: ai client editing a playcanvas engine project -->
 
-If your code is stored in a PlayCanvas Editor project, use the [VS Code Extension](./vscode-extension.md) instead. Use the [Editor MCP Server](./editor-mcp-server.md) when the assistant also needs to modify scenes, entities, assets, or project settings.
+If your code is stored in a PlayCanvas Editor project, use the [VS Code Extension](/user-manual/editor/scripting/vscode-extension/) instead. Use the [Editor MCP Server](/user-manual/editor/mcp-server/) when the assistant also needs to modify scenes, entities, assets, or project settings.
 
 ## Choose an AI Client
 
@@ -75,8 +73,8 @@ Start with only the integrations needed for the task. In particular, choose one 
 - **[Context7 MCP](https://github.com/upstash/context7):** Retrieve its indexed [PlayCanvas Engine documentation](https://context7.com/playcanvas/engine) when the client benefits from MCP-based lookup. Prefer the official AI-readable documentation above for authoritative content.
 - **[Playwright MCP](https://github.com/microsoft/playwright-mcp):** Launch and operate the application in a browser, exercise user flows, and capture screenshots.
 - **[Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp):** Use instead of Playwright when console, network, or performance diagnosis is the main task.
-- **[PlayCanvas Editor MCP Server](./editor-mcp-server.md):** Add direct Editor, scene, asset, and runtime access when the application also uses an Editor project.
-- **[PlayCanvas VS Code Extension](./vscode-extension.md):** Expose Editor-managed text assets as local files for Cursor and other coding assistants.
+- **[PlayCanvas Editor MCP Server](/user-manual/editor/mcp-server/):** Add direct Editor, scene, asset, and runtime access when the application also uses an Editor project.
+- **[PlayCanvas VS Code Extension](/user-manual/editor/scripting/vscode-extension/):** Expose Editor-managed text assets as local files for Cursor and other coding assistants.
 
 ## Verify Every Change
 

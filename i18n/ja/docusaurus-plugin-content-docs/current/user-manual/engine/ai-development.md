@@ -1,7 +1,5 @@
 ---
-title: Engine 開発
-id: engine-development
-slug: developing-with-engine
+title: AI 開発
 description: AI コーディングアシスタント、ドキュメント、ブラウザーツールを使用して、スタンドアロンの PlayCanvas Engine アプリケーションを構築、検証します。
 ---
 
@@ -9,7 +7,7 @@ PlayCanvas Engine アプリケーションは通常の JavaScript または Type
 
 <!-- screenshot: ai client editing a playcanvas engine project -->
 
-コードが PlayCanvas Editor プロジェクトに保存されている場合は、代わりに [VS Code Extension](./vscode-extension.md) を使用してください。アシスタントがシーン、エンティティ、アセット、プロジェクト設定も変更する必要がある場合は、[Editor MCP Server](./editor-mcp-server.md) を使用します。
+コードが PlayCanvas Editor プロジェクトに保存されている場合は、代わりに [VS Code Extension](/user-manual/editor/scripting/vscode-extension/) を使用してください。アシスタントがシーン、エンティティ、アセット、プロジェクト設定も変更する必要がある場合は、[Editor MCP Server](/user-manual/editor/mcp-server/) を使用します。
 
 ## AI クライアントを選択する
 
@@ -75,8 +73,8 @@ API を推測せずに、インストール済みの PlayCanvas 型定義また�
 - **[Context7 MCP](https://github.com/upstash/context7):** クライアントで MCP による検索が役立つ場合に、インデックス化された [PlayCanvas Engine ドキュメント](https://context7.com/playcanvas/engine)を取得します。信頼できる情報源としては、上記の公式 AI 向けドキュメントを優先してください。
 - **[Playwright MCP](https://github.com/microsoft/playwright-mcp):** ブラウザーでアプリケーションを起動、操作し、ユーザーフローを実行してスクリーンショットを取得します。
 - **[Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp):** コンソール、ネットワーク、パフォーマンスの診断が主な目的の場合に Playwright の代わりに使用します。
-- **[PlayCanvas Editor MCP Server](./editor-mcp-server.md):** アプリケーションで Editor プロジェクトも使用する場合に、Editor、シーン、アセット、ランタイムへの直接アクセスを追加します。
-- **[PlayCanvas VS Code Extension](./vscode-extension.md):** Editor で管理されているテキストアセットを、Cursor などのコーディングアシスタントが操作できるローカルファイルとして公開します。
+- **[PlayCanvas Editor MCP Server](/user-manual/editor/mcp-server/):** アプリケーションで Editor プロジェクトも使用する場合に、Editor、シーン、アセット、ランタイムへの直接アクセスを追加します。
+- **[PlayCanvas VS Code Extension](/user-manual/editor/scripting/vscode-extension/):** Editor で管理されているテキストアセットを、Cursor などのコーディングアシスタントが操作できるローカルファイルとして公開します。
 
 ## すべての変更を検証する
 

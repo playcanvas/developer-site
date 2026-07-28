@@ -9,6 +9,10 @@ By default, when you launch your PlayCanvas app from the Editor, it will use the
 * To temporarily step back to a previous stable engine version to mitigate a regression in the current stable build.
 * To develop and debug against your own fork of the [engine repo on GitHub](https://github.com/playcanvas/engine).
 
+:::ai
+The **[Editor MCP Server](/user-manual/editor/mcp-server/)** can launch with a selected Engine build, compare behavior and captures, and inspect runtime errors.
+:::
+
 :::important[Loading the Correct Engine: Module vs UMD]
 
 When loading a custom engine build, it's important to choose the correct format based on your project's script type:

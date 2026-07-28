@@ -3,17 +3,11 @@ title: VS Code拡張機能
 description: PlayCanvas VS Code Extension をインストールし、同期モードの選択、プロジェクトファイルの管理、同期問題の解決を行います。
 ---
 
-:::ai
-
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** VS Code の外部でプロジェクトファイルを編集する AI コーディングアシスタントには **Pull/Push** モードを使用し、変更を確認して Push するまでローカルに保持してください。
-
-:::
-
 PlayCanvas VS Code Extension は、PlayCanvas プロジェクトのテキストベースアセットをローカルワークスペースにマッピングします。VS Code または Cursor でスクリプトやシェーダーを編集しながら、認証、ブランチ、型情報、Editor との同期を拡張機能で管理できます。
 
 ![VS Code Extension Demo](/img/user-manual/scripting/vscode-demo.webp)
 
-この拡張機能は [GitHub でオープンソースとして公開](https://github.com/playcanvas/vscode-extension)され、MIT ライセンスで提供されています。外部のコーディングアシスタント向けワークフローについては、[VS Code Extension で AI を使用する](/user-manual/ai/vscode-extension/)を参照してください。
+この拡張機能は [GitHub でオープンソースとして公開](https://github.com/playcanvas/vscode-extension)され、MIT ライセンスで提供されています。
 
 ## インストールしてプロジェクトを開く
 
@@ -77,6 +71,29 @@ Push は fast-forward のみに対応しています。最後の Pull 以降に�
 4. ファイルが **Changes** に戻ったことを確認し、Push します。
 
 ローカル変更を破棄する場合は、Source Control で破棄アクションを選択します。破棄を実行すると、確認後に最後に同期したバージョンへ戻ります。
+
+## AI コーディングアシスタントを使用する
+
+AI コーディングアシスタントでプロジェクトファイルを編集する場合は、Pull/Push モードを使用します。マッピングされたプロジェクトディレクトリでアシスタントを起動し、対象のファイルまたは動作、期待する結果、実行するチェックを伝えてください。
+
+:::caution
+
+外部のアシスタントには Realtime モードを使用しないでください。Realtime モードでは、古いファイルによって共同作業中の内容が上書きされないように、他のアプリケーションが閉じているファイルに加えた変更を無視します。
+
+:::
+
+次に例を示します。
+
+```text
+プレイヤー移動スクリプトを確認し、キーボード移動をフレームレートに依存しないようにしてください。
+現在の操作方法と公開スクリプト属性は変更しないでください。
+編集後、Problems パネルを確認するか、利用可能な型チェックを実行し、
+変更したファイルをまとめてください。無関係なアセットは変更しないでください。
+```
+
+アシスタントによる変更は、Push するまでローカルに保持されます。変更したすべてのファイルと診断を確認し、サーバーの最新状態を Pull してコンフリクトを解決してから Push してください。その後、PlayCanvas Editor でプロジェクトを起動し、実際のシーンで動作を検証します。
+
+アシスタントでエンティティの作成、コンポーネントの設定、テキスト以外のアセットの管理、ビューポートの操作、実行中のシーンの直接テストを行う場合は、代わりに [Editor MCP Server](/user-manual/editor/mcp-server/)を使用します。
 
 ## ブランチを切り替える
 

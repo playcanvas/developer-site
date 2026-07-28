@@ -3,17 +3,11 @@ title: VS Code Extension
 description: Install the PlayCanvas VS Code Extension, choose a sync mode, manage project files, and resolve synchronization problems.
 ---
 
-:::ai
-
-- **[VS Code Extension](/user-manual/ai/vscode-extension/):** Use **Pull/Push** mode for AI coding assistants that edit project files outside VS Code, keeping changes local until you review and push them; review the complete diff and diagnostics before Push.
-
-:::
-
 The PlayCanvas VS Code Extension maps text-based assets from a PlayCanvas project into a local workspace. You can edit scripts and shaders with VS Code or Cursor while the extension handles authentication, branches, type information, and synchronization with the Editor.
 
 ![VS Code Extension Demo](/img/user-manual/scripting/vscode-demo.webp)
 
-The extension is [open source on GitHub](https://github.com/playcanvas/vscode-extension) and licensed under MIT. For a workflow designed for external coding agents, see [Using AI with the VS Code Extension](/user-manual/ai/vscode-extension/).
+The extension is [open source on GitHub](https://github.com/playcanvas/vscode-extension) and licensed under MIT.
 
 ## Install and Open a Project
 
@@ -77,6 +71,29 @@ Conflicted files appear under **Merge Changes**.
 4. Check that the file moved back to **Changes**, then Push.
 
 To abandon a local edit instead, select its discard action in Source Control. Discard restores the last synchronized version and asks for confirmation first.
+
+## Use with AI Coding Assistants
+
+Use Pull/Push mode when an AI coding assistant edits project files. Start the assistant in the mapped project directory and give it the files or behavior in scope, the result you expect, and the checks it should run.
+
+:::caution
+
+Do not use realtime mode for an external assistant. Realtime mode ignores changes made to closed files by other applications so that stale files cannot overwrite collaborative work.
+
+:::
+
+For example:
+
+```text
+Inspect the player movement scripts and make keyboard movement frame-rate independent.
+Keep the current controls and public script attributes unchanged.
+After editing, check the Problems panel or run the available type check, then summarize
+the files changed. Do not modify unrelated assets.
+```
+
+The assistant's edits remain local until you Push. Review every changed file, check diagnostics, Pull the latest server state, resolve any conflicts, and Push. Then launch the project in the PlayCanvas Editor to verify the behavior in its real scene.
+
+Use the [Editor MCP Server](/user-manual/editor/mcp-server/) instead when the assistant needs to create entities, configure components, manage non-text assets, operate the viewport, or test a running scene directly.
 
 ## Switch Branches
 

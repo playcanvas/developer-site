@@ -3,17 +3,15 @@ title: Loading Screen
 description: Loading screen customization via generated or selected scripts that render DOM UI through application start including how to hide overlays once boot completes.
 ---
 
-:::ai
-
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create or update a loading-screen script, assign it in project settings, then launch and capture the application to verify its loading and completed states.
-
-:::
-
 All newly created PlayCanvas projects use the default loading screen:
 
 ![Default Loading Screen](/img/user-manual/editor/launch-page/loading-screen/loading-screen-default.webp)
 
 It will be displayed in both the Launch Page and your published app.
+
+:::ai
+The **[Editor MCP Server](/user-manual/editor/mcp-server/)** can edit and assign a loading-screen script, then verify both loading and completed states.
+:::
 
 ## Customizing the Loading Screen
 

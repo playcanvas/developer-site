@@ -4,14 +4,12 @@ description: How PlayCanvas uses Entities, Components, and Systems to organize o
 sidebar_label: Entity Component System
 ---
 
+PlayCanvas uses an **Entity Component System (ECS)** to organize and manage the objects in your application.
+
 :::ai
-
-- **[Engine Development](/user-manual/ai/developing-with-engine/):** Inspect the project, choose the Entity Component System (ECS) features described here that match the requested outcome, and implement only those features; query the resulting hierarchy, transforms, and Component data.
-- **[Editor MCP Server](/user-manual/ai/editor-mcp-server/):** Create and organize entities, configure their Components and transforms, and inspect the current scene hierarchy.
-
+Use **[AI Development](/user-manual/engine/ai-development/)** or the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to create entities, configure components, and inspect the resulting hierarchy.
 :::
 
-PlayCanvas uses an **Entity Component System (ECS)** to organize and manage the objects in your application.  
 In this design pattern:
 
 - **[Entities](https://api.playcanvas.com/engine/classes/Entity.html)** are containers — they hold components but have no behavior of their own.
