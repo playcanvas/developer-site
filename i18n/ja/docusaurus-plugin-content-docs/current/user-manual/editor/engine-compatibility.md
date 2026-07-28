@@ -44,6 +44,10 @@ Editorは、エンジンの主要な2つのリリースストリームをサポ�
 
 <img src='/img/user-manual/editor/editor-v2/scripting-engine.png' width='300' />
 
+:::ai
+**[Editor MCP Server](/user-manual/editor/mcp-server/)** を使用すると、影響を受けるスクリプトの特定、非推奨 API の更新、各変更前後の Launch ログとキャプチャの比較を行い、Engine V2 への移行を支援できます。
+:::
+
 #### ガンマとトーンマップ
 
 これらの設定は以前、設定パネルのレンダリングセクションにありました。しかし、Engine V2では、これらはカメラごとに設定されるように移動されました。各カメラコンポーネントには、これらの追加フィールドが含まれるようになります。
