@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.6
-Total Documents: 481
+Total Documents: 482
 Generated: 2026-07-28
 
 ## Instructions for Large Language Models
@@ -298,6 +298,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Rendering Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/rendering/): Rendering Project Settings controlling sky clustered lights shadows exposure fog mesh sketch overlays and resolution defaults shared with everyone on branch.
 - [Toolbar](https://developer.playcanvas.com/user-manual/editor/interface/toolbar/): Toolbar buttons from menus and gizmos through snap focus history lightmapper code editor publish downloads community links help overlays and settings access.
 - [Viewport](https://developer.playcanvas.com/user-manual/editor/interface/viewport/): Use viewport cameras gizmos and render modes from wireframe to material debug views like albedo normals or emission to validate lighting before shipping.
+- [MCP Server](https://developer.playcanvas.com/user-manual/editor/mcp-server/): Connect AI assistants to the PlayCanvas Editor to modify and verify projects through MCP tools.
 - [Projects](https://developer.playcanvas.com/user-manual/editor/projects/): Maps project administration topics from creation through dashboard settings teamwork dev logs exports and ownership transfers.
 - [Backup and Export](https://developer.playcanvas.com/user-manual/editor/projects/backup-and-export/): Compares forks exports scheduled downloads REST backups storage caps and restores while noting what exports omit from projects.
 - [Creating Projects](https://developer.playcanvas.com/user-manual/editor/projects/creating/): Creates projects from starter kits or forks walks privacy rules and explains duplicating projects for templates or backups.
