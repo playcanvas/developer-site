@@ -110,6 +110,7 @@ const sidebars = {
             'user-manual/editor/getting-started/your-first-app',
           ],
         },
+        'user-manual/editor/mcp-server',
         {
           type: 'category',
           label: 'Projects',
