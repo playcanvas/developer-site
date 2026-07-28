@@ -33,6 +33,10 @@ Open the file in the code editor. If you want to map a module like "/utils/math.
 
 Now in your code you can call `import x from "math"` and it will resolve to your module.
 
+:::ai
+When changing an import alias, an AI coding assistant can help update its uses across the project through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)**.
+:::
+
 :::tip
 
 You can also use Import Maps as shorthand for npm packages. For example, add `"tweenjs": "https://esm.sh/tween.js"` which will resolve to tween.js on a CDN.
