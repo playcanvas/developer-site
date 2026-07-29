@@ -7,7 +7,11 @@ PlayCanvas Engine アプリケーションは通常の JavaScript または Type
 
 <!-- screenshot: ai client editing a playcanvas engine project -->
 
+:::tip
+
 コードが PlayCanvas Editor プロジェクトに保存されている場合は、代わりに [VS Code Extension](/user-manual/editor/scripting/vscode-extension/) を使用してください。
+
+:::
 
 ## AI クライアントとインターフェースを選択する
 

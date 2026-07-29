@@ -7,7 +7,11 @@ PlayCanvas Engine applications are regular JavaScript or TypeScript projects, so
 
 <!-- screenshot: ai client editing a playcanvas engine project -->
 
+:::tip
+
 If your code is stored in a PlayCanvas Editor project, use the [VS Code Extension](/user-manual/editor/scripting/vscode-extension/) instead.
+
+:::
 
 ## Choose an AI Client and Interface
 
