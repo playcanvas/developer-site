@@ -29,3 +29,7 @@ description: Project Settings のマップ。Engine、インポート、物理�
 | [入力](input.md) | 入力デバイス（マウス、キーボードなど）の有効化/無効化。 |
 | [ローカライゼーション](localization.md) | ローカライズ用アセットの設定。 |
 | [ネットワーク](network.md) | プロジェクトのネットワーク関連の設定。 |
+
+:::ai
+設定が予期しない動作の原因と思われる場合は、AIアシスタントに**[Editor MCP Server](/user-manual/editor/mcp-server/)**で関連する設定とスコープを特定させ、適用前に最小限の変更を説明させます。
+:::

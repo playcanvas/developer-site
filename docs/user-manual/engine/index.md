@@ -11,3 +11,5 @@ As a developer, you have complete freedom as to how you use the Engine. The two 
 
 1. Build applications against the Engine directly. [Learn](standalone) how to use the Engine standalone.
 2. Build applications in the [Editor](../editor). In this case, consult the [Scripting](../scripting) section.
+
+For AI-assisted standalone development, see **[Developing with AI](developing-with-ai)**.

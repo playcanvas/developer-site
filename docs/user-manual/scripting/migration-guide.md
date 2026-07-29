@@ -28,7 +28,7 @@ npx codemod playcanvas-esm-scripts
 ```
 
 :::ai
-For Editor projects, use **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** to run the codemod locally and review its changes before syncing, then use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to check script attributes and references and verify each batch in Launch.
+For Editor projects, use a coding assistant to coordinate the codemod with metadata that source conversion cannot update. Review each **[Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** batch, then use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to reparse scripts, flag affected wiring, and test in Launcher.
 :::
 
 ## Known differences

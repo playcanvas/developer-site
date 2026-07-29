@@ -15,6 +15,10 @@ When selecting an animstategraph asset in the editors asset panel, you’ll open
 
 Within this view you can edit your animation state graph. The following sections will highlight how different elements of the animstategraph asset can be used to define specific animation behavior.
 
+:::ai
+For complex graphs, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to trace a failing transition across its conditions, parameters, scripts, and Anim mappings, then reproduce it in Launcher.
+:::
+
 ## States {#states}
 
 In essence, states are used to specify which animations should play at a given point in time. An anim state graph can only be in one of these states at a given time.

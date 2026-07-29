@@ -20,3 +20,7 @@ description: Entity、Component、シーン全体の設定を説明する Scene 
 | [シーンの管理](managing-scenes.md) | プロジェクト内のシーンを作成、開く、複製、削除します。 |
 | [コンポーネント](components/index.md) | エンティティに追加できるさまざまなコンポーネントタイプについて学びます。 |
 | [シーンの読み込み](loading-scenes.md) | アプリケーション実行時にシーンを動的に読み込みます。 |
+
+:::ai
+シーン内の反復的な変更には、AIアシスタントと**[Editor MCP Server](/user-manual/editor/mcp-server/)**で対象のエンティティとコンポーネントを特定し、一括編集を準備します。対象を確認し、ViewportとLauncherのキャプチャで不整合を探します。
+:::

@@ -45,7 +45,7 @@ Editorは、エンジンの主要な2つのリリースストリームをサポ�
 <img src='/img/user-manual/editor/editor-v2/scripting-engine.png' width='300' />
 
 :::ai
-両方の Engine バージョンでスクリプトをテストする場合、**[Editor MCP Server](/user-manual/editor/mcp-server/)** を使用すると、影響を受けるスクリプトを特定し、変更を加えながらランタイムログとキャプチャを比較できます。
+Engineのバージョン間で動作が異なる場合は、**[Editor MCP Server](/user-manual/editor/mcp-server/)**で同じシナリオを再現します。AIアシスタントはログやキャプチャを関連するスクリプトやAPIと結び付け、修正箇所を絞り込めます。
 :::
 
 #### ガンマとトーンマップ

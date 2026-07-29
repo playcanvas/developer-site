@@ -103,7 +103,7 @@ description: Monaco ベースの共同編集、ファイルタブ、オートコ
 検索結果の行をダブルクリックすると、そのアセットの特定の行に移動します。
 
 :::ai
-より大規模な編集では、AI コーディングアシスタントが **[VS Code Extension の Pull/Push モード](/user-manual/editor/scripting/vscode-extension/)** を通じて関連するテキストアセットを更新できます。同期する前に変更差分全体を確認できます。
+関連するテキストアセット全体を変更する場合は、AIコーディングアシスタントと**[VS Code ExtensionのPull/Pushモード](/user-manual/editor/scripting/vscode-extension/)**で送信側とリスナーをまとめて更新し、同期前に差分全体を確認します。
 :::
 
 ## クイックオープン

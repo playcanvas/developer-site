@@ -26,3 +26,7 @@ As an Editor user, you benefit from a tightly integrated development environment
 - [VS Code Extension](./vscode-extension.md) — Set up VS Code for a full-featured development experience.
 - [Hot Reloading](./hot-reloading.md) — Iterate rapidly with live code updates.
 - [Loading Order](./loading-order.md) — Control the order in which scripts are loaded.
+
+:::ai
+When a script change also needs Editor setup, use an AI coding assistant with **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** for source edits and the **[Editor MCP Server](/user-manual/editor/mcp-server/)** for attachments, attributes, instances, and Launcher verification. Review both source and Editor changes.
+:::

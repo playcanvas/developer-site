@@ -45,7 +45,7 @@ Additionally, conditionally checking the Engine version at runtime will allow yo
 <img src='/img/user-manual/editor/editor-v2/scripting-engine.png' width='300' />
 
 :::ai
-When testing scripts against both Engine versions, the **[Editor MCP Server](/user-manual/editor/mcp-server/)** can help identify affected scripts and compare runtime logs and captures as you make changes.
+When behavior differs between Engine versions, use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to reproduce the same scenario in each. An AI assistant can correlate logs and captures with affected scripts and APIs to suggest a focused fix.
 :::
 
 #### Gamma and Tonemap

@@ -34,7 +34,7 @@ Open the file in the code editor. If you want to map a module like "/utils/math.
 Now in your code you can call `import x from "math"` and it will resolve to your module.
 
 :::ai
-When changing an import alias, an AI coding assistant can help update its uses across the project through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)**.
+When an alias's target API changes, use an AI coding assistant through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** to update the import map and dependent code semantically, then review the diff before syncing.
 :::
 
 :::tip

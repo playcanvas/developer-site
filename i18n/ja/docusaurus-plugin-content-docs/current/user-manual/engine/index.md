@@ -11,3 +11,5 @@ PlayCanvas Engine は、PlayCanvasアプリケーションを動かすランタ�
 
 1. Engineを直接利用してアプリケーションを構築する。[Engineをスタンドアロンで使用する方法](standalone)を学びましょう。
 2. [Editor](../editor)でアプリケーションを構築する。この場合、[スクリプト](../scripting)セクションを参照してください。
+
+AIを活用したスタンドアロン開発については、**[AIを活用した開発](developing-with-ai)**を参照してください。
