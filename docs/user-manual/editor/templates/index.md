@@ -51,6 +51,10 @@ If you hover over the colored label of the overridden field you can view more de
 
 ![Override Hover](/img/user-manual/editor/templates/override-hover.png)
 
+:::ai
+Before applying overrides across template instances, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to summarize what will propagate. Create a checkpoint and approve only the intended changes.
+:::
+
 ### Applying Overrides {#applying-overrides}
 
 To apply an override you can click APPLY in the tooltip shown when you hover over the overridden field.

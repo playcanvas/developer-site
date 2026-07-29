@@ -1,5 +1,5 @@
 ---
-title: AI Development
+title: Developing with AI
 description: Use AI coding assistants, documentation, and browser tools to build and verify standalone PlayCanvas Engine applications.
 ---
 

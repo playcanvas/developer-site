@@ -51,6 +51,10 @@ Templateアセットに変更を加えるには、まずエディタにそのイ
 
 ![Override Hover](/img/user-manual/editor/templates/override-hover.png)
 
+:::ai
+テンプレート全体にオーバーライドを適用する前に、AIアシスタントに**[Editor MCP Server](/user-manual/editor/mcp-server/)**で伝播内容を要約させます。チェックポイントを作成し、意図した変更だけを承認します。
+:::
+
 ### オーバーライドの適用 {#applying-overrides}
 
 オーバーライドを適用するには、オーバーライドされたフィールドのツールチップに表示されるAPPLYをクリックします。

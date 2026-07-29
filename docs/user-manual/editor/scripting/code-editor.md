@@ -103,7 +103,7 @@ On the left side of the input fields there are various search options. These all
 You can double click on a line in the search results to go that particular line in the asset.
 
 :::ai
-For larger edits, an AI coding assistant can help update related text assets through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)**, leaving you to review the complete diff before syncing it.
+For changes spanning related text assets, use an AI coding assistant through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** to trace and update producers and listeners together, then review the complete diff before syncing.
 :::
 
 ## Quick Open

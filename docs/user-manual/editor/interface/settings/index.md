@@ -29,3 +29,7 @@ Settings are grouped into categories, where each category is shown as a collapsi
 | [Input](input.md) | Enable or disable input devices (mouse, keyboard, etc.). |
 | [Localization](localization.md) | Settings for adding localization assets. |
 | [Network](network.md) | Network-related settings for the project. |
+
+:::ai
+When configuration may cause unexpected behavior, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to identify relevant settings and scopes, then explain the smallest change before you apply it.
+:::

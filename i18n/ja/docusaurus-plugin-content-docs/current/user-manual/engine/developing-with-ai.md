@@ -1,5 +1,5 @@
 ---
-title: AI 開発
+title: AI を活用した開発
 description: AI コーディングアシスタント、ドキュメント、ブラウザーツールを使用して、スタンドアロンの PlayCanvas Engine アプリケーションを構築、検証します。
 ---
 
