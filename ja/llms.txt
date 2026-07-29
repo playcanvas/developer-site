@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.6
-Total Documents: 483
+Total Documents: 484
 Generated: 2026-07-29
 
 ## Instructions for Large Language Models
@@ -432,6 +432,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-layoutgroup>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutgroup/): Reference for the pc-layoutgroup element: arranges child elements in horizontal or vertical layouts with spacing, padding, alignment, and fitting.
 - [<pc-light>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light/): Reference for the pc-light element: light types, color, intensity, shadows, and attributes for directional, spot, and omni lights.
 - [<pc-listener>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-listener/): Reference for the pc-listener element: positional audio listener placement and settings for 3D sound relative to the active camera.
+- [<pc-material>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material/): Reference for the pc-material element: define a standard material with a diffuse color and texture maps that render components can reference by id.
 - [<pc-model>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/): Reference for the pc-model element: load and instance GLB or model assets on an entity with import settings and render integration.
 - [<pc-module>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-module/): Reference for the pc-module element: load Wasm modules for scripts or plugins and associate them with PlayCanvas script components.
 - [<pc-particles>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-particles/): Reference for the pc-particles element: configure particle emitters, textures, blending, and simulation parameters in markup.

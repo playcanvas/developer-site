@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 483
+Total Documents: 484
 Generated: 2026-07-29
 
 ================================================================================
@@ -34449,6 +34449,12 @@ Then import it and await the element you need:
 
 `whenReady` resolves with the element once its engine object has been created. If the element is already initialized by the time you call it, it resolves immediately. There is no need to wait for `DOMContentLoaded` or listen for events.
 
+:::note[Misplaced Elements]
+
+The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. Either way, a misplaced element logs a console warning naming the parent it requires.
+
+:::
+
 ## Reaching Engine Objects
 
 `whenReady` accepts a tag name, any CSS selector or a direct element reference, so it works for every asynchronously initializing element — not just `<pc-app>`:
@@ -34655,6 +34661,8 @@ Inside the JSON, a plain numeric array converts automatically to the script attr
 }'></pc-script>
 ```
 
+An object value merges with the script's declared default rather than replacing it wholesale — with a declared default of `{a: 1, b: 2}`, setting `{"a": 5}` yields `{a: 5, b: 2}`. This means you only need to specify the properties you want to change.
+
 The [type prefixes](#type-prefixes) also work anywhere inside the JSON, including in nested arrays and objects:
 
 ```html
@@ -34702,6 +34710,8 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 
 The attributes of every tag share the same value conventions: an absent (or removed) attribute means the engine default applies, and an invalid value logs a console warning and falls back to the default. See [Attributes](../attributes.md) for how booleans, numbers, enums, vectors and colors are written.
 
+Tags also have placement rules — each tag's page notes the parent it requires. A misplaced element logs a console warning naming the required parent, so keep the console open while authoring.
+
 | Tag | Description |
 | --- | --- |
 | [`<pc-app>`](pc-app) | Defines the root element of your application. |
@@ -34716,17 +34726,19 @@ The attributes of every tag share the same value conventions: an absent (or remo
 | [`<pc-layoutgroup>`](pc-layoutgroup) | Defines a layout group component. |
 | [`<pc-light>`](pc-light) | Defines a light component. |
 | [`<pc-listener>`](pc-listener) | Defines a listener component. |
+| [`<pc-material>`](pc-material) | Defines a material that render components can reference. |
+| [`<pc-model>`](pc-model) | Defines an entity that instantiates a 3D model from a GLB file. |
 | [`<pc-module>`](pc-module) | Defines a WebAssembly module. |
 | [`<pc-particles>`](pc-particles) | Defines a particle system component. |
 | [`<pc-render>`](pc-render) | Defines a render component. |
 | [`<pc-rigidbody>`](pc-rigidbody) | Defines a rigidbody component. |
 | [`<pc-scene>`](pc-scene) | Defines a scene. |
+| [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
 | [`<pc-script>`](pc-script) | Defines a single script assigned to a script component. |
 | [`<pc-scripts>`](pc-scripts) | Defines a script component. |
 | [`<pc-scrollbar>`](pc-scrollbar) | Defines a scrollbar component. |
 | [`<pc-scrollview>`](pc-scrollview) | Defines a scroll view component. |
 | [`<pc-sky>`](pc-sky) | Defines an image-based skybox. |
-| [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
 | [`<pc-sound>`](pc-sound) | Defines a single sound assigned to a sound component. |
 | [`<pc-sounds>`](pc-sounds) | Defines a sound component. |
 
@@ -35361,6 +35373,59 @@ You can programmatically create and manipulate `<pc-listener>` elements using th
 
 --------------------------------------------------------------------------------
 
+## <pc-material>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-material/
+
+The `<pc-material>` tag is used to define a material that can be applied to [`<pc-render>`](../pc-render) components via their `material` attribute.
+
+:::note[Usage]
+
+* It must be a direct child of [`<pc-app>`](../pc-app).
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `diffuse` | Color | `"1 1 1"` | Diffuse color of the material |
+| `diffuse-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the diffuse map |
+| `id` | String | - | Unique identifier used by other tags to reference this material |
+| `metalness-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the metalness map |
+| `normal-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the normal map |
+| `roughness-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the roughness map |
+
+</div>
+
+## Example
+
+```html
+<pc-app>
+    <pc-asset src="assets/textures/dark-tiles.png" id="dark-tiles"></pc-asset>
+    <pc-material id="crimson" diffuse="crimson"></pc-material>
+    <pc-material id="ground" diffuse-map="dark-tiles"></pc-material>
+    <pc-scene>
+        <pc-entity name="box">
+            <pc-render type="box" material="crimson"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" scale="10 1 10">
+            <pc-render type="plane" material="ground"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+A `<pc-material>` inserted at runtime (after the application has started) creates its material on insertion, so materials can be added dynamically from JavaScript.
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-material>` elements using the [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html).
+
+--------------------------------------------------------------------------------
+
 ## <pc-model>
 
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/
@@ -35548,10 +35613,17 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 | --- | --- | --- | --- |
 | `cast-shadows` | Boolean | `"true"` | Whether the component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `material` | String | - | `id` of a [`<pc-material>`](../pc-material) to render the primitive with. If omitted, a default material is used |
 | `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
-| `type` | Enum | `"asset"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"`. The default, `"asset"`, renders a render asset instead of a primitive |
+| `type` | Enum | `"box"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
 </div>
+
+:::tip
+
+To render a 3D model from a glTF/GLB file, use [`<pc-model>`](../pc-model) instead.
+
+:::
 
 ## Example
 
