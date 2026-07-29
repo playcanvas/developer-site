@@ -35,6 +35,8 @@ Then import it and await the element you need:
 
 `whenReady` resolves with the element once its engine object has been created. If the element is already initialized by the time you call it, it resolves immediately. There is no need to wait for `DOMContentLoaded` or listen for events.
 
+Note that the promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. Either way, a misplaced element logs a console warning naming the parent it requires.
+
 ## Reaching Engine Objects
 
 `whenReady` accepts a tag name, any CSS selector or a direct element reference, so it works for every asynchronously initializing element — not just `<pc-app>`:

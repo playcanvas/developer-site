@@ -156,6 +156,8 @@ Inside the JSON, a plain numeric array converts automatically to the script attr
 }'></pc-script>
 ```
 
+An object value merges with the script's declared default rather than replacing it wholesale — with a declared default of `{a: 1, b: 2}`, setting `{"a": 5}` yields `{a: 5, b: 2}`. This means you only need to specify the properties you want to change.
+
 The [type prefixes](#type-prefixes) also work anywhere inside the JSON, including in nested arrays and objects:
 
 ```html
