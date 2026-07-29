@@ -9,13 +9,13 @@ PlayCanvas Engine アプリケーションは通常の JavaScript または Type
 
 コードが PlayCanvas Editor プロジェクトに保存されている場合は、代わりに [VS Code Extension](/user-manual/editor/scripting/vscode-extension/) を使用してください。
 
-## AI クライアントを選択する
+## AI クライアントとインターフェースを選択する
 
 | クライアント | インターフェース | 推奨される用途 |
 | --- | --- | --- |
 | [Cursor](https://cursor.com/docs) | コードエディター | インライン変更、視覚的な差分レビュー、エディター中心のエージェントワークフロー |
-| [Claude Code](https://code.claude.com/docs/en/overview) | ターミナルと IDE 連携 | コマンドラインから行うリポジトリ全体の変更 |
-| [OpenAI Codex](https://learn.chatgpt.com/docs/codex/cli) | CLI、IDE 拡張機能、デスクトップアプリ | 好みのインターフェースから行うローカル実装、レビュー、コマンド実行 |
+| Claude Code | [CLI](https://code.claude.com/docs/en/overview)、[IDE 連携](https://code.claude.com/docs/en/ide-integrations)、[Claude Desktop の Code タブ](https://code.claude.com/docs/en/desktop) | ターミナル、エディター、または視覚的な差分とアプリのプレビューを備えたデスクトップワークスペースから行うリポジトリ全体の作業 |
+| OpenAI Codex | [CLI](https://learn.chatgpt.com/docs/codex/cli)、[IDE 拡張機能](https://learn.chatgpt.com/docs/codex/ide)、[ChatGPT デスクトップアプリ内の Codex](https://learn.chatgpt.com/docs/app) | ターミナル、エディター、または並列チャットとワークツリーを備えたデスクトップワークスペースから行うローカル実装とレビュー |
 
 クライアントごとにプランと対応プラットフォームが異なります。最新のインストール方法と利用条件については、各クライアントの公式ドキュメントを参照してください。
 
@@ -68,7 +68,7 @@ API を推測せずに、インストール済みの PlayCanvas 型定義また�
 
 ## 推奨プラグインと MCP サーバー
 
-タスクに必要な連携機能だけを使用してください。特に、最初はブラウザーツールを 1 つ選択し、不足する機能がある場合にだけ別のツールを追加します。
+タスクに必要な連携機能だけを使用してください。ブラウザー用の MCP サーバーを追加する前に、選択したデスクトップクライアントに組み込まれているブラウザーまたはアプリのプレビューで検証を行えるか確認してください。追加する場合は、最初はブラウザーツールを 1 つ選択し、不足する機能がある場合にだけ別のツールを追加します。
 
 - **[Context7 MCP](https://github.com/upstash/context7):** クライアントで MCP による検索が役立つ場合に、インデックス化された [PlayCanvas Engine ドキュメント](https://context7.com/playcanvas/engine)を取得します。信頼できる情報源としては、上記の公式 AI 向けドキュメントを優先してください。
 - **[Playwright MCP](https://github.com/microsoft/playwright-mcp):** ブラウザーでアプリケーションを起動、操作し、ユーザーフローを実行してスクリーンショットを取得します。
@@ -94,7 +94,7 @@ API を推測せずに、インストール済みの PlayCanvas 型定義また�
 
 - [Codex CLI](https://learn.chatgpt.com/docs/codex/cli)
 - [Codex IDE 拡張機能](https://learn.chatgpt.com/docs/codex/ide)
-- [ChatGPT デスクトップアプリ](https://learn.chatgpt.com/docs/app)
+- [ChatGPT デスクトップアプリ内の Codex](https://learn.chatgpt.com/docs/app)
 - [`AGENTS.md` によるカスタム指示](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
 - [プラグイン](https://learn.chatgpt.com/docs/plugins)
 

@@ -9,13 +9,13 @@ PlayCanvas Engine applications are regular JavaScript or TypeScript projects, so
 
 If your code is stored in a PlayCanvas Editor project, use the [VS Code Extension](/user-manual/editor/scripting/vscode-extension/) instead.
 
-## Choose an AI Client
+## Choose an AI Client and Interface
 
 | Client | Interface | Recommended for |
 | --- | --- | --- |
 | [Cursor](https://cursor.com/docs) | Code editor | Inline changes, visual diff review, and an editor-first agent workflow |
-| [Claude Code](https://code.claude.com/docs/en/overview) | Terminal and IDE integrations | Repository-wide changes driven from a command line |
-| [OpenAI Codex](https://learn.chatgpt.com/docs/codex/cli) | CLI, IDE extension, and desktop app | Local implementation, review, and command execution from your preferred surface |
+| Claude Code | [CLI](https://code.claude.com/docs/en/overview), [IDE integrations](https://code.claude.com/docs/en/ide-integrations), and the [Code tab in Claude Desktop](https://code.claude.com/docs/en/desktop) | Repository-wide work from a terminal, editor, or desktop workspace with visual diffs and app previews |
+| OpenAI Codex | [CLI](https://learn.chatgpt.com/docs/codex/cli), [IDE extension](https://learn.chatgpt.com/docs/codex/ide), and [Codex in the ChatGPT desktop app](https://learn.chatgpt.com/docs/app) | Local implementation and review from a terminal, editor, or desktop workspace with parallel chats and worktrees |
 
 The clients have different plans and supported platforms. Use their official documentation for current installation and availability details.
 
@@ -68,7 +68,7 @@ the evidence that the result works.
 
 ## Recommended Plugins and MCP Servers
 
-Start with only the integrations needed for the task. In particular, choose one browser tool and add another only when it provides a missing capability.
+Start with only the integrations needed for the task. Before adding a browser MCP server, check whether the selected desktop client's built-in browser or app preview already covers verification. Otherwise, choose one browser tool and add another only when it provides a missing capability.
 
 - **[Context7 MCP](https://github.com/upstash/context7):** Retrieve its indexed [PlayCanvas Engine documentation](https://context7.com/playcanvas/engine) when the client benefits from MCP-based lookup. Prefer the official AI-readable documentation above for authoritative content.
 - **[Playwright MCP](https://github.com/microsoft/playwright-mcp):** Launch and operate the application in a browser, exercise user flows, and capture screenshots.
@@ -94,7 +94,7 @@ Source inspection is not proof of interactive behavior. Before accepting the res
 
 - [Codex CLI](https://learn.chatgpt.com/docs/codex/cli)
 - [Codex IDE extension](https://learn.chatgpt.com/docs/codex/ide)
-- [ChatGPT desktop app](https://learn.chatgpt.com/docs/app)
+- [Codex in the ChatGPT desktop app](https://learn.chatgpt.com/docs/app)
 - [Custom instructions with `AGENTS.md`](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
 - [Plugins](https://learn.chatgpt.com/docs/plugins)
 
