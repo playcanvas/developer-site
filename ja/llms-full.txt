@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 482
-Generated: 2026-07-28
+Total Documents: 483
+Generated: 2026-07-29
 
 ================================================================================
 
@@ -942,6 +942,10 @@ After creating an event for an animation asset, the event will be fired whenever
 
 Any number of animation events can be attached to a single animation asset and used by any number of anim components. Making use of the additional `number` and `string` properties of an event allows you to differentiate between events that are passed to the same event listener.
 
+:::ai
+When one effect spans several animations, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to check event names and payloads against script listeners, then reproduce the animations in Launcher to find missing or mistimed effects.
+:::
+
 --------------------------------------------------------------------------------
 
 ## Anim Layer Masks
@@ -981,6 +985,10 @@ When selecting an animstategraph asset in the editors asset panel, you’ll open
 [Image: Initial Editor]
 
 Within this view you can edit your animation state graph. The following sections will highlight how different elements of the animstategraph asset can be used to define specific animation behavior.
+
+:::ai
+For complex graphs, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to trace a failing transition across its conditions, parameters, scripts, and Anim mappings, then reproduce it in Launcher.
+:::
 
 ## States {#states}
 
@@ -4252,6 +4260,10 @@ When you upload a file, the Editor runs it through the [import pipeline](import-
 
 For conceptual information about assets and how to work with them programmatically, see the [Assets](/user-manual/assets/) section in Common Topics.
 
+:::ai
+Before replacing a widely used asset, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to trace dependencies and summarize the impact. Approve the references it updates, then inspect affected scenes.
+:::
+
 --------------------------------------------------------------------------------
 
 ## Assets Panel
@@ -4432,6 +4444,10 @@ On the details page you can:
 
 Please respect the license terms for the store items you use in your projects. For example, the [Oldsmobile Cutlass Supreme Sedan '71](https://sketchfab.com/3d-models/oldsmobile-cutlass-supreme-sedan-71-78f76d386a4341b0b71745bdc50fd5ab) in the screenshot above was authored by [Barbo](https://sketchfab.com/barbo-autos) and has CC BY 4.0 license. This means that you must give the author appropriate credit for using their works.
 
+:::
+
+:::ai
+Give an AI assistant your style, license, and file-size constraints. Through the **[Editor MCP Server](/user-manual/editor/mcp-server/)**, it can compare PlayCanvas, Sketchfab, and My Assets results and shortlist suitable items.
 :::
 
 --------------------------------------------------------------------------------
@@ -5928,7 +5944,7 @@ Additionally, conditionally checking the Engine version at runtime will allow yo
 <img src='/img/user-manual/editor/editor-v2/scripting-engine.png' width='300' />
 
 :::ai
-When testing scripts against both Engine versions, the **[Editor MCP Server](/user-manual/editor/mcp-server/)** can help identify affected scripts and compare runtime logs and captures as you make changes.
+When behavior differs between Engine versions, use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to reproduce the same scenario in each. An AI assistant can correlate logs and captures with affected scripts and APIs to suggest a focused fix.
 :::
 
 #### Gamma and Tonemap
@@ -6482,6 +6498,10 @@ A key feature of the Launch Page is that it maintains a real-time connection (or
 
 And if any other users (with write permission) are present in the Editor with you, their edits can update your Launch Page as well.
 
+:::ai
+Give an AI assistant the steps and expected behavior for a reproducible bug. Through the **[Editor MCP Server](/user-manual/editor/mcp-server/)**, it can replay the input and correlate logs, entity state, and captures before and after a fix.
+:::
+
 ## Running on Other Devices
 
 Sometimes it can be useful to run the Launch Page on another device. For example, you might wish to test your application on a mobile device. To do this, ensure you are logged in to your PlayCanvas account on that device. Then, simply visit the Launch Page URL in your device's browser.
@@ -6770,6 +6790,10 @@ Settings are grouped into categories, where each category is shown as a collapsi
 | [Input](input.md) | Enable or disable input devices (mouse, keyboard, etc.). |
 | [Localization](localization.md) | Settings for adding localization assets. |
 | [Network](network.md) | Network-related settings for the project. |
+
+:::ai
+When configuration may cause unexpected behavior, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to identify relevant settings and scopes, then explain the smallest change before you apply it.
+:::
 
 --------------------------------------------------------------------------------
 
@@ -9392,6 +9416,10 @@ Every scene contains:
 | [Components](components/index.md) | Learn about the different component types you can add to entities. |
 | [Loading Scenes](loading-scenes.md) | Load scenes dynamically at runtime in your application. |
 
+:::ai
+For repetitive scene changes, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to find matching entities and components and prepare a consistent batch edit. Review the targets, then use Viewport and Launcher captures to spot outliers.
+:::
+
 --------------------------------------------------------------------------------
 
 ## Components
@@ -10830,6 +10858,10 @@ As an Editor user, you benefit from a tightly integrated development environment
 - [Hot Reloading](./hot-reloading.md) — Iterate rapidly with live code updates.
 - [Loading Order](./loading-order.md) — Control the order in which scripts are loaded.
 
+:::ai
+When a script change also needs Editor setup, use an AI coding assistant with **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** for source edits and the **[Editor MCP Server](/user-manual/editor/mcp-server/)** for attachments, attributes, instances, and Launcher verification. Review both source and Editor changes.
+:::
+
 --------------------------------------------------------------------------------
 
 ## Code Editor
@@ -10932,7 +10964,7 @@ On the left side of the input fields there are various search options. These all
 You can double click on a line in the search results to go that particular line in the asset.
 
 :::ai
-For larger edits, an AI coding assistant can help update related text assets through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)**, leaving you to review the complete diff before syncing it.
+For changes spanning related text assets, use an AI coding assistant through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** to trace and update producers and listeners together, then review the complete diff before syncing.
 :::
 
 ## Quick Open
@@ -11024,7 +11056,7 @@ Open the file in the code editor. If you want to map a module like "/utils/math.
 Now in your code you can call `import x from "math"` and it will resolve to your module.
 
 :::ai
-When changing an import alias, an AI coding assistant can help update its uses across the project through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)**.
+When an alias's target API changes, use an AI coding assistant through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** to update the import map and dependent code semantically, then review the diff before syncing.
 :::
 
 :::tip
@@ -11356,6 +11388,10 @@ If you hover over the colored label of the overridden field you can view more de
 
 [Image: Override Hover]
 
+:::ai
+Before applying overrides across template instances, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to summarize what will propagate. Create a checkpoint and approve only the intended changes.
+:::
+
 ### Applying Overrides {#applying-overrides}
 
 To apply an override you can click APPLY in the tooltip shown when you hover over the overridden field.
@@ -11515,6 +11551,10 @@ PlayCanvas has version control tools built directly into the Editor which can be
 You may be familiar with other version control systems (VCS), if so this summary will help you get familiar with how PlayCanvas works relative to other version control systems.
 
 You can think of a checkpoint like you would a **commit** in a VCS like Git or Mercurial. Each checkpoint is a point-in-time snapshot of the project with an associated message that describes what changes were made in this checkpoint. While you are editing your project your current (un-checkpointed) changes are similar to the **working directory** i.e. you can think of these as your **local changes** (even though in PlayCanvas your local changes are shared with anyone else in the same branch as you).
+
+:::ai
+Before an AI assistant changes multiple scenes or assets, use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to checkpoint a dedicated branch. Afterwards, ask it to summarize the diff and conflicts; separately approve any restore, hard reset, or branch deletion.
+:::
 
 You cannot delete a checkpoint, but you can restore a previous checkpoint. Restoring a checkpoint works a little like a `git checkout <commit>` or `hg update -r <commit>`. However, in PlayCanvas we don't allow branches unless they have been explicitly created (no detached heads or similar). When you restore a previous checkpoint future changes will be children of the latest checkpoint in the branch.
 
@@ -11914,6 +11954,123 @@ As a developer, you have complete freedom as to how you use the Engine. The two 
 1. Build applications against the Engine directly. [Learn](standalone) how to use the Engine standalone.
 2. Build applications in the [Editor](../editor). In this case, consult the [Scripting](../scripting) section.
 
+For AI-assisted standalone development, see **[Developing with AI](developing-with-ai)**.
+
+--------------------------------------------------------------------------------
+
+## Developing with AI
+
+URL: https://developer.playcanvas.com/user-manual/engine/developing-with-ai/
+
+PlayCanvas Engine applications are regular JavaScript or TypeScript projects, so any coding assistant that can read files, edit code, and run commands can work with them. Give the assistant the same Engine references and verification steps that a human contributor would use.
+
+:::tip
+
+If your code is stored in a PlayCanvas Editor project, use the [VS Code Extension](/user-manual/editor/scripting/vscode-extension/) instead.
+
+:::
+
+## Choose an AI Client and Interface
+
+| Client | Interface | Recommended for |
+| --- | --- | --- |
+| [Cursor](https://cursor.com/docs) | Code editor | Inline changes, visual diff review, and an editor-first agent workflow |
+| Claude Code | [CLI](https://code.claude.com/docs/en/overview), [IDE integrations](https://code.claude.com/docs/en/ide-integrations), and the [Code tab in Claude Desktop](https://code.claude.com/docs/en/desktop) | Repository-wide work from a terminal, editor, or desktop workspace with visual diffs and app previews |
+| OpenAI Codex | [CLI](https://learn.chatgpt.com/docs/codex/cli), [IDE extension](https://learn.chatgpt.com/docs/codex/ide), and [Codex in the ChatGPT desktop app](https://learn.chatgpt.com/docs/app) | Local implementation and review from a terminal, editor, or desktop workspace with parallel chats and worktrees |
+
+The clients have different plans and supported platforms. Use their official documentation for current installation and availability details.
+
+## Provide Project Context
+
+Start the assistant in the repository root and install the project dependencies first. This gives it access to the PlayCanvas package, TypeScript declarations, scripts, and existing code patterns.
+
+Add the project's real development commands and conventions to the client's repository instructions, such as [`AGENTS.md`](https://learn.chatgpt.com/docs/agent-configuration/agents-md), [`CLAUDE.md`](https://code.claude.com/docs/en/memory), or [Cursor Rules](https://cursor.com/docs/rules). Keep the instructions short and include:
+
+- The development, lint, test, and build commands
+- The source and generated directories
+- Browser support and performance constraints
+- The observable result required before a task is complete
+
+Keep shared guidance in `AGENTS.md` where possible. Claude Code can reuse it through a `CLAUDE.md` containing only:
+
+```md
+@AGENTS.md
+```
+
+Keep separate client files only for instructions that are genuinely client-specific.
+
+Point the assistant to these PlayCanvas sources instead of asking it to recall APIs from memory:
+
+- [Engine User Manual](/user-manual/engine/)
+- [Engine API Reference](https://api.playcanvas.com/engine/)
+- [Engine Examples](https://playcanvas.github.io/)
+- [Engine source](https://github.com/playcanvas/engine)
+- [AI-readable documentation index](https://developer.playcanvas.com/llms.txt)
+- [Complete AI-readable documentation](https://developer.playcanvas.com/llms-full.txt)
+
+## Reuse Engine Code Before Writing It
+
+Before writing camera controls, character controllers, tweens, water, sky, post effects, or XR code, check the production [Engine scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm) available through `playcanvas/scripts/*`.
+
+For an unfamiliar Engine feature, find a matching [Engine Example](https://playcanvas.github.io/) and adapt its Engine setup and update logic. Treat examples as recipes to read and port, not modules to import.
+
+## Describe the Outcome and Its Proof
+
+Ask for one observable result, the constraints to preserve, and the checks that prove the result. For example:
+
+```text
+Inspect this PlayCanvas Engine project before editing. Reuse its existing patterns and
+check the installed PlayCanvas types or official API reference instead of guessing APIs.
+
+Implement [outcome] without changing [constraints]. Run [test/build command], launch
+the app, exercise [interaction], check the browser console, and summarize the diff and
+the evidence that the result works.
+```
+
+## Recommended Plugins and MCP Servers
+
+Start with only the integrations needed for the task. Before adding a browser MCP server, check whether the selected desktop client's built-in browser or app preview already covers verification. Otherwise, choose one browser tool and add another only when it provides a missing capability.
+
+- **[Context7 MCP](https://github.com/upstash/context7):** Retrieve its indexed [PlayCanvas Engine documentation](https://context7.com/playcanvas/engine) when the client benefits from MCP-based lookup. Prefer the official AI-readable documentation above for authoritative content.
+- **[Playwright MCP](https://github.com/microsoft/playwright-mcp):** Launch and operate the application in a browser, exercise user flows, and capture screenshots.
+- **[Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp):** Use instead of Playwright when console, network, or performance diagnosis is the main task.
+- **[PlayCanvas VS Code Extension](/user-manual/editor/scripting/vscode-extension/):** Expose Editor-managed text assets as local files for Cursor and other coding assistants.
+
+## Verify Every Change
+
+Source inspection is not proof of interactive behavior. Before accepting the result:
+
+1. Review the complete diff and reject unrelated changes.
+2. Run the project's focused tests, lint, and production build where available.
+3. Launch the application and check the browser console for new errors or warnings.
+4. Exercise the changed interaction with real browser input. Use screenshots for appearance and runtime queries for state, counts, positions, and other behavior; do not mutate state to manufacture evidence.
+5. For complex state, consider a development-only `window.snapshot()` that returns JSON-serializable data without exposing mutation methods.
+6. Fix and re-verify failed checks, test affected browsers or devices, and report anything that was not verified.
+
+## Official AI Tool Documentation
+
+### OpenAI
+
+- [Codex CLI](https://learn.chatgpt.com/docs/codex/cli)
+- [Codex IDE extension](https://learn.chatgpt.com/docs/codex/ide)
+- [Codex in the ChatGPT desktop app](https://learn.chatgpt.com/docs/app)
+- [Custom instructions with `AGENTS.md`](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
+- [Plugins](https://learn.chatgpt.com/docs/plugins)
+
+### Anthropic
+
+- [Claude Code overview](https://code.claude.com/docs/en/overview)
+- [Claude Code IDE integrations](https://code.claude.com/docs/en/ide-integrations)
+- [Claude Code on desktop](https://code.claude.com/docs/en/desktop)
+- [Claude Code MCP](https://code.claude.com/docs/en/mcp)
+- [Claude Code plugins](https://code.claude.com/docs/en/plugins)
+- [Claude Code memory and `CLAUDE.md`](https://code.claude.com/docs/en/memory)
+
+### Cursor
+
+- [Cursor documentation](https://cursor.com/docs)
+- [Cursor Rules](https://cursor.com/docs/rules)
+
 --------------------------------------------------------------------------------
 
 ## Engine Migrations
@@ -11925,6 +12082,10 @@ The PlayCanvas Engine is continually evolving, and its updates occasionally intr
 This guide provides an overview of all major breaking changes across releases, offering users a helpful resource for migrating their code to newer versions.
 
 It’s advisable to use the debug version of the engine when troubleshooting issues, as it provides logs for deprecated messages, warnings, and errors related to incorrect usage.
+
+:::ai
+Give a coding assistant the current and target Engine versions so it can match your API usage to this guide. Following **[Developing with AI](/user-manual/engine/developing-with-ai/)**, review and test each related change group with the debug Engine.
+:::
 
 ## Migration from 2.4.0 to 2.5.0
 
@@ -23138,6 +23299,10 @@ Let's begin by establishing the key goals for optimization and highlight why eac
 | 🔋 Minimize CPU and GPU load | Just because your app maintains 60 frames per second does not mean your work is done. Reducing processor load preserves battery power and keeps devices running cool. |
 | 🧠 Minimize memory utilization | Browsers allocate a limited pool of memory to applications. Once this pool is exhausted, the tab will crash and reload. Your users will be upset! |
 
+:::ai
+Give an AI assistant a performance goal, repeatable scenario, and baseline. It can rank bottlenecks from **[Profiler](/user-manual/optimization/profiler/)** or browser evidence and propose one measurable change at a time. Use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to replay Editor input or follow **[Developing with AI](/user-manual/engine/developing-with-ai/)** for standalone projects.
+:::
+
 --------------------------------------------------------------------------------
 
 ## GPU Profiling
@@ -27790,7 +27955,7 @@ npx codemod playcanvas-esm-scripts
 ```
 
 :::ai
-For Editor projects, use **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** to run the codemod locally and review its changes before syncing, then use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to check script attributes and references and verify each batch in Launch.
+For Editor projects, use a coding assistant to coordinate the codemod with metadata that source conversion cannot update. Review each **[Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** batch, then use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to reparse scripts, flag affected wiring, and test in Launcher.
 :::
 
 ## Known differences

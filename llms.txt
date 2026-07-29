@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.20.6
-Total Documents: 482
-Generated: 2026-07-28
+Total Documents: 483
+Generated: 2026-07-29
 
 ## Instructions for Large Language Models
 
@@ -236,6 +236,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 
 ### Engine
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine/): Open source JavaScript/TypeScript 3D engine published on npm with full TypeScript declarations and comprehensive examples.
+- [Developing with AI](https://developer.playcanvas.com/user-manual/engine/developing-with-ai/): Use AI coding assistants, documentation, and browser tools to build and verify standalone PlayCanvas Engine applications.
 - [Engine Migrations](https://developer.playcanvas.com/user-manual/engine/migrations/): Breaking changes and migration instructions for each major PlayCanvas Engine release.
 - [Running the Engine in Node.js](https://developer.playcanvas.com/user-manual/engine/running-in-node/): Use the PlayCanvas Engine server-side in Node.js for multiplayer servers, asset processing tools, and unit testing.
 - [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone/): Build PlayCanvas applications without the Editor using npm, a CDN, or a direct script include.
