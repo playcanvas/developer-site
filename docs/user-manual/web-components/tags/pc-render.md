@@ -19,10 +19,17 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 | --- | --- | --- | --- |
 | `cast-shadows` | Boolean | `"true"` | Whether the component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `material` | String | - | `id` of a [`<pc-material>`](../pc-material) to render the primitive with. If omitted, a default material is used |
 | `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
-| `type` | Enum | `"asset"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"`. The default, `"asset"`, renders a render asset instead of a primitive |
+| `type` | Enum | `"box"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
 </div>
+
+:::tip
+
+To render a 3D model from a glTF/GLB file, use [`<pc-model>`](../pc-model) instead.
+
+:::
 
 ## Example
 

@@ -19,10 +19,17 @@ description: "pc-render要素のリファレンス: プリミティブまたは�
 | --- | --- | --- | --- |
 | `cast-shadows` | Boolean | `"true"` | コンポーネントが影を落とすかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `material` | String | - | プリミティブのレンダリングに使用する [`<pc-material>`](../pc-material) の `id`。省略した場合はデフォルトのマテリアルが使用されます |
 | `receive-shadows` | Boolean | `"true"` | コンポーネントが影を受け取るかどうか |
-| `type` | 列挙型 | `"asset"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"`。デフォルトの `"asset"` は、プリミティブの代わりにレンダーアセットをレンダリングします |
+| `type` | 列挙型 | `"box"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
 </div>
+
+:::tip
+
+glTF/GLBファイルから3Dモデルをレンダリングするには、代わりに [`<pc-model>`](../pc-model) を使用してください。
+
+:::
 
 ## 例
 

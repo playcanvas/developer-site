@@ -7,6 +7,8 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 
 The attributes of every tag share the same value conventions: an absent (or removed) attribute means the engine default applies, and an invalid value logs a console warning and falls back to the default. See [Attributes](../attributes.md) for how booleans, numbers, enums, vectors and colors are written.
 
+Tags also have placement rules — each tag's page notes the parent it requires. A misplaced element logs a console warning naming the required parent, so keep the console open while authoring.
+
 | Tag | Description |
 | --- | --- |
 | [`<pc-app>`](pc-app) | Defines the root element of your application. |
@@ -21,16 +23,18 @@ The attributes of every tag share the same value conventions: an absent (or remo
 | [`<pc-layoutgroup>`](pc-layoutgroup) | Defines a layout group component. |
 | [`<pc-light>`](pc-light) | Defines a light component. |
 | [`<pc-listener>`](pc-listener) | Defines a listener component. |
+| [`<pc-material>`](pc-material) | Defines a material that render components can reference. |
+| [`<pc-model>`](pc-model) | Defines an entity that instantiates a 3D model from a GLB file. |
 | [`<pc-module>`](pc-module) | Defines a WebAssembly module. |
 | [`<pc-particles>`](pc-particles) | Defines a particle system component. |
 | [`<pc-render>`](pc-render) | Defines a render component. |
 | [`<pc-rigidbody>`](pc-rigidbody) | Defines a rigidbody component. |
 | [`<pc-scene>`](pc-scene) | Defines a scene. |
+| [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
 | [`<pc-script>`](pc-script) | Defines a single script assigned to a script component. |
 | [`<pc-scripts>`](pc-scripts) | Defines a script component. |
 | [`<pc-scrollbar>`](pc-scrollbar) | Defines a scrollbar component. |
 | [`<pc-scrollview>`](pc-scrollview) | Defines a scroll view component. |
 | [`<pc-sky>`](pc-sky) | Defines an image-based skybox. |
-| [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
 | [`<pc-sound>`](pc-sound) | Defines a single sound assigned to a sound component. |
 | [`<pc-sounds>`](pc-sounds) | Defines a sound component. |
