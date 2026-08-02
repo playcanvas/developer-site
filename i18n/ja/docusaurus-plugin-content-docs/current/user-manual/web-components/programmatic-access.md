@@ -16,7 +16,7 @@ PlayCanvas Web Components を使えば、HTML だけでリッチな 3D シーン
     {
         "imports": {
             "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
-            "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
+            "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"
         }
     }
 </script>

@@ -53,7 +53,7 @@ Leverages the same high-performance PlayCanvas Engine used by thousands of web a
 - **Declarative 3D scenes** defined entirely in HTML
 - **Component-based architecture** mirroring the PlayCanvas Editor
 - **Real-time updates** through reactive attribute binding
-- **WebGL and WebGPU support** with automatic fallbacks
+- **WebGPU-first rendering** with automatic fallback to WebGL 2
 - **Mobile-optimized** touch controls and responsive layouts
 
 ## Browser Support

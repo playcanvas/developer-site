@@ -19,7 +19,7 @@ description: "pc-app要素のリファレンス: PlayCanvasのApplicationを初�
 | --- | --- | --- | --- |
 | `alpha` | Boolean | `"true"` | アプリケーションがフレームバッファにアルファチャネルを割り当てるかどうか |
 | `antialias` | Boolean | `"true"` | アプリケーションがアンチエイリアシングを使用するかどうか |
-| `backend` | Enum | `"webgl2"` | グラフィックスエンジンのバックエンド: `"webgpu"` \| `"webgl2"` \| `"null"` |
+| `backend` | Enum | `"webgpu"` | グラフィックスエンジンのバックエンド: `"webgpu"` \| `"webgl2"` \| `"null"`。WebGPUが利用できないブラウザではWebGL 2にフォールバックします。WebGL 2を強制するには`"webgl2"`を設定してください |
 | `depth` | Boolean | `"true"` | アプリケーションがデプスバッファを割り当てるかどうか |
 | `high-resolution` | Boolean | `"true"` | 物理解像度またはCSS解像度を使用してレンダリングするかどうか |
 | `stencil` | Boolean | `"true"` | アプリケーションがステンシルバッファを割り当てるかどうか |
