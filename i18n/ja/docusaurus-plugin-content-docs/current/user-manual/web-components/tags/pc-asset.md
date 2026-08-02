@@ -29,6 +29,26 @@ description: "pc-asset要素のリファレンス: URLまたはidで読み込む
 
 </div>
 
+### タイプの推論
+
+`type`を省略した場合、`src`のファイル拡張子から推論されます:
+
+| タイプ | 拡張子 |
+| --- | --- |
+| `audio` | `.mp3` |
+| `binary` | `.bin` |
+| `container` | `.glb`, `.gltf` |
+| `css` | `.css` |
+| `gsplat` | `.ply`, `.sog` |
+| `html` | `.html` |
+| `json` | `.json` |
+| `script` | `.js`, `.mjs` |
+| `shader` | `.frag`, `.glsl`, `.vert` |
+| `text` | `.txt` |
+| `texture` | `.hdr`, `.jpg`, `.ktx2`, `.png`, `.webp` |
+
+それ以外の拡張子、または`font`、`sprite`、`textureatlas`など推論の対象外のタイプでは、明示的な`type`属性が必要です。
+
 ## 例
 
 ```html

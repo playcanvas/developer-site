@@ -37,14 +37,14 @@ npm install playcanvas @playcanvas/web-components --save-dev
 
 ## CDNの使用
 
-ライブラリをローカルパッケージからロードする代わりに、CDN（jsDelivrなど）からロードすることを選択できます。この場合、インポートマップを更新します。
+ライブラリをローカルパッケージからロードする代わりに、CDN（jsDelivrなど）からロードすることを選択できます。この場合、インポートマップを更新して `pwc.min.mjs`（`pwc.mjs` の半分以下のサイズのミニファイ版ビルド）を使用します。
 
 ```html
 <script type="importmap">
     {
         "imports": {
             "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
-            "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
+            "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"
         }
     }
 </script>
@@ -53,7 +53,7 @@ npm install playcanvas @playcanvas/web-components --save-dev
 コンポーネントは次のようにインポートされます。
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"></script>
 ```
 
 :::note[バージョニング]
@@ -77,11 +77,11 @@ npm install playcanvas @playcanvas/web-components --save-dev
             {
                 "imports": {
                     "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
-                    "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
+                    "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"
                 }
             }
         </script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"></script>
         <style>
             body {
                 margin: 0;
@@ -96,3 +96,21 @@ npm install playcanvas @playcanvas/web-components --save-dev
 ```
 
 これで、PlayCanvas Web Componentsを使用して3Dシーンを構築する準備ができました！
+
+## エディタサポート
+
+このパッケージは[Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)を同梱しており、エディタはこれを使ってHTMLの記述時にタグと属性の補完、有効な属性値、ホバードキュメントを提供します。
+
+**VS Code** — ワークスペースの `.vscode/settings.json` に以下を追加します。
+
+```json
+{
+  "html.customData": [
+    "./node_modules/@playcanvas/web-components/dist/vscode.html-custom-data.json"
+  ]
+}
+```
+
+**JetBrains IDE**（WebStorm、IntelliJ IDEA）— 設定は不要です。IDEが同梱の `web-types.json` を自動的に検出します。
+
+**その他のツール** — マニフェスト本体は `@playcanvas/web-components/dist/custom-elements.json` にあり、パッケージの `customElements` フィールドで宣言されています。`lit-analyzer` やStorybookなどのツールはこれを通じてマニフェストを見つけます。

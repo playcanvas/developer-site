@@ -29,6 +29,26 @@ The `<pc-asset>` tag is used to define an asset.
 
 </div>
 
+### Type Inference
+
+When `type` is omitted, it is inferred from the file extension of `src`:
+
+| Type | Extensions |
+| --- | --- |
+| `audio` | `.mp3` |
+| `binary` | `.bin` |
+| `container` | `.glb`, `.gltf` |
+| `css` | `.css` |
+| `gsplat` | `.ply`, `.sog` |
+| `html` | `.html` |
+| `json` | `.json` |
+| `script` | `.js`, `.mjs` |
+| `shader` | `.frag`, `.glsl`, `.vert` |
+| `text` | `.txt` |
+| `texture` | `.hdr`, `.jpg`, `.ktx2`, `.png`, `.webp` |
+
+Any other extension — or a type not covered by inference, such as `font`, `sprite` or `textureatlas` — requires an explicit `type` attribute.
+
 ## Example
 
 ```html

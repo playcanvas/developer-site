@@ -37,14 +37,14 @@ You can now incorporate any of the PlayCanvas Web Components elements into your 
 
 ## Using a CDN
 
-Instead of loading the library from a local package, you can instead opt to load it from a CDN (such as jsDelivr). In this case, you would update the import map:
+Instead of loading the library from a local package, you can instead opt to load it from a CDN (such as jsDelivr). In this case, you would update the import map to use `pwc.min.mjs` — the minified build, less than half the size of `pwc.mjs`:
 
 ```html
 <script type="importmap">
     {
         "imports": {
             "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
-            "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
+            "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"
         }
     }
 </script>
@@ -53,7 +53,7 @@ Instead of loading the library from a local package, you can instead opt to load
 And the components would now be imported as follows:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"></script>
 ```
 
 :::note[Versioning]
@@ -77,11 +77,11 @@ Let's see how this looks in a minimal boilerplate HTML file:
             {
                 "imports": {
                     "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs",
-                    "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"
+                    "@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"
                 }
             }
         </script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.mjs"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"></script>
         <style>
             body {
                 margin: 0;
@@ -96,3 +96,21 @@ Let's see how this looks in a minimal boilerplate HTML file:
 ```
 
 You are now ready to start using the PlayCanvas Web Components to build a 3D scene!
+
+## Editor Support
+
+The package ships a [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest), which editors use to offer tag and attribute completions, valid attribute values and hover documentation when authoring HTML.
+
+**VS Code** — add the following to your workspace `.vscode/settings.json`:
+
+```json
+{
+  "html.customData": [
+    "./node_modules/@playcanvas/web-components/dist/vscode.html-custom-data.json"
+  ]
+}
+```
+
+**JetBrains IDEs** (WebStorm, IntelliJ IDEA) — no setup required. The IDE discovers the bundled `web-types.json` automatically.
+
+**Other tooling** — the manifest itself is at `@playcanvas/web-components/dist/custom-elements.json` and is declared in the package's `customElements` field, which is how tools such as `lit-analyzer` and Storybook locate it.
