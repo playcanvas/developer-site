@@ -1,6 +1,6 @@
 ---
 title: <pc-collision>
-description: "pc-collision要素のリファレンス: トリガー、rigid body、宣言的HTMLでの物理クエリ向けのコリジョン形状とパラメータです。"
+description: "pc-collision要素のリファレンス: rigid bodyと組み合わせる、ボックス・球・カプセル・コーン・シリンダー・メッシュのコリジョン形状です。"
 ---
 
 `<pc-collision>`タグは、衝突コンポーネントを定義するために使用されます。

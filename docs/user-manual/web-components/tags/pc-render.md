@@ -1,6 +1,6 @@
 ---
 title: <pc-render>
-description: "Reference for the pc-render element: primitive or mesh rendering, materials, layers, and cast or receive shadow settings on entities."
+description: "Reference for the pc-render element: render primitive shapes (box, sphere, capsule, cone, cylinder, plane) with a material and shadow settings."
 ---
 
 The `<pc-render>` tag is used to define a render component that renders a 3D primitive.

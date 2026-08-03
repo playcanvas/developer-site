@@ -1,6 +1,6 @@
 ---
 title: <pc-asset>
-description: "Reference for the pc-asset element: declare assets to load by URL or id, types, preloading, and how other tags consume loaded resources."
+description: "Reference for the pc-asset element: declare assets to load by URL, type inference from file extensions, lazy loading, and how other tags reference them by id."
 ---
 
 The `<pc-asset>` tag is used to define an asset.
