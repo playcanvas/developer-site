@@ -7,19 +7,21 @@ ammo.jsはおそらく最も人気があり、よく知られたJavaScript物理
 
 実際、ammo.jsの代わりにはいくつかの選択肢があります。最も活発に開発されているものを先に、その後にほとんどメンテナンスされていないものの依然として使用可能な古いエンジンを記載しています。
 
-| 物理エンジン                                             | Language   | JS | WASM | 2D | 3D | Determinism | PlayCanvas Integration                                |
-| -------------------------------------------------- | ---------- | -- | ---- | -- | -- | ----------- | ----------------------------------------------------- |
-| [Rapier](https://rapier.rs)                        | Rust       |    | ✔️    | ✔️  | ✔️  | ✔️           |                                                       |
-| [Jolt](https://github.com/jrouwe/JoltPhysics.js)   | C++        | ✔️  | ✔️    |    | ✔️  | ✔️           |                                                       |
-| [Box3D](https://github.com/erincatto/box3d)        | C          |    | ✔️    |    | ✔️  | ✔️           |                                                       |
-| [PhysX](https://github.com/NVIDIA-Omniverse/PhysX) | C++        |    | ✔️    |    | ✔️  |             |                                                       |
-| [box2d.js](https://github.com/kripken/box2d.js)    | C++        | ✔️  | ✔️    | ✔️  |    |             |                                                       |
-| [Matter.js](https://github.com/liabru/matter-js)   | JavaScript | ✔️  |      | ✔️  |    |             |                                                       |
-| [p2.js](https://github.com/schteppe/p2.js)         | JavaScript | ✔️  |      | ✔️  |    |             | [Yes](https://github.com/playcanvas/playcanvas-p2.js) |
-| [cannon.js](https://github.com/schteppe/cannon.js) | JavaScript | ✔️  |      |    | ✔️  |             |                                                       |
-| [Oimo.js](https://github.com/lo-th/Oimo.js)        | JavaScript | ✔️  |      |    | ✔️  |             |                                                       |
+| 物理エンジン                                             | Language   | JS Build | WASM Build | 2D | 3D | Determinism | PlayCanvas Integration                                |
+| -------------------------------------------------- | ---------- | -------- | ---------- | -- | -- | ----------- | ----------------------------------------------------- |
+| [Rapier](https://rapier.rs)                        | Rust       |          | ✔️          | ✔️  | ✔️  | ✔️           |                                                       |
+| [Jolt](https://github.com/jrouwe/JoltPhysics.js)   | C++        | ✔️        | ✔️          |    | ✔️  | ✔️           |                                                       |
+| [Box3D](https://github.com/erincatto/box3d)        | C          |          | ✔️          |    | ✔️  | ✔️           |                                                       |
+| [PhysX](https://github.com/NVIDIA-Omniverse/PhysX) | C++        |          | ✔️          |    | ✔️  |             |                                                       |
+| [box2d.js](https://github.com/kripken/box2d.js)    | C++        | ✔️        | ✔️          | ✔️  |    |             |                                                       |
+| [Matter.js](https://github.com/liabru/matter-js)   | JavaScript | ✔️        |            | ✔️  |    |             |                                                       |
+| [p2.js](https://github.com/schteppe/p2.js)         | JavaScript | ✔️        |            | ✔️  |    |             | [Yes](https://github.com/playcanvas/playcanvas-p2.js) |
+| [cannon.js](https://github.com/schteppe/cannon.js) | JavaScript | ✔️        |            |    | ✔️  |             |                                                       |
+| [Oimo.js](https://github.com/lo-th/Oimo.js)        | JavaScript | ✔️        |            |    | ✔️  |             |                                                       |
 
-JavaScript以外で書かれたエンジンは、WebAssemblyとしてブラウザで動作します。Rapierは`@dimforge/rapier2d`と`@dimforge/rapier3d`、Joltは[JoltPhysics.js](https://github.com/jrouwe/JoltPhysics.js)、Box3Dは[box3d.js](https://github.com/isaac-mason/box3d.js)、PhysXは[physx-js-webidl](https://github.com/fabmax/physx-js-webidl)を使用します。このうちエンジンの作者自身がメンテナンスしているバインディングは、RapierとJoltのみです。
+JavaScript以外で書かれたエンジンは、それぞれ別のバインディングプロジェクトによってブラウザ向けにコンパイルされています。Rapierは`@dimforge/rapier2d`と`@dimforge/rapier3d`、Joltは[JoltPhysics.js](https://github.com/jrouwe/JoltPhysics.js)、Box3Dは[box3d.js](https://github.com/isaac-mason/box3d.js)、PhysXは[physx-js-webidl](https://github.com/fabmax/physx-js-webidl)を使用します。このうちエンジンの作者自身がメンテナンスしているバインディングは、RapierとJoltのみです。
+
+これらの多くはWebAssemblyのビルドのみを提供しています。ただし、EmscriptenはWebAssemblyの代わりに[asm.js](https://developer.mozilla.org/ja/docs/Games/Tools/asm.js)を出力できるため、Joltとbox2d.jsはJavaScriptのビルドも提供しています。asm.jsのビルドはJavaScriptが動作する環境であればどこでも実行でき、WebAssemblyのサポートを必要としませんが、同等のWebAssemblyビルドよりも低速でサイズも大きくなります。特別な理由がない限りWebAssemblyを選択してください。
 
 Box3Dはここに挙げた中で圧倒的に新しい選択肢です。エンジンは2026年6月に最初のリリースである0.1.0に到達し、box3d.jsはまだ初期の0.0.x版であるため、APIの破壊的変更が予想されます。
 

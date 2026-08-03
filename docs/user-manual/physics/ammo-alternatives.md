@@ -7,19 +7,21 @@ ammo.js is perhaps the most popular and well known JavaScript physics engine. It
 
 As it happens, there are several alternatives to ammo.js. The most actively developed options are listed first, followed by older engines that are largely unmaintained but still usable:
 
-| Physics Engine                                     | Language   | JS | WASM | 2D | 3D | Determinism | PlayCanvas Integration                                |
-| -------------------------------------------------- | ---------- | -- | ---- | -- | -- | ----------- | ----------------------------------------------------- |
-| [Rapier](https://rapier.rs)                        | Rust       |    | ✔️    | ✔️  | ✔️  | ✔️           |                                                       |
-| [Jolt](https://github.com/jrouwe/JoltPhysics.js)   | C++        | ✔️  | ✔️    |    | ✔️  | ✔️           |                                                       |
-| [Box3D](https://github.com/erincatto/box3d)        | C          |    | ✔️    |    | ✔️  | ✔️           |                                                       |
-| [PhysX](https://github.com/NVIDIA-Omniverse/PhysX) | C++        |    | ✔️    |    | ✔️  |             |                                                       |
-| [box2d.js](https://github.com/kripken/box2d.js)    | C++        | ✔️  | ✔️    | ✔️  |    |             |                                                       |
-| [Matter.js](https://github.com/liabru/matter-js)   | JavaScript | ✔️  |      | ✔️  |    |             |                                                       |
-| [p2.js](https://github.com/schteppe/p2.js)         | JavaScript | ✔️  |      | ✔️  |    |             | [Yes](https://github.com/playcanvas/playcanvas-p2.js) |
-| [cannon.js](https://github.com/schteppe/cannon.js) | JavaScript | ✔️  |      |    | ✔️  |             |                                                       |
-| [Oimo.js](https://github.com/lo-th/Oimo.js)        | JavaScript | ✔️  |      |    | ✔️  |             |                                                       |
+| Physics Engine                                     | Language   | JS Build | WASM Build | 2D | 3D | Determinism | PlayCanvas Integration                                |
+| -------------------------------------------------- | ---------- | -------- | ---------- | -- | -- | ----------- | ----------------------------------------------------- |
+| [Rapier](https://rapier.rs)                        | Rust       |          | ✔️          | ✔️  | ✔️  | ✔️           |                                                       |
+| [Jolt](https://github.com/jrouwe/JoltPhysics.js)   | C++        | ✔️        | ✔️          |    | ✔️  | ✔️           |                                                       |
+| [Box3D](https://github.com/erincatto/box3d)        | C          |          | ✔️          |    | ✔️  | ✔️           |                                                       |
+| [PhysX](https://github.com/NVIDIA-Omniverse/PhysX) | C++        |          | ✔️          |    | ✔️  |             |                                                       |
+| [box2d.js](https://github.com/kripken/box2d.js)    | C++        | ✔️        | ✔️          | ✔️  |    |             |                                                       |
+| [Matter.js](https://github.com/liabru/matter-js)   | JavaScript | ✔️        |            | ✔️  |    |             |                                                       |
+| [p2.js](https://github.com/schteppe/p2.js)         | JavaScript | ✔️        |            | ✔️  |    |             | [Yes](https://github.com/playcanvas/playcanvas-p2.js) |
+| [cannon.js](https://github.com/schteppe/cannon.js) | JavaScript | ✔️        |            |    | ✔️  |             |                                                       |
+| [Oimo.js](https://github.com/lo-th/Oimo.js)        | JavaScript | ✔️        |            |    | ✔️  |             |                                                       |
 
-The engines not written in JavaScript reach the browser as WebAssembly, via `@dimforge/rapier2d` and `@dimforge/rapier3d` for Rapier, [JoltPhysics.js](https://github.com/jrouwe/JoltPhysics.js) for Jolt, [box3d.js](https://github.com/isaac-mason/box3d.js) for Box3D and [physx-js-webidl](https://github.com/fabmax/physx-js-webidl) for PhysX. Only the Rapier and Jolt bindings are maintained by the engine authors.
+The engines not written in JavaScript are compiled for the browser by separate binding projects: `@dimforge/rapier2d` and `@dimforge/rapier3d` for Rapier, [JoltPhysics.js](https://github.com/jrouwe/JoltPhysics.js) for Jolt, [box3d.js](https://github.com/isaac-mason/box3d.js) for Box3D and [physx-js-webidl](https://github.com/fabmax/physx-js-webidl) for PhysX. Only the Rapier and Jolt bindings are maintained by the engine authors.
+
+Most of those ship WebAssembly only. Jolt and box2d.js also offer a JavaScript build, because Emscripten can emit [asm.js](https://developer.mozilla.org/en-US/docs/Games/Tools/asm.js) instead of WebAssembly. An asm.js build runs anywhere JavaScript does and needs no WebAssembly support, but it is slower and larger than the equivalent WebAssembly build, so prefer WebAssembly unless you have a specific reason not to.
 
 Box3D is by far the newest option here. The engine reached its initial 0.1.0 release in June 2026 and box3d.js is still at an early 0.0.x version, so expect breaking API changes.
 
