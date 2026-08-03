@@ -47,20 +47,20 @@
     "@docusaurus/theme-mermaid": "^3.10.2",
     "@mdx-js/react": "^3.1.1",
     "@playcanvas/react": "^0.11.5",
-    "@tanstack/react-query": "^5.101.3",
+    "@tanstack/react-query": "^5.101.4",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "docusaurus-plugin-copy-page-button": "^0.8.4",
     "docusaurus-plugin-sass": "^0.2.6",
-    "js-yaml": "^5.2.2",
+    "js-yaml": "^5.2.3",
     "leva": "^0.10.1",
-    "motion": "^12.42.2",
-    "playcanvas": "^2.20.6",
+    "motion": "^12.43.0",
+    "playcanvas": "^2.21.3",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "sass": "^1.101.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sass": "^1.102.0",
     "sync-ammo": "^0.1.2",
     "ts-morph": "^28.0.0",
     "unist-util-visit": "^5.1.0"
@@ -69,8 +69,8 @@
     "@docusaurus/module-type-aliases": "^3.10.2",
     "@docusaurus/types": "^3.10.2",
     "gray-matter": "^4.0.3",
-    "markdownlint-cli2": "^0.23.1",
-    "marked": "^18.0.6"
+    "markdownlint-cli2": "^0.23.2",
+    "marked": "^18.0.7"
   },
   "browserslist": {
     "production": [
