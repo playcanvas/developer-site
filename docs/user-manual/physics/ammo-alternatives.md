@@ -23,8 +23,20 @@ The engines not written in JavaScript are compiled for the browser by separate b
 
 Most of those ship WebAssembly only. Jolt and box2d.js also offer a JavaScript build, because Emscripten can emit [asm.js](https://developer.mozilla.org/en-US/docs/Games/Tools/asm.js) instead of WebAssembly. An asm.js build runs anywhere JavaScript does and needs no WebAssembly support, but it is slower and larger than the equivalent WebAssembly build, so prefer WebAssembly unless you have a specific reason not to.
 
+:::info
+
+The Determinism column means *cross-platform* determinism: the simulation produces identical results on every device, which you need for lockstep networked multiplayer and replays. It depends on how the engine is built, so check before relying on it:
+
+- Rapier's official WebAssembly packages are cross-platform deterministic out of the box.
+- Jolt requires `CROSS_PLATFORM_DETERMINISTIC` to be enabled at compile time, which the prebuilt JoltPhysics.js packages do not set.
+- PhysX guarantees determinism only for a fixed platform and build, and explicitly does not support it across architectures.
+
+:::
+
+:::warning
+
 Box3D is by far the newest option here. The engine reached its initial 0.1.0 release in June 2026 and box3d.js is still at an early 0.0.x version, so expect breaking API changes.
 
-The Determinism column means *cross-platform* determinism: the simulation produces identical results on every device, which you need for lockstep networked multiplayer and replays. This depends on how the engine is built. Rapier's official WebAssembly packages are cross-platform deterministic out of the box, whereas Jolt requires `CROSS_PLATFORM_DETERMINISTIC` to be enabled at compile time, which the prebuilt JoltPhysics.js packages do not set. PhysX guarantees determinism only for a fixed platform and build, and explicitly does not support it across architectures.
+:::
 
 While there is currently only one existing PlayCanvas integration for the p2.js engine, it should be straightforward to create additional integrations for the other engines listed using a similar approach.
