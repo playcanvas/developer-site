@@ -122,6 +122,25 @@ app.xr.on('available', (type, available) => {
 
 :::
 
+### カメラ要素のAPI
+
+最小限のケースでは、[`<pc-camera>`](tags/pc-camera.md) の要素APIを使って、スクリプトなしでXRセッションを直接開始・終了できます。
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const camera = await whenReady('pc-camera');
+
+if (camera.xrAvailable) {
+    camera.startXr('immersive-vr', 'local-floor');
+}
+
+// ...後でセッションを終了するには:
+camera.endXr();
+```
+
+`startXr(type, space)` は、セッションタイプ（`'immersive-ar'` または `'immersive-vr'`）と参照空間（`'viewer'`、`'local'`、`'local-floor'`、`'bounded-floor'`、`'unbounded'`）を受け取ります。`xrAvailable` ゲッターは、イマーシブセッションを開始できるかどうかを返します。`false` の間、`startXr` は何もしません。なお、`xrSession` スクリプトはカメラリグのトランスフォーム、ARの透過、セッションのクリーンアップも管理してくれるため、本格的な体験にはスクリプトを、簡単なテストやシンプルなビューアーには要素APIを使うのがおすすめです。
+
 ほとんどの [Web Component の例](https://playcanvas.github.io/web-components/examples/) には、XR のサポートが統合されています。それらのソースコードを参照して、どのように行われているかを確認してください。
 
 ## 次のステップ

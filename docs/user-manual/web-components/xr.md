@@ -122,6 +122,25 @@ This snippet imports `whenReady` by package name, which requires `@playcanvas/we
 
 :::
 
+### The Camera Element API
+
+For minimal cases, [`<pc-camera>`](tags/pc-camera.md)'s element API can start and end XR sessions directly — no scripts required:
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const camera = await whenReady('pc-camera');
+
+if (camera.xrAvailable) {
+    camera.startXr('immersive-vr', 'local-floor');
+}
+
+// ...and later, to leave the session:
+camera.endXr();
+```
+
+`startXr(type, space)` takes the session type (`'immersive-ar'` or `'immersive-vr'`) and a reference space (`'viewer'`, `'local'`, `'local-floor'`, `'bounded-floor'` or `'unbounded'`). The `xrAvailable` getter reports whether an immersive session can be started; `startXr` does nothing while it is `false`. Note that the `xrSession` script also manages the camera rig transforms, AR transparency and session cleanup for you — prefer it for full experiences, and the element API for quick tests and simple viewers.
+
 Most of the [Web Component examples](https://playcanvas.github.io/web-components/examples/) have integrated support for XR. Consult their source code to see how it's done.
 
 ## Next Steps
