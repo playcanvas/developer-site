@@ -39,18 +39,24 @@ description: "pc-button要素のリファレンス: ホバー、押下、非ア�
 ## 例
 
 ```html
-<pc-entity name="button">
-    <!-- イメージ要素がボタンの見た目を提供し、入力を受け取ります -->
-    <pc-element type="image" width="190" height="45" use-input sprite-asset="blue-button"></pc-element>
-    <pc-button transition-mode="tint" hover-tint="0.8 0.8 0.8 1" pressed-tint="0.6 0.6 0.6 1"></pc-button>
-</pc-entity>
+<pc-app>
+    <pc-scene>
+        <pc-entity name="button">
+            <!-- イメージ要素がボタンの見た目を提供し、入力を受け取ります -->
+            <pc-element type="image" width="190" height="45" use-input></pc-element>
+            <pc-button transition-mode="tint" hover-tint="0.8 0.8 0.8 1" pressed-tint="0.6 0.6 0.6 1"></pc-button>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
-基盤となるボタンコンポーネントの `click` イベントをリッスンすることで、クリックに応答できます。
+基盤となるボタンコンポーネントの `click` イベントをリッスンすることで、クリックに応答できます。要素を同期的にクエリするのではなく、`whenReady` で初期化の完了を待ちます（[プログラムによるアクセス](../programmatic-access.md)を参照）。
 
 ```javascript
-const entity = document.querySelector('pc-entity[name="button"]').entity;
-entity.button.on('click', () => {
+import { whenReady } from '@playcanvas/web-components';
+
+const button = await whenReady('pc-entity[name="button"] > pc-button');
+button.component.on('click', () => {
     console.log('Button clicked!');
 });
 ```

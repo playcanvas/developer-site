@@ -11,7 +11,7 @@ PlayCanvas Web Componentsは、[NPM](https://www.npmjs.com/package/@playcanvas/w
 次のようにインストールできます（PlayCanvas Engineも同様に）：
 
 ```bash
-npm install playcanvas @playcanvas/web-components --save-dev
+npm install playcanvas @playcanvas/web-components
 ```
 
 次に、HTMLファイルでインポートマップが必要になります。これは、Web ComponentsがPlayCanvas Engine（外部依存関係）を見つけられるようにするためです。`@playcanvas/web-components` もマッピングしておくと、独自のモジュールスクリプトからライブラリのJavaScript API（`whenReady` など）をインポートできます。

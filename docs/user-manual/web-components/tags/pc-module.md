@@ -24,12 +24,14 @@ The `<pc-module>` tag is used to load a WebAssembly module.
 
 </div>
 
+The `name` is case-sensitive — the engine looks the module up by exact name. The modules consumed by the engine are `Ammo` (physics), `Basis` (texture transcoding) and `DracoDecoderModule` (mesh decompression).
+
 ## Example
 
 ```html
 <pc-app>
     <!-- Load the ammo.js module -->
-    <pc-module name="ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
+    <pc-module name="Ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
 </pc-app>
 ```
 

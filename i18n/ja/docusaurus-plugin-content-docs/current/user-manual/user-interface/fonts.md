@@ -114,7 +114,7 @@ function Label() {
   <pc-entity>
     <pc-screen screen-space>
       <pc-entity>
-        <pc-element type="text" asset="myfont" text="Hello, World!" font-size="32"></pc-element>
+        <pc-element type="text" font-asset="myfont" text="Hello, World!" font-size="32"></pc-element>
       </pc-entity>
     </pc-screen>
   </pc-entity>

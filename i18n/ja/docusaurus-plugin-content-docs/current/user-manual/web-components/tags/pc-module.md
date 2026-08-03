@@ -24,12 +24,14 @@ description: "pc-module要素のリファレンス: Scriptやプラグイン用�
 
 </div>
 
+`name`は大文字と小文字が区別されます — エンジンは正確な名前でモジュールを検索します。エンジンが使用するモジュールは`Ammo`（物理）、`Basis`（テクスチャトランスコード）、`DracoDecoderModule`（メッシュ展開）です。
+
 ## 例
 
 ```html
 <pc-app>
     <!-- ammo.jsモジュールをロード -->
-    <pc-module name="ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
+    <pc-module name="Ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
 </pc-app>
 ```
 

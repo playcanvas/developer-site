@@ -30,14 +30,19 @@ The `<pc-screen>` tag is used to define a screen component.
 ## Example
 
 ```html
-<pc-entity>
-    <!-- define a 2d screen -->
-    <pc-screen></pc-screen>
-    <!-- render some text on the parent screen -->
-    <pc-entity>
-        <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
-    </pc-entity>
-</pc-entity>
+<pc-app>
+    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            <!-- define a 2d screen -->
+            <pc-screen></pc-screen>
+            <!-- render some text on the parent screen -->
+            <pc-entity>
+                <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

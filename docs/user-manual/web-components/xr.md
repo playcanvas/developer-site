@@ -36,7 +36,7 @@ Or, when using a CDN:
 
 :::note[CDN and import maps]
 
-When loading XR scripts from a CDN, make sure your page’s import map also points the `playcanvas` module to the same CDN source and version as shown in the [Getting Started guide](getting-started.md). For production, consider pinning specific versions instead of `@latest`.
+When loading XR scripts from a CDN, make sure your page's import map also points the `playcanvas` module to the same CDN source and version as shown in the [Getting Started guide](getting-started.md). For production, consider pinning specific versions instead of `@latest`.
 
 :::
 

@@ -30,8 +30,8 @@ The `<pc-camera>` tag is used to define a camera component.
 | `gamma` | Enum | `"srgb"` | Color space: `"linear"` \| `"srgb"` |
 | `horizontal-fov` | Boolean | `"false"` | Whether to use horizontal field of view instead of vertical |
 | `near-clip` | Number | `"0.1"` | The near clipping plane distance |
-| `orthographic` | Boolean | `"false"` | Whether to use orthographic projection instead of perspective |
 | `ortho-height` | Number | `"10"` | Height of the orthographic projection |
+| `orthographic` | Boolean | `"false"` | Whether to use orthographic projection instead of perspective |
 | `priority` | Number | `"0"` | Rendering priority of the camera |
 | `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |

@@ -26,10 +26,12 @@ description: "pc-model要素のリファレンス: GLBまたはモデルAssetを
 ## 例
 
 ```html
-<pc-asset src="assets/car.glb" id="car"></pc-asset>
-<pc-scene>
-    <pc-model asset="car"></pc-model>
-</pc-scene>
+<pc-app>
+    <pc-asset src="assets/car.glb" id="car"></pc-asset>
+    <pc-scene>
+        <pc-model asset="car"></pc-model>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

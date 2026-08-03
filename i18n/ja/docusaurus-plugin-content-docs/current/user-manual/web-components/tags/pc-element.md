@@ -29,8 +29,8 @@ description: "pc-element要素のリファレンス: スクリーン空間のUI�
 | `auto-height` | Boolean | `"true"` | テキストコンテンツに合わせて高さを自動的に調整するかどうか。テキスト要素のみ |
 | `auto-width` | Boolean | `"true"` | テキストコンテンツに合わせて幅を自動的に調整するかどうか。テキスト要素のみ |
 | `color` | Color | `"1 1 1 1"` | スペース区切りのRGBA値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としての色 |
-| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `enable-markup` | Boolean | `"false"` | スタイル付きテキストのマークアップ処理を有効にします。色付きテキストの場合は `[color="#ff0000"]text[/color]` などのタグをサポートします。 |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `font-asset` | String | - | フォント [`<pc-asset>`](../pc-asset) のID (`font` 型アセットを参照する必要があります)。テキスト要素でのみ必須です |
 | `font-size` | Number | `"32"` | ピクセル単位のフォントサイズ |
 | `height` | Number | `"0"` | ピクセル単位の高さ (自動サイズ調整の場合は0) |
@@ -56,9 +56,14 @@ description: "pc-element要素のリファレンス: スクリーン空間のUI�
 ## 例
 
 ```html
-<pc-entity>
-    <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
-</pc-entity>
+<pc-app>
+    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース
