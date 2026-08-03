@@ -34341,7 +34341,7 @@ PlayCanvas Web Components is available as a package on [NPM](https://www.npmjs.c
 You can install it (and the PlayCanvas Engine) as follows:
 
 ```bash
-npm install playcanvas @playcanvas/web-components --save-dev
+npm install playcanvas @playcanvas/web-components
 ```
 
 Next, in your HTML file, you will need an import map because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency). Mapping `@playcanvas/web-components` as well lets your own module scripts import the library's JavaScript API (such as `whenReady`):
@@ -34534,7 +34534,7 @@ const { app } = await whenReady(appElement);
 
 ## TypeScript
 
-The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (such as `pc-module`) is a compile-time error.
+The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (`pc-material` or `pc-module`) is a compile-time error.
 
 ## When to Use Scripts Instead
 
@@ -34620,7 +34620,7 @@ We can now configure the script simply by adding a `speed` attribute to the `<pc
 </pc-entity>
 ```
 
-Any attribute on `<pc-script>` that is not part of the element's own API (`name`, `enabled`, `attributes` and standard HTML attributes such as `id` and `style`) maps to the script attribute of the same name. Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`).
+Any attribute on `<pc-script>` that is not reserved maps to the script attribute of the same name. Reserved names are the element's own API (`name`, `enabled`, `attributes`), global HTML attributes (such as `id` and `style`), `data-*` and `aria-*` attributes, names starting with `_` (as stamped on elements by some frameworks), and real inline event handler names such as `onclick` (a script attribute that merely starts with `on`, like `once`, still maps). Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`). A script attribute whose name collides with the script API (`app`, `entity`, `destroy`, `initialize`, `postInitialize`, `postUpdate`, `swap`, `update`) is never written and logs a console warning.
 
 Values are parsed according to the type of the script's declared default value, following the same [value conventions](attributes.md) as every other element:
 
@@ -34837,7 +34837,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `data` | String | - | Inline JSON asset data. Used by texture atlases (frame definitions) and sprites |
 | `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
-| `lazy` | Boolean | `"false"` | Whether to defer loading until first referenced or explicitly requested |
+| `lazy` | Boolean | `"false"` | Whether to skip preloading. A lazy asset is loaded on demand by [`<pc-model>`](../pc-model), [`<pc-particles>`](../pc-particles), [`<pc-sky>`](../pc-sky) and [`<pc-material>`](../pc-material) texture maps — other elements do not trigger loading |
 | `pixels-per-unit` | Number | `"1"` | For `sprite` assets: number of pixels per world unit |
 | `render-mode` | Enum | `"simple"` | For `sprite` assets: `"simple"` \| `"sliced"` \| `"tiled"`. Use `"sliced"` for 9-slice panels |
 | `src` | String | - | Path to the asset file |
@@ -34934,18 +34934,23 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 ## Example
 
 ```html
-<pc-entity name="button">
-    
-    <pc-element type="image" width="190" height="45" use-input sprite-asset="blue-button"></pc-element>
-    <pc-button transition-mode="tint" hover-tint="0.8 0.8 0.8 1" pressed-tint="0.6 0.6 0.6 1"></pc-button>
-</pc-entity>
+<pc-app>
+    <pc-scene>
+        <pc-entity name="button">
+            
+            <pc-element type="image" width="190" height="45" use-input></pc-element>
+            <pc-button transition-mode="tint" hover-tint="0.8 0.8 0.8 1" pressed-tint="0.6 0.6 0.6 1"></pc-button>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
-You can respond to clicks by listening for the `click` event on the underlying button component:
+You can respond to clicks by listening for the `click` event on the underlying button component. Wait for the element to finish initializing with `whenReady` (see [Programmatic Access](../programmatic-access.md)) rather than querying it synchronously:
 
 ```javascript
-const entity = document.querySelector('pc-entity[name="button"]').entity;
-entity.button.on('click', () => {
+
+const button = await whenReady('pc-entity[name="button"] > pc-button');
+button.component.on('click', () => {
     console.log('Button clicked!');
 });
 ```
@@ -34987,8 +34992,8 @@ The `<pc-camera>` tag is used to define a camera component.
 | `gamma` | Enum | `"srgb"` | Color space: `"linear"` \| `"srgb"` |
 | `horizontal-fov` | Boolean | `"false"` | Whether to use horizontal field of view instead of vertical |
 | `near-clip` | Number | `"0.1"` | The near clipping plane distance |
-| `orthographic` | Boolean | `"false"` | Whether to use orthographic projection instead of perspective |
 | `ortho-height` | Number | `"10"` | Height of the orthographic projection |
+| `orthographic` | Boolean | `"false"` | Whether to use orthographic projection instead of perspective |
 | `priority` | Number | `"0"` | Rendering priority of the camera |
 | `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |
@@ -35041,18 +35046,25 @@ The `<pc-collision>` tag is used to define a collision component.
 ## Example
 
 ```html
+<pc-app>
+    
+    <pc-module name="Ammo" glue="modules/ammo/ammo.wasm.js" wasm="modules/ammo/ammo.wasm.wasm" fallback="modules/ammo/ammo.js"></pc-module>
+    <pc-scene>
+        
+        <pc-entity>
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigidbody></pc-rigidbody>
+        </pc-entity>
 
-<pc-entity>
-    <pc-render type="box"></pc-render>
-    <pc-collision></pc-collision>
-    <pc-rigidbody></pc-rigidbody>
-</pc-entity>
-
-<pc-entity>
-    <pc-render type="sphere"></pc-render>
-    <pc-collision type="sphere"></pc-collision>
-    <pc-rigidbody type="dynamic"></pc-rigidbody>
-</pc-entity>
+        
+        <pc-entity position="0 4 0">
+            <pc-render type="sphere"></pc-render>
+            <pc-collision type="sphere"></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -35091,8 +35103,8 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `auto-height` | Boolean | `"true"` | Whether to automatically adjust height to fit text content. Text elements only |
 | `auto-width` | Boolean | `"true"` | Whether to automatically adjust width to fit text content. Text elements only |
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
-| `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `enable-markup` | Boolean | `"false"` | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `font-asset` | String | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
 | `font-size` | Number | `"32"` | Font size in pixels |
 | `height` | Number | `"0"` | Height in pixels (0 for auto-sizing) |
@@ -35118,9 +35130,14 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 ## Example
 
 ```html
-<pc-entity>
-    <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
- </pc-entity>
+<pc-app>
+    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -35138,8 +35155,8 @@ The `<pc-entity>` tag is used to define an entity.
 :::note[Usage]
 
 * It must be a direct child of [`<pc-scene>`](../pc-scene) or another `<pc-entity>`.
-* It can have 0..n [`<pc-entity>`](../pc-entity) children.
-* It can optionally have one of each component type as children: [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-sounds>`](../pc-sounds).
+* It can have 0..n [`<pc-entity>`](../pc-entity) or [`<pc-model>`](../pc-model) children.
+* It can optionally have one of each component type as children: [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-layoutchild>`](../pc-layoutchild), [`<pc-layoutgroup>`](../pc-layoutgroup), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scrollview>`](../pc-scrollview), [`<pc-sounds>`](../pc-sounds).
 
 :::
 
@@ -35220,8 +35237,8 @@ When rendering splat-based scenes, it is recommended to set `antialias` and `hig
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `lod-base-distance` | Number | `"5"` | Distance for the first LOD transition (LOD 0 to LOD 1). Splats closer than this use the highest-quality LOD. Minimum `0.1`. Only affects assets that contain LOD levels. |
 | `lod-multiplier` | Number | `"3"` | Multiplier between successive LOD distance thresholds, forming a geometric progression. Higher values switch to coarser LODs sooner. Minimum `1.2`. Only affects assets that contain LOD levels. |
-| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The LOD selected by distance is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
 | `lod-range-max` | Number | `"99"` | Maximum allowed LOD index (inclusive). The LOD selected by distance is clamped so it never goes coarser (higher index) than this value. The default of `99` effectively means "no cap". Only affects assets that contain LOD levels. |
+| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The LOD selected by distance is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
 
 </div>
 
@@ -35584,10 +35601,12 @@ All attributes of [`<pc-entity>`](../pc-entity) are also available.
 ## Example
 
 ```html
-<pc-asset src="assets/car.glb" id="car"></pc-asset>
-<pc-scene>
-    <pc-model asset="car"></pc-model>
-</pc-scene>
+<pc-app>
+    <pc-asset src="assets/car.glb" id="car"></pc-asset>
+    <pc-scene>
+        <pc-model asset="car"></pc-model>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -35621,12 +35640,14 @@ The `<pc-module>` tag is used to load a WebAssembly module.
 
 </div>
 
+The `name` is case-sensitive — the engine looks the module up by exact name. The modules consumed by the engine are `Ammo` (physics), `Basis` (texture transcoding) and `DracoDecoderModule` (mesh decompression).
+
 ## Example
 
 ```html
 <pc-app>
     
-    <pc-module name="ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
+    <pc-module name="Ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
 </pc-app>
 ```
 
@@ -35883,14 +35904,19 @@ The `<pc-screen>` tag is used to define a screen component.
 ## Example
 
 ```html
-<pc-entity>
-    
-    <pc-screen></pc-screen>
-    
-    <pc-entity>
-        <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
-    </pc-entity>
-</pc-entity>
+<pc-app>
+    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            
+            <pc-screen></pc-screen>
+            
+            <pc-entity>
+                <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -35948,7 +35974,7 @@ The element becomes ready once its script instance has been created — await `w
 
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scripts/
 
-The `<pc-scripts>` tag is used to define a scripts component.
+The `<pc-scripts>` tag is used to define a script component.
 
 :::note[Usage]
 
@@ -36141,10 +36167,12 @@ The `<pc-sky>` tag is used to define a sky component.
 ## Example
 
 ```html
-<pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
-<pc-scene>
-    <pc-sky asset="skybox"></pc-sky>
-</pc-scene>
+<pc-app>
+    <pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
+    <pc-scene>
+        <pc-sky asset="skybox"></pc-sky>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -36186,9 +36214,16 @@ The `<pc-sound>` tag is used to define a sound.
 ## Example
 
 ```html
-<pc-sounds>
-    <pc-sound asset="music"></pc-sound>
-</pc-sounds>
+<pc-app>
+    <pc-asset src="assets/audio/music.mp3" id="music"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            <pc-sounds>
+                <pc-sound asset="music"></pc-sound>
+            </pc-sounds>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -36230,11 +36265,16 @@ The `<pc-sounds>` tag is used to define a sound component.
 ## Example
 
 ```html
-<pc-entity>
-    <pc-sounds>
-        <pc-sound asset="music"></pc-sound>
-    </pc-sounds>
-</pc-entity>
+<pc-app>
+    <pc-asset src="assets/audio/music.mp3" id="music"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            <pc-sounds volume="0.5">
+                <pc-sound asset="music"></pc-sound>
+            </pc-sounds>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -36280,7 +36320,7 @@ Or, when using a CDN:
 
 :::note[CDN and import maps]
 
-When loading XR scripts from a CDN, make sure your page’s import map also points the `playcanvas` module to the same CDN source and version as shown in the [Getting Started guide](getting-started.md). For production, consider pinning specific versions instead of `@latest`.
+When loading XR scripts from a CDN, make sure your page's import map also points the `playcanvas` module to the same CDN source and version as shown in the [Getting Started guide](getting-started.md). For production, consider pinning specific versions instead of `@latest`.
 
 :::
 
