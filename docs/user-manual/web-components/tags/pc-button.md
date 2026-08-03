@@ -39,18 +39,24 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 ## Example
 
 ```html
-<pc-entity name="button">
-    <!-- The image element provides the button's visuals and receives input -->
-    <pc-element type="image" width="190" height="45" use-input sprite-asset="blue-button"></pc-element>
-    <pc-button transition-mode="tint" hover-tint="0.8 0.8 0.8 1" pressed-tint="0.6 0.6 0.6 1"></pc-button>
-</pc-entity>
+<pc-app>
+    <pc-scene>
+        <pc-entity name="button">
+            <!-- The image element provides the button's visuals and receives input -->
+            <pc-element type="image" width="190" height="45" use-input></pc-element>
+            <pc-button transition-mode="tint" hover-tint="0.8 0.8 0.8 1" pressed-tint="0.6 0.6 0.6 1"></pc-button>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
-You can respond to clicks by listening for the `click` event on the underlying button component:
+You can respond to clicks by listening for the `click` event on the underlying button component. Wait for the element to finish initializing with `whenReady` (see [Programmatic Access](../programmatic-access.md)) rather than querying it synchronously:
 
 ```javascript
-const entity = document.querySelector('pc-entity[name="button"]').entity;
-entity.button.on('click', () => {
+import { whenReady } from '@playcanvas/web-components';
+
+const button = await whenReady('pc-entity[name="button"] > pc-button');
+button.component.on('click', () => {
     console.log('Button clicked!');
 });
 ```

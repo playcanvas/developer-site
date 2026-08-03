@@ -81,7 +81,7 @@ We can now configure the script simply by adding a `speed` attribute to the `<pc
 </pc-entity>
 ```
 
-Any attribute on `<pc-script>` that is not part of the element's own API (`name`, `enabled`, `attributes` and standard HTML attributes such as `id` and `style`) maps to the script attribute of the same name. Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`).
+Any attribute on `<pc-script>` that is not reserved maps to the script attribute of the same name. Reserved names are the element's own API (`name`, `enabled`, `attributes`), global HTML attributes (such as `id` and `style`), `data-*` and `aria-*` attributes, names starting with `_` (as stamped on elements by some frameworks), and real inline event handler names such as `onclick` (a script attribute that merely starts with `on`, like `once`, still maps). Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`). A script attribute whose name collides with the script API (`app`, `entity`, `destroy`, `initialize`, `postInitialize`, `postUpdate`, `swap`, `update`) is never written and logs a console warning.
 
 Values are parsed according to the type of the script's declared default value, following the same [value conventions](attributes.md) as every other element:
 

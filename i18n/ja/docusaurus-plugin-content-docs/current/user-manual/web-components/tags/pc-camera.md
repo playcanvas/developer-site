@@ -30,8 +30,8 @@ description: "pc-camera要素のリファレンス: 投影、クリアオプシ�
 | `gamma` | Enum | `"srgb"` | カラースペース: `"linear"` \| `"srgb"` |
 | `horizontal-fov` | Boolean | `"false"` | 垂直視野角の代わりに水平視野角を使用するかどうか |
 | `near-clip` | Number | `"0.1"` | ニアクリッピングプレーンの距離 |
-| `orthographic` | Boolean | `"false"` | パースペクティブ投影の代わりに正射影を使用するかどうか |
 | `ortho-height` | Number | `"10"` | 正射影の高さ |
+| `orthographic` | Boolean | `"false"` | パースペクティブ投影の代わりに正射影を使用するかどうか |
 | `priority` | Number | `"0"` | カメラのレンダリング優先度 |
 | `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのシザー矩形 |

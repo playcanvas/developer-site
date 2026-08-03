@@ -29,8 +29,8 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `auto-height` | Boolean | `"true"` | Whether to automatically adjust height to fit text content. Text elements only |
 | `auto-width` | Boolean | `"true"` | Whether to automatically adjust width to fit text content. Text elements only |
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
-| `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `enable-markup` | Boolean | `"false"` | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `font-asset` | String | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
 | `font-size` | Number | `"32"` | Font size in pixels |
 | `height` | Number | `"0"` | Height in pixels (0 for auto-sizing) |
@@ -56,9 +56,14 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 ## Example
 
 ```html
-<pc-entity>
-    <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
- </pc-entity>
+<pc-app>
+    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

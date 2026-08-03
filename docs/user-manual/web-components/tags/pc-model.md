@@ -26,10 +26,12 @@ All attributes of [`<pc-entity>`](../pc-entity) are also available.
 ## Example
 
 ```html
-<pc-asset src="assets/car.glb" id="car"></pc-asset>
-<pc-scene>
-    <pc-model asset="car"></pc-model>
-</pc-scene>
+<pc-app>
+    <pc-asset src="assets/car.glb" id="car"></pc-asset>
+    <pc-scene>
+        <pc-model asset="car"></pc-model>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

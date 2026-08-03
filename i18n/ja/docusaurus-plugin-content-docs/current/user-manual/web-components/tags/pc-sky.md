@@ -31,10 +31,12 @@ description: "pc-sky要素のリファレンス: Sceneの背景向けに、cubem
 ## 例
 
 ```html
-<pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
-<pc-scene>
-    <pc-sky asset="skybox"></pc-sky>
-</pc-scene>
+<pc-app>
+    <pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
+    <pc-scene>
+        <pc-sky asset="skybox"></pc-sky>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

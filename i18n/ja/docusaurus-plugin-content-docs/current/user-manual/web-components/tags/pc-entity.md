@@ -8,8 +8,8 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 :::note[使用法]
 
 * それは[`<pc-scene>`](../pc-scene)または別の`<pc-entity>`の直接の子でなければなりません。
-* それは0からn個の[`<pc-entity>`](../pc-entity)の子を持つことができます。
-* それはオプションで、各コンポーネントタイプの子を1つ持つことができます：[`<pc-camera>`](../pc-camera)、[`<pc-collision>`](../pc-collision)、[`<pc-element>`](../pc-element)、[`<pc-gsplat>`](../pc-gsplat)、[`<pc-light>`](../pc-light)、[`<pc-listener>`](../pc-listener)、[`<pc-particles>`](../pc-particles)、[`<pc-render>`](../pc-render)、[`<pc-rigidbody>`](../pc-rigidbody)、[`<pc-screen>`](../pc-screen)、[`<pc-scripts>`](../pc-scripts)、[`<pc-sounds>`](../pc-sounds)。
+* それは0からn個の[`<pc-entity>`](../pc-entity)または[`<pc-model>`](../pc-model)の子を持つことができます。
+* それはオプションで、各コンポーネントタイプの子を1つ持つことができます：[`<pc-button>`](../pc-button)、[`<pc-camera>`](../pc-camera)、[`<pc-collision>`](../pc-collision)、[`<pc-element>`](../pc-element)、[`<pc-gsplat>`](../pc-gsplat)、[`<pc-layoutchild>`](../pc-layoutchild)、[`<pc-layoutgroup>`](../pc-layoutgroup)、[`<pc-light>`](../pc-light)、[`<pc-listener>`](../pc-listener)、[`<pc-particles>`](../pc-particles)、[`<pc-render>`](../pc-render)、[`<pc-rigidbody>`](../pc-rigidbody)、[`<pc-screen>`](../pc-screen)、[`<pc-scripts>`](../pc-scripts)、[`<pc-scrollbar>`](../pc-scrollbar)、[`<pc-scrollview>`](../pc-scrollview)、[`<pc-sounds>`](../pc-sounds)。
 
 :::
 

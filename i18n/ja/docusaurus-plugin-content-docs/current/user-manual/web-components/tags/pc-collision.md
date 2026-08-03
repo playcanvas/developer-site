@@ -30,19 +30,25 @@ description: "pc-collision要素のリファレンス: トリガー、rigid body
 ## 例
 
 ```html
-<!-- 静的な1x1x1ボックス -->
-<pc-entity>
-    <pc-render type="box"></pc-render>
-    <pc-collision></pc-collision>
-    <pc-rigidbody></pc-rigidbody>
-</pc-entity>
+<pc-app>
+    <!-- 物理にはammo.jsのWebAssemblyモジュールが必要です -->
+    <pc-module name="Ammo" glue="modules/ammo/ammo.wasm.js" wasm="modules/ammo/ammo.wasm.wasm" fallback="modules/ammo/ammo.js"></pc-module>
+    <pc-scene>
+        <!-- 静的な1x1x1ボックス -->
+        <pc-entity>
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigidbody></pc-rigidbody>
+        </pc-entity>
 
-<!-- 半径0.5の動的な球 -->
-<pc-entity>
-    <pc-render type="sphere"></pc-render>
-    <pc-collision type="sphere"></pc-collision>
-    <pc-rigidbody type="dynamic"></pc-rigidbody>
-</pc-entity>
+        <!-- 半径0.5の動的な球 -->
+        <pc-entity position="0 4 0">
+            <pc-render type="sphere"></pc-render>
+            <pc-collision type="sphere"></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

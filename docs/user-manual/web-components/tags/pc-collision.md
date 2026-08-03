@@ -30,19 +30,25 @@ The `<pc-collision>` tag is used to define a collision component.
 ## Example
 
 ```html
-<!-- static 1x1x1 box -->
-<pc-entity>
-    <pc-render type="box"></pc-render>
-    <pc-collision></pc-collision>
-    <pc-rigidbody></pc-rigidbody>
-</pc-entity>
+<pc-app>
+    <!-- Physics requires the ammo.js WebAssembly module -->
+    <pc-module name="Ammo" glue="modules/ammo/ammo.wasm.js" wasm="modules/ammo/ammo.wasm.wasm" fallback="modules/ammo/ammo.js"></pc-module>
+    <pc-scene>
+        <!-- static 1x1x1 box -->
+        <pc-entity>
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigidbody></pc-rigidbody>
+        </pc-entity>
 
-<!-- dynamic sphere with radius 0.5 -->
-<pc-entity>
-    <pc-render type="sphere"></pc-render>
-    <pc-collision type="sphere"></pc-collision>
-    <pc-rigidbody type="dynamic"></pc-rigidbody>
-</pc-entity>
+        <!-- dynamic sphere with radius 0.5 -->
+        <pc-entity position="0 4 0">
+            <pc-render type="sphere"></pc-render>
+            <pc-collision type="sphere"></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

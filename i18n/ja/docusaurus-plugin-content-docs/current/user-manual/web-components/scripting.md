@@ -81,7 +81,7 @@ export class RotateScript extends Script {
 </pc-entity>
 ```
 
-`<pc-script>` 上の、要素自身のAPI（`name`、`enabled`、`attributes`、および `id` や `style` などの標準HTML属性）に含まれない属性は、同名のスクリプト属性にマッピングされます。属性名はケバブケースで記述し、スクリプトのキャメルケースのプロパティ名にマッピングされます（例: `focus-point` → `focusPoint`）。
+`<pc-script>` 上の、予約されていない属性は、同名のスクリプト属性にマッピングされます。予約名は、要素自身のAPI（`name`、`enabled`、`attributes`）、グローバルHTML属性（`id` や `style` など）、`data-*` および `aria-*` 属性、`_` で始まる名前（一部のフレームワークが要素に付与するもの）、そして `onclick` のような実在するインラインイベントハンドラー名です（単に `on` で始まるだけのスクリプト属性、例えば `once` はマッピングされます）。属性名はケバブケースで記述し、スクリプトのキャメルケースのプロパティ名にマッピングされます（例: `focus-point` → `focusPoint`）。スクリプトAPI（`app`、`entity`、`destroy`、`initialize`、`postInitialize`、`postUpdate`、`swap`、`update`）と名前が衝突するスクリプト属性は書き込まれず、コンソール警告が記録されます。
 
 値は、スクリプトが宣言したデフォルト値の型に従って解析され、他のすべての要素と同じ[値の規約](attributes.md)に従います。
 

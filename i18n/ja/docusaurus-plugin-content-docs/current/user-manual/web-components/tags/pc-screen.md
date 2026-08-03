@@ -30,14 +30,19 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 ## 例
 
 ```html
-<pc-entity>
-    <!-- 2Dスクリーンを定義 -->
-    <pc-screen></pc-screen>
-    <!-- 親スクリーンにテキストをレンダリング -->
-    <pc-entity>
-        <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
-    </pc-entity>
-</pc-entity>
+<pc-app>
+    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            <!-- 2Dスクリーンを定義 -->
+            <pc-screen></pc-screen>
+            <!-- 親スクリーンにテキストをレンダリング -->
+            <pc-entity>
+                <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

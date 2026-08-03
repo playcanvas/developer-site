@@ -32,9 +32,16 @@ description: "pc-sound要素のリファレンス: 位置オーディオまた�
 ## 例
 
 ```html
-<pc-sounds>
-    <pc-sound asset="music"></pc-sound>
-</pc-sounds>
+<pc-app>
+    <pc-asset src="assets/audio/music.mp3" id="music"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            <pc-sounds>
+                <pc-sound asset="music"></pc-sound>
+            </pc-sounds>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

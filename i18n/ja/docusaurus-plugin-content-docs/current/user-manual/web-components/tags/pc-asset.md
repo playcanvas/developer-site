@@ -21,7 +21,7 @@ description: "pc-asset要素のリファレンス: URLまたはidで読み込む
 | `data` | String | - | インラインのJSONアセットデータ。テクスチャアトラス（フレーム定義）やスプライトで使用されます |
 | `frame-keys` | String | - | `sprite` アセットの場合: スプライトを構成するアトラスのフレームキーを、スペースまたはカンマ区切りで指定したリスト |
 | `id` | String | - | 他のタグがこのアセットを参照するために使用する一意の識別子 |
-| `lazy` | Boolean | `"false"` | 最初に参照されるか、明示的に要求されるまでロードを延期するかどうか |
+| `lazy` | Boolean | `"false"` | プリロードをスキップするかどうか。lazyなアセットは[`<pc-model>`](../pc-model)、[`<pc-particles>`](../pc-particles)、[`<pc-sky>`](../pc-sky)、[`<pc-material>`](../pc-material)のテクスチャマップによってオンデマンドでロードされます — その他の要素はロードをトリガーしません |
 | `pixels-per-unit` | Number | `"1"` | `sprite` アセットの場合: ワールドユニットあたりのピクセル数 |
 | `render-mode` | Enum | `"simple"` | `sprite` アセットの場合: `"simple"` \| `"sliced"` \| `"tiled"`。9スライスパネルには `"sliced"` を使用します |
 | `src` | String | - | アセットファイルへのパス |

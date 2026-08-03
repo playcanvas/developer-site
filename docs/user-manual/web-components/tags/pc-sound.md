@@ -32,9 +32,16 @@ The `<pc-sound>` tag is used to define a sound.
 ## Example
 
 ```html
-<pc-sounds>
-    <pc-sound asset="music"></pc-sound>
-</pc-sounds>
+<pc-app>
+    <pc-asset src="assets/audio/music.mp3" id="music"></pc-asset>
+    <pc-scene>
+        <pc-entity>
+            <pc-sounds>
+                <pc-sound asset="music"></pc-sound>
+            </pc-sounds>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

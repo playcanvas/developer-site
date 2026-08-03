@@ -31,10 +31,12 @@ The `<pc-sky>` tag is used to define a sky component.
 ## Example
 
 ```html
-<pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
-<pc-scene>
-    <pc-sky asset="skybox"></pc-sky>
-</pc-scene>
+<pc-app>
+    <pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
+    <pc-scene>
+        <pc-sky asset="skybox"></pc-sky>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

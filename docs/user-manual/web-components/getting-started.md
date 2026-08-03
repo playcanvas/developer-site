@@ -11,7 +11,7 @@ PlayCanvas Web Components is available as a package on [NPM](https://www.npmjs.c
 You can install it (and the PlayCanvas Engine) as follows:
 
 ```bash
-npm install playcanvas @playcanvas/web-components --save-dev
+npm install playcanvas @playcanvas/web-components
 ```
 
 Next, in your HTML file, you will need an import map because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency). Mapping `@playcanvas/web-components` as well lets your own module scripts import the library's JavaScript API (such as `whenReady`):
