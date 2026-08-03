@@ -1,6 +1,6 @@
 ---
 title: <pc-collision>
-description: "Reference for the pc-collision element: collision shapes and parameters for triggers, rigid bodies, and physics queries in declarative HTML."
+description: "Reference for the pc-collision element: box, sphere, capsule, cone, cylinder, and mesh collision shapes to pair with rigid bodies."
 ---
 
 The `<pc-collision>` tag is used to define a collision component.

@@ -1,6 +1,6 @@
 ---
 title: <pc-module>
-description: "Reference for the pc-module element: load Wasm modules for scripts or plugins and associate them with PlayCanvas script components."
+description: "Reference for the pc-module element: load WebAssembly modules such as Ammo, Basis, and DracoDecoderModule from glue, wasm, and fallback paths."
 ---
 
 The `<pc-module>` tag is used to load a WebAssembly module.

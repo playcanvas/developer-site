@@ -1,6 +1,6 @@
 ---
 title: <pc-element>
-description: "Reference for the pc-element element: screen-space UI text, images, and groups mapped to PlayCanvas Element components and layout."
+description: "Reference for the pc-element element: text, image, and group UI elements with fonts, sprites, layout, and input support on entities."
 ---
 
 The `<pc-element>` tag is used to define an element component. Element components are the building blocks of user interfaces and come in three types — `group`, `image`, and `text` — selected with the `type` attribute. Which attributes apply depends on the type.

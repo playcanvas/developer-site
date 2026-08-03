@@ -1,6 +1,6 @@
 ---
 title: <pc-model>
-description: "pc-model要素のリファレンス: GLBまたはモデルAssetをEntity上で読み込みインスタンス化し、インポート設定とレンダリング連携を扱います。"
+description: "pc-model要素のリファレンス: SceneまたはEntity内で、GLBコンテナアセットから3Dモデルをインスタンス化します。"
 ---
 
 `<pc-model>`タグは、GLBファイルから3Dモデルをインスタンス化するエンティティを定義するために使用されます。
