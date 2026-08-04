@@ -14766,7 +14766,7 @@ Begin by creating a new file called `index.html` and copy the [Web Components bo
 Now, let's add the basic structure of our application to our HTML `body` using the [`<pc-app>`](/user-manual/web-components/tags/pc-app) and [`<pc-scene>`](/user-manual/web-components/tags/pc-scene) elements.
 
 ```html
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-scene>
     </pc-scene>
 </pc-app>
@@ -14776,7 +14776,7 @@ This creates an empty 3D scene. However, we can't see anything rendered yet. For
 
 :::warning Performance Optimization
 
-We've disabled `antialias` and `high-resolution` on the `<pc-app>` element for optimal splat rendering performance. These settings help reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../performance.md) guide.
+We've disabled `antialias` and capped `max-pixel-ratio` at `1` (rendering at CSS resolution) on the `<pc-app>` element for optimal splat rendering performance. These settings help reduce the fragment processing load, which is the primary bottleneck in Gaussian splat rendering. Learn more in the [Performance](../performance.md) guide.
 
 :::
 
@@ -14785,7 +14785,7 @@ We've disabled `antialias` and `high-resolution` on the `<pc-app>` element for o
 Before we can display a splat or add camera controls, we need to define the assets our app will use. Let's add a camera controls script and a splat asset using the [`<pc-asset>`](/user-manual/web-components/tags/pc-asset) element.
 
 ```html {2-3}
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
@@ -14803,7 +14803,7 @@ We've added two assets:
 To view our scene, we need a camera which we can add using the [`<pc-entity>`](/user-manual/web-components/tags/pc-entity) and [`<pc-camera>`](/user-manual/web-components/tags/pc-camera) elements.
 
 ```html {5-7}
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
@@ -14821,7 +14821,7 @@ We've positioned the camera 2.5 units down the Z axis. By default, a camera look
 Now let's make the camera interactive by adding the camera controls script using the [`<pc-scripts>`](/user-manual/web-components/tags/pc-scripts) and [`<pc-script>`](/user-manual/web-components/tags/pc-script) elements.
 
 ```html {7-9}
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
@@ -14846,7 +14846,7 @@ The camera controls script will allow you to:
 Now let's add our toy cat splat to the scene using the [`<pc-gsplat>`](/user-manual/web-components/tags/pc-gsplat) element.
 
 ```html {11-13}
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
@@ -34887,14 +34887,38 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `alpha` | Boolean | `"true"` | Whether the application allocates an alpha channel in the frame buffer |
+| `alpha` | Boolean | `"true"` | Whether the application allocates an alpha channel in the frame buffer, which is what lets the page show through wherever the scene has not drawn |
 | `antialias` | Boolean | `"true"` | Whether the application uses anti-aliasing |
-| `backend` | Enum | `"webgpu"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"`. WebGPU falls back to WebGL 2 in browsers where it is unavailable — set `"webgl2"` to force WebGL 2 |
-| `depth` | Boolean | `"true"` | Whether the application allocates a depth buffer |
-| `high-resolution` | Boolean | `"true"` | Whether to render using physical resolution or CSS resolution |
-| `stencil` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
+| `backend` | Enum | `"webgpu"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"`. WebGPU falls back to WebGL 2 in browsers where it is unavailable — set `"webgl2"` to force WebGL 2. `"null"` selects a renderer that draws nothing, and exists for headless testing |
+| `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
+| `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
+| `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
+| `stencil-buffer` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
 
 </div>
+
+:::note[When these are read]
+
+Every attribute above except `max-pixel-ratio` and `loading-bar` is read once, when the element is
+inserted into the document and creates its graphics device. Changing one afterwards updates the
+element's property but has no effect on the running application, and logs a warning saying so — to
+apply a new value, remove the element and re-insert it.
+
+:::
+
+## Loading bar
+
+While the application boots and preloads its assets, `<pc-app>` shows a loading bar along the top of
+the element. Set `loading-bar="false"` to suppress it, or theme it with these CSS custom properties:
+
+| Property | Description |
+| --- | --- |
+| `--pc-loading-bar-color` | The color of the filled portion of the bar |
+| `--pc-loading-bar-background` | The color of the unfilled track behind it |
+| `--pc-loading-bar-height` | The height of the bar |
+
+To build a loading screen of your own instead, suppress the bar and drive it from the element's
+`progress` event and `loadProgress` property.
 
 ## Example
 
@@ -35083,9 +35107,9 @@ The `<pc-camera>` tag is used to define a camera component.
 | `gamma` | Enum | `"srgb"` | Color space: `"linear"` \| `"srgb"` |
 | `horizontal-fov` | Boolean | `"false"` | Whether to use horizontal field of view instead of vertical |
 | `near-clip` | Number | `"0.1"` | The near clipping plane distance |
-| `ortho-height` | Number | `"10"` | Height of the orthographic projection |
-| `orthographic` | Boolean | `"false"` | Whether to use orthographic projection instead of perspective |
+| `ortho-height` | Number | `"10"` | Height of the orthographic projection. Only used when `projection` is `"orthographic"` |
 | `priority` | Number | `"0"` | Rendering priority of the camera |
+| `projection` | Enum | `"perspective"` | Projection of the camera: `"perspective"` \| `"orthographic"`. Use `ortho-height` to size an orthographic projection |
 | `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |
 | `tonemap` | Enum | `"none"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
@@ -35309,7 +35333,7 @@ URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat/
 
 The `<pc-gsplat>` tag is used to define a gsplat component for rendering 3D Gaussian Splats.
 
-When rendering splat-based scenes, it is recommended to set `antialias` and `high-resolution` on your [`<pc-app>`](../pc-app) tag to `false` for best performance.
+When rendering splat-based scenes, it is recommended to set `antialias` to `false` and `max-pixel-ratio` to `1` on your [`<pc-app>`](../pc-app) tag for best performance.
 
 :::note[Usage]
 
@@ -35982,15 +36006,22 @@ The `<pc-screen>` tag is used to define a screen component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `blend` | Boolean | `"false"` | Whether to enable alpha blending |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `priority` | Number | `"0"` | Rendering priority (0-255) |
 | `reference-resolution` | Vector2 | `"640 320"` | Reference resolution as "Width Height" values |
 | `resolution` | Vector2 | `"640 320"` | Screen resolution as "Width Height" values |
-| `scale-blend` | Number | `"0.5"` | Scale blending factor (0-1) |
+| `scale-blend` | Number | `"0.5"` | How `resolution` and `reference-resolution` are weighted against each other when `scale-mode` is `"blend"`, from 0 (follow `resolution`) to 1 (follow `reference-resolution`). Ignored when `scale-mode` is `"none"` |
+| `scale-mode` | Enum | `"none"` | How the screen scales its contents: `"none"` \| `"blend"`. `"none"` renders at `resolution` and ignores `reference-resolution`; `"blend"` scales between the two, weighted by `scale-blend`, which is what keeps a UI laid out at one resolution usable at another. Requires `screen-space` |
 | `screen-space` | Boolean | `"false"` | Whether to render in screen space |
 
 </div>
+
+:::note[Scaling only applies to screen-space screens]
+
+A world-space screen does not support scaling, and the engine forces `scale-mode` back to `"none"`
+on one. Set `screen-space` alongside `scale-mode="blend"` for it to have any effect.
+
+:::
 
 ## Example
 
@@ -36173,18 +36204,27 @@ The `<pc-scrollview>` tag is used to define a scroll view component, which lets 
 | `content` | String | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
-| `horizontal` | Boolean | `"true"` | Whether horizontal scrolling is enabled |
+| `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
 | `horizontal-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
 | `horizontal-scrollbar-visibility` | Enum | `"when-required"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
 | `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
 | `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
-| `vertical` | Boolean | `"true"` | Whether vertical scrolling is enabled |
+| `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
 | `vertical-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
 | `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
 | `viewport` | String | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
 
 </div>
+
+:::note[`horizontal` and `vertical` are toggles here]
+
+They enable scrolling on an axis, and take `"true"` or `"false"`. This is not the same as the
+`orientation` attribute on [`<pc-scrollbar>`](../pc-scrollbar) and
+[`<pc-layoutgroup>`](../pc-layoutgroup), for which `"horizontal"` and `"vertical"` are the accepted
+*values*.
+
+:::
 
 ## Example
 
@@ -36247,8 +36287,8 @@ The `<pc-sky>` tag is used to define a sky component.
 | `asset` | String | - | Texture asset ID (must reference a `texture` type asset) |
 | `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range) |
 | `intensity` | Number | `"1"` | Sky brightness intensity |
-| `level` | Number | `"0"` | Mipmap level to use for rendering |
 | `lighting` | Boolean | `"false"` | Whether the skybox is used as a light source |
+| `mip-level` | Number | `"0"` | Mip level of the skybox, where 0 is the sharpest. Raising it selects a blurrier mip, which is how a skybox is softened without blurring the texture itself |
 | `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles |
 | `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values |
 | `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |
