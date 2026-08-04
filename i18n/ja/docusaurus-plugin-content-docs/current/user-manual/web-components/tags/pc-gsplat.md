@@ -5,7 +5,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 `<pc-gsplat>`タグは、3D Gaussian Splatsをレンダリングするためのgsplatコンポーネントを定義するために使用されます。
 
-スプラットベースのシーンをレンダリングする場合、最高のパフォーマンスを得るには、[`<pc-app>`](../pc-app)タグの`antialias`と`high-resolution`を`false`に設定することをお勧めします。
+スプラットベースのシーンをレンダリングする場合、最高のパフォーマンスを得るには、[`<pc-app>`](../pc-app)タグの`antialias`を`false`に、`max-pixel-ratio`を`1`に設定することをお勧めします。
 
 :::note[使用法]
 

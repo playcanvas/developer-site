@@ -23,18 +23,27 @@ The `<pc-scrollview>` tag is used to define a scroll view component, which lets 
 | `content` | String | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
-| `horizontal` | Boolean | `"true"` | Whether horizontal scrolling is enabled |
+| `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
 | `horizontal-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
 | `horizontal-scrollbar-visibility` | Enum | `"when-required"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
 | `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
 | `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
-| `vertical` | Boolean | `"true"` | Whether vertical scrolling is enabled |
+| `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
 | `vertical-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
 | `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
 | `viewport` | String | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
 
 </div>
+
+:::note[`horizontal` and `vertical` are toggles here]
+
+They enable scrolling on an axis, and take `"true"` or `"false"`. This is not the same as the
+`orientation` attribute on [`<pc-scrollbar>`](../pc-scrollbar) and
+[`<pc-layoutgroup>`](../pc-layoutgroup), for which `"horizontal"` and `"vertical"` are the accepted
+*values*.
+
+:::
 
 ## Example
 

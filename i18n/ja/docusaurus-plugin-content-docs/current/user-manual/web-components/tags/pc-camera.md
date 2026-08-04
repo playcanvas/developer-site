@@ -30,14 +30,20 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 | `gamma` | Enum | `"srgb"` | カラースペース: `"linear"` \| `"srgb"` |
 | `horizontal-fov` | Boolean | `"false"` | 垂直視野角の代わりに水平視野角を使用するかどうか |
 | `near-clip` | Number | `"0.1"` | ニアクリッピングプレーンの距離 |
-| `ortho-height` | Number | `"10"` | 正射影の高さ |
-| `orthographic` | Boolean | `"false"` | パースペクティブ投影の代わりに正射影を使用するかどうか |
+| `ortho-height` | Number | `"10"` | 正射影の高さ。`projection`が`"orthographic"`のときにのみ使用されます |
 | `priority` | Number | `"0"` | カメラのレンダリング優先度 |
+| `projection` | Enum | `"perspective"` | カメラの投影方式: `"perspective"` \| `"orthographic"`。正射影のサイズは`ortho-height`で指定します |
 | `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのシザー矩形 |
 | `tonemap` | Enum | `"none"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
 
 </div>
+
+:::warning[0.11.0での名称変更]
+
+Booleanの`orthographic`属性は、エンジンに合わせて`projection`列挙型に置き換えられました。`orthographic`は`projection="orthographic"`に置き換えてください。`ortho-height`は変更ありません。以前の名称は認識されません。
+
+:::
 
 ## 例
 
