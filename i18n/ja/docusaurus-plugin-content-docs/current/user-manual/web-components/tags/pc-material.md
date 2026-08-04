@@ -11,7 +11,7 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 
 :::
 
-この要素はエンジンの[StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html)をラップし、デフォルトでメタル/ラフネスのワークフローを使用します。素の`StandardMaterial`とは異なり、メタルネスワークフローが有効化されており（`use-metalness`のデフォルトは`"true"`）、これは`metalness-*`属性が前提とする動作であり、glTFをはじめとするPBRツールが「PBR」と呼ぶものです。
+この要素はエンジンの[StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html)をラップし、デフォルトでメタル/ラフネスのワークフローを使用します。素の`StandardMaterial`とは異なり、メタルネスワークフローが有効化されており（`use-metalness`のデフォルトは`"true"`）、これは`metalness-*`属性が前提とする動作であり、glTFをはじめとするPBRツールが「PBR」と呼ぶものです。この既定と対になるように、`metalness`はエンジンの`1`ではなく`0`（誘電体）から始まるため、`diffuse`カラーだけを指定したマテリアルは完全な金属面としてではなく、そのカラーとして描画されます。金属にする場合は`metalness="1"`を設定してください。
 
 :::warning[グロスとラフネス]
 
@@ -48,7 +48,7 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 | `height-map` | String | - | ハイトマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `height-map-factor` | Number | `"1"` | ハイトマップによる視差効果の強さ |
 | `id` | String | - | 他のタグがこのマテリアルを参照するために使用する一意の識別子 |
-| `metalness` | Number | `"1"` | 表面の金属度。0（誘電体）から1（金属）まで |
+| `metalness` | Number | `"0"` | 表面の金属度。0（誘電体）から1（金属）まで |
 | `metalness-map` | String | - | メタルネスマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `normal-map` | String | - | ノーマルマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `occlude-direct` | Boolean | `"false"` | アンビエントオクルージョンが直接光も減衰させるかどうか |
