@@ -36,12 +36,6 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
 
 </div>
 
-:::note[ここでの`horizontal`と`vertical`は切り替えスイッチです]
-
-これらは各軸のスクロールを有効にするもので、`"true"`または`"false"`を取ります。[`<pc-scrollbar>`](../pc-scrollbar) や [`<pc-layoutgroup>`](../pc-layoutgroup) の`orientation`属性とは異なります。そちらでは`"horizontal"`と`"vertical"`が受け取る*値*です。
-
-:::
-
 ## 例
 
 ```html
