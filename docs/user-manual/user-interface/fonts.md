@@ -14,11 +14,11 @@ This page covers the two ways to create a Font asset and how to load one in each
 
 ### In the Editor
 
-Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor and it is converted to an MSDF Font asset automatically. You choose which characters to include and tune the result, then click **Process Font** to regenerate. See the [Font asset inspector](/user-manual/editor/assets/inspectors/font) for the full list of options.
+Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor. The atlas is generated in your browser and you get a folder holding the source file, the `.json` descriptor, the `.png` atlas page(s), and the Font asset that references them. You choose which characters to include and tune the result, then click **Regenerate Font Assets**. See the [Font asset inspector](/user-manual/editor/assets/inspectors/font) for the full list of options.
 
 ### Without the Editor — font-tools
 
-If you are building with the Engine, React or Web Components — without the Editor — use [**font-tools**](https://github.com/playcanvas/font-tools) to generate the same `.json` + `.png` asset the Editor produces. There are two ways to use it:
+If you are building with the Engine, React or Web Components — without the Editor — use [**font-tools**](https://github.com/playcanvas/font-tools) to generate the same `.json` + `.png` asset. It is the generator the Editor itself runs, with one difference: font-tools extracts kerning pairs from the source font by default, while the Editor does not, so text set from a font-tools asset is spaced more tightly. There are two ways to use it:
 
 - **Web app** — Open [playcanvas.github.io/font-tools](https://playcanvas.github.io/font-tools/), drag in a TTF or OTF, choose a character set and glyph size, preview the result in live PlayCanvas text, and download the files. Everything runs in your browser — your font is never uploaded.
 - **Command line** — Generate an asset without leaving your terminal:

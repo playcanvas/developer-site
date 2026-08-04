@@ -55,7 +55,7 @@ Assets imported from the [Asset Store](/user-manual/editor/assets/asset-store) d
 | `bundle`                         | Created in the Editor            | `.tar`                           | Bundled assets                     |
 | [`css`](css)                     | `.css`                           | `.css`                           | Stylesheets for HTML               |
 | [`cubemap`](cubemap)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Environment lighting data          |
-| [`font`](font)                   | `.ttf`, `.woff`                  | `.json`, `.png`                  | Font data for rendering text       |
+| [`font`](font)                   | `.ttf`, `.ttc`, `.otf`, `.dfont` | `.json`, `.png`                  | Font data for rendering text       |
 | [`gsplat`](gsplat)               | `.ply`                           | `.ply`                           | 3D Gaussian Splat data             |
 | [`html`](html)                   | `.html`                          | `.html`                          | HTML documents                     |
 | [`json`](json)                   | `.json`                          | `.json`                          | JSON documents                     |
