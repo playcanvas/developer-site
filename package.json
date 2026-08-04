@@ -70,7 +70,7 @@
     "@docusaurus/types": "^3.10.2",
     "gray-matter": "^4.0.3",
     "markdownlint-cli2": "^0.23.2",
-    "marked": "^18.0.7"
+    "marked": "^18.0.9"
   },
   "browserslist": {
     "production": [
