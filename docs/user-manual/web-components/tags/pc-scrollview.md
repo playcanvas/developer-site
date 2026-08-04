@@ -36,15 +36,6 @@ The `<pc-scrollview>` tag is used to define a scroll view component, which lets 
 
 </div>
 
-:::note[`horizontal` and `vertical` are toggles here]
-
-They enable scrolling on an axis, and take `"true"` or `"false"`. This is not the same as the
-`orientation` attribute on [`<pc-scrollbar>`](../pc-scrollbar) and
-[`<pc-layoutgroup>`](../pc-layoutgroup), for which `"horizontal"` and `"vertical"` are the accepted
-*values*.
-
-:::
-
 ## Example
 
 ```html
