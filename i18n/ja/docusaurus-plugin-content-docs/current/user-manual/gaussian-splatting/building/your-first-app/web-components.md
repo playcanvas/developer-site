@@ -12,7 +12,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 次に、[`<pc-app>`](/user-manual/web-components/tags/pc-app)および[`<pc-scene>`](/user-manual/web-components/tags/pc-scene)要素を使用して、アプリケーションの基本構造をHTMLの`body`に追加しましょう。
 
 ```html
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-scene>
     </pc-scene>
 </pc-app>
@@ -22,7 +22,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 
 :::warning パフォーマンス最適化
 
-スプラットのレンダリングパフォーマンスを最適化するため、`<pc-app>`要素の`antialias`と`high-resolution`を無効にしました。これらの設定は、Gaussian splatレンダリングの主要なボトルネックであるフラグメント処理の負荷を軽減するのに役立ちます。詳細については、[パフォーマンス](../performance.md)ガイドを参照してください。
+スプラットのレンダリングパフォーマンスを最適化するため、`<pc-app>`要素の`antialias`を無効にし、`max-pixel-ratio`を`1`（CSS解像度でのレンダリング）に制限しました。これらの設定は、Gaussian splatレンダリングの主要なボトルネックであるフラグメント処理の負荷を軽減するのに役立ちます。詳細については、[パフォーマンス](../performance.md)ガイドを参照してください。
 
 :::
 
@@ -31,7 +31,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 スプラットを表示したり、カメラコントロールを追加したりする前に、アプリが使用するアセットを定義する必要があります。[`<pc-asset>`](/user-manual/web-components/tags/pc-asset)要素を使用して、カメラコントロールスクリプトとスプラットアセットを追加しましょう。
 
 ```html {2-3}
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
@@ -49,7 +49,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 シーンを見るにはカメラが必要です。これは[`<pc-entity>`](/user-manual/web-components/tags/pc-entity)および[`<pc-camera>`](/user-manual/web-components/tags/pc-camera)要素を使用して追加できます。
 
 ```html {5-7}
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
@@ -67,7 +67,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 次に、[`<pc-scripts>`](/user-manual/web-components/tags/pc-scripts)および[`<pc-script>`](/user-manual/web-components/tags/pc-script)要素を使用してカメラコントロールスクリプトを追加し、カメラをインタラクティブにしましょう。
 
 ```html {7-9}
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
@@ -92,7 +92,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 次に、[`<pc-gsplat>`](/user-manual/web-components/tags/pc-gsplat)要素を使用して、猫のオモチャのスプラットをシーンに追加しましょう。
 
 ```html {11-13}
-<pc-app antialias="false" high-resolution="false">
+<pc-app antialias="false" max-pixel-ratio="1">
     <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>

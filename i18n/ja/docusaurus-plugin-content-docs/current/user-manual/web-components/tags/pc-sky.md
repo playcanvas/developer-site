@@ -20,8 +20,8 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 | `asset` | String | - | テクスチャアセットID (`texture`型のアセットを参照する必要があります) |
 | `center` | Vector3 | `"0 0.01 0"` | "X Y Z"値としてのスカイの中心 (0-1の範囲) |
 | `intensity` | Number | `"1"` | スカイの明るさの強度 |
-| `level` | Number | `"0"` | レンダリングに使用するミップマップレベル |
 | `lighting` | Boolean | `"false"` | スカイボックスを光源として使用するかどうか |
+| `mip-level` | Number | `"0"` | スカイボックスのミップレベル。0が最も鮮明です。値を上げるとぼやけたミップが選択され、テクスチャ自体をぼかすことなくスカイボックスを柔らかくできます |
 | `rotation` | Vector3 | `"0 0 0"` | "X Y Z"オイラー角としてのスカイの回転 |
 | `scale` | Vector3 | `"100 100 100"` | "X Y Z"値としてのスカイのスケール |
 | `type` | Enum | `"infinite"` | スカイの種類: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |

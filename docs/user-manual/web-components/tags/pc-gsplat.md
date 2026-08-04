@@ -5,7 +5,7 @@ description: "Reference for the pc-gsplat element: render Gaussian splat assets 
 
 The `<pc-gsplat>` tag is used to define a gsplat component for rendering 3D Gaussian Splats.
 
-When rendering splat-based scenes, it is recommended to set `antialias` and `high-resolution` on your [`<pc-app>`](../pc-app) tag to `false` for best performance.
+When rendering splat-based scenes, it is recommended to set `antialias` to `false` and `max-pixel-ratio` to `1` on your [`<pc-app>`](../pc-app) tag for best performance.
 
 :::note[Usage]
 

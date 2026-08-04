@@ -17,15 +17,22 @@ The `<pc-screen>` tag is used to define a screen component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `blend` | Boolean | `"false"` | Whether to enable alpha blending |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `priority` | Number | `"0"` | Rendering priority (0-255) |
 | `reference-resolution` | Vector2 | `"640 320"` | Reference resolution as "Width Height" values |
 | `resolution` | Vector2 | `"640 320"` | Screen resolution as "Width Height" values |
-| `scale-blend` | Number | `"0.5"` | Scale blending factor (0-1) |
+| `scale-blend` | Number | `"0.5"` | How `resolution` and `reference-resolution` are weighted against each other when `scale-mode` is `"blend"`, from 0 (follow `resolution`) to 1 (follow `reference-resolution`). Ignored when `scale-mode` is `"none"` |
+| `scale-mode` | Enum | `"none"` | How the screen scales its contents: `"none"` \| `"blend"`. `"none"` renders at `resolution` and ignores `reference-resolution`; `"blend"` scales between the two, weighted by `scale-blend`, which is what keeps a UI laid out at one resolution usable at another. Requires `screen-space` |
 | `screen-space` | Boolean | `"false"` | Whether to render in screen space |
 
 </div>
+
+:::note[Scaling only applies to screen-space screens]
+
+A world-space screen does not support scaling, and the engine forces `scale-mode` back to `"none"`
+on one. Set `screen-space` alongside `scale-mode="blend"` for it to have any effect.
+
+:::
 
 ## Example
 

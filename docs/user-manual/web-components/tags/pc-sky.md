@@ -20,8 +20,8 @@ The `<pc-sky>` tag is used to define a sky component.
 | `asset` | String | - | Texture asset ID (must reference a `texture` type asset) |
 | `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range) |
 | `intensity` | Number | `"1"` | Sky brightness intensity |
-| `level` | Number | `"0"` | Mipmap level to use for rendering |
 | `lighting` | Boolean | `"false"` | Whether the skybox is used as a light source |
+| `mip-level` | Number | `"0"` | Mip level of the skybox, where 0 is the sharpest. Raising it selects a blurrier mip, which is how a skybox is softened without blurring the texture itself |
 | `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles |
 | `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values |
 | `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |

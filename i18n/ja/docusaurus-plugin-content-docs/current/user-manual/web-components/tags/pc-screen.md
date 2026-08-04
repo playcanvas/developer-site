@@ -17,15 +17,21 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `blend` | Boolean | `"false"` | アルファブレンディングを有効にするかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `priority` | Number | `"0"` | レンダリング優先度 (0-255) |
 | `reference-resolution` | Vector2 | `"640 320"` | 「幅 高さ」の値としての参照解像度 |
 | `resolution` | Vector2 | `"640 320"` | 「幅 高さ」の値としてのスクリーン解像度 |
-| `scale-blend` | Number | `"0.5"` | スケールブレンディング係数 (0-1) |
+| `scale-blend` | Number | `"0.5"` | `scale-mode`が`"blend"`のときに、`resolution`と`reference-resolution`をどのように重み付けするか。0（`resolution`に従う）から1（`reference-resolution`に従う）まで。`scale-mode`が`"none"`のときは無視されます |
+| `scale-mode` | Enum | `"none"` | スクリーンがコンテンツをスケーリングする方法: `"none"` \| `"blend"`。`"none"`は`resolution`でレンダリングし`reference-resolution`を無視します。`"blend"`は`scale-blend`で重み付けしながら両者の間でスケーリングし、ある解像度で設計したUIを別の解像度でも使えるようにします。`screen-space`が必要です |
 | `screen-space` | Boolean | `"false"` | スクリーン空間でレンダリングするかどうか |
 
 </div>
+
+:::note[スケーリングはスクリーン空間のスクリーンにのみ適用されます]
+
+ワールド空間のスクリーンはスケーリングに対応しておらず、エンジンはその場合`scale-mode`を`"none"`に戻します。効果を得るには、`scale-mode="blend"`とあわせて`screen-space`を設定してください。
+
+:::
 
 ## 例
 
