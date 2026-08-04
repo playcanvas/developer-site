@@ -3885,8 +3885,11 @@ For best browser compatibility, provide both MP3 and OGG versions of audio files
 
 | Format | Extension | Notes |
 |--------|-----------|-------|
-| TrueType | `.ttf` | Converted to bitmap font on import |
-| WOFF | `.woff` | Web font format |
+| TrueType | `.ttf`, `.ttc` | Converted to an MSDF atlas on import |
+| OpenType | `.otf` | Converted to an MSDF atlas on import |
+| Datafork TrueType | `.dfont` | Converted to an MSDF atlas on import |
+
+See [Fonts](/user-manual/user-interface/fonts) for how the atlas is generated and how to load one outside the Editor.
 
 ## Scripts
 
@@ -4731,7 +4734,7 @@ Assets imported from the [Asset Store](/user-manual/editor/assets/asset-store) d
 | `bundle`                         | Created in the Editor            | `.tar`                           | Bundled assets                     |
 | [`css`](css)                     | `.css`                           | `.css`                           | Stylesheets for HTML               |
 | [`cubemap`](cubemap)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | Environment lighting data          |
-| [`font`](font)                   | `.ttf`, `.woff`                  | `.json`, `.png`                  | Font data for rendering text       |
+| [`font`](font)                   | `.ttf`, `.ttc`, `.otf`, `.dfont` | `.json`, `.png`                  | Font data for rendering text       |
 | [`gsplat`](gsplat)               | `.ply`                           | `.ply`                           | 3D Gaussian Splat data             |
 | [`html`](html)                   | `.html`                          | `.html`                          | HTML documents                     |
 | [`json`](json)                   | `.json`                          | `.json`                          | JSON documents                     |
@@ -4982,43 +4985,95 @@ Other tools that can also do this conversion include:
 
 URL: https://developer.playcanvas.com/user-manual/editor/assets/inspectors/font/
 
-A Font asset contains an image with all the characters of the font that the user chose to include, and data related to how each character should be displayed. Font assets are used to render text using an [Element](/user-manual/editor/scenes/components/element/) component of type Text. To render text, add an Element Component to an Entity set its type to Text and drag and drop the Font asset to the Font slot of the Element Component.
+A Font asset renders text through an [Element](/user-manual/editor/scenes/components/element/) component of type Text. Add an Element component to an Entity, set its type to Text, then drag the Font asset onto the component's **Font** slot.
 
-You can create a Font asset by uploading a font file ending in `.ttf`, `.ttc`, `.otf` or `.dfont`. We convert the uploaded font to a multi-channel signed distance field. This makes a font keep its details at various sizes so you only need to upload one font and use the same one for every size you want to display. The technique might work better for some fonts than others.
+Fonts are stored as multi-channel signed distance field (MSDF) atlases rather than fixed-size bitmaps, so one asset stays crisp at every size and you only need one per typeface. The technique suits some typefaces better than others.
 
-:::tip Not using the Editor?
+## Importing a font
 
-Engine, React and Web Components projects can generate the same Font asset without the Editor using [font-tools](/user-manual/user-interface/fonts).
+Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor. The atlas is generated in your browser, and the result is a folder named after the file containing four assets:
+
+[Image: Font import folder]
+
+| Asset               | Type    | What it is                                                                                       |
+| ------------------- | ------- | ------------------------------------------------------------------------------------------------ |
+| `myfont.otf`        | Source  | The font file you uploaded, kept so the atlas can be regenerated. Shown with a dashed outline.    |
+| `myfont.json`       | JSON    | The MSDF descriptor — glyph metrics and atlas layout.                                            |
+| `myfont.png`        | Texture | An atlas page. Larger character sets spill onto `myfont1.png`, `myfont2.png`, and so on.          |
+| `myfont.otf`        | Font    | The Font asset itself. It only references the JSON and textures, so the atlas is never duplicated. |
+
+The source file and the Font asset share a name. The one to assign to a Text element is the Font asset — the one that previews the typeface in its thumbnail.
+
+An import includes printable ASCII (`0x20`–`0x7E`) to begin with. Add characters and regenerate as described below.
+
+:::note
+
+Repointing a reference, or editing the JSON or texture asset it points at, rebuilds the font straight away — text in the viewport and asset thumbnails update without reloading the Editor.
 
 :::
 
-Here are the properties that you can edit for a Font asset in the Editor:
+:::tip Not using the Editor?
 
-[Image: Font Asset]
+Engine, React and Web Components projects can generate the same kind of asset without the Editor using [font-tools](/user-manual/user-interface/fonts), which runs the same generator.
+
+:::
 
 ## Properties
 
-### Intensity
+[Image: Font Asset]
 
-Intensity is used to boost the value read from the signed distance field, 0 is no boost, 1 is max boost. This can be useful if the font does not render with clean smooth edges with the default intensity or if you are rendering the font at small font sizes.
+### Source Files
 
-## Character Presets
+The JSON descriptor and atlas textures the font is built from. Both are ordinary assets you can repoint with the asset pickers, which is useful for supplying an atlas generated elsewhere.
 
-Click on a preset to include its characters to the Font asset. Clicking on a preset will add the characters to the existing selection.
+| Property   | Description                                                                                        |
+| ---------- | -------------------------------------------------------------------------------------------------- |
+| `JSON`     | The MSDF descriptor. Repointing it rebuilds the font.                                              |
+| `Textures` | The atlas pages, **in the order the descriptor indexes them**. Page one first, then page two, and so on. |
 
-## Custom Character Range
+Two things to keep in mind when editing these by hand:
 
-If you want to include a specific range of characters to the Font asset, enter the range in Hex and click the Plus icon to add the range to the character selection.
+- **Page order is meaningful.** The descriptor addresses atlas pages by index, so a list in the wrong order renders the wrong glyphs. The picker appends new entries to the end and cannot reorder them, so if the order is wrong, regenerate the font to restore it.
+- **Don't share the atlas textures.** They are reconfigured for MSDF sampling when the font loads — no sRGB, no mipmaps, linear filtering — so pointing them at a texture used elsewhere will change how that texture renders.
 
-## Font
+The panel warns you when the references cannot produce a usable font: nothing referenced, a JSON asset that is not a valid descriptor, or a page count that disagrees with the descriptor. A font with broken references renders blank rather than failing the load, so this warning is how you find out.
 
-### Characters
+### Character Presets
 
-The characters that should be included in the Font asset. If you only need numbers for example, there is no need to include all the other characters of the Font. This is useful to keep Font assets small. Please note that some characters may not exist in the uploaded font.
+Click a preset to add its characters to the font. Presets add to the current selection rather than replacing it.
 
-## Process Font
+### Custom Character Range
 
-Click on the Process Font button after you make changes to the Font asset in order to generate a new version.
+To include a specific range, enter its start and end in hex and click the **+** button to append it to the character selection.
+
+### Font
+
+| Property     | Description                                                                                                                                                             |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Characters` | The characters generated into the font. If you only need digits, there is no need to include anything else — a smaller set means a smaller atlas. A character must exist in the source font to be included; any that don't are listed after regenerating. |
+| `Invert`     | Inverts the generated atlas. Regenerate after changing it.                                                                                                              |
+
+### Regenerate Font Assets
+
+Click **REGENERATE FONT ASSETS** after changing the character selection or the `Invert` option. Generation runs in your browser and rewrites the existing JSON and texture assets in place, so references stay valid and the font's ID never changes — text elements using it keep working. Extra pages are created if the new character set needs them.
+
+If the new set needs *fewer* pages than before, the surplus texture assets are left in the folder rather than deleted, in case you still want them, and the Editor tells you how many are now unreferenced. Delete them yourself if you don't.
+
+## Converting a font created before Editor-side generation
+
+Fonts imported before the Editor generated its own atlases have no JSON or texture assets, so they show **CONVERT TO REFERENCED FONT** instead. Converting one generates the descriptor and atlas as separate assets and repoints the font at them, keeping its asset ID and every text assignment intact.
+
+Conversion replaces the font's data and file and cannot be undone, so it asks first:
+
+[Image: Convert font confirmation]
+
+Until a font is converted, it keeps the **Intensity** property under a **PROPERTIES** panel:
+
+| Property    | Description                                                                                                                                                                                                       |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Intensity` | Boosts the value read from the signed distance field — 0 is no boost, 1 is maximum. Useful when a font's edges aren't clean at the default, or when rendering at small sizes.                                       |
+
+Fonts with JSON and texture references take their intensity from the descriptor instead, so the panel does not appear for them.
 
 --------------------------------------------------------------------------------
 
@@ -33431,11 +33486,11 @@ This page covers the two ways to create a Font asset and how to load one in each
 
 ### In the Editor
 
-Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor and it is converted to an MSDF Font asset automatically. You choose which characters to include and tune the result, then click **Process Font** to regenerate. See the [Font asset inspector](/user-manual/editor/assets/inspectors/font) for the full list of options.
+Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor. The atlas is generated in your browser and you get a folder holding the source file, the `.json` descriptor, the `.png` atlas page(s), and the Font asset that references them. You choose which characters to include and tune the result, then click **Regenerate Font Assets**. See the [Font asset inspector](/user-manual/editor/assets/inspectors/font) for the full list of options.
 
 ### Without the Editor — font-tools
 
-If you are building with the Engine, React or Web Components — without the Editor — use [**font-tools**](https://github.com/playcanvas/font-tools) to generate the same `.json` + `.png` asset the Editor produces. There are two ways to use it:
+If you are building with the Engine, React or Web Components — without the Editor — use [**font-tools**](https://github.com/playcanvas/font-tools) to generate the same `.json` + `.png` asset. It is the generator the Editor itself runs, with one difference: font-tools extracts kerning pairs from the source font by default, while the Editor does not, so text set from a font-tools asset is spaced more tightly. There are two ways to use it:
 
 - **Web app** — Open [playcanvas.github.io/font-tools](https://playcanvas.github.io/font-tools/), drag in a TTF or OTF, choose a character set and glyph size, preview the result in live PlayCanvas text, and download the files. Everything runs in your browser — your font is never uploaded.
 - **Command line** — Generate an asset without leaving your terminal:
