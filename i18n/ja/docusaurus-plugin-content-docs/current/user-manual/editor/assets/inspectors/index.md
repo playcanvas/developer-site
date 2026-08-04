@@ -55,7 +55,7 @@ description: Asset の Inspector パネルのリファレンス。プリロー�
 | `bundle`                         | エディタで作成                    | `.tar`                           | バンドルされたアセット             |
 | [`css`](css)                     | `.css`                           | `.css`                           | HTML 用スタイルシート              |
 | [`cubemap`](cubemap)             | `.png`, `.jpg`, `.webp`, `.avif` | `.png`, `.jpg`, `.webp`, `.avif` | 環境ライティングデータ             |
-| [`font`](font)                   | `.ttf`, `.woff`                  | `.json`, `.png`                  | テキスト描画用フォントデータ       |
+| [`font`](font)                   | `.ttf`, `.ttc`, `.otf`, `.dfont` | `.json`, `.png`                  | テキスト描画用フォントデータ       |
 | [`gsplat`](gsplat)               | `.ply`                           | `.ply`                           | 3D Gaussian Splat データ          |
 | [`html`](html)                   | `.html`                          | `.html`                          | HTML ドキュメント                  |
 | [`json`](json)                   | `.json`                          | `.json`                          | JSON ドキュメント                  |
