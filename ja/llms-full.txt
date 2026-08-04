@@ -35571,7 +35571,7 @@ The `<pc-material>` tag is used to define a material that can be applied to [`<p
 
 :::
 
-The element wraps the engine's [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) and is metal/rough by default: unlike a bare `StandardMaterial`, the metalness workflow is enabled (`use-metalness` defaults to `"true"`), which is what the `metalness-*` attributes assume and what glTF and other PBR tools mean by PBR.
+The element wraps the engine's [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) and is metal/rough by default: unlike a bare `StandardMaterial`, the metalness workflow is enabled (`use-metalness` defaults to `"true"`), which is what the `metalness-*` attributes assume and what glTF and other PBR tools mean by PBR. As a companion to that default, `metalness` starts at `0` (dielectric) rather than the engine's `1`, so a material with just a `diffuse` color renders as that color rather than as a fully metallic surface. Set `metalness="1"` for a metal.
 
 :::warning[Gloss vs roughness]
 
@@ -35608,7 +35608,7 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `height-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the height map |
 | `height-map-factor` | Number | `"1"` | Strength of the parallax effect driven by the height map |
 | `id` | String | - | Unique identifier used by other tags to reference this material |
-| `metalness` | Number | `"1"` | How metallic the surface is, from 0 (dielectric) to 1 (metal) |
+| `metalness` | Number | `"0"` | How metallic the surface is, from 0 (dielectric) to 1 (metal) |
 | `metalness-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the metalness map |
 | `normal-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the normal map |
 | `occlude-direct` | Boolean | `"false"` | Whether ambient occlusion also attenuates direct lighting |
