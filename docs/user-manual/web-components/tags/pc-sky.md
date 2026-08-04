@@ -28,12 +28,6 @@ The `<pc-sky>` tag is used to define a sky component.
 
 </div>
 
-:::warning[Renamed in 0.11.0]
-
-The `level` attribute is now `mip-level`. The old name is no longer recognized.
-
-:::
-
 ## Example
 
 ```html

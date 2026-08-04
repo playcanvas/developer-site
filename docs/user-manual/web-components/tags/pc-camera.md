@@ -39,14 +39,6 @@ The `<pc-camera>` tag is used to define a camera component.
 
 </div>
 
-:::warning[Renamed in 0.11.0]
-
-The boolean `orthographic` attribute has been replaced by the `projection` enum, matching the engine.
-Replace `orthographic` with `projection="orthographic"`. `ortho-height` is unchanged. The old name is
-no longer recognized.
-
-:::
-
 ## Example
 
 ```html

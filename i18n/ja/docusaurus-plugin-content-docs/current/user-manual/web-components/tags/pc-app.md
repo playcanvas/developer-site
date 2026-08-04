@@ -27,12 +27,6 @@ description: "pc-app要素のリファレンス: PlayCanvasのApplicationを初�
 
 </div>
 
-:::warning[0.11.0での名称変更]
-
-`depth`は`depth-buffer`に、`stencil`は`stencil-buffer`に変更され、Booleanの`high-resolution`は数値の`max-pixel-ratio`になりました。`high-resolution="false"`は`max-pixel-ratio="1"`に置き換えてください。以前の名称は認識されません。
-
-:::
-
 :::note[属性が読み取られるタイミング]
 
 上記の属性のうち`max-pixel-ratio`と`loading-bar`以外は、要素がドキュメントに挿入されてグラフィックスデバイスを作成する際に一度だけ読み取られます。その後に変更しても、要素のプロパティは更新されますが実行中のアプリケーションには影響せず、その旨の警告がログに出力されます。新しい値を適用するには、要素を削除して再挿入してください。

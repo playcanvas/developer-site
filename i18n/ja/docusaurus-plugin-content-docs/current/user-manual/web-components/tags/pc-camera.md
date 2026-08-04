@@ -39,12 +39,6 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 
 </div>
 
-:::warning[0.11.0での名称変更]
-
-Booleanの`orthographic`属性は、エンジンに合わせて`projection`列挙型に置き換えられました。`orthographic`は`projection="orthographic"`に置き換えてください。`ortho-height`は変更ありません。以前の名称は認識されません。
-
-:::
-
 ## 例
 
 ```html

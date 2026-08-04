@@ -27,17 +27,6 @@ The `<pc-screen>` tag is used to define a screen component.
 
 </div>
 
-:::warning[Renamed in 0.11.0]
-
-The `blend` attribute is now `scale-mode`, and takes `"none"` or `"blend"` rather than a boolean.
-Replace `blend` with `scale-mode="blend"`. The old name is no longer recognized.
-
-Its previous description in these docs — "whether to enable alpha blending" — was wrong: the
-attribute has always driven the screen's *scale* mode, never alpha blending. The rename is what makes
-that legible.
-
-:::
-
 :::note[Scaling only applies to screen-space screens]
 
 A world-space screen does not support scaling, and the engine forces `scale-mode` back to `"none"`

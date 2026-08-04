@@ -27,14 +27,6 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 </div>
 
-:::warning[Renamed in 0.11.0]
-
-`depth` is now `depth-buffer`, `stencil` is now `stencil-buffer`, and the boolean `high-resolution`
-has become the numeric `max-pixel-ratio` — replace `high-resolution="false"` with
-`max-pixel-ratio="1"`. The old names are no longer recognized.
-
-:::
-
 :::note[When these are read]
 
 Every attribute above except `max-pixel-ratio` and `loading-bar` is read once, when the element is
