@@ -23,7 +23,7 @@ Enter `My First App` as the project name. The description is optional and can be
 
 With your project created, we can dive right into the Editor - simply hit the EDITOR button:
 
-![Editor Button](/img/user-manual/editor/getting-started/your-first-app/editor-button.png)
+<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/editor-button.png" alt="Editor Button" width="151" />
 
 When you first open the Editor, you should find that a minimal scene has been created for you:
 
@@ -31,7 +31,7 @@ When you first open the Editor, you should find that a minimal scene has been cr
 
 Specifically, you have a camera (to render the scene), a box sitting on a plane and a light (to illuminate the 3D objects).
 
-You can easily change the box to another shape, like a sphere. To do this, select the Box entity in the HIERARCHY panel. In the Inspector panel on the right, change the Type property of the MODEL component from Box to Sphere. To be complete, rename the Entity from Box to Sphere too!
+You can easily change the box to another shape, like a sphere. To do this, select the Box entity in the HIERARCHY panel. In the Inspector panel on the right, change the Type property of the RENDER component from Box to Sphere. To be complete, rename the Entity from Box to Sphere too!
 
 ![Box To Sphere](/img/user-manual/editor/getting-started/your-first-app/box-to-sphere.png)
 
@@ -41,11 +41,11 @@ But our sphere is a slightly boring gray color. Let's color it red! To do this, 
 
 Select the material and its properties will appear in the Inspector panel to the right. Expand the DIFFUSE section and click on the color swatch to edit the color to red:
 
-![Red Material](/img/user-manual/editor/getting-started/your-first-app/red-material.png)
+<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/red-material.png" alt="Red Material" width="320" />
 
 Next, we must assign the material to the sphere. You can do this with a simple drag and drop operation:
 
-![Drag And Drop Material](/img/user-manual/editor/getting-started/your-first-app/drag-and-drop-material.gif)
+![Drag And Drop Material](/img/user-manual/editor/getting-started/your-first-app/drag-and-drop-material.webp)
 
 Now let's set up the Camera entity. Select it in the HIERARCHY panel:
 
@@ -53,7 +53,7 @@ Now let's set up the Camera entity. Select it in the HIERARCHY panel:
 
 Notice the little preview window that has appeared for the selected camera. Let's edit the camera's position and rotation to view the cube from directly in front. Edit the camera's position and rotation with the values below:
 
-![Camera Transform](/img/user-manual/editor/getting-started/your-first-app/camera-transform.png)
+<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/camera-transform.png" alt="Camera Transform" width="320" />
 
 Next, let's make the sphere controllable with the arrow keys on the keyboard. To do this, we must create a script. Right click the Sphere entity and select `Add Component -> Script`.
 
@@ -61,13 +61,13 @@ Next, let's make the sphere controllable with the arrow keys on the keyboard. To
 
 A script component will appear in the Inspector on the Sphere entity. To create a script asset on the script component, enter the name `movement.js`.
 
-![Create Script Asset](/img/user-manual/editor/getting-started/your-first-app/create-script-asset.png)
+<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/create-script-asset.png" alt="Create Script Asset" width="320" />
 
 Hit Enter and your script will be created.
 
-![Edit Script](/img/user-manual/editor/getting-started/your-first-app/edit-script.png)
+<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/edit-script.png" alt="Edit Script" width="320" />
 
-Now hit EDIT to open the Code Editor. You'll see the following skeleton script:
+Now click the edit (pencil) icon on the movement script to open the Code Editor. You'll see the following skeleton script:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -196,33 +196,33 @@ When the code is updated, save the script using CTRL+S (or CMD+S on Mac) and clo
 
 You are now ready to preview your app by opening the Launch page. To do this, hit the Launch button in the top right of the Editor's 3D view.
 
-![Launch Button](/img/user-manual/editor/getting-started/your-first-app/launch-button.png)
+<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/launch-button.png" alt="Launch Button" width="312" />
 
 The Launch page opens in a new tab. When it opens, try pressing the 4 arrow keys to move the sphere around.
 
-![Launch Page](/img/user-manual/editor/getting-started/your-first-app/launch-page.gif)
+![Launch Page](/img/user-manual/editor/getting-started/your-first-app/launch-page.webp)
 
 :::tip
 
 There is a 'Live Link' between the Editor and the Launch page. Any change you make in the Editor will be reflected in the Launch page in real time! It can be convenient to place the Launch page side by side with the Editor while you are working.
 
-![Editor Live Link](/img/user-manual/editor/getting-started/your-first-app/live-link.gif)
+![Editor Live Link](/img/user-manual/editor/getting-started/your-first-app/live-link.webp)
 
 :::
 
 The final step is to publish your app so you can share it with others. To do this, click on the <span class="pc-icon">&#57911;</span> button in the left hand side toolbar.
 
-![Publish Button](/img/user-manual/editor/getting-started/your-first-app/publish-button.png)
+<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/publish-button.png" alt="Publish Button" width="96" />
 
 This will open up the Publishing dialog. Here you can publish a build (or even download a build for self-hosting).
 
 ![Publish](/img/user-manual/editor/getting-started/your-first-app/publish-dialog.png)
 
-Click the PUBLISH TO PLAYCANVAS option. You can then configure your published app.
+Click the Publish button. You can then configure your published app.
 
 ![Publish New Build](/img/user-manual/editor/getting-started/your-first-app/publish-options.png)
 
-Leave the defaults, scroll down and select PUBLISH NOW.
+Leave the defaults and select Publish.
 
 ![Builds](/img/user-manual/editor/getting-started/your-first-app/builds.png)
 
