@@ -23,7 +23,7 @@ Enter `My First App` as the project name. The description is optional and can be
 
 With your project created, we can dive right into the Editor - simply hit the EDITOR button:
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/editor-button.png" alt="Editor Button" width="151" />
+![Editor Button](/img/user-manual/editor/getting-started/your-first-app/editor-button.png)
 
 When you first open the Editor, you should find that a minimal scene has been created for you:
 
@@ -41,7 +41,7 @@ But our sphere is a slightly boring gray color. Let's color it red! To do this, 
 
 Select the material and its properties will appear in the Inspector panel to the right. Expand the DIFFUSE section and click on the color swatch to edit the color to red:
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/red-material.png" alt="Red Material" width="320" />
+![Red Material](/img/user-manual/editor/getting-started/your-first-app/red-material.png)
 
 Next, we must assign the material to the sphere. You can do this with a simple drag and drop operation:
 
@@ -53,7 +53,7 @@ Now let's set up the Camera entity. Select it in the HIERARCHY panel:
 
 Notice the little preview window that has appeared for the selected camera. Let's edit the camera's position and rotation to view the cube from directly in front. Edit the camera's position and rotation with the values below:
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/camera-transform.png" alt="Camera Transform" width="320" />
+![Camera Transform](/img/user-manual/editor/getting-started/your-first-app/camera-transform.png)
 
 Next, let's make the sphere controllable with the arrow keys on the keyboard. To do this, we must create a script. Right click the Sphere entity and select `Add Component -> Script`.
 
@@ -61,11 +61,11 @@ Next, let's make the sphere controllable with the arrow keys on the keyboard. To
 
 A script component will appear in the Inspector on the Sphere entity. To create a script asset on the script component, enter the name `movement.js`.
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/create-script-asset.png" alt="Create Script Asset" width="320" />
+![Create Script Asset](/img/user-manual/editor/getting-started/your-first-app/create-script-asset.png)
 
 Hit Enter and your script will be created.
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/edit-script.png" alt="Edit Script" width="320" />
+![Edit Script](/img/user-manual/editor/getting-started/your-first-app/edit-script.png)
 
 Now click the edit (pencil) icon on the movement script to open the Code Editor. You'll see the following skeleton script:
 
@@ -196,7 +196,7 @@ When the code is updated, save the script using CTRL+S (or CMD+S on Mac) and clo
 
 You are now ready to preview your app by opening the Launch page. To do this, hit the Launch button in the top right of the Editor's 3D view.
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/launch-button.png" alt="Launch Button" width="312" />
+![Launch Button](/img/user-manual/editor/getting-started/your-first-app/launch-button.png)
 
 The Launch page opens in a new tab. When it opens, try pressing the 4 arrow keys to move the sphere around.
 
@@ -212,7 +212,7 @@ There is a 'Live Link' between the Editor and the Launch page. Any change you ma
 
 The final step is to publish your app so you can share it with others. To do this, click on the <span class="pc-icon">&#57911;</span> button in the left hand side toolbar.
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/publish-button.png" alt="Publish Button" width="96" />
+![Publish Button](/img/user-manual/editor/getting-started/your-first-app/publish-button.png)
 
 This will open up the Publishing dialog. Here you can publish a build (or even download a build for self-hosting).
 

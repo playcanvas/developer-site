@@ -23,7 +23,7 @@ NEWボタンを選択して新しいプロジェクトを作成します。
 
 プロジェクトが作成されたら、すぐにエディタに入りましょう。EDITORボタンをクリックします。
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/editor-button.png" alt="Editor Button" width="151" />
+![Editor Button](/img/user-manual/editor/getting-started/your-first-app/editor-button.png)
 
 エディタを初めて開くと、最小限のシーンが作成されているはずです。
 
@@ -41,7 +41,7 @@ NEWボタンを選択して新しいプロジェクトを作成します。
 
 マテリアルを選択すると、そのプロパティが右のインスペクターパネルに表示されます。DIFFUSEセクションを展開し、色見本をクリックして色を赤に編集します。
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/red-material.png" alt="Red Material" width="320" />
+![Red Material](/img/user-manual/editor/getting-started/your-first-app/red-material.png)
 
 次に、マテリアルをスフィアに割り当てる必要があります。これはシンプルなドラッグアンドドロップ操作で行うことができます。
 
@@ -53,7 +53,7 @@ NEWボタンを選択して新しいプロジェクトを作成します。
 
 選択したカメラのために小さなプレビューウィンドウが表示されていることに注目してください。カメラの位置と回転を編集して、直接前からキューブを見るようにしましょう。以下の値でカメラの位置と回転を編集します。
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/camera-transform.png" alt="Camera Transform" width="320" />
+![Camera Transform](/img/user-manual/editor/getting-started/your-first-app/camera-transform.png)
 
 次に、スフィアをキーボードの矢印キーで操作できるようにしましょう。これを行うには、スクリプトを作成する必要があります。Sphereエンティティを右クリックし、`Add Component -> Script`を選択します。
 
@@ -61,11 +61,11 @@ NEWボタンを選択して新しいプロジェクトを作成します。
 
 ScriptコンポーネントがSphereエンティティのインスペクター (Inspector) に表示されます。Scriptコンポーネント上にスクリプトアセットを作成するには、`movement.js`という名前を入力します。
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/create-script-asset.png" alt="Create Script Asset" width="320" />
+![Create Script Asset](/img/user-manual/editor/getting-started/your-first-app/create-script-asset.png)
 
 Enterを押すと、スクリプトが作成されます。
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/edit-script.png" alt="Edit Script" width="320" />
+![Edit Script](/img/user-manual/editor/getting-started/your-first-app/edit-script.png)
 
 次に、EDITをクリックしてコードエディターを開きます。以下のデフォルトのスクリプトが表示されます。
 
@@ -123,7 +123,7 @@ Movement.prototype.update = function(dt) {
 
 これで、Launchページを開いてアプリのプレビューが可能になりました。これを行うには、エディタの3Dビューの右上にあるLaunchボタンをクリックします。
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/launch-button.png" alt="Launch Button" width="312" />
+![Launch Button](/img/user-manual/editor/getting-started/your-first-app/launch-button.png)
 
 Launchページは新しいタブで開きます。開いたら、4つの矢印キーを押してスフィアを動かしてみてください。
 
@@ -139,7 +139,7 @@ Launchページは新しいタブで開きます。開いたら、4つの矢印�
 
 最後のステップは、他の人と共有できるようにアプリを公開することです。これを行うには、左側のツールバーにある <span class="pc-icon">&#57911; </span>ボタンをクリックします。
 
-<img loading="lazy" src="/img/user-manual/editor/getting-started/your-first-app/publish-button.png" alt="Publish Button" width="96" />
+![Publish Button](/img/user-manual/editor/getting-started/your-first-app/publish-button.png)
 
 これにより、公開ダイアログが開きます。ここでビルドを公開することができます（または、セルフホスティング用にビルドをダウンロードすることもできます）。
 
