@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 484
-Generated: 2026-08-04
+Generated: 2026-08-05
 
 ================================================================================
 
@@ -6260,7 +6260,7 @@ When you first open the Editor, you should find that a minimal scene has been cr
 
 Specifically, you have a camera (to render the scene), a box sitting on a plane and a light (to illuminate the 3D objects).
 
-You can easily change the box to another shape, like a sphere. To do this, select the Box entity in the HIERARCHY panel. In the Inspector panel on the right, change the Type property of the MODEL component from Box to Sphere. To be complete, rename the Entity from Box to Sphere too!
+You can easily change the box to another shape, like a sphere. To do this, select the Box entity in the HIERARCHY panel. In the Inspector panel on the right, change the Type property of the RENDER component from Box to Sphere. To be complete, rename the Entity from Box to Sphere too!
 
 [Image: Box To Sphere]
 
@@ -6296,7 +6296,7 @@ Hit Enter and your script will be created.
 
 [Image: Edit Script]
 
-Now hit EDIT to open the Code Editor. You'll see the following skeleton script:
+Now click the edit (pencil) icon on the movement script to open the Code Editor. You'll see the following skeleton script:
 
 To make the sphere controllable, let's add some code to the `update` function. Copy and paste the code below:
 
@@ -6326,11 +6326,11 @@ This will open up the Publishing dialog. Here you can publish a build (or even d
 
 [Image: Publish]
 
-Click the PUBLISH TO PLAYCANVAS option. You can then configure your published app.
+Click the Publish button. You can then configure your published app.
 
 [Image: Publish New Build]
 
-Leave the defaults, scroll down and select PUBLISH NOW.
+Leave the defaults and select Publish.
 
 [Image: Builds]
 
@@ -6346,13 +6346,13 @@ URL: https://developer.playcanvas.com/user-manual/editor/interface/
 
 [Image: Editor Interface]
 
-This is the main interface to the PlayCanvas Editor. You can see labeled the main areas:
+This is the main interface to the PlayCanvas Editor. The numbered areas above are:
 
-* [**Toolbar**](toolbar.md) Commonly used commands are available on the toolbar for quick access.
-* [**Hierarchy**](hierarchy.md) A hierarchical view of the Entities that make up the open Scene. Use this to select, delete and re-parent Entities.
-* [**Inspector**](inspector.md) Detailed properties of the selected [Entity](/user-manual/glossary#entity), [Asset](/user-manual/glossary#asset) or [Component](/user-manual/glossary#component).
-* [**Viewport**](viewport.md) A 3D view onto your scene, use this view to select, position and orientate Entities.
-* [**Assets**](assets.md) A view of all the Assets in the current Project. You can search for assets by name, filter by type and also drag and drop assets to various slots or in the Design View.
+1. [**Toolbar**](toolbar.md) Commonly used commands are available on the toolbar for quick access.
+2. [**Hierarchy**](hierarchy.md) A hierarchical view of the Entities that make up the open Scene. Use this to select, delete and re-parent Entities.
+3. [**Viewport**](viewport.md) A 3D view onto your scene, use this view to select, position and orientate Entities.
+4. [**Inspector**](inspector.md) Detailed properties of the selected [Entity](/user-manual/glossary#entity), [Asset](/user-manual/glossary#asset) or [Component](/user-manual/glossary#component).
+5. [**Assets**](assets.md) A view of all the Assets in the current Project. You can search for assets by name, filter by type and also drag and drop assets to various slots or in the Design View.
 
 --------------------------------------------------------------------------------
 
