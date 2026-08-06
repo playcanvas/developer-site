@@ -61,6 +61,11 @@ output.color = vec4f(vec3f(result), 1.0);
   - **プリプロセッサ定義:** `CAPS_PRIMITIVE_INDEX`
   - **シェーダー段階:** フラグメント
   - **説明:** 簡略 API では、対応端末向けに `FragmentInput` の `primitiveIndex` およびグローバル `pcPrimitiveIndex`
+- **`device.supportsDualSourceBlending`**
+  - **エンジンが注入:** ブレンドステートが 2 つ目のソースを参照する係数を使用するフラグメントシェーダーバリアントに `enable dual_source_blending;`
+  - **プリプロセッサ定義:** `CAPS_DUAL_SOURCE_BLENDING`
+  - **シェーダー段階:** フラグメント
+  - **説明:** ブレンド係数として使用できる 2 つ目のフラグメント出力を提供します。詳細は [デュアルソースブレンディング](/user-manual/graphics/advanced-rendering/dual-source-blending) を参照してください
 - **`device.supportsSubgroups`**
   - **エンジンが注入:** `enable subgroups;`
   - **プリプロセッサ定義:** `CAPS_SUBGROUPS`

@@ -52,3 +52,9 @@ varying vec2 uv0;
 `in`/`out` 構文 (GLSL 3.3+ で導入) はサポートされていません。
 
 :::
+
+### デュアルソースフラグメント出力
+
+マテリアルのブレンドステートが 2 つ目のソースを参照する係数を使用する場合、1 つ目のカラーを `gl_FragColor` に、2 つ目のブレンド値を `pcFragColorSecondary` に書き込みます。WebGL 2 では、エンジンが `GL_EXT_blend_func_extended` を有効にし、両方の出力を自動的に宣言します。
+
+ケイパビリティの検出、クロスプラットフォームのシェーダーコード、BlendState の設定については、[デュアルソースブレンディング](/user-manual/graphics/advanced-rendering/dual-source-blending) を参照してください。
