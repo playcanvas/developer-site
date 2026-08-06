@@ -1,6 +1,6 @@
 ---
 title: シーンを構築する
-description: pc-appとpc-sceneでライトの当たったシーンを実際に作り、カメラ、ライト、メッシュを追加し、要素の階層を理解するハンズオンチュートリアルです。
+description: pc-appとpc-sceneでライトの当たったシーンを実際に作り、カメラ、メッシュ、ライトを追加し、要素の階層を理解するハンズオンチュートリアルです。
 ---
 
 PlayCanvas Web Components を使用して、シンプルな3Dシーンをステップバイステップで構築しましょう。最後まで進めると、青空の下、地面の上に置かれた色付きの球体がシェーディング付きで表示され、各行が何をしているのかも理解できるようになります。
@@ -46,9 +46,9 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 灰色の何もない空間ですが、レンダラーが動いている証拠です。
 
-## ライトを追加する
+## オブジェクトを追加する
 
-[`<pc-light>`](tags/pc-light.md) 要素を使用して、シーンを照らすための指向性ライトを追加しましょう。
+シーンには映すものが必要です。[`<pc-render>`](tags/pc-render.md) 要素を使用して、球体を追加しましょう。
 
 ```html {6-8}
 <pc-app>
@@ -56,20 +56,22 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
         <pc-entity name="camera" position="0 0 5">
             <pc-camera></pc-camera>
         </pc-entity>
-        <pc-entity name="light" rotation="45 45 0">
-            <pc-light type="directional"></pc-light>
+        <pc-entity name="sphere">
+            <pc-render type="sphere"></pc-render>
         </pc-entity>
     </pc-scene>
 </pc-app>
 ```
 
-ライトは角度を付けて回転されており、オブジェクトにより興味深いシェーディングが作成されます。ただし、画面上はまだ何も変わりません。シーンにはまだ、ライトに照らされるものが何もないからです。
+画面の中央に暗い円が現れます。球体は確かにそこにあるのですが、シーンにライトがないため表面には光がまったく当たらず、黒いシルエットとしてレンダリングされています。
 
-## オブジェクトを追加する
+![灰色の背景に黒いシルエットとして表示される、ライトのない球体](/img/user-manual/web-components/building-a-scene/unlit-sphere.jpg)
 
-[`<pc-render>`](tags/pc-render.md) 要素を使用して、シーンに球体を追加しましょう。
+## ライトを追加する
 
-```html {9-11}
+これを解決しましょう。[`<pc-light>`](tags/pc-light.md) 要素を使用して、カメラと球体の間に指向性ライトを追加します。
+
+```html {6-8}
 <pc-app>
     <pc-scene>
         <pc-entity name="camera" position="0 0 5">
@@ -85,7 +87,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 </pc-app>
 ```
 
-これで、画面の中央に白い球体が表示されているはずです。
+ライトは角度を付けて回転させてあり、正面から照らすよりも興味深いシェーディングが生まれます。球体が一気に生き生きとしました。
 
 ![灰色の背景に浮かぶ、ライトが当たった白い球体](/img/user-manual/web-components/building-a-scene/white-sphere.jpg)
 

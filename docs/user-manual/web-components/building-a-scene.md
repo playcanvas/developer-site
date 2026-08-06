@@ -1,6 +1,6 @@
 ---
 title: Building a Scene
-description: Hands-on tutorial building a lit scene with pc-app and pc-scene, adding a camera, light, mesh, and understanding the element hierarchy.
+description: Hands-on tutorial building a lit scene with pc-app and pc-scene, adding a camera, mesh, light, and understanding the element hierarchy.
 ---
 
 Let's build a simple 3D scene step by step using PlayCanvas Web Components. By the end, you'll have a shaded, colored sphere resting on the ground under a blue sky — and you'll know what every line does.
@@ -46,9 +46,9 @@ We've added a camera entity positioned 5 units down the positive Z axis. By defa
 
 A grey void — but proof that the renderer is up and running.
 
-## Adding a Light
+## Adding an Object
 
-Let's add a directional light to illuminate our scene using the [`<pc-light>`](tags/pc-light.md) element.
+The scene needs something to look at. Let's add a sphere using the [`<pc-render>`](tags/pc-render.md) element.
 
 ```html {6-8}
 <pc-app>
@@ -56,20 +56,22 @@ Let's add a directional light to illuminate our scene using the [`<pc-light>`](t
         <pc-entity name="camera" position="0 0 5">
             <pc-camera></pc-camera>
         </pc-entity>
-        <pc-entity name="light" rotation="45 45 0">
-            <pc-light type="directional"></pc-light>
+        <pc-entity name="sphere">
+            <pc-render type="sphere"></pc-render>
         </pc-entity>
     </pc-scene>
 </pc-app>
 ```
 
-The light is rotated to shine at an angle, which will create more interesting shading on our objects. Nothing changes on screen just yet, though — there's still nothing in the scene for the light to illuminate.
+A dark disc appears in the center of the screen. The sphere is definitely there — but the scene has no lights, so nothing illuminates its surface and it renders as a black silhouette:
 
-## Adding an Object
+![An unlit sphere rendering as a black silhouette on a grey background](/img/user-manual/web-components/building-a-scene/unlit-sphere.jpg)
 
-Now let's add a sphere shape to our scene using the [`<pc-render>`](tags/pc-render.md) element.
+## Adding a Light
 
-```html {9-11}
+Let's fix that with a directional light, added between the camera and the sphere using the [`<pc-light>`](tags/pc-light.md) element.
+
+```html {6-8}
 <pc-app>
     <pc-scene>
         <pc-entity name="camera" position="0 0 5">
@@ -85,7 +87,7 @@ Now let's add a sphere shape to our scene using the [`<pc-render>`](tags/pc-rend
 </pc-app>
 ```
 
-You should now see a white sphere in the center of your screen:
+The light is rotated to shine down at an angle, which creates more interesting shading than lighting the sphere head-on. The sphere springs to life:
 
 ![A white lit sphere on a grey background](/img/user-manual/web-components/building-a-scene/white-sphere.jpg)
 

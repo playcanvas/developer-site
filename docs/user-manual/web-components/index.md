@@ -77,7 +77,7 @@ The Web Components are developed in the open [on GitHub](https://github.com/play
 Start with the Getting Started guide — you'll have a scene rendering in minutes.
 
 - [Getting Started](getting-started.md) — load the library from a CDN or npm and render your first page.
-- [Building a Scene](building-a-scene.md) — a step-by-step tutorial: camera, light, meshes and materials.
+- [Building a Scene](building-a-scene.md) — a step-by-step tutorial: camera, meshes, lights and materials.
 - [Attributes](attributes.md) — the value conventions shared by every tag.
 - [Adding Behavior with Scripts](scripting.md) — attach engine scripts to entities for motion and interactivity.
 - [Programmatic Access](programmatic-access.md) — drive the running app from JavaScript with `whenReady`.
