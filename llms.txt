@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
 Total Documents: 484
-Generated: 2026-08-05
+Generated: 2026-08-06
 
 ## Instructions for Large Language Models
 
@@ -416,8 +416,8 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 ### Web Components
 - [PlayCanvas Web Components](https://developer.playcanvas.com/user-manual/web-components/): Declarative 3D with custom HTML elements wrapping the PlayCanvas engine: concepts, tag overview, and links to tutorials and reference.
 - [Attributes](https://developer.playcanvas.com/user-manual/web-components/attributes/): How PlayCanvas Web Component attributes parse values: shared defaults contract, booleans, numbers, enums, vectors, colors, and entity references.
-- [Building a Scene](https://developer.playcanvas.com/user-manual/web-components/building-a-scene/): Hands-on tutorial building a lit scene with pc-app and pc-scene, adding a camera, light, mesh, and understanding the element hierarchy.
-- [Getting Started](https://developer.playcanvas.com/user-manual/web-components/getting-started/): Install PlayCanvas Web Components from npm, configure import maps for the engine, register elements, and embed a minimal HTML example.
+- [Building a Scene](https://developer.playcanvas.com/user-manual/web-components/building-a-scene/): Hands-on tutorial building a lit scene with pc-app and pc-scene, adding a camera, mesh, light, and understanding the element hierarchy.
+- [Getting Started](https://developer.playcanvas.com/user-manual/web-components/getting-started/): Load PlayCanvas Web Components from a CDN or install from npm, set up the import map, and render your first 3D scene in the browser.
 - [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access/): Drive the engine from JavaScript: await element initialization with whenReady, access engine objects like AppBase and Entity, and target specific apps.
 - [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting/): Attach PlayCanvas Script classes to entities with pc-module and pc-script tags, load ES modules, and wire behaviors into Web Components.
 - [Tag Reference](https://developer.playcanvas.com/user-manual/web-components/tags/): Alphabetical index of PlayCanvas Web Component tags with short summaries linking to full attribute and usage documentation for each element.
