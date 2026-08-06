@@ -91,7 +91,7 @@ overlay.camera.clearDepthBuffer = true;  // メインビューと深度テスト
 
 ## レンダーターゲット {#render-targets}
 
-カメラは画面の代わりに、`renderTarget` プロパティに [RenderTarget](https://api.playcanvas.com/engine/classes/RenderTarget.html) を割り当てることで、オフスクリーンテクスチャにレンダリングできます。生成されたテクスチャはマテリアルに適用して、ゲーム内のスクリーン、鏡、ポータルなどに使ったり、さらに加工したりできます。エンジンのレンダーテクスチャのサンプルを参照してください:
+カメラは画面の代わりに、`renderTarget` プロパティに [RenderTarget](https://api.playcanvas.com/engine/classes/RenderTarget.html) を割り当てることで、オフスクリーンテクスチャにレンダリングできます。生成されたテクスチャはマテリアルに適用して、ゲーム内のスクリーン、鏡、ポータルなどに使ったり、さらに加工したりできます。詳しくは [レンダーターゲット](/user-manual/graphics/advanced-rendering/render-targets/) のページを参照してください。エンジンのレンダーテクスチャのサンプルも参照してください:
 
 <EngineExample id="graphics/render-to-texture" title="Render to Texture" />
 
