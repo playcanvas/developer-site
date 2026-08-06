@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 484
+Total Documents: 485
 Generated: 2026-08-06
 
 ================================================================================
@@ -34230,6 +34230,8 @@ The *Default* column in each tag's attribute table shows the value that applies 
 
 Invalid values never reach the engine. Instead, you get a console warning naming the attribute and the expected format — keep the console open while authoring and typos surface immediately.
 
+[`<pc-node>`](tags/pc-node.md) is the one exception to the middle row. Its attributes are overrides against a node inside a loaded model, so an absent attribute restores the value that model was authored with rather than the engine default.
+
 ## Booleans
 
 A boolean attribute is `true` when present with any value other than `"false"` — including the empty value of a bare attribute — and `false` when set to `"false"`:
@@ -34622,7 +34624,7 @@ Then import it and await the element you need:
 
 :::note[Misplaced Elements]
 
-The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. Either way, a misplaced element logs a console warning naming the parent it requires.
+The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`, or a [`<pc-node>`](./tags/pc-node.md) whose `name` matches no node in its model. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. Either way, the element logs a console warning saying what went wrong.
 
 :::
 
@@ -34644,12 +34646,14 @@ Each element exposes its engine counterpart through a property:
 | --- | --- | --- |
 | [`<pc-app>`](./tags/pc-app.md) | `app` | [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) |
 | [`<pc-entity>`](./tags/pc-entity.md) | `entity` | [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
+| [`<pc-model>`](./tags/pc-model.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) rooting the instantiated hierarchy |
+| [`<pc-node>`](./tags/pc-node.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) it bound inside that hierarchy |
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
 | Component tags (`<pc-camera>`, `<pc-light>`, ...) | `component` | The corresponding [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
-These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. The exception is [`<pc-model>`](./tags/pc-model.md), which currently becomes ready before its GLB has loaded — its `entity` remains `null` until the model instantiates.
+These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. [`<pc-model>`](./tags/pc-model.md) is the one case where readiness does not promise a non-null `entity`: a load that failed also settles readiness, so check `entity` (or listen for the element's `error` event) if the asset might not arrive.
 
-Every asynchronously initializing element also exposes `closestApp` and `closestEntity` getters, returning its nearest `<pc-app>` or `<pc-entity>` *ancestor* element (or `null` if there is none) — handy when you hold a component element and need its owning entity or app.
+Every asynchronously initializing element also exposes `closestApp` and `closestEntity` getters, returning its nearest `<pc-app>` *ancestor* element, or its nearest entity-fronting ancestor — a `<pc-entity>` or a `<pc-node>` — or `null` if there is none. Handy when you hold a component element and need its owning entity or app.
 
 ## Targeting a Specific App
 
@@ -34697,10 +34701,10 @@ const material = MaterialElement.get('gold'); // the material declared by <pc-ma
 
 `AssetElement.get` returns the registered [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html), which may not have finished loading yet — check `asset.loaded`, or subscribe to its `load` event, before using `asset.resource`.
 
-[`<pc-module>`](./tags/pc-module.md) does not initialize asynchronously, so it cannot be awaited with `whenReady`. Instead, it exposes `getLoadPromise()`, which resolves once the WebAssembly module is ready:
+[`<pc-module>`](./tags/pc-module.md) does not initialize asynchronously and has no public JavaScript API of its own. It needs none: `<pc-app>` waits for every `<pc-module>` declared beneath it before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
 
 ```javascript
-await document.querySelector('pc-module[name="Ammo"]').getLoadPromise();
+const { app } = await whenReady('pc-app'); // every <pc-module> has loaded by now
 ```
 
 ## TypeScript
@@ -34915,7 +34919,7 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 
 The attributes of every tag share the same value conventions: an absent (or removed) attribute means the engine default applies, and an invalid value logs a console warning and falls back to the default. See [Attributes](../attributes.md) for how booleans, numbers, enums, vectors and colors are written.
 
-Tags also have placement rules — each tag's page notes the parent it requires. A misplaced element logs a console warning naming the required parent, so keep the console open while authoring.
+Tags also have placement rules — each tag's page notes the parent it requires. A misplaced element logs a console warning naming the required parent, so keep the console open while authoring. The component tags accept one further parent beyond the [`<pc-entity>`](pc-entity) their pages name: a [`<pc-node>`](pc-node), which fronts a node inside a model loaded by [`<pc-model>`](pc-model) and takes the same component children an entity does.
 
 | Tag | Description |
 | --- | --- |
@@ -34934,6 +34938,7 @@ Tags also have placement rules — each tag's page notes the parent it requires.
 | [`<pc-material>`](pc-material) | Defines a material that render components can reference. |
 | [`<pc-model>`](pc-model) | Defines an entity that instantiates a 3D model from a GLB file. |
 | [`<pc-module>`](pc-module) | Defines a WebAssembly module. |
+| [`<pc-node>`](pc-node) | Binds to a node inside a loaded model to override it. |
 | [`<pc-particles>`](pc-particles) | Defines a particle system component. |
 | [`<pc-render>`](pc-render) | Defines a render component. |
 | [`<pc-rigidbody>`](pc-rigidbody) | Defines a rigidbody component. |
@@ -35028,17 +35033,48 @@ The `<pc-asset>` tag is used to define an asset.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
+| `address-u` | Enum | `"repeat"` | For `texture` and `textureatlas` assets: how coordinates outside 0 to 1 sample horizontally — `"repeat"` \| `"clamp"` \| `"mirror"` |
+| `address-v` | Enum | `"repeat"` | For `texture` and `textureatlas` assets: how coordinates outside 0 to 1 sample vertically — `"repeat"` \| `"clamp"` \| `"mirror"` |
+| `anisotropy` | Number | `"1"` | For `texture` and `textureatlas` assets: maximum anisotropic filtering level, which improves quality at oblique viewing angles |
 | `atlas` | String | - | For `sprite` assets: the `id` of the `textureatlas` `<pc-asset>` this sprite reads from. The atlas must be declared before the sprite |
 | `data` | String | - | Inline JSON asset data. Used by texture atlases (frame definitions) and sprites |
+| `flip-y` | Boolean | `"false"` | For `texture` and `textureatlas` assets: whether the image data is flipped vertically at upload |
 | `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
 | `lazy` | Boolean | `"false"` | Whether to skip preloading. A lazy asset is loaded on demand by [`<pc-model>`](../pc-model), [`<pc-particles>`](../pc-particles), [`<pc-sky>`](../pc-sky) and [`<pc-material>`](../pc-material) texture maps — other elements do not trigger loading |
+| `mag-filter` | Enum | `"linear"` | For `texture` and `textureatlas` assets: the filter used when the texture is displayed larger than its source size — `"nearest"` \| `"linear"` |
+| `min-filter` | Enum | `"linear-mip-linear"` | For `texture` and `textureatlas` assets: the filter used when the texture is displayed smaller than its source size — `"nearest"` \| `"linear"` \| `"nearest-mip-nearest"` \| `"linear-mip-nearest"` \| `"nearest-mip-linear"` \| `"linear-mip-linear"` |
+| `mipmaps` | Boolean | `"true"` | For `texture` and `textureatlas` assets: whether the texture generates and uses mipmaps |
 | `pixels-per-unit` | Number | `"1"` | For `sprite` assets: number of pixels per world unit |
 | `render-mode` | Enum | `"simple"` | For `sprite` assets: `"simple"` \| `"sliced"` \| `"tiled"`. Use `"sliced"` for 9-slice panels |
 | `src` | String | - | Path to the asset file |
+| `srgb` | Boolean | `"false"` | For `texture` and `textureatlas` assets: whether the texture holds sRGB (gamma-encoded) color data, enabling hardware gamma decode |
 | `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"sprite"` \| `"text"` \| `"texture"` \| `"textureatlas"` |
 
 </div>
+
+:::note[When these are read]
+
+`lazy` and the texture options are live: changing one updates the asset, and removing one restores the engine default shown above. Every other attribute is read once, when the asset is created, so changing it later has no effect.
+
+Setting an attribute that does not apply to the asset's type — a texture option on an audio asset, say, or `frame-keys` on anything but a sprite — logs a console warning listing the attributes it ignored.
+
+:::
+
+### Texture Options
+
+The texture options apply when the texture is created, and each one overrides the matching key in the `data` JSON. Options you leave unset write nothing at all, which keeps the engine's per-format defaults in force — an HDR file's `rgbe` encoding, or the transcoded format a KTX2 file chose — so it is worth setting only the options you actually need.
+
+They also apply to a texture that has already loaded, which makes them convenient to experiment with from dev tools. Two are more expensive than the rest: changing `srgb` or `mipmaps` on a loaded texture recreates the underlying GPU resource, so prefer declaring those in the markup up front.
+
+```html
+
+<pc-asset id="sprite-sheet" src="assets/textures/tiles.png"
+          min-filter="nearest" mag-filter="nearest" mipmaps="false"
+          address-u="clamp" address-v="clamp"></pc-asset>
+
+<pc-asset id="ground" src="assets/textures/gravel.jpg" anisotropy="16"></pc-asset>
+```
 
 ### Type Inference
 
@@ -35059,6 +35095,25 @@ When `type` is omitted, it is inferred from the file extension of `src`:
 | `texture` | `.hdr`, `.jpg`, `.ktx2`, `.png`, `.webp` |
 
 Any other extension — or a type not covered by inference, such as `font`, `sprite` or `textureatlas` — requires an explicit `type` attribute.
+
+## Events
+
+Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+
+| Event | Description |
+| --- | --- |
+| `load` | Fired each time the asset finishes loading, including a `lazy` asset loaded later and any subsequent reloads. |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the asset fails to load, with the engine's error in `message`. |
+
+Neither event bubbles, so listen on the element itself — or use a capture-phase listener on `<pc-app>` to observe every asset it holds:
+
+```javascript
+document.querySelector('pc-app').addEventListener('error', (event) => {
+    console.warn(`${event.target.id} failed to load: ${event.message}`);
+}, true);
+```
+
+A failed load still makes the element ready: readiness means the load settled, not that it succeeded.
 
 ## Example
 
@@ -35228,15 +35283,33 @@ The `<pc-collision>` tag is used to define a collision component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
+| `angular-offset` | Vector3 | `"0 0 0"` | Rotation of the collision shape relative to the entity, as "X Y Z" Euler angles in degrees |
 | `axis` | Number | `"1"` | Axis for cylinder/capsule shapes (0=X, 1=Y, 2=Z) |
 | `convex-hull` | Boolean | `"false"` | Whether to use a convex hull for mesh collision |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `half-extents` | Vector3 | `"0.5 0.5 0.5"` | Half-extents for box collision as "X Y Z" values |
 | `height` | Number | `"2"` | Height for cylinder/capsule collision shapes |
+| `linear-offset` | Vector3 | `"0 0 0"` | Position of the collision shape relative to the entity as "X Y Z" values |
 | `radius` | Number | `"0.5"` | Radius for sphere/cylinder/capsule collision shapes |
 | `type` | Enum | `"box"` | Collision shape: `"box"` \| `"capsule"` \| `"compound"` \| `"cone"` \| `"cylinder"` \| `"mesh"` \| `"sphere"` |
 
 </div>
+
+## Mesh Colliders
+
+A mesh collider needs geometry, and there is no attribute to supply it — so `type="mesh"` takes it from the entity's own [`<pc-render>`](../pc-render) component, giving you a collider that matches the visible mesh. That is what a mesh collider on a model node usually means, and it is what makes `type="mesh"` useful on a [`<pc-node>`](../pc-node) bound inside a loaded GLB:
+
+```html
+<pc-model asset="car">
+    <pc-node name="Body">
+        <pc-collision type="mesh"></pc-collision>
+    </pc-node>
+</pc-model>
+```
+
+The geometry is resolved each time the component applies, so a `<pc-node>` that retargets or rebinds picks up the new node's mesh.
+
+The render component has to be backed by a render asset, which the primitive types are not: a `<pc-render type="box">` has no asset to collide against. An entity without a suitable render component logs a console warning and its collider has no shape.
 
 ## Example
 
@@ -35349,7 +35422,7 @@ The `<pc-entity>` tag is used to define an entity.
 
 :::note[Usage]
 
-* It must be a direct child of [`<pc-scene>`](../pc-scene) or another `<pc-entity>`.
+* It must be a direct child of [`<pc-scene>`](../pc-scene), another `<pc-entity>`, or a [`<pc-node>`](../pc-node) — which parents it under a node inside a loaded model.
 * It can have 0..n [`<pc-entity>`](../pc-entity) or [`<pc-model>`](../pc-model) children.
 * It can optionally have one of each component type as children: [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-layoutchild>`](../pc-layoutchild), [`<pc-layoutgroup>`](../pc-layoutgroup), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scrollview>`](../pc-scrollview), [`<pc-sounds>`](../pc-sounds).
 
@@ -35778,6 +35851,7 @@ The `<pc-model>` tag is used to define an entity that instantiates a 3D model fr
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-scene>`](../pc-scene) or a [`<pc-entity>`](../pc-entity).
+* It can have 0..n [`<pc-node>`](../pc-node) children, each binding to a node inside the instantiated hierarchy to override it, add components to it or attach new content under it.
 
 :::
 
@@ -35793,6 +35867,19 @@ All attributes of [`<pc-entity>`](../pc-entity) are also available.
 
 </div>
 
+## Events
+
+Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+
+| Event | Description |
+| --- | --- |
+| `load` | Fired each time the container asset finishes instantiating, including a re-instantiation after `asset` changes. |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the container asset fails to load, with the engine's error in `message`. |
+
+Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
+
+The element becomes ready once its hierarchy has been instantiated and added to the scene, so a ready `<pc-model>` always has a non-null `entity` with valid world transforms. A failed load also settles readiness, with `entity` left `null` — readiness means the load settled, not that it succeeded, so listen for `error` (or check `entity`) to tell the two apart.
+
 ## Example
 
 ```html
@@ -35802,6 +35889,15 @@ All attributes of [`<pc-entity>`](../pc-entity) are also available.
         <pc-model asset="car"></pc-model>
     </pc-scene>
 </pc-app>
+```
+
+To reach inside the loaded hierarchy, nest a [`<pc-node>`](../pc-node) for each node you want to change:
+
+```html
+<pc-model asset="car">
+    
+    <pc-node name="Plane" enabled="false"></pc-node>
+</pc-model>
 ```
 
 ## JavaScript Interface
@@ -35849,6 +35945,118 @@ The `name` is case-sensitive — the engine looks the module up by exact name. T
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-module>` elements using the [ModuleElement API](https://api.playcanvas.com/web-components/classes/ModuleElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-node>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-node/
+
+The `<pc-node>` tag binds to a node inside the hierarchy that a [`<pc-model>`](../pc-model) instantiated, and declares overrides against it. It is how you adjust what a GLB was authored with, without editing the GLB: hide a node, move it, give it a component, or parent new content under it.
+
+Where [`<pc-entity>`](../pc-entity) *creates* an entity, `<pc-node>` *references* one that the model already created. Its `name` is a lookup, never a rename.
+
+:::note[Usage]
+
+* It must be a descendant of a [`<pc-model>`](../pc-model), either directly or nested inside another `<pc-node>`.
+* It can have 0..n nested [`<pc-node>`](../pc-node) children, which resolve their own `name` within the bound node's subtree.
+* It can have 0..n [`<pc-entity>`](../pc-entity) children, which are created and parented under the bound node — attachment points for new content.
+* It can have the same component tags as a [`<pc-entity>`](../pc-entity) — [`<pc-collision>`](../pc-collision), [`<pc-light>`](../pc-light), [`<pc-scripts>`](../pc-scripts) and the rest — which add that component to the bound node.
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | *authored* | Overrides the node's enabled state |
+| `index` | Number | - | Which match to bind when `name` matches more than one node, 0-based in depth-first order. Required when the name is ambiguous, optional otherwise |
+| `name` | String | - | Name of the node to bind, looked up within the enclosing `<pc-model>` (or `<pc-node>`) |
+| `position` | Vector3 | *authored* | Overrides the node's local position as "X Y Z" values |
+| `rotation` | Vector3 | *authored* | Overrides the node's local rotation as "X Y Z" Euler angles in degrees |
+| `scale` | Vector3 | *authored* | Overrides the node's local scale as "X Y Z" values |
+| `tags` | String | *authored* | Overrides the node's tags, separated by spaces or commas |
+
+</div>
+
+:::note[Overrides, not defaults]
+
+Everything except `name` and `index` is an *override*, so `<pc-node>` reads its absent attributes differently from every other tag. An attribute that is present replaces the authored value; an attribute that is absent leaves it alone. Removing one at runtime — or assigning `null` to the matching JavaScript property — restores the value the model was authored with, rather than the engine default. That is why the table above has no concrete defaults: the default *is* whatever the GLB says.
+
+An override replaces the authored value; it does not compose with it. `position="0 1 0"` puts the node at a local Y of 1, whatever it was exported at.
+
+:::
+
+## Finding the Node
+
+`name` matches on the node names in the loaded hierarchy, taking the first match in depth-first order. Nesting one `<pc-node>` inside another scopes the inner search to the outer node's subtree, which is the simplest way to reach a node whose name is only unique locally.
+
+When a name is not unique within the search scope, the element binds nothing and warns with the paths of every candidate, so you can pick one with `index`:
+
+```none
+pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/Wheel, [1] Body/Wheel_FR/Wheel
+```
+
+Binding nothing is deliberate: guessing would silently decorate the wrong node, and a re-export that introduced a duplicate name would break a document that used to work.
+
+The other resolution failures warn in the same way — a name that matches nothing (with the closest name it did find, as a typo hint), an `index` beyond the number of matches, and a node that another `<pc-node>` has already bound. In each case the element binds nothing and never becomes ready.
+
+An element only becomes ready once it is bound, and its descendants wait with it. If the model reloads, or the element retargets because you changed `name`, it re-resolves and re-applies its overrides, components and attached content against the new node.
+
+## Events
+
+`<pc-node>` dispatches the same pointer events as [`<pc-entity>`](../pc-entity), fired when the pointer intersects the bound node's geometry. Binding a node is what makes it a pick target, so a `<pc-node>` is also how you make one part of a model interactive.
+
+| Event | Description |
+| --- | --- |
+| `pointerdown` | Fired when a pointer is pressed down on the node. |
+| `pointerenter` | Fired when a pointer enters the node. |
+| `pointerleave` | Fired when a pointer leaves the node. |
+| `pointermove` | Fired when a pointer is moved over the node. |
+| `pointerup` | Fired when a pointer is released from the node. |
+
+The inline `onpointer*` attributes work here exactly as they do on [`<pc-entity>`](../pc-entity).
+
+## Example
+
+```html
+<pc-app>
+    <pc-asset src="assets/car.glb" id="car"></pc-asset>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1 4">
+            <pc-camera></pc-camera>
+        </pc-entity>
+        <pc-model asset="car">
+            
+            <pc-node name="Plane" enabled="false"></pc-node>
+
+            
+            <pc-node name="Roof" position="0 0.05 0" tags="openable"></pc-node>
+
+            
+            <pc-node name="Headlight_L">
+                <pc-entity>
+                    <pc-light type="spot" intensity="4" range="20"></pc-light>
+                </pc-entity>
+            </pc-node>
+        </pc-model>
+    </pc-scene>
+</pc-app>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-node>` elements using the [NodeElement API](https://api.playcanvas.com/web-components/classes/NodeElement.html).
+
+Alongside `entity`, which is the node it bound, the element reports how resolution went. `state` is `"pending"` while it has nothing to bind (no name yet, or the model has not instantiated), `"bound"` once it has, and `"missing"`, `"ambiguous"` or `"duplicate"` when resolution failed. `path` is the `/`-separated path of the bound node below the search scope, or `null` while unbound. Together they let you assert a document's bindings rather than reading the console:
+
+```javascript
+
+const node = await whenReady('pc-node[name="Roof"]');
+console.log(node.state, node.path); // 'bound' 'Body/Roof'
+```
 
 --------------------------------------------------------------------------------
 

@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 484
+Total Documents: 485
 Generated: 2026-08-06
 
 ## Instructions for Large Language Models
@@ -436,6 +436,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-material>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material/): Reference for the pc-material element: a physically based standard material with color, metalness, gloss, opacity and per-attribute texture map slots.
 - [<pc-model>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/): Reference for the pc-model element: instantiate a 3D model from a GLB container asset within a scene or entity.
 - [<pc-module>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-module/): Reference for the pc-module element: load WebAssembly modules such as Ammo, Basis, and DracoDecoderModule from glue, wasm, and fallback paths.
+- [<pc-node>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node/): Reference for the pc-node element: bind to a node inside a loaded model's hierarchy to override its transform, enabled state and tags, add components to it, or attach new content under it.
 - [<pc-particles>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-particles/): Reference for the pc-particles element: configure particle emitters, textures, blending, and simulation parameters in markup.
 - [<pc-render>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render/): Reference for the pc-render element: render primitive shapes (box, sphere, capsule, cone, cylinder, plane) with a material and shadow settings.
 - [<pc-rigidbody>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigidbody/): Reference for the pc-rigidbody element: rigid body type, mass, friction, restitution, and integration with collision components.
