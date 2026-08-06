@@ -7,7 +7,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 
 ## 開始点
 
-`index.html`という新しいファイルを作成し、[WebコンポーネントのボイラープレートHTML](/user-manual/web-components/getting-started/#ボイラープレートhtml)をそこにコピーすることから始めます。
+`index.html`という新しいファイルを作成し、Web Componentsの「開始」ガイドにある[サンプルページ](/user-manual/web-components/getting-started/#最初のページ)をそこにコピーし、`body` の中身をすべて空にすることから始めます。
 
 次に、[`<pc-app>`](/user-manual/web-components/tags/pc-app)および[`<pc-scene>`](/user-manual/web-components/tags/pc-scene)要素を使用して、アプリケーションの基本構造をHTMLの`body`に追加しましょう。
 

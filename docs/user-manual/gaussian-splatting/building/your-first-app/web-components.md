@@ -7,7 +7,7 @@ Let's build a simple Gaussian splat application step by step using [PlayCanvas W
 
 ## Starting Point
 
-Begin by creating a new file called `index.html` and copy the [Web Components boilerplate HTML](/user-manual/web-components/getting-started/#boilerplate-html) into it.
+Begin by creating a new file called `index.html` and copy the [example page](/user-manual/web-components/getting-started/#your-first-page) from the Web Components Getting Started guide into it, clearing out everything inside its `body`.
 
 Now, let's add the basic structure of our application to our HTML `body` using the [`<pc-app>`](/user-manual/web-components/tags/pc-app) and [`<pc-scene>`](/user-manual/web-components/tags/pc-scene) elements.
 
