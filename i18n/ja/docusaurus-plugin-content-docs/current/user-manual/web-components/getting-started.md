@@ -7,7 +7,12 @@ description: "CDNからPlayCanvas Web Componentsを読み込むか、npmから�
 
 ## インストール
 
-どちらの方法を選ぶ場合でも、HTMLファイルには[インポートマップ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap)が必要になります。これは、Web ComponentsがPlayCanvas Engine（外部依存関係）を見つけられるようにするためです。`@playcanvas/web-components` もマッピングしておくと、独自のモジュールスクリプトからライブラリのJavaScript API（`whenReady` など）をインポートできます。
+ライブラリの読み込み方法は2通りあります。どちらにするか迷ったら、まずはCDNから始めましょう。マークアップを一切変更することなく、後からnpmへ切り替えることができます。
+
+- **CDN（インストール不要）** — ダウンロードもツールも不要です。最も早く始められる方法で、バージョンを固定すれば本番環境でも問題なく使えます。
+- **npm** — プロジェクトにすでに `package.json` や開発サーバー、バンドラーがある場合に適した選択肢です。エンジンとコンポーネントのバージョンを他の依存関係と一緒に管理でき、すべて自前のインフラから配信されます。
+
+どちらの方法を選ぶ場合でも、HTMLファイルには[インポートマップ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap)が必要になります。これは、Web ComponentsがPlayCanvas Engine（外部依存関係）を見つけられるようにするためです。インポートマップには `@playcanvas/web-components` 自体も記載しています。タグを使うだけならこのエントリは不要ですが、これがあると、後で自分で書くJavaScriptからライブラリのAPI（[プログラムによるアクセス](programmatic-access.md)で紹介します）をインポートできるようになります。
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

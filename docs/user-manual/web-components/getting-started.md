@@ -7,7 +7,12 @@ You can be rendering 3D in the browser inside a minute — no installs and no bu
 
 ## Installation
 
-Whichever route you choose, your HTML file needs an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency). Mapping `@playcanvas/web-components` as well lets your own module scripts import the library's JavaScript API (such as `whenReady`).
+You can load the library in one of two ways. If you're not sure which to pick, start with the CDN — you can switch to npm later without changing any of your markup:
+
+- **CDN (no install)** — nothing to download and no tooling required. The fastest way to get started, and fine for production too as long as you pin to specific versions.
+- **npm** — the right choice when your project already has a `package.json`, a dev server or a bundler. The engine and components are versioned alongside the rest of your dependencies and served from your own infrastructure.
+
+Whichever route you choose, your HTML file needs an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap), because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency). The map also lists `@playcanvas/web-components` itself — the tags don't need that entry, but it means any JavaScript you write later can import the library's API (introduced in [Programmatic Access](programmatic-access.md)).
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
