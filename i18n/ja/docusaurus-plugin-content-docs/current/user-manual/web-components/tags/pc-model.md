@@ -8,6 +8,7 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 :::note[使用法]
 
 * [`<pc-scene>`](../pc-scene)または[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* 0からn個の[`<pc-node>`](../pc-node)の子を持つことができます。それぞれがインスタンス化された階層内のノードにバインドし、そのノードをオーバーライドしたり、コンポーネントを追加したり、その下に新しいコンテンツをアタッチします。
 
 :::
 
@@ -23,6 +24,19 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 
 </div>
 
+## イベント
+
+これらのイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用するか、このインターフェースの`oneventname`プロパティにイベントリスナーを割り当てることでリッスンできます。
+
+| イベント | 説明 |
+| --- | --- |
+| `load` | コンテナアセットのインスタンス化が完了するたびに発生します。`asset`の変更後の再インスタンス化も含みます。 |
+| `error` | コンテナアセットの読み込みが失敗したときに発生する[`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent)で、エンジンのエラーが`message`に入ります。 |
+
+どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、ページ上のすべてのモデルを監視するには、祖先要素でキャプチャフェーズのリスナーを使用します。
+
+要素は階層がインスタンス化されてシーンに追加された時点でreadyになるため、readyな`<pc-model>`は常に有効なワールドトランスフォームを持つ非nullの`entity`を持ちます。読み込みが失敗した場合もreadyは確定し、`entity`は`null`のままになります。readyであることは読み込みが決着したことを意味し、成功したことを意味しません。両者を区別するには`error`をリッスンする（または`entity`を確認する）必要があります。
+
 ## 例
 
 ```html
@@ -32,6 +46,15 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
         <pc-model asset="car"></pc-model>
     </pc-scene>
 </pc-app>
+```
+
+読み込まれた階層の内部に手を入れるには、変更したいノードごとに[`<pc-node>`](../pc-node)をネストします。
+
+```html
+<pc-model asset="car">
+    <!-- GLBに含まれていた地面プレーンを非表示にします -->
+    <pc-node name="Plane" enabled="false"></pc-node>
+</pc-model>
 ```
 
 ## JavaScriptインターフェース

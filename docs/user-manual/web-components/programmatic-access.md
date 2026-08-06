@@ -39,7 +39,7 @@ Then import it and await the element you need:
 
 :::note[Misplaced Elements]
 
-The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. Either way, a misplaced element logs a console warning naming the parent it requires.
+The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`, or a [`<pc-node>`](./tags/pc-node.md) whose `name` matches no node in its model. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. Either way, the element logs a console warning saying what went wrong.
 
 :::
 
@@ -61,12 +61,14 @@ Each element exposes its engine counterpart through a property:
 | --- | --- | --- |
 | [`<pc-app>`](./tags/pc-app.md) | `app` | [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) |
 | [`<pc-entity>`](./tags/pc-entity.md) | `entity` | [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
+| [`<pc-model>`](./tags/pc-model.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) rooting the instantiated hierarchy |
+| [`<pc-node>`](./tags/pc-node.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) it bound inside that hierarchy |
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
 | Component tags (`<pc-camera>`, `<pc-light>`, ...) | `component` | The corresponding [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
-These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. The exception is [`<pc-model>`](./tags/pc-model.md), which currently becomes ready before its GLB has loaded — its `entity` remains `null` until the model instantiates.
+These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. [`<pc-model>`](./tags/pc-model.md) is the one case where readiness does not promise a non-null `entity`: a load that failed also settles readiness, so check `entity` (or listen for the element's `error` event) if the asset might not arrive.
 
-Every asynchronously initializing element also exposes `closestApp` and `closestEntity` getters, returning its nearest `<pc-app>` or `<pc-entity>` *ancestor* element (or `null` if there is none) — handy when you hold a component element and need its owning entity or app.
+Every asynchronously initializing element also exposes `closestApp` and `closestEntity` getters, returning its nearest `<pc-app>` *ancestor* element, or its nearest entity-fronting ancestor — a `<pc-entity>` or a `<pc-node>` — or `null` if there is none. Handy when you hold a component element and need its owning entity or app.
 
 ## Targeting a Specific App
 
@@ -115,10 +117,10 @@ const material = MaterialElement.get('gold'); // the material declared by <pc-ma
 
 `AssetElement.get` returns the registered [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html), which may not have finished loading yet — check `asset.loaded`, or subscribe to its `load` event, before using `asset.resource`.
 
-[`<pc-module>`](./tags/pc-module.md) does not initialize asynchronously, so it cannot be awaited with `whenReady`. Instead, it exposes `getLoadPromise()`, which resolves once the WebAssembly module is ready:
+[`<pc-module>`](./tags/pc-module.md) does not initialize asynchronously and has no public JavaScript API of its own. It needs none: `<pc-app>` waits for every `<pc-module>` declared beneath it before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
 
 ```javascript
-await document.querySelector('pc-module[name="Ammo"]').getLoadPromise();
+const { app } = await whenReady('pc-app'); // every <pc-module> has loaded by now
 ```
 
 ## TypeScript
