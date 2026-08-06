@@ -7,7 +7,7 @@ The `<pc-entity>` tag is used to define an entity.
 
 :::note[Usage]
 
-* It must be a direct child of [`<pc-scene>`](../pc-scene) or another `<pc-entity>`.
+* It must be a direct child of [`<pc-scene>`](../pc-scene), another `<pc-entity>`, or a [`<pc-node>`](../pc-node) — which parents it under a node inside a loaded model.
 * It can have 0..n [`<pc-entity>`](../pc-entity) or [`<pc-model>`](../pc-model) children.
 * It can optionally have one of each component type as children: [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-layoutchild>`](../pc-layoutchild), [`<pc-layoutgroup>`](../pc-layoutgroup), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scrollview>`](../pc-scrollview), [`<pc-sounds>`](../pc-sounds).
 

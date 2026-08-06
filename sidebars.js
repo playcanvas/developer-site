@@ -532,6 +532,7 @@ const sidebars = {
             'user-manual/web-components/tags/pc-material',
             'user-manual/web-components/tags/pc-model',
             'user-manual/web-components/tags/pc-module',
+            'user-manual/web-components/tags/pc-node',
             'user-manual/web-components/tags/pc-particles',
             'user-manual/web-components/tags/pc-render',
             'user-manual/web-components/tags/pc-rigidbody',

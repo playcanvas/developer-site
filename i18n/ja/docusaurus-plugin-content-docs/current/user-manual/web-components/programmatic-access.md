@@ -39,7 +39,7 @@ PlayCanvas Web Components を使えば、HTML だけでリッチな 3D シーン
 
 :::note[誤配置された要素]
 
-要素が初期化を完了できない場合（たとえば、`<pc-scripts>` の直接の子ではない `<pc-script>`）、Promiseは決して解決されません。例外は `<pc-entity>` の外にあるコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。いずれの場合も、誤った場所に配置された要素は、必要な親要素の名前を含むコンソール警告をログに出力します。
+要素が初期化を完了できない場合（たとえば、`<pc-scripts>` の直接の子ではない `<pc-script>`、または `name` がモデル内のどのノードにも一致しない [`<pc-node>`](./tags/pc-node.md)）、Promiseは決して解決されません。例外は `<pc-entity>` の外にあるコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。いずれの場合も、その要素は何が問題だったかを示すコンソール警告をログに出力します。
 
 :::
 
@@ -61,12 +61,14 @@ const { entity } = await whenReady('pc-entity[name="player"]');
 | --- | --- | --- |
 | [`<pc-app>`](./tags/pc-app.md) | `app` | [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) |
 | [`<pc-entity>`](./tags/pc-entity.md) | `entity` | [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
+| [`<pc-model>`](./tags/pc-model.md) | `entity` | インスタンス化された階層のルートとなる [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
+| [`<pc-node>`](./tags/pc-node.md) | `entity` | その階層内でバインドした [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
 | コンポーネントタグ (`<pc-camera>`、`<pc-light>` など) | `component` | 対応する [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
-これらのアクセサーはnull許容として型付けされています。要素の準備が完了する前と、破棄された後には `null` を返します。先に準備完了を待つことが、非nullの結果を保証します。例外は [`<pc-model>`](./tags/pc-model.md) で、現時点ではGLBの読み込みが完了する前に準備完了となるため、モデルがインスタンス化されるまで `entity` は `null` のままです。
+これらのアクセサーはnull許容として型付けされています。要素の準備が完了する前と、破棄された後には `null` を返します。先に準備完了を待つことが、非nullの結果を保証します。準備完了が非nullの `entity` を保証しない唯一のケースは [`<pc-model>`](./tags/pc-model.md) です。読み込みが失敗した場合も準備完了は確定するため、アセットが到達しない可能性がある場合は `entity` を確認するか、要素の `error` イベントをリッスンしてください。
 
-非同期に初期化されるすべての要素は、`closestApp` と `closestEntity` ゲッターも公開しています。これらは、最も近い*祖先*の `<pc-app>` または `<pc-entity>` 要素（存在しない場合は `null`）を返します。コンポーネント要素を保持していて、それが属するエンティティやアプリが必要な場合に便利です。
+非同期に初期化されるすべての要素は、`closestApp` と `closestEntity` ゲッターも公開しています。これらは、最も近い*祖先*の `<pc-app>` 要素、またはエンティティを表す最も近い祖先要素（`<pc-entity>` または `<pc-node>`）を返します（存在しない場合は `null`）。コンポーネント要素を保持していて、それが属するエンティティやアプリが必要な場合に便利です。
 
 ## 特定のアプリを対象にする
 
@@ -115,10 +117,10 @@ const material = MaterialElement.get('gold'); // <pc-material id="gold"> が宣�
 
 `AssetElement.get` は登録済みの [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html) を返しますが、読み込みが完了していない場合があります。`asset.resource` を使用する前に、`asset.loaded` を確認するか、`load` イベントを購読してください。
 
-[`<pc-module>`](./tags/pc-module.md) は非同期に初期化されないため、`whenReady` では待てません。代わりに、WebAssemblyモジュールの準備が完了すると解決される `getLoadPromise()` を公開しています。
+[`<pc-module>`](./tags/pc-module.md) は非同期に初期化されず、独自の公開JavaScript APIも持ちません。その必要がないためです。`<pc-app>` は、自身の配下に宣言されたすべての `<pc-module>` を待ってからグラフィックスデバイスを作成するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリです。Ammoを待つ方法は、アプリを待つことです。
 
 ```javascript
-await document.querySelector('pc-module[name="Ammo"]').getLoadPromise();
+const { app } = await whenReady('pc-app'); // この時点ですべての <pc-module> は読み込み済みです
 ```
 
 ## TypeScript

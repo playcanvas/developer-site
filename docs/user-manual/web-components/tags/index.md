@@ -7,7 +7,7 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 
 The attributes of every tag share the same value conventions: an absent (or removed) attribute means the engine default applies, and an invalid value logs a console warning and falls back to the default. See [Attributes](../attributes.md) for how booleans, numbers, enums, vectors and colors are written.
 
-Tags also have placement rules — each tag's page notes the parent it requires. A misplaced element logs a console warning naming the required parent, so keep the console open while authoring.
+Tags also have placement rules — each tag's page notes the parent it requires. A misplaced element logs a console warning naming the required parent, so keep the console open while authoring. The component tags accept one further parent beyond the [`<pc-entity>`](pc-entity) their pages name: a [`<pc-node>`](pc-node), which fronts a node inside a model loaded by [`<pc-model>`](pc-model) and takes the same component children an entity does.
 
 | Tag | Description |
 | --- | --- |
@@ -26,6 +26,7 @@ Tags also have placement rules — each tag's page notes the parent it requires.
 | [`<pc-material>`](pc-material) | Defines a material that render components can reference. |
 | [`<pc-model>`](pc-model) | Defines an entity that instantiates a 3D model from a GLB file. |
 | [`<pc-module>`](pc-module) | Defines a WebAssembly module. |
+| [`<pc-node>`](pc-node) | Binds to a node inside a loaded model to override it. |
 | [`<pc-particles>`](pc-particles) | Defines a particle system component. |
 | [`<pc-render>`](pc-render) | Defines a render component. |
 | [`<pc-rigidbody>`](pc-rigidbody) | Defines a rigidbody component. |
