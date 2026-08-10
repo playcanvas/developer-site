@@ -67,13 +67,6 @@ page rule — however plain — overrides them.)
 
 :::
 
-:::warning[Breaking change]
-
-In releases up to 0.12.0, `<pc-app>` filled the browser window implicitly. A page that relied on
-that behavior must now size the element itself — the fullscreen CSS above restores it.
-
-:::
-
 The one time the element's size does not drive the drawing buffer is while an XR session is
 presenting — the session owns the buffer for its duration.
 
