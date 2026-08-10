@@ -98,7 +98,7 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 }, true);
 ```
 
-A failed load still makes the element ready: readiness means the load settled, not that it succeeded.
+The element's readiness is a separate signal: it becomes ready once its asset has reached the state the markup declares. For a preloaded asset that is a settled load — a failed load still makes the element ready, so readiness never means success. For a `lazy` asset it is registration, before any load happens; and an element inserted at runtime becomes ready as soon as its asset is created, while its load is still in flight. An element that is not a direct child of `<pc-app>`, or whose asset type is unsupported, warns and never becomes ready.
 
 ## Example
 

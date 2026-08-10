@@ -39,7 +39,7 @@ Then import it and await the element you need:
 
 :::note[Elements That Never Become Ready]
 
-The promise never settles if the element cannot finish initializing. That covers a `<pc-script>` that is not a direct child of `<pc-scripts>`, a [`<pc-node>`](./tags/pc-node.md) whose `name` matches no node in its model, a [`<pc-module>`](./tags/pc-module.md) without a `name` — and an [`<pc-app>`](./tags/pc-app.md) that could not create a graphics device, where a fallback UI should hang off the element's [`error` event](./tags/pc-app.md#events) instead. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. In every case, the element reports what went wrong in the console.
+The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`, a [`<pc-node>`](./tags/pc-node.md) that cannot resolve its `name`, a [`<pc-module>`](./tags/pc-module.md) without a `name`, or an [`<pc-app>`](./tags/pc-app.md) that could not create a graphics device, where a fallback UI should hang off the element's [`error` event](./tags/pc-app.md#events) instead. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. In every case, the element reports what went wrong in the console.
 
 :::
 
@@ -64,6 +64,8 @@ Each element exposes its engine counterpart through a property:
 | [`<pc-model>`](./tags/pc-model.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) rooting the instantiated hierarchy |
 | [`<pc-node>`](./tags/pc-node.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) it bound inside that hierarchy |
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
+| [`<pc-script>`](./tags/pc-script.md) | `script` | [`Script`](https://api.playcanvas.com/engine/classes/Script.html) |
+| [`<pc-sound>`](./tags/pc-sound.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
 | Component tags (`<pc-camera>`, `<pc-light>`, ...) | `component` | The corresponding [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
 These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. [`<pc-model>`](./tags/pc-model.md) is the one case where readiness does not promise a non-null `entity`: a load that failed also settles readiness, so check `entity` (or listen for the element's `error` event) if the asset might not arrive.
@@ -102,7 +104,7 @@ document.addEventListener('ready', (event) => {
 });
 ```
 
-Use whichever fits the job: `whenReady` *awaits a specific element* and resolves even if that element became ready long ago, while the `ready` event *reacts to elements as they initialize* — including elements added to the page after load, which `whenReady`'s selector form cannot see. The event fires once per element, so attach the listener before the elements you care about initialize; an element that became ready earlier will not fire it again.
+Use whichever fits the job: `whenReady` *awaits a specific element* and resolves even if that element became ready long ago, while the `ready` event *reacts to elements as they initialize* — including elements added to the page after load, which `whenReady`'s selector form cannot see. The event fires once per readiness cycle, so attach the listener before the elements you care about initialize — an element that became ready earlier will not fire it again. An element that is torn down and re-initialized (removed and re-inserted, say, or a `<pc-node>` rebinding after its model reloads) starts a new cycle and fires the event again; `<pc-module>`, whose readiness never resets, is the exception.
 
 ## Assets, Materials and Modules
 

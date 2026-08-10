@@ -39,7 +39,7 @@ PlayCanvas Web Components を使えば、HTML だけでリッチな 3D シーン
 
 :::note[準備完了にならない要素]
 
-要素が初期化を完了できない場合、Promiseは決して解決されません。これに該当するのは、`<pc-scripts>` の直接の子ではない `<pc-script>`、`name` がモデル内のどのノードにも一致しない [`<pc-node>`](./tags/pc-node.md)、`name` のない [`<pc-module>`](./tags/pc-module.md)、そしてグラフィックスデバイスを作成できなかった [`<pc-app>`](./tags/pc-app.md) です。最後のケースでフォールバックUIを表示するには、要素の [`error` イベント](./tags/pc-app.md#イベント)をリッスンしてください。例外は `<pc-entity>` の外にあるコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。いずれの場合も、その要素は何が問題だったかをコンソールに報告します。
+要素が初期化を完了できない場合、Promiseは決して解決されません。たとえば、`<pc-scripts>` の直接の子ではない `<pc-script>`、`name` を解決できない [`<pc-node>`](./tags/pc-node.md)、`name` のない [`<pc-module>`](./tags/pc-module.md)、グラフィックスデバイスを作成できなかった [`<pc-app>`](./tags/pc-app.md) などです。最後のケースでフォールバックUIを表示するには、要素の [`error` イベント](./tags/pc-app.md#イベント)をリッスンしてください。例外は `<pc-entity>` の外にあるコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。いずれの場合も、その要素は何が問題だったかをコンソールに報告します。
 
 :::
 
@@ -64,6 +64,8 @@ const { entity } = await whenReady('pc-entity[name="player"]');
 | [`<pc-model>`](./tags/pc-model.md) | `entity` | インスタンス化された階層のルートとなる [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
 | [`<pc-node>`](./tags/pc-node.md) | `entity` | その階層内でバインドした [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
+| [`<pc-script>`](./tags/pc-script.md) | `script` | [`Script`](https://api.playcanvas.com/engine/classes/Script.html) |
+| [`<pc-sound>`](./tags/pc-sound.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
 | コンポーネントタグ (`<pc-camera>`、`<pc-light>` など) | `component` | 対応する [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
 これらのアクセサーはnull許容として型付けされています。要素の準備が完了する前と、破棄された後には `null` を返します。先に準備完了を待つことが、非nullの結果を保証します。準備完了が非nullの `entity` を保証しない唯一のケースは [`<pc-model>`](./tags/pc-model.md) です。読み込みが失敗した場合も準備完了は確定するため、アセットが到達しない可能性がある場合は `entity` を確認するか、要素の `error` イベントをリッスンしてください。
@@ -102,7 +104,7 @@ document.addEventListener('ready', (event) => {
 });
 ```
 
-用途に応じて使い分けてください。`whenReady` は*特定の要素を待つ*ためのもので、その要素がずっと前に準備完了していても解決されます。一方 `ready` イベントは、*要素が初期化されるのに反応する*ためのものです — `whenReady` のセレクター形式では見つけられない、読み込み後にページへ追加された要素も含まれます。イベントは要素ごとに1回だけ発火するため、対象の要素が初期化される前にリスナーを登録してください。すでに準備完了となった要素が再度発火することはありません。
+用途に応じて使い分けてください。`whenReady` は*特定の要素を待つ*ためのもので、その要素がずっと前に準備完了していても解決されます。一方 `ready` イベントは、*要素が初期化されるのに反応する*ためのものです — `whenReady` のセレクター形式では見つけられない、読み込み後にページへ追加された要素も含まれます。イベントはreadyサイクルごとに1回だけ発火するため、対象の要素が初期化される前にリスナーを登録してください。すでに準備完了となった要素が再度発火することはありません。ただし、要素が破棄されて再初期化されると（削除して再挿入した場合や、モデルの再読み込み後に `<pc-node>` が再バインドする場合など）、新しいサイクルが始まり、イベントは再度発火します。例外は `<pc-module>` で、そのready状態は決してリセットされません。
 
 ## アセット、マテリアル、モジュール
 
