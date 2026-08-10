@@ -24,7 +24,7 @@ PlayCanvas Editor では、JavaScript コードは Script Asset に格納され�
 
 :::tip
 
-選択するファイル拡張子によってスクリプトの種類が決まります。拡張子なし（または `.js`）の名前ではクラシックスクリプトが作成され、`.mjs` 拡張子（例: `PlayerController.mjs`）では最新の **ESM** スクリプトが作成されます。新しいプロジェクトでは ESM が推奨されます。詳細は [ESM スクリプト](/user-manual/scripting/esm-scripts/#creating-esm-scripts) を参照してください。
+選択するファイル拡張子によってスクリプトの種類が決まります。拡張子なし（または `.js`）の名前ではクラシックスクリプトが作成され、`.mjs` 拡張子（例: `PlayerController.mjs`）では最新の **ESM** スクリプトが作成されます。新しいプロジェクトでは ESM が推奨されます。詳細は [ESM スクリプト](/user-manual/scripting/esm-scripts/#esmスクリプトの作成) を参照してください。
 
 :::
 
