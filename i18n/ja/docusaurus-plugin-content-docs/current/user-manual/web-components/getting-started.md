@@ -82,7 +82,7 @@ npm install playcanvas @playcanvas/web-components
 
 ライトが当たった球体（3Dにおける「hello, world」）をレンダリングする完全なページを次に示します。CDNセットアップを使用しているため、何もインストールする必要はありません。
 
-```html title="index.html" {24-36}
+```html title="index.html" {29-41}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -103,6 +103,11 @@ npm install playcanvas @playcanvas/web-components
                 margin: 0;
                 overflow: hidden;
             }
+            pc-app {
+                width: 100%;
+                height: 100vh;  /* 動的ビューポート単位に未対応のブラウザ向けフォールバック */
+                height: 100dvh;
+            }
         </style>
     </head>
     <body>
@@ -122,6 +127,8 @@ npm install playcanvas @playcanvas/web-components
     </body>
 </html>
 ```
+
+`<style>`ブロックの中で1つ触れておきたいルールがあります。`<pc-app>`は`<video>`要素と同じようにサイズが決まる、ページのCSSが制御するブロックレベルのボックスで、デフォルトではわずか300×150ピクセルです。上記の`pc-app`ルールはこれをビューポート全体に引き伸ばしています。通常のページレイアウトにシーンを埋め込みたい場合は、好きなサイズを指定してください。詳細は[サイズ指定](tags/pc-app.md#サイズ指定)を参照してください。
 
 これを `index.html` として保存し、ブラウザで開いてください。次のように表示されるはずです。
 

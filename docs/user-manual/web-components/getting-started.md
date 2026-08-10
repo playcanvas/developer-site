@@ -82,7 +82,7 @@ These paths assume your site is served from the project root, so that `/node_mod
 
 Here is a complete page that renders a lit sphere — the "hello, world" of 3D. It uses the CDN setup, so there is nothing to install:
 
-```html title="index.html" {24-36}
+```html title="index.html" {29-41}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -103,6 +103,11 @@ Here is a complete page that renders a lit sphere — the "hello, world" of 3D. 
                 margin: 0;
                 overflow: hidden;
             }
+            pc-app {
+                width: 100%;
+                height: 100vh;  /* fallback for browsers without dynamic viewport units */
+                height: 100dvh;
+            }
         </style>
     </head>
     <body>
@@ -122,6 +127,8 @@ Here is a complete page that renders a lit sphere — the "hello, world" of 3D. 
     </body>
 </html>
 ```
+
+One rule in the `<style>` block deserves a mention: `<pc-app>` is sized like a `<video>` element — a block-level box that your CSS controls, just 300×150 pixels by default. The `pc-app` rule stretches it to fill the viewport; size it however you like to embed the scene in a normal page layout instead. See [Sizing](tags/pc-app.md#sizing) for the details.
 
 Save this as `index.html` and open it in your browser. You should see:
 

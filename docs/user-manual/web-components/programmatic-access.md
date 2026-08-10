@@ -35,11 +35,11 @@ Then import it and await the element you need:
 
 `whenReady` resolves with the element once its engine object has been created. If the element is already initialized by the time you call it, it resolves immediately. There is no need to wait for `DOMContentLoaded` or listen for events.
 
-`whenReady` rejects rather than waiting in three cases: the string is not a valid CSS selector, no element in the document matches it, or the matched element does not initialize asynchronously (`<pc-material>` or `<pc-module>`). A selector is evaluated once — after the document finishes parsing, if called while it is still loading — so it finds elements present in the markup, not elements added later. To wait on a dynamically created element, pass the element reference itself (see [below](#waiting-on-an-element-you-already-hold)).
+`whenReady` rejects rather than waiting in three cases: the string is not a valid CSS selector, no element in the document matches it, or the matched element does not initialize asynchronously (`<pc-material>` is the only such element). A selector is evaluated once — after the document finishes parsing, if called while it is still loading — so it finds elements present in the markup, not elements added later. To wait on a dynamically created element, pass the element reference itself (see [below](#waiting-on-an-element-you-already-hold)).
 
-:::note[Misplaced Elements]
+:::note[Elements That Never Become Ready]
 
-The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`, or a [`<pc-node>`](./tags/pc-node.md) whose `name` matches no node in its model. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. Either way, the element logs a console warning saying what went wrong.
+The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`, a [`<pc-node>`](./tags/pc-node.md) that cannot resolve its `name`, a [`<pc-module>`](./tags/pc-module.md) without a `name`, or an [`<pc-app>`](./tags/pc-app.md) that could not create a graphics device, where a fallback UI should hang off the element's [`error` event](./tags/pc-app.md#events) instead. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. In every case, the element reports what went wrong in the console.
 
 :::
 
@@ -64,6 +64,8 @@ Each element exposes its engine counterpart through a property:
 | [`<pc-model>`](./tags/pc-model.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) rooting the instantiated hierarchy |
 | [`<pc-node>`](./tags/pc-node.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) it bound inside that hierarchy |
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
+| [`<pc-script>`](./tags/pc-script.md) | `script` | [`Script`](https://api.playcanvas.com/engine/classes/Script.html) |
+| [`<pc-sound>`](./tags/pc-sound.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
 | Component tags (`<pc-camera>`, `<pc-light>`, ...) | `component` | The corresponding [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
 These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. [`<pc-model>`](./tags/pc-model.md) is the one case where readiness does not promise a non-null `entity`: a load that failed also settles readiness, so check `entity` (or listen for the element's `error` event) if the asset might not arrive.
@@ -102,7 +104,7 @@ document.addEventListener('ready', (event) => {
 });
 ```
 
-Use whichever fits the job: `whenReady` *awaits a specific element* and resolves even if that element became ready long ago, while the `ready` event *reacts to elements as they initialize* — including elements added to the page after load, which `whenReady`'s selector form cannot see. The event fires once per element, so attach the listener before the elements you care about initialize; an element that became ready earlier will not fire it again.
+Use whichever fits the job: `whenReady` *awaits a specific element* and resolves even if that element became ready long ago, while the `ready` event *reacts to elements as they initialize* — including elements added to the page after load, which `whenReady`'s selector form cannot see. The event fires once per readiness cycle, so attach the listener before the elements you care about initialize — an element that became ready earlier will not fire it again. An element that is torn down and re-initialized (removed and re-inserted, say, or a `<pc-node>` rebinding after its model reloads) starts a new cycle and fires the event again; `<pc-module>`, whose readiness never resets, is the exception.
 
 ## Assets, Materials and Modules
 
@@ -117,15 +119,17 @@ const material = MaterialElement.get('gold'); // the material declared by <pc-ma
 
 `AssetElement.get` returns the registered [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html), which may not have finished loading yet — check `asset.loaded`, or subscribe to its `load` event, before using `asset.resource`.
 
-[`<pc-module>`](./tags/pc-module.md) does not initialize asynchronously and has no public JavaScript API of its own. It needs none: `<pc-app>` waits for every `<pc-module>` declared beneath it before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
+[`<pc-module>`](./tags/pc-module.md) initializes asynchronously like the elements above — it becomes ready once its module has loaded, so `whenReady('pc-module')` awaits the load. You will rarely need it: `<pc-app>` waits for every `<pc-module>` declared beneath it before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
 
 ```javascript
 const { app } = await whenReady('pc-app'); // every <pc-module> has loaded by now
 ```
 
+One caveat sets `<pc-module>` apart: its readiness is sticky. WebAssembly modules configure engine-global state that never unloads, so removing and re-inserting the element neither resets its readiness nor loads the module again — see [Readiness](./tags/pc-module.md#readiness).
+
 ## TypeScript
 
-The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (`pc-material` or `pc-module`) is a compile-time error.
+The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (`pc-material` is the only one) is a compile-time error.
 
 ## When to Use Scripts Instead
 

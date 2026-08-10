@@ -36,6 +36,40 @@ apply a new value, remove the element and re-insert it.
 
 :::
 
+## Sizing
+
+The element is sized like a replaced element such as `<video>` or `<img>`: a block-level box that
+your page's CSS controls, defaulting to the canvas's intrinsic size of 300×150 pixels. The
+application's canvas always fills the element, and the drawing buffer resolution follows the
+element's size live (capped by `max-pixel-ratio`) — whatever resizes the element, be it a splitter
+drag, a flex reflow or a CSS animation, the rendered scene tracks it.
+
+Fullscreen is not built-in behavior; a full-viewport app is ordinary CSS:
+
+```css
+pc-app {
+    width: 100%;
+    height: 100vh;  /* fallback for browsers without dynamic viewport units */
+    height: 100dvh;
+}
+```
+
+Equally, the element can be embedded at any size — in a card, a split pane or a grid cell — and
+several apps can coexist on one page.
+
+:::note[Use explicit dimensions]
+
+Size the element with explicit `width` and `height`. The library's default styles supply explicit
+dimensions, and in CSS box resolution those beat inset stretching — so `position: fixed; inset: 0`
+alone does **not** stretch the element. (The defaults are declared with
+[`:where()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:where) at zero specificity, so any
+page rule — however plain — overrides them.)
+
+:::
+
+The one time the element's size does not drive the drawing buffer is while an XR session is
+presenting — the session owns the buffer for its duration.
+
 ## Loading bar
 
 While the application boots and preloads its assets, `<pc-app>` shows a loading bar along the top of
@@ -49,6 +83,31 @@ the element. Set `loading-bar="false"` to suppress it, or theme it with these CS
 
 To build a loading screen of your own instead, suppress the bar and drive it from the element's
 `progress` event and `loadProgress` property.
+
+## Events
+
+Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+
+| Event | Description |
+| --- | --- |
+| `progress` | A [`ProgressEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent) fired while the application preloads its assets. `loaded` and `total` are asset counts rather than bytes, and an asset that fails to load still counts as loaded. It fires at least once per boot, and the final event always has `loaded` equal to `total`. |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the application cannot boot because no graphics device could be created — WebGL disabled, say, or a blocklisted GPU. `message` names the backends that were requested and `error` carries the underlying failure. |
+
+Neither event bubbles, so listen on the element itself.
+
+An element that fired `error` never becomes ready and its `app` property stays `null` — in
+particular, `whenReady('pc-app')` never settles (see
+[Programmatic Access](../programmatic-access.md)). A page that wants a fallback UI should listen
+for the event rather than await readiness:
+
+```javascript
+document.querySelector('pc-app').addEventListener('error', (event) => {
+    // Neither WebGPU nor WebGL 2 is available — show static content instead
+    document.getElementById('fallback').hidden = false;
+});
+```
+
+Removing the element and re-inserting it retries the boot with its current attributes.
 
 ## Example
 

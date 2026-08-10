@@ -46,4 +46,4 @@ description: "pc-sound要素のリファレンス: 位置オーディオまた�
 
 ## JavaScriptインターフェース
 
-[SoundElement API](https://api.playcanvas.com/web-components/classes/SoundElement.html)を使用して、`<pc-sound>`要素をプログラムで作成および操作できます。
+[SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html)を使用して、`<pc-sound>`要素をプログラムで作成および操作できます。
