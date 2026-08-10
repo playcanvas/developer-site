@@ -35,11 +35,11 @@ PlayCanvas Web Components を使えば、HTML だけでリッチな 3D シーン
 
 `whenReady` は、エンジンオブジェクトが作成された時点で要素とともに解決されます。呼び出した時点で要素がすでに初期化されていれば、即座に解決されます。`DOMContentLoaded` を待ったり、イベントをリッスンしたりする必要はありません。
 
-`whenReady` は、次の3つの場合には待機せずに拒否（reject）されます: 文字列が有効なCSSセレクターでない場合、ドキュメント内に一致する要素がない場合、一致した要素が非同期に初期化されない要素（`<pc-material>` または `<pc-module>`）である場合です。セレクターは一度だけ評価されます（ドキュメントの解析中に呼び出された場合は、解析の完了後に評価されます）。そのため、マークアップに存在する要素は見つかりますが、後から追加される要素は見つかりません。動的に作成した要素を待つには、要素への参照をそのまま渡してください（[下記](#すでに保持している要素を待つ)参照）。
+`whenReady` は、次の3つの場合には待機せずに拒否（reject）されます: 文字列が有効なCSSセレクターでない場合、ドキュメント内に一致する要素がない場合、一致した要素が非同期に初期化されない要素（該当するのは `<pc-material>` のみ）である場合です。セレクターは一度だけ評価されます（ドキュメントの解析中に呼び出された場合は、解析の完了後に評価されます）。そのため、マークアップに存在する要素は見つかりますが、後から追加される要素は見つかりません。動的に作成した要素を待つには、要素への参照をそのまま渡してください（[下記](#すでに保持している要素を待つ)参照）。
 
-:::note[誤配置された要素]
+:::note[準備完了にならない要素]
 
-要素が初期化を完了できない場合（たとえば、`<pc-scripts>` の直接の子ではない `<pc-script>`、または `name` がモデル内のどのノードにも一致しない [`<pc-node>`](./tags/pc-node.md)）、Promiseは決して解決されません。例外は `<pc-entity>` の外にあるコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。いずれの場合も、その要素は何が問題だったかを示すコンソール警告をログに出力します。
+要素が初期化を完了できない場合、Promiseは決して解決されません。これに該当するのは、`<pc-scripts>` の直接の子ではない `<pc-script>`、`name` がモデル内のどのノードにも一致しない [`<pc-node>`](./tags/pc-node.md)、`name` のない [`<pc-module>`](./tags/pc-module.md)、そしてグラフィックスデバイスを作成できなかった [`<pc-app>`](./tags/pc-app.md) です。最後のケースでフォールバックUIを表示するには、要素の [`error` イベント](./tags/pc-app.md#イベント)をリッスンしてください。例外は `<pc-entity>` の外にあるコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。いずれの場合も、その要素は何が問題だったかをコンソールに報告します。
 
 :::
 
@@ -117,15 +117,17 @@ const material = MaterialElement.get('gold'); // <pc-material id="gold"> が宣�
 
 `AssetElement.get` は登録済みの [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html) を返しますが、読み込みが完了していない場合があります。`asset.resource` を使用する前に、`asset.loaded` を確認するか、`load` イベントを購読してください。
 
-[`<pc-module>`](./tags/pc-module.md) は非同期に初期化されず、独自の公開JavaScript APIも持ちません。その必要がないためです。`<pc-app>` は、自身の配下に宣言されたすべての `<pc-module>` を待ってからグラフィックスデバイスを作成するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリです。Ammoを待つ方法は、アプリを待つことです。
+[`<pc-module>`](./tags/pc-module.md) は、上記の要素と同じく非同期に初期化されます。モジュールの読み込みが完了するとready状態になるため、`whenReady('pc-module')` で読み込みを待機できます。とはいえ、これが必要になることはほとんどありません。`<pc-app>` は、自身の配下に宣言されたすべての `<pc-module>` を待ってからグラフィックスデバイスを作成するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリです。Ammoを待つ方法は、アプリを待つことです。
 
 ```javascript
 const { app } = await whenReady('pc-app'); // この時点ですべての <pc-module> は読み込み済みです
 ```
 
+1つだけ `<pc-module>` に特有の注意点があります。そのready状態は固定（スティッキー）です。WebAssemblyモジュールは決してアンロードされないエンジングローバルな状態を構成するため、要素を削除して再挿入してもready状態はリセットされず、モジュールが再読み込みされることもありません。[準備完了](./tags/pc-module.md#準備完了)を参照してください。
+
 ## TypeScript
 
-このパッケージはすべてのタグを TypeScript の `HTMLElementTagNameMap` に登録しているため、要素のクエリは完全に型付けされます。`document.querySelector('pc-app')` は `AppElement | null` となり、`whenReady('pc-camera')` は `CameraComponentElement` に解決されます。非同期に初期化されない要素のタグ(`pc-material` または `pc-module`)を渡すと、コンパイル時エラーになります。
+このパッケージはすべてのタグを TypeScript の `HTMLElementTagNameMap` に登録しているため、要素のクエリは完全に型付けされます。`document.querySelector('pc-app')` は `AppElement | null` となり、`whenReady('pc-camera')` は `CameraComponentElement` に解決されます。非同期に初期化されない要素のタグ（該当するのは `pc-material` のみ）を渡すと、コンパイル時エラーになります。
 
 ## スクリプトを使うべき場面
 
