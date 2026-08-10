@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 485
-Generated: 2026-08-06
+Generated: 2026-08-10
 
 ================================================================================
 
@@ -34505,7 +34505,7 @@ Whichever route you choose, your HTML file needs an [import map](https://develop
 
 Here is a complete page that renders a lit sphere — the "hello, world" of 3D. It uses the CDN setup, so there is nothing to install:
 
-```html title="index.html" {24-36}
+```html title="index.html" {29-41}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -34526,6 +34526,11 @@ Here is a complete page that renders a lit sphere — the "hello, world" of 3D. 
                 margin: 0;
                 overflow: hidden;
             }
+            pc-app {
+                width: 100%;
+                height: 100vh;  /* fallback for browsers without dynamic viewport units */
+                height: 100dvh;
+            }
         </style>
     </head>
     <body>
@@ -34545,6 +34550,8 @@ Here is a complete page that renders a lit sphere — the "hello, world" of 3D. 
     </body>
 </html>
 ```
+
+One rule in the `<style>` block deserves a mention: `<pc-app>` is sized like a `<video>` element — a block-level box that your CSS controls, just 300×150 pixels by default. The `pc-app` rule stretches it to fill the viewport; size it however you like to embed the scene in a normal page layout instead. See [Sizing](tags/pc-app.md#sizing) for the details.
 
 Save this as `index.html` and open it in your browser. You should see:
 
@@ -34620,11 +34627,11 @@ Then import it and await the element you need:
 
 `whenReady` resolves with the element once its engine object has been created. If the element is already initialized by the time you call it, it resolves immediately. There is no need to wait for `DOMContentLoaded` or listen for events.
 
-`whenReady` rejects rather than waiting in three cases: the string is not a valid CSS selector, no element in the document matches it, or the matched element does not initialize asynchronously (`<pc-material>` or `<pc-module>`). A selector is evaluated once — after the document finishes parsing, if called while it is still loading — so it finds elements present in the markup, not elements added later. To wait on a dynamically created element, pass the element reference itself (see [below](#waiting-on-an-element-you-already-hold)).
+`whenReady` rejects rather than waiting in three cases: the string is not a valid CSS selector, no element in the document matches it, or the matched element does not initialize asynchronously (`<pc-material>` is the only such element). A selector is evaluated once — after the document finishes parsing, if called while it is still loading — so it finds elements present in the markup, not elements added later. To wait on a dynamically created element, pass the element reference itself (see [below](#waiting-on-an-element-you-already-hold)).
 
-:::note[Misplaced Elements]
+:::note[Elements That Never Become Ready]
 
-The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`, or a [`<pc-node>`](./tags/pc-node.md) whose `name` matches no node in its model. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. Either way, the element logs a console warning saying what went wrong.
+The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`, a [`<pc-node>`](./tags/pc-node.md) that cannot resolve its `name`, a [`<pc-module>`](./tags/pc-module.md) without a `name`, or an [`<pc-app>`](./tags/pc-app.md) that could not create a graphics device, where a fallback UI should hang off the element's [`error` event](./tags/pc-app.md#events) instead. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. In every case, the element reports what went wrong in the console.
 
 :::
 
@@ -34649,6 +34656,8 @@ Each element exposes its engine counterpart through a property:
 | [`<pc-model>`](./tags/pc-model.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) rooting the instantiated hierarchy |
 | [`<pc-node>`](./tags/pc-node.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) it bound inside that hierarchy |
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
+| [`<pc-script>`](./tags/pc-script.md) | `script` | [`Script`](https://api.playcanvas.com/engine/classes/Script.html) |
+| [`<pc-sound>`](./tags/pc-sound.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
 | Component tags (`<pc-camera>`, `<pc-light>`, ...) | `component` | The corresponding [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
 These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. [`<pc-model>`](./tags/pc-model.md) is the one case where readiness does not promise a non-null `entity`: a load that failed also settles readiness, so check `entity` (or listen for the element's `error` event) if the asset might not arrive.
@@ -34687,7 +34696,7 @@ document.addEventListener('ready', (event) => {
 });
 ```
 
-Use whichever fits the job: `whenReady` *awaits a specific element* and resolves even if that element became ready long ago, while the `ready` event *reacts to elements as they initialize* — including elements added to the page after load, which `whenReady`'s selector form cannot see. The event fires once per element, so attach the listener before the elements you care about initialize; an element that became ready earlier will not fire it again.
+Use whichever fits the job: `whenReady` *awaits a specific element* and resolves even if that element became ready long ago, while the `ready` event *reacts to elements as they initialize* — including elements added to the page after load, which `whenReady`'s selector form cannot see. The event fires once per readiness cycle, so attach the listener before the elements you care about initialize — an element that became ready earlier will not fire it again. An element that is torn down and re-initialized (removed and re-inserted, say, or a `<pc-node>` rebinding after its model reloads) starts a new cycle and fires the event again; `<pc-module>`, whose readiness never resets, is the exception.
 
 ## Assets, Materials and Modules
 
@@ -34701,15 +34710,17 @@ const material = MaterialElement.get('gold'); // the material declared by <pc-ma
 
 `AssetElement.get` returns the registered [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html), which may not have finished loading yet — check `asset.loaded`, or subscribe to its `load` event, before using `asset.resource`.
 
-[`<pc-module>`](./tags/pc-module.md) does not initialize asynchronously and has no public JavaScript API of its own. It needs none: `<pc-app>` waits for every `<pc-module>` declared beneath it before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
+[`<pc-module>`](./tags/pc-module.md) initializes asynchronously like the elements above — it becomes ready once its module has loaded, so `whenReady('pc-module')` awaits the load. You will rarely need it: `<pc-app>` waits for every `<pc-module>` declared beneath it before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
 
 ```javascript
 const { app } = await whenReady('pc-app'); // every <pc-module> has loaded by now
 ```
 
+One caveat sets `<pc-module>` apart: its readiness is sticky. WebAssembly modules configure engine-global state that never unloads, so removing and re-inserting the element neither resets its readiness nor loads the module again — see [Readiness](./tags/pc-module.md#readiness).
+
 ## TypeScript
 
-The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (`pc-material` or `pc-module`) is a compile-time error.
+The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (`pc-material` is the only one) is a compile-time error.
 
 ## When to Use Scripts Instead
 
@@ -34991,6 +35002,40 @@ apply a new value, remove the element and re-insert it.
 
 :::
 
+## Sizing
+
+The element is sized like a replaced element such as `<video>` or `<img>`: a block-level box that
+your page's CSS controls, defaulting to the canvas's intrinsic size of 300×150 pixels. The
+application's canvas always fills the element, and the drawing buffer resolution follows the
+element's size live (capped by `max-pixel-ratio`) — whatever resizes the element, be it a splitter
+drag, a flex reflow or a CSS animation, the rendered scene tracks it.
+
+Fullscreen is not built-in behavior; a full-viewport app is ordinary CSS:
+
+```css
+pc-app {
+    width: 100%;
+    height: 100vh;  /* fallback for browsers without dynamic viewport units */
+    height: 100dvh;
+}
+```
+
+Equally, the element can be embedded at any size — in a card, a split pane or a grid cell — and
+several apps can coexist on one page.
+
+:::note[Use explicit dimensions]
+
+Size the element with explicit `width` and `height`. The library's default styles supply explicit
+dimensions, and in CSS box resolution those beat inset stretching — so `position: fixed; inset: 0`
+alone does **not** stretch the element. (The defaults are declared with
+[`:where()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:where) at zero specificity, so any
+page rule — however plain — overrides them.)
+
+:::
+
+The one time the element's size does not drive the drawing buffer is while an XR session is
+presenting — the session owns the buffer for its duration.
+
 ## Loading bar
 
 While the application boots and preloads its assets, `<pc-app>` shows a loading bar along the top of
@@ -35004,6 +35049,31 @@ the element. Set `loading-bar="false"` to suppress it, or theme it with these CS
 
 To build a loading screen of your own instead, suppress the bar and drive it from the element's
 `progress` event and `loadProgress` property.
+
+## Events
+
+Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+
+| Event | Description |
+| --- | --- |
+| `progress` | A [`ProgressEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent) fired while the application preloads its assets. `loaded` and `total` are asset counts rather than bytes, and an asset that fails to load still counts as loaded. It fires at least once per boot, and the final event always has `loaded` equal to `total`. |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the application cannot boot because no graphics device could be created — WebGL disabled, say, or a blocklisted GPU. `message` names the backends that were requested and `error` carries the underlying failure. |
+
+Neither event bubbles, so listen on the element itself.
+
+An element that fired `error` never becomes ready and its `app` property stays `null` — in
+particular, `whenReady('pc-app')` never settles (see
+[Programmatic Access](../programmatic-access.md)). A page that wants a fallback UI should listen
+for the event rather than await readiness:
+
+```javascript
+document.querySelector('pc-app').addEventListener('error', (event) => {
+    // Neither WebGPU nor WebGL 2 is available — show static content instead
+    document.getElementById('fallback').hidden = false;
+});
+```
+
+Removing the element and re-inserting it retries the boot with its current attributes.
 
 ## Example
 
@@ -35113,7 +35183,7 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 }, true);
 ```
 
-A failed load still makes the element ready: readiness means the load settled, not that it succeeded.
+The element's readiness is a separate signal: it becomes ready once its asset has reached the state the markup declares. For a preloaded asset that is a settled load — a failed load still makes the element ready, so readiness never means success. For a `lazy` asset it is registration, before any load happens; and an element inserted at runtime becomes ready as soon as its asset is created, while its load is still in flight. An element that is not a direct child of `<pc-app>`, or whose asset type is unsupported, warns and never becomes ready.
 
 ## Example
 
@@ -35933,6 +36003,30 @@ The `<pc-module>` tag is used to load a WebAssembly module.
 
 The `name` is case-sensitive — the engine looks the module up by exact name. The modules consumed by the engine are `Ammo` (physics), `Basis` (texture transcoding) and `DracoDecoderModule` (mesh decompression).
 
+:::note[When these are read]
+
+The attributes are read once, when the module starts loading — on the element's first connection
+to the document, or earlier if a containing `<pc-app>` boots first and collects it. Changing them
+afterwards has no effect. Creating the element programmatically works as you would expect: set the
+attributes before appending the element to the document.
+
+:::
+
+## Readiness
+
+The element initializes asynchronously and becomes ready once its module has loaded: it fires the
+standard `ready` event and can be awaited with `whenReady('pc-module')` — see
+[Programmatic Access](../programmatic-access.md). You will rarely need to, though: a containing
+`<pc-app>` waits for every `<pc-module>` declared beneath it before creating its graphics device,
+so an app that is ready is an app whose modules have loaded.
+
+Readiness is deliberately sticky. A WebAssembly module configures engine-global state that never
+unloads, so removing the element does not return it to a pending state, and re-inserting it does
+not load the module again.
+
+A `<pc-module>` without a `name` logs a warning and never becomes ready — but it does not block
+the containing `<pc-app>` from booting.
+
 ## Example
 
 ```html
@@ -36638,7 +36732,7 @@ The `<pc-sound>` tag is used to define a sound.
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-sound>` elements using the [SoundElement API](https://api.playcanvas.com/web-components/classes/SoundElement.html).
+You can programmatically create and manipulate `<pc-sound>` elements using the [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html).
 
 --------------------------------------------------------------------------------
 
