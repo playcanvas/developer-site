@@ -7,25 +7,25 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 
 詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
 
-## グループエレメント (Group Element)
+## グループエレメント (Group Element) {#group-element}
 
 グループエレメントは、Elementコンポーネントのレイアウトプロパティのみを提供します。
 
 ![Group Element](/img/user-manual/editor/scenes/components/component-element-group.png)
 
-## イメージエレメント (Image Element)
+## イメージエレメント (Image Element) {#image-element}
 
 イメージエレメントは、テクスチャアセット、スプライトアセット、または単色を使用して画像を表示します。
 
 ![Image Element](/img/user-manual/editor/scenes/components/component-element-image.png)
 
-## テキストエレメント (Text Element)
+## テキストエレメント (Text Element) {#text-element}
 
 テキストエレメントは、[フォントアセット](/user-manual/editor/assets/inspectors/font/)を使用してテキスト文字列をレンダリングします。
 
 ![Text Element](/img/user-manual/editor/scenes/components/component-element-text.png)
 
-## 共通コンポーネントプロパティ
+## 共通コンポーネントプロパティ {#common-component-properties}
 
 | プロパティ名 | 説明 |
 |----------------|-------------|
@@ -44,7 +44,7 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 | Batch Group    | このエレメントが属するバッチグループ。バッチングについては[こちら](/user-manual/graphics/advanced-rendering/batching)を参照してください。 |
 | Layers         | このエレメントをレンダリングするレイヤー。レイヤーについては[こちら](/user-manual/graphics/layers)を参照してください。 |
 
-## Imageコンポーネントプロパティ
+## Imageコンポーネントプロパティ {#image-component-properties}
 
 | プロパティ名 | 説明 |
 |----------------|-------------|
@@ -59,7 +59,7 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 | Color          | エレメントをティントする色。 |
 | Opacity        | エレメントの透明度。0（完全に透明）から1（完全に不透明）。 |
 
-## Textコンポーネントプロパティ
+## Textコンポーネントプロパティ {#text-component-properties}
 
 | プロパティ名 | 説明 |
 |-------------------|-------------|
@@ -83,7 +83,7 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 | Shadow Color      | テキストの影の色（不透明度用のアルファを含む）。 |
 | Shadow Offset     | テキストからの影のオフセット。水平方向と垂直方向のオフセットとして指定します。 |
 
-## 関連項目
+## 関連項目 {#see-also}
 
 - [Screenコンポーネント](screen.md) - ユーザーインターフェースのルートコンポーネント
 - [Buttonコンポーネント](button.md) - インタラクティブなボタン要素
@@ -91,6 +91,6 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 - [LayoutChildコンポーネント](layoutchild.md) - 個々のエレメントのレイアウト動作をオーバーライド
 - [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
 
-## スクリプトインターフェース
+## スクリプトインターフェース {#scripting-interface}
 
 [Scriptコンポーネント](script.md)を使用してElementコンポーネントのプロパティを制御できます。Elementコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ElementComponent.html)です。
