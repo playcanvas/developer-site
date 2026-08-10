@@ -72,7 +72,7 @@ app.assets.load(asset);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-読み込みコードは必要ありません。[Text Elements](/user-manual/user-interface/text-elements) で説明されているように、FontアセットをTextタイプの [Element コンポーネント](/user-manual/editor/scenes/components/element#テキストエレメント-text-element) の **Font** スロットにドラッグします。
+読み込みコードは必要ありません。[Text Elements](/user-manual/user-interface/text-elements) で説明されているように、FontアセットをTextタイプの [Element コンポーネント](/user-manual/editor/scenes/components/element#text-element) の **Font** スロットにドラッグします。
 
 </TabItem>
 <TabItem value="react" label="React">
