@@ -78,6 +78,7 @@ Web Componentsは[GitHub](https://github.com/playcanvas/web-components)でMITラ
 
 - [開始](getting-started.md) — CDNまたはnpmからライブラリを読み込み、最初のページをレンダリングします。
 - [シーンを構築する](building-a-scene.md) — カメラ、メッシュ、ライト、マテリアルを扱うステップバイステップのチュートリアルです。
+- [モデルの読み込み](loading-models.md) — glTFやGLBを読み込み、その中身を確認し、マークアップから調整します。
 - [属性](attributes.md) — すべてのタグに共通する値の規約です。
 - [スクリプトで動作を追加する](scripting.md) — エンティティにエンジンのスクリプトをアタッチして、動きやインタラクティブ性を加えます。
 - [プログラムによるアクセス](programmatic-access.md) — `whenReady` を使ってJavaScriptから実行中のアプリを操作します。

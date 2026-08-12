@@ -165,6 +165,7 @@ pc-app ................... the application
 
 ## Next Steps
 
+- [Loading Models](loading-models.md) — swap the primitives for a glTF or GLB model, and reach inside it.
 - [Attributes](attributes.md) — the value conventions you just used: booleans, colors, vectors and more.
 - [Adding Behavior with Scripts](scripting.md) — make things move. The engine also ships ready-made scripts such as `cameraControls`, which lets you orbit your scene with the mouse.
 - [Tag Reference](tags/index.md) — everything else you can declare.

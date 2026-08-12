@@ -5,6 +5,8 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 
 `<pc-model>`タグは、GLBファイルから3Dモデルをインスタンス化するエンティティを定義するために使用されます。
 
+エクスポート、圧縮メッシュ、ファイルの中身の調査、そしてその調整といったワークフロー全体の解説は、[モデルの読み込み](../loading-models.md)を参照してください。
+
 :::note[使用法]
 
 * [`<pc-scene>`](../pc-scene)または[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
@@ -24,7 +26,7 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 
 </div>
 
-## イベント
+## イベント {#events}
 
 これらのイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用するか、このインターフェースの`oneventname`プロパティにイベントリスナーを割り当てることでリッスンできます。
 
@@ -36,6 +38,19 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、ページ上のすべてのモデルを監視するには、祖先要素でキャプチャフェーズのリスナーを使用します。
 
 要素は階層がインスタンス化されてシーンに追加された時点でreadyになるため、readyな`<pc-model>`は常に有効なワールドトランスフォームを持つ非nullの`entity`を持ちます。読み込みが失敗した場合もreadyは確定し、`entity`は`null`のままになります。readyであることは読み込みが決着したことを意味し、成功したことを意味しません。両者を区別するには`error`をリッスンする（または`entity`を確認する）必要があります。
+
+## アニメーション {#animation}
+
+コンテナがアニメーションを保持している場合、インスタンス化されたルートに`anim`コンポーネントが与えられ、*最初の*アニメーションが割り当てられて再生されます。これは自動的に行われ、有効にするための属性も、別のクリップを選ぶ・一時停止する・クリップ間をブレンドするための属性もありません。
+
+したがってマークアップがカバーするのは1つのケースだけです。ファイルに入っていたものを再生することです。それ以上のことをするには、要素の`entity`を通じてコンポーネントに到達し、エンジンの[AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) APIで制御してください。
+
+```javascript
+const { entity } = await whenReady('pc-model');
+entity.anim.baseLayer.pause();
+```
+
+アニメーションを持たないモデルには`anim`コンポーネントは与えられません。そのため、コンポーネントの有無を確認することが、ファイルのアニメーションがエクスポートを通過したかを判断する方法になります。[印字可能な階層](#inspecting-the-hierarchy)では、ルートに`(anim)`として表示されます。
 
 ## 例
 
@@ -61,9 +76,9 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 
 [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html)を使用して、`<pc-model>`要素をプログラムで作成および操作できます。
 
-### 階層の調査
+### 階層の調査 {#inspecting-the-hierarchy}
 
-[`<pc-node>`](../pc-node)を書くには、GLBが実際に何としてインスタンス化されたかを知る必要があります。そして、*ソース*アセットのノード名を表示するビューアーが、必ずしもそれを示しているとは限りません。`hierarchy()`メソッドは、実際に存在するとおりのツリーを報告します。これが`<pc-node>`が解決に用いる語彙です。出力は1行で済みます。
+`hierarchy()`メソッドは、インスタンス化されたツリーを実際に存在するとおりに報告します。これが[`<pc-node>`](../pc-node)が解決に用いる語彙であり、ソースアセットのノード名から想像されるものとは必ずしも一致しません。[モデルの読み込み](../loading-models.md#seeing-what-you-loaded)が実例で解説しています。こちらはリファレンスです。出力は1行で済みます。
 
 ```javascript
 import { whenReady } from '@playcanvas/web-components';
@@ -96,6 +111,6 @@ Car
 | `children` | Object[] | ノードの子ノード |
 | `toString()` | Function | このノードをルートとするサブツリーを上記の印字可能なツリーとして描画します。`String(node)`でどの枝でも出力できます |
 
-マテリアルの`name`値はそのまま読み取られる実行時のラベルであり、便利な手掛かりではあるものの一意ではありません。名前のないglTFマテリアルは`Untitled`と呼ばれ、マテリアルなしでオーサリングされたプリミティブはエンジンが共有する`defaultGlbMaterial`を持ち、重複はそのまま重複し、スクリプトが割り当てを解除した場合は名前は`null`になります。一意なのは`index`です。どちらも[`<pc-node>`の`material-overrides`](../pc-node#マテリアルのオーバーライド)が選択に用いるもので、差し替えた[`<pc-material>`](../pc-material)は`name`属性の内容をそのまま報告します。ここで識別したいマテリアルには設定しておく価値があります。
+マテリアルの`name`値はそのまま読み取られる実行時のラベルであり、便利な手掛かりではあるものの一意ではありません。名前のないglTFマテリアルは`Untitled`と呼ばれ、マテリアルなしでオーサリングされたプリミティブはエンジンが共有する`defaultGlbMaterial`を持ち、重複はそのまま重複し、スクリプトが割り当てを解除した場合は名前は`null`になります。一意なのは`index`です。どちらも[`<pc-node>`の`material-overrides`](../pc-node#overriding-materials)が選択に用いるもので、差し替えた[`<pc-material>`](../pc-material)は`name`属性の内容をそのまま報告します。ここで識別したいマテリアルには設定しておく価値があります。
 
 このツリーはスナップショットであり、呼び出しごとに新しく計算されます。その後の階層の変更を追跡することはなく、変更を加えても何も起こりません。プレーンなデータであるため`JSON.stringify`を通過でき、ログ出力・差分比較・テストでの検証が容易です。
