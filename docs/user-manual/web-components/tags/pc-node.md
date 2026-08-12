@@ -7,6 +7,8 @@ The `<pc-node>` tag binds to a node inside the hierarchy that a [`<pc-model>`](.
 
 Where [`<pc-entity>`](../pc-entity) *creates* an entity, `<pc-node>` *references* one that the model already created. Its `name` is a lookup, never a rename.
 
+For worked examples of the common adjustments — hiding, re-posing, reskinning, attaching content and adding components — see [Loading Models](../loading-models.md#adjusting-what-you-loaded).
+
 :::note[Usage]
 
 * It must be a descendant of a [`<pc-model>`](../pc-model), either directly or nested inside another `<pc-node>`.

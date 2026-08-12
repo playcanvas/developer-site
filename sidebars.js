@@ -505,6 +505,7 @@ const sidebars = {
       items: [
         'user-manual/web-components/getting-started',
         'user-manual/web-components/building-a-scene',
+        'user-manual/web-components/loading-models',
         'user-manual/web-components/attributes',
         'user-manual/web-components/scripting',
         'user-manual/web-components/programmatic-access',

@@ -5,6 +5,8 @@ description: "Reference for the pc-model element: instantiate a 3D model from a 
 
 The `<pc-model>` tag is used to define an entity that instantiates a 3D model from a GLB file.
 
+For a walkthrough of the whole workflow — exporting, compressed meshes, discovering what a file contains and adjusting it — see [Loading Models](../loading-models.md).
+
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-scene>`](../pc-scene) or a [`<pc-entity>`](../pc-entity).
@@ -37,6 +39,23 @@ Neither event bubbles, so listen on the element itself — or use a capture-phas
 
 The element becomes ready once its hierarchy has been instantiated and added to the scene, so a ready `<pc-model>` always has a non-null `entity` with valid world transforms. A failed load also settles readiness, with `entity` left `null` — readiness means the load settled, not that it succeeded, so listen for `error` (or check `entity`) to tell the two apart.
 
+## Animation
+
+If the container holds any animations, the instantiated root is given an `anim` component and the *first* animation is assigned and played. This happens automatically: there is no attribute to enable it, and none to choose a different clip, pause it or blend between clips.
+
+Markup therefore covers exactly one case — play what the file came with. For anything more, reach the component through the element's `entity` and drive it with the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) API:
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const { entity } = await whenReady('pc-model');
+entity.anim.baseLayer.pause();
+```
+
+Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](../programmatic-access.md).
+
+A model with no animations gets no `anim` component, so checking for one is how you tell whether a file's animations survived its export — the [printable hierarchy](#inspecting-the-hierarchy) shows it as `(anim)` on the root.
+
 ## Example
 
 ```html
@@ -63,7 +82,7 @@ You can programmatically create and manipulate `<pc-model>` elements using the [
 
 ### Inspecting the Hierarchy
 
-Writing a [`<pc-node>`](../pc-node) means knowing what the GLB instantiated as — and a viewer that shows you the node names of the *source* asset is not always showing you those. The `hierarchy()` method reports the tree as it actually exists, which is the vocabulary a `<pc-node>` resolves against. Printing it is one line:
+The `hierarchy()` method reports the instantiated tree as it actually exists, which is the vocabulary a [`<pc-node>`](../pc-node) resolves against — and not necessarily what the source asset's node names suggest. [Loading Models](../loading-models.md#seeing-what-you-loaded) works through a real example; this is the reference. Printing it is one line:
 
 ```javascript
 import { whenReady } from '@playcanvas/web-components';
