@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 485
-Generated: 2026-08-10
+Generated: 2026-08-12
 
 ================================================================================
 
@@ -34664,6 +34664,8 @@ These accessors are typed nullable: they return `null` before the element is rea
 
 Every asynchronously initializing element also exposes `closestApp` and `closestEntity` getters, returning its nearest `<pc-app>` *ancestor* element, or its nearest entity-fronting ancestor — a `<pc-entity>` or a `<pc-node>` — or `null` if there is none. Handy when you hold a component element and need its owning entity or app.
 
+A `<pc-model>`'s `entity` roots a whole instantiated hierarchy, and reading that hierarchy is the other thing you will want from one. Its `hierarchy()` method returns a plain-data snapshot of the instantiated tree — the node names, paths and match indices a [`<pc-node>`](./tags/pc-node.md) binds against, plus the material assignments its `material-overrides` mapping selects — and `String()` of the result prints it as a tree. See [Inspecting the Hierarchy](./tags/pc-model.md#inspecting-the-hierarchy).
+
 ## Targeting a Specific App
 
 Most pages contain a single `<pc-app>`, and `whenReady('pc-app')` finds it (the first one in document order). If your page hosts several apps, pass a selector to pick one:
@@ -35833,6 +35835,7 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `id` | String | - | Unique identifier used by other tags to reference this material |
 | `metalness` | Number | `"0"` | How metallic the surface is, from 0 (dielectric) to 1 (metal) |
 | `metalness-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the metalness map |
+| `name` | String | `"Untitled"` | Name of the material. A label, not a reference: other tags always address the material by `id` |
 | `normal-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the normal map |
 | `occlude-direct` | Boolean | `"false"` | Whether ambient occlusion also attenuates direct lighting |
 | `occlude-specular` | Enum | `"ao"` | How specular reflections are occluded: `"none"` \| `"ao"` \| `"gloss-dependent"` |
@@ -35906,6 +35909,8 @@ The `-map-channel` modifier varies by slot:
 
 A `<pc-material>` inserted at runtime (after the application has started) creates its material on insertion, so materials can be added dynamically from JavaScript. Attribute changes made at runtime also take effect immediately — a burst of changes is coalesced into a single material update — and removing a `*-map` attribute clears that texture slot.
 
+The `name` attribute is worth setting on any material you expect to identify later. It reaches the engine material, so it is the label that shows up wherever materials surface by name: profilers, GPU captures, and the assignments [`<pc-model>`'s `hierarchy()`](../pc-model#inspecting-the-hierarchy) reports — including on a material swapped in by [`<pc-node>`'s `material-overrides`](../pc-node#overriding-materials), which otherwise reads as `Untitled` there. It has no bearing on how the material is referenced, which is always by `id`.
+
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-material>` elements using the [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html).
@@ -35973,6 +35978,44 @@ To reach inside the loaded hierarchy, nest a [`<pc-node>`](../pc-node) for each 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
+
+### Inspecting the Hierarchy
+
+Writing a [`<pc-node>`](../pc-node) means knowing what the GLB instantiated as — and a viewer that shows you the node names of the *source* asset is not always showing you those. The `hierarchy()` method reports the tree as it actually exists, which is the vocabulary a `<pc-node>` resolves against. Printing it is one line:
+
+```javascript
+
+const model = await whenReady('pc-model');
+console.log(String(model.hierarchy()));
+```
+
+```none
+Car
+├─ FrontAxle
+│  └─ Wheel [0] (render) {defaultGlbMaterial}
+├─ RearAxle
+│  └─ Wheel [1] (render) {defaultGlbMaterial}
+├─ Wing
+└─ Wing1
+```
+
+Each line is a node: its name, then `[index]` when other nodes share that name, the component types it carries in parentheses, and the materials of a render component in braces. So the two wheels above are reached with `<pc-node name="Wheel" index="0">` and `<pc-node name="Wheel" index="1">`, and `Wing1` is the engine renaming a second `Wing` sibling apart as it built the hierarchy.
+
+`hierarchy()` returns the root node of a plain-data tree, or `null` while there is nothing instantiated — before the container asset has loaded, after a load failed, or once the element has left the document. Every node carries:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `name` | String | The node's name as instantiated, which is the name a `<pc-node>` looks up. It can differ from the name in the source asset: the engine synthesizes `node_<index>` names for unnamed nodes and renames identically named siblings apart |
+| `path` | String | The node's `/`-separated path below the model root, which is the `path` a `<pc-node>` bound to it reports. The root's path is its own name |
+| `index` | Number | The node's position among the nodes sharing its name, counted in depth-first order over the whole model — exactly the match a `<pc-node>`'s `index` selects |
+| `components` | String[] | The types of the components attached to the node (such as `render`), sorted |
+| `materials` | Object[] | One `{ index, name }` entry per mesh instance of the node's render component, in component order. Empty for a node without one |
+| `children` | Object[] | The node's child nodes |
+| `toString()` | Function | Renders the subtree rooted at this node as the printable tree above, so `String(node)` prints any branch |
+
+The material `name` values are runtime labels read as they stand, which makes them a convenient handle but not a unique one: an unnamed glTF material is called `Untitled`, a primitive authored without a material carries the engine's shared `defaultGlbMaterial`, duplicates stay duplicated, and the name is `null` if a script cleared the assignment. The `index` is the unambiguous one. Both are what [`<pc-node>`'s `material-overrides`](../pc-node#overriding-materials) selects with, and a [`<pc-material>`](../pc-material) you swap in reports whatever its `name` attribute says — worth setting on any material you want to recognize here.
+
+The tree is a snapshot, computed afresh on each call: it does not track later changes to the hierarchy, and mutating it changes nothing. Being plain data, it survives `JSON.stringify`, so it is easy to log, diff or assert against in a test.
 
 --------------------------------------------------------------------------------
 
@@ -36067,6 +36110,7 @@ Where [`<pc-entity>`](../pc-entity) *creates* an entity, `<pc-node>` *references
 | --- | --- | --- | --- |
 | `enabled` | Boolean | *authored* | Overrides the node's enabled state |
 | `index` | Number | - | Which match to bind when `name` matches more than one node, 0-based in depth-first order. Required when the name is ambiguous, optional otherwise |
+| `material-overrides` | String | *authored* | Overrides the material assignments of the bound node's render component, as a JSON object mapping selectors to `<pc-material>` ids. See [Overriding Materials](#overriding-materials) |
 | `name` | String | - | Name of the node to bind, looked up within the enclosing `<pc-model>` (or `<pc-node>`) |
 | `position` | Vector3 | *authored* | Overrides the node's local position as "X Y Z" values |
 | `rotation` | Vector3 | *authored* | Overrides the node's local rotation as "X Y Z" Euler angles in degrees |
@@ -36098,6 +36142,35 @@ Binding nothing is deliberate: guessing would silently decorate the wrong node, 
 The other resolution failures warn in the same way — a name that matches nothing (with the closest name it did find, as a typo hint), an `index` beyond the number of matches, and a node that another `<pc-node>` has already bound. In each case the element binds nothing and never becomes ready.
 
 An element only becomes ready once it is bound, and its descendants wait with it. If the model reloads, or the element retargets because you changed `name`, it re-resolves and re-applies its overrides, components and attached content against the new node.
+
+## Overriding Materials
+
+`material-overrides` reskins part of a model without editing the GLB. Its value is a JSON object mapping selectors to [`<pc-material>`](../pc-material) ids, so wrap it in single quotes — JSON needs the double ones for itself:
+
+```html
+<pc-model asset="car">
+    <pc-node name="Body" material-overrides='{"name:CarPaint": "candy-red", "index:3": "smoked-glass"}'></pc-node>
+</pc-model>
+```
+
+Both selectors address the mesh instances of the bound node's render component:
+
+| Selector | Selects |
+| --- | --- |
+| `name:X` | Every mesh instance whose material is named `X` |
+| `index:N` | Mesh instance `N`, numbered from 0 in the order the render component lists them |
+
+The mapping is sparse: an assignment that no rule matches keeps the material the model was authored with. Where rules of both kinds cover the same mesh instance, `index:` wins — so you can replace a material everywhere it appears by name, then pin the one exception by index.
+
+Use [`<pc-model>`'s `hierarchy()`](../pc-model#inspecting-the-hierarchy) to discover the names and indices a node offers. Material names are runtime labels rather than unique identifiers — glTF allows duplicates, leaves unnamed materials called `Untitled`, and gives a primitive authored without a material the engine's shared `defaultGlbMaterial` — so reach for `index:` whenever a name is not distinct.
+
+Names are matched against the assignments captured when the mapping first applied. A rule therefore never matches a material that another rule put there, and renaming a material afterwards cannot change what it selects. Removing the attribute puts every captured assignment back, as does assigning `null` to the `materialOverrides` property or setting an empty `{}`.
+
+The target is the render component the model was authored with. A `<pc-node>` bound to a node that has none warns and changes nothing, and a render component that a child [`<pc-render>`](../pc-render) added is never the target.
+
+Rules are validated one at a time, and an invalid one is ignored while the rest of the mapping still applies. Each of these warns: a selector with neither prefix, an `index:` that is not a non-negative integer, an index past the last mesh instance, a name that matches no assignment (the warning lists the names that are there), and an id that resolves to no `<pc-material>`. A value that is not a JSON object at all — malformed JSON, or an array — warns and is treated as absent, restoring the captured assignments rather than leaving the previous mapping in force.
+
+A `<pc-material>` added to the document *after* a mapping referenced it is not picked up on its own. Assign the mapping again once the element exists and the rule resolves.
 
 ## Events
 
@@ -36151,6 +36224,16 @@ Alongside `entity`, which is the node it bound, the element reports how resoluti
 const node = await whenReady('pc-node[name="Roof"]');
 console.log(node.state, node.path); // 'bound' 'Body/Roof'
 ```
+
+The `materialOverrides` property is the mapping described in [Overriding Materials](#overriding-materials), as an object rather than a JSON string:
+
+```javascript
+const body = await whenReady('pc-node[name="Body"]');
+body.materialOverrides = { 'name:CarPaint': 'candy-red' };
+body.materialOverrides = null; // back to the authored materials
+```
+
+The element stores a frozen copy of what you assign, so mutating your object afterwards changes nothing — assign a new mapping to change one. Property writes do not reflect back to the `material-overrides` attribute, which follows how the other override properties behave.
 
 --------------------------------------------------------------------------------
 
