@@ -72,6 +72,8 @@ These accessors are typed nullable: they return `null` before the element is rea
 
 Every asynchronously initializing element also exposes `closestApp` and `closestEntity` getters, returning its nearest `<pc-app>` *ancestor* element, or its nearest entity-fronting ancestor — a `<pc-entity>` or a `<pc-node>` — or `null` if there is none. Handy when you hold a component element and need its owning entity or app.
 
+A `<pc-model>`'s `entity` roots a whole instantiated hierarchy, and reading that hierarchy is the other thing you will want from one. Its `hierarchy()` method returns a plain-data snapshot of the instantiated tree — the node names, paths and match indices a [`<pc-node>`](./tags/pc-node.md) binds against, plus the material assignments its `material-overrides` mapping selects — and `String()` of the result prints it as a tree. See [Inspecting the Hierarchy](./tags/pc-model.md#inspecting-the-hierarchy).
+
 ## Targeting a Specific App
 
 Most pages contain a single `<pc-app>`, and `whenReady('pc-app')` finds it (the first one in document order). If your page hosts several apps, pass a selector to pick one:

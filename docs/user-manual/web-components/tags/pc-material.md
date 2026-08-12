@@ -50,6 +50,7 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `id` | String | - | Unique identifier used by other tags to reference this material |
 | `metalness` | Number | `"0"` | How metallic the surface is, from 0 (dielectric) to 1 (metal) |
 | `metalness-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the metalness map |
+| `name` | String | `"Untitled"` | Name of the material. A label, not a reference: other tags always address the material by `id` |
 | `normal-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the normal map |
 | `occlude-direct` | Boolean | `"false"` | Whether ambient occlusion also attenuates direct lighting |
 | `occlude-specular` | Enum | `"ao"` | How specular reflections are occluded: `"none"` \| `"ao"` \| `"gloss-dependent"` |
@@ -122,6 +123,8 @@ The `-map-channel` modifier varies by slot:
 ```
 
 A `<pc-material>` inserted at runtime (after the application has started) creates its material on insertion, so materials can be added dynamically from JavaScript. Attribute changes made at runtime also take effect immediately — a burst of changes is coalesced into a single material update — and removing a `*-map` attribute clears that texture slot.
+
+The `name` attribute is worth setting on any material you expect to identify later. It reaches the engine material, so it is the label that shows up wherever materials surface by name: profilers, GPU captures, and the assignments [`<pc-model>`'s `hierarchy()`](../pc-model#inspecting-the-hierarchy) reports — including on a material swapped in by [`<pc-node>`'s `material-overrides`](../pc-node#overriding-materials), which otherwise reads as `Untitled` there. It has no bearing on how the material is referenced, which is always by `id`.
 
 ## JavaScript Interface
 

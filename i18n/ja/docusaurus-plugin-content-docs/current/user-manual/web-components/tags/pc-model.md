@@ -60,3 +60,42 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 ## JavaScriptインターフェース
 
 [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html)を使用して、`<pc-model>`要素をプログラムで作成および操作できます。
+
+### 階層の調査
+
+[`<pc-node>`](../pc-node)を書くには、GLBが実際に何としてインスタンス化されたかを知る必要があります。そして、*ソース*アセットのノード名を表示するビューアーが、必ずしもそれを示しているとは限りません。`hierarchy()`メソッドは、実際に存在するとおりのツリーを報告します。これが`<pc-node>`が解決に用いる語彙です。出力は1行で済みます。
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const model = await whenReady('pc-model');
+console.log(String(model.hierarchy()));
+```
+
+```none
+Car
+├─ FrontAxle
+│  └─ Wheel [0] (render) {defaultGlbMaterial}
+├─ RearAxle
+│  └─ Wheel [1] (render) {defaultGlbMaterial}
+├─ Wing
+└─ Wing1
+```
+
+各行が1つのノードです。名前、その名前を他のノードと共有している場合は`[index]`、括弧内に持っているコンポーネントのタイプ、そして波括弧内にrenderコンポーネントのマテリアルが並びます。したがって上の2つのホイールには`<pc-node name="Wheel" index="0">`と`<pc-node name="Wheel" index="1">`で到達でき、`Wing1`はエンジンが階層を構築する際に2つ目の`Wing`兄弟をリネームして区別したものです。
+
+`hierarchy()`はプレーンなデータツリーのルートノードを返します。インスタンス化されたものが何もない間 — コンテナアセットの読み込み前、読み込みが失敗した後、要素がドキュメントから外れた後 — は`null`を返します。各ノードは次を持ちます。
+
+| プロパティ | タイプ | 説明 |
+| --- | --- | --- |
+| `name` | String | インスタンス化された時点でのノード名で、`<pc-node>`が検索する名前です。ソースアセット内の名前と異なる場合があります。エンジンは名前のないノードに`node_<index>`という名前を合成し、同名の兄弟をリネームして区別するためです |
+| `path` | String | モデルルート以下のノードの`/`区切りのパスで、そのノードにバインドした`<pc-node>`が報告する`path`です。ルートのパスはそれ自身の名前です |
+| `index` | Number | 同じ名前を共有するノードの中でのこのノードの位置。モデル全体を深さ優先順で数えたもので、`<pc-node>`の`index`が選択する一致項目そのものです |
+| `components` | String[] | ノードにアタッチされているコンポーネントのタイプ（`render`など）。ソート済みです |
+| `materials` | Object[] | ノードのrenderコンポーネントのメッシュインスタンス1つごとに`{ index, name }`エントリが1つ、コンポーネント順に並びます。renderコンポーネントを持たないノードでは空です |
+| `children` | Object[] | ノードの子ノード |
+| `toString()` | Function | このノードをルートとするサブツリーを上記の印字可能なツリーとして描画します。`String(node)`でどの枝でも出力できます |
+
+マテリアルの`name`値はそのまま読み取られる実行時のラベルであり、便利な手掛かりではあるものの一意ではありません。名前のないglTFマテリアルは`Untitled`と呼ばれ、マテリアルなしでオーサリングされたプリミティブはエンジンが共有する`defaultGlbMaterial`を持ち、重複はそのまま重複し、スクリプトが割り当てを解除した場合は名前は`null`になります。一意なのは`index`です。どちらも[`<pc-node>`の`material-overrides`](../pc-node#マテリアルのオーバーライド)が選択に用いるもので、差し替えた[`<pc-material>`](../pc-material)は`name`属性の内容をそのまま報告します。ここで識別したいマテリアルには設定しておく価値があります。
+
+このツリーはスナップショットであり、呼び出しごとに新しく計算されます。その後の階層の変更を追跡することはなく、変更を加えても何も起こりません。プレーンなデータであるため`JSON.stringify`を通過でき、ログ出力・差分比較・テストでの検証が容易です。

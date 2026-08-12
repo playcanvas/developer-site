@@ -24,6 +24,7 @@ Where [`<pc-entity>`](../pc-entity) *creates* an entity, `<pc-node>` *references
 | --- | --- | --- | --- |
 | `enabled` | Boolean | *authored* | Overrides the node's enabled state |
 | `index` | Number | - | Which match to bind when `name` matches more than one node, 0-based in depth-first order. Required when the name is ambiguous, optional otherwise |
+| `material-overrides` | String | *authored* | Overrides the material assignments of the bound node's render component, as a JSON object mapping selectors to `<pc-material>` ids. See [Overriding Materials](#overriding-materials) |
 | `name` | String | - | Name of the node to bind, looked up within the enclosing `<pc-model>` (or `<pc-node>`) |
 | `position` | Vector3 | *authored* | Overrides the node's local position as "X Y Z" values |
 | `rotation` | Vector3 | *authored* | Overrides the node's local rotation as "X Y Z" Euler angles in degrees |
@@ -55,6 +56,35 @@ Binding nothing is deliberate: guessing would silently decorate the wrong node, 
 The other resolution failures warn in the same way — a name that matches nothing (with the closest name it did find, as a typo hint), an `index` beyond the number of matches, and a node that another `<pc-node>` has already bound. In each case the element binds nothing and never becomes ready.
 
 An element only becomes ready once it is bound, and its descendants wait with it. If the model reloads, or the element retargets because you changed `name`, it re-resolves and re-applies its overrides, components and attached content against the new node.
+
+## Overriding Materials
+
+`material-overrides` reskins part of a model without editing the GLB. Its value is a JSON object mapping selectors to [`<pc-material>`](../pc-material) ids, so wrap it in single quotes — JSON needs the double ones for itself:
+
+```html
+<pc-model asset="car">
+    <pc-node name="Body" material-overrides='{"name:CarPaint": "candy-red", "index:3": "smoked-glass"}'></pc-node>
+</pc-model>
+```
+
+Both selectors address the mesh instances of the bound node's render component:
+
+| Selector | Selects |
+| --- | --- |
+| `name:X` | Every mesh instance whose material is named `X` |
+| `index:N` | Mesh instance `N`, numbered from 0 in the order the render component lists them |
+
+The mapping is sparse: an assignment that no rule matches keeps the material the model was authored with. Where rules of both kinds cover the same mesh instance, `index:` wins — so you can replace a material everywhere it appears by name, then pin the one exception by index.
+
+Use [`<pc-model>`'s `hierarchy()`](../pc-model#inspecting-the-hierarchy) to discover the names and indices a node offers. Material names are runtime labels rather than unique identifiers — glTF allows duplicates, leaves unnamed materials called `Untitled`, and gives a primitive authored without a material the engine's shared `defaultGlbMaterial` — so reach for `index:` whenever a name is not distinct.
+
+Names are matched against the assignments captured when the mapping first applied. A rule therefore never matches a material that another rule put there, and renaming a material afterwards cannot change what it selects. Removing the attribute puts every captured assignment back, as does assigning `null` to the `materialOverrides` property or setting an empty `{}`.
+
+The target is the render component the model was authored with. A `<pc-node>` bound to a node that has none warns and changes nothing, and a render component that a child [`<pc-render>`](../pc-render) added is never the target.
+
+Rules are validated one at a time, and an invalid one is ignored while the rest of the mapping still applies. Each of these warns: a selector with neither prefix, an `index:` that is not a non-negative integer, an index past the last mesh instance, a name that matches no assignment (the warning lists the names that are there), and an id that resolves to no `<pc-material>`. A value that is not a JSON object at all — malformed JSON, or an array — warns and is treated as absent, restoring the captured assignments rather than leaving the previous mapping in force.
+
+A `<pc-material>` added to the document *after* a mapping referenced it is not picked up on its own. Assign the mapping again once the element exists and the rule resolves.
 
 ## Events
 
@@ -109,3 +139,13 @@ import { whenReady } from '@playcanvas/web-components';
 const node = await whenReady('pc-node[name="Roof"]');
 console.log(node.state, node.path); // 'bound' 'Body/Roof'
 ```
+
+The `materialOverrides` property is the mapping described in [Overriding Materials](#overriding-materials), as an object rather than a JSON string:
+
+```javascript
+const body = await whenReady('pc-node[name="Body"]');
+body.materialOverrides = { 'name:CarPaint': 'candy-red' };
+body.materialOverrides = null; // back to the authored materials
+```
+
+The element stores a frozen copy of what you assign, so mutating your object afterwards changes nothing — assign a new mapping to change one. Property writes do not reflect back to the `material-overrides` attribute, which follows how the other override properties behave.

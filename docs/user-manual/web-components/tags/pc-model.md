@@ -60,3 +60,42 @@ To reach inside the loaded hierarchy, nest a [`<pc-node>`](../pc-node) for each 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
+
+### Inspecting the Hierarchy
+
+Writing a [`<pc-node>`](../pc-node) means knowing what the GLB instantiated as — and a viewer that shows you the node names of the *source* asset is not always showing you those. The `hierarchy()` method reports the tree as it actually exists, which is the vocabulary a `<pc-node>` resolves against. Printing it is one line:
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const model = await whenReady('pc-model');
+console.log(String(model.hierarchy()));
+```
+
+```none
+Car
+├─ FrontAxle
+│  └─ Wheel [0] (render) {defaultGlbMaterial}
+├─ RearAxle
+│  └─ Wheel [1] (render) {defaultGlbMaterial}
+├─ Wing
+└─ Wing1
+```
+
+Each line is a node: its name, then `[index]` when other nodes share that name, the component types it carries in parentheses, and the materials of a render component in braces. So the two wheels above are reached with `<pc-node name="Wheel" index="0">` and `<pc-node name="Wheel" index="1">`, and `Wing1` is the engine renaming a second `Wing` sibling apart as it built the hierarchy.
+
+`hierarchy()` returns the root node of a plain-data tree, or `null` while there is nothing instantiated — before the container asset has loaded, after a load failed, or once the element has left the document. Every node carries:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `name` | String | The node's name as instantiated, which is the name a `<pc-node>` looks up. It can differ from the name in the source asset: the engine synthesizes `node_<index>` names for unnamed nodes and renames identically named siblings apart |
+| `path` | String | The node's `/`-separated path below the model root, which is the `path` a `<pc-node>` bound to it reports. The root's path is its own name |
+| `index` | Number | The node's position among the nodes sharing its name, counted in depth-first order over the whole model — exactly the match a `<pc-node>`'s `index` selects |
+| `components` | String[] | The types of the components attached to the node (such as `render`), sorted |
+| `materials` | Object[] | One `{ index, name }` entry per mesh instance of the node's render component, in component order. Empty for a node without one |
+| `children` | Object[] | The node's child nodes |
+| `toString()` | Function | Renders the subtree rooted at this node as the printable tree above, so `String(node)` prints any branch |
+
+The material `name` values are runtime labels read as they stand, which makes them a convenient handle but not a unique one: an unnamed glTF material is called `Untitled`, a primitive authored without a material carries the engine's shared `defaultGlbMaterial`, duplicates stay duplicated, and the name is `null` if a script cleared the assignment. The `index` is the unambiguous one. Both are what [`<pc-node>`'s `material-overrides`](../pc-node#overriding-materials) selects with, and a [`<pc-material>`](../pc-material) you swap in reports whatever its `name` attribute says — worth setting on any material you want to recognize here.
+
+The tree is a snapshot, computed afresh on each call: it does not track later changes to the hierarchy, and mutating it changes nothing. Being plain data, it survives `JSON.stringify`, so it is easy to log, diff or assert against in a test.
