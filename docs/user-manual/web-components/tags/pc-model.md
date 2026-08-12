@@ -46,9 +46,13 @@ If the container holds any animations, the instantiated root is given an `anim` 
 Markup therefore covers exactly one case — play what the file came with. For anything more, reach the component through the element's `entity` and drive it with the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) API:
 
 ```javascript
+import { whenReady } from '@playcanvas/web-components';
+
 const { entity } = await whenReady('pc-model');
 entity.anim.baseLayer.pause();
 ```
+
+Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](../programmatic-access.md).
 
 A model with no animations gets no `anim` component, so checking for one is how you tell whether a file's animations survived its export — the [printable hierarchy](#inspecting-the-hierarchy) shows it as `(anim)` on the root.
 

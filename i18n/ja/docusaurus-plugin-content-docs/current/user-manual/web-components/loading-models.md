@@ -97,6 +97,8 @@ Sketchfab_model
    │  └─ Plane.002_0 (render) {paint}
    ├─ boot
    │  └─ boot_0 (render) {full_black}
+   ├─ underbody
+   │  └─ underbody_0 (render) {full_black}
    ├─ Cylinder.000
    │  ├─ Cylinder.000_0 (render) {silver}
    │  ├─ Cylinder.000_1 (render) {plastic}
@@ -105,10 +107,20 @@ Sketchfab_model
    ├─ Plane
    │  └─ Plane_0 (render) {Material}
    ⋮
+   ├─ bumper_front.004
+   │  ├─ bumper_front.004_0 (render) {silver}
+   │  ├─ bumper_front.004_1 (render) {lights}
+   │  └─ bumper_front.004_2 (render) {plastic}
+   ⋮
+   ├─ boot.001
+   │  └─ boot.001_0 (render) {paint}
+   ⋮
    └─ boot.011
       ├─ boot.011_0 (render) {coat}
       └─ boot.011_01 (render) {coat}
 ```
+
+`⋮`の箇所は省略しています（`Root`は実際には32個の子を持ちます）が、それ以外はそのままの出力であり、以下のレシピで使うノードはすべてこの中に含まれています。
 
 各行が1つのノードです。名前、括弧内の`(render)`やその他のコンポーネント、そして波括弧内にrenderコンポーネントのマテリアルが並びます。上の実際の出力を読むと、いくら推測しても分からなかったことがいくつも明らかになります。
 

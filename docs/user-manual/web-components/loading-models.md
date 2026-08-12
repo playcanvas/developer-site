@@ -97,6 +97,8 @@ Sketchfab_model
    │  └─ Plane.002_0 (render) {paint}
    ├─ boot
    │  └─ boot_0 (render) {full_black}
+   ├─ underbody
+   │  └─ underbody_0 (render) {full_black}
    ├─ Cylinder.000
    │  ├─ Cylinder.000_0 (render) {silver}
    │  ├─ Cylinder.000_1 (render) {plastic}
@@ -105,10 +107,20 @@ Sketchfab_model
    ├─ Plane
    │  └─ Plane_0 (render) {Material}
    ⋮
+   ├─ bumper_front.004
+   │  ├─ bumper_front.004_0 (render) {silver}
+   │  ├─ bumper_front.004_1 (render) {lights}
+   │  └─ bumper_front.004_2 (render) {plastic}
+   ⋮
+   ├─ boot.001
+   │  └─ boot.001_0 (render) {paint}
+   ⋮
    └─ boot.011
       ├─ boot.011_0 (render) {coat}
       └─ boot.011_01 (render) {coat}
 ```
+
+That is abridged at the `⋮` — `Root` really has 32 children — but otherwise it is verbatim, and the nodes the recipes below use are all in it.
 
 Each line is a node: its name, `(render)` and any other components in parentheses, and the materials of a render component in braces. Read the real output above and several things become obvious that no amount of guessing would have told you:
 

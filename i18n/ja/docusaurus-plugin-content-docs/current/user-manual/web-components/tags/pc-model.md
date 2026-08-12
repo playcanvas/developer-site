@@ -46,9 +46,13 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 したがってマークアップがカバーするのは1つのケースだけです。ファイルに入っていたものを再生することです。それ以上のことをするには、要素の`entity`を通じてコンポーネントに到達し、エンジンの[AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) APIで制御してください。
 
 ```javascript
+import { whenReady } from '@playcanvas/web-components';
+
 const { entity } = await whenReady('pc-model');
 entity.anim.baseLayer.pause();
 ```
+
+パッケージ名でインポートするには、ページのimport mapに`@playcanvas/web-components`が必要です。[プログラムによるアクセス](../programmatic-access.md)を参照してください。
 
 アニメーションを持たないモデルには`anim`コンポーネントは与えられません。そのため、コンポーネントの有無を確認することが、ファイルのアニメーションがエクスポートを通過したかを判断する方法になります。[印字可能な階層](#inspecting-the-hierarchy)では、ルートに`(anim)`として表示されます。
 
