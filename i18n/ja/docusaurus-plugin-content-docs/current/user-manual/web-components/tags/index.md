@@ -19,6 +19,7 @@ description: "PlayCanvas Web Componentのタグをアルファベット順に一
 | [`<pc-element>`](pc-element) | テキスト、画像、またはグループユーザーインターフェース要素を定義します。 |
 | [`<pc-entity>`](pc-entity) | エンティティを定義します。 |
 | [`<pc-gsplat>`](pc-gsplat) | 3D Gaussian Splats をレンダリングする gsplat コンポーネントを定義します。 |
+| [`<pc-joint>`](pc-joint) | 2つのリジッドボディを拘束する物理ジョイントを定義します。 |
 | [`<pc-layoutchild>`](pc-layoutchild) | レイアウトの子コンポーネントを定義します。 |
 | [`<pc-layoutgroup>`](pc-layoutgroup) | レイアウトグループコンポーネントを定義します。 |
 | [`<pc-light>`](pc-light) | ライトコンポーネントを定義します。 |
