@@ -85,7 +85,7 @@ Invalid value 'bogus' for attribute 'scroll-mode'. Valid values: clamp, bounce, 
 <pc-light color="1 0.8 0.6"></pc-light>
 ```
 
-## エンティティ参照
+## エンティティ参照 {#entity-references}
 
 一部の属性は、ドキュメント内の別のエンティティを参照します — 例えば、[`<pc-button>`](tags/pc-button.md) の `image`、[`<pc-scrollbar>`](tags/pc-scrollbar.md) の `handle`、[`<pc-scrollview>`](tags/pc-scrollview.md) の `viewport`、`content`、スクロールバー属性です。参照には次のいずれかを使用できます。
 

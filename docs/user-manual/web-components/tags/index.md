@@ -19,6 +19,7 @@ Tags also have placement rules — each tag's page notes the parent it requires.
 | [`<pc-element>`](pc-element) | Defines a text, image or group user interface element. |
 | [`<pc-entity>`](pc-entity) | Defines an entity. |
 | [`<pc-gsplat>`](pc-gsplat) | Defines a gsplat component that renders 3D Gaussian Splats. |
+| [`<pc-joint>`](pc-joint) | Defines a physics joint constraining two rigid bodies. |
 | [`<pc-layoutchild>`](pc-layoutchild) | Defines a layout child component. |
 | [`<pc-layoutgroup>`](pc-layoutgroup) | Defines a layout group component. |
 | [`<pc-light>`](pc-light) | Defines a light component. |

@@ -526,6 +526,7 @@ const sidebars = {
             'user-manual/web-components/tags/pc-element',
             'user-manual/web-components/tags/pc-entity',
             'user-manual/web-components/tags/pc-gsplat',
+            'user-manual/web-components/tags/pc-joint',
             'user-manual/web-components/tags/pc-layoutchild',
             'user-manual/web-components/tags/pc-layoutgroup',
             'user-manual/web-components/tags/pc-light',
