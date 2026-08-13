@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 486
+Total Documents: 487
 Generated: 2026-08-13
 
 ## Instructions for Large Language Models
@@ -430,6 +430,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-element>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element/): Reference for the pc-element element: text, image, and group UI elements with fonts, sprites, layout, and input support on entities.
 - [<pc-entity>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity/): Reference for the pc-entity element: names, transforms, hierarchy rules, and which child component tags are valid under an entity.
 - [<pc-gsplat>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat/): Reference for the pc-gsplat element: render Gaussian splat assets with attributes for the splat data source, shadows, and LOD tuning.
+- [<pc-joint>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-joint/): Reference for the pc-joint element: constrain two rigid bodies together with a fixed, ball, hinge, slider or 6dof physics joint, with limits, motors, springs and a break impulse.
 - [<pc-layoutchild>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutchild/): Reference for the pc-layoutchild element: per-child layout constraints (min/max size and fit proportions) within a layout group.
 - [<pc-layoutgroup>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutgroup/): Reference for the pc-layoutgroup element: arranges child elements in horizontal or vertical layouts with spacing, padding, alignment, and fitting.
 - [<pc-light>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light/): Reference for the pc-light element: light types, color, intensity, shadows, and attributes for directional, spot, and omni lights.
