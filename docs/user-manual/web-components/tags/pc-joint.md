@@ -134,7 +134,7 @@ joint.component.refreshFrames(); // re-armed, frames re-captured from the curren
 
 ## Example
 
-A rope of three links hanging from an anchor, each link tied to the one above it by a ball joint with swing and twist limits:
+A rope of two links hanging from an anchor, each link tied to the body above it by a ball joint with swing and twist limits:
 
 ```html
 <pc-app>
