@@ -31,17 +31,47 @@ description: "pc-sounds要素のリファレンス: pc-soundスロットと共�
 
 ## 例
 
-```html
+2つのスロットを保持する1つのサウンドコンポーネントです — ループする足音と単発の効果音です。コンポーネントの `volume` と `pitch` は保持するすべてのスロットに適用されます。`volume` を半分にしたり、`pitch="1.5"` にして再実行したりしてみましょう:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/audio/music.mp3" id="music"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/footsteps.mp3" id="footsteps"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/drop.mp3" id="drop"></pc-asset>
     <pc-scene>
-        <pc-entity>
-            <pc-sounds volume="0.5">
-                <pc-sound asset="music"></pc-sound>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="speaker">
+            <pc-sounds volume="1" pitch="1">
+                <pc-sound name="footsteps" asset="footsteps" loop="true"></pc-sound>
+                <pc-sound name="drop" asset="drop"></pc-sound>
             </pc-sounds>
         </pc-entity>
     </pc-scene>
 </pc-app>
+<div class="controls">
+    <button id="toggle">Toggle footsteps</button>
+    <button id="drop">Play drop</button>
+</div>
+<style>
+    .controls {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        gap: 8px;
+    }
+</style>
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const sounds = await whenReady('pc-sounds');
+    const footsteps = sounds.component.slot('footsteps');
+    document.getElementById('toggle').onclick = () => {
+        footsteps.isPlaying ? footsteps.stop() : footsteps.play();
+    };
+    document.getElementById('drop').onclick = () => sounds.component.slot('drop').play();
+</script>
 ```
 
 ## JavaScriptインターフェース

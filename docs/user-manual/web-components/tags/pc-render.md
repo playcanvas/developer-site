@@ -33,9 +33,38 @@ To render a 3D model from a glTF/GLB file, use [`<pc-model>`](../pc-model) inste
 
 ## Example
 
-import CodePenEmbed from '@site/src/components/CodePenEmbed';
+All six primitive shapes. Try changing any `type`, or add `material` once you have defined a [`<pc-material>`](../pc-material):
 
-<CodePenEmbed id="NPKMrLy" title="<pc-render> example" />
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.5 6" rotation="-10 0 0">
+            <pc-camera clear-color="#2a2d36"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="box" position="-2.5 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="sphere" position="-1 0.5 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+        <pc-entity name="capsule" position="0.25 1 0">
+            <pc-render type="capsule"></pc-render>
+        </pc-entity>
+        <pc-entity name="cone" position="1.5 0.5 0">
+            <pc-render type="cone"></pc-render>
+        </pc-entity>
+        <pc-entity name="cylinder" position="2.75 0.5 0">
+            <pc-render type="cylinder"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" scale="10 10 10">
+            <pc-render type="plane"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## JavaScript Interface
 

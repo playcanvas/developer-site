@@ -104,26 +104,26 @@ The inline `onpointer*` attributes work here exactly as they do on [`<pc-entity>
 
 ## Example
 
-```html
+This GLB instantiates two nodes — `play` (the orange shell, its logo cut out of each face) and `canvas` (the dark inner box you see through the cutouts). [`hierarchy()`](../pc-model#inspecting-the-hierarchy) is how you discover that. The `<pc-node>` binds `play` and swaps its authored orange for blue via `material-overrides`. Try binding `canvas` instead, or add `enabled="false"` to hide the shell entirely. Drag to orbit:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/car.glb" id="car"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
+    <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
-        <pc-entity name="camera" position="0 1 4">
-            <pc-camera></pc-camera>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
+            </pc-scripts>
         </pc-entity>
-        <pc-model asset="car">
-            <!-- Hide the ground plane the GLB was exported with -->
-            <pc-node name="Plane" enabled="false"></pc-node>
-
-            <!-- Nudge the roof up and tag it, leaving its authored rotation and scale alone -->
-            <pc-node name="Roof" position="0 0.05 0" tags="openable"></pc-node>
-
-            <!-- Attach a spot light under the headlight node -->
-            <pc-node name="Headlight_L">
-                <pc-entity>
-                    <pc-light type="spot" intensity="4" range="20"></pc-light>
-                </pc-entity>
-            </pc-node>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light intensity="2"></pc-light>
+        </pc-entity>
+        <pc-model asset="cube">
+            <!-- Bind the node named "play" and swap in the repaint material -->
+            <pc-node name="play" material-overrides='{"index:0": "repaint"}'></pc-node>
         </pc-model>
     </pc-scene>
 </pc-app>

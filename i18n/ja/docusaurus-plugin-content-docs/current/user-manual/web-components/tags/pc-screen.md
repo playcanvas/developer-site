@@ -35,16 +35,23 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 
 ## 例
 
-```html
+テキスト要素をホストするスクリーンスペースのスクリーンです。`scale-mode="blend"` により、キャンバスのリサイズに合わせてUIがスケールします — フルスクリーンボタンで確認したり、`text` を編集したりしてみましょう:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/fonts/arial.json" type="font" id="arial"></pc-asset>
     <pc-scene>
-        <pc-entity>
-            <!-- 2Dスクリーンを定義 -->
-            <pc-screen></pc-screen>
-            <!-- 親スクリーンにテキストをレンダリング -->
-            <pc-entity>
-                <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <!-- キャンバスに合わせてスケールする2Dスクリーン -->
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <!-- 親スクリーンにレンダリングされるテキスト -->
+            <pc-entity name="title">
+                <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            font-asset="arial" font-size="48" color="#ff8a3c"
+                            text="Hello, World!"></pc-element>
             </pc-entity>
         </pc-entity>
     </pc-scene>

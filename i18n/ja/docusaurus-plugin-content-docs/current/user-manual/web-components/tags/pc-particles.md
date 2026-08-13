@@ -64,17 +64,17 @@ description: "pc-particles要素のリファレンス: マークアップでパ�
 }
 ```
 
-次に、HTMLでシーンにパーティクルシステムを追加します。
+次に、HTMLでシーンにパーティクルシステムを追加します。これは上の `snow.json` をそのまま実行するものです — `colorMapAsset` が `snowflake` テクスチャアセットの `id` を指している点に注目してください:
 
-```html
+```html live-example
 <pc-app>
-    <pc-asset src="assets/snowflake.png" id="snowflake"></pc-asset>
-    <pc-asset src="assets/snow.json" id="snow"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/snowflake.png" id="snowflake"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/snow.json" id="snow"></pc-asset>
     <pc-scene>
-        <pc-entity position="0 0 8">
-            <pc-camera></pc-camera>
+        <pc-entity name="camera" position="0 0 8">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity position="0 5 0">
+        <pc-entity name="snow" position="0 5 0">
             <pc-particles asset="snow"></pc-particles>
         </pc-entity>
     </pc-scene>

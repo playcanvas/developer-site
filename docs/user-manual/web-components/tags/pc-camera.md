@@ -41,10 +41,31 @@ The `<pc-camera>` tag is used to define a camera component.
 
 ## Example
 
-```html
-<pc-entity>
-    <pc-camera clear-color="yellow"></pc-camera>
-</pc-entity>
+A row of boxes receding into the distance. Try a different `fov`, or switch to `projection="orthographic"` (sized by `ortho-height`) and watch the perspective disappear:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.5 4" rotation="-15 0 0">
+            <pc-camera clear-color="#4a5568" fov="60"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="box-near" position="-1.5 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-mid" position="0 0.5 -2">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-far" position="1.5 0.5 -4">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 -2" scale="12 1 16">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

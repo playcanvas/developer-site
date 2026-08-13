@@ -134,45 +134,37 @@ joint.component.refreshFrames(); // re-armed, frames re-captured from the curren
 
 ## Example
 
-A rope of two links hanging from an anchor, each link tied to the body above it by a ball joint with swing and twist limits:
+A motor-driven hinge spinning a blade about a static hub. The joint entity sits at the pivot, rotated `"0 90 0"` so its local X axis — the hinge axis — points at the camera. Try a different `motor-speed` (negative reverses it), or add `enable-limits limits="-60 60"` and watch the motor stall against the stop:
 
-```html
+```html live-example
 <pc-app>
-    <pc-module name="Ammo" glue="modules/ammo/ammo.wasm.js"
-               wasm="modules/ammo/ammo.wasm.wasm"
-               fallback="modules/ammo/ammo.js"></pc-module>
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
     <pc-scene>
         <pc-entity name="camera" position="0 2 6">
-            <pc-camera></pc-camera>
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity name="light" rotation="45 45 0">
-            <pc-light type="directional"></pc-light>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
         </pc-entity>
 
-        <pc-entity id="anchor" position="0 4 0">
-            <pc-collision half-extents="0.2 0.2 0.2"></pc-collision>
+        <!-- Static hub -->
+        <pc-entity id="hub" position="0 2 0" rotation="90 0 0" scale="0.5 0.3 0.5">
+            <pc-render type="cylinder"></pc-render>
+            <pc-collision type="cylinder" radius="0.25" height="0.3"></pc-collision>
             <pc-rigidbody></pc-rigidbody>
         </pc-entity>
 
-        <pc-entity id="link-1" position="0 3.4 0" scale="0.24 1 0.24">
+        <!-- Dynamic blade -->
+        <pc-entity id="blade" position="0 2 0" scale="4 0.3 0.2">
             <pc-render type="box"></pc-render>
-            <pc-collision half-extents="0.12 0.5 0.12"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
-        </pc-entity>
-        <pc-entity id="link-2" position="0 2.4 0" scale="0.24 1 0.24">
-            <pc-render type="box"></pc-render>
-            <pc-collision half-extents="0.12 0.5 0.12"></pc-collision>
+            <pc-collision half-extents="2 0.15 0.1"></pc-collision>
             <pc-rigidbody type="dynamic"></pc-rigidbody>
         </pc-entity>
 
-        <!-- One joint entity per pivot, each at the point the two links meet -->
-        <pc-entity position="0 3.9 0">
-            <pc-joint type="ball" entity-a="#link-1" entity-b="#anchor"
-                      enable-limits swing-limit-y="35" swing-limit-z="35" twist-limit="10"></pc-joint>
-        </pc-entity>
-        <pc-entity position="0 2.9 0">
-            <pc-joint type="ball" entity-a="#link-2" entity-b="#link-1"
-                      enable-limits swing-limit-y="35" swing-limit-z="35" twist-limit="10"></pc-joint>
+        <!-- The joint sits at the pivot; its frame's X axis is the hinge axis -->
+        <pc-entity name="hinge" position="0 2 0" rotation="0 90 0">
+            <pc-joint type="hinge" entity-a="#blade" entity-b="#hub"
+                      motor-speed="90" max-motor-force="1000"></pc-joint>
         </pc-entity>
     </pc-scene>
 </pc-app>

@@ -55,12 +55,30 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 
 ## Example
 
-```html
+An `image` element as a panel, with two `text` elements on top — the second uses `enable-markup` for inline coloring. Try editing the `text`, `font-size` or panel `color`:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/fonts/arial.json" type="font" id="arial"></pc-asset>
     <pc-scene>
-        <pc-entity>
-            <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="panel">
+                <pc-element type="image" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            width="400" height="150" color="#2a2d36" opacity="0.9"></pc-element>
+                <pc-entity name="heading" position="0 35 0">
+                    <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                                font-asset="arial" font-size="36" text="<pc-element>"></pc-element>
+                </pc-entity>
+                <pc-entity name="body" position="0 -25 0">
+                    <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                                font-asset="arial" font-size="20" enable-markup="true"
+                                text='Comes in [color="#ff8a3c"]group[/color], [color="#7ab8ff"]image[/color] and [color="#8ce99a"]text[/color] types'></pc-element>
+                </pc-entity>
+            </pc-entity>
         </pc-entity>
     </pc-scene>
 </pc-app>

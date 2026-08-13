@@ -42,10 +42,34 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 
 ## 例
 
-```html
-<pc-entity>
-    <pc-light type="directional" intensity="10" color="red" cast-shadows></pc-light>
-</pc-entity>
+ライトの `color`、`intensity`、`type` の値を編集して、シーンが更新される様子を確認してみましょう:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2.5 5" rotation="-15 0 0">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <!-- 下向きに照らす暖色のスポットライト (スポットライトはY軸負方向を向きます) -->
+        <pc-entity name="spot-light" position="-2 4 0">
+            <pc-light type="spot" color="#ffb47a" intensity="5" outer-cone-angle="35" cast-shadows></pc-light>
+        </pc-entity>
+        <!-- 形状の間に置いた寒色のオムニライト -->
+        <pc-entity name="omni-light" position="2 2 1">
+            <pc-light type="omni" color="#7ab8ff" intensity="2.5" range="10"></pc-light>
+        </pc-entity>
+        <!-- 照らされる形状 -->
+        <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="sphere" position="-2 0.5 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+        <pc-entity name="box" position="2 0.5 0" rotation="0 30 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

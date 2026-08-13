@@ -31,17 +31,43 @@ The `<pc-sound>` tag is used to define a sound.
 
 ## Example
 
-```html
+Two slots playing the same clip — the second at half `pitch`. Browsers only allow audio after a user gesture, so playback is wired to plain HTML buttons overlaid on the app. Try editing the `pitch` or `volume` values:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/audio/music.mp3" id="music"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/drop.mp3" id="drop"></pc-asset>
     <pc-scene>
-        <pc-entity>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="jukebox">
             <pc-sounds>
-                <pc-sound asset="music"></pc-sound>
+                <pc-sound name="drop" asset="drop"></pc-sound>
+                <pc-sound name="drop-slow" asset="drop" pitch="0.5" volume="0.8"></pc-sound>
             </pc-sounds>
         </pc-entity>
     </pc-scene>
 </pc-app>
+<div class="controls">
+    <button id="play">Play</button>
+    <button id="play-slow">Play at half pitch</button>
+</div>
+<style>
+    .controls {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        gap: 8px;
+    }
+</style>
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const sounds = await whenReady('pc-sounds');
+    document.getElementById('play').onclick = () => sounds.component.slot('drop').play();
+    document.getElementById('play-slow').onclick = () => sounds.component.slot('drop-slow').play();
+</script>
 ```
 
 ## JavaScript Interface

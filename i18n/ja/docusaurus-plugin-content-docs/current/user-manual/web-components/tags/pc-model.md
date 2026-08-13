@@ -58,11 +58,27 @@ entity.anim.baseLayer.pause();
 
 ## 例
 
-```html
+スケルタルアニメーション付きのGLBです。上の[アニメーション](#animation)セクションで説明したとおり、アニメーションは自動再生されます。ドラッグで軌道回転できます:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/car.glb" id="car"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
+    <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
-        <pc-model asset="car"></pc-model>
+        <pc-entity name="camera" position="2.5 1.5 3.5">
+            <pc-camera clear-color="#2a2d36"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="ground" scale="30 30 30">
+            <pc-render type="plane" material="floor"></pc-render>
+        </pc-entity>
+        <pc-model asset="t-rex" scale="1.5 1.5 1.5"></pc-model>
     </pc-scene>
 </pc-app>
 ```

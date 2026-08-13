@@ -28,12 +28,40 @@ In addition, any other non-reserved attribute maps to the script attribute of th
 
 ## Example
 
-```html
-<pc-entity>
-    <pc-scripts>
-        <pc-script name="myScript" speed="180" target-color="#ff6432"></pc-script>
-    </pc-scripts>
-</pc-entity>
+A `rotate` script attached to a cube. Script classes usually load from a [`<pc-asset>`](../pc-asset), but they can also be registered from an inline module — the `<pc-script>` stays pending until its class arrives. Try changing the rotation rates:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="cube">
+            <pc-render type="box"></pc-render>
+            <pc-scripts>
+                <pc-script name="rotate"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<script type="module">
+    import { registerScript, Script } from 'playcanvas';
+    import { whenReady } from '@playcanvas/web-components';
+
+    // Wait for the application, then register the script class
+    await whenReady('pc-app');
+
+    class Rotate extends Script {
+        update(dt) {
+            this.entity.rotate(10 * dt, 20 * dt, 30 * dt);
+        }
+    }
+
+    registerScript(Rotate, 'rotate');
+</script>
 ```
 
 ## JavaScript Interface

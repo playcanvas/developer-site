@@ -47,23 +47,38 @@ The render component has to be backed by a render asset, which the primitive typ
 
 ## Example
 
-```html
+Each collision shape matches its rendered shape: a sphere, a capsule and a box tumbling onto static ground. Try changing the sphere's `radius` — the visual mesh stays the same, but it collides differently:
+
+```html live-example
 <pc-app>
     <!-- Physics requires the ammo.js WebAssembly module -->
-    <pc-module name="Ammo" glue="modules/ammo/ammo.wasm.js" wasm="modules/ammo/ammo.wasm.wasm" fallback="modules/ammo/ammo.js"></pc-module>
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
     <pc-scene>
-        <!-- static 1x1x1 box -->
-        <pc-entity>
-            <pc-render type="box"></pc-render>
-            <pc-collision></pc-collision>
-            <pc-rigidbody></pc-rigidbody>
+        <pc-entity name="camera" position="0 2 8">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-
-        <!-- dynamic sphere with radius 0.5 -->
-        <pc-entity position="0 4 0">
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="ball" position="-1.5 4 0">
             <pc-render type="sphere"></pc-render>
-            <pc-collision type="sphere"></pc-collision>
+            <pc-collision type="sphere" radius="0.5"></pc-collision>
             <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="pill" position="0 5 0" rotation="0 0 70">
+            <pc-render type="capsule"></pc-render>
+            <pc-collision type="capsule" radius="0.5" height="2"></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="crate" position="1.5 6 0" rotation="20 30 40">
+            <pc-render type="box"></pc-render>
+            <pc-collision type="box" half-extents="0.5 0.5 0.5"></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
+            <pc-render type="box"></pc-render>
+            <pc-collision half-extents="6 0.5 6"></pc-collision>
+            <pc-rigidbody type="static"></pc-rigidbody>
         </pc-entity>
     </pc-scene>
 </pc-app>

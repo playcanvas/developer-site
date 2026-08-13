@@ -134,45 +134,37 @@ joint.component.refreshFrames(); // 復帰し、現在のトランスフォー�
 
 ## 例 {#example}
 
-アンカーから吊り下がる2連のロープです。各リンクは、スイングとひねりのリミットを設定したballジョイントで1つ上のボディに繋がっています。
+モーター駆動のhingeジョイントが、静的なハブを軸にブレードを回転させます。ジョイントエンティティは支点に置かれ、`"0 90 0"` の回転により、ローカルX軸 — ヒンジ軸 — がカメラの方を向いています。`motor-speed` を変えたり (負の値で逆回転)、`enable-limits limits="-60 60"` を追加してモーターがストッパーで止まる様子を見たりしてみましょう:
 
-```html
+```html live-example
 <pc-app>
-    <pc-module name="Ammo" glue="modules/ammo/ammo.wasm.js"
-               wasm="modules/ammo/ammo.wasm.wasm"
-               fallback="modules/ammo/ammo.js"></pc-module>
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
     <pc-scene>
         <pc-entity name="camera" position="0 2 6">
-            <pc-camera></pc-camera>
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity name="light" rotation="45 45 0">
-            <pc-light type="directional"></pc-light>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
         </pc-entity>
 
-        <pc-entity id="anchor" position="0 4 0">
-            <pc-collision half-extents="0.2 0.2 0.2"></pc-collision>
+        <!-- 静的なハブ -->
+        <pc-entity id="hub" position="0 2 0" rotation="90 0 0" scale="0.5 0.3 0.5">
+            <pc-render type="cylinder"></pc-render>
+            <pc-collision type="cylinder" radius="0.25" height="0.3"></pc-collision>
             <pc-rigidbody></pc-rigidbody>
         </pc-entity>
 
-        <pc-entity id="link-1" position="0 3.4 0" scale="0.24 1 0.24">
+        <!-- 動的なブレード -->
+        <pc-entity id="blade" position="0 2 0" scale="4 0.3 0.2">
             <pc-render type="box"></pc-render>
-            <pc-collision half-extents="0.12 0.5 0.12"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
-        </pc-entity>
-        <pc-entity id="link-2" position="0 2.4 0" scale="0.24 1 0.24">
-            <pc-render type="box"></pc-render>
-            <pc-collision half-extents="0.12 0.5 0.12"></pc-collision>
+            <pc-collision half-extents="2 0.15 0.1"></pc-collision>
             <pc-rigidbody type="dynamic"></pc-rigidbody>
         </pc-entity>
 
-        <!-- 支点ごとに1つのジョイントエンティティを、2つのリンクが接する位置に置きます -->
-        <pc-entity position="0 3.9 0">
-            <pc-joint type="ball" entity-a="#link-1" entity-b="#anchor"
-                      enable-limits swing-limit-y="35" swing-limit-z="35" twist-limit="10"></pc-joint>
-        </pc-entity>
-        <pc-entity position="0 2.9 0">
-            <pc-joint type="ball" entity-a="#link-2" entity-b="#link-1"
-                      enable-limits swing-limit-y="35" swing-limit-z="35" twist-limit="10"></pc-joint>
+        <!-- ジョイントは支点に置きます。フレームのX軸がヒンジ軸になります -->
+        <pc-entity name="hinge" position="0 2 0" rotation="0 90 0">
+            <pc-joint type="hinge" entity-a="#blade" entity-b="#hub"
+                      motor-speed="90" max-motor-force="1000"></pc-joint>
         </pc-entity>
     </pc-scene>
 </pc-app>
