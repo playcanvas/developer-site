@@ -294,4 +294,4 @@ entity.anim.baseLayer.pause();
 * [`<pc-model>`](tags/pc-model.md)と[`<pc-node>`](tags/pc-node.md) — 両タグの完全な属性・メソッドリファレンス。
 * [スクリプトによる振る舞いの追加](scripting.md) — モデル全体のマテリアルを一括処理するなど、マークアップでは収まらないロジック向け。
 * [プログラムによるアクセス](programmatic-access.md) — これらの要素の背後にあるエンジンオブジェクトへの到達方法。
-* [サンプル](https://playcanvas.github.io/web-components/examples/) — [GLB](https://playcanvas.github.io/web-components/examples/glb.html)、[Animation](https://playcanvas.github.io/web-components/examples/animation.html)、[Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html)をご覧ください。
+* [サンプル](https://playcanvas.github.io/web-components/examples/) — [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html)をご覧ください。

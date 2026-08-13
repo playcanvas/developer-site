@@ -294,4 +294,4 @@ entity.anim.baseLayer.pause();
 * [`<pc-model>`](tags/pc-model.md) and [`<pc-node>`](tags/pc-node.md) — the full attribute and method reference for both tags.
 * [Adding Behavior with Scripts](scripting.md) — for logic that outgrows markup, such as sweeping materials across a whole model.
 * [Programmatic Access](programmatic-access.md) — reaching the engine objects behind these elements.
-* [Examples](https://playcanvas.github.io/web-components/examples/) — see [GLB](https://playcanvas.github.io/web-components/examples/glb.html), [Animation](https://playcanvas.github.io/web-components/examples/animation.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).
+* [Examples](https://playcanvas.github.io/web-components/examples/) — see [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).
