@@ -81,7 +81,7 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
                     <pc-element type="image" anchor="1 0 1 1" width="20" color="#2a2d36"></pc-element>
                     <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
                     <pc-entity name="handle" id="v-handle">
-                        <pc-element type="image" anchor="0 1 1 1" color="#ff8a3c" use-input></pc-element>
+                        <pc-element type="image" anchor="0 1 1 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
                         <pc-button></pc-button>
                     </pc-entity>
                 </pc-entity>
