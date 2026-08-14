@@ -76,9 +76,9 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
                     </pc-entity>
                 </pc-entity>
 
-                <!-- 垂直スクロールバー -->
+                <!-- 垂直スクロールバー: 右端の内側に沿った幅20pxのストリップ -->
                 <pc-entity name="v-scrollbar" id="v-scrollbar">
-                    <pc-element type="image" anchor="1 0 1 1" width="20" color="#2a2d36"></pc-element>
+                    <pc-element type="image" anchor="1 0 1 1" pivot="1 0.5" width="20" margin="0 0 0 0" color="#2a2d36"></pc-element>
                     <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
                     <pc-entity name="handle" id="v-handle">
                         <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
