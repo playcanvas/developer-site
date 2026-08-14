@@ -100,7 +100,13 @@ export default function LiveExample({ code }) {
         clearTimeout(copiedTimerRef.current);
     }, []);
 
-    const srcdoc = useMemo(() => buildPreviewHtml(preview.code, nonce), [preview, nonce]);
+    // Deferred until the iframe actually renders: never built during SSR, and
+    // not before the example approaches the viewport.
+    const showIframe = isBrowser && nearViewport;
+    const srcdoc = useMemo(
+        () => (showIframe ? buildPreviewHtml(preview.code, nonce) : null),
+        [showIframe, preview, nonce]
+    );
 
     // Boot the (WebGL-heavy) iframe only once the example approaches the viewport.
     useEffect(() => {
@@ -215,7 +221,7 @@ export default function LiveExample({ code }) {
     // ------------------------------------------------------------------ render
 
     const staticCode = (
-        <CodeBlock language="html" className={styles.staticCode}>{code}</CodeBlock>
+        <CodeBlock language="html">{code}</CodeBlock>
     );
 
     return (
@@ -223,7 +229,7 @@ export default function LiveExample({ code }) {
             ref={rootRef}
             className={clsx(styles.liveExample, expanded && styles.expanded, overlayFullscreen && styles.overlay)}>
             <div className={styles.preview}>
-                {isBrowser && nearViewport && (
+                {showIframe && (
                     // Deliberately not sandboxed: a sandboxed srcdoc iframe has an
                     // opaque origin, which turns same-site asset fetches (including
                     // localhost during authoring) into CORS failures. The content is
