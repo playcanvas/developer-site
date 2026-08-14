@@ -53,10 +53,27 @@ You can also handle these events declaratively with inline `onpointer*` attribut
 
 ## Example
 
-```html
-<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1,tag2">
-    <!-- Child entities and components go here -->
-</pc-entity>
+Entity transforms compose down the hierarchy: the small cube is a *child* of the large one, so hover over the large cube and both move together. Try editing the parent's `rotation` or `scale`, or the inline `onpointer*` handlers:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1 4">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="parent" rotation="0 30 0" tags="interactive"
+                   onpointerenter="this.entity.setLocalPosition(0, 0.25, 0)"
+                   onpointerleave="this.entity.setLocalPosition(0, 0, 0)">
+            <pc-render type="box"></pc-render>
+            <pc-entity name="child" position="0.75 0.75 0" scale="0.5 0.5 0.5">
+                <pc-render type="box"></pc-render>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

@@ -31,11 +31,37 @@ description: "pc-layoutchild要素のリファレンス: レイアウトグル�
 
 ## 例
 
-```html
-<pc-entity>
-    <pc-element type="image" width="200" height="45"></pc-element>
-    <pc-layoutchild min-height="45" fit-width-proportion="1"></pc-layoutchild>
-</pc-entity>
+`width-fitting="stretch"` を設定した水平グループ内の3つのアイテムです。中央のアイテムの `fit-width-proportion="1"` により、グループの余剰幅は中央だけが吸収します。最初のアイテムにも `1` を与えて分け合わせたり、中央に `max-width` を設定したりしてみましょう:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="toolbar">
+                <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="480" height="70"></pc-element>
+                <pc-layoutgroup orientation="horizontal" alignment="0 0.5" spacing="8 0"
+                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+
+                <pc-entity name="item-1">
+                    <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
+                    <pc-layoutchild></pc-layoutchild>
+                </pc-entity>
+                <pc-entity name="item-2">
+                    <pc-element type="image" width="80" height="50" color="#ff8a3c"></pc-element>
+                    <pc-layoutchild fit-width-proportion="1"></pc-layoutchild>
+                </pc-entity>
+                <pc-entity name="item-3">
+                    <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
+                    <pc-layoutchild></pc-layoutchild>
+                </pc-entity>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

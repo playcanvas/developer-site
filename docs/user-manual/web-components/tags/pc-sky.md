@@ -30,11 +30,23 @@ The `<pc-sky>` tag is used to define a sky component.
 
 ## Example
 
-```html
+An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"` or a higher `mip-level` to soften it:
+
+```html live-example
 <pc-app>
-    <pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
-        <pc-sky asset="skybox"></pc-sky>
+        <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
+        <pc-entity name="camera" position="0 1.5 5">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" pitch-range="-90 0" zoom-range="2 12"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="sphere" position="0 1 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
     </pc-scene>
 </pc-app>
 ```

@@ -140,11 +140,23 @@ Using the npm install instead? Swap the import map and script tag for the `/node
 
 :::
 
-You can also experiment with this scene right here — it's live on CodePen:
+You can also experiment with the scene right here — edit the markup and the preview re-runs:
 
-import CodePenEmbed from '@site/src/components/CodePenEmbed';
-
-<CodePenEmbed id="JoPvXjO" title="A lit sphere built with PlayCanvas Web Components" />
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 45 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="ball">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## Editor Support
 

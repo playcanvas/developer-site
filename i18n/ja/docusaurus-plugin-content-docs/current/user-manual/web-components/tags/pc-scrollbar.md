@@ -29,17 +29,30 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 
 ## 例
 
-```html
-<pc-entity name="scrollbar">
-    <pc-element type="image" anchor="1 0 1 1" width="20"></pc-element>
-    <pc-scrollbar orientation="vertical" handle-size="0.5" handle="#handle"></pc-scrollbar>
+単体の垂直スクロールバーです — オレンジ色のハンドルをドラッグしてみましょう。`handle-size` (トラックに対する割合) や初期の `value` を変えることもできます:
 
-    <!-- ドラッグ可能なハンドル -->
-    <pc-entity name="handle" id="handle">
-        <pc-element type="image" anchor="0 1 1 1" use-input></pc-element>
-        <pc-button></pc-button>
-    </pc-entity>
-</pc-entity>
+```html live-example
+<pc-app max-pixel-ratio="1">
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="scrollbar">
+                <pc-element type="image" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            width="20" height="240" color="#3a3f4b"></pc-element>
+                <pc-scrollbar orientation="vertical" handle-size="0.35" handle="#handle"></pc-scrollbar>
+
+                <!-- ドラッグ可能なハンドル -->
+                <pc-entity name="handle" id="handle">
+                    <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
+                    <pc-button hover-tint="0.85 0.85 0.85 1" pressed-tint="0.7 0.7 0.7 1"></pc-button>
+                </pc-entity>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

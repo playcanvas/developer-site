@@ -64,17 +64,17 @@ First define the particle system in JSON format:
 }
 ```
 
-Then add the particle system to your scene in HTML:
+Then add the particle system to your scene in HTML. This runs the `snow.json` above — note how `colorMapAsset` names the `snowflake` texture asset's `id`:
 
-```html
+```html live-example
 <pc-app>
-    <pc-asset src="assets/snowflake.png" id="snowflake"></pc-asset>
-    <pc-asset src="assets/snow.json" id="snow"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/snowflake.png" id="snowflake"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/snow.json" id="snow"></pc-asset>
     <pc-scene>
-        <pc-entity position="0 0 8">
-            <pc-camera></pc-camera>
+        <pc-entity name="camera" position="0 0 8">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity position="0 5 0">
+        <pc-entity name="snow" position="0 5 0">
             <pc-particles asset="snow"></pc-particles>
         </pc-entity>
     </pc-scene>

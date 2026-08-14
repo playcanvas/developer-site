@@ -93,9 +93,23 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 
 ## 例
 
-import CodePenEmbed from '@site/src/components/CodePenEmbed';
+カメラ、ライト、球体からなる完全なアプリケーションです。`<pc-app>`タグに `antialias="false"` や `max-pixel-ratio="1"` を設定してみましょう:
 
-<CodePenEmbed id="JoPvXjO" title="<pc-app> の例" />
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#8099e6"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 45 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="ball">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## JavaScriptインターフェース
 

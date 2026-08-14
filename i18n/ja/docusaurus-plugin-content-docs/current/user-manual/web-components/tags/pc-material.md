@@ -98,21 +98,31 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 
 ## 例
 
-```html
+4つのマテリアル: 単色、金属、透明な「ガラス」、タイリングされたテクスチャマップです。スカイの `lighting` が金属に映り込みを与えます。`diffuse` の色、`metalness`、`roughness`、`opacity`、`diffuse-map-tiling` を編集してみましょう:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/textures/dark-tiles.png" id="dark-tiles"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/dark-tiles.png" id="dark-tiles"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp" id="skybox"></pc-asset>
     <pc-material id="crimson" diffuse="crimson"></pc-material>
     <pc-material id="gold" diffuse="#ffd700" metalness="1" roughness="0.3"></pc-material>
     <pc-material id="glass" blend-type="normal" opacity="0.4"></pc-material>
     <pc-material id="ground" diffuse-map="dark-tiles" diffuse-map-tiling="4 4"></pc-material>
     <pc-scene>
-        <pc-entity name="box" position="-2 0 0">
+        <pc-sky asset="skybox" lighting></pc-sky>
+        <pc-entity name="camera" position="0 1.5 5" rotation="-12 0 0">
+            <pc-camera clear-color="#1d1f2b" tonemap="aces"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="box" position="-2 0.5 0">
             <pc-render type="box" material="crimson"></pc-render>
         </pc-entity>
-        <pc-entity name="sphere">
+        <pc-entity name="sphere" position="0 0.5 0">
             <pc-render type="sphere" material="gold"></pc-render>
         </pc-entity>
-        <pc-entity name="capsule" position="2 0 0">
+        <pc-entity name="capsule" position="2 1 0">
             <pc-render type="capsule" material="glass"></pc-render>
         </pc-entity>
         <pc-entity name="ground" scale="10 1 10">

@@ -28,10 +28,32 @@ description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ
 
 ## 例
 
-```html
+リニアフォグの中へ消えていくボックスです。`fog-color` を変えたり (カメラの `clear-color` と揃えると定番の深度ヘイズ表現になります)、`fog` を `"exp"` にして `fog-density` を `0.15` にしたりしてみましょう:
+
+```html live-example
 <pc-app>
-    <pc-scene>
-        <!-- ここにpc-entityタグを定義します -->
+    <pc-scene fog="linear" fog-color="#4a5568" fog-start="2" fog-end="10">
+        <pc-entity name="camera" position="0 1.5 4" rotation="-10 0 0">
+            <pc-camera clear-color="#4a5568"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="box-1" position="-1 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-2" position="0 0.5 -3">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-3" position="1 0.5 -6">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-4" position="2 0.5 -9">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 -4" scale="10 1 20">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
     </pc-scene>
 </pc-app>
 ```

@@ -504,5 +504,45 @@
   "engineExample.clickToLoad": {
     "message": "クリックして読み込む",
     "description": "Button label to load an embedded PlayCanvas engine example"
+  },
+  "liveExample.badge": {
+    "message": "ライブサンプル",
+    "description": "Badge label on the live example toolbar"
+  },
+  "liveExample.previewTitle": {
+    "message": "ライブサンプルのプレビュー",
+    "description": "Accessible title of the live example preview iframe"
+  },
+  "liveExample.editorLabel": {
+    "message": "編集可能なサンプルコード",
+    "description": "Accessible label of the live example code editor"
+  },
+  "liveExample.loading": {
+    "message": "サンプルを読み込み中…",
+    "description": "Shown while the live example preview is loading"
+  },
+  "liveExample.reset": {
+    "message": "コードをリセット",
+    "description": "Button that restores the live example to its original code"
+  },
+  "liveExample.copy": {
+    "message": "コードをコピー",
+    "description": "Button that copies the live example code to the clipboard"
+  },
+  "liveExample.copied": {
+    "message": "コピーしました!",
+    "description": "Confirmation shown after copying the live example code"
+  },
+  "liveExample.openInStackBlitz": {
+    "message": "StackBlitzで開く",
+    "description": "Button that opens the live example as a StackBlitz project"
+  },
+  "liveExample.enterFullscreen": {
+    "message": "フルスクリーンにする",
+    "description": "Button that expands the live example to fullscreen"
+  },
+  "liveExample.exitFullscreen": {
+    "message": "フルスクリーンを終了",
+    "description": "Button that exits the live example fullscreen mode"
   }
 }

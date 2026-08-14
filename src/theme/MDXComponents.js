@@ -3,6 +3,7 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import MDXComponents from '@theme-original/MDXComponents';
 import EngineExample from '@site/src/components/EngineExample';
+import LiveExample from '@site/src/components/LiveExample';
 import RenderApiDocs from '@site/src/components/playcanvas-react/RenderApiDocs';
 
 // Shared static asset links are rewritten to pathname:// at compile time in
@@ -17,5 +18,6 @@ export default {
   ...MDXComponents,
   a: A,
   EngineExample,
+  LiveExample,
   RenderApiDocs,
 };

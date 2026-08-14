@@ -41,10 +41,31 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 
 ## 例
 
-```html
-<pc-entity>
-    <pc-camera clear-color="yellow"></pc-camera>
-</pc-entity>
+遠くへ連なるボックスの列です。`fov` を変えたり、`projection="orthographic"` (サイズは `ortho-height` で指定) に切り替えて遠近感が消える様子を確認したりしてみましょう:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.5 4" rotation="-15 0 0">
+            <pc-camera clear-color="#4a5568" fov="60"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="box-near" position="-1.5 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-mid" position="0 0.5 -2">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-far" position="1.5 0.5 -4">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 -2" scale="12 1 16">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

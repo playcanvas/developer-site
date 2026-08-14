@@ -102,12 +102,26 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 
 ## 例
 
-```html
+2つのアセット: スクリプト (CDNから直接読み込むエンジンのヘルパー) とGLBモデルです。スクリプトは名前で自身を登録し、モデルは `id` で参照されます。ドラッグで軌道回転できます:
+
+```html live-example
 <pc-app>
-    <!-- スクリプトアセット -->
-    <pc-asset src="assets/scripts/animate.mjs"></pc-asset>
-    <!-- GLBアセット -->
-    <pc-asset src="assets/models/car.glb" id="car"></pc-asset>
+    <!-- スクリプトアセット: タイプは.mjs拡張子から推論されます -->
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <!-- コンテナアセット: タイプは.glb拡張子から推論されます -->
+    <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light intensity="2"></pc-light>
+        </pc-entity>
+        <pc-model asset="cube"></pc-model>
+    </pc-scene>
 </pc-app>
 ```
 

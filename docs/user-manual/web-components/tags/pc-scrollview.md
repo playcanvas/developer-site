@@ -38,36 +38,58 @@ The `<pc-scrollview>` tag is used to define a scroll view component, which lets 
 
 ## Example
 
-```html
-<pc-entity name="scroll-view">
-    <pc-element type="group" width="230" height="400"></pc-element>
-    <pc-scrollview
-        horizontal="false"
-        vertical="true"
-        viewport="#viewport"
-        content="#content"
-        vertical-scrollbar="#v-scrollbar"></pc-scrollview>
+Scroll the striped content with the mouse wheel, by dragging it, or with the scrollbar. The viewport's `mask` clips the content. Try `scroll-mode="clamp"` (no bounce), or a taller content `height`:
 
-    <!-- Viewport clips the content to the scroll view's bounds -->
-    <pc-entity name="viewport" id="viewport">
-        <pc-element type="image" anchor="0 0 1 1" mask></pc-element>
-
-        <!-- Content is moved as the view is scrolled -->
-        <pc-entity name="content" id="content">
-            <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="220" height="700" use-input></pc-element>
+```html live-example
+<pc-app max-pixel-ratio="1">
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-    </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="scroll-view">
+                <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="260"></pc-element>
+                <pc-scrollview
+                    horizontal="false"
+                    vertical="true"
+                    viewport="#viewport"
+                    content="#content"
+                    vertical-scrollbar="#v-scrollbar"></pc-scrollview>
 
-    <!-- Vertical scrollbar -->
-    <pc-entity name="v-scrollbar" id="v-scrollbar">
-        <pc-element type="image" anchor="1 0 1 1" width="20"></pc-element>
-        <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
-        <pc-entity name="handle" id="v-handle">
-            <pc-element type="image" anchor="0 1 1 1" use-input></pc-element>
-            <pc-button></pc-button>
+                <!-- Viewport clips the content to the scroll view's bounds -->
+                <pc-entity name="viewport" id="viewport">
+                    <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" color="#2a2d36" mask></pc-element>
+
+                    <!-- Content is moved as the view is scrolled. Its height is the laid-out
+                         size of the rows: 8 x 60, plus 7 x 8 spacing, plus 10 padding top and bottom -->
+                    <pc-entity name="content" id="content">
+                        <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="556" use-input></pc-element>
+                        <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layoutgroup>
+                        <pc-entity name="row-1"><pc-element type="image" width="220" height="60" color="#ff8a3c"></pc-element></pc-entity>
+                        <pc-entity name="row-2"><pc-element type="image" width="220" height="60" color="#7ab8ff"></pc-element></pc-entity>
+                        <pc-entity name="row-3"><pc-element type="image" width="220" height="60" color="#8ce99a"></pc-element></pc-entity>
+                        <pc-entity name="row-4"><pc-element type="image" width="220" height="60" color="#ffd43b"></pc-element></pc-entity>
+                        <pc-entity name="row-5"><pc-element type="image" width="220" height="60" color="#e599f7"></pc-element></pc-entity>
+                        <pc-entity name="row-6"><pc-element type="image" width="220" height="60" color="#63e6be"></pc-element></pc-entity>
+                        <pc-entity name="row-7"><pc-element type="image" width="220" height="60" color="#ffa8a8"></pc-element></pc-entity>
+                        <pc-entity name="row-8"><pc-element type="image" width="220" height="60" color="#74c0fc"></pc-element></pc-entity>
+                    </pc-entity>
+                </pc-entity>
+
+                <!-- Vertical scrollbar: a 20px strip hugging the inside of the right edge -->
+                <pc-entity name="v-scrollbar" id="v-scrollbar">
+                    <pc-element type="image" anchor="1 0 1 1" pivot="1 0.5" width="20" margin="0 0 0 0" color="#2a2d36"></pc-element>
+                    <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
+                    <pc-entity name="handle" id="v-handle">
+                        <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
+                        <pc-button></pc-button>
+                    </pc-entity>
+                </pc-entity>
+            </pc-entity>
         </pc-entity>
-    </pc-entity>
-</pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

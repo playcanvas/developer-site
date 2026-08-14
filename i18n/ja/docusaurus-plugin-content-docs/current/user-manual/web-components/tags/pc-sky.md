@@ -30,11 +30,23 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 
 ## 例
 
-```html
+正距円筒図法のテクスチャをドーム投影のスカイとして使い、シーンの照明にも利用しています (`lighting` に注目)。ドラッグで見回せます。`type="infinite"` や `rotation="0 90 0"`、より高い `mip-level` (ソフトになります) も試してみましょう:
+
+```html live-example
 <pc-app>
-    <pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
-        <pc-sky asset="skybox"></pc-sky>
+        <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
+        <pc-entity name="camera" position="0 1.5 5">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" pitch-range="-90 0" zoom-range="2 12"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="sphere" position="0 1 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
     </pc-scene>
 </pc-app>
 ```

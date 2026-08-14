@@ -102,12 +102,26 @@ The element's readiness is a separate signal: it becomes ready once its asset ha
 
 ## Example
 
-```html
+Two assets: a script (an engine helper loaded straight from a CDN) and a GLB model. The script registers itself by name; the model is referenced by `id`. Drag to orbit:
+
+```html live-example
 <pc-app>
-    <!-- Script asset -->
-    <pc-asset src="assets/scripts/animate.mjs"></pc-asset>
-    <!-- GLB asset -->
-    <pc-asset src="assets/models/car.glb" id="car"></pc-asset>
+    <!-- Script asset: type inferred from the .mjs extension -->
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <!-- Container asset: type inferred from the .glb extension -->
+    <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light intensity="2"></pc-light>
+        </pc-entity>
+        <pc-model asset="cube"></pc-model>
+    </pc-scene>
 </pc-app>
 ```
 

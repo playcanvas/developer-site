@@ -36,16 +36,23 @@ on one. Set `screen-space` alongside `scale-mode="blend"` for it to have any eff
 
 ## Example
 
-```html
+A screen-space screen hosting a text element. With `scale-mode="blend"`, the UI scales as the canvas resizes — try the fullscreen button to see it, or edit the `text`:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/fonts/arial.json" type="font" id="arial"></pc-asset>
     <pc-scene>
-        <pc-entity>
-            <!-- define a 2d screen -->
-            <pc-screen></pc-screen>
-            <!-- render some text on the parent screen -->
-            <pc-entity>
-                <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <!-- A 2D screen that scales with the canvas -->
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <!-- Text rendered on the parent screen -->
+            <pc-entity name="title">
+                <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            font-asset="arial" font-size="48" color="#ff8a3c"
+                            text="Hello, World!"></pc-element>
             </pc-entity>
         </pc-entity>
     </pc-scene>

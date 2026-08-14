@@ -33,20 +33,34 @@ description: "pc-layoutgroup要素のリファレンス: 子要素を水平ま�
 
 ## 例
 
-```html
-<pc-entity name="list">
-    <pc-element type="group" width="220" height="400"></pc-element>
-    <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 5" padding="10 10 10 10"></pc-layoutgroup>
+行を自動的に配置する縦のリストです。`orientation="horizontal"` にしたり、`spacing` を大きくしたり、`reverse-y` を付けたり — 行を追加して自動的に収まる様子を見たりしてみましょう:
 
-    <pc-entity name="item-1">
-        <pc-element type="image" width="200" height="45"></pc-element>
-        <pc-layoutchild></pc-layoutchild>
-    </pc-entity>
-    <pc-entity name="item-2">
-        <pc-element type="image" width="200" height="45"></pc-element>
-        <pc-layoutchild></pc-layoutchild>
-    </pc-entity>
-</pc-entity>
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="list">
+                <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="220"></pc-element>
+                <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8"
+                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+
+                <pc-entity name="row-1">
+                    <pc-element type="image" width="240" height="50" color="#ff8a3c"></pc-element>
+                </pc-entity>
+                <pc-entity name="row-2">
+                    <pc-element type="image" width="240" height="50" color="#7ab8ff"></pc-element>
+                </pc-entity>
+                <pc-entity name="row-3">
+                    <pc-element type="image" width="240" height="50" color="#8ce99a"></pc-element>
+                </pc-entity>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

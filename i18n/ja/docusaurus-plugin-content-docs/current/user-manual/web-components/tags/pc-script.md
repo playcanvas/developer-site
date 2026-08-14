@@ -28,12 +28,40 @@ description: "pc-script要素のリファレンス: 単一のスクリプトク�
 
 ## 例
 
-```html
-<pc-entity>
-    <pc-scripts>
-        <pc-script name="myScript" speed="180" target-color="#ff6432"></pc-script>
-    </pc-scripts>
-</pc-entity>
+キューブにアタッチされた `rotate` スクリプトです。スクリプトクラスは通常 [`<pc-asset>`](../pc-asset) から読み込みますが、インラインのモジュールから登録することもできます — `<pc-script>` はクラスが届くまで保留のままになります。回転速度を変更してみましょう:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="cube">
+            <pc-render type="box"></pc-render>
+            <pc-scripts>
+                <pc-script name="rotate"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<script type="module">
+    import { registerScript, Script } from 'playcanvas';
+    import { whenReady } from '@playcanvas/web-components';
+
+    // アプリケーションを待ってからスクリプトクラスを登録します
+    await whenReady('pc-app');
+
+    class Rotate extends Script {
+        update(dt) {
+            this.entity.rotate(10 * dt, 20 * dt, 30 * dt);
+        }
+    }
+
+    registerScript(Rotate, 'rotate');
+</script>
 ```
 
 ## JavaScriptインターフェース

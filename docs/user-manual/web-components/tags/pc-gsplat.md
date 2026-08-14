@@ -31,9 +31,25 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 
 ## Example
 
-import CodePenEmbed from '@site/src/components/CodePenEmbed';
+A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — and note the `<pc-app>` attributes recommended above:
 
-<CodePenEmbed id="MYgGZax" title="<pc-gsplat> example" />
+```html live-example
+<pc-app antialias="false" max-pixel-ratio="1">
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 2.5">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" zoom-range="1 5"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="toy" position="0 -0.7 0" rotation="0 0 180">
+            <pc-gsplat asset="toy"></pc-gsplat>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## JavaScript Interface
 

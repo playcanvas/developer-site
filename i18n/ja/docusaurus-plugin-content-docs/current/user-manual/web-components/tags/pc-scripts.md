@@ -24,12 +24,51 @@ description: "pc-scripts要素のリファレンス: 複数のpc-script子をま
 
 ## 例
 
-```html
-<pc-entity>
-    <pc-scripts>
-        <pc-script name="myScript"></pc-script>
-    </pc-scripts>
-</pc-entity>
+2つのスクリプトを保持する1つのスクリプトコンポーネントです — `rotate` がキューブを回転させ、`pulse` がスケールを脈動させます。どちらかの `<pc-script>` タグを削除したり、`<pc-scripts>` コンポーネントに `enabled="false"` を設定して両方を無効にしたりしてみましょう:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="cube">
+            <pc-render type="box"></pc-render>
+            <pc-scripts>
+                <pc-script name="rotate"></pc-script>
+                <pc-script name="pulse"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<script type="module">
+    import { registerScript, Script } from 'playcanvas';
+    import { whenReady } from '@playcanvas/web-components';
+
+    await whenReady('pc-app');
+
+    class Rotate extends Script {
+        update(dt) {
+            this.entity.rotate(0, 90 * dt, 0);
+        }
+    }
+
+    class Pulse extends Script {
+        time = 0;
+
+        update(dt) {
+            this.time += dt;
+            const s = 1 + 0.2 * Math.sin(this.time * 3);
+            this.entity.setLocalScale(s, s, s);
+        }
+    }
+
+    registerScript(Rotate, 'rotate');
+    registerScript(Pulse, 'pulse');
+</script>
 ```
 
 ## JavaScriptインターフェース

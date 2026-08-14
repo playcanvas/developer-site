@@ -53,10 +53,27 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 ## 例
 
-```html
-<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1,tag2">
-    <!-- 子エンティティとコンポーネントはここに入ります -->
-</pc-entity>
+エンティティのトランスフォームは階層を通じて合成されます。小さいキューブは大きいキューブの*子*なので、大きいキューブにポインタを乗せると両方が一緒に動きます。親の `rotation` や `scale`、インラインの `onpointer*` ハンドラを編集してみましょう:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1 4">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="parent" rotation="0 30 0" tags="interactive"
+                   onpointerenter="this.entity.setLocalPosition(0, 0.25, 0)"
+                   onpointerleave="this.entity.setLocalPosition(0, 0, 0)">
+            <pc-render type="box"></pc-render>
+            <pc-entity name="child" position="0.75 0.75 0" scale="0.5 0.5 0.5">
+                <pc-render type="box"></pc-render>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

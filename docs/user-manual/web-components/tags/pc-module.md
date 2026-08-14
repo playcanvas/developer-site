@@ -52,10 +52,30 @@ the containing `<pc-app>` from booting.
 
 ## Example
 
-```html
+Loading the `Ammo` physics module. The box only falls because the module is declared — the app waits for it before booting, so physics is ready when the scene starts. Try removing the `<pc-module>` tag and re-running:
+
+```html live-example
 <pc-app>
-    <!-- Load the ammo.js module -->
-    <pc-module name="Ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
+    <!-- Load the ammo.js WebAssembly module -->
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2 6">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
+            <pc-render type="box"></pc-render>
+            <pc-collision half-extents="5 0.5 5"></pc-collision>
+            <pc-rigidbody type="static"></pc-rigidbody>
+        </pc-entity>
+    </pc-scene>
 </pc-app>
 ```
 

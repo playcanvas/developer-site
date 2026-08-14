@@ -42,10 +42,30 @@ description: "pc-module要素のリファレンス: glue・wasm・fallbackのパ
 
 ## 例
 
-```html
+`Ammo` 物理モジュールの読み込みです。ボックスが落下するのはモジュールが宣言されているからです — アプリはモジュールを待ってから起動するため、シーン開始時には物理が使用可能になっています。`<pc-module>` タグを削除して再実行してみましょう:
+
+```html live-example
 <pc-app>
-    <!-- ammo.jsモジュールをロード -->
-    <pc-module name="Ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
+    <!-- ammo.jsのWebAssemblyモジュールをロード -->
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2 6">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
+            <pc-render type="box"></pc-render>
+            <pc-collision half-extents="5 0.5 5"></pc-collision>
+            <pc-rigidbody type="static"></pc-rigidbody>
+        </pc-entity>
+    </pc-scene>
 </pc-app>
 ```
 
