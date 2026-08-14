@@ -46,7 +46,7 @@ A standalone vertical scrollbar — drag the orange handle. Try a different `han
 
                 <!-- Draggable handle -->
                 <pc-entity name="handle" id="handle">
-                    <pc-element type="image" anchor="0 1 1 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
+                    <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
                     <pc-button hover-tint="0.85 0.85 0.85 1" pressed-tint="0.7 0.7 0.7 1"></pc-button>
                 </pc-entity>
             </pc-entity>
