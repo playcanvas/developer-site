@@ -32,7 +32,7 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 単体の垂直スクロールバーです — オレンジ色のハンドルをドラッグしてみましょう。`handle-size` (トラックに対する割合) や初期の `value` を変えることもできます:
 
 ```html live-example
-<pc-app>
+<pc-app max-pixel-ratio="1">
     <pc-scene>
         <pc-entity name="camera">
             <pc-camera clear-color="#1d1f2b"></pc-camera>

@@ -32,7 +32,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 A standalone vertical scrollbar — drag the orange handle. Try a different `handle-size` (as a fraction of the track) or starting `value`:
 
 ```html live-example
-<pc-app>
+<pc-app max-pixel-ratio="1">
     <pc-scene>
         <pc-entity name="camera">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
