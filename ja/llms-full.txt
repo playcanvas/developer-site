@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 487
-Generated: 2026-08-13
+Generated: 2026-08-14
 
 ================================================================================
 
@@ -34565,7 +34565,23 @@ Using the npm install instead? Swap the import map and script tag for the `/node
 
 :::
 
-You can also experiment with this scene right here — it's live on CodePen:
+You can also experiment with the scene right here — edit the markup and the preview re-runs:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 45 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="ball">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## Editor Support
 
@@ -35380,7 +35396,23 @@ Removing the element and re-inserting it retries the boot with its current attri
 
 ## Example
 
-<CodePenEmbed id="JoPvXjO" title="<pc-app> example" />
+A complete application: a camera, a light and a sphere. Try setting `antialias="false"` or `max-pixel-ratio="1"` on the `<pc-app>` tag:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#8099e6"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 45 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="ball">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## JavaScript Interface
 
@@ -35490,12 +35522,26 @@ The element's readiness is a separate signal: it becomes ready once its asset ha
 
 ## Example
 
-```html
+Two assets: a script (an engine helper loaded straight from a CDN) and a GLB model. The script registers itself by name; the model is referenced by `id`. Drag to orbit:
+
+```html live-example
 <pc-app>
     
-    <pc-asset src="assets/scripts/animate.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
     
-    <pc-asset src="assets/models/car.glb" id="car"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light intensity="2"></pc-light>
+        </pc-entity>
+        <pc-model asset="cube"></pc-model>
+    </pc-scene>
 </pc-app>
 ```
 
@@ -35556,16 +35602,41 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 
 ## Example
 
-```html
+A clickable button with tint transitions — hover and press it, then try the `hover-tint`/`pressed-tint` colors or a longer `fade-duration`. The script below wires up the `click` event using the pattern described next:
+
+```html live-example
 <pc-app>
+    <pc-asset src="https://developer.playcanvas.com/assets/fonts/arial.json" type="font" id="arial"></pc-asset>
     <pc-scene>
-        <pc-entity name="button">
-            
-            <pc-element type="image" width="190" height="45" use-input></pc-element>
-            <pc-button transition-mode="tint" hover-tint="0.8 0.8 0.8 1" pressed-tint="0.6 0.6 0.6 1"></pc-button>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="button">
+                
+                <pc-element type="image" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            width="220" height="56" color="#ff8a3c" use-input></pc-element>
+                <pc-button transition-mode="tint" hover-tint="0.85 0.85 0.85 1"
+                           pressed-tint="0.6 0.6 0.6 1" fade-duration="100"></pc-button>
+                <pc-entity name="label">
+                    <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                                font-asset="arial" font-size="24" color="#1d1f2b" text="Click me"></pc-element>
+                </pc-entity>
+            </pc-entity>
         </pc-entity>
     </pc-scene>
 </pc-app>
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const button = await whenReady('pc-button');
+    const label = document.querySelector('pc-entity[name="label"] > pc-element');
+    let clicks = 0;
+    button.component.on('click', () => {
+        label.setAttribute('text', `Clicked ${++clicks} time${clicks === 1 ? '' : 's'}`);
+    });
+</script>
 ```
 
 You can respond to clicks by listening for the `click` event on the underlying button component. Wait for the element to finish initializing with `whenReady` (see [Programmatic Access](../programmatic-access.md)) rather than querying it synchronously:
@@ -35626,10 +35697,31 @@ The `<pc-camera>` tag is used to define a camera component.
 
 ## Example
 
-```html
-<pc-entity>
-    <pc-camera clear-color="yellow"></pc-camera>
-</pc-entity>
+A row of boxes receding into the distance. Try a different `fov`, or switch to `projection="orthographic"` (sized by `ortho-height`) and watch the perspective disappear:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.5 4" rotation="-15 0 0">
+            <pc-camera clear-color="#4a5568" fov="60"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="box-near" position="-1.5 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-mid" position="0 0.5 -2">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-far" position="1.5 0.5 -4">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 -2" scale="12 1 16">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -35686,23 +35778,38 @@ The render component has to be backed by a render asset, which the primitive typ
 
 ## Example
 
-```html
+Each collision shape matches its rendered shape: a sphere, a capsule and a box tumbling onto static ground. Try changing the sphere's `radius` — the visual mesh stays the same, but it collides differently:
+
+```html live-example
 <pc-app>
     
-    <pc-module name="Ammo" glue="modules/ammo/ammo.wasm.js" wasm="modules/ammo/ammo.wasm.wasm" fallback="modules/ammo/ammo.js"></pc-module>
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
     <pc-scene>
-        
-        <pc-entity>
-            <pc-render type="box"></pc-render>
-            <pc-collision></pc-collision>
-            <pc-rigidbody></pc-rigidbody>
+        <pc-entity name="camera" position="0 2 8">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-
-        
-        <pc-entity position="0 4 0">
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="ball" position="-1.5 4 0">
             <pc-render type="sphere"></pc-render>
-            <pc-collision type="sphere"></pc-collision>
+            <pc-collision type="sphere" radius="0.5"></pc-collision>
             <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="pill" position="0 5 0" rotation="0 0 70">
+            <pc-render type="capsule"></pc-render>
+            <pc-collision type="capsule" radius="0.5" height="2"></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="crate" position="1.5 6 0" rotation="20 30 40">
+            <pc-render type="box"></pc-render>
+            <pc-collision type="box" half-extents="0.5 0.5 0.5"></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
+            <pc-render type="box"></pc-render>
+            <pc-collision half-extents="6 0.5 6"></pc-collision>
+            <pc-rigidbody type="static"></pc-rigidbody>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -35770,12 +35877,30 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 
 ## Example
 
-```html
+An `image` element as a panel, with two `text` elements on top — the second uses `enable-markup` for inline coloring. Try editing the `text`, `font-size` or panel `color`:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/fonts/arial.json" type="font" id="arial"></pc-asset>
     <pc-scene>
-        <pc-entity>
-            <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="panel">
+                <pc-element type="image" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            width="400" height="150" color="#2a2d36" opacity="0.9"></pc-element>
+                <pc-entity name="heading" position="0 35 0">
+                    <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                                font-asset="arial" font-size="36" text="<pc-element>"></pc-element>
+                </pc-entity>
+                <pc-entity name="body" position="0 -25 0">
+                    <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                                font-asset="arial" font-size="20" enable-markup="true"
+                                text='Comes in [color="#ff8a3c"]group[/color], [color="#7ab8ff"]image[/color] and [color="#8ce99a"]text[/color] types'></pc-element>
+                </pc-entity>
+            </pc-entity>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -35841,10 +35966,27 @@ You can also handle these events declaratively with inline `onpointer*` attribut
 
 ## Example
 
-```html
-<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1,tag2">
-    
-</pc-entity>
+Entity transforms compose down the hierarchy: the small cube is a *child* of the large one, so hover over the large cube and both move together. Try editing the parent's `rotation` or `scale`, or the inline `onpointer*` handlers:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1 4">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="parent" rotation="0 30 0" tags="interactive"
+                   onpointerenter="this.entity.setLocalPosition(0, 0.25, 0)"
+                   onpointerleave="this.entity.setLocalPosition(0, 0, 0)">
+            <pc-render type="box"></pc-render>
+            <pc-entity name="child" position="0.75 0.75 0" scale="0.5 0.5 0.5">
+                <pc-render type="box"></pc-render>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -35885,7 +36027,25 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 
 ## Example
 
-<CodePenEmbed id="MYgGZax" title="<pc-gsplat> example" />
+A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — and note the `<pc-app>` attributes recommended above:
+
+```html live-example
+<pc-app antialias="false" max-pixel-ratio="1">
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 2.5">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" zoom-range="1 5"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="toy" position="0 -0.7 0" rotation="0 0 180">
+            <pc-gsplat asset="toy"></pc-gsplat>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## JavaScript Interface
 
@@ -36027,45 +36187,37 @@ joint.component.refreshFrames(); // re-armed, frames re-captured from the curren
 
 ## Example
 
-A rope of two links hanging from an anchor, each link tied to the body above it by a ball joint with swing and twist limits:
+A motor-driven hinge spinning a blade about a static hub. The joint entity sits at the pivot, rotated `"0 90 0"` so its local X axis — the hinge axis — points at the camera. Try a different `motor-speed` (negative reverses it), or add `enable-limits limits="-60 60"` and watch the motor stall against the stop:
 
-```html
+```html live-example
 <pc-app>
-    <pc-module name="Ammo" glue="modules/ammo/ammo.wasm.js"
-               wasm="modules/ammo/ammo.wasm.wasm"
-               fallback="modules/ammo/ammo.js"></pc-module>
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
     <pc-scene>
         <pc-entity name="camera" position="0 2 6">
-            <pc-camera></pc-camera>
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity name="light" rotation="45 45 0">
-            <pc-light type="directional"></pc-light>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
         </pc-entity>
 
-        <pc-entity id="anchor" position="0 4 0">
-            <pc-collision half-extents="0.2 0.2 0.2"></pc-collision>
+        
+        <pc-entity id="hub" position="0 2 0" rotation="90 0 0" scale="0.5 0.3 0.5">
+            <pc-render type="cylinder"></pc-render>
+            <pc-collision type="cylinder" radius="0.25" height="0.3"></pc-collision>
             <pc-rigidbody></pc-rigidbody>
         </pc-entity>
 
-        <pc-entity id="link-1" position="0 3.4 0" scale="0.24 1 0.24">
+        
+        <pc-entity id="blade" position="0 2 0" scale="4 0.3 0.2">
             <pc-render type="box"></pc-render>
-            <pc-collision half-extents="0.12 0.5 0.12"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
-        </pc-entity>
-        <pc-entity id="link-2" position="0 2.4 0" scale="0.24 1 0.24">
-            <pc-render type="box"></pc-render>
-            <pc-collision half-extents="0.12 0.5 0.12"></pc-collision>
+            <pc-collision half-extents="2 0.15 0.1"></pc-collision>
             <pc-rigidbody type="dynamic"></pc-rigidbody>
         </pc-entity>
 
         
-        <pc-entity position="0 3.9 0">
-            <pc-joint type="ball" entity-a="#link-1" entity-b="#anchor"
-                      enable-limits swing-limit-y="35" swing-limit-z="35" twist-limit="10"></pc-joint>
-        </pc-entity>
-        <pc-entity position="0 2.9 0">
-            <pc-joint type="ball" entity-a="#link-2" entity-b="#link-1"
-                      enable-limits swing-limit-y="35" swing-limit-z="35" twist-limit="10"></pc-joint>
+        <pc-entity name="hinge" position="0 2 0" rotation="0 90 0">
+            <pc-joint type="hinge" entity-a="#blade" entity-b="#hub"
+                      motor-speed="90" max-motor-force="1000"></pc-joint>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -36120,11 +36272,37 @@ The `<pc-layoutchild>` tag is used to define a layout child component, which con
 
 ## Example
 
-```html
-<pc-entity>
-    <pc-element type="image" width="200" height="45"></pc-element>
-    <pc-layoutchild min-height="45" fit-width-proportion="1"></pc-layoutchild>
-</pc-entity>
+Three items in a horizontal group with `width-fitting="stretch"`. The middle item's `fit-width-proportion="1"` means it alone absorbs the group's spare width. Try giving the first item a proportion of `1` too — they will share it — or set a `max-width` on the middle one:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="toolbar">
+                <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="480" height="70"></pc-element>
+                <pc-layoutgroup orientation="horizontal" alignment="0 0.5" spacing="8 0"
+                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+
+                <pc-entity name="item-1">
+                    <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
+                    <pc-layoutchild></pc-layoutchild>
+                </pc-entity>
+                <pc-entity name="item-2">
+                    <pc-element type="image" width="80" height="50" color="#ff8a3c"></pc-element>
+                    <pc-layoutchild fit-width-proportion="1"></pc-layoutchild>
+                </pc-entity>
+                <pc-entity name="item-3">
+                    <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
+                    <pc-layoutchild></pc-layoutchild>
+                </pc-entity>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -36167,20 +36345,34 @@ The `<pc-layoutgroup>` tag is used to define a layout group component, which aut
 
 ## Example
 
-```html
-<pc-entity name="list">
-    <pc-element type="group" width="220" height="400"></pc-element>
-    <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 5" padding="10 10 10 10"></pc-layoutgroup>
+A vertical list that lays out its rows automatically. Try `orientation="horizontal"`, a bigger `spacing`, or `reverse-y` — or add another row and watch it slot in:
 
-    <pc-entity name="item-1">
-        <pc-element type="image" width="200" height="45"></pc-element>
-        <pc-layoutchild></pc-layoutchild>
-    </pc-entity>
-    <pc-entity name="item-2">
-        <pc-element type="image" width="200" height="45"></pc-element>
-        <pc-layoutchild></pc-layoutchild>
-    </pc-entity>
-</pc-entity>
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="list">
+                <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="220"></pc-element>
+                <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8"
+                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+
+                <pc-entity name="row-1">
+                    <pc-element type="image" width="240" height="50" color="#ff8a3c"></pc-element>
+                </pc-entity>
+                <pc-entity name="row-2">
+                    <pc-element type="image" width="240" height="50" color="#7ab8ff"></pc-element>
+                </pc-entity>
+                <pc-entity name="row-3">
+                    <pc-element type="image" width="240" height="50" color="#8ce99a"></pc-element>
+                </pc-entity>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -36232,10 +36424,34 @@ The `<pc-light>` tag is used to define a light component.
 
 ## Example
 
-```html
-<pc-entity>
-    <pc-light type="directional" intensity="10" color="red" cast-shadows></pc-light>
-</pc-entity>
+Try editing the light `color`, `intensity` or `type` values and watch the scene update:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2.5 5" rotation="-15 0 0">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        
+        <pc-entity name="spot-light" position="-2 4 0">
+            <pc-light type="spot" color="#ffb47a" intensity="5" outer-cone-angle="35" cast-shadows></pc-light>
+        </pc-entity>
+        
+        <pc-entity name="omni-light" position="2 2 1">
+            <pc-light type="omni" color="#7ab8ff" intensity="2.5" range="10"></pc-light>
+        </pc-entity>
+        
+        <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="sphere" position="-2 0.5 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+        <pc-entity name="box" position="2 0.5 0" rotation="0 30 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -36268,10 +36484,55 @@ The `<pc-listener>` tag is used to define a listener component.
 
 ## Example
 
-```html
-<pc-entity>
-    <pc-listener></pc-listener>
-</pc-entity>
+The listener sits on the camera, and a sphere emitting positional footsteps circles in front of it — put headphones on and the sound pans left and right as the sphere crosses. Browsers gate audio behind a user gesture, so click Play to start:
+
+```html live-example
+<pc-app>
+    <pc-asset src="https://developer.playcanvas.com/assets/footsteps.mp3" id="footsteps"></pc-asset>
+    <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2.5 6" rotation="-15 0 0">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            
+            <pc-listener></pc-listener>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="ground" scale="14 14 14">
+            <pc-render type="plane" material="floor"></pc-render>
+        </pc-entity>
+        <pc-entity name="pivot">
+            <pc-scripts>
+                <pc-script name="orbit"></pc-script>
+            </pc-scripts>
+            <pc-entity name="emitter" position="3 1 0" scale="0.4 0.4 0.4">
+                <pc-render type="sphere"></pc-render>
+                <pc-sounds positional="true" ref-distance="2" roll-off-factor="1">
+                    <pc-sound name="footsteps" asset="footsteps" loop="true"></pc-sound>
+                </pc-sounds>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<button id="play" style="position: absolute; top: 12px; left: 12px;">Play</button>
+<script type="module">
+    import { registerScript, Script } from 'playcanvas';
+    import { whenReady } from '@playcanvas/web-components';
+
+    await whenReady('pc-app');
+
+    class Orbit extends Script {
+        update(dt) {
+            this.entity.rotate(0, 45 * dt, 0);
+        }
+    }
+
+    registerScript(Orbit, 'orbit');
+
+    const sounds = await whenReady('pc-sounds');
+    document.getElementById('play').onclick = () => sounds.component.slot('footsteps').play();
+</script>
 ```
 
 ## JavaScript Interface
@@ -36379,21 +36640,31 @@ The `-map-channel` modifier varies by slot:
 
 ## Example
 
-```html
+Four materials: a plain color, a metal, a transparent "glass" and a tiled texture map. The sky's `lighting` gives the metal something to reflect. Try editing `diffuse` colors, `metalness`, `roughness`, `opacity` or the `diffuse-map-tiling`:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/textures/dark-tiles.png" id="dark-tiles"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/dark-tiles.png" id="dark-tiles"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp" id="skybox"></pc-asset>
     <pc-material id="crimson" diffuse="crimson"></pc-material>
     <pc-material id="gold" diffuse="#ffd700" metalness="1" roughness="0.3"></pc-material>
     <pc-material id="glass" blend-type="normal" opacity="0.4"></pc-material>
     <pc-material id="ground" diffuse-map="dark-tiles" diffuse-map-tiling="4 4"></pc-material>
     <pc-scene>
-        <pc-entity name="box" position="-2 0 0">
+        <pc-sky asset="skybox" lighting></pc-sky>
+        <pc-entity name="camera" position="0 1.5 5" rotation="-12 0 0">
+            <pc-camera clear-color="#1d1f2b" tonemap="aces"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="box" position="-2 0.5 0">
             <pc-render type="box" material="crimson"></pc-render>
         </pc-entity>
-        <pc-entity name="sphere">
+        <pc-entity name="sphere" position="0 0.5 0">
             <pc-render type="sphere" material="gold"></pc-render>
         </pc-entity>
-        <pc-entity name="capsule" position="2 0 0">
+        <pc-entity name="capsule" position="2 1 0">
             <pc-render type="capsule" material="glass"></pc-render>
         </pc-entity>
         <pc-entity name="ground" scale="10 1 10">
@@ -36471,11 +36742,27 @@ A model with no animations gets no `anim` component, so checking for one is how 
 
 ## Example
 
-```html
+A GLB with a skeletal animation — which auto-plays, exactly as the [Animation](#animation) section above describes. Drag to orbit:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/car.glb" id="car"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
+    <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
-        <pc-model asset="car"></pc-model>
+        <pc-entity name="camera" position="2.5 1.5 3.5">
+            <pc-camera clear-color="#2a2d36"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="ground" scale="30 30 30">
+            <pc-render type="plane" material="floor"></pc-render>
+        </pc-entity>
+        <pc-model asset="t-rex" scale="1.5 1.5 1.5"></pc-model>
     </pc-scene>
 </pc-app>
 ```
@@ -36586,10 +36873,30 @@ the containing `<pc-app>` from booting.
 
 ## Example
 
-```html
+Loading the `Ammo` physics module. The box only falls because the module is declared — the app waits for it before booting, so physics is ready when the scene starts. Try removing the `<pc-module>` tag and re-running:
+
+```html live-example
 <pc-app>
     
-    <pc-module name="Ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2 6">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
+            <pc-render type="box"></pc-render>
+            <pc-collision half-extents="5 0.5 5"></pc-collision>
+            <pc-rigidbody type="static"></pc-rigidbody>
+        </pc-entity>
+    </pc-scene>
 </pc-app>
 ```
 
@@ -36704,26 +37011,26 @@ The inline `onpointer*` attributes work here exactly as they do on [`<pc-entity>
 
 ## Example
 
-```html
+This GLB instantiates two nodes — `play` (the orange shell, its logo cut out of each face) and `canvas` (the dark inner box you see through the cutouts). [`hierarchy()`](../pc-model#inspecting-the-hierarchy) is how you discover that. The `<pc-node>` binds `play` and swaps its authored orange for blue via `material-overrides`. Try binding `canvas` instead, or add `enabled="false"` to hide the shell entirely. Drag to orbit:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/car.glb" id="car"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
+    <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
-        <pc-entity name="camera" position="0 1 4">
-            <pc-camera></pc-camera>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
+            </pc-scripts>
         </pc-entity>
-        <pc-model asset="car">
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light intensity="2"></pc-light>
+        </pc-entity>
+        <pc-model asset="cube">
             
-            <pc-node name="Plane" enabled="false"></pc-node>
-
-            
-            <pc-node name="Roof" position="0 0.05 0" tags="openable"></pc-node>
-
-            
-            <pc-node name="Headlight_L">
-                <pc-entity>
-                    <pc-light type="spot" intensity="4" range="20"></pc-light>
-                </pc-entity>
-            </pc-node>
+            <pc-node name="play" material-overrides='{"index:0": "repaint"}'></pc-node>
         </pc-model>
     </pc-scene>
 </pc-app>
@@ -36818,17 +37125,17 @@ First define the particle system in JSON format:
 }
 ```
 
-Then add the particle system to your scene in HTML:
+Then add the particle system to your scene in HTML. This runs the `snow.json` above — note how `colorMapAsset` names the `snowflake` texture asset's `id`:
 
-```html
+```html live-example
 <pc-app>
-    <pc-asset src="assets/snowflake.png" id="snowflake"></pc-asset>
-    <pc-asset src="assets/snow.json" id="snow"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/snowflake.png" id="snowflake"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/snow.json" id="snow"></pc-asset>
     <pc-scene>
-        <pc-entity position="0 0 8">
-            <pc-camera></pc-camera>
+        <pc-entity name="camera" position="0 0 8">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity position="0 5 0">
+        <pc-entity name="snow" position="0 5 0">
             <pc-particles asset="snow"></pc-particles>
         </pc-entity>
     </pc-scene>
@@ -36875,7 +37182,38 @@ To render a 3D model from a glTF/GLB file, use [`<pc-model>`](../pc-model) inste
 
 ## Example
 
-<CodePenEmbed id="NPKMrLy" title="<pc-render> example" />
+All six primitive shapes. Try changing any `type`, or add `material` once you have defined a [`<pc-material>`](../pc-material):
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.5 6" rotation="-10 0 0">
+            <pc-camera clear-color="#2a2d36"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="box" position="-2.5 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="sphere" position="-1 0.5 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+        <pc-entity name="capsule" position="0.25 1 0">
+            <pc-render type="capsule"></pc-render>
+        </pc-entity>
+        <pc-entity name="cone" position="1.5 0.5 0">
+            <pc-render type="cone"></pc-render>
+        </pc-entity>
+        <pc-entity name="cylinder" position="2.75 0.5 0">
+            <pc-render type="cylinder"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" scale="10 10 10">
+            <pc-render type="plane"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## JavaScript Interface
 
@@ -36918,7 +37256,41 @@ The `<pc-rigidbody>` tag is used to define a rigidbody component.
 
 ## Example
 
-<CodePenEmbed id="XJrqjJr" title="<pc-rigidbody> example" />
+Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`, so it bounces — try giving the boxes some bounce too, or changing their `mass`:
+
+```html live-example
+<pc-app>
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2 8">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="box-1" position="-1.5 4 0" rotation="30 10 40">
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="box-2" position="0 6 0" rotation="10 40 20">
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="ball" position="1.5 5 0">
+            <pc-render type="sphere"></pc-render>
+            <pc-collision type="sphere"></pc-collision>
+            <pc-rigidbody type="dynamic" restitution="0.9"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
+            <pc-render type="box"></pc-render>
+            <pc-collision half-extents="6 0.5 6"></pc-collision>
+            <pc-rigidbody type="static"></pc-rigidbody>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## JavaScript Interface
 
@@ -36955,10 +37327,32 @@ The `<pc-scene>` tag is used to define the scene.
 
 ## Example
 
-```html
+Boxes fading into linear fog. Try a different `fog-color` (match the camera's `clear-color` for the classic depth-haze look), or switch `fog` to `"exp"` with a `fog-density` of `0.15`:
+
+```html live-example
 <pc-app>
-    <pc-scene>
-        
+    <pc-scene fog="linear" fog-color="#4a5568" fog-start="2" fog-end="10">
+        <pc-entity name="camera" position="0 1.5 4" rotation="-10 0 0">
+            <pc-camera clear-color="#4a5568"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="box-1" position="-1 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-2" position="0 0.5 -3">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-3" position="1 0.5 -6">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-4" position="2 0.5 -9">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 -4" scale="10 1 20">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
     </pc-scene>
 </pc-app>
 ```
@@ -37006,16 +37400,23 @@ on one. Set `screen-space` alongside `scale-mode="blend"` for it to have any eff
 
 ## Example
 
-```html
+A screen-space screen hosting a text element. With `scale-mode="blend"`, the UI scales as the canvas resizes — try the fullscreen button to see it, or edit the `text`:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/fonts/arial.json" type="font" id="arial"></pc-asset>
     <pc-scene>
-        <pc-entity>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
             
-            <pc-screen></pc-screen>
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
             
-            <pc-entity>
-                <pc-element type="text" font-asset="arial" text="Hello, World!"></pc-element>
+            <pc-entity name="title">
+                <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            font-asset="arial" font-size="48" color="#ff8a3c"
+                            text="Hello, World!"></pc-element>
             </pc-entity>
         </pc-entity>
     </pc-scene>
@@ -37057,12 +37458,40 @@ In addition, any other non-reserved attribute maps to the script attribute of th
 
 ## Example
 
-```html
-<pc-entity>
-    <pc-scripts>
-        <pc-script name="myScript" speed="180" target-color="#ff6432"></pc-script>
-    </pc-scripts>
-</pc-entity>
+A `rotate` script attached to a cube. Script classes usually load from a [`<pc-asset>`](../pc-asset), but they can also be registered from an inline module — the `<pc-script>` stays pending until its class arrives. Try changing the rotation rates:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="cube">
+            <pc-render type="box"></pc-render>
+            <pc-scripts>
+                <pc-script name="rotate"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<script type="module">
+    import { registerScript, Script } from 'playcanvas';
+    import { whenReady } from '@playcanvas/web-components';
+
+    // Wait for the application, then register the script class
+    await whenReady('pc-app');
+
+    class Rotate extends Script {
+        update(dt) {
+            this.entity.rotate(10 * dt, 20 * dt, 30 * dt);
+        }
+    }
+
+    registerScript(Rotate, 'rotate');
+</script>
 ```
 
 ## JavaScript Interface
@@ -37098,12 +37527,51 @@ The `<pc-scripts>` tag is used to define a script component.
 
 ## Example
 
-```html
-<pc-entity>
-    <pc-scripts>
-        <pc-script name="myScript"></pc-script>
-    </pc-scripts>
-</pc-entity>
+One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script>` tags, or setting `enabled="false"` on the `<pc-scripts>` component to switch both off:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 0 3">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="cube">
+            <pc-render type="box"></pc-render>
+            <pc-scripts>
+                <pc-script name="rotate"></pc-script>
+                <pc-script name="pulse"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<script type="module">
+    import { registerScript, Script } from 'playcanvas';
+    import { whenReady } from '@playcanvas/web-components';
+
+    await whenReady('pc-app');
+
+    class Rotate extends Script {
+        update(dt) {
+            this.entity.rotate(0, 90 * dt, 0);
+        }
+    }
+
+    class Pulse extends Script {
+        time = 0;
+
+        update(dt) {
+            this.time += dt;
+            const s = 1 + 0.2 * Math.sin(this.time * 3);
+            this.entity.setLocalScale(s, s, s);
+        }
+    }
+
+    registerScript(Rotate, 'rotate');
+    registerScript(Pulse, 'pulse');
+</script>
 ```
 
 ## JavaScript Interface
@@ -37142,17 +37610,30 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 
 ## Example
 
-```html
-<pc-entity name="scrollbar">
-    <pc-element type="image" anchor="1 0 1 1" width="20"></pc-element>
-    <pc-scrollbar orientation="vertical" handle-size="0.5" handle="#handle"></pc-scrollbar>
+A standalone vertical scrollbar — drag the orange handle. Try a different `handle-size` (as a fraction of the track) or starting `value`:
 
-    
-    <pc-entity name="handle" id="handle">
-        <pc-element type="image" anchor="0 1 1 1" use-input></pc-element>
-        <pc-button></pc-button>
-    </pc-entity>
-</pc-entity>
+```html live-example
+<pc-app max-pixel-ratio="1">
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="scrollbar">
+                <pc-element type="image" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            width="20" height="240" color="#3a3f4b"></pc-element>
+                <pc-scrollbar orientation="vertical" handle-size="0.35" handle="#handle"></pc-scrollbar>
+
+                
+                <pc-entity name="handle" id="handle">
+                    <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
+                    <pc-button hover-tint="0.85 0.85 0.85 1" pressed-tint="0.7 0.7 0.7 1"></pc-button>
+                </pc-entity>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -37200,36 +37681,57 @@ The `<pc-scrollview>` tag is used to define a scroll view component, which lets 
 
 ## Example
 
-```html
-<pc-entity name="scroll-view">
-    <pc-element type="group" width="230" height="400"></pc-element>
-    <pc-scrollview
-        horizontal="false"
-        vertical="true"
-        viewport="#viewport"
-        content="#content"
-        vertical-scrollbar="#v-scrollbar"></pc-scrollview>
+Scroll the striped content with the mouse wheel, by dragging it, or with the scrollbar. The viewport's `mask` clips the content. Try `scroll-mode="clamp"` (no bounce), or a taller content `height`:
 
-    
-    <pc-entity name="viewport" id="viewport">
-        <pc-element type="image" anchor="0 0 1 1" mask></pc-element>
-
-        
-        <pc-entity name="content" id="content">
-            <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="220" height="700" use-input></pc-element>
+```html live-example
+<pc-app max-pixel-ratio="1">
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-    </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="scroll-view">
+                <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="260"></pc-element>
+                <pc-scrollview
+                    horizontal="false"
+                    vertical="true"
+                    viewport="#viewport"
+                    content="#content"
+                    vertical-scrollbar="#v-scrollbar"></pc-scrollview>
 
-    
-    <pc-entity name="v-scrollbar" id="v-scrollbar">
-        <pc-element type="image" anchor="1 0 1 1" width="20"></pc-element>
-        <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
-        <pc-entity name="handle" id="v-handle">
-            <pc-element type="image" anchor="0 1 1 1" use-input></pc-element>
-            <pc-button></pc-button>
+                
+                <pc-entity name="viewport" id="viewport">
+                    <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" color="#2a2d36" mask></pc-element>
+
+                    
+                    <pc-entity name="content" id="content">
+                        <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="556" use-input></pc-element>
+                        <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layoutgroup>
+                        <pc-entity name="row-1"><pc-element type="image" width="220" height="60" color="#ff8a3c"></pc-element></pc-entity>
+                        <pc-entity name="row-2"><pc-element type="image" width="220" height="60" color="#7ab8ff"></pc-element></pc-entity>
+                        <pc-entity name="row-3"><pc-element type="image" width="220" height="60" color="#8ce99a"></pc-element></pc-entity>
+                        <pc-entity name="row-4"><pc-element type="image" width="220" height="60" color="#ffd43b"></pc-element></pc-entity>
+                        <pc-entity name="row-5"><pc-element type="image" width="220" height="60" color="#e599f7"></pc-element></pc-entity>
+                        <pc-entity name="row-6"><pc-element type="image" width="220" height="60" color="#63e6be"></pc-element></pc-entity>
+                        <pc-entity name="row-7"><pc-element type="image" width="220" height="60" color="#ffa8a8"></pc-element></pc-entity>
+                        <pc-entity name="row-8"><pc-element type="image" width="220" height="60" color="#74c0fc"></pc-element></pc-entity>
+                    </pc-entity>
+                </pc-entity>
+
+                
+                <pc-entity name="v-scrollbar" id="v-scrollbar">
+                    <pc-element type="image" anchor="1 0 1 1" pivot="1 0.5" width="20" margin="0 0 0 0" color="#2a2d36"></pc-element>
+                    <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
+                    <pc-entity name="handle" id="v-handle">
+                        <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
+                        <pc-button></pc-button>
+                    </pc-entity>
+                </pc-entity>
+            </pc-entity>
         </pc-entity>
-    </pc-entity>
-</pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface
@@ -37269,11 +37771,23 @@ The `<pc-sky>` tag is used to define a sky component.
 
 ## Example
 
-```html
+An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"` or a higher `mip-level` to soften it:
+
+```html live-example
 <pc-app>
-    <pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
-        <pc-sky asset="skybox"></pc-sky>
+        <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
+        <pc-entity name="camera" position="0 1.5 5">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" pitch-range="-90 0" zoom-range="2 12"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="sphere" position="0 1 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
     </pc-scene>
 </pc-app>
 ```
@@ -37316,17 +37830,43 @@ The `<pc-sound>` tag is used to define a sound.
 
 ## Example
 
-```html
+Two slots playing the same clip — the second at half `pitch`. Browsers only allow audio after a user gesture, so playback is wired to plain HTML buttons overlaid on the app. Try editing the `pitch` or `volume` values:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/audio/music.mp3" id="music"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/drop.mp3" id="drop"></pc-asset>
     <pc-scene>
-        <pc-entity>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="jukebox">
             <pc-sounds>
-                <pc-sound asset="music"></pc-sound>
+                <pc-sound name="drop" asset="drop"></pc-sound>
+                <pc-sound name="drop-slow" asset="drop" pitch="0.5" volume="0.8"></pc-sound>
             </pc-sounds>
         </pc-entity>
     </pc-scene>
 </pc-app>
+<div class="controls">
+    <button id="play">Play</button>
+    <button id="play-slow">Play at half pitch</button>
+</div>
+<style>
+    .controls {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        gap: 8px;
+    }
+</style>
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const sounds = await whenReady('pc-sounds');
+    document.getElementById('play').onclick = () => sounds.component.slot('drop').play();
+    document.getElementById('play-slow').onclick = () => sounds.component.slot('drop-slow').play();
+</script>
 ```
 
 ## JavaScript Interface
@@ -37367,17 +37907,47 @@ The `<pc-sounds>` tag is used to define a sound component.
 
 ## Example
 
-```html
+One sound component holding two slots — looping footsteps and a one-shot. The component's `volume` and `pitch` apply to every slot it holds; try halving the `volume`, or setting `pitch="1.5"` and re-running:
+
+```html live-example
 <pc-app>
-    <pc-asset src="assets/audio/music.mp3" id="music"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/footsteps.mp3" id="footsteps"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/drop.mp3" id="drop"></pc-asset>
     <pc-scene>
-        <pc-entity>
-            <pc-sounds volume="0.5">
-                <pc-sound asset="music"></pc-sound>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="speaker">
+            <pc-sounds volume="1" pitch="1">
+                <pc-sound name="footsteps" asset="footsteps" loop="true"></pc-sound>
+                <pc-sound name="drop" asset="drop"></pc-sound>
             </pc-sounds>
         </pc-entity>
     </pc-scene>
 </pc-app>
+<div class="controls">
+    <button id="toggle">Toggle footsteps</button>
+    <button id="drop">Play drop</button>
+</div>
+<style>
+    .controls {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        gap: 8px;
+    }
+</style>
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const sounds = await whenReady('pc-sounds');
+    const footsteps = sounds.component.slot('footsteps');
+    document.getElementById('toggle').onclick = () => {
+        footsteps.isPlaying ? footsteps.stop() : footsteps.play();
+    };
+    document.getElementById('drop').onclick = () => sounds.component.slot('drop').play();
+</script>
 ```
 
 ## JavaScript Interface
