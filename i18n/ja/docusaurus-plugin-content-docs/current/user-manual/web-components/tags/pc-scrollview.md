@@ -61,9 +61,10 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
                 <pc-entity name="viewport" id="viewport">
                     <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" color="#2a2d36" mask></pc-element>
 
-                    <!-- コンテンツはビューのスクロールに合わせて移動します -->
+                    <!-- コンテンツはビューのスクロールに合わせて移動します。高さは行のレイアウト後の
+                         サイズです: 60 x 8行 + 間隔 8 x 7 + 上下のパディング 10 ずつ -->
                     <pc-entity name="content" id="content">
-                        <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="640" use-input></pc-element>
+                        <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="556" use-input></pc-element>
                         <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layoutgroup>
                         <pc-entity name="row-1"><pc-element type="image" width="220" height="60" color="#ff8a3c"></pc-element></pc-entity>
                         <pc-entity name="row-2"><pc-element type="image" width="220" height="60" color="#7ab8ff"></pc-element></pc-entity>

@@ -61,9 +61,10 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
                 <pc-entity name="viewport" id="viewport">
                     <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" color="#2a2d36" mask></pc-element>
 
-                    <!-- Content is moved as the view is scrolled -->
+                    <!-- Content is moved as the view is scrolled. Its height is the laid-out
+                         size of the rows: 8 x 60, plus 7 x 8 spacing, plus 10 padding top and bottom -->
                     <pc-entity name="content" id="content">
-                        <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="640" use-input></pc-element>
+                        <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="556" use-input></pc-element>
                         <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layoutgroup>
                         <pc-entity name="row-1"><pc-element type="image" width="220" height="60" color="#ff8a3c"></pc-element></pc-entity>
                         <pc-entity name="row-2"><pc-element type="image" width="220" height="60" color="#7ab8ff"></pc-element></pc-entity>
