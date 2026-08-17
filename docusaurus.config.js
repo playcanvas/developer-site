@@ -6,6 +6,7 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
+import remarkLiveExample from './utils/plugins/remark-live-example.mjs';
 import remarkRootStaticUrls from './utils/plugins/remark-root-static-urls.mjs';
 import pluginLlms from './utils/plugins/docusaurus-plugin-llms.mjs';
 
@@ -264,6 +265,7 @@ const config = {
         docs: {
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
+          admonitions: { keywords: ['ai'] },
           beforeDefaultRemarkPlugins: localizedBuild ? [remarkRootStaticUrls] : [],
           remarkPlugins: [
             [remarkTypedoc, {
@@ -292,7 +294,8 @@ const config = {
                   types: resolvedTypes
                 };
               }
-            }]
+            }],
+            remarkLiveExample
           ],
           editUrl:
             'https://github.com/playcanvas/developer-site/tree/main/',

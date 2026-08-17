@@ -34,7 +34,7 @@ Select a row in the property list to display its distribution. The default prope
 | **Opacity** | Effective opacity, including the active Color panel transparency adjustment. |
 | **Red/Green/Blue** | Final color for the current camera direction, including spherical harmonics and Color panel adjustments. These histograms can change when the camera moves. |
 | **Scale X/Y/Z** | Decoded Gaussian scale along each local axis. |
-| **Quat W/X/Y/Z** | Components of the Gaussian's rotation quaternion. |
+| **Quaternion W/X/Y/Z** | Components of the Gaussian's rotation quaternion. |
 | **Distance** | Distance from the world origin `(0, 0, 0)`. |
 | **Camera Depth** | Distance along the current camera's view direction. This histogram changes when the camera moves. |
 | **Volume** | `scale_x * scale_y * scale_z`. |
@@ -114,7 +114,7 @@ The panel displays decoded or derived values rather than every value exactly as 
 | Red/Green/Blue | Final color after evaluating available SH bands for the current view and applying Color panel adjustments. |
 | Hue/Saturation/Value | Calculated from the final color after clamping RGB to the `0-1` range. |
 | Opacity | Decoded opacity with the Color panel transparency adjustment applied. |
-| Quat W/X/Y/Z | Rotation quaternion; `W` is reconstructed in its non-negative canonical form. |
+| Quaternion W/X/Y/Z | Rotation quaternion; `W` is reconstructed in its non-negative canonical form. |
 | DC and SH | Raw coefficients exposed when **All Properties** is enabled. |
 
 Internal `state` and `transform` properties are not available for histogram visualization.

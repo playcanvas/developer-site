@@ -135,6 +135,7 @@ Hooks (e.g. `useModel`, `useEnvAtlas`) are imported from `@playcanvas/react/hook
 
 ```html
 <pc-app>
+    <pc-material id="crimson" diffuse="crimson"></pc-material>
     <pc-scene>
         <pc-entity name="camera" position="0 0 3">
             <pc-camera></pc-camera>
@@ -143,13 +144,13 @@ Hooks (e.g. `useModel`, `useEnvAtlas`) are imported from `@playcanvas/react/hook
             <pc-light type="directional"></pc-light>
         </pc-entity>
         <pc-entity name="ball">
-            <pc-render type="sphere"></pc-render>
+            <pc-render type="sphere" material="crimson"></pc-render>
         </pc-entity>
     </pc-scene>
 </pc-app>
 ```
 
-Custom scripts attach to an entity via a `<pc-scripts>` element wrapping one `<pc-script>` element per script.
+Attribute values follow HTML conventions: kebab-case names, space-separated vectors and colors (`position="0 1 -2"`, `diffuse="#ff0000"` or named colors), and bare boolean attributes (`cast-shadows`). App-level resources (`<pc-asset>`, `<pc-material>`, `<pc-module>`) are declared as direct children of `<pc-app>` and referenced by `id`. Custom scripts attach to an entity via a `<pc-scripts>` element wrapping one `<pc-script>` element per script. From JavaScript, `import { whenReady } from '@playcanvas/web-components'` and `await whenReady('pc-app')` to reach engine objects once elements are ready.
 
 ### 6. Versions
 

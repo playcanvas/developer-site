@@ -38,19 +38,50 @@ description: "pc-button要素のリファレンス: ホバー、押下、非ア�
 
 ## 例
 
-```html
-<pc-entity name="button">
-    <!-- イメージ要素がボタンの見た目を提供し、入力を受け取ります -->
-    <pc-element type="image" width="190" height="45" use-input sprite-asset="blue-button"></pc-element>
-    <pc-button transition-mode="tint" hover-tint="0.8 0.8 0.8 1" pressed-tint="0.6 0.6 0.6 1"></pc-button>
-</pc-entity>
+ティント遷移を持つクリック可能なボタンです。ホバーして押してみたら、`hover-tint`/`pressed-tint` の色や、より長い `fade-duration` を試してみましょう。下のスクリプトは、次のセクションで説明するパターンで `click` イベントを配線しています:
+
+```html live-example
+<pc-app>
+    <pc-asset src="https://developer.playcanvas.com/assets/fonts/arial.json" type="font" id="arial"></pc-asset>
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="button">
+                <!-- イメージ要素がボタンの見た目を提供し、入力を受け取ります -->
+                <pc-element type="image" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            width="220" height="56" color="#ff8a3c" use-input></pc-element>
+                <pc-button transition-mode="tint" hover-tint="0.85 0.85 0.85 1"
+                           pressed-tint="0.6 0.6 0.6 1" fade-duration="100"></pc-button>
+                <pc-entity name="label">
+                    <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                                font-asset="arial" font-size="24" color="#1d1f2b" text="Click me"></pc-element>
+                </pc-entity>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const button = await whenReady('pc-button');
+    const label = document.querySelector('pc-entity[name="label"] > pc-element');
+    let clicks = 0;
+    button.component.on('click', () => {
+        label.setAttribute('text', `Clicked ${++clicks} time${clicks === 1 ? '' : 's'}`);
+    });
+</script>
 ```
 
-基盤となるボタンコンポーネントの `click` イベントをリッスンすることで、クリックに応答できます。
+基盤となるボタンコンポーネントの `click` イベントをリッスンすることで、クリックに応答できます。要素を同期的にクエリするのではなく、`whenReady` で初期化の完了を待ちます（[プログラムによるアクセス](../programmatic-access.md)を参照）。
 
 ```javascript
-const entity = document.querySelector('pc-entity[name="button"]').entity;
-entity.button.on('click', () => {
+import { whenReady } from '@playcanvas/web-components';
+
+const button = await whenReady('pc-entity[name="button"] > pc-button');
+button.component.on('click', () => {
     console.log('Button clicked!');
 });
 ```

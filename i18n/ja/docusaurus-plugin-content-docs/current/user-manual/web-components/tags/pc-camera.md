@@ -1,6 +1,6 @@
 ---
 title: <pc-camera>
-description: "pc-camera要素のリファレンス: 投影、クリアオプション、レンダーオーダー、エンジンのカメラComponentに対応する属性です。"
+description: "pc-camera要素のリファレンス: エンジンのカメラComponentに対応する、投影、視野角、クリッピングプレーン、クリアオプション、トーンマッピングです。"
 ---
 
 `<pc-camera>`タグはカメラコンポーネントを定義するために使用されます。
@@ -20,7 +20,7 @@ description: "pc-camera要素のリファレンス: 投影、クリアオプシ�
 | `clear-color` | Color | `"0.75 0.75 0.75 1"` | スペース区切りのRGBA値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としての背景色 |
 | `clear-color-buffer` | Boolean | `"true"` | カメラがカラーバッファをクリアするかどうかを制御します |
 | `clear-depth-buffer` | Boolean | `"true"` | カメラがデプスバッファをクリアするかどうかを制御します |
-| `clear-stencil-buffer` | Boolean | `"true"` | カメラがステンシルバッファをクリアするかどうかを制御します |
+| `clear-stencil-buffer` | Boolean | `"false"` | カメラがステンシルバッファをクリアするかどうかを制御します |
 | `cull-faces` | Boolean | `"true"` | カメラが面をカリングするかどうかを制御します |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `far-clip` | Number | `"1000"` | ファーカリングプレーンの距離 |
@@ -28,11 +28,11 @@ description: "pc-camera要素のリファレンス: 投影、クリアオプシ�
 | `fov` | Number | `"45"` | 視野角（度数） |
 | `frustum-culling` | Boolean | `"true"` | カメラがフラスタムカリングを使用するかどうかを制御します |
 | `gamma` | Enum | `"srgb"` | カラースペース: `"linear"` \| `"srgb"` |
-| `horizontal-fov` | Flag | - | 垂直視野角の代わりに水平視野角を使用するかどうか |
+| `horizontal-fov` | Boolean | `"false"` | 垂直視野角の代わりに水平視野角を使用するかどうか |
 | `near-clip` | Number | `"0.1"` | ニアクリッピングプレーンの距離 |
-| `orthographic` | Flag | - | パースペクティブ投影の代わりに正射影を使用するかどうか |
-| `ortho-height` | Number | `"10"` | 正射影の高さ |
+| `ortho-height` | Number | `"10"` | 正射影の高さ。`projection`が`"orthographic"`のときにのみ使用されます |
 | `priority` | Number | `"0"` | カメラのレンダリング優先度 |
+| `projection` | Enum | `"perspective"` | カメラの投影方式: `"perspective"` \| `"orthographic"`。正射影のサイズは`ortho-height`で指定します |
 | `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのシザー矩形 |
 | `tonemap` | Enum | `"none"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
@@ -41,10 +41,31 @@ description: "pc-camera要素のリファレンス: 投影、クリアオプシ�
 
 ## 例
 
-```html
-<pc-entity>
-    <pc-camera clear-color="yellow"></pc-camera>
-</pc-entity>
+遠くへ連なるボックスの列です。`fov` を変えたり、`projection="orthographic"` (サイズは `ortho-height` で指定) に切り替えて遠近感が消える様子を確認したりしてみましょう:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.5 4" rotation="-15 0 0">
+            <pc-camera clear-color="#4a5568" fov="60"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="box-near" position="-1.5 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-mid" position="0 0.5 -2">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-far" position="1.5 0.5 -4">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 -2" scale="12 1 16">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

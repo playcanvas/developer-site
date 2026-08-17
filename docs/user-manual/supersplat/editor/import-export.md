@@ -15,6 +15,7 @@ SuperSplat supports several Gaussian Splat scene formats, plus COLMAP and INRIA 
 | `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
 | `.sog` | ✅ | ✅ | Bundled super-compressed format (a zip file containing `meta.json` and `.webp` textures). Recommended for runtime applications |
 | `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](/user-manual/splat-transform/) CLI tool to export |
+| `lod-meta.json` | ✅ | ❌ | [Streamed SOG](/user-manual/supersplat/streaming) bundle (accompanied by per-LOD `.sog` chunks). Use [SplatTransform](/user-manual/splat-transform/) CLI tool to export |
 | `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
 | `.ksplat` | ✅ | ❌ | KSplat compressed splat format. Import only |
 | `.spz` | ✅ | ✅ | Niantic compressed format. Exports as SPZ version 4 by default, with SPZ version 3 available for older readers |
@@ -32,11 +33,11 @@ Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY fi
 
 ## Importing Splats
 
-SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.ksplat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG), and `meta.json` (unbundled SOG) formats. It can also import COLMAP `images.txt` and INRIA camera pose `.json` files to create [camera animation keyframes](timeline.md#importing-camera-poses-as-keyframes).
+SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.ksplat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG), `meta.json` (unbundled SOG), and `lod-meta.json` (Streamed SOG) formats. It can also import COLMAP `images.txt` and INRIA camera pose `.json` files to create [camera animation keyframes](timeline.md#importing-camera-poses-as-keyframes).
 
 There are four ways to load a Gaussian Splat file:
 
-1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc`, `.lcc2`, or unbundled SOG), drag the parent folder containing those files.
+1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc`, `.lcc2`, unbundled SOG, or Streamed SOG), drag the parent folder containing those files.
 2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system.
 3. **Direct file opening** - If you have installed SuperSplat as a PWA, you can double-click a splat file in File Explorer (Windows) or Finder (macOS).
 4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<SPLAT_URL>`. For example:
@@ -45,7 +46,7 @@ There are four ways to load a Gaussian Splat file:
 
     This is particularly useful for sharing splats with others on social platforms like X and LinkedIn.
 
-    URL loading also supports multi-file `.lcc`, `.lcc2`, and unbundled SOG scenes. Keep their related chunk or texture files at the relative paths referenced by the container.
+    URL loading also supports multi-file `.lcc`, `.lcc2`, unbundled SOG, and Streamed SOG scenes. Keep their related chunk or texture files at the relative paths referenced by the container.
 
 ### Choosing a Level of Detail {#choosing-a-level-of-detail}
 

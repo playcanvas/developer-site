@@ -14,11 +14,11 @@ import TabItem from '@theme/TabItem';
 
 ### Editorで作成する
 
-`.ttf`、`.ttc`、`.otf`、`.dfont` ファイルをEditorにドラッグすると、自動的にMSDFのFontアセットに変換されます。含める文字を選択して結果を調整し、**Process Font** をクリックして再生成できます。オプションの一覧については [Fontアセットのインスペクター](/user-manual/editor/assets/inspectors/font) を参照してください。
+`.ttf`、`.ttc`、`.otf`、`.dfont` ファイルをEditorにドラッグします。アトラスはブラウザ内で生成され、ソースファイル、`.json` ディスクリプタ、`.png` アトラスページ、そしてそれらを参照するFontアセットを含むフォルダーが作成されます。含める文字を選択して結果を調整し、**Regenerate Font Assets** をクリックします。オプションの一覧については [Fontアセットのインスペクター](/user-manual/editor/assets/inspectors/font) を参照してください。
 
 ### Editorを使わない場合 — font-tools
 
-Editorを使わずにEngine、React、Web Componentsで開発している場合は、[**font-tools**](https://github.com/playcanvas/font-tools) を使用して、Editorと同じ `.json` + `.png` アセットを生成できます。使用方法は2通りあります。
+Editorを使わずにEngine、React、Web Componentsで開発している場合は、[**font-tools**](https://github.com/playcanvas/font-tools) を使用して、同じ `.json` + `.png` アセットを生成できます。Editorが内部で使用しているジェネレーターと同じものですが、1点だけ違いがあります。font-toolsはデフォルトでソースフォントからカーニングペアを抽出しますが、Editorは抽出しません。そのためfont-toolsで生成したアセットの方が文字間が詰まって表示されます。使用方法は2通りあります。
 
 - **ウェブアプリ** — [playcanvas.github.io/font-tools](https://playcanvas.github.io/font-tools/) を開き、TTFまたはOTFをドラッグし、文字セットとグリフサイズを選択し、実際のPlayCanvasテキストで結果をプレビューして、ファイルをダウンロードします。すべてブラウザ内で実行され、フォントがアップロードされることはありません。
 - **コマンドライン** — ターミナルから離れずにアセットを生成できます。
@@ -114,7 +114,7 @@ function Label() {
   <pc-entity>
     <pc-screen screen-space>
       <pc-entity>
-        <pc-element type="text" asset="myfont" text="Hello, World!" font-size="32"></pc-element>
+        <pc-element type="text" font-asset="myfont" text="Hello, World!" font-size="32"></pc-element>
       </pc-entity>
     </pc-screen>
   </pc-entity>

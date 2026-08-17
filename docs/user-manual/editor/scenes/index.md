@@ -20,3 +20,7 @@ Every scene contains:
 | [Managing Scenes](managing-scenes.md) | Create, open, duplicate and delete scenes in your project. |
 | [Components](components/index.md) | Learn about the different component types you can add to entities. |
 | [Loading Scenes](loading-scenes.md) | Load scenes dynamically at runtime in your application. |
+
+:::ai
+For repetitive scene changes, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to find matching entities and components and prepare a consistent batch edit. Review the targets, then use Viewport and Launcher captures to spot outliers.
+:::

@@ -102,6 +102,10 @@ On the left side of the input fields there are various search options. These all
 
 You can double click on a line in the search results to go that particular line in the asset.
 
+:::ai
+For changes spanning related text assets, use an AI coding assistant through **[VS Code Extension Pull/Push mode](/user-manual/editor/scripting/vscode-extension/)** to trace and update producers and listeners together, then review the complete diff before syncing.
+:::
+
 ## Quick Open
 
 You can quickly open an asset by hitting Ctrl + P (or Cmd + P on Mac) which will open a panel where you can search for the asset by its name. Start typing the name of the asset and the panel will perform a fuzzy search to find the asset you are looking for. Hit Enter to open the selected asset.

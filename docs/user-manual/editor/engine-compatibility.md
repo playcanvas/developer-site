@@ -44,6 +44,10 @@ Additionally, conditionally checking the Engine version at runtime will allow yo
 
 <img src='/img/user-manual/editor/editor-v2/scripting-engine.png' width='300' />
 
+:::ai
+When behavior differs between Engine versions, use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to reproduce the same scenario in each. An AI assistant can correlate logs and captures with affected scripts and APIs to suggest a focused fix.
+:::
+
 #### Gamma and Tonemap
 
 These settings were previously found under the rendering section of the Settings panel. However, in Engine V2, these have been moved to be set per camera. Each camera component will now have these additional fields:

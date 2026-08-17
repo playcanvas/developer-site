@@ -1,6 +1,6 @@
 ---
 title: <pc-sky>
-description: "pc-sky要素のリファレンス: Sceneの背景向けに、cubemapまたはequirectangular Assetからのイメージベースライティングとスカイボックスです。"
+description: "pc-sky要素のリファレンス: テクスチャアセットによるスカイボックス。ボックス・ドーム・無限の投影、シーンライティングのオプション、回転を備えます。"
 ---
 
 `<pc-sky>`タグは、スカイコンポーネントを定義するために使用されます。
@@ -20,7 +20,8 @@ description: "pc-sky要素のリファレンス: Sceneの背景向けに、cubem
 | `asset` | String | - | テクスチャアセットID (`texture`型のアセットを参照する必要があります) |
 | `center` | Vector3 | `"0 0.01 0"` | "X Y Z"値としてのスカイの中心 (0-1の範囲) |
 | `intensity` | Number | `"1"` | スカイの明るさの強度 |
-| `level` | Number | `"0"` | レンダリングに使用するミップマップレベル |
+| `lighting` | Boolean | `"false"` | スカイボックスを光源として使用するかどうか |
+| `mip-level` | Number | `"0"` | スカイボックスのミップレベル。0が最も鮮明です。値を上げるとぼやけたミップが選択され、テクスチャ自体をぼかすことなくスカイボックスを柔らかくできます |
 | `rotation` | Vector3 | `"0 0 0"` | "X Y Z"オイラー角としてのスカイの回転 |
 | `scale` | Vector3 | `"100 100 100"` | "X Y Z"値としてのスカイのスケール |
 | `type` | Enum | `"infinite"` | スカイの種類: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |
@@ -29,11 +30,25 @@ description: "pc-sky要素のリファレンス: Sceneの背景向けに、cubem
 
 ## 例
 
-```html
-<pc-asset id="skybox" src="assets/skybox.webp"></pc-asset>
-<pc-scene>
-    <pc-sky asset="skybox"></pc-sky>
-</pc-scene>
+正距円筒図法のテクスチャをドーム投影のスカイとして使い、シーンの照明にも利用しています (`lighting` に注目)。ドラッグで見回せます。`type="infinite"` や `rotation="0 90 0"`、より高い `mip-level` (ソフトになります) も試してみましょう:
+
+```html live-example
+<pc-app>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
+    <pc-scene>
+        <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
+        <pc-entity name="camera" position="0 1.5 5">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" enable-pan="false" pitch-range="-90 0" zoom-range="2 12"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="sphere" position="0 1 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

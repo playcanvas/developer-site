@@ -50,3 +50,7 @@ On the details page you can:
 Please respect the license terms for the store items you use in your projects. For example, the [Oldsmobile Cutlass Supreme Sedan '71](https://sketchfab.com/3d-models/oldsmobile-cutlass-supreme-sedan-71-78f76d386a4341b0b71745bdc50fd5ab) in the screenshot above was authored by [Barbo](https://sketchfab.com/barbo-autos) and has CC BY 4.0 license. This means that you must give the author appropriate credit for using their works.
 
 :::
+
+:::ai
+Give an AI assistant your style, license, and file-size constraints. Through the **[Editor MCP Server](/user-manual/editor/mcp-server/)**, it can compare PlayCanvas, Sketchfab, and My Assets results and shortlist suitable items.
+:::

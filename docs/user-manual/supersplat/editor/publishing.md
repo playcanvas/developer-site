@@ -33,7 +33,7 @@ To publish your splat:
 
    | Option | Description |
    |--------|-------------|
-   | **Publish To** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
+   | **Publish to** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
    | **Title** | A short title that will appear below your splat's thumbnail once it is published |
    | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
    | **Background** | The background color of the viewer. Defaults to the Editor's current background color |
@@ -62,7 +62,7 @@ Once the publish process is complete, a modal dialog will show with the URL of y
 
 ## Republishing to an Existing Scene
 
-Setting **Publish To** to one of your existing scenes overwrites that scene in place, keeping its URL. In this mode, two toggles choose what gets replaced:
+Setting **Publish to** to one of your existing scenes overwrites that scene in place, keeping its URL. In this mode, two toggles choose what gets replaced:
 
 | Option | Description |
 |--------|-------------|

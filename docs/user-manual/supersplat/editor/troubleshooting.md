@@ -53,7 +53,7 @@ See [Managing Projects](managing-projects.md) for the difference between saving,
 ## Publishing or Rendering Fails
 
 - Publishing requires you to be signed in to superspl.at with a PlayCanvas account.
-- Video codec support depends on the browser. Try another format from the Render dialog or use a current version of Chrome, Edge, Firefox, or Safari.
+- Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or use a current version of Chrome, Edge, Firefox, or Safari.
 - A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing.
 
 If the problem persists, open **Help > Log an Issue** in the Editor and include the browser version, operating system, source format, approximate Gaussian count, and the steps that reproduce the problem. You can also ask in the [SuperSplat Discord community](https://discord.gg/T3pnhRTTAY).

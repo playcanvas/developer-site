@@ -26,7 +26,7 @@ Picker、Lasso、Polygon、Brush、Floodで選択するときは、`Shift`を押
 
 | 操作 | ショートカット |
 |---|---|
-| Move / Rotate / Scale | `1` / `2` / `3` |
+| Move / Rotate / Scale | `1` / `2` / `3`（Box SelectまたはSphere Selectがアクティブな間は、代わりに選択ボリュームのギズモを切り替えます） |
 | Picker / Lasso / Polygon | `R` / `L` / `P` |
 | Brush / Flood | `B` / `O` |
 | Eyedropper | `Ctrl + E`（macOSでは`Cmd + E`） |
@@ -63,4 +63,4 @@ Picker、Lasso、Polygon、Brush、Floodで選択するときは、`Shift`を押
 | キーフレームを追加 | `Enter` |
 | キーフレームを削除 | `Shift + Enter` |
 
-テキストまたは数値入力にフォーカスがある間、ショートカットは無視されます。一部のキーはツール固有の動作もします。たとえば、Measureがアクティブな間は`Delete`で測定マーカーを削除し、Polygonの描画中は閉じていない最後の点を削除します。
+テキストまたは数値入力にフォーカスがある間、ショートカットは無視されます。一部のキーはツール固有の動作もします。たとえば、MeasureまたはOrientがアクティブな間は`Delete`で配置した点を削除し、Polygonの描画中は閉じていない最後の点を削除します。MeasureまたはOrientがアクティブな間、`F`は選択範囲ではなく配置した点をフレーミングします。

@@ -27,3 +27,7 @@ Assets in the Editor are managed through the [Assets Panel](asset-panel), which 
 When you upload a file, the Editor runs it through the [import pipeline](import-pipeline/) to convert and optimize it for use in your application. The resulting asset can then be configured using the appropriate [asset inspector](inspectors/).
 
 For conceptual information about assets and how to work with them programmatically, see the [Assets](/user-manual/assets/) section in Common Topics.
+
+:::ai
+Before replacing a widely used asset, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to trace dependencies and summarize the impact. Approve the references it updates, then inspect affected scenes.
+:::

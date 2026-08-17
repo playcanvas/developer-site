@@ -50,3 +50,7 @@ Editor内からアセットストアにアクセスするには、[Assets Panel]
 プロジェクトで使用するストアアイテムのライセンス条項を遵守してください。例えば、上記のスクリーンショットにある[Oldsmobile Cutlass Supreme Sedan '71](https://sketchfab.com/3d-models/oldsmobile-cutlass-supreme-sedan-71-78f76d386a4341b0b71745bdc50fd5ab)は[Barbo](https://sketchfab.com/barbo-autos)によって作成され、CC BY 4.0ライセンスを持っています。これは、その著作物を使用する際に、作成者に適切なクレジットを付与する必要があることを意味します。
 
 :::
+
+:::ai
+AIアシスタントにスタイル、ライセンス、ファイルサイズの条件を伝えると、**[Editor MCP Server](/user-manual/editor/mcp-server/)**でPlayCanvas、Sketchfab、My Assetsの結果を比較し、候補を絞り込めます。
+:::

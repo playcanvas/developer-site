@@ -7,9 +7,9 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 :::note[使用法]
 
-* それは[`<pc-scene>`](../pc-scene)または別の`<pc-entity>`の直接の子でなければなりません。
-* それは0からn個の[`<pc-entity>`](../pc-entity)の子を持つことができます。
-* それはオプションで、各コンポーネントタイプの子を1つ持つことができます：[`<pc-camera>`](../pc-camera)、[`<pc-collision>`](../pc-collision)、[`<pc-element>`](../pc-element)、[`<pc-gsplat>`](../pc-gsplat)、[`<pc-light>`](../pc-light)、[`<pc-listener>`](../pc-listener)、[`<pc-particles>`](../pc-particles)、[`<pc-render>`](../pc-render)、[`<pc-rigidbody>`](../pc-rigidbody)、[`<pc-screen>`](../pc-screen)、[`<pc-scripts>`](../pc-scripts)、[`<pc-sounds>`](../pc-sounds)。
+* それは[`<pc-scene>`](../pc-scene)、別の`<pc-entity>`、または[`<pc-node>`](../pc-node)の直接の子でなければなりません。`<pc-node>`の下に置くと、読み込まれたモデル内のノードの下に親子付けされます。
+* それは0からn個の[`<pc-entity>`](../pc-entity)または[`<pc-model>`](../pc-model)の子を持つことができます。
+* それはオプションで、各コンポーネントタイプの子を1つ持つことができます：[`<pc-button>`](../pc-button)、[`<pc-camera>`](../pc-camera)、[`<pc-collision>`](../pc-collision)、[`<pc-element>`](../pc-element)、[`<pc-gsplat>`](../pc-gsplat)、[`<pc-layoutchild>`](../pc-layoutchild)、[`<pc-layoutgroup>`](../pc-layoutgroup)、[`<pc-light>`](../pc-light)、[`<pc-listener>`](../pc-listener)、[`<pc-particles>`](../pc-particles)、[`<pc-render>`](../pc-render)、[`<pc-rigidbody>`](../pc-rigidbody)、[`<pc-screen>`](../pc-screen)、[`<pc-scripts>`](../pc-scripts)、[`<pc-scrollbar>`](../pc-scrollbar)、[`<pc-scrollview>`](../pc-scrollview)、[`<pc-sounds>`](../pc-sounds)。
 
 :::
 
@@ -24,7 +24,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 | `position` | Vector3 | `"0 0 0"` | 「X Y Z」値としてのローカル空間位置 |
 | `rotation` | Vector3 | `"0 0 0"` | 度単位の「X Y Z」オイラー角としてのローカル空間回転 |
 | `scale` | Vector3 | `"1 1 1"` | 「X Y Z」値としてのローカル空間スケール |
-| `tags` | String | - | スペース区切りのタグのリスト |
+| `tags` | String | - | コンマ区切りのタグのリスト |
 
 </div>
 
@@ -40,12 +40,40 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 | `pointermove` | ポインターがエンティティ上で移動したときに発生します。 |
 | `pointerup` | ポインターがエンティティから解放されたときに発生します。 |
 
-## 例
+これらのイベントは、インラインの `onpointer*` 属性を使って宣言的に処理することもできます。これらは標準の[インラインイベントハンドラー](https://developer.mozilla.org/ja/docs/Web/Events/Event_handlers)であり、ブラウザ自身によってコンパイル・実行されるため、任意のHTML要素の `onclick` とまったく同じように動作します。属性を（実行時であっても）設定すると以前のハンドラーが置き換えられ、削除するとハンドラーが削除されます。ハンドラー内では、`this` は `<pc-entity>` 要素であり、`event` はディスパッチされたイベントです。
 
 ```html
-<pc-entity name="MyEntity" position="1 2 3" rotation="45 0 0" scale="2 2 2" tags="tag1 tag2">
-    <!-- 子エンティティとコンポーネントはここに入ります -->
+<pc-entity name="cube"
+           onpointerenter="this.entity.script.tweener.play(0)"
+           onpointerleave="this.entity.script.tweener.play(1)"
+           onpointerdown="this.entity.script.tweener.play(2)">
+    <pc-render type="box"></pc-render>
 </pc-entity>
+```
+
+## 例
+
+エンティティのトランスフォームは階層を通じて合成されます。小さいキューブは大きいキューブの*子*なので、大きいキューブにポインタを乗せると両方が一緒に動きます。親の `rotation` や `scale`、インラインの `onpointer*` ハンドラを編集してみましょう:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1 4">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="parent" rotation="0 30 0" tags="interactive"
+                   onpointerenter="this.entity.setLocalPosition(0, 0.25, 0)"
+                   onpointerleave="this.entity.setLocalPosition(0, 0, 0)">
+            <pc-render type="box"></pc-render>
+            <pc-entity name="child" position="0.75 0.75 0" scale="0.5 0.5 0.5">
+                <pc-render type="box"></pc-render>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScriptインターフェース

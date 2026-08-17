@@ -17,6 +17,10 @@ You may be familiar with other version control systems (VCS), if so this summary
 
 You can think of a checkpoint like you would a **commit** in a VCS like Git or Mercurial. Each checkpoint is a point-in-time snapshot of the project with an associated message that describes what changes were made in this checkpoint. While you are editing your project your current (un-checkpointed) changes are similar to the **working directory** i.e. you can think of these as your **local changes** (even though in PlayCanvas your local changes are shared with anyone else in the same branch as you).
 
+:::ai
+Before an AI assistant changes multiple scenes or assets, use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to checkpoint a dedicated branch. Afterwards, ask it to summarize the diff and conflicts; separately approve any restore, hard reset, or branch deletion.
+:::
+
 You cannot delete a checkpoint, but you can restore a previous checkpoint. Restoring a checkpoint works a little like a `git checkout <commit>` or `hg update -r <commit>`. However, in PlayCanvas we don't allow branches unless they have been explicitly created (no detached heads or similar). When you restore a previous checkpoint future changes will be children of the latest checkpoint in the branch.
 
 **Branches** in PlayCanvas work like branches in other systems. A branch forms an isolated line of development made up of checkpoints. All users who have set a branch as their current branch will see their changes in a real-time collaborative fashion. Branches cannot be deleted, but when you are finished working on a branch it can be *closed*.

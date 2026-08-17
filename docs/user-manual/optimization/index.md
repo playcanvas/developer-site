@@ -19,3 +19,7 @@ Let's begin by establishing the key goals for optimization and highlight why eac
 | 🎞️ Maximize frame rate | A high (and stable) frame rate makes for pleasing visuals and low latency response to user input. |
 | 🔋 Minimize CPU and GPU load | Just because your app maintains 60 frames per second does not mean your work is done. Reducing processor load preserves battery power and keeps devices running cool. |
 | 🧠 Minimize memory utilization | Browsers allocate a limited pool of memory to applications. Once this pool is exhausted, the tab will crash and reload. Your users will be upset! |
+
+:::ai
+Give an AI assistant a performance goal, repeatable scenario, and baseline. It can rank bottlenecks from **[Profiler](/user-manual/optimization/profiler/)** or browser evidence and propose one measurable change at a time. Use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to replay Editor input or follow **[Developing with AI](/user-manual/engine/developing-with-ai/)** for standalone projects.
+:::

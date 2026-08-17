@@ -29,7 +29,7 @@ scene.collision.glb    # optional triangle mesh extracted from the voxels
 interface VoxelMeta {
     version: string;             // file format version, decimal string, e.g. "1.1"
     asset?: {
-        generator?: string;      // tool/version that produced the file, e.g. "splat-transform v2.5.2"
+        generator?: string;      // tool/version that produced the file, e.g. "splat-transform v3.1.6"
     };
     gridBounds: {                // AABB of the voxel grid, aligned to 4-voxel block boundaries
         min: number[];           // [x, y, z] — world position of the min corner of voxel (0, 0, 0)
@@ -136,7 +136,7 @@ A 32 × 14 × 32-block grid at 5 cm resolution (block size 0.2):
 {
     "version": "1.1",
     "asset": {
-        "generator": "splat-transform v2.5.2"
+        "generator": "splat-transform v3.1.6"
     },
     "gridBounds": {
         "min": [-3.2, -0.2, -3.2],

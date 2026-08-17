@@ -1,6 +1,6 @@
 ---
 title: <pc-render>
-description: "pc-render要素のリファレンス: プリミティブまたはメッシュのレンダリング、マテリアル、レイヤー、Entity上のシャドウの投射・受け取り設定です。"
+description: "pc-render要素のリファレンス: プリミティブ形状（ボックス、球、カプセル、コーン、シリンダー、プレーン）をマテリアルとシャドウ設定でレンダリングします。"
 ---
 
 `<pc-render>`タグは、3Dプリミティブをレンダリングするレンダリングコンポーネントを定義するために使用されます。
@@ -17,18 +17,54 @@ description: "pc-render要素のリファレンス: プリミティブまたは�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `cast-shadows` | Flag | - | コンポーネントが影を落とすかどうか |
+| `cast-shadows` | Boolean | `"true"` | コンポーネントが影を落とすかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `receive-shadows` | Flag | - | コンポーネントが影を受け取るかどうか |
-| `type` | 列挙型 | - | プリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
+| `material` | String | - | プリミティブのレンダリングに使用する [`<pc-material>`](../pc-material) の `id`。省略した場合はデフォルトのマテリアルが使用されます |
+| `receive-shadows` | Boolean | `"true"` | コンポーネントが影を受け取るかどうか |
+| `type` | 列挙型 | `"box"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
 </div>
 
+:::tip
+
+glTF/GLBファイルから3Dモデルをレンダリングするには、代わりに [`<pc-model>`](../pc-model) を使用してください。
+
+:::
+
 ## 例
 
-import CodePenEmbed from '@site/src/components/CodePenEmbed';
+6種類のプリミティブ形状すべてです。任意の `type` を変更してみましょう。[`<pc-material>`](../pc-material) を定義すれば `material` も追加できます:
 
-<CodePenEmbed id="NPKMrLy" title="<pc-render> 例" />
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.5 6" rotation="-10 0 0">
+            <pc-camera clear-color="#2a2d36"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="box" position="-2.5 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="sphere" position="-1 0.5 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+        <pc-entity name="capsule" position="0.25 1 0">
+            <pc-render type="capsule"></pc-render>
+        </pc-entity>
+        <pc-entity name="cone" position="1.5 0.5 0">
+            <pc-render type="cone"></pc-render>
+        </pc-entity>
+        <pc-entity name="cylinder" position="2.75 0.5 0">
+            <pc-render type="cylinder"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" scale="10 10 10">
+            <pc-render type="plane"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
 
 ## JavaScriptインターフェース
 

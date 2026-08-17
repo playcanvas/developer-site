@@ -67,8 +67,11 @@ For best browser compatibility, provide both MP3 and OGG versions of audio files
 
 | Format | Extension | Notes |
 |--------|-----------|-------|
-| TrueType | `.ttf` | Converted to bitmap font on import |
-| WOFF | `.woff` | Web font format |
+| TrueType | `.ttf`, `.ttc` | Converted to an MSDF atlas on import |
+| OpenType | `.otf` | Converted to an MSDF atlas on import |
+| Datafork TrueType | `.dfont` | Converted to an MSDF atlas on import |
+
+See [Fonts](/user-manual/user-interface/fonts) for how the atlas is generated and how to load one outside the Editor.
 
 ## Scripts
 

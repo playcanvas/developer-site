@@ -1,6 +1,6 @@
 ---
 title: <pc-module>
-description: "pc-module要素のリファレンス: Scriptやプラグイン用にWasmモジュールを読み込み、PlayCanvasのScript Componentに関連付けます。"
+description: "pc-module要素のリファレンス: glue・wasm・fallbackのパスから、Ammo、Basis、DracoDecoderModuleなどのWebAssemblyモジュールを読み込みます。"
 ---
 
 `<pc-module>`タグはWebAssemblyモジュールをロードするために使用されます。
@@ -24,12 +24,48 @@ description: "pc-module要素のリファレンス: Scriptやプラグイン用�
 
 </div>
 
+`name`は大文字と小文字が区別されます — エンジンは正確な名前でモジュールを検索します。エンジンが使用するモジュールは`Ammo`（物理）、`Basis`（テクスチャトランスコード）、`DracoDecoderModule`（メッシュ展開）です。
+
+:::note[属性が読み取られるタイミング]
+
+属性は、モジュールの読み込みが始まるとき（要素が最初にドキュメントに接続されたとき、または包含する`<pc-app>`が先に起動してこの要素を収集した場合はそれより早いタイミング）に一度だけ読み取られます。その後に変更しても効果はありません。プログラムによる要素の作成は期待どおりに動作します。要素をドキュメントに追加する前に属性を設定してください。
+
+:::
+
+## 準備完了
+
+この要素は非同期に初期化され、モジュールの読み込みが完了するとready状態になります。標準の`ready`イベントを発生させ、`whenReady('pc-module')`で待機できます（[プログラムによるアクセス](../programmatic-access.md)を参照）。ただし、直接待機する必要はほとんどありません。包含する`<pc-app>`は、グラフィックスデバイスを作成する前に、配下に宣言されたすべての`<pc-module>`を待機するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリだからです。
+
+準備完了状態は意図的に固定されています。WebAssemblyモジュールは決してアンロードされないエンジングローバルな状態を構成するため、要素を削除してもpending状態には戻らず、再挿入してもモジュールが再読み込みされることはありません。
+
+`name`のない`<pc-module>`は警告をログに出力し、決してready状態になりません — ただし、包含する`<pc-app>`の起動は妨げません。
+
 ## 例
 
-```html
+`Ammo` 物理モジュールの読み込みです。ボックスが落下するのはモジュールが宣言されているからです — アプリはモジュールを待ってから起動するため、シーン開始時には物理が使用可能になっています。`<pc-module>` タグを削除して再実行してみましょう:
+
+```html live-example
 <pc-app>
-    <!-- ammo.jsモジュールをロード -->
-    <pc-module name="ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm" fallback="ammo.js"></pc-module>
+    <!-- ammo.jsのWebAssemblyモジュールをロード -->
+    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2 6">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigidbody type="dynamic"></pc-rigidbody>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
+            <pc-render type="box"></pc-render>
+            <pc-collision half-extents="5 0.5 5"></pc-collision>
+            <pc-rigidbody type="static"></pc-rigidbody>
+        </pc-entity>
+    </pc-scene>
 </pc-app>
 ```
 

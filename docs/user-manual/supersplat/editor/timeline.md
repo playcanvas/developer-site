@@ -11,7 +11,7 @@ The Timeline panel allows you to create camera animations for your Gaussian Spla
 
 The Timeline panel includes the following controls:
 
-- **Play/Stop button** - Play or stop the animation playback
+- **Play/Pause button** - Play or pause the animation playback
 - **Previous/Next Frame buttons** - Step one frame backward or forward. Hold **Shift** while clicking to jump to the previous or next keyframe instead
 - **Add Key button (`+`)** - Create a new keyframe at the current timeline position
 - **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
@@ -107,7 +107,7 @@ All keyframe operations - adding, moving, copying, and removing - can be undone 
 
 ## Visualizing Keyframe Cameras
 
-To see where your keyframes place the camera in 3D space, enable the **Show Cameras** toggle in the **Settings** panel (the gear icon in the [Right Toolbar](interface.md#right-toolbar)). A wireframe camera gizmo is drawn in the viewport at each keyframe's stored position and orientation, making it easy to review your camera path at a glance. The state of the toggle is saved with your project.
+To see where your keyframes place the camera in 3D space, enable the **Show Camera Poses** toggle in the **Settings** panel (the gear icon in the [Right Toolbar](interface.md#right-toolbar)). A wireframe camera gizmo is drawn in the viewport at each keyframe's stored position and orientation, making it easy to review your camera path at a glance. The state of the toggle is saved with your project.
 
 ## Configuring Timeline Settings
 
@@ -151,7 +151,7 @@ The Loop toggle on the Timeline (next to the smoothness setting) controls what h
 - **Loop enabled (default)** - The camera path forms a closed loop: after the last keyframe, the camera smoothly interpolates back to the first keyframe over the remaining frames of the timeline
 - **Loop disabled** - The camera path stays open: the camera comes to rest on the last keyframe and holds that pose
 
-The state of the Loop toggle is saved with your project, and the camera path drawn by the **Show Cameras** toggle updates to show a closed or open curve accordingly.
+The state of the Loop toggle is saved with your project, and the camera path drawn by the **Show Camera Poses** toggle updates to show a closed or open curve accordingly.
 
 When looping is enabled, it's important to avoid setting a keyframe on both the first and last frames of the timeline, as this will cause a sudden snap when the animation loops.
 

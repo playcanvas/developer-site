@@ -38,3 +38,7 @@ AnimationEvents.prototype.initialize = function() {
 ```
 
 単一のアニメーションアセットに任意の数のアニメーションイベントを添付し、任意の数のAnimコンポーネントで使用できます。イベントの追加の `number` プロパティと `string` プロパティを使用することで、同じイベントリスナーに渡されるイベントを区別することができます。
+
+:::ai
+1つのエフェクトを複数のアニメーションで使う場合は、AIアシスタントに**[Editor MCP Server](/user-manual/editor/mcp-server/)**でイベント名とペイロードをスクリプトリスナーと照合させ、Launcherで未発生やタイミングのずれを特定します。
+:::

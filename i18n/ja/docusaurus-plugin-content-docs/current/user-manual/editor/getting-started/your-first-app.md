@@ -45,7 +45,7 @@ NEWボタンを選択して新しいプロジェクトを作成します。
 
 次に、マテリアルをスフィアに割り当てる必要があります。これはシンプルなドラッグアンドドロップ操作で行うことができます。
 
-![Drag And Drop Material](/img/user-manual/editor/getting-started/your-first-app/drag-and-drop-material.gif)
+![Drag And Drop Material](/img/user-manual/editor/getting-started/your-first-app/drag-and-drop-material.webp)
 
 次に、カメラエンティティの設定をしましょう。ヒエラルキーパネル (HIERARCHY) でそれを選択します。
 
@@ -127,13 +127,13 @@ Movement.prototype.update = function(dt) {
 
 Launchページは新しいタブで開きます。開いたら、4つの矢印キーを押してスフィアを動かしてみてください。
 
-![Launch Page](/img/user-manual/editor/getting-started/your-first-app/launch-page.gif)
+![Launch Page](/img/user-manual/editor/getting-started/your-first-app/launch-page.webp)
 
 :::tip
 
 エディタとLaunchページの間には'ライブリンク'があります。エディタで行った変更は、Launchページにリアルタイムで反映されます！作業中にエディタとLaunchページを並べて配置すると便利です。
 
-![Editor Live Link](/img/user-manual/editor/getting-started/your-first-app/live-link.gif)
+![Editor Live Link](/img/user-manual/editor/getting-started/your-first-app/live-link.webp)
 
 :::
 

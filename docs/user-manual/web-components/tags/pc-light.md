@@ -17,7 +17,7 @@ The `<pc-light>` tag is used to define a light component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `cast-shadows` | Flag | - | Whether the light casts shadows |
+| `cast-shadows` | Boolean | `"false"` | Whether the light casts shadows |
 | `color` | Color | `"1 1 1"` | Light color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `inner-cone-angle` | Number | `"40"` | Inner cone angle in degrees (for spot lights) |
@@ -42,10 +42,34 @@ The `<pc-light>` tag is used to define a light component.
 
 ## Example
 
-```html
-<pc-entity>
-    <pc-light type="directional" intensity="10" color="red" cast-shadows></pc-light>
-</pc-entity>
+Try editing the light `color`, `intensity` or `type` values and watch the scene update:
+
+```html live-example
+<pc-app>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2.5 5" rotation="-15 0 0">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <!-- A warm spot light shining down (spot lights point down the negative Y axis) -->
+        <pc-entity name="spot-light" position="-2 4 0">
+            <pc-light type="spot" color="#ffb47a" intensity="5" outer-cone-angle="35" cast-shadows></pc-light>
+        </pc-entity>
+        <!-- A cool omni light between the shapes -->
+        <pc-entity name="omni-light" position="2 2 1">
+            <pc-light type="omni" color="#7ab8ff" intensity="2.5" range="10"></pc-light>
+        </pc-entity>
+        <!-- Shapes to light -->
+        <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="sphere" position="-2 0.5 0">
+            <pc-render type="sphere"></pc-render>
+        </pc-entity>
+        <pc-entity name="box" position="2 0.5 0" rotation="0 30 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
 ```
 
 ## JavaScript Interface

@@ -67,8 +67,11 @@ GLB は 3D モデルの推奨フォーマットです。コンパクトで読み
 
 | フォーマット | 拡張子 | 備考 |
 |--------|-----------|-------|
-| TrueType | `.ttf` | インポート時にビットマップフォントに変換 |
-| WOFF | `.woff` | Web フォントフォーマット |
+| TrueType | `.ttf`, `.ttc` | インポート時に MSDF アトラスに変換 |
+| OpenType | `.otf` | インポート時に MSDF アトラスに変換 |
+| Datafork TrueType | `.dfont` | インポート時に MSDF アトラスに変換 |
+
+アトラスの生成方法、およびEditorを使わずに読み込む方法については [フォント](/user-manual/user-interface/fonts) を参照してください。
 
 ## スクリプト
 

@@ -31,7 +31,7 @@ When you first open the Editor, you should find that a minimal scene has been cr
 
 Specifically, you have a camera (to render the scene), a box sitting on a plane and a light (to illuminate the 3D objects).
 
-You can easily change the box to another shape, like a sphere. To do this, select the Box entity in the HIERARCHY panel. In the Inspector panel on the right, change the Type property of the MODEL component from Box to Sphere. To be complete, rename the Entity from Box to Sphere too!
+You can easily change the box to another shape, like a sphere. To do this, select the Box entity in the HIERARCHY panel. In the Inspector panel on the right, change the Type property of the RENDER component from Box to Sphere. To be complete, rename the Entity from Box to Sphere too!
 
 ![Box To Sphere](/img/user-manual/editor/getting-started/your-first-app/box-to-sphere.png)
 
@@ -45,7 +45,7 @@ Select the material and its properties will appear in the Inspector panel to the
 
 Next, we must assign the material to the sphere. You can do this with a simple drag and drop operation:
 
-![Drag And Drop Material](/img/user-manual/editor/getting-started/your-first-app/drag-and-drop-material.gif)
+![Drag And Drop Material](/img/user-manual/editor/getting-started/your-first-app/drag-and-drop-material.webp)
 
 Now let's set up the Camera entity. Select it in the HIERARCHY panel:
 
@@ -67,7 +67,7 @@ Hit Enter and your script will be created.
 
 ![Edit Script](/img/user-manual/editor/getting-started/your-first-app/edit-script.png)
 
-Now hit EDIT to open the Code Editor. You'll see the following skeleton script:
+Now click the edit (pencil) icon on the movement script to open the Code Editor. You'll see the following skeleton script:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -200,13 +200,13 @@ You are now ready to preview your app by opening the Launch page. To do this, hi
 
 The Launch page opens in a new tab. When it opens, try pressing the 4 arrow keys to move the sphere around.
 
-![Launch Page](/img/user-manual/editor/getting-started/your-first-app/launch-page.gif)
+![Launch Page](/img/user-manual/editor/getting-started/your-first-app/launch-page.webp)
 
 :::tip
 
 There is a 'Live Link' between the Editor and the Launch page. Any change you make in the Editor will be reflected in the Launch page in real time! It can be convenient to place the Launch page side by side with the Editor while you are working.
 
-![Editor Live Link](/img/user-manual/editor/getting-started/your-first-app/live-link.gif)
+![Editor Live Link](/img/user-manual/editor/getting-started/your-first-app/live-link.webp)
 
 :::
 
@@ -218,11 +218,11 @@ This will open up the Publishing dialog. Here you can publish a build (or even d
 
 ![Publish](/img/user-manual/editor/getting-started/your-first-app/publish-dialog.png)
 
-Click the PUBLISH TO PLAYCANVAS option. You can then configure your published app.
+Click the Publish button. You can then configure your published app.
 
 ![Publish New Build](/img/user-manual/editor/getting-started/your-first-app/publish-options.png)
 
-Leave the defaults, scroll down and select PUBLISH NOW.
+Leave the defaults and select Publish.
 
 ![Builds](/img/user-manual/editor/getting-started/your-first-app/builds.png)
 

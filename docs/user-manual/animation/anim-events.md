@@ -67,3 +67,7 @@ AnimationEvents.prototype.initialize = function() {
 </Tabs>
 
 Any number of animation events can be attached to a single animation asset and used by any number of anim components. Making use of the additional `number` and `string` properties of an event allows you to differentiate between events that are passed to the same event listener.
+
+:::ai
+When one effect spans several animations, ask an AI assistant through the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to check event names and payloads against script listeners, then reproduce the animations in Launcher to find missing or mistimed effects.
+:::

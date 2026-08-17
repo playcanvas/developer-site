@@ -27,6 +27,10 @@ ESMスクリプトは、PlayCanvasアプリケーションの推奨される開�
 npx codemod playcanvas-esm-scripts
 ```
 
+:::ai
+Editorプロジェクトでは、コーディングアシスタントでcodemodとEditorメタデータの変更を連携させます。各**[Pull/Pushモード](/user-manual/editor/scripting/vscode-extension/)**の差分を確認し、**[Editor MCP Server](/user-manual/editor/mcp-server/)**で再解析、接続確認、Launcherテストを行います。
+:::
+
 ## 既知の違い
 
 一般的に、ESMスクリプトはより表現力豊かで柔軟なプロジェクト作成を可能にします。移行プロセスは可能な限りシームレスに保たれていますが、いくつか重要な違いがあります。
