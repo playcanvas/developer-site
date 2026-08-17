@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 487
-Generated: 2026-08-14
+Generated: 2026-08-17
 
 ================================================================================
 
@@ -20296,7 +20296,7 @@ new pc.Asset(
     'color',
     'texture',
     { url: 'heart.png' },
-    { encoding: 'srgb' }
+    { srgb: true }
 );
 ```
 
