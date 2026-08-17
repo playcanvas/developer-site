@@ -46,6 +46,7 @@ flowchart TB
 | **[User Profile](user-profile)** | ユーザーの公開ページ：アバター、自己紹介、ソーシャルリンク、公開済みスプラット。 | `superspl.at/user?id=<username>` |
 | **[Viewer](viewer/)** | シーンページとEditorのHTMLエクスポートを動かしているオープンソースのウェブビューア。自分のページに埋め込むか、セルフホストできます。 | npm `@playcanvas/supersplat-viewer`、[GitHub](https://github.com/playcanvas/supersplat-viewer) |
 | **[Convert](convert)** | [splat-transform](/user-manual/splat-transform/) CLIのウェブフロントエンド：ブラウザ上で形式変換、トランスフォーム、フィルタを実行します。 | [superspl.at/convert](https://superspl.at/convert) |
+| **[APIと統合](api-integrations)** | キャプチャツール、トレーニングパイプライン、カスタムアプリケーションからシーンを公開・確認します。 | [APIリファレンス](/user-manual/api/supersplat/) |
 
 舞台裏では、公開されたすべてのスプラットはSOG形式に圧縮され、大きなスプラット（100万ガウシアンを超えるもの）は、どのデバイスでも高速に読み込めるよう自動的にStreamed SOGへ変換されます — [ストリーミングとパフォーマンス](streaming)を参照してください。
 
