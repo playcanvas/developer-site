@@ -16,7 +16,7 @@ new pc.Asset(
     'color',
     'texture',
     { url: 'heart.png' },
-    { encoding: 'srgb' }
+    { srgb: true }
 );
 ```
 
