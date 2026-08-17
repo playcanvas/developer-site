@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 487
+Total Documents: 488
 Generated: 2026-08-17
 
 ## Instructions for Large Language Models
@@ -455,6 +455,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 
 ### SuperSplat
 - [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat/): SuperSplat is PlayCanvas's editing and publishing platform for 3D Gaussian Splats — edit, upload, manage, curate, share, and discover splat scenes on superspl.at.
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations/): Use the SuperSplat API to publish Gaussian splats from capture tools, training pipelines, and custom applications.
 - [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert/): Convert and transform splats in your browser at superspl.at/convert — the web frontend to the splat-transform CLI.
 - [SuperSplat Editor](https://developer.playcanvas.com/user-manual/supersplat/editor/): SuperSplat Editor: the open-source, browser-based editor for cleaning, optimizing, and animating 3D Gaussian Splats.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls/): SuperSplat navigation: orbit and fly modes, mouse, touch, and keyboard shortcuts, plus the editable camera info overlay for precise camera placement.
