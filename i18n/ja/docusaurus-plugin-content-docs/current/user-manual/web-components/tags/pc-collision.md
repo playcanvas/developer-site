@@ -11,7 +11,7 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -29,7 +29,7 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 
 </div>
 
-## メッシュコライダー
+## メッシュコライダー {#mesh-colliders}
 
 メッシュコライダーはジオメトリを必要としますが、それを与える属性はありません。そのため`type="mesh"`は、エンティティ自身の[`<pc-render>`](../pc-render)コンポーネントからジオメトリを取得し、表示されているメッシュに一致するコライダーを生成します。これはモデルのノードに付けるメッシュコライダーの通常の意味であり、読み込まれたGLB内にバインドされた[`<pc-node>`](../pc-node)で`type="mesh"`が役に立つのは、この仕組みによります。
 
@@ -45,7 +45,7 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 
 レンダーコンポーネントはレンダーアセットに裏付けられている必要があり、プリミティブタイプはこれに該当しません。`<pc-render type="box">`には衝突判定の対象となるアセットがありません。適切なレンダーコンポーネントを持たないエンティティはコンソール警告を出力し、そのコライダーは形状を持ちません。
 
-## 例
+## 例 {#example}
 
 それぞれの衝突形状が描画される形状と一致しています。球、カプセル、ボックスが静的な地面に転がり落ちます。球の `radius` を変更してみましょう — 見た目のメッシュはそのままでも、衝突の仕方が変わります:
 
@@ -84,6 +84,6 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html)を使用して、`<pc-collision>`要素をプログラムで作成および操作できます。

@@ -12,7 +12,7 @@ description: "pc-sounds要素のリファレンス: pc-soundスロットと共�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -29,7 +29,7 @@ description: "pc-sounds要素のリファレンス: pc-soundスロットと共�
 
 </div>
 
-## 例
+## 例 {#example}
 
 2つのスロットを保持する1つのサウンドコンポーネントです — ループする足音と単発の効果音です。コンポーネントの `volume` と `pitch` は保持するすべてのスロットに適用されます。`volume` を半分にしたり、`pitch="1.5"` にして再実行したりしてみましょう:
 
@@ -74,6 +74,6 @@ description: "pc-sounds要素のリファレンス: pc-soundスロットと共�
 </script>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html)を使用して、`<pc-sounds>`要素をプログラムで作成および操作できます。

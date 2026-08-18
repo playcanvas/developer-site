@@ -7,7 +7,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 以下の各スニペットは、ページの `body` の中身全体です。周囲のHTML（インポートマップ、scriptタグ、スタイル）は[開始](getting-started.md)のボイラープレートです。開始のページを終えている場合は、そのシーンをいったん空にしてください。ここでは同じシーンをゼロから作り直し、さらに先へ進みます。
 
-## 開始点
+## 開始点 {#starting-point}
 
 まず、[`<pc-app>`](tags/pc-app.md) および [`<pc-scene>`](tags/pc-scene.md) 要素を使用して、アプリケーションの基本構造をHTMLの `body` に追加しましょう。
 
@@ -26,7 +26,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 :::
 
-## カメラを追加する
+## カメラを追加する {#adding-a-camera}
 
 シーンを表示するには、カメラが必要です。[`<pc-entity>`](tags/pc-entity.md) および [`<pc-camera>`](tags/pc-camera.md) 要素を使用してシーンにカメラを追加できます。
 
@@ -46,7 +46,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 灰色の何もない空間ですが、レンダラーが動いている証拠です。
 
-## オブジェクトを追加する
+## オブジェクトを追加する {#adding-an-object}
 
 シーンには映すものが必要です。[`<pc-render>`](tags/pc-render.md) 要素を使用して、球体を追加しましょう。
 
@@ -67,7 +67,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 ![灰色の背景に黒いシルエットとして表示される、ライトのない球体](/img/user-manual/web-components/building-a-scene/unlit-sphere.jpg)
 
-## ライトを追加する
+## ライトを追加する {#adding-a-light}
 
 これを解決しましょう。[`<pc-light>`](tags/pc-light.md) 要素を使用して、カメラと球体の間に指向性ライトを追加します。
 
@@ -91,7 +91,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 ![灰色の背景に浮かぶ、ライトが当たった白い球体](/img/user-manual/web-components/building-a-scene/white-sphere.jpg)
 
-## 色を追加する
+## 色を追加する {#adding-some-color}
 
 ここまでは、白いマテリアルと灰色のクリアカラーという、すべてデフォルトの見た目でした。ここに自分の色を加えてみましょう。マテリアルは [`<pc-material>`](tags/pc-material.md) 要素で定義します。この要素は（特定のシーンの一部ではなく共有リソースなので）`<pc-app>` の直下に置き、レンダーコンポーネントの `material` 属性から `id` で参照して適用します。あわせて、カメラの `clear-color` 属性で背景色も変更します。
 
@@ -116,7 +116,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 ![水色の背景に浮かぶ真紅の球体](/img/user-manual/web-components/building-a-scene/colored-sphere.jpg)
 
-## シーンに地面を追加する
+## シーンに地面を追加する {#grounding-the-scene}
 
 何もない空間にオブジェクトを浮かべるだけでは、できることに限りがあります。球体が載る場所を用意しましょう。`plane` プリミティブを拡大して地面にし、2つ目のマテリアルを適用します。球体プリミティブの直径は1ユニットなので、`position="0 0.5 0"` に持ち上げると平面のちょうど真上に載ります。また、シーン全体がフレームに収まるようにカメラを持ち上げて傾け、`cast-shadows` 属性でライトが影を落とすようにします。これは、存在するだけで有効になるBoolean属性です（[属性](attributes.md)を参照）。
 
@@ -145,7 +145,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 これで1つのシーンの完成です。カメラ、ライト、ジオメトリ、マテリアルのすべてを、HTMLだけで構成しました。
 
-## 要素の階層
+## 要素の階層 {#the-element-hierarchy}
 
 いま構築した構造は、すべてのPlayCanvas Web Componentsドキュメントに共通するルールに従っています。
 
@@ -163,7 +163,7 @@ pc-app ................... アプリケーション
 - [`<pc-camera>`](tags/pc-camera.md)、[`<pc-light>`](tags/pc-light.md)、[`<pc-render>`](tags/pc-render.md) などのコンポーネント要素はエンティティの直下に置き、それぞれがそのエンティティに機能を与えます。
 - 誤った場所に置かれた要素は、必要な親要素の名前を含むコンソール警告をログに出力します。記述の際はコンソールを開いておきましょう。各タグの配置ルールは[リファレンスページ](tags/index.md)に記載されています。
 
-## 次のステップ
+## 次のステップ {#next-steps}
 
 - [モデルの読み込み](loading-models.md) — プリミティブをglTFやGLBモデルに置き換え、その内部に手を入れます。
 - [属性](attributes.md) — いま使った値の規約（Boolean、カラー、ベクトルなど）です。

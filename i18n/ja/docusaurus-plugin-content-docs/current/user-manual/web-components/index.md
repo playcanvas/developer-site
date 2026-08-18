@@ -11,7 +11,7 @@ PlayCanvas Web Componentsを使えば、HTMLだけでリアルタイム3Dをウ�
 
 上のシーンはドラッグで周回できます。シーン内のすべてのオブジェクト、ライト、マテリアルはHTMLで宣言されています。これは、ソースコード付きで公開されている[30以上のライブサンプル](https://playcanvas.github.io/web-components/examples/)のひとつです。
 
-## Web Componentsとは？
+## Web Componentsとは？ {#what-are-web-components}
 
 [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) は再利用可能なカスタムHTML要素であり、シンプルで宣言的なインターフェースの背後に複雑な機能をカプセル化します。PlayCanvas Web Componentsは、PlayCanvas Engineの全機能を使いやすいHTMLタグでラッピングします。
 
@@ -36,25 +36,25 @@ PlayCanvas Web Componentsを使えば、HTMLだけでリアルタイム3Dをウ�
 
 ![指向性ライトに照らされた白い球体](/img/user-manual/web-components/hello-sphere.jpg)
 
-## PlayCanvas Web Componentsを使用する理由
+## PlayCanvas Web Componentsを使用する理由 {#why-playcanvas-web-components}
 
-### 🚀 JavaScript不要
+### 🚀 JavaScript不要 {#-zero-javascript-required}
 
 マークアップだけで、完全でインタラクティブな3Dシーンを作成できます。ビルドステップもエンジンのボイラープレートも不要で、必要にならない限りJavaScriptを書くこともありません。
 
-### 🔧 すべての属性がライブ
+### 🔧 すべての属性がライブ {#-every-attribute-is-live}
 
 属性はエンジンの機能に直接対応し、実行時の変更にも反応します。JavaScriptから、あるいはブラウザの開発者ツールから属性を更新すると、シーンは即座に更新されます。共通の規約については[属性](attributes.md)を参照してください。
 
-### ⚡ フルスペックのエンジンが土台
+### ⚡ フルスペックのエンジンが土台 {#-the-full-engine-underneath}
 
 これは簡略化されたおもちゃのレイヤーではありません。何千ものウェブアプリケーションを支えているものと同じ[PlayCanvas Engine](../engine/index.md)がレンダリングを担い、WebGPUファーストでWebGL 2への自動フォールバックを備えています。
 
-### 🌍 フレームワークではなくウェブ標準
+### 🌍 フレームワークではなくウェブ標準 {#-a-web-standard-not-a-framework}
 
 [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)に基づいて構築されているため、プレーンなHTMLページでも、任意のフレームワークと組み合わせても動作します。ブラウザに求めるのは、WebGL 2またはWebGPU、ES Modules、Custom Elementsだけです。いずれも現行のChrome、Edge、Firefox、Safariで標準対応しています。
 
-## こんな方に最適
+## こんな方に最適 {#perfect-for}
 
 - 複雑な3Dプログラミングを学ぶことなくウェブサイトに3D要素を追加したい**コンテンツクリエイター**
 - 既存のHTML/CSSワークフローに3Dグラフィックスを統合したい**ウェブ開発者**
@@ -68,11 +68,11 @@ PlayCanvas Web Componentsを使えば、HTMLだけでリアルタイム3Dをウ�
 
 :::
 
-## オープンソース＆MITライセンス
+## オープンソース＆MITライセンス {#open-source--mit-licensed}
 
 Web Componentsは[GitHub](https://github.com/playcanvas/web-components)でMITライセンスの下、オープンに開発されています。個人・商用を問わず自由に利用でき、コントリビューションも歓迎です。
 
-## このセクションの内容
+## このセクションの内容 {#in-this-section}
 
 まずは「開始」ガイドから始めましょう。数分でシーンをレンダリングできます。
 

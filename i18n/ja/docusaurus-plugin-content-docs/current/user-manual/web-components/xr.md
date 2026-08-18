@@ -5,7 +5,7 @@ description: "Web Components向けのWebXRセットアップ: エンジンのXR�
 
 PlayCanvas Web Components を使用すると、アプリケーションに Virtual Reality (VR) および Augmented Reality (AR) のサポートを簡単に追加できます。
 
-## 基本的なセットアップ
+## 基本的なセットアップ {#basic-setup}
 
 XR のサポートを有効にするには、以下が必要です。
 
@@ -14,7 +14,7 @@ XR のサポートを有効にするには、以下が必要です。
 3. XR の開始用の UI（WebXR のセッション開始にはユーザーのジェスチャーが必要です）。
 4. セキュアコンテキスト — 本番では HTTPS（開発中は `http://localhost`）でページを提供してください。
 
-### XR スクリプト
+### XR スクリプト {#xr-scripts}
 
 エンジンは、`scripts/esm/xr` フォルダに一連の XR スクリプトを同梱しています。[`<pc-asset>`](tags/pc-asset.md) 要素を使用して指定します。
 
@@ -45,7 +45,7 @@ CDN から XR スクリプトを読み込む場合は、[Getting Started ガイ�
 * [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-navigation.mjs) - 基本的なテレポートナビゲーション（ポイント＆選択アクションによる）を実装します。
 * [`xr-menu.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-menu.mjs) - ヘッドセット内メニューを表示します（ハンドトラッキングでは手のひらを上に向けるジェスチャー、またはコントローラーのボタンで表示）。メニュー項目はアプリイベントを発火します — 「Exit XR」ボタンに最適です。
 
-### カメラのセットアップ
+### カメラのセットアップ {#camera-setup}
 
 XR スクリプトは、カメラエンティティの*親*にアタッチする必要があります — `xrSession` はリグのルートを動かし、ヘッドセットがカメラ自体を動かします。
 
@@ -79,7 +79,7 @@ XR スクリプトは、カメラエンティティの*親*にアタッチする
 
 :::
 
-### XR の開始用 UI
+### XR の開始用 UI {#ui-for-entering-xr}
 
 最後に、ユーザーが XR モードを開始できるように、UI を追加する必要があります。これは WebXR 固有の要件であり、XR セッションをアクティブ化するにはユーザーのジェスチャーが必要です。2つのシンプルなボタンを作成しましょう。
 
@@ -122,7 +122,7 @@ app.xr.on('available', (type, available) => {
 
 :::
 
-### カメラ要素のAPI
+### カメラ要素のAPI {#the-camera-element-api}
 
 最小限のケースでは、[`<pc-camera>`](tags/pc-camera.md) の要素APIを使って、スクリプトなしでXRセッションを直接開始・終了できます。
 
@@ -143,6 +143,6 @@ camera.endXr();
 
 ほとんどの [Web Component の例](https://playcanvas.github.io/web-components/examples/) には、XR のサポートが統合されています。それらのソースコードを参照して、どのように行われているかを確認してください。
 
-## 次のステップ
+## 次のステップ {#next-steps}
 
 PlayCanvas Engine は、幅広い機能とオプションを備えた包括的な XR サポートを提供しています。詳細については、[XR ドキュメント](/user-manual/xr) を参照してください。

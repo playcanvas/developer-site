@@ -17,7 +17,7 @@ npm create playcanvas@latest my-app -- -f web-components
 
 :::
 
-## インストール
+## インストール {#installation}
 
 ライブラリの読み込み方法は2通りあります。どちらにするか迷ったら、まずはCDNから始めましょう。マークアップを一切変更することなく、後からnpmへ切り替えることができます。
 
@@ -90,7 +90,7 @@ npm install playcanvas @playcanvas/web-components
 </TabItem>
 </Tabs>
 
-## 最初のページ
+## 最初のページ {#your-first-page}
 
 ライトが当たった球体（3Dにおける「hello, world」）をレンダリングする完全なページを次に示します。CDNセットアップを使用しているため、何もインストールする必要はありません。
 
@@ -140,7 +140,7 @@ npm install playcanvas @playcanvas/web-components
 </html>
 ```
 
-`<style>`ブロックの中で1つ触れておきたいルールがあります。`<pc-app>`は`<video>`要素と同じようにサイズが決まる、ページのCSSが制御するブロックレベルのボックスで、デフォルトではわずか300×150ピクセルです。上記の`pc-app`ルールはこれをビューポート全体に引き伸ばしています。通常のページレイアウトにシーンを埋め込みたい場合は、好きなサイズを指定してください。詳細は[サイズ指定](tags/pc-app.md#サイズ指定)を参照してください。
+`<style>`ブロックの中で1つ触れておきたいルールがあります。`<pc-app>`は`<video>`要素と同じようにサイズが決まる、ページのCSSが制御するブロックレベルのボックスで、デフォルトではわずか300×150ピクセルです。上記の`pc-app`ルールはこれをビューポート全体に引き伸ばしています。通常のページレイアウトにシーンを埋め込みたい場合は、好きなサイズを指定してください。詳細は[サイズ指定](tags/pc-app.md#sizing)を参照してください。
 
 これを `index.html` として保存し、ブラウザで開いてください。次のように表示されるはずです。
 
@@ -170,7 +170,7 @@ npmインストールを使用する場合は、インポートマップとscrip
 </pc-app>
 ```
 
-## エディタサポート
+## エディタサポート {#editor-support}
 
 このパッケージは[Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)を同梱しており、エディタはこれを使ってHTMLの記述時にタグと属性の補完、有効な属性値、ホバードキュメントを提供します。
 
@@ -188,7 +188,7 @@ npmインストールを使用する場合は、インポートマップとscrip
 
 **その他のツール** — マニフェスト本体は `@playcanvas/web-components/dist/custom-elements.json` にあり、パッケージの `customElements` フィールドで宣言されています。`lit-analyzer` やStorybookなどのツールはこれを通じてマニフェストを見つけます。
 
-## 次のステップ
+## 次のステップ {#next-steps}
 
 - [シーンを構築する](building-a-scene.md)に進んで、要素を1つずつ積み上げながらシーンを作りましょう。さらにマテリアル、影、地面まで作り込みます。
 - [タグリファレンス](tags/index.md)にざっと目を通して、宣言できるすべての要素を確認しましょう。

@@ -20,7 +20,7 @@ export class RotateScript extends Script {
 }
 ```
 
-## スクリプトの読み込み
+## スクリプトの読み込み {#loading-scripts}
 
 スクリプトは、[`<pc-asset>`](../tags/pc-asset) タグを介して読み込まれます。
 
@@ -45,7 +45,7 @@ export class RotateScript extends Script {
 
 :::
 
-## 属性を使用してスクリプトにデータを渡す
+## 属性を使用してスクリプトにデータを渡す {#passing-data-to-scripts-with-attributes}
 
 現在の回転スクリプトは、毎秒90度で回転するようにハードコードされています。しかし、異なる速度で回転させたい場合はどうでしょうか？そして、複数のエンティティを異なる速度で回転させたい場合はどうでしょうか？ここでスクリプト属性が役立ちます！
 
@@ -109,7 +109,7 @@ export class RotateScript extends Script {
 
 :::
 
-### 型プレフィックス
+### 型プレフィックス {#type-prefixes}
 
 Number、Boolean、ベクトル、カラーの値は、スクリプトが宣言したデフォルト値から型が推論されます。推論が役立たないケース — アセットやエンティティの参照、またはデフォルト値が `null` の属性の設定 — では、明示的な型のプレフィックスを値に付けます。
 
@@ -126,7 +126,7 @@ Number、Boolean、ベクトル、カラーの値は、スクリプトが宣言�
 <pc-script name="myScript" font="asset:arial-font" target="entity:#player"></pc-script>
 ```
 
-### `attributes` JSON属性
+### `attributes` JSON属性 {#the-attributes-json-attribute}
 
 プロパティごとの属性は、フラットでシンプルな名前のスクリプト属性をカバーします。それ以外のケースでは、`attributes` 属性がJSONオブジェクトを取ります。
 
@@ -158,7 +158,7 @@ JSON内では、プレーンな数値配列がスクリプト属性の宣言さ�
 
 オブジェクト値は、スクリプトの宣言されたデフォルト値を丸ごと置き換えるのではなく、マージされます。宣言されたデフォルトが `{a: 1, b: 2}` の場合、`{"a": 5}` を設定すると `{a: 5, b: 2}` になります。つまり、変更したいプロパティだけを指定すれば済みます。
 
-[型プレフィックス](#型プレフィックス)は、ネストされた配列やオブジェクトを含め、JSON内のどこでも機能します。
+[型プレフィックス](#type-prefixes)は、ネストされた配列やオブジェクトを含め、JSON内のどこでも機能します。
 
 ```html
 <pc-script name="xrMenu" attributes='{
@@ -167,11 +167,11 @@ JSON内では、プレーンな数値配列がスクリプト属性の宣言さ�
 }'></pc-script>
 ```
 
-### 優先順位
+### 優先順位 {#precedence}
 
 同じスクリプト属性がプロパティごとの属性と `attributes` JSONの両方で設定されている場合、プロパティごとの属性が常に優先されます — 作成時も、実行時にどちらかが変更されたときも同様です。プロパティごとの属性を削除すると、そのキーに対するJSONの値（存在する場合）に、なければスクリプトのデフォルト値にフォールバックします。
 
-### JavaScriptからスクリプトにアクセスする
+### JavaScriptからスクリプトにアクセスする {#accessing-scripts-from-javascript}
 
 `<pc-script>` 要素は、そのスクリプトインスタンスが作成されると*準備完了*になります。`whenReady()`（または要素の `ready()` プロミス）でそれを待ってから、`script` プロパティを介してライブの [`Script`](https://api.playcanvas.com/engine/classes/Script.html) インスタンスにアクセスします。`whenReady` API の詳細は[プログラムによるアクセス](programmatic-access.md)を参照してください。
 
@@ -192,6 +192,6 @@ scriptElement.scriptAttributes = { speed: 2, focusPoint: [0, 1.75, 0] };
 
 スクリプト属性についての[詳細はこちら](/user-manual/scripting/script-attributes)。
 
-## エンジンに用意されているスクリプトの使用
+## エンジンに用意されているスクリプトの使用 {#using-ready-made-scripts-from-the-engine}
 
 独自のスクリプトを書き始める前に、必要な機能がPlayCanvas Engineに既に用意されているか確認してください。Engineには、アプリで使用できる便利なスクリプトのライブラリが付属しています。それらは[GitHub](https://github.com/playcanvas/engine/tree/main/scripts/esm)で見つけることができ、[Web Component Examples](https://playcanvas.github.io/web-components/examples/)で頻繁に使用されています。

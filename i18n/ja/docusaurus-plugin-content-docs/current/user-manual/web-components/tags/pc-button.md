@@ -12,7 +12,7 @@ description: "pc-button要素のリファレンス: ホバー、押下、非ア�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -36,7 +36,7 @@ description: "pc-button要素のリファレンス: ホバー、押下、非ア�
 
 </div>
 
-## 例
+## 例 {#example}
 
 ティント遷移を持つクリック可能なボタンです。ホバーして押してみたら、`hover-tint`/`pressed-tint` の色や、より長い `fade-duration` を試してみましょう。下のスクリプトは、次のセクションで説明するパターンで `click` イベントを配線しています:
 
@@ -86,6 +86,6 @@ button.component.on('click', () => {
 });
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ButtonComponentElement API](https://api.playcanvas.com/web-components/classes/ButtonComponentElement.html)を使用して、`<pc-button>`要素をプログラムで作成および操作できます。

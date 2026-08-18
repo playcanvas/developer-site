@@ -11,7 +11,7 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -28,7 +28,7 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 
 </div>
 
-## 例
+## 例 {#example}
 
 正距円筒図法のテクスチャをドーム投影のスカイとして使い、シーンの照明にも利用しています (`lighting` に注目)。ドラッグで見回せます。`type="infinite"` や `rotation="0 90 0"`、より高い `mip-level` (ソフトになります) も試してみましょう:
 
@@ -51,6 +51,6 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html)を使用して、`<pc-sky>`要素をプログラムで作成および操作できます。

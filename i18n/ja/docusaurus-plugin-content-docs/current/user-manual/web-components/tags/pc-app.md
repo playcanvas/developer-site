@@ -11,7 +11,7 @@ description: "pc-app要素のリファレンス: PlayCanvasのApplicationを初�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -33,7 +33,7 @@ description: "pc-app要素のリファレンス: PlayCanvasのApplicationを初�
 
 :::
 
-## サイズ指定
+## サイズ指定 {#sizing}
 
 この要素は`<video>`や`<img>`のような置換要素と同じ方式でサイズが決まります。つまり、ページのCSSが制御するブロックレベルのボックスで、デフォルトはキャンバスの固有サイズである300×150ピクセルです。アプリケーションのキャンバスは常に要素全体を満たし、描画バッファの解像度は要素のサイズにライブで追従します（上限は`max-pixel-ratio`）。スプリッターのドラッグ、フレックスのリフロー、CSSアニメーションなど、要素のサイズを変えるものすべてにレンダリング結果が追従します。
 
@@ -57,7 +57,7 @@ pc-app {
 
 要素のサイズが描画バッファを制御しない唯一の例外はXRセッションの表示中で、その間はセッションがバッファを所有します。
 
-## ローディングバー
+## ローディングバー {#loading-bar}
 
 アプリケーションの起動中およびアセットのプリロード中、`<pc-app>`は要素の上端にローディングバーを表示します。表示を抑制するには`loading-bar="false"`を設定するか、次のCSSカスタムプロパティでテーマを設定します。
 
@@ -69,7 +69,7 @@ pc-app {
 
 独自のローディング画面を作成する場合は、バーを抑制し、要素の`progress`イベントと`loadProgress`プロパティから制御してください。
 
-## イベント
+## イベント {#events}
 
 これらのイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用するか、このインターフェースの`oneventname`プロパティにイベントリスナーを割り当てることでリッスンできます。
 
@@ -91,7 +91,7 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 
 要素を削除して再挿入すると、その時点の属性で起動を再試行します。
 
-## 例
+## 例 {#example}
 
 カメラ、ライト、球体からなる完全なアプリケーションです。`<pc-app>`タグに `antialias="false"` や `max-pixel-ratio="1"` を設定してみましょう:
 
@@ -111,6 +111,6 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [AppElement API](https://api.playcanvas.com/web-components/classes/AppElement.html)を使用して、`<pc-app>`要素をプログラムで作成および操作できます。

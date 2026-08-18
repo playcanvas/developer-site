@@ -15,11 +15,11 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 
 :::warning[グロスとラフネス]
 
-`roughness`および`roughness-map`属性は、`gloss`および`gloss-map`のエイリアスで、加えてグロスチャンネルを反転します。1つのマテリアルではどちらか一方のファミリーだけを使用してください。両方を混在させると、2つのファミリーは反転について解釈が食い違うため、コンソールに警告が記録されます。`gloss-map-*`[修飾子](#テクスチャマップ修飾子)自体は反転に関与しないため、`roughness-map`の設定にはそれらを使用するのが正しい方法です。
+`roughness`および`roughness-map`属性は、`gloss`および`gloss-map`のエイリアスで、加えてグロスチャンネルを反転します。1つのマテリアルではどちらか一方のファミリーだけを使用してください。両方を混在させると、2つのファミリーは反転について解釈が食い違うため、コンソールに警告が記録されます。`gloss-map-*`[修飾子](#texture-map-modifiers)自体は反転に関与しないため、`roughness-map`の設定にはそれらを使用するのが正しい方法です。
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -73,7 +73,7 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 
 </div>
 
-## テクスチャマップ修飾子
+## テクスチャマップ修飾子 {#texture-map-modifiers}
 
 上記の各`*-map`属性はテクスチャスロットを定義し、各スロットにはテクスチャのサンプリング方法を設定する一連の修飾子があります。`<slot>`は`ao`、`diffuse`、`emissive`、`gloss`、`height`、`metalness`、`normal`、`opacity`のいずれかに置き換えてください:
 
@@ -96,7 +96,7 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 * `opacity`マップは`"r"` \| `"g"` \| `"b"` \| `"a"`を受け付け、デフォルトは`"a"`です。
 * `normal`マップにはチャンネル修飾子がありません — 常に3つのチャンネルすべてを読み取ります。
 
-## 例
+## 例 {#example}
 
 4つのマテリアル: 単色、金属、透明な「ガラス」、タイリングされたテクスチャマップです。スカイの `lighting` が金属に映り込みを与えます。`diffuse` の色、`metalness`、`roughness`、`opacity`、`diffuse-map-tiling` を編集してみましょう:
 
@@ -136,6 +136,6 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 
 `name`属性は、後から識別したいマテリアルには設定しておく価値があります。この値はエンジンのマテリアルに渡されるため、マテリアルが名前で現れるあらゆる場所 — プロファイラー、GPUキャプチャ、そして[`<pc-model>`の`hierarchy()`](../pc-model#inspecting-the-hierarchy)が報告する割り当て — で表示されるラベルになります。[`<pc-node>`の`material-overrides`](../pc-node#overriding-materials)が差し込んだマテリアルも含まれ、設定しない場合はそこで`Untitled`と表示されます。マテリアルの参照方法には影響しません。参照は常に`id`によって行われます。
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html)を使用して、`<pc-material>`要素をプログラムで作成および操作できます。

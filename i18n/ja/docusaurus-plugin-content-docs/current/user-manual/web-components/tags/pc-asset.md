@@ -11,7 +11,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -45,7 +45,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 
 :::
 
-### テクスチャオプション
+### テクスチャオプション {#texture-options}
 
 テクスチャオプションはテクスチャが作成されるときに適用され、それぞれが`data` JSONの対応するキーをオーバーライドします。設定しなかったオプションは何も書き込まないため、エンジンのフォーマットごとのデフォルト値 — HDRファイルの`rgbe`エンコードや、KTX2ファイルが選択したトランスコード先フォーマットなど — がそのまま有効になります。したがって、実際に必要なオプションだけを設定する価値があります。
 
@@ -61,7 +61,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 <pc-asset id="ground" src="assets/textures/gravel.jpg" anisotropy="16"></pc-asset>
 ```
 
-### タイプの推論
+### タイプの推論 {#type-inference}
 
 `type`を省略した場合、`src`のファイル拡張子から推論されます:
 
@@ -81,7 +81,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 
 それ以外の拡張子、または`font`、`sprite`、`textureatlas`など推論の対象外のタイプでは、明示的な`type`属性が必要です。
 
-## イベント
+## イベント {#events}
 
 これらのイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用するか、このインターフェースの`oneventname`プロパティにイベントリスナーを割り当てることでリッスンできます。
 
@@ -100,7 +100,7 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 
 要素のready状態はこれとは別のシグナルです。要素は、アセットがマークアップの宣言する状態に達した時点でreadyになります。プリロードされるアセットの場合、それは読み込みの決着です — 読み込みが失敗しても要素はreadyになるため、readyは決して成功を意味しません。`lazy`アセットの場合は登録であり、読み込みが行われる前です。また、実行中に挿入された要素は、読み込みがまだ進行中でも、アセットが作成された時点でreadyになります。`<pc-app>`の直接の子でない要素や、アセットタイプがサポートされていない要素は、警告を出力し、決してreadyになりません。
 
-## 例
+## 例 {#example}
 
 2つのアセット: スクリプト (CDNから直接読み込むエンジンのヘルパー) とGLBモデルです。スクリプトは名前で自身を登録し、モデルは `id` で参照されます。ドラッグで軌道回転できます:
 
@@ -137,6 +137,6 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html)を使用して、`<pc-asset>`要素をプログラムで作成および操作できます。

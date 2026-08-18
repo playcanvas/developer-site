@@ -13,7 +13,7 @@ description: "pc-rigidbody要素のリファレンス: rigid bodyの種類、質
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -32,7 +32,7 @@ description: "pc-rigidbody要素のリファレンス: rigid bodyの種類、質
 
 </div>
 
-## 例
+## 例 {#example}
 
 静的な地面に落下する動的ボディです。球体には `restitution="0.9"` が設定されているため跳ね返ります。ボックスにも反発を与えたり、`mass` を変更したりしてみましょう:
 
@@ -70,6 +70,6 @@ description: "pc-rigidbody要素のリファレンス: rigid bodyの種類、質
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html)を使用して、`<pc-rigidbody>`要素をプログラムで作成および操作できます。

@@ -13,7 +13,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -29,7 +29,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 </div>
 
-## 例
+## 例 {#example}
 
 実物のぬいぐるみをスキャンしたガウシアンスプラットです。ドラッグで軌道回転、スクロールでズームできます。上で推奨した `<pc-app>` の属性にも注目してください:
 
@@ -51,6 +51,6 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [GSplatComponentElement API](https://api.playcanvas.com/web-components/classes/GSplatComponentElement.html)を使用して、`<pc-gsplat>`要素をプログラムで作成および操作できます。

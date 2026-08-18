@@ -13,7 +13,7 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -27,7 +27,7 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 
 </div>
 
-## 例
+## 例 {#example}
 
 単体の垂直スクロールバーです — オレンジ色のハンドルをドラッグしてみましょう。`handle-size` (トラックに対する割合) や初期の `value` を変えることもできます:
 
@@ -55,6 +55,6 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ScrollbarComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollbarComponentElement.html)を使用して、`<pc-scrollbar>`要素をプログラムで作成および操作できます。

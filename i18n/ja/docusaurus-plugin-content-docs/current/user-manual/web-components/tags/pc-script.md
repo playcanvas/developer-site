@@ -12,7 +12,7 @@ description: "pc-script要素のリファレンス: 単一のスクリプトク�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -26,7 +26,7 @@ description: "pc-script要素のリファレンス: 単一のスクリプトク�
 
 さらに、その他の予約されていない属性は、同名のスクリプト属性にマッピングされます（ケバブケースからキャメルケースへ、例: `focus-point` → `focusPoint`）。値はスクリプトが宣言したデフォルト値の型に従って解析され、型推論が役立たない場合は `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` プレフィックスを使用できます。同じスクリプト属性が `attributes` JSONにも存在する場合は、プロパティごとの属性が優先されます。詳細は[スクリプトで動作を追加する](../scripting.md)を参照してください。
 
-## 例
+## 例 {#example}
 
 キューブにアタッチされた `rotate` スクリプトです。スクリプトクラスは通常 [`<pc-asset>`](../pc-asset) から読み込みますが、インラインのモジュールから登録することもできます — `<pc-script>` はクラスが届くまで保留のままになります。回転速度を変更してみましょう:
 
@@ -64,7 +64,7 @@ description: "pc-script要素のリファレンス: 単一のスクリプトク�
 </script>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ScriptElement API](https://api.playcanvas.com/web-components/classes/ScriptElement.html)を使用して、`<pc-script>`要素をプログラムで作成および操作できます。
 

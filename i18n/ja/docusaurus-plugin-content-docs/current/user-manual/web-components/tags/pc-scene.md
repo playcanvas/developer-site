@@ -11,7 +11,7 @@ description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -26,7 +26,7 @@ description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ
 
 </div>
 
-## 例
+## 例 {#example}
 
 リニアフォグの中へ消えていくボックスです。`fog-color` を変えたり (カメラの `clear-color` と揃えると定番の深度ヘイズ表現になります)、`fog` を `"exp"` にして `fog-density` を `0.15` にしたりしてみましょう:
 
@@ -58,6 +58,6 @@ description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html)を使用して、`<pc-scene>`要素をプログラムで作成および操作できます。

@@ -11,7 +11,7 @@ description: "pc-listener要素のリファレンス: 位置サウンドをど�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -21,7 +21,7 @@ description: "pc-listener要素のリファレンス: 位置サウンドをど�
 
 </div>
 
-## 例
+## 例 {#example}
 
 リスナーはカメラ上にあり、位置音源の足音を発する球体がその前を旋回します。ヘッドフォンを着けると、球体が横切るたびに音が左右にパンします。ブラウザはユーザー操作があるまでオーディオをブロックするため、Playをクリックして開始してください:
 
@@ -74,6 +74,6 @@ description: "pc-listener要素のリファレンス: 位置サウンドをど�
 </script>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ListenerComponentElement API](https://api.playcanvas.com/web-components/classes/ListenerComponentElement.html)を使用して、`<pc-listener>`要素をプログラムで作成および操作できます。

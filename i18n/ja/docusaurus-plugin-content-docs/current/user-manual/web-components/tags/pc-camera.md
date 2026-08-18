@@ -11,7 +11,7 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -39,7 +39,7 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 
 </div>
 
-## 例
+## 例 {#example}
 
 遠くへ連なるボックスの列です。`fov` を変えたり、`projection="orthographic"` (サイズは `ortho-height` で指定) に切り替えて遠近感が消える様子を確認したりしてみましょう:
 
@@ -68,6 +68,6 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html)を使用して、`<pc-camera>`要素をプログラムで作成および操作できます。

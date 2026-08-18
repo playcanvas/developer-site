@@ -18,7 +18,7 @@ description: "pc-node要素のリファレンス: 読み込まれたモデルの
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -43,7 +43,7 @@ description: "pc-node要素のリファレンス: 読み込まれたモデルの
 
 :::
 
-## ノードの検索
+## ノードの検索 {#finding-the-node}
 
 `name`は読み込まれた階層内のノード名に対して照合し、深さ優先順で最初に一致したものを採用します。`<pc-node>`を別の`<pc-node>`の内側にネストすると、内側の検索は外側のノードのサブツリーに限定されます。名前がローカルにしか一意でないノードに到達する、最も簡単な方法です。
 
@@ -102,7 +102,7 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 インラインの`onpointer*`属性は、[`<pc-entity>`](../pc-entity)とまったく同じように動作します。
 
-## 例
+## 例 {#example}
 
 このGLBは2つのノードをインスタンス化します — `play` (オレンジ色のシェルで、各面からロゴがくり抜かれています) と `canvas` (くり抜きから見える内側の暗いボックス) です。これを発見する方法が [`hierarchy()`](../pc-model#inspecting-the-hierarchy) です。`<pc-node>` は `play` にバインドし、`material-overrides` でオーサリングされたオレンジを青に差し替えます。代わりに `canvas` にバインドしたり、`enabled="false"` を追加してシェルごと非表示にしたりしてみましょう。ドラッグで軌道回転できます:
 
@@ -129,7 +129,7 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [NodeElement API](https://api.playcanvas.com/web-components/classes/NodeElement.html)を使用して、`<pc-node>`要素をプログラムで作成および操作できます。
 

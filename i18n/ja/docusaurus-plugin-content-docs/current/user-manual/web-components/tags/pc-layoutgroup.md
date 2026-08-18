@@ -12,7 +12,7 @@ description: "pc-layoutgroup要素のリファレンス: 子要素を水平ま�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -31,7 +31,7 @@ description: "pc-layoutgroup要素のリファレンス: 子要素を水平ま�
 
 </div>
 
-## 例
+## 例 {#example}
 
 行を自動的に配置する縦のリストです。`orientation="horizontal"` にしたり、`spacing` を大きくしたり、`reverse-y` を付けたり — 行を追加して自動的に収まる様子を見たりしてみましょう:
 
@@ -63,6 +63,6 @@ description: "pc-layoutgroup要素のリファレンス: 子要素を水平ま�
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html)を使用して、`<pc-layoutgroup>`要素をプログラムで作成および操作できます。
