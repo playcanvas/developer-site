@@ -247,33 +247,51 @@ Sketchfabのモデルにはベイクされた影用のプレーンが同梱さ�
 
 ## アニメーション {#animation}
 
-コンテナがアニメーションを保持している場合、`<pc-model>`はインスタンス化されたルートに`anim`コンポーネントを追加し、最初のアニメーションを再生します。これには属性がなく、有効にする操作も必要ありません。
+コンテナのアニメーションは、モデルの内側にネストした[`<pc-anim>`](tags/pc-anim.md)が再生します。空のまま置けば、コンテナが持つすべてのアニメーションを、それぞれのトラック名を名前として割り当て、最初のものを再生します。「ファイルに入っていたものを再生する」がタグ1つで済みます。
 
 ```html
 <pc-asset id="robot" type="container" src="assets/walking-robot.glb"></pc-asset>
 <pc-scene>
-    <pc-model asset="robot"></pc-model>
+    <pc-entity name="robot">
+        <pc-model asset="robot">
+            <pc-anim></pc-anim>
+        </pc-model>
+    </pc-entity>
 </pc-scene>
 ```
 
 ![歩行アニメーションが再生され、歩を進めている途中のロボットキャラクター](/img/user-manual/web-components/loading-models/robot-animation.jpg)
 
-`hierarchy()`は追加されたコンポーネントを表示します。モデルのアニメーションがエクスポートを通過したかを確認する最も手早い方法です。
+モデルを囲む`<pc-entity>`には意味があります。`<pc-anim>`はコンポーネントタグなので、モデルのインスタンス化されたルートではなく、最も近い外側のエンティティに取り付けられます。そして`<pc-scene>`の直下に置かれた`<pc-model>`には、渡せるエンティティがありません。コンソールはそれをはっきり伝えます（`must be a descendant of pc-entity`）。対処は上のラッパーです。
 
-```none
-Armature (anim)
-├─ Alpha_Joints (render) {Alpha_Joints_MAT}
-├─ Alpha_Surface (render) {Alpha_Body_MAT}
-└─ mixamorig:Hips
-   ⋮
-```
-
-割り当てられるのは*最初の*アニメーションだけで、マークアップから別のクリップを選んだり、一時停止したり、クリップ間をブレンドしたりする手段はありません。「ファイルに入っていたものを再生する」以上のことをするには、JavaScriptからコンポーネントに到達し、エンジンの[AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) APIで制御してください。
+どのアニメーションがエクスポートを通過したかを確認するには、コンポーネントに尋ねます。
 
 ```javascript
-const { entity } = await whenReady('pc-model');
-entity.anim.baseLayer.pause();
+const anim = await whenReady('pc-anim');
+console.log(anim.clips); // ['Walk', 'Idle', 'Wave']
 ```
+
+エクスポーターが付けた名前をそのまま使うのではなく、自分でクリップに名前を付けるには、クリップを宣言します。1クリップにつき1つの[`<pc-anim-clip>`](tags/pc-anim-clip.md)です。クリップごとの速度とループもここで設定し、他のファイルのクリップを混ぜるのもここです。
+
+```html
+<pc-entity name="robot">
+    <pc-model asset="robot">
+        <pc-anim clip="idle" transition-time="0.3">
+            <pc-anim-clip name="idle"></pc-anim-clip>
+            <pc-anim-clip name="walk" speed="1.2"></pc-anim-clip>
+            <pc-anim-clip name="wave" asset="wave-glb" loop="false"></pc-anim-clip>
+        </pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+あとは`clip`を設定すればクリップが切り替わり、`transition-time`にわたってクロスフェードします。
+
+```javascript
+document.querySelector('pc-anim').setAttribute('clip', 'walk');
+```
+
+トラックは**名前によって**ノードにバインドされます。別ファイルのクリップが、ノード名の一致するモデルしかアニメーションさせられないのはこのためであり、剛体パーツだけの単純な階層がスキン付きのスケルトンと同じようにアニメーションするのもこのためです。クロスフェード、一時停止、そしてエンジンがクリップの再生完了を通知しないことを含む全体像は、[`<pc-anim>`](tags/pc-anim.md)を参照してください。
 
 ## トラブルシューティング {#troubleshooting}
 
@@ -289,9 +307,14 @@ entity.anim.baseLayer.pause();
 
 **マテリアル名が`Untitled`または`defaultGlbMaterial`と表示される。** これらは、名前のないglTFマテリアルと、マテリアルなしでエクスポートされたプリミティブに対するエンジンのデフォルトです。どちらも一意な指定手段ではないため、そうしたものは`index:`で選択してください。
 
+**モデルは読み込まれるが何もアニメーションしない。** モデルは[`<pc-anim>`](tags/pc-anim.md)が指示するまで何も再生しません。そしてその要素には、[アニメーション](#animation)で説明したとおり、外側の`<pc-entity>`が必要です。両方が揃っているなら`anim.clips`を確認してください。モデルにアニメーションがないという警告とともに空のリストが返る場合、アニメーションはエクスポートを通過していません。
+
+**別ファイルのクリップが何もアニメーションさせない。** そのトラックは名前によってバインドされるため、クリップとモデルでノード名が一致している必要があります。モデルの`hierarchy()`を出力して見比べてください。
+
 ## 次のステップ {#next-steps}
 
 * [`<pc-model>`](tags/pc-model.md)と[`<pc-node>`](tags/pc-node.md) — 両タグの完全な属性・メソッドリファレンス。
+* [`<pc-anim>`](tags/pc-anim.md)と[`<pc-anim-clip>`](tags/pc-anim-clip.md) — クリップライブラリ、クロスフェード、再生の制御。
 * [スクリプトによる振る舞いの追加](scripting.md) — モデル全体のマテリアルを一括処理するなど、マークアップでは収まらないロジック向け。
 * [プログラムによるアクセス](programmatic-access.md) — これらの要素の背後にあるエンジンオブジェクトへの到達方法。
-* [サンプル](https://playcanvas.github.io/web-components/examples/) — [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html)をご覧ください。
+* [サンプル](https://playcanvas.github.io/web-components/examples/) — [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)、[Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html)をご覧ください。
