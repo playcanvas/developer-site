@@ -41,24 +41,32 @@ The element becomes ready once its hierarchy has been instantiated and added to 
 
 ## Animation
 
-If the container holds any animations, the instantiated root is given an `anim` component and the *first* animation is assigned and played. This happens automatically: there is no attribute to enable it, and none to choose a different clip, pause it or blend between clips.
+A container's animations play when you nest a [`<pc-anim>`](../pc-anim) inside the model. One empty tag is enough to get what the file came with — every animation in the container becomes a clip, named after its track, and the first one starts playing:
 
-Markup therefore covers exactly one case — play what the file came with. For anything more, reach the component through the element's `entity` and drive it with the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) API:
+```html
+<pc-entity name="robot">
+    <pc-model asset="robot">
+        <pc-anim></pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+The `<pc-entity>` wrapper is not decoration: the component attaches to the nearest enclosing entity rather than to the instantiated root, so a `<pc-model>` placed directly under a [`<pc-scene>`](../pc-scene) has nowhere to put it and warns instead. Add [`<pc-anim-clip>`](../pc-anim-clip) children to name the clips yourself, set a per-clip speed or looping, or take clips from other files.
+
+To check whether a file's animations survived its export, ask the component what it found:
 
 ```javascript
 import { whenReady } from '@playcanvas/web-components';
 
-const { entity } = await whenReady('pc-model');
-entity.anim.baseLayer.pause();
+const anim = await whenReady('pc-anim');
+console.log(anim.clips); // ['Walk', 'Idle']
 ```
 
-Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](../programmatic-access.md).
-
-A model with no animations gets no `anim` component, so checking for one is how you tell whether a file's animations survived its export — the [printable hierarchy](#inspecting-the-hierarchy) shows it as `(anim)` on the root.
+Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](../programmatic-access.md). A container with no animations in it logs a warning naming the model, so the console answers the same question without any code.
 
 ## Example
 
-A GLB with a skeletal animation — which auto-plays, exactly as the [Animation](#animation) section above describes. Drag to orbit:
+A GLB with a skeletal animation, played by the [`<pc-anim>`](../pc-anim) nested inside the model. Drag to orbit:
 
 ```html live-example
 <pc-app>
@@ -78,7 +86,11 @@ A GLB with a skeletal animation — which auto-plays, exactly as the [Animation]
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        <pc-model asset="t-rex" scale="1.5 1.5 1.5"></pc-model>
+        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
+            <pc-model asset="t-rex">
+                <pc-anim></pc-anim>
+            </pc-model>
+        </pc-entity>
     </pc-scene>
 </pc-app>
 ```

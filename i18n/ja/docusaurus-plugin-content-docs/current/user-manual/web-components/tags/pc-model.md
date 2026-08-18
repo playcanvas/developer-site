@@ -14,7 +14,7 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 [`<pc-entity>`](../pc-entity)のすべての属性も利用可能です。
 
@@ -41,24 +41,32 @@ description: "pc-model要素のリファレンス: SceneまたはEntity内で、
 
 ## アニメーション {#animation}
 
-コンテナがアニメーションを保持している場合、インスタンス化されたルートに`anim`コンポーネントが与えられ、*最初の*アニメーションが割り当てられて再生されます。これは自動的に行われ、有効にするための属性も、別のクリップを選ぶ・一時停止する・クリップ間をブレンドするための属性もありません。
+コンテナのアニメーションは、モデルの内側に[`<pc-anim>`](../pc-anim)をネストすると再生されます。ファイルに入っていたものを得るには空のタグ1つで十分です。コンテナ内のすべてのアニメーションが、それぞれのトラック名を名前としてクリップになり、最初のものが再生を始めます。
 
-したがってマークアップがカバーするのは1つのケースだけです。ファイルに入っていたものを再生することです。それ以上のことをするには、要素の`entity`を通じてコンポーネントに到達し、エンジンの[AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) APIで制御してください。
+```html
+<pc-entity name="robot">
+    <pc-model asset="robot">
+        <pc-anim></pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+`<pc-entity>`のラッパーは飾りではありません。コンポーネントはインスタンス化されたルートではなく、最も近い外側のエンティティに取り付けられます。そのため、[`<pc-scene>`](../pc-scene)の直下に置かれた`<pc-model>`にはコンポーネントの置き場所がなく、代わりに警告が出ます。クリップに自分で名前を付ける、クリップごとの速度やループを設定する、他のファイルからクリップを取得する、といった場合は[`<pc-anim-clip>`](../pc-anim-clip)を子として追加してください。
+
+ファイルのアニメーションがエクスポートを通過したかを確認するには、コンポーネントに尋ねます。
 
 ```javascript
 import { whenReady } from '@playcanvas/web-components';
 
-const { entity } = await whenReady('pc-model');
-entity.anim.baseLayer.pause();
+const anim = await whenReady('pc-anim');
+console.log(anim.clips); // ['Walk', 'Idle']
 ```
 
-パッケージ名でインポートするには、ページのimport mapに`@playcanvas/web-components`が必要です。[プログラムによるアクセス](../programmatic-access.md)を参照してください。
-
-アニメーションを持たないモデルには`anim`コンポーネントは与えられません。そのため、コンポーネントの有無を確認することが、ファイルのアニメーションがエクスポートを通過したかを判断する方法になります。[印字可能な階層](#inspecting-the-hierarchy)では、ルートに`(anim)`として表示されます。
+パッケージ名でインポートするには、ページのimport mapに`@playcanvas/web-components`が必要です。[プログラムによるアクセス](../programmatic-access.md)を参照してください。アニメーションを含まないコンテナはモデル名を含む警告をログに出力するため、コードを書かずにコンソールで同じことを確認できます。
 
 ## 例
 
-スケルタルアニメーション付きのGLBです。上の[アニメーション](#animation)セクションで説明したとおり、アニメーションは自動再生されます。ドラッグで軌道回転できます:
+モデルの内側にネストした[`<pc-anim>`](../pc-anim)が再生する、スケルタルアニメーション付きのGLBです。ドラッグで軌道回転できます:
 
 ```html live-example
 <pc-app>
@@ -78,7 +86,11 @@ entity.anim.baseLayer.pause();
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        <pc-model asset="t-rex" scale="1.5 1.5 1.5"></pc-model>
+        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
+            <pc-model asset="t-rex">
+                <pc-anim></pc-anim>
+            </pc-model>
+        </pc-entity>
     </pc-scene>
 </pc-app>
 ```

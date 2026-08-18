@@ -518,6 +518,8 @@ const sidebars = {
             id: 'user-manual/web-components/tags/index',
           },
           items: [
+            'user-manual/web-components/tags/pc-anim',
+            'user-manual/web-components/tags/pc-anim-clip',
             'user-manual/web-components/tags/pc-app',
             'user-manual/web-components/tags/pc-asset',
             'user-manual/web-components/tags/pc-button',

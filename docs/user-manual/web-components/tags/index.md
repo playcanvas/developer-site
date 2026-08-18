@@ -11,6 +11,8 @@ Tags also have placement rules — each tag's page notes the parent it requires.
 
 | Tag | Description |
 | --- | --- |
+| [`<pc-anim>`](pc-anim) | Defines an animation component that plays animation clips. |
+| [`<pc-anim-clip>`](pc-anim-clip) | Defines a single clip assigned to an animation component. |
 | [`<pc-app>`](pc-app) | Defines the root element of your application. |
 | [`<pc-asset>`](pc-asset) | Defines an asset to be loaded by your application. |
 | [`<pc-button>`](pc-button) | Defines a button component. |

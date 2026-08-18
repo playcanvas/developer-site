@@ -247,33 +247,51 @@ The events and their inline attribute forms are listed in the [`<pc-node>` refer
 
 ## Animation
 
-If a container holds animations, `<pc-model>` adds an `anim` component to the instantiated root and plays the first one. There is no attribute for this and nothing to switch on:
+A container's animations are played by a [`<pc-anim>`](tags/pc-anim.md) nested inside the model. Empty, it assigns every animation the container holds — each named after its track — and starts the first one, which covers "play what the file came with" in a single tag:
 
 ```html
 <pc-asset id="robot" type="container" src="assets/walking-robot.glb"></pc-asset>
 <pc-scene>
-    <pc-model asset="robot"></pc-model>
+    <pc-entity name="robot">
+        <pc-model asset="robot">
+            <pc-anim></pc-anim>
+        </pc-model>
+    </pc-entity>
 </pc-scene>
 ```
 
 ![A robot character mid-stride, its walk animation playing](/img/user-manual/web-components/loading-models/robot-animation.jpg)
 
-`hierarchy()` shows the component that got added, which is the quickest way to confirm a model's animations came through the export:
+The `<pc-entity>` around the model matters. `<pc-anim>` is a component tag, so it attaches to the nearest enclosing entity — not to the model's instantiated root — and a `<pc-model>` sitting directly under `<pc-scene>` has no entity to offer it. The console says so plainly (`must be a descendant of pc-entity`), and the fix is the wrapper above.
 
-```none
-Armature (anim)
-├─ Alpha_Joints (render) {Alpha_Joints_MAT}
-├─ Alpha_Surface (render) {Alpha_Body_MAT}
-└─ mixamorig:Hips
-   ⋮
-```
-
-Only the *first* animation is assigned, and markup gives you no way to pick another, pause it or blend between clips. For anything beyond "play what the file came with", reach the component from JavaScript and drive it through the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) API:
+To see which animations came through the export, ask the component:
 
 ```javascript
-const { entity } = await whenReady('pc-model');
-entity.anim.baseLayer.pause();
+const anim = await whenReady('pc-anim');
+console.log(anim.clips); // ['Walk', 'Idle', 'Wave']
 ```
+
+Naming the clips yourself — rather than living with whatever the exporter called them — means declaring them, one [`<pc-anim-clip>`](tags/pc-anim-clip.md) each. That is also where per-clip speed and looping live, and how clips from other files get mixed in:
+
+```html
+<pc-entity name="robot">
+    <pc-model asset="robot">
+        <pc-anim clip="idle" transition-time="0.3">
+            <pc-anim-clip name="idle"></pc-anim-clip>
+            <pc-anim-clip name="walk" speed="1.2"></pc-anim-clip>
+            <pc-anim-clip name="wave" asset="wave-glb" loop="false"></pc-anim-clip>
+        </pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+Switching clips is then a matter of setting `clip`, which cross-fades over `transition-time`:
+
+```javascript
+document.querySelector('pc-anim').setAttribute('clip', 'walk');
+```
+
+Tracks bind to nodes **by name**, which is why a clip from a separate file only animates a model whose node names match it — and why a plain hierarchy of rigid parts animates just as well as a skinned skeleton. See [`<pc-anim>`](tags/pc-anim.md) for the full picture, including cross-fades, pausing and the fact that the engine reports no clip completion.
 
 ## Troubleshooting
 
@@ -289,9 +307,14 @@ entity.anim.baseLayer.pause();
 
 **A material name appears as `Untitled` or `defaultGlbMaterial`.** Those are engine defaults for an unnamed glTF material and for a primitive exported with no material at all. Neither is a unique handle, so select those by `index:` instead.
 
+**The model loads but nothing animates.** A model plays nothing until a [`<pc-anim>`](tags/pc-anim.md) asks it to — and that element needs an enclosing `<pc-entity>`, as [Animation](#animation) describes. If both are in place, check `anim.clips`: an empty list with a warning about the model having no animations means they did not survive the export.
+
+**A clip from a separate file animates nothing.** Its tracks bind by node name, so the clip and the model have to agree on those names. Print the model's `hierarchy()` and compare.
+
 ## Next Steps
 
 * [`<pc-model>`](tags/pc-model.md) and [`<pc-node>`](tags/pc-node.md) — the full attribute and method reference for both tags.
+* [`<pc-anim>`](tags/pc-anim.md) and [`<pc-anim-clip>`](tags/pc-anim-clip.md) — clip libraries, cross-fades and playback control.
 * [Adding Behavior with Scripts](scripting.md) — for logic that outgrows markup, such as sweeping materials across a whole model.
 * [Programmatic Access](programmatic-access.md) — reaching the engine objects behind these elements.
-* [Examples](https://playcanvas.github.io/web-components/examples/) — see [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).
+* [Examples](https://playcanvas.github.io/web-components/examples/) — see [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html), [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).
