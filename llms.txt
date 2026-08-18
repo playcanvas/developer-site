@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 488
+Total Documents: 490
 Generated: 2026-08-18
 
 ## Instructions for Large Language Models
@@ -422,6 +422,8 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access/): Drive the engine from JavaScript: await element initialization with whenReady, access engine objects like AppBase and Entity, and target specific apps.
 - [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting/): Attach PlayCanvas Script classes to entities with pc-module and pc-script tags, load ES modules, and wire behaviors into Web Components.
 - [Tag Reference](https://developer.playcanvas.com/user-manual/web-components/tags/): Alphabetical index of PlayCanvas Web Component tags with short summaries linking to full attribute and usage documentation for each element.
+- [<pc-anim-clip>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim-clip/): Reference for the pc-anim-clip element: declare one named animation clip on a pc-anim component, from the enclosing model's container or from a separate container, animation or animclip asset.
+- [<pc-anim>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim/): Reference for the pc-anim element: play, switch and cross-fade animation clips over an entity hierarchy, taken from a model's own animations or from declared pc-anim-clip children.
 - [<pc-app>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app/): Reference for the pc-app element: initializes the PlayCanvas Application, graphics options, and root container for scenes and entities.
 - [<pc-asset>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset/): Reference for the pc-asset element: declare assets to load by URL, type inference from file extensions, lazy loading, and how other tags reference them by id.
 - [<pc-button>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button/): Reference for the pc-button element: interactive button component with tint and sprite transitions for hover, pressed, and inactive states.

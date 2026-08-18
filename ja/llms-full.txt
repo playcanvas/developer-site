@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 488
+Total Documents: 490
 Generated: 2026-08-18
 
 ================================================================================
@@ -34930,33 +34930,51 @@ The events and their inline attribute forms are listed in the [`<pc-node>` refer
 
 ## Animation
 
-If a container holds animations, `<pc-model>` adds an `anim` component to the instantiated root and plays the first one. There is no attribute for this and nothing to switch on:
+A container's animations are played by a [`<pc-anim>`](tags/pc-anim.md) nested inside the model. Empty, it assigns every animation the container holds — each named after its track — and starts the first one, which covers "play what the file came with" in a single tag:
 
 ```html
 <pc-asset id="robot" type="container" src="assets/walking-robot.glb"></pc-asset>
 <pc-scene>
-    <pc-model asset="robot"></pc-model>
+    <pc-entity name="robot">
+        <pc-model asset="robot">
+            <pc-anim></pc-anim>
+        </pc-model>
+    </pc-entity>
 </pc-scene>
 ```
 
 [Image: A robot character mid-stride, its walk animation playing]
 
-`hierarchy()` shows the component that got added, which is the quickest way to confirm a model's animations came through the export:
+The `<pc-entity>` around the model matters. `<pc-anim>` is a component tag, so it attaches to the nearest enclosing entity — not to the model's instantiated root — and a `<pc-model>` sitting directly under `<pc-scene>` has no entity to offer it. The console says so plainly (`must be a descendant of pc-entity`), and the fix is the wrapper above.
 
-```none
-Armature (anim)
-├─ Alpha_Joints (render) {Alpha_Joints_MAT}
-├─ Alpha_Surface (render) {Alpha_Body_MAT}
-└─ mixamorig:Hips
-   ⋮
-```
-
-Only the *first* animation is assigned, and markup gives you no way to pick another, pause it or blend between clips. For anything beyond "play what the file came with", reach the component from JavaScript and drive it through the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) API:
+To see which animations came through the export, ask the component:
 
 ```javascript
-const { entity } = await whenReady('pc-model');
-entity.anim.baseLayer.pause();
+const anim = await whenReady('pc-anim');
+console.log(anim.clips); // ['Walk', 'Idle', 'Wave']
 ```
+
+Naming the clips yourself — rather than living with whatever the exporter called them — means declaring them, one [`<pc-anim-clip>`](tags/pc-anim-clip.md) each. That is also where per-clip speed and looping live, and how clips from other files get mixed in:
+
+```html
+<pc-entity name="robot">
+    <pc-model asset="robot">
+        <pc-anim clip="idle" transition-time="0.3">
+            <pc-anim-clip name="idle"></pc-anim-clip>
+            <pc-anim-clip name="walk" speed="1.2"></pc-anim-clip>
+            <pc-anim-clip name="wave" asset="wave-glb" loop="false"></pc-anim-clip>
+        </pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+Switching clips is then a matter of setting `clip`, which cross-fades over `transition-time`:
+
+```javascript
+document.querySelector('pc-anim').setAttribute('clip', 'walk');
+```
+
+Tracks bind to nodes **by name**, which is why a clip from a separate file only animates a model whose node names match it — and why a plain hierarchy of rigid parts animates just as well as a skinned skeleton. See [`<pc-anim>`](tags/pc-anim.md) for the full picture, including cross-fades, pausing and the fact that the engine reports no clip completion.
 
 ## Troubleshooting
 
@@ -34972,12 +34990,17 @@ entity.anim.baseLayer.pause();
 
 **A material name appears as `Untitled` or `defaultGlbMaterial`.** Those are engine defaults for an unnamed glTF material and for a primitive exported with no material at all. Neither is a unique handle, so select those by `index:` instead.
 
+**The model loads but nothing animates.** A model plays nothing until a [`<pc-anim>`](tags/pc-anim.md) asks it to — and that element needs an enclosing `<pc-entity>`, as [Animation](#animation) describes. If both are in place, check `anim.clips`: an empty list with a warning about the model having no animations means they did not survive the export.
+
+**A clip from a separate file animates nothing.** Its tracks bind by node name, so the clip and the model have to agree on those names. Print the model's `hierarchy()` and compare.
+
 ## Next Steps
 
 * [`<pc-model>`](tags/pc-model.md) and [`<pc-node>`](tags/pc-node.md) — the full attribute and method reference for both tags.
+* [`<pc-anim>`](tags/pc-anim.md) and [`<pc-anim-clip>`](tags/pc-anim-clip.md) — clip libraries, cross-fades and playback control.
 * [Adding Behavior with Scripts](scripting.md) — for logic that outgrows markup, such as sweeping materials across a whole model.
 * [Programmatic Access](programmatic-access.md) — reaching the engine objects behind these elements.
-* [Examples](https://playcanvas.github.io/web-components/examples/) — see [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).
+* [Examples](https://playcanvas.github.io/web-components/examples/) — see [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html), [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).
 
 --------------------------------------------------------------------------------
 
@@ -35326,6 +35349,8 @@ Tags also have placement rules — each tag's page notes the parent it requires.
 
 | Tag | Description |
 | --- | --- |
+| [`<pc-anim>`](pc-anim) | Defines an animation component that plays animation clips. |
+| [`<pc-anim-clip>`](pc-anim-clip) | Defines a single clip assigned to an animation component. |
 | [`<pc-app>`](pc-app) | Defines the root element of your application. |
 | [`<pc-asset>`](pc-asset) | Defines an asset to be loaded by your application. |
 | [`<pc-button>`](pc-button) | Defines a button component. |
@@ -35355,6 +35380,384 @@ Tags also have placement rules — each tag's page notes the parent it requires.
 | [`<pc-sky>`](pc-sky) | Defines an image-based skybox. |
 | [`<pc-sound>`](pc-sound) | Defines a single sound assigned to a sound component. |
 | [`<pc-sounds>`](pc-sounds) | Defines a sound component. |
+
+--------------------------------------------------------------------------------
+
+## <pc-anim-clip>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim-clip/
+
+The `<pc-anim-clip>` tag declares one named animation clip on a [`<pc-anim>`](../pc-anim) component. A handful of them make up a clip library — `idle`, `run`, `jump` — that the component switches between.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-anim>`](../pc-anim) component.
+* Its `name` is required, must be unique within the component, and must not contain `.`.
+
+:::
+
+## Where the Track Comes From
+
+`name` does double duty: it is the name the clip is played by, *and* the name of the track looked up in the clip's source. That source is either the enclosing model or an asset you name:
+
+**The enclosing model.** With no `asset`, the track comes from the container of the [`<pc-model>`](../pc-model) that encloses the parent [`<pc-anim>`](../pc-anim). This is the usual case — a GLB exported with several animations, each declared as a clip:
+
+```html
+<pc-entity name="hero">
+    <pc-model asset="hero-glb">
+        <pc-anim>
+            <pc-anim-clip name="idle"></pc-anim-clip>
+            <pc-anim-clip name="run"></pc-anim-clip>
+        </pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+**A named asset.** Point `asset` at a [`<pc-asset>`](../pc-asset) to take the track from a separate file, which is how a shared clip library gets applied to a model that was exported without it. Three asset types work: a `container` (a GLB), an `animation` GLB, or an `animclip` JSON.
+
+```html
+<pc-asset id="hero-glb" type="container" src="hero.glb"></pc-asset>
+<pc-asset id="wave" type="container" src="clips/wave.glb"></pc-asset>
+
+<pc-entity name="hero">
+    <pc-model asset="hero-glb">
+        <pc-anim>
+            <pc-anim-clip name="idle"></pc-anim-clip>
+            <pc-anim-clip name="wave" asset="wave"></pc-anim-clip>
+        </pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+Mixing the two is fine, as the snippet above does: clips without an `asset` come from the model, and the ones with it come from their own file.
+
+Whichever the source, the track is picked out of it like this:
+
+* A source holding **one** track supplies it whatever it is named. So a single-clip GLB does not force you to know the name its exporter chose — call the clip whatever suits your markup.
+* A source holding **several** tracks supplies the one named `name`, falling back to the first with a warning listing what was available.
+
+The tracks bind to scene nodes by name, so a clip from a separate file animates a model only if the two agree on node names — see [How Tracks Bind](../pc-anim#how-tracks-bind).
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | String | - | ID of the [`<pc-asset>`](../pc-asset) supplying the track — a `container`, an `animation` GLB or an `animclip` JSON. Empty takes it from the enclosing [`<pc-model>`](../pc-model) |
+| `loop` | Boolean | `"true"` | Whether the clip loops. A non-looping clip holds its last pose when it ends |
+| `name` | String | - | The clip's name, and the track looked up in its source. Unique within the component, and no `.` |
+| `speed` | Number | `"1"` | Playback speed of this clip, where negative values play it backwards |
+
+</div>
+
+Every attribute is live. Changing `speed` or `loop` applies immediately and keeps the playhead where it was; changing `asset` or `name` re-resolves the track, which restarts the clip if it is the one playing. The component's own [`speed`](../pc-anim#attributes) multiplies whatever is set here.
+
+## Loading
+
+The element becomes ready once its track has been resolved and assigned. Until then the parent component holds the clip's place with an empty track, so a scene is never blocked waiting on a file: `activate` starts playback and a declared `clip` selection applies as soon as the markup is parsed, and real motion appears when the asset arrives.
+
+A clip that cannot resolve its track warns and stays pending, leaving the rest of the library playable. The console message names the cause — a missing asset, a failed load, an asset of the wrong type, or a source with no usable track in it.
+
+## Example
+
+The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak` — a single-track source supplies its track under whatever name a clip asks for, so neither has to know the name inside the GLB. Try a positive `speed`, or `loop="false"` to watch a clip hold its final pose:
+
+```html live-example
+<pc-app>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
+    <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
+    <pc-scene>
+        <pc-entity name="camera" position="2.5 1.5 3.5">
+            <pc-camera clear-color="#2a2d36"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="ground" scale="30 30 30">
+            <pc-render type="plane" material="floor"></pc-render>
+        </pc-entity>
+        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
+            <pc-model asset="t-rex">
+                <pc-anim id="anim" clip="walk" transition-time="0.4">
+                    <pc-anim-clip name="walk"></pc-anim-clip>
+                    
+                    <pc-anim-clip name="sneak" speed="-0.4"></pc-anim-clip>
+                </pc-anim>
+            </pc-model>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<div class="controls">
+    <button id="walk">Walk</button>
+    <button id="sneak">Sneak backwards</button>
+</div>
+<style>
+    .controls {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        gap: 8px;
+    }
+</style>
+<script type="module">
+    const anim = document.getElementById('anim');
+
+    document.getElementById('walk').onclick = () => anim.setAttribute('clip', 'walk');
+    document.getElementById('sneak').onclick = () => anim.setAttribute('clip', 'sneak');
+</script>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-anim-clip>` elements using the [AnimClipElement API](https://api.playcanvas.com/web-components/classes/AnimClipElement.html).
+
+`asset`, `loop`, `name` and `speed` are available as properties, mirroring the attributes above. Awaiting a clip's `ready()` is what guarantees its track is assigned and the parent component's layer is populated:
+
+```javascript
+
+const clip = await whenReady('pc-anim-clip');
+clip.speed = 2;
+```
+
+Clips can be added and removed at runtime, and the component rebuilds its set to match — appending a `<pc-anim-clip>` extends the library, and removing the last one from inside a [`<pc-model>`](../pc-model) hands the component back to that model's own animations. An active clip that survives a rebuild keeps playing from where it was.
+
+```javascript
+const clip = document.createElement('pc-anim-clip');
+clip.setAttribute('name', 'wave');
+clip.setAttribute('asset', 'wave-glb');
+document.querySelector('pc-anim').appendChild(clip);
+
+await clip.ready();
+document.querySelector('pc-anim').transition('wave');
+```
+
+--------------------------------------------------------------------------------
+
+## <pc-anim>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim/
+
+The `<pc-anim>` tag plays animation clips over an entity hierarchy — a character's walk cycle, a machine stepping through a sequence of moves, a door swinging open.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-node>`](../pc-node) or a [`<pc-model>`](../pc-model).
+* It can have 0..n [`<pc-anim-clip>`](../pc-anim-clip) children, each declaring one named clip.
+
+:::
+
+## Where the Clips Come From
+
+There are two ways to end up with clips, and the element picks between them for you:
+
+**Declared clips.** Each [`<pc-anim-clip>`](../pc-anim-clip) child contributes one named clip. This is the form to reach for whenever you want to name clips yourself, set a per-clip `speed` or `loop`, or pull clips out of more than one file:
+
+```html
+<pc-entity name="robot">
+    <pc-model asset="arm">
+        <pc-anim clip="idle" transition-time="0.35">
+            <pc-anim-clip name="idle"></pc-anim-clip>
+            <pc-anim-clip name="pick"></pc-anim-clip>
+            <pc-anim-clip name="stow" loop="false"></pc-anim-clip>
+        </pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+**Every animation in the enclosing model.** With no clip children and a [`<pc-model>`](../pc-model) as its parent, the element assigns every animation of that model's container asset, each named after its track, in container order. One empty tag is then enough to play what a GLB came with:
+
+```html
+<pc-entity name="t-rex">
+    <pc-model asset="t-rex">
+        <pc-anim></pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+Declared clips win: adding a `<pc-anim-clip>` child to an element that had been assigning a model's animations switches it over to the declared set. Either way the first clip starts playing on its own — opt out with `activate="false"`.
+
+Tracks whose names the engine cannot host are skipped with a warning naming each: a name containing `.` (reserved for blend tree paths), or one a previous track already took.
+
+:::warning[The component goes on the enclosing entity]
+
+A `<pc-anim>` inside a `<pc-model>` still attaches its component to the nearest enclosing [`<pc-entity>`](../pc-entity) or [`<pc-node>`](../pc-node) — the model's instantiated hierarchy sits below that same entity, which is what lets the clips reach it. A `<pc-model>` that is a direct child of [`<pc-scene>`](../pc-scene) has no such entity, so wrap it in one:
+
+```html
+
+<pc-scene>
+    <pc-model asset="t-rex">
+        <pc-anim></pc-anim>
+    </pc-model>
+</pc-scene>
+
+<pc-scene>
+    <pc-entity>
+        <pc-model asset="t-rex">
+            <pc-anim></pc-anim>
+        </pc-model>
+    </pc-entity>
+</pc-scene>
+```
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `activate` | Boolean | `"true"` | Whether playback starts automatically once clips are assigned. It does not stop a clip that is already playing |
+| `clip` | String | first assigned clip | Name of the active clip. Changing it switches playback, cross-fading over `transition-time`. A name matching no clip warns and leaves the selection alone |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `speed` | Number | `"1"` | Playback speed multiplier applied across all clips, where 0 freezes playback |
+| `transition-time` | Number | `"0"` | Cross-fade duration of switches made through `clip`, in seconds. 0 is a hard cut |
+
+</div>
+
+`speed` here multiplies the [per-clip `speed`](../pc-anim-clip#attributes), so a clip authored at `speed="1.4"` inside a component at `speed="0.5"` plays at 0.7.
+
+## Switching Clips
+
+`clip` names the clip that plays, and it is live: set it from markup, dev tools or JavaScript and playback follows. With `transition-time` above 0 the switch cross-fades over that many seconds, which is what stops a character snapping between poses:
+
+```html
+<pc-anim id="hero" clip="idle" transition-time="0.3">
+    <pc-anim-clip name="idle"></pc-anim-clip>
+    <pc-anim-clip name="run"></pc-anim-clip>
+</pc-anim>
+```
+
+```javascript
+document.getElementById('hero').setAttribute('clip', 'run'); // cross-fades over 0.3s
+```
+
+The methods on the element cover what an attribute cannot express — a hard cut when the default is a fade, a one-off fade duration, and pausing:
+
+```javascript
+const anim = document.getElementById('hero');
+
+anim.play('run');           // hard cut, ignoring transition-time
+anim.transition('idle', 1); // one-second fade, just this once
+anim.pause();               // freeze, keeping the playhead
+anim.play();                // resume from where it stopped
+```
+
+A name that matches no clip leaves the current selection playing, so a mistyped clip never stops the scene dead — watch the console for the warning.
+
+## How Tracks Bind
+
+Clips bind to scene nodes **by name**, over the whole hierarchy below the component's entity. A model's skeleton is the common case, but nothing about it is special: any hierarchy whose node names match a clip's curves animates, which is how the [Robot Arm example](https://playcanvas.github.io/web-components/examples/robot-arm.html) drives ten rigid parts with no skinning at all.
+
+The engine resolves each curve once and does not retry, so a model that finishes loading *after* its clips were assigned would otherwise stay silently unbound. The element handles this: it rebinds when a model below its host announces readiness, and refreshes the whole clip set when the model it takes its clips from is re-instantiated. Changing a [`<pc-model>`'s `asset`](../pc-model#attributes) at runtime therefore does the right thing without any help.
+
+There is one thing to know about the end of a clip: **the engine reports no completion**. A clip with `loop="false"` holds its last pose and says nothing — there is no `end` event to listen for. To act when one finishes, compare the playhead against the track's duration on the underlying component:
+
+```javascript
+const { baseLayer } = anim.component;
+const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
+```
+
+## Example
+
+A GLB with a single walk cycle, declared twice: `walk` at its authored speed and `stalk` at a third of it. Switch between them to watch the cross-fade, which `transition-time="0.4"` sets. Try a different per-clip `speed`, set `activate="false"` to start paused, or drop the clip children entirely — the model's own animation is then assigned automatically:
+
+```html live-example
+<pc-app>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
+    <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
+    <pc-scene>
+        <pc-entity name="camera" position="2.5 1.5 3.5">
+            <pc-camera clear-color="#2a2d36"></pc-camera>
+            <pc-scripts>
+                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
+            </pc-scripts>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="ground" scale="30 30 30">
+            <pc-render type="plane" material="floor"></pc-render>
+        </pc-entity>
+        
+        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
+            <pc-model asset="t-rex">
+                <pc-anim id="anim" clip="walk" transition-time="0.4">
+                    <pc-anim-clip name="walk"></pc-anim-clip>
+                    <pc-anim-clip name="stalk" speed="0.33"></pc-anim-clip>
+                </pc-anim>
+            </pc-model>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<div class="controls">
+    <button id="walk">Walk</button>
+    <button id="stalk">Stalk</button>
+    <button id="transport">Pause</button>
+</div>
+<style>
+    .controls {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        gap: 8px;
+    }
+</style>
+<script type="module">
+    const anim = document.getElementById('anim');
+    const transport = document.getElementById('transport');
+
+    // The clips are what guarantee the layer exists, so wait for them rather than the app
+    await Promise.all([...anim.querySelectorAll('pc-anim-clip')].map(clip => clip.ready()));
+
+    let playing = true;
+
+    document.getElementById('walk').onclick = () => anim.setAttribute('clip', 'walk');
+    document.getElementById('stalk').onclick = () => anim.setAttribute('clip', 'stalk');
+
+    transport.onclick = () => {
+        playing = !playing;
+        playing ? anim.play() : anim.pause();
+        transport.textContent = playing ? 'Pause' : 'Play';
+    };
+</script>
+```
+
+The [Robot Arm example](https://playcanvas.github.io/web-components/examples/robot-arm.html) goes further, with a six-clip library, a scrubbable playhead and a blend toggle.
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-anim>` elements using the [AnimComponentElement API](https://api.playcanvas.com/web-components/classes/AnimComponentElement.html).
+
+| Member | Description |
+| --- | --- |
+| `play(name?)` | Resumes playback, optionally cutting to a named clip first. Ignores `transition-time` |
+| `pause()` | Pauses playback, preserving the playhead |
+| `transition(name, time?)` | Cross-fades to a named clip and ensures playback is running. `time` defaults to `transition-time` |
+| `clips` | The names of the assigned clips, in assignment order |
+| `component` | The underlying engine [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) |
+
+`activate`, `clip`, `speed` and `transitionTime` are also available as properties, mirroring the attributes above.
+
+Awaiting the element is not quite enough to guarantee a clip is playable: the component exists as soon as its host entity is ready, but each clip's track loads separately. Await the clips when you need the layer populated:
+
+```javascript
+
+const anim = await whenReady('pc-anim');
+await Promise.all([...anim.querySelectorAll('pc-anim-clip')].map(clip => clip.ready()));
+
+console.log(anim.clips); // ['walk', 'stalk']
+```
+
+Anything this element does not expose is available on `component` — the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) — including the playhead (`baseLayer.activeStateCurrentTime`), the active clip's duration, and state graphs and blend trees for animation beyond a flat set of clips.
 
 --------------------------------------------------------------------------------
 
@@ -36800,23 +37203,31 @@ The element becomes ready once its hierarchy has been instantiated and added to 
 
 ## Animation
 
-If the container holds any animations, the instantiated root is given an `anim` component and the *first* animation is assigned and played. This happens automatically: there is no attribute to enable it, and none to choose a different clip, pause it or blend between clips.
+A container's animations play when you nest a [`<pc-anim>`](../pc-anim) inside the model. One empty tag is enough to get what the file came with — every animation in the container becomes a clip, named after its track, and the first one starts playing:
 
-Markup therefore covers exactly one case — play what the file came with. For anything more, reach the component through the element's `entity` and drive it with the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) API:
+```html
+<pc-entity name="robot">
+    <pc-model asset="robot">
+        <pc-anim></pc-anim>
+    </pc-model>
+</pc-entity>
+```
+
+The `<pc-entity>` wrapper is not decoration: the component attaches to the nearest enclosing entity rather than to the instantiated root, so a `<pc-model>` placed directly under a [`<pc-scene>`](../pc-scene) has nowhere to put it and warns instead. Add [`<pc-anim-clip>`](../pc-anim-clip) children to name the clips yourself, set a per-clip speed or looping, or take clips from other files.
+
+To check whether a file's animations survived its export, ask the component what it found:
 
 ```javascript
 
-const { entity } = await whenReady('pc-model');
-entity.anim.baseLayer.pause();
+const anim = await whenReady('pc-anim');
+console.log(anim.clips); // ['Walk', 'Idle']
 ```
 
-Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](../programmatic-access.md).
-
-A model with no animations gets no `anim` component, so checking for one is how you tell whether a file's animations survived its export — the [printable hierarchy](#inspecting-the-hierarchy) shows it as `(anim)` on the root.
+Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](../programmatic-access.md). A container with no animations in it logs a warning naming the model, so the console answers the same question without any code.
 
 ## Example
 
-A GLB with a skeletal animation — which auto-plays, exactly as the [Animation](#animation) section above describes. Drag to orbit:
+A GLB with a skeletal animation, played by the [`<pc-anim>`](../pc-anim) nested inside the model. Drag to orbit:
 
 ```html live-example
 <pc-app>
@@ -36836,7 +37247,11 @@ A GLB with a skeletal animation — which auto-plays, exactly as the [Animation]
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        <pc-model asset="t-rex" scale="1.5 1.5 1.5"></pc-model>
+        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
+            <pc-model asset="t-rex">
+                <pc-anim></pc-anim>
+            </pc-model>
+        </pc-entity>
     </pc-scene>
 </pc-app>
 ```
