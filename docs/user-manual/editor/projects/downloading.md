@@ -107,9 +107,9 @@ NPM downloads may rename scene, asset, and folder files to make paths filesystem
 
 Scene JSON files are named from the scene display name. Names are lowercased, non-`a-z` or `0-9` characters become hyphens, repeated hyphens are collapsed, and leading or trailing hyphens are removed. For example, `Main Scene` becomes `main-scene.json` and `100% Scene` becomes `100-scene.json`.
 
-If a scene name is empty or only contains punctuation, the file uses `scene-{sceneId}.json`. If multiple scenes would use the same filename, the scene id is appended before `.json`, for example a conflicting `Main Scene` with id `101` becomes `main-scene-101.json`.
+If a scene name is empty or only contains punctuation, the file uses `scene-{sceneId}.json`. If multiple scenes would use the same filename, the scene id is appended before `.json` using the collision rule below. For example, a conflicting `Main Scene` with id `101` becomes `main-scene-101.json`.
 
-Asset and folder names are sanitized for filesystem use, but they are not converted to lowercase hyphenated names. Conflicts are resolved per folder by appending `.{id}` before the extension, for example `image.2.png`, `image.1.1.png`, or `Folder.10`. Generated config paths are updated to the final filenames.
+Asset and folder names are sanitized for filesystem use, but they are not converted to lowercase hyphenated names. Scene, asset, and folder conflicts are resolved per folder by appending `-{id}` before the extension, for example `image-2.png`, `Folder-10`, or `main-scene-101.json`. Every member of a collision group receives its stable id, while unique names remain unchanged. A naturally suffixed name stays reserved, so duplicate `image.png` files with ids `1` and `2` alongside a natural `image-1.png` become `image-1-1.png`, `image-2.png`, and `image-1.png`. Generated config paths are updated to the final filenames.
 
 The following examples show the package structure created for projects that contain only classic scripts, only ESM scripts, or both script types.
 
