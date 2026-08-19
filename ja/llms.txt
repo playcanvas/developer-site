@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 490
-Generated: 2026-08-18
+Total Documents: 492
+Generated: 2026-08-19
 
 ## Instructions for Large Language Models
 
@@ -234,6 +234,8 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Join the PlayCanvas Community](https://developer.playcanvas.com/user-manual/getting-started/community/): Connect with PlayCanvas developers on Discord, the Forum, Reddit, X, and LinkedIn for help, news, and inspiration.
 - [Made with PlayCanvas](https://developer.playcanvas.com/user-manual/getting-started/made-with-playcanvas/): Showcase of games and interactive experiences built with PlayCanvas by developers around the world.
 - [Open Source Mission](https://developer.playcanvas.com/user-manual/getting-started/open-source/): Learn about PlayCanvas open source projects on GitHub and how to contribute code, report bugs, and support the community.
+- [Start with create-playcanvas](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas/): Use create-playcanvas to start a Vite and TypeScript project from runnable Engine, React, or Web Components starters.
+- [Use PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills/): Use PlayCanvas-specific AI coding workflows to build and verify Engine, React, and Web Components applications.
 
 ### Engine
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine/): Open source JavaScript/TypeScript 3D engine published on npm with full TypeScript declarations and comprehensive examples.

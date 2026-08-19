@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 490
-Generated: 2026-08-18
+Total Documents: 492
+Generated: 2026-08-19
 
 ================================================================================
 
@@ -12035,6 +12035,16 @@ If your code is stored in a PlayCanvas Editor project, use the [VS Code Extensio
 
 The clients have different plans and supported platforms. Use their official documentation for current installation and availability details.
 
+## Add PlayCanvas Workflows
+
+[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) give compatible AI coding agents task-specific workflows for Engine, React, and Web Components applications. New projects created with [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/) include them by default. For an existing project, run:
+
+```bash
+npx skills add playcanvas/skills
+```
+
+Start a new agent conversation after installation so the client discovers the skills.
+
 ## Provide Project Context
 
 Start the assistant in the repository root and install the project dependencies first. This gives it access to the PlayCanvas package, TypeScript declarations, scripts, and existing code patterns.
@@ -12334,6 +12344,18 @@ This page guides you in how to get started.
 :::note
 
 Before you begin, ensure you have [Node.js](https://nodejs.org/) installed.
+
+:::
+
+:::tip[Quick start]
+
+For a Vite and TypeScript project, use the official [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/) tool and choose the Engine format:
+
+```bash
+npm create playcanvas@latest my-app -- -f engine
+```
+
+The generated project includes a runnable starter and [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) for compatible AI coding agents.
 
 :::
 
@@ -17343,6 +17365,10 @@ PlayCanvas is a collection of open-source products that you can use to build int
 ⚛️ [**PlayCanvas React**](../react) - Open source React-based declarative interface that wraps the PlayCanvas Engine  
 🧩 [**PlayCanvas Web Components**](../web-components) - Open source Web Components-based declarative interface that wraps the PlayCanvas Engine
 
+## Start a Code Project
+
+Use [`create-playcanvas`](start-with-create-playcanvas) to scaffold a Vite and TypeScript project for the Engine, React, or Web Components from one of 12 runnable starters. New projects include [PlayCanvas Skills](use-playcanvas-skills), which give compatible AI coding agents PlayCanvas-specific development and verification workflows.
+
 ## Which Product is Right For You?
 
 Every developer is different, so picking the right entry point to PlayCanvas will depend on your background and skills. Let us help you choose:
@@ -17643,6 +17669,173 @@ Stay informed about PlayCanvas development by watching repositories of interest:
 When you contribute to PlayCanvas, you're not just improving software — you're helping to build the future of interactive web experiences. Every bug fix, feature request, documentation improvement, and star helps make 3D web development more accessible to developers everywhere.
 
 **Ready to contribute?** Start by exploring our [GitHub organization](https://github.com/playcanvas) and find a project that interests you. The PlayCanvas community is here to help you get started! 🙌
+
+--------------------------------------------------------------------------------
+
+## Start with create-playcanvas
+
+URL: https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas/
+
+[`create-playcanvas`](https://github.com/playcanvas/create-playcanvas) is the official scaffolding tool for code-based PlayCanvas projects. It creates a Vite and TypeScript project for the PlayCanvas Engine, React, or Web Components and includes a runnable starter scene.
+
+## Create a Project
+
+Run the creator with your preferred package manager:
+
+```sh
+# npm
+npm create playcanvas@latest
+
+# pnpm
+pnpm create playcanvas@latest
+
+# Yarn
+yarn create playcanvas
+
+# Bun
+bun x create-playcanvas@latest
+```
+
+Follow the prompts to name the project, choose an authoring format, and select a starter. The creator requires Node.js 22.23.2 or later when using npm, pnpm, or Yarn.
+
+After the files are created, install the dependencies and start the Vite development server:
+
+```sh
+cd my-playcanvas-project
+npm install
+npm run dev
+```
+
+## Choose a Format
+
+Every format uses TypeScript and includes Vite, ESLint, Prettier, and a production build.
+
+| Format | Use it when |
+| --- | --- |
+| Engine | You want to work directly with the `playcanvas` API. |
+| React | You are building a React application with `@playcanvas/react`. |
+| Web Components | You want declarative custom elements from `@playcanvas/web-components`. |
+
+## Choose a Starter
+
+The creator provides the same 12 runnable starters for every format:
+
+[Image: The twelve create-playcanvas starter scenes]
+
+| Category | Starters |
+| --- | --- |
+| Basics | Spinning Cube, Interactive Sphere |
+| Viewers | Model Viewer, Splat Viewer, Product Configurator |
+| Games | Physics Playground, First-Person Controller, Third-Person Controller, Sprite Game |
+| Tools | Scene Editor |
+| XR | VR Starter, AR Placement |
+
+Choose the starter closest to the application you want to build, run it unchanged first, and then replace its assets and behavior incrementally.
+
+## Skip the Prompts
+
+Pass a project name, format, and starter to create a project non-interactively:
+
+```sh
+npm create playcanvas@latest my-viewer -- -f react -s model-viewer
+```
+
+| Option | Shorthand | Purpose |
+| --- | --- | --- |
+| `--format <name>` | `-f` | Choose `engine`, `react`, or `web-components`. |
+| `--starter <name>` | `-s` | Choose one of the starters above. |
+| `--yes` | `-y` | Accept the default Engine and Spinning Cube choices. |
+| `--no-skills` | | Omit the PlayCanvas Skills included by default. |
+| `--overwrite` | | Replace files in a non-empty target directory. |
+| `--help` | `-h` | Show the current command options. |
+
+:::warning
+
+`--overwrite` removes existing files from the target directory. Use a new directory unless you intend to replace its contents.
+
+:::
+
+## Included PlayCanvas Skills
+
+New projects include [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) under `.claude/skills/` and `.agents/skills/`. Compatible AI coding agents can use them to follow PlayCanvas-specific workflows for application setup, assets, scenes, animation, lighting, effects, interfaces, and game state.
+
+Pass `--no-skills` only when the project does not use an AI coding agent or you manage the skills through another installation route.
+
+## Next Steps
+
+- For the direct Engine API, continue with [Using the Engine Standalone](/user-manual/engine/standalone/).
+- For React, continue with [Building a Scene](/user-manual/react/building-a-scene/).
+- For Web Components, continue with [Building a Scene](/user-manual/web-components/building-a-scene/).
+
+--------------------------------------------------------------------------------
+
+## Use PlayCanvas Skills
+
+URL: https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills/
+
+[PlayCanvas Skills](https://github.com/playcanvas/skills) are portable instructions, references, and utilities for AI coding agents. They help an agent inspect the real project and installed packages, use the matching PlayCanvas authoring surface, and verify the result in a running application.
+
+The skills support code-based applications built with the PlayCanvas Engine, React, and Web Components. They do not run in the application or add a runtime dependency.
+
+## Start a New Project
+
+The quickest way to start is with [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/):
+
+```sh
+npm create playcanvas@latest
+```
+
+Every generated project includes the skills under `.claude/skills/` for Claude Code and `.agents/skills/` for Codex, Cursor, and other Agent Skills-compatible clients. Install the project dependencies, open the project root in your client, and start a new conversation so it discovers the skills.
+
+## Add Skills to an Existing Project
+
+Use the [Agent Skills](https://skills.sh/) installer from the project root:
+
+```sh
+npx skills add playcanvas/skills
+```
+
+Use `--all` to install every skill into all detected clients, or `-g` for a user-level installation. Use one installation route per client so the same skills are not exposed twice. The [PlayCanvas Skills repository](https://github.com/playcanvas/skills#install) also documents native plugin installation for Claude Code, Codex, and Cursor.
+
+After installing or updating the skills, start a new agent conversation so the client reloads their metadata.
+
+## What the Skills Cover
+
+The collection is organized around the work required to turn a project brief and source assets into a verified application:
+
+| Workflow | Skills |
+| --- | --- |
+| Application setup and conventions | `build-app`, `apply-conventions` |
+| Official examples and Engine features | `find-examples`, `reuse-scripts` |
+| Model inspection and animation | `inspect-glb`, `calibrate-model`, `configure-animation` |
+| Scene and gameplay composition | `assemble-scene`, `manage-game-state` |
+| Visual and interface polish | `light-scene`, `add-effects`, `build-hud` |
+
+The agent loads only the skills relevant to the current task. Each skill tells it which installed package declarations, Engine source, scripts, or official examples to inspect before choosing an API or implementation.
+
+## Ask for an Outcome
+
+Describe the result you want and the evidence required to accept it. You do not need to name every skill yourself. For example:
+
+```text
+Build a Direct Engine product viewer for these GLBs. Inspect and calibrate every model,
+reuse the shipped camera controls, and verify grounding and framing in the browser.
+```
+
+```text
+Polish this PlayCanvas React prototype with deterministic game states, a state-driven HUD,
+pooled effects, coherent lighting, and screenshot checks.
+```
+
+The agent should inspect the project before editing, preserve the active Engine, React, or Web Components surface, run the project's checks, and verify interactive or visual behavior in the browser.
+
+For broader guidance on project context, prompts, browser tools, and evidence, see [Developing with AI](/user-manual/engine/developing-with-ai/).
+
+## Scope
+
+PlayCanvas Skills target code-based Engine application workflows. They do not automate PlayCanvas Editor projects, publish applications, manage PlayCanvas services, or replace project-specific art direction and gameplay design. For AI-assisted Editor workflows, use the [Editor MCP Server](/user-manual/editor/mcp-server/) and [VS Code Extension](/user-manual/editor/scripting/vscode-extension/).
+
+To report a repeatable problem or suggest an improvement, use the [skill feedback form](https://github.com/playcanvas/skills/issues/new?template=skill-feedback.yml).
 
 --------------------------------------------------------------------------------
 
@@ -26647,19 +26840,19 @@ In this getting started guide, you'll learn how to:
 
 Before you begin, make sure you have:
 
-- **Node.js** (version 18 or higher) installed on your system
+- **Node.js** 22.23.2 or later installed on your system
 - Basic familiarity with **React** - if you're new to React, check out the [React documentation](https://react.dev/learn)
 - A text editor or IDE (we recommend [Visual Studio Code](https://code.visualstudio.com/))
 
 ## Quick Start
 
-The fastest way to get started is with our scaffolding tool:
+The fastest way to get started is with [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/):
 
 ```bash
-npm create playcanvas@latest -- -t react-ts
+npm create playcanvas@latest my-app -- -f react
 ```
 
-This creates a new project with everything set up and ready to go. You can also try our [online playground](https://playcanvas-react.vercel.app/new) to experiment without installing anything locally.
+Choose one of the 12 runnable starters when prompted. The generated project includes [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) for compatible AI coding agents. You can also try our [online playground](https://playcanvas-react.vercel.app/new) without installing anything locally.
 
 ## Next Steps
 
@@ -26673,21 +26866,15 @@ For more advanced topics and examples, explore the complete [PlayCanvas React do
 
 URL: https://developer.playcanvas.com/user-manual/react/getting-started/installation/
 
-The recommended way to get started is to use the official PlayCanvas scaffolding tool, and follow the prompts.
+The recommended way to get started is to use the official [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/) scaffolding tool and choose the React format:
 
 ```bash
-npm create playcanvas@latest -- -t react-ts
+npm create playcanvas@latest my-app -- -f react
 ```
 
-This creates a new project with everything set up and ready to go. If you've followed the prompts, you'll have a new PlayCanvas React project running in your browser.
+Choose one of the 12 runnable starters when prompted. The generated TypeScript project includes Vite, development and production scripts, and [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) for compatible AI coding agents.
 
 We recommend following [this guide](../../building-a-scene) to start building your first project.
-
-:::note
-
-We’re working on adding more React templates. Currently, only **TypeScript** is available.
-
-:::
 
 ## Manual Installation
 
@@ -26697,7 +26884,7 @@ Once installed, you can start using it in your project. As the next step, we rec
 
 ### Starter Templates
 
-Alternatively you can grab one of the [templates directly](https://github.com/playcanvas/create-playcanvas/tree/main/templates) or quickly spin a project up from our [StackBlitz template](https://stackblitz.com/edit/playcanvas-react-template?file=src%2FScene.tsx).
+Explore the complete [starter catalogue](/user-manual/getting-started/start-with-create-playcanvas/#choose-a-starter), or quickly spin up a project from the [StackBlitz template](https://stackblitz.com/edit/playcanvas-react-template?file=src%2FScene.tsx).
 
 --------------------------------------------------------------------------------
 
@@ -34567,6 +34754,18 @@ pc-app ................... the application
 URL: https://developer.playcanvas.com/user-manual/web-components/getting-started/
 
 You can be rendering 3D in the browser inside a minute — no installs and no build step required. Load PlayCanvas Web Components straight from a CDN, or install the npm package if you are integrating them into an existing project.
+
+:::tip[Scaffold a project]
+
+For a Vite and TypeScript project, use [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/) and choose the Web Components format:
+
+```bash
+npm create playcanvas@latest my-app -- -f web-components
+```
+
+The generated project includes one of 12 runnable starters and [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) for compatible AI coding agents. Use the CDN or npm setup below when integrating Web Components manually.
+
+:::
 
 ## Installation
 
