@@ -22,13 +22,13 @@ Before you begin, ensure you have [Node.js](https://nodejs.org/) installed.
 
 :::tip[Quick start]
 
-For a Vite and TypeScript project, use the official [`create-playcanvas`](/user-manual/getting-started/create-playcanvas/) tool and choose the Engine format:
+For a Vite and TypeScript project, use the official [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/) tool and choose the Engine format:
 
 ```bash
 npm create playcanvas@latest my-app -- -f engine
 ```
 
-The generated project includes a runnable starter and [PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/) for compatible AI coding agents.
+The generated project includes a runnable starter and [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) for compatible AI coding agents.
 
 :::
 

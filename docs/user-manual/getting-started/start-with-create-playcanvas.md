@@ -1,6 +1,6 @@
 ---
-title: Create a PlayCanvas Project
-description: Scaffold a Vite and TypeScript PlayCanvas project from runnable Engine, React, or Web Components starters.
+title: Start with create-playcanvas
+description: Use create-playcanvas to start a Vite and TypeScript project from runnable Engine, React, or Web Components starters.
 ---
 
 [`create-playcanvas`](https://github.com/playcanvas/create-playcanvas) is the official scaffolding tool for code-based PlayCanvas projects. It creates a Vite and TypeScript project for the PlayCanvas Engine, React, or Web Components and includes a runnable starter scene.
@@ -84,7 +84,7 @@ npm create playcanvas@latest my-viewer -- -f react -s model-viewer
 
 ## Included PlayCanvas Skills
 
-New projects include [PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/) under `.claude/skills/` and `.agents/skills/`. Compatible AI coding agents can use them to follow PlayCanvas-specific workflows for application setup, assets, scenes, animation, lighting, effects, interfaces, and game state.
+New projects include [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) under `.claude/skills/` and `.agents/skills/`. Compatible AI coding agents can use them to follow PlayCanvas-specific workflows for application setup, assets, scenes, animation, lighting, effects, interfaces, and game state.
 
 Pass `--no-skills` only when the project does not use an AI coding agent or you manage the skills through another installation route.
 

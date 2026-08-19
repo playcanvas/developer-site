@@ -1,6 +1,6 @@
 ---
-title: PlayCanvasプロジェクトを作成する
-description: 実行可能なEngine、React、Web Componentsスターターから、ViteとTypeScriptを使用するPlayCanvasプロジェクトを作成します。
+title: create-playcanvasで始める
+description: create-playcanvasを使用して、実行可能なEngine、React、Web ComponentsスターターからViteとTypeScriptプロジェクトを始めます。
 ---
 
 [`create-playcanvas`](https://github.com/playcanvas/create-playcanvas)は、コードベースのPlayCanvasプロジェクト向け公式スキャフォールディングツールです。PlayCanvas Engine、React、またはWeb Components用のViteとTypeScriptプロジェクトを、実行可能なスターターシーンとともに作成します。
@@ -84,7 +84,7 @@ npm create playcanvas@latest my-viewer -- -f react -s model-viewer
 
 ## 含まれるPlayCanvas Skills
 
-新しいプロジェクトには、`.claude/skills/`と`.agents/skills/`に[PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/)が含まれます。対応するAIコーディングエージェントは、アプリケーションのセットアップ、アセット、シーン、アニメーション、ライティング、エフェクト、インターフェース、ゲーム状態に関するPlayCanvas固有のワークフローを利用できます。
+新しいプロジェクトには、`.claude/skills/`と`.agents/skills/`に[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。対応するAIコーディングエージェントは、アプリケーションのセットアップ、アセット、シーン、アニメーション、ライティング、エフェクト、インターフェース、ゲーム状態に関するPlayCanvas固有のワークフローを利用できます。
 
 プロジェクトでAIコーディングエージェントを使用しない場合、または別の方法でSkillsを管理する場合にのみ、`--no-skills`を指定してください。
 

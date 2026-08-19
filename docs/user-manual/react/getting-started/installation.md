@@ -6,13 +6,13 @@ description: Install PlayCanvas React with npm create playcanvas, TypeScript tem
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The recommended way to get started is to use the official [`create-playcanvas`](/user-manual/getting-started/create-playcanvas/) scaffolding tool and choose the React format:
+The recommended way to get started is to use the official [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/) scaffolding tool and choose the React format:
 
 ```bash
 npm create playcanvas@latest my-app -- -f react
 ```
 
-Choose one of the 12 runnable starters when prompted. The generated TypeScript project includes Vite, development and production scripts, and [PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/) for compatible AI coding agents.
+Choose one of the 12 runnable starters when prompted. The generated TypeScript project includes Vite, development and production scripts, and [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) for compatible AI coding agents.
 
 We recommend following [this guide](../../building-a-scene) to start building your first project.
 
@@ -48,4 +48,4 @@ Once installed, you can start using it in your project. As the next step, we rec
 
 ### Starter Templates
 
-Explore the complete [starter catalogue](/user-manual/getting-started/create-playcanvas/#choose-a-starter), or quickly spin up a project from the [StackBlitz template](https://stackblitz.com/edit/playcanvas-react-template?file=src%2FScene.tsx).
+Explore the complete [starter catalogue](/user-manual/getting-started/start-with-create-playcanvas/#choose-a-starter), or quickly spin up a project from the [StackBlitz template](https://stackblitz.com/edit/playcanvas-react-template?file=src%2FScene.tsx).

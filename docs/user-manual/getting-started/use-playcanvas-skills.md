@@ -1,6 +1,6 @@
 ---
-title: PlayCanvas Skills
-description: Give AI coding agents PlayCanvas-specific workflows for building and verifying Engine, React, and Web Components applications.
+title: Use PlayCanvas Skills
+description: Use PlayCanvas-specific AI coding workflows to build and verify Engine, React, and Web Components applications.
 ---
 
 [PlayCanvas Skills](https://github.com/playcanvas/skills) are portable instructions, references, and utilities for AI coding agents. They help an agent inspect the real project and installed packages, use the matching PlayCanvas authoring surface, and verify the result in a running application.
@@ -9,7 +9,7 @@ The skills support code-based applications built with the PlayCanvas Engine, Rea
 
 ## Start a New Project
 
-The quickest way to start is with [`create-playcanvas`](/user-manual/getting-started/create-playcanvas/):
+The quickest way to start is with [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/):
 
 ```sh
 npm create playcanvas@latest

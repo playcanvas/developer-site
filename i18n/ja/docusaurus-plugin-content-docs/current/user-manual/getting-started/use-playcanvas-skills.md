@@ -1,6 +1,6 @@
 ---
-title: PlayCanvas Skills
-description: AIコーディングエージェントに、Engine、React、Web Componentsアプリケーションを構築して検証するためのPlayCanvas固有のワークフローを提供します。
+title: PlayCanvas Skillsを使う
+description: PlayCanvas固有のAIコーディングワークフローを使用して、Engine、React、Web Componentsアプリケーションを構築し検証します。
 ---
 
 [PlayCanvas Skills](https://github.com/playcanvas/skills)は、AIコーディングエージェント向けのポータブルな指示、リファレンス、ユーティリティです。エージェントが実際のプロジェクトとインストール済みパッケージを確認し、対応するPlayCanvasオーサリング形式を使用して、実行中のアプリケーションで結果を検証できるようにします。
@@ -9,7 +9,7 @@ SkillsはPlayCanvas Engine、React、Web Componentsで構築されたコード�
 
 ## 新しいプロジェクトを始める
 
-最も簡単な方法は[`create-playcanvas`](/user-manual/getting-started/create-playcanvas/)を使用することです。
+最も簡単な方法は[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)を使用することです。
 
 ```sh
 npm create playcanvas@latest

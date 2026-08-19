@@ -23,13 +23,13 @@ PlayCanvas React へようこそ！ このセクションでは、最初の 3D R
 
 ## クイックスタート
 
-最も速く始める方法は[`create-playcanvas`](/user-manual/getting-started/create-playcanvas/)を使用することです。
+最も速く始める方法は[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)を使用することです。
 
 ```bash
 npm create playcanvas@latest my-app -- -f react
 ```
 
-プロンプトで12個の実行可能なスターターから1つを選択します。生成されたプロジェクトには、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/)が含まれます。ローカルにインストールせずに試したい場合は、[オンラインプレイグラウンド](https://playcanvas-react.vercel.app/new)も利用できます。
+プロンプトで12個の実行可能なスターターから1つを選択します。生成されたプロジェクトには、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。ローカルにインストールせずに試したい場合は、[オンラインプレイグラウンド](https://playcanvas-react.vercel.app/new)も利用できます。
 
 ## 次のステップ
 

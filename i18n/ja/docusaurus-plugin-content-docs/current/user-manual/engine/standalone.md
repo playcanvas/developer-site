@@ -22,13 +22,13 @@ PlayCanvas Engineでアプリケーションを構築する際に、エディタ
 
 :::tip[クイックスタート]
 
-ViteとTypeScriptを使用するプロジェクトでは、公式の[`create-playcanvas`](/user-manual/getting-started/create-playcanvas/)ツールを実行してEngine形式を選択します。
+ViteとTypeScriptを使用するプロジェクトでは、公式の[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)ツールを実行してEngine形式を選択します。
 
 ```bash
 npm create playcanvas@latest my-app -- -f engine
 ```
 
-生成されたプロジェクトには、実行可能なスターターと、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/)が含まれます。
+生成されたプロジェクトには、実行可能なスターターと、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。
 
 :::
 

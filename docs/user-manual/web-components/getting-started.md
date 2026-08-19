@@ -7,13 +7,13 @@ You can be rendering 3D in the browser inside a minute — no installs and no bu
 
 :::tip[Scaffold a project]
 
-For a Vite and TypeScript project, use [`create-playcanvas`](/user-manual/getting-started/create-playcanvas/) and choose the Web Components format:
+For a Vite and TypeScript project, use [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/) and choose the Web Components format:
 
 ```bash
 npm create playcanvas@latest my-app -- -f web-components
 ```
 
-The generated project includes one of 12 runnable starters and [PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/) for compatible AI coding agents. Use the CDN or npm setup below when integrating Web Components manually.
+The generated project includes one of 12 runnable starters and [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) for compatible AI coding agents. Use the CDN or npm setup below when integrating Web Components manually.
 
 :::
 

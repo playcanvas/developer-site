@@ -25,7 +25,7 @@ The clients have different plans and supported platforms. Use their official doc
 
 ## Add PlayCanvas Workflows
 
-[PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/) give compatible AI coding agents task-specific workflows for Engine, React, and Web Components applications. New projects created with [`create-playcanvas`](/user-manual/getting-started/create-playcanvas/) include them by default. For an existing project, run:
+[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) give compatible AI coding agents task-specific workflows for Engine, React, and Web Components applications. New projects created with [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/) include them by default. For an existing project, run:
 
 ```bash
 npx skills add playcanvas/skills

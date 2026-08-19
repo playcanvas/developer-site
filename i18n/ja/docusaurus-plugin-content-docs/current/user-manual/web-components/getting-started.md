@@ -7,13 +7,13 @@ description: "CDNからPlayCanvas Web Componentsを読み込むか、npmから�
 
 :::tip[プロジェクトを作成する]
 
-ViteとTypeScriptを使用するプロジェクトでは、[`create-playcanvas`](/user-manual/getting-started/create-playcanvas/)を実行してWeb Components形式を選択します。
+ViteとTypeScriptを使用するプロジェクトでは、[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)を実行してWeb Components形式を選択します。
 
 ```bash
 npm create playcanvas@latest my-app -- -f web-components
 ```
 
-生成されたプロジェクトには、12個の実行可能なスターターのうち1つと、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/)が含まれます。Web Componentsを手動で統合する場合は、以下のCDNまたはnpmセットアップを使用してください。
+生成されたプロジェクトには、12個の実行可能なスターターのうち1つと、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。Web Componentsを手動で統合する場合は、以下のCDNまたはnpmセットアップを使用してください。
 
 :::
 

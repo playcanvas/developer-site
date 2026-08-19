@@ -25,7 +25,7 @@ PlayCanvas Engine アプリケーションは通常の JavaScript または Type
 
 ## PlayCanvasワークフローを追加する
 
-[PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/)は、対応するAIコーディングエージェントにEngine、React、Web Componentsアプリケーション向けのタスク固有のワークフローを提供します。[`create-playcanvas`](/user-manual/getting-started/create-playcanvas/)で作成した新しいプロジェクトには、Skillsがデフォルトで含まれます。既存のプロジェクトでは、次を実行します。
+[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)は、対応するAIコーディングエージェントにEngine、React、Web Componentsアプリケーション向けのタスク固有のワークフローを提供します。[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)で作成した新しいプロジェクトには、Skillsがデフォルトで含まれます。既存のプロジェクトでは、次を実行します。
 
 ```bash
 npx skills add playcanvas/skills
