@@ -23,6 +23,16 @@ If your code is stored in a PlayCanvas Editor project, use the [VS Code Extensio
 
 The clients have different plans and supported platforms. Use their official documentation for current installation and availability details.
 
+## Add PlayCanvas Workflows
+
+[PlayCanvas Skills](/user-manual/getting-started/playcanvas-skills/) give compatible AI coding agents task-specific workflows for Engine, React, and Web Components applications. New projects created with [`create-playcanvas`](/user-manual/getting-started/create-playcanvas/) include them by default. For an existing project, run:
+
+```bash
+npx skills add playcanvas/skills
+```
+
+Start a new agent conversation after installation so the client discovers the skills.
+
 ## Provide Project Context
 
 Start the assistant in the repository root and install the project dependencies first. This gives it access to the PlayCanvas package, TypeScript declarations, scripts, and existing code patterns.

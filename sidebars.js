@@ -29,6 +29,8 @@ const sidebars = {
         id: 'user-manual/getting-started/index',
       },
       items: [
+        'user-manual/getting-started/create-playcanvas',
+        'user-manual/getting-started/playcanvas-skills',
         'user-manual/getting-started/community',
         'user-manual/getting-started/open-source',
         'user-manual/getting-started/made-with-playcanvas',

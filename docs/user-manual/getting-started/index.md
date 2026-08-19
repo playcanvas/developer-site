@@ -14,6 +14,10 @@ PlayCanvas is a collection of open-source products that you can use to build int
 ⚛️ [**PlayCanvas React**](../react) - Open source React-based declarative interface that wraps the PlayCanvas Engine  
 🧩 [**PlayCanvas Web Components**](../web-components) - Open source Web Components-based declarative interface that wraps the PlayCanvas Engine
 
+## Start a Code Project
+
+Use [`create-playcanvas`](create-playcanvas) to scaffold a Vite and TypeScript project for the Engine, React, or Web Components from one of 12 runnable starters. New projects include [PlayCanvas Skills](playcanvas-skills), which give compatible AI coding agents PlayCanvas-specific development and verification workflows.
+
 ## Which Product is Right For You?
 
 Every developer is different, so picking the right entry point to PlayCanvas will depend on your background and skills. Let us help you choose:
