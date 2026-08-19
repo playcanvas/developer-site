@@ -17,19 +17,19 @@ PlayCanvas React へようこそ！ このセクションでは、最初の 3D R
 
 始める前に、以下を確認してください:
 
-- **Node.js**（バージョン 18 以上）がシステムにインストールされている
+- **Node.js** 22.23.2以降がシステムにインストールされている
 - **React** の基本的な知識がある - React が初めての場合は [React ドキュメント](https://react.dev/learn) を参照してください
 - テキストエディタまたは IDE（[Visual Studio Code](https://code.visualstudio.com/) を推奨）
 
 ## クイックスタート
 
-最も速く始める方法はスキャフォールディングツールを使用することです:
+最も速く始める方法は[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)を使用することです。
 
 ```bash
-npm create playcanvas@latest -- -t react-ts
+npm create playcanvas@latest my-app -- -f react
 ```
 
-これにより、すべてがセットアップされたすぐに使えるプロジェクトが作成されます。ローカルにインストールせずに試したい場合は、[オンラインプレイグラウンド](https://playcanvas-react.vercel.app/new) もご利用いただけます。
+プロンプトで12個の実行可能なスターターから1つを選択します。生成されたプロジェクトには、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。ローカルにインストールせずに試したい場合は、[オンラインプレイグラウンド](https://playcanvas-react.vercel.app/new)も利用できます。
 
 ## 次のステップ
 

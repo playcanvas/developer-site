@@ -17,19 +17,19 @@ In this getting started guide, you'll learn how to:
 
 Before you begin, make sure you have:
 
-- **Node.js** (version 18 or higher) installed on your system
+- **Node.js** 22.23.2 or later installed on your system
 - Basic familiarity with **React** - if you're new to React, check out the [React documentation](https://react.dev/learn)
 - A text editor or IDE (we recommend [Visual Studio Code](https://code.visualstudio.com/))
 
 ## Quick Start
 
-The fastest way to get started is with our scaffolding tool:
+The fastest way to get started is with [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/):
 
 ```bash
-npm create playcanvas@latest -- -t react-ts
+npm create playcanvas@latest my-app -- -f react
 ```
 
-This creates a new project with everything set up and ready to go. You can also try our [online playground](https://playcanvas-react.vercel.app/new) to experiment without installing anything locally.
+Choose one of the 12 runnable starters when prompted. The generated project includes [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) for compatible AI coding agents. You can also try our [online playground](https://playcanvas-react.vercel.app/new) without installing anything locally.
 
 ## Next Steps
 

@@ -5,6 +5,18 @@ description: "Load PlayCanvas Web Components from a CDN or install from npm, set
 
 You can be rendering 3D in the browser inside a minute — no installs and no build step required. Load PlayCanvas Web Components straight from a CDN, or install the npm package if you are integrating them into an existing project.
 
+:::tip[Scaffold a project]
+
+For a Vite and TypeScript project, use [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/) and choose the Web Components format:
+
+```bash
+npm create playcanvas@latest my-app -- -f web-components
+```
+
+The generated project includes one of 12 runnable starters and [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) for compatible AI coding agents. Use the CDN or npm setup below when integrating Web Components manually.
+
+:::
+
 ## Installation
 
 You can load the library in one of two ways. If you're not sure which to pick, start with the CDN — you can switch to npm later without changing any of your markup:

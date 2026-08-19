@@ -14,6 +14,10 @@ PlayCanvasは、インタラクティブでグラフィカルなウェブアプ�
 ⚛️ [**PlayCanvas React**](../react) - PlayCanvas EngineをラップするオープンソースのReactベースの宣言型インターフェース  
 🧩 [**PlayCanvas Web Components**](../web-components) - PlayCanvas EngineをラップするオープンソースのWeb Componentsベースの宣言型インターフェース
 
+## コードプロジェクトを始める
+
+[`create-playcanvas`](start-with-create-playcanvas)を使用すると、12個の実行可能なスターターからEngine、React、またはWeb Components用のViteとTypeScriptプロジェクトを作成できます。新しいプロジェクトには、対応するAIコーディングエージェントにPlayCanvas固有の開発と検証ワークフローを提供する[PlayCanvas Skills](use-playcanvas-skills)が含まれます。
+
 ## どの製品があなたに適していますか？
 
 開発者はそれぞれ異なるため、PlayCanvasへの適切な入り口を選ぶことは、あなたの経験とスキルに依存します。私たちが選ぶお手伝いをします：

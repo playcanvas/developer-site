@@ -6,21 +6,15 @@ description: npm create playcanvas で PlayCanvas React をインストールす
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-公式の PlayCanvas スキャフォールディングツールを使用してプロンプトに従うのが推奨の方法です。
+公式の[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)スキャフォールディングツールを使用し、React形式を選択するのが推奨の方法です。
 
 ```bash
-npm create playcanvas@latest -- -t react-ts
+npm create playcanvas@latest my-app -- -f react
 ```
 
-これにより、すべてがセットアップされたすぐに使えるプロジェクトが作成されます。プロンプトに従えば、ブラウザで新しい PlayCanvas React プロジェクトが実行されます。
+プロンプトで12個の実行可能なスターターから1つを選択します。生成されたTypeScriptプロジェクトには、Vite、開発用とプロダクション用のスクリプト、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。
 
 最初のプロジェクトを構築するには [このガイド](../../building-a-scene) に従うことをお勧めします。
-
-:::note
-
-現在、React テンプレートの追加に取り組んでいます。現時点では **TypeScript** のみ利用可能です。
-
-:::
 
 ## 手動インストール
 
@@ -54,4 +48,4 @@ pnpm add @playcanvas/react playcanvas
 
 ### スターターテンプレート
 
-または、[テンプレートを直接](https://github.com/playcanvas/create-playcanvas/tree/main/templates) 取得するか、[StackBlitz テンプレート](https://stackblitz.com/edit/playcanvas-react-template?file=src%2FScene.tsx) からすぐにプロジェクトを立ち上げることもできます。
+[スターターカタログ](/user-manual/getting-started/start-with-create-playcanvas/#スターターを選択する)を確認するか、[StackBlitzテンプレート](https://stackblitz.com/edit/playcanvas-react-template?file=src%2FScene.tsx)からすぐにプロジェクトを起動できます。

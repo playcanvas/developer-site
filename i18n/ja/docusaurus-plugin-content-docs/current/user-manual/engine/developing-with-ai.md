@@ -23,6 +23,16 @@ PlayCanvas Engine アプリケーションは通常の JavaScript または Type
 
 クライアントごとにプランと対応プラットフォームが異なります。最新のインストール方法と利用条件については、各クライアントの公式ドキュメントを参照してください。
 
+## PlayCanvasワークフローを追加する
+
+[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)は、対応するAIコーディングエージェントにEngine、React、Web Componentsアプリケーション向けのタスク固有のワークフローを提供します。[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)で作成した新しいプロジェクトには、Skillsがデフォルトで含まれます。既存のプロジェクトでは、次を実行します。
+
+```bash
+npx skills add playcanvas/skills
+```
+
+インストール後に新しいエージェント会話を開始すると、クライアントがSkillsを検出します。
+
 ## プロジェクトのコンテキストを提供する
 
 アシスタントをリポジトリのルートで起動し、最初にプロジェクトの依存関係をインストールします。これにより、PlayCanvas パッケージ、TypeScript 宣言、スクリプト、既存のコードパターンを利用できます。
