@@ -12,7 +12,7 @@ description: "pc-layoutchild要素のリファレンス: レイアウトグル�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -29,7 +29,7 @@ description: "pc-layoutchild要素のリファレンス: レイアウトグル�
 
 </div>
 
-## 例
+## 例 {#example}
 
 `width-fitting="stretch"` を設定した水平グループ内の3つのアイテムです。中央のアイテムの `fit-width-proportion="1"` により、グループの余剰幅は中央だけが吸収します。最初のアイテムにも `1` を与えて分け合わせたり、中央に `max-width` を設定したりしてみましょう:
 
@@ -64,6 +64,6 @@ description: "pc-layoutchild要素のリファレンス: レイアウトグル�
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html)を使用して、`<pc-layoutchild>`要素をプログラムで作成および操作できます。

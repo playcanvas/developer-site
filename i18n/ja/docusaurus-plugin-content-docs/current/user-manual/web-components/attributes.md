@@ -5,7 +5,7 @@ description: "PlayCanvas Web Componentsの属性が値を解析する方法: デ
 
 すべてのPlayCanvas Web ComponentはHTML属性を通じて設定します。すべての属性は同じ規約に従うため、一度覚えてしまえば、どのタグがどう動作するかを予測できます。
 
-## 共通の契約
+## 共通の契約 {#the-shared-contract}
 
 すべての属性は、次の3つのルールに従います。
 
@@ -21,7 +21,7 @@ description: "PlayCanvas Web Componentsの属性が値を解析する方法: デ
 
 [`<pc-node>`](tags/pc-node.md)は、上の表の中央の行に対する唯一の例外です。その属性は読み込まれたモデル内のノードに対するオーバーライドであるため、属性が存在しない場合は、エンジンのデフォルト値ではなく、そのモデルがオーサリングされた値が復元されます。
 
-## Boolean
+## Boolean {#booleans}
 
 Boolean属性は、`"false"` 以外の値（値なしの属性の空の値を含む）で存在する場合は `true`、`"false"` が設定されている場合は `false` になります。
 
@@ -40,7 +40,7 @@ Boolean属性は、`"false"` 以外の値（値なしの属性の空の値を含
 <pc-scrollview horizontal="false"></pc-scrollview>
 ```
 
-## 数値
+## 数値 {#numbers}
 
 数値属性は、任意の有限数を受け付けます: 整数、小数、負の数、指数表記（`"1e3"`）。それ以外 — 単位付きの値（`fov="60deg"`）、空の値（`intensity=""`）、`"Infinity"` — は警告をログに出力し、デフォルト値が適用されます。
 
@@ -48,7 +48,7 @@ Boolean属性は、`"false"` 以外の値（値なしの属性の空の値を含
 <pc-camera fov="60" near-clip="0.1"></pc-camera>
 ```
 
-## 列挙型
+## 列挙型 {#enums}
 
 列挙型属性は、固定された名前のセットのうちの1つを受け付けます。無効な名前は、有効な名前を列挙する警告をログに出力し、デフォルト値が適用されます。
 
@@ -62,7 +62,7 @@ Invalid value 'bogus' for attribute 'scroll-mode'. Valid values: clamp, bounce, 
 <pc-camera tonemap="aces"></pc-camera>
 ```
 
-## ベクトル
+## ベクトル {#vectors}
 
 ベクトル属性は、スペース区切りの数値を取ります — 型のコンポーネント数とちょうど同じ個数です（Vector2は2つ、Vector3は3つ、Vector4は4つ）。コンポーネント間の空白の量は問いません。コンマは文法の一部ではなく、警告とともに拒否されます。
 
@@ -70,7 +70,7 @@ Invalid value 'bogus' for attribute 'scroll-mode'. Valid values: clamp, bounce, 
 <pc-entity position="0 1.5 0" scale="2 2 2"></pc-entity>
 ```
 
-## カラー
+## カラー {#colors}
 
 カラー属性は、次の3つのフォーマットのいずれかを受け付けます。
 
@@ -97,6 +97,6 @@ Invalid value 'bogus' for attribute 'scroll-mode'. Valid values: clamp, bounce, 
 <pc-scrollbar orientation="vertical" handle="#handle"></pc-scrollbar>
 ```
 
-## スクリプト属性
+## スクリプト属性 {#script-attributes}
 
 スクリプトは独自の属性を宣言するため、[`<pc-script>`](tags/pc-script.md) はこれらの規約を、各スクリプト属性の宣言された型に基づいて解析されるプロパティごとの属性で拡張します。詳細は[スクリプトで動作を追加する](scripting.md)を参照してください。

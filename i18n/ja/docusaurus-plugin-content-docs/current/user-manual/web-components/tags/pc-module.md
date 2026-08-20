@@ -11,7 +11,7 @@ description: "pc-module要素のリファレンス: glue・wasm・fallbackのパ
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -32,7 +32,7 @@ description: "pc-module要素のリファレンス: glue・wasm・fallbackのパ
 
 :::
 
-## 準備完了
+## 準備完了 {#readiness}
 
 この要素は非同期に初期化され、モジュールの読み込みが完了するとready状態になります。標準の`ready`イベントを発生させ、`whenReady('pc-module')`で待機できます（[プログラムによるアクセス](../programmatic-access.md)を参照）。ただし、直接待機する必要はほとんどありません。包含する`<pc-app>`は、グラフィックスデバイスを作成する前に、配下に宣言されたすべての`<pc-module>`を待機するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリだからです。
 
@@ -40,7 +40,7 @@ description: "pc-module要素のリファレンス: glue・wasm・fallbackのパ
 
 `name`のない`<pc-module>`は警告をログに出力し、決してready状態になりません — ただし、包含する`<pc-app>`の起動は妨げません。
 
-## 例
+## 例 {#example}
 
 `Ammo` 物理モジュールの読み込みです。ボックスが落下するのはモジュールが宣言されているからです — アプリはモジュールを待ってから起動するため、シーン開始時には物理が使用可能になっています。`<pc-module>` タグを削除して再実行してみましょう:
 
@@ -69,6 +69,6 @@ description: "pc-module要素のリファレンス: glue・wasm・fallbackのパ
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ModuleElement API](https://api.playcanvas.com/web-components/classes/ModuleElement.html)を使用して、`<pc-module>`要素をプログラムで作成および操作できます。

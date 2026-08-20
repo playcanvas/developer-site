@@ -11,7 +11,7 @@ description: "pc-render要素のリファレンス: プリミティブ形状（�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -31,7 +31,7 @@ glTF/GLBファイルから3Dモデルをレンダリングするには、代わ�
 
 :::
 
-## 例
+## 例 {#example}
 
 6種類のプリミティブ形状すべてです。任意の `type` を変更してみましょう。[`<pc-material>`](../pc-material) を定義すれば `material` も追加できます:
 
@@ -66,6 +66,6 @@ glTF/GLBファイルから3Dモデルをレンダリングするには、代わ�
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html)を使用して、`<pc-render>`要素をプログラムで作成および操作できます。

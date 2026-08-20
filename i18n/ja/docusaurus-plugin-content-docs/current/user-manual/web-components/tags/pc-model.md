@@ -64,7 +64,7 @@ console.log(anim.clips); // ['Walk', 'Idle']
 
 パッケージ名でインポートするには、ページのimport mapに`@playcanvas/web-components`が必要です。[プログラムによるアクセス](../programmatic-access.md)を参照してください。アニメーションを含まないコンテナはモデル名を含む警告をログに出力するため、コードを書かずにコンソールで同じことを確認できます。
 
-## 例
+## 例 {#example}
 
 モデルの内側にネストした[`<pc-anim>`](../pc-anim)が再生する、スケルタルアニメーション付きのGLBです。ドラッグで軌道回転できます:
 
@@ -104,7 +104,7 @@ console.log(anim.clips); // ['Walk', 'Idle']
 </pc-model>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html)を使用して、`<pc-model>`要素をプログラムで作成および操作できます。
 

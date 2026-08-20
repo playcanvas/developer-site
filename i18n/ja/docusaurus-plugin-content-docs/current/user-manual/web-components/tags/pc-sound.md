@@ -11,7 +11,7 @@ description: "pc-sound要素のリファレンス: 位置オーディオまた�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -29,7 +29,7 @@ description: "pc-sound要素のリファレンス: 位置オーディオまた�
 
 </div>
 
-## 例
+## 例 {#example}
 
 同じクリップを再生する2つのスロットです — 2つ目は `pitch` が半分です。ブラウザはユーザー操作の後にしかオーディオを許可しないため、再生はアプリに重ねた通常のHTMLボタンに配線しています。`pitch` や `volume` の値を編集してみましょう:
 
@@ -70,6 +70,6 @@ description: "pc-sound要素のリファレンス: 位置オーディオまた�
 </script>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html)を使用して、`<pc-sound>`要素をプログラムで作成および操作できます。

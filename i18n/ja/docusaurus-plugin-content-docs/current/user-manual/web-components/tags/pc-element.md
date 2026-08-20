@@ -17,7 +17,7 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -53,7 +53,7 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 
 </div>
 
-## 例
+## 例 {#example}
 
 パネルとしての `image` 要素の上に、2つの `text` 要素を重ねています。2つ目は `enable-markup` によるインラインの色付けを使用しています。`text`、`font-size`、パネルの `color` を編集してみましょう:
 
@@ -84,6 +84,6 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ElementComponentElement API](https://api.playcanvas.com/web-components/classes/ElementComponentElement.html)を使用して、`<pc-element>`要素をプログラムで作成および操作できます。

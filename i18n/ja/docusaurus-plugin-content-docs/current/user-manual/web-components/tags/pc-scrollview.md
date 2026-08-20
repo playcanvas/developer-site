@@ -13,7 +13,7 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -36,7 +36,7 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
 
 </div>
 
-## 例
+## 例 {#example}
 
 ストライプのコンテンツを、マウスホイール、ドラッグ、またはスクロールバーでスクロールしてみましょう。ビューポートの `mask` がコンテンツをクリップします。`scroll-mode="clamp"` (バウンスなし) や、より大きなコンテンツの `height` も試してみましょう:
 
@@ -92,6 +92,6 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html)を使用して、`<pc-scrollview>`要素をプログラムで作成および操作できます。

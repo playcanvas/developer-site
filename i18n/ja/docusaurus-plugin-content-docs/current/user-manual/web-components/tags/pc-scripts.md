@@ -12,7 +12,7 @@ description: "pc-scripts要素のリファレンス: 複数のpc-script子をま
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -22,7 +22,7 @@ description: "pc-scripts要素のリファレンス: 複数のpc-script子をま
 
 </div>
 
-## 例
+## 例 {#example}
 
 2つのスクリプトを保持する1つのスクリプトコンポーネントです — `rotate` がキューブを回転させ、`pulse` がスケールを脈動させます。どちらかの `<pc-script>` タグを削除したり、`<pc-scripts>` コンポーネントに `enabled="false"` を設定して両方を無効にしたりしてみましょう:
 
@@ -71,6 +71,6 @@ description: "pc-scripts要素のリファレンス: 複数のpc-script子をま
 </script>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html)を使用して、`<pc-scripts>`要素をプログラムで作成および操作できます。

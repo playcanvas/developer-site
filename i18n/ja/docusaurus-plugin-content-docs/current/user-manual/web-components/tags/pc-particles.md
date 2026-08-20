@@ -11,7 +11,7 @@ description: "pc-particles要素のリファレンス: マークアップでパ�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -22,7 +22,7 @@ description: "pc-particles要素のリファレンス: マークアップでパ�
 
 </div>
 
-## 例
+## 例 {#example}
 
 まず、パーティクルシステムをJSON形式で定義します。
 
@@ -81,6 +81,6 @@ description: "pc-particles要素のリファレンス: マークアップでパ�
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html)を使用して、`<pc-particles>`要素をプログラムで作成および操作できます。

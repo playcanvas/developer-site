@@ -11,7 +11,7 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -40,7 +40,7 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 
 </div>
 
-## 例
+## 例 {#example}
 
 ライトの `color`、`intensity`、`type` の値を編集して、シーンが更新される様子を確認してみましょう:
 
@@ -72,6 +72,6 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html)を使用して、`<pc-light>`要素をプログラムで作成および操作できます。

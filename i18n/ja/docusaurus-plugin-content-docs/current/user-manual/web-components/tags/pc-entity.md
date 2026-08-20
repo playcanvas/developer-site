@@ -13,7 +13,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -28,7 +28,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 </div>
 
-## イベント
+## イベント {#events}
 
 これらのイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用するか、このインターフェースの`oneventname`プロパティにイベントリスナーを割り当てることでリッスンできます。
 
@@ -51,7 +51,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 </pc-entity>
 ```
 
-## 例
+## 例 {#example}
 
 エンティティのトランスフォームは階層を通じて合成されます。小さいキューブは大きいキューブの*子*なので、大きいキューブにポインタを乗せると両方が一緒に動きます。親の `rotation` や `scale`、インラインの `onpointer*` ハンドラを編集してみましょう:
 
@@ -76,6 +76,6 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html)を使用して、`<pc-entity>`要素をプログラムで作成および操作できます。

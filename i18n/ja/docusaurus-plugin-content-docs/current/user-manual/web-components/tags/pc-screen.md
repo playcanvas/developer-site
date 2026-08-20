@@ -11,7 +11,7 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 
 :::
 
-## 属性
+## 属性 {#attributes}
 
 <div className="attribute-table">
 
@@ -33,7 +33,7 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 
 :::
 
-## 例
+## 例 {#example}
 
 テキスト要素をホストするスクリーンスペースのスクリーンです。`scale-mode="blend"` により、キャンバスのリサイズに合わせてUIがスケールします — フルスクリーンボタンで確認したり、`text` を編集したりしてみましょう:
 
@@ -58,6 +58,6 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 </pc-app>
 ```
 
-## JavaScriptインターフェース
+## JavaScriptインターフェース {#javascript-interface}
 
 [ScreenComponentElement API](https://api.playcanvas.com/web-components/classes/ScreenComponentElement.html)を使用して、`<pc-screen>`要素をプログラムで作成および操作できます。
