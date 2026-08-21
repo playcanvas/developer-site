@@ -99,14 +99,24 @@ The main advantage of using manual subdivision is the level of detail that can b
 
 All lights that cast shadows use the same shadow type. This allows you to globally set the shadow softness and related performance impact. The supported options are PCF1, PCF3, and PCF5. For more information, see the [Shadows](/user-manual/graphics/lighting/shadows/#shadow-types) page.
 
-## Limitations {#limitations}
+## Maximum Number of Lights {#maximum-number-of-lights}
 
-Internally, a light index is stored using 8 bits, so the maximum number of visible lights at any frame is 254 (one index is reserved). In the future, there may be an additional option to use 16 bits to store the index and increase the limit.
+Internally, a light index is stored using 8 bits, so by default the maximum number of visible lights at any frame is 255. Lights over this limit are ignored, and a warning is reported to the console.
+
+From Engine v2.22, this limit can be raised using the [maxLights of LightingParams](https://api.playcanvas.com/engine/classes/LightingParams.html#maxlights). Values over 255 store the light index using 16 bits instead, which doubles the size of the texture used to store the 3D grid. The limit is additionally capped by the maximum texture size supported by the device.
+
+```javascript
+// Assuming being in a script type
+this.app.scene.lighting.maxLights = 4096;
+```
+
+This is not available in the Editor settings and needs to be set in code.
 
 ## Performance Considerations {#performance-considerations}
 
 - **Cell subdivisions** should be as small as possible, since large cell subdivisions lead to larger CPU usage when the grid is filled by the lights each frame. This should be optimized for each scene, depending on its lighting complexity. Optimally, you should have enough cells to limit the overlap of lights and the number of lights in each cell.
 - The **Max Lights Per Cell** should be as small as possible, since this limits the size of the texture used to store the 3D grid, which needs to be updated every frame.
+- The **maximum number of lights** should be kept as low as the scene allows, as a larger value has a per frame cost.
 - If an application using Clustered Lighting **runs slowly** on older mobile devices, consider globally turning off features like Shadows or Cookies.
 
 ## Render Debug Grid {#render-debug-grid}
