@@ -19,6 +19,48 @@ material.update();
 
 This gives the smoothest result and supports any opacity value, but it is order dependent. Blended geometry is drawn in the transparent pass, after opaque geometry, and is sorted back to front per layer according to [`Layer#transparentSortMode`](https://api.playcanvas.com/engine/classes/Layer.html#transparentsortmode). Sorting happens per mesh instance, so it cannot resolve a single mesh that overlaps itself - a common source of artifacts on foliage, hair and glass. Blended materials also normally disable depth writes, so they do not occlude each other.
 
+### Blend State
+
+`blendType` is a convenient shorthand for a handful of common configurations. For full control, assign a [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html) to [`Material#blendState`](https://api.playcanvas.com/engine/classes/Material.html#blendstate), which specifies the blend equation and the source and destination factors for color and alpha independently, along with a per-channel color write mask. Assigning a blend state overwrites anything previously set through `blendType`.
+
+```javascript
+// equivalent to BLEND_NORMAL, written out in full
+material.blendState = new pc.BlendState(
+    true,
+    pc.BLENDEQUATION_ADD, pc.BLENDMODE_SRC_ALPHA, pc.BLENDMODE_ONE_MINUS_SRC_ALPHA
+);
+material.update();
+```
+
+Several ready-made states are available as constants - `BlendState.NOBLEND`, `BlendState.ALPHABLEND`, `BlendState.ADDBLEND` and `BlendState.NOWRITE`. For best performance, create the blend states you need up front and assign them as required, rather than modifying a state after creation.
+
+Note that the getter returns a read-only view, so the setter must be used to change blending - this is what keeps the material's transparency and sorting state in sync:
+
+```javascript
+const state = material.blendState.clone();
+state.setColorWrite(true, true, true, false);
+material.blendState = state;
+material.update();
+```
+
+#### Per-attachment blending
+
+By default a blend state applies to every color attachment of the render target. When rendering to [Multiple Render Targets](/user-manual/graphics/advanced-rendering/multiple-render-targets), individual attachments can be given their own blend state and write mask using [`BlendState#setAttachment`](https://api.playcanvas.com/engine/classes/BlendState.html#setattachment), for attachment indices 1 to 7. Attachment 0 is configured through the other properties of the class, and any attachment without an independent state follows attachment 0.
+
+```javascript
+// attachment 1 keeps the blending of attachment 0, but writes no channels
+const state = material.blendState.clone();
+const noWrite = state.clone();
+noWrite.setColorWrite(false, false, false, false);
+state.setAttachment(1, noWrite);
+material.blendState = state;
+material.update();
+```
+
+This requires [`GraphicsDevice#supportsIndependentBlending`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindependentblending). On devices without support, the state of attachment 0 is used for all attachments.
+
+Using one of the secondary source blend factors in a blend state additionally enables dual-source blending, which lets a fragment shader output a second color used as a blend factor.
+
 ## Alpha Test
 
 [`alphaTest`](https://api.playcanvas.com/engine/classes/Material.html#alphatest) discards any fragment whose opacity falls below a threshold.

@@ -19,6 +19,48 @@ material.update();
 
 これは最も滑らかな結果が得られ、任意の不透明度の値をサポートしますが、描画順に依存します。ブレンドされるジオメトリは不透明なジオメトリの後の透明パスで描画され、[`Layer#transparentSortMode`](https://api.playcanvas.com/engine/classes/Layer.html#transparentsortmode)に従ってレイヤーごとに奥から手前へソートされます。ソートはメッシュインスタンス単位で行われるため、自身と重なる単一のメッシュを正しく解決することはできません。これは、植生、髪、ガラスでアーティファクトが発生する一般的な原因です。また、ブレンドされるマテリアルは通常デプス書き込みを無効にするため、互いを遮蔽しません。
 
+### ブレンドステート
+
+`blendType`は、よく使われるいくつかの設定に対する便利な短縮形です。完全に制御するには、[`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html)を[`Material#blendState`](https://api.playcanvas.com/engine/classes/Material.html#blendstate)に割り当てます。BlendStateでは、ブレンド式と、カラーおよびアルファのソース係数とデスティネーション係数をそれぞれ個別に指定でき、さらにチャンネルごとのカラー書き込みマスクも指定できます。ブレンドステートを割り当てると、`blendType`で以前に設定した内容は上書きされます。
+
+```javascript
+// BLEND_NORMAL と同等の設定を明示的に記述したもの
+material.blendState = new pc.BlendState(
+    true,
+    pc.BLENDEQUATION_ADD, pc.BLENDMODE_SRC_ALPHA, pc.BLENDMODE_ONE_MINUS_SRC_ALPHA
+);
+material.update();
+```
+
+よく使われるステートは定数として用意されています（`BlendState.NOBLEND`、`BlendState.ALPHABLEND`、`BlendState.ADDBLEND`、`BlendState.NOWRITE`）。パフォーマンスを最大限に高めるには、作成後にステートを変更するのではなく、必要なブレンドステートを事前に作成して必要に応じて割り当ててください。
+
+なお、ゲッターは読み取り専用のビューを返すため、ブレンディングを変更するにはセッターを使用する必要があります。これにより、マテリアルの透明度とソートの状態が同期されます。
+
+```javascript
+const state = material.blendState.clone();
+state.setColorWrite(true, true, true, false);
+material.blendState = state;
+material.update();
+```
+
+#### カラーアタッチメントごとのブレンディング
+
+ブレンドステートは、デフォルトではレンダーターゲットのすべてのカラーアタッチメントに適用されます。[複数のレンダーターゲット](/user-manual/graphics/advanced-rendering/multiple-render-targets)にレンダリングする場合、[`BlendState#setAttachment`](https://api.playcanvas.com/engine/classes/BlendState.html#setattachment)を使用して、インデックス1から7のアタッチメントに個別のブレンドステートと書き込みマスクを設定できます。アタッチメント0はクラスの他のプロパティで設定し、個別のステートが設定されていないアタッチメントはアタッチメント0に従います。
+
+```javascript
+// アタッチメント1はアタッチメント0のブレンディングを維持しますが、どのチャンネルも書き込みません
+const state = material.blendState.clone();
+const noWrite = state.clone();
+noWrite.setColorWrite(false, false, false, false);
+state.setAttachment(1, noWrite);
+material.blendState = state;
+material.update();
+```
+
+これには[`GraphicsDevice#supportsIndependentBlending`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindependentblending)が必要です。サポートされていないデバイスでは、アタッチメント0のステートがすべてのアタッチメントに使用されます。
+
+ブレンドステートで2つ目のソースを参照する係数を使用すると、デュアルソースブレンディングも有効になります。これにより、フラグメントシェーダーがブレンド係数として使用される2つ目のカラーを出力できます。
+
 ## アルファテスト
 
 [`alphaTest`](https://api.playcanvas.com/engine/classes/Material.html#alphatest)は、不透明度がしきい値を下回るフラグメントを破棄します。
