@@ -39,6 +39,25 @@ A spot light lights an object like this:
 
 ![Spot light](/img/user-manual/graphics/lighting/lights/spot.jpg)
 
+## Light Direction {#light-direction}
+
+Directional and spot lights are aimed by rotating their entity: both shine along the entity's **negative Y axis**, so an unrotated light shines straight down. Omni lights emit in all directions, so their rotation has no effect.
+
+```javascript
+// an unrotated light shines straight down
+light.setEulerAngles(0, 0, 0);
+
+// tilted 45 degrees, it shines down and towards negative z
+light.setEulerAngles(45, 0, 0);
+```
+
+Note that [`lookAt`](https://api.playcanvas.com/engine/classes/GraphNode.html#lookat) orients an entity's negative Z axis. That aims a camera, but not a light — follow it with a quarter turn to bring the negative Y axis onto the target:
+
+```javascript
+light.lookAt(target.getPosition());
+light.rotateLocal(90, 0, 0);
+```
+
 ## Light Shapes {#light-shapes}
 
 There are four light source shapes:

@@ -39,6 +39,25 @@ PlayCanvasには3つの種類の光源があります。
 
 ![Spot light](/img/user-manual/graphics/lighting/lights/spot.jpg)
 
+## Light Direction {#light-direction}
+
+ディレクショナルライトとスポットライトは、エンティティを回転させることで向きを決めます。どちらもエンティティの**負のY軸**の方向に光を発するため、回転していないライトは真下を照らします。オムニライトはすべての方向に光を発するため、回転は影響しません。
+
+```javascript
+// 回転していないライトは真下を照らします
+light.setEulerAngles(0, 0, 0);
+
+// 45度傾けると、下方向かつ負のz方向を照らします
+light.setEulerAngles(45, 0, 0);
+```
+
+なお、[`lookAt`](https://api.playcanvas.com/engine/classes/GraphNode.html#lookat)はエンティティの負のZ軸を向けます。これはカメラの向きを合わせるには適していますが、ライトには適していません。負のY軸を対象に向けるには、続けて90度回転させてください。
+
+```javascript
+light.lookAt(target.getPosition());
+light.rotateLocal(90, 0, 0);
+```
+
 ## Light Shapes {#light-shapes}
 
 光源の形状には4つのタイプがあります。
