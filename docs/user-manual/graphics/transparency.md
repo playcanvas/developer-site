@@ -59,7 +59,7 @@ material.update();
 
 This requires [`GraphicsDevice#supportsIndependentBlending`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindependentblending). On devices without support, the state of attachment 0 is used for all attachments.
 
-Using one of the secondary source blend factors in a blend state additionally enables dual-source blending, which lets a fragment shader output a second color used as a blend factor.
+Using one of the secondary source blend factors in a blend state additionally enables [Dual-Source Blending](/user-manual/graphics/advanced-rendering/dual-source-blending), which lets a fragment shader output a second color used as a blend factor.
 
 ## Alpha Test
 

@@ -59,7 +59,7 @@ material.update();
 
 これには[`GraphicsDevice#supportsIndependentBlending`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindependentblending)が必要です。サポートされていないデバイスでは、アタッチメント0のステートがすべてのアタッチメントに使用されます。
 
-ブレンドステートで2つ目のソースを参照する係数を使用すると、デュアルソースブレンディングも有効になります。これにより、フラグメントシェーダーがブレンド係数として使用される2つ目のカラーを出力できます。
+ブレンドステートで2つ目のソースを参照する係数を使用すると、[デュアルソースブレンディング](/user-manual/graphics/advanced-rendering/dual-source-blending)も有効になります。これにより、フラグメントシェーダーがブレンド係数として使用される2つ目のカラーを出力できます。
 
 ## アルファテスト
 

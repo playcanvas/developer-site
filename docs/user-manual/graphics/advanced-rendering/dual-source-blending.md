@@ -39,7 +39,7 @@ Only use these constants when `device.supportsDualSourceBlending` is true.
 
 ## StandardMaterial
 
-Dual-source blending is enabled automatically when a material's [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html) uses one of the secondary source factors. There is no separate material setting.
+Dual-source blending is enabled automatically when a material's [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html) uses one of the secondary source factors. There is no separate material setting. See [Transparency](/user-manual/graphics/transparency) for how blend state fits together with the other transparency options.
 
 First, override the `outputPS` chunk to write the primary and secondary fragment outputs. Supply both GLSL and WGSL versions when supporting both graphics backends:
 

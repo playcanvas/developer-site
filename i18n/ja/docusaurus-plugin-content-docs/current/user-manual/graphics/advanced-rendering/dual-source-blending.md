@@ -39,7 +39,7 @@ if (!device.supportsDualSourceBlending) {
 
 ## StandardMaterial
 
-マテリアルの [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html) が 2 つ目のソースを参照する係数を使用すると、デュアルソースブレンディングは自動的に有効になります。マテリアルに個別の設定はありません。
+マテリアルの [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html) が 2 つ目のソースを参照する係数を使用すると、デュアルソースブレンディングは自動的に有効になります。マテリアルに個別の設定はありません。ブレンドステートが他の透明度オプションとどのように関係するかについては、[透明度](/user-manual/graphics/transparency) を参照してください。
 
 最初に、`outputPS` チャンクをオーバーライドして、1 つ目と 2 つ目のフラグメント出力を書き込みます。両方のグラフィックスバックエンドをサポートする場合は、GLSL 版と WGSL 版の両方を指定します。
 
