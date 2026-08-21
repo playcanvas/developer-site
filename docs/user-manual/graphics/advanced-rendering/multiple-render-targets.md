@@ -12,6 +12,7 @@ Multiple render targets have the following restrictions:
 - All color attachments of a multiple render target must have the same width and height.
 - All color attachments are cleared to the same value, specified using [`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor).
 - All color attachments use the same write mask and alpha blend mode, as specified using [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html).
+- [Dual-source blending](/user-manual/graphics/advanced-rendering/dual-source-blending) cannot be used with MRT because it requires exactly one color attachment.
 
 ## How to use MRT
 

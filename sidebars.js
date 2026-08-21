@@ -800,6 +800,7 @@ const sidebars = {
             'user-manual/graphics/physical-rendering/image-based-lighting',
           ],
         },
+        'user-manual/graphics/transparency',
         {
           type: 'category',
           label: 'Linear Workflow',
@@ -883,6 +884,7 @@ const sidebars = {
             'user-manual/graphics/advanced-rendering/hardware-instancing',
             'user-manual/graphics/advanced-rendering/multi-draw',
             'user-manual/graphics/advanced-rendering/multiple-render-targets',
+            'user-manual/graphics/advanced-rendering/dual-source-blending',
             'user-manual/graphics/advanced-rendering/indirect-drawing',
             'user-manual/graphics/advanced-rendering/html-in-canvas',
           ],
