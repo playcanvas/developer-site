@@ -800,6 +800,7 @@ const sidebars = {
             'user-manual/graphics/physical-rendering/image-based-lighting',
           ],
         },
+        'user-manual/graphics/transparency',
         {
           type: 'category',
           label: 'Linear Workflow',
