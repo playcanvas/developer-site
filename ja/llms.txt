@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
 Total Documents: 492
-Generated: 2026-08-21
+Generated: 2026-08-22
 
 ## Instructions for Large Language Models
 
@@ -150,7 +150,7 @@ Hooks (e.g. `useModel`, `useEnvAtlas`) are imported from `@playcanvas/react/hook
 </pc-app>
 ```
 
-Attribute values follow HTML conventions: kebab-case names, space-separated vectors and colors (`position="0 1 -2"`, `diffuse="#ff0000"` or named colors), and bare boolean attributes (`cast-shadows`). App-level resources (`<pc-asset>`, `<pc-material>`, `<pc-module>`) are declared as direct children of `<pc-app>` and referenced by `id`. Custom scripts attach to an entity via a `<pc-scripts>` element wrapping one `<pc-script>` element per script. From JavaScript, `import { whenReady } from '@playcanvas/web-components'` and `await whenReady('pc-app')` to reach engine objects once elements are ready.
+Attribute values follow HTML conventions: kebab-case names, space-separated vectors and colors (`position="0 1 -2"`, `diffuse="#ff0000"` or named colors), and bare boolean attributes (`cast-shadows`). App-level resources (`<pc-asset>`, `<pc-material>`, `<pc-wasm>`) are declared as direct children of `<pc-app>` and referenced by `id`. Custom scripts attach to an entity via a `<pc-script>` element wrapping one `<pc-script-instance>` element per script. Tag names are kebab-cased, and a component tag states the engine component it adds: drop the `pc-` prefix and the hyphens to get the component id, so `<pc-rigid-body>` adds `entity.rigidbody` and `<pc-audio-listener>` adds `entity.audiolistener`. A component attaches to the nearest enclosing `<pc-entity>`, `<pc-model>` or `<pc-node>`. From JavaScript, `import { whenReady } from '@playcanvas/web-components'` and `await whenReady('pc-app')` to reach engine objects once elements are ready.
 
 ### 6. Versions
 
@@ -422,12 +422,13 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Getting Started](https://developer.playcanvas.com/user-manual/web-components/getting-started/): Load PlayCanvas Web Components from a CDN or install from npm, set up the import map, and render your first 3D scene in the browser.
 - [Loading Models](https://developer.playcanvas.com/user-manual/web-components/loading-models/): Load a glTF or GLB model with pc-asset and pc-model, discover its hierarchy with hierarchy(), then reach inside it with pc-node to hide, re-pose, reskin and extend what the artist exported.
 - [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access/): Drive the engine from JavaScript: await element initialization with whenReady, access engine objects like AppBase and Entity, and target specific apps.
-- [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting/): Attach PlayCanvas Script classes to entities with pc-module and pc-script tags, load ES modules, and wire behaviors into Web Components.
+- [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting/): Attach PlayCanvas Script classes to entities with pc-wasm and pc-script-instance tags, load ES modules, and wire behaviors into Web Components.
 - [Tag Reference](https://developer.playcanvas.com/user-manual/web-components/tags/): Alphabetical index of PlayCanvas Web Component tags with short summaries linking to full attribute and usage documentation for each element.
 - [<pc-anim-clip>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim-clip/): Reference for the pc-anim-clip element: declare one named animation clip on a pc-anim component, from the enclosing model's container or from a separate container, animation or animclip asset.
 - [<pc-anim>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim/): Reference for the pc-anim element: play, switch and cross-fade animation clips over an entity hierarchy, taken from a model's own animations or from declared pc-anim-clip children.
 - [<pc-app>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app/): Reference for the pc-app element: initializes the PlayCanvas Application, graphics options, and root container for scenes and entities.
 - [<pc-asset>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset/): Reference for the pc-asset element: declare assets to load by URL, type inference from file extensions, lazy loading, and how other tags reference them by id.
+- [<pc-audio-listener>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener/): Reference for the pc-audio-listener element: audio listener component defining the point from which positional sounds are heard.
 - [<pc-button>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button/): Reference for the pc-button element: interactive button component with tint and sprite transitions for hover, pressed, and inactive states.
 - [<pc-camera>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera/): Reference for the pc-camera element: projection, field of view, clipping planes, clear options, and tone mapping mapped to the engine camera component.
 - [<pc-collision>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision/): Reference for the pc-collision element: box, sphere, capsule, cone, cylinder, and mesh collision shapes to pair with rigid bodies.
@@ -435,26 +436,25 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-entity>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity/): Reference for the pc-entity element: names, transforms, hierarchy rules, and which child component tags are valid under an entity.
 - [<pc-gsplat>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat/): Reference for the pc-gsplat element: render Gaussian splat assets with attributes for the splat data source, shadows, and LOD tuning.
 - [<pc-joint>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-joint/): Reference for the pc-joint element: constrain two rigid bodies together with a fixed, ball, hinge, slider or 6dof physics joint, with limits, motors, springs and a break impulse.
-- [<pc-layoutchild>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutchild/): Reference for the pc-layoutchild element: per-child layout constraints (min/max size and fit proportions) within a layout group.
-- [<pc-layoutgroup>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutgroup/): Reference for the pc-layoutgroup element: arranges child elements in horizontal or vertical layouts with spacing, padding, alignment, and fitting.
+- [<pc-layout-child>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child/): Reference for the pc-layout-child element: per-child layout constraints (min/max size and fit proportions) within a layout group.
+- [<pc-layout-group>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group/): Reference for the pc-layout-group element: arranges child elements in horizontal or vertical layouts with spacing, padding, alignment, and fitting.
 - [<pc-light>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light/): Reference for the pc-light element: light types, color, intensity, shadows, and attributes for directional, spot, and omni lights.
-- [<pc-listener>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-listener/): Reference for the pc-listener element: audio listener component defining the point from which positional sounds are heard.
 - [<pc-material>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material/): Reference for the pc-material element: a physically based standard material with color, metalness, gloss, opacity and per-attribute texture map slots.
-- [<pc-model>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/): Reference for the pc-model element: instantiate a 3D model from a GLB container asset within a scene or entity.
-- [<pc-module>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-module/): Reference for the pc-module element: load WebAssembly modules such as Ammo, Basis, and DracoDecoderModule from glue, wasm, and fallback paths.
+- [<pc-model>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/): Reference for the pc-model element: instantiate a 3D model from a GLB container asset, and host components and child entities on the stable entity it creates.
 - [<pc-node>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node/): Reference for the pc-node element: bind to a node inside a loaded model's hierarchy to override its transform, enabled state and tags, add components to it, or attach new content under it.
-- [<pc-particles>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-particles/): Reference for the pc-particles element: configure particle emitters, textures, blending, and simulation parameters in markup.
+- [<pc-particle-system>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-particle-system/): Reference for the pc-particle-system element: configure particle emitters, textures, blending, and simulation parameters in markup.
 - [<pc-render>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render/): Reference for the pc-render element: render primitive shapes (box, sphere, capsule, cone, cylinder, plane) with a material and shadow settings.
-- [<pc-rigidbody>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigidbody/): Reference for the pc-rigidbody element: rigid body type, mass, friction, restitution, and integration with collision components.
+- [<pc-rigid-body>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body/): Reference for the pc-rigid-body element: rigid body type, mass, friction, restitution, and integration with collision components.
 - [<pc-scene>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene/): Reference for the pc-scene element: scene container inside pc-app, ambient settings, and where entities are mounted for rendering.
 - [<pc-screen>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen/): Reference for the pc-screen element: 2D screen space for UI elements, resolution, scale modes, and child pc-element hierarchies.
-- [<pc-script>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/): Reference for the pc-script element: attach a single script class to an entity, configure script attributes per-property or as JSON.
-- [<pc-scripts>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scripts/): Reference for the pc-scripts element: script component container grouping multiple pc-script children and shared script settings.
+- [<pc-script-instance>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script-instance/): Reference for the pc-script-instance element: attach a single script class to an entity, configure script attributes per-property or as JSON.
+- [<pc-script>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/): Reference for the pc-script element: script component container grouping multiple pc-script-instance children and shared script settings.
+- [<pc-scroll-view>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view/): Reference for the pc-scroll-view element: scrollable viewport with content, scrollbars, mouse-wheel support, and bounce/clamp/infinite modes.
 - [<pc-scrollbar>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar/): Reference for the pc-scrollbar element: draggable scrollbar with orientation, handle size, and value, used to drive a scroll view.
-- [<pc-scrollview>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollview/): Reference for the pc-scrollview element: scrollable viewport with content, scrollbars, mouse-wheel support, and bounce/clamp/infinite modes.
 - [<pc-sky>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky/): Reference for the pc-sky element: skybox from a texture asset with box, dome, or infinite projection, optional scene lighting, and rotation.
-- [<pc-sound>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/): Reference for the pc-sound element: positional or non-positional audio clips, volume, pitch, autoplay rules, and asset references.
-- [<pc-sounds>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sounds/): Reference for the pc-sounds element: sound component container that groups pc-sound slots and shared audio settings on an entity.
+- [<pc-sound-slot>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot/): Reference for the pc-sound-slot element: positional or non-positional audio clips, volume, pitch, autoplay rules, and asset references.
+- [<pc-sound>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/): Reference for the pc-sound element: sound component container that groups pc-sound-slot slots and shared audio settings on an entity.
+- [<pc-wasm>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm/): Reference for the pc-wasm element: load WebAssembly modules such as Ammo, Basis, and DracoDecoderModule from glue, wasm, and fallback paths.
 - [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr/): WebXR setup for Web Components: load the engine's XR scripts, build a camera rig with xrSession, and start sessions by firing app events.
 
 ### SuperSplat

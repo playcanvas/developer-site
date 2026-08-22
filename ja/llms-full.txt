@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 492
-Generated: 2026-08-21
+Generated: 2026-08-22
 
 ================================================================================
 
@@ -14840,7 +14840,7 @@ We've positioned the camera 2.5 units down the Z axis. By default, a camera look
 
 ## Adding Camera Controls
 
-Now let's make the camera interactive by adding the camera controls script using the [`<pc-scripts>`](/user-manual/web-components/tags/pc-scripts) and [`<pc-script>`](/user-manual/web-components/tags/pc-script) elements.
+Now let's make the camera interactive by adding the camera controls script using the [`<pc-script>`](/user-manual/web-components/tags/pc-script) and [`<pc-script-instance>`](/user-manual/web-components/tags/pc-script-instance) elements.
 
 ```html {7-9}
 <pc-app antialias="false" max-pixel-ratio="1">
@@ -14849,9 +14849,9 @@ Now let's make the camera interactive by adding the camera controls script using
     <pc-scene>
         <pc-entity position="0 0 2.5">
             <pc-camera></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls"></pc-script-instance>
+            </pc-script>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -14874,9 +14874,9 @@ Now let's add our toy cat splat to the scene using the [`<pc-gsplat>`](/user-man
     <pc-scene>
         <pc-entity position="0 0 2.5">
             <pc-camera></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity position="0 -0.7 0" rotation="0 0 180">
             <pc-gsplat asset="toy"></pc-gsplat>
@@ -34528,7 +34528,7 @@ A boolean attribute is `true` when present with any value other than `"false"` �
 
 <pc-light type="directional" cast-shadows></pc-light>
 
-<pc-scrollview horizontal="false"></pc-scrollview>
+<pc-scroll-view horizontal="false"></pc-scroll-view>
 ```
 
 ## Numbers
@@ -34578,7 +34578,7 @@ Color attributes accept any of three formats:
 
 ## Entity References
 
-Some attributes reference another entity in the document — for example, [`<pc-button>`](tags/pc-button.md)'s `image`, [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle` and [`<pc-scrollview>`](tags/pc-scrollview.md)'s `viewport`, `content` and scrollbar attributes. A reference can be any of:
+Some attributes reference another entity in the document — for example, [`<pc-button>`](tags/pc-button.md)'s `image`, [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle` and [`<pc-scroll-view>`](tags/pc-scroll-view.md)'s `viewport`, `content` and scrollbar attributes. A reference can be any of:
 
 * A CSS selector (e.g. `#my-id` or `pc-entity[name="Player"]`)
 * An element `id` (e.g. `my-id`)
@@ -34590,7 +34590,7 @@ Some attributes reference another entity in the document — for example, [`<pc-
 
 ## Script Attributes
 
-Scripts declare their own attributes, so [`<pc-script>`](tags/pc-script.md) extends these conventions with per-property attributes that are parsed based on each script attribute's declared type. See [Adding Behavior with Scripts](scripting.md) for details.
+Scripts declare their own attributes, so [`<pc-script-instance>`](tags/pc-script-instance.md) extends these conventions with per-property attributes that are parsed based on each script attribute's declared type. See [Adding Behavior with Scripts](scripting.md) for details.
 
 --------------------------------------------------------------------------------
 
@@ -34943,7 +34943,7 @@ Loading takes two tags. [`<pc-asset>`](tags/pc-asset.md) declares the file, and 
 
 The `type="container"` matters: a GLB is a *container* asset, holding meshes, materials, textures, skins and animations together, and `<pc-model>` instantiates its hierarchy from that container. Point it at an asset of another type and the load fails at instantiation rather than with a tidy message, so it is worth getting right. `<pc-model>` behaves like a [`<pc-entity>`](tags/pc-entity.md) otherwise, so it takes `position`, `rotation` and `scale`, and it can be nested inside another entity.
 
-A model becomes ready once its hierarchy is in the scene, and it fires `load`. A failed load also settles readiness with a `null` entity and fires an [`error` event](tags/pc-model.md#events), so that is the one to listen for if the file might not arrive:
+A model becomes ready once its content is in the scene, and it fires `load`. A failed load also settles readiness — with a `null` `contentEntity` — and fires an [`error` event](tags/pc-model.md#events), so that is the one to listen for if the file might not arrive:
 
 ```javascript
 document.querySelector('pc-model').addEventListener('error', (event) => {
@@ -34959,13 +34959,13 @@ Nothing normalizes a model's pivot or scale. This car's origin sits at the middl
 
 ### Compressed Meshes
 
-Most models from asset sites are Draco-compressed, and this one is. Draco needs a WebAssembly decoder, declared with [`<pc-module>`](tags/pc-module.md) as a child of `<pc-app>`:
+Most models from asset sites are Draco-compressed, and this one is. Draco needs a WebAssembly decoder, declared with [`<pc-wasm>`](tags/pc-wasm.md) as a child of `<pc-app>`:
 
 ```html
-<pc-module name="DracoDecoderModule"
-           glue="modules/draco/draco.wasm.js"
-           wasm="modules/draco/draco.wasm.wasm"
-           fallback="modules/draco/draco.js"></pc-module>
+<pc-wasm name="DracoDecoderModule"
+         glue="modules/draco/draco.wasm.js"
+         wasm="modules/draco/draco.wasm.wasm"
+         fallback="modules/draco/draco.js"></pc-wasm>
 ```
 
 The three files are a [Draco](https://google.github.io/draco/) decoder build — the glue script, the `.wasm` binary, and a pure-JavaScript fallback for browsers without WebAssembly. They are not part of the engine's npm package, so you serve them yourself: take them from a [Draco release](https://github.com/google/draco/releases) or copy the set vendored in the [Web Components examples](https://github.com/playcanvas/web-components/tree/main/examples/modules/draco), then point the attributes at wherever you put them.
@@ -35124,13 +35124,13 @@ A `<pc-node>` takes the same component tags a `<pc-entity>` does, adding that co
 ```html
 <pc-model asset="car">
     <pc-node name="underbody_0">
-        <pc-rigidbody type="static"></pc-rigidbody>
+        <pc-rigid-body type="static"></pc-rigid-body>
         <pc-collision type="mesh"></pc-collision>
     </pc-node>
 </pc-model>
 ```
 
-Physics needs the `Ammo` module declared the same way Draco was — see [`<pc-module>`](tags/pc-module.md).
+Physics needs the `Ammo` module declared the same way Draco was — see [`<pc-wasm>`](tags/pc-wasm.md).
 
 ### Make a Part Interactive
 
@@ -35153,17 +35153,15 @@ A container's animations are played by a [`<pc-anim>`](tags/pc-anim.md) nested i
 ```html
 <pc-asset id="robot" type="container" src="assets/walking-robot.glb"></pc-asset>
 <pc-scene>
-    <pc-entity name="robot">
-        <pc-model asset="robot">
-            <pc-anim></pc-anim>
-        </pc-model>
-    </pc-entity>
+    <pc-model name="robot" asset="robot">
+        <pc-anim></pc-anim>
+    </pc-model>
 </pc-scene>
 ```
 
 [Image: A robot character mid-stride, its walk animation playing]
 
-The `<pc-entity>` around the model matters. `<pc-anim>` is a component tag, so it attaches to the nearest enclosing entity — not to the model's instantiated root — and a `<pc-model>` sitting directly under `<pc-scene>` has no entity to offer it. The console says so plainly (`must be a descendant of pc-entity`), and the fix is the wrapper above.
+No wrapper entity is involved. `<pc-model>` is an entity host in its own right, so a component placed inside it attaches to the model — the same way it would attach to a [`<pc-entity>`](tags/pc-entity.md). That also means the model can carry its own name, transform and pointer handlers, and can host child entities alongside its content.
 
 To see which animations came through the export, ask the component:
 
@@ -35175,15 +35173,13 @@ console.log(anim.clips); // ['Walk', 'Idle', 'Wave']
 Naming the clips yourself — rather than living with whatever the exporter called them — means declaring them, one [`<pc-anim-clip>`](tags/pc-anim-clip.md) each. That is also where per-clip speed and looping live, and how clips from other files get mixed in:
 
 ```html
-<pc-entity name="robot">
-    <pc-model asset="robot">
-        <pc-anim clip="idle" transition-time="0.3">
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="walk" speed="1.2"></pc-anim-clip>
-            <pc-anim-clip name="wave" asset="wave-glb" loop="false"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="robot" asset="robot">
+    <pc-anim clip="idle" transition-time="0.3">
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="walk" speed="1.2"></pc-anim-clip>
+        <pc-anim-clip name="wave" asset="wave-glb" loop="false"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 Switching clips is then a matter of setting `clip`, which cross-fades over `transition-time`:
@@ -35208,7 +35204,7 @@ Tracks bind to nodes **by name**, which is why a clip from a separate file only 
 
 **A material name appears as `Untitled` or `defaultGlbMaterial`.** Those are engine defaults for an unnamed glTF material and for a primitive exported with no material at all. Neither is a unique handle, so select those by `index:` instead.
 
-**The model loads but nothing animates.** A model plays nothing until a [`<pc-anim>`](tags/pc-anim.md) asks it to — and that element needs an enclosing `<pc-entity>`, as [Animation](#animation) describes. If both are in place, check `anim.clips`: an empty list with a warning about the model having no animations means they did not survive the export.
+**The model loads but nothing animates.** A model plays nothing until a [`<pc-anim>`](tags/pc-anim.md) inside it asks it to, as [Animation](#animation) describes. If one is there, check `anim.clips`: an empty list with a warning about the model having no animations means they did not survive the export.
 
 **A clip from a separate file animates nothing.** Its tracks bind by node name, so the clip and the model have to agree on those names. Print the model's `hierarchy()` and compare.
 
@@ -35262,7 +35258,7 @@ Then import it and await the element you need:
 
 :::note[Elements That Never Become Ready]
 
-The promise never settles if the element cannot finish initializing — for example, a `<pc-script>` that is not a direct child of `<pc-scripts>`, a [`<pc-node>`](./tags/pc-node.md) that cannot resolve its `name`, a [`<pc-module>`](./tags/pc-module.md) without a `name`, or an [`<pc-app>`](./tags/pc-app.md) that could not create a graphics device, where a fallback UI should hang off the element's [`error` event](./tags/pc-app.md#events) instead. A component element outside a `<pc-entity>` is the exception: it still becomes ready, but its `component` is `null`. In every case, the element reports what went wrong in the console.
+The promise never settles if the element cannot finish initializing — for example, a `<pc-script-instance>` that is not a direct child of `<pc-script>`, a [`<pc-node>`](./tags/pc-node.md) that cannot resolve its `name`, a [`<pc-wasm>`](./tags/pc-wasm.md) without a `name`, or an [`<pc-app>`](./tags/pc-app.md) that could not create a graphics device, where a fallback UI should hang off the element's [`error` event](./tags/pc-app.md#events) instead. A component element with no `<pc-entity>`, `<pc-model>` or `<pc-node>` above it is the exception: it still becomes ready, but its `component` is `null`. In every case, the element reports what went wrong in the console.
 
 :::
 
@@ -35284,18 +35280,19 @@ Each element exposes its engine counterpart through a property:
 | --- | --- | --- |
 | [`<pc-app>`](./tags/pc-app.md) | `app` | [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) |
 | [`<pc-entity>`](./tags/pc-entity.md) | `entity` | [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
-| [`<pc-model>`](./tags/pc-model.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) rooting the instantiated hierarchy |
+| [`<pc-model>`](./tags/pc-model.md) | `entity` | The host [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) the element creates and fronts |
+| [`<pc-model>`](./tags/pc-model.md) | `contentEntity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) rooting the instantiated hierarchy, beneath the host |
 | [`<pc-node>`](./tags/pc-node.md) | `entity` | The [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) it bound inside that hierarchy |
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
-| [`<pc-script>`](./tags/pc-script.md) | `script` | [`Script`](https://api.playcanvas.com/engine/classes/Script.html) |
-| [`<pc-sound>`](./tags/pc-sound.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
+| [`<pc-script-instance>`](./tags/pc-script-instance.md) | `script` | [`Script`](https://api.playcanvas.com/engine/classes/Script.html) |
+| [`<pc-sound-slot>`](./tags/pc-sound-slot.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
 | Component tags (`<pc-camera>`, `<pc-light>`, ...) | `component` | The corresponding [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
-These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. [`<pc-model>`](./tags/pc-model.md) is the one case where readiness does not promise a non-null `entity`: a load that failed also settles readiness, so check `entity` (or listen for the element's `error` event) if the asset might not arrive.
+These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. [`<pc-model>`](./tags/pc-model.md)'s `contentEntity` is the exception that stays nullable: readiness there means the `asset` selection settled, which includes a failed load and no asset at all, so check `contentEntity` (or listen for the element's `error` event) if the file might not arrive. Its host `entity` is non-null from boot either way.
 
-Every asynchronously initializing element also exposes `closestApp` and `closestEntity` getters, returning its nearest `<pc-app>` *ancestor* element, or its nearest entity-fronting ancestor — a `<pc-entity>` or a `<pc-node>` — or `null` if there is none. Handy when you hold a component element and need its owning entity or app.
+Every asynchronously initializing element also exposes `closestApp` and `closestEntity` getters, returning its nearest `<pc-app>` *ancestor* element, or its nearest entity-fronting ancestor — a `<pc-entity>`, a `<pc-model>` or a `<pc-node>` — or `null` if there is none. Handy when you hold a component element and need its owning entity or app.
 
-A `<pc-model>`'s `entity` roots a whole instantiated hierarchy, and reading that hierarchy is the other thing you will want from one. Its `hierarchy()` method returns a plain-data snapshot of the instantiated tree — the node names, paths and match indices a [`<pc-node>`](./tags/pc-node.md) binds against, plus the material assignments its `material-overrides` mapping selects — and `String()` of the result prints it as a tree. See [Inspecting the Hierarchy](./tags/pc-model.md#inspecting-the-hierarchy).
+A `<pc-model>`'s `contentEntity` roots a whole instantiated hierarchy, and reading that hierarchy is the other thing you will want from one. Its `hierarchy()` method returns a plain-data snapshot of the instantiated tree — the node names, paths and match indices a [`<pc-node>`](./tags/pc-node.md) binds against, plus the material assignments its `material-overrides` mapping selects — and `String()` of the result prints it as a tree. See [Inspecting the Hierarchy](./tags/pc-model.md#inspecting-the-hierarchy).
 
 ## Targeting a Specific App
 
@@ -35329,7 +35326,7 @@ document.addEventListener('ready', (event) => {
 });
 ```
 
-Use whichever fits the job: `whenReady` *awaits a specific element* and resolves even if that element became ready long ago, while the `ready` event *reacts to elements as they initialize* — including elements added to the page after load, which `whenReady`'s selector form cannot see. The event fires once per readiness cycle, so attach the listener before the elements you care about initialize — an element that became ready earlier will not fire it again. An element that is torn down and re-initialized (removed and re-inserted, say, or a `<pc-node>` rebinding after its model reloads) starts a new cycle and fires the event again; `<pc-module>`, whose readiness never resets, is the exception.
+Use whichever fits the job: `whenReady` *awaits a specific element* and resolves even if that element became ready long ago, while the `ready` event *reacts to elements as they initialize* — including elements added to the page after load, which `whenReady`'s selector form cannot see. The event fires once per readiness cycle, so attach the listener before the elements you care about initialize — an element that became ready earlier will not fire it again. An element that is torn down and re-initialized (removed and re-inserted, say, or a `<pc-node>` rebinding after its model reloads) starts a new cycle and fires the event again; `<pc-wasm>`, whose readiness never resets, is the exception.
 
 ## Assets, Materials and Modules
 
@@ -35343,13 +35340,13 @@ const material = MaterialElement.get('gold'); // the material declared by <pc-ma
 
 `AssetElement.get` returns the registered [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html), which may not have finished loading yet — check `asset.loaded`, or subscribe to its `load` event, before using `asset.resource`.
 
-[`<pc-module>`](./tags/pc-module.md) initializes asynchronously like the elements above — it becomes ready once its module has loaded, so `whenReady('pc-module')` awaits the load. You will rarely need it: `<pc-app>` waits for every `<pc-module>` declared beneath it before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
+[`<pc-wasm>`](./tags/pc-wasm.md) initializes asynchronously like the elements above — it becomes ready once its module has loaded, so `whenReady('pc-wasm')` awaits the load. You will rarely need it: `<pc-app>` waits for every `<pc-wasm>` declared beneath it before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
 
 ```javascript
-const { app } = await whenReady('pc-app'); // every <pc-module> has loaded by now
+const { app } = await whenReady('pc-app'); // every <pc-wasm> has loaded by now
 ```
 
-One caveat sets `<pc-module>` apart: its readiness is sticky. WebAssembly modules configure engine-global state that never unloads, so removing and re-inserting the element neither resets its readiness nor loads the module again — see [Readiness](./tags/pc-module.md#readiness).
+One caveat sets `<pc-wasm>` apart: its readiness is sticky. WebAssembly modules configure engine-global state that never unloads, so removing and re-inserting the element neither resets its readiness nor loads the module again — see [Readiness](./tags/pc-wasm.md#readiness).
 
 ## TypeScript
 
@@ -35357,7 +35354,7 @@ The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`,
 
 ## When to Use Scripts Instead
 
-`whenReady` is ideal for page-level glue: connecting DOM UI to the app, tweaking settings, firing events. For substantial or reusable behavior — anything with an update loop or per-entity logic — write a script and attach it with `<pc-script>` instead. Scripts receive a fully initialized entity, so no readiness check is ever needed. See [Adding Behavior with Scripts](scripting.md).
+`whenReady` is ideal for page-level glue: connecting DOM UI to the app, tweaking settings, firing events. For substantial or reusable behavior — anything with an update loop or per-entity logic — write a script and attach it with `<pc-script-instance>` instead. Scripts receive a fully initialized entity, so no readiness check is ever needed. See [Adding Behavior with Scripts](scripting.md).
 
 --------------------------------------------------------------------------------
 
@@ -35388,20 +35385,20 @@ Scripts are loaded via the [`<pc-asset>`](../tags/pc-asset) tag:
 <pc-asset src="path/to/rotate-script.mjs"></pc-asset>
 ```
 
-Then attach it to an entity using [`<pc-scripts>`](../tags/pc-scripts) and [`<pc-script>`](../tags/pc-script):
+Then attach it to an entity using [`<pc-script>`](../tags/pc-script) and [`<pc-script-instance>`](../tags/pc-script-instance):
 
 ```html
 <pc-entity name="spinning cube">
     <pc-render type="box"></pc-render>
-    <pc-scripts>
-        <pc-script name="rotateScript"></pc-script>
-    </pc-scripts>
+    <pc-script>
+        <pc-script-instance name="rotateScript"></pc-script-instance>
+    </pc-script>
 </pc-entity>
 ```
 
 :::important
 
-The `name` attribute of `<pc-script>` must match the value of the `scriptName` property of the script.
+The `name` attribute of `<pc-script-instance>` must match the value of the `scriptName` property of the script.
 
 :::
 
@@ -35428,18 +35425,18 @@ Let's update our script to accept a rotation speed as an attribute:
 }
 ```
 
-We can now configure the script simply by adding a `speed` attribute to the `<pc-script>` tag:
+We can now configure the script simply by adding a `speed` attribute to the `<pc-script-instance>` tag:
 
 ```html {4}
 <pc-entity name="fast spinning cube">
     <pc-render type="box"></pc-render>
-    <pc-scripts>
-        <pc-script name="rotateScript" speed="180"></pc-script>
-    </pc-scripts>
+    <pc-script>
+        <pc-script-instance name="rotateScript" speed="180"></pc-script-instance>
+    </pc-script>
 </pc-entity>
 ```
 
-Any attribute on `<pc-script>` that is not reserved maps to the script attribute of the same name. Reserved names are the element's own API (`name`, `enabled`, `attributes`), global HTML attributes (such as `id` and `style`), `data-*` and `aria-*` attributes, names starting with `_` (as stamped on elements by some frameworks), and real inline event handler names such as `onclick` (a script attribute that merely starts with `on`, like `once`, still maps). Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`). A script attribute whose name collides with the script API (`app`, `entity`, `destroy`, `initialize`, `postInitialize`, `postUpdate`, `swap`, `update`) is never written and logs a console warning.
+Any attribute on `<pc-script-instance>` that is not reserved maps to the script attribute of the same name. Reserved names are the element's own API (`name`, `enabled`, `attributes`), global HTML attributes (such as `id` and `style`), `data-*` and `aria-*` attributes, names starting with `_` (as stamped on elements by some frameworks), and real inline event handler names such as `onclick` (a script attribute that merely starts with `on`, like `once`, still maps). Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`). A script attribute whose name collides with the script API (`app`, `entity`, `destroy`, `initialize`, `postInitialize`, `postUpdate`, `swap`, `update`) is never written and logs a console warning.
 
 Values are parsed according to the type of the script's declared default value, following the same [value conventions](attributes.md) as every other element:
 
@@ -35455,10 +35452,10 @@ Values are parsed according to the type of the script's declared default value, 
 For example, here is the engine's `cameraControls` script configured entirely with per-property attributes:
 
 ```html
-<pc-script name="cameraControls"
-           enable-fly="false"
-           focus-point="0 1.75 0"
-           zoom-range="2 15"></pc-script>
+<pc-script-instance name="cameraControls"
+                    enable-fly="false"
+                    focus-point="0 1.75 0"
+                    zoom-range="2 15"></pc-script-instance>
 ```
 
 :::tip
@@ -35481,7 +35478,7 @@ Number, boolean, vector and color values are inferred from the script's declared
 | `color:`  | `color:1 0.5 0.5` | A Color from 3 (RGB) or 4 (RGBA) space-separated numbers in the range 0 to 1 |
 
 ```html
-<pc-script name="myScript" font="asset:arial-font" target="entity:#player"></pc-script>
+<pc-script-instance name="myScript" font="asset:arial-font" target="entity:#player"></pc-script-instance>
 ```
 
 ### The `attributes` JSON Attribute
@@ -35492,11 +35489,11 @@ Per-property attributes cover flat, simply named script attributes. For everythi
 * **Reserved names** — script attributes whose names collide with the element's own API or standard HTML attribute names (e.g. `title`, `name`, `enabled`, `id`, `style`).
 
 ```html
-<pc-script name="annotation" attributes='{
+<pc-script-instance name="annotation" attributes='{
     "label": "1",
     "title": "Cockpit Canopy",
     "text": "Transparent canopy offering visibility and housing the pilot controls."
-}'></pc-script>
+}'></pc-script-instance>
 ```
 
 :::important
@@ -35508,10 +35505,10 @@ The `attributes` attribute takes a JSON string. Because JSON requires properties
 Inside the JSON, a plain numeric array converts automatically to the script attribute's declared math type — a `Vec2`, `Vec3`, `Vec4` or `Color` default turns `[0, 1.75, 0]` into the right type:
 
 ```html
-<pc-script name="cameraControls" attributes='{
+<pc-script-instance name="cameraControls" attributes='{
     "focusPoint": [0, 1.75, 0],
     "pitchRange": [-90, 0]
-}'></pc-script>
+}'></pc-script-instance>
 ```
 
 An object value merges with the script's declared default rather than replacing it wholesale — with a declared default of `{a: 1, b: 2}`, setting `{"a": 5}` yields `{a: 5, b: 2}`. This means you only need to specify the properties you want to change.
@@ -35519,10 +35516,10 @@ An object value merges with the script's declared default rather than replacing 
 The [type prefixes](#type-prefixes) also work anywhere inside the JSON, including in nested arrays and objects:
 
 ```html
-<pc-script name="xrMenu" attributes='{
+<pc-script-instance name="xrMenu" attributes='{
     "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
     "fontAsset": "asset:arial-font"
-}'></pc-script>
+}'></pc-script-instance>
 ```
 
 ### Precedence
@@ -35531,11 +35528,11 @@ If the same script attribute is set both as a per-property attribute and in the 
 
 ### Accessing Scripts from JavaScript
 
-`<pc-script>` elements become *ready* once their script instance has been created. Use `whenReady()` (or the element's `ready()` promise) to wait for that, then access the live [`Script`](https://api.playcanvas.com/engine/classes/Script.html) instance via the `script` property. See [Programmatic Access](programmatic-access.md) for the full `whenReady` API:
+`<pc-script-instance>` elements become *ready* once their script instance has been created. Use `whenReady()` (or the element's `ready()` promise) to wait for that, then access the live [`Script`](https://api.playcanvas.com/engine/classes/Script.html) instance via the `script` property. See [Programmatic Access](programmatic-access.md) for the full `whenReady` API:
 
 ```javascript
 
-const scriptElement = await whenReady('pc-script');
+const scriptElement = await whenReady('pc-script-instance');
 scriptElement.script.speed = 360;
 ```
 
@@ -35563,7 +35560,17 @@ Here is a complete list of the tags that are available in PlayCanvas Web Compone
 
 The attributes of every tag share the same value conventions: an absent (or removed) attribute means the engine default applies, and an invalid value logs a console warning and falls back to the default. See [Attributes](../attributes.md) for how booleans, numbers, enums, vectors and colors are written.
 
-Tags also have placement rules — each tag's page notes the parent it requires. A misplaced element logs a console warning naming the required parent, so keep the console open while authoring. The component tags accept one further parent beyond the [`<pc-entity>`](pc-entity) their pages name: a [`<pc-node>`](pc-node), which fronts a node inside a model loaded by [`<pc-model>`](pc-model) and takes the same component children an entity does.
+Tags also have placement rules — each tag's page notes the parent it requires. A misplaced element logs a console warning naming the parents it would accept, so keep the console open while authoring.
+
+Three tags front an engine entity, and a component tag can sit inside any of them: [`<pc-entity>`](pc-entity), [`<pc-model>`](pc-model) and [`<pc-node>`](pc-node). So a component placed inside a model attaches to that model, and one placed inside a node attaches to the node — both take the same component children an entity does.
+
+:::note[A component tag spells the engine component it adds]
+
+Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id: `<pc-layout-group>` adds `entity.layoutgroup`, `<pc-rigid-body>` adds `entity.rigidbody`, `<pc-audio-listener>` adds `entity.audiolistener`. The rule holds in both directions for every component tag below, so neither spelling has to be memorized. The engine's ids run their words together only because they are JavaScript property names, which cannot carry a hyphen — an HTML tag can.
+
+:::
+
+A repeatable child takes its parent's tag as a prefix: [`<pc-anim-clip>`](pc-anim-clip) inside [`<pc-anim>`](pc-anim), [`<pc-sound-slot>`](pc-sound-slot) inside [`<pc-sound>`](pc-sound), [`<pc-script-instance>`](pc-script-instance) inside [`<pc-script>`](pc-script).
 
 | Tag | Description |
 | --- | --- |
@@ -35571,6 +35578,7 @@ Tags also have placement rules — each tag's page notes the parent it requires.
 | [`<pc-anim-clip>`](pc-anim-clip) | Defines a single clip assigned to an animation component. |
 | [`<pc-app>`](pc-app) | Defines the root element of your application. |
 | [`<pc-asset>`](pc-asset) | Defines an asset to be loaded by your application. |
+| [`<pc-audio-listener>`](pc-audio-listener) | Defines an audio listener component. |
 | [`<pc-button>`](pc-button) | Defines a button component. |
 | [`<pc-camera>`](pc-camera) | Defines a camera that is used to render the scene. |
 | [`<pc-collision>`](pc-collision) | Defines a collision component used by triggers and rigid bodies. |
@@ -35578,26 +35586,25 @@ Tags also have placement rules — each tag's page notes the parent it requires.
 | [`<pc-entity>`](pc-entity) | Defines an entity. |
 | [`<pc-gsplat>`](pc-gsplat) | Defines a gsplat component that renders 3D Gaussian Splats. |
 | [`<pc-joint>`](pc-joint) | Defines a physics joint constraining two rigid bodies. |
-| [`<pc-layoutchild>`](pc-layoutchild) | Defines a layout child component. |
-| [`<pc-layoutgroup>`](pc-layoutgroup) | Defines a layout group component. |
+| [`<pc-layout-child>`](pc-layout-child) | Defines a layout child component. |
+| [`<pc-layout-group>`](pc-layout-group) | Defines a layout group component. |
 | [`<pc-light>`](pc-light) | Defines a light component. |
-| [`<pc-listener>`](pc-listener) | Defines a listener component. |
 | [`<pc-material>`](pc-material) | Defines a material that render components can reference. |
 | [`<pc-model>`](pc-model) | Defines an entity that instantiates a 3D model from a GLB file. |
-| [`<pc-module>`](pc-module) | Defines a WebAssembly module. |
 | [`<pc-node>`](pc-node) | Binds to a node inside a loaded model to override it. |
-| [`<pc-particles>`](pc-particles) | Defines a particle system component. |
+| [`<pc-particle-system>`](pc-particle-system) | Defines a particle system component. |
 | [`<pc-render>`](pc-render) | Defines a render component. |
-| [`<pc-rigidbody>`](pc-rigidbody) | Defines a rigidbody component. |
+| [`<pc-rigid-body>`](pc-rigid-body) | Defines a rigid body component. |
 | [`<pc-scene>`](pc-scene) | Defines a scene. |
 | [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
-| [`<pc-script>`](pc-script) | Defines a single script assigned to a script component. |
-| [`<pc-scripts>`](pc-scripts) | Defines a script component. |
+| [`<pc-script>`](pc-script) | Defines a script component. |
+| [`<pc-script-instance>`](pc-script-instance) | Defines a single script assigned to a script component. |
 | [`<pc-scrollbar>`](pc-scrollbar) | Defines a scrollbar component. |
-| [`<pc-scrollview>`](pc-scrollview) | Defines a scroll view component. |
+| [`<pc-scroll-view>`](pc-scroll-view) | Defines a scroll view component. |
 | [`<pc-sky>`](pc-sky) | Defines an image-based skybox. |
-| [`<pc-sound>`](pc-sound) | Defines a single sound assigned to a sound component. |
-| [`<pc-sounds>`](pc-sounds) | Defines a sound component. |
+| [`<pc-sound>`](pc-sound) | Defines a sound component. |
+| [`<pc-sound-slot>`](pc-sound-slot) | Defines a single sound assigned to a sound component. |
+| [`<pc-wasm>`](pc-wasm) | Defines a WebAssembly module. |
 
 --------------------------------------------------------------------------------
 
@@ -35689,9 +35696,9 @@ The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak`
     <pc-scene>
         <pc-entity name="camera" position="2.5 1.5 3.5">
             <pc-camera clear-color="#2a2d36"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
@@ -35699,15 +35706,13 @@ The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak`
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
-            <pc-model asset="t-rex">
-                <pc-anim id="anim" clip="walk" transition-time="0.4">
-                    <pc-anim-clip name="walk"></pc-anim-clip>
-                    
-                    <pc-anim-clip name="sneak" speed="-0.4"></pc-anim-clip>
-                </pc-anim>
-            </pc-model>
-        </pc-entity>
+        <pc-model name="t-rex" asset="t-rex" scale="1.5 1.5 1.5">
+            <pc-anim id="anim" clip="walk" transition-time="0.4">
+                <pc-anim-clip name="walk"></pc-anim-clip>
+                
+                <pc-anim-clip name="sneak" speed="-0.4"></pc-anim-clip>
+            </pc-anim>
+        </pc-model>
     </pc-scene>
 </pc-app>
 <div class="controls">
@@ -35777,53 +35782,28 @@ There are two ways to end up with clips, and the element picks between them for 
 **Declared clips.** Each [`<pc-anim-clip>`](../pc-anim-clip) child contributes one named clip. This is the form to reach for whenever you want to name clips yourself, set a per-clip `speed` or `loop`, or pull clips out of more than one file:
 
 ```html
-<pc-entity name="robot">
-    <pc-model asset="arm">
-        <pc-anim clip="idle" transition-time="0.35">
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="pick"></pc-anim-clip>
-            <pc-anim-clip name="stow" loop="false"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="robot" asset="arm">
+    <pc-anim clip="idle" transition-time="0.35">
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="pick"></pc-anim-clip>
+        <pc-anim-clip name="stow" loop="false"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 **Every animation in the enclosing model.** With no clip children and a [`<pc-model>`](../pc-model) as its parent, the element assigns every animation of that model's container asset, each named after its track, in container order. One empty tag is then enough to play what a GLB came with:
 
 ```html
-<pc-entity name="t-rex">
-    <pc-model asset="t-rex">
-        <pc-anim></pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="t-rex" asset="t-rex">
+    <pc-anim></pc-anim>
+</pc-model>
 ```
 
 Declared clips win: adding a `<pc-anim-clip>` child to an element that had been assigning a model's animations switches it over to the declared set. Either way the first clip starts playing on its own — opt out with `activate="false"`.
 
 Tracks whose names the engine cannot host are skipped with a warning naming each: a name containing `.` (reserved for blend tree paths), or one a previous track already took.
 
-:::warning[The component goes on the enclosing entity]
-
-A `<pc-anim>` inside a `<pc-model>` still attaches its component to the nearest enclosing [`<pc-entity>`](../pc-entity) or [`<pc-node>`](../pc-node) — the model's instantiated hierarchy sits below that same entity, which is what lets the clips reach it. A `<pc-model>` that is a direct child of [`<pc-scene>`](../pc-scene) has no such entity, so wrap it in one:
-
-```html
-
-<pc-scene>
-    <pc-model asset="t-rex">
-        <pc-anim></pc-anim>
-    </pc-model>
-</pc-scene>
-
-<pc-scene>
-    <pc-entity>
-        <pc-model asset="t-rex">
-            <pc-anim></pc-anim>
-        </pc-model>
-    </pc-entity>
-</pc-scene>
-```
-
-:::
+A `<pc-anim>` inside a [`<pc-model>`](../pc-model) attaches to that model's own host entity, so no wrapper entity is needed and none should be added. The model's content sits below the same host, which is what lets the clips reach it, and the host survives a change of `asset` — so swapping a model's GLB keeps the component and re-resolves its clips against the new container.
 
 ## Attributes
 
@@ -35875,6 +35855,8 @@ Clips bind to scene nodes **by name**, over the whole hierarchy below the compon
 
 The engine resolves each curve once and does not retry, so a model that finishes loading *after* its clips were assigned would otherwise stay silently unbound. The element handles this: it rebinds when a model below its host announces readiness, and refreshes the whole clip set when the model it takes its clips from is re-instantiated. Changing a [`<pc-model>`'s `asset`](../pc-model#attributes) at runtime therefore does the right thing without any help.
 
+The element also manages the component's `rootBone` for you, pointing it at the enclosing model's host so that curves targeting the asset's own root node bind where the engine expects. It re-derives that on every cycle and clears it when no single model is in scope — but a `rootBone` you assign yourself through the engine API is recognized as yours and never overwritten.
+
 There is one thing to know about the end of a clip: **the engine reports no completion**. A clip with `loop="false"` holds its last pose and says nothing — there is no `end` event to listen for. To act when one finishes, compare the playhead against the track's duration on the underlying component:
 
 ```javascript
@@ -35894,9 +35876,9 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
     <pc-scene>
         <pc-entity name="camera" position="2.5 1.5 3.5">
             <pc-camera clear-color="#2a2d36"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
@@ -35904,15 +35886,12 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        
-        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
-            <pc-model asset="t-rex">
-                <pc-anim id="anim" clip="walk" transition-time="0.4">
-                    <pc-anim-clip name="walk"></pc-anim-clip>
-                    <pc-anim-clip name="stalk" speed="0.33"></pc-anim-clip>
-                </pc-anim>
-            </pc-model>
-        </pc-entity>
+        <pc-model name="t-rex" asset="t-rex" scale="1.5 1.5 1.5">
+            <pc-anim id="anim" clip="walk" transition-time="0.4">
+                <pc-anim-clip name="walk"></pc-anim-clip>
+                <pc-anim-clip name="stalk" speed="0.33"></pc-anim-clip>
+            </pc-anim>
+        </pc-model>
     </pc-scene>
 </pc-app>
 <div class="controls">
@@ -36141,7 +36120,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `flip-y` | Boolean | `"false"` | For `texture` and `textureatlas` assets: whether the image data is flipped vertically at upload |
 | `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
-| `lazy` | Boolean | `"false"` | Whether to skip preloading. A lazy asset is loaded on demand by [`<pc-model>`](../pc-model), [`<pc-particles>`](../pc-particles), [`<pc-sky>`](../pc-sky) and [`<pc-material>`](../pc-material) texture maps — other elements do not trigger loading |
+| `lazy` | Boolean | `"false"` | Whether to skip preloading. A lazy asset is loaded on demand by [`<pc-model>`](../pc-model), [`<pc-particle-system>`](../pc-particle-system), [`<pc-sky>`](../pc-sky) and [`<pc-material>`](../pc-material) texture maps — other elements do not trigger loading |
 | `mag-filter` | Enum | `"linear"` | For `texture` and `textureatlas` assets: the filter used when the texture is displayed larger than its source size — `"nearest"` \| `"linear"` |
 | `min-filter` | Enum | `"linear-mip-linear"` | For `texture` and `textureatlas` assets: the filter used when the texture is displayed smaller than its source size — `"nearest"` \| `"linear"` \| `"nearest-mip-nearest"` \| `"linear-mip-nearest"` \| `"nearest-mip-linear"` \| `"linear-mip-linear"` |
 | `mipmaps` | Boolean | `"true"` | For `texture` and `textureatlas` assets: whether the texture generates and uses mipmaps |
@@ -36228,9 +36207,9 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
     <pc-scene>
         <pc-entity name="camera" position="0 0 3">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light intensity="2"></pc-light>
@@ -36255,6 +36234,87 @@ Sprites are defined by a texture atlas (which holds the frame definitions) and o
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-asset>` elements using the [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-audio-listener>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener/
+
+The `<pc-audio-listener>` tag is used to define a listener component.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+
+</div>
+
+## Example
+
+The listener sits on the camera, and a sphere emitting positional footsteps circles in front of it — put headphones on and the sound pans left and right as the sphere crosses. Browsers gate audio behind a user gesture, so click Play to start:
+
+```html live-example
+<pc-app>
+    <pc-asset src="https://developer.playcanvas.com/assets/footsteps.mp3" id="footsteps"></pc-asset>
+    <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2.5 6" rotation="-15 0 0">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+            
+            <pc-audio-listener></pc-audio-listener>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="ground" scale="14 14 14">
+            <pc-render type="plane" material="floor"></pc-render>
+        </pc-entity>
+        <pc-entity name="pivot">
+            <pc-script>
+                <pc-script-instance name="orbit"></pc-script-instance>
+            </pc-script>
+            <pc-entity name="emitter" position="3 1 0" scale="0.4 0.4 0.4">
+                <pc-render type="sphere"></pc-render>
+                <pc-sound positional="true" ref-distance="2" roll-off-factor="1">
+                    <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
+                </pc-sound>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<button id="play" style="position: absolute; top: 12px; left: 12px;">Play</button>
+<script type="module">
+    import { registerScript, Script } from 'playcanvas';
+    import { whenReady } from '@playcanvas/web-components';
+
+    await whenReady('pc-app');
+
+    class Orbit extends Script {
+        update(dt) {
+            this.entity.rotate(0, 45 * dt, 0);
+        }
+    }
+
+    registerScript(Orbit, 'orbit');
+
+    const sounds = await whenReady('pc-sound');
+    document.getElementById('play').onclick = () => sounds.component.slot('footsteps').play();
+</script>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-audio-listener>` elements using the [AudioListenerComponentElement API](https://api.playcanvas.com/web-components/classes/AudioListenerComponentElement.html).
 
 --------------------------------------------------------------------------------
 
@@ -36284,7 +36344,7 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 | `hover-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown on hover (sprite transition mode) |
 | `hover-sprite-frame` | Number | `"0"` | Frame of the hover sprite |
 | `hover-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity on hover (tint transition mode) |
-| `image` | String | - | Reference (CSS selector, element id, or entity name) to the [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity |
+| `image` | String | - | Reference (CSS selector, element id, or entity name) to the [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](../pc-model) that is the model's host, so name a UI entity explicitly there |
 | `inactive-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown when inactive (sprite transition mode) |
 | `inactive-sprite-frame` | Number | `"0"` | Frame of the inactive sprite |
 | `inactive-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when inactive (tint transition mode) |
@@ -36478,7 +36538,7 @@ Each collision shape matches its rendered shape: a sphere, a capsule and a box t
 ```html live-example
 <pc-app>
     
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
     <pc-scene>
         <pc-entity name="camera" position="0 2 8">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -36489,22 +36549,22 @@ Each collision shape matches its rendered shape: a sphere, a capsule and a box t
         <pc-entity name="ball" position="-1.5 4 0">
             <pc-render type="sphere"></pc-render>
             <pc-collision type="sphere" radius="0.5"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="pill" position="0 5 0" rotation="0 0 70">
             <pc-render type="capsule"></pc-render>
             <pc-collision type="capsule" radius="0.5" height="2"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="crate" position="1.5 6 0" rotation="20 30 40">
             <pc-render type="box"></pc-render>
             <pc-collision type="box" half-extents="0.5 0.5 0.5"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="6 0.5 6"></pc-collision>
-            <pc-rigidbody type="static"></pc-rigidbody>
+            <pc-rigid-body type="static"></pc-rigid-body>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -36521,6 +36581,8 @@ You can programmatically create and manipulate `<pc-collision>` elements using t
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-element/
 
 The `<pc-element>` tag is used to define an element component. Element components are the building blocks of user interfaces and come in three types — `group`, `image`, and `text` — selected with the `type` attribute. Which attributes apply depends on the type.
+
+Despite the name, this is not a base class or a generic wrapper. `<pc-element>` is the engine's 2D UI component, and like every component tag it spells the component it adds (`entity.element`): it gives its host entity a rectangle inside a [`<pc-screen>`](../pc-screen) hierarchy that draws an image, a line of text, or nothing at all.
 
 :::note[Usage]
 
@@ -36617,7 +36679,7 @@ The `<pc-entity>` tag is used to define an entity.
 
 * It must be a direct child of [`<pc-scene>`](../pc-scene), another `<pc-entity>`, or a [`<pc-node>`](../pc-node) — which parents it under a node inside a loaded model.
 * It can have 0..n [`<pc-entity>`](../pc-entity) or [`<pc-model>`](../pc-model) children.
-* It can optionally have one of each component type as children: [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-layoutchild>`](../pc-layoutchild), [`<pc-layoutgroup>`](../pc-layoutgroup), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scrollview>`](../pc-scrollview), [`<pc-sounds>`](../pc-sounds).
+* It can optionally have one of each component type as children: [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-layout-child>`](../pc-layout-child), [`<pc-layout-group>`](../pc-layout-group), [`<pc-light>`](../pc-light), [`<pc-audio-listener>`](../pc-audio-listener), [`<pc-particle-system>`](../pc-particle-system), [`<pc-render>`](../pc-render), [`<pc-rigid-body>`](../pc-rigid-body), [`<pc-screen>`](../pc-screen), [`<pc-script>`](../pc-script), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scroll-view>`](../pc-scroll-view), [`<pc-sound>`](../pc-sound).
 
 :::
 
@@ -36731,9 +36793,9 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" zoom-range="1 5"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" zoom-range="1 5"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="toy" position="0 -0.7 0" rotation="0 0 180">
             <pc-gsplat asset="toy"></pc-gsplat>
@@ -36757,7 +36819,7 @@ The `<pc-joint>` tag constrains two rigid bodies to each other — a hinged door
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity) or a [`<pc-node>`](../pc-node).
-* Both constrained entities need a [`<pc-rigidbody>`](../pc-rigidbody), and physics needs the `Ammo` module — see [`<pc-module>`](../pc-module).
+* Both constrained entities need a [`<pc-rigid-body>`](../pc-rigid-body), and physics needs the `Ammo` module — see [`<pc-wasm>`](../pc-wasm).
 
 :::
 
@@ -36768,11 +36830,11 @@ So a joint is a third entity positioned where the pivot belongs, pointing the wa
 ```html
 <pc-entity name="hinge-anchor" position="0 2 0">
     <pc-collision half-extents="0.25 0.25 0.25"></pc-collision>
-    <pc-rigidbody></pc-rigidbody>
+    <pc-rigid-body></pc-rigid-body>
 </pc-entity>
 <pc-entity name="hinge-arm" position="1 2 0">
     <pc-collision half-extents="1 0.1 0.1"></pc-collision>
-    <pc-rigidbody type="dynamic"></pc-rigidbody>
+    <pc-rigid-body type="dynamic"></pc-rigid-body>
 </pc-entity>
 
 <pc-entity name="hinge" position="0 2 0" rotation="0 90 0">
@@ -36808,7 +36870,7 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 | `enable-collision` | Boolean | `"false"` | Whether the two constrained bodies collide with each other |
 | `enable-limits` | Boolean | `"false"` | Whether the joint's limits are enforced. Limit attributes do nothing until this is set |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `entity-a` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the first body. Needs a [`<pc-rigidbody>`](../pc-rigidbody) |
+| `entity-a` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the first body. Needs a [`<pc-rigid-body>`](../pc-rigid-body) |
 | `entity-b` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
 | `limits` | Vector2 | `"-45 45"` | Rotation or travel limits about the primary axis, as "min max" — degrees for `hinge`, units for `slider` |
 | `linear-damping` | Vector3 | `"1 1 1"` | Spring damping per linear axis. Used by `6dof` |
@@ -36886,7 +36948,7 @@ A motor-driven hinge spinning a blade about a static hub. The joint entity sits 
 
 ```html live-example
 <pc-app>
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
     <pc-scene>
         <pc-entity name="camera" position="0 2 6">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -36899,14 +36961,14 @@ A motor-driven hinge spinning a blade about a static hub. The joint entity sits 
         <pc-entity id="hub" position="0 2 0" rotation="90 0 0" scale="0.5 0.3 0.5">
             <pc-render type="cylinder"></pc-render>
             <pc-collision type="cylinder" radius="0.25" height="0.3"></pc-collision>
-            <pc-rigidbody></pc-rigidbody>
+            <pc-rigid-body></pc-rigid-body>
         </pc-entity>
 
         
         <pc-entity id="blade" position="0 2 0" scale="4 0.3 0.2">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="2 0.15 0.1"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
 
         
@@ -36935,16 +36997,16 @@ Both accept the same reference forms as other entity-valued attributes — a CSS
 
 --------------------------------------------------------------------------------
 
-## <pc-layoutchild>
+## <pc-layout-child>
 
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutchild/
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child/
 
-The `<pc-layoutchild>` tag is used to define a layout child component, which controls how an element is sized by its parent [`<pc-layoutgroup>`](../pc-layoutgroup).
+The `<pc-layout-child>` tag is used to define a layout child component, which controls how an element is sized by its parent [`<pc-layout-group>`](../pc-layout-group).
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
-* That entity must itself be a child of an entity with a [`<pc-layoutgroup>`](../pc-layoutgroup).
+* That entity must itself be a child of an entity with a [`<pc-layout-group>`](../pc-layout-group).
 
 :::
 
@@ -36979,20 +37041,20 @@ Three items in a horizontal group with `width-fitting="stretch"`. The middle ite
             <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
             <pc-entity name="toolbar">
                 <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="480" height="70"></pc-element>
-                <pc-layoutgroup orientation="horizontal" alignment="0 0.5" spacing="8 0"
-                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+                <pc-layout-group orientation="horizontal" alignment="0 0.5" spacing="8 0"
+                                 padding="10 10 10 10" width-fitting="stretch"></pc-layout-group>
 
                 <pc-entity name="item-1">
                     <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
-                    <pc-layoutchild></pc-layoutchild>
+                    <pc-layout-child></pc-layout-child>
                 </pc-entity>
                 <pc-entity name="item-2">
                     <pc-element type="image" width="80" height="50" color="#ff8a3c"></pc-element>
-                    <pc-layoutchild fit-width-proportion="1"></pc-layoutchild>
+                    <pc-layout-child fit-width-proportion="1"></pc-layout-child>
                 </pc-entity>
                 <pc-entity name="item-3">
                     <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
-                    <pc-layoutchild></pc-layoutchild>
+                    <pc-layout-child></pc-layout-child>
                 </pc-entity>
             </pc-entity>
         </pc-entity>
@@ -37002,20 +37064,20 @@ Three items in a horizontal group with `width-fitting="stretch"`. The middle ite
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-layoutchild>` elements using the [LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html).
+You can programmatically create and manipulate `<pc-layout-child>` elements using the [LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html).
 
 --------------------------------------------------------------------------------
 
-## <pc-layoutgroup>
+## <pc-layout-group>
 
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layoutgroup/
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group/
 
-The `<pc-layoutgroup>` tag is used to define a layout group component, which automatically arranges its child element entities in a row or column.
+The `<pc-layout-group>` tag is used to define a layout group component, which automatically arranges its child element entities in a row or column.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
-* Child entities are laid out automatically. Add a [`<pc-layoutchild>`](../pc-layoutchild) to a child to control how it is sized within the group.
+* Child entities are laid out automatically. Add a [`<pc-layout-child>`](../pc-layout-child) to a child to control how it is sized within the group.
 
 :::
 
@@ -37052,8 +37114,8 @@ A vertical list that lays out its rows automatically. Try `orientation="horizont
             <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
             <pc-entity name="list">
                 <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="220"></pc-element>
-                <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8"
-                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+                <pc-layout-group orientation="vertical" alignment="0 1" spacing="0 8"
+                                 padding="10 10 10 10" width-fitting="stretch"></pc-layout-group>
 
                 <pc-entity name="row-1">
                     <pc-element type="image" width="240" height="50" color="#ff8a3c"></pc-element>
@@ -37072,7 +37134,9 @@ A vertical list that lays out its rows automatically. Try `orientation="horizont
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-layoutgroup>` elements using the [LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html).
+You can programmatically create and manipulate `<pc-layout-group>` elements using the [LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html).
+
+The [UI Layout example](https://playcanvas.github.io/web-components/examples/ui-layout.html) builds a nested set of layout groups on a world-space screen.
 
 --------------------------------------------------------------------------------
 
@@ -37152,87 +37216,6 @@ Try editing the light `color`, `intensity` or `type` values and watch the scene 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-light>` elements using the [LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html).
-
---------------------------------------------------------------------------------
-
-## <pc-listener>
-
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-listener/
-
-The `<pc-listener>` tag is used to define a listener component.
-
-:::note[Usage]
-
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
-
-:::
-
-## Attributes
-
-<div className="attribute-table">
-
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `enabled` | Boolean | `"true"` | Enabled state of the component |
-
-</div>
-
-## Example
-
-The listener sits on the camera, and a sphere emitting positional footsteps circles in front of it — put headphones on and the sound pans left and right as the sphere crosses. Browsers gate audio behind a user gesture, so click Play to start:
-
-```html live-example
-<pc-app>
-    <pc-asset src="https://developer.playcanvas.com/assets/footsteps.mp3" id="footsteps"></pc-asset>
-    <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
-    <pc-scene>
-        <pc-entity name="camera" position="0 2.5 6" rotation="-15 0 0">
-            <pc-camera clear-color="#1d1f2b"></pc-camera>
-            
-            <pc-listener></pc-listener>
-        </pc-entity>
-        <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
-        </pc-entity>
-        <pc-entity name="ground" scale="14 14 14">
-            <pc-render type="plane" material="floor"></pc-render>
-        </pc-entity>
-        <pc-entity name="pivot">
-            <pc-scripts>
-                <pc-script name="orbit"></pc-script>
-            </pc-scripts>
-            <pc-entity name="emitter" position="3 1 0" scale="0.4 0.4 0.4">
-                <pc-render type="sphere"></pc-render>
-                <pc-sounds positional="true" ref-distance="2" roll-off-factor="1">
-                    <pc-sound name="footsteps" asset="footsteps" loop="true"></pc-sound>
-                </pc-sounds>
-            </pc-entity>
-        </pc-entity>
-    </pc-scene>
-</pc-app>
-<button id="play" style="position: absolute; top: 12px; left: 12px;">Play</button>
-<script type="module">
-    import { registerScript, Script } from 'playcanvas';
-    import { whenReady } from '@playcanvas/web-components';
-
-    await whenReady('pc-app');
-
-    class Orbit extends Script {
-        update(dt) {
-            this.entity.rotate(0, 45 * dt, 0);
-        }
-    }
-
-    registerScript(Orbit, 'orbit');
-
-    const sounds = await whenReady('pc-sounds');
-    document.getElementById('play').onclick = () => sounds.component.slot('footsteps').play();
-</script>
-```
-
-## JavaScript Interface
-
-You can programmatically create and manipulate `<pc-listener>` elements using the [ListenerComponentElement API](https://api.playcanvas.com/web-components/classes/ListenerComponentElement.html).
 
 --------------------------------------------------------------------------------
 
@@ -37389,20 +37372,39 @@ For a walkthrough of the whole workflow — exporting, compressed meshes, discov
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-scene>`](../pc-scene) or a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-scene>`](../pc-scene), a [`<pc-entity>`](../pc-entity), another `<pc-model>` or a [`<pc-node>`](../pc-node).
 * It can have 0..n [`<pc-node>`](../pc-node) children, each binding to a node inside the instantiated hierarchy to override it, add components to it or attach new content under it.
+* It can have [`<pc-entity>`](../pc-entity) and `<pc-model>` children, and one of each component type — it hosts them exactly as a [`<pc-entity>`](../pc-entity) does.
 
 :::
 
+`<pc-model>` is an entity in its own right, not just a loader. The element creates its own entity — the *host* — and parents the GLB's instantiated content beneath it. That is what lets a model carry components and children directly:
+
+```html
+<pc-model name="t-rex" asset="t-rex" scale="3 3 3">
+    <pc-anim></pc-anim>
+</pc-model>
+```
+
+The host is the element's `entity`, and it is stable: it exists from boot, survives a change of `asset`, and keeps whatever components and children were attached to it across a reload. The instantiated GLB content is separately available as `contentEntity`.
+
+Because the element's own transform belongs to the host, `position`, `rotation` and `scale` are *instance placement* — they compose with whatever transform the asset authored on its own root rather than replacing it.
+
 ## Attributes
 
-All attributes of [`<pc-entity>`](../pc-entity) are also available.
+`<pc-model>` takes every attribute of [`<pc-entity>`](../pc-entity), including the `onpointer*` inline handlers, and adds `asset`.
 
 <div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | String | - | Container asset ID (must reference a `container` type asset) |
+| `enabled` | Boolean | `"true"` | Enabled state of the model |
+| `name` | String | - | Name identifier for the host entity |
+| `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
+| `rotation` | Vector3 | `"0 0 0"` | Local-space rotation as "X Y Z" Euler angles in degrees |
+| `scale` | Vector3 | `"1 1 1"` | Local-space scale as "X Y Z" values |
+| `tags` | String | - | Comma-separated list of tags |
 
 </div>
 
@@ -37417,21 +37419,34 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
 
-The element becomes ready once its hierarchy has been instantiated and added to the scene, so a ready `<pc-model>` always has a non-null `entity` with valid world transforms. A failed load also settles readiness, with `entity` left `null` — readiness means the load settled, not that it succeeded, so listen for `error` (or check `entity`) to tell the two apart.
+The host is registered for picking, so `<pc-model>` also fires the five pointer events a [`<pc-entity>`](../pc-entity) does — `pointerdown`, `pointerenter`, `pointerleave`, `pointermove` and `pointerup` — with the same inline `onpointer*` attribute forms. A whole model becomes clickable without a wrapper or a [`<pc-node>`](../pc-node):
+
+```html
+<pc-model asset="t-rex" onpointerdown="this.setAttribute('scale', '2 2 2')"></pc-model>
+```
+
+Pointer events resolve to the nearest *listening* element, so a model that listens for nothing does not swallow events from a listening ancestor.
+
+Readiness means the current `asset` selection has settled, which covers three outcomes: content loaded and parented beneath the host, a load that failed, or no `asset` assigned at all. The host `entity` is non-null throughout — including after a failure — so it is not the way to tell success from failure. Use the `error` event, or check `contentEntity`:
+
+```javascript
+const model = await whenReady('pc-model');
+if (!model.contentEntity) {
+    // no asset, or the load failed
+}
+```
 
 ## Animation
 
 A container's animations play when you nest a [`<pc-anim>`](../pc-anim) inside the model. One empty tag is enough to get what the file came with — every animation in the container becomes a clip, named after its track, and the first one starts playing:
 
 ```html
-<pc-entity name="robot">
-    <pc-model asset="robot">
-        <pc-anim></pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model asset="robot">
+    <pc-anim></pc-anim>
+</pc-model>
 ```
 
-The `<pc-entity>` wrapper is not decoration: the component attaches to the nearest enclosing entity rather than to the instantiated root, so a `<pc-model>` placed directly under a [`<pc-scene>`](../pc-scene) has nowhere to put it and warns instead. Add [`<pc-anim-clip>`](../pc-anim-clip) children to name the clips yourself, set a per-clip speed or looping, or take clips from other files.
+The component attaches to the model's host, so no wrapper entity is involved. Add [`<pc-anim-clip>`](../pc-anim-clip) children to name the clips yourself, set a per-clip speed or looping, or take clips from other files.
 
 To check whether a file's animations survived its export, ask the component what it found:
 
@@ -37455,9 +37470,9 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](../pc-anim) nested 
     <pc-scene>
         <pc-entity name="camera" position="2.5 1.5 3.5">
             <pc-camera clear-color="#2a2d36"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
@@ -37465,11 +37480,9 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](../pc-anim) nested 
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
-            <pc-model asset="t-rex">
-                <pc-anim></pc-anim>
-            </pc-model>
-        </pc-entity>
+        <pc-model name="t-rex" asset="t-rex" scale="1.5 1.5 1.5">
+            <pc-anim></pc-anim>
+        </pc-model>
     </pc-scene>
 </pc-app>
 ```
@@ -37486,6 +37499,26 @@ To reach inside the loaded hierarchy, nest a [`<pc-node>`](../pc-node) for each 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
+
+### The Two Entities
+
+A `<pc-model>` exposes two entities, and picking the wrong one is the easiest mistake to make here:
+
+| Property | What it is |
+| --- | --- |
+| `entity` | The **host** the element creates and fronts. Non-null from boot, stable across `asset` changes, and where components and child elements attach |
+| `contentEntity` | The **instantiated GLB root**, parented beneath the host. `null` until a load succeeds, and replaced on every reload |
+
+So components go on `entity`, and questions about what the file contained go to `contentEntity`:
+
+```javascript
+const model = await whenReady('pc-model');
+
+model.entity.anim;          // the component a nested <pc-anim> added
+model.contentEntity.name;   // the GLB root's own name, e.g. 'Sketchfab_model'
+```
+
+`hierarchy()` and [`<pc-node>`](../pc-node) resolution are both scoped to the content root, so the host never appears in a printed tree, a node `path`, or a name search.
 
 ### Inspecting the Hierarchy
 
@@ -37527,92 +37560,6 @@ The tree is a snapshot, computed afresh on each call: it does not track later ch
 
 --------------------------------------------------------------------------------
 
-## <pc-module>
-
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-module/
-
-The `<pc-module>` tag is used to load a WebAssembly module.
-
-:::note[Usage]
-
-* It must be a direct child of [`<pc-app>`](../pc-app).
-
-:::
-
-## Attributes
-
-<div className="attribute-table">
-
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `fallback` | String | - | Path to fallback (asm.js) code when WebAssembly is not supported |
-| `glue` | String | - | Path to the JavaScript glue code for the module |
-| `name` | String | - | Module name used to reference it in scripts |
-| `wasm` | String | - | Path to the WebAssembly (.wasm) file |
-
-</div>
-
-The `name` is case-sensitive — the engine looks the module up by exact name. The modules consumed by the engine are `Ammo` (physics), `Basis` (texture transcoding) and `DracoDecoderModule` (mesh decompression).
-
-:::note[When these are read]
-
-The attributes are read once, when the module starts loading — on the element's first connection
-to the document, or earlier if a containing `<pc-app>` boots first and collects it. Changing them
-afterwards has no effect. Creating the element programmatically works as you would expect: set the
-attributes before appending the element to the document.
-
-:::
-
-## Readiness
-
-The element initializes asynchronously and becomes ready once its module has loaded: it fires the
-standard `ready` event and can be awaited with `whenReady('pc-module')` — see
-[Programmatic Access](../programmatic-access.md). You will rarely need to, though: a containing
-`<pc-app>` waits for every `<pc-module>` declared beneath it before creating its graphics device,
-so an app that is ready is an app whose modules have loaded.
-
-Readiness is deliberately sticky. A WebAssembly module configures engine-global state that never
-unloads, so removing the element does not return it to a pending state, and re-inserting it does
-not load the module again.
-
-A `<pc-module>` without a `name` logs a warning and never becomes ready — but it does not block
-the containing `<pc-app>` from booting.
-
-## Example
-
-Loading the `Ammo` physics module. The box only falls because the module is declared — the app waits for it before booting, so physics is ready when the scene starts. Try removing the `<pc-module>` tag and re-running:
-
-```html live-example
-<pc-app>
-    
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
-    <pc-scene>
-        <pc-entity name="camera" position="0 2 6">
-            <pc-camera clear-color="#1d1f2b"></pc-camera>
-        </pc-entity>
-        <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
-        </pc-entity>
-        <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
-            <pc-render type="box"></pc-render>
-            <pc-collision></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
-        </pc-entity>
-        <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
-            <pc-render type="box"></pc-render>
-            <pc-collision half-extents="5 0.5 5"></pc-collision>
-            <pc-rigidbody type="static"></pc-rigidbody>
-        </pc-entity>
-    </pc-scene>
-</pc-app>
-```
-
-## JavaScript Interface
-
-You can programmatically create and manipulate `<pc-module>` elements using the [ModuleElement API](https://api.playcanvas.com/web-components/classes/ModuleElement.html).
-
---------------------------------------------------------------------------------
-
 ## <pc-node>
 
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-node/
@@ -37628,7 +37575,7 @@ For worked examples of the common adjustments — hiding, re-posing, reskinning,
 * It must be a descendant of a [`<pc-model>`](../pc-model), either directly or nested inside another `<pc-node>`.
 * It can have 0..n nested [`<pc-node>`](../pc-node) children, which resolve their own `name` within the bound node's subtree.
 * It can have 0..n [`<pc-entity>`](../pc-entity) children, which are created and parented under the bound node — attachment points for new content.
-* It can have the same component tags as a [`<pc-entity>`](../pc-entity) — [`<pc-collision>`](../pc-collision), [`<pc-light>`](../pc-light), [`<pc-scripts>`](../pc-scripts) and the rest — which add that component to the bound node.
+* It can have the same component tags as a [`<pc-entity>`](../pc-entity) — [`<pc-collision>`](../pc-collision), [`<pc-light>`](../pc-light), [`<pc-script>`](../pc-script) and the rest — which add that component to the bound node.
 
 :::
 
@@ -37728,9 +37675,9 @@ This GLB instantiates two nodes — `play` (the orange shell, its logo cut out o
     <pc-scene>
         <pc-entity name="camera" position="0 0 3">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light intensity="2"></pc-light>
@@ -37767,11 +37714,11 @@ The element stores a frozen copy of what you assign, so mutating your object aft
 
 --------------------------------------------------------------------------------
 
-## <pc-particles>
+## <pc-particle-system>
 
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-particles/
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-particle-system/
 
-The `<pc-particles>` tag is used to define a particle system.
+The `<pc-particle-system>` tag is used to define a particle system.
 
 :::note[Usage]
 
@@ -37843,7 +37790,7 @@ Then add the particle system to your scene in HTML. This runs the `snow.json` ab
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="snow" position="0 5 0">
-            <pc-particles asset="snow"></pc-particles>
+            <pc-particle-system asset="snow"></pc-particle-system>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -37851,7 +37798,7 @@ Then add the particle system to your scene in HTML. This runs the `snow.json` ab
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-particles>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).
+You can programmatically create and manipulate `<pc-particle-system>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).
 
 --------------------------------------------------------------------------------
 
@@ -37928,17 +37875,17 @@ You can programmatically create and manipulate `<pc-render>` elements using the 
 
 --------------------------------------------------------------------------------
 
-## <pc-rigidbody>
+## <pc-rigid-body>
 
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigidbody/
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body/
 
-The `<pc-rigidbody>` tag is used to define a rigidbody component.
+The `<pc-rigid-body>` tag is used to define a rigidbody component.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 * It must be a sibling of a [`<pc-collision>`](../pc-collision) component.
-* The ammo.js WebAssembly module must be loaded via a [`<pc-module>`](../pc-module) tag.
+* The ammo.js WebAssembly module must be loaded via a [`<pc-wasm>`](../pc-wasm) tag.
 
 :::
 
@@ -37967,7 +37914,7 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
 
 ```html live-example
 <pc-app>
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
     <pc-scene>
         <pc-entity name="camera" position="0 2 8">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -37978,22 +37925,22 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
         <pc-entity name="box-1" position="-1.5 4 0" rotation="30 10 40">
             <pc-render type="box"></pc-render>
             <pc-collision></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="box-2" position="0 6 0" rotation="10 40 20">
             <pc-render type="box"></pc-render>
             <pc-collision></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="ball" position="1.5 5 0">
             <pc-render type="sphere"></pc-render>
             <pc-collision type="sphere"></pc-collision>
-            <pc-rigidbody type="dynamic" restitution="0.9"></pc-rigidbody>
+            <pc-rigid-body type="dynamic" restitution="0.9"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="6 0.5 6"></pc-collision>
-            <pc-rigidbody type="static"></pc-rigidbody>
+            <pc-rigid-body type="static"></pc-rigid-body>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -38001,7 +37948,7 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-rigidbody>` elements using the [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html).
+You can programmatically create and manipulate `<pc-rigid-body>` elements using the [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html).
 
 --------------------------------------------------------------------------------
 
@@ -38136,15 +38083,15 @@ You can programmatically create and manipulate `<pc-screen>` elements using the 
 
 --------------------------------------------------------------------------------
 
-## <pc-script>
+## <pc-script-instance>
 
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-script-instance/
 
-The `<pc-script>` tag is used to define a script.
+The `<pc-script-instance>` tag is used to define a script.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-scripts>`](../pc-scripts) component.
+* It must be a direct child of a [`<pc-script>`](../pc-script) component.
 * The script must have been loaded via the [`<pc-asset>`](../pc-asset) tag.
 
 :::
@@ -38163,9 +38110,11 @@ The `<pc-script>` tag is used to define a script.
 
 In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
 
+Declared values are the source of truth. When the host entity cycles — a [`<pc-node>`](../pc-node) rebinding after its model reloads, for instance — a surviving script instance has its declared state re-asserted, which deliberately snaps back any runtime mutation of a declared property. Keep state you change at runtime in properties the markup does not declare.
+
 ## Example
 
-A `rotate` script attached to a cube. Script classes usually load from a [`<pc-asset>`](../pc-asset), but they can also be registered from an inline module — the `<pc-script>` stays pending until its class arrives. Try changing the rotation rates:
+A `rotate` script attached to a cube. Script classes usually load from a [`<pc-asset>`](../pc-asset), but they can also be registered from an inline module — the `<pc-script-instance>` stays pending until its class arrives. Try changing the rotation rates:
 
 ```html live-example
 <pc-app>
@@ -38178,9 +38127,9 @@ A `rotate` script attached to a cube. Script classes usually load from a [`<pc-a
         </pc-entity>
         <pc-entity name="cube">
             <pc-render type="box"></pc-render>
-            <pc-scripts>
-                <pc-script name="rotate"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="rotate"></pc-script-instance>
+            </pc-script>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -38203,22 +38152,22 @@ A `rotate` script attached to a cube. Script classes usually load from a [`<pc-a
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-script>` elements using the [ScriptElement API](https://api.playcanvas.com/web-components/classes/ScriptElement.html).
+You can programmatically create and manipulate `<pc-script-instance>` elements using the [ScriptInstanceElement API](https://api.playcanvas.com/web-components/classes/ScriptInstanceElement.html).
 
-The element becomes ready once its script instance has been created — await `whenReady('pc-script')` or the element's `ready()` promise. The live `Script` instance is then available via the `script` property, and script attributes can be read and written as an object via the `scriptAttributes` property.
+The element becomes ready once its script instance has been created — await `whenReady('pc-script-instance')` or the element's `ready()` promise. The live `Script` instance is then available via the `script` property, and script attributes can be read and written as an object via the `scriptAttributes` property.
 
 --------------------------------------------------------------------------------
 
-## <pc-scripts>
+## <pc-script>
 
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scripts/
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/
 
-The `<pc-scripts>` tag is used to define a script component.
+The `<pc-script>` tag is used to define a script component.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
-* It can have 0..n [`<pc-script>`](../pc-script) children.
+* It can have 0..n [`<pc-script-instance>`](../pc-script-instance) children.
 
 :::
 
@@ -38234,7 +38183,7 @@ The `<pc-scripts>` tag is used to define a script component.
 
 ## Example
 
-One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script>` tags, or setting `enabled="false"` on the `<pc-scripts>` component to switch both off:
+One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script-instance>` tags, or setting `enabled="false"` on the `<pc-script>` component to switch both off:
 
 ```html live-example
 <pc-app>
@@ -38247,10 +38196,10 @@ One script component holding two scripts — `rotate` spins the cube while `puls
         </pc-entity>
         <pc-entity name="cube">
             <pc-render type="box"></pc-render>
-            <pc-scripts>
-                <pc-script name="rotate"></pc-script>
-                <pc-script name="pulse"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="rotate"></pc-script-instance>
+                <pc-script-instance name="pulse"></pc-script-instance>
+            </pc-script>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -38283,7 +38232,105 @@ One script component holding two scripts — `rotate` spins the cube while `puls
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-scripts>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html).
+You can programmatically create and manipulate `<pc-script>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-scroll-view>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view/
+
+The `<pc-scroll-view>` tag is used to define a scroll view component, which lets the user scroll a larger content area within a clipped viewport.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It references its viewport, content, and scrollbar entities by CSS selector, element id, or entity name.
+* The viewport element should have its `mask` attribute set so the content is clipped to the scroll view's bounds.
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `bounce-amount` | Number | `"0.1"` | How far content bounces past its bounds when `scroll-mode="bounce"` (0 to 1) |
+| `content` | String | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
+| `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
+| `horizontal-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
+| `horizontal-scrollbar-visibility` | Enum | `"when-required"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
+| `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
+| `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
+| `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
+| `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
+| `vertical-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
+| `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
+| `viewport` | String | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
+
+</div>
+
+## Example
+
+Scroll the striped content with the mouse wheel, by dragging it, or with the scrollbar. The viewport's `mask` clips the content. Try `scroll-mode="clamp"` (no bounce), or a taller content `height`:
+
+```html live-example
+<pc-app max-pixel-ratio="1">
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="scroll-view">
+                <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="260"></pc-element>
+                <pc-scroll-view
+                    horizontal="false"
+                    vertical="true"
+                    viewport="#viewport"
+                    content="#content"
+                    vertical-scrollbar="#v-scrollbar"></pc-scroll-view>
+
+                
+                <pc-entity name="viewport" id="viewport">
+                    <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" color="#2a2d36" mask></pc-element>
+
+                    
+                    <pc-entity name="content" id="content">
+                        <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="556" use-input></pc-element>
+                        <pc-layout-group orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layout-group>
+                        <pc-entity name="row-1"><pc-element type="image" width="220" height="60" color="#ff8a3c"></pc-element></pc-entity>
+                        <pc-entity name="row-2"><pc-element type="image" width="220" height="60" color="#7ab8ff"></pc-element></pc-entity>
+                        <pc-entity name="row-3"><pc-element type="image" width="220" height="60" color="#8ce99a"></pc-element></pc-entity>
+                        <pc-entity name="row-4"><pc-element type="image" width="220" height="60" color="#ffd43b"></pc-element></pc-entity>
+                        <pc-entity name="row-5"><pc-element type="image" width="220" height="60" color="#e599f7"></pc-element></pc-entity>
+                        <pc-entity name="row-6"><pc-element type="image" width="220" height="60" color="#63e6be"></pc-element></pc-entity>
+                        <pc-entity name="row-7"><pc-element type="image" width="220" height="60" color="#ffa8a8"></pc-element></pc-entity>
+                        <pc-entity name="row-8"><pc-element type="image" width="220" height="60" color="#74c0fc"></pc-element></pc-entity>
+                    </pc-entity>
+                </pc-entity>
+
+                
+                <pc-entity name="v-scrollbar" id="v-scrollbar">
+                    <pc-element type="image" anchor="1 0 1 1" pivot="1 0.5" width="20" margin="0 0 0 0" color="#2a2d36"></pc-element>
+                    <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
+                    <pc-entity name="handle" id="v-handle">
+                        <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
+                        <pc-button></pc-button>
+                    </pc-entity>
+                </pc-entity>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-scroll-view>` elements using the [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html).
 
 --------------------------------------------------------------------------------
 
@@ -38296,7 +38343,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
-* It is referenced by a [`<pc-scrollview>`](../pc-scrollview) via its `horizontal-scrollbar` or `vertical-scrollbar` attribute.
+* It is referenced by a [`<pc-scroll-view>`](../pc-scroll-view) via its `horizontal-scrollbar` or `vertical-scrollbar` attribute.
 * Its `handle` attribute references the [`<pc-entity>`](../pc-entity) used as the draggable handle, whose image element should have `use-input` set.
 
 :::
@@ -38349,104 +38396,6 @@ You can programmatically create and manipulate `<pc-scrollbar>` elements using t
 
 --------------------------------------------------------------------------------
 
-## <pc-scrollview>
-
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollview/
-
-The `<pc-scrollview>` tag is used to define a scroll view component, which lets the user scroll a larger content area within a clipped viewport.
-
-:::note[Usage]
-
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
-* It references its viewport, content, and scrollbar entities by CSS selector, element id, or entity name.
-* The viewport element should have its `mask` attribute set so the content is clipped to the scroll view's bounds.
-
-:::
-
-## Attributes
-
-<div className="attribute-table">
-
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `bounce-amount` | Number | `"0.1"` | How far content bounces past its bounds when `scroll-mode="bounce"` (0 to 1) |
-| `content` | String | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
-| `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
-| `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
-| `horizontal-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
-| `horizontal-scrollbar-visibility` | Enum | `"when-required"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
-| `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
-| `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
-| `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
-| `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
-| `vertical-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
-| `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
-| `viewport` | String | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
-
-</div>
-
-## Example
-
-Scroll the striped content with the mouse wheel, by dragging it, or with the scrollbar. The viewport's `mask` clips the content. Try `scroll-mode="clamp"` (no bounce), or a taller content `height`:
-
-```html live-example
-<pc-app max-pixel-ratio="1">
-    <pc-scene>
-        <pc-entity name="camera">
-            <pc-camera clear-color="#1d1f2b"></pc-camera>
-        </pc-entity>
-        <pc-entity name="ui">
-            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
-            <pc-entity name="scroll-view">
-                <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="260"></pc-element>
-                <pc-scrollview
-                    horizontal="false"
-                    vertical="true"
-                    viewport="#viewport"
-                    content="#content"
-                    vertical-scrollbar="#v-scrollbar"></pc-scrollview>
-
-                
-                <pc-entity name="viewport" id="viewport">
-                    <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" color="#2a2d36" mask></pc-element>
-
-                    
-                    <pc-entity name="content" id="content">
-                        <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="556" use-input></pc-element>
-                        <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layoutgroup>
-                        <pc-entity name="row-1"><pc-element type="image" width="220" height="60" color="#ff8a3c"></pc-element></pc-entity>
-                        <pc-entity name="row-2"><pc-element type="image" width="220" height="60" color="#7ab8ff"></pc-element></pc-entity>
-                        <pc-entity name="row-3"><pc-element type="image" width="220" height="60" color="#8ce99a"></pc-element></pc-entity>
-                        <pc-entity name="row-4"><pc-element type="image" width="220" height="60" color="#ffd43b"></pc-element></pc-entity>
-                        <pc-entity name="row-5"><pc-element type="image" width="220" height="60" color="#e599f7"></pc-element></pc-entity>
-                        <pc-entity name="row-6"><pc-element type="image" width="220" height="60" color="#63e6be"></pc-element></pc-entity>
-                        <pc-entity name="row-7"><pc-element type="image" width="220" height="60" color="#ffa8a8"></pc-element></pc-entity>
-                        <pc-entity name="row-8"><pc-element type="image" width="220" height="60" color="#74c0fc"></pc-element></pc-entity>
-                    </pc-entity>
-                </pc-entity>
-
-                
-                <pc-entity name="v-scrollbar" id="v-scrollbar">
-                    <pc-element type="image" anchor="1 0 1 1" pivot="1 0.5" width="20" margin="0 0 0 0" color="#2a2d36"></pc-element>
-                    <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
-                    <pc-entity name="handle" id="v-handle">
-                        <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
-                        <pc-button></pc-button>
-                    </pc-entity>
-                </pc-entity>
-            </pc-entity>
-        </pc-entity>
-    </pc-scene>
-</pc-app>
-```
-
-## JavaScript Interface
-
-You can programmatically create and manipulate `<pc-scrollview>` elements using the [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html).
-
---------------------------------------------------------------------------------
-
 ## <pc-sky>
 
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky/
@@ -38488,9 +38437,9 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
         <pc-entity name="camera" position="0 1.5 5">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" pitch-range="-90 0" zoom-range="2 12"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" pitch-range="-90 0" zoom-range="2 12"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="sphere" position="0 1 0">
             <pc-render type="sphere"></pc-render>
@@ -38505,15 +38454,15 @@ You can programmatically create and manipulate `<pc-sky>` elements using the [Sk
 
 --------------------------------------------------------------------------------
 
-## <pc-sound>
+## <pc-sound-slot>
 
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot/
 
-The `<pc-sound>` tag is used to define a sound.
+The `<pc-sound-slot>` tag is used to define a sound.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-sounds>`](../pc-sounds) component.
+* It must be a direct child of a [`<pc-sound>`](../pc-sound) component.
 
 :::
 
@@ -38547,10 +38496,10 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="jukebox">
-            <pc-sounds>
-                <pc-sound name="drop" asset="drop"></pc-sound>
-                <pc-sound name="drop-slow" asset="drop" pitch="0.5" volume="0.8"></pc-sound>
-            </pc-sounds>
+            <pc-sound>
+                <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
+                <pc-sound-slot name="drop-slow" asset="drop" pitch="0.5" volume="0.8"></pc-sound-slot>
+            </pc-sound>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -38570,7 +38519,7 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
 <script type="module">
     import { whenReady } from '@playcanvas/web-components';
 
-    const sounds = await whenReady('pc-sounds');
+    const sounds = await whenReady('pc-sound');
     document.getElementById('play').onclick = () => sounds.component.slot('drop').play();
     document.getElementById('play-slow').onclick = () => sounds.component.slot('drop-slow').play();
 </script>
@@ -38578,20 +38527,20 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-sound>` elements using the [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html).
+You can programmatically create and manipulate `<pc-sound-slot>` elements using the [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html).
 
 --------------------------------------------------------------------------------
 
-## <pc-sounds>
+## <pc-sound>
 
-URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-sounds/
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/
 
-The `<pc-sounds>` tag is used to define a sound component.
+The `<pc-sound>` tag is used to define a sound component.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
-* It can have 0..n [`<pc-sound>`](../pc-sound) children.
+* It can have 0..n [`<pc-sound-slot>`](../pc-sound-slot) children.
 
 :::
 
@@ -38625,10 +38574,10 @@ One sound component holding two slots — looping footsteps and a one-shot. The 
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="speaker">
-            <pc-sounds volume="1" pitch="1">
-                <pc-sound name="footsteps" asset="footsteps" loop="true"></pc-sound>
-                <pc-sound name="drop" asset="drop"></pc-sound>
-            </pc-sounds>
+            <pc-sound volume="1" pitch="1">
+                <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
+                <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
+            </pc-sound>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -38648,7 +38597,7 @@ One sound component holding two slots — looping footsteps and a one-shot. The 
 <script type="module">
     import { whenReady } from '@playcanvas/web-components';
 
-    const sounds = await whenReady('pc-sounds');
+    const sounds = await whenReady('pc-sound');
     const footsteps = sounds.component.slot('footsteps');
     document.getElementById('toggle').onclick = () => {
         footsteps.isPlaying ? footsteps.stop() : footsteps.play();
@@ -38659,7 +38608,93 @@ One sound component holding two slots — looping footsteps and a one-shot. The 
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-sounds>` elements using the [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html).
+You can programmatically create and manipulate `<pc-sound>` elements using the [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html).
+
+--------------------------------------------------------------------------------
+
+## <pc-wasm>
+
+URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm/
+
+The `<pc-wasm>` tag is used to load a WebAssembly module.
+
+:::note[Usage]
+
+* It must be a direct child of [`<pc-app>`](../pc-app).
+
+:::
+
+## Attributes
+
+<div className="attribute-table">
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fallback` | String | - | Path to fallback (asm.js) code when WebAssembly is not supported |
+| `glue` | String | - | Path to the JavaScript glue code for the module |
+| `name` | String | - | Module name used to reference it in scripts |
+| `wasm` | String | - | Path to the WebAssembly (.wasm) file |
+
+</div>
+
+The `name` is case-sensitive — the engine looks the module up by exact name. The modules consumed by the engine are `Ammo` (physics), `Basis` (texture transcoding) and `DracoDecoderModule` (mesh decompression).
+
+:::note[When these are read]
+
+The attributes are read once, when the module starts loading — on the element's first connection
+to the document, or earlier if a containing `<pc-app>` boots first and collects it. Changing them
+afterwards has no effect. Creating the element programmatically works as you would expect: set the
+attributes before appending the element to the document.
+
+:::
+
+## Readiness
+
+The element initializes asynchronously and becomes ready once its module has loaded: it fires the
+standard `ready` event and can be awaited with `whenReady('pc-wasm')` — see
+[Programmatic Access](../programmatic-access.md). You will rarely need to, though: a containing
+`<pc-app>` waits for every `<pc-wasm>` declared beneath it before creating its graphics device,
+so an app that is ready is an app whose modules have loaded.
+
+Readiness is deliberately sticky. A WebAssembly module configures engine-global state that never
+unloads, so removing the element does not return it to a pending state, and re-inserting it does
+not load the module again.
+
+A `<pc-wasm>` without a `name` logs a warning and never becomes ready — but it does not block
+the containing `<pc-app>` from booting.
+
+## Example
+
+Loading the `Ammo` physics module. The box only falls because the module is declared — the app waits for it before booting, so physics is ready when the scene starts. Try removing the `<pc-wasm>` tag and re-running:
+
+```html live-example
+<pc-app>
+    
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
+    <pc-scene>
+        <pc-entity name="camera" position="0 2 6">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows></pc-light>
+        </pc-entity>
+        <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
+            <pc-render type="box"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
+            <pc-render type="box"></pc-render>
+            <pc-collision half-extents="5 0.5 5"></pc-collision>
+            <pc-rigid-body type="static"></pc-rigid-body>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-wasm>` elements using the [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html).
 
 --------------------------------------------------------------------------------
 
@@ -38719,15 +38754,15 @@ The XR scripts should be attached to a *parent* of the camera entity — `xrSess
     <pc-entity name="camera" position="0 1.7 5">
         <pc-camera></pc-camera>
     </pc-entity>
-    <pc-scripts>
-        <pc-script name="xrControllers"></pc-script>
-        <pc-script name="xrMenu" attributes='{
+    <pc-script>
+        <pc-script-instance name="xrControllers"></pc-script-instance>
+        <pc-script-instance name="xrMenu" attributes='{
             "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
             "fontAsset": "asset:arial-font"
-        }'></pc-script>
-        <pc-script name="xrNavigation"></pc-script>
-        <pc-script name="xrSession"></pc-script>
-    </pc-scripts>
+        }'></pc-script-instance>
+        <pc-script-instance name="xrNavigation"></pc-script-instance>
+        <pc-script-instance name="xrSession"></pc-script-instance>
+    </pc-script>
 </pc-entity>
 ```
 
