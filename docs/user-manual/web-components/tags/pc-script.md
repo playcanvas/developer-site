@@ -1,14 +1,14 @@
 ---
 title: <pc-script>
-description: "Reference for the pc-script element: attach a single script class to an entity, configure script attributes per-property or as JSON."
+description: "Reference for the pc-script element: script component container grouping multiple pc-script-instance children and shared script settings."
 ---
 
-The `<pc-script>` tag is used to define a script.
+The `<pc-script>` tag is used to define a script component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-scripts>`](../pc-scripts) component.
-* The script must have been loaded via the [`<pc-asset>`](../pc-asset) tag.
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It can have 0..n [`<pc-script-instance>`](../pc-script-instance) children.
 
 :::
 
@@ -18,17 +18,13 @@ The `<pc-script>` tag is used to define a script.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `attributes` | String | `""` | JSON object of script attributes. Use it for nested structures and for script attribute names that collide with reserved HTML attribute names (e.g. `title`) |
-| `enabled` | Boolean | `"true"` | Enabled state of the script |
-| `name` | String | - | Script name (must match the script's `scriptName` property) |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
 
 </div>
 
-In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
-
 ## Example
 
-A `rotate` script attached to a cube. Script classes usually load from a [`<pc-asset>`](../pc-asset), but they can also be registered from an inline module — the `<pc-script>` stays pending until its class arrives. Try changing the rotation rates:
+One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script-instance>` tags, or setting `enabled="false"` on the `<pc-script>` component to switch both off:
 
 ```html live-example
 <pc-app>
@@ -41,9 +37,10 @@ A `rotate` script attached to a cube. Script classes usually load from a [`<pc-a
         </pc-entity>
         <pc-entity name="cube">
             <pc-render type="box"></pc-render>
-            <pc-scripts>
-                <pc-script name="rotate"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="rotate"></pc-script-instance>
+                <pc-script-instance name="pulse"></pc-script-instance>
+            </pc-script>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -51,21 +48,29 @@ A `rotate` script attached to a cube. Script classes usually load from a [`<pc-a
     import { registerScript, Script } from 'playcanvas';
     import { whenReady } from '@playcanvas/web-components';
 
-    // Wait for the application, then register the script class
     await whenReady('pc-app');
 
     class Rotate extends Script {
         update(dt) {
-            this.entity.rotate(10 * dt, 20 * dt, 30 * dt);
+            this.entity.rotate(0, 90 * dt, 0);
+        }
+    }
+
+    class Pulse extends Script {
+        time = 0;
+
+        update(dt) {
+            this.time += dt;
+            const s = 1 + 0.2 * Math.sin(this.time * 3);
+            this.entity.setLocalScale(s, s, s);
         }
     }
 
     registerScript(Rotate, 'rotate');
+    registerScript(Pulse, 'pulse');
 </script>
 ```
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-script>` elements using the [ScriptElement API](https://api.playcanvas.com/web-components/classes/ScriptElement.html).
-
-The element becomes ready once its script instance has been created — await `whenReady('pc-script')` or the element's `ready()` promise. The live `Script` instance is then available via the `script` property, and script attributes can be read and written as an object via the `scriptAttributes` property.
+You can programmatically create and manipulate `<pc-script>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html).

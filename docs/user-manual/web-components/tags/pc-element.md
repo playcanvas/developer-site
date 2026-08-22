@@ -5,6 +5,8 @@ description: "Reference for the pc-element element: text, image, and group UI el
 
 The `<pc-element>` tag is used to define an element component. Element components are the building blocks of user interfaces and come in three types — `group`, `image`, and `text` — selected with the `type` attribute. Which attributes apply depends on the type.
 
+Despite the name, this is not a base class or a generic wrapper. `<pc-element>` is the engine's 2D UI component, and like every component tag it spells the component it adds (`entity.element`): it gives its host entity a rectangle inside a [`<pc-screen>`](../pc-screen) hierarchy that draws an image, a line of text, or nothing at all.
+
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).

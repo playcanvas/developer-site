@@ -52,7 +52,7 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 ```html live-example
 <pc-app>
     <!-- 物理にはammo.jsのWebAssemblyモジュールが必要です -->
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
     <pc-scene>
         <pc-entity name="camera" position="0 2 8">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -63,22 +63,22 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
         <pc-entity name="ball" position="-1.5 4 0">
             <pc-render type="sphere"></pc-render>
             <pc-collision type="sphere" radius="0.5"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="pill" position="0 5 0" rotation="0 0 70">
             <pc-render type="capsule"></pc-render>
             <pc-collision type="capsule" radius="0.5" height="2"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="crate" position="1.5 6 0" rotation="20 30 40">
             <pc-render type="box"></pc-render>
             <pc-collision type="box" half-extents="0.5 0.5 0.5"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="6 0.5 6"></pc-collision>
-            <pc-rigidbody type="static"></pc-rigidbody>
+            <pc-rigid-body type="static"></pc-rigid-body>
         </pc-entity>
     </pc-scene>
 </pc-app>

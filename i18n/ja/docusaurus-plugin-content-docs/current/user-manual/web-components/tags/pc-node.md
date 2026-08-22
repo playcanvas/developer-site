@@ -14,7 +14,7 @@ description: "pc-node要素のリファレンス: 読み込まれたモデルの
 * [`<pc-model>`](../pc-model)の子孫である必要があります。直接の子か、別の`<pc-node>`の内側にネストされている必要があります。
 * 0からn個のネストされた[`<pc-node>`](../pc-node)の子を持つことができます。それらは自身の`name`を、バインドされたノードのサブツリー内で解決します。
 * 0からn個の[`<pc-entity>`](../pc-entity)の子を持つことができます。それらは作成され、バインドされたノードの下に親子付けされます — 新しいコンテンツのアタッチポイントです。
-* [`<pc-entity>`](../pc-entity)と同じコンポーネントタグ — [`<pc-collision>`](../pc-collision)、[`<pc-light>`](../pc-light)、[`<pc-scripts>`](../pc-scripts)など — を持つことができます。それらはバインドされたノードにそのコンポーネントを追加します。
+* [`<pc-entity>`](../pc-entity)と同じコンポーネントタグ — [`<pc-collision>`](../pc-collision)、[`<pc-light>`](../pc-light)、[`<pc-script>`](../pc-script)など — を持つことができます。それらはバインドされたノードにそのコンポーネントを追加します。
 
 :::
 
@@ -114,9 +114,9 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
     <pc-scene>
         <pc-entity name="camera" position="0 0 3">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light intensity="2"></pc-light>

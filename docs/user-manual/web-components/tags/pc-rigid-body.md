@@ -1,15 +1,15 @@
 ---
-title: <pc-rigidbody>
-description: "Reference for the pc-rigidbody element: rigid body type, mass, friction, restitution, and integration with collision components."
+title: <pc-rigid-body>
+description: "Reference for the pc-rigid-body element: rigid body type, mass, friction, restitution, and integration with collision components."
 ---
 
-The `<pc-rigidbody>` tag is used to define a rigidbody component.
+The `<pc-rigid-body>` tag is used to define a rigidbody component.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity).
 * It must be a sibling of a [`<pc-collision>`](../pc-collision) component.
-* The ammo.js WebAssembly module must be loaded via a [`<pc-module>`](../pc-module) tag.
+* The ammo.js WebAssembly module must be loaded via a [`<pc-wasm>`](../pc-wasm) tag.
 
 :::
 
@@ -38,7 +38,7 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
 
 ```html live-example
 <pc-app>
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
     <pc-scene>
         <pc-entity name="camera" position="0 2 8">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -49,22 +49,22 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
         <pc-entity name="box-1" position="-1.5 4 0" rotation="30 10 40">
             <pc-render type="box"></pc-render>
             <pc-collision></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="box-2" position="0 6 0" rotation="10 40 20">
             <pc-render type="box"></pc-render>
             <pc-collision></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="ball" position="1.5 5 0">
             <pc-render type="sphere"></pc-render>
             <pc-collision type="sphere"></pc-collision>
-            <pc-rigidbody type="dynamic" restitution="0.9"></pc-rigidbody>
+            <pc-rigid-body type="dynamic" restitution="0.9"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="6 0.5 6"></pc-collision>
-            <pc-rigidbody type="static"></pc-rigidbody>
+            <pc-rigid-body type="static"></pc-rigid-body>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -72,4 +72,4 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-rigidbody>` elements using the [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html).
+You can programmatically create and manipulate `<pc-rigid-body>` elements using the [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html).

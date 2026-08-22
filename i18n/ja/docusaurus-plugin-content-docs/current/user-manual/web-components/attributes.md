@@ -37,7 +37,7 @@ Boolean属性は、`"false"` 以外の値（値なしの属性の空の値を含
 <pc-light type="directional" cast-shadows></pc-light>
 
 <!-- "false"を設定して、デフォルトがtrueのオプションを無効化 -->
-<pc-scrollview horizontal="false"></pc-scrollview>
+<pc-scroll-view horizontal="false"></pc-scroll-view>
 ```
 
 ## 数値 {#numbers}
@@ -87,7 +87,7 @@ Invalid value 'bogus' for attribute 'scroll-mode'. Valid values: clamp, bounce, 
 
 ## エンティティ参照 {#entity-references}
 
-一部の属性は、ドキュメント内の別のエンティティを参照します — 例えば、[`<pc-button>`](tags/pc-button.md) の `image`、[`<pc-scrollbar>`](tags/pc-scrollbar.md) の `handle`、[`<pc-scrollview>`](tags/pc-scrollview.md) の `viewport`、`content`、スクロールバー属性です。参照には次のいずれかを使用できます。
+一部の属性は、ドキュメント内の別のエンティティを参照します — 例えば、[`<pc-button>`](tags/pc-button.md) の `image`、[`<pc-scrollbar>`](tags/pc-scrollbar.md) の `handle`、[`<pc-scroll-view>`](tags/pc-scroll-view.md) の `viewport`、`content`、スクロールバー属性です。参照には次のいずれかを使用できます。
 
 * CSSセレクター（例: `#my-id` や `pc-entity[name="Player"]`）
 * 要素の `id`（例: `my-id`）
@@ -99,4 +99,4 @@ Invalid value 'bogus' for attribute 'scroll-mode'. Valid values: clamp, bounce, 
 
 ## スクリプト属性 {#script-attributes}
 
-スクリプトは独自の属性を宣言するため、[`<pc-script>`](tags/pc-script.md) はこれらの規約を、各スクリプト属性の宣言された型に基づいて解析されるプロパティごとの属性で拡張します。詳細は[スクリプトで動作を追加する](scripting.md)を参照してください。
+スクリプトは独自の属性を宣言するため、[`<pc-script-instance>`](tags/pc-script-instance.md) はこれらの規約を、各スクリプト属性の宣言された型に基づいて解析されるプロパティごとの属性で拡張します。詳細は[スクリプトで動作を追加する](scripting.md)を参照してください。

@@ -1,14 +1,14 @@
 ---
-title: <pc-layoutgroup>
-description: "pc-layoutgroup要素のリファレンス: 子要素を水平または垂直のレイアウトに配置し、間隔、パディング、整列、フィッティングを制御します。"
+title: <pc-layout-group>
+description: "pc-layout-group要素のリファレンス: 子要素を水平または垂直のレイアウトに配置し、間隔、パディング、整列、フィッティングを制御します。"
 ---
 
-`<pc-layoutgroup>`タグは、子の要素エンティティを行または列に自動的に配置するレイアウトグループコンポーネントを定義するために使用されます。
+`<pc-layout-group>`タグは、子の要素エンティティを行または列に自動的に配置するレイアウトグループコンポーネントを定義するために使用されます。
 
 :::note[使用法]
 
 * [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
-* 子エンティティは自動的に配置されます。グループ内での子のサイズ調整方法を制御するには、子に [`<pc-layoutchild>`](../pc-layoutchild) を追加します。
+* 子エンティティは自動的に配置されます。グループ内での子のサイズ調整方法を制御するには、子に [`<pc-layout-child>`](../pc-layout-child) を追加します。
 
 :::
 
@@ -45,8 +45,8 @@ description: "pc-layoutgroup要素のリファレンス: 子要素を水平ま�
             <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
             <pc-entity name="list">
                 <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="220"></pc-element>
-                <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8"
-                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+                <pc-layout-group orientation="vertical" alignment="0 1" spacing="0 8"
+                                 padding="10 10 10 10" width-fitting="stretch"></pc-layout-group>
 
                 <pc-entity name="row-1">
                     <pc-element type="image" width="240" height="50" color="#ff8a3c"></pc-element>
@@ -65,4 +65,6 @@ description: "pc-layoutgroup要素のリファレンス: 子要素を水平ま�
 
 ## JavaScriptインターフェース {#javascript-interface}
 
-[LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html)を使用して、`<pc-layoutgroup>`要素をプログラムで作成および操作できます。
+[LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html)を使用して、`<pc-layout-group>`要素をプログラムで作成および操作できます。
+
+[UI Layoutのサンプル](https://playcanvas.github.io/web-components/examples/ui-layout.html)では、ワールド空間のスクリーン上にレイアウトグループを入れ子にして構築しています。

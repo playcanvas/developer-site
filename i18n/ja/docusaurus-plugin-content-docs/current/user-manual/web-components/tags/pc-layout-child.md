@@ -1,14 +1,14 @@
 ---
-title: <pc-layoutchild>
-description: "pc-layoutchild要素のリファレンス: レイアウトグループ内での子ごとのレイアウト制約（最小/最大サイズとフィット比率）です。"
+title: <pc-layout-child>
+description: "pc-layout-child要素のリファレンス: レイアウトグループ内での子ごとのレイアウト制約（最小/最大サイズとフィット比率）です。"
 ---
 
-`<pc-layoutchild>`タグは、親の [`<pc-layoutgroup>`](../pc-layoutgroup) によって要素がどのようにサイズ調整されるかを制御するレイアウトの子コンポーネントを定義するために使用されます。
+`<pc-layout-child>`タグは、親の [`<pc-layout-group>`](../pc-layout-group) によって要素がどのようにサイズ調整されるかを制御するレイアウトの子コンポーネントを定義するために使用されます。
 
 :::note[使用法]
 
 * [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
-* そのエンティティ自体は、[`<pc-layoutgroup>`](../pc-layoutgroup) を持つエンティティの子である必要があります。
+* そのエンティティ自体は、[`<pc-layout-group>`](../pc-layout-group) を持つエンティティの子である必要があります。
 
 :::
 
@@ -43,20 +43,20 @@ description: "pc-layoutchild要素のリファレンス: レイアウトグル�
             <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
             <pc-entity name="toolbar">
                 <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="480" height="70"></pc-element>
-                <pc-layoutgroup orientation="horizontal" alignment="0 0.5" spacing="8 0"
-                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+                <pc-layout-group orientation="horizontal" alignment="0 0.5" spacing="8 0"
+                                 padding="10 10 10 10" width-fitting="stretch"></pc-layout-group>
 
                 <pc-entity name="item-1">
                     <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
-                    <pc-layoutchild></pc-layoutchild>
+                    <pc-layout-child></pc-layout-child>
                 </pc-entity>
                 <pc-entity name="item-2">
                     <pc-element type="image" width="80" height="50" color="#ff8a3c"></pc-element>
-                    <pc-layoutchild fit-width-proportion="1"></pc-layoutchild>
+                    <pc-layout-child fit-width-proportion="1"></pc-layout-child>
                 </pc-entity>
                 <pc-entity name="item-3">
                     <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
-                    <pc-layoutchild></pc-layoutchild>
+                    <pc-layout-child></pc-layout-child>
                 </pc-entity>
             </pc-entity>
         </pc-entity>
@@ -66,4 +66,4 @@ description: "pc-layoutchild要素のリファレンス: レイアウトグル�
 
 ## JavaScriptインターフェース {#javascript-interface}
 
-[LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html)を使用して、`<pc-layoutchild>`要素をプログラムで作成および操作できます。
+[LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html)を使用して、`<pc-layout-child>`要素をプログラムで作成および操作できます。

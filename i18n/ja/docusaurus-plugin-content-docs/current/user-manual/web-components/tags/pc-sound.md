@@ -1,13 +1,14 @@
 ---
 title: <pc-sound>
-description: "pc-sound要素のリファレンス: 位置オーディオまたは非位置のオーディオクリップ、音量、ピッチ、自動再生のルール、Asset参照です。"
+description: "pc-sound要素のリファレンス: pc-sound-slotスロットと共有オーディオ設定をEntity上でまとめるサウンドComponentのコンテナです。"
 ---
 
-`<pc-sound>`タグは、サウンドを定義するために使用されます。
+`<pc-sound>`タグはサウンドコンポーネントを定義するために使用されます。
 
 :::note[使用法]
 
-* [`<pc-sounds>`](../pc-sounds)コンポーネントの直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* 0..n個の[`<pc-sound-slot>`](../pc-sound-slot) 子を持つことができます。
 
 :::
 
@@ -17,40 +18,40 @@ description: "pc-sound要素のリファレンス: 位置オーディオまた�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | String | - | オーディオアセットID（`audio`型アセットを参照する必要があります） |
-| `auto-play` | Boolean | `"false"` | サウンドが自動的に再生されるかどうか |
-| `duration` | Number | - | サウンドの再生時間（秒単位）（省略するとクリップ全体を再生します） |
-| `loop` | Boolean | `"false"` | サウンドがループするかどうか |
-| `name` | String | - | サウンドスロットの名前識別子 |
-| `overlap` | Boolean | `"false"` | 複数回トリガーされたときにサウンドが重なることができるかどうか |
-| `pitch` | Number | `"1"` | ピッチ乗数（1 = 通常ピッチ） |
-| `start-time` | Number | `"0"` | 開始時間のオフセット（秒単位） |
-| `volume` | Number | `"1"` | 音量レベル（0-1） |
+| `distance-model` | Enum | `"linear"` | 距離減衰モデル: `"exponential"` \| `"inverse"` \| `"linear"` |
+| `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `max-distance` | Number | `"10000"` | オーディオ減衰の最大距離 |
+| `pitch` | Number | `"1"` | このコンポーネント内のすべてのサウンドのピッチ乗数 |
+| `positional` | Boolean | `"false"` | サウンドが位置情報を持つか (3D空間オーディオ) |
+| `ref-distance` | Number | `"1"` | 最大音量の基準距離 |
+| `roll-off-factor` | Number | `"1"` | 距離減衰の減衰率ファクター |
+| `volume` | Number | `"1"` | このコンポーネント内のすべてのサウンドのマスターボリューム |
 
 </div>
 
 ## 例 {#example}
 
-同じクリップを再生する2つのスロットです — 2つ目は `pitch` が半分です。ブラウザはユーザー操作の後にしかオーディオを許可しないため、再生はアプリに重ねた通常のHTMLボタンに配線しています。`pitch` や `volume` の値を編集してみましょう:
+2つのスロットを保持する1つのサウンドコンポーネントです — ループする足音と単発の効果音です。コンポーネントの `volume` と `pitch` は保持するすべてのスロットに適用されます。`volume` を半分にしたり、`pitch="1.5"` にして再実行したりしてみましょう:
 
 ```html live-example
 <pc-app>
+    <pc-asset src="https://developer.playcanvas.com/assets/footsteps.mp3" id="footsteps"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/drop.mp3" id="drop"></pc-asset>
     <pc-scene>
         <pc-entity name="camera">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity name="jukebox">
-            <pc-sounds>
-                <pc-sound name="drop" asset="drop"></pc-sound>
-                <pc-sound name="drop-slow" asset="drop" pitch="0.5" volume="0.8"></pc-sound>
-            </pc-sounds>
+        <pc-entity name="speaker">
+            <pc-sound volume="1" pitch="1">
+                <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
+                <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
+            </pc-sound>
         </pc-entity>
     </pc-scene>
 </pc-app>
 <div class="controls">
-    <button id="play">Play</button>
-    <button id="play-slow">Play at half pitch</button>
+    <button id="toggle">Toggle footsteps</button>
+    <button id="drop">Play drop</button>
 </div>
 <style>
     .controls {
@@ -64,12 +65,15 @@ description: "pc-sound要素のリファレンス: 位置オーディオまた�
 <script type="module">
     import { whenReady } from '@playcanvas/web-components';
 
-    const sounds = await whenReady('pc-sounds');
-    document.getElementById('play').onclick = () => sounds.component.slot('drop').play();
-    document.getElementById('play-slow').onclick = () => sounds.component.slot('drop-slow').play();
+    const sounds = await whenReady('pc-sound');
+    const footsteps = sounds.component.slot('footsteps');
+    document.getElementById('toggle').onclick = () => {
+        footsteps.isPlaying ? footsteps.stop() : footsteps.play();
+    };
+    document.getElementById('drop').onclick = () => sounds.component.slot('drop').play();
 </script>
 ```
 
 ## JavaScriptインターフェース {#javascript-interface}
 
-[SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html)を使用して、`<pc-sound>`要素をプログラムで作成および操作できます。
+[SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html)を使用して、`<pc-sound>`要素をプログラムで作成および操作できます。

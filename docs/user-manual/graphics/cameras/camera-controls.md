@@ -72,9 +72,9 @@ import { Script } from '@playcanvas/react/components';
   <pc-scene>
     <pc-entity name="camera" position="0 1 4">
       <pc-camera></pc-camera>
-      <pc-scripts>
-        <pc-script name="cameraControls"></pc-script>
-      </pc-scripts>
+      <pc-script>
+        <pc-script-instance name="cameraControls"></pc-script-instance>
+      </pc-script>
     </pc-entity>
   </pc-scene>
 </pc-app>

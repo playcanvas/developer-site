@@ -25,7 +25,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 | `flip-y` | Boolean | `"false"` | `texture` および `textureatlas` アセットの場合: アップロード時に画像データを垂直方向に反転するかどうか |
 | `frame-keys` | String | - | `sprite` アセットの場合: スプライトを構成するアトラスのフレームキーを、スペースまたはカンマ区切りで指定したリスト |
 | `id` | String | - | 他のタグがこのアセットを参照するために使用する一意の識別子 |
-| `lazy` | Boolean | `"false"` | プリロードをスキップするかどうか。lazyなアセットは[`<pc-model>`](../pc-model)、[`<pc-particles>`](../pc-particles)、[`<pc-sky>`](../pc-sky)、[`<pc-material>`](../pc-material)のテクスチャマップによってオンデマンドでロードされます — その他の要素はロードをトリガーしません |
+| `lazy` | Boolean | `"false"` | プリロードをスキップするかどうか。lazyなアセットは[`<pc-model>`](../pc-model)、[`<pc-particle-system>`](../pc-particle-system)、[`<pc-sky>`](../pc-sky)、[`<pc-material>`](../pc-material)のテクスチャマップによってオンデマンドでロードされます — その他の要素はロードをトリガーしません |
 | `mag-filter` | Enum | `"linear"` | `texture` および `textureatlas` アセットの場合: テクスチャが元のサイズより大きく表示されるときに使用されるフィルター — `"nearest"` \| `"linear"` |
 | `min-filter` | Enum | `"linear-mip-linear"` | `texture` および `textureatlas` アセットの場合: テクスチャが元のサイズより小さく表示されるときに使用されるフィルター — `"nearest"` \| `"linear"` \| `"nearest-mip-nearest"` \| `"linear-mip-nearest"` \| `"nearest-mip-linear"` \| `"linear-mip-linear"` |
 | `mipmaps` | Boolean | `"true"` | `texture` および `textureatlas` アセットの場合: テクスチャがミップマップを生成して使用するかどうか |
@@ -113,9 +113,9 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
     <pc-scene>
         <pc-entity name="camera" position="0 0 3">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light intensity="2"></pc-light>

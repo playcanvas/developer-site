@@ -64,7 +64,7 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
 
 ## カメラコントロールの追加
 
-次に、[`<pc-scripts>`](/user-manual/web-components/tags/pc-scripts)および[`<pc-script>`](/user-manual/web-components/tags/pc-script)要素を使用してカメラコントロールスクリプトを追加し、カメラをインタラクティブにしましょう。
+次に、[`<pc-script>`](/user-manual/web-components/tags/pc-script)および[`<pc-script-instance>`](/user-manual/web-components/tags/pc-script-instance)要素を使用してカメラコントロールスクリプトを追加し、カメラをインタラクティブにしましょう。
 
 ```html {7-9}
 <pc-app antialias="false" max-pixel-ratio="1">
@@ -73,9 +73,9 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
     <pc-scene>
         <pc-entity position="0 0 2.5">
             <pc-camera></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls"></pc-script-instance>
+            </pc-script>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -98,9 +98,9 @@ description: "ステップバイステップ：pc-app、pc-scene、pc-asset、sp
     <pc-scene>
         <pc-entity position="0 0 2.5">
             <pc-camera></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity position="0 -0.7 0" rotation="0 0 180">
             <pc-gsplat asset="toy"></pc-gsplat>

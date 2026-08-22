@@ -40,9 +40,9 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
         <pc-entity name="camera" position="0 1.5 5">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" pitch-range="-90 0" zoom-range="2 12"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" pitch-range="-90 0" zoom-range="2 12"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="sphere" position="0 1 0">
             <pc-render type="sphere"></pc-render>

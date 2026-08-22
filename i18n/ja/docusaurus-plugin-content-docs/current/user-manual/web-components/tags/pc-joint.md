@@ -8,7 +8,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 :::note[使用法]
 
 * [`<pc-entity>`](../pc-entity)または[`<pc-node>`](../pc-node)の直接の子である必要があります。
-* 拘束される両方のエンティティに[`<pc-rigidbody>`](../pc-rigidbody)が必要で、物理には`Ammo`モジュールが必要です。[`<pc-module>`](../pc-module)を参照してください。
+* 拘束される両方のエンティティに[`<pc-rigid-body>`](../pc-rigid-body)が必要で、物理には`Ammo`モジュールが必要です。[`<pc-wasm>`](../pc-wasm)を参照してください。
 
 :::
 
@@ -19,11 +19,11 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 ```html
 <pc-entity name="hinge-anchor" position="0 2 0">
     <pc-collision half-extents="0.25 0.25 0.25"></pc-collision>
-    <pc-rigidbody></pc-rigidbody>
+    <pc-rigid-body></pc-rigid-body>
 </pc-entity>
 <pc-entity name="hinge-arm" position="1 2 0">
     <pc-collision half-extents="1 0.1 0.1"></pc-collision>
-    <pc-rigidbody type="dynamic"></pc-rigidbody>
+    <pc-rigid-body type="dynamic"></pc-rigid-body>
 </pc-entity>
 
 <!-- ジョイントはどちらのボディでもなく、支点に置きます -->
@@ -60,7 +60,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 | `enable-collision` | Boolean | `"false"` | 拘束される2つのボディが互いに衝突するかどうか |
 | `enable-limits` | Boolean | `"false"` | ジョイントのリミットを適用するかどうか。これを設定するまでリミット系の属性は効果がありません |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `entity-a` | String | - | 1つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。[`<pc-rigidbody>`](../pc-rigidbody)が必要です |
+| `entity-a` | String | - | 1つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。[`<pc-rigid-body>`](../pc-rigid-body)が必要です |
 | `entity-b` | String | - | 2つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。空にすると`entity-a`をワールド空間の固定点に拘束します |
 | `limits` | Vector2 | `"-45 45"` | 主軸まわりの回転または移動のリミット。「min max」で、`hinge`では度、`slider`ではユニットです |
 | `linear-damping` | Vector3 | `"1 1 1"` | 直線軸ごとのスプリングのダンピング。`6dof`で使用します |
@@ -138,7 +138,7 @@ joint.component.refreshFrames(); // 復帰し、現在のトランスフォー�
 
 ```html live-example
 <pc-app>
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
     <pc-scene>
         <pc-entity name="camera" position="0 2 6">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -151,14 +151,14 @@ joint.component.refreshFrames(); // 復帰し、現在のトランスフォー�
         <pc-entity id="hub" position="0 2 0" rotation="90 0 0" scale="0.5 0.3 0.5">
             <pc-render type="cylinder"></pc-render>
             <pc-collision type="cylinder" radius="0.25" height="0.3"></pc-collision>
-            <pc-rigidbody></pc-rigidbody>
+            <pc-rigid-body></pc-rigid-body>
         </pc-entity>
 
         <!-- 動的なブレード -->
         <pc-entity id="blade" position="0 2 0" scale="4 0.3 0.2">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="2 0.15 0.1"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
 
         <!-- ジョイントは支点に置きます。フレームのX軸がヒンジ軸になります -->

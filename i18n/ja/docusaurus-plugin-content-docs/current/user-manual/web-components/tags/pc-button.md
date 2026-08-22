@@ -25,7 +25,7 @@ description: "pc-button要素のリファレンス: ホバー、押下、非ア�
 | `hover-sprite-asset` | String | - | ホバー時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
 | `hover-sprite-frame` | Number | `"0"` | ホバースプライトのフレーム |
 | `hover-tint` | Color | `"1 1 1 1"` | ホバー時にイメージエンティティに適用されるティント（ティント遷移モード） |
-| `image` | String | - | 視覚的な遷移を表示するイメージ要素を持つ [`<pc-entity>`](../pc-entity) への参照（CSSセレクター、要素id、またはエンティティ名）。デフォルトはボタン自身のエンティティです |
+| `image` | String | - | 視覚的な遷移を表示するイメージ要素を持つ [`<pc-entity>`](../pc-entity) への参照（CSSセレクター、要素id、またはエンティティ名）。デフォルトはボタン自身のエンティティです。[`<pc-model>`](../pc-model)の内側ではそれがモデルのホストになるため、その場合はUIエンティティを明示的に指定してください |
 | `inactive-sprite-asset` | String | - | 非アクティブ時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
 | `inactive-sprite-frame` | Number | `"0"` | 非アクティブスプライトのフレーム |
 | `inactive-tint` | Color | `"1 1 1 1"` | 非アクティブ時にイメージエンティティに適用されるティント（ティント遷移モード） |

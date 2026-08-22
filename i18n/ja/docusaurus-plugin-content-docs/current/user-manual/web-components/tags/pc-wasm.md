@@ -1,9 +1,9 @@
 ---
-title: <pc-module>
-description: "pc-module要素のリファレンス: glue・wasm・fallbackのパスから、Ammo、Basis、DracoDecoderModuleなどのWebAssemblyモジュールを読み込みます。"
+title: <pc-wasm>
+description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパスから、Ammo、Basis、DracoDecoderModuleなどのWebAssemblyモジュールを読み込みます。"
 ---
 
-`<pc-module>`タグはWebAssemblyモジュールをロードするために使用されます。
+`<pc-wasm>`タグはWebAssemblyモジュールをロードするために使用されます。
 
 :::note[使用法]
 
@@ -34,20 +34,20 @@ description: "pc-module要素のリファレンス: glue・wasm・fallbackのパ
 
 ## 準備完了 {#readiness}
 
-この要素は非同期に初期化され、モジュールの読み込みが完了するとready状態になります。標準の`ready`イベントを発生させ、`whenReady('pc-module')`で待機できます（[プログラムによるアクセス](../programmatic-access.md)を参照）。ただし、直接待機する必要はほとんどありません。包含する`<pc-app>`は、グラフィックスデバイスを作成する前に、配下に宣言されたすべての`<pc-module>`を待機するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリだからです。
+この要素は非同期に初期化され、モジュールの読み込みが完了するとready状態になります。標準の`ready`イベントを発生させ、`whenReady('pc-wasm')`で待機できます（[プログラムによるアクセス](../programmatic-access.md)を参照）。ただし、直接待機する必要はほとんどありません。包含する`<pc-app>`は、グラフィックスデバイスを作成する前に、配下に宣言されたすべての`<pc-wasm>`を待機するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリだからです。
 
 準備完了状態は意図的に固定されています。WebAssemblyモジュールは決してアンロードされないエンジングローバルな状態を構成するため、要素を削除してもpending状態には戻らず、再挿入してもモジュールが再読み込みされることはありません。
 
-`name`のない`<pc-module>`は警告をログに出力し、決してready状態になりません — ただし、包含する`<pc-app>`の起動は妨げません。
+`name`のない`<pc-wasm>`は警告をログに出力し、決してready状態になりません — ただし、包含する`<pc-app>`の起動は妨げません。
 
 ## 例 {#example}
 
-`Ammo` 物理モジュールの読み込みです。ボックスが落下するのはモジュールが宣言されているからです — アプリはモジュールを待ってから起動するため、シーン開始時には物理が使用可能になっています。`<pc-module>` タグを削除して再実行してみましょう:
+`Ammo` 物理モジュールの読み込みです。ボックスが落下するのはモジュールが宣言されているからです — アプリはモジュールを待ってから起動するため、シーン開始時には物理が使用可能になっています。`<pc-wasm>` タグを削除して再実行してみましょう:
 
 ```html live-example
 <pc-app>
     <!-- ammo.jsのWebAssemblyモジュールをロード -->
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
     <pc-scene>
         <pc-entity name="camera" position="0 2 6">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -58,12 +58,12 @@ description: "pc-module要素のリファレンス: glue・wasm・fallbackのパ
         <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
             <pc-render type="box"></pc-render>
             <pc-collision></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="5 0.5 5"></pc-collision>
-            <pc-rigidbody type="static"></pc-rigidbody>
+            <pc-rigid-body type="static"></pc-rigid-body>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -71,4 +71,4 @@ description: "pc-module要素のリファレンス: glue・wasm・fallbackのパ
 
 ## JavaScriptインターフェース {#javascript-interface}
 
-[ModuleElement API](https://api.playcanvas.com/web-components/classes/ModuleElement.html)を使用して、`<pc-module>`要素をプログラムで作成および操作できます。
+[WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html)を使用して、`<pc-wasm>`要素をプログラムで作成および操作できます。

@@ -1,6 +1,6 @@
 ---
 title: <pc-model>
-description: "Reference for the pc-model element: instantiate a 3D model from a GLB container asset within a scene or entity."
+description: "Reference for the pc-model element: instantiate a 3D model from a GLB container asset, and host components and child entities on the stable entity it creates."
 ---
 
 The `<pc-model>` tag is used to define an entity that instantiates a 3D model from a GLB file.
@@ -9,20 +9,39 @@ For a walkthrough of the whole workflow — exporting, compressed meshes, discov
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-scene>`](../pc-scene) or a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-scene>`](../pc-scene), a [`<pc-entity>`](../pc-entity), another `<pc-model>` or a [`<pc-node>`](../pc-node).
 * It can have 0..n [`<pc-node>`](../pc-node) children, each binding to a node inside the instantiated hierarchy to override it, add components to it or attach new content under it.
+* It can have [`<pc-entity>`](../pc-entity) and `<pc-model>` children, and one of each component type — it hosts them exactly as a [`<pc-entity>`](../pc-entity) does.
 
 :::
 
+`<pc-model>` is an entity in its own right, not just a loader. The element creates its own entity — the *host* — and parents the GLB's instantiated content beneath it. That is what lets a model carry components and children directly:
+
+```html
+<pc-model name="t-rex" asset="t-rex" scale="3 3 3">
+    <pc-anim></pc-anim>
+</pc-model>
+```
+
+The host is the element's `entity`, and it is stable: it exists from boot, survives a change of `asset`, and keeps whatever components and children were attached to it across a reload. The instantiated GLB content is separately available as `contentEntity`.
+
+Because the element's own transform belongs to the host, `position`, `rotation` and `scale` are *instance placement* — they compose with whatever transform the asset authored on its own root rather than replacing it.
+
 ## Attributes
 
-All attributes of [`<pc-entity>`](../pc-entity) are also available.
+`<pc-model>` takes every attribute of [`<pc-entity>`](../pc-entity), including the `onpointer*` inline handlers, and adds `asset`.
 
 <div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | String | - | Container asset ID (must reference a `container` type asset) |
+| `enabled` | Boolean | `"true"` | Enabled state of the model |
+| `name` | String | - | Name identifier for the host entity |
+| `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
+| `rotation` | Vector3 | `"0 0 0"` | Local-space rotation as "X Y Z" Euler angles in degrees |
+| `scale` | Vector3 | `"1 1 1"` | Local-space scale as "X Y Z" values |
+| `tags` | String | - | Comma-separated list of tags |
 
 </div>
 
@@ -37,21 +56,34 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
 
-The element becomes ready once its hierarchy has been instantiated and added to the scene, so a ready `<pc-model>` always has a non-null `entity` with valid world transforms. A failed load also settles readiness, with `entity` left `null` — readiness means the load settled, not that it succeeded, so listen for `error` (or check `entity`) to tell the two apart.
+The host is registered for picking, so `<pc-model>` also fires the five pointer events a [`<pc-entity>`](../pc-entity) does — `pointerdown`, `pointerenter`, `pointerleave`, `pointermove` and `pointerup` — with the same inline `onpointer*` attribute forms. A whole model becomes clickable without a wrapper or a [`<pc-node>`](../pc-node):
+
+```html
+<pc-model asset="t-rex" onpointerdown="this.setAttribute('scale', '2 2 2')"></pc-model>
+```
+
+Pointer events resolve to the nearest *listening* element, so a model that listens for nothing does not swallow events from a listening ancestor.
+
+Readiness means the current `asset` selection has settled, which covers three outcomes: content loaded and parented beneath the host, a load that failed, or no `asset` assigned at all. The host `entity` is non-null throughout — including after a failure — so it is not the way to tell success from failure. Use the `error` event, or check `contentEntity`:
+
+```javascript
+const model = await whenReady('pc-model');
+if (!model.contentEntity) {
+    // no asset, or the load failed
+}
+```
 
 ## Animation
 
 A container's animations play when you nest a [`<pc-anim>`](../pc-anim) inside the model. One empty tag is enough to get what the file came with — every animation in the container becomes a clip, named after its track, and the first one starts playing:
 
 ```html
-<pc-entity name="robot">
-    <pc-model asset="robot">
-        <pc-anim></pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model asset="robot">
+    <pc-anim></pc-anim>
+</pc-model>
 ```
 
-The `<pc-entity>` wrapper is not decoration: the component attaches to the nearest enclosing entity rather than to the instantiated root, so a `<pc-model>` placed directly under a [`<pc-scene>`](../pc-scene) has nowhere to put it and warns instead. Add [`<pc-anim-clip>`](../pc-anim-clip) children to name the clips yourself, set a per-clip speed or looping, or take clips from other files.
+The component attaches to the model's host, so no wrapper entity is involved. Add [`<pc-anim-clip>`](../pc-anim-clip) children to name the clips yourself, set a per-clip speed or looping, or take clips from other files.
 
 To check whether a file's animations survived its export, ask the component what it found:
 
@@ -76,9 +108,9 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](../pc-anim) nested 
     <pc-scene>
         <pc-entity name="camera" position="2.5 1.5 3.5">
             <pc-camera clear-color="#2a2d36"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
@@ -86,11 +118,9 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](../pc-anim) nested 
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
-            <pc-model asset="t-rex">
-                <pc-anim></pc-anim>
-            </pc-model>
-        </pc-entity>
+        <pc-model name="t-rex" asset="t-rex" scale="1.5 1.5 1.5">
+            <pc-anim></pc-anim>
+        </pc-model>
     </pc-scene>
 </pc-app>
 ```
@@ -107,6 +137,26 @@ To reach inside the loaded hierarchy, nest a [`<pc-node>`](../pc-node) for each 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
+
+### The Two Entities
+
+A `<pc-model>` exposes two entities, and picking the wrong one is the easiest mistake to make here:
+
+| Property | What it is |
+| --- | --- |
+| `entity` | The **host** the element creates and fronts. Non-null from boot, stable across `asset` changes, and where components and child elements attach |
+| `contentEntity` | The **instantiated GLB root**, parented beneath the host. `null` until a load succeeds, and replaced on every reload |
+
+So components go on `entity`, and questions about what the file contained go to `contentEntity`:
+
+```javascript
+const model = await whenReady('pc-model');
+
+model.entity.anim;          // the component a nested <pc-anim> added
+model.contentEntity.name;   // the GLB root's own name, e.g. 'Sketchfab_model'
+```
+
+`hierarchy()` and [`<pc-node>`](../pc-node) resolution are both scoped to the content root, so the host never appears in a printed tree, a node `path`, or a name search.
 
 ### Inspecting the Hierarchy
 

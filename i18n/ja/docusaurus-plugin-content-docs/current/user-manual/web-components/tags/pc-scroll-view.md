@@ -1,9 +1,9 @@
 ---
-title: <pc-scrollview>
-description: "pc-scrollview要素のリファレンス: コンテンツ、スクロールバー、マウスホイール対応、bounce/clamp/infinite モードを備えたスクロール可能なビューポートです。"
+title: <pc-scroll-view>
+description: "pc-scroll-view要素のリファレンス: コンテンツ、スクロールバー、マウスホイール対応、bounce/clamp/infinite モードを備えたスクロール可能なビューポートです。"
 ---
 
-`<pc-scrollview>`タグは、クリップされたビューポート内でより大きなコンテンツ領域をユーザーがスクロールできるようにするスクロールビューコンポーネントを定義するために使用されます。
+`<pc-scroll-view>`タグは、クリップされたビューポート内でより大きなコンテンツ領域をユーザーがスクロールできるようにするスクロールビューコンポーネントを定義するために使用されます。
 
 :::note[使用法]
 
@@ -50,12 +50,12 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
             <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
             <pc-entity name="scroll-view">
                 <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="260"></pc-element>
-                <pc-scrollview
+                <pc-scroll-view
                     horizontal="false"
                     vertical="true"
                     viewport="#viewport"
                     content="#content"
-                    vertical-scrollbar="#v-scrollbar"></pc-scrollview>
+                    vertical-scrollbar="#v-scrollbar"></pc-scroll-view>
 
                 <!-- ビューポートはコンテンツをスクロールビューの範囲にクリップします -->
                 <pc-entity name="viewport" id="viewport">
@@ -65,7 +65,7 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
                          サイズです: 60 x 8行 + 間隔 8 x 7 + 上下のパディング 10 ずつ -->
                     <pc-entity name="content" id="content">
                         <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="556" use-input></pc-element>
-                        <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layoutgroup>
+                        <pc-layout-group orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layout-group>
                         <pc-entity name="row-1"><pc-element type="image" width="220" height="60" color="#ff8a3c"></pc-element></pc-entity>
                         <pc-entity name="row-2"><pc-element type="image" width="220" height="60" color="#7ab8ff"></pc-element></pc-entity>
                         <pc-entity name="row-3"><pc-element type="image" width="220" height="60" color="#8ce99a"></pc-element></pc-entity>
@@ -94,4 +94,4 @@ description: "pc-scrollview要素のリファレンス: コンテンツ、スク
 
 ## JavaScriptインターフェース {#javascript-interface}
 
-[ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html)を使用して、`<pc-scrollview>`要素をプログラムで作成および操作できます。
+[ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html)を使用して、`<pc-scroll-view>`要素をプログラムで作成および操作できます。

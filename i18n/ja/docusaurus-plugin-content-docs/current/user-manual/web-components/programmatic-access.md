@@ -39,7 +39,7 @@ PlayCanvas Web Components を使えば、HTML だけでリッチな 3D シーン
 
 :::note[準備完了にならない要素]
 
-要素が初期化を完了できない場合、Promiseは決して解決されません。たとえば、`<pc-scripts>` の直接の子ではない `<pc-script>`、`name` を解決できない [`<pc-node>`](./tags/pc-node.md)、`name` のない [`<pc-module>`](./tags/pc-module.md)、グラフィックスデバイスを作成できなかった [`<pc-app>`](./tags/pc-app.md) などです。最後のケースでフォールバックUIを表示するには、要素の [`error` イベント](./tags/pc-app.md#events)をリッスンしてください。例外は `<pc-entity>` の外にあるコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。いずれの場合も、その要素は何が問題だったかをコンソールに報告します。
+要素が初期化を完了できない場合、Promiseは決して解決されません。たとえば、`<pc-script>` の直接の子ではない `<pc-script-instance>`、`name` を解決できない [`<pc-node>`](./tags/pc-node.md)、`name` のない [`<pc-wasm>`](./tags/pc-wasm.md)、グラフィックスデバイスを作成できなかった [`<pc-app>`](./tags/pc-app.md) などです。最後のケースでフォールバックUIを表示するには、要素の [`error` イベント](./tags/pc-app.md#events)をリッスンしてください。例外は、上に `<pc-entity>`・`<pc-model>`・`<pc-node>` のいずれもないコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。いずれの場合も、その要素は何が問題だったかをコンソールに報告します。
 
 :::
 
@@ -61,18 +61,19 @@ const { entity } = await whenReady('pc-entity[name="player"]');
 | --- | --- | --- |
 | [`<pc-app>`](./tags/pc-app.md) | `app` | [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) |
 | [`<pc-entity>`](./tags/pc-entity.md) | `entity` | [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
-| [`<pc-model>`](./tags/pc-model.md) | `entity` | インスタンス化された階層のルートとなる [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
+| [`<pc-model>`](./tags/pc-model.md) | `entity` | 要素が作成して表に出すホストの [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
+| [`<pc-model>`](./tags/pc-model.md) | `contentEntity` | ホストの下でインスタンス化された階層のルートとなる [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
 | [`<pc-node>`](./tags/pc-node.md) | `entity` | その階層内でバインドした [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) |
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
-| [`<pc-script>`](./tags/pc-script.md) | `script` | [`Script`](https://api.playcanvas.com/engine/classes/Script.html) |
-| [`<pc-sound>`](./tags/pc-sound.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
+| [`<pc-script-instance>`](./tags/pc-script-instance.md) | `script` | [`Script`](https://api.playcanvas.com/engine/classes/Script.html) |
+| [`<pc-sound-slot>`](./tags/pc-sound-slot.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
 | コンポーネントタグ (`<pc-camera>`、`<pc-light>` など) | `component` | 対応する [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
-これらのアクセサーはnull許容として型付けされています。要素の準備が完了する前と、破棄された後には `null` を返します。先に準備完了を待つことが、非nullの結果を保証します。準備完了が非nullの `entity` を保証しない唯一のケースは [`<pc-model>`](./tags/pc-model.md) です。読み込みが失敗した場合も準備完了は確定するため、アセットが到達しない可能性がある場合は `entity` を確認するか、要素の `error` イベントをリッスンしてください。
+これらのアクセサーはnull許容として型付けされています。要素の準備が完了する前と、破棄された後には `null` を返します。先に準備完了を待つことが、非nullの結果を保証します。null許容のままとなる例外は [`<pc-model>`](./tags/pc-model.md) の `contentEntity` です。この要素の準備完了は `asset` の選択が決着したことを意味し、読み込みの失敗やassetが未指定の場合も含みます。そのため、ファイルが到達しない可能性がある場合は `contentEntity` を確認するか、要素の `error` イベントをリッスンしてください。ホストの `entity` はいずれの場合も起動時から非nullです。
 
-非同期に初期化されるすべての要素は、`closestApp` と `closestEntity` ゲッターも公開しています。これらは、最も近い*祖先*の `<pc-app>` 要素、またはエンティティを表す最も近い祖先要素（`<pc-entity>` または `<pc-node>`）を返します（存在しない場合は `null`）。コンポーネント要素を保持していて、それが属するエンティティやアプリが必要な場合に便利です。
+非同期に初期化されるすべての要素は、`closestApp` と `closestEntity` ゲッターも公開しています。これらは、最も近い*祖先*の `<pc-app>` 要素、またはエンティティを表す最も近い祖先要素（`<pc-entity>`・`<pc-model>`・`<pc-node>`）を返します（存在しない場合は `null`）。コンポーネント要素を保持していて、それが属するエンティティやアプリが必要な場合に便利です。
 
-`<pc-model>` の `entity` はインスタンス化された階層全体のルートであり、その階層を読み取ることが、この要素に求めるもう1つのことでしょう。`hierarchy()` メソッドは、インスタンス化されたツリーのプレーンなデータによるスナップショットを返します。[`<pc-node>`](./tags/pc-node.md) がバインドに用いるノード名・パス・一致インデックスに加えて、その `material-overrides` マッピングが選択するマテリアル割り当ても含まれます。結果の `String()` はツリーとして出力されます。[階層の調査](./tags/pc-model.md#inspecting-the-hierarchy)を参照してください。
+`<pc-model>` の `contentEntity` はインスタンス化された階層全体のルートであり、その階層を読み取ることが、この要素に求めるもう1つのことでしょう。`hierarchy()` メソッドは、インスタンス化されたツリーのプレーンなデータによるスナップショットを返します。[`<pc-node>`](./tags/pc-node.md) がバインドに用いるノード名・パス・一致インデックスに加えて、その `material-overrides` マッピングが選択するマテリアル割り当ても含まれます。結果の `String()` はツリーとして出力されます。[階層の調査](./tags/pc-model.md#inspecting-the-hierarchy)を参照してください。
 
 ## 特定のアプリを対象にする {#targeting-a-specific-app}
 
@@ -106,7 +107,7 @@ document.addEventListener('ready', (event) => {
 });
 ```
 
-用途に応じて使い分けてください。`whenReady` は*特定の要素を待つ*ためのもので、その要素がずっと前に準備完了していても解決されます。一方 `ready` イベントは、*要素が初期化されるのに反応する*ためのものです — `whenReady` のセレクター形式では見つけられない、読み込み後にページへ追加された要素も含まれます。イベントはreadyサイクルごとに1回だけ発火するため、対象の要素が初期化される前にリスナーを登録してください。すでに準備完了となった要素が再度発火することはありません。ただし、要素が破棄されて再初期化されると（削除して再挿入した場合や、モデルの再読み込み後に `<pc-node>` が再バインドする場合など）、新しいサイクルが始まり、イベントは再度発火します。例外は `<pc-module>` で、そのready状態は決してリセットされません。
+用途に応じて使い分けてください。`whenReady` は*特定の要素を待つ*ためのもので、その要素がずっと前に準備完了していても解決されます。一方 `ready` イベントは、*要素が初期化されるのに反応する*ためのものです — `whenReady` のセレクター形式では見つけられない、読み込み後にページへ追加された要素も含まれます。イベントはreadyサイクルごとに1回だけ発火するため、対象の要素が初期化される前にリスナーを登録してください。すでに準備完了となった要素が再度発火することはありません。ただし、要素が破棄されて再初期化されると（削除して再挿入した場合や、モデルの再読み込み後に `<pc-node>` が再バインドする場合など）、新しいサイクルが始まり、イベントは再度発火します。例外は `<pc-wasm>` で、そのready状態は決してリセットされません。
 
 ## アセット、マテリアル、モジュール {#assets-materials-and-modules}
 
@@ -121,13 +122,13 @@ const material = MaterialElement.get('gold'); // <pc-material id="gold"> が宣�
 
 `AssetElement.get` は登録済みの [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html) を返しますが、読み込みが完了していない場合があります。`asset.resource` を使用する前に、`asset.loaded` を確認するか、`load` イベントを購読してください。
 
-[`<pc-module>`](./tags/pc-module.md) は、上記の要素と同じく非同期に初期化されます。モジュールの読み込みが完了するとready状態になるため、`whenReady('pc-module')` で読み込みを待機できます。とはいえ、これが必要になることはほとんどありません。`<pc-app>` は、自身の配下に宣言されたすべての `<pc-module>` を待ってからグラフィックスデバイスを作成するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリです。Ammoを待つ方法は、アプリを待つことです。
+[`<pc-wasm>`](./tags/pc-wasm.md) は、上記の要素と同じく非同期に初期化されます。モジュールの読み込みが完了するとready状態になるため、`whenReady('pc-wasm')` で読み込みを待機できます。とはいえ、これが必要になることはほとんどありません。`<pc-app>` は、自身の配下に宣言されたすべての `<pc-wasm>` を待ってからグラフィックスデバイスを作成するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリです。Ammoを待つ方法は、アプリを待つことです。
 
 ```javascript
-const { app } = await whenReady('pc-app'); // この時点ですべての <pc-module> は読み込み済みです
+const { app } = await whenReady('pc-app'); // この時点ですべての <pc-wasm> は読み込み済みです
 ```
 
-1つだけ `<pc-module>` に特有の注意点があります。そのready状態は固定（スティッキー）です。WebAssemblyモジュールは決してアンロードされないエンジングローバルな状態を構成するため、要素を削除して再挿入してもready状態はリセットされず、モジュールが再読み込みされることもありません。[準備完了](./tags/pc-module.md#readiness)を参照してください。
+1つだけ `<pc-wasm>` に特有の注意点があります。そのready状態は固定（スティッキー）です。WebAssemblyモジュールは決してアンロードされないエンジングローバルな状態を構成するため、要素を削除して再挿入してもready状態はリセットされず、モジュールが再読み込みされることもありません。[準備完了](./tags/pc-wasm.md#readiness)を参照してください。
 
 ## TypeScript {#typescript}
 
@@ -135,4 +136,4 @@ const { app } = await whenReady('pc-app'); // この時点ですべての <pc-mo
 
 ## スクリプトを使うべき場面 {#when-to-use-scripts-instead}
 
-`whenReady` は、DOM の UI とアプリの接続、設定の調整、イベントの発火といったページレベルのグルーコードに最適です。更新ループやエンティティごとのロジックを持つような本格的で再利用可能な動作には、代わりにスクリプトを書いて `<pc-script>` でアタッチしてください。スクリプトは完全に初期化されたエンティティを受け取るため、準備完了の確認は一切不要です。[スクリプトで動作を追加する](scripting.md) を参照してください。
+`whenReady` は、DOM の UI とアプリの接続、設定の調整、イベントの発火といったページレベルのグルーコードに最適です。更新ループやエンティティごとのロジックを持つような本格的で再利用可能な動作には、代わりにスクリプトを書いて `<pc-script-instance>` でアタッチしてください。スクリプトは完全に初期化されたエンティティを受け取るため、準備完了の確認は一切不要です。[スクリプトで動作を追加する](scripting.md) を参照してください。
