@@ -11,7 +11,11 @@ Tags also have placement rules — each tag's page notes the parent it requires.
 
 Three tags front an engine entity, and a component tag can sit inside any of them: [`<pc-entity>`](pc-entity), [`<pc-model>`](pc-model) and [`<pc-node>`](pc-node). So a component placed inside a model attaches to that model, and one placed inside a node attaches to the node — both take the same component children an entity does.
 
-**A component tag spells the engine component it adds.** Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id: `<pc-layout-group>` adds `entity.layoutgroup`, `<pc-rigid-body>` adds `entity.rigidbody`, `<pc-audio-listener>` adds `entity.audiolistener`. The rule holds in both directions for every component tag below, so neither spelling has to be memorized. The engine's ids run their words together only because they are JavaScript property names, which cannot carry a hyphen — an HTML tag can.
+:::note[A component tag spells the engine component it adds]
+
+Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id: `<pc-layout-group>` adds `entity.layoutgroup`, `<pc-rigid-body>` adds `entity.rigidbody`, `<pc-audio-listener>` adds `entity.audiolistener`. The rule holds in both directions for every component tag below, so neither spelling has to be memorized. The engine's ids run their words together only because they are JavaScript property names, which cannot carry a hyphen — an HTML tag can.
+
+:::
 
 A repeatable child takes its parent's tag as a prefix: [`<pc-anim-clip>`](pc-anim-clip) inside [`<pc-anim>`](pc-anim), [`<pc-sound-slot>`](pc-sound-slot) inside [`<pc-sound>`](pc-sound), [`<pc-script-instance>`](pc-script-instance) inside [`<pc-script>`](pc-script).
 

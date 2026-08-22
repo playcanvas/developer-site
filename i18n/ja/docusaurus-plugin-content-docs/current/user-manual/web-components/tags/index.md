@@ -11,7 +11,11 @@ description: "PlayCanvas Web Componentのタグをアルファベット順に一
 
 エンジンのエンティティを表すタグは3つあり、コンポーネントタグはそのいずれの内側にも置けます。[`<pc-entity>`](pc-entity)、[`<pc-model>`](pc-model)、[`<pc-node>`](pc-node)です。つまり、モデルの内側に置いたコンポーネントはそのモデルに取り付けられ、ノードの内側に置いたコンポーネントはそのノードに取り付けられます。どちらもエンティティと同じコンポーネントの子を取ります。
 
-**コンポーネントタグは、それが追加するエンジンのコンポーネントを名前で表します。** `pc-`プレフィックスを外し、ハイフンを取り除くと、エンジンのコンポーネントIDになります。`<pc-layout-group>`は`entity.layoutgroup`を、`<pc-rigid-body>`は`entity.rigidbody`を、`<pc-audio-listener>`は`entity.audiolistener`を追加します。このルールは以下のすべてのコンポーネントタグで双方向に成り立つため、どちらの綴りも暗記する必要はありません。エンジンのIDが単語を続けて書くのは、それがハイフンを含められないJavaScriptのプロパティ名だからにすぎません。HTMLのタグにはその制約がありません。
+:::note[コンポーネントタグは、それが追加するエンジンのコンポーネントを名前で表します]
+
+`pc-`プレフィックスを外し、ハイフンを取り除くと、エンジンのコンポーネントIDになります。`<pc-layout-group>`は`entity.layoutgroup`を、`<pc-rigid-body>`は`entity.rigidbody`を、`<pc-audio-listener>`は`entity.audiolistener`を追加します。このルールは以下のすべてのコンポーネントタグで双方向に成り立つため、どちらの綴りも暗記する必要はありません。エンジンのIDが単語を続けて書くのは、それがハイフンを含められないJavaScriptのプロパティ名だからにすぎません。HTMLのタグにはその制約がありません。
+
+:::
 
 繰り返し可能な子要素は、親のタグをプレフィックスとして取ります。[`<pc-anim>`](pc-anim)の中の[`<pc-anim-clip>`](pc-anim-clip)、[`<pc-sound>`](pc-sound)の中の[`<pc-sound-slot>`](pc-sound-slot)、[`<pc-script>`](pc-script)の中の[`<pc-script-instance>`](pc-script-instance)です。
 
