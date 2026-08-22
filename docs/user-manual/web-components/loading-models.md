@@ -41,7 +41,7 @@ Loading takes two tags. [`<pc-asset>`](tags/pc-asset.md) declares the file, and 
 
 The `type="container"` matters: a GLB is a *container* asset, holding meshes, materials, textures, skins and animations together, and `<pc-model>` instantiates its hierarchy from that container. Point it at an asset of another type and the load fails at instantiation rather than with a tidy message, so it is worth getting right. `<pc-model>` behaves like a [`<pc-entity>`](tags/pc-entity.md) otherwise, so it takes `position`, `rotation` and `scale`, and it can be nested inside another entity.
 
-A model becomes ready once its hierarchy is in the scene, and it fires `load`. A failed load also settles readiness with a `null` entity and fires an [`error` event](tags/pc-model.md#events), so that is the one to listen for if the file might not arrive:
+A model becomes ready once its content is in the scene, and it fires `load`. A failed load also settles readiness — with a `null` `contentEntity` — and fires an [`error` event](tags/pc-model.md#events), so that is the one to listen for if the file might not arrive:
 
 ```javascript
 document.querySelector('pc-model').addEventListener('error', (event) => {
@@ -57,13 +57,13 @@ Nothing normalizes a model's pivot or scale. This car's origin sits at the middl
 
 ### Compressed Meshes
 
-Most models from asset sites are Draco-compressed, and this one is. Draco needs a WebAssembly decoder, declared with [`<pc-module>`](tags/pc-module.md) as a child of `<pc-app>`:
+Most models from asset sites are Draco-compressed, and this one is. Draco needs a WebAssembly decoder, declared with [`<pc-wasm>`](tags/pc-wasm.md) as a child of `<pc-app>`:
 
 ```html
-<pc-module name="DracoDecoderModule"
-           glue="modules/draco/draco.wasm.js"
-           wasm="modules/draco/draco.wasm.wasm"
-           fallback="modules/draco/draco.js"></pc-module>
+<pc-wasm name="DracoDecoderModule"
+         glue="modules/draco/draco.wasm.js"
+         wasm="modules/draco/draco.wasm.wasm"
+         fallback="modules/draco/draco.js"></pc-wasm>
 ```
 
 The three files are a [Draco](https://google.github.io/draco/) decoder build — the glue script, the `.wasm` binary, and a pure-JavaScript fallback for browsers without WebAssembly. They are not part of the engine's npm package, so you serve them yourself: take them from a [Draco release](https://github.com/google/draco/releases) or copy the set vendored in the [Web Components examples](https://github.com/playcanvas/web-components/tree/main/examples/modules/draco), then point the attributes at wherever you put them.
@@ -223,13 +223,13 @@ A `<pc-node>` takes the same component tags a `<pc-entity>` does, adding that co
 ```html
 <pc-model asset="car">
     <pc-node name="underbody_0">
-        <pc-rigidbody type="static"></pc-rigidbody>
+        <pc-rigid-body type="static"></pc-rigid-body>
         <pc-collision type="mesh"></pc-collision>
     </pc-node>
 </pc-model>
 ```
 
-Physics needs the `Ammo` module declared the same way Draco was — see [`<pc-module>`](tags/pc-module.md).
+Physics needs the `Ammo` module declared the same way Draco was — see [`<pc-wasm>`](tags/pc-wasm.md).
 
 ### Make a Part Interactive
 
@@ -252,17 +252,15 @@ A container's animations are played by a [`<pc-anim>`](tags/pc-anim.md) nested i
 ```html
 <pc-asset id="robot" type="container" src="assets/walking-robot.glb"></pc-asset>
 <pc-scene>
-    <pc-entity name="robot">
-        <pc-model asset="robot">
-            <pc-anim></pc-anim>
-        </pc-model>
-    </pc-entity>
+    <pc-model name="robot" asset="robot">
+        <pc-anim></pc-anim>
+    </pc-model>
 </pc-scene>
 ```
 
 ![A robot character mid-stride, its walk animation playing](/img/user-manual/web-components/loading-models/robot-animation.jpg)
 
-The `<pc-entity>` around the model matters. `<pc-anim>` is a component tag, so it attaches to the nearest enclosing entity — not to the model's instantiated root — and a `<pc-model>` sitting directly under `<pc-scene>` has no entity to offer it. The console says so plainly (`must be a descendant of pc-entity`), and the fix is the wrapper above.
+No wrapper entity is involved. `<pc-model>` is an entity host in its own right, so a component placed inside it attaches to the model — the same way it would attach to a [`<pc-entity>`](tags/pc-entity.md). That also means the model can carry its own name, transform and pointer handlers, and can host child entities alongside its content.
 
 To see which animations came through the export, ask the component:
 
@@ -274,15 +272,13 @@ console.log(anim.clips); // ['Walk', 'Idle', 'Wave']
 Naming the clips yourself — rather than living with whatever the exporter called them — means declaring them, one [`<pc-anim-clip>`](tags/pc-anim-clip.md) each. That is also where per-clip speed and looping live, and how clips from other files get mixed in:
 
 ```html
-<pc-entity name="robot">
-    <pc-model asset="robot">
-        <pc-anim clip="idle" transition-time="0.3">
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="walk" speed="1.2"></pc-anim-clip>
-            <pc-anim-clip name="wave" asset="wave-glb" loop="false"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="robot" asset="robot">
+    <pc-anim clip="idle" transition-time="0.3">
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="walk" speed="1.2"></pc-anim-clip>
+        <pc-anim-clip name="wave" asset="wave-glb" loop="false"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 Switching clips is then a matter of setting `clip`, which cross-fades over `transition-time`:
@@ -307,7 +303,7 @@ Tracks bind to nodes **by name**, which is why a clip from a separate file only 
 
 **A material name appears as `Untitled` or `defaultGlbMaterial`.** Those are engine defaults for an unnamed glTF material and for a primitive exported with no material at all. Neither is a unique handle, so select those by `index:` instead.
 
-**The model loads but nothing animates.** A model plays nothing until a [`<pc-anim>`](tags/pc-anim.md) asks it to — and that element needs an enclosing `<pc-entity>`, as [Animation](#animation) describes. If both are in place, check `anim.clips`: an empty list with a warning about the model having no animations means they did not survive the export.
+**The model loads but nothing animates.** A model plays nothing until a [`<pc-anim>`](tags/pc-anim.md) inside it asks it to, as [Animation](#animation) describes. If one is there, check `anim.clips`: an empty list with a warning about the model having no animations means they did not survive the export.
 
 **A clip from a separate file animates nothing.** Its tracks bind by node name, so the clip and the model have to agree on those names. Print the model's `hierarchy()` and compare.
 

@@ -1,14 +1,14 @@
 ---
-title: <pc-layoutchild>
-description: "Reference for the pc-layoutchild element: per-child layout constraints (min/max size and fit proportions) within a layout group."
+title: <pc-layout-child>
+description: "Reference for the pc-layout-child element: per-child layout constraints (min/max size and fit proportions) within a layout group."
 ---
 
-The `<pc-layoutchild>` tag is used to define a layout child component, which controls how an element is sized by its parent [`<pc-layoutgroup>`](../pc-layoutgroup).
+The `<pc-layout-child>` tag is used to define a layout child component, which controls how an element is sized by its parent [`<pc-layout-group>`](../pc-layout-group).
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
-* That entity must itself be a child of an entity with a [`<pc-layoutgroup>`](../pc-layoutgroup).
+* That entity must itself be a child of an entity with a [`<pc-layout-group>`](../pc-layout-group).
 
 :::
 
@@ -43,20 +43,20 @@ Three items in a horizontal group with `width-fitting="stretch"`. The middle ite
             <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
             <pc-entity name="toolbar">
                 <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="480" height="70"></pc-element>
-                <pc-layoutgroup orientation="horizontal" alignment="0 0.5" spacing="8 0"
-                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+                <pc-layout-group orientation="horizontal" alignment="0 0.5" spacing="8 0"
+                                 padding="10 10 10 10" width-fitting="stretch"></pc-layout-group>
 
                 <pc-entity name="item-1">
                     <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
-                    <pc-layoutchild></pc-layoutchild>
+                    <pc-layout-child></pc-layout-child>
                 </pc-entity>
                 <pc-entity name="item-2">
                     <pc-element type="image" width="80" height="50" color="#ff8a3c"></pc-element>
-                    <pc-layoutchild fit-width-proportion="1"></pc-layoutchild>
+                    <pc-layout-child fit-width-proportion="1"></pc-layout-child>
                 </pc-entity>
                 <pc-entity name="item-3">
                     <pc-element type="image" width="80" height="50" color="#7ab8ff"></pc-element>
-                    <pc-layoutchild></pc-layoutchild>
+                    <pc-layout-child></pc-layout-child>
                 </pc-entity>
             </pc-entity>
         </pc-entity>
@@ -66,4 +66,4 @@ Three items in a horizontal group with `width-fitting="stretch"`. The middle ite
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-layoutchild>` elements using the [LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html).
+You can programmatically create and manipulate `<pc-layout-child>` elements using the [LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html).

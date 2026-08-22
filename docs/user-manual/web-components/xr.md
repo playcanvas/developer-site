@@ -55,15 +55,15 @@ The XR scripts should be attached to a *parent* of the camera entity — `xrSess
     <pc-entity name="camera" position="0 1.7 5">
         <pc-camera></pc-camera>
     </pc-entity>
-    <pc-scripts>
-        <pc-script name="xrControllers"></pc-script>
-        <pc-script name="xrMenu" attributes='{
+    <pc-script>
+        <pc-script-instance name="xrControllers"></pc-script-instance>
+        <pc-script-instance name="xrMenu" attributes='{
             "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
             "fontAsset": "asset:arial-font"
-        }'></pc-script>
-        <pc-script name="xrNavigation"></pc-script>
-        <pc-script name="xrSession"></pc-script>
-    </pc-scripts>
+        }'></pc-script-instance>
+        <pc-script-instance name="xrNavigation"></pc-script-instance>
+        <pc-script-instance name="xrSession"></pc-script-instance>
+    </pc-script>
 </pc-entity>
 ```
 

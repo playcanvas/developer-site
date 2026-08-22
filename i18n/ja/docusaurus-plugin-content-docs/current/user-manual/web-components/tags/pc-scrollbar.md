@@ -8,7 +8,7 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 :::note[使用法]
 
 * [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
-* [`<pc-scrollview>`](../pc-scrollview) の `horizontal-scrollbar` または `vertical-scrollbar` 属性から参照されます。
+* [`<pc-scroll-view>`](../pc-scroll-view) の `horizontal-scrollbar` または `vertical-scrollbar` 属性から参照されます。
 * `handle` 属性は、ドラッグ可能なハンドルとして使用する [`<pc-entity>`](../pc-entity) を参照します。そのイメージ要素には `use-input` を設定してください。
 
 :::

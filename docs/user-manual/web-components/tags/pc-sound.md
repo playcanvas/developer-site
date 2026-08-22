@@ -1,13 +1,14 @@
 ---
 title: <pc-sound>
-description: "Reference for the pc-sound element: positional or non-positional audio clips, volume, pitch, autoplay rules, and asset references."
+description: "Reference for the pc-sound element: sound component container that groups pc-sound-slot slots and shared audio settings on an entity."
 ---
 
-The `<pc-sound>` tag is used to define a sound.
+The `<pc-sound>` tag is used to define a sound component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-sounds>`](../pc-sounds) component.
+* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It can have 0..n [`<pc-sound-slot>`](../pc-sound-slot) children.
 
 :::
 
@@ -17,40 +18,40 @@ The `<pc-sound>` tag is used to define a sound.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Audio asset ID (must reference an `audio` type asset) |
-| `auto-play` | Boolean | `"false"` | Whether the sound plays automatically |
-| `duration` | Number | - | Duration of the sound in seconds (omit to play the full clip) |
-| `loop` | Boolean | `"false"` | Whether the sound loops |
-| `name` | String | - | Name identifier for the sound slot |
-| `overlap` | Boolean | `"false"` | Whether sounds can overlap when triggered multiple times |
-| `pitch` | Number | `"1"` | Pitch multiplier (1 = normal pitch) |
-| `start-time` | Number | `"0"` | Start time offset in seconds |
-| `volume` | Number | `"1"` | Volume level (0-1) |
+| `distance-model` | Enum | `"linear"` | Distance attenuation model: `"exponential"` \| `"inverse"` \| `"linear"` |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `max-distance` | Number | `"10000"` | Maximum distance for audio falloff |
+| `pitch` | Number | `"1"` | Pitch multiplier for all sounds in this component |
+| `positional` | Boolean | `"false"` | Whether the sound is positional (3D spatial audio) |
+| `ref-distance` | Number | `"1"` | Reference distance for full volume |
+| `roll-off-factor` | Number | `"1"` | Falloff rate factor for distance attenuation |
+| `volume` | Number | `"1"` | Master volume for all sounds in this component |
 
 </div>
 
 ## Example
 
-Two slots playing the same clip — the second at half `pitch`. Browsers only allow audio after a user gesture, so playback is wired to plain HTML buttons overlaid on the app. Try editing the `pitch` or `volume` values:
+One sound component holding two slots — looping footsteps and a one-shot. The component's `volume` and `pitch` apply to every slot it holds; try halving the `volume`, or setting `pitch="1.5"` and re-running:
 
 ```html live-example
 <pc-app>
+    <pc-asset src="https://developer.playcanvas.com/assets/footsteps.mp3" id="footsteps"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/drop.mp3" id="drop"></pc-asset>
     <pc-scene>
         <pc-entity name="camera">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity name="jukebox">
-            <pc-sounds>
-                <pc-sound name="drop" asset="drop"></pc-sound>
-                <pc-sound name="drop-slow" asset="drop" pitch="0.5" volume="0.8"></pc-sound>
-            </pc-sounds>
+        <pc-entity name="speaker">
+            <pc-sound volume="1" pitch="1">
+                <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
+                <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
+            </pc-sound>
         </pc-entity>
     </pc-scene>
 </pc-app>
 <div class="controls">
-    <button id="play">Play</button>
-    <button id="play-slow">Play at half pitch</button>
+    <button id="toggle">Toggle footsteps</button>
+    <button id="drop">Play drop</button>
 </div>
 <style>
     .controls {
@@ -64,12 +65,15 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
 <script type="module">
     import { whenReady } from '@playcanvas/web-components';
 
-    const sounds = await whenReady('pc-sounds');
-    document.getElementById('play').onclick = () => sounds.component.slot('drop').play();
-    document.getElementById('play-slow').onclick = () => sounds.component.slot('drop-slow').play();
+    const sounds = await whenReady('pc-sound');
+    const footsteps = sounds.component.slot('footsteps');
+    document.getElementById('toggle').onclick = () => {
+        footsteps.isPlaying ? footsteps.stop() : footsteps.play();
+    };
+    document.getElementById('drop').onclick = () => sounds.component.slot('drop').play();
 </script>
 ```
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-sound>` elements using the [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html).
+You can programmatically create and manipulate `<pc-sound>` elements using the [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html).

@@ -37,7 +37,7 @@ A boolean attribute is `true` when present with any value other than `"false"` �
 <pc-light type="directional" cast-shadows></pc-light>
 
 <!-- Setting "false" disables a default-true option -->
-<pc-scrollview horizontal="false"></pc-scrollview>
+<pc-scroll-view horizontal="false"></pc-scroll-view>
 ```
 
 ## Numbers
@@ -87,7 +87,7 @@ Color attributes accept any of three formats:
 
 ## Entity References
 
-Some attributes reference another entity in the document — for example, [`<pc-button>`](tags/pc-button.md)'s `image`, [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle` and [`<pc-scrollview>`](tags/pc-scrollview.md)'s `viewport`, `content` and scrollbar attributes. A reference can be any of:
+Some attributes reference another entity in the document — for example, [`<pc-button>`](tags/pc-button.md)'s `image`, [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle` and [`<pc-scroll-view>`](tags/pc-scroll-view.md)'s `viewport`, `content` and scrollbar attributes. A reference can be any of:
 
 * A CSS selector (e.g. `#my-id` or `pc-entity[name="Player"]`)
 * An element `id` (e.g. `my-id`)
@@ -99,4 +99,4 @@ Some attributes reference another entity in the document — for example, [`<pc-
 
 ## Script Attributes
 
-Scripts declare their own attributes, so [`<pc-script>`](tags/pc-script.md) extends these conventions with per-property attributes that are parsed based on each script attribute's declared type. See [Adding Behavior with Scripts](scripting.md) for details.
+Scripts declare their own attributes, so [`<pc-script-instance>`](tags/pc-script-instance.md) extends these conventions with per-property attributes that are parsed based on each script attribute's declared type. See [Adding Behavior with Scripts](scripting.md) for details.

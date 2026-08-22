@@ -25,7 +25,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `flip-y` | Boolean | `"false"` | For `texture` and `textureatlas` assets: whether the image data is flipped vertically at upload |
 | `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
-| `lazy` | Boolean | `"false"` | Whether to skip preloading. A lazy asset is loaded on demand by [`<pc-model>`](../pc-model), [`<pc-particles>`](../pc-particles), [`<pc-sky>`](../pc-sky) and [`<pc-material>`](../pc-material) texture maps — other elements do not trigger loading |
+| `lazy` | Boolean | `"false"` | Whether to skip preloading. A lazy asset is loaded on demand by [`<pc-model>`](../pc-model), [`<pc-particle-system>`](../pc-particle-system), [`<pc-sky>`](../pc-sky) and [`<pc-material>`](../pc-material) texture maps — other elements do not trigger loading |
 | `mag-filter` | Enum | `"linear"` | For `texture` and `textureatlas` assets: the filter used when the texture is displayed larger than its source size — `"nearest"` \| `"linear"` |
 | `min-filter` | Enum | `"linear-mip-linear"` | For `texture` and `textureatlas` assets: the filter used when the texture is displayed smaller than its source size — `"nearest"` \| `"linear"` \| `"nearest-mip-nearest"` \| `"linear-mip-nearest"` \| `"nearest-mip-linear"` \| `"linear-mip-linear"` |
 | `mipmaps` | Boolean | `"true"` | For `texture` and `textureatlas` assets: whether the texture generates and uses mipmaps |
@@ -113,9 +113,9 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
     <pc-scene>
         <pc-entity name="camera" position="0 0 3">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light intensity="2"></pc-light>

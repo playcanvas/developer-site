@@ -1,14 +1,14 @@
 ---
-title: <pc-layoutgroup>
-description: "Reference for the pc-layoutgroup element: arranges child elements in horizontal or vertical layouts with spacing, padding, alignment, and fitting."
+title: <pc-layout-group>
+description: "Reference for the pc-layout-group element: arranges child elements in horizontal or vertical layouts with spacing, padding, alignment, and fitting."
 ---
 
-The `<pc-layoutgroup>` tag is used to define a layout group component, which automatically arranges its child element entities in a row or column.
+The `<pc-layout-group>` tag is used to define a layout group component, which automatically arranges its child element entities in a row or column.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
-* Child entities are laid out automatically. Add a [`<pc-layoutchild>`](../pc-layoutchild) to a child to control how it is sized within the group.
+* Child entities are laid out automatically. Add a [`<pc-layout-child>`](../pc-layout-child) to a child to control how it is sized within the group.
 
 :::
 
@@ -45,8 +45,8 @@ A vertical list that lays out its rows automatically. Try `orientation="horizont
             <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
             <pc-entity name="list">
                 <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="220"></pc-element>
-                <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8"
-                                padding="10 10 10 10" width-fitting="stretch"></pc-layoutgroup>
+                <pc-layout-group orientation="vertical" alignment="0 1" spacing="0 8"
+                                 padding="10 10 10 10" width-fitting="stretch"></pc-layout-group>
 
                 <pc-entity name="row-1">
                     <pc-element type="image" width="240" height="50" color="#ff8a3c"></pc-element>
@@ -65,4 +65,6 @@ A vertical list that lays out its rows automatically. Try `orientation="horizont
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-layoutgroup>` elements using the [LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html).
+You can programmatically create and manipulate `<pc-layout-group>` elements using the [LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html).
+
+The [UI Layout example](https://playcanvas.github.io/web-components/examples/ui-layout.html) builds a nested set of layout groups on a world-space screen.

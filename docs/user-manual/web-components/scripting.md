@@ -1,6 +1,6 @@
 ---
 title: Adding Behavior with Scripts
-description: Attach PlayCanvas Script classes to entities with pc-module and pc-script tags, load ES modules, and wire behaviors into Web Components.
+description: Attach PlayCanvas Script classes to entities with pc-wasm and pc-script-instance tags, load ES modules, and wire behaviors into Web Components.
 ---
 
 Scripts add custom behaviors to entities in your PlayCanvas Web Components app.
@@ -28,20 +28,20 @@ Scripts are loaded via the [`<pc-asset>`](../tags/pc-asset) tag:
 <pc-asset src="path/to/rotate-script.mjs"></pc-asset>
 ```
 
-Then attach it to an entity using [`<pc-scripts>`](../tags/pc-scripts) and [`<pc-script>`](../tags/pc-script):
+Then attach it to an entity using [`<pc-script>`](../tags/pc-script) and [`<pc-script-instance>`](../tags/pc-script-instance):
 
 ```html
 <pc-entity name="spinning cube">
     <pc-render type="box"></pc-render>
-    <pc-scripts>
-        <pc-script name="rotateScript"></pc-script>
-    </pc-scripts>
+    <pc-script>
+        <pc-script-instance name="rotateScript"></pc-script-instance>
+    </pc-script>
 </pc-entity>
 ```
 
 :::important
 
-The `name` attribute of `<pc-script>` must match the value of the `scriptName` property of the script.
+The `name` attribute of `<pc-script-instance>` must match the value of the `scriptName` property of the script.
 
 :::
 
@@ -70,18 +70,18 @@ export class RotateScript extends Script {
 }
 ```
 
-We can now configure the script simply by adding a `speed` attribute to the `<pc-script>` tag:
+We can now configure the script simply by adding a `speed` attribute to the `<pc-script-instance>` tag:
 
 ```html {4}
 <pc-entity name="fast spinning cube">
     <pc-render type="box"></pc-render>
-    <pc-scripts>
-        <pc-script name="rotateScript" speed="180"></pc-script>
-    </pc-scripts>
+    <pc-script>
+        <pc-script-instance name="rotateScript" speed="180"></pc-script-instance>
+    </pc-script>
 </pc-entity>
 ```
 
-Any attribute on `<pc-script>` that is not reserved maps to the script attribute of the same name. Reserved names are the element's own API (`name`, `enabled`, `attributes`), global HTML attributes (such as `id` and `style`), `data-*` and `aria-*` attributes, names starting with `_` (as stamped on elements by some frameworks), and real inline event handler names such as `onclick` (a script attribute that merely starts with `on`, like `once`, still maps). Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`). A script attribute whose name collides with the script API (`app`, `entity`, `destroy`, `initialize`, `postInitialize`, `postUpdate`, `swap`, `update`) is never written and logs a console warning.
+Any attribute on `<pc-script-instance>` that is not reserved maps to the script attribute of the same name. Reserved names are the element's own API (`name`, `enabled`, `attributes`), global HTML attributes (such as `id` and `style`), `data-*` and `aria-*` attributes, names starting with `_` (as stamped on elements by some frameworks), and real inline event handler names such as `onclick` (a script attribute that merely starts with `on`, like `once`, still maps). Attribute names are written in kebab-case and map to the script's camelCase property names (e.g. `focus-point` → `focusPoint`). A script attribute whose name collides with the script API (`app`, `entity`, `destroy`, `initialize`, `postInitialize`, `postUpdate`, `swap`, `update`) is never written and logs a console warning.
 
 Values are parsed according to the type of the script's declared default value, following the same [value conventions](attributes.md) as every other element:
 
@@ -97,10 +97,10 @@ Values are parsed according to the type of the script's declared default value, 
 For example, here is the engine's `cameraControls` script configured entirely with per-property attributes:
 
 ```html
-<pc-script name="cameraControls"
-           enable-fly="false"
-           focus-point="0 1.75 0"
-           zoom-range="2 15"></pc-script>
+<pc-script-instance name="cameraControls"
+                    enable-fly="false"
+                    focus-point="0 1.75 0"
+                    zoom-range="2 15"></pc-script-instance>
 ```
 
 :::tip
@@ -123,7 +123,7 @@ Number, boolean, vector and color values are inferred from the script's declared
 | `color:`  | `color:1 0.5 0.5` | A Color from 3 (RGB) or 4 (RGBA) space-separated numbers in the range 0 to 1 |
 
 ```html
-<pc-script name="myScript" font="asset:arial-font" target="entity:#player"></pc-script>
+<pc-script-instance name="myScript" font="asset:arial-font" target="entity:#player"></pc-script-instance>
 ```
 
 ### The `attributes` JSON Attribute
@@ -134,11 +134,11 @@ Per-property attributes cover flat, simply named script attributes. For everythi
 * **Reserved names** — script attributes whose names collide with the element's own API or standard HTML attribute names (e.g. `title`, `name`, `enabled`, `id`, `style`).
 
 ```html
-<pc-script name="annotation" attributes='{
+<pc-script-instance name="annotation" attributes='{
     "label": "1",
     "title": "Cockpit Canopy",
     "text": "Transparent canopy offering visibility and housing the pilot controls."
-}'></pc-script>
+}'></pc-script-instance>
 ```
 
 :::important
@@ -150,10 +150,10 @@ The `attributes` attribute takes a JSON string. Because JSON requires properties
 Inside the JSON, a plain numeric array converts automatically to the script attribute's declared math type — a `Vec2`, `Vec3`, `Vec4` or `Color` default turns `[0, 1.75, 0]` into the right type:
 
 ```html
-<pc-script name="cameraControls" attributes='{
+<pc-script-instance name="cameraControls" attributes='{
     "focusPoint": [0, 1.75, 0],
     "pitchRange": [-90, 0]
-}'></pc-script>
+}'></pc-script-instance>
 ```
 
 An object value merges with the script's declared default rather than replacing it wholesale — with a declared default of `{a: 1, b: 2}`, setting `{"a": 5}` yields `{a: 5, b: 2}`. This means you only need to specify the properties you want to change.
@@ -161,10 +161,10 @@ An object value merges with the script's declared default rather than replacing 
 The [type prefixes](#type-prefixes) also work anywhere inside the JSON, including in nested arrays and objects:
 
 ```html
-<pc-script name="xrMenu" attributes='{
+<pc-script-instance name="xrMenu" attributes='{
     "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
     "fontAsset": "asset:arial-font"
-}'></pc-script>
+}'></pc-script-instance>
 ```
 
 ### Precedence
@@ -173,12 +173,12 @@ If the same script attribute is set both as a per-property attribute and in the 
 
 ### Accessing Scripts from JavaScript
 
-`<pc-script>` elements become *ready* once their script instance has been created. Use `whenReady()` (or the element's `ready()` promise) to wait for that, then access the live [`Script`](https://api.playcanvas.com/engine/classes/Script.html) instance via the `script` property. See [Programmatic Access](programmatic-access.md) for the full `whenReady` API:
+`<pc-script-instance>` elements become *ready* once their script instance has been created. Use `whenReady()` (or the element's `ready()` promise) to wait for that, then access the live [`Script`](https://api.playcanvas.com/engine/classes/Script.html) instance via the `script` property. See [Programmatic Access](programmatic-access.md) for the full `whenReady` API:
 
 ```javascript
 import { whenReady } from '@playcanvas/web-components';
 
-const scriptElement = await whenReady('pc-script');
+const scriptElement = await whenReady('pc-script-instance');
 scriptElement.script.speed = 360;
 ```
 

@@ -87,9 +87,9 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
     <pc-scene>
         <pc-entity name="camera" position="2.5 1.5 3.5">
             <pc-camera clear-color="#2a2d36"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
@@ -97,15 +97,13 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
-            <pc-model asset="t-rex">
-                <pc-anim id="anim" clip="walk" transition-time="0.4">
-                    <pc-anim-clip name="walk"></pc-anim-clip>
-                    <!-- 負のspeedは同じトラックを逆再生します -->
-                    <pc-anim-clip name="sneak" speed="-0.4"></pc-anim-clip>
-                </pc-anim>
-            </pc-model>
-        </pc-entity>
+        <pc-model name="t-rex" asset="t-rex" scale="1.5 1.5 1.5">
+            <pc-anim id="anim" clip="walk" transition-time="0.4">
+                <pc-anim-clip name="walk"></pc-anim-clip>
+                <!-- 負のspeedは同じトラックを逆再生します -->
+                <pc-anim-clip name="sneak" speed="-0.4"></pc-anim-clip>
+            </pc-anim>
+        </pc-model>
     </pc-scene>
 </pc-app>
 <div class="controls">

@@ -8,7 +8,7 @@ The `<pc-joint>` tag constrains two rigid bodies to each other — a hinged door
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity) or a [`<pc-node>`](../pc-node).
-* Both constrained entities need a [`<pc-rigidbody>`](../pc-rigidbody), and physics needs the `Ammo` module — see [`<pc-module>`](../pc-module).
+* Both constrained entities need a [`<pc-rigid-body>`](../pc-rigid-body), and physics needs the `Ammo` module — see [`<pc-wasm>`](../pc-wasm).
 
 :::
 
@@ -19,11 +19,11 @@ So a joint is a third entity positioned where the pivot belongs, pointing the wa
 ```html
 <pc-entity name="hinge-anchor" position="0 2 0">
     <pc-collision half-extents="0.25 0.25 0.25"></pc-collision>
-    <pc-rigidbody></pc-rigidbody>
+    <pc-rigid-body></pc-rigid-body>
 </pc-entity>
 <pc-entity name="hinge-arm" position="1 2 0">
     <pc-collision half-extents="1 0.1 0.1"></pc-collision>
-    <pc-rigidbody type="dynamic"></pc-rigidbody>
+    <pc-rigid-body type="dynamic"></pc-rigid-body>
 </pc-entity>
 
 <!-- The joint sits at the pivot, not on either body -->
@@ -60,7 +60,7 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 | `enable-collision` | Boolean | `"false"` | Whether the two constrained bodies collide with each other |
 | `enable-limits` | Boolean | `"false"` | Whether the joint's limits are enforced. Limit attributes do nothing until this is set |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `entity-a` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the first body. Needs a [`<pc-rigidbody>`](../pc-rigidbody) |
+| `entity-a` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the first body. Needs a [`<pc-rigid-body>`](../pc-rigid-body) |
 | `entity-b` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
 | `limits` | Vector2 | `"-45 45"` | Rotation or travel limits about the primary axis, as "min max" — degrees for `hinge`, units for `slider` |
 | `linear-damping` | Vector3 | `"1 1 1"` | Spring damping per linear axis. Used by `6dof` |
@@ -138,7 +138,7 @@ A motor-driven hinge spinning a blade about a static hub. The joint entity sits 
 
 ```html live-example
 <pc-app>
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
     <pc-scene>
         <pc-entity name="camera" position="0 2 6">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -151,14 +151,14 @@ A motor-driven hinge spinning a blade about a static hub. The joint entity sits 
         <pc-entity id="hub" position="0 2 0" rotation="90 0 0" scale="0.5 0.3 0.5">
             <pc-render type="cylinder"></pc-render>
             <pc-collision type="cylinder" radius="0.25" height="0.3"></pc-collision>
-            <pc-rigidbody></pc-rigidbody>
+            <pc-rigid-body></pc-rigid-body>
         </pc-entity>
 
         <!-- Dynamic blade -->
         <pc-entity id="blade" position="0 2 0" scale="4 0.3 0.2">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="2 0.15 0.1"></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
 
         <!-- The joint sits at the pivot; its frame's X axis is the hinge axis -->

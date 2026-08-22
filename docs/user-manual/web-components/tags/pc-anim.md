@@ -19,54 +19,28 @@ There are two ways to end up with clips, and the element picks between them for 
 **Declared clips.** Each [`<pc-anim-clip>`](../pc-anim-clip) child contributes one named clip. This is the form to reach for whenever you want to name clips yourself, set a per-clip `speed` or `loop`, or pull clips out of more than one file:
 
 ```html
-<pc-entity name="robot">
-    <pc-model asset="arm">
-        <pc-anim clip="idle" transition-time="0.35">
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="pick"></pc-anim-clip>
-            <pc-anim-clip name="stow" loop="false"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="robot" asset="arm">
+    <pc-anim clip="idle" transition-time="0.35">
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="pick"></pc-anim-clip>
+        <pc-anim-clip name="stow" loop="false"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 **Every animation in the enclosing model.** With no clip children and a [`<pc-model>`](../pc-model) as its parent, the element assigns every animation of that model's container asset, each named after its track, in container order. One empty tag is then enough to play what a GLB came with:
 
 ```html
-<pc-entity name="t-rex">
-    <pc-model asset="t-rex">
-        <pc-anim></pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="t-rex" asset="t-rex">
+    <pc-anim></pc-anim>
+</pc-model>
 ```
 
 Declared clips win: adding a `<pc-anim-clip>` child to an element that had been assigning a model's animations switches it over to the declared set. Either way the first clip starts playing on its own — opt out with `activate="false"`.
 
 Tracks whose names the engine cannot host are skipped with a warning naming each: a name containing `.` (reserved for blend tree paths), or one a previous track already took.
 
-:::warning[The component goes on the enclosing entity]
-
-A `<pc-anim>` inside a `<pc-model>` still attaches its component to the nearest enclosing [`<pc-entity>`](../pc-entity) or [`<pc-node>`](../pc-node) — the model's instantiated hierarchy sits below that same entity, which is what lets the clips reach it. A `<pc-model>` that is a direct child of [`<pc-scene>`](../pc-scene) has no such entity, so wrap it in one:
-
-```html
-<!-- Warns "must be a descendant of pc-entity", and nothing animates -->
-<pc-scene>
-    <pc-model asset="t-rex">
-        <pc-anim></pc-anim>
-    </pc-model>
-</pc-scene>
-
-<!-- Wrapped in an entity, so the component has a home -->
-<pc-scene>
-    <pc-entity>
-        <pc-model asset="t-rex">
-            <pc-anim></pc-anim>
-        </pc-model>
-    </pc-entity>
-</pc-scene>
-```
-
-:::
+A `<pc-anim>` inside a [`<pc-model>`](../pc-model) attaches to that model's own host entity, so no wrapper entity is needed and none should be added. The model's content sits below the same host, which is what lets the clips reach it, and the host survives a change of `asset` — so swapping a model's GLB keeps the component and re-resolves its clips against the new container.
 
 ## Attributes
 
@@ -118,6 +92,8 @@ Clips bind to scene nodes **by name**, over the whole hierarchy below the compon
 
 The engine resolves each curve once and does not retry, so a model that finishes loading *after* its clips were assigned would otherwise stay silently unbound. The element handles this: it rebinds when a model below its host announces readiness, and refreshes the whole clip set when the model it takes its clips from is re-instantiated. Changing a [`<pc-model>`'s `asset`](../pc-model#attributes) at runtime therefore does the right thing without any help.
 
+The element also manages the component's `rootBone` for you, pointing it at the enclosing model's host so that curves targeting the asset's own root node bind where the engine expects. It re-derives that on every cycle and clears it when no single model is in scope — but a `rootBone` you assign yourself through the engine API is recognized as yours and never overwritten.
+
 There is one thing to know about the end of a clip: **the engine reports no completion**. A clip with `loop="false"` holds its last pose and says nothing — there is no `end` event to listen for. To act when one finishes, compare the playhead against the track's duration on the underlying component:
 
 ```javascript
@@ -137,9 +113,9 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
     <pc-scene>
         <pc-entity name="camera" position="2.5 1.5 3.5">
             <pc-camera clear-color="#2a2d36"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
@@ -147,15 +123,12 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        <!-- The component attaches to this entity; the clips come from the model below it -->
-        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
-            <pc-model asset="t-rex">
-                <pc-anim id="anim" clip="walk" transition-time="0.4">
-                    <pc-anim-clip name="walk"></pc-anim-clip>
-                    <pc-anim-clip name="stalk" speed="0.33"></pc-anim-clip>
-                </pc-anim>
-            </pc-model>
-        </pc-entity>
+        <pc-model name="t-rex" asset="t-rex" scale="1.5 1.5 1.5">
+            <pc-anim id="anim" clip="walk" transition-time="0.4">
+                <pc-anim-clip name="walk"></pc-anim-clip>
+                <pc-anim-clip name="stalk" speed="0.33"></pc-anim-clip>
+            </pc-anim>
+        </pc-model>
     </pc-scene>
 </pc-app>
 <div class="controls">

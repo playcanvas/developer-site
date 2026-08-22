@@ -1,9 +1,9 @@
 ---
-title: <pc-particles>
-description: "Reference for the pc-particles element: configure particle emitters, textures, blending, and simulation parameters in markup."
+title: <pc-particle-system>
+description: "Reference for the pc-particle-system element: configure particle emitters, textures, blending, and simulation parameters in markup."
 ---
 
-The `<pc-particles>` tag is used to define a particle system.
+The `<pc-particle-system>` tag is used to define a particle system.
 
 :::note[Usage]
 
@@ -75,7 +75,7 @@ Then add the particle system to your scene in HTML. This runs the `snow.json` ab
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="snow" position="0 5 0">
-            <pc-particles asset="snow"></pc-particles>
+            <pc-particle-system asset="snow"></pc-particle-system>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -83,4 +83,4 @@ Then add the particle system to your scene in HTML. This runs the `snow.json` ab
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-particles>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).
+You can programmatically create and manipulate `<pc-particle-system>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).

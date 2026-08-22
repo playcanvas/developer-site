@@ -1,9 +1,9 @@
 ---
-title: <pc-scrollview>
-description: "Reference for the pc-scrollview element: scrollable viewport with content, scrollbars, mouse-wheel support, and bounce/clamp/infinite modes."
+title: <pc-scroll-view>
+description: "Reference for the pc-scroll-view element: scrollable viewport with content, scrollbars, mouse-wheel support, and bounce/clamp/infinite modes."
 ---
 
-The `<pc-scrollview>` tag is used to define a scroll view component, which lets the user scroll a larger content area within a clipped viewport.
+The `<pc-scroll-view>` tag is used to define a scroll view component, which lets the user scroll a larger content area within a clipped viewport.
 
 :::note[Usage]
 
@@ -50,12 +50,12 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
             <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
             <pc-entity name="scroll-view">
                 <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="260" height="260"></pc-element>
-                <pc-scrollview
+                <pc-scroll-view
                     horizontal="false"
                     vertical="true"
                     viewport="#viewport"
                     content="#content"
-                    vertical-scrollbar="#v-scrollbar"></pc-scrollview>
+                    vertical-scrollbar="#v-scrollbar"></pc-scroll-view>
 
                 <!-- Viewport clips the content to the scroll view's bounds -->
                 <pc-entity name="viewport" id="viewport">
@@ -65,7 +65,7 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
                          size of the rows: 8 x 60, plus 7 x 8 spacing, plus 10 padding top and bottom -->
                     <pc-entity name="content" id="content">
                         <pc-element type="group" anchor="0 1 0 1" pivot="0 1" width="240" height="556" use-input></pc-element>
-                        <pc-layoutgroup orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layoutgroup>
+                        <pc-layout-group orientation="vertical" alignment="0 1" spacing="0 8" padding="10 10 10 10"></pc-layout-group>
                         <pc-entity name="row-1"><pc-element type="image" width="220" height="60" color="#ff8a3c"></pc-element></pc-entity>
                         <pc-entity name="row-2"><pc-element type="image" width="220" height="60" color="#7ab8ff"></pc-element></pc-entity>
                         <pc-entity name="row-3"><pc-element type="image" width="220" height="60" color="#8ce99a"></pc-element></pc-entity>
@@ -94,4 +94,4 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-scrollview>` elements using the [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html).
+You can programmatically create and manipulate `<pc-scroll-view>` elements using the [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html).

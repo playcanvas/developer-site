@@ -19,54 +19,28 @@ description: "pc-anim要素のリファレンス: エンティティ階層上で
 **宣言されたクリップ。** [`<pc-anim-clip>`](../pc-anim-clip)の子が1つずつ名前付きクリップを提供します。クリップに自分で名前を付けたいとき、クリップごとに`speed`や`loop`を設定したいとき、複数のファイルからクリップを集めたいときは、この形式を使います。
 
 ```html
-<pc-entity name="robot">
-    <pc-model asset="arm">
-        <pc-anim clip="idle" transition-time="0.35">
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="pick"></pc-anim-clip>
-            <pc-anim-clip name="stow" loop="false"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="robot" asset="arm">
+    <pc-anim clip="idle" transition-time="0.35">
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="pick"></pc-anim-clip>
+        <pc-anim-clip name="stow" loop="false"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 **囲んでいるモデルのすべてのアニメーション。** クリップの子がなく、親が[`<pc-model>`](../pc-model)である場合、そのモデルのコンテナアセットが持つすべてのアニメーションが、それぞれのトラック名を名前として、コンテナ内の順序で割り当てられます。空のタグ1つで、GLBに入っていたものを再生できます。
 
 ```html
-<pc-entity name="t-rex">
-    <pc-model asset="t-rex">
-        <pc-anim></pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="t-rex" asset="t-rex">
+    <pc-anim></pc-anim>
+</pc-model>
 ```
 
 宣言されたクリップが優先されます。モデルのアニメーションを割り当てていた要素に`<pc-anim-clip>`の子を追加すると、宣言されたクリップの側に切り替わります。どちらの場合も最初のクリップは自動的に再生を始めます。これを止めるには`activate="false"`を指定します。
 
 エンジンが扱えない名前のトラックは、それぞれを名指しする警告とともにスキップされます。`.`を含む名前（ブレンドツリーのパス用に予約されています）と、先行するトラックがすでに使った名前です。
 
-:::warning[コンポーネントは囲んでいるエンティティに付きます]
-
-`<pc-model>`の内側にある`<pc-anim>`も、コンポーネントは最も近い外側の[`<pc-entity>`](../pc-entity)または[`<pc-node>`](../pc-node)に取り付けられます。モデルのインスタンス化された階層は同じエンティティの下に置かれるため、これによりクリップが階層に届きます。[`<pc-scene>`](../pc-scene)の直接の子である`<pc-model>`にはそのようなエンティティが存在しないため、エンティティで囲んでください。
-
-```html
-<!-- 「must be a descendant of pc-entity」と警告され、何もアニメーションしません -->
-<pc-scene>
-    <pc-model asset="t-rex">
-        <pc-anim></pc-anim>
-    </pc-model>
-</pc-scene>
-
-<!-- エンティティで囲んだので、コンポーネントに置き場所ができます -->
-<pc-scene>
-    <pc-entity>
-        <pc-model asset="t-rex">
-            <pc-anim></pc-anim>
-        </pc-model>
-    </pc-entity>
-</pc-scene>
-```
-
-:::
+[`<pc-model>`](../pc-model)の内側にある`<pc-anim>`は、そのモデル自身のホストエンティティに取り付けられます。したがってラッパーとなるエンティティは不要で、追加すべきでもありません。モデルのコンテンツは同じホストの下に置かれるため、これによりクリップが階層に届きます。またホストは`asset`の変更を越えて存続するので、モデルのGLBを差し替えてもコンポーネントは残り、新しいコンテナに対してクリップが再解決されます。
 
 ## 属性 {#attributes}
 
@@ -118,6 +92,8 @@ anim.play();                // 停止した位置から再開します
 
 エンジンは各カーブを一度だけ解決し、再試行しません。そのため、クリップが割り当てられた*後*に読み込みが完了したモデルは、本来なら黙ってバインドされないままになります。この要素はそれを処理します。ホストの下にあるモデルがreadyを通知した時点で再バインドし、クリップの供給元であるモデルが再インスタンス化された場合はクリップセット全体を作り直します。したがって、実行時に[`<pc-model>`の`asset`](../pc-model#attributes)を変更しても、特別な対応なしに期待どおりに動作します。
 
+この要素はコンポーネントの`rootBone`も管理します。アセット自身のルートノードを対象とするカーブがエンジンの期待する位置にバインドされるよう、囲んでいるモデルのホストを指すように設定します。これはサイクルごとに再導出され、対象となるモデルが1つに定まらない場合はクリアされます。ただし、エンジンのAPIを通じて自分で割り当てた`rootBone`はユーザーのものとして認識され、上書きされることはありません。
+
 クリップの終わりについて1つ知っておくべきことがあります。**エンジンは再生完了を通知しません**。`loop="false"`のクリップは最後のポーズを保持したまま、何も知らせません。リッスンできる`end`イベントは存在しません。クリップの終了時に何かをするには、内部のコンポーネント上で再生ヘッドをトラックの長さと比較してください。
 
 ```javascript
@@ -137,9 +113,9 @@ const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
     <pc-scene>
         <pc-entity name="camera" position="2.5 1.5 3.5">
             <pc-camera clear-color="#2a2d36"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
@@ -147,15 +123,12 @@ const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
-        <!-- コンポーネントはこのエンティティに付きます。クリップはその下のモデルから来ます -->
-        <pc-entity name="t-rex" scale="1.5 1.5 1.5">
-            <pc-model asset="t-rex">
-                <pc-anim id="anim" clip="walk" transition-time="0.4">
-                    <pc-anim-clip name="walk"></pc-anim-clip>
-                    <pc-anim-clip name="stalk" speed="0.33"></pc-anim-clip>
-                </pc-anim>
-            </pc-model>
-        </pc-entity>
+        <pc-model name="t-rex" asset="t-rex" scale="1.5 1.5 1.5">
+            <pc-anim id="anim" clip="walk" transition-time="0.4">
+                <pc-anim-clip name="walk"></pc-anim-clip>
+                <pc-anim-clip name="stalk" speed="0.33"></pc-anim-clip>
+            </pc-anim>
+        </pc-model>
     </pc-scene>
 </pc-app>
 <div class="controls">

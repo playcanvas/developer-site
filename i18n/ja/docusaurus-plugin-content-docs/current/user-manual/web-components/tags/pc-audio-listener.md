@@ -1,9 +1,9 @@
 ---
-title: <pc-listener>
-description: "pc-listener要素のリファレンス: 位置サウンドをどの地点から聴くかを定義するオーディオリスナーComponentです。"
+title: <pc-audio-listener>
+description: "pc-audio-listener要素のリファレンス: 位置サウンドをどの地点から聴くかを定義するオーディオリスナーComponentです。"
 ---
 
-`<pc-listener>`タグは、リスナーコンポーネントを定義するために使用されます。
+`<pc-audio-listener>`タグは、リスナーコンポーネントを定義するために使用されます。
 
 :::note[使用法]
 
@@ -33,7 +33,7 @@ description: "pc-listener要素のリファレンス: 位置サウンドをど�
         <pc-entity name="camera" position="0 2.5 6" rotation="-15 0 0">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
             <!-- 位置音源はこのエンティティの位置で聴取されます -->
-            <pc-listener></pc-listener>
+            <pc-audio-listener></pc-audio-listener>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows></pc-light>
@@ -42,14 +42,14 @@ description: "pc-listener要素のリファレンス: 位置サウンドをど�
             <pc-render type="plane" material="floor"></pc-render>
         </pc-entity>
         <pc-entity name="pivot">
-            <pc-scripts>
-                <pc-script name="orbit"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="orbit"></pc-script-instance>
+            </pc-script>
             <pc-entity name="emitter" position="3 1 0" scale="0.4 0.4 0.4">
                 <pc-render type="sphere"></pc-render>
-                <pc-sounds positional="true" ref-distance="2" roll-off-factor="1">
-                    <pc-sound name="footsteps" asset="footsteps" loop="true"></pc-sound>
-                </pc-sounds>
+                <pc-sound positional="true" ref-distance="2" roll-off-factor="1">
+                    <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
+                </pc-sound>
             </pc-entity>
         </pc-entity>
     </pc-scene>
@@ -69,11 +69,11 @@ description: "pc-listener要素のリファレンス: 位置サウンドをど�
 
     registerScript(Orbit, 'orbit');
 
-    const sounds = await whenReady('pc-sounds');
+    const sounds = await whenReady('pc-sound');
     document.getElementById('play').onclick = () => sounds.component.slot('footsteps').play();
 </script>
 ```
 
 ## JavaScriptインターフェース {#javascript-interface}
 
-[ListenerComponentElement API](https://api.playcanvas.com/web-components/classes/ListenerComponentElement.html)を使用して、`<pc-listener>`要素をプログラムで作成および操作できます。
+[AudioListenerComponentElement API](https://api.playcanvas.com/web-components/classes/AudioListenerComponentElement.html)を使用して、`<pc-audio-listener>`要素をプログラムで作成および操作できます。

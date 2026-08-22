@@ -64,7 +64,7 @@ We've positioned the camera 2.5 units down the Z axis. By default, a camera look
 
 ## Adding Camera Controls
 
-Now let's make the camera interactive by adding the camera controls script using the [`<pc-scripts>`](/user-manual/web-components/tags/pc-scripts) and [`<pc-script>`](/user-manual/web-components/tags/pc-script) elements.
+Now let's make the camera interactive by adding the camera controls script using the [`<pc-script>`](/user-manual/web-components/tags/pc-script) and [`<pc-script-instance>`](/user-manual/web-components/tags/pc-script-instance) elements.
 
 ```html {7-9}
 <pc-app antialias="false" max-pixel-ratio="1">
@@ -73,9 +73,9 @@ Now let's make the camera interactive by adding the camera controls script using
     <pc-scene>
         <pc-entity position="0 0 2.5">
             <pc-camera></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls"></pc-script-instance>
+            </pc-script>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -98,9 +98,9 @@ Now let's add our toy cat splat to the scene using the [`<pc-gsplat>`](/user-man
     <pc-scene>
         <pc-entity position="0 0 2.5">
             <pc-camera></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity position="0 -0.7 0" rotation="0 0 180">
             <pc-gsplat asset="toy"></pc-gsplat>

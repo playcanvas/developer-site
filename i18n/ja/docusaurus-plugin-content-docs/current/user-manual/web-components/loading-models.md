@@ -41,7 +41,7 @@ glTFのどちらの形式でも動作します。`.gltf`（JSONで、テクス�
 
 `type="container"`は重要です。GLBは*コンテナ*アセットであり、メッシュ・マテリアル・テクスチャ・スキン・アニメーションをまとめて保持します。`<pc-model>`はそのコンテナから階層をインスタンス化します。別の型のアセットを指定すると、丁寧なメッセージではなくインスタンス化の時点で失敗するため、正しく指定する価値があります。それ以外の点で`<pc-model>`は[`<pc-entity>`](tags/pc-entity.md)と同じように振る舞うため、`position`・`rotation`・`scale`を取り、別のエンティティの内側にネストすることもできます。
 
-モデルは階層がシーンに入った時点でready状態になり、`load`を発生させます。読み込みが失敗した場合もentityが`null`のままreadyは確定し、[`error`イベント](tags/pc-model.md#events)を発生させます。ファイルが届かない可能性がある場合はこちらをリッスンしてください。
+モデルはコンテンツがシーンに入った時点でready状態になり、`load`を発生させます。読み込みが失敗した場合も`contentEntity`が`null`のままreadyは確定し、[`error`イベント](tags/pc-model.md#events)を発生させます。ファイルが届かない可能性がある場合はこちらをリッスンしてください。
 
 ```javascript
 document.querySelector('pc-model').addEventListener('error', (event) => {
@@ -57,13 +57,13 @@ document.querySelector('pc-model').addEventListener('error', (event) => {
 
 ### 圧縮されたメッシュ {#compressed-meshes}
 
-アセットサイトのモデルはほとんどがDraco圧縮されており、このモデルもそうです。DracoにはWebAssemblyデコーダーが必要で、`<pc-app>`の子として[`<pc-module>`](tags/pc-module.md)で宣言します。
+アセットサイトのモデルはほとんどがDraco圧縮されており、このモデルもそうです。DracoにはWebAssemblyデコーダーが必要で、`<pc-app>`の子として[`<pc-wasm>`](tags/pc-wasm.md)で宣言します。
 
 ```html
-<pc-module name="DracoDecoderModule"
-           glue="modules/draco/draco.wasm.js"
-           wasm="modules/draco/draco.wasm.wasm"
-           fallback="modules/draco/draco.js"></pc-module>
+<pc-wasm name="DracoDecoderModule"
+         glue="modules/draco/draco.wasm.js"
+         wasm="modules/draco/draco.wasm.wasm"
+         fallback="modules/draco/draco.js"></pc-wasm>
 ```
 
 この3つのファイルは[Draco](https://google.github.io/draco/)デコーダーのビルド — glueスクリプト、`.wasm`バイナリ、そしてWebAssemblyのないブラウザ向けの純JavaScriptフォールバック — です。エンジンのnpmパッケージには含まれていないため、自分で配信します。[Dracoのリリース](https://github.com/google/draco/releases)から取得するか、[Web Componentsのサンプル](https://github.com/playcanvas/web-components/tree/main/examples/modules/draco)に同梱されている一式をコピーし、置いた場所を属性で指定してください。
@@ -223,13 +223,13 @@ Sketchfabのモデルにはベイクされた影用のプレーンが同梱さ�
 ```html
 <pc-model asset="car">
     <pc-node name="underbody_0">
-        <pc-rigidbody type="static"></pc-rigidbody>
+        <pc-rigid-body type="static"></pc-rigid-body>
         <pc-collision type="mesh"></pc-collision>
     </pc-node>
 </pc-model>
 ```
 
-物理にはDracoと同じ方法で宣言する`Ammo`モジュールが必要です。[`<pc-module>`](tags/pc-module.md)を参照してください。
+物理にはDracoと同じ方法で宣言する`Ammo`モジュールが必要です。[`<pc-wasm>`](tags/pc-wasm.md)を参照してください。
 
 ### 部分をインタラクティブにする {#make-a-part-interactive}
 
@@ -252,17 +252,15 @@ Sketchfabのモデルにはベイクされた影用のプレーンが同梱さ�
 ```html
 <pc-asset id="robot" type="container" src="assets/walking-robot.glb"></pc-asset>
 <pc-scene>
-    <pc-entity name="robot">
-        <pc-model asset="robot">
-            <pc-anim></pc-anim>
-        </pc-model>
-    </pc-entity>
+    <pc-model name="robot" asset="robot">
+        <pc-anim></pc-anim>
+    </pc-model>
 </pc-scene>
 ```
 
 ![歩行アニメーションが再生され、歩を進めている途中のロボットキャラクター](/img/user-manual/web-components/loading-models/robot-animation.jpg)
 
-モデルを囲む`<pc-entity>`には意味があります。`<pc-anim>`はコンポーネントタグなので、モデルのインスタンス化されたルートではなく、最も近い外側のエンティティに取り付けられます。そして`<pc-scene>`の直下に置かれた`<pc-model>`には、渡せるエンティティがありません。コンソールはそれをはっきり伝えます（`must be a descendant of pc-entity`）。対処は上のラッパーです。
+ラッパーとなるエンティティは必要ありません。`<pc-model>`はそれ自体がエンティティのホストなので、その内側に置いたコンポーネントは[`<pc-entity>`](tags/pc-entity.md)に取り付けるのと同じように、モデルに取り付けられます。つまりモデルは自身の名前・トランスフォーム・ポインタハンドラを持てて、コンテンツと並べて子エンティティをホストすることもできます。
 
 どのアニメーションがエクスポートを通過したかを確認するには、コンポーネントに尋ねます。
 
@@ -274,15 +272,13 @@ console.log(anim.clips); // ['Walk', 'Idle', 'Wave']
 エクスポーターが付けた名前をそのまま使うのではなく、自分でクリップに名前を付けるには、クリップを宣言します。1クリップにつき1つの[`<pc-anim-clip>`](tags/pc-anim-clip.md)です。クリップごとの速度とループもここで設定し、他のファイルのクリップを混ぜるのもここです。
 
 ```html
-<pc-entity name="robot">
-    <pc-model asset="robot">
-        <pc-anim clip="idle" transition-time="0.3">
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="walk" speed="1.2"></pc-anim-clip>
-            <pc-anim-clip name="wave" asset="wave-glb" loop="false"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="robot" asset="robot">
+    <pc-anim clip="idle" transition-time="0.3">
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="walk" speed="1.2"></pc-anim-clip>
+        <pc-anim-clip name="wave" asset="wave-glb" loop="false"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 あとは`clip`を設定すればクリップが切り替わり、`transition-time`にわたってクロスフェードします。
@@ -307,7 +303,7 @@ document.querySelector('pc-anim').setAttribute('clip', 'walk');
 
 **マテリアル名が`Untitled`または`defaultGlbMaterial`と表示される。** これらは、名前のないglTFマテリアルと、マテリアルなしでエクスポートされたプリミティブに対するエンジンのデフォルトです。どちらも一意な指定手段ではないため、そうしたものは`index:`で選択してください。
 
-**モデルは読み込まれるが何もアニメーションしない。** モデルは[`<pc-anim>`](tags/pc-anim.md)が指示するまで何も再生しません。そしてその要素には、[アニメーション](#animation)で説明したとおり、外側の`<pc-entity>`が必要です。両方が揃っているなら`anim.clips`を確認してください。モデルにアニメーションがないという警告とともに空のリストが返る場合、アニメーションはエクスポートを通過していません。
+**モデルは読み込まれるが何もアニメーションしない。** [アニメーション](#animation)で説明したとおり、モデルは内側の[`<pc-anim>`](tags/pc-anim.md)が指示するまで何も再生しません。それが置かれているなら`anim.clips`を確認してください。モデルにアニメーションがないという警告とともに空のリストが返る場合、アニメーションはエクスポートを通過していません。
 
 **別ファイルのクリップが何もアニメーションさせない。** そのトラックは名前によってバインドされるため、クリップとモデルでノード名が一致している必要があります。モデルの`hierarchy()`を出力して見比べてください。
 

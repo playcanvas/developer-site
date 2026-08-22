@@ -9,7 +9,7 @@ The `<pc-entity>` tag is used to define an entity.
 
 * It must be a direct child of [`<pc-scene>`](../pc-scene), another `<pc-entity>`, or a [`<pc-node>`](../pc-node) — which parents it under a node inside a loaded model.
 * It can have 0..n [`<pc-entity>`](../pc-entity) or [`<pc-model>`](../pc-model) children.
-* It can optionally have one of each component type as children: [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-layoutchild>`](../pc-layoutchild), [`<pc-layoutgroup>`](../pc-layoutgroup), [`<pc-light>`](../pc-light), [`<pc-listener>`](../pc-listener), [`<pc-particles>`](../pc-particles), [`<pc-render>`](../pc-render), [`<pc-rigidbody>`](../pc-rigidbody), [`<pc-screen>`](../pc-screen), [`<pc-scripts>`](../pc-scripts), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scrollview>`](../pc-scrollview), [`<pc-sounds>`](../pc-sounds).
+* It can optionally have one of each component type as children: [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-layout-child>`](../pc-layout-child), [`<pc-layout-group>`](../pc-layout-group), [`<pc-light>`](../pc-light), [`<pc-audio-listener>`](../pc-audio-listener), [`<pc-particle-system>`](../pc-particle-system), [`<pc-render>`](../pc-render), [`<pc-rigid-body>`](../pc-rigid-body), [`<pc-screen>`](../pc-screen), [`<pc-script>`](../pc-script), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scroll-view>`](../pc-scroll-view), [`<pc-sound>`](../pc-sound).
 
 :::
 

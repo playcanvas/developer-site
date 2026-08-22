@@ -40,9 +40,9 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" zoom-range="1 5"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" zoom-range="1 5"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="toy" position="0 -0.7 0" rotation="0 0 180">
             <pc-gsplat asset="toy"></pc-gsplat>

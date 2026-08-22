@@ -1,6 +1,6 @@
 ---
 title: スクリプトで動作を追加する
-description: pc-moduleとpc-scriptタグでPlayCanvas ScriptクラスをEntityにアタッチし、ESモジュールを読み込み、Web Componentsに振る舞いを接続します。
+description: pc-wasmとpc-script-instanceタグでPlayCanvas ScriptクラスをEntityにアタッチし、ESモジュールを読み込み、Web Componentsに振る舞いを接続します。
 ---
 
 スクリプトは、PlayCanvas Web Components アプリのエンティティにカスタム動作を追加します。
@@ -28,20 +28,20 @@ export class RotateScript extends Script {
 <pc-asset src="path/to/rotate-script.mjs"></pc-asset>
 ```
 
-次に、[`<pc-scripts>`](../tags/pc-scripts) および [`<pc-script>`](../tags/pc-script) を使用してエンティティにアタッチします。
+次に、[`<pc-script>`](../tags/pc-script) および [`<pc-script-instance>`](../tags/pc-script-instance) を使用してエンティティにアタッチします。
 
 ```html
 <pc-entity name="回転するキューブ">
     <pc-render type="box"></pc-render>
-    <pc-scripts>
-        <pc-script name="rotateScript"></pc-script>
-    </pc-scripts>
+    <pc-script>
+        <pc-script-instance name="rotateScript"></pc-script-instance>
+    </pc-script>
 </pc-entity>
 ```
 
 :::important
 
-`<pc-script>` の `name` 属性は、スクリプトの `scriptName` プロパティの値と一致する必要があります。
+`<pc-script-instance>` の `name` 属性は、スクリプトの `scriptName` プロパティの値と一致する必要があります。
 
 :::
 
@@ -70,18 +70,18 @@ export class RotateScript extends Script {
 }
 ```
 
-これで、`<pc-script>` タグに `speed` 属性を追加するだけでスクリプトを設定できます。
+これで、`<pc-script-instance>` タグに `speed` 属性を追加するだけでスクリプトを設定できます。
 
 ```html {4}
 <pc-entity name="高速回転するキューブ">
     <pc-render type="box"></pc-render>
-    <pc-scripts>
-        <pc-script name="rotateScript" speed="180"></pc-script>
-    </pc-scripts>
+    <pc-script>
+        <pc-script-instance name="rotateScript" speed="180"></pc-script-instance>
+    </pc-script>
 </pc-entity>
 ```
 
-`<pc-script>` 上の、予約されていない属性は、同名のスクリプト属性にマッピングされます。予約名は、要素自身のAPI（`name`、`enabled`、`attributes`）、グローバルHTML属性（`id` や `style` など）、`data-*` および `aria-*` 属性、`_` で始まる名前（一部のフレームワークが要素に付与するもの）、そして `onclick` のような実在するインラインイベントハンドラー名です（単に `on` で始まるだけのスクリプト属性、例えば `once` はマッピングされます）。属性名はケバブケースで記述し、スクリプトのキャメルケースのプロパティ名にマッピングされます（例: `focus-point` → `focusPoint`）。スクリプトAPI（`app`、`entity`、`destroy`、`initialize`、`postInitialize`、`postUpdate`、`swap`、`update`）と名前が衝突するスクリプト属性は書き込まれず、コンソール警告が記録されます。
+`<pc-script-instance>` 上の、予約されていない属性は、同名のスクリプト属性にマッピングされます。予約名は、要素自身のAPI（`name`、`enabled`、`attributes`）、グローバルHTML属性（`id` や `style` など）、`data-*` および `aria-*` 属性、`_` で始まる名前（一部のフレームワークが要素に付与するもの）、そして `onclick` のような実在するインラインイベントハンドラー名です（単に `on` で始まるだけのスクリプト属性、例えば `once` はマッピングされます）。属性名はケバブケースで記述し、スクリプトのキャメルケースのプロパティ名にマッピングされます（例: `focus-point` → `focusPoint`）。スクリプトAPI（`app`、`entity`、`destroy`、`initialize`、`postInitialize`、`postUpdate`、`swap`、`update`）と名前が衝突するスクリプト属性は書き込まれず、コンソール警告が記録されます。
 
 値は、スクリプトが宣言したデフォルト値の型に従って解析され、他のすべての要素と同じ[値の規約](attributes.md)に従います。
 
@@ -97,10 +97,10 @@ export class RotateScript extends Script {
 例えば、エンジンの `cameraControls` スクリプトをプロパティごとの属性だけで設定すると次のようになります。
 
 ```html
-<pc-script name="cameraControls"
-           enable-fly="false"
-           focus-point="0 1.75 0"
-           zoom-range="2 15"></pc-script>
+<pc-script-instance name="cameraControls"
+                    enable-fly="false"
+                    focus-point="0 1.75 0"
+                    zoom-range="2 15"></pc-script-instance>
 ```
 
 :::tip
@@ -123,7 +123,7 @@ Number、Boolean、ベクトル、カラーの値は、スクリプトが宣言�
 | `color:`  | `color:1 0.5 0.5` | 0から1の範囲のスペース区切りの3つ（RGB）または4つ（RGBA）の数値からColorを生成します |
 
 ```html
-<pc-script name="myScript" font="asset:arial-font" target="entity:#player"></pc-script>
+<pc-script-instance name="myScript" font="asset:arial-font" target="entity:#player"></pc-script-instance>
 ```
 
 ### `attributes` JSON属性 {#the-attributes-json-attribute}
@@ -134,11 +134,11 @@ Number、Boolean、ベクトル、カラーの値は、スクリプトが宣言�
 * **予約名** — 要素自身のAPIや標準HTML属性名（例: `title`、`name`、`enabled`、`id`、`style`）と衝突する名前のスクリプト属性。
 
 ```html
-<pc-script name="annotation" attributes='{
+<pc-script-instance name="annotation" attributes='{
     "label": "1",
     "title": "Cockpit Canopy",
     "text": "Transparent canopy offering visibility and housing the pilot controls."
-}'></pc-script>
+}'></pc-script-instance>
 ```
 
 :::important
@@ -150,10 +150,10 @@ Number、Boolean、ベクトル、カラーの値は、スクリプトが宣言�
 JSON内では、プレーンな数値配列がスクリプト属性の宣言された数学型に自動的に変換されます。デフォルト値が `Vec2`、`Vec3`、`Vec4`、`Color` であれば、`[0, 1.75, 0]` は適切な型になります。
 
 ```html
-<pc-script name="cameraControls" attributes='{
+<pc-script-instance name="cameraControls" attributes='{
     "focusPoint": [0, 1.75, 0],
     "pitchRange": [-90, 0]
-}'></pc-script>
+}'></pc-script-instance>
 ```
 
 オブジェクト値は、スクリプトの宣言されたデフォルト値を丸ごと置き換えるのではなく、マージされます。宣言されたデフォルトが `{a: 1, b: 2}` の場合、`{"a": 5}` を設定すると `{a: 5, b: 2}` になります。つまり、変更したいプロパティだけを指定すれば済みます。
@@ -161,10 +161,10 @@ JSON内では、プレーンな数値配列がスクリプト属性の宣言さ�
 [型プレフィックス](#type-prefixes)は、ネストされた配列やオブジェクトを含め、JSON内のどこでも機能します。
 
 ```html
-<pc-script name="xrMenu" attributes='{
+<pc-script-instance name="xrMenu" attributes='{
     "menuItems": [{"label": "Exit XR", "eventName": "xr:end"}],
     "fontAsset": "asset:arial-font"
-}'></pc-script>
+}'></pc-script-instance>
 ```
 
 ### 優先順位 {#precedence}
@@ -173,12 +173,12 @@ JSON内では、プレーンな数値配列がスクリプト属性の宣言さ�
 
 ### JavaScriptからスクリプトにアクセスする {#accessing-scripts-from-javascript}
 
-`<pc-script>` 要素は、そのスクリプトインスタンスが作成されると*準備完了*になります。`whenReady()`（または要素の `ready()` プロミス）でそれを待ってから、`script` プロパティを介してライブの [`Script`](https://api.playcanvas.com/engine/classes/Script.html) インスタンスにアクセスします。`whenReady` API の詳細は[プログラムによるアクセス](programmatic-access.md)を参照してください。
+`<pc-script-instance>` 要素は、そのスクリプトインスタンスが作成されると*準備完了*になります。`whenReady()`（または要素の `ready()` プロミス）でそれを待ってから、`script` プロパティを介してライブの [`Script`](https://api.playcanvas.com/engine/classes/Script.html) インスタンスにアクセスします。`whenReady` API の詳細は[プログラムによるアクセス](programmatic-access.md)を参照してください。
 
 ```javascript
 import { whenReady } from '@playcanvas/web-components';
 
-const scriptElement = await whenReady('pc-script');
+const scriptElement = await whenReady('pc-script-instance');
 scriptElement.script.speed = 360;
 ```
 

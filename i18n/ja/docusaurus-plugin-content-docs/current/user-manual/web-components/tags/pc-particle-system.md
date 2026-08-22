@@ -1,9 +1,9 @@
 ---
-title: <pc-particles>
-description: "pc-particles要素のリファレンス: マークアップでパーティクルエミッター、テクスチャ、ブレンディング、シミュレーションのパラメータを設定します。"
+title: <pc-particle-system>
+description: "pc-particle-system要素のリファレンス: マークアップでパーティクルエミッター、テクスチャ、ブレンディング、シミュレーションのパラメータを設定します。"
 ---
 
-`<pc-particles>`タグは、パーティクルシステムを定義するために使用されます。
+`<pc-particle-system>`タグは、パーティクルシステムを定義するために使用されます。
 
 :::note[使用法]
 
@@ -75,7 +75,7 @@ description: "pc-particles要素のリファレンス: マークアップでパ�
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="snow" position="0 5 0">
-            <pc-particles asset="snow"></pc-particles>
+            <pc-particle-system asset="snow"></pc-particle-system>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -83,4 +83,4 @@ description: "pc-particles要素のリファレンス: マークアップでパ�
 
 ## JavaScriptインターフェース {#javascript-interface}
 
-[ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html)を使用して、`<pc-particles>`要素をプログラムで作成および操作できます。
+[ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html)を使用して、`<pc-particle-system>`要素をプログラムで作成および操作できます。

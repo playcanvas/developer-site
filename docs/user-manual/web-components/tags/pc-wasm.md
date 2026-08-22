@@ -1,9 +1,9 @@
 ---
-title: <pc-module>
-description: "Reference for the pc-module element: load WebAssembly modules such as Ammo, Basis, and DracoDecoderModule from glue, wasm, and fallback paths."
+title: <pc-wasm>
+description: "Reference for the pc-wasm element: load WebAssembly modules such as Ammo, Basis, and DracoDecoderModule from glue, wasm, and fallback paths."
 ---
 
-The `<pc-module>` tag is used to load a WebAssembly module.
+The `<pc-wasm>` tag is used to load a WebAssembly module.
 
 :::note[Usage]
 
@@ -38,26 +38,26 @@ attributes before appending the element to the document.
 ## Readiness
 
 The element initializes asynchronously and becomes ready once its module has loaded: it fires the
-standard `ready` event and can be awaited with `whenReady('pc-module')` — see
+standard `ready` event and can be awaited with `whenReady('pc-wasm')` — see
 [Programmatic Access](../programmatic-access.md). You will rarely need to, though: a containing
-`<pc-app>` waits for every `<pc-module>` declared beneath it before creating its graphics device,
+`<pc-app>` waits for every `<pc-wasm>` declared beneath it before creating its graphics device,
 so an app that is ready is an app whose modules have loaded.
 
 Readiness is deliberately sticky. A WebAssembly module configures engine-global state that never
 unloads, so removing the element does not return it to a pending state, and re-inserting it does
 not load the module again.
 
-A `<pc-module>` without a `name` logs a warning and never becomes ready — but it does not block
+A `<pc-wasm>` without a `name` logs a warning and never becomes ready — but it does not block
 the containing `<pc-app>` from booting.
 
 ## Example
 
-Loading the `Ammo` physics module. The box only falls because the module is declared — the app waits for it before booting, so physics is ready when the scene starts. Try removing the `<pc-module>` tag and re-running:
+Loading the `Ammo` physics module. The box only falls because the module is declared — the app waits for it before booting, so physics is ready when the scene starts. Try removing the `<pc-wasm>` tag and re-running:
 
 ```html live-example
 <pc-app>
     <!-- Load the ammo.js WebAssembly module -->
-    <pc-module name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-module>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
     <pc-scene>
         <pc-entity name="camera" position="0 2 6">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -68,12 +68,12 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
         <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
             <pc-render type="box"></pc-render>
             <pc-collision></pc-collision>
-            <pc-rigidbody type="dynamic"></pc-rigidbody>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
         </pc-entity>
         <pc-entity name="ground" position="0 -0.5 0" scale="10 1 10">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="5 0.5 5"></pc-collision>
-            <pc-rigidbody type="static"></pc-rigidbody>
+            <pc-rigid-body type="static"></pc-rigid-body>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -81,4 +81,4 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
 
 ## JavaScript Interface
 
-You can programmatically create and manipulate `<pc-module>` elements using the [ModuleElement API](https://api.playcanvas.com/web-components/classes/ModuleElement.html).
+You can programmatically create and manipulate `<pc-wasm>` elements using the [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html).

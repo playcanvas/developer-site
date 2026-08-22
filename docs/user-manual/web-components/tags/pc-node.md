@@ -14,7 +14,7 @@ For worked examples of the common adjustments — hiding, re-posing, reskinning,
 * It must be a descendant of a [`<pc-model>`](../pc-model), either directly or nested inside another `<pc-node>`.
 * It can have 0..n nested [`<pc-node>`](../pc-node) children, which resolve their own `name` within the bound node's subtree.
 * It can have 0..n [`<pc-entity>`](../pc-entity) children, which are created and parented under the bound node — attachment points for new content.
-* It can have the same component tags as a [`<pc-entity>`](../pc-entity) — [`<pc-collision>`](../pc-collision), [`<pc-light>`](../pc-light), [`<pc-scripts>`](../pc-scripts) and the rest — which add that component to the bound node.
+* It can have the same component tags as a [`<pc-entity>`](../pc-entity) — [`<pc-collision>`](../pc-collision), [`<pc-light>`](../pc-light), [`<pc-script>`](../pc-script) and the rest — which add that component to the bound node.
 
 :::
 
@@ -114,9 +114,9 @@ This GLB instantiates two nodes — `play` (the orange shell, its logo cut out o
     <pc-scene>
         <pc-entity name="camera" position="0 0 3">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
-            <pc-scripts>
-                <pc-script name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script>
-            </pc-scripts>
+            <pc-script>
+                <pc-script-instance name="cameraControls" enable-pan="false" zoom-range="1.5 6"></pc-script-instance>
+            </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light intensity="2"></pc-light>
