@@ -36,7 +36,7 @@ The listener sits on the camera, and a sphere emitting positional footsteps circ
             <pc-audio-listener></pc-audio-listener>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="ground" scale="14 14 14">
             <pc-render type="plane" material="floor"></pc-render>

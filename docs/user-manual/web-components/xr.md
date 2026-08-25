@@ -131,7 +131,7 @@ import { whenReady } from '@playcanvas/web-components';
 
 const camera = await whenReady('pc-camera');
 
-if (camera.xrAvailable) {
+if (camera.vrAvailable) {
     camera.startXr('immersive-vr', 'local-floor');
 }
 
@@ -139,7 +139,16 @@ if (camera.xrAvailable) {
 camera.endXr();
 ```
 
-`startXr(type, space)` takes the session type (`'immersive-ar'` or `'immersive-vr'`) and a reference space (`'viewer'`, `'local'`, `'local-floor'`, `'bounded-floor'` or `'unbounded'`). The `xrAvailable` getter reports whether an immersive session can be started; `startXr` does nothing while it is `false`. Note that the `xrSession` script also manages the camera rig transforms, AR transparency and session cleanup for you — prefer it for full experiences, and the element API for quick tests and simple viewers.
+`startXr(type, space)` takes the session type (`'immersive-ar'` or `'immersive-vr'`) and a reference space (`'viewer'`, `'local'`, `'local-floor'`, `'bounded-floor'` or `'unbounded'`).
+
+Availability is reported per mode, by `arAvailable` and `vrAvailable`. The two are independent — a device can offer either without the other, and an Android phone with ARCore commonly offers AR and no VR — so gate each control on the mode it starts:
+
+```javascript
+document.getElementById('enter-vr').hidden = !camera.vrAvailable;
+document.getElementById('enter-ar').hidden = !camera.arAvailable;
+```
+
+`startXr` is gated the same way and does nothing when the mode being asked for is unavailable, so a button that slips through does not fail loudly. Note that the `xrSession` script also manages the camera rig transforms, AR transparency and session cleanup for you — prefer it for full experiences, and the element API for quick tests and simple viewers.
 
 Most of the [Web Component examples](https://playcanvas.github.io/web-components/examples/) have integrated support for XR. Consult their source code to see how it's done.
 

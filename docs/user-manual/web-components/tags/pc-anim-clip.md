@@ -19,14 +19,12 @@ The `<pc-anim-clip>` tag declares one named animation clip on a [`<pc-anim>`](..
 **The enclosing model.** With no `asset`, the track comes from the container of the [`<pc-model>`](../pc-model) that encloses the parent [`<pc-anim>`](../pc-anim). This is the usual case — a GLB exported with several animations, each declared as a clip:
 
 ```html
-<pc-entity name="hero">
-    <pc-model asset="hero-glb">
-        <pc-anim>
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="run"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="hero" asset="hero-glb">
+    <pc-anim>
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="run"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 **A named asset.** Point `asset` at a [`<pc-asset>`](../pc-asset) to take the track from a separate file, which is how a shared clip library gets applied to a model that was exported without it. Three asset types work: a `container` (a GLB), an `animation` GLB, or an `animclip` JSON.
@@ -35,14 +33,12 @@ The `<pc-anim-clip>` tag declares one named animation clip on a [`<pc-anim>`](..
 <pc-asset id="hero-glb" type="container" src="hero.glb"></pc-asset>
 <pc-asset id="wave" type="container" src="clips/wave.glb"></pc-asset>
 
-<pc-entity name="hero">
-    <pc-model asset="hero-glb">
-        <pc-anim>
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="wave" asset="wave"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="hero" asset="hero-glb">
+    <pc-anim>
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="wave" asset="wave"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 Mixing the two is fine, as the snippet above does: clips without an `asset` come from the model, and the ones with it come from their own file.
@@ -92,7 +88,7 @@ The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak`
             </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" shadow-distance="20" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>

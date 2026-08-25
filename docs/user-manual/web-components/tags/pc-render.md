@@ -42,7 +42,7 @@ All six primitive shapes. Try changing any `type`, or add `material` once you ha
             <pc-camera clear-color="#2a2d36"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="box" position="-2.5 0.5 0">
             <pc-render type="box"></pc-render>

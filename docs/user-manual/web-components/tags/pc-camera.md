@@ -19,8 +19,9 @@ The `<pc-camera>` tag is used to define a camera component.
 | --- | --- | --- | --- |
 | `clear-color` | Color | `"0.75 0.75 0.75 1"` | Background color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `clear-color-buffer` | Boolean | `"true"` | Controls whether the camera clears the color buffer |
+| `clear-depth` | Number | `"1"` | The depth value the depth buffer is cleared to |
 | `clear-depth-buffer` | Boolean | `"true"` | Controls whether the camera clears the depth buffer |
-| `clear-stencil-buffer` | Boolean | `"false"` | Controls whether the camera clears the stencil buffer |
+| `clear-stencil-buffer` | Boolean | `"true"` | Controls whether the camera clears the stencil buffer |
 | `cull-faces` | Boolean | `"true"` | Controls whether the camera culls faces |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `far-clip` | Number | `"1000"` | The far clipping plane distance |
