@@ -154,7 +154,7 @@ Allow pop-ups for the Editor origin, close an existing Launch window, and ask th
 
 ### The Launch Instance Never Connects
 
-The Launch window opens but the runtime tools report that it did not connect. Reload the Editor so it picks up the current build, then start the Launch instance again. On an Editor build that predates the Launch bridge, the Launch page reaches the server directly and needs **Apps on device** allowed in its own padlock menu.
+The Launch window opens but the runtime tools report that it did not connect. Reload the Editor so it picks up the current build, then start the Launch instance again.
 
 ### The Assistant Is Operating on the Wrong Project
 
