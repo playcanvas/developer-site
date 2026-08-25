@@ -44,7 +44,7 @@ description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、�
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="box-1" position="-1.5 4 0" rotation="30 10 40">
             <pc-render type="box"></pc-render>

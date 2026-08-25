@@ -54,3 +54,5 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [GSplatComponentElement API](https://api.playcanvas.com/web-components/classes/GSplatComponentElement.html)を使用して、`<pc-gsplat>`要素をプログラムで作成および操作できます。
+
+スプラットのワークフローはサンプルでいくつか扱っています。[Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html)、[Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html)、[Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html)、[Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html)です。

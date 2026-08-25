@@ -131,7 +131,7 @@ import { whenReady } from '@playcanvas/web-components';
 
 const camera = await whenReady('pc-camera');
 
-if (camera.xrAvailable) {
+if (camera.vrAvailable) {
     camera.startXr('immersive-vr', 'local-floor');
 }
 
@@ -139,7 +139,16 @@ if (camera.xrAvailable) {
 camera.endXr();
 ```
 
-`startXr(type, space)` は、セッションタイプ（`'immersive-ar'` または `'immersive-vr'`）と参照空間（`'viewer'`、`'local'`、`'local-floor'`、`'bounded-floor'`、`'unbounded'`）を受け取ります。`xrAvailable` ゲッターは、イマーシブセッションを開始できるかどうかを返します。`false` の間、`startXr` は何もしません。なお、`xrSession` スクリプトはカメラリグのトランスフォーム、ARの透過、セッションのクリーンアップも管理してくれるため、本格的な体験にはスクリプトを、簡単なテストやシンプルなビューアーには要素APIを使うのがおすすめです。
+`startXr(type, space)` は、セッションタイプ（`'immersive-ar'` または `'immersive-vr'`）と参照空間（`'viewer'`、`'local'`、`'local-floor'`、`'bounded-floor'`、`'unbounded'`）を受け取ります。
+
+利用可否はモード単位で、`arAvailable` と `vrAvailable` が報告します。この2つは互いに独立しています。デバイスは一方だけを提供できますし、ARCore対応のAndroid端末はARのみを提供しVRを提供しないことがよくあります。そのため、各コントロールはそれが開始するモードで判定してください。
+
+```javascript
+document.getElementById('enter-vr').hidden = !camera.vrAvailable;
+document.getElementById('enter-ar').hidden = !camera.arAvailable;
+```
+
+`startXr` も同じ方法で判定され、要求されたモードが利用できない場合は何もしません。判定をすり抜けたボタンが大きな失敗を起こすことはありません。なお、`xrSession` スクリプトはカメラリグのトランスフォーム、ARの透過、セッションのクリーンアップも管理してくれるため、本格的な体験にはスクリプトを、簡単なテストやシンプルなビューアーには要素APIを使うのがおすすめです。
 
 ほとんどの [Web Component の例](https://playcanvas.github.io/web-components/examples/) には、XR のサポートが統合されています。それらのソースコードを参照して、どのように行われているかを確認してください。
 

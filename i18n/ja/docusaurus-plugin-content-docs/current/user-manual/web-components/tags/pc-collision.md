@@ -58,7 +58,7 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="ball" position="-1.5 4 0">
             <pc-render type="sphere"></pc-render>

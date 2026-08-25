@@ -63,7 +63,7 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
             <pc-render type="box"></pc-render>
