@@ -797,6 +797,7 @@ const sidebars = {
           },
           items: [
             'user-manual/graphics/physical-rendering/physical-materials',
+            'user-manual/graphics/physical-rendering/parallax-mapping',
             'user-manual/graphics/physical-rendering/image-based-lighting',
           ],
         },
