@@ -62,6 +62,12 @@ For JSON-based clients on Windows, use `"command": "cmd"` and prepend `"/c"` to 
 
 Keep the MCP client running while you use the connection. Only one Editor instance can connect to the server at a time, so disconnect another Editor before changing projects or browser tabs.
 
+:::note Browser Permission
+
+Chromium browsers ask before letting a website reach a server running on your own machine (Chrome 142 and later; Chrome 147 extends this to the connection the Editor uses). Select **Allow** when prompted, or open the padlock menu in the address bar and allow **Apps on device**. Only the Editor needs this permission — the Launch page is bridged through it. A blocked connection fails silently and looks the same as a server that is not running.
+
+:::
+
 To use another port, append `--port <number>` to the server arguments and enter the same port in the Editor.
 
 ## Check the Connection Without Editing
@@ -110,7 +116,7 @@ For scene or behavior changes, source inspection is not enough. Ask the assistan
 5. Inject keyboard, mouse, or touch input when interaction is part of the task.
 6. Stop the Launch instance when verification is complete.
 
-Allow pop-ups for the PlayCanvas Editor origin so the server can open the Launch window. It uses your existing PlayCanvas login session.
+Allow pop-ups for the PlayCanvas Editor origin so the server can open the Launch window. It uses your existing PlayCanvas login session. Starting a Launch instance when one is already running attaches to it rather than restarting it, so a session in progress is not thrown away; ask for a specific option, such as a graphics device, to force a fresh launch.
 
 This demo shows an assistant auditing a legacy Engine V1 project, cross-referencing the PlayCanvas documentation, migrating it to Engine V2 and ESM Scripts with checkpoints, and verifying the running result.
 
@@ -136,6 +142,8 @@ Use the [VS Code Extension workflow](/user-manual/editor/scripting/vscode-extens
 
 Confirm that the MCP client is running the server, the client and Editor both use the same port, and no other Editor is connected. Restart the MCP client after changing its configuration.
 
+If the panel stays on **Connecting** and reports that the browser blocked the connection, open the padlock menu for the Editor and allow **Apps on device**.
+
 ### The First Connection Times Out
 
 The first `npx` run may need time to download the package. Start the client again after the download finishes. Codex users can also increase `startup_timeout_sec` under `[mcp_servers.playcanvas]` in `~/.codex/config.toml`.
@@ -143,6 +151,10 @@ The first `npx` run may need time to download the package. Start the client agai
 ### Launch Does Not Open
 
 Allow pop-ups for the Editor origin, close an existing Launch window, and ask the assistant to start the Launch instance again.
+
+### The Launch Instance Never Connects
+
+The Launch window opens but the runtime tools report that it did not connect. Reload the Editor so it picks up the current build, then start the Launch instance again.
 
 ### The Assistant Is Operating on the Wrong Project
 
