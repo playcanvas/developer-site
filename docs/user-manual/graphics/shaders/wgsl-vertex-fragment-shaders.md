@@ -78,6 +78,7 @@ As part of the `FragmentInput` structure these built-in variables are automatica
 position: @builtin(position)            // interpolated fragment position
 frontFacing: @builtin(front_facing)     // front-facing
 sampleIndex: @builtin(sample_index)     // sample index for MSAA
+sampleMask: @builtin(sample_mask)       // coverage mask for MSAA
 primitiveIndex: @builtin(primitive_index) // primitive index (when supported)
 ```
 
@@ -87,6 +88,7 @@ These built-ins are also available in the global scope using these names:
 pcPosition
 pcFrontFacing
 pcSampleIndex
+pcSampleMask
 pcPrimitiveIndex  // when supported
 ```
 
@@ -119,6 +121,7 @@ As part of the `FragmentOutput` structure these built-in variables are automatic
 
 ```wgsl
 fragDepth: @builtin(frag_depth)
+sampleMask: @builtin(sample_mask)
 ```
 
 Example:
@@ -129,6 +132,17 @@ Example:
     output.color = vec4f(1.0);
     output.color1 = vec4f(0.5);
     output.fragDepth = 0.2;
+    return output;
+}
+```
+
+When rendering to a multisampled render target, writing `output.sampleMask` controls which samples the fragment writes to - the written mask is AND-ed with the coverage mask by the GPU, so a shader can discard individual samples. This is the basis of techniques such as custom alpha-to-coverage dither patterns:
+
+```wgsl
+@fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
+    var output: FragmentOutput;
+    output.color = vec4f(1.0);
+    output.sampleMask = pcSampleMask & 0x5u;  // keep samples 0 and 2 only
     return output;
 }
 ```
