@@ -130,6 +130,44 @@ const renderTarget = new pc.RenderTarget({
 });
 ```
 
+For control over how the samples are resolved - or to read them individually in a shader - see [Explicit multisampled render targets](#explicit-multisampled-render-targets-and-custom-resolves) below.
+
+## Explicit multisampled render targets and custom resolves
+
+:::note
+
+The features in this section require Engine 2.22 or later, and are WebGPU only.
+
+:::
+
+The automatic resolve above averages the samples with a fixed hardware "box" filter. Techniques that need a different resolve - a tonemapped color resolve, a min/max depth resolve, or reading the individual samples in a shader - create the multisampled textures explicitly (a [`Texture`](https://api.playcanvas.com/engine/classes/Texture.html) with `samples` greater than 1) and use them directly as the render target's buffers:
+
+```javascript
+// multisampled textures - the render target renders directly into their samples
+const msColor = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_RGBA16F, samples: 4 });
+const msDepth = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_DEPTH, samples: 4 });
+
+// optional single-sampled resolve targets
+const resolvedColor = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_RGBA16F, mipmaps: false });
+const resolvedDepth = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_R32F, mipmaps: false });
+
+const renderTarget = new pc.RenderTarget({
+    colorBuffer: msColor,
+    resolveBuffer: resolvedColor,       // hardware resolve at the end of a render pass
+    depthBuffer: msDepth,
+    depthResolveBuffer: resolvedDepth   // shader-based resolve, controlled by depthResolveMode
+});
+```
+
+- **Color**: when a `resolveBuffer` is provided, the color samples are hardware-resolved into it at the end of a render pass, like the automatic path. When it is omitted, the samples are stored instead, and a later pass reads them individually with `textureLoad` on a `texture_multisampled_2d` - a custom resolve. This is also the only way to use MSAA with formats the hardware cannot resolve, such as integer formats. With multiple render targets, each attachment has its own optional resolve texture (`resolveBuffers`).
+- **Depth**: depth has no hardware resolve on WebGPU. A multisampled `depthBuffer` can be read per sample as a `texture_depth_multisampled_2d`, or resolved into the `depthResolveBuffer` by an engine-provided shader whose operation is selected with [`depthResolveMode`](https://api.playcanvas.com/engine/classes/RenderTarget.html#depthresolvemode) - `DEPTHRESOLVE_MIN` (the default, selecting the nearest surface), `DEPTHRESOLVE_MAX` or `DEPTHRESOLVE_SAMPLE0`. The same mode also controls the depth resolve used by the scene depth map and by depth copies.
+
+Two examples demonstrate these techniques - a custom tonemapped color resolve compared side by side against the hardware resolve, and per-sample depth fog compared against fog computed from a resolved depth:
+
+<EngineExample id="graphics-advanced/custom-msaa-resolve" title="Custom MSAA Resolve" />
+
+<EngineExample id="graphics-advanced/msaa-depth-fog" title="MSAA Depth Fog" />
+
 ## Cleaning up
 
 A render target does not own its textures, so destroy them separately when you are done. Destroy the color texture (and depth buffer texture, if you created one explicitly), then the render target:

@@ -130,6 +130,44 @@ const renderTarget = new pc.RenderTarget({
 });
 ```
 
+サンプルの解決方法を制御したり、シェーダーでサンプルを個別に読み取ったりするには、下記の[明示的なマルチサンプルレンダーターゲット](#explicit-multisampled-render-targets-and-custom-resolves)を参照してください。
+
+## 明示的なマルチサンプルレンダーターゲットとカスタム解決 {#explicit-multisampled-render-targets-and-custom-resolves}
+
+:::note
+
+このセクションの機能は Engine 2.22 以降が必要で、WebGPU 専用です。
+
+:::
+
+上記の自動解決は、固定のハードウェア「ボックス」フィルターでサンプルを平均します。異なる解決が必要なテクニック（トーンマップされたカラー解決、min/max のデプス解決、シェーダーでの個別サンプルの読み取りなど）では、マルチサンプルテクスチャ（`samples` を1より大きく設定した [`Texture`](https://api.playcanvas.com/engine/classes/Texture.html)）を明示的に作成し、レンダーターゲットのバッファとして直接使用します。
+
+```javascript
+// マルチサンプルテクスチャ - レンダーターゲットはそのサンプルへ直接レンダリングします
+const msColor = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_RGBA16F, samples: 4 });
+const msDepth = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_DEPTH, samples: 4 });
+
+// 任意の単一サンプル解決ターゲット
+const resolvedColor = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_RGBA16F, mipmaps: false });
+const resolvedDepth = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_R32F, mipmaps: false });
+
+const renderTarget = new pc.RenderTarget({
+    colorBuffer: msColor,
+    resolveBuffer: resolvedColor,       // レンダーパス終了時のハードウェア解決
+    depthBuffer: msDepth,
+    depthResolveBuffer: resolvedDepth   // depthResolveMode で制御されるシェーダーベースの解決
+});
+```
+
+- **カラー**: `resolveBuffer` を指定すると、自動パスと同様に、レンダーパス終了時にカラーサンプルがハードウェア解決されます。省略すると、サンプルはそのまま保存され、後続のパスが `texture_multisampled_2d` に対する `textureLoad` で個別に読み取れます（カスタム解決）。整数フォーマットなど、ハードウェアが解決できないフォーマットで MSAA を使う唯一の方法でもあります。複数レンダーターゲットでは、各アタッチメントごとに任意の解決テクスチャ（`resolveBuffers`）を持てます。
+- **デプス**: WebGPU にはデプスのハードウェア解決がありません。マルチサンプルの `depthBuffer` は `texture_depth_multisampled_2d` としてサンプルごとに読み取るか、エンジン提供のシェーダーで `depthResolveBuffer` へ解決できます。解決の演算は [`depthResolveMode`](https://api.playcanvas.com/engine/classes/RenderTarget.html#depthresolvemode) で選択します - `DEPTHRESOLVE_MIN`（デフォルト。最も近いサーフェスを選択）、`DEPTHRESOLVE_MAX`、`DEPTHRESOLVE_SAMPLE0`。同じモードは、シーンデプスマップやデプスコピーで使われるデプス解決も制御します。
+
+これらのテクニックを示す2つの例があります - ハードウェア解決と並べて比較するカスタムのトーンマップカラー解決、および解決済みデプスによるフォグと比較するサンプルごとのデプスフォグです。
+
+<EngineExample id="graphics-advanced/custom-msaa-resolve" title="Custom MSAA Resolve" />
+
+<EngineExample id="graphics-advanced/msaa-depth-fog" title="MSAA Depth Fog" />
+
 ## クリーンアップ {#cleaning-up}
 
 レンダーターゲットはテクスチャを所有しないため、使い終わったらそれらを個別に破棄します。カラーテクスチャ（および明示的に作成した場合は深度バッファのテクスチャ）を破棄してから、レンダーターゲットを破棄します。
