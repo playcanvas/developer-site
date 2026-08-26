@@ -968,6 +968,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/building/picking',
             'user-manual/gaussian-splatting/building/shadows',
             'user-manual/gaussian-splatting/building/fisheye',
+            'user-manual/gaussian-splatting/building/tonemapping',
             {
               type: 'category',
               label: 'Custom Shaders',
