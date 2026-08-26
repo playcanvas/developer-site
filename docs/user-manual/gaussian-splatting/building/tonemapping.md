@@ -59,19 +59,6 @@ Both flags live on [`Scene.gsplat`](https://api.playcanvas.com/engine/classes/Sc
 
 :::
 
-## Scene Settings
-
-Both flags can also be set through the application's scene settings, as `gsplatUseTonemap` and `gsplatUseFog`:
-
-```javascript
-app.applySceneSettings({
-    render: {
-        gsplatUseTonemap: false,
-        gsplatUseFog: false
-    }
-});
-```
-
 ## See Also
 
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)

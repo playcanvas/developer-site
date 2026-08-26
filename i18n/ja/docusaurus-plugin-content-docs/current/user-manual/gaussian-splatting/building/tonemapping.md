@@ -59,19 +59,6 @@ app.scene.gsplat.useFog = false;
 
 :::
 
-## シーン設定
-
-どちらのフラグも、アプリケーションのシーン設定から `gsplatUseTonemap` と `gsplatUseFog` として設定できます：
-
-```javascript
-app.applySceneSettings({
-    render: {
-        gsplatUseTonemap: false,
-        gsplatUseFog: false
-    }
-});
-```
-
 ## 関連項目
 
 - [Scene.gsplat API](https://api.playcanvas.com/engine/classes/Scene.html#gsplat)
