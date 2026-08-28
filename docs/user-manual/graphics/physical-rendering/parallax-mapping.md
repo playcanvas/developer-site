@@ -1,6 +1,6 @@
 ---
 title: Parallax Mapping
-description: "Fake surface relief from a height map: the offset and marched modes, sample budgets, self shadowing, and the limits of the technique."
+description: "Fake surface relief from a height map: the offset and marched modes, the zero level, sample budgets, self shadowing, and the limits of the technique."
 ---
 
 Parallax mapping uses a height map to make a flat surface look like it has depth. Where a normal map only changes how the surface is lit, parallax mapping also shifts what you see across it as the camera moves, so bricks look recessed rather than merely shaded.
@@ -32,18 +32,18 @@ material.heightMapFactor = 0.5;
 material.update();
 ```
 
-:::warning
-
-The two modes read the height map differently, which is the one thing likely to surprise you when switching an existing material.
-
-- **Offset** treats mid grey as the level of the original geometry, and pivots the surface around it. Lighter areas rise above it, darker areas sink below.
-- **Occlusion** treats the map as depth *below* the geometry. White sits at the surface and black is `heightMapFactor` deep.
-
-Switching from offset to occlusion therefore shifts the apparent zero level of the relief, not just its sharpness.
-
-:::
-
 `heightMapFactor` scales the depth in both modes. The useful range is roughly 0 to 2; past that the relief is deeper than the technique can convincingly fake, and the texture visibly stretches when you look along the surface.
+
+## The Zero Level
+
+`StandardMaterial#heightMapBase` selects which height map value sits at the level of the original geometry. Relief above it appears to stand out of the surface, and relief below it appears to sink in. Both modes read the map the same way, so switching between them keeps the surface where it is.
+
+The default of 0.5 pivots the relief around mid grey, which suits maps with detail in both directions. A map authored as pure depth - a white floor with dark cracks - wants the base at 1, so the floor stays at the surface and only the cracks recede. A map of pure elevation wants 0.
+
+```javascript
+material.heightMapBase = 1; // white is the surface, darker is carved in
+material.update();
+```
 
 ## Sample Budget
 
