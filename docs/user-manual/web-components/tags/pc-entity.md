@@ -34,26 +34,39 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 | Event | Description |
 | --- | --- |
+| `click` | Fired when a primary pointer button is pressed and then released over the entity. |
 | `pointerdown` | Fired when a pointer is pressed down on the entity. |
 | `pointerenter` | Fired when a pointer enters the entity. |
 | `pointerleave` | Fired when a pointer leaves the entity. |
 | `pointermove` | Fired when a pointer is moved over the entity. |
 | `pointerup` | Fired when a pointer is released from the entity. |
 
-You can also handle these events declaratively with inline `onpointer*` attributes. These are standard [inline event handlers](https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers#registering_onevent_handlers), compiled and run by the browser itself, so they behave exactly like `onclick` on any HTML element: setting the attribute (even at runtime) replaces the previous handler, removing it removes the handler, and within the handler `this` is the `<pc-entity>` element and `event` is the dispatched event.
+All six are delivered as [`PointerEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent) objects and bubble up the element tree, so one listener on an ancestor can serve a whole subtree.
+
+You can also handle these events declaratively with inline `onclick` and `onpointer*` attributes. These are standard [inline event handlers](https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers#registering_onevent_handlers), compiled and run by the browser itself, so they behave exactly like `onclick` on any HTML element: setting the attribute (even at runtime) replaces the previous handler, removing it removes the handler, and within the handler `this` is the `<pc-entity>` element and `event` is the dispatched event.
 
 ```html
 <pc-entity name="cube"
            onpointerenter="this.entity.script.tweener.play(0)"
            onpointerleave="this.entity.script.tweener.play(1)"
-           onpointerdown="this.entity.script.tweener.play(2)">
+           onclick="this.entity.script.tweener.play(2)">
     <pc-render type="box"></pc-render>
 </pc-entity>
 ```
 
+### Clicks
+
+`click` is the one to reach for when you want click-to-select, and it is worth knowing why rather than composing it yourself from `pointerdown` and `pointerup`:
+
+* It requires the **primary** button, so a right-click does not fire it — `pointerup` alone does.
+* It requires a press *and* a release, so it does not fire at the start of every camera drag the way `pointerdown` does.
+* If the press and the release landed on different geometry, the click fires at their **nearest common ancestor** — dragging from one object onto its sibling clicks their shared parent, and dragging off onto the background clicks nothing at all. This is the same rule the browser applies to native clicks on nested HTML.
+
+A press the browser takes back — a touch it reinterprets as a scroll, say — is discarded rather than concluding as a click.
+
 ## Example
 
-Entity transforms compose down the hierarchy: the small cube is a *child* of the large one, so hover over the large cube and both move together. Try editing the parent's `rotation` or `scale`, or the inline `onpointer*` handlers:
+Entity transforms compose down the hierarchy: the small cube is a *child* of the large one, so hover over the large cube and both move together. Clicking either cube turns the pair — the child has no handler of its own, so its clicks bubble to the parent. Try editing the parent's `rotation` or `scale`, or the inline handlers:
 
 ```html live-example
 <pc-app>
@@ -66,7 +79,8 @@ Entity transforms compose down the hierarchy: the small cube is a *child* of the
         </pc-entity>
         <pc-entity name="parent" rotation="0 30 0" tags="interactive"
                    onpointerenter="this.entity.setLocalPosition(0, 0.25, 0)"
-                   onpointerleave="this.entity.setLocalPosition(0, 0, 0)">
+                   onpointerleave="this.entity.setLocalPosition(0, 0, 0)"
+                   onclick="this.entity.rotate(0, 45, 0)">
             <pc-render type="box"></pc-render>
             <pc-entity name="child" position="0.75 0.75 0" scale="0.5 0.5 0.5">
                 <pc-render type="box"></pc-render>

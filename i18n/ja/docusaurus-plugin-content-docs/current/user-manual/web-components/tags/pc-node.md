@@ -94,13 +94,14 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 | イベント | 説明 |
 | --- | --- |
+| `click` | ノード上でプライマリボタンが押され、そして離されたときに発生します。 |
 | `pointerdown` | ポインターがノード上で押下されたときに発生します。 |
 | `pointerenter` | ポインターがノードに入ったときに発生します。 |
 | `pointerleave` | ポインターがノードを離れたときに発生します。 |
 | `pointermove` | ポインターがノード上で移動したときに発生します。 |
 | `pointerup` | ポインターがノードから解放されたときに発生します。 |
 
-インラインの`onpointer*`属性は、[`<pc-entity>`](../pc-entity)とまったく同じように動作します。
+インラインの`onclick`・`onpointer*`属性は、[`<pc-entity>`](../pc-entity)とまったく同じように動作します。押下と解放が別のジオメトリ上で起きた場合に[クリックがどう解決されるか](../pc-entity#clicks)も同じです。
 
 ## 例 {#example}
 

@@ -29,7 +29,7 @@ Because the element's own transform belongs to the host, `position`, `rotation` 
 
 ## Attributes
 
-`<pc-model>` takes every attribute of [`<pc-entity>`](../pc-entity), including the `onpointer*` inline handlers, and adds `asset`.
+`<pc-model>` takes every attribute of [`<pc-entity>`](../pc-entity), including the `onclick` and `onpointer*` inline handlers, and adds `asset`.
 
 <div className="attribute-table">
 
@@ -56,10 +56,10 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
 
-The host is registered for picking, so `<pc-model>` also fires the five pointer events a [`<pc-entity>`](../pc-entity) does — `pointerdown`, `pointerenter`, `pointerleave`, `pointermove` and `pointerup` — with the same inline `onpointer*` attribute forms. A whole model becomes clickable without a wrapper or a [`<pc-node>`](../pc-node):
+The host is registered for picking, so `<pc-model>` also fires the six pointer events a [`<pc-entity>`](../pc-entity) does — `click`, `pointerdown`, `pointerenter`, `pointerleave`, `pointermove` and `pointerup` — with the same inline handler attributes. A whole model becomes clickable without a wrapper or a [`<pc-node>`](../pc-node):
 
 ```html
-<pc-model asset="t-rex" onpointerdown="this.setAttribute('scale', '2 2 2')"></pc-model>
+<pc-model asset="t-rex" onclick="this.setAttribute('scale', '2 2 2')"></pc-model>
 ```
 
 Pointer events resolve to the nearest *listening* element, so a model that listens for nothing does not swallow events from a listening ancestor.

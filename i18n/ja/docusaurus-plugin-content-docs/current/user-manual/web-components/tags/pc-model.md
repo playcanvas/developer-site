@@ -29,7 +29,7 @@ description: "pc-model要素のリファレンス: GLBコンテナアセット�
 
 ## 属性 {#attributes}
 
-`<pc-model>`は[`<pc-entity>`](../pc-entity)のすべての属性（インラインの`onpointer*`ハンドラを含む）を取り、さらに`asset`を加えます。
+`<pc-model>`は[`<pc-entity>`](../pc-entity)のすべての属性（インラインの`onclick`・`onpointer*`ハンドラを含む）を取り、さらに`asset`を加えます。
 
 <div className="attribute-table">
 
@@ -56,10 +56,10 @@ description: "pc-model要素のリファレンス: GLBコンテナアセット�
 
 どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、ページ上のすべてのモデルを監視するには、祖先要素でキャプチャフェーズのリスナーを使用します。
 
-ホストはピッキング対象として登録されるため、`<pc-model>`も[`<pc-entity>`](../pc-entity)と同じ5つのポインタイベント（`pointerdown`・`pointerenter`・`pointerleave`・`pointermove`・`pointerup`）を発生させ、インラインの`onpointer*`属性形式も同じように使えます。ラッパーや[`<pc-node>`](../pc-node)なしで、モデル全体がクリック可能になります。
+ホストはピッキング対象として登録されるため、`<pc-model>`も[`<pc-entity>`](../pc-entity)と同じ6つのポインタイベント（`click`・`pointerdown`・`pointerenter`・`pointerleave`・`pointermove`・`pointerup`）を発生させ、インラインのハンドラ属性も同じように使えます。ラッパーや[`<pc-node>`](../pc-node)なしで、モデル全体がクリック可能になります。
 
 ```html
-<pc-model asset="t-rex" onpointerdown="this.setAttribute('scale', '2 2 2')"></pc-model>
+<pc-model asset="t-rex" onclick="this.setAttribute('scale', '2 2 2')"></pc-model>
 ```
 
 ポインタイベントは最も近い*リッスンしている*要素に解決されるため、何もリッスンしていないモデルが、リッスンしている祖先要素のイベントを飲み込むことはありません。
