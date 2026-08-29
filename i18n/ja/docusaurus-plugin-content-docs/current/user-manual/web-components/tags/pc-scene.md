@@ -17,6 +17,7 @@ description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
+| `exposure` | Number | `"1"` | レンダリングされる画像全体の明るさの倍率。シーンが物理単位を使用している間は無視されます |
 | `fog` | Enum | `"none"` | フォグの種類：`"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
 | `fog-color` | Color | `"1 1 1"` | スペース区切りのRGB値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としてのフォグの色 |
 | `fog-density` | Number | `"0"` | 指数フォグタイプの場合のフォグの密度 |

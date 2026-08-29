@@ -73,3 +73,5 @@ description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html)を使用して、`<pc-rigid-body>`要素をプログラムで作成および操作できます。
+
+物理のサンプルはこのタグを土台にしています。[Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html)、[Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html)です。

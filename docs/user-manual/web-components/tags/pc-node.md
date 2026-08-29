@@ -94,13 +94,14 @@ A `<pc-material>` added to the document *after* a mapping referenced it is not p
 
 | Event | Description |
 | --- | --- |
+| `click` | Fired when a primary pointer button is pressed and then released over the node. |
 | `pointerdown` | Fired when a pointer is pressed down on the node. |
 | `pointerenter` | Fired when a pointer enters the node. |
 | `pointerleave` | Fired when a pointer leaves the node. |
 | `pointermove` | Fired when a pointer is moved over the node. |
 | `pointerup` | Fired when a pointer is released from the node. |
 
-The inline `onpointer*` attributes work here exactly as they do on [`<pc-entity>`](../pc-entity).
+The inline `onclick` and `onpointer*` attributes work here exactly as they do on [`<pc-entity>`](../pc-entity), including [how a click resolves](../pc-entity#clicks) when the press and release land on different geometry.
 
 ## Example
 
