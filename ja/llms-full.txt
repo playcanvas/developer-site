@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 492
-Generated: 2026-08-29
+Total Documents: 493
+Generated: 2026-08-31
 
 ================================================================================
 
@@ -34497,6 +34497,7 @@ Start with the Getting Started guide — you'll have a scene rendering in minute
 - [Attributes](attributes.md) — the value conventions shared by every tag.
 - [Adding Behavior with Scripts](scripting.md) — attach engine scripts to entities for motion and interactivity.
 - [Programmatic Access](programmatic-access.md) — drive the running app from JavaScript with `whenReady`.
+- [Reusable Scenes with Templates](templates.md) — declare a subtree once in a `<template>` and clone it into many live instances.
 - [XR Support](xr.md) — take your scene into VR and AR.
 - [Tag Reference](./tags/index.md) — every element and its attributes.
 - [Examples](https://playcanvas.github.io/web-components/examples/) — live demos with source code.
@@ -34590,15 +34591,34 @@ Color attributes accept any of three formats:
 
 ## Entity References
 
-Some attributes reference another entity in the document — for example, [`<pc-button>`](tags/pc-button.md)'s `image`, [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle` and [`<pc-scroll-view>`](tags/pc-scroll-view.md)'s `viewport`, `content` and scrollbar attributes. A reference can be any of:
+Some attributes reference another entity in the document — for example, [`<pc-button>`](tags/pc-button.md)'s `image`, [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle`, [`<pc-scroll-view>`](tags/pc-scroll-view.md)'s `viewport` and `content`, and [`<pc-joint>`](tags/pc-joint.md)'s `entity-a` and `entity-b`. A reference takes exactly one of two forms:
 
-* A CSS selector (e.g. `#my-id` or `pc-entity[name="Player"]`)
-* An element `id` (e.g. `my-id`)
-* An entity `name` (e.g. `Player`)
+| Form | Meaning | Scope |
+| --- | --- | --- |
+| `handle` | The `name` of a [`<pc-entity>`](tags/pc-entity.md), [`<pc-model>`](tags/pc-model.md) or [`<pc-node>`](tags/pc-node.md) | Nearest enclosing entity first, then outward, then the whole document |
+| `#handle`, `#hud pc-entity` | A CSS selector beginning with `#` — an element `id`, or any selector rooted in one | The whole document |
 
 ```html
 <pc-scrollbar orientation="vertical" handle="#handle"></pc-scrollbar>
 ```
+
+The grammar is closed: a bare value is always a name — never an element `id` and never a selector — and a selector that does not begin with `#` is not accepted. Which form a reference takes is visible at a glance, and adding or renaming elements elsewhere in the document can never change it.
+
+### Names Resolve Nearest-First
+
+A name is looked up through the enclosing entity hierarchy: first the nearest enclosing entity-fronting element — a [`<pc-entity>`](tags/pc-entity.md), [`<pc-model>`](tags/pc-model.md) or [`<pc-node>`](tags/pc-node.md), that element itself included — and its subtree, then each outer enclosing entity in turn, then the containing [`<pc-app>`](tags/pc-app.md), and finally the whole document. The first match wins, in document order within each scope. For a `<pc-node>`, the name matched is the glTF node name it binds.
+
+Nearest-first is what makes names safe in repeated content: inside a [cloned `<template>`](templates.md), a reference finds its own instance's entities before the lookup could ever reach an earlier clone's — see [Reusable Scenes with Templates](templates.md).
+
+### `#` References Are Document-Wide {#hash-references-are-document-wide}
+
+A reference beginning with `#` is evaluated as a [CSS selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) against the whole document, and it is authoritative: the name lookup never runs for it, so an entity that happens to be *named* `#body` can never shadow the element whose `id` is `body`. Use a `#` form to pin a reference to one specific element, regardless of where the referencing element sits.
+
+### Unresolved References Warn
+
+A non-empty reference that does not resolve logs a console warning naming the attribute and the cause: nothing in the document matches, the match is not backing an entity *yet* (usually timing — a [`<pc-node>`](tags/pc-node.md) whose model has not loaded resolves once you assign the attribute again), or the match can never back one (the reference points at the wrong kind of element). And if a bare reference matches nothing but does equal the `id` of an entity-fronting element, the warning suggests the `#id` spelling to use — escaped where the `id` needs it, such as `#a\:b` for an `id` of `a:b`.
+
+[Script attributes](scripting.md#type-prefixes) follow the same grammar: `entity:body` references an entity named `body`, while `entity:#body` references the element with that `id`.
 
 ## Script Attributes
 
@@ -35272,6 +35292,8 @@ Then import it and await the element you need:
 
 The promise never settles if the element cannot finish initializing — for example, a `<pc-script-instance>` that is not a direct child of `<pc-script>`, a [`<pc-node>`](./tags/pc-node.md) that cannot resolve its `name`, a [`<pc-wasm>`](./tags/pc-wasm.md) without a `name`, or an [`<pc-app>`](./tags/pc-app.md) that could not create a graphics device, where a fallback UI should hang off the element's [`error` event](./tags/pc-app.md#events) instead. A component element with no `<pc-entity>`, `<pc-model>` or `<pc-node>` above it is the exception: it still becomes ready, but its `component` is `null`. In every case, the element reports what went wrong in the console.
 
+An element *removed* from the document before it finished initializing never becomes ready either — nothing is wrong, so nothing is reported, but an await on its `ready()` will not complete. When teardown can race initialization (common with [cloned templates](templates.md)), race the await against your own teardown signal — see [Removing an Instance](templates.md#removing-an-instance).
+
 :::
 
 ## Reaching Engine Objects
@@ -35327,6 +35349,8 @@ const { app } = await whenReady(appElement);
 ```
 
 (Under the hood, every asynchronously initializing element has a `ready()` method that returns a promise resolving with the element itself — `whenReady` is a convenience wrapper around it.)
+
+This is the pattern for instances cloned from a `<template>`, too: hold the cloned elements and await exactly the ones you are about to use. See [Reusable Scenes with Templates](templates.md).
 
 ## The `ready` Event
 
@@ -35483,7 +35507,7 @@ Number, boolean, vector and color values are inferred from the script's declared
 | Prefix    | Example | Description |
 | --------- | ------- | ----------- |
 | `asset:`  | `asset:arial-font` | References a `<pc-asset>` by its `id` attribute |
-| `entity:` | `entity:#player` | References a `<pc-entity>` by CSS selector, element `id` or entity `name` |
+| `entity:` | `entity:player` | References a `<pc-entity>`, `<pc-model>` or `<pc-node>` by entity `name`, or by document-wide `#` selector (`entity:#player`) |
 | `vec2:`   | `vec2:10 20` | A Vec2 from 2 space-separated numbers |
 | `vec3:`   | `vec3:10 20 30` | A Vec3 from 3 space-separated numbers |
 | `vec4:`   | `vec4:10 20 30 40` | A Vec4 from 4 space-separated numbers |
@@ -35492,6 +35516,8 @@ Number, boolean, vector and color values are inferred from the script's declared
 ```html
 <pc-script-instance name="myScript" font="asset:arial-font" target="entity:#player"></pc-script-instance>
 ```
+
+An `entity:` value follows the same [reference grammar](attributes.md#entity-references) as entity-valued attributes like [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle`: a bare value is an entity `name` — resolved against the nearest enclosing entity first, then outward, then the document — and never an element `id`, while a value beginning with `#` is a document-wide selector. So `entity:body` names an entity, and `entity:#body` references the element whose `id` is `body`. Inside a [cloned `<template>`](templates.md), names resolve within the clone first, which is what lets one template wire many independent instances.
 
 ### The `attributes` JSON Attribute
 
@@ -36352,7 +36378,7 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 | `hover-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown on hover (sprite transition mode) |
 | `hover-sprite-frame` | Number | `"0"` | Frame of the hover sprite |
 | `hover-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity on hover (tint transition mode) |
-| `image` | String | - | Reference (CSS selector, element id, or entity name) to the [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](../pc-model) that is the model's host, so name a UI entity explicitly there |
+| `image` | String | - | [Reference](../attributes.md#entity-references) (entity `name`, or document-wide `#` selector) to the [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](../pc-model) that is the model's host, so name a UI entity explicitly there |
 | `inactive-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown when inactive (sprite transition mode) |
 | `inactive-sprite-frame` | Number | `"0"` | Frame of the inactive sprite |
 | `inactive-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when inactive (tint transition mode) |
@@ -36773,6 +36799,8 @@ Entity transforms compose down the hierarchy: the small cube is a *child* of the
 
 You can programmatically create and manipulate `<pc-entity>` elements using the [EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html).
 
+To stamp out many copies of an entity subtree, declare it once inside a native `<template>` element and clone it — see [Reusable Scenes with Templates](../templates.md).
+
 --------------------------------------------------------------------------------
 
 ## <pc-gsplat>
@@ -37018,7 +37046,7 @@ const joint = document.querySelector('pc-joint');
 joint.entityA = '#link-3'; // re-resolves now
 ```
 
-Both accept the same reference forms as other entity-valued attributes — a CSS selector, an element `id`, or an entity `name`. See [Attributes](../attributes.md#entity-references).
+Both accept the same reference forms as other entity-valued attributes — an entity `name` (resolved against the nearest enclosing entity first), or a document-wide `#` selector. See [Entity References](../attributes.md#entity-references).
 
 --------------------------------------------------------------------------------
 
@@ -37556,6 +37584,8 @@ To reach inside the loaded hierarchy, nest a [`<pc-node>`](../pc-node) for each 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
+
+A `<pc-model>` also makes a natural root for a cloneable `<template>` prefab — the [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) example spawns its projectiles this way. See [Reusable Scenes with Templates](../templates.md).
 
 ### The Two Entities
 
@@ -38169,7 +38199,7 @@ The `<pc-script-instance>` tag is used to define a script.
 
 </div>
 
-In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
+In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. An `entity:` value is an entity `name` — write `entity:#id` to reference an element by `id`. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
 
 Declared values are the source of truth. When the host entity cycles — a [`<pc-node>`](../pc-node) rebinding after its model reloads, for instance — a surviving script instance has its declared state re-asserted, which deliberately snaps back any runtime mutation of a declared property. Keep state you change at runtime in properties the markup does not declare.
 
@@ -38306,7 +38336,7 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
-* It references its viewport, content, and scrollbar entities by CSS selector, element id, or entity name.
+* It references its viewport, content, and scrollbar entities by entity `name` or document-wide `#` selector — see [Entity References](../attributes.md#entity-references).
 * The viewport element should have its `mask` attribute set so the content is clipped to the scroll view's bounds.
 
 :::
@@ -38416,7 +38446,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `handle` | String | - | Reference (CSS selector, element id, or entity name) to the [`<pc-entity>`](../pc-entity) used as the draggable handle |
+| `handle` | String | - | [Reference](../attributes.md#entity-references) (entity `name`, or document-wide `#` selector) to the [`<pc-entity>`](../pc-entity) used as the draggable handle |
 | `handle-size` | Number | `"0.5"` | Size of the handle relative to the size of the track (0 to 1) |
 | `orientation` | Enum | `"horizontal"` | Orientation of the scrollbar: `"horizontal"` \| `"vertical"` |
 | `value` | Number | `"0"` | Current position of the scrollbar (0 to 1) |
@@ -38756,6 +38786,233 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-wasm>` elements using the [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html).
+
+--------------------------------------------------------------------------------
+
+## Reusable Scenes with Templates
+
+URL: https://developer.playcanvas.com/user-manual/web-components/templates/
+
+Scenes repeat structure all the time: crates to spawn, projectiles to fire, rows to add to a list. Rather than authoring every copy by hand — or assembling each one element-by-element from JavaScript — declare the subtree once inside a native HTML [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/template) element and clone it on demand. The browser keeps template content inert, and the Web Components lifecycle turns each clone into a live engine hierarchy the moment it is appended to the page. There is no dedicated prefab API to learn: the platform primitive *is* the API.
+
+## Declaring a Template
+
+A template holds ordinary `pc-*` markup:
+
+```html
+<template id="crate-template">
+    <pc-entity name="crate">
+        <pc-render type="box" material="crate"></pc-render>
+        <pc-collision></pc-collision>
+        <pc-rigid-body type="dynamic"></pc-rigid-body>
+    </pc-entity>
+</template>
+```
+
+Content inside a `<template>` never initializes: no entity is created, no component attaches, nothing renders. The markup only comes to life when a clone of it is appended somewhere beneath a [`<pc-app>`](tags/pc-app.md) — under the [`<pc-scene>`](tags/pc-scene.md), or under any entity in it. The template element itself can sit anywhere in the document; right after the `</pc-app>` it serves is a good convention.
+
+## One Root Owns the Instance
+
+Give a template exactly one top-level element — a [`<pc-entity>`](tags/pc-entity.md) for a subtree you compose yourself, or a [`<pc-model>`](tags/pc-model.md) for a prefab built around a loaded asset. That root plays three roles at once:
+
+* **The instance's handle.** It is the element you keep to configure, await and eventually remove the instance.
+* **The lifecycle owner.** Removing the root tears down the entire engine hierarchy it created — one call disposes of the whole instance.
+* **The name-resolution scope.** Bare-name [entity references](attributes.md#entity-references) inside the clone resolve within their nearest enclosing entity-fronting element before looking anywhere else, so a single root keeps every internal reference inside the instance.
+
+A template with several top-level elements still renders, but then no single element owns the instance, and references in one subtree can no longer reach the others without going through the document. One root, always.
+
+:::note[A pc-node Root Is a Special Case]
+
+A template rooted in a [`<pc-node>`](tags/pc-node.md) is an *attachment* template, not a free-standing prefab. A `<pc-node>` binds a node that already exists inside a loaded model, so its clones must be appended beneath the owning [`<pc-model>`](tags/pc-model.md) — anywhere else, the element warns, never binds, and its `ready()` never settles. Teardown differs to match: the model owns the node, so removing the clone reverts the node to its authored state and destroys only what the clone added beneath it.
+
+:::
+
+## Creating an Instance
+
+The whole pattern is six steps, and their order matters:
+
+```javascript
+const template = document.getElementById('crate-template');
+const scene = document.querySelector('pc-scene');
+
+// 1. Clone the template's content
+const clone = template.content.cloneNode(true);
+
+// 2. Capture the root now - appending will empty the fragment
+const crate = clone.querySelector('pc-entity');
+
+// 3. Configure the instance while it is still disconnected
+crate.setAttribute('position', '0 5 0');
+
+// 4. Append the fragment once - the lifecycle builds the engine hierarchy
+scene.appendChild(clone);
+
+// 5. Await the specific elements you are about to use
+await Promise.all([crate, crate.querySelector('pc-rigid-body')].map((el) => el.ready()));
+
+// 6. Later: remove the root to dispose of the whole instance
+crate.remove();
+```
+
+Step 2 is the one that trips people up. `template.content` is a [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment), and so is its clone — a container that hands its children to the new parent when appended and comes back empty. Query the fragment for the root element *before* appending, and keep that element; after step 4, the fragment has nothing left in it.
+
+Configuring in step 3 — position, rotation, script attributes, anything — happens while the clone is disconnected, so the attributes are simply the initial state the instance boots with. No half-configured instance ever exists in the scene, and no engine object is created only to be immediately reconfigured.
+
+## Names Are Clone-Local
+
+Wire references *inside* a template with bare names:
+
+```html
+<template id="pendulum-template">
+    <pc-entity name="pendulum">
+        <pc-entity name="anchor">
+            <pc-collision half-extents="0.05 0.05 0.05"></pc-collision>
+            <pc-rigid-body type="static"></pc-rigid-body>
+        </pc-entity>
+        <pc-entity name="bob" position="0 -1.5 0">
+            <pc-render type="sphere"></pc-render>
+            <pc-collision type="sphere" radius="0.5"></pc-collision>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
+        </pc-entity>
+        
+        <pc-joint type="ball" entity-a="anchor" entity-b="bob"></pc-joint>
+    </pc-entity>
+</template>
+```
+
+A bare reference is an entity name, resolved [nearest-first](attributes.md#names-resolve-nearest-first): the joint searches its nearest enclosing entity-fronting element, then each outer one — reaching the `pendulum` root before the lookup could ever leave the clone. Every instance therefore wires to its *own* `anchor` and `bob`: clone this template ten times and you get ten independent pendulums, even though all ten use the same names. Script [`entity:` attributes](scripting.md#type-prefixes) (for example `target="entity:bob"`) scope the same way.
+
+## `id`s Are Document-Global
+
+Everything addressed by `id` ignores clone boundaries:
+
+* [Entity references beginning with `#`](attributes.md#hash-references-are-document-wide) select across the whole document.
+* `asset` attributes and `asset:` prefixes name a [`<pc-asset>`](tags/pc-asset.md) by its document-wide `id`.
+* `material` attributes name a [`<pc-material>`](tags/pc-material.md) by its document-wide `id`.
+
+That global reach is exactly right for shared resources: the crate template above references `material="crate"` declared once outside the template, and every clone shares that one material. It is exactly wrong for per-instance structure — so avoid `id` attributes on elements *inside* a template. Cloning duplicates them, and with duplicate `id`s in the document, a `#` reference (like `getElementById`) finds whichever copy comes first, which is rarely the one you meant. If instances genuinely need `id`s, assign a unique one to each instance after cloning.
+
+## Readiness Is Per Element
+
+Appending a clone starts asynchronous initialization, and readiness is tracked [per element](programmatic-access.md#reaching-engine-objects): the root becoming ready means its `Entity` exists — not that its descendant components do. Await the specific elements you are about to touch:
+
+```javascript
+const body = crate.querySelector('pc-rigid-body');
+await body.ready();
+body.component.applyImpulse(0, 0, -10); // the component exists now
+```
+
+Every asynchronously initializing element has a `ready()` method returning a promise that resolves with the element ([`whenReady(element)`](programmatic-access.md#waiting-on-an-element-you-already-hold) is the same thing for a reference you hold), and `Promise.all` awaits several at once. Resist the temptation to wait a frame with `requestAnimationFrame` instead: with asset loads or WASM modules in flight, "one frame later" is a race that readiness promises settle deterministically.
+
+## Removing an Instance
+
+Removing the cloned root disposes of the instance — the element lifecycle destroys the engine hierarchy it created, exactly as if the markup had been deleted:
+
+```javascript
+crate.remove();
+```
+
+Removal can race initialization: a wave of enemies cleared while the last one is still loading, a list emptied mid-append. Removing a clone that has not finished initializing is safe — teardown runs through the same lifecycle — but note that a removed element's `ready()` promise [never settles](programmatic-access.md#element-readiness). Code awaiting readiness must not assume the await will complete: race it against your own teardown signal, then check the element is still connected before using it:
+
+```javascript
+await Promise.race([
+    Promise.all(parts.map((part) => part.ready())),
+    teardown // a promise you resolve when discarding in-flight instances
+]);
+if (!crate.isConnected) return; // removed while initializing - nothing to do
+```
+
+## Example
+
+Every crate is a clone of the one `<template>` after the app — spawned, configured while disconnected, appended, awaited, and hurled with an impulse the moment its rigid body exists. Click a settled crate to remove it. Try raising the impulse, or giving the crate `restitution="0.8"` so it bounces:
+
+```html live-example
+<pc-app>
+    <pc-wasm name="Ammo" glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js" wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm" fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
+    
+    <pc-material id="crate" diffuse="#c98a4b"></pc-material>
+    <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
+    <pc-scene>
+        <pc-entity name="camera" position="0 5 12" rotation="-18 0 0">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 0" scale="14 1 14">
+            <pc-render type="box" material="floor"></pc-render>
+            <pc-collision half-extents="7 0.5 7"></pc-collision>
+            <pc-rigid-body type="static"></pc-rigid-body>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+
+<template id="crate-template">
+    <pc-entity name="crate">
+        <pc-render type="box" material="crate"></pc-render>
+        <pc-collision></pc-collision>
+        <pc-rigid-body type="dynamic" friction="0.6"></pc-rigid-body>
+    </pc-entity>
+</template>
+<div class="controls">
+    <button id="spawn">Spawn crate</button>
+    <button id="clear">Clear</button>
+</div>
+<style>
+    .controls {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        gap: 8px;
+    }
+</style>
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const template = document.getElementById('crate-template');
+    const scene = await whenReady('pc-scene');
+
+    async function spawn() {
+        // Clone, and capture the root before appending empties the fragment
+        const clone = template.content.cloneNode(true);
+        const crate = clone.querySelector('pc-entity');
+
+        // Configure this instance while it is still disconnected
+        crate.setAttribute('position', `${(Math.random() - 0.5) * 4} 6 ${(Math.random() - 0.5) * 4}`);
+        crate.setAttribute('rotation', `${Math.random() * 360} ${Math.random() * 360} ${Math.random() * 360}`);
+
+        // Append once - the lifecycle builds the engine hierarchy
+        scene.appendChild(clone);
+
+        // Await the element we are about to use, not a frame count
+        const body = crate.querySelector('pc-rigid-body');
+        await body.ready();
+
+        // The component exists now - hurl the crate sideways
+        body.component.applyImpulse((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4);
+
+        // Removing the root disposes of the whole instance
+        crate.addEventListener('click', () => crate.remove());
+    }
+
+    document.getElementById('spawn').onclick = spawn;
+    document.getElementById('clear').onclick = () => {
+        scene.querySelectorAll('[name="crate"]').forEach((crate) => crate.remove());
+    };
+
+    for (let i = 0; i < 3; i++) spawn();
+</script>
+```
+
+## Templates in the Examples
+
+Several of the library's examples are built on this pattern, in increasing order of ambition:
+
+* [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html) — the minimal case: forty spheres cloned from one template into a gravity well.
+* [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) — tiles cloned into a [`<pc-layout-group>`](tags/pc-layout-group.md), which lays out each new arrival automatically.
+* [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html) — list entries cloned into scrollable content and removed by their own buttons.
+* [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) — the full treatment: a jointed, physics-driven [`<pc-model>`](tags/pc-model.md) prefab whose bare-name references wire each clone internally, with readiness raced against teardown.
 
 --------------------------------------------------------------------------------
 

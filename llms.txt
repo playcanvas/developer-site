@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 492
-Generated: 2026-08-29
+Total Documents: 493
+Generated: 2026-08-31
 
 ## Instructions for Large Language Models
 
@@ -455,6 +455,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-sound-slot>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot/): Reference for the pc-sound-slot element: positional or non-positional audio clips, volume, pitch, autoplay rules, and asset references.
 - [<pc-sound>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound/): Reference for the pc-sound element: sound component container that groups pc-sound-slot slots and shared audio settings on an entity.
 - [<pc-wasm>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm/): Reference for the pc-wasm element: load WebAssembly modules such as Ammo, Basis, and DracoDecoderModule from glue, wasm, and fallback paths.
+- [Reusable Scenes with Templates](https://developer.playcanvas.com/user-manual/web-components/templates/): Declare a pc-* subtree once in a native HTML template, then clone it into as many live instances as you need: the prefab pattern, step by step.
 - [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr/): WebXR setup for Web Components: load the engine's XR scripts, build a camera rig with xrSession, and start sessions by firing app events.
 
 ### SuperSplat
