@@ -183,4 +183,4 @@ const joint = document.querySelector('pc-joint');
 joint.entityA = '#link-3'; // re-resolves now
 ```
 
-Both accept the same reference forms as other entity-valued attributes — a CSS selector, an element `id`, or an entity `name`. See [Attributes](../attributes.md#entity-references).
+Both accept the same reference forms as other entity-valued attributes — an entity `name` (resolved against the nearest enclosing entity first), or a document-wide `#` selector. See [Entity References](../attributes.md#entity-references).

@@ -138,6 +138,8 @@ console.log(anim.clips); // ['Walk', 'Idle']
 
 [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html)を使用して、`<pc-model>`要素をプログラムで作成および操作できます。
 
+`<pc-model>` は、クローン可能な `<template>` プレハブのルートとしても自然な選択です — [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) のサンプルは、この方法で弾をスポーンしています。[テンプレートによる再利用可能なシーン](../templates.md)を参照してください。
+
 ### 2つのエンティティ {#the-two-entities}
 
 `<pc-model>`は2つのエンティティを公開しており、どちらを選ぶかを間違えるのがここで最も起こりやすいミスです。

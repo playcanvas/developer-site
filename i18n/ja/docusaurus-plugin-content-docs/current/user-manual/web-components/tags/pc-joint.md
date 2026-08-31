@@ -183,4 +183,4 @@ const joint = document.querySelector('pc-joint');
 joint.entityA = '#link-3'; // ここで再解決されます
 ```
 
-どちらも他のエンティティ参照属性と同じ参照形式を受け付けます。CSSセレクター、要素の`id`、エンティティの`name`です。[属性](../attributes.md#entity-references)を参照してください。
+どちらも他のエンティティ参照属性と同じ参照形式を受け付けます。エンティティの `name`（最も近い外側のエンティティから解決されます）、またはドキュメント全体の `#` セレクターです。[エンティティ参照](../attributes.md#entity-references)を参照してください。

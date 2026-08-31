@@ -41,6 +41,8 @@ Then import it and await the element you need:
 
 The promise never settles if the element cannot finish initializing — for example, a `<pc-script-instance>` that is not a direct child of `<pc-script>`, a [`<pc-node>`](./tags/pc-node.md) that cannot resolve its `name`, a [`<pc-wasm>`](./tags/pc-wasm.md) without a `name`, or an [`<pc-app>`](./tags/pc-app.md) that could not create a graphics device, where a fallback UI should hang off the element's [`error` event](./tags/pc-app.md#events) instead. A component element with no `<pc-entity>`, `<pc-model>` or `<pc-node>` above it is the exception: it still becomes ready, but its `component` is `null`. In every case, the element reports what went wrong in the console.
 
+An element *removed* from the document before it finished initializing never becomes ready either — nothing is wrong, so nothing is reported, but an await on its `ready()` will not complete. When teardown can race initialization (common with [cloned templates](templates.md)), race the await against your own teardown signal — see [Removing an Instance](templates.md#removing-an-instance).
+
 :::
 
 ## Reaching Engine Objects
@@ -96,6 +98,8 @@ const { app } = await whenReady(appElement);
 ```
 
 (Under the hood, every asynchronously initializing element has a `ready()` method that returns a promise resolving with the element itself — `whenReady` is a convenience wrapper around it.)
+
+This is the pattern for instances cloned from a `<template>`, too: hold the cloned elements and await exactly the ones you are about to use. See [Reusable Scenes with Templates](templates.md).
 
 ## The `ready` Event
 

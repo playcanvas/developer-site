@@ -24,7 +24,7 @@ The `<pc-script-instance>` tag is used to define a script.
 
 </div>
 
-In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
+In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. An `entity:` value is an entity `name` — write `entity:#id` to reference an element by `id`. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
 
 Declared values are the source of truth. When the host entity cycles — a [`<pc-node>`](../pc-node) rebinding after its model reloads, for instance — a surviving script instance has its declared state re-asserted, which deliberately snaps back any runtime mutation of a declared property. Keep state you change at runtime in properties the markup does not declare.
 

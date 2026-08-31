@@ -87,15 +87,34 @@ Color attributes accept any of three formats:
 
 ## Entity References
 
-Some attributes reference another entity in the document — for example, [`<pc-button>`](tags/pc-button.md)'s `image`, [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle` and [`<pc-scroll-view>`](tags/pc-scroll-view.md)'s `viewport`, `content` and scrollbar attributes. A reference can be any of:
+Some attributes reference another entity in the document — for example, [`<pc-button>`](tags/pc-button.md)'s `image`, [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle`, [`<pc-scroll-view>`](tags/pc-scroll-view.md)'s `viewport` and `content`, and [`<pc-joint>`](tags/pc-joint.md)'s `entity-a` and `entity-b`. A reference takes exactly one of two forms:
 
-* A CSS selector (e.g. `#my-id` or `pc-entity[name="Player"]`)
-* An element `id` (e.g. `my-id`)
-* An entity `name` (e.g. `Player`)
+| Form | Meaning | Scope |
+| --- | --- | --- |
+| `handle` | The `name` of a [`<pc-entity>`](tags/pc-entity.md), [`<pc-model>`](tags/pc-model.md) or [`<pc-node>`](tags/pc-node.md) | Nearest enclosing entity first, then outward, then the whole document |
+| `#handle`, `#hud pc-entity` | A CSS selector beginning with `#` — an element `id`, or any selector rooted in one | The whole document |
 
 ```html
 <pc-scrollbar orientation="vertical" handle="#handle"></pc-scrollbar>
 ```
+
+The grammar is closed: a bare value is always a name — never an element `id` and never a selector — and a selector that does not begin with `#` is not accepted. Which form a reference takes is visible at a glance, and adding or renaming elements elsewhere in the document can never change it.
+
+### Names Resolve Nearest-First
+
+A name is looked up through the enclosing entity hierarchy: first the nearest enclosing entity-fronting element — a [`<pc-entity>`](tags/pc-entity.md), [`<pc-model>`](tags/pc-model.md) or [`<pc-node>`](tags/pc-node.md), that element itself included — and its subtree, then each outer enclosing entity in turn, then the containing [`<pc-app>`](tags/pc-app.md), and finally the whole document. The first match wins, in document order within each scope. For a `<pc-node>`, the name matched is the glTF node name it binds.
+
+Nearest-first is what makes names safe in repeated content: inside a [cloned `<template>`](templates.md), a reference finds its own instance's entities before the lookup could ever reach an earlier clone's — see [Reusable Scenes with Templates](templates.md).
+
+### `#` References Are Document-Wide {#hash-references-are-document-wide}
+
+A reference beginning with `#` is evaluated as a [CSS selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) against the whole document, and it is authoritative: the name lookup never runs for it, so an entity that happens to be *named* `#body` can never shadow the element whose `id` is `body`. Use a `#` form to pin a reference to one specific element, regardless of where the referencing element sits.
+
+### Unresolved References Warn
+
+A non-empty reference that does not resolve logs a console warning naming the attribute and the cause: nothing in the document matches, the match is not backing an entity *yet* (usually timing — a [`<pc-node>`](tags/pc-node.md) whose model has not loaded resolves once you assign the attribute again), or the match can never back one (the reference points at the wrong kind of element). And if a bare reference matches nothing but does equal the `id` of an entity-fronting element, the warning suggests the `#id` spelling to use — escaped where the `id` needs it, such as `#a\:b` for an `id` of `a:b`.
+
+[Script attributes](scripting.md#type-prefixes) follow the same grammar: `entity:body` references an entity named `body`, while `entity:#body` references the element with that `id`.
 
 ## Script Attributes
 

@@ -138,6 +138,8 @@ To reach inside the loaded hierarchy, nest a [`<pc-node>`](../pc-node) for each 
 
 You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
 
+A `<pc-model>` also makes a natural root for a cloneable `<template>` prefab — the [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) example spawns its projectiles this way. See [Reusable Scenes with Templates](../templates.md).
+
 ### The Two Entities
 
 A `<pc-model>` exposes two entities, and picking the wrong one is the easiest mistake to make here:
