@@ -93,3 +93,5 @@ Entity transforms compose down the hierarchy: the small cube is a *child* of the
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-entity>` elements using the [EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html).
+
+To stamp out many copies of an entity subtree, declare it once inside a native `<template>` element and clone it — see [Reusable Scenes with Templates](../templates.md).

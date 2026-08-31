@@ -82,6 +82,7 @@ Start with the Getting Started guide — you'll have a scene rendering in minute
 - [Attributes](attributes.md) — the value conventions shared by every tag.
 - [Adding Behavior with Scripts](scripting.md) — attach engine scripts to entities for motion and interactivity.
 - [Programmatic Access](programmatic-access.md) — drive the running app from JavaScript with `whenReady`.
+- [Reusable Scenes with Templates](templates.md) — declare a subtree once in a `<template>` and clone it into many live instances.
 - [XR Support](xr.md) — take your scene into VR and AR.
 - [Tag Reference](./tags/index.md) — every element and its attributes.
 - [Examples](https://playcanvas.github.io/web-components/examples/) — live demos with source code.

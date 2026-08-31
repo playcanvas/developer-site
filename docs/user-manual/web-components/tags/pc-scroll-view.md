@@ -8,7 +8,7 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
-* It references its viewport, content, and scrollbar entities by CSS selector, element id, or entity name.
+* It references its viewport, content, and scrollbar entities by entity `name` or document-wide `#` selector — see [Entity References](../attributes.md#entity-references).
 * The viewport element should have its `mask` attribute set so the content is clipped to the scroll view's bounds.
 
 :::

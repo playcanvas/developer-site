@@ -87,15 +87,34 @@ Invalid value 'bogus' for attribute 'scroll-mode'. Valid values: clamp, bounce, 
 
 ## エンティティ参照 {#entity-references}
 
-一部の属性は、ドキュメント内の別のエンティティを参照します — 例えば、[`<pc-button>`](tags/pc-button.md) の `image`、[`<pc-scrollbar>`](tags/pc-scrollbar.md) の `handle`、[`<pc-scroll-view>`](tags/pc-scroll-view.md) の `viewport`、`content`、スクロールバー属性です。参照には次のいずれかを使用できます。
+一部の属性は、ドキュメント内の別のエンティティを参照します — 例えば、[`<pc-button>`](tags/pc-button.md) の `image`、[`<pc-scrollbar>`](tags/pc-scrollbar.md) の `handle`、[`<pc-scroll-view>`](tags/pc-scroll-view.md) の `viewport` と `content`、[`<pc-joint>`](tags/pc-joint.md) の `entity-a` と `entity-b` です。参照は、次の2つの形式のうちちょうど1つを取ります。
 
-* CSSセレクター（例: `#my-id` や `pc-entity[name="Player"]`）
-* 要素の `id`（例: `my-id`）
-* エンティティの `name`（例: `Player`）
+| 形式 | 意味 | スコープ |
+| --- | --- | --- |
+| `handle` | [`<pc-entity>`](tags/pc-entity.md)、[`<pc-model>`](tags/pc-model.md)、[`<pc-node>`](tags/pc-node.md) の `name` | 最も近い外側のエンティティが最初、次に順に外側へ、最後にドキュメント全体 |
+| `#handle`、`#hud pc-entity` | `#` で始まるCSSセレクター — 要素の `id`、またはそれを起点とする任意のセレクター | ドキュメント全体 |
 
 ```html
 <pc-scrollbar orientation="vertical" handle="#handle"></pc-scrollbar>
 ```
+
+この文法は閉じています: ベアな値（bare value）は常に名前であり — 決して要素の `id` でもセレクターでもなく — `#` で始まらないセレクターは受け付けられません。参照がどちらの形式なのかはひと目で分かり、ドキュメントの他の場所で要素を追加したり名前を変えたりしても、それが変わることはありません。
+
+### 名前は最も近いものから解決される {#names-resolve-nearest-first}
+
+名前は、外側を囲むエンティティ階層を通して検索されます: まず最も近い外側のエンティティを担う要素 — [`<pc-entity>`](tags/pc-entity.md)、[`<pc-model>`](tags/pc-model.md)、[`<pc-node>`](tags/pc-node.md) のいずれかで、その要素自身も含みます — とそのサブツリー、次に外側を囲むエンティティを順に、その次に包含する [`<pc-app>`](tags/pc-app.md)、最後にドキュメント全体です。各スコープ内ではドキュメント順で、最初のマッチが優先されます。`<pc-node>` の場合、マッチする名前はそれがバインドするglTFノード名です。
+
+「最も近いものから」こそが、繰り返されるコンテンツの中で名前を安全にするものです: [クローンされた `<template>`](templates.md) の内部では、ルックアップが先行するクローンに到達しうるより前に、参照は自分自身のインスタンスのエンティティを見つけます — [テンプレートによる再利用可能なシーン](templates.md)を参照してください。
+
+### `#` 参照はドキュメント全体 {#hash-references-are-document-wide}
+
+`#` で始まる参照は、ドキュメント全体に対する[CSSセレクター](https://developer.mozilla.org/ja/docs/Web/API/Document/querySelector)として評価され、これは絶対的です: この場合、名前のルックアップは決して実行されないため、たまたま `#body` という*名前*を持つエンティティが、`id` が `body` である要素を覆い隠すことはできません。参照する要素がどこにあっても特定の1要素に参照を固定したいときは、`#` 形式を使ってください。
+
+### 解決されない参照は警告する {#unresolved-references-warn}
+
+空でない参照が解決されない場合、属性名と原因を示すコンソール警告がログに出力されます。原因は次のいずれかです: ドキュメント内に何もマッチしない、マッチした要素が*まだ*エンティティを担っていない（通常はタイミングの問題です — モデルが読み込まれていない [`<pc-node>`](tags/pc-node.md) は、属性をもう一度割り当てれば解決されます）、あるいはマッチした要素が決してエンティティを担えない（参照が誤った種類の要素を指しています）。さらに、ベアな参照が何にもマッチしないものの、エンティティを担う要素の `id` と一致する場合、警告は使用すべき `#id` 表記を提案します — `id` が必要とする場合はエスケープされます。例えば `a:b` という `id` に対しては `#a\:b` です。
+
+[スクリプト属性](scripting.md#type-prefixes)も同じ文法に従います: `entity:body` は `body` という名前のエンティティを参照し、`entity:#body` はその `id` を持つ要素を参照します。
 
 ## スクリプト属性 {#script-attributes}
 

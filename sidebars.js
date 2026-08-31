@@ -511,6 +511,7 @@ const sidebars = {
         'user-manual/web-components/attributes',
         'user-manual/web-components/scripting',
         'user-manual/web-components/programmatic-access',
+        'user-manual/web-components/templates',
         'user-manual/web-components/xr',
         {
           type: 'category',
