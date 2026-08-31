@@ -56,7 +56,7 @@ app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
 ```
 
 - `GSPLAT_LODMODE_ERROR` (default): the budget goes where it removes the most visual error per splat.
-- `GSPLAT_LODMODE_DISTANCE`: error metadata is ignored and detail is guaranteed to step down in clean concentric bands around the camera, with the band edges adapting to the budget. Useful when a capture's error data does not match its visual importance.
+- `GSPLAT_LODMODE_DISTANCE`: error metadata is ignored and detail is ordered by camera distance alone, stepping down in concentric bands around the camera with the band edges adapting to the budget. Useful when a capture's error data does not match its visual importance.
 
 ### LOD Falloff
 
@@ -66,7 +66,7 @@ app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
 entity.gsplat.lodFalloff = 2; // more detail near the camera, less in the distance
 ```
 
-The value ranges from 0 to 8 and defaults to 1, which gives a balanced falloff. Higher values concentrate detail near the camera at the cost of the far field, while values towards 0 spread it evenly across the scene regardless of the view. This redistributes the detail the splat receives from the budget without changing its overall share of it.
+The value ranges from 0 to 8 and defaults to 1, which gives a balanced falloff. Higher values concentrate detail near the camera at the cost of the far field, while values towards 0 spread it evenly across the scene regardless of the view. This primarily redistributes the detail the splat receives from the budget between its near and far field, though it can also shift how the budget divides between splats.
 
 ### Scene-Level Control
 
