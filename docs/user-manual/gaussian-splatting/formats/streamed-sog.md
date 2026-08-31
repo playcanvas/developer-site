@@ -49,6 +49,7 @@ interface LodMeta {
   count: number;               // Total gaussians across all LOD levels (excludes environment)
   counts: number[];            // Gaussians per LOD level; index = LOD level, length = lodLevels
   lodLevels: number;           // Number of LOD levels
+  lodErrors?: boolean;         // If true, every leaf supplies per-level `errors`
   environment?: string;        // Relative path to the environment SOG's meta.json; omitted if none
   filenames: string[];         // Relative paths to chunk SOG meta.json files, referenced by index
   tree: Node;                  // Root of the spatial tree
@@ -67,6 +68,7 @@ interface Node {
       count: number;           // Number of consecutive splats
     };
   };
+  errors?: number[];           // Leaf node: per-level approximation error; index = LOD level
 }
 ```
 
@@ -95,6 +97,12 @@ Each `lods` entry addresses a contiguous run of splats within one chunk:
 
 A chunk file's contents are exactly the concatenation of the leaf runs that reference it: the runs are non-overlapping and cover the chunk completely. Within each run, splats are sorted in Morton order for spatial locality; no ordering holds across run boundaries. A chunk only ever contains splats of a single LOD level.
 
+### 3.3 LOD errors
+
+When the top-level `lodErrors` flag is `true`, every leaf carries an `errors` array measuring how much each of its LOD levels deviates from the highest-detail representation, indexed by LOD level. Errors are finite, non-negative and non-decreasing with level; level `0` is typically `0`. Only relative magnitudes are meaningful — a viewer uses them to decide which regions benefit most from finer levels (the PlayCanvas engine spends its splat budget by error removed per splat). Entries for levels a leaf does not hold are ignored.
+
+Writers producing these values include [SplatTransform](/user-manual/splat-transform) 3.3 and newer. Readers **should** treat a manifest without `lodErrors: true` as carrying no error data and fall back to their own heuristic (for example, deriving errors from the per-level splat counts).
+
 ---
 
 ## 4. Environment
@@ -120,6 +128,7 @@ A two-level scene with an environment, split into one interior node with two lea
   "count": 1500000,
   "counts": [1000000, 500000],
   "lodLevels": 2,
+  "lodErrors": true,
   "environment": "env/meta.json",
   "filenames": [
     "0_0/meta.json",
@@ -133,14 +142,16 @@ A two-level scene with an environment, split into one interior node with two lea
         "lods": {
           "0": { "file": 0, "offset": 0, "count": 600000 },
           "1": { "file": 1, "offset": 0, "count": 300000 }
-        }
+        },
+        "errors": [0, 0.8127411]
       },
       {
         "bound": { "min": [0.5, 0, -10], "max": [10, 4.5, 10] },
         "lods": {
           "0": { "file": 0, "offset": 600000, "count": 400000 },
           "1": { "file": 1, "offset": 300000, "count": 200000 }
-        }
+        },
+        "errors": [0, 1.244906]
       }
     ]
   }
