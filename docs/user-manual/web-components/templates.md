@@ -23,13 +23,19 @@ Content inside a `<template>` never initializes: no entity is created, no compon
 
 ## One Root Owns the Instance
 
-Give a template exactly one top-level element, and make it one of the entity-fronting elements — a [`<pc-entity>`](tags/pc-entity.md), a [`<pc-model>`](tags/pc-model.md) or a [`<pc-node>`](tags/pc-node.md). That root plays three roles at once:
+Give a template exactly one top-level element — a [`<pc-entity>`](tags/pc-entity.md) for a subtree you compose yourself, or a [`<pc-model>`](tags/pc-model.md) for a prefab built around a loaded asset. That root plays three roles at once:
 
 * **The instance's handle.** It is the element you keep to configure, await and eventually remove the instance.
 * **The lifecycle owner.** Removing the root tears down the entire engine hierarchy it created — one call disposes of the whole instance.
 * **The name-resolution scope.** Bare-name [entity references](attributes.md#entity-references) inside the clone resolve within their nearest enclosing entity-fronting element before looking anywhere else, so a single root keeps every internal reference inside the instance.
 
 A template with several top-level elements still renders, but then no single element owns the instance, and references in one subtree can no longer reach the others without going through the document. One root, always.
+
+:::note[A pc-node Root Is a Special Case]
+
+A template rooted in a [`<pc-node>`](tags/pc-node.md) is an *attachment* template, not a free-standing prefab. A `<pc-node>` binds a node that already exists inside a loaded model, so its clones must be appended beneath the owning [`<pc-model>`](tags/pc-model.md) — anywhere else, the element warns, never binds, and its `ready()` never settles. Teardown differs to match: the model owns the node, so removing the clone reverts the node to its authored state and destroys only what the clone added beneath it.
+
+:::
 
 ## Creating an Instance
 
