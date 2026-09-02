@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
 Total Documents: 493
-Generated: 2026-08-31
+Generated: 2026-09-02
 
 ## Instructions for Large Language Models
 
