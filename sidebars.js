@@ -872,6 +872,8 @@ const sidebars = {
         },
         'user-manual/graphics/particles',
         'user-manual/graphics/layers/index',
+        'user-manual/graphics/wide-lines',
+        'user-manual/graphics/debug-drawing',
         {
           type: 'category',
           label: 'Advanced Rendering',
