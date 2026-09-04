@@ -35,7 +35,7 @@ description: "pc-model要素のリファレンス: GLBコンテナアセット�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | Asset ID | - | コンテナアセットID (`container`型のアセットを参照する必要があります) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | コンテナアセットID (`container`型のアセットを参照する必要があります) |
 | `enabled` | Boolean | `"true"` | モデルの有効状態 |
 | `name` | String | - | ホストエンティティの名前 |
 | `position` | Vector3 | `"0 0 0"` | ローカル空間の位置を "X Y Z" で指定 |

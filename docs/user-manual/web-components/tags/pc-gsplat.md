@@ -19,7 +19,7 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | Asset ID | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
 | `cast-shadows` | Boolean | `"false"` | Whether the gsplat component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `lod-base-distance` | Number | `"5"` | Distance for the first LOD transition (LOD 0 to LOD 1). Splats closer than this use the highest-quality LOD. Minimum `0.1`. Only affects assets that contain LOD levels. |

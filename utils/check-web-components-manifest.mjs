@@ -72,6 +72,15 @@ const TYPE_VOCABULARY = new Set([
     'Asset ID', 'Material ID', 'Entity Reference'
 ]);
 
+// Types whose value grammar is defined on the Attributes page link there from the Type cell, so
+// the token itself answers "what do I write here". Every row of these types must carry exactly
+// this link, and no other type is linked.
+const TYPE_LINKS = {
+    'Asset ID': '../attributes.md#asset-and-material-ids',
+    'Material ID': '../attributes.md#asset-and-material-ids',
+    'Entity Reference': '../attributes.md#entity-references'
+};
+
 // Events a page documents by deferring to another page's table. The event name must still be
 // mentioned on the page; it just need not have a row of its own.
 const EVENTS_BY_REFERENCE = {
@@ -153,8 +162,11 @@ const splitRow = (line) => line.trim().slice(1, -1).split(/(?<!\\)\|/).map((cell
  * second-level heading whose first cell is a single backticked attribute name. Restricting the
  * scan to that section keeps the JavaScript Interface property tables out of the comparison.
  *
+ * A Type cell is either a bare token or a Markdown link around one; `type` is always the token
+ * and `typeLink` the link target, or null.
+ *
  * @param {string} markdown - The page source.
- * @returns {Map<string, { type: string, default: string, description: string }>} Rows by attribute.
+ * @returns {Map<string, { type: string, typeLink: string | null, default: string, description: string }>} Rows by attribute.
  */
 function parseAttributeTable(markdown) {
     const rows = new Map();
@@ -171,8 +183,10 @@ function parseAttributeTable(markdown) {
         if (cells.length < 4) {
             continue;
         }
+        const link = cells[1].match(/^\[([^\]]+)\]\(([^)]+)\)$/);
         rows.set(cells[0].replace(/`/g, ''), {
-            type: cells[1],
+            type: link ? link[1] : cells[1],
+            typeLink: link ? link[2] : null,
             default: cells[2].replace(/^`|`$/g, '').replace(/^"|"$/g, '').trim(),
             description: cells[3]
         });
@@ -338,7 +352,9 @@ for (const locale of LOCALES) {
         }
 
         // Rows the manifest knows nothing about are either read-once attributes on the allowlist or
-        // a rename the page has not followed. Allowlist entries with no row are reported too.
+        // a rename the page has not followed. Allowlist entries with no row are reported too. Every
+        // row's Type must come from the vocabulary, and link to the Attributes page exactly when the
+        // vocabulary says so.
         const readOnce = [...READ_ONCE['*'], ...(READ_ONCE[tag] ?? [])];
         for (const [name, row] of rows) {
             if (!declaredNames.has(name) && !readOnce.includes(name)) {
@@ -346,6 +362,10 @@ for (const locale of LOCALES) {
             }
             if (!TYPE_VOCABULARY.has(row.type)) {
                 report(locale.name, tag, `\`${name}\` type "${row.type}" is not in the Type vocabulary (${[...TYPE_VOCABULARY].join(', ')})`);
+            } else if (TYPE_LINKS[row.type] && row.typeLink !== TYPE_LINKS[row.type]) {
+                report(locale.name, tag, `\`${name}\` type ${row.type} must link to ${TYPE_LINKS[row.type]}`);
+            } else if (!TYPE_LINKS[row.type] && row.typeLink) {
+                report(locale.name, tag, `\`${name}\` type ${row.type} must not be a link`);
             }
         }
         for (const name of READ_ONCE[tag] ?? []) {

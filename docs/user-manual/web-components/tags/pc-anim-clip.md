@@ -56,7 +56,7 @@ The tracks bind to scene nodes by name, so a clip from a separate file animates 
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | Asset ID | - | ID of the [`<pc-asset>`](../pc-asset) supplying the track — a `container`, an `animation` GLB or an `animclip` JSON. Empty takes it from the enclosing [`<pc-model>`](../pc-model) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | ID of the [`<pc-asset>`](../pc-asset) supplying the track — a `container`, an `animation` GLB or an `animclip` JSON. Empty takes it from the enclosing [`<pc-model>`](../pc-model) |
 | `loop` | Boolean | `"true"` | Whether the clip loops. A non-looping clip holds its last pose when it ends |
 | `name` | String | - | The clip's name, and the track looked up in its source. Unique within the component, and no `.` |
 | `speed` | Number | `"1"` | Playback speed of this clip, where negative values play it backwards |

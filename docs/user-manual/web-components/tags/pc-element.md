@@ -33,7 +33,7 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enable-markup` | Boolean | `"false"` | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `font-asset` | Asset ID | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
+| `font-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
 | `font-size` | Number | `"32"` | Font size in pixels |
 | `height` | Number | `"0"` | Height in pixels (0 for auto-sizing) |
 | `line-height` | Number | `"32"` | Line height in pixels |
@@ -44,10 +44,10 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `opacity` | Number | `"1"` | Opacity, from 0 (transparent) to 1 (opaque) |
 | `pivot` | Vector2 | `"0.5 0.5"` | Pivot point as "X Y" values |
 | `pixels-per-unit` | Number | - | Pixels per unit used when rendering a sprite. Image elements only |
-| `sprite-asset` | Asset ID | - | Sprite [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
+| `sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `sprite-frame` | Number | `"0"` | Frame index of the sprite to render. Image elements only |
 | `text` | String | - | Text content to display |
-| `texture-asset` | Asset ID | - | Texture [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
+| `texture-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Texture [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `type` | Enum | `"group"` | Element type: `"group"` \| `"image"` \| `"text"` |
 | `use-input` | Boolean | `"false"` | Whether the element receives pointer input. Required for [`<pc-button>`](../pc-button) and scroll-view interaction |
 | `width` | Number | `"0"` | Width in pixels (0 for auto-sizing) |

@@ -17,7 +17,7 @@ description: "pc-particle-system要素のリファレンス: エミッター、�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | Asset ID | - | パーティクルシステム設定を定義するJSONアセットID |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | パーティクルシステム設定を定義するJSONアセットID |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 
 </div>

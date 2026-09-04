@@ -17,7 +17,7 @@ The `<pc-sound-slot>` tag is used to define a sound.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | Asset ID | - | Audio asset ID (must reference an `audio` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Audio asset ID (must reference an `audio` type asset) |
 | `auto-play` | Boolean | `"false"` | Whether the sound plays automatically |
 | `duration` | Number | - | Duration of the sound in seconds (omit to play the full clip) |
 | `loop` | Boolean | `"false"` | Whether the sound loops |
