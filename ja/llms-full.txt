@@ -34526,6 +34526,21 @@ Invalid values never reach the engine. Instead, you get a console warning naming
 
 [`<pc-node>`](tags/pc-node.md) is the one exception to the middle row. Its attributes are overrides against a node inside a loaded model, so an absent attribute restores the value that model was authored with rather than the engine default.
 
+## The Type Column
+
+The *Type* column of each attribute table names how a value is written. Every type is defined on this page:
+
+| Type | Written as |
+| --- | --- |
+| Boolean | `"true"`, `"false"`, or bare presence — see [Booleans](#booleans) |
+| Number | Any finite number — see [Numbers](#numbers) |
+| Enum | One of a fixed set of names, listed in the attribute's description — see [Enums](#enums) |
+| Vector2, Vector3, Vector4 | Two, three or four space-separated numbers — see [Vectors](#vectors) |
+| Color | A CSS color name, a hex code, or three or four numbers — see [Colors](#colors) |
+| String | Free text: a name, a path, a JSON object |
+| Asset ID, Material ID | The `id` of a [`<pc-asset>`](tags/pc-asset.md) or a [`<pc-material>`](tags/pc-material.md) — see [Asset and Material IDs](#asset-and-material-ids) |
+| Entity Reference | An entity `name`, or a `#` selector — see [Entity References](#entity-references) |
+
 ## Booleans
 
 A boolean attribute is `true` when present with any value other than `"false"` — including the empty value of a bare attribute — and `false` when set to `"false"`:
@@ -34588,6 +34603,19 @@ Color attributes accept any of three formats:
 <pc-camera clear-color="#f0f8ff"></pc-camera>
 <pc-light color="1 0.8 0.6"></pc-light>
 ```
+
+## Asset and Material IDs
+
+Resources are declared once, as direct children of [`<pc-app>`](tags/pc-app.md), and referenced by the `id` you give them. An Asset ID attribute names a [`<pc-asset>`](tags/pc-asset.md); a Material ID attribute names a [`<pc-material>`](tags/pc-material.md):
+
+```html
+<pc-asset id="tiles" src="tiles.png"></pc-asset>
+<pc-material id="floor" diffuse-map="tiles"></pc-material>
+
+<pc-render type="plane" material="floor"></pc-render>
+```
+
+The value is the element's own `id`, written bare — no `#`, because it is a lookup in the application's registry rather than a CSS selector. Each attribute's description says which asset type it accepts. An `id` that matches no declared resource has no effect: the element keeps what it had, and [`<pc-model>`](tags/pc-model.md) additionally logs a warning naming the asset it could not find.
 
 ## Entity References
 
@@ -35594,17 +35622,135 @@ Before you set about writing your own scripts, check to see whether the function
 
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/
 
-Here is a complete list of the tags that are available in PlayCanvas Web Components.
+Every PlayCanvas Web Component tag is listed here, grouped by role, with the document structure they form and a reference page for each one.
 
-The attributes of every tag share the same value conventions: an absent (or removed) attribute means the engine default applies, and an invalid value logs a console warning and falls back to the default. See [Attributes](../attributes.md) for how booleans, numbers, enums, vectors and colors are written.
+## How the Tags Fit Together
 
-Tags also have placement rules — each tag's page notes the parent it requires. A misplaced element logs a console warning naming the parents it would accept, so keep the console open while authoring.
+Every document has the same shape. [`<pc-app>`](pc-app) holds the resources and one [`<pc-scene>`](pc-scene); the scene holds entities; an entity holds one of each component tag it needs, plus child entities:
 
-Three tags front an engine entity, and a component tag can sit inside any of them: [`<pc-entity>`](pc-entity), [`<pc-model>`](pc-model) and [`<pc-node>`](pc-node). So a component placed inside a model attaches to that model, and one placed inside a node attaches to the node — both take the same component children an entity does.
+```html
+<pc-app>
+    
+    <pc-asset id="sky" src="sky.webp"></pc-asset>
+    <pc-asset id="robot" src="robot.glb"></pc-asset>
+    <pc-material id="gold" diffuse="#d4af37" metalness="1"></pc-material>
+    <pc-wasm name="Ammo" glue="ammo.js" wasm="ammo.wasm"></pc-wasm>
+    <pc-scene>
+        <pc-sky asset="sky"></pc-sky>
+        
+        <pc-entity name="camera" position="0 2 6">
+            <pc-camera></pc-camera>
+        </pc-entity>
+        <pc-entity name="crate" position="0 3 0">
+            <pc-render type="box" material="gold"></pc-render>
+            <pc-collision></pc-collision>
+            <pc-rigid-body type="dynamic"></pc-rigid-body>
+        </pc-entity>
+        
+        <pc-model asset="robot">
+            <pc-anim clip="idle">
+                <pc-anim-clip name="idle"></pc-anim-clip>
+            </pc-anim>
+            <pc-node name="head">
+                <pc-light type="spot"></pc-light>
+            </pc-node>
+        </pc-model>
+    </pc-scene>
+</pc-app>
+```
+
+Three tags front an engine entity, and a component tag can sit inside any of them: [`<pc-entity>`](pc-entity), [`<pc-model>`](pc-model) and [`<pc-node>`](pc-node). A component placed inside a model attaches to that model's host entity, and one placed inside a node attaches to the bound node — both take the same component children an entity does.
+
+Each tag's page states the parent it requires. A misplaced element logs a console warning naming the parents it would accept, so keep the console open while authoring.
+
+## Tags by Role
+
+### Structure
+
+The five tags that form the document: the application, its scene, and the three that front an entity.
+
+| Tag | Description |
+| --- | --- |
+| [`<pc-app>`](pc-app) | Defines the root element of an application: its graphics device, and the resources and scene it holds. |
+| [`<pc-scene>`](pc-scene) | Defines the scene, with the fog, exposure and gravity that apply to everything inside it. |
+| [`<pc-entity>`](pc-entity) | Defines an entity: a named transform that hosts component tags and child entities. |
+| [`<pc-model>`](pc-model) | Defines an entity that instantiates a 3D model from a GLB file. |
+| [`<pc-node>`](pc-node) | Binds to a node inside a loaded model to override it. |
+
+### Resources
+
+Direct children of `<pc-app>`, declared once and referenced by `id` from the tags that use them.
+
+| Tag | Description |
+| --- | --- |
+| [`<pc-asset>`](pc-asset) | Defines an asset to be loaded by your application. |
+| [`<pc-material>`](pc-material) | Defines a material that render components can reference. |
+| [`<pc-wasm>`](pc-wasm) | Defines a WebAssembly module, such as the Ammo physics engine. |
+
+### Rendering
+
+| Tag | Description |
+| --- | --- |
+| [`<pc-camera>`](pc-camera) | Defines a camera that is used to render the scene. |
+| [`<pc-light>`](pc-light) | Defines a directional, omni or spot light, with optional shadows. |
+| [`<pc-render>`](pc-render) | Defines a render component that draws a primitive shape with a material. |
+| [`<pc-gsplat>`](pc-gsplat) | Defines a gsplat component that renders 3D Gaussian Splats. |
+| [`<pc-particle-system>`](pc-particle-system) | Defines a particle system driven by a JSON configuration asset. |
+| [`<pc-sky>`](pc-sky) | Defines an image-based skybox. |
+
+### Animation
+
+| Tag | Description |
+| --- | --- |
+| [`<pc-anim>`](pc-anim) | Defines an animation component that plays animation clips. |
+| [`<pc-anim-clip>`](pc-anim-clip) | Defines a single clip assigned to an animation component. |
+
+### Physics
+
+Physics needs the Ammo module, declared with [`<pc-wasm>`](pc-wasm).
+
+| Tag | Description |
+| --- | --- |
+| [`<pc-collision>`](pc-collision) | Defines a collision component used by triggers and rigid bodies. |
+| [`<pc-rigid-body>`](pc-rigid-body) | Defines a static, dynamic or kinematic rigid body. |
+| [`<pc-joint>`](pc-joint) | Defines a physics joint constraining two rigid bodies. |
+
+### User Interface
+
+A [`<pc-screen>`](pc-screen) hosts a tree of entities that each carry a [`<pc-element>`](pc-element); the other tags refine how those elements behave.
+
+| Tag | Description |
+| --- | --- |
+| [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
+| [`<pc-element>`](pc-element) | Defines a text, image or group user interface element. |
+| [`<pc-button>`](pc-button) | Defines a button component with hover, pressed and inactive states. |
+| [`<pc-layout-group>`](pc-layout-group) | Defines a layout group that arranges child elements in rows or columns. |
+| [`<pc-layout-child>`](pc-layout-child) | Defines per-child sizing rules within a layout group. |
+| [`<pc-scroll-view>`](pc-scroll-view) | Defines a scrollable viewport over a content entity. |
+| [`<pc-scrollbar>`](pc-scrollbar) | Defines a draggable scrollbar that drives a scroll view. |
+
+### Audio
+
+| Tag | Description |
+| --- | --- |
+| [`<pc-sound>`](pc-sound) | Defines a sound component that holds sound slots. |
+| [`<pc-sound-slot>`](pc-sound-slot) | Defines a single sound assigned to a sound component. |
+| [`<pc-audio-listener>`](pc-audio-listener) | Defines the point from which positional sound is heard. |
+
+### Scripting
+
+| Tag | Description |
+| --- | --- |
+| [`<pc-script>`](pc-script) | Defines a script component that hosts script instances. |
+| [`<pc-script-instance>`](pc-script-instance) | Defines a single script assigned to a script component. |
+
+## Shared Conventions
+
+The attributes of every tag share the same value conventions: an absent (or removed) attribute means the engine default applies, and an invalid value logs a console warning and falls back to the default. The *Type* column of each attribute table names how a value is written — Boolean, Number, Enum, Vector, Color, String, or a reference to an asset, a material or an entity — and [Attributes](../attributes.md) defines every one of those types.
 
 :::note[A component tag spells the engine component it adds]
 
-Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id: `<pc-layout-group>` adds `entity.layoutgroup`, `<pc-rigid-body>` adds `entity.rigidbody`, `<pc-audio-listener>` adds `entity.audiolistener`. The rule holds in both directions for every component tag below, so neither spelling has to be memorized. The engine's ids run their words together only because they are JavaScript property names, which cannot carry a hyphen — an HTML tag can.
+Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id: `<pc-layout-group>` adds `entity.layoutgroup`, `<pc-rigid-body>` adds `entity.rigidbody`, `<pc-audio-listener>` adds `entity.audiolistener`. The rule holds in both directions for every component tag on this page, so neither spelling has to be memorized. The engine's ids run their words together only because they are JavaScript property names, which cannot carry a hyphen — an HTML tag can.
 
 :::
 
@@ -35612,39 +35758,9 @@ A repeatable child takes its parent's tag as a prefix: [`<pc-anim-clip>`](pc-ani
 
 Every tag except [`<pc-material>`](pc-material) initializes asynchronously and fires a `ready` event once it has — see [The `ready` Event](../programmatic-access.md#the-ready-event) for the timing, and for the `whenReady()` helper that wraps it. The Events section on a tag's page lists only the events specific to that tag.
 
-| Tag | Description |
-| --- | --- |
-| [`<pc-anim>`](pc-anim) | Defines an animation component that plays animation clips. |
-| [`<pc-anim-clip>`](pc-anim-clip) | Defines a single clip assigned to an animation component. |
-| [`<pc-app>`](pc-app) | Defines the root element of your application. |
-| [`<pc-asset>`](pc-asset) | Defines an asset to be loaded by your application. |
-| [`<pc-audio-listener>`](pc-audio-listener) | Defines an audio listener component. |
-| [`<pc-button>`](pc-button) | Defines a button component. |
-| [`<pc-camera>`](pc-camera) | Defines a camera that is used to render the scene. |
-| [`<pc-collision>`](pc-collision) | Defines a collision component used by triggers and rigid bodies. |
-| [`<pc-element>`](pc-element) | Defines a text, image or group user interface element. |
-| [`<pc-entity>`](pc-entity) | Defines an entity. |
-| [`<pc-gsplat>`](pc-gsplat) | Defines a gsplat component that renders 3D Gaussian Splats. |
-| [`<pc-joint>`](pc-joint) | Defines a physics joint constraining two rigid bodies. |
-| [`<pc-layout-child>`](pc-layout-child) | Defines a layout child component. |
-| [`<pc-layout-group>`](pc-layout-group) | Defines a layout group component. |
-| [`<pc-light>`](pc-light) | Defines a light component. |
-| [`<pc-material>`](pc-material) | Defines a material that render components can reference. |
-| [`<pc-model>`](pc-model) | Defines an entity that instantiates a 3D model from a GLB file. |
-| [`<pc-node>`](pc-node) | Binds to a node inside a loaded model to override it. |
-| [`<pc-particle-system>`](pc-particle-system) | Defines a particle system component. |
-| [`<pc-render>`](pc-render) | Defines a render component. |
-| [`<pc-rigid-body>`](pc-rigid-body) | Defines a rigid body component. |
-| [`<pc-scene>`](pc-scene) | Defines a scene. |
-| [`<pc-screen>`](pc-screen) | Defines a screen component that can render element components. |
-| [`<pc-script>`](pc-script) | Defines a script component. |
-| [`<pc-script-instance>`](pc-script-instance) | Defines a single script assigned to a script component. |
-| [`<pc-scrollbar>`](pc-scrollbar) | Defines a scrollbar component. |
-| [`<pc-scroll-view>`](pc-scroll-view) | Defines a scroll view component. |
-| [`<pc-sky>`](pc-sky) | Defines an image-based skybox. |
-| [`<pc-sound>`](pc-sound) | Defines a sound component. |
-| [`<pc-sound-slot>`](pc-sound-slot) | Defines a single sound assigned to a sound component. |
-| [`<pc-wasm>`](pc-wasm) | Defines a WebAssembly module. |
+## All Tags A–Z {#all-tags-a-z}
+
+[`<pc-anim>`](pc-anim) · [`<pc-anim-clip>`](pc-anim-clip) · [`<pc-app>`](pc-app) · [`<pc-asset>`](pc-asset) · [`<pc-audio-listener>`](pc-audio-listener) · [`<pc-button>`](pc-button) · [`<pc-camera>`](pc-camera) · [`<pc-collision>`](pc-collision) · [`<pc-element>`](pc-element) · [`<pc-entity>`](pc-entity) · [`<pc-gsplat>`](pc-gsplat) · [`<pc-joint>`](pc-joint) · [`<pc-layout-child>`](pc-layout-child) · [`<pc-layout-group>`](pc-layout-group) · [`<pc-light>`](pc-light) · [`<pc-material>`](pc-material) · [`<pc-model>`](pc-model) · [`<pc-node>`](pc-node) · [`<pc-particle-system>`](pc-particle-system) · [`<pc-render>`](pc-render) · [`<pc-rigid-body>`](pc-rigid-body) · [`<pc-scene>`](pc-scene) · [`<pc-screen>`](pc-screen) · [`<pc-script>`](pc-script) · [`<pc-script-instance>`](pc-script-instance) · [`<pc-scrollbar>`](pc-scrollbar) · [`<pc-scroll-view>`](pc-scroll-view) · [`<pc-sky>`](pc-sky) · [`<pc-sound>`](pc-sound) · [`<pc-sound-slot>`](pc-sound-slot) · [`<pc-wasm>`](pc-wasm)
 
 --------------------------------------------------------------------------------
 
@@ -35705,7 +35821,7 @@ The tracks bind to scene nodes by name, so a clip from a separate file animates 
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | ID of the [`<pc-asset>`](../pc-asset) supplying the track — a `container`, an `animation` GLB or an `animclip` JSON. Empty takes it from the enclosing [`<pc-model>`](../pc-model) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | ID of the [`<pc-asset>`](../pc-asset) supplying the track — a `container`, an `animation` GLB or an `animclip` JSON. Empty takes it from the enclosing [`<pc-model>`](../pc-model) |
 | `loop` | Boolean | `"true"` | Whether the clip loops. A non-looping clip holds its last pose when it ends |
 | `name` | String | - | The clip's name, and the track looked up in its source. Unique within the component, and no `.` |
 | `speed` | Number | `"1"` | Playback speed of this clip, where negative values play it backwards |
@@ -36151,7 +36267,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `address-u` | Enum | `"repeat"` | For `texture` and `textureatlas` assets: how coordinates outside 0 to 1 sample horizontally — `"repeat"` \| `"clamp"` \| `"mirror"` |
 | `address-v` | Enum | `"repeat"` | For `texture` and `textureatlas` assets: how coordinates outside 0 to 1 sample vertically — `"repeat"` \| `"clamp"` \| `"mirror"` |
 | `anisotropy` | Number | `"1"` | For `texture` and `textureatlas` assets: maximum anisotropic filtering level, which improves quality at oblique viewing angles |
-| `atlas` | String | - | For `sprite` assets: the `id` of the `textureatlas` `<pc-asset>` this sprite reads from. The atlas must be declared before the sprite |
+| `atlas` | [Asset ID](../attributes.md#asset-and-material-ids) | - | For `sprite` assets: the `id` of the `textureatlas` `<pc-asset>` this sprite reads from. The atlas must be declared before the sprite |
 | `data` | String | - | Inline JSON asset data. Used by texture atlases (frame definitions) and sprites |
 | `flip-y` | Boolean | `"false"` | For `texture` and `textureatlas` assets: whether the image data is flipped vertically at upload |
 | `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
@@ -36377,14 +36493,14 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `fade-duration` | Number | `"0"` | Duration in milliseconds over which tint transitions are applied |
 | `hit-padding` | Vector4 | `"0 0 0 0"` | Expands the button's hit area as `left bottom right top` |
-| `hover-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown on hover (sprite transition mode) |
+| `hover-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown on hover (sprite transition mode) |
 | `hover-sprite-frame` | Number | `"0"` | Frame of the hover sprite |
 | `hover-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity on hover (tint transition mode) |
-| `image` | String | - | [Reference](../attributes.md#entity-references) (entity `name`, or document-wide `#` selector) to the [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](../pc-model) that is the model's host, so name a UI entity explicitly there |
-| `inactive-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown when inactive (sprite transition mode) |
+| `image` | [Entity Reference](../attributes.md#entity-references) | - | The [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](../pc-model) that is the model's host, so name a UI entity explicitly there |
+| `inactive-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown when inactive (sprite transition mode) |
 | `inactive-sprite-frame` | Number | `"0"` | Frame of the inactive sprite |
 | `inactive-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when inactive (tint transition mode) |
-| `pressed-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown when pressed (sprite transition mode) |
+| `pressed-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown when pressed (sprite transition mode) |
 | `pressed-sprite-frame` | Number | `"0"` | Frame of the pressed sprite |
 | `pressed-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when pressed (tint transition mode) |
 | `transition-mode` | Enum | `"tint"` | How the button reacts to hover/press: `"tint"` \| `"sprite"` |
@@ -36647,7 +36763,7 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enable-markup` | Boolean | `"false"` | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `font-asset` | String | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
+| `font-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
 | `font-size` | Number | `"32"` | Font size in pixels |
 | `height` | Number | `"0"` | Height in pixels (0 for auto-sizing) |
 | `line-height` | Number | `"32"` | Line height in pixels |
@@ -36658,10 +36774,10 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `opacity` | Number | `"1"` | Opacity, from 0 (transparent) to 1 (opaque) |
 | `pivot` | Vector2 | `"0.5 0.5"` | Pivot point as "X Y" values |
 | `pixels-per-unit` | Number | - | Pixels per unit used when rendering a sprite. Image elements only |
-| `sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
+| `sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `sprite-frame` | Number | `"0"` | Frame index of the sprite to render. Image elements only |
 | `text` | String | - | Text content to display |
-| `texture-asset` | String | - | Texture [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
+| `texture-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Texture [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `type` | Enum | `"group"` | Element type: `"group"` \| `"image"` \| `"text"` |
 | `use-input` | Boolean | `"false"` | Whether the element receives pointer input. Required for [`<pc-button>`](../pc-button) and scroll-view interaction |
 | `width` | Number | `"0"` | Width in pixels (0 for auto-sizing) |
@@ -36826,7 +36942,7 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
 | `cast-shadows` | Boolean | `"false"` | Whether the gsplat component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `lod-base-distance` | Number | `"5"` | Distance for the first LOD transition (LOD 0 to LOD 1). Splats closer than this use the highest-quality LOD. Minimum `0.1`. Only affects assets that contain LOD levels. |
@@ -36926,8 +37042,8 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 | `enable-collision` | Boolean | `"false"` | Whether the two constrained bodies collide with each other |
 | `enable-limits` | Boolean | `"false"` | Whether the joint's limits are enforced. Limit attributes do nothing until this is set |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `entity-a` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the first body. Needs a [`<pc-rigid-body>`](../pc-rigid-body) |
-| `entity-b` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
+| `entity-a` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) providing the first body. Needs a [`<pc-rigid-body>`](../pc-rigid-body) |
+| `entity-b` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
 | `limits` | Vector2 | `"-45 45"` | Rotation or travel limits about the primary axis, as "min max" — degrees for `hinge`, units for `slider` |
 | `linear-damping` | Vector3 | `"1 1 1"` | Spring damping per linear axis. Used by `6dof` |
 | `linear-equilibrium` | Vector3 | `"0 0 0"` | Rest point of the linear springs. Used by `6dof` |
@@ -37336,7 +37452,7 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `alpha-test` | Number | `"0"` | Alpha test reference value. Fragments with an opacity below this value are discarded |
 | `alpha-to-coverage` | Boolean | `"false"` | Whether to use alpha-to-coverage, which resolves transparency using multisampling |
 | `ao-intensity` | Number | `"1"` | Strength of the ambient occlusion map, from 0 to 1 |
-| `ao-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the ambient occlusion map |
+| `ao-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the ambient occlusion map |
 | `blend-type` | Enum | `"none"` | How the material is blended with the scene behind it: `"none"` \| `"normal"` \| `"additive"` \| `"additive-alpha"` \| `"premultiplied"` \| `"multiplicative"` \| `"multiplicative-2x"` \| `"screen"` \| `"min"` \| `"max"` \| `"subtractive"` |
 | `bumpiness` | Number | `"1"` | Strength of the normal map, where 0 is flat and 1 is the map's full effect |
 | `cull` | Enum | `"back"` | Which faces of a mesh are culled: `"none"` \| `"back"` \| `"front"` \| `"front-and-back"` |
@@ -37344,30 +37460,30 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `depth-test` | Boolean | `"true"` | Whether fragments are tested against the depth buffer |
 | `depth-write` | Boolean | `"true"` | Whether fragments write to the depth buffer |
 | `diffuse` | Color | `"1 1 1"` | Diffuse color of the material |
-| `diffuse-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the diffuse map |
+| `diffuse-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the diffuse map |
 | `emissive` | Color | `"0 0 0"` | Emissive color of the material |
 | `emissive-intensity` | Number | `"1"` | Multiplier applied to the emissive color and map |
-| `emissive-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the emissive map |
+| `emissive-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the emissive map |
 | `enable-ggx-specular` | Boolean | `"false"` | Whether to use the GGX specular model, which supports anisotropy |
 | `fresnel-model` | Enum | `"schlick"` | Fresnel model used for specular reflections at grazing angles: `"none"` \| `"schlick"` |
 | `gloss` | Number | `"0.25"` | Glossiness of the material, from 0 (rough) to 1 (shiny). See `roughness` |
 | `gloss-invert` | Boolean | `"false"` | Whether the gloss value and map are inverted, making the material treat them as roughness. Setting `roughness` or `roughness-map` enables this automatically |
-| `gloss-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the gloss map |
-| `height-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the height map |
+| `gloss-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the gloss map |
+| `height-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the height map |
 | `height-map-factor` | Number | `"1"` | Strength of the parallax effect driven by the height map |
 | `id` | String | - | Unique identifier used by other tags to reference this material |
 | `metalness` | Number | `"0"` | How metallic the surface is, from 0 (dielectric) to 1 (metal) |
-| `metalness-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the metalness map |
+| `metalness-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the metalness map |
 | `name` | String | `"Untitled"` | Name of the material. A label, not a reference: other tags always address the material by `id` |
-| `normal-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the normal map |
+| `normal-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the normal map |
 | `occlude-direct` | Boolean | `"false"` | Whether ambient occlusion also attenuates direct lighting |
 | `occlude-specular` | Enum | `"ao"` | How specular reflections are occluded: `"none"` \| `"ao"` \| `"gloss-dependent"` |
 | `opacity` | Number | `"1"` | Opacity of the material, from 0 (transparent) to 1 (opaque). Requires a `blend-type` other than `"none"` to have a visible effect |
 | `opacity-dither` | Enum | `"none"` | Dithering used to render opacity, which approximates transparency without blending: `"none"` \| `"bayer8"` \| `"bluenoise"` \| `"ignnoise"` |
 | `opacity-fades-specular` | Boolean | `"true"` | Whether specular highlights fade out as the material becomes transparent |
-| `opacity-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the opacity map |
+| `opacity-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the opacity map |
 | `roughness` | Number | - | Roughness of the material, from 0 (shiny) to 1 (rough). An alias for `gloss` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
-| `roughness-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the roughness map. An alias for `gloss-map` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
+| `roughness-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the roughness map. An alias for `gloss-map` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
 | `slope-depth-bias` | Number | `"0"` | Depth offset applied in proportion to a surface's slope, used to resolve z-fighting |
 | `specular` | Color | `"0 0 0"` | Specular color of the material. Applies only when the metalness workflow is disabled or `use-metalness-specular-color` is enabled |
 | `specularity-factor` | Number | `"1"` | Strength of specular reflections at direct angles, from 0 to 1. Applies only when `use-metalness-specular-color` is enabled |
@@ -37486,7 +37602,7 @@ Because the element's own transform belongs to the host, `position`, `rotation` 
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Container asset ID (must reference a `container` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Container asset ID (must reference a `container` type asset) |
 | `enabled` | Boolean | `"true"` | Enabled state of the model |
 | `name` | String | - | Name identifier for the host entity |
 | `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
@@ -37823,7 +37939,7 @@ The `<pc-particle-system>` tag is used to define a particle system.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | JSON asset ID defining the particle system configuration |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | JSON asset ID defining the particle system configuration |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 
 </div>
@@ -37913,7 +38029,7 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 | --- | --- | --- | --- |
 | `cast-shadows` | Boolean | `"true"` | Whether the component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `material` | String | - | `id` of a [`<pc-material>`](../pc-material) to render the primitive with. If omitted, a default material is used |
+| `material` | [Material ID](../attributes.md#asset-and-material-ids) | - | `id` of a [`<pc-material>`](../pc-material) to render the primitive with. If omitted, a default material is used |
 | `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
 | `type` | Enum | `"box"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
@@ -38363,19 +38479,19 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `bounce-amount` | Number | `"0.1"` | How far content bounces past its bounds when `scroll-mode="bounce"` (0 to 1) |
-| `content` | String | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
+| `content` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
 | `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
-| `horizontal-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
+| `horizontal-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
 | `horizontal-scrollbar-visibility` | Enum | `"when-required"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
 | `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
 | `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
 | `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
-| `vertical-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
+| `vertical-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
 | `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
-| `viewport` | String | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
+| `viewport` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
 
 </div>
 
@@ -38461,7 +38577,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `handle` | String | - | [Reference](../attributes.md#entity-references) (entity `name`, or document-wide `#` selector) to the [`<pc-entity>`](../pc-entity) used as the draggable handle |
+| `handle` | [Entity Reference](../attributes.md#entity-references) | - | The [`<pc-entity>`](../pc-entity) used as the draggable handle |
 | `handle-size` | Number | `"0.5"` | Size of the handle relative to the size of the track (0 to 1) |
 | `orientation` | Enum | `"horizontal"` | Orientation of the scrollbar: `"horizontal"` \| `"vertical"` |
 | `value` | Number | `"0"` | Current position of the scrollbar (0 to 1) |
@@ -38520,7 +38636,7 @@ The `<pc-sky>` tag is used to define a sky component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Texture asset ID (must reference a `texture` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Texture asset ID (must reference a `texture` type asset) |
 | `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range) |
 | `intensity` | Number | `"1"` | Sky brightness intensity |
 | `lighting` | Boolean | `"false"` | Whether the skybox is used as a light source |
@@ -38578,7 +38694,7 @@ The `<pc-sound-slot>` tag is used to define a sound.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Audio asset ID (must reference an `audio` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Audio asset ID (must reference an `audio` type asset) |
 | `auto-play` | Boolean | `"false"` | Whether the sound plays automatically |
 | `duration` | Number | - | Duration of the sound in seconds (omit to play the full clip) |
 | `loop` | Boolean | `"false"` | Whether the sound loops |
