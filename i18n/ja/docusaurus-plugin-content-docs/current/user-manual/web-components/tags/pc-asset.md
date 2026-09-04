@@ -20,7 +20,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 | `address-u` | Enum | `"repeat"` | `texture` および `textureatlas` アセットの場合: 0から1の範囲外の座標を水平方向にどうサンプリングするか — `"repeat"` \| `"clamp"` \| `"mirror"` |
 | `address-v` | Enum | `"repeat"` | `texture` および `textureatlas` アセットの場合: 0から1の範囲外の座標を垂直方向にどうサンプリングするか — `"repeat"` \| `"clamp"` \| `"mirror"` |
 | `anisotropy` | Number | `"1"` | `texture` および `textureatlas` アセットの場合: 異方性フィルタリングの最大レベル。浅い視野角での品質が向上します |
-| `atlas` | String | - | `sprite` アセットの場合: このスプライトが読み込む `textureatlas` `<pc-asset>` の `id`。アトラスはスプライトより前に宣言する必要があります |
+| `atlas` | Asset ID | - | `sprite` アセットの場合: このスプライトが読み込む `textureatlas` `<pc-asset>` の `id`。アトラスはスプライトより前に宣言する必要があります |
 | `data` | String | - | インラインのJSONアセットデータ。テクスチャアトラス（フレーム定義）やスプライトで使用されます |
 | `flip-y` | Boolean | `"false"` | `texture` および `textureatlas` アセットの場合: アップロード時に画像データを垂直方向に反転するかどうか |
 | `frame-keys` | String | - | `sprite` アセットの場合: スプライトを構成するアトラスのフレームキーを、スペースまたはカンマ区切りで指定したリスト |

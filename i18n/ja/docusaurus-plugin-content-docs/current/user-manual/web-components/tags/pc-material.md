@@ -28,7 +28,7 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 | `alpha-test` | Number | `"0"` | アルファテストの参照値。不透明度がこの値を下回るフラグメントは破棄されます |
 | `alpha-to-coverage` | Boolean | `"false"` | マルチサンプリングで透明度を解決するアルファトゥカバレッジを使用するかどうか |
 | `ao-intensity` | Number | `"1"` | アンビエントオクルージョンマップの強さ（0〜1） |
-| `ao-map` | String | - | アンビエントオクルージョンマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `ao-map` | Asset ID | - | アンビエントオクルージョンマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `blend-type` | Enum | `"none"` | マテリアルを背後のシーンとブレンドする方法: `"none"` \| `"normal"` \| `"additive"` \| `"additive-alpha"` \| `"premultiplied"` \| `"multiplicative"` \| `"multiplicative-2x"` \| `"screen"` \| `"min"` \| `"max"` \| `"subtractive"` |
 | `bumpiness` | Number | `"1"` | ノーマルマップの強さ。0はフラット、1はマップの効果を最大に適用します |
 | `cull` | Enum | `"back"` | メッシュのどの面をカリングするか: `"none"` \| `"back"` \| `"front"` \| `"front-and-back"` |
@@ -36,30 +36,30 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 | `depth-test` | Boolean | `"true"` | フラグメントを深度バッファに対してテストするかどうか |
 | `depth-write` | Boolean | `"true"` | フラグメントが深度バッファに書き込むかどうか |
 | `diffuse` | Color | `"1 1 1"` | マテリアルのディフューズカラー |
-| `diffuse-map` | String | - | ディフューズマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `diffuse-map` | Asset ID | - | ディフューズマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `emissive` | Color | `"0 0 0"` | マテリアルのエミッシブカラー |
 | `emissive-intensity` | Number | `"1"` | エミッシブカラーとマップに適用される乗数 |
-| `emissive-map` | String | - | エミッシブマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `emissive-map` | Asset ID | - | エミッシブマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `enable-ggx-specular` | Boolean | `"false"` | 異方性をサポートするGGXスペキュラモデルを使用するかどうか |
 | `fresnel-model` | Enum | `"schlick"` | 浅い角度でのスペキュラ反射に使用するフレネルモデル: `"none"` \| `"schlick"` |
 | `gloss` | Number | `"0.25"` | マテリアルの光沢度。0（ラフ）から1（光沢）まで。`roughness`も参照してください |
 | `gloss-invert` | Boolean | `"false"` | グロスの値とマップを反転し、ラフネスとして扱うかどうか。`roughness`または`roughness-map`を設定すると自動的に有効になります |
-| `gloss-map` | String | - | グロスマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
-| `height-map` | String | - | ハイトマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `gloss-map` | Asset ID | - | グロスマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `height-map` | Asset ID | - | ハイトマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `height-map-factor` | Number | `"1"` | ハイトマップによる視差効果の強さ |
 | `id` | String | - | 他のタグがこのマテリアルを参照するために使用する一意の識別子 |
 | `metalness` | Number | `"0"` | 表面の金属度。0（誘電体）から1（金属）まで |
-| `metalness-map` | String | - | メタルネスマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `metalness-map` | Asset ID | - | メタルネスマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `name` | String | `"Untitled"` | マテリアルの名前。参照用ではなくラベルです。他のタグは常に`id`でマテリアルを指定します |
-| `normal-map` | String | - | ノーマルマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `normal-map` | Asset ID | - | ノーマルマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `occlude-direct` | Boolean | `"false"` | アンビエントオクルージョンが直接光も減衰させるかどうか |
 | `occlude-specular` | Enum | `"ao"` | スペキュラ反射をオクルージョンする方法: `"none"` \| `"ao"` \| `"gloss-dependent"` |
 | `opacity` | Number | `"1"` | マテリアルの不透明度。0（透明）から1（不透明）まで。視覚的な効果を得るには`"none"`以外の`blend-type`が必要です |
 | `opacity-dither` | Enum | `"none"` | ブレンドなしで透明度を近似する不透明度のディザリング: `"none"` \| `"bayer8"` \| `"bluenoise"` \| `"ignnoise"` |
 | `opacity-fades-specular` | Boolean | `"true"` | マテリアルが透明になるにつれてスペキュラハイライトをフェードアウトさせるかどうか |
-| `opacity-map` | String | - | オパシティマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `opacity-map` | Asset ID | - | オパシティマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `roughness` | Number | - | マテリアルのラフネス。0（光沢）から1（ラフ）まで。`gloss`のエイリアスで、`gloss-invert`も設定するため、`gloss`系の属性と組み合わせないでください |
-| `roughness-map` | String | - | ラフネスマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id`。`gloss-map`のエイリアスで、`gloss-invert`も設定するため、`gloss`系の属性と組み合わせないでください |
+| `roughness-map` | Asset ID | - | ラフネスマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id`。`gloss-map`のエイリアスで、`gloss-invert`も設定するため、`gloss`系の属性と組み合わせないでください |
 | `slope-depth-bias` | Number | `"0"` | 表面の傾きに比例して適用される深度オフセット。Zファイティングの解決に使用します |
 | `specular` | Color | `"0 0 0"` | マテリアルのスペキュラカラー。メタルネスワークフローが無効か、`use-metalness-specular-color`が有効な場合にのみ適用されます |
 | `specularity-factor` | Number | `"1"` | 正面の角度でのスペキュラ反射の強さ（0〜1）。`use-metalness-specular-color`が有効な場合にのみ適用されます |

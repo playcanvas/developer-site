@@ -17,7 +17,7 @@ The `<pc-sky>` tag is used to define a sky component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Texture asset ID (must reference a `texture` type asset) |
+| `asset` | Asset ID | - | Texture asset ID (must reference a `texture` type asset) |
 | `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range) |
 | `intensity` | Number | `"1"` | Sky brightness intensity |
 | `lighting` | Boolean | `"false"` | Whether the skybox is used as a light source |

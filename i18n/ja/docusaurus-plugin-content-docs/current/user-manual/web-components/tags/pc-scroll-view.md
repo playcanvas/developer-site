@@ -20,19 +20,19 @@ description: "pc-scroll-view要素のリファレンス: コンテンツ、ス�
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `bounce-amount` | Number | `"0.1"` | `scroll-mode="bounce"` のとき、コンテンツが範囲を超えてバウンスする量（0〜1） |
-| `content` | String | - | ビューのスクロールに合わせて移動するコンテンツ [`<pc-entity>`](../pc-entity) への参照 |
+| `content` | Entity Reference | - | ビューのスクロールに合わせて移動するコンテンツ [`<pc-entity>`](../pc-entity) への参照 |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `friction` | Number | `"0.05"` | 投げられた後のコンテンツの動きやすさ（0 = なし、1 = 高い） |
 | `horizontal` | Boolean | `"true"` | 水平軸方向のスクロールを有効にするかどうか |
-| `horizontal-scrollbar` | String | - | 水平 [`<pc-scrollbar>`](../pc-scrollbar) を保持する [`<pc-entity>`](../pc-entity) への参照 |
+| `horizontal-scrollbar` | Entity Reference | - | 水平 [`<pc-scrollbar>`](../pc-scrollbar) を保持する [`<pc-entity>`](../pc-entity) への参照 |
 | `horizontal-scrollbar-visibility` | Enum | `"when-required"` | 水平スクロールバーを表示するタイミング: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | マウスホイールの感度を `x y` で指定（軸の値が0の場合、その軸のホイールスクロールは無効） |
 | `scroll-mode` | Enum | `"bounce"` | 範囲を超えてスクロールしたときの挙動: `"clamp"` \| `"bounce"` \| `"infinite"` |
 | `use-mouse-wheel` | Boolean | `"true"` | スクロールビューがマウスホイールに反応するかどうか |
 | `vertical` | Boolean | `"true"` | 垂直軸方向のスクロールを有効にするかどうか |
-| `vertical-scrollbar` | String | - | 垂直 [`<pc-scrollbar>`](../pc-scrollbar) を保持する [`<pc-entity>`](../pc-entity) への参照 |
+| `vertical-scrollbar` | Entity Reference | - | 垂直 [`<pc-scrollbar>`](../pc-scrollbar) を保持する [`<pc-entity>`](../pc-entity) への参照 |
 | `vertical-scrollbar-visibility` | Enum | `"when-required"` | 垂直スクロールバーを表示するタイミング: `"always"` \| `"when-required"` |
-| `viewport` | String | - | ビューポートとして使用される [`<pc-entity>`](../pc-entity) への参照。コンテンツをスクロールビューの範囲にクリップします |
+| `viewport` | Entity Reference | - | ビューポートとして使用される [`<pc-entity>`](../pc-entity) への参照。コンテンツをスクロールビューの範囲にクリップします |
 
 </div>
 

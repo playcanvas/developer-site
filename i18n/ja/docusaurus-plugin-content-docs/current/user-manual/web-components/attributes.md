@@ -1,6 +1,6 @@
 ---
 title: 属性
-description: "PlayCanvas Web Componentsの属性が値を解析する方法: デフォルト値の共通契約、Boolean、数値、列挙型、ベクトル、カラー、エンティティ参照。"
+description: "PlayCanvas Web Componentsの属性が値を解析する方法: デフォルト値の共通契約、タイプ列、Boolean、数値、列挙型、ベクトル、カラー、アセットIDとマテリアルID、エンティティ参照。"
 ---
 
 すべてのPlayCanvas Web ComponentはHTML属性を通じて設定します。すべての属性は同じ規約に従うため、一度覚えてしまえば、どのタグがどう動作するかを予測できます。
@@ -20,6 +20,21 @@ description: "PlayCanvas Web Componentsの属性が値を解析する方法: デ
 無効な値がエンジンに到達することはありません。代わりに、属性名と期待されるフォーマットを示すコンソール警告が表示されます。オーサリング中はコンソールを開いておけば、タイプミスがすぐに見つかります。
 
 [`<pc-node>`](tags/pc-node.md)は、上の表の中央の行に対する唯一の例外です。その属性は読み込まれたモデル内のノードに対するオーバーライドであるため、属性が存在しない場合は、エンジンのデフォルト値ではなく、そのモデルがオーサリングされた値が復元されます。
+
+## タイプ列 {#the-type-column}
+
+各属性テーブルの*タイプ*列は、値の書き方を示します。すべてのタイプはこのページで定義しています。
+
+| タイプ | 書き方 |
+| --- | --- |
+| Boolean | `"true"`、`"false"`、または属性名のみ — [Boolean](#booleans)を参照 |
+| Number | 任意の有限な数値 — [数値](#numbers)を参照 |
+| Enum | 決められた名前の集合のうちの1つ。属性の説明に一覧があります — [列挙型](#enums)を参照 |
+| Vector2、Vector3、Vector4 | スペース区切りの2つ、3つ、または4つの数値 — [ベクトル](#vectors)を参照 |
+| Color | CSSカラー名、16進コード、または3つか4つの数値 — [カラー](#colors)を参照 |
+| String | 自由なテキスト。名前、パス、JSONオブジェクトなど |
+| Asset ID、Material ID | [`<pc-asset>`](tags/pc-asset.md)または[`<pc-material>`](tags/pc-material.md)の`id` — [アセットIDとマテリアルID](#asset-and-material-ids)を参照 |
+| Entity Reference | エンティティの`name`、または`#`セレクター — [エンティティ参照](#entity-references)を参照 |
 
 ## Boolean {#booleans}
 
@@ -84,6 +99,19 @@ Invalid value 'bogus' for attribute 'scroll-mode'. Valid values: clamp, bounce, 
 <pc-camera clear-color="#f0f8ff"></pc-camera>
 <pc-light color="1 0.8 0.6"></pc-light>
 ```
+
+## アセットIDとマテリアルID {#asset-and-material-ids}
+
+リソースは[`<pc-app>`](tags/pc-app.md)の直接の子として一度だけ宣言し、付けた`id`で参照します。Asset ID属性は[`<pc-asset>`](tags/pc-asset.md)を、Material ID属性は[`<pc-material>`](tags/pc-material.md)を指定します。
+
+```html
+<pc-asset id="tiles" src="tiles.png"></pc-asset>
+<pc-material id="floor" diffuse-map="tiles"></pc-material>
+<!-- ... -->
+<pc-render type="plane" material="floor"></pc-render>
+```
+
+値は要素自身の`id`を、`#`を付けずにそのまま書きます。CSSセレクターではなく、アプリケーションのレジストリに対する検索だからです。受け付けるアセットタイプは各属性の説明に記載しています。宣言されたリソースのどれにも一致しない`id`は何の効果も持たず、要素はそれまでの状態を保ちます。[`<pc-model>`](tags/pc-model.md)はさらに、見つからなかったアセットの名前を含む警告をログに出力します。
 
 ## エンティティ参照 {#entity-references}
 

@@ -65,6 +65,13 @@ const ALIAS_DEFAULTS = {
 // index and in Programmatic Access, rather than on each page.
 const SHARED_EVENTS = ['ready'];
 
+// The vocabulary of the Type column, defined under "The Type Column" in attributes.md. Every
+// row must use one of these, in every locale, so a translated or misspelt token is reported.
+const TYPE_VOCABULARY = new Set([
+    'Boolean', 'Number', 'Enum', 'String', 'Color', 'Vector2', 'Vector3', 'Vector4',
+    'Asset ID', 'Material ID', 'Entity Reference'
+]);
+
 // Events a page documents by deferring to another page's table. The event name must still be
 // mentioned on the page; it just need not have a row of its own.
 const EVENTS_BY_REFERENCE = {
@@ -333,9 +340,12 @@ for (const locale of LOCALES) {
         // Rows the manifest knows nothing about are either read-once attributes on the allowlist or
         // a rename the page has not followed. Allowlist entries with no row are reported too.
         const readOnce = [...READ_ONCE['*'], ...(READ_ONCE[tag] ?? [])];
-        for (const name of rows.keys()) {
+        for (const [name, row] of rows) {
             if (!declaredNames.has(name) && !readOnce.includes(name)) {
                 report(locale.name, tag, `attribute table has \`${name}\`, which the manifest does not declare`);
+            }
+            if (!TYPE_VOCABULARY.has(row.type)) {
+                report(locale.name, tag, `\`${name}\` type "${row.type}" is not in the Type vocabulary (${[...TYPE_VOCABULARY].join(', ')})`);
             }
         }
         for (const name of READ_ONCE[tag] ?? []) {

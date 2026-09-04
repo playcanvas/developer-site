@@ -17,7 +17,7 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | String | - | テクスチャアセットID (`texture`型のアセットを参照する必要があります) |
+| `asset` | Asset ID | - | テクスチャアセットID (`texture`型のアセットを参照する必要があります) |
 | `center` | Vector3 | `"0 0.01 0"` | "X Y Z"値としてのスカイの中心 (0-1の範囲) |
 | `intensity` | Number | `"1"` | スカイの明るさの強度 |
 | `lighting` | Boolean | `"false"` | スカイボックスを光源として使用するかどうか |

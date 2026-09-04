@@ -17,7 +17,7 @@ description: "pc-sound-slot要素のリファレンス: 位置オーディオま
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | String | - | オーディオアセットID（`audio`型アセットを参照する必要があります） |
+| `asset` | Asset ID | - | オーディオアセットID（`audio`型アセットを参照する必要があります） |
 | `auto-play` | Boolean | `"false"` | サウンドが自動的に再生されるかどうか |
 | `duration` | Number | - | サウンドの再生時間（秒単位）（省略するとクリップ全体を再生します） |
 | `loop` | Boolean | `"false"` | サウンドがループするかどうか |
