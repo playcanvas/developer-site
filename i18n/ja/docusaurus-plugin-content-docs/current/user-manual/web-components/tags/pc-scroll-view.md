@@ -7,8 +7,8 @@ description: "pc-scroll-view要素のリファレンス: コンテンツ、ス�
 
 :::note[使用法]
 
-* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
-* ビューポート、コンテンツ、スクロールバーの各エンティティを、CSSセレクター、要素id、またはエンティティ名で参照します。
+* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
+* ビューポート、コンテンツ、スクロールバーの各エンティティを、エンティティの `name` またはドキュメント全体の `#` セレクターで参照します。[エンティティ参照](../attributes.md#entity-references)を参照してください。
 * コンテンツがスクロールビューの範囲にクリップされるように、ビューポート要素には `mask` 属性を設定してください。
 
 :::
@@ -20,19 +20,19 @@ description: "pc-scroll-view要素のリファレンス: コンテンツ、ス�
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `bounce-amount` | Number | `"0.1"` | `scroll-mode="bounce"` のとき、コンテンツが範囲を超えてバウンスする量（0〜1） |
-| `content` | String | - | ビューのスクロールに合わせて移動するコンテンツ [`<pc-entity>`](../pc-entity) への参照 |
+| `content` | [Entity Reference](../attributes.md#entity-references) | - | ビューのスクロールに合わせて移動するコンテンツ [`<pc-entity>`](../pc-entity) への参照 |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `friction` | Number | `"0.05"` | 投げられた後のコンテンツの動きやすさ（0 = なし、1 = 高い） |
 | `horizontal` | Boolean | `"true"` | 水平軸方向のスクロールを有効にするかどうか |
-| `horizontal-scrollbar` | String | - | 水平 [`<pc-scrollbar>`](../pc-scrollbar) を保持する [`<pc-entity>`](../pc-entity) への参照 |
+| `horizontal-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | 水平 [`<pc-scrollbar>`](../pc-scrollbar) を保持する [`<pc-entity>`](../pc-entity) への参照 |
 | `horizontal-scrollbar-visibility` | Enum | `"when-required"` | 水平スクロールバーを表示するタイミング: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | マウスホイールの感度を `x y` で指定（軸の値が0の場合、その軸のホイールスクロールは無効） |
 | `scroll-mode` | Enum | `"bounce"` | 範囲を超えてスクロールしたときの挙動: `"clamp"` \| `"bounce"` \| `"infinite"` |
 | `use-mouse-wheel` | Boolean | `"true"` | スクロールビューがマウスホイールに反応するかどうか |
 | `vertical` | Boolean | `"true"` | 垂直軸方向のスクロールを有効にするかどうか |
-| `vertical-scrollbar` | String | - | 垂直 [`<pc-scrollbar>`](../pc-scrollbar) を保持する [`<pc-entity>`](../pc-entity) への参照 |
+| `vertical-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | 垂直 [`<pc-scrollbar>`](../pc-scrollbar) を保持する [`<pc-entity>`](../pc-entity) への参照 |
 | `vertical-scrollbar-visibility` | Enum | `"when-required"` | 垂直スクロールバーを表示するタイミング: `"always"` \| `"when-required"` |
-| `viewport` | String | - | ビューポートとして使用される [`<pc-entity>`](../pc-entity) への参照。コンテンツをスクロールビューの範囲にクリップします |
+| `viewport` | [Entity Reference](../attributes.md#entity-references) | - | ビューポートとして使用される [`<pc-entity>`](../pc-entity) への参照。コンテンツをスクロールビューの範囲にクリップします |
 
 </div>
 
@@ -95,3 +95,13 @@ description: "pc-scroll-view要素のリファレンス: コンテンツ、ス�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html)を使用して、`<pc-scroll-view>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ScrollViewComponent](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-scrollbar>`](../pc-scrollbar) — ビューを操作し、その位置を反映します
+* [`<pc-element>`](../pc-element) — ビューポートとコンテンツは要素です。`mask`がコンテンツをクリップします
+* [`<pc-layout-group>`](../pc-layout-group) — コンテンツの子を配置します
+
+サンプル: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

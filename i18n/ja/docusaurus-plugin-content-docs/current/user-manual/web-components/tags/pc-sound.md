@@ -7,7 +7,7 @@ description: "pc-sound要素のリファレンス: pc-sound-slotスロットと�
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
 * 0..n個の[`<pc-sound-slot>`](../pc-sound-slot) 子を持つことができます。
 
 :::
@@ -77,3 +77,13 @@ description: "pc-sound要素のリファレンス: pc-sound-slotスロットと�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html)を使用して、`<pc-sound>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-sound-slot>`](../pc-sound-slot) — コンポーネントが再生する各クリップ
+* [`<pc-audio-listener>`](../pc-audio-listener) — 位置音源に必要です
+* [`<pc-asset>`](../pc-asset) — オーディオアセット
+
+サンプル: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html)、[Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)

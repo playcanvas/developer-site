@@ -3,7 +3,7 @@ title: 複数のレンダーターゲット
 description: 複数レンダーターゲットの設定、共有アタッチメントのルール、複数のカラーバッファへのシェーダー出力です。
 ---
 
-複数のレンダーターゲット機能を使用すると、複数のテクスチャに同時にレンダリングできます。このマニュアルページでは、複数のレンダーターゲットの実装、設定、および使用例について説明します。
+複数のレンダーターゲット機能を使用すると、複数のテクスチャに同時にレンダリングできます。このマニュアルページでは、複数のレンダーターゲットの実装、設定、および使用例について説明します。このページは [レンダーターゲット](./render-targets.md) で扱う概念を基礎としています。
 
 MRTは、PlayCanvasが動作するすべてのデバイス（WebGL2およびWebGPU）でサポートされています。現在のデバイスで使用できるカラーアタッチメントの数を検出するには、[`GraphicsDevice.maxColorAttachments`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxcolorattachments)を確認してください。通常、8つのアタッチメントがサポートされています。
 
@@ -12,6 +12,7 @@ MRTは、PlayCanvasが動作するすべてのデバイス（WebGL2およびWebG
 - 複数のレンダーターゲットのすべてのカラーアタッチメントは、同じ幅と高さを持ちます。
 - すべてのカラーアタッチメントは、[`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor)を使用して指定された同じ値にクリアされます。
 - すべてのカラーアタッチメントは、[`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html)を使用して指定された同じ書き込みマスクとアルファブレンドモードを使用します。
+- [デュアルソースブレンディング](/user-manual/graphics/advanced-rendering/dual-source-blending)にはカラーアタッチメントが 1 つだけ必要なため、MRT と組み合わせることはできません。
 
 ## MRTの使用方法
 
@@ -41,6 +42,7 @@ const renderTarget = new pc.RenderTarget({
     name: 'MRT',
     colorBuffers: [texture0, texture1, texture2],
     depth: true,
+    origin: pc.RENDERTARGET_ORIGIN_TOP,
     samples: 2
 });
 ```

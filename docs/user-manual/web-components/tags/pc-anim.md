@@ -7,7 +7,7 @@ The `<pc-anim>` tag plays animation clips over an entity hierarchy — a charact
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-node>`](../pc-node) or a [`<pc-model>`](../pc-model).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * It can have 0..n [`<pc-anim-clip>`](../pc-anim-clip) children, each declaring one named clip.
 
 :::
@@ -118,7 +118,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
             </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" shadow-distance="20" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
@@ -193,3 +193,11 @@ console.log(anim.clips); // ['walk', 'stalk']
 ```
 
 Anything this element does not expose is available on `component` — the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) — including the playhead (`baseLayer.activeStateCurrentTime`), the active clip's duration, and state graphs and blend trees for animation beyond a flat set of clips.
+
+## See Also
+
+* [`<pc-anim-clip>`](../pc-anim-clip) — declares each clip the component plays
+* [`<pc-model>`](../pc-model) — the usual host, whose GLB supplies the animation tracks
+* [`<pc-asset>`](../pc-asset) — supplies clips from a separate GLB or animclip JSON
+
+Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html).

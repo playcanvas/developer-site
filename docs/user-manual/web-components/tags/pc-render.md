@@ -7,7 +7,7 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -19,7 +19,7 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 | --- | --- | --- | --- |
 | `cast-shadows` | Boolean | `"true"` | Whether the component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `material` | String | - | `id` of a [`<pc-material>`](../pc-material) to render the primitive with. If omitted, a default material is used |
+| `material` | [Material ID](../attributes.md#asset-and-material-ids) | - | `id` of a [`<pc-material>`](../pc-material) to render the primitive with. If omitted, a default material is used |
 | `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
 | `type` | Enum | `"box"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
@@ -42,7 +42,7 @@ All six primitive shapes. Try changing any `type`, or add `material` once you ha
             <pc-camera clear-color="#2a2d36"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="box" position="-2.5 0.5 0">
             <pc-render type="box"></pc-render>
@@ -69,3 +69,14 @@ All six primitive shapes. Try changing any `type`, or add `material` once you ha
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-render>` elements using the [RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html).
+
+The `component` property is the engine [RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-material>`](../pc-material) — the material a primitive is drawn with
+* [`<pc-model>`](../pc-model) — renders a GLB instead of a primitive
+* [`<pc-light>`](../pc-light) — lights and shadows the primitive
+* [`<pc-collision>`](../pc-collision) — a matching physics shape
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html).

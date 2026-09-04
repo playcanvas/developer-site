@@ -1,13 +1,13 @@
 ---
 title: <pc-script>
-description: "Reference for the pc-script element: script component container grouping multiple pc-script-instance children and shared script settings."
+description: "Reference for the pc-script element: the script component that hosts pc-script-instance children and enables or disables them together."
 ---
 
 The `<pc-script>` tag is used to define a script component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * It can have 0..n [`<pc-script-instance>`](../pc-script-instance) children.
 
 :::
@@ -74,3 +74,13 @@ One script component holding two scripts — `rotate` spins the cube while `puls
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-script>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html).
+
+The `component` property is the engine [ScriptComponent](https://api.playcanvas.com/engine/classes/ScriptComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-script-instance>`](../pc-script-instance) — each script the component runs
+* [`<pc-asset>`](../pc-asset) — how script modules are loaded
+* [Adding Behavior with Scripts](../scripting.md) — writing scripts and declaring their attributes
+
+Examples: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html), [First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html) and [Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html).

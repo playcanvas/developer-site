@@ -82,6 +82,7 @@ Web Componentsは[GitHub](https://github.com/playcanvas/web-components)でMITラ
 - [属性](attributes.md) — すべてのタグに共通する値の規約です。
 - [スクリプトで動作を追加する](scripting.md) — エンティティにエンジンのスクリプトをアタッチして、動きやインタラクティブ性を加えます。
 - [プログラムによるアクセス](programmatic-access.md) — `whenReady` を使ってJavaScriptから実行中のアプリを操作します。
+- [テンプレートによる再利用可能なシーン](templates.md) — サブツリーを `<template>` に一度だけ宣言し、多数のライブインスタンスとしてクローンします。
 - [XR のサポート](xr.md) — シーンをVRやARに対応させます。
 - [タグリファレンス](./tags/index.md) — すべての要素とその属性の一覧です。
 - [サンプル](https://playcanvas.github.io/web-components/examples/) — ソースコード付きのライブデモ集です。

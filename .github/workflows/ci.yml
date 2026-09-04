@@ -68,3 +68,24 @@ jobs:
 
     - name: Lint
       run: npm run lint
+
+  # The Web Components tag reference is hand-written, so it can drift from the library without
+  # anything failing to build. This diffs every tag page (en and ja) against the library's
+  # Custom Elements Manifest at the version the live examples are pinned to: attribute names,
+  # types, defaults, enum values and events. The script needs only Node built-ins, so there is
+  # no install step.
+  web-components-manifest:
+    name: Web Components manifest
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v7
+
+    - name: Setup Node.js 22.x
+      uses: actions/setup-node@v7
+      with:
+        node-version: 22.x
+
+    - name: Check the tag reference against the manifest
+      run: npm run check:web-components

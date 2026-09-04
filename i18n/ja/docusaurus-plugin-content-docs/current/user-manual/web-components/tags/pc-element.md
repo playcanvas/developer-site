@@ -9,7 +9,7 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 
 :::note[使用法]
 
-* これは、[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* これは、[`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 
 :::
 
@@ -25,7 +25,7 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `anchor` | Vector4 | `"0 0 0 1"` | 要素のアンカーを親に対する `left bottom right top` で設定します。各値は 0〜1。`[0,0,0,0]` は親の左下に固定、`[1,1,1,1]` は右上に固定。左右または上下が異なる（スプリットアンカー）場合、その範囲に合わせて要素がリサイズされます（例: `[0,0,1,1]` は親全体を埋めます）。 |
+| `anchor` | Vector4 | `"0.5 0.5 0.5 0.5"` | 要素のアンカーを親に対する `left bottom right top` で設定します。各値は 0〜1。`[0,0,0,0]` は親の左下に固定、`[1,1,1,1]` は右上に固定。左右または上下が異なる（スプリットアンカー）場合、その範囲に合わせて要素がリサイズされます（例: `[0,0,1,1]` は親全体を埋めます）。 |
 | `auto-fit-height` | Boolean | `"false"` | フォントサイズを（`min-font-size` まで）縮小して、テキストを要素の高さに収めます。`auto-height="false"` が必要です。テキスト要素のみ |
 | `auto-fit-width` | Boolean | `"false"` | フォントサイズを（`min-font-size` まで）縮小して、テキストを要素の幅に収めます。`auto-width="false"` が必要です。テキスト要素のみ |
 | `auto-height` | Boolean | `"true"` | テキストコンテンツに合わせて高さを自動的に調整するかどうか。テキスト要素のみ |
@@ -33,7 +33,7 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 | `color` | Color | `"1 1 1 1"` | スペース区切りのRGBA値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としての色 |
 | `enable-markup` | Boolean | `"false"` | スタイル付きテキストのマークアップ処理を有効にします。色付きテキストの場合は `[color="#ff0000"]text[/color]` などのタグをサポートします。 |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `font-asset` | String | - | フォント [`<pc-asset>`](../pc-asset) のID (`font` 型アセットを参照する必要があります)。テキスト要素でのみ必須です |
+| `font-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | フォント [`<pc-asset>`](../pc-asset) のID (`font` 型アセットを参照する必要があります)。テキスト要素でのみ必須です |
 | `font-size` | Number | `"32"` | ピクセル単位のフォントサイズ |
 | `height` | Number | `"0"` | ピクセル単位の高さ (自動サイズ調整の場合は0) |
 | `line-height` | Number | `"32"` | ピクセル単位の行の高さ |
@@ -44,10 +44,10 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 | `opacity` | Number | `"1"` | 不透明度。0（透明）〜1（不透明） |
 | `pivot` | Vector2 | `"0.5 0.5"` | "X Y" 値としてのピボットポイント |
 | `pixels-per-unit` | Number | - | スプライトをレンダリングするときに使用される、ユニットあたりのピクセル数。イメージ要素のみ |
-| `sprite-asset` | String | - | レンダリングするスプライト [`<pc-asset>`](../pc-asset) のID。イメージ要素のみ |
+| `sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | レンダリングするスプライト [`<pc-asset>`](../pc-asset) のID。イメージ要素のみ |
 | `sprite-frame` | Number | `"0"` | レンダリングするスプライトのフレームインデックス。イメージ要素のみ |
 | `text` | String | - | 表示するテキストコンテンツ |
-| `texture-asset` | String | - | レンダリングするテクスチャ [`<pc-asset>`](../pc-asset) のID。イメージ要素のみ |
+| `texture-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | レンダリングするテクスチャ [`<pc-asset>`](../pc-asset) のID。イメージ要素のみ |
 | `type` | Enum | `"group"` | 要素の型: `"group"` \| `"image"` \| `"text"` |
 | `use-input` | Boolean | `"false"` | 要素がポインター入力を受け取るかどうか。[`<pc-button>`](../pc-button) とスクロールビューの操作に必要です |
 | `width` | Number | `"0"` | ピクセル単位の幅 (自動サイズ調整の場合は0) |
@@ -89,3 +89,14 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ElementComponentElement API](https://api.playcanvas.com/web-components/classes/ElementComponentElement.html)を使用して、`<pc-element>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-screen>`](../pc-screen) — すべての要素はスクリーンの下に置きます
+* [`<pc-button>`](../pc-button) — イメージ要素をインタラクティブにします
+* [`<pc-layout-group>`](../pc-layout-group) — 兄弟要素を自動的に配置します
+* [`<pc-scroll-view>`](../pc-scroll-view) — ビューポートの中でコンテンツ要素をスクロールします
+
+サンプル: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html)、[Text](https://playcanvas.github.io/web-components/examples/text.html)、[3D Text](https://playcanvas.github.io/web-components/examples/3d-text.html)、[UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)

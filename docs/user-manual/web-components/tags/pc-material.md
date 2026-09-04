@@ -28,7 +28,7 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `alpha-test` | Number | `"0"` | Alpha test reference value. Fragments with an opacity below this value are discarded |
 | `alpha-to-coverage` | Boolean | `"false"` | Whether to use alpha-to-coverage, which resolves transparency using multisampling |
 | `ao-intensity` | Number | `"1"` | Strength of the ambient occlusion map, from 0 to 1 |
-| `ao-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the ambient occlusion map |
+| `ao-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the ambient occlusion map |
 | `blend-type` | Enum | `"none"` | How the material is blended with the scene behind it: `"none"` \| `"normal"` \| `"additive"` \| `"additive-alpha"` \| `"premultiplied"` \| `"multiplicative"` \| `"multiplicative-2x"` \| `"screen"` \| `"min"` \| `"max"` \| `"subtractive"` |
 | `bumpiness` | Number | `"1"` | Strength of the normal map, where 0 is flat and 1 is the map's full effect |
 | `cull` | Enum | `"back"` | Which faces of a mesh are culled: `"none"` \| `"back"` \| `"front"` \| `"front-and-back"` |
@@ -36,30 +36,30 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `depth-test` | Boolean | `"true"` | Whether fragments are tested against the depth buffer |
 | `depth-write` | Boolean | `"true"` | Whether fragments write to the depth buffer |
 | `diffuse` | Color | `"1 1 1"` | Diffuse color of the material |
-| `diffuse-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the diffuse map |
+| `diffuse-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the diffuse map |
 | `emissive` | Color | `"0 0 0"` | Emissive color of the material |
 | `emissive-intensity` | Number | `"1"` | Multiplier applied to the emissive color and map |
-| `emissive-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the emissive map |
+| `emissive-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the emissive map |
 | `enable-ggx-specular` | Boolean | `"false"` | Whether to use the GGX specular model, which supports anisotropy |
 | `fresnel-model` | Enum | `"schlick"` | Fresnel model used for specular reflections at grazing angles: `"none"` \| `"schlick"` |
 | `gloss` | Number | `"0.25"` | Glossiness of the material, from 0 (rough) to 1 (shiny). See `roughness` |
 | `gloss-invert` | Boolean | `"false"` | Whether the gloss value and map are inverted, making the material treat them as roughness. Setting `roughness` or `roughness-map` enables this automatically |
-| `gloss-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the gloss map |
-| `height-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the height map |
+| `gloss-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the gloss map |
+| `height-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the height map |
 | `height-map-factor` | Number | `"1"` | Strength of the parallax effect driven by the height map |
 | `id` | String | - | Unique identifier used by other tags to reference this material |
 | `metalness` | Number | `"0"` | How metallic the surface is, from 0 (dielectric) to 1 (metal) |
-| `metalness-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the metalness map |
+| `metalness-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the metalness map |
 | `name` | String | `"Untitled"` | Name of the material. A label, not a reference: other tags always address the material by `id` |
-| `normal-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the normal map |
+| `normal-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the normal map |
 | `occlude-direct` | Boolean | `"false"` | Whether ambient occlusion also attenuates direct lighting |
 | `occlude-specular` | Enum | `"ao"` | How specular reflections are occluded: `"none"` \| `"ao"` \| `"gloss-dependent"` |
 | `opacity` | Number | `"1"` | Opacity of the material, from 0 (transparent) to 1 (opaque). Requires a `blend-type` other than `"none"` to have a visible effect |
 | `opacity-dither` | Enum | `"none"` | Dithering used to render opacity, which approximates transparency without blending: `"none"` \| `"bayer8"` \| `"bluenoise"` \| `"ignnoise"` |
 | `opacity-fades-specular` | Boolean | `"true"` | Whether specular highlights fade out as the material becomes transparent |
-| `opacity-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the opacity map |
+| `opacity-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the opacity map |
 | `roughness` | Number | - | Roughness of the material, from 0 (shiny) to 1 (rough). An alias for `gloss` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
-| `roughness-map` | String | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the roughness map. An alias for `gloss-map` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
+| `roughness-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the roughness map. An alias for `gloss-map` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
 | `slope-depth-bias` | Number | `"0"` | Depth offset applied in proportion to a surface's slope, used to resolve z-fighting |
 | `specular` | Color | `"0 0 0"` | Specular color of the material. Applies only when the metalness workflow is disabled or `use-metalness-specular-color` is enabled |
 | `specularity-factor` | Number | `"1"` | Strength of specular reflections at direct angles, from 0 to 1. Applies only when `use-metalness-specular-color` is enabled |
@@ -114,7 +114,7 @@ Four materials: a plain color, a metal, a transparent "glass" and a tiled textur
             <pc-camera clear-color="#1d1f2b" tonemap="aces"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="box" position="-2 0.5 0">
             <pc-render type="box" material="crimson"></pc-render>
@@ -139,3 +139,13 @@ The `name` attribute is worth setting on any material you expect to identify lat
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-material>` elements using the [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html).
+
+The `material` property is the engine [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) the element builds, and `MaterialElement.get(id)` looks one up by `id`. The element is synchronous, so neither waits on readiness.
+
+## See Also
+
+* [`<pc-render>`](../pc-render) — applies a material to a primitive
+* [`<pc-node>`](../pc-node) — overrides materials inside a loaded model
+* [`<pc-asset>`](../pc-asset) — the texture assets a material's maps reference
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).

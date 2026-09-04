@@ -7,7 +7,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * It is referenced by a [`<pc-scroll-view>`](../pc-scroll-view) via its `horizontal-scrollbar` or `vertical-scrollbar` attribute.
 * Its `handle` attribute references the [`<pc-entity>`](../pc-entity) used as the draggable handle, whose image element should have `use-input` set.
 
@@ -20,7 +20,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `handle` | String | - | Reference (CSS selector, element id, or entity name) to the [`<pc-entity>`](../pc-entity) used as the draggable handle |
+| `handle` | [Entity Reference](../attributes.md#entity-references) | - | The [`<pc-entity>`](../pc-entity) used as the draggable handle |
 | `handle-size` | Number | `"0.5"` | Size of the handle relative to the size of the track (0 to 1) |
 | `orientation` | Enum | `"horizontal"` | Orientation of the scrollbar: `"horizontal"` \| `"vertical"` |
 | `value` | Number | `"0"` | Current position of the scrollbar (0 to 1) |
@@ -58,3 +58,13 @@ A standalone vertical scrollbar — drag the orange handle. Try a different `han
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-scrollbar>` elements using the [ScrollbarComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollbarComponentElement.html).
+
+The `component` property is the engine [ScrollbarComponent](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scroll-view>`](../pc-scroll-view) — the view a scrollbar drives
+* [`<pc-element>`](../pc-element) — the track and handle are image elements
+* [`<pc-screen>`](../pc-screen) — the screen the scrollbar renders on
+
+Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

@@ -9,7 +9,7 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -19,7 +19,7 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
 | `cast-shadows` | Boolean | `"false"` | Whether the gsplat component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `lod-base-distance` | Number | `"5"` | Distance for the first LOD transition (LOD 0 to LOD 1). Splats closer than this use the highest-quality LOD. Minimum `0.1`. Only affects assets that contain LOD levels. |
@@ -54,3 +54,13 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-gsplat>` elements using the [GSplatComponentElement API](https://api.playcanvas.com/web-components/classes/GSplatComponentElement.html).
+
+The `component` property is the engine [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the splat file, declared as a `gsplat` asset
+* [`<pc-app>`](../pc-app) — the device settings recommended for splats
+* [Using Web Components](../../gaussian-splatting/building/your-first-app/web-components.md) — a first splat app, step by step
+
+Examples: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html).

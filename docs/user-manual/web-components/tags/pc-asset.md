@@ -20,7 +20,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `address-u` | Enum | `"repeat"` | For `texture` and `textureatlas` assets: how coordinates outside 0 to 1 sample horizontally — `"repeat"` \| `"clamp"` \| `"mirror"` |
 | `address-v` | Enum | `"repeat"` | For `texture` and `textureatlas` assets: how coordinates outside 0 to 1 sample vertically — `"repeat"` \| `"clamp"` \| `"mirror"` |
 | `anisotropy` | Number | `"1"` | For `texture` and `textureatlas` assets: maximum anisotropic filtering level, which improves quality at oblique viewing angles |
-| `atlas` | String | - | For `sprite` assets: the `id` of the `textureatlas` `<pc-asset>` this sprite reads from. The atlas must be declared before the sprite |
+| `atlas` | [Asset ID](../attributes.md#asset-and-material-ids) | - | For `sprite` assets: the `id` of the `textureatlas` `<pc-asset>` this sprite reads from. The atlas must be declared before the sprite |
 | `data` | String | - | Inline JSON asset data. Used by texture atlases (frame definitions) and sprites |
 | `flip-y` | Boolean | `"false"` | For `texture` and `textureatlas` assets: whether the image data is flipped vertically at upload |
 | `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
@@ -140,3 +140,14 @@ Sprites are defined by a texture atlas (which holds the frame definitions) and o
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-asset>` elements using the [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html).
+
+The `asset` property is the engine [Asset](https://api.playcanvas.com/engine/classes/Asset.html) the element registered — `null` until the element is ready — and `AssetElement.get(id)` looks one up by `id` without holding the element.
+
+## See Also
+
+* [`<pc-model>`](../pc-model) — instantiates a container asset
+* [`<pc-material>`](../pc-material) — takes texture assets for its maps
+* [`<pc-sound-slot>`](../pc-sound-slot) — plays an audio asset
+* [`<pc-script-instance>`](../pc-script-instance) — runs a script loaded as an asset
+
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html) and [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html).

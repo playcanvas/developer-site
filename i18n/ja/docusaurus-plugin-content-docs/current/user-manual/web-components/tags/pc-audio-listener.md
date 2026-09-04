@@ -7,7 +7,7 @@ description: "pc-audio-listener要素のリファレンス: 位置サウンド�
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 
 :::
 
@@ -36,7 +36,7 @@ description: "pc-audio-listener要素のリファレンス: 位置サウンド�
             <pc-audio-listener></pc-audio-listener>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="ground" scale="14 14 14">
             <pc-render type="plane" material="floor"></pc-render>
@@ -77,3 +77,13 @@ description: "pc-audio-listener要素のリファレンス: 位置サウンド�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [AudioListenerComponentElement API](https://api.playcanvas.com/web-components/classes/AudioListenerComponentElement.html)を使用して、`<pc-audio-listener>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[AudioListenerComponent](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-sound>`](../pc-sound) — リスナーが聴く位置音源
+* [`<pc-sound-slot>`](../pc-sound-slot) — それらの音源が再生するクリップ
+* [`<pc-camera>`](../pc-camera) — リスナーは通常カメラのエンティティに載せます
+
+サンプル: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)

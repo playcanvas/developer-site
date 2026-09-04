@@ -116,7 +116,7 @@ Number, boolean, vector and color values are inferred from the script's declared
 | Prefix    | Example | Description |
 | --------- | ------- | ----------- |
 | `asset:`  | `asset:arial-font` | References a `<pc-asset>` by its `id` attribute |
-| `entity:` | `entity:#player` | References a `<pc-entity>` by CSS selector, element `id` or entity `name` |
+| `entity:` | `entity:player` | References a `<pc-entity>`, `<pc-model>` or `<pc-node>` by entity `name`, or by document-wide `#` selector (`entity:#player`) |
 | `vec2:`   | `vec2:10 20` | A Vec2 from 2 space-separated numbers |
 | `vec3:`   | `vec3:10 20 30` | A Vec3 from 3 space-separated numbers |
 | `vec4:`   | `vec4:10 20 30 40` | A Vec4 from 4 space-separated numbers |
@@ -125,6 +125,8 @@ Number, boolean, vector and color values are inferred from the script's declared
 ```html
 <pc-script-instance name="myScript" font="asset:arial-font" target="entity:#player"></pc-script-instance>
 ```
+
+An `entity:` value follows the same [reference grammar](attributes.md#entity-references) as entity-valued attributes like [`<pc-scrollbar>`](tags/pc-scrollbar.md)'s `handle`: a bare value is an entity `name` — resolved against the nearest enclosing entity first, then outward, then the document — and never an element `id`, while a value beginning with `#` is a document-wide selector. So `entity:body` names an entity, and `entity:#body` references the element whose `id` is `body`. Inside a [cloned `<template>`](templates.md), names resolve within the clone first, which is what lets one template wire many independent instances.
 
 ### The `attributes` JSON Attribute
 

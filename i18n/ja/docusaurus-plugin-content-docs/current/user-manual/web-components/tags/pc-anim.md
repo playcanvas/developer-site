@@ -7,7 +7,7 @@ description: "pc-anim要素のリファレンス: エンティティ階層上で
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)、[`<pc-node>`](../pc-node)、または[`<pc-model>`](../pc-model)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 * 0..n個の[`<pc-anim-clip>`](../pc-anim-clip)を子として持つことができ、それぞれが1つの名前付きクリップを宣言します。
 
 :::
@@ -118,7 +118,7 @@ const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
             </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" shadow-distance="20" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
@@ -193,3 +193,11 @@ console.log(anim.clips); // ['walk', 'stalk']
 ```
 
 この要素が公開していない機能は`component`（エンジンの[AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html)）から利用できます。再生ヘッド（`baseLayer.activeStateCurrentTime`）、アクティブなクリップの長さ、そしてフラットなクリップ集合を超えるアニメーションのためのステートグラフやブレンドツリーなどです。
+
+## 関連項目 {#see-also}
+
+* [`<pc-anim-clip>`](../pc-anim-clip) — コンポーネントが再生する各クリップを宣言します
+* [`<pc-model>`](../pc-model) — 通常のホスト。そのGLBがアニメーショントラックを供給します
+* [`<pc-asset>`](../pc-asset) — 別のGLBやanimclip JSONからクリップを供給します
+
+サンプル: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)

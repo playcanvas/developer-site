@@ -24,9 +24,21 @@ The `<pc-script-instance>` tag is used to define a script.
 
 </div>
 
-In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
+In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. An `entity:` value is an entity `name` — write `entity:#id` to reference an element by `id`. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
 
 Declared values are the source of truth. When the host entity cycles — a [`<pc-node>`](../pc-node) rebinding after its model reloads, for instance — a surviving script instance has its declared state re-asserted, which deliberately snaps back any runtime mutation of a declared property. Keep state you change at runtime in properties the markup does not declare.
+
+## Events
+
+Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).
+
+| Event | Description |
+| --- | --- |
+| `scriptattributeschange` | Fired when the script attributes change. `detail.attributes` carries the new attributes object. |
+| `scriptenablechange` | Fired when `enabled` changes. `detail.enabled` carries the new state. |
+| `scriptnamechange` | Fired when the script is renamed by changing `name` on an element that already had one. `detail.oldName` and `detail.newName` carry the two names, and the parent [`<pc-script>`](../pc-script) responds by destroying the old script and creating the new one. |
+
+All three bubble. The parent [`<pc-script>`](../pc-script) listens for them to apply each change to the engine, and the same events let your own code observe script configuration changing — one listener on an ancestor covers every script instance beneath it.
 
 ## Example
 
@@ -71,3 +83,11 @@ A `rotate` script attached to a cube. Script classes usually load from a [`<pc-a
 You can programmatically create and manipulate `<pc-script-instance>` elements using the [ScriptInstanceElement API](https://api.playcanvas.com/web-components/classes/ScriptInstanceElement.html).
 
 The element becomes ready once its script instance has been created — await `whenReady('pc-script-instance')` or the element's `ready()` promise. The live `Script` instance is then available via the `script` property, and script attributes can be read and written as an object via the `scriptAttributes` property.
+
+## See Also
+
+* [`<pc-script>`](../pc-script) — the component that hosts instances
+* [`<pc-asset>`](../pc-asset) — loads the script's module
+* [Adding Behavior with Scripts](../scripting.md) — declaring and typing script attributes
+
+Examples: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html), [Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html) and [Annotations](https://playcanvas.github.io/web-components/examples/annotations.html).

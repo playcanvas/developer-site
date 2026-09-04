@@ -61,11 +61,21 @@ At device creation, the engine reads `navigator.gpu.wgslLanguageFeatures` and ad
   - **Preprocessor define:** `CAPS_PRIMITIVE_INDEX`
   - **Shader stages:** fragment
   - **Details:** Simplified API exposes `primitiveIndex` on `FragmentInput` and the global `pcPrimitiveIndex` when the device supports the feature
+- **`device.supportsDualSourceBlending`**
+  - **Engine injects:** `enable dual_source_blending;` for fragment shader variants whose blend state uses a secondary source factor
+  - **Preprocessor define:** `CAPS_DUAL_SOURCE_BLENDING`
+  - **Shader stages:** fragment
+  - **Details:** Provides a second fragment output for use as a blend factor; see [Dual-Source Blending](/user-manual/graphics/advanced-rendering/dual-source-blending)
 - **`device.supportsSubgroups`**
   - **Engine injects:** `enable subgroups;`
   - **Preprocessor define:** `CAPS_SUBGROUPS`
   - **Shader stages:** fragment and compute
   - **Details:** Subgroup builtins (`subgroupBroadcast`, `subgroupAdd`, …). `device.supportsSubgroupUniformity` does not add a separate `requires` or `enable` line; the driver uses it together with the subgroups feature
+- **`device.supportsSubgroupSizeControl`**
+  - **Engine injects:** *(none)* — `enable subgroups;` is already added when `device.supportsSubgroups` (a dependency of this feature); add `enable subgroup_size_control;` in your own WGSL when you use `@subgroup_size`
+  - **Preprocessor define:** `CAPS_SUBGROUP_SIZE_CONTROL`
+  - **Shader stages:** compute
+  - **Details:** Pin a compute entry point to a fixed subgroup size with the `@subgroup_size(N)` attribute, where `N` is a power of two within the `device.minSubgroupSize`…`device.maxSubgroupSize` range (both read-only). Without it, the driver picks the size and it is not known ahead of time. The engine only advertises the capability; the `enable` line is author-written so usage stays explicit. See the [WebGPU 151-152](https://developer.chrome.com/blog/new-in-webgpu-151-152#subgroup-size) overview
 - **`device.supportsSubgroupId`**
   - **Engine injects:** `requires subgroup_id;`
   - **Preprocessor define:** `CAPS_SUBGROUP_ID`
@@ -121,3 +131,25 @@ fn main(
     _ = wg;
 }
 ```
+
+Example (compute) — pin the subgroup size when `CAPS_SUBGROUP_SIZE_CONTROL` is set, otherwise let the driver choose:
+
+```wgsl
+#ifdef CAPS_SUBGROUP_SIZE_CONTROL
+enable subgroup_size_control; // enable subgroups; is already injected by the engine
+#endif
+
+@compute @workgroup_size(64)
+#ifdef CAPS_SUBGROUP_SIZE_CONTROL
+@subgroup_size(32)            // power of two within device.minSubgroupSize..maxSubgroupSize
+#endif
+fn main(@builtin(global_invocation_id) global_id: vec3u) {
+    _ = global_id;
+}
+```
+
+:::note
+
+All `enable …;` directives must precede every module-scope declaration. The engine prepends its own directives (such as `enable subgroups;`) ahead of your shader source, so place your `enable subgroup_size_control;` at the very top of the chunk — before any `const`, `struct`, `var`, or `fn`. The order among the `enable` directives themselves does not matter.
+
+:::

@@ -7,7 +7,7 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 
 :::
 
@@ -58,7 +58,7 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="ball" position="-1.5 4 0">
             <pc-render type="sphere"></pc-render>
@@ -87,3 +87,13 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 ## JavaScriptインターフェース {#javascript-interface}
 
 [CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html)を使用して、`<pc-collision>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — 衝突形状を物理に参加させます
+* [`<pc-joint>`](../pc-joint) — 衝突形状を持つ2つのボディを拘束します
+* [`<pc-wasm>`](../pc-wasm) — 物理に必要なAmmoモジュールをロードします
+
+サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)

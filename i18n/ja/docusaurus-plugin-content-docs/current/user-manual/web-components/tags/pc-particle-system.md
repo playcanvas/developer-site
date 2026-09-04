@@ -1,13 +1,13 @@
 ---
 title: <pc-particle-system>
-description: "pc-particle-system要素のリファレンス: マークアップでパーティクルエミッター、テクスチャ、ブレンディング、シミュレーションのパラメータを設定します。"
+description: "pc-particle-system要素のリファレンス: エミッター、テクスチャ、ブレンディング、シミュレーションのパラメータを定義するJSONアセットからパーティクルを放出します。"
 ---
 
 `<pc-particle-system>`タグは、パーティクルシステムを定義するために使用されます。
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 
 :::
 
@@ -17,7 +17,7 @@ description: "pc-particle-system要素のリファレンス: マークアップ�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | String | - | パーティクルシステム設定を定義するJSONアセットID |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | パーティクルシステム設定を定義するJSONアセットID |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 
 </div>
@@ -84,3 +84,12 @@ description: "pc-particle-system要素のリファレンス: マークアップ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html)を使用して、`<pc-particle-system>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-asset>`](../pc-asset) — JSON設定と、それが参照するテクスチャ
+* [`<pc-entity>`](../pc-entity) — エミッターの位置と向きを決めます
+
+サンプル: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html)

@@ -29,13 +29,13 @@ Because the element's own transform belongs to the host, `position`, `rotation` 
 
 ## Attributes
 
-`<pc-model>` takes every attribute of [`<pc-entity>`](../pc-entity), including the `onpointer*` inline handlers, and adds `asset`.
+`<pc-model>` takes every attribute of [`<pc-entity>`](../pc-entity), including the `onclick` and `onpointer*` inline handlers, and adds `asset`.
 
 <div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Container asset ID (must reference a `container` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Container asset ID (must reference a `container` type asset) |
 | `enabled` | Boolean | `"true"` | Enabled state of the model |
 | `name` | String | - | Name identifier for the host entity |
 | `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
@@ -56,10 +56,10 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
 
-The host is registered for picking, so `<pc-model>` also fires the five pointer events a [`<pc-entity>`](../pc-entity) does — `pointerdown`, `pointerenter`, `pointerleave`, `pointermove` and `pointerup` — with the same inline `onpointer*` attribute forms. A whole model becomes clickable without a wrapper or a [`<pc-node>`](../pc-node):
+The host is registered for picking, so `<pc-model>` also fires the six pointer events a [`<pc-entity>`](../pc-entity) does — `click`, `pointerdown`, `pointerenter`, `pointerleave`, `pointermove` and `pointerup` — with the same inline handler attributes. A whole model becomes clickable without a wrapper or a [`<pc-node>`](../pc-node):
 
 ```html
-<pc-model asset="t-rex" onpointerdown="this.setAttribute('scale', '2 2 2')"></pc-model>
+<pc-model asset="t-rex" onclick="this.setAttribute('scale', '2 2 2')"></pc-model>
 ```
 
 Pointer events resolve to the nearest *listening* element, so a model that listens for nothing does not swallow events from a listening ancestor.
@@ -113,7 +113,7 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](../pc-anim) nested 
             </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" shadow-distance="20" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
@@ -137,6 +137,8 @@ To reach inside the loaded hierarchy, nest a [`<pc-node>`](../pc-node) for each 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
+
+A `<pc-model>` also makes a natural root for a cloneable `<template>` prefab — the [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) example spawns its projectiles this way. See [Reusable Scenes with Templates](../templates.md).
 
 ### The Two Entities
 
@@ -196,3 +198,12 @@ Each line is a node: its name, then `[index]` when other nodes share that name, 
 The material `name` values are runtime labels read as they stand, which makes them a convenient handle but not a unique one: an unnamed glTF material is called `Untitled`, a primitive authored without a material carries the engine's shared `defaultGlbMaterial`, duplicates stay duplicated, and the name is `null` if a script cleared the assignment. The `index` is the unambiguous one. Both are what [`<pc-node>`'s `material-overrides`](../pc-node#overriding-materials) selects with, and a [`<pc-material>`](../pc-material) you swap in reports whatever its `name` attribute says — worth setting on any material you want to recognize here.
 
 The tree is a snapshot, computed afresh on each call: it does not track later changes to the hierarchy, and mutating it changes nothing. Being plain data, it survives `JSON.stringify`, so it is easy to log, diff or assert against in a test.
+
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the container asset a model instantiates
+* [`<pc-node>`](../pc-node) — reaches into the instantiated hierarchy
+* [`<pc-anim>`](../pc-anim) — plays the animations the GLB carries
+* [Loading Models](../loading-models.md) — loading a model and adjusting it from markup
+
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html).

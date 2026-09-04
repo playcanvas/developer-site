@@ -7,7 +7,7 @@ The `<pc-layout-group>` tag is used to define a layout group component, which au
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * Child entities are laid out automatically. Add a [`<pc-layout-child>`](../pc-layout-child) to a child to control how it is sized within the group.
 
 :::
@@ -67,4 +67,12 @@ A vertical list that lays out its rows automatically. Try `orientation="horizont
 
 You can programmatically create and manipulate `<pc-layout-group>` elements using the [LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html).
 
-The [UI Layout example](https://playcanvas.github.io/web-components/examples/ui-layout.html) builds a nested set of layout groups on a world-space screen.
+The `component` property is the engine [LayoutGroupComponent](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-layout-child>`](../pc-layout-child) — per-child sizing rules
+* [`<pc-element>`](../pc-element) — the elements being arranged
+* [`<pc-screen>`](../pc-screen) — the screen the layout lives on
+
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

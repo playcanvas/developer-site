@@ -3,7 +3,7 @@ title: Streamed SOG
 description: "Streamed SOG for large splat scenes: spatial tree layout, generating lod-meta data, examples, and performance guidance."
 ---
 
-Streamed SOG enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail (LOD) based on the camera's distance. This dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
+Streamed SOG enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail (LOD) for each region of the scene, within a global splat budget. This dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
 
 ## How It Works
 
@@ -11,8 +11,8 @@ Streamed SOG works by:
 
 1. Pre-generating multiple versions of your splat at different detail levels
 2. Organizing them into a spatial tree structure for efficient streaming
-3. Dynamically loading and unloading detail levels based on camera distance
-4. Rendering only the appropriate level of detail for each region of the scene
+3. Dynamically loading and unloading detail levels to fit a global splat budget, spending detail where it improves the image the most
+4. Rendering only the selected level of detail for each region of the scene
 
 This approach allows you to render massive splat scenes that would otherwise be impossible due to memory constraints.
 
@@ -43,18 +43,30 @@ Streaming is enabled simply by loading a Streamed SOG asset (`lod-meta.json`) on
 
 ## Controlling LOD Behavior
 
-You can control and fine-tune streaming behavior using the following APIs:
+### How LOD Is Chosen
 
-### Component-Level Control
+The engine picks one LOD level per region of the scene so that the total splat count fits the global [splat budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget), spending detail where it improves the image the most. It combines each region's projected size on screen with a measure of how much visual error each of its LOD levels would leave. These error metrics are read from `lod-meta.json` when present ([SplatTransform](/user-manual/splat-transform) 3.3 and newer writes them) and are derived automatically from the splat counts otherwise — no configuration is required either way. LOD selection also compensates for the camera's field of view automatically.
 
-Use [`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodBaseDistance) and [`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodMultiplier) to control LOD distance thresholds. Thresholds follow a geometric progression: `lodBaseDistance * lodMultiplier^i`:
+### LOD Mode
+
+[`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode) on `app.scene.gsplat` selects between two strategies:
 
 ```javascript
-entity.gsplat.lodBaseDistance = 10;  // distance for the first LOD transition
-entity.gsplat.lodMultiplier = 2;    // each successive threshold is 2x farther
+app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
 ```
 
-The multiplier defaults to 3 (and is clamped to a minimum of 1.2) — each LOD transition happens at three times the previous distance. The system also compensates for camera FOV automatically.
+- `GSPLAT_LODMODE_ERROR` (default): the budget goes where it removes the most visual error per splat.
+- `GSPLAT_LODMODE_DISTANCE`: error metadata is ignored and detail is ordered by camera distance alone, stepping down in concentric bands around the camera with the band edges adapting to the budget. Useful when a capture's error data does not match its visual importance.
+
+### LOD Falloff
+
+[`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff) on the gsplat component controls how quickly that splat's detail drops with distance from the camera, in either mode:
+
+```javascript
+entity.gsplat.lodFalloff = 2; // more detail near the camera, less in the distance
+```
+
+The value ranges from 0 to 8 and defaults to 1, which gives a balanced falloff. Higher values concentrate detail near the camera at the cost of the far field, while values towards 0 spread it evenly across the scene regardless of the view. This primarily redistributes the detail the splat receives from the budget between its near and far field, though it can also shift how the budget divides between splats.
 
 ### Scene-Level Control
 

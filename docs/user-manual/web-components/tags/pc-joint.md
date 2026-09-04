@@ -7,7 +7,7 @@ The `<pc-joint>` tag constrains two rigid bodies to each other — a hinged door
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) or a [`<pc-node>`](../pc-node).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * Both constrained entities need a [`<pc-rigid-body>`](../pc-rigid-body), and physics needs the `Ammo` module — see [`<pc-wasm>`](../pc-wasm).
 
 :::
@@ -60,8 +60,8 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 | `enable-collision` | Boolean | `"false"` | Whether the two constrained bodies collide with each other |
 | `enable-limits` | Boolean | `"false"` | Whether the joint's limits are enforced. Limit attributes do nothing until this is set |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `entity-a` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the first body. Needs a [`<pc-rigid-body>`](../pc-rigid-body) |
-| `entity-b` | String | - | Reference to the [`<pc-entity>`](../pc-entity) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
+| `entity-a` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) providing the first body. Needs a [`<pc-rigid-body>`](../pc-rigid-body) |
+| `entity-b` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
 | `limits` | Vector2 | `"-45 45"` | Rotation or travel limits about the primary axis, as "min max" — degrees for `hinge`, units for `slider` |
 | `linear-damping` | Vector3 | `"1 1 1"` | Spring damping per linear axis. Used by `6dof` |
 | `linear-equilibrium` | Vector3 | `"0 0 0"` | Rest point of the linear springs. Used by `6dof` |
@@ -111,7 +111,7 @@ For a `6dof` joint, each axis starts `"locked"`, so a joint with nothing else se
 
 ## Events
 
-Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+Listen to this event using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).
 
 | Event | Description |
 | --- | --- |
@@ -176,6 +176,8 @@ The [Physics Joints example](https://playcanvas.github.io/web-components/example
 
 You can programmatically create and manipulate `<pc-joint>` elements using the [JointComponentElement API](https://api.playcanvas.com/web-components/classes/JointComponentElement.html).
 
+The `component` property is the engine [JointComponent](https://api.playcanvas.com/engine/classes/JointComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
 `entity-a` and `entity-b` resolve when they are set, so an entity created later is not picked up on its own — set the attribute again once it exists:
 
 ```javascript
@@ -183,4 +185,12 @@ const joint = document.querySelector('pc-joint');
 joint.entityA = '#link-3'; // re-resolves now
 ```
 
-Both accept the same reference forms as other entity-valued attributes — a CSS selector, an element `id`, or an entity `name`. See [Attributes](../attributes.md#entity-references).
+Both accept the same reference forms as other entity-valued attributes — an entity `name` (resolved against the nearest enclosing entity first), or a document-wide `#` selector. See [Entity References](../attributes.md#entity-references).
+
+## See Also
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — both constrained entities need one
+* [`<pc-collision>`](../pc-collision) — gives a body its shape
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+
+Examples: [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html).

@@ -7,7 +7,7 @@ The `<pc-audio-listener>` tag is used to define a listener component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -36,7 +36,7 @@ The listener sits on the camera, and a sphere emitting positional footsteps circ
             <pc-audio-listener></pc-audio-listener>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="ground" scale="14 14 14">
             <pc-render type="plane" material="floor"></pc-render>
@@ -77,3 +77,13 @@ The listener sits on the camera, and a sphere emitting positional footsteps circ
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-audio-listener>` elements using the [AudioListenerComponentElement API](https://api.playcanvas.com/web-components/classes/AudioListenerComponentElement.html).
+
+The `component` property is the engine [AudioListenerComponent](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-sound>`](../pc-sound) — the positional sound sources the listener hears
+* [`<pc-sound-slot>`](../pc-sound-slot) — the clips those sources play
+* [`<pc-camera>`](../pc-camera) — the listener usually rides on the camera entity
+
+Examples: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html).

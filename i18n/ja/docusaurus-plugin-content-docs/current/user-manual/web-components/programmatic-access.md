@@ -41,6 +41,8 @@ PlayCanvas Web Components を使えば、HTML だけでリッチな 3D シーン
 
 要素が初期化を完了できない場合、Promiseは決して解決されません。たとえば、`<pc-script>` の直接の子ではない `<pc-script-instance>`、`name` を解決できない [`<pc-node>`](./tags/pc-node.md)、`name` のない [`<pc-wasm>`](./tags/pc-wasm.md)、グラフィックスデバイスを作成できなかった [`<pc-app>`](./tags/pc-app.md) などです。最後のケースでフォールバックUIを表示するには、要素の [`error` イベント](./tags/pc-app.md#events)をリッスンしてください。例外は、上に `<pc-entity>`・`<pc-model>`・`<pc-node>` のいずれもないコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。いずれの場合も、その要素は何が問題だったかをコンソールに報告します。
 
+初期化が完了する前にドキュメントから*削除された*要素も、決してready状態にはなりません — 何も問題は起きていないので何も報告されませんが、その `ready()` に対するawaitは完了しません。破棄が初期化と競合しうる場合（[クローンされたテンプレート](templates.md)ではよくあることです）は、awaitを自分自身の破棄シグナルと競争させてください — [インスタンスを削除する](templates.md#removing-an-instance)を参照してください。
+
 :::
 
 ## エンジンオブジェクトへのアクセス {#reaching-engine-objects}
@@ -96,6 +98,8 @@ const { app } = await whenReady(appElement);
 ```
 
 (内部的には、非同期に初期化されるすべての要素が、要素自身とともに解決される Promise を返す `ready()` メソッドを持っており、`whenReady` はその便利なラッパーです。)
+
+これは `<template>` からクローンしたインスタンスに対するパターンでもあります: クローンした要素を保持し、これから使う要素だけを待機してください。[テンプレートによる再利用可能なシーン](templates.md)を参照してください。
 
 ## `ready` イベント {#the-ready-event}
 

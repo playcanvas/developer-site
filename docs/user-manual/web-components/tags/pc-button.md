@@ -7,7 +7,7 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * The entity must also have a [`<pc-element>`](../pc-element) (typically `type="image"`) with the `use-input` attribute set, so the button can receive pointer input.
 
 :::
@@ -22,14 +22,14 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `fade-duration` | Number | `"0"` | Duration in milliseconds over which tint transitions are applied |
 | `hit-padding` | Vector4 | `"0 0 0 0"` | Expands the button's hit area as `left bottom right top` |
-| `hover-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown on hover (sprite transition mode) |
+| `hover-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown on hover (sprite transition mode) |
 | `hover-sprite-frame` | Number | `"0"` | Frame of the hover sprite |
 | `hover-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity on hover (tint transition mode) |
-| `image` | String | - | Reference (CSS selector, element id, or entity name) to the [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](../pc-model) that is the model's host, so name a UI entity explicitly there |
-| `inactive-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown when inactive (sprite transition mode) |
+| `image` | [Entity Reference](../attributes.md#entity-references) | - | The [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](../pc-model) that is the model's host, so name a UI entity explicitly there |
+| `inactive-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown when inactive (sprite transition mode) |
 | `inactive-sprite-frame` | Number | `"0"` | Frame of the inactive sprite |
 | `inactive-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when inactive (tint transition mode) |
-| `pressed-sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) id shown when pressed (sprite transition mode) |
+| `pressed-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown when pressed (sprite transition mode) |
 | `pressed-sprite-frame` | Number | `"0"` | Frame of the pressed sprite |
 | `pressed-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when pressed (tint transition mode) |
 | `transition-mode` | Enum | `"tint"` | How the button reacts to hover/press: `"tint"` \| `"sprite"` |
@@ -89,3 +89,13 @@ button.component.on('click', () => {
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-button>` elements using the [ButtonComponentElement API](https://api.playcanvas.com/web-components/classes/ButtonComponentElement.html).
+
+The `component` property is the engine [ButtonComponent](https://api.playcanvas.com/engine/classes/ButtonComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-element>`](../pc-element) — the image element a button needs for input and transitions
+* [`<pc-screen>`](../pc-screen) — the screen the button's element hierarchy lives on
+* [`<pc-entity>`](../pc-entity) — click and pointer events on 3D objects, without a screen
+
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

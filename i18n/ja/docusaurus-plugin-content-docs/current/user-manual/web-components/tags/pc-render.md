@@ -7,7 +7,7 @@ description: "pc-render要素のリファレンス: プリミティブ形状（�
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
 
 :::
 
@@ -19,9 +19,9 @@ description: "pc-render要素のリファレンス: プリミティブ形状（�
 | --- | --- | --- | --- |
 | `cast-shadows` | Boolean | `"true"` | コンポーネントが影を落とすかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `material` | String | - | プリミティブのレンダリングに使用する [`<pc-material>`](../pc-material) の `id`。省略した場合はデフォルトのマテリアルが使用されます |
+| `material` | [Material ID](../attributes.md#asset-and-material-ids) | - | プリミティブのレンダリングに使用する [`<pc-material>`](../pc-material) の `id`。省略した場合はデフォルトのマテリアルが使用されます |
 | `receive-shadows` | Boolean | `"true"` | コンポーネントが影を受け取るかどうか |
-| `type` | 列挙型 | `"box"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
+| `type` | Enum | `"box"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
 </div>
 
@@ -42,7 +42,7 @@ glTF/GLBファイルから3Dモデルをレンダリングするには、代わ�
             <pc-camera clear-color="#2a2d36"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="box" position="-2.5 0.5 0">
             <pc-render type="box"></pc-render>
@@ -69,3 +69,14 @@ glTF/GLBファイルから3Dモデルをレンダリングするには、代わ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html)を使用して、`<pc-render>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-material>`](../pc-material) — プリミティブを描くマテリアル
+* [`<pc-model>`](../pc-model) — プリミティブの代わりにGLBをレンダリングします
+* [`<pc-light>`](../pc-light) — プリミティブに光と影を当てます
+* [`<pc-collision>`](../pc-collision) — 対応する物理形状
+
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)、[Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html)

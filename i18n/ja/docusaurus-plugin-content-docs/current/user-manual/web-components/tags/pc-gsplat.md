@@ -9,7 +9,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 :::note[使用法]
 
-* それは、[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* それは、[`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 
 :::
 
@@ -19,7 +19,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | String | - | Gaussian splatアセットID (`gsplat`タイプのアセットを参照する必要があります) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Gaussian splatアセットID (`gsplat`タイプのアセットを参照する必要があります) |
 | `cast-shadows` | Boolean | `"false"` | gsplatコンポーネントが影を落とすかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `lod-base-distance` | Number | `"5"` | 最初のLOD遷移 (LOD 0 から LOD 1) の距離。これより近いスプラットは最高品質のLODを使用します。最小値は`0.1`。LODレベルを含むアセットにのみ影響します。 |
@@ -54,3 +54,13 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [GSplatComponentElement API](https://api.playcanvas.com/web-components/classes/GSplatComponentElement.html)を使用して、`<pc-gsplat>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-asset>`](../pc-asset) — `gsplat`アセットとして宣言するスプラットファイル
+* [`<pc-app>`](../pc-app) — スプラットに推奨するデバイス設定
+* [Webコンポーネントの使用](../../gaussian-splatting/building/your-first-app/web-components.md) — はじめてのスプラットアプリを順を追って作る
+
+サンプル: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html)、[Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html)、[Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html)、[Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html)

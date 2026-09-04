@@ -19,14 +19,12 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
 **囲んでいるモデル。** `asset`がない場合、トラックは親の[`<pc-anim>`](../pc-anim)を囲む[`<pc-model>`](../pc-model)のコンテナから取得されます。これが通常のケースです。複数のアニメーションを含めてエクスポートされたGLBの各アニメーションを、クリップとして宣言します。
 
 ```html
-<pc-entity name="hero">
-    <pc-model asset="hero-glb">
-        <pc-anim>
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="run"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="hero" asset="hero-glb">
+    <pc-anim>
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="run"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 **名前を指定したアセット。** `asset`で[`<pc-asset>`](../pc-asset)を指すと、トラックを別のファイルから取得できます。共有のクリップライブラリを、それを含めずにエクスポートされたモデルに適用する方法です。使用できるアセットタイプは3つです。`container`（GLB）、`animation`のGLB、`animclip`のJSONです。
@@ -35,14 +33,12 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
 <pc-asset id="hero-glb" type="container" src="hero.glb"></pc-asset>
 <pc-asset id="wave" type="container" src="clips/wave.glb"></pc-asset>
 
-<pc-entity name="hero">
-    <pc-model asset="hero-glb">
-        <pc-anim>
-            <pc-anim-clip name="idle"></pc-anim-clip>
-            <pc-anim-clip name="wave" asset="wave"></pc-anim-clip>
-        </pc-anim>
-    </pc-model>
-</pc-entity>
+<pc-model name="hero" asset="hero-glb">
+    <pc-anim>
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="wave" asset="wave"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
 ```
 
 上のスニペットのように、2つを混在させても問題ありません。`asset`のないクリップはモデルから、`asset`のあるクリップはそれぞれのファイルから取得されます。
@@ -60,7 +56,7 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
 
 | 属性 | 型 | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | String | - | トラックを供給する[`<pc-asset>`](../pc-asset)のID。`container`、`animation`のGLB、`animclip`のJSONのいずれかです。空の場合は囲んでいる[`<pc-model>`](../pc-model)から取得します |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | トラックを供給する[`<pc-asset>`](../pc-asset)のID。`container`、`animation`のGLB、`animclip`のJSONのいずれかです。空の場合は囲んでいる[`<pc-model>`](../pc-model)から取得します |
 | `loop` | Boolean | `"true"` | クリップをループさせるかどうか。ループしないクリップは終了時に最後のポーズを保持します |
 | `name` | String | - | クリップの名前であり、供給元から探すトラックの名前。コンポーネント内で一意で、`.`を含められません |
 | `speed` | Number | `"1"` | このクリップの再生速度。負の値で逆再生します |
@@ -92,7 +88,7 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
             </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" shadow-distance="20" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
@@ -151,3 +147,10 @@ document.querySelector('pc-anim').appendChild(clip);
 await clip.ready();
 document.querySelector('pc-anim').transition('wave');
 ```
+
+## 関連項目 {#see-also}
+
+* [`<pc-anim>`](../pc-anim) — クリップが属するコンポーネント
+* [`<pc-asset>`](../pc-asset) — クリップのトラックの元になるコンテナまたはアニメーションアセット
+
+サンプル: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)

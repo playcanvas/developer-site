@@ -7,7 +7,7 @@ description: "pc-button要素のリファレンス: ホバー、押下、非ア�
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 * ボタンが入力を受け取れるように、エンティティには `use-input` 属性を設定した [`<pc-element>`](../pc-element)（通常は `type="image"`）も必要です。
 
 :::
@@ -22,14 +22,14 @@ description: "pc-button要素のリファレンス: ホバー、押下、非ア�
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `fade-duration` | Number | `"0"` | ティント遷移を適用する時間（ミリ秒） |
 | `hit-padding` | Vector4 | `"0 0 0 0"` | ボタンのヒット領域を `left bottom right top` で拡張します |
-| `hover-sprite-asset` | String | - | ホバー時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
+| `hover-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | ホバー時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
 | `hover-sprite-frame` | Number | `"0"` | ホバースプライトのフレーム |
 | `hover-tint` | Color | `"1 1 1 1"` | ホバー時にイメージエンティティに適用されるティント（ティント遷移モード） |
-| `image` | String | - | 視覚的な遷移を表示するイメージ要素を持つ [`<pc-entity>`](../pc-entity) への参照（CSSセレクター、要素id、またはエンティティ名）。デフォルトはボタン自身のエンティティです。[`<pc-model>`](../pc-model)の内側ではそれがモデルのホストになるため、その場合はUIエンティティを明示的に指定してください |
-| `inactive-sprite-asset` | String | - | 非アクティブ時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
+| `image` | [Entity Reference](../attributes.md#entity-references) | - | 視覚的な遷移を表示するイメージ要素を持つ [`<pc-entity>`](../pc-entity)。デフォルトはボタン自身のエンティティです。[`<pc-model>`](../pc-model)の内側ではそれがモデルのホストになるため、その場合はUIエンティティを明示的に指定してください |
+| `inactive-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | 非アクティブ時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
 | `inactive-sprite-frame` | Number | `"0"` | 非アクティブスプライトのフレーム |
 | `inactive-tint` | Color | `"1 1 1 1"` | 非アクティブ時にイメージエンティティに適用されるティント（ティント遷移モード） |
-| `pressed-sprite-asset` | String | - | 押下時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
+| `pressed-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | 押下時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
 | `pressed-sprite-frame` | Number | `"0"` | 押下スプライトのフレーム |
 | `pressed-tint` | Color | `"1 1 1 1"` | 押下時にイメージエンティティに適用されるティント（ティント遷移モード） |
 | `transition-mode` | Enum | `"tint"` | ボタンがホバー/押下に反応する方法: `"tint"` \| `"sprite"` |
@@ -89,3 +89,13 @@ button.component.on('click', () => {
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ButtonComponentElement API](https://api.playcanvas.com/web-components/classes/ButtonComponentElement.html)を使用して、`<pc-button>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ButtonComponent](https://api.playcanvas.com/engine/classes/ButtonComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-element>`](../pc-element) — ボタンが入力と遷移に必要とするイメージ要素
+* [`<pc-screen>`](../pc-screen) — ボタンの要素階層が載るスクリーン
+* [`<pc-entity>`](../pc-entity) — スクリーンを使わずに3Dオブジェクトのクリックやポインターイベントを扱う
+
+サンプル: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

@@ -511,10 +511,11 @@ const sidebars = {
         'user-manual/web-components/attributes',
         'user-manual/web-components/scripting',
         'user-manual/web-components/programmatic-access',
+        'user-manual/web-components/templates',
         'user-manual/web-components/xr',
         {
           type: 'category',
-          label: 'Tags',
+          label: 'Tag Reference',
           link: {
             type: 'doc',
             id: 'user-manual/web-components/tags/index',
@@ -797,9 +798,11 @@ const sidebars = {
           },
           items: [
             'user-manual/graphics/physical-rendering/physical-materials',
+            'user-manual/graphics/physical-rendering/parallax-mapping',
             'user-manual/graphics/physical-rendering/image-based-lighting',
           ],
         },
+        'user-manual/graphics/transparency',
         {
           type: 'category',
           label: 'Linear Workflow',
@@ -871,6 +874,8 @@ const sidebars = {
         },
         'user-manual/graphics/particles',
         'user-manual/graphics/layers/index',
+        'user-manual/graphics/wide-lines',
+        'user-manual/graphics/debug-drawing',
         {
           type: 'category',
           label: 'Advanced Rendering',
@@ -882,8 +887,11 @@ const sidebars = {
             'user-manual/graphics/advanced-rendering/batching',
             'user-manual/graphics/advanced-rendering/hardware-instancing',
             'user-manual/graphics/advanced-rendering/multi-draw',
+            'user-manual/graphics/advanced-rendering/render-targets',
             'user-manual/graphics/advanced-rendering/multiple-render-targets',
+            'user-manual/graphics/advanced-rendering/dual-source-blending',
             'user-manual/graphics/advanced-rendering/indirect-drawing',
+            'user-manual/graphics/advanced-rendering/transform-feedback',
             'user-manual/graphics/advanced-rendering/html-in-canvas',
           ],
         },
@@ -968,6 +976,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/building/picking',
             'user-manual/gaussian-splatting/building/shadows',
             'user-manual/gaussian-splatting/building/fisheye',
+            'user-manual/gaussian-splatting/building/tonemapping',
             {
               type: 'category',
               label: 'Custom Shaders',

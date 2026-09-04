@@ -29,13 +29,13 @@ description: "pc-model要素のリファレンス: GLBコンテナアセット�
 
 ## 属性 {#attributes}
 
-`<pc-model>`は[`<pc-entity>`](../pc-entity)のすべての属性（インラインの`onpointer*`ハンドラを含む）を取り、さらに`asset`を加えます。
+`<pc-model>`は[`<pc-entity>`](../pc-entity)のすべての属性（インラインの`onclick`・`onpointer*`ハンドラを含む）を取り、さらに`asset`を加えます。
 
 <div className="attribute-table">
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | String | - | コンテナアセットID (`container`型のアセットを参照する必要があります) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | コンテナアセットID (`container`型のアセットを参照する必要があります) |
 | `enabled` | Boolean | `"true"` | モデルの有効状態 |
 | `name` | String | - | ホストエンティティの名前 |
 | `position` | Vector3 | `"0 0 0"` | ローカル空間の位置を "X Y Z" で指定 |
@@ -56,10 +56,10 @@ description: "pc-model要素のリファレンス: GLBコンテナアセット�
 
 どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、ページ上のすべてのモデルを監視するには、祖先要素でキャプチャフェーズのリスナーを使用します。
 
-ホストはピッキング対象として登録されるため、`<pc-model>`も[`<pc-entity>`](../pc-entity)と同じ5つのポインタイベント（`pointerdown`・`pointerenter`・`pointerleave`・`pointermove`・`pointerup`）を発生させ、インラインの`onpointer*`属性形式も同じように使えます。ラッパーや[`<pc-node>`](../pc-node)なしで、モデル全体がクリック可能になります。
+ホストはピッキング対象として登録されるため、`<pc-model>`も[`<pc-entity>`](../pc-entity)と同じ6つのポインタイベント（`click`・`pointerdown`・`pointerenter`・`pointerleave`・`pointermove`・`pointerup`）を発生させ、インラインのハンドラ属性も同じように使えます。ラッパーや[`<pc-node>`](../pc-node)なしで、モデル全体がクリック可能になります。
 
 ```html
-<pc-model asset="t-rex" onpointerdown="this.setAttribute('scale', '2 2 2')"></pc-model>
+<pc-model asset="t-rex" onclick="this.setAttribute('scale', '2 2 2')"></pc-model>
 ```
 
 ポインタイベントは最も近い*リッスンしている*要素に解決されるため、何もリッスンしていないモデルが、リッスンしている祖先要素のイベントを飲み込むことはありません。
@@ -113,7 +113,7 @@ console.log(anim.clips); // ['Walk', 'Idle']
             </pc-script>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows shadow-distance="20" intensity="1.5"></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" shadow-distance="20" intensity="1.5"></pc-light>
         </pc-entity>
         <pc-entity name="ground" scale="30 30 30">
             <pc-render type="plane" material="floor"></pc-render>
@@ -137,6 +137,8 @@ console.log(anim.clips); // ['Walk', 'Idle']
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html)を使用して、`<pc-model>`要素をプログラムで作成および操作できます。
+
+`<pc-model>` は、クローン可能な `<template>` プレハブのルートとしても自然な選択です — [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) のサンプルは、この方法で弾をスポーンしています。[テンプレートによる再利用可能なシーン](../templates.md)を参照してください。
 
 ### 2つのエンティティ {#the-two-entities}
 
@@ -196,3 +198,12 @@ Car
 マテリアルの`name`値はそのまま読み取られる実行時のラベルであり、便利な手掛かりではあるものの一意ではありません。名前のないglTFマテリアルは`Untitled`と呼ばれ、マテリアルなしでオーサリングされたプリミティブはエンジンが共有する`defaultGlbMaterial`を持ち、重複はそのまま重複し、スクリプトが割り当てを解除した場合は名前は`null`になります。一意なのは`index`です。どちらも[`<pc-node>`の`material-overrides`](../pc-node#overriding-materials)が選択に用いるもので、差し替えた[`<pc-material>`](../pc-material)は`name`属性の内容をそのまま報告します。ここで識別したいマテリアルには設定しておく価値があります。
 
 このツリーはスナップショットであり、呼び出しごとに新しく計算されます。その後の階層の変更を追跡することはなく、変更を加えても何も起こりません。プレーンなデータであるため`JSON.stringify`を通過でき、ログ出力・差分比較・テストでの検証が容易です。
+
+## 関連項目 {#see-also}
+
+* [`<pc-asset>`](../pc-asset) — モデルがインスタンス化するコンテナアセット
+* [`<pc-node>`](../pc-node) — インスタンス化された階層の内側に手を伸ばします
+* [`<pc-anim>`](../pc-anim) — GLBが持つアニメーションを再生します
+* [モデルの読み込み](../loading-models.md) — モデルを読み込み、マークアップから調整する方法
+
+サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html)

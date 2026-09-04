@@ -1,6 +1,6 @@
 ---
 title: <pc-scene>
-description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ、アンビエント設定、レンダリング用にEntityをマウントする場所です。"
+description: "pc-scene要素のリファレンス: pc-app内のシーンコンテナで、保持するエンティティに適用されるフォグ、露出、重力の設定を持ちます。"
 ---
 
 `<pc-scene>`タグは、シーンを定義するために使用されます。
@@ -17,6 +17,7 @@ description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
+| `exposure` | Number | `"1"` | レンダリングされる画像全体の明るさの倍率。シーンが物理単位を使用している間は無視されます |
 | `fog` | Enum | `"none"` | フォグの種類：`"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
 | `fog-color` | Color | `"1 1 1"` | スペース区切りのRGB値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としてのフォグの色 |
 | `fog-density` | Number | `"0"` | 指数フォグタイプの場合のフォグの密度 |
@@ -61,3 +62,14 @@ description: "pc-scene要素のリファレンス: pc-app内のSceneコンテナ
 ## JavaScriptインターフェース {#javascript-interface}
 
 [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html)を使用して、`<pc-scene>`要素をプログラムで作成および操作できます。
+
+`scene`プロパティは、エンジンの[Scene](https://api.playcanvas.com/engine/classes/Scene.html)です。要素の準備が完了するまでは`null`で、フォグ、露出、スカイはここで設定されます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-app>`](../pc-app) — シーンを保持するアプリケーション
+* [`<pc-sky>`](../pc-sky) — シーンのスカイボックスと画像ベースのライティング
+* [`<pc-camera>`](../pc-camera) — シーンの露出のあとに適用されるトーンマッピング
+* [`<pc-rigid-body>`](../pc-rigid-body) — 重力が働くボディ
+
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html)

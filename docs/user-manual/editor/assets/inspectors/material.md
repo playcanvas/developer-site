@@ -155,7 +155,7 @@ Controls surface detail through normal mapping.
 
 ## Parallax
 
-Adds depth illusion to surfaces using height mapping. Requires a normal map to be set.
+Adds depth illusion to surfaces using height mapping. See [Parallax Mapping](/user-manual/graphics/physical-rendering/parallax-mapping/) for the modes and their limits.
 
 ![Parallax](/img/user-manual/editor/assets/inspectors/material/parallax.png)
 

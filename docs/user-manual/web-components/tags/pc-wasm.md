@@ -63,7 +63,7 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
             <pc-render type="box"></pc-render>
@@ -82,3 +82,13 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-wasm>` elements using the [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html).
+
+The element exposes no engine object of its own. Once it is ready the module has been instantiated through the engine's `WasmModule` under its `name` (`Basis` goes through the engine's Basis initializer instead), and the global the module defines, such as `Ammo`, is available to scripts.
+
+## See Also
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — physics, the usual reason to load Ammo
+* [`<pc-collision>`](../pc-collision) — collision shapes for physics
+* [`<pc-app>`](../pc-app) — waits for every module before it boots
+
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html) and [Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html).

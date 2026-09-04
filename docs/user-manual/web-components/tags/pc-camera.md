@@ -7,7 +7,7 @@ The `<pc-camera>` tag is used to define a camera component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -19,8 +19,9 @@ The `<pc-camera>` tag is used to define a camera component.
 | --- | --- | --- | --- |
 | `clear-color` | Color | `"0.75 0.75 0.75 1"` | Background color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `clear-color-buffer` | Boolean | `"true"` | Controls whether the camera clears the color buffer |
+| `clear-depth` | Number | `"1"` | The depth value the depth buffer is cleared to |
 | `clear-depth-buffer` | Boolean | `"true"` | Controls whether the camera clears the depth buffer |
-| `clear-stencil-buffer` | Boolean | `"false"` | Controls whether the camera clears the stencil buffer |
+| `clear-stencil-buffer` | Boolean | `"true"` | Controls whether the camera clears the stencil buffer |
 | `cull-faces` | Boolean | `"true"` | Controls whether the camera culls faces |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `far-clip` | Number | `"1000"` | The far clipping plane distance |
@@ -71,3 +72,14 @@ A row of boxes receding into the distance. Try a different `fov`, or switch to `
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-camera>` elements using the [CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html).
+
+The `component` property is the engine [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scene>`](../pc-scene) — exposure and fog, which the camera's tone mapping works with
+* [`<pc-sky>`](../pc-sky) — a skybox in place of the clear color
+* [`<pc-script>`](../pc-script) — camera controls are engine scripts attached beside the camera
+* [XR Support](../xr.md) — entering VR and AR from the camera element
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html).

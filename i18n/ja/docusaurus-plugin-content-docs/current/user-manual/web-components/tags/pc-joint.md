@@ -7,7 +7,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)または[`<pc-node>`](../pc-node)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 * 拘束される両方のエンティティに[`<pc-rigid-body>`](../pc-rigid-body)が必要で、物理には`Ammo`モジュールが必要です。[`<pc-wasm>`](../pc-wasm)を参照してください。
 
 :::
@@ -60,8 +60,8 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 | `enable-collision` | Boolean | `"false"` | 拘束される2つのボディが互いに衝突するかどうか |
 | `enable-limits` | Boolean | `"false"` | ジョイントのリミットを適用するかどうか。これを設定するまでリミット系の属性は効果がありません |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `entity-a` | String | - | 1つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。[`<pc-rigid-body>`](../pc-rigid-body)が必要です |
-| `entity-b` | String | - | 2つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。空にすると`entity-a`をワールド空間の固定点に拘束します |
+| `entity-a` | [Entity Reference](../attributes.md#entity-references) | - | 1つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。[`<pc-rigid-body>`](../pc-rigid-body)が必要です |
+| `entity-b` | [Entity Reference](../attributes.md#entity-references) | - | 2つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。空にすると`entity-a`をワールド空間の固定点に拘束します |
 | `limits` | Vector2 | `"-45 45"` | 主軸まわりの回転または移動のリミット。「min max」で、`hinge`では度、`slider`ではユニットです |
 | `linear-damping` | Vector3 | `"1 1 1"` | 直線軸ごとのスプリングのダンピング。`6dof`で使用します |
 | `linear-equilibrium` | Vector3 | `"0 0 0"` | 直線スプリングの静止位置。`6dof`で使用します |
@@ -111,7 +111,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 
 ## イベント {#events}
 
-これらのイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用するか、このインターフェースの`oneventname`プロパティにイベントリスナーを割り当てることでリッスンできます。
+このイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用してリッスンできます。
 
 | イベント | 説明 |
 | --- | --- |
@@ -176,6 +176,8 @@ joint.component.refreshFrames(); // 復帰し、現在のトランスフォー�
 
 [JointComponentElement API](https://api.playcanvas.com/web-components/classes/JointComponentElement.html)を使用して、`<pc-joint>`要素をプログラムで作成および操作できます。
 
+`component`プロパティは、この要素が追加するエンジンの[JointComponent](https://api.playcanvas.com/engine/classes/JointComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
 `entity-a`と`entity-b`は設定された時点で解決されるため、後から作成されたエンティティは自動では取り込まれません。存在する状態で属性を再設定してください。
 
 ```javascript
@@ -183,4 +185,12 @@ const joint = document.querySelector('pc-joint');
 joint.entityA = '#link-3'; // ここで再解決されます
 ```
 
-どちらも他のエンティティ参照属性と同じ参照形式を受け付けます。CSSセレクター、要素の`id`、エンティティの`name`です。[属性](../attributes.md#entity-references)を参照してください。
+どちらも他のエンティティ参照属性と同じ参照形式を受け付けます。エンティティの `name`（最も近い外側のエンティティから解決されます）、またはドキュメント全体の `#` セレクターです。[エンティティ参照](../attributes.md#entity-references)を参照してください。
+
+## 関連項目 {#see-also}
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — 拘束する両方のエンティティに必要です
+* [`<pc-collision>`](../pc-collision) — ボディに形状を与えます
+* [`<pc-wasm>`](../pc-wasm) — 物理に必要なAmmoモジュールをロードします
+
+サンプル: [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)、[AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html)

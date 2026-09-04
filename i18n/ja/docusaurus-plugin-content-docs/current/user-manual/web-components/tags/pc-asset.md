@@ -20,7 +20,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 | `address-u` | Enum | `"repeat"` | `texture` および `textureatlas` アセットの場合: 0から1の範囲外の座標を水平方向にどうサンプリングするか — `"repeat"` \| `"clamp"` \| `"mirror"` |
 | `address-v` | Enum | `"repeat"` | `texture` および `textureatlas` アセットの場合: 0から1の範囲外の座標を垂直方向にどうサンプリングするか — `"repeat"` \| `"clamp"` \| `"mirror"` |
 | `anisotropy` | Number | `"1"` | `texture` および `textureatlas` アセットの場合: 異方性フィルタリングの最大レベル。浅い視野角での品質が向上します |
-| `atlas` | String | - | `sprite` アセットの場合: このスプライトが読み込む `textureatlas` `<pc-asset>` の `id`。アトラスはスプライトより前に宣言する必要があります |
+| `atlas` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `sprite` アセットの場合: このスプライトが読み込む `textureatlas` `<pc-asset>` の `id`。アトラスはスプライトより前に宣言する必要があります |
 | `data` | String | - | インラインのJSONアセットデータ。テクスチャアトラス（フレーム定義）やスプライトで使用されます |
 | `flip-y` | Boolean | `"false"` | `texture` および `textureatlas` アセットの場合: アップロード時に画像データを垂直方向に反転するかどうか |
 | `frame-keys` | String | - | `sprite` アセットの場合: スプライトを構成するアトラスのフレームキーを、スペースまたはカンマ区切りで指定したリスト |
@@ -140,3 +140,14 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 ## JavaScriptインターフェース {#javascript-interface}
 
 [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html)を使用して、`<pc-asset>`要素をプログラムで作成および操作できます。
+
+`asset`プロパティは、この要素が登録したエンジンの[Asset](https://api.playcanvas.com/engine/classes/Asset.html)です。要素の準備が完了するまでは`null`です。`AssetElement.get(id)`を使えば、要素を保持せずに`id`でアセットを取得できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-model>`](../pc-model) — コンテナアセットをインスタンス化します
+* [`<pc-material>`](../pc-material) — テクスチャアセットをマップとして受け取ります
+* [`<pc-sound-slot>`](../pc-sound-slot) — オーディオアセットを再生します
+* [`<pc-script-instance>`](../pc-script-instance) — アセットとして読み込んだスクリプトを実行します
+
+サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html)、[Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html)

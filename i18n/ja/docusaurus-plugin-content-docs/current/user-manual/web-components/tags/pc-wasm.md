@@ -53,7 +53,7 @@ description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパ�
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="crate" position="0 4 0" rotation="25 15 35">
             <pc-render type="box"></pc-render>
@@ -72,3 +72,13 @@ description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html)を使用して、`<pc-wasm>`要素をプログラムで作成および操作できます。
+
+この要素はエンジンオブジェクトを公開しません。準備が完了した時点で、モジュールは`name`の下でエンジンの`WasmModule`を通じてインスタンス化されており（`Basis`だけはエンジンのBasis初期化処理を通ります）、モジュールが定義する`Ammo`などのグローバルをスクリプトから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — Ammoをロードする最も一般的な理由である物理
+* [`<pc-collision>`](../pc-collision) — 物理用の衝突形状
+* [`<pc-app>`](../pc-app) — すべてのモジュールを待ってから起動します
+
+サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html)、[Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html)

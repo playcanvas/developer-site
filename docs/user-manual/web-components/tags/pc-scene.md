@@ -1,6 +1,6 @@
 ---
 title: <pc-scene>
-description: "Reference for the pc-scene element: scene container inside pc-app, ambient settings, and where entities are mounted for rendering."
+description: "Reference for the pc-scene element: the scene container inside pc-app, with fog, exposure and gravity settings for the entities it holds."
 ---
 
 The `<pc-scene>` tag is used to define the scene.
@@ -17,6 +17,7 @@ The `<pc-scene>` tag is used to define the scene.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
+| `exposure` | Number | `"1"` | Overall brightness multiplier applied to the rendered image. Ignored while the scene uses physical light units |
 | `fog` | Enum | `"none"` | Fog type: `"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
 | `fog-color` | Color | `"1 1 1"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `fog-density` | Number | `"0"` | Fog density for exponential fog types |
@@ -61,3 +62,14 @@ Boxes fading into linear fog. Try a different `fog-color` (match the camera's `c
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html).
+
+The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — `null` until the element is ready — where fog, exposure and the sky are configured.
+
+## See Also
+
+* [`<pc-app>`](../pc-app) — the application that holds the scene
+* [`<pc-sky>`](../pc-sky) — the scene's skybox and image-based lighting
+* [`<pc-camera>`](../pc-camera) — tone mapping, applied after the scene's exposure
+* [`<pc-rigid-body>`](../pc-rigid-body) — the bodies gravity acts on
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html).

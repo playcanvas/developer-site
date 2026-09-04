@@ -7,7 +7,7 @@ The `<pc-collision>` tag is used to define a collision component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -58,7 +58,7 @@ Each collision shape matches its rendered shape: a sphere, a capsule and a box t
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="ball" position="-1.5 4 0">
             <pc-render type="sphere"></pc-render>
@@ -87,3 +87,13 @@ Each collision shape matches its rendered shape: a sphere, a capsule and a box t
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-collision>` elements using the [CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html).
+
+The `component` property is the engine [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — makes a collision shape take part in physics
+* [`<pc-joint>`](../pc-joint) — constrains two bodies that have collision shapes
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html) and [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html).

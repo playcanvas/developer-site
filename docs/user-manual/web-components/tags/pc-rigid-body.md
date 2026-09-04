@@ -7,7 +7,7 @@ The `<pc-rigid-body>` tag is used to define a rigidbody component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * It must be a sibling of a [`<pc-collision>`](../pc-collision) component.
 * The ammo.js WebAssembly module must be loaded via a [`<pc-wasm>`](../pc-wasm) tag.
 
@@ -44,7 +44,7 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
-            <pc-light cast-shadows></pc-light>
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="box-1" position="-1.5 4 0" rotation="30 10 40">
             <pc-render type="box"></pc-render>
@@ -73,3 +73,14 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-rigid-body>` elements using the [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html).
+
+The `component` property is the engine [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-collision>`](../pc-collision) — the shape the body collides with; every rigid body needs one
+* [`<pc-joint>`](../pc-joint) — constrains two bodies together
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+* [`<pc-scene>`](../pc-scene) — gravity
+
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).

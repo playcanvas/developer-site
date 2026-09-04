@@ -17,7 +17,7 @@ The `<pc-sky>` tag is used to define a sky component.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Texture asset ID (must reference a `texture` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Texture asset ID (must reference a `texture` type asset) |
 | `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range) |
 | `intensity` | Number | `"1"` | Sky brightness intensity |
 | `lighting` | Boolean | `"false"` | Whether the skybox is used as a light source |
@@ -54,3 +54,13 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-sky>` elements using the [SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html).
+
+The attributes are mirrored as properties. The sky itself is engine scene state — `sky` and the environment atlas on the [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — reached through the `<pc-scene>` element's `scene` property.
+
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the equirectangular texture asset
+* [`<pc-scene>`](../pc-scene) — exposure, and where the sky lives in the engine
+* [`<pc-light>`](../pc-light) — direct lights alongside the sky's image-based lighting
+
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html).

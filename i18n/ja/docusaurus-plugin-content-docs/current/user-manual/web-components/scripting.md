@@ -116,7 +116,7 @@ Number、Boolean、ベクトル、カラーの値は、スクリプトが宣言�
 | プレフィックス | 例 | 説明 |
 | --------- | ------- | ----------- |
 | `asset:`  | `asset:arial-font` | `<pc-asset>` をその `id` 属性で参照します |
-| `entity:` | `entity:#player` | `<pc-entity>` をCSSセレクター、要素の `id`、またはエンティティの `name` で参照します |
+| `entity:` | `entity:player` | `<pc-entity>`・`<pc-model>`・`<pc-node>` をエンティティの `name` で、またはドキュメント全体の `#` セレクター（`entity:#player`）で参照します |
 | `vec2:`   | `vec2:10 20` | スペース区切りの2つの数値からVec2を生成します |
 | `vec3:`   | `vec3:10 20 30` | スペース区切りの3つの数値からVec3を生成します |
 | `vec4:`   | `vec4:10 20 30 40` | スペース区切りの4つの数値からVec4を生成します |
@@ -125,6 +125,8 @@ Number、Boolean、ベクトル、カラーの値は、スクリプトが宣言�
 ```html
 <pc-script-instance name="myScript" font="asset:arial-font" target="entity:#player"></pc-script-instance>
 ```
+
+`entity:` の値は、[`<pc-scrollbar>`](tags/pc-scrollbar.md) の `handle` のようなエンティティ値の属性と同じ[参照の文法](attributes.md#entity-references)に従います: ベアな値はエンティティの `name` であり — 最も近い外側のエンティティが最初、次に順に外側へ、最後にドキュメントに対して解決されます — 決して要素の `id` ではありません。一方、`#` で始まる値はドキュメント全体のセレクターです。つまり、`entity:body` はエンティティを名前で指し、`entity:#body` は `id` が `body` である要素を参照します。[クローンされた `<template>`](templates.md) の内部では、名前はまずクローンの中で解決されます。これこそが、1つのテンプレートで多数の独立したインスタンスを配線できる理由です。
 
 ### `attributes` JSON属性 {#the-attributes-json-attribute}
 

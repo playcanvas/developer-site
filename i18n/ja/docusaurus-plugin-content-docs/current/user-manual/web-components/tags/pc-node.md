@@ -94,13 +94,14 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 | イベント | 説明 |
 | --- | --- |
+| `click` | ノード上でプライマリボタンが押され、そして離されたときに発生します。 |
 | `pointerdown` | ポインターがノード上で押下されたときに発生します。 |
 | `pointerenter` | ポインターがノードに入ったときに発生します。 |
 | `pointerleave` | ポインターがノードを離れたときに発生します。 |
 | `pointermove` | ポインターがノード上で移動したときに発生します。 |
 | `pointerup` | ポインターがノードから解放されたときに発生します。 |
 
-インラインの`onpointer*`属性は、[`<pc-entity>`](../pc-entity)とまったく同じように動作します。
+インラインの`onclick`・`onpointer*`属性は、[`<pc-entity>`](../pc-entity)とまったく同じように動作します。押下と解放が別のジオメトリ上で起きた場合に[クリックがどう解決されるか](../pc-entity#clicks)も同じです。
 
 ## 例 {#example}
 
@@ -151,3 +152,12 @@ body.materialOverrides = null; // オーサリングされたマテリアルに�
 ```
 
 要素は代入された内容を凍結してコピーして保持するため、後からご自身のオブジェクトを変更しても何も起こりません。変更するには新しいマッピングを代入してください。プロパティへの書き込みは`material-overrides`属性に反映されません。これは他のオーバーライドプロパティの動作に従っています。
+
+## 関連項目 {#see-also}
+
+* [`<pc-model>`](../pc-model) — バインドされるノードを持つモデル
+* [`<pc-material>`](../pc-material) — `material-overrides`でノードが差し替えられるマテリアル
+* [`<pc-entity>`](../pc-entity) — ノードの下に新しいコンテンツを取り付けます
+* [モデルの読み込み](../loading-models.md) — 読み込まれたモデル内のノードを見つける方法
+
+サンプル: [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html)

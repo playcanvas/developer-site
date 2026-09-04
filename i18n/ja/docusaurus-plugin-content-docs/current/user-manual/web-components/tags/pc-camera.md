@@ -7,7 +7,7 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子要素である必要があります。
 
 :::
 
@@ -19,8 +19,9 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 | --- | --- | --- | --- |
 | `clear-color` | Color | `"0.75 0.75 0.75 1"` | スペース区切りのRGBA値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としての背景色 |
 | `clear-color-buffer` | Boolean | `"true"` | カメラがカラーバッファをクリアするかどうかを制御します |
+| `clear-depth` | Number | `"1"` | デプスバッファをクリアする際の深度値 |
 | `clear-depth-buffer` | Boolean | `"true"` | カメラがデプスバッファをクリアするかどうかを制御します |
-| `clear-stencil-buffer` | Boolean | `"false"` | カメラがステンシルバッファをクリアするかどうかを制御します |
+| `clear-stencil-buffer` | Boolean | `"true"` | カメラがステンシルバッファをクリアするかどうかを制御します |
 | `cull-faces` | Boolean | `"true"` | カメラが面をカリングするかどうかを制御します |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `far-clip` | Number | `"1000"` | ファーカリングプレーンの距離 |
@@ -71,3 +72,14 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 ## JavaScriptインターフェース {#javascript-interface}
 
 [CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html)を使用して、`<pc-camera>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-scene>`](../pc-scene) — カメラのトーンマッピングと組み合わせて働く露出とフォグ
+* [`<pc-sky>`](../pc-sky) — クリアカラーの代わりに背景となるスカイボックス
+* [`<pc-script>`](../pc-script) — カメラ操作はカメラの隣に付けるエンジンスクリプト
+* [XR のサポート](../xr.md) — カメラ要素からVRやARを開始する方法
+
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html)

@@ -94,13 +94,14 @@ A `<pc-material>` added to the document *after* a mapping referenced it is not p
 
 | Event | Description |
 | --- | --- |
+| `click` | Fired when a primary pointer button is pressed and then released over the node. |
 | `pointerdown` | Fired when a pointer is pressed down on the node. |
 | `pointerenter` | Fired when a pointer enters the node. |
 | `pointerleave` | Fired when a pointer leaves the node. |
 | `pointermove` | Fired when a pointer is moved over the node. |
 | `pointerup` | Fired when a pointer is released from the node. |
 
-The inline `onpointer*` attributes work here exactly as they do on [`<pc-entity>`](../pc-entity).
+The inline `onclick` and `onpointer*` attributes work here exactly as they do on [`<pc-entity>`](../pc-entity), including [how a click resolves](../pc-entity#clicks) when the press and release land on different geometry.
 
 ## Example
 
@@ -151,3 +152,12 @@ body.materialOverrides = null; // back to the authored materials
 ```
 
 The element stores a frozen copy of what you assign, so mutating your object afterwards changes nothing — assign a new mapping to change one. Property writes do not reflect back to the `material-overrides` attribute, which follows how the other override properties behave.
+
+## See Also
+
+* [`<pc-model>`](../pc-model) — the model whose node is bound
+* [`<pc-material>`](../pc-material) — materials a node can substitute via `material-overrides`
+* [`<pc-entity>`](../pc-entity) — attaches new content under a node
+* [Loading Models](../loading-models.md) — finding the nodes inside a loaded model
+
+Examples: [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).

@@ -24,9 +24,21 @@ description: "pc-script-instance要素のリファレンス: 単一のスクリ�
 
 </div>
 
-さらに、その他の予約されていない属性は、同名のスクリプト属性にマッピングされます（ケバブケースからキャメルケースへ、例: `focus-point` → `focusPoint`）。値はスクリプトが宣言したデフォルト値の型に従って解析され、型推論が役立たない場合は `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` プレフィックスを使用できます。同じスクリプト属性が `attributes` JSONにも存在する場合は、プロパティごとの属性が優先されます。詳細は[スクリプトで動作を追加する](../scripting.md)を参照してください。
+さらに、その他の予約されていない属性は、同名のスクリプト属性にマッピングされます（ケバブケースからキャメルケースへ、例: `focus-point` → `focusPoint`）。値はスクリプトが宣言したデフォルト値の型に従って解析され、型推論が役立たない場合は `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` プレフィックスを使用できます。`entity:` の値はエンティティの `name` です — 要素を `id` で参照するには `entity:#id` と書いてください。同じスクリプト属性が `attributes` JSONにも存在する場合は、プロパティごとの属性が優先されます。詳細は[スクリプトで動作を追加する](../scripting.md)を参照してください。
 
 真の値はマークアップで宣言された値です。ホストのエンティティがサイクルすると（たとえばモデルの再読み込み後に[`<pc-node>`](../pc-node)が再バインドしたとき）、生き残ったスクリプトインスタンスには宣言された状態が再適用されます。これは意図的な挙動で、宣言済みプロパティに対する実行時の変更は元に戻ります。実行時に変更する状態は、マークアップで宣言していないプロパティに持たせてください。
+
+## イベント {#events}
+
+これらのイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用してリッスンできます。
+
+| イベント | 説明 |
+| --- | --- |
+| `scriptattributeschange` | スクリプト属性が変更されたときに発生します。`detail.attributes`に新しい属性オブジェクトが入ります。 |
+| `scriptenablechange` | `enabled`が変更されたときに発生します。`detail.enabled`に新しい状態が入ります。 |
+| `scriptnamechange` | すでに`name`を持つ要素の`name`を変更してスクリプトをリネームしたときに発生します。`detail.oldName`と`detail.newName`に両方の名前が入り、親の[`<pc-script>`](../pc-script)はこれを受けて古いスクリプトを破棄し、新しいスクリプトを作成します。 |
+
+3つのイベントはいずれもバブリングします。親の[`<pc-script>`](../pc-script)はこれらをリッスンして各変更をエンジンに適用しますが、同じイベントを使って自分のコードからスクリプト設定の変更を監視することもできます。祖先要素にリスナーを1つ置けば、その下のすべてのスクリプトインスタンスをカバーできます。
 
 ## 例 {#example}
 
@@ -71,3 +83,11 @@ description: "pc-script-instance要素のリファレンス: 単一のスクリ�
 [ScriptInstanceElement API](https://api.playcanvas.com/web-components/classes/ScriptInstanceElement.html)を使用して、`<pc-script-instance>`要素をプログラムで作成および操作できます。
 
 この要素は、そのスクリプトインスタンスが作成されると準備完了になります — `whenReady('pc-script-instance')` または要素の `ready()` プロミスを待ってください。その後、ライブの `Script` インスタンスは `script` プロパティから利用でき、スクリプト属性は `scriptAttributes` プロパティを介してオブジェクトとして読み書きできます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-script>`](../pc-script) — インスタンスをホストするコンポーネント
+* [`<pc-asset>`](../pc-asset) — スクリプトのモジュールをロードします
+* [スクリプトで動作を追加する](../scripting.md) — スクリプト属性の宣言と型付け
+
+サンプル: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html)、[Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html)、[Annotations](https://playcanvas.github.io/web-components/examples/annotations.html)

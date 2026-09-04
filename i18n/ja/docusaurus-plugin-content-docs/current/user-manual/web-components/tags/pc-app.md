@@ -114,3 +114,14 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 ## JavaScriptインターフェース {#javascript-interface}
 
 [AppElement API](https://api.playcanvas.com/web-components/classes/AppElement.html)を使用して、`<pc-app>`要素をプログラムで作成および操作できます。
+
+`app`プロパティは、実行中のエンジンの[AppBase](https://api.playcanvas.com/engine/classes/AppBase.html)です。要素の準備が完了するまでは`null`で、シーン、アセットレジストリ、レンダーループにアクセスできます。`elementFromEntity()`は、エンジンのエンティティからそれを表す要素を返します。
+
+## 関連項目 {#see-also}
+
+* [`<pc-scene>`](../pc-scene) — アプリがレンダリングする唯一のシーン
+* [`<pc-asset>`](../pc-asset) — シーンが始まる前にアプリがプリロードするリソース
+* [`<pc-wasm>`](../pc-wasm) — 物理などアプリが起動前にロードするモジュール
+* [プログラムによるアクセス](../programmatic-access.md) — JavaScriptから`ready`を待ち、`app`にアクセスする方法
+
+サンプル: [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html)、[Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)

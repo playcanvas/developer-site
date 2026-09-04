@@ -7,7 +7,7 @@ description: "pc-layout-child要素のリファレンス: レイアウトグル�
 
 :::note[使用法]
 
-* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
 * そのエンティティ自体は、[`<pc-layout-group>`](../pc-layout-group) を持つエンティティの子である必要があります。
 
 :::
@@ -67,3 +67,12 @@ description: "pc-layout-child要素のリファレンス: レイアウトグル�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html)を使用して、`<pc-layout-child>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[LayoutChildComponent](https://api.playcanvas.com/engine/classes/LayoutChildComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-layout-group>`](../pc-layout-group) — 子が調整するレイアウトを持つグループ
+* [`<pc-element>`](../pc-element) — 子がサイズを決める要素
+
+サンプル: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

@@ -155,7 +155,7 @@ Use Metalnessが無効な場合:
 
 ## 視差
 
-高さマッピングを使用してサーフェスに深さの錯覚を追加します。ノーマルマップの設定が必要です。
+高さマッピングを使用してサーフェスに深さの錯覚を追加します。モードとその制限については [視差マッピング](/user-manual/graphics/physical-rendering/parallax-mapping/) を参照してください。
 
 ![Parallax](/img/user-manual/editor/assets/inspectors/material/parallax.png)
 

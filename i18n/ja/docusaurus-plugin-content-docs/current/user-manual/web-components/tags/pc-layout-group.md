@@ -7,7 +7,7 @@ description: "pc-layout-group要素のリファレンス: 子要素を水平ま�
 
 :::note[使用法]
 
-* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
 * 子エンティティは自動的に配置されます。グループ内での子のサイズ調整方法を制御するには、子に [`<pc-layout-child>`](../pc-layout-child) を追加します。
 
 :::
@@ -67,4 +67,12 @@ description: "pc-layout-group要素のリファレンス: 子要素を水平ま�
 
 [LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html)を使用して、`<pc-layout-group>`要素をプログラムで作成および操作できます。
 
-[UI Layoutのサンプル](https://playcanvas.github.io/web-components/examples/ui-layout.html)では、ワールド空間のスクリーン上にレイアウトグループを入れ子にして構築しています。
+`component`プロパティは、この要素が追加するエンジンの[LayoutGroupComponent](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-layout-child>`](../pc-layout-child) — 子ごとのサイズ規則
+* [`<pc-element>`](../pc-element) — 配置される要素
+* [`<pc-screen>`](../pc-screen) — レイアウトが載るスクリーン
+
+サンプル: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

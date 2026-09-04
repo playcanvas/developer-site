@@ -17,7 +17,7 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | String | - | テクスチャアセットID (`texture`型のアセットを参照する必要があります) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | テクスチャアセットID (`texture`型のアセットを参照する必要があります) |
 | `center` | Vector3 | `"0 0.01 0"` | "X Y Z"値としてのスカイの中心 (0-1の範囲) |
 | `intensity` | Number | `"1"` | スカイの明るさの強度 |
 | `lighting` | Boolean | `"false"` | スカイボックスを光源として使用するかどうか |
@@ -54,3 +54,13 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html)を使用して、`<pc-sky>`要素をプログラムで作成および操作できます。
+
+属性はプロパティとしても利用できます。スカイそのものはエンジンのシーンの状態、つまり[Scene](https://api.playcanvas.com/engine/classes/Scene.html)の`sky`と環境アトラスであり、`<pc-scene>`要素の`scene`プロパティを通じてアクセスします。
+
+## 関連項目 {#see-also}
+
+* [`<pc-asset>`](../pc-asset) — 正距円筒テクスチャアセット
+* [`<pc-scene>`](../pc-scene) — 露出と、エンジン上でスカイが置かれる場所
+* [`<pc-light>`](../pc-light) — スカイの画像ベースライティングと組み合わせる直接光
+
+サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html)、[Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html)

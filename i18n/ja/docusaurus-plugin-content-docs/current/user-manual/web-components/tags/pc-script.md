@@ -1,13 +1,13 @@
 ---
 title: <pc-script>
-description: "pc-script要素のリファレンス: 複数のpc-script-instance子をまとめ、共有のScript設定を持つScript Componentのコンテナです。"
+description: "pc-script要素のリファレンス: pc-script-instance子要素をホストし、それらをまとめて有効化・無効化するスクリプトコンポーネントです。"
 ---
 
 `<pc-script>`タグは、スクリプトコンポーネントを定義するために使用されます。
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 * 0..n個の[`<pc-script-instance>`](../pc-script-instance)の子を持つことができます。
 
 :::
@@ -74,3 +74,13 @@ description: "pc-script要素のリファレンス: 複数のpc-script-instance�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html)を使用して、`<pc-script>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ScriptComponent](https://api.playcanvas.com/engine/classes/ScriptComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-script-instance>`](../pc-script-instance) — コンポーネントが実行する各スクリプト
+* [`<pc-asset>`](../pc-asset) — スクリプトモジュールの読み込み方法
+* [スクリプトで動作を追加する](../scripting.md) — スクリプトの書き方と属性の宣言
+
+サンプル: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html)、[First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html)、[Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html)

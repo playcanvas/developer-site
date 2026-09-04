@@ -9,7 +9,7 @@ Despite the name, this is not a base class or a generic wrapper. `<pc-element>` 
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -25,7 +25,7 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `anchor` | Vector4 | `"0 0 0 1"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
+| `anchor` | Vector4 | `"0.5 0.5 0.5 0.5"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
 | `auto-fit-height` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's height. Requires `auto-height="false"`. Text elements only |
 | `auto-fit-width` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's width. Requires `auto-width="false"`. Text elements only |
 | `auto-height` | Boolean | `"true"` | Whether to automatically adjust height to fit text content. Text elements only |
@@ -33,7 +33,7 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enable-markup` | Boolean | `"false"` | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `font-asset` | String | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
+| `font-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
 | `font-size` | Number | `"32"` | Font size in pixels |
 | `height` | Number | `"0"` | Height in pixels (0 for auto-sizing) |
 | `line-height` | Number | `"32"` | Line height in pixels |
@@ -44,10 +44,10 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `opacity` | Number | `"1"` | Opacity, from 0 (transparent) to 1 (opaque) |
 | `pivot` | Vector2 | `"0.5 0.5"` | Pivot point as "X Y" values |
 | `pixels-per-unit` | Number | - | Pixels per unit used when rendering a sprite. Image elements only |
-| `sprite-asset` | String | - | Sprite [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
+| `sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `sprite-frame` | Number | `"0"` | Frame index of the sprite to render. Image elements only |
 | `text` | String | - | Text content to display |
-| `texture-asset` | String | - | Texture [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
+| `texture-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Texture [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `type` | Enum | `"group"` | Element type: `"group"` \| `"image"` \| `"text"` |
 | `use-input` | Boolean | `"false"` | Whether the element receives pointer input. Required for [`<pc-button>`](../pc-button) and scroll-view interaction |
 | `width` | Number | `"0"` | Width in pixels (0 for auto-sizing) |
@@ -89,3 +89,14 @@ An `image` element as a panel, with two `text` elements on top — the second us
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-element>` elements using the [ElementComponentElement API](https://api.playcanvas.com/web-components/classes/ElementComponentElement.html).
+
+The `component` property is the engine [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-screen>`](../pc-screen) — every element sits under a screen
+* [`<pc-button>`](../pc-button) — makes an image element interactive
+* [`<pc-layout-group>`](../pc-layout-group) — arranges sibling elements automatically
+* [`<pc-scroll-view>`](../pc-scroll-view) — scrolls a content element inside a viewport
+
+Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [Text](https://playcanvas.github.io/web-components/examples/text.html), [3D Text](https://playcanvas.github.io/web-components/examples/3d-text.html) and [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html).

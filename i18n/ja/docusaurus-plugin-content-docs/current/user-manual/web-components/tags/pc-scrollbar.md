@@ -7,7 +7,7 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 
 :::note[使用法]
 
-* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
 * [`<pc-scroll-view>`](../pc-scroll-view) の `horizontal-scrollbar` または `vertical-scrollbar` 属性から参照されます。
 * `handle` 属性は、ドラッグ可能なハンドルとして使用する [`<pc-entity>`](../pc-entity) を参照します。そのイメージ要素には `use-input` を設定してください。
 
@@ -20,7 +20,7 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `handle` | String | - | ドラッグ可能なハンドルとして使用する [`<pc-entity>`](../pc-entity) への参照（CSSセレクター、要素id、またはエンティティ名） |
+| `handle` | [Entity Reference](../attributes.md#entity-references) | - | ドラッグ可能なハンドルとして使用する [`<pc-entity>`](../pc-entity) |
 | `handle-size` | Number | `"0.5"` | トラックのサイズに対するハンドルのサイズ（0〜1） |
 | `orientation` | Enum | `"horizontal"` | スクロールバーの向き: `"horizontal"` \| `"vertical"` |
 | `value` | Number | `"0"` | スクロールバーの現在位置（0〜1） |
@@ -58,3 +58,13 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ScrollbarComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollbarComponentElement.html)を使用して、`<pc-scrollbar>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ScrollbarComponent](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-scroll-view>`](../pc-scroll-view) — スクロールバーが操作するビュー
+* [`<pc-element>`](../pc-element) — トラックとハンドルはイメージ要素です
+* [`<pc-screen>`](../pc-screen) — スクロールバーがレンダリングされるスクリーン
+
+サンプル: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

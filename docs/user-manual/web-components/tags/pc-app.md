@@ -132,3 +132,14 @@ A complete application: a camera, a light and a sphere. Try setting `antialias="
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-app>` elements using the [AppElement API](https://api.playcanvas.com/web-components/classes/AppElement.html).
+
+The `app` property is the running engine [AppBase](https://api.playcanvas.com/engine/classes/AppBase.html) — `null` until the element is ready — which gives you the scene, the asset registry and the render loop; `elementFromEntity()` maps an engine entity back to the element that fronts it.
+
+## See Also
+
+* [`<pc-scene>`](../pc-scene) — the one scene an app renders
+* [`<pc-asset>`](../pc-asset) — resources the app preloads before the scene starts
+* [`<pc-wasm>`](../pc-wasm) — modules such as physics that the app loads before it boots
+* [Programmatic Access](../programmatic-access.md) — waiting for `ready` and reaching `app` from JavaScript
+
+Examples: [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html) and [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html).

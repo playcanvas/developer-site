@@ -1,13 +1,13 @@
 ---
 title: <pc-particle-system>
-description: "Reference for the pc-particle-system element: configure particle emitters, textures, blending, and simulation parameters in markup."
+description: "Reference for the pc-particle-system element: emit particles from a JSON asset that defines the emitter, textures, blending and simulation parameters."
 ---
 
 The `<pc-particle-system>` tag is used to define a particle system.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -17,7 +17,7 @@ The `<pc-particle-system>` tag is used to define a particle system.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | JSON asset ID defining the particle system configuration |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | JSON asset ID defining the particle system configuration |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 
 </div>
@@ -84,3 +84,12 @@ Then add the particle system to your scene in HTML. This runs the `snow.json` ab
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-particle-system>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).
+
+The `component` property is the engine [ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the JSON configuration and the textures it names
+* [`<pc-entity>`](../pc-entity) — positions and orients the emitter
+
+Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html).

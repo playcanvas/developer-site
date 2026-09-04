@@ -7,7 +7,7 @@ The `<pc-layout-child>` tag is used to define a layout child component, which co
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * That entity must itself be a child of an entity with a [`<pc-layout-group>`](../pc-layout-group).
 
 :::
@@ -67,3 +67,12 @@ Three items in a horizontal group with `width-fitting="stretch"`. The middle ite
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-layout-child>` elements using the [LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html).
+
+The `component` property is the engine [LayoutChildComponent](https://api.playcanvas.com/engine/classes/LayoutChildComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-layout-group>`](../pc-layout-group) — the group whose layout the child adjusts
+* [`<pc-element>`](../pc-element) — the element the child sizes
+
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

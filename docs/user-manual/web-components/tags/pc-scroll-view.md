@@ -7,8 +7,8 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
-* It references its viewport, content, and scrollbar entities by CSS selector, element id, or entity name.
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
+* It references its viewport, content, and scrollbar entities by entity `name` or document-wide `#` selector — see [Entity References](../attributes.md#entity-references).
 * The viewport element should have its `mask` attribute set so the content is clipped to the scroll view's bounds.
 
 :::
@@ -20,19 +20,19 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `bounce-amount` | Number | `"0.1"` | How far content bounces past its bounds when `scroll-mode="bounce"` (0 to 1) |
-| `content` | String | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
+| `content` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
 | `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
-| `horizontal-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
+| `horizontal-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
 | `horizontal-scrollbar-visibility` | Enum | `"when-required"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
 | `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
 | `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
 | `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
-| `vertical-scrollbar` | String | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
+| `vertical-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
 | `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
-| `viewport` | String | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
+| `viewport` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
 
 </div>
 
@@ -95,3 +95,13 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-scroll-view>` elements using the [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html).
+
+The `component` property is the engine [ScrollViewComponent](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scrollbar>`](../pc-scrollbar) — drives the view and reflects its position
+* [`<pc-element>`](../pc-element) — the viewport and content are elements; `mask` clips the content
+* [`<pc-layout-group>`](../pc-layout-group) — lays out the content's children
+
+Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

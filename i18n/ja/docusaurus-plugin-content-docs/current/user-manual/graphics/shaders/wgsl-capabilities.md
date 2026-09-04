@@ -61,11 +61,21 @@ output.color = vec4f(vec3f(result), 1.0);
   - **プリプロセッサ定義:** `CAPS_PRIMITIVE_INDEX`
   - **シェーダー段階:** フラグメント
   - **説明:** 簡略 API では、対応端末向けに `FragmentInput` の `primitiveIndex` およびグローバル `pcPrimitiveIndex`
+- **`device.supportsDualSourceBlending`**
+  - **エンジンが注入:** ブレンドステートが 2 つ目のソースを参照する係数を使用するフラグメントシェーダーバリアントに `enable dual_source_blending;`
+  - **プリプロセッサ定義:** `CAPS_DUAL_SOURCE_BLENDING`
+  - **シェーダー段階:** フラグメント
+  - **説明:** ブレンド係数として使用できる 2 つ目のフラグメント出力を提供します。詳細は [デュアルソースブレンディング](/user-manual/graphics/advanced-rendering/dual-source-blending) を参照してください
 - **`device.supportsSubgroups`**
   - **エンジンが注入:** `enable subgroups;`
   - **プリプロセッサ定義:** `CAPS_SUBGROUPS`
   - **シェーダー段階:** フラグメントとコンピュート
   - **説明:** サブグループ組み込み（`subgroupBroadcast` 等）。`device.supportsSubgroupUniformity` 専用の `requires` / `enable` は追加されず、subgroups 機能と合わせて扱う
+- **`device.supportsSubgroupSizeControl`**
+  - **エンジンが注入:** *なし* — `enable subgroups;` は `device.supportsSubgroups` のとき既に付与されます（本機能はこれに依存）。`@subgroup_size` を使う場合は `enable subgroup_size_control;` を自前の WGSL に記述してください
+  - **プリプロセッサ定義:** `CAPS_SUBGROUP_SIZE_CONTROL`
+  - **シェーダー段階:** コンピュート
+  - **説明:** `@subgroup_size(N)` 属性でコンピュートのエントリポイントをサブグループサイズに固定します。`N` は `device.minSubgroupSize`…`device.maxSubgroupSize` の範囲内（いずれも読み取り専用）の2のべき乗です。指定しない場合はドライバがサイズを選び、事前には分かりません。エンジンは能力の宣言のみで、`enable` は筆者が書く想定です。解説: [WebGPU 151-152](https://developer.chrome.com/blog/new-in-webgpu-151-152#subgroup-size)
 - **`device.supportsSubgroupId`**
   - **エンジンが注入:** `requires subgroup_id;`
   - **プリプロセッサ定義:** `CAPS_SUBGROUP_ID`
@@ -121,3 +131,25 @@ fn main(
     _ = wg;
 }
 ```
+
+使用例（コンピュート）— `CAPS_SUBGROUP_SIZE_CONTROL` があるときはサブグループサイズを固定し、なければドライバに選ばせます。
+
+```wgsl
+#ifdef CAPS_SUBGROUP_SIZE_CONTROL
+enable subgroup_size_control; // enable subgroups; はエンジンが既に注入
+#endif
+
+@compute @workgroup_size(64)
+#ifdef CAPS_SUBGROUP_SIZE_CONTROL
+@subgroup_size(32)            // device.minSubgroupSize..maxSubgroupSize 内の2のべき乗
+#endif
+fn main(@builtin(global_invocation_id) global_id: vec3u) {
+    _ = global_id;
+}
+```
+
+:::note
+
+すべての `enable …;` ディレクティブは、モジュールスコープのあらゆる宣言より前に置く必要があります。エンジンは自身のディレクティブ（`enable subgroups;` など）をシェーダーソースの前に付加するため、`enable subgroup_size_control;` はチャンクの先頭、つまり `const`・`struct`・`var`・`fn` のいずれよりも前に記述してください。`enable` ディレクティブどうしの順序は問いません。
+
+:::
