@@ -23,6 +23,8 @@ description: "pc-scene要素のリファレンス: pc-app内のシーンコン�
 | `fog-density` | Number | `"0"` | 指数フォグタイプの場合のフォグの密度 |
 | `fog-end` | Number | `"1000"` | 線形フォグの終了距離 |
 | `fog-start` | Number | `"0"` | 線形フォグの開始距離 |
+| `gsplat-lod-mode` | Enum | `"error"` | ストリーミングされるGaussian splatのLODレベルを、スプラット予算の範囲内でどう選ぶか：`"error"` \| `"distance"`。[レベルオブディテール](../pc-gsplat#level-of-detail)を参照 |
+| `gsplat-splat-budget` | Number | `"1000000"` | シーン内のすべてのGaussian splatを合わせて描画するスプラット数の目標値。ストリーミングされるスプラットアセット間で配分されます。0以下の値は警告を出し、デフォルトが維持されます |
 | `gravity` | Vector3 | `"0 -9.81 0"` | 「X Y Z」値としてリジッドボディに適用される重力 |
 
 </div>
