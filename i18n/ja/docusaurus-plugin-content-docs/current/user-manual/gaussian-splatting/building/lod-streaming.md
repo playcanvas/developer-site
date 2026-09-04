@@ -3,7 +3,7 @@ title: Streamed SOG
 description: "大規模スプラットシーン向けStreamed SOG：空間ツリー構成、lod-metaデータの生成、例、パフォーマンス指針です。"
 ---
 
-Streamed SOGは、カメラの距離に基づいて適切な詳細レベル（LOD）を動的にロードすることで、大規模なGaussian splatシーンの効率的なレンダリングを可能にします。これにより、大規模なスプラットシーンのメモリ使用量を大幅に削減し、レンダリングパフォーマンスを向上させます。
+Streamed SOGは、グローバルなスプラット予算の範囲内でシーンの各領域に適切な詳細レベル（LOD）を動的にロードすることで、大規模なGaussian splatシーンの効率的なレンダリングを可能にします。これにより、大規模なスプラットシーンのメモリ使用量を大幅に削減し、レンダリングパフォーマンスを向上させます。
 
 ## 仕組み
 
@@ -11,8 +11,8 @@ Streamed SOGは以下のように動作します：
 
 1. スプラットの複数のバージョンを異なる詳細レベルで事前生成
 2. 効率的なストリーミングのために空間ツリー構造に整理
-3. カメラ距離に基づいて詳細レベルを動的にロードおよびアンロード
-4. シーンの各領域に適切な詳細レベルのみをレンダリング
+3. グローバルなスプラット予算に収まるように詳細レベルを動的にロードおよびアンロードし、画質への貢献が最も大きい場所に詳細を割り当て
+4. シーンの各領域で選択された詳細レベルのみをレンダリング
 
 このアプローチにより、メモリ制約により不可能だった大規模なスプラットシーンをレンダリングできます。
 
@@ -41,20 +41,32 @@ Streamed SOGの動作を確認するには、以下のライブサンプルを�
 
 ストリーミングは、Streamed SOGアセット（`lod-meta.json`）をGSplatコンポーネントにロードするだけで有効になります。追加の設定は必要ありません。
 
-## LOD動作の制御
+## LOD動作の制御 {#controlling-lod-behavior}
 
-以下のAPIを使用してストリーミング動作を制御および微調整できます：
+### LODの選択方法
 
-### コンポーネントレベルの制御
+エンジンは、合計スプラット数がグローバルな[スプラット予算](/user-manual/gaussian-splatting/building/performance#global-splat-budget)に収まるように、シーンの各領域に1つのLODレベルを選択し、画質への貢献が最も大きい場所に詳細を割り当てます。その際、各領域の画面上での投影サイズと、各LODレベルが残す視覚的誤差の指標を組み合わせて判断します。誤差の指標は、`lod-meta.json`に含まれている場合はそこから読み取られ（[SplatTransform](/user-manual/splat-transform) 3.3以降が書き出します）、含まれていない場合はスプラット数から自動的に導出されるため、どちらの場合も設定は不要です。LOD選択はカメラの視野角（FOV）も自動的に補正します。
 
-[`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodBaseDistance)と[`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodMultiplier)を使用して、LODの距離しきい値を制御します。しきい値は等比数列に従います：`lodBaseDistance * lodMultiplier^i`
+### LODモード
+
+`app.scene.gsplat`の[`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode)で、2つの戦略を切り替えられます：
 
 ```javascript
-entity.gsplat.lodBaseDistance = 10;  // 最初のLOD遷移の距離
-entity.gsplat.lodMultiplier = 2;    // 後続のしきい値はそれぞれ2倍遠くなる
+app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
 ```
 
-乗数のデフォルトは3で（最小1.2にクランプされます）、各LOD遷移は前の遷移の3倍の距離で発生します。システムはカメラのFOVも自動的に補正します。
+- `GSPLAT_LODMODE_ERROR`（デフォルト）：スプラット1つあたりの視覚的誤差の削減量が最も大きい場所に予算を割り当てます。
+- `GSPLAT_LODMODE_DISTANCE`：誤差メタデータを無視し、カメラからの距離のみに基づいて詳細を順序付けます。詳細はカメラを中心とした同心円状のバンドで段階的に低下し、バンドの境界は予算に応じて調整されます。キャプチャの誤差データが視覚的な重要度と一致しない場合に便利です。
+
+### LODフォールオフ
+
+gsplatコンポーネントの[`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff)は、どちらのモードでも、そのスプラットの詳細がカメラからの距離に応じてどれだけ速く低下するかを制御します：
+
+```javascript
+entity.gsplat.lodFalloff = 2; // カメラ付近の詳細を増やし、遠方の詳細を減らす
+```
+
+値の範囲は0から8で、デフォルトは1（バランスの取れたフォールオフ）です。値が大きいほど遠方を犠牲にしてカメラ付近に詳細が集中し、0に近づけると視点に関係なくシーン全体に均等に分配されます。これは主に、そのスプラットが予算から受け取る詳細を近景と遠景の間で再配分するものですが、スプラット間での予算の配分にも影響することがあります。
 
 ### シーンレベルの制御
 
