@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 495
+Total Documents: 496
 Generated: 2026-09-04
 
 ## Instructions for Large Language Models
@@ -614,6 +614,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Relighting](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/relighting/): Relight Gaussian splat scenes with standard lights using a proxy mesh and the GsplatRelighting script: setup, lights, shadows and tuning.
 - [Render on Demand](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/render-on-demand/): Render Gaussian splats only when something changes: background streaming with autoRender disabled, the frame:request event, and on-demand rendering.
 - [Shadows](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/shadows/): Enable shadow casting from Gaussian splats onto meshes: API properties, lights, and tuning shadow quality for splat scenes.
+- [Tonemapping and Exposure](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/tonemapping/): How the camera tone curve, scene exposure and fog affect Gaussian splats, and how to opt splats out with Scene.gsplat.useTonemap and Scene.gsplat.useFog.
 - [Your First Splat App](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/): Choose a path to build your first PlayCanvas splat app: Engine, Editor, React, or Web Components tutorials with a toy cat demo.
 - [Using the Editor](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/editor/): Step-by-step: create a splat scene in the PlayCanvas Editor, import assets, and publish an interactive orbitable splat project.
 - [Using the Engine API](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/engine/): Step-by-step: load a splat with the PlayCanvas Engine API, ES modules, camera controls, and a minimal HTML and JavaScript setup.
