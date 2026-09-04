@@ -35,6 +35,7 @@
     "faq-to-json": "node faq_to_json.js --dir faq --out ../editor/static/json/howdoi.json",
     "generate-tutorial-data": "node utils/generate-tutorial-data.mjs",
     "sync:supersplat-api": "node utils/sync-supersplat-api.mjs",
+    "check:web-components": "node utils/check-web-components-manifest.mjs",
     "lint": "markdownlint-cli2 docs i18n .github/CONTRIBUTING.md README.md",
     "preview-llms": "node utils/plugins/llms/preview.mjs"
   },
