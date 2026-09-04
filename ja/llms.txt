@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 500
+Total Documents: 501
 Generated: 2026-09-04
 
 ## Instructions for Large Language Models
@@ -549,6 +549,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Multi-Draw](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multi-draw/): Single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent.
 - [Multiple Render Targets](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multiple-render-targets/): Configure multiple render targets, shared attachments rules, and shader output to several color buffers at once.
 - [Render Targets](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/render-targets/): Render a scene into an offscreen texture instead of the screen, then use the result in your scene - covering creation, layer setup, orientation, formats, resizing and MSAA.
+- [Transform Feedback](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/transform-feedback/): Capture vertex shader output into vertex buffers on the GPU, using a single interleaved buffer or one buffer per varying.
 - [Cameras](https://developer.playcanvas.com/user-manual/graphics/cameras/): Create cameras and explore projection, tone mapping, multi-camera rendering, camera controls, and coordinate conversion.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/graphics/cameras/camera-controls/): Add orbit, fly, and pan navigation to any camera with the engine's ready-made camera-controls script, with mouse, touch, and gamepad support.
 - [Clearing](https://developer.playcanvas.com/user-manual/graphics/cameras/clearing/): Control how a camera clears its render target — set the background color, make the canvas transparent, or disable clearing entirely.
