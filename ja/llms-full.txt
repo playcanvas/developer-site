@@ -35912,6 +35912,13 @@ await clip.ready();
 document.querySelector('pc-anim').transition('wave');
 ```
 
+## See Also
+
+* [`<pc-anim>`](../pc-anim) — the component a clip belongs to
+* [`<pc-asset>`](../pc-asset) — the container or animation asset a clip's track comes from
+
+Examples: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-anim>
@@ -36108,6 +36115,14 @@ console.log(anim.clips); // ['walk', 'stalk']
 
 Anything this element does not expose is available on `component` — the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) — including the playhead (`baseLayer.activeStateCurrentTime`), the active clip's duration, and state graphs and blend trees for animation beyond a flat set of clips.
 
+## See Also
+
+* [`<pc-anim-clip>`](../pc-anim-clip) — declares each clip the component plays
+* [`<pc-model>`](../pc-model) — the usual host, whose GLB supplies the animation tracks
+* [`<pc-asset>`](../pc-asset) — supplies clips from a separate GLB or animclip JSON
+
+Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-app>
@@ -36243,6 +36258,17 @@ A complete application: a camera, a light and a sphere. Try setting `antialias="
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-app>` elements using the [AppElement API](https://api.playcanvas.com/web-components/classes/AppElement.html).
+
+The `app` property is the running engine [AppBase](https://api.playcanvas.com/engine/classes/AppBase.html) — `null` until the element is ready — which gives you the scene, the asset registry and the render loop; `elementFromEntity()` maps an engine entity back to the element that fronts it.
+
+## See Also
+
+* [`<pc-scene>`](../pc-scene) — the one scene an app renders
+* [`<pc-asset>`](../pc-asset) — resources the app preloads before the scene starts
+* [`<pc-wasm>`](../pc-wasm) — modules such as physics that the app loads before it boots
+* [Programmatic Access](../programmatic-access.md) — waiting for `ready` and reaching `app` from JavaScript
+
+Examples: [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html) and [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html).
 
 --------------------------------------------------------------------------------
 
@@ -36387,6 +36413,17 @@ Sprites are defined by a texture atlas (which holds the frame definitions) and o
 
 You can programmatically create and manipulate `<pc-asset>` elements using the [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html).
 
+The `asset` property is the engine [Asset](https://api.playcanvas.com/engine/classes/Asset.html) the element registered — `null` until the element is ready — and `AssetElement.get(id)` looks one up by `id` without holding the element.
+
+## See Also
+
+* [`<pc-model>`](../pc-model) — instantiates a container asset
+* [`<pc-material>`](../pc-material) — takes texture assets for its maps
+* [`<pc-sound-slot>`](../pc-sound-slot) — plays an audio asset
+* [`<pc-script-instance>`](../pc-script-instance) — runs a script loaded as an asset
+
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html) and [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-audio-listener>
@@ -36467,6 +36504,16 @@ The listener sits on the camera, and a sphere emitting positional footsteps circ
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-audio-listener>` elements using the [AudioListenerComponentElement API](https://api.playcanvas.com/web-components/classes/AudioListenerComponentElement.html).
+
+The `component` property is the engine [AudioListenerComponent](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-sound>`](../pc-sound) — the positional sound sources the listener hears
+* [`<pc-sound-slot>`](../pc-sound-slot) — the clips those sources play
+* [`<pc-camera>`](../pc-camera) — the listener usually rides on the camera entity
+
+Examples: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html).
 
 --------------------------------------------------------------------------------
 
@@ -36560,6 +36607,16 @@ button.component.on('click', () => {
 
 You can programmatically create and manipulate `<pc-button>` elements using the [ButtonComponentElement API](https://api.playcanvas.com/web-components/classes/ButtonComponentElement.html).
 
+The `component` property is the engine [ButtonComponent](https://api.playcanvas.com/engine/classes/ButtonComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-element>`](../pc-element) — the image element a button needs for input and transitions
+* [`<pc-screen>`](../pc-screen) — the screen the button's element hierarchy lives on
+* [`<pc-entity>`](../pc-entity) — click and pointer events on 3D objects, without a screen
+
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-camera>
@@ -36635,6 +36692,17 @@ A row of boxes receding into the distance. Try a different `fov`, or switch to `
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-camera>` elements using the [CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html).
+
+The `component` property is the engine [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scene>`](../pc-scene) — exposure and fog, which the camera's tone mapping works with
+* [`<pc-sky>`](../pc-sky) — a skybox in place of the clear color
+* [`<pc-script>`](../pc-script) — camera controls are engine scripts attached beside the camera
+* [XR Support](../xr.md) — entering VR and AR from the camera element
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html).
 
 --------------------------------------------------------------------------------
 
@@ -36726,6 +36794,16 @@ Each collision shape matches its rendered shape: a sphere, a capsule and a box t
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-collision>` elements using the [CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html).
+
+The `component` property is the engine [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — makes a collision shape take part in physics
+* [`<pc-joint>`](../pc-joint) — constrains two bodies that have collision shapes
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html) and [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html).
 
 --------------------------------------------------------------------------------
 
@@ -36819,6 +36897,17 @@ An `image` element as a panel, with two `text` elements on top — the second us
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-element>` elements using the [ElementComponentElement API](https://api.playcanvas.com/web-components/classes/ElementComponentElement.html).
+
+The `component` property is the engine [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-screen>`](../pc-screen) — every element sits under a screen
+* [`<pc-button>`](../pc-button) — makes an image element interactive
+* [`<pc-layout-group>`](../pc-layout-group) — arranges sibling elements automatically
+* [`<pc-scroll-view>`](../pc-scroll-view) — scrolls a content element inside a viewport
+
+Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [Text](https://playcanvas.github.io/web-components/examples/text.html), [3D Text](https://playcanvas.github.io/web-components/examples/3d-text.html) and [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html).
 
 --------------------------------------------------------------------------------
 
@@ -36918,7 +37007,18 @@ Entity transforms compose down the hierarchy: the small cube is a *child* of the
 
 You can programmatically create and manipulate `<pc-entity>` elements using the [EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html).
 
+The `entity` property is the engine [Entity](https://api.playcanvas.com/engine/classes/Entity.html) the element creates — `null` until the element is ready — so anything the attributes do not cover, from `lookAt()` to the components that child tags added, is reached through it.
+
 To stamp out many copies of an entity subtree, declare it once inside a native `<template>` element and clone it — see [Reusable Scenes with Templates](../templates.md).
+
+## See Also
+
+* [`<pc-model>`](../pc-model) — an entity that instantiates a GLB
+* [`<pc-node>`](../pc-node) — an entity inside a loaded model, addressed by name
+* [`<pc-script>`](../pc-script) — behavior attached to an entity
+* [Reusable Scenes with Templates](../templates.md) — cloning entity subtrees from a `<template>`
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).
 
 --------------------------------------------------------------------------------
 
@@ -36978,7 +37078,15 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 You can programmatically create and manipulate `<pc-gsplat>` elements using the [GSplatComponentElement API](https://api.playcanvas.com/web-components/classes/GSplatComponentElement.html).
 
-The examples cover a few splat workflows: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html).
+The `component` property is the engine [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the splat file, declared as a `gsplat` asset
+* [`<pc-app>`](../pc-app) — the device settings recommended for splats
+* [Using Web Components](../../gaussian-splatting/building/your-first-app/web-components.md) — a first splat app, step by step
+
+Examples: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html).
 
 --------------------------------------------------------------------------------
 
@@ -37158,6 +37266,8 @@ The [Physics Joints example](https://playcanvas.github.io/web-components/example
 
 You can programmatically create and manipulate `<pc-joint>` elements using the [JointComponentElement API](https://api.playcanvas.com/web-components/classes/JointComponentElement.html).
 
+The `component` property is the engine [JointComponent](https://api.playcanvas.com/engine/classes/JointComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
 `entity-a` and `entity-b` resolve when they are set, so an entity created later is not picked up on its own — set the attribute again once it exists:
 
 ```javascript
@@ -37166,6 +37276,14 @@ joint.entityA = '#link-3'; // re-resolves now
 ```
 
 Both accept the same reference forms as other entity-valued attributes — an entity `name` (resolved against the nearest enclosing entity first), or a document-wide `#` selector. See [Entity References](../attributes.md#entity-references).
+
+## See Also
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — both constrained entities need one
+* [`<pc-collision>`](../pc-collision) — gives a body its shape
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+
+Examples: [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html).
 
 --------------------------------------------------------------------------------
 
@@ -37238,6 +37356,15 @@ Three items in a horizontal group with `width-fitting="stretch"`. The middle ite
 
 You can programmatically create and manipulate `<pc-layout-child>` elements using the [LayoutChildComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutChildComponentElement.html).
 
+The `component` property is the engine [LayoutChildComponent](https://api.playcanvas.com/engine/classes/LayoutChildComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-layout-group>`](../pc-layout-group) — the group whose layout the child adjusts
+* [`<pc-element>`](../pc-element) — the element the child sizes
+
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-layout-group>
@@ -37308,7 +37435,15 @@ A vertical list that lays out its rows automatically. Try `orientation="horizont
 
 You can programmatically create and manipulate `<pc-layout-group>` elements using the [LayoutGroupComponentElement API](https://api.playcanvas.com/web-components/classes/LayoutGroupComponentElement.html).
 
-The [UI Layout example](https://playcanvas.github.io/web-components/examples/ui-layout.html) builds a nested set of layout groups on a world-space screen.
+The `component` property is the engine [LayoutGroupComponent](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-layout-child>`](../pc-layout-child) — per-child sizing rules
+* [`<pc-element>`](../pc-element) — the elements being arranged
+* [`<pc-screen>`](../pc-screen) — the screen the layout lives on
+
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
 
 --------------------------------------------------------------------------------
 
@@ -37420,6 +37555,16 @@ Try editing the light `color`, `intensity` or `type` values and watch the scene 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-light>` elements using the [LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html).
+
+The `component` property is the engine [LightComponent](https://api.playcanvas.com/engine/classes/LightComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scene>`](../pc-scene) — exposure, which scales every light's contribution
+* [`<pc-sky>`](../pc-sky) — image-based lighting to fill in what direct lights miss
+* [`<pc-render>`](../pc-render) — `cast-shadows` and `receive-shadows` on what the light hits
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html).
 
 --------------------------------------------------------------------------------
 
@@ -37563,6 +37708,16 @@ The `name` attribute is worth setting on any material you expect to identify lat
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-material>` elements using the [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html).
+
+The `material` property is the engine [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) the element builds, and `MaterialElement.get(id)` looks one up by `id`. The element is synchronous, so neither waits on readiness.
+
+## See Also
+
+* [`<pc-render>`](../pc-render) — applies a material to a primitive
+* [`<pc-node>`](../pc-node) — overrides materials inside a loaded model
+* [`<pc-asset>`](../pc-asset) — the texture assets a material's maps reference
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).
 
 --------------------------------------------------------------------------------
 
@@ -37764,6 +37919,15 @@ The material `name` values are runtime labels read as they stand, which makes th
 
 The tree is a snapshot, computed afresh on each call: it does not track later changes to the hierarchy, and mutating it changes nothing. Being plain data, it survives `JSON.stringify`, so it is easy to log, diff or assert against in a test.
 
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the container asset a model instantiates
+* [`<pc-node>`](../pc-node) — reaches into the instantiated hierarchy
+* [`<pc-anim>`](../pc-anim) — plays the animations the GLB carries
+* [Loading Models](../loading-models.md) — loading a model and adjusting it from markup
+
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-node>
@@ -37919,6 +38083,15 @@ body.materialOverrides = null; // back to the authored materials
 
 The element stores a frozen copy of what you assign, so mutating your object afterwards changes nothing — assign a new mapping to change one. Property writes do not reflect back to the `material-overrides` attribute, which follows how the other override properties behave.
 
+## See Also
+
+* [`<pc-model>`](../pc-model) — the model whose node is bound
+* [`<pc-material>`](../pc-material) — materials a node can substitute via `material-overrides`
+* [`<pc-entity>`](../pc-entity) — attaches new content under a node
+* [Loading Models](../loading-models.md) — finding the nodes inside a loaded model
+
+Examples: [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-particle-system>
@@ -38007,6 +38180,15 @@ Then add the particle system to your scene in HTML. This runs the `snow.json` ab
 
 You can programmatically create and manipulate `<pc-particle-system>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).
 
+The `component` property is the engine [ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the JSON configuration and the textures it names
+* [`<pc-entity>`](../pc-entity) — positions and orients the emitter
+
+Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-render>
@@ -38079,6 +38261,17 @@ All six primitive shapes. Try changing any `type`, or add `material` once you ha
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-render>` elements using the [RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html).
+
+The `component` property is the engine [RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-material>`](../pc-material) — the material a primitive is drawn with
+* [`<pc-model>`](../pc-model) — renders a GLB instead of a primitive
+* [`<pc-light>`](../pc-light) — lights and shadows the primitive
+* [`<pc-collision>`](../pc-collision) — a matching physics shape
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html).
 
 --------------------------------------------------------------------------------
 
@@ -38157,7 +38350,16 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
 
 You can programmatically create and manipulate `<pc-rigid-body>` elements using the [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html).
 
-The physics examples build on this tag: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html), [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).
+The `component` property is the engine [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-collision>`](../pc-collision) — the shape the body collides with; every rigid body needs one
+* [`<pc-joint>`](../pc-joint) — constrains two bodies together
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+* [`<pc-scene>`](../pc-scene) — gravity
+
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).
 
 --------------------------------------------------------------------------------
 
@@ -38225,6 +38427,17 @@ Boxes fading into linear fog. Try a different `fog-color` (match the camera's `c
 
 You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html).
 
+The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — `null` until the element is ready — where fog, exposure and the sky are configured.
+
+## See Also
+
+* [`<pc-app>`](../pc-app) — the application that holds the scene
+* [`<pc-sky>`](../pc-sky) — the scene's skybox and image-based lighting
+* [`<pc-camera>`](../pc-camera) — tone mapping, applied after the scene's exposure
+* [`<pc-rigid-body>`](../pc-rigid-body) — the bodies gravity acts on
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-screen>
@@ -38290,6 +38503,17 @@ A screen-space screen hosting a text element. With `scale-mode="blend"`, the UI 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-screen>` elements using the [ScreenComponentElement API](https://api.playcanvas.com/web-components/classes/ScreenComponentElement.html).
+
+The `component` property is the engine [ScreenComponent](https://api.playcanvas.com/engine/classes/ScreenComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-element>`](../pc-element) — the elements a screen renders
+* [`<pc-layout-group>`](../pc-layout-group) — automatic arrangement of elements
+* [`<pc-scroll-view>`](../pc-scroll-view) — scrolling content on a screen
+* [`<pc-button>`](../pc-button) — interactive elements
+
+Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
 
 --------------------------------------------------------------------------------
 
@@ -38378,6 +38602,14 @@ You can programmatically create and manipulate `<pc-script-instance>` elements u
 
 The element becomes ready once its script instance has been created — await `whenReady('pc-script-instance')` or the element's `ready()` promise. The live `Script` instance is then available via the `script` property, and script attributes can be read and written as an object via the `scriptAttributes` property.
 
+## See Also
+
+* [`<pc-script>`](../pc-script) — the component that hosts instances
+* [`<pc-asset>`](../pc-asset) — loads the script's module
+* [Adding Behavior with Scripts](../scripting.md) — declaring and typing script attributes
+
+Examples: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html), [Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html) and [Annotations](https://playcanvas.github.io/web-components/examples/annotations.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-script>
@@ -38455,6 +38687,16 @@ One script component holding two scripts — `rotate` spins the cube while `puls
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-script>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html).
+
+The `component` property is the engine [ScriptComponent](https://api.playcanvas.com/engine/classes/ScriptComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-script-instance>`](../pc-script-instance) — each script the component runs
+* [`<pc-asset>`](../pc-asset) — how script modules are loaded
+* [Adding Behavior with Scripts](../scripting.md) — writing scripts and declaring their attributes
+
+Examples: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html), [First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html) and [Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html).
 
 --------------------------------------------------------------------------------
 
@@ -38554,6 +38796,16 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
 
 You can programmatically create and manipulate `<pc-scroll-view>` elements using the [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html).
 
+The `component` property is the engine [ScrollViewComponent](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scrollbar>`](../pc-scrollbar) — drives the view and reflects its position
+* [`<pc-element>`](../pc-element) — the viewport and content are elements; `mask` clips the content
+* [`<pc-layout-group>`](../pc-layout-group) — lays out the content's children
+
+Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-scrollbar>
@@ -38616,6 +38868,16 @@ A standalone vertical scrollbar — drag the orange handle. Try a different `han
 
 You can programmatically create and manipulate `<pc-scrollbar>` elements using the [ScrollbarComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollbarComponentElement.html).
 
+The `component` property is the engine [ScrollbarComponent](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scroll-view>`](../pc-scroll-view) — the view a scrollbar drives
+* [`<pc-element>`](../pc-element) — the track and handle are image elements
+* [`<pc-screen>`](../pc-screen) — the screen the scrollbar renders on
+
+Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+
 --------------------------------------------------------------------------------
 
 ## <pc-sky>
@@ -38673,6 +38935,16 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-sky>` elements using the [SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html).
+
+The attributes are mirrored as properties. The sky itself is engine scene state — `sky` and the environment atlas on the [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — reached through the `<pc-scene>` element's `scene` property.
+
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the equirectangular texture asset
+* [`<pc-scene>`](../pc-scene) — exposure, and where the sky lives in the engine
+* [`<pc-light>`](../pc-light) — direct lights alongside the sky's image-based lighting
+
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html).
 
 --------------------------------------------------------------------------------
 
@@ -38750,6 +39022,16 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-sound-slot>` elements using the [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html).
+
+The attributes are mirrored as properties. The engine [SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html) itself belongs to the parent component: `soundElement.component.slot(name)` returns it.
+
+## See Also
+
+* [`<pc-sound>`](../pc-sound) — the component a slot belongs to
+* [`<pc-asset>`](../pc-asset) — the audio asset a slot plays
+* [`<pc-audio-listener>`](../pc-audio-listener) — positional playback needs a listener
+
+Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).
 
 --------------------------------------------------------------------------------
 
@@ -38831,6 +39113,16 @@ One sound component holding two slots — looping footsteps and a one-shot. The 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-sound>` elements using the [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html).
+
+The `component` property is the engine [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-sound-slot>`](../pc-sound-slot) — each clip the component plays
+* [`<pc-audio-listener>`](../pc-audio-listener) — required for positional sound
+* [`<pc-asset>`](../pc-asset) — audio assets
+
+Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).
 
 --------------------------------------------------------------------------------
 
@@ -38917,6 +39209,16 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-wasm>` elements using the [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html).
+
+The element exposes no engine object of its own. Once it is ready the module has been instantiated through the engine's `WasmModule` under its `name` (`Basis` goes through the engine's Basis initializer instead), and the global the module defines, such as `Ammo`, is available to scripts.
+
+## See Also
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — physics, the usual reason to load Ammo
+* [`<pc-collision>`](../pc-collision) — collision shapes for physics
+* [`<pc-app>`](../pc-app) — waits for every module before it boots
+
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html) and [Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html).
 
 --------------------------------------------------------------------------------
 
