@@ -176,6 +176,8 @@ The [Physics Joints example](https://playcanvas.github.io/web-components/example
 
 You can programmatically create and manipulate `<pc-joint>` elements using the [JointComponentElement API](https://api.playcanvas.com/web-components/classes/JointComponentElement.html).
 
+The `component` property is the engine [JointComponent](https://api.playcanvas.com/engine/classes/JointComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
 `entity-a` and `entity-b` resolve when they are set, so an entity created later is not picked up on its own — set the attribute again once it exists:
 
 ```javascript
@@ -184,3 +186,11 @@ joint.entityA = '#link-3'; // re-resolves now
 ```
 
 Both accept the same reference forms as other entity-valued attributes — an entity `name` (resolved against the nearest enclosing entity first), or a document-wide `#` selector. See [Entity References](../attributes.md#entity-references).
+
+## See Also
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — both constrained entities need one
+* [`<pc-collision>`](../pc-collision) — gives a body its shape
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+
+Examples: [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html).

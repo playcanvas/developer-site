@@ -95,4 +95,15 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 [EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html)を使用して、`<pc-entity>`要素をプログラムで作成および操作できます。
 
+`entity`プロパティは、この要素が作成するエンジンの[Entity](https://api.playcanvas.com/engine/classes/Entity.html)です。要素の準備が完了するまでは`null`で、`lookAt()`から子タグが追加したコンポーネントまで、属性がカバーしないものはすべてここから利用できます。
+
 エンティティのサブツリーのコピーを大量に作るには、ネイティブの `<template>` 要素の中に一度だけ宣言してクローンしてください — [テンプレートによる再利用可能なシーン](../templates.md)を参照してください。
+
+## 関連項目 {#see-also}
+
+* [`<pc-model>`](../pc-model) — GLBをインスタンス化するエンティティ
+* [`<pc-node>`](../pc-node) — 名前で指定する、読み込まれたモデル内のエンティティ
+* [`<pc-script>`](../pc-script) — エンティティに付ける振る舞い
+* [テンプレートによる再利用可能なシーン](../templates.md) — `<template>`からエンティティのサブツリーをクローンする方法
+
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)

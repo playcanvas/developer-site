@@ -69,3 +69,14 @@ glTF/GLBファイルから3Dモデルをレンダリングするには、代わ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html)を使用して、`<pc-render>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-material>`](../pc-material) — プリミティブを描くマテリアル
+* [`<pc-model>`](../pc-model) — プリミティブの代わりにGLBをレンダリングします
+* [`<pc-light>`](../pc-light) — プリミティブに光と影を当てます
+* [`<pc-collision>`](../pc-collision) — 対応する物理形状
+
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)、[Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html)

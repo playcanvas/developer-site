@@ -95,4 +95,15 @@ Entity transforms compose down the hierarchy: the small cube is a *child* of the
 
 You can programmatically create and manipulate `<pc-entity>` elements using the [EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html).
 
+The `entity` property is the engine [Entity](https://api.playcanvas.com/engine/classes/Entity.html) the element creates — `null` until the element is ready — so anything the attributes do not cover, from `lookAt()` to the components that child tags added, is reached through it.
+
 To stamp out many copies of an entity subtree, declare it once inside a native `<template>` element and clone it — see [Reusable Scenes with Templates](../templates.md).
+
+## See Also
+
+* [`<pc-model>`](../pc-model) — an entity that instantiates a GLB
+* [`<pc-node>`](../pc-node) — an entity inside a loaded model, addressed by name
+* [`<pc-script>`](../pc-script) — behavior attached to an entity
+* [Reusable Scenes with Templates](../templates.md) — cloning entity subtrees from a `<template>`
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).

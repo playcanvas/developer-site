@@ -139,3 +139,13 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html)を使用して、`<pc-material>`要素をプログラムで作成および操作できます。
+
+`material`プロパティは、この要素が構築するエンジンの[StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html)です。`MaterialElement.get(id)`を使えば`id`でマテリアルを取得できます。この要素は同期的に初期化されるため、どちらも準備完了を待つ必要はありません。
+
+## 関連項目 {#see-also}
+
+* [`<pc-render>`](../pc-render) — プリミティブにマテリアルを適用します
+* [`<pc-node>`](../pc-node) — 読み込まれたモデル内のマテリアルをオーバーライドします
+* [`<pc-asset>`](../pc-asset) — マテリアルのマップが参照するテクスチャアセット
+
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)、[Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html)

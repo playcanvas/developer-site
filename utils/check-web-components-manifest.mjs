@@ -88,6 +88,13 @@ const EVENTS_BY_REFERENCE = {
     'pc-model': /^(click|pointer(down|up|move|enter|leave))$/
 };
 
+// The shape every page's tail takes: a JavaScript Interface section, then See Also as the last
+// section, linking sibling tag pages and examples from the library's gallery. The Japanese pages
+// carry the English heading ids explicitly.
+const JS_INTERFACE_HEADING = { en: /^## JavaScript Interface\s*$/m, ja: /^## .*\{#javascript-interface\}\s*$/m };
+const SEE_ALSO_HEADING = { en: /^See Also\s*$/m, ja: /^.*\{#see-also\}\s*$/m };
+const EXAMPLES_URL = 'https://playcanvas.github.io/web-components/examples/';
+
 const args = process.argv.slice(2);
 const option = (flag) => {
     const index = args.indexOf(flag);
@@ -371,6 +378,31 @@ for (const locale of LOCALES) {
         for (const name of READ_ONCE[tag] ?? []) {
             if (!rows.has(name)) {
                 report(locale.name, tag, `READ_ONCE lists \`${name}\`, which is not in the attribute table`);
+            }
+        }
+
+        // Every page ends the same way: a JavaScript Interface section, then a See Also section
+        // that links at least one sibling tag page (which must exist) and at least one example
+        // from the library's gallery.
+        if (!JS_INTERFACE_HEADING[locale.name].test(markdown)) {
+            report(locale.name, tag, 'no JavaScript Interface section');
+        }
+        const sections = markdown.split(/^## /m);
+        const seeAlso = sections[sections.length - 1];
+        if (!SEE_ALSO_HEADING[locale.name].test(seeAlso)) {
+            report(locale.name, tag, 'the last section is not See Also');
+        } else {
+            const siblings = [...seeAlso.matchAll(/\]\(\.\.\/(pc-[a-z-]+)\)/g)].map((match) => match[1]);
+            if (siblings.length === 0) {
+                report(locale.name, tag, 'See Also links no sibling tag page');
+            }
+            for (const sibling of siblings) {
+                if (!elements.has(sibling)) {
+                    report(locale.name, tag, `See Also links \`<${sibling}>\`, which is not a tag`);
+                }
+            }
+            if (!seeAlso.includes(EXAMPLES_URL)) {
+                report(locale.name, tag, 'See Also links no example from the gallery');
             }
         }
 

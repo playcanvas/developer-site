@@ -95,3 +95,13 @@ description: "pc-scroll-view要素のリファレンス: コンテンツ、ス�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html)を使用して、`<pc-scroll-view>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ScrollViewComponent](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-scrollbar>`](../pc-scrollbar) — ビューを操作し、その位置を反映します
+* [`<pc-element>`](../pc-element) — ビューポートとコンテンツは要素です。`mask`がコンテンツをクリップします
+* [`<pc-layout-group>`](../pc-layout-group) — コンテンツの子を配置します
+
+サンプル: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

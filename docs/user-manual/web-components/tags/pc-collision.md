@@ -87,3 +87,13 @@ Each collision shape matches its rendered shape: a sphere, a capsule and a box t
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-collision>` elements using the [CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html).
+
+The `component` property is the engine [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — makes a collision shape take part in physics
+* [`<pc-joint>`](../pc-joint) — constrains two bodies that have collision shapes
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html) and [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html).

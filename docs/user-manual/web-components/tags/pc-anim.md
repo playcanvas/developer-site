@@ -193,3 +193,11 @@ console.log(anim.clips); // ['walk', 'stalk']
 ```
 
 Anything this element does not expose is available on `component` — the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) — including the playhead (`baseLayer.activeStateCurrentTime`), the active clip's duration, and state graphs and blend trees for animation beyond a flat set of clips.
+
+## See Also
+
+* [`<pc-anim-clip>`](../pc-anim-clip) — declares each clip the component plays
+* [`<pc-model>`](../pc-model) — the usual host, whose GLB supplies the animation tracks
+* [`<pc-asset>`](../pc-asset) — supplies clips from a separate GLB or animclip JSON
+
+Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html).

@@ -62,3 +62,14 @@ description: "pc-scene要素のリファレンス: pc-app内のシーンコン�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html)を使用して、`<pc-scene>`要素をプログラムで作成および操作できます。
+
+`scene`プロパティは、エンジンの[Scene](https://api.playcanvas.com/engine/classes/Scene.html)です。要素の準備が完了するまでは`null`で、フォグ、露出、スカイはここで設定されます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-app>`](../pc-app) — シーンを保持するアプリケーション
+* [`<pc-sky>`](../pc-sky) — シーンのスカイボックスと画像ベースのライティング
+* [`<pc-camera>`](../pc-camera) — シーンの露出のあとに適用されるトーンマッピング
+* [`<pc-rigid-body>`](../pc-rigid-body) — 重力が働くボディ
+
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html)

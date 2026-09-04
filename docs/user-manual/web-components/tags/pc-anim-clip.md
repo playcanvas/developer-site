@@ -147,3 +147,10 @@ document.querySelector('pc-anim').appendChild(clip);
 await clip.ready();
 document.querySelector('pc-anim').transition('wave');
 ```
+
+## See Also
+
+* [`<pc-anim>`](../pc-anim) — the component a clip belongs to
+* [`<pc-asset>`](../pc-asset) — the container or animation asset a clip's track comes from
+
+Examples: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html).

@@ -72,3 +72,14 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 ## JavaScriptインターフェース {#javascript-interface}
 
 [CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html)を使用して、`<pc-camera>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-scene>`](../pc-scene) — カメラのトーンマッピングと組み合わせて働く露出とフォグ
+* [`<pc-sky>`](../pc-sky) — クリアカラーの代わりに背景となるスカイボックス
+* [`<pc-script>`](../pc-script) — カメラ操作はカメラの隣に付けるエンジンスクリプト
+* [XR のサポート](../xr.md) — カメラ要素からVRやARを開始する方法
+
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html)

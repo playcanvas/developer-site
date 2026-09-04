@@ -140,3 +140,14 @@ Sprites are defined by a texture atlas (which holds the frame definitions) and o
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-asset>` elements using the [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html).
+
+The `asset` property is the engine [Asset](https://api.playcanvas.com/engine/classes/Asset.html) the element registered — `null` until the element is ready — and `AssetElement.get(id)` looks one up by `id` without holding the element.
+
+## See Also
+
+* [`<pc-model>`](../pc-model) — instantiates a container asset
+* [`<pc-material>`](../pc-material) — takes texture assets for its maps
+* [`<pc-sound-slot>`](../pc-sound-slot) — plays an audio asset
+* [`<pc-script-instance>`](../pc-script-instance) — runs a script loaded as an asset
+
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html) and [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html).

@@ -198,3 +198,12 @@ Each line is a node: its name, then `[index]` when other nodes share that name, 
 The material `name` values are runtime labels read as they stand, which makes them a convenient handle but not a unique one: an unnamed glTF material is called `Untitled`, a primitive authored without a material carries the engine's shared `defaultGlbMaterial`, duplicates stay duplicated, and the name is `null` if a script cleared the assignment. The `index` is the unambiguous one. Both are what [`<pc-node>`'s `material-overrides`](../pc-node#overriding-materials) selects with, and a [`<pc-material>`](../pc-material) you swap in reports whatever its `name` attribute says — worth setting on any material you want to recognize here.
 
 The tree is a snapshot, computed afresh on each call: it does not track later changes to the hierarchy, and mutating it changes nothing. Being plain data, it survives `JSON.stringify`, so it is easy to log, diff or assert against in a test.
+
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the container asset a model instantiates
+* [`<pc-node>`](../pc-node) — reaches into the instantiated hierarchy
+* [`<pc-anim>`](../pc-anim) — plays the animations the GLB carries
+* [Loading Models](../loading-models.md) — loading a model and adjusting it from markup
+
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html).
