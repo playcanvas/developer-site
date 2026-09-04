@@ -133,6 +133,12 @@ fragDepth: @builtin(frag_depth)
 }
 ```
 
+#### デュアルソース出力
+
+マテリアルのブレンドステートが 2 つ目のソースを参照する係数を使用する場合、1 つ目のカラーを `output.color` に、2 つ目のブレンド値を `output.colorSecondary` に書き込みます。エンジンは、適切な `@blend_src` 属性を使用してロケーション 0 に両方の出力を生成し、必要な WGSL 拡張を有効にします。
+
+デュアルソースブレンディングには、カラーアタッチメントが 1 つだけ必要です。ケイパビリティの検出と BlendState の設定については、[デュアルソースブレンディング](/user-manual/graphics/advanced-rendering/dual-source-blending) を参照してください。
+
 :::note
 
 整数テクスチャへのレンダリング（`vec4f`以外の出力フォーマット）のサポートはまだ利用できませんが、将来追加される予定です。
