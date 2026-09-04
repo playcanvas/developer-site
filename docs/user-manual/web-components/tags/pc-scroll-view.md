@@ -95,3 +95,5 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-scroll-view>` elements using the [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html).
+
+The `component` property is the engine [ScrollViewComponent](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

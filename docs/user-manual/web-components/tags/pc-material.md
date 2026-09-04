@@ -139,3 +139,5 @@ The `name` attribute is worth setting on any material you expect to identify lat
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-material>` elements using the [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html).
+
+The `material` property is the engine [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) the element builds, and `MaterialElement.get(id)` looks one up by `id`. The element is synchronous, so neither waits on readiness.

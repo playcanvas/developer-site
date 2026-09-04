@@ -176,6 +176,8 @@ joint.component.refreshFrames(); // 復帰し、現在のトランスフォー�
 
 [JointComponentElement API](https://api.playcanvas.com/web-components/classes/JointComponentElement.html)を使用して、`<pc-joint>`要素をプログラムで作成および操作できます。
 
+`component`プロパティは、この要素が追加するエンジンの[JointComponent](https://api.playcanvas.com/engine/classes/JointComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
 `entity-a`と`entity-b`は設定された時点で解決されるため、後から作成されたエンティティは自動では取り込まれません。存在する状態で属性を再設定してください。
 
 ```javascript

@@ -87,3 +87,5 @@ Each collision shape matches its rendered shape: a sphere, a capsule and a box t
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-collision>` elements using the [CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html).
+
+The `component` property is the engine [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

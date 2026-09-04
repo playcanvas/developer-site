@@ -54,3 +54,5 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-sky>` elements using the [SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html).
+
+The attributes are mirrored as properties. The sky itself is engine scene state — `sky` and the environment atlas on the [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — reached through the `<pc-scene>` element's `scene` property.

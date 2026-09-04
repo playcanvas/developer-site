@@ -54,3 +54,5 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html)を使用して、`<pc-sky>`要素をプログラムで作成および操作できます。
+
+属性はプロパティとしても利用できます。スカイそのものはエンジンのシーンの状態、つまり[Scene](https://api.playcanvas.com/engine/classes/Scene.html)の`sky`と環境アトラスであり、`<pc-scene>`要素の`scene`プロパティを通じてアクセスします。

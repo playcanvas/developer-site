@@ -140,3 +140,5 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 ## JavaScriptインターフェース {#javascript-interface}
 
 [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html)を使用して、`<pc-asset>`要素をプログラムで作成および操作できます。
+
+`asset`プロパティは、この要素が登録したエンジンの[Asset](https://api.playcanvas.com/engine/classes/Asset.html)です。要素の準備が完了するまでは`null`です。`AssetElement.get(id)`を使えば、要素を保持せずに`id`でアセットを取得できます。

@@ -62,3 +62,5 @@ Boxes fading into linear fog. Try a different `fog-color` (match the camera's `c
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html).
+
+The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — `null` until the element is ready — where fog, exposure and the sky are configured.

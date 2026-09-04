@@ -73,3 +73,5 @@ description: "pc-sound-slot要素のリファレンス: 位置オーディオま
 ## JavaScriptインターフェース {#javascript-interface}
 
 [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html)を使用して、`<pc-sound-slot>`要素をプログラムで作成および操作できます。
+
+属性はプロパティとしても利用できます。エンジンの[SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html)そのものは親コンポーネントに属しており、`soundElement.component.slot(name)`で取得できます。

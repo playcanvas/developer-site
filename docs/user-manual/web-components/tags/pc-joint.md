@@ -176,6 +176,8 @@ The [Physics Joints example](https://playcanvas.github.io/web-components/example
 
 You can programmatically create and manipulate `<pc-joint>` elements using the [JointComponentElement API](https://api.playcanvas.com/web-components/classes/JointComponentElement.html).
 
+The `component` property is the engine [JointComponent](https://api.playcanvas.com/engine/classes/JointComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
 `entity-a` and `entity-b` resolve when they are set, so an entity created later is not picked up on its own — set the attribute again once it exists:
 
 ```javascript

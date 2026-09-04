@@ -55,4 +55,6 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 You can programmatically create and manipulate `<pc-gsplat>` elements using the [GSplatComponentElement API](https://api.playcanvas.com/web-components/classes/GSplatComponentElement.html).
 
+The `component` property is the engine [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
 The examples cover a few splat workflows: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html).

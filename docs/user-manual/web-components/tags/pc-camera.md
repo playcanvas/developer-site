@@ -72,3 +72,5 @@ A row of boxes receding into the distance. Try a different `fov`, or switch to `
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-camera>` elements using the [CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html).
+
+The `component` property is the engine [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

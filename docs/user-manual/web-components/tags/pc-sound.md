@@ -77,3 +77,5 @@ One sound component holding two slots — looping footsteps and a one-shot. The 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-sound>` elements using the [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html).
+
+The `component` property is the engine [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

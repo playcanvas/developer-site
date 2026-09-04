@@ -107,3 +107,5 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html)を使用して、`<pc-light>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[LightComponent](https://api.playcanvas.com/engine/classes/LightComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

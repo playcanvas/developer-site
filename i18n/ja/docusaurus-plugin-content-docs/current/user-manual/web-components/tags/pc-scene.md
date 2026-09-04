@@ -62,3 +62,5 @@ description: "pc-scene要素のリファレンス: pc-app内のシーンコン�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html)を使用して、`<pc-scene>`要素をプログラムで作成および操作できます。
+
+`scene`プロパティは、エンジンの[Scene](https://api.playcanvas.com/engine/classes/Scene.html)です。要素の準備が完了するまでは`null`で、フォグ、露出、スカイはここで設定されます。

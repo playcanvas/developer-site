@@ -77,3 +77,5 @@ The listener sits on the camera, and a sphere emitting positional footsteps circ
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-audio-listener>` elements using the [AudioListenerComponentElement API](https://api.playcanvas.com/web-components/classes/AudioListenerComponentElement.html).
+
+The `component` property is the engine [AudioListenerComponent](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

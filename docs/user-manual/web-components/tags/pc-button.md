@@ -89,3 +89,5 @@ button.component.on('click', () => {
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-button>` elements using the [ButtonComponentElement API](https://api.playcanvas.com/web-components/classes/ButtonComponentElement.html).
+
+The `component` property is the engine [ButtonComponent](https://api.playcanvas.com/engine/classes/ButtonComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

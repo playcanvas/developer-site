@@ -139,3 +139,5 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html)を使用して、`<pc-material>`要素をプログラムで作成および操作できます。
+
+`material`プロパティは、この要素が構築するエンジンの[StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html)です。`MaterialElement.get(id)`を使えば`id`でマテリアルを取得できます。この要素は同期的に初期化されるため、どちらも準備完了を待つ必要はありません。

@@ -72,3 +72,5 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 ## JavaScriptインターフェース {#javascript-interface}
 
 [CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html)を使用して、`<pc-camera>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

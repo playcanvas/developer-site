@@ -69,3 +69,5 @@ All six primitive shapes. Try changing any `type`, or add `material` once you ha
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-render>` elements using the [RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html).
+
+The `component` property is the engine [RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

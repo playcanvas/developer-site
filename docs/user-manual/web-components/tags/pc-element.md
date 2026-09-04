@@ -89,3 +89,5 @@ An `image` element as a panel, with two `text` elements on top — the second us
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-element>` elements using the [ElementComponentElement API](https://api.playcanvas.com/web-components/classes/ElementComponentElement.html).
+
+The `component` property is the engine [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

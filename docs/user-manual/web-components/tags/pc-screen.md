@@ -62,3 +62,5 @@ A screen-space screen hosting a text element. With `scale-mode="blend"`, the UI 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-screen>` elements using the [ScreenComponentElement API](https://api.playcanvas.com/web-components/classes/ScreenComponentElement.html).
+
+The `component` property is the engine [ScreenComponent](https://api.playcanvas.com/engine/classes/ScreenComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

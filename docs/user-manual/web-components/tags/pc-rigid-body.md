@@ -74,4 +74,6 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
 
 You can programmatically create and manipulate `<pc-rigid-body>` elements using the [RigidBodyComponentElement API](https://api.playcanvas.com/web-components/classes/RigidBodyComponentElement.html).
 
+The `component` property is the engine [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
 The physics examples build on this tag: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html), [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).

@@ -84,3 +84,5 @@ Then add the particle system to your scene in HTML. This runs the `snow.json` ab
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-particle-system>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).
+
+The `component` property is the engine [ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

@@ -114,3 +114,5 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 ## JavaScriptインターフェース {#javascript-interface}
 
 [AppElement API](https://api.playcanvas.com/web-components/classes/AppElement.html)を使用して、`<pc-app>`要素をプログラムで作成および操作できます。
+
+`app`プロパティは、実行中のエンジンの[AppBase](https://api.playcanvas.com/engine/classes/AppBase.html)です。要素の準備が完了するまでは`null`で、シーン、アセットレジストリ、レンダーループにアクセスできます。`elementFromEntity()`は、エンジンのエンティティからそれを表す要素を返します。

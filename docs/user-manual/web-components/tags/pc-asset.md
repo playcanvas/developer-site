@@ -140,3 +140,5 @@ Sprites are defined by a texture atlas (which holds the frame definitions) and o
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-asset>` elements using the [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html).
+
+The `asset` property is the engine [Asset](https://api.playcanvas.com/engine/classes/Asset.html) the element registered — `null` until the element is ready — and `AssetElement.get(id)` looks one up by `id` without holding the element.

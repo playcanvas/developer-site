@@ -72,3 +72,5 @@ description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html)を使用して、`<pc-wasm>`要素をプログラムで作成および操作できます。
+
+この要素はエンジンオブジェクトを公開しません。準備が完了した時点で、モジュールは`name`の下でエンジンの`WasmModule`を通じてインスタンス化されており（`Basis`だけはエンジンのBasis初期化処理を通ります）、モジュールが定義する`Ammo`などのグローバルをスクリプトから利用できます。

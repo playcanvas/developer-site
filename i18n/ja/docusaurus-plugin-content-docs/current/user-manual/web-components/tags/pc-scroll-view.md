@@ -95,3 +95,5 @@ description: "pc-scroll-view要素のリファレンス: コンテンツ、ス�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ScrollViewComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollViewComponentElement.html)を使用して、`<pc-scroll-view>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ScrollViewComponent](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

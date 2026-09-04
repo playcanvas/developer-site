@@ -74,3 +74,5 @@ description: "pc-script要素のリファレンス: pc-script-instance子要素�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html)を使用して、`<pc-script>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ScriptComponent](https://api.playcanvas.com/engine/classes/ScriptComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

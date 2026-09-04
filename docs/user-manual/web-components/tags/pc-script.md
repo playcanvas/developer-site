@@ -74,3 +74,5 @@ One script component holding two scripts — `rotate` spins the cube while `puls
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-script>` elements using the [ScriptComponentElement API](https://api.playcanvas.com/web-components/classes/ScriptComponentElement.html).
+
+The `component` property is the engine [ScriptComponent](https://api.playcanvas.com/engine/classes/ScriptComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.

@@ -69,3 +69,5 @@ glTF/GLBファイルから3Dモデルをレンダリングするには、代わ�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html)を使用して、`<pc-render>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

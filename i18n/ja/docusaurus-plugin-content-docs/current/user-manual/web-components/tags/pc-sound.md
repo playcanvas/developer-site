@@ -77,3 +77,5 @@ description: "pc-sound要素のリファレンス: pc-sound-slotスロットと�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [SoundComponentElement API](https://api.playcanvas.com/web-components/classes/SoundComponentElement.html)を使用して、`<pc-sound>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

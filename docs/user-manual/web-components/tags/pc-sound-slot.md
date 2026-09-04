@@ -73,3 +73,5 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-sound-slot>` elements using the [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html).
+
+The attributes are mirrored as properties. The engine [SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html) itself belongs to the parent component: `soundElement.component.slot(name)` returns it.

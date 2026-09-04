@@ -95,4 +95,6 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 [EntityElement API](https://api.playcanvas.com/web-components/classes/EntityElement.html)を使用して、`<pc-entity>`要素をプログラムで作成および操作できます。
 
+`entity`プロパティは、この要素が作成するエンジンの[Entity](https://api.playcanvas.com/engine/classes/Entity.html)です。要素の準備が完了するまでは`null`で、`lookAt()`から子タグが追加したコンポーネントまで、属性がカバーしないものはすべてここから利用できます。
+
 エンティティのサブツリーのコピーを大量に作るには、ネイティブの `<template>` 要素の中に一度だけ宣言してクローンしてください — [テンプレートによる再利用可能なシーン](../templates.md)を参照してください。

@@ -55,4 +55,6 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 [GSplatComponentElement API](https://api.playcanvas.com/web-components/classes/GSplatComponentElement.html)を使用して、`<pc-gsplat>`要素をプログラムで作成および操作できます。
 
+`component`プロパティは、この要素が追加するエンジンの[GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
 スプラットのワークフローはサンプルでいくつか扱っています。[Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html)、[Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html)、[Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html)、[Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html)です。

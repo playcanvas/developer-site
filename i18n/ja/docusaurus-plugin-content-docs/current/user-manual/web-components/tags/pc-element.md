@@ -89,3 +89,5 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ElementComponentElement API](https://api.playcanvas.com/web-components/classes/ElementComponentElement.html)を使用して、`<pc-element>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

@@ -89,3 +89,5 @@ button.component.on('click', () => {
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ButtonComponentElement API](https://api.playcanvas.com/web-components/classes/ButtonComponentElement.html)を使用して、`<pc-button>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ButtonComponent](https://api.playcanvas.com/engine/classes/ButtonComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

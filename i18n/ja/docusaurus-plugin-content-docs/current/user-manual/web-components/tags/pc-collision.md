@@ -87,3 +87,5 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 ## JavaScriptインターフェース {#javascript-interface}
 
 [CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html)を使用して、`<pc-collision>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

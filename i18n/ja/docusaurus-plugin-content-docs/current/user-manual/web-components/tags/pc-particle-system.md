@@ -84,3 +84,5 @@ description: "pc-particle-system要素のリファレンス: エミッター、�
 ## JavaScriptインターフェース {#javascript-interface}
 
 [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html)を使用して、`<pc-particle-system>`要素をプログラムで作成および操作できます。
+
+`component`プロパティは、この要素が追加するエンジンの[ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。

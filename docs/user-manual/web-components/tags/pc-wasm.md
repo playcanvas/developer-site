@@ -82,3 +82,5 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-wasm>` elements using the [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html).
+
+The element exposes no engine object of its own. Once it is ready the module has been instantiated through the engine's `WasmModule` under its `name` (`Basis` goes through the engine's Basis initializer instead), and the global the module defines, such as `Ammo`, is available to scripts.

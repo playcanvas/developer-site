@@ -107,3 +107,5 @@ Try editing the light `color`, `intensity` or `type` values and watch the scene 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-light>` elements using the [LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html).
+
+The `component` property is the engine [LightComponent](https://api.playcanvas.com/engine/classes/LightComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
