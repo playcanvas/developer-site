@@ -20,7 +20,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `handle` | String | - | [Reference](../attributes.md#entity-references) (entity `name`, or document-wide `#` selector) to the [`<pc-entity>`](../pc-entity) used as the draggable handle |
+| `handle` | [Entity Reference](../attributes.md#entity-references) | - | The [`<pc-entity>`](../pc-entity) used as the draggable handle |
 | `handle-size` | Number | `"0.5"` | Size of the handle relative to the size of the track (0 to 1) |
 | `orientation` | Enum | `"horizontal"` | Orientation of the scrollbar: `"horizontal"` \| `"vertical"` |
 | `value` | Number | `"0"` | Current position of the scrollbar (0 to 1) |

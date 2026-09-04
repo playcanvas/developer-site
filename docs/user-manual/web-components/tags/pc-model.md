@@ -35,7 +35,7 @@ Because the element's own transform belongs to the host, `position`, `rotation` 
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | Container asset ID (must reference a `container` type asset) |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Container asset ID (must reference a `container` type asset) |
 | `enabled` | Boolean | `"true"` | Enabled state of the model |
 | `name` | String | - | Name identifier for the host entity |
 | `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |

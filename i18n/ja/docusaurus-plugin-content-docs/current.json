@@ -99,9 +99,9 @@
     "message": "PlayCanvas Web Components",
     "description": "The label for category PlayCanvas Web Components in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Tags": {
+  "sidebar.userManualSidebar.category.Tag Reference": {
     "message": "タグリファレンス",
-    "description": "The label for category Tags in sidebar userManualSidebar"
+    "description": "The label for category Tag Reference in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.PlayCanvas React": {
     "message": "PlayCanvas React",

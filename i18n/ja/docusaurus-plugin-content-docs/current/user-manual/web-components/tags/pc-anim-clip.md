@@ -56,7 +56,7 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
 
 | 属性 | 型 | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `asset` | String | - | トラックを供給する[`<pc-asset>`](../pc-asset)のID。`container`、`animation`のGLB、`animclip`のJSONのいずれかです。空の場合は囲んでいる[`<pc-model>`](../pc-model)から取得します |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | トラックを供給する[`<pc-asset>`](../pc-asset)のID。`container`、`animation`のGLB、`animclip`のJSONのいずれかです。空の場合は囲んでいる[`<pc-model>`](../pc-model)から取得します |
 | `loop` | Boolean | `"true"` | クリップをループさせるかどうか。ループしないクリップは終了時に最後のポーズを保持します |
 | `name` | String | - | クリップの名前であり、供給元から探すトラックの名前。コンポーネント内で一意で、`.`を含められません |
 | `speed` | Number | `"1"` | このクリップの再生速度。負の値で逆再生します |

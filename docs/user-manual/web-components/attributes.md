@@ -1,6 +1,6 @@
 ---
 title: Attributes
-description: "How PlayCanvas Web Component attributes parse values: shared defaults contract, booleans, numbers, enums, vectors, colors, and entity references."
+description: "How PlayCanvas Web Component attributes parse values: the shared defaults contract, the Type column, booleans, numbers, enums, vectors, colors, asset and material IDs, and entity references."
 ---
 
 Every PlayCanvas Web Component is configured through HTML attributes. All attributes follow the same set of conventions, so once you have learned them, you can predict how any tag will behave.
@@ -20,6 +20,21 @@ The *Default* column in each tag's attribute table shows the value that applies 
 Invalid values never reach the engine. Instead, you get a console warning naming the attribute and the expected format — keep the console open while authoring and typos surface immediately.
 
 [`<pc-node>`](tags/pc-node.md) is the one exception to the middle row. Its attributes are overrides against a node inside a loaded model, so an absent attribute restores the value that model was authored with rather than the engine default.
+
+## The Type Column
+
+The *Type* column of each attribute table names how a value is written. Every type is defined on this page:
+
+| Type | Written as |
+| --- | --- |
+| Boolean | `"true"`, `"false"`, or bare presence — see [Booleans](#booleans) |
+| Number | Any finite number — see [Numbers](#numbers) |
+| Enum | One of a fixed set of names, listed in the attribute's description — see [Enums](#enums) |
+| Vector2, Vector3, Vector4 | Two, three or four space-separated numbers — see [Vectors](#vectors) |
+| Color | A CSS color name, a hex code, or three or four numbers — see [Colors](#colors) |
+| String | Free text: a name, a path, a JSON object |
+| Asset ID, Material ID | The `id` of a [`<pc-asset>`](tags/pc-asset.md) or a [`<pc-material>`](tags/pc-material.md) — see [Asset and Material IDs](#asset-and-material-ids) |
+| Entity Reference | An entity `name`, or a `#` selector — see [Entity References](#entity-references) |
 
 ## Booleans
 
@@ -84,6 +99,19 @@ Color attributes accept any of three formats:
 <pc-camera clear-color="#f0f8ff"></pc-camera>
 <pc-light color="1 0.8 0.6"></pc-light>
 ```
+
+## Asset and Material IDs
+
+Resources are declared once, as direct children of [`<pc-app>`](tags/pc-app.md), and referenced by the `id` you give them. An Asset ID attribute names a [`<pc-asset>`](tags/pc-asset.md); a Material ID attribute names a [`<pc-material>`](tags/pc-material.md):
+
+```html
+<pc-asset id="tiles" src="tiles.png"></pc-asset>
+<pc-material id="floor" diffuse-map="tiles"></pc-material>
+<!-- ... -->
+<pc-render type="plane" material="floor"></pc-render>
+```
+
+The value is the element's own `id`, written bare — no `#`, because it is a lookup in the application's registry rather than a CSS selector. Each attribute's description says which asset type it accepts. An `id` that matches no declared resource has no effect: the element keeps what it had, and [`<pc-model>`](tags/pc-model.md) additionally logs a warning naming the asset it could not find.
 
 ## Entity References
 

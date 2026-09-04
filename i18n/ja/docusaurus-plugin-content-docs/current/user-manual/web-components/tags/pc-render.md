@@ -19,7 +19,7 @@ description: "pc-render要素のリファレンス: プリミティブ形状（�
 | --- | --- | --- | --- |
 | `cast-shadows` | Boolean | `"true"` | コンポーネントが影を落とすかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `material` | String | - | プリミティブのレンダリングに使用する [`<pc-material>`](../pc-material) の `id`。省略した場合はデフォルトのマテリアルが使用されます |
+| `material` | [Material ID](../attributes.md#asset-and-material-ids) | - | プリミティブのレンダリングに使用する [`<pc-material>`](../pc-material) の `id`。省略した場合はデフォルトのマテリアルが使用されます |
 | `receive-shadows` | Boolean | `"true"` | コンポーネントが影を受け取るかどうか |
 | `type` | Enum | `"box"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 

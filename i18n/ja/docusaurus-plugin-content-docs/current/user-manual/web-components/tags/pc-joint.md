@@ -60,8 +60,8 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 | `enable-collision` | Boolean | `"false"` | 拘束される2つのボディが互いに衝突するかどうか |
 | `enable-limits` | Boolean | `"false"` | ジョイントのリミットを適用するかどうか。これを設定するまでリミット系の属性は効果がありません |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `entity-a` | String | - | 1つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。[`<pc-rigid-body>`](../pc-rigid-body)が必要です |
-| `entity-b` | String | - | 2つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。空にすると`entity-a`をワールド空間の固定点に拘束します |
+| `entity-a` | [Entity Reference](../attributes.md#entity-references) | - | 1つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。[`<pc-rigid-body>`](../pc-rigid-body)が必要です |
+| `entity-b` | [Entity Reference](../attributes.md#entity-references) | - | 2つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。空にすると`entity-a`をワールド空間の固定点に拘束します |
 | `limits` | Vector2 | `"-45 45"` | 主軸まわりの回転または移動のリミット。「min max」で、`hinge`では度、`slider`ではユニットです |
 | `linear-damping` | Vector3 | `"1 1 1"` | 直線軸ごとのスプリングのダンピング。`6dof`で使用します |
 | `linear-equilibrium` | Vector3 | `"0 0 0"` | 直線スプリングの静止位置。`6dof`で使用します |

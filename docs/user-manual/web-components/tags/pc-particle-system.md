@@ -17,7 +17,7 @@ The `<pc-particle-system>` tag is used to define a particle system.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | String | - | JSON asset ID defining the particle system configuration |
+| `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | JSON asset ID defining the particle system configuration |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 
 </div>

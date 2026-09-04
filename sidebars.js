@@ -515,7 +515,7 @@ const sidebars = {
         'user-manual/web-components/xr',
         {
           type: 'category',
-          label: 'Tags',
+          label: 'Tag Reference',
           link: {
             type: 'doc',
             id: 'user-manual/web-components/tags/index',
