@@ -12795,7 +12795,7 @@ app.scene.sky.fisheye = 1;
 
 URL: https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming/
 
-Streamed SOG enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail (LOD) based on the camera's distance. This dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
+Streamed SOG enables efficient rendering of large Gaussian splat scenes by dynamically loading appropriate levels of detail (LOD) for each region of the scene, within a global splat budget. This dramatically reduces memory usage and improves rendering performance for large-scale splat scenes.
 
 ## How It Works
 
@@ -12803,8 +12803,8 @@ Streamed SOG works by:
 
 1. Pre-generating multiple versions of your splat at different detail levels
 2. Organizing them into a spatial tree structure for efficient streaming
-3. Dynamically loading and unloading detail levels based on camera distance
-4. Rendering only the appropriate level of detail for each region of the scene
+3. Dynamically loading and unloading detail levels to fit a global splat budget, spending detail where it improves the image the most
+4. Rendering only the selected level of detail for each region of the scene
 
 This approach allows you to render massive splat scenes that would otherwise be impossible due to memory constraints.
 
@@ -12831,18 +12831,30 @@ Streaming is enabled simply by loading a Streamed SOG asset (`lod-meta.json`) on
 
 ## Controlling LOD Behavior
 
-You can control and fine-tune streaming behavior using the following APIs:
+### How LOD Is Chosen
 
-### Component-Level Control
+The engine picks one LOD level per region of the scene so that the total splat count fits the global [splat budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget), spending detail where it improves the image the most. It combines each region's projected size on screen with a measure of how much visual error each of its LOD levels would leave. These error metrics are read from `lod-meta.json` when present ([SplatTransform](/user-manual/splat-transform) 3.3 and newer writes them) and are derived automatically from the splat counts otherwise — no configuration is required either way. LOD selection also compensates for the camera's field of view automatically.
 
-Use [`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodBaseDistance) and [`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodMultiplier) to control LOD distance thresholds. Thresholds follow a geometric progression: `lodBaseDistance * lodMultiplier^i`:
+### LOD Mode
+
+[`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode) on `app.scene.gsplat` selects between two strategies:
 
 ```javascript
-entity.gsplat.lodBaseDistance = 10;  // distance for the first LOD transition
-entity.gsplat.lodMultiplier = 2;    // each successive threshold is 2x farther
+app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
 ```
 
-The multiplier defaults to 3 (and is clamped to a minimum of 1.2) — each LOD transition happens at three times the previous distance. The system also compensates for camera FOV automatically.
+- `GSPLAT_LODMODE_ERROR` (default): the budget goes where it removes the most visual error per splat.
+- `GSPLAT_LODMODE_DISTANCE`: error metadata is ignored and detail is ordered by camera distance alone, stepping down in concentric bands around the camera with the band edges adapting to the budget. Useful when a capture's error data does not match its visual importance.
+
+### LOD Falloff
+
+[`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff) on the gsplat component controls how quickly that splat's detail drops with distance from the camera, in either mode:
+
+```javascript
+entity.gsplat.lodFalloff = 2; // more detail near the camera, less in the distance
+```
+
+The value ranges from 0 to 8 and defaults to 1, which gives a balanced falloff. Higher values concentrate detail near the camera at the cost of the far field, while values towards 0 spread it evenly across the scene regardless of the view. This primarily redistributes the detail the splat receives from the budget between its near and far field, though it can also shift how the budget divides between splats.
 
 ### Scene-Level Control
 
@@ -12975,29 +12987,26 @@ When using [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming
 
 ### Global Splat Budget
 
-The global splat budget is the primary way to control rendering performance for Streamed SOG. Set it via:
+The global splat budget is the primary way to control rendering performance for Streamed SOG. It is always active and defaults to 1 million splats; set it via:
 
 ```javascript
 app.scene.gsplat.splatBudget = 4000000; // 4 million splats max
 ```
 
-When a budget is set, the engine automatically adjusts LOD levels across all GSplat assets to stay within the budget. It prioritizes nearby geometry (using finer LOD) while degrading distant geometry first. This provides a consistent frame rate regardless of how many splats are potentially visible.
-
-- **Budget = 0**: Disables budget enforcement, using only distance-based LOD selection
-- **Budget > 0**: Enforces the specified maximum splat count across all GSplat assets
+The engine automatically adjusts LOD levels across all GSplat assets to stay within the budget, spending it where it improves the image the most — typically keeping nearby geometry at finer detail while degrading distant geometry first. This provides a consistent workload regardless of how many splats are potentially visible.
 
 The budget system accounts for all GSplat assets in the scene, including both Streamed SOG assets (with multiple detail levels) and fixed assets (single detail level).
 
-### LOD Distances
+### LOD Mode and Falloff
 
-LOD distance thresholds are controlled by two properties per GSplat component:
+Within the budget, LOD levels are picked by measured visual error by default. Two properties fine-tune this — [`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode) on `app.scene.gsplat` can switch the whole scene to clean concentric distance bands instead, and [`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff) on each gsplat component tilts that splat's detail between the near and far field:
 
 ```javascript
-entity.gsplat.lodBaseDistance = 5;  // distance for the first LOD transition
-entity.gsplat.lodMultiplier = 2;   // multiplier between successive thresholds
+app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
+entity.gsplat.lodFalloff = 2; // more detail near the camera, less in the distance
 ```
 
-`lodBaseDistance` sets how far from the camera the first quality reduction occurs. `lodMultiplier` controls how quickly quality drops with distance — each subsequent LOD level transitions at this factor times the previous level's distance. Lower values keep higher quality at distance; higher values switch to coarser LODs sooner. LOD distances are also automatically compensated for the camera's field of view — a wider FOV makes objects appear smaller on screen, so LOD switches to coarser levels sooner.
+See [Controlling LOD Behavior](/user-manual/gaussian-splatting/building/lod-streaming#controlling-lod-behavior) for details. LOD selection is also automatically compensated for the camera's field of view — a wider FOV makes objects appear smaller on screen, so it switches to coarser levels sooner.
 
 ### LOD Range Limits
 
@@ -16117,6 +16126,7 @@ interface LodMeta {
   count: number;               // Total gaussians across all LOD levels (excludes environment)
   counts: number[];            // Gaussians per LOD level; index = LOD level, length = lodLevels
   lodLevels: number;           // Number of LOD levels
+  lodErrors?: boolean;         // If true, every leaf supplies per-level `errors`
   environment?: string;        // Relative path to the environment SOG's meta.json; omitted if none
   filenames: string[];         // Relative paths to chunk SOG meta.json files, referenced by index
   tree: Node;                  // Root of the spatial tree
@@ -16135,6 +16145,7 @@ interface Node {
       count: number;           // Number of consecutive splats
     };
   };
+  errors?: number[];           // Leaf node: per-level approximation error; index = LOD level
 }
 ```
 
@@ -16163,6 +16174,12 @@ Each `lods` entry addresses a contiguous run of splats within one chunk:
 
 A chunk file's contents are exactly the concatenation of the leaf runs that reference it: the runs are non-overlapping and cover the chunk completely. Within each run, splats are sorted in Morton order for spatial locality; no ordering holds across run boundaries. A chunk only ever contains splats of a single LOD level.
 
+### 3.3 LOD errors
+
+When the top-level `lodErrors` flag is `true`, every leaf carries an `errors` array measuring how much each of its LOD levels deviates from the highest-detail representation, indexed by LOD level. Errors are finite, non-negative and non-decreasing with level; level `0` is typically `0`. Only relative magnitudes are meaningful — a viewer uses them to decide which regions benefit most from finer levels (the PlayCanvas engine spends its splat budget by error removed per splat). Entries for levels a leaf does not hold are ignored.
+
+Writers producing these values include [SplatTransform](/user-manual/splat-transform) 3.3 and newer. Readers **should** treat a manifest without `lodErrors: true` as carrying no error data and fall back to their own heuristic (for example, deriving errors from the per-level splat counts).
+
 ---
 
 ## 4. Environment
@@ -16188,6 +16205,7 @@ A two-level scene with an environment, split into one interior node with two lea
   "count": 1500000,
   "counts": [1000000, 500000],
   "lodLevels": 2,
+  "lodErrors": true,
   "environment": "env/meta.json",
   "filenames": [
     "0_0/meta.json",
@@ -16201,14 +16219,16 @@ A two-level scene with an environment, split into one interior node with two lea
         "lods": {
           "0": { "file": 0, "offset": 0, "count": 600000 },
           "1": { "file": 1, "offset": 0, "count": 300000 }
-        }
+        },
+        "errors": [0, 0.8127411]
       },
       {
         "bound": { "min": [0.5, 0, -10], "max": [10, 4.5, 10] },
         "lods": {
           "0": { "file": 0, "offset": 600000, "count": 400000 },
           "1": { "file": 1, "offset": 300000, "count": 200000 }
-        }
+        },
+        "errors": [0, 1.244906]
       }
     ]
   }
@@ -19901,14 +19921,24 @@ The main advantage of using manual subdivision is the level of detail that can b
 
 All lights that cast shadows use the same shadow type. This allows you to globally set the shadow softness and related performance impact. The supported options are PCF1, PCF3, and PCF5. For more information, see the [Shadows](/user-manual/graphics/lighting/shadows/#shadow-types) page.
 
-## Limitations {#limitations}
+## Maximum Number of Lights {#maximum-number-of-lights}
 
-Internally, a light index is stored using 8 bits, so the maximum number of visible lights at any frame is 254 (one index is reserved). In the future, there may be an additional option to use 16 bits to store the index and increase the limit.
+Internally, a light index is stored using 8 bits, so by default the maximum number of visible lights at any frame is 255. Lights over this limit are ignored, and a warning is reported to the console.
+
+From Engine v2.22, this limit can be raised using the [maxLights of LightingParams](https://api.playcanvas.com/engine/classes/LightingParams.html#maxlights). Values over 255 store the light index using 16 bits instead, which doubles the size of the texture used to store the 3D grid. The limit is additionally capped by the maximum texture size supported by the device.
+
+```javascript
+// Assuming being in a script type
+this.app.scene.lighting.maxLights = 4096;
+```
+
+This is not available in the Editor settings and needs to be set in code.
 
 ## Performance Considerations {#performance-considerations}
 
 - **Cell subdivisions** should be as small as possible, since large cell subdivisions lead to larger CPU usage when the grid is filled by the lights each frame. This should be optimized for each scene, depending on its lighting complexity. Optimally, you should have enough cells to limit the overlap of lights and the number of lights in each cell.
 - The **Max Lights Per Cell** should be as small as possible, since this limits the size of the texture used to store the 3D grid, which needs to be updated every frame.
+- The **maximum number of lights** should be kept as low as the scene allows, as a larger value has a per frame cost.
 - If an application using Clustered Lighting **runs slowly** on older mobile devices, consider globally turning off features like Shadows or Cookies.
 
 ## Render Debug Grid {#render-debug-grid}
@@ -21577,74 +21607,11 @@ The engine provides predefined shader includes that handle common transformation
 
 For example:
 
-```glsl
-// Includes transformation-related functionality provided by the engine.
-// - Automatically declares the `vertex_position` attribute.
-// - Handles skinning and morphing if necessary.
-// - Adds the following uniforms:
-//   - `matrix_viewProjection`
-//   - `matrix_model`
-//   - `matrix_normal`
-// - Provides utility functions:
-//   - `getModelMatrix()`
-//   - `getLocalPosition()`
-#include "transformCoreVS"
-
-// Includes normal-related functionality provided by the engine.
-// - Automatically declares the `vertex_normal` attribute.
-// - Handles skinning and morphing if necessary.
-// - Provides utility functions:
-//   - `getNormalMatrix()`
-//   - `getLocalNormal()`
-#include "normalCoreVS"
-
-void main(void)
-{
-    // Retrieve the model matrix, accounting for skinning, morphing, or instancing.
-    mat4 modelMatrix = getModelMatrix();
-    vec3 localPos = getLocalPosition(vertex_position.xyz);
-    vec4 worldPos = modelMatrix * vec4(localPos, 1.0);
-
-    // Retrieve the normal matrix and compute the world normal.
-    mat3 normalMatrix = getNormalMatrix(modelMatrix);
-    vec3 localNormal = getLocalNormal(vertex_normal);
-    vec3 worldNormal = normalize(normalMatrix * localNormal);
-
-    // Example: Apply simple wrap-around diffuse lighting using the world normal.
-    brightness = (dot(worldNormal, uLightDir) + 1.0) * 0.5;
-
-    // Transform the geometry.
-    gl_Position = matrix_viewProjection * worldPos;
-}
-```
-
 #### Fragment Shader {#fragment-shader}
 
 The engine provides predefined shader chunks you can include for common color processing effects such as gamma correction, tone mapping and fog. These includes ensure that colors are processed correctly according to the rendering settings.
 
 Example Usage
-
-```glsl
-#include "gammaPS"       // Adds support for gamma correction of inputs and outputs
-#include "tonemappingPS" // Adds support for tone mapping
-#include "fogPS"         // Adds support for fog effects
-
-void main(void)
-{
-    // Evaluate color in linear color space
-    vec3 colorLinear = ...;
-
-    // Apply fog if enabled
-    vec3 fogged = addFog(colorLinear);
-
-    // Apply tone mapping if enabled
-    vec3 toneMapped = toneMap(fogged);
-
-    // Apply gamma correction and output the final color
-    gl_FragColor.rgb = gammaCorrectOutput(toneMapped);
-    gl_FragColor.a = alpha;
-}
-```
 
 These functions are automatically configured based on the engine's settings, ensuring that color processing is consistent across different rendering conditions.
 
@@ -21653,6 +21620,24 @@ These functions are automatically configured based on the engine's settings, ens
 For more complete examples, and also for details on how to implement instancing, refer to the engine examples.
 
 :::
+
+#### Shadow Pass {#shadow-pass}
+
+To allow meshes using your custom shader to cast shadows, the fragment shader needs to output data appropriate for the shadow type being rendered during the shadow pass. Include the engine-provided `shadowCasterPS` chunk when `SHADOW_PASS` is defined, and write the value returned by `getShadowOutput()` to the output color:
+
+The same vertex shader is used when rendering shadows, so skinning, morphing and instancing handled by `transformCoreVS` work automatically. It is recommended to skip work not needed by shadow rendering (for example lighting) using `#ifndef SHADOW_PASS`, to make the shadow rendering faster. Note that some engine uniforms, such as `matrix_normal`, are not available during the shadow pass.
+
+Supported are all shadow types for directional lights, and PCF shadows for spot lights. Omni light shadows are not supported.
+
+:::note
+
+For a complete example, see the Shader Material Shadows example in the engine examples browser.
+
+:::
+
+#### Picker Pass {#picker-pass}
+
+To allow meshes using your custom shader to be identified by the [`Picker`](https://api.playcanvas.com/engine/classes/Picker.html), the fragment shader needs to output the mesh instance ID during the pick pass. Include the engine-provided `pickPS` chunk when `PICK_PASS` is defined, and write the value returned by `getPickOutput()` to the output color:
 
 #### Generated Shaders {#generated-shaders}
 
