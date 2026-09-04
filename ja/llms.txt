@@ -9,7 +9,7 @@ Full API reference: https://api.playcanvas.com
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
 Total Documents: 493
-Generated: 2026-09-02
+Generated: 2026-09-04
 
 ## Instructions for Large Language Models
 
@@ -442,13 +442,13 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [<pc-material>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material/): Reference for the pc-material element: a physically based standard material with color, metalness, gloss, opacity and per-attribute texture map slots.
 - [<pc-model>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model/): Reference for the pc-model element: instantiate a 3D model from a GLB container asset, and host components and child entities on the stable entity it creates.
 - [<pc-node>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node/): Reference for the pc-node element: bind to a node inside a loaded model's hierarchy to override its transform, enabled state and tags, add components to it, or attach new content under it.
-- [<pc-particle-system>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-particle-system/): Reference for the pc-particle-system element: configure particle emitters, textures, blending, and simulation parameters in markup.
+- [<pc-particle-system>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-particle-system/): Reference for the pc-particle-system element: emit particles from a JSON asset that defines the emitter, textures, blending and simulation parameters.
 - [<pc-render>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render/): Reference for the pc-render element: render primitive shapes (box, sphere, capsule, cone, cylinder, plane) with a material and shadow settings.
 - [<pc-rigid-body>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body/): Reference for the pc-rigid-body element: rigid body type, mass, friction, restitution, and integration with collision components.
-- [<pc-scene>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene/): Reference for the pc-scene element: scene container inside pc-app, ambient settings, and where entities are mounted for rendering.
+- [<pc-scene>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene/): Reference for the pc-scene element: the scene container inside pc-app, with fog, exposure and gravity settings for the entities it holds.
 - [<pc-screen>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen/): Reference for the pc-screen element: 2D screen space for UI elements, resolution, scale modes, and child pc-element hierarchies.
 - [<pc-script-instance>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script-instance/): Reference for the pc-script-instance element: attach a single script class to an entity, configure script attributes per-property or as JSON.
-- [<pc-script>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/): Reference for the pc-script element: script component container grouping multiple pc-script-instance children and shared script settings.
+- [<pc-script>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script/): Reference for the pc-script element: the script component that hosts pc-script-instance children and enables or disables them together.
 - [<pc-scroll-view>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view/): Reference for the pc-scroll-view element: scrollable viewport with content, scrollbars, mouse-wheel support, and bounce/clamp/infinite modes.
 - [<pc-scrollbar>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar/): Reference for the pc-scrollbar element: draggable scrollbar with orientation, handle size, and value, used to drive a scroll view.
 - [<pc-sky>](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky/): Reference for the pc-sky element: skybox from a texture asset with box, dome, or infinite projection, optional scene lighting, and rotation.

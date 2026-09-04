@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 493
-Generated: 2026-09-02
+Generated: 2026-09-04
 
 ================================================================================
 
@@ -35610,6 +35610,8 @@ Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id:
 
 A repeatable child takes its parent's tag as a prefix: [`<pc-anim-clip>`](pc-anim-clip) inside [`<pc-anim>`](pc-anim), [`<pc-sound-slot>`](pc-sound-slot) inside [`<pc-sound>`](pc-sound), [`<pc-script-instance>`](pc-script-instance) inside [`<pc-script>`](pc-script).
 
+Every tag except [`<pc-material>`](pc-material) initializes asynchronously and fires a `ready` event once it has — see [The `ready` Event](../programmatic-access.md#the-ready-event) for the timing, and for the `whenReady()` helper that wraps it. The Events section on a tag's page lists only the events specific to that tag.
+
 | Tag | Description |
 | --- | --- |
 | [`<pc-anim>`](pc-anim) | Defines an animation component that plays animation clips. |
@@ -35804,7 +35806,7 @@ The `<pc-anim>` tag plays animation clips over an entity hierarchy — a charact
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-node>`](../pc-node) or a [`<pc-model>`](../pc-model).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * It can have 0..n [`<pc-anim-clip>`](../pc-anim-clip) children, each declaring one named clip.
 
 :::
@@ -36279,7 +36281,7 @@ The `<pc-audio-listener>` tag is used to define a listener component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -36360,7 +36362,7 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * The entity must also have a [`<pc-element>`](../pc-element) (typically `type="image"`) with the `use-input` attribute set, so the button can receive pointer input.
 
 :::
@@ -36452,7 +36454,7 @@ The `<pc-camera>` tag is used to define a camera component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -36528,7 +36530,7 @@ The `<pc-collision>` tag is used to define a collision component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -36621,7 +36623,7 @@ Despite the name, this is not a base class or a generic wrapper. `<pc-element>` 
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -36637,7 +36639,7 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `anchor` | Vector4 | `"0 0 0 1"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
+| `anchor` | Vector4 | `"0.5 0.5 0.5 0.5"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
 | `auto-fit-height` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's height. Requires `auto-height="false"`. Text elements only |
 | `auto-fit-width` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's width. Requires `auto-width="false"`. Text elements only |
 | `auto-height` | Boolean | `"true"` | Whether to automatically adjust height to fit text content. Text elements only |
@@ -36712,9 +36714,9 @@ The `<pc-entity>` tag is used to define an entity.
 
 :::note[Usage]
 
-* It must be a direct child of [`<pc-scene>`](../pc-scene), another `<pc-entity>`, or a [`<pc-node>`](../pc-node) — which parents it under a node inside a loaded model.
+* It must be a direct child of [`<pc-scene>`](../pc-scene), another `<pc-entity>`, a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node). Under a model it is parented to the model's host entity; under a node, to that node inside the loaded model.
 * It can have 0..n [`<pc-entity>`](../pc-entity) or [`<pc-model>`](../pc-model) children.
-* It can optionally have one of each component type as children: [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-layout-child>`](../pc-layout-child), [`<pc-layout-group>`](../pc-layout-group), [`<pc-light>`](../pc-light), [`<pc-audio-listener>`](../pc-audio-listener), [`<pc-particle-system>`](../pc-particle-system), [`<pc-render>`](../pc-render), [`<pc-rigid-body>`](../pc-rigid-body), [`<pc-screen>`](../pc-screen), [`<pc-script>`](../pc-script), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scroll-view>`](../pc-scroll-view), [`<pc-sound>`](../pc-sound).
+* It can optionally have one of each component type as children: [`<pc-anim>`](../pc-anim), [`<pc-audio-listener>`](../pc-audio-listener), [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-joint>`](../pc-joint), [`<pc-layout-child>`](../pc-layout-child), [`<pc-layout-group>`](../pc-layout-group), [`<pc-light>`](../pc-light), [`<pc-particle-system>`](../pc-particle-system), [`<pc-render>`](../pc-render), [`<pc-rigid-body>`](../pc-rigid-body), [`<pc-screen>`](../pc-screen), [`<pc-script>`](../pc-script), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scroll-view>`](../pc-scroll-view), [`<pc-sound>`](../pc-sound).
 
 :::
 
@@ -36766,6 +36768,7 @@ You can also handle these events declaratively with inline `onclick` and `onpoin
 * It requires the **primary** button, so a right-click does not fire it — `pointerup` alone does.
 * It requires a press *and* a release, so it does not fire at the start of every camera drag the way `pointerdown` does.
 * If the press and the release landed on different geometry, the click fires at their **nearest common ancestor** — dragging from one object onto its sibling clicks their shared parent, and dragging off onto the background clicks nothing at all. This is the same rule the browser applies to native clicks on nested HTML.
+* `detail` carries the click count, as it does for a native click: a second click on the same element within half a second arrives as a `click` whose `detail` is `2`, so a double click is read from `detail` rather than from a separate event.
 
 A press the browser takes back — a touch it reinterprets as a scroll, say — is discarded rather than concluding as a click.
 
@@ -36813,7 +36816,7 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -36871,7 +36874,7 @@ The `<pc-joint>` tag constrains two rigid bodies to each other — a hinged door
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) or a [`<pc-node>`](../pc-node).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * Both constrained entities need a [`<pc-rigid-body>`](../pc-rigid-body), and physics needs the `Ammo` module — see [`<pc-wasm>`](../pc-wasm).
 
 :::
@@ -36974,7 +36977,7 @@ For a `6dof` joint, each axis starts `"locked"`, so a joint with nothing else se
 
 ## Events
 
-Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+Listen to this event using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).
 
 | Event | Description |
 | --- | --- |
@@ -37058,7 +37061,7 @@ The `<pc-layout-child>` tag is used to define a layout child component, which co
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * That entity must itself be a child of an entity with a [`<pc-layout-group>`](../pc-layout-group).
 
 :::
@@ -37129,7 +37132,7 @@ The `<pc-layout-group>` tag is used to define a layout group component, which au
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * Child entities are laid out automatically. Add a [`<pc-layout-child>`](../pc-layout-child) to a child to control how it is sized within the group.
 
 :::
@@ -37201,7 +37204,7 @@ The `<pc-light>` tag is used to define a light component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -37810,7 +37813,7 @@ The `<pc-particle-system>` tag is used to define a particle system.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -37898,7 +37901,7 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -37971,7 +37974,7 @@ The `<pc-rigid-body>` tag is used to define a rigidbody component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * It must be a sibling of a [`<pc-collision>`](../pc-collision) component.
 * The ammo.js WebAssembly module must be loaded via a [`<pc-wasm>`](../pc-wasm) tag.
 
@@ -38116,7 +38119,7 @@ The `<pc-screen>` tag is used to define a screen component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 
@@ -38203,6 +38206,18 @@ In addition, any other non-reserved attribute maps to the script attribute of th
 
 Declared values are the source of truth. When the host entity cycles — a [`<pc-node>`](../pc-node) rebinding after its model reloads, for instance — a surviving script instance has its declared state re-asserted, which deliberately snaps back any runtime mutation of a declared property. Keep state you change at runtime in properties the markup does not declare.
 
+## Events
+
+Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).
+
+| Event | Description |
+| --- | --- |
+| `scriptattributeschange` | Fired when the script attributes change. `detail.attributes` carries the new attributes object. |
+| `scriptenablechange` | Fired when `enabled` changes. `detail.enabled` carries the new state. |
+| `scriptnamechange` | Fired when the script is renamed by changing `name` on an element that already had one. `detail.oldName` and `detail.newName` carry the two names, and the parent [`<pc-script>`](../pc-script) responds by destroying the old script and creating the new one. |
+
+All three bubble. The parent [`<pc-script>`](../pc-script) listens for them to apply each change to the engine, and the same events let your own code observe script configuration changing — one listener on an ancestor covers every script instance beneath it.
+
 ## Example
 
 A `rotate` script attached to a cube. Script classes usually load from a [`<pc-asset>`](../pc-asset), but they can also be registered from an inline module — the `<pc-script-instance>` stays pending until its class arrives. Try changing the rotation rates:
@@ -38257,7 +38272,7 @@ The `<pc-script>` tag is used to define a script component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * It can have 0..n [`<pc-script-instance>`](../pc-script-instance) children.
 
 :::
@@ -38335,7 +38350,7 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * It references its viewport, content, and scrollbar entities by entity `name` or document-wide `#` selector — see [Entity References](../attributes.md#entity-references).
 * The viewport element should have its `mask` attribute set so the content is clipped to the scroll view's bounds.
 
@@ -38433,7 +38448,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * It is referenced by a [`<pc-scroll-view>`](../pc-scroll-view) via its `horizontal-scrollbar` or `vertical-scrollbar` attribute.
 * Its `handle` attribute references the [`<pc-entity>`](../pc-entity) used as the draggable handle, whose image element should have `use-input` set.
 
@@ -38630,7 +38645,7 @@ The `<pc-sound>` tag is used to define a sound component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * It can have 0..n [`<pc-sound-slot>`](../pc-sound-slot) children.
 
 :::
