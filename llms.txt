@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 493
+Total Documents: 495
 Generated: 2026-09-04
 
 ## Instructions for Large Language Models
@@ -540,8 +540,9 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 
 ### Graphics
 - [Graphics](https://developer.playcanvas.com/user-manual/graphics/): Overview of PlayCanvas rendering: WebGL and WebGPU backends, PBR, lighting, HDR, post effects, and key graphics features.
-- [Advanced Rendering](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/): Section index for batching, instancing, multi-draw, indirect drawing, and multiple render targets in PlayCanvas.
+- [Advanced Rendering](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/): Section index for batching, instancing, multi-draw, indirect drawing, multiple render targets, and dual-source blending in PlayCanvas.
 - [Batching](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/batching/): Batch groups merge mesh instances to cut draw calls: Editor setup, static versus dynamic rules, and limitations.
+- [Dual-Source Blending](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/dual-source-blending/): Use two fragment shader outputs in one blend operation on WebGL 2 and WebGPU.
 - [Hardware Instancing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/hardware-instancing/): Hardware instancing formats, MeshInstance buffers, shader chunks, and live engine examples for repeated meshes.
 - [HTML-in-Canvas](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/html-in-canvas/): Render live HTML and CSS into 3D scenes as GPU textures with full styling, hit testing, and accessibility — plus fallback strategies.
 - [Indirect Drawing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/indirect-drawing/): WebGPU indirect draw slots, GPU buffer parameters, compute-driven culling, and per-frame slot allocation rules.
@@ -592,6 +593,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [WGSL Capabilities](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-capabilities/): Optional, device-gated WGSL features in PlayCanvas: half-precision types and WGSL language extensions, with their CAPS_* defines.
 - [WGSL Reflection](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-reflection/): Simplified WGSL declarations without manual bind groups: how PlayCanvas reflects resources from shader source and assigns bindings.
 - [WGSL Vertex and Fragment Shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders/): Vertex and fragment specific WGSL constructs in PlayCanvas: attributes, varyings, and fragment outputs.
+- [Transparency](https://developer.playcanvas.com/user-manual/graphics/transparency/): Compare the ways PlayCanvas renders transparent surfaces: alpha blending, alpha test, opacity dithering and alpha to coverage, and when to use each.
 
 ### Gaussian Splatting
 - [Gaussian Splatting](https://developer.playcanvas.com/user-manual/gaussian-splatting/): Overview of 3D Gaussian Splatting in PlayCanvas: capture, viewing, editing, and building web apps with photorealistic splat scenes.

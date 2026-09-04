@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 493
+Total Documents: 495
 Generated: 2026-09-04
 
 ================================================================================
@@ -18202,6 +18202,102 @@ In this animation we have created 4 batch groups for the buildings, the cacti, t
 
 --------------------------------------------------------------------------------
 
+## Dual-Source Blending
+
+URL: https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/dual-source-blending/
+
+Dual-source blending allows a fragment shader to produce two colors for a single color attachment. The first color is the value being blended, while the second color can be selected as a blend factor. This supports effects such as subpixel text antialiasing and advanced compositing that cannot be expressed using a single fragment output.
+
+## Platform Support
+
+Dual-source blending is an optional capability on both graphics backends:
+
+- **WebGPU** uses the `dual-source-blending` device feature and WGSL language extension.
+- **WebGL 2** uses the `WEBGL_blend_func_extended` extension.
+
+PlayCanvas exposes both through the same capability flag:
+
+```javascript
+const device = app.graphicsDevice;
+
+if (!device.supportsDualSourceBlending) {
+    // Use a fallback material or rendering path.
+}
+```
+
+The engine also defines `CAPS_DUAL_SOURCE_BLENDING` when the capability is available. On WebGPU, the engine adds `enable dual_source_blending;` to fragment shader variants that use the feature.
+
+## Blend Factors
+
+The secondary fragment output can be referenced using four blend factors:
+
+| Blend factor | Description |
+|--------------|-------------|
+| `BLENDMODE_SRC1_COLOR` | Secondary source color |
+| `BLENDMODE_ONE_MINUS_SRC1_COLOR` | One minus the secondary source color |
+| `BLENDMODE_SRC1_ALPHA` | Secondary source alpha |
+| `BLENDMODE_ONE_MINUS_SRC1_ALPHA` | One minus the secondary source alpha |
+
+Only use these constants when `device.supportsDualSourceBlending` is true.
+
+## StandardMaterial
+
+Dual-source blending is enabled automatically when a material's [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html) uses one of the secondary source factors. There is no separate material setting. See [Transparency](/user-manual/graphics/transparency) for how blend state fits together with the other transparency options.
+
+First, override the `outputPS` chunk to write the primary and secondary fragment outputs. Supply both GLSL and WGSL versions when supporting both graphics backends:
+
+```javascript
+const material = new pc.StandardMaterial();
+material.useLighting = false;
+material.useTonemap = false;
+
+material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('outputPS', `
+    gl_FragColor = vec4(0.45, 0.02, 0.02, 0.0);
+    pcFragColorSecondary = vec4(0.0, 0.85, 0.18, 1.0);
+`);
+
+material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('outputPS', `
+    output.color = vec4f(0.45, 0.02, 0.02, 0.0);
+    output.colorSecondary = vec4f(0.0, 0.85, 0.18, 1.0);
+`);
+```
+
+Then configure the blend state. This example calculates `source0 + destination * source1` for RGB:
+
+```javascript
+material.blendState = new pc.BlendState(
+    true,
+    pc.BLENDEQUATION_ADD,
+    pc.BLENDMODE_ONE,
+    pc.BLENDMODE_SRC1_COLOR,
+    pc.BLENDEQUATION_ADD,
+    pc.BLENDMODE_ZERO,
+    pc.BLENDMODE_ONE
+);
+
+material.update();
+```
+
+Here, `gl_FragColor` / `output.color` is `source0`, and `pcFragColorSecondary` / `output.colorSecondary` is `source1`. The secondary value participates in blending but is not written to a separate color attachment.
+
+## ShaderMaterial
+
+[`ShaderMaterial`](https://api.playcanvas.com/engine/classes/ShaderMaterial.html) uses the same BlendState-driven behavior. Write both outputs in the fragment shader and assign a blend state containing a secondary source factor. The engine automatically generates the dual-source shader variant for that material.
+
+When creating shader definitions directly using `ShaderDefinitionUtils.createDefinition`, pass `useDualSourceBlending: true`. This low-level option is not needed for StandardMaterial or ShaderMaterial.
+
+## Restrictions
+
+- The render target must have exactly one color attachment. Dual-source blending cannot be combined with [Multiple Render Targets](/user-manual/graphics/advanced-rendering/multiple-render-targets).
+- Support is device-dependent, so always check `device.supportsDualSourceBlending` before assigning a secondary source blend factor.
+- Dual-source blending is selected independently for each material and draw call. Other materials in the same render pass do not need dual-source outputs.
+
+## Example
+
+The [Dual-Source Blending example](https://playcanvas.com/examples/#/test/dual-source-blending) renders a black-and-white checkerboard, then draws a dual-source blended quad over it. Black cells receive only the red primary output, while white cells also contribute the green secondary output.
+
+--------------------------------------------------------------------------------
+
 ## Hardware Instancing
 
 URL: https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/hardware-instancing/
@@ -18937,6 +19033,7 @@ Multiple render targets have the following restrictions:
 - All color attachments of a multiple render target must have the same width and height.
 - All color attachments are cleared to the same value, specified using [`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor).
 - All color attachments use the same write mask and alpha blend mode, as specified using [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html).
+- [Dual-source blending](/user-manual/graphics/advanced-rendering/dual-source-blending) cannot be used with MRT because it requires exactly one color attachment.
 
 ## How to use MRT
 
@@ -22221,6 +22318,12 @@ The `in`/`out` syntax (introduced in GLSL 3.3+) is not supported.
 
 :::
 
+### Dual-Source Fragment Outputs
+
+When a material's blend state uses a secondary source factor, write the primary color to `gl_FragColor` and the secondary blend value to `pcFragColorSecondary`. On WebGL 2, the engine enables `GL_EXT_blend_func_extended` and declares both outputs automatically.
+
+See [Dual-Source Blending](/user-manual/graphics/advanced-rendering/dual-source-blending) for capability detection, cross-platform shader code, and BlendState configuration.
+
 --------------------------------------------------------------------------------
 
 ## Shader Chunk Migrations
@@ -23148,6 +23251,11 @@ At device creation, the engine reads `navigator.gpu.wgslLanguageFeatures` and ad
   - **Preprocessor define:** `CAPS_PRIMITIVE_INDEX`
   - **Shader stages:** fragment
   - **Details:** Simplified API exposes `primitiveIndex` on `FragmentInput` and the global `pcPrimitiveIndex` when the device supports the feature
+- **`device.supportsDualSourceBlending`**
+  - **Engine injects:** `enable dual_source_blending;` for fragment shader variants whose blend state uses a secondary source factor
+  - **Preprocessor define:** `CAPS_DUAL_SOURCE_BLENDING`
+  - **Shader stages:** fragment
+  - **Details:** Provides a second fragment output for use as a blend factor; see [Dual-Source Blending](/user-manual/graphics/advanced-rendering/dual-source-blending)
 - **`device.supportsSubgroups`**
   - **Engine injects:** `enable subgroups;`
   - **Preprocessor define:** `CAPS_SUBGROUPS`
@@ -23549,11 +23657,151 @@ Example:
 }
 ```
 
+#### Dual-Source Outputs
+
+When a material's blend state uses a secondary source factor, write the primary color to `output.color` and the secondary blend value to `output.colorSecondary`. The engine generates both outputs at location 0 with the appropriate `@blend_src` attributes and enables the required WGSL extension.
+
+Dual-source blending requires exactly one color attachment. See [Dual-Source Blending](/user-manual/graphics/advanced-rendering/dual-source-blending) for capability detection and BlendState configuration.
+
 :::note
 
 Support for rendering to integer textures (output format other than `vec4f`) is not available yet, and will be added in the future.
 
 :::
+
+--------------------------------------------------------------------------------
+
+## Transparency
+
+URL: https://developer.playcanvas.com/user-manual/graphics/transparency/
+
+PlayCanvas offers several ways to render a surface that is not fully opaque. They differ in cost, in how much they depend on draw order, and in the kind of artifacts they produce, so the right choice depends on what you are rendering.
+
+All of them are driven by the material's opacity, which comes from [`StandardMaterial#opacity`](https://api.playcanvas.com/engine/classes/StandardMaterial.html#opacity), an [`opacityMap`](https://api.playcanvas.com/engine/classes/StandardMaterial.html#opacitymap), or vertex colors.
+
+## Alpha Blending
+
+Setting [`blendType`](https://api.playcanvas.com/engine/classes/Material.html#blendtype) to a blending mode such as `BLEND_NORMAL` mixes the surface with whatever is already in the frame buffer.
+
+```javascript
+material.blendType = pc.BLEND_NORMAL;
+material.opacity = 0.5;
+material.update();
+```
+
+This gives the smoothest result and supports any opacity value, but it is order dependent. Blended geometry is drawn in the transparent pass, after opaque geometry, and is sorted back to front per layer according to [`Layer#transparentSortMode`](https://api.playcanvas.com/engine/classes/Layer.html#transparentsortmode). Sorting happens per mesh instance, so it cannot resolve a single mesh that overlaps itself - a common source of artifacts on foliage, hair and glass. Blended materials also normally disable depth writes, so they do not occlude each other.
+
+### Blend State
+
+`blendType` is a convenient shorthand for a handful of common configurations. For full control, assign a [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html) to [`Material#blendState`](https://api.playcanvas.com/engine/classes/Material.html#blendstate), which specifies the blend equation and the source and destination factors for color and alpha independently, along with a per-channel color write mask. Assigning a blend state overwrites anything previously set through `blendType`.
+
+```javascript
+// equivalent to BLEND_NORMAL, written out in full
+material.blendState = new pc.BlendState(
+    true,
+    pc.BLENDEQUATION_ADD, pc.BLENDMODE_SRC_ALPHA, pc.BLENDMODE_ONE_MINUS_SRC_ALPHA
+);
+material.update();
+```
+
+Several ready-made states are available as constants - `BlendState.NOBLEND`, `BlendState.ALPHABLEND`, `BlendState.ADDBLEND` and `BlendState.NOWRITE`. For best performance, create the blend states you need up front and assign them as required, rather than modifying a state after creation.
+
+Note that the getter returns a read-only view, so the setter must be used to change blending - this is what keeps the material's transparency and sorting state in sync:
+
+```javascript
+const state = material.blendState.clone();
+state.setColorWrite(true, true, true, false);
+material.blendState = state;
+material.update();
+```
+
+#### Per-attachment blending
+
+By default a blend state applies to every color attachment of the render target. When rendering to [Multiple Render Targets](/user-manual/graphics/advanced-rendering/multiple-render-targets), individual attachments can be given their own blend state and write mask using [`BlendState#setAttachment`](https://api.playcanvas.com/engine/classes/BlendState.html#setattachment), for attachment indices 1 to 7. Attachment 0 is configured through the other properties of the class, and any attachment without an independent state follows attachment 0.
+
+```javascript
+// attachment 1 keeps the blending of attachment 0, but writes no channels
+const state = material.blendState.clone();
+const noWrite = state.clone();
+noWrite.setColorWrite(false, false, false, false);
+state.setAttachment(1, noWrite);
+material.blendState = state;
+material.update();
+```
+
+This requires [`GraphicsDevice#supportsIndependentBlending`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindependentblending). On devices without support, the state of attachment 0 is used for all attachments.
+
+Using one of the secondary source blend factors in a blend state additionally enables [Dual-Source Blending](/user-manual/graphics/advanced-rendering/dual-source-blending), which lets a fragment shader output a second color used as a blend factor.
+
+## Alpha Test
+
+[`alphaTest`](https://api.playcanvas.com/engine/classes/Material.html#alphatest) discards any fragment whose opacity falls below a threshold.
+
+```javascript
+material.alphaTest = 0.5;
+material.update();
+```
+
+The result is binary - a fragment is either fully opaque or gone - so there is nothing to sort and the material stays in the opaque pass, writing depth normally. That makes it cheap and completely order independent, at the cost of hard, aliased cutout edges. It is the usual choice for dense foliage and other cutouts where partial opacity is not needed.
+
+## Opacity Dithering
+
+[`opacityDither`](https://api.playcanvas.com/engine/classes/StandardMaterial.html#opacitydither) converts opacity into a screen-space dither pattern, discarding a proportion of fragments instead of blending them.
+
+```javascript
+material.blendType = pc.BLEND_NONE;
+material.opacity = 0.5;
+material.opacityDither = pc.DITHER_BAYER8;
+material.update();
+```
+
+Available patterns are `DITHER_BAYER2`, `DITHER_BAYER4`, `DITHER_BAYER8`, `DITHER_BAYER16`, `DITHER_BLUENOISE` and `DITHER_IGNNOISE`. Like alpha test this is order independent and stays in the opaque pass, but it supports continuous opacity. The trade-off is visible noise, which resolves into smooth transparency when combined with temporal antialiasing or a high output resolution. [`opacityShadowDither`](https://api.playcanvas.com/engine/classes/StandardMaterial.html#opacityshadowdither) applies the same technique to the shadow the object casts.
+
+## Alpha To Coverage
+
+[`alphaToCoverage`](https://api.playcanvas.com/engine/classes/Material.html#alphatocoverage) uses the fragment's alpha to build an MSAA sample coverage mask. Instead of blending, the hardware keeps a proportion of the multi-sample coverage matching the alpha value.
+
+```javascript
+material.blendType = pc.BLEND_NONE;
+material.opacity = 0.5;
+material.alphaToCoverage = true;
+material.update();
+```
+
+Blending does not need to be enabled - the alpha is consumed by the coverage mask, much like alpha test. The material stays in the opaque pass and writes depth, which makes the result order independent.
+
+Quality is bounded by the sample count of the render target. With 4x MSAA, opacity is quantized to 0%, 25%, 50%, 75% and 100%, which is why alpha to coverage works well for softening the sharp edges of an alpha cutout, but is a poor choice for large areas of even semi-transparency, where the quantization is obvious.
+
+### Requirements
+
+Alpha to coverage requires a multi-sampled render target and is **silently ignored** when rendering into a single-sampled one. Nothing is logged in release builds and no error is raised - the surface simply renders as fully opaque. If you enable the flag and see no change, check that antialiasing is actually on:
+
+```javascript
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [deviceType],
+    antialias: true
+});
+```
+
+On WebGPU there is an additional requirement: the first color attachment of the render target must use a blendable format that has an alpha channel. This matters in practice because [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) prefers `PIXELFORMAT_111110F` for its HDR render target, and that format has no alpha channel. Alpha to coverage is therefore ignored for geometry rendered through `CameraFrame` with its default formats, and a warning is logged in debug builds. Requesting a format with an alpha channel resolves it:
+
+```javascript
+cameraFrame.rendering.renderFormats = [pc.PIXELFORMAT_RGBA16F];
+cameraFrame.update();
+```
+
+WebGL has no equivalent restriction, as it uses the alpha the shader outputs regardless of whether the render target stores an alpha channel. Alpha to coverage therefore still applies on WebGL with formats such as `PIXELFORMAT_111110F`, which is a deliberate difference between the two backends rather than a bug.
+
+## Choosing an Approach
+
+| Technique | Opacity | Order dependent | Pass | Main drawback |
+|-----------|---------|-----------------|------|---------------|
+| Alpha blending | Continuous | Yes | Transparent | Sorting artifacts, no self-sorting |
+| Alpha test | Binary | No | Opaque | Hard, aliased edges |
+| Opacity dithering | Continuous | No | Opaque | Visible noise without TAA |
+| Alpha to coverage | Quantized to sample count | No | Opaque | Needs MSAA, coarse steps |
+
+As a rough guide, use alpha blending for glass and other genuinely see-through surfaces where quality matters more than ordering; alpha test for dense cutouts; opacity dithering for fades and level-of-detail transitions, especially when temporal antialiasing is already enabled; and alpha to coverage to soften cutout edges when MSAA is already being paid for.
 
 --------------------------------------------------------------------------------
 
