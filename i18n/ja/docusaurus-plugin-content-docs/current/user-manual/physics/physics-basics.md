@@ -1,98 +1,158 @@
 ---
-title: 物理の基本
-description: ammo.js を有効化し、重力と単位を設定し、Bullet 物理用に rigidbody と collision の Component を構成します。
+title: はじめに
+description: エディター、エンジンのみのアプリ、React、Web Components で ammo.js 物理演算を有効化し、重力と単位を設定し、シミュレーションがどのようにステップするかを理解します。
 ---
 
-PlayCanvasには、[ammo.js](https://github.com/kripken/ammo.js)という非常に強力な物理エンジンが組み込まれています。これは、オープンソースのC++ Bullet物理エンジンのブラウザポートです。
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-PlayCanvasには、物理シミュレーションをセットアップするための[RigidBody](/user-manual/editor/scenes/components/rigidbody/) および[Collision](/user-manual/editor/scenes/components/collision/) コンポーネントがあります。
+PlayCanvasの物理演算は、オープンソースのBullet物理エンジンをWebAssemblyに移植した[ammo.js](https://github.com/kripken/ammo.js)によって動作します。読み込みが済んだら、エンティティがどのように動くかを決める[RigidBody](/user-manual/editor/scenes/components/rigidbody/)コンポーネントと、形状を与える[Collision](/user-manual/editor/scenes/components/collision/)コンポーネントを持つエンティティからシミュレーションを組み立てます。このページでは、ライブラリの読み込み、グローバルな設定、そしてこのセクションの他のすべてのページが前提とするルールを扱います。
 
 ## 物理を有効化 {#enabling-physics}
 
-デフォルトでは、新しいPlayCanvasプロジェクトにはammo.jsモジュールは含まれません。これは、ammo.jsが数百キロバイトあり、アプリがこのライブラリを必要としない場合は読み込む必要がないためです。
+物理演算はオプトインです。ammo.jsは数百キロバイトのサイズがあるため、要求しない限り何も読み込みません。配布は3つのファイルで行われます。WebAssemblyモジュールの`ammo.wasm.wasm`、そのJavaScriptグルーである`ammo.wasm.js`、そしてWebAssemblyをサポートしないブラウザ向けのasm.jsフォールバックである`ammo.js`です。ライブラリが存在するまで、物理コンポーネントは何もしないプレースホルダーです。追加しても何も起こらず、エラーも発生しません。
 
-Scene Settingsパネルのインポートボタンを使用して、ammo.jsモジュールをプロジェクトにインポートできます。
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
 
-![Physics Settings](/img/user-manual/physics/physics-settings.png)
+アプリケーションを作成する前にモジュールを読み込みます。3つのファイルは、エンジンリポジトリの`examples/assets/wasm/ammo/`と[sync-ammo](https://www.npmjs.com/package/sync-ammo) npmパッケージに同梱されています。
 
-これにより、PlayCanvasが提供するammo.jsのデフォルトビルドがインポートされます。独自のバージョンのammo.jsをコンパイルし、代わりにプロジェクトに追加することもできます。詳細は、[このページ](/user-manual/editor/assets/inspectors/wasm/)を参照してください。
+```javascript
+pc.WasmModule.setConfig('Ammo', {
+    glueUrl: 'ammo/ammo.wasm.js',
+    wasmUrl: 'ammo/ammo.wasm.wasm',
+    fallbackUrl: 'ammo/ammo.js'
+});
 
-従来のプロジェクトを最新のammo.jsに移行する方法の詳細は、 [このページ](/user-manual/physics/physics-migration/)を参照してください。
+// モジュールを待ってから、通常どおりアプリケーションを作成する
+await new Promise((resolve) => {
+    pc.WasmModule.getInstance('Ammo', () => resolve());
+});
+
+const app = new pc.Application(canvas);
+```
+
+アプリケーションの開始時にRigidBodyシステムが`Ammo`グローバルを見つけ、ammo.jsバックエンドをインストールします。`pc.Application`はすべてのコンポーネントシステムを登録します。代わりに`pc.AppBase`と`pc.AppOptions`から構築する場合は、`pc.CollisionComponentSystem`と`pc.RigidBodyComponentSystem`（[ジョイント](/user-manual/physics/joints/)を使うなら`pc.JointComponentSystem`も）を`componentSystems`に追加してください。[Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes)の例に完全な手順があります。
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Scene Settingsパネルを開き、**PHYSICS**を展開して**IMPORT AMMO**をクリックします。これによりPlayCanvasストアから3つのファイルがアセットに追加され、エンジンはシーンの開始前にそれらを読み込みます。
+
+![Physics Settings](/img/user-manual/editor/interface/settings/physics.webp)
+
+ライブラリがインポートされるまで、[Collision](/user-manual/editor/scenes/components/collision/)と[RigidBody](/user-manual/editor/scenes/components/rigidbody/)コンポーネントのインスペクターには、同じボタン付きの*Ammo module not found*という警告が表示されます。独自のammo.jsビルドを使用するには、ストア版の代わりに[WASMモジュールアセット](/user-manual/editor/assets/inspectors/wasm/)として追加してください。
+
+:::note[レガシープロジェクト]
+
+ammo.jsがモジュールアセットとして配布される前に作成されたプロジェクトは、ランチャーが自動的に挿入するレガシー版のライブラリを使用していました。プロジェクトにammo.jsのアセットがないのに物理演算が動作する場合は、これが理由です。**IMPORT AMMO**をクリックするとモジュールアセットが追加され、同時にレガシーライブラリが無効になるため、プロジェクトが両方を読み込むことはありません。インポートされるビルドはより新しく、小さく、高速なので、できるだけ早く切り替えてください。
+
+:::
+
+</TabItem>
+<TabItem value="react" label="React">
+
+モジュールをインストールし、ルートの`<Application>`に`usePhysics`プロパティを設定します。
+
+```bash
+npm install sync-ammo
+```
+
+```jsx
+import { Application } from '@playcanvas/react';
+
+<Application usePhysics>
+  {/* <RigidBody> と <Collision> コンポーネントを持つエンティティ */}
+</Application>
+```
+
+`usePhysics`を設定するとammo.jsは遅延読み込みされるため、ライブラリが届く前にシーンが描画され、届いた時点で物理コンポーネントが有効になります。そのタイミングを待つ必要があれば、[`usePhysics`](/user-manual/react/api/hooks/use-physics/)フックの`isPhysicsLoaded`を参照してください。詳細は[Reactの物理演算ガイド](/user-manual/react/guide/physics/)を参照してください。
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+`<pc-app>`の中で[`<pc-wasm>`](/user-manual/web-components/tags/pc-wasm/)タグを使ってモジュールを宣言します。
+
+```html
+<pc-app>
+    <pc-wasm name="Ammo"
+             glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js"
+             wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm"
+             fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
+    <pc-scene>
+        <!-- <pc-rigid-body> と <pc-collision> コンポーネントを持つエンティティ -->
+    </pc-scene>
+</pc-app>
+```
+
+アプリケーションはモジュールを待ってから開始するため、シーン内のすべての物理タグは最初のフレームから機能します。
+
+</TabItem>
+</Tabs>
 
 ## 重力 (Gravity) {#gravity}
 
-同じ設定パネルで、物理シミュレーションのグローバルな重力を設定できます。重力はシーン内のすべてのRigidBodyに適用される一定の力です。デフォルトでは、ワールドの負のY軸に-9.81に設定されています(つまり、直下)。このデフォルトは、地球の重力に近い値です。この値を増減することもできます。例えば、宇宙設定のゲームでは重力をゼロに設定することも可能です。
+重力は、すべてのDynamicなRigidBodyに適用される一定の加速度です。デフォルトのワールドY軸方向（真下）に-9.81という値は地球の重力に近いものです。宇宙を舞台にしたゲームではゼロに、月ならもう少し小さな値に設定します。
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+// 月の重力。古い setGravity() メソッドは非推奨で、このプロパティに置き換えられている。
+app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+[Scene Settings](/user-manual/editor/interface/settings/physics/)パネルの**PHYSICS**セクションで**Gravity**を設定します。
+
+</TabItem>
+<TabItem value="react" label="React">
+
+重力のプロパティはないため、`<Application>`の中のコンポーネントからアプリケーションに設定します。
+
+```jsx
+import { useEffect } from 'react';
+import { useApp } from '@playcanvas/react/hooks';
+
+function LunarGravity() {
+  const app = useApp();
+  useEffect(() => {
+    app.systems.rigidbody.gravity.set(0, -1.62, 0);
+  }, [app]);
+  return null;
+}
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<pc-scene gravity="0 -1.62 0">
+    <!-- ... -->
+</pc-scene>
+```
+
+</TabItem>
+</Tabs>
 
 ## 測定の単位 {#units-of-measurement}
 
-デフォルトでは、PlayCanvas物理エンジンは1メートルを1 unit（単位）としています。オブジェクトを物理的に正確な速度で落下させるには、シーンのオブジェクトサイズが適切であることを確認する必要があります。
+物理エンジンは1ユニットを1メートルとして解釈し、質量はキログラムで測ります。オブジェクトが自然な速さで落下するように、シーンのサイズをそれに合わせてください。身長1.8mのキャラクターは1.8ユニットの高さにします。大きく異なるスケールで作られたシーンもシミュレートはされますが、重力が弱すぎたり強すぎたりして見え、非常に小さな形状は互いをすり抜けやすくなります。
 
-たとえば、高さ1.8mのキャラクターがゲームに登場する場合、エディターの3Dビューでの高さは1.8ユニットである必要があります。
+## シミュレーションの仕組み {#how-the-simulation-runs}
 
-## RigidBody {#rigid-bodies}
+エンジンがシミュレーションを進める方法から、いくつかのルールが導かれます。このセクションの残りはこれらを前提としています。
 
-シーン内の任意のエンティティを物理シミュレーションに参加させることができます。RigidBodyコンポーネントとCollisionコンポーネントを追加するだけです。RigidBodyコンポーネントはタイプを指定します：
+- **シミュレーションは固定レートでステップします。** 毎フレーム、物理ワールドは1/60秒の固定ステップで進み、フレーム時間が必要とする回数（上限あり）だけステップします。そのため、ボディは30fpsでも144fpsでも同じように振る舞います。60Hzより速いディスプレイではステップが1回も実行されないフレームがあり、その場合はボディのトランスフォームが補間されて動きが滑らかに保たれます。
+- **Dynamicなボディは物理エンジンが所有します。** 各ステップの後、エンジンはすべてのDynamicなボディの位置と回転をエンティティに書き戻します。エンティティのトランスフォームに設定した値は上書きされるため、Dynamicなボディは力、速度、または`teleport`で動かします（[RigidBody](/user-manual/physics/rigid-bodies/#moving-and-teleporting)を参照）。
+- **StaticとKinematicなボディは開発者が所有します。** それらのトランスフォームは各ステップの開始時にエンティティから読み取られるため、他のエンティティと同じように動かせます。
+- **イベントはステップごとに発火します。** 衝突イベントとトリガーイベントは、フレームごとではなく物理ステップごとに1回通知されます。床の上で静止している箱は、静止している間ずっと毎ステップ`contact`イベントを発生させます。
 
-- Static - 移動しない物理オブジェクト
-- Dynamic - 適用された力に応じて移動する物理オブジェクト
-- Kinematic - APIを介して明示的にのみ配置できる物理オブジェクト
+## 関連情報 {#see-also}
 
-また、質量、摩擦、反発などの物理的プロパティも指定されます（本質的に「弾力性」の計測）。
-
-Collisionコンポーネントは、ボディの物理的な形状を指定します。RigidBodyの物理的な形状は、グラフィカルな形状と一致している必要はありません。一般的に、オブジェクトの物理的な表現は、グラフィックよりもはるかに単純です。使用可能なCollisionコンポーネントのタイプは次のとおりです。
-
-- Box
-- Sphere
-- Capsule
-- Cylinder
-- Mesh
-- Cone
-- [Compound](/user-manual/physics/compound-shapes/)
-
-## Staticなグラウンドの作成 {#creating-a-static-ground}
-
-ほとんどの場合、何らかのStaticな物理環境を作成する必要があります。たとえば、競馬場やサッカー場などです。最も単純な例は平面です。PlayCanvasは平面タイプのCollisionプリミティブを公開しませんが、ボックスのプリミティブを提供します。StaticなRigidBodyである1単位の高さの10x10ボックスを設定する方法は次のとおりです。
-
-![Static Ground](/img/user-manual/physics/static-ground.png)
-
-より複雑なものが必要な場合は、CollisionコンポーネントタイプをMeshに設定し、モデルアセットを割り当てることもできます。
-
-## Dynamicボディの作成 {#creating-dynamic-bodies}
-
-物理は動きに関連するものです。DynamicなRigidBodyを作成するとより面白くなります。Dynamicな1x1x1ボックスを作成してみましょう：
-
-![Dynamic Box](/img/user-manual/physics/dynamic-box.png)
-
-ボックスは、Staticな地面と衝突したときに興味深い方法で跳ね返るように回転されています。
-
-![Falling Box](/img/user-manual/physics/falling-box.gif)
-
-## Kinematicボディの作成 {#creating-kinematic-bodies}
-
-場合によっては、シーン内の物理オブジェクトの動きを明示的に制御し、これらのオブジェクトが他の物理オブジェクトに対して抵抗できない力を発揮できるようにするべきです。たとえば、プレイヤーを別の階に運ぶための動くプラットフォームを作るとします。これを実現するためには、RigidBodyのタイプをKinematicに設定します。それでは、Kinematicボックスを作成してみましょう。
-
-![Kinematic Box](/img/user-manual/physics/kinematic-box.png)
-
-Kinematicボディのアニメーション化が自身で行う必要があります。上記のKinematicボックスには、movement.jsというスクリプトが割り当てられた、スクリプトコンポーネントも含まれています。
-
-```javascript
-var Movement = pc.createScript('movement');
-
-// initialize code called once per entity
-Movement.prototype.initialize = function() {
-
-};
-
-// update code called every frame
-Movement.prototype.update = function(dt) {
-    this.entity.setPosition(Math.sin(Date.now() / 1000), 0.5, 0);
-};
-```
-
-このスクリプトは、正弦関数を使用して、ワールドのX軸に沿ってボックスをアニメーション化します。Kinematicボディを移動するには、 `setPosition`、`setRotation`および `setEulerAngles`のようなエンティティ上の標準の変換関数を使用します。シーンを実行すると、ダイナミックボックスがKinematicボックスの上に落ち、その上に乗ったまま運ばれます。
-
-![Kinematic Box](/img/user-manual/physics/kinematic-box.gif)
-
-## Dynamicボディのテレポート {#teleporting-dynamic-bodies}
-
-Kinematicボディで標準エンティティ変換関数を使用することはできますが、ダイナミックボディでは許可されていません。DynamicRigidBodyを作成するとき、そのエンティティの位置と方向の設定は物理エンジンが行うようになります。つまり、pc.Entity APIを使用してスクリプト内のエンティティの位置または方向を更新しようとすると、関数の効果は無効になります。代わりに、RigidBodyのテレポート機能を呼び出して、RigidBodyの位置や方向を瞬間的に更新する物理エンジンに明示的に通知する必要があります。
+- [RigidBody](/user-manual/physics/rigid-bodies/) - ボディのタイプとプロパティ。次に読むページ
+- [コリジョン形状](/user-manual/physics/collision-shapes/) - ボディに形状を与える
+- [Physics設定](/user-manual/editor/interface/settings/physics/) - エディターのシーン設定のPHYSICSセクション
+- [衝突とトリガー](/tutorials/collision-and-triggers/) - エディターで完全な物理シーンを構築するチュートリアル

@@ -92,6 +92,10 @@ const config = {
         { from: ['/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/lines/'], to: '/user-manual/gaussian-splatting/building/procedural-splats/lines/' },
         { from: ['/user-manual/gaussian-splatting/building/unified-rendering/procedural-splats/text/'], to: '/user-manual/gaussian-splatting/building/procedural-splats/text/' },
         { from: ['/user-manual/graphics/shader-chunk-migrations/'], to: '/user-manual/graphics/shaders/migrations/' },
+        // Physics: the legacy ammo.js migration page was folded into Physics Basics (the Editor no longer has an Enable Physics checkbox)
+        { from: ['/user-manual/physics/physics-migration/'], to: '/user-manual/physics/physics-basics/' },
+        // Physics: Compound Shapes became a section of the Collision Shapes page
+        { from: ['/user-manual/physics/compound-shapes/'], to: '/user-manual/physics/collision-shapes/' },
         { from: ['/user-manual/organizations/'], to: '/user-manual/account-management/organizations/' },
         { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
         { from: ['/user-manual/organizations/managing-organizations/'], to: '/user-manual/account-management/organizations/managing/' },

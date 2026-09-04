@@ -166,7 +166,7 @@ If the metadata at the top of this file includes an Engine Version line, generat
 - [Scripting]({{BASE_URL}}/user-manual/scripting/): Script lifecycle, attributes, events, and the ESM vs classic script formats.
 - [Gaussian Splatting]({{BASE_URL}}/user-manual/gaussian-splatting/): Rendering 3D Gaussian splats, formats, and building splat applications.
 - [Graphics]({{BASE_URL}}/user-manual/graphics/): Cameras, lighting, materials, shaders, and post effects.
-- [Physics]({{BASE_URL}}/user-manual/physics/): Rigid bodies, collision, triggers, and forces with the ammo.js integration.
+- [Physics]({{BASE_URL}}/user-manual/physics/): Rigid bodies, collision shapes and events, triggers, forces, ray casts and joints with the ammo.js integration.
 - [XR (VR/AR)]({{BASE_URL}}/user-manual/xr/): WebXR-based virtual and augmented reality.
 
 ## Essential API

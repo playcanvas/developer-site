@@ -33,4 +33,9 @@ JavaScript以外で書かれたエンジンは、それぞれ別のバインデ�
 
 :::
 
-現時点で、p2.jsエンジンのPlayCanvasインテグレーションが唯一存在しますが、同様の手法を使用して他のエンジン用の追加インテグレーションを簡単に作成できます。
+エンジンの物理コンポーネントは、ammo.jsを直接呼び出しているわけではありません。ボディ、形状、ジョイント、レイキャスト、接触の通知は、バックエンド層である[`PhysicsWorld`](https://github.com/playcanvas/engine/blob/main/src/framework/physics/physics-world.js)を経由し、組み込みのammo.jsバックエンドはその実装の1つです。この層はアルファ版とされており、APIはまだ変わる可能性がありますが、他のエンジンを統合するための接点として意図されています。RapierやJolt向けのバックエンドは同じクラスを実装すればよく、RigidBodyコンポーネントとCollisionコンポーネントはそのまま使えます。以前からある[PlayCanvas p2.jsインテグレーション](https://github.com/playcanvas/playcanvas-p2.js)はこの層より前に作られたもので、代わりに独自のスクリプトベースのコンポーネントでエンジンをラップしています。
+
+## 関連情報 {#see-also}
+
+- [物理の基本](/user-manual/physics/physics-basics/) - エディター、エンジンのみのアプリ、React、Web Componentsでammo.jsを有効にする
+- [ammo.jsを直接呼び出す](/user-manual/physics/calling-ammo/) - コンポーネントが公開していないBulletの機能を利用する

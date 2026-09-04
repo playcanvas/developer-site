@@ -33,4 +33,9 @@ The check marks above mean *cross-platform* determinism: the simulation produces
 
 :::
 
-While there is currently only one existing PlayCanvas integration for the p2.js engine, it should be straightforward to create additional integrations for the other engines listed using a similar approach.
+The engine's physics components do not call ammo.js directly. Bodies, shapes, joints, ray casts and contact reporting go through a backend layer, [`PhysicsWorld`](https://github.com/playcanvas/engine/blob/main/src/framework/physics/physics-world.js), and the built-in ammo.js backend is one implementation of it. The layer is marked alpha, so its API may still change, but it is the intended seam for integrating another engine: a backend for Rapier or Jolt would implement the same class and leave the rigidbody and collision components unchanged. The older [PlayCanvas p2.js integration](https://github.com/playcanvas/playcanvas-p2.js) predates this layer and wraps the engine with its own script-based components instead.
+
+## See Also
+
+- [Physics Basics](/user-manual/physics/physics-basics/) - Enabling ammo.js in the Editor, engine-only apps, React and Web Components
+- [Calling ammo.js Directly](/user-manual/physics/calling-ammo/) - Reaching Bullet features that the components do not expose
