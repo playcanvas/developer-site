@@ -7,7 +7,7 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
 
 :::
 

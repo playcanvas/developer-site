@@ -1,13 +1,13 @@
 ---
 title: <pc-script>
-description: "Reference for the pc-script element: script component container grouping multiple pc-script-instance children and shared script settings."
+description: "Reference for the pc-script element: the script component that hosts pc-script-instance children and enables or disables them together."
 ---
 
 The `<pc-script>` tag is used to define a script component.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * It can have 0..n [`<pc-script-instance>`](../pc-script-instance) children.
 
 :::

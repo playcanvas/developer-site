@@ -7,7 +7,7 @@ description: "pc-anim要素のリファレンス: エンティティ階層上で
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)、[`<pc-node>`](../pc-node)、または[`<pc-model>`](../pc-model)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 * 0..n個の[`<pc-anim-clip>`](../pc-anim-clip)を子として持つことができ、それぞれが1つの名前付きクリップを宣言します。
 
 :::

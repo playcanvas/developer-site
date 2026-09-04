@@ -7,7 +7,7 @@ description: "pc-button要素のリファレンス: ホバー、押下、非ア�
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 * ボタンが入力を受け取れるように、エンティティには `use-input` 属性を設定した [`<pc-element>`](../pc-element)（通常は `type="image"`）も必要です。
 
 :::

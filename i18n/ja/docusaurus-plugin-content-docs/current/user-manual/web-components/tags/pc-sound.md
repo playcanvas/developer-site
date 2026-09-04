@@ -7,7 +7,7 @@ description: "pc-sound要素のリファレンス: pc-sound-slotスロットと�
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
 * 0..n個の[`<pc-sound-slot>`](../pc-sound-slot) 子を持つことができます。
 
 :::

@@ -7,7 +7,7 @@ The `<pc-layout-group>` tag is used to define a layout group component, which au
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * Child entities are laid out automatically. Add a [`<pc-layout-child>`](../pc-layout-child) to a child to control how it is sized within the group.
 
 :::

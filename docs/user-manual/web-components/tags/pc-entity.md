@@ -7,9 +7,9 @@ The `<pc-entity>` tag is used to define an entity.
 
 :::note[Usage]
 
-* It must be a direct child of [`<pc-scene>`](../pc-scene), another `<pc-entity>`, or a [`<pc-node>`](../pc-node) — which parents it under a node inside a loaded model.
+* It must be a direct child of [`<pc-scene>`](../pc-scene), another `<pc-entity>`, a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node). Under a model it is parented to the model's host entity; under a node, to that node inside the loaded model.
 * It can have 0..n [`<pc-entity>`](../pc-entity) or [`<pc-model>`](../pc-model) children.
-* It can optionally have one of each component type as children: [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-layout-child>`](../pc-layout-child), [`<pc-layout-group>`](../pc-layout-group), [`<pc-light>`](../pc-light), [`<pc-audio-listener>`](../pc-audio-listener), [`<pc-particle-system>`](../pc-particle-system), [`<pc-render>`](../pc-render), [`<pc-rigid-body>`](../pc-rigid-body), [`<pc-screen>`](../pc-screen), [`<pc-script>`](../pc-script), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scroll-view>`](../pc-scroll-view), [`<pc-sound>`](../pc-sound).
+* It can optionally have one of each component type as children: [`<pc-anim>`](../pc-anim), [`<pc-audio-listener>`](../pc-audio-listener), [`<pc-button>`](../pc-button), [`<pc-camera>`](../pc-camera), [`<pc-collision>`](../pc-collision), [`<pc-element>`](../pc-element), [`<pc-gsplat>`](../pc-gsplat), [`<pc-joint>`](../pc-joint), [`<pc-layout-child>`](../pc-layout-child), [`<pc-layout-group>`](../pc-layout-group), [`<pc-light>`](../pc-light), [`<pc-particle-system>`](../pc-particle-system), [`<pc-render>`](../pc-render), [`<pc-rigid-body>`](../pc-rigid-body), [`<pc-screen>`](../pc-screen), [`<pc-script>`](../pc-script), [`<pc-scrollbar>`](../pc-scrollbar), [`<pc-scroll-view>`](../pc-scroll-view), [`<pc-sound>`](../pc-sound).
 
 :::
 
@@ -61,6 +61,7 @@ You can also handle these events declaratively with inline `onclick` and `onpoin
 * It requires the **primary** button, so a right-click does not fire it — `pointerup` alone does.
 * It requires a press *and* a release, so it does not fire at the start of every camera drag the way `pointerdown` does.
 * If the press and the release landed on different geometry, the click fires at their **nearest common ancestor** — dragging from one object onto its sibling clicks their shared parent, and dragging off onto the background clicks nothing at all. This is the same rule the browser applies to native clicks on nested HTML.
+* `detail` carries the click count, as it does for a native click: a second click on the same element within half a second arrives as a `click` whose `detail` is `2`, so a double click is read from `detail` rather than from a separate event.
 
 A press the browser takes back — a touch it reinterprets as a scroll, say — is discarded rather than concluding as a click.
 

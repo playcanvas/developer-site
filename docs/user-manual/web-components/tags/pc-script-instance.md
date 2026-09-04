@@ -28,6 +28,18 @@ In addition, any other non-reserved attribute maps to the script attribute of th
 
 Declared values are the source of truth. When the host entity cycles — a [`<pc-node>`](../pc-node) rebinding after its model reloads, for instance — a surviving script instance has its declared state re-asserted, which deliberately snaps back any runtime mutation of a declared property. Keep state you change at runtime in properties the markup does not declare.
 
+## Events
+
+Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).
+
+| Event | Description |
+| --- | --- |
+| `scriptattributeschange` | Fired when the script attributes change. `detail.attributes` carries the new attributes object. |
+| `scriptenablechange` | Fired when `enabled` changes. `detail.enabled` carries the new state. |
+| `scriptnamechange` | Fired when the script is renamed by changing `name` on an element that already had one. `detail.oldName` and `detail.newName` carry the two names, and the parent [`<pc-script>`](../pc-script) responds by destroying the old script and creating the new one. |
+
+All three bubble. The parent [`<pc-script>`](../pc-script) listens for them to apply each change to the engine, and the same events let your own code observe script configuration changing — one listener on an ancestor covers every script instance beneath it.
+
 ## Example
 
 A `rotate` script attached to a cube. Script classes usually load from a [`<pc-asset>`](../pc-asset), but they can also be registered from an inline module — the `<pc-script-instance>` stays pending until its class arrives. Try changing the rotation rates:

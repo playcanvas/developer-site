@@ -9,7 +9,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 :::note[使用法]
 
-* それは、[`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* それは、[`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 
 :::
 

@@ -7,7 +7,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * It is referenced by a [`<pc-scroll-view>`](../pc-scroll-view) via its `horizontal-scrollbar` or `vertical-scrollbar` attribute.
 * Its `handle` attribute references the [`<pc-entity>`](../pc-entity) used as the draggable handle, whose image element should have `use-input` set.
 
