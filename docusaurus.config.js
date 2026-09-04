@@ -333,8 +333,8 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       algolia: {
-        appId: '69QRBNV3NH',
-        apiKey: '1a45aa069915da9c841ad1a9c225e815',
+        appId: process.env.ALGOLIA_APP_ID ?? '69QRBNV3NH',
+        apiKey: process.env.ALGOLIA_API_KEY ?? '',
         indexName: 'developer-playcanvas',
         contextualSearch: true,
       },
