@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 496
+Total Documents: 500
 Generated: 2026-09-04
 
 ## Instructions for Large Language Models
@@ -548,6 +548,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Indirect Drawing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/indirect-drawing/): WebGPU indirect draw slots, GPU buffer parameters, compute-driven culling, and per-frame slot allocation rules.
 - [Multi-Draw](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multi-draw/): Single-call multi-submesh rendering, platform support, terrain-style culling, and fallback when multi-draw is absent.
 - [Multiple Render Targets](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multiple-render-targets/): Configure multiple render targets, shared attachments rules, and shader output to several color buffers at once.
+- [Render Targets](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/render-targets/): Render a scene into an offscreen texture instead of the screen, then use the result in your scene - covering creation, layer setup, orientation, formats, resizing and MSAA.
 - [Cameras](https://developer.playcanvas.com/user-manual/graphics/cameras/): Create cameras and explore projection, tone mapping, multi-camera rendering, camera controls, and coordinate conversion.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/graphics/cameras/camera-controls/): Add orbit, fly, and pan navigation to any camera with the engine's ready-made camera-controls script, with mouse, touch, and gamepad support.
 - [Clearing](https://developer.playcanvas.com/user-manual/graphics/cameras/clearing/): Control how a camera clears its render target — set the background color, make the canvas transparent, or disable clearing entirely.
@@ -557,6 +558,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Scene Picker](https://developer.playcanvas.com/user-manual/graphics/cameras/scene-picker/): Select meshes and splats from screen coordinates with the Picker API, async reads, and optional depth-based world positions.
 - [Screen and World Coordinates](https://developer.playcanvas.com/user-manual/graphics/cameras/screen-and-world/): Convert between 2D screen positions and 3D world positions with screenToWorld and worldToScreen for picking, placement, and UI.
 - [Tone Mapping & Exposure](https://developer.playcanvas.com/user-manual/graphics/cameras/tone-mapping/): Map HDR scene lighting to your display with per-camera tone mapping and gamma, plus optional physically based exposure controls.
+- [Debug Drawing](https://developer.playcanvas.com/user-manual/graphics/debug-drawing/): Draw wireframe shapes and lines for a single frame with WireRenderer, to visualize what your scene is doing.
 - [Layers](https://developer.playcanvas.com/user-manual/graphics/layers/): Customize render order and visibility with layers, layer composition, opaque and transparent sub-layers, and sort modes.
 - [Lighting](https://developer.playcanvas.com/user-manual/graphics/lighting/): How dynamic runtime lighting compares to baked lightmaps and when to use each approach in PlayCanvas scenes.
 - [Ambient Occlusion](https://developer.playcanvas.com/user-manual/graphics/lighting/ambient-occlusion/): Bake ambient occlusion textures in DCC tools, upload them, and multiply diffuse and specular ambient lighting.
@@ -571,6 +573,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Particles](https://developer.playcanvas.com/user-manual/graphics/particles/): Create and tune particle systems in the Editor, start them from scripts, and use soft particles with scene depth.
 - [Physically Based Rendering](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/): PBR fundamentals in PlayCanvas: diffuse and specular, energy conservation, metalness, and consistent materials.
 - [Image Based Lighting](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/image-based-lighting/): Image-based lighting with HDR cubemaps, prefiltering for roughness, and authoring environment maps for realistic PBR.
+- [Parallax Mapping](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/parallax-mapping/): Fake surface relief from a height map: the offset and marched modes, the zero level, sample budgets, self shadowing, and the limits of the technique.
 - [Physical Materials](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/physical-materials/): Physical Material maps and parameters: metalness and specular workflows, IBL needs, and common texture slots.
 - [Post Effects](https://developer.playcanvas.com/user-manual/graphics/posteffects/): Compare modern CameraFrame HDR post-processing with legacy script effects and find links to individual filters.
 - [Modern Post Processing](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/): CameraFrame HDR stack: bloom, SSAO, TAA, depth of field, grading, examples, and customization entry points.
@@ -594,6 +597,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [WGSL Reflection](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-reflection/): Simplified WGSL declarations without manual bind groups: how PlayCanvas reflects resources from shader source and assigns bindings.
 - [WGSL Vertex and Fragment Shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders/): Vertex and fragment specific WGSL constructs in PlayCanvas: attributes, varyings, and fragment outputs.
 - [Transparency](https://developer.playcanvas.com/user-manual/graphics/transparency/): Compare the ways PlayCanvas renders transparent surfaces: alpha blending, alpha test, opacity dithering and alpha to coverage, and when to use each.
+- [Wide Lines](https://developer.playcanvas.com/user-manual/graphics/wide-lines/): Render thick lines with caps, joins, dashes and gradients using WideLineRenderer, for paths, annotations and other line geometry that is part of your scene.
 
 ### Gaussian Splatting
 - [Gaussian Splatting](https://developer.playcanvas.com/user-manual/gaussian-splatting/): Overview of 3D Gaussian Splatting in PlayCanvas: capture, viewing, editing, and building web apps with photorealistic splat scenes.
