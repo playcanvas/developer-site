@@ -891,6 +891,7 @@ const sidebars = {
             'user-manual/graphics/advanced-rendering/multiple-render-targets',
             'user-manual/graphics/advanced-rendering/dual-source-blending',
             'user-manual/graphics/advanced-rendering/indirect-drawing',
+            'user-manual/graphics/advanced-rendering/transform-feedback',
             'user-manual/graphics/advanced-rendering/html-in-canvas',
           ],
         },
