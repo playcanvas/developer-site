@@ -7,7 +7,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)または[`<pc-node>`](../pc-node)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 * 拘束される両方のエンティティに[`<pc-rigid-body>`](../pc-rigid-body)が必要で、物理には`Ammo`モジュールが必要です。[`<pc-wasm>`](../pc-wasm)を参照してください。
 
 :::
@@ -111,7 +111,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 
 ## イベント {#events}
 
-これらのイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用するか、このインターフェースの`oneventname`プロパティにイベントリスナーを割り当てることでリッスンできます。
+このイベントは、[`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)を使用してリッスンできます。
 
 | イベント | 説明 |
 | --- | --- |

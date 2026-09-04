@@ -7,7 +7,7 @@ The `<pc-layout-child>` tag is used to define a layout child component, which co
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) that also has a [`<pc-element>`](../pc-element).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * That entity must itself be a child of an entity with a [`<pc-layout-group>`](../pc-layout-group).
 
 :::

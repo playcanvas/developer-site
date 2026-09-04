@@ -7,7 +7,7 @@ description: "pc-layout-child要素のリファレンス: レイアウトグル�
 
 :::note[使用法]
 
-* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
 * そのエンティティ自体は、[`<pc-layout-group>`](../pc-layout-group) を持つエンティティの子である必要があります。
 
 :::

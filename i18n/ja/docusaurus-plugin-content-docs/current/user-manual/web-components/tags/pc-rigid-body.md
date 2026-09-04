@@ -7,7 +7,7 @@ description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、�
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子要素である必要があります。
 * [`<pc-collision>`](../pc-collision)コンポーネントの兄弟要素である必要があります。
 * ammo.js WebAssemblyモジュールは、[`<pc-wasm>`](../pc-wasm)タグを介してロードされている必要があります。
 

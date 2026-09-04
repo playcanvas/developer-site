@@ -7,7 +7,7 @@ description: "pc-scroll-view要素のリファレンス: コンテンツ、ス�
 
 :::note[使用法]
 
-* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity) の直接の子である必要があります。
+* [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
 * ビューポート、コンテンツ、スクロールバーの各エンティティを、エンティティの `name` またはドキュメント全体の `#` セレクターで参照します。[エンティティ参照](../attributes.md#entity-references)を参照してください。
 * コンテンツがスクロールビューの範囲にクリップされるように、ビューポート要素には `mask` 属性を設定してください。
 

@@ -7,7 +7,7 @@ The `<pc-joint>` tag constrains two rigid bodies to each other — a hinged door
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity) or a [`<pc-node>`](../pc-node).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * Both constrained entities need a [`<pc-rigid-body>`](../pc-rigid-body), and physics needs the `Ammo` module — see [`<pc-wasm>`](../pc-wasm).
 
 :::
@@ -111,7 +111,7 @@ For a `6dof` joint, each axis starts `"locked"`, so a joint with nothing else se
 
 ## Events
 
-Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+Listen to this event using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).
 
 | Event | Description |
 | --- | --- |

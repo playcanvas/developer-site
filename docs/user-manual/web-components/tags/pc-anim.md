@@ -7,7 +7,7 @@ The `<pc-anim>` tag plays animation clips over an entity hierarchy — a charact
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-node>`](../pc-node) or a [`<pc-model>`](../pc-model).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 * It can have 0..n [`<pc-anim-clip>`](../pc-anim-clip) children, each declaring one named clip.
 
 :::

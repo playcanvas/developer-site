@@ -7,9 +7,9 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 :::note[使用法]
 
-* それは[`<pc-scene>`](../pc-scene)、別の`<pc-entity>`、または[`<pc-node>`](../pc-node)の直接の子でなければなりません。`<pc-node>`の下に置くと、読み込まれたモデル内のノードの下に親子付けされます。
+* それは[`<pc-scene>`](../pc-scene)、別の`<pc-entity>`、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子でなければなりません。モデルの下に置くとそのモデルのホストエンティティに、ノードの下に置くと読み込まれたモデル内のそのノードに親子付けされます。
 * それは0からn個の[`<pc-entity>`](../pc-entity)または[`<pc-model>`](../pc-model)の子を持つことができます。
-* それはオプションで、各コンポーネントタイプの子を1つ持つことができます：[`<pc-button>`](../pc-button)、[`<pc-camera>`](../pc-camera)、[`<pc-collision>`](../pc-collision)、[`<pc-element>`](../pc-element)、[`<pc-gsplat>`](../pc-gsplat)、[`<pc-layout-child>`](../pc-layout-child)、[`<pc-layout-group>`](../pc-layout-group)、[`<pc-light>`](../pc-light)、[`<pc-audio-listener>`](../pc-audio-listener)、[`<pc-particle-system>`](../pc-particle-system)、[`<pc-render>`](../pc-render)、[`<pc-rigid-body>`](../pc-rigid-body)、[`<pc-screen>`](../pc-screen)、[`<pc-script>`](../pc-script)、[`<pc-scrollbar>`](../pc-scrollbar)、[`<pc-scroll-view>`](../pc-scroll-view)、[`<pc-sound>`](../pc-sound)。
+* それはオプションで、各コンポーネントタイプの子を1つ持つことができます：[`<pc-anim>`](../pc-anim)、[`<pc-audio-listener>`](../pc-audio-listener)、[`<pc-button>`](../pc-button)、[`<pc-camera>`](../pc-camera)、[`<pc-collision>`](../pc-collision)、[`<pc-element>`](../pc-element)、[`<pc-gsplat>`](../pc-gsplat)、[`<pc-joint>`](../pc-joint)、[`<pc-layout-child>`](../pc-layout-child)、[`<pc-layout-group>`](../pc-layout-group)、[`<pc-light>`](../pc-light)、[`<pc-particle-system>`](../pc-particle-system)、[`<pc-render>`](../pc-render)、[`<pc-rigid-body>`](../pc-rigid-body)、[`<pc-screen>`](../pc-screen)、[`<pc-script>`](../pc-script)、[`<pc-scrollbar>`](../pc-scrollbar)、[`<pc-scroll-view>`](../pc-scroll-view)、[`<pc-sound>`](../pc-sound)。
 
 :::
 
@@ -61,6 +61,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 * **プライマリ**ボタンを必要とするため、右クリックでは発生しません。`pointerup`だけではこれを区別できません。
 * 押下*と*解放の両方を必要とするため、`pointerdown`のようにカメラのドラッグ開始ごとに発生することはありません。
 * 押下と解放が別のジオメトリ上で起きた場合、クリックは両者の**最も近い共通の祖先**で発生します。あるオブジェクトから兄弟オブジェクトへドラッグすると共通の親でクリックが発生し、背景へドラッグして離すとどこでもクリックは発生しません。これは、ネストしたHTML上のネイティブなクリックにブラウザが適用するのと同じルールです。
+* `detail`にはネイティブなクリックと同様にクリック回数が入ります。同じ要素を0.5秒以内に再度クリックすると`detail`が`2`の`click`として届くため、ダブルクリックは別のイベントではなく`detail`から読み取ります。
 
 ブラウザが取り消した押下 — たとえばスクロールと解釈し直されたタッチ — はクリックとして成立せず、破棄されます。
 

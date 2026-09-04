@@ -7,7 +7,7 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子要素である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子要素である必要があります。
 
 :::
 

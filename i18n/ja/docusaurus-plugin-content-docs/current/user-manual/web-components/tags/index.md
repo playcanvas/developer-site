@@ -19,6 +19,8 @@ description: "PlayCanvas Web Componentのタグをアルファベット順に一
 
 繰り返し可能な子要素は、親のタグをプレフィックスとして取ります。[`<pc-anim>`](pc-anim)の中の[`<pc-anim-clip>`](pc-anim-clip)、[`<pc-sound>`](pc-sound)の中の[`<pc-sound-slot>`](pc-sound-slot)、[`<pc-script>`](pc-script)の中の[`<pc-script-instance>`](pc-script-instance)です。
 
+[`<pc-material>`](pc-material)を除くすべてのタグは非同期に初期化され、初期化が完了すると`ready`イベントを発火します。そのタイミングと、これをラップする`whenReady()`ヘルパーについては[`ready`イベント](../programmatic-access.md#the-ready-event)を参照してください。各タグのページのイベントセクションには、そのタグに固有のイベントのみを記載しています。
+
 | タグ | 説明 |
 | --- | --- |
 | [`<pc-anim>`](pc-anim) | アニメーションクリップを再生するアニメーションコンポーネントを定義します。 |

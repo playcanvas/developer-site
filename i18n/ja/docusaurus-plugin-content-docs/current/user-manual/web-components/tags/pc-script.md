@@ -1,13 +1,13 @@
 ---
 title: <pc-script>
-description: "pc-script要素のリファレンス: 複数のpc-script-instance子をまとめ、共有のScript設定を持つScript Componentのコンテナです。"
+description: "pc-script要素のリファレンス: pc-script-instance子要素をホストし、それらをまとめて有効化・無効化するスクリプトコンポーネントです。"
 ---
 
 `<pc-script>`タグは、スクリプトコンポーネントを定義するために使用されます。
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 * 0..n個の[`<pc-script-instance>`](../pc-script-instance)の子を持つことができます。
 
 :::

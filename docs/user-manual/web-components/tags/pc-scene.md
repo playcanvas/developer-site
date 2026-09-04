@@ -1,6 +1,6 @@
 ---
 title: <pc-scene>
-description: "Reference for the pc-scene element: scene container inside pc-app, ambient settings, and where entities are mounted for rendering."
+description: "Reference for the pc-scene element: the scene container inside pc-app, with fog, exposure and gravity settings for the entities it holds."
 ---
 
 The `<pc-scene>` tag is used to define the scene.

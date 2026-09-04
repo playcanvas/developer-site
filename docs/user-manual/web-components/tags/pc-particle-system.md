@@ -1,13 +1,13 @@
 ---
 title: <pc-particle-system>
-description: "Reference for the pc-particle-system element: configure particle emitters, textures, blending, and simulation parameters in markup."
+description: "Reference for the pc-particle-system element: emit particles from a JSON asset that defines the emitter, textures, blending and simulation parameters."
 ---
 
 The `<pc-particle-system>` tag is used to define a particle system.
 
 :::note[Usage]
 
-* It must be a direct child of a [`<pc-entity>`](../pc-entity).
+* It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node).
 
 :::
 

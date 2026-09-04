@@ -19,6 +19,8 @@ Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id:
 
 A repeatable child takes its parent's tag as a prefix: [`<pc-anim-clip>`](pc-anim-clip) inside [`<pc-anim>`](pc-anim), [`<pc-sound-slot>`](pc-sound-slot) inside [`<pc-sound>`](pc-sound), [`<pc-script-instance>`](pc-script-instance) inside [`<pc-script>`](pc-script).
 
+Every tag except [`<pc-material>`](pc-material) initializes asynchronously and fires a `ready` event once it has — see [The `ready` Event](../programmatic-access.md#the-ready-event) for the timing, and for the `whenReady()` helper that wraps it. The Events section on a tag's page lists only the events specific to that tag.
+
 | Tag | Description |
 | --- | --- |
 | [`<pc-anim>`](pc-anim) | Defines an animation component that plays animation clips. |

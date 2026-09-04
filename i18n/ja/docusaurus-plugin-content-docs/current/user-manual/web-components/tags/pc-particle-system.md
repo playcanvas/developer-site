@@ -1,13 +1,13 @@
 ---
 title: <pc-particle-system>
-description: "pc-particle-system要素のリファレンス: マークアップでパーティクルエミッター、テクスチャ、ブレンディング、シミュレーションのパラメータを設定します。"
+description: "pc-particle-system要素のリファレンス: エミッター、テクスチャ、ブレンディング、シミュレーションのパラメータを定義するJSONアセットからパーティクルを放出します。"
 ---
 
 `<pc-particle-system>`タグは、パーティクルシステムを定義するために使用されます。
 
 :::note[使用法]
 
-* [`<pc-entity>`](../pc-entity)の直接の子である必要があります。
+* [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子である必要があります。
 
 :::
 
