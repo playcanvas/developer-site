@@ -109,7 +109,7 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>

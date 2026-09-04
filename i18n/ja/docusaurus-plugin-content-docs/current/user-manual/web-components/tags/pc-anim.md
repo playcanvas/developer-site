@@ -107,7 +107,7 @@ const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>

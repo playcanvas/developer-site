@@ -23,6 +23,8 @@ The `<pc-scene>` tag is used to define the scene.
 | `fog-density` | Number | `"0"` | Fog density for exponential fog types |
 | `fog-end` | Number | `"1000"` | End distance for linear fog |
 | `fog-start` | Number | `"0"` | Start distance for linear fog |
+| `gsplat-lod-mode` | Enum | `"error"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](../pc-gsplat#level-of-detail) |
+| `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less warns and keeps the default |
 | `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
 
 </div>

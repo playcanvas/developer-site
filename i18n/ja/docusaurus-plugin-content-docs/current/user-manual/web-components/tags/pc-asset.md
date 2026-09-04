@@ -107,7 +107,7 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 ```html live-example
 <pc-app>
     <!-- スクリプトアセット: タイプは.mjs拡張子から推論されます -->
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.21.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <!-- コンテナアセット: タイプは.glb拡張子から推論されます -->
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-scene>
