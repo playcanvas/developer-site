@@ -78,6 +78,7 @@ varying texCoord: vec2f;
 position: @builtin(position)            // 補間されたフラグメント位置
 frontFacing: @builtin(front_facing)     // 前面向き
 sampleIndex: @builtin(sample_index)     // MSAAのサンプルインデックス
+sampleMask: @builtin(sample_mask)       // MSAAのカバレッジマスク
 primitiveIndex: @builtin(primitive_index) // プリミティブインデックス（サポート時）
 ```
 
@@ -87,6 +88,7 @@ primitiveIndex: @builtin(primitive_index) // プリミティブインデック�
 pcPosition
 pcFrontFacing
 pcSampleIndex
+pcSampleMask
 pcPrimitiveIndex  // サポート時
 ```
 
@@ -119,6 +121,7 @@ fn fragmentMain(input: FragmentInput) -> FragmentOutput {
 
 ```wgsl
 fragDepth: @builtin(frag_depth)
+sampleMask: @builtin(sample_mask)
 ```
 
 例：
@@ -129,6 +132,17 @@ fragDepth: @builtin(frag_depth)
     output.color = vec4f(1.0);
     output.color1 = vec4f(0.5);
     output.fragDepth = 0.2;
+    return output;
+}
+```
+
+マルチサンプル（MSAA）レンダーターゲットへのレンダリング時に `output.sampleMask` を書き込むと、フラグメントが書き込むサンプルを制御できます。書き込まれたマスクは GPU によってカバレッジマスクと AND 演算されるため、シェーダーは個々のサンプルを破棄できます。これはカスタムのアルファトゥカバレッジ・ディザパターンなどのテクニックの基礎になります：
+
+```wgsl
+@fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
+    var output: FragmentOutput;
+    output.color = vec4f(1.0);
+    output.sampleMask = pcSampleMask & 0x5u;  // サンプル0と2のみを保持
     return output;
 }
 ```
