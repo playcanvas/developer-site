@@ -30,7 +30,7 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 
 ## Level of Detail
 
-A streamed splat asset — one exported with LOD levels, alongside a `.lod-meta.json` — is not rendered at full detail everywhere. The engine works to a **scene-wide splat budget**: a target number of splats on screen across every `<pc-gsplat>` in the scene, spent where it buys the most. The budget and how it is spent are properties of the scene, so they live on [`<pc-scene>`](../pc-scene); how each splat competes for its share lives here:
+A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](../pc-asset) `src` points at the export's `lod-meta.json`, which is downloaded up front while the splat data itself streams in on demand. Such an asset is not rendered at full detail everywhere. The engine works to a **scene-wide splat budget**: a target number of splats on screen across every `<pc-gsplat>` in the scene, spent where it buys the most. The budget and how it is spent are properties of the scene, so they live on [`<pc-scene>`](../pc-scene); how each splat competes for its share lives here:
 
 | Attribute | On | What it controls |
 | --- | --- | --- |
