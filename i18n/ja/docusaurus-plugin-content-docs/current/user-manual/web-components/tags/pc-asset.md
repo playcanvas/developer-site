@@ -142,3 +142,12 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 [AssetElement API](https://api.playcanvas.com/web-components/classes/AssetElement.html)を使用して、`<pc-asset>`要素をプログラムで作成および操作できます。
 
 `asset`プロパティは、この要素が登録したエンジンの[Asset](https://api.playcanvas.com/engine/classes/Asset.html)です。要素の準備が完了するまでは`null`です。`AssetElement.get(id)`を使えば、要素を保持せずに`id`でアセットを取得できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-model>`](../pc-model) — コンテナアセットをインスタンス化します
+* [`<pc-material>`](../pc-material) — テクスチャアセットをマップとして受け取ります
+* [`<pc-sound-slot>`](../pc-sound-slot) — オーディオアセットを再生します
+* [`<pc-script-instance>`](../pc-script-instance) — アセットとして読み込んだスクリプトを実行します
+
+サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html)、[Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html)

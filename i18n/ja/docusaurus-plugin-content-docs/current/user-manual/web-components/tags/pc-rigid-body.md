@@ -76,4 +76,11 @@ description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、�
 
 `component`プロパティは、この要素が追加するエンジンの[RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
 
-物理のサンプルはこのタグを土台にしています。[Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html)、[Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html)です。
+## 関連項目 {#see-also}
+
+* [`<pc-collision>`](../pc-collision) — ボディが衝突する形状。すべてのリジッドボディに必要です
+* [`<pc-joint>`](../pc-joint) — 2つのボディを互いに拘束します
+* [`<pc-wasm>`](../pc-wasm) — 物理に必要なAmmoモジュールをロードします
+* [`<pc-scene>`](../pc-scene) — 重力
+
+サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html)

@@ -91,3 +91,11 @@ button.component.on('click', () => {
 You can programmatically create and manipulate `<pc-button>` elements using the [ButtonComponentElement API](https://api.playcanvas.com/web-components/classes/ButtonComponentElement.html).
 
 The `component` property is the engine [ButtonComponent](https://api.playcanvas.com/engine/classes/ButtonComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-element>`](../pc-element) — the image element a button needs for input and transitions
+* [`<pc-screen>`](../pc-screen) — the screen the button's element hierarchy lives on
+* [`<pc-entity>`](../pc-entity) — click and pointer events on 3D objects, without a screen
+
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

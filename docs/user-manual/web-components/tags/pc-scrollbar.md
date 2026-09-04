@@ -60,3 +60,11 @@ A standalone vertical scrollbar — drag the orange handle. Try a different `han
 You can programmatically create and manipulate `<pc-scrollbar>` elements using the [ScrollbarComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollbarComponentElement.html).
 
 The `component` property is the engine [ScrollbarComponent](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scroll-view>`](../pc-scroll-view) — the view a scrollbar drives
+* [`<pc-element>`](../pc-element) — the track and handle are image elements
+* [`<pc-screen>`](../pc-screen) — the screen the scrollbar renders on
+
+Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

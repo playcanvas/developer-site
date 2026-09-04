@@ -64,3 +64,12 @@ Boxes fading into linear fog. Try a different `fog-color` (match the camera's `c
 You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html).
 
 The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — `null` until the element is ready — where fog, exposure and the sky are configured.
+
+## See Also
+
+* [`<pc-app>`](../pc-app) — the application that holds the scene
+* [`<pc-sky>`](../pc-sky) — the scene's skybox and image-based lighting
+* [`<pc-camera>`](../pc-camera) — tone mapping, applied after the scene's exposure
+* [`<pc-rigid-body>`](../pc-rigid-body) — the bodies gravity acts on
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html).

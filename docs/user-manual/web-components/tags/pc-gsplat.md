@@ -57,4 +57,10 @@ You can programmatically create and manipulate `<pc-gsplat>` elements using the 
 
 The `component` property is the engine [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
 
-The examples cover a few splat workflows: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html).
+## See Also
+
+* [`<pc-asset>`](../pc-asset) — the splat file, declared as a `gsplat` asset
+* [`<pc-app>`](../pc-app) — the device settings recommended for splats
+* [Using Web Components](../../gaussian-splatting/building/your-first-app/web-components.md) — a first splat app, step by step
+
+Examples: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html).

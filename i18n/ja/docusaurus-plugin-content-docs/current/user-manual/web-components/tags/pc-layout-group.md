@@ -69,4 +69,10 @@ description: "pc-layout-group要素のリファレンス: 子要素を水平ま�
 
 `component`プロパティは、この要素が追加するエンジンの[LayoutGroupComponent](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
 
-[UI Layoutのサンプル](https://playcanvas.github.io/web-components/examples/ui-layout.html)では、ワールド空間のスクリーン上にレイアウトグループを入れ子にして構築しています。
+## 関連項目 {#see-also}
+
+* [`<pc-layout-child>`](../pc-layout-child) — 子ごとのサイズ規則
+* [`<pc-element>`](../pc-element) — 配置される要素
+* [`<pc-screen>`](../pc-screen) — レイアウトが載るスクリーン
+
+サンプル: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

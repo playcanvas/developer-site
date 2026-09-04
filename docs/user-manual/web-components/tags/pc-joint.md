@@ -186,3 +186,11 @@ joint.entityA = '#link-3'; // re-resolves now
 ```
 
 Both accept the same reference forms as other entity-valued attributes — an entity `name` (resolved against the nearest enclosing entity first), or a document-wide `#` selector. See [Entity References](../attributes.md#entity-references).
+
+## See Also
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — both constrained entities need one
+* [`<pc-collision>`](../pc-collision) — gives a body its shape
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+
+Examples: [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html).

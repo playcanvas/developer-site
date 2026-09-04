@@ -198,3 +198,12 @@ Car
 マテリアルの`name`値はそのまま読み取られる実行時のラベルであり、便利な手掛かりではあるものの一意ではありません。名前のないglTFマテリアルは`Untitled`と呼ばれ、マテリアルなしでオーサリングされたプリミティブはエンジンが共有する`defaultGlbMaterial`を持ち、重複はそのまま重複し、スクリプトが割り当てを解除した場合は名前は`null`になります。一意なのは`index`です。どちらも[`<pc-node>`の`material-overrides`](../pc-node#overriding-materials)が選択に用いるもので、差し替えた[`<pc-material>`](../pc-material)は`name`属性の内容をそのまま報告します。ここで識別したいマテリアルには設定しておく価値があります。
 
 このツリーはスナップショットであり、呼び出しごとに新しく計算されます。その後の階層の変更を追跡することはなく、変更を加えても何も起こりません。プレーンなデータであるため`JSON.stringify`を通過でき、ログ出力・差分比較・テストでの検証が容易です。
+
+## 関連項目 {#see-also}
+
+* [`<pc-asset>`](../pc-asset) — モデルがインスタンス化するコンテナアセット
+* [`<pc-node>`](../pc-node) — インスタンス化された階層の内側に手を伸ばします
+* [`<pc-anim>`](../pc-anim) — GLBが持つアニメーションを再生します
+* [モデルの読み込み](../loading-models.md) — モデルを読み込み、マークアップから調整する方法
+
+サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html)

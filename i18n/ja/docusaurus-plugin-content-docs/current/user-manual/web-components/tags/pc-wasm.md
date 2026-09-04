@@ -74,3 +74,11 @@ description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパ�
 [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html)を使用して、`<pc-wasm>`要素をプログラムで作成および操作できます。
 
 この要素はエンジンオブジェクトを公開しません。準備が完了した時点で、モジュールは`name`の下でエンジンの`WasmModule`を通じてインスタンス化されており（`Basis`だけはエンジンのBasis初期化処理を通ります）、モジュールが定義する`Ammo`などのグローバルをスクリプトから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — Ammoをロードする最も一般的な理由である物理
+* [`<pc-collision>`](../pc-collision) — 物理用の衝突形状
+* [`<pc-app>`](../pc-app) — すべてのモジュールを待ってから起動します
+
+サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html)、[Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html)

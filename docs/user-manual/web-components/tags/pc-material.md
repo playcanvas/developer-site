@@ -141,3 +141,11 @@ The `name` attribute is worth setting on any material you expect to identify lat
 You can programmatically create and manipulate `<pc-material>` elements using the [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html).
 
 The `material` property is the engine [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) the element builds, and `MaterialElement.get(id)` looks one up by `id`. The element is synchronous, so neither waits on readiness.
+
+## See Also
+
+* [`<pc-render>`](../pc-render) — applies a material to a primitive
+* [`<pc-node>`](../pc-node) — overrides materials inside a loaded model
+* [`<pc-asset>`](../pc-asset) — the texture assets a material's maps reference
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).

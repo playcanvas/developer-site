@@ -74,3 +74,12 @@ A row of boxes receding into the distance. Try a different `fov`, or switch to `
 You can programmatically create and manipulate `<pc-camera>` elements using the [CameraComponentElement API](https://api.playcanvas.com/web-components/classes/CameraComponentElement.html).
 
 The `component` property is the engine [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scene>`](../pc-scene) — exposure and fog, which the camera's tone mapping works with
+* [`<pc-sky>`](../pc-sky) — a skybox in place of the clear color
+* [`<pc-script>`](../pc-script) — camera controls are engine scripts attached beside the camera
+* [XR Support](../xr.md) — entering VR and AR from the camera element
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html).

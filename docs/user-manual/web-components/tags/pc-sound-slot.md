@@ -75,3 +75,11 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
 You can programmatically create and manipulate `<pc-sound-slot>` elements using the [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html).
 
 The attributes are mirrored as properties. The engine [SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html) itself belongs to the parent component: `soundElement.component.slot(name)` returns it.
+
+## See Also
+
+* [`<pc-sound>`](../pc-sound) — the component a slot belongs to
+* [`<pc-asset>`](../pc-asset) — the audio asset a slot plays
+* [`<pc-audio-listener>`](../pc-audio-listener) — positional playback needs a listener
+
+Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).

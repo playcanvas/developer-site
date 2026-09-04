@@ -76,4 +76,11 @@ You can programmatically create and manipulate `<pc-rigid-body>` elements using 
 
 The `component` property is the engine [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
 
-The physics examples build on this tag: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html), [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).
+## See Also
+
+* [`<pc-collision>`](../pc-collision) — the shape the body collides with; every rigid body needs one
+* [`<pc-joint>`](../pc-joint) — constrains two bodies together
+* [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
+* [`<pc-scene>`](../pc-scene) — gravity
+
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).

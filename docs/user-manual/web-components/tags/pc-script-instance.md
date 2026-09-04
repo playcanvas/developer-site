@@ -83,3 +83,11 @@ A `rotate` script attached to a cube. Script classes usually load from a [`<pc-a
 You can programmatically create and manipulate `<pc-script-instance>` elements using the [ScriptInstanceElement API](https://api.playcanvas.com/web-components/classes/ScriptInstanceElement.html).
 
 The element becomes ready once its script instance has been created — await `whenReady('pc-script-instance')` or the element's `ready()` promise. The live `Script` instance is then available via the `script` property, and script attributes can be read and written as an object via the `scriptAttributes` property.
+
+## See Also
+
+* [`<pc-script>`](../pc-script) — the component that hosts instances
+* [`<pc-asset>`](../pc-asset) — loads the script's module
+* [Adding Behavior with Scripts](../scripting.md) — declaring and typing script attributes
+
+Examples: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html), [Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html) and [Annotations](https://playcanvas.github.io/web-components/examples/annotations.html).

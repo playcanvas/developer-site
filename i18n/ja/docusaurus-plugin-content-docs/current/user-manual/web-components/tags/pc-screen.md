@@ -63,3 +63,12 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 [ScreenComponentElement API](https://api.playcanvas.com/web-components/classes/ScreenComponentElement.html)を使用して、`<pc-screen>`要素をプログラムで作成および操作できます。
 
 `component`プロパティは、この要素が追加するエンジンの[ScreenComponent](https://api.playcanvas.com/engine/classes/ScreenComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-element>`](../pc-element) — スクリーンがレンダリングする要素
+* [`<pc-layout-group>`](../pc-layout-group) — 要素の自動配置
+* [`<pc-scroll-view>`](../pc-scroll-view) — スクリーン上でコンテンツをスクロールする
+* [`<pc-button>`](../pc-button) — インタラクティブな要素
+
+サンプル: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html)、[UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

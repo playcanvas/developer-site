@@ -64,3 +64,12 @@ A screen-space screen hosting a text element. With `scale-mode="blend"`, the UI 
 You can programmatically create and manipulate `<pc-screen>` elements using the [ScreenComponentElement API](https://api.playcanvas.com/web-components/classes/ScreenComponentElement.html).
 
 The `component` property is the engine [ScreenComponent](https://api.playcanvas.com/engine/classes/ScreenComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-element>`](../pc-element) — the elements a screen renders
+* [`<pc-layout-group>`](../pc-layout-group) — automatic arrangement of elements
+* [`<pc-scroll-view>`](../pc-scroll-view) — scrolling content on a screen
+* [`<pc-button>`](../pc-button) — interactive elements
+
+Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

@@ -56,3 +56,11 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 [SkyElement API](https://api.playcanvas.com/web-components/classes/SkyElement.html)を使用して、`<pc-sky>`要素をプログラムで作成および操作できます。
 
 属性はプロパティとしても利用できます。スカイそのものはエンジンのシーンの状態、つまり[Scene](https://api.playcanvas.com/engine/classes/Scene.html)の`sky`と環境アトラスであり、`<pc-scene>`要素の`scene`プロパティを通じてアクセスします。
+
+## 関連項目 {#see-also}
+
+* [`<pc-asset>`](../pc-asset) — 正距円筒テクスチャアセット
+* [`<pc-scene>`](../pc-scene) — 露出と、エンジン上でスカイが置かれる場所
+* [`<pc-light>`](../pc-light) — スカイの画像ベースライティングと組み合わせる直接光
+
+サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html)、[Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html)

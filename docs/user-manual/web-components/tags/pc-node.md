@@ -152,3 +152,12 @@ body.materialOverrides = null; // back to the authored materials
 ```
 
 The element stores a frozen copy of what you assign, so mutating your object afterwards changes nothing — assign a new mapping to change one. Property writes do not reflect back to the `material-overrides` attribute, which follows how the other override properties behave.
+
+## See Also
+
+* [`<pc-model>`](../pc-model) — the model whose node is bound
+* [`<pc-material>`](../pc-material) — materials a node can substitute via `material-overrides`
+* [`<pc-entity>`](../pc-entity) — attaches new content under a node
+* [Loading Models](../loading-models.md) — finding the nodes inside a loaded model
+
+Examples: [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).

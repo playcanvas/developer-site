@@ -186,3 +186,11 @@ joint.entityA = '#link-3'; // ここで再解決されます
 ```
 
 どちらも他のエンティティ参照属性と同じ参照形式を受け付けます。エンティティの `name`（最も近い外側のエンティティから解決されます）、またはドキュメント全体の `#` セレクターです。[エンティティ参照](../attributes.md#entity-references)を参照してください。
+
+## 関連項目 {#see-also}
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — 拘束する両方のエンティティに必要です
+* [`<pc-collision>`](../pc-collision) — ボディに形状を与えます
+* [`<pc-wasm>`](../pc-wasm) — 物理に必要なAmmoモジュールをロードします
+
+サンプル: [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)、[AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html)

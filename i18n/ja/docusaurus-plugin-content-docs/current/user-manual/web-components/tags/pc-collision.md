@@ -89,3 +89,11 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 [CollisionComponentElement API](https://api.playcanvas.com/web-components/classes/CollisionComponentElement.html)を使用して、`<pc-collision>`要素をプログラムで作成および操作できます。
 
 `component`プロパティは、この要素が追加するエンジンの[CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-rigid-body>`](../pc-rigid-body) — 衝突形状を物理に参加させます
+* [`<pc-joint>`](../pc-joint) — 衝突形状を持つ2つのボディを拘束します
+* [`<pc-wasm>`](../pc-wasm) — 物理に必要なAmmoモジュールをロードします
+
+サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)

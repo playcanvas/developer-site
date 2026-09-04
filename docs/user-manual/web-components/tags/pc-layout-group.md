@@ -69,4 +69,10 @@ You can programmatically create and manipulate `<pc-layout-group>` elements usin
 
 The `component` property is the engine [LayoutGroupComponent](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
 
-The [UI Layout example](https://playcanvas.github.io/web-components/examples/ui-layout.html) builds a nested set of layout groups on a world-space screen.
+## See Also
+
+* [`<pc-layout-child>`](../pc-layout-child) — per-child sizing rules
+* [`<pc-element>`](../pc-element) — the elements being arranged
+* [`<pc-screen>`](../pc-screen) — the screen the layout lives on
+
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

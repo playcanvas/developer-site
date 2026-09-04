@@ -86,3 +86,10 @@ description: "pc-particle-system要素のリファレンス: エミッター、�
 [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html)を使用して、`<pc-particle-system>`要素をプログラムで作成および操作できます。
 
 `component`プロパティは、この要素が追加するエンジンの[ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-asset>`](../pc-asset) — JSON設定と、それが参照するテクスチャ
+* [`<pc-entity>`](../pc-entity) — エミッターの位置と向きを決めます
+
+サンプル: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html)

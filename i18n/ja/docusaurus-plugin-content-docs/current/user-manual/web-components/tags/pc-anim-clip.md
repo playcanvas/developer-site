@@ -147,3 +147,10 @@ document.querySelector('pc-anim').appendChild(clip);
 await clip.ready();
 document.querySelector('pc-anim').transition('wave');
 ```
+
+## 関連項目 {#see-also}
+
+* [`<pc-anim>`](../pc-anim) — クリップが属するコンポーネント
+* [`<pc-asset>`](../pc-asset) — クリップのトラックの元になるコンテナまたはアニメーションアセット
+
+サンプル: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)

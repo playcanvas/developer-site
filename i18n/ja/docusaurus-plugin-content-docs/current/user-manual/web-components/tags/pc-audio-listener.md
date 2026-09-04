@@ -79,3 +79,11 @@ description: "pc-audio-listener要素のリファレンス: 位置サウンド�
 [AudioListenerComponentElement API](https://api.playcanvas.com/web-components/classes/AudioListenerComponentElement.html)を使用して、`<pc-audio-listener>`要素をプログラムで作成および操作できます。
 
 `component`プロパティは、この要素が追加するエンジンの[AudioListenerComponent](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-sound>`](../pc-sound) — リスナーが聴く位置音源
+* [`<pc-sound-slot>`](../pc-sound-slot) — それらの音源が再生するクリップ
+* [`<pc-camera>`](../pc-camera) — リスナーは通常カメラのエンティティに載せます
+
+サンプル: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)

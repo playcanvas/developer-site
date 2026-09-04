@@ -91,3 +91,11 @@ button.component.on('click', () => {
 [ButtonComponentElement API](https://api.playcanvas.com/web-components/classes/ButtonComponentElement.html)を使用して、`<pc-button>`要素をプログラムで作成および操作できます。
 
 `component`プロパティは、この要素が追加するエンジンの[ButtonComponent](https://api.playcanvas.com/engine/classes/ButtonComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-element>`](../pc-element) — ボタンが入力と遷移に必要とするイメージ要素
+* [`<pc-screen>`](../pc-screen) — ボタンの要素階層が載るスクリーン
+* [`<pc-entity>`](../pc-entity) — スクリーンを使わずに3Dオブジェクトのクリックやポインターイベントを扱う
+
+サンプル: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

@@ -83,3 +83,11 @@ description: "pc-script-instance要素のリファレンス: 単一のスクリ�
 [ScriptInstanceElement API](https://api.playcanvas.com/web-components/classes/ScriptInstanceElement.html)を使用して、`<pc-script-instance>`要素をプログラムで作成および操作できます。
 
 この要素は、そのスクリプトインスタンスが作成されると準備完了になります — `whenReady('pc-script-instance')` または要素の `ready()` プロミスを待ってください。その後、ライブの `Script` インスタンスは `script` プロパティから利用でき、スクリプト属性は `scriptAttributes` プロパティを介してオブジェクトとして読み書きできます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-script>`](../pc-script) — インスタンスをホストするコンポーネント
+* [`<pc-asset>`](../pc-asset) — スクリプトのモジュールをロードします
+* [スクリプトで動作を追加する](../scripting.md) — スクリプト属性の宣言と型付け
+
+サンプル: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html)、[Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html)、[Annotations](https://playcanvas.github.io/web-components/examples/annotations.html)

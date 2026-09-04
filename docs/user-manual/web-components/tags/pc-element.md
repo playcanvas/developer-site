@@ -91,3 +91,12 @@ An `image` element as a panel, with two `text` elements on top — the second us
 You can programmatically create and manipulate `<pc-element>` elements using the [ElementComponentElement API](https://api.playcanvas.com/web-components/classes/ElementComponentElement.html).
 
 The `component` property is the engine [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-screen>`](../pc-screen) — every element sits under a screen
+* [`<pc-button>`](../pc-button) — makes an image element interactive
+* [`<pc-layout-group>`](../pc-layout-group) — arranges sibling elements automatically
+* [`<pc-scroll-view>`](../pc-scroll-view) — scrolls a content element inside a viewport
+
+Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [Text](https://playcanvas.github.io/web-components/examples/text.html), [3D Text](https://playcanvas.github.io/web-components/examples/3d-text.html) and [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html).

@@ -71,3 +71,12 @@ All six primitive shapes. Try changing any `type`, or add `material` once you ha
 You can programmatically create and manipulate `<pc-render>` elements using the [RenderComponentElement API](https://api.playcanvas.com/web-components/classes/RenderComponentElement.html).
 
 The `component` property is the engine [RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-material>`](../pc-material) — the material a primitive is drawn with
+* [`<pc-model>`](../pc-model) — renders a GLB instead of a primitive
+* [`<pc-light>`](../pc-light) — lights and shadows the primitive
+* [`<pc-collision>`](../pc-collision) — a matching physics shape
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html).

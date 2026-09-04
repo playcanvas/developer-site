@@ -193,3 +193,11 @@ console.log(anim.clips); // ['walk', 'stalk']
 ```
 
 この要素が公開していない機能は`component`（エンジンの[AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html)）から利用できます。再生ヘッド（`baseLayer.activeStateCurrentTime`）、アクティブなクリップの長さ、そしてフラットなクリップ集合を超えるアニメーションのためのステートグラフやブレンドツリーなどです。
+
+## 関連項目 {#see-also}
+
+* [`<pc-anim-clip>`](../pc-anim-clip) — コンポーネントが再生する各クリップを宣言します
+* [`<pc-model>`](../pc-model) — 通常のホスト。そのGLBがアニメーショントラックを供給します
+* [`<pc-asset>`](../pc-asset) — 別のGLBやanimclip JSONからクリップを供給します
+
+サンプル: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)

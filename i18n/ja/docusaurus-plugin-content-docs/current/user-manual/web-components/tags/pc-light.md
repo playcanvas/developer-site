@@ -109,3 +109,11 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 [LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html)を使用して、`<pc-light>`要素をプログラムで作成および操作できます。
 
 `component`プロパティは、この要素が追加するエンジンの[LightComponent](https://api.playcanvas.com/engine/classes/LightComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-scene>`](../pc-scene) — すべてのライトの寄与をスケールする露出
+* [`<pc-sky>`](../pc-sky) — 直接光が届かない部分を埋める画像ベースのライティング
+* [`<pc-render>`](../pc-render) — ライトが当たるものの`cast-shadows`と`receive-shadows`
+
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html)

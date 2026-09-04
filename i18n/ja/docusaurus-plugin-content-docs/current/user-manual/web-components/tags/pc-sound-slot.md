@@ -75,3 +75,11 @@ description: "pc-sound-slot要素のリファレンス: 位置オーディオま
 [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html)を使用して、`<pc-sound-slot>`要素をプログラムで作成および操作できます。
 
 属性はプロパティとしても利用できます。エンジンの[SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html)そのものは親コンポーネントに属しており、`soundElement.component.slot(name)`で取得できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-sound>`](../pc-sound) — スロットが属するコンポーネント
+* [`<pc-asset>`](../pc-asset) — スロットが再生するオーディオアセット
+* [`<pc-audio-listener>`](../pc-audio-listener) — 位置再生にはリスナーが必要です
+
+サンプル: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html)、[Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)

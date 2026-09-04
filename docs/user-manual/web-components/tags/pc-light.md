@@ -109,3 +109,11 @@ Try editing the light `color`, `intensity` or `type` values and watch the scene 
 You can programmatically create and manipulate `<pc-light>` elements using the [LightComponentElement API](https://api.playcanvas.com/web-components/classes/LightComponentElement.html).
 
 The `component` property is the engine [LightComponent](https://api.playcanvas.com/engine/classes/LightComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scene>`](../pc-scene) — exposure, which scales every light's contribution
+* [`<pc-sky>`](../pc-sky) — image-based lighting to fill in what direct lights miss
+* [`<pc-render>`](../pc-render) — `cast-shadows` and `receive-shadows` on what the light hits
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html).

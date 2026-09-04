@@ -91,3 +91,12 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 [ElementComponentElement API](https://api.playcanvas.com/web-components/classes/ElementComponentElement.html)を使用して、`<pc-element>`要素をプログラムで作成および操作できます。
 
 `component`プロパティは、この要素が追加するエンジンの[ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+
+## 関連項目 {#see-also}
+
+* [`<pc-screen>`](../pc-screen) — すべての要素はスクリーンの下に置きます
+* [`<pc-button>`](../pc-button) — イメージ要素をインタラクティブにします
+* [`<pc-layout-group>`](../pc-layout-group) — 兄弟要素を自動的に配置します
+* [`<pc-scroll-view>`](../pc-scroll-view) — ビューポートの中でコンテンツ要素をスクロールします
+
+サンプル: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html)、[Text](https://playcanvas.github.io/web-components/examples/text.html)、[3D Text](https://playcanvas.github.io/web-components/examples/3d-text.html)、[UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)
