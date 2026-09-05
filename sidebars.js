@@ -1138,9 +1138,10 @@ const sidebars = {
       items: [
         'user-manual/optimization/guidelines',
         'user-manual/optimization/texture-compression',
-        'user-manual/optimization/gpu-profiling',
-        'user-manual/optimization/profiler',
         'user-manual/optimization/mini-stats',
+        'user-manual/optimization/app-stats',
+        'user-manual/optimization/profiler',
+        'user-manual/optimization/gpu-profiling',
         'user-manual/optimization/runtime-devicepixelratio',
         'user-manual/optimization/load-time',
         'user-manual/optimization/optimizing-scene-format',
