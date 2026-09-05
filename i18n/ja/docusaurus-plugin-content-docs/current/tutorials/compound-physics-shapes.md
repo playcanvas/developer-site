@@ -7,7 +7,7 @@ description: 複雑なインポートメッシュ向けに、複数のコリジ�
 
 import Link from '@docusaurus/Link';
 
-複合物理シェイプに関する完全なドキュメントは[ユーザーマニュアル](/user-manual/physics/compound-shapes/)にあります。
+複合物理シェイプに関する完全なドキュメントは[ユーザーマニュアル](/user-manual/physics/collision-shapes/#compound-shapes)にあります。
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/KXZ5Lsda/" title="Compound Physics Shapes" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

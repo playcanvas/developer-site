@@ -1,126 +1,158 @@
 ---
-title: Physics Basics
-description: Enable ammo.js, set gravity and units, and configure rigidbody and collision components for Bullet physics.
+title: Getting Started
+description: Enable ammo.js physics in the Editor, engine-only apps, React and Web Components, set gravity and units, and understand how the simulation steps.
 ---
-
-PlayCanvas incorporates a very powerful physics engine called [ammo.js](https://github.com/kripken/ammo.js). This is a browser port of the open source C++ Bullet physics engine.
-
-PlayCanvas provides the [rigidbody](/user-manual/editor/scenes/components/rigidbody/) and [collision](/user-manual/editor/scenes/components/collision/) components to set up physics simulations.
-
-## Enabling Physics {#enabling-physics}
-
-By default, a new PlayCanvas project does not include ammo.js modules. This is because ammo.js weighs in at several hundred kilobytes and your app should not have to load this library if it is not needed.
-
-You can import ammo.js modules into your project using the import button on the Scene Settings panel:
-
-![Physics Settings](/img/user-manual/physics/physics-settings.png)
-
-This will import the default build of ammo.js provided by PlayCanvas. However please note it is possible to compile your own version of ammo.js and add it to your project instead. For more information see [this page](/user-manual/editor/assets/inspectors/wasm/).
-
-For details on migrating legacy projects to the latest ammo.js see [this page](/user-manual/physics/physics-migration/).
-
-## Gravity {#gravity}
-
-In the same Settings panel, you can set global gravity of the physics simulation. Gravity is a constant force applied to all rigid bodies in your scene. By default, this is set to -9.81 in the world's negative Y axis (straight down, in other words). This default approximates Earth gravity. But you may want to increase or decrease this value. For example, for a game set in space, you will probably want to set gravity to zero.
-
-## Units of Measurement {#units-of-measurement}
-
-By default, the PlayCanvas physics engine interprets 1 unit as 1 meter. Therefore, for objects to fall at a rate that appears to be physically accurate, you should ensure that your scenes size objects appropriately.
-
-For example, if your game features a character that is 1.8m tall, he should be 1.8 units high in the Editor's 3D view.
-
-## Rigid Bodies {#rigid-bodies}
-
-You can make any entity in your scene participate in the physics simulation. Just add a rigidbody component and a collision component. The rigidbody component specifies a type:
-
-- Static - A physical object that never moves
-- Dynamic - A physical object that will move in response to an applied force
-- Kinematic - A physical object that can only be positioned explicitly via the API
-
-It also specifies physical properties like mass, friction and restitution (essentially a measure of 'bounciness').
-
-The collision component specifies the physical shape of the body. Note that a rigid body's physical shape does not have to match its graphical shape. It is typical for physical representations of objects to be much simpler than the graphical. The available collision component types are:
-
-- Box
-- Sphere
-- Capsule
-- Cylinder
-- Mesh
-- Cone
-- [Compound](/user-manual/physics/compound-shapes/)
-
-## Creating a Static Ground {#creating-a-static-ground}
-
-Most of the time, you will want to create some kind of static physical environment. For example, a race track or a football pitch. The simplest example is a flat plane. PlayCanvas doesn't expose a plane-type collision primitive but it does provide a box primitive. Here is how to configure a 1 unit high 10x10 box that is a static rigid body:
-
-![Static Ground](/img/user-manual/physics/static-ground.png)
-
-You could also set the collision component type to Mesh and assign a model asset if you want something more complex.
-
-## Creating Dynamic Bodies {#creating-dynamic-bodies}
-
-Physics is all about movement so things get interesting when we create dynamic rigid bodies. Let's create a dynamic 1x1x1 box:
-
-![Dynamic Box](/img/user-manual/physics/dynamic-box.png)
-
-The box has been rotated so that when it collides with the static ground, it will bounce in an interesting way:
-
-![Falling Box](/img/user-manual/physics/falling-box.gif)
-
-## Creating Kinematic Bodies {#creating-kinematic-bodies}
-
-Sometimes, it can be useful to be able to explicitly control the motion of physical objects in your scene and have these objects exert an irresistible force on other physical objects. For example, imagine a moving platform that can carry the player across a level. To achieve this, you can set a rigid body's type to Kinematic. Let's create a kinematic box:
-
-![Kinematic Box](/img/user-manual/physics/kinematic-box.png)
-
-The responsibility for animating kinematic bodies is on you, the developer. You will notice that the kinematic box shown above also has a script component with a script called movement.js assigned:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+PlayCanvas physics is powered by [ammo.js](https://github.com/kripken/ammo.js), a port of the open source Bullet physics engine to WebAssembly. Once it is loaded, you build a simulation out of entities that carry a [rigidbody](/user-manual/editor/scenes/components/rigidbody/) component, which decides how the entity moves, and a [collision](/user-manual/editor/scenes/components/collision/) component, which gives it a shape. This page covers loading the library, the global settings, and the rules that every other page in this section builds on.
+
+## Enabling Physics {#enabling-physics}
+
+Physics is opt-in. ammo.js weighs in at several hundred kilobytes, so nothing loads it unless you ask. It is distributed as three files: the WebAssembly module `ammo.wasm.wasm`, its JavaScript glue `ammo.wasm.js`, and `ammo.js`, an asm.js fallback for browsers without WebAssembly support. Until the library is present, physics components are inert placeholders: adding them does nothing and raises no errors.
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+Load the module before creating the application. The three files ship with the engine repository under `examples/assets/wasm/ammo/` and in the [sync-ammo](https://www.npmjs.com/package/sync-ammo) npm package.
 
 ```javascript
-import { Script } from 'playcanvas';
+pc.WasmModule.setConfig('Ammo', {
+    glueUrl: 'ammo/ammo.wasm.js',
+    wasmUrl: 'ammo/ammo.wasm.wasm',
+    fallbackUrl: 'ammo/ammo.js'
+});
 
-export class Movement extends Script {
-    static scriptName = "movement";
+// Wait for the module, then create the application as usual
+await new Promise((resolve) => {
+    pc.WasmModule.getInstance('Ammo', () => resolve());
+});
 
-    initialize() {
+const app = new pc.Application(canvas);
+```
 
-    }
+The rigid body system finds the `Ammo` global as the application starts and installs the ammo.js backend. `pc.Application` registers every component system for you; if you build from `pc.AppBase` and `pc.AppOptions` instead, add `pc.CollisionComponentSystem` and `pc.RigidBodyComponentSystem` (and `pc.JointComponentSystem` for [joints](/user-manual/physics/joints/)) to `componentSystems`. The [Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes) example shows the complete sequence.
 
-    update(dt) {
-        this.entity.setPosition(Math.sin(Date.now() / 1000), 0.5, 0);
-    }
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Open the Scene Settings panel, expand **PHYSICS** and click **IMPORT AMMO**. This adds the three files from the PlayCanvas Store to your assets, and the engine loads them before your scene starts.
+
+![Physics Settings](/img/user-manual/editor/interface/settings/physics.webp)
+
+Until the library is imported, the [Collision](/user-manual/editor/scenes/components/collision/) and [Rigid Body](/user-manual/editor/scenes/components/rigidbody/) component inspectors show an *Ammo module not found* warning with the same button. To use your own build of ammo.js, add it as a [WASM module asset](/user-manual/editor/assets/inspectors/wasm/) instead of the Store version.
+
+:::note[Legacy projects]
+
+Projects created before ammo.js was distributed as module assets used a legacy copy of the library that the launcher injected automatically. If a project has no ammo.js assets but physics still works, this is why. Clicking **IMPORT AMMO** adds the module assets and turns the legacy library off at the same time, so a project never loads both. The imported build is newer, smaller and faster, so make the switch when you can.
+
+:::
+
+</TabItem>
+<TabItem value="react" label="React">
+
+Install the module and set the `usePhysics` prop on your root `<Application>`:
+
+```bash
+npm install sync-ammo
+```
+
+```jsx
+import { Application } from '@playcanvas/react';
+
+<Application usePhysics>
+  {/* entities with <RigidBody> and <Collision> components */}
+</Application>
+```
+
+ammo.js is loaded lazily when `usePhysics` is set, so your scene renders before the library arrives and physics components activate once it has. The [`usePhysics`](/user-manual/react/api/hooks/use-physics/) hook reports `isPhysicsLoaded` if you need to wait for that moment. See the [React physics guide](/user-manual/react/guide/physics/) for details.
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+Declare the module with a [`<pc-wasm>`](/user-manual/web-components/tags/pc-wasm/) tag inside `<pc-app>`:
+
+```html
+<pc-app>
+    <pc-wasm name="Ammo"
+             glue="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.js"
+             wasm="https://developer.playcanvas.com/assets/modules/ammo/ammo.wasm.wasm"
+             fallback="https://developer.playcanvas.com/assets/modules/ammo/ammo.js"></pc-wasm>
+    <pc-scene>
+        <!-- entities with <pc-rigid-body> and <pc-collision> components -->
+    </pc-scene>
+</pc-app>
+```
+
+The application waits for the module before it starts, so every physics tag in the scene works from the first frame.
+
+</TabItem>
+</Tabs>
+
+## Gravity {#gravity}
+
+Gravity is a constant acceleration applied to every dynamic rigid body. The default of -9.81 along the world's Y axis (straight down) approximates Earth. Set it to zero for a game in space, or to something smaller for the Moon.
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+// Lunar gravity. The older setGravity() method is deprecated in favor of this property.
+app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Set **Gravity** in the **PHYSICS** section of the [Scene Settings](/user-manual/editor/interface/settings/physics/) panel.
+
+</TabItem>
+<TabItem value="react" label="React">
+
+There is no gravity prop, so set it on the application from a component inside `<Application>`:
+
+```jsx
+import { useEffect } from 'react';
+import { useApp } from '@playcanvas/react/hooks';
+
+function LunarGravity() {
+  const app = useApp();
+  useEffect(() => {
+    app.systems.rigidbody.gravity.set(0, -1.62, 0);
+  }, [app]);
+  return null;
 }
 ```
 
 </TabItem>
-<TabItem value="classic" label="Classic">
+<TabItem value="web-components" label="Web Components">
 
-```javascript
-var Movement = pc.createScript('movement');
-
-// initialize code called once per entity
-Movement.prototype.initialize = function() {
-
-};
-
-// update code called every frame
-Movement.prototype.update = function(dt) {
-    this.entity.setPosition(Math.sin(Date.now() / 1000), 0.5, 0);
-};
+```html
+<pc-scene gravity="0 -1.62 0">
+    <!-- ... -->
+</pc-scene>
 ```
 
 </TabItem>
 </Tabs>
 
-This script simply animates the box along the world x-axis using a sine function. You move kinematic bodies using the standard transformation functions on the entity like `setPosition`, `setRotation` and `setEulerAngles`. Now when we run the scene, the dynamic box falls on the kinematic box and is carried along on top of it:
+## Units of Measurement {#units-of-measurement}
 
-![Kinematic Box](/img/user-manual/physics/kinematic-box.gif)
+The physics engine interprets 1 unit as 1 meter and measures mass in kilograms. For objects to fall at a rate that looks right, size your scenes accordingly: a character who is 1.8 m tall should be 1.8 units high. Scenes built at a very different scale still simulate, but gravity will look too weak or too strong, and very small shapes are prone to tunneling through one another.
 
-## Teleporting Dynamic Bodies {#teleporting-dynamic-bodies}
+## How the Simulation Runs {#how-the-simulation-runs}
 
-Although you can use the standard entity transformation function with kinematic bodies, this is not allowed for dynamic bodies. When creating a dynamic rigid body, you pass the responsibility for setting the position and orientation of that entity to the physics engine. This means that if you try to update the position or orientation of an entity in a script using the pc.Entity API, the functions will not have an effect. Instead, you must call the teleport function on the rigid body component which explicitly notifies the physics engine you want to momentarily update a rigid body's position and/or orientation.
+A few rules follow from the way the engine drives the simulation, and the rest of this section relies on them:
+
+- **The simulation steps at a fixed rate.** Each frame, the physics world advances in fixed steps of 1/60 of a second, taking as many as the frame time requires (up to a limit). Bodies therefore behave the same at 30 and at 144 frames per second. On displays faster than 60 Hz some frames run no step at all, and body transforms are interpolated so that motion stays smooth.
+- **Physics owns dynamic bodies.** After each step the engine writes the position and rotation of every dynamic body back to its entity. Anything you set on the entity's transform is overwritten, so dynamic bodies are moved with forces, velocities or `teleport` instead (see [Rigid Bodies](/user-manual/physics/rigid-bodies/#moving-and-teleporting)).
+- **You own static and kinematic bodies.** Their transforms are read from the entity at the start of each step, so you move them like any other entity.
+- **Events fire per step.** Collision and trigger events are reported once per physics step, not per frame. A body resting on the floor produces a `contact` event every step for as long as it rests there.
+
+## See Also
+
+- [Rigid Bodies](/user-manual/physics/rigid-bodies/) - Body types and properties, the next thing to read
+- [Collision Shapes](/user-manual/physics/collision-shapes/) - Giving bodies a shape
+- [Physics Settings](/user-manual/editor/interface/settings/physics/) - The PHYSICS section of the Editor's scene settings
+- [Collision and Triggers](/tutorials/collision-and-triggers/) - Tutorial that builds a complete physics scene in the Editor

@@ -1,395 +1,60 @@
 ---
-title: Calling the ammo.js API
-description: Call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components.
+title: Calling ammo.js Directly
+description: Reach Bullet physics features that the PlayCanvas components do not expose by calling the ammo.js API on a rigid body's native object, with continuous collision detection as a worked example.
 ---
 
-The PlayCanvas integration with ammo.js does not expose the full capability of the ammo.js API. However, it is possible to call the ammo.js API directly from your PlayCanvas scripts.
+The rigidbody, collision and joint components cover most of what games need from physics, but Bullet can do more than they expose. Continuous collision detection, custom collision flags, extra constraint types, soft bodies and vehicles are all reachable by calling ammo.js directly from your code.
 
-PlayCanvas currently uses [this build](https://github.com/kripken/ammo.js/commit/dcab07bf0e7f2b4b64c01dc45da846344c8f50be) of ammo.js. The API exposed by this build can be found [here](https://github.com/kripken/ammo.js/blob/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/ammo.idl). Although there is no official documentation for ammo.js, you can refer to the [Bullet Physics User Guide](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) to learn more.
+ammo.js is a direct port of Bullet, so its API mirrors the C++ one. There is no ammo.js documentation, but the [Bullet User Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) applies, and the classes and methods exposed to JavaScript are listed in the [ammo.idl](https://github.com/kripken/ammo.js/blob/main/ammo.idl) file of the ammo.js repository. The build that the Editor imports from the Store and that ships with the engine examples exposes everything in that file. If you need more, compile your own build and load it in place of the standard one; in the Editor, add it as a [WASM module asset](/user-manual/editor/assets/inspectors/wasm/).
 
-## Joint Constraints
+:::warning
 
-There are currently no PlayCanvas components which implement physics constraints (sometimes known as physics joints). However, it is easy to leverage the ammo.js API to create scripts that implement constraints.
+Code written against `Ammo` bypasses the engine's physics components. It ties your project to the ammo.js backend, it is not covered by the PlayCanvas API reference, and the objects it works with are internal to the engine and may change between releases. Prefer the components whenever they can do the job.
 
-Here is the script for a point-to-point constraint (essentially a ball and socket joint):
+:::
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+## Reaching the Native Objects {#reaching-the-native-objects}
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+Every rigidbody component wraps a Bullet `btRigidBody`, available as `entity.rigidbody.body` once the component has been initialized. The whole simulation lives in a `btDiscreteDynamicsWorld`, available as `app.systems.rigidbody.dynamicsWorld`. Both are `null` when ammo.js is not loaded. These properties are the same on every surface; only how you obtain `entity` and `app` differs, as described in [Moving Bodies](/user-manual/physics/forces-and-impulses/#running-physics-code).
 
-```javascript
-import { Script, Vec3, Entity, Color } from 'playcanvas';
+Two rules keep ammo.js code stable:
 
-export class PointToPointConstraint extends Script {
-    static scriptName = "pointToPointConstraint";
+- **Fetch the body when you need it.** The engine recreates the native body when properties such as the rigidbody type or the collision shape change, so do not cache `rigidbody.body` across frames. Read it each time you use it, and reapply any settings after a change.
+- **Free what you allocate.** ammo.js objects live in WebAssembly memory that JavaScript's garbage collector does not manage. Call `Ammo.destroy()` on any `btVector3`, `btTransform` or constraint you create once you are done with it.
 
-    /**
-     * Position of the constraint in the local space of this entity.
-     * 
-     * @attribute
-     * @title Pivot
-     * @type {Vec3}
-     */
-    pivotA = new pc.Vec3(0, 0, 0);
+## Continuous Collision Detection {#continuous-collision-detection}
 
-    /**
-     * Optional second entity.
-     * 
-     * @attribute
-     * @title Connected Entity
-     * @type {Entity}
-     */
-    entityB = null;
-
-    /**
-     * Position of the constraint in the local space of entity B (if specified).
-     * 
-     * @attribute
-     * @title Connected Pivot
-     * @type {Vec3}
-     */
-    pivotB = new pc.Vec3(0, 0, 0);
-
-    /**
-     * Maximum breaking impulse threshold required to break the constraint.
-     * 
-     * @attribute
-     * @title Break Threshold
-     * @type {number}
-     */
-    breakingThreshold = 3.4e+38;
-
-    /**
-     * Enable collision between linked rigid bodies.
-     * 
-     * @attribute
-     * @title Enable Collision
-     * @type {boolean}
-     */
-    enableCollision = true;
-
-    /**
-     * Enable to render a representation of the constraint.
-     * 
-     * @attribute
-     * @title Debug Render
-     * @type {boolean}
-     */
-    debugRender = false;
-
-    /**
-     * The color of the debug rendering of the constraint.
-     * 
-     * @attribute
-     * @title Debug Color
-     * @type {Color}
-     */
-    debugColor = new Color(1, 0, 0);
-
-    initialize() {
-        this.createConstraint();
-
-        this.on('attr', (name, value, prev) => {
-            // If any constraint properties change, recreate the constraint
-            if (name === 'pivotA' || name === 'entityB' || name === 'pivotB') {
-                this.createConstraint();
-            } else if (name === 'breakingThreshold') {
-                this.constraint.setBreakingImpulseThreshold(this.breakingThreshold);
-                this.activate();
-            }
-        });
-        this.on('enable', () => {
-            this.createConstraint();
-        });
-        this.on('disable', () => {
-            this.destroyConstraint();
-        });
-        this.on('destroy', () => {
-            this.destroyConstraint();
-        });
-    }
-
-    createConstraint() {
-        if (this.constraint) {
-            this.destroyConstraint();
-        }
-
-        var bodyA = this.entity.rigidbody.body;
-        var pivotA = new Ammo.btVector3(this.pivotA.x, this.pivotA.y, this.pivotA.z);
-        if (this.entityB && this.entityB.rigidbody) {
-            var bodyB = this.entityB.rigidbody.body;
-            var pivotB = new Ammo.btVector3(this.pivotB.x, this.pivotB.y, this.pivotB.z);
-            this.constraint = new Ammo.btPoint2PointConstraint(bodyA, bodyB, pivotA, pivotB);
-        } else {
-            this.constraint = new Ammo.btPoint2PointConstraint(bodyA, pivotA);
-        }
-
-        var dynamicsWorld = this.app.systems.rigidbody.dynamicsWorld;
-        dynamicsWorld.addConstraint(this.constraint, !this.enableCollision);
-
-        this.activate();
-    }
-
-    destroyConstraint() {
-        if (this.constraint) {
-            const dynamicsWorld = this.app.systems.rigidbody.dynamicsWorld;
-            dynamicsWorld.removeConstraint(this.constraint);
-            Ammo.destroy(this.constraint);
-            this.constraint = null;
-        }
-    }
-
-    activate() {
-        this.entity.rigidbody.activate();
-        if (this.entityB) {
-            this.entityB.rigidbody.activate();
-        }
-    }
-
-    update(dt) {
-        if (this.debugRender) {
-        // Note that it's generally bad to allocate new objects in an update function
-        // but this is just for debug rendering and will normally be disabled
-        var tempVecA = new Vec3();
-        this.entity.getWorldTransform().transformPoint(this.pivotA, tempVecA);
-        this.app.renderLine(this.entity.getPosition(), tempVecA, this.debugColor);
-        if (this.entityB) {
-            this.app.renderLine(this.entityB.getPosition(), tempVecA, this.debugColor);
-        }
-    }
-    }
-}
-
-```
-
-</TabItem>
-<TabItem value="classic" label="Classic">
+Sometimes, you might find that fast moving rigid bodies in your simulations pass through one another. To overcome this, Bullet provides Continuous Collision Detection (CCD). It performs additional checks by sweeping a sphere between the previous and current positions of a rigid body and looking for intersections with other bodies along the way. CCD is not exposed by the rigidbody component, but two calls on the native body enable it:
 
 ```javascript
-var PointToPointConstraint = pc.createScript('pointToPointConstraint');
+// Run this once the body exists, for example in a script's initialize(), and again
+// if the body is recreated by a change of type or shape
+const body = entity.rigidbody.body;
 
-PointToPointConstraint.attributes.add('pivotA', {
-    title: 'Pivot',
-    description: 'Position of the constraint in the local space of this entity.',
-    type: 'vec3',
-    default: [0, 0, 0]
-});
-PointToPointConstraint.attributes.add('entityB', {
-    title: 'Connected Entity',
-    description: 'Optional second entity',
-    type: 'entity'
-});
-PointToPointConstraint.attributes.add('pivotB', {
-    title: 'Connected Pivot',
-    description: 'Position of the constraint in the local space of entity B (if specified).',
-    type: 'vec3',
-    default: [0, 0, 0]
-});
-PointToPointConstraint.attributes.add('breakingThreshold', {
-    title: 'Break Threshold',
-    description: 'Maximum breaking impulse threshold required to break the constraint.',
-    type: 'number',
-    default: 3.4e+38
-});
-PointToPointConstraint.attributes.add('enableCollision', {
-    title: 'Enable Collision',
-    description: 'Enable collision between linked rigid bodies.',
-    type: 'boolean',
-    default: true
-});
-PointToPointConstraint.attributes.add('debugRender', {
-    title: 'Debug Render',
-    description: 'Enable to render a representation of the constraint.',
-    type: 'boolean',
-    default: false
-});
-PointToPointConstraint.attributes.add('debugColor', {
-    title: 'Debug Color',
-    description: 'The color of the debug rendering of the constraint.',
-    type: 'rgb',
-    default: [1, 0, 0]
-});
+// Distance in meters the body must move in one step before CCD kicks in
+body.setCcdMotionThreshold(1);
 
-// initialize code called once per entity
-PointToPointConstraint.prototype.initialize = function() {
-    this.createConstraint();
-
-    this.on('attr', function(name, value, prev) {
-        // If any constraint properties change, recreate the constraint
-        if (name === 'pivotA' || name === 'entityB' || name === 'pivotB') {
-            this.createConstraint();
-        } else if (name === 'breakingThreshold') {
-            this.constraint.setBreakingImpulseThreshold(this.breakingThreshold);
-            this.activate();
-        }
-    });
-    this.on('enable', function () {
-        this.createConstraint();
-    });
-    this.on('disable', function () {
-        this.destroyConstraint();
-    });
-    this.on('destroy', function () {
-        this.destroyConstraint();
-    });
-};
-
-PointToPointConstraint.prototype.createConstraint = function() {
-    if (this.constraint) {
-        this.destroyConstraint();
-    }
-
-    var bodyA = this.entity.rigidbody.body;
-    var pivotA = new Ammo.btVector3(this.pivotA.x, this.pivotA.y, this.pivotA.z);
-    if (this.entityB && this.entityB.rigidbody) {
-        var bodyB = this.entityB.rigidbody.body;
-        var pivotB = new Ammo.btVector3(this.pivotB.x, this.pivotB.y, this.pivotB.z);
-        this.constraint = new Ammo.btPoint2PointConstraint(bodyA, bodyB, pivotA, pivotB);
-    } else {
-        this.constraint = new Ammo.btPoint2PointConstraint(bodyA, pivotA);
-    }
-
-    var dynamicsWorld = this.app.systems.rigidbody.dynamicsWorld;
-    dynamicsWorld.addConstraint(this.constraint, !this.enableCollision);
-
-    this.activate();
-};
-
-PointToPointConstraint.prototype.destroyConstraint = function() {
-    if (this.constraint) {
-        var dynamicsWorld = this.app.systems.rigidbody.dynamicsWorld;
-        dynamicsWorld.removeConstraint(this.constraint);
-        Ammo.destroy(this.constraint);
-        this.constraint = null;
-    }
-};
-
-PointToPointConstraint.prototype.activate = function() {
-    this.entity.rigidbody.activate();
-    if (this.entityB) {
-        this.entityB.rigidbody.activate();
-    }
-};
-
-// update code called every frame
-PointToPointConstraint.prototype.update = function(dt) {
-    if (this.debugRender) {
-        // Note that it's generally bad to allocate new objects in an update function
-        // but this is just for debug rendering and will normally be disabled
-        var tempVecA = new pc.Vec3();
-        this.entity.getWorldTransform().transformPoint(this.pivotA, tempVecA);
-        this.app.renderLine(this.entity.getPosition(), tempVecA, this.debugColor);
-        if (this.entityB) {
-            this.app.renderLine(this.entityB.getPosition(), tempVecA, this.debugColor);
-        }
-    }
-};
+// Radius of the swept sphere. Keep it below the half extent of the shape:
+// for an object about 1 meter across, try 0.2
+body.setCcdSweptSphereRadius(0.2);
 ```
 
-</TabItem>
-</Tabs>
+The [Physics with CCD](/tutorials/physics-with-ccd/) tutorial wraps these calls in a script with attributes for both values, and you can find its project [here](https://playcanvas.com/project/447023/overview/physics-with-ccd).
 
-You can find a project that implements all of the constraint types from ammo.js [here](https://playcanvas.com/project/618829/overview/physics-constraints).
+## Beyond the Built-in Components {#beyond-the-built-in-components}
 
-## Continuous Collision Detection
+CCD is one example. The same approach reaches other Bullet features:
 
-Sometimes, you might find that fast moving rigid bodies in your simulations pass through one another. To overcome this, ammo.js provides a concept called Continuous Collision Detection (or CCD for short). This enables additional checks for collisions by sweeping a sphere volume between the previous and current positions of a rigid body and looking for intersections with the volumes of other bodies.
+- **Constraints.** The [joint component](/user-manual/physics/joints/) covers fixed, ball, hinge, slider and 6dof joints. For a constraint type or parameter it does not expose, create the Bullet constraint yourself, add it to the dynamics world with `addConstraint()`, and remove and destroy it when you are done. The [Physics Constraints](https://playcanvas.com/project/618829/overview/physics-constraints) project drives every Bullet constraint type this way.
+- **Vehicles.** Bullet's raycast vehicle simulates wheels, suspension and steering on top of a chassis rigid body. There is no vehicle component, so the [Vehicle Physics](/tutorials/vehicle-physics/) tutorial and the engine's [vehicle.js](https://github.com/playcanvas/engine/blob/main/scripts/physics/vehicle.js) script drive `btRaycastVehicle` directly.
+- **Soft bodies and cloth.** Bullet's soft body solver is included in ammo.js, but it needs a soft-rigid dynamics world rather than the discrete world the engine creates, which makes it an advanced integration.
 
-You can enable CCD for any PlayCanvas rigid body using the following script:
+<EngineExample id="physics/vehicle" title="Vehicle" />
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+## See Also
 
-```javascript
-import { Script } from 'playcanvas';
-
-export class Ccd extends Script {
-    static scriptName = "ccd";
-
-    /**
-     * Number of meters moved in one frame before CCD is enabled.
-     * 
-     * @attribute
-     * @title Motion Threshold
-     * @type {number}
-     */
-    motionThreshold = 1;
-
-    /**
-     * This should be below the half extent of the collision volume. E.g., For an object of dimensions 1 meter, try 0.2.
-     * 
-     * @attribute
-     * @title Swept Sphere Radius
-     * @type {number}
-     */
-    sweptSphereRadius = 0.2;
-
-    initialize() {
-        const body = this.entity.rigidbody.body;
-        body.setCcdMotionThreshold(this.motionThreshold);
-        body.setCcdSweptSphereRadius(this.sweptSphereRadius);
-
-        this.on('attr:motionThreshold', function(value) {
-            body = this.entity.rigidbody.body;
-            body.setCcdMotionThreshold(value);
-        });
-        this.on('attr:sweptSphereRadius', function(value) {
-            body = this.entity.rigidbody.body;
-            body.setCcdSweptSphereRadius(value);
-        });
-    }
-}
-```
-
-</TabItem>
-<TabItem value="classic" label="Classic">
-
-```javascript
-var Ccd = pc.createScript('ccd');
-
-Ccd.attributes.add('motionThreshold', {
-    type: 'number',
-    default: 1,
-    title: 'Motion Threshold',
-    description: 'Number of meters moved in one frame before CCD is enabled'
-});
-
-Ccd.attributes.add('sweptSphereRadius', {
-    type: 'number',
-    default: 0.2,
-    title: 'Swept Sphere Radius',
-    description: 'This should be below the half extent of the collision volume. E.g For an object of dimensions 1 meter, try 0.2'
-});
-
-// initialize code called once per entity
-Ccd.prototype.initialize = function() {
-    var body; // Type btRigidBody
-
-    body = this.entity.rigidbody.body;
-    body.setCcdMotionThreshold(this.motionThreshold);
-    body.setCcdSweptSphereRadius(this.sweptSphereRadius);
-
-    this.on('attr:motionThreshold', function(value, prev) {
-        body = this.entity.rigidbody.body;
-        body.setCcdMotionThreshold(value);
-    });
-    this.on('attr:sweptSphereRadius', function(value, prev) {
-        body = this.entity.rigidbody.body;
-        body.setCcdSweptSphereRadius(value);
-    });
-};
-```
-
-</TabItem>
-</Tabs>
-
-You can find a project that implements CCD [here](https://playcanvas.com/project/447023/overview/physics-with-ccd).
-
-These are just two examples of using the ammo.js API directly. You can also use it to implement additional things like:
-
-- Compound collision shapes
-- Soft body simulation
-- Cloth simulation
-- Vehicles
+- [Physics with CCD](/tutorials/physics-with-ccd/) - Tutorial that wraps the CCD calls above in a configurable script
+- [Vehicle Physics](/tutorials/vehicle-physics/) - Tutorial that drives a raycast vehicle on desktop, mobile and WebXR
+- [Joints](/user-manual/physics/joints/) - Constraints without touching ammo.js
+- [Alternatives to ammo.js](/user-manual/physics/ammo-alternatives/) - Other physics engines and the backend layer they would plug into
+- [Bullet User Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) - The documentation that applies to ammo.js

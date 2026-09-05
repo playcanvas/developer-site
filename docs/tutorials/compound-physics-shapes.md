@@ -7,7 +7,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/6881
 
 import Link from '@docusaurus/Link';
 
-Full documentation for Compound Physics Shapes is now in the [User Manual](/user-manual/physics/compound-shapes/).
+Full documentation for Compound Physics Shapes is now in the [User Manual](/user-manual/physics/collision-shapes/#compound-shapes).
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/KXZ5Lsda/" title="Compound Physics Shapes" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

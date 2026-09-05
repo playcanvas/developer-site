@@ -1,61 +1,103 @@
 ---
 title: レイキャスティング
-description: Scene にレイを飛ばし、カメラやマウス／タッチ位置からピッキングとヒットテストを行います。
+description: raycastFirst と raycastAll で直線に沿って物理シーンを問い合わせ、ヒットしたエンティティ、位置、法線を読み取り、タグ、グループ、コールバックでヒットを絞り込み、ポインターの下のエンティティをピッキングします。
 ---
 
-PlayCanvas物理エンジンを使用すると、レイキャストを実行できます。レイキャストは、2つの任意の3Dポイント間の直線がRigidBodyと交差するかどうかを判断するクエリです。
+PlayCanvas物理エンジンを使用すると、レイキャストを実行できます。レイキャストは、2つの3Dポイント間の直線がコリジョン形状と交差するかどうか、またどこで交差するかを判定するクエリです。レイキャストはRigidBodyコンポーネントシステム`app.systems.rigidbody`のメソッドなので、どの方法で構築しても同じように機能します。必要なのはアプリケーションと2つの点だけです。
 
-レイキャスティングの用途の一つは、ユーザーが画面をタッチ/クリックしてエンティティを選択できる場所を選択することです。以下のスクリプトでは、画面のタッチ/クリック位置を介してカメラの位置からシーンにレイキャストを実行し、選択された最も近いRigidBodyを有効にしたエンティティを返します。
+## レイキャストによるピッキング {#picking-with-a-ray-cast}
+
+レイキャスティングの用途の一つはピッキングです。ユーザーが画面をタッチまたはクリックしてエンティティを選択できます。以下の例では、カメラからポインターの位置を通してレイを飛ばし、最も近くでヒットしたボディを報告します。
+
+<EngineExample id="physics/raycast" title="Raycast" />
+
+レイはカメラから始まり、ポインターの位置がカメラのファークリップ面に当たる場所で終わるため、ポインターの下にあるものを通過します。
 
 ```javascript
-var Raycast = pc.createScript('raycast');
+function pick(screenX, screenY) {
+    // カメラの位置から...
+    const from = cameraEntity.getPosition();
 
-// initialize code called once per entity
-Raycast.prototype.initialize = function() {
-    if (!this.entity.camera) {
-        console.error('This script must be applied to an entity with a camera component.');
-        return;
-    }
+    // ...ポインターの位置をファークリップ面に投影した点まで
+    const to = cameraEntity.camera.screenToWorld(screenX, screenY, cameraEntity.camera.farClip);
 
-    // Add a mousedown event handler
-    this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.mouseDown, this);
-
-    // Add touch event only if touch is available
-    if (this.app.touch) {
-        this.app.touch.on(pc.EVENT_TOUCHSTART, this.touchStart, this);
-    }
-};
-
-Raycast.prototype.mouseDown = function (e) {
-    this.doRaycast(e.x, e.y);
-};
-
-Raycast.prototype.touchStart = function (e) {
-    // Only perform the raycast if there is one finger on the screen
-    if (e.touches.length === 1) {
-        this.doRaycast(e.touches[0].x, e.touches[0].y);
-    }
-    e.event.preventDefault();
-};
-
-Raycast.prototype.doRaycast = function (screenX, screenY) {
-    // The pc.Vec3 to raycast from (the position of the camera)
-    const from = this.entity.getPosition();
-
-    // The pc.Vec3 to raycast to (the click position projected onto the camera's far clip plane)
-    const to = this.entity.camera.screenToWorld(screenX, screenY, this.entity.camera.farClip);
-
-    // Raycast between the two points and return the closest hit result
-    const result = this.app.systems.rigidbody.raycastFirst(from, to);
-
-    // If there was a hit, store the entity
+    // 最も近いヒットを返す。なければ null
+    const result = app.systems.rigidbody.raycastFirst(from, to);
     if (result) {
-        const hitEntity = result.entity;
-        console.log('You selected ' + hitEntity.name);
+        console.log(`You selected ${result.entity.name}`);
     }
-};
+}
+
+app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
+app.touch?.on(pc.EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
 ```
 
-レイキャスティングを使用してエンティティを選択するプロジェクトは[こちら](https://playcanvas.com/project/410547/overview/entity-picking-using-physics)。
+エディターでは、このコードはカメラのエンティティに付けたスクリプトの中に置き、`app`と`cameraEntity`の代わりに`this.app`と`this.entity`を使います。完全なスクリプトは[物理演算によるエンティティのピッキング](/tutorials/entity-picking-using-physics/)チュートリアルにあります。Reactでは`useApp()`が、Web Componentsでは`whenReady('pc-app')`がアプリケーションを返します。これらのパターンは[ボディを動かす](/user-manual/physics/forces-and-impulses/#running-physics-code)を参照してください。
 
-レイキャスティングには他の用途もあります。エンティティはレイキャストを発射することで環境を調査できます。たとえば、エンティティが地面に置かれていることを判断するために、エンティティを直接下方向に発射し、環境と交差するかどうかを確認できます。
+## レイキャストの結果 {#raycast-results}
+
+RigidBodyコンポーネントシステムは、2つのクエリメソッドを提供します。
+
+- [`raycastFirst(start, end, options)`](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastfirst)は最も近いヒットを返し、何もヒットしなければ`null`を返します。
+- [`raycastAll(start, end, options)`](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastall)はレイに沿ったすべてのヒットの配列を返し、何もヒットしなければ空の配列を返します。`sort: true`を渡さない限り配列の順序は不定で、渡すと近い順に並びます。
+
+各ヒットは[RaycastResult](https://api.playcanvas.com/engine/classes/RaycastResult.html)です。
+
+| プロパティ | 説明 |
+| --- | --- |
+| `entity` | コリジョン形状がヒットしたエンティティ |
+| `point` | ヒットしたワールド空間の位置 |
+| `normal` | ヒット位置におけるワールド空間の表面法線 |
+| `hitFraction` | レイ上のヒット位置の割合。`start`で0、`end`で1 |
+
+レイキャストはRigidBodyだけでなく[トリガーボリューム](/user-manual/physics/trigger-volumes/)にもヒットします。トリガーを除外するには、以下のフィルターのいずれかを使用してください。
+
+## レイキャストのフィルタリング {#filtering-ray-casts}
+
+どちらのメソッドもオプションオブジェクトを受け取ります。
+
+| オプション | 説明 |
+| --- | --- |
+| `filterTags` | [タグ](https://api.playcanvas.com/engine/classes/Tags.html)が一致するエンティティのヒットだけを報告します。`Tags#has`の引数と同じ書き方を配列の中に記述します。`['enemy']`はそのタグを必須にし、`['enemy', 'boss']`は両方を必須にし、`[['red', 'blue']]`はどちらか一方を必須にします |
+| `filterCallback` | ヒットした各エンティティを受け取り、そのヒットを残す場合に`true`を返す関数 |
+| `filterCollisionGroup` | レイの[コリジョングループ](/user-manual/physics/rigid-bodies/#collision-groups-and-masks)。各ボディのマスクと照合されます |
+| `filterCollisionMask` | レイのコリジョンマスク。各ボディのグループと照合されます |
+| `sort` | `raycastAll`のみ。ヒットを近い順に並べ替えます |
+
+```javascript
+// 弾が貫通するすべての敵を、近い順に見つける
+const hits = app.systems.rigidbody.raycastAll(from, to, {
+    filterTags: ['enemy'],
+    sort: true
+});
+for (const hit of hits) {
+    hit.entity.script.health.damage(10 * (1 - hit.hitFraction));
+}
+
+// プレイヤー自身のボディ以外をピッキングする
+const result = app.systems.rigidbody.raycastFirst(from, to, {
+    filterCallback: (entity) => entity !== player
+});
+```
+
+タグやコールバックによるフィルタリングにはレイに沿ったすべてのヒットが必要なため、これらのオプションを付けた`raycastFirst`は`raycastAll`と同じ処理を行います。グループとマスクによるフィルタリングは物理エンジン内部で行われるため、より低コストです。[タグによる物理レイキャスティング](/tutorials/physics-raycasting-by-tag/)チュートリアルでは、完全なプロジェクトでタグのフィルタリングを紹介しています。
+
+## 環境の探査 {#probing-the-environment}
+
+レイキャスティングには他の用途もあります。エンティティはレイキャストを飛ばすことで周囲を探査できます。たとえば、キャラクターが地面に立っているかどうかを判定するには、その位置から真下に短いレイを飛ばし、キャラクター自身以外の何かにヒットするかを確認します。
+
+```javascript
+const from = player.getPosition();
+const to = new pc.Vec3(from.x, from.y - 1.1, from.z);
+const hit = app.systems.rigidbody.raycastFirst(from, to, {
+    filterCallback: (entity) => entity !== player
+});
+const onGround = hit !== null;
+```
+
+## 関連情報 {#see-also}
+
+- [物理演算によるエンティティのピッキング](/tutorials/entity-picking-using-physics/) - エディター向けの完全なピッキングスクリプトを含むチュートリアル
+- [タグによる物理レイキャスティング](/tutorials/physics-raycasting-by-tag/) - `filterTags`でヒットを絞り込むチュートリアル
+- [物理演算でエンティティを配置する](/tutorials/place-an-entity-with-physics/) - レイが地面にヒットした位置にオブジェクトを生成するチュートリアル
+- [RigidBodyComponentSystem](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html) - `raycastFirst`と`raycastAll`のAPIリファレンス
