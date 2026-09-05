@@ -20,6 +20,17 @@ Let's begin by establishing the key goals for optimization and highlight why eac
 | 🔋 Minimize CPU and GPU load | Just because your app maintains 60 frames per second does not mean your work is done. Reducing processor load preserves battery power and keeps devices running cool. |
 | 🧠 Minimize memory utilization | Browsers allocate a limited pool of memory to applications. Once this pool is exhausted, the tab will crash and reload. Your users will be upset! |
 
+## Measure Before Optimizing
+
+Choose a repeatable scene or interaction, record a baseline on the target device, then measure each change under the same conditions.
+
+| Tool | Use it for |
+| ---- | ---------- |
+| [MiniStats](/user-manual/optimization/mini-stats/) | Watching frame time, CPU/GPU costs and GPU resource memory while interacting with the application. |
+| [Profiling with AppStats](/user-manual/optimization/app-stats/) | Reading public statistics from code and collecting reports for dashboards, agents and automated comparisons. |
+| [Editor Profiler](/user-manual/optimization/profiler/) | Inspecting the Editor Launch profiler, including asset loading and shader compilation timelines. |
+| [GPU Profiling](/user-manual/optimization/gpu-profiling/) | Capturing frames with native GPU tools for detailed rendering investigations. |
+
 :::ai
-Give an AI assistant a performance goal, repeatable scenario, and baseline. It can rank bottlenecks from **[Profiler](/user-manual/optimization/profiler/)** or browser evidence and propose one measurable change at a time. Use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to replay Editor input or follow **[Developing with AI](/user-manual/engine/developing-with-ai/)** for standalone projects.
+Give an AI assistant a performance goal, repeatable scenario and baseline reports from **[AppStats](/user-manual/optimization/app-stats/#collecting-periodic-reports)**. It can combine these with MiniStats or browser evidence and propose one measurable change at a time. Use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to replay Editor input or follow **[Developing with AI](/user-manual/engine/developing-with-ai/)** for standalone projects.
 :::

@@ -3,7 +3,7 @@ title: Profiler
 description: Use the built-in Profiler overlay for frame stats, update and render timings, and the app launch timeline.
 ---
 
-PlayCanvas provides a real-time profiler to assist in diagnosing performance problems.
+The Editor Launch page provides a real-time profiler to assist in diagnosing performance problems. This is a separate tool from the lightweight [MiniStats](/user-manual/optimization/mini-stats/) overlay. To collect statistics directly from application code, see [Profiling with AppStats](/user-manual/optimization/app-stats/).
 
 ![Profiler](/img/user-manual/optimization/profiler/profiler.png)
 
