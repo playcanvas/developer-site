@@ -77,7 +77,7 @@ player.rigidbody.on('triggerenter', (trigger) => {
 });
 ```
 
-購読の方法は衝突イベントとまったく同じです。`on`が返すハンドルを保持し、リスナーが不要になったら`off()`を呼び出します。[衝突イベント](/user-manual/physics/collision-events/#listening-for-collisions)では、エディター、React、Web Componentsでそのコードをどこに置くかを示しています。
+購読の方法は衝突イベントとまったく同じです。`on`は[EventHandle](https://api.playcanvas.com/engine/classes/EventHandle.html)を返し、その`off()`メソッドでリスナーを解除できます。同じコールバックをコンポーネントの`off(eventName, callback)`に渡して解除することもできます。[衝突イベント](/user-manual/physics/collision-events/#listening-for-collisions)では、エディター、React、Web Componentsでそのコードをどこに置くかを示しています。
 
 ## トリガーを発火させられるもの {#what-can-trigger-a-volume}
 

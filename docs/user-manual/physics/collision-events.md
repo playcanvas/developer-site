@@ -20,7 +20,7 @@ Contacts are only reported when at least one of the two bodies is dynamic. Stati
 
 ## Listening for Collisions {#listening-for-collisions}
 
-Subscribe with `on`, keep the handle it returns, and call `off()` on that handle when the listener is no longer needed. Use `collisionstart` for one-off reactions such as an impact sound, and `contact` when you need the contact details refreshed every step:
+Subscribe with `on`, which returns an [EventHandle](https://api.playcanvas.com/engine/classes/EventHandle.html). Keep that handle and call its `off()` method when the listener is no longer needed; passing the same callback to `off(eventName, callback)` on the component, as described in [Events](/user-manual/scripting/events/), removes the listener too. Use `collisionstart` for one-off reactions such as an impact sound, and `contact` when you need the contact details refreshed every step:
 
 ```javascript
 const handle = entity.collision.on('collisionstart', (result) => {

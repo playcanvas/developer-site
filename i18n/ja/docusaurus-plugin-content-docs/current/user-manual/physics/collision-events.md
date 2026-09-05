@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 
 ## 衝突の監視 {#listening-for-collisions}
 
-`on`で購読し、返されたハンドルを保持して、リスナーが不要になったらそのハンドルの`off()`を呼び出します。衝突音のような1回限りの反応には`collisionstart`を、毎ステップ更新される接触の詳細が必要な場合には`contact`を使用します。
+`on`で購読すると[EventHandle](https://api.playcanvas.com/engine/classes/EventHandle.html)が返されます。そのハンドルを保持し、リスナーが不要になったらハンドルの`off()`メソッドを呼び出します。[イベント](/user-manual/scripting/events/)で説明しているように、同じコールバックをコンポーネントの`off(eventName, callback)`に渡してもリスナーを解除できます。衝突音のような1回限りの反応には`collisionstart`を、毎ステップ更新される接触の詳細が必要な場合には`contact`を使用します。
 
 ```javascript
 const handle = entity.collision.on('collisionstart', (result) => {

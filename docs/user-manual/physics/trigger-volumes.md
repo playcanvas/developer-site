@@ -77,7 +77,7 @@ player.rigidbody.on('triggerenter', (trigger) => {
 });
 ```
 
-Subscribing works exactly as it does for collision events: keep the handle that `on` returns and call `off()` on it when the listener is no longer needed. [Collision Events](/user-manual/physics/collision-events/#listening-for-collisions) shows where to put that code in the Editor, in React and in Web Components.
+Subscribing works exactly as it does for collision events: `on` returns an [EventHandle](https://api.playcanvas.com/engine/classes/EventHandle.html) whose `off()` method removes the listener, or you can pass the same callback to `off(eventName, callback)` on the component. [Collision Events](/user-manual/physics/collision-events/#listening-for-collisions) shows where to put that code in the Editor, in React and in Web Components.
 
 ## What Can Trigger a Volume {#what-can-trigger-a-volume}
 
