@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 501
-Generated: 2026-09-04
+Total Documents: 503
+Generated: 2026-09-05
 
 ## Instructions for Large Language Models
 
@@ -166,7 +166,7 @@ If the metadata at the top of this file includes an Engine Version line, generat
 - [Scripting](https://developer.playcanvas.com/user-manual/scripting/): Script lifecycle, attributes, events, and the ESM vs classic script formats.
 - [Gaussian Splatting](https://developer.playcanvas.com/user-manual/gaussian-splatting/): Rendering 3D Gaussian splats, formats, and building splat applications.
 - [Graphics](https://developer.playcanvas.com/user-manual/graphics/): Cameras, lighting, materials, shaders, and post effects.
-- [Physics](https://developer.playcanvas.com/user-manual/physics/): Rigid bodies, collision, triggers, and forces with the ammo.js integration.
+- [Physics](https://developer.playcanvas.com/user-manual/physics/): Rigid bodies, collision shapes and events, triggers, forces, ray casts and joints with the ammo.js integration.
 - [XR (VR/AR)](https://developer.playcanvas.com/user-manual/xr/): WebXR-based virtual and augmented reality.
 
 ## Essential API
@@ -653,15 +653,17 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Animstategraph Assets](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets/): Author animstategraph state machines for animation states, transitions, blending, layers, and parameters.
 
 ### Physics
-- [Physics](https://developer.playcanvas.com/user-manual/physics/): Overview of PlayCanvas physics: rigid bodies, collision, forces, raycasting, and related simulation topics.
+- [Physics](https://developer.playcanvas.com/user-manual/physics/): Overview of PlayCanvas physics: rigid bodies, collision shapes, motion, collision events, triggers, ray casts and joints, on every authoring surface.
 - [Alternatives to ammo.js](https://developer.playcanvas.com/user-manual/physics/ammo-alternatives/): Survey of lighter 2D and 3D physics engines when ammo.js size or cost is too high for your project.
-- [Calling the ammo.js API](https://developer.playcanvas.com/user-manual/physics/calling-ammo/): Call ammo.js and Bullet APIs directly for joints and features beyond built-in PlayCanvas physics components.
-- [Compound Shapes](https://developer.playcanvas.com/user-manual/physics/compound-shapes/): Combine primitive collision shapes on child entities into compound colliders for dynamic rigid bodies.
-- [Forces and Impulses](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses/): Apply continuous forces and one-frame impulses to dynamic rigid bodies using RigidBodyComponent APIs.
-- [Physics Basics](https://developer.playcanvas.com/user-manual/physics/physics-basics/): Enable ammo.js, set gravity and units, and configure rigidbody and collision components for Bullet physics.
-- [Updating ammo.js](https://developer.playcanvas.com/user-manual/physics/physics-migration/): Migrate from legacy built-in ammo.js to the latest wasm build using Scene Settings import and migration steps.
-- [Ray Casting](https://developer.playcanvas.com/user-manual/physics/ray-casting/): Cast rays through the scene for picking and hit tests from camera and mouse or touch positions.
-- [Trigger Volumes](https://developer.playcanvas.com/user-manual/physics/trigger-volumes/): Static trigger volumes that fire enter and leave events when rigid bodies pass through, with example scripts.
+- [Calling ammo.js Directly](https://developer.playcanvas.com/user-manual/physics/calling-ammo/): Reach Bullet physics features that the PlayCanvas components do not expose by calling the ammo.js API on a rigid body's native object, with continuous collision detection as a worked example.
+- [Collision Events](https://developer.playcanvas.com/user-manual/physics/collision-events/): Respond to physical contacts between rigid bodies with the contact, collisionstart and collisionend events, read contact points and impulses, and listen for every contact in the scene.
+- [Collision Shapes](https://developer.playcanvas.com/user-manual/physics/collision-shapes/): Give rigid bodies and triggers a physical shape with box, sphere, capsule, cylinder, cone, mesh and compound collision shapes, offset shapes from their entity, and understand how scale applies.
+- [Moving Bodies](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses/): Move dynamic rigid bodies with forces, impulses and torque, set their velocity directly, drive kinematic bodies through their transform, and see where physics code runs on each surface.
+- [Joints](https://developer.playcanvas.com/user-manual/physics/joints/): Constrain rigid bodies to each other with fixed, ball, hinge, slider and 6dof joints using the alpha JointComponent, with limits, motors, springs and breakable constraints.
+- [Getting Started](https://developer.playcanvas.com/user-manual/physics/physics-basics/): Enable ammo.js physics in the Editor, engine-only apps, React and Web Components, set gravity and units, and understand how the simulation steps.
+- [Ray Casting](https://developer.playcanvas.com/user-manual/physics/ray-casting/): Query the physics scene along a line with raycastFirst and raycastAll, read the hit entity, point and normal, filter hits by tag, group or callback, and pick entities under the pointer.
+- [Rigid Bodies](https://developer.playcanvas.com/user-manual/physics/rigid-bodies/): Static, dynamic and kinematic rigid bodies, their mass, friction, restitution, damping and factor properties, sleeping, teleporting and collision groups.
+- [Trigger Volumes](https://developer.playcanvas.com/user-manual/physics/trigger-volumes/): Detect when dynamic or kinematic rigid bodies enter and leave a region with a collision component that has no rigid body, and respond to triggerenter and triggerleave events.
 
 ### 2D
 - [2D](https://developer.playcanvas.com/user-manual/2D/): Build 2D games with sprites, texture atlases, and the Sprite Editor on top of the PlayCanvas engine.

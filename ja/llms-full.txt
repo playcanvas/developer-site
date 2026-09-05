@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 501
-Generated: 2026-09-04
+Total Documents: 503
+Generated: 2026-09-05
 
 ================================================================================
 
@@ -25812,7 +25812,28 @@ A physics engine attempts to reproduce our understanding of the natural world in
 
 [Image: Physics Constraints]
 
-PlayCanvas provides a very powerful physics engine that can be used to achieve a great many effects. This section introduces the concepts of rigid bodies, collision, forces, impulses, raycasting and more.
+PlayCanvas physics is powered by [ammo.js](https://github.com/kripken/ammo.js), a WebAssembly port of the open source Bullet physics engine. You work with it through components. The [rigidbody](/user-manual/editor/scenes/components/rigidbody/) component decides how an entity moves, the [collision](/user-manual/editor/scenes/components/collision/) component gives it a physical shape, and the alpha [joint](/user-manual/physics/joints/) component constrains bodies to one another. The same components, with the same properties, are available whichever way you build: in the Editor, directly against the engine, in [PlayCanvas React](/user-manual/react/guide/physics/) and in [Web Components](/user-manual/web-components/tags/pc-rigid-body/). Each page in this section explains a concept once and then shows how to apply it on each of those surfaces.
+
+This section covers:
+
+- [Getting Started](/user-manual/physics/physics-basics/) - Enabling physics, gravity, units and how the simulation runs.
+- [Rigid Bodies](/user-manual/physics/rigid-bodies/) - Static, dynamic and kinematic bodies, their properties, sleeping and teleporting.
+- [Collision Shapes](/user-manual/physics/collision-shapes/) - Primitive, mesh and compound shapes, offsets and scale.
+- [Moving Bodies](/user-manual/physics/forces-and-impulses/) - Forces, impulses, torque, velocity and kinematic motion.
+- [Collision Events](/user-manual/physics/collision-events/) - Responding to contacts between rigid bodies.
+- [Trigger Volumes](/user-manual/physics/trigger-volumes/) - Detecting when bodies enter and leave a region.
+- [Ray Casting](/user-manual/physics/ray-casting/) - Querying the scene along a line for picking and probing.
+- [Joints](/user-manual/physics/joints/) - Hinges, sliders, ball joints, springs and breakable welds.
+- [Calling ammo.js Directly](/user-manual/physics/calling-ammo/) - Reaching Bullet features that the components do not expose.
+- [Alternatives to ammo.js](/user-manual/physics/ammo-alternatives/) - Other physics engines and how they could be integrated.
+
+## See Also
+
+- [Collision and Triggers](/tutorials/collision-and-triggers/) - Tutorial that builds a complete physics scene in the Editor
+- [Creating Rigid Bodies in Code](/tutorials/creating-rigid-bodies-in-code/) - Tutorial that spawns physics objects from scripts
+- [Vehicle Physics](/tutorials/vehicle-physics/) - Tutorial that drives a raycast vehicle
+- [Physics in PlayCanvas React](/user-manual/react/guide/physics/) - The React guide to enabling and using physics
+- [`<pc-rigid-body>`](/user-manual/web-components/tags/pc-rigid-body/) - The Web Components rigid body reference
 
 --------------------------------------------------------------------------------
 
@@ -25850,222 +25871,457 @@ The check marks above mean *cross-platform* determinism: the simulation produces
 
 :::
 
-While there is currently only one existing PlayCanvas integration for the p2.js engine, it should be straightforward to create additional integrations for the other engines listed using a similar approach.
+The engine's physics components do not call ammo.js directly. Bodies, shapes, joints, ray casts and contact reporting go through a backend layer, [`PhysicsWorld`](https://github.com/playcanvas/engine/blob/main/src/framework/physics/physics-world.js), and the built-in ammo.js backend is one implementation of it. The layer is marked alpha, so its API may still change, but it is the intended seam for integrating another engine: a backend for Rapier or Jolt would implement the same class and leave the rigidbody and collision components unchanged. The older [PlayCanvas p2.js integration](https://github.com/playcanvas/playcanvas-p2.js) predates this layer and wraps the engine with its own script-based components instead.
+
+## See Also
+
+- [Physics Basics](/user-manual/physics/physics-basics/) - Enabling ammo.js in the Editor, engine-only apps, React and Web Components
+- [Calling ammo.js Directly](/user-manual/physics/calling-ammo/) - Reaching Bullet features that the components do not expose
 
 --------------------------------------------------------------------------------
 
-## Calling the ammo.js API
+## Calling ammo.js Directly
 
 URL: https://developer.playcanvas.com/user-manual/physics/calling-ammo/
 
-The PlayCanvas integration with ammo.js does not expose the full capability of the ammo.js API. However, it is possible to call the ammo.js API directly from your PlayCanvas scripts.
+The rigidbody, collision and joint components cover most of what games need from physics, but Bullet can do more than they expose. Continuous collision detection, custom collision flags, extra constraint types, soft bodies and vehicles are all reachable by calling ammo.js directly from your code.
 
-PlayCanvas currently uses [this build](https://github.com/kripken/ammo.js/commit/dcab07bf0e7f2b4b64c01dc45da846344c8f50be) of ammo.js. The API exposed by this build can be found [here](https://github.com/kripken/ammo.js/blob/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/ammo.idl). Although there is no official documentation for ammo.js, you can refer to the [Bullet Physics User Guide](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) to learn more.
+ammo.js is a direct port of Bullet, so its API mirrors the C++ one. There is no ammo.js documentation, but the [Bullet User Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) applies, and the classes and methods exposed to JavaScript are listed in the [ammo.idl](https://github.com/kripken/ammo.js/blob/main/ammo.idl) file of the ammo.js repository. The build that the Editor imports from the Store and that ships with the engine examples exposes everything in that file. If you need more, compile your own build and load it in place of the standard one; in the Editor, add it as a [WASM module asset](/user-manual/editor/assets/inspectors/wasm/).
 
-## Joint Constraints
+:::warning
 
-There are currently no PlayCanvas components which implement physics constraints (sometimes known as physics joints). However, it is easy to leverage the ammo.js API to create scripts that implement constraints.
+Code written against `Ammo` bypasses the engine's physics components. It ties your project to the ammo.js backend, it is not covered by the PlayCanvas API reference, and the objects it works with are internal to the engine and may change between releases. Prefer the components whenever they can do the job.
 
-Here is the script for a point-to-point constraint (essentially a ball and socket joint):
+:::
 
-You can find a project that implements all of the constraint types from ammo.js [here](https://playcanvas.com/project/618829/overview/physics-constraints).
+## Reaching the Native Objects {#reaching-the-native-objects}
 
-## Continuous Collision Detection
+Every rigidbody component wraps a Bullet `btRigidBody`, available as `entity.rigidbody.body` once the component has been initialized. The whole simulation lives in a `btDiscreteDynamicsWorld`, available as `app.systems.rigidbody.dynamicsWorld`. Both are `null` when ammo.js is not loaded. These properties are the same on every surface; only how you obtain `entity` and `app` differs, as described in [Moving Bodies](/user-manual/physics/forces-and-impulses/#running-physics-code).
 
-Sometimes, you might find that fast moving rigid bodies in your simulations pass through one another. To overcome this, ammo.js provides a concept called Continuous Collision Detection (or CCD for short). This enables additional checks for collisions by sweeping a sphere volume between the previous and current positions of a rigid body and looking for intersections with the volumes of other bodies.
+Two rules keep ammo.js code stable:
 
-You can enable CCD for any PlayCanvas rigid body using the following script:
+- **Fetch the body when you need it.** The engine recreates the native body when properties such as the rigidbody type or the collision shape change, so do not cache `rigidbody.body` across frames. Read it each time you use it, and reapply any settings after a change.
+- **Free what you allocate.** ammo.js objects live in WebAssembly memory that JavaScript's garbage collector does not manage. Call `Ammo.destroy()` on any `btVector3`, `btTransform` or constraint you create once you are done with it.
 
-You can find a project that implements CCD [here](https://playcanvas.com/project/447023/overview/physics-with-ccd).
+## Continuous Collision Detection {#continuous-collision-detection}
 
-These are just two examples of using the ammo.js API directly. You can also use it to implement additional things like:
+Sometimes, you might find that fast moving rigid bodies in your simulations pass through one another. To overcome this, Bullet provides Continuous Collision Detection (CCD). It performs additional checks by sweeping a sphere between the previous and current positions of a rigid body and looking for intersections with other bodies along the way. CCD is not exposed by the rigidbody component, but two calls on the native body enable it:
 
-- Compound collision shapes
-- Soft body simulation
-- Cloth simulation
-- Vehicles
+```javascript
+// Run this once the body exists, for example in a script's initialize(), and again
+// if the body is recreated by a change of type or shape
+const body = entity.rigidbody.body;
+
+// Distance in meters the body must move in one step before CCD kicks in
+body.setCcdMotionThreshold(1);
+
+// Radius of the swept sphere. Keep it below the half extent of the shape:
+// for an object about 1 meter across, try 0.2
+body.setCcdSweptSphereRadius(0.2);
+```
+
+The [Physics with CCD](/tutorials/physics-with-ccd/) tutorial wraps these calls in a script with attributes for both values, and you can find its project [here](https://playcanvas.com/project/447023/overview/physics-with-ccd).
+
+## Beyond the Built-in Components {#beyond-the-built-in-components}
+
+CCD is one example. The same approach reaches other Bullet features:
+
+- **Constraints.** The [joint component](/user-manual/physics/joints/) covers fixed, ball, hinge, slider and 6dof joints. For a constraint type or parameter it does not expose, create the Bullet constraint yourself, add it to the dynamics world with `addConstraint()`, and remove and destroy it when you are done. The [Physics Constraints](https://playcanvas.com/project/618829/overview/physics-constraints) project drives every Bullet constraint type this way.
+- **Vehicles.** Bullet's raycast vehicle simulates wheels, suspension and steering on top of a chassis rigid body. There is no vehicle component, so the [Vehicle Physics](/tutorials/vehicle-physics/) tutorial and the engine's [vehicle.js](https://github.com/playcanvas/engine/blob/main/scripts/physics/vehicle.js) script drive `btRaycastVehicle` directly.
+- **Soft bodies and cloth.** Bullet's soft body solver is included in ammo.js, but it needs a soft-rigid dynamics world rather than the discrete world the engine creates, which makes it an advanced integration.
+
+## See Also
+
+- [Physics with CCD](/tutorials/physics-with-ccd/) - Tutorial that wraps the CCD calls above in a configurable script
+- [Vehicle Physics](/tutorials/vehicle-physics/) - Tutorial that drives a raycast vehicle on desktop, mobile and WebXR
+- [Joints](/user-manual/physics/joints/) - Constraints without touching ammo.js
+- [Alternatives to ammo.js](/user-manual/physics/ammo-alternatives/) - Other physics engines and the backend layer they would plug into
+- [Bullet User Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf) - The documentation that applies to ammo.js
 
 --------------------------------------------------------------------------------
 
-## Compound Shapes
+## Collision Events
 
-URL: https://developer.playcanvas.com/user-manual/physics/compound-shapes/
+URL: https://developer.playcanvas.com/user-manual/physics/collision-events/
 
-Compound shapes are custom collision shapes created out of multiple primitive shapes ([full list of shapes here](/user-manual/physics/physics-basics/#rigid-bodies)). This allows you to have more complex collision shapes without using a custom mesh model.
+When two rigid bodies touch, the physics engine reports the contact to both entities. You can respond by playing a sound, applying damage, spawning particles or changing game state. The events are fired on both the [collision](/user-manual/editor/scenes/components/collision/) and the [rigidbody](/user-manual/editor/scenes/components/rigidbody/) components of each entity involved, so you can listen on whichever is more convenient.
 
-The main advantage is that you are able to have dynamic rigidbody collisions between compound shapes (shown below) which is not possible with mesh collision types.
+## Events {#events}
 
-[Interactive Demo]
+| Event | When it fires | Handler argument |
+| --- | --- | --- |
+| `collisionstart` | Once, on the physics step in which two bodies begin touching | [ContactResult](https://api.playcanvas.com/engine/classes/ContactResult.html) |
+| `contact` | Every physics step while the bodies remain in contact | [ContactResult](https://api.playcanvas.com/engine/classes/ContactResult.html) |
+| `collisionend` | Once, when the bodies stop touching | The other [Entity](https://api.playcanvas.com/engine/classes/Entity.html) |
 
-[PlayCanvas project link](https://playcanvas.com/project/688146/overview/compound-physics-shapes)
+Contacts are only reported when at least one of the two bodies is dynamic. Static and kinematic bodies never collide with each other. Overlaps with a [trigger volume](/user-manual/physics/trigger-volumes/) fire `triggerenter` and `triggerleave` instead of these events.
 
-The shape of a compound physics object is defined by the children's collision shapes as shown below.
+## Listening for Collisions {#listening-for-collisions}
 
-[Image: Compound shapes setup]
+Subscribe with `on`, which returns an [EventHandle](https://api.playcanvas.com/engine/classes/EventHandle.html). Keep that handle and call its `off()` method when the listener is no longer needed; passing the same callback to `off(eventName, callback)` on the component, as described in [Events](/user-manual/scripting/events/), removes the listener too. Use `collisionstart` for one-off reactions such as an impact sound, and `contact` when you need the contact details refreshed every step:
+
+```javascript
+const handle = entity.collision.on('collisionstart', (result) => {
+    console.log(`${entity.name} hit ${result.other.name}`);
+});
+
+// Later, when the entity is destroyed or the listener is no longer wanted
+handle.off();
+```
+
+Where that code lives depends on how you build:
+
+## Contact Data {#contact-data}
+
+`collisionstart` and `contact` pass a [ContactResult](https://api.playcanvas.com/engine/classes/ContactResult.html) with two properties:
+
+- `other` - The entity this body collided with.
+- `contacts` - An array of [ContactPoint](https://api.playcanvas.com/engine/classes/ContactPoint.html) objects, one for each point where the two shapes touch.
+
+Each contact point holds:
+
+| Property | Description |
+| --- | --- |
+| `point` | The contact point on this entity, in world space |
+| `pointOther` | The contact point on the other entity, in world space |
+| `localPoint` | The contact point in the local space of this entity |
+| `localPointOther` | The contact point in the local space of the other entity |
+| `normal` | The contact normal in world space. It points away from the surface of the other entity at the point of contact |
+| `impulse` | The impulse the physics engine applied to separate the bodies. Larger values mean a harder hit |
+
+The impulse is a handy measure of how hard two bodies collided. Use it to scale a sound's volume or the damage dealt, and to ignore glancing touches:
+
+```javascript
+entity.collision.on('collisionstart', (result) => {
+    let strongest = 0;
+    for (const contact of result.contacts) {
+        strongest = Math.max(strongest, contact.impulse);
+    }
+    if (strongest > 5) {
+        entity.sound.play('crash');
+    }
+});
+```
+
+## Scene-wide Contacts {#scene-wide-contacts}
+
+To handle every contact in one place, for example in a central audio or damage manager, listen to the `contact` event on the rigid body component system instead of on individual entities. It fires once per contact point with a [SingleContactResult](https://api.playcanvas.com/engine/classes/SingleContactResult.html) that names both entities:
+
+```javascript
+app.systems.rigidbody.on('contact', (result) => {
+    // result.a and result.b are the two entities
+    // result.pointA, result.pointB and result.normal are in world space
+    if (result.impulse > 5) {
+        console.log(`${result.a.name} and ${result.b.name} collided hard`);
+    }
+});
+```
+
+:::tip
+
+`contact` fires every physics step for as long as two bodies touch, which for a box resting on the floor means every frame. Prefer `collisionstart` for one-shot effects and keep `contact` handlers cheap.
+
+:::
+
+## See Also
+
+- [Trigger Volumes](/user-manual/physics/trigger-volumes/) - Overlap events for regions that do not block movement
+- [Collision and Triggers](/tutorials/collision-and-triggers/) - Tutorial that plays a sound on impact
+- [Events](/user-manual/scripting/events/) - How the scripting event system works
+- [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html) and [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) - API reference for the events on each component
+
+--------------------------------------------------------------------------------
+
+## Collision Shapes
+
+URL: https://developer.playcanvas.com/user-manual/physics/collision-shapes/
+
+The [collision](/user-manual/editor/scenes/components/collision/) component gives an entity a physical shape. Paired with a rigidbody component it defines the shape of that [rigid body](/user-manual/physics/rigid-bodies/); on its own it acts as a [trigger volume](/user-manual/physics/trigger-volumes/). The shape does not have to match what the entity looks like, and usually should not: the physics engine tests shapes against each other many times a second, so a simple box or capsule around a detailed model is both faster and more stable than a mesh that follows every polygon.
+
+## Shape Types {#shape-types}
+
+| Type | Properties | Notes |
+| --- | --- | --- |
+| **Box** | Half Extents | The default. Half the width, height and depth of the box, so `0.5, 0.5, 0.5` is a one unit cube |
+| **Sphere** | Radius | |
+| **Capsule** | Radius, Height, Axis | A cylinder with rounded ends and the usual choice for characters. Height is measured tip to tip along the chosen local axis |
+| **Cylinder** | Radius, Height, Axis | |
+| **Cone** | Radius, Height, Axis | |
+| **Mesh** | Model Asset or Render Asset, Convex Hull | The geometry of an asset. See [Mesh Colliders](#mesh-colliders) below |
+| **Compound** | | The shapes of child entities combined into one body. See [Compound Shapes](#compound-shapes) below |
+
+Primitive shapes are far cheaper to simulate than meshes, so use the simplest shape that reasonably fits the object. A capsule standing on its Y axis is the standard choice for a character:
+
+## Mesh Colliders {#mesh-colliders}
+
+A mesh collider takes its geometry from a model or render asset, usually the same asset the entity renders. It comes in two kinds:
+
+- A **triangle mesh**, the default, follows the geometry exactly, including any concave parts. It can only be used on static and kinematic bodies and on triggers.
+- A **convex hull** wraps the geometry in the smallest convex shape that contains it. It loses concavities such as the inside of a bowl, but it is the only kind of mesh shape a dynamic body can have.
+
+Building a mesh shape from a large model takes time and memory, so prefer primitives or a [compound](#compound-shapes) for anything that moves, and keep triangle meshes for the environment.
+
+## Offsetting a Shape {#offsetting-a-shape}
+
+Every shape has a **Position Offset** and a **Rotation Offset** that move it relative to the entity's origin. A character model whose origin is at its feet, for example, needs its capsule raised by half the capsule's height. Offsets save adding a child entity just to shift a collider.
+
+## Compound Shapes {#compound-shapes}
+
+A compound shape combines the collision shapes of an entity's children into a single body. It gives a dynamic body a complex outline without a mesh collider: a chair can be a seat, a back and four legs, all boxes, and still collide with other dynamic bodies, which a concave mesh cannot do. Compounds are also far cheaper to simulate than mesh shapes.
+
+The parent carries a collision component of type **Compound** together with the rigidbody component. Each child carries a collision component with a primitive shape, positioned and rotated relative to the parent. The children need no rigidbody components of their own; the parent's body owns the whole shape. A descendant that does have its own rigidbody component is treated as a separate body and left out of the compound.
 
 [Image: Compound shapes chair]
 
-The Chair entity (parent) has the [collision component](/user-manual/editor/scenes/components/collision/) with type set to 'Compound'.
+Children can be moved at runtime. When a child's transform changes, the engine updates that shape's offset within the compound and wakes the parent body. The parent entity is also the body's center of mass, so keep it within the bounds of the shape (usually its center); otherwise the body may behave oddly when forces and torque are applied, such as rotating around an invisible pivot.
 
-The children entities will form the shape of the physics object with collision components and the type set to a primitive shape and positioned relative to the parent.
+The chair above comes from the [Compound Physics Shapes](/tutorials/compound-physics-shapes/) tutorial project.
 
-The parent is also the center of mass of the physics object and it is recommended to have it within the bounds of the shape of the object (usually the center). If not, the object may show odd behavior when forces and torque are applied such as rotating around an invisible pivot in the world.
+## Scale {#scale}
+
+Primitive shapes ignore the entity's scale. A box collider is always its half extents in world units, so scaling an entity up does not enlarge its collider; change the half extents or radius instead. Mesh shapes are the exception: they follow the world scale of the entity, or of the model node, that they are built from. Children of a compound are placed by their local position and rotation relative to the parent.
+
+## Visualizing Shapes {#visualizing-shapes}
+
+The Editor outlines the collision shape of the selected entity in the viewport, which is the quickest way to check a shape's size and offset. To see every shape while an application runs, on any surface, add the engine's [render-physics.js](https://github.com/playcanvas/engine/blob/main/scripts/physics/render-physics.js) script to an entity and enable its **Draw Shapes** attribute. It draws each collision shape in the scene as a translucent mesh.
+
+## See Also
+
+- [Rigid Bodies](/user-manual/physics/rigid-bodies/) - The body a shape belongs to
+- [Trigger Volumes](/user-manual/physics/trigger-volumes/) - Shapes without a body
+- [Collision Component](/user-manual/editor/scenes/components/collision/) - Editor reference for every property
+- [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html) - API reference
+- [Compound Physics Shapes](/tutorials/compound-physics-shapes/) - Tutorial project for the chair shown above
 
 --------------------------------------------------------------------------------
 
-## Forces and Impulses
+## Moving Bodies
 
 URL: https://developer.playcanvas.com/user-manual/physics/forces-and-impulses/
 
-Dynamic rigid bodies move in response to forces and impulses. A force is applied to a body over a period of time whereas an impulse is a force that is applied in an instant.
+Dynamic rigid bodies move in response to forces and impulses. A force is applied to a body over a period of time, whereas an impulse changes a body's velocity in an instant. Both are methods on the [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html), and they only affect dynamic bodies: static bodies never move and kinematic bodies are positioned by you, so calling them on either has no effect.
 
-To apply a force or an impulse to a rigid body, you must use the [pc.RigidBodyComponent scripting API](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html).
+Everything on this page is a call on the rigidbody component, identical on every surface. The only thing that differs is where the code runs.
 
-Let's consider a couple of examples. If you want to push a heavy weight across the floor, you would apply a force over an amount of time:
+## Running Physics Code {#running-physics-code}
 
-```javascript
-MyScript.prototype.update = function(dt) {
-    // While the right arrow key is pressed, apply a force to the right
-    if (app.keyboard.isPressed(pc.KEY_RIGHT)) {
-        this.entity.rigidbody.applyForce(10, 0, 0);
-    }
-};
-```
+Forces are usually applied every frame while a key is held, so you need somewhere to run per-frame code with access to the entity:
 
-If you want to fire a cannonball from a cannon, you would apply a single impulse:
+## Forces {#forces}
+
+If you want to push a heavy weight across the floor, you would apply a force for as long as the push lasts. Forces accumulate until the next physics step, so a force applied every frame produces a steady acceleration, and a heavier body accelerates more slowly than a lighter one under the same force:
 
 ```javascript
-MyScript.prototype.update = function(dt) {
-    // If the space bar was pressed, apply an impulse up and to the right
-    if (app.keyboard.wasPressed(pc.KEY_SPACE)) {
-        this.entity.rigidbody.applyImpulse(10, 10, 0);
-    }
-};
+// Push along the world X axis, every frame while the push lasts
+entity.rigidbody.applyForce(10, 0, 0);
 ```
+
+## Impulses {#impulses}
+
+If you want to fire a cannonball from a cannon, you would apply a single impulse. An impulse is an instantaneous change in momentum, so apply it once rather than every frame:
+
+```javascript
+// Launch up and to the right, once
+entity.rigidbody.applyImpulse(10, 10, 0);
+```
+
+Both methods also accept a [Vec3](https://api.playcanvas.com/engine/classes/Vec3.html), which is convenient when the direction is calculated at runtime:
+
+```javascript
+// Launch the body along the direction it is facing
+const impulse = entity.forward.clone().mulScalar(10);
+entity.rigidbody.applyImpulse(impulse);
+```
+
+## Applying at a Point {#applying-at-a-point}
+
+By default a force or impulse acts through the body's center of mass, so it changes the body's velocity without spinning it. Pass an optional point to apply it off-center and the body rotates as well. The two methods measure that point differently:
+
+- `applyForce(force, point)` takes the point as an offset from the body's position in **world space**.
+- `applyImpulse(impulse, point)` takes the point in the **local space of the entity**.
+
+```javascript
+// Impulse: the point is in the entity's local space, so this pushes up on the
+// point 1 unit along the entity's local Z axis and makes the body tip over
+entity.rigidbody.applyImpulse(new pc.Vec3(0, 10, 0), new pc.Vec3(0, 0, 1));
+
+// Force: the point is a world space offset from the body, so transform the
+// same local point into world space first
+const offset = entity.getWorldTransform().transformVector(new pc.Vec3(0, 0, 1));
+entity.rigidbody.applyForce(new pc.Vec3(0, 10, 0), offset);
+```
+
+Both methods can also be called with six numbers, the force or impulse followed by the point.
+
+## Torque {#torque}
+
+To spin a body without moving it, apply a torque. `applyTorque` is the rotational equivalent of a force and `applyTorqueImpulse` of an impulse. Both take a Vec3 (or three numbers) whose direction is the world space axis to rotate about and whose length is the strength:
+
+```javascript
+// Keep spinning the body about the world Y axis while called every frame
+entity.rigidbody.applyTorque(0, 5, 0);
+
+// Give the body a single kick of spin about the world X axis
+entity.rigidbody.applyTorqueImpulse(2, 0, 0);
+```
+
+## Setting Velocity Directly {#setting-velocity-directly}
+
+Sometimes you want a body to move at an exact speed regardless of its mass, for example a character that should reach top speed immediately or a projectile that must be reset. Assign `linearVelocity` and `angularVelocity` directly:
+
+```javascript
+// Move at 5 units per second along the world X axis, keeping the current vertical speed
+const velocity = entity.rigidbody.linearVelocity;
+entity.rigidbody.linearVelocity = new pc.Vec3(5, velocity.y, 0);
+
+// Stop all motion
+entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
+entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+```
+
+The velocity getters return read-only snapshots, so modifying the returned vector in place has no effect. Always assign a new value. For a complete character driven this way, see the engine's [first-person](https://github.com/playcanvas/engine/blob/main/scripts/esm/first-person-controller.mjs) and [third-person](https://github.com/playcanvas/engine/blob/main/scripts/esm/third-person-controller.mjs) controller scripts.
+
+## Kinematic Motion {#kinematic-motion}
+
+Kinematic bodies ignore forces, impulses and velocities. You move them by moving the entity, and the physics engine reads the new transform at the start of each step. Dynamic bodies standing on a kinematic platform are carried along with it:
+
+```javascript
+// Slide a platform back and forth along the world X axis
+let time = 0;
+app.on('update', (dt) => {
+    time += dt;
+    platform.setPosition(Math.sin(time) * 2, 0.5, 0);
+});
+```
+
+:::tip
+
+[Damping and factors](/user-manual/physics/rigid-bodies/#damping-and-factors) shape how a body responds to everything on this page. Damping slows a body over time, and a factor of 0 on an axis stops it moving or rotating about that axis, which is how you keep a character upright or confine a body to a 2D plane.
+
+:::
+
+## See Also
+
+- [Rigid Bodies](/user-manual/physics/rigid-bodies/) - Body types, mass, damping and factors
+- [Collision Events](/user-manual/physics/collision-events/) - Responding when bodies hit each other
+- [Forces and Impulses](/tutorials/using-forces-on-rigid-bodies/) - Tutorial project that applies forces, impulses and torque to a rigid body
+- [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) - API reference for every method on this page
 
 --------------------------------------------------------------------------------
 
-## Physics Basics
+## Joints
+
+URL: https://developer.playcanvas.com/user-manual/physics/joints/
+
+:::warning[Alpha]
+
+The joint component is in alpha, so its behavior and API may change. It is available from code on every surface and as a tag in Web Components, but the Editor does not yet have an inspector for it and PlayCanvas React has no component for it.
+
+:::
+
+Joints constrain the relative motion of two rigid bodies: a door swinging on its hinge, a drawer sliding on its runner, a chain of links, a crate bobbing on a spring, or a tower of blocks welded together until something hits it hard enough to break the weld.
+
+## How Joints Work {#how-joints-work}
+
+A joint is a [JointComponent](https://api.playcanvas.com/engine/classes/JointComponent.html) on its own entity. That entity is **not** constrained itself. Its world transform defines the *joint frame*: the position is the anchor point the constraint operates about, and the local X axis is the primary axis. A hinge rotates about X, a slider translates along X and a ball joint twists about X. To aim a joint, rotate the joint entity.
+
+The two bodies being constrained are set with `entityA` and `entityB`, both of which need a [rigidbody component](/user-manual/physics/rigid-bodies/). Leave `entityB` empty to constrain `entityA` to a fixed point in world space, which is how you hang something from nothing. A common arrangement is to parent the joint entity to `entityA` at the pivot point, so the pivot moves with the part it belongs to.
+
+Two details catch people out:
+
+- **Frames are captured once**, when the constraint is created. That usually happens when the component is enabled and both bodies are in the simulation. Moving the joint entity afterwards changes nothing until you call `refreshFrames()` on the component, which re-captures the frames from the current transforms. Entity scale is ignored throughout, as it is for rigid bodies.
+- **Limits are measured from the starting pose**, not from the joint entity. The two joint frames coincide at the moment the constraint is created, so every degree of freedom reads zero there. Hinge limits of `0` to `110` degrees mean "from wherever the body started, up to 110 degrees further", not an absolute angle.
+
+## Joint Types {#joint-types}
+
+The `type` property selects the constraint and decides which of the other properties matter:
+
+| Type | Constant | Constrains | Properties it uses |
+| --- | --- | --- | --- |
+| `fixed` | `JOINTTYPE_FIXED` | Locks the bodies rigidly together | none |
+| `ball` | `JOINTTYPE_BALL` | Ball and socket: free rotation about the anchor, with optional swing and twist limits | `swingLimitY`, `swingLimitZ`, `twistLimit` |
+| `hinge` | `JOINTTYPE_HINGE` | Rotation about the frame's X axis, with optional limits and a motor | `limits`, `motorSpeed`, `maxMotorForce` |
+| `slider` | `JOINTTYPE_SLIDER` | Translation along the frame's X axis, with optional limits and a motor | `limits`, `motorSpeed`, `maxMotorForce` |
+| `6dof` | `JOINTTYPE_6DOF` | Each linear and angular axis independently locked, limited or free, with optional springs | `linearMotionX/Y/Z`, `angularMotionX/Y/Z`, `linearLimitsX/Y/Z`, `angularLimitsX/Y/Z`, `linearStiffness`, `angularStiffness`, `linearDamping`, `angularDamping`, `linearEquilibrium`, `angularEquilibrium` |
+
+Every type also honors `enableCollision`, which decides whether the two bodies still collide with each other (off by default), and `breakImpulse`.
+
+For a `6dof` joint each axis starts `MOTION_LOCKED`, so a joint with nothing else set behaves like a fixed one. Open the axes you want with `MOTION_FREE` or `MOTION_LIMITED`, bound the limited ones with the matching limits, and set a stiffness above zero on an axis to turn it into a spring that pulls towards its equilibrium value.
+
+## Adding a Joint {#adding-a-joint}
+
+This door hinge constrains a dynamic door to a static frame. The joint entity sits on the hinge line, rotated so that its local X axis points up, and limits of `0` to `110` degrees let the door open one way only:
+
+## Motors, Limits and Breaking {#motors-limits-and-breaking}
+
+Limits are opt-in twice over: they need `enableLimits` set **and** a limit value. A hinge with `limits` set but `enableLimits` left false swings freely.
+
+Hinges and sliders have a motor. It is engaged while `maxMotorForce` is greater than zero and drives the joint at `motorSpeed`, in degrees per second for a hinge and units per second for a slider. A motor with limits enabled stalls against the stop.
+
+```javascript
+// A windmill: spin the rotor about the hinge axis at 90 degrees per second
+hinge.joint.motorSpeed = 90;
+hinge.joint.maxMotorForce = 100;
+```
+
+Any joint can break. Set `breakImpulse` to the impulse above which the constraint gives way; it defaults to `Infinity`, meaning it never breaks. When it does, the component fires a `break` event, `isBroken` becomes true and the bodies move independently. Calling `refreshFrames()` re-attaches the joint from the bodies' current transforms.
+
+```javascript
+const weld = jointEntity.joint;
+weld.breakImpulse = 60;
+weld.on('break', () => {
+    console.log('The weld snapped');
+});
+```
+
+:::note
+
+Breaking cannot be detected for `6dof` joints on ammo.js builds that do not expose constraint state, so the `break` event does not fire for them. The other joint types are unaffected.
+
+:::
+
+## See Also
+
+- [JointComponent](https://api.playcanvas.com/engine/classes/JointComponent.html) - API reference for every joint property
+- [`<pc-joint>`](/user-manual/web-components/tags/pc-joint/) - The same joints in Web Components, with a live example of each type
+- [Ragdoll](https://playcanvas.github.io/#/physics/ragdoll) - Engine example that builds a character from ball and hinge joints
+- [Rigid Bodies](/user-manual/physics/rigid-bodies/) - The bodies every joint constrains
+
+--------------------------------------------------------------------------------
+
+## Getting Started
 
 URL: https://developer.playcanvas.com/user-manual/physics/physics-basics/
 
-PlayCanvas incorporates a very powerful physics engine called [ammo.js](https://github.com/kripken/ammo.js). This is a browser port of the open source C++ Bullet physics engine.
-
-PlayCanvas provides the [rigidbody](/user-manual/editor/scenes/components/rigidbody/) and [collision](/user-manual/editor/scenes/components/collision/) components to set up physics simulations.
+PlayCanvas physics is powered by [ammo.js](https://github.com/kripken/ammo.js), a port of the open source Bullet physics engine to WebAssembly. Once it is loaded, you build a simulation out of entities that carry a [rigidbody](/user-manual/editor/scenes/components/rigidbody/) component, which decides how the entity moves, and a [collision](/user-manual/editor/scenes/components/collision/) component, which gives it a shape. This page covers loading the library, the global settings, and the rules that every other page in this section builds on.
 
 ## Enabling Physics {#enabling-physics}
 
-By default, a new PlayCanvas project does not include ammo.js modules. This is because ammo.js weighs in at several hundred kilobytes and your app should not have to load this library if it is not needed.
-
-You can import ammo.js modules into your project using the import button on the Scene Settings panel:
-
-[Image: Physics Settings]
-
-This will import the default build of ammo.js provided by PlayCanvas. However please note it is possible to compile your own version of ammo.js and add it to your project instead. For more information see [this page](/user-manual/editor/assets/inspectors/wasm/).
-
-For details on migrating legacy projects to the latest ammo.js see [this page](/user-manual/physics/physics-migration/).
+Physics is opt-in. ammo.js weighs in at several hundred kilobytes, so nothing loads it unless you ask. It is distributed as three files: the WebAssembly module `ammo.wasm.wasm`, its JavaScript glue `ammo.wasm.js`, and `ammo.js`, an asm.js fallback for browsers without WebAssembly support. Until the library is present, physics components are inert placeholders: adding them does nothing and raises no errors.
 
 ## Gravity {#gravity}
 
-In the same Settings panel, you can set global gravity of the physics simulation. Gravity is a constant force applied to all rigid bodies in your scene. By default, this is set to -9.81 in the world's negative Y axis (straight down, in other words). This default approximates Earth gravity. But you may want to increase or decrease this value. For example, for a game set in space, you will probably want to set gravity to zero.
+Gravity is a constant acceleration applied to every dynamic rigid body. The default of -9.81 along the world's Y axis (straight down) approximates Earth. Set it to zero for a game in space, or to something smaller for the Moon.
 
 ## Units of Measurement {#units-of-measurement}
 
-By default, the PlayCanvas physics engine interprets 1 unit as 1 meter. Therefore, for objects to fall at a rate that appears to be physically accurate, you should ensure that your scenes size objects appropriately.
+The physics engine interprets 1 unit as 1 meter and measures mass in kilograms. For objects to fall at a rate that looks right, size your scenes accordingly: a character who is 1.8 m tall should be 1.8 units high. Scenes built at a very different scale still simulate, but gravity will look too weak or too strong, and very small shapes are prone to tunneling through one another.
 
-For example, if your game features a character that is 1.8m tall, he should be 1.8 units high in the Editor's 3D view.
+## How the Simulation Runs {#how-the-simulation-runs}
 
-## Rigid Bodies {#rigid-bodies}
+A few rules follow from the way the engine drives the simulation, and the rest of this section relies on them:
 
-You can make any entity in your scene participate in the physics simulation. Just add a rigidbody component and a collision component. The rigidbody component specifies a type:
+- **The simulation steps at a fixed rate.** Each frame, the physics world advances in fixed steps of 1/60 of a second, taking as many as the frame time requires (up to a limit). Bodies therefore behave the same at 30 and at 144 frames per second. On displays faster than 60 Hz some frames run no step at all, and body transforms are interpolated so that motion stays smooth.
+- **Physics owns dynamic bodies.** After each step the engine writes the position and rotation of every dynamic body back to its entity. Anything you set on the entity's transform is overwritten, so dynamic bodies are moved with forces, velocities or `teleport` instead (see [Rigid Bodies](/user-manual/physics/rigid-bodies/#moving-and-teleporting)).
+- **You own static and kinematic bodies.** Their transforms are read from the entity at the start of each step, so you move them like any other entity.
+- **Events fire per step.** Collision and trigger events are reported once per physics step, not per frame. A body resting on the floor produces a `contact` event every step for as long as it rests there.
 
-- Static - A physical object that never moves
-- Dynamic - A physical object that will move in response to an applied force
-- Kinematic - A physical object that can only be positioned explicitly via the API
+## See Also
 
-It also specifies physical properties like mass, friction and restitution (essentially a measure of 'bounciness').
-
-The collision component specifies the physical shape of the body. Note that a rigid body's physical shape does not have to match its graphical shape. It is typical for physical representations of objects to be much simpler than the graphical. The available collision component types are:
-
-- Box
-- Sphere
-- Capsule
-- Cylinder
-- Mesh
-- Cone
-- [Compound](/user-manual/physics/compound-shapes/)
-
-## Creating a Static Ground {#creating-a-static-ground}
-
-Most of the time, you will want to create some kind of static physical environment. For example, a race track or a football pitch. The simplest example is a flat plane. PlayCanvas doesn't expose a plane-type collision primitive but it does provide a box primitive. Here is how to configure a 1 unit high 10x10 box that is a static rigid body:
-
-[Image: Static Ground]
-
-You could also set the collision component type to Mesh and assign a model asset if you want something more complex.
-
-## Creating Dynamic Bodies {#creating-dynamic-bodies}
-
-Physics is all about movement so things get interesting when we create dynamic rigid bodies. Let's create a dynamic 1x1x1 box:
-
-[Image: Dynamic Box]
-
-The box has been rotated so that when it collides with the static ground, it will bounce in an interesting way:
-
-[Image: Falling Box]
-
-## Creating Kinematic Bodies {#creating-kinematic-bodies}
-
-Sometimes, it can be useful to be able to explicitly control the motion of physical objects in your scene and have these objects exert an irresistible force on other physical objects. For example, imagine a moving platform that can carry the player across a level. To achieve this, you can set a rigid body's type to Kinematic. Let's create a kinematic box:
-
-[Image: Kinematic Box]
-
-The responsibility for animating kinematic bodies is on you, the developer. You will notice that the kinematic box shown above also has a script component with a script called movement.js assigned:
-
-This script simply animates the box along the world x-axis using a sine function. You move kinematic bodies using the standard transformation functions on the entity like `setPosition`, `setRotation` and `setEulerAngles`. Now when we run the scene, the dynamic box falls on the kinematic box and is carried along on top of it:
-
-[Image: Kinematic Box]
-
-## Teleporting Dynamic Bodies {#teleporting-dynamic-bodies}
-
-Although you can use the standard entity transformation function with kinematic bodies, this is not allowed for dynamic bodies. When creating a dynamic rigid body, you pass the responsibility for setting the position and orientation of that entity to the physics engine. This means that if you try to update the position or orientation of an entity in a script using the pc.Entity API, the functions will not have an effect. Instead, you must call the teleport function on the rigid body component which explicitly notifies the physics engine you want to momentarily update a rigid body's position and/or orientation.
-
---------------------------------------------------------------------------------
-
-## Updating ammo.js
-
-URL: https://developer.playcanvas.com/user-manual/physics/physics-migration/
-
-### Introduction
-
-PlayCanvas has added support for the latest version of ammo.js.
-
-The new version has a number of benefits:
-
-- more of the underlying Bullet API has been exposed
-- support for ammo.js wasm module has been added
-- the wasm version is smaller and runs faster
-
-### Existing projects
-
-Projects created before the introduction of wasm modules continue by default to use the legacy version of ammo.js. It is up to project owners to migrate their physics system to the latest version of ammo.js.
-
-To check if your project is using the legacy version of ammo.js, navigate to the Scene Settings panel:
-
-[Image: Physics Legacy Settings]
-
-If 'Enable Physics' does not appear, then the project is new and doesn't have the option of using the legacy built-in version of ammo.js.
-
-Otherwise, if 'Enable Physics' is checked the legacy version of ammo.js is silently being added to your project at build time.
-
-### Migration
-
-In order to use the latest version of ammo.js, disable 'Enable Physics' and click 'Import Ammo'. This imports the latest version of ammo.js provided by PlayCanvas into the Assets Panel.
-
-If updating ammo.js causes issues with your project you may need to revert back to the old version. Do this by deleting (or disabling) the project's ammo.js modules and re-enabling the physics checkbox.
-
-### Note
-
-The project should either include legacy physics (using the 'Enable Physics' checkbox) or it should have the ammo.js modules included in the project directly, but it should not include both at the same time!
+- [Rigid Bodies](/user-manual/physics/rigid-bodies/) - Body types and properties, the next thing to read
+- [Collision Shapes](/user-manual/physics/collision-shapes/) - Giving bodies a shape
+- [Physics Settings](/user-manual/editor/interface/settings/physics/) - The PHYSICS section of the Editor's scene settings
+- [Collision and Triggers](/tutorials/collision-and-triggers/) - Tutorial that builds a complete physics scene in the Editor
 
 --------------------------------------------------------------------------------
 
@@ -26073,13 +26329,197 @@ The project should either include legacy physics (using the 'Enable Physics' che
 
 URL: https://developer.playcanvas.com/user-manual/physics/ray-casting/
 
-The PlayCanvas physics engine allows you to perform ray casts. A ray cast is a query that determines if a straight line between two arbitrary 3D points intersects with a rigid body.
+The PlayCanvas physics engine allows you to perform ray casts. A ray cast is a query that determines whether a straight line between two 3D points intersects any collision shapes, and where. Ray casts are methods on the rigid body component system, `app.systems.rigidbody`, so they work the same wherever you build: you only need the application and two points.
 
-One application of ray casting is picking, where the user can touch/click the screen and select an entity. Here is a script which performs a ray cast from the camera position into the scene through the screen touch/click position and returns the closest selected rigid body-enabled entity:
+## Picking with a Ray Cast {#picking-with-a-ray-cast}
 
-You can find a project that uses ray casting for entity selection [here](https://playcanvas.com/project/410547/overview/entity-picking-using-physics).
+One application of ray casting is picking, where the user can touch or click the screen to select an entity. The example below casts a ray from the camera through the pointer position and reports the closest body it hits:
 
-Ray casting has other applications too. An entity can probe the environment by firing ray casts. For example, to determine if an entity is on the ground, it can fire a ray cast directly downwards some distance and check if it intersects with the environment.
+The ray starts at the camera and ends where the pointer position lands on the camera's far clip plane, so it passes through whatever is under the pointer:
+
+```javascript
+function pick(screenX, screenY) {
+    // From the camera position...
+    const from = cameraEntity.getPosition();
+
+    // ...to the pointer position projected onto the far clip plane
+    const to = cameraEntity.camera.screenToWorld(screenX, screenY, cameraEntity.camera.farClip);
+
+    // Return the closest hit, or null
+    const result = app.systems.rigidbody.raycastFirst(from, to);
+    if (result) {
+        console.log(`You selected ${result.entity.name}`);
+    }
+}
+
+app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
+app.touch?.on(pc.EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
+```
+
+In the Editor this lives in a script on the camera entity, where `this.app` and `this.entity` stand in for `app` and `cameraEntity`; the [Entity picking using physics](/tutorials/entity-picking-using-physics/) tutorial has the complete script. In React, `useApp()` returns the application; in Web Components, `whenReady('pc-app')` does. See [Moving Bodies](/user-manual/physics/forces-and-impulses/#running-physics-code) for those patterns.
+
+## Raycast Results {#raycast-results}
+
+The rigid body component system provides two query methods:
+
+- [`raycastFirst(start, end, options)`](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastfirst) returns the closest hit, or `null` if nothing was hit.
+- [`raycastAll(start, end, options)`](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastall) returns an array with every hit along the ray, which is empty if nothing was hit. The array is in no particular order unless you pass `sort: true`, which orders it from nearest to farthest.
+
+Each hit is a [RaycastResult](https://api.playcanvas.com/engine/classes/RaycastResult.html):
+
+| Property | Description |
+| --- | --- |
+| `entity` | The entity whose collision shape was hit |
+| `point` | The world space position of the hit |
+| `normal` | The world space surface normal at the hit |
+| `hitFraction` | How far along the ray the hit is, from 0 at `start` to 1 at `end` |
+
+Ray casts hit [trigger volumes](/user-manual/physics/trigger-volumes/) as well as rigid bodies. Use one of the filters below to skip them.
+
+## Filtering Ray Casts {#filtering-ray-casts}
+
+Both methods accept an options object:
+
+| Option | Description |
+| --- | --- |
+| `filterTags` | Only report hits on entities whose [tags](https://api.playcanvas.com/engine/classes/Tags.html) match. Written like the arguments to `Tags#has`, inside an array: `['enemy']` requires the tag, `['enemy', 'boss']` requires both, `[['red', 'blue']]` requires either |
+| `filterCallback` | A function that receives each hit entity and returns `true` to keep the hit |
+| `filterCollisionGroup` | The [collision group](/user-manual/physics/rigid-bodies/#collision-groups-and-masks) of the ray, tested against the mask of each body |
+| `filterCollisionMask` | The collision mask of the ray, tested against the group of each body |
+| `sort` | `raycastAll` only. Sort the hits from nearest to farthest |
+
+```javascript
+// Find every enemy the shot passes through, nearest first
+const hits = app.systems.rigidbody.raycastAll(from, to, {
+    filterTags: ['enemy'],
+    sort: true
+});
+for (const hit of hits) {
+    hit.entity.script.health.damage(10 * (1 - hit.hitFraction));
+}
+
+// Pick anything except the player's own body
+const result = app.systems.rigidbody.raycastFirst(from, to, {
+    filterCallback: (entity) => entity !== player
+});
+```
+
+Filtering by tag or callback needs every hit along the ray, so `raycastFirst` with either option does the same work as `raycastAll`. Group and mask filtering happens inside the physics engine and is cheaper. The [Physics raycasting by tag](/tutorials/physics-raycasting-by-tag/) tutorial shows tag filtering in a full project.
+
+## Probing the Environment {#probing-the-environment}
+
+Ray casting has other applications too. An entity can probe its surroundings by firing ray casts. For example, to determine whether a character is standing on the ground, cast a short ray straight down from its position and see whether anything other than the character itself is hit:
+
+```javascript
+const from = player.getPosition();
+const to = new pc.Vec3(from.x, from.y - 1.1, from.z);
+const hit = app.systems.rigidbody.raycastFirst(from, to, {
+    filterCallback: (entity) => entity !== player
+});
+const onGround = hit !== null;
+```
+
+## See Also
+
+- [Entity picking using physics](/tutorials/entity-picking-using-physics/) - Tutorial with the complete picking script for the Editor
+- [Physics raycasting by tag](/tutorials/physics-raycasting-by-tag/) - Tutorial that filters hits with `filterTags`
+- [Place an entity with physics](/tutorials/place-an-entity-with-physics/) - Tutorial that spawns objects where a ray hits the ground
+- [RigidBodyComponentSystem](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html) - API reference for `raycastFirst` and `raycastAll`
+
+--------------------------------------------------------------------------------
+
+## Rigid Bodies
+
+URL: https://developer.playcanvas.com/user-manual/physics/rigid-bodies/
+
+A rigid body is an entity that takes part in the physics simulation. It needs two components: a [rigidbody](/user-manual/editor/scenes/components/rigidbody/) component, which decides how the physics engine treats the entity, and a [collision](/user-manual/editor/scenes/components/collision/) component, which gives it a shape. A rigidbody component without a collision component has nothing to collide with and does nothing. Shapes are covered on the [Collision Shapes](/user-manual/physics/collision-shapes/) page; this page is about the body itself.
+
+## Body Types {#body-types}
+
+The `type` of a rigid body decides who moves it:
+
+- **Static** - Never moves. Use it for the ground, walls and anything else that is part of the environment. Static bodies are cheap, and the engine assumes they stay put.
+- **Dynamic** - Fully simulated. It falls under gravity, responds to collisions, [forces and impulses](/user-manual/physics/forces-and-impulses/), and the physics engine owns its position and rotation.
+- **Kinematic** - Moved by you, through the entity's transform. It pushes dynamic bodies out of its way but is not affected by them or by gravity. Use it for moving platforms, doors driven by animation and anything else that follows a script rather than the laws of physics.
+
+Here is a one meter dynamic box that will fall onto whatever is below it:
+
+## Mass and Materials {#mass-and-materials}
+
+Four properties describe how heavy a body is and how its surface behaves in a contact:
+
+| Property | Description |
+| --- | --- |
+| **Mass** | The mass of a dynamic body in kilograms. Heavier bodies need more force to accelerate and push lighter ones aside. Defaults to 1 and is ignored by static and kinematic bodies |
+| **Friction** | How strongly the surface resists sliding, from 0 to 1. Defaults to 0.5 |
+| **Rolling Friction** | Resistance to rolling, which stops spheres and cylinders from rolling forever. Defaults to 0 |
+| **Restitution** | Bounciness, from 0 to 1. Defaults to 0. The values of the two bodies in a contact are multiplied together, so a ball with a restitution of 1 does not bounce on a floor with a restitution of 0 |
+
+## Damping and Factors {#damping-and-factors}
+
+Two pairs of properties shape how a dynamic body moves once it is in motion:
+
+- **Linear Damping** and **Angular Damping** are the proportion of velocity a body loses each second, from 0 to 1, like air resistance. They default to 0.
+- **Linear Factor** and **Angular Factor** scale movement and rotation per world axis. A factor of 0 locks that axis. Setting the angular factor to `0, 0, 0` keeps a character upright; a linear factor of `1, 1, 0` with an angular factor of `0, 0, 1` confines a body to the XY plane for a 2D game. They default to `1, 1, 1`.
+
+## Sleeping {#sleeping}
+
+A dynamic body that comes to rest is put to sleep by the physics engine, which stops simulating it until something disturbs it. Applying a force, impulse or torque, assigning a velocity and teleporting all wake a body automatically, as does being hit by another body. You can also wake one yourself:
+
+```javascript
+if (!entity.rigidbody.isActive()) {
+    entity.rigidbody.activate();
+}
+```
+
+## Moving and Teleporting {#moving-and-teleporting}
+
+The physics engine owns the position and rotation of a dynamic body, so anything you set on its entity's transform is overwritten on the next step. To move a dynamic body, apply [forces or velocities](/user-manual/physics/forces-and-impulses/), or call `teleport` on the rigidbody component when it has to jump somewhere, for example when respawning. Teleporting does not clear the body's velocity, so reset that first if the body should arrive at rest:
+
+```javascript
+// Move to a position, keeping the current rotation
+entity.rigidbody.teleport(0, 10, 0);
+
+// Move and rotate, with the rotation given as Euler angles in degrees
+entity.rigidbody.teleport(new pc.Vec3(0, 10, 0), new pc.Vec3(0, 90, 0));
+
+// Respawn at rest: clear the old motion, then move and rotate with a quaternion
+entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
+entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+entity.rigidbody.teleport(spawn.getPosition(), spawn.getRotation());
+```
+
+Kinematic bodies work the other way round. You move the entity with `setPosition`, `setRotation`, `lookAt` and the rest of the transform API, and the body follows on the next step, carrying any dynamic bodies that rest on it:
+
+```javascript
+// A platform that slides back and forth along the X axis
+platform.setPosition(Math.sin(time) * 2, 0.5, 0);
+```
+
+Vector properties such as `linearVelocity` and `angularFactor` return read-only snapshots. Assign a new vector rather than editing the returned one.
+
+These calls are the same wherever you build. In React, reach the entity with the [`useParent`](/user-manual/react/api/hooks/use-parent/) hook from a component placed inside the `<Entity>`; in Web Components, through the `entity` property of the [`<pc-entity>`](/user-manual/web-components/tags/pc-entity/) element. [Moving Bodies](/user-manual/physics/forces-and-impulses/#running-physics-code) shows where per-frame code runs on each surface.
+
+## Collision Groups and Masks {#collision-groups-and-masks}
+
+Every body belongs to a collision **group** and carries a **mask** of the groups it collides with. Two bodies interact only when each one's group is in the other's mask. The engine assigns both when the body type is set: dynamic bodies collide with everything, while static and kinematic bodies never collide with each other. You can narrow this from code to stop, for example, projectiles hitting one another:
+
+```javascript
+// Put the body in a user group and stop it colliding with other members of that group.
+// Set these after the type, because changing the type resets them.
+entity.rigidbody.group = pc.BODYGROUP_USER_1;
+entity.rigidbody.mask = pc.BODYMASK_ALL ^ pc.BODYGROUP_USER_1;
+```
+
+Eight user groups, `pc.BODYGROUP_USER_1` to `pc.BODYGROUP_USER_8`, are free for your own use. The same groups and masks filter [ray casts](/user-manual/physics/ray-casting/#filtering-ray-casts).
+
+## See Also
+
+- [Collision Shapes](/user-manual/physics/collision-shapes/) - The shape every rigid body needs
+- [Moving Bodies](/user-manual/physics/forces-and-impulses/) - Forces, impulses, torque and velocity
+- [Rigid Body Component](/user-manual/editor/scenes/components/rigidbody/) - Editor reference for every property
+- [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) - API reference
+- [Creating Rigid Bodies in Code](/tutorials/creating-rigid-bodies-in-code/) - Tutorial that adds both components from a script
 
 --------------------------------------------------------------------------------
 
@@ -26087,13 +26527,51 @@ Ray casting has other applications too. An entity can probe the environment by f
 
 URL: https://developer.playcanvas.com/user-manual/physics/trigger-volumes/
 
-Trigger volumes are static collision shapes which can fire events whenever a rigid body enters or leaves their volume. They can be useful to determine when a goal has been scored in a football match or when a race car has reached the finish line.
+Trigger volumes are collision shapes that fire events whenever a rigid body enters or leaves them, without physically blocking anything. They are useful for detecting when a goal has been scored, when a race car crosses the finish line or when the player walks into a room.
 
-To create a trigger volume, add a [collision component](/user-manual/editor/scenes/components/collision) to an entity and configure its shape. Do not add a rigidbody component to your trigger volume entity.
+## Creating a Trigger Volume {#creating-a-trigger-volume}
 
-[Image: Trigger Volume]
+A trigger is simply a [collision](/user-manual/editor/scenes/components/collision/) component on an entity that has no rigidbody component. Any [collision shape](/user-manual/physics/collision-shapes/) works, including mesh and compound shapes. Here is a box-shaped goal mouth:
 
-To check whether a volume has been entered or exited by a rigid body based entity, you need a simple script:
+Because a trigger has no rigid body, you move it like any other entity, with `setPosition`, `setRotation` and the rest of the [Entity](https://api.playcanvas.com/engine/classes/Entity.html) transform API. The physics engine picks up the new transform on its next step.
+
+## Listening for Trigger Events {#listening-for-trigger-events}
+
+The trigger's collision component fires `triggerenter` when a rigid body starts overlapping the volume and `triggerleave` when it stops. Both events pass the entity of the body that entered or left:
+
+```javascript
+goal.collision.on('triggerenter', (entity) => {
+    console.log(`${entity.name} has entered ${goal.name}.`);
+});
+
+goal.collision.on('triggerleave', (entity) => {
+    console.log(`${entity.name} has left ${goal.name}.`);
+});
+```
+
+The rigid body on the other side receives the same two events from its own collision and rigidbody components. Its handlers are passed the trigger entity instead, which lets a body react to the volumes it passes through:
+
+```javascript
+player.rigidbody.on('triggerenter', (trigger) => {
+    if (trigger.tags.has('checkpoint')) {
+        lastCheckpoint = trigger.getPosition().clone();
+    }
+});
+```
+
+Subscribing works exactly as it does for collision events: `on` returns an [EventHandle](https://api.playcanvas.com/engine/classes/EventHandle.html) whose `off()` method removes the listener, or you can pass the same callback to `off(eventName, callback)` on the component. [Collision Events](/user-manual/physics/collision-events/#listening-for-collisions) shows where to put that code in the Editor, in React and in Web Components.
+
+## What Can Trigger a Volume {#what-can-trigger-a-volume}
+
+Only dynamic and kinematic rigid bodies fire trigger events. Static bodies never move, so they are excluded from the overlap tests, and one trigger cannot detect another. If a trigger appears not to fire, check that the entity passing through it has a rigidbody component whose type is Dynamic or Kinematic.
+
+Trigger overlaps never fire the `contact`, `collisionstart` or `collisionend` events. Those are reserved for physical contacts between rigid bodies and are described in [Collision Events](/user-manual/physics/collision-events/).
+
+## See Also
+
+- [Collision Events](/user-manual/physics/collision-events/) - Events for physical contacts between rigid bodies, and where to subscribe on each surface
+- [Collision Shapes](/user-manual/physics/collision-shapes/) - The shapes a trigger can take
+- [Collision and Triggers](/tutorials/collision-and-triggers/) - Tutorial that resets falling bodies with a trigger
 
 --------------------------------------------------------------------------------
 
