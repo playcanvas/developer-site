@@ -107,7 +107,7 @@ const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -200,4 +200,4 @@ console.log(anim.clips); // ['walk', 'stalk']
 * [`<pc-model>`](../pc-model) — 通常のホスト。そのGLBがアニメーショントラックを供給します
 * [`<pc-asset>`](../pc-asset) — 別のGLBやanimclip JSONからクリップを供給します
 
-サンプル: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)
+サンプル: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)、[Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html)

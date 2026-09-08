@@ -21,7 +21,7 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `handle` | [Entity Reference](../attributes.md#entity-references) | - | ドラッグ可能なハンドルとして使用する [`<pc-entity>`](../pc-entity) |
-| `handle-size` | Number | `"0.5"` | トラックのサイズに対するハンドルのサイズ（0〜1） |
+| `handle-size` | Number | `"0"` | トラックのサイズに対するハンドルのサイズ（0〜1） |
 | `orientation` | Enum | `"horizontal"` | スクロールバーの向き: `"horizontal"` \| `"vertical"` |
 | `value` | Number | `"0"` | スクロールバーの現在位置（0〜1） |
 

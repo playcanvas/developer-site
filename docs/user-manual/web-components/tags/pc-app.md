@@ -19,6 +19,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | --- | --- | --- | --- |
 | `alpha` | Boolean | `"true"` | Whether the application allocates an alpha channel in the frame buffer, which is what lets the page show through wherever the scene has not drawn |
 | `antialias` | Boolean | `"true"` | Whether the application uses anti-aliasing |
+| `area-light-luts` | [Asset ID](../attributes.md#asset-and-material-ids) | - | ID of a [`<pc-asset>`](../pc-asset) holding the area light lookup tables as JSON. Loading it switches area lights on for the whole application, so [`<pc-light>`](../pc-light) elements with a `rect`, `disk` or `sphere` `shape` render as intended; clearing it switches them off again. Applies immediately — see [Area Lights](../pc-light#area-lights) |
 | `backend` | Enum | `"webgpu"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"`. WebGPU falls back to WebGL 2 in browsers where it is unavailable — set `"webgl2"` to force WebGL 2. `"null"` selects a renderer that draws nothing, and exists for headless testing |
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
@@ -29,7 +30,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 :::note[When these are read]
 
-Every attribute above except `max-pixel-ratio` and `loading-bar` is read once, when the element is
+Every attribute above except `max-pixel-ratio`, `loading-bar` and `area-light-luts` is read once, when the element is
 inserted into the document and creates its graphics device. Changing one afterwards updates the
 element's property but has no effect on the running application, and logs a warning saying so — to
 apply a new value, remove the element and re-insert it.

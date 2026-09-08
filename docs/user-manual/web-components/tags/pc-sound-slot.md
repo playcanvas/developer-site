@@ -41,7 +41,7 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="jukebox">
-            <pc-sound>
+            <pc-sound positional="false">
                 <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
                 <pc-sound-slot name="drop-slow" asset="drop" pitch="0.5" volume="0.8"></pc-sound-slot>
             </pc-sound>

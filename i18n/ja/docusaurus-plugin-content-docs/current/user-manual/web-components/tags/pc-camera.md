@@ -36,7 +36,7 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 | `projection` | Enum | `"perspective"` | カメラの投影方式: `"perspective"` \| `"orthographic"`。正射影のサイズは`ortho-height`で指定します |
 | `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのシザー矩形 |
-| `tonemap` | Enum | `"none"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
+| `tonemap` | Enum | `"linear"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
 
 </div>
 

@@ -37,6 +37,7 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 | `shadow-resolution` | Number | `"1024"` | シャドウマップの解像度 |
 | `shadow-samples` | Number | `"16"` | PCSSシャドウのサンプル数 |
 | `shadow-type` | Enum | `"pcf3-32f"` | 影のフィルタリング: `"pcf1-16f"` \| `"pcf1-32f"` \| `"pcf3-16f"` \| `"pcf3-32f"` \| `"pcf5-16f"` \| `"pcf5-32f"` \| `"vsm-16f"` \| `"vsm-32f"` \| `"pcss-32f"` |
+| `shape` | Enum | `"punctual"` | 光源の形状: `"punctual"` \| `"rect"` \| `"disk"` \| `"sphere"`。エリア形状は`omni`と`spot`ライトに適用され、サイズはエンティティのスケールで決まり、[`<pc-app>`](../pc-app)の`area-light-luts`で読み込むルックアップテーブルが必要です。[エリアライト](#area-lights)を参照 |
 | `type` | Enum | `"directional"` | ライトのタイプ: `"directional"` \| `"omni"` \| `"spot"` |
 | `vsm-bias` | Number | `"0.0025"` | バリアンスシャドウマップのバイアス |
 | `vsm-blur-size` | Number | `"11"` | バリアンスシャドウマップのぼかしサイズ（1〜25） |
@@ -71,6 +72,30 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 全体の範囲は依然として`shadow-distance`が決めます。これがカスケードで分割される距離なので、距離を上げずにカスケード数だけ増やしても、同じ近距離範囲をさらに細分するだけです。`shadow-resolution`は共有の予算ではなく、カスケードごとの値です。
 
 [Shadow Cascadesのサンプル](https://playcanvas.github.io/web-components/examples/shadow-cascades.html)は、カスケードが必要になるほど長い砂漠の堤道で3つの属性すべてを操作でき、レンダラーが導出する分割距離もプロットします。エンジンにはカスケードのデバッグビューがなく、それがないと`cascade-distribution`のスライダーは何も効いていないように見えるため、一見の価値があります。
+
+## エリアライト {#area-lights}
+
+点光源は無限に小さな1点です。現実の照明器具には大きさがあり、その大きさこそがハイライトと影を柔らかくします。`shape`は`omni`または`spot`ライトに3種類のエリア形状（`rect`・`disk`・`sphere`）のいずれかを与え、サイズはエンティティのスケールで決まります。単位スケールでは、`rect`はエンティティのローカルXZ平面上の1×1の矩形、`disk`は同じ平面上の直径1の円盤、`sphere`は直径1の球です。エリア形状は自身のサイズと距離に応じて減衰するため、それらにとって`range`は減衰そのものではなく、単なるカットオフです。
+
+エリアライトには、エンジンが同梱していないルックアップテーブルが必要です。Heitz、Dupuy、Hill、Neubelt（SIGGRAPH 2016）による線形変換コサインのテーブルです。[`<pc-app>`](../pc-app)の`area-light-luts`には、それをJSONとして保持する[`<pc-asset>`](../pc-asset)を指定します（`LTC_MAT_1`と`LTC_MAT_2`、各16,384個の数値。エンジンのサンプルの`area-light-luts.json`と同じ形式です）。このアセットが読み込まれることが、アプリケーション全体でエリアライトを有効にするスイッチになります。
+
+```html
+<pc-app area-light-luts="luts">
+    <pc-asset id="luts" src="https://playcanvas.github.io/web-components/examples/assets/json/area-light-luts.json"></pc-asset>
+    <pc-scene>
+        <!-- 2×1の天井パネル。rectとdiskはエンティティのXZ平面から放射するので、これは下向きに照らします -->
+        <pc-entity name="panel" position="0 3 0" scale="2 1 1">
+            <pc-light type="spot" shape="rect" intensity="8" range="12" outer-cone-angle="88"></pc-light>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+1つの属性がこの機能の両面を制御します。有効なテーブルを読み込むとそれが適用されてエリアライトが有効になり、属性を外すと再び無効になります（すでにエンジンに渡されたテーブルはそのまま残ります）。どのアセットにも解決しないIDは警告とともに無効化し、ルックアップテーブルでないファイルは警告を出して拒否されます。本物のテーブルがないと、エンジンのプレースホルダーによって`disk`ライトは何も放射せず、すべての形状からスペキュラが失われるためです。他の[`<pc-app>`](../pc-app)の属性と異なり、この属性は即座に適用され、起動前に設定すれば他のアセットと一緒に読み込まれます。エリアライトを描画できないデバイスではこのスイッチは無視され、その`omni`と`spot`のエリアライトは点光源のままです。
+
+テーブルの出所はエンジンリポジトリの`examples/assets/json/area-light-luts.json`（MITライセンス）です。Web Componentsのサンプルギャラリーが上記URLでコピーを配信しており（約300 KB）、試すには十分ですが、本番では自分でホストしてください。
+
+[Area Lightsのサンプル](https://playcanvas.github.io/web-components/examples/area-lights.html)は、`rect`のスポットで天井パネルを、`sphere`のオムニでランタンの電球を作っており、`intensity`と`range`が形状のサイズとどう相互作用するかを見るのに最も手早い方法です。
 
 ## 例 {#example}
 
@@ -116,4 +141,4 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 * [`<pc-sky>`](../pc-sky) — 直接光が届かない部分を埋める画像ベースのライティング
 * [`<pc-render>`](../pc-render) — ライトが当たるものの`cast-shadows`と`receive-shadows`
 
-サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html)
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html)、[Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html)

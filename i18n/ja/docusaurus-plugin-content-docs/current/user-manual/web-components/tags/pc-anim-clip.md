@@ -77,7 +77,7 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -153,4 +153,4 @@ document.querySelector('pc-anim').transition('wave');
 * [`<pc-anim>`](../pc-anim) — クリップが属するコンポーネント
 * [`<pc-asset>`](../pc-asset) — クリップのトラックの元になるコンテナまたはアニメーションアセット
 
-サンプル: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)
+サンプル: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)、[Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html)

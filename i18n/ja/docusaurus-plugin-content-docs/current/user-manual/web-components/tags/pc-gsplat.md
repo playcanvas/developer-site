@@ -57,7 +57,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">

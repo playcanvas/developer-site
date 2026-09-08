@@ -25,13 +25,13 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 | `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
 | `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
 | `horizontal-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
-| `horizontal-scrollbar-visibility` | Enum | `"when-required"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
+| `horizontal-scrollbar-visibility` | Enum | `"always"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
 | `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
 | `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
 | `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
 | `vertical-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
-| `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
+| `vertical-scrollbar-visibility` | Enum | `"always"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
 | `viewport` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
 
 </div>

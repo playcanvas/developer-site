@@ -24,7 +24,7 @@ The `<pc-layout-group>` tag is used to define a layout group component, which au
 | `orientation` | Enum | `"horizontal"` | Orientation of the layout: `"horizontal"` \| `"vertical"` |
 | `padding` | Vector4 | `"0 0 0 0"` | Padding around the group as `left bottom right top` |
 | `reverse-x` | Boolean | `"false"` | Reverse the order of children along the horizontal axis |
-| `reverse-y` | Boolean | `"false"` | Reverse the order of children along the vertical axis |
+| `reverse-y` | Boolean | `"true"` | Reverse the order of children along the vertical axis |
 | `spacing` | Vector2 | `"0 0"` | Spacing between children as `x y` |
 | `width-fitting` | Enum | `"none"` | Fitting along the horizontal axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
 | `wrap` | Boolean | `"false"` | Whether children wrap onto a new line or column when they overflow the group |
@@ -33,7 +33,7 @@ The `<pc-layout-group>` tag is used to define a layout group component, which au
 
 ## Example
 
-A vertical list that lays out its rows automatically. Try `orientation="horizontal"`, a bigger `spacing`, or `reverse-y` — or add another row and watch it slot in:
+A vertical list that lays out its rows automatically, first row at the top. Try `orientation="horizontal"`, a bigger `spacing`, or `reverse-y="false"` to stack them upwards instead — or add another row and watch it slot in:
 
 ```html live-example
 <pc-app>
