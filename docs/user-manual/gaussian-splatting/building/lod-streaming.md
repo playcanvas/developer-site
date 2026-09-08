@@ -45,18 +45,20 @@ Streaming is enabled simply by loading a Streamed SOG asset (`lod-meta.json`) on
 
 ### How LOD Is Chosen
 
-The engine picks one LOD level per region of the scene so that the total splat count fits the global [splat budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget), spending detail where it improves the image the most. It combines each region's projected size on screen with a measure of how much visual error each of its LOD levels would leave. These error metrics are read from `lod-meta.json` when present ([SplatTransform](/user-manual/splat-transform) 3.3 and newer writes them) and are derived automatically from the splat counts otherwise — no configuration is required either way. LOD selection also compensates for the camera's field of view automatically.
+The engine picks one LOD level per region of the scene so that the total splat count fits the global [splat budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget). By default detail is ordered by camera distance: each region steps down through concentric bands around the camera, with the band edges adapting to the budget. With `GSPLAT_LODMODE_ERROR` (see below) the engine instead combines each region's projected size on screen with a measure of how much visual error each of its LOD levels would leave. These error metrics are read from `lod-meta.json` when present ([SplatTransform](/user-manual/splat-transform) 3.3 and newer writes them) and are derived automatically from the splat counts otherwise — no configuration is required either way. LOD selection also compensates for the camera's field of view automatically.
 
 ### LOD Mode
 
 [`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode) on `app.scene.gsplat` selects between two strategies:
 
 ```javascript
-app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
+app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_ERROR;
 ```
 
-- `GSPLAT_LODMODE_ERROR` (default): the budget goes where it removes the most visual error per splat.
-- `GSPLAT_LODMODE_DISTANCE`: error metadata is ignored and detail is ordered by camera distance alone, stepping down in concentric bands around the camera with the band edges adapting to the budget. Useful when a capture's error data does not match its visual importance.
+- `GSPLAT_LODMODE_DISTANCE` (default): error metadata is ignored and detail is ordered by camera distance alone, stepping down in concentric bands around the camera with the band edges adapting to the budget. It uses the least memory of the two modes, so prefer it on memory-constrained devices.
+- `GSPLAT_LODMODE_ERROR`: the budget goes where it removes the most visual error per splat. This lifts sparse, low-quality regions such as sky and distant background that distance alone leaves coarse, but it keeps considerably more source data resident, so memory use is noticeably higher.
+
+Distance mode became the default in engine 2.23; 2.22 defaults to error mode.
 
 ### LOD Falloff
 

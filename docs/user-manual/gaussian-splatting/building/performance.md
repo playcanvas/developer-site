@@ -48,10 +48,10 @@ The budget system accounts for all GSplat assets in the scene, including both St
 
 ### LOD Mode and Falloff
 
-Within the budget, LOD levels are picked by measured visual error by default. Two properties fine-tune this — [`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode) on `app.scene.gsplat` can switch the whole scene to clean concentric distance bands instead, and [`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff) on each gsplat component tilts that splat's detail between the near and far field:
+Within the budget, LOD levels are picked by camera distance by default, stepping down in concentric bands around the camera. Two properties fine-tune this — [`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode) on `app.scene.gsplat` can switch the whole scene to spending the budget by measured visual error instead, which lifts sparse background regions at a noticeably higher memory cost, and [`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff) on each gsplat component tilts that splat's detail between the near and far field:
 
 ```javascript
-app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
+app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_ERROR;
 entity.gsplat.lodFalloff = 2; // more detail near the camera, less in the distance
 ```
 
