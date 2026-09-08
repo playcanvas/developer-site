@@ -22,7 +22,7 @@ description: "pc-sound要素のリファレンス: pc-sound-slotスロットと�
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `max-distance` | Number | `"10000"` | オーディオ減衰の最大距離 |
 | `pitch` | Number | `"1"` | このコンポーネント内のすべてのサウンドのピッチ乗数 |
-| `positional` | Boolean | `"false"` | サウンドが位置情報を持つか (3D空間オーディオ) |
+| `positional` | Boolean | `"true"` | サウンドが位置情報を持つか (3D空間オーディオ) |
 | `ref-distance` | Number | `"1"` | 最大音量の基準距離 |
 | `roll-off-factor` | Number | `"1"` | 距離減衰の減衰率ファクター |
 | `volume` | Number | `"1"` | このコンポーネント内のすべてのサウンドのマスターボリューム |
@@ -42,7 +42,7 @@ description: "pc-sound要素のリファレンス: pc-sound-slotスロットと�
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="speaker">
-            <pc-sound volume="1" pitch="1">
+            <pc-sound volume="1" pitch="1" positional="false">
                 <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
                 <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
             </pc-sound>

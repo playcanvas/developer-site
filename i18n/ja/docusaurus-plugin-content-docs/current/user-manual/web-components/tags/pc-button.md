@@ -24,14 +24,14 @@ description: "pc-button要素のリファレンス: ホバー、押下、非ア�
 | `hit-padding` | Vector4 | `"0 0 0 0"` | ボタンのヒット領域を `left bottom right top` で拡張します |
 | `hover-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | ホバー時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
 | `hover-sprite-frame` | Number | `"0"` | ホバースプライトのフレーム |
-| `hover-tint` | Color | `"1 1 1 1"` | ホバー時にイメージエンティティに適用されるティント（ティント遷移モード） |
+| `hover-tint` | Color | `"0.75 0.75 0.75 1"` | ホバー時にイメージエンティティに適用されるティント（ティント遷移モード） |
 | `image` | [Entity Reference](../attributes.md#entity-references) | - | 視覚的な遷移を表示するイメージ要素を持つ [`<pc-entity>`](../pc-entity)。デフォルトはボタン自身のエンティティです。[`<pc-model>`](../pc-model)の内側ではそれがモデルのホストになるため、その場合はUIエンティティを明示的に指定してください |
 | `inactive-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | 非アクティブ時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
 | `inactive-sprite-frame` | Number | `"0"` | 非アクティブスプライトのフレーム |
-| `inactive-tint` | Color | `"1 1 1 1"` | 非アクティブ時にイメージエンティティに適用されるティント（ティント遷移モード） |
+| `inactive-tint` | Color | `"0.25 0.25 0.25 1"` | 非アクティブ時にイメージエンティティに適用されるティント（ティント遷移モード） |
 | `pressed-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | 押下時に表示されるスプライト [`<pc-asset>`](../pc-asset) のid（スプライト遷移モード） |
 | `pressed-sprite-frame` | Number | `"0"` | 押下スプライトのフレーム |
-| `pressed-tint` | Color | `"1 1 1 1"` | 押下時にイメージエンティティに適用されるティント（ティント遷移モード） |
+| `pressed-tint` | Color | `"0.5 0.5 0.5 1"` | 押下時にイメージエンティティに適用されるティント（ティント遷移モード） |
 | `transition-mode` | Enum | `"tint"` | ボタンがホバー/押下に反応する方法: `"tint"` \| `"sprite"` |
 
 </div>

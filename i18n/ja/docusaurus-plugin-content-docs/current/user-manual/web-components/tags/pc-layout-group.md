@@ -24,7 +24,7 @@ description: "pc-layout-group要素のリファレンス: 子要素を水平ま�
 | `orientation` | Enum | `"horizontal"` | レイアウトの向き: `"horizontal"` \| `"vertical"` |
 | `padding` | Vector4 | `"0 0 0 0"` | グループ周囲のパディングを `left bottom right top` で指定 |
 | `reverse-x` | Boolean | `"false"` | 水平軸に沿って子の順序を反転します |
-| `reverse-y` | Boolean | `"false"` | 垂直軸に沿って子の順序を反転します |
+| `reverse-y` | Boolean | `"true"` | 垂直軸に沿って子の順序を反転します |
 | `spacing` | Vector2 | `"0 0"` | 子同士の間隔を `x y` で指定 |
 | `width-fitting` | Enum | `"none"` | 水平軸方向のフィッティング: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
 | `wrap` | Boolean | `"false"` | 子がグループからあふれたときに、新しい行または列に折り返すかどうか |
@@ -33,7 +33,7 @@ description: "pc-layout-group要素のリファレンス: 子要素を水平ま�
 
 ## 例 {#example}
 
-行を自動的に配置する縦のリストです。`orientation="horizontal"` にしたり、`spacing` を大きくしたり、`reverse-y` を付けたり — 行を追加して自動的に収まる様子を見たりしてみましょう:
+行を自動的に配置する縦のリストで、最初の行が一番上に来ます。`orientation="horizontal"` にしたり、`spacing` を大きくしたり、`reverse-y="false"` で下から上へ積み上げる向きにしたり — 行を追加して自動的に収まる様子を見たりしてみましょう:
 
 ```html live-example
 <pc-app>

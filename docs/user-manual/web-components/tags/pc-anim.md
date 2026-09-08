@@ -107,7 +107,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -200,4 +200,4 @@ Anything this element does not expose is available on `component` — the engine
 * [`<pc-model>`](../pc-model) — the usual host, whose GLB supplies the animation tracks
 * [`<pc-asset>`](../pc-asset) — supplies clips from a separate GLB or animclip JSON
 
-Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html).
+Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html), [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html).

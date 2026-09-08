@@ -22,7 +22,7 @@ The `<pc-sound>` tag is used to define a sound component.
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `max-distance` | Number | `"10000"` | Maximum distance for audio falloff |
 | `pitch` | Number | `"1"` | Pitch multiplier for all sounds in this component |
-| `positional` | Boolean | `"false"` | Whether the sound is positional (3D spatial audio) |
+| `positional` | Boolean | `"true"` | Whether the sound is positional (3D spatial audio) |
 | `ref-distance` | Number | `"1"` | Reference distance for full volume |
 | `roll-off-factor` | Number | `"1"` | Falloff rate factor for distance attenuation |
 | `volume` | Number | `"1"` | Master volume for all sounds in this component |
@@ -42,7 +42,7 @@ One sound component holding two slots — looping footsteps and a one-shot. The 
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="speaker">
-            <pc-sound volume="1" pitch="1">
+            <pc-sound volume="1" pitch="1" positional="false">
                 <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
                 <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
             </pc-sound>

@@ -37,6 +37,7 @@ The `<pc-light>` tag is used to define a light component.
 | `shadow-resolution` | Number | `"1024"` | Shadow map resolution |
 | `shadow-samples` | Number | `"16"` | Number of PCSS shadow samples |
 | `shadow-type` | Enum | `"pcf3-32f"` | Shadow filtering: `"pcf1-16f"` \| `"pcf1-32f"` \| `"pcf3-16f"` \| `"pcf3-32f"` \| `"pcf5-16f"` \| `"pcf5-32f"` \| `"vsm-16f"` \| `"vsm-32f"` \| `"pcss-32f"` |
+| `shape` | Enum | `"punctual"` | Light source shape: `"punctual"` \| `"rect"` \| `"disk"` \| `"sphere"`. The area shapes apply to `omni` and `spot` lights, take their size from the entity's scale, and need the lookup tables loaded by `area-light-luts` on [`<pc-app>`](../pc-app) — see [Area Lights](#area-lights) |
 | `type` | Enum | `"directional"` | Light type: `"directional"` \| `"omni"` \| `"spot"` |
 | `vsm-bias` | Number | `"0.0025"` | Variance shadow map bias |
 | `vsm-blur-size` | Number | `"11"` | Variance shadow map blur size (1-25) |
@@ -71,6 +72,30 @@ The three attributes do distinct jobs, and only `num-cascades` above 1 brings th
 `shadow-distance` still bounds the whole thing — it is the range the cascades divide up, so raising the cascade count without raising the distance just subdivides the same near-field. `shadow-resolution` is per cascade, not a shared budget.
 
 The [Shadow Cascades example](https://playcanvas.github.io/web-components/examples/shadow-cascades.html) drives all three over a desert causeway long enough to need them, and plots the split distances the renderer derives — worth a look, because the engine has no cascade debug view and the distribution slider otherwise appears to do nothing.
+
+## Area Lights
+
+A punctual light is an infinitesimal point. Real fixtures have size, and that size is what softens their highlights and shadows. `shape` gives an `omni` or `spot` light one of three areas — `rect`, `disk` or `sphere` — sized by the entity's scale: at unit scale a `rect` is a 1 by 1 rectangle in the entity's local XZ plane, a `disk` is 1 across in the same plane, and a `sphere` is 1 across. Area shapes fall off with their own size and distance, so for them `range` is only a cutoff, not the falloff itself.
+
+Area lights need lookup tables the engine does not ship — the linearly transformed cosine tables from Heitz, Dupuy, Hill and Neubelt (SIGGRAPH 2016). `area-light-luts` on [`<pc-app>`](../pc-app) names a [`<pc-asset>`](../pc-asset) holding them as JSON (`LTC_MAT_1` and `LTC_MAT_2`, 16,384 numbers each — the format of the engine examples' `area-light-luts.json`), and loading that asset is what switches area lights on for the whole application:
+
+```html
+<pc-app area-light-luts="luts">
+    <pc-asset id="luts" src="https://playcanvas.github.io/web-components/examples/assets/json/area-light-luts.json"></pc-asset>
+    <pc-scene>
+        <!-- A 2 by 1 ceiling panel; rect and disk shapes emit from the entity's XZ plane, so this one shines down -->
+        <pc-entity name="panel" position="0 3 0" scale="2 1 1">
+            <pc-light type="spot" shape="rect" intensity="8" range="12" outer-cone-angle="88"></pc-light>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+One attribute drives both halves of the feature. Loading a valid table applies it and enables area lights; clearing the attribute switches them off again (tables already handed to the engine stay in place). An id that resolves to no asset switches them off with a warning, and a file that is not a lookup table is refused with a warning — because without real tables the engine's placeholder makes `disk` lights emit nothing and strips specular from every shape. Unlike the other [`<pc-app>`](../pc-app) attributes this one applies immediately, and set before boot it loads along with the other assets. A device that cannot render area lights ignores the switch, and its `omni` and `spot` area lights stay punctual.
+
+The tables come from the engine repository's `examples/assets/json/area-light-luts.json` (MIT licensed). The Web Components example gallery serves a copy at the URL above — about 300 KB, fine for trying things out, but host your own for production.
+
+The [Area Lights example](https://playcanvas.github.io/web-components/examples/area-lights.html) builds ceiling panels from `rect` spots and lantern bulbs from `sphere` omnis, which is the quickest way to see how `intensity` and `range` interact with a shape's size.
 
 ## Example
 
@@ -116,4 +141,4 @@ The `component` property is the engine [LightComponent](https://api.playcanvas.c
 * [`<pc-sky>`](../pc-sky) — image-based lighting to fill in what direct lights miss
 * [`<pc-render>`](../pc-render) — `cast-shadows` and `receive-shadows` on what the light hits
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html) and [Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html).

@@ -25,7 +25,7 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `anchor` | Vector4 | `"0.5 0.5 0.5 0.5"` | 要素のアンカーを親に対する `left bottom right top` で設定します。各値は 0〜1。`[0,0,0,0]` は親の左下に固定、`[1,1,1,1]` は右上に固定。左右または上下が異なる（スプリットアンカー）場合、その範囲に合わせて要素がリサイズされます（例: `[0,0,1,1]` は親全体を埋めます）。 |
+| `anchor` | Vector4 | `"0 0 0 0"` | 要素のアンカーを親に対する `left bottom right top` で設定します。各値は 0〜1。`[0,0,0,0]` は親の左下に固定、`[1,1,1,1]` は右上に固定。左右または上下が異なる（スプリットアンカー）場合、その範囲に合わせて要素がリサイズされます（例: `[0,0,1,1]` は親全体を埋めます）。 |
 | `auto-fit-height` | Boolean | `"false"` | フォントサイズを（`min-font-size` まで）縮小して、テキストを要素の高さに収めます。`auto-height="false"` が必要です。テキスト要素のみ |
 | `auto-fit-width` | Boolean | `"false"` | フォントサイズを（`min-font-size` まで）縮小して、テキストを要素の幅に収めます。`auto-width="false"` が必要です。テキスト要素のみ |
 | `auto-height` | Boolean | `"true"` | テキストコンテンツに合わせて高さを自動的に調整するかどうか。テキスト要素のみ |
@@ -35,14 +35,14 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `font-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | フォント [`<pc-asset>`](../pc-asset) のID (`font` 型アセットを参照する必要があります)。テキスト要素でのみ必須です |
 | `font-size` | Number | `"32"` | ピクセル単位のフォントサイズ |
-| `height` | Number | `"0"` | ピクセル単位の高さ (自動サイズ調整の場合は0) |
+| `height` | Number | `"32"` | ピクセル単位の高さ (自動サイズ調整の場合は0) |
 | `line-height` | Number | `"32"` | ピクセル単位の行の高さ |
 | `margin` | Vector4 | - | スプリット（ストレッチ）アンカーからの要素のインセットを `left bottom right top` で指定します。ポイントアンカーの場合は、代わりに `width`/`height` がサイズを決定します |
 | `mask` | Boolean | `"false"` | 要素が子孫を自身の範囲にクリップするかどうか。イメージ要素のみ |
 | `max-font-size` | Number | `"32"` | 自動フィット時に使用される最大のフォントサイズ |
 | `min-font-size` | Number | `"8"` | 自動フィット時に使用される最小のフォントサイズ |
 | `opacity` | Number | `"1"` | 不透明度。0（透明）〜1（不透明） |
-| `pivot` | Vector2 | `"0.5 0.5"` | "X Y" 値としてのピボットポイント |
+| `pivot` | Vector2 | `"0 0"` | "X Y" 値としてのピボットポイント |
 | `pixels-per-unit` | Number | - | スプライトをレンダリングするときに使用される、ユニットあたりのピクセル数。イメージ要素のみ |
 | `sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | レンダリングするスプライト [`<pc-asset>`](../pc-asset) のID。イメージ要素のみ |
 | `sprite-frame` | Number | `"0"` | レンダリングするスプライトのフレームインデックス。イメージ要素のみ |
@@ -50,7 +50,7 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 | `texture-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | レンダリングするテクスチャ [`<pc-asset>`](../pc-asset) のID。イメージ要素のみ |
 | `type` | Enum | `"group"` | 要素の型: `"group"` \| `"image"` \| `"text"` |
 | `use-input` | Boolean | `"false"` | 要素がポインター入力を受け取るかどうか。[`<pc-button>`](../pc-button) とスクロールビューの操作に必要です |
-| `width` | Number | `"0"` | ピクセル単位の幅 (自動サイズ調整の場合は0) |
+| `width` | Number | `"32"` | ピクセル単位の幅 (自動サイズ調整の場合は0) |
 | `wrap-lines` | Boolean | `"false"` | テキストの行を折り返すかどうか |
 
 </div>
