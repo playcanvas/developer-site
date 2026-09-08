@@ -825,6 +825,7 @@ const sidebars = {
           items: [
             'user-manual/graphics/shaders/preprocessor',
             'user-manual/graphics/shaders/glsl-specifics',
+            'user-manual/graphics/shaders/wgsl-specifics',
             'user-manual/graphics/shaders/wgsl-reflection',
             'user-manual/graphics/shaders/wgsl-capabilities',
             'user-manual/graphics/shaders/wgsl-vertex-fragment-shaders',

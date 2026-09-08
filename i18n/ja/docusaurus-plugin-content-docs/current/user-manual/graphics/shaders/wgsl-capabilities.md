@@ -47,6 +47,24 @@ output.color = vec4f(vec3f(result), 1.0);
 
 :::
 
+### 診断フィルタ {#diagnostic-filters}
+
+任意の WGSL ディレクティブがすべてデバイス依存というわけではありません。診断フィルタは拡張ではなく WGSL のコア機能であるため、`device.supports*` フラグや `CAPS_*` 定義は存在せず、エンジンもこれを一切注入しません。その結果、`derivative_uniformity` ルールは生成されるすべてのシェーダーで既定の深刻度 `error` のままになります。
+
+このルールは、一様な制御フローで実行されることをコンパイラが証明できない `dpdx` / `dpdy` / `fwidth`、`textureSample`、`textureSampleBias`、`textureSampleCompare` の呼び出しを拒否します。モジュールスコープのディレクティブでこれを緩められます。
+
+```wgsl
+diagnostic(off, derivative_uniformity);
+```
+
+:::warning
+
+ブラウザのサポート状況は不均一です。上記のモジュールスコープのディレクティブはどの環境でも解析されますが、`@diagnostic(…)` の属性形式は Safari（関数スコープと文スコープ）および Firefox（文スコープ）でシェーダー作成エラーになるため、出荷するコードでは使用できません。また、現時点でこのルールを実際に強制しているのは Chrome だけです。
+
+:::
+
+抑制された微分は正しい値ではなく不定値を返すため、これは最後の手段です。推奨される修正方法とブラウザのサポート状況の一覧は [微分と一様な制御フロー](/user-manual/graphics/shaders/wgsl-specifics#derivatives-and-uniform-control-flow) を参照してください。
+
 ### WGSL 言語拡張 {#wgsl-language-extensions}
 
 デバイス作成時に、エンジンは `navigator.gpu.wgslLanguageFeatures` を読み取り、任意の言語機能用に必要な `enable …;` および `requires …;` ディレクティブを生成される WGSL に付加します。シェーダー側では、対応する `CAPS_*` 定義（`Shader` 定義の `vertexDefines` / `fragmentDefines` / `cdefines` とマージ）で分岐できます。
