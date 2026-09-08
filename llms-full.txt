@@ -37546,7 +37546,7 @@ The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak`
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -37621,7 +37621,7 @@ document.querySelector('pc-anim').transition('wave');
 * [`<pc-anim>`](../pc-anim) — the component a clip belongs to
 * [`<pc-asset>`](../pc-asset) — the container or animation asset a clip's track comes from
 
-Examples: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html).
+Examples: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html).
 
 --------------------------------------------------------------------------------
 
@@ -37733,7 +37733,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -37825,7 +37825,7 @@ Anything this element does not expose is available on `component` — the engine
 * [`<pc-model>`](../pc-model) — the usual host, whose GLB supplies the animation tracks
 * [`<pc-asset>`](../pc-asset) — supplies clips from a separate GLB or animclip JSON
 
-Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html).
+Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html), [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html).
 
 --------------------------------------------------------------------------------
 
@@ -37849,6 +37849,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | --- | --- | --- | --- |
 | `alpha` | Boolean | `"true"` | Whether the application allocates an alpha channel in the frame buffer, which is what lets the page show through wherever the scene has not drawn |
 | `antialias` | Boolean | `"true"` | Whether the application uses anti-aliasing |
+| `area-light-luts` | [Asset ID](../attributes.md#asset-and-material-ids) | - | ID of a [`<pc-asset>`](../pc-asset) holding the area light lookup tables as JSON. Loading it switches area lights on for the whole application, so [`<pc-light>`](../pc-light) elements with a `rect`, `disk` or `sphere` `shape` render as intended; clearing it switches them off again. Applies immediately — see [Area Lights](../pc-light#area-lights) |
 | `backend` | Enum | `"webgpu"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"`. WebGPU falls back to WebGL 2 in browsers where it is unavailable — set `"webgl2"` to force WebGL 2. `"null"` selects a renderer that draws nothing, and exists for headless testing |
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
@@ -37859,7 +37860,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 :::note[When these are read]
 
-Every attribute above except `max-pixel-ratio` and `loading-bar` is read once, when the element is
+Every attribute above except `max-pixel-ratio`, `loading-bar` and `area-light-luts` is read once, when the element is
 inserted into the document and creates its graphics device. Changing one afterwards updates the
 element's property but has no effect on the running application, and logs a warning saying so — to
 apply a new value, remove the element and re-insert it.
@@ -38083,7 +38084,7 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
 ```html live-example
 <pc-app>
     
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-scene>
@@ -38246,14 +38247,14 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 | `hit-padding` | Vector4 | `"0 0 0 0"` | Expands the button's hit area as `left bottom right top` |
 | `hover-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown on hover (sprite transition mode) |
 | `hover-sprite-frame` | Number | `"0"` | Frame of the hover sprite |
-| `hover-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity on hover (tint transition mode) |
+| `hover-tint` | Color | `"0.75 0.75 0.75 1"` | Tint applied to the image entity on hover (tint transition mode) |
 | `image` | [Entity Reference](../attributes.md#entity-references) | - | The [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](../pc-model) that is the model's host, so name a UI entity explicitly there |
 | `inactive-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown when inactive (sprite transition mode) |
 | `inactive-sprite-frame` | Number | `"0"` | Frame of the inactive sprite |
-| `inactive-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when inactive (tint transition mode) |
+| `inactive-tint` | Color | `"0.25 0.25 0.25 1"` | Tint applied to the image entity when inactive (tint transition mode) |
 | `pressed-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown when pressed (sprite transition mode) |
 | `pressed-sprite-frame` | Number | `"0"` | Frame of the pressed sprite |
-| `pressed-tint` | Color | `"1 1 1 1"` | Tint applied to the image entity when pressed (tint transition mode) |
+| `pressed-tint` | Color | `"0.5 0.5 0.5 1"` | Tint applied to the image entity when pressed (tint transition mode) |
 | `transition-mode` | Enum | `"tint"` | How the button reacts to hover/press: `"tint"` \| `"sprite"` |
 
 </div>
@@ -38360,7 +38361,7 @@ The `<pc-camera>` tag is used to define a camera component.
 | `projection` | Enum | `"perspective"` | Projection of the camera: `"perspective"` \| `"orthographic"`. Use `ortho-height` to size an orthographic projection |
 | `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |
-| `tonemap` | Enum | `"none"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
+| `tonemap` | Enum | `"linear"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
 
 </div>
 
@@ -38537,7 +38538,7 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `anchor` | Vector4 | `"0.5 0.5 0.5 0.5"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
+| `anchor` | Vector4 | `"0 0 0 0"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
 | `auto-fit-height` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's height. Requires `auto-height="false"`. Text elements only |
 | `auto-fit-width` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's width. Requires `auto-width="false"`. Text elements only |
 | `auto-height` | Boolean | `"true"` | Whether to automatically adjust height to fit text content. Text elements only |
@@ -38547,14 +38548,14 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `font-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
 | `font-size` | Number | `"32"` | Font size in pixels |
-| `height` | Number | `"0"` | Height in pixels (0 for auto-sizing) |
+| `height` | Number | `"32"` | Height in pixels (0 for auto-sizing) |
 | `line-height` | Number | `"32"` | Line height in pixels |
 | `margin` | Vector4 | - | Insets the element from a split (stretched) anchor as `left bottom right top`. For point anchors, `width`/`height` govern size instead |
 | `mask` | Boolean | `"false"` | Whether the element clips its descendants to its bounds. Image elements only |
 | `max-font-size` | Number | `"32"` | Largest font size used when auto-fitting |
 | `min-font-size` | Number | `"8"` | Smallest font size used when auto-fitting |
 | `opacity` | Number | `"1"` | Opacity, from 0 (transparent) to 1 (opaque) |
-| `pivot` | Vector2 | `"0.5 0.5"` | Pivot point as "X Y" values |
+| `pivot` | Vector2 | `"0 0"` | Pivot point as "X Y" values |
 | `pixels-per-unit` | Number | - | Pixels per unit used when rendering a sprite. Image elements only |
 | `sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `sprite-frame` | Number | `"0"` | Frame index of the sprite to render. Image elements only |
@@ -38562,7 +38563,7 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `texture-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Texture [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `type` | Enum | `"group"` | Element type: `"group"` \| `"image"` \| `"text"` |
 | `use-input` | Boolean | `"false"` | Whether the element receives pointer input. Required for [`<pc-button>`](../pc-button) and scroll-view interaction |
-| `width` | Number | `"0"` | Width in pixels (0 for auto-sizing) |
+| `width` | Number | `"32"` | Width in pixels (0 for auto-sizing) |
 | `wrap-lines` | Boolean | `"false"` | Whether to wrap text lines |
 
 </div>
@@ -38784,7 +38785,7 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">
@@ -39118,7 +39119,7 @@ The `<pc-layout-group>` tag is used to define a layout group component, which au
 | `orientation` | Enum | `"horizontal"` | Orientation of the layout: `"horizontal"` \| `"vertical"` |
 | `padding` | Vector4 | `"0 0 0 0"` | Padding around the group as `left bottom right top` |
 | `reverse-x` | Boolean | `"false"` | Reverse the order of children along the horizontal axis |
-| `reverse-y` | Boolean | `"false"` | Reverse the order of children along the vertical axis |
+| `reverse-y` | Boolean | `"true"` | Reverse the order of children along the vertical axis |
 | `spacing` | Vector2 | `"0 0"` | Spacing between children as `x y` |
 | `width-fitting` | Enum | `"none"` | Fitting along the horizontal axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
 | `wrap` | Boolean | `"false"` | Whether children wrap onto a new line or column when they overflow the group |
@@ -39127,7 +39128,7 @@ The `<pc-layout-group>` tag is used to define a layout group component, which au
 
 ## Example
 
-A vertical list that lays out its rows automatically. Try `orientation="horizontal"`, a bigger `spacing`, or `reverse-y` — or add another row and watch it slot in:
+A vertical list that lays out its rows automatically, first row at the top. Try `orientation="horizontal"`, a bigger `spacing`, or `reverse-y="false"` to stack them upwards instead — or add another row and watch it slot in:
 
 ```html live-example
 <pc-app>
@@ -39211,6 +39212,7 @@ The `<pc-light>` tag is used to define a light component.
 | `shadow-resolution` | Number | `"1024"` | Shadow map resolution |
 | `shadow-samples` | Number | `"16"` | Number of PCSS shadow samples |
 | `shadow-type` | Enum | `"pcf3-32f"` | Shadow filtering: `"pcf1-16f"` \| `"pcf1-32f"` \| `"pcf3-16f"` \| `"pcf3-32f"` \| `"pcf5-16f"` \| `"pcf5-32f"` \| `"vsm-16f"` \| `"vsm-32f"` \| `"pcss-32f"` |
+| `shape` | Enum | `"punctual"` | Light source shape: `"punctual"` \| `"rect"` \| `"disk"` \| `"sphere"`. The area shapes apply to `omni` and `spot` lights, take their size from the entity's scale, and need the lookup tables loaded by `area-light-luts` on [`<pc-app>`](../pc-app) — see [Area Lights](#area-lights) |
 | `type` | Enum | `"directional"` | Light type: `"directional"` \| `"omni"` \| `"spot"` |
 | `vsm-bias` | Number | `"0.0025"` | Variance shadow map bias |
 | `vsm-blur-size` | Number | `"11"` | Variance shadow map blur size (1-25) |
@@ -39245,6 +39247,30 @@ The three attributes do distinct jobs, and only `num-cascades` above 1 brings th
 `shadow-distance` still bounds the whole thing — it is the range the cascades divide up, so raising the cascade count without raising the distance just subdivides the same near-field. `shadow-resolution` is per cascade, not a shared budget.
 
 The [Shadow Cascades example](https://playcanvas.github.io/web-components/examples/shadow-cascades.html) drives all three over a desert causeway long enough to need them, and plots the split distances the renderer derives — worth a look, because the engine has no cascade debug view and the distribution slider otherwise appears to do nothing.
+
+## Area Lights
+
+A punctual light is an infinitesimal point. Real fixtures have size, and that size is what softens their highlights and shadows. `shape` gives an `omni` or `spot` light one of three areas — `rect`, `disk` or `sphere` — sized by the entity's scale: at unit scale a `rect` is a 1 by 1 rectangle in the entity's local XZ plane, a `disk` is 1 across in the same plane, and a `sphere` is 1 across. Area shapes fall off with their own size and distance, so for them `range` is only a cutoff, not the falloff itself.
+
+Area lights need lookup tables the engine does not ship — the linearly transformed cosine tables from Heitz, Dupuy, Hill and Neubelt (SIGGRAPH 2016). `area-light-luts` on [`<pc-app>`](../pc-app) names a [`<pc-asset>`](../pc-asset) holding them as JSON (`LTC_MAT_1` and `LTC_MAT_2`, 16,384 numbers each — the format of the engine examples' `area-light-luts.json`), and loading that asset is what switches area lights on for the whole application:
+
+```html
+<pc-app area-light-luts="luts">
+    <pc-asset id="luts" src="https://playcanvas.github.io/web-components/examples/assets/json/area-light-luts.json"></pc-asset>
+    <pc-scene>
+        
+        <pc-entity name="panel" position="0 3 0" scale="2 1 1">
+            <pc-light type="spot" shape="rect" intensity="8" range="12" outer-cone-angle="88"></pc-light>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+One attribute drives both halves of the feature. Loading a valid table applies it and enables area lights; clearing the attribute switches them off again (tables already handed to the engine stay in place). An id that resolves to no asset switches them off with a warning, and a file that is not a lookup table is refused with a warning — because without real tables the engine's placeholder makes `disk` lights emit nothing and strips specular from every shape. Unlike the other [`<pc-app>`](../pc-app) attributes this one applies immediately, and set before boot it loads along with the other assets. A device that cannot render area lights ignores the switch, and its `omni` and `spot` area lights stay punctual.
+
+The tables come from the engine repository's `examples/assets/json/area-light-luts.json` (MIT licensed). The Web Components example gallery serves a copy at the URL above — about 300 KB, fine for trying things out, but host your own for production.
+
+The [Area Lights example](https://playcanvas.github.io/web-components/examples/area-lights.html) builds ceiling panels from `rect` spots and lantern bulbs from `sphere` omnis, which is the quickest way to see how `intensity` and `range` interact with a shape's size.
 
 ## Example
 
@@ -39290,7 +39316,7 @@ The `component` property is the engine [LightComponent](https://api.playcanvas.c
 * [`<pc-sky>`](../pc-sky) — image-based lighting to fill in what direct lights miss
 * [`<pc-render>`](../pc-render) — `cast-shadows` and `receive-shadows` on what the light hits
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html) and [Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html).
 
 --------------------------------------------------------------------------------
 
@@ -39549,7 +39575,7 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](../pc-anim) nested 
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -39766,7 +39792,7 @@ This GLB instantiates two nodes — `play` (the orange shell, its logo cut out o
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
@@ -40454,13 +40480,13 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 | `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
 | `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
 | `horizontal-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
-| `horizontal-scrollbar-visibility` | Enum | `"when-required"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
+| `horizontal-scrollbar-visibility` | Enum | `"always"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
 | `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
 | `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
 | `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
 | `vertical-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
-| `vertical-scrollbar-visibility` | Enum | `"when-required"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
+| `vertical-scrollbar-visibility` | Enum | `"always"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
 | `viewport` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
 
 </div>
@@ -40558,7 +40584,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `handle` | [Entity Reference](../attributes.md#entity-references) | - | The [`<pc-entity>`](../pc-entity) used as the draggable handle |
-| `handle-size` | Number | `"0.5"` | Size of the handle relative to the size of the track (0 to 1) |
+| `handle-size` | Number | `"0"` | Size of the handle relative to the size of the track (0 to 1) |
 | `orientation` | Enum | `"horizontal"` | Orientation of the scrollbar: `"horizontal"` \| `"vertical"` |
 | `value` | Number | `"0"` | Current position of the scrollbar (0 to 1) |
 
@@ -40643,7 +40669,7 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
@@ -40718,7 +40744,7 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="jukebox">
-            <pc-sound>
+            <pc-sound positional="false">
                 <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
                 <pc-sound-slot name="drop-slow" asset="drop" pitch="0.5" volume="0.8"></pc-sound-slot>
             </pc-sound>
@@ -40786,7 +40812,7 @@ The `<pc-sound>` tag is used to define a sound component.
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `max-distance` | Number | `"10000"` | Maximum distance for audio falloff |
 | `pitch` | Number | `"1"` | Pitch multiplier for all sounds in this component |
-| `positional` | Boolean | `"false"` | Whether the sound is positional (3D spatial audio) |
+| `positional` | Boolean | `"true"` | Whether the sound is positional (3D spatial audio) |
 | `ref-distance` | Number | `"1"` | Reference distance for full volume |
 | `roll-off-factor` | Number | `"1"` | Falloff rate factor for distance attenuation |
 | `volume` | Number | `"1"` | Master volume for all sounds in this component |
@@ -40806,7 +40832,7 @@ One sound component holding two slots — looping footsteps and a one-shot. The 
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
         <pc-entity name="speaker">
-            <pc-sound volume="1" pitch="1">
+            <pc-sound volume="1" pitch="1" positional="false">
                 <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
                 <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
             </pc-sound>
