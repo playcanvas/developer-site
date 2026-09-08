@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.21.3
-Total Documents: 503
+Total Documents: 504
 Generated: 2026-09-08
 
 ## Instructions for Large Language Models
@@ -596,6 +596,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Shader Preprocessor](https://developer.playcanvas.com/user-manual/graphics/shaders/preprocessor/): C-style defines, includes, and ifdef chains applied to GLSL, WGSL, and compute shaders before compilation.
 - [WGSL Capabilities](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-capabilities/): Optional, device-gated WGSL features in PlayCanvas: half-precision types and WGSL language extensions, with their CAPS_* defines.
 - [WGSL Reflection](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-reflection/): Simplified WGSL declarations without manual bind groups: how PlayCanvas reflects resources from shader source and assigns bindings.
+- [WGSL Specifics](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-specifics/): WGSL language rules that affect PlayCanvas shaders: derivatives and uniform control flow, and the derivative_uniformity diagnostic.
 - [WGSL Vertex and Fragment Shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-vertex-fragment-shaders/): Vertex and fragment specific WGSL constructs in PlayCanvas: attributes, varyings, and fragment outputs.
 - [Transparency](https://developer.playcanvas.com/user-manual/graphics/transparency/): Compare the ways PlayCanvas renders transparent surfaces: alpha blending, alpha test, opacity dithering and alpha to coverage, and when to use each.
 - [Wide Lines](https://developer.playcanvas.com/user-manual/graphics/wide-lines/): Render thick lines with caps, joins, dashes and gradients using WideLineRenderer, for paths, annotations and other line geometry that is part of your scene.
