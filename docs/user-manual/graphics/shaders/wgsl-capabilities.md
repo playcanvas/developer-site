@@ -47,6 +47,24 @@ When `device.supportsShaderF16` is true, the engine automatically adds the `enab
 
 :::
 
+### Diagnostic Filters {#diagnostic-filters}
+
+Not every optional WGSL directive is device-gated. Diagnostic filters are core WGSL rather than an extension, so there is no `device.supports*` flag or `CAPS_*` define for them, and the engine injects none of them - which leaves the `derivative_uniformity` rule at its default severity of `error` in every generated shader.
+
+That rule rejects `dpdx` / `dpdy` / `fwidth`, `textureSample`, `textureSampleBias` and `textureSampleCompare` calls that the compiler cannot prove run in uniform control flow. A module-scope directive relaxes it:
+
+```wgsl
+diagnostic(off, derivative_uniformity);
+```
+
+:::warning
+
+Browser support is uneven. The module-scope directive above parses everywhere, but the `@diagnostic(…)` attribute form is a shader-creation error on Safari (function and statement scope) and on Firefox (statement scope), so it is not safe to ship. Chrome is also currently the only implementation that enforces the rule at all.
+
+:::
+
+Because a suppressed derivative returns an indeterminate value rather than a correct one, this is a last resort. See [Derivatives and Uniform Control Flow](/user-manual/graphics/shaders/wgsl-specifics#derivatives-and-uniform-control-flow) for the preferred fixes and the full browser support matrix.
+
 ### WGSL language extensions {#wgsl-language-extensions}
 
 At device creation, the engine reads `navigator.gpu.wgslLanguageFeatures` and adds the necessary `enable …;` and `requires …;` directives to generated WGSL so shaders can use optional language features. Your shader source can branch on the matching `CAPS_*` defines (merged with your own `vertexDefines`, `fragmentDefines`, and `cdefines` on the `Shader` definition, where applicable).
