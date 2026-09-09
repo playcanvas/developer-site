@@ -10,8 +10,8 @@ MRTは、PlayCanvasが動作するすべてのデバイス（WebGL2およびWebG
 複数のレンダーターゲットには、以下の制限があります。
 
 - 複数のレンダーターゲットのすべてのカラーアタッチメントは、同じ幅と高さを持ちます。
-- カラーアタッチメントは、[`CameraComponent.setClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setclearcolor)で個別のクリアカラーが指定されていない限り、[`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor)にクリアされます。詳細は後述の[クリアカラー](#クリアカラー)を参照してください。
-- すべてのカラーアタッチメントは、[`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html)を使用して指定された同じ書き込みマスクとアルファブレンドモードを使用します。ただし、デバイスが[`GraphicsDevice.supportsIndependentBlending`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindependentblending)を報告する場合は、[`BlendState.setAttachment`](https://api.playcanvas.com/engine/classes/BlendState.html#setattachment)でアタッチメントごとに個別の設定ができます。
+- すべてのカラーアタッチメントは、[`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor)を使用して指定された同じ値にクリアされます。
+- すべてのカラーアタッチメントは、[`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html)を使用して指定された同じ書き込みマスクとアルファブレンドモードを使用します。
 - [デュアルソースブレンディング](/user-manual/graphics/advanced-rendering/dual-source-blending)にはカラーアタッチメントが 1 つだけ必要なため、MRT と組み合わせることはできません。
 
 ## MRTの使用方法
@@ -62,21 +62,6 @@ app.root.addChild(entity);
 entity.camera.setShaderPass('MyMRT');
 ```
 
-### クリアカラー
-
-カメラのレンダリング開始時に、すべてのカラーアタッチメントはカメラの[`clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor)にクリアされます。アタッチメントに異なる種類のデータを格納する場合は、[`CameraComponent.setClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setclearcolor)にカラーアタッチメントのインデックスを渡して、それぞれに個別のクリアカラーを指定します。整数フォーマットのアタッチメントでは、カラーの各成分がクリアする整数値になります。
-
-```javascript
-// アタッチメント0は引き続きentity.camera.clearColorにクリアされます
-// 法線アタッチメントを中立な法線に、グロスアタッチメントを黒にクリアします
-entity.camera.setClearColor(1, new pc.Color(0.5, 0.5, 1, 1));
-entity.camera.setClearColor(2, new pc.Color(0, 0, 0, 1));
-```
-
-`null`を渡すとアタッチメントのクリアカラーが削除され、再び`clearColor`にクリアされます。アタッチメントがクリアされる色は[`CameraComponent.getClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#getclearcolor)で取得できます。
-
-アタッチメントごとのクリアカラーは、カメラのレンダリング開始時のクリアに適用されます。レンダリング中に行われるクリア — `clearColorBuffer`を有効にした[`Layer`](https://api.playcanvas.com/engine/classes/Layer.html)によるものや、`rect`がレンダーターゲット全体を覆わないカメラによるもの — はアタッチメントごとのカラーをサポートしないため、複数のレンダーターゲットでは避けるのが最善です。
-
 ### 標準マテリアル
 
 [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html)を使用して複数のレンダーターゲット (MRT) にレンダリングする場合、追加のカラーバッファに値を出力するために`outputPS`シェーダーチャンクをオーバーライドします。プロジェクトが対象とするシェーダー言語ごとにチャンクを用意してください — WebGL2にはGLSL、WebGPUにはWGSLです。[`Material.getShaderChunks`](https://api.playcanvas.com/engine/classes/Material.html#getshaderchunks)を使って、両方のチャンクを対象エンティティのレンダーコンポーネントのすべてのマテリアルに適用します。
@@ -126,6 +111,6 @@ renders.forEach((render) => {
 
 ## 例
 
-完全に動作するサンプルがエンジンの例にあります: Multiple Render Targets は、カスタムシェーダーパスを通してチェス盤をレンダリングし、ワールド法線とグロスをそれぞれ個別のクリアカラーを持つ追加のカラーターゲットに書き込んで、それぞれを画面上に別々のテクスチャとして表示します。
+完全に動作するサンプルがエンジンの例にあります: Multiple Render Targets は、カスタムシェーダーパスを通してチェス盤をレンダリングし、ワールド法線とグロスを追加のカラーターゲットに書き込んで、それぞれを画面上に別々のテクスチャとして表示します。
 
 <EngineExample id="graphics/multi-render-targets" title="Multiple Render Targets" />
