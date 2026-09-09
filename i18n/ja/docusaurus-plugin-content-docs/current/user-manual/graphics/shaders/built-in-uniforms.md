@@ -22,7 +22,7 @@ PlayCanvas は、フォワードパスでメッシュを描画するときに、
 | `matrix_projection` | `mat4` | `mat4x4f` | ビュー空間の位置をクリップ空間に変換します。ジッター、レンダーターゲットの Y 反転、グラフィックスバックエンドの深度規約など、レンダラーによる射影の調整を含みます。 |
 | `matrix_viewProjection` | `mat4` | `mat4x4f` | `matrix_projection * matrix_view`。ワールド空間の位置をクリップ空間に変換します。 |
 | `view_position` | `vec3` | `vec3f` | ワールド空間のカメラ位置。XR では現在描画している目の位置です。 |
-| `screen_size` | `vec4` | `vec4f` | キャンバスの描画バッファの幅、高さ、幅の逆数、高さの逆数。CSS サイズではなくピクセル単位です。Engine 2.23 以降で利用できます。 |
+| `screen_size` | `vec4` | `vec4f` | キャンバスの描画バッファの幅、高さ、幅の逆数、高さの逆数。CSS サイズではなくピクセル単位です。 |
 | `viewport_size` | `vec4` | `vec4f` | カメラのビューポートの幅、高さ、幅の逆数、高さの逆数（ピクセル単位）。レンダーターゲット、`camera.rect`、XR の各目のビューポートを考慮します。ビューポートの原点は含みません。 |
 | `view_index` | `uint` | `u32` | 現在描画している XR ビューの 0 始まりのインデックス。深度テクスチャ配列のレイヤーなど、ビューごとのデータを選択するために使用します。 |
 | `exposure` | `float` | `f32` | `scene.physicalUnits` が有効な場合はカメラの露出、それ以外は `scene.exposure`。エンジンのトーンマッピングチャンクを使用する場合は、露出を二重に適用しないよう、チャンクに処理を任せてください。 |
@@ -72,20 +72,3 @@ fn directionToView(worldDirection: vec3f) -> vec3f {
 1920×1080 のキャンバスで、カメラが 960×540 のターゲット全体に描画する場合、`screen_size.xy` は `(1920, 1080)`、`viewport_size.xy` は `(960, 540)` です。カメラがターゲットの幅の半分を占める場合、`viewport_size.xy` は `(480, 540)` になります。
 
 `screen_size` を任意のテクスチャサイズを取得するために使用しないでください。部分的なビューポートのフレームバッファ座標を正規化するには、ビューポートの原点も考慮する必要があります。どちらのサイズユニフォームも原点は提供しません。
-
-## 環境シェーディング
-
-カスタムの環境シェーディングでは、エンジンの `envProcPS` と `cubeMapRotatePS` チャンクを再利用できます。対応するユニフォームは `skyboxIntensity` (`float` / `f32`) と `cubeMapRotationMatrix` (`mat3` / `mat3x3f`) です。`skyboxIntensity` は、物理ライティングが有効な場合は `scene.skyboxLuminance`、それ以外は `scene.skyboxIntensity` の値を持ちます。`cubeMapRotationMatrix` はシーンのスカイボックスの回転を保持します。エンジンの環境マップの方向規約に従うため、回転ヘルパーを使用してください。
-
-## uScreenSize からの移行
-
-Engine 2.23 では `screen_size` が推奨名になります。宣言とすべての参照を更新してください。
-
-| 言語 | 変更前 | 変更後 |
-| --- | --- | --- |
-| GLSL 宣言 | `uniform vec4 uScreenSize;` | `uniform vec4 screen_size;` |
-| GLSL アクセス | `uScreenSize.zw` | `screen_size.zw` |
-| WGSL 宣言 | `uniform uScreenSize: vec4f;` | `uniform screen_size: vec4f;` |
-| WGSL アクセス | `uniform.uScreenSize.zw` | `uniform.screen_size.zw` |
-
-`uScreenSize` を明示的に宣言する既存のシェーダーには、引き続き同じキャンバスサイズが渡されます。デバッグビルドでは、古い宣言を検出すると非推奨の警告が一度表示されます。`material.shaderChunksVersion` を変更してもこの警告は消えません。ユニフォーム名を変更して移行してください。

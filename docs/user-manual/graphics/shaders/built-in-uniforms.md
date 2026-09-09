@@ -22,7 +22,7 @@ The uniforms can be read in vertex and fragment shaders. Declare the names you u
 | `matrix_projection` | `mat4` | `mat4x4f` | Transforms view-space positions to clip space. Includes the renderer's projection adjustments, such as jitter, render-target Y flip, and the graphics backend's depth convention. |
 | `matrix_viewProjection` | `mat4` | `mat4x4f` | `matrix_projection * matrix_view`; transforms world-space positions to clip space. |
 | `view_position` | `vec3` | `vec3f` | Camera position in world space; the current eye's position in XR. |
-| `screen_size` | `vec4` | `vec4f` | Canvas drawing-buffer width, height, inverse width, and inverse height. These are pixel dimensions, not CSS dimensions. Available since Engine 2.23. |
+| `screen_size` | `vec4` | `vec4f` | Canvas drawing-buffer width, height, inverse width, and inverse height. These are pixel dimensions, not CSS dimensions. |
 | `viewport_size` | `vec4` | `vec4f` | Camera viewport width, height, inverse width, and inverse height in pixels. Accounts for the render target, `camera.rect`, and the XR eye viewport. Contains no viewport origin. |
 | `view_index` | `uint` | `u32` | Zero-based index of the XR view currently being rendered. Use it to select per-view data such as a depth texture array layer. |
 | `exposure` | `float` | `f32` | Camera exposure when `scene.physicalUnits` is enabled; otherwise `scene.exposure`. When using the engine's tone-mapping chunks, let those chunks apply exposure to avoid applying it twice. |
@@ -72,20 +72,3 @@ Both size uniforms use the layout `[width, height, 1 / width, 1 / height]`, but 
 For a 1920×1080 canvas with a camera rendering into a 960×540 target, `screen_size.xy` is `(1920, 1080)` and `viewport_size.xy` is `(960, 540)` when the camera fills the target. If the camera occupies half the target's width, `viewport_size.xy` is `(480, 540)`.
 
 Do not use `screen_size` as a general texture-size uniform. To normalize framebuffer coordinates for a partial viewport, also account for the viewport origin; neither size uniform supplies that origin.
-
-## Environment Shading
-
-Custom environment shading can reuse the engine chunks `envProcPS` and `cubeMapRotatePS`. Their corresponding uniforms are `skyboxIntensity` (`float` / `f32`) and `cubeMapRotationMatrix` (`mat3` / `mat3x3f`). `skyboxIntensity` contains `scene.skyboxLuminance` when physical lighting is enabled, or `scene.skyboxIntensity` otherwise. `cubeMapRotationMatrix` carries the scene's skybox rotation; use the rotation helper to follow the engine's environment-map direction convention.
-
-## Migrating from uScreenSize
-
-Engine 2.23 introduces `screen_size` as the preferred name. Update both the declaration and every reference:
-
-| Language | Before | After |
-| --- | --- | --- |
-| GLSL declaration | `uniform vec4 uScreenSize;` | `uniform vec4 screen_size;` |
-| GLSL access | `uScreenSize.zw` | `screen_size.zw` |
-| WGSL declaration | `uniform uScreenSize: vec4f;` | `uniform screen_size: vec4f;` |
-| WGSL access | `uniform.uScreenSize.zw` | `uniform.screen_size.zw` |
-
-Existing shaders that explicitly declare `uScreenSize` continue receiving the same canvas dimensions. Debug builds emit a deprecation warning once when they encounter the old declaration. Changing `material.shaderChunksVersion` does not silence this warning; rename the uniform to migrate.
