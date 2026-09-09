@@ -1,22 +1,22 @@
 ---
-title: Varying Streams
-description: "Pass per-splat data from the gsplat vertex stage to the fragment stage using custom varying streams: API, generated set/get functions, and a live clipping example."
+title: Varying ストリーム
+description: "カスタム Varying ストリームで gsplat の頂点ステージからフラグメントステージにスプラットごとのデータを渡す方法。API、自動生成される set/get 関数、クリッピングのライブサンプル。"
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Varying streams pass custom per-splat data from the [vertex stage](/user-manual/gaussian-splatting/building/custom-shaders/vertex) to the [fragment stage](/user-manual/gaussian-splatting/building/custom-shaders/fragment). A value is computed **once per splat** in the `gsplatModifyVS` chunk and read by every fragment of that splat in the `gsplatModifyPS` chunk.
+Varying ストリームは、スプラットごとのカスタムデータを[頂点ステージ](/user-manual/gaussian-splatting/building/custom-shaders/vertex)から[フラグメントステージ](/user-manual/gaussian-splatting/building/custom-shaders/fragment)へ渡します。`gsplatModifyVS` チャンクで**スプラットごとに一度**値を計算し、`gsplatModifyPS` チャンクでそのスプラットの各フラグメントが読み取ります。
 
-The typical use is classification: decide something about a splat once, then let the fragment stage pay per-pixel cost only where needed.
+主な用途は分類です。スプラットについて一度判定し、必要な場合にだけフラグメントステージでピクセル単位の処理を行います。
 
-**View Live Example** - Splats clipped by an animated box, with per-pixel clipping only on splats intersecting the box surface.
+**ライブサンプルを見る** - アニメーションするボックスでスプラットをクリップし、ボックスの表面と交差するスプラットだけにピクセル単位のクリッピングを適用します。
 
-<EngineExample id="gaussian-splatting/clipping" title="View Live Example" />
+<EngineExample id="gaussian-splatting/clipping" title="ライブサンプルを見る" />
 
-## Adding Streams
+## ストリームの追加
 
-Streams are managed via [`app.scene.gsplat.varyings`](https://api.playcanvas.com/engine/classes/GSplatParams.html#varyings):
+ストリームは [`app.scene.gsplat.varyings`](https://api.playcanvas.com/engine/classes/GSplatParams.html#varyings) で管理します。
 
 ```javascript
 app.scene.gsplat.varyings.add([
@@ -27,22 +27,22 @@ app.scene.gsplat.varyings.add([
 app.scene.gsplat.varyings.remove(['clipState']);
 ```
 
-Supported types are `TYPE_FLOAT32`, `TYPE_INT32` and `TYPE_UINT32`, with 1 to 4 components.
+対応する型は `TYPE_FLOAT32`、`TYPE_INT32`、`TYPE_UINT32` で、成分数は 1〜4 です。
 
-For each stream, two functions are generated and made available to your shader chunks:
+各ストリームに対して 2 つの関数が生成され、シェーダーチャンクで使用できるようになります。
 
-| Function | Available in | Purpose |
+| 関数 | 使用可能なチャンク | 用途 |
 | --- | --- | --- |
-| `set<Name>(value)` | `gsplatModifyVS` | Write the per-splat value (runs once per splat) |
-| `get<Name>()` | `gsplatModifyPS` | Read the per-splat value for the current fragment |
+| `set<Name>(value)` | `gsplatModifyVS` | スプラットごとの値を書き込む（スプラットごとに一度実行） |
+| `get<Name>()` | `gsplatModifyPS` | 現在のフラグメントに対応するスプラットの値を読み取る |
 
-Adding or removing streams rebuilds the gsplat shaders, so configure them at startup rather than toggling them at runtime.
+ストリームを追加または削除すると gsplat シェーダーが再構築されるため、実行中に切り替えるのではなく、起動時に設定してください。
 
-## Example
+## 使用例
 
-The live example above clips splats by an animated world-space box. The vertex stage classifies each splat against the box once per splat: splats fully inside are clipped entirely, splats fully outside set a flag so their fragments skip all work, and only splats intersecting the box surface run the per-pixel test.
+上のライブサンプルでは、ワールド空間でアニメーションするボックスによってスプラットをクリップします。頂点ステージで各スプラットとボックスの位置関係を一度判定します。完全に内側にあるスプラットは全体をクリップし、完全に外側にあるスプラットはフラグメント処理を省略するフラグを設定します。ボックスの表面と交差するスプラットだけでピクセル単位の判定を行います。
 
-**1. Write the per-splat value in the vertex stage chunk:**
+**1. 頂点ステージのチャンクでスプラットごとの値を書き込みます。**
 
 <Tabs groupId="shader-language" queryString="lang">
 <TabItem value="glsl" label="GLSL">
@@ -117,9 +117,9 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 </TabItem>
 </Tabs>
 
-**2. Read it in the fragment stage chunk** and early-out before the expensive per-pixel work:
+**2. フラグメントステージのチャンクで値を読み取り**、負荷の高いピクセル単位の処理の前に早期リターンします。
 
-This example assumes rendering fills the canvas drawing buffer. The built-in [`screen_size`](/user-manual/graphics/shaders/built-in-uniforms) supplies its dimensions; adapt the coordinate normalization for other render targets or partial viewports.
+この例は、キャンバスの描画バッファ全体に描画することを前提としています。組み込みの [`screen_size`](/user-manual/graphics/shaders/built-in-uniforms) がそのサイズを提供します。別のレンダーターゲットや部分的なビューポートを使用する場合は、座標の正規化を調整してください。
 
 <Tabs groupId="shader-language" queryString="lang">
 <TabItem value="glsl" label="GLSL">
@@ -179,13 +179,13 @@ fn modifySplatColor(gaussianUV: vec2f, color: ptr<function, vec4f>) {
 </TabItem>
 </Tabs>
 
-Both chunks are applied to the scene gsplat material as usual, using the `gsplatModifyVS` and `gsplatModifyPS` keys.
+両方のチャンクを、通常どおり `gsplatModifyVS` と `gsplatModifyPS` キーを使ってシーンの gsplat マテリアルに適用します。
 
-## Memory Considerations
+## メモリに関する考慮事項
 
-On some platforms each component is stored in per-splat video memory, so its size scales with the number of rendered splats. Keep the data as compact as possible - prefer fewer components, and consider bit-packing multiple small values into a single uint component instead of using separate streams.
+一部のプラットフォームでは、各成分がスプラットごとにビデオメモリに保存されるため、描画するスプラット数に比例してメモリ使用量が増加します。成分数を減らし、複数の小さな値を個別のストリームではなく 1 つの uint 成分にビットパックするなど、データをできるだけコンパクトにしてください。
 
-## See Also
+## 関連項目
 
-- [Vertex Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/vertex) — where the values are written
-- [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — where the values are read
+- [頂点ステージのカスタマイズ](/user-manual/gaussian-splatting/building/custom-shaders/vertex) — 値を書き込む場所
+- [フラグメントステージのカスタマイズ](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — 値を読み取る場所

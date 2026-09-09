@@ -823,6 +823,7 @@ const sidebars = {
             id: 'user-manual/graphics/shaders/index',
           },
           items: [
+            'user-manual/graphics/shaders/built-in-uniforms',
             'user-manual/graphics/shaders/preprocessor',
             'user-manual/graphics/shaders/glsl-specifics',
             'user-manual/graphics/shaders/wgsl-specifics',
