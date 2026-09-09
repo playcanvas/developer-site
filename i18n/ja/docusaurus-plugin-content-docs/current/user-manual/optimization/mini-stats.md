@@ -155,13 +155,41 @@ if (app.stats.primitiveCount !== undefined) {
 }
 ```
 
-アプリケーション独自のカウンターオブジェクトを`app.stats.custom = { activeEnemies: 0 }`のように追加し、`custom.activeEnemies`のようなパスを設定することもできます。そのオブジェクトは一度だけ作成し、ゲームの状態が変わったときに数値フィールドを更新してください。これはアプリケーションが所有するデータです。エンジンの読み取り専用getterを上書きしないでください。
-
 `miniStats.enabled = false`でオーバーレイを非表示にしてカウンターのサンプリングを停止するか、`miniStats.destroy()`でリソースを解放します。GPUプロファイリングはデバイス側の設定であり、オーバーレイを非表示または破棄しても無効にはなりません。他にGPU時間を必要とするものがなければ、プロファイラーが存在することを確認したうえで、`app.graphicsDevice.gpuProfiler.enabled = false`で別途無効にしてください。
 
 MiniStatsはオーバーレイをメッシュにまとめ、テキストアトラスを再利用します。履歴はグラフを表示するビューでのみ収集します。オーバーヘッドを低く抑える設計ですが、描画とGPUクエリにはコストがあります。変更前後を比較するときは、同じ計測機能を有効にしてください。
 
 すべてのオプションとライフサイクルメソッドについては、[MiniStats APIリファレンス](https://api.playcanvas.com/engine/classes/MiniStats.html)を参照してください。
+
+## ユーザーカウンター {#user-counters}
+
+Engine 2.23 以降では、[`app.stats.user`](https://api.playcanvas.com/engine/classes/AppStats.html#user) がアプリケーション独自のカウンターを格納する `Map<string, number>` を提供します。キューの長さや手動で計測した CPU 処理時間などを保存できます。ゲッターは常に同じ Map を返し、`set`、`get`、`delete`、`clear` でエントリーを管理できます。ユーザーカウンターはすべてのエンジンビルドで利用できます。
+
+MiniStats を作成する前に、オプションにグラフを追加してください。`user.wave` というパスは、Map 内の `wave` というエントリーを参照します。ドットはパスの区切り文字なので、カウンター名には使用しないでください。次の例では、0 から 20 の間で変化する値を表示します。
+
+```javascript
+import { MiniStats } from 'playcanvas';
+
+app.stats.user.set('wave', 10);
+
+const options = MiniStats.getDefaultOptions();
+options.startSizeIndex = 2; // グラフ履歴を表示した状態で開始
+options.stats.push({
+    name: 'Wave',
+    stats: ['user.wave'],
+    decimalPlaces: 1,
+    watermark: 20
+});
+const miniStats = new MiniStats(app, options);
+
+let time = 0;
+app.on('update', (dt) => {
+    time += dt;
+    app.stats.user.set('wave', 10 + 10 * Math.sin(time));
+});
+```
+
+エンジンはユーザーカウンターをリセットしません。フレームごとの合計を計測する場合は、エントリーを初期化し、値を加算する前に `frameupdate` でリセットしてください。同期処理の時間を計測するには、2 回の `performance.now()` の差を使用し、グラフに `unitsName: 'ms'` を設定します。単位はアプリケーション側で定義します。MiniStats は単位を推測せず、Map に新しいエントリーを追加してもグラフを自動追加しません。
 
 ## サンプル {#example}
 

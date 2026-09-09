@@ -3,7 +3,7 @@ title: AppStatsによるプロファイリング
 description: app.statsからフレーム、CPU、GPU、ドローコール、プリミティブ、GPUメモリの統計を取得し、プロファイリングスクリプト、レポート、自動比較に活用します。
 ---
 
-[`AppStats`](https://api.playcanvas.com/engine/classes/AppStats.html)は、[`app.stats`](https://api.playcanvas.com/engine/classes/AppBase.html#stats)を通じて読み取り専用のパフォーマンス測定値を公開します。オーバーレイを描画せずに、プロファイリングスクリプト、カスタムダッシュボード、自動比較に使用できます。[MiniStats](/user-manual/optimization/mini-stats/)は、アプリケーションの統計と独自のCPUタイマーを視覚的に表示します。
+[`AppStats`](https://api.playcanvas.com/engine/classes/AppStats.html)は、[`app.stats`](https://api.playcanvas.com/engine/classes/AppBase.html#stats)を通じて読み取り専用のエンジン測定値と、書き込み可能なユーザーカウンターを公開します。オーバーレイを描画せずに、プロファイリングスクリプト、カスタムダッシュボード、自動比較に使用できます。[MiniStats](/user-manual/optimization/mini-stats/)は、アプリケーションの統計と独自のCPUタイマーを視覚的に表示します。
 
 ここで説明する公開getterには、**Engine 2.23以降**が必要です。`Application`と`AppBase`の両方で使用できます。アプリケーションがstatsインスタンスを作成し、アクセスするたびに同じオブジェクトを返します。自分で作成したり置き換えたりする必要はありません。
 
@@ -21,6 +21,20 @@ const textureMiB = stats.vramTextureBytes / (1024 * 1024);
 時間の単位は**ミリ秒**、メモリサイズの単位は**バイト**です。getterは取得可能な最新の値を返し、MiniStatsの0.5秒平均ではありません。例外は`fps`で、直近のおよそ1秒間の報告区間におけるフレーム数を返します。
 
 statsを読み取るだけでは、GPUプロファイリングは有効にならず、スナップショットオブジェクトの確保や描画も行われません。CPU時間とカウンターの初期値はゼロ、GPU時間の初期値は`undefined`です。
+
+## ユーザーカウンター {#user-counters}
+
+[`app.stats.user`](https://api.playcanvas.com/engine/classes/AppStats.html#user)は、アプリケーションが管理する`Map<string, number>`を返します。エンジンの測定値とともに独自の値を公開できます。
+
+```javascript
+app.stats.user.set('activeEnemies', 12);
+const activeEnemies = app.stats.user.get('activeEnemies');
+app.stats.user.delete('activeEnemies');
+// 不要になったユーザーカウンターをすべて削除します。
+app.stats.user.clear();
+```
+
+Mapへの参照は読み取り専用ですが、エントリーは変更できます。アプリケーションごとに独立したMapがあり、すべてのビルドで利用できます。エンジンは値をリセットしません。値を加算する前にエントリーを初期化し、フレームごとの合計は`frameupdate`でリセットしてください。単位はアプリケーション側で定義します。オーバーレイに表示するには、MiniStatsに`user.activeEnemies`などのパスを設定します。[ユーザーカウンター](/user-manual/optimization/mini-stats/#user-counters)を参照してください。
 
 ## 指標と対応ビルド {#metrics-and-build-availability}
 

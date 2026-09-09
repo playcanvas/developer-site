@@ -155,13 +155,41 @@ if (app.stats.primitiveCount !== undefined) {
 }
 ```
 
-Applications can also attach their own counter object, such as `app.stats.custom = { activeEnemies: 0 }`, and configure a path like `custom.activeEnemies`. Create that object once and update its numeric fields as game state changes. This is application-owned data; do not overwrite the engine's read-only getters.
-
 Set `miniStats.enabled = false` to hide the overlay and stop its counter sampling, or call `miniStats.destroy()` to release it. GPU profiling is a device setting: hiding or destroying the overlay does not turn it off. If nothing else needs GPU timings, disable it separately with `app.graphicsDevice.gpuProfiler.enabled = false` when that profiler exists.
 
 MiniStats batches the overlay into a mesh and reuses its text atlas. History is collected only for views with graphs. It is designed to keep overhead low, but rendering and GPU queries still have a cost. Keep the same instrumentation enabled for before/after comparisons.
 
 For all options and lifecycle methods, see the [MiniStats API reference](https://api.playcanvas.com/engine/classes/MiniStats.html).
+
+## User Counters
+
+Starting with Engine 2.23, [`app.stats.user`](https://api.playcanvas.com/engine/classes/AppStats.html#user) provides a `Map<string, number>` for application-defined counters, such as queue lengths or manually measured CPU timings. The getter always returns the same map, and you can use `set`, `get`, `delete`, and `clear` to manage its entries. User counters are available in all engine builds.
+
+Add a graph to the options before creating MiniStats. A path such as `user.wave` reads the map entry named `wave`; avoid dots in counter names because dots separate path segments. This example displays a value that oscillates between 0 and 20:
+
+```javascript
+import { MiniStats } from 'playcanvas';
+
+app.stats.user.set('wave', 10);
+
+const options = MiniStats.getDefaultOptions();
+options.startSizeIndex = 2; // Start with graph history visible
+options.stats.push({
+    name: 'Wave',
+    stats: ['user.wave'],
+    decimalPlaces: 1,
+    watermark: 20
+});
+const miniStats = new MiniStats(app, options);
+
+let time = 0;
+app.on('update', (dt) => {
+    time += dt;
+    app.stats.user.set('wave', 10 + 10 * Math.sin(time));
+});
+```
+
+The engine does not reset user counters. For a per-frame total, initialize the entry and reset it on `frameupdate` before accumulating values. To measure synchronous code, use the difference between two `performance.now()` calls and configure the graph with `unitsName: 'ms'`. Units are application-defined; MiniStats does not infer them or automatically add graphs for new map entries.
 
 ## Example
 

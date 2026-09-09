@@ -3,7 +3,7 @@ title: Profiling with AppStats
 description: Read frame, CPU, GPU, draw call, primitive and GPU memory statistics from app.stats for profiling scripts, reports and automated comparisons.
 ---
 
-[`AppStats`](https://api.playcanvas.com/engine/classes/AppStats.html) exposes read-only performance measurements through [`app.stats`](https://api.playcanvas.com/engine/classes/AppBase.html#stats). Use it for profiling scripts, custom dashboards and automated comparisons without rendering an overlay. [MiniStats](/user-manual/optimization/mini-stats/) provides a visual view of application statistics alongside its own CPU timer.
+[`AppStats`](https://api.playcanvas.com/engine/classes/AppStats.html) exposes read-only engine measurements and writable user counters through [`app.stats`](https://api.playcanvas.com/engine/classes/AppBase.html#stats). Use it for profiling scripts, custom dashboards and automated comparisons without rendering an overlay. [MiniStats](/user-manual/optimization/mini-stats/) provides a visual view of application statistics alongside its own CPU timer.
 
 The public getters described here require **Engine 2.23 or later**. They are available on both `Application` and `AppBase`. The application creates the stats instance and returns the same object on every access; you do not construct or replace it.
 
@@ -21,6 +21,20 @@ const textureMiB = stats.vramTextureBytes / (1024 * 1024);
 Durations are in **milliseconds** and memory sizes are in **bytes**. These getters return the latest available values, not MiniStats' half-second averages. `fps` is the exception: it reports the frame count from the latest approximately one-second reporting interval.
 
 Reading stats does not enable GPU profiling, allocate a snapshot object or render anything. CPU timings and counters start at zero; GPU timing starts as `undefined`.
+
+## User Counters
+
+[`app.stats.user`](https://api.playcanvas.com/engine/classes/AppStats.html#user) returns a `Map<string, number>` owned by the application. Use it to publish custom values alongside the engine measurements:
+
+```javascript
+app.stats.user.set('activeEnemies', 12);
+const activeEnemies = app.stats.user.get('activeEnemies');
+app.stats.user.delete('activeEnemies');
+// Clear all user counters when they are no longer needed.
+app.stats.user.clear();
+```
+
+The map reference is read-only, but its entries are writable. Each application has its own map, available in all builds. The engine never resets its values; initialize entries before accumulation and reset per-frame totals on `frameupdate`. Units are application-defined. To display these values in an overlay, configure MiniStats with paths such as `user.activeEnemies`; see [User Counters](/user-manual/optimization/mini-stats/#user-counters).
 
 ## Metrics and Build Availability
 
