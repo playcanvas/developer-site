@@ -1,6 +1,6 @@
 ---
 title: Built-in Shader Uniforms
-description: Engine-provided camera matrices, screen and viewport dimensions, exposure, and XR view index for custom forward shaders.
+description: Engine-provided camera matrices, screen and viewport dimensions, and XR view index for custom forward shaders.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -25,7 +25,6 @@ The uniforms can be read in vertex and fragment shaders. Declare the names you u
 | `screen_size` | `vec4` | `vec4f` | Canvas drawing-buffer width, height, inverse width, and inverse height. These are pixel dimensions, not CSS dimensions. |
 | `viewport_size` | `vec4` | `vec4f` | Camera viewport width, height, inverse width, and inverse height in pixels. Accounts for the render target, `camera.rect`, and the XR eye viewport. Contains no viewport origin. |
 | `view_index` | `uint` | `u32` | Zero-based index of the XR view currently being rendered. Use it to select per-view data such as a depth texture array layer. |
-| `exposure` | `float` | `f32` | Camera exposure when `scene.physicalUnits` is enabled; otherwise `scene.exposure`. When using the engine's tone-mapping chunks, let those chunks apply exposure to avoid applying it twice. |
 
 The projection matrices are the versions used for rendering. They can differ from a projection matrix calculated in application code before jitter or backend adjustments. Prefer `matrix_viewProjection` when projecting a world-space position in a shader.
 
