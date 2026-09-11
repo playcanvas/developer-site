@@ -20,6 +20,17 @@ description: PlayCanvas アプリケーションでロード時間、フレー�
 | 🔋 CPUとGPUの負荷の最小化 | アプリが1秒間に60フレームを維持しているからといって、作業が完了したわけではありません。プロセッサーの負荷を減らすことでバッテリー電力を節約し、デバイスを低温に保ちます。 |
 | 🧠 メモリ使用量の最小化 | ブラウザはアプリケーションに割り当てるメモリプールを制限しています。このプールが枯渇すると、タブがクラッシュして再ロードされます。ユーザーは不満に感じるでしょう！ |
 
+## 最適化の前に測定する {#measure-before-optimizing}
+
+再現可能なシーンや操作を選び、対象デバイスでベースラインを記録してから、同じ条件で各変更を測定します。
+
+| ツール | 用途 |
+| ------ | ---- |
+| [MiniStats](/user-manual/optimization/mini-stats/) | アプリケーションを操作しながら、フレーム時間、CPU/GPUコスト、GPUリソースメモリを観察します。 |
+| [AppStatsによるプロファイリング](/user-manual/optimization/app-stats/) | コードから公開統計を読み取り、ダッシュボード、エージェント、自動比較向けのレポートを収集します。 |
+| [Editor Profiler](/user-manual/optimization/profiler/) | アセットの読み込みやシェーダーのコンパイルのタイムラインなど、エディターのLaunchプロファイラーを確認します。 |
+| [GPUプロファイリング](/user-manual/optimization/gpu-profiling/) | ネイティブGPUツールでフレームをキャプチャし、レンダリングを詳しく調査します。 |
+
 :::ai
-AIアシスタントに目標、再現手順、ベースラインを伝えると、**[Profiler](/user-manual/optimization/profiler/)**やブラウザーの結果からボトルネックを絞り、測定可能な変更を1つずつ提案できます。Editorでは**[Editor MCP Server](/user-manual/editor/mcp-server/)**、スタンドアロンでは**[AIを活用した開発](/user-manual/engine/developing-with-ai/)**を使用します。
+AIアシスタントに目標、再現手順、**[AppStats](/user-manual/optimization/app-stats/#collecting-periodic-reports)**のベースラインレポートを渡すと、MiniStatsやブラウザーの結果と組み合わせ、測定可能な変更を1つずつ提案できます。Editorでは**[Editor MCP Server](/user-manual/editor/mcp-server/)**、スタンドアロンでは**[AIを活用した開発](/user-manual/engine/developing-with-ai/)**を使用します。
 :::

@@ -5,6 +5,8 @@ description: デスクトップと Android のネイティブ GPU プロファ�
 
 このセクションでは、ネイティブGPUプロファイラを使用してWebGLまたはWebGPUフレームをキャプチャおよび分析し、GPU操作のデバッグとパフォーマンスプロファイリングを可能にする方法について説明します。
 
+アプリケーション内で最初の測定を行うには、[MiniStats](/user-manual/optimization/mini-stats/)を使用するか、[AppStats](/user-manual/optimization/app-stats/#enabling-gpu-timing)でGPU時間測定を有効にします。ネイティブプロファイラーは、それらの測定値の背景にあるレンダリング処理の調査に役立ちます。
+
 これはWebプラットフォーム上では特に困難です。なぜなら、Webアプリケーションは通常サンドボックス化された環境で実行されるため、ネイティブGPUプロファイラとの互換性や統合が本質的に制限されるからです。このページでは、特定のプラットフォームで利用可能なテスト済みのオプションについて概説します。
 
 ## Apple Silicon搭載macOS上でのWebGPUアプリケーション
