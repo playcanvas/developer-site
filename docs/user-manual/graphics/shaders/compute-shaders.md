@@ -281,6 +281,8 @@ compute.setupIndirectDispatch(0, customBuffer);
 
 When using a custom buffer, you manage its lifetime and contents—no frame validation is performed.
 
+In Engine 2.23 and later, compute resources are recreated during device recovery, but storage-buffer contents must be written again or regenerated. See [Device Loss and Recovery](../advanced-rendering/device-loss.md) for interrupted reads and explicit resource cleanup.
+
 ## Reading Data Back to CPU
 
 To read results from a storage buffer back to the CPU:
