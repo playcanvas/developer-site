@@ -28,6 +28,65 @@ material.chunks.APIVersion = pc.CHUNKAPI_1_55;
 
 次の表は、Engine リリースごとのチャンクの変更点をまとめたものです。
 
+### *Engine v2.23*
+
+#### シーンの環境テクスチャが専用のユニフォームを使用するように
+
+v2.23 より前は、シーンの環境アトラスとスカイボックスは、マテリアル自身の環境テクスチャと同じユニフォーム名 `texture_envAtlas` および `texture_cubeMap` でマテリアルのシェーダーに渡されていました。エンジンは、シーン環境でライティングされるすべての `StandardMaterial` のパラメータにシーンのテクスチャをコピーしていました。v2.23 からは、レンダラーがシーンのテクスチャを `scene_envAtlas` および `scene_skybox` として公開し、マテリアルは自身が所有するテクスチャのみを公開します。ライティングの環境チャンクは、`{LIT_ENV_ATLAS}` および `{LIT_ENV_CUBEMAP}` トークンを通してテクスチャを宣言・サンプリングするようになり、シェーダージェネレーターがシェーダーバリアントごとにシーンまたはマテリアルのユニフォームへ解決します。詳細は [PR #9364](https://github.com/playcanvas/engine/pull/9364) を参照してください。
+
+これらのチャンクのカスタムオーバーライドが `texture_envAtlas` や `texture_cubeMap` をハードコードしたままの場合、独自の `envAtlas` または `cubeMap` を持つマテリアルでは引き続き動作しますが、シーン環境でライティングされるマテリアルではテクスチャを受け取れません。サンプラーが設定されないため、シェーダーはそのユニットにたまたまバインドされているテクスチャをサンプリングします。
+
+また、v2.23 から環境の解決は「オール・オア・ナッシング」になりました。マテリアルが独自の環境テクスチャ(`envAtlas`、`cubeMap`、`sphereMap`)を 1 つでも持つ場合、反射・アンビエント・屈折のすべてにマテリアルのテクスチャのみを使用し、`cubeMap` または `sphereMap` だけを持つマテリアルのアンビエントは定数の `ambientLight` から取得されます。以前は、そのようなマテリアルはシーンのアトラスからアンビエントを取得していました。
+
+影響を受けるチャンク:
+
+- `src/scene/shader-lib/glsl/chunks/lit/frag/ambient.js`
+- `src/scene/shader-lib/glsl/chunks/lit/frag/reflectionEnv.js`
+- `src/scene/shader-lib/glsl/chunks/lit/frag/reflectionEnvHQ.js`
+- `src/scene/shader-lib/glsl/chunks/lit/frag/reflectionCube.js`
+- `src/scene/shader-lib/wgsl/chunks/lit/frag/ambient.js`
+- `src/scene/shader-lib/wgsl/chunks/lit/frag/reflectionEnv.js`
+- `src/scene/shader-lib/wgsl/chunks/lit/frag/reflectionEnvHQ.js`
+- `src/scene/shader-lib/wgsl/chunks/lit/frag/reflectionCube.js`
+
+**移行方法:** カスタムの `ambientPS`、`reflectionEnvPS`、`reflectionEnvHQPS`、`reflectionCubePS` オーバーライドで、宣言とすべてのサンプリング箇所において `texture_envAtlas` を `{LIT_ENV_ATLAS}` に、`texture_cubeMap` を `{LIT_ENV_CUBEMAP}` に置き換えてください。WGSL ではサンプラーも同じパターン `{LIT_ENV_ATLAS}Sampler` に従います。その後、`material.shaderChunksVersion = '2.23'` を設定します。
+
+変更前 (GLSL):
+
+```glsl
+uniform sampler2D texture_envAtlas;
+
+vec3 linearA = {reflectionDecode}(texture2D(texture_envAtlas, uv0));
+```
+
+変更後 (GLSL):
+
+```glsl
+uniform sampler2D {LIT_ENV_ATLAS};
+
+vec3 linearA = {reflectionDecode}(texture2D({LIT_ENV_ATLAS}, uv0));
+```
+
+変更前 (WGSL):
+
+```wgsl
+var texture_envAtlas: texture_2d<f32>;
+var texture_envAtlasSampler: sampler;
+
+let raw: vec4f = textureSample(texture_envAtlas, texture_envAtlasSampler, uv);
+```
+
+変更後 (WGSL):
+
+```wgsl
+var {LIT_ENV_ATLAS}: texture_2d<f32>;
+var {LIT_ENV_ATLAS}Sampler: sampler;
+
+let raw: vec4f = textureSample({LIT_ENV_ATLAS}, {LIT_ENV_ATLAS}Sampler, uv);
+```
+
+---
+
 ### *Engine v2.20*
 
 #### MSDF テキストレンダリングの刷新
