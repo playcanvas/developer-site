@@ -3,12 +3,6 @@ title: Device Loss and Recovery
 description: Handle WebGL context loss and WebGPU device loss, restore GPU-generated data, and test recovery in PlayCanvas.
 ---
 
-:::note
-
-This page describes recovery behavior in **PlayCanvas Engine 2.23 and later**.
-
-:::
-
 The browser can lose access to the GPU because of a driver reset, resource pressure, or a change in the system's graphics configuration. Treat loss as something an application may encounter during normal use.
 
 In **WebGL2**, the rendering context is lost and the browser may restore it. In **WebGPU**, the lost native device cannot be reused: PlayCanvas requests a replacement device and recreates its GPU resources. The application keeps the same PlayCanvas graphics device object.
