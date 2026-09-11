@@ -77,11 +77,6 @@ The rule is simple: **a material with an environment map of its own uses only th
 
 A material environment replaces the scene environment completely. The scene's Intensity and Rotation do not apply to it, and the scene does not fill in the ambient light for a plain cube map or a sphere map. If you want directional ambient light on a material with its own environment, prefilter its cubemap in the Editor, or generate an environment atlas for it in code.
 
-:::note
-
-Before Engine v2.23, a material with a plain cube map took its ambient light from the scene skybox. From v2.23, the material environment is all-or-nothing as described above, so such a material now uses the Ambient Color. Prefilter the cubemap to get image-based ambient light back.
-
-:::
 
 ## Setting it up in code
 
