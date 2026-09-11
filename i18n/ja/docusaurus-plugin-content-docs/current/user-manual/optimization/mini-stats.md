@@ -25,19 +25,52 @@ scriptタグで読み込むビルドでは、代わりに`new pc.MiniStats(app)`
 
 ## 表示サイズ {#display-sizes}
 
-オーバーレイをクリックまたはタップすると、3つの既定ビューが順に切り替わります。フォーカスを合わせてEnterまたはSpaceキーを押すこともできます。
+セクション見出し以外の場所をクリックまたはタップすると、3つの既定ビューが順に切り替わります。オーバーレイにフォーカスを合わせてEnterまたはSpaceキーを押すこともできます。
 
 | ビュー | 内容 |
 | ------ | ---- |
 | **コンパクト** | 主要カウンターの平均値を数値で表示します。 |
-| **中** | CPU、GPU、VRAMの内訳を含む、グループ別の平均値を表示します。グラフとピーク列はありません。 |
+| **中** | 折りたたみ可能なEngine、User、CPU、GPU、VRAMセクションに平均値を表示します。グラフとピーク列はありません。 |
 | **大** | 同じグループに加え、テキストの背後に履歴グラフを表示し、平均値とピーク値を示します。 |
 
-先頭にはDraw callsとFrameが表示され、その後にグループに属さないカスタムカウンターが設定順で並び、CPU、GPU、VRAMが続きます。リストが画面より高い場合は、マウスホイールでスクロールするか、タッチスクリーン上でドラッグしてください。Draw callsとFrameは上部に固定されます。
+セクションはEngine、User、CPU、GPU、VRAMの順に表示されます。リストが画面より高い場合は、マウスホイールでスクロールするか、タッチスクリーン上でドラッグしてください。Draw callsとFrameを含むすべてのセクションは、固定された列見出しの下をスクロールします。
 
-次の例は、カウンターを追加した大ビューです。
+次の画像は、大ビューでセクションを展開した状態と折りたたんだ状態です。
 
-<img loading="lazy" alt="リソースの確保と解放を行うサンプルの横に、平均値、ピーク値、履歴グラフ、CPU、GPU、VRAMのグループ別カウンターを表示したMiniStatsの大ビュー" width="710" src="/img/user-manual/optimization/mini-stats/mini-stats.png" />
+<table>
+<thead><tr><th>展開した状態</th><th>折りたたんだ状態</th></tr></thead>
+<tbody><tr>
+<td style={{ verticalAlign: 'top' }}><img loading="lazy" alt="Engine、User、CPU、GPU、VRAMセクションを展開したMiniStats" width="230" src="/img/user-manual/optimization/mini-stats/mini-stats.png" /></td>
+<td style={{ verticalAlign: 'top' }}><img loading="lazy" alt="すべてのセクションを折りたたみ、CPU、GPU、VRAMの合計値を表示したMiniStats" width="234" src="/img/user-manual/optimization/mini-stats/mini-stats-collapsed.png" /></td>
+</tr></tbody>
+</table>
+
+## セクションの折りたたみ {#collapsing-sections}
+
+中ビューと大ビューでは、セクション見出しをクリックまたはタップすると、カウンターの表示と非表示を切り替えられます。セクションは最初は展開されています。折りたたんでも見出しは表示され、CPU、GPU、VRAMは合計値も表示されます。EngineとUserのカウンターは単位が異なる場合があるため、合計値は表示しません。
+
+| セクション | 内容 |
+| ---------- | ---- |
+| **Engine** | `options.stats`に設定した組み込みカウンターです。Draw callsとFrameが先頭に並び、Update、FPS、プリミティブ数、スプラット数などのエンジンカウンターもここに含まれます。 |
+| **User** | 設定されたパスがすべて`user.`で始まり、`app.stats.user`から値を取得するカウンターです。サンプルではWaveだけがここに含まれます。 |
+| **CPU**、**GPU**、**VRAM** | 合計値と、取得できる処理時間またはメモリの内訳です。 |
+
+カウンターが設定されていない場合、EngineとUserは表示されません。セクションを折りたたんでもサンプリングとグラフ履歴の収集は継続します。折りたたみ状態はサイズを切り替えても保持されますが、コンパクトビューではその状態にかかわらず、セクション見出しなしで各カウンターを表示します。
+
+同じ状態をコードから制御するには、次の読み書き可能な真偽値プロパティを使用します。
+
+```javascript
+miniStats.engineCollapsed = true;
+miniStats.userCollapsed = true;
+miniStats.cpuCollapsed = true;
+miniStats.gpuCollapsed = true;
+miniStats.vramCollapsed = true;
+
+// Expand GPU details again.
+miniStats.gpuCollapsed = false;
+```
+
+5つのプロパティの既定値はすべて`false`で、見出しのクリックと同期します。オーバーレイがコンパクト表示で詳細カウンターがまだ表示されていない場合でも設定できます。`miniStats.enabled = false`とは異なり、セクションを折りたたんでも測定は停止しません。
 
 ## 平均値、ピーク値、履歴 {#averages-peaks-and-history}
 
@@ -63,7 +96,7 @@ CPUとGPUの処理は重なることがあります。CPU時間とGPU時間を�
 
 ## 詳細タイミングモード {#detailed-timing-mode}
 
-中ビューと大ビューには、カテゴリーの合計と、取得可能なサブカウンターが表示されます。
+中ビューと大ビューのCPU、GPU、VRAMセクションを展開すると、合計値と取得できるサブカウンターが表示されます。
 
 ### CPUの内訳 {#cpu-sub-timings}
 
@@ -193,6 +226,6 @@ app.on('update', (dt) => {
 
 ## サンプル {#example}
 
-リソース確保のサンプルは、エンティティ、マテリアル、頂点バッファ、テクスチャの作成と解放を繰り返します。カウンターへの影響を観察し、オーバーレイをクリックして3つのビューを比較してください。
+リソース確保のサンプルは、エンティティ、マテリアル、頂点バッファ、テクスチャの作成と解放を繰り返します。カウンターへの影響を観察し、見出しのクリックでセクションを折りたたみまたは展開し、オーバーレイのそれ以外の場所をクリックして3つのビューを比較してください。
 
 <EngineExample id="debug/mini-stats" title="MiniStatsのリソース確保サンプル" />

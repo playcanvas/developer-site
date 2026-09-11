@@ -25,19 +25,52 @@ When using a script-tag build, use `new pc.MiniStats(app)` instead. MiniStats en
 
 ## Display Sizes
 
-Click or tap the overlay to cycle through three default views. You can also focus it and press Enter or Space.
+Click or tap outside the section headings to cycle through three default views. You can also focus the overlay and press Enter or Space.
 
 | View | Contents |
 | ---- | -------- |
 | **Compact** | Core counters with averaged numeric values. |
-| **Medium** | Grouped averages with CPU, GPU and VRAM breakdowns. No graphs or peak column. |
+| **Medium** | Collapsible Engine, User, CPU, GPU and VRAM sections with averaged values. No graphs or peak column. |
 | **Large** | The same groups with graph history behind the text, plus averages and peaks. |
 
-Draw calls and Frame appear first, followed by ungrouped custom counters in their configured order, then CPU, GPU and VRAM. If the list is taller than the screen, scroll with the mouse wheel or drag on a touch screen. Draw calls and Frame remain visible at the top.
+Sections appear in the order Engine, User, CPU, GPU and VRAM. If the list is taller than the screen, scroll with the mouse wheel or drag on a touch screen. All sections scroll beneath the fixed column labels, including Draw calls and Frame.
 
-The example below shows the large view with additional counters:
+The large view with sections expanded and collapsed:
 
-<img loading="lazy" alt="MiniStats large view showing averages, peaks, history graphs and grouped CPU, GPU and VRAM counters beside the resource allocation example" width="710" src="/img/user-manual/optimization/mini-stats/mini-stats.png" />
+<table>
+<thead><tr><th>Expanded</th><th>Collapsed</th></tr></thead>
+<tbody><tr>
+<td style={{ verticalAlign: 'top' }}><img loading="lazy" alt="MiniStats with Engine, User, CPU, GPU and VRAM sections expanded" width="230" src="/img/user-manual/optimization/mini-stats/mini-stats.png" /></td>
+<td style={{ verticalAlign: 'top' }}><img loading="lazy" alt="MiniStats with all sections collapsed and CPU, GPU and VRAM totals still visible" width="234" src="/img/user-manual/optimization/mini-stats/mini-stats-collapsed.png" /></td>
+</tr></tbody>
+</table>
+
+## Collapsing Sections
+
+In the medium and large views, click or tap a section heading to hide or show its counters. Sections start expanded. The heading stays visible when collapsed; CPU, GPU and VRAM also keep their total values. Engine and User have no total because their counters can use different units.
+
+| Section | Contents |
+| ------- | -------- |
+| **Engine** | Built-in counters configured in `options.stats`, starting with Draw calls and Frame. Additional engine counters such as Update, FPS, primitive counts and splat counts also belong here. |
+| **User** | Counters whose configured paths all start with `user.`, reading from `app.stats.user`. In the example, only Wave belongs here. |
+| **CPU**, **GPU**, **VRAM** | Their totals and available timing or memory breakdowns. |
+
+Engine and User are omitted when they have no configured counters. Collapsing a section keeps sampling and graph history running. Its state survives size changes, but compact mode shows individual counters without section headings and ignores collapsed state.
+
+Control the same state from code with these read/write boolean properties:
+
+```javascript
+miniStats.engineCollapsed = true;
+miniStats.userCollapsed = true;
+miniStats.cpuCollapsed = true;
+miniStats.gpuCollapsed = true;
+miniStats.vramCollapsed = true;
+
+// Expand GPU details again.
+miniStats.gpuCollapsed = false;
+```
+
+All five properties default to `false` and stay synchronized with heading clicks. They can also be set while the overlay is compact, before detailed counters are shown. Unlike `miniStats.enabled = false`, collapsing a section does not stop its measurements.
 
 ## Averages, Peaks and History
 
@@ -63,7 +96,7 @@ CPU and GPU work can overlap. Adding CPU and GPU durations does not give the Fra
 
 ## Detailed Timing Mode
 
-Medium and large views include category totals and their available sub-counters.
+When expanded, the CPU, GPU and VRAM sections in medium and large views include their totals and available sub-counters.
 
 ### CPU Sub-Timings
 
@@ -193,6 +226,6 @@ The engine does not reset user counters. For a per-frame total, initialize the e
 
 ## Example
 
-The resource allocation example repeatedly creates and releases entities, materials, vertex buffers and textures. Watch their effect on the counters and click the overlay to compare all three views.
+The resource allocation example repeatedly creates and releases entities, materials, vertex buffers and textures. Watch their effect on the counters, click section headings to collapse or expand them, and click elsewhere in the overlay to compare all three views.
 
 <EngineExample id="debug/mini-stats" title="MiniStats resource allocation example" />
