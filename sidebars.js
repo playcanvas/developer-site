@@ -800,6 +800,7 @@ const sidebars = {
             'user-manual/graphics/physical-rendering/physical-materials',
             'user-manual/graphics/physical-rendering/parallax-mapping',
             'user-manual/graphics/physical-rendering/image-based-lighting',
+            'user-manual/graphics/physical-rendering/environment-lighting',
           ],
         },
         'user-manual/graphics/transparency',
