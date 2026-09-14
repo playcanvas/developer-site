@@ -885,6 +885,7 @@ const sidebars = {
             id: 'user-manual/graphics/advanced-rendering/index',
           },
           items: [
+            'user-manual/graphics/advanced-rendering/rendering-without-entities',
             'user-manual/graphics/advanced-rendering/batching',
             'user-manual/graphics/advanced-rendering/hardware-instancing',
             'user-manual/graphics/advanced-rendering/multi-draw',
