@@ -37,7 +37,7 @@ Uniforms are used to pass resources from the engine to the shader. They are decl
 uniform vec3 view_position;
 ```
 
-The engine automatically sets appropriate uniform values when rendering.
+The engine supplies the values of [built-in shader uniforms](/user-manual/graphics/shaders/built-in-uniforms) during forward rendering. Set your own uniform values from application code, for example with `material.setParameter()`.
 
 :::note
 

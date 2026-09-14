@@ -124,12 +124,14 @@ scopeDepthUvMatrix.setValue(view.depthUvMatrix.data);
 
 すべての準備が整ったので、単一のシェーダーでモノ/ステレオのシナリオと異なるテクスチャ形式に対応できます。
 
+`screen_size` と `view_index` は、フォワードレンダラーが提供する[組み込みユニフォーム](/user-manual/graphics/shaders/built-in-uniforms)です。`view_index` は符号なし整数 (`uint`) です。
+
 ```glsl
-uniform vec4 uScreenSize; // エンジンによって提供されます
+uniform vec4 screen_size; // エンジンによって提供されます
 uniform mat4 matrix_depth_uv;
 
 #ifdef XRDEPTH_ARRAY
-    uniform int view_index; // エンジンによって提供されます
+    uniform uint view_index; // エンジンによって提供されます
     uniform highp sampler2DArray depthMap;
 #else
     uniform sampler2D depthMap;
@@ -137,16 +139,16 @@ uniform mat4 matrix_depth_uv;
 
 void main (void) {
     // スクリーン空間用のUVを構築
-    vec2 uvScreen = gl_FragCoord.xy * uScreenSize.zw;
+    vec2 uvScreen = gl_FragCoord.xy * screen_size.zw;
 
     #ifdef XRDEPTH_ARRAY
         // ステレオ
         // view_index（左目/右目）に基づいてスクリーン空間を変更
-        uvScreen = uvScreen * vec2(2.0, 1.0) - vec2(view_index, 0.0);
+        uvScreen = uvScreen * vec2(2.0, 1.0) - vec2(float(view_index), 0.0);
         // 提供された行列を使用してUVを正規化
         vec2 uvNormalized = (matrix_depth_uv * vec4(uvScreen.xy, 0.0, 1.0)).xy;
         // 配列テクスチャのインデックスとしてview_indexを使用
-        vec3 uv = vec3(uvNormalized, view_index);
+        vec3 uv = vec3(uvNormalized, float(view_index));
     #else
         // モノ
         // 垂直方向に反転して正規化
