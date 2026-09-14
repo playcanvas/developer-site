@@ -18,21 +18,32 @@ description: 名前付きGraphNode、永続的なMeshInstance、ハードウェ�
 以下のコードは、カメラとライティングを備えた初期化済みのアプリケーションを前提としています。Worldレイヤーは、アプリケーションのデフォルトのレイヤー構成とカメラ設定に含まれています。
 
 ```javascript
-import * as pc from 'playcanvas';
+import {
+    Color,
+    GraphNode,
+    LAYERID_WORLD,
+    Mesh,
+    MeshInstance,
+    PlaneGeometry,
+    StandardMaterial,
+    Vec2,
+    VertexBuffer,
+    VertexFormat
+} from 'playcanvas';
 
-const layer = app.scene.layers.getLayerById(pc.LAYERID_WORLD);
+const layer = app.scene.layers.getLayerById(LAYERID_WORLD);
 
-const material = new pc.StandardMaterial();
-material.diffuse = new pc.Color(0.53, 0.55, 0.43);
+const material = new StandardMaterial();
+material.diffuse = new Color(0.53, 0.55, 0.43);
 material.gloss = 0.15;
 material.update();
 
-const mesh = pc.Mesh.fromGeometry(app.graphicsDevice, new pc.PlaneGeometry({
-    halfExtents: new pc.Vec2(20, 20)
+const mesh = Mesh.fromGeometry(app.graphicsDevice, new PlaneGeometry({
+    halfExtents: new Vec2(20, 20)
 }));
 
-const node = new pc.GraphNode('Ground');
-const ground = new pc.MeshInstance(mesh, material, node);
+const node = new GraphNode('Ground');
+const ground = new MeshInstance(mesh, material, node);
 const meshInstances = [ground];
 layer.addMeshInstances(meshInstances);
 ```
@@ -63,7 +74,7 @@ layer.addMeshInstances(meshInstances);
 // treeAssetは読み込み済みのコンテナアセットです。
 const treeMesh = treeAsset.resource.renders[0].resource.meshes[0];
 const treeMaterial = treeAsset.resource.materials[0].resource;
-const forest = new pc.MeshInstance(treeMesh, treeMaterial, new pc.GraphNode('Forest'));
+const forest = new MeshInstance(treeMesh, treeMaterial, new GraphNode('Forest'));
 forest.castShadow = true;
 ```
 
@@ -72,9 +83,9 @@ forest.castShadow = true;
 [ハードウェアインスタンシング](hardware-instancing.md)では、トランスフォームを格納するバッファを1つ作成し、メッシュインスタンスに設定します。ここでは、`matrices`は`treeCount`個のワールド空間のMat4トランスフォームを格納したFloat32Arrayで、`forestBounds`は変換後のすべての木を囲むバウンディングボックスです。
 
 ```javascript
-const instanceBuffer = new pc.VertexBuffer(
+const instanceBuffer = new VertexBuffer(
     app.graphicsDevice,
-    pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice),
+    VertexFormat.getDefaultInstancingFormat(app.graphicsDevice),
     treeCount,
     { data: matrices }
 );

@@ -18,21 +18,32 @@ The example renders a ground plane with a manually created StandardMaterial and 
 The following code assumes an initialized application with a camera and lighting. The World layer is already part of the application's default layer composition and camera configuration.
 
 ```javascript
-import * as pc from 'playcanvas';
+import {
+    Color,
+    GraphNode,
+    LAYERID_WORLD,
+    Mesh,
+    MeshInstance,
+    PlaneGeometry,
+    StandardMaterial,
+    Vec2,
+    VertexBuffer,
+    VertexFormat
+} from 'playcanvas';
 
-const layer = app.scene.layers.getLayerById(pc.LAYERID_WORLD);
+const layer = app.scene.layers.getLayerById(LAYERID_WORLD);
 
-const material = new pc.StandardMaterial();
-material.diffuse = new pc.Color(0.53, 0.55, 0.43);
+const material = new StandardMaterial();
+material.diffuse = new Color(0.53, 0.55, 0.43);
 material.gloss = 0.15;
 material.update();
 
-const mesh = pc.Mesh.fromGeometry(app.graphicsDevice, new pc.PlaneGeometry({
-    halfExtents: new pc.Vec2(20, 20)
+const mesh = Mesh.fromGeometry(app.graphicsDevice, new PlaneGeometry({
+    halfExtents: new Vec2(20, 20)
 }));
 
-const node = new pc.GraphNode('Ground');
-const ground = new pc.MeshInstance(mesh, material, node);
+const node = new GraphNode('Ground');
+const ground = new MeshInstance(mesh, material, node);
 const meshInstances = [ground];
 layer.addMeshInstances(meshInstances);
 ```
@@ -63,7 +74,7 @@ A loaded container asset exposes render assets and materials without requiring `
 // treeAsset is an already loaded container asset.
 const treeMesh = treeAsset.resource.renders[0].resource.meshes[0];
 const treeMaterial = treeAsset.resource.materials[0].resource;
-const forest = new pc.MeshInstance(treeMesh, treeMaterial, new pc.GraphNode('Forest'));
+const forest = new MeshInstance(treeMesh, treeMaterial, new GraphNode('Forest'));
 forest.castShadow = true;
 ```
 
@@ -72,9 +83,9 @@ This direct lookup is specific to the example asset. A general GLB can contain m
 For [hardware instancing](hardware-instancing.md), create one buffer of transforms and attach it to the mesh instance. Here, `matrices` is a Float32Array containing `treeCount` world-space Mat4 transforms, and `forestBounds` encloses all transformed trees:
 
 ```javascript
-const instanceBuffer = new pc.VertexBuffer(
+const instanceBuffer = new VertexBuffer(
     app.graphicsDevice,
-    pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice),
+    VertexFormat.getDefaultInstancingFormat(app.graphicsDevice),
     treeCount,
     { data: matrices }
 );
