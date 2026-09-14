@@ -894,6 +894,7 @@ const sidebars = {
             'user-manual/graphics/advanced-rendering/indirect-drawing',
             'user-manual/graphics/advanced-rendering/transform-feedback',
             'user-manual/graphics/advanced-rendering/html-in-canvas',
+            'user-manual/graphics/advanced-rendering/device-loss',
           ],
         },
       ],
