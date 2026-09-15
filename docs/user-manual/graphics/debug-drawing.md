@@ -134,20 +134,23 @@ The arguments to `draw` are the texture, left edge, top edge, width and height. 
 
 ### Preview settings
 
-Like `WireRenderer`, settings apply to subsequent draw calls:
+`layer` and `channels` apply to subsequent draw calls. `camera` selects the camera for all previews when they are rendered:
 
 | Property | Meaning |
 | --- | --- |
 | `layer` | Destination layer, or `null` for the application's default debug drawing layer, normally Immediate. |
-| `channels` | Three characters from `r`, `g`, `b` and `a`. Defaults to `'rgb'`, which displays decoded color. |
+| `channels` | Three characters from `r`, `g`, `b` and `a`. Defaults to `'rgb'`, which displays decoded color, or grayscale for single-channel formats. |
+| `camera` | The `CameraComponent` that draws the previews, or `null` (the default) to allow every camera rendering the destination layer. |
 
-Previews are opaque and do not test or write depth. Use a layer rendered after the scene and skybox so later drawing does not cover them. The displaying camera must include that layer. When previewing a render target, exclude the preview layer from the camera producing the texture to avoid reading and writing the same texture at once.
+Previews are opaque and do not test or write depth. Use a layer rendered after the scene and skybox so later drawing does not cover them. The displaying camera must include that layer. Set `textures.camera = camera.camera` to restrict previews to one camera, such as the main camera, and keep them out of reflections. Set it back to `null` to allow all cameras rendering the destination layer.
+
+When previewing a render target, the renderer automatically skips any preview whose texture is a color, resolve or depth attachment of the current render target. This prevents reading and writing the same texture at once, including with CameraFrame and custom render passes.
 
 For render-target textures, use [`RENDERTARGET_ORIGIN_TOP`](./advanced-rendering/render-targets.md#orientation) on the render target for consistent orientation across WebGL2 and WebGPU.
 
 ### Inspecting channels
 
-With `'rgb'`, the renderer automatically decodes the texture's color encoding. Other selections show stored channel values without color decoding, with values from `0` to `1` mapping directly from black to white. For example, `'rrr'` shows red as grayscale, `'aaa'` shows alpha, and `'bgr'` swaps red and blue. The preview itself remains opaque, including when inspecting alpha.
+With `'rgb'`, the renderer automatically decodes the texture's color encoding. Single-channel formats (`R8`, `R16F`, `R32F`) display their stored channel as grayscale. Other selections show stored channel values without color decoding, with values from `0` to `1` mapping directly from black to white. For example, `'rrr'` shows red as grayscale, `'aaa'` shows alpha, and `'bgr'` swaps red and blue. The preview itself remains opaque, including when inspecting alpha.
 
 You can display the same texture in multiple ways during one update:
 
@@ -170,6 +173,7 @@ import { TextureRenderer } from 'playcanvas';
 // camera is an entity with a camera component.
 camera.camera.requestSceneDepthMap(true);
 const textures = new TextureRenderer(app);
+textures.camera = camera.camera;
 
 app.on('update', () => {
     textures.sceneDepth(0.7, 0.7, 0.25, 0.25);
