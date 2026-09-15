@@ -118,8 +118,6 @@ This does not affect `circle`, `cylinder`, `capsule` or `cone`, whose rings are 
 
 ## TextureRenderer
 
-Available in Engine 2.23 and later.
-
 [`TextureRenderer`](https://api.playcanvas.com/engine/classes/TextureRenderer.html) displays textures on screen for debugging. Create one and submit the previews you want to see each frame:
 
 ```javascript

@@ -118,8 +118,6 @@ for (const meshInstance of meshInstances) {
 
 ## TextureRenderer
 
-Engine 2.23 以降で使用できます。
-
 [`TextureRenderer`](https://api.playcanvas.com/engine/classes/TextureRenderer.html) は、デバッグ用にテクスチャを画面に表示します。1 つ作成し、表示したいプレビューを毎フレーム描画します。
 
 ```javascript
