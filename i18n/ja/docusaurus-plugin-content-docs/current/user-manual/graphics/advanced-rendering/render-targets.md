@@ -189,3 +189,4 @@ renderTarget.destroy();
 - [複数のカメラ](../cameras/multiple-cameras.md) - ビューの合成とカメラへのレンダーターゲットの割り当てです。
 - [レイヤー](../layers/index.md) - 各カメラがどのオブジェクトをレンダリングするかを制御します。
 - [ポストエフェクト](../posteffects/index.md) - レンダーターゲットの上に構築された、組み込みおよびカスタムの後処理です。
+- [TextureRenderer](../debug-drawing.md#texturerenderer) - レンダーターゲットの色や個別のチャンネルを画面で確認します。
