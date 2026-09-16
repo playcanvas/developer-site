@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 504
-Generated: 2026-09-15
+Total Documents: 505
+Generated: 2026-09-16
 
 ================================================================================
 
@@ -21096,6 +21096,10 @@ The PlayCanvas Engine offers a comprehensive rendering setup through the `Camera
 - **Temporal Anti-Aliasing (TAA)**: Reduces visual artifacts by smoothing jagged edges over time.
 - **Vignette**: Darkens the image's corners to draw attention to the center.
 - **Color Grading**: Adjusts the color balance for stylistic effects.
+- **Color Enhance**: Selectively adjusts shadows, highlights, midtones, vibrance, and dehaze.
+- **[Volumetric Fog](/user-manual/graphics/posteffects/cameraframe/volumetric-fog/)**: Renders height fog and light shafts from directional, omni, and spot lights.
+
+See [Modern Post Processing](/user-manual/graphics/posteffects/cameraframe/) for the full feature list, configuration tips, and examples.
 
 ### Configuring CameraFrame on a Camera
 
@@ -21103,10 +21107,11 @@ The PlayCanvas Engine offers a comprehensive rendering setup through the `Camera
 const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
 cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
 cameraFrame.rendering.samples = 4;
-cameraFrame.bloom.enabled = true;
 cameraFrame.bloom.intensity = 0.01;
 cameraFrame.update();
 ```
+
+On the engine `CameraFrame`, a positive `bloom.intensity` enables bloom; set it to 0 to disable it. There is no `bloom.enabled` flag on this API. The Editor script wrapper has a separate **Bloom > Enabled** setting.
 
 For HDR bloom to be effective, the scene should include bright light sources. This is typically achieved using emissive materials with high intensity. For example:
 
@@ -21176,12 +21181,12 @@ The second texture must satisfy the same size and filtering requirements as the 
 
 ## CameraFrame in the Editor
 
-There is a `CameraScript` [available here](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs) for the PlayCanvas Editor project. This script integrates `CameraFrame` functionality directly into the Editor's Inspector, making it easy to set up and configure cameras with advanced rendering features.
+The [`camera-frame.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs) script exposes the engine's `CameraFrame` settings in the Editor's Inspector. Its class is named `CameraFrame` and it is registered as `cameraFrame`.
 
 ### Instructions on Use
 
-1. Add the `CameraScript` into your project and parse it.
-2. Add it to an entity that has the `CameraComponent`.
+1. Add `camera-frame.mjs` to your project and parse it.
+2. Add the `cameraFrame` script to an entity that has a Camera component.
 3. Use the Inspector to configure the rendering settings for the camera, such as tone mapping, bloom, SSAO, and other effects.
 
 This integration streamlines the process of setting up complex camera effects and enhances the overall workflow within the PlayCanvas Editor.
@@ -21623,11 +21628,13 @@ PlayCanvas offers modern post-processing workflows that provide visually advance
 The `CameraFrame` enables advanced rendering techniques including:
 
 - **Bloom** - HDR physically based bloom effect that simulates the natural glow of bright light sources
+- **[Volumetric Fog](volumetric-fog.md)** - Height fog and light shafts lit by directional, omni, and spot lights
 - **SSAO (Screen Space Ambient Occlusion)** - Enhances depth perception by simulating ambient light occlusion
 - **Depth of Field (DoF)** - Mimics camera focus effects, blurring objects outside the focal plane
 - **Temporal Anti-Aliasing (TAA)** - Reduces visual artifacts by smoothing jagged edges over time
-- **Vignette** - Darkens or lightens the image edges to draw attention to the center
+- **Vignette** - Blends the image edges towards a configurable color using `vignette.color`
 - **Color Grading** - Adjusts brightness, contrast, saturation, and color tint for stylistic effects
+- **[Color Enhance](#color-enhance)** - Adjusts shadows, highlights, midtones, vibrance, and dehaze in HDR
 - **Color LUT** - Apply color lookup tables for advanced color transformations. See [HDR Rendering > Color LUT](/user-manual/graphics/linear-workflow/hdr-rendering/#color-lut) for details.
 - **Fringing** - Chromatic aberration effect that simulates color channel separation
 - **Tone Mapping** - Controls how HDR colors are mapped to displayable range
@@ -21639,17 +21646,69 @@ For detailed information on setting up and using `CameraFrame`, see the [HDR Ren
 
 For Editor users, a ready-to-use script is available. See [CameraFrame in the Editor](/user-manual/graphics/linear-workflow/hdr-rendering/#cameraframe-in-the-editor) for setup instructions.
 
+### Color Enhance {#color-enhance}
+
+`colorEnhance` provides selective adjustments in addition to the brightness, contrast, saturation, and tint controls in `grading`:
+
+- `shadows` and `highlights` brighten or darken those areas, with a range of -3 to 3 and a neutral value of 0.
+- `midtones` adjusts intermediate brightness while preserving shadows and highlights more strongly than an exposure change, with a range of -1 to 1.
+- `vibrance` boosts less-saturated colors more than already-saturated ones. Negative values desaturate; the range is -1 to 1.
+- `dehaze` increases clarity for positive values and adds haze for negative values, with a range of -1 to 1. This is a color adjustment; use [volumetric fog](volumetric-fog.md) for fog illuminated by scene lights.
+
+```javascript
+cameraFrame.colorEnhance.enabled = true;
+cameraFrame.colorEnhance.shadows = 0.5;
+cameraFrame.colorEnhance.midtones = 0.1;
+cameraFrame.colorEnhance.vibrance = 0.2;
+cameraFrame.update();
+```
+
+All five adjustments default to 0, and the effect is disabled by default.
+
+### Vignette Color
+
+Use `vignette.color` to tint the edges instead of fading them to black:
+
+```javascript
+cameraFrame.vignette.intensity = 0.4;
+cameraFrame.vignette.color.set(0.1, 0.05, 0.2);
+cameraFrame.update();
+```
+
+`inner`, `outer`, and `curvature` control the shape and falloff. Setting `outer` below `inner` reverses the effect, applying it towards the center.
+
+### Debug Views {#debug-views}
+
+Set `cameraFrame.debug` to inspect an intermediate result: `'scene'`, `'ssao'`, `'bloom'`, `'vignette'`, `'dofcoc'` (depth-of-field circle of confusion), `'dofblur'`, or `'depth'`.
+
+```javascript
+cameraFrame.debug = 'depth';
+cameraFrame.update();
+```
+
+Debug views do not enable effects or generate additional textures. The depth view is black if the frame is not already producing scene depth; effect views require the corresponding effect to be enabled. Set `debug` to `null` and call `update()` to return to the composed image. In the Editor script, use **Rendering > Debug** and select **None** to restore normal output.
+
+For Gaussian splats, see [scene depth requirements](volumetric-fog.md#gaussian-splats) when using fog or depth of field.
+
 ## Examples
 
 - HDR with Bloom and LUT - Demonstrates HDR bloom and color lookup table effects
 
-- Post-Processing - Shows multiple effects including bloom, grading, vignette, fringing, and TAA
+- Post-Processing - Shows bloom, grading, Color Enhance, colored vignette, fringing, and TAA
 
 - Ambient Occlusion - Demonstrates SSAO implementation
 
 - Depth of Field - Demonstrates depth of field effect
 
 - Temporal Anti-Aliasing - Demonstrates TAA implementation
+
+- Volumetric Fog - Height fog illuminated by a directional light
+
+- Volumetric Fog Local Lights - Omni and spot lights scattering in fog
+
+- Volumetric Fog Shafts - Shadowed spot light beams and light cookies
+
+- LUT Grading - Crossfade between two color grades on a Gaussian splat scene
 
 ## Custom Post Processing
 
@@ -21968,6 +22027,115 @@ This approach is suitable for:
 - Integrating third-party rendering techniques
 - Advanced users who need fine-grained control over the pipeline
 - Effects that need to process intermediate results from other passes
+
+--------------------------------------------------------------------------------
+
+## Volumetric Fog
+
+URL: https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/volumetric-fog/
+
+[`CameraFrame.volumetricFog`](https://api.playcanvas.com/engine/classes/CameraFrame.html#volumetricfog) renders height fog illuminated by scene lights. Directional lights produce atmospheric haze and sun shafts; omni and spot lights create illuminated volumes and beams. The effect samples shadows along view rays, so objects can block the light within the fog.
+
+## Setup
+
+Use a perspective camera. Assign a directional light component to `volumetricFog.light`, or enable local omni or spot lights. Enabling fog without either source leaves the effect inactive. Assigning a non-directional light to `light` disables the effect; use the local-light settings for omni and spot lights.
+
+The following example assumes `cameraEntity` has a camera component and `sunEntity` has a directional light component:
+
+```javascript
+const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
+cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+cameraFrame.taa.enabled = true;
+
+sunEntity.light.castShadows = true;
+cameraFrame.volumetricFog.enabled = true;
+cameraFrame.volumetricFog.light = sunEntity.light;
+cameraFrame.volumetricFog.density = 0.01;
+cameraFrame.volumetricFog.heightBase = 0;
+cameraFrame.volumetricFog.heightFalloff = 0.05;
+cameraFrame.update();
+```
+
+Choose the height and density to suit your scene's world units. To see shafts, place shadow-casting geometry between the light and the fog, and set the light's shadow distance and resolution to cover the area of interest. Fog is composed before TAA, so enabling TAA smooths the raymarch noise over time. Call `cameraFrame.update()` after changing settings.
+
+## Omni and Spot Lights
+
+Local lights require [clustered lighting](/user-manual/graphics/lighting/clustered-lighting/), which is enabled by default. Enable the light types you want to contribute:
+
+```javascript
+cameraFrame.volumetricFog.localSpotLights = true;
+cameraFrame.volumetricFog.localOmniLights = true;
+cameraFrame.volumetricFog.localIntensity = 1;
+cameraFrame.volumetricFog.localSteps = 12;
+cameraFrame.update();
+
+// Adjust one spot light's contribution independently of its surface lighting.
+spotEntity.light.volumetricScattering = 2;
+```
+
+[`LightComponent.volumetricScattering`](https://api.playcanvas.com/engine/classes/LightComponent.html#volumetricscattering) defaults to 1 and applies to omni and spot lights. Set it to 0 to exclude a light from the fog. `localIntensity` scales all local-light scattering, while `intensity` controls the directional-light contribution. Narrow beams may need a higher `localIntensity` because they cross only a short section of each view ray.
+
+Local lights sample the clustered shadow and cookie atlases. Enable shadow casting on the lights to let geometry block their beams, and use cookies to shape the illumination. Shadow atlas resolution affects the detail visible in the beams.
+
+For a scene lit only by local lights, leave `volumetricFog.light` as `null` and enable `localSpotLights` or `localOmniLights`. The ambient term still contributes, but ambient alone does not activate the effect.
+
+## Appearance
+
+| Setting | Default | Effect |
+| --- | --- | --- |
+| `density` | `0.01` | Fog density at and below the base height. |
+| `heightBase` | `0` | World-space height above which density starts to fall off. |
+| `heightFalloff` | `0.05` | Exponential density falloff above the base. Use 0 for uniform density. |
+| `tint` | White | Color of the fog's scattering medium. |
+| `extinction` | `1` | Absorption relative to scattering. Lower values keep distant fog and shafts brighter, at the expense of physical accuracy. |
+| `anisotropy` | `0.6` | Forward scattering, from 0 to 0.95. Larger values make fog brighter when looking towards the light. |
+| `intensity` | `1` | Directional-light scattering strength. |
+| `localIntensity` | `1` | Omni and spot light scattering strength. |
+| `ambientColor` | White | Color of the ambient light scattered by the fog. |
+| `ambientIntensity` | `0.02` | Ambient contribution that keeps shadowed fog visible. |
+
+## Quality and Performance
+
+| Setting | Default | Tradeoff |
+| --- | --- | --- |
+| `steps` | `24` | Main raymarch samples, from 4 to 128. More samples improve quality at a higher cost. |
+| `localSteps` | `12` | Samples inside each local light volume, from 2 to 64. Increase for detailed beams. |
+| `scale` | `0.5` | Fog texture resolution relative to the scene render target, from 0.25 to 1. Lower values reduce pixel work. |
+| `maxDistance` | `300` | Maximum world-space distance covered by the raymarch. Limit it to the visible fog range. |
+
+Start with the default half-resolution fog and TAA, then increase samples only where noise or banding remains visible. A longer `maxDistance` spreads the same samples over more space, so long rays may need more steps.
+
+Local-light cost grows with the number of contributing lights, their screen coverage, and `localSteps`. Omni lights fill a sphere and often cover more of the screen than spot lights. Keep light ranges tight and disable scattering on lights that do not need to illuminate fog.
+
+## Gaussian Splats {#gaussian-splats}
+
+Fog and depth of field need Gaussian splats to contribute to scene depth to respect the splats' surfaces. This is disabled by default because it costs an extra full-screen render target. Enable it through [`GSplatParams.sceneDepthWrite`](https://api.playcanvas.com/engine/classes/GSplatParams.html#scenedepthwrite):
+
+```javascript
+if (pc.CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
+    app.scene.gsplat.sceneDepthWrite = true;
+    cameraFrame.rendering.samples = 1;
+    cameraFrame.update();
+}
+```
+
+[`CameraFrame.isSplatSceneDepthSupported`](https://api.playcanvas.com/engine/classes/CameraFrame.html#issplatscenedepthsupported) checks device support, not the camera's complete configuration. Splat scene depth also requires:
+
+- No MSAA on the CameraFrame (`rendering.samples = 1`); TAA can still be used.
+- A camera that clears its whole render target.
+- No depth prepass required for in-scene depth sampling. In particular, `rendering.sceneDepthMap = true` and `ssao.type = pc.SSAOTYPE_LIGHTING` prevent this path. Use `pc.SSAOTYPE_COMBINE` if SSAO is needed alongside splat scene depth.
+
+Unsupported configurations fall back to depth that excludes splats, and a debug build warns when requested splat depth cannot be produced. If the scene relies on splat depth, disable fog and DoF when it is unavailable, or provide suitable depth geometry. Use the [depth debug view](index.md#debug-views) to inspect the result.
+
+Some devices use lower-precision scene depth. Keep camera clip distances within approximately 0.000015 to 16384 world units on those devices to preserve depth accuracy.
+
+## In the Editor
+
+Add and parse [`camera-frame.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs), then attach the registered `cameraFrame` script to the camera entity as described in [CameraFrame in the Editor](/user-manual/graphics/linear-workflow/hdr-rendering/#cameraframe-in-the-editor).
+
+Enable the **Volumetric Fog** group. Its **Light** field takes the directional light **entity**; the engine API takes the light **component**. Enable **Local Spot Lights** or **Local Omni Lights** for local illumination, and use the same appearance and quality controls described above. Enable **TAA** to smooth the fog. If these attributes are missing from an existing project, update the script asset and parse it again.
+
+## Examples
 
 --------------------------------------------------------------------------------
 

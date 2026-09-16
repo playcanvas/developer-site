@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.22.2
-Total Documents: 504
-Generated: 2026-09-15
+Total Documents: 505
+Generated: 2026-09-16
 
 ## Instructions for Large Language Models
 
@@ -577,10 +577,11 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Parallax Mapping](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/parallax-mapping/): Fake surface relief from a height map: the offset and marched modes, the zero level, sample budgets, self shadowing, and the limits of the technique.
 - [Physical Materials](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/physical-materials/): Physical Material maps and parameters: metalness and specular workflows, IBL needs, and common texture slots.
 - [Post Effects](https://developer.playcanvas.com/user-manual/graphics/posteffects/): Compare modern CameraFrame HDR post-processing with legacy script effects and find links to individual filters.
-- [Modern Post Processing](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/): CameraFrame HDR stack: bloom, SSAO, TAA, depth of field, grading, examples, and customization entry points.
+- [Modern Post Processing](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/): CameraFrame HDR stack: volumetric fog, bloom, SSAO, TAA, depth of field, color enhancement, grading, and customization.
 - [Customizing the Compose Shader](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/compose-shader/): Override CameraFrame compose chunks to inject uniforms and pixel effects into the final fullscreen combine pass.
 - [Custom Render Passes](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/custom-passes/): Build custom RenderPass-based post stacks on the camera without CameraFrame for full manual pipeline control.
 - [Extending FramePassCameraFrame Class](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/extending-class/): Extend FramePassCameraFrame to insert passes, reorder work, and tap intermediate scene textures in the HDR stack.
+- [Volumetric Fog](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/volumetric-fog/): Set up CameraFrame height fog and light shafts, tune directional and local lights, and handle performance and Gaussian splat depth.
 - [Legacy Post Effects](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/): Attach legacy script post effects to camera entities, order passes, and fetch ready-made effects from the engine repo.
 - [Bloom Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/bloom/): Legacy script bloom: intensity, threshold, blur, and links to the engine posteffect-bloom source on GitHub.
 - [Brightness-Contrast Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/brightness_contrast/): Legacy brightness and contrast script effect: parameter ranges and GitHub source for the camera post pipeline.
