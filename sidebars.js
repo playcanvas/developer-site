@@ -850,6 +850,7 @@ const sidebars = {
                 id: 'user-manual/graphics/posteffects/cameraframe/index',
               },
               items: [
+                'user-manual/graphics/posteffects/cameraframe/volumetric-fog',
                 'user-manual/graphics/posteffects/cameraframe/compose-shader',
                 'user-manual/graphics/posteffects/cameraframe/extending-class',
                 'user-manual/graphics/posteffects/cameraframe/custom-passes',

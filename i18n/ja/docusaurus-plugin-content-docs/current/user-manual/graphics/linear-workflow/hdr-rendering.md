@@ -53,6 +53,10 @@ PlayCanvas Engine は、High Dynamic Range (HDR) レンダリング、ブルー�
 - **Temporal Anti-Aliasing (TAA)**: 時間の経過とともにギザギザのエッジを滑らかにすることで、視覚的なアーティファクトを軽減します。
 - **Vignette**: 画像の隅を暗くすることで、中央に注意を引きます。
 - **Color Grading**: スタイリッシュな効果のためにカラーバランスを調整します。
+- **カラーエンハンス**: シャドウ、ハイライト、中間調、自然な彩度、かすみの除去を個別に調整します。
+- **[ボリューメトリックフォグ](/user-manual/graphics/posteffects/cameraframe/volumetric-fog/)**: ディレクショナル、オムニ、スポットライトによる高さに応じたフォグと光の筋をレンダリングします。
+
+全機能の一覧、設定のヒント、例は[モダンなポストプロセス](/user-manual/graphics/posteffects/cameraframe/)を参照してください。
 
 ### カメラでの CameraFrame の設定
 
@@ -60,10 +64,11 @@ PlayCanvas Engine は、High Dynamic Range (HDR) レンダリング、ブルー�
 const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
 cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
 cameraFrame.rendering.samples = 4;
-cameraFrame.bloom.enabled = true;
 cameraFrame.bloom.intensity = 0.01;
 cameraFrame.update();
 ```
+
+エンジンの `CameraFrame` では、`bloom.intensity` を正の値にするとブルームが有効になり、0 にすると無効になります。この API に `bloom.enabled` フラグはありません。Editor のスクリプトラッパーには別途 **Bloom > Enabled** 設定があります。
 
 HDR bloomが効果的であるためには、シーンに明るい光源を含める必要があります。これは通常、高輝度の放射マテリアルを使用することで実現されます。例：
 
@@ -133,12 +138,12 @@ cameraFrame.update();
 
 ## エディターでのCameraFrame {#cameraframe-in-the-editor}
 
-PlayCanvas Editorプロジェクト用の`CameraScript`が[こちら](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs)で利用可能です。このスクリプトは`CameraFrame`の機能をエディターのInspectorに直接統合し、高度なレンダリング機能を備えたカメラのセットアップと設定を容易にします。
+[`camera-frame.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs) スクリプトは、エンジンの `CameraFrame` 設定を Editor の Inspector に公開します。クラス名は `CameraFrame`、登録名は `cameraFrame` です。
 
 ### 使用方法
 
-1. `CameraScript`をプロジェクトに追加し、パースします。
-2. `CameraComponent`を持つエンティティに追加します。
+1. `camera-frame.mjs` をプロジェクトに追加し、パースします。
+2. Camera コンポーネントを持つエンティティに `cameraFrame` スクリプトを追加します。
 3. Inspectorを使用して、トーンマッピング、ブルーム、SSAO、その他のエフェクトなど、カメラのレンダリング設定を構成します。
 
 この統合により、複雑なカメラエフェクトのセットアッププロセスが効率化され、PlayCanvas Editor内での全体的なワークフローが向上します。
