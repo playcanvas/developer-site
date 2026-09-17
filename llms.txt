@@ -8,8 +8,8 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.22.2
-Total Documents: 505
-Generated: 2026-09-16
+Total Documents: 506
+Generated: 2026-09-17
 
 ## Instructions for Large Language Models
 
@@ -459,7 +459,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr/): WebXR setup for Web Components: load the engine's XR scripts, build a camera rig with xrSession, and start sessions by firing app events.
 
 ### SuperSplat
-- [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat/): SuperSplat is PlayCanvas's editing and publishing platform for 3D Gaussian Splats — edit, upload, manage, curate, share, and discover splat scenes on superspl.at.
+- [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat/): SuperSplat turns a raw 3D Gaussian Splat capture into a polished, shareable scene: clean it in the browser-based Editor, publish it to superspl.at, curate it in Studio, and embed it anywhere.
 - [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations/): Use the SuperSplat API to publish Gaussian splats from capture tools, training pipelines, and custom applications.
 - [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert/): Convert and transform splats in your browser at superspl.at/convert — the web frontend to the splat-transform CLI.
 - [SuperSplat Editor](https://developer.playcanvas.com/user-manual/supersplat/editor/): SuperSplat Editor: the open-source, browser-based editor for cleaning, optimizing, and animating 3D Gaussian Splats.
@@ -478,6 +478,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Transform, Measure and Align](https://developer.playcanvas.com/user-manual/supersplat/editor/transform-measure-align/): Move, rotate, scale, measure, orient, align, and merge whole splats or selected Gaussians in the SuperSplat Editor.
 - [Troubleshooting](https://developer.playcanvas.com/user-manual/supersplat/editor/troubleshooting/): Resolve common SuperSplat Editor problems with imports, selection, transforms, exports, performance, saving, rendering, and publishing.
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore/): Browse and discover public splats on superspl.at: sort, filter by time and feature, search, and dig into a creator's profile.
+- [Getting Started](https://developer.playcanvas.com/user-manual/supersplat/getting-started/): Publish your first splat with SuperSplat in about ten minutes: load a PLY in the Editor, clean it up, publish it, curate it in Studio, and share the scene page.
 - [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage/): Use the Manage page on superspl.at to list, edit, share, and delete your published splats — and to open them in Studio.
 - [Scene Page](https://developer.playcanvas.com/user-manual/supersplat/scene-page/): The public page for a published splat on superspl.at — embedded viewer, share, embed, download, comments, likes, and suggested splats.
 - [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming/): How SuperSplat compresses published splats to SOG, generates Streamed SOG for large scenes, and enforces a runtime Gaussian budget.

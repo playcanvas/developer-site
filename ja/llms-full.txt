@@ -4,8 +4,8 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 505
-Generated: 2026-09-16
+Total Documents: 506
+Generated: 2026-09-17
 
 ================================================================================
 
@@ -32888,9 +32888,54 @@ A 32 × 14 × 32-block grid at 5 cm resolution (block size 0.2):
 
 URL: https://developer.playcanvas.com/user-manual/supersplat/
 
-[SuperSplat](https://superspl.at) is PlayCanvas's editing and publishing platform for 3D Gaussian Splats. It takes a raw splat capture all the way from cleanup to a polished, shareable scene with cameras, animations, annotations, post effects, and collision — viewable in any modern browser.
+[SuperSplat](https://superspl.at) turns a raw 3D Gaussian Splat capture into a polished, shareable 3D scene. Clean it up in your browser, publish it with one click, and let anyone explore it on any device.
 
-The platform is made up of several pieces. Some you'll use as a creator, some your visitors use to view what you've made, and some are general-purpose utilities.
+[Interactive Demo]
+
+Drag to orbit, scroll to zoom, and click the numbered hotspots. This honeybee by [danylyon](https://superspl.at/user/danylyon) was cleaned in the [Editor](editor/), published to [superspl.at](https://superspl.at), and annotated in [Studio](studio/). Everything on this page is about doing the same with your own captures.
+
+## SuperSplat in 60 seconds
+
+[Interactive Demo]
+
+Browse, view, clean up, publish, curate, convert, and share: the whole platform in under a minute.
+
+## Where do you want to start?
+
+<div className="row path-cards">
+  <div className="col col--6">
+    
+  </div>
+  <div className="col col--6">
+    
+  </div>
+  <div className="col col--6">
+    
+  </div>
+  <div className="col col--6">
+    
+  </div>
+</div>
+
+:::tip Already have a clean splat?
+
+You can skip the Editor. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) or use [Direct Upload](upload) to publish a ready-made file straight to your [Manage page](manage).
+
+:::
+
+## Your first splat in 10 minutes
+
+1. **Load.** Open [superspl.at/editor](https://superspl.at/editor) and drop in your splat file. See [Import and Export](editor/import-export) for the supported formats.
+2. **Clean.** Select stray floaters with the box, brush, or sphere tools and press <kbd>Delete</kbd>. See [Selection and Cleanup](editor/editing-splats).
+3. **Publish.** Choose **File → Publish**. Your splat lands on your [Manage page](manage) with its own [scene page](scene-page). See [Publishing](editor/publishing).
+4. **Curate.** Open it in [Studio](studio/) to frame the camera, add annotations, and switch on post effects.
+5. **Share.** Copy the scene link, grab the embed snippet, or set it to **Public** so it appears in [Explore](explore).
+
+The [Getting Started](getting-started) guide walks through each step with screenshots.
+
+## How the pieces fit together
+
+Some parts of SuperSplat you use as a creator, some your visitors use to view what you've made, and some are general-purpose utilities.
 
 ```mermaid
 flowchart TB
@@ -32912,54 +32957,32 @@ flowchart TB
     end
 ```
 
-:::tip You can skip the Editor
-
-If you already have a clean splat file, you don't need to use the Editor. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or on your [Manage page](manage)) to publish straight to the platform.
-
-:::
-
-## The platform
-
 | Surface | What it is | Where it lives |
 |---------|------------|----------------|
 | **[Editor](editor/)** | Browser-based editor for cleaning, cropping, color-adjusting, and animating splats. Publishes to superspl.at. | [superspl.at/editor](https://superspl.at/editor) |
 | **[Direct Upload](upload)** | Publish an already-clean splat file without opening the Editor. | The orange **Upload Splat** button on [superspl.at](https://superspl.at) |
-| **[Manage](manage)** | Your splat library: edit title/description, change visibility, choose downloadable + license, delete, open in Studio. | [superspl.at/manage](https://superspl.at/manage) |
-| **[Studio](studio/)** | Curate the published viewing experience: cameras, animations, annotations, post effects, skybox, collision. YouTube-Studio-style per-scene URL. | `superspl.at/scene/<hash>/studio` |
+| **[Manage](manage)** | Your splat library: edit title and description, change visibility, choose downloadable + license, delete, open in Studio. | [superspl.at/manage](https://superspl.at/manage) |
+| **[Studio](studio/)** | Curate the published viewing experience: cameras, annotations, post effects, skybox, collision. | `superspl.at/scene/<hash>/studio` |
 | **[Scene page](scene-page)** | Public page for a published splat: embedded viewer, share, embed, download, comments, likes, suggested splats. | `superspl.at/scene/<hash>` |
 | **[Explore](explore)** | Public gallery with sort, time, feature filters, and search. The superspl.at home page. | [superspl.at](https://superspl.at) |
-| **[User Profile](user-profile)** | A user's public page: avatar, bio, social links, their published splats. | `superspl.at/user?id=<username>` |
-| **[Viewer](viewer/)** | The open-source web viewer that powers scene pages and Editor HTML exports. Embed in your own page or self-host. | npm `@playcanvas/supersplat-viewer`, [GitHub](https://github.com/playcanvas/supersplat-viewer) |
+| **[User Profile](user-profile)** | A creator's public page: avatar, bio, social links, their published splats. | `superspl.at/user/<username>` |
+| **[Viewer](viewer/)** | The open-source web viewer that powers scene pages and Editor HTML exports. Embed it in your own page or self-host it. | npm `@playcanvas/supersplat-viewer`, [GitHub](https://github.com/playcanvas/supersplat-viewer) |
 | **[Convert](convert)** | Web frontend to the [splat-transform](/user-manual/splat-transform/) CLI: convert formats, transform, and filter in the browser. | [superspl.at/convert](https://superspl.at/convert) |
 | **[API & Integrations](api-integrations)** | Publish and inspect scenes from capture tools, training pipelines, and custom applications. | [API reference](/user-manual/api/supersplat/) |
 
-Behind the scenes, every published splat is compressed to the SOG format, and large splats (over 1 million Gaussians) are automatically converted to Streamed SOG for fast loading on any device — see [Streaming & Performance](streaming).
+## Good to know
 
-## Open source vs hosted
+- **Everything runs in your browser.** The Editor loads splats locally and nothing is uploaded until you choose to publish.
+- **Browsing is anonymous.** A free PlayCanvas account is needed to publish, like, or comment. See [Account Creation](/user-manual/account-management/user-accounts/account-creation).
+- **Open source at the core.** The [Editor](https://github.com/playcanvas/supersplat), the [Viewer](https://github.com/playcanvas/supersplat-viewer), and [splat-transform](https://github.com/playcanvas/splat-transform) (which powers Convert) are MIT-licensed. Studio, Manage, Explore, scene pages, and the publish API are hosted by PlayCanvas on superspl.at.
+- **Publishing optimizes for you.** Every published splat is compressed to SOG, and splats over one million Gaussians are streamed progressively so they load fast on any device. See [Streaming & Performance](streaming).
+- **You can host it yourself.** Export a single-file HTML viewer from the Editor or use the Viewer npm package. See [Self-Hosting the Viewer](viewer/self-hosting).
 
-SuperSplat is built on open foundations, with a hosted platform layered on top.
+## Stay in the loop
 
-| Component | Source | License |
-|-----------|--------|---------|
-| Editor | [playcanvas/supersplat](https://github.com/playcanvas/supersplat) | MIT |
-| Viewer | [playcanvas/supersplat-viewer](https://github.com/playcanvas/supersplat-viewer) | MIT |
-| splat-transform (powers Convert) | [playcanvas/splat-transform](https://github.com/playcanvas/splat-transform) | MIT |
-| Studio, Manage, Explore, Scene page, Convert UI, the publish/scene API | hosted by PlayCanvas on superspl.at | proprietary |
-
-You can take the Editor's HTML export, or the Viewer npm package, and host published splats entirely on your own infrastructure if you prefer — see [Self-Hosting the Viewer](viewer/self-hosting).
-
-## Accounts
-
-A free PlayCanvas account is required to **publish splats** to superspl.at, **comment** on splats, and **like** splats. Browsing the [Explore](explore) page and viewing public [scene pages](scene-page) is anonymous. See [Account Creation](/user-manual/account-management/user-accounts/account-creation) to get started.
-
-## What's next?
-
-A typical first-time workflow:
-
-1. [Open the Editor](editor/) and load your PLY, or skip to step 2 if you already have a clean file.
-2. [Publish](editor/publishing) (from the Editor) or [Upload](upload) directly. The splat appears on your [Manage page](manage).
-3. [Open it in Studio](studio/) and add cameras, animations, annotations, post effects, a skybox, or collision.
-4. Share the [scene page](scene-page) URL, or [embed the Viewer](viewer/embedding) in your own site.
+- [SuperSplat news on the PlayCanvas blog](https://blog.playcanvas.com/tags/supersplat/)
+- [Discord](https://discord.gg/RSaMRzg) for questions and sharing your splats
+- [GitHub](https://github.com/playcanvas/supersplat) for issues and contributions
 
 --------------------------------------------------------------------------------
 
@@ -34557,6 +34580,111 @@ Click a card's author chip to land on that user's [profile page](/user-manual/su
 - [Scene page](/user-manual/supersplat/scene-page) — what happens when you click a card
 - [User Profile](/user-manual/supersplat/user-profile) — browse one creator's published splats
 - [Manage](/user-manual/supersplat/manage) — set your splats to **Public** so they appear in Explore
+
+--------------------------------------------------------------------------------
+
+## Getting Started
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/getting-started/
+
+This guide takes a raw splat file all the way to a published, shareable scene page. It takes about ten minutes and touches every part of the SuperSplat workflow: **Editor → Publish → Studio → Share**.
+
+## Before you start
+
+- **A splat file.** Any `.ply` produced by a Gaussian splatting trainer works, as do `.compressed.ply`, `.sog`, `.splat`, `.ksplat`, `.spz`, and XGRIDS `.lcc` files. Don't have one yet? [Creating Splats](/user-manual/gaussian-splatting/creating/) explains how captures are made and [Recommended Tools](/user-manual/gaussian-splatting/creating/recommended-tools) compares the apps that produce them. Or practice on the sample biker: [open it in the Editor](https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply).
+- **A free PlayCanvas account** for step 3. Loading and editing don't need one; publishing does. See [Account Creation](/user-manual/account-management/user-accounts/account-creation).
+- **A current browser.** The Editor runs on WebGPU: current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled. There is nothing to install.
+
+## 1. Load your splat in the Editor
+
+Open [superspl.at/editor](https://superspl.at/editor) and drop your file anywhere in the window. You can also use **File → Import**.
+
+[Image: The SuperSplat Editor interface]
+
+Once the splat appears, get your bearings:
+
+| Do this | To |
+|---------|----|
+| Left-drag | Orbit around the focal point |
+| Right-drag | Pan |
+| Mouse wheel | Zoom |
+| Double-click | Set the focal point |
+| Press **F** | Focus the camera on the current selection |
+
+If the scene is on its side or upside down, select it in the **Scene Manager** and rotate it upright with the transform controls. See [Transform, Measure and Align](editor/transform-measure-align.md). The full list of controls is in [Camera Controls](editor/camera-controls.md).
+
+## 2. Clean it up
+
+Most raw captures contain **floaters**: stray Gaussians hanging in space where the trainer wasn't sure what it saw. Removing them is the single biggest quality win.
+
+1. Switch to **Rings** mode so selections stop at the topmost visible surface.
+2. Pick a selection tool from the toolbar: **Brush Select** to paint over floaters, **Sphere Select** or **Box Select** to grab a 3D region, or **Flood Select** for an isolated patch. Hold **Shift** to add to the selection and **Ctrl** to remove from it.
+3. Press <kbd>Delete</kbd>. Rotate the camera, check from another angle, and repeat.
+4. Removed too much? Use **Edit → Undo**, or **Select → Reset** to restore every deleted Gaussian.
+
+[Image: Gaussians selected in Centers mode]
+
+To crop away everything outside your subject, select the region to keep with Box or Sphere Select, choose **Select → Invert**, and delete. [Selection and Cleanup](editor/editing-splats.md) covers every tool plus more cleanup recipes, and [Color and Appearance](editor/color-and-appearance.md) is where you fix exposure and tint.
+
+:::tip Save your work
+
+Choose **File → Save** to keep an `.ssproj` project file. It preserves your edits and project setup so you can pick up where you left off. See [Managing Projects](editor/managing-projects.md).
+
+:::
+
+## 3. Publish
+
+1. Make sure you are logged in at [superspl.at](https://superspl.at) (the **Login** button in the top right). Your avatar appears there when you are.
+2. Frame your favorite view. The published scene opens with the camera exactly where you leave it.
+3. Choose **File → Publish**, give the splat a **Title** and a **Description**, and click **Publish**.
+
+[Image: The Publish dialog]
+
+Compression to SOG takes a moment, and several minutes for very large scenes. When it finishes, a dialog shows the URL of your new [scene page](scene-page.md). New splats are **Unlisted**: anyone with the link can view them, but they won't appear in Explore until you make them Public in step 5.
+
+:::tip Already clean?
+
+If your file needs no editing, skip the Editor. The orange **Upload Splat** button on superspl.at publishes it directly. See [Direct Upload](upload.md).
+
+:::
+
+Every option in the dialog, including republishing to an existing scene, is covered in [Publishing](editor/publishing.md).
+
+## 4. Curate it in Studio
+
+Your splat now appears on your [Manage page](manage.md). Click **Open in Studio** in its row, or **Edit in Studio** on your scene page, to open [Studio](studio/index.md), where you shape what visitors see.
+
+[Image: The Manage page]
+
+Three things worth doing on a first pass:
+
+- **Frame the opening shot.** In the **Scene** tab, under **Cameras**, set the initial camera position, target, and field of view so visitors start from your best angle. See [Cameras](studio/cameras.md).
+- **Add a hotspot.** In the **Annotations** tab, frame a detail, add an annotation, and give it a title and some text. Visitors click through hotspots like a guided tour. See [Annotations](studio/annotations.md).
+- **Add some polish.** Under **Post Effects**, try a touch of **Bloom** or a **Vignette**, or pick a **Tonemapping** curve. See [Post Effects](studio/post-effects.md).
+
+<video autoPlay muted loop controls src='/video/supersplat-studio-edit-camera.mp4' style={{width: '100%', height: 'auto'}} />
+
+Click **Save** in the header when you're happy. Edits are not saved automatically. Each save publishes the complete settings, so visitors see the update as soon as they reload.
+
+## 5. Share it
+
+Open your [scene page](scene-page.md) at `superspl.at/scene/<hash>`.
+
+[Image: A published scene page]
+
+- **Share** copies the link or posts it to social platforms.
+- **Embed** gives you an `<iframe>` snippet for your own website. Later Studio changes show up there automatically.
+- To let visitors download your splat, enable **Downloadable** and pick a Creative Commons license on the [Manage page](manage.md).
+- To appear in [Explore](explore.md) and in search results, switch **Visibility** to **Public** in Manage.
+
+## Where next?
+
+- [Keyboard Shortcuts](editor/keyboard-shortcuts.md) to speed up cleanup.
+- [Timeline](editor/timeline.md) to animate the camera and publish a flythrough.
+- [Collision](studio/collision.md) to make a scene walkable in first person.
+- [Convert](convert.md) to change formats or shrink a splat without leaving the browser.
+- [Self-Hosting the Viewer](viewer/self-hosting.md) to export a single HTML file you can host anywhere.
+- [API & Integrations](api-integrations.md) to publish from your own pipeline.
 
 --------------------------------------------------------------------------------
 
