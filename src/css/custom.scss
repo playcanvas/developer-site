@@ -388,3 +388,13 @@ html[data-theme='dark'] .navbar--github-link:before {
   color: var(--ifm-color-primary);
   font-weight: 600;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .path-card {
+    transition: none;
+  }
+
+  .path-card:hover {
+    transform: none;
+  }
+}
