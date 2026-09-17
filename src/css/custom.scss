@@ -348,3 +348,53 @@ html[data-theme='dark'] .navbar--github-link:before {
 .sidebar-item-nowrap > .menu__list-item-collapsible > .menu__link {
   white-space: nowrap;
 }
+
+/* Intent cards on section landing pages (e.g. /user-manual/supersplat/) */
+.path-cards .col {
+  margin-bottom: var(--ifm-spacing-vertical);
+}
+
+.path-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.path-card:hover {
+  color: inherit;
+  text-decoration: none;
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.12), 0 4px 6px -4px rgba(0, 0, 0, 0.12);
+}
+
+.path-card .card__header h3 {
+  margin-bottom: 0;
+}
+
+.path-card .card__body {
+  flex: 1;
+}
+
+.path-card .card__body p {
+  margin-bottom: 0;
+}
+
+.path-card .card__footer {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .path-card {
+    transition: none;
+  }
+
+  .path-card:hover {
+    transform: none;
+  }
+}
