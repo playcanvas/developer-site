@@ -565,6 +565,7 @@ const sidebars = {
         id: 'user-manual/supersplat/index',
       },
       items: [
+        'user-manual/supersplat/getting-started',
         {
           type: 'category',
           label: 'Editor',
