@@ -36,7 +36,7 @@ To publish your splat:
    | **Publish to** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
    | **Title** | A short title that will appear below your splat's thumbnail once it is published |
    | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
-   | **Background** | The background color of the viewer. Defaults to the Editor's current background color |
+   | **Background** | The background color of the viewer. Defaults to the Editor's current background color (set in the [Appearance](interface.md#appearance) popup) |
    | **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
    | **Animation** | If enabled, the camera animation authored on the [Timeline](timeline.md) is baked into the scene and plays when it loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
    | **Loop Mode** | How an included camera animation plays back in the viewer:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |

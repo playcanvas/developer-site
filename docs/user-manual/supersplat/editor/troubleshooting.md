@@ -1,7 +1,13 @@
 ---
 title: Troubleshooting
-description: "Resolve common SuperSplat Editor problems with imports, selection, transforms, exports, performance, saving, rendering, and publishing."
+description: "Resolve common SuperSplat Editor problems with startup, imports, selection, transforms, exports, performance, saving, rendering, and publishing."
 ---
+
+## The Editor Does Not Start
+
+The Editor requires WebGPU. If the page shows "SuperSplat requires WebGPU, which this browser does not support" instead of loading, switch to a current version of Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled, and make sure hardware acceleration is turned on in the browser's settings. On a machine with more than one GPU, the browser must be allowed to use the dedicated one.
+
+If the message is "SuperSplat failed to start", open the browser console for details and include them when you [report the problem](#reporting-a-problem).
 
 ## A File Does Not Import
 
@@ -12,11 +18,14 @@ description: "Resolve common SuperSplat Editor problems with imports, selection,
 
 ## Selection Does Not Match the Visible Surface
 
-**Centers** mode selects Gaussian centers through the depth of the scene. Switch to **Rings** mode when you want screen-space selection to affect only the topmost visible layer.
+Check the two toggles at the left of the bottom toolbar:
 
-Pressing `Tab` hides the edit overlay but does not change the active selection mode. Press `M` to switch modes. Locked or deleted Gaussians cannot be selected; use **Select > Unlock** or **Select > Reset** when appropriate.
+- **Selection Depth** (`N`) is off by default, so a selection reaches through the whole scene and also picks Gaussians hidden behind the surface you clicked. Turn it on to select only the visible surface.
+- **Selection Footprint** (`M`) is off by default, so a Gaussian is only picked when its center lies inside the tool's shape. Large, soft Gaussians whose centers sit just outside your selection are left out; turn it on to select by the whole footprint instead.
 
-See [Selection and Cleanup](editing-splats.md) for selection operations and cleanup recipes.
+Pressing `Tab` only shows or hides the center and ring overlays; it does not change how selection works. Locked or deleted Gaussians cannot be selected; use **Select > Unlock** or **Select > Reset** when appropriate.
+
+See [Selection Depth and Footprint](editing-splats.md#selection-depth-and-footprint) and the cleanup recipes in [Selection and Cleanup](editing-splats.md).
 
 ## A Transform Moves the Wrong Content
 
@@ -32,28 +41,30 @@ To combine splats into one PLY, use **File > Export > PLY**. **File > Save** cre
 
 ## Color Looks Different
 
-- Check **Settings** for tonemapping, exposure, background color, and the number of spherical harmonic bands shown in the viewport.
-- Open **Color** and use its reset button to rule out per-splat tint, tonal, or transparency adjustments.
+- Check **Preferences** for the tone mapping curve and the number of spherical harmonic bands shown in the viewport, and **Appearance** for the background color. These are view settings and are not written into exports.
+- Expand **Colors** in the Scene Manager and click **Reset** to rule out a color grade applied to the splat or to a selection.
 - Inspect the scene from several angles because spherical harmonic color is view-dependent.
 
 See [Color and Appearance](color-and-appearance.md) for the difference between splat adjustments and viewport settings.
 
 ## The Editor Is Slow or Runs Out of Memory
 
-Large splats are limited by available browser and GPU memory. Close other graphics-intensive tabs, work on one visible splat at a time with Solo mode, and choose a lower level of detail when importing a multi-LOD file. You can also reduce the Gaussian count by cleaning the splat. For large sequence imports, remember that every frame contains a full splat.
+Large splats are limited by available GPU memory. Close other graphics-intensive tabs, work on one visible splat at a time with Solo mode, and choose a lower level of detail when importing a multi-LOD file. You can also reduce the Gaussian count by cleaning the splat. For large sequence imports, remember that every frame contains a full splat.
 
-WebGPU is required only for SOG and standalone viewer exports; normal editing requires WebGL 2.0. If a WebGPU export is unavailable, use a current browser with WebGPU enabled and supported by the device.
+If the viewport stutters while you orbit a heavy scene, open **Preferences** and check **Stochastic Alpha**. **Auto** (the default) switches to fast stochastic rendering during movement only once a sorted frame proves slow; choose **Movement** to use it during every camera move, or **Enabled** to use it all the time. The **Frame Timings** and **Overdraw** diagnostics in the [Overlays](interface.md#overlays) popup show where the time goes: high GPU times together with a red-to-white overdraw map mean many overlapping Gaussians, which cleanup or a lower level of detail will reduce.
 
 ## Unsaved Work or Project Confusion
 
-Use **File > Save** or **Save As** regularly to preserve an editable `.ssproj` project. Exported PLY and other delivery formats are not substitutes for the project file when you need to continue editing splat layout, color controls, camera settings, or animation.
+Use **File > Save** or **Save As** regularly to preserve an editable `.ssproj` project. Exported PLY and other delivery formats are not substitutes for the project file when you need to continue editing splat layout, camera settings, or animation.
 
 See [Managing Projects](managing-projects.md) for the difference between saving, opening, importing, and exporting.
 
 ## Publishing or Rendering Fails
 
 - Publishing requires you to be signed in to superspl.at with a PlayCanvas account.
-- Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or use a current version of Chrome, Edge, Firefox, or Safari.
-- A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing.
+- Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or update your browser or graphics driver.
+- A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing. In browsers without the File System Access API, renders and exports are delivered as downloads.
+
+## Reporting a Problem {#reporting-a-problem}
 
 If the problem persists, open **Help > Log an Issue** in the Editor and include the browser version, operating system, source format, approximate Gaussian count, and the steps that reproduce the problem. You can also ask in the [SuperSplat Discord community](https://discord.gg/T3pnhRTTAY).

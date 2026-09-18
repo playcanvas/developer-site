@@ -23,7 +23,8 @@ The controls on the left determine which values are included in the histogram:
 | Control | Description |
 |---------|-------------|
 | **Visible Splats Only** | Includes only splats inside the camera's current view. Splats outside the view are excluded. This is a view-frustum filter; it does not test whether another splat is in front of them. |
-| **Log Scale** | Uses a logarithmic vertical scale so bins with small counts remain visible alongside bins with large counts. This changes only the graph's vertical display, not the underlying values or selection. |
+| **Log Counts** | Uses a logarithmic vertical scale so bins with small counts remain visible alongside bins with large counts. This changes only the graph's vertical display, not the underlying values or selection. |
+| **Log Bins** | Spaces the bins logarithmically along the value axis (negative values included), so groups of values spread across a large range stay distinguishable. Range selection still works on the real values. |
 | **All Properties** | Adds raw DC and spherical harmonic (SH) coefficients to the property list. The available SH entries depend on the bands contained in the active splat. |
 
 Select a row in the property list to display its distribution. The default properties are:
@@ -31,8 +32,8 @@ Select a row in the property list to display its distribution. The default prope
 | Property | Description |
 |----------|-------------|
 | **Position X/Y/Z** | World-space position after applying scene and per-splat transforms. |
-| **Opacity** | Effective opacity, including the active Color panel transparency adjustment. |
-| **Red/Green/Blue** | Final color for the current camera direction, including spherical harmonics and Color panel adjustments. These histograms can change when the camera moves. |
+| **Opacity** | Effective opacity, including any applied **Colors** transparency grade. |
+| **Red/Green/Blue** | Final color for the current camera direction, including spherical harmonics and any applied **Colors** grade. These histograms can change when the camera moves. |
 | **Scale X/Y/Z** | Decoded Gaussian scale along each local axis. |
 | **Quaternion W/X/Y/Z** | Components of the Gaussian's rotation quaternion. |
 | **Distance** | Distance from the world origin `(0, 0, 0)`. |
@@ -45,7 +46,7 @@ With **All Properties** enabled, the list can also include:
 
 | Property | Description |
 |----------|-------------|
-| **DC R/G/B** | Raw zeroth-order spherical harmonic color coefficients. These values do not include higher SH bands or Color panel adjustments. |
+| **DC R/G/B** | Raw zeroth-order spherical harmonic color coefficients. These values do not include higher SH bands or an applied color grade. |
 | **R/G/B SH _n_** | Higher-order spherical harmonic coefficients, grouped by color channel. Only coefficients present in the source data are listed. |
 
 Locked and deleted splats are always excluded from the histogram. Enable **Visible Splats Only** to exclude off-screen splats as well.
@@ -93,7 +94,7 @@ These totals update when splats are selected, deselected, locked, unlocked, dele
 
 ### Finding Outliers
 
-Choose **Distance**, **Opacity**, **Volume**, or **Surface Area**, look for isolated bins at either end of the histogram, and select the relevant range for inspection or deletion. Enable **Log Scale** when a small number of outliers is hidden by much larger bins.
+Choose **Distance**, **Opacity**, **Volume**, or **Surface Area**, look for isolated bins at either end of the histogram, and select the relevant range for inspection or deletion. Enable **Log Counts** when a small number of outliers is hidden by much larger bins, and **Log Bins** when the values span several orders of magnitude.
 
 ### Selecting by Color
 
@@ -111,9 +112,9 @@ The panel displays decoded or derived values rather than every value exactly as 
 |---------------|----------------|
 | Position | World-space position after active transforms. |
 | Scale | Decoded Gaussian scale; logarithmic source values have already been exponentiated. |
-| Red/Green/Blue | Final color after evaluating available SH bands for the current view and applying Color panel adjustments. |
+| Red/Green/Blue | Final color after evaluating available SH bands for the current view and applying any color grade. |
 | Hue/Saturation/Value | Calculated from the final color after clamping RGB to the `0-1` range. |
-| Opacity | Decoded opacity with the Color panel transparency adjustment applied. |
+| Opacity | Decoded opacity with any transparency grade applied. |
 | Quaternion W/X/Y/Z | Rotation quaternion; `W` is reconstructed in its non-negative canonical form. |
 | DC and SH | Raw coefficients exposed when **All Properties** is enabled. |
 
