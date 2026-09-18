@@ -7,7 +7,7 @@ SuperSplat supports the `.ssproj` file format, allowing you to save and reload y
 
 ## Features of `.ssproj` Files
 
-* Full Project Save: Stores all relevant project data, including app settings, timeline settings and more.
+* Full Project Save: Stores every imported splat with its edits, transform, pivot, and applied color grades, plus the camera, view settings such as the grid planes, and the timeline animation.
 * Easy Reloading: Load a saved project file to restore the exact state of your work.
 * Portability: Share `.ssproj` files with others to collaborate on projects.
 
@@ -15,26 +15,30 @@ SuperSplat supports the `.ssproj` file format, allowing you to save and reload y
 
 To save your current work as a `.ssproj` file:
 
-* Open the `File` menu.
-* Select `Save As`.
-* Choose a location and enter a name for your project.
-* Click Save. Your project will be stored as a `.ssproj` file.
+* Open the `File` menu and select `Save As`.
+* In the **Save As** dialog, choose the output folder under **Location**. The Editor remembers the last folder you used; click **Choose output folder…** (or **Change…**) to pick another.
+* Enter a **Filename**. The dialog warns if a file of that name already exists and offers to **Overwrite** it.
+* Click **Save**. Your project will be stored as a `.ssproj` file.
+
+Once a project has a name, `File` > `Save` writes to the same file again without asking. In browsers without the File System Access API, the project is delivered as a download instead.
 
 ## Loading a Project
 
 To load a previously saved `.ssproj` file:
 
-* Open the `File` menu.
-* Select `Open`.
-* Browse to the `.ssproj` file you wish to open.
-* Click `Open`. SuperSplat will restore your project to its last saved state.
+* Open the `File` menu and select `Open`, then browse to the `.ssproj` file and click `Open`.
+* Or select `File` > `Open Recent` to pick a project you have opened or saved before.
+* Or drag the `.ssproj` file into the Editor window.
+* If you have installed SuperSplat as an app, double-click the `.ssproj` file in File Explorer (Windows) or Finder (macOS).
+
+SuperSplat restores the project to its last saved state.
 
 ## File Structure
 
 The `.ssproj` format is actually a ZIP archive containing:
 
-* A JSON-based file that stores project-specific metadata, such as app settings and timeline settings.
-* One or more uncompressed `.ply` files (these are listed in the `Scenes` panel on load).
+* A JSON document that stores the project metadata: camera, view settings, camera poses, timeline, and the list of splats.
+* The splat data, stored once as uncompressed `.ply` files, plus a small per-splat file holding each splat's editing state (selection, locked and deleted Gaussians, transform, and color grades). Each splat appears as a row in the Scene Manager on load.
 
 ## Best Practices
 

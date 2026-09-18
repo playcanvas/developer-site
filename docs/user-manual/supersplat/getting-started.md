@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: "Publish your first splat with SuperSplat in about ten minutes: load a PLY in the Editor, clean it up, publish it, curate it in Studio, and share the scene page."
+description: "Publish your first splat with SuperSplat in about ten minutes: load a splat file in the Editor, clean it up, publish it, curate it in Studio, and share the scene page."
 ---
 
 This guide takes a raw splat file all the way to a published, shareable scene page. It takes about ten minutes and touches every part of the SuperSplat workflow: **Editor → Publish → Studio → Share**.
@@ -15,7 +15,7 @@ This guide takes a raw splat file all the way to a published, shareable scene pa
 
 Open [superspl.at/editor](https://superspl.at/editor) and drop your file anywhere in the window. You can also use **File → Import**.
 
-![The SuperSplat Editor interface](/img/user-manual/supersplat/editor/interface-overview.png)
+![The SuperSplat Editor interface](/img/user-manual/supersplat/editor/interface-overview.webp)
 
 Once the splat appears, get your bearings:
 
@@ -33,14 +33,14 @@ If the scene is on its side or upside down, select it in the **Scene Manager** a
 
 Most raw captures contain **floaters**: stray Gaussians hanging in space where the trainer wasn't sure what it saw. Removing them is the single biggest quality win.
 
-1. Switch to **Rings** mode so selections stop at the topmost visible surface.
-2. Pick a selection tool from the toolbar: **Brush Select** to paint over floaters, **Sphere Select** or **Box Select** to grab a 3D region, or **Flood Select** for an isolated patch. Hold **Shift** to add to the selection and **Ctrl** to remove from it.
+1. Turn on **Selection Depth** (the second toggle at the left of the bottom toolbar, or press **N**) so selections stop at the visible surface, and press **Tab** to show the Gaussian centers.
+2. Pick a selection tool from the toolbar: **Brush Selection** to paint over floaters, **Sphere Brush** to paint in 3D along a surface, **Sphere Selection** or **Box Selection** to grab a 3D region, or **Flood Selection** for an isolated patch. Hold **Shift** to add to the selection and **Ctrl** to remove from it.
 3. Press <kbd>Delete</kbd>. Rotate the camera, check from another angle, and repeat.
 4. Removed too much? Use **Edit → Undo**, or **Select → Reset** to restore every deleted Gaussian.
 
-![Gaussians selected in Centers mode](/img/user-manual/supersplat/editor/centers-mode.png)
+![Selected Gaussians highlighted among the centers of the rest](/img/user-manual/supersplat/editor/display-centers.webp)
 
-To crop away everything outside your subject, select the region to keep with Box or Sphere Select, choose **Select → Invert**, and delete. [Selection and Cleanup](editor/editing-splats.md) covers every tool plus more cleanup recipes, and [Color and Appearance](editor/color-and-appearance.md) is where you fix exposure and tint.
+To crop away everything outside your subject, select the region to keep with Box or Sphere Selection, choose **Select → Invert**, and delete. [Selection and Cleanup](editor/editing-splats.md) covers every tool plus more cleanup recipes, and [Color and Appearance](editor/color-and-appearance.md) is where you fix exposure and tint.
 
 :::tip Save your work
 

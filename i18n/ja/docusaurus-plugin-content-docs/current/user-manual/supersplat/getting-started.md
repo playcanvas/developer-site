@@ -1,6 +1,6 @@
 ---
 title: はじめに
-description: "SuperSplatで最初のスプラットを約10分で公開する：EditorでPLYを読み込み、クリーンアップし、公開し、Studioでキュレーションし、シーンページを共有します。"
+description: "SuperSplatで最初のスプラットを約10分で公開する：Editorでスプラットファイルを読み込み、クリーンアップし、公開し、Studioでキュレーションし、シーンページを共有します。"
 ---
 
 このガイドでは、生のスプラットファイルを、公開され共有可能なシーンページになるまで一通り仕上げます。所要時間は約10分で、SuperSplatのワークフロー全体（**Editor → 公開 → Studio → 共有**）に触れます。
@@ -15,7 +15,7 @@ description: "SuperSplatで最初のスプラットを約10分で公開する：
 
 [superspl.at/editor](https://superspl.at/editor)を開き、ウィンドウ内の任意の場所にファイルをドロップします。**File → Import**からも読み込めます。
 
-![SuperSplat Editorのインターフェース](/img/user-manual/supersplat/editor/interface-overview.png)
+![SuperSplat Editorのインターフェース](/img/user-manual/supersplat/editor/interface-overview.webp)
 
 スプラットが表示されたら、操作に慣れましょう：
 
@@ -33,14 +33,14 @@ description: "SuperSplatで最初のスプラットを約10分で公開する：
 
 生のキャプチャの多くには**フローター**（トレーナーが判断に迷った場所に浮かんでいる不要なガウシアン）が含まれています。これを取り除くことが、品質向上のもっとも大きな一手です。
 
-1. **Rings**モードに切り替えて、選択が最前面の可視サーフェスで止まるようにします。
-2. ツールバーから選択ツールを選びます：フローターを塗るように選択する**Brush Select**、3D領域をまとめて選択する**Sphere Select**や**Box Select**、孤立した部分を選ぶ**Flood Select**などです。**Shift**を押しながらで選択に追加、**Ctrl**を押しながらで選択から除外できます。
+1. **Selection Depth**（下ツールバー左側の2つ目のトグル、または**N**キー）をオンにして選択が可視サーフェスで止まるようにし、**Tab**を押してガウシアンの中心点を表示します。
+2. ツールバーから選択ツールを選びます：フローターを塗るように選択する**Brush Selection**、サーフェスに沿って3Dでペイントする**Sphere Brush**、3D領域をまとめて選択する**Sphere Selection**や**Box Selection**、孤立した部分を選ぶ**Flood Selection**などです。**Shift**を押しながらで選択に追加、**Ctrl**を押しながらで選択から除外できます。
 3. <kbd>Delete</kbd>を押します。カメラを回して別の角度から確認し、繰り返します。
 4. 消しすぎてしまったら、**Edit → Undo**で戻すか、**Select → Reset**で削除したすべてのガウシアンを復元します。
 
-![Centersモードで選択されたガウシアン](/img/user-manual/supersplat/editor/centers-mode.png)
+![他のガウシアンの中心点の中でハイライトされた選択ガウシアン](/img/user-manual/supersplat/editor/display-centers.webp)
 
-被写体の外側をすべて切り落とすには、残したい領域をBox SelectまたはSphere Selectで選択し、**Select → Invert**を選んでから削除します。[選択とクリーンアップ](editor/editing-splats.md)ではすべてのツールとクリーンアップのレシピを、[色と外観](editor/color-and-appearance.md)では露出や色味の調整を解説しています。
+被写体の外側をすべて切り落とすには、残したい領域をBox SelectionまたはSphere Selectionで選択し、**Select → Invert**を選んでから削除します。[選択とクリーンアップ](editor/editing-splats.md)ではすべてのツールとクリーンアップのレシピを、[色と外観](editor/color-and-appearance.md)では露出や色味の調整を解説しています。
 
 :::tip 作業を保存する
 

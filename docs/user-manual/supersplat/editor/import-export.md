@@ -23,7 +23,7 @@ SuperSplat supports several Gaussian Splat scene formats, plus COLMAP and INRIA 
 | `images.txt` | ✅ | ❌ | Camera poses from a [COLMAP reconstruction](https://colmap.github.io/format.html#images-txt). Importing the file creates [Timeline keyframes](timeline.md#importing-camera-poses-as-keyframes); it does not load a splat scene |
 | Camera pose `.json` | ✅ | ❌ | Camera poses in the INRIA JSON format. Importing the file creates [Timeline keyframes](timeline.md#importing-camera-poses-as-keyframes); it does not load a splat scene |
 | `.html` | ❌ | ✅ | Self-contained viewer app with the compressed splat data embedded in one HTML file |
-| `.zip` | ❌ | ✅ | Viewer package containing an HTML app and a separate `.compressed.ply` file |
+| `.zip` | ❌ | ✅ | Viewer package containing an HTML app and a separate bundled SOG file (`index.sog`) |
 
 :::warning
 
@@ -37,9 +37,9 @@ SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.spla
 
 There are four ways to load a Gaussian Splat file:
 
-1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc`, `.lcc2`, unbundled SOG, or Streamed SOG), drag the parent folder containing those files.
-2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system.
-3. **Direct file opening** - If you have installed SuperSplat as a PWA, you can double-click a splat file in File Explorer (Windows) or Finder (macOS).
+1. **Drag and drop** - Drop one or more splat files, or a whole folder, from your file system into SuperSplat's window. For multi-file formats (such as `.lcc`, `.lcc2`, unbundled SOG, or Streamed SOG), drag the parent folder containing those files.
+2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system. `File` > `Import Recent` lists the files and folders you have imported before so you can reload them without browsing for them again; `Clear Recent` at the bottom of the list empties it.
+3. **Direct file opening** - If you have installed SuperSplat as an app from your browser's address bar, you can double-click a `.ply`, `.splat`, `.sog`, `.spz`, `.ksplat`, or `.ssproj` file in File Explorer (Windows) or Finder (macOS) to open it in the Editor.
 4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<SPLAT_URL>`. For example:
 
     https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply
@@ -85,14 +85,16 @@ PLY sequences are memory-intensive since each frame loads a complete splat scene
 
 ## Exporting Splats
 
-To export your currently loaded scene, open the `File` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
+To export your currently loaded scene, open the `File` > `Export` submenu and choose **PLY**, **SOG**, **SPZ**, **Splat**, or **Viewer App**. Exports include the visible splats only. Every export uses the same dialog:
 
-Most formats let you choose how many spherical harmonic bands to include in the export dialog. When exporting to SPZ, you can also select the format version: **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
+![The export dialog with its Location and Filename rows](/img/user-manual/supersplat/editor/export-dialog.png)
 
-:::note
+- **Location** - The output folder. The Editor remembers the folder you last exported to; click **Choose output folder…** (or **Change…**) to pick another. In browsers without the File System Access API this row is hidden and the file is delivered as a download instead.
+- **Filename** - The name of the output file. The dialog warns if the name is invalid or already exists in the folder (the button then reads **Overwrite**), and it refuses to overwrite a file that the current scene is still reading from.
+- Format-specific options:
+  - **PLY**: **Compress PLY** writes a `.compressed.ply` instead of a full-size PLY; **SH Bands** chooses how many spherical harmonic bands to include.
+  - **SOG**: **SH Bands**, and **Iterations** (1–20, default 10), the number of clustering passes used to compress the spherical harmonic data. More iterations give slightly better quality at the cost of export time.
+  - **SPZ**: **SH Bands**, and **Version**. **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
+  - **Viewer App**: the options for a standalone HTML viewer are described in [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting).
 
-Exporting to SOG (`.sog`) and exporting the standalone viewer (`.html` / `.zip`) require a browser with **WebGPU** support, as the SOG compression runs on the GPU. In a browser without WebGPU, these exports fail with the error: "This export requires WebGPU, which is not available in this browser. Please try a recent version of Chrome, Edge or Safari." All other export formats work in any WebGL 2.0 browser.
-
-:::
-
-For information about exporting and hosting HTML viewers for your splats, see [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting).
+Choose `File` > `Re-export` (`Ctrl + Shift + E`) to repeat the last export with the same options to the same file. It overwrites the previous output without further prompts, which is handy while iterating on a cleanup.

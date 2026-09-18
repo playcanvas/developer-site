@@ -63,7 +63,7 @@ Editorを省略できます。[superspl.atのホームページ](https://supersp
 ## 10分で最初のスプラットを公開する
 
 1. **読み込む。** [superspl.at/editor](https://superspl.at/editor)を開き、スプラットファイルをドロップします。対応形式は[インポートとエクスポート](editor/import-export)を参照してください。
-2. **クリーンアップする。** ボックス、ブラシ、スフィアの各ツールで浮遊するフローターを選択し、<kbd>Delete</kbd>を押します。[選択とクリーンアップ](editor/editing-splats)を参照してください。
+2. **クリーンアップする。** ブラシ、スフィア、ボックスの各選択ツールで浮遊するフローターを選択し、<kbd>Delete</kbd>を押します。[選択とクリーンアップ](editor/editing-splats)を参照してください。
 3. **公開する。** **File → Publish**を選びます。スプラットは[Manageページ](manage)に追加され、専用の[シーンページ](scene-page)が作られます。[公開](editor/publishing)を参照してください。
 4. **キュレーションする。** [Studio](studio/)で開き、カメラを決め、注釈を追加し、ポストエフェクトを有効にします。
 5. **共有する。** シーンのリンクをコピーする、埋め込みスニペットを取得する、または**Public**に設定して[Explore](explore)に表示させます。
@@ -109,7 +109,7 @@ flowchart TB
 
 ## 知っておきたいこと
 
-- **すべてブラウザで動きます。** Editorはスプラットをローカルで読み込み、あなたが公開を選ぶまで何もアップロードされません。
+- **すべてブラウザで動きます。** Editorはスプラットをローカルで読み込み、あなたが公開を選ぶまで何もアップロードされません。WebGPUに対応したブラウザ（最新のChromeまたはEdge、Safari 26以降、WebGPUを有効にしたFirefox）が必要です。
 - **閲覧は匿名でできます。** 公開、いいね、コメントには無料のPlayCanvasアカウントが必要です。[アカウント作成](/user-manual/account-management/user-accounts/account-creation)を参照してください。
 - **中核はオープンソースです。** [Editor](https://github.com/playcanvas/supersplat)、[Viewer](https://github.com/playcanvas/supersplat-viewer)、そしてConvertを支える[splat-transform](https://github.com/playcanvas/splat-transform)はMITライセンスです。Studio、Manage、Explore、シーンページ、公開APIはPlayCanvasがsuperspl.atでホストしています。
 - **公開時に自動で最適化されます。** 公開されたすべてのスプラットはSOG形式に圧縮され、100万ガウシアンを超えるスプラットはプログレッシブにストリーミングされるため、どのデバイスでも高速に読み込めます。[ストリーミングとパフォーマンス](streaming)を参照してください。
