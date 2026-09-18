@@ -613,6 +613,16 @@ class GameLogic extends Script {
 インターフェース属性は、通常の属性と同様に配列として使用できます。これは、`GameLogic`スクリプトが敵の配列を使用できることを意味し、それぞれが独自の制御可能なpowerとspeedプロパティを持ちます。
 
 ```javascript
+/** @interface */
+class Enemy {
+    /**
+     * @range [0, 11]
+     */
+    power = 10;
+
+    speed = 3;
+}
+
 class GameLogic extends Script {
     static scriptName = 'gameLogic';
 
@@ -624,11 +634,13 @@ class GameLogic extends Script {
 
     update(dt) {
         this.enemies.forEach(({ power, speed }) => {
-            this.updateEnemy(power, speed);
+            console.log('これは敵です', power, speed);
         });
     }
 }
 ```
+
+`Enemy`インターフェースは、スクリプトと同じファイル内で宣言するか、そのファイルにインポートする必要があります。`@type`タグの型を解決できない場合、その属性は無視され、エディターには表示されません。
 
 これにより、エディターにEnemyコントロールの配列が作成され、それぞれがサブ属性の独自の数値コントロールを持ちます。
 
