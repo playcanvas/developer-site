@@ -32946,7 +32946,7 @@ You can skip the Editor. Hit the orange **Upload Splat** button on the [superspl
 ## Your first splat in 10 minutes
 
 1. **Load.** Open [superspl.at/editor](https://superspl.at/editor) and drop in your splat file. See [Import and Export](editor/import-export) for the supported formats.
-2. **Clean.** Select stray floaters with the box, brush, or sphere tools and press <kbd>Delete</kbd>. See [Selection and Cleanup](editor/editing-splats).
+2. **Clean.** Select stray floaters with the brush, sphere, or box selection tools and press <kbd>Delete</kbd>. See [Selection and Cleanup](editor/editing-splats).
 3. **Publish.** Choose **File → Publish**. Your splat lands on your [Manage page](manage) with its own [scene page](scene-page). See [Publishing](editor/publishing).
 4. **Curate.** Open it in [Studio](studio/) to frame the camera, add annotations, and switch on post effects.
 5. **Share.** Copy the scene link, grab the embed snippet, or set it to **Public** so it appears in [Explore](explore).
@@ -32992,7 +32992,7 @@ flowchart TB
 
 ## Good to know
 
-- **Everything runs in your browser.** The Editor loads splats locally and nothing is uploaded until you choose to publish.
+- **Everything runs in your browser.** The Editor loads splats locally and nothing is uploaded until you choose to publish. It needs a WebGPU-capable browser: current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled.
 - **Browsing is anonymous.** A free PlayCanvas account is needed to publish, like, or comment. See [Account Creation](/user-manual/account-management/user-accounts/account-creation).
 - **Open source at the core.** The [Editor](https://github.com/playcanvas/supersplat), the [Viewer](https://github.com/playcanvas/supersplat-viewer), and [splat-transform](https://github.com/playcanvas/splat-transform) (which powers Convert) are MIT-licensed. Studio, Manage, Explore, scene pages, and the publish API are hosted by PlayCanvas on superspl.at.
 - **Publishing optimizes for you.** Every published splat is compressed to SOG, and splats over one million Gaussians are streamed progressively so they load fast on any device. See [Streaming & Performance](streaming).
@@ -33194,16 +33194,14 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 ### Accessing the Editor
 
 1. **Open your browser** — Navigate to [superspl.at/editor](https://superspl.at/editor)
-2. **Load your PLY file** — Drag and drop or use the File menu
+2. **Load your splat file** — Drag and drop it into the window, or use **File > Import**
 3. **Begin editing** — Use the interface controls to navigate and edit
 
 ### System Requirements
 
-- **Modern web browser** — Chrome, Firefox, Safari, or Edge
-- **WebGL 2.0 support** — Available in all modern browsers
-- **WebGPU support** — Only needed for SOG and standalone viewer exports (available in recent Chrome, Edge, and Safari)
-- **GPU acceleration** — Recommended for large splat files
-- **No installation** — Everything runs in the browser
+- **A WebGPU-capable browser** — Current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled. If WebGPU is unavailable, the Editor shows a message at startup instead of loading.
+- **GPU acceleration** — Keep hardware acceleration enabled in your browser. A dedicated GPU helps with very large splats.
+- **Nothing to install** — Everything runs in the browser. You can optionally install the Editor as an app from the browser's address bar; it then opens `.ply`, `.splat`, `.sog`, `.spz`, `.ksplat`, and `.ssproj` files directly from your file manager.
 
 ## What's next?
 
@@ -33262,16 +33260,16 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 | **Alt** | 0.1× slower fly speed |
 | **V** | Toggle between orbit and fly modes |
 | **Shift + F** | Reset camera to default position |
-| **F** | Focus camera on selection |
+| **F** | Focus camera on the selection (or on the active Box, Sphere, Measure, or Orient tool) |
 | **I** | Toggle the [camera info overlay](#camera-info-overlay) |
 
 ## Camera Settings
 
-Access camera settings through the **Settings** panel (gear icon):
+Access camera settings through the **Preferences** popup (the gear icon in the right toolbar):
 
 | Setting | Range | Default | Description |
 |---------|-------|---------|-------------|
-| **Field of View** | 10° - 120° | 75° | Camera viewing angle |
+| **Field of View** | 10° - 120° | 85° | Vertical camera viewing angle |
 | **FOV Auto Dolly** | On / Off | Off | How Field of View changes affect the camera (see below) |
 | **Fly Speed** | 0.1 - 30 | 1 | Speed of WASD navigation |
 
@@ -33279,7 +33277,7 @@ By default, changing the Field of View behaves like a lens zoom: the camera stay
 
 ## Camera Info Overlay
 
-Press **I** (or enable **Show Camera Info** in the **Settings** panel) to toggle an information overlay in the bottom-left corner of the viewport:
+Press **I** (or enable **Camera Info** in the **Overlays** popup) to toggle an information overlay in the bottom-left corner of the viewport:
 
 [Image: Camera Info Overlay]
 
@@ -33306,37 +33304,91 @@ This is handy for reproducing exact viewpoints - for example, returning to a pre
 
 URL: https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance/
 
-The **Color** panel applies non-destructive appearance adjustments to the active splat. Open it from the color icon in the right toolbar, then select the splat you want to adjust in the Scene Manager.
+Two different sets of controls affect how a splat looks in SuperSplat:
 
-Color adjustments apply to the entire active splat, not only to selected Gaussians. To treat one region differently, [separate it into a new splat](editing-splats.md#duplicate-and-separate-a-selection) first.
+- The **Colors** section of the Scene Manager changes the splat data itself: tint, temperature, saturation, brightness, tonal range, and transparency. These edits are saved and exported with the splat.
+- The **Appearance** popup changes only how the viewport draws Gaussians, their centers and rings, and the selection. It never modifies the splat.
 
-## Controls
+## Colors
 
-| Control | Effect |
-|---|---|
-| **Tint** | Multiplies the splat color by the selected color. White leaves the source color unchanged. |
-| **Temperature** | Shifts the result toward cooler or warmer tones. |
-| **Saturation** | Reduces or increases color intensity. A value of `1` leaves saturation unchanged. |
-| **Brightness** | Darkens or brightens the splat. A value of `0` leaves brightness unchanged. |
-| **Black Point** | Raises the darkest value that is mapped to black, increasing shadow clipping. |
-| **White Point** | Lowers the brightest value that is mapped to white, increasing highlight clipping. |
-| **Transparency** | Reduces or increases the splat's opacity relative to its source values. |
+Expand the **Colors** section at the bottom of the [Scene Manager](scene-management.md), below **Transform**. The sliders hold a pending color grade that is previewed live in the viewport on the Gaussians it would affect: the current selection, or the whole active splat when nothing is selected. Click **Apply** to bake the grade into those Gaussians; the sliders then return to neutral, ready for the next adjustment. To grade one region differently from the rest, select it first.
 
-Black Point cannot be set above White Point. Use the reset button in the panel header to return all Color controls to their defaults. Adjustments and resets can be undone and redone.
+[Image: The Colors section of the Scene Manager]
 
-## A Practical Correction Workflow
+### Controls
 
-1. Set the viewport tonemapping and background in **Settings** so you are judging the scene in its intended viewing conditions.
+| Control | Range | Effect |
+|---|---|---|
+| **Tint** | color | Multiplies the color by the chosen tint. White leaves the source color unchanged. |
+| **Temperature** | −0.5 to 0.5 | Shifts the result toward cooler (negative) or warmer (positive) tones. |
+| **Saturation** | 0 to 2 | Reduces or increases color intensity. `1` leaves saturation unchanged. |
+| **Brightness** | −1 to 1 | Darkens or brightens. `0` leaves brightness unchanged. |
+| **Black Point** | 0 to 1 | Raises the darkest value that is mapped to black, increasing shadow clipping. |
+| **White Point** | 0 to 1 | Lowers the brightest value that is mapped to white, increasing highlight clipping. |
+| **Transparency** | −6 to 6 | Reduces (negative) or increases (positive) opacity relative to the source values. |
+
+Black Point cannot be set above White Point. **Reset** removes any grade already applied to the targeted Gaussians and returns the sliders to neutral. Changing the selection discards a pending grade that has not been applied. Apply and Reset are recorded in the edit history and can be undone and redone.
+
+### A Practical Correction Workflow
+
+1. Set the viewport tone mapping in [Preferences](interface.md#preferences) and the background color in [Appearance](#appearance), so you are judging the scene in its intended viewing conditions.
 2. Correct overall warmth with **Temperature**.
 3. Adjust **Brightness**, then set **Black Point** and **White Point** to establish the tonal range.
 4. Use **Saturation** and **Tint** for the final color balance.
 5. Check the result from several camera angles. Spherical harmonic color can change with view direction.
+6. Click **Apply**.
 
-The viewport's tonemapping, exposure, and background are view settings; the Color panel changes the splat itself.
+Tone mapping and the background color are view settings; the Colors section changes the splat itself.
 
-## Save and Export Behavior
+### Save and Export Behavior
 
-Saving an `.ssproj` project preserves these controls as editable splat settings. When you export a splat format, SuperSplat applies the adjustments to the exported color and opacity data.
+Applied grades become part of the splat's color data, so they are stored in `.ssproj` projects and included in every export format. Click **Apply** before saving or exporting: a pending grade that has not been applied is only a preview.
+
+## Appearance {#appearance}
+
+Open the **Appearance** popup from the first button in the [right toolbar](interface.md#right-toolbar). Its settings are saved with your preferences and affect only the viewport.
+
+[Image: The Appearance popup]
+
+### Display
+
+The **Display** row chooses what is drawn for every Gaussian in the scene:
+
+| Toggle | Default | Description |
+|---|---|---|
+| **Gaussians** | On | Render the Gaussians themselves. |
+| **Centers** | On | Draw a dot at every Gaussian center. |
+| **Rings** | Off | Outline the footprint of every Gaussian. |
+
+Press `Tab` to toggle these display overlays on and off. They start off when you open the Editor, so the Gaussians render plainly and the Centers and Rings buttons are dimmed to show that they are inactive. Your choices are remembered, and turning any Display toggle on brings the overlays back. The [Selection Footprint](editing-splats.md#selection-depth-and-footprint) toggle keeps its own Display arrangement for each mode: centers while selecting by center, rings while selecting by footprint.
+
+### Selection
+
+The **Selection** row chooses how selected Gaussians are highlighted. These overlays stay visible even when the display overlays are toggled off.
+
+| Toggle | Default | Description |
+|---|---|---|
+| **Selection Color** | Off | Tint the selected Gaussians with the selected color. |
+| **Selection Centers** | On | Draw a dot at the center of each selected Gaussian. |
+| **Selection Rings** | Off | Outline the footprint of each selected Gaussian. |
+| **Selection Outline** | Off | Draw an outline around the silhouette of the selection. |
+
+### Viewport Colors
+
+The **Colors** row sets the viewport's **Background Color** and the **Selected**, **Unselected**, and **Locked** colors used by the overlays, the tints, and the [Splat Data](data-panel.md) histogram.
+
+### Gaussians, Centers, and Rings
+
+| Section | Control | Default | Description |
+|---|---|---|---|
+| Gaussians | **Unselected Tint** | 0 | How strongly unselected Gaussians are tinted with the unselected color. |
+| | **Selection Tint** | 1 | How strongly selected Gaussians are tinted with the selected color. |
+| Centers | **Size** | 2 | Size of the center dots in pixels (0–10). |
+| | **Unselected Tint** / **Selection Tint** | 1 / 1 | Tint strength of unselected and selected center dots. |
+| Rings | **Thickness** | 4 | Thickness of the ring outlines (1–50). |
+| | **Unselected Tint** / **Selection Tint** | 0 / 1 | Tint strength of unselected and selected rings. |
+
+Click the reset icon in the popup's header to restore the Appearance defaults. Every control has a tooltip that names its shortcut where one exists.
 
 For per-Gaussian inspection and selection by color or other attributes, use the [Splat Data panel](data-panel.md). To animate the viewport camera after finishing the splat's appearance, see the [Timeline](timeline.md).
 
@@ -33366,7 +33418,8 @@ The controls on the left determine which values are included in the histogram:
 | Control | Description |
 |---------|-------------|
 | **Visible Splats Only** | Includes only splats inside the camera's current view. Splats outside the view are excluded. This is a view-frustum filter; it does not test whether another splat is in front of them. |
-| **Log Scale** | Uses a logarithmic vertical scale so bins with small counts remain visible alongside bins with large counts. This changes only the graph's vertical display, not the underlying values or selection. |
+| **Log Counts** | Uses a logarithmic vertical scale so bins with small counts remain visible alongside bins with large counts. This changes only the graph's vertical display, not the underlying values or selection. |
+| **Log Bins** | Spaces the bins logarithmically along the value axis (negative values included), so groups of values spread across a large range stay distinguishable. Range selection still works on the real values. |
 | **All Properties** | Adds raw DC and spherical harmonic (SH) coefficients to the property list. The available SH entries depend on the bands contained in the active splat. |
 
 Select a row in the property list to display its distribution. The default properties are:
@@ -33374,8 +33427,8 @@ Select a row in the property list to display its distribution. The default prope
 | Property | Description |
 |----------|-------------|
 | **Position X/Y/Z** | World-space position after applying scene and per-splat transforms. |
-| **Opacity** | Effective opacity, including the active Color panel transparency adjustment. |
-| **Red/Green/Blue** | Final color for the current camera direction, including spherical harmonics and Color panel adjustments. These histograms can change when the camera moves. |
+| **Opacity** | Effective opacity, including any applied **Colors** transparency grade. |
+| **Red/Green/Blue** | Final color for the current camera direction, including spherical harmonics and any applied **Colors** grade. These histograms can change when the camera moves. |
 | **Scale X/Y/Z** | Decoded Gaussian scale along each local axis. |
 | **Quaternion W/X/Y/Z** | Components of the Gaussian's rotation quaternion. |
 | **Distance** | Distance from the world origin `(0, 0, 0)`. |
@@ -33388,7 +33441,7 @@ With **All Properties** enabled, the list can also include:
 
 | Property | Description |
 |----------|-------------|
-| **DC R/G/B** | Raw zeroth-order spherical harmonic color coefficients. These values do not include higher SH bands or Color panel adjustments. |
+| **DC R/G/B** | Raw zeroth-order spherical harmonic color coefficients. These values do not include higher SH bands or an applied color grade. |
 | **R/G/B SH _n_** | Higher-order spherical harmonic coefficients, grouped by color channel. Only coefficients present in the source data are listed. |
 
 Locked and deleted splats are always excluded from the histogram. Enable **Visible Splats Only** to exclude off-screen splats as well.
@@ -33436,7 +33489,7 @@ These totals update when splats are selected, deselected, locked, unlocked, dele
 
 ### Finding Outliers
 
-Choose **Distance**, **Opacity**, **Volume**, or **Surface Area**, look for isolated bins at either end of the histogram, and select the relevant range for inspection or deletion. Enable **Log Scale** when a small number of outliers is hidden by much larger bins.
+Choose **Distance**, **Opacity**, **Volume**, or **Surface Area**, look for isolated bins at either end of the histogram, and select the relevant range for inspection or deletion. Enable **Log Counts** when a small number of outliers is hidden by much larger bins, and **Log Bins** when the values span several orders of magnitude.
 
 ### Selecting by Color
 
@@ -33454,9 +33507,9 @@ The panel displays decoded or derived values rather than every value exactly as 
 |---------------|----------------|
 | Position | World-space position after active transforms. |
 | Scale | Decoded Gaussian scale; logarithmic source values have already been exponentiated. |
-| Red/Green/Blue | Final color after evaluating available SH bands for the current view and applying Color panel adjustments. |
+| Red/Green/Blue | Final color after evaluating available SH bands for the current view and applying any color grade. |
 | Hue/Saturation/Value | Calculated from the final color after clamping RGB to the `0-1` range. |
-| Opacity | Decoded opacity with the Color panel transparency adjustment applied. |
+| Opacity | Decoded opacity with any transparency grade applied. |
 | Quaternion W/X/Y/Z | Rotation quaternion; `W` is reconstructed in its non-negative canonical form. |
 | DC and SH | Raw coefficients exposed when **All Properties** is enabled. |
 
@@ -33470,66 +33523,54 @@ URL: https://developer.playcanvas.com/user-manual/supersplat/editor/editing-spla
 
 Select a splat in the **Scene Manager** before editing it. Gaussian selection and cleanup operations apply only to that active splat, even when several splats are visible.
 
-## Edit Modes
+## Selection Depth and Footprint {#selection-depth-and-footprint}
 
-SuperSplat functions in one of two **_edit modes_**:
+Two toggles at the left of the bottom toolbar control how every selection tool decides which Gaussians it hits. Both are off when you first open the Editor.
 
-- Centers Mode
-- Rings Mode
+| Toggle | Shortcut | Off (default) | On |
+|---|---|---|---|
+| **Selection Depth** | `N` | Selects through the whole scene: every Gaussian under the tool's shape is picked, regardless of what is in front of it. | Selects only the visible surface: Gaussians hidden behind others are left alone. Turn this on to clean the surface of a scene without punching through it. |
+| **Selection Footprint** | `M` | Selects by center: a Gaussian is picked when its center point falls inside the tool's shape. | Selects by footprint: a Gaussian is picked when any part of its projected ellipse falls inside the shape, so large, soft Gaussians at the edge of a selection are included. |
 
-These modes affect how selections work and what you see in the viewport.
+The viewport can show what the tools are testing: with Selection Footprint off, a dot marks each Gaussian center; with it on, a ring outlines each footprint. Selected Gaussians are highlighted in the selection color (yellow by default) and unselected ones in blue. These overlays are drawn according to the [Appearance](color-and-appearance.md#appearance) popup, where you can change their size, thickness, tint strength, and colors.
 
-### Centers Mode
+[Image: Gaussian centers shown while selecting by center]
 
-In centers mode:
+[Image: Gaussian rings shown while selecting by footprint]
 
-- Gaussians are overlaid with a blue dot at their center.
-- Selections apply to all Gaussian centers independent of their screen depth.
-- Centers are colored depending on their selection state. By default, blue is used for unselected Gaussians and yellow for selected Gaussians.
-- You can control the size that centers are rendered in the SETTINGS panel.
+### Display Overlays
 
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 53" src="/img/user-manual/supersplat/editor/centers-mode.png" />
+Press `Tab` to toggle the center and ring overlays on and off. They are off when the Editor starts, so you see the plain rendered splat; press `Tab` (or turn on a Display toggle in Appearance) when you want to see the individual Gaussians while you work. Hiding the overlays does not change how selection works — Selection Depth and Footprint are independent of what is drawn — and the highlight on selected Gaussians stays visible.
 
-### Rings Mode
-
-In rings mode:
-
-- Gaussians are overlaid with a ring at their outer boundary.
-- Selections apply to the top-most layer of gaussian rings only.
-- Selected Gaussians are colored yellow (by default).
-
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 58" src="/img/user-manual/supersplat/editor/rings-mode.png" />
-
-### Disabling the Overlay
-
-The mode overlay can be disabled entirely (by pressing **Tab**), so neither dots nor rings are displayed.
-
-However, please note that the selection behavior is still determined by the active mode.
-
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 48" src="/img/user-manual/supersplat/editor/disable-overlay.png" />
+Locked and deleted Gaussians cannot be selected. Fully transparent Gaussians can, which makes it possible to clean up invisible leftovers that still cost memory and rendering time.
 
 ## Selection Tools
 
-Each Scene Manager row represents an imported splat, while the selection tools act on individual Gaussians within the active splat. Use these eight tools to crop a splat or remove unwanted Gaussians:
+Each Scene Manager row represents an imported splat, while the selection tools act on individual Gaussians within the active splat. Use these tools to crop a splat or remove unwanted Gaussians:
 
 <div class="no-wrap-first-col">
 
 | Tool | Description |
 |------|-------------|
-| [Image: Picker Select] **Picker Select** | Click to select a single Gaussian, or click + drag to create a rectangular selection area. This is the default selection tool. |
-| [Image: Lasso Select] **Lasso Select** | Click and drag to draw a freeform shape. Gaussians within the shape's outline will be selected. This is a 2D screen-space selection tool. |
-| [Image: Polygon Select] **Polygon Select** | Click to place points that define the vertices of a polygon. Press `Backspace` or `Delete` to remove the last placed point. Close the shape by clicking the first point, double-clicking, or pressing `Enter`. Gaussians within the polygon will be selected. This is useful for precise selections with straight edges. |
-| [Image: Brush Select] **Brush Select** | Click and drag to paint a selection using a circular brush. Adjust the brush size with the `[` (decrease) and `]` (increase) keys. Ideal for organic selection work. |
-| [Image: Flood Select] **Flood Select** | Click on the viewport to generate a 2D selection mask based on a flood fill algorithm. A threshold slider (0-1) controls the sensitivity of the flood fill. This tool is particularly useful for selecting and deleting stray Gaussians (also known as floaters) that appear isolated in the scene. |
-| [Image: Eyedropper Select] **Eyedropper Select** | Click on the viewport to select Gaussians based on color similarity. A threshold slider (0-1) controls the sensitivity of the color matching. This tool is useful for selecting groups of Gaussians that share similar colors. |
-| [Image: Sphere Select] **Sphere Select** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center. Move and Scale buttons in the toolbar (or the `1` and `3` keys) switch the sphere's gizmo — dragging the scale gizmo's center handle changes the radius — or enter its **Position** (X, Y, Z) and **Radius** numerically. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. |
-| [Image: Box Select] **Box Select** | Creates a 3D box for volumetric selection. Double-click anywhere in the scene to position the box center. Move, Rotate, and Scale buttons in the toolbar (or the `1`, `2`, and `3` keys) switch the box's gizmo, so the box can be freely positioned, rotated, and resized — or enter its **Position** (X, Y, Z) and **Size** (X, Y, Z) numerically. While the rotate gizmo is active, the **Size** fields are replaced by **Rotation** fields (enter `0, 0, 0` to reset the orientation). Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. This is ideal for selecting Gaussians within a specific region of 3D space. |
+| [Image: Rectangle Selection] **Rectangle Selection** (`R`) | Click to select a single Gaussian, or click and drag to select everything inside a rectangle. This is the default selection tool. |
+| [Image: Brush Selection] **Brush Selection** (`B`) | Click and drag to paint a selection with a circular brush. Adjust the brush size with the `[` (decrease) and `]` (increase) keys, or with `Alt + Wheel`. Ideal for organic selection work. |
+| [Image: Polygon Selection] **Polygon Selection** (`P`) | Click to place the vertices of a polygon. Press `Backspace` to remove the last placed point. Close the shape by clicking the first point, double-clicking, or pressing `Enter`. Useful for precise selections with straight edges. Shares a toolbar button with Lasso Selection. |
+| [Image: Lasso Selection] **Lasso Selection** (`L`) | Click and drag to draw a freeform shape. Gaussians within the outline are selected. Shares a toolbar button with Polygon Selection. |
+| [Image: Eyedropper Selection] **Eyedropper Selection** (`Ctrl + E`) | Click the viewport to select Gaussians of a similar color. A threshold slider (0–1) controls the sensitivity of the color match. Shares a toolbar button with Flood Selection. |
+| [Image: Flood Selection] **Flood Selection** (`O`) | Click the viewport to grow a 2D selection from that point with a flood fill. A threshold slider (0–1) controls its sensitivity. Particularly useful for isolated stray Gaussians (floaters). Shares a toolbar button with Eyedropper Selection. |
+| [Image: Sphere Brush Selection] **Sphere Brush Selection** (`Shift + B`) | Paint a selection in 3D. Each point of the stroke is projected onto the surface under the cursor and selects the Gaussians inside a sphere there, so the brush follows the surface instead of selecting through the scene. The brush size is shared with Brush Selection (`[`, `]`, `Alt + Wheel`) and maps to a world-space radius at the picked depth. |
+| [Image: Sphere Selection] **Sphere Selection** | Creates a 3D spherical volume for volumetric selection. Double-click anywhere in the scene to position the sphere center. Move and Scale buttons in the toolbar (or the `1` and `3` keys) switch the sphere's gizmo — dragging the scale gizmo's center handle changes the radius — or enter its **Position** (X, Y, Z) and **Radius** numerically. Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. |
+| [Image: Box Selection] **Box Selection** | Creates a 3D box for volumetric selection. Double-click anywhere in the scene to position the box center. Move, Rotate, and Scale buttons in the toolbar (or the `1`, `2`, and `3` keys) switch the box's gizmo, so the box can be freely positioned, rotated, and resized — or enter its **Position** (X, Y, Z) and **Size** (X, Y, Z) numerically. While the rotate gizmo is active, the **Size** fields are replaced by **Rotation** fields (enter `0, 0, 0` to reset the orientation). Click **Set**, **Add**, **Remove**, or **Intersect** to apply the volume to the current selection. Ideal for selecting Gaussians within a specific region of 3D space. |
 
 </div>
 
+Two of the toolbar buttons hold a pair of tools: **Polygon** / **Lasso** and **Eyedropper** / **Flood**. Click the button to activate the tool it currently shows, or press and hold it to choose the other; the button then remembers your choice. The keyboard shortcuts always activate a specific tool.
+
+[Image: The bottom toolbar with the Polygon / Lasso popup open]
+
 ### Selection Modifiers {#selection-modifiers}
 
-The 2D selection tools support modifier keys to control how the selection is applied:
+The 2D selection tools and the Sphere Brush support modifier keys to control how the selection is applied:
 
 | Modifier | Action |
 |----------|--------|
@@ -33538,11 +33579,9 @@ The 2D selection tools support modifier keys to control how the selection is app
 | **Ctrl** | Remove from the current selection |
 | **Shift + Ctrl** | Keep only Gaussians that are in both the current selection and the new selection |
 
-**Intersect** is available with Picker, Lasso, Polygon, Brush, and Flood Select. Eyedropper Select supports **Set**, **Add**, and **Remove**, but not **Intersect**.
+While one of these tools is active, the cursor shows which operation the current modifier keys will apply. A plain crosshair means **Set**; a badge on the crosshair indicates **Add** (`+`), **Remove** (`−`), or **Intersect** (`∩`). The same feedback appears when selecting a value range in the [Splat Data panel](data-panel.md).
 
-While Picker, Lasso, Polygon, Brush, or Flood Select is active, the cursor shows which operation the current modifier keys will apply. A plain crosshair means **Set**; a badge on the crosshair indicates **Add** (`+`), **Remove** (`−`), or **Intersect** (`∩`). The same feedback appears when selecting a value range in the [Splat Data panel](data-panel.md).
-
-The 3D selection tools (Sphere Select and Box Select) have **Set**, **Add**, **Remove**, and **Intersect** buttons in their toolbar instead of using modifier keys. Their volumes are transformed with the same gizmos as the transform tools: clicking the active gizmo mode button again hides the gizmo, the gizmo follows the local/world coordinate-space toggle, and volume edits are undoable while the tool is active.
+The 3D volume tools (Sphere Selection and Box Selection) have **Set**, **Add**, **Remove**, and **Intersect** buttons in their toolbar instead of using modifier keys. Their volumes are transformed with the same gizmos as the transform tools: clicking the active gizmo mode button again hides the gizmo, the gizmo follows the local/world coordinate-space toggle, and volume edits are undoable while the tool is active. Press `F` to frame the volume in the viewport.
 
 ## Lock, Delete, and Restore
 
@@ -33559,21 +33598,21 @@ When a Gaussian selection exists, the **Edit** menu provides two ways to turn it
 - **Duplicate** copies the selected Gaussians into a new splat and keeps the originals unchanged.
 - **Separate** creates a new splat from the selected Gaussians and deletes them from the original splat.
 
-Both operations can be undone and are useful for giving one region its own transform, visibility, or [Color](color-and-appearance.md) settings.
+Both operations can be undone and are useful for giving one region its own transform or visibility.
 
 ## Cleanup Recipes
 
 ### Remove Floaters
 
-1. Switch to **Rings** mode so selection stops at the topmost visible surface.
-2. Use Flood Select for an isolated patch, or Lasso, Brush, Sphere, or Box Select for a larger region.
+1. Turn on **Selection Depth** (`N`) so selections stop at the visible surface, and press `Tab` if you want to see the Gaussian centers while you work.
+2. Use Flood Selection for an isolated patch, or Lasso, Brush, Sphere Brush, Sphere, or Box Selection for a larger region.
 3. Rotate the camera and add to or remove from the selection until the intended geometry is isolated.
 4. Press `Delete` or `Backspace`.
 5. Inspect the result from several angles and use Undo if too much was removed.
 
 ### Crop a Splat
 
-1. Select the region you want to keep with Box, Sphere, Lasso, or Polygon Select.
+1. Select the region you want to keep with Box, Sphere, Lasso, or Polygon Selection. Leave **Selection Depth** off so the selection reaches through the whole scene.
 2. Choose **Select > Invert**.
 3. Delete the inverted selection.
 4. Export the cleaned result, or save an `.ssproj` if you want to preserve the splat and project setup.
@@ -33614,7 +33653,7 @@ SuperSplat supports several Gaussian Splat scene formats, plus COLMAP and INRIA 
 | `images.txt` | ✅ | ❌ | Camera poses from a [COLMAP reconstruction](https://colmap.github.io/format.html#images-txt). Importing the file creates [Timeline keyframes](timeline.md#importing-camera-poses-as-keyframes); it does not load a splat scene |
 | Camera pose `.json` | ✅ | ❌ | Camera poses in the INRIA JSON format. Importing the file creates [Timeline keyframes](timeline.md#importing-camera-poses-as-keyframes); it does not load a splat scene |
 | `.html` | ❌ | ✅ | Self-contained viewer app with the compressed splat data embedded in one HTML file |
-| `.zip` | ❌ | ✅ | Viewer package containing an HTML app and a separate `.compressed.ply` file |
+| `.zip` | ❌ | ✅ | Viewer package containing an HTML app and a separate bundled SOG file (`index.sog`) |
 
 :::warning
 
@@ -33628,9 +33667,9 @@ SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.spla
 
 There are four ways to load a Gaussian Splat file:
 
-1. **Drag and drop** - Drop one or more splat files from your file system into SuperSplat's client area. For multi-file formats (such as `.lcc`, `.lcc2`, unbundled SOG, or Streamed SOG), drag the parent folder containing those files.
-2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system.
-3. **Direct file opening** - If you have installed SuperSplat as a PWA, you can double-click a splat file in File Explorer (Windows) or Finder (macOS).
+1. **Drag and drop** - Drop one or more splat files, or a whole folder, from your file system into SuperSplat's window. For multi-file formats (such as `.lcc`, `.lcc2`, unbundled SOG, or Streamed SOG), drag the parent folder containing those files.
+2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system. `File` > `Import Recent` lists the files and folders you have imported before so you can reload them without browsing for them again; `Clear Recent` at the bottom of the list empties it.
+3. **Direct file opening** - If you have installed SuperSplat as an app from your browser's address bar, you can double-click a `.ply`, `.splat`, `.sog`, `.spz`, `.ksplat`, or `.ssproj` file in File Explorer (Windows) or Finder (macOS) to open it in the Editor.
 4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<SPLAT_URL>`. For example:
 
     https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply
@@ -33676,17 +33715,19 @@ PLY sequences are memory-intensive since each frame loads a complete splat scene
 
 ## Exporting Splats
 
-To export your currently loaded scene, open the `File` > `Export` submenu and select your desired format. All formats with export support listed in the [Supported File Formats](#supported-file-formats) table above are available.
+To export your currently loaded scene, open the `File` > `Export` submenu and choose **PLY**, **SOG**, **SPZ**, **Splat**, or **Viewer App**. Exports include the visible splats only. Every export uses the same dialog:
 
-Most formats let you choose how many spherical harmonic bands to include in the export dialog. When exporting to SPZ, you can also select the format version: **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
+[Image: The export dialog with its Location and Filename rows]
 
-:::note
+- **Location** - The output folder. The Editor remembers the folder you last exported to; click **Choose output folder…** (or **Change…**) to pick another. In browsers without the File System Access API this row is hidden and the file is delivered as a download instead.
+- **Filename** - The name of the output file. The dialog warns if the name is invalid or already exists in the folder (the button then reads **Overwrite**), and it refuses to overwrite a file that the current scene is still reading from.
+- Format-specific options:
+  - **PLY**: **Compress PLY** writes a `.compressed.ply` instead of a full-size PLY; **SH Bands** chooses how many spherical harmonic bands to include.
+  - **SOG**: **SH Bands**, and **Iterations** (1–20, default 10), the number of clustering passes used to compress the spherical harmonic data. More iterations give slightly better quality at the cost of export time.
+  - **SPZ**: **SH Bands**, and **Version**. **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
+  - **Viewer App**: the options for a standalone HTML viewer are described in [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting).
 
-Exporting to SOG (`.sog`) and exporting the standalone viewer (`.html` / `.zip`) require a browser with **WebGPU** support, as the SOG compression runs on the GPU. In a browser without WebGPU, these exports fail with the error: "This export requires WebGPU, which is not available in this browser. Please try a recent version of Chrome, Edge or Safari." All other export formats work in any WebGL 2.0 browser.
-
-:::
-
-For information about exporting and hosting HTML viewers for your splats, see [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting).
+Choose `File` > `Re-export` (`Ctrl + Shift + E`) to repeat the last export with the same options to the same file. It overwrites the previous output without further prompts, which is handy while iterating on a cleanup.
 
 --------------------------------------------------------------------------------
 
@@ -33696,7 +33737,7 @@ URL: https://developer.playcanvas.com/user-manual/supersplat/editor/interface/
 
 The SuperSplat Editor's interface appears as follows:
 
-[Image: supersplat-interface]
+[Image: The SuperSplat Editor interface with its main areas labeled]
 
 ## Interface Elements
 
@@ -33704,21 +33745,21 @@ The key elements of the interface are labeled:
 
 ### Menu Bar
 
-The Menu Bar gives you access to the most commonly used functions in the SuperSplat Editor.
+The Menu Bar gives you access to the most commonly used functions in the SuperSplat Editor. The SuperSplat logo at its left edge takes you back to [superspl.at](https://superspl.at).
 
-* **File Menu:** Load and save your projects. Import and export to/from popular file formats.
+* **File Menu:** Create, open, and save `.ssproj` projects; import splats, including an **Import Recent** list; export to the supported formats and repeat the last export with **Re-export**; publish to superspl.at.
 * **Edit Menu:** Undo or redo changes, or duplicate or separate selected Gaussians into a new splat.
-* **Select Menu:** Perform common selection based operations on your loaded scene.
+* **Select Menu:** Select all, none, or the inverse; lock, unlock, delete, and restore Gaussians.
 * **Render Menu:** Render an image or a video of your currently loaded scene.
-* **Help Menu:** Access developer resources related to SuperSplat.
+* **Help Menu:** Video tutorials, this user guide, the keyboard shortcuts reference, community links, and the About dialog.
 
 ### Scene Manager
 
-The Scene Manager lists the imported splats in the project. Click a row to choose the active splat, use the eye icons or Solo mode to control visibility, and use the panel below it for precise transforms. See [Managing Splats](scene-management.md) for the complete workflow.
+The Scene Manager lists the imported splats in the project. Click a row to choose the active splat, use the eye icons or Solo mode to control visibility, and use the **Transform** and **Colors** sections below the list for precise transforms and color grading. See [Managing Splats](scene-management.md) for the complete workflow.
 
 ### Viewport
 
-The 3D viewport where you can visually edit your scenes. The viewport has a 2D grid to help orient yourself in the scene. By default, the grid lies in the XZ plane (with the world Y axis pointing upwards); the **Grid Plane** option in the **Settings** panel can place it on the XY or YZ plane instead. The X axis is colored red and the Z axis is blue. Major grid divisions occur at 1 meter intervals (and smaller grid divisions are at 10cm intervals).
+The 3D viewport where you can visually edit your scenes. A grid helps you orient yourself in the scene. By default the grid lies in the XZ plane (with the world Y axis pointing upwards); the [Overlays](#overlays) popup can draw the XY and YZ planes as well, in any combination. The X axis is colored red and the Z axis is blue. The grid uses meters, and its divisions adapt to your distance from the scene: 1 meter and 10 cm lines up close, with 100 m and 1 km lines appearing on large scenes.
 
 ### View Cube
 
@@ -33726,29 +33767,85 @@ The View Cube is a gizmo that gives added control over the viewport camera. You 
 
 ### Right Toolbar
 
-This vertical toolbar contains icons related to splat visualization, camera controls and application settings.
+This vertical toolbar contains, from top to bottom:
+
+* **Appearance** — opens the [Appearance](#appearance) popup, which controls how Gaussians, centers, rings, and selections are drawn.
+* **Overlays** (eye icon) — opens the [Overlays](#overlays) popup: grid, bounding box, camera poses, camera info, and diagnostics.
+* **Orbit Camera** and **Fly Camera** — switch the [camera control mode](camera-controls.md) (`V`).
+* **Frame Selection** (`F`) and **Reset Camera** (`Shift + F`).
+* **Preferences** (gear icon) — opens the [Preferences](#preferences) popup.
+
+Only one of the Appearance, Overlays, and Preferences popups is open at a time.
 
 ### Bottom Toolbar
 
-This horizontal toolbar contains undo and redo, Gaussian selection tools, Move, Rotate, Scale, Measure, Orient, coordinate-space and pivot controls. See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
+This horizontal toolbar contains, from left to right:
+
+* **Undo** and **Redo**.
+* The **Selection Footprint** (`M`) and **Selection Depth** (`N`) toggles, which control how every selection tool decides what it hits. See [Selection Depth and Footprint](editing-splats.md#selection-depth-and-footprint).
+* The 2D selection tools: **Rectangle**, **Brush**, **Polygon** / **Lasso**, and **Eyedropper** / **Flood**. The last two buttons each hold a pair of tools: click to use the current one, or press and hold to switch to the other.
+* The 3D selection tools: **Sphere Brush**, **Sphere Selection**, and **Box Selection**.
+* **Move**, **Rotate**, and **Scale**.
+* **Measure**, **Orient**, the **Use Local Orientation** toggle (`Shift + C`), and **Reset Pivot**.
+
+See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
+
+### Status Bar
+
+The bar along the bottom edge opens the **Timeline** (`Ctrl + T`) and **Splat Data** (`Ctrl + D`) panels and shows live counts of the active splat's **Splats**, **Selected**, **Locked**, and **Deleted** Gaussians. The Editor version is shown in the bottom-left corner of the viewport.
 
 ### Animation Timeline
 
 The Timeline allows you to create and delete keyframes for the viewport camera. It also allows you to play back (or scrub through) the animation you have configured.
 
-### Histogram Panel
+### Splat Data Panel
 
-This panel allows you to inspect the Gaussian data in your scenes, visualized as a histogram along with a set of numerical statistics. See the [Splat Data panel](data-panel.md).
+This panel visualizes the Gaussian data in the active splat as a histogram and lets you select ranges of values. See the [Splat Data panel](data-panel.md).
 
-## Settings and Preferences
+## Appearance
 
-Open the **Settings** panel from the gear icon in the [Right Toolbar](#right-toolbar). Changes to view, camera, and editing preferences are saved in your browser and restored the next time you open the Editor. These preferences include colors and tonemapping, camera field of view and control mode, spherical harmonic bands, centers and rings display, grid and bounds overlays, and other viewport options.
+The **Appearance** popup (the first button in the [Right Toolbar](#right-toolbar)) controls how the viewport draws Gaussians, their centers and rings, and the selection, how strongly selected and unselected Gaussians are tinted, and the background, selection, and lock colors. Press `Tab` to toggle the display overlays on and off without changing these settings. The full reference is in [Color and Appearance](color-and-appearance.md#appearance).
 
-Loading an `.ssproj` project applies the view and camera settings saved in that project for the current session without replacing your stored preferences. Selecting **File > New** reapplies your preferences. To clear them and restore the factory settings, click **Reset to Defaults** at the bottom of the **Settings** panel. This also returns the interface language to **Automatic**.
+## Overlays
+
+The **Overlays** popup (the eye icon in the [Right Toolbar](#right-toolbar)) holds viewport helpers and diagnostics. Each row is a toggle; click anywhere on the row to flip it.
+
+[Image: The Overlays popup]
+
+| Section | Control | Default | Description |
+|---|---|---|---|
+| Helpers | **Grid** (`G`) | On | Shows the reference grid. |
+| | **Planes** | XZ | Which grid planes are drawn: **XZ**, **XY**, and **YZ**, in any combination. The choice is saved with your preferences and in `.ssproj` projects. |
+| | **Bounding Box** | On | Draws the bounding box of the active splat. |
+| | **Dimensions** | Off | Labels the bounding box edges with their lengths in the viewport, and the [Measure](transform-measure-align.md#measure-and-rescale-a-splat) tool's line with its length. |
+| | **Camera Poses** | Off | Draws a camera gizmo at every [Timeline](timeline.md) keyframe. |
+| | **Camera Info** (`I`) | Off | Shows the editable [camera position and target overlay](camera-controls.md#camera-info-overlay). |
+| Diagnostics | **Frame Timings** | Off | Live GPU and CPU frame times (median, minimum, and 95th percentile over the last second) with a graph, and whether the last frame was rendered sorted or stochastic. |
+| | **Overdraw** | Off | Replaces the image with a heat map of how many Gaussians overlap each pixel, with a legend from 1 to over 1000. Red-to-white regions are where cleanup would help performance most. |
+
+Click the reset icon in the popup's header to restore the Overlays defaults.
+
+## Preferences
+
+The **Preferences** popup (the gear icon in the [Right Toolbar](#right-toolbar)) holds application-wide settings. They are saved in your browser and restored the next time you open the Editor.
+
+[Image: The Preferences popup]
+
+| Section | Setting | Default | Description |
+|---|---|---|---|
+| | **Language** | Automatic | Interface language. See [Language](#language). |
+| Rendering | **Stochastic Alpha** | Auto | How heavy scenes are drawn while you move the camera. **Disabled** always draws depth-sorted, blended frames. **Enabled** always uses stochastic transparency, which needs no sorting and stays responsive on very large scenes at some cost in image quality. **Movement** uses stochastic frames only while the camera or a tool is moving and draws an exact sorted frame once the view settles. **Auto** keeps drawing sorted frames until one proves slow, then behaves like Movement. |
+| | **Tone Mapping** | Linear | Viewport tone mapping curve: Linear, Neutral, ACES, ACES2, Filmic, or Hejl. |
+| | **SH Bands** | 3 | Spherical harmonic bands evaluated in the viewport (0–3). Lower values render faster and preview how a reduced-band export will look. |
+| Camera | **Fly Speed** | 1 | Speed of WASD navigation in fly mode (0.1–30). |
+| | **Field of View** | 85° | Vertical field of view of the viewport camera (10°–120°). |
+| | **FOV Auto Dolly** | Off | Move the camera as the field of view changes so the subject keeps its framing. See [Camera Settings](camera-controls.md#camera-settings). |
+
+Loading an `.ssproj` project applies the view and camera settings saved in that project for the current session without replacing your stored preferences. Selecting **File > New** reapplies your preferences. To restore the factory settings, click the reset icon in the popup's header (**Reset to Defaults**). This also returns the interface language to **Automatic**. The Appearance and Overlays popups have their own reset buttons.
 
 ### Language
 
-SuperSplat's interface is available in several languages. By default it follows your browser's language — the **Automatic** setting — but you can choose a specific language from the **Language** dropdown at the top of the **Settings** panel (the gear icon in the [Right Toolbar](#right-toolbar)).
+SuperSplat's interface is available in several languages. By default it follows your browser's language — the **Automatic** setting — but you can choose a specific language from the **Language** dropdown at the top of the **Preferences** popup (the gear icon in the [Right Toolbar](#right-toolbar)).
 
 Switching language takes effect immediately. There is no page reload, so your loaded scene and any unsaved work are preserved. Your choice is remembered across sessions until you change it again or switch back to **Automatic**.
 
@@ -33798,24 +33895,29 @@ On macOS, shortcuts shown with `Ctrl` use `Cmd` for application commands such as
 | Delete selected Gaussians | `Delete` or `Backspace` | `Delete` or `Backspace` |
 | Lock selection | `H` | `H` |
 | Unlock all | `Shift + H` | `Shift + H` |
+| Toggle Selection Depth | `N` | `N` |
+| Toggle Selection Footprint | `M` | `M` |
 
-For Picker, Lasso, Polygon, Brush, and Flood selections, hold `Shift` to add, `Ctrl` to remove, or `Shift + Ctrl` to intersect with the current selection.
+For Rectangle, Lasso, Polygon, Brush, Sphere Brush, Flood, and Eyedropper selections, hold `Shift` to add, `Ctrl` to remove, or `Shift + Ctrl` to intersect with the current selection. [Selection Depth and Footprint](editing-splats.md#selection-depth-and-footprint) explains what `N` and `M` change.
 
 ## Tools and View
 
 | Action | Shortcut |
 |---|---|
-| Move / Rotate / Scale | `1` / `2` / `3` (while Box or Sphere Select is active, these switch the selection volume's gizmo instead) |
-| Picker / Lasso / Polygon | `R` / `L` / `P` |
-| Brush / Flood | `B` / `O` |
-| Eyedropper | `Ctrl + E` (`Cmd + E` on macOS) |
-| Decrease / increase brush size | `[` / `]` |
+| Move / Rotate / Scale | `1` / `2` / `3` (while Box or Sphere Selection is active, these switch the selection volume's gizmo instead) |
+| Rectangle / Lasso / Polygon Selection | `R` / `L` / `P` |
+| Brush / Sphere Brush Selection | `B` / `Shift + B` |
+| Flood Selection | `O` |
+| Eyedropper Selection | `Ctrl + E` (`Cmd + E` on macOS) |
+| Decrease / increase brush size | `[` / `]`, or `Alt + Wheel` |
+| Close the polygon | `Enter` |
+| Remove the last polygon point | `Backspace` |
+| Remove the active Measure or Orient point | `Delete` or `Backspace` |
 | Deactivate current tool | `Escape` |
 | Toggle world/local coordinates | `Shift + C` |
-| Toggle centers/rings mode | `M` |
-| Toggle edit overlay | `Tab` |
+| Toggle display overlays | `Tab` |
 | Toggle grid | `G` |
-| Toggle camera information | `I` |
+| Toggle camera info | `I` |
 | Toggle Splat Data panel | `Ctrl + D` (`Cmd + D` on macOS) |
 | Toggle Timeline panel | `Ctrl + T` (`Cmd + T` on macOS) |
 
@@ -33823,7 +33925,7 @@ For Picker, Lasso, Polygon, Brush, and Flood selections, hold `Shift` to add, `C
 
 | Action | Shortcut |
 |---|---|
-| Focus on selection or active splat | `F` |
+| Frame the selection or active splat | `F` (frames the active Box, Sphere, Measure, or Orient tool instead while one is active) |
 | Reset camera | `Shift + F` |
 | Toggle orbit/fly controls | `V` |
 | Fly forward/back/left/right | `W` / `S` / `A` / `D` |
@@ -33838,11 +33940,19 @@ See [Camera Controls](camera-controls.md) for mouse, touch, fly, and view-cube c
 |---|---|
 | Play or pause | `Space` |
 | Previous / next frame | `,` / `.` |
-| Previous / next keyframe | `<` / `>` |
+| Previous / next keyframe | `<` / `>` (`Shift + ,` / `Shift + .`) |
 | Add keyframe | `Enter` |
 | Remove keyframe | `Shift + Enter` |
+| Overwrite a keyframe with the current camera pose | `Ctrl + Click` the keyframe |
+| Copy a keyframe | `Shift + Drag` the keyframe |
 
-Shortcuts are ignored while focus is in a text or numeric input. Some keys also have tool-specific behavior: for example, `Delete` removes a placed point while Measure or Orient is active, and removes the last unclosed Polygon point while drawing a polygon. While Measure or Orient is active, `F` frames the placed points instead of the selection.
+## File
+
+| Action | Windows/Linux | macOS |
+|---|---|---|
+| Re-export (repeat the last export) | `Ctrl + Shift + E` | `Cmd + Shift + E` |
+
+Shortcuts are ignored while focus is in a text or numeric input. The brush size shortcuts act on whichever brush is active; Brush and Sphere Brush share one size.
 
 --------------------------------------------------------------------------------
 
@@ -33854,7 +33964,7 @@ SuperSplat supports the `.ssproj` file format, allowing you to save and reload y
 
 ## Features of `.ssproj` Files
 
-* Full Project Save: Stores all relevant project data, including app settings, timeline settings and more.
+* Full Project Save: Stores every imported splat with its edits, transform, pivot, and applied color grades, plus the camera, view settings such as the grid planes, and the timeline animation.
 * Easy Reloading: Load a saved project file to restore the exact state of your work.
 * Portability: Share `.ssproj` files with others to collaborate on projects.
 
@@ -33862,26 +33972,30 @@ SuperSplat supports the `.ssproj` file format, allowing you to save and reload y
 
 To save your current work as a `.ssproj` file:
 
-* Open the `File` menu.
-* Select `Save As`.
-* Choose a location and enter a name for your project.
-* Click Save. Your project will be stored as a `.ssproj` file.
+* Open the `File` menu and select `Save As`.
+* In the **Save As** dialog, choose the output folder under **Location**. The Editor remembers the last folder you used; click **Choose output folder…** (or **Change…**) to pick another.
+* Enter a **Filename**. The dialog warns if a file of that name already exists and offers to **Overwrite** it.
+* Click **Save**. Your project will be stored as a `.ssproj` file.
+
+Once a project has a name, `File` > `Save` writes to the same file again without asking. In browsers without the File System Access API, the project is delivered as a download instead.
 
 ## Loading a Project
 
 To load a previously saved `.ssproj` file:
 
-* Open the `File` menu.
-* Select `Open`.
-* Browse to the `.ssproj` file you wish to open.
-* Click `Open`. SuperSplat will restore your project to its last saved state.
+* Open the `File` menu and select `Open`, then browse to the `.ssproj` file and click `Open`.
+* Or select `File` > `Open Recent` to pick a project you have opened or saved before.
+* Or drag the `.ssproj` file into the Editor window.
+* If you have installed SuperSplat as an app, double-click the `.ssproj` file in File Explorer (Windows) or Finder (macOS).
+
+SuperSplat restores the project to its last saved state.
 
 ## File Structure
 
 The `.ssproj` format is actually a ZIP archive containing:
 
-* A JSON-based file that stores project-specific metadata, such as app settings and timeline settings.
-* One or more uncompressed `.ply` files (these are listed in the `Scenes` panel on load).
+* A JSON document that stores the project metadata: camera, view settings, camera poses, timeline, and the list of splats.
+* The splat data, stored once as uncompressed `.ply` files, plus a small per-splat file holding each splat's editing state (selection, locked and deleted Gaussians, transform, and color grades). Each splat appears as a row in the Scene Manager on load.
 
 ## Best Practices
 
@@ -33930,7 +34044,7 @@ To publish your splat:
    | **Publish to** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
    | **Title** | A short title that will appear below your splat's thumbnail once it is published |
    | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
-   | **Background** | The background color of the viewer. Defaults to the Editor's current background color |
+   | **Background** | The background color of the viewer. Defaults to the Editor's current background color (set in the [Appearance](interface.md#appearance) popup) |
    | **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
    | **Animation** | If enabled, the camera animation authored on the [Timeline](timeline.md) is baked into the scene and plays when it loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
    | **Loop Mode** | How an included camera animation plays back in the viewer:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
@@ -34019,7 +34133,7 @@ When you select `Image` from the Render menu, a dialog will appear with settings
   - `WebP` - Lossless WebP output with transparency support
 - **Quality:** Only shown for `JPEG`. Set the JPEG quality from 1 to 100 (default 90).
 - **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays. This option is unavailable for JPEG, which does not support transparency.
-- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the image. Only available for `Standard` projection.
+- **Show Debug Overlays:** If checked, the viewport's overlays — the grid, and the Gaussian centers or rings when the display overlays are turned on — are rendered into the image. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the image stays level and follows only the camera's heading. If unchecked, the camera's full orientation (including pitch) is baked into the image.
 
 ### Rendering the Image
@@ -34072,7 +34186,7 @@ When you select `Video` from the Render menu, a dialog will appear with several 
 - **Frame Range:** Specify the start and end frames from the Timeline to include in your video. By default, the entire Timeline is rendered.
 - **Portrait Mode:** If checked, the resolution will be flipped to be vertical. This is useful if you intend your video to be viewed in portrait on mobile. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the video stays level and follows only the camera's heading, which is generally the most comfortable to watch. If unchecked, the camera's full orientation (including pitch) is baked into the video.
-- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the video. Only available for `Standard` projection.
+- **Show Debug Overlays:** If checked, the viewport's overlays — the grid, and the Gaussian centers or rings when the display overlays are turned on — are rendered into the video. Only available for `Standard` projection.
 
 :::note Resolution availability
 
@@ -34090,7 +34204,7 @@ Once you've configured your settings:
 
 :::tip Browser Recommendation for Video Rendering
 
-We recommend using a Chromium-based browser (Chrome, Edge, Opera, etc.) for rendering videos. Browsers that support the [FileSystem API](https://caniuse.com/native-filesystem-api) will ask you to pick a destination filename and will then stream out the file during the encoding process instead of having to do it in memory. This allows for the recording of much larger videos without running into memory limitations.
+Chromium-based browsers (Chrome and Edge) give the best results for video. They support the [File System Access API](https://caniuse.com/native-filesystem-api), so the video is streamed to disk while it encodes instead of being held in memory, which allows much longer and larger renders. Browsers without it must buffer the whole video in memory and deliver it as a download when encoding completes.
 
 :::
 
@@ -34118,7 +34232,7 @@ You can render 360° still images in the same way: set the `Projection` option i
 - **For Videos:** Before rendering, ensure your Timeline animations are smooth and camera movements are polished.
 - **For 360° Videos:** The camera animation drives the viewer's position through the scene. Slow, smooth camera movement is much more comfortable to watch in a VR headset than rapid motion.
 - **For Social Media:** Portrait-mode renders often yield better engagement on mobile platforms.
-- **Debug Overlays:** Use the debug overlay option when you need to show splat data for educational or technical presentations.
+- **Debug Overlays:** Enable **Show Debug Overlays** when you need to show the Gaussian structure for educational or technical presentations. Press `Tab` in the Editor first so the centers or rings are visible, and configure them in [Appearance](color-and-appearance.md#appearance).
 
 Happy Rendering! 🎬📸
 
@@ -34135,14 +34249,18 @@ The **Scene Manager** lists the splats in the current project. Each splat file y
 Click a row to make that splat active. The active splat is the target for:
 
 - Gaussian selection and editing
-- The **Transform**, **Color**, and **Splat Data** panels
+- The **Transform** and **Colors** sections of the Scene Manager, and the **Splat Data** panel
 - Camera focus and measurement tools
 
 Only one splat can be active at a time. Selecting a row does not change its visibility.
 
+## Transform and Colors
+
+Below the splat list, the **Transform** section shows the active splat's **Position**, **Rotation**, and **Scale** for precise numeric edits (see [Transform, Measure and Align](transform-measure-align.md)). The collapsible **Colors** section below it grades the color of the active splat, or of the selected Gaussians, and bakes the result with **Apply** (see [Color and Appearance](color-and-appearance.md#colors)).
+
 ## Add Splats
 
-Use **File > Import**, the import button in the Scene Manager header, or drag supported files into the viewport. Importing adds splats to the current project; it does not replace splats that are already loaded.
+Use **File > Import** (or **File > Import Recent** for a file you have loaded before), the import button in the Scene Manager header, or drag supported files into the viewport. Importing adds splats to the current project; it does not replace splats that are already loaded.
 
 **File > New** is different: it starts a new, empty project after asking for confirmation if the current project contains data.
 
@@ -34290,7 +34408,7 @@ All keyframe operations - adding, moving, copying, and removing - can be undone 
 
 ## Visualizing Keyframe Cameras
 
-To see where your keyframes place the camera in 3D space, enable the **Show Camera Poses** toggle in the **Settings** panel (the gear icon in the [Right Toolbar](interface.md#right-toolbar)). A wireframe camera gizmo is drawn in the viewport at each keyframe's stored position and orientation, making it easy to review your camera path at a glance. The state of the toggle is saved with your project.
+To see where your keyframes place the camera in 3D space, enable the **Camera Poses** toggle in the **Overlays** popup (the eye icon in the [Right Toolbar](interface.md#right-toolbar)). A wireframe camera gizmo is drawn in the viewport at each keyframe's stored position and orientation, making it easy to review your camera path at a glance. The state of the toggle is saved with your project.
 
 ## Configuring Timeline Settings
 
@@ -34334,7 +34452,7 @@ The Loop toggle on the Timeline (next to the smoothness setting) controls what h
 - **Loop enabled (default)** - The camera path forms a closed loop: after the last keyframe, the camera smoothly interpolates back to the first keyframe over the remaining frames of the timeline
 - **Loop disabled** - The camera path stays open: the camera comes to rest on the last keyframe and holds that pose
 
-The state of the Loop toggle is saved with your project, and the camera path drawn by the **Show Camera Poses** toggle updates to show a closed or open curve accordingly.
+The state of the Loop toggle is saved with your project, and the camera path drawn by the **Camera Poses** overlay updates to show a closed or open curve accordingly.
 
 When looping is enabled, it's important to avoid setting a keyframe on both the first and last frames of the timeline, as this will cause a sudden snap when the animation loops.
 
@@ -34423,7 +34541,7 @@ The Orient tool levels a mis-rotated splat — a Z-up import, a tilted capture, 
 
 The side of the plane facing the camera becomes up. If the result is upside down, orbit underneath the plane and press **Align to Grid** again. When the picked plane is within 3 degrees of one of the splat's own axes, the rotation snaps to that axis, so conventional Z-up imports produce exact quarter turns.
 
-Alignment applies to the whole active splat regardless of any Gaussian selection and is recorded as a single undoable operation. The grid is displayed while the tool is active, even if hidden. The target plane follows the **Grid Plane** setting in **Settings** (XZ by default, or XY/YZ).
+Alignment applies to the whole active splat regardless of any Gaussian selection and is recorded as a single undoable operation. The grid is displayed while the tool is active, even if hidden. The target is the first grid plane enabled under **Planes** in the [Overlays](interface.md#overlays) popup: XZ by default, or XY or YZ if you have turned XZ off.
 
 With three points placed, the pivot button in the bottom toolbar changes to **Set Pivot**. Instead of moving the splat, it stores the picked plane as the splat's pivot and local frame: local-space gizmos and the **Transform** panel then work in that frame. This is useful for transforming along a surface's own axes without rotating the splat itself.
 
@@ -34437,7 +34555,7 @@ To align independently captured splats:
 4. Use Move, Rotate, and Scale, checking the result from more than one camera angle.
 5. Toggle visibility or use Solo mode to compare the splats.
 
-The grid uses meters, with major divisions at 1 m and minor divisions at 0.1 m. Enable **Show Bounding Box** and **Show Dimensions** in **Settings** when a numeric size check is useful.
+The grid uses meters, with major divisions at 1 m and minor divisions at 0.1 m. Enable **Bounding Box** and **Dimensions** in the [Overlays](interface.md#overlays) popup when a numeric size check is useful.
 
 ## Measure and Rescale a Splat
 
@@ -34446,7 +34564,7 @@ The Measure tool reports the distance between two surface points and can rescale
 1. Activate **Measure** in the bottom toolbar.
 2. Click a surface to place the first marker, then click again to place the second.
 3. Click either marker and use its move gizmo to refine the position.
-4. Read the measured length in the toolbar above the bottom controls. With **Show Dimensions** enabled in **Settings**, the length is also labeled along the line in the viewport.
+4. Read the measured length in the toolbar above the bottom controls. With **Dimensions** enabled in the Overlays popup, the length is also labeled along the line in the viewport.
 5. To calibrate the splat, enter the real distance in that field. SuperSplat uniformly rescales the whole active splat around the midpoint of the two markers.
 
 `Delete` or `Backspace` removes the active marker while Measure is active, and `F` frames the placed markers. Press `Escape` to leave the tool. Changing the length is undoable.
@@ -34463,6 +34581,12 @@ After aligning and cleaning the splats, make every splat you want to include vis
 
 URL: https://developer.playcanvas.com/user-manual/supersplat/editor/troubleshooting/
 
+## The Editor Does Not Start
+
+The Editor requires WebGPU. If the page shows "SuperSplat requires WebGPU, which this browser does not support" instead of loading, switch to a current version of Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled, and make sure hardware acceleration is turned on in the browser's settings. On a machine with more than one GPU, the browser must be allowed to use the dedicated one.
+
+If the message is "SuperSplat failed to start", open the browser console for details and include them when you [report the problem](#reporting-a-problem).
+
 ## A File Does Not Import
 
 - Confirm that the file uses a format listed in [Import and Export](import-export.md). A generic or "vanilla" PLY containing only mesh or point-cloud data will not load. SuperSplat requires a 3DGS PLY with Gaussian attributes such as position (`x`, `y`, `z`), scale (`scale_*`), rotation (`rot_*`), opacity, and spherical harmonic color (`f_dc_*`, with optional `f_rest_*`). See [How 3DGS PLYs Differ from Regular PLYs](/user-manual/gaussian-splatting/formats/ply).
@@ -34472,11 +34596,14 @@ URL: https://developer.playcanvas.com/user-manual/supersplat/editor/troubleshoot
 
 ## Selection Does Not Match the Visible Surface
 
-**Centers** mode selects Gaussian centers through the depth of the scene. Switch to **Rings** mode when you want screen-space selection to affect only the topmost visible layer.
+Check the two toggles at the left of the bottom toolbar:
 
-Pressing `Tab` hides the edit overlay but does not change the active selection mode. Press `M` to switch modes. Locked or deleted Gaussians cannot be selected; use **Select > Unlock** or **Select > Reset** when appropriate.
+- **Selection Depth** (`N`) is off by default, so a selection reaches through the whole scene and also picks Gaussians hidden behind the surface you clicked. Turn it on to select only the visible surface.
+- **Selection Footprint** (`M`) is off by default, so a Gaussian is only picked when its center lies inside the tool's shape. Large, soft Gaussians whose centers sit just outside your selection are left out; turn it on to select by the whole footprint instead.
 
-See [Selection and Cleanup](editing-splats.md) for selection operations and cleanup recipes.
+Pressing `Tab` only shows or hides the center and ring overlays; it does not change how selection works. Locked or deleted Gaussians cannot be selected; use **Select > Unlock** or **Select > Reset** when appropriate.
+
+See [Selection Depth and Footprint](editing-splats.md#selection-depth-and-footprint) and the cleanup recipes in [Selection and Cleanup](editing-splats.md).
 
 ## A Transform Moves the Wrong Content
 
@@ -34492,29 +34619,31 @@ To combine splats into one PLY, use **File > Export > PLY**. **File > Save** cre
 
 ## Color Looks Different
 
-- Check **Settings** for tonemapping, exposure, background color, and the number of spherical harmonic bands shown in the viewport.
-- Open **Color** and use its reset button to rule out per-splat tint, tonal, or transparency adjustments.
+- Check **Preferences** for the tone mapping curve and the number of spherical harmonic bands shown in the viewport, and **Appearance** for the background color. These are view settings and are not written into exports.
+- Expand **Colors** in the Scene Manager and click **Reset** to rule out a color grade applied to the splat or to a selection.
 - Inspect the scene from several angles because spherical harmonic color is view-dependent.
 
 See [Color and Appearance](color-and-appearance.md) for the difference between splat adjustments and viewport settings.
 
 ## The Editor Is Slow or Runs Out of Memory
 
-Large splats are limited by available browser and GPU memory. Close other graphics-intensive tabs, work on one visible splat at a time with Solo mode, and choose a lower level of detail when importing a multi-LOD file. You can also reduce the Gaussian count by cleaning the splat. For large sequence imports, remember that every frame contains a full splat.
+Large splats are limited by available GPU memory. Close other graphics-intensive tabs, work on one visible splat at a time with Solo mode, and choose a lower level of detail when importing a multi-LOD file. You can also reduce the Gaussian count by cleaning the splat. For large sequence imports, remember that every frame contains a full splat.
 
-WebGPU is required only for SOG and standalone viewer exports; normal editing requires WebGL 2.0. If a WebGPU export is unavailable, use a current browser with WebGPU enabled and supported by the device.
+If the viewport stutters while you orbit a heavy scene, open **Preferences** and check **Stochastic Alpha**. **Auto** (the default) switches to fast stochastic rendering during movement only once a sorted frame proves slow; choose **Movement** to use it during every camera move, or **Enabled** to use it all the time. The **Frame Timings** and **Overdraw** diagnostics in the [Overlays](interface.md#overlays) popup show where the time goes: high GPU times together with a red-to-white overdraw map mean many overlapping Gaussians, which cleanup or a lower level of detail will reduce.
 
 ## Unsaved Work or Project Confusion
 
-Use **File > Save** or **Save As** regularly to preserve an editable `.ssproj` project. Exported PLY and other delivery formats are not substitutes for the project file when you need to continue editing splat layout, color controls, camera settings, or animation.
+Use **File > Save** or **Save As** regularly to preserve an editable `.ssproj` project. Exported PLY and other delivery formats are not substitutes for the project file when you need to continue editing splat layout, camera settings, or animation.
 
 See [Managing Projects](managing-projects.md) for the difference between saving, opening, importing, and exporting.
 
 ## Publishing or Rendering Fails
 
 - Publishing requires you to be signed in to superspl.at with a PlayCanvas account.
-- Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or use a current version of Chrome, Edge, Firefox, or Safari.
-- A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing.
+- Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or update your browser or graphics driver.
+- A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing. In browsers without the File System Access API, renders and exports are delivered as downloads.
+
+## Reporting a Problem {#reporting-a-problem}
 
 If the problem persists, open **Help > Log an Issue** in the Editor and include the browser version, operating system, source format, approximate Gaussian count, and the steps that reproduce the problem. You can also ask in the [SuperSplat Discord community](https://discord.gg/T3pnhRTTAY).
 
@@ -34637,14 +34766,14 @@ If the scene is on its side or upside down, select it in the **Scene Manager** a
 
 Most raw captures contain **floaters**: stray Gaussians hanging in space where the trainer wasn't sure what it saw. Removing them is the single biggest quality win.
 
-1. Switch to **Rings** mode so selections stop at the topmost visible surface.
-2. Pick a selection tool from the toolbar: **Brush Select** to paint over floaters, **Sphere Select** or **Box Select** to grab a 3D region, or **Flood Select** for an isolated patch. Hold **Shift** to add to the selection and **Ctrl** to remove from it.
+1. Turn on **Selection Depth** (the second toggle at the left of the bottom toolbar, or press **N**) so selections stop at the visible surface, and press **Tab** to show the Gaussian centers.
+2. Pick a selection tool from the toolbar: **Brush Selection** to paint over floaters, **Sphere Brush** to paint in 3D along a surface, **Sphere Selection** or **Box Selection** to grab a 3D region, or **Flood Selection** for an isolated patch. Hold **Shift** to add to the selection and **Ctrl** to remove from it.
 3. Press <kbd>Delete</kbd>. Rotate the camera, check from another angle, and repeat.
 4. Removed too much? Use **Edit → Undo**, or **Select → Reset** to restore every deleted Gaussian.
 
-[Image: Gaussians selected in Centers mode]
+[Image: Selected Gaussians highlighted among the centers of the rest]
 
-To crop away everything outside your subject, select the region to keep with Box or Sphere Select, choose **Select → Invert**, and delete. [Selection and Cleanup](editor/editing-splats.md) covers every tool plus more cleanup recipes, and [Color and Appearance](editor/color-and-appearance.md) is where you fix exposure and tint.
+To crop away everything outside your subject, select the region to keep with Box or Sphere Selection, choose **Select → Invert**, and delete. [Selection and Cleanup](editor/editing-splats.md) covers every tool plus more cleanup recipes, and [Color and Appearance](editor/color-and-appearance.md) is where you fix exposure and tint.
 
 :::tip Save your work
 
@@ -35661,12 +35790,9 @@ To export your splat as an HTML viewer:
 
 1. Open the `File` > `Export` submenu in the SuperSplat Editor.
 2. Select `Viewer App…`.
+3. Choose the output folder under **Location** and enter a **Filename**, set the options below, and click **Export**. The Editor remembers the folder for next time; in browsers without the File System Access API the file is delivered as a download instead.
 
-:::note
-
-Viewer export requires a browser with **WebGPU** support, as the embedded splat data is compressed to SOG on the GPU. In a browser without WebGPU, the export fails with the error: "This export requires WebGPU, which is not available in this browser. Please try a recent version of Chrome, Edge or Safari."
-
-:::
+The splat data is compressed to SOG on the GPU as part of the export, so large scenes take a moment.
 
 ## Export Options
 
@@ -35678,8 +35804,8 @@ The viewer export can be configured via several options:
 |--------|-------------|
 | **Export Type** | Controls the format of the exported viewer:<br/>• **HTML**: A single-page `.html` file where the splat is compressed to SOG, Base64 encoded and embedded directly into the file. Very convenient since everything is packed into a single file that can be double-clicked to run in your browser using the `file://` protocol. However, the base64 encoding means it will be roughly 30% larger than the ZIP Package format, and browsers impose different limits on the maximum size (below 32MB should load everywhere, but above this you could encounter problems)<br/>• **ZIP Package**: A zip file containing the viewer app (`index.html`, `index.js`, `index.css` and `settings.json`) plus the splat data as a bundled SOG file (`index.sog`). Smaller, loads faster and guaranteed to load everywhere. However, it will only load over `http://`, so you will need to run a local web server (e.g. Node's [`serve`](https://www.npmjs.com/package/serve) or Python's [`http.server`](https://docs.python.org/3/library/http.server.html) (`python -m http.server`)) |
 | **Animation** | If enabled, the camera animation authored on the [Timeline](/user-manual/supersplat/editor/timeline) is included and plays when the viewer loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
-| **Loop Mode** | How an included camera animation plays back:<br/>• **None**: Play once and stop<br/>• **Repeat** (default): Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly |
-| **Background** | The background color of the viewer. Defaults to the Editor's current background color |
+| **Loop Mode** | How an included camera animation plays back:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
+| **Background** | The background color of the viewer. Defaults to the Editor's current background color (set in the [Appearance](/user-manual/supersplat/editor/interface#appearance) popup) |
 | **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
 | **SH Bands** | The number of spherical harmonics bands to include in the exported splat data |
 
