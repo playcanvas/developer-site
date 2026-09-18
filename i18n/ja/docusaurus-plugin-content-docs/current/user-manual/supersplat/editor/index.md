@@ -11,7 +11,7 @@ Editorを完全にスキップできます。[superspl.atのホームページ](
 
 :::
 
-![SuperSplat Interface](/img/user-manual/supersplat/editor/supersplat-interface.png)
+![SuperSplat Interface](/img/user-manual/supersplat/editor/editor-hero.webp)
 
 ## 動画チュートリアル
 
@@ -36,16 +36,14 @@ SuperSplat Editorのより包括的なガイドについては、この詳細な
 ### Editorへのアクセス
 
 1. **ブラウザを開く** — [superspl.at/editor](https://superspl.at/editor)にアクセスします
-2. **PLYファイルを読み込む** — ドラッグ＆ドロップするか、Fileメニューを使用します
+2. **スプラットファイルを読み込む** — ウィンドウにドラッグ＆ドロップするか、**File > Import**を使用します
 3. **編集を開始する** — インターフェースコントロールを使用してナビゲートおよび編集します
 
 ### システム要件
 
-- **モダンなウェブブラウザ** — Chrome、Firefox、Safari、またはEdge
-- **WebGL 2.0のサポート** — すべてのモダンなブラウザで利用可能
-- **WebGPUのサポート** — SOGおよびスタンドアロンビューアのエクスポート時にのみ必要（最近のChrome、Edge、Safariで利用可能）
-- **GPUアクセラレーション** — 大容量のスプラットファイルに推奨
-- **インストール不要** — すべてブラウザで動作します
+- **WebGPUに対応したブラウザ** — 最新のChromeまたはEdge、Safari 26以降、あるいはWebGPUを有効にしたFirefox。WebGPUが利用できない場合、Editorは読み込まれずに起動時にメッセージを表示します。
+- **GPUアクセラレーション** — ブラウザのハードウェアアクセラレーションを有効にしておいてください。非常に大きなスプラットには専用GPUが有効です。
+- **インストール不要** — すべてブラウザで動作します。必要に応じて、ブラウザのアドレスバーからEditorをアプリとしてインストールすることもできます。インストールすると、ファイルマネージャーから`.ply`、`.splat`、`.sog`、`.spz`、`.ksplat`、`.ssproj`ファイルを直接開けます。
 
 ## 次のステップ
 

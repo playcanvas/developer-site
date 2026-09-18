@@ -19,22 +19,27 @@ macOSでは、UndoやSelect Allなどのアプリケーションコマンドに�
 | 選択したガウシアンを削除 | `Delete`または`Backspace` | `Delete`または`Backspace` |
 | 選択範囲をロック | `H` | `H` |
 | すべてロック解除 | `Shift + H` | `Shift + H` |
+| Selection Depthを切り替え | `N` | `N` |
+| Selection Footprintを切り替え | `M` | `M` |
 
-Picker、Lasso、Polygon、Brush、Floodで選択するときは、`Shift`を押すと追加、`Ctrl`を押すと削除、`Shift + Ctrl`を押すと現在の選択範囲との共通部分だけを保持します。
+Rectangle、Lasso、Polygon、Brush、Sphere Brush、Flood、Eyedropperで選択するときは、`Shift`を押すと追加、`Ctrl`を押すと削除、`Shift + Ctrl`を押すと現在の選択範囲との共通部分だけを保持します。`N`と`M`が何を変えるかは、[Selection DepthとSelection Footprint](editing-splats.md#selection-depth-and-footprint)を参照してください。
 
 ## ツールと表示
 
 | 操作 | ショートカット |
 |---|---|
-| Move / Rotate / Scale | `1` / `2` / `3`（Box SelectまたはSphere Selectがアクティブな間は、代わりに選択ボリュームのギズモを切り替えます） |
-| Picker / Lasso / Polygon | `R` / `L` / `P` |
-| Brush / Flood | `B` / `O` |
-| Eyedropper | `Ctrl + E`（macOSでは`Cmd + E`） |
-| ブラシサイズを縮小 / 拡大 | `[` / `]` |
+| Move / Rotate / Scale | `1` / `2` / `3`（Box SelectionまたはSphere Selectionがアクティブな間は、代わりに選択ボリュームのギズモを切り替えます） |
+| Rectangle / Lasso / Polygon Selection | `R` / `L` / `P` |
+| Brush / Sphere Brush Selection | `B` / `Shift + B` |
+| Flood Selection | `O` |
+| Eyedropper Selection | `Ctrl + E`（macOSでは`Cmd + E`） |
+| ブラシサイズを縮小 / 拡大 | `[` / `]`、または`Alt + ホイール` |
+| ポリゴンを閉じる | `Enter` |
+| ポリゴンの最後の点を削除 | `Backspace` |
+| MeasureまたはOrientのアクティブな点を削除 | `Delete`または`Backspace` |
 | 現在のツールを終了 | `Escape` |
 | ワールド / ローカル座標を切り替え | `Shift + C` |
-| Centers / Ringsモードを切り替え | `M` |
-| 編集オーバーレイを切り替え | `Tab` |
+| 表示オーバーレイを切り替え | `Tab` |
 | グリッドを切り替え | `G` |
 | カメラ情報を切り替え | `I` |
 | Splat Dataパネルを切り替え | `Ctrl + D`（macOSでは`Cmd + D`） |
@@ -44,7 +49,7 @@ Picker、Lasso、Polygon、Brush、Floodで選択するときは、`Shift`を押
 
 | 操作 | ショートカット |
 |---|---|
-| 選択範囲またはアクティブスプラットにフォーカス | `F` |
+| 選択範囲またはアクティブスプラットをフレーミング | `F`（Box、Sphere、Measure、Orientツールがアクティブな間は、代わりにそのツールをフレーミングします） |
 | カメラをリセット | `Shift + F` |
 | Orbit / Flyコントロールを切り替え | `V` |
 | 前進 / 後退 / 左 / 右へFly移動 | `W` / `S` / `A` / `D` |
@@ -59,8 +64,16 @@ Picker、Lasso、Polygon、Brush、Floodで選択するときは、`Shift`を押
 |---|---|
 | 再生または一時停止 | `Space` |
 | 前 / 次のフレーム | `,` / `.` |
-| 前 / 次のキーフレーム | `<` / `>` |
+| 前 / 次のキーフレーム | `<` / `>`（`Shift + ,` / `Shift + .`） |
 | キーフレームを追加 | `Enter` |
 | キーフレームを削除 | `Shift + Enter` |
+| キーフレームを現在のカメラポーズで上書き | キーフレームを`Ctrl + クリック` |
+| キーフレームをコピー | キーフレームを`Shift + ドラッグ` |
 
-テキストまたは数値入力にフォーカスがある間、ショートカットは無視されます。一部のキーはツール固有の動作もします。たとえば、MeasureまたはOrientがアクティブな間は`Delete`で配置した点を削除し、Polygonの描画中は閉じていない最後の点を削除します。MeasureまたはOrientがアクティブな間、`F`は選択範囲ではなく配置した点をフレーミングします。
+## ファイル
+
+| 操作 | Windows/Linux | macOS |
+|---|---|---|
+| Re-export（前回のエクスポートを繰り返す） | `Ctrl + Shift + E` | `Cmd + Shift + E` |
+
+テキストまたは数値入力にフォーカスがある間、ショートカットは無視されます。ブラシサイズのショートカットはアクティブなブラシに作用し、BrushとSphere Brushはサイズを共有します。
