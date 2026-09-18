@@ -5,7 +5,7 @@ description: WebGPUの間接ドロースロット、GPUバッファパラメー�
 
 間接描画は、描画呼び出しのパラメーター(頂点数、インスタンス数など)がCPUによって直接指定されるのではなく、GPUバッファメモリに格納されるGPU駆動のレンダリング手法です。これにより、コンピュートシェーダーがレンダリングパラメーターを動的に生成または変更できるようになり、より効率的なGPU駆動のレンダリングワークフローが可能になります。
 
-この機能は現在、**WebGPUでのみサポートされています** ([`GraphicsDevice.isWebGPU`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#iswebgpu)を使用してWebGPUの利用可能性を確認できます) 。他のプラットフォームでは無視されます。
+この機能は現在、**WebGPUでのみサポートされています** ([`GraphicsDevice.supportsIndirectDraw`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectdraw)を使用してサポート状況を確認できます) 。他のプラットフォームでは無視され、メッシュインスタンスは通常の描画呼び出しとしてレンダリングされます。
 
 ## 間接描画の仕組み
 
@@ -73,6 +73,7 @@ device.computeDispatch([compute], 'GenerateIndirectDraw');
 詳細なAPIドキュメントについては、以下のPlayCanvasエンジンクラスとメソッドを参照してください:
 
 - [`MeshInstance.setIndirect()`](https://api.playcanvas.com/engine/classes/MeshInstance.html#setindirect) - 間接レンダリング用にメッシュインスタンスを設定する
+- [`GraphicsDevice.supportsIndirectDraw`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectdraw) - デバイスが間接描画をサポートしているかを確認する
 - [`GraphicsDevice.getIndirectDrawSlot()`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getindirectdrawslot) - 間接描画バッファにスロットを割り当てる
 - [`GraphicsDevice.indirectDrawBuffer`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#indirectdrawbuffer) - 間接描画バッファにアクセスする
 - [`GraphicsDevice.maxIndirectDrawCount`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxindirectdrawcount) - フレームごとの間接描画呼び出しの最大数を制御する
