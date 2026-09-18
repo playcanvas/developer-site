@@ -64,7 +64,7 @@ SuperSplatは、3Dビューをナビゲートするための直感的なカメ�
 
 **I**を押す（または**Overlays**ポップアップで**Camera Info**を有効にする）と、ビューポートの左下隅に情報オーバーレイが表示されます：
 
-![カメラ情報オーバーレイ](/img/user-manual/supersplat/editor/camera-info-overlay.png)
+<img src="/img/user-manual/supersplat/editor/camera-info-overlay.png" alt="カメラ情報オーバーレイ" width="520" />
 
 オーバーレイには、カメラの現在のポーズがシーン単位の`x, y, z`座標で表示され、ナビゲートするたびにリアルタイムで更新されます：
 

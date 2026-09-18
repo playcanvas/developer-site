@@ -78,6 +78,8 @@ The **Appearance** popup (the first button in the [Right Toolbar](#right-toolbar
 
 The **Overlays** popup (the eye icon in the [Right Toolbar](#right-toolbar)) holds viewport helpers and diagnostics. Each row is a toggle; click anywhere on the row to flip it.
 
+<img src="/img/user-manual/supersplat/editor/overlays-panel.png" alt="The Overlays popup" width="418" />
+
 | Section | Control | Default | Description |
 |---|---|---|---|
 | Helpers | **Grid** (`G`) | On | Shows the reference grid. |
@@ -94,6 +96,8 @@ Click the reset icon in the popup's header to restore the Overlays defaults.
 ## Preferences
 
 The **Preferences** popup (the gear icon in the [Right Toolbar](#right-toolbar)) holds application-wide settings. They are saved in your browser and restored the next time you open the Editor.
+
+<img src="/img/user-manual/supersplat/editor/preferences-panel.png" alt="The Preferences popup" width="418" />
 
 | Section | Setting | Default | Description |
 |---|---|---|---|

@@ -87,7 +87,7 @@ PLY sequences are memory-intensive since each frame loads a complete splat scene
 
 To export your currently loaded scene, open the `File` > `Export` submenu and choose **PLY**, **SOG**, **SPZ**, **Splat**, or **Viewer App**. Exports include the visible splats only. Every export uses the same dialog:
 
-![The export dialog with its Location and Filename rows](/img/user-manual/supersplat/editor/export-dialog.png)
+<img src="/img/user-manual/supersplat/editor/export-dialog.png" alt="The export dialog with its Location and Filename rows" width="408" />
 
 - **Location** - The output folder. The Editor remembers the folder you last exported to; click **Choose output folder…** (or **Change…**) to pick another. In browsers without the File System Access API this row is hidden and the file is delivered as a download instead.
 - **Filename** - The name of the output file. The dialog warns if the name is invalid or already exists in the folder (the button then reads **Overwrite**), and it refuses to overwrite a file that the current scene is still reading from.

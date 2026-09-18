@@ -54,7 +54,7 @@ Choose **File → Save** to keep an `.ssproj` project file. It preserves your ed
 2. Frame your favorite view. The published scene opens with the camera exactly where you leave it.
 3. Choose **File → Publish**, give the splat a **Title** and a **Description**, and click **Publish**.
 
-![The Publish dialog](/img/user-manual/supersplat/editor/publish-settings.png)
+<img src="/img/user-manual/supersplat/editor/publish-settings.png" alt="The Publish dialog" width="428" />
 
 Compression to SOG takes a moment, and several minutes for very large scenes. When it finishes, a dialog shows the URL of your new [scene page](scene-page.md). New splats are **Unlisted**: anyone with the link can view them, but they won't appear in Explore until you make them Public in step 5.
 
