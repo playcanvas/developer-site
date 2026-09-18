@@ -54,7 +54,7 @@ description: "SuperSplatで最初のスプラットを約10分で公開する：
 2. お気に入りの構図を決めます。公開されたシーンは、カメラをそのまま残した位置から始まります。
 3. **File → Publish**を選び、スプラットに**Title**と**Description**を入力して、**Publish**をクリックします。
 
-<img src="/img/user-manual/supersplat/editor/publish-settings.png" alt="Publishダイアログ" width="428" />
+![Publishダイアログ](/img/user-manual/supersplat/editor/publish-settings.png)
 
 SOG形式への圧縮には少し時間がかかり、非常に大きなシーンでは数分かかることもあります。完了すると、新しい[シーンページ](scene-page.md)のURLがダイアログに表示されます。新しいスプラットは**Unlisted**（限定公開）です。リンクを知っている人は誰でも閲覧できますが、ステップ5でPublicにするまでExploreには表示されません。
 

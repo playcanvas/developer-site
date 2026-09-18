@@ -12,7 +12,7 @@ SuperSplatでスプラットの見え方に影響するコントロールは2種
 
 [Scene Manager](scene-management.md)の最下部、**Transform**の下にある**Colors**セクションを展開します。スライダーは保留中のカラーグレードを保持し、対象となるガウシアン（現在の選択範囲、または何も選択していない場合はアクティブスプラット全体）にビューポートでリアルタイムにプレビューされます。**Apply**をクリックすると、グレードがそれらのガウシアンにベイクされ、スライダーは次の調整に備えてニュートラルに戻ります。一部の領域だけを異なる設定でグレーディングするには、先にその領域を選択します。
 
-<img src="/img/user-manual/supersplat/editor/scene-manager-colors.png" alt="Scene ManagerのColorsセクション" width="340" />
+![Scene ManagerのColorsセクション](/img/user-manual/supersplat/editor/scene-manager-colors.png)
 
 ### コントロール
 
@@ -47,7 +47,7 @@ Black PointをWhite Pointより高く設定することはできません。**Re
 
 **Appearance**ポップアップは[右ツールバー](interface.md#right-toolbar)の最初のボタンから開きます。設定は環境設定とともに保存され、ビューポートにだけ影響します。
 
-<img src="/img/user-manual/supersplat/editor/appearance-panel.png" alt="Appearanceポップアップ" width="418" />
+![Appearanceポップアップ](/img/user-manual/supersplat/editor/appearance-panel.png)
 
 ### Display
 

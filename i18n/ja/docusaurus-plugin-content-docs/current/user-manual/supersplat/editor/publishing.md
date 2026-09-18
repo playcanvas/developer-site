@@ -29,7 +29,7 @@ superspl.atに公開する代わりに（または併用して）自前のサー
 2. `Publish`を選択します。
 3. `Publish`ダイアログのオプションを記入します：
 
-   <img src="/img/user-manual/supersplat/editor/publish-settings.png" alt="Publish Settings" width="428" />
+   ![Publish Settings](/img/user-manual/supersplat/editor/publish-settings.png)
 
    | オプション | 説明 |
    |--------|-------------|

@@ -87,7 +87,7 @@ PLYシーケンスは、各フレームが完全なスプラットシーンを�
 
 現在読み込まれているシーンをエクスポートするには、`File` > `Export` サブメニューを開き、**PLY**、**SOG**、**SPZ**、**Splat**、**Viewer App** のいずれかを選択します。エクスポートには表示中のスプラットだけが含まれます。すべてのエクスポートで同じダイアログを使用します。
 
-<img src="/img/user-manual/supersplat/editor/export-dialog.png" alt="LocationとFilename行のあるエクスポートダイアログ" width="408" />
+![LocationとFilename行のあるエクスポートダイアログ](/img/user-manual/supersplat/editor/export-dialog.png)
 
 - **Location** - 出力フォルダー。Editorは前回エクスポートしたフォルダーを記憶しています。別のフォルダーを選ぶには**Choose output folder…**（または**Change…**）をクリックします。File System Access APIに対応していないブラウザではこの行は表示されず、ファイルはダウンロードとして提供されます。
 - **Filename** - 出力ファイルの名前。名前が無効な場合やフォルダー内に同名のファイルがある場合は警告が表示され（ボタンは**Overwrite**に変わります）、現在のシーンが読み込み中のファイルの上書きは拒否されます。

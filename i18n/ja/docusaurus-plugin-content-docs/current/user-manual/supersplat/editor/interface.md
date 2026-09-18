@@ -78,7 +78,7 @@ Appearance、Overlays、Preferencesのポップアップは、同時に1つだ�
 
 **Overlays**ポップアップ（[右ツールバー](#right-toolbar)の目のアイコン）には、ビューポートのヘルパーと診断機能があります。各行はトグルで、行のどこをクリックしても切り替わります。
 
-<img src="/img/user-manual/supersplat/editor/overlays-panel.png" alt="Overlaysポップアップ" width="418" />
+![Overlaysポップアップ](/img/user-manual/supersplat/editor/overlays-panel.png)
 
 | セクション | コントロール | デフォルト | 説明 |
 |---|---|---|---|
@@ -97,7 +97,7 @@ Appearance、Overlays、Preferencesのポップアップは、同時に1つだ�
 
 **Preferences**ポップアップ（[右ツールバー](#right-toolbar)の歯車アイコン）には、アプリケーション全体の設定があります。設定はブラウザに保存され、次回Editorを開いたときに復元されます。
 
-<img src="/img/user-manual/supersplat/editor/preferences-panel.png" alt="Preferencesポップアップ" width="418" />
+![Preferencesポップアップ](/img/user-manual/supersplat/editor/preferences-panel.png)
 
 | セクション | 設定 | デフォルト | 説明 |
 |---|---|---|---|
