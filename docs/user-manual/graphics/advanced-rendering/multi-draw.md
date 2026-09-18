@@ -31,6 +31,14 @@ if (app.graphicsDevice.supportsMultiDraw) {
 
 When `supportsMultiDraw` is false, the engine automatically falls back to an internal loop of single draw calls using the multi-draw data. While this doesn't provide the full multi-draw performance benefit, it is still significantly faster than rendering separate geometries with individual MeshInstances, as the material and render state are set up only once.
 
+:::note
+
+`gl_DrawID` is provided by the `WEBGL_multi_draw` extension itself, so it is not available on the fallback path. The engine defines `CAPS_MULTI_DRAW` only when the extension is present, which is why shader code that reads `gl_DrawID` has to be guarded by it.
+
+Sub-draws that differ only in which portion of the geometry they render behave the same either way, as the fallback submits each portion as its own draw. Sub-draws that need to identify themselves in the shader do not — if your material reads `gl_DrawID`, check `supportsMultiDraw` and provide another path when it is false, as in [Cross-Platform Approach](#cross-platform-approach) below.
+
+:::
+
 ## Live Examples
 
 - Multi-Draw - Terrain rendering with dynamic patch culling
