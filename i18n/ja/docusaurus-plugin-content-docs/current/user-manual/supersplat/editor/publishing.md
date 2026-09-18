@@ -13,7 +13,7 @@ Editorを使わずに公開することもできます。[superspl.atのホー�
 
 superspl.atに公開する代わりに（または併用して）自前のサーバーで公開済みビューアをホストする方法については、[ビューアのセルフホスティング](/user-manual/supersplat/viewer/self-hosting)を参照してください。
 
-![SuperSplat Website](/img/user-manual/supersplat/editor/supersplat-website.png)
+![SuperSplat Website](/img/user-manual/supersplat/editor/supersplat-website.webp)
 
 ## ログイン状態の確認
 
