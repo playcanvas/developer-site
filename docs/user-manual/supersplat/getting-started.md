@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: "Publish your first splat with SuperSplat in about ten minutes: load a PLY in the Editor, clean it up, publish it, curate it in Studio, and share the scene page."
+description: "Publish your first splat with SuperSplat in about ten minutes: load a splat file in the Editor, clean it up, publish it, curate it in Studio, and share the scene page."
 ---
 
 This guide takes a raw splat file all the way to a published, shareable scene page. It takes about ten minutes and touches every part of the SuperSplat workflow: **Editor → Publish → Studio → Share**.
