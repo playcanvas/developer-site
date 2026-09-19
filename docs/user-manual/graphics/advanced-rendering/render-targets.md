@@ -189,3 +189,4 @@ The following example renders a scene into a texture from a second camera and di
 - [Multiple Cameras](../cameras/multiple-cameras.md) - composing views and assigning render targets to cameras.
 - [Layers](../layers/index.md) - controlling which objects each camera renders.
 - [Post Effects](../posteffects/index.md) - built-in and custom post-processing built on render targets.
+- [TextureRenderer](../debug-drawing.md#texturerenderer) - inspect render-target color and individual channels on screen.

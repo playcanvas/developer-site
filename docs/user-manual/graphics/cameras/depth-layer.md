@@ -12,6 +12,8 @@ Additionally, to capture these buffers, the capture needs to be enabled on a Cam
 - [```requestSceneColorMap```](https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenecolormap) to request a color map
 - [```requestSceneDepthMap```](https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenedepthmap) to request a depth map
 
+To inspect captured depth on screen, use [TextureRenderer.sceneDepth](../debug-drawing.md#scene-depth).
+
 ## Buffer access
 
 To access one of these buffers in the shader as a texture, these are the uniform names to be used:
