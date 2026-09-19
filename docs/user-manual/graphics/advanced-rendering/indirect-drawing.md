@@ -5,7 +5,7 @@ description: WebGPU indirect draw slots, GPU buffer parameters, compute-driven c
 
 Indirect drawing is a GPU-driven rendering technique where draw call parameters (such as vertex count, instance count, etc.) are stored in GPU buffer memory rather than being specified directly by the CPU. This allows compute shaders to dynamically generate or modify rendering parameters, enabling more efficient GPU-driven rendering workflows.
 
-This feature is currently **only supported on WebGPU** (you can check WebGPU availability using [`GraphicsDevice.isWebGPU`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#iswebgpu)) and is ignored on other platforms.
+This feature is currently **only supported on WebGPU** (you can check support using [`GraphicsDevice.supportsIndirectDraw`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectdraw)) and is ignored on other platforms, where the mesh instance renders as a normal draw call.
 
 ## How Indirect Drawing Works
 
@@ -73,6 +73,7 @@ device.computeDispatch([compute], 'GenerateIndirectDraw');
 For detailed API documentation, refer to these PlayCanvas engine classes and methods:
 
 - [`MeshInstance.setIndirect()`](https://api.playcanvas.com/engine/classes/MeshInstance.html#setindirect) - Configure a mesh instance for indirect rendering
+- [`GraphicsDevice.supportsIndirectDraw`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectdraw) - Check whether the device supports indirect drawing
 - [`GraphicsDevice.getIndirectDrawSlot()`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getindirectdrawslot) - Allocate a slot in the indirect draw buffer
 - [`GraphicsDevice.indirectDrawBuffer`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#indirectdrawbuffer) - Access the indirect draw buffer
 - [`GraphicsDevice.maxIndirectDrawCount`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxindirectdrawcount) - Control maximum indirect draw calls per frame
