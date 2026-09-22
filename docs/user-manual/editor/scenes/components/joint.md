@@ -5,6 +5,12 @@ description: PlayCanvas Joint component constrains two rigid bodies, or one rigi
 
 The Joint Component constrains two rigid bodies, or constrains one rigid body to a fixed point in world space.
 
+:::warning[Alpha]
+
+The joint component is in alpha, so its behavior and API may change. The Editor inspector for it is available from Editor 2.32.
+
+:::
+
 <video autoPlay muted loop controls src='/video/editor-joint-component.mp4' style={{width: '100%', height: 'auto'}} />
 
 ## Prerequisites
@@ -108,6 +114,7 @@ Two behaviours are worth knowing when you change joint properties from a script:
 
 - [Rigid Body Component](rigidbody.md) - Required on both constrained entities
 - [Collision Component](collision.md) - Defines each rigid body's shape
+- [Joints](/user-manual/physics/joints/) - How joints work, and driving them from code
 - [Physics](/user-manual/physics) - Learn more about the physics system
 
 ## Scripting Interface

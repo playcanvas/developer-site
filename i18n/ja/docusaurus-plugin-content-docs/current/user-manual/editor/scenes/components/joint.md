@@ -5,6 +5,12 @@ description: PlayCanvas の Joint Component は、2つの rigid body、または
 
 Jointコンポーネントは、2つのリジッドボディを拘束します。または、1つのリジッドボディをワールド空間上の固定点に拘束します。
 
+:::warning[Alpha]
+
+Jointコンポーネントはアルファ版のため、その挙動やAPIは変わる可能性があります。エディターのインスペクターはEditor 2.32以降で利用できます。
+
+:::
+
 <video autoPlay muted loop controls src='/video/editor-joint-component.mp4' style={{width: '100%', height: 'auto'}} />
 
 ## 前提条件 {#prerequisites}
@@ -108,6 +114,7 @@ JointコンポーネントはAmmo物理バックエンドで動作するため�
 
 - [Rigid Bodyコンポーネント](rigidbody.md) - 拘束する両方のエンティティに必要
 - [Collisionコンポーネント](collision.md) - 各リジッドボディの形状を定義
+- [ジョイント](/user-manual/physics/joints/) - ジョイントの仕組みと、コードから制御する方法
 - [物理演算](/user-manual/physics) - 物理システムについて詳しく学ぶ
 
 ## スクリプトインターフェース {#scripting-interface}
