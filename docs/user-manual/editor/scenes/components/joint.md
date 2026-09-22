@@ -99,17 +99,6 @@ The six degrees of freedom type replaces the fields above with a per-axis grid â
 
 A `Limits` field only appears once its corresponding `Motion` field is set to **Limited**.
 
-## Editing a joint at runtime
-
-<video autoPlay muted loop controls src='/video/editor-joint-bridge-sim.mp4' style={{width: '100%', height: 'auto'}} />
-
-A bridge of jointed planks simulating in a running application.
-
-Two behaviours are worth knowing when you change joint properties from a script:
-
-- Setting `type` destroys and recreates the constraint, which also clears the broken flag. It does not pull already-separated bodies back together.
-- Setting a limit such as `swingLimitY` calls the constraint's limit update, so limits are live-editable while the application is running.
-
 ## See Also
 
 - [Rigid Body Component](rigidbody.md) - Required on both constrained entities
@@ -120,3 +109,8 @@ Two behaviours are worth knowing when you change joint properties from a script:
 ## Scripting Interface
 
 You can control a Joint Component's properties using a [Script Component](script.md). The Joint Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/JointComponent.html).
+
+Two behaviours are worth knowing when changing a joint from a script:
+
+- Setting `type` destroys and recreates the constraint, which also clears the broken flag. It does not pull already-separated bodies back together.
+- Setting a limit such as `swingLimitY` calls the constraint's limit update, so limits are live-editable while the application is running.
