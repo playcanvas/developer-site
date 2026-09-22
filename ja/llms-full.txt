@@ -4,7 +4,7 @@
 > It is designed for consumption by Large Language Models (LLMs) and AI assistants.
 
 Base URL: https://developer.playcanvas.com
-Total Documents: 506
+Total Documents: 507
 Generated: 2026-09-22
 
 ================================================================================
@@ -4991,7 +4991,11 @@ Fonts are stored as multi-channel signed distance field (MSDF) atlases rather th
 
 ## Importing a font
 
+Since Editor 2.30.0 the atlas is generated in the browser rather than by the server-side conversion pipeline, and the descriptor and atlas pages are created as separate assets you can inspect, repoint or replace with your own. Fonts imported before then are converted on first regeneration.
+
 Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor. The atlas is generated in your browser, and the result is a folder named after the file containing four assets:
+
+<video autoPlay muted loop controls src='/video/editor-font-generation.mp4' style={{width: '100%', height: 'auto'}} />
 
 [Image: Font import folder]
 
@@ -5324,12 +5328,18 @@ Adds depth illusion to surfaces using height mapping. See [Parallax Mapping](/us
 
 [Image: Parallax]
 
+<video autoPlay muted loop controls src='/video/editor-parallax-occlusion.mp4' style={{width: '100%', height: 'auto'}} />
+
 | Property | Description |
 |----------|-------------|
 | Heightmap | The height map texture. White represents high areas, black represents low areas. |
 | UV Channel | The UV set used to sample the height texture (UV0 or UV1). |
 | Color Channel | Which texture channel to read the height from (R, G, B, or A). |
+| Mode | Selects a single height-map offset or ray-marched parallax occlusion. The mesh silhouette and depth buffer remain unchanged. Options: Offset, Occlusion. |
 | Strength | Intensity of the parallax effect (0-2). |
+| Base | Height-map value that sits at the original surface. Use 1 for depth maps where white represents the flat surface (0-1). |
+| Samples | Maximum height-map samples used by parallax occlusion. Higher values increase rendering cost (4-64). Only shown when Mode is Occlusion. |
+| Self Shadow | Maximum samples used to self-shadow parallax relief for each directional light. Set to 0 to disable it (0-32). Only shown when Mode is Occlusion. |
 
 ## Clear Coat
 
@@ -7230,12 +7240,15 @@ Navigate to the `NETWORK` section and expand the panel:
 
 [Image: Network Settings]
 
+<video autoPlay muted loop controls src='/video/editor-network-settings.mp4' style={{width: '100%', height: 'auto'}} />
+
 Here is a breakdown of the available settings:
 
 ## Settings
 
 | Setting | Description |
 | --- | --- |
+| **Asset Credentials** | Send asset requests with credentials such as cookies, client certificates, or HTTP authentication. Authenticated cross-origin servers must allow credentials and return a specific origin. |
 | **Asset Retries** | The maximum number of times to retry loading an asset if it fails to load. If an asset request fails, it will be retried with exponential backoff. |
 | **Max Concurrent Requests** | The maximum number of asset requests allowed to be in flight at the same time. Additional requests are queued and sent as earlier ones complete. This prevents the browser from rejecting requests with `net::ERR_INSUFFICIENT_RESOURCES` when a large number of assets load at once. Defaults to 128; set to 0 to disable throttling. |
 
@@ -7294,6 +7307,8 @@ Navigate to the `RENDERING` section and expand the panel:
 
 [Image: Rendering Settings]
 
+<video autoPlay muted loop controls src='/video/editor-rendering-max-lights.mp4' style={{width: '100%', height: 'auto'}} />
+
 Here is a breakdown of the available settings:
 
 ## Environment
@@ -7316,12 +7331,40 @@ Here is a breakdown of the available settings:
 | **Clustered Lighting** | Enable clustered lighting. |
 | **Cells (X, Y, Z)** | Number of cells per world-space axis used to subdivide the space containing lights. |
 | **Max Lights Per Cell** | Maximum number of lights a cell can store. |
+| **Max Lights** | Maximum number of clustered lights visible in a frame. Keep this as low as the scene allows; values above 255 use a larger light-index texture. |
 | **Cookie Atlas Resolution** | Resolution of the atlas texture storing all non-directional cookie textures. |
 | **Cookies Enabled** | Clustered lights support cookies. |
 | **Shadows Enabled** | Clustered lights support shadows. |
 | **Shadow Atlas Resolution** | Resolution of the atlas texture storing all non-directional shadow textures. |
 | **Shadow Type** | The type of shadow filtering used by all shadows. |
 | **Area Lights Enabled** | Clustered lights support area lights. |
+
+## Gaussian Splatting
+
+Scene-wide settings for [Gaussian splat](/user-manual/gaussian-splatting) rendering. Per-entity LOD range and falloff live on the [GSplat Component](/user-manual/editor/scenes/components/gsplat).
+
+| Setting | Description |
+| --- | --- |
+| **Radial Sorting** | Sort splats by radial camera distance instead of view depth. |
+| **LOD Update Distance** | Camera travel distance that triggers a Gaussian splat LOD update. |
+| **LOD Update Angle** | Camera rotation in degrees that triggers an LOD update. Set to 0 to disable angle updates. |
+| **LOD Behind Penalty** | Distance multiplier used for splat nodes behind the camera during LOD selection. |
+| **LOD Underfill Limit** | Number of lower-detail LOD levels that can be used while optimal data loads. |
+| **Splat Budget** | Target number of splats rendered across the scene. Non-positive values use the engine default. |
+| **Alpha Clip** | Alpha threshold for Gaussian splat shadow, picking and prepass rendering. |
+| **Forward Alpha Clip** | Alpha threshold below which splats are removed from the forward pass. |
+| **Min Pixel Size** | Minimum screen-space size below which splats are discarded. |
+| **Min Contribution** | Minimum visual contribution below which splats are culled. Set to 0 to disable it. |
+| **Foveation Strength** | Strength of contribution culling towards the screen edges. Set to 0 to disable it. Only applies to the GPU-sorted raster renderer; on other renderers it has no effect. |
+| **Foveation Center** | Protected screen-centre radius where foveation does not apply. |
+| **Anti-Alias** | Apply anti-aliasing compensation to splats trained with anti-aliasing. |
+| **Use Fog** | Apply scene fog to Gaussian splats. |
+| **Use Tonemapping** | Apply camera tonemapping and scene exposure to Gaussian splats. Other scene objects are unaffected. |
+| **Color Update Angle** | Viewing-angle change that triggers a spherical-harmonics color update. |
+| **Cooldown Ticks** | Ticks an unused streamed splat resource waits before unloading. |
+| **Data Format** | Work-buffer format used for Gaussian splat rendering. Options: Compact, Large. |
+| **Enable IDs** | Store a unique component ID in the Gaussian splat work buffer. |
+| **LOD Mode** | Metric used to select Gaussian splat detail within the global budget. Options: Error, Distance. |
 
 ## Exposure & Fog
 
@@ -7394,6 +7437,32 @@ The Editor's main toolbar can be found on the left, vertical edge of the Editor.
 | [Image: How Do I] | **How Do I...?** | Toggle the 'How Do I...?' help widget in the [Viewport](../viewport). |
 | [Image: Controls] | **Controls** | Show the list of [controls and keyboard shortcuts](../keyboard-shortcuts) supported by the Editor. |
 | [Image: Settings] | **Settings** | Load Editor and Scene Settings into the [Inspector](../inspector). |
+
+## Customizing the toolbar
+
+Since Editor 2.30.3 you can hide buttons you never use and reorder the rest.
+
+<video autoPlay muted loop controls src='/video/editor-toolbar-customization.mp4' style={{width: '100%', height: 'auto'}} />
+
+Right-click anywhere on the toolbar to open its context menu:
+
+| Command | Description |
+| ------- | ----------- |
+| **Edit Toolbar** | Enter edit mode. |
+| **Done Editing** | Leave edit mode. Shown in place of Edit Toolbar while editing. |
+| **Reset Toolbar** | Restore the default buttons and order. Only shown once you have hidden or moved something. |
+
+In edit mode:
+
+- Each button gains an **eye** badge. Click it to hide or show that button. Hidden buttons stay visible, dimmed, while you are editing so you can bring them back.
+- Buttons can be dragged to reorder them. The toolbar has two groups — the commands at the top and the utility buttons at the bottom — and a button can only be moved within its own group.
+- The **Menu** button at the top of the toolbar becomes a **Done editing toolbar** button. Click it, or pick **Done Editing** from the context menu, to finish.
+
+:::note
+
+Your layout is saved in your browser rather than in the project, so it applies to every project you open in that browser and is not shared with your collaborators.
+
+:::
 
 --------------------------------------------------------------------------------
 
@@ -9524,6 +9593,7 @@ There are many different components defined in the PlayCanvas Engine:
 | [Collision](collision)            | Assigns a collision volume to the entity.                                     |
 | [Element](element)                | Defines a user interface text or image element.                               |
 | [GSplat](gsplat)                  | Renders a 3D Gaussian Splat at the location of the entity.                    |
+| [Joint](joint)                    | Constrains two rigid bodies, or one rigid body to a point in world space.     |
 | [Layout Child](layoutchild)       | Overrides default Layout Group properties for one element.                    |
 | [Layout Group](layoutgroup)       | Automatically sets position and scale of child user interface elements.       |
 | [Light](light)                    | Attaches a dynamic light source to the Entity.                                |
@@ -9877,6 +9947,8 @@ The text element renders a string of text using a [font asset](/user-manual/edit
 
 ## Text Component Properties
 
+<video autoPlay muted loop controls src='/video/editor-justified-text.mp4' style={{width: '100%', height: 'auto'}} />
+
 | Property          | Description |
 |-------------------|-------------|
 | Alignment         | Determines how the text is aligned within the element. (0, 0) is bottom left, (1, 1) is top right. |
@@ -9890,6 +9962,7 @@ The text element renders a string of text using a [font asset](/user-manual/edit
 | Max Font Size     | The maximum font size when using Auto Fit Width or Auto Fit Height. |
 | Line Height       | The size in Screen Component pixels to move down for a new line. |
 | Wrap Lines        | If enabled, text that overflows the width of the text element will be wrapped to the next line. |
+| Justify           | Stretch wrapped text lines to both edges by widening the spaces between words. Only shown when Wrap Lines is enabled and Auto Width is disabled. |
 | Max Lines         | The maximum number of lines to display. Text beyond this limit will be clipped. Only shown when Wrap Lines is enabled. |
 | Spacing           | A multiplier to apply to the amount of space between each character. |
 | Color             | The color to tint the font. |
@@ -9921,23 +9994,157 @@ The GSplat Component enables an entity to render a 3D Gaussian Splat.
 
 [Image: GSplat Component]
 
+<video autoPlay muted loop controls src='/video/editor-gsplat-lod-controls.mp4' style={{width: '100%', height: 'auto'}} />
+
+*Splat scenes on this page: Trogir, Croatia by tosolini, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
 ## Properties
 
 | Property | Description |
 |----------|-------------|
 | Asset    | The GSplat asset to be rendered by this GSplat Component. Only a single GSplat asset can be assigned to a GSplat Component. |
 | Cast Shadows | When enabled, the splat casts shadows for lights that have shadow casting enabled. |
-| LOD Base Distance | The distance of the first LOD transition (from LOD 0 to LOD 1). Splats closer than this distance use the highest quality LOD, and each subsequent LOD level transitions at a progressively larger distance (scaled by LOD Multiplier). Defaults to 5. |
-| LOD Multiplier | The geometric multiplier between successive LOD distance thresholds. Lower values keep higher quality at greater distances; higher values switch to coarser LODs sooner. Defaults to 3. |
+| LOD Range Min | Lowest LOD level used when rendering this Gaussian splat. Integer, minimum 0. |
+| LOD Range Max | Highest LOD level used when rendering this Gaussian splat. Integer, minimum 0. |
+| LOD Falloff | Controls how strongly detail is concentrated near the camera within the global splat budget. 0 spreads detail evenly. Range 0 to 8. |
 | Layers   | The [layers](/user-manual/graphics/layers) to render this element into. |
+
+:::note
+
+**LOD Range only has an effect on streamed SOG octrees.** The LOD level is clamped to the number of levels the asset actually has, and a single `.sog` or `.ply` file is a single level — the fields are still shown, but changing them does nothing.
+
+:::
+
+<video autoPlay muted loop controls src='/video/editor-gsplat-lod-launch.mp4' style={{width: '100%', height: 'auto'}} />
+
+Scene-wide Gaussian splat behaviour, including the global splat budget these LOD settings work within, is configured in [Rendering Settings](/user-manual/editor/interface/settings/rendering#gaussian-splatting).
 
 ## See Also
 
 - [Gaussian Splatting](/user-manual/gaussian-splatting) - Learn more about 3D Gaussian Splats
+- [Rendering Settings](/user-manual/editor/interface/settings/rendering#gaussian-splatting) - Scene-wide Gaussian splat settings
 
 ## Scripting Interface
 
 You can control a GSplat Component's properties using a [Script Component](script.md). The GSplat Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/GSplatComponent.html).
+
+--------------------------------------------------------------------------------
+
+## Joint
+
+URL: https://developer.playcanvas.com/user-manual/editor/scenes/components/joint/
+
+The Joint Component constrains two rigid bodies, or constrains one rigid body to a fixed point in world space.
+
+:::warning[Alpha]
+
+The joint component is in alpha, so its behavior and API may change. The Editor inspector for it is available from Editor 2.32.
+
+:::
+
+<video autoPlay muted loop controls src='/video/editor-joint-component.mp4' style={{width: '100%', height: 'auto'}} />
+
+## Prerequisites
+
+The Joint Component is driven by the Ammo physics backend, so two things must be in place before it does anything:
+
+- **Ammo must be imported into the project.** Until it is, the component panel shows an `Ammo module not found` warning with an import button. See [Physics](/user-manual/physics) for how to add it.
+- **Both referenced entities need a [Rigid Body Component](rigidbody.md)**, each with a [Collision Component](collision.md) to give it a shape.
+
+Leave `Entity B` empty to constrain `Entity A` to a fixed point in world space instead of to a second body.
+
+## Joint types
+
+`Type` selects a fixed, ball, hinge, slider, or six degrees of freedom joint. The inspector options are **Fixed**, **Ball**, **Hinge**, **Slider** and **6DoF**.
+
+The type decides which of the remaining fields the inspector shows, so the panel changes as you switch between them:
+
+| Type | Additional fields |
+|------|-------------------|
+| Fixed | None — only the always-shown properties. |
+| Ball | Enable Limits, and the swing and twist limits when it is on. |
+| Hinge | Enable Limits, Limits, Motor Speed, Max Motor Force. |
+| Slider | Enable Limits, Limits, Motor Speed, Max Motor Force. |
+| 6DoF | The per-axis Linear and Angular motion, limit and spring fields. |
+
+<video autoPlay muted loop controls src='/video/editor-joint-bridge-launch.mp4' style={{width: '100%', height: 'auto'}} />
+
+A chain of planks, each held to the next by a joint, launched from the Editor.
+
+## Properties
+
+### Always shown
+
+| Property | Description |
+|----------|-------------|
+| Type | Selects a fixed, ball, hinge, slider, or six degrees of freedom joint. |
+| Entity A | First constrained entity. It must have a rigid body component. |
+| Entity B | Second constrained entity. Leave empty to constrain Entity A to world space. |
+| Enable Collision | Allow the two constrained bodies to collide with each other. |
+| Break Impulse | Impulse above which the joint breaks. Leave empty for an unbreakable joint. |
+
+### Limits
+
+`Enable Limits` is shown for the Ball, Hinge and Slider types.
+
+| Property | Description |
+|----------|-------------|
+| Enable Limits | Enable the configured hinge, slider, or ball-joint limits. |
+
+### Hinge and Slider
+
+`Motor Speed` and `Max Motor Force` do not depend on `Enable Limits`.
+
+| Property | Description |
+|----------|-------------|
+| Limits | Lower and upper angular hinge limits or linear slider limits. Only shown when Enable Limits is on. |
+| Motor Speed | Target angular hinge speed or linear slider speed. |
+| Max Motor Force | Maximum motor force or torque. Set to 0 to disable the motor. |
+
+### Ball
+
+Only shown when `Enable Limits` is on.
+
+| Property | Description |
+|----------|-------------|
+| Swing Limit Y | Maximum ball-joint swing towards its Y axis in degrees. |
+| Swing Limit Z | Maximum ball-joint swing towards its Z axis in degrees. |
+| Twist Limit | Maximum ball-joint twist about its X axis in degrees. |
+
+### 6DoF
+
+The six degrees of freedom type replaces the fields above with a per-axis grid — Linear and Angular, each for X, Y and Z.
+
+| Property | Description |
+|----------|-------------|
+| Linear Motion X / Y / Z | Selects whether linear motion on that axis is locked, limited, or free. |
+| Linear Limits X / Y / Z | Lower and upper limits used when linear motion on that axis is limited. |
+| Linear Stiffness | Stiffness of the linear springs on the X, Y and Z axes. |
+| Linear Damping | Damping of the linear springs on the X, Y and Z axes. |
+| Linear Equilibrium | Rest positions of the linear springs on the X, Y and Z axes. |
+| Angular Motion X / Y / Z | Selects whether angular motion on that axis is locked, limited, or free. |
+| Angular Limits X / Y / Z | Lower and upper limits used when angular motion on that axis is limited. |
+| Angular Stiffness | Stiffness of the angular springs about the X, Y and Z axes. |
+| Angular Damping | Damping of the angular springs about the X, Y and Z axes. |
+| Angular Equilibrium | Rest angles of the angular springs about the X, Y and Z axes. |
+
+A `Limits` field only appears once its corresponding `Motion` field is set to **Limited**.
+
+## See Also
+
+- [Rigid Body Component](rigidbody.md) - Required on both constrained entities
+- [Collision Component](collision.md) - Defines each rigid body's shape
+- [Joints](/user-manual/physics/joints/) - How joints work, and driving them from code
+- [Physics](/user-manual/physics) - Learn more about the physics system
+
+## Scripting Interface
+
+You can control a Joint Component's properties using a [Script Component](script.md). The Joint Component's scripting interface is [here](https://api.playcanvas.com/engine/classes/JointComponent.html).
+
+Two behaviours are worth knowing when changing a joint from a script:
+
+- Setting `type` destroys and recreates the constraint, which also clears the broken flag. It does not pull already-separated bodies back together.
+- Setting a limit such as `swingLimitY` calls the constraint's limit update, so limits are live-editable while the application is running.
 
 --------------------------------------------------------------------------------
 
@@ -10280,6 +10487,8 @@ The Render Component enables an entity to render a primitive shape or a render a
 
 [Image: Render Component]
 
+<video autoPlay muted loop controls src='/video/editor-shadow-cascade-mask.mp4' style={{width: '100%', height: 'auto'}} />
+
 ## Properties
 
 | Property                 | Description |
@@ -10288,6 +10497,7 @@ The Render Component enables an entity to render a primitive shape or a render a
 | Asset                    | Asset type only. The render asset to be rendered by this render component. Only a single render asset can be assigned to a render component. |
 | Root Bone                | Asset type only (skinned meshes). The entity to be used as the root bone for any skinned meshes that are rendered by this component. |
 | Cast Shadows             | If enabled, the mesh instances rendered by this component will cast shadows onto other mesh instances in the scene. |
+| Shadow Cascades          | Selects which directional-light shadow cascades receive this render component. Extra cascades are ignored. Only shown when Cast Shadows is enabled. |
 | Cast Lightmap Shadows    | If enabled, the mesh instances rendered by this component will cast shadows into lightmaps. |
 | Receive Shadows          | If enabled, the mesh instances rendered by this component will receive shadows cast by other mesh instances in the scene. |
 | Static                   | If the entity referencing this render component never moves, check this box as a hint to the engine to make certain optimizations. |
@@ -10300,9 +10510,14 @@ The Render Component enables an entity to render a primitive shape or a render a
 | Layers                   | The layers to render this component's mesh instances into. |
 | Materials                | The material assets that will be used to render the mesh instances of this component. Each material corresponds to the respective mesh instance. |
 
+The Shadow Cascades mask is a row of four boxes, one per cascade. It pairs with the **Cascades** and **Cascade Distribution** settings on a directional [Light Component](light.md), which decide how many cascades exist and how they are spread through the camera's view.
+
+<video autoPlay muted loop controls src='/video/editor-shadow-cascades-launch.mp4' style={{width: '100%', height: 'auto'}} />
+
 ## See Also
 
 - [Render Assets](/user-manual/editor/assets/inspectors/render) - Learn about render assets
+- [Light Component](light.md) - Configures the directional light cascades the mask selects from
 
 ## Scripting Interface
 
@@ -26597,7 +26812,7 @@ URL: https://developer.playcanvas.com/user-manual/physics/joints/
 
 :::warning[Alpha]
 
-The joint component is in alpha, so its behavior and API may change. It is available from code on every surface and as a tag in Web Components, but the Editor does not yet have an inspector for it and PlayCanvas React has no component for it.
+The joint component is in alpha, so its behavior and API may change. It is available from code on every surface, as a tag in Web Components, and from the Editor inspector since Editor 2.32. PlayCanvas React has no component for it.
 
 :::
 
@@ -26668,6 +26883,7 @@ Breaking cannot be detected for `6dof` joints on ammo.js builds that do not expo
 - [`<pc-joint>`](/user-manual/web-components/tags/pc-joint/) - The same joints in Web Components, with a live example of each type
 - [Ragdoll](https://playcanvas.github.io/#/physics/ragdoll) - Engine example that builds a character from ball and hinge joints
 - [Rigid Bodies](/user-manual/physics/rigid-bodies/) - The bodies every joint constrains
+- [Joint Component](/user-manual/editor/scenes/components/joint/) - The Editor inspector for the same component
 
 --------------------------------------------------------------------------------
 

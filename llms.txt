@@ -8,7 +8,7 @@ Full API reference: https://api.playcanvas.com
 
 Base URL: https://developer.playcanvas.com
 Engine Version: 2.22.2
-Total Documents: 506
+Total Documents: 507
 Generated: 2026-09-22
 
 ## Instructions for Large Language Models
@@ -338,6 +338,7 @@ The full API reference lives at https://api.playcanvas.com. Engine classes follo
 - [Collision](https://developer.playcanvas.com/user-manual/editor/scenes/components/collision/): PlayCanvas Collision component assigns physics or trigger volumes such as box, sphere, capsule, cone, cylinder, mesh, or compound shapes.
 - [Element](https://developer.playcanvas.com/user-manual/editor/scenes/components/element/): PlayCanvas Element component defines 2D UI group, image, or text elements with anchors, pivot, and sizing under a Screen hierarchy.
 - [GSplat](https://developer.playcanvas.com/user-manual/editor/scenes/components/gsplat/): PlayCanvas GSplat component renders a 3D Gaussian splat asset from the entity and chooses which render layers the splat appears on.
+- [Joint](https://developer.playcanvas.com/user-manual/editor/scenes/components/joint/): PlayCanvas Joint component constrains two rigid bodies, or one rigid body to a fixed point in world space, as a fixed, ball, hinge, slider or 6DoF joint.
 - [Layout Child](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild/): PlayCanvas Layout Child component overrides Layout Group rules for one UI element with min or max sizes, fit proportions, or exclusion.
 - [Layout Group](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup/): PlayCanvas Layout Group component auto-arranges child Element entities in horizontal or vertical layouts with padding, spacing, and wrap.
 - [Light](https://developer.playcanvas.com/user-manual/editor/scenes/components/light/): PlayCanvas Light component adds directional, omni, or spot lights with color, intensity, range, falloff, area shapes, and lightmap options.
