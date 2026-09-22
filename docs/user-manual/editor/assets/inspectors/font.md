@@ -9,7 +9,7 @@ Fonts are stored as multi-channel signed distance field (MSDF) atlases rather th
 
 ## Importing a font
 
-Since Editor 2.30.0 the Editor generates the MSDF atlas itself, so no external tooling is needed.
+Since Editor 2.30.0 the atlas is generated in the browser rather than by the server-side conversion pipeline, and the descriptor and atlas pages are created as separate assets you can inspect, repoint or replace with your own. Fonts imported before then are converted on first regeneration.
 
 Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor. The atlas is generated in your browser, and the result is a folder named after the file containing four assets:
 
