@@ -64,7 +64,7 @@ Scene-wide settings for [Gaussian splat](/user-manual/gaussian-splatting) render
 | **Forward Alpha Clip** | Alpha threshold below which splats are removed from the forward pass. |
 | **Min Pixel Size** | Minimum screen-space size below which splats are discarded. |
 | **Min Contribution** | Minimum visual contribution below which splats are culled. Set to 0 to disable it. |
-| **Foveation Strength** | Strength of contribution culling towards the screen edges. Set to 0 to disable it. |
+| **Foveation Strength** | Strength of contribution culling towards the screen edges. Set to 0 to disable it. Only applies to the GPU-sorted raster renderer; on other renderers it has no effect. |
 | **Foveation Center** | Protected screen-centre radius where foveation does not apply. |
 | **Anti-Alias** | Apply anti-aliasing compensation to splats trained with anti-aliasing. |
 | **Use Fog** | Apply scene fog to Gaussian splats. |
