@@ -16,6 +16,8 @@ description: スカイ、クラスタードライト、シャドウ、露出、�
 
 ![Rendering Settings](/img/user-manual/editor/interface/settings/rendering.webp)
 
+<video autoPlay muted loop controls src='/video/editor-rendering-max-lights.mp4' style={{width: '100%', height: 'auto'}} />
+
 利用可能な設定は次のとおりです。
 
 ## 環境 (Environment)
@@ -38,12 +40,40 @@ description: スカイ、クラスタードライト、シャドウ、露出、�
 | **Clustered Lighting** | クラスタードライティングを有効化。 |
 | **Cells (X, Y, Z)** | 光源を含む空間を分割する各軸方向のセル数。 |
 | **Max Lights Per Cell** | 各セルが保持できる最大ライト数。 |
+| **Max Lights** | 1フレーム内に表示できるクラスタードライトの最大数。シーンが許す範囲でできるだけ小さく保ってください。255を超える値では、より大きなライトインデックステクスチャが使用されます。 |
 | **Cookie Atlas Resolution** | 非平行光のクッキーテクスチャをまとめるアトラステクスチャの解像度。 |
 | **Cookies Enabled** | クラスタードライトでクッキーをサポート。 |
 | **Shadows Enabled** | クラスタードライトでシャドウをサポート。 |
 | **Shadow Atlas Resolution** | 非平行光のシャドウテクスチャをまとめるアトラステクスチャの解像度。 |
 | **Shadow Type** | すべてのシャドウで使用するフィルタリング方式。 |
 | **Area Lights Enabled** | クラスタードライトでエリアライトをサポート。 |
+
+## ガウシアンスプラッティング (Gaussian Splatting) {#gaussian-splatting}
+
+[ガウシアンスプラット](/user-manual/gaussian-splatting)のレンダリングに関するシーン全体の設定です。エンティティごとのLOD範囲とフォールオフは[GSplatコンポーネント](/user-manual/editor/scenes/components/gsplat)にあります。
+
+| 設定 | 説明 |
+| --- | --- |
+| **Radial Sorting** | ビュー深度ではなく、カメラからの放射距離でスプラットをソートします。 |
+| **LOD Update Distance** | ガウシアンスプラットのLOD更新を引き起こすカメラの移動距離。 |
+| **LOD Update Angle** | LOD更新を引き起こすカメラの回転角度（度）。0に設定すると角度による更新が無効になります。 |
+| **LOD Behind Penalty** | LOD選択時に、カメラの背後にあるスプラットノードに適用される距離の乗数。 |
+| **LOD Underfill Limit** | 最適なデータの読み込み中に使用できる、より低詳細なLODレベルの数。 |
+| **Splat Budget** | シーン全体でレンダリングするスプラット数の目標値。0以下の値ではエンジンのデフォルトが使用されます。 |
+| **Alpha Clip** | ガウシアンスプラットのシャドウ、ピッキング、プリパスのレンダリングに使用するアルファしきい値。 |
+| **Forward Alpha Clip** | この値を下回るスプラットがフォワードパスから除外されるアルファしきい値。 |
+| **Min Pixel Size** | この値を下回るスプラットが破棄される、スクリーン空間での最小サイズ。 |
+| **Min Contribution** | この値を下回るスプラットがカリングされる、視覚的な寄与の最小値。0に設定すると無効になります。 |
+| **Foveation Strength** | 画面の端に向かうほど強まる寄与カリングの強度。0に設定すると無効になります。 |
+| **Foveation Center** | フォービエーションが適用されない、保護される画面中央の半径。 |
+| **Anti-Alias** | アンチエイリアスを有効にして学習されたスプラットに、アンチエイリアスの補正を適用します。 |
+| **Use Fog** | シーンのフォグをガウシアンスプラットに適用します。 |
+| **Use Tonemapping** | カメラのトーンマッピングとシーンの露出をガウシアンスプラットに適用します。シーン内の他のオブジェクトには影響しません。 |
+| **Color Update Angle** | 球面調和関数によるカラー更新を引き起こす視線角度の変化量。 |
+| **Cooldown Ticks** | 未使用のストリーミングスプラットリソースがアンロードされるまでに待機するティック数。 |
+| **Data Format** | ガウシアンスプラットのレンダリングに使用するワークバッファの形式。オプション：Compact、Large。 |
+| **Enable IDs** | ガウシアンスプラットのワークバッファに一意のコンポーネントIDを格納します。 |
+| **LOD Mode** | グローバルなスプラット予算の範囲内でガウシアンスプラットの詳細度を選択するために使用する指標。オプション：Error、Distance。 |
 
 ## 露出とフォグ (Exposure & Fog)
 

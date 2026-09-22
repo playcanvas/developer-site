@@ -159,12 +159,18 @@ Use Metalnessが無効な場合:
 
 ![Parallax](/img/user-manual/editor/assets/inspectors/material/parallax.png)
 
+<video autoPlay muted loop controls src='/video/editor-parallax-occlusion.mp4' style={{width: '100%', height: 'auto'}} />
+
 | プロパティ | 説明 |
 |----------|-------------|
 | Heightmap | 高さマップテクスチャ。白は高い領域、黒は低い領域を表します。 |
 | UV Channel | 高さテクスチャのサンプリングに使用するUVセット (UV0 または UV1)。 |
 | Color Channel | 高さを読み取るテクスチャチャンネル (R, G, B, または A)。 |
+| Mode | 高さマップによる単一のオフセットと、レイマーチングによる視差オクルージョンのいずれかを選択します。メッシュのシルエットと深度バッファは変化しません。オプション：Offset、Occlusion。 |
 | Strength | 視差効果の強度 (0-2)。 |
+| Base | 元のサーフェスに位置する高さマップの値。白が平坦なサーフェスを表すデプスマップでは1を使用します (0-1)。 |
+| Samples | 視差オクルージョンが使用する高さマップの最大サンプル数。値を大きくするとレンダリングコストが増加します (4-64)。ModeがOcclusionの場合のみ表示されます。 |
+| Self Shadow | 各ディレクショナルライトについて、視差によるレリーフをセルフシャドウするために使用する最大サンプル数。0に設定すると無効になります (0-32)。ModeがOcclusionの場合のみ表示されます。 |
 
 ## クリアコート
 

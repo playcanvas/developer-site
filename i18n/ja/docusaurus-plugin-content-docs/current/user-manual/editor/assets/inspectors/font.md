@@ -9,7 +9,11 @@ Fontアセットは、Textタイプの[Element](/user-manual/editor/scenes/compo
 
 ## フォントのインポート
 
+Editor 2.30.0以降、MSDFアトラスはEditor自身が生成するため、外部ツールは不要です。
+
 `.ttf`、`.ttc`、`.otf`、`.dfont` ファイルをEditorにドラッグします。アトラスはブラウザ内で生成され、結果としてファイル名を冠したフォルダーに4つのアセットが作成されます。
+
+<video autoPlay muted loop controls src='/video/editor-font-generation.mp4' style={{width: '100%', height: 'auto'}} />
 
 ![Font import folder](/img/user-manual/assets/fonts/font-import-folder.png)
 
