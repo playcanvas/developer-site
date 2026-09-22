@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 :::warning[Alpha]
 
-The joint component is in alpha, so its behavior and API may change. It is available from code on every surface and as a tag in Web Components, but the Editor does not yet have an inspector for it and PlayCanvas React has no component for it.
+The joint component is in alpha, so its behavior and API may change. It is available from code on every surface, as a tag in Web Components, and from the Editor inspector since Editor 2.32. PlayCanvas React has no component for it.
 
 :::
 
@@ -69,7 +69,9 @@ app.root.addChild(hinge);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-There is no Joint inspector yet, so add the component from a script attached to the hinge entity. Position and rotate the entity in the viewport as usual, then assign the two bodies to the script's attributes:
+Since Editor 2.32 you can add the component directly with **Add Component → Physics → Joint** and set it up in the inspector — see the [Joint Component](/user-manual/editor/scenes/components/joint/) reference for every field.
+
+To drive a joint from code instead, add the component from a script attached to the hinge entity. Position and rotate the entity in the viewport as usual, then assign the two bodies to the script's attributes:
 
 ```javascript
 import { Script, Vec2, JOINTTYPE_HINGE } from 'playcanvas';
@@ -199,3 +201,4 @@ Breaking cannot be detected for `6dof` joints on ammo.js builds that do not expo
 - [`<pc-joint>`](/user-manual/web-components/tags/pc-joint/) - The same joints in Web Components, with a live example of each type
 - [Ragdoll](https://playcanvas.github.io/#/physics/ragdoll) - Engine example that builds a character from ball and hinge joints
 - [Rigid Bodies](/user-manual/physics/rigid-bodies/) - The bodies every joint constrains
+- [Joint Component](/user-manual/editor/scenes/components/joint/) - The Editor inspector for the same component

@@ -9,7 +9,11 @@ Fontアセットは、Textタイプの[Element](/user-manual/editor/scenes/compo
 
 ## フォントのインポート
 
+Editor 2.30.0以降、アトラスはサーバー側の変換パイプラインではなくブラウザーで生成され、ディスクリプターとアトラスページは、確認・再割り当て・独自アセットへの差し替えが可能な個別のアセットとして作成されます。それ以前にインポートされたフォントは、最初の再生成時に変換されます。
+
 `.ttf`、`.ttc`、`.otf`、`.dfont` ファイルをEditorにドラッグします。アトラスはブラウザ内で生成され、結果としてファイル名を冠したフォルダーに4つのアセットが作成されます。
+
+<video autoPlay muted loop controls src='/video/editor-font-generation.mp4' style={{width: '100%', height: 'auto'}} />
 
 ![Font import folder](/img/user-manual/assets/fonts/font-import-folder.png)
 

@@ -16,6 +16,8 @@ Navigate to the `RENDERING` section and expand the panel:
 
 ![Rendering Settings](/img/user-manual/editor/interface/settings/rendering.webp)
 
+<video autoPlay muted loop controls src='/video/editor-rendering-max-lights.mp4' style={{width: '100%', height: 'auto'}} />
+
 Here is a breakdown of the available settings:
 
 ## Environment
@@ -38,12 +40,40 @@ Here is a breakdown of the available settings:
 | **Clustered Lighting** | Enable clustered lighting. |
 | **Cells (X, Y, Z)** | Number of cells per world-space axis used to subdivide the space containing lights. |
 | **Max Lights Per Cell** | Maximum number of lights a cell can store. |
+| **Max Lights** | Maximum number of clustered lights visible in a frame. Keep this as low as the scene allows; values above 255 use a larger light-index texture. |
 | **Cookie Atlas Resolution** | Resolution of the atlas texture storing all non-directional cookie textures. |
 | **Cookies Enabled** | Clustered lights support cookies. |
 | **Shadows Enabled** | Clustered lights support shadows. |
 | **Shadow Atlas Resolution** | Resolution of the atlas texture storing all non-directional shadow textures. |
 | **Shadow Type** | The type of shadow filtering used by all shadows. |
 | **Area Lights Enabled** | Clustered lights support area lights. |
+
+## Gaussian Splatting
+
+Scene-wide settings for [Gaussian splat](/user-manual/gaussian-splatting) rendering. Per-entity LOD range and falloff live on the [GSplat Component](/user-manual/editor/scenes/components/gsplat).
+
+| Setting | Description |
+| --- | --- |
+| **Radial Sorting** | Sort splats by radial camera distance instead of view depth. |
+| **LOD Update Distance** | Camera travel distance that triggers a Gaussian splat LOD update. |
+| **LOD Update Angle** | Camera rotation in degrees that triggers an LOD update. Set to 0 to disable angle updates. |
+| **LOD Behind Penalty** | Distance multiplier used for splat nodes behind the camera during LOD selection. |
+| **LOD Underfill Limit** | Number of lower-detail LOD levels that can be used while optimal data loads. |
+| **Splat Budget** | Target number of splats rendered across the scene. Non-positive values use the engine default. |
+| **Alpha Clip** | Alpha threshold for Gaussian splat shadow, picking and prepass rendering. |
+| **Forward Alpha Clip** | Alpha threshold below which splats are removed from the forward pass. |
+| **Min Pixel Size** | Minimum screen-space size below which splats are discarded. |
+| **Min Contribution** | Minimum visual contribution below which splats are culled. Set to 0 to disable it. |
+| **Foveation Strength** | Strength of contribution culling towards the screen edges. Set to 0 to disable it. Only applies to the GPU-sorted raster renderer; on other renderers it has no effect. |
+| **Foveation Center** | Protected screen-centre radius where foveation does not apply. |
+| **Anti-Alias** | Apply anti-aliasing compensation to splats trained with anti-aliasing. |
+| **Use Fog** | Apply scene fog to Gaussian splats. |
+| **Use Tonemapping** | Apply camera tonemapping and scene exposure to Gaussian splats. Other scene objects are unaffected. |
+| **Color Update Angle** | Viewing-angle change that triggers a spherical-harmonics color update. |
+| **Cooldown Ticks** | Ticks an unused streamed splat resource waits before unloading. |
+| **Data Format** | Work-buffer format used for Gaussian splat rendering. Options: Compact, Large. |
+| **Enable IDs** | Store a unique component ID in the Gaussian splat work buffer. |
+| **LOD Mode** | Metric used to select Gaussian splat detail within the global budget. Options: Error, Distance. |
 
 ## Exposure & Fog
 

@@ -61,6 +61,8 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 
 ## Textコンポーネントプロパティ {#text-component-properties}
 
+<video autoPlay muted loop controls src='/video/editor-justified-text.mp4' style={{width: '100%', height: 'auto'}} />
+
 | プロパティ名 | 説明 |
 |-------------------|-------------|
 | Alignment         | エレメント内でテキストがどのように配置されるかを決定します。(0, 0)は左下、(1, 1)は右上です。 |
@@ -74,6 +76,7 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 | Max Font Size     | Auto Fit WidthまたはAuto Fit Height使用時の最大フォントサイズ。 |
 | Line Height       | 新しい行に移動するためのサイズ（Screenコンポーネントのピクセル単位）。 |
 | Wrap Lines        | 有効にすると、テキストエレメントの幅を超えるテキストは次の行に折り返されます。 |
+| Justify           | 単語間のスペースを広げて、折り返されたテキストの行を両端に揃えます。Wrap Linesが有効で、Auto Widthが無効な場合のみ表示されます。 |
 | Max Lines         | 表示する最大行数。この制限を超えるテキストはクリップされます。Wrap Linesが有効な場合のみ表示されます。 |
 | Spacing           | 各文字間のスペースに適用する乗数。 |
 | Color             | フォントをティントする色。 |

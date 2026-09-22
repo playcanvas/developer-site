@@ -7,6 +7,8 @@ The Render Component enables an entity to render a primitive shape or a render a
 
 ![Render Component](/img/user-manual/editor/scenes/components/component-render.png)
 
+<video autoPlay muted loop controls src='/video/editor-shadow-cascade-mask.mp4' style={{width: '100%', height: 'auto'}} />
+
 ## Properties
 
 | Property                 | Description |
@@ -15,6 +17,7 @@ The Render Component enables an entity to render a primitive shape or a render a
 | Asset                    | Asset type only. The render asset to be rendered by this render component. Only a single render asset can be assigned to a render component. |
 | Root Bone                | Asset type only (skinned meshes). The entity to be used as the root bone for any skinned meshes that are rendered by this component. |
 | Cast Shadows             | If enabled, the mesh instances rendered by this component will cast shadows onto other mesh instances in the scene. |
+| Shadow Cascades          | Selects which directional-light shadow cascades receive this render component. Extra cascades are ignored. Only shown when Cast Shadows is enabled. |
 | Cast Lightmap Shadows    | If enabled, the mesh instances rendered by this component will cast shadows into lightmaps. |
 | Receive Shadows          | If enabled, the mesh instances rendered by this component will receive shadows cast by other mesh instances in the scene. |
 | Static                   | If the entity referencing this render component never moves, check this box as a hint to the engine to make certain optimizations. |
@@ -27,9 +30,14 @@ The Render Component enables an entity to render a primitive shape or a render a
 | Layers                   | The layers to render this component's mesh instances into. |
 | Materials                | The material assets that will be used to render the mesh instances of this component. Each material corresponds to the respective mesh instance. |
 
+The Shadow Cascades mask is a row of four boxes, one per cascade. It pairs with the **Cascades** and **Cascade Distribution** settings on a directional [Light Component](light.md), which decide how many cascades exist and how they are spread through the camera's view.
+
+<video autoPlay muted loop controls src='/video/editor-shadow-cascades-launch.mp4' style={{width: '100%', height: 'auto'}} />
+
 ## See Also
 
 - [Render Assets](/user-manual/editor/assets/inspectors/render) - Learn about render assets
+- [Light Component](light.md) - Configures the directional light cascades the mask selects from
 
 ## Scripting Interface
 

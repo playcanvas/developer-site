@@ -270,6 +270,7 @@ const sidebars = {
                 'user-manual/editor/scenes/components/collision',
                 'user-manual/editor/scenes/components/element',
                 'user-manual/editor/scenes/components/gsplat',
+                'user-manual/editor/scenes/components/joint',
                 'user-manual/editor/scenes/components/layoutchild',
                 'user-manual/editor/scenes/components/layoutgroup',
                 'user-manual/editor/scenes/components/light',
