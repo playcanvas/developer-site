@@ -61,6 +61,8 @@ The text element renders a string of text using a [font asset](/user-manual/edit
 
 ## Text Component Properties
 
+<video autoPlay muted loop controls src='/video/editor-justified-text.mp4' style={{width: '100%', height: 'auto'}} />
+
 | Property          | Description |
 |-------------------|-------------|
 | Alignment         | Determines how the text is aligned within the element. (0, 0) is bottom left, (1, 1) is top right. |
@@ -74,6 +76,7 @@ The text element renders a string of text using a [font asset](/user-manual/edit
 | Max Font Size     | The maximum font size when using Auto Fit Width or Auto Fit Height. |
 | Line Height       | The size in Screen Component pixels to move down for a new line. |
 | Wrap Lines        | If enabled, text that overflows the width of the text element will be wrapped to the next line. |
+| Justify           | Stretch wrapped text lines to both edges by widening the spaces between words. Only shown when Wrap Lines is enabled and Auto Width is disabled. |
 | Max Lines         | The maximum number of lines to display. Text beyond this limit will be clipped. Only shown when Wrap Lines is enabled. |
 | Spacing           | A multiplier to apply to the amount of space between each character. |
 | Color             | The color to tint the font. |

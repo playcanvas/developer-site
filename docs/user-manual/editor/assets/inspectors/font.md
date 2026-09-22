@@ -9,7 +9,11 @@ Fonts are stored as multi-channel signed distance field (MSDF) atlases rather th
 
 ## Importing a font
 
+Since Editor 2.30.0 the Editor generates the MSDF atlas itself, so no external tooling is needed.
+
 Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor. The atlas is generated in your browser, and the result is a folder named after the file containing four assets:
+
+<video autoPlay muted loop controls src='/video/editor-font-generation.mp4' style={{width: '100%', height: 'auto'}} />
 
 ![Font import folder](/img/user-manual/assets/fonts/font-import-folder.png)
 

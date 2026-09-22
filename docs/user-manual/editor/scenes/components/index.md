@@ -34,6 +34,7 @@ There are many different components defined in the PlayCanvas Engine:
 | [Collision](collision)            | Assigns a collision volume to the entity.                                     |
 | [Element](element)                | Defines a user interface text or image element.                               |
 | [GSplat](gsplat)                  | Renders a 3D Gaussian Splat at the location of the entity.                    |
+| [Joint](joint)                    | Constrains two rigid bodies, or one rigid body to a point in world space.     |
 | [Layout Child](layoutchild)       | Overrides default Layout Group properties for one element.                    |
 | [Layout Group](layoutgroup)       | Automatically sets position and scale of child user interface elements.       |
 | [Light](light)                    | Attaches a dynamic light source to the Entity.                                |

@@ -159,12 +159,18 @@ Adds depth illusion to surfaces using height mapping. See [Parallax Mapping](/us
 
 ![Parallax](/img/user-manual/editor/assets/inspectors/material/parallax.png)
 
+<video autoPlay muted loop controls src='/video/editor-parallax-occlusion.mp4' style={{width: '100%', height: 'auto'}} />
+
 | Property | Description |
 |----------|-------------|
 | Heightmap | The height map texture. White represents high areas, black represents low areas. |
 | UV Channel | The UV set used to sample the height texture (UV0 or UV1). |
 | Color Channel | Which texture channel to read the height from (R, G, B, or A). |
+| Mode | Selects a single height-map offset or ray-marched parallax occlusion. The mesh silhouette and depth buffer remain unchanged. Options: Offset, Occlusion. |
 | Strength | Intensity of the parallax effect (0-2). |
+| Base | Height-map value that sits at the original surface. Use 1 for depth maps where white represents the flat surface (0-1). |
+| Samples | Maximum height-map samples used by parallax occlusion. Higher values increase rendering cost (4-64). Only shown when Mode is Occlusion. |
+| Self Shadow | Maximum samples used to self-shadow parallax relief for each directional light. Set to 0 to disable it (0-32). Only shown when Mode is Occlusion. |
 
 ## Clear Coat
 
