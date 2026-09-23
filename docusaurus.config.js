@@ -255,7 +255,8 @@ const config = {
       }
     }],
     'docusaurus-plugin-sass',
-    pluginLlms,
+    // Fail CI builds on docs the LLM files cannot represent faithfully
+    [pluginLlms, { failOnError: process.env.CI === 'true' }],
     'docusaurus-plugin-copy-page-button'
   ],
 

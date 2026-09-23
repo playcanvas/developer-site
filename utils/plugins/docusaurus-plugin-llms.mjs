@@ -2,7 +2,9 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import yaml from 'js-yaml';
+
+import { docIdFromFile, docPathFromId, loadSidebarOrder, sidebarSortKey } from './llms/docs.mjs';
+import { convertDoc } from './llms/markdown.mjs';
 
 /**
  * Docusaurus plugin to generate LLM-friendly documentation files.
@@ -10,18 +12,25 @@ import yaml from 'js-yaml';
  * - llms.txt: Structured overview with links to all documentation sections
  * - llms-full.txt: Complete documentation content in a single file
  *
+ * Only the default locale build generates them: the docs are read from the
+ * docs directory, so a localized build would publish a copy of the same files.
+ *
  * @param {Object} context - Docusaurus context
  * @param {Object} options - Plugin options
  * @param {string} [options.docsDir='docs'] - Path to docs directory relative to site root
+ * @param {string} [options.sidebarPath='sidebars.js'] - Path to the sidebars file relative to
+ *   site root, which sets the order of the docs
  * @param {string[]} [options.excludeDirs=['shader-editor', 'tutorials']] - Directories to exclude
  *   from LLM file generation (e.g., private or unlisted documentation sections)
  * @param {boolean} [options.failOnError=false] - If true, build will fail when LLM file
- *   generation encounters an error. If false (default), errors are logged as warnings
- *   and the build continues. Set to true if LLM files are critical to your deployment.
+ *   generation encounters an error, or when a doc cannot be converted faithfully or does
+ *   not match a built page. If false (default), errors are logged as warnings and the
+ *   build continues. Set to true if LLM files are critical to your deployment.
  */
 export default function pluginLlms(context, options = {}) {
-    const { siteDir, siteConfig } = context;
+    const { siteDir, siteConfig, i18n } = context;
     const docsDir = path.join(siteDir, options.docsDir || 'docs');
+    const sidebarPath = path.join(siteDir, options.sidebarPath || 'sidebars.js');
     const baseUrl = siteConfig.url;
     const excludeDirs = options.excludeDirs ?? ['shader-editor', 'tutorials'];
     const failOnError = options.failOnError ?? false;
@@ -29,8 +38,16 @@ export default function pluginLlms(context, options = {}) {
     return {
         name: 'docusaurus-plugin-llms',
 
-        async postBuild({ outDir }) {
+        async postBuild({ outDir, routesPaths }) {
+            if (i18n && i18n.currentLocale !== i18n.defaultLocale) {
+                console.log(`[LLMs Plugin] Skipping LLM files for the '${i18n.currentLocale}' locale`);
+                return;
+            }
+
             console.log('[LLMs Plugin] Generating LLM-friendly documentation files...');
+
+            // Docs that could not be converted faithfully
+            const problems = [];
 
             try {
                 // Ensure the docs directory exists before processing
@@ -39,16 +56,34 @@ export default function pluginLlms(context, options = {}) {
                     return;
                 }
                 // Collect all markdown files (excluding private/unlisted directories)
-                const docFiles = await collectMarkdownFiles(docsDir, excludeDirs);
+                const docFiles = collectMarkdownFiles(docsDir, excludeDirs);
                 console.log(`[LLMs Plugin] Found ${docFiles.length} documentation files`);
 
-                // Process files and extract content
-                const processedDocs = await Promise.all(
-                    docFiles.map(filePath => processMarkdownFile(filePath, docsDir))
-                );
+                // Document `tsx asTypedoc` code blocks as the site does (loaded here as it starts TypeScript)
+                const { generateDefinitions } = await import('./remark-typedoc.mjs');
+                const typedoc = code => generateDefinitions({ code, typeResolver: typedocTypeResolver });
 
-                // Sort by path for consistent ordering
-                processedDocs.sort((a, b) => a.urlPath.localeCompare(b.urlPath));
+                // Process files and extract content
+                const processedDocs = docFiles
+                    .map(filePath => processMarkdownFile(filePath, { docsDir, siteDir, baseUrl, typedoc }, problems))
+                    .filter(Boolean);
+
+                // Every doc URL must be a built page (routes are only known in a real build)
+                if (routesPaths) {
+                    const routes = new Set(routesPaths);
+                    for (const doc of processedDocs) {
+                        if (!routes.has(doc.urlPath)) {
+                            problems.push(`${doc.relativePath}: no page is built at ${doc.urlPath}`);
+                        }
+                    }
+                }
+
+                // Sort in the sidebar's reading order, except that the subcategories llms.txt lists
+                // under '## Optional' come last (consumers that truncate lose the end first)
+                const sidebarOrder = await loadSidebarOrder(sidebarPath);
+                processedDocs.sort((a, b) => (isOptionalDoc(a) - isOptionalDoc(b)) ||
+                    (sidebarSortKey(a.id, sidebarOrder) - sidebarSortKey(b.id, sidebarOrder)) ||
+                    a.urlPath.localeCompare(b.urlPath));
 
                 // Generate llms.txt (structured overview)
                 const engineVersion = resolveEngineVersion(siteDir);
@@ -74,6 +109,14 @@ export default function pluginLlms(context, options = {}) {
                 console.warn('[LLMs Plugin] Warning: Failed to generate LLM files (build continuing):', error.message);
                 console.warn('[LLMs Plugin] Set { failOnError: true } in plugin options to make this fatal.');
             }
+
+            if (problems.length > 0) {
+                const message = `[LLMs Plugin] ${problems.length} doc problem(s):\n  ${problems.join('\n  ')}`;
+                if (failOnError) {
+                    throw new Error(message);
+                }
+                console.warn(message);
+            }
         }
     };
 }
@@ -90,6 +133,11 @@ function collectMarkdownFiles(dir, excludeDirs = [], files = []) {
     for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
 
+        // Docusaurus does not build files or directories starting with an underscore (partials)
+        if (entry.name.startsWith('_')) {
+            continue;
+        }
+
         if (entry.isDirectory()) {
             // Skip excluded directories
             if (excludeDirs.includes(entry.name)) {
@@ -105,146 +153,71 @@ function collectMarkdownFiles(dir, excludeDirs = [], files = []) {
 }
 
 /**
- * Process a markdown file and extract metadata and content
+ * Process a markdown file and extract metadata and content. Returns null for
+ * a doc that is not published, and adds anything that could not be converted
+ * faithfully to problems.
  */
-function processMarkdownFile(filePath, docsDir) {
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const relativePath = path.relative(docsDir, filePath);
+function processMarkdownFile(filePath, { docsDir, siteDir, baseUrl, typedoc }, problems) {
+    const relativePath = path.relative(docsDir, filePath).split(path.sep).join('/');
+    const id = docIdFromFile(docsDir, filePath);
+    const urlPath = docPathFromId(id);
 
-    // Parse frontmatter
-    const frontmatter = parseFrontmatter(content);
+    let doc;
+    try {
+        doc = convertDoc(fs.readFileSync(filePath, 'utf-8'), {
+            filePath,
+            pageUrl: `${baseUrl}${urlPath}`,
+            siteUrl: baseUrl,
+            siteDir,
+            fileUrl: file => `${baseUrl}${docPathFromId(docIdFromFile(docsDir, file))}`,
+            typedoc
+        });
+    } catch (error) {
+        problems.push(`${relativePath}: ${error.message}`);
+        return null;
+    }
 
-    // Convert file path to URL path
-    let urlPath = '/' + relativePath
-        .replace(/\\/g, '/')
-        .replace(/\.mdx?$/, '/')
-        .replace(/\/index\/$/, '/');
-
-    // Extract title from frontmatter or first heading
-    const title = frontmatter.title || extractFirstHeading(content) || path.basename(filePath, path.extname(filePath));
-
-    // Clean content for LLM consumption
-    const cleanedContent = cleanMarkdownContent(content);
-
-    // Extract description from first paragraph if available
-    const description = frontmatter.description || extractFirstParagraph(cleanedContent);
-
-    // Extract tags if present
-    const tags = frontmatter.tags || [];
-
-    // Determine category from path
-    const category = getCategoryFromPath(urlPath);
+    // Drafts are not published, and unlisted docs are hidden from the site's navigation and search
+    const { frontMatter } = doc;
+    if (frontMatter.draft === true || frontMatter.unlisted === true) {
+        return null;
+    }
+    problems.push(...doc.problems.map(problem => `${relativePath}: ${problem}`));
 
     return {
         filePath,
         relativePath,
+        id,
         urlPath,
-        title,
-        description,
-        tags,
-        category,
-        content: cleanedContent
+        title: frontMatter.title || doc.title || path.basename(filePath, path.extname(filePath)),
+        description: frontMatter.description || truncate(doc.firstParagraph ?? '', 200),
+        tags: frontMatter.tags || [],
+        category: getCategoryFromPath(urlPath),
+        content: doc.markdown
     };
 }
 
 /**
- * Parse YAML frontmatter from markdown content using js-yaml.
- * Supports full YAML syntax including multi-line strings (| and >),
- * multi-line arrays, nested objects, and all standard YAML constructs.
+ * Type resolver for remark-typedoc: the one in docusaurus.config.js, without its
+ * links to the API reference (the type text is what an LLM needs)
  */
-function parseFrontmatter(content) {
-    const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-    if (!match) return {};
-
-    try {
-        return yaml.load(match[1]) || {};
-    } catch (error) {
-        // Log warning but return empty object to allow processing to continue
-        console.warn(`[LLMs Plugin] Warning: Failed to parse frontmatter: ${error.message}`);
-        return {};
-    }
+function typedocTypeResolver({ displayName, tags }) {
+    return tags.has('ignore') || tags.has('internal') ? null : { displayName };
 }
 
 /**
- * Extract the first heading from markdown content
+ * Whether a doc is in a User Manual subcategory that llms.txt lists under '## Optional'
  */
-function extractFirstHeading(content) {
-    // Remove frontmatter first
-    const withoutFrontmatter = content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n*/, '');
-    const match = withoutFrontmatter.match(/^#\s+(.+)$/m);
-    return match ? match[1].trim() : null;
+function isOptionalDoc(doc) {
+    const parts = doc.urlPath.split('/').filter(Boolean);
+    return doc.category === 'User Manual' && OPTIONAL_SUBCATEGORIES.includes(parts[1]);
 }
 
 /**
- * Extract the first paragraph from markdown content
+ * Shorten text to a maximum length, marking the cut with an ellipsis
  */
-function extractFirstParagraph(content) {
-    // Find first non-heading, non-empty paragraph
-    const lines = content.split('\n');
-    let paragraph = '';
-
-    for (const line of lines) {
-        const trimmed = line.trim();
-        if (!trimmed) {
-            if (paragraph) break;
-            continue;
-        }
-        if (trimmed.startsWith('#')) continue;
-        if (trimmed.startsWith('![')) continue;
-        // Skip lines that start with what looks like an HTML/JSX tag (e.g. <div>, <MyComponent>, </Section>)
-        if (/^<\s*\/?[A-Za-z]/.test(trimmed)) continue;
-
-        paragraph += (paragraph ? ' ' : '') + trimmed;
-        if (paragraph.length > 200) break;
-    }
-
-    return paragraph.slice(0, 200) + (paragraph.length > 200 ? '...' : '');
-}
-
-/**
- * Clean markdown content for LLM consumption
- */
-function cleanMarkdownContent(content) {
-    let cleaned = content;
-
-    // Remove frontmatter (handle both \n and \r\n line endings)
-    cleaned = cleaned.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n*/, '');
-
-    // Remove JSX/MDX components but keep text content
-    cleaned = cleaned.replace(/<([A-Z][a-zA-Z]*)[^>]*\/>/g, ''); // Self-closing components
-    const componentWithChildrenRegex = /<([A-Z][a-zA-Z]*)[^>]*>[\s\S]*?<\/\1>/g;
-    // Remove components with children; iterate to handle nested components of the same type
-    let previousCleaned;
-    do {
-        previousCleaned = cleaned;
-        cleaned = cleaned.replace(componentWithChildrenRegex, '');
-    } while (cleaned !== previousCleaned);
-
-    // Remove iframe embeds
-    cleaned = cleaned.replace(/<iframe[\s\S]*?<\/iframe>/gi, '[Interactive Demo]');
-    cleaned = cleaned.replace(/<div[^>]*className=["']iframe-container["'][^>]*>[\s\S]*?<\/div>/g, '[Interactive Demo]');
-
-    // Simplify images - keep alt text
-    cleaned = cleaned.replace(/!\[([^\]]*)\]\([^)]+\)/g, (match, alt) => {
-        return alt ? `[Image: ${alt}]` : '';
-    });
-
-    // Remove HTML comments
-    cleaned = cleaned.replace(/<!--[\s\S]*?-->/g, '');
-
-    // Remove import statements
-    cleaned = cleaned.replace(/^import\s+.*$/gm, '');
-
-    // Remove export statements
-    cleaned = cleaned.replace(/^export\s+.*$/gm, '');
-
-    // Clean up excessive whitespace
-    cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
-
-    // Trim
-    cleaned = cleaned.trim();
-
-    return cleaned;
+function truncate(text, maxLength) {
+    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
 }
 
 /**
