@@ -1,0 +1,63 @@
+# <pc-scrollbar>
+
+The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides a draggable handle that reports a position in the range 0 to 1.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) that also has a [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md).
+* It is referenced by a [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) via its `horizontal-scrollbar` or `vertical-scrollbar` attribute.
+* Its `handle` attribute references the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) used as the draggable handle, whose image element should have `use-input` set.
+
+:::
+
+## Attributes
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `handle` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | The [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) used as the draggable handle |
+| `handle-size` | Number | `"0"` | Size of the handle relative to the size of the track (0 to 1) |
+| `orientation` | Enum | `"horizontal"` | Orientation of the scrollbar: `"horizontal"` \| `"vertical"` |
+| `value` | Number | `"0"` | Current position of the scrollbar (0 to 1) |
+
+## Example
+
+A standalone vertical scrollbar — drag the orange handle. Try a different `handle-size` (as a fraction of the track) or starting `value`:
+
+```html live-example
+<pc-app max-pixel-ratio="1">
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="ui">
+            <pc-screen screen-space="true" scale-mode="blend" reference-resolution="640 320"></pc-screen>
+            <pc-entity name="scrollbar">
+                <pc-element type="image" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
+                            width="20" height="240" color="#3a3f4b"></pc-element>
+                <pc-scrollbar orientation="vertical" handle-size="0.35" handle="#handle"></pc-scrollbar>
+
+                <!-- Draggable handle -->
+                <pc-entity name="handle" id="handle">
+                    <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
+                    <pc-button hover-tint="0.85 0.85 0.85 1" pressed-tint="0.7 0.7 0.7 1"></pc-button>
+                </pc-entity>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-scrollbar>` elements using the [ScrollbarComponentElement API](https://api.playcanvas.com/web-components/classes/ScrollbarComponentElement.html).
+
+The `component` property is the engine [ScrollbarComponent](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+
+## See Also
+
+* [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) — the view a scrollbar drives
+* [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) — the track and handle are image elements
+* [`<pc-screen>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md) — the screen the scrollbar renders on
+
+Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).

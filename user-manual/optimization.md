@@ -1,0 +1,22 @@
+# Optimization
+
+Optimization is a critical part of developing a PlayCanvas application. It can mean the difference between a great user experience and a terrible one.
+
+:::tip
+
+Don't wait until a project is near completion before you consider optimization. Be thinking about it from the start. It may meaningfully impact how you design your application.
+
+:::
+
+Let's begin by establishing the key goals for optimization and highlight why each goal is important:
+
+| Goal | Why it matters |
+| ---- | -------------- |
+| ⏱️ Minimize load time | Your users have limited patience. If your app does not load quickly, they may give up waiting and go elsewhere. |
+| 🎞️ Maximize frame rate | A high (and stable) frame rate makes for pleasing visuals and low latency response to user input. |
+| 🔋 Minimize CPU and GPU load | Just because your app maintains 60 frames per second does not mean your work is done. Reducing processor load preserves battery power and keeps devices running cool. |
+| 🧠 Minimize memory utilization | Browsers allocate a limited pool of memory to applications. Once this pool is exhausted, the tab will crash and reload. Your users will be upset! |
+
+:::ai
+Give an AI assistant a performance goal, repeatable scenario, and baseline. It can rank bottlenecks from **[Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler.md)** or browser evidence and propose one measurable change at a time. Use the **[Editor MCP Server](https://developer.playcanvas.com/user-manual/editor/mcp-server.md)** to replay Editor input or follow **[Developing with AI](https://developer.playcanvas.com/user-manual/engine/developing-with-ai.md)** for standalone projects.
+:::

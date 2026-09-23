@@ -1,0 +1,31 @@
+# Asset Viewers
+
+Some of the assets have viewer tools that can help inspect them more closely. Assets that can be viewed in these will have the option to 'Open in Viewer' in the inspector and context menu.
+
+[Image: Open in Viewer option]
+
+Clicking on either of these options will open the viewer with the asset in a new tab.
+
+## Model Viewer
+
+[Image: Model Viewer Preview]
+
+(Model: Copyright 2021 Wayfair LLC. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) International)
+
+The [open source Model Viewer](https://github.com/playcanvas/model-viewer) is available for the following asset types:
+
+- Model (Source) that are GLBs
+- Model
+- Container
+- Animation
+
+The Model Viewer is useful for inspecting the model node hierarchy, morph targets and debugging animation issues.
+
+## Texture Tool
+
+[Image: Texture Tool Preview]
+
+The [open source Texture Tool](https://github.com/playcanvas/texture-tool) is available for the following asset types:
+
+- Texture
+- Texture Atlas

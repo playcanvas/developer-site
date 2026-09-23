@@ -1,0 +1,78 @@
+# <pc-sound-slot>
+
+The `<pc-sound-slot>` tag is used to define a sound.
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) component.
+
+:::
+
+## Attributes
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Audio asset ID (must reference an `audio` type asset) |
+| `auto-play` | Boolean | `"false"` | Whether the sound plays automatically |
+| `duration` | Number | - | Duration of the sound in seconds (omit to play the full clip) |
+| `loop` | Boolean | `"false"` | Whether the sound loops |
+| `name` | String | - | Name identifier for the sound slot |
+| `overlap` | Boolean | `"false"` | Whether sounds can overlap when triggered multiple times |
+| `pitch` | Number | `"1"` | Pitch multiplier (1 = normal pitch) |
+| `start-time` | Number | `"0"` | Start time offset in seconds |
+| `volume` | Number | `"1"` | Volume level (0-1) |
+
+## Example
+
+Two slots playing the same clip — the second at half `pitch`. Browsers only allow audio after a user gesture, so playback is wired to plain HTML buttons overlaid on the app. Try editing the `pitch` or `volume` values:
+
+```html live-example
+<pc-app>
+    <pc-asset src="https://developer.playcanvas.com/assets/drop.mp3" id="drop"></pc-asset>
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera clear-color="#1d1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="jukebox">
+            <pc-sound positional="false">
+                <pc-sound-slot name="drop" asset="drop"></pc-sound-slot>
+                <pc-sound-slot name="drop-slow" asset="drop" pitch="0.5" volume="0.8"></pc-sound-slot>
+            </pc-sound>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+<div class="controls">
+    <button id="play">Play</button>
+    <button id="play-slow">Play at half pitch</button>
+</div>
+<style>
+    .controls {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        gap: 8px;
+    }
+</style>
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const sounds = await whenReady('pc-sound');
+    document.getElementById('play').onclick = () => sounds.component.slot('drop').play();
+    document.getElementById('play-slow').onclick = () => sounds.component.slot('drop-slow').play();
+</script>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-sound-slot>` elements using the [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html).
+
+The attributes are mirrored as properties. The engine [SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html) itself belongs to the parent component: `soundElement.component.slot(name)` returns it.
+
+## See Also
+
+* [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) — the component a slot belongs to
+* [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the audio asset a slot plays
+* [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) — positional playback needs a listener
+
+Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).

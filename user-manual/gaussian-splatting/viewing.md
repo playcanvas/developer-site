@@ -1,0 +1,63 @@
+# Viewing Splats
+
+Once you've created a Gaussian splat, you'll want to preview and evaluate it before proceeding to editing or integration into your projects. The **PlayCanvas Model Viewer** provides a convenient way to quickly view and inspect your splat files without needing to set up a full PlayCanvas project.
+
+## PlayCanvas Model Viewer
+
+The [PlayCanvas Model Viewer](https://playcanvas.com/viewer) is a web-based tool that allows you to instantly preview 3D content, including Gaussian splats, directly in your browser.
+
+[Video](https://developer.playcanvas.com/video/playcanvas-splat-viewer.mp4)
+
+### Supported Splat Formats
+
+The Model Viewer supports the following commonly used Gaussian splat formats:
+
+| Format | File Extension | Description |
+|--------|----------------|-------------|
+| **PLY** | `.ply` | Standard uncompressed splat format |
+| **Compressed PLY** | `.compressed.ply` | Compressed (quantized) format |
+| **SOG (bundled)** | `.sog` | Super-compressed format in single file |
+| **SOG (unbundled)** | `meta.json` + `.webp` images | Super-compressed format in multiple files |
+
+### How to View Your Splats
+
+1. **Visit** [playcanvas.com/viewer](https://playcanvas.com/viewer)
+2. **Drag and drop** your splat from your file system onto the viewer
+
+   :::info[Viewing unbundled SOG scenes]
+   For **SOG (unbundled)** format: drag the **parent folder** containing `meta.json` and `.webp` images
+   :::
+3. **Navigate** the 3D scene:
+
+   | Control | Action |
+   |---------|--------|
+   | Left double click | Set orbit point |
+   | Left click + drag | Orbit around the splat |
+   | Right click + drag | Look around |
+   | Shift + click + drag | Pan the view |
+   | Mouse wheel | Zoom in/out |
+   | WASD or Arrow keys | Move forwards/backwards/left/right |
+
+## Open Source and Customization
+
+The PlayCanvas Model Viewer is **open source** and available on [GitHub](https://github.com/playcanvas/model-viewer). This means you can:
+
+- **Host your own version** - Use a local server or deploy to your own infrastructure for complete control
+- **Add new functionality** - Add support for additional file formats or custom UI
+- **Contribute back** - Submit issues and pull requests to help improve the viewer for everyone
+
+## Viewing already-published splats
+
+If your splat is already published on superspl.at, you have two viewer-side options that are specific to Gaussian Splats:
+
+- The **public [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md)** at `superspl.at/scene/<hash>` — the easiest way to share a splat that's also been [curated in Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) (with cameras, animations, annotations, post effects, and collision).
+- The **[SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md)** — the open-source web viewer that powers scene pages, available on npm as `@playcanvas/supersplat-viewer` for embedding in your own site or self-hosting as a single-file HTML export.
+
+The PlayCanvas Model Viewer described above is still the right tool for quickly previewing arbitrary splat files (and other 3D content), before publishing or as part of a pre-flight check.
+
+## Next Steps
+
+After previewing your splats in the Model Viewer:
+
+- If cleanup is needed → continue to [Editing and Publishing Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/editing.md) for optimization, publishing, and curation on the [SuperSplat platform](https://developer.playcanvas.com/user-manual/supersplat.md)
+- If the quality meets your needs → proceed directly to [Building Splat-based Apps](https://developer.playcanvas.com/user-manual/gaussian-splatting/building.md)

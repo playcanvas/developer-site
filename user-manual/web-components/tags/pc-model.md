@@ -1,0 +1,202 @@
+# <pc-model>
+
+The `<pc-model>` tag is used to define an entity that instantiates a 3D model from a GLB file.
+
+For a walkthrough of the whole workflow — exporting, compressed meshes, discovering what a file contains and adjusting it — see [Loading Models](https://developer.playcanvas.com/user-manual/web-components/loading-models.md).
+
+:::note[Usage]
+
+* It must be a direct child of a [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md), a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), another `<pc-model>` or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md).
+* It can have 0..n [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) children, each binding to a node inside the instantiated hierarchy to override it, add components to it or attach new content under it.
+* It can have [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) and `<pc-model>` children, and one of each component type — it hosts them exactly as a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) does.
+
+:::
+
+`<pc-model>` is an entity in its own right, not just a loader. The element creates its own entity — the *host* — and parents the GLB's instantiated content beneath it. That is what lets a model carry components and children directly:
+
+```html
+<pc-model name="t-rex" asset="t-rex" scale="3 3 3">
+    <pc-anim></pc-anim>
+</pc-model>
+```
+
+The host is the element's `entity`, and it is stable: it exists from boot, survives a change of `asset`, and keeps whatever components and children were attached to it across a reload. The instantiated GLB content is separately available as `contentEntity`.
+
+Because the element's own transform belongs to the host, `position`, `rotation` and `scale` are *instance placement* — they compose with whatever transform the asset authored on its own root rather than replacing it.
+
+## Attributes
+
+`<pc-model>` takes every attribute of [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), including the `onclick` and `onpointer*` inline handlers, and adds `asset`.
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Container asset ID (must reference a `container` type asset) |
+| `enabled` | Boolean | `"true"` | Enabled state of the model |
+| `name` | String | - | Name identifier for the host entity |
+| `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
+| `rotation` | Vector3 | `"0 0 0"` | Local-space rotation as "X Y Z" Euler angles in degrees |
+| `scale` | Vector3 | `"1 1 1"` | Local-space scale as "X Y Z" values |
+| `tags` | String | - | Comma-separated list of tags |
+
+## Events
+
+Listen to these events using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+
+| Event | Description |
+| --- | --- |
+| `load` | Fired each time the container asset finishes instantiating, including a re-instantiation after `asset` changes. |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the container asset fails to load, with the engine's error in `message`. |
+
+Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
+
+The host is registered for picking, so `<pc-model>` also fires the six pointer events a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) does — `click`, `pointerdown`, `pointerenter`, `pointerleave`, `pointermove` and `pointerup` — with the same inline handler attributes. A whole model becomes clickable without a wrapper or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md):
+
+```html
+<pc-model asset="t-rex" onclick="this.setAttribute('scale', '2 2 2')"></pc-model>
+```
+
+Pointer events resolve to the nearest *listening* element, so a model that listens for nothing does not swallow events from a listening ancestor.
+
+Readiness means the current `asset` selection has settled, which covers three outcomes: content loaded and parented beneath the host, a load that failed, or no `asset` assigned at all. The host `entity` is non-null throughout — including after a failure — so it is not the way to tell success from failure. Use the `error` event, or check `contentEntity`:
+
+```javascript
+const model = await whenReady('pc-model');
+if (!model.contentEntity) {
+    // no asset, or the load failed
+}
+```
+
+## Animation
+
+A container's animations play when you nest a [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) inside the model. One empty tag is enough to get what the file came with — every animation in the container becomes a clip, named after its track, and the first one starts playing:
+
+```html
+<pc-model asset="robot">
+    <pc-anim></pc-anim>
+</pc-model>
+```
+
+The component attaches to the model's host, so no wrapper entity is involved. Add [`<pc-anim-clip>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim-clip.md) children to name the clips yourself, set a per-clip speed or looping, or take clips from other files.
+
+To check whether a file's animations survived its export, ask the component what it found:
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const anim = await whenReady('pc-anim');
+console.log(anim.clips); // ['Walk', 'Idle']
+```
+
+Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md). A container with no animations in it logs a warning naming the model, so the console answers the same question without any code.
+
+## Example
+
+A GLB with a skeletal animation, played by the [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) nested inside the model. Drag to orbit:
+
+```html live-example
+<pc-app>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
+    <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
+    <pc-scene>
+        <pc-entity name="camera" position="2.5 1.5 3.5">
+            <pc-camera clear-color="#2a2d36"></pc-camera>
+            <pc-script>
+                <pc-script-instance name="cameraControls" focus-point="0 1.2 0" pitch-range="-90 0" zoom-range="1.5 10"></pc-script-instance>
+            </pc-script>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" shadow-distance="20" intensity="1.5"></pc-light>
+        </pc-entity>
+        <pc-entity name="ground" scale="30 30 30">
+            <pc-render type="plane" material="floor"></pc-render>
+        </pc-entity>
+        <pc-model name="t-rex" asset="t-rex" scale="1.5 1.5 1.5">
+            <pc-anim></pc-anim>
+        </pc-model>
+    </pc-scene>
+</pc-app>
+```
+
+To reach inside the loaded hierarchy, nest a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) for each node you want to change:
+
+```html
+<pc-model asset="car">
+    <!-- Hide the ground plane the GLB was exported with -->
+    <pc-node name="Plane" enabled="false"></pc-node>
+</pc-model>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
+
+A `<pc-model>` also makes a natural root for a cloneable `<template>` prefab — the [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) example spawns its projectiles this way. See [Reusable Scenes with Templates](https://developer.playcanvas.com/user-manual/web-components/templates.md).
+
+### The Two Entities
+
+A `<pc-model>` exposes two entities, and picking the wrong one is the easiest mistake to make here:
+
+| Property | What it is |
+| --- | --- |
+| `entity` | The **host** the element creates and fronts. Non-null from boot, stable across `asset` changes, and where components and child elements attach |
+| `contentEntity` | The **instantiated GLB root**, parented beneath the host. `null` until a load succeeds, and replaced on every reload |
+
+So components go on `entity`, and questions about what the file contained go to `contentEntity`:
+
+```javascript
+const model = await whenReady('pc-model');
+
+model.entity.anim;          // the component a nested <pc-anim> added
+model.contentEntity.name;   // the GLB root's own name, e.g. 'Sketchfab_model'
+```
+
+`hierarchy()` and [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) resolution are both scoped to the content root, so the host never appears in a printed tree, a node `path`, or a name search.
+
+### Inspecting the Hierarchy
+
+The `hierarchy()` method reports the instantiated tree as it actually exists, which is the vocabulary a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) resolves against — and not necessarily what the source asset's node names suggest. [Loading Models](https://developer.playcanvas.com/user-manual/web-components/loading-models.md#seeing-what-you-loaded) works through a real example; this is the reference. Printing it is one line:
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const model = await whenReady('pc-model');
+console.log(String(model.hierarchy()));
+```
+
+```none
+Car
+├─ FrontAxle
+│  └─ Wheel [0] (render) {defaultGlbMaterial}
+├─ RearAxle
+│  └─ Wheel [1] (render) {defaultGlbMaterial}
+├─ Wing
+└─ Wing1
+```
+
+Each line is a node: its name, then `[index]` when other nodes share that name, the component types it carries in parentheses, and the materials of a render component in braces. So the two wheels above are reached with `<pc-node name="Wheel" index="0">` and `<pc-node name="Wheel" index="1">`, and `Wing1` is the engine renaming a second `Wing` sibling apart as it built the hierarchy.
+
+`hierarchy()` returns the root node of a plain-data tree, or `null` while there is nothing instantiated — before the container asset has loaded, after a load failed, or once the element has left the document. Every node carries:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `name` | String | The node's name as instantiated, which is the name a `<pc-node>` looks up. It can differ from the name in the source asset: the engine synthesizes `node_<index>` names for unnamed nodes and renames identically named siblings apart |
+| `path` | String | The node's `/`-separated path below the model root, which is the `path` a `<pc-node>` bound to it reports. The root's path is its own name |
+| `index` | Number | The node's position among the nodes sharing its name, counted in depth-first order over the whole model — exactly the match a `<pc-node>`'s `index` selects |
+| `components` | String[] | The types of the components attached to the node (such as `render`), sorted |
+| `materials` | Object[] | One `{ index, name }` entry per mesh instance of the node's render component, in component order. Empty for a node without one |
+| `children` | Object[] | The node's child nodes |
+| `toString()` | Function | Renders the subtree rooted at this node as the printable tree above, so `String(node)` prints any branch |
+
+The material `name` values are runtime labels read as they stand, which makes them a convenient handle but not a unique one: an unnamed glTF material is called `Untitled`, a primitive authored without a material carries the engine's shared `defaultGlbMaterial`, duplicates stay duplicated, and the name is `null` if a script cleared the assignment. The `index` is the unambiguous one. Both are what [`<pc-node>`'s `material-overrides`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md#overriding-materials) selects with, and a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) you swap in reports whatever its `name` attribute says — worth setting on any material you want to recognize here.
+
+The tree is a snapshot, computed afresh on each call: it does not track later changes to the hierarchy, and mutating it changes nothing. Being plain data, it survives `JSON.stringify`, so it is easy to log, diff or assert against in a test.
+
+## See Also
+
+* [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the container asset a model instantiates
+* [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) — reaches into the instantiated hierarchy
+* [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) — plays the animations the GLB carries
+* [Loading Models](https://developer.playcanvas.com/user-manual/web-components/loading-models.md) — loading a model and adjusting it from markup
+
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html).

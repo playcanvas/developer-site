@@ -1,0 +1,42 @@
+# SplatTransform
+
+> SplatTransform (`@playcanvas/splat-transform`) is a CLI and library for 3D Gaussian splats: it converts between formats, transforms, filters and merges splat data, generates streamed levels of detail, voxelizes splats for collision, and renders images.
+
+Use this index to process splat files from a command line, a script or a pipeline. To edit splats by hand, see [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat/llms.txt); to render them in an app, see Gaussian Splatting in the [Engine](https://developer.playcanvas.com/user-manual/engine/llms.txt) index.
+
+## Rules
+
+- **Install** the CLI with `npm install -g @playcanvas/splat-transform`, or the library with `npm install @playcanvas/splat-transform`.
+- **The CLI reads inputs, applies actions in order and writes the last file**: `splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]`, for example `splat-transform input.ply output.sog`. File formats come from the extensions, and several inputs are merged.
+- **For the web, write SOG** (`.sog`), the recommended compressed format, or Streamed SOG (`lod-meta.json`) for scenes too large to load at once.
+- **Decimation (`-d`) must be the final action and write a `.ply`**: convert the result in a second run.
+- **SOG compression and voxelization use the GPU through WebGPU**, which picks the best adapter unless `-g <index>` chooses one (`--list-gpus` lists them). Without a usable GPU, `-g cpu` compresses SOG on the CPU, 5 to 10 times more slowly, but GPU-only features such as `--filter-cluster` are then unavailable.
+- **To inspect a file without writing one**, use `--stats` or `--info` with `null` as the output.
+- **In the browser, without installing anything**, [superspl.at/convert](https://superspl.at/convert) runs SplatTransform.
+
+## Guides
+
+- [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md): Installation, the CLI syntax, every supported format, action and option, and examples.
+- [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md): Building multi-LOD Streamed SOG: tagging LOD levels, decimating a single source and tuning chunks.
+- [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision.md): Generating voxel octrees and collision meshes from splats.
+- [Library Usage](https://developer.playcanvas.com/user-manual/splat-transform/library.md): Reading, processing and writing splat data from code, in Node.js and the browser.
+- [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md): Running SplatTransform as a containerized backend on a GPU host.
+- [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md): The `.voxel.json` and `.voxel.bin` files it writes.
+
+## Formats
+
+- [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats.md): Choosing between PLY, SOG, Streamed SOG, GLB and SPZ.
+- [The SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md): The SOG specification.
+- [The Streamed SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md): The Streamed SOG specification.
+- [The PLY Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply.md): How training tools store splats in PLY files.
+- [The GLB Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/glb.md): Splats in glTF with the `KHR_gaussian_splatting` extension.
+- [The SPZ Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/spz.md): Niantic's compressed splat format.
+
+## API reference
+
+- [SplatTransform API](https://api.playcanvas.com/splat-transform/): The library's API.
+- [SplatTransform on GitHub](https://github.com/playcanvas/splat-transform): The source.
+
+## Optional
+
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/splat-transform/llms-full.txt): 12 pages (109 KB), for downloading and searching rather than reading into context.

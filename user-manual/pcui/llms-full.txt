@@ -1,0 +1,746 @@
+# PCUI: All Pages
+
+> PCUI (`@playcanvas/pcui`) is the UI component library the PlayCanvas Editor is built with, for building browser-based tools, with React wrappers. PCUI Graph (`@playcanvas/pcui-graph`) adds node-graph editors, and Observer (`@playcanvas/observer`) the observable state that PCUI components bind to.
+
+Index: https://developer.playcanvas.com/user-manual/pcui/llms.txt
+Total Documents: 15
+Generated: 2026-09-23
+
+================================================================================
+
+## PCUI
+
+URL: https://developer.playcanvas.com/user-manual/pcui/
+Markdown: https://developer.playcanvas.com/user-manual/pcui.md
+
+[Image: PCUI splash]
+
+PCUI stands for **P**lay**C**anvas **U**ser **I**nterface. It is the front-end framework on which all PlayCanvas tools are built:
+
+* [PlayCanvas Editor](https://github.com/playcanvas/editor)
+* [SuperSplat](https://superspl.at/editor)
+* [Model Viewer](https://playcanvas.com/viewer)
+* [Texture Tool](https://playcanvas.com/texture-tool)
+
+PCUI is open source and available on [GitHub](https://github.com/playcanvas/pcui). As such, you can use it in your own projects. This guide shows you how!
+
+--------------------------------------------------------------------------------
+
+## Getting Started
+
+URL: https://developer.playcanvas.com/user-manual/pcui/getting-started/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/getting-started.md
+
+Before you begin, make sure you have [Node.js](https://nodejs.org/) 18 or later installed.
+
+## Installing from NPM
+
+PCUI is available as a package on [NPM](https://www.npmjs.com/package/@playcanvas/pcui). You can install it as follows:
+
+```bash
+npm install @playcanvas/pcui --save-dev
+```
+
+This will include the entire PCUI library in your project. The various parts of the library will be available to import from that package at the following locations:
+
+- Observers: `@playcanvas/observer`
+- ES Module Components: `@playcanvas/pcui`
+- React Components: `@playcanvas/pcui/react`
+
+You can import the ES Module components into your own `.js` files and use them as follows:
+
+```javascript
+import { Button } from '@playcanvas/pcui';
+import '@playcanvas/pcui/styles';
+
+const button = new Button({
+    text: 'Click Me'
+});
+
+document.body.appendChild(button.dom);
+```
+
+This will result in your first component being appended to your document body!
+
+[Interactive demo](https://playcanvas.github.io/pcui/storybook/iframe?id=components-button--text&viewMode=story)
+
+## API Reference
+
+The [API reference](https://api.playcanvas.com/pcui/) is a list of all of PCUI's class components and their properties. It is automatically generated from the source code.
+
+--------------------------------------------------------------------------------
+
+## React
+
+URL: https://developer.playcanvas.com/user-manual/pcui/react/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/react.md
+
+PCUI components can be used directly in React applications. Import the components from the React package and use them in your `.jsx` files as follows:
+
+```jsx
+import * as React from 'react';
+import ReactDOM from 'react-dom';
+import { TextInput } from '@playcanvas/pcui/react';
+import '@playcanvas/pcui/styles';
+
+ReactDOM.render(
+    <TextInput />,
+    document.body
+);
+```
+
+This example renders a basic text input component. You can see it in action below:
+
+[Interactive demo](https://playcanvas.github.io/pcui/storybook/iframe?id=components-textinput--main&viewMode=story)
+
+For more complex implementations, check out the [examples](https://developer.playcanvas.com/user-manual/pcui/examples.md) section.
+
+## Storybook
+
+The [PCUI Storybook](https://playcanvas.github.io/pcui/storybook/) provides an interactive showcase of all available components. You can:
+
+- Explore each component's properties and behavior
+- Test different configurations in real-time
+- View component documentation
+- Copy example code
+
+--------------------------------------------------------------------------------
+
+## Data Binding
+
+URL: https://developer.playcanvas.com/user-manual/pcui/data-binding/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/data-binding.md
+
+The PCUI library offers a data binding layer that can be used to synchronize data across multiple components. It offers two-way binding to a given observer object, so updates made in a component are reflected in the observer's data and distributed out to all other subscribed components.
+
+--------------------------------------------------------------------------------
+
+## Using Observers
+
+URL: https://developer.playcanvas.com/user-manual/pcui/data-binding/using-observers/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/data-binding/using-observers.md
+
+A simple use case is shown below.
+
+[Interactive demo](https://playcanvas.github.io/pcui/storybook/iframe?id=examples-observer--main&viewMode=story)
+
+In this example, the created label will start with `Hello World` as its text value. When a user enters a value into the text input, the label will be updated with the new value.
+
+### How To
+
+First import the components, binding classes and PCUI styles.
+
+```javascript
+import { Observer } from '@playcanvas/observer';
+import { Label, TextInput, BindingObserversToElement, BindingElementToObservers } from '@playcanvas/pcui';
+import '@playcanvas/pcui/styles';
+```
+
+Create a new observer for an object which contains a text string.
+
+```javascript
+const observer = new Observer({
+    text: 'Hello World'
+});
+```
+
+Create a label which will listen to updates from the observer.
+
+```javascript
+const label = new Label({
+    binding: new BindingObserversToElement()
+});
+```
+
+Link the observer to the label, telling it to use the text variable as its value.
+
+```javascript
+label.link(observer, 'text');
+```
+
+Create a text input which will send updates to the observer.
+
+```javascript
+const textInput = new TextInput({
+    binding: new BindingElementToObservers()
+});
+```
+
+Link the observer to the label, telling it to set the text variable on change.
+
+```javascript
+textInput.link(observer, 'text');
+```
+
+--------------------------------------------------------------------------------
+
+## Two Way Binding
+
+URL: https://developer.playcanvas.com/user-manual/pcui/data-binding/two-way-binding/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/data-binding/two-way-binding.md
+
+Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in React to showcase binding with React components.
+
+[Interactive demo](https://playcanvas.github.io/pcui/storybook/iframe?id=examples-bindingtwoway--main&viewMode=story)
+
+### How To
+
+First import the components, binding classes and PCUI styles.
+
+```javascript
+import { Observer } from '@playcanvas/observer';
+import { TextInput, BindingTwoWay } from '@playcanvas/pcui';
+import '@playcanvas/pcui/styles';
+```
+
+Then create a new observer for an object which contains a text string.
+
+```javascript
+const observer = new Observer({
+    text: 'Hello World'
+});
+```
+
+Create two text inputs, which can both send and receive updates through the linked observer. This style of binding is defined through the use of the `BindingTwoWay` object which is passed as a property.
+
+```javascript
+const link = { observer, path: 'text' };
+const TextInput1 = () => <TextInput binding={new BindingTwoWay()} link={link} />
+const TextInput2 = () => <TextInput binding={new BindingTwoWay()} link={link} />
+```
+
+--------------------------------------------------------------------------------
+
+## Examples
+
+URL: https://developer.playcanvas.com/user-manual/pcui/examples/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/examples.md
+
+Here are some simple examples demonstrating the various PCUI elements:
+
+[Interactive demo](https://playcanvas.github.io/pcui/examples/)
+
+The source code for these examples can be found in the [PCUI GitHub repository](https://github.com/playcanvas/pcui/tree/main/examples).
+
+--------------------------------------------------------------------------------
+
+## History
+
+URL: https://developer.playcanvas.com/user-manual/pcui/examples/history/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/examples/history.md
+
+In this example you can interact with the input slider to update the progress bar. Any actions you make can be undone / redone using the history buttons.
+
+[Interactive demo](https://playcanvas.github.io/pcui/storybook/iframe?id=examples-history--main&viewMode=story)
+
+### Code
+
+```jsx
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+
+import { Observer, History } from '@playcanvas/observer';
+import { Container, Button, SliderInput, Progress, Label, BindingTwoWay } from '@playcanvas/pcui/react';
+
+const observer = new Observer({ progress: 0 });
+const history = new History();
+
+const HistoryExample = (props) => {
+    const [ canUndo, setCanUndo ] = useState(false);
+    const [ canRedo, setCanRedo ] = useState(false);
+    const [ historyLabel, setHistoryLabel ] = useState('');
+    history.on('canUndo', setCanUndo);
+    history.on('canRedo', setCanRedo);
+    history.on('add', (name) => setHistoryLabel(`add action: ${name}`));
+    history.on('undo', (name) => setHistoryLabel(`undo action: ${name}`));
+    history.on('redo', (name) => setHistoryLabel(`redo action: ${name}`));
+    const linkProgress = { observer, path: 'progress' };
+    return (
+        <Container flex>
+            <Progress binding={new BindingTwoWay({ history })} link={linkProgress} />
+            <Container>
+            </Container>
+            <Container>
+                <SliderInput min={0} sliderMin={0} max={100} sliderMax={100} binding={new BindingTwoWay({ history })} link={linkProgress} />
+            </Container>
+            <Container>
+                <Button text="Undo" enabled={canUndo} icon="E114" onClick={() => history.undo()} />
+                <Button text="Redo" enabled={canRedo} icon="E115" onClick={() => history.redo()} />
+                <Label text={historyLabel} />
+            </Container>
+        </Container>
+    );
+};
+
+ReactDOM.render(<HistoryExample />, document.body);
+```
+
+--------------------------------------------------------------------------------
+
+## Todo List
+
+URL: https://developer.playcanvas.com/user-manual/pcui/examples/todo-list/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/examples/todo-list.md
+
+The todo list below allows you to add items to the list, toggle their 'done' status and filter items by that status.
+
+[Interactive demo](https://playcanvas.github.io/pcui/storybook/iframe?id=examples-todolist--main&viewMode=story)
+
+### Code
+
+```jsx
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Observer } from '@playcanvas/observer';
+
+import { Container, TextInput, BooleanInput, Label, SelectInput, Button, BindingTwoWay } from '@playcanvas/pcui/react';
+
+const observer = new Observer({ input: '', items: {} });
+
+export const TodoList = (props) => {
+    const [ items, setItems ] = useState({});
+    const [ listFilter, setListFilter ] = useState(0);
+    observer.on('items:set', setItems);
+    const addItem = (value) => {
+        const items = observer.get('items');
+        if (value === '') return;
+        items[Date.now()] = { done: false, text: value };
+        observer.set('input', '');
+        observer.set('items', items);
+    };
+    const removeItem = (key) => {
+        const items = observer.get('items');
+        delete items[key];
+        observer.set('items', items);
+    };
+    const toggleItem = (key) => {
+        const items = observer.get('items');
+        items[key].done = !items[key].done;
+        observer.set('items', items);
+    };
+    const textInputLink = { observer, path: 'input' };
+    return (
+        <Container class='todo'>
+            <TextInput blurOnEnter={false} placeholder='enter item' binding={new BindingTwoWay()} link={textInputLink} onChange={addItem}/>
+            <SelectInput type="number" options={[{v: 0, t: 'Show all items'}, {v: 1, t: 'Show active items'}, {v: 2, t: 'Show done items'}]} onChange={setListFilter} />
+            <Container>
+                {Object.keys(items).map(key => {
+                    var item = items[key];
+                    if (listFilter !== 0) {
+                        if ((listFilter === 1 && item.done) || (listFilter === 2 && !item.done)) return null;
+                    }
+                    return [
+                        <Container key={key} class={'todo-item'}>
+                            <BooleanInput onChange={() => toggleItem(key)} value={item.done} />
+                            <Label text={item.text}/>
+                            <Button icon='E124' text='' size='small' onClick={() => removeItem(key)} />
+                        </Container>
+                    ];
+                })}
+            </Container>
+        </Container>
+    );
+};
+
+ReactDOM.render(<TodoList />, document.body);
+```
+
+--------------------------------------------------------------------------------
+
+## PCUI Graph
+
+URL: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/pcui-graph.md
+
+[Image: PCUI Graph Banner]
+
+PCUI Graph is a graph visualization framework designed to help you build applications that can create and view node-based graphs in the browser. It was built as an extension of the PCUI library but now lives in its own repository.
+
+--------------------------------------------------------------------------------
+
+## Getting Started
+
+URL: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/getting-started/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/getting-started.md
+
+## Installing from NPM
+
+PCUI Graph is available as a package on [NPM](https://www.npmjs.com/package/@playcanvas/pcui-graph). You can install it as follows:
+
+```bash
+npm install @playcanvas/pcui-graph --save-dev
+```
+
+:::note
+
+It is assumed you already have the `@playcanvas/pcui` package installed in your project.
+
+:::
+
+## Importing the Graph Component
+
+You can import the `Graph` component as follows:
+
+```javascript
+import { Graph } from '@playcanvas/pcui-graph';
+```
+
+## Creating a Graph
+
+Options can be passed to the `Graph` constructor as a JSON object which change the default behavior of the graph. You can do so as follows:
+
+```javascript
+const graph = new Graph(schema, {
+    readOnly: true,
+    initialData: { ... }
+});
+```
+
+You can see a full list of options [here](https://api.playcanvas.com/pcui-graph/classes/Graph.html#constructor).
+
+## Examples
+
+Examples of PCUI Graph usage can be found in this [Storybook](https://playcanvas.github.io/pcui-graph/storybook/).
+
+--------------------------------------------------------------------------------
+
+## Schema
+
+URL: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/schema/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/schema.md
+
+The schema object is used to define what type of graph you will be initializing. More specifically, it defines which nodes your graph can contain and how those nodes can be connected together with edges.
+
+It should contain a set of nodes and edges which can be created in the graph. Each node and edge that is defined will need a unique number key which is used to reference that particular part of the schema. In the above example the single edge type defined references the two nodes contained in the schema when defining which node types it can connect. When creating large schemas, it can be useful to define these keys before creating the schema, so they can be easily referenced:
+
+```javascript
+const NODE_KEYS = {
+    HELLO: 0,
+    WORLD: 1
+};
+const EDGE_KEYS = {
+    HELLO_TO_WORLD: 0
+};
+
+const schema = {
+    nodes: {
+        [NODE_KEYS.HELLO]: {
+            name: 'Hello',
+            fill: 'red'
+        },
+        [NODE_KEYS.WORLD]: {
+            name: 'World',
+            fill: 'green'
+        }
+    },
+    edges: {
+        [EDGE_KEYS.HELLO_TO_WORLD]: {
+            from: [NODE_KEYS.HELLO], // this edge can connect nodes of type NODE_KEYS.HELLO
+            to: [NODE_KEYS.WORLD] // to nodes of type NODE_KEYS.WORLD,
+            stroke: 'blue'
+        }
+    }
+};
+```
+
+The schemas above are used to create directed graphs, as they define edges which contain `from` and `to` attributes. These attributes tell an edge which nodes they can connect, creating a directed edge from one node to another.
+
+When creating visual programming graphs, nodes are not connected directly. Instead, they contain input and output ports which can be connected together. This will need to be expressed in the schema you create. To achieve this, you can add `inPorts` and `outPorts` attributes to your nodes in the schema. These will define a set of ports which will be created on a given node, specifying which edges can connect those ports.
+
+The schema defined above can be reworked to support port connections as follows:
+
+```javascript
+const NODE_KEYS = {
+    HELLO: 0,
+    WORLD: 1
+};
+const EDGE_KEYS = {
+    HELLO_TO_WORLD: 0
+};
+
+const schema = {
+    nodes: {
+        [NODE_KEYS.HELLO]: {
+            name: 'Hello',
+            fill: 'red',
+            outPorts: [
+                {
+                    name: 'output',
+                    type: EDGE_KEYS.HELLO_TO_WORLD
+                }
+            ]
+        },
+        [NODE_KEYS.WORLD]: {
+            name: 'World',
+            fill: 'green',
+            inPorts: [
+                {
+                    name: 'input',
+                    type: EDGE_KEYS.HELLO_TO_WORLD
+                }
+            ]
+        }
+    },
+    edges: {
+        [EDGE_KEYS.HELLO_TO_WORLD]: {
+            stroke: 'blue'
+        }
+    }
+};
+```
+
+You can see that created ports have a type which defines the edge type each port accepts. Only input and output ports of the same type can be connected together in the graph. Ports also contain a name which will appear next to the port in the graph.
+
+Nodes can also contain editable attributes, which will show up as input fields within them. These attributes can be set in a node as follows:
+
+```javascript
+const schema = {
+    nodes: {
+        0: {
+            name: 'Foobar',
+            attributes: [
+                {
+                    name: 'Editable boolean',
+                    type: 'BOOLEAN_INPUT'
+                },
+                {
+                    name: 'Editable text',
+                    type: 'TEXT_INPUT'
+                },
+                {
+                    name: 'Editable number',
+                    type: 'NUMERIC_INPUT'
+                },
+                {
+                    name: 'Editable 2D vector',
+                    type: 'VEC2_INPUT'
+                },
+                {
+                    name: 'Editable 3D vector',
+                    type: 'VEC3_INPUT'
+                },
+                {
+                    name: 'Editable 4D vector',
+                    type: 'VEC4_INPUT'
+                }
+            ]
+        }
+    }
+};
+```
+
+Editable attributes for a given node type must have unique names as they are stored in the graph data in a dictionary. When a node with an editable attribute is created, it can be accessed via the graph data as follows:
+
+```javascript
+const selectedItemId = graph.selectedItem.id;
+const currentBooleanValue = graph.data.nodes[selectedItemId].attributes['Editable boolean'].value;
+```
+
+--------------------------------------------------------------------------------
+
+## Events
+
+URL: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/events/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/events.md
+
+After creating a graph, you can register a callback for various events. This is achieved using the graph's [on function](https://api.playcanvas.com/pcui-graph/classes/Graph.html#on). The following events are supported:
+
+```javascript
+import Graph from '@playcanvas/pcui-graph';
+
+const schema = { ... };
+const graph = new Graph(schema);
+
+/*
+ * @event
+ * @param {object} args.node - The node that was added
+ */
+graph.on(Graph.GRAPH_ACTIONS.ADD_NODE, ({ node }) => { ... });
+
+/*
+ * @event
+ * @param {object} args.node - The node that was deleted
+ * @param {object} args.edgeData - The edges contained in the graph
+ * @param {object} args.edges - The edges that were removed when deleting this node
+ */
+graph.on(Graph.GRAPH_ACTIONS.DELETE_NODE, ({ node, edgeData, edges }) => { ... });
+
+/*
+ * @event
+ * @param {object} args.node - The node that was selected
+ * @param {object} args.prevItem - The previously selected item, either a node or an edge
+ */
+graph.on(Graph.GRAPH_ACTIONS.SELECT_NODE, ({ node, prevItem }) => { ... });
+
+/*
+ * @event
+ * @param {object} args.node - The node that was updated
+ * @param {object} args.nodeId - The node id of the node that was updated
+ */
+graph.on(Graph.GRAPH_ACTIONS.UPDATE_NODE_POSITION, ({ node, nodeId }) => { ... });
+
+/*
+ * @event
+ * @param {object} args.node - The node that was updated
+ * @param {object} args.attribute - The name of the attribute that was updated
+ * @param {object} args.attributeKey - The key of the attribute that was updated
+ */
+graph.on(Graph.GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, ({ node, attribute, attributeKey }) => { ... });
+
+/*
+ * @event
+ * @param {object} args.edge - The edge that was updated
+ * @param {object} args.edgeId - The id of the edge that was updated
+ */
+graph.on(Graph.GRAPH_ACTIONS.ADD_EDGE, ({ edge, edgeId }) => { ... });
+
+/*
+ * @event
+ * @param {object} args.edge - The edge that was updated
+ * @param {object} args.edgeId - The id of the edge that was updated
+ */
+graph.on(Graph.GRAPH_ACTIONS.DELETE_EDGE, ({ edge, edgeId }) => { ... });
+
+/*
+ * @event
+ * @param {object} args.edge - The edge that was selected
+ * @param {object} args.prevItem - The previously selected item, either a node or an edge
+ */
+graph.on(Graph.GRAPH_ACTIONS.SELECT_EDGE, ({ edge, prevItem }) => { ... });
+
+/*
+ * @event
+ * @param {object} args.prevItem - The previously selected item, either a node or an edge
+ */
+graph.on(Graph.GRAPH_ACTIONS.DESELECT_ITEM, ({ prevItem }) => { ... });
+
+/*
+ * @event
+ * @param {number} args.pos.x - The x position of the viewport in relation to the graph
+ * @param {number} args.pos.y - The y position of the viewport in relation to the graph
+ */
+graph.on(Graph.GRAPH_ACTIONS.UPDATE_TRANSLATE, ({ pos }) => { ... });
+
+/*
+ * @event
+ * param {number} args.scale - The current scale of the graph
+ */
+graph.on(Graph.GRAPH_ACTIONS.UPDATE_SCALE, ({ scale }) => { ... });
+```
+
+--------------------------------------------------------------------------------
+
+## Context Menus
+
+URL: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/context-menus/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/context-menus.md
+
+It is possible to create context menus on your graph which display when right clicking various graph items. There are three types of context menus; background, node and edge. You can define a set of actions which will display in each of these menus and each action item in the menu will fire an action event when selected.
+
+The background context menu appears when you right click on any blank space in the canvas. This context menu is used to add new nodes to the graph. It can be created by adding a `contextMenuItems` array to the options object passed to the graph constructor:
+
+```javascript
+const graph = new Graph(schema, {
+    contextMenuItems: [
+        {
+            {
+                text: 'Add a hello node',
+                action: GRAPH.GRAPH_ACTIONS.ADD_NODE,
+                nodeType: NODE_KEYS.HELLO,
+                attributes: {
+                    name: 'New hello'
+                    'Editable boolean': true
+                }
+            },
+            {
+                text: 'Add a world node',
+                action: GRAPH.GRAPH_ACTIONS.ADD_NODE,
+                nodeType: NODE_KEYS.WORLD,
+                attributes: {
+                    name: 'New world'
+                    'Editable boolean': true
+                }
+            }
+        }
+    ]
+})
+```
+
+The text property defines the display text of the context menu item. The action property tells the graph that this context menu item should fire an `ADD_NODE` action when it is selected. The other properties define the type of node that will be created when this item is selected. The node type references one of the node keys defined in the graphs schema. The attributes object defines the initial values of any editable attributes that exist in that node's schema. The name attribute will also show up in the header for the node.
+
+Context menus can also be added to nodes and edges by including contextMenu properties in their schemas as follows:
+
+```javascript
+const schema = {
+    edges: {
+        0: {
+            contextMenuItems: [
+                {
+                    text: 'Delete edge', // name of the context menu item
+                    action: Graph.GRAPH_ACTIONS.DELETE_EDGE // action to carry out when item is selected
+                }
+            ]
+        }
+    }
+};
+```
+
+Currently, node context menus support two actions:
+
+```javascript
+Graph.GRAPH_ACTIONS.DELETE_NODE // Delete the node associated with this context menu.
+Graph.GRAPH_ACTIONS.ADD_EDGE // Add an edge that starts from the node associated with this context menu, selecting another node will complete the edge connection. Selecting the background canvas will cancel adding an edge.
+```
+
+While edges support their own deletion by adding this action in their context menu:
+
+```javascript
+Graph.GRAPH_ACTIONS.DELETE_EDGE // Delete the edge associated with this context menu.
+```
+
+--------------------------------------------------------------------------------
+
+## Styling
+
+URL: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/styling/
+Markdown: https://developer.playcanvas.com/user-manual/pcui/pcui-graph/styling.md
+
+You can style your graph by overriding its default style properties. This can be achieved by modifying the defaultStyles passed in as part of an options object to the graph constructor.
+
+```javascript
+const graph = new Graph(schema, {
+    defaultStyles: {
+        background: {
+            color: 'black'
+        }
+    }
+})
+```
+
+The `defaultStyles` object contains styling options for the graphs background as well as node and edge styles. A full list of these overridable properties can be seen [here](https://github.com/playcanvas/pcui-graph/blob/main/src/constants.js).
+
+If you'd like to update the styling of particular node/edge types, you can override any of the node or edge properties given in the `defaultStyles` object by defining them in the schema for a particular node or edge as follows:
+
+```javascript
+const schema = {
+    nodes: {
+        0: {
+            name: 'standard node'
+        },
+        1: {
+            name: 'red node'
+            fill: 'red' // Update the background color of any nodes of this type to red
+        },
+    }
+};
+
+const graph = new Graph(schema, {
+    defaultStyles: {
+        node: {
+            fill: 'grey' // All other node types will have a grey background
+        }
+    }
+})
+```
+
+--------------------------------------------------------------------------------

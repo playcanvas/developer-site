@@ -1,0 +1,229 @@
+# PlayCanvas Editor
+
+> The PlayCanvas Editor is a browser-based, collaborative editor for building scenes, managing assets, writing scripts and publishing PlayCanvas apps. It is also reachable from code through the Editor API, the REST API, the MCP server and the VS Code extension.
+
+Use this index for projects made in the Editor, where code lives in scripts attached to entities. Scripts run on the engine, so the [Engine](https://developer.playcanvas.com/user-manual/engine/llms.txt) index covers the APIs they call.
+
+## Rules
+
+- **Check which engine the project runs.** A project uses Engine V1 or Engine V2 (see Engine Settings), and their APIs differ: the Engine index's rules for Engine 2 apply to V2 projects only.
+- **A project lives in the Editor.** Its scenes, entities and assets are stored there and shared with collaborators in real time. Edit its scripts locally with the VS Code extension; change scenes from code with the Editor API, or from an agent with the MCP server.
+- **Write new scripts as ESM scripts**, and never mix the ESM and classic formats in one file. An ESM script is a `.mjs` file exporting a class that extends `Script`, with a `static scriptName`, and attributes declared as class fields tagged `/** @attribute */`:
+
+    ```javascript
+    import { Script } from 'playcanvas';
+
+    export class Rotate extends Script {
+        static scriptName = 'rotate';
+
+        /** @attribute */
+        speed = 10;
+
+        update(dt) {
+            this.entity.rotate(0, this.speed * dt, 0);
+        }
+    }
+    ```
+
+- **Keep an existing classic script classic.** Classic scripts are legacy but still supported:
+
+    ```javascript
+    var Rotate = pc.createScript('rotate');
+
+    Rotate.attributes.add('speed', { type: 'number', default: 10 });
+
+    Rotate.prototype.update = function (dt) {
+        this.entity.rotate(0, this.speed * dt, 0);
+    };
+    ```
+
+- **ESM scripts do not support classic `attr:[name]` change events.** After changing a script's attributes, parse the script in the Editor so the Inspector shows them.
+- **ESM scripts load in no particular order**: declare dependencies with `import` statements, and use an import map for aliases or CDN packages. Classic scripts run in the project's script loading order.
+- **Reuse entities as templates**, the Editor's prefabs, rather than copying them.
+- **Test in the Launch page**, which runs the current scene and reloads with your changes.
+
+## Getting started
+
+- [PlayCanvas Editor](https://developer.playcanvas.com/user-manual/editor.md): A tour of the Editor: live testing, collaboration, version control, visual editing, scripting, assets and publishing.
+- [The Editor Workflow](https://developer.playcanvas.com/user-manual/editor/getting-started/workflow.md): From importing assets and building scenes to scripting and publishing.
+- [Your First App](https://developer.playcanvas.com/user-manual/editor/getting-started/your-first-app.md): A first project step by step: a scene, materials, a script, movement and publishing.
+- [Common Questions](https://developer.playcanvas.com/user-manual/editor/faq.md): Quick answers to everyday tasks, such as adding components, scripts, materials, lights and cameras.
+
+## Working from code
+
+- [MCP Server](https://developer.playcanvas.com/user-manual/editor/mcp-server.md): Connecting an AI agent to an open Editor to modify a project and verify the result.
+- [VS Code Extension](https://developer.playcanvas.com/user-manual/editor/scripting/vscode-extension.md): Editing a project's scripts and shaders locally in VS Code or Cursor, with sync modes.
+- [Editor API](https://developer.playcanvas.com/user-manual/editor/editor-api.md): Automating and extending the Editor from the browser console or user scripts (beta).
+- [REST API](https://developer.playcanvas.com/user-manual/api.md): HTTP endpoints for projects, assets, apps, jobs and checkpoints, authenticated with a bearer token (beta).
+
+## Scripting
+
+- [Scripting](https://developer.playcanvas.com/user-manual/editor/scripting.md): Script assets, import maps, the code editor, the VS Code extension, hot reloading and load order.
+- [Managing Your Scripts](https://developer.playcanvas.com/user-manual/editor/scripting/managing-scripts.md): Creating, organizing and importing script assets, and adding them to entities.
+- [ESM Scripts](https://developer.playcanvas.com/user-manual/scripting/esm-scripts.md): The ESM script format.
+- [ESM Script Attributes](https://developer.playcanvas.com/user-manual/scripting/script-attributes/esm.md): Declaring attributes that the Inspector can edit.
+- [Classic Script Attributes](https://developer.playcanvas.com/user-manual/scripting/script-attributes/classic.md): Attributes of classic scripts.
+- [Migration Guide](https://developer.playcanvas.com/user-manual/scripting/migration-guide.md): Converting classic scripts to ESM scripts.
+- [Import Maps](https://developer.playcanvas.com/user-manual/editor/scripting/import-maps.md): Aliasing module specifiers and using CDN packages, with one active import map per project.
+- [Script Loading Order](https://developer.playcanvas.com/user-manual/editor/scripting/loading-order.md): Imports for ESM scripts versus the preload order of classic scripts, and concatenation on publish.
+- [Hot Reloading](https://developer.playcanvas.com/user-manual/editor/scripting/hot-reloading.md): Reloading scripts live with `swap`, and carrying state across.
+- [Code Editor](https://developer.playcanvas.com/user-manual/editor/scripting/code-editor.md): The built-in collaborative code editor.
+
+## Engine versions
+
+- [Engine Compatibility](https://developer.playcanvas.com/user-manual/editor/engine-compatibility.md): Engine V1 versus V2, and switching a project between them.
+- [Engine Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/engine.md): Choosing the engine version used to launch, publish and download the project.
+- [Troubleshooting](https://developer.playcanvas.com/user-manual/editor/troubleshooting.md): Fixing brightness differences between the Editor and the Launch page caused by gamma, tone mapping and sRGB textures.
+
+## Scenes and entities
+
+- [Working with Scenes](https://developer.playcanvas.com/user-manual/editor/scenes.md): Entities, components and scene settings.
+- [Managing Scenes](https://developer.playcanvas.com/user-manual/editor/scenes/managing-scenes.md): Creating, duplicating, opening and deleting scenes.
+- [Loading Scenes](https://developer.playcanvas.com/user-manual/editor/scenes/loading-scenes.md): Changing scenes at runtime with the scene registry, and loading scenes additively.
+- [Components](https://developer.playcanvas.com/user-manual/editor/scenes/components.md): Every component and its Inspector settings.
+- [Render](https://developer.playcanvas.com/user-manual/editor/scenes/components/render.md): Meshes and primitives, with materials, shadows, lightmaps and batching.
+- [Camera](https://developer.playcanvas.com/user-manual/editor/scenes/components/camera.md): Projection, clipping, layers, tone mapping and viewports.
+- [Light](https://developer.playcanvas.com/user-manual/editor/scenes/components/light.md): Directional, omni and spot lights.
+- [Script](https://developer.playcanvas.com/user-manual/editor/scenes/components/script.md): Attaching scripts to an entity.
+- [Collision](https://developer.playcanvas.com/user-manual/editor/scenes/components/collision.md): Collision shapes for physics and triggers.
+- [Rigid Body](https://developer.playcanvas.com/user-manual/editor/scenes/components/rigidbody.md): Static, dynamic and kinematic physics bodies.
+- [Anim](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md): Driving animation with an anim state graph.
+- [GSplat](https://developer.playcanvas.com/user-manual/editor/scenes/components/gsplat.md): Rendering a Gaussian splat asset.
+- [Templates](https://developer.playcanvas.com/user-manual/editor/templates.md): Creating templates, their instances and overrides, and applying changes.
+- [Nested Templates](https://developer.playcanvas.com/user-manual/editor/templates/nested.md): Templates inside templates, and how overrides propagate.
+
+## Assets
+
+- [Assets](https://developer.playcanvas.com/user-manual/editor/assets.md): The Assets panel, uploads, the import pipeline, inspectors and the Asset Store.
+- [Uploading and Importing](https://developer.playcanvas.com/user-manual/editor/assets/importing.md): Uploading files and replacing assets.
+- [Asset Import Pipeline](https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline.md): How uploads become runtime assets, and its settings.
+- [Import Hierarchy](https://developer.playcanvas.com/user-manual/editor/assets/import-pipeline/import-hierarchy.md): Importing models as editable entity trees, with templates.
+- [Asset Inspectors](https://developer.playcanvas.com/user-manual/editor/assets/inspectors.md): The settings of each asset type.
+- [Material](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/material.md): The physically based material settings.
+- [Texture](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture.md): Texture import, filtering, wrapping and mipmaps.
+- [Asset Store](https://developer.playcanvas.com/user-manual/editor/assets/asset-store.md): Importing assets from the PlayCanvas and Sketchfab stores.
+
+## Interface
+
+- [Editor Interface](https://developer.playcanvas.com/user-manual/editor/interface.md): A map of the toolbar, hierarchy, inspector, viewport and Assets panel.
+- [Launch Page](https://developer.playcanvas.com/user-manual/editor/interface/launch-page.md): Running the project in a browser tab and on phones, with live updates.
+- [Using a Custom Engine](https://developer.playcanvas.com/user-manual/editor/interface/launch-page/custom-engine.md): Launching with another engine build.
+- [Project Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings.md): The project's engine, rendering, physics, lightmapping, input, layers and other settings.
+- [Physics Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/physics.md): Importing ammo.js and setting gravity.
+- [Rendering Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/rendering.md): Sky, lights, shadows, exposure, fog and resolution.
+
+## Version control
+
+- [Version Control](https://developer.playcanvas.com/user-manual/editor/version-control.md): Checkpoints, branches and merges, compared with Git.
+- [Checkpoints](https://developer.playcanvas.com/user-manual/editor/version-control/checkpoints.md): Creating, restoring and hard-resetting snapshots of a project.
+- [Branches](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md): Creating and working on branches.
+- [Merging and resolving conflicts](https://developer.playcanvas.com/user-manual/editor/version-control/merging.md): Merging branches and resolving conflicts.
+
+## Publishing
+
+- [Publishing](https://developer.playcanvas.com/user-manual/editor/publishing.md): Publishing to the web, mobile, desktop and playable ad networks.
+- [PlayCanvas Hosting](https://developer.playcanvas.com/user-manual/editor/publishing/web/playcanvas-hosting.md): Publishing builds to playcanvas.com.
+- [Self-hosting](https://developer.playcanvas.com/user-manual/editor/publishing/web/self-hosting.md): Embedding a hosted build, or downloading a build to deploy on your own server.
+- [Downloading Projects](https://developer.playcanvas.com/user-manual/editor/projects/downloading.md): The static and npm package formats of downloaded projects.
+- [Communication with web pages](https://developer.playcanvas.com/user-manual/editor/publishing/web/communicating-webpage.md): Messaging between an app and the page that hosts it.
+- [Playable Ads](https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads.md): Exporting playable ads for Facebook and Snapchat.
+
+## API reference
+
+- [Editor API](https://api.playcanvas.com/editor/): The reference of the Editor API.
+- [Engine API](https://api.playcanvas.com/engine/): The engine classes scripts use.
+
+## Optional
+
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/editor/llms-full.txt): 150 pages (515 KB), for downloading and searching rather than reading into context.
+- [Getting Started](https://developer.playcanvas.com/user-manual/editor/getting-started.md)
+- [Projects](https://developer.playcanvas.com/user-manual/editor/projects.md)
+- [Creating Projects](https://developer.playcanvas.com/user-manual/editor/projects/creating.md)
+- [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md)
+- [Project Settings](https://developer.playcanvas.com/user-manual/editor/projects/settings.md)
+- [Team Management](https://developer.playcanvas.com/user-manual/editor/projects/team-management.md)
+- [Dev Logs](https://developer.playcanvas.com/user-manual/editor/projects/dev-logs.md)
+- [Backup and Export](https://developer.playcanvas.com/user-manual/editor/projects/backup-and-export.md)
+- [Ownership and Transfers](https://developer.playcanvas.com/user-manual/editor/projects/ownership-transfers.md)
+- [Toolbar](https://developer.playcanvas.com/user-manual/editor/interface/toolbar.md)
+- [Hierarchy Panel](https://developer.playcanvas.com/user-manual/editor/interface/hierarchy.md)
+- [Inspector Panel](https://developer.playcanvas.com/user-manual/editor/interface/inspector.md)
+- [Assets Panel](https://developer.playcanvas.com/user-manual/editor/interface/assets.md)
+- [Viewport](https://developer.playcanvas.com/user-manual/editor/interface/viewport.md)
+- [Loading Screen](https://developer.playcanvas.com/user-manual/editor/interface/launch-page/loading-screen.md)
+- [Controls and Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/editor/interface/keyboard-shortcuts.md)
+- [Editor Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/editor.md)
+- [Asset Import Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/asset-import.md)
+- [Layers Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/layers.md)
+- [Lightmapping Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/lightmapping.md)
+- [Batch Group Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/batch-groups.md)
+- [Launch Page Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/launch-page.md)
+- [Input Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/input.md)
+- [Localization Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/localization.md)
+- [Network Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/network.md)
+- [Assets Panel](https://developer.playcanvas.com/user-manual/editor/assets/asset-panel.md)
+- [Animation](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation.md)
+- [Audio](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio.md)
+- [CSS](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/css.md)
+- [Cubemap](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/cubemap.md)
+- [Font](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/font.md)
+- [GSplat](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/gsplat.md)
+- [HTML](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/html.md)
+- [JSON](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/json.md)
+- [Render](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/render.md)
+- [Shader](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/shader.md)
+- [Sprite](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/sprite.md)
+- [Template](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/template.md)
+- [Text](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/text.md)
+- [Texture Atlas](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture-atlas.md)
+- [WASM Module](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/wasm.md)
+- [Sketchfab](https://developer.playcanvas.com/user-manual/editor/assets/asset-store/sketchfab.md)
+- [Asset Viewers](https://developer.playcanvas.com/user-manual/editor/assets/viewers.md)
+- [Real-time Collaboration](https://developer.playcanvas.com/user-manual/editor/realtime-collaboration.md)
+- [Animation (Legacy)](https://developer.playcanvas.com/user-manual/editor/scenes/components/animation.md)
+- [Audio Listener](https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener.md)
+- [Button](https://developer.playcanvas.com/user-manual/editor/scenes/components/button.md)
+- [Element](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md)
+- [Joint](https://developer.playcanvas.com/user-manual/editor/scenes/components/joint.md)
+- [Layout Child](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild.md)
+- [Layout Group](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup.md)
+- [Model (Legacy)](https://developer.playcanvas.com/user-manual/editor/scenes/components/model.md)
+- [Particle System](https://developer.playcanvas.com/user-manual/editor/scenes/components/particlesystem.md)
+- [Screen](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen.md)
+- [Scrollbar](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollbar.md)
+- [Scroll View](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview.md)
+- [Sound](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md)
+- [Sprite](https://developer.playcanvas.com/user-manual/editor/scenes/components/sprite.md)
+- [Override Diff View](https://developer.playcanvas.com/user-manual/editor/templates/diff.md)
+- [View Changes](https://developer.playcanvas.com/user-manual/editor/version-control/changes.md)
+- [Branch Workflows](https://developer.playcanvas.com/user-manual/editor/version-control/branch-workflows.md)
+- [Graph View](https://developer.playcanvas.com/user-manual/editor/version-control/graph-view.md)
+- [Item History](https://developer.playcanvas.com/user-manual/editor/version-control/item-history.md)
+- [Web](https://developer.playcanvas.com/user-manual/editor/publishing/web.md)
+- [Self-hosting for beginners](https://developer.playcanvas.com/user-manual/editor/publishing/web/self-hosting-for-beginners.md)
+- [Hosting using a CDN](https://developer.playcanvas.com/user-manual/editor/publishing/web/hosting-cdn.md)
+- [Hosting on heyVR.io](https://developer.playcanvas.com/user-manual/editor/publishing/web/hosting-heyvr.md)
+- [Mobile](https://developer.playcanvas.com/user-manual/editor/publishing/mobile.md)
+- [Apache Cordova](https://developer.playcanvas.com/user-manual/editor/publishing/mobile/cordova.md)
+- [GoNative](https://developer.playcanvas.com/user-manual/editor/publishing/mobile/gonative.md)
+- [Desktop](https://developer.playcanvas.com/user-manual/editor/publishing/desktop.md)
+- [Facebook Playable Ad](https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads/fb-playable-ads.md)
+- [Snapchat Playable Ad](https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads/snapchat-playable-ads.md)
+- [Apps - Download app](https://developer.playcanvas.com/user-manual/api/app-download.md)
+- [Apps - Get app](https://developer.playcanvas.com/user-manual/api/app-get.md)
+- [Apps - Get primary app](https://developer.playcanvas.com/user-manual/api/app-get-primary.md)
+- [Apps - Get project apps](https://developer.playcanvas.com/user-manual/api/app-get-project.md)
+- [Assets - Create asset](https://developer.playcanvas.com/user-manual/api/asset-create.md)
+- [Assets - Delete asset](https://developer.playcanvas.com/user-manual/api/asset-delete.md)
+- [Assets - Get Asset File](https://developer.playcanvas.com/user-manual/api/asset-file.md)
+- [Assets - Get Asset](https://developer.playcanvas.com/user-manual/api/asset-get.md)
+- [Assets - List assets](https://developer.playcanvas.com/user-manual/api/asset-list.md)
+- [Assets - Update asset](https://developer.playcanvas.com/user-manual/api/asset-update.md)
+- [Branches - Create branch](https://developer.playcanvas.com/user-manual/api/branch-create.md)
+- [Branches - List branches](https://developer.playcanvas.com/user-manual/api/branch-list.md)
+- [Checkpoints - Create checkpoint](https://developer.playcanvas.com/user-manual/api/checkpoint-create.md)
+- [Checkpoints - Get checkpoint](https://developer.playcanvas.com/user-manual/api/checkpoint-get.md)
+- [Checkpoints - List checkpoints](https://developer.playcanvas.com/user-manual/api/checkpoint-list.md)
+- [Jobs - Get job](https://developer.playcanvas.com/user-manual/api/job-get.md)
+- [Projects - Export project](https://developer.playcanvas.com/user-manual/api/project-export.md)
+- [Scenes - List scenes](https://developer.playcanvas.com/user-manual/api/scene-list.md)

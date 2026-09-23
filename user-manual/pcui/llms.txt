@@ -1,0 +1,44 @@
+# PCUI
+
+> PCUI (`@playcanvas/pcui`) is the UI component library the PlayCanvas Editor is built with, for building browser-based tools, with React wrappers. PCUI Graph (`@playcanvas/pcui-graph`) adds node-graph editors, and Observer (`@playcanvas/observer`) the observable state that PCUI components bind to.
+
+Use this index to build tool interfaces, such as editors, inspectors and node graphs, in the browser. It is not for user interfaces inside a 3D scene: those are covered by User Interface in the [Engine](https://developer.playcanvas.com/user-manual/engine/llms.txt) index.
+
+## Rules
+
+- **Install** `@playcanvas/pcui` (with `@playcanvas/observer` for data binding, and `@playcanvas/pcui-graph` for node graphs), and import the styles once: `import '@playcanvas/pcui/styles';`.
+- **Import components from `@playcanvas/pcui`**, or their React wrappers from `@playcanvas/pcui/react`.
+- **Bind components to state instead of setting their values by hand**: hold the state in an `Observer`, then link each component to a path of it, as in `textInput.link(observer, 'text')`, or `<TextInput binding={new BindingTwoWay()} link={{ observer, path: 'text' }} />` in React. `BindingTwoWay` keeps a component and the state in sync in both directions.
+- **Undo and redo** come from Observer's `History`.
+
+## PCUI
+
+- [PCUI](https://developer.playcanvas.com/user-manual/pcui.md): What PCUI is and how to adopt it in your own projects.
+- [Getting Started](https://developer.playcanvas.com/user-manual/pcui/getting-started.md): Installing PCUI, importing components and styles, and a minimal project.
+- [React](https://developer.playcanvas.com/user-manual/pcui/react.md): Using the React wrappers from `@playcanvas/pcui/react`.
+- [Data Binding](https://developer.playcanvas.com/user-manual/pcui/data-binding.md): Keeping components in sync with shared observer state.
+- [Using Observers](https://developer.playcanvas.com/user-manual/pcui/data-binding/using-observers.md): Binding elements to observer state, and how updates propagate.
+- [Two Way Binding](https://developer.playcanvas.com/user-manual/pcui/data-binding/two-way-binding.md): Inputs and labels that stay in sync both ways, with a React example.
+- [Examples](https://developer.playcanvas.com/user-manual/pcui/examples.md): Live examples, with links to their source.
+- [History](https://developer.playcanvas.com/user-manual/pcui/examples/history.md): Undo and redo of observer-backed state.
+- [Todo List](https://developer.playcanvas.com/user-manual/pcui/examples/todo-list.md): A complete React example: adding, completing and filtering items.
+
+## PCUI Graph
+
+- [PCUI Graph](https://developer.playcanvas.com/user-manual/pcui/pcui-graph.md): Node-based graph editors in the browser, and how they relate to PCUI.
+- [Getting Started](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/getting-started.md): Installing `@playcanvas/pcui-graph` and embedding a graph.
+- [Schema](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/schema.md): Defining node and edge types, and the rules for connecting them.
+- [Events](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/events.md): Node and edge events, for handling edits made in the graph.
+- [Context Menus](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/context-menus.md): Menus for the canvas, nodes and edges, and the actions they run.
+- [Styling](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/styling.md): Changing the look of the graph with `defaultStyles`.
+
+## API reference
+
+- [PCUI API](https://api.playcanvas.com/pcui/): Every PCUI component.
+- [PCUI Graph API](https://api.playcanvas.com/pcui-graph/): The graph component.
+- [Observer API](https://api.playcanvas.com/observer/): `Observer`, `ObserverList` and `History`.
+- [PCUI on GitHub](https://github.com/playcanvas/pcui): The source, with a Storybook of its components.
+
+## Optional
+
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/pcui/llms-full.txt): 15 pages (27 KB), for downloading and searching rather than reading into context.

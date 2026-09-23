@@ -1,0 +1,164 @@
+# HDR Rendering
+
+High Dynamic Range (HDR) rendering significantly enhances visual realism in computer graphics by capturing and displaying a broader spectrum of light and color. This technique ensures that both the brightest highlights and the deepest shadows retain their details, offering a more lifelike representation of scenes. One notable advantage of HDR rendering is its ability to produce physically based bloom effects, where intense light sources naturally bleed into surrounding areas, mimicking real-world camera and eye behavior. Additionally, HDR rendering facilitates more accurate reflections and refractions, as it allows for light values that exceed the standard displayable range, resulting in visuals that are both striking and true to life.
+
+[Image: HDR]
+
+## Camera Settings
+
+The camera provides two key settings for handling HDR rendering:
+
+- **gammaCorrection**
+- **toneMapping**
+
+These settings can be configured based on the rendering mode.
+
+### LDR (Low Dynamic Range)
+
+- **toneMapping**: For LDR rendering, you can select any tone mapping method to achieve the desired visual style. The tone mapping compresses HDR values into displayable LDR values.
+- **gammaCorrection**: Set to `GAMMA_SRGB` to indicate that the output should be stored in gamma space, as it represents colors.
+  - If the output pixel format is sRGB, gamma correction is handled by the hardware.
+  - Otherwise, gamma encoding is applied in shader code.
+
+### HDR (High Dynamic Range)
+
+For HDR rendering with post-processing effects like bloom, use the `CameraFrame` class (see below) which handles the HDR pipeline automatically.
+
+:::warning
+While `gammaCorrection` can be set to `GAMMA_NONE` directly on the camera, this will cause the entire scene to appear too dark on standard displays, as linear values are written directly without gamma encoding. Only use this for advanced custom pipelines where the output is rendered to an intermediate HDR texture that will be tonemapped and gamma-corrected in a subsequent pass.
+:::
+
+For manual HDR setup without `CameraFrame`:
+
+- **toneMapping**: Set to `TONEMAP_LINEAR` to maintain HDR colors.
+- **gammaCorrection**: Set to `GAMMA_NONE` only if rendering to an intermediate HDR render target.
+- Ensure a compatible HDR pixel format is used. This format can be obtained using the `GraphicsDevice.getRenderableHdrFormat()` API.
+- Apply tonemapping and gamma correction in a subsequent pass before displaying.
+
+### HDR Display Output
+
+When rendering in HDR mode, an HDR display output can be enabled by configuring the `Application` with the `displayFormat` parameter set to `DISPLAYFORMAT_HDR`.
+
+- **toneMapping**: If HDR output is supported, set to `TONEMAP_NONE`.
+- **gammaCorrection**: Keep set to `GAMMA_SRGB` to ensure low-intensity values remain visually similar to LDR rendering.
+- After the device has been created, check if HDR display output is supported using `GraphicsDevice.isHdr()`. Note that for `isHdr()` to return `true`, the browser must be running on a display that supports HDR output.
+
+**Note:** Currently, HDR display output is only supported by WebGPU. On other platforms, `GraphicsDevice.isHdr()` will always return `false`.
+
+## PlayCanvas Engine - CameraFrame Class
+
+The PlayCanvas Engine offers a comprehensive rendering setup through the `CameraFrame` class, which integrates advanced effects such as High Dynamic Range (HDR) rendering, bloom, Screen Space Ambient Occlusion (SSAO), and more. This setup enhances visual fidelity by simulating realistic lighting and post-processing effects.
+
+### Key Features of CameraFrame
+
+- **Bloom**: Simulates the scattering of light to create a glow around bright areas.
+- **SSAO**: Enhances depth perception by simulating ambient light occlusion in crevices and corners.
+- **Depth of Field (DoF)**: Mimics camera focus effects, blurring objects outside the focal plane.
+- **Temporal Anti-Aliasing (TAA)**: Reduces visual artifacts by smoothing jagged edges over time.
+- **Vignette**: Darkens the image's corners to draw attention to the center.
+- **Color Grading**: Adjusts the color balance for stylistic effects.
+- **Color Enhance**: Selectively adjusts shadows, highlights, midtones, vibrance, and dehaze.
+- **[Volumetric Fog](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/volumetric-fog.md)**: Renders height fog and light shafts from directional, omni, and spot lights.
+
+See [Modern Post Processing](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md) for the full feature list, configuration tips, and examples.
+
+### Configuring CameraFrame on a Camera
+
+```javascript
+const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
+cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+cameraFrame.rendering.samples = 4;
+cameraFrame.bloom.intensity = 0.01;
+cameraFrame.update();
+```
+
+On the engine `CameraFrame`, a positive `bloom.intensity` enables bloom; set it to 0 to disable it. There is no `bloom.enabled` flag on this API. The Editor script wrapper has a separate **Bloom > Enabled** setting.
+
+For HDR bloom to be effective, the scene should include bright light sources. This is typically achieved using emissive materials with high intensity. For example:
+
+```javascript
+material.emissive = pc.Color.YELLOW;
+material.emissiveIntensity = 50;
+```
+
+For more detailed information, refer to the CameraFrame [API documentation](https://api.playcanvas.com/engine/classes/CameraFrame.html).
+
+### Color LUT
+
+`CameraFrame` supports color grading via a 3D Color Lookup Table (LUT). The LUT must be a **256×16** 2D "horizontal strip" texture representing an unwrapped 16×16×16 3D LUT in Unreal Engine layout: 16 horizontal slices along the blue axis, each slice mapping red to the X-axis and green to the Y-axis. HALD LUTs and Unity-style LUTs use different layouts and are not compatible.
+
+Start from the neutral identity LUT below — applying it to a scene produces no change — and modify it in an image editor to create your own grade:
+
+[Image: Neutral identity LUT (256x16)]
+
+An example of an aggressive modification — strong red push, with green and blue heavily reduced:
+
+[Image: Cherry LUT example (256x16)]
+
+The LUT texture must be loaded with the following settings — LUTs are authored in sRGB display space and the engine relies on hardware sRGB sampling, so a misconfigured texture produces visibly wrong colors:
+
+- `srgb: true` — the LUT is sRGB-encoded
+- `mipmaps: false` — sampled at LOD 0 only
+- `minfilter: 'linear'`, `magfilter: 'linear'` — bilinear filtering between LUT entries prevents banding
+
+```javascript
+const lutAsset = new pc.Asset(
+    'colorLut',
+    'texture',
+    { url: 'path/to/lut.png' },
+    {
+        srgb: true,
+        mipmaps: false,
+        minfilter: 'linear'
+    }
+);
+app.assets.add(lutAsset);
+lutAsset.ready(() => {
+    cameraFrame.colorLUT.texture = lutAsset.resource;
+    cameraFrame.colorLUT.intensity = 1.0;
+    cameraFrame.update();
+});
+app.assets.load(lutAsset);
+```
+
+If any of the texture settings above are wrong, the engine emits a debug-build warning naming the specific properties to change (this check is stripped from release builds).
+
+LUTs can be authored by taking a screenshot of the scene, applying color adjustments in an image editor such as Photoshop, dragging those adjustments onto the neutral identity LUT, and exporting the result as a PNG. In the PlayCanvas Editor, set the texture asset's **sRGB** flag on, **Mipmaps** off, and **Filter** to **Linear**.
+
+#### Crossfading between two LUTs
+
+For transitions between two graded looks (day → night, location A → location B, etc.) the LUT slot supports an optional second texture and a blend factor. Both LUTs are sampled at the same time and the two graded results are crossfaded in linear space:
+
+```javascript
+cameraFrame.colorLUT.texture  = lutDayAsset.resource;
+cameraFrame.colorLUT.texture2 = lutNightAsset.resource;
+cameraFrame.colorLUT.intensity  = 1; // strength of LUT 1 against the original
+cameraFrame.colorLUT.intensity2 = 1; // strength of LUT 2 against the original
+cameraFrame.colorLUT.blend = 0;      // 0 = only LUT 1, 1 = only LUT 2, animate this for a fade
+cameraFrame.update();
+```
+
+The second texture must satisfy the same size and filtering requirements as the first. When `texture2` is `null`, the single-LUT path is used and the `intensity2` / `blend` values are ignored.
+
+## CameraFrame in the Editor
+
+The [`camera-frame.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs) script exposes the engine's `CameraFrame` settings in the Editor's Inspector. Its class is named `CameraFrame` and it is registered as `cameraFrame`.
+
+### Instructions on Use
+
+1. Add `camera-frame.mjs` to your project and parse it.
+2. Add the `cameraFrame` script to an entity that has a Camera component.
+3. Use the Inspector to configure the rendering settings for the camera, such as tone mapping, bloom, SSAO, and other effects.
+
+This integration streamlines the process of setting up complex camera effects and enhances the overall workflow within the PlayCanvas Editor.
+
+[Image: CameraFrame Script]
+
+## CameraFrame Tips
+
+- HDR bloom requires at least one renderable float format (e.g., RG11B10, RGBA16F, or RGBA32F). If none of these formats are supported by the device, HDR bloom is automatically disabled.
+- The `toneMapping` property of `StandardMaterial` is ignored. Tonemapping is applied as a full-screen post-processing pass, so per-mesh tonemapping control is not possible.
+- When using `CameraFrame`, two properties control tonemapping:
+  - `CameraFrame.rendering.toneMapping` – Controls tonemapping for the 3D scene rendered within the `CameraFrame`.
+  - `CameraComponent.toneMapping` – Controls tonemapping applied after the 3D scene including post-processing is rendered. This typically affects UI elements rendered on top.
+- When using `CameraFrame`, you may notice differences in the intensity of alpha-blended geometry. This occurs because blending takes place in linear HDR space, which is more physically accurate than blending in gamma space. As a result, you may need to adjust material properties related to alpha blending.

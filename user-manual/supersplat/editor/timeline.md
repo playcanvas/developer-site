@@ -1,0 +1,190 @@
+# Timeline
+
+The Timeline panel allows you to create camera animations for your Gaussian Splat scenes. You can set keyframes to define camera positions and movements, creating smooth animated transitions that can be played back in the editor.
+
+[Image: Timeline Panel]
+
+## Timeline Controls
+
+The Timeline panel includes the following controls:
+
+- **Play/Pause button** - Play or pause the animation playback
+- **Previous/Next Frame buttons** - Step one frame backward or forward. Hold **Shift** while clicking to jump to the previous or next keyframe instead
+- **Add Key button (`+`)** - Create a new keyframe at the current timeline position
+- **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
+- **Timeline slider** - Scrub through the animation by dragging the playhead (which displays the current frame number)
+- **FPS setting** - Set the frames per second for the animation
+- **Timeline length** - Set the total duration of the animation in frames
+- **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
+- **Loop toggle** - Control whether the camera path loops. When enabled (the default), the animation wraps smoothly from the last keyframe back to the first; when disabled, the camera comes to rest on the last keyframe. See [Animation Looping](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md#animation-looping)
+
+### Keyboard Shortcuts
+
+The timeline can also be driven from the keyboard:
+
+| Key | Action |
+| --- | ------ |
+| **Space** | Play/pause the animation |
+| `,` / `.` | Step to the previous/next frame |
+| `<` / `>` | Jump to the previous/next keyframe |
+| **Enter** | Add a keyframe at the current frame |
+| **Shift + Enter** | Remove the keyframe at the current frame |
+| **Ctrl + T** (or **Cmd + T** on Mac) | Toggle the Timeline panel |
+
+## Creating Keyframes
+
+To create a camera animation keyframe:
+
+1. Position the timeline playhead at the desired frame (by clicking on the timeline or using the frame counter)
+2. Move and orient the viewport camera to the desired position
+3. Click the `+` (Add Keyframe) button on the Timeline (or press **Enter**)
+
+The keyframe will appear as a yellow diamond on the timeline at the current frame position. Keyframes store the camera's position and rotation at that moment in time.
+
+## Importing Camera Poses as Keyframes
+
+SuperSplat can import camera poses from [COLMAP](https://colmap.github.io/) reconstructions or INRIA camera pose JSON files to automatically create timeline keyframes. This allows you to recreate the approximate camera path used during the original capture of a Gaussian Splat scene.
+
+### COLMAP `images.txt`
+
+To import COLMAP poses:
+
+1. Obtain the [`images.txt`](https://colmap.github.io/format.html#images-txt) file from your COLMAP reconstruction output
+2. In SuperSplat, select **File > Import** (or drag and drop the `images.txt` file)
+3. SuperSplat will create keyframes from the camera poses in the file
+
+Each camera pose in the `images.txt` file will be placed as a keyframe on sequential frames of the timeline, in the order they appear in the file. This creates an animation that follows the original capture path.
+
+:::note
+
+The `images.txt` file contains camera poses expressed as quaternions and translation vectors in COLMAP's coordinate system. SuperSplat automatically converts these to the appropriate camera positions and orientations for the timeline.
+
+:::
+
+### INRIA Camera Pose JSON
+
+SuperSplat also accepts a `.json` file containing an array of INRIA camera entries. Each entry must contain `position` and `rotation`; it can also include `id` or `img_name` for ordering and `fx`, `fy`, `width`, and `height` for calculating the field of view.
+
+Import the file using **File > Import** or drag it onto the Editor. SuperSplat sorts entries by `id`, or by a trailing number in `img_name`, and creates a keyframe for each entry. Use a filename other than `meta.json`, which SuperSplat reserves for unbundled SOG scenes.
+
+## Editing Keyframes
+
+Once keyframes are created, you can modify them in the following ways:
+
+### Changing Keyframe Timing
+
+Click and drag the yellow diamond keyframes along the timeline to adjust when each camera position occurs in your animation.
+
+### Copying Keyframes
+
+Hold **Shift** and drag a keyframe to copy it instead of moving it. A clone of the keyframe follows the pointer while you drag, and a copy is created at the frame where you release, leaving the original keyframe in place.
+
+### Updating Camera Position/Rotation
+
+To change the camera position or rotation stored in an existing keyframe:
+
+1. Move the playhead to the frame containing the keyframe you want to update
+2. Adjust the viewport camera to the new desired position and rotation
+3. Click the `+` (Add Key) button - this will overwrite the existing keyframe with the updated camera values
+
+Alternatively, hold **Ctrl** and click a keyframe diamond to overwrite it with the current view directly - no need to move the playhead first.
+
+## Deleting Keyframes
+
+To delete a keyframe:
+
+1. Move the playhead to the frame containing the keyframe you want to delete
+2. Click the `-` (Remove Key) button (or press **Shift + Enter**)
+
+:::note
+
+All keyframe operations - adding, moving, copying, and removing - can be undone with **Ctrl + Z** (or **Cmd + Z** on Mac) and redone with **Ctrl + Shift + Z** (or **Cmd + Shift + Z** on Mac).
+
+:::
+
+## Visualizing Keyframe Cameras
+
+To see where your keyframes place the camera in 3D space, enable the **Camera Poses** toggle in the **Overlays** popup (the eye icon in the [Right Toolbar](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#right-toolbar)). A wireframe camera gizmo is drawn in the viewport at each keyframe's stored position and orientation, making it easy to review your camera path at a glance. The state of the toggle is saved with your project.
+
+## Configuring Timeline Settings
+
+### Frames Per Second (FPS)
+
+The FPS setting controls the playback speed of your animation. Available FPS values are:
+
+- **1 FPS** - Very slow, single frame per second
+- **6 FPS** - Low frame rate
+- **12 FPS** - Medium frame rate
+- **24 FPS** - Standard film frame rate
+- **30 FPS** - Common video frame rate
+- **60 FPS** - Smooth, high frame rate playback
+
+### Timeline Length
+
+You can set the total duration of your animation by adjusting the timeline length setting. This defines how many frames your animation spans and determines when the animation loops back to the beginning.
+
+If you shorten the timeline so that existing keyframes fall past its end, SuperSplat preserves those keyframes but excludes them from playback and interpolation. Their dimmed, error-colored markers are pinned just beyond the right edge of the timeline, and a tooltip identifies each keyframe's original frame number.
+
+To bring an out-of-range keyframe back into the animation, drag its pinned marker onto the timeline or increase **Total Frames** until the keyframe is in range again. Shortening the timeline also clamps the playhead to the new end, and previous/next keyframe navigation skips any out-of-range keys. To delete one of these keyframes, first drag it into range or temporarily increase **Total Frames**.
+
+### Smoothness
+
+The Smoothness setting controls how the camera interpolates between keyframes. This value ranges from 0 to 1:
+
+- **0** - Linear interpolation, creating direct straight-line motion between keyframes
+- **1** - Maximum smooth interpolation, creating more curved, cinematic camera movements
+- **Values in between** - Blend between linear and smooth interpolation
+
+Adjusting smoothness allows you to control the feel of your camera animation, from mechanical and precise to flowing and organic.
+
+## Playing Animations
+
+Use the play button (or press **Space**) to preview your animation. The camera will interpolate between keyframes based on your smoothness setting, creating fluid motion. With the Loop toggle enabled (the default), the animation loops continuously, wrapping from the last keyframe back to the first.
+
+### Animation Looping
+
+The Loop toggle on the Timeline (next to the smoothness setting) controls what happens after the camera passes the final keyframe:
+
+- **Loop enabled (default)** - The camera path forms a closed loop: after the last keyframe, the camera smoothly interpolates back to the first keyframe over the remaining frames of the timeline
+- **Loop disabled** - The camera path stays open: the camera comes to rest on the last keyframe and holds that pose
+
+The state of the Loop toggle is saved with your project, and the camera path drawn by the **Camera Poses** overlay updates to show a closed or open curve accordingly.
+
+When looping is enabled, it's important to avoid setting a keyframe on both the first and last frames of the timeline, as this will cause a sudden snap when the animation loops.
+
+:::tip[Best Practice for Smooth Loops]
+
+Instead of placing keyframes on both the first and last frames, place your final keyframe before the last frame and let the animation interpolate smoothly back to the beginning.
+
+For example, with a 100-frame timeline:
+
+- **Good:** Set keyframes at frames 0, 10, 20, 30, 40, 50, 60, 70, 80, 90
+  - The animation smoothly interpolates from frame 90 back to frame 0
+- **Avoid:** Setting keyframes at frames 0, 10, 20, ... 90, 100
+  - This causes a snap/jerk when looping from frame 100 back to frame 0
+
+This technique allows the camera to smoothly transition from your last keyframe back to the starting position, creating a seamless loop.
+
+:::
+
+## Publishing and Playback on the Scene Page
+
+The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) the splat with the publish dialog's **Animation** toggle enabled. This bakes the keyframed camera path into the published scene and sets it to play on load. The dialog's **Loop Mode** option is initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** if not - and controls whether the published animation plays once or loops in the viewer.
+
+On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
+
+:::note
+
+Camera animation tracks are authored here in the Editor Timeline — **not** in [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), which only curates cameras, annotations, post effects, skybox, and collision. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md).
+
+:::
+
+## Saving Timeline Animations
+
+:::important
+
+Timeline animations are only preserved when you save your project as an `.ssproj` file. The timeline configuration is not saved when exporting to PLY or other splat formats.
+
+See [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects.md) for more information on saving and loading SuperSplat project files.
+
+:::

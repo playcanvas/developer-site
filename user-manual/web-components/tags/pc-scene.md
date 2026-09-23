@@ -1,0 +1,74 @@
+# <pc-scene>
+
+The `<pc-scene>` tag is used to define the scene.
+
+:::note[Usage]
+
+* It must be a direct child of [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md).
+
+:::
+
+## Attributes
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `exposure` | Number | `"1"` | Overall brightness multiplier applied to the rendered image. Ignored while the scene uses physical light units |
+| `fog` | Enum | `"none"` | Fog type: `"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
+| `fog-color` | Color | `"1 1 1"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
+| `fog-density` | Number | `"0"` | Fog density for exponential fog types |
+| `fog-end` | Number | `"1000"` | End distance for linear fog |
+| `fog-start` | Number | `"0"` | Start distance for linear fog |
+| `gsplat-lod-mode` | Enum | `"error"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md#level-of-detail) |
+| `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less warns and keeps the default |
+| `gsplat-use-fog` | Boolean | `"true"` | Whether the scene's fog applies to Gaussian splats |
+| `gsplat-use-tonemap` | Boolean | `"true"` | Whether the camera's tone mapping and the scene's `exposure` apply to Gaussian splats. Set `"false"` to render splats with their stored colors, which suits captures that are already display-ready. Fog still applies |
+| `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
+| `lighting-max-lights` | Number | `"255"` | Maximum number of lights clustered lighting uses in a frame, from 1 to 65535. Lights over the limit are ignored with a warning, and values above 255 double the memory of the light grid |
+| `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running. Applied on top of the application's own time scale |
+
+## Example
+
+Boxes fading into linear fog. Try a different `fog-color` (match the camera's `clear-color` for the classic depth-haze look), or switch `fog` to `"exp"` with a `fog-density` of `0.15`:
+
+```html live-example
+<pc-app>
+    <pc-scene fog="linear" fog-color="#4a5568" fog-start="2" fog-end="10">
+        <pc-entity name="camera" position="0 1.5 4" rotation="-10 0 0">
+            <pc-camera clear-color="#4a5568"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="box-1" position="-1 0.5 0">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-2" position="0 0.5 -3">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-3" position="1 0.5 -6">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="box-4" position="2 0.5 -9">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" position="0 -0.5 -4" scale="10 1 20">
+            <pc-render type="box"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+## JavaScript Interface
+
+You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html).
+
+The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — `null` until the element is ready — where fog, exposure and the sky are configured.
+
+## See Also
+
+* [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) — the application that holds the scene
+* [`<pc-sky>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md) — the scene's skybox and image-based lighting
+* [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md) — tone mapping, applied after the scene's exposure
+* [`<pc-rigid-body>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body.md) — the bodies gravity acts on
+
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html).
