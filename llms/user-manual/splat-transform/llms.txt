@@ -37,7 +37,7 @@ Use this index to process splat files from a command line, a script or a pipelin
 
 ## API reference
 
-- [SplatTransform API](https://api.playcanvas.com/splat-transform/): The library's API.
+- [SplatTransform API](https://api.playcanvas.com/splat-transform/llms.txt): The library's API.
 - [SplatTransform on GitHub](https://github.com/playcanvas/splat-transform): The source.
 
 ## Optional
