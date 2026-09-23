@@ -21,6 +21,7 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `material` | [Material ID](../attributes.md#asset-and-material-ids) | - | `id` of a [`<pc-material>`](../pc-material) to render the primitive with. If omitted, a default material is used |
 | `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
+| `shadow-cascade-mask` | String | `"0 1 2 3"` | Which [shadow cascades](../pc-light#shadow-cascades) of directional lights the component casts into, as space-separated cascade indices from 0 (nearest the camera) to 3: `"0 1"` casts into the two nearest cascades only, and an empty value casts into none. Needs `cast-shadows` |
 | `type` | Enum | `"box"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
 </div>

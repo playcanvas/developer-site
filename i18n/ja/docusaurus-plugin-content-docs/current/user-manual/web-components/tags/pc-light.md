@@ -39,6 +39,7 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 | `shadow-type` | Enum | `"pcf3-32f"` | 影のフィルタリング: `"pcf1-16f"` \| `"pcf1-32f"` \| `"pcf3-16f"` \| `"pcf3-32f"` \| `"pcf5-16f"` \| `"pcf5-32f"` \| `"vsm-16f"` \| `"vsm-32f"` \| `"pcss-32f"` |
 | `shape` | Enum | `"punctual"` | 光源の形状: `"punctual"` \| `"rect"` \| `"disk"` \| `"sphere"`。エリア形状は`omni`と`spot`ライトに適用され、サイズはエンティティのスケールで決まり、[`<pc-app>`](../pc-app)の`area-light-luts`で読み込むルックアップテーブルが必要です。[エリアライト](#area-lights)を参照 |
 | `type` | Enum | `"directional"` | ライトのタイプ: `"directional"` \| `"omni"` \| `"spot"` |
+| `volumetric-scattering` | Number | `"1"` | ライトが[ボリュメトリックフォグ](../../graphics/posteffects/cameraframe/volumetric-fog.md#omni-and-spot-lights)の中でどれだけ強く散乱するかを、その寄与への乗数として指定します。`"0"`にするとライトはフォグに含まれません。`omni`と`spot`ライトにのみ、カメラのボリュメトリックフォグでローカルライトが有効になっている間に適用されます |
 | `vsm-bias` | Number | `"0.0025"` | バリアンスシャドウマップのバイアス |
 | `vsm-blur-size` | Number | `"11"` | バリアンスシャドウマップのぼかしサイズ（1〜25） |
 
