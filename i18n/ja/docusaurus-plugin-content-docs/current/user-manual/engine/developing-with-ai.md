@@ -59,6 +59,7 @@ npx skills add playcanvas/skills
 - [Engine サンプル](https://playcanvas.github.io/)
 - [Engine ソースコード](https://github.com/playcanvas/engine)
 - [AI 向けドキュメントの索引](https://developer.playcanvas.com/llms.txt)
+- [AI 向け Engine API の索引](https://api.playcanvas.com/engine/llms.txt)
 - [AI 向けドキュメントの全文](https://developer.playcanvas.com/llms-full.txt)
 
 ## コードを書く前に Engine の機能を再利用する
