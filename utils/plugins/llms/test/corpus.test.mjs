@@ -50,6 +50,8 @@ function endsInCodeBlock(markdown) {
 }
 
 describe('every doc', () => {
+    // Converted without the typedoc option, so `tsx asTypedoc` blocks stay code blocks and
+    // every code block must survive. Their conversion to tables is tested on the generated files.
     it('converts without losing a line of code', () => {
         const failures = [];
         for (const filePath of docFiles()) {
@@ -119,6 +121,18 @@ describe('the generated files', () => {
 
     it('documents React component props', () => {
         assert.match(section('/user-manual/react/api/entity/'), /^\| `position\?` \| `\[number, number, number\]` \|/m);
+    });
+
+    it('turns every asTypedoc block into property tables', () => {
+        const blocks = docFiles().flatMap((file) => {
+            const { frontMatter, tree } = parseDoc(fs.readFileSync(file, 'utf-8'));
+            return frontMatter.unlisted || frontMatter.draft ? [] : codeNodes(tree);
+        }).filter(code => /^tsx?$/.test(code.lang ?? '') && code.meta?.includes('asTypedoc'));
+        const tables = llmsFullTxt.match(/^\| Name \| Type \| Default \| Description \|$/gm) ?? [];
+
+        assert.ok(blocks.length > 0);
+        assert.ok(tables.length >= blocks.length, `${tables.length} tables for ${blocks.length} asTypedoc blocks`);
+        assert.ok(!llmsFullTxt.includes('asTypedoc'), 'an asTypedoc block was left as code');
     });
 
     it('links docs at the URLs they are published at', () => {

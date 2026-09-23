@@ -58,6 +58,11 @@ describe('code blocks', () => {
         const code = lines('```html', '<!-- an HTML comment -->', '', '', '', '<pc-app></pc-app>', '```');
         assert.equal(convert(code).markdown, code);
     });
+
+    it('keeps custom heading id syntax', () => {
+        const code = lines('```md', '## Setting Up {#setting-up}', '```');
+        assert.equal(convert(code).markdown, code);
+    });
 });
 
 describe('MDX syntax', () => {
@@ -302,6 +307,19 @@ describe('links', () => {
             '[Reference][ref]',
             '',
             '[ref]: https://developer.playcanvas.com/user-manual/section/sibling/'
+        ));
+    });
+
+    it('labels images inside links without nesting brackets', () => {
+        const { markdown } = convert(lines(
+            '[![Lightmapping](/img/scene.jpg)](https://playcanv.as/p/abc/)',
+            '',
+            '[![](/img/scene.jpg)](../other/page.md)'
+        ));
+        assert.equal(markdown, lines(
+            '[Image: Lightmapping](https://playcanv.as/p/abc/)',
+            '',
+            '[Image](https://developer.playcanvas.com/user-manual/other/page/)'
         ));
     });
 });

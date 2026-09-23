@@ -2,7 +2,6 @@
 import fs from 'fs';
 import path from 'path';
 
-import { escapeMarkdownHeadingIds } from '@docusaurus/utils';
 import remarkComment from '@slorber/remark-comment';
 import { load as loadYaml } from 'js-yaml';
 import remarkDirective from 'remark-directive';
@@ -17,8 +16,9 @@ import { unified } from 'unified';
  * The source is parsed with the syntax extensions the Docusaurus MDX loader
  * uses, then copied verbatim except for the nodes that only mean something on
  * the website: MDX imports, comments and JSX components are rewritten or
- * dropped, and site-relative URLs are made absolute. Code blocks are never
- * modified.
+ * dropped, and site-relative URLs are made absolute. Code blocks are copied
+ * exactly as written, except `tsx asTypedoc` blocks, which become the property
+ * tables the site generates from them.
  */
 
 // The syntax extensions of the Docusaurus MDX loader, in the same order
@@ -31,8 +31,15 @@ const processor = unified()
 
 const FRONT_MATTER_RE = /^---\n([\s\S]*?)\n---(?:\n|$)/;
 
-// An escaped custom heading id at the end of a heading: ## Title \{#my-id}
-const HEADING_ID_RE = /\s*\\\{#[^}]*\}\s*$/;
+// The lines Docusaurus treats as headings when it escapes custom heading ids
+// (see escapeMarkdownHeadingIds in @docusaurus/utils)
+const HEADING_LINE_RE = /(?:^|\n)#{1,6}(?!#).*/g;
+
+// Stands in for the brace of a custom heading id while parsing
+const HEADING_ID_MASK = '';
+
+// A custom heading id at the end of a heading: ## Title {#my-id}
+const HEADING_ID_RE = /\s*\\?\{#[^}]*\}\s*$/;
 
 // Marks a removed inline element whose following space should go too
 const SWALLOW_SPACE = '\u0000';
@@ -88,10 +95,24 @@ export function parseDoc(source, filePath) {
     const normalized = source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
     const match = normalized.match(FRONT_MATTER_RE);
     const frontMatter = match ? parseFrontMatter(match[1], filePath) : {};
+    const text = match ? normalized.slice(match[0].length) : normalized;
 
-    // Custom heading ids ({#my-id}) are not valid MDX, so Docusaurus escapes them first
-    const text = escapeMarkdownHeadingIds(match ? normalized.slice(match[0].length) : normalized);
-    return { frontMatter, text, tree: processor.parse(text) };
+    // Custom heading ids ({#my-id}) are not valid MDX. Docusaurus escapes them with a
+    // backslash, on every line that starts like a heading, code included. Masking the
+    // brace instead keeps positions aligned with the source, so code is copied as written.
+    const tree = processor.parse(text.replace(HEADING_LINE_RE, line => line.replace('{#', `${HEADING_ID_MASK}#`)));
+    unmask(tree);
+    return { frontMatter, text, tree };
+}
+
+/**
+ * Restore the braces of heading ids in the values of a syntax tree
+ */
+function unmask(node) {
+    if (typeof node.value === 'string') {
+        node.value = node.value.replaceAll(HEADING_ID_MASK, '{');
+    }
+    node.children?.forEach(unmask);
 }
 
 /**
@@ -103,7 +124,7 @@ export function parseDoc(source, filePath) {
  */
 export function convertDoc(source, options) {
     const { frontMatter, text, tree } = parseDoc(source, options.filePath);
-    const ctx = { ...options, text, problems: [], rawImports: collectRawImports(tree, options) };
+    const ctx = { ...options, text, problems: [], rawImports: collectRawImports(tree, options), linkDepth: 0 };
     const rendered = renderSpan(0, text.length, tree.children, ctx).replace(SWALLOW_SPACE_RE, '');
 
     return {
@@ -170,10 +191,17 @@ function renderNode(node, ctx) {
         case 'heading':
             return renderSource(node, ctx).replace(HEADING_ID_RE, '');
         case 'image':
+            // Inside a link, a label in brackets would nest inside the link text
+            if (ctx.linkDepth > 0) return node.alt ? `Image: ${node.alt}` : 'Image';
             return node.alt ? `[Image: ${node.alt}]` : '';
         case 'link':
-        case 'definition':
-            return renderLink(node, ctx);
+        case 'linkReference':
+        case 'definition': {
+            ctx.linkDepth++;
+            const rendered = renderLink(node, ctx);
+            ctx.linkDepth--;
+            return rendered;
+        }
         case 'mdxJsxFlowElement':
         case 'mdxJsxTextElement':
             return renderJsx(node, ctx);
@@ -504,7 +532,7 @@ function collapseBlankLines(markdown) {
  */
 function findTitle(tree) {
     const heading = findNode(tree, node => node.type === 'heading' && node.depth === 1);
-    return heading ? plainText(heading).replace(/\s*\{#[^}]*\}$/, '') || null : null;
+    return heading ? plainText(heading).replace(HEADING_ID_RE, '') || null : null;
 }
 
 /**
