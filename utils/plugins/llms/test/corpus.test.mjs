@@ -3,12 +3,13 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { before, describe, it } from 'node:test';
+import { after, before, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import pluginLlms from '../../docusaurus-plugin-llms.mjs';
-import { docIdFromFile, docPathFromId } from '../docs.mjs';
-import { convertDoc, parseDoc } from '../markdown.mjs';
+import { docIdFromFile, docPathFromId, markdownPathFromDocPath } from '../docs.mjs';
+import { INDEX_BUDGET, ROOT_INDEX_BUDGET, loadIndexes } from '../indexes.mjs';
+import { convertDoc, parseDoc, readFrontMatter } from '../markdown.mjs';
 
 /**
  * Tests over the real docs, so that a doc using Markdown or MDX the converter
@@ -83,14 +84,35 @@ describe('every doc', () => {
 });
 
 describe('the generated files', () => {
-    let llmsTxt;
+    let outDir;
     let llmsFullTxt;
 
+    // A generated file, by the URL path it is published at
+    const outPath = urlPath => path.join(outDir, ...urlPath.split('/'));
+    const read = urlPath => fs.readFileSync(outPath(urlPath), 'utf-8');
+
+    // Every published index, with its text as generated
+    const indexes = () => loadIndexes(siteDir, path.join(siteDir, 'llms')).map(index => ({ ...index, text: read(index.publishedPath) }));
+
+    // Every published doc
+    const publishedDocs = () => docFiles().filter((file) => {
+        const frontMatter = readFrontMatter(fs.readFileSync(file, 'utf-8'));
+        return !frontMatter.unlisted && !frontMatter.draft;
+    }).map(file => docPathFromId(docIdFromFile(docsDir, file)));
+
     before(async () => {
-        const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'llms-test-'));
+        // failOnError makes any problem the plugin finds, such as a broken index link, fail here
+        outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'llms-test-'));
+
+        // A built page, for the plugin to link to its Markdown version
+        fs.mkdirSync(outPath('/user-manual/engine/standalone/'), { recursive: true });
+        fs.writeFileSync(outPath('/user-manual/engine/standalone/index.html'), '<!doctype html><html><head><title>Standalone</title></head><body></body></html>');
+
         await pluginLlms({ siteDir, siteConfig: { url: siteUrl } }, { failOnError: true }).postBuild({ outDir });
-        llmsTxt = fs.readFileSync(path.join(outDir, 'llms.txt'), 'utf-8');
-        llmsFullTxt = fs.readFileSync(path.join(outDir, 'llms-full.txt'), 'utf-8');
+        llmsFullTxt = read('/llms-full.txt');
+    });
+
+    after(() => {
         fs.rmSync(outDir, { recursive: true, force: true });
     });
 
@@ -136,8 +158,63 @@ describe('the generated files', () => {
     });
 
     it('links docs at the URLs they are published at', () => {
-        assert.ok(llmsTxt.includes(`(${siteUrl}/user-manual/2D/slicing/)`));
-        assert.ok(!llmsTxt.includes('/user-manual/2D/9-slicing/'));
+        const engineIndex = read('/user-manual/engine/llms.txt');
+        assert.ok(engineIndex.includes(`(${siteUrl}/user-manual/2D/slicing.md)`));
+        assert.ok(!engineIndex.includes('/user-manual/2D/9-slicing'));
+    });
+
+    it('writes a Markdown version of every published page', () => {
+        for (const docPath of publishedDocs()) {
+            assert.ok(fs.existsSync(outPath(markdownPathFromDocPath(docPath))), `no Markdown version of ${docPath}`);
+        }
+        const standalone = read('/user-manual/engine/standalone.md');
+        assert.ok(standalone.startsWith('# Using the Engine Standalone\n'));
+        assert.ok(standalone.includes(`(${siteUrl}/user-manual/getting-started/start-with-create-playcanvas.md)`));
+    });
+
+    it('links each built page to its Markdown version', () => {
+        const html = read('/user-manual/engine/standalone/index.html');
+        const tags = html.match(/<link rel="alternate" type="text\/markdown" href="[^"]*">/g);
+        assert.deepEqual(tags, ['<link rel="alternate" type="text/markdown" href="/user-manual/engine/standalone.md">']);
+        assert.ok(html.indexOf(tags[0]) < html.indexOf('</head>'));
+    });
+
+    it('gives the page and the Markdown version of every doc in the bundles', () => {
+        assert.ok(llmsFullTxt.includes(`URL: ${siteUrl}/user-manual/engine/standalone/\nMarkdown: ${siteUrl}/user-manual/engine/standalone.md\n`));
+        assert.ok(read('/user-manual/engine/llms-full.txt').includes(`Markdown: ${siteUrl}/user-manual/engine/standalone.md\n`));
+    });
+
+    it('publishes every index, with the file of all its pages', () => {
+        for (const index of indexes()) {
+            assert.ok(index.text.startsWith(`# ${index.title}\n`));
+            if (index.bundlePath) {
+                assert.ok(read(index.bundlePath).startsWith(`# ${index.title}: All Pages\n`));
+            }
+        }
+    });
+
+    it('links indexes only to files that are published', () => {
+        for (const { source, text } of indexes()) {
+            assert.ok(!/\]\(\//.test(text), `${source} has a site path left`);
+            assert.ok(!/\{\{\w+\}\}/.test(text), `${source} has a placeholder left`);
+            for (const [, urlPath] of text.matchAll(/\]\(https:\/\/developer\.playcanvas\.com(\/[^)#\s]*)/g)) {
+                assert.ok(fs.existsSync(outPath(urlPath)), `${source} links ${urlPath}, which is not published`);
+            }
+        }
+    });
+
+    it('lists every page of the User Manual in an index', () => {
+        const listed = new Set(indexes().flatMap(({ text }) => [...text.matchAll(/\]\(https:\/\/developer\.playcanvas\.com(\/[^)#\s]*)/g)].map(match => match[1])));
+        for (const docPath of publishedDocs()) {
+            assert.ok(listed.has(markdownPathFromDocPath(docPath)), `${docPath} is in no index`);
+        }
+    });
+
+    it('keeps every index within its budget', () => {
+        for (const { source, publishedPath, text } of indexes()) {
+            const budget = publishedPath === '/llms.txt' ? ROOT_INDEX_BUDGET : INDEX_BUDGET;
+            assert.ok(Buffer.byteLength(text) <= budget, `${source} is over its budget`);
+        }
     });
 
     it('orders the docs like the sidebar, with the optional sections last', () => {

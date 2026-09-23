@@ -310,6 +310,13 @@ describe('links', () => {
         ));
     });
 
+    it('maps the URLs links resolve to', () => {
+        const { markdown } = convert('[Page](../other/page.md#setup) and [External](https://example.com/)', {
+            linkUrl: url => url.replace('/user-manual/other/page/', '/user-manual/other/page.md')
+        });
+        assert.equal(markdown, '[Page](https://developer.playcanvas.com/user-manual/other/page.md#setup) and [External](https://example.com/)');
+    });
+
     it('labels images inside links without nesting brackets', () => {
         const { markdown } = convert(lines(
             '[![Lightmapping](/img/scene.jpg)](https://playcanv.as/p/abc/)',

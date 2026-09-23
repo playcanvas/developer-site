@@ -1,0 +1,141 @@
+---
+covers: [editor, api]
+---
+# PlayCanvas Editor
+
+> The PlayCanvas Editor is a browser-based, collaborative editor for building scenes, managing assets, writing scripts and publishing PlayCanvas apps. It is also reachable from code through the Editor API, the REST API, the MCP server and the VS Code extension.
+
+Use this index for projects made in the Editor, where code lives in scripts attached to entities. Scripts run on the engine, so the [Engine](/user-manual/engine/llms.txt) index covers the APIs they call.
+
+## Rules
+
+- **Check which engine the project runs.** A project uses Engine V1 or Engine V2 (see Engine Settings), and their APIs differ: the Engine index's rules for Engine 2 apply to V2 projects only.
+- **A project lives in the Editor.** Its scenes, entities and assets are stored there and shared with collaborators in real time. Edit its scripts locally with the VS Code extension; change scenes from code with the Editor API, or from an agent with the MCP server.
+- **Write new scripts as ESM scripts**, and never mix the ESM and classic formats in one file. An ESM script is a `.mjs` file exporting a class that extends `Script`, with a `static scriptName`, and attributes declared as class fields tagged `/** @attribute */`:
+
+    ```javascript
+    import { Script } from 'playcanvas';
+
+    export class Rotate extends Script {
+        static scriptName = 'rotate';
+
+        /** @attribute */
+        speed = 10;
+
+        update(dt) {
+            this.entity.rotate(0, this.speed * dt, 0);
+        }
+    }
+    ```
+
+- **Keep an existing classic script classic.** Classic scripts are legacy but still supported:
+
+    ```javascript
+    var Rotate = pc.createScript('rotate');
+
+    Rotate.attributes.add('speed', { type: 'number', default: 10 });
+
+    Rotate.prototype.update = function (dt) {
+        this.entity.rotate(0, this.speed * dt, 0);
+    };
+    ```
+
+- **ESM scripts do not support classic `attr:[name]` change events.** After changing a script's attributes, parse the script in the Editor so the Inspector shows them.
+- **ESM scripts load in no particular order**: declare dependencies with `import` statements, and use an import map for aliases or CDN packages. Classic scripts run in the project's script loading order.
+- **Reuse entities as templates**, the Editor's prefabs, rather than copying them.
+- **Test in the Launch page**, which runs the current scene and reloads with your changes.
+
+## Getting started
+
+- [PlayCanvas Editor](/user-manual/editor/): A tour of the Editor: live testing, collaboration, version control, visual editing, scripting, assets and publishing.
+- [The Editor Workflow](/user-manual/editor/getting-started/workflow/): From importing assets and building scenes to scripting and publishing.
+- [Your First App](/user-manual/editor/getting-started/your-first-app/): A first project step by step: a scene, materials, a script, movement and publishing.
+- [Common Questions](/user-manual/editor/faq/): Quick answers to everyday tasks, such as adding components, scripts, materials, lights and cameras.
+
+## Working from code
+
+- [MCP Server](/user-manual/editor/mcp-server/): Connecting an AI agent to an open Editor to modify a project and verify the result.
+- [VS Code Extension](/user-manual/editor/scripting/vscode-extension/): Editing a project's scripts and shaders locally in VS Code or Cursor, with sync modes.
+- [Editor API](/user-manual/editor/editor-api/): Automating and extending the Editor from the browser console or user scripts (beta).
+- [REST API](/user-manual/api/): HTTP endpoints for projects, assets, apps, jobs and checkpoints, authenticated with a bearer token (beta).
+
+## Scripting
+
+- [Scripting](/user-manual/editor/scripting/): Script assets, import maps, the code editor, the VS Code extension, hot reloading and load order.
+- [Managing Your Scripts](/user-manual/editor/scripting/managing-scripts/): Creating, organizing and importing script assets, and adding them to entities.
+- [ESM Scripts](/user-manual/scripting/esm-scripts/): The ESM script format.
+- [ESM Script Attributes](/user-manual/scripting/script-attributes/esm/): Declaring attributes that the Inspector can edit.
+- [Classic Script Attributes](/user-manual/scripting/script-attributes/classic/): Attributes of classic scripts.
+- [Migration Guide](/user-manual/scripting/migration-guide/): Converting classic scripts to ESM scripts.
+- [Import Maps](/user-manual/editor/scripting/import-maps/): Aliasing module specifiers and using CDN packages, with one active import map per project.
+- [Script Loading Order](/user-manual/editor/scripting/loading-order/): Imports for ESM scripts versus the preload order of classic scripts, and concatenation on publish.
+- [Hot Reloading](/user-manual/editor/scripting/hot-reloading/): Reloading scripts live with `swap`, and carrying state across.
+- [Code Editor](/user-manual/editor/scripting/code-editor/): The built-in collaborative code editor.
+
+## Engine versions
+
+- [Engine Compatibility](/user-manual/editor/engine-compatibility/): Engine V1 versus V2, and switching a project between them.
+- [Engine Settings](/user-manual/editor/interface/settings/engine/): Choosing the engine version used to launch, publish and download the project.
+- [Troubleshooting](/user-manual/editor/troubleshooting/): Fixing brightness differences between the Editor and the Launch page caused by gamma, tone mapping and sRGB textures.
+
+## Scenes and entities
+
+- [Working with Scenes](/user-manual/editor/scenes/): Entities, components and scene settings.
+- [Managing Scenes](/user-manual/editor/scenes/managing-scenes/): Creating, duplicating, opening and deleting scenes.
+- [Loading Scenes](/user-manual/editor/scenes/loading-scenes/): Changing scenes at runtime with the scene registry, and loading scenes additively.
+- [Components](/user-manual/editor/scenes/components/): Every component and its Inspector settings.
+- [Render](/user-manual/editor/scenes/components/render/): Meshes and primitives, with materials, shadows, lightmaps and batching.
+- [Camera](/user-manual/editor/scenes/components/camera/): Projection, clipping, layers, tone mapping and viewports.
+- [Light](/user-manual/editor/scenes/components/light/): Directional, omni and spot lights.
+- [Script](/user-manual/editor/scenes/components/script/): Attaching scripts to an entity.
+- [Collision](/user-manual/editor/scenes/components/collision/): Collision shapes for physics and triggers.
+- [Rigid Body](/user-manual/editor/scenes/components/rigidbody/): Static, dynamic and kinematic physics bodies.
+- [Anim](/user-manual/editor/scenes/components/anim/): Driving animation with an anim state graph.
+- [GSplat](/user-manual/editor/scenes/components/gsplat/): Rendering a Gaussian splat asset.
+- [Templates](/user-manual/editor/templates/): Creating templates, their instances and overrides, and applying changes.
+- [Nested Templates](/user-manual/editor/templates/nested/): Templates inside templates, and how overrides propagate.
+
+## Assets
+
+- [Assets](/user-manual/editor/assets/): The Assets panel, uploads, the import pipeline, inspectors and the Asset Store.
+- [Uploading and Importing](/user-manual/editor/assets/importing/): Uploading files and replacing assets.
+- [Asset Import Pipeline](/user-manual/editor/assets/import-pipeline/): How uploads become runtime assets, and its settings.
+- [Import Hierarchy](/user-manual/editor/assets/import-pipeline/import-hierarchy/): Importing models as editable entity trees, with templates.
+- [Asset Inspectors](/user-manual/editor/assets/inspectors/): The settings of each asset type.
+- [Material](/user-manual/editor/assets/inspectors/material/): The physically based material settings.
+- [Texture](/user-manual/editor/assets/inspectors/texture/): Texture import, filtering, wrapping and mipmaps.
+- [Asset Store](/user-manual/editor/assets/asset-store/): Importing assets from the PlayCanvas and Sketchfab stores.
+
+## Interface
+
+- [Editor Interface](/user-manual/editor/interface/): A map of the toolbar, hierarchy, inspector, viewport and Assets panel.
+- [Launch Page](/user-manual/editor/interface/launch-page/): Running the project in a browser tab and on phones, with live updates.
+- [Using a Custom Engine](/user-manual/editor/interface/launch-page/custom-engine/): Launching with another engine build.
+- [Project Settings](/user-manual/editor/interface/settings/): The project's engine, rendering, physics, lightmapping, input, layers and other settings.
+- [Physics Settings](/user-manual/editor/interface/settings/physics/): Importing ammo.js and setting gravity.
+- [Rendering Settings](/user-manual/editor/interface/settings/rendering/): Sky, lights, shadows, exposure, fog and resolution.
+
+## Version control
+
+- [Version Control](/user-manual/editor/version-control/): Checkpoints, branches and merges, compared with Git.
+- [Checkpoints](/user-manual/editor/version-control/checkpoints/): Creating, restoring and hard-resetting snapshots of a project.
+- [Branches](/user-manual/editor/version-control/branches/): Creating and working on branches.
+- [Merging and resolving conflicts](/user-manual/editor/version-control/merging/): Merging branches and resolving conflicts.
+
+## Publishing
+
+- [Publishing](/user-manual/editor/publishing/): Publishing to the web, mobile, desktop and playable ad networks.
+- [PlayCanvas Hosting](/user-manual/editor/publishing/web/playcanvas-hosting/): Publishing builds to playcanvas.com.
+- [Self-hosting](/user-manual/editor/publishing/web/self-hosting/): Embedding a hosted build, or downloading a build to deploy on your own server.
+- [Downloading Projects](/user-manual/editor/projects/downloading/): The static and npm package formats of downloaded projects.
+- [Communication with web pages](/user-manual/editor/publishing/web/communicating-webpage/): Messaging between an app and the page that hosts it.
+- [Playable Ads](/user-manual/editor/publishing/playable-ads/): Exporting playable ads for Facebook and Snapchat.
+
+## API reference
+
+- [Editor API](https://api.playcanvas.com/editor/): The reference of the Editor API.
+- [Engine API](https://api.playcanvas.com/engine/): The engine classes scripts use.
+
+## Optional
+
+{{OTHER_PAGES}}
