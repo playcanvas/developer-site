@@ -113,7 +113,7 @@ export default function remarkTypedoc({ typeResolver }) {
  * @param {TypeResolver} options.typeResolver - A function to resolve types
  * @returns {Array} An array of definitions
  */
-function generateDefinitions({ code, typeResolver }) {
+export function generateDefinitions({ code, typeResolver }) {
   // Get a fresh compiler object for each call to avoid stale references
   const compilerObject = project.getTypeChecker().compilerObject;
   const sourceFile = project.createSourceFile('temp.tsx', code, { overwrite: true });
