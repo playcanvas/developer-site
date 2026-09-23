@@ -25,6 +25,7 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
+| `alpha-dither` | Number | - | `opacity-dither`が使用するアルファ値。0から1まで。マテリアルを`opacity`でブレンドしつつ、この値でディザリングすることができます。省略した場合、ディザリングは`opacity`に従います。`"none"`以外の`opacity-dither`が必要です |
 | `alpha-test` | Number | `"0"` | アルファテストの参照値。不透明度がこの値を下回るフラグメントは破棄されます |
 | `alpha-to-coverage` | Boolean | `"false"` | マルチサンプリングで透明度を解決するアルファトゥカバレッジを使用するかどうか |
 | `ao-intensity` | Number | `"1"` | アンビエントオクルージョンマップの強さ（0〜1） |
@@ -41,11 +42,13 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 | `emissive-intensity` | Number | `"1"` | エミッシブカラーとマップに適用される乗数 |
 | `emissive-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | エミッシブマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `enable-ggx-specular` | Boolean | `"false"` | 異方性をサポートするGGXスペキュラモデルを使用するかどうか |
+| `flat-shading` | Boolean | `"false"` | 頂点から補間された法線の代わりに各三角形の幾何法線でマテリアルをシェーディングし、面がファセット状に見えるようにするかどうか |
 | `fresnel-model` | Enum | `"schlick"` | 浅い角度でのスペキュラ反射に使用するフレネルモデル: `"none"` \| `"schlick"` |
 | `gloss` | Number | `"0.25"` | マテリアルの光沢度。0（ラフ）から1（光沢）まで。`roughness`も参照してください |
 | `gloss-invert` | Boolean | `"false"` | グロスの値とマップを反転し、ラフネスとして扱うかどうか。`roughness`または`roughness-map`を設定すると自動的に有効になります |
 | `gloss-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | グロスマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `height-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | ハイトマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `height-map-base` | Number | `"0.5"` | ジオメトリの高さに位置するハイトマップの値。0から1まで。これより高い起伏は表面から浮き出し、低い起伏は沈み込みます。`"1"`はマップを純粋な深さとして、`"0"`は純粋な高さとして扱います |
 | `height-map-factor` | Number | `"1"` | ハイトマップによる視差効果の強さ |
 | `id` | String | - | 他のタグがこのマテリアルを参照するために使用する一意の識別子 |
 | `metalness` | Number | `"0"` | 表面の金属度。0（誘電体）から1（金属）まで |
@@ -55,9 +58,12 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 | `occlude-direct` | Boolean | `"false"` | アンビエントオクルージョンが直接光も減衰させるかどうか |
 | `occlude-specular` | Enum | `"ao"` | スペキュラ反射をオクルージョンする方法: `"none"` \| `"ao"` \| `"gloss-dependent"` |
 | `opacity` | Number | `"1"` | マテリアルの不透明度。0（透明）から1（不透明）まで。視覚的な効果を得るには`"none"`以外の`blend-type`が必要です |
-| `opacity-dither` | Enum | `"none"` | ブレンドなしで透明度を近似する不透明度のディザリング: `"none"` \| `"bayer8"` \| `"bluenoise"` \| `"ignnoise"` |
+| `opacity-dither` | Enum | `"none"` | ブレンドなしで透明度を近似する不透明度のディザリング: `"none"` \| `"bayer2"` \| `"bayer4"` \| `"bayer8"` \| `"bayer16"` \| `"bluenoise"` \| `"ignnoise"`。`alpha-dither`も参照してください |
 | `opacity-fades-specular` | Boolean | `"true"` | マテリアルが透明になるにつれてスペキュラハイライトをフェードアウトさせるかどうか |
 | `opacity-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | オパシティマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
+| `parallax-mode` | Enum | `"offset"` | ハイトマップが他のマップのUVをどのようにずらすか: `"offset"` \| `"occlusion"`。`offset`はハイトマップを1回サンプリングします。`occlusion`は視線をハイトフィールド内でレイマーチングし、1ピクセルあたり複数回のサンプリングと引き換えに、にじみのない深い起伏を表現します。どちらもメッシュのシルエットは変わりません |
+| `parallax-samples` | Number | `"16"` | 視線に沿ったハイトマップのサンプリング回数の上限。`parallax-mode`が`"occlusion"`のときに使用されます |
+| `parallax-shadow-samples` | Number | `"0"` | 各ディレクショナルライトに向かうハイトマップのサンプリング回数の上限で、起伏が自身にソフトシャドウを落とせるようにします。0はセルフシャドウを無効にします。`parallax-mode`が`"occlusion"`のときに使用されます |
 | `roughness` | Number | - | マテリアルのラフネス。0（光沢）から1（ラフ）まで。`gloss`のエイリアスで、`gloss-invert`も設定するため、`gloss`系の属性と組み合わせないでください |
 | `roughness-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | ラフネスマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id`。`gloss-map`のエイリアスで、`gloss-invert`も設定するため、`gloss`系の属性と組み合わせないでください |
 | `slope-depth-bias` | Number | `"0"` | 表面の傾きに比例して適用される深度オフセット。Zファイティングの解決に使用します |

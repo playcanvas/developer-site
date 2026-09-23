@@ -25,7 +25,11 @@ description: "pc-scene要素のリファレンス: pc-app内のシーンコン�
 | `fog-start` | Number | `"0"` | 線形フォグの開始距離 |
 | `gsplat-lod-mode` | Enum | `"error"` | ストリーミングされるGaussian splatのLODレベルを、スプラット予算の範囲内でどう選ぶか：`"error"` \| `"distance"`。[レベルオブディテール](../pc-gsplat#level-of-detail)を参照 |
 | `gsplat-splat-budget` | Number | `"1000000"` | シーン内のすべてのGaussian splatを合わせて描画するスプラット数の目標値。ストリーミングされるスプラットアセット間で配分されます。0以下の値は警告を出し、デフォルトが維持されます |
+| `gsplat-use-fog` | Boolean | `"true"` | シーンのフォグをGaussian splatに適用するかどうか |
+| `gsplat-use-tonemap` | Boolean | `"true"` | カメラのトーンマッピングとシーンの`exposure`をGaussian splatに適用するかどうか。`"false"`にすると、スプラットは保存されている色のままレンダリングされます。これはすでに表示用に仕上がっているキャプチャに適しています。フォグは引き続き適用されます |
 | `gravity` | Vector3 | `"0 -9.81 0"` | 「X Y Z」値としてリジッドボディに適用される重力 |
+| `lighting-max-lights` | Number | `"255"` | クラスターライティングが1フレームで使用するライトの最大数。1から65535まで。上限を超えたライトは警告とともに無視され、255を超える値はライトグリッドのメモリを2倍にします |
+| `physics-time-scale` | Number | `"1"` | 物理シミュレーションが毎フレーム進める時間に掛かる倍率。1未満はスローモーション、1を超えると高速になり、`"0"`はアプリケーションの他の部分を動かしたまま物理を一時停止します。アプリケーション自体のタイムスケールに重ねて適用されます |
 
 </div>
 

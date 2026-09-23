@@ -25,6 +25,7 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
+| `alignment` | Vector2 | `"0.5 0.5"` | 要素内でのテキストの水平・垂直方向の配置。各値は 0〜1。`"0.5 0.5"` は中央揃え、`"0 1"` は左上揃えです。テキスト要素のみ |
 | `anchor` | Vector4 | `"0 0 0 0"` | 要素のアンカーを親に対する `left bottom right top` で設定します。各値は 0〜1。`[0,0,0,0]` は親の左下に固定、`[1,1,1,1]` は右上に固定。左右または上下が異なる（スプリットアンカー）場合、その範囲に合わせて要素がリサイズされます（例: `[0,0,1,1]` は親全体を埋めます）。 |
 | `auto-fit-height` | Boolean | `"false"` | フォントサイズを（`min-font-size` まで）縮小して、テキストを要素の高さに収めます。`auto-height="false"` が必要です。テキスト要素のみ |
 | `auto-fit-width` | Boolean | `"false"` | フォントサイズを（`min-font-size` まで）縮小して、テキストを要素の幅に収めます。`auto-width="false"` が必要です。テキスト要素のみ |
@@ -33,17 +34,25 @@ description: "pc-element要素のリファレンス: フォント、スプライ
 | `color` | Color | `"1 1 1 1"` | スペース区切りのRGBA値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としての色 |
 | `enable-markup` | Boolean | `"false"` | スタイル付きテキストのマークアップ処理を有効にします。色付きテキストの場合は `[color="#ff0000"]text[/color]` などのタグをサポートします。 |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
+| `fit-mode` | Enum | `"stretch"` | テクスチャまたはスプライトを要素の矩形にどう収めるか: `"stretch"` \| `"contain"` \| `"cover"`。`stretch` はソースのアスペクト比を無視して矩形をちょうど埋め、`contain` はソース全体を矩形の内側に収め、`cover` はソースで矩形全体を覆います（どちらもアスペクト比を維持します）。イメージ要素のみ |
 | `font-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | フォント [`<pc-asset>`](../pc-asset) のID (`font` 型アセットを参照する必要があります)。テキスト要素でのみ必須です |
 | `font-size` | Number | `"32"` | ピクセル単位のフォントサイズ |
 | `height` | Number | `"32"` | ピクセル単位の高さ (自動サイズ調整の場合は0) |
+| `justify` | Boolean | `"false"` | 単語間の隙間を広げて、折り返された行を要素の両端に揃えるかどうか。`wrap-lines` と固定幅が必要です。最終行と、明示的な改行で終わる行は、代わりに `alignment` に従います。テキスト要素のみ |
 | `line-height` | Number | `"32"` | ピクセル単位の行の高さ |
 | `margin` | Vector4 | - | スプリット（ストレッチ）アンカーからの要素のインセットを `left bottom right top` で指定します。ポイントアンカーの場合は、代わりに `width`/`height` がサイズを決定します |
 | `mask` | Boolean | `"false"` | 要素が子孫を自身の範囲にクリップするかどうか。イメージ要素のみ |
 | `max-font-size` | Number | `"32"` | 自動フィット時に使用される最大のフォントサイズ |
+| `max-lines` | Number | - | `wrap-lines` がテキストを折り返す最大行数。収まらないテキストは最終行に追加されます。省略した場合は制限なし。テキスト要素のみ |
 | `min-font-size` | Number | `"8"` | 自動フィット時に使用される最小のフォントサイズ |
 | `opacity` | Number | `"1"` | 不透明度。0（透明）〜1（不透明） |
+| `outline-color` | Color | `"0 0 0 1"` | テキストのアウトラインの色。`outline-thickness` が0より大きい場合にのみ描画されます。テキスト要素のみ |
+| `outline-thickness` | Number | `"0"` | テキストのアウトラインの太さ。0（アウトラインなし）〜1。テキスト要素のみ |
 | `pivot` | Vector2 | `"0 0"` | "X Y" 値としてのピボットポイント |
 | `pixels-per-unit` | Number | - | スプライトをレンダリングするときに使用される、ユニットあたりのピクセル数。イメージ要素のみ |
+| `shadow-color` | Color | `"0 0 0 1"` | テキストの影の色。`shadow-offset` が `"0 0"` 以外の場合にのみ描画されます。テキスト要素のみ |
+| `shadow-offset` | Vector2 | `"0 0"` | "X Y" 値としてのテキストの影のオフセット。各値は -1〜1 で、フォントサイズに比例します。正の値は影を右と上にずらし、`"0 0"` は影を描画しません。テキスト要素のみ |
+| `spacing` | Number | `"1"` | テキストの文字間隔。通常の間隔に対する倍率です。テキスト要素のみ |
 | `sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | レンダリングするスプライト [`<pc-asset>`](../pc-asset) のID。イメージ要素のみ |
 | `sprite-frame` | Number | `"0"` | レンダリングするスプライトのフレームインデックス。イメージ要素のみ |
 | `text` | String | - | 表示するテキストコンテンツ |

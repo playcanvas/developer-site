@@ -34,6 +34,7 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 | `ortho-height` | Number | `"10"` | 正射影の高さ。`projection`が`"orthographic"`のときにのみ使用されます |
 | `priority` | Number | `"0"` | カメラのレンダリング優先度 |
 | `projection` | Enum | `"perspective"` | カメラの投影方式: `"perspective"` \| `"orthographic"`。正射影のサイズは`ortho-height`で指定します |
+| `projection-offset` | Vector2 | `"0 0"` | シフトレンズのように、投影ウィンドウを視線方向からずらします。"X Y"値で、単位は視錐台の半分です。`"0 1"`はウィンドウを視錐台の高さの半分だけ上に移動します。カメラを水平に保ったままウィンドウをずらすと、背の高い被写体を垂直線が平行なままフレームに収められます。両方の投影方式に適用され、XRでは無視されます |
 | `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのシザー矩形 |
 | `tonemap` | Enum | `"linear"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |

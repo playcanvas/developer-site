@@ -21,6 +21,7 @@ description: "pc-render要素のリファレンス: プリミティブ形状（�
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `material` | [Material ID](../attributes.md#asset-and-material-ids) | - | プリミティブのレンダリングに使用する [`<pc-material>`](../pc-material) の `id`。省略した場合はデフォルトのマテリアルが使用されます |
 | `receive-shadows` | Boolean | `"true"` | コンポーネントが影を受け取るかどうか |
+| `shadow-cascade-mask` | String | `"0 1 2 3"` | コンポーネントがディレクショナルライトのどの[シャドウカスケード](../pc-light#shadow-cascades)に影を落とすか。0（カメラに最も近い）から3までのカスケード番号をスペース区切りで指定します。`"0 1"`は近い2つのカスケードにのみ影を落とし、空の値はどのカスケードにも落としません。`cast-shadows`が必要です |
 | `type` | Enum | `"box"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
 </div>

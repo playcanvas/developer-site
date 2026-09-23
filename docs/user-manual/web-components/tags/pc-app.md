@@ -25,12 +25,13 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
 | `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
 | `stencil-buffer` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
+| `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page, and once one switches it on, all of them send credentials |
 
 </div>
 
 :::note[When these are read]
 
-Every attribute above except `max-pixel-ratio`, `loading-bar` and `area-light-luts` is read once, when the element is
+Every attribute above except `max-pixel-ratio`, `loading-bar`, `area-light-luts` and `with-credentials` is read once, when the element is
 inserted into the document and creates its graphics device. Changing one afterwards updates the
 element's property but has no effect on the running application, and logs a warning saying so — to
 apply a new value, remove the element and re-insert it.

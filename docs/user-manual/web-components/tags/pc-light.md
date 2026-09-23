@@ -39,6 +39,7 @@ The `<pc-light>` tag is used to define a light component.
 | `shadow-type` | Enum | `"pcf3-32f"` | Shadow filtering: `"pcf1-16f"` \| `"pcf1-32f"` \| `"pcf3-16f"` \| `"pcf3-32f"` \| `"pcf5-16f"` \| `"pcf5-32f"` \| `"vsm-16f"` \| `"vsm-32f"` \| `"pcss-32f"` |
 | `shape` | Enum | `"punctual"` | Light source shape: `"punctual"` \| `"rect"` \| `"disk"` \| `"sphere"`. The area shapes apply to `omni` and `spot` lights, take their size from the entity's scale, and need the lookup tables loaded by `area-light-luts` on [`<pc-app>`](../pc-app) — see [Area Lights](#area-lights) |
 | `type` | Enum | `"directional"` | Light type: `"directional"` \| `"omni"` \| `"spot"` |
+| `volumetric-scattering` | Number | `"1"` | How strongly the light scatters into [volumetric fog](../../graphics/posteffects/cameraframe/volumetric-fog.md#omni-and-spot-lights), as a multiplier on its contribution; `"0"` leaves the light out of the fog. Applies only to `omni` and `spot` lights, while the camera's volumetric fog has its local lights switched on |
 | `vsm-bias` | Number | `"0.0025"` | Variance shadow map bias |
 | `vsm-blur-size` | Number | `"11"` | Variance shadow map blur size (1-25) |
 

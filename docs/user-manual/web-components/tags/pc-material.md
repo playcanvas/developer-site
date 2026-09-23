@@ -25,6 +25,7 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
+| `alpha-dither` | Number | - | Alpha used by `opacity-dither`, from 0 to 1, which lets a material be blended by `opacity` and dithered by this value at the same time. When omitted, dithering follows `opacity`. Needs an `opacity-dither` other than `"none"` |
 | `alpha-test` | Number | `"0"` | Alpha test reference value. Fragments with an opacity below this value are discarded |
 | `alpha-to-coverage` | Boolean | `"false"` | Whether to use alpha-to-coverage, which resolves transparency using multisampling |
 | `ao-intensity` | Number | `"1"` | Strength of the ambient occlusion map, from 0 to 1 |
@@ -41,11 +42,13 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `emissive-intensity` | Number | `"1"` | Multiplier applied to the emissive color and map |
 | `emissive-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the emissive map |
 | `enable-ggx-specular` | Boolean | `"false"` | Whether to use the GGX specular model, which supports anisotropy |
+| `flat-shading` | Boolean | `"false"` | Whether the material is shaded with the geometric normal of each triangle rather than normals interpolated from its vertices, giving the surface a faceted look |
 | `fresnel-model` | Enum | `"schlick"` | Fresnel model used for specular reflections at grazing angles: `"none"` \| `"schlick"` |
 | `gloss` | Number | `"0.25"` | Glossiness of the material, from 0 (rough) to 1 (shiny). See `roughness` |
 | `gloss-invert` | Boolean | `"false"` | Whether the gloss value and map are inverted, making the material treat them as roughness. Setting `roughness` or `roughness-map` enables this automatically |
 | `gloss-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the gloss map |
 | `height-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the height map |
+| `height-map-base` | Number | `"0.5"` | Height map value that sits at the level of the geometry, from 0 to 1: relief above it stands out of the surface and relief below it sinks in. `"1"` treats the map as pure depth and `"0"` as pure elevation |
 | `height-map-factor` | Number | `"1"` | Strength of the parallax effect driven by the height map |
 | `id` | String | - | Unique identifier used by other tags to reference this material |
 | `metalness` | Number | `"0"` | How metallic the surface is, from 0 (dielectric) to 1 (metal) |
@@ -55,9 +58,12 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `occlude-direct` | Boolean | `"false"` | Whether ambient occlusion also attenuates direct lighting |
 | `occlude-specular` | Enum | `"ao"` | How specular reflections are occluded: `"none"` \| `"ao"` \| `"gloss-dependent"` |
 | `opacity` | Number | `"1"` | Opacity of the material, from 0 (transparent) to 1 (opaque). Requires a `blend-type` other than `"none"` to have a visible effect |
-| `opacity-dither` | Enum | `"none"` | Dithering used to render opacity, which approximates transparency without blending: `"none"` \| `"bayer8"` \| `"bluenoise"` \| `"ignnoise"` |
+| `opacity-dither` | Enum | `"none"` | Dithering used to render opacity, which approximates transparency without blending: `"none"` \| `"bayer2"` \| `"bayer4"` \| `"bayer8"` \| `"bayer16"` \| `"bluenoise"` \| `"ignnoise"`. See also `alpha-dither` |
 | `opacity-fades-specular` | Boolean | `"true"` | Whether specular highlights fade out as the material becomes transparent |
 | `opacity-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the opacity map |
+| `parallax-mode` | Enum | `"offset"` | How the height map offsets the UVs of the other maps: `"offset"` \| `"occlusion"`. `offset` takes a single tap of the height map; `occlusion` marches the view ray through the height field for deeper relief without smearing, at the cost of several taps per pixel. Neither changes the mesh's silhouette |
+| `parallax-samples` | Number | `"16"` | Maximum number of height map taps along the view ray. Used when `parallax-mode` is `"occlusion"` |
+| `parallax-shadow-samples` | Number | `"0"` | Maximum number of height map taps towards each directional light, which lets the relief soft-shadow itself; 0 turns self-shadowing off. Used when `parallax-mode` is `"occlusion"` |
 | `roughness` | Number | - | Roughness of the material, from 0 (shiny) to 1 (rough). An alias for `gloss` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
 | `roughness-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the roughness map. An alias for `gloss-map` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
 | `slope-depth-bias` | Number | `"0"` | Depth offset applied in proportion to a surface's slope, used to resolve z-fighting |
