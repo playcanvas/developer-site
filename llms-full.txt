@@ -1199,6 +1199,7 @@ Point the assistant to these PlayCanvas sources instead of asking it to recall A
 - [Engine Examples](https://playcanvas.github.io/)
 - [Engine source](https://github.com/playcanvas/engine)
 - [AI-readable documentation index](https://developer.playcanvas.com/llms.txt)
+- [AI-readable Engine API index](https://api.playcanvas.com/engine/llms.txt)
 - [Complete AI-readable documentation](https://developer.playcanvas.com/llms-full.txt)
 
 ## Reuse Engine Code Before Writing It

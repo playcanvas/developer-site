@@ -130,8 +130,8 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## API reference
 
-- [Editor API](https://api.playcanvas.com/editor/): The reference of the Editor API.
-- [Engine API](https://api.playcanvas.com/engine/): The engine classes scripts use.
+- [Editor API](https://api.playcanvas.com/editor/llms.txt): The reference of the Editor API.
+- [Engine API](https://api.playcanvas.com/engine/llms.txt): The engine classes scripts use.
 
 ## Optional
 

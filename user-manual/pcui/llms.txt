@@ -34,9 +34,9 @@ Use this index to build tool interfaces, such as editors, inspectors and node gr
 
 ## API reference
 
-- [PCUI API](https://api.playcanvas.com/pcui/): Every PCUI component.
-- [PCUI Graph API](https://api.playcanvas.com/pcui-graph/): The graph component.
-- [Observer API](https://api.playcanvas.com/observer/): `Observer`, `ObserverList` and `History`.
+- [PCUI API](https://api.playcanvas.com/pcui/llms.txt): Every PCUI component.
+- [PCUI Graph API](https://api.playcanvas.com/pcui-graph/llms.txt): The graph component.
+- [Observer API](https://api.playcanvas.com/observer/llms.txt): `Observer`, `ObserverList` and `History`.
 - [PCUI on GitHub](https://github.com/playcanvas/pcui): The source, with a Storybook of its components.
 
 ## Optional

@@ -65,7 +65,7 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 
 ## API reference
 
-- [Web Components API](https://api.playcanvas.com/web-components/): The classes behind the elements, and the library's JavaScript API.
+- [Web Components API](https://api.playcanvas.com/web-components/llms.txt): The classes behind the elements, and the library's JavaScript API.
 - [Web Components on GitHub](https://github.com/playcanvas/web-components): The source, with examples.
 
 ## Optional

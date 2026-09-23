@@ -44,13 +44,14 @@ This is the entry point for AI agents. Each product below has its own index: rea
 
 ## API reference
 
-- [Engine API](https://api.playcanvas.com/engine/): Every engine class. Class pages follow the pattern `https://api.playcanvas.com/engine/classes/<ClassName>.html`.
-- [Editor API](https://api.playcanvas.com/editor/): The API for scripting the Editor itself.
-- [Web Components API](https://api.playcanvas.com/web-components/): The custom element classes of `@playcanvas/web-components`.
-- [PCUI API](https://api.playcanvas.com/pcui/): PCUI components.
-- [PCUI Graph API](https://api.playcanvas.com/pcui-graph/): The node-graph component.
-- [Observer API](https://api.playcanvas.com/observer/): Observable data and history.
-- [SplatTransform API](https://api.playcanvas.com/splat-transform/): The SplatTransform library.
+- [API reference index](https://api.playcanvas.com/llms.txt): The libraries below, with their current versions.
+- [Engine API](https://api.playcanvas.com/engine/llms.txt): Every engine class. Class pages follow the pattern `https://api.playcanvas.com/engine/classes/<ClassName>.md`.
+- [Editor API](https://api.playcanvas.com/editor/llms.txt): The API for scripting the Editor itself.
+- [Web Components API](https://api.playcanvas.com/web-components/llms.txt): The custom element classes of `@playcanvas/web-components`.
+- [PCUI API](https://api.playcanvas.com/pcui/llms.txt): PCUI components.
+- [PCUI Graph API](https://api.playcanvas.com/pcui-graph/llms.txt): The node-graph component.
+- [Observer API](https://api.playcanvas.com/observer/llms.txt): Observable data and history.
+- [SplatTransform API](https://api.playcanvas.com/splat-transform/llms.txt): The SplatTransform library.
 - [REST API](https://developer.playcanvas.com/user-manual/api.md): HTTP endpoints for projects, assets, apps, jobs and checkpoints, authenticated with a bearer token.
 
 ## Examples and source

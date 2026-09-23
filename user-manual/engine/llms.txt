@@ -6,7 +6,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Rules
 
-- **Create the app with [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)**, whose page shows the setup. Set every input device the app reads in its `AppOptions`, or it stays `null`: `mouse = new Mouse(canvas)`, `keyboard = new Keyboard(window)`, `touch = new TouchDevice(canvas)`, and `elementInput = new ElementInput(canvas)` for user interface elements. The manual's examples use `Application`, a subclass that registers everything and is expected to be deprecated.
+- **Create the app with [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.md)**, whose page shows the setup. Set every input device the app reads in its `AppOptions`, or it stays `null`: `mouse = new Mouse(canvas)`, `keyboard = new Keyboard(window)`, `touch = new TouchDevice(canvas)`, and `elementInput = new ElementInput(canvas)` for user interface elements. The manual's examples use `Application`, a subclass that registers everything and is expected to be deprecated.
 - **WebGL1 is not supported.**
 - **Build the scene from entities and components**: `const box = new Entity('box'); box.addComponent('render', { type: 'box' }); app.root.addChild(box);`. Meshes use the `render` component, as the `model` component is deprecated.
 - **Y is up**, and cameras and `entity.forward` point along −Z.
@@ -173,32 +173,32 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## API reference
 
-- [Engine API reference](https://api.playcanvas.com/engine/): Every engine class, with pages at `https://api.playcanvas.com/engine/classes/<ClassName>.html`. When the package is installed, `node_modules/playcanvas/build/playcanvas.d.ts` has the same documentation for the exact installed version.
-- [AppBase](https://api.playcanvas.com/engine/classes/AppBase.html): The application, with the component systems and resource handlers you register through `AppOptions`.
-- [Application](https://api.playcanvas.com/engine/classes/Application.html): The subclass of `AppBase` that the manual's examples use.
-- [Entity](https://api.playcanvas.com/engine/classes/Entity.html): A node of the scene graph that components attach to, with transform methods.
-- [Script](https://api.playcanvas.com/engine/classes/Script.html): The base class of ESM scripts.
-- [Asset](https://api.playcanvas.com/engine/classes/Asset.html): A loadable resource such as a model, texture, splat or script.
-- [AssetListLoader](https://api.playcanvas.com/engine/classes/AssetListLoader.html): Loads a list of assets and calls back once all of them are ready.
-- [AssetRegistry](https://api.playcanvas.com/engine/classes/AssetRegistry.html): Finds and loads assets at runtime, as `app.assets`.
-- [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html): Renders the scene from its entity's viewpoint.
-- [LightComponent](https://api.playcanvas.com/engine/classes/LightComponent.html): A directional, omni or spot light.
-- [RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html): Renders meshes, from primitive shapes to loaded models.
-- [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html): Renders 3D Gaussian splats.
-- [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html): A static, dynamic or kinematic physics body.
-- [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html): A collision shape, for rigid bodies and triggers.
-- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html): Plays and blends animations through an animstategraph.
-- [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html): Positional and non-positional audio.
-- [ScreenComponent](https://api.playcanvas.com/engine/classes/ScreenComponent.html): The root of a screen-space or world-space user interface.
-- [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html): An image, text or group element of a user interface.
-- [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html): The default physically based material.
-- [ShaderMaterial](https://api.playcanvas.com/engine/classes/ShaderMaterial.html): A material with custom GLSL and WGSL shaders.
-- [CameraFrame](https://api.playcanvas.com/engine/classes/CameraFrame.html): The HDR post-processing stack of a camera.
-- [Texture](https://api.playcanvas.com/engine/classes/Texture.html): A GPU texture.
-- [GraphicsDevice](https://api.playcanvas.com/engine/classes/GraphicsDevice.html): The WebGL2 or WebGPU rendering device.
-- [Vec3](https://api.playcanvas.com/engine/classes/Vec3.html), [Quat](https://api.playcanvas.com/engine/classes/Quat.html) and [Color](https://api.playcanvas.com/engine/classes/Color.html): Vectors, rotations and colors.
-- [Mouse](https://api.playcanvas.com/engine/classes/Mouse.html), [Keyboard](https://api.playcanvas.com/engine/classes/Keyboard.html) and [TouchDevice](https://api.playcanvas.com/engine/classes/TouchDevice.html): Input devices, available as `app.mouse`, `app.keyboard` and `app.touch` when passed to the application.
-- [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html): Starts and manages WebXR sessions, as `app.xr`.
+- [Engine API reference](https://api.playcanvas.com/engine/llms.txt): Every engine class, with pages at `https://api.playcanvas.com/engine/classes/<ClassName>.md`. When the package is installed, `node_modules/playcanvas/build/playcanvas.d.ts` has the same documentation for the exact installed version.
+- [AppBase](https://api.playcanvas.com/engine/classes/AppBase.md): The application, with the component systems and resource handlers you register through `AppOptions`.
+- [Application](https://api.playcanvas.com/engine/classes/Application.md): The subclass of `AppBase` that the manual's examples use.
+- [Entity](https://api.playcanvas.com/engine/classes/Entity.md): A node of the scene graph that components attach to, with transform methods.
+- [Script](https://api.playcanvas.com/engine/classes/Script.md): The base class of ESM scripts.
+- [Asset](https://api.playcanvas.com/engine/classes/Asset.md): A loadable resource such as a model, texture, splat or script.
+- [AssetListLoader](https://api.playcanvas.com/engine/classes/AssetListLoader.md): Loads a list of assets and calls back once all of them are ready.
+- [AssetRegistry](https://api.playcanvas.com/engine/classes/AssetRegistry.md): Finds and loads assets at runtime, as `app.assets`.
+- [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.md): Renders the scene from its entity's viewpoint.
+- [LightComponent](https://api.playcanvas.com/engine/classes/LightComponent.md): A directional, omni or spot light.
+- [RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.md): Renders meshes, from primitive shapes to loaded models.
+- [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.md): Renders 3D Gaussian splats.
+- [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.md): A static, dynamic or kinematic physics body.
+- [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.md): A collision shape, for rigid bodies and triggers.
+- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.md): Plays and blends animations through an animstategraph.
+- [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.md): Positional and non-positional audio.
+- [ScreenComponent](https://api.playcanvas.com/engine/classes/ScreenComponent.md): The root of a screen-space or world-space user interface.
+- [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.md): An image, text or group element of a user interface.
+- [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.md): The default physically based material.
+- [ShaderMaterial](https://api.playcanvas.com/engine/classes/ShaderMaterial.md): A material with custom GLSL and WGSL shaders.
+- [CameraFrame](https://api.playcanvas.com/engine/classes/CameraFrame.md): The HDR post-processing stack of a camera.
+- [Texture](https://api.playcanvas.com/engine/classes/Texture.md): A GPU texture.
+- [GraphicsDevice](https://api.playcanvas.com/engine/classes/GraphicsDevice.md): The WebGL2 or WebGPU rendering device.
+- [Vec3](https://api.playcanvas.com/engine/classes/Vec3.md), [Quat](https://api.playcanvas.com/engine/classes/Quat.md) and [Color](https://api.playcanvas.com/engine/classes/Color.md): Vectors, rotations and colors.
+- [Mouse](https://api.playcanvas.com/engine/classes/Mouse.md), [Keyboard](https://api.playcanvas.com/engine/classes/Keyboard.md) and [TouchDevice](https://api.playcanvas.com/engine/classes/TouchDevice.md): Input devices, available as `app.mouse`, `app.keyboard` and `app.touch` when passed to the application.
+- [XrManager](https://api.playcanvas.com/engine/classes/XrManager.md): Starts and manages WebXR sessions, as `app.xr`.
 
 ## Examples and scripts
 
