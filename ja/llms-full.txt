@@ -5,7 +5,7 @@
 
 Base URL: https://developer.playcanvas.com
 Total Documents: 507
-Generated: 2026-09-22
+Generated: 2026-09-23
 
 ================================================================================
 
@@ -38204,7 +38204,7 @@ The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak`
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -38391,7 +38391,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -38513,12 +38513,13 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
 | `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
 | `stencil-buffer` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
+| `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page, and once one switches it on, all of them send credentials |
 
 </div>
 
 :::note[When these are read]
 
-Every attribute above except `max-pixel-ratio`, `loading-bar` and `area-light-luts` is read once, when the element is
+Every attribute above except `max-pixel-ratio`, `loading-bar`, `area-light-luts` and `with-credentials` is read once, when the element is
 inserted into the document and creates its graphics device. Changing one afterwards updates the
 element's property but has no effect on the running application, and logs a warning saying so — to
 apply a new value, remove the element and re-insert it.
@@ -38742,7 +38743,7 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
 ```html live-example
 <pc-app>
     
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
     
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-scene>
@@ -39017,6 +39018,7 @@ The `<pc-camera>` tag is used to define a camera component.
 | `ortho-height` | Number | `"10"` | Height of the orthographic projection. Only used when `projection` is `"orthographic"` |
 | `priority` | Number | `"0"` | Rendering priority of the camera |
 | `projection` | Enum | `"perspective"` | Projection of the camera: `"perspective"` \| `"orthographic"`. Use `ortho-height` to size an orthographic projection |
+| `projection-offset` | Vector2 | `"0 0"` | Shifts the projection window off the view direction, like a shift lens, as "X Y" values in half-frustum units: `"0 1"` moves it up by half the frustum height. Keeping the camera level and shifting the window frames a tall subject with its verticals parallel. Applies to both projections and is ignored in XR |
 | `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |
 | `tonemap` | Enum | `"linear"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
@@ -39196,6 +39198,7 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
+| `alignment` | Vector2 | `"0.5 0.5"` | Horizontal and vertical alignment of the text within the element, each from 0 to 1: `"0.5 0.5"` centers it and `"0 1"` aligns it to the top left. Text elements only |
 | `anchor` | Vector4 | `"0 0 0 0"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
 | `auto-fit-height` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's height. Requires `auto-height="false"`. Text elements only |
 | `auto-fit-width` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's width. Requires `auto-width="false"`. Text elements only |
@@ -39204,17 +39207,25 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enable-markup` | Boolean | `"false"` | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
+| `fit-mode` | Enum | `"stretch"` | How the texture or sprite fits the element's rectangle: `"stretch"` \| `"contain"` \| `"cover"`. `stretch` fills the rectangle exactly, ignoring the source's aspect ratio; `contain` fits the whole source inside the rectangle and `cover` fills the rectangle with it, both preserving the aspect ratio. Image elements only |
 | `font-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Font [`<pc-asset>`](../pc-asset) ID (must reference a `font` type asset). Required for text elements only |
 | `font-size` | Number | `"32"` | Font size in pixels |
 | `height` | Number | `"32"` | Height in pixels (0 for auto-sizing) |
+| `justify` | Boolean | `"false"` | Whether wrapped lines are stretched flush with both edges of the element by widening the gaps between their words. Needs `wrap-lines` and a fixed width. The last line, and any line ended by an explicit line break, follows `alignment` instead. Text elements only |
 | `line-height` | Number | `"32"` | Line height in pixels |
 | `margin` | Vector4 | - | Insets the element from a split (stretched) anchor as `left bottom right top`. For point anchors, `width`/`height` govern size instead |
 | `mask` | Boolean | `"false"` | Whether the element clips its descendants to its bounds. Image elements only |
 | `max-font-size` | Number | `"32"` | Largest font size used when auto-fitting |
+| `max-lines` | Number | - | Maximum number of lines `wrap-lines` wraps the text onto; any leftover text is appended to the last line. No limit when omitted. Text elements only |
 | `min-font-size` | Number | `"8"` | Smallest font size used when auto-fitting |
 | `opacity` | Number | `"1"` | Opacity, from 0 (transparent) to 1 (opaque) |
+| `outline-color` | Color | `"0 0 0 1"` | Color of the text outline, drawn only when `outline-thickness` is above 0. Text elements only |
+| `outline-thickness` | Number | `"0"` | Thickness of the text outline, from 0 (no outline) to 1. Text elements only |
 | `pivot` | Vector2 | `"0 0"` | Pivot point as "X Y" values |
 | `pixels-per-unit` | Number | - | Pixels per unit used when rendering a sprite. Image elements only |
+| `shadow-color` | Color | `"0 0 0 1"` | Color of the text shadow, drawn only when `shadow-offset` is not `"0 0"`. Text elements only |
+| `shadow-offset` | Vector2 | `"0 0"` | Offset of the text shadow as "X Y" values, each from -1 to 1 in proportion to the font size. Positive values shift the shadow right and up, and `"0 0"` draws no shadow. Text elements only |
+| `spacing` | Number | `"1"` | Spacing between the letters of the text, as a multiple of their normal spacing. Text elements only |
 | `sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) ID to render. Image elements only |
 | `sprite-frame` | Number | `"0"` | Frame index of the sprite to render. Image elements only |
 | `text` | String | - | Text content to display |
@@ -39443,7 +39454,7 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">
@@ -39872,6 +39883,7 @@ The `<pc-light>` tag is used to define a light component.
 | `shadow-type` | Enum | `"pcf3-32f"` | Shadow filtering: `"pcf1-16f"` \| `"pcf1-32f"` \| `"pcf3-16f"` \| `"pcf3-32f"` \| `"pcf5-16f"` \| `"pcf5-32f"` \| `"vsm-16f"` \| `"vsm-32f"` \| `"pcss-32f"` |
 | `shape` | Enum | `"punctual"` | Light source shape: `"punctual"` \| `"rect"` \| `"disk"` \| `"sphere"`. The area shapes apply to `omni` and `spot` lights, take their size from the entity's scale, and need the lookup tables loaded by `area-light-luts` on [`<pc-app>`](../pc-app) — see [Area Lights](#area-lights) |
 | `type` | Enum | `"directional"` | Light type: `"directional"` \| `"omni"` \| `"spot"` |
+| `volumetric-scattering` | Number | `"1"` | How strongly the light scatters into [volumetric fog](../../graphics/posteffects/cameraframe/volumetric-fog.md#omni-and-spot-lights), as a multiplier on its contribution; `"0"` leaves the light out of the fog. Applies only to `omni` and `spot` lights, while the camera's volumetric fog has its local lights switched on |
 | `vsm-bias` | Number | `"0.0025"` | Variance shadow map bias |
 | `vsm-blur-size` | Number | `"11"` | Variance shadow map blur size (1-25) |
 
@@ -40004,6 +40016,7 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
+| `alpha-dither` | Number | - | Alpha used by `opacity-dither`, from 0 to 1, which lets a material be blended by `opacity` and dithered by this value at the same time. When omitted, dithering follows `opacity`. Needs an `opacity-dither` other than `"none"` |
 | `alpha-test` | Number | `"0"` | Alpha test reference value. Fragments with an opacity below this value are discarded |
 | `alpha-to-coverage` | Boolean | `"false"` | Whether to use alpha-to-coverage, which resolves transparency using multisampling |
 | `ao-intensity` | Number | `"1"` | Strength of the ambient occlusion map, from 0 to 1 |
@@ -40020,11 +40033,13 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `emissive-intensity` | Number | `"1"` | Multiplier applied to the emissive color and map |
 | `emissive-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the emissive map |
 | `enable-ggx-specular` | Boolean | `"false"` | Whether to use the GGX specular model, which supports anisotropy |
+| `flat-shading` | Boolean | `"false"` | Whether the material is shaded with the geometric normal of each triangle rather than normals interpolated from its vertices, giving the surface a faceted look |
 | `fresnel-model` | Enum | `"schlick"` | Fresnel model used for specular reflections at grazing angles: `"none"` \| `"schlick"` |
 | `gloss` | Number | `"0.25"` | Glossiness of the material, from 0 (rough) to 1 (shiny). See `roughness` |
 | `gloss-invert` | Boolean | `"false"` | Whether the gloss value and map are inverted, making the material treat them as roughness. Setting `roughness` or `roughness-map` enables this automatically |
 | `gloss-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the gloss map |
 | `height-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the height map |
+| `height-map-base` | Number | `"0.5"` | Height map value that sits at the level of the geometry, from 0 to 1: relief above it stands out of the surface and relief below it sinks in. `"1"` treats the map as pure depth and `"0"` as pure elevation |
 | `height-map-factor` | Number | `"1"` | Strength of the parallax effect driven by the height map |
 | `id` | String | - | Unique identifier used by other tags to reference this material |
 | `metalness` | Number | `"0"` | How metallic the surface is, from 0 (dielectric) to 1 (metal) |
@@ -40034,9 +40049,12 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `occlude-direct` | Boolean | `"false"` | Whether ambient occlusion also attenuates direct lighting |
 | `occlude-specular` | Enum | `"ao"` | How specular reflections are occluded: `"none"` \| `"ao"` \| `"gloss-dependent"` |
 | `opacity` | Number | `"1"` | Opacity of the material, from 0 (transparent) to 1 (opaque). Requires a `blend-type` other than `"none"` to have a visible effect |
-| `opacity-dither` | Enum | `"none"` | Dithering used to render opacity, which approximates transparency without blending: `"none"` \| `"bayer8"` \| `"bluenoise"` \| `"ignnoise"` |
+| `opacity-dither` | Enum | `"none"` | Dithering used to render opacity, which approximates transparency without blending: `"none"` \| `"bayer2"` \| `"bayer4"` \| `"bayer8"` \| `"bayer16"` \| `"bluenoise"` \| `"ignnoise"`. See also `alpha-dither` |
 | `opacity-fades-specular` | Boolean | `"true"` | Whether specular highlights fade out as the material becomes transparent |
 | `opacity-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the opacity map |
+| `parallax-mode` | Enum | `"offset"` | How the height map offsets the UVs of the other maps: `"offset"` \| `"occlusion"`. `offset` takes a single tap of the height map; `occlusion` marches the view ray through the height field for deeper relief without smearing, at the cost of several taps per pixel. Neither changes the mesh's silhouette |
+| `parallax-samples` | Number | `"16"` | Maximum number of height map taps along the view ray. Used when `parallax-mode` is `"occlusion"` |
+| `parallax-shadow-samples` | Number | `"0"` | Maximum number of height map taps towards each directional light, which lets the relief soft-shadow itself; 0 turns self-shadowing off. Used when `parallax-mode` is `"occlusion"` |
 | `roughness` | Number | - | Roughness of the material, from 0 (shiny) to 1 (rough). An alias for `gloss` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
 | `roughness-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the roughness map. An alias for `gloss-map` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
 | `slope-depth-bias` | Number | `"0"` | Depth offset applied in proportion to a surface's slope, used to resolve z-fighting |
@@ -40233,7 +40251,7 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](../pc-anim) nested 
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -40450,7 +40468,7 @@ This GLB instantiates two nodes — `play` (the orange shell, its logo cut out o
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
@@ -40623,6 +40641,7 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `material` | [Material ID](../attributes.md#asset-and-material-ids) | - | `id` of a [`<pc-material>`](../pc-material) to render the primitive with. If omitted, a default material is used |
 | `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
+| `shadow-cascade-mask` | String | `"0 1 2 3"` | Which [shadow cascades](../pc-light#shadow-cascades) of directional lights the component casts into, as space-separated cascade indices from 0 (nearest the camera) to 3: `"0 1"` casts into the two nearest cascades only, and an empty value casts into none. Needs `cast-shadows` |
 | `type` | Enum | `"box"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
 
 </div>
@@ -40799,7 +40818,11 @@ The `<pc-scene>` tag is used to define the scene.
 | `fog-start` | Number | `"0"` | Start distance for linear fog |
 | `gsplat-lod-mode` | Enum | `"error"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](../pc-gsplat#level-of-detail) |
 | `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less warns and keeps the default |
+| `gsplat-use-fog` | Boolean | `"true"` | Whether the scene's fog applies to Gaussian splats |
+| `gsplat-use-tonemap` | Boolean | `"true"` | Whether the camera's tone mapping and the scene's `exposure` apply to Gaussian splats. Set `"false"` to render splats with their stored colors, which suits captures that are already display-ready. Fog still applies |
 | `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
+| `lighting-max-lights` | Number | `"255"` | Maximum number of lights clustered lighting uses in a frame, from 1 to 65535. Lights over the limit are ignored with a warning, and values above 255 double the memory of the light grid |
+| `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running. Applied on top of the application's own time scale |
 
 </div>
 
@@ -41327,7 +41350,7 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
