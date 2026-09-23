@@ -36,7 +36,7 @@ const FRONT_MATTER_RE = /^---\n([\s\S]*?)\n---(?:\n|$)/;
 const HEADING_LINE_RE = /(?:^|\n)#{1,6}(?!#).*/g;
 
 // Stands in for the brace of a custom heading id while parsing
-const HEADING_ID_MASK = '';
+const HEADING_ID_MASK = '\uE000';
 
 // A custom heading id at the end of a heading: ## Title {#my-id}
 const HEADING_ID_RE = /\s*\\?\{#[^}]*\}\s*$/;
@@ -70,6 +70,8 @@ const PHRASING_TYPES = new Set(['paragraph', 'heading', 'emphasis', 'strong', 'd
  * @property {string} siteUrl - Site origin, e.g. https://developer.playcanvas.com
  * @property {string} siteDir - Site root, for resolving '@site/' imports
  * @property {(filePath: string) => string} fileUrl - Absolute URL of the page built from a doc file
+ * @property {(url: string) => string} [linkUrl] - Maps every absolute URL a link resolves to, for
+ *   example to point links to pages at their Markdown versions
  * @property {(code: string) => Array<{ entries: object[] }>} [typedoc] - Documents the types of a
  *   `tsx asTypedoc` code block, like generateDefinitions in utils/plugins/remark-typedoc.mjs
  */
@@ -92,7 +94,7 @@ const PHRASING_TYPES = new Set(['paragraph', 'heading', 'emphasis', 'strong', 'd
  * matter, the text that was parsed and its syntax tree
  */
 export function parseDoc(source, filePath) {
-    const normalized = source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+    const normalized = normalizeSource(source);
     const match = normalized.match(FRONT_MATTER_RE);
     const frontMatter = match ? parseFrontMatter(match[1], filePath) : {};
     const text = match ? normalized.slice(match[0].length) : normalized;
@@ -103,6 +105,22 @@ export function parseDoc(source, filePath) {
     const tree = processor.parse(text.replace(HEADING_LINE_RE, line => line.replace('{#', `${HEADING_ID_MASK}#`)));
     unmask(tree);
     return { frontMatter, text, tree };
+}
+
+/**
+ * Parse only the front matter of a doc
+ *
+ * @param {string} source - Doc source
+ * @param {string} [filePath] - Doc path, for warnings
+ * @returns {object} The parsed front matter
+ */
+export function readFrontMatter(source, filePath) {
+    const match = normalizeSource(source).match(FRONT_MATTER_RE);
+    return match ? parseFrontMatter(match[1], filePath) : {};
+}
+
+function normalizeSource(source) {
+    return source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 }
 
 /**
@@ -471,9 +489,14 @@ function renderDetails(node, ctx) {
 }
 
 /**
- * Make a URL absolute, resolving it the way the website does
+ * Make a URL absolute, resolving it the way the website does, then map it
  */
 function resolveUrl(url, ctx) {
+    const resolved = resolveAbsoluteUrl(url, ctx);
+    return resolved && ctx.linkUrl ? ctx.linkUrl(resolved) : resolved;
+}
+
+function resolveAbsoluteUrl(url, ctx) {
     if (!url) return url;
 
     // pathname:// marks a site root URL that must not be localized

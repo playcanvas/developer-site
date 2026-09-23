@@ -1,0 +1,47 @@
+---
+covers: [pcui]
+---
+# PCUI
+
+> PCUI (`@playcanvas/pcui`) is the UI component library the PlayCanvas Editor is built with, for building browser-based tools, with React wrappers. PCUI Graph (`@playcanvas/pcui-graph`) adds node-graph editors, and Observer (`@playcanvas/observer`) the observable state that PCUI components bind to.
+
+Use this index to build tool interfaces, such as editors, inspectors and node graphs, in the browser. It is not for user interfaces inside a 3D scene: those are covered by User Interface in the [Engine](/user-manual/engine/llms.txt) index.
+
+## Rules
+
+- **Install** `@playcanvas/pcui` (with `@playcanvas/observer` for data binding, and `@playcanvas/pcui-graph` for node graphs), and import the styles once: `import '@playcanvas/pcui/styles';`.
+- **Import components from `@playcanvas/pcui`**, or their React wrappers from `@playcanvas/pcui/react`.
+- **Bind components to state instead of setting their values by hand**: hold the state in an `Observer`, then link each component to a path of it, as in `textInput.link(observer, 'text')`, or `<TextInput binding={new BindingTwoWay()} link={{ observer, path: 'text' }} />` in React. `BindingTwoWay` keeps a component and the state in sync in both directions.
+- **Undo and redo** come from Observer's `History`.
+
+## PCUI
+
+- [PCUI](/user-manual/pcui/): What PCUI is and how to adopt it in your own projects.
+- [Getting Started](/user-manual/pcui/getting-started/): Installing PCUI, importing components and styles, and a minimal project.
+- [React](/user-manual/pcui/react/): Using the React wrappers from `@playcanvas/pcui/react`.
+- [Data Binding](/user-manual/pcui/data-binding/): Keeping components in sync with shared observer state.
+- [Using Observers](/user-manual/pcui/data-binding/using-observers/): Binding elements to observer state, and how updates propagate.
+- [Two Way Binding](/user-manual/pcui/data-binding/two-way-binding/): Inputs and labels that stay in sync both ways, with a React example.
+- [Examples](/user-manual/pcui/examples/): Live examples, with links to their source.
+- [History](/user-manual/pcui/examples/history/): Undo and redo of observer-backed state.
+- [Todo List](/user-manual/pcui/examples/todo-list/): A complete React example: adding, completing and filtering items.
+
+## PCUI Graph
+
+- [PCUI Graph](/user-manual/pcui/pcui-graph/): Node-based graph editors in the browser, and how they relate to PCUI.
+- [Getting Started](/user-manual/pcui/pcui-graph/getting-started/): Installing `@playcanvas/pcui-graph` and embedding a graph.
+- [Schema](/user-manual/pcui/pcui-graph/schema/): Defining node and edge types, and the rules for connecting them.
+- [Events](/user-manual/pcui/pcui-graph/events/): Node and edge events, for handling edits made in the graph.
+- [Context Menus](/user-manual/pcui/pcui-graph/context-menus/): Menus for the canvas, nodes and edges, and the actions they run.
+- [Styling](/user-manual/pcui/pcui-graph/styling/): Changing the look of the graph with `defaultStyles`.
+
+## API reference
+
+- [PCUI API](https://api.playcanvas.com/pcui/): Every PCUI component.
+- [PCUI Graph API](https://api.playcanvas.com/pcui-graph/): The graph component.
+- [Observer API](https://api.playcanvas.com/observer/): `Observer`, `ObserverList` and `History`.
+- [PCUI on GitHub](https://github.com/playcanvas/pcui): The source, with a Storybook of its components.
+
+## Optional
+
+{{OTHER_PAGES}}

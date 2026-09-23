@@ -1,0 +1,76 @@
+---
+covers: [web-components]
+---
+# PlayCanvas Web Components
+
+> `@playcanvas/web-components` builds PlayCanvas Engine scenes declaratively from custom HTML elements (`<pc-app>`, `<pc-entity>`, `<pc-camera>` and so on), in plain HTML with no build step, plus a small JavaScript API for reaching the engine. The tag pages below are its attribute reference.
+
+Use this index for pages built from `<pc-*>` elements. The engine features the tags wrap, such as materials, lighting, physics, Gaussian splats and XR, work the same way underneath, and the [Engine](/user-manual/engine/llms.txt) index covers them.
+
+## Rules
+
+- **Load the engine and the components through an import map** with entries for both, for example `"playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@latest/build/playcanvas.mjs"` and `"@playcanvas/web-components": "https://cdn.jsdelivr.net/npm/@playcanvas/web-components@latest/dist/pwc.min.mjs"`. The engine is a peer dependency and is never bundled into the components.
+- **The document structure is fixed**: `<pc-app>` holds the resources (`<pc-asset>`, `<pc-material>` and `<pc-wasm>`) as direct children, referenced by `id`, and a `<pc-scene>` with the `<pc-entity>` hierarchy.
+- **Component tags go directly inside the entity they add a component to**: a `<pc-entity>`, `<pc-model>` or `<pc-node>`, with at most one tag of each kind per host. A tag names its engine component without the `pc-` prefix and hyphens: `<pc-rigid-body>` adds `entity.rigidbody`.
+- **Attribute values follow HTML conventions**: kebab-case names, space-separated vectors (`position="0 1 -3"`), colors as a CSS color name, a hex code or 3 or 4 numbers from 0 to 1, and bare booleans (`cast-shadows`). An absent attribute applies the engine default, and an invalid value logs a console warning and applies the default. Remove an attribute to reset it rather than setting it to an empty string.
+- **Look attributes up in the tag reference** instead of inferring their names from examples.
+- **Load models** by declaring the GLB as a `<pc-asset>` and instancing it with `<pc-model asset="id">`, and reach inside a model with `<pc-node>`.
+- **Add behavior with engine `Script` classes**: load the module with `<pc-asset src="rotate.mjs">`, then attach it with `<pc-script><pc-script-instance name="rotate"></pc-script-instance></pc-script>`, where `name` matches the class's `static scriptName`. Write update loops and per-entity behavior as scripts, not page scripts.
+- **Physics needs ammo.js**, declared as `<pc-wasm name="Ammo" glue="..." wasm="..." fallback="...">` inside `<pc-app>`, which waits for it before starting.
+- **From JavaScript**, `import { whenReady } from '@playcanvas/web-components'` and `await whenReady('pc-app')` (or any element) before reading `.app`, `.entity` or `.component`, which are `null` until the element is ready.
+
+## Guides
+
+- [PlayCanvas Web Components](/user-manual/web-components/): The concepts, an overview of the tags, and a map of these docs.
+- [Getting Started](/user-manual/web-components/getting-started/): Loading the components from a CDN or npm, the import map, and a first scene.
+- [Building a Scene](/user-manual/web-components/building-a-scene/): A lit scene step by step: `pc-app`, `pc-scene`, a camera, a mesh and a light, and how the elements nest.
+- [Loading Models](/user-manual/web-components/loading-models/): Loading a GLB with `pc-asset` and `pc-model`, listing its hierarchy with `hierarchy()`, and changing its nodes with `pc-node`.
+- [Attributes](/user-manual/web-components/attributes/): How attribute values are parsed: defaults, booleans, numbers, enums, vectors, colors, and asset and material ids.
+- [Adding Behavior with Scripts](/user-manual/web-components/scripting/): Attaching engine `Script` classes with `pc-script` and `pc-script-instance`, and setting their attributes.
+- [Programmatic Access](/user-manual/web-components/programmatic-access/): Driving the engine from JavaScript: `whenReady`, the engine objects behind the elements, and pages with several apps.
+- [Reusable Scenes with Templates](/user-manual/web-components/templates/): Declaring a subtree once in an HTML template and cloning it into live instances, like prefabs.
+- [XR Support](/user-manual/web-components/xr/): WebXR with the engine's XR scripts: a camera rig with `xrSession`, and starting sessions from app events.
+
+## Tag reference
+
+- [Tag Reference](/user-manual/web-components/tags/): Every tag grouped by role, the document structure they form, and where each may be placed.
+- [pc-app](/user-manual/web-components/tags/pc-app/): The root element: creates the application, with graphics options.
+- [pc-scene](/user-manual/web-components/tags/pc-scene/): The scene inside `pc-app`, with fog, exposure and gravity.
+- [pc-entity](/user-manual/web-components/tags/pc-entity/): Entities: names, transforms, hierarchy, and the component tags valid inside them.
+- [pc-asset](/user-manual/web-components/tags/pc-asset/): Declares an asset to load by URL, with its type inferred from the extension and optional lazy loading.
+- [pc-material](/user-manual/web-components/tags/pc-material/): A physically based material: color, metalness, gloss, opacity and texture maps.
+- [pc-model](/user-manual/web-components/tags/pc-model/): Instances a GLB container asset, and hosts components and child entities on the entity it creates.
+- [pc-node](/user-manual/web-components/tags/pc-node/): Binds to a node inside a loaded model to override its transform, state and tags, or add components to it.
+- [pc-camera](/user-manual/web-components/tags/pc-camera/): Projection, field of view, clipping planes, clearing and tone mapping.
+- [pc-light](/user-manual/web-components/tags/pc-light/): Directional, omni and spot lights: color, intensity and shadows.
+- [pc-render](/user-manual/web-components/tags/pc-render/): Primitive shapes with a material and shadow settings.
+- [pc-sky](/user-manual/web-components/tags/pc-sky/): A skybox from a texture asset, with box, dome or infinite projection and optional scene lighting.
+- [pc-gsplat](/user-manual/web-components/tags/pc-gsplat/): Renders a Gaussian splat asset, with shadow and LOD settings.
+- [pc-rigid-body](/user-manual/web-components/tags/pc-rigid-body/): The rigid body type, mass, friction and restitution.
+- [pc-collision](/user-manual/web-components/tags/pc-collision/): Box, sphere, capsule, cone, cylinder and mesh collision shapes.
+- [pc-joint](/user-manual/web-components/tags/pc-joint/): Fixed, ball, hinge, slider and 6DoF joints between two rigid bodies.
+- [pc-wasm](/user-manual/web-components/tags/pc-wasm/): Loads WebAssembly modules such as Ammo, Basis and the Draco decoder.
+- [pc-script](/user-manual/web-components/tags/pc-script/): The script component, which hosts `pc-script-instance` elements.
+- [pc-script-instance](/user-manual/web-components/tags/pc-script-instance/): Attaches one script class to an entity, with attributes set one by one or as JSON.
+- [pc-anim](/user-manual/web-components/tags/pc-anim/): Plays, switches and cross-fades animation clips over an entity hierarchy.
+- [pc-anim-clip](/user-manual/web-components/tags/pc-anim-clip/): Declares a named animation clip of a `pc-anim`.
+- [pc-particle-system](/user-manual/web-components/tags/pc-particle-system/): Emits particles as defined by a JSON asset.
+- [pc-sound](/user-manual/web-components/tags/pc-sound/): The sound component, which groups `pc-sound-slot` elements.
+- [pc-sound-slot](/user-manual/web-components/tags/pc-sound-slot/): A positional or non-positional audio clip, with volume, pitch and autoplay.
+- [pc-audio-listener](/user-manual/web-components/tags/pc-audio-listener/): The point positional sounds are heard from.
+- [pc-screen](/user-manual/web-components/tags/pc-screen/): A 2D screen for user interface elements, with resolution and scale modes.
+- [pc-element](/user-manual/web-components/tags/pc-element/): Text, image and group elements of a user interface.
+- [pc-button](/user-manual/web-components/tags/pc-button/): A button with tint and sprite transitions for its states.
+- [pc-layout-group](/user-manual/web-components/tags/pc-layout-group/): Arranges child elements horizontally or vertically, with spacing, padding and fitting.
+- [pc-layout-child](/user-manual/web-components/tags/pc-layout-child/): Size limits and fit proportions of a child in a layout group.
+- [pc-scroll-view](/user-manual/web-components/tags/pc-scroll-view/): A scrollable viewport with scrollbars and mouse-wheel support.
+- [pc-scrollbar](/user-manual/web-components/tags/pc-scrollbar/): A draggable scrollbar that drives a scroll view.
+
+## API reference
+
+- [Web Components API](https://api.playcanvas.com/web-components/): The classes behind the elements, and the library's JavaScript API.
+- [Web Components on GitHub](https://github.com/playcanvas/web-components): The source, with examples.
+
+## Optional
+
+{{OTHER_PAGES}}

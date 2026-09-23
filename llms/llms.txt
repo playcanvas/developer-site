@@ -1,0 +1,72 @@
+---
+covers: [getting-started, account-management, glossary, press-pack, security]
+---
+# PlayCanvas
+
+> PlayCanvas is an open-source 3D engine for the web, rendering with WebGL2 or WebGPU, and a set of products built on it for games, product configurators, 3D Gaussian splat experiences and other interactive 3D in the browser.
+
+This is the entry point for AI agents. Each product below has its own index: read the index for your task, then fetch only the pages you need. Page links in the indexes point to Markdown versions of the pages.
+
+## Rules
+
+1. **Identify the authoring surface first, and use only its patterns.** The same engine is used in four ways:
+    - **Engine**: code-first, with the `playcanvas` npm package or its CDN build.
+    - **React**: `@playcanvas/react` components and hooks.
+    - **Web Components**: `@playcanvas/web-components` custom elements in plain HTML.
+    - **Editor**: the browser-based visual editor, where code lives in scripts attached to entities.
+
+    In an existing project, `package.json` usually settles it: `@playcanvas/react` means React, `@playcanvas/web-components` means Web Components, and `playcanvas` on its own means Engine. Scripts synced from an Editor project, for example by the VS Code extension, belong to the Editor.
+2. **Write new scripts as ESM scripts.** An ESM script is an exported class that extends `Script`, has a `static scriptName`, and declares attributes as class fields tagged `/** @attribute */`. In the Editor, the file must use the `.mjs` extension. Classic scripts (`pc.createScript` and `attributes.add`) are legacy but still supported: keep an existing classic script classic, and never mix the two formats in one file.
+3. **Engine 2 is current.** Code written for Engine 1 often no longer works, so check [Engine Migrations](/user-manual/engine/migrations/) before relying on an API from memory.
+4. **Prefer the installed version to memory.** If `node_modules/playcanvas` exists, `build/playcanvas.d.ts` is the exact API of the installed engine, and `scripts/esm/` holds production scripts to reuse, such as camera controls, character controllers and XR helpers.
+5. **Run the app to verify.** Rendering, input and physics can only be confirmed in a browser.
+
+## Products
+
+- [Engine](/user-manual/engine/llms.txt): The open-source engine every other product is built on, used directly from npm or a CDN. Its index also covers what all four surfaces share: scripting, graphics, Gaussian splat rendering, physics, animation, XR, user interface and assets.
+- [Editor](/user-manual/editor/llms.txt): The browser-based, collaborative editor for building scenes, managing assets and publishing apps, with the Editor API, the REST API, the MCP server and the VS Code extension.
+- [React](/user-manual/react/llms.txt): `@playcanvas/react`, which builds scenes declaratively from React components and hooks. Includes a reference for every component and hook.
+- [Web Components](/user-manual/web-components/llms.txt): `@playcanvas/web-components`, which builds scenes declaratively from HTML custom elements, with no build step required. Includes a reference for every tag and attribute.
+- [SuperSplat](/user-manual/supersplat/llms.txt): Turns a raw 3D Gaussian splat capture into a shareable scene: clean it in the browser-based SuperSplat Editor, publish it to superspl.at, curate it in Studio and embed it anywhere with the open-source viewer.
+- [SplatTransform](/user-manual/splat-transform/llms.txt): `@playcanvas/splat-transform`, a CLI and library that converts between splat formats, transforms, filters and merges splat data, generates streamed LODs and builds collision meshes.
+- [PCUI](/user-manual/pcui/llms.txt): The UI component library behind the Editor, for building browser-based tools, with PCUI Graph for node-graph editors and Observer for data binding.
+
+## Which product?
+
+- **Gaussian splats**: to show splats in your own app, use the Engine, React or Web Components, starting with Gaussian Splatting in the Engine index. To clean up, edit, publish or share a splat, use SuperSplat. To convert, compress, merge or generate LODs for splat files from a script or pipeline, use SplatTransform.
+- **"The API"**: the Engine API reference documents the engine's classes. The Editor API automates the Editor from inside it. The REST API gives HTTP access to projects, assets, apps and jobs. The SuperSplat API publishes splats from your own pipeline.
+- **An agent operating the Editor**: use the Editor MCP server.
+
+## Starting a project
+
+- [Getting Started](/user-manual/getting-started/): Choose between the Engine, the Editor, React and Web Components, and start a first project.
+- [Start with create-playcanvas](/user-manual/getting-started/start-with-create-playcanvas/): `npm create playcanvas@latest` creates a runnable Vite and TypeScript project for the Engine, React or Web Components, with PlayCanvas Skills included.
+- [Use PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/): `npx skills add playcanvas/skills` adds workflows that help coding agents build and verify Engine, React and Web Components apps.
+- [Developing with AI](/user-manual/engine/developing-with-ai/): How to set up a coding agent on an Engine project: instructions files, the references to give it and how to verify its changes.
+- [MCP Server](/user-manual/editor/mcp-server/): Connect an agent to the PlayCanvas Editor to modify and verify a project through MCP tools, with `npx -y @playcanvas/editor-mcp-server`.
+
+## API reference
+
+- [Engine API](https://api.playcanvas.com/engine/): Every engine class. Class pages follow the pattern `https://api.playcanvas.com/engine/classes/<ClassName>.html`.
+- [Editor API](https://api.playcanvas.com/editor/): The API for scripting the Editor itself.
+- [Web Components API](https://api.playcanvas.com/web-components/): The custom element classes of `@playcanvas/web-components`.
+- [PCUI API](https://api.playcanvas.com/pcui/): PCUI components.
+- [PCUI Graph API](https://api.playcanvas.com/pcui-graph/): The node-graph component.
+- [Observer API](https://api.playcanvas.com/observer/): Observable data and history.
+- [SplatTransform API](https://api.playcanvas.com/splat-transform/): The SplatTransform library.
+- [REST API](/user-manual/api/): HTTP endpoints for projects, assets, apps, jobs and checkpoints, authenticated with a bearer token.
+
+## Examples and source
+
+- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live engine examples. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>.example.mjs`: read it and port what you need rather than importing it.
+- [Engine source](https://github.com/playcanvas/engine): The engine, its examples, and the production scripts in `scripts/esm`.
+- [PlayCanvas on GitHub](https://github.com/playcanvas): The source of every open-source product listed here.
+
+## Optional
+
+- [Complete documentation](/llms-full.txt): The whole User Manual in one file of several megabytes. It is meant for indexing, or for downloading and searching locally, and is too large to read into context.
+- [Community](/user-manual/getting-started/community/): Discord, the forum and the social channels.
+- [Account Management](/user-manual/account-management/): PlayCanvas accounts, organizations and billing.
+- [Glossary](/user-manual/glossary/): Definitions of PlayCanvas terms such as entity, component and asset.
+- [Security](/user-manual/security/): How to report security vulnerabilities.
+{{OTHER_PAGES}}

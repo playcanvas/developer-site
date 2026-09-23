@@ -1,16 +1,19 @@
 // utils/plugins/docusaurus-plugin-llms.mjs
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-import { docIdFromFile, docPathFromId, loadSidebarOrder, sidebarSortKey } from './llms/docs.mjs';
-import { convertDoc } from './llms/markdown.mjs';
+import { docIdFromFile, docPathFromId, loadSidebarOrder, markdownPathFromDocPath, sidebarSortKey } from './llms/docs.mjs';
+import { indexPages, loadIndexes, renderIndex, renderText, sectionOf } from './llms/indexes.mjs';
+import { convertDoc, readFrontMatter } from './llms/markdown.mjs';
 
 /**
- * Docusaurus plugin to generate LLM-friendly documentation files.
- * Generates:
- * - llms.txt: Structured overview with links to all documentation sections
- * - llms-full.txt: Complete documentation content in a single file
+ * Docusaurus plugin to generate LLM-friendly documentation files:
+ * - A Markdown version of every doc, published next to its page
+ *   (/user-manual/engine.md for /user-manual/engine/) and linked from the
+ *   page's head
+ * - The hand-written llms.txt indexes of the llms/ directory, checked and
+ *   published, each with a file of all its pages (see llms/indexes.mjs)
+ * - llms-full.txt: every doc in a single file
  *
  * Only the default locale build generates them: the docs are read from the
  * docs directory, so a localized build would publish a copy of the same files.
@@ -18,18 +21,21 @@ import { convertDoc } from './llms/markdown.mjs';
  * @param {Object} context - Docusaurus context
  * @param {Object} options - Plugin options
  * @param {string} [options.docsDir='docs'] - Path to docs directory relative to site root
+ * @param {string} [options.indexDir='llms'] - Path to the directory of llms.txt indexes relative
+ *   to site root
  * @param {string} [options.sidebarPath='sidebars.js'] - Path to the sidebars file relative to
  *   site root, which sets the order of the docs
  * @param {string[]} [options.excludeDirs=['shader-editor', 'tutorials']] - Directories to exclude
  *   from LLM file generation (e.g., private or unlisted documentation sections)
  * @param {boolean} [options.failOnError=false] - If true, build will fail when LLM file
- *   generation encounters an error, or when a doc cannot be converted faithfully or does
- *   not match a built page. If false (default), errors are logged as warnings and the
- *   build continues. Set to true if LLM files are critical to your deployment.
+ *   generation encounters an error, when a doc cannot be converted faithfully or does not
+ *   match a built page, or when an index links a page that is not published or is over its
+ *   budget. If false (default), errors are logged as warnings and the build continues.
  */
 export default function pluginLlms(context, options = {}) {
     const { siteDir, siteConfig, i18n } = context;
     const docsDir = path.join(siteDir, options.docsDir || 'docs');
+    const indexDir = path.join(siteDir, options.indexDir || 'llms');
     const sidebarPath = path.join(siteDir, options.sidebarPath || 'sidebars.js');
     const baseUrl = siteConfig.url;
     const excludeDirs = options.excludeDirs ?? ['shader-editor', 'tutorials'];
@@ -46,7 +52,7 @@ export default function pluginLlms(context, options = {}) {
 
             console.log('[LLMs Plugin] Generating LLM-friendly documentation files...');
 
-            // Docs that could not be converted faithfully
+            // Docs that could not be converted faithfully, and index problems
             const problems = [];
 
             try {
@@ -59,44 +65,64 @@ export default function pluginLlms(context, options = {}) {
                 const docFiles = collectMarkdownFiles(docsDir, excludeDirs);
                 console.log(`[LLMs Plugin] Found ${docFiles.length} documentation files`);
 
+                // Drafts are not published, and unlisted docs are hidden from the site's navigation and search
+                const sources = docFiles
+                    .map(filePath => ({ filePath, source: fs.readFileSync(filePath, 'utf-8') }))
+                    .filter(({ filePath, source }) => {
+                        const frontMatter = readFrontMatter(source, filePath);
+                        return frontMatter.draft !== true && frontMatter.unlisted !== true;
+                    });
+
+                // Links to published docs point to their Markdown versions
+                const publishedPaths = new Set(sources.map(({ filePath }) => docPathFromId(docIdFromFile(docsDir, filePath))));
+                const linkUrl = markdownLinkMapper(baseUrl, publishedPaths);
+
                 // Document `tsx asTypedoc` code blocks as the site does (loaded here as it starts TypeScript)
                 const { generateDefinitions } = await import('./remark-typedoc.mjs');
                 const typedoc = code => generateDefinitions({ code, typeResolver: typedocTypeResolver });
 
                 // Process files and extract content
-                const processedDocs = docFiles
-                    .map(filePath => processMarkdownFile(filePath, { docsDir, siteDir, baseUrl, typedoc }, problems))
+                const docs = sources
+                    .map(source => processMarkdownFile(source, { docsDir, siteDir, baseUrl, typedoc, linkUrl }, problems))
                     .filter(Boolean);
 
                 // Every doc URL must be a built page (routes are only known in a real build)
                 if (routesPaths) {
                     const routes = new Set(routesPaths);
-                    for (const doc of processedDocs) {
+                    for (const doc of docs) {
                         if (!routes.has(doc.urlPath)) {
                             problems.push(`${doc.relativePath}: no page is built at ${doc.urlPath}`);
                         }
                     }
                 }
 
-                // Sort in the sidebar's reading order, except that the subcategories llms.txt lists
-                // under '## Optional' come last (consumers that truncate lose the end first)
+                // Sort in the sidebar's reading order, except that the subcategories the root
+                // index lists under '## Optional' come last (consumers that truncate lose the end first)
                 const sidebarOrder = await loadSidebarOrder(sidebarPath);
-                processedDocs.sort((a, b) => (isOptionalDoc(a) - isOptionalDoc(b)) ||
+                docs.sort((a, b) => (isOptionalDoc(a) - isOptionalDoc(b)) ||
                     (sidebarSortKey(a.id, sidebarOrder) - sidebarSortKey(b.id, sidebarOrder)) ||
                     a.urlPath.localeCompare(b.urlPath));
 
-                // Generate llms.txt (structured overview)
-                const engineVersion = resolveEngineVersion(siteDir);
-                const llmsTxt = generateLlmsTxt(processedDocs, baseUrl, engineVersion);
-                const llmsTxtPath = path.join(outDir, 'llms.txt');
-                fs.writeFileSync(llmsTxtPath, llmsTxt, 'utf-8');
-                console.log(`[LLMs Plugin] Generated ${llmsTxtPath}`);
+                // A Markdown version of every doc, linked from its page
+                for (const doc of docs) {
+                    const heading = doc.content.startsWith('# ') ? '' : `# ${doc.title}\n\n`;
+                    writeFile(outDir, markdownPathFromDocPath(doc.urlPath), `${heading}${doc.content}\n`);
+                }
+                linkMarkdownVersions(outDir, docs);
+                console.log(`[LLMs Plugin] Generated ${docs.length} Markdown pages`);
 
                 // Generate llms-full.txt (complete content)
-                const llmsFullTxt = generateLlmsFullTxt(processedDocs, baseUrl);
-                const llmsFullTxtPath = path.join(outDir, 'llms-full.txt');
-                fs.writeFileSync(llmsFullTxtPath, llmsFullTxt, 'utf-8');
-                console.log(`[LLMs Plugin] Generated ${llmsFullTxtPath} (${(llmsFullTxt.length / 1024).toFixed(1)} KB)`);
+                const llmsFullTxt = formatBundle({
+                    title: 'PlayCanvas Developer Documentation - Full Content',
+                    summary: 'The complete text of the PlayCanvas User Manual in one file, for indexing, or for downloading and searching.',
+                    indexUrl: `${baseUrl}/llms.txt`,
+                    docs,
+                    baseUrl
+                });
+                writeFile(outDir, '/llms-full.txt', llmsFullTxt);
+                console.log(`[LLMs Plugin] Generated llms-full.txt (${(llmsFullTxt.length / 1024).toFixed(1)} KB)`);
+
+                publishIndexes({ siteDir, indexDir, outDir, docs, baseUrl, engineVersion: resolveEngineVersion(siteDir) }, problems);
 
             } catch (error) {
                 if (failOnError) {
@@ -111,7 +137,7 @@ export default function pluginLlms(context, options = {}) {
             }
 
             if (problems.length > 0) {
-                const message = `[LLMs Plugin] ${problems.length} doc problem(s):\n  ${problems.join('\n  ')}`;
+                const message = `[LLMs Plugin] ${problems.length} problem(s):\n  ${problems.join('\n  ')}`;
                 if (failOnError) {
                     throw new Error(message);
                 }
@@ -153,37 +179,33 @@ function collectMarkdownFiles(dir, excludeDirs = [], files = []) {
 }
 
 /**
- * Process a markdown file and extract metadata and content. Returns null for
- * a doc that is not published, and adds anything that could not be converted
+ * Process a markdown file and extract metadata and content. Returns null for a
+ * doc that cannot be parsed, and adds anything that could not be converted
  * faithfully to problems.
  */
-function processMarkdownFile(filePath, { docsDir, siteDir, baseUrl, typedoc }, problems) {
+function processMarkdownFile({ filePath, source }, { docsDir, siteDir, baseUrl, typedoc, linkUrl }, problems) {
     const relativePath = path.relative(docsDir, filePath).split(path.sep).join('/');
     const id = docIdFromFile(docsDir, filePath);
     const urlPath = docPathFromId(id);
 
     let doc;
     try {
-        doc = convertDoc(fs.readFileSync(filePath, 'utf-8'), {
+        doc = convertDoc(source, {
             filePath,
             pageUrl: `${baseUrl}${urlPath}`,
             siteUrl: baseUrl,
             siteDir,
             fileUrl: file => `${baseUrl}${docPathFromId(docIdFromFile(docsDir, file))}`,
+            linkUrl,
             typedoc
         });
     } catch (error) {
         problems.push(`${relativePath}: ${error.message}`);
         return null;
     }
-
-    // Drafts are not published, and unlisted docs are hidden from the site's navigation and search
-    const { frontMatter } = doc;
-    if (frontMatter.draft === true || frontMatter.unlisted === true) {
-        return null;
-    }
     problems.push(...doc.problems.map(problem => `${relativePath}: ${problem}`));
 
+    const { frontMatter } = doc;
     return {
         filePath,
         relativePath,
@@ -198,6 +220,123 @@ function processMarkdownFile(filePath, { docsDir, siteDir, baseUrl, typedoc }, p
 }
 
 /**
+ * Map an absolute URL of a published doc's page to its Markdown version
+ */
+function markdownLinkMapper(baseUrl, publishedPaths) {
+    return (url) => {
+        if (!url.startsWith(`${baseUrl}/`)) return url;
+
+        const target = new URL(url);
+        const docPath = [target.pathname, `${target.pathname}/`].find(candidate => publishedPaths.has(candidate));
+        return docPath ? `${baseUrl}${markdownPathFromDocPath(docPath)}${target.search}${target.hash}` : url;
+    };
+}
+
+/**
+ * Point every doc's page to its Markdown version with a link in its head. A
+ * preview without a site build has no pages to change.
+ */
+function linkMarkdownVersions(outDir, docs) {
+    for (const doc of docs) {
+        const file = path.join(outDir, ...doc.urlPath.split('/'), 'index.html');
+        if (!fs.existsSync(file)) continue;
+
+        const html = fs.readFileSync(file, 'utf-8');
+        const tag = `<link rel="alternate" type="text/markdown" href="${markdownPathFromDocPath(doc.urlPath)}">`;
+        if (!html.includes(tag)) {
+            fs.writeFileSync(file, html.replace('</head>', `${tag}</head>`), 'utf-8');
+        }
+    }
+}
+
+/**
+ * Publish the llms.txt indexes, each with the file of all its pages
+ */
+function publishIndexes({ siteDir, indexDir, outDir, docs, baseUrl, engineVersion }, problems) {
+    if (!fs.existsSync(path.join(indexDir, 'llms.txt'))) {
+        problems.push(`there is no root index at ${path.relative(siteDir, path.join(indexDir, 'llms.txt'))}`);
+        return;
+    }
+    const indexes = loadIndexes(siteDir, indexDir);
+    const llmsFiles = new Set(['/llms-full.txt', ...indexes.flatMap(index => [index.publishedPath, index.bundlePath].filter(Boolean))]);
+
+    // Every page of the User Manual (but its own) is linked from an index or listed by one
+    const sections = new Set(docs.map(doc => sectionOf(doc.urlPath)).filter(Boolean));
+    for (const section of sections) {
+        const covering = indexes.filter(index => index.covers.includes(section));
+        if (covering.length !== 1) {
+            problems.push(`the ${section} section is covered by ${covering.length} indexes${covering.length ? ` (${covering.map(index => index.source).join(', ')})` : ''}, not one`);
+        }
+    }
+    for (const index of indexes) {
+        for (const section of index.covers.filter(covered => !sections.has(covered))) {
+            problems.push(`${index.source}: covers ${section}, which has no published docs`);
+        }
+    }
+
+    const vars = { ENGINE_VERSION: engineVersion };
+    for (const index of indexes) {
+        const { linked, others } = indexPages(index, docs);
+        let bundle = null;
+        if (index.bundlePath) {
+            // Problems in the summary are reported for the index itself
+            const summary = renderText(index.summary, { source: index.source, siteUrl: baseUrl, docs, llmsFiles, vars }, []);
+            const pages = [...linked, ...others];
+            const text = formatBundle({ title: `${index.title}: All Pages`, summary, indexUrl: `${baseUrl}${index.publishedPath}`, docs: pages, baseUrl });
+            writeFile(outDir, index.bundlePath, text);
+            bundle = { pages: pages.length, bytes: Buffer.byteLength(text) };
+        }
+        const text = renderIndex(index, { siteUrl: baseUrl, docs, llmsFiles, others, bundle, vars }, problems);
+        writeFile(outDir, index.publishedPath, text);
+    }
+    console.log(`[LLMs Plugin] Published ${indexes.length} llms.txt indexes`);
+}
+
+/**
+ * Format docs as a single file: a header, then every doc with its title and URL
+ */
+function formatBundle({ title, summary, indexUrl, docs, baseUrl }) {
+    const lines = [];
+
+    lines.push(`# ${title}
+
+> ${summary}
+
+Index: ${indexUrl}
+Total Documents: ${docs.length}
+Generated: ${new Date().toISOString().split('T')[0]}
+
+${'='.repeat(80)}
+`);
+
+    for (const doc of docs) {
+        const tagsLine = (doc.tags && doc.tags.length > 0)
+            ? `Tags: ${Array.isArray(doc.tags) ? doc.tags.join(', ') : doc.tags}\n`
+            : '';
+
+        lines.push(`## ${doc.title}
+
+URL: ${baseUrl}${doc.urlPath}
+${tagsLine}
+${doc.content}
+
+${'-'.repeat(80)}
+`);
+    }
+
+    return lines.join('\n');
+}
+
+/**
+ * Write a file of the build at its URL path
+ */
+function writeFile(outDir, urlPath, text) {
+    const file = path.join(outDir, ...urlPath.split('/'));
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, text, 'utf-8');
+}
+
+/**
  * Type resolver for remark-typedoc: the one in docusaurus.config.js, without its
  * links to the API reference (the type text is what an LLM needs)
  */
@@ -206,7 +345,7 @@ function typedocTypeResolver({ displayName, tags }) {
 }
 
 /**
- * Whether a doc is in a User Manual subcategory that llms.txt lists under '## Optional'
+ * Whether a doc is in a User Manual subcategory that the root index lists under '## Optional'
  */
 function isOptionalDoc(doc) {
     const parts = doc.urlPath.split('/').filter(Boolean);
@@ -236,21 +375,9 @@ function getCategoryFromPath(urlPath) {
     return categoryMap[parts[0]] || parts[0];
 }
 
-// Subcategories rendered under '## Optional' (per the llms.txt spec, a section
-// that consumers can skip when a shorter context is needed)
+// Subcategories the root index lists under '## Optional' (per the llms.txt spec,
+// a section that consumers can skip when a shorter context is needed)
 const OPTIONAL_SUBCATEGORIES = ['account-management', 'glossary', 'press-pack', 'security'];
-
-// User Manual subcategory order, following sidebars.js (minus the
-// subcategories in OPTIONAL_SUBCATEGORIES, which render under '## Optional')
-const USER_MANUAL_ORDER = [
-    'Overview',
-    'getting-started',
-    'engine', 'editor', 'react', 'web-components',
-    'supersplat', 'splat-transform',
-    'ecs', 'assets', 'scripting', 'graphics', 'gaussian-splatting',
-    'animation', 'physics', '2D', 'user-interface', 'xr',
-    'optimization', 'api', 'pcui'
-];
 
 /**
  * Resolve the installed PlayCanvas engine version, or null if unavailable
@@ -262,195 +389,4 @@ function resolveEngineVersion(siteDir) {
     } catch {
         return null;
     }
-}
-
-/**
- * Load the hand-written llms.txt header partial
- */
-function loadHeaderTemplate() {
-    const templatePath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'llms', 'llms-header.md');
-    return fs.readFileSync(templatePath, 'utf-8').replace(/\r\n/g, '\n');
-}
-
-/**
- * Substitute {{NAME}} placeholders, then drop any line with an unresolved
- * placeholder (e.g. the engine version line when resolution failed)
- */
-function applyTemplate(template, vars) {
-    const substituted = template.replace(/\{\{(\w+)\}\}/g, (match, name) => {
-        const value = vars[name];
-        return (value === null || value === undefined) ? match : String(value);
-    });
-    return substituted
-        .split('\n')
-        .filter(line => !/\{\{\w+\}\}/.test(line))
-        .join('\n');
-}
-
-/**
- * Format a doc as an llms.txt list entry: - [Title](url): description
- * (If per-page markdown variants are published later, the link target changes here.)
- */
-function formatDocEntry(doc, baseUrl) {
-    const title = doc.title.replace(/\s+/g, ' ').replace(/[[\]]/g, '\\$&').trim();
-    let description = (doc.description || '').replace(/\s+/g, ' ').trim();
-    if (description.length > 300) {
-        description = `${description.slice(0, 300)}...`;
-    }
-    const link = `- [${title}](${baseUrl}${doc.urlPath})`;
-    return description ? `${link}: ${description}` : link;
-}
-
-/**
- * Format a subcategory slug as a display name
- */
-function formatSubcategoryName(subcat) {
-    // Acronyms that should be fully uppercased
-    const acronyms = new Set(['api', 'xr', '2d', 'ui', 'ecs', 'pcui']);
-    // Brand names with specific capitalization
-    const brandNames = { 'playcanvas': 'PlayCanvas', 'supersplat': 'SuperSplat' };
-    return subcat
-        .split('-')
-        .map((word) => {
-            const lower = word.toLowerCase();
-            if (acronyms.has(lower)) return word.toUpperCase();
-            if (brandNames[lower]) return brandNames[lower];
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        })
-        .join(' ');
-}
-
-/**
- * Render subcategory groups as lines: an H3 heading when a subcategory has
- * multiple docs, then one list entry per doc
- */
-function renderSubcategorySections(subcategories, order, baseUrl) {
-    const lines = [];
-
-    // Sort subcategories: use defined order if available, otherwise alphabetical
-    const sortedSubcats = Object.keys(subcategories).sort((a, b) => {
-        if (order) {
-            const indexA = order.indexOf(a);
-            const indexB = order.indexOf(b);
-            // Items in order come first, in their defined order
-            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-            if (indexA !== -1) return -1;
-            if (indexB !== -1) return 1;
-        }
-        // Fallback to alphabetical
-        return a.localeCompare(b);
-    });
-
-    for (const subcat of sortedSubcats) {
-        const subcatDocs = subcategories[subcat];
-
-        if (subcatDocs.length > 1) {
-            lines.push(`### ${formatSubcategoryName(subcat)}`);
-        }
-
-        for (const doc of subcatDocs) {
-            lines.push(formatDocEntry(doc, baseUrl));
-        }
-
-        if (subcatDocs.length > 1) {
-            lines.push('');
-        }
-    }
-
-    return lines;
-}
-
-/**
- * Generate the llms.txt file (structured overview)
- */
-function generateLlmsTxt(docs, baseUrl, engineVersion) {
-    const lines = [];
-
-    lines.push(applyTemplate(loadHeaderTemplate(), {
-        BASE_URL: baseUrl,
-        ENGINE_VERSION: engineVersion,
-        TOTAL_DOCS: String(docs.length),
-        DATE: new Date().toISOString().split('T')[0]
-    }));
-
-    // Group by category
-    const categories = {};
-    for (const doc of docs) {
-        if (!categories[doc.category]) {
-            categories[doc.category] = [];
-        }
-        categories[doc.category].push(doc);
-    }
-
-    // User Manual: group by subcategory (second level path), holding back
-    // secondary subcategories for the '## Optional' section
-    const mainSubcats = {};
-    const optionalSubcats = {};
-    for (const doc of categories['User Manual'] ?? []) {
-        const parts = doc.urlPath.split('/').filter(Boolean);
-        const subcat = parts.length > 1 ? parts[1] : 'Overview';
-        const target = OPTIONAL_SUBCATEGORIES.includes(subcat) ? optionalSubcats : mainSubcats;
-        if (!target[subcat]) {
-            target[subcat] = [];
-        }
-        target[subcat].push(doc);
-    }
-
-    lines.push('## User Manual\n');
-    lines.push(...renderSubcategorySections(mainSubcats, USER_MANUAL_ORDER, baseUrl));
-
-    // Add any remaining categories
-    for (const category of Object.keys(categories)) {
-        if (category === 'User Manual') continue;
-
-        const docLinks = categories[category]
-            .map(doc => formatDocEntry(doc, baseUrl))
-            .join('\n');
-
-        lines.push(`## ${category}\n\n${docLinks}\n`);
-    }
-
-    if (Object.keys(optionalSubcats).length > 0) {
-        lines.push('## Optional\n');
-        lines.push('Secondary content that most coding tasks will not need.\n');
-        lines.push(...renderSubcategorySections(optionalSubcats, OPTIONAL_SUBCATEGORIES, baseUrl));
-    }
-
-    return `${lines.join('\n').trimEnd()}\n`;
-}
-
-/**
- * Generate the llms-full.txt file (complete content)
- */
-function generateLlmsFullTxt(docs, baseUrl) {
-    const lines = [];
-
-    lines.push(`# PlayCanvas Developer Documentation - Full Content
-
-> This file contains the complete text content of the PlayCanvas documentation.
-> It is designed for consumption by Large Language Models (LLMs) and AI assistants.
-
-Base URL: ${baseUrl}
-Total Documents: ${docs.length}
-Generated: ${new Date().toISOString().split('T')[0]}
-
-${'='.repeat(80)}
-`);
-
-    for (const doc of docs) {
-        const tagsLine = (doc.tags && doc.tags.length > 0)
-            ? `Tags: ${Array.isArray(doc.tags) ? doc.tags.join(', ') : doc.tags}\n`
-            : '';
-
-        lines.push(`## ${doc.title}
-
-URL: ${baseUrl}${doc.urlPath}
-${tagsLine}
-${doc.content}
-
-${'-'.repeat(80)}
-`);
-    }
-
-    return lines.join('\n');
 }

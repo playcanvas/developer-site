@@ -1,0 +1,213 @@
+---
+covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, user-interface, xr, optimization, 2D]
+---
+# PlayCanvas Engine
+
+> The PlayCanvas Engine is an open-source JavaScript 3D engine that renders with WebGL2 or WebGPU. It is published as `playcanvas` on npm, with TypeScript declarations, and runs every PlayCanvas product. This index describes Engine {{ENGINE_VERSION}}.
+
+Use this index to write code against the engine directly. React, Web Components and Editor projects run on the same engine, so the features covered here (entities and components, scripts, graphics, Gaussian splats, physics, animation, XR, user interface and assets) apply to them too. How each surface expresses them is in its own index: [React](/user-manual/react/llms.txt), [Web Components](/user-manual/web-components/llms.txt) and [Editor](/user-manual/editor/llms.txt).
+
+## Rules
+
+- **Create the app** with `new Application(canvas, options)`, then call `app.start()`. Pass every input device you read, or it stays `null`: for example `new Application(canvas, { mouse: new Mouse(canvas), keyboard: new Keyboard(window), touch: new TouchDevice(canvas) })`, plus `elementInput: new ElementInput(canvas)` for user interface elements.
+- **WebGL2 is the default device.** For WebGPU, create the device first with `await createGraphicsDevice(canvas, { deviceTypes: ['webgpu', 'webgl2'] })` and pass it as the `graphicsDevice` option. WebGL1 is not supported.
+- **Build the scene from entities and components**: `const box = new Entity('box'); box.addComponent('render', { type: 'box' }); app.root.addChild(box);`. Meshes use the `render` component, as the `model` component is deprecated.
+- **Y is up**, and cameras and `entity.forward` point along −Z.
+- **Load assets before using them.** A GLB is a `container` asset: create it with `new Asset('robot', 'container', { url })`, load it with an `AssetListLoader` (`await new Promise(resolve => loader.load(resolve))`) or `app.assets.load`, then add `asset.resource.instantiateRenderEntity()` to the scene. A Gaussian splat is a `gsplat` asset, rendered by the `gsplat` component.
+- **Add behavior as `Script` classes**: `entity.addComponent('script'); entity.script.create(Rotator, { properties: { speed: 2 } })`. Code that belongs to no entity can listen to `app.on('update', (dt) => { ... })`.
+- **Reuse the production scripts** in `playcanvas/scripts/esm/` before writing your own, for example `import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs'`.
+- **Physics needs ammo.js.** Configure it with `WasmModule.setConfig('Ammo', ...)` and wait for `WasmModule.getInstance('Ammo', ...)` before creating the application.
+- **Colors are linear.** Color textures must be sRGB: give texture assets an sRGB encoding, and create textures in an sRGB pixel format such as `PIXELFORMAT_SRGBA8`. A material's emissive color defaults to black and tints its emissive map, so set it to white when you assign a map.
+- **For post-processing, use CameraFrame**, which provides bloom, SSAO, TAA, depth of field and color grading. The script-based post effects are legacy.
+- **Code written for Engine 1 often breaks in Engine 2.** In particular:
+    - Tone mapping and gamma are set per camera (`toneMapping` and `gammaCorrection`), not on the scene.
+    - Fog settings are properties of `scene.fog`: `type`, `color`, `start`, `end` and `density`.
+    - To render to a texture, set the camera's `renderTarget`, as layers no longer have one.
+    - `BasicMaterial` and `AudioSourceComponent` are gone: use `StandardMaterial` and the `sound` component. Custom shaders use `ShaderMaterial`.
+
+## Setting up
+
+- [Using the Engine Standalone](/user-manual/engine/standalone/): Setting up a project with Vite and npm, or without a build step using an import map and the CDN build.
+- [Start with create-playcanvas](/user-manual/getting-started/start-with-create-playcanvas/): `npm create playcanvas@latest my-app -- -f engine` creates a runnable Vite and TypeScript project, with PlayCanvas Skills for coding agents.
+- [Developing with AI](/user-manual/engine/developing-with-ai/): Setting up a coding agent on an Engine project and verifying its changes in a browser.
+- [Engine Migrations](/user-manual/engine/migrations/): The breaking changes of each major release. Read it before using an API you remember from Engine 1.
+- [Supported Browsers](/user-manual/engine/supported-browsers/): Minimum browser versions for WebGL2 and WebGPU.
+- [Running the Engine in Node.js](/user-manual/engine/running-in-node/): Running the engine on a server for multiplayer, asset processing or unit tests.
+
+## Entities and components
+
+- [Entity Component System](/user-manual/ecs/): How entities, components and systems organize objects and behavior.
+- [Entities](/user-manual/ecs/entities/): Creating, parenting, enabling and managing entities.
+- [Components](/user-manual/ecs/components/): Adding cameras, lights, physics, scripts and other behavior to entities.
+- [Hierarchy and Transformations](/user-manual/ecs/hierarchy-and-transformations/): Local and world position, rotation and scale in a parent-child hierarchy.
+- [Searching the Hierarchy](/user-manual/ecs/searching-the-hierarchy/): Finding entities at runtime by name, tag, path or callback.
+
+## Scripting
+
+- [ESM Scripts](/user-manual/scripting/esm-scripts/): The current script format: classes that extend `Script`, with static imports.
+- [Script Lifecycle](/user-manual/scripting/script-lifecycle/): When `initialize`, `postInitialize`, `update`, `postUpdate` and `destroy` run.
+- [ESM Script Attributes](/user-manual/scripting/script-attributes/esm/): The complete reference for ESM script attributes: every type, the JSDoc tags that declare them, and conditional visibility.
+- [Calling the Engine API](/user-manual/scripting/engine-api/): The engine classes and patterns scripts use most, for entities, transforms, input, assets and physics.
+- [Events](/user-manual/scripting/events/): Communicating between scripts with `on`, `once`, `off` and `fire`.
+- [Application Lifecycle](/user-manual/scripting/application-lifecycle/): The order in which an application initializes and runs its update loop.
+- [Migration Guide](/user-manual/scripting/migration-guide/): Converting classic scripts to ESM scripts step by step.
+- [Debugging](/user-manual/scripting/debugging/): Finding script bugs with the browser's developer tools.
+
+## Assets
+
+- [Asset Registry](/user-manual/assets/asset-registry/): Finding, loading and managing assets at runtime through `app.assets`.
+- [Loading and Unloading](/user-manual/assets/loading-unloading/): Loading assets on demand and unloading them to free memory.
+- [Supported Formats](/user-manual/assets/supported-formats/): The file formats the engine loads for models, textures, audio, fonts and other asset types.
+- [Custom Asset Parsers](/user-manual/assets/custom-parsers/): Registering parsers to load new formats or to override the built-in ones.
+- [Building Models](/user-manual/assets/models/building/): Preparing models in Blender, Maya or 3ds Max, with GLB as the recommended format.
+
+## Graphics
+
+- [Graphics](/user-manual/graphics/): The rendering features: WebGL2 and WebGPU backends, PBR, lighting, HDR and post effects.
+
+### Cameras
+
+- [Cameras](/user-manual/graphics/cameras/): Creating cameras, with projection, tone mapping, multiple cameras, camera controls and coordinate conversion.
+- [Camera Controls](/user-manual/graphics/cameras/camera-controls/): Orbit, fly and pan navigation from the ready-made camera-controls script, with mouse, touch and gamepad input.
+- [Tone Mapping & Exposure](/user-manual/graphics/cameras/tone-mapping/): Per-camera tone mapping and gamma, and physically based exposure.
+- [Multiple Cameras](/user-manual/graphics/cameras/multiple-cameras/): Split screen, overlays and other compositions with priorities, viewports, layers and render targets.
+- [Screen and World Coordinates](/user-manual/graphics/cameras/screen-and-world/): Converting between screen and world positions with `screenToWorld` and `worldToScreen`.
+- [Scene Picker](/user-manual/graphics/cameras/scene-picker/): Selecting the meshes and splats under a screen position with the `Picker` API.
+
+### Lighting and materials
+
+- [Lights](/user-manual/graphics/lighting/lights/): Directional, omni and spot lights, with shadows and cookies.
+- [Shadows](/user-manual/graphics/lighting/shadows/): Shadow types (PCF, VSM and PCSS) and tuning them with cascades, resolution and bias.
+- [Clustered Lighting](/user-manual/graphics/lighting/clustered-lighting/): How many omni and spot lights, with shadows and cookies, stay affordable on the GPU.
+- [Runtime Lightmaps](/user-manual/graphics/lighting/runtime-lightmaps/): Baking lightmaps at runtime and mixing baked with dynamic lights.
+- [Physically Based Rendering](/user-manual/graphics/physical-rendering/): PBR fundamentals: diffuse and specular, energy conservation and metalness.
+- [Physical Materials](/user-manual/graphics/physical-rendering/physical-materials/): The maps and parameters of physical materials in the metalness and specular workflows.
+- [Image Based Lighting](/user-manual/graphics/physical-rendering/image-based-lighting/): Lighting with HDR environment maps, prefiltered for roughness.
+- [Transparency](/user-manual/graphics/transparency/): Alpha blending, alpha test, opacity dithering and alpha to coverage, and when to use each.
+- [Linear Workflow](/user-manual/graphics/linear-workflow/): Linear shading, sRGB inputs, and LDR versus HDR output.
+- [Textures](/user-manual/graphics/linear-workflow/textures/): Marking color textures as sRGB, in assets and in code.
+
+### Shaders
+
+- [Shaders](/user-manual/graphics/shaders/): Writing a `ShaderMaterial` with paired GLSL and WGSL, and fitting it into the engine's shader system.
+- [GLSL Specifics](/user-manual/graphics/shaders/glsl-specifics/): Declaring attributes, uniforms and varyings so the engine can bind them and transpile the shader to WGSL.
+- [WGSL Specifics](/user-manual/graphics/shaders/wgsl-specifics/): WGSL rules that affect PlayCanvas shaders, such as derivatives and uniform control flow.
+- [Shader Preprocessor](/user-manual/graphics/shaders/preprocessor/): Defines, includes and conditionals in GLSL, WGSL and compute shaders.
+- [Compute Shaders](/user-manual/graphics/shaders/compute-shaders/): WebGPU-only compute shaders: device checks, resource declarations and dispatch.
+- [Shader Chunk Migrations](/user-manual/graphics/shaders/migrations/): Shader chunk changes in each release, for code that overrides chunks.
+
+### Post-processing and rendering
+
+- [Modern Post Processing](/user-manual/graphics/posteffects/cameraframe/): The CameraFrame HDR stack: volumetric fog, bloom, SSAO, TAA, depth of field, color enhancement and grading.
+- [Layers](/user-manual/graphics/layers/): Controlling render order and visibility with layers and the layer composition.
+- [Render Targets](/user-manual/graphics/advanced-rendering/render-targets/): Rendering into an offscreen texture and using the result in the scene.
+- [Hardware Instancing](/user-manual/graphics/advanced-rendering/hardware-instancing/): Drawing many copies of a mesh at once: instance buffer formats, mesh instance setup and shader chunks.
+- [Batching](/user-manual/graphics/advanced-rendering/batching/): Merging mesh instances into batch groups to reduce draw calls.
+- [Particles](/user-manual/graphics/particles/): Particle systems, starting them from scripts, and soft particles.
+- [Debug Drawing](/user-manual/graphics/debug-drawing/): Drawing lines and wireframe shapes for a single frame to see what a scene is doing.
+- [Wide Lines](/user-manual/graphics/wide-lines/): Thick lines with caps, joins, dashes and gradients, for paths and annotations.
+
+## Gaussian splats
+
+- [Gaussian Splatting](/user-manual/gaussian-splatting/): Capturing, viewing, editing and building apps with 3D Gaussian splats.
+- [Splat File Formats](/user-manual/gaussian-splatting/formats/): Choosing between PLY, SOG, Streamed SOG, GLB and SPZ for editing or for web delivery.
+- [Using the Engine API](/user-manual/gaussian-splatting/building/your-first-app/engine/): A first splat app: loading a `gsplat` asset, adding camera controls and rendering it.
+- [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming/): Streaming large splat scenes with levels of detail.
+- [Performance](/user-manual/gaussian-splatting/building/performance/): Splat counts, fill rate, scene settings and streaming budgets.
+- [Picking](/user-manual/gaussian-splatting/building/picking/): Picking splats with the `Picker`, including world positions from depth.
+- [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders/): Changing how splats render with vertex and fragment shader chunks.
+- [Tonemapping and Exposure](/user-manual/gaussian-splatting/building/tonemapping/): How tone mapping, exposure and fog affect splats, and how to opt splats out.
+- [Shadows](/user-manual/gaussian-splatting/building/shadows/): Casting shadows from splats onto meshes.
+- [Relighting](/user-manual/gaussian-splatting/building/relighting/): Relighting a splat scene with standard lights through a proxy mesh.
+- [Render on Demand](/user-manual/gaussian-splatting/building/render-on-demand/): Rendering only when something changes, while streaming continues in the background.
+- [Splat Rendering Architecture](/user-manual/gaussian-splatting/rendering-architecture/): How the engine renders splats: the work buffer, global sorting and the renderers.
+- [Procedural Splats](/user-manual/gaussian-splatting/building/procedural-splats/): Generating splats on the CPU or GPU with a `GSplatContainer`.
+- [SuperSplat](/user-manual/supersplat/llms.txt): The index for cleaning up, editing and publishing splats.
+- [SplatTransform](/user-manual/splat-transform/llms.txt): The index for converting, compressing and generating LODs for splat files.
+
+## Physics
+
+- [Physics](/user-manual/physics/): Rigid bodies, collision shapes, motion, collision events, triggers, ray casts and joints, on every surface.
+- [Getting Started](/user-manual/physics/physics-basics/): Loading ammo.js in an engine-only app or on another surface, gravity, units and how the simulation steps.
+- [Rigid Bodies](/user-manual/physics/rigid-bodies/): Static, dynamic and kinematic bodies: mass, friction, restitution, damping, sleeping, teleporting and collision groups.
+- [Collision Shapes](/user-manual/physics/collision-shapes/): Box, sphere, capsule, cylinder, cone, mesh and compound shapes, their offsets, and how scale applies.
+- [Moving Bodies](/user-manual/physics/forces-and-impulses/): Moving dynamic bodies with forces, impulses, torque and velocity, and kinematic bodies through their transform.
+- [Collision Events](/user-manual/physics/collision-events/): The `contact`, `collisionstart` and `collisionend` events, with contact points and impulses.
+- [Trigger Volumes](/user-manual/physics/trigger-volumes/): Detecting bodies entering and leaving a region with `triggerenter` and `triggerleave`.
+- [Ray Casting](/user-manual/physics/ray-casting/): `raycastFirst` and `raycastAll`, filtering hits, and picking entities under the pointer.
+- [Joints](/user-manual/physics/joints/): Fixed, ball, hinge, slider and 6DoF joints with limits, motors, springs and breaking, using the joint component (in alpha).
+
+## Animation
+
+- [Animation](/user-manual/animation/): State-based animation with animation clips, animstategraph assets and the anim component.
+- [Anim Component](/user-manual/animation/anim-component/): Connecting an animstategraph and animation assets to an entity.
+- [Animstategraph Assets](/user-manual/animation/anim-state-graph-assets/): State machines of animation states, transitions, blending, layers and parameters.
+- [Anim Layer Masks](/user-manual/animation/anim-layer-masking/): Driving separate parts of a skeleton from different layers.
+- [Anim Events](/user-manual/animation/anim-events/): Firing named events on animation frames and handling them in scripts.
+
+## User interface
+
+- [User Interface](/user-manual/user-interface/): Choosing between in-canvas UI, built from screen and element components, and HTML and CSS.
+- [User Interface Basics](/user-manual/user-interface/user-interface-basics/): How screens and elements combine for layout, draw order, input and localization.
+- [Screens](/user-manual/user-interface/screens/): Screen-space versus world-space UI, reference resolutions and scaling.
+- [Elements](/user-manual/user-interface/elements/): Positioning and sizing elements with anchors, pivots and margins.
+- [Text Elements](/user-manual/user-interface/text-elements/): Fonts, color markup, alignment and localized text.
+- [Fonts](/user-manual/user-interface/fonts/): Creating the MSDF font assets that text elements need, including with font-tools outside the Editor.
+- [Input](/user-manual/user-interface/input/): Enabling element input with `ElementInput` and handling clicks, hovers and touches.
+
+## XR
+
+- [XR](/user-manual/xr/): WebXR AR and VR: platforms, capabilities and session setup.
+- [Using WebXR](/user-manual/xr/using-webxr/): Checking support, starting AR and VR sessions from user input, and configuring them with the camera component and `XrManager`.
+- [Input Sources](/user-manual/xr/input-sources/): Controllers, tracked hands, gaze and touch.
+- [Capabilities](/user-manual/xr/capabilities/): The supported WebXR modules, such as anchors, depth sensing, hand tracking, hit testing, and mesh and plane detection.
+- [Hit Testing](/user-manual/xr/ar/hit-testing/): Placing virtual objects on real-world surfaces in AR.
+- [Platforms](/user-manual/xr/platforms/): Tested devices and browsers for VR, AR and each capability.
+- [Optimizing WebXR Applications](/user-manual/xr/optimizing-webxr/): Keeping the frame rate up despite stereo rendering, draw calls and AR tracking costs.
+
+## Optimization
+
+- [General Guidelines](/user-manual/optimization/guidelines/): Tuning scripts, draw calls, batching, shaders, lighting, textures and post effects.
+- [Optimizing Load Time](/user-manual/optimization/load-time/): Image formats, texture sizes, preloading, asset audits, compression and staged loading.
+- [Texture Compression](/user-manual/optimization/texture-compression/): Reducing GPU memory and download size with Basis compressed textures.
+- [MiniStats](/user-manual/optimization/mini-stats/): An on-screen overlay of draw calls, frame time, and CPU and GPU timings.
+- [GPU Profiling](/user-manual/optimization/gpu-profiling/): Capturing WebGL and WebGPU frames with native GPU profilers.
+- [Device Pixel Ratio](/user-manual/optimization/runtime-devicepixelratio/): Trading sharpness for fill rate with `maxPixelRatio`.
+
+## API reference
+
+- [Engine API reference](https://api.playcanvas.com/engine/): Every engine class, with pages at `https://api.playcanvas.com/engine/classes/<ClassName>.html`. When the package is installed, `node_modules/playcanvas/build/playcanvas.d.ts` has the same documentation for the exact installed version.
+- [Application](https://api.playcanvas.com/engine/classes/Application.html): Creates the component systems and resource loaders, and runs the update loop.
+- [AppBase](https://api.playcanvas.com/engine/classes/AppBase.html): The base of `Application`, for apps that register only the component systems and resource handlers they use, through `AppOptions`.
+- [Entity](https://api.playcanvas.com/engine/classes/Entity.html): A node of the scene graph that components attach to, with transform methods.
+- [Script](https://api.playcanvas.com/engine/classes/Script.html): The base class of ESM scripts.
+- [Asset](https://api.playcanvas.com/engine/classes/Asset.html): A loadable resource such as a model, texture, splat or script.
+- [AssetListLoader](https://api.playcanvas.com/engine/classes/AssetListLoader.html): Loads a list of assets and calls back once all of them are ready.
+- [AssetRegistry](https://api.playcanvas.com/engine/classes/AssetRegistry.html): Finds and loads assets at runtime, as `app.assets`.
+- [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html): Renders the scene from its entity's viewpoint.
+- [LightComponent](https://api.playcanvas.com/engine/classes/LightComponent.html): A directional, omni or spot light.
+- [RenderComponent](https://api.playcanvas.com/engine/classes/RenderComponent.html): Renders meshes, from primitive shapes to loaded models.
+- [GSplatComponent](https://api.playcanvas.com/engine/classes/GSplatComponent.html): Renders 3D Gaussian splats.
+- [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html): A static, dynamic or kinematic physics body.
+- [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html): A collision shape, for rigid bodies and triggers.
+- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html): Plays and blends animations through an animstategraph.
+- [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html): Positional and non-positional audio.
+- [ScreenComponent](https://api.playcanvas.com/engine/classes/ScreenComponent.html): The root of a screen-space or world-space user interface.
+- [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html): An image, text or group element of a user interface.
+- [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html): The default physically based material.
+- [ShaderMaterial](https://api.playcanvas.com/engine/classes/ShaderMaterial.html): A material with custom GLSL and WGSL shaders.
+- [CameraFrame](https://api.playcanvas.com/engine/classes/CameraFrame.html): The HDR post-processing stack of a camera.
+- [Texture](https://api.playcanvas.com/engine/classes/Texture.html): A GPU texture.
+- [GraphicsDevice](https://api.playcanvas.com/engine/classes/GraphicsDevice.html): The WebGL2 or WebGPU rendering device.
+- [Vec3](https://api.playcanvas.com/engine/classes/Vec3.html), [Quat](https://api.playcanvas.com/engine/classes/Quat.html) and [Color](https://api.playcanvas.com/engine/classes/Color.html): Vectors, rotations and colors.
+- [Mouse](https://api.playcanvas.com/engine/classes/Mouse.html), [Keyboard](https://api.playcanvas.com/engine/classes/Keyboard.html) and [TouchDevice](https://api.playcanvas.com/engine/classes/TouchDevice.html): Input devices, available as `app.mouse`, `app.keyboard` and `app.touch` when passed to the application.
+- [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html): Starts and manages WebXR sessions, as `app.xr`.
+
+## Examples and scripts
+
+- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live examples by category, including animation, cameras, compute, Gaussian splatting, graphics, input, loaders, materials, physics, shaders, sound, user interface and XR. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>.example.mjs`: read it and port what you need rather than importing it.
+- [Engine scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm): Production `Script` classes shipped in the npm package under `playcanvas/scripts/esm/`: camera controls, first- and third-person controllers, CameraFrame post-processing, planar reflections, a shadow catcher, a reference grid, a procedural sky, annotations, XR helpers and Gaussian splat effects.
+
+## Optional
+
+{{OTHER_PAGES}}

@@ -34,6 +34,17 @@ export function docPathFromId(docId) {
 }
 
 /**
+ * URL path of the Markdown version of a doc: '/user-manual/engine/' is published
+ * as '/user-manual/engine.md'
+ *
+ * @param {string} docPath - The URL path of the doc
+ * @returns {string} The URL path of its Markdown version
+ */
+export function markdownPathFromDocPath(docPath) {
+    return docPath === '/' ? '/index.md' : `${docPath.replace(/\/$/, '')}.md`;
+}
+
+/**
  * Number every doc id in the sidebars in reading order
  *
  * @param {string} sidebarPath - Path of the sidebars file
