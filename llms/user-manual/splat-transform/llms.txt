@@ -13,7 +13,7 @@ Use this index to process splat files from a command line, a script or a pipelin
 - **The CLI reads inputs, applies actions in order and writes the last file**: `splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]`, for example `splat-transform input.ply output.sog`. File formats come from the extensions, and several inputs are merged.
 - **For the web, write SOG** (`.sog`), the recommended compressed format, or Streamed SOG (`lod-meta.json`) for scenes too large to load at once.
 - **Decimation (`-d`) must be the final action and write a `.ply`**: convert the result in a second run.
-- **SOG compression and voxelization run on the GPU.**
+- **SOG compression and voxelization use the GPU through WebGPU**, which picks the best adapter unless `-g <index>` chooses one (`--list-gpus` lists them). Without a usable GPU, `-g cpu` compresses SOG on the CPU, 5 to 10 times more slowly, but GPU-only features such as `--filter-cluster` are then unavailable.
 - **To inspect a file without writing one**, use `--stats` or `--info` with `null` as the output.
 - **In the browser, without installing anything**, [superspl.at/convert](https://superspl.at/convert) runs SplatTransform.
 

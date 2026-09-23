@@ -260,7 +260,7 @@ function publishIndexes({ siteDir, indexDir, outDir, docs, baseUrl, engineVersio
     const indexes = loadIndexes(siteDir, indexDir);
     const llmsFiles = new Set(['/llms-full.txt', ...indexes.flatMap(index => [index.publishedPath, index.bundlePath].filter(Boolean))]);
 
-    // Every page of the User Manual (but its own) is linked from an index or listed by one
+    // Every section of the User Manual belongs to one index, which lists its pages
     const sections = new Set(docs.map(doc => sectionOf(doc.urlPath)).filter(Boolean));
     for (const section of sections) {
         const covering = indexes.filter(index => index.covers.includes(section));
@@ -275,8 +275,10 @@ function publishIndexes({ siteDir, indexDir, outDir, docs, baseUrl, engineVersio
     }
 
     const vars = { ENGINE_VERSION: engineVersion };
+    const reachable = new Set();
     for (const index of indexes) {
         const { linked, others } = indexPages(index, docs);
+        [...linked, ...others].forEach(doc => reachable.add(doc));
         let bundle = null;
         if (index.bundlePath) {
             // Problems in the summary are reported for the index itself
@@ -289,11 +291,17 @@ function publishIndexes({ siteDir, indexDir, outDir, docs, baseUrl, engineVersio
         const text = renderIndex(index, { siteUrl: baseUrl, docs, llmsFiles, others, bundle, vars }, problems);
         writeFile(outDir, index.publishedPath, text);
     }
+
+    // Every page can be found from an index
+    for (const doc of docs.filter(published => !reachable.has(published))) {
+        problems.push(`${doc.relativePath}: no index links it or covers its section`);
+    }
     console.log(`[LLMs Plugin] Published ${indexes.length} llms.txt indexes`);
 }
 
 /**
- * Format docs as a single file: a header, then every doc with its title and URL
+ * Format docs as a single file: a header, then every doc with its title, the
+ * URL of its page and the URL of its Markdown version
  */
 function formatBundle({ title, summary, indexUrl, docs, baseUrl }) {
     const lines = [];
@@ -317,6 +325,7 @@ ${'='.repeat(80)}
         lines.push(`## ${doc.title}
 
 URL: ${baseUrl}${doc.urlPath}
+Markdown: ${baseUrl}${markdownPathFromDocPath(doc.urlPath)}
 ${tagsLine}
 ${doc.content}
 

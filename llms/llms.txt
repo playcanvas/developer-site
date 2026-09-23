@@ -65,6 +65,7 @@ This is the entry point for AI agents. Each product below has its own index: rea
 ## Optional
 
 - [Complete documentation](/llms-full.txt): The whole User Manual in one file of several megabytes. It is meant for indexing, or for downloading and searching locally, and is too large to read into context.
+- [Welcome](/user-manual/): The User Manual's front page, which points to Getting Started.
 - [Community](/user-manual/getting-started/community/): Discord, the forum and the social channels.
 - [Account Management](/user-manual/account-management/): PlayCanvas accounts, organizations and billing.
 - [Glossary](/user-manual/glossary/): Definitions of PlayCanvas terms such as entity, component and asset.

@@ -103,6 +103,11 @@ describe('the generated files', () => {
     before(async () => {
         // failOnError makes any problem the plugin finds, such as a broken index link, fail here
         outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'llms-test-'));
+
+        // A built page, for the plugin to link to its Markdown version
+        fs.mkdirSync(outPath('/user-manual/engine/standalone/'), { recursive: true });
+        fs.writeFileSync(outPath('/user-manual/engine/standalone/index.html'), '<!doctype html><html><head><title>Standalone</title></head><body></body></html>');
+
         await pluginLlms({ siteDir, siteConfig: { url: siteUrl } }, { failOnError: true }).postBuild({ outDir });
         llmsFullTxt = read('/llms-full.txt');
     });
@@ -167,6 +172,18 @@ describe('the generated files', () => {
         assert.ok(standalone.includes(`(${siteUrl}/user-manual/getting-started/start-with-create-playcanvas.md)`));
     });
 
+    it('links each built page to its Markdown version', () => {
+        const html = read('/user-manual/engine/standalone/index.html');
+        const tags = html.match(/<link rel="alternate" type="text\/markdown" href="[^"]*">/g);
+        assert.deepEqual(tags, ['<link rel="alternate" type="text/markdown" href="/user-manual/engine/standalone.md">']);
+        assert.ok(html.indexOf(tags[0]) < html.indexOf('</head>'));
+    });
+
+    it('gives the page and the Markdown version of every doc in the bundles', () => {
+        assert.ok(llmsFullTxt.includes(`URL: ${siteUrl}/user-manual/engine/standalone/\nMarkdown: ${siteUrl}/user-manual/engine/standalone.md\n`));
+        assert.ok(read('/user-manual/engine/llms-full.txt').includes(`Markdown: ${siteUrl}/user-manual/engine/standalone.md\n`));
+    });
+
     it('publishes every index, with the file of all its pages', () => {
         for (const index of indexes()) {
             assert.ok(index.text.startsWith(`# ${index.title}\n`));
@@ -188,7 +205,7 @@ describe('the generated files', () => {
 
     it('lists every page of the User Manual in an index', () => {
         const listed = new Set(indexes().flatMap(({ text }) => [...text.matchAll(/\]\(https:\/\/developer\.playcanvas\.com(\/[^)#\s]*)/g)].map(match => match[1])));
-        for (const docPath of publishedDocs().filter(docPath => docPath !== '/user-manual/')) {
+        for (const docPath of publishedDocs()) {
             assert.ok(listed.has(markdownPathFromDocPath(docPath)), `${docPath} is in no index`);
         }
     });

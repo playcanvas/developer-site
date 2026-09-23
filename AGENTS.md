@@ -23,7 +23,7 @@ llms/           # Hand-written llms.txt indexes for AI agents (mirrors their pub
 1. **Localization**: When updating `docs/`, also update the corresponding file in `i18n/ja/docusaurus-plugin-content-docs/current/`
 2. **FAQ**: Do not edit `docs/user-manual/editor/faq.md` directly - it is auto-generated from `faq/`. Run `npm run faq` after editing FAQ source files.
 3. **File operations**: Use `git mv` and `git rm` for moving/deleting files to ensure proper version control tracking.
-4. **LLM indexes**: When you move, rename or remove a page, update any `llms/` index that links it. A new top-level User Manual section must be added to the `covers` list of one index. `npm test` and the build fail until both hold.
+4. **LLM indexes**: When you move, rename or remove a page, update any `llms/` index that links it. A new top-level User Manual section must be added to the `covers` list of one index. `npm test` and CI builds fail until both hold (local builds only warn).
 
 ## Commands
 
