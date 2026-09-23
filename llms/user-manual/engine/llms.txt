@@ -9,8 +9,8 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Rules
 
-- **Create the app** with `new Application(canvas, options)`, then call `app.start()`. Pass every input device you read, or it stays `null`: for example `new Application(canvas, { mouse: new Mouse(canvas), keyboard: new Keyboard(window), touch: new TouchDevice(canvas) })`, plus `elementInput: new ElementInput(canvas)` for user interface elements.
-- **WebGL2 is the default device.** For WebGPU, create the device first with `await createGraphicsDevice(canvas, { deviceTypes: ['webgpu', 'webgl2'] })` and pass it as the `graphicsDevice` option. WebGL1 is not supported.
+- **Create the app with [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)**, whose page shows the setup. Set every input device the app reads in its `AppOptions`, or it stays `null`: `mouse = new Mouse(canvas)`, `keyboard = new Keyboard(window)`, `touch = new TouchDevice(canvas)`, and `elementInput = new ElementInput(canvas)` for user interface elements. The manual's examples use `Application`, a subclass that registers everything and is expected to be deprecated.
+- **WebGL1 is not supported.**
 - **Build the scene from entities and components**: `const box = new Entity('box'); box.addComponent('render', { type: 'box' }); app.root.addChild(box);`. Meshes use the `render` component, as the `model` component is deprecated.
 - **Y is up**, and cameras and `entity.forward` point along −Z.
 - **Load assets before using them.** A GLB is a `container` asset: create it with `new Asset('robot', 'container', { url })`, load it with an `AssetListLoader` (`await new Promise(resolve => loader.load(resolve))`) or `app.assets.load`, then add `asset.resource.instantiateRenderEntity()` to the scene. A Gaussian splat is a `gsplat` asset, rendered by the `gsplat` component.
@@ -177,8 +177,8 @@ Use this index to write code against the engine directly. React, Web Components 
 ## API reference
 
 - [Engine API reference](https://api.playcanvas.com/engine/): Every engine class, with pages at `https://api.playcanvas.com/engine/classes/<ClassName>.html`. When the package is installed, `node_modules/playcanvas/build/playcanvas.d.ts` has the same documentation for the exact installed version.
-- [Application](https://api.playcanvas.com/engine/classes/Application.html): Creates the component systems and resource loaders, and runs the update loop.
-- [AppBase](https://api.playcanvas.com/engine/classes/AppBase.html): The base of `Application`, for apps that register only the component systems and resource handlers they use, through `AppOptions`.
+- [AppBase](https://api.playcanvas.com/engine/classes/AppBase.html): The application, with the component systems and resource handlers you register through `AppOptions`.
+- [Application](https://api.playcanvas.com/engine/classes/Application.html): The subclass of `AppBase` that the manual's examples use.
 - [Entity](https://api.playcanvas.com/engine/classes/Entity.html): A node of the scene graph that components attach to, with transform methods.
 - [Script](https://api.playcanvas.com/engine/classes/Script.html): The base class of ESM scripts.
 - [Asset](https://api.playcanvas.com/engine/classes/Asset.html): A loadable resource such as a model, texture, splat or script.
