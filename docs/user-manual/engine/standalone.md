@@ -98,7 +98,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     // create a box
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -179,7 +179,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     // create a box
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -276,7 +276,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     // create a box
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -352,7 +352,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     // create a box
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);

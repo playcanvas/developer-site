@@ -102,7 +102,7 @@ npm create playcanvas@latest my-app -- -f engine
     // create a box
     // ボックスを作成します
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -184,7 +184,7 @@ npm create playcanvas@latest my-app -- -f engine
 
     // ボックスを作成
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -281,7 +281,7 @@ import * as pc from 'playcanvas';
 
     // ボックスを作成
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -357,7 +357,7 @@ import * as pc from 'playcanvas';
 
     // ボックスを作成します
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
