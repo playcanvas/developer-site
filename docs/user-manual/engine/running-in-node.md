@@ -30,19 +30,25 @@ npm install playcanvas
 When running a PlayCanvas application in Node.js, you are unlikely to require rendering. In this case, you can create a [`NullGraphicsDevice`](https://api.playcanvas.com/engine/classes/NullGraphicsDevice.html), which renders nothing. Since there is nothing to display, a plain object can stand in for the canvas.
 
 ```javascript
-import { Application, NullGraphicsDevice } from 'playcanvas';
+import { AppBase, AppOptions, NullGraphicsDevice, ScriptComponentSystem } from 'playcanvas';
 
 // Nothing is rendered, so a plain object stands in for the canvas
 const canvas = { width: 1, height: 1 };
-const graphicsDevice = new NullGraphicsDevice(canvas);
 
-const app = new Application(canvas, { graphicsDevice });
+const options = new AppOptions();
+options.graphicsDevice = new NullGraphicsDevice(canvas);
+options.componentSystems = [ScriptComponentSystem];
+
+const app = new AppBase(canvas);
+app.init(options);
 app.start();
 ```
 
+[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) only runs the component systems that you register. This application registers the script component system, which [Adding Scripts](#adding-scripts) uses. Register a system for each other component type you add, as described in [Configuring the Application](/user-manual/engine/standalone/#configuring-the-application).
+
 ## Updating the Application
 
-In a browser, `app.start()` begins a main loop driven by `requestAnimationFrame`. Node.js has no `requestAnimationFrame`, so no main loop runs. Instead, call [`app.update(dt)`](https://api.playcanvas.com/engine/classes/AppBase.html#update) at the rate you need. This updates your scripts, animation and physics, and skips rendering entirely.
+In a browser, `app.start()` begins a main loop driven by `requestAnimationFrame`. Node.js has no `requestAnimationFrame`, so no main loop runs. Instead, call [`app.update(dt)`](https://api.playcanvas.com/engine/classes/AppBase.html#update) at the rate you need. This updates the component systems you registered, such as scripts, animation or physics, and skips rendering entirely.
 
 ```javascript
 const TICK_RATE = 20; // updates per second
@@ -132,4 +138,4 @@ export function jsdomSetup() {
 }
 ```
 
-Call `jsdomSetup()` before you create your application. `jsdom` does not provide a main loop either, so keep calling `app.update(dt)` as shown above.
+Call `jsdomSetup()` before you create your application. To load assets, also register the resource handler for each asset type in `AppOptions`, such as `ScriptHandler` for classic scripts. `jsdom` does not provide a main loop either, so keep calling `app.update(dt)` as shown above.

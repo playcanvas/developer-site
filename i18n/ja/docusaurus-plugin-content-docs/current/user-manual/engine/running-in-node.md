@@ -30,19 +30,25 @@ npm install playcanvas
 Node.jsでPlayCanvasアプリケーションを実行する場合、レンダリングは必要ない可能性が高いです。この場合、何もレンダリングしない[`NullGraphicsDevice`](https://api.playcanvas.com/engine/classes/NullGraphicsDevice.html)を作成できます。表示するものがないため、キャンバスの代わりにプレーンなオブジェクトを使用できます。
 
 ```javascript
-import { Application, NullGraphicsDevice } from 'playcanvas';
+import { AppBase, AppOptions, NullGraphicsDevice, ScriptComponentSystem } from 'playcanvas';
 
 // 何もレンダリングしないため、プレーンなオブジェクトをキャンバスの代わりに使用する
 const canvas = { width: 1, height: 1 };
-const graphicsDevice = new NullGraphicsDevice(canvas);
 
-const app = new Application(canvas, { graphicsDevice });
+const options = new AppOptions();
+options.graphicsDevice = new NullGraphicsDevice(canvas);
+options.componentSystems = [ScriptComponentSystem];
+
+const app = new AppBase(canvas);
+app.init(options);
 app.start();
 ```
 
+[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)は、登録したコンポーネントシステムだけを実行します。このアプリケーションは、[スクリプトの追加](#adding-scripts)で使用するスクリプトコンポーネントシステムを登録しています。他の種類のコンポーネントを追加する場合は、[アプリケーションの構成](/user-manual/engine/standalone/#configuring-the-application)で説明しているように、それぞれのシステムを登録してください。
+
 ## アプリケーションの更新 {#updating-the-application}
 
-ブラウザでは、`app.start()`は`requestAnimationFrame`で駆動されるメインループを開始します。Node.jsには`requestAnimationFrame`がないため、メインループは実行されません。代わりに、必要なレートで[`app.update(dt)`](https://api.playcanvas.com/engine/classes/AppBase.html#update)を呼び出してください。これによりスクリプト、アニメーション、物理が更新され、レンダリングは一切行われません。
+ブラウザでは、`app.start()`は`requestAnimationFrame`で駆動されるメインループを開始します。Node.jsには`requestAnimationFrame`がないため、メインループは実行されません。代わりに、必要なレートで[`app.update(dt)`](https://api.playcanvas.com/engine/classes/AppBase.html#update)を呼び出してください。これにより、スクリプト、アニメーション、物理など、登録したコンポーネントシステムが更新され、レンダリングは一切行われません。
 
 ```javascript
 const TICK_RATE = 20; // 1秒あたりの更新回数
@@ -132,4 +138,4 @@ export function jsdomSetup() {
 }
 ```
 
-アプリケーションを作成する前に`jsdomSetup()`を呼び出してください。`jsdom`もメインループを提供しないため、上記のように`app.update(dt)`を呼び出し続けてください。
+アプリケーションを作成する前に`jsdomSetup()`を呼び出してください。アセットをロードするには、クラシックスクリプト用の`ScriptHandler`など、アセットの種類ごとのリソースハンドラーも`AppOptions`に登録してください。`jsdom`もメインループを提供しないため、上記のように`app.update(dt)`を呼び出し続けてください。
