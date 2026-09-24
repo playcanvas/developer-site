@@ -147,16 +147,19 @@ app.touch.on(pc.EVENT_TOUCHSTART, (event) => {
 
 ## Debugging
 
-The picker exposes its internal buffers which can be useful for debugging:
+Use [TextureRenderer](../../graphics/debug-drawing.md#texturerenderer) to inspect the picker's buffers each frame.
 
 ```javascript
-// Display the color buffer (object IDs)
-if (picker.colorBuffer) {
-    app.drawTexture(0.55, -0.77, 0.2, 0.2, picker.colorBuffer);
-}
+import { TextureRenderer } from 'playcanvas';
 
-// Display the depth buffer
-if (picker.depthBuffer) {
-    app.drawTexture(0.77, -0.77, 0.2, 0.2, picker.depthBuffer);
-}
+const textures = new TextureRenderer(app);
+
+app.on('update', () => {
+    if (picker.colorBuffer) {
+        textures.draw(picker.colorBuffer, 0.725, 0.835, 0.1, 0.1);
+    }
+    if (picker.depthBuffer) {
+        textures.draw(picker.depthBuffer, 0.835, 0.835, 0.1, 0.1);
+    }
+});
 ```
