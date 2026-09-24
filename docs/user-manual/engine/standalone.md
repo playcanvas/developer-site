@@ -1,6 +1,6 @@
 ---
 title: Using the Engine Standalone
-description: Build PlayCanvas applications without the Editor using npm, a CDN, or a direct script include.
+description: Build PlayCanvas applications without the Editor, using npm and a build tool, or an import map and a CDN.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -49,7 +49,8 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 2. Install `playcanvas` and `vite`:
 
     ```sh
-    npm install playcanvas vite --save-dev
+    npm install playcanvas
+    npm install vite --save-dev
     ```
 
 3. Create an `index.html` and paste this:
@@ -81,6 +82,9 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // resize the canvas when the window is resized
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
     const camera = new pc.Entity();
@@ -130,7 +134,8 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 2. Install `playcanvas` and `vite`:
 
     ```sh
-    npm install playcanvas vite --save-dev
+    npm install playcanvas
+    npm install vite --save-dev
     ```
 
 3. Create an `index.html` and paste this:
@@ -162,6 +167,9 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // resize the canvas when the window is resized
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
     const camera = new pc.Entity();
@@ -260,6 +268,9 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
 
+    // resize the canvas when the window is resized
+    window.addEventListener('resize', () => app.resizeCanvas());
+
     // create a camera
     const camera = new pc.Entity();
     camera.addComponent('camera', {
@@ -326,7 +337,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
 3. Create a `main.ts` and paste this:
 
-    ```javascript title="main.ts"
+    ```typescript title="main.ts"
     import * as pc from 'playcanvas';
 
     // create an application
@@ -335,6 +346,9 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // resize the canvas when the window is resized
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
     const camera = new pc.Entity();
@@ -370,7 +384,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 5. Compile `main.ts` to `main.js`:
 
     ```sh
-    npx tsc main.ts --lib esnext,dom --module esnext --moduleResolution node
+    npx tsc main.ts --lib esnext,dom --module esnext --moduleResolution bundler --types webxr
     ```
 
 6. Run `serve`:

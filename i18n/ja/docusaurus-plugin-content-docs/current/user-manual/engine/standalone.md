@@ -1,6 +1,6 @@
 ---
 title: Engineをスタンドアロンで使用する
-description: Editorを使わず、npm、CDN、または直接スクリプト読み込みでPlayCanvasアプリケーションを構築します。
+description: Editorを使わず、npmとビルドツール、またはインポートマップとCDNでPlayCanvasアプリケーションを構築します。
 ---
 
 import Tabs from '@theme/Tabs';
@@ -49,7 +49,8 @@ npm create playcanvas@latest my-app -- -f engine
 2. `playcanvas`と`vite`をインストールします。
 
     ```sh
-    npm install playcanvas vite --save-dev
+    npm install playcanvas
+    npm install vite --save-dev
     ```
 
 3. `index.html`を作成し、これを貼り付けます。
@@ -82,6 +83,10 @@ npm create playcanvas@latest my-app -- -f engine
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // resize the canvas when the window is resized
+    // ウィンドウのサイズが変わったらキャンバスのサイズを変更します
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
     // カメラを作成します
@@ -135,7 +140,8 @@ npm create playcanvas@latest my-app -- -f engine
 2. `playcanvas`と`vite`をインストールします。
 
     ```sh
-    npm install playcanvas vite --save-dev
+    npm install playcanvas
+    npm install vite --save-dev
     ```
 
 3. `index.html`を作成し、これを貼り付けます。
@@ -167,6 +173,9 @@ npm create playcanvas@latest my-app -- -f engine
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // ウィンドウのサイズが変わったらキャンバスのサイズを変更
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // カメラを作成
     const camera = new pc.Entity();
@@ -265,6 +274,9 @@ import * as pc from 'playcanvas';
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
 
+    // ウィンドウのサイズが変わったらキャンバスのサイズを変更
+    window.addEventListener('resize', () => app.resizeCanvas());
+
     // カメラを作成
     const camera = new pc.Entity();
     camera.addComponent('camera', {
@@ -331,7 +343,7 @@ import * as pc from 'playcanvas';
 
 3. `main.ts` を作成し、これを貼り付けます:
 
-    ```javascript title="main.ts"
+    ```typescript title="main.ts"
     import * as pc from 'playcanvas';
 
     // アプリケーションを作成します
@@ -340,6 +352,9 @@ import * as pc from 'playcanvas';
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // ウィンドウのサイズが変わったらキャンバスのサイズを変更します
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // カメラを作成します
     const camera = new pc.Entity();
@@ -375,7 +390,7 @@ import * as pc from 'playcanvas';
 5. `main.ts` を `main.js` にコンパイルします:
 
     ```sh
-    npx tsc main.ts --lib esnext,dom --module esnext --moduleResolution node
+    npx tsc main.ts --lib esnext,dom --module esnext --moduleResolution bundler --types webxr
     ```
 
 6. `serve` を実行します:
