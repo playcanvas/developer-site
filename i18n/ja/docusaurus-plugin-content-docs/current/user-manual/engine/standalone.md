@@ -76,10 +76,29 @@ npm create playcanvas@latest my-app -- -f engine
     ```javascript title="main.js"
     import * as pc from 'playcanvas';
 
-    // create an application
-    // アプリケーションを作成します
+    // create a graphics device, preferring WebGPU over WebGL 2.0
+    // WebGPUを優先してグラフィックスデバイスを作成します
     const canvas = document.getElementById('application');
-    const app = new pc.Application(canvas);
+    const device = await pc.createGraphicsDevice(canvas, {
+        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    });
+
+    // create an application with the systems and handlers it uses
+    // 使用するシステムとハンドラーを指定してアプリケーションを作成します
+    const options = new pc.AppOptions();
+    options.graphicsDevice = device;
+    options.componentSystems = [
+        pc.RenderComponentSystem,
+        pc.CameraComponentSystem,
+        pc.LightComponentSystem
+    ];
+    options.resourceHandlers = [
+        pc.TextureHandler,
+        pc.ContainerHandler
+    ];
+
+    const app = new pc.AppBase(canvas);
+    app.init(options);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
@@ -167,9 +186,27 @@ npm create playcanvas@latest my-app -- -f engine
     ```typescript title="main.ts"
     import * as pc from 'playcanvas';
 
-    // アプリケーションを作成
+    // WebGPUを優先してグラフィックスデバイスを作成
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const app = new pc.Application(canvas);
+    const device = await pc.createGraphicsDevice(canvas, {
+        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    });
+
+    // 使用するシステムとハンドラーを指定してアプリケーションを作成
+    const options = new pc.AppOptions();
+    options.graphicsDevice = device;
+    options.componentSystems = [
+        pc.RenderComponentSystem,
+        pc.CameraComponentSystem,
+        pc.LightComponentSystem
+    ];
+    options.resourceHandlers = [
+        pc.TextureHandler,
+        pc.ContainerHandler
+    ];
+
+    const app = new pc.AppBase(canvas);
+    app.init(options);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
@@ -267,9 +304,27 @@ import * as pc from 'playcanvas';
     ```javascript title="main.js"
     import * as pc from 'playcanvas';
 
-    // アプリケーションを作成
+    // WebGPUを優先してグラフィックスデバイスを作成
     const canvas = document.getElementById('application');
-    const app = new pc.Application(canvas);
+    const device = await pc.createGraphicsDevice(canvas, {
+        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    });
+
+    // 使用するシステムとハンドラーを指定してアプリケーションを作成
+    const options = new pc.AppOptions();
+    options.graphicsDevice = device;
+    options.componentSystems = [
+        pc.RenderComponentSystem,
+        pc.CameraComponentSystem,
+        pc.LightComponentSystem
+    ];
+    options.resourceHandlers = [
+        pc.TextureHandler,
+        pc.ContainerHandler
+    ];
+
+    const app = new pc.AppBase(canvas);
+    app.init(options);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
@@ -346,9 +401,27 @@ import * as pc from 'playcanvas';
     ```typescript title="main.ts"
     import * as pc from 'playcanvas';
 
-    // アプリケーションを作成します
+    // WebGPUを優先してグラフィックスデバイスを作成します
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const app = new pc.Application(canvas);
+    const device = await pc.createGraphicsDevice(canvas, {
+        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    });
+
+    // 使用するシステムとハンドラーを指定してアプリケーションを作成します
+    const options = new pc.AppOptions();
+    options.graphicsDevice = device;
+    options.componentSystems = [
+        pc.RenderComponentSystem,
+        pc.CameraComponentSystem,
+        pc.LightComponentSystem
+    ];
+    options.resourceHandlers = [
+        pc.TextureHandler,
+        pc.ContainerHandler
+    ];
+
+    const app = new pc.AppBase(canvas);
+    app.init(options);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
@@ -390,7 +463,7 @@ import * as pc from 'playcanvas';
 5. `main.ts` を `main.js` にコンパイルします:
 
     ```sh
-    npx tsc main.ts --lib esnext,dom --module esnext --moduleResolution bundler --types webxr
+    npx tsc main.ts --target es2022 --lib esnext,dom --module esnext --moduleResolution bundler --types webxr
     ```
 
 6. `serve` を実行します:
@@ -405,3 +478,22 @@ import * as pc from 'playcanvas';
 
   </TabItem>
 </Tabs>
+
+## アプリケーションの構成 {#configuring-the-application}
+
+サンプルは、2つの手順でアプリケーションを作成します。
+
+1. [`createGraphicsDevice`](https://api.playcanvas.com/engine/functions/createGraphicsDevice.html)でグラフィックスデバイスを作成します。`deviceTypes`に`DEVICETYPE_WEBGPU`を指定するとWebGPUが要求され、WebGPUが利用できない場合、EngineはWebGL 2.0にフォールバックします。
+2. アプリケーションが使用するコンポーネントシステムとリソースハンドラーを列挙した[`AppOptions`](https://api.playcanvas.com/engine/classes/AppOptions.html)オブジェクトで、[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)を初期化します。それ以外は登録されないため、ビルドツールは残りの部分をバンドルから除外できます。
+
+アプリケーションの機能を増やすときは、必要なものを登録します。
+
+* **コンポーネント**: コンポーネントの種類ごとに、そのコンポーネントシステムが必要です。たとえば、`script`コンポーネントを使用するには`pc.ScriptComponentSystem`を追加します。[`Application`のコンストラクター](https://api.playcanvas.com/engine/classes/Application.html#constructor)に、すべてのコンポーネントの種類とそのシステムが記載されています。システムが登録されていない場合、`addComponent`は`null`を返し、Engineのデバッグビルドはエラーをログに出力します。
+* **アセット**: アセットの種類ごとに、そのリソースハンドラーが必要です。サンプルでは、テクスチャ用の`pc.TextureHandler`とGLBモデル用の`pc.ContainerHandler`を登録しています。
+* **その他の機能**: サウンド、バッチ処理、ライトマップ、XRは、`AppOptions`の他のプロパティで有効にします。たとえば、`sound`コンポーネントには`options.soundManager = new pc.SoundManager()`も必要です。
+
+:::note
+
+[`Application`](https://api.playcanvas.com/engine/classes/Application.html)クラスは、これらをすべて自動的に設定します。ただし、コンストラクターではWebGPUデバイスを作成できず、すべてのコンポーネントシステムとリソースハンドラーがバンドルに含まれます。また、将来のリリースで非推奨になる予定です。
+
+:::
