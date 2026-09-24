@@ -43,7 +43,7 @@ It is called in the forward pass after the gaussian falloff and opacity dither h
 Inside the chunk you can also use:
 
 - `gl_FragCoord` (GLSL) / `pcPosition` (WGSL) — the fragment's framebuffer position in pixels
-- `uScreenSize` — engine-provided `vec4` uniform: `xy` = render target size, `zw` = inverse size
+- `screen_size` — engine-provided `vec4` / `vec4f` uniform: `xy` = canvas drawing-buffer size in pixels, `zw` = inverse size. See [Built-in Shader Uniforms](/user-manual/graphics/shaders/built-in-uniforms) for the distinction from `viewport_size`.
 - Your own uniforms and textures, declared in the chunk and driven via material parameters
 
 ## Example

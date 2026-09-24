@@ -28,6 +28,16 @@ material.chunks.APIVersion = pc.CHUNKAPI_1_55;
 
 次の表は、Engine リリースごとのチャンクの変更点をまとめたものです。
 
+### *Engine v2.23*
+
+#### `uScreenSize` → `screen_size`
+
+フォワードシェーダーでは `screen_size` を使用してください。GLSL の宣言を `uniform vec4 uScreenSize;` から `uniform vec4 screen_size;` に、WGSL の宣言を `uniform uScreenSize: vec4f;` から `uniform screen_size: vec4f;` に変更し、すべての参照も更新します。値は引き続きキャンバスの描画バッファの幅、高さ、幅の逆数、高さの逆数です。
+
+`uScreenSize` を明示的に宣言する既存のシェーダーは引き続き動作しますが、デバッグビルドでは非推奨の警告が一度表示されます。`material.shaderChunksVersion` を変更してもこの警告は消えません。ユニフォーム名を変更してください。
+
+詳細は[組み込みシェーダーユニフォーム](/user-manual/graphics/shaders/built-in-uniforms)を参照してください。
+
 ### *Engine v2.20*
 
 #### MSDF テキストレンダリングの刷新

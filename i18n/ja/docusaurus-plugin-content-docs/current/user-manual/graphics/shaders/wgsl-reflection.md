@@ -45,7 +45,7 @@ varying uv0: vec2f;
 }
 ```
 
-### ユニフォーム
+### ユニフォーム {#uniforms}
 
 ユニフォームは、エンジンからシェーダーに*数値リソース*を渡すために使用されます。
 
@@ -69,7 +69,7 @@ var color = uniform.tints[2];
 var weight = uniform.weights[3].element;
 ```
 
-エンジンはレンダリング時に適切なユニフォーム値を自動的に設定します。
+エンジンはフォワードレンダリング時に[組み込みシェーダーユニフォーム](/user-manual/graphics/shaders/built-in-uniforms)の値を設定します。独自のユニフォームの値は、`material.setParameter()` などでアプリケーションから設定してください。
 
 :::note
 

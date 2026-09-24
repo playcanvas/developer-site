@@ -29,6 +29,16 @@ By doing this you will no longer see warning messages in the console.
 
 The following tables break down the chunk changes by Engine release.
 
+### *Engine v2.23*
+
+#### `uScreenSize` → `screen_size`
+
+Use `screen_size` in forward shaders. Change the GLSL declaration from `uniform vec4 uScreenSize;` to `uniform vec4 screen_size;`, or the WGSL declaration from `uniform uScreenSize: vec4f;` to `uniform screen_size: vec4f;`, and update every reference. The value remains the canvas drawing-buffer width, height, inverse width, and inverse height.
+
+Existing shaders that explicitly declare `uScreenSize` continue to work, but debug builds emit a deprecation warning once. Changing `material.shaderChunksVersion` does not silence this warning; rename the uniform instead.
+
+See [Built-in Shader Uniforms](/user-manual/graphics/shaders/built-in-uniforms) for details.
+
 ### *Engine v2.20*
 
 #### MSDF text rendering reworked
