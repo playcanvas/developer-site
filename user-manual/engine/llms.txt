@@ -6,7 +6,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Rules
 
-- **Create the app with [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.md)**, whose page shows the setup. Set every input device the app reads in its `AppOptions`, or it stays `null`: `mouse = new Mouse(canvas)`, `keyboard = new Keyboard(window)`, `touch = new TouchDevice(canvas)`, and `elementInput = new ElementInput(canvas)` for user interface elements. The manual's examples use `Application`, a subclass that registers everything and is expected to be deprecated.
+- **Create the app with [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.md)**, whose page and [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md) show the setup. Set every input device the app reads in its `AppOptions`, or it stays `null`: `mouse = new Mouse(canvas)`, `keyboard = new Keyboard(window)`, `touch = new TouchDevice(canvas)`, and `elementInput = new ElementInput(canvas)` for user interface elements. Some of the manual's examples still use `Application`, a subclass that registers everything and is expected to be deprecated.
 - **WebGL1 is not supported.**
 - **Build the scene from entities and components**: `const box = new Entity('box'); box.addComponent('render', { type: 'box' }); app.root.addChild(box);`. Meshes use the `render` component, as the `model` component is deprecated.
 - **Y is up**, and cameras and `entity.forward` point along −Z.
@@ -24,7 +24,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Setting up
 
-- [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md): Setting up a project with Vite and npm, or without a build step using an import map and the CDN build.
+- [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md): Setting up an `AppBase` project with Vite and npm, or without a build step using an import map and the CDN build, and registering the component systems and resource handlers it uses.
 - [Start with create-playcanvas](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas.md): `npm create playcanvas@latest my-app -- -f engine` creates a runnable Vite and TypeScript project, with PlayCanvas Skills for coding agents.
 - [Developing with AI](https://developer.playcanvas.com/user-manual/engine/developing-with-ai.md): Setting up a coding agent on an Engine project and verifying its changes in a browser.
 - [Engine Migrations](https://developer.playcanvas.com/user-manual/engine/migrations.md): The breaking changes of each major release. Read it before using an API you remember from Engine 1.
@@ -175,7 +175,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 - [Engine API reference](https://api.playcanvas.com/engine/llms.txt): Every engine class, with pages at `https://api.playcanvas.com/engine/classes/<ClassName>.md`. When the package is installed, `node_modules/playcanvas/build/playcanvas.d.ts` has the same documentation for the exact installed version.
 - [AppBase](https://api.playcanvas.com/engine/classes/AppBase.md): The application, with the component systems and resource handlers you register through `AppOptions`.
-- [Application](https://api.playcanvas.com/engine/classes/Application.md): The subclass of `AppBase` that the manual's examples use.
+- [Application](https://api.playcanvas.com/engine/classes/Application.md): The subclass of `AppBase` that registers everything, which some of the manual's examples still use.
 - [Entity](https://api.playcanvas.com/engine/classes/Entity.md): A node of the scene graph that components attach to, with transform methods.
 - [Script](https://api.playcanvas.com/engine/classes/Script.md): The base class of ESM scripts.
 - [Asset](https://api.playcanvas.com/engine/classes/Asset.md): A loadable resource such as a model, texture, splat or script.
@@ -207,7 +207,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 205 pages (1027 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 205 pages (1031 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
 - [Preloading](https://developer.playcanvas.com/user-manual/assets/preloading.md)
