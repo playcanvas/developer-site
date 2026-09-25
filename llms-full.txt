@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/llms.txt
 Total Documents: 506
-Generated: 2026-09-24
+Generated: 2026-09-25
 
 ================================================================================
 
@@ -11417,6 +11417,48 @@ const PhysicsStatus = () => {
 The `usePhysics` hook provides information about the physics engine state. You can read more about the [`usePhysics`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-physics.md) hook in the API reference.
 
 For more detailed information about PlayCanvas physics, see the [PlayCanvas physics](https://developer.playcanvas.com/user-manual/physics.md) docs.
+
+## Troubleshooting
+
+### webpack warns `Can't resolve 'sync-ammo'`
+
+`sync-ammo` is an optional dependency, so it is only needed when you use physics. If you haven't installed it, webpack (including `next build --webpack`) still reports a warning because it resolves every import at build time:
+
+```none
+Module not found: Error: Can't resolve 'sync-ammo'
+```
+
+The warning is harmless. PlayCanvas React only loads `sync-ammo` when `usePhysics` is set. Vite and Turbopack handle the missing package without a warning, so they need no changes.
+
+To silence the warning in webpack, ignore the module:
+
+```javascript title="webpack.config.js"
+const webpack = require('webpack');
+
+module.exports = {
+  // ...
+  plugins: [
+    new webpack.IgnorePlugin({ resourceRegExp: /^sync-ammo$/ })
+  ]
+};
+```
+
+In Next.js, add it to `next.config.mjs`. Only do this if you build with `next build --webpack`, as the default Turbopack build fails when a `webpack` config is present:
+
+```javascript title="next.config.mjs"
+export default {
+  webpack: (config, { webpack }) => {
+    config.plugins.push(new webpack.IgnorePlugin({ resourceRegExp: /^sync-ammo$/ }));
+    return config;
+  }
+};
+```
+
+:::warning
+
+`IgnorePlugin` stops webpack from bundling `sync-ammo` even if it is installed. Remove it if you enable `usePhysics`.
+
+:::
 
 --------------------------------------------------------------------------------
 
