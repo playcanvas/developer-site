@@ -147,13 +147,26 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## User interface
 
-- [User Interface](/user-manual/user-interface/): Choosing between in-canvas UI, built from screen and element components, and HTML and CSS.
-- [User Interface Basics](/user-manual/user-interface/user-interface-basics/): How screens and elements combine for layout, draw order, input and localization.
-- [Screens](/user-manual/user-interface/screens/): Screen-space versus world-space UI, reference resolutions and scaling.
-- [Elements](/user-manual/user-interface/elements/): Positioning and sizing elements with anchors, pivots and margins.
-- [Text Elements](/user-manual/user-interface/text-elements/): Fonts, color markup, alignment and localized text.
-- [Fonts](/user-manual/user-interface/fonts/): Creating the MSDF font assets that text elements need, including with font-tools outside the Editor.
-- [Input](/user-manual/user-interface/input/): Enabling element input with `ElementInput` and handling clicks, hovers and touches.
+- [User Interface](/user-manual/user-interface/): Choosing between in-canvas UI, built from screen and element components, and HTML and CSS, and the components that interfaces are built from.
+- [Getting Started](/user-manual/user-interface/user-interface-basics/): Setting up an application for UI and building a first interface, a panel with a label and a button, how the parts fit together and how each surface names them.
+- [Screens](/user-manual/user-interface/screens/): Screen-space and world-space screens, reference resolution and Blend scaling, scale mode None and the pixel ratio, and responsive layouts.
+- [Elements](/user-manual/user-interface/elements/): Element types, anchors, pivots, split anchors and margins, sizes, group elements and reading an element's bounds.
+- [Layout Groups](/user-manual/user-interface/layout-groups/): Arranging children in rows, columns and grids with spacing, padding, fitting and wrapping, and layout children.
+- [Safe Areas](/user-manual/user-interface/safe-area/): Keeping an interface clear of notches and rounded corners with the browser's `env(safe-area-inset-*)` values.
+- [Image Elements](/user-manual/user-interface/image-elements/): Colors, textures and fit modes, sprites, 9-sliced and tiled panels, rendering 3D into an image and custom materials.
+- [Masks](/user-manual/user-interface/masks/): Clipping children to a rectangle or a shape, nested masks, and masks' layers, input and cost.
+- [Text Elements](/user-manual/user-interface/text-elements/): Size, spacing and alignment, wrapping and line limits, shrinking to fit, markup, outlines and shadows, and revealing text.
+- [Fonts](/user-manual/user-interface/fonts/): Creating the MSDF font assets that text elements need, in the Editor or with font-tools, choosing their characters, and emoji.
+- [Localization](/user-manual/user-interface/localization/): Localization files and plural forms, choosing the locale, localized text elements, strings in scripts and fonts per language.
+- [Input](/user-manual/user-interface/input/): Enabling element input with `ElementInput`, mouse, touch and XR events, bubbling, hit testing and keeping UI clicks from game input.
+- [Buttons](/user-manual/user-interface/buttons/): The button component, tint and sprite transitions, button events and states, hit padding and disabling buttons.
+- [Scroll Views](/user-manual/user-interface/scroll-views/): Scrolling content by dragging, with the mouse wheel and with scrollbars, bouncing and friction, sizing the content and scrolling from code.
+- [Common Widgets](/user-manual/user-interface/common-widgets/): Recipes for progress bars, sliders, toggles, dialogs, tooltips, dynamic lists, drag and drop, text fields and animated UI.
+- [World-Space UI](/user-manual/user-interface/world-space-ui/): Interfaces in the 3D scene, sized in meters, facing the camera, and labels over characters placed with `worldToScreen`.
+- [UI in XR](/user-manual/user-interface/xr/): World-space panels in VR and AR, pointing and selecting with controllers and hands, and the `XrMenu` script.
+- [HTML and CSS](/user-manual/user-interface/html-and-css/): HTML overlays on each surface, keeping their input away from the game, and placing HTML over 3D points and elements.
+- [Draw Order and Performance](/user-manual/user-interface/draw-order-and-performance/): The UI layer, draw order and screen priority, cameras and post-processing, batching, text updates and culling.
+- [Troubleshooting](/user-manual/user-interface/troubleshooting/): Causes and fixes for invisible text, ignored clicks, unchanging buttons, wrong sizes, empty masks and other common problems.
 
 ## XR
 

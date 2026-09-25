@@ -1,100 +1,183 @@
 ---
 title: Text Elements
-description: Configure text elements with fonts, simple color markup, alignment, and localized string keys.
+description: Draw text with a font asset, control its size, spacing and alignment, wrap it and limit its lines, shrink it to fit, justify it, style it with markup, outlines and shadows, reveal it a character at a time, and change it at runtime.
 ---
 
-The Text Element is used to display a string of text using a [font asset](/user-manual/editor/assets/inspectors/font). See [Fonts](/user-manual/user-interface/fonts) for how to create one — in the Editor or with the standalone font-tools.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-## Text
+A text element draws a string with a [font asset](/user-manual/user-interface/fonts/). Every label, title, score, line of dialogue and other piece of text in an in-canvas interface is a text element.
 
-The Text Element contains a string field to enter the text that will be displayed. Use `Shift+Enter` to enter a new line character in the string field.
+<EngineExample id="user-interface/text" title="Text" />
 
-:::tip
+## Creating Text {#creating-text}
 
-Text elements are rendered to the screen using a single quad for each character in the string. When you change the text property, we re-generate the mesh for the element. There is a performance implication for this, though there should be no problems changing text content for a reasonable number of Elements every frame.
-
-:::
-
-### Text Markup
-
-Text elements support a simple markup syntax that allows you to apply different colors to specific parts of the text. Consider this example:
-
-```none
-[color="#ff0000"]Red[/color], [color="#00ff00"]green[/color] and [color="#0000ff"]blue[/color].
-```
-
-Assuming the base color of the text element is white, this will render as follows:
-
-![Text Markup](/img/user-manual/user-interface/text-element/text-markup.png)
-
-:::tip
-
-You must proactively enable support for the markup syntax on a text element. You can do this via the API:
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
 
 ```javascript
-entity.element.enableMarkup = true;
+const title = new pc.Entity('title');
+title.addComponent('element', {
+    type: pc.ELEMENTTYPE_TEXT,
+    fontAsset: font.id,
+    text: 'Game Over',
+    fontSize: 64,
+    color: new pc.Color(1, 0.55, 0.2),
+    anchor: [0.5, 0.5, 0.5, 0.5],
+    pivot: [0.5, 0.5]
+});
+screen.addChild(title);
 ```
 
-Or by enabling it in the Editor:
+`font` is a font asset that has loaded. See [Using a Font Asset](/user-manual/user-interface/fonts/#using-a-font-asset).
 
-![Enable Markup](/img/user-manual/user-interface/text-element/enable-markup.png)
+</TabItem>
+<TabItem value="editor" label="Editor">
 
-:::
+Select a screen or an element, click **+** in the Hierarchy and choose **User Interface › Text Element**. Set **Font** to a font asset, then set **Text**, **Font Size** and **Color**. In the **Text** field, press Shift+Enter to start a new line.
 
-## Localization
+</TabItem>
+<TabItem value="react" label="React">
 
-You can check the 'Localized' checkbox to localize the text of the Text Element. If this is enabled then, instead of the text, you specify the localization key for the Text Element which will be used to get the localized text from the localization assets.
+```jsx
+<Entity name="title">
+  <Element type="text" fontAsset={font} text="Game Over" fontSize={64} color="#ff8c33"
+    anchor={[0.5, 0.5, 0.5, 0.5]} pivot={[0.5, 0.5]} />
+</Entity>
+```
 
-Read more about localization [here](/user-manual/user-interface/localization).
+`font` is the asset that [`useFont`](/user-manual/react/api/hooks/use-asset/#usefont) returns.
 
-## Auto-size
+</TabItem>
+<TabItem value="web-components" label="Web Components">
 
-By default a Text Element is set to automatically adjust its width and height to match the text string. You can disable this and specify the height and width of the element directly in the Editor panel.
+```html
+<pc-entity name="title">
+    <pc-element type="text" font-asset="arial" text="Game Over" font-size="64" color="#ff8c33"
+                anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"></pc-element>
+</pc-entity>
+```
 
-![Auto Size](/img/user-manual/user-interface/text-element/auto-size.png)
+`arial` is the `id` of a `<pc-asset type="font">`.
 
-:::note
+</TabItem>
+</Tabs>
 
-The height of the character is determined by the largest character present in the font. It is the same for every character so as to avoid the string position changing depending on the contents of the string.
+A character that is not in the font is drawn as a space, and the engine logs a warning that names it. Include every character your text needs when you create the font asset. See [Choosing Characters](/user-manual/user-interface/fonts/#choosing-characters).
 
-:::
+## Size, Spacing and Alignment {#size-spacing-and-alignment}
 
-## Alignment
+| Property | Effect |
+| --- | --- |
+| `fontSize` | The height of the text, in screen units. 32 by default |
+| `lineHeight` | The distance between the baselines of neighboring lines. A text element created with a `fontSize` but no `lineHeight` gets a line height equal to the font size. Changing `fontSize` later leaves `lineHeight` as it is |
+| `spacing` | A multiplier for the distance between characters. 1 by default |
+| `alignment` | Where the text sits inside the element, from `0, 0` at the bottom-left to `1, 1` at the top-right. `0.5, 0.5`, the default, centers it |
 
-Text Elements have an additional tool to help with positioning which is the alignment. You will be used to how this property works from tools like Word Processes. In this case, rather than presets we expose a variable that can be altered. The alignment consists of two values `[X, Y]` each between 0 and 1. `[0,0]` is bottom left alignment, `[0.5,0.5]` is centered and `[1,1]` is top right.
+The alignment only shows when the element is larger than its text, such as a label with a fixed width, or wrapped lines of different lengths.
 
-![Top Left](/img/user-manual/user-interface/text-element/alignment-bottom-left.png)
+## Sizing, Wrapping and Line Limits {#sizing-wrapping-and-line-limits}
 
-![Centered](/img/user-manual/user-interface/text-element/alignment-centered.png)
+By default, a text element is sized to its text: **Auto Width** and **Auto Height** set its width and height to those of the text whenever the text changes. Turn them off to give the element a size of its own.
 
-![Bottom Right](/img/user-manual/user-interface/text-element/alignment-top-right.png)
+Text wraps onto new lines when **Wrap Lines** is on and the element has a width to wrap at: either **Auto Width** is off, or the element's anchor is [split horizontally](/user-manual/user-interface/elements/#split-anchors), which gives it the width of its anchors. With Auto Height on, the element grows taller as lines are added.
 
-## Font Size & Line Height
+```javascript
+// A paragraph that wraps at 400 units and grows downwards from its top edge
+paragraph.element.autoWidth = false;
+paragraph.element.width = 400;
+paragraph.element.wrapLines = true;
+paragraph.element.pivot = new pc.Vec2(0.5, 1);
+```
 
-The font size property sets the rendered size of the font in Screen Component pixels. The line height sets the distance in Screen Component pixels to move down when the text contains a new line character.
+`maxLines` limits the number of lines. The text beyond the limit is not cut off: it continues on the last line, past the edge of the element, so combine a line limit with [shrinking to fit](#shrinking-to-fit), or crop the overflow with a [mask](/user-manual/user-interface/masks/). After the text is laid out, `lines` holds it as an array with one string per line.
 
-Equal Font Size and Line Height is the default:
+## Shrinking to Fit {#shrinking-to-fit}
 
-![Font Size Line Equal](/img/user-manual/user-interface/text-element/font-line-equal.png)
+**Auto Fit Width** and **Auto Fit Height** shrink the font until the text fits the element, between a **Max Font Size** and a **Min Font Size**, 32 and 8 by default. Text that fits is drawn at the maximum size, and text that doesn't fit even at the minimum size is drawn at the minimum size and overflows. The line height shrinks along with the font.
 
-Increase Line Height to increase line spacing:
+Auto fitting only works on an axis whose auto size is off: Auto Fit Width needs **Auto Width** off, and Auto Fit Height needs **Auto Height** off. With auto size on, the element grows to fit the text instead.
 
-![Font Size Line Spaced](/img/user-manual/user-interface/text-element/font-line-spaced.png)
+```javascript
+// Shrink a name to fit its 200 × 40 badge, down to 12 units if needed
+badge.element.autoWidth = false;
+badge.element.autoHeight = false;
+badge.element.width = 200;
+badge.element.height = 40;
+badge.element.autoFitWidth = true;
+badge.element.autoFitHeight = true;
+badge.element.maxFontSize = 32;
+badge.element.minFontSize = 12;
+```
 
-## Spacing
+<EngineExample id="user-interface/text-auto-font-size" title="Text Auto Font Size" />
 
-The spacing property increases the distance between characters in a string. Fonts define the ideal distance to move the cursor forward for each character. The spacing property is a multiplier to this distance.
+## Justified Text {#justified-text}
 
-![Spacing](/img/user-manual/user-interface/text-element/spacing.png)
+With **Justify** on, wrapped lines are stretched to the full width of the element by widening the gaps between their words. The last line of a paragraph, and any line that ends with a line break, keeps its alignment instead. Justified text needs wrapping, so turn on **Wrap Lines** as well. The `justify` property is available from engine 2.22.
 
-## Tinting
+<EngineExample id="user-interface/text-justify" title="Text Justify" />
 
-The Color property allows you to tint the string to the color of your choice.
+## Outline and Shadow {#outline-and-shadow}
 
-![Tinted](/img/user-manual/user-interface/text-element/tinted.png)
+| Property | Effect |
+| --- | --- |
+| `outlineColor` and `outlineThickness` | An outline around the characters. The thickness goes from 0, no outline, to 1 |
+| `shadowColor` and `shadowOffset` | A shadow below the characters. The offset is a `pc.Vec2`, and each of its values goes from -1 to 1 |
 
-## Transparency
+Outlines and shadows are drawn by the shader of the font, and work with the MSDF font assets that the Editor and font-tools create.
 
-The Opacity property allows you to set the transparency of the string
+## Markup {#markup}
 
-![Transparent](/img/user-manual/user-interface/text-element/transparent.png)
+With **Enable Markup** on (`enableMarkup` in the Engine and React, `enable-markup` in Web Components), tags in the text style parts of it:
+
+| Tag | Effect |
+| --- | --- |
+| `[color="#ff0000"]…[/color]` | Draws the text in a color, given as a six-digit hex code. It replaces the element's color for that text |
+| `[outline color="#000000" thickness="0.5"]…[/outline]` | Outlines the text |
+| `[shadow color="#000000" offset="0.5"]…[/shadow]` | Adds a shadow. Use `offsetX` and `offsetY` to set each axis on its own |
+
+```javascript
+message.element.enableMarkup = true;
+message.element.text = 'You found the [color="#ffcc00"]golden key[/color]!';
+```
+
+Write `\[` for a `[` that doesn't start a tag. When the markup has an error, such as a tag that is never closed, the whole text is drawn as written, tags included, and the engine logs a warning.
+
+<EngineExample id="user-interface/text-markup" title="Text Markup" />
+
+## Revealing Text {#revealing-text}
+
+`rangeStart` and `rangeEnd` draw part of the text: the characters from `rangeStart` up to, but not including, `rangeEnd`. Changing them doesn't lay the text out again, so a typewriter effect costs little. Changing `text` resets the range to the whole of the new text, which gives you its length:
+
+```javascript
+dialog.element.text = 'It is dangerous to go alone.';
+
+// Changing the text resets the range, so rangeEnd is now its length
+const length = dialog.element.rangeEnd;
+let shown = 0;
+const handle = app.on('update', (dt) => {
+    // Reveal 20 characters a second
+    shown = Math.min(shown + dt * 20, length);
+    dialog.element.rangeEnd = Math.floor(shown);
+    if (shown === length) handle.off();
+});
+```
+
+<EngineExample id="user-interface/text-typewriter" title="Text Typewriter" />
+
+## Changing Text at Runtime {#changing-text}
+
+Setting `text` lays the text out again and rebuilds its mesh, which costs more than moving or recoloring the element. Updating a few labels every frame, such as a timer or a score, is fine. For many labels, set the text only when its value has changed. See [Draw Order and Performance](/user-manual/user-interface/draw-order-and-performance/#updating-text).
+
+To show text in the player's language, give the element a localization key instead of text. See [Localization](/user-manual/user-interface/localization/).
+
+## Right-to-Left and Complex Scripts {#rtl}
+
+A text element draws one glyph per character, from left to right. Languages written from right to left, such as Arabic and Hebrew, need their characters reordered first, and Arabic also needs the joined forms of its letters. See [Language Notes](/user-manual/user-interface/localization/#language-notes) for how to add this.
+
+## See Also
+
+- [Fonts](/user-manual/user-interface/fonts/) - Creating font assets and choosing their characters
+- [Localization](/user-manual/user-interface/localization/) - Showing text in the player's language
+- [Element Component](/user-manual/editor/scenes/components/element/), [`<pc-element>`](/user-manual/web-components/tags/pc-element/) and [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html) - Reference for every text property
