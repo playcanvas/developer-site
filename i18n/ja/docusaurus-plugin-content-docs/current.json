@@ -4,12 +4,8 @@
     "description": "The label for version current"
   },
   "sidebar.userManualSidebar.category.Launch Page": {
-    "message": "Launch Page",
+    "message": "起動ページ",
     "description": "The label for category Launch Page in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.Scenes": {
-    "message": "シーン",
-    "description": "The label for category Scenes in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Asset Store": {
     "message": "アセットストア",
@@ -63,19 +59,15 @@
     "message": "インスペクターペイン",
     "description": "The label for category インスペクターペイン in sidebar shaderEditorSidebar"
   },
-  "sidebar.userManualSidebar.category.Getting Started": {
-    "message": "はじめに",
-    "description": "The label for category Getting Started in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.Getting Started.general-getting-started": {
+  "sidebar.userManualSidebar.category.general-getting-started": {
     "message": "はじめに",
     "description": "The label for category Getting Started (General) in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Getting Started.editor-getting-started": {
+  "sidebar.userManualSidebar.category.editor-getting-started": {
     "message": "はじめに",
     "description": "The label for category Getting Started (Editor) in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Getting Started.react-getting-started": {
+  "sidebar.userManualSidebar.category.react-getting-started": {
     "message": "はじめに",
     "description": "The label for category Getting Started (React) in sidebar userManualSidebar"
   },
@@ -107,6 +99,26 @@
     "message": "PlayCanvas React",
     "description": "The label for category PlayCanvas React in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Guide": {
+    "message": "ガイド",
+    "description": "The label for category Guide in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.API": {
+    "message": "API",
+    "description": "The label for category API in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.react-api-components": {
+    "message": "コンポーネント",
+    "description": "The label for category Components (React API) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.react-api-hooks": {
+    "message": "フック",
+    "description": "The label for category Hooks (React API) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.react-examples": {
+    "message": "例",
+    "description": "The label for category Examples (React) in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.PlayCanvas Editor": {
     "message": "PlayCanvas Editor",
     "description": "The label for category PlayCanvas Editor in sidebar userManualSidebar"
@@ -118,6 +130,10 @@
   "sidebar.userManualSidebar.category.Editor Interface": {
     "message": "エディターインターフェース",
     "description": "The label for category Editor Interface in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Project Settings": {
+    "message": "プロジェクト設定",
+    "description": "The label for category Project Settings in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Templates": {
     "message": "テンプレート",
@@ -132,7 +148,7 @@
     "description": "The label for category Publishing in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Web": {
-    "message": "Web",
+    "message": "ウェブ",
     "description": "The label for category Web in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Mobile": {
@@ -143,45 +159,53 @@
     "message": "プレイアブル広告",
     "description": "The label for category Playable Ads in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Working with Scenes": {
+    "message": "シーンの操作",
+    "description": "The label for category Working with Scenes in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.Components": {
     "message": "コンポーネント",
     "description": "The label for category Components in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Assets": {
+  "sidebar.userManualSidebar.category.editor-assets": {
     "message": "アセット",
-    "description": "The label for category Assets in sidebar userManualSidebar"
+    "description": "The label for category Assets (Editor) in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Types": {
-    "message": "タイプ",
-    "description": "The label for category Types in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.common-assets": {
+    "message": "アセット",
+    "description": "The label for category Assets (Common Topics) in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Import Pipeline": {
     "message": "インポートパイプライン",
     "description": "The label for category Import Pipeline in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Asset Inspectors": {
+    "message": "アセットインスペクター",
+    "description": "The label for category Asset Inspectors in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.Models": {
     "message": "モデル",
     "description": "The label for category Models in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Scripting": {
+  "sidebar.userManualSidebar.category.editor-scripting": {
     "message": "スクリプティング",
-    "description": "The label for category Scripting in sidebar userManualSidebar"
+    "description": "The label for category Scripting (Editor) in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Scripting Fundamentals": {
-    "message": "スクリプティングの基礎",
-    "description": "The label for category Scripting Fundamentals in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.scripting": {
+    "message": "スクリプティング",
+    "description": "The label for category Scripting (Common Topics) in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Script Attributes": {
     "message": "スクリプト属性",
     "description": "The label for category Script Attributes in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Scripting for Editor Users": {
-    "message": "エディターユーザー向けスクリプティング",
-    "description": "The label for category Scripting for Editor Users in sidebar userManualSidebar"
-  },
   "sidebar.userManualSidebar.category.Debugging": {
     "message": "デバッグ",
     "description": "The label for category Debugging in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Entity Component System": {
+    "message": "エンティティ・コンポーネント・システム",
+    "description": "The label for category Entity Component System in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Graphics": {
     "message": "グラフィック",
@@ -211,17 +235,29 @@
     "message": "ポストエフェクト",
     "description": "The label for category Post Effects in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Modern Post Processing": {
+    "message": "モダンなポストプロセス",
+    "description": "The label for category Modern Post Processing in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Legacy Post Effects": {
+    "message": "レガシーポストエフェクト",
+    "description": "The label for category Legacy Post Effects in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.Gaussian Splatting": {
     "message": "ガウシアン・スプラッティング",
     "description": "The label for category Gaussian Splatting in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Splat File Formats": {
+    "message": "Splat ファイル形式",
+    "description": "The label for category Splat File Formats in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Creating Splats": {
     "message": "スプラットの作成",
     "description": "The label for category Creating Splats in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Editing and Publishing Splats": {
-    "message": "スプラットの編集と公開",
-    "description": "The label for category Editing and Publishing Splats in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.Rendering Architecture": {
+    "message": "レンダリングアーキテクチャ",
+    "description": "The label for category Rendering Architecture in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Building Splat Applications": {
     "message": "スプラットアプリケーションの構築",
@@ -230,6 +266,14 @@
   "sidebar.userManualSidebar.category.Your First Splat App": {
     "message": "はじめてのスプラットアプリ",
     "description": "The label for category Your First Splat App in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Custom Shaders": {
+    "message": "カスタムシェーダー",
+    "description": "The label for category Custom Shaders in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Procedural Splats": {
+    "message": "プロシージャルスプラット",
+    "description": "The label for category Procedural Splats in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.SuperSplat": {
     "message": "SuperSplat",
@@ -247,9 +291,17 @@
     "message": "ビューア",
     "description": "The label for category Viewer in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Rendering Splats": {
-    "message": "スプラットのレンダリング",
-    "description": "The label for category Rendering Splats in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.API & Integrations": {
+    "message": "APIと統合",
+    "description": "The label for category API & Integrations in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.link.supersplat-api-reference": {
+    "message": "APIリファレンス",
+    "description": "The label for link 'API Reference' in sidebar 'userManualSidebar' (item 'supersplat-api-reference')"
+  },
+  "sidebar.userManualSidebar.category.SplatTransform": {
+    "message": "SplatTransform",
+    "description": "The label for category SplatTransform in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Animation": {
     "message": "アニメーション",
