@@ -6,7 +6,7 @@ sidebar_label: GLB
 
 **GLB** (バイナリ [glTF](https://www.khronos.org/gltf/)) は、Khronosの[KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting)拡張機能を使用して3D Gaussian Splatデータを格納できます。これによりスプラットはglTFエコシステムの一級市民となり、標準的なglTFパイプラインを通過でき、通常のメッシュ、マテリアル、アニメーションと同じファイルに共存できます。
 
-これらのファイルは**[SplatTransform](/user-manual/splat-transform/)**で作成でき、PlayCanvasエンジンで直接読み込むことができます。
+これらのファイルは[**SplatTransform**](/user-manual/splat-transform/)で作成でき、PlayCanvasエンジンで直接読み込むことができます。
 
 ## スプラットの格納方法
 

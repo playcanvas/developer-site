@@ -34,7 +34,7 @@ import config from 'utils/config.js';
 これでコード内で `import x from "math"` を呼び出すと、あなたのモジュールに解決されます。
 
 :::ai
-エイリアスの参照先APIが変わる場合は、AIコーディングアシスタントと**[VS Code ExtensionのPull/Pushモード](/user-manual/editor/scripting/vscode-extension/)**でインポートマップと依存コードを意味に沿って更新し、同期前に差分を確認します。
+エイリアスの参照先APIが変わる場合は、AIコーディングアシスタントと[**VS Code ExtensionのPull/Pushモード**](/user-manual/editor/scripting/vscode-extension/)でインポートマップと依存コードを意味に沿って更新し、同期前に差分を確認します。
 :::
 
 :::tip

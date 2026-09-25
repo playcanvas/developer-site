@@ -28,7 +28,7 @@ Model Viewerは、以下の一般的に使用されるGaussian splatフォーマ
 2. ファイルシステムからビューアへsplatを**ドラッグ＆ドロップ**します
 
    :::info[unbundled SOGシーンの表示]
-   **SOG (unbundled)**フォーマットの場合：`meta.json`と`.webp`画像を含む**親フォルダー**をドラッグします
+   **SOG (unbundled)** フォーマットの場合：`meta.json`と`.webp`画像を含む**親フォルダー**をドラッグします
    :::
 3. 3Dシーンを**ナビゲート**します：
 

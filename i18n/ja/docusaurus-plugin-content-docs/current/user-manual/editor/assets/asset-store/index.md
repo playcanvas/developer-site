@@ -52,5 +52,5 @@ Editor内からアセットストアにアクセスするには、[Assets Panel]
 :::
 
 :::ai
-AIアシスタントにスタイル、ライセンス、ファイルサイズの条件を伝えると、**[Editor MCP Server](/user-manual/editor/mcp-server/)**でPlayCanvas、Sketchfab、My Assetsの結果を比較し、候補を絞り込めます。
+AIアシスタントにスタイル、ライセンス、ファイルサイズの条件を伝えると、[**Editor MCP Server**](/user-manual/editor/mcp-server/)でPlayCanvas、Sketchfab、My Assetsの結果を比較し、候補を絞り込めます。
 :::

@@ -43,7 +43,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 キューブマップは、6つのテクスチャアセットから構成される特殊なタイプのテクスチャアセットです。各テクスチャは、キューブの各面を表します。
 
-キューブマップを作成するには、アセットパネルの**<span class="pc-icon">&#57632;</span> Add**ボタンをクリックして**New Cubemap**を選択し、キューブマップインスペクターに6つのテクスチャをドラッグします。物理ベースのレンダリングを活用するには、6つのテクスチャを設定した後に**Prefilter**をクリックする必要があります。
+キューブマップを作成するには、アセットパネルの **<span class="pc-icon">&#57632;</span> Add** ボタンをクリックして**New Cubemap**を選択し、キューブマップインスペクターに6つのテクスチャをドラッグします。物理ベースのレンダリングを活用するには、6つのテクスチャを設定した後に**Prefilter**をクリックする必要があります。
 
 [詳細を見る](/user-manual/editor/assets/inspectors/cubemap/)
 
@@ -63,7 +63,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 3Dモデルのすべての表面は、**マテリアル**を使用してレンダリングされます。マテリアルは、表面の色、光沢、凹凸などのプロパティを定義します。
 
-マテリアルを作成するには、アセットパネルの**<span class="pc-icon">&#57632;</span> Add**ボタンをクリックして、**New Material**を選択します。
+マテリアルを作成するには、アセットパネルの **<span class="pc-icon">&#57632;</span> Add** ボタンをクリックして、**New Material**を選択します。
 
 [詳細を見る](/user-manual/editor/assets/inspectors/material/)
 
@@ -121,7 +121,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 <img src="https://playcanvas.com/static-assets/instructions/remove_component.jpg" />
 
-コンポーネントを削除するには、Entityを選択して、Inspectorのコンポーネントのタイトルの横にある**<span class="pc-icon">&#57636;</span> Delete** ボタンをクリックします。
+コンポーネントを削除するには、Entityを選択して、Inspectorのコンポーネントのタイトルの横にある **<span class="pc-icon">&#57636;</span> Delete** ボタンをクリックします。
 
 ## 3Dモデルをレンダリングするには?
 
