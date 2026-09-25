@@ -99,3 +99,45 @@ const PhysicsStatus = () => {
 `usePhysics` フックは物理エンジンの状態に関する情報を提供します。[`usePhysics`](../../api/hooks/use-physics) フックの詳細は API リファレンスを参照してください。
 
 PlayCanvas の物理についての詳細は [PlayCanvas 物理](/user-manual/physics/) ドキュメントを参照してください。
+
+## トラブルシューティング {#troubleshooting}
+
+### webpack で `Can't resolve 'sync-ammo'` の警告が出る {#webpack-warns-cant-resolve-sync-ammo}
+
+`sync-ammo` はオプションの依存関係で、物理を使用する場合にのみ必要です。インストールしていない場合でも、webpack (`next build --webpack` を含む) はビルド時にすべてのインポートを解決するため、次の警告を出力します。
+
+```none
+Module not found: Error: Can't resolve 'sync-ammo'
+```
+
+この警告は無害です。PlayCanvas React は `usePhysics` が設定されている場合にのみ `sync-ammo` をロードします。Vite と Turbopack は未インストールのパッケージを警告なしで処理するため、変更は不要です。
+
+webpack で警告を抑制するには、モジュールを無視します。
+
+```javascript title="webpack.config.js"
+const webpack = require('webpack');
+
+module.exports = {
+  // ...
+  plugins: [
+    new webpack.IgnorePlugin({ resourceRegExp: /^sync-ammo$/ })
+  ]
+};
+```
+
+Next.js では `next.config.mjs` に追加します。デフォルトの Turbopack ビルドは `webpack` 設定があると失敗するため、`next build --webpack` でビルドする場合にのみ追加してください。
+
+```javascript title="next.config.mjs"
+export default {
+  webpack: (config, { webpack }) => {
+    config.plugins.push(new webpack.IgnorePlugin({ resourceRegExp: /^sync-ammo$/ }));
+    return config;
+  }
+};
+```
+
+:::warning
+
+`IgnorePlugin` を使用すると、`sync-ammo` がインストールされていても webpack はバンドルしません。`usePhysics` を有効にする場合は削除してください。
+
+:::
