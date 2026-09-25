@@ -5,7 +5,7 @@ description: PlayCanvas Scroll View component creates a masked, inertial scrolli
 
 The Scroll View Component defines a scrollable area in a user interface. A Scroll View can be scrolled via [Scrollbar](scrollbar.md) Components.
 
-See the [User Interface](/user-manual/user-interface) section for more details.
+See [Scroll Views](/user-manual/user-interface/scroll-views/) for how the entities of a scroll view fit together, and how to set one up.
 
 ![Scroll View Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
 
@@ -31,7 +31,8 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 
 - [Scrollbar Component](scrollbar.md) - Controls for scrolling the view
 - [Element Component](element.md) - Required for the viewport and content
-- [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
+- [Scroll Views](/user-manual/user-interface/scroll-views/) - Setting up a scroll view, its scrolling behavior and sizing its content
+- [User Interface](/user-manual/user-interface/) - Learn more about building user interfaces
 
 ## Scripting Interface
 

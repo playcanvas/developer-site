@@ -5,7 +5,7 @@ description: PlayCanvas の Layout Group Component は、パディング、間�
 
 LayoutGroupコンポーネントは、エンティティが子Elementコンポーネントのサイズと位置を指定できるようにします。
 
-詳細については[レイアウトグループ](/user-manual/user-interface/layout-groups)のセクションを参照してください。
+レイアウトグループが子を配置するしくみとレイアウトの例は、[レイアウトグループ](/user-manual/user-interface/layout-groups/)を参照してください。
 
 ![LayoutGroup Component](/img/user-manual/editor/scenes/components/component-layoutgroup.png)
 
@@ -27,7 +27,7 @@ LayoutGroupコンポーネントは、エンティティが子Elementコンポ�
 
 - [LayoutChildコンポーネント](layoutchild.md) - 個々の子のレイアウト動作をオーバーライド
 - [Elementコンポーネント](element.md) - UIレイアウトに必要
-- [レイアウトグループ](/user-manual/user-interface/layout-groups) - レイアウトグループについて詳しく学ぶ
+- [レイアウトグループ](/user-manual/user-interface/layout-groups/) - レイアウトグループが子を配置するしくみとレイアウトの例
 
 ## スクリプトインターフェース
 

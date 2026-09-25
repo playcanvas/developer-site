@@ -38,7 +38,7 @@ app.xr.input.on('add', (inputSource) => {
 });
 ```
 
-## プライマリアクション (select)
+## プライマリアクション (select) {#primary-action-select}
 
 各入力ソースにはプライマリアクション`select`を設定できます。コントローラーの場合、これはプライマリボタン/トリガーです。タッチスクリーンの場合、タップです。手の場合、親指と人差し指のピンチです。また、次のように購読できる`selectstart`および`selectend`イベントもあります。
 
@@ -139,27 +139,6 @@ if (inputSource.profiles.includes('oculus-touch-v2')) {
 
 ## UI
 
-3Dスクリーン、ボタン、スクロールビュー、その他のコンポーネントといったUI要素は、入力ソースと連携してうまく機能します。`click`などのイベントは、マウス、タッチ、XR入力ソースといった入力タイプに関わらずトリガーされます。
+エレメントとボタンは、マウスやタッチと同じように入力ソースに反応します。入力ソースのレイが指しているエレメントはホバー状態になり、エレメント上でのセレクトでそのエレメントがクリックされるので、`click`のリスナーとボタンの状態はそのまま動作します。エレメントは入力ソースに対して`selectenter`、`selectleave`、`selectstart`、`selectmove`、`selectend`も発生させ、ボタンは`selectmove`以外のすべてを発生させます。入力ソースの`elementInput`を`false`にするとその入力ソースはインターフェースに反応しなくなり、`elementEntity`でそれが指しているエレメントのエンティティを取得できます。
 
-デフォルトでは、すべての入力ソースのレイがUIコンポーネントとのインタラクションチェックに使用されますが、フラグを使用してこれを無効にすることができます。
-
-```javascript
-inputSource.elementInput = false;
-```
-
-入力ソースがインタラクションしたUIエンティティにもアクセスできます。
-
-```javascript
-const entity = inputSource.elementEntity;
-if (entity) {
-    // 入力ソースがインタラクションした特定のエンティティ
-}
-```
-
-特定のマウスイベントやタッチイベントと同様に、XR入力ソースのみによって発生するButtonComponentの`select`イベントを購読することも可能です。
-
-```javascript
-entity.button.on('selectstart', (evt) => {
-    // このボタンはevt.inputSourceによって選択されました
-});
-```
+XR向けのインターフェースの構築、ポインティングとセレクト、`XrMenu`スクリプトについては、[XRのUI](/user-manual/user-interface/xr/)を参照してください。

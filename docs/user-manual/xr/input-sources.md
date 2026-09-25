@@ -38,7 +38,7 @@ app.xr.input.on('add', (inputSource) => {
 });
 ```
 
-## Primary Action (select)
+## Primary Action (select) {#primary-action-select}
 
 Each input source can have a primary action `select`. For controllers, it is a primary button/trigger. For the touch-screen, it is a tap. For hands, it is a pinch of thumb and index fingers. There are also `selectstart` and `selectend` events which you can subscribe to as follows:
 
@@ -139,27 +139,6 @@ if (inputSource.profiles.includes('oculus-touch-v2')) {
 
 ## UI
 
-UI elements such as 3D screens, buttons, scroll views, and other components work well with input sources. Events such as `click` will trigger regardless of input type: mouse, touch, or XR input source.
+Elements and buttons respond to input sources as they do to the mouse and touch. The ray of an input source hovers the element it points at, and a select on an element clicks it, so `click` listeners and button states work unchanged. Elements also fire `selectenter`, `selectleave`, `selectstart`, `selectmove` and `selectend` for input sources, and buttons fire all of them except `selectmove`. Set an input source's `elementInput` to `false` to keep it away from the interface, and read its `elementEntity` for the entity of the element it points at.
 
-By default, all input source rays will be used to check for interaction with UI components, but you can disable this using a flag:
-
-```javascript
-inputSource.elementInput = false;
-```
-
-You can also access a UI entity with which an input source has interacted:
-
-```javascript
-const entity = inputSource.elementEntity;
-if (entity) {
-    // a specific entity that the input source has interacted with
-}
-```
-
-It is also possible to subscribe to ButtonComponent `select` events, that are fired only by XR input sources, similar to specific mouse or touch events:
-
-```javascript
-entity.button.on('selectstart', (evt) => {
-    // this button is selected by evt.inputSource
-});
-```
+See [UI in XR](/user-manual/user-interface/xr/) for building interfaces for XR, pointing and selecting, and the `XrMenu` script.

@@ -174,28 +174,35 @@ export function RenderEnvAtlas() {
 
 ## useFont
 
-PlayCanvas ではテキストが Signed-Distance-Fields（SDF）でレンダリングされるため、読み込む前に ttf フォントを適切な形式に変換する必要があります。
+PlayCanvas ではテキストがマルチチャンネル符号付き距離場（MSDF）フォントで描画されるため、TTF や OTF のフォントは、まず `.json` ファイルと 1 枚以上の `.png` テクスチャからなるフォントアセットに変換します。[font-tools](https://github.com/playcanvas/font-tools) の [Web アプリ](https://playcanvas.github.io/font-tools/)かコマンドラインで作成し、アプリと一緒に配信してください。たとえば Vite プロジェクトなら `public` フォルダーに置きます。
 
-Vite や Rollup を使う場合、ビルド時に ttf を変換する公式プラグインがあります。詳しくは [@playcanvas/rollup](https://www.npmjs.com/package/@playcanvas/plugin) を参照してください。
+```bash
+npx @playcanvas/font-tools Inconsolata.ttf --charset latin -o public/fonts/inconsolata
+```
 
-`?sdf` クエリパラメータで ttf をインポートすると、ビルド時に自動的に SDF テクスチャに変換されます。
+次に `useFont` で `.json` ファイルを読み込み（テクスチャも一緒に読み込まれます）、そのアセットをテキストエレメントに渡します。
 
 ```tsx copy filename="render-font.tsx"
-
-// Use the @playcanvas/rollup plugin to convert the ttf file into an SDF texture at build time.
-import inconsolata from "@assets/fonts/inconsolata.ttf?sdf";
+import { Entity } from '@playcanvas/react';
+import { Element } from '@playcanvas/react/components';
 import { useFont } from '@playcanvas/react/hooks';
 
-export function InconsolataFont() {
-  const { asset, loading, error } = useFont(inconsolata);
+export function RenderText() {
+  const { asset, loading, error } = useFont('fonts/inconsolata.json');
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
   if (!asset) return null;
 
-  return asset;
+  return (
+    <Entity name="label">
+      <Element type="text" fontAsset={asset} text="Hello, World!" />
+    </Entity>
+  );
 }
 ```
+
+フォントに含める文字の選び方は[フォント](/user-manual/user-interface/fonts/)、スクリーン上へのテキストの描画は[テキストエレメント](/user-manual/user-interface/text-elements/)を参照してください。
 
 ## useAsset
 

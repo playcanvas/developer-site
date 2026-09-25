@@ -5,7 +5,7 @@ description: PlayCanvas の Element Component は、Screen 階層の下でアン
 
 Elementコンポーネントは、Screenコンポーネントを祖先に持つ階層内で、画像やテキストなどの2Dコンポーネントで構成されたユーザーインターフェースを構築するために使用されます。Elementコンポーネントはアンカーやピボットポイントなどのレイアウトプロパティを提供します。
 
-詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
+アンカー、ピボット、マージン、サイズについては[エレメント](/user-manual/user-interface/elements/)を、画像とテキストについては[イメージエレメント](/user-manual/user-interface/image-elements/)と[テキストエレメント](/user-manual/user-interface/text-elements/)を参照してください。
 
 ## グループエレメント (Group Element) {#group-element}
 
@@ -31,8 +31,8 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 |----------------|-------------|
 | Type           | Elementのタイプ：Group、Image、またはText。 |
 | Preset         | レイアウトプリセットを選択すると、AnchorプロパティとPivotプロパティがプリセット値に自動的に設定されます。 |
-| Anchor         | エレメントが位置を計算する基準点を決定します。詳細は[Elements#Anchor](/user-manual/user-interface/elements/#anchor)セクションを参照してください。 |
-| Pivot          | Elementのピボットポイントの位置を決定します。(0, 0)は左下、(1, 1)は右上です。詳細は[Elements#Pivot](/user-manual/user-interface/elements/#pivot)セクションを参照してください。 |
+| Anchor         | エレメントが位置を計算する基準点を決定します。詳細は[アンカー](/user-manual/user-interface/elements/#anchor)を参照してください。 |
+| Pivot          | Elementのピボットポイントの位置を決定します。(0, 0)は左下、(1, 1)は右上です。詳細は[ピボット](/user-manual/user-interface/elements/#pivot)を参照してください。 |
 | Auto Width     | Textのみ。有効にすると、エレメントの幅がテキスト内容に基づいて自動的に計算されます。 |
 | Auto Fit Width | Textのみ。有効にすると、テキストがエレメントの幅内に収まるようにフォントサイズが自動的に縮小されます。 |
 | Width          | Elementの幅（ピクセル単位）。Auto Widthが有効な場合、またはアンカーが水平方向に分割されている場合は無効になります。 |
@@ -92,7 +92,9 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 - [Buttonコンポーネント](button.md) - インタラクティブなボタン要素
 - [LayoutGroupコンポーネント](layoutgroup.md) - 子エレメントの自動レイアウト
 - [LayoutChildコンポーネント](layoutchild.md) - 個々のエレメントのレイアウト動作をオーバーライド
-- [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
+- [エレメント](/user-manual/user-interface/elements/) - アンカー、ピボット、マージン、サイズ
+- [イメージエレメント](/user-manual/user-interface/image-elements/)と[テキストエレメント](/user-manual/user-interface/text-elements/) - 画像とテキストの描画
+- [ユーザーインターフェース](/user-manual/user-interface/) - ユーザーインターフェースの構築について詳しく学ぶ
 
 ## スクリプトインターフェース {#scripting-interface}
 
