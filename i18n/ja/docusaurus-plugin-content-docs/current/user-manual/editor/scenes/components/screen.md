@@ -5,7 +5,7 @@ description: PlayCanvas の Screen Component は、スクリーン空間また�
 
 Screenコンポーネントは、ユーザーインターフェースの領域とレンダリングを定義します。Screenコンポーネントに追加された子要素はすべてElementコンポーネントを持つ必要があります。
 
-詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
+スクリーンのしくみは[スクリーン](/user-manual/user-interface/screens/)を、スクリーンを使ったインターフェースの構築は[ユーザーインターフェース](/user-manual/user-interface/)のセクションを参照してください。
 
 ![Screen Component](/img/user-manual/editor/scenes/components/component-screen.png)
 
@@ -24,7 +24,8 @@ Screenコンポーネントは、ユーザーインターフェースの領域�
 
 - [Elementコンポーネント](element.md) - スクリーンの子となるUI要素
 - [Buttonコンポーネント](button.md) - インタラクティブなボタン要素
-- [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
+- [スクリーン](/user-manual/user-interface/screens/) - スクリーン空間とワールド空間、解像度とスケーリング
+- [ユーザーインターフェース](/user-manual/user-interface/) - ユーザーインターフェースの構築について詳しく学ぶ
 
 ## スクリプトインターフェース
 

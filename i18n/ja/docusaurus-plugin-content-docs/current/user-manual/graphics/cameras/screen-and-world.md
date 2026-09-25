@@ -36,14 +36,13 @@ entity.setPosition(pos);
 ```javascript
 const screenPos = camera.camera.worldToScreen(entity.getPosition());
 
-// デバイスピクセル比を考慮しながら、絶対配置のHTML要素を
+// キャンバスを覆うコンテナの中で、絶対配置のHTML要素を
 // エンティティの上に配置する
-const dpr = window.devicePixelRatio;
-htmlElement.style.left = `${screenPos.x / dpr}px`;
-htmlElement.style.top = `${screenPos.y / dpr}px`;
+htmlElement.style.left = `${screenPos.x}px`;
+htmlElement.style.top = `${screenPos.y}px`;
 ```
 
-戻り値の `z` 成分には、その点の深度が格納されます。透視投影カメラでは、`z` が負の場合はその点がカメラの後ろにあることを意味するため、要素を表示する前に確認してください。
+`x` と `y` 成分は、デバイスピクセル比に関係なく、キャンバスの左上隅からのCSSピクセルなので、HTMLではそのまま使えます。戻り値の `z` 成分には、その点の深度が格納されます。透視投影カメラでは、`z` が負の場合はその点がカメラの後ろにあることを意味するため、要素を表示する前に確認してください。キャンバス内のUIエレメントを同じように配置する方法は、[キャラクターの上のラベル](/user-manual/user-interface/world-space-ui/#labels-over-characters)を参照してください。
 
 ## オブジェクトのピッキング {#picking}
 

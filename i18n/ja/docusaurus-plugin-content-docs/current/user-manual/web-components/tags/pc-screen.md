@@ -18,11 +18,11 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `priority` | Number | `"0"` | レンダリング優先度 (0-255) |
-| `reference-resolution` | Vector2 | `"640 320"` | 「幅 高さ」の値としての参照解像度 |
-| `resolution` | Vector2 | `"640 320"` | 「幅 高さ」の値としてのスクリーン解像度 |
-| `scale-blend` | Number | `"0.5"` | `scale-mode`が`"blend"`のときに、`resolution`と`reference-resolution`をどのように重み付けするか。0（`resolution`に従う）から1（`reference-resolution`に従う）まで。`scale-mode`が`"none"`のときは無視されます |
-| `scale-mode` | Enum | `"none"` | スクリーンがコンテンツをスケーリングする方法: `"none"` \| `"blend"`。`"none"`は`resolution`でレンダリングし`reference-resolution`を無視します。`"blend"`は`scale-blend`で重み付けしながら両者の間でスケーリングし、ある解像度で設計したUIを別の解像度でも使えるようにします。`screen-space`が必要です |
+| `priority` | Number | `"0"` | スクリーン同士の描画順。0から127までで、優先度の高いスクリーンは低いスクリーンの上に描画され、そのエレメントが先に入力を受け取ります |
+| `reference-resolution` | Vector2 | `"640 320"` | UIをレイアウトする基準の解像度（「幅 高さ」の値）。`scale-mode="blend"`では、この解像度に対するキャンバスのサイズでコンテンツがスケーリングされます |
+| `resolution` | Vector2 | `"640 320"` | ワールド空間のスクリーンのサイズ。エンティティのローカル単位での「幅 高さ」の値です。スクリーン空間のスクリーンは解像度をキャンバスから取るため、この属性は効果がありません |
+| `scale-blend` | Number | `"0.5"` | `scale-mode="blend"`のとき、スケールの計算でキャンバスの幅と高さをどう重み付けするか。0（幅のみ）から1（高さのみ）までで、0.5では均等に扱います。`scale-mode`が`"none"`のときは無視されます |
+| `scale-mode` | Enum | `"none"` | スクリーンがコンテンツをスケーリングする方法: `"none"` \| `"blend"`。`"none"`はスケーリングせず、スクリーン空間のスクリーンでは1単位がキャンバスの描画バッファの1ピクセルになります。`"blend"`は`reference-resolution`に対するキャンバスのサイズで、`scale-blend`で重み付けしてスケーリングし、ある解像度でレイアウトしたUIを別の解像度でも使えるようにします。`screen-space`が必要です |
 | `screen-space` | Boolean | `"false"` | スクリーン空間でレンダリングするかどうか |
 
 </div>
@@ -70,5 +70,6 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 * [`<pc-layout-group>`](../pc-layout-group) — 要素の自動配置
 * [`<pc-scroll-view>`](../pc-scroll-view) — スクリーン上でコンテンツをスクロールする
 * [`<pc-button>`](../pc-button) — インタラクティブな要素
+* [スクリーン](/user-manual/user-interface/screens/) — ユーザーインターフェースのセクションにある、スクリーン空間とワールド空間、解像度とスケーリングの解説
 
 サンプル: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html)、[UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)

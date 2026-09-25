@@ -1,125 +1,171 @@
 ---
 title: Fonts
-description: Create the MSDF Font assets that text elements need — in the Editor, or with the standalone font-tools for Engine, React and Web Components projects.
+description: Create the MSDF font assets that text elements need, in the Editor or with font-tools, choose the characters they hold, load them in the Engine, React and Web Components, and draw emoji.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A [Text Element](/user-manual/user-interface/text-elements) renders its string using a **Font asset** — a multi-channel signed distance field (MSDF) atlas made up of a `.json` file (glyph metrics) and one or more `.png` texture pages. Because the glyphs are stored as distance fields rather than fixed-size bitmaps, a single Font asset stays crisp at any size, so you only need one asset per typeface.
+A [text element](/user-manual/user-interface/text-elements/) draws its text with a **font asset**: a multi-channel signed distance field (MSDF) atlas, made of a `.json` file that describes the glyphs and one or more `.png` texture pages that hold them. The glyphs are stored as distance fields rather than as pixels, so one font asset stays sharp at any size, and one asset per typeface is enough.
 
-This page covers the two ways to create a Font asset and how to load one in each runtime.
+## Creating a Font Asset {#creating-a-font-asset}
 
-## Creating a Font asset
+### In the Editor {#in-the-editor}
 
-### In the Editor
+Upload a `.ttf`, `.ttc`, `.otf` or `.dfont` file. The Editor generates the font asset in your browser, in a folder that holds the source file, the `.json` file, the `.png` texture pages and the font asset itself.
 
-Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor. The atlas is generated in your browser and you get a folder holding the source file, the `.json` descriptor, the `.png` atlas page(s), and the Font asset that references them. You choose which characters to include and tune the result, then click **Regenerate Font Assets**. See the [Font asset inspector](/user-manual/editor/assets/inspectors/font) for the full list of options.
+Select the font asset to choose its characters in the inspector. **CHARACTER PRESETS** adds whole sets of characters (**Latin**, **Latin Supplement**, **Cyrillic** and **Greek**), **CUSTOM CHARACTER RANGE** adds a range of Unicode code points given in hex, and the **Characters** field lists every character the asset will hold. Click **REGENERATE FONT ASSETS** to build the asset again with them. If the font file lacks some of the characters, the inspector lists them, with buttons to copy each character or its code.
 
-### Without the Editor — font-tools
+A font created by an older version of the Editor is converted to the current format the first time you regenerate it, which can't be undone. See the [Font asset inspector](/user-manual/editor/assets/inspectors/font/) for the other options.
 
-If you are building with the Engine, React or Web Components — without the Editor — use [**font-tools**](https://github.com/playcanvas/font-tools) to generate the same `.json` + `.png` asset. It is the generator the Editor itself runs, with one difference: font-tools extracts kerning pairs from the source font by default, while the Editor does not, so text set from a font-tools asset is spaced more tightly. There are two ways to use it:
+### With font-tools {#font-tools}
 
-- **Web app** — Open [playcanvas.github.io/font-tools](https://playcanvas.github.io/font-tools/), drag in a TTF or OTF, choose a character set and glyph size, preview the result in live PlayCanvas text, and download the files. Everything runs in your browser — your font is never uploaded.
-- **Command line** — Generate an asset without leaving your terminal:
+Without the Editor, create font assets with [font-tools](https://github.com/playcanvas/font-tools), the generator that the Editor itself uses:
+
+- **Web app.** Open [playcanvas.github.io/font-tools](https://playcanvas.github.io/font-tools/), drop in a TTF or OTF file, choose the characters and the glyph size, preview the result as real PlayCanvas text, and download the files. Everything runs in your browser, and your font is never uploaded.
+- **Command line.** Generate an asset from a terminal:
 
   ```bash
   npx @playcanvas/font-tools MyFont.ttf --charset latin-ext -o assets/fonts/myfont
   ```
 
-  This writes `myfont.json` and `myfont.png` (large character sets spill onto additional pages: `myfont1.png`, `myfont2.png`, and so on).
+  This writes `myfont.json` and `myfont.png`. Large character sets spill onto more pages: `myfont1.png`, `myfont2.png` and so on.
 
-:::note Open Source
+| Option | Default | Effect |
+| --- | --- | --- |
+| `-o`, `--out <path>` | The font's name | The output path, without the extension |
+| `--charset <spec>` | `ascii` | A preset (`ascii`, `latin`, `latin-ext`, `cyrillic` or `greek`), or the characters themselves |
+| `--size <px>` | `64` | The size of each glyph's cell in the atlas |
+| `--pxrange <px>` | `8` | The distance range of the MSDF, in pixels |
+| `--name <face>` | The output name | The face name written into the `.json` file |
+| `--no-kerning` | Kerning on | Leaves out kerning |
 
-font-tools is [open-sourced under an MIT license on GitHub](https://github.com/playcanvas/font-tools). See the README for the full list of CLI options and the JavaScript API for generating fonts programmatically.
+font-tools reads the kerning pairs of a font by default, and the Editor does not, so text in a font-tools asset is spaced a little more tightly. font-tools is open source under the MIT license, and also has a JavaScript API for generating fonts in your own tools.
 
-:::
+## Choosing Characters {#choosing-characters}
 
-## Using a Font asset
+A font asset holds only the characters it was created with, and a text element draws any other character as a space, with a warning in the console. Include every character your text uses: accented letters, punctuation such as `“”` and `…`, currency symbols, and the characters of every language you [localize](/user-manual/user-interface/localization/) into.
 
-Keep the `.json` and its `.png` page(s) together, with the same base name — the loader derives the texture URLs from the JSON URL and fetches the pages automatically.
+Each character takes space in the texture pages, so thousands of characters, as Chinese, Japanese and Korean text needs, make a large asset that takes longer to load. Include the characters your text actually uses, rather than whole scripts, and give each language its own [localized font](/user-manual/user-interface/localization/#localized-fonts) if the sets differ a lot.
+
+## Using a Font Asset {#using-a-font-asset}
+
+Keep the `.json` file and its `.png` pages together, with the same base name. The loader works out the URLs of the pages from the URL of the `.json` file and loads them too.
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
 
 ```javascript
-// myfont.json + myfont.png (from font-tools) sit side by side;
-// loading the .json pulls in the .png page(s) automatically.
-const asset = new pc.Asset('myfont', 'font', { url: '/assets/fonts/myfont.json' });
-app.assets.add(asset);
-
-asset.ready(() => {
-    // A 2D screen to hold the text
-    const screen = new pc.Entity('screen');
-    screen.addComponent('screen', { screenSpace: true });
-    app.root.addChild(screen);
-
-    const text = new pc.Entity('text');
-    text.addComponent('element', {
-        type: 'text',
-        fontAsset: asset.id,
-        text: 'Hello, World!',
-        fontSize: 32,
-        anchor: [0.5, 0.5, 0.5, 0.5],
-        pivot: [0.5, 0.5]
-    });
-    screen.addChild(text);
+// Loading myfont.json also loads myfont.png, and any further pages
+const font = new pc.Asset('myfont', 'font', { url: 'fonts/myfont.json' });
+app.assets.add(font);
+await new Promise((resolve) => {
+    font.ready(resolve);
+    app.assets.load(font);
 });
 
-app.assets.load(asset);
+const label = new pc.Entity('label');
+label.addComponent('element', {
+    type: pc.ELEMENTTYPE_TEXT,
+    fontAsset: font.id,
+    text: 'Hello, World!',
+    anchor: [0.5, 0.5, 0.5, 0.5],
+    pivot: [0.5, 0.5]
+});
+screen.addChild(label);
 ```
+
+Register `pc.FontHandler` when you create the application, so that it can load font assets.
 
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-No loading code is required. Drag the Font asset onto the **Font** slot of a Text [Element component](/user-manual/editor/scenes/components/element#text-element), as described in [Text Elements](/user-manual/user-interface/text-elements).
+No loading code is needed. Drag the font asset onto the **Font** field of a text element. See [Text Elements](/user-manual/user-interface/text-elements/).
 
 </TabItem>
 <TabItem value="react" label="React">
 
-In [PlayCanvas React](/user-manual/react), font-tools is the standalone alternative to the build-time `?sdf` conversion offered by the [`@playcanvas/rollup`](https://www.npmjs.com/package/@playcanvas/plugin) plugin. Load the generated `.json` with [`useFont`](/user-manual/react/api/hooks/use-asset#usefont), then assign it to a text [`<Element>`](/user-manual/react/api/element) inside a [`<Screen>`](/user-manual/react/api/screen):
+Load the `.json` file with [`useFont`](/user-manual/react/api/hooks/use-asset/#usefont), and give the asset to a text [`<Element>`](/user-manual/react/api/element/):
 
-```tsx
+```jsx
 import { Entity } from '@playcanvas/react';
-import { Screen, Element } from '@playcanvas/react/components';
+import { Element } from '@playcanvas/react/components';
 import { useFont } from '@playcanvas/react/hooks';
 
-function Label() {
-  const { asset } = useFont('/assets/fonts/myfont.json');
-  if (!asset) return null;
+export function Label() {
+  const { asset: font } = useFont('fonts/myfont.json');
+  if (!font) return null;
 
   return (
-    <Entity>
-      <Screen />
-      <Entity>
-        <Element type="text" fontAsset={asset} text="Hello, World!" fontSize={32} />
-      </Entity>
+    <Entity name="label">
+      <Element type="text" fontAsset={font} text="Hello, World!"
+        anchor={[0.5, 0.5, 0.5, 0.5]} pivot={[0.5, 0.5]} />
     </Entity>
   );
 }
 ```
 
-See [Loading Assets](/user-manual/react/guide/loading-assets) for handling `loading` and `error` states.
+See [Loading Assets](/user-manual/react/guide/loading-assets/) for handling the `loading` and `error` states.
 
 </TabItem>
 <TabItem value="web-components" label="Web Components">
 
-Declare the asset with `type="font"` (the `.json` extension would otherwise be treated as a plain JSON asset), then reference it by `id` from a text [`<pc-element>`](/user-manual/web-components/tags/pc-element):
+Declare the asset with `type="font"`, as a `.json` file would otherwise be loaded as plain JSON, and refer to it by its `id`:
 
 ```html
 <pc-app>
-  <!-- font-tools output: fonts/myfont.json + fonts/myfont.png -->
-  <pc-asset id="myfont" type="font" src="fonts/myfont.json"></pc-asset>
-
-  <pc-entity>
-    <pc-screen screen-space>
-      <pc-entity>
-        <pc-element type="text" font-asset="myfont" text="Hello, World!" font-size="32"></pc-element>
-      </pc-entity>
-    </pc-screen>
-  </pc-entity>
+    <pc-asset id="myfont" type="font" src="fonts/myfont.json"></pc-asset>
+    <pc-scene>
+        <pc-entity name="camera">
+            <pc-camera></pc-camera>
+        </pc-entity>
+        <pc-entity name="screen">
+            <pc-screen screen-space scale-mode="blend" reference-resolution="1280 720"></pc-screen>
+            <pc-entity name="label">
+                <pc-element type="text" font-asset="myfont" text="Hello, World!"
+                            anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"></pc-element>
+            </pc-entity>
+        </pc-entity>
+    </pc-scene>
 </pc-app>
 ```
 
 </TabItem>
 </Tabs>
+
+## Emoji {#emoji}
+
+MSDF glyphs have a single color, so a font asset can't draw color emoji. `pc.CanvasFont`, which is not yet in the API reference, draws characters with the browser's own fonts into textures instead, emoji included. It is a bitmap font: create it at a size at least as large as the text you draw with it, and add the characters you need before you use them:
+
+```javascript
+const emojiFont = new pc.CanvasFont(app, {
+    fontName: 'Arial',
+    fontSize: 64,
+    color: new pc.Color(1, 1, 1),
+    width: 256,
+    height: 256
+});
+emojiFont.createTextures('Well done! 🎉');
+
+const message = new pc.Entity('message');
+message.addComponent('element', {
+    type: pc.ELEMENTTYPE_TEXT,
+    text: 'Well done! 🎉',
+    fontSize: 32,
+    anchor: [0.5, 0.5, 0.5, 0.5],
+    pivot: [0.5, 0.5]
+});
+message.element.font = emojiFont;
+screen.addChild(message);
+```
+
+The first call to `createTextures` creates the font's textures. Before you set text with characters the textures don't have yet, add the characters with `updateTextures`.
+
+<EngineExample id="user-interface/text-emojis" title="Text Emojis" />
+
+## See Also
+
+- [Text Elements](/user-manual/user-interface/text-elements/) - Drawing, wrapping, fitting and styling text
+- [Localization](/user-manual/user-interface/localization/) - Translated text, and fonts for each language
+- [Font asset inspector](/user-manual/editor/assets/inspectors/font/) - Every option of a font asset in the Editor
+- [font-tools](https://github.com/playcanvas/font-tools) - The font generator's source, command line options and API

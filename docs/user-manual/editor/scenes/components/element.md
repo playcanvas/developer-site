@@ -5,7 +5,7 @@ description: PlayCanvas Element component defines 2D UI group, image, or text el
 
 The Element Component is used to build user interfaces made up of 2D components such as images and text when in a hierarchy with a Screen Component ancestor. The Element Component provides layout properties such as anchors and a pivot point.
 
-See the [User Interface](/user-manual/user-interface) section for more details.
+See [Elements](/user-manual/user-interface/elements/) for anchors, pivots, margins and sizes, and [Image Elements](/user-manual/user-interface/image-elements/) and [Text Elements](/user-manual/user-interface/text-elements/) for images and text.
 
 ## Group Element
 
@@ -31,8 +31,8 @@ The text element renders a string of text using a [font asset](/user-manual/edit
 |----------------|-------------|
 | Type           | The type of Element: Group, Image, or Text. |
 | Preset         | Choosing a layout preset will automatically set the Anchor and Pivot properties to a preset value. |
-| Anchor         | Determines where the element calculates its position in relation to. See the [Elements#Anchor](/user-manual/user-interface/elements/#anchor) section for more information. |
-| Pivot          | Determines where the pivot point of the Element is. (0, 0) is bottom left, (1, 1) is top right. See the [Elements#Pivot](/user-manual/user-interface/elements/#pivot) section for more information. |
+| Anchor         | Determines where the element calculates its position in relation to. See [Anchor](/user-manual/user-interface/elements/#anchor) for more information. |
+| Pivot          | Determines where the pivot point of the Element is. (0, 0) is bottom left, (1, 1) is top right. See [Pivot](/user-manual/user-interface/elements/#pivot) for more information. |
 | Auto Width     | Text only. If enabled, the element's width will be automatically calculated based on the text content. |
 | Auto Fit Width | Text only. If enabled, the font size will be automatically reduced to fit the text within the element's width. |
 | Width          | The width of the Element in pixels. May be disabled when Auto Width is enabled or when the anchor is horizontally split. |
@@ -92,7 +92,9 @@ The text element renders a string of text using a [font asset](/user-manual/edit
 - [Button Component](button.md) - Interactive button elements
 - [LayoutGroup Component](layoutgroup.md) - Automatic layout of child elements
 - [LayoutChild Component](layoutchild.md) - Override layout behavior for individual elements
-- [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
+- [Elements](/user-manual/user-interface/elements/) - Anchors, pivots, margins and sizes
+- [Image Elements](/user-manual/user-interface/image-elements/) and [Text Elements](/user-manual/user-interface/text-elements/) - Drawing images and text
+- [User Interface](/user-manual/user-interface/) - Learn more about building user interfaces
 
 ## Scripting Interface
 

@@ -315,6 +315,26 @@
     "message": "ユーザーインターフェース",
     "description": "The label for category User Interface in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.ui-layout": {
+    "message": "レイアウト",
+    "description": "The label for category Layout in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.ui-images": {
+    "message": "画像",
+    "description": "The label for category Images in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.ui-text": {
+    "message": "テキスト",
+    "description": "The label for category Text in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.ui-interaction": {
+    "message": "インタラクション",
+    "description": "The label for category Interaction in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.ui-world-space-and-xr": {
+    "message": "ワールド空間とXR",
+    "description": "The label for category World Space and XR in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.PCUI": {
     "message": "PCUI",
     "description": "The label for category PCUI in sidebar userManualSidebar"

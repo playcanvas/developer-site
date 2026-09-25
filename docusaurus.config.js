@@ -94,6 +94,8 @@ const config = {
         { from: ['/user-manual/physics/physics-migration/'], to: '/user-manual/physics/physics-basics/' },
         // Physics: Compound Shapes became a section of the Collision Shapes page
         { from: ['/user-manual/physics/compound-shapes/'], to: '/user-manual/physics/collision-shapes/' },
+        // User Interface: Group Elements became a section of the Elements page
+        { from: ['/user-manual/user-interface/group-elements/'], to: '/user-manual/user-interface/elements/' },
         { from: ['/user-manual/organizations/'], to: '/user-manual/account-management/organizations/' },
         { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
         { from: ['/user-manual/organizations/managing-organizations/'], to: '/user-manual/account-management/organizations/managing/' },

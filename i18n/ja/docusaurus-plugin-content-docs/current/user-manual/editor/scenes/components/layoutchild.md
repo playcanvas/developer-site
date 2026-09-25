@@ -5,7 +5,7 @@ description: PlayCanvas の Layout Child Component は、1 つの UI 要素に�
 
 LayoutChildコンポーネントは、LayoutGroupコンポーネントによって制御されるエレメントが、Layout Groupのデフォルト動作をオーバーライドすることを可能にします。
 
-詳細については[レイアウトグループ](/user-manual/user-interface/layout-groups)のセクションを参照してください。
+レイアウトチャイルドでエレメントのレイアウトを変える方法は、[レイアウトチャイルド](/user-manual/user-interface/layout-groups/#layout-children)を参照してください。
 
 ![LayoutChild Component](/img/user-manual/editor/scenes/components/component-layoutchild.png)
 
@@ -25,7 +25,7 @@ LayoutChildコンポーネントは、LayoutGroupコンポーネントによっ�
 
 - [LayoutGroupコンポーネント](layoutgroup.md) - レイアウトを制御する親コンポーネント
 - [Elementコンポーネント](element.md) - UIレイアウトに必要
-- [レイアウトグループ](/user-manual/user-interface/layout-groups) - レイアウトグループについて詳しく学ぶ
+- [レイアウトグループ](/user-manual/user-interface/layout-groups/) - レイアウトグループが子を配置するしくみとレイアウトチャイルド
 
 ## スクリプトインターフェース
 

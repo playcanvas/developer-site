@@ -1,15 +1,18 @@
 ---
-title: ローカライゼーション
-description: Editorの設定でJSONのローカライゼーション Assetを作成し、翻訳キーをText Elementの内容にバインドします。
+title: ローカライズ
+description: ローカライズファイルでインターフェースを翻訳し、ファイルを読み込んでロケールを選び、テキストエレメントとスクリプト内の文字列をローカライズし、複数形を扱い、言語ごとにフォントを切り替え、数値と日付をフォーマットします。
 ---
 
-テキストエレメントを異なる言語にローカライズする方法について説明します。
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-## ローカライゼーションファイル
+ローカライズを行うと、アプリケーションのテキストがプレイヤーの言語で表示されます。翻訳は**ローカライズファイル**に収めます。これは、1つ以上のロケールについて、**キー**ごとにメッセージを持つJSONアセットです。テキストエレメントやスクリプトがキーを指定すると、アプリケーションの[`I18n`](https://api.playcanvas.com/engine/classes/I18n.html)オブジェクトである`app.i18n`が、現在のロケールのメッセージを返します。
 
-JSONファイルの`info`部分で異なるロケールを指定することができます。`messages`セクションには、それぞれのローカライズされたフレーズのキーバリューのペアが含まれています。キーはそのフレーズの識別子で、テキストはそのキーの翻訳テキストです。
+<EngineExample id="user-interface/text-localization" title="Text Localization" />
 
-JSONアセットは次のようになります。
+## ローカライズファイル {#localization-files}
+
+ローカライズファイルは次のような形式です。
 
 ```json
 {
@@ -22,107 +25,265 @@ JSONアセットは次のようになります。
                 "locale": "en-US"
             },
             "messages": {
-                "key": "Single key translation",
-                "key plural": [
-                    "One key translation",
-                    "Translation for {number} keys"
-                ]
+                "title": "Treasure Hunt",
+                "coins": ["You have {number} coin", "You have {number} coins"]
             }
         }
     ]
 }
 ```
 
-JSONファイルの`info`部分ので異なるロケールを指定することができます。`messages`セクションには、それぞれのローカライズされたフレーズのキーバリューのペアが含まれています。キーはそのフレーズの識別子で、テキストはそのキーの翻訳テキストです。
+- `header.version`は1でなければなりません。これがないファイルは受け付けられず、コンソールにエラーが出力されます。
+- `data`はロケールごとに1つのエントリーを持つので、1つのファイルに1つの言語を入れることも、複数の言語を入れることもできます。
+- メッセージは文字列です。数値によって変わるテキストの場合は、その言語の複数形ごとに1つずつ文字列を並べた配列になります。
 
-PlayCanvasは各ロケールの複数形もサポートしています。各フレーズの複数形を指定するためには、単一の文字列の代わりに、各複数形の文字列の配列を渡す必要があります。各言語の複数形は[ここ](https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html)で見つけることができます。各配列要素はその言語の複数形に対応します。たとえば英語の場合は次のようになります。
+エディターでは、設定パネルの**LOCALIZATION**セクションにある**CREATE NEW ASSET**で、この形式のファイルを作成できます。
 
-```json
-"key plural": [
-    "One item", // plural form ONE
-    "Not one" // plural form OTHER
-]
-```
+### 複数形 {#plural-forms}
 
-アラビア語の場合:
+言語によって複数形の数は異なります。複数形のメッセージでは、その言語が使う形を[Unicodeの複数形カテゴリー](https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html)の順（zero、one、two、few、many、other）に並べます。エンジンは次の言語の複数形に対応しています。
 
-```json
-"key plural": [
-    "Zero items", // plural form ZERO
-    "One item", // plural form ONE
-    "Two items", // plural form TWO
-    "Few items", // plural form FEW
-    "Many items", // plural form MANY
-    "Rest" // plural form OTHER
-]
-```
+| 複数形 | 言語 |
+| --- | --- |
+| 1つ（other） | 中国語、インドネシア語、日本語、韓国語、タイ語、ベトナム語 |
+| 2つ（one、other） | デンマーク語、英語、フィンランド語、ドイツ語、ギリシャ語、イタリア語、ノルウェー語、スペイン語、スウェーデン語、トルコ語、ウルドゥー語では、「one」は1です。フランス語、ヒンディー語、ペルシャ語、ポルトガル語では、「one」は0または1です |
+| 4つ（one、few、many、other） | ポーランド語、ロシア語、ウクライナ語 |
+| 6つ（zero、one、two、few、many、other） | アラビア語 |
 
-各言語のルールについては、[ここ](https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html)の言語表を参照してください。
+これ以外の言語では、英語の規則が使われます。
 
-ローカライズJSONアセットを作成したら、エディタ設定のローカライゼーションの下に追加する必要があります。
+## ファイルの読み込み {#loading-the-files}
 
-## テキストエレメントのローカライズ
+`app.i18n`は、ローカライズファイルの読み込みが完了するとその内容を取り込みますが、ファイルを読み込むことはしません。
 
-テキストエレメントの `Localized` チェックボックスを有効にすると、ローカライゼーションファイルを使用してそのテキストを翻訳できます。テキストエレメントの `Key` フィールドに入力するテキストは、ローカライゼーションファイルのキーと一致する必要があります。
-
-ローカライゼーションをテストするためには、エディタ設定の `Locale` フィールドを変更できます。これにより、エディタのビューポートがそのロケールに更新され、またアプリケーションを起動したときに使用するロケールも更新されます。このフィールドは、ビルドを公開またはダウンロードするときには使用されません。
-
-## 数字のローカライズ
-
-異なるロケールでは、数字のフォーマット方法について異なるルールがあります。例えば、英語（イギリスとアメリカ）では `1000000` を `1,000,000` とフォーマットし、オランダ語では小数点でフォーマットします `1.000.000`。
-
-JavaScriptはロケールコードに基づいてこのフォーマットを行う組み込み関数、[`Number.protoype.toLocaleString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)を提供しています。
-
-使用例:
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
 
 ```javascript
-const numberOfItems = 1000;
-const currentLocale = this.app.i18n.locale;
-const localeNumberString = numberOfItems.toLocaleString(currentLocale);
+const english = new pc.Asset('en-US', 'json', { url: 'localization/en-US.json' });
+const french = new pc.Asset('fr-FR', 'json', { url: 'localization/fr-FR.json' });
+app.assets.add(english);
+app.assets.add(french);
 
-console.log(localeNumberString);
-// expected output assuming currentLocale is en-US: "1,000"
+app.i18n.assets = [english, french];
+app.assets.load(english);
+app.assets.load(french);
 ```
 
-## ローカライズされたフォント
+アプリケーションを作成するときに、`pc.JsonHandler`を登録してください。すでに手元にあるデータを使う場合は、代わりにそれを`app.i18n.addData()`に渡します。
 
-よくあるケースとして、異なる言語では異なるフォントを使用する必要がある場合があります。特定の言語に対して異なるフォントを定義するためには、テキストエレメントで使用している主要なフォントアセットを選択し、アセット属性の下部にあるそのフォントアセットのローカライゼーションセクションを見つけます。目的のロケールを入力し、そのロケールに新しいフォントアセットを割り当てます。
+</TabItem>
+<TabItem value="editor" label="Editor">
 
-ランタイム時にアプリケーションが異なるロケールに切り替えると、そのロケールに定義したフォントアセットが読み込まれます。
+設定パネルの**LOCALIZATION**セクションにある**Assets**に、ローカライズファイルを追加します。アプリケーションの開始時に読み込みが完了しているよう、これらのファイルの**Preload**はオンのままにしておきます。
 
-![Localized Fonts Inspector](/img/user-manual/user-interface/localization/localized-fonts-inspector.gif)
+</TabItem>
+<TabItem value="react" label="React">
 
-## 言語ノート
+`useAsset`はJSONアセットを読み込まないため、ファイルを取得してそのデータを追加します。
 
-以下に、特定のワークフローや注意事項が必要な言語がいくつか挙げられています。
+```jsx
+import { useEffect } from 'react';
+import { useApp } from '@playcanvas/react/hooks';
 
-### タイ語
+export function Localization({ urls }) {
+  const app = useApp();
 
-テキストエレメントでタイ語のテキストのワードラッピングを正しく動作させるためには、翻訳者が単語の間に [zero width characters (Unicode U+200B)](https://en.wikipedia.org/wiki/Zero-width_space) を追加する必要があります。
+  useEffect(() => {
+    let cancelled = false;
+    const files = [];
+    Promise.all(urls.map(url => fetch(url).then(response => response.json()))).then((data) => {
+      if (cancelled) return;
+      for (const file of data) {
+        app.i18n.addData(file);
+        files.push(file);
+      }
+    });
+    return () => {
+      cancelled = true;
+      files.forEach(file => app.i18n.removeData(file));
+    };
+  }, [app, urls.join()]);
 
-タイ語には単語の間にスペースがなく、同じグリフの連続が文脈によって異なる単語の組み合わせに分割されることがあります。
+  return null;
+}
+```
 
-タイ語のテキストを計算上正しく分割することはまだ[未解決の問題](http://www.thai-language.com/ref/breaking-words)であり、通常はランタイムで行うには費用がかかる辞書ベースのアプローチを使用します。
+`<Application>`の中で`<Localization urls={['localization/en-US.json', 'localization/fr-FR.json']} />`をレンダリングします。
 
-[thai-language.comサイトには辞書ベースのアプローチを使用した別のツール](http://www.thai-language.com/?nav=zwsp)もあり、既存のテキストを使用して単語の間にゼロ幅文字を追加することができます。
+</TabItem>
+<TabItem value="web-components" label="Web Components">
 
-### 右から左の言語
+```html
+<pc-asset id="en-US" type="json" src="localization/en-US.json"></pc-asset>
+<pc-asset id="fr-FR" type="json" src="localization/fr-FR.json"></pc-asset>
 
-右から左に書く言語には、[この例のプロジェクト](/tutorials/right-to-left-language-support/)で見つけることができるサポートするための追加スクリプトが必要です。
+<script type="module">
+    import { AssetElement, whenReady } from '@playcanvas/web-components';
 
-例のプロジェクトには、「Rtl Support」というフォルダがあり、プロジェクトに[コピーして貼り付ける](/user-manual/editor/assets/asset-panel/#copy-and-paste-between-projects)必要があります。
+    const { app } = await whenReady('pc-app');
+    app.i18n.assets = [AssetElement.get('en-US'), AssetElement.get('fr-FR')];
+</script>
+```
 
-![](/img/user-manual/user-interface/localization/rtl-asset-folder.png)
+`<pc-asset>`は`<pc-app>`の中で宣言します。
 
-フォルダには、「RtlElement」というスクリプトタイプがあり、右から左に表示されるテキストに使用されるText Elementコンポーネントを持つエンティティに追加する必要があります。
+</TabItem>
+</Tabs>
 
-![](/img/user-manual/user-interface/localization/adding-rtl-script-type.png)
+## ロケールの選択 {#choosing-the-locale}
 
-## エンジン
+ロケールは`app.i18n.locale`で、デフォルトは`en-US`です。ブラウザから自動的に設定されることはないため、アプリケーションは`en-US`で始まり、ロケールを選ぶまでそのままです。これはエディターから公開したアプリケーションでも同じです。プレイヤーの選択か、ブラウザの言語から設定してください。
 
-スクリプト内のキーからテキストを取得するには、次のAPIを使用します。
+```javascript
+app.i18n.locale = navigator.language;
+```
 
-- [pc.I18n#getText](https://api.playcanvas.com/engine/classes/I18n.html#gettext) 複数形のリスト内の非複数形または最初のテキスト文字列を取得するためのAPI
-- [pc.I18n#getPluralText](https://api.playcanvas.com/engine/classes/I18n.html#getpluralText) 数字に基づいて複数形のテキスト文字列を取得するためのAPI
+ロケールは、それ専用のデータがなくても使えます。例えば`fr-CA`のデータがない場合、`app.i18n`は`fr-FR`か他のフランス語のロケールを使い、フランス語がまったくない場合は`en-US`にフォールバックします。`app.i18n.findAvailableLocale('fr-CA')`は、`fr-CA`に対して使われるロケールを返します。
 
-ローカライゼーションのための完全なエンジンAPIリファレンスについては、[このページ](https://api.playcanvas.com/engine/classes/I18n.html)を参照してください。
+ロケールを変更すると、ローカライズされたすべてのテキストエレメントが更新されます。HTMLなど、それ以外のものを更新するには、`change`イベントをリッスンします。
+
+```javascript
+app.i18n.on('change', (locale, previous) => {
+    document.documentElement.lang = locale;
+});
+```
+
+エディターでは、設定パネルの**EDITOR**セクションにある**Locale**フィールドを使って、ビューポートと起動したアプリケーションでロケールをプレビューできます。公開したアプリケーションには影響しません。
+
+## ローカライズされたテキストエレメント {#localized-text-elements}
+
+`key`を持つテキストエレメントは、現在のロケールでのそのキーのメッセージを表示し、ロケールが変わると表示も変わります。メッセージのないキーの場合は、キーそのものが表示されます。
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+const heading = new pc.Entity('heading');
+heading.addComponent('element', {
+    type: pc.ELEMENTTYPE_TEXT,
+    fontAsset: font.id,
+    key: 'title',
+    anchor: [0.5, 1, 0.5, 1],
+    pivot: [0.5, 1]
+});
+screen.addChild(heading);
+```
+
+`text`を設定するとキーは解除され、`key`を設定するとテキストが置き換わります。
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+テキストエレメントの**Localized**にチェックを入れ、**Text**フィールドに代わって表示される**Key**にキーを入力します。
+
+</TabItem>
+<TabItem value="react" label="React">
+
+Reactは`key`をpropとして予約しているため、キーはエンジン側のコンポーネントに設定します。
+
+```jsx
+import { useEffect } from 'react';
+import { Entity } from '@playcanvas/react';
+import { Element } from '@playcanvas/react/components';
+import { useParent } from '@playcanvas/react/hooks';
+
+// 配置先のエンティティのテキストエレメントにローカライズのキーを設定する
+function LocalizationKey({ value }) {
+  const entity = useParent();
+  useEffect(() => {
+    entity.element.key = value;
+  }, [entity, value]);
+  return null;
+}
+
+export function Heading({ font }) {
+  return (
+    <Entity name="heading">
+      <Element type="text" fontAsset={font} anchor={[0.5, 1, 0.5, 1]} pivot={[0.5, 1]} />
+      <LocalizationKey value="title" />
+    </Entity>
+  );
+}
+```
+
+`<Element>`には`text`のpropを併せて渡さないでください。`<Element>`はレンダリングのたびにそれを適用し直すため、キーが解除されてしまいます。
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+`<pc-element>`にはキーを指定する属性がないため、エンジン側のコンポーネントに設定します。
+
+```html
+<pc-entity name="heading">
+    <pc-element id="heading" type="text" font-asset="arial" anchor="0.5 1 0.5 1" pivot="0.5 1"></pc-element>
+</pc-entity>
+
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const heading = await whenReady('#heading');
+    heading.component.key = 'title';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+複数形のメッセージのキーを持つテキストエレメントは、最初の形を`{number}`が残ったまま表示します。このようなエレメントのテキストは、代わりにスクリプトから設定してください。
+
+## スクリプト内の文字列 {#strings-in-scripts}
+
+`getText`は、現在のロケールでのキーのメッセージを返し、メッセージがない場合はキーそのものを返します。`getPluralText`は数値に応じた複数形を選びますが、テキスト内の`{number}`は置き換えずに残すので、自分で置き換えてください。
+
+```javascript
+const title = app.i18n.getText('title');
+
+const count = 3;
+const coins = app.i18n.getPluralText('coins', count).replace('{number}', count);
+// "You have 3 coins"
+```
+
+どちらも、省略可能な最後の引数としてロケールを受け取ります。
+
+## ローカライズされたフォント {#localized-fonts}
+
+フォントにない文字を必要とする言語のために、フォントアセットには、ロケールごとに使う別のフォントアセットを指定できます。ロケールが変わると、ローカライズされたテキストエレメントはそのロケールのフォントに切り替わり、必要に応じてそのフォントを読み込みます。キーのないテキストエレメントは、元のフォントのままです。
+
+- **エディター**：フォントアセットを選択し、インスペクターの**LOCALIZATION**セクションで**Add Locale**をクリックして、そのロケールのフォントを選びます。
+- **エンジン、React、Web Components**：フォントアセットの`addLocalizedAssetId`を呼び出します。
+
+```javascript
+latinFont.addLocalizedAssetId('ja-JP', japaneseFont.id);
+```
+
+新しいロケールのフォントを読み込んでいる間、テキストエレメントのテキストは描画されません。
+
+## 数値と日付のフォーマット {#formatting}
+
+数値、価格、日付の表記はロケールごとに異なります。ブラウザの[`Intl`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)オブジェクトと現在のロケールを使ってフォーマットしてください。
+
+```javascript
+const price = new Intl.NumberFormat(app.i18n.locale, { style: 'currency', currency: 'EUR' }).format(4.5);
+const today = new Intl.DateTimeFormat(app.i18n.locale, { dateStyle: 'long' }).format(new Date());
+```
+
+## 言語ごとの注意点 {#language-notes}
+
+### 中国語、日本語、韓国語 {#cjk}
+
+テキストエレメントは、中国語、日本語、韓国語のテキストを、スペースがなくても文字と文字の間で折り返し、閉じ括弧や句読点、小書きの仮名は前の行に残します。これらの言語の文字セットは大きいので、[文字の選択](/user-manual/user-interface/fonts/#choosing-characters)を参照し、[ローカライズされたフォント](#localized-fonts)を設定してください。
+
+### タイ語 {#thai}
+
+タイ語では単語の間にスペースを入れませんが、テキストエレメントが折り返すのは、スペース、タブ、ハイフン、ゼロ幅スペースの位置だけです。折り返せるように、タイ語のテキストでは単語の間にゼロ幅スペース（U+200B）を入れるよう翻訳者に依頼してください。
+
+### 右から左に書く言語 {#rtl}
+
+テキストエレメントは文字を左から右へ並べます。アラビア語、ヘブライ語などの右から左に書く言語では、先に文字を並べ替える必要があり、アラビア語ではさらに文字の連結形も必要です。[右から左に書く言語のサポート](/tutorials/right-to-left-language-support/)のチュートリアルでは、テキストエレメントに対してこれを行うスクリプトを提供しています。
+
+## 関連情報 {#see-also}
+
+- [テキストエレメント](/user-manual/user-interface/text-elements/) - テキストの描画、折り返し、フィッティング
+- [フォント](/user-manual/user-interface/fonts/) - フォントアセットの作成と文字の選択
+- [I18n](https://api.playcanvas.com/engine/classes/I18n.html) - `app.i18n`のAPIリファレンス

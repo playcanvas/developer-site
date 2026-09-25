@@ -5,7 +5,7 @@ description: PlayCanvas Layout Group component auto-arranges child Element entit
 
 The LayoutGroup Component enables an entity to specify the size and position of child Element Components.
 
-See the [Layout Groups](/user-manual/user-interface/layout-groups) section for more details.
+See [Layout Groups](/user-manual/user-interface/layout-groups/) for how a layout group places its children, with example layouts.
 
 ![LayoutGroup Component](/img/user-manual/editor/scenes/components/component-layoutgroup.png)
 
@@ -27,7 +27,7 @@ See the [Layout Groups](/user-manual/user-interface/layout-groups) section for m
 
 - [LayoutChild Component](layoutchild.md) - Override layout behavior for individual children
 - [Element Component](element.md) - Required for UI layout
-- [Layout Groups](/user-manual/user-interface/layout-groups) - Learn more about layout groups
+- [Layout Groups](/user-manual/user-interface/layout-groups/) - How layout groups place their children, with example layouts
 
 ## Scripting Interface
 
