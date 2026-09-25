@@ -73,5 +73,5 @@ Use this index for React projects, where the scene is JSX. The engine features t
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/react/llms-full.txt): 40 pages (373 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/react/llms-full.txt): 40 pages (374 KB), for downloading and searching rather than reading into context.
 - [Getting Started](https://developer.playcanvas.com/user-manual/react/getting-started.md)

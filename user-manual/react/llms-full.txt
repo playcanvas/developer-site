@@ -3793,28 +3793,35 @@ See the [Environment](https://developer.playcanvas.com/user-manual/react/api/env
 
 ## useFont
 
-Text in PlayCanvas is rendered using Signed-Distance-Fields (SDFs), so you'll need to convert your ttf fonts into the appropriate format before loading them.
+Text in PlayCanvas is drawn with multi-channel signed distance field (MSDF) fonts, so a TTF or OTF font is first converted into a font asset: a `.json` file and one or more `.png` textures. Create them with [font-tools](https://github.com/playcanvas/font-tools), in its [web app](https://playcanvas.github.io/font-tools/) or from the command line, and serve them with your app, for example from the `public` folder of a Vite project:
 
-If you're using Vite or Rollup there's an official plugin to convert ttf files for you at build time. Check out the [@playcanvas/rollup](https://www.npmjs.com/package/@playcanvas/plugin) for more information.
+```bash
+npx @playcanvas/font-tools Inconsolata.ttf --charset latin -o public/fonts/inconsolata
+```
 
-You can import a ttf using the `?sdf` query parameter which will automatically convert it into an SDF texture at build time.
+Then load the `.json` file with `useFont`, which loads its textures too, and give the asset to a text element:
 
 ```tsx copy filename="render-font.tsx"
-
-// Use the @playcanvas/rollup plugin to convert the ttf file into an SDF texture at build time.
-import inconsolata from "@assets/fonts/inconsolata.ttf?sdf";
+import { Entity } from '@playcanvas/react';
+import { Element } from '@playcanvas/react/components';
 import { useFont } from '@playcanvas/react/hooks';
 
-export function InconsolataFont() {
-  const { asset, loading, error } = useFont(inconsolata);
+export function RenderText() {
+  const { asset, loading, error } = useFont('fonts/inconsolata.json');
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
   if (!asset) return null;
 
-  return asset;
+  return (
+    <Entity name="label">
+      <Element type="text" fontAsset={asset} text="Hello, World!" />
+    </Entity>
+  );
 }
 ```
+
+See [Fonts](https://developer.playcanvas.com/user-manual/user-interface/fonts.md) for choosing the characters that a font holds, and [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md) for drawing text on a screen.
 
 ## useAsset
 

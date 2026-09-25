@@ -4664,11 +4664,11 @@ The `<pc-screen>` tag is used to define a screen component.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `priority` | Number | `"0"` | Rendering priority (0-255) |
-| `reference-resolution` | Vector2 | `"640 320"` | Reference resolution as "Width Height" values |
-| `resolution` | Vector2 | `"640 320"` | Screen resolution as "Width Height" values |
-| `scale-blend` | Number | `"0.5"` | How `resolution` and `reference-resolution` are weighted against each other when `scale-mode` is `"blend"`, from 0 (follow `resolution`) to 1 (follow `reference-resolution`). Ignored when `scale-mode` is `"none"` |
-| `scale-mode` | Enum | `"none"` | How the screen scales its contents: `"none"` \| `"blend"`. `"none"` renders at `resolution` and ignores `reference-resolution`; `"blend"` scales between the two, weighted by `scale-blend`, which is what keeps a UI laid out at one resolution usable at another. Requires `screen-space` |
+| `priority` | Number | `"0"` | Drawing order among screens, from 0 to 127: a screen with a higher priority is drawn over screens with a lower one, and its elements receive input first |
+| `reference-resolution` | Vector2 | `"640 320"` | The resolution the UI is laid out for, as "Width Height" values. With `scale-mode="blend"`, the contents are scaled by the size of the canvas relative to it |
+| `resolution` | Vector2 | `"640 320"` | Size of a world-space screen in its entity's local units, as "Width Height" values. A screen-space screen takes its resolution from the canvas, so this has no effect on one |
+| `scale-blend` | Number | `"0.5"` | With `scale-mode="blend"`, how the width and the height of the canvas are weighted in the scale, from 0 (width only) to 1 (height only). 0.5 weights them equally. Ignored when `scale-mode` is `"none"` |
+| `scale-mode` | Enum | `"none"` | How the screen scales its contents: `"none"` \| `"blend"`. `"none"` doesn't scale them: on a screen-space screen, one unit is one pixel of the canvas's drawing buffer. `"blend"` scales them by the size of the canvas relative to `reference-resolution`, weighted by `scale-blend`, which is what keeps a UI laid out at one resolution usable at another. Requires `screen-space` |
 | `screen-space` | Boolean | `"false"` | Whether to render in screen space |
 
 :::note[Scaling only applies to screen-space screens]
@@ -4715,6 +4715,7 @@ The `component` property is the engine [ScreenComponent](https://api.playcanvas.
 * [`<pc-layout-group>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md) — automatic arrangement of elements
 * [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) — scrolling content on a screen
 * [`<pc-button>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button.md) — interactive elements
+* [Screens](https://developer.playcanvas.com/user-manual/user-interface/screens.md) — screen space and world space, resolution and scaling, in the User Interface section
 
 Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
 

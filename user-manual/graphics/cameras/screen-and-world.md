@@ -33,14 +33,13 @@ entity.setPosition(pos);
 ```javascript
 const screenPos = camera.camera.worldToScreen(entity.getPosition());
 
-// Position an absolutely-positioned HTML element over the entity,
-// accounting for the device pixel ratio
-const dpr = window.devicePixelRatio;
-htmlElement.style.left = `${screenPos.x / dpr}px`;
-htmlElement.style.top = `${screenPos.y / dpr}px`;
+// Position an absolutely-positioned HTML element over the entity, inside a
+// container that covers the canvas
+htmlElement.style.left = `${screenPos.x}px`;
+htmlElement.style.top = `${screenPos.y}px`;
 ```
 
-The returned `z` component holds the depth of the point. For perspective cameras, a negative `z` means the point is behind the camera — check it before showing the element.
+The `x` and `y` components are CSS pixels from the top-left corner of the canvas, whatever the device pixel ratio, so HTML can use them as they are. The returned `z` component holds the depth of the point. For perspective cameras, a negative `z` means the point is behind the camera — check it before showing the element. See [Labels Over Characters](https://developer.playcanvas.com/user-manual/user-interface/world-space-ui.md#labels-over-characters) for placing in-canvas UI elements the same way.
 
 ## Picking Objects
 

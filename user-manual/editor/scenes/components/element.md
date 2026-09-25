@@ -2,7 +2,7 @@
 
 The Element Component is used to build user interfaces made up of 2D components such as images and text when in a hierarchy with a Screen Component ancestor. The Element Component provides layout properties such as anchors and a pivot point.
 
-See the [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) section for more details.
+See [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md) for anchors, pivots, margins and sizes, and [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md) and [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md) for images and text.
 
 ## Group Element
 
@@ -28,8 +28,8 @@ The text element renders a string of text using a [font asset](https://developer
 |----------------|-------------|
 | Type           | The type of Element: Group, Image, or Text. |
 | Preset         | Choosing a layout preset will automatically set the Anchor and Pivot properties to a preset value. |
-| Anchor         | Determines where the element calculates its position in relation to. See the [Elements#Anchor](https://developer.playcanvas.com/user-manual/user-interface/elements.md#anchor) section for more information. |
-| Pivot          | Determines where the pivot point of the Element is. (0, 0) is bottom left, (1, 1) is top right. See the [Elements#Pivot](https://developer.playcanvas.com/user-manual/user-interface/elements.md#pivot) section for more information. |
+| Anchor         | Determines where the element calculates its position in relation to. See [Anchor](https://developer.playcanvas.com/user-manual/user-interface/elements.md#anchor) for more information. |
+| Pivot          | Determines where the pivot point of the Element is. (0, 0) is bottom left, (1, 1) is top right. See [Pivot](https://developer.playcanvas.com/user-manual/user-interface/elements.md#pivot) for more information. |
 | Auto Width     | Text only. If enabled, the element's width will be automatically calculated based on the text content. |
 | Auto Fit Width | Text only. If enabled, the font size will be automatically reduced to fit the text within the element's width. |
 | Width          | The width of the Element in pixels. May be disabled when Auto Width is enabled or when the anchor is horizontally split. |
@@ -89,6 +89,8 @@ The text element renders a string of text using a [font asset](https://developer
 - [Button Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/button.md) - Interactive button elements
 - [LayoutGroup Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup.md) - Automatic layout of child elements
 - [LayoutChild Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild.md) - Override layout behavior for individual elements
+- [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md) - Anchors, pivots, margins and sizes
+- [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md) and [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md) - Drawing images and text
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) - Learn more about building user interfaces
 
 ## Scripting Interface

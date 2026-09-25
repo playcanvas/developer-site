@@ -1,97 +1,170 @@
 # Text Elements
 
-The Text Element is used to display a string of text using a [font asset](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/font.md). See [Fonts](https://developer.playcanvas.com/user-manual/user-interface/fonts.md) for how to create one — in the Editor or with the standalone font-tools.
+A text element draws a string with a [font asset](https://developer.playcanvas.com/user-manual/user-interface/fonts.md). Every label, title, score, line of dialogue and other piece of text in an in-canvas interface is a text element.
 
-## Text
+[Live example: Text](https://playcanvas.com/examples/#/user-interface/text) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text.example.mjs))
 
-The Text Element contains a string field to enter the text that will be displayed. Use `Shift+Enter` to enter a new line character in the string field.
+## Creating Text
 
-:::tip
-
-Text elements are rendered to the screen using a single quad for each character in the string. When you change the text property, we re-generate the mesh for the element. There is a performance implication for this, though there should be no problems changing text content for a reasonable number of Elements every frame.
-
-:::
-
-### Text Markup
-
-Text elements support a simple markup syntax that allows you to apply different colors to specific parts of the text. Consider this example:
-
-```none
-[color="#ff0000"]Red[/color], [color="#00ff00"]green[/color] and [color="#0000ff"]blue[/color].
-```
-
-Assuming the base color of the text element is white, this will render as follows:
-
-[Image: Text Markup]
-
-:::tip
-
-You must proactively enable support for the markup syntax on a text element. You can do this via the API:
+**Engine**
 
 ```javascript
-entity.element.enableMarkup = true;
+const title = new pc.Entity('title');
+title.addComponent('element', {
+    type: pc.ELEMENTTYPE_TEXT,
+    fontAsset: font.id,
+    text: 'Game Over',
+    fontSize: 64,
+    color: new pc.Color(1, 0.55, 0.2),
+    anchor: [0.5, 0.5, 0.5, 0.5],
+    pivot: [0.5, 0.5]
+});
+screen.addChild(title);
 ```
 
-Or by enabling it in the Editor:
+`font` is a font asset that has loaded. See [Using a Font Asset](https://developer.playcanvas.com/user-manual/user-interface/fonts.md#using-a-font-asset).
 
-[Image: Enable Markup]
+**Editor**
 
-:::
+Select a screen or an element, click **+** in the Hierarchy and choose **User Interface › Text Element**. Set **Font** to a font asset, then set **Text**, **Font Size** and **Color**. In the **Text** field, press Shift+Enter to start a new line.
 
-## Localization
+**React**
 
-You can check the 'Localized' checkbox to localize the text of the Text Element. If this is enabled then, instead of the text, you specify the localization key for the Text Element which will be used to get the localized text from the localization assets.
+```jsx
+<Entity name="title">
+  <Element type="text" fontAsset={font} text="Game Over" fontSize={64} color="#ff8c33"
+    anchor={[0.5, 0.5, 0.5, 0.5]} pivot={[0.5, 0.5]} />
+</Entity>
+```
 
-Read more about localization [here](https://developer.playcanvas.com/user-manual/user-interface/localization.md).
+`font` is the asset that [`useFont`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-asset.md#usefont) returns.
 
-## Auto-size
+**Web Components**
 
-By default a Text Element is set to automatically adjust its width and height to match the text string. You can disable this and specify the height and width of the element directly in the Editor panel.
+```html
+<pc-entity name="title">
+    <pc-element type="text" font-asset="arial" text="Game Over" font-size="64" color="#ff8c33"
+                anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"></pc-element>
+</pc-entity>
+```
 
-[Image: Auto Size]
+`arial` is the `id` of a `<pc-asset type="font">`.
 
-:::note
+A character that is not in the font is drawn as a space, and the engine logs a warning that names it. Include every character your text needs when you create the font asset. See [Choosing Characters](https://developer.playcanvas.com/user-manual/user-interface/fonts.md#choosing-characters).
 
-The height of the character is determined by the largest character present in the font. It is the same for every character so as to avoid the string position changing depending on the contents of the string.
+## Size, Spacing and Alignment
 
-:::
+| Property | Effect |
+| --- | --- |
+| `fontSize` | The height of the text, in screen units. 32 by default |
+| `lineHeight` | The distance between the baselines of neighboring lines. A text element created with a `fontSize` but no `lineHeight` gets a line height equal to the font size. Changing `fontSize` later leaves `lineHeight` as it is |
+| `spacing` | A multiplier for the distance between characters. 1 by default |
+| `alignment` | Where the text sits inside the element, from `0, 0` at the bottom-left to `1, 1` at the top-right. `0.5, 0.5`, the default, centers it |
 
-## Alignment
+The alignment only shows when the element is larger than its text, such as a label with a fixed width, or wrapped lines of different lengths.
 
-Text Elements have an additional tool to help with positioning which is the alignment. You will be used to how this property works from tools like Word Processes. In this case, rather than presets we expose a variable that can be altered. The alignment consists of two values `[X, Y]` each between 0 and 1. `[0,0]` is bottom left alignment, `[0.5,0.5]` is centered and `[1,1]` is top right.
+## Sizing, Wrapping and Line Limits
 
-[Image: Top Left]
+By default, a text element is sized to its text: **Auto Width** and **Auto Height** set its width and height to those of the text whenever the text changes. Turn them off to give the element a size of its own.
 
-[Image: Centered]
+Text wraps onto new lines when **Wrap Lines** is on and the element has a width to wrap at: either **Auto Width** is off, or the element's anchor is [split horizontally](https://developer.playcanvas.com/user-manual/user-interface/elements.md#split-anchors), which gives it the width of its anchors. With Auto Height on, the element grows taller as lines are added.
 
-[Image: Bottom Right]
+```javascript
+// A paragraph that wraps at 400 units and grows downwards from its top edge
+paragraph.element.autoWidth = false;
+paragraph.element.width = 400;
+paragraph.element.wrapLines = true;
+paragraph.element.pivot = new pc.Vec2(0.5, 1);
+```
 
-## Font Size & Line Height
+`maxLines` limits the number of lines. The text beyond the limit is not cut off: it continues on the last line, past the edge of the element, so combine a line limit with [shrinking to fit](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md#shrinking-to-fit), or crop the overflow with a [mask](https://developer.playcanvas.com/user-manual/user-interface/masks.md). After the text is laid out, `lines` holds it as an array with one string per line.
 
-The font size property sets the rendered size of the font in Screen Component pixels. The line height sets the distance in Screen Component pixels to move down when the text contains a new line character.
+## Shrinking to Fit
 
-Equal Font Size and Line Height is the default:
+**Auto Fit Width** and **Auto Fit Height** shrink the font until the text fits the element, between a **Max Font Size** and a **Min Font Size**, 32 and 8 by default. Text that fits is drawn at the maximum size, and text that doesn't fit even at the minimum size is drawn at the minimum size and overflows. The line height shrinks along with the font.
 
-[Image: Font Size Line Equal]
+Auto fitting only works on an axis whose auto size is off: Auto Fit Width needs **Auto Width** off, and Auto Fit Height needs **Auto Height** off. With auto size on, the element grows to fit the text instead.
 
-Increase Line Height to increase line spacing:
+```javascript
+// Shrink a name to fit its 200 × 40 badge, down to 12 units if needed
+badge.element.autoWidth = false;
+badge.element.autoHeight = false;
+badge.element.width = 200;
+badge.element.height = 40;
+badge.element.autoFitWidth = true;
+badge.element.autoFitHeight = true;
+badge.element.maxFontSize = 32;
+badge.element.minFontSize = 12;
+```
 
-[Image: Font Size Line Spaced]
+[Live example: Text Auto Font Size](https://playcanvas.com/examples/#/user-interface/text-auto-font-size) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-auto-font-size.example.mjs))
 
-## Spacing
+## Justified Text
 
-The spacing property increases the distance between characters in a string. Fonts define the ideal distance to move the cursor forward for each character. The spacing property is a multiplier to this distance.
+With **Justify** on, wrapped lines are stretched to the full width of the element by widening the gaps between their words. The last line of a paragraph, and any line that ends with a line break, keeps its alignment instead. Justified text needs wrapping, so turn on **Wrap Lines** as well. The `justify` property is available from engine 2.22.
 
-[Image: Spacing]
+[Live example: Text Justify](https://playcanvas.com/examples/#/user-interface/text-justify) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-justify.example.mjs))
 
-## Tinting
+## Outline and Shadow
 
-The Color property allows you to tint the string to the color of your choice.
+| Property | Effect |
+| --- | --- |
+| `outlineColor` and `outlineThickness` | An outline around the characters. The thickness goes from 0, no outline, to 1 |
+| `shadowColor` and `shadowOffset` | A shadow below the characters. The offset is a `pc.Vec2`, and each of its values goes from -1 to 1 |
 
-[Image: Tinted]
+Outlines and shadows are drawn by the shader of the font, and work with the MSDF font assets that the Editor and font-tools create.
 
-## Transparency
+## Markup
 
-The Opacity property allows you to set the transparency of the string
+With **Enable Markup** on (`enableMarkup` in the Engine and React, `enable-markup` in Web Components), tags in the text style parts of it:
 
-[Image: Transparent]
+| Tag | Effect |
+| --- | --- |
+| `[color="#ff0000"]…[/color]` | Draws the text in a color, given as a six-digit hex code. It replaces the element's color for that text |
+| `[outline color="#000000" thickness="0.5"]…[/outline]` | Outlines the text |
+| `[shadow color="#000000" offset="0.5"]…[/shadow]` | Adds a shadow. Use `offsetX` and `offsetY` to set each axis on its own |
+
+```javascript
+message.element.enableMarkup = true;
+message.element.text = 'You found the [color="#ffcc00"]golden key[/color]!';
+```
+
+Write `\[` for a `[` that doesn't start a tag. When the markup has an error, such as a tag that is never closed, the whole text is drawn as written, tags included, and the engine logs a warning.
+
+[Live example: Text Markup](https://playcanvas.com/examples/#/user-interface/text-markup) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-markup.example.mjs))
+
+## Revealing Text
+
+`rangeStart` and `rangeEnd` draw part of the text: the characters from `rangeStart` up to, but not including, `rangeEnd`. Changing them doesn't lay the text out again, so a typewriter effect costs little. Changing `text` resets the range to the whole of the new text, which gives you its length:
+
+```javascript
+dialog.element.text = 'It is dangerous to go alone.';
+
+// Changing the text resets the range, so rangeEnd is now its length
+const length = dialog.element.rangeEnd;
+let shown = 0;
+const handle = app.on('update', (dt) => {
+    // Reveal 20 characters a second
+    shown = Math.min(shown + dt * 20, length);
+    dialog.element.rangeEnd = Math.floor(shown);
+    if (shown === length) handle.off();
+});
+```
+
+[Live example: Text Typewriter](https://playcanvas.com/examples/#/user-interface/text-typewriter) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-typewriter.example.mjs))
+
+## Changing Text at Runtime
+
+Setting `text` lays the text out again and rebuilds its mesh, which costs more than moving or recoloring the element. Updating a few labels every frame, such as a timer or a score, is fine. For many labels, set the text only when its value has changed. See [Draw Order and Performance](https://developer.playcanvas.com/user-manual/user-interface/draw-order-and-performance.md#updating-text).
+
+To show text in the player's language, give the element a localization key instead of text. See [Localization](https://developer.playcanvas.com/user-manual/user-interface/localization.md).
+
+## Right-to-Left and Complex Scripts
+
+A text element draws one glyph per character, from left to right. Languages written from right to left, such as Arabic and Hebrew, need their characters reordered first, and Arabic also needs the joined forms of its letters. See [Language Notes](https://developer.playcanvas.com/user-manual/user-interface/localization.md#language-notes) for how to add this.
+
+## See Also
+
+- [Fonts](https://developer.playcanvas.com/user-manual/user-interface/fonts.md) - Creating font assets and choosing their characters
+- [Localization](https://developer.playcanvas.com/user-manual/user-interface/localization.md) - Showing text in the player's language
+- [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md), [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) and [ElementComponent](https://api.playcanvas.com/engine/classes/ElementComponent.html) - Reference for every text property

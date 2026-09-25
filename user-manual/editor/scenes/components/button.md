@@ -1,6 +1,6 @@
 # Button
 
-The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen.md) and [Element](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) Components.
+The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen.md) and [Element](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) Components. It responds to input on the element of its own entity, which should have **Use Input** enabled.
 
 The Button Component can be used in two Transition Modes. *Sprite Change*, which uses a different sprite or frame for each button state or *Tint*, which tints a single sprite with a different color for each state.
 
@@ -9,8 +9,8 @@ The Button Component can be used in two Transition Modes. *Sprite Change*, which
 | Property        | Description |
 |-----------------|-------------|
 | Active          | When enabled the button will respond to and fire events. When disabled the button is set to the Inactive State. |
-| Image           | The Image Element Entity that is used to detect input events. |
-| Hit Padding     | Additional space around the Image Element that will be included when testing for input events. Specified as left, bottom, right, top padding values. |
+| Image           | The entity whose image element changes color or sprite as the button changes state. The **User Interface › Button** menu sets it to the button's own entity. With no entity, the button doesn't change. |
+| Hit Padding     | Additional space around the button's own element that will be included when testing for input events. Specified as left, bottom, right, top padding values. |
 | Transition Mode | The type of effect to use when transitioning between states. Either Sprite Change or Tint. |
 
 ## Sprite Change Properties
@@ -41,6 +41,7 @@ The Button Component can be used in two Transition Modes. *Sprite Change*, which
 
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - Required for button visuals
 - [Screen Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen.md) - The root component for user interfaces
+- [Buttons](https://developer.playcanvas.com/user-manual/user-interface/buttons.md) - Creating buttons, their transitions, events and hit padding
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) - Learn more about building user interfaces
 
 ## Scripting Interface

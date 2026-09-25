@@ -2,7 +2,7 @@
 
 The LayoutChild Component enables an element that is controlled by a LayoutGroup Component to override the default behavior of the Layout Group.
 
-See the [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) section for more details.
+See [Layout Children](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#layout-children) for how a layout child changes the way its element is laid out.
 
 [Image: LayoutChild Component]
 
@@ -22,7 +22,7 @@ See the [Layout Groups](https://developer.playcanvas.com/user-manual/user-interf
 
 - [LayoutGroup Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup.md) - The parent component that controls layout
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - Required for UI layout
-- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) - Learn more about layout groups
+- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) - How layout groups place their children, and layout children
 
 ## Scripting Interface
 

@@ -8257,7 +8257,7 @@ You can control an Audio Listener Component's properties using a [Script Compone
 URL: https://developer.playcanvas.com/user-manual/editor/scenes/components/button/
 Markdown: https://developer.playcanvas.com/user-manual/editor/scenes/components/button.md
 
-The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen.md) and [Element](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) Components.
+The Button Component is a convenient shortcut for creating User Interface buttons for use with [Screen](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen.md) and [Element](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) Components. It responds to input on the element of its own entity, which should have **Use Input** enabled.
 
 The Button Component can be used in two Transition Modes. *Sprite Change*, which uses a different sprite or frame for each button state or *Tint*, which tints a single sprite with a different color for each state.
 
@@ -8266,8 +8266,8 @@ The Button Component can be used in two Transition Modes. *Sprite Change*, which
 | Property        | Description |
 |-----------------|-------------|
 | Active          | When enabled the button will respond to and fire events. When disabled the button is set to the Inactive State. |
-| Image           | The Image Element Entity that is used to detect input events. |
-| Hit Padding     | Additional space around the Image Element that will be included when testing for input events. Specified as left, bottom, right, top padding values. |
+| Image           | The entity whose image element changes color or sprite as the button changes state. The **User Interface › Button** menu sets it to the button's own entity. With no entity, the button doesn't change. |
+| Hit Padding     | Additional space around the button's own element that will be included when testing for input events. Specified as left, bottom, right, top padding values. |
 | Transition Mode | The type of effect to use when transitioning between states. Either Sprite Change or Tint. |
 
 ## Sprite Change Properties
@@ -8298,6 +8298,7 @@ The Button Component can be used in two Transition Modes. *Sprite Change*, which
 
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - Required for button visuals
 - [Screen Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen.md) - The root component for user interfaces
+- [Buttons](https://developer.playcanvas.com/user-manual/user-interface/buttons.md) - Creating buttons, their transitions, events and hit padding
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) - Learn more about building user interfaces
 
 ## Scripting Interface
@@ -8313,7 +8314,7 @@ Markdown: https://developer.playcanvas.com/user-manual/editor/scenes/components/
 
 The Element Component is used to build user interfaces made up of 2D components such as images and text when in a hierarchy with a Screen Component ancestor. The Element Component provides layout properties such as anchors and a pivot point.
 
-See the [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) section for more details.
+See [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md) for anchors, pivots, margins and sizes, and [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md) and [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md) for images and text.
 
 ## Group Element
 
@@ -8339,8 +8340,8 @@ The text element renders a string of text using a [font asset](https://developer
 |----------------|-------------|
 | Type           | The type of Element: Group, Image, or Text. |
 | Preset         | Choosing a layout preset will automatically set the Anchor and Pivot properties to a preset value. |
-| Anchor         | Determines where the element calculates its position in relation to. See the [Elements#Anchor](https://developer.playcanvas.com/user-manual/user-interface/elements.md#anchor) section for more information. |
-| Pivot          | Determines where the pivot point of the Element is. (0, 0) is bottom left, (1, 1) is top right. See the [Elements#Pivot](https://developer.playcanvas.com/user-manual/user-interface/elements.md#pivot) section for more information. |
+| Anchor         | Determines where the element calculates its position in relation to. See [Anchor](https://developer.playcanvas.com/user-manual/user-interface/elements.md#anchor) for more information. |
+| Pivot          | Determines where the pivot point of the Element is. (0, 0) is bottom left, (1, 1) is top right. See [Pivot](https://developer.playcanvas.com/user-manual/user-interface/elements.md#pivot) for more information. |
 | Auto Width     | Text only. If enabled, the element's width will be automatically calculated based on the text content. |
 | Auto Fit Width | Text only. If enabled, the font size will be automatically reduced to fit the text within the element's width. |
 | Width          | The width of the Element in pixels. May be disabled when Auto Width is enabled or when the anchor is horizontally split. |
@@ -8400,6 +8401,8 @@ The text element renders a string of text using a [font asset](https://developer
 - [Button Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/button.md) - Interactive button elements
 - [LayoutGroup Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup.md) - Automatic layout of child elements
 - [LayoutChild Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild.md) - Override layout behavior for individual elements
+- [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md) - Anchors, pivots, margins and sizes
+- [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md) and [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md) - Drawing images and text
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) - Learn more about building user interfaces
 
 ## Scripting Interface
@@ -8534,7 +8537,7 @@ Markdown: https://developer.playcanvas.com/user-manual/editor/scenes/components/
 
 The LayoutChild Component enables an element that is controlled by a LayoutGroup Component to override the default behavior of the Layout Group.
 
-See the [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) section for more details.
+See [Layout Children](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#layout-children) for how a layout child changes the way its element is laid out.
 
 [Image: LayoutChild Component]
 
@@ -8554,7 +8557,7 @@ See the [Layout Groups](https://developer.playcanvas.com/user-manual/user-interf
 
 - [LayoutGroup Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup.md) - The parent component that controls layout
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - Required for UI layout
-- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) - Learn more about layout groups
+- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) - How layout groups place their children, and layout children
 
 ## Scripting Interface
 
@@ -8569,7 +8572,7 @@ Markdown: https://developer.playcanvas.com/user-manual/editor/scenes/components/
 
 The LayoutGroup Component enables an entity to specify the size and position of child Element Components.
 
-See the [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) section for more details.
+See [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) for how a layout group places its children, with example layouts.
 
 [Image: LayoutGroup Component]
 
@@ -8591,7 +8594,7 @@ See the [Layout Groups](https://developer.playcanvas.com/user-manual/user-interf
 
 - [LayoutChild Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild.md) - Override layout behavior for individual children
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - Required for UI layout
-- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) - Learn more about layout groups
+- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) - How layout groups place their children, with example layouts
 
 ## Scripting Interface
 
@@ -8777,7 +8780,7 @@ Markdown: https://developer.playcanvas.com/user-manual/editor/scenes/components/
 
 The Screen Component defines the area and rendering of a user interface. Children added to a Screen Component should all have an Element Component.
 
-See the [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) section for more details.
+See [Screens](https://developer.playcanvas.com/user-manual/user-interface/screens.md) for how screens work, and the [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) section for building interfaces with them.
 
 [Image: Screen Component]
 
@@ -8796,6 +8799,7 @@ See the [User Interface](https://developer.playcanvas.com/user-manual/user-inter
 
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - UI elements that are children of the screen
 - [Button Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/button.md) - Interactive button elements
+- [Screens](https://developer.playcanvas.com/user-manual/user-interface/screens.md) - Screen space and world space, resolution and scaling
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) - Learn more about building user interfaces
 
 ## Scripting Interface
@@ -8811,7 +8815,7 @@ Markdown: https://developer.playcanvas.com/user-manual/editor/scenes/components/
 
 The Scrollbar Component defines a scrolling control for a [Scroll View](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview.md) Component.
 
-See the [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) section for more details.
+See [Scrollbars](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md#scrollbars) for using one with a scroll view, and [Sliders](https://developer.playcanvas.com/user-manual/user-interface/common-widgets.md#sliders) for using one on its own as a slider.
 
 [Image: Scrollbar Component]
 
@@ -8828,6 +8832,8 @@ See the [User Interface](https://developer.playcanvas.com/user-manual/user-inter
 
 - [Scroll View Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview.md) - The scrollable area that uses this scrollbar
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - Required for the scrollbar handle
+- [Scroll Views](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md) - Scroll views and their scrollbars
+- [Sliders](https://developer.playcanvas.com/user-manual/user-interface/common-widgets.md#sliders) - A scrollbar used as a slider
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) - Learn more about building user interfaces
 
 ## Scripting Interface
@@ -8843,7 +8849,7 @@ Markdown: https://developer.playcanvas.com/user-manual/editor/scenes/components/
 
 The Scroll View Component defines a scrollable area in a user interface. A Scroll View can be scrolled via [Scrollbar](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollbar.md) Components.
 
-See the [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) section for more details.
+See [Scroll Views](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md) for how the entities of a scroll view fit together, and how to set one up.
 
 [Image: Scroll View Component]
 
@@ -8869,6 +8875,7 @@ See the [User Interface](https://developer.playcanvas.com/user-manual/user-inter
 
 - [Scrollbar Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollbar.md) - Controls for scrolling the view
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - Required for the viewport and content
+- [Scroll Views](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md) - Setting up a scroll view, its scrolling behavior and sizing its content
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) - Learn more about building user interfaces
 
 ## Scripting Interface

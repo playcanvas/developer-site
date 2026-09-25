@@ -144,13 +144,26 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## User interface
 
-- [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md): Choosing between in-canvas UI, built from screen and element components, and HTML and CSS.
-- [User Interface Basics](https://developer.playcanvas.com/user-manual/user-interface/user-interface-basics.md): How screens and elements combine for layout, draw order, input and localization.
-- [Screens](https://developer.playcanvas.com/user-manual/user-interface/screens.md): Screen-space versus world-space UI, reference resolutions and scaling.
-- [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md): Positioning and sizing elements with anchors, pivots and margins.
-- [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md): Fonts, color markup, alignment and localized text.
-- [Fonts](https://developer.playcanvas.com/user-manual/user-interface/fonts.md): Creating the MSDF font assets that text elements need, including with font-tools outside the Editor.
-- [Input](https://developer.playcanvas.com/user-manual/user-interface/input.md): Enabling element input with `ElementInput` and handling clicks, hovers and touches.
+- [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md): Choosing between in-canvas UI, built from screen and element components, and HTML and CSS, and the components that interfaces are built from.
+- [Getting Started](https://developer.playcanvas.com/user-manual/user-interface/user-interface-basics.md): Setting up an application for UI and building a first interface, a panel with a label and a button, how the parts fit together and how each surface names them.
+- [Screens](https://developer.playcanvas.com/user-manual/user-interface/screens.md): Screen-space and world-space screens, reference resolution and Blend scaling, scale mode None and the pixel ratio, and responsive layouts.
+- [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md): Element types, anchors, pivots, split anchors and margins, sizes, group elements and reading an element's bounds.
+- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md): Arranging children in rows, columns and grids with spacing, padding, fitting and wrapping, and layout children.
+- [Safe Areas](https://developer.playcanvas.com/user-manual/user-interface/safe-area.md): Keeping an interface clear of notches and rounded corners with the browser's `env(safe-area-inset-*)` values.
+- [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md): Colors, textures and fit modes, sprites, 9-sliced and tiled panels, rendering 3D into an image and custom materials.
+- [Masks](https://developer.playcanvas.com/user-manual/user-interface/masks.md): Clipping children to a rectangle or a shape, nested masks, and masks' layers, input and cost.
+- [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md): Size, spacing and alignment, wrapping and line limits, shrinking to fit, markup, outlines and shadows, and revealing text.
+- [Fonts](https://developer.playcanvas.com/user-manual/user-interface/fonts.md): Creating the MSDF font assets that text elements need, in the Editor or with font-tools, choosing their characters, and emoji.
+- [Localization](https://developer.playcanvas.com/user-manual/user-interface/localization.md): Localization files and plural forms, choosing the locale, localized text elements, strings in scripts and fonts per language.
+- [Input](https://developer.playcanvas.com/user-manual/user-interface/input.md): Enabling element input with `ElementInput`, mouse, touch and XR events, bubbling, hit testing and keeping UI clicks from game input.
+- [Buttons](https://developer.playcanvas.com/user-manual/user-interface/buttons.md): The button component, tint and sprite transitions, button events and states, hit padding and disabling buttons.
+- [Scroll Views](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md): Scrolling content by dragging, with the mouse wheel and with scrollbars, bouncing and friction, sizing the content and scrolling from code.
+- [Common Widgets](https://developer.playcanvas.com/user-manual/user-interface/common-widgets.md): Recipes for progress bars, sliders, toggles, dialogs, tooltips, dynamic lists, drag and drop, text fields and animated UI.
+- [World-Space UI](https://developer.playcanvas.com/user-manual/user-interface/world-space-ui.md): Interfaces in the 3D scene, sized in meters, facing the camera, and labels over characters placed with `worldToScreen`.
+- [UI in XR](https://developer.playcanvas.com/user-manual/user-interface/xr.md): World-space panels in VR and AR, pointing and selecting with controllers and hands, and the `XrMenu` script.
+- [HTML and CSS](https://developer.playcanvas.com/user-manual/user-interface/html-and-css.md): HTML overlays on each surface, keeping their input away from the game, and placing HTML over 3D points and elements.
+- [Draw Order and Performance](https://developer.playcanvas.com/user-manual/user-interface/draw-order-and-performance.md): The UI layer, draw order and screen priority, cameras and post-processing, batching, text updates and culling.
+- [Troubleshooting](https://developer.playcanvas.com/user-manual/user-interface/troubleshooting.md): Causes and fixes for invisible text, ignored clicks, unchanging buttons, wrong sizes, empty masks and other common problems.
 
 ## XR
 
@@ -207,7 +220,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 205 pages (1032 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 213 pages (1213 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
 - [Preloading](https://developer.playcanvas.com/user-manual/assets/preloading.md)
@@ -288,11 +301,6 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Sprite Editor](https://developer.playcanvas.com/user-manual/2D/sprite-editor.md)
 - [9-slicing](https://developer.playcanvas.com/user-manual/2D/slicing.md)
 - [Using Texture Packers](https://developer.playcanvas.com/user-manual/2D/texture-packing.md)
-- [Group Elements](https://developer.playcanvas.com/user-manual/user-interface/group-elements.md)
-- [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md)
-- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md)
-- [Localization](https://developer.playcanvas.com/user-manual/user-interface/localization.md)
-- [Safe Area](https://developer.playcanvas.com/user-manual/user-interface/safe-area.md)
 - [Hand Tracking](https://developer.playcanvas.com/user-manual/xr/hand-tracking.md)
 - [AR](https://developer.playcanvas.com/user-manual/xr/ar.md)
 - [Anchors](https://developer.playcanvas.com/user-manual/xr/ar/anchors.md)

@@ -135,7 +135,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/editor/llms-full.txt): 150 pages (515 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/editor/llms-full.txt): 150 pages (517 KB), for downloading and searching rather than reading into context.
 - [Getting Started](https://developer.playcanvas.com/user-manual/editor/getting-started.md)
 - [Projects](https://developer.playcanvas.com/user-manual/editor/projects.md)
 - [Creating Projects](https://developer.playcanvas.com/user-manual/editor/projects/creating.md)

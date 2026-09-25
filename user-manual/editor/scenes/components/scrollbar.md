@@ -2,7 +2,7 @@
 
 The Scrollbar Component defines a scrolling control for a [Scroll View](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview.md) Component.
 
-See the [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) section for more details.
+See [Scrollbars](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md#scrollbars) for using one with a scroll view, and [Sliders](https://developer.playcanvas.com/user-manual/user-interface/common-widgets.md#sliders) for using one on its own as a slider.
 
 [Image: Scrollbar Component]
 
@@ -19,6 +19,8 @@ See the [User Interface](https://developer.playcanvas.com/user-manual/user-inter
 
 - [Scroll View Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview.md) - The scrollable area that uses this scrollbar
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - Required for the scrollbar handle
+- [Scroll Views](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md) - Scroll views and their scrollbars
+- [Sliders](https://developer.playcanvas.com/user-manual/user-interface/common-widgets.md#sliders) - A scrollbar used as a slider
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md) - Learn more about building user interfaces
 
 ## Scripting Interface

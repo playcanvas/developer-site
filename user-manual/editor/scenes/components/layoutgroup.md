@@ -2,7 +2,7 @@
 
 The LayoutGroup Component enables an entity to specify the size and position of child Element Components.
 
-See the [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) section for more details.
+See [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) for how a layout group places its children, with example layouts.
 
 [Image: LayoutGroup Component]
 
@@ -24,7 +24,7 @@ See the [Layout Groups](https://developer.playcanvas.com/user-manual/user-interf
 
 - [LayoutChild Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild.md) - Override layout behavior for individual children
 - [Element Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) - Required for UI layout
-- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) - Learn more about layout groups
+- [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) - How layout groups place their children, with example layouts
 
 ## Scripting Interface
 

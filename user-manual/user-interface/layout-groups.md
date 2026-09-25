@@ -1,93 +1,273 @@
 # Layout Groups
 
-The Layout Group Component is used to automatically set the position and size of child Elements. A Layout Group Component can be used to align child elements into vertical or horizontal columns or a grid. A Layout Group Component applies the layout rules to all its direct children, you can override the Layout Group rules on a single child using a Layout Child Component.
+A layout group positions and sizes the children of an element for you: in a row, in a column, or in a grid when the rows wrap. Use one for lists, toolbars, menus, inventories and anything else whose children should stay evenly arranged as they are added, removed and resized.
 
-The Layout Group Component can be used to generate common layouts, for example, a [grid](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#grid), a fixed width [vertical column](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#vertical-leaderboard), or [horizontal row](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#horizontal-buttons).
+[Image: Three layouts: a column of rows stretched to the width of their parent, two toolbars whose four and three buttons share the toolbar's width, and a grid of squares whose last row is centered. In each layout, the lightest child comes first]
 
 ## Creating a Layout Group
 
-Add a Layout Group by adding the LayoutGroup Component to an existing Element Entity.
+A layout group is a component on an entity that also has an element, usually a [group element](https://developer.playcanvas.com/user-manual/user-interface/elements.md#group-elements). The element's rectangle is the space its children are arranged in. This list stacks five rows from the top down, and stretches each one to the width of the list:
 
-[Image: Create Layout Group]
+**Engine**
+
+```javascript
+const list = new pc.Entity('list');
+list.addComponent('element', {
+    type: pc.ELEMENTTYPE_GROUP,
+    anchor: [0.5, 0.5, 0.5, 0.5],
+    pivot: [0.5, 0.5],
+    width: 300,
+    height: 400
+});
+list.addComponent('layoutgroup', {
+    orientation: pc.ORIENTATION_VERTICAL,
+    spacing: [0, 10],
+    padding: [10, 10, 10, 10],
+    widthFitting: pc.FITTING_STRETCH
+});
+screen.addChild(list);
+
+for (let i = 0; i < 5; i++) {
+    const row = new pc.Entity(`row ${i}`);
+    row.addComponent('element', {
+        type: pc.ELEMENTTYPE_IMAGE,
+        height: 60,
+        color: new pc.Color(0.23, 0.55, 1)
+    });
+    list.addChild(row);
+}
+```
+
+Register `pc.LayoutGroupComponentSystem` and `pc.LayoutChildComponentSystem` when you create the application. A layout group needs the layout child system even when no child uses it.
+
+**Editor**
+
+In the Hierarchy, click **+** and choose **User Interface › Layout Group**, which creates a group element with a Layout Group component. To turn an existing element into a layout group instead, select it and choose **Add Component › UI › Layout Group** in the inspector. Then add the children below it. Set **Orientation** to **Vertical**, **Spacing** to 0 and 10, each **Padding** value to 10 and **Width Fitting** to **Stretch**.
+
+**React**
+
+There is no `<LayoutGroup>` component yet, so `LayoutGroup` adds the engine's layout group component to the entity it is placed in:
+
+```jsx
+import { useEffect } from 'react';
+import { FITTING_STRETCH, ORIENTATION_VERTICAL } from 'playcanvas';
+import { Entity } from '@playcanvas/react';
+import { Element } from '@playcanvas/react/components';
+import { useParent } from '@playcanvas/react/hooks';
+
+// Adds a layout group with the given options when it mounts
+function LayoutGroup(options) {
+  const entity = useParent();
+  useEffect(() => {
+    entity.addComponent('layoutgroup', options);
+    return () => entity.removeComponent('layoutgroup');
+  }, [entity]);
+  return null;
+}
+
+export function List({ items }) {
+  return (
+    <Entity name="list">
+      <Element type="group" anchor={[0.5, 0.5, 0.5, 0.5]} pivot={[0.5, 0.5]} width={300} height={400} />
+      <LayoutGroup orientation={ORIENTATION_VERTICAL} spacing={[0, 10]}
+        padding={[10, 10, 10, 10]} widthFitting={FITTING_STRETCH} />
+      {items.map(item => (
+        <Entity key={item.id} name={item.name}>
+          <Element type="image" height={60} color="#3a8cff" />
+        </Entity>
+      ))}
+    </Entity>
+  );
+}
+```
+
+The layout group positions the rows, so leave out the `position` prop on their `<Entity>`.
+
+`<Entity>` adds a new entity after its existing siblings, wherever it is in the JSX, so a row inserted into the middle of `items` is laid out last. If items can be inserted or reordered, give the list a `key` that changes with their order, such as `key={items.map(item => item.id).join()}`, so that it is built again in the new order.
+
+**Web Components**
+
+```html
+<pc-entity name="list">
+    <pc-element type="group" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5" width="300" height="400"></pc-element>
+    <pc-layout-group orientation="vertical" spacing="0 10" padding="10 10 10 10" width-fitting="stretch"></pc-layout-group>
+    <pc-entity name="row 0">
+        <pc-element type="image" height="60" color="#3a8cff"></pc-element>
+    </pc-entity>
+    <pc-entity name="row 1">
+        <pc-element type="image" height="60" color="#3a8cff"></pc-element>
+    </pc-entity>
+    <pc-entity name="row 2">
+        <pc-element type="image" height="60" color="#3a8cff"></pc-element>
+    </pc-entity>
+    <pc-entity name="row 3">
+        <pc-element type="image" height="60" color="#3a8cff"></pc-element>
+    </pc-entity>
+    <pc-entity name="row 4">
+        <pc-element type="image" height="60" color="#3a8cff"></pc-element>
+    </pc-entity>
+</pc-entity>
+```
+
+## How Children Are Placed
+
+A layout group arranges its **direct children** that are enabled and have an enabled element, in their order in the hierarchy. For each child, it:
+
+- **Sets the anchor** to `0, 0, 0, 0`, the bottom-left corner of the group. An anchor you give the child, split or not, is replaced.
+- **Sets the position.** The layout places the child's rectangle, taking its pivot into account, so the rectangle lands in the same place whatever the pivot.
+- **Sets the calculated size** when fitting or a layout child changes the child's size. The `width` and `height` of the child stay as you set them, and are the size it starts from. See [Width and Height](https://developer.playcanvas.com/user-manual/user-interface/elements.md#width-and-height).
+
+Entities further down the hierarchy are not affected, so a child can hold its own content, and even a layout group of its own. Nested layout groups are laid out from the outermost in.
+
+The layout is recalculated later in the same frame, before it is drawn, whenever a child is added, removed, enabled, disabled or resized, a child's pivot changes, or a property of the layout group changes. Moving a child yourself does not trigger a layout, and the next layout moves it back. After each layout, the layout group fires `reflow` with the bounds of its children:
+
+```javascript
+list.layoutgroup.on('reflow', ({ bounds }) => {
+    // bounds.x and bounds.y are the bottom-left corner of the children, relative to the
+    // bottom-left corner of the group, and bounds.z and bounds.w are their width and height
+    console.log(`The children take up ${bounds.z} × ${bounds.w}`);
+});
+```
 
 ## Layout Group Properties
 
 ### Orientation
 
-Set the `Orientation` to Horizontal to organize your layout from left-to-right or right-to-left. Or Vertical to organize your layout top-to-bottom or bottom-to-top.
+**Horizontal** places the children in a row, from left to right. **Vertical** places them in a column, from the top down.
 
 ### Reverse
 
-ReverseX and ReverseY properties are used to set the direction the layout group is built out in. The default is left-to-right and bottom-to-top.
+**Reverse X** and **Reverse Y** reverse the order along each axis. Reverse Y is on by default, which is what makes columns, and the rows of a grid, run from the top down. Turn it off to build upwards from the bottom, and turn Reverse X on to build from right to left.
 
 ### Alignment
 
-Alignment is used to align the child elements to the edges of the Layout Group. `[0,0]` aligns to the bottom left, `[1,1]` aligns to the top right.
+**Alignment** places the children as a whole inside the group when they don't fill it, from `0, 0` for the bottom-left corner to `1, 1` for the top-right. The default of `0, 1` puts them at the top left. In a grid it also aligns each row, so `0.5, 1` centers a last row that is shorter than the others.
 
 ### Padding
 
-Padding adds a space to the inside of the Layout Group before positioning any children.
+**Padding** is the space kept clear inside the edges of the group, in the order left, bottom, right, top.
 
 ### Spacing
 
-Spacing determines the gap between each child.
+**Spacing** is the gap between neighboring children. Its x value is the gap between the children in a row, and its y value the gap between the children in a column and between the rows of a grid.
 
 ### Fitting
 
-The Width Fitting and Height Fitting properties determine how a child element's width or height will be adjusted by the Layout Group.
+**Width Fitting** and **Height Fitting** decide whether the layout group changes the sizes of its children to fit the group:
 
-A value of **None** will apply no fitting.
+| Fitting | Children are |
+| --- | --- |
+| **None** | Left at their own size |
+| **Stretch** | Grown to fill the group when they are smaller than it, up to any maximum size |
+| **Shrink** | Shrunk to fit the group when they are larger than it, down to any minimum size |
+| **Both** | Stretched or shrunk, whichever fits |
 
-A value of **Stretch** will stretch the children to fill the width or height of the container using the following procedure:
-
-- Sum the fitWidthProportion/fitHeightProportion values of each child and normalize so that all values sum to 1.
-- Apply the natural width/height for each child.
-- If there is space remaining in the container, distribute it to each child based on the normalized fitWidthProportion/fitHeightProportion values, but do not exceed the maxWidth/maxHeight of each child.
-
-A value of **Shrink** will shrink the children to fit the container using the following procedure:
-
-- Sum the fitWidthProportion/fitHeightProportion values of each child and normalize so that all values sum to 1.
-- Apply the natural width/height for each child.
-- If the new total width/height of all children exceeds the available space of the container, reduce each child's width/height proportionally based on the normalized fitWidthProportion/fitHeightProportion values, but do not exceed the minWidth/minHeight of each child.
-
-A value of **Both** will apply both **Stretch** and **Shrink**.
+Along the direction of the layout, such as the width of a row, the free space or the overflow is shared between the children, equally unless [layout children](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#layout-children) give them different proportions. Across the layout, each child is stretched or shrunk to the height of its row, or the width of its column, on its own. The Engine constants are `pc.FITTING_NONE`, `pc.FITTING_STRETCH`, `pc.FITTING_SHRINK` and `pc.FITTING_BOTH`.
 
 ### Wrap
 
-The wrap property causes children that are outside of the width (for vertical groups) or height (for horizontal groups) to be moved to a new row or column. Using the wrap property you can create grid-based layouts.
+With **Wrap** on, a child that would overflow the row starts a new one, which makes a grid. The width of the group decides how many children fit on a row: three children 100 units wide with 10 units of spacing need a group at least 320 units wide. In a vertical layout, the height of the group decides how many children fit in each column instead.
 
 ## Layout Children
 
-A Layout Group applies its rules to all of its direct children. If you want to override these rules for a specific child you can do that by adding a LayoutChild Component to that child.
+A layout child component on a child of a layout group changes how the layout sizes that child:
 
-[Image: Layout Child]
+| Property | Effect |
+| --- | --- |
+| **Min Width**, **Min Height** | The smallest size the layout gives the child |
+| **Max Width**, **Max Height** | The largest size the layout gives the child. Empty means no limit |
+| **Fit Width Proportion**, **Fit Height Proportion** | How the free space or the overflow is shared when the layout stretches or shrinks. Stretching gives a child with 2 twice the extra space of a child with 1. Shrinking takes less from a larger proportion: two 100-unit children with 2 and 1, shrunk into 140 units, become 80 and 60 |
+| **Exclude from Layout** | Leaves the child out of the layout. It keeps its own anchor and position |
 
-In this example, the horizontal layout is using the **Stretch** width fitting to stretch each button to fit evenly into the container. The center button has a Layout Child Component with a `maxWidth` value set to 64, so it will not be stretched.
+In a row of buttons that stretch to fill a toolbar, for example, a maximum width stops one of them from growing:
 
-[Image: Layout Child Setup]
+**Engine**
+
+```javascript
+button.addComponent('layoutchild', {
+    maxWidth: 120
+});
+```
+
+**Editor**
+
+Select the button and choose **Add Component › UI › Layout Child**, then set **Max Width** to 120. **User Interface › Layout Child** in the Hierarchy's **+** menu creates a new group element with a Layout Child component.
+
+**React**
+
+`LayoutChild` works like `LayoutGroup` above:
+
+```jsx
+function LayoutChild(options) {
+  const entity = useParent();
+  useEffect(() => {
+    entity.addComponent('layoutchild', options);
+    return () => entity.removeComponent('layoutchild');
+  }, [entity]);
+  return null;
+}
+
+<Entity name="button">
+  <Element type="image" width={100} height={60} useInput />
+  <LayoutChild maxWidth={120} />
+</Entity>
+```
+
+**Web Components**
+
+```html
+<pc-entity name="button">
+    <pc-element type="image" width="100" height="60" use-input></pc-element>
+    <pc-layout-child max-width="120"></pc-layout-child>
+</pc-entity>
+```
 
 ## Example Layouts
 
-### Vertical Leaderboard
+The layouts in the image at the top of this page use these properties:
 
-[Image: Leaderboard]
+| Property | Vertical list | Toolbar | Grid |
+| --- | --- | --- | --- |
+| **Orientation** | Vertical | Horizontal | Horizontal |
+| **Alignment** | 0, 1 | 0, 0.5 | 0.5, 1 |
+| **Padding** | 10, 10, 10, 10 | 10, 10, 10, 10 | 0, 0, 0, 0 |
+| **Spacing** | 0, 10 | 10, 0 | 10, 10 |
+| **Width Fitting** | Stretch | Stretch | None |
+| **Height Fitting** | None | Stretch | None |
+| **Wrap** | Off | Off | On |
 
-This Leaderboard is setup as vertical column aligned to the top center. We're using the Width Fitting property to stretch each item to be the full width. And using the Padding and Spacing properties to leave clear gaps between the cells.
+- **Vertical list.** Each row sets only its height. Width Fitting stretches the rows to the width of the list, less its padding, as in a leaderboard or a settings menu.
+- **Toolbar.** Stretch fitting on both axes shares the width of the toolbar between the buttons and gives them its height, less the padding, so the buttons keep an even share as buttons are added or removed.
+- **Grid.** The children are 100 units square and the group is 320 units wide, so three fit on each row. The alignment of `0.5, 1` starts the grid at the top and centers each row, including a last row that is not full.
 
-[Image: Leaderboard Setup]
+[Live example: Layout Group](https://playcanvas.com/examples/#/user-interface/layout-group) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/layout-group.example.mjs))
 
-### Horizontal Buttons
+## Changing a Layout at Runtime
 
-[Image: Horizontal Buttons]
+Changing a property of a layout group lays its children out again. Properties that hold vectors need a new vector object:
 
-This row of buttons is laid out using a Horizontal Layout Group with some Spacing and Padding settings to make the buttons fit the correct width. No width or height fitting is used.
+```javascript
+list.layoutgroup.spacing = new pc.Vec2(0, 20);
+list.layoutgroup.padding = new pc.Vec4(20, 20, 20, 20);
+list.layoutgroup.wrap = true;
+```
 
-[Image: Horizontal Setup]
+Adding, removing, enabling or disabling a child also lays the group out again, so a list grows as you add rows to it:
 
-### Grid
+```javascript
+const row = new pc.Entity('row');
+row.addComponent('element', {
+    type: pc.ELEMENTTYPE_IMAGE,
+    height: 60
+});
+list.addChild(row);
+```
 
-[Image: Grid]
+A layout group does not resize its own element to fit its children. To size a [scroll view](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md#sizing-the-content)'s content to fit a list, use the bounds from the `reflow` event.
 
-This row of buttons is laid out using a Layout Group with the Wrap setting enabled to set up a grid. The Group Element the Layout Group is attached to is set to the correct width (button width + spacing) to force the wrap to generate a two column grid. The Horizontal layout means that the grid fills in rows not columns and the Alignment property is set to `[0.5, 1]` which means that any "loose" elements (a row with only one element) will be centered in the X axis.
+## See Also
 
-[Image: Setup]
+- [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md) - Anchors, pivots and group elements
+- [Scroll Views](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md) - Scrolling a list that is longer than its viewport
+- [Layout Group Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup.md), [`<pc-layout-group>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md) and [LayoutGroupComponent](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html) - Reference for every layout group property
+- [Layout Child Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild.md), [`<pc-layout-child>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child.md) and [LayoutChildComponent](https://api.playcanvas.com/engine/classes/LayoutChildComponent.html) - Reference for every layout child property
