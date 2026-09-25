@@ -216,7 +216,7 @@ Three properties give the four corners of an element, in the order bottom-left, 
 
 ## Elements Without a Screen {#elements-without-a-screen}
 
-An element does not need a screen. One with no screen ancestor is placed like any other entity, by its transform, and its width and height are in world units, so a 32 × 32 element is 32 meters across. Anchors have no effect on it. A lone element suits a single label or image in the world. For anything more, such as a panel with a layout or a menu, use a [world-space screen](/user-manual/user-interface/world-space-ui/).
+An element does not need a screen. One with no screen ancestor is placed like any other entity, by its transform, and its width and height are in world units, so a 32 × 32 element is 32 meters across. Its anchors don't move it, but split anchors still size it against a parent element: anchored `0, 0, 1, 1` inside a 100 × 100 element, it is 100 × 100, and anchored `0, 0, 0.5, 0.5`, it is 50 × 50. A lone element suits a single label or image in the world. For anything more, such as a panel with a layout or a menu, use a [world-space screen](/user-manual/user-interface/world-space-ui/).
 
 ## See Also
 

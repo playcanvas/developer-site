@@ -189,7 +189,7 @@ A layout child component on a child of a layout group changes how the layout siz
 | --- | --- |
 | **Min Width**, **Min Height** | The smallest size the layout gives the child |
 | **Max Width**, **Max Height** | The largest size the layout gives the child. Empty means no limit |
-| **Fit Width Proportion**, **Fit Height Proportion** | The child's share of the free space or overflow when the layout stretches or shrinks. A child with 2 gets twice the share of a child with 1 |
+| **Fit Width Proportion**, **Fit Height Proportion** | How the free space or the overflow is shared when the layout stretches or shrinks. Stretching gives a child with 2 twice the extra space of a child with 1. Shrinking takes less from a larger proportion: two 100-unit children with 2 and 1, shrunk into 140 units, become 80 and 60 |
 | **Exclude from Layout** | Leaves the child out of the layout. It keeps its own anchor and position |
 
 In a row of buttons that stretch to fill a toolbar, for example, a maximum width stops one of them from growing:

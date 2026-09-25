@@ -171,7 +171,7 @@ In the [Sprite Editor](/user-manual/2D/sprite-editor/), set the borders of a fra
 `useAsset` does not load texture atlases or sprites, so build them from a texture:
 
 ```jsx
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { SPRITE_RENDERMODE_SLICED, Sprite, TextureAtlas, Vec2, Vec4 } from 'playcanvas';
 import { Entity } from '@playcanvas/react';
 import { Element } from '@playcanvas/react/components';
@@ -180,18 +180,25 @@ import { useApp, useTexture } from '@playcanvas/react/hooks';
 export function Dialog() {
   const app = useApp();
   const { asset: texture } = useTexture('textures/panel.png');
+  const [sprite, setSprite] = useState(null);
 
-  // A texture atlas with one 64 x 64 frame, whose 16 pixel borders keep their size
-  const sprite = useMemo(() => {
-    if (!texture) return null;
+  // A texture atlas with one 64 x 64 frame, whose 16 pixel borders keep their size. The sprite
+  // owns meshes on the GPU, so it is created in an effect and destroyed with the dialog
+  useEffect(() => {
+    if (!texture) return;
     const atlas = new TextureAtlas();
     atlas.texture = texture.resource;
     atlas.frames = {
       panel: { rect: new Vec4(0, 0, 64, 64), pivot: new Vec2(0.5, 0.5), border: new Vec4(16, 16, 16, 16) }
     };
-    return new Sprite(app.graphicsDevice, {
+    const panelSprite = new Sprite(app.graphicsDevice, {
       atlas, frameKeys: ['panel'], pixelsPerUnit: 1, renderMode: SPRITE_RENDERMODE_SLICED
     });
+    setSprite(panelSprite);
+    return () => {
+      setSprite(null);
+      panelSprite.destroy();
+    };
   }, [app, texture]);
 
   if (!sprite) return null;

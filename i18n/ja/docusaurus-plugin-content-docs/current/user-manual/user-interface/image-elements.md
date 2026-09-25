@@ -171,7 +171,7 @@ screen.addChild(dialog);
 `useAsset`はテクスチャアトラスやスプライトを読み込まないため、テクスチャから作成します。
 
 ```jsx
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { SPRITE_RENDERMODE_SLICED, Sprite, TextureAtlas, Vec2, Vec4 } from 'playcanvas';
 import { Entity } from '@playcanvas/react';
 import { Element } from '@playcanvas/react/components';
@@ -180,18 +180,25 @@ import { useApp, useTexture } from '@playcanvas/react/hooks';
 export function Dialog() {
   const app = useApp();
   const { asset: texture } = useTexture('textures/panel.png');
+  const [sprite, setSprite] = useState(null);
 
-  // 64 x 64のフレームを1つ持つテクスチャアトラス。フレームの16ピクセルのボーダーはサイズが保たれる
-  const sprite = useMemo(() => {
-    if (!texture) return null;
+  // 64 x 64のフレームを1つ持つテクスチャアトラス。フレームの16ピクセルのボーダーはサイズが保たれる。
+  // スプライトはGPU上のメッシュを持つため、エフェクトの中で作成し、ダイアログと一緒に破棄する
+  useEffect(() => {
+    if (!texture) return;
     const atlas = new TextureAtlas();
     atlas.texture = texture.resource;
     atlas.frames = {
       panel: { rect: new Vec4(0, 0, 64, 64), pivot: new Vec2(0.5, 0.5), border: new Vec4(16, 16, 16, 16) }
     };
-    return new Sprite(app.graphicsDevice, {
+    const panelSprite = new Sprite(app.graphicsDevice, {
       atlas, frameKeys: ['panel'], pixelsPerUnit: 1, renderMode: SPRITE_RENDERMODE_SLICED
     });
+    setSprite(panelSprite);
+    return () => {
+      setSprite(null);
+      panelSprite.destroy();
+    };
   }, [app, texture]);
 
   if (!sprite) return null;
