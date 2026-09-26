@@ -71,15 +71,15 @@ PlayCanvasにColyseus JavaScript SDKを追加する必要があります。
 
 "PlayCanvasプロジェクトの設定"を使用して、"外部スクリプト"として追加できます。
 
-**「メニュー」→ 「設定」**を開いてください:
+**メニュー → 設定**を開いてください:
 
 ![settings](/img/tutorials/multiplayer-colyseus/settings.png)
 
-設定パネルから、**「外部スクリプト」**を展開し、**「URL」**の数を増やします。
+設定パネルから、**外部スクリプト**を展開し、**URL**の数を増やします。
 
 ![CDN](/img/tutorials/multiplayer-colyseus/ext_script.png)
 
-新しい**「URL」**フィールドに、CDNからColyseus JavaScript SDKを含めてください:
+新しい**URL**フィールドに、CDNからColyseus JavaScript SDKを含めてください:
 
 ```none
 https://unpkg.com/colyseus.js@^0.16.0/dist/colyseus.js
@@ -113,7 +113,7 @@ NetworkManager.prototype.initialize = async function () {
 
 > ここで、ローカルの `ws://localhost:2567` エンドポイントを使用しています。他の人とオンラインでプレイするには、 [サーバーをデプロイ](https://docs.colyseus.io/deployment/)して、公共のインターネットを使用する必要があります。[Glitch](https://glitch.com/edit/#!/tutorial-playcanvas-server)を使ってサーバーを公開することもできます。
 
-PlayCanvasプロジェクトを**「起動」**すると、クライアントはサーバーと接続し、サーバーは必要に応じて`my_room`という部屋を作成します。
+PlayCanvasプロジェクトを**起動**すると、クライアントはサーバーと接続し、サーバーは必要に応じて`my_room`という部屋を作成します。
 
 `my_room` は、Colyseusサーバーのデフォルトのルーム識別子です。 `arena.config.ts` ファイルでこの識別子を変更することができます。
 
@@ -133,7 +133,7 @@ Colyseusでは、共有データを `Schema` 構造を使用して定義しま�
 
 1. 状態の変更(変異)は、サーバー→クライアント間で自動的に同期されます。
 2. クライアントは、ローカルの_読み取り専用_の`Schema`構造体にコールバックをアタッチすることで、状態の変化を観察し、それに対応することができます。
-3. クライアントは任意のメッセージをサーバーに送信することができます - それが何をするかはサーバーが決定します - そして状態を変化させることができます（ステップ**1.**に戻ります）
+3. クライアントは任意のメッセージをサーバーに送信することができます - それが何をするかはサーバーが決定します - そして状態を変化させることができます（ステップ **1.** に戻ります）
 
 ---
 

@@ -73,7 +73,7 @@ Diffuseカラーは **アルベド** や **ベースカラー** と呼ばれる�
     <iframe src="https://playcanv.as/p/Q28EwTwQ/?gloss" title="Physical Materials - Glossiness" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-いくつかの物理ベースレンダリングシステムでは、光沢度という用語の代わりに**粗さ (Roughness)**という用語を使います。粗さは光沢度の反対の意味です。光沢度と粗さを変換する際には、単純にその値を反転してください。
+いくつかの物理ベースレンダリングシステムでは、光沢度という用語の代わりに **粗さ (Roughness)** という用語を使います。粗さは光沢度の反対の意味です。光沢度と粗さを変換する際には、単純にその値を反転してください。
 
 光沢度と粗さは、**microsurface値**という用語で呼ばれることもあります。
 
