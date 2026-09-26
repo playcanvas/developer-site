@@ -29,6 +29,65 @@ By doing this you will no longer see warning messages in the console.
 
 The following tables break down the chunk changes by Engine release.
 
+### *Engine v2.23*
+
+#### Scene environment textures use their own uniforms
+
+Until v2.23, the scene's environment atlas and skybox reached a material's shader under the same uniform names as the material's own environment textures, `texture_envAtlas` and `texture_cubeMap`: the engine copied the scene textures into the parameters of every `StandardMaterial` lit by the scene environment. As of v2.23 the renderer publishes the scene textures as `scene_envAtlas` and `scene_skybox`, and a material publishes only the textures it owns. The lit environment chunks declare and sample the texture through the `{LIT_ENV_ATLAS}` and `{LIT_ENV_CUBEMAP}` tokens, which the shader generator resolves to the scene or the material uniform for each shader variant. See [PR #9364](https://github.com/playcanvas/engine/pull/9364) for details.
+
+A custom override of one of these chunks that still hard-codes `texture_envAtlas` or `texture_cubeMap` keeps working on a material that has its own `envAtlas` or `cubeMap`, but receives no texture on a material lit by the scene environment: the sampler is never set, so the shader samples whatever texture happens to be bound to that unit.
+
+Environment resolution is also all-or-nothing from v2.23: a material with any environment texture of its own (`envAtlas`, `cubeMap` or `sphereMap`) uses only material textures for reflections, ambient and refraction, and a material with just a `cubeMap` or `sphereMap` takes its ambient from the constant `ambientLight`. Previously such a material took its ambient from the scene atlas.
+
+Affected chunks:
+
+- `src/scene/shader-lib/glsl/chunks/lit/frag/ambient.js`
+- `src/scene/shader-lib/glsl/chunks/lit/frag/reflectionEnv.js`
+- `src/scene/shader-lib/glsl/chunks/lit/frag/reflectionEnvHQ.js`
+- `src/scene/shader-lib/glsl/chunks/lit/frag/reflectionCube.js`
+- `src/scene/shader-lib/wgsl/chunks/lit/frag/ambient.js`
+- `src/scene/shader-lib/wgsl/chunks/lit/frag/reflectionEnv.js`
+- `src/scene/shader-lib/wgsl/chunks/lit/frag/reflectionEnvHQ.js`
+- `src/scene/shader-lib/wgsl/chunks/lit/frag/reflectionCube.js`
+
+**Migration:** In custom `ambientPS`, `reflectionEnvPS`, `reflectionEnvHQPS` and `reflectionCubePS` overrides, replace `texture_envAtlas` with `{LIT_ENV_ATLAS}` and `texture_cubeMap` with `{LIT_ENV_CUBEMAP}`, both in the declaration and at every sample. In WGSL the sampler follows the same pattern, `{LIT_ENV_ATLAS}Sampler`. Then set `material.shaderChunksVersion = '2.23'`.
+
+Before (GLSL):
+
+```glsl
+uniform sampler2D texture_envAtlas;
+
+vec3 linearA = {reflectionDecode}(texture2D(texture_envAtlas, uv0));
+```
+
+After (GLSL):
+
+```glsl
+uniform sampler2D {LIT_ENV_ATLAS};
+
+vec3 linearA = {reflectionDecode}(texture2D({LIT_ENV_ATLAS}, uv0));
+```
+
+Before (WGSL):
+
+```wgsl
+var texture_envAtlas: texture_2d<f32>;
+var texture_envAtlasSampler: sampler;
+
+let raw: vec4f = textureSample(texture_envAtlas, texture_envAtlasSampler, uv);
+```
+
+After (WGSL):
+
+```wgsl
+var {LIT_ENV_ATLAS}: texture_2d<f32>;
+var {LIT_ENV_ATLAS}Sampler: sampler;
+
+let raw: vec4f = textureSample({LIT_ENV_ATLAS}, {LIT_ENV_ATLAS}Sampler, uv);
+```
+
+---
+
 ### *Engine v2.20*
 
 #### MSDF text rendering reworked
