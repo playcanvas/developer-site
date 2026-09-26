@@ -34,16 +34,23 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 | Event | Description |
 | --- | --- |
-| `click` | Fired when a primary pointer button is pressed and then released over the entity. |
-| `pointerdown` | Fired when a pointer is pressed down on the entity. |
-| `pointerenter` | Fired when a pointer enters the entity. |
-| `pointerleave` | Fired when a pointer leaves the entity. |
-| `pointermove` | Fired when a pointer is moved over the entity. |
-| `pointerup` | Fired when a pointer is released from the entity. |
+| `click` | Fired when a primary pointer button is pressed and then released over the entity. See [Clicks](#clicks). |
+| `pointercancel` | Fired on the entity a press began over when the browser cancels the press, for example because a touch became a scroll. No `click` follows. |
+| `pointerdown` | Fired when a pointer button is pressed over the entity. |
+| `pointerenter` | Fired when the pointer moves onto the entity or an entity below it, having been over none of them. Does not bubble. |
+| `pointerleave` | Fired when the pointer moves off the entity and every entity below it. Does not bubble. |
+| `pointermove` | Fired when the pointer moves over the entity. |
+| `pointerout` | Fired when the pointer moves off the entity. `relatedTarget` is the element it moved onto. |
+| `pointerover` | Fired when the pointer moves onto the entity. `relatedTarget` is the element it came from. |
+| `pointerup` | Fired when a pointer button is released over the entity. |
 
-All six are delivered as [`PointerEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent) objects and bubble up the element tree, so one listener on an ancestor can serve a whole subtree.
+The containing [`<pc-app>`](../pc-app) dispatches these by picking the scene under the pointer, and they behave like the browser's own pointer events. All nine are [`PointerEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent) objects. Each targets an entity element, which for most of them is the one fronting the geometry under the pointer, and bubbles up the element tree from there; `event.target` is that element. A listener on an ancestor entity, or on [`<pc-scene>`](../pc-scene#events), therefore receives the events of every entity below it.
 
-You can also handle these events declaratively with inline `onclick` and `onpointer*` attributes. These are standard [inline event handlers](https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers#registering_onevent_handlers), compiled and run by the browser itself, so they behave exactly like `onclick` on any HTML element: setting the attribute (even at runtime) replaces the previous handler, removing it removes the handler, and within the handler `this` is the `<pc-entity>` element and `event` is the dispatched event.
+`pointerenter` and `pointerleave` are the exceptions. They do not bubble: each element the pointer moves into or out of receives its own. Moving onto an entity from the background fires `pointerenter` on the entity and on each of its ancestors, outermost first. Moving from a parent onto its child fires it on the child alone, because the pointer never left the parent. An ancestor therefore receives a single `pointerenter` and `pointerleave` for its whole subtree, which is usually what a hover effect wants. On all four boundary events (`pointerover`, `pointerout`, `pointerenter` and `pointerleave`), `relatedTarget` is the element the pointer came from or went to. When that was the background, or the pointer left the canvas, `relatedTarget` is the `<pc-app>`.
+
+Each pointer is tracked on its own, so two touches can each be over a different entity. A pointer leaving the canvas ends its hover, firing `pointerout` and `pointerleave`, but not its press. A pointer that comes back and releases over the entity it pressed still clicks it, while a release off the canvas ends the press without a click.
+
+You can also handle these events declaratively with inline `onclick` and `onpointer*` attributes. These are standard [inline event handlers](https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers#registering_onevent_handlers), compiled and run by the browser itself, so they behave exactly like `onclick` on any HTML element: setting the attribute (even at runtime) replaces the previous handler, and removing it removes the handler. Within the handler, `this` is the element the attribute is on and `event` is the dispatched event, whose `target` is the entity actually hit.
 
 ```html
 <pc-entity name="cube"
@@ -60,10 +67,21 @@ You can also handle these events declaratively with inline `onclick` and `onpoin
 
 * It requires the **primary** button, so a right-click does not fire it — `pointerup` alone does.
 * It requires a press *and* a release, so it does not fire at the start of every camera drag the way `pointerdown` does.
-* If the press and the release landed on different geometry, the click fires at their **nearest common ancestor** — dragging from one object onto its sibling clicks their shared parent, and dragging off onto the background clicks nothing at all. This is the same rule the browser applies to native clicks on nested HTML.
+* If the press and the release landed on different geometry, the click fires at their **nearest common ancestor** — dragging from one object onto its sibling clicks their shared parent (`<pc-scene>`, for two top-level entities), and dragging off onto the background clicks nothing at all. This is the same rule the browser applies to native clicks on nested HTML.
 * `detail` carries the click count, as it does for a native click: a second click on the same element within half a second arrives as a `click` whose `detail` is `2`, so a double click is read from `detail` rather than from a separate event.
 
-A press the browser takes back — a touch it reinterprets as a scroll, say — is discarded rather than concluding as a click.
+A press the browser takes back — a touch it reinterprets as a scroll, say — fires `pointercancel` on the entity it began over instead of concluding as a click.
+
+### When Events Are Dispatched
+
+Finding the entity under the pointer means rendering the scene again, so `<pc-app>` only picks while something is listening. With its default [`picking="auto"`](../pc-app#attributes), it picks for an event type only while a listener for that type is registered on an entity element (`<pc-entity>`, [`<pc-model>`](../pc-model) or [`<pc-node>`](../pc-node)) or on `<pc-scene>`. The listener can be added with `addEventListener()`, set as an inline attribute or assigned as a handler property. A page that listens for none of these events pays nothing for them.
+
+Two kinds of listener go unseen:
+
+* **Listeners elsewhere on the page**, such as one on the document, one on `<pc-app>` itself, or a framework's delegated handler like React's `onClick`. They receive an event only when a listener that `<pc-app>` does see is on the entity's path, and never cause one to be dispatched themselves. Set `picking="always"` on `<pc-app>` to pick for every pointer event, or `picking="none"` to switch the events off.
+* **Listeners added with `addEventListener()` before the library has defined the element.** A classic `<script>` that runs ahead of the library's module does this, and so does code that configures a [template clone](../templates.md#creating-an-instance) before appending it. Add such listeners from a module that imports the library, and add a clone's only after appending it. An inline attribute or handler property is seen whenever it was set.
+
+The canvas keeps receiving its own native pointer events throughout, so a listener on `<pc-app>` or above receives both kinds. `event.target` tells them apart: it is the `<canvas>` for a native event, and an entity element for a dispatched one. A dispatched event arrives shortly after the native event that caused it, once its pick has been read back from the GPU.
 
 ## Example
 

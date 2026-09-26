@@ -40,7 +40,7 @@ const DOCUMENTED_AS_PATTERN = [
     /^(ao|diffuse|emissive|gloss|height|metalness|normal|opacity)-map-(channel|offset|rotation|tiling|uv)$/,
     // pc-entity, pc-model, pc-node: inline handlers for the synthesized pointer events, covered
     // under "Events" alongside the events themselves.
-    /^on(click|pointer(down|up|move|enter|leave))$/
+    /^on(click|pointer(over|enter|down|move|up|cancel|out|leave))$/
 ];
 
 // Documented attributes the manifest does not list. `id` is a global HTML attribute. The rest
@@ -84,8 +84,8 @@ const TYPE_LINKS = {
 // Events a page documents by deferring to another page's table. The event name must still be
 // mentioned on the page; it just need not have a row of its own.
 const EVENTS_BY_REFERENCE = {
-    // pc-model fires the six pointer events exactly as pc-entity does, and says so under Events.
-    'pc-model': /^(click|pointer(down|up|move|enter|leave))$/
+    // pc-model fires the nine pointer events exactly as pc-entity does, and says so under Events.
+    'pc-model': /^(click|pointer(over|enter|down|move|up|cancel|out|leave))$/
 };
 
 // The shape every page's tail takes: a JavaScript Interface section, then See Also as the last

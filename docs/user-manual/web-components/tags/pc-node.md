@@ -90,16 +90,21 @@ A `<pc-material>` added to the document *after* a mapping referenced it is not p
 
 ## Events
 
-`<pc-node>` dispatches the same pointer events as [`<pc-entity>`](../pc-entity), fired when the pointer intersects the bound node's geometry. Binding a node is what makes it a pick target, so a `<pc-node>` is also how you make one part of a model interactive.
+`<pc-node>` dispatches the same [pointer events](../pc-entity#events) as [`<pc-entity>`](../pc-entity), fired when the pointer is over the bound node's geometry. Binding a node is what makes it a pick target, so a `<pc-node>` is also how you make one part of a model interactive. A hit on a part that no `<pc-node>` fronts targets the [`<pc-model>`](../pc-model) instead.
 
 | Event | Description |
 | --- | --- |
 | `click` | Fired when a primary pointer button is pressed and then released over the node. |
-| `pointerdown` | Fired when a pointer is pressed down on the node. |
-| `pointerenter` | Fired when a pointer enters the node. |
-| `pointerleave` | Fired when a pointer leaves the node. |
-| `pointermove` | Fired when a pointer is moved over the node. |
-| `pointerup` | Fired when a pointer is released from the node. |
+| `pointercancel` | Fired on the node a press began over when the browser cancels the press, for example because a touch became a scroll. No `click` follows. |
+| `pointerdown` | Fired when a pointer button is pressed over the node. |
+| `pointerenter` | Fired when the pointer moves onto the node or an entity below it, having been over none of them. Does not bubble. |
+| `pointerleave` | Fired when the pointer moves off the node and every entity below it. Does not bubble. |
+| `pointermove` | Fired when the pointer moves over the node. |
+| `pointerout` | Fired when the pointer moves off the node. `relatedTarget` is the element it moved onto. |
+| `pointerover` | Fired when the pointer moves onto the node. `relatedTarget` is the element it came from. |
+| `pointerup` | Fired when a pointer button is released over the node. |
+
+Like every DOM event, these propagate through the element tree, not through the model's node hierarchy. A hit on geometry below the bound node targets this `<pc-node>` unless a nearer `<pc-node>` fronts it. In that case the event reaches this one only if the nearer `<pc-node>` is nested inside it in the markup; if the two are siblings, it bubbles straight to the `<pc-model>`.
 
 The inline `onclick` and `onpointer*` attributes work here exactly as they do on [`<pc-entity>`](../pc-entity), including [how a click resolves](../pc-entity#clicks) when the press and release land on different geometry.
 
@@ -109,7 +114,7 @@ This GLB instantiates two nodes — `play` (the orange shell, its logo cut out o
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
