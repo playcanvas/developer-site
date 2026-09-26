@@ -56,13 +56,13 @@ description: "pc-model要素のリファレンス: GLBコンテナアセット�
 
 どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、ページ上のすべてのモデルを監視するには、祖先要素でキャプチャフェーズのリスナーを使用します。
 
-ホストはピッキング対象として登録されるため、`<pc-model>`も[`<pc-entity>`](../pc-entity)と同じ6つのポインタイベント（`click`・`pointerdown`・`pointerenter`・`pointerleave`・`pointermove`・`pointerup`）を発生させ、インラインのハンドラ属性も同じように使えます。ラッパーや[`<pc-node>`](../pc-node)なしで、モデル全体がクリック可能になります。
+ホストはピッキング対象として登録されるため、`<pc-model>`も[`<pc-entity>`](../pc-entity)と同じ9つの[ポインターイベント](../pc-entity#events)（`click`・`pointercancel`・`pointerdown`・`pointerenter`・`pointerleave`・`pointermove`・`pointerout`・`pointerover`・`pointerup`）を発生させ、インラインのハンドラ属性も同じように使えます。ラッパーや[`<pc-node>`](../pc-node)なしで、モデル全体がクリック可能になります。
 
 ```html
 <pc-model asset="t-rex" onclick="this.setAttribute('scale', '2 2 2')"></pc-model>
 ```
 
-ポインタイベントは最も近い*リッスンしている*要素に解決されるため、何もリッスンしていないモデルが、リッスンしている祖先要素のイベントを飲み込むことはありません。
+モデルのどこがヒットしても、ターゲットは`<pc-model>`自体です。ただし、ヒットした部分を`<pc-node>`が担っている場合は、そのノードがターゲットになります。どちらの場合もイベントはそこから要素ツリーをバブリングしていくため、祖先に置いたリスナーは、モデル自身がリッスンしているかどうかに関係なくモデルのイベントを受け取ります。
 
 readyは現在の`asset`の選択が決着したことを意味し、次の3つの結果を含みます。コンテンツが読み込まれてホストの下に置かれた場合、読み込みが失敗した場合、そして`asset`がまったく割り当てられていない場合です。ホストの`entity`は失敗後も含めて常に非nullなので、成功と失敗の判別には使えません。`error`イベントを使うか、`contentEntity`を確認してください。
 
@@ -102,7 +102,7 @@ console.log(anim.clips); // ['Walk', 'Idle']
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
