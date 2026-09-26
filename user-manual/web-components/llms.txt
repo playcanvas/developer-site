@@ -70,4 +70,4 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/web-components/llms-full.txt): 41 pages (337 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/web-components/llms-full.txt): 41 pages (346 KB), for downloading and searching rather than reading into context.

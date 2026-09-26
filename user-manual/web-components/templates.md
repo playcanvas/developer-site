@@ -65,6 +65,8 @@ Step 2 is the one that trips people up. `template.content` is a [`DocumentFragme
 
 Configuring in step 3 — position, rotation, script attributes, anything — happens while the clone is disconnected, so the attributes are simply the initial state the instance boots with. No half-configured instance ever exists in the scene, and no engine object is created only to be immediately reconfigured.
 
+[Pointer event](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) listeners are the exception. A clone of template content becomes a live `pc-*` element only once it is appended. A listener added with `addEventListener()` before then is invisible to `<pc-app>`, which therefore never [dispatches events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched) for it. Add those listeners after step 4, as the [example](https://developer.playcanvas.com/user-manual/web-components/templates.md#example) below does. An inline handler attribute such as `onclick` is fine in step 3, like any other attribute.
+
 ## Names Are Clone-Local
 
 Wire references *inside* a template with bare names:

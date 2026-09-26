@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/user-manual/web-components/llms.txt
 Total Documents: 41
-Generated: 2026-09-25
+Generated: 2026-09-26
 
 ================================================================================
 
@@ -1351,6 +1351,8 @@ Step 2 is the one that trips people up. `template.content` is a [`DocumentFragme
 
 Configuring in step 3 — position, rotation, script attributes, anything — happens while the clone is disconnected, so the attributes are simply the initial state the instance boots with. No half-configured instance ever exists in the scene, and no engine object is created only to be immediately reconfigured.
 
+[Pointer event](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) listeners are the exception. A clone of template content becomes a live `pc-*` element only once it is appended. A listener added with `addEventListener()` before then is invisible to `<pc-app>`, which therefore never [dispatches events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched) for it. Add those listeners after step 4, as the [example](https://developer.playcanvas.com/user-manual/web-components/templates.md#example) below does. An inline handler attribute such as `onclick` is fine in step 3, like any other attribute.
+
 ## Names Are Clone-Local
 
 Wire references *inside* a template with bare names:
@@ -1840,12 +1842,13 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
 | `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
+| `picking` | Enum | `"auto"` | When the application picks the scene under the pointer to dispatch [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) on entity elements: `"auto"` \| `"always"` \| `"none"`. `auto` picks for an event type only while a listener for it is registered on an entity element or on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); `always` picks for every pointer event, which listeners the application cannot see need, such as one on the document or a framework's delegated handler like React's `onPointerMove`; `none` never picks, so entities receive no pointer events. Picking renders the scene again, which is why `auto` is the default. See [When Events Are Dispatched](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched) |
 | `stencil-buffer` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
 | `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page, and once one switches it on, all of them send credentials |
 
 :::note[When these are read]
 
-Every attribute above except `max-pixel-ratio`, `loading-bar`, `area-light-luts` and `with-credentials` is read once, when the element is
+Every attribute above except `max-pixel-ratio`, `loading-bar`, `area-light-luts`, `picking` and `with-credentials` is read once, when the element is
 inserted into the document and creates its graphics device. Changing one afterwards updates the
 element's property but has no effect on the running application, and logs a warning saying so — to
 apply a new value, remove the element and re-insert it.
@@ -1925,6 +1928,8 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 
 Removing the element and re-inserting it retries the boot with its current attributes.
 
+The [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) dispatched on entities bubble up through `<pc-app>` too, alongside the canvas's own native pointer events, and `event.target` tells the two apart. Whether entity events are dispatched at all is up to `picking` — see [When Events Are Dispatched](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched).
+
 ## Example
 
 A complete application: a camera, a light and a sphere. Try setting `antialias="false"` or `max-pixel-ratio="1"` on the `<pc-app>` tag:
@@ -1992,6 +1997,18 @@ The `<pc-scene>` tag is used to define the scene.
 | `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
 | `lighting-max-lights` | Number | `"255"` | Maximum number of lights clustered lighting uses in a frame, from 1 to 65535. Lights over the limit are ignored with a warning, and values above 255 double the memory of the light grid |
 | `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running. Applied on top of the application's own time scale |
+
+## Events
+
+`<pc-scene>` is the ancestor of every entity element, so the [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) dispatched on entities bubble through it, and a listener here is a delegated listener for the whole scene. Read `event.target` to find the entity that was hit:
+
+```javascript
+document.querySelector('pc-scene').addEventListener('click', (event) => {
+    console.log(`Clicked ${event.target.getAttribute('name')}`);
+});
+```
+
+A listener here counts towards [when events are dispatched](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched), so none is needed on the entities themselves. A click whose press and release landed on two different top-level entities targets `<pc-scene>` itself, their nearest common ancestor. The scene also receives its own `pointerenter` and `pointerleave` as the pointer moves onto and off its entities as a whole, so one pair of listeners can, for example, change the cursor whenever anything in the scene is under the pointer.
 
 ## Example
 
@@ -2074,16 +2091,23 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 | Event | Description |
 | --- | --- |
-| `click` | Fired when a primary pointer button is pressed and then released over the entity. |
-| `pointerdown` | Fired when a pointer is pressed down on the entity. |
-| `pointerenter` | Fired when a pointer enters the entity. |
-| `pointerleave` | Fired when a pointer leaves the entity. |
-| `pointermove` | Fired when a pointer is moved over the entity. |
-| `pointerup` | Fired when a pointer is released from the entity. |
+| `click` | Fired when a primary pointer button is pressed and then released over the entity. See [Clicks](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#clicks). |
+| `pointercancel` | Fired on the entity a press began over when the browser cancels the press, for example because a touch became a scroll. No `click` follows. |
+| `pointerdown` | Fired when a pointer button is pressed over the entity. |
+| `pointerenter` | Fired when the pointer moves onto the entity or an entity below it, having been over none of them. Does not bubble. |
+| `pointerleave` | Fired when the pointer moves off the entity and every entity below it. Does not bubble. |
+| `pointermove` | Fired when the pointer moves over the entity. |
+| `pointerout` | Fired when the pointer moves off the entity. `relatedTarget` is the element it moved onto. |
+| `pointerover` | Fired when the pointer moves onto the entity. `relatedTarget` is the element it came from. |
+| `pointerup` | Fired when a pointer button is released over the entity. |
 
-All six are delivered as [`PointerEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent) objects and bubble up the element tree, so one listener on an ancestor can serve a whole subtree.
+The containing [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) dispatches these by picking the scene under the pointer, and they behave like the browser's own pointer events. All nine are [`PointerEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent) objects. Each targets an entity element, which for most of them is the one fronting the geometry under the pointer, and bubbles up the element tree from there; `event.target` is that element. A listener on an ancestor entity, or on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md#events), therefore receives the events of every entity below it.
 
-You can also handle these events declaratively with inline `onclick` and `onpointer*` attributes. These are standard [inline event handlers](https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers#registering_onevent_handlers), compiled and run by the browser itself, so they behave exactly like `onclick` on any HTML element: setting the attribute (even at runtime) replaces the previous handler, removing it removes the handler, and within the handler `this` is the `<pc-entity>` element and `event` is the dispatched event.
+`pointerenter` and `pointerleave` are the exceptions. They do not bubble: each element the pointer moves into or out of receives its own. Moving onto an entity from the background fires `pointerenter` on the entity and on each of its ancestors, outermost first. Moving from a parent onto its child fires it on the child alone, because the pointer never left the parent. An ancestor therefore receives a single `pointerenter` and `pointerleave` for its whole subtree, which is usually what a hover effect wants. On all four boundary events (`pointerover`, `pointerout`, `pointerenter` and `pointerleave`), `relatedTarget` is the element the pointer came from or went to. When that was the background, or the pointer left the canvas, `relatedTarget` is the `<pc-app>`.
+
+Each pointer is tracked on its own, so two touches can each be over a different entity. A pointer leaving the canvas ends its hover, firing `pointerout` and `pointerleave`, but not its press. A pointer that comes back and releases over the entity it pressed still clicks it, while a release off the canvas ends the press without a click.
+
+You can also handle these events declaratively with inline `onclick` and `onpointer*` attributes. These are standard [inline event handlers](https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers#registering_onevent_handlers), compiled and run by the browser itself, so they behave exactly like `onclick` on any HTML element: setting the attribute (even at runtime) replaces the previous handler, and removing it removes the handler. Within the handler, `this` is the element the attribute is on and `event` is the dispatched event, whose `target` is the entity actually hit.
 
 ```html
 <pc-entity name="cube"
@@ -2100,10 +2124,21 @@ You can also handle these events declaratively with inline `onclick` and `onpoin
 
 * It requires the **primary** button, so a right-click does not fire it — `pointerup` alone does.
 * It requires a press *and* a release, so it does not fire at the start of every camera drag the way `pointerdown` does.
-* If the press and the release landed on different geometry, the click fires at their **nearest common ancestor** — dragging from one object onto its sibling clicks their shared parent, and dragging off onto the background clicks nothing at all. This is the same rule the browser applies to native clicks on nested HTML.
+* If the press and the release landed on different geometry, the click fires at their **nearest common ancestor** — dragging from one object onto its sibling clicks their shared parent (`<pc-scene>`, for two top-level entities), and dragging off onto the background clicks nothing at all. This is the same rule the browser applies to native clicks on nested HTML.
 * `detail` carries the click count, as it does for a native click: a second click on the same element within half a second arrives as a `click` whose `detail` is `2`, so a double click is read from `detail` rather than from a separate event.
 
-A press the browser takes back — a touch it reinterprets as a scroll, say — is discarded rather than concluding as a click.
+A press the browser takes back — a touch it reinterprets as a scroll, say — fires `pointercancel` on the entity it began over instead of concluding as a click.
+
+### When Events Are Dispatched
+
+Finding the entity under the pointer means rendering the scene again, so `<pc-app>` only picks while something is listening. With its default [`picking="auto"`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#attributes), it picks for an event type only while a listener for that type is registered on an entity element (`<pc-entity>`, [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) or [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md)) or on `<pc-scene>`. The listener can be added with `addEventListener()`, set as an inline attribute or assigned as a handler property. A page that listens for none of these events pays nothing for them.
+
+Two kinds of listener go unseen:
+
+* **Listeners elsewhere on the page**, such as one on the document, one on `<pc-app>` itself, or a framework's delegated handler like React's `onPointerMove`. They receive an event only when a listener that `<pc-app>` does see is on the entity's path, and never cause one to be dispatched themselves. Set `picking="always"` on `<pc-app>` to pick for every pointer event, or `picking="none"` to switch the events off. React's `onClick` is an exception. React also sets the `onclick` property of the element that has it, so an `onClick` on an entity element or on `<pc-scene>` is seen, and clicks work under `auto`. Switching to `always` for it would only add a pick on every pointer move.
+* **Listeners added with `addEventListener()` before the library has defined the element.** A classic `<script>` that runs ahead of the library's module does this, and so does code that configures a [template clone](https://developer.playcanvas.com/user-manual/web-components/templates.md#creating-an-instance) before appending it. Add such listeners from a module that imports the library, and add a clone's only after appending it. An inline attribute or handler property is seen whenever it was set.
+
+The canvas keeps receiving its own native pointer events throughout, so a listener on `<pc-app>` or above receives both kinds. `event.target` tells them apart: it is the `<canvas>` for a native event, and an entity element for a dispatched one. A dispatched event arrives shortly after the native event that caused it, once its pick has been read back from the GPU.
 
 ## Example
 
@@ -2255,7 +2290,7 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
 ```html live-example
 <pc-app>
     <!-- Script asset: type inferred from the .mjs extension -->
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <!-- Container asset: type inferred from the .glb extension -->
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-scene>
@@ -2508,13 +2543,13 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
 
-The host is registered for picking, so `<pc-model>` also fires the six pointer events a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) does — `click`, `pointerdown`, `pointerenter`, `pointerleave`, `pointermove` and `pointerup` — with the same inline handler attributes. A whole model becomes clickable without a wrapper or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md):
+The host is registered for picking, so `<pc-model>` also fires the nine [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) does — `click`, `pointercancel`, `pointerdown`, `pointerenter`, `pointerleave`, `pointermove`, `pointerout`, `pointerover` and `pointerup` — with the same inline handler attributes. A whole model becomes clickable without a wrapper or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md):
 
 ```html
 <pc-model asset="t-rex" onclick="this.setAttribute('scale', '2 2 2')"></pc-model>
 ```
 
-Pointer events resolve to the nearest *listening* element, so a model that listens for nothing does not swallow events from a listening ancestor.
+A hit anywhere on the model targets the `<pc-model>` itself, unless a `<pc-node>` fronts the part that was hit, in which case it targets that node. Either way the event bubbles on up the element tree, so a listener on an ancestor receives the model's events whether or not the model listens itself.
 
 Readiness means the current `asset` selection has settled, which covers three outcomes: content loaded and parented beneath the host, a load that failed, or no `asset` assigned at all. The host `entity` is non-null throughout — including after a failure — so it is not the way to tell success from failure. Use the `error` event, or check `contentEntity`:
 
@@ -2554,7 +2589,7 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](https://developer.p
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -2750,16 +2785,21 @@ A `<pc-material>` added to the document *after* a mapping referenced it is not p
 
 ## Events
 
-`<pc-node>` dispatches the same pointer events as [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), fired when the pointer intersects the bound node's geometry. Binding a node is what makes it a pick target, so a `<pc-node>` is also how you make one part of a model interactive.
+`<pc-node>` dispatches the same [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) as [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), fired when the pointer is over the bound node's geometry. Binding a node is what makes it a pick target, so a `<pc-node>` is also how you make one part of a model interactive. A hit on a part that no `<pc-node>` fronts targets the [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) instead.
 
 | Event | Description |
 | --- | --- |
 | `click` | Fired when a primary pointer button is pressed and then released over the node. |
-| `pointerdown` | Fired when a pointer is pressed down on the node. |
-| `pointerenter` | Fired when a pointer enters the node. |
-| `pointerleave` | Fired when a pointer leaves the node. |
-| `pointermove` | Fired when a pointer is moved over the node. |
-| `pointerup` | Fired when a pointer is released from the node. |
+| `pointercancel` | Fired on the node a press began over when the browser cancels the press, for example because a touch became a scroll. No `click` follows. |
+| `pointerdown` | Fired when a pointer button is pressed over the node. |
+| `pointerenter` | Fired when the pointer moves onto the node or an entity below it, having been over none of them. Does not bubble. |
+| `pointerleave` | Fired when the pointer moves off the node and every entity below it. Does not bubble. |
+| `pointermove` | Fired when the pointer moves over the node. |
+| `pointerout` | Fired when the pointer moves off the node. `relatedTarget` is the element it moved onto. |
+| `pointerover` | Fired when the pointer moves onto the node. `relatedTarget` is the element it came from. |
+| `pointerup` | Fired when a pointer button is released over the node. |
+
+Like every DOM event, these propagate through the element tree, not through the model's node hierarchy. A hit on geometry below the bound node targets this `<pc-node>` unless a nearer `<pc-node>` fronts it. In that case the event reaches this one only if the nearer `<pc-node>` is nested inside it in the markup; if the two are siblings, it bubbles straight to the `<pc-model>`.
 
 The inline `onclick` and `onpointer*` attributes work here exactly as they do on [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), including [how a click resolves](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#clicks) when the press and release land on different geometry.
 
@@ -2769,7 +2809,7 @@ This GLB instantiates two nodes — `play` (the orange shell, its logo cut out o
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
@@ -3167,7 +3207,7 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
@@ -3255,7 +3295,7 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">
@@ -4040,7 +4080,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -4212,7 +4252,7 @@ The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak`
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>

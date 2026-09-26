@@ -49,13 +49,13 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 
 Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
 
-The host is registered for picking, so `<pc-model>` also fires the six pointer events a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) does — `click`, `pointerdown`, `pointerenter`, `pointerleave`, `pointermove` and `pointerup` — with the same inline handler attributes. A whole model becomes clickable without a wrapper or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md):
+The host is registered for picking, so `<pc-model>` also fires the nine [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) does — `click`, `pointercancel`, `pointerdown`, `pointerenter`, `pointerleave`, `pointermove`, `pointerout`, `pointerover` and `pointerup` — with the same inline handler attributes. A whole model becomes clickable without a wrapper or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md):
 
 ```html
 <pc-model asset="t-rex" onclick="this.setAttribute('scale', '2 2 2')"></pc-model>
 ```
 
-Pointer events resolve to the nearest *listening* element, so a model that listens for nothing does not swallow events from a listening ancestor.
+A hit anywhere on the model targets the `<pc-model>` itself, unless a `<pc-node>` fronts the part that was hit, in which case it targets that node. Either way the event bubbles on up the element tree, so a listener on an ancestor receives the model's events whether or not the model listens itself.
 
 Readiness means the current `asset` selection has settled, which covers three outcomes: content loaded and parented beneath the host, a load that failed, or no `asset` assigned at all. The host `entity` is non-null throughout — including after a failure — so it is not the way to tell success from failure. Use the `error` event, or check `contentEntity`:
 
@@ -95,7 +95,7 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](https://developer.p
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
