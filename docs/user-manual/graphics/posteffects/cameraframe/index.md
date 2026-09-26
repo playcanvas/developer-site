@@ -9,7 +9,7 @@ PlayCanvas offers modern post-processing workflows that provide visually advance
 
 The `CameraFrame` enables advanced rendering techniques including:
 
-- **Bloom** - HDR physically based bloom effect that simulates the natural glow of bright light sources
+- **Bloom** - HDR physically based bloom effect that simulates the natural glow of bright light sources, with an optional brightness threshold to restrict the glow to the brightest parts of the scene
 - **[Volumetric Fog](volumetric-fog.md)** - Height fog and light shafts lit by directional, omni, and spot lights
 - **SSAO (Screen Space Ambient Occlusion)** - Enhances depth perception by simulating ambient light occlusion
 - **Depth of Field (DoF)** - Mimics camera focus effects, blurring objects outside the focal plane
