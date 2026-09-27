@@ -245,7 +245,11 @@ const previewTexture = new pc.Texture(app.graphicsDevice, {
     format: pc.PIXELFORMAT_SRGBA8,
     mipmaps: false
 });
-const renderTarget = new pc.RenderTarget({ colorBuffer: previewTexture, depth: true });
+const renderTarget = new pc.RenderTarget({
+    colorBuffer: previewTexture,
+    depth: true,
+    origin: pc.RENDERTARGET_ORIGIN_TOP
+});
 
 // プレビューカメラが映すもののためのレイヤー。メインカメラはこのレイヤーをレンダリングしない
 const previewLayer = new pc.Layer({ name: 'Preview' });
@@ -267,7 +271,7 @@ model.render.layers = [previewLayer.id];
 portrait.element.texture = previewTexture;
 ```
 
-カメラの`priority`を-1にすると、優先度が0のメインカメラより先にレンダリングされるため、インターフェースを描画する時点でテクスチャの準備ができています。クリアカラーが透明なので、イメージの背景は透明のままです。テクスチャはsRGB形式の`pc.PIXELFORMAT_SRGBA8`のままにしてください。`pc.PIXELFORMAT_RGBA8`にすると、イメージが明るくなりすぎます。
+カメラの`priority`を-1にすると、優先度が0のメインカメラより先にレンダリングされるため、インターフェースを描画する時点でテクスチャの準備ができています。クリアカラーが透明なので、イメージの背景は透明のままです。テクスチャはsRGB形式の`pc.PIXELFORMAT_SRGBA8`のままにしてください。`pc.PIXELFORMAT_RGBA8`にすると、イメージが明るくなりすぎます。`origin`を`pc.RENDERTARGET_ORIGIN_TOP`にすると、画像テクスチャと同じく一番上の行から順に格納されるので、WebGL2でもWebGPUでも正しい向きになります。指定しないと、WebGL2では上下が逆になります。`origin`オプションはエンジン2.22から使えます。
 
 ## カスタムマテリアル {#custom-materials}
 
