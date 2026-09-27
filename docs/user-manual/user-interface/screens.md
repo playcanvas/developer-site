@@ -177,6 +177,8 @@ fitReference();
 app.graphicsDevice.on('resizecanvas', fitReference);
 ```
 
+<EngineExample id="user-interface/screen-scaling" title="Screen Scaling" />
+
 ## Pixel Ratio {#pixel-ratio}
 
 On a high-density display, the canvas's drawing buffer can have more pixels than the canvas has CSS pixels on the page. That makes rendering sharper, and costs more to draw. The graphics device's `maxPixelRatio` caps the ratio between the two, and each surface sets it differently:

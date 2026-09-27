@@ -10,6 +10,8 @@ Buttonコンポーネントは、エレメントをボタンにします。エ�
 
 ![デフォルト、ホバー、押下、非アクティブの4つの状態それぞれで表示した、1つのオレンジ色のボタン。ホバー時は明るく、押下時は暗く、非アクティブ時は濃いグレーになります](/img/user-manual/user-interface/buttons/button-states.webp)
 
+<EngineExample id="user-interface/buttons" title="Buttons" />
+
 ## ボタンの作成 {#creating-a-button}
 
 <Tabs groupId="workflow" defaultValue="engine">

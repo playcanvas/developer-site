@@ -169,6 +169,8 @@ background.element.left = 40;
 background.element.margin = new pc.Vec4(10, 10, 10, 10);
 ```
 
+<EngineExample id="user-interface/anchors" title="Anchors" />
+
 ## 幅と高さ {#width-and-height}
 
 エレメントには2つのサイズがあります。

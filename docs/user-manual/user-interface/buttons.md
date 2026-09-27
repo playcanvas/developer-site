@@ -10,6 +10,8 @@ A button component turns an element into a button. It reacts to input on its ent
 
 ![One orange button in each of its four states: default, hovered, pressed and inactive. The button turns lighter when hovered, darker when pressed, and dark grey when inactive](/img/user-manual/user-interface/buttons/button-states.webp)
 
+<EngineExample id="user-interface/buttons" title="Buttons" />
+
 ## Creating a Button {#creating-a-button}
 
 <Tabs groupId="workflow" defaultValue="engine">

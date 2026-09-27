@@ -217,6 +217,8 @@ Leave input off on the HUD's own group element. Bubbling delivers its children's
 
 The Editor, React and Web Components create the `ElementInput` first. In an Engine application, create it before the mouse and touch devices, as [Setting Up](/user-manual/user-interface/user-interface-basics/#setting-up) does.
 
+<EngineExample id="user-interface/input-events" title="Input Events" />
+
 ## Which Element Gets the Event {#hit-testing}
 
 When elements overlap, only one receives an event. The `ElementInput` tests elements in this order and stops at the first hit:

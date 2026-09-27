@@ -113,6 +113,8 @@ icon.element.rect = new pc.Vec4(0, 0.5, 0.5, 0.5);
 
 多くの画像を1つのテクスチャにまとめる場合は、テクスチャアトラスとスプライトを使うほうが管理しやすくなります。
 
+<EngineExample id="user-interface/image-fit" title="Image Fit" />
+
 ## スプライト {#sprites}
 
 スプライトは、[テクスチャアトラス](/user-manual/2D/sprite-editor/)（名前付きの矩形を定義したテクスチャ）のフレームの集まりです。イメージエレメントにスプライトアセットを割り当てると最初のフレームが描画され、`spriteFrame`を設定すると別のフレームを選べます。さらにスプライトには、どのサイズでもフレームのボーダーをくっきりと保つレンダーモードがあります。
@@ -272,6 +274,8 @@ portrait.element.texture = previewTexture;
 ```
 
 カメラの`priority`を-1にすると、優先度が0のメインカメラより先にレンダリングされるため、インターフェースを描画する時点でテクスチャの準備ができています。クリアカラーが透明なので、イメージの背景は透明のままです。テクスチャはsRGB形式の`pc.PIXELFORMAT_SRGBA8`のままにしてください。`pc.PIXELFORMAT_RGBA8`にすると、イメージが明るくなりすぎます。`origin`を`pc.RENDERTARGET_ORIGIN_TOP`にすると、画像テクスチャと同じく一番上の行から順に格納されるので、WebGL2でもWebGPUでも正しい向きになります。指定しないと、WebGL2では上下が逆になります。`origin`オプションはエンジン2.22から使えます。
+
+<EngineExample id="user-interface/render-to-image" title="Render to Image" />
 
 ## カスタムマテリアル {#custom-materials}
 

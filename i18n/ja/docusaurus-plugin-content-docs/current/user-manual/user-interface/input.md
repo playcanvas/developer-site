@@ -217,6 +217,8 @@ HUD自体のグループエレメントでは、入力をオフのままにし�
 
 エディター、React、Web Componentsは、`ElementInput`を最初に作成します。エンジンのアプリケーションでは、[セットアップ](/user-manual/user-interface/user-interface-basics/#setting-up)で示しているように、マウスとタッチのデバイスより前に作成してください。
 
+<EngineExample id="user-interface/input-events" title="Input Events" />
+
 ## どのエレメントがイベントを受け取るか {#hit-testing}
 
 エレメントが重なっているとき、イベントを受け取るのは1つだけです。`ElementInput`は次の順序でエレメントをテストし、最初にヒットした時点で止まります。
