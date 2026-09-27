@@ -225,7 +225,11 @@ const previewTexture = new pc.Texture(app.graphicsDevice, {
     format: pc.PIXELFORMAT_SRGBA8,
     mipmaps: false
 });
-const renderTarget = new pc.RenderTarget({ colorBuffer: previewTexture, depth: true });
+const renderTarget = new pc.RenderTarget({
+    colorBuffer: previewTexture,
+    depth: true,
+    origin: pc.RENDERTARGET_ORIGIN_TOP
+});
 
 // A layer for what the preview camera sees, which the main camera does not render
 const previewLayer = new pc.Layer({ name: 'Preview' });
@@ -247,7 +251,7 @@ model.render.layers = [previewLayer.id];
 portrait.element.texture = previewTexture;
 ```
 
-The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `pc.PIXELFORMAT_SRGBA8`: with `pc.PIXELFORMAT_RGBA8`, the image comes out too light.
+The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `pc.PIXELFORMAT_SRGBA8`: with `pc.PIXELFORMAT_RGBA8`, the image comes out too light. An `origin` of `pc.RENDERTARGET_ORIGIN_TOP` stores the image top row first, as image textures are, so that it is the right way up on both WebGL2 and WebGPU. Without it, the image is upside down on WebGL2. The `origin` option is available from engine 2.22.
 
 ## Custom Materials
 

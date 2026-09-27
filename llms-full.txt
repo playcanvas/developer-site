@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/llms.txt
 Total Documents: 514
-Generated: 2026-09-26
+Generated: 2026-09-27
 
 ================================================================================
 
@@ -45614,7 +45614,11 @@ const previewTexture = new pc.Texture(app.graphicsDevice, {
     format: pc.PIXELFORMAT_SRGBA8,
     mipmaps: false
 });
-const renderTarget = new pc.RenderTarget({ colorBuffer: previewTexture, depth: true });
+const renderTarget = new pc.RenderTarget({
+    colorBuffer: previewTexture,
+    depth: true,
+    origin: pc.RENDERTARGET_ORIGIN_TOP
+});
 
 // A layer for what the preview camera sees, which the main camera does not render
 const previewLayer = new pc.Layer({ name: 'Preview' });
@@ -45636,7 +45640,7 @@ model.render.layers = [previewLayer.id];
 portrait.element.texture = previewTexture;
 ```
 
-The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `pc.PIXELFORMAT_SRGBA8`: with `pc.PIXELFORMAT_RGBA8`, the image comes out too light.
+The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `pc.PIXELFORMAT_SRGBA8`: with `pc.PIXELFORMAT_RGBA8`, the image comes out too light. An `origin` of `pc.RENDERTARGET_ORIGIN_TOP` stores the image top row first, as image textures are, so that it is the right way up on both WebGL2 and WebGPU. Without it, the image is upside down on WebGL2. The `origin` option is available from engine 2.22.
 
 ## Custom Materials
 
@@ -47547,15 +47551,18 @@ A world-space screen is a child of the character entity, positioned over its hea
 // The label is on a screen-space screen, anchored to its bottom-left corner: anchor 0, 0, 0, 0
 const head = new pc.Vec3();
 const onCanvas = new pc.Vec3();
+const inView = new pc.Vec3();
 const overHead = new pc.Vec3(0, 2.2, 0);
 
 app.on('update', () => {
     head.add2(character.getPosition(), overHead);
-    // CSS pixels from the canvas's top-left corner, and the distance in front of the camera
+    // CSS pixels from the canvas's top-left corner
     camera.camera.worldToScreen(head, onCanvas);
 
-    // Hide the label when the character is behind the camera
-    label.enabled = onCanvas.z > 0;
+    // Hide the label when the character is behind the camera, which its depth in view space
+    // tells: a point in front of the camera has a negative z
+    camera.camera.viewMatrix.transformPoint(head, inView);
+    label.enabled = inView.z < 0;
 
     // One CSS pixel is canvas.width / canvas.clientWidth pixels of the drawing buffer, and one
     // screen unit is screen.scale of them. The screen's y axis points up, the canvas's down
