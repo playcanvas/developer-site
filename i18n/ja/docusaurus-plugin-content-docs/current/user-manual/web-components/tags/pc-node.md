@@ -90,16 +90,21 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 ## イベント {#events}
 
-`<pc-node>`は[`<pc-entity>`](../pc-entity)と同じポインターイベントをディスパッチします。ポインターがバインドされたノードのジオメトリと交差したときに発生します。ノードをバインドすることがそれをピック対象にするため、`<pc-node>`はモデルの一部をインタラクティブにする手段でもあります。
+`<pc-node>`は[`<pc-entity>`](../pc-entity)と同じ[ポインターイベント](../pc-entity#events)をディスパッチします。ポインターがバインドされたノードのジオメトリの上にあるときに発生します。ノードをバインドすることがそれをピック対象にするため、`<pc-node>`はモデルの一部をインタラクティブにする手段でもあります。どの`<pc-node>`も担っていない部分がヒットした場合は、代わりに[`<pc-model>`](../pc-model)がターゲットになります。
 
 | イベント | 説明 |
 | --- | --- |
 | `click` | ノード上でプライマリボタンが押され、そして離されたときに発生します。 |
-| `pointerdown` | ポインターがノード上で押下されたときに発生します。 |
-| `pointerenter` | ポインターがノードに入ったときに発生します。 |
-| `pointerleave` | ポインターがノードを離れたときに発生します。 |
+| `pointercancel` | ブラウザが押下を取り消したときに、その押下が始まったノードで発生します。たとえばタッチがスクロールになった場合です。その後に`click`は発生しません。 |
+| `pointerdown` | ノード上でポインターのボタンが押されたときに発生します。 |
+| `pointerenter` | ポインターが、ノードとその下のエンティティのどれの上にもない状態から、それらのいずれかの上に移動したときに発生します。バブリングしません。 |
+| `pointerleave` | ポインターが、ノードとその下のすべてのエンティティの上から離れたときに発生します。バブリングしません。 |
 | `pointermove` | ポインターがノード上で移動したときに発生します。 |
-| `pointerup` | ポインターがノードから解放されたときに発生します。 |
+| `pointerout` | ポインターがノードの上から離れたときに発生します。`relatedTarget`は移動先の要素です。 |
+| `pointerover` | ポインターがノードの上に移動したときに発生します。`relatedTarget`は移動元の要素です。 |
+| `pointerup` | ノード上でポインターのボタンが離されたときに発生します。 |
+
+すべてのDOMイベントと同じく、これらはモデルのノード階層ではなく要素ツリーを伝わります。バインドされたノードより下のジオメトリがヒットした場合、より近い`<pc-node>`がそこを担っていなければ、ターゲットはこの`<pc-node>`です。より近い`<pc-node>`が担っている場合、イベントがこの`<pc-node>`に届くのは、マークアップ上でその`<pc-node>`がこの`<pc-node>`の中にネストされているときだけです。2つが兄弟であれば、イベントは`<pc-model>`へ直接バブリングします。
 
 インラインの`onclick`・`onpointer*`属性は、[`<pc-entity>`](../pc-entity)とまったく同じように動作します。押下と解放が別のジオメトリ上で起きた場合に[クリックがどう解決されるか](../pc-entity#clicks)も同じです。
 
@@ -109,7 +114,7 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.3/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>

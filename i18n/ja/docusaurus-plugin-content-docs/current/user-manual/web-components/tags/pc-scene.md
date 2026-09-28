@@ -33,6 +33,18 @@ description: "pc-scene要素のリファレンス: pc-app内のシーンコン�
 
 </div>
 
+## イベント {#events}
+
+`<pc-scene>`はすべてのエンティティ要素の祖先なので、エンティティでディスパッチされた[ポインターイベント](../pc-entity#events)はここを通ってバブリングします。ここに置いたリスナーは、シーン全体に対する委譲リスナーになります。ヒットしたエンティティは`event.target`で調べます:
+
+```javascript
+document.querySelector('pc-scene').addEventListener('click', (event) => {
+    console.log(`Clicked ${event.target.getAttribute('name')}`);
+});
+```
+
+ここに置いたリスナーは[イベントがディスパッチされるタイミング](../pc-entity#when-events-are-dispatched)の判定に含まれるため、エンティティ自体にリスナーを置く必要はありません。押下と解放が異なる2つのトップレベルのエンティティ上で起きたクリックは、両者の最も近い共通の祖先である`<pc-scene>`自体がターゲットになります。シーンは、ポインターがそのエンティティ全体の上に移動したときと離れたときに、自分用の`pointerenter`と`pointerleave`も受け取ります。そのため、たとえばシーン内の何かがポインターの下にある間はカーソルを変える、といった処理を1組のリスナーで実現できます。
+
 ## 例 {#example}
 
 リニアフォグの中へ消えていくボックスです。`fog-color` を変えたり (カメラの `clear-color` と揃えると定番の深度ヘイズ表現になります)、`fog` を `"exp"` にして `fog-density` を `0.15` にしたりしてみましょう:

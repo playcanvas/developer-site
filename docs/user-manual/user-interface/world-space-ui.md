@@ -137,15 +137,18 @@ A world-space screen is a child of the character entity, positioned over its hea
 // The label is on a screen-space screen, anchored to its bottom-left corner: anchor 0, 0, 0, 0
 const head = new pc.Vec3();
 const onCanvas = new pc.Vec3();
+const inView = new pc.Vec3();
 const overHead = new pc.Vec3(0, 2.2, 0);
 
 app.on('update', () => {
     head.add2(character.getPosition(), overHead);
-    // CSS pixels from the canvas's top-left corner, and the distance in front of the camera
+    // CSS pixels from the canvas's top-left corner
     camera.camera.worldToScreen(head, onCanvas);
 
-    // Hide the label when the character is behind the camera
-    label.enabled = onCanvas.z > 0;
+    // Hide the label when the character is behind the camera, which its depth in view space
+    // tells: a point in front of the camera has a negative z
+    camera.camera.viewMatrix.transformPoint(head, inView);
+    label.enabled = inView.z < 0;
 
     // One CSS pixel is canvas.width / canvas.clientWidth pixels of the drawing buffer, and one
     // screen unit is screen.scale of them. The screen's y axis points up, the canvas's down

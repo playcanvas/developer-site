@@ -137,15 +137,18 @@ app.on('update', () => {
 // ラベルはスクリーン空間のスクリーン上にあり、その左下隅にアンカーされている（アンカーは0, 0, 0, 0）
 const head = new pc.Vec3();
 const onCanvas = new pc.Vec3();
+const inView = new pc.Vec3();
 const overHead = new pc.Vec3(0, 2.2, 0);
 
 app.on('update', () => {
     head.add2(character.getPosition(), overHead);
-    // キャンバスの左上隅からのCSSピクセル位置と、カメラの前方への距離
+    // キャンバスの左上隅からのCSSピクセル位置
     camera.camera.worldToScreen(head, onCanvas);
 
-    // キャラクターがカメラの後ろにあるときはラベルを隠す
-    label.enabled = onCanvas.z > 0;
+    // キャラクターがカメラの後ろにあるときはラベルを隠す。それはビュー空間での奥行きでわかり、
+    // カメラの前にある点のzは負になる
+    camera.camera.viewMatrix.transformPoint(head, inView);
+    label.enabled = inView.z < 0;
 
     // 1 CSSピクセルは描画バッファのcanvas.width / canvas.clientWidthピクセルで、1スクリーン単位は
     // 描画バッファのscreen.scaleピクセル。スクリーンのy軸は上向き、キャンバスのy軸は下向き

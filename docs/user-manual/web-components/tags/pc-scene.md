@@ -33,6 +33,18 @@ The `<pc-scene>` tag is used to define the scene.
 
 </div>
 
+## Events
+
+`<pc-scene>` is the ancestor of every entity element, so the [pointer events](../pc-entity#events) dispatched on entities bubble through it, and a listener here is a delegated listener for the whole scene. Read `event.target` to find the entity that was hit:
+
+```javascript
+document.querySelector('pc-scene').addEventListener('click', (event) => {
+    console.log(`Clicked ${event.target.getAttribute('name')}`);
+});
+```
+
+A listener here counts towards [when events are dispatched](../pc-entity#when-events-are-dispatched), so none is needed on the entities themselves. A click whose press and release landed on two different top-level entities targets `<pc-scene>` itself, their nearest common ancestor. The scene also receives its own `pointerenter` and `pointerleave` as the pointer moves onto and off its entities as a whole, so one pair of listeners can, for example, change the cursor whenever anything in the scene is under the pointer.
+
 ## Example
 
 Boxes fading into linear fog. Try a different `fog-color` (match the camera's `clear-color` for the classic depth-haze look), or switch `fog` to `"exp"` with a `fog-density` of `0.15`:
