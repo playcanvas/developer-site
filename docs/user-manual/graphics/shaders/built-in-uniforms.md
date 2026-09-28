@@ -6,7 +6,7 @@ description: Engine-provided camera matrices, screen and viewport dimensions, an
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-PlayCanvas supplies the following numerical uniforms when rendering meshes in forward passes. Use them in `ShaderMaterial` shaders and custom material chunks without calling `Material.setParameter()` for these names.
+PlayCanvas supplies the following numerical uniforms when rendering meshes in forward passes. Use them in `ShaderMaterial` shaders and custom material chunks without calling `Material.setParameter()` for these names. To set the values of your own uniforms, see [Shader Parameters](/user-manual/graphics/shaders/shader-parameters).
 
 Camera values follow the camera or XR view being rendered. The list describes forward rendering; do not assume the same inputs are populated in shadow, picking, compute, or standalone post-processing passes.
 

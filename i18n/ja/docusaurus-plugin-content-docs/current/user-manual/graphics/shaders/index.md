@@ -45,7 +45,7 @@ GLSLシェーダーを記述した場合、WebGL2プラットフォームで直�
 
 :::
 
-フォワードレンダリングでエンジンが提供するカメラ行列、画面とビューポートのサイズ、その他の値については、[組み込みシェーダーユニフォーム](/user-manual/graphics/shaders/built-in-uniforms)を参照してください。
+フォワードレンダリングでエンジンが提供するカメラ行列、画面とビューポートのサイズ、その他の値については、[組み込みシェーダーユニフォーム](/user-manual/graphics/shaders/built-in-uniforms)を参照してください。独自のユニフォームの値をマテリアル、メッシュインスタンス、またはグローバルに設定する方法については、[シェーダーパラメーター](/user-manual/graphics/shaders/shader-parameters)を参照してください。
 
 ## プリプロセッサー {#preprocessor}
 

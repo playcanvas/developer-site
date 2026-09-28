@@ -830,6 +830,7 @@ const sidebars = {
             'user-manual/graphics/shaders/wgsl-capabilities',
             'user-manual/graphics/shaders/wgsl-vertex-fragment-shaders',
             'user-manual/graphics/shaders/built-in-uniforms',
+            'user-manual/graphics/shaders/shader-parameters',
             'user-manual/graphics/shaders/compute-shaders',
             'user-manual/graphics/shaders/compute-shaders-advanced',
             'user-manual/graphics/shaders/migrations',
