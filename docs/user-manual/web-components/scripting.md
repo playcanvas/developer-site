@@ -45,6 +45,8 @@ The `name` attribute of `<pc-script-instance>` must match the value of the `scri
 
 :::
 
+The script does not have to be registered first: a `<pc-script-instance>` waits for its class, whether it comes from a `<pc-asset>` or from `registerScript()` in your own code, and creates its instance as soon as it arrives. If the class has still not arrived once no script asset is left loading, the element logs a console warning — usually a sign of a missing `<pc-asset>` or a `name` that does not match.
+
 ## Passing Data to Scripts with Attributes
 
 Our rotate script is currently hardcoded to rotate at 90 degrees per second. But what if we want to rotate at a different speed? And what if we want to rotate multiple entities at different speeds? This is where script attributes come in!

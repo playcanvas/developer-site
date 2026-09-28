@@ -8,7 +8,7 @@ The `<pc-script-instance>` tag is used to define a script.
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-script>`](../pc-script) component.
-* The script must have been loaded via the [`<pc-asset>`](../pc-asset) tag.
+* Its script class is registered by loading the script's module with a [`<pc-asset>`](../pc-asset) tag, or by calling `registerScript()` from your own code.
 
 :::
 
@@ -27,6 +27,8 @@ The `<pc-script-instance>` tag is used to define a script.
 In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. An `entity:` value is an entity `name` — write `entity:#id` to reference an element by `id`. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](../scripting.md) for full details.
 
 Declared values are the source of truth. When the host entity cycles — a [`<pc-node>`](../pc-node) rebinding after its model reloads, for instance — a surviving script instance has its declared state re-asserted, which deliberately snaps back any runtime mutation of a declared property. Keep state you change at runtime in properties the markup does not declare.
+
+The script class does not have to be registered before the element is added. An element whose class is not registered yet waits for it, and once the class arrives the instance is created as usual, with every declared attribute applied before `initialize()` runs. If the class is still missing once no script asset is left loading, the console warns that the element is waiting and asks whether its `<pc-asset>` is missing — the usual causes are a forgotten `<pc-asset>` and a `name` that does not match the script's `scriptName`. The element keeps waiting either way, so a class registered later still gets its instance.
 
 ## Events
 

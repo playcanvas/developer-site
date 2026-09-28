@@ -142,4 +142,4 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 * [`<pc-sky>`](../pc-sky) — 直接光が届かない部分を埋める画像ベースのライティング
 * [`<pc-render>`](../pc-render) — ライトが当たるものの`cast-shadows`と`receive-shadows`
 
-サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html)、[Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html)
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html)、[Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html)、[Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html)

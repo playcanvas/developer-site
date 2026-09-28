@@ -82,4 +82,4 @@ description: "pc-sound-slot要素のリファレンス: 位置オーディオま
 * [`<pc-asset>`](../pc-asset) — スロットが再生するオーディオアセット
 * [`<pc-audio-listener>`](../pc-audio-listener) — 位置再生にはリスナーが必要です
 
-サンプル: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html)、[Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)
+サンプル: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html)、[Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)、[Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html)

@@ -70,6 +70,15 @@ page rule — however plain — overrides them.)
 
 :::
 
+The buffer follows the display as well as the element. Moving the window to a screen of another
+pixel density, or zooming the page, changes the device pixel ratio without necessarily resizing the
+element, so the application re-evaluates its pixel ratio and resizes the buffer to match. The ratio
+in effect — the smaller of `max-pixel-ratio` and the display's own — is what
+`app.graphicsDevice.maxPixelRatio` holds, while the element's `maxPixelRatio` property reports the
+cap. Code that manages render quality can assign `app.graphicsDevice.maxPixelRatio` itself: a
+display change then keeps that ratio and only resizes the buffer, until `max-pixel-ratio` is set
+again and takes the device back.
+
 The one time the element's size does not drive the drawing buffer is while an XR session is
 presenting — the session owns the buffer for its duration.
 

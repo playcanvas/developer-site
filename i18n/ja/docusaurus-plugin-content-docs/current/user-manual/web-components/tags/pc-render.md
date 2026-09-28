@@ -1,6 +1,6 @@
 ---
 title: <pc-render>
-description: "pc-render要素のリファレンス: プリミティブ形状（ボックス、球、カプセル、コーン、シリンダー、プレーン）をマテリアルとシャドウ設定でレンダリングします。"
+description: "pc-render要素のリファレンス: プリミティブ形状（ボックス、球、カプセル、コーン、シリンダー、プレーン、トーラス）をマテリアルとシャドウ設定でレンダリングします。"
 ---
 
 `<pc-render>`タグは、3Dプリミティブをレンダリングするレンダリングコンポーネントを定義するために使用されます。
@@ -22,7 +22,7 @@ description: "pc-render要素のリファレンス: プリミティブ形状（�
 | `material` | [Material ID](../attributes.md#asset-and-material-ids) | - | プリミティブのレンダリングに使用する [`<pc-material>`](../pc-material) の `id`。省略した場合はデフォルトのマテリアルが使用されます |
 | `receive-shadows` | Boolean | `"true"` | コンポーネントが影を受け取るかどうか |
 | `shadow-cascade-mask` | String | `"0 1 2 3"` | コンポーネントがディレクショナルライトのどの[シャドウカスケード](../pc-light#shadow-cascades)に影を落とすか。0（カメラに最も近い）から3までのカスケード番号をスペース区切りで指定します。`"0 1"`は近い2つのカスケードにのみ影を落とし、空の値はどのカスケードにも落としません。`cast-shadows`が必要です |
-| `type` | Enum | `"box"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
+| `type` | Enum | `"box"` | レンダリングするプリミティブの形状: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` \| `"torus"` |
 
 </div>
 
@@ -34,31 +34,34 @@ glTF/GLBファイルから3Dモデルをレンダリングするには、代わ�
 
 ## 例 {#example}
 
-6種類のプリミティブ形状すべてです。任意の `type` を変更してみましょう。[`<pc-material>`](../pc-material) を定義すれば `material` も追加できます:
+7種類のプリミティブ形状すべてです。任意の `type` を変更してみましょう。[`<pc-material>`](../pc-material) を定義すれば `material` も追加できます:
 
 ```html live-example
 <pc-app>
     <pc-scene>
-        <pc-entity name="camera" position="0 1.5 6" rotation="-10 0 0">
+        <pc-entity name="camera" position="0 1.5 7" rotation="-10 0 0">
             <pc-camera clear-color="#2a2d36"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" intensity="1.5"></pc-light>
         </pc-entity>
-        <pc-entity name="box" position="-2.5 0.5 0">
+        <pc-entity name="box" position="-3.5 0.5 0">
             <pc-render type="box"></pc-render>
         </pc-entity>
-        <pc-entity name="sphere" position="-1 0.5 0">
+        <pc-entity name="sphere" position="-2.1 0.5 0">
             <pc-render type="sphere"></pc-render>
         </pc-entity>
-        <pc-entity name="capsule" position="0.25 1 0">
+        <pc-entity name="capsule" position="-0.7 1 0">
             <pc-render type="capsule"></pc-render>
         </pc-entity>
-        <pc-entity name="cone" position="1.5 0.5 0">
+        <pc-entity name="cone" position="0.7 0.5 0">
             <pc-render type="cone"></pc-render>
         </pc-entity>
-        <pc-entity name="cylinder" position="2.75 0.5 0">
+        <pc-entity name="cylinder" position="2.1 0.5 0">
             <pc-render type="cylinder"></pc-render>
+        </pc-entity>
+        <pc-entity name="torus" position="3.5 0.5 0" rotation="90 0 0">
+            <pc-render type="torus"></pc-render>
         </pc-entity>
         <pc-entity name="ground" scale="10 10 10">
             <pc-render type="plane"></pc-render>

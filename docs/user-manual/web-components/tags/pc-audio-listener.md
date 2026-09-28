@@ -86,4 +86,4 @@ The `component` property is the engine [AudioListenerComponent](https://api.play
 * [`<pc-sound-slot>`](../pc-sound-slot) — the clips those sources play
 * [`<pc-camera>`](../pc-camera) — the listener usually rides on the camera entity
 
-Examples: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html).
+Examples: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
