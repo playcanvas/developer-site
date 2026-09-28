@@ -35,7 +35,7 @@ A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](../pc
 | Attribute | On | What it controls |
 | --- | --- | --- |
 | `gsplat-splat-budget` | [`<pc-scene>`](../pc-scene) | The total number of splats to render across the scene. Defaults to 1,000,000; a budget larger than the scene resolves every node at its finest level |
-| `gsplat-lod-mode` | [`<pc-scene>`](../pc-scene) | `"error"` spends the budget where it removes the most approximation error; `"distance"` ignores the error metadata and steps detail down in concentric bands around the camera, for captures whose error tables are unreliable |
+| `gsplat-lod-mode` | [`<pc-scene>`](../pc-scene) | `"distance"`, the default, orders detail by camera distance alone, stepping it down in concentric bands around the camera, and uses less memory. `"error"` spends the same budget where it removes the most approximation error, which lifts sparse regions such as sky and distant background that `"distance"` leaves coarse, but keeps noticeably more of the streamed data in memory |
 | `lod-falloff` | `<pc-gsplat>` | How steeply *this* splat trades far-field detail for near-field detail within its share of the budget. 1 is neutral; higher values pull detail towards the camera |
 | `lod-range-min`, `lod-range-max` | `<pc-gsplat>` | Hard clamps on the LOD index this splat may use, whatever the budget decides — raise the minimum to avoid ever downloading the largest files |
 
@@ -57,7 +57,7 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">

@@ -86,4 +86,4 @@ description: "pc-audio-listener要素のリファレンス: 位置サウンド�
 * [`<pc-sound-slot>`](../pc-sound-slot) — それらの音源が再生するクリップ
 * [`<pc-camera>`](../pc-camera) — リスナーは通常カメラのエンティティに載せます
 
-サンプル: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)
+サンプル: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)、[Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html)

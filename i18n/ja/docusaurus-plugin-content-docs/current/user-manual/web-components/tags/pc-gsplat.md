@@ -35,7 +35,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 | 属性 | 場所 | 制御する内容 |
 | --- | --- | --- |
 | `gsplat-splat-budget` | [`<pc-scene>`](../pc-scene) | シーン全体で描画するスプラットの総数。デフォルトは1,000,000。シーンより大きい予算を与えると、すべてのノードが最も細かいレベルで解決されます |
-| `gsplat-lod-mode` | [`<pc-scene>`](../pc-scene) | `"error"`は近似誤差を最も減らせる場所に予算を使います。`"distance"`は誤差メタデータを無視し、カメラを中心とした同心円状の帯でディテールを段階的に下げます。誤差テーブルが信頼できないキャプチャ向けです |
+| `gsplat-lod-mode` | [`<pc-scene>`](../pc-scene) | デフォルトの`"distance"`は、カメラからの距離だけでディテールの順序を決め、カメラを中心とした同心円状の帯で段階的に下げます。メモリ使用量も少なく済みます。`"error"`は同じ予算を近似誤差を最も減らせる場所に使うため、`"distance"`では粗いままになる空や遠景などの疎な領域の品質が上がりますが、ストリーミングされたデータを明らかに多くメモリに保持します |
 | `lod-falloff` | `<pc-gsplat>` | *この*スプラットが自分の予算の中で、遠方のディテールを近くのディテールとどれだけ急にトレードするか。1が中立で、大きい値ほどディテールをカメラ側へ引き寄せます |
 | `lod-range-min`・`lod-range-max` | `<pc-gsplat>` | 予算の判断にかかわらず、このスプラットが使えるLODインデックスの上下限。最小値を上げれば、最大のファイルを一切ダウンロードしないようにできます |
 
@@ -57,7 +57,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">

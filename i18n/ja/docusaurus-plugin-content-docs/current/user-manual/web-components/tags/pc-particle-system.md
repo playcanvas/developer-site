@@ -92,4 +92,4 @@ description: "pc-particle-system要素のリファレンス: エミッター、�
 * [`<pc-asset>`](../pc-asset) — JSON設定と、それが参照するテクスチャ
 * [`<pc-entity>`](../pc-entity) — エミッターの位置と向きを決めます
 
-サンプル: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html)
+サンプル: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html)、[Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html)

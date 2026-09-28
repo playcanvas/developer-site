@@ -41,7 +41,7 @@ description: "pc-scroll-view要素のリファレンス: コンテンツ、ス�
 ストライプのコンテンツを、マウスホイール、ドラッグ、またはスクロールバーでスクロールしてみましょう。ビューポートの `mask` がコンテンツをクリップします。`scroll-mode="clamp"` (バウンスなし) や、より大きなコンテンツの `height` も試してみましょう:
 
 ```html live-example
-<pc-app max-pixel-ratio="1">
+<pc-app>
     <pc-scene>
         <pc-entity name="camera">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
