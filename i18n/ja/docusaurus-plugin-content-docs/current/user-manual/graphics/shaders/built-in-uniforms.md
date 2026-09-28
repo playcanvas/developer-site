@@ -6,7 +6,7 @@ description: カスタムフォワードシェーダーで使用できる、エ�
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-PlayCanvas は、フォワードパスでメッシュを描画するときに、以下の数値ユニフォームを提供します。これらの名前に対して `Material.setParameter()` を呼び出すことなく、`ShaderMaterial` のシェーダーやカスタムマテリアルチャンクで使用できます。独自のユニフォームの値を設定するには、[シェーダーパラメーター](/user-manual/graphics/shaders/shader-parameters)を参照してください。
+PlayCanvas は、フォワードパスでメッシュを描画するときに、以下の数値ユニフォームを提供します。これらの名前に対して `Material.setParameter()` を呼び出すことなく、`ShaderMaterial` のシェーダーやカスタムマテリアルチャンクで使用できます。ユニフォームの値を自分で設定するには、[シェーダーパラメーター](/user-manual/graphics/shaders/shader-parameters)を参照してください。
 
 カメラの値は、現在描画しているカメラまたは XR ビューに対応します。この一覧はフォワードレンダリングを対象としています。シャドウ、ピッキング、コンピュート、独立したポストプロセスのパスでも同じ入力が設定されるとは限りません。
 

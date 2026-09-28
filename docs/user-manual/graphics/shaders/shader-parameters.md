@@ -1,18 +1,18 @@
 ---
 title: Shader Parameters
-description: Set the values of your own shader uniforms on a material, on a mesh instance, or globally on the graphics device.
+description: Set the values of shader uniforms on a material, on a mesh instance, or globally on the graphics device.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Custom shaders often read uniforms of their own, such as a tint color or an animation time. Their values can be set in three places:
+Shaders read their inputs from uniforms. The engine sets many of them itself, such as the camera matrices described in [Built-in Shader Uniforms](/user-manual/graphics/shaders/built-in-uniforms), and a `StandardMaterial` sets the uniforms of its own properties. The application can set the values of uniforms too, in three places:
 
 - On a **material**, for all mesh instances that render with it.
 - On a **mesh instance**, for the draws of that mesh instance only.
 - **Globally**, on the scope of the graphics device, for every draw that does not set its own value.
 
-For each draw, a value set on the mesh instance takes precedence over one set on its material, which takes precedence over a global value. The uniforms the engine supplies itself, such as the camera matrices, are described in [Built-in Shader Uniforms](/user-manual/graphics/shaders/built-in-uniforms).
+For each draw, a value set on the mesh instance takes precedence over one set on its material, which takes precedence over a global value.
 
 The values can be numbers, arrays of numbers for vectors and matrices, and textures. To change the contents of an array, set the array again: a change made to an array in place is not guaranteed to be picked up.
 

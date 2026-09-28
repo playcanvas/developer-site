@@ -51,7 +51,7 @@ If you write a GLSL shader, it is directly supported by the WebGL2 platform. How
 
 :::
 
-See [Built-in Shader Uniforms](/user-manual/graphics/shaders/built-in-uniforms) for the camera matrices, screen and viewport dimensions, and other values supplied by the engine during forward rendering, and [Shader Parameters](/user-manual/graphics/shaders/shader-parameters) for setting the values of your own uniforms on a material, on a mesh instance, or globally.
+See [Built-in Shader Uniforms](/user-manual/graphics/shaders/built-in-uniforms) for the camera matrices, screen and viewport dimensions, and other values supplied by the engine during forward rendering, and [Shader Parameters](/user-manual/graphics/shaders/shader-parameters) for setting the values of uniforms on a material, on a mesh instance, or globally.
 
 ## Preprocessor {#preprocessor}
 
