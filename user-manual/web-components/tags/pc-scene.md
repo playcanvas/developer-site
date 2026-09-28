@@ -14,11 +14,11 @@ The `<pc-scene>` tag is used to define the scene.
 | --- | --- | --- | --- |
 | `exposure` | Number | `"1"` | Overall brightness multiplier applied to the rendered image. Ignored while the scene uses physical light units |
 | `fog` | Enum | `"none"` | Fog type: `"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
-| `fog-color` | Color | `"1 1 1"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
+| `fog-color` | Color | `"0 0 0"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `fog-density` | Number | `"0"` | Fog density for exponential fog types |
 | `fog-end` | Number | `"1000"` | End distance for linear fog |
-| `fog-start` | Number | `"0"` | Start distance for linear fog |
-| `gsplat-lod-mode` | Enum | `"error"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md#level-of-detail) |
+| `fog-start` | Number | `"1"` | Start distance for linear fog |
+| `gsplat-lod-mode` | Enum | `"distance"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md#level-of-detail) |
 | `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less warns and keeps the default |
 | `gsplat-use-fog` | Boolean | `"true"` | Whether the scene's fog applies to Gaussian splats |
 | `gsplat-use-tonemap` | Boolean | `"true"` | Whether the camera's tone mapping and the scene's `exposure` apply to Gaussian splats. Set `"false"` to render splats with their stored colors, which suits captures that are already display-ready. Fog still applies |

@@ -85,4 +85,4 @@ The `component` property is the engine [ParticleSystemComponent](https://api.pla
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the JSON configuration and the textures it names
 * [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) — positions and orients the emitter
 
-Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html).
+Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).

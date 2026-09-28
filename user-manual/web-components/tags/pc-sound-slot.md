@@ -75,4 +75,4 @@ The attributes are mirrored as properties. The engine [SoundSlot](https://api.pl
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the audio asset a slot plays
 * [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) — positional playback needs a listener
 
-Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).
+Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).

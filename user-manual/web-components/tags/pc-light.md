@@ -135,4 +135,4 @@ The `component` property is the engine [LightComponent](https://api.playcanvas.c
 * [`<pc-sky>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md) — image-based lighting to fill in what direct lights miss
 * [`<pc-render>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render.md) — `cast-shadows` and `receive-shadows` on what the light hits
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html) and [Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html), [Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).

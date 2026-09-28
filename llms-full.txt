@@ -15818,7 +15818,7 @@ You can then import the Web Components as follows:
 
 :::note[Versioning]
 
-The snippets above use `@latest` for convenience. For production deployments, pin to a specific version to ensure deterministic builds (for example: `playcanvas@2.x.y` and `@playcanvas/web-components@x.y.z`). See the release notes for the latest stable versions: [PlayCanvas Engine releases](https://github.com/playcanvas/engine/releases) and [Web Components releases](https://github.com/playcanvas/web-components/releases).
+The snippets above use `@latest` for convenience. For production deployments, pin to a specific version to ensure deterministic builds (for example: `playcanvas@2.x.y` and `@playcanvas/web-components@x.y.z`). Choose a pair that works together: each release of `@playcanvas/web-components` supports a range of engine versions, declared as the `playcanvas` peer dependency in its `package.json`. See the release notes for the latest stable versions: [PlayCanvas Engine releases](https://github.com/playcanvas/engine/releases) and [Web Components releases](https://github.com/playcanvas/web-components/releases).
 
 :::
 
@@ -16649,6 +16649,8 @@ Then attach it to an entity using [`<pc-script>`](https://developer.playcanvas.c
 The `name` attribute of `<pc-script-instance>` must match the value of the `scriptName` property of the script.
 
 :::
+
+The script does not have to be registered first: a `<pc-script-instance>` waits for its class, whether it comes from a `<pc-asset>` or from `registerScript()` in your own code, and creates its instance as soon as it arrives. If the class has still not arrived once no script asset is left loading, the element logs a console warning — usually a sign of a missing `<pc-asset>` or a `name` that does not match.
 
 ## Passing Data to Scripts with Attributes
 
@@ -17593,7 +17595,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -17765,7 +17767,7 @@ The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak`
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -17912,6 +17914,15 @@ alone does **not** stretch the element. (The defaults are declared with
 page rule — however plain — overrides them.)
 
 :::
+
+The buffer follows the display as well as the element. Moving the window to a screen of another
+pixel density, or zooming the page, changes the device pixel ratio without necessarily resizing the
+element, so the application re-evaluates its pixel ratio and resizes the buffer to match. The ratio
+in effect — the smaller of `max-pixel-ratio` and the display's own — is what
+`app.graphicsDevice.maxPixelRatio` holds, while the element's `maxPixelRatio` property reports the
+cap. Code that manages render quality can assign `app.graphicsDevice.maxPixelRatio` itself: a
+display change then keeps that ratio and only resizes the buffer, until `max-pixel-ratio` is set
+again and takes the device back.
 
 The one time the element's size does not drive the drawing buffer is while an XR session is
 presenting — the session owns the buffer for its duration.
@@ -18099,7 +18110,7 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
 ```html live-example
 <pc-app>
     <!-- Script asset: type inferred from the .mjs extension -->
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <!-- Container asset: type inferred from the .glb extension -->
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-scene>
@@ -18230,7 +18241,7 @@ The `component` property is the engine [AudioListenerComponent](https://api.play
 * [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) — the clips those sources play
 * [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md) — the listener usually rides on the camera entity
 
-Examples: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html).
+Examples: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
 
 --------------------------------------------------------------------------------
 
@@ -18786,7 +18797,7 @@ A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https
 | Attribute | On | What it controls |
 | --- | --- | --- |
 | `gsplat-splat-budget` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | The total number of splats to render across the scene. Defaults to 1,000,000; a budget larger than the scene resolves every node at its finest level |
-| `gsplat-lod-mode` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | `"error"` spends the budget where it removes the most approximation error; `"distance"` ignores the error metadata and steps detail down in concentric bands around the camera, for captures whose error tables are unreliable |
+| `gsplat-lod-mode` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | `"distance"`, the default, orders detail by camera distance alone, stepping it down in concentric bands around the camera, and uses less memory. `"error"` spends the same budget where it removes the most approximation error, which lifts sparse regions such as sky and distant background that `"distance"` leaves coarse, but keeps noticeably more of the streamed data in memory |
 | `lod-falloff` | `<pc-gsplat>` | How steeply *this* splat trades far-field detail for near-field detail within its share of the budget. 1 is neutral; higher values pull detail towards the camera |
 | `lod-range-min`, `lod-range-max` | `<pc-gsplat>` | Hard clamps on the LOD index this splat may use, whatever the budget decides — raise the minimum to avoid ever downloading the largest files |
 
@@ -18808,7 +18819,7 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">
@@ -19329,7 +19340,7 @@ The `component` property is the engine [LightComponent](https://api.playcanvas.c
 * [`<pc-sky>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md) — image-based lighting to fill in what direct lights miss
 * [`<pc-render>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render.md) — `cast-shadows` and `receive-shadows` on what the light hits
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html) and [Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html), [Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
 
 --------------------------------------------------------------------------------
 
@@ -19585,7 +19596,7 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](https://developer.p
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -19805,7 +19816,7 @@ This GLB instantiates two nodes — `play` (the orange shell, its logo cut out o
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
@@ -19950,7 +19961,7 @@ The `component` property is the engine [ParticleSystemComponent](https://api.pla
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the JSON configuration and the textures it names
 * [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) — positions and orients the emitter
 
-Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html).
+Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
 
 --------------------------------------------------------------------------------
 
@@ -19976,7 +19987,7 @@ The `<pc-render>` tag is used to define a render component that renders a 3D pri
 | `material` | [Material ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | `id` of a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) to render the primitive with. If omitted, a default material is used |
 | `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
 | `shadow-cascade-mask` | String | `"0 1 2 3"` | Which [shadow cascades](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md#shadow-cascades) of directional lights the component casts into, as space-separated cascade indices from 0 (nearest the camera) to 3: `"0 1"` casts into the two nearest cascades only, and an empty value casts into none. Needs `cast-shadows` |
-| `type` | Enum | `"box"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` |
+| `type` | Enum | `"box"` | Primitive shape to render: `"box"` \| `"capsule"` \| `"cone"` \| `"cylinder"` \| `"plane"` \| `"sphere"` \| `"torus"` |
 
 :::tip
 
@@ -19986,31 +19997,34 @@ To render a 3D model from a glTF/GLB file, use [`<pc-model>`](https://developer.
 
 ## Example
 
-All six primitive shapes. Try changing any `type`, or add `material` once you have defined a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md):
+All seven primitive shapes. Try changing any `type`, or add `material` once you have defined a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md):
 
 ```html live-example
 <pc-app>
     <pc-scene>
-        <pc-entity name="camera" position="0 1.5 6" rotation="-10 0 0">
+        <pc-entity name="camera" position="0 1.5 7" rotation="-10 0 0">
             <pc-camera clear-color="#2a2d36"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 30 0">
             <pc-light cast-shadows normal-offset-bias="0.05" shadow-bias="0.2" intensity="1.5"></pc-light>
         </pc-entity>
-        <pc-entity name="box" position="-2.5 0.5 0">
+        <pc-entity name="box" position="-3.5 0.5 0">
             <pc-render type="box"></pc-render>
         </pc-entity>
-        <pc-entity name="sphere" position="-1 0.5 0">
+        <pc-entity name="sphere" position="-2.1 0.5 0">
             <pc-render type="sphere"></pc-render>
         </pc-entity>
-        <pc-entity name="capsule" position="0.25 1 0">
+        <pc-entity name="capsule" position="-0.7 1 0">
             <pc-render type="capsule"></pc-render>
         </pc-entity>
-        <pc-entity name="cone" position="1.5 0.5 0">
+        <pc-entity name="cone" position="0.7 0.5 0">
             <pc-render type="cone"></pc-render>
         </pc-entity>
-        <pc-entity name="cylinder" position="2.75 0.5 0">
+        <pc-entity name="cylinder" position="2.1 0.5 0">
             <pc-render type="cylinder"></pc-render>
+        </pc-entity>
+        <pc-entity name="torus" position="3.5 0.5 0" rotation="90 0 0">
+            <pc-render type="torus"></pc-render>
         </pc-entity>
         <pc-entity name="ground" scale="10 10 10">
             <pc-render type="plane"></pc-render>
@@ -20140,11 +20154,11 @@ The `<pc-scene>` tag is used to define the scene.
 | --- | --- | --- | --- |
 | `exposure` | Number | `"1"` | Overall brightness multiplier applied to the rendered image. Ignored while the scene uses physical light units |
 | `fog` | Enum | `"none"` | Fog type: `"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
-| `fog-color` | Color | `"1 1 1"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
+| `fog-color` | Color | `"0 0 0"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `fog-density` | Number | `"0"` | Fog density for exponential fog types |
 | `fog-end` | Number | `"1000"` | End distance for linear fog |
-| `fog-start` | Number | `"0"` | Start distance for linear fog |
-| `gsplat-lod-mode` | Enum | `"error"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md#level-of-detail) |
+| `fog-start` | Number | `"1"` | Start distance for linear fog |
+| `gsplat-lod-mode` | Enum | `"distance"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md#level-of-detail) |
 | `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less warns and keeps the default |
 | `gsplat-use-fog` | Boolean | `"true"` | Whether the scene's fog applies to Gaussian splats |
 | `gsplat-use-tonemap` | Boolean | `"true"` | Whether the camera's tone mapping and the scene's `exposure` apply to Gaussian splats. Set `"false"` to render splats with their stored colors, which suits captures that are already display-ready. Fog still applies |
@@ -20383,7 +20397,7 @@ The `<pc-script-instance>` tag is used to define a script.
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md) component.
-* The script must have been loaded via the [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) tag.
+* Its script class is registered by loading the script's module with a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) tag, or by calling `registerScript()` from your own code.
 
 :::
 
@@ -20398,6 +20412,8 @@ The `<pc-script-instance>` tag is used to define a script.
 In addition, any other non-reserved attribute maps to the script attribute of the same name (kebab-case to camelCase, e.g. `focus-point` → `focusPoint`). Values are parsed according to the type of the script's declared default, and the `asset:`/`entity:`/`vec2:`/`vec3:`/`vec4:`/`color:` prefixes can be used where inference cannot help. An `entity:` value is an entity `name` — write `entity:#id` to reference an element by `id`. If the same script attribute is also present in the `attributes` JSON, the per-property attribute wins. See [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting.md) for full details.
 
 Declared values are the source of truth. When the host entity cycles — a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) rebinding after its model reloads, for instance — a surviving script instance has its declared state re-asserted, which deliberately snaps back any runtime mutation of a declared property. Keep state you change at runtime in properties the markup does not declare.
+
+The script class does not have to be registered before the element is added. An element whose class is not registered yet waits for it, and once the class arrives the instance is created as usual, with every declared attribute applied before `initialize()` runs. If the class is still missing once no script asset is left loading, the console warns that the element is waiting and asks whether its `<pc-asset>` is missing — the usual causes are a forgotten `<pc-asset>` and a `name` that does not match the script's `scriptName`. The element keeps waiting either way, so a class registered later still gets its instance.
 
 ## Events
 
@@ -20495,7 +20511,7 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 A standalone vertical scrollbar — drag the orange handle. Try a different `handle-size` (as a fraction of the track) or starting `value`:
 
 ```html live-example
-<pc-app max-pixel-ratio="1">
+<pc-app>
     <pc-scene>
         <pc-entity name="camera">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -20573,7 +20589,7 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 Scroll the striped content with the mouse wheel, by dragging it, or with the scrollbar. The viewport's `mask` clips the content. Try `scroll-mode="clamp"` (no bounce), or a taller content `height`:
 
 ```html live-example
-<pc-app max-pixel-ratio="1">
+<pc-app>
     <pc-scene>
         <pc-entity name="camera">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -20672,7 +20688,7 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
@@ -20873,7 +20889,7 @@ The attributes are mirrored as properties. The engine [SoundSlot](https://api.pl
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the audio asset a slot plays
 * [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) — positional playback needs a listener
 
-Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).
+Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
 
 --------------------------------------------------------------------------------
 

@@ -34,7 +34,7 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 Scroll the striped content with the mouse wheel, by dragging it, or with the scrollbar. The viewport's `mask` clips the content. Try `scroll-mode="clamp"` (no bounce), or a taller content `height`:
 
 ```html live-example
-<pc-app max-pixel-ratio="1">
+<pc-app>
     <pc-scene>
         <pc-entity name="camera">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
