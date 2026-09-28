@@ -35,7 +35,7 @@ NEWボタンを選択して新しいプロジェクトを作成します。
 
 ![Box To Sphere](/img/user-manual/editor/getting-started/your-first-app/box-to-sphere.png)
 
-しかし、私たちのスフィアは少し退屈な灰色です。それを赤色にしましょう！これを行うには、ASSETSパネルの**+**アイコンをクリックしてマテリアルを作成する必要があります。
+しかし、私たちのスフィアは少し退屈な灰色です。それを赤色にしましょう！これを行うには、ASSETSパネルの **+** アイコンをクリックしてマテリアルを作成する必要があります。
 
 ![Create Material](/img/user-manual/editor/getting-started/your-first-app/create-material.png)
 
