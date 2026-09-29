@@ -1,6 +1,6 @@
 ---
 title: Built-in Shader Uniforms
-description: Engine-provided camera matrices, screen and viewport dimensions, and XR view index for custom forward shaders.
+description: Engine-provided camera matrices and parameters, screen and viewport dimensions, and XR view index for custom forward shaders.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -22,6 +22,7 @@ The uniforms can be read in vertex and fragment shaders. Declare the names you u
 | `matrix_projection` | `mat4` | `mat4x4f` | Transforms view-space positions to clip space. Includes the renderer's projection adjustments, such as jitter, render-target Y flip, and the graphics backend's depth convention. |
 | `matrix_viewProjection` | `mat4` | `mat4x4f` | `matrix_projection * matrix_view`; transforms world-space positions to clip space. |
 | `view_position` | `vec3` | `vec3f` | Camera position in world space; the current eye's position in XR. |
+| `camera_params` | `vec4` | `vec4f` | Camera clip planes and projection type: `1 / farClip`, `farClip`, `nearClip`, and `1` for an orthographic camera or `0` for a perspective one. Use it to linearize depth values. |
 | `screen_size` | `vec4` | `vec4f` | Canvas drawing-buffer width, height, inverse width, and inverse height. These are pixel dimensions, not CSS dimensions. |
 | `viewport_size` | `vec4` | `vec4f` | Camera viewport width, height, inverse width, and inverse height in pixels. Accounts for the render target, `camera.rect`, and the XR eye viewport. Contains no viewport origin. |
 | `view_index` | `uint` | `u32` | Zero-based index of the XR view currently being rendered. Use it to select per-view data such as a depth texture array layer. |
@@ -29,6 +30,8 @@ The uniforms can be read in vertex and fragment shaders. Declare the names you u
 The projection matrices are the versions used for rendering. They can differ from a projection matrix calculated in application code before jitter or backend adjustments. Prefer `matrix_viewProjection` when projecting a world-space position in a shader.
 
 `matrix_model` and `matrix_normal` are per-mesh inputs, separate from these camera and scene values. For transformations that also support skinning, morphing, and instancing, use the [vertex shader chunks](/user-manual/graphics/shaders/#vertex-shader).
+
+The scene depth and color textures, `uSceneDepthMap` and `uSceneColorMap`, are described in [Depth Layer](/user-manual/graphics/cameras/depth-layer).
 
 ## Declaring and Reading Uniforms
 
