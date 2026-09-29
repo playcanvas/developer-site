@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/user-manual/engine/llms.txt
 Total Documents: 213
-Generated: 2026-09-28
+Generated: 2026-09-29
 
 ================================================================================
 

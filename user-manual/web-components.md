@@ -2,9 +2,9 @@
 
 PlayCanvas Web Components let you put real-time 3D on a web page with nothing but HTML. Each `<pc-*>` tag wraps a piece of the [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md) — an app, a scene, a camera, a light — so you compose interactive 3D scenes the same way you compose the rest of your page: with markup.
 
-[Interactive demo: Basic Shapes — a 3D scene built entirely with PlayCanvas Web Components](https://playcanvas.github.io/web-components/examples/basic-shapes.html)
+[Interactive demo: Golden Meadow — a meadow at golden hour, built with PlayCanvas Web Components](https://playcanvas.github.io/web-components/examples/#golden-meadow.html)
 
-Drag to orbit the scene above. Every object, light and material in it is declared in HTML — and it's one of [30+ live examples](https://playcanvas.github.io/web-components/examples/) you can explore, complete with source code.
+Drag to look around the meadow above. Its camera, sun, haze and sound are HTML elements, and so are the scripts that paint its sky and generate its terrain, trees and grass. It's one of [40+ live examples](https://playcanvas.github.io/web-components/examples/) you can explore, complete with source code.
 
 ## What Are Web Components?
 
