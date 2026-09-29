@@ -1,6 +1,6 @@
 ---
 title: Building a Scene
-description: Hands-on tutorial building a lit scene with pc-app and pc-scene, adding a camera, mesh, light, and understanding the element hierarchy.
+description: "Hands-on tutorial: build a lit, shadowed scene with pc-app and pc-scene, step by step through camera, mesh, light, materials and ground, then learn the element hierarchy."
 ---
 
 Let's build a simple 3D scene step by step using PlayCanvas Web Components. By the end, you'll have a shaded, colored sphere resting on the ground under a blue sky — and you'll know what every line does.
@@ -22,7 +22,7 @@ This creates an empty 3D scene. However, we can't see anything rendered yet. We 
 
 :::note
 
-All `pc-` elements must be closed properly. Self-closing tags (e.g. `<pc-camera />`) are not supported.
+Always write a closing tag, as in `<pc-camera></pc-camera>`. HTML has no self-closing custom elements: the browser reads `<pc-camera />` as an opening tag, so everything after it ends up nested inside the camera.
 
 :::
 
@@ -118,7 +118,7 @@ Both color values here are [CSS color names](https://github.com/playcanvas/web-c
 
 ## Grounding the Scene
 
-Objects floating in a void only get you so far. Let's give the sphere something to rest on: a `plane` primitive, scaled up to act as the ground, with a second material. The sphere primitive is 1 unit in diameter, so raising it to `position="0 0.5 0"` sets it exactly on top of the plane. We'll also raise and tilt the camera to frame the scene, and have the light cast shadows with the `cast-shadows` attribute — a boolean that is enabled simply by being present (see [Attributes](attributes.md)).
+Objects floating in a void only get you so far. Let's give the sphere something to rest on: a `plane` primitive, scaled up to act as the ground, with a second material. The sphere primitive is 1 unit in diameter, so raising it to `position="0 0.5 0"` sets it exactly on top of the plane. We'll also raise and tilt the camera to frame the scene, and have the light cast shadows with the `cast-shadows` attribute — a boolean that is enabled simply by being present (see [Attributes](attributes.md)). The light's two bias attributes keep each surface from shadowing itself. Without them the sphere and the ground break up into stripes, an artifact known as shadow acne (see [Fixing Shadow Artifacts](../graphics/lighting/shadows.md#fixing-shadow-artifacts)).
 
 ```html {3,5,9,11,14-16}
 <pc-app>
@@ -129,7 +129,7 @@ Objects floating in a void only get you so far. Let's give the sphere something 
             <pc-camera clear-color="lightskyblue"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 45 0">
-            <pc-light type="directional" cast-shadows></pc-light>
+            <pc-light type="directional" cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="sphere" position="0 0.5 0">
             <pc-render type="sphere" material="crimson"></pc-render>
@@ -141,7 +141,34 @@ Objects floating in a void only get you so far. Let's give the sphere something 
 </pc-app>
 ```
 
-![A crimson sphere resting on a light gray plane, casting a shadow under a blue sky](/img/user-manual/web-components/building-a-scene/final-scene.jpg)
+Here is the finished scene, running live. It is the same markup, and you can edit it: the preview re-runs as you type.
+
+```html live-example
+<pc-app>
+    <pc-material id="crimson" diffuse="crimson"></pc-material>
+    <pc-material id="gray" diffuse="lightgray"></pc-material>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.5 6" rotation="-10 0 0">
+            <pc-camera clear-color="lightskyblue"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 45 0">
+            <pc-light type="directional" cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
+        </pc-entity>
+        <pc-entity name="sphere" position="0 0.5 0">
+            <pc-render type="sphere" material="crimson"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" scale="8 1 8">
+            <pc-render type="plane" material="gray"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+Some things to try:
+
+- Lower the sun: give the light entity `rotation="70 45 0"` and watch the shadow stretch.
+- Delete `normal-offset-bias` and `shadow-bias` to see the shadow acne they prevent.
+- Change the sphere's `type` to `"box"`. It still rests exactly on the ground, because the box primitive is 1 unit across too.
 
 That's a scene: a camera, a light, geometry and materials — composed entirely in HTML.
 
@@ -161,7 +188,7 @@ pc-app ................... the application
 - [`<pc-scene>`](tags/pc-scene.md), [`<pc-material>`](tags/pc-material.md) and [`<pc-asset>`](tags/pc-asset.md) are direct children of [`<pc-app>`](tags/pc-app.md).
 - [`<pc-entity>`](tags/pc-entity.md) is a direct child of `<pc-scene>` or of another entity. Nest entities to build the transform hierarchy — an entity's `position`, `rotation` and `scale` are local to its parent.
 - Component elements such as [`<pc-camera>`](tags/pc-camera.md), [`<pc-light>`](tags/pc-light.md) and [`<pc-render>`](tags/pc-render.md) are direct children of an entity, and each one gives that entity a capability.
-- A misplaced element logs a console warning naming the required parent, so keep the console open while authoring. Each tag's [reference page](tags/index.md) states its placement rules.
+- A misplaced element logs a console warning saying where it must be placed, so keep the console open while authoring. Each tag's [reference page](tags/index.md) states its placement rules.
 
 ## Next Steps
 
