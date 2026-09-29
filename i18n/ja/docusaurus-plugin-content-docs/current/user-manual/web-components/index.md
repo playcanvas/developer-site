@@ -6,10 +6,10 @@ description: "PlayCanvasエンジンを包むカスタムHTML要素による宣�
 PlayCanvas Web Componentsを使えば、HTMLだけでリアルタイム3Dをウェブページに組み込むことができます。各 `<pc-*>` タグは[PlayCanvas Engine](../engine/index.md)の構成要素（アプリ、シーン、カメラ、ライト）をラップしているため、ページの他の部分と同じ方法、つまりマークアップでインタラクティブな3Dシーンを構成できます。
 
 <div className="iframe-container">
-    <iframe src="https://playcanvas.github.io/web-components/examples/#basic-shapes.html" title="Basic Shapes — PlayCanvas Web Componentsだけで構築された3Dシーン" allow="fullscreen; xr-spatial-tracking" allowFullScreen loading="lazy"></iframe>
+    <iframe src="https://playcanvas.github.io/web-components/examples/#golden-meadow.html" title="Golden Meadow — PlayCanvas Web Componentsで構築された、ゴールデンアワーの草原" allow="fullscreen; xr-spatial-tracking" allowFullScreen loading="lazy"></iframe>
 </div>
 
-上のシーンはドラッグで周回できます。シーン内のすべてのオブジェクト、ライト、マテリアルはHTMLで宣言されています。これは、ソースコード付きで公開されている[30以上のライブサンプル](https://playcanvas.github.io/web-components/examples/)のひとつです。
+上の草原はドラッグで見回せます。カメラ、太陽、霞、サウンドはHTML要素で、空を描き、地形や木々、草を生成するスクリプトもHTML要素です。これは、ソースコード付きで公開されている[40以上のライブサンプル](https://playcanvas.github.io/web-components/examples/)のひとつです。
 
 ## Web Componentsとは？ {#what-are-web-components}
 
