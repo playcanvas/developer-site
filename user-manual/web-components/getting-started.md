@@ -21,11 +21,11 @@ You can load the library in one of two ways. If you're not sure which to pick, s
 - **CDN (no install)** — nothing to download and no tooling required. The fastest way to get started, and fine for production too as long as you pin to specific versions.
 - **npm** — the right choice when your project already has a `package.json`, a dev server or a bundler. The engine and components are versioned alongside the rest of your dependencies and served from your own infrastructure.
 
-Whichever route you choose, your HTML file needs an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap), because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency). The map also lists `@playcanvas/web-components` itself — the tags don't need that entry, but it means any JavaScript you write later can import the library's API (introduced in [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md)).
+Unless a bundler builds your pages (see the npm tab), your HTML file needs an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap), because the Web Components need to be able to find the PlayCanvas Engine (which is an external dependency). The map also lists `@playcanvas/web-components` itself — the tags don't need that entry, but it means any JavaScript you write later can import the library's API (introduced in [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md)).
 
 **CDN (no install)**
 
-Load both the engine and the components from a CDN such as jsDelivr, using `pwc.min.mjs` — the minified build, less than half the size of `pwc.mjs`:
+Load both the engine and the components from a CDN such as jsDelivr, using `pwc.min.mjs` — the minified build, under a third the size of `pwc.mjs`:
 
 ```html
 <script type="importmap">
@@ -46,7 +46,11 @@ You can then import the Web Components as follows:
 
 :::note[Versioning]
 
-The snippets above use `@latest` for convenience. For production deployments, pin to a specific version to ensure deterministic builds (for example: `playcanvas@2.x.y` and `@playcanvas/web-components@x.y.z`). Choose a pair that works together: each release of `@playcanvas/web-components` supports a range of engine versions, declared as the `playcanvas` peer dependency in its `package.json`. See the release notes for the latest stable versions: [PlayCanvas Engine releases](https://github.com/playcanvas/engine/releases) and [Web Components releases](https://github.com/playcanvas/web-components/releases).
+The snippets above use `@latest` for convenience. For production deployments, pin to a specific version to ensure deterministic builds (for example: `playcanvas@2.x.y` and `@playcanvas/web-components@x.y.z`). Choose a pair that works together: each release of `@playcanvas/web-components` supports a range of engine versions, declared as the `playcanvas` peer dependency in its `package.json`.
+
+The library's URL appears twice, in the import map and in the `<script>` tag, so pin both to the same version. If the two URLs differ, the browser treats them as two different modules: as soon as your own code imports the library through the map, a second copy loads and fails to register the tags, which the first copy already defined.
+
+See the release notes for the latest stable versions: [PlayCanvas Engine releases](https://github.com/playcanvas/engine/releases) and [Web Components releases](https://github.com/playcanvas/web-components/releases).
 
 :::
 
@@ -58,7 +62,15 @@ Make sure you have [Node.js](https://nodejs.org/) 18 or later installed. PlayCan
 npm install playcanvas @playcanvas/web-components
 ```
 
-Point the import map at the installed packages:
+How you load it from there depends on whether a bundler builds your pages.
+
+**With a bundler** such as Vite, webpack or Rollup, import the package once from your JavaScript entry point. The bundler resolves `playcanvas` for you, so you need no import map and no extra `<script>` tag:
+
+```js title="main.js"
+import '@playcanvas/web-components';
+```
+
+**Without a bundler**, when your files are served as they are, point an import map at the installed packages and load the library from the same path:
 
 ```html
 <script type="importmap">
@@ -69,15 +81,10 @@ Point the import map at the installed packages:
         }
     }
 </script>
-```
-
-You can then import the Web Components as follows:
-
-```html
 <script type="module" src="/node_modules/@playcanvas/web-components/dist/pwc.mjs"></script>
 ```
 
-These paths assume your site is served from the project root, so that `/node_modules/...` resolves. Adjust them to match your dev server or bundler setup.
+These paths assume your site is served from the project root, so that `/node_modules/...` resolves.
 
 ## Your First Page
 
@@ -88,7 +95,7 @@ Here is a complete page that renders a lit sphere — the "hello, world" of 3D. 
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My PlayCanvas Web Components App</title>
         <script type="importmap">
             {
@@ -131,17 +138,7 @@ Here is a complete page that renders a lit sphere — the "hello, world" of 3D. 
 
 One rule in the `<style>` block deserves a mention: `<pc-app>` is sized like a `<video>` element — a block-level box that your CSS controls, just 300×150 pixels by default. The `pc-app` rule stretches it to fill the viewport; size it however you like to embed the scene in a normal page layout instead. See [Sizing](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#sizing) for the details.
 
-Save this as `index.html` and open it in your browser. You should see:
-
-[Image: A white sphere lit by a directional light]
-
-:::note
-
-Using the npm install instead? Swap the import map and script tag for the `/node_modules/...` versions shown in the npm tab above.
-
-:::
-
-You can also experiment with the scene right here — edit the markup and the preview re-runs:
+Save this as `index.html` and open it in your browser. Everything loads from the CDN, so you can open the file straight from disk, with no web server. You should see a lit sphere, just like the live preview below, which runs the same scene. Edit its markup and the preview re-runs:
 
 ```html live-example
 <pc-app>
@@ -159,9 +156,15 @@ You can also experiment with the scene right here — edit the markup and the pr
 </pc-app>
 ```
 
+:::note
+
+Installed from npm instead? Swap the import map and `<script>` tag for the `/node_modules/...` versions in the npm tab above or, with a bundler, delete both and import the package from your entry script.
+
+:::
+
 ## Editor Support
 
-The package ships a [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest), which editors use to offer tag and attribute completions, valid attribute values and hover documentation when authoring HTML.
+The package ships a [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest), which editors use to offer tag and attribute completions, valid attribute values and hover documentation when authoring HTML. Editors read these files from `node_modules`, so install the npm package to get them, even if your page loads the library from the CDN.
 
 **VS Code** — add the following to your workspace `.vscode/settings.json`:
 
