@@ -1,7 +1,9 @@
 ---
 title: PlayCanvas Web Components
-description: "PlayCanvasエンジンを包むカスタムHTML要素による宣言的3Dの概念、タグの概要、チュートリアルとリファレンスへのリンクです。"
+description: "HTMLでウェブ向けのインタラクティブな3Dを構築できる、PlayCanvas Engineを包むカスタム要素です。ライブデモ、ページ上で編集できる最初のシーン、ショーケースのサンプル、次に読むべきページを紹介します。"
 ---
+
+import Link from '@docusaurus/Link';
 
 PlayCanvas Web Componentsを使えば、HTMLだけでリアルタイム3Dをウェブページに組み込むことができます。各 `<pc-*>` タグは[PlayCanvas Engine](../engine/index.md)の構成要素（アプリ、シーン、カメラ、ライト）をラップしているため、ページの他の部分と同じ方法、つまりマークアップでインタラクティブな3Dシーンを構成できます。
 
@@ -11,12 +13,16 @@ PlayCanvas Web Componentsを使えば、HTMLだけでリアルタイム3Dをウ�
 
 上の草原はドラッグで見回せます。カメラ、太陽、霞、サウンドはHTML要素で、空を描き、地形や木々、草を生成するスクリプトもHTML要素です。これは、ソースコード付きで公開されている[40以上のライブサンプル](https://playcanvas.github.io/web-components/examples/)のひとつです。
 
-## Web Componentsとは？ {#what-are-web-components}
+<div className="cta-buttons">
+    <Link className="button button--primary button--lg" to="/user-manual/web-components/getting-started/">はじめる →</Link>
+    <Link className="button button--secondary button--lg" to="https://playcanvas.github.io/web-components/examples/">サンプルを見る</Link>
+</div>
 
-[Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) は再利用可能なカスタムHTML要素であり、シンプルで宣言的なインターフェースの背後に複雑な機能をカプセル化します。PlayCanvas Web Componentsは、PlayCanvas Engineの全機能を使いやすいHTMLタグでラッピングします。
+## 最初のシーン {#your-first-scene}
 
-```html
-<!-- HTMLだけで3Dシーンを作成します -->
+これは完全な3Dシーンです。このページ上で実際に動いていて、編集することもできます。入力するとプレビューが再実行されます。
+
+```html live-example
 <pc-app>
     <pc-scene>
         <pc-entity name="camera" position="0 0 3">
@@ -32,49 +38,109 @@ PlayCanvas Web Componentsを使えば、HTMLだけでリアルタイム3Dをウ�
 </pc-app>
 ```
 
-これがプログラムのすべてです。レンダリング結果は次のとおりです。
+`<pc-app>` はキャンバス、`<pc-scene>` はその中の世界です。各 `<pc-entity>` はその世界の中に位置を持つオブジェクトで、エンティティの中のタグがそのオブジェクトに能力を与えます。ここでは、ひとつ目がカメラ、ふたつ目がライトになり、3つ目が球体を描画します。次のような変更を試してみてください。
 
-![指向性ライトに照らされた白い球体](/img/user-manual/web-components/hello-sphere.jpg)
+- ボールの `type="sphere"` を `"cone"`、`"capsule"`、`"cylinder"` に変える。
+- `<pc-light color="orange">` でライトに色を付ける。
+- `<pc-camera clear-color="midnightblue">` で背景を塗る。
+- ボールのエンティティを複製し、`position="1.2 0 0"` でコピーを横に動かす。
+
+このようなシーンを自分のページに置くには、ライブラリを読み込む2つの `<script>` タグを追加します。完全なファイルは[開始](getting-started.md)に載っています。
+
+## 作れるもの {#what-you-can-build}
+
+同じタグで、球体ひとつから完成度の高い本格的な体験まで作れます。以下のショーケースはどれも1枚のHTMLページです。開くとその場で操作でき、ソースを読んだり、StackBlitzで改造したりできます。
+
+<div className="row path-cards">
+  <div className="col col--4">
+    <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#car-configurator.html">
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/car-configurator.jpg" alt="塗装色のスウォッチの列の上に置かれたシルバーのスポーツカー" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>Car Configurator</h3><p>塗装色を選ぶと、スポーツカーの色が変わります。</p></div>
+    </Link>
+  </div>
+  <div className="col col--4">
+    <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#product-viewer.html">
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/product-viewer.jpg" alt="Explode allとResetのボタンがあるパネルの横に浮かぶカメラドローン" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>Product Viewer</h3><p>ドローンの部品にカーソルを合わせるとハイライトされ、クリックすると組み立てから引き出されます。</p></div>
+    </Link>
+  </div>
+  <div className="col col--4">
+    <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#solar-system.html">
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.jpg" alt="太陽と、その解説を載せたパネル" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>Solar System</h3><p>ページをスクロールすると、太陽から8つの惑星を越えて旅します。</p></div>
+    </Link>
+  </div>
+  <div className="col col--4">
+    <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#basic-splat.html">
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/basic-splat.jpg" alt="ドームのあるホールに置かれた大理石の天使像をキャプチャしたGaussian splat" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>Gaussian Splat</h3><p>フォトリアルな3Dキャプチャを <code>&lt;pc-gsplat&gt;</code> タグで描画します。</p></div>
+    </Link>
+  </div>
+  <div className="col col--4">
+    <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#third-person-controller.html">
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/third-person-controller.jpg" alt="大きなアーチの下、石畳の中庭に立つアニメーションキャラクター" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>Third Person Controller</h3><p>物理演算とブレンドされたアニメーションで、中庭を歩き、走り、ジャンプします。</p></div>
+    </Link>
+  </div>
+  <div className="col col--4">
+    <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#clock-tower.html">
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/clock-tower.jpg" alt="ほこりの舞う鐘楼で、ランプが文字盤の裏の機構を照らしている" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>Clock Tower</h3><p>ローカル時刻に合わせて動く時計の機構を、ほこりの舞う光と鐘の音とともに。</p></div>
+    </Link>
+  </div>
+</div>
+
+[サンプルブラウザ](https://playcanvas.github.io/web-components/examples/)には、ウェブカメラAR、車両やラグドール、パーティクル、ポジショナルサウンド、2Dと3Dのユーザーインターフェースなど、さらに多くのサンプルがあります。
 
 ## PlayCanvas Web Componentsを使用する理由 {#why-playcanvas-web-components}
 
-### 🚀 JavaScript不要 {#-zero-javascript-required}
+- **HTMLがそのままAPI。** ビルドステップもエンジンのボイラープレートもなしに、完全でインタラクティブなシーンをマークアップで構築できます。JavaScriptが必要になるのは、[独自の動作](scripting.md)を加えたいときだけです。
+- **すべての属性がライブ。** JavaScriptから、フレームワークから、あるいはブラウザの開発者ツールから直接属性を変更すると、シーンは即座に更新されます。共通の規約については[属性](attributes.md)を参照してください。
+- **フルスペックのエンジンが土台。** これは簡略化されたおもちゃのレイヤーではありません。何千ものウェブアプリケーションを支えているものと同じ[PlayCanvas Engine](../engine/index.md)がレンダリングを担い、WebGPUファーストでWebGL 2への自動フォールバックを備えています。タグで足りないことがあれば、どの要素も[エンジンのオブジェクトを渡してくれます](programmatic-access.md)。
+- **フレームワークではなくウェブ標準。** コンポーネントは[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)なので、プレーンなHTMLページでも、DOMに描画する任意のフレームワークと組み合わせても動作します。ブラウザに求めるのは、WebGL 2またはWebGPU、ES Modules、Custom Elementsだけです。いずれも現行のChrome、Edge、Firefox、Safariで標準対応しています。
+- **エディタがすべてのタグを知っている。** パッケージにはCustom Elements Manifestが同梱されているため、VS CodeやJetBrains系のIDEが[タグと属性を補完](getting-started.md#editor-support)し、入力中にそのドキュメントを表示します。
+- **オープンソース、MITライセンス。** [GitHub](https://github.com/playcanvas/web-components)でオープンに開発されており、個人・商用を問わず自由に利用でき、コントリビューションも歓迎です。
 
-マークアップだけで、完全でインタラクティブな3Dシーンを作成できます。ビルドステップもエンジンのボイラープレートも不要で、必要にならない限りJavaScriptを書くこともありません。
+## どこから始めますか？ {#where-do-you-want-to-start}
 
-### 🔧 すべての属性がライブ {#-every-attribute-is-live}
-
-属性はエンジンの機能に直接対応し、実行時の変更にも反応します。JavaScriptから、あるいはブラウザの開発者ツールから属性を更新すると、シーンは即座に更新されます。共通の規約については[属性](attributes.md)を参照してください。
-
-### ⚡ フルスペックのエンジンが土台 {#-the-full-engine-underneath}
-
-これは簡略化されたおもちゃのレイヤーではありません。何千ものウェブアプリケーションを支えているものと同じ[PlayCanvas Engine](../engine/index.md)がレンダリングを担い、WebGPUファーストでWebGL 2への自動フォールバックを備えています。
-
-### 🌍 フレームワークではなくウェブ標準 {#-a-web-standard-not-a-framework}
-
-[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)に基づいて構築されているため、プレーンなHTMLページでも、任意のフレームワークと組み合わせても動作します。ブラウザに求めるのは、WebGL 2またはWebGPU、ES Modules、Custom Elementsだけです。いずれも現行のChrome、Edge、Firefox、Safariで標準対応しています。
-
-## こんな方に最適 {#perfect-for}
-
-- 複雑な3Dプログラミングを学ぶことなくウェブサイトに3D要素を追加したい**コンテンツクリエイター**
-- 既存のHTML/CSSワークフローに3Dグラフィックスを統合したい**ウェブ開発者**
-- おなじみのウェブ技術を通じて3Dの概念を教えている**教育者**
-- 3Dのアイデアやコンセプトの**ラピッドプロトタイピング**
-- インタラクティブな製品ショーケースやデモを作成している**マーケティングチーム**
+<div className="row path-cards">
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/web-components/getting-started/">
+      <div className="card__header"><h3>🚀 はじめて使う</h3></div>
+      <div className="card__body"><p>CDNからライブラリを読み込むか、<code>npm create playcanvas</code> でプロジェクトを作成して、数分で最初のページをレンダリングします。</p></div>
+      <div className="card__footer">開始 →</div>
+    </Link>
+  </div>
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/web-components/loading-models/">
+      <div className="card__header"><h3>📦 3Dモデルがある</h3></div>
+      <div className="card__body"><p>glTFやGLBファイルを読み込み、その中身を確認し、マークアップから各パーツを調整します。</p></div>
+      <div className="card__footer">モデルの読み込み →</div>
+    </Link>
+  </div>
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/gaussian-splatting/building/your-first-app/web-components/">
+      <div className="card__header"><h3>✨ Gaussian splatがある</h3></div>
+      <div className="card__body"><p>スプラットビューアのページをステップバイステップで構築します。キャプチャを読み込み、周回できるカメラを加え、スプラットの描画に合わせてアプリを調整します。</p></div>
+      <div className="card__footer">Webコンポーネントの使用 →</div>
+    </Link>
+  </div>
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/web-components/scripting/">
+      <div className="card__header"><h3>🧩 インタラクティブにしたい</h3></div>
+      <div className="card__body"><p>エンティティにスクリプトをアタッチして動きやゲームプレイを加え、マークアップから設定し、エンジンに同梱された既製のスクリプトを再利用します。</p></div>
+      <div className="card__footer">スクリプトで動作を追加する →</div>
+    </Link>
+  </div>
+</div>
 
 :::tip[Reactをお使いですか？]
 
-アプリをReactで構築している場合は、React流のバインディングを提供する[PlayCanvas React](/user-manual/react/)をご覧ください。Web Componentsはフレームワークを一切必要とせず、HTMLが動く場所ならどこでも動作します。
+Web ComponentsはHTMLが動く場所ならどこでも動作し、Reactも例外ではありません。シーンをフックやJSXを使ったReactコンポーネントとして書きたい場合は、[PlayCanvas React](/user-manual/react/)をご覧ください。
 
 :::
 
-## オープンソース＆MITライセンス {#open-source--mit-licensed}
-
-Web Componentsは[GitHub](https://github.com/playcanvas/web-components)でMITライセンスの下、オープンに開発されています。個人・商用を問わず自由に利用でき、コントリビューションも歓迎です。
-
 ## このセクションの内容 {#in-this-section}
-
-まずは「開始」ガイドから始めましょう。数分でシーンをレンダリングできます。
 
 - [開始](getting-started.md) — CDNまたはnpmからライブラリを読み込み、最初のページをレンダリングします。
 - [シーンを構築する](building-a-scene.md) — カメラ、メッシュ、ライト、マテリアルを扱うステップバイステップのチュートリアルです。
