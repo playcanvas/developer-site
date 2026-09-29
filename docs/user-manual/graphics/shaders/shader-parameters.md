@@ -77,11 +77,9 @@ meshInstance.setParameter('material_diffuse', new Float32Array([0.8, 0.1, 0.1]))
 
 :::warning
 
-Overriding the values or textures of a `StandardMaterial` per mesh instance is not a cheap solution. The mesh instance gets its own copy of the material's uniform data, which takes additional GPU memory, is uploaded again whenever the material or the override changes, and is bound for each of its draws. When many mesh instances differ in these values, prefer separate materials, or [hardware instancing](/user-manual/graphics/advanced-rendering/hardware-instancing) with per-instance data.
+Overriding the values or textures of a material per mesh instance is not a cheap solution. The mesh instance gets its own copy of the material's uniform data, which takes additional GPU memory, is uploaded again whenever the material or the override changes, and is bound for each of its draws. When many mesh instances differ in these values, prefer separate materials, or [hardware instancing](/user-manual/graphics/advanced-rendering/hardware-instancing) with per-instance data.
 
 :::
-
-Overriding other values, such as the uniforms of a `ShaderMaterial`, does not create such a copy.
 
 ## Global Parameters
 
