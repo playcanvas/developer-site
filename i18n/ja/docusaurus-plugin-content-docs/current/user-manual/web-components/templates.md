@@ -68,7 +68,11 @@ crate.remove();
 
 ステップ3での設定 — position、rotation、スクリプト属性、その他何でも — は、クローンが切断されている間に行われるため、属性は単にインスタンスが起動時に持つ初期状態になります。設定が中途半端なインスタンスがシーンに存在する瞬間はなく、作成した直後に再設定されるだけのエンジンオブジェクトも生まれません。
 
+クローンの設定には、プロパティではなく属性を使ってください。テンプレートの内容のクローンは、追加されるまではただのHTML要素です。そのため`crate.position`のようなプロパティを代入すると、その要素に通常のプロパティが作られます。要素がアップグレードされると、そのプロパティがライブラリの定義するプロパティを覆い隠し、値がエンティティに届くことはありません。プロパティはステップ4以降であれば機能します。
+
 例外は[ポインターイベント](tags/pc-entity.md#events)のリスナーです。テンプレートの内容のクローンは、追加されて初めてライブな`pc-*`要素になります。それより前に`addEventListener()`で追加したリスナーは`<pc-app>`から見えないため、そのリスナーのために[イベントがディスパッチされる](tags/pc-entity.md#when-events-are-dispatched)ことはありません。このようなリスナーは、下の[例](#example)のようにステップ4の後で追加してください。`onclick`のようなインラインのハンドラー属性は、他の属性と同じようにステップ3で設定してかまいません。
+
+どちらの制限も、`cloneNode()`でクローンすることから来ています。追加する前にプロパティを設定したりリスナーを追加したりしたい場合は、ステップ1で代わりに`document.importNode(template.content, true)`でインスタンスを作成してください。すでにライブな要素が返され、ルートの取得と追加は同じ方法で行えます。
 
 ## 名前はクローンローカル {#names-are-clone-local}
 
@@ -136,7 +140,7 @@ if (!crate.isConnected) return; // 初期化中に削除された - 何もする
 
 ## 例 {#example}
 
-すべての木箱は、アプリの後にある1つの `<template>` のクローンです — スポーンされ、切断中に設定され、追加され、待機され、リジッドボディが存在した瞬間にインパルスで放り投げられます。静止した木箱をクリックすると削除されます。インパルスを大きくしたり、木箱に `restitution="0.8"` を与えて弾ませたりしてみてください:
+すべての木箱は、アプリの後にある1つの `<template>` のクローンです — スポーンされ、切断中に設定され、追加され、待機され、リジッドボディが存在した瞬間にインパルスで放り投げられます。静止した木箱をクリックすると削除されます。インパルスを大きくしたり、木箱と地面の両方に `restitution="0.8"` を与えて木箱を弾ませたりしてみてください（衝突の反発は2つのボディのrestitutionの積なので、片方だけでは足りません）:
 
 ```html live-example
 <pc-app>
@@ -221,7 +225,7 @@ if (!crate.isConnected) return; // 初期化中に削除された - 何もする
 
 ライブラリのサンプルのいくつかはこのパターンの上に構築されています。野心的な順に並べると:
 
-* [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html) — 最小のケース: 1つのテンプレートから重力井戸へクローンされた40個の球。
-* [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) — [`<pc-layout-group>`](tags/pc-layout-group.md) にクローンされるタイル。新しく加わったものは自動的にレイアウトされます。
-* [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html) — スクロール可能なコンテンツにクローンされ、自身のボタンで削除されるリストエントリー。
-* [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) — フルコース: ジョイントで結ばれた物理駆動の [`<pc-model>`](tags/pc-model.md) プレハブ。ベア名の参照が各クローンを内部で配線し、準備完了の待機は破棄と競争します。
+* [Physics Cluster](https://playcanvas.github.io/web-components/examples/#physics-cluster.html) — 最小のケース: 1つのテンプレートから`importNode()`で重力井戸へクローンされた40個の球。
+* [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) — [`<pc-layout-group>`](tags/pc-layout-group.md) にクローンされるタイル。新しく加わったものは自動的にレイアウトされます。
+* [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html) — スクロール可能なコンテンツにクローンされ、自身のボタンで削除されるリストエントリー。
+* [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/#ar-wiener-storm.html) — フルコース: ジョイントで結ばれた物理駆動の [`<pc-model>`](tags/pc-model.md) プレハブ。ベア名の参照が各クローンを内部で配線し、準備完了の待機は破棄と競争します。
