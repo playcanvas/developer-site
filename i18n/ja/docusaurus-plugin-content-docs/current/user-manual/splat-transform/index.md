@@ -24,9 +24,9 @@ SplatTransformは、開発者がGaussian splatsを扱う際に直面する問題
 🔄 **幅広いフォーマットサポート** — 読み取り：PLY、Compressed PLY、SOG、Streamed SOG、SPZ、SPLAT、KSPLAT、LCC、LCC2。書き込み：PLY、Compressed PLY、SOG、Streamed SOG、SPZ、GLB、CSV、HTMLビューア、Voxel、WebP画像  
 🛠️ **強力な変換機能** — スプラットを正確に平行移動、回転、拡大縮小  
 🧹 **スマートフィルタリング** — NaN/Inf の除去、値・ボックス・球・球面調和バンド・フローター寄与によるフィルタリング、シード点周辺の連結クラスタのみを保持  
-📐 **デシメーションと並べ替え** — 1億以上のガウシアンにスケールするメモリ制限付きのマージベースデシメーションによる単純化と、空間局所性のためのMortonコードによる並べ替え  
+📐 **デシメーションと並べ替え** — 1億以上のガウシアンにスケールするメモリ制限付きのマージベースデシメーション（均一または誤差適応型）による単純化と、空間局所性のためのMortonコードによる並べ替え  
 🧱 **コリジョン生成** — シーンをスパースオクツリーにボクセル化し、ランタイム物理エンジン用の`.collision.glb`メッシュを出力  
-🖼️ **画像レンダリング** — 設定可能なカメラビューからシーンをロスレスWebPにレンダリング（パノラマ、デフォーカス、モーションブラー対応）  
+🖼️ **画像レンダリング** — 設定可能なカメラビューからシーンをロスレスWebPにレンダリング（パノラマ、デフォーカス、モーションブラー対応）。カメラアニメーションを連番フレームとしてレンダリングすることも可能  
 📊 **統計分析** — データ分析、検証、公開ゲーティングのためのカラムごとの統計情報と構造メタデータ（`--stats`、`--info`）  
 📦 **シーンのマージ** — 複数のスプラットファイルを1つのマージされたシーンに結合  
 ⚙️ **ジェネレーター** — JavaScriptのジェネレータースクリプトでスプラットデータを手続き的に合成  
@@ -84,6 +84,7 @@ splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
 - 入力ファイルが作業セットになり、ACTIONS が順番に適用されます
 - 最後のファイルが出力で、その後のアクションは最終結果を変更します
 - ファイル出力を破棄するには出力として `null` を使用します（`--stats` と併用すると分析専用の実行に便利）
+- 入力ファイル名には `http(s)://` URLも指定でき、必要に応じてダウンロードされます（`.mjs` ジェネレーターはローカルファイルである必要があります）
 
 ## サポートされているフォーマット
 
@@ -109,6 +110,14 @@ SplatTransform はファイル拡張子からフォーマットを検出しま�
 | `.webp`           | ❌   | ✅   | GPUラスタライザでカメラビューからレンダリングされたロスレスWebP画像                                                                              |
 | `null`            | ❌   | ✅   | 出力を破棄（`--stats` と併用して分析専用の実行に便利）                                                                                            |
 
+### アンチエイリアスおよび2DGSシーン {#antialiased-and-2dgs-scenes}
+
+アンチエイリアス（mip-splatting方式のスクリーンスペースフィルタ）付きで学習されたシーンや、2Dガウシアンサーフェル（2DGS）として学習されたシーンは読み取り時にタグ付けされ、出力フォーマットが保持できる場合はそのタグが維持されます。`--info` はこれを `model` として報告します。
+
+- **読み取り時**：PLYヘッダーコメント（Brushの `comment SplatRenderMode: default | mip | 2dgs` またはPostshotの `comment antialiased 0 | 1`。複数ある場合は最後のものが優先）、SPZのアンチエイリアスヘッダービット、またはSOG `meta.json` の `model` エントリから読み取ります。`scale_0` と `scale_1` はあるが `scale_2` がないPLYは、コメントに関係なく2DGSとして読み取られ、欠けているカラムは厚さゼロのスケールで補われるため、パイプラインの残りの部分には影響しません。
+- **書き込み時**：`.ply` と `.compressed.ply` には `comment SplatRenderMode: mip | 2dgs`（読み取った形式にかかわらずBrushの表記）が、`.sog` と `meta.json` には `"model": "antialiased" | "2dgs"` が書き込まれます。`.spz` はアンチエイリアスビットを設定し、2DGSを表現できないことを警告します。2DGSのPLY出力では `scale_2` カラムが再び削除されます。その他の出力フォーマットにはタグを記録する場所がないため、タグは警告なしに破棄されます。
+- **マージ時**：タグが一致しない入力を結合すると警告が出され、結果はタグなしで書き込まれます。
+
 ## アクション {#actions}
 
 アクションは指定された順序で実行され、繰り返し使用できます。アクションは任意の入力または出力ファイルの後に配置できます：
@@ -128,15 +137,20 @@ SplatTransform はファイル拡張子からフォーマットを検出しま�
                                           opacity, scale_*, f_dc_* use transformed values
                                           (linear opacity 0-1, linear scale, linear color 0-1).
                                           Append _raw for raw PLY values (e.g. opacity_raw).
--d, --decimate         <n|n%>           Simplify to n Gaussians via merge-based decimation
+-d, --decimate         <n|n%>           Simplify to n Gaussians via merge-based decimation,
+                                          removing at a uniform rate everywhere.
                                           Use n% to keep a percentage of Gaussians.
-                                          Memory-bounded and streaming: scales to scenes of 100M+
-                                          Gaussians. Must be the final action, and the output must
-                                          be .ply (write a decimated PLY first, then convert in a
-                                          second invocation). Deep targets on huge scenes spill
-                                          temporary files to --scratch-dir (default: the output
-                                          file's directory).
-    --scratch-dir      <path>           Directory for decimation spill files
+                                          Lower memory, and better at depth on uniformly-sized
+                                          Gaussians: uniform texture, single objects, snow.
+    --decimate-adaptive <n|n%>          Simplify, allocating removal by local error instead.
+                                          Much better on mixed-scale content such as skies,
+                                          at higher memory cost.
+                                          Both are memory-bounded and streaming: they scale to
+                                          scenes of 100M+ Gaussians. Either must be the final
+                                          action, and the output must be .ply (write a decimated
+                                          PLY first, then convert in a second invocation).
+    --scratch-dir      <path>           Directory for intermediate levels when a deep decimation
+                                          target exceeds memory. Nothing is written without it.
 -F, --filter-floaters  [size,op,min]    Remove Gaussians not contributing to any solid voxel.
                                           Evaluates each Gaussian at occupied voxel centers.
                                           Default: size=0.05, opacity=0.1, min=0.004 (1/255).
@@ -166,6 +180,9 @@ SplatTransform はファイル拡張子からフォーマットを検出しま�
     --memory                            Show peak memory in progress output
     --tty                               Interactive bar rendering (default on a TTY; --no-tty to disable)
 -w, --overwrite                         Overwrite output file if it exists
+    --webp-effort      <0-9>            Lossless WebP compression effort for image, SOG, HTML and LOD output.
+                                          Higher tries harder to reduce size. Default: libwebp's default
+                                          lossless settings.
 ```
 
 ### GPUオプション
@@ -177,6 +194,9 @@ SOG圧縮および GPU ボクセル化（`--filter-cluster`、`--filter-floaters
 -g, --gpu              <n|cpu>          Device for GPU operations: GPU adapter index | 'cpu'
                                           ('cpu' disables GPU and is incompatible with
                                           GPU-only features like --filter-cluster)
+    --gpu-backend      <name>           Force the WebGPU backend: vulkan | d3d12 | metal.
+                                          Default: the platform default (e.g. vulkan works around
+                                          Dawn D3D12 bugs on Windows)
 ```
 
 ### SOG圧縮オプション {#sog-compression-options}
@@ -185,7 +205,7 @@ SOG圧縮および GPU ボクセル化（`--filter-cluster`、`--filter-floaters
 
 ```none
 -i, --sh-iterations    <n>              Iterations for SH compression (more=better). Default: 10
-    --max-workers      <n>              Worker threads for SOG encoding (0 = inline/serial). Default: 4
+    --max-workers      <n>              Worker threads for SOG and image-sequence encoding (0 = inline/serial). Default: 4
 ```
 
 ### SPZ出力オプション
@@ -207,7 +227,7 @@ SOG圧縮および GPU ボクセル化（`--filter-cluster`、`--filter-floaters
 
 :::note
 
-`--viewer-settings` オプションにデータを渡す方法の詳細については、[SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) を参照してください。
+`--viewer-settings` オプションにデータを渡す方法の詳細については、[SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) を参照してください。設定はページを書き込む前に検証されるため、無効なファイルを指定すると、何も表示されないビューアを生成する代わりに実行が失敗します。
 
 :::
 
@@ -226,7 +246,10 @@ SOG圧縮および GPU ボクセル化（`--filter-cluster`、`--filter-floaters
 ```none
     --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
     --lod-chunk-extent <n>              Approximate size of an LOD chunk in world units (m). Default: 16
+    --lod-chunk-min    <n>              Gaussians in K below which a chunk is not split for extent. Default: 8
 ```
+
+チャンクは、`--lod-chunk-count` を超えるガウシアンを含む場合、または `--lod-chunk-extent` より広く、かつ `--lod-chunk-min` を超えるガウシアンを含む場合に分割されます。この最小値により、空や遠景などの疎な領域が何千もの空に近いチャンクに分割されるのを防ぎます。最小値を下回る領域は、どれほど広くても1つのチャンクのままです。密な領域には影響しません。
 
 エンドツーエンドの手順については、[Streamed SOGの生成](/user-manual/splat-transform/streamed-sog)を参照してください。
 
@@ -255,7 +278,7 @@ SOG圧縮および GPU ボクセル化（`--filter-cluster`、`--filter-floaters
     --collision-mesh   [smooth|faces]   Generate collision mesh (.collision.glb). Default: smooth
 ```
 
-### 画像出力オプション
+### 画像出力オプション {#image-output-options}
 
 `.webp`（GPUラスタライザでレンダリングされたロスレスWebP）を書き込む際に適用されます。
 
@@ -274,18 +297,30 @@ SOG圧縮および GPU ボクセル化（`--filter-cluster`、`--filter-floaters
                                         smaller = more blur. Pinhole only. Default: disabled (no defocus).
     --focus-distance   <n>              Camera-space Z of the focus plane (world units). Default: distance to --camera-target.
                                         Pinhole only; only meaningful with --f-stop.
+    --dof-samples      <n>              Aperture samples per instant with --f-stop. Default: 32. More samples reduce
+                                        sampling artifacts at greater cost; multiplies --motion-samples when combined.
     --sensor-size      <n>              Vertical sensor height in world units. Gives --f-stop a physical meaning.
                                         Default: 0.024 (35mm full-frame, world units = meters). Scale to your world:
                                         world unit = decimeter → 0.24, world unit = millimeter → 24.
-    --camera-pos-end   <x,y,z>          End camera position. When set, enables camera motion blur: the renderer
-                                        averages sub-frames with the camera interpolated from --camera-pos (shutter open)
-                                        to --camera-pos-end (shutter close). Default: disabled (no motion blur).
+    --camera-pos-end   <x,y,z>          End camera position. When set, enables camera motion blur: the camera moves
+                                        from --camera-pos (shutter open) to --camera-pos-end (shutter close) and the
+                                        frame averages renders at instants across the shutter. Default: disabled.
     --camera-target-end <x,y,z>         End camera target. Default: same as --camera-target. Only with --camera-pos-end.
     --camera-up-end    <x,y,z>          End up vector. Default: same as --camera-up. Only with --camera-pos-end.
-    --shutter          <0..1>           Fraction of the start→end segment integrated, centered on the midpoint
-                                        (1.0 = full motion; 0.5 = 180° shutter). Default: 1. Only with --camera-pos-end.
-    --motion-samples   <n>              Sub-frames to accumulate for motion blur. Cost is N× a single render.
-                                        Default: 16. Only with --camera-pos-end.
+    --shutter          <0..1>           Fraction of the start→end segment averaged, centered on its midpoint. Default: 0.5.
+                                        With --camera-track, fraction of the frame interval averaged around each frame.
+                                        Default for tracks: off. 1.0 = full interval; 0.5 = 180° shutter.
+    --motion-samples   <n>              Renders averaged per motion-blurred frame, at evenly spaced instants across
+                                        the shutter. Cost is N× a single render; too few show as discrete copies
+                                        where the motion between instants exceeds a couple of pixels. Default: 16.
+    --camera-track     <path>           Render a camera animation as a frame sequence: a SuperSplat editor project
+                                        (.ssproj directory or its document.json), a viewer settings.json with
+                                        animTracks, or a JSON { frameRate, frames: [{ position, target, fov, up }] }.
+                                        Frames are written as <name>.NNNN.webp. Replaces --camera-pos/--camera-target;
+                                        the track's target is the defocus focus point. A frame's up vector tilts the
+                                        camera; frames without one use --camera-up. With --shutter, each frame is
+                                        motion-blurred over that fraction of the frame interval.
+    --frames           <a[-b]>          Inclusive frame range of the track to render. Default: all frames.
 ```
 
 ## 使用例
@@ -364,7 +399,15 @@ splat-transform input.ply --decimate 50000 output.ply
 
 # 元のスプラット数の 25% に単純化
 splat-transform input.ply -d 25% output.ply
+
+# 局所的な誤差に応じて削減量を配分（空などスケールが混在するコンテンツに適する）
+splat-transform input.ply --decimate-adaptive 25% output.ply
+
+# 巨大なシーンで深いターゲットを指定：中間レベルの書き込み先を指定
+splat-transform huge.ply -d 1% --scratch-dir /mnt/scratch output.ply
 ```
+
+デシメーションは、マシンのRAMの半分（最大48 GiB）のメモリ予算内で動作します。巨大なシーンで深いターゲットを指定し、中間レベルがこの予算に収まらない場合、`--scratch-dir` が設定されていなければ実行はエラーで停止します。設定されている場合、それらのレベルは一時PLYファイルとしてそこに書き込まれ、使用後に削除されます。
 
 ### シーンのマージ
 
@@ -437,6 +480,9 @@ splat-transform input.ply view.webp --background 0,0,0,0
 # デフォーカスブラー（--camera-target に焦点、f/2.8 の絞り）
 splat-transform input.ply view.webp --f-stop 2.8
 
+# 強くぼけたエッジのために、より滑らかな絞りサンプリング
+splat-transform input.ply view.webp --f-stop 1 --dof-samples 64
+
 # 明示的な焦点距離と、より小さいワールドスケールでのデフォーカス
 splat-transform input.ply view.webp \
     --f-stop 2.8 --focus-distance 3 --sensor-size 0.1
@@ -445,10 +491,38 @@ splat-transform input.ply view.webp \
 splat-transform input.ply pano.webp \
     --projection equirect --camera-pos 0,1,0 --camera-target 0,1,1
 
-# カメラモーションブラー（シャッター中に開始ポーズから終了ポーズへドリー移動）
+# カメラモーションブラー（180°シャッターで開始ポーズから終了ポーズへドリー移動、16の瞬間を平均）
 splat-transform input.ply view.webp \
     --camera-pos 2,1,-2 --camera-pos-end 3,1,-2 \
-    --motion-samples 16 --shutter 1
+    --shutter 0.5 --motion-samples 16
+```
+
+被写界深度とモーションブラーは、サンプルごとに可視性を個別に解決してから、最終画像をエンコードする前にリニア空間で平均します。再構成されたスプラットの色はsRGBとして扱われ、透明な出力では平均化の際にプリマルチプライされたリニアカラーが使用されます。両方の効果を有効にすると、シャッターの各瞬間で `--dof-samples` 個の絞りビューが使用されます。
+
+#### カメラアニメーション {#camera-animations}
+
+`--camera-track` は、単一のビューの代わりに、カメラアニメーションを連番のフレームシーケンスとしてレンダリングします。トラックには、[SuperSplat](/user-manual/supersplat/)エディターのプロジェクト、`animTracks` を含む[ビューア設定](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema)の `settings.json`、またはプレーンなフレームリストを使用できます。保存された `.ssproj` はZIPアーカイブなので、先に展開し、展開したディレクトリまたはその `document.json` を渡してください。フレームリストは次のようになります：
+
+```json
+{
+    "frameRate": 30,
+    "frames": [
+        { "position": [2, 1, -2], "target": [0, 0, 0], "fov": 60 },
+        { "position": [2.1, 1, -1.9], "target": [0, 0, 0], "fov": 60, "up": [0, 1, 0] }
+    ]
+}
+```
+
+エディターのプロジェクトとビューア設定は、エディターやビューアでの再生と同じ方法で評価されます。フレームリストはエントリ間で線形補間されます。`frameRate` のデフォルトは30で、`fov` のないフレームは `--camera-fov` を、`up` のないフレームは `--camera-up` を使用します。各フレームは `<name>.NNNN.webp` として書き込まれ、トラック内のフレームインデックスで番号付けされます。
+
+```bash
+# 展開したSuperSplatプロジェクトのカメラアニメーションの全フレームをレンダリング
+# （view.0000.webp、view.0001.webp、... を書き込みます）
+splat-transform scene.ply view.webp --camera-track scene-project/
+
+# フレーム0〜47を1920x1080でレンダリングし、各フレーム間隔の半分にわたってモーションブラーを適用
+splat-transform scene.ply view.webp --camera-track track.json \
+    --frames 0-47 --resolution 1920x1080 --shutter 0.5
 ```
 
 ### SOG圧縮用デバイス選択
@@ -468,11 +542,14 @@ splat-transform -g 1 input.ply output.sog  # 2番目にリストされたアダ�
 
 # 代わりにCPUを使用して圧縮（非常に遅いが常に利用可能）
 splat-transform -g cpu input.ply output.sog
+
+# Vulkanバックエンドを強制（例：WindowsでのDawn D3D12のバグを回避）
+splat-transform --gpu-backend vulkan input.ply output.sog
 ```
 
 :::note
 
-`-g` が指定されていない場合、WebGPUは自動的に利用可能な最適なGPUを選択します。`--list-gpus` を使用して、インデックスと名前を含む利用可能なアダプタを一覧表示できます。アダプタの順序と可用性は、システムとGPUドライバに依存します。特定のアダプタを選択するには `-g <index>` を、CPU計算を強制するには `-g cpu` を使用します。
+`-g` が指定されていない場合、WebGPUは自動的に利用可能な最適なGPUを選択します。`--list-gpus` を使用して、インデックスと名前を含む利用可能なアダプタを一覧表示できます。アダプタの順序と可用性は、システムとGPUドライバに依存します。特定のアダプタを選択するには `-g <index>` を、CPU計算を強制するには `-g cpu` を使用します。`--gpu-backend` は `--list-gpus` にも適用され、その場合はそのバックエンドのアダプタのみが一覧表示されます。
 
 :::
 

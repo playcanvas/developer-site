@@ -24,9 +24,9 @@ SplatTransform solves the problems developers face when working with Gaussian sp
 🔄 **Broad Format Support** — read PLY, Compressed PLY, SOG, Streamed SOG, SPZ, SPLAT, KSPLAT, LCC and LCC2; write PLY, Compressed PLY, SOG, Streamed SOG, SPZ, GLB, CSV, HTML Viewer, Voxel and WebP image  
 🛠️ **Powerful Transformations** — translate, rotate, and scale your splats with precision  
 🧹 **Smart Filtering** — strip NaN/Inf, filter by value, box, sphere, harmonic band, or floater contribution, and keep only the connected cluster around a seed point  
-📐 **Decimation & Reordering** — simplify via memory-bounded merge-based decimation that scales to 100M+ Gaussians, and reorder by Morton code for spatial locality  
+📐 **Decimation & Reordering** — simplify via memory-bounded merge-based decimation (uniform or error-adaptive) that scales to 100M+ Gaussians, and reorder by Morton code for spatial locality  
 🧱 **Collision Generation** — voxelize a scene into a sparse octree and emit a `.collision.glb` mesh ready for runtime physics  
-🖼️ **Image Rendering** — render a scene to a lossless WebP from a configurable camera view, with panoramas, defocus, and motion blur  
+🖼️ **Image Rendering** — render a scene to a lossless WebP from a configurable camera view, with panoramas, defocus, and motion blur, or render a camera animation as a frame sequence  
 📊 **Statistical Analysis** — per-column statistics and structural metadata (`--stats`, `--info`) for data analysis, validation, and publish gating  
 📦 **Scene Merging** — combine multiple splat files into a single merged scene  
 ⚙️ **Generators** — procedurally synthesize splat data with JavaScript generator scripts  
@@ -84,6 +84,7 @@ splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
 - Input files become the working set; ACTIONS are applied in order
 - The last file is the output; actions after it modify the final result
 - Use `null` as the output to discard file output (useful with `--stats` for analysis-only runs)
+- Input filenames may also be `http(s)://` URLs, downloaded on demand (`.mjs` generators must be local files)
 
 ## Supported Formats
 
@@ -109,6 +110,14 @@ SplatTransform detects file format from the file extension:
 | `.webp`           | ❌    | ✅     | Lossless WebP image rendered from a camera view via GPU rasterizer                                                                                   |
 | `null`            | ❌    | ✅     | Discard output (useful with `--stats` for analysis-only runs)                                                                                        |
 
+### Antialiased and 2DGS Scenes
+
+Scenes trained with antialiasing (a mip-splatting style screen-space filter) or as 2D Gaussian surfels (2DGS) are tagged on read, and the tag is preserved wherever the output format can hold it. `--info` reports it as `model`.
+
+- **On read:** a PLY header comment — Brush's `comment SplatRenderMode: default | mip | 2dgs` or Postshot's `comment antialiased 0 | 1` (the last one wins) — the SPZ antialiased header bit, or the `model` entry of a SOG `meta.json`. A PLY with `scale_0` and `scale_1` but no `scale_2` is read as 2DGS regardless of comments, and the missing column is filled with a zero-thickness scale so the rest of the pipeline is unaffected.
+- **On write:** `.ply` and `.compressed.ply` carry `comment SplatRenderMode: mip | 2dgs` (Brush's spelling, whichever form was read); `.sog` and `meta.json` carry `"model": "antialiased" | "2dgs"`; `.spz` sets its antialiased bit, and warns that it cannot represent 2DGS. A 2DGS PLY output drops the `scale_2` column again. Other output formats have nowhere to record the tag and drop it silently.
+- **Merging:** combining inputs whose tags disagree warns and writes the result untagged.
+
 ## Actions
 
 Actions execute in the order specified and can be repeated. Any action may appear after any input or output file:
@@ -128,15 +137,20 @@ Actions execute in the order specified and can be repeated. Any action may appea
                                           opacity, scale_*, f_dc_* use transformed values
                                           (linear opacity 0-1, linear scale, linear color 0-1).
                                           Append _raw for raw PLY values (e.g. opacity_raw).
--d, --decimate         <n|n%>           Simplify to n Gaussians via merge-based decimation
+-d, --decimate         <n|n%>           Simplify to n Gaussians via merge-based decimation,
+                                          removing at a uniform rate everywhere.
                                           Use n% to keep a percentage of Gaussians.
-                                          Memory-bounded and streaming: scales to scenes of 100M+
-                                          Gaussians. Must be the final action, and the output must
-                                          be .ply (write a decimated PLY first, then convert in a
-                                          second invocation). Deep targets on huge scenes spill
-                                          temporary files to --scratch-dir (default: the output
-                                          file's directory).
-    --scratch-dir      <path>           Directory for decimation spill files
+                                          Lower memory, and better at depth on uniformly-sized
+                                          Gaussians: uniform texture, single objects, snow.
+    --decimate-adaptive <n|n%>          Simplify, allocating removal by local error instead.
+                                          Much better on mixed-scale content such as skies,
+                                          at higher memory cost.
+                                          Both are memory-bounded and streaming: they scale to
+                                          scenes of 100M+ Gaussians. Either must be the final
+                                          action, and the output must be .ply (write a decimated
+                                          PLY first, then convert in a second invocation).
+    --scratch-dir      <path>           Directory for intermediate levels when a deep decimation
+                                          target exceeds memory. Nothing is written without it.
 -F, --filter-floaters  [size,op,min]    Remove Gaussians not contributing to any solid voxel.
                                           Evaluates each Gaussian at occupied voxel centers.
                                           Default: size=0.05, opacity=0.1, min=0.004 (1/255).
@@ -166,6 +180,9 @@ These options configure a run as a whole rather than operating on splat data —
     --memory                            Show peak memory in progress output
     --tty                               Interactive bar rendering (default on a TTY; --no-tty to disable)
 -w, --overwrite                         Overwrite output file if it exists
+    --webp-effort      <0-9>            Lossless WebP compression effort for image, SOG, HTML and LOD output.
+                                          Higher tries harder to reduce size. Default: libwebp's default
+                                          lossless settings.
 ```
 
 ### GPU Options
@@ -177,6 +194,9 @@ Used by SOG compression and GPU voxelization (`--filter-cluster`, `--filter-floa
 -g, --gpu              <n|cpu>          Device for GPU operations: GPU adapter index | 'cpu'
                                           ('cpu' disables GPU and is incompatible with
                                           GPU-only features like --filter-cluster)
+    --gpu-backend      <name>           Force the WebGPU backend: vulkan | d3d12 | metal.
+                                          Default: the platform default (e.g. vulkan works around
+                                          Dawn D3D12 bugs on Windows)
 ```
 
 ### SOG Compression Options
@@ -185,7 +205,7 @@ Apply when writing `.sog`, `meta.json`, `lod-meta.json`, or `.html` outputs.
 
 ```none
 -i, --sh-iterations    <n>              Iterations for SH compression (more=better). Default: 10
-    --max-workers      <n>              Worker threads for SOG encoding (0 = inline/serial). Default: 4
+    --max-workers      <n>              Worker threads for SOG and image-sequence encoding (0 = inline/serial). Default: 4
 ```
 
 ### SPZ Output Options
@@ -207,7 +227,7 @@ Apply when writing `.html` outputs.
 
 :::note
 
-See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `--viewer-settings` option.
+See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `--viewer-settings` option. The settings are validated before the page is written, so an invalid file fails the run instead of producing a viewer that renders nothing.
 
 :::
 
@@ -226,7 +246,10 @@ Apply when writing `lod-meta.json` ([Streamed SOG](/user-manual/gaussian-splatti
 ```none
     --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
     --lod-chunk-extent <n>              Approximate size of an LOD chunk in world units (m). Default: 16
+    --lod-chunk-min    <n>              Gaussians in K below which a chunk is not split for extent. Default: 8
 ```
+
+A chunk is split when it holds more than `--lod-chunk-count` Gaussians, or when it is wider than `--lod-chunk-extent` and holds more than `--lod-chunk-min`. The minimum keeps sparse regions such as sky or distant background from being cut into thousands of near-empty chunks: below it, a region stays one chunk however wide it is. Dense regions are unaffected.
 
 See [Generating Streamed SOG](/user-manual/splat-transform/streamed-sog) for an end-to-end walkthrough.
 
@@ -274,18 +297,30 @@ Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer).
                                         smaller = more blur. Pinhole only. Default: disabled (no defocus).
     --focus-distance   <n>              Camera-space Z of the focus plane (world units). Default: distance to --camera-target.
                                         Pinhole only; only meaningful with --f-stop.
+    --dof-samples      <n>              Aperture samples per instant with --f-stop. Default: 32. More samples reduce
+                                        sampling artifacts at greater cost; multiplies --motion-samples when combined.
     --sensor-size      <n>              Vertical sensor height in world units. Gives --f-stop a physical meaning.
                                         Default: 0.024 (35mm full-frame, world units = meters). Scale to your world:
                                         world unit = decimeter → 0.24, world unit = millimeter → 24.
-    --camera-pos-end   <x,y,z>          End camera position. When set, enables camera motion blur: the renderer
-                                        averages sub-frames with the camera interpolated from --camera-pos (shutter open)
-                                        to --camera-pos-end (shutter close). Default: disabled (no motion blur).
+    --camera-pos-end   <x,y,z>          End camera position. When set, enables camera motion blur: the camera moves
+                                        from --camera-pos (shutter open) to --camera-pos-end (shutter close) and the
+                                        frame averages renders at instants across the shutter. Default: disabled.
     --camera-target-end <x,y,z>         End camera target. Default: same as --camera-target. Only with --camera-pos-end.
     --camera-up-end    <x,y,z>          End up vector. Default: same as --camera-up. Only with --camera-pos-end.
-    --shutter          <0..1>           Fraction of the start→end segment integrated, centered on the midpoint
-                                        (1.0 = full motion; 0.5 = 180° shutter). Default: 1. Only with --camera-pos-end.
-    --motion-samples   <n>              Sub-frames to accumulate for motion blur. Cost is N× a single render.
-                                        Default: 16. Only with --camera-pos-end.
+    --shutter          <0..1>           Fraction of the start→end segment averaged, centered on its midpoint. Default: 0.5.
+                                        With --camera-track, fraction of the frame interval averaged around each frame.
+                                        Default for tracks: off. 1.0 = full interval; 0.5 = 180° shutter.
+    --motion-samples   <n>              Renders averaged per motion-blurred frame, at evenly spaced instants across
+                                        the shutter. Cost is N× a single render; too few show as discrete copies
+                                        where the motion between instants exceeds a couple of pixels. Default: 16.
+    --camera-track     <path>           Render a camera animation as a frame sequence: a SuperSplat editor project
+                                        (.ssproj directory or its document.json), a viewer settings.json with
+                                        animTracks, or a JSON { frameRate, frames: [{ position, target, fov, up }] }.
+                                        Frames are written as <name>.NNNN.webp. Replaces --camera-pos/--camera-target;
+                                        the track's target is the defocus focus point. A frame's up vector tilts the
+                                        camera; frames without one use --camera-up. With --shutter, each frame is
+                                        motion-blurred over that fraction of the frame interval.
+    --frames           <a[-b]>          Inclusive frame range of the track to render. Default: all frames.
 ```
 
 ## Examples
@@ -364,7 +399,15 @@ splat-transform input.ply --decimate 50000 output.ply
 
 # Simplify to 25% of original splat count
 splat-transform input.ply -d 25% output.ply
+
+# Allocate removal by local error (better on mixed-scale content such as skies)
+splat-transform input.ply --decimate-adaptive 25% output.ply
+
+# Deep target on a huge scene: give the intermediate levels somewhere to go
+splat-transform huge.ply -d 1% --scratch-dir /mnt/scratch output.ply
 ```
+
+Decimation works within a memory budget of half the machine's RAM (at most 48 GiB). When a deep target on a huge scene produces an intermediate level that doesn't fit, the run stops with an error unless `--scratch-dir` is set; with it, those levels are written there as temporary PLY files and removed once consumed.
 
 ### Scene Merging
 
@@ -437,6 +480,9 @@ splat-transform input.ply view.webp --background 0,0,0,0
 # Defocus blur (focus on camera-target, f/2.8 aperture)
 splat-transform input.ply view.webp --f-stop 2.8
 
+# Smoother aperture sampling for strongly defocused edges
+splat-transform input.ply view.webp --f-stop 1 --dof-samples 64
+
 # Defocus with explicit focus distance and a smaller world scale
 splat-transform input.ply view.webp \
     --f-stop 2.8 --focus-distance 3 --sensor-size 0.1
@@ -445,10 +491,38 @@ splat-transform input.ply view.webp \
 splat-transform input.ply pano.webp \
     --projection equirect --camera-pos 0,1,0 --camera-target 0,1,1
 
-# Camera motion blur (dolly from start to end pose over the shutter)
+# Camera motion blur (dolly from start to end pose over a 180° shutter, 16 instants averaged)
 splat-transform input.ply view.webp \
     --camera-pos 2,1,-2 --camera-pos-end 3,1,-2 \
-    --motion-samples 16 --shutter 1
+    --shutter 0.5 --motion-samples 16
+```
+
+Depth of field and motion blur resolve visibility separately for each sample, then average in linear light before encoding the final image. Reconstructed splat colors are treated as sRGB; transparent outputs use premultiplied linear color during averaging. When both effects are enabled, each shutter instant uses `--dof-samples` aperture views.
+
+#### Camera Animations
+
+`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](/user-manual/supersplat/) editor project, a [viewer settings](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
+
+```json
+{
+    "frameRate": 30,
+    "frames": [
+        { "position": [2, 1, -2], "target": [0, 0, 0], "fov": 60 },
+        { "position": [2.1, 1, -1.9], "target": [0, 0, 0], "fov": 60, "up": [0, 1, 0] }
+    ]
+}
+```
+
+Editor projects and viewer settings are evaluated the way the editor and viewer play them back. A frame list is interpolated linearly between entries; `frameRate` defaults to 30, frames without a `fov` use `--camera-fov`, and frames without an `up` use `--camera-up`. Each frame is written as `<name>.NNNN.webp`, numbered by its frame index in the track.
+
+```bash
+# Render every frame of an extracted SuperSplat project's camera animation
+# (writes view.0000.webp, view.0001.webp, ...)
+splat-transform scene.ply view.webp --camera-track scene-project/
+
+# Render frames 0-47 at 1920x1080, motion-blurred over half of each frame interval
+splat-transform scene.ply view.webp --camera-track track.json \
+    --frames 0-47 --resolution 1920x1080 --shutter 0.5
 ```
 
 ### Device Selection for SOG Compression
@@ -468,11 +542,14 @@ splat-transform -g 1 input.ply output.sog  # Use second listed adapter
 
 # Use CPU for compression instead (much slower but always available)
 splat-transform -g cpu input.ply output.sog
+
+# Force the Vulkan backend (e.g. to work around Dawn D3D12 bugs on Windows)
+splat-transform --gpu-backend vulkan input.ply output.sog
 ```
 
 :::note
 
-When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `--list-gpus` to list available adapters with their indices and names. The order and availability of adapters depend on your system and GPU drivers. Use `-g <index>` to select a specific adapter, or `-g cpu` to force CPU computation.
+When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `--list-gpus` to list available adapters with their indices and names. The order and availability of adapters depend on your system and GPU drivers. Use `-g <index>` to select a specific adapter, or `-g cpu` to force CPU computation. `--gpu-backend` also applies to `--list-gpus`, which then lists only that backend's adapters.
 
 :::
 

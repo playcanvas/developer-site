@@ -13,9 +13,11 @@ description: "AWS GPU インスタンスや CPU 専用バリアントを含む�
 
 - `--filter-cluster` と `--filter-floaters`。
 - `.voxel.json` 出力と `--collision-mesh`（[コリジョンメッシュ](/user-manual/splat-transform/collision)ガイドを参照）。
+- `--camera-track` のフレームシーケンスを含む `.webp` 画像出力（[画像出力オプション](/user-manual/splat-transform/#image-output-options)を参照）。
 
 いくつかは **GPU 加速されているがオプション**です：
 
+- `--decimate` と `--decimate-adaptive`。デフォルトで GPU を使用し、`-g cpu` で CPU で実行されます。
 - SOG / `meta.json` / `lod-meta.json` / `.html` ビューア出力（[SOG 圧縮オプション](/user-manual/splat-transform/#sog-compression-options)を参照）。このライター内で GPU を使用する唯一のステップは球面調和係数の k-means クラスタリングなので：
   - SH バンドを**持たない**入力（例：`.splat`、SH を取り除いた PLY、または `-H 0` / `--filter-harmonics 0` を経由したもの）は SOG を完全に CPU で書き込みます。
   - SH バンドを**持つ**入力も `-g cpu` で CPU で動作しますが、SH クラスタリングは GPU なしではおおよそ 5-10 倍遅くなります。

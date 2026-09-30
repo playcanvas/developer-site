@@ -76,7 +76,7 @@ interface Meta {
     generator?: string;    // e.g. "splat-transform v1.2.3"
   };
   count: number;           // Number of gaussians (<= W*H of the images)
-  antialias?: boolean;     // Optional. True iff scene was trained with anti-aliasing. Default: false
+  model?: "antialiased" | "2dgs"; // Optional. How the scene was trained; omitted for ordinary gaussians
 
   means: {
     // Ranges for decoding *log-transformed* positions (see §3.1).
@@ -305,7 +305,7 @@ for (let c = 0; c < shCoeffs; c++) {
   "version": 2,
   "asset": { "generator": "splat-transform v1.2.3" },
   "count": 187543,
-  "antialias": true,
+  "model": "antialiased",
   "means": {
     "mins": [-2.10, -1.75, -2.40],
     "maxs": [ 2.05,  2.25,  1.90],

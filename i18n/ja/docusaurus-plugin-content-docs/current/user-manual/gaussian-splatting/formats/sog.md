@@ -76,7 +76,7 @@ interface Meta {
     generator?: string;    // 例: "splat-transform v1.2.3"
   };
   count: number;           // ガウス分布の数 (画像のW*H以下)
-  antialias?: boolean;     // オプション。シーンがアンチエイリアシングで学習された場合に真。デフォルト: false
+  model?: "antialiased" | "2dgs"; // オプション。シーンの学習方法。通常のガウス分布の場合は省略
 
   means: {
     // *対数変換された*位置をデコードするための範囲 (3.1節参照)。
@@ -275,7 +275,7 @@ const index = shN_labels.r + (shN_labels.g << 8);
   "version": 2,
   "asset": { "generator": "splat-transform v1.2.3" },
   "count": 187543,
-  "antialias": true,
+  "model": "antialiased",
   "means": {
     "mins": [-2.10, -1.75, -2.40],
     "maxs": [ 2.05,  2.25,  1.90],
