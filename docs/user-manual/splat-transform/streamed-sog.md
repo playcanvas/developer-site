@@ -12,7 +12,7 @@ For loading and rendering Streamed SOG in a PlayCanvas application, see the [LOD
 You can obtain the LOD levels in two ways:
 
 - **Supply your own LOD files** — provide a separate splat file for each level, for example produced during training or exported from another tool.
-- **Generate them by decimating a single source** — use [`--decimate`](/user-manual/splat-transform/#actions) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately. `--decimate` removes Gaussians at a uniform rate everywhere; `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at higher memory cost.
+- **Generate them by decimating a single source** — use [`--decimate`](/user-manual/splat-transform/#decimation) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately. `--decimate` removes Gaussians at a uniform rate everywhere; `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at higher memory cost.
 
 :::note
 
@@ -120,5 +120,5 @@ splat-transform scene/lod-meta.json --info null
 
 - [Streamed SOG format](/user-manual/gaussian-splatting/formats/streamed-sog) — the on-disk format specification.
 - [LOD Streaming](/user-manual/gaussian-splatting/building/lod-streaming) — loading and rendering Streamed SOG in a PlayCanvas app.
-- [splat-transform CLI reference](/user-manual/splat-transform/) — full option reference including LOD Input/Output Options.
+- [CLI Reference](/user-manual/splat-transform/cli-reference#lod-input-options) — full option reference including LOD Input/Output Options.
 - [SuperSplat streaming](/user-manual/supersplat/streaming) — generating Streamed SOG through the SuperSplat web UI.

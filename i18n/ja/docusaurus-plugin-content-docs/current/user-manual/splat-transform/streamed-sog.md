@@ -12,7 +12,7 @@ PlayCanvasアプリケーションでのStreamed SOGの読み込みとレンダ�
 LODレベルは次の2つの方法で用意できます：
 
 - **独自のLODファイルを用意する** — 各レベルごとに個別のスプラットファイルを提供します（例：トレーニング時に生成したものや、別のツールからエクスポートしたもの）。
-- **単一のソースをデシメートして生成する** — [`--decimate`](/user-manual/splat-transform/#actions)を使用して、1つの高品質な入力から詳細度の低いレベルを作成できます。各レベルを個別に用意する必要はありません。`--decimate` はあらゆる場所で均一な割合でガウシアンを削減します。`--decimate-adaptive` は代わりに局所的な誤差に応じて削減量を配分するため、空などスケールが混在するコンテンツでははるかに良い結果になりますが、メモリ使用量は多くなります。
+- **単一のソースをデシメートして生成する** — [`--decimate`](/user-manual/splat-transform/#decimation)を使用して、1つの高品質な入力から詳細度の低いレベルを作成できます。各レベルを個別に用意する必要はありません。`--decimate` はあらゆる場所で均一な割合でガウシアンを削減します。`--decimate-adaptive` は代わりに局所的な誤差に応じて削減量を配分するため、空などスケールが混在するコンテンツでははるかに良い結果になりますが、メモリ使用量は多くなります。
 
 :::note
 
@@ -120,5 +120,5 @@ splat-transform scene/lod-meta.json --info null
 
 - [Streamed SOGフォーマット](/user-manual/gaussian-splatting/formats/streamed-sog) — ディスク上のフォーマット仕様。
 - [LODストリーミング](/user-manual/gaussian-splatting/building/lod-streaming) — PlayCanvasアプリでのStreamed SOGの読み込みとレンダリング。
-- [splat-transform CLI リファレンス](/user-manual/splat-transform/) — LOD入力/出力オプションを含む完全なオプションリファレンス。
+- [CLIリファレンス](/user-manual/splat-transform/cli-reference#lod-input-options) — LOD入力/出力オプションを含む完全なオプションリファレンス。
 - [SuperSplatのストリーミング](/user-manual/supersplat/streaming) — SuperSplatのWeb UIを介したStreamed SOGの生成。

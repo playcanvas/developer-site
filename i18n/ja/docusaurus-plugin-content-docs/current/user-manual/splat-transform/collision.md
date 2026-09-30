@@ -225,6 +225,6 @@ splat-transform input.ply \
 ## 関連項目
 
 - [ボクセルフォーマット](/user-manual/splat-transform/voxel-format) — `.voxel.json` / `.voxel.bin` 出力のディスク上のフォーマット。
-- [splat-transform CLI リファレンス](/user-manual/splat-transform/) — ボクセル出力オプションを含む完全なオプションリファレンス。
+- [CLIリファレンス](/user-manual/splat-transform/cli-reference#voxel-output-options) — ボクセル出力オプションを含む完全なオプションリファレンス。
 - [Docker バックエンド](/user-manual/splat-transform/docker) — コンテナで GPU 専用のボクセル/コリジョン機能を実行する方法。
 - [Studio → コリジョン](/user-manual/supersplat/studio/collision) — SuperSplat の Web UI を介してボクセルコリジョンをアップロードまたは生成する方法。
