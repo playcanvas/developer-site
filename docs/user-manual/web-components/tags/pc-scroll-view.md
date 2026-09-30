@@ -3,13 +3,15 @@ title: <pc-scroll-view>
 description: "Reference for the pc-scroll-view element: scrollable viewport with content, scrollbars, mouse-wheel support, and bounce/clamp/infinite modes."
 ---
 
-The `<pc-scroll-view>` tag is used to define a scroll view component, which lets the user scroll a larger content area within a clipped viewport.
+The `<pc-scroll-view>` tag adds a scroll view component, which shows part of a larger content element through a viewport, and lets the user bring the rest into view by dragging it, with the mouse wheel or with scrollbars.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
 * It references its viewport, content, and scrollbar entities by entity `name` or document-wide `#` selector — see [Entity References](../attributes.md#entity-references).
-* The viewport element should have its `mask` attribute set so the content is clipped to the scroll view's bounds.
+* The viewport should be an image element with `mask` set, so that the content is only drawn inside it. A mask isn't drawn itself, so its `color` has no effect.
+* The content must be a child of the viewport, anchored to its top-left corner with a top-left pivot, `anchor="0 1 0 1" pivot="0 1"`, and sized to fit what it holds, since the scroll view never resizes it. It needs `use-input` to be dragged. See [Sizing the Content](/user-manual/user-interface/scroll-views/#sizing-the-content).
+* The mouse wheel scrolls the view while the pointer is over an input-enabled element in it, such as the content.
 
 :::
 
@@ -19,26 +21,26 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `bounce-amount` | Number | `"0.1"` | How far content bounces past its bounds when `scroll-mode="bounce"` (0 to 1) |
+| `bounce-amount` | Number | `"0.1"` | How slowly the content springs back after it is scrolled past its edges, with `scroll-mode="bounce"`. 0 snaps it back at once, 0.1 feels like scrolling on a phone, and larger values are slower |
 | `content` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the content [`<pc-entity>`](../pc-entity) that is moved as the view is scrolled |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
+| `friction` | Number | `"0.05"` | How quickly the content slows down after it is flung, from 0 to 1: at 0 it never slows down, and at 1 it stops at once |
 | `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
 | `horizontal-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the horizontal [`<pc-scrollbar>`](../pc-scrollbar) |
 | `horizontal-scrollbar-visibility` | Enum | `"always"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
-| `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
+| `scroll-mode` | Enum | `"bounce"` | What happens at the edges of the content: `"clamp"` \| `"bounce"` \| `"infinite"`. `"clamp"` stops the content there, `"bounce"` lets it go past them and springs it back, and `"infinite"` lets it scroll on forever. The mouse wheel never bounces |
 | `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
 | `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
 | `vertical-scrollbar` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) holding the vertical [`<pc-scrollbar>`](../pc-scrollbar) |
 | `vertical-scrollbar-visibility` | Enum | `"always"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
-| `viewport` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport, which clips the content to the scroll view's bounds |
+| `viewport` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) used as the viewport: the masked image element that the content is clipped to |
 
 </div>
 
 ## Example
 
-Scroll the striped content with the mouse wheel, by dragging it, or with the scrollbar. The viewport's `mask` clips the content. Try `scroll-mode="clamp"` (no bounce), or a taller content `height`:
+Scroll the rows with the mouse wheel, by dragging them, or with the scrollbar. The viewport's `mask` clips them. Try `scroll-mode="clamp"` to stop at the edges without a bounce, a `friction` of `0.5` to stop a fling sooner, or a taller content `height`:
 
 ```html live-example
 <pc-app>
@@ -59,7 +61,7 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
 
                 <!-- Viewport clips the content to the scroll view's bounds -->
                 <pc-entity name="viewport" id="viewport">
-                    <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" color="#2a2d36" mask></pc-element>
+                    <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" mask></pc-element>
 
                     <!-- Content is moved as the view is scrolled. Its height is the laid-out
                          size of the rows: 8 x 60, plus 7 x 8 spacing, plus 10 padding top and bottom -->
@@ -77,13 +79,13 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
                     </pc-entity>
                 </pc-entity>
 
-                <!-- Vertical scrollbar: a 20px strip hugging the inside of the right edge -->
+                <!-- Vertical scrollbar: a 20-unit strip hugging the inside of the right edge -->
                 <pc-entity name="v-scrollbar" id="v-scrollbar">
                     <pc-element type="image" anchor="1 0 1 1" pivot="1 0.5" width="20" margin="0 0 0 0" color="#2a2d36"></pc-element>
                     <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
                     <pc-entity name="handle" id="v-handle">
                         <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
-                        <pc-button></pc-button>
+                        <pc-button hover-tint="#ffa76d" pressed-tint="#cc6e30"></pc-button>
                     </pc-entity>
                 </pc-entity>
             </pc-entity>
@@ -103,5 +105,6 @@ The `component` property is the engine [ScrollViewComponent](https://api.playcan
 * [`<pc-scrollbar>`](../pc-scrollbar) — drives the view and reflects its position
 * [`<pc-element>`](../pc-element) — the viewport and content are elements; `mask` clips the content
 * [`<pc-layout-group>`](../pc-layout-group) — lays out the content's children
+* [Scroll Views](/user-manual/user-interface/scroll-views/) — building one, sizing its content and scrolling from code, in the User Interface section
 
-Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).
