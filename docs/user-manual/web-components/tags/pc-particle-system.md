@@ -28,7 +28,7 @@ The JSON asset holds the settings of the engine's [ParticleSystemComponent](http
 
 `colorMapAsset` names a [`<pc-asset>`](../pc-asset) by its `id`, which the element resolves to the texture. It is the only asset setting that can: `normalMapAsset`, `meshAsset` and `renderAsset` given the same way do not resolve.
 
-Declare the configuration's `<pc-asset>` without `lazy`, and set `asset` in the markup. A configuration that arrives after the component exists, as a lazy one does, is not converted to the engine's types, and fails to apply.
+The configuration's `<pc-asset>` can be `lazy`, and changing `asset` at runtime swaps in another configuration. Whenever a configuration arrives, the element builds its vectors and curves as the engine does and applies every setting to the component. An `enabled` key in the configuration is ignored: the element's `enabled` attribute decides whether the system runs.
 
 ## Example
 

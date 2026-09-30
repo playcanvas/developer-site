@@ -28,7 +28,7 @@ JSONアセットはエンジンの[ParticleSystemComponent](https://api.playcanv
 
 `colorMapAsset`は[`<pc-asset>`](../pc-asset)を`id`で指定し、要素がそれをテクスチャに解決します。これができるアセット設定はこれだけで、`normalMapAsset`、`meshAsset`、`renderAsset`を同じように指定しても解決されません。
 
-設定の`<pc-asset>`は`lazy`なしで宣言し、`asset`はマークアップで設定してください。lazyな設定のように、コンポーネントが存在した後に届いた設定はエンジンの型に変換されず、適用に失敗します。
+設定の`<pc-asset>`は`lazy`にでき、実行時に`asset`を変更すると別の設定に差し替わります。設定がいつ届いても、要素はエンジンと同じようにベクトルとカーブを構築し、すべての設定をコンポーネントに適用します。設定内の`enabled`キーは無視されます。システムを動かすかどうかは要素の`enabled`属性が決めます。
 
 ## 例 {#example}
 

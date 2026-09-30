@@ -1,6 +1,6 @@
 ---
 title: <pc-app>
-description: "Reference for the pc-app element: initializes the PlayCanvas Application, graphics options, and root container for scenes and entities."
+description: "Reference for the pc-app element: initializes the PlayCanvas Application, its graphics options and time scales, and the root container for scenes and entities."
 ---
 
 The `<pc-app>` tag is the root element for your PlayCanvas application. It is used to initialize the PlayCanvas application and provide a container for your scene.
@@ -24,18 +24,24 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
 | `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at, above 0. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
+| `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame, applied on top of `time-scale`: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running — for a pause menu, say, that must stay interactive while the world stands still |
 | `picking` | Enum | `"auto"` | When the application picks the scene under the pointer to dispatch [pointer events](../pc-entity#events) on entity elements: `"auto"` \| `"always"` \| `"none"`. `auto` picks for an event type only while a listener for it is registered on an entity element or on [`<pc-scene>`](../pc-scene); `always` picks for every pointer event, which listeners the application cannot see need, such as one on the document or a framework's delegated handler like React's `onPointerMove`; `none` never picks, so entities receive no pointer events. Picking renders the scene again, which is why `auto` is the default. See [When Events Are Dispatched](../pc-entity#when-events-are-dispatched) |
 | `stencil-buffer` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
+| `time-scale` | Number | `"1"` | Scale on the time the application advances by each frame. Scripts, animation and physics all advance by the scaled time, so below 1 is slow motion, above 1 speeds it up, and `"0"` pauses all three together while the scene keeps rendering. To slow down or pause physics alone, use `physics-time-scale` |
 | `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page: an app that boots with it switches it on for all of them, and a later change on any app sets it for all of them |
 
 </div>
 
 :::note[When these are read]
 
-Every attribute above except `max-pixel-ratio`, `loading-bar`, `area-light-luts`, `picking` and `with-credentials` is read once, when the element is
-inserted into the document and creates its graphics device. Changing one afterwards updates the
-element's property but has no effect on the running application, and logs a warning saying so — to
-apply a new value, remove the element and re-insert it.
+`alpha`, `antialias`, `backend`, `depth-buffer` and `stencil-buffer` configure the graphics device,
+so they are read once, when the element is inserted into the document and creates it. Changing one
+afterwards updates the element's property but has no effect on the running application, and logs a
+warning saying so — to apply a new value, remove the element and re-insert it.
+
+Every other attribute is live, applying to the running application as soon as it changes, except
+that `loading-bar` can only remove the bar (see [Loading bar](#loading-bar)). The two time scales
+are in place before any script's `initialize()` runs.
 
 :::
 

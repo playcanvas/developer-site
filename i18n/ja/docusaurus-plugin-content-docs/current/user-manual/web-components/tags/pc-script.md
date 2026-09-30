@@ -24,7 +24,7 @@ description: "pc-script要素のリファレンス: pc-script-instance子要素�
 
 ## 例 {#example}
 
-2つのスクリプトを保持する1つのスクリプトコンポーネントです — `rotate` がキューブを回転させ、`pulse` がスケールを脈動させます。どちらかの `<pc-script-instance>` タグを削除したり、一方に `enabled="false"` を加えてそのスクリプトだけを無効にしたりしてみましょう:
+2つのスクリプトを保持する1つのスクリプトコンポーネントです — `rotate` がキューブを回転させ、`pulse` がスケールを脈動させます。どちらかの `<pc-script-instance>` タグを削除したり、一方に `enabled="false"` を加えてそのスクリプトだけを無効にしたり、`<pc-script>` に加えて両方を無効にしたりしてみましょう:
 
 ```html live-example
 <pc-app>
