@@ -27,10 +27,6 @@
     "message": "API Reference",
     "description": "The label of footer link with label=API Reference linking to https://api.playcanvas.com"
   },
-  "link.item.label.Twitter / X": {
-    "message": "Twitter / X",
-    "description": "The label of footer link with label=Twitter / X linking to https://twitter.com/playcanvas"
-  },
   "link.item.label.Facebook": {
     "message": "Facebook",
     "description": "The label of footer link with label=Facebook linking to https://www.facebook.com/playcanvas"
@@ -47,10 +43,6 @@
     "message": "Discord",
     "description": "The label of footer link with label=Discord linking to https://discord.gg/RSaMRzg"
   },
-  "link.item.label.Stack Overflow": {
-    "message": "Stack Overflow",
-    "description": "The label of footer link with label=Stack Overflow linking to https://stackoverflow.com/questions/tagged/playcanvas"
-  },
   "link.item.label.Blog": {
     "message": "Blog",
     "description": "The label of footer link with label=Blog linking to https://blog.playcanvas.com"
@@ -62,9 +54,5 @@
   "link.item.label.YouTube": {
     "message": "YouTube",
     "description": "The label of footer link with label=YouTube linking to https://www.youtube.com/@playcanvas"
-  },
-  "copyright": {
-    "message": "Copyright © 2024 PlayCanvas Ltd.",
-    "description": "The footer copyright"
   }
 }
