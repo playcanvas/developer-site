@@ -85,24 +85,50 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 ## 例 {#example}
 
-エンティティのトランスフォームは階層を通じて合成されます。小さいキューブは大きいキューブの*子*なので、大きいキューブにポインタを乗せると両方が一緒に動きます。どちらのキューブをクリックしても2つとも回転します。子にはハンドラがないため、そのクリックが親までバブリングするからです。親の `rotation` や `scale`、インラインのハンドラを編集してみましょう:
+入れ子のエンティティで組み立てたデスクランプです。関節である `arm`、`forearm`、`head` はそれぞれ親を基準に配置・回転されているため、1つを回すと、その先にあるものがライトも含めてすべて一緒に動きます。ハンドラーはすべてルートの `lamp` にあります。ポインターがパーツの間をどう移動しても、`pointerenter` と `pointerleave` はランプ全体に対して1回ずつ発生します。また、どのパーツのクリックも `lamp` までバブリングし、電球の `enabled` 属性を切り替えます。エンティティを無効にするとそのコンポーネントと子もまとめて無効になるため、ライトと発光が一緒に消えます。関節の `rotation` の値を変えてランプにポーズを付けたり、ルートに `scale` を付けて大きさを変えたりしてみましょう:
 
 ```html live-example
 <pc-app>
+    <pc-material id="paint" diffuse="#e8702a" gloss="0.7"></pc-material>
+    <pc-material id="steel" diffuse="#b7bec7" gloss="0.8"></pc-material>
+    <pc-material id="glow" emissive="#fff0d0"></pc-material>
+    <pc-material id="desk" diffuse="#3d4250"></pc-material>
     <pc-scene>
-        <pc-entity name="camera" position="0 1 4">
+        <pc-entity name="camera" position="0.45 1.55 2.3" rotation="-27 0 0">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity name="light" rotation="45 30 0">
-            <pc-light></pc-light>
+        <pc-entity name="room-light" rotation="40 50 0">
+            <pc-light intensity="0.8" cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
-        <pc-entity name="parent" rotation="0 30 0" tags="interactive"
-                   onpointerenter="this.entity.setLocalPosition(0, 0.25, 0)"
-                   onpointerleave="this.entity.setLocalPosition(0, 0, 0)"
-                   onclick="this.entity.rotate(0, 45, 0)">
-            <pc-render type="box"></pc-render>
-            <pc-entity name="child" position="0.75 0.75 0" scale="0.5 0.5 0.5">
-                <pc-render type="box"></pc-render>
+        <pc-entity name="desk" scale="100 1 100">
+            <pc-render type="plane" material="desk"></pc-render>
+        </pc-entity>
+        <pc-entity name="lamp" rotation="0 -25 0"
+                   onpointerenter="document.body.style.cursor = 'pointer'"
+                   onpointerleave="document.body.style.cursor = ''"
+                   onclick="const bulb = this.querySelector('[name=bulb]'); bulb.setAttribute('enabled', !bulb.enabled)">
+            <pc-entity name="base" position="0 0.025 0" scale="0.45 0.05 0.45">
+                <pc-render type="cylinder" material="paint"></pc-render>
+            </pc-entity>
+            <pc-entity name="arm" position="0 0.05 0" rotation="0 0 25">
+                <!-- スケールは arm ではなくロッドに付けているので、その先の関節は引き伸ばされません -->
+                <pc-entity name="arm-rod" position="0 0.35 0" scale="0.04 0.7 0.04">
+                    <pc-render type="cylinder" material="steel"></pc-render>
+                </pc-entity>
+                <pc-entity name="forearm" position="0 0.7 0" rotation="0 0 -80">
+                    <pc-entity name="forearm-rod" position="0 0.35 0" scale="0.04 0.7 0.04">
+                        <pc-render type="cylinder" material="steel"></pc-render>
+                    </pc-entity>
+                    <pc-entity name="head" position="0 0.7 0" rotation="0 0 70">
+                        <pc-entity name="shade" position="0 -0.12 0" scale="0.3 0.24 0.3">
+                            <pc-render type="cone" material="paint"></pc-render>
+                        </pc-entity>
+                        <pc-entity name="bulb" position="0 -0.24 0" scale="0.1 0.1 0.1">
+                            <pc-render type="sphere" material="glow"></pc-render>
+                            <pc-light type="spot" color="#ffc978" intensity="4" inner-cone-angle="25" outer-cone-angle="35"></pc-light>
+                        </pc-entity>
+                    </pc-entity>
+                </pc-entity>
             </pc-entity>
         </pc-entity>
     </pc-scene>
