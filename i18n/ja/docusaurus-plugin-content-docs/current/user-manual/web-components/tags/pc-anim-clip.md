@@ -16,7 +16,7 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
 
 `name`は2つの役割を兼ねます。クリップを再生するときに使う名前であり、*かつ*クリップの供給元から探すトラックの名前です。その供給元は、囲んでいるモデルか、指定したアセットのいずれかになります。
 
-**囲んでいるモデル。** `asset`がない場合、トラックは親の[`<pc-anim>`](../pc-anim)を囲む[`<pc-model>`](../pc-model)のコンテナから取得されます。これが通常のケースです。複数のアニメーションを含めてエクスポートされたGLBの各アニメーションを、クリップとして宣言します。
+**囲んでいるモデル。** `asset`がない場合、トラックは親の[`<pc-anim>`](../pc-anim)が直下に置かれている[`<pc-model>`](../pc-model)のコンテナから取得されます。これが通常のケースです。複数のアニメーションを含めてエクスポートされたGLBの各アニメーションを、クリップとして宣言します。
 
 ```html
 <pc-model name="hero" asset="hero-glb">
@@ -27,7 +27,7 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
 </pc-model>
 ```
 
-**名前を指定したアセット。** `asset`で[`<pc-asset>`](../pc-asset)を指すと、トラックを別のファイルから取得できます。共有のクリップライブラリを、それを含めずにエクスポートされたモデルに適用する方法です。使用できるアセットタイプは3つです。`container`（GLB）、`animation`のGLB、`animclip`のJSONです。
+**名前を指定したアセット。** `asset`で[`<pc-asset>`](../pc-asset)を指すと、トラックを別のファイルから取得できます。共有のクリップライブラリを、それを含めずにエクスポートされたモデルに適用する方法です。使用できるアセットタイプは3つです。`container`（GLB）、`animation`のGLB、`animclip`のJSONです。後の2つは`type="animation"`または`type="animclip"`を付けて宣言してください。そうしないと`.glb`は`container`として、`.json`は通常のJSONとして読み込まれます。
 
 ```html
 <pc-asset id="hero-glb" type="container" src="hero.glb"></pc-asset>
@@ -63,13 +63,13 @@ description: "pc-anim-clip要素のリファレンス: pc-animコンポーネン
 
 </div>
 
-すべての属性はライブです。`speed`や`loop`の変更は即座に適用され、再生ヘッドの位置は保たれます。`asset`や`name`の変更はトラックを再解決するため、再生中のクリップであれば再スタートします。コンポーネント自身の[`speed`](../pc-anim#attributes)は、ここでの設定に乗算されます。
+すべての属性はライブです。`speed`や`loop`の変更は即座に適用され、再生ヘッドの位置は保たれます。`asset`や`name`の変更はトラックを再解決し、古い名前を指していたコンポーネントの`clip`の選択は一致しなくなります。コンポーネント自身の[`speed`](../pc-anim#attributes)は、ここでの設定に乗算されます。
 
 ## 読み込み {#loading}
 
-要素は、トラックが解決されて割り当てられた時点でreadyになります。それまでは親のコンポーネントが空のトラックでクリップの場所を確保するため、シーンがファイルの読み込みで止まることはありません。`activate`は再生を開始し、宣言された`clip`の選択もマークアップが解析された時点で適用され、アセットが届いた時点で実際の動きが現れます。
+要素は、トラックが解決されて割り当てられた時点でreadyになります。それまでは親のコンポーネントが空のトラックでクリップの場所を確保するため、シーンがファイルの読み込みで止まることはありません。`activate`は再生を開始し、宣言された`clip`の選択もコンポーネントが存在した時点で適用され、アセットが届いた時点で実際の動きが現れます。
 
-トラックを解決できなかったクリップは警告を出して未readyのままになり、ライブラリの残りは再生可能なまま保たれます。コンソールのメッセージが原因を示します。アセットが見つからない、読み込みに失敗した、アセットのタイプが違う、供給元に使用できるトラックがない、のいずれかです。
+トラックを解決できなかったクリップは警告を出して未readyのままになり、ライブラリの残りは再生可能なまま保たれます。コンソールのメッセージが原因を示します。アセットが見つからない、読み込みに失敗した、アセットのタイプが違う、供給元に使用できるトラックがない、のいずれかです。唯一警告が出ないのは、モデル自身の読み込みが失敗した場合です。それは`<pc-model>`がすでに報告しており、クリップは未readyのままになります。
 
 ## 例 {#example}
 
@@ -153,4 +153,4 @@ document.querySelector('pc-anim').transition('wave');
 * [`<pc-anim>`](../pc-anim) — クリップが属するコンポーネント
 * [`<pc-asset>`](../pc-asset) — クリップのトラックの元になるコンテナまたはアニメーションアセット
 
-サンプル: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)、[Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html)
+サンプル: [Robot Arm](https://playcanvas.github.io/web-components/examples/#robot-arm.html)、[Third Person Controller](https://playcanvas.github.io/web-components/examples/#third-person-controller.html)

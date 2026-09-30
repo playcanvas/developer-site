@@ -84,26 +84,28 @@ anim.pause();               // 再生ヘッドを保ったまま停止します
 anim.play();                // 停止した位置から再開します
 ```
 
-どのクリップにも一致しない名前を指定した場合、現在のクリップがそのまま再生され続けます。クリップ名の打ち間違いでシーンが止まってしまうことはありません。警告はコンソールで確認してください。
+どのクリップにも一致しない名前を指定した場合、現在のクリップがそのまま再生され続けます。クリップ名の打ち間違いでシーンが止まってしまうことはありません。コンソールで警告するのは`clip`だけで、`play()`と`transition()`は未知の名前を何も言わずに無視します。
 
 ## トラックのバインド方法 {#how-tracks-bind}
 
-クリップはコンポーネントのエンティティ以下の階層全体に対して、**名前によって**シーンノードにバインドされます。モデルのスケルトンが典型例ですが、スケルトンが特別なわけではありません。クリップのカーブと名前が一致する階層であれば何でもアニメーションします。[Robot Armの例](https://playcanvas.github.io/web-components/examples/robot-arm.html)が、スキニングを一切使わずに10個の剛体パーツを動かしているのはこのためです。
+クリップはコンポーネントのエンティティ以下の階層全体に対して、**名前によって**シーンノードにバインドされます。モデルのスケルトンが典型例ですが、スケルトンが特別なわけではありません。クリップのカーブと名前が一致する階層であれば何でもアニメーションします。[Robot Armの例](https://playcanvas.github.io/web-components/examples/#robot-arm.html)が、スキニングを一切使わずに10個の剛体パーツを動かしているのはこのためです。
 
 エンジンは各カーブを一度だけ解決し、再試行しません。そのため、クリップが割り当てられた*後*に読み込みが完了したモデルは、本来なら黙ってバインドされないままになります。この要素はそれを処理します。ホストの下にあるモデルがreadyを通知した時点で再バインドし、クリップの供給元であるモデルが再インスタンス化された場合はクリップセット全体を作り直します。したがって、実行時に[`<pc-model>`の`asset`](../pc-model#attributes)を変更しても、特別な対応なしに期待どおりに動作します。
 
 この要素はコンポーネントの`rootBone`も管理します。アセット自身のルートノードを対象とするカーブがエンジンの期待する位置にバインドされるよう、囲んでいるモデルのホストを指すように設定します。これはサイクルごとに再導出され、対象となるモデルが1つに定まらない場合はクリアされます。ただし、エンジンのAPIを通じて自分で割り当てた`rootBone`はユーザーのものとして認識され、上書きされることはありません。
 
-クリップの終わりについて1つ知っておくべきことがあります。**エンジンは再生完了を通知しません**。`loop="false"`のクリップは最後のポーズを保持したまま、何も知らせません。リッスンできる`end`イベントは存在しません。クリップの終了時に何かをするには、内部のコンポーネント上で再生ヘッドをトラックの長さと比較してください。
+クリップの終わりについて1つ知っておくべきことがあります。**エンジンは再生完了を通知しません**。`loop="false"`のクリップは最後のポーズを保持したまま、何も知らせません。リッスンできる`end`イベントは存在しません。クリップの終了時に何かをするには、内部のコンポーネント上で、レイヤーが現在のステートで過ごした時間をトラックの長さと比較してください。
 
 ```javascript
 const { baseLayer } = anim.component;
 const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
 ```
 
+この判定は前方向に再生されるクリップ向けです。負の`speed`のクリップは時間を0から減らしていくため、長さに達することはありません。
+
 ## 例 {#example}
 
-歩行サイクルが1つだけ入ったGLBを、2つのクリップとして宣言しています。`walk`は元の速度、`stalk`はその3分の1の速度です。両者を切り替えると、`transition-time="0.4"`が設定するクロスフェードを確認できます。クリップごとの`speed`を変えたり、`activate="false"`で一時停止状態から始めたり、クリップの子をすべて削除してみてください。削除するとモデル自身のアニメーションが自動的に割り当てられます:
+歩行サイクルが1つだけ入ったGLBを、2つのクリップとして宣言しています。`walk`は元の速度、`stalk`はその3分の1の速度です。両者を切り替えると、`transition-time="0.4"`が設定するクロスフェードを確認できます。クリップごとの`speed`を変えたり、`activate="false"`で一時停止状態から始めたり、クリップの子と`clip="walk"`を削除してみてください。削除するとモデル自身のアニメーションが自動的に割り当てられ、再生されます:
 
 ```html live-example
 <pc-app>
@@ -165,7 +167,7 @@ const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
 </script>
 ```
 
-[Robot Armの例](https://playcanvas.github.io/web-components/examples/robot-arm.html)はさらに踏み込んで、6つのクリップライブラリ、スクラブ可能な再生ヘッド、ブレンドの切り替えを備えています。
+[Robot Armの例](https://playcanvas.github.io/web-components/examples/#robot-arm.html)はさらに踏み込んで、6つのクリップライブラリ、スクラブ可能な再生ヘッド、ブレンドの切り替えを備えています。
 
 ## JavaScriptインターフェース {#javascript-interface}
 
@@ -192,7 +194,7 @@ await Promise.all([...anim.querySelectorAll('pc-anim-clip')].map(clip => clip.re
 console.log(anim.clips); // ['walk', 'stalk']
 ```
 
-この要素が公開していない機能は`component`（エンジンの[AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html)）から利用できます。再生ヘッド（`baseLayer.activeStateCurrentTime`）、アクティブなクリップの長さ、そしてフラットなクリップ集合を超えるアニメーションのためのステートグラフやブレンドツリーなどです。
+この要素が公開していない機能は`component`（エンジンの[AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html)）から利用できます。現在のステートで過ごした時間（`baseLayer.activeStateCurrentTime`。ループするクリップが繰り返されてもカウントし続けます）、アクティブなクリップの長さ、そしてフラットなクリップ集合を超えるアニメーションのためのステートグラフやブレンドツリーなどです。
 
 ## 関連項目 {#see-also}
 
@@ -200,4 +202,4 @@ console.log(anim.clips); // ['walk', 'stalk']
 * [`<pc-model>`](../pc-model) — 通常のホスト。そのGLBがアニメーショントラックを供給します
 * [`<pc-asset>`](../pc-asset) — 別のGLBやanimclip JSONからクリップを供給します
 
-サンプル: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html)、[Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html)
+サンプル: [GLB Animation](https://playcanvas.github.io/web-components/examples/#glb-animation.html)、[Robot Arm](https://playcanvas.github.io/web-components/examples/#robot-arm.html)、[Third Person Controller](https://playcanvas.github.io/web-components/examples/#third-person-controller.html)
