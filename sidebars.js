@@ -652,11 +652,13 @@ const sidebars = {
         id: 'user-manual/splat-transform/index',
       },
       items: [
+        'user-manual/splat-transform/cli-reference',
         'user-manual/splat-transform/streamed-sog',
         'user-manual/splat-transform/collision',
-        'user-manual/splat-transform/voxel-format',
-        'user-manual/splat-transform/docker',
+        'user-manual/splat-transform/image-rendering',
         'user-manual/splat-transform/library',
+        'user-manual/splat-transform/docker',
+        'user-manual/splat-transform/voxel-format',
       ],
     },
     {

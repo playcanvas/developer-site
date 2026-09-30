@@ -9,18 +9,7 @@ This guide explains how to run [splat-transform](/user-manual/splat-transform/) 
 
 `splat-transform` is a Node.js CLI and the published npm package runs anywhere Node 22+ runs — Docker is not strictly required.
 
-A few features are **GPU-only** and will not run without WebGPU:
-
-- `--filter-cluster` and `--filter-floaters`.
-- `.voxel.json` output and `--collision-mesh` (see the [Collision Mesh](/user-manual/splat-transform/collision) guide).
-- `.webp` image output, including `--camera-track` frame sequences (see [Image Output Options](/user-manual/splat-transform/#image-output-options)).
-
-A few are **GPU-accelerated but optional**:
-
-- `--decimate` and `--decimate-adaptive`, which use the GPU by default and run on the CPU with `-g cpu`.
-- SOG / `meta.json` / `lod-meta.json` / `.html` viewer output (see [SOG Compression Options](/user-manual/splat-transform/#sog-compression-options)). The only step inside this writer that uses the GPU is k-means clustering of spherical-harmonic coefficients, so:
-  - Inputs **without** SH bands (e.g. `.splat`, SH-stripped PLYs, or anything piped through `-H 0` / `--filter-harmonics 0`) write SOG fully on the CPU.
-  - Inputs **with** SH bands work on the CPU too via `-g cpu`, but SH clustering is roughly 5-10x slower without a GPU.
+A few features are **GPU-only** and will not run without WebGPU: `--filter-cluster`, `--filter-floaters`, `.voxel.json` output and `--collision-mesh` (see the [Collision Mesh](/user-manual/splat-transform/collision) guide), and `.webp` image output (see [Rendering Images](/user-manual/splat-transform/image-rendering)). Decimation and SOG output use the GPU by default but also run on the CPU; SOG output with spherical harmonics is roughly 5-10x slower that way. [Which Features Need a GPU](/user-manual/splat-transform/cli-reference#which-features-need-a-gpu) has the full breakdown.
 
 All GPU paths go through WebGPU, which on Linux is implemented over Vulkan. That sets the host and container requirements below.
 
@@ -143,7 +132,7 @@ docker run --rm --gpus all --user "$(id -u):$(id -g)" \
 
 The remaining examples omit `--user` for brevity — add it to any invocation that mounts a host directory.
 
-Any normal `splat-transform` invocation works — see the [CLI reference](/user-manual/splat-transform/) for the full CLI surface. For example:
+Any normal `splat-transform` invocation works — see the [CLI Reference](/user-manual/splat-transform/cli-reference) for the full CLI surface. For example:
 
 ```bash
 # GPU SOG compression
@@ -179,7 +168,7 @@ docker run --rm --gpus all --entrypoint vulkaninfo splat-transform --summary
 
 ## CPU-only variant
 
-If you don't need the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`) you can skip the GPU setup entirely and use a much smaller base image. SOG / `meta.json` / `lod-meta.json` / `.html` outputs still work in this image — the SH compression step falls back to CPU:
+If you don't need the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`, `.webp`) you can skip the GPU setup entirely and use a much smaller base image. SOG / `meta.json` / `lod-meta.json` / `.html` outputs still work in this image — the SH compression step falls back to CPU:
 
 ```dockerfile
 FROM node:22-slim
@@ -202,7 +191,7 @@ If you keep the GPU image but want to force CPU mode for a single run, pass `-g 
 docker run --rm -v "$PWD":/work splat-transform -g cpu input.ply output.sog
 ```
 
-Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`). CPU-side SH compression also runs roughly 5-10x slower than GPU.
+Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`, `.webp`). CPU-side SH compression also runs roughly 5-10x slower than GPU.
 
 ## Troubleshooting
 
