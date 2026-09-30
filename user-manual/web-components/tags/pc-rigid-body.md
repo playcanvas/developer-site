@@ -1,11 +1,11 @@
 # <pc-rigid-body>
 
-The `<pc-rigid-body>` tag is used to define a rigidbody component.
+The `<pc-rigid-body>` tag makes an entity a rigid body in the physics simulation: a `static` one that never moves, a `dynamic` one that gravity and collisions move, or a `kinematic` one that you move yourself.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md).
-* It must be a sibling of a [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md) component.
+* The entity also needs a [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md), which gives the body its shape.
 * The ammo.js WebAssembly module must be loaded via a [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) tag.
 
 :::
@@ -21,13 +21,13 @@ The `<pc-rigid-body>` tag is used to define a rigidbody component.
 | `linear-damping` | Number | `"0"` | Linear velocity damping factor |
 | `linear-factor` | Vector3 | `"1 1 1"` | Linear movement constraints as "X Y Z" values |
 | `mass` | Number | `"1"` | Mass of the rigidbody in kilograms |
-| `restitution` | Number | `"0"` | Bounce/elasticity coefficient (0-1) |
+| `restitution` | Number | `"0"` | Bounce/elasticity coefficient (0-1). A collision's bounce is the product of both bodies' restitution, so a body only bounces off another that has some too |
 | `rolling-friction` | Number | `"0"` | Rolling resistance coefficient |
 | `type` | Enum | `"static"` | Physics body type: `"static"` \| `"kinematic"` \| `"dynamic"` |
 
 ## Example
 
-Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`, so it bounces — try giving the boxes some bounce too, or changing their `mass`:
+Dynamic bodies falling onto a static ground. A collision's bounce is the product of the two bodies' `restitution`, so the ground has `restitution="1"` and the sphere, with `"0.9"`, keeps most of its speed. Try giving the boxes some bounce too, or setting the ground's `restitution` to 0 to stop every bounce:
 
 ```html live-example
 <pc-app>
@@ -57,7 +57,7 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
         <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="6 0.5 6"></pc-collision>
-            <pc-rigid-body type="static"></pc-rigid-body>
+            <pc-rigid-body type="static" restitution="1"></pc-rigid-body>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -76,4 +76,4 @@ The `component` property is the engine [RigidBodyComponent](https://api.playcanv
 * [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) — loads the Ammo module physics needs
 * [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) — gravity
 
-Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/#basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/#physics-cluster.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/#vehicle-physics.html).

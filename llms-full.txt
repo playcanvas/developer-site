@@ -17780,26 +17780,28 @@ anim.pause();               // freeze, keeping the playhead
 anim.play();                // resume from where it stopped
 ```
 
-A name that matches no clip leaves the current selection playing, so a mistyped clip never stops the scene dead — watch the console for the warning.
+A name that matches no clip leaves the current selection playing, so a mistyped clip never stops the scene dead. Only `clip` warns about it in the console; `play()` and `transition()` ignore an unknown name without a word.
 
 ## How Tracks Bind
 
-Clips bind to scene nodes **by name**, over the whole hierarchy below the component's entity. A model's skeleton is the common case, but nothing about it is special: any hierarchy whose node names match a clip's curves animates, which is how the [Robot Arm example](https://playcanvas.github.io/web-components/examples/robot-arm.html) drives ten rigid parts with no skinning at all.
+Clips bind to scene nodes **by name**, over the whole hierarchy below the component's entity. A model's skeleton is the common case, but nothing about it is special: any hierarchy whose node names match a clip's curves animates, which is how the [Robot Arm example](https://playcanvas.github.io/web-components/examples/#robot-arm.html) drives ten rigid parts with no skinning at all.
 
 The engine resolves each curve once and does not retry, so a model that finishes loading *after* its clips were assigned would otherwise stay silently unbound. The element handles this: it rebinds when a model below its host announces readiness, and refreshes the whole clip set when the model it takes its clips from is re-instantiated. Changing a [`<pc-model>`'s `asset`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md#attributes) at runtime therefore does the right thing without any help.
 
 The element also manages the component's `rootBone` for you, pointing it at the enclosing model's host so that curves targeting the asset's own root node bind where the engine expects. It re-derives that on every cycle and clears it when no single model is in scope — but a `rootBone` you assign yourself through the engine API is recognized as yours and never overwritten.
 
-There is one thing to know about the end of a clip: **the engine reports no completion**. A clip with `loop="false"` holds its last pose and says nothing — there is no `end` event to listen for. To act when one finishes, compare the playhead against the track's duration on the underlying component:
+There is one thing to know about the end of a clip: **the engine reports no completion**. A clip with `loop="false"` holds its last pose and says nothing — there is no `end` event to listen for. To act when one finishes, compare the time the layer has spent in its current state against the track's duration on the underlying component:
 
 ```javascript
 const { baseLayer } = anim.component;
 const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
 ```
 
+That check suits a clip playing forwards. A clip with a negative `speed` counts its time down from zero instead, so it never reaches the duration.
+
 ## Example
 
-A GLB with a single walk cycle, declared twice: `walk` at its authored speed and `stalk` at a third of it. Switch between them to watch the cross-fade, which `transition-time="0.4"` sets. Try a different per-clip `speed`, set `activate="false"` to start paused, or drop the clip children entirely — the model's own animation is then assigned automatically:
+A GLB with a single walk cycle, declared twice: `walk` at its authored speed and `stalk` at a third of it. Switch between them to watch the cross-fade, which `transition-time="0.4"` sets. Try a different per-clip `speed`, set `activate="false"` to start paused, or drop the clip children and `clip="walk"` — the model's own animation is then assigned and plays automatically:
 
 ```html live-example
 <pc-app>
@@ -17861,7 +17863,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 </script>
 ```
 
-The [Robot Arm example](https://playcanvas.github.io/web-components/examples/robot-arm.html) goes further, with a six-clip library, a scrubbable playhead and a blend toggle.
+The [Robot Arm example](https://playcanvas.github.io/web-components/examples/#robot-arm.html) goes further, with a six-clip library, a scrubbable playhead and a blend toggle.
 
 ## JavaScript Interface
 
@@ -17888,7 +17890,7 @@ await Promise.all([...anim.querySelectorAll('pc-anim-clip')].map(clip => clip.re
 console.log(anim.clips); // ['walk', 'stalk']
 ```
 
-Anything this element does not expose is available on `component` — the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) — including the playhead (`baseLayer.activeStateCurrentTime`), the active clip's duration, and state graphs and blend trees for animation beyond a flat set of clips.
+Anything this element does not expose is available on `component` — the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) — including the time spent in the current state (`baseLayer.activeStateCurrentTime`, which keeps counting as a looping clip repeats), the active clip's duration, and state graphs and blend trees for animation beyond a flat set of clips.
 
 ## See Also
 
@@ -17896,7 +17898,7 @@ Anything this element does not expose is available on `component` — the engine
 * [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) — the usual host, whose GLB supplies the animation tracks
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — supplies clips from a separate GLB or animclip JSON
 
-Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html), [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html).
+Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/#glb-animation.html), [Robot Arm](https://playcanvas.github.io/web-components/examples/#robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/#third-person-controller.html).
 
 --------------------------------------------------------------------------------
 
@@ -17918,7 +17920,7 @@ The `<pc-anim-clip>` tag declares one named animation clip on a [`<pc-anim>`](ht
 
 `name` does double duty: it is the name the clip is played by, *and* the name of the track looked up in the clip's source. That source is either the enclosing model or an asset you name:
 
-**The enclosing model.** With no `asset`, the track comes from the container of the [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) that encloses the parent [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md). This is the usual case — a GLB exported with several animations, each declared as a clip:
+**The enclosing model.** With no `asset`, the track comes from the container of the [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) that the parent [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) sits directly inside. This is the usual case — a GLB exported with several animations, each declared as a clip:
 
 ```html
 <pc-model name="hero" asset="hero-glb">
@@ -17929,7 +17931,7 @@ The `<pc-anim-clip>` tag declares one named animation clip on a [`<pc-anim>`](ht
 </pc-model>
 ```
 
-**A named asset.** Point `asset` at a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) to take the track from a separate file, which is how a shared clip library gets applied to a model that was exported without it. Three asset types work: a `container` (a GLB), an `animation` GLB, or an `animclip` JSON.
+**A named asset.** Point `asset` at a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) to take the track from a separate file, which is how a shared clip library gets applied to a model that was exported without it. Three asset types work: a `container` (a GLB), an `animation` GLB, or an `animclip` JSON. Declare the last two with `type="animation"` or `type="animclip"`, since a `.glb` is otherwise loaded as a `container` and a `.json` as plain JSON.
 
 ```html
 <pc-asset id="hero-glb" type="container" src="hero.glb"></pc-asset>
@@ -17961,13 +17963,13 @@ The tracks bind to scene nodes by name, so a clip from a separate file animates 
 | `name` | String | - | The clip's name, and the track looked up in its source. Unique within the component, and no `.` |
 | `speed` | Number | `"1"` | Playback speed of this clip, where negative values play it backwards |
 
-Every attribute is live. Changing `speed` or `loop` applies immediately and keeps the playhead where it was; changing `asset` or `name` re-resolves the track, which restarts the clip if it is the one playing. The component's own [`speed`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md#attributes) multiplies whatever is set here.
+Every attribute is live. Changing `speed` or `loop` applies immediately and keeps the playhead where it was; changing `asset` or `name` re-resolves the track, and a `clip` selection on the component that named the old name no longer matches. The component's own [`speed`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md#attributes) multiplies whatever is set here.
 
 ## Loading
 
-The element becomes ready once its track has been resolved and assigned. Until then the parent component holds the clip's place with an empty track, so a scene is never blocked waiting on a file: `activate` starts playback and a declared `clip` selection applies as soon as the markup is parsed, and real motion appears when the asset arrives.
+The element becomes ready once its track has been resolved and assigned. Until then the parent component holds the clip's place with an empty track, so a scene is never blocked waiting on a file: `activate` starts playback and a declared `clip` selection applies as soon as the component exists, and real motion appears when the asset arrives.
 
-A clip that cannot resolve its track warns and stays pending, leaving the rest of the library playable. The console message names the cause — a missing asset, a failed load, an asset of the wrong type, or a source with no usable track in it.
+A clip that cannot resolve its track warns and stays pending, leaving the rest of the library playable. The console message names the cause — a missing asset, a failed load, an asset of the wrong type, or a source with no usable track in it. The one silent case is a model whose own load failed: the `<pc-model>` has already reported that, and the clip stays pending.
 
 ## Example
 
@@ -18051,7 +18053,7 @@ document.querySelector('pc-anim').transition('wave');
 * [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) — the component a clip belongs to
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the container or animation asset a clip's track comes from
 
-Examples: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html).
+Examples: [Robot Arm](https://playcanvas.github.io/web-components/examples/#robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/#third-person-controller.html).
 
 --------------------------------------------------------------------------------
 
@@ -18656,7 +18658,7 @@ Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#b
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md
 
-The `<pc-collision>` tag is used to define a collision component.
+The `<pc-collision>` tag gives an entity a collision shape. Paired with a [`<pc-rigid-body>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body.md), the shape takes part in the physics simulation; on its own, it is a trigger volume that reports what enters it.
 
 :::note[Usage]
 
@@ -18669,30 +18671,35 @@ The `<pc-collision>` tag is used to define a collision component.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `angular-offset` | Vector3 | `"0 0 0"` | Rotation of the collision shape relative to the entity, as "X Y Z" Euler angles in degrees |
-| `axis` | Number | `"1"` | Axis for cylinder/capsule shapes (0=X, 1=Y, 2=Z) |
+| `axis` | Number | `"1"` | Axis for cylinder, capsule and cone shapes (0=X, 1=Y, 2=Z) |
 | `convex-hull` | Boolean | `"false"` | Whether to use a convex hull for mesh collision |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `half-extents` | Vector3 | `"0.5 0.5 0.5"` | Half-extents for box collision as "X Y Z" values |
-| `height` | Number | `"2"` | Height for cylinder/capsule collision shapes |
+| `height` | Number | `"2"` | Height for cylinder, capsule and cone collision shapes |
 | `linear-offset` | Vector3 | `"0 0 0"` | Position of the collision shape relative to the entity as "X Y Z" values |
-| `radius` | Number | `"0.5"` | Radius for sphere/cylinder/capsule collision shapes |
-| `type` | Enum | `"box"` | Collision shape: `"box"` \| `"capsule"` \| `"compound"` \| `"cone"` \| `"cylinder"` \| `"mesh"` \| `"sphere"` |
+| `radius` | Number | `"0.5"` | Radius for sphere, cylinder, capsule and cone collision shapes |
+| `type` | Enum | `"box"` | Collision shape: `"box"` \| `"capsule"` \| `"compound"` \| `"cone"` \| `"cylinder"` \| `"mesh"` \| `"sphere"`. A `compound` shape combines the collision shapes of the entity's descendants into one |
+
+The primitive shapes — every type but `mesh` — ignore the entity's scale, so size them with `half-extents`, `radius` and `height` rather than `scale`. The primitives do not line up with the defaults everywhere, either: a `<pc-render>` cylinder or cone is 1 unit tall, while a collision cylinder or cone defaults to a `height` of 2.
 
 ## Mesh Colliders
 
-A mesh collider needs geometry, and there is no attribute to supply it — so `type="mesh"` takes it from the entity's own [`<pc-render>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render.md) component, giving you a collider that matches the visible mesh. That is what a mesh collider on a model node usually means, and it is what makes `type="mesh"` useful on a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) bound inside a loaded GLB:
+A mesh collider needs geometry, and there is no attribute to supply it — so `type="mesh"` takes it from the render component the entity was loaded with, giving you a collider that matches the visible mesh. That makes it a tool for a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) bound inside a loaded GLB:
 
 ```html
 <pc-model asset="car">
     <pc-node name="Body">
         <pc-collision type="mesh"></pc-collision>
+        <pc-rigid-body type="static"></pc-rigid-body>
     </pc-node>
 </pc-model>
 ```
 
+An exact triangle mesh only works on a `static` body. For a body that moves, set `convex-hull` to collide against the mesh's convex hull instead.
+
 The geometry is resolved each time the component applies, so a `<pc-node>` that retargets or rebinds picks up the new node's mesh.
 
-The render component has to be backed by a render asset, which the primitive types are not: a `<pc-render type="box">` has no asset to collide against. An entity without a suitable render component logs a console warning and its collider has no shape.
+The render component has to be backed by a render asset, which a [`<pc-render>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render.md) primitive is not: a `<pc-render type="box">` has no asset to collide against, so give a primitive the matching primitive shape instead. An entity without a suitable render component logs a console warning and its collider has no shape.
 
 ## Example
 
@@ -18745,7 +18752,7 @@ The `component` property is the engine [CollisionComponent](https://api.playcanv
 * [`<pc-joint>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-joint.md) — constrains two bodies that have collision shapes
 * [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) — loads the Ammo module physics needs
 
-Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html) and [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html).
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/#basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/#physics-cluster.html) and [Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html).
 
 --------------------------------------------------------------------------------
 
@@ -19104,7 +19111,7 @@ So a joint is a third entity positioned where the pivot belongs, pointing the wa
 
 <!-- The joint sits at the pivot, not on either body -->
 <pc-entity name="hinge" position="0 2 0" rotation="0 90 0">
-    <pc-joint type="hinge" entity-a="#hinge-arm" entity-b="#hinge-anchor"
+    <pc-joint type="hinge" entity-a="hinge-arm" entity-b="hinge-anchor"
               enable-limits limits="-100 100"></pc-joint>
 </pc-entity>
 ```
@@ -19121,7 +19128,7 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `angular-damping` | Vector3 | `"1 1 1"` | Spring damping per angular axis. Used by `6dof` |
+| `angular-damping` | Vector3 | `"1 1 1"` | Spring damping per angular axis, from 0 to 1, where 1 is no damping and lower values damp more. Used by `6dof` |
 | `angular-equilibrium` | Vector3 | `"0 0 0"` | Rest angle of the angular springs. Used by `6dof` |
 | `angular-limits-x` | Vector2 | `"0 0"` | Rotation limits about the frame's X axis, as "min max" in degrees. Used by `6dof` |
 | `angular-limits-y` | Vector2 | `"0 0"` | Rotation limits about the frame's Y axis, as "min max" in degrees. Used by `6dof` |
@@ -19132,12 +19139,12 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 | `angular-stiffness` | Vector3 | `"0 0 0"` | Spring stiffness per angular axis. Used by `6dof` |
 | `break-impulse` | Number | never breaks | Impulse above which the constraint breaks. Omit for a joint that holds whatever happens |
 | `enable-collision` | Boolean | `"false"` | Whether the two constrained bodies collide with each other |
-| `enable-limits` | Boolean | `"false"` | Whether the joint's limits are enforced. Limit attributes do nothing until this is set |
+| `enable-limits` | Boolean | `"false"` | Whether a `hinge`, `slider` or `ball` joint's limits are enforced. Limit attributes do nothing until this is set, and set alone it enforces their defaults. A `6dof` joint ignores it |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `entity-a` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) providing the first body. Needs a [`<pc-rigid-body>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body.md) |
-| `entity-b` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
+| `entity-a` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) or [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) providing the first body. Needs a [`<pc-rigid-body>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body.md) |
+| `entity-b` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) or [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
 | `limits` | Vector2 | `"-45 45"` | Rotation or travel limits about the primary axis, as "min max" — degrees for `hinge`, units for `slider` |
-| `linear-damping` | Vector3 | `"1 1 1"` | Spring damping per linear axis. Used by `6dof` |
+| `linear-damping` | Vector3 | `"1 1 1"` | Spring damping per linear axis, from 0 to 1, where 1 is no damping and lower values damp more. Used by `6dof` |
 | `linear-equilibrium` | Vector3 | `"0 0 0"` | Rest point of the linear springs. Used by `6dof` |
 | `linear-limits-x` | Vector2 | `"0 0"` | Translation limits along the frame's X axis, as "min max". Used by `6dof` |
 | `linear-limits-y` | Vector2 | `"0 0"` | Translation limits along the frame's Y axis, as "min max". Used by `6dof` |
@@ -19148,8 +19155,8 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 | `linear-stiffness` | Vector3 | `"0 0 0"` | Spring stiffness per linear axis. Used by `6dof` |
 | `max-motor-force` | Number | `"0"` | Maximum torque or force the motor can apply. Leave at 0 for no motor. Used by `hinge` and `slider` |
 | `motor-speed` | Number | `"0"` | Target speed of the motor. Used by `hinge` and `slider` |
-| `swing-limit-y` | Number | `"45"` | Maximum swing about the frame's Y axis, in degrees. Used by `ball` |
-| `swing-limit-z` | Number | `"45"` | Maximum swing about the frame's Z axis, in degrees. Used by `ball` |
+| `swing-limit-y` | Number | `"45"` | How far the primary axis may swing towards the frame's Y axis (a rotation about Z), as an angle either side in degrees. Used by `ball` |
+| `swing-limit-z` | Number | `"45"` | How far the primary axis may swing towards the frame's Z axis (a rotation about Y), as an angle either side in degrees. Used by `ball` |
 | `twist-limit` | Number | `"20"` | Maximum twist about the primary axis, in degrees. Used by `ball` |
 | `type` | Enum | `"fixed"` | The kind of constraint: `"fixed"` \| `"ball"` \| `"hinge"` \| `"slider"` \| `"6dof"` |
 
@@ -19167,7 +19174,7 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 
 Every type also honours `entity-a`, `entity-b`, `enable-collision` and `break-impulse`.
 
-Limits are opt-in twice over: they need `enable-limits` *and* a limit value. A `hinge` with `limits="-100 100"` and no `enable-limits` swings freely.
+Limits are opt-in: a `hinge` with `limits="-100 100"` and no `enable-limits` swings freely. Set `enable-limits` alone and the defaults apply — ±45 degrees for a hinge, ±45 units for a slider, and 45-degree swings with a 20-degree twist for a ball — so set the limit values you want alongside it. A `6dof` joint does not use `enable-limits` at all: each of its axes is limited by setting its `*-motion-*` to `"limited"`.
 
 ## Frames and Limits
 
@@ -19187,7 +19194,7 @@ Listen to this event using [`addEventListener()`](https://developer.mozilla.org/
 
 | Event | Description |
 | --- | --- |
-| `break` | Fired when the impulse on the joint exceeds `break-impulse` and the constraint breaks. |
+| `break` | Fired when the impulse on the joint exceeds `break-impulse` and the constraint breaks. See below for when the engine notices. |
 
 Unlike most element events here, `break` bubbles and is composed, so one listener on an ancestor can watch every joint in a scene:
 
@@ -19196,6 +19203,8 @@ document.addEventListener('break', (event) => {
     console.log(`${event.target.getAttribute('entity-a')} came loose`);
 });
 ```
+
+The physics engine breaks the constraint the moment the impulse is exceeded, but the standard ammo.js build, the one this manual loads, cannot report that. So the element notices the break only once its two anchor points have drifted more than 0.2 units apart, and a `6dof` joint's break goes unreported.
 
 A broken joint stops constraining its bodies, and nothing re-arms it on its own. Any of these bring it back: calling `refreshFrames()` on the underlying component, toggling the component's `enabled`, or changing `type`, `entity-a` or `entity-b`.
 
@@ -19206,7 +19215,7 @@ joint.component.refreshFrames(); // re-armed, frames re-captured from the curren
 
 ## Example
 
-A motor-driven hinge spinning a blade about a static hub. The joint entity sits at the pivot, rotated `"0 90 0"` so its local X axis — the hinge axis — points at the camera. Try a different `motor-speed` (negative reverses it), or add `enable-limits limits="-60 60"` and watch the motor stall against the stop:
+A motor-driven hinge spinning a blade about a static hub. The joint entity sits at the pivot, rotated `"0 90 0"` so its local X axis — the hinge axis — points into the screen, away from the camera, and a positive `motor-speed` turns the blade clockwise as you look at it. Try a different `motor-speed` (negative reverses it), or add `enable-limits limits="-60 60"` and watch the motor stall against the stop:
 
 ```html live-example
 <pc-app>
@@ -19242,7 +19251,7 @@ A motor-driven hinge spinning a blade about a static hub. The joint entity sits 
 </pc-app>
 ```
 
-The [Physics Joints example](https://playcanvas.github.io/web-components/examples/physics-joints.html) builds one of each type, including a fixed joint that snaps under a dropped weight.
+The [Physics Joints example](https://playcanvas.github.io/web-components/examples/#physics-joints.html) builds one of each type, including a fixed joint that snaps under a dropped weight.
 
 ## JavaScript Interface
 
@@ -19265,7 +19274,7 @@ Both accept the same reference forms as other entity-valued attributes — an en
 * [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md) — gives a body its shape
 * [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) — loads the Ammo module physics needs
 
-Examples: [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html).
+Examples: [Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html) and [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/#ar-wiener-storm.html).
 
 --------------------------------------------------------------------------------
 
@@ -20292,12 +20301,12 @@ Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#b
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body.md
 
-The `<pc-rigid-body>` tag is used to define a rigidbody component.
+The `<pc-rigid-body>` tag makes an entity a rigid body in the physics simulation: a `static` one that never moves, a `dynamic` one that gravity and collisions move, or a `kinematic` one that you move yourself.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md).
-* It must be a sibling of a [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md) component.
+* The entity also needs a [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md), which gives the body its shape.
 * The ammo.js WebAssembly module must be loaded via a [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) tag.
 
 :::
@@ -20313,13 +20322,13 @@ The `<pc-rigid-body>` tag is used to define a rigidbody component.
 | `linear-damping` | Number | `"0"` | Linear velocity damping factor |
 | `linear-factor` | Vector3 | `"1 1 1"` | Linear movement constraints as "X Y Z" values |
 | `mass` | Number | `"1"` | Mass of the rigidbody in kilograms |
-| `restitution` | Number | `"0"` | Bounce/elasticity coefficient (0-1) |
+| `restitution` | Number | `"0"` | Bounce/elasticity coefficient (0-1). A collision's bounce is the product of both bodies' restitution, so a body only bounces off another that has some too |
 | `rolling-friction` | Number | `"0"` | Rolling resistance coefficient |
 | `type` | Enum | `"static"` | Physics body type: `"static"` \| `"kinematic"` \| `"dynamic"` |
 
 ## Example
 
-Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`, so it bounces — try giving the boxes some bounce too, or changing their `mass`:
+Dynamic bodies falling onto a static ground. A collision's bounce is the product of the two bodies' `restitution`, so the ground has `restitution="1"` and the sphere, with `"0.9"`, keeps most of its speed. Try giving the boxes some bounce too, or setting the ground's `restitution` to 0 to stop every bounce:
 
 ```html live-example
 <pc-app>
@@ -20349,7 +20358,7 @@ Dynamic bodies falling onto a static ground. The sphere has `restitution="0.9"`,
         <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="6 0.5 6"></pc-collision>
-            <pc-rigid-body type="static"></pc-rigid-body>
+            <pc-rigid-body type="static" restitution="1"></pc-rigid-body>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -20368,7 +20377,7 @@ The `component` property is the engine [RigidBodyComponent](https://api.playcanv
 * [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) — loads the Ammo module physics needs
 * [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) — gravity
 
-Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/#basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/#physics-cluster.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/#vehicle-physics.html).
 
 --------------------------------------------------------------------------------
 
