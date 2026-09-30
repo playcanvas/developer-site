@@ -17568,7 +17568,7 @@ Every document has the same shape. [`<pc-app>`](https://developer.playcanvas.com
     <pc-asset id="sky" src="sky.webp"></pc-asset>
     <pc-asset id="robot" src="robot.glb"></pc-asset>
     <pc-material id="gold" diffuse="#d4af37" metalness="1"></pc-material>
-    <pc-wasm name="Ammo" glue="ammo.js" wasm="ammo.wasm"></pc-wasm>
+    <pc-wasm name="Ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm"></pc-wasm>
     <pc-scene>
         <pc-sky asset="sky"></pc-sky>
         <!-- An entity takes one of each component tag, and nests entities and models -->
@@ -17595,7 +17595,7 @@ Every document has the same shape. [`<pc-app>`](https://developer.playcanvas.com
 
 Three tags front an engine entity, and a component tag can sit inside any of them: [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) and [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md). A component placed inside a model attaches to that model's host entity, and one placed inside a node attaches to the bound node — both take the same component children an entity does.
 
-Each tag's page states the parent it requires. A misplaced element logs a console warning naming the parents it would accept, so keep the console open while authoring.
+Each tag's page states the parent it requires. Most misplaced elements log a console warning saying where they belong, so keep the console open while authoring.
 
 ## Tags by Role
 
@@ -17684,13 +17684,13 @@ The attributes of every tag share the same value conventions: an absent (or remo
 
 :::note[A component tag spells the engine component it adds]
 
-Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id: `<pc-layout-group>` adds `entity.layoutgroup`, `<pc-rigid-body>` adds `entity.rigidbody`, `<pc-audio-listener>` adds `entity.audiolistener`. The rule holds in both directions for every component tag on this page, so neither spelling has to be memorized. The engine's ids run their words together only because they are JavaScript property names, which cannot carry a hyphen — an HTML tag can.
+Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id: `<pc-layout-group>` adds `entity.layoutgroup`, `<pc-rigid-body>` adds `entity.rigidbody`, `<pc-audio-listener>` adds `entity.audiolistener`. The rule holds for every component tag on this page. Going the other way means putting the word breaks back, and not every id has one: `scrollview` is `<pc-scroll-view>`, but `scrollbar` is `<pc-scrollbar>`. The engine's ids run their words together because they are used as JavaScript properties (`entity.rigidbody`), where a hyphen would need bracket notation — an HTML tag can carry one.
 
 :::
 
 A repeatable child takes its parent's tag as a prefix: [`<pc-anim-clip>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim-clip.md) inside [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md), [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) inside [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md), [`<pc-script-instance>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script-instance.md) inside [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md).
 
-Every tag except [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) initializes asynchronously and fires a `ready` event once it has — see [The `ready` Event](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md#the-ready-event) for the timing, and for the `whenReady()` helper that wraps it. The Events section on a tag's page lists only the events specific to that tag.
+Every tag except [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) initializes asynchronously and fires a `ready` event once it has, which is also when `whenReady()` resolves for it — see [The `ready` Event](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md#the-ready-event) for the timing. The Events section on a tag's page lists only the events specific to that tag.
 
 ## All Tags A–Z
 
@@ -18078,10 +18078,10 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `backend` | Enum | `"webgpu"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"`. WebGPU falls back to WebGL 2 in browsers where it is unavailable — set `"webgl2"` to force WebGL 2. `"null"` selects a renderer that draws nothing, and exists for headless testing |
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
-| `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
+| `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at, above 0. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
 | `picking` | Enum | `"auto"` | When the application picks the scene under the pointer to dispatch [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) on entity elements: `"auto"` \| `"always"` \| `"none"`. `auto` picks for an event type only while a listener for it is registered on an entity element or on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); `always` picks for every pointer event, which listeners the application cannot see need, such as one on the document or a framework's delegated handler like React's `onPointerMove`; `none` never picks, so entities receive no pointer events. Picking renders the scene again, which is why `auto` is the default. See [When Events Are Dispatched](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched) |
 | `stencil-buffer` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
-| `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page, and once one switches it on, all of them send credentials |
+| `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page: an app that boots with it switches it on for all of them, and a later change on any app sets it for all of them |
 
 :::note[When these are read]
 
@@ -18138,7 +18138,9 @@ presenting — the session owns the buffer for its duration.
 ## Loading bar
 
 While the application boots and preloads its assets, `<pc-app>` shows a loading bar along the top of
-the element. Set `loading-bar="false"` to suppress it, or theme it with these CSS custom properties:
+the element. Set `loading-bar="false"` to suppress it (set after boot, it removes the bar at once;
+setting it back to `"true"` has no effect until the element is re-inserted), or theme it with these
+CSS custom properties:
 
 | Property | Description |
 | --- | --- |
@@ -18156,25 +18158,32 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | Event | Description |
 | --- | --- |
 | `progress` | A [`ProgressEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent) fired while the application preloads its assets. `loaded` and `total` are asset counts rather than bytes, and an asset that fails to load still counts as loaded. It fires at least once per boot, and the final event always has `loaded` equal to `total`. |
-| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the application cannot boot because no graphics device could be created — WebGL disabled, say, or a blocklisted GPU. `message` names the backends that were requested and `error` carries the underlying failure. |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the application cannot boot because no graphics device could be created — WebGL disabled, say, or a blocklisted GPU. `message` names the backends that were requested and `error` carries the underlying failure. See [below](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#handling-a-failed-boot) for how to catch it. |
 
 Neither event bubbles, so listen on the element itself.
+
+### Handling a Failed Boot
 
 An element that fired `error` never becomes ready and its `app` property stays `null` — in
 particular, `whenReady('pc-app')` never settles (see
 [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md)). A page that wants a fallback UI should listen
-for the event rather than await readiness:
+for the event rather than await readiness. Set the handler as an inline attribute: a failure can be
+reported as soon as the library starts, before a module script of your own gets to run, so a
+listener added from one can miss it. An attribute is in place from the moment the element is
+parsed:
 
-```javascript
-document.querySelector('pc-app').addEventListener('error', (event) => {
-    // Neither WebGPU nor WebGL 2 is available — show static content instead
-    document.getElementById('fallback').hidden = false;
-});
+```html
+<pc-app onerror="document.getElementById('fallback').hidden = false">
 ```
+
+The event covers a device that cannot be created at all. With the default `backend`, a browser
+that offers WebGPU tries it first and falls back to WebGL 2, and if both fail that way, the engine
+currently leaves the element waiting without firing `error`. A fallback that must always appear
+can also time out: show it if the element has not become ready after a few seconds.
 
 Removing the element and re-inserting it retries the boot with its current attributes.
 
-The [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) dispatched on entities bubble up through `<pc-app>` too, alongside the canvas's own native pointer events, and `event.target` tells the two apart. Whether entity events are dispatched at all is up to `picking` — see [When Events Are Dispatched](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched).
+The [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) dispatched on entities bubble up through `<pc-app>` too, alongside the canvas's own native pointer events. `event.isTrusted` tells the two apart: it is `true` for the browser's native events and `false` for dispatched ones. Whether entity events are dispatched at all is up to `picking` — see [When Events Are Dispatched](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched).
 
 ## Example
 
@@ -18209,7 +18218,7 @@ The `app` property is the running engine [AppBase](https://api.playcanvas.com/en
 * [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) — modules such as physics that the app loads before it boots
 * [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md) — waiting for `ready` and reaching `app` from JavaScript
 
-Examples: [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html) and [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html).
+Examples: [Spinning Cube](https://playcanvas.github.io/web-components/examples/#spinning-cube.html) and [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html).
 
 --------------------------------------------------------------------------------
 
@@ -18851,7 +18860,7 @@ Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-sc
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md
 
-The `<pc-entity>` tag is used to define an entity.
+The `<pc-entity>` tag defines an entity: a named point in the scene with a position, rotation and scale, which the component tags inside it give abilities such as rendering, lighting or physics.
 
 :::note[Usage]
 
@@ -18866,7 +18875,7 @@ The `<pc-entity>` tag is used to define an entity.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the entity |
-| `name` | String | - | Name identifier for the entity |
+| `name` | String | - | Name identifier for the entity. An entity without one is named `Untitled` |
 | `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
 | `rotation` | Vector3 | `"0 0 0"` | Local-space rotation as "X Y Z" Euler angles in degrees |
 | `scale` | Vector3 | `"1 1 1"` | Local-space scale as "X Y Z" values |
@@ -18879,7 +18888,7 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | Event | Description |
 | --- | --- |
 | `click` | Fired when a primary pointer button is pressed and then released over the entity. See [Clicks](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#clicks). |
-| `pointercancel` | Fired on the entity a press began over when the browser cancels the press, for example because a touch became a scroll. No `click` follows. |
+| `pointercancel` | Fired on the entity a press began over when the browser cancels the press, for example because the operating system took over the touch. No `click` follows. |
 | `pointerdown` | Fired when a pointer button is pressed over the entity. |
 | `pointerenter` | Fired when the pointer moves onto the entity or an entity below it, having been over none of them. Does not bubble. |
 | `pointerleave` | Fired when the pointer moves off the entity and every entity below it. Does not bubble. |
@@ -18898,9 +18907,9 @@ You can also handle these events declaratively with inline `onclick` and `onpoin
 
 ```html
 <pc-entity name="cube"
-           onpointerenter="this.entity.script.tweener.play(0)"
-           onpointerleave="this.entity.script.tweener.play(1)"
-           onclick="this.entity.script.tweener.play(2)">
+           onpointerenter="this.setAttribute('scale', '1.2 1.2 1.2')"
+           onpointerleave="this.removeAttribute('scale')"
+           onclick="this.setAttribute('rotation', '0 45 0')">
     <pc-render type="box"></pc-render>
 </pc-entity>
 ```
@@ -18914,7 +18923,7 @@ You can also handle these events declaratively with inline `onclick` and `onpoin
 * If the press and the release landed on different geometry, the click fires at their **nearest common ancestor** — dragging from one object onto its sibling clicks their shared parent (`<pc-scene>`, for two top-level entities), and dragging off onto the background clicks nothing at all. This is the same rule the browser applies to native clicks on nested HTML.
 * `detail` carries the click count, as it does for a native click: a second click on the same element within half a second arrives as a `click` whose `detail` is `2`, so a double click is read from `detail` rather than from a separate event.
 
-A press the browser takes back — a touch it reinterprets as a scroll, say — fires `pointercancel` on the entity it began over instead of concluding as a click.
+A press the browser takes back — because the operating system took over the touch, say — fires `pointercancel` on the entity it began over instead of concluding as a click. (The canvas is styled `touch-action: none`, so a touch on it never turns into a scroll.)
 
 ### When Events Are Dispatched
 
@@ -18925,7 +18934,7 @@ Two kinds of listener go unseen:
 * **Listeners elsewhere on the page**, such as one on the document, one on `<pc-app>` itself, or a framework's delegated handler like React's `onPointerMove`. They receive an event only when a listener that `<pc-app>` does see is on the entity's path, and never cause one to be dispatched themselves. Set `picking="always"` on `<pc-app>` to pick for every pointer event, or `picking="none"` to switch the events off. React's `onClick` is an exception. React also sets the `onclick` property of the element that has it, so an `onClick` on an entity element or on `<pc-scene>` is seen, and clicks work under `auto`. Switching to `always` for it would only add a pick on every pointer move.
 * **Listeners added with `addEventListener()` before the library has defined the element.** A classic `<script>` that runs ahead of the library's module does this, and so does code that configures a [template clone](https://developer.playcanvas.com/user-manual/web-components/templates.md#creating-an-instance) before appending it. Add such listeners from a module that imports the library, and add a clone's only after appending it. An inline attribute or handler property is seen whenever it was set.
 
-The canvas keeps receiving its own native pointer events throughout, so a listener on `<pc-app>` or above receives both kinds. `event.target` tells them apart: it is the `<canvas>` for a native event, and an entity element for a dispatched one. A dispatched event arrives shortly after the native event that caused it, once its pick has been read back from the GPU.
+The canvas keeps receiving its own native pointer events throughout, so a listener on `<pc-app>` or above receives both kinds. `event.isTrusted` tells them apart: it is `true` for the browser's native events and `false` for dispatched ones, whose `target` is an entity element, `<pc-scene>` or, for some boundary events under `picking="always"`, the `<pc-app>` itself. A dispatched event arrives shortly after the native event that caused it, once its pick has been read back from the GPU.
 
 ## Example
 
@@ -18968,7 +18977,7 @@ To stamp out many copies of an entity subtree, declare it once inside a native `
 * [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md) — behavior attached to an entity
 * [Reusable Scenes with Templates](https://developer.playcanvas.com/user-manual/web-components/templates.md) — cloning entity subtrees from a `<template>`
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html).
 
 --------------------------------------------------------------------------------
 
@@ -19754,7 +19763,7 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | Event | Description |
 | --- | --- |
 | `load` | Fired each time the container asset finishes instantiating, including a re-instantiation after `asset` changes. |
-| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the container asset fails to load, with the engine's error in `message`. |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the container asset fails to load. If the asset had already failed by the time the model looked for it, as a preloaded asset has, `message` just says so; the engine's own error is on the [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md#events)'s `error` event. |
 
 Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
 
@@ -19766,7 +19775,7 @@ The host is registered for picking, so `<pc-model>` also fires the nine [pointer
 
 A hit anywhere on the model targets the `<pc-model>` itself, unless a `<pc-node>` fronts the part that was hit, in which case it targets that node. Either way the event bubbles on up the element tree, so a listener on an ancestor receives the model's events whether or not the model listens itself.
 
-Readiness means the current `asset` selection has settled, which covers three outcomes: content loaded and parented beneath the host, a load that failed, or no `asset` assigned at all. The host `entity` is non-null throughout — including after a failure — so it is not the way to tell success from failure. Use the `error` event, or check `contentEntity`:
+Readiness means the current `asset` selection has settled, which covers three outcomes: content loaded and parented beneath the host, a load that failed, or no `asset` assigned at all. An `asset` that names no declared asset is not one of them: the model warns that it could not find the asset and never becomes ready. The host `entity` is non-null throughout — including after a failure — so it is not the way to tell success from failure. Use the `error` event, or check `contentEntity`:
 
 ```javascript
 const model = await whenReady('pc-model');
@@ -19777,7 +19786,7 @@ if (!model.contentEntity) {
 
 ## Animation
 
-A container's animations play when you nest a [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) inside the model. One empty tag is enough to get what the file came with — every animation in the container becomes a clip, named after its track, and the first one starts playing:
+A container's animations play when you place a [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) directly inside the model. One empty tag is enough to get what the file came with — every animation in the container becomes a clip, named after its track, and the first one starts playing:
 
 ```html
 <pc-model asset="robot">
@@ -19796,7 +19805,7 @@ const anim = await whenReady('pc-anim');
 console.log(anim.clips); // ['Walk', 'Idle']
 ```
 
-Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md). A container with no animations in it logs a warning naming the model, so the console answers the same question without any code.
+Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md). A container with no animations in it logs a warning naming the model, and a track whose name contains a `.` is skipped with a warning of its own, so the console answers the same question without any code.
 
 ## Example
 
@@ -19840,7 +19849,7 @@ To reach inside the loaded hierarchy, nest a [`<pc-node>`](https://developer.pla
 
 You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
 
-A `<pc-model>` also makes a natural root for a cloneable `<template>` prefab — the [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) example spawns its projectiles this way. See [Reusable Scenes with Templates](https://developer.playcanvas.com/user-manual/web-components/templates.md).
+A `<pc-model>` also makes a natural root for a cloneable `<template>` prefab — the [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/#ar-wiener-storm.html) example spawns its projectiles this way. See [Reusable Scenes with Templates](https://developer.playcanvas.com/user-manual/web-components/templates.md).
 
 ### The Two Entities
 
@@ -19890,14 +19899,14 @@ Each line is a node: its name, then `[index]` when other nodes share that name, 
 | Property | Type | Description |
 | --- | --- | --- |
 | `name` | String | The node's name as instantiated, which is the name a `<pc-node>` looks up. It can differ from the name in the source asset: the engine synthesizes `node_<index>` names for unnamed nodes and renames identically named siblings apart |
-| `path` | String | The node's `/`-separated path below the model root, which is the `path` a `<pc-node>` bound to it reports. The root's path is its own name |
-| `index` | Number | The node's position among the nodes sharing its name, counted in depth-first order over the whole model — exactly the match a `<pc-node>`'s `index` selects |
+| `path` | String | The node's `/`-separated path below the model root, which is the `path` a `<pc-node>` bound to it reports when it sits directly inside the `<pc-model>`. The root's path is its own name |
+| `index` | Number | The node's position among the nodes sharing its name, counted in depth-first order over the whole model — exactly the match an `index` selects on a `<pc-node>` directly inside the `<pc-model>`. A `<pc-node>` nested in another searches, counts and reports its `path` within the outer node's subtree instead |
 | `components` | String[] | The types of the components attached to the node (such as `render`), sorted |
 | `materials` | Object[] | One `{ index, name }` entry per mesh instance of the node's render component, in component order. Empty for a node without one |
 | `children` | Object[] | The node's child nodes |
 | `toString()` | Function | Renders the subtree rooted at this node as the printable tree above, so `String(node)` prints any branch |
 
-The material `name` values are runtime labels read as they stand, which makes them a convenient handle but not a unique one: an unnamed glTF material is called `Untitled`, a primitive authored without a material carries the engine's shared `defaultGlbMaterial`, duplicates stay duplicated, and the name is `null` if a script cleared the assignment. The `index` is the unambiguous one. Both are what [`<pc-node>`'s `material-overrides`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md#overriding-materials) selects with, and a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) you swap in reports whatever its `name` attribute says — worth setting on any material you want to recognize here.
+The material `name` values are runtime labels read as they stand, which makes them a convenient handle but not a unique one: an unnamed glTF material is called `Untitled`, a primitive authored without a material carries the engine's shared `defaultGlbMaterial`, a primitive exported without normals gets a copy of its material with `-flatShaded` added to the name, duplicates stay duplicated, and the name is `null` if a script cleared the assignment. The `index` is the unambiguous one. Both are what [`<pc-node>`'s `material-overrides`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md#overriding-materials) selects with, and a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) you swap in reports whatever its `name` attribute says — worth setting on any material you want to recognize here.
 
 The tree is a snapshot, computed afresh on each call: it does not track later changes to the hierarchy, and mutating it changes nothing. Being plain data, it survives `JSON.stringify`, so it is easy to log, diff or assert against in a test.
 
@@ -19908,7 +19917,7 @@ The tree is a snapshot, computed afresh on each call: it does not track later ch
 * [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) — plays the animations the GLB carries
 * [Loading Models](https://developer.playcanvas.com/user-manual/web-components/loading-models.md) — loading a model and adjusting it from markup
 
-Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html).
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/#glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/#glb-animation.html) and [Product Viewer](https://playcanvas.github.io/web-components/examples/#product-viewer.html).
 
 --------------------------------------------------------------------------------
 
@@ -19928,7 +19937,7 @@ For worked examples of the common adjustments — hiding, re-posing, reskinning,
 * It must be a descendant of a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md), either directly or nested inside another `<pc-node>`.
 * It can have 0..n nested [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) children, which resolve their own `name` within the bound node's subtree.
 * It can have 0..n [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) children, which are created and parented under the bound node — attachment points for new content.
-* It can have the same component tags as a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) — [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md), [`<pc-light>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md), [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md) and the rest — which add that component to the bound node.
+* It can have the same component tags as a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) — [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md), [`<pc-light>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md), [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md) and the rest — which add that component to the bound node. A component the node already has, such as the `render` of a mesh node, is not added a second time: the tag warns and does nothing.
 
 :::
 
@@ -19943,7 +19952,7 @@ For worked examples of the common adjustments — hiding, re-posing, reskinning,
 | `position` | Vector3 | *authored* | Overrides the node's local position as "X Y Z" values |
 | `rotation` | Vector3 | *authored* | Overrides the node's local rotation as "X Y Z" Euler angles in degrees |
 | `scale` | Vector3 | *authored* | Overrides the node's local scale as "X Y Z" values |
-| `tags` | String | *authored* | Overrides the node's tags, separated by spaces or commas |
+| `tags` | String | *authored* | Overrides the node's tags, as a comma-separated list |
 
 :::note[Overrides, not defaults]
 
@@ -19955,7 +19964,7 @@ An override replaces the authored value; it does not compose with it. `position=
 
 ## Finding the Node
 
-`name` matches on the node names in the loaded hierarchy, taking the first match in depth-first order. Nesting one `<pc-node>` inside another scopes the inner search to the outer node's subtree, which is the simplest way to reach a node whose name is only unique locally.
+`name` matches on the node names in the loaded hierarchy, and has to match exactly one node in the search scope. Nesting one `<pc-node>` inside another scopes the inner search to the outer node's subtree, which is the simplest way to reach a node whose name is only unique locally.
 
 When a name is not unique within the search scope, the element binds nothing and warns with the paths of every candidate, so you can pick one with `index`:
 
@@ -19965,7 +19974,7 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 Binding nothing is deliberate: guessing would silently decorate the wrong node, and a re-export that introduced a duplicate name would break a document that used to work.
 
-The other resolution failures warn in the same way — a name that matches nothing (with the closest name it did find, as a typo hint), an `index` beyond the number of matches, and a node that another `<pc-node>` has already bound. In each case the element binds nothing and never becomes ready.
+The other resolution failures warn in the same way — a name that matches nothing (with a node name within two edits of it as a typo hint, when there is one), an `index` beyond the number of matches, and a node that another `<pc-node>` has already bound. In each case the element binds nothing and never becomes ready.
 
 An element only becomes ready once it is bound, and its descendants wait with it. If the model reloads, or the element retargets because you changed `name`, it re-resolves and re-applies its overrides, components and attached content against the new node.
 
@@ -19988,7 +19997,7 @@ Both selectors address the mesh instances of the bound node's render component:
 
 The mapping is sparse: an assignment that no rule matches keeps the material the model was authored with. Where rules of both kinds cover the same mesh instance, `index:` wins — so you can replace a material everywhere it appears by name, then pin the one exception by index.
 
-Use [`<pc-model>`'s `hierarchy()`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md#inspecting-the-hierarchy) to discover the names and indices a node offers. Material names are runtime labels rather than unique identifiers — glTF allows duplicates, leaves unnamed materials called `Untitled`, and gives a primitive authored without a material the engine's shared `defaultGlbMaterial` — so reach for `index:` whenever a name is not distinct.
+Use [`<pc-model>`'s `hierarchy()`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md#inspecting-the-hierarchy) to discover the names and indices a node offers. Material names are runtime labels rather than unique identifiers — glTF allows duplicates, the engine calls an unnamed material `Untitled`, gives a primitive authored without a material its shared `defaultGlbMaterial`, and adds `-flatShaded` to the name of a copy it makes for a primitive without normals — so reach for `index:` whenever a name is not distinct.
 
 Names are matched against the assignments captured when the mapping first applied. A rule therefore never matches a material that another rule put there, and renaming a material afterwards cannot change what it selects. Removing the attribute puts every captured assignment back, as does assigning `null` to the `materialOverrides` property or setting an empty `{}`.
 
@@ -20020,7 +20029,7 @@ The inline `onclick` and `onpointer*` attributes work here exactly as they do on
 
 ## Example
 
-This GLB instantiates two nodes — `play` (the orange shell, its logo cut out of each face) and `canvas` (the dark inner box you see through the cutouts). [`hierarchy()`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md#inspecting-the-hierarchy) is how you discover that. The `<pc-node>` binds `play` and swaps its authored orange for blue via `material-overrides`. Try binding `canvas` instead, or add `enabled="false"` to hide the shell entirely. Drag to orbit:
+This GLB instantiates two mesh nodes — `play` (the orange shell, its logo cut out of each face) and `canvas` (the dark inner box you see through the cutouts) — alongside an empty `Light` and `Camera` left over from its export. [`hierarchy()`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md#inspecting-the-hierarchy) is how you discover that. The `<pc-node>` binds `play` and swaps its authored orange for blue via `material-overrides`. Try binding `canvas` instead, or add `enabled="false"` to hide the shell entirely. Drag to orbit:
 
 ```html live-example
 <pc-app>
@@ -20075,7 +20084,7 @@ The element stores a frozen copy of what you assign, so mutating your object aft
 * [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) — attaches new content under a node
 * [Loading Models](https://developer.playcanvas.com/user-manual/web-components/loading-models.md) — finding the nodes inside a loaded model
 
-Examples: [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).
+Examples: [Product Viewer](https://playcanvas.github.io/web-components/examples/#product-viewer.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/#vehicle-physics.html).
 
 --------------------------------------------------------------------------------
 
@@ -20348,7 +20357,7 @@ Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/b
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md
 
-The `<pc-scene>` tag is used to define the scene.
+The `<pc-scene>` tag defines the scene an application renders: the root of its entity hierarchy, and the fog, exposure and physics settings that apply to everything in it.
 
 :::note[Usage]
 
@@ -20360,18 +20369,18 @@ The `<pc-scene>` tag is used to define the scene.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `exposure` | Number | `"1"` | Overall brightness multiplier applied to the rendered image. Ignored while the scene uses physical light units |
+| `exposure` | Number | `"1"` | Overall brightness multiplier applied to the rendered image. Ignored while the scene uses physical light units, which are switched on from JavaScript with the engine scene's `physicalUnits` |
 | `fog` | Enum | `"none"` | Fog type: `"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
 | `fog-color` | Color | `"0 0 0"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `fog-density` | Number | `"0"` | Fog density for exponential fog types |
 | `fog-end` | Number | `"1000"` | End distance for linear fog |
 | `fog-start` | Number | `"1"` | Start distance for linear fog |
 | `gsplat-lod-mode` | Enum | `"distance"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md#level-of-detail) |
-| `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less warns and keeps the default |
+| `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less is treated as the default |
 | `gsplat-use-fog` | Boolean | `"true"` | Whether the scene's fog applies to Gaussian splats |
 | `gsplat-use-tonemap` | Boolean | `"true"` | Whether the camera's tone mapping and the scene's `exposure` apply to Gaussian splats. Set `"false"` to render splats with their stored colors, which suits captures that are already display-ready. Fog still applies |
 | `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
-| `lighting-max-lights` | Number | `"255"` | Maximum number of lights clustered lighting uses in a frame, from 1 to 65535. Lights over the limit are ignored with a warning, and values above 255 double the memory of the light grid |
+| `lighting-max-lights` | Number | `"255"` | Maximum number of lights clustered lighting uses in a frame. The engine clamps the value to between 1 and the most the device supports (up to 65535), and lights over the limit are left out of the frame. Values above 255 double the memory of the light grid |
 | `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running. Applied on top of the application's own time scale |
 
 ## Events
@@ -20431,7 +20440,7 @@ The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/cla
 * [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md) — tone mapping, applied after the scene's exposure
 * [`<pc-rigid-body>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body.md) — the bodies gravity acts on
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) and [Spinning Cube](https://playcanvas.github.io/web-components/examples/#spinning-cube.html).
 
 --------------------------------------------------------------------------------
 

@@ -45,7 +45,7 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | Event | Description |
 | --- | --- |
 | `load` | Fired each time the container asset finishes instantiating, including a re-instantiation after `asset` changes. |
-| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the container asset fails to load, with the engine's error in `message`. |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the container asset fails to load. If the asset had already failed by the time the model looked for it, as a preloaded asset has, `message` just says so; the engine's own error is on the [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md#events)'s `error` event. |
 
 Neither event bubbles, so listen on the element itself — or use a capture-phase listener on an ancestor to observe every model on the page.
 
@@ -57,7 +57,7 @@ The host is registered for picking, so `<pc-model>` also fires the nine [pointer
 
 A hit anywhere on the model targets the `<pc-model>` itself, unless a `<pc-node>` fronts the part that was hit, in which case it targets that node. Either way the event bubbles on up the element tree, so a listener on an ancestor receives the model's events whether or not the model listens itself.
 
-Readiness means the current `asset` selection has settled, which covers three outcomes: content loaded and parented beneath the host, a load that failed, or no `asset` assigned at all. The host `entity` is non-null throughout — including after a failure — so it is not the way to tell success from failure. Use the `error` event, or check `contentEntity`:
+Readiness means the current `asset` selection has settled, which covers three outcomes: content loaded and parented beneath the host, a load that failed, or no `asset` assigned at all. An `asset` that names no declared asset is not one of them: the model warns that it could not find the asset and never becomes ready. The host `entity` is non-null throughout — including after a failure — so it is not the way to tell success from failure. Use the `error` event, or check `contentEntity`:
 
 ```javascript
 const model = await whenReady('pc-model');
@@ -68,7 +68,7 @@ if (!model.contentEntity) {
 
 ## Animation
 
-A container's animations play when you nest a [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) inside the model. One empty tag is enough to get what the file came with — every animation in the container becomes a clip, named after its track, and the first one starts playing:
+A container's animations play when you place a [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) directly inside the model. One empty tag is enough to get what the file came with — every animation in the container becomes a clip, named after its track, and the first one starts playing:
 
 ```html
 <pc-model asset="robot">
@@ -87,7 +87,7 @@ const anim = await whenReady('pc-anim');
 console.log(anim.clips); // ['Walk', 'Idle']
 ```
 
-Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md). A container with no animations in it logs a warning naming the model, so the console answers the same question without any code.
+Importing by package name needs `@playcanvas/web-components` in your page's import map — see [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md). A container with no animations in it logs a warning naming the model, and a track whose name contains a `.` is skipped with a warning of its own, so the console answers the same question without any code.
 
 ## Example
 
@@ -131,7 +131,7 @@ To reach inside the loaded hierarchy, nest a [`<pc-node>`](https://developer.pla
 
 You can programmatically create and manipulate `<pc-model>` elements using the [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html).
 
-A `<pc-model>` also makes a natural root for a cloneable `<template>` prefab — the [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) example spawns its projectiles this way. See [Reusable Scenes with Templates](https://developer.playcanvas.com/user-manual/web-components/templates.md).
+A `<pc-model>` also makes a natural root for a cloneable `<template>` prefab — the [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/#ar-wiener-storm.html) example spawns its projectiles this way. See [Reusable Scenes with Templates](https://developer.playcanvas.com/user-manual/web-components/templates.md).
 
 ### The Two Entities
 
@@ -181,14 +181,14 @@ Each line is a node: its name, then `[index]` when other nodes share that name, 
 | Property | Type | Description |
 | --- | --- | --- |
 | `name` | String | The node's name as instantiated, which is the name a `<pc-node>` looks up. It can differ from the name in the source asset: the engine synthesizes `node_<index>` names for unnamed nodes and renames identically named siblings apart |
-| `path` | String | The node's `/`-separated path below the model root, which is the `path` a `<pc-node>` bound to it reports. The root's path is its own name |
-| `index` | Number | The node's position among the nodes sharing its name, counted in depth-first order over the whole model — exactly the match a `<pc-node>`'s `index` selects |
+| `path` | String | The node's `/`-separated path below the model root, which is the `path` a `<pc-node>` bound to it reports when it sits directly inside the `<pc-model>`. The root's path is its own name |
+| `index` | Number | The node's position among the nodes sharing its name, counted in depth-first order over the whole model — exactly the match an `index` selects on a `<pc-node>` directly inside the `<pc-model>`. A `<pc-node>` nested in another searches, counts and reports its `path` within the outer node's subtree instead |
 | `components` | String[] | The types of the components attached to the node (such as `render`), sorted |
 | `materials` | Object[] | One `{ index, name }` entry per mesh instance of the node's render component, in component order. Empty for a node without one |
 | `children` | Object[] | The node's child nodes |
 | `toString()` | Function | Renders the subtree rooted at this node as the printable tree above, so `String(node)` prints any branch |
 
-The material `name` values are runtime labels read as they stand, which makes them a convenient handle but not a unique one: an unnamed glTF material is called `Untitled`, a primitive authored without a material carries the engine's shared `defaultGlbMaterial`, duplicates stay duplicated, and the name is `null` if a script cleared the assignment. The `index` is the unambiguous one. Both are what [`<pc-node>`'s `material-overrides`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md#overriding-materials) selects with, and a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) you swap in reports whatever its `name` attribute says — worth setting on any material you want to recognize here.
+The material `name` values are runtime labels read as they stand, which makes them a convenient handle but not a unique one: an unnamed glTF material is called `Untitled`, a primitive authored without a material carries the engine's shared `defaultGlbMaterial`, a primitive exported without normals gets a copy of its material with `-flatShaded` added to the name, duplicates stay duplicated, and the name is `null` if a script cleared the assignment. The `index` is the unambiguous one. Both are what [`<pc-node>`'s `material-overrides`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md#overriding-materials) selects with, and a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) you swap in reports whatever its `name` attribute says — worth setting on any material you want to recognize here.
 
 The tree is a snapshot, computed afresh on each call: it does not track later changes to the hierarchy, and mutating it changes nothing. Being plain data, it survives `JSON.stringify`, so it is easy to log, diff or assert against in a test.
 
@@ -199,4 +199,4 @@ The tree is a snapshot, computed afresh on each call: it does not track later ch
 * [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) — plays the animations the GLB carries
 * [Loading Models](https://developer.playcanvas.com/user-manual/web-components/loading-models.md) — loading a model and adjusting it from markup
 
-Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html) and [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html).
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/#glb-loader.html), [GLB Animation](https://playcanvas.github.io/web-components/examples/#glb-animation.html) and [Product Viewer](https://playcanvas.github.io/web-components/examples/#product-viewer.html).
