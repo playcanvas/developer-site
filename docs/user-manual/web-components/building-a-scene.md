@@ -196,4 +196,4 @@ pc-app ................... the application
 - [Attributes](attributes.md) — the value conventions you just used: booleans, colors, vectors and more.
 - [Adding Behavior with Scripts](scripting.md) — make things move. The engine also ships ready-made scripts such as `cameraControls`, which lets you orbit your scene with the mouse.
 - [Tag Reference](tags/index.md) — everything else you can declare.
-- [Examples](https://playcanvas.github.io/web-components/examples/) — see [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) for a bigger version of the scene you just built.
+- [Examples](https://playcanvas.github.io/web-components/examples/) — see [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) for a bigger version of the scene you just built.
