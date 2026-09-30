@@ -15,6 +15,7 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 - **Add behavior with engine `Script` classes**: load the module with `<pc-asset src="rotate.mjs">`, then attach it with `<pc-script><pc-script-instance name="rotate"></pc-script-instance></pc-script>`, where `name` matches the class's `static scriptName`. Write update loops and per-entity behavior as scripts, not page scripts.
 - **Physics needs ammo.js**, declared as `<pc-wasm name="Ammo" glue="..." wasm="..." fallback="...">` inside `<pc-app>`, which waits for it before starting.
 - **From JavaScript**, `import { whenReady } from '@playcanvas/web-components'` and `await whenReady('pc-app')` (or any element) before reading `.app`, `.entity` or `.component`, which are `null` until the element is ready.
+- **XR needs WebGL 2**: give the `<pc-app>` of a page that offers WebXR `backend="webgl2"`. On the default WebGPU backend, the engine reports XR as unavailable in browsers that do not expose `XRGPUBinding`.
 
 ## Guides
 
@@ -26,7 +27,7 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 - [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting.md): Attaching engine `Script` classes with `pc-script` and `pc-script-instance`, and setting their attributes.
 - [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md): Driving the engine from JavaScript: `whenReady`, the engine objects behind the elements, and pages with several apps.
 - [Reusable Scenes with Templates](https://developer.playcanvas.com/user-manual/web-components/templates.md): Declaring a subtree once in an HTML template and cloning it into live instances, like prefabs.
-- [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr.md): WebXR with the engine's XR scripts: a camera rig with `xrSession`, and starting sessions from app events.
+- [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr.md): WebXR with the engine's XR scripts: the WebGL 2 backend it needs, a camera rig with `xrSession`, and starting sessions from app events.
 
 ## Tag reference
 
@@ -70,4 +71,4 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/web-components/llms-full.txt): 41 pages (365 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/web-components/llms-full.txt): 41 pages (368 KB), for downloading and searching rather than reading into context.
