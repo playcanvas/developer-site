@@ -196,4 +196,4 @@ pc-app ................... アプリケーション
 - [属性](attributes.md) — いま使った値の規約（Boolean、カラー、ベクトルなど）です。
 - [スクリプトで動作を追加する](scripting.md) — オブジェクトを動かしましょう。エンジンには `cameraControls` のような既製のスクリプトも同梱されており、マウスでシーンを周回できます。
 - [タグリファレンス](tags/index.md) — 宣言できる残りすべての要素です。
-- [サンプル](https://playcanvas.github.io/web-components/examples/) — [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) は、いま構築したシーンの拡大版です。
+- [サンプル](https://playcanvas.github.io/web-components/examples/) — [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) は、いま構築したシーンの拡大版です。
