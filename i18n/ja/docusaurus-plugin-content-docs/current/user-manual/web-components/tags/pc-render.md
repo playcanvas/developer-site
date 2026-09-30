@@ -3,7 +3,7 @@ title: <pc-render>
 description: "pc-render要素のリファレンス: プリミティブ形状（ボックス、球、カプセル、コーン、シリンダー、プレーン、トーラス）をマテリアルとシャドウ設定でレンダリングします。"
 ---
 
-`<pc-render>`タグは、3Dプリミティブをレンダリングするレンダリングコンポーネントを定義するために使用されます。
+`<pc-render>`タグは、プリミティブ形状 — ボックス、球、カプセル、円錐、円柱、平面、トーラス — をマテリアルで描画するレンダーコンポーネントを追加します。
 
 :::note[使用法]
 
@@ -83,4 +83,4 @@ glTF/GLBファイルから3Dモデルをレンダリングするには、代わ�
 * [`<pc-light>`](../pc-light) — プリミティブに光と影を当てます
 * [`<pc-collision>`](../pc-collision) — 対応する物理形状
 
-サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)、[Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html)
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html)、[Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html)
