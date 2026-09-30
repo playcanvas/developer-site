@@ -3,12 +3,13 @@ title: <pc-layout-group>
 description: "Reference for the pc-layout-group element: arranges child elements in horizontal or vertical layouts with spacing, padding, alignment, and fitting."
 ---
 
-The `<pc-layout-group>` tag is used to define a layout group component, which automatically arranges its child element entities in a row or column.
+The `<pc-layout-group>` tag adds a layout group component, which arranges the elements of its entity's children in a row, a column or a grid, and can stretch or shrink them to fit.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](../pc-entity), a [`<pc-model>`](../pc-model) or a [`<pc-node>`](../pc-node) that also has a [`<pc-element>`](../pc-element).
-* Child entities are laid out automatically. Add a [`<pc-layout-child>`](../pc-layout-child) to a child to control how it is sized within the group.
+* It lays out the entity's direct children that are enabled and have an enabled element, in their order in the document. It sets their anchors to `"0 0 0 0"` and their positions, replacing any you give them. See [How Children Are Placed](/user-manual/user-interface/layout-groups/#how-children-are-placed).
+* Add a [`<pc-layout-child>`](../pc-layout-child) to a child to control how it is sized, or to leave it out of the layout.
 
 :::
 
@@ -18,22 +19,28 @@ The `<pc-layout-group>` tag is used to define a layout group component, which au
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `alignment` | Vector2 | `"0 1"` | Horizontal and vertical alignment of the child elements (each component 0 to 1) |
+| `alignment` | Vector2 | `"0 1"` | Where the children sit inside the group when they don't fill it, from `"0 0"`, its bottom-left corner, to `"1 1"`, its top-right. The default puts them at the top left |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `height-fitting` | Enum | `"none"` | Fitting along the vertical axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
-| `orientation` | Enum | `"horizontal"` | Orientation of the layout: `"horizontal"` \| `"vertical"` |
-| `padding` | Vector4 | `"0 0 0 0"` | Padding around the group as `left bottom right top` |
-| `reverse-x` | Boolean | `"false"` | Reverse the order of children along the horizontal axis |
-| `reverse-y` | Boolean | `"true"` | Reverse the order of children along the vertical axis |
-| `spacing` | Vector2 | `"0 0"` | Spacing between children as `x y` |
-| `width-fitting` | Enum | `"none"` | Fitting along the horizontal axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
-| `wrap` | Boolean | `"false"` | Whether children wrap onto a new line or column when they overflow the group |
+| `height-fitting` | Enum | `"none"` | Whether the heights of the children change to fit the group: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"`. See the note below |
+| `orientation` | Enum | `"horizontal"` | `"horizontal"` places the children in a row, and `"vertical"` in a column: `"horizontal"` \| `"vertical"` |
+| `padding` | Vector4 | `"0 0 0 0"` | Space kept clear inside the edges of the group, as `left bottom right top` |
+| `reverse-x` | Boolean | `"false"` | Whether to place the children from right to left |
+| `reverse-y` | Boolean | `"true"` | Whether to place the children from the top down. The y axis points up, so it is this default that makes a column, and the rows of a grid, run from the top down. Set it to `"false"` to build upwards from the bottom |
+| `spacing` | Vector2 | `"0 0"` | Gap between neighboring children as `x y`: `x` between the children in a row, and `y` between the children in a column and between the rows of a grid |
+| `width-fitting` | Enum | `"none"` | Whether the widths of the children change to fit the group: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"`. See the note below |
+| `wrap` | Boolean | `"false"` | Whether a child that would overflow a row starts a new one, which makes a grid. In a vertical layout, it starts a new column |
 
 </div>
 
+:::note[Fitting]
+
+`"none"` leaves the children at their own size, `"stretch"` grows them to fill the group, up to any maximum size, `"shrink"` shrinks them to fit inside it, down to any minimum size, and `"both"` does whichever is needed. Along the layout, such as the width of a row, the space is shared between the children by their [`<pc-layout-child>`](../pc-layout-child) proportions. Across it, each child is fitted to its row or column on its own. With `wrap`, a new row starts before one would overflow, so `"both"` acts as `"stretch"`. See [Fitting](/user-manual/user-interface/layout-groups/#fitting).
+
+:::
+
 ## Example
 
-A vertical list that lays out its rows automatically, first row at the top. Try `orientation="horizontal"`, a bigger `spacing`, or `reverse-y="false"` to stack them upwards instead — or add another row and watch it slot in:
+A vertical list that lays out its rows automatically, first row at the top. Try a bigger `spacing`, `reverse-y="false"` to stack the rows upwards instead, or add another row and watch it slot in. `orientation="horizontal"` places the rows side by side, overflowing the group, until `width-fitting="both"` shrinks them to share its width:
 
 ```html live-example
 <pc-app>
@@ -74,5 +81,6 @@ The `component` property is the engine [LayoutGroupComponent](https://api.playca
 * [`<pc-layout-child>`](../pc-layout-child) — per-child sizing rules
 * [`<pc-element>`](../pc-element) — the elements being arranged
 * [`<pc-screen>`](../pc-screen) — the screen the layout lives on
+* [Layout Groups](/user-manual/user-interface/layout-groups/) — how children are placed, fitted and wrapped, in the User Interface section
 
-Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).
