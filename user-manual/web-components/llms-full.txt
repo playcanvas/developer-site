@@ -2052,16 +2052,22 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
 | `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at, above 0. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
+| `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame, applied on top of `time-scale`: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running — for a pause menu, say, that must stay interactive while the world stands still |
 | `picking` | Enum | `"auto"` | When the application picks the scene under the pointer to dispatch [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) on entity elements: `"auto"` \| `"always"` \| `"none"`. `auto` picks for an event type only while a listener for it is registered on an entity element or on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); `always` picks for every pointer event, which listeners the application cannot see need, such as one on the document or a framework's delegated handler like React's `onPointerMove`; `none` never picks, so entities receive no pointer events. Picking renders the scene again, which is why `auto` is the default. See [When Events Are Dispatched](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched) |
 | `stencil-buffer` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
+| `time-scale` | Number | `"1"` | Scale on the time the application advances by each frame. Scripts, animation and physics all advance by the scaled time, so below 1 is slow motion, above 1 speeds it up, and `"0"` pauses all three together while the scene keeps rendering. To slow down or pause physics alone, use `physics-time-scale` |
 | `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page: an app that boots with it switches it on for all of them, and a later change on any app sets it for all of them |
 
 :::note[When these are read]
 
-Every attribute above except `max-pixel-ratio`, `loading-bar`, `area-light-luts`, `picking` and `with-credentials` is read once, when the element is
-inserted into the document and creates its graphics device. Changing one afterwards updates the
-element's property but has no effect on the running application, and logs a warning saying so — to
-apply a new value, remove the element and re-insert it.
+`alpha`, `antialias`, `backend`, `depth-buffer` and `stencil-buffer` configure the graphics device,
+so they are read once, when the element is inserted into the document and creates it. Changing one
+afterwards updates the element's property but has no effect on the running application, and logs a
+warning saying so — to apply a new value, remove the element and re-insert it.
+
+Every other attribute is live, applying to the running application as soon as it changes, except
+that `loading-bar` can only remove the bar (see [Loading bar](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#loading-bar)). The two time scales
+are in place before any script's `initialize()` runs.
 
 :::
 
@@ -2200,7 +2206,7 @@ Examples: [Spinning Cube](https://playcanvas.github.io/web-components/examples/#
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md
 
-The `<pc-scene>` tag defines the scene an application renders: the root of its entity hierarchy, and the fog, exposure and physics settings that apply to everything in it.
+The `<pc-scene>` tag defines the scene an application renders: the root of its entity hierarchy, and the fog, exposure, Gaussian splat, lighting and gravity settings that apply to everything in it.
 
 :::note[Usage]
 
@@ -2224,7 +2230,8 @@ The `<pc-scene>` tag defines the scene an application renders: the root of its e
 | `gsplat-use-tonemap` | Boolean | `"true"` | Whether the camera's tone mapping and the scene's `exposure` apply to Gaussian splats. Set `"false"` to render splats with their stored colors, which suits captures that are already display-ready. Fog still applies |
 | `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
 | `lighting-max-lights` | Number | `"255"` | Maximum number of lights clustered lighting uses in a frame. The engine clamps the value to between 1 and the most the device supports (up to 65535), and lights over the limit are left out of the frame. Values above 255 double the memory of the light grid |
-| `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running. Applied on top of the application's own time scale |
+
+The scene applies these settings before any script's `initialize()` runs, both when the application boots and when a `<pc-scene>` is inserted into a running one, so scripts see the element's values from the start. The time scales that slow down or pause the application and its physics are attributes of [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md).
 
 ## Events
 
@@ -2274,11 +2281,11 @@ Boxes fading into linear fog. Try a different `fog-color` (match the camera's `c
 
 You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html).
 
-The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — `null` until the element is ready — where fog, exposure and the sky are configured.
+The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html), where fog, exposure and the sky are configured. It is `null` until the containing application has been created, so await the element's readiness before reading it from page code.
 
 ## See Also
 
-* [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) — the application that holds the scene
+* [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) — the application that holds the scene, and its time scales
 * [`<pc-sky>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md) — the scene's skybox and image-based lighting
 * [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md) — tone mapping, applied after the scene's exposure
 * [`<pc-rigid-body>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body.md) — the bodies gravity acts on
@@ -3470,7 +3477,7 @@ The `<pc-sky>` tag gives a scene its sky from an image: a background drawn behin
 
 ## Example
 
-An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, `type="none"` to keep only the lighting, or a higher `mip-level` to soften it:
+An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"`, `type="none"` to keep only the lighting, or a higher `mip-level` to soften it:
 
 ```html live-example
 <pc-app>
@@ -4103,7 +4110,7 @@ The `<pc-script>` tag adds a script component to an entity: the container for th
 
 ## Example
 
-One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script-instance>` tags, or adding `enabled="false"` to one to switch just that script off:
+One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script-instance>` tags, adding `enabled="false"` to one to switch just that script off, or adding it to the `<pc-script>` to switch both off:
 
 ```html live-example
 <pc-app>
@@ -4645,7 +4652,7 @@ The JSON asset holds the settings of the engine's [ParticleSystemComponent](http
 
 `colorMapAsset` names a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) by its `id`, which the element resolves to the texture. It is the only asset setting that can: `normalMapAsset`, `meshAsset` and `renderAsset` given the same way do not resolve.
 
-Declare the configuration's `<pc-asset>` without `lazy`, and set `asset` in the markup. A configuration that arrives after the component exists, as a lazy one does, is not converted to the engine's types, and fails to apply.
+The configuration's `<pc-asset>` can be `lazy`, and changing `asset` at runtime swaps in another configuration. Whenever a configuration arrives, the element builds its vectors and curves as the engine does and applies every setting to the component. An `enabled` key in the configuration is ignored: the element's `enabled` attribute decides whether the system runs.
 
 ## Example
 

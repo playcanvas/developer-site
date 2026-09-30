@@ -17,7 +17,7 @@ The `<pc-script>` tag adds a script component to an entity: the container for th
 
 ## Example
 
-One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script-instance>` tags, or adding `enabled="false"` to one to switch just that script off:
+One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script-instance>` tags, adding `enabled="false"` to one to switch just that script off, or adding it to the `<pc-script>` to switch both off:
 
 ```html live-example
 <pc-app>
