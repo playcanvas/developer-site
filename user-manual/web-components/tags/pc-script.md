@@ -1,6 +1,6 @@
 # <pc-script>
 
-The `<pc-script>` tag is used to define a script component.
+The `<pc-script>` tag adds a script component to an entity: the container for the scripts that give the entity its behavior, one [`<pc-script-instance>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script-instance.md) per script.
 
 :::note[Usage]
 
@@ -17,7 +17,7 @@ The `<pc-script>` tag is used to define a script component.
 
 ## Example
 
-One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script-instance>` tags, or setting `enabled="false"` on the `<pc-script>` component to switch both off:
+One script component holding two scripts — `rotate` spins the cube while `pulse` scales it. Try removing one of the `<pc-script-instance>` tags, or adding `enabled="false"` to one to switch just that script off:
 
 ```html live-example
 <pc-app>
@@ -76,4 +76,4 @@ The `component` property is the engine [ScriptComponent](https://api.playcanvas.
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — how script modules are loaded
 * [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting.md) — writing scripts and declaring their attributes
 
-Examples: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html), [First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html) and [Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html).
+Examples: [Tweening](https://playcanvas.github.io/web-components/examples/#tweening.html), [First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html) and [Solar System](https://playcanvas.github.io/web-components/examples/#solar-system.html).
