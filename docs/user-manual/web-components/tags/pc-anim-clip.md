@@ -16,7 +16,7 @@ The `<pc-anim-clip>` tag declares one named animation clip on a [`<pc-anim>`](..
 
 `name` does double duty: it is the name the clip is played by, *and* the name of the track looked up in the clip's source. That source is either the enclosing model or an asset you name:
 
-**The enclosing model.** With no `asset`, the track comes from the container of the [`<pc-model>`](../pc-model) that encloses the parent [`<pc-anim>`](../pc-anim). This is the usual case — a GLB exported with several animations, each declared as a clip:
+**The enclosing model.** With no `asset`, the track comes from the container of the [`<pc-model>`](../pc-model) that the parent [`<pc-anim>`](../pc-anim) sits directly inside. This is the usual case — a GLB exported with several animations, each declared as a clip:
 
 ```html
 <pc-model name="hero" asset="hero-glb">
@@ -27,7 +27,7 @@ The `<pc-anim-clip>` tag declares one named animation clip on a [`<pc-anim>`](..
 </pc-model>
 ```
 
-**A named asset.** Point `asset` at a [`<pc-asset>`](../pc-asset) to take the track from a separate file, which is how a shared clip library gets applied to a model that was exported without it. Three asset types work: a `container` (a GLB), an `animation` GLB, or an `animclip` JSON.
+**A named asset.** Point `asset` at a [`<pc-asset>`](../pc-asset) to take the track from a separate file, which is how a shared clip library gets applied to a model that was exported without it. Three asset types work: a `container` (a GLB), an `animation` GLB, or an `animclip` JSON. Declare the last two with `type="animation"` or `type="animclip"`, since a `.glb` is otherwise loaded as a `container` and a `.json` as plain JSON.
 
 ```html
 <pc-asset id="hero-glb" type="container" src="hero.glb"></pc-asset>
@@ -63,13 +63,13 @@ The tracks bind to scene nodes by name, so a clip from a separate file animates 
 
 </div>
 
-Every attribute is live. Changing `speed` or `loop` applies immediately and keeps the playhead where it was; changing `asset` or `name` re-resolves the track, which restarts the clip if it is the one playing. The component's own [`speed`](../pc-anim#attributes) multiplies whatever is set here.
+Every attribute is live. Changing `speed` or `loop` applies immediately and keeps the playhead where it was; changing `asset` or `name` re-resolves the track, and a `clip` selection on the component that named the old name no longer matches. The component's own [`speed`](../pc-anim#attributes) multiplies whatever is set here.
 
 ## Loading
 
-The element becomes ready once its track has been resolved and assigned. Until then the parent component holds the clip's place with an empty track, so a scene is never blocked waiting on a file: `activate` starts playback and a declared `clip` selection applies as soon as the markup is parsed, and real motion appears when the asset arrives.
+The element becomes ready once its track has been resolved and assigned. Until then the parent component holds the clip's place with an empty track, so a scene is never blocked waiting on a file: `activate` starts playback and a declared `clip` selection applies as soon as the component exists, and real motion appears when the asset arrives.
 
-A clip that cannot resolve its track warns and stays pending, leaving the rest of the library playable. The console message names the cause — a missing asset, a failed load, an asset of the wrong type, or a source with no usable track in it.
+A clip that cannot resolve its track warns and stays pending, leaving the rest of the library playable. The console message names the cause — a missing asset, a failed load, an asset of the wrong type, or a source with no usable track in it. The one silent case is a model whose own load failed: the `<pc-model>` has already reported that, and the clip stays pending.
 
 ## Example
 
@@ -153,4 +153,4 @@ document.querySelector('pc-anim').transition('wave');
 * [`<pc-anim>`](../pc-anim) — the component a clip belongs to
 * [`<pc-asset>`](../pc-asset) — the container or animation asset a clip's track comes from
 
-Examples: [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html).
+Examples: [Robot Arm](https://playcanvas.github.io/web-components/examples/#robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/#third-person-controller.html).
