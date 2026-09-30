@@ -28,7 +28,7 @@ So a joint is a third entity positioned where the pivot belongs, pointing the wa
 
 <!-- The joint sits at the pivot, not on either body -->
 <pc-entity name="hinge" position="0 2 0" rotation="0 90 0">
-    <pc-joint type="hinge" entity-a="#hinge-arm" entity-b="#hinge-anchor"
+    <pc-joint type="hinge" entity-a="hinge-arm" entity-b="hinge-anchor"
               enable-limits limits="-100 100"></pc-joint>
 </pc-entity>
 ```
@@ -47,7 +47,7 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `angular-damping` | Vector3 | `"1 1 1"` | Spring damping per angular axis. Used by `6dof` |
+| `angular-damping` | Vector3 | `"1 1 1"` | Spring damping per angular axis, from 0 to 1, where 1 is no damping and lower values damp more. Used by `6dof` |
 | `angular-equilibrium` | Vector3 | `"0 0 0"` | Rest angle of the angular springs. Used by `6dof` |
 | `angular-limits-x` | Vector2 | `"0 0"` | Rotation limits about the frame's X axis, as "min max" in degrees. Used by `6dof` |
 | `angular-limits-y` | Vector2 | `"0 0"` | Rotation limits about the frame's Y axis, as "min max" in degrees. Used by `6dof` |
@@ -58,12 +58,12 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 | `angular-stiffness` | Vector3 | `"0 0 0"` | Spring stiffness per angular axis. Used by `6dof` |
 | `break-impulse` | Number | never breaks | Impulse above which the constraint breaks. Omit for a joint that holds whatever happens |
 | `enable-collision` | Boolean | `"false"` | Whether the two constrained bodies collide with each other |
-| `enable-limits` | Boolean | `"false"` | Whether the joint's limits are enforced. Limit attributes do nothing until this is set |
+| `enable-limits` | Boolean | `"false"` | Whether a `hinge`, `slider` or `ball` joint's limits are enforced. Limit attributes do nothing until this is set, and set alone it enforces their defaults. A `6dof` joint ignores it |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `entity-a` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) providing the first body. Needs a [`<pc-rigid-body>`](../pc-rigid-body) |
-| `entity-b` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
+| `entity-a` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity), [`<pc-model>`](../pc-model) or [`<pc-node>`](../pc-node) providing the first body. Needs a [`<pc-rigid-body>`](../pc-rigid-body) |
+| `entity-b` | [Entity Reference](../attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](../pc-entity), [`<pc-model>`](../pc-model) or [`<pc-node>`](../pc-node) providing the second body. Leave empty to constrain `entity-a` to a fixed point in world space |
 | `limits` | Vector2 | `"-45 45"` | Rotation or travel limits about the primary axis, as "min max" — degrees for `hinge`, units for `slider` |
-| `linear-damping` | Vector3 | `"1 1 1"` | Spring damping per linear axis. Used by `6dof` |
+| `linear-damping` | Vector3 | `"1 1 1"` | Spring damping per linear axis, from 0 to 1, where 1 is no damping and lower values damp more. Used by `6dof` |
 | `linear-equilibrium` | Vector3 | `"0 0 0"` | Rest point of the linear springs. Used by `6dof` |
 | `linear-limits-x` | Vector2 | `"0 0"` | Translation limits along the frame's X axis, as "min max". Used by `6dof` |
 | `linear-limits-y` | Vector2 | `"0 0"` | Translation limits along the frame's Y axis, as "min max". Used by `6dof` |
@@ -74,8 +74,8 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 | `linear-stiffness` | Vector3 | `"0 0 0"` | Spring stiffness per linear axis. Used by `6dof` |
 | `max-motor-force` | Number | `"0"` | Maximum torque or force the motor can apply. Leave at 0 for no motor. Used by `hinge` and `slider` |
 | `motor-speed` | Number | `"0"` | Target speed of the motor. Used by `hinge` and `slider` |
-| `swing-limit-y` | Number | `"45"` | Maximum swing about the frame's Y axis, in degrees. Used by `ball` |
-| `swing-limit-z` | Number | `"45"` | Maximum swing about the frame's Z axis, in degrees. Used by `ball` |
+| `swing-limit-y` | Number | `"45"` | How far the primary axis may swing towards the frame's Y axis (a rotation about Z), as an angle either side in degrees. Used by `ball` |
+| `swing-limit-z` | Number | `"45"` | How far the primary axis may swing towards the frame's Z axis (a rotation about Y), as an angle either side in degrees. Used by `ball` |
 | `twist-limit` | Number | `"20"` | Maximum twist about the primary axis, in degrees. Used by `ball` |
 | `type` | Enum | `"fixed"` | The kind of constraint: `"fixed"` \| `"ball"` \| `"hinge"` \| `"slider"` \| `"6dof"` |
 
@@ -95,7 +95,7 @@ The engine's joint component is in alpha, so its behavior and API may change. Ex
 
 Every type also honours `entity-a`, `entity-b`, `enable-collision` and `break-impulse`.
 
-Limits are opt-in twice over: they need `enable-limits` *and* a limit value. A `hinge` with `limits="-100 100"` and no `enable-limits` swings freely.
+Limits are opt-in: a `hinge` with `limits="-100 100"` and no `enable-limits` swings freely. Set `enable-limits` alone and the defaults apply — ±45 degrees for a hinge, ±45 units for a slider, and 45-degree swings with a 20-degree twist for a ball — so set the limit values you want alongside it. A `6dof` joint does not use `enable-limits` at all: each of its axes is limited by setting its `*-motion-*` to `"limited"`.
 
 ## Frames and Limits
 
@@ -115,7 +115,7 @@ Listen to this event using [`addEventListener()`](https://developer.mozilla.org/
 
 | Event | Description |
 | --- | --- |
-| `break` | Fired when the impulse on the joint exceeds `break-impulse` and the constraint breaks. |
+| `break` | Fired when the impulse on the joint exceeds `break-impulse` and the constraint breaks. See below for when the engine notices. |
 
 Unlike most element events here, `break` bubbles and is composed, so one listener on an ancestor can watch every joint in a scene:
 
@@ -124,6 +124,8 @@ document.addEventListener('break', (event) => {
     console.log(`${event.target.getAttribute('entity-a')} came loose`);
 });
 ```
+
+The physics engine breaks the constraint the moment the impulse is exceeded, but the standard ammo.js build, the one this manual loads, cannot report that. So the element notices the break only once its two anchor points have drifted more than 0.2 units apart, and a `6dof` joint's break goes unreported.
 
 A broken joint stops constraining its bodies, and nothing re-arms it on its own. Any of these bring it back: calling `refreshFrames()` on the underlying component, toggling the component's `enabled`, or changing `type`, `entity-a` or `entity-b`.
 
@@ -134,7 +136,7 @@ joint.component.refreshFrames(); // re-armed, frames re-captured from the curren
 
 ## Example
 
-A motor-driven hinge spinning a blade about a static hub. The joint entity sits at the pivot, rotated `"0 90 0"` so its local X axis — the hinge axis — points at the camera. Try a different `motor-speed` (negative reverses it), or add `enable-limits limits="-60 60"` and watch the motor stall against the stop:
+A motor-driven hinge spinning a blade about a static hub. The joint entity sits at the pivot, rotated `"0 90 0"` so its local X axis — the hinge axis — points into the screen, away from the camera, and a positive `motor-speed` turns the blade clockwise as you look at it. Try a different `motor-speed` (negative reverses it), or add `enable-limits limits="-60 60"` and watch the motor stall against the stop:
 
 ```html live-example
 <pc-app>
@@ -170,7 +172,7 @@ A motor-driven hinge spinning a blade about a static hub. The joint entity sits 
 </pc-app>
 ```
 
-The [Physics Joints example](https://playcanvas.github.io/web-components/examples/physics-joints.html) builds one of each type, including a fixed joint that snaps under a dropped weight.
+The [Physics Joints example](https://playcanvas.github.io/web-components/examples/#physics-joints.html) builds one of each type, including a fixed joint that snaps under a dropped weight.
 
 ## JavaScript Interface
 
@@ -193,4 +195,4 @@ Both accept the same reference forms as other entity-valued attributes — an en
 * [`<pc-collision>`](../pc-collision) — gives a body its shape
 * [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
 
-Examples: [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html).
+Examples: [Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html) and [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/#ar-wiener-storm.html).

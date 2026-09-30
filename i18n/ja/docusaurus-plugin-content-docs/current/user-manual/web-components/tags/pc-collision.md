@@ -3,7 +3,7 @@ title: <pc-collision>
 description: "pc-collision要素のリファレンス: rigid bodyと組み合わせる、ボックス・球・カプセル・コーン・シリンダー・メッシュのコリジョン形状です。"
 ---
 
-`<pc-collision>`タグは、衝突コンポーネントを定義するために使用されます。
+`<pc-collision>`タグは、エンティティに衝突形状を与えます。[`<pc-rigid-body>`](../pc-rigid-body)と組み合わせると形状は物理シミュレーションに参加し、単独では、中に入ったものを報告するトリガーボリュームになります。
 
 :::note[使用法]
 
@@ -18,32 +18,37 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `angular-offset` | Vector3 | `"0 0 0"` | エンティティに対する衝突形状の回転を、度単位の「X Y Z」オイラー角で指定 |
-| `axis` | Number | `"1"` | 円柱/カプセル形状の軸 (0=X, 1=Y, 2=Z) |
+| `axis` | Number | `"1"` | 円柱/カプセル/円錐形状の軸 (0=X, 1=Y, 2=Z) |
 | `convex-hull` | Boolean | `"false"` | メッシュ衝突に凸包を使用するかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `half-extents` | Vector3 | `"0.5 0.5 0.5"` | ボックス衝突の半範囲を「X Y Z」値で指定 |
-| `height` | Number | `"2"` | 円柱/カプセル衝突形状の高さ |
+| `height` | Number | `"2"` | 円柱/カプセル/円錐衝突形状の高さ |
 | `linear-offset` | Vector3 | `"0 0 0"` | エンティティに対する衝突形状の位置を「X Y Z」値で指定 |
-| `radius` | Number | `"0.5"` | 球/円柱/カプセル衝突形状の半径 |
-| `type` | Enum | `"box"` | 衝突形状: `"box"` \| `"capsule"` \| `"compound"` \| `"cone"` \| `"cylinder"` \| `"mesh"` \| `"sphere"` |
+| `radius` | Number | `"0.5"` | 球/円柱/カプセル/円錐衝突形状の半径 |
+| `type` | Enum | `"box"` | 衝突形状: `"box"` \| `"capsule"` \| `"compound"` \| `"cone"` \| `"cylinder"` \| `"mesh"` \| `"sphere"`。`compound`形状は、エンティティの子孫の衝突形状を1つにまとめます |
 
 </div>
 
+プリミティブの形状 — `mesh`以外のすべての種類 — はエンティティのスケールを無視するため、`scale`ではなく`half-extents`、`radius`、`height`でサイズを決めてください。プリミティブ同士も、どこでもデフォルトが揃っているわけではありません。`<pc-render>`の円柱と円錐の高さは1ユニットですが、衝突形状の円柱と円錐の`height`のデフォルトは2です。
+
 ## メッシュコライダー {#mesh-colliders}
 
-メッシュコライダーはジオメトリを必要としますが、それを与える属性はありません。そのため`type="mesh"`は、エンティティ自身の[`<pc-render>`](../pc-render)コンポーネントからジオメトリを取得し、表示されているメッシュに一致するコライダーを生成します。これはモデルのノードに付けるメッシュコライダーの通常の意味であり、読み込まれたGLB内にバインドされた[`<pc-node>`](../pc-node)で`type="mesh"`が役に立つのは、この仕組みによります。
+メッシュコライダーはジオメトリを必要としますが、それを与える属性はありません。そのため`type="mesh"`は、エンティティが読み込まれたときのレンダーコンポーネントからジオメトリを取得し、表示されているメッシュに一致するコライダーを生成します。そのため、これは読み込まれたGLB内にバインドされた[`<pc-node>`](../pc-node)のための機能です。
 
 ```html
 <pc-model asset="car">
     <pc-node name="Body">
         <pc-collision type="mesh"></pc-collision>
+        <pc-rigid-body type="static"></pc-rigid-body>
     </pc-node>
 </pc-model>
 ```
 
+正確な三角形メッシュは`static`のボディでのみ機能します。動くボディでは`convex-hull`を設定し、代わりにメッシュの凸包と衝突させてください。
+
 ジオメトリはコンポーネントが適用されるたびに解決されるため、ターゲットが変わったり再バインドされた`<pc-node>`は、新しいノードのメッシュを取得します。
 
-レンダーコンポーネントはレンダーアセットに裏付けられている必要があり、プリミティブタイプはこれに該当しません。`<pc-render type="box">`には衝突判定の対象となるアセットがありません。適切なレンダーコンポーネントを持たないエンティティはコンソール警告を出力し、そのコライダーは形状を持ちません。
+レンダーコンポーネントはレンダーアセットに裏付けられている必要があり、[`<pc-render>`](../pc-render)のプリミティブはこれに該当しません。`<pc-render type="box">`には衝突判定の対象となるアセットがないため、プリミティブには対応するプリミティブの形状を与えてください。適切なレンダーコンポーネントを持たないエンティティはコンソール警告を出力し、そのコライダーは形状を持ちません。
 
 ## 例 {#example}
 
@@ -96,4 +101,4 @@ description: "pc-collision要素のリファレンス: rigid bodyと組み合わ
 * [`<pc-joint>`](../pc-joint) — 衝突形状を持つ2つのボディを拘束します
 * [`<pc-wasm>`](../pc-wasm) — 物理に必要なAmmoモジュールをロードします
 
-サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)
+サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/#basic-physics.html)、[Physics Cluster](https://playcanvas.github.io/web-components/examples/#physics-cluster.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html)
