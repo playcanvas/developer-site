@@ -9,11 +9,11 @@ For loading and rendering Streamed SOG in a PlayCanvas application, see the [LOD
 You can obtain the LOD levels in two ways:
 
 - **Supply your own LOD files** — provide a separate splat file for each level, for example produced during training or exported from another tool.
-- **Generate them by decimating a single source** — use [`--decimate`](https://developer.playcanvas.com/user-manual/splat-transform.md#actions) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately.
+- **Generate them by decimating a single source** — use [`--decimate`](https://developer.playcanvas.com/user-manual/splat-transform.md#actions) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately. `--decimate` removes Gaussians at a uniform rate everywhere; `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at higher memory cost.
 
 :::note
 
-Decimation must be the final action of an invocation and its output must be a `.ply` file, so generating LOD levels is a two-step process: write the decimated PLY levels first, then bundle them into Streamed SOG in a second invocation. Decimation is memory-bounded and streaming, scaling to scenes of 100M+ Gaussians; deep targets on huge scenes spill temporary files to `--scratch-dir` (default: the output file's directory).
+Decimation must be the final action of an invocation and its output must be a `.ply` file, so generating LOD levels is a two-step process: write the decimated PLY levels first, then bundle them into Streamed SOG in a second invocation. Decimation is memory-bounded and streaming, scaling to scenes of 100M+ Gaussians. A deep target on a huge scene can need `--scratch-dir` for its intermediate levels; nothing is written to disk without it, and the run stops with an error if those levels don't fit in memory.
 
 :::
 
@@ -60,6 +60,7 @@ splat-transform \
 splat-transform source.ply -d 50% lod1.ply
 splat-transform source.ply -d 25% lod2.ply
 splat-transform source.ply -d 10% lod3.ply
+# (for mixed-scale content such as skies, use --decimate-adaptive instead of -d)
 # Step 2: bundle the full-detail source and the decimated levels into Streamed SOG format
 splat-transform \
   source.ply -l 0 \
@@ -104,11 +105,12 @@ splat-transform scene/lod-meta.json --info null
 
 ## Tips
 
-- Use `--decimate` (`-d`) to generate lower LOD levels from a single high-quality source, instead of authoring each level separately
+- Use `--decimate` (`-d`) to generate lower LOD levels from a single high-quality source, instead of authoring each level separately, or `--decimate-adaptive` for mixed-scale content such as skies
 - Use `--filter-nan` to remove invalid Gaussians before processing
 - Use `--filter-harmonics 0` to reduce file size if colour detail is less critical
 - Use `--lod-chunk-count` to control the number of generated SOG files containing splats
 - Use `--lod-chunk-extent` to control the size of each node. Increase for very large scenes to avoid generating a huge number of nodes to manage
+- Use `--lod-chunk-min` to keep sparse regions such as sky or distant background from being cut into many near-empty chunks: a region with fewer Gaussians than this (in K, default 8) is not split for extent
 - Use `--info` to check per-LOD splat counts of a generated dataset
 
 ## See also

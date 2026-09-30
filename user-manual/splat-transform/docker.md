@@ -10,9 +10,11 @@ A few features are **GPU-only** and will not run without WebGPU:
 
 - `--filter-cluster` and `--filter-floaters`.
 - `.voxel.json` output and `--collision-mesh` (see the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide).
+- `.webp` image output, including `--camera-track` frame sequences (see [Image Output Options](https://developer.playcanvas.com/user-manual/splat-transform.md#image-output-options)).
 
 A few are **GPU-accelerated but optional**:
 
+- `--decimate` and `--decimate-adaptive`, which use the GPU by default and run on the CPU with `-g cpu`.
 - SOG / `meta.json` / `lod-meta.json` / `.html` viewer output (see [SOG Compression Options](https://developer.playcanvas.com/user-manual/splat-transform.md#sog-compression-options)). The only step inside this writer that uses the GPU is k-means clustering of spherical-harmonic coefficients, so:
   - Inputs **without** SH bands (e.g. `.splat`, SH-stripped PLYs, or anything piped through `-H 0` / `--filter-harmonics 0`) write SOG fully on the CPU.
   - Inputs **with** SH bands work on the CPU too via `-g cpu`, but SH clustering is roughly 5-10x slower without a GPU.
