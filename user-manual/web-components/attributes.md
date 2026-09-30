@@ -4,7 +4,7 @@ Every PlayCanvas Web Component is configured through HTML attributes. All attrib
 
 ## The Shared Contract
 
-Every attribute obeys the same three rules:
+Attributes follow three rules:
 
 | Markup | Result |
 | --- | --- |
@@ -16,7 +16,12 @@ The *Default* column in each tag's attribute table shows the value that applies 
 
 Invalid values never reach the engine. Instead, you get a console warning naming the attribute and the expected format — keep the console open while authoring and typos surface immediately.
 
-[`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) is the one exception to the middle row. Its attributes are overrides against a node inside a loaded model, so an absent attribute restores the value that model was authored with rather than the engine default.
+A few kinds of attribute bend these rules:
+
+* [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md)'s attributes are overrides against a node inside a loaded model, so an absent attribute restores the value that model was authored with rather than the engine default.
+* A reference to a resource or an entity — the [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids), [Material ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) and [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) types below — usually keeps whatever it last resolved to when you remove it: removing `material` from a `<pc-render>` leaves its current material in place. Where an empty reference means something of its own, such as a `<pc-joint>` with no `entity-b`, the tag's page says so.
+* Some attributes are read only once, when their element starts up, such as `<pc-app>`'s graphics options and most of `<pc-asset>`'s. Each tag page with any of these has a *When these are read* note that lists them.
+* [Script attributes](https://developer.playcanvas.com/user-manual/web-components/attributes.md#script-attributes) are set on a script rather than on an engine component, so an invalid or removed one keeps the script's current value.
 
 ## The Type Column
 
@@ -108,7 +113,9 @@ Resources are declared once, as direct children of [`<pc-app>`](https://develope
 <pc-render type="plane" material="floor"></pc-render>
 ```
 
-The value is the element's own `id`, written bare — no `#`, because it is a lookup in the application's registry rather than a CSS selector. Each attribute's description says which asset type it accepts. An `id` that matches no declared resource has no effect: the element keeps what it had, and [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) additionally logs a warning naming the asset it could not find.
+The value is the element's own `id`, written bare — no `#`, because it is a lookup in the application's registry rather than a CSS selector. Each attribute's description says which asset type it accepts.
+
+An `id` that matches no declared resource usually changes nothing, and silently: the element keeps what it had. [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) is the exception, because its content comes from the asset: it clears that content, warns that it could not find the asset, and never becomes ready. `<pc-app>`'s `area-light-luts`, a sprite `<pc-asset>`'s `atlas`, `<pc-node>`'s `material-overrides` and script `asset:` values also warn when their `id` matches nothing.
 
 ## Entity References
 
@@ -143,4 +150,9 @@ A non-empty reference that does not resolve logs a console warning naming the at
 
 ## Script Attributes
 
-Scripts declare their own attributes, so [`<pc-script-instance>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script-instance.md) extends these conventions with per-property attributes that are parsed based on each script attribute's declared type. See [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting.md) for details.
+Scripts declare their own attributes, so [`<pc-script-instance>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script-instance.md) extends these conventions with per-property attributes that are parsed based on each script attribute's declared type. The value grammar is the same, but there is no engine default to fall back to, so two rules change:
+
+* An invalid value logs a warning and keeps the script's current value.
+* Removing an attribute also keeps the current value, unless the element's `attributes` JSON sets the same property, in which case the JSON's value applies again.
+
+A name the script does not declare with a typed default is assigned as a plain string, with a warning. See [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting.md) for details.
