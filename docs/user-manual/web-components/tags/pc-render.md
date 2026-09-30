@@ -3,7 +3,7 @@ title: <pc-render>
 description: "Reference for the pc-render element: render primitive shapes (box, sphere, capsule, cone, cylinder, plane, torus) with a material and shadow settings."
 ---
 
-The `<pc-render>` tag is used to define a render component that renders a 3D primitive.
+The `<pc-render>` tag adds a render component that draws a primitive shape — a box, sphere, capsule, cone, cylinder, plane or torus — with a material.
 
 :::note[Usage]
 
@@ -83,4 +83,4 @@ The `component` property is the engine [RenderComponent](https://api.playcanvas.
 * [`<pc-light>`](../pc-light) — lights and shadows the primitive
 * [`<pc-collision>`](../pc-collision) — a matching physics shape
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html) and [Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html).

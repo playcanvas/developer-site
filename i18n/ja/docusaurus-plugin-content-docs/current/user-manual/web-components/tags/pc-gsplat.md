@@ -3,7 +3,7 @@ title: <pc-gsplat>
 description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレンダリングし、splatデータのソース、影、LOD調整向けの属性を扱います。"
 ---
 
-`<pc-gsplat>`タグは、3D Gaussian Splatsをレンダリングするためのgsplatコンポーネントを定義するために使用されます。
+`<pc-gsplat>`タグは、3D Gaussian Splatを描画するgsplatコンポーネントを追加します。何百万もの小さく柔らかな色付きの粒としてキャプチャしたシーンです。
 
 スプラットベースのシーンをレンダリングする場合、最高のパフォーマンスを得るには、[`<pc-app>`](../pc-app)タグの`antialias`を`false`に、`max-pixel-ratio`を`1`に設定することをお勧めします。
 
@@ -23,14 +23,14 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 | `cast-shadows` | Boolean | `"false"` | gsplatコンポーネントが影を落とすかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `lod-falloff` | Number | `"1"` | このスプラットのディテールがカメラから離れるにつれてどれだけ速く落ちるかを、0から8の指数で指定します。値が大きいほどシーン全体のスプラット予算をカメラ近くに集中させ、小さいほど均等に分散させます。LODレベルを含むアセットにのみ影響します。 |
-| `lod-range-max` | Number | `"99"` | 許可される最大のLODインデックス (この値を含む)。距離によって選択されるLODは、この値より粗い (インデックスが大きい) ものにならないようにクランプされます。デフォルトの`99`は事実上「上限なし」を意味します。LODレベルを含むアセットにのみ影響します。 |
-| `lod-range-min` | Number | `"0"` | 許可される最小のLODインデックス (この値を含む)。距離によって選択されるLODは、この値より細かい (インデックスが小さい) ものにならないようにクランプされます。値を上げると、最高品質 (最大) のLODファイルのダウンロードを回避できます。LODレベルを含むアセットにのみ影響します。 |
+| `lod-range-max` | Number | `"99"` | 許可される最大のLODインデックス (この値を含む)。予算が選択するLODは、この値より粗い (インデックスが大きい) ものにならないようにクランプされます。デフォルトの`99`は事実上「上限なし」を意味します。LODレベルを含むアセットにのみ影響します。 |
+| `lod-range-min` | Number | `"0"` | 許可される最小のLODインデックス (この値を含む)。予算が選択するLODは、この値より細かい (インデックスが小さい) ものにならないようにクランプされます。値を上げると、最高品質 (最大) のLODファイルのダウンロードを回避できます。LODレベルを含むアセットにのみ影響します。 |
 
 </div>
 
 ## レベルオブディテール {#level-of-detail}
 
-ストリーミング用のスプラットアセットとは、LODレベル付きでエクスポートされたものです。その[`<pc-asset>`](../pc-asset)の`src`はエクスポートの`lod-meta.json`を指し、このファイルが先に読み込まれ、スプラットデータ自体はオンデマンドでストリーミングされます。こうしたアセットは、どこでもフルディテールで描画されるわけではありません。エンジンは**シーン全体のスプラット予算**、つまりシーン内のすべての`<pc-gsplat>`を合わせて画面に描くスプラット数の目標値に従って動き、最も効果の高い場所にそれを使います。予算とその使い方はシーンの性質なので[`<pc-scene>`](../pc-scene)に置かれ、各スプラットが自分の取り分をどう競うかはここに置かれます。
+ストリーミング用のスプラットアセットとは、LODレベル付きでエクスポートされたものです。その[`<pc-asset>`](../pc-asset)の`src`はエクスポートの`lod-meta.json`を指し、このファイルが先に読み込まれ、スプラットデータ自体はオンデマンドでストリーミングされます。`.json`ファイルはそのままでは通常のJSONとして読み込まれるため、`type="gsplat"`を付けて宣言してください。こうしたアセットは、どこでもフルディテールで描画されるわけではありません。エンジンは**シーン全体のスプラット予算**、つまりシーン内のすべての`<pc-gsplat>`を合わせて画面に描くスプラット数の目標値に従って動き、最も効果の高い場所にそれを使います。予算とその使い方はシーンの性質なので[`<pc-scene>`](../pc-scene)に置かれ、各スプラットが自分の取り分をどう競うかはここに置かれます。
 
 | 属性 | 場所 | 制御する内容 |
 | --- | --- | --- |
@@ -40,6 +40,8 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 | `lod-range-min`・`lod-range-max` | `<pc-gsplat>` | 予算の判断にかかわらず、このスプラットが使えるLODインデックスの上下限。最小値を上げれば、最大のファイルを一切ダウンロードしないようにできます |
 
 ```html
+<pc-asset id="capture" src="capture/lod-meta.json" type="gsplat"></pc-asset>
+<!-- ... -->
 <pc-scene gsplat-splat-budget="1500000" gsplat-lod-mode="error">
     <pc-entity name="capture">
         <pc-gsplat asset="capture" lod-falloff="1.5" lod-range-min="1"></pc-gsplat>
@@ -47,9 +49,9 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 </pc-scene>
 ```
 
-予算による選択を無効にする方法はありません。0以下の予算は上限を外すのではなく、すべてのノードを最も粗いレベルに固定してしまうため、エンジンは警告を出してデフォルトを使い続けます。すべてをフルディテールで見たい場合は、キャプチャより大きい予算を設定してください。LODレベルを持たない通常の`.ply`・`.sog`・`.splat`アセットにはどれも影響せず、常にフルで描画されます。
+予算による選択を無効にする方法はありません。0以下の予算は上限を外すのではなく、すべてのノードを最も粗いレベルに固定してしまうため、エンジンは代わりにデフォルトを使います。すべてをフルディテールで見たい場合は、キャプチャより大きい予算を設定してください。LODレベルを持たない通常の`.ply`・`.sog`アセットは常にフルで描画されますが、そのスプラットは予算に数えられ、その分ストリーミングされるアセットに回る量が減ります。
 
-[Splat Streamingのサンプル](https://playcanvas.github.io/web-components/examples/splat-streaming.html)は大きなLODキャプチャをストリーミングし、予算を操作できるようにしているので、このトレードオフを想像ではなく実際に眺めることができます。
+[Splat Streamingのサンプル](https://playcanvas.github.io/web-components/examples/#splat-streaming.html)は大きなLODキャプチャをストリーミングします。`lod-range-min`を最も粗いレベルに固定してシーン全体を素早く表示し、その後固定を外してより細かいレベルをストリーミングさせるため、予算の働きを見ることができます。
 
 ## 例 {#example}
 
@@ -85,4 +87,4 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 * [`<pc-app>`](../pc-app) — スプラットに推奨するデバイス設定
 * [Webコンポーネントの使用](../../gaussian-splatting/building/your-first-app/web-components.md) — はじめてのスプラットアプリを順を追って作る
 
-サンプル: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html)、[Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html)、[Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html)、[Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html)
+サンプル: [Basic Splat](https://playcanvas.github.io/web-components/examples/#basic-splat.html)、[Splat Annotations](https://playcanvas.github.io/web-components/examples/#splat-annotations.html)、[Splat Flipbook](https://playcanvas.github.io/web-components/examples/#splat-flipbook.html)、[Splat Streaming](https://playcanvas.github.io/web-components/examples/#splat-streaming.html)
