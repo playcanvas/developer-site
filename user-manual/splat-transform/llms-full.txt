@@ -3,7 +3,7 @@
 > SplatTransform (`@playcanvas/splat-transform`) is a CLI and library for 3D Gaussian splats: it converts between formats, transforms, filters and merges splat data, generates streamed levels of detail, voxelizes splats for collision, and renders images.
 
 Index: https://developer.playcanvas.com/user-manual/splat-transform/llms.txt
-Total Documents: 12
+Total Documents: 14
 Generated: 2026-09-30
 
 ================================================================================
@@ -31,7 +31,7 @@ The [SuperSplat Convert page](https://developer.playcanvas.com/user-manual/super
 
 SplatTransform solves the problems developers face when working with Gaussian splats:
 
-🔄 **Broad Format Support** — read PLY, Compressed PLY, SOG, Streamed SOG, SPZ, SPLAT, KSPLAT, LCC and LCC2; write PLY, Compressed PLY, SOG, Streamed SOG, SPZ, GLB, CSV, HTML Viewer, Voxel and WebP image  
+🔄 **Broad Format Support** — convert between the common splat formats, from PLY and SPZ to SOG and Streamed SOG, and export to glTF, CSV, standalone HTML viewers and WebP images ([full list](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#supported-formats))  
 🛠️ **Powerful Transformations** — translate, rotate, and scale your splats with precision  
 🧹 **Smart Filtering** — strip NaN/Inf, filter by value, box, sphere, harmonic band, or floater contribution, and keep only the connected cluster around a seed point  
 📐 **Decimation & Reordering** — simplify via memory-bounded merge-based decimation (uniform or error-adaptive) that scales to 100M+ Gaussians, and reorder by Morton code for spatial locality  
@@ -64,283 +64,38 @@ splat-transform --version
 
 For running on a backend with Docker (including GPU/Vulkan setup), see the [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) guide.
 
-## Guides
+## Quick Start
 
-- [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md) — build a multi-LOD Streamed SOG from a single PLY.
-- [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md) — load and render Streamed SOG output in a PlayCanvas app.
-- [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) — generate voxel/collision data from a splat scene.
-- [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) — run splat-transform on a backend (incl. GPU/Vulkan setup).
-- [Library Usage](https://developer.playcanvas.com/user-manual/splat-transform/library.md) — drive splat-transform programmatically from Node.js or the browser. The full TypeDoc reference lives at [api.playcanvas.com/splat-transform](https://api.playcanvas.com/splat-transform/).
-
-## Format Specifications
-
-| Format | Description |
-| ------ | ----------- |
-| [PLY](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply.md) | Industry-standard uncompressed format for source, editing and interchange |
-| [SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md) | Super-compressed format for web delivery (`meta.json` + WebP textures, bundled or unbundled) |
-| [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) | Multi-LOD chunked SOG for streaming very large scenes (`lod-meta.json`) |
-| [Voxel](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) | Sparse voxel octree for collision detection (`.voxel.json` / `.voxel.bin`) |
-
-## CLI Usage
-
-The general syntax for SplatTransform is:
+Convert a PLY file to SOG for web delivery:
 
 ```bash
-splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
+splat-transform scene.ply scene.sog
 ```
 
-**Key points:**
+The format of each file is detected from its extension. Actions go after the file they apply to and run in the order given. This run scales the scene, raises it by one unit, and removes invalid Gaussians before writing:
 
-- Input files become the working set; ACTIONS are applied in order
-- The last file is the output; actions after it modify the final result
-- Use `null` as the output to discard file output (useful with `--stats` for analysis-only runs)
-- Input filenames may also be `http(s)://` URLs, downloaded on demand (`.mjs` generators must be local files)
-
-## Supported Formats
-
-SplatTransform detects file format from the file extension:
-
-| Format            | Input | Output | Description                                                                                                                                          |
-| ----------------- | ----- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.ply`            | ✅    | ✅     | Standard PLY format                                                                                                                                  |
-| `.sog`            | ✅    | ✅     | Bundled super-compressed format (recommended)                                                                                                        |
-| `meta.json`       | ✅    | ✅     | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** be `meta.json`                                         |
-| `lod-meta.json`   | ✅    | ✅     | Multi-LOD [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) bundle (accompanied by per-LOD `.sog` chunks). Filename **must** be `lod-meta.json` |
-| `.compressed.ply` | ✅    | ✅     | Compressed PLY format (auto-detected and decompressed on read)                                                                                       |
-| `.spz`            | ✅    | ✅     | Compressed splat format (Niantic format, v2–4)                                                                                                       |
-| `.lcc`            | ✅    | ❌     | LCC file format (XGRIDS)                                                                                                                             |
-| `.lcc2`           | ✅    | ❌     | LCC2 file format (XGRIDS, octree)                                                                                                                    |
-| `.ksplat`         | ✅    | ❌     | Compressed splat format (mkkellogg format)                                                                                                           |
-| `.splat`          | ✅    | ❌     | Compressed splat format (antimatter15 format)                                                                                                        |
-| `.mjs`            | ✅    | ❌     | Generate a scene using an mjs script (Beta)                                                                                                          |
-| `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension, [loadable directly](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/glb.md) by the PlayCanvas Engine |
-| `.csv`            | ❌    | ✅     | Comma-separated values spreadsheet                                                                                                                   |
-| `.html`           | ❌    | ✅     | HTML viewer app (single-page or unbundled) based on SOG                                                                                              |
-| `.voxel.json`     | ❌    | ✅     | Sparse voxel octree for collision detection. See the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide. Output filename must end with `.voxel.json` (the prefix is up to you, e.g. `room.voxel.json`) |
-| `.webp`           | ❌    | ✅     | Lossless WebP image rendered from a camera view via GPU rasterizer                                                                                   |
-| `null`            | ❌    | ✅     | Discard output (useful with `--stats` for analysis-only runs)                                                                                        |
-
-### Antialiased and 2DGS Scenes
-
-Scenes trained with antialiasing (a mip-splatting style screen-space filter) or as 2D Gaussian surfels (2DGS) are tagged on read, and the tag is preserved wherever the output format can hold it. `--info` reports it as `model`.
-
-- **On read:** a PLY header comment — Brush's `comment SplatRenderMode: default | mip | 2dgs` or Postshot's `comment antialiased 0 | 1` (the last one wins) — the SPZ antialiased header bit, or the `model` entry of a SOG `meta.json`. A PLY with `scale_0` and `scale_1` but no `scale_2` is read as 2DGS regardless of comments, and the missing column is filled with a zero-thickness scale so the rest of the pipeline is unaffected.
-- **On write:** `.ply` and `.compressed.ply` carry `comment SplatRenderMode: mip | 2dgs` (Brush's spelling, whichever form was read); `.sog` and `meta.json` carry `"model": "antialiased" | "2dgs"`; `.spz` sets its antialiased bit, and warns that it cannot represent 2DGS. A 2DGS PLY output drops the `scale_2` column again. Other output formats have nowhere to record the tag and drop it silently.
-- **Merging:** combining inputs whose tags disagree warns and writes the result untagged.
-
-## Actions
-
-Actions execute in the order specified and can be repeated. Any action may appear after any input or output file:
-
-```none
--t, --translate        <x,y,z>          Translate Gaussians by (x, y, z)
--r, --rotate           <x,y,z>          Rotate Gaussians by Euler angles (x, y, z), in degrees
--s, --scale            <factor>         Uniformly scale Gaussians by factor
--H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
--N, --filter-nan                        Remove Gaussians with NaN values, most Inf values, or a
-                                          zero-norm (unrenderable) rotation quaternion;
-                                          retains +Infinity in opacity and -Infinity in scale_*
--B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
--S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
--V, --filter-value     <name,cmp,value> Keep Gaussians where <name> <cmp> <value>
-                                          cmp ∈ {lt,lte,gt,gte,eq,neq}
-                                          opacity, scale_*, f_dc_* use transformed values
-                                          (linear opacity 0-1, linear scale, linear color 0-1).
-                                          Append _raw for raw PLY values (e.g. opacity_raw).
--d, --decimate         <n|n%>           Simplify to n Gaussians via merge-based decimation,
-                                          removing at a uniform rate everywhere.
-                                          Use n% to keep a percentage of Gaussians.
-                                          Lower memory, and better at depth on uniformly-sized
-                                          Gaussians: uniform texture, single objects, snow.
-    --decimate-adaptive <n|n%>          Simplify, allocating removal by local error instead.
-                                          Much better on mixed-scale content such as skies,
-                                          at higher memory cost.
-                                          Both are memory-bounded and streaming: they scale to
-                                          scenes of 100M+ Gaussians. Either must be the final
-                                          action, and the output must be .ply (write a decimated
-                                          PLY first, then convert in a second invocation).
-    --scratch-dir      <path>           Directory for intermediate levels when a deep decimation
-                                          target exceeds memory. Nothing is written without it.
--F, --filter-floaters  [size,op,min]    Remove Gaussians not contributing to any solid voxel.
-                                          Evaluates each Gaussian at occupied voxel centers.
-                                          Default: size=0.05, opacity=0.1, min=0.004 (1/255).
-                                          Bare flag (no value) uses all defaults.
--C, --filter-cluster   [res,op,min]     Keep only the connected cluster at --seed-pos.
-                                          GPU-voxelizes at coarse resolution (res world units/voxel).
-                                          Default: res=1.0, opacity=0.999, min=0.1.
-                                          Bare flag (no value) uses all defaults.
--p, --params           <key=val,...>    Pass parameters to .mjs generator script
--l, --tag-lod          <n>              Tag the Gaussians with LOD level n (n >= 0, or -1 for environment)
-    --stats            [text|json]      Print file info, per-column statistics and the fill/overdraw ratio to stdout. Default: text
-    --info             [text|json]      Print structural metadata (format, per-LOD counts, extra columns) to stdout. Default: text
--m, --morton-order                      Reorder Gaussians by Morton code (Z-order curve)
+```bash
+splat-transform scene.ply -s 0.5 -t 0,1,0 --filter-nan scene.sog
 ```
 
-## CLI Options
+Add `-w` to overwrite an output file that already exists. The general form is `splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]`: see [Command Syntax](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#command-syntax) for the full rules and [Supported Formats](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#supported-formats) for every file type.
 
-These options configure a run as a whole rather than operating on splat data — most groups apply only when reading or writing a specific format.
+## Guides
 
-### General Options
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md) — every option, the supported formats, and which features need a GPU.
+- [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md) — build a multi-LOD Streamed SOG from a single PLY.
+- [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) — generate voxel/collision data from a splat scene.
+- [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md) — render views, panoramas, depth of field, motion blur and camera animations to WebP.
+- [Library Usage](https://developer.playcanvas.com/user-manual/splat-transform/library.md) — drive splat-transform programmatically from Node.js or the browser. The full TypeDoc reference lives at [api.playcanvas.com/splat-transform](https://api.playcanvas.com/splat-transform/).
+- [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) — run splat-transform on a backend (incl. GPU/Vulkan setup).
 
-```none
--h, --help                              Show this help and exit
--v, --version                           Show version and exit
--q, --quiet                             Suppress non-error output
-    --verbose                           Show debug-level diagnostics
-    --memory                            Show peak memory in progress output
-    --tty                               Interactive bar rendering (default on a TTY; --no-tty to disable)
--w, --overwrite                         Overwrite output file if it exists
-    --webp-effort      <0-9>            Lossless WebP compression effort for image, SOG, HTML and LOD output.
-                                          Higher tries harder to reduce size. Default: libwebp's default
-                                          lossless settings.
-```
-
-### GPU Options
-
-Used by SOG compression and GPU voxelization (`--filter-cluster`, `--filter-floaters`, `.voxel.json` output).
-
-```none
-    --list-gpus                         List available GPU adapters and exit
--g, --gpu              <n|cpu>          Device for GPU operations: GPU adapter index | 'cpu'
-                                          ('cpu' disables GPU and is incompatible with
-                                          GPU-only features like --filter-cluster)
-    --gpu-backend      <name>           Force the WebGPU backend: vulkan | d3d12 | metal.
-                                          Default: the platform default (e.g. vulkan works around
-                                          Dawn D3D12 bugs on Windows)
-```
-
-### SOG Compression Options
-
-Apply when writing `.sog`, `meta.json`, `lod-meta.json`, or `.html` outputs.
-
-```none
--i, --sh-iterations    <n>              Iterations for SH compression (more=better). Default: 10
-    --max-workers      <n>              Worker threads for SOG and image-sequence encoding (0 = inline/serial). Default: 4
-```
-
-### SPZ Output Options
-
-Apply when writing `.spz` outputs.
-
-```none
-    --spz-version      <3|4>            The SPZ format version to write. Default: 4
-```
-
-### HTML Viewer Output Options
-
-Apply when writing `.html` outputs.
-
-```none
-    --viewer-settings  <settings.json>  HTML viewer settings JSON file
-    --unbundled                         Generate unbundled HTML viewer with separate files
-```
-
-:::note
-
-See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `--viewer-settings` option. The settings are validated before the page is written, so an invalid file fails the run instead of producing a viewer that renders nothing.
-
-:::
-
-### LOD Input Options
-
-Apply when reading `lod-meta.json`, `.lcc`, and `.lcc2` files.
-
-```none
--L, --select-lod       <n,n,...>        Comma-separated LOD levels to read from streamed SOG / LCC / LCC2 input
-```
-
-### LOD Output Options
-
-Apply when writing `lod-meta.json` ([Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) output).
-
-```none
-    --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
-    --lod-chunk-extent <n>              Approximate size of an LOD chunk in world units (m). Default: 16
-    --lod-chunk-min    <n>              Gaussians in K below which a chunk is not split for extent. Default: 8
-```
-
-A chunk is split when it holds more than `--lod-chunk-count` Gaussians, or when it is wider than `--lod-chunk-extent` and holds more than `--lod-chunk-min`. The minimum keeps sparse regions such as sky or distant background from being cut into thousands of near-empty chunks: below it, a region stays one chunk however wide it is. Dense regions are unaffected.
-
-See [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md) for an end-to-end walkthrough.
-
-### Voxel Output Options
-
-Apply when writing `.voxel.json` (sparse voxel octree for collision detection). See the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide for a deep dive on each step and tuning.
-
-```none
-    --voxel-size       <n>              Voxel size for .voxel.json. Default: 0.05
-    --voxel-opacity    <n>              Voxel opacity threshold for .voxel.json. Default: 0.1
-    --voxel-external-fill [size]        Seal exterior voxels via boundary flood fill (interior scenes).
-                                          [size] (world units) is the dilation distance applied
-                                          before the flood fill to bridge small wall gaps.
-                                          --seed-pos is used to verify the volume is enclosed at
-                                          the seed; the fill is skipped if the seed is reachable
-                                          from outside.
-                                          Default size: 1.6
-    --voxel-floor-fill [size]           Fill each column upward from bottom until hitting solid (exterior scenes).
-                                          Optional size (world units): only patch XZ areas surrounded by floor
-                                          within 2*size; large empty exterior areas are left alone.
-                                          Default size: 1.6
-    --voxel-carve      [h,r]            Carve navigable space using capsule flood fill from seed.
-                                          Default: height=1.6, radius=0.2
-    --seed-pos         <x,y,z>          Seed position for voxel fill/carve and --filter-cluster.
-                                          Default: 0,0,0
-    --collision-mesh   [smooth|faces]   Generate collision mesh (.collision.glb). Default: smooth
-```
-
-### Image Output Options
-
-Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer).
-
-```none
-    --projection       <pinhole|equirect>  Camera projection. Default: pinhole.
-                                        equirect = 360°×180° panorama from --camera-pos; --camera-fov must be
-                                        omitted; --resolution must be 2:1 (default 2048x1024).
-    --camera-pos       <x,y,z>          Camera position in world space. Default: 2,1,-2
-    --camera-target    <x,y,z>          Camera target point. Default: 0,0,0
-    --camera-up        <x,y,z>          World up vector. Default: 0,1,0
-    --camera-fov       <degrees>        Vertical field of view in degrees. Default: 60. Rejected with --projection equirect.
-    --resolution       <WxH>            Output resolution, e.g. 1920x1080. Default: 1280x720 (pinhole) or 2048x1024 (equirect)
-    --camera-near      <n>              Near clip distance. Default: 0.2 (matches reference 3DGS)
-    --background       <r,g,b[,a]>      Background color in [0,1]. Default: 0,0,0,1
-    --f-stop           <N>              Aperture as a photographic f-stop (e.g. 2.8, 5.6, 11). Enables defocus blur;
-                                        smaller = more blur. Pinhole only. Default: disabled (no defocus).
-    --focus-distance   <n>              Camera-space Z of the focus plane (world units). Default: distance to --camera-target.
-                                        Pinhole only; only meaningful with --f-stop.
-    --dof-samples      <n>              Aperture samples per instant with --f-stop. Default: 32. More samples reduce
-                                        sampling artifacts at greater cost; multiplies --motion-samples when combined.
-    --sensor-size      <n>              Vertical sensor height in world units. Gives --f-stop a physical meaning.
-                                        Default: 0.024 (35mm full-frame, world units = meters). Scale to your world:
-                                        world unit = decimeter → 0.24, world unit = millimeter → 24.
-    --camera-pos-end   <x,y,z>          End camera position. When set, enables camera motion blur: the camera moves
-                                        from --camera-pos (shutter open) to --camera-pos-end (shutter close) and the
-                                        frame averages renders at instants across the shutter. Default: disabled.
-    --camera-target-end <x,y,z>         End camera target. Default: same as --camera-target. Only with --camera-pos-end.
-    --camera-up-end    <x,y,z>          End up vector. Default: same as --camera-up. Only with --camera-pos-end.
-    --shutter          <0..1>           Fraction of the start→end segment averaged, centered on its midpoint. Default: 0.5.
-                                        With --camera-track, fraction of the frame interval averaged around each frame.
-                                        Default for tracks: off. 1.0 = full interval; 0.5 = 180° shutter.
-    --motion-samples   <n>              Renders averaged per motion-blurred frame, at evenly spaced instants across
-                                        the shutter. Cost is N× a single render; too few show as discrete copies
-                                        where the motion between instants exceeds a couple of pixels. Default: 16.
-    --camera-track     <path>           Render a camera animation as a frame sequence: a SuperSplat editor project
-                                        (.ssproj directory or its document.json), a viewer settings.json with
-                                        animTracks, or a JSON { frameRate, frames: [{ position, target, fov, up }] }.
-                                        Frames are written as <name>.NNNN.webp. Replaces --camera-pos/--camera-target;
-                                        the track's target is the defocus focus point. A frame's up vector tilts the
-                                        camera; frames without one use --camera-up. With --shutter, each frame is
-                                        motion-blurred over that fraction of the frame interval.
-    --frames           <a[-b]>          Inclusive frame range of the track to render. Default: all frames.
-```
+The file formats themselves are specified in [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats.md) and the [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) specification. To load Streamed SOG output in a PlayCanvas app, see [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md).
 
 ## Examples
 
 ### Format Conversion
 
 ```bash
-# Simple format conversion
-splat-transform input.ply output.csv
-
 # Convert from .splat format
 splat-transform input.splat output.ply
 
@@ -374,9 +129,15 @@ splat-transform --unbundled input.ply output.html
 
 # Convert to HTML viewer with custom settings
 splat-transform --viewer-settings settings.json input.ply output.html
+```
 
-# Export to CSV for spreadsheet analysis
-splat-transform scene.ply data.csv
+To convert a whole folder, call splat-transform once per file:
+
+```bash
+# Convert existing KSPLAT assets to PlayCanvas SOG
+for file in *.ksplat; do
+  splat-transform "$file" "${file%.ksplat}.sog"
+done
 ```
 
 ### Transformations
@@ -404,6 +165,17 @@ splat-transform input.ply -V opacity,gt,0.5 output.ply
 # Strip spherical harmonic bands higher than 2
 splat-transform input.ply --filter-harmonics 2 output.ply
 
+# Clean a raw capture and write it straight to SOG for production
+splat-transform raw_capture.ply --filter-nan --filter-harmonics 2 production/capture.sog
+```
+
+`--filter-floaters` and `--filter-cluster` remove stray Gaussians by voxelizing the scene on the GPU. The [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide shows `--filter-cluster` isolating the scene around a seed point, which works just as well when the output is a splat file.
+
+### Decimation
+
+`--decimate` simplifies a scene to a target count via merge-based decimation, removing at a uniform rate everywhere. `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at a higher memory cost. Either must be the last action, and the output must be `.ply`, so convert the result in a second run if you need another format.
+
+```bash
 # Simplify to 50000 splats via merge-based decimation
 splat-transform input.ply --decimate 50000 output.ply
 
@@ -413,41 +185,55 @@ splat-transform input.ply -d 25% output.ply
 # Allocate removal by local error (better on mixed-scale content such as skies)
 splat-transform input.ply --decimate-adaptive 25% output.ply
 
+# Then convert the decimated PLY for delivery
+splat-transform output.ply output.sog
+
 # Deep target on a huge scene: give the intermediate levels somewhere to go
 splat-transform huge.ply -d 1% --scratch-dir /mnt/scratch output.ply
 ```
 
 Decimation works within a memory budget of half the machine's RAM (at most 48 GiB). When a deep target on a huge scene produces an intermediate level that doesn't fit, the run stops with an error unless `--scratch-dir` is set; with it, those levels are written there as temporary PLY files and removed once consumed.
 
+Decimation is also how you build the lower-detail levels of a Streamed SOG from one source; see [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md).
+
 ### Scene Merging
 
-```bash
-# Combine multiple files with different transforms
-splat-transform -w cloudA.ply -r 0,90,0 cloudB.ply -s 2 merged.compressed.ply
+List several inputs to merge them into one output. Actions after an input apply to that input alone; actions after the output apply to the merged result:
 
-# Apply final transformations to combined result
+```bash
+# Place each scene before merging
+splat-transform \
+  environment.ply \
+  character.ply -t 2,0,1 -r 0,180,0 \
+  props.ply -t -3,0,2 -s 1.2 \
+  complete_scene.ply
+
+# Apply final transformations to the combined result
 splat-transform input1.ply input2.ply output.ply -t 0,0,10 -s 0.5
 ```
 
-### Statistics
+### Inspecting Scenes
 
-Generate per-column statistics for data analysis or test validation:
+`--info` prints a scene's structural metadata: the detected format, whether the file holds Gaussian splat data at all, Gaussian and per-LOD counts, SH bands, the [antialiased or 2DGS tag](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#antialiased-and-2dgs-scenes) if there is one, and any extra columns. `--stats` prints the same block followed by per-column statistics, for data analysis or test validation:
 
 ```bash
+# Check what a file contains without writing anything
+splat-transform input.ply --info null
+
 # Print stats, then write output
 splat-transform input.ply --stats output.ply
-
-# Print stats without writing a file (discard output)
-splat-transform input.ply --stats null
 
 # Print stats as JSON for scripting
 splat-transform input.ply --stats json null
 
 # Print stats before and after a transform
 splat-transform input.ply --stats -s 0.5 --stats output.ply
+
+# Export the cleaned-up data for analysis in a spreadsheet
+splat-transform scene.ply --filter-nan -V opacity,gt,0.05 quality_analysis.csv
 ```
 
-The output starts with the file info block (including the `gaussian` verdict — `false` for a readable container that isn't splat data, such as a plain point-cloud PLY), followed by min, max, median, mean, stdDev, nanCount, infCount and a histogram for each column, one table per LOD. Each LOD also reports a `fillRatio` — total splat footprint area over the scene's robust (p1–p99) cross-section, approximately the average overdraw layer count: healthy scenes score in the ones-to-hundreds, while degenerate or adversarial scenes that would overwhelm a GPU with fill score orders of magnitude higher, making the value suitable for automated publish gating. A `+Infinity` scale propagates to an infinite ratio, which serializes as `null` in JSON — treat that as a reject. The JSON form is the same info fields plus a columnar per-LOD `stats` array. The stats are computed in a single streaming pass; the median is approximated from a 1024-bin histogram (error within ~1/1000 of the column's range), all other fields are exact.
+The info block's `gaussian` verdict is `false` for a readable container that isn't splat data, such as a plain point-cloud PLY. The stats follow as min, max, median, mean, stdDev, nanCount, infCount and a histogram for each column, one table per LOD. Each LOD also reports a `fillRatio` — total splat footprint area over the scene's robust (p1–p99) cross-section, approximately the average overdraw layer count: healthy scenes score in the ones-to-hundreds, while degenerate or adversarial scenes that would overwhelm a GPU with fill score orders of magnitude higher, making the value suitable for automated publish gating. A `+Infinity` scale propagates to an infinite ratio, which serializes as `null` in JSON — treat that as a reject. The JSON form is the same info fields plus a columnar per-LOD `stats` array. The stats are computed in a single streaming pass; the median is approximated from a 1024-bin histogram (error within ~1/1000 of the column's range), all other fields are exact.
 
 ### Generators (Beta)
 
@@ -457,175 +243,10 @@ Generator scripts synthesize Gaussian splat data procedurally. See the [example 
 splat-transform gen-grid.mjs -p width=10,height=10,scale=10,color=0.1 scenes/grid.ply -w
 ```
 
-### Voxel Pipeline (Collision)
-
-The voxel format stores a sparse voxel octree for collision detection (`.voxel.json` + `.voxel.bin`). Pass `--collision-mesh` to also emit a `.collision.glb` mesh derived from the voxel grid. The recommended pipeline:
-
-```bash
-splat-transform input.ply \
-    --filter-cluster --seed-pos x,y,z \
-    [--voxel-external-fill | --voxel-floor-fill] [--voxel-carve] \
-    [--collision-mesh [smooth|faces]] \
-    output.voxel.json
-```
-
-For a step-by-step walkthrough of each option (with illustrations) and full interior/exterior recipes, see the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide.
-
-### Image Rendering
-
-Render a splat scene to a lossless WebP image from a given camera view. Rendering runs on the GPU.
-
-```bash
-# Default 1280x720 render
-splat-transform input.ply view.webp
-
-# Custom camera and resolution
-splat-transform input.ply view.webp \
-    --camera-pos 2,1,-2 --camera-target 0,0,0 \
-    --camera-fov 50 --resolution 1920x1080
-
-# Transparent background
-splat-transform input.ply view.webp --background 0,0,0,0
-
-# Defocus blur (focus on camera-target, f/2.8 aperture)
-splat-transform input.ply view.webp --f-stop 2.8
-
-# Smoother aperture sampling for strongly defocused edges
-splat-transform input.ply view.webp --f-stop 1 --dof-samples 64
-
-# Defocus with explicit focus distance and a smaller world scale
-splat-transform input.ply view.webp \
-    --f-stop 2.8 --focus-distance 3 --sensor-size 0.1
-
-# 360° equirectangular panorama from camera position
-splat-transform input.ply pano.webp \
-    --projection equirect --camera-pos 0,1,0 --camera-target 0,1,1
-
-# Camera motion blur (dolly from start to end pose over a 180° shutter, 16 instants averaged)
-splat-transform input.ply view.webp \
-    --camera-pos 2,1,-2 --camera-pos-end 3,1,-2 \
-    --shutter 0.5 --motion-samples 16
-```
-
-Depth of field and motion blur resolve visibility separately for each sample, then average in linear light before encoding the final image. Reconstructed splat colors are treated as sRGB; transparent outputs use premultiplied linear color during averaging. When both effects are enabled, each shutter instant uses `--dof-samples` aperture views.
-
-#### Camera Animations
-
-`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md) editor project, a [viewer settings](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
-
-```json
-{
-    "frameRate": 30,
-    "frames": [
-        { "position": [2, 1, -2], "target": [0, 0, 0], "fov": 60 },
-        { "position": [2.1, 1, -1.9], "target": [0, 0, 0], "fov": 60, "up": [0, 1, 0] }
-    ]
-}
-```
-
-Editor projects and viewer settings are evaluated the way the editor and viewer play them back. A frame list is interpolated linearly between entries; `frameRate` defaults to 30, frames without a `fov` use `--camera-fov`, and frames without an `up` use `--camera-up`. Each frame is written as `<name>.NNNN.webp`, numbered by its frame index in the track.
-
-```bash
-# Render every frame of an extracted SuperSplat project's camera animation
-# (writes view.0000.webp, view.0001.webp, ...)
-splat-transform scene.ply view.webp --camera-track scene-project/
-
-# Render frames 0-47 at 1920x1080, motion-blurred over half of each frame interval
-splat-transform scene.ply view.webp --camera-track track.json \
-    --frames 0-47 --resolution 1920x1080 --shutter 0.5
-```
-
-### Device Selection for SOG Compression
-
-When compressing to SOG format, you can control which device (GPU or CPU) performs the compression:
-
-```bash
-# List available GPU adapters
-splat-transform --list-gpus
-
-# Let WebGPU automatically choose the best GPU (default behavior)
-splat-transform input.ply output.sog
-
-# Explicitly select a GPU adapter by index
-splat-transform -g 0 input.ply output.sog  # Use first listed adapter
-splat-transform -g 1 input.ply output.sog  # Use second listed adapter
-
-# Use CPU for compression instead (much slower but always available)
-splat-transform -g cpu input.ply output.sog
-
-# Force the Vulkan backend (e.g. to work around Dawn D3D12 bugs on Windows)
-splat-transform --gpu-backend vulkan input.ply output.sog
-```
-
-:::note
-
-When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `--list-gpus` to list available adapters with their indices and names. The order and availability of adapters depend on your system and GPU drivers. Use `-g <index>` to select a specific adapter, or `-g cpu` to force CPU computation. `--gpu-backend` also applies to `--list-gpus`, which then lists only that backend's adapters.
-
-:::
-
-:::warning
-
-CPU compression can be significantly slower than GPU compression (often 5-10x slower). Use CPU mode only if GPU drivers are unavailable or problematic.
-
-:::
-
-## Common Workflows
-
-### Production Optimization Pipeline
-
-```bash
-# Clean, limit spherical harmonic bands, and apply a scale for production
-splat-transform raw_capture.ply \
-  --filter-nan \
-  --filter-harmonics 2 \
-  -s 0.8 \
-  production/capture.sog
-```
-
-### Format Migration
-
-```bash
-# Convert existing KSPLAT assets to PlayCanvas SOG
-for file in *.ksplat; do
-  splat-transform "$file" "${file%.ksplat}.sog"
-done
-```
-
-### Quality Analysis
-
-```bash
-# Export for quality analysis in a spreadsheet
-splat-transform scene.ply \
-  --filter-nan \
-  -V opacity,gt,0.05 \
-  quality_analysis.csv
-```
-
-### Multi-Scene Composition
-
-```bash
-# Combine multiple scenes with precise positioning
-splat-transform \
-  environment.ply -t 0,0,0 \
-  character.ply -t 2,0,1 -r 0,180,0 \
-  props.ply -t -3,0,2 -s 1.2 \
-  complete_scene.ply
-```
-
-### Generating Streamed SOG
-
-The [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) format packages multiple LOD levels of a scene into spatial chunks for progressive loading of very large scenes. The full walkthrough — tagging inputs with `--tag-lod`, generating LOD levels with `--decimate`, tuning chunk settings, and reading Streamed SOG back — lives on its own page:
-
-**[Generating Streamed SOG →](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md)**
-
 ## Getting Help
 
 ```bash
-# General help
 splat-transform --help
-
-# Get version information
-splat-transform --version
 ```
 
 For issues, feature requests, or contributions, visit the [GitHub repository](https://github.com/playcanvas/splat-transform). The project welcomes bug reports and pull requests from the community.
@@ -646,7 +267,7 @@ For loading and rendering Streamed SOG in a PlayCanvas application, see the [LOD
 You can obtain the LOD levels in two ways:
 
 - **Supply your own LOD files** — provide a separate splat file for each level, for example produced during training or exported from another tool.
-- **Generate them by decimating a single source** — use [`--decimate`](https://developer.playcanvas.com/user-manual/splat-transform.md#actions) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately. `--decimate` removes Gaussians at a uniform rate everywhere; `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at higher memory cost.
+- **Generate them by decimating a single source** — use [`--decimate`](https://developer.playcanvas.com/user-manual/splat-transform.md#decimation) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately. `--decimate` removes Gaussians at a uniform rate everywhere; `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at higher memory cost.
 
 :::note
 
@@ -754,7 +375,7 @@ splat-transform scene/lod-meta.json --info null
 
 - [Streamed SOG format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) — the on-disk format specification.
 - [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md) — loading and rendering Streamed SOG in a PlayCanvas app.
-- [splat-transform CLI reference](https://developer.playcanvas.com/user-manual/splat-transform.md) — full option reference including LOD Input/Output Options.
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#lod-input-options) — full option reference including LOD Input/Output Options.
 - [SuperSplat streaming](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) — generating Streamed SOG through the SuperSplat web UI.
 
 --------------------------------------------------------------------------------
@@ -984,7 +605,7 @@ splat-transform input.ply \
 ## See also
 
 - [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) — the on-disk format of `.voxel.json` / `.voxel.bin` output.
-- [splat-transform CLI reference](https://developer.playcanvas.com/user-manual/splat-transform.md) — full option reference including Voxel Output Options.
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#voxel-output-options) — full option reference including Voxel Output Options.
 - [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) — running the GPU-only voxel/collision features in a container.
 - [Studio → Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) — uploading or generating voxel collision through the SuperSplat web UI.
 
@@ -1176,18 +797,7 @@ This guide explains how to run [splat-transform](https://developer.playcanvas.co
 
 `splat-transform` is a Node.js CLI and the published npm package runs anywhere Node 22+ runs — Docker is not strictly required.
 
-A few features are **GPU-only** and will not run without WebGPU:
-
-- `--filter-cluster` and `--filter-floaters`.
-- `.voxel.json` output and `--collision-mesh` (see the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide).
-- `.webp` image output, including `--camera-track` frame sequences (see [Image Output Options](https://developer.playcanvas.com/user-manual/splat-transform.md#image-output-options)).
-
-A few are **GPU-accelerated but optional**:
-
-- `--decimate` and `--decimate-adaptive`, which use the GPU by default and run on the CPU with `-g cpu`.
-- SOG / `meta.json` / `lod-meta.json` / `.html` viewer output (see [SOG Compression Options](https://developer.playcanvas.com/user-manual/splat-transform.md#sog-compression-options)). The only step inside this writer that uses the GPU is k-means clustering of spherical-harmonic coefficients, so:
-  - Inputs **without** SH bands (e.g. `.splat`, SH-stripped PLYs, or anything piped through `-H 0` / `--filter-harmonics 0`) write SOG fully on the CPU.
-  - Inputs **with** SH bands work on the CPU too via `-g cpu`, but SH clustering is roughly 5-10x slower without a GPU.
+A few features are **GPU-only** and will not run without WebGPU: `--filter-cluster`, `--filter-floaters`, `.voxel.json` output and `--collision-mesh` (see the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide), and `.webp` image output (see [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md)). Decimation and SOG output use the GPU by default but also run on the CPU; SOG output with spherical harmonics is roughly 5-10x slower that way. [Which Features Need a GPU](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#which-features-need-a-gpu) has the full breakdown.
 
 All GPU paths go through WebGPU, which on Linux is implemented over Vulkan. That sets the host and container requirements below.
 
@@ -1310,7 +920,7 @@ docker run --rm --gpus all --user "$(id -u):$(id -g)" \
 
 The remaining examples omit `--user` for brevity — add it to any invocation that mounts a host directory.
 
-Any normal `splat-transform` invocation works — see the [CLI reference](https://developer.playcanvas.com/user-manual/splat-transform.md) for the full CLI surface. For example:
+Any normal `splat-transform` invocation works — see the [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md) for the full CLI surface. For example:
 
 ```bash
 # GPU SOG compression
@@ -1346,7 +956,7 @@ docker run --rm --gpus all --entrypoint vulkaninfo splat-transform --summary
 
 ## CPU-only variant
 
-If you don't need the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`) you can skip the GPU setup entirely and use a much smaller base image. SOG / `meta.json` / `lod-meta.json` / `.html` outputs still work in this image — the SH compression step falls back to CPU:
+If you don't need the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`, `.webp`) you can skip the GPU setup entirely and use a much smaller base image. SOG / `meta.json` / `lod-meta.json` / `.html` outputs still work in this image — the SH compression step falls back to CPU:
 
 ```dockerfile
 FROM node:22-slim
@@ -1369,7 +979,7 @@ If you keep the GPU image but want to force CPU mode for a single run, pass `-g 
 docker run --rm -v "$PWD":/work splat-transform -g cpu input.ply output.sog
 ```
 
-Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`). CPU-side SH compression also runs roughly 5-10x slower than GPU.
+Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`, `.webp`). CPU-side SH compression also runs roughly 5-10x slower than GPU.
 
 ## Troubleshooting
 
@@ -1550,7 +1160,7 @@ A 32 × 14 × 32-block grid at 5 cm resolution (block size 0.2):
 ## See also
 
 - [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) — generating voxel and collision data with splat-transform.
-- [splat-transform CLI reference](https://developer.playcanvas.com/user-manual/splat-transform.md) — full option reference including Voxel Output Options.
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#voxel-output-options) — full option reference including Voxel Output Options.
 
 --------------------------------------------------------------------------------
 
@@ -2414,5 +2024,418 @@ Use SPZ when your splat assets already exist in this format — for example scan
 For web delivery, [SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md) remains the recommended format — it offers stronger compression and faster loading, and is supported by the engine out of the box.
 
 :::
+
+--------------------------------------------------------------------------------
+
+## CLI Reference
+
+URL: https://developer.playcanvas.com/user-manual/splat-transform/cli-reference/
+Markdown: https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md
+
+This page lists every [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) command-line option, grouped the way `splat-transform --help` prints them. For worked examples, see the [Overview](https://developer.playcanvas.com/user-manual/splat-transform.md#examples) and the task guides: [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md), [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) and [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md).
+
+## Command Syntax
+
+```bash
+splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
+```
+
+- Input files become the working set; ACTIONS are applied in order
+- The last file is the output; actions after it modify the final result
+- Use `null` as the output to discard file output (useful with `--stats` for analysis-only runs)
+- Input filenames may also be `http(s)://` URLs, downloaded on demand (`.mjs` generators must be local files)
+
+## Supported Formats
+
+SplatTransform detects file format from the file extension:
+
+| Format            | Input | Output | Description                                                                                                                                          |
+| ----------------- | ----- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.ply`            | ✅    | ✅     | Standard [PLY](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply.md) format                                                                                   |
+| `.sog`            | ✅    | ✅     | Bundled super-compressed [SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md) format (recommended)                                                     |
+| `meta.json`       | ✅    | ✅     | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** be `meta.json`                                         |
+| `lod-meta.json`   | ✅    | ✅     | Multi-LOD [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) bundle (accompanied by per-LOD `.sog` chunks). Filename **must** be `lod-meta.json` |
+| `.compressed.ply` | ✅    | ✅     | Compressed PLY format (auto-detected and decompressed on read)                                                                                       |
+| `.spz`            | ✅    | ✅     | Compressed [SPZ](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/spz.md) splat format (Niantic format, v2–4)                                                    |
+| `.lcc`            | ✅    | ❌     | LCC file format (XGRIDS)                                                                                                                             |
+| `.lcc2`           | ✅    | ❌     | LCC2 file format (XGRIDS, octree)                                                                                                                    |
+| `.ksplat`         | ✅    | ❌     | Compressed splat format (mkkellogg format)                                                                                                           |
+| `.splat`          | ✅    | ❌     | Compressed splat format (antimatter15 format)                                                                                                        |
+| `.mjs`            | ✅    | ❌     | Generate a scene using an mjs script (Beta)                                                                                                          |
+| `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension, [loadable directly](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/glb.md) by the PlayCanvas Engine |
+| `.csv`            | ❌    | ✅     | Comma-separated values spreadsheet                                                                                                                   |
+| `.html`           | ❌    | ✅     | HTML viewer app (single-page or unbundled) based on SOG                                                                                              |
+| `.voxel.json`     | ❌    | ✅     | [Sparse voxel octree](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) for collision detection. See the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide. Output filename must end with `.voxel.json` (the prefix is up to you, e.g. `room.voxel.json`) |
+| `.webp`           | ❌    | ✅     | Lossless WebP image rendered from a camera view via GPU rasterizer. See the [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md) guide    |
+| `null`            | ❌    | ✅     | Discard output (useful with `--stats` for analysis-only runs)                                                                                        |
+
+### Antialiased and 2DGS Scenes
+
+Scenes trained with antialiasing (a mip-splatting style screen-space filter) or as 2D Gaussian surfels (2DGS) are tagged on read, and the tag is preserved wherever the output format can hold it. `--info` reports it as `model`.
+
+- **On read:** a PLY header comment — Brush's `comment SplatRenderMode: default | mip | 2dgs` or Postshot's `comment antialiased 0 | 1` (the last one wins) — the SPZ antialiased header bit, or the `model` entry of a SOG `meta.json`. A PLY with `scale_0` and `scale_1` but no `scale_2` is read as 2DGS regardless of comments, and the missing column is filled with a zero-thickness scale so the rest of the pipeline is unaffected.
+- **On write:** `.ply` and `.compressed.ply` carry `comment SplatRenderMode: mip | 2dgs` (Brush's spelling, whichever form was read); `.sog` and `meta.json` carry `"model": "antialiased" | "2dgs"`; `.spz` sets its antialiased bit, and warns that it cannot represent 2DGS. A 2DGS PLY output drops the `scale_2` column again. Other output formats have nowhere to record the tag and drop it silently.
+- **Merging:** combining inputs whose tags disagree warns and writes the result untagged.
+
+## Actions
+
+Actions execute in the order specified and can be repeated. Any action may appear after any input or output file:
+
+```none
+-t, --translate        <x,y,z>          Translate Gaussians by (x, y, z)
+-r, --rotate           <x,y,z>          Rotate Gaussians by Euler angles (x, y, z), in degrees
+-s, --scale            <factor>         Uniformly scale Gaussians by factor
+-H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
+-N, --filter-nan                        Remove Gaussians with NaN values, most Inf values, or a
+                                          zero-norm (unrenderable) rotation quaternion;
+                                          retains +Infinity in opacity and -Infinity in scale_*
+-B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
+-S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
+-V, --filter-value     <name,cmp,value> Keep Gaussians where <name> <cmp> <value>
+                                          cmp ∈ {lt,lte,gt,gte,eq,neq}
+                                          opacity, scale_*, f_dc_* use transformed values
+                                          (linear opacity 0-1, linear scale, linear color 0-1).
+                                          Append _raw for raw PLY values (e.g. opacity_raw).
+-d, --decimate         <n|n%>           Simplify to n Gaussians via merge-based decimation,
+                                          removing at a uniform rate everywhere.
+                                          Use n% to keep a percentage of Gaussians.
+                                          Lower memory, and better at depth on uniformly-sized
+                                          Gaussians: uniform texture, single objects, snow.
+    --decimate-adaptive <n|n%>          Simplify, allocating removal by local error instead.
+                                          Much better on mixed-scale content such as skies,
+                                          at higher memory cost.
+                                          Both are memory-bounded and streaming: they scale to
+                                          scenes of 100M+ Gaussians. Either must be the final
+                                          action, and the output must be .ply (write a decimated
+                                          PLY first, then convert in a second invocation).
+    --scratch-dir      <path>           Directory for intermediate levels when a deep decimation
+                                          target exceeds memory. Nothing is written without it.
+-F, --filter-floaters  [size,op,min]    Remove Gaussians not contributing to any solid voxel.
+                                          Evaluates each Gaussian at occupied voxel centers.
+                                          Default: size=0.05, opacity=0.1, min=0.004 (1/255).
+                                          Bare flag (no value) uses all defaults.
+-C, --filter-cluster   [res,op,min]     Keep only the connected cluster at --seed-pos.
+                                          GPU-voxelizes at coarse resolution (res world units/voxel).
+                                          Default: res=1.0, opacity=0.999, min=0.1.
+                                          Bare flag (no value) uses all defaults.
+-p, --params           <key=val,...>    Pass parameters to .mjs generator script
+-l, --tag-lod          <n>              Tag the Gaussians with LOD level n (n >= 0, or -1 for environment)
+    --stats            [text|json]      Print file info, per-column statistics and the fill/overdraw ratio to stdout. Default: text
+    --info             [text|json]      Print structural metadata (format, per-LOD counts, extra columns) to stdout. Default: text
+-m, --morton-order                      Reorder Gaussians by Morton code (Z-order curve)
+```
+
+## CLI Options
+
+These options configure a run as a whole rather than operating on splat data — most groups apply only when reading or writing a specific format.
+
+### General Options
+
+```none
+-h, --help                              Show this help and exit
+-v, --version                           Show version and exit
+-q, --quiet                             Suppress non-error output
+    --verbose                           Show debug-level diagnostics
+    --memory                            Show peak memory in progress output
+    --tty                               Interactive bar rendering (default on a TTY; --no-tty to disable)
+-w, --overwrite                         Overwrite output file if it exists
+    --webp-effort      <0-9>            Lossless WebP compression effort for image, SOG, HTML and LOD output.
+                                          Higher tries harder to reduce size. Default: libwebp's default
+                                          lossless settings.
+```
+
+### GPU Options
+
+Select the device used for GPU work. See [Which Features Need a GPU](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#which-features-need-a-gpu) below for what runs on it.
+
+```none
+    --list-gpus                         List available GPU adapters and exit
+-g, --gpu              <n|cpu>          Device for GPU operations: GPU adapter index | 'cpu'
+                                          ('cpu' disables GPU and is incompatible with
+                                          GPU-only features like --filter-cluster)
+    --gpu-backend      <name>           Force the WebGPU backend: vulkan | d3d12 | metal.
+                                          Default: the platform default (e.g. vulkan works around
+                                          Dawn D3D12 bugs on Windows)
+```
+
+#### Which Features Need a GPU
+
+All GPU work goes through WebGPU. Some features cannot run without it:
+
+- `--filter-cluster` and `--filter-floaters`.
+- `.voxel.json` output and `--collision-mesh`.
+- `.webp` image output, including `--camera-track` frame sequences.
+
+Others use the GPU by default but also run on the CPU with `-g cpu`:
+
+- `--decimate` and `--decimate-adaptive`.
+- SOG output (`.sog`, `meta.json`, `lod-meta.json` and `.html`). The only step that uses the GPU is k-means clustering of the spherical harmonic coefficients, so inputs without SH bands (for example `.splat` files, or anything passed through `--filter-harmonics 0`) are written entirely on the CPU. Inputs with SH bands also work with `-g cpu`, but SH clustering is often 5-10x slower without a GPU.
+
+#### Selecting a Device
+
+```bash
+# List available GPU adapters
+splat-transform --list-gpus
+
+# Let WebGPU automatically choose the best GPU (default behavior)
+splat-transform input.ply output.sog
+
+# Explicitly select a GPU adapter by index
+splat-transform -g 0 input.ply output.sog  # Use first listed adapter
+splat-transform -g 1 input.ply output.sog  # Use second listed adapter
+
+# Use the CPU instead (much slower for SH compression, but always available)
+splat-transform -g cpu input.ply output.sog
+
+# Force the Vulkan backend (e.g. to work around Dawn D3D12 bugs on Windows)
+splat-transform --gpu-backend vulkan input.ply output.sog
+```
+
+When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `--list-gpus` to list available adapters with their indices and names. The order and availability of adapters depend on your system and GPU drivers. `--gpu-backend` also applies to `--list-gpus`, which then lists only that backend's adapters.
+
+To run splat-transform on a server with an NVIDIA GPU, see the [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) guide.
+
+### SOG Compression Options
+
+Apply when writing `.sog`, `meta.json`, `lod-meta.json`, or `.html` outputs.
+
+```none
+-i, --sh-iterations    <n>              Iterations for SH compression (more=better). Default: 10
+    --max-workers      <n>              Worker threads for SOG and image-sequence encoding (0 = inline/serial). Default: 4
+```
+
+### SPZ Output Options
+
+Apply when writing `.spz` outputs.
+
+```none
+    --spz-version      <3|4>            The SPZ format version to write. Default: 4
+```
+
+### HTML Viewer Output Options
+
+Apply when writing `.html` outputs.
+
+```none
+    --viewer-settings  <settings.json>  HTML viewer settings JSON file
+    --unbundled                         Generate unbundled HTML viewer with separate files
+```
+
+:::note
+
+See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `--viewer-settings` option. The settings are validated before the page is written, so an invalid file fails the run instead of producing a viewer that renders nothing.
+
+:::
+
+### LOD Input Options
+
+Apply when reading `lod-meta.json`, `.lcc`, and `.lcc2` files.
+
+```none
+-L, --select-lod       <n,n,...>        Comma-separated LOD levels to read from streamed SOG / LCC / LCC2 input
+```
+
+### LOD Output Options
+
+Apply when writing `lod-meta.json` ([Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) output).
+
+```none
+    --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
+    --lod-chunk-extent <n>              Approximate size of an LOD chunk in world units (m). Default: 16
+    --lod-chunk-min    <n>              Gaussians in K below which a chunk is not split for extent. Default: 8
+```
+
+A chunk is split when it holds more than `--lod-chunk-count` Gaussians, or when it is wider than `--lod-chunk-extent` and holds more than `--lod-chunk-min`. The minimum keeps sparse regions such as sky or distant background from being cut into thousands of near-empty chunks: below it, a region stays one chunk however wide it is. Dense regions are unaffected.
+
+See [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md) for an end-to-end walkthrough.
+
+### Voxel Output Options
+
+Apply when writing `.voxel.json` (sparse voxel octree for collision detection). See the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide for a deep dive on each step and tuning.
+
+```none
+    --voxel-size       <n>              Voxel size for .voxel.json. Default: 0.05
+    --voxel-opacity    <n>              Voxel opacity threshold for .voxel.json. Default: 0.1
+    --voxel-external-fill [size]        Seal exterior voxels via boundary flood fill (interior scenes).
+                                          [size] (world units) is the dilation distance applied
+                                          before the flood fill to bridge small wall gaps.
+                                          --seed-pos is used to verify the volume is enclosed at
+                                          the seed; the fill is skipped if the seed is reachable
+                                          from outside.
+                                          Default size: 1.6
+    --voxel-floor-fill [size]           Fill each column upward from bottom until hitting solid (exterior scenes).
+                                          Optional size (world units): only patch XZ areas surrounded by floor
+                                          within 2*size; large empty exterior areas are left alone.
+                                          Default size: 1.6
+    --voxel-carve      [h,r]            Carve navigable space using capsule flood fill from seed.
+                                          Default: height=1.6, radius=0.2
+    --seed-pos         <x,y,z>          Seed position for voxel fill/carve and --filter-cluster.
+                                          Default: 0,0,0
+    --collision-mesh   [smooth|faces]   Generate collision mesh (.collision.glb). Default: smooth
+```
+
+### Image Output Options
+
+Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer). See the [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md) guide for examples of each effect.
+
+```none
+    --projection       <pinhole|equirect>  Camera projection. Default: pinhole.
+                                        equirect = 360°×180° panorama from --camera-pos; --camera-fov must be
+                                        omitted; --resolution must be 2:1 (default 2048x1024).
+    --camera-pos       <x,y,z>          Camera position in world space. Default: 2,1,-2
+    --camera-target    <x,y,z>          Camera target point. Default: 0,0,0
+    --camera-up        <x,y,z>          World up vector. Default: 0,1,0
+    --camera-fov       <degrees>        Vertical field of view in degrees. Default: 60. Rejected with --projection equirect.
+    --resolution       <WxH>            Output resolution, e.g. 1920x1080. Default: 1280x720 (pinhole) or 2048x1024 (equirect)
+    --camera-near      <n>              Near clip distance. Default: 0.2 (matches reference 3DGS)
+    --background       <r,g,b[,a]>      Background color in [0,1]. Default: 0,0,0,1
+    --f-stop           <N>              Aperture as a photographic f-stop (e.g. 2.8, 5.6, 11). Enables defocus blur;
+                                        smaller = more blur. Pinhole only. Default: disabled (no defocus).
+    --focus-distance   <n>              Camera-space Z of the focus plane (world units). Default: distance to --camera-target.
+                                        Pinhole only; only meaningful with --f-stop.
+    --dof-samples      <n>              Aperture samples per instant with --f-stop. Default: 32. More samples reduce
+                                        sampling artifacts at greater cost; multiplies --motion-samples when combined.
+    --sensor-size      <n>              Vertical sensor height in world units. Gives --f-stop a physical meaning.
+                                        Default: 0.024 (35mm full-frame, world units = meters). Scale to your world:
+                                        world unit = decimeter → 0.24, world unit = millimeter → 24.
+    --camera-pos-end   <x,y,z>          End camera position. When set, enables camera motion blur: the camera moves
+                                        from --camera-pos (shutter open) to --camera-pos-end (shutter close) and the
+                                        frame averages renders at instants across the shutter. Default: disabled.
+    --camera-target-end <x,y,z>         End camera target. Default: same as --camera-target. Only with --camera-pos-end.
+    --camera-up-end    <x,y,z>          End up vector. Default: same as --camera-up. Only with --camera-pos-end.
+    --shutter          <0..1>           Fraction of the start→end segment averaged, centered on its midpoint. Default: 0.5.
+                                        With --camera-track, fraction of the frame interval averaged around each frame.
+                                        Default for tracks: off. 1.0 = full interval; 0.5 = 180° shutter.
+    --motion-samples   <n>              Renders averaged per motion-blurred frame, at evenly spaced instants across
+                                        the shutter. Cost is N× a single render; too few show as discrete copies
+                                        where the motion between instants exceeds a couple of pixels. Default: 16.
+    --camera-track     <path>           Render a camera animation as a frame sequence: a SuperSplat editor project
+                                        (.ssproj directory or its document.json), a viewer settings.json with
+                                        animTracks, or a JSON { frameRate, frames: [{ position, target, fov, up }] }.
+                                        Frames are written as <name>.NNNN.webp. Replaces --camera-pos/--camera-target;
+                                        the track's target is the defocus focus point. A frame's up vector tilts the
+                                        camera; frames without one use --camera-up. With --shutter, each frame is
+                                        motion-blurred over that fraction of the frame interval.
+    --frames           <a[-b]>          Inclusive frame range of the track to render. Default: all frames.
+```
+
+## See Also
+
+- [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats.md) — specifications for the PLY, SOG, Streamed SOG, GLB and SPZ formats.
+- [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) — specification of `.voxel.json` / `.voxel.bin` output.
+- [Library Usage](https://developer.playcanvas.com/user-manual/splat-transform/library.md) — the same operations from JavaScript.
+
+--------------------------------------------------------------------------------
+
+## Rendering Images
+
+URL: https://developer.playcanvas.com/user-manual/splat-transform/image-rendering/
+Markdown: https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md
+
+[SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) can render a splat scene to a lossless WebP image from a camera view you choose. Give the output a `.webp` extension and the scene is rasterized on the GPU instead of being written as splat data. Use it for thumbnails, previews, panoramas and camera-animation frame sequences.
+
+Rendering needs a GPU: it does not run with `-g cpu`. See [Which Features Need a GPU](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#which-features-need-a-gpu) and, for servers, the [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) guide.
+
+## Setting Up the Camera
+
+By default the camera sits at `2,1,-2`, looks at the origin with a 60° vertical field of view, and renders 1280x720 over an opaque black background:
+
+```bash
+# Default 1280x720 render
+splat-transform input.ply view.webp
+
+# Custom camera and resolution
+splat-transform input.ply view.webp \
+    --camera-pos 2,1,-2 --camera-target 0,0,0 \
+    --camera-fov 50 --resolution 1920x1080
+
+# Transparent background
+splat-transform input.ply view.webp --background 0,0,0,0
+```
+
+`--camera-up` sets the world up vector (default `0,1,0`). `--camera-near` sets the near clip distance (default `0.2`, matching the reference 3DGS rasterizer); splats closer to the camera than this are culled.
+
+## 360° Panoramas
+
+`--projection equirect` renders a full 360°×180° equirectangular panorama from `--camera-pos`, with `--camera-target` setting the view direction at the center of the image. The resolution must be 2:1 (default 2048x1024), and `--camera-fov` must be omitted:
+
+```bash
+# 360° equirectangular panorama from camera position
+splat-transform input.ply pano.webp \
+    --projection equirect --camera-pos 0,1,0 --camera-target 0,1,1
+```
+
+Depth of field is not available with this projection.
+
+## Depth of Field
+
+`--f-stop` enables defocus blur, treating the camera as a lens with that aperture: smaller numbers give stronger blur. The focus plane defaults to the distance to `--camera-target`; set `--focus-distance` to focus elsewhere.
+
+```bash
+# Defocus blur (focus on camera-target, f/2.8 aperture)
+splat-transform input.ply view.webp --f-stop 2.8
+
+# Smoother aperture sampling for strongly defocused edges
+splat-transform input.ply view.webp --f-stop 1 --dof-samples 64
+
+# Defocus with explicit focus distance and a smaller world scale
+splat-transform input.ply view.webp \
+    --f-stop 2.8 --focus-distance 3 --sensor-size 0.1
+```
+
+An f-stop only means something relative to a sensor size. `--sensor-size` is the vertical sensor height in world units, and its default of `0.024` is a 35mm full-frame sensor when one world unit is one meter. Scale it with your scene's units: `0.24` if a world unit is a decimeter, `24` if it is a millimeter.
+
+Each image averages `--dof-samples` views across the aperture (default 32). More samples reduce sampling artifacts in strongly defocused areas, at the cost of more render passes.
+
+## Motion Blur
+
+Setting `--camera-pos-end` enables camera motion blur. The camera moves from its start pose (`--camera-pos`, `--camera-target`, `--camera-up`) at shutter open to its end pose at shutter close, and the image averages renders at `--motion-samples` instants across the shutter. `--camera-target-end` and `--camera-up-end` default to the start values.
+
+```bash
+# Camera motion blur (dolly from start to end pose over a 180° shutter, 16 instants averaged)
+splat-transform input.ply view.webp \
+    --camera-pos 2,1,-2 --camera-pos-end 3,1,-2 \
+    --shutter 0.5 --motion-samples 16
+```
+
+`--shutter` is the fraction of the start→end movement that is averaged, centered on its midpoint: `1.0` covers the full movement and the default `0.5` is a 180° shutter. Rendering cost grows with `--motion-samples`; too few samples show as discrete copies wherever the motion between instants exceeds a couple of pixels.
+
+### Combining Effects
+
+Depth of field and motion blur resolve visibility separately for each sample, then average in linear light before encoding the final image. Reconstructed splat colors are treated as sRGB; transparent outputs use premultiplied linear color during averaging. When both effects are enabled, each shutter instant uses `--dof-samples` aperture views, so the cost multiplies.
+
+## Camera Animations
+
+`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md) editor project, a [viewer settings](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
+
+```json
+{
+    "frameRate": 30,
+    "frames": [
+        { "position": [2, 1, -2], "target": [0, 0, 0], "fov": 60 },
+        { "position": [2.1, 1, -1.9], "target": [0, 0, 0], "fov": 60, "up": [0, 1, 0] }
+    ]
+}
+```
+
+Editor projects and viewer settings are evaluated the way the editor and viewer play them back. A frame list is interpolated linearly between entries; `frameRate` defaults to 30, frames without a `fov` use `--camera-fov`, and frames without an `up` use `--camera-up`. Each frame is written as `<name>.NNNN.webp`, numbered by its frame index in the track.
+
+```bash
+# Render every frame of an extracted SuperSplat project's camera animation
+# (writes view.0000.webp, view.0001.webp, ...)
+splat-transform scene.ply view.webp --camera-track scene-project/
+
+# Render frames 0-47 at 1920x1080, motion-blurred over half of each frame interval
+splat-transform scene.ply view.webp --camera-track track.json \
+    --frames 0-47 --resolution 1920x1080 --shutter 0.5
+```
+
+The track replaces `--camera-pos` and `--camera-target`, and its target is also the focus point for depth of field. Motion blur for a track comes from `--shutter` alone: it is off by default, and setting it blurs each frame over that fraction of the frame interval. `--camera-pos-end` cannot be combined with a track.
+
+## See Also
+
+- [Image Output Options](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#image-output-options) — every rendering option with its default.
+- [SuperSplat Editor → Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) — authoring the camera animations that `--camera-track` renders.
+- [Library Usage](https://developer.playcanvas.com/user-manual/splat-transform/library.md) — rendering from JavaScript with `writeImage` and `loadCameraTrack`.
 
 --------------------------------------------------------------------------------

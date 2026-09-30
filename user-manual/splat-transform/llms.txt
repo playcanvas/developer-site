@@ -39,4 +39,6 @@ Use this index to process splat files from a command line, a script or a pipelin
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/splat-transform/llms-full.txt): 12 pages (118 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/splat-transform/llms-full.txt): 14 pages (124 KB), for downloading and searching rather than reading into context.
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md)
+- [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md)

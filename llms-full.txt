@@ -3,7 +3,7 @@
 > The complete text of the PlayCanvas User Manual in one file, for indexing, or for downloading and searching.
 
 Index: https://developer.playcanvas.com/llms.txt
-Total Documents: 514
+Total Documents: 516
 Generated: 2026-09-30
 
 ================================================================================
@@ -24275,7 +24275,7 @@ The [SuperSplat Convert page](https://developer.playcanvas.com/user-manual/super
 
 SplatTransform solves the problems developers face when working with Gaussian splats:
 
-🔄 **Broad Format Support** — read PLY, Compressed PLY, SOG, Streamed SOG, SPZ, SPLAT, KSPLAT, LCC and LCC2; write PLY, Compressed PLY, SOG, Streamed SOG, SPZ, GLB, CSV, HTML Viewer, Voxel and WebP image  
+🔄 **Broad Format Support** — convert between the common splat formats, from PLY and SPZ to SOG and Streamed SOG, and export to glTF, CSV, standalone HTML viewers and WebP images ([full list](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#supported-formats))  
 🛠️ **Powerful Transformations** — translate, rotate, and scale your splats with precision  
 🧹 **Smart Filtering** — strip NaN/Inf, filter by value, box, sphere, harmonic band, or floater contribution, and keep only the connected cluster around a seed point  
 📐 **Decimation & Reordering** — simplify via memory-bounded merge-based decimation (uniform or error-adaptive) that scales to 100M+ Gaussians, and reorder by Morton code for spatial locality  
@@ -24308,32 +24308,207 @@ splat-transform --version
 
 For running on a backend with Docker (including GPU/Vulkan setup), see the [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) guide.
 
+## Quick Start
+
+Convert a PLY file to SOG for web delivery:
+
+```bash
+splat-transform scene.ply scene.sog
+```
+
+The format of each file is detected from its extension. Actions go after the file they apply to and run in the order given. This run scales the scene, raises it by one unit, and removes invalid Gaussians before writing:
+
+```bash
+splat-transform scene.ply -s 0.5 -t 0,1,0 --filter-nan scene.sog
+```
+
+Add `-w` to overwrite an output file that already exists. The general form is `splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]`: see [Command Syntax](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#command-syntax) for the full rules and [Supported Formats](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#supported-formats) for every file type.
+
 ## Guides
 
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md) — every option, the supported formats, and which features need a GPU.
 - [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md) — build a multi-LOD Streamed SOG from a single PLY.
-- [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md) — load and render Streamed SOG output in a PlayCanvas app.
 - [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) — generate voxel/collision data from a splat scene.
-- [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) — run splat-transform on a backend (incl. GPU/Vulkan setup).
+- [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md) — render views, panoramas, depth of field, motion blur and camera animations to WebP.
 - [Library Usage](https://developer.playcanvas.com/user-manual/splat-transform/library.md) — drive splat-transform programmatically from Node.js or the browser. The full TypeDoc reference lives at [api.playcanvas.com/splat-transform](https://api.playcanvas.com/splat-transform/).
+- [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) — run splat-transform on a backend (incl. GPU/Vulkan setup).
 
-## Format Specifications
+The file formats themselves are specified in [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats.md) and the [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) specification. To load Streamed SOG output in a PlayCanvas app, see [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md).
 
-| Format | Description |
-| ------ | ----------- |
-| [PLY](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply.md) | Industry-standard uncompressed format for source, editing and interchange |
-| [SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md) | Super-compressed format for web delivery (`meta.json` + WebP textures, bundled or unbundled) |
-| [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) | Multi-LOD chunked SOG for streaming very large scenes (`lod-meta.json`) |
-| [Voxel](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) | Sparse voxel octree for collision detection (`.voxel.json` / `.voxel.bin`) |
+## Examples
 
-## CLI Usage
+### Format Conversion
 
-The general syntax for SplatTransform is:
+```bash
+# Convert from .splat format
+splat-transform input.splat output.ply
+
+# Convert from .ksplat format
+splat-transform input.ksplat output.ply
+
+# Convert to compressed PLY
+splat-transform input.ply output.compressed.ply
+
+# Uncompress a compressed PLY back to standard PLY
+# (compressed .ply is detected automatically on read)
+splat-transform input.compressed.ply output.ply
+
+# Convert to SOG bundled format
+splat-transform input.ply output.sog
+
+# Convert to SOG unbundled format
+splat-transform input.ply output/meta.json
+
+# Convert from SOG (bundled) back to PLY
+splat-transform scene.sog restored.ply
+
+# Convert from SOG (unbundled folder) back to PLY
+splat-transform output/meta.json restored.ply
+
+# Convert to standalone HTML viewer (bundled, single file)
+splat-transform input.ply output.html
+
+# Convert to unbundled HTML viewer (separate CSS, JS, and SOG files)
+splat-transform --unbundled input.ply output.html
+
+# Convert to HTML viewer with custom settings
+splat-transform --viewer-settings settings.json input.ply output.html
+```
+
+To convert a whole folder, call splat-transform once per file:
+
+```bash
+# Convert existing KSPLAT assets to PlayCanvas SOG
+for file in *.ksplat; do
+  splat-transform "$file" "${file%.ksplat}.sog"
+done
+```
+
+### Transformations
+
+```bash
+# Scale and translate
+splat-transform bunny.ply -s 0.5 -t 0,0,10 bunny_scaled.ply
+
+# Rotate by 90 degrees around Y axis
+splat-transform input.ply -r 0,90,0 output.ply
+
+# Chain multiple transformations
+splat-transform input.ply -s 2 -t 1,0,0 -r 0,0,45 output.ply
+```
+
+### Filtering
+
+```bash
+# Remove entries containing NaN and Inf
+splat-transform input.ply --filter-nan output.ply
+
+# Filter by opacity values (keep only splats with opacity > 0.5)
+splat-transform input.ply -V opacity,gt,0.5 output.ply
+
+# Strip spherical harmonic bands higher than 2
+splat-transform input.ply --filter-harmonics 2 output.ply
+
+# Clean a raw capture and write it straight to SOG for production
+splat-transform raw_capture.ply --filter-nan --filter-harmonics 2 production/capture.sog
+```
+
+`--filter-floaters` and `--filter-cluster` remove stray Gaussians by voxelizing the scene on the GPU. The [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide shows `--filter-cluster` isolating the scene around a seed point, which works just as well when the output is a splat file.
+
+### Decimation
+
+`--decimate` simplifies a scene to a target count via merge-based decimation, removing at a uniform rate everywhere. `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at a higher memory cost. Either must be the last action, and the output must be `.ply`, so convert the result in a second run if you need another format.
+
+```bash
+# Simplify to 50000 splats via merge-based decimation
+splat-transform input.ply --decimate 50000 output.ply
+
+# Simplify to 25% of original splat count
+splat-transform input.ply -d 25% output.ply
+
+# Allocate removal by local error (better on mixed-scale content such as skies)
+splat-transform input.ply --decimate-adaptive 25% output.ply
+
+# Then convert the decimated PLY for delivery
+splat-transform output.ply output.sog
+
+# Deep target on a huge scene: give the intermediate levels somewhere to go
+splat-transform huge.ply -d 1% --scratch-dir /mnt/scratch output.ply
+```
+
+Decimation works within a memory budget of half the machine's RAM (at most 48 GiB). When a deep target on a huge scene produces an intermediate level that doesn't fit, the run stops with an error unless `--scratch-dir` is set; with it, those levels are written there as temporary PLY files and removed once consumed.
+
+Decimation is also how you build the lower-detail levels of a Streamed SOG from one source; see [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md).
+
+### Scene Merging
+
+List several inputs to merge them into one output. Actions after an input apply to that input alone; actions after the output apply to the merged result:
+
+```bash
+# Place each scene before merging
+splat-transform \
+  environment.ply \
+  character.ply -t 2,0,1 -r 0,180,0 \
+  props.ply -t -3,0,2 -s 1.2 \
+  complete_scene.ply
+
+# Apply final transformations to the combined result
+splat-transform input1.ply input2.ply output.ply -t 0,0,10 -s 0.5
+```
+
+### Inspecting Scenes
+
+`--info` prints a scene's structural metadata: the detected format, whether the file holds Gaussian splat data at all, Gaussian and per-LOD counts, SH bands, the [antialiased or 2DGS tag](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#antialiased-and-2dgs-scenes) if there is one, and any extra columns. `--stats` prints the same block followed by per-column statistics, for data analysis or test validation:
+
+```bash
+# Check what a file contains without writing anything
+splat-transform input.ply --info null
+
+# Print stats, then write output
+splat-transform input.ply --stats output.ply
+
+# Print stats as JSON for scripting
+splat-transform input.ply --stats json null
+
+# Print stats before and after a transform
+splat-transform input.ply --stats -s 0.5 --stats output.ply
+
+# Export the cleaned-up data for analysis in a spreadsheet
+splat-transform scene.ply --filter-nan -V opacity,gt,0.05 quality_analysis.csv
+```
+
+The info block's `gaussian` verdict is `false` for a readable container that isn't splat data, such as a plain point-cloud PLY. The stats follow as min, max, median, mean, stdDev, nanCount, infCount and a histogram for each column, one table per LOD. Each LOD also reports a `fillRatio` — total splat footprint area over the scene's robust (p1–p99) cross-section, approximately the average overdraw layer count: healthy scenes score in the ones-to-hundreds, while degenerate or adversarial scenes that would overwhelm a GPU with fill score orders of magnitude higher, making the value suitable for automated publish gating. A `+Infinity` scale propagates to an infinite ratio, which serializes as `null` in JSON — treat that as a reject. The JSON form is the same info fields plus a columnar per-LOD `stats` array. The stats are computed in a single streaming pass; the median is approximated from a 1024-bin histogram (error within ~1/1000 of the column's range), all other fields are exact.
+
+### Generators (Beta)
+
+Generator scripts synthesize Gaussian splat data procedurally. See the [example generator scripts](https://github.com/playcanvas/splat-transform/tree/main/generators) in the GitHub repository for more.
+
+```bash
+splat-transform gen-grid.mjs -p width=10,height=10,scale=10,color=0.1 scenes/grid.ply -w
+```
+
+## Getting Help
+
+```bash
+splat-transform --help
+```
+
+For issues, feature requests, or contributions, visit the [GitHub repository](https://github.com/playcanvas/splat-transform). The project welcomes bug reports and pull requests from the community.
+
+--------------------------------------------------------------------------------
+
+## CLI Reference
+
+URL: https://developer.playcanvas.com/user-manual/splat-transform/cli-reference/
+Markdown: https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md
+
+This page lists every [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) command-line option, grouped the way `splat-transform --help` prints them. For worked examples, see the [Overview](https://developer.playcanvas.com/user-manual/splat-transform.md#examples) and the task guides: [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md), [Collision Mesh Generation](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) and [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md).
+
+## Command Syntax
 
 ```bash
 splat-transform [GLOBAL] input [ACTIONS] ... output [ACTIONS]
 ```
-
-**Key points:**
 
 - Input files become the working set; ACTIONS are applied in order
 - The last file is the output; actions after it modify the final result
@@ -24346,12 +24521,12 @@ SplatTransform detects file format from the file extension:
 
 | Format            | Input | Output | Description                                                                                                                                          |
 | ----------------- | ----- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.ply`            | ✅    | ✅     | Standard PLY format                                                                                                                                  |
-| `.sog`            | ✅    | ✅     | Bundled super-compressed format (recommended)                                                                                                        |
+| `.ply`            | ✅    | ✅     | Standard [PLY](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply.md) format                                                                                   |
+| `.sog`            | ✅    | ✅     | Bundled super-compressed [SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md) format (recommended)                                                     |
 | `meta.json`       | ✅    | ✅     | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** be `meta.json`                                         |
 | `lod-meta.json`   | ✅    | ✅     | Multi-LOD [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) bundle (accompanied by per-LOD `.sog` chunks). Filename **must** be `lod-meta.json` |
 | `.compressed.ply` | ✅    | ✅     | Compressed PLY format (auto-detected and decompressed on read)                                                                                       |
-| `.spz`            | ✅    | ✅     | Compressed splat format (Niantic format, v2–4)                                                                                                       |
+| `.spz`            | ✅    | ✅     | Compressed [SPZ](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/spz.md) splat format (Niantic format, v2–4)                                                    |
 | `.lcc`            | ✅    | ❌     | LCC file format (XGRIDS)                                                                                                                             |
 | `.lcc2`           | ✅    | ❌     | LCC2 file format (XGRIDS, octree)                                                                                                                    |
 | `.ksplat`         | ✅    | ❌     | Compressed splat format (mkkellogg format)                                                                                                           |
@@ -24360,8 +24535,8 @@ SplatTransform detects file format from the file extension:
 | `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension, [loadable directly](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/glb.md) by the PlayCanvas Engine |
 | `.csv`            | ❌    | ✅     | Comma-separated values spreadsheet                                                                                                                   |
 | `.html`           | ❌    | ✅     | HTML viewer app (single-page or unbundled) based on SOG                                                                                              |
-| `.voxel.json`     | ❌    | ✅     | Sparse voxel octree for collision detection. See the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide. Output filename must end with `.voxel.json` (the prefix is up to you, e.g. `room.voxel.json`) |
-| `.webp`           | ❌    | ✅     | Lossless WebP image rendered from a camera view via GPU rasterizer                                                                                   |
+| `.voxel.json`     | ❌    | ✅     | [Sparse voxel octree](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) for collision detection. See the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide. Output filename must end with `.voxel.json` (the prefix is up to you, e.g. `room.voxel.json`) |
+| `.webp`           | ❌    | ✅     | Lossless WebP image rendered from a camera view via GPU rasterizer. See the [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md) guide    |
 | `null`            | ❌    | ✅     | Discard output (useful with `--stats` for analysis-only runs)                                                                                        |
 
 ### Antialiased and 2DGS Scenes
@@ -24441,7 +24616,7 @@ These options configure a run as a whole rather than operating on splat data —
 
 ### GPU Options
 
-Used by SOG compression and GPU voxelization (`--filter-cluster`, `--filter-floaters`, `.voxel.json` output).
+Select the device used for GPU work. See [Which Features Need a GPU](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#which-features-need-a-gpu) below for what runs on it.
 
 ```none
     --list-gpus                         List available GPU adapters and exit
@@ -24452,6 +24627,43 @@ Used by SOG compression and GPU voxelization (`--filter-cluster`, `--filter-floa
                                           Default: the platform default (e.g. vulkan works around
                                           Dawn D3D12 bugs on Windows)
 ```
+
+#### Which Features Need a GPU
+
+All GPU work goes through WebGPU. Some features cannot run without it:
+
+- `--filter-cluster` and `--filter-floaters`.
+- `.voxel.json` output and `--collision-mesh`.
+- `.webp` image output, including `--camera-track` frame sequences.
+
+Others use the GPU by default but also run on the CPU with `-g cpu`:
+
+- `--decimate` and `--decimate-adaptive`.
+- SOG output (`.sog`, `meta.json`, `lod-meta.json` and `.html`). The only step that uses the GPU is k-means clustering of the spherical harmonic coefficients, so inputs without SH bands (for example `.splat` files, or anything passed through `--filter-harmonics 0`) are written entirely on the CPU. Inputs with SH bands also work with `-g cpu`, but SH clustering is often 5-10x slower without a GPU.
+
+#### Selecting a Device
+
+```bash
+# List available GPU adapters
+splat-transform --list-gpus
+
+# Let WebGPU automatically choose the best GPU (default behavior)
+splat-transform input.ply output.sog
+
+# Explicitly select a GPU adapter by index
+splat-transform -g 0 input.ply output.sog  # Use first listed adapter
+splat-transform -g 1 input.ply output.sog  # Use second listed adapter
+
+# Use the CPU instead (much slower for SH compression, but always available)
+splat-transform -g cpu input.ply output.sog
+
+# Force the Vulkan backend (e.g. to work around Dawn D3D12 bugs on Windows)
+splat-transform --gpu-backend vulkan input.ply output.sog
+```
+
+When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `--list-gpus` to list available adapters with their indices and names. The order and availability of adapters depend on your system and GPU drivers. `--gpu-backend` also applies to `--list-gpus`, which then lists only that backend's adapters.
+
+To run splat-transform on a server with an NVIDIA GPU, see the [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) guide.
 
 ### SOG Compression Options
 
@@ -24534,7 +24746,7 @@ Apply when writing `.voxel.json` (sparse voxel octree for collision detection). 
 
 ### Image Output Options
 
-Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer).
+Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer). See the [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md) guide for examples of each effect.
 
 ```none
     --projection       <pinhole|equirect>  Camera projection. Default: pinhole.
@@ -24577,302 +24789,11 @@ Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer).
     --frames           <a[-b]>          Inclusive frame range of the track to render. Default: all frames.
 ```
 
-## Examples
-
-### Format Conversion
-
-```bash
-# Simple format conversion
-splat-transform input.ply output.csv
-
-# Convert from .splat format
-splat-transform input.splat output.ply
-
-# Convert from .ksplat format
-splat-transform input.ksplat output.ply
-
-# Convert to compressed PLY
-splat-transform input.ply output.compressed.ply
-
-# Uncompress a compressed PLY back to standard PLY
-# (compressed .ply is detected automatically on read)
-splat-transform input.compressed.ply output.ply
-
-# Convert to SOG bundled format
-splat-transform input.ply output.sog
-
-# Convert to SOG unbundled format
-splat-transform input.ply output/meta.json
-
-# Convert from SOG (bundled) back to PLY
-splat-transform scene.sog restored.ply
-
-# Convert from SOG (unbundled folder) back to PLY
-splat-transform output/meta.json restored.ply
-
-# Convert to standalone HTML viewer (bundled, single file)
-splat-transform input.ply output.html
-
-# Convert to unbundled HTML viewer (separate CSS, JS, and SOG files)
-splat-transform --unbundled input.ply output.html
-
-# Convert to HTML viewer with custom settings
-splat-transform --viewer-settings settings.json input.ply output.html
-
-# Export to CSV for spreadsheet analysis
-splat-transform scene.ply data.csv
-```
-
-### Transformations
-
-```bash
-# Scale and translate
-splat-transform bunny.ply -s 0.5 -t 0,0,10 bunny_scaled.ply
-
-# Rotate by 90 degrees around Y axis
-splat-transform input.ply -r 0,90,0 output.ply
-
-# Chain multiple transformations
-splat-transform input.ply -s 2 -t 1,0,0 -r 0,0,45 output.ply
-```
-
-### Filtering
-
-```bash
-# Remove entries containing NaN and Inf
-splat-transform input.ply --filter-nan output.ply
-
-# Filter by opacity values (keep only splats with opacity > 0.5)
-splat-transform input.ply -V opacity,gt,0.5 output.ply
-
-# Strip spherical harmonic bands higher than 2
-splat-transform input.ply --filter-harmonics 2 output.ply
-
-# Simplify to 50000 splats via merge-based decimation
-splat-transform input.ply --decimate 50000 output.ply
-
-# Simplify to 25% of original splat count
-splat-transform input.ply -d 25% output.ply
-
-# Allocate removal by local error (better on mixed-scale content such as skies)
-splat-transform input.ply --decimate-adaptive 25% output.ply
-
-# Deep target on a huge scene: give the intermediate levels somewhere to go
-splat-transform huge.ply -d 1% --scratch-dir /mnt/scratch output.ply
-```
-
-Decimation works within a memory budget of half the machine's RAM (at most 48 GiB). When a deep target on a huge scene produces an intermediate level that doesn't fit, the run stops with an error unless `--scratch-dir` is set; with it, those levels are written there as temporary PLY files and removed once consumed.
-
-### Scene Merging
-
-```bash
-# Combine multiple files with different transforms
-splat-transform -w cloudA.ply -r 0,90,0 cloudB.ply -s 2 merged.compressed.ply
-
-# Apply final transformations to combined result
-splat-transform input1.ply input2.ply output.ply -t 0,0,10 -s 0.5
-```
-
-### Statistics
-
-Generate per-column statistics for data analysis or test validation:
-
-```bash
-# Print stats, then write output
-splat-transform input.ply --stats output.ply
-
-# Print stats without writing a file (discard output)
-splat-transform input.ply --stats null
-
-# Print stats as JSON for scripting
-splat-transform input.ply --stats json null
-
-# Print stats before and after a transform
-splat-transform input.ply --stats -s 0.5 --stats output.ply
-```
-
-The output starts with the file info block (including the `gaussian` verdict — `false` for a readable container that isn't splat data, such as a plain point-cloud PLY), followed by min, max, median, mean, stdDev, nanCount, infCount and a histogram for each column, one table per LOD. Each LOD also reports a `fillRatio` — total splat footprint area over the scene's robust (p1–p99) cross-section, approximately the average overdraw layer count: healthy scenes score in the ones-to-hundreds, while degenerate or adversarial scenes that would overwhelm a GPU with fill score orders of magnitude higher, making the value suitable for automated publish gating. A `+Infinity` scale propagates to an infinite ratio, which serializes as `null` in JSON — treat that as a reject. The JSON form is the same info fields plus a columnar per-LOD `stats` array. The stats are computed in a single streaming pass; the median is approximated from a 1024-bin histogram (error within ~1/1000 of the column's range), all other fields are exact.
-
-### Generators (Beta)
-
-Generator scripts synthesize Gaussian splat data procedurally. See the [example generator scripts](https://github.com/playcanvas/splat-transform/tree/main/generators) in the GitHub repository for more.
-
-```bash
-splat-transform gen-grid.mjs -p width=10,height=10,scale=10,color=0.1 scenes/grid.ply -w
-```
-
-### Voxel Pipeline (Collision)
-
-The voxel format stores a sparse voxel octree for collision detection (`.voxel.json` + `.voxel.bin`). Pass `--collision-mesh` to also emit a `.collision.glb` mesh derived from the voxel grid. The recommended pipeline:
-
-```bash
-splat-transform input.ply \
-    --filter-cluster --seed-pos x,y,z \
-    [--voxel-external-fill | --voxel-floor-fill] [--voxel-carve] \
-    [--collision-mesh [smooth|faces]] \
-    output.voxel.json
-```
-
-For a step-by-step walkthrough of each option (with illustrations) and full interior/exterior recipes, see the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide.
-
-### Image Rendering
-
-Render a splat scene to a lossless WebP image from a given camera view. Rendering runs on the GPU.
-
-```bash
-# Default 1280x720 render
-splat-transform input.ply view.webp
-
-# Custom camera and resolution
-splat-transform input.ply view.webp \
-    --camera-pos 2,1,-2 --camera-target 0,0,0 \
-    --camera-fov 50 --resolution 1920x1080
-
-# Transparent background
-splat-transform input.ply view.webp --background 0,0,0,0
-
-# Defocus blur (focus on camera-target, f/2.8 aperture)
-splat-transform input.ply view.webp --f-stop 2.8
-
-# Smoother aperture sampling for strongly defocused edges
-splat-transform input.ply view.webp --f-stop 1 --dof-samples 64
-
-# Defocus with explicit focus distance and a smaller world scale
-splat-transform input.ply view.webp \
-    --f-stop 2.8 --focus-distance 3 --sensor-size 0.1
-
-# 360° equirectangular panorama from camera position
-splat-transform input.ply pano.webp \
-    --projection equirect --camera-pos 0,1,0 --camera-target 0,1,1
-
-# Camera motion blur (dolly from start to end pose over a 180° shutter, 16 instants averaged)
-splat-transform input.ply view.webp \
-    --camera-pos 2,1,-2 --camera-pos-end 3,1,-2 \
-    --shutter 0.5 --motion-samples 16
-```
-
-Depth of field and motion blur resolve visibility separately for each sample, then average in linear light before encoding the final image. Reconstructed splat colors are treated as sRGB; transparent outputs use premultiplied linear color during averaging. When both effects are enabled, each shutter instant uses `--dof-samples` aperture views.
-
-#### Camera Animations
-
-`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md) editor project, a [viewer settings](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
-
-```json
-{
-    "frameRate": 30,
-    "frames": [
-        { "position": [2, 1, -2], "target": [0, 0, 0], "fov": 60 },
-        { "position": [2.1, 1, -1.9], "target": [0, 0, 0], "fov": 60, "up": [0, 1, 0] }
-    ]
-}
-```
-
-Editor projects and viewer settings are evaluated the way the editor and viewer play them back. A frame list is interpolated linearly between entries; `frameRate` defaults to 30, frames without a `fov` use `--camera-fov`, and frames without an `up` use `--camera-up`. Each frame is written as `<name>.NNNN.webp`, numbered by its frame index in the track.
-
-```bash
-# Render every frame of an extracted SuperSplat project's camera animation
-# (writes view.0000.webp, view.0001.webp, ...)
-splat-transform scene.ply view.webp --camera-track scene-project/
-
-# Render frames 0-47 at 1920x1080, motion-blurred over half of each frame interval
-splat-transform scene.ply view.webp --camera-track track.json \
-    --frames 0-47 --resolution 1920x1080 --shutter 0.5
-```
-
-### Device Selection for SOG Compression
-
-When compressing to SOG format, you can control which device (GPU or CPU) performs the compression:
-
-```bash
-# List available GPU adapters
-splat-transform --list-gpus
-
-# Let WebGPU automatically choose the best GPU (default behavior)
-splat-transform input.ply output.sog
-
-# Explicitly select a GPU adapter by index
-splat-transform -g 0 input.ply output.sog  # Use first listed adapter
-splat-transform -g 1 input.ply output.sog  # Use second listed adapter
-
-# Use CPU for compression instead (much slower but always available)
-splat-transform -g cpu input.ply output.sog
-
-# Force the Vulkan backend (e.g. to work around Dawn D3D12 bugs on Windows)
-splat-transform --gpu-backend vulkan input.ply output.sog
-```
-
-:::note
-
-When `-g` is not specified, WebGPU automatically selects the best available GPU. Use `--list-gpus` to list available adapters with their indices and names. The order and availability of adapters depend on your system and GPU drivers. Use `-g <index>` to select a specific adapter, or `-g cpu` to force CPU computation. `--gpu-backend` also applies to `--list-gpus`, which then lists only that backend's adapters.
-
-:::
-
-:::warning
-
-CPU compression can be significantly slower than GPU compression (often 5-10x slower). Use CPU mode only if GPU drivers are unavailable or problematic.
-
-:::
-
-## Common Workflows
-
-### Production Optimization Pipeline
-
-```bash
-# Clean, limit spherical harmonic bands, and apply a scale for production
-splat-transform raw_capture.ply \
-  --filter-nan \
-  --filter-harmonics 2 \
-  -s 0.8 \
-  production/capture.sog
-```
-
-### Format Migration
-
-```bash
-# Convert existing KSPLAT assets to PlayCanvas SOG
-for file in *.ksplat; do
-  splat-transform "$file" "${file%.ksplat}.sog"
-done
-```
-
-### Quality Analysis
-
-```bash
-# Export for quality analysis in a spreadsheet
-splat-transform scene.ply \
-  --filter-nan \
-  -V opacity,gt,0.05 \
-  quality_analysis.csv
-```
-
-### Multi-Scene Composition
-
-```bash
-# Combine multiple scenes with precise positioning
-splat-transform \
-  environment.ply -t 0,0,0 \
-  character.ply -t 2,0,1 -r 0,180,0 \
-  props.ply -t -3,0,2 -s 1.2 \
-  complete_scene.ply
-```
-
-### Generating Streamed SOG
-
-The [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) format packages multiple LOD levels of a scene into spatial chunks for progressive loading of very large scenes. The full walkthrough — tagging inputs with `--tag-lod`, generating LOD levels with `--decimate`, tuning chunk settings, and reading Streamed SOG back — lives on its own page:
-
-**[Generating Streamed SOG →](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md)**
-
-## Getting Help
-
-```bash
-# General help
-splat-transform --help
-
-# Get version information
-splat-transform --version
-```
-
-For issues, feature requests, or contributions, visit the [GitHub repository](https://github.com/playcanvas/splat-transform). The project welcomes bug reports and pull requests from the community.
+## See Also
+
+- [Splat File Formats](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats.md) — specifications for the PLY, SOG, Streamed SOG, GLB and SPZ formats.
+- [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) — specification of `.voxel.json` / `.voxel.bin` output.
+- [Library Usage](https://developer.playcanvas.com/user-manual/splat-transform/library.md) — the same operations from JavaScript.
 
 --------------------------------------------------------------------------------
 
@@ -24890,7 +24811,7 @@ For loading and rendering Streamed SOG in a PlayCanvas application, see the [LOD
 You can obtain the LOD levels in two ways:
 
 - **Supply your own LOD files** — provide a separate splat file for each level, for example produced during training or exported from another tool.
-- **Generate them by decimating a single source** — use [`--decimate`](https://developer.playcanvas.com/user-manual/splat-transform.md#actions) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately. `--decimate` removes Gaussians at a uniform rate everywhere; `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at higher memory cost.
+- **Generate them by decimating a single source** — use [`--decimate`](https://developer.playcanvas.com/user-manual/splat-transform.md#decimation) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately. `--decimate` removes Gaussians at a uniform rate everywhere; `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at higher memory cost.
 
 :::note
 
@@ -24998,7 +24919,7 @@ splat-transform scene/lod-meta.json --info null
 
 - [Streamed SOG format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) — the on-disk format specification.
 - [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md) — loading and rendering Streamed SOG in a PlayCanvas app.
-- [splat-transform CLI reference](https://developer.playcanvas.com/user-manual/splat-transform.md) — full option reference including LOD Input/Output Options.
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#lod-input-options) — full option reference including LOD Input/Output Options.
 - [SuperSplat streaming](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) — generating Streamed SOG through the SuperSplat web UI.
 
 --------------------------------------------------------------------------------
@@ -25228,398 +25149,122 @@ splat-transform input.ply \
 ## See also
 
 - [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) — the on-disk format of `.voxel.json` / `.voxel.bin` output.
-- [splat-transform CLI reference](https://developer.playcanvas.com/user-manual/splat-transform.md) — full option reference including Voxel Output Options.
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#voxel-output-options) — full option reference including Voxel Output Options.
 - [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) — running the GPU-only voxel/collision features in a container.
 - [Studio → Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) — uploading or generating voxel collision through the SuperSplat web UI.
 
 --------------------------------------------------------------------------------
 
-## Voxel Format
+## Rendering Images
 
-URL: https://developer.playcanvas.com/user-manual/splat-transform/voxel-format/
-Markdown: https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md
+URL: https://developer.playcanvas.com/user-manual/splat-transform/image-rendering/
+Markdown: https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md
 
-This document specifies version 1.1 of the **voxel** format. It describes the on-disk structure written by [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) when the output path ends in `.voxel.json` and consumed by runtimes such as the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) for collision detection and raycasts.
+[SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) can render a splat scene to a lossless WebP image from a camera view you choose. Give the output a `.webp` extension and the scene is rasterized on the GPU instead of being written as splat data. Use it for thumbnails, previews, panoramas and camera-animation frame sequences.
 
-The format stores a solid/empty voxelization of a Gaussian splat scene as a sparse voxel octree (SVO) in the Laine–Karras node layout: a JSON header describing the grid, plus a compact binary file holding the tree.
+Rendering needs a GPU: it does not run with `-g cpu`. See [Which Features Need a GPU](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#which-features-need-a-gpu) and, for servers, the [Docker Backend](https://developer.playcanvas.com/user-manual/splat-transform/docker.md) guide.
 
-For a step-by-step guide to generating this format (voxelization, exterior fill, nav carving, collision meshes), see the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide.
+## Setting Up the Camera
 
-## File set
+By default the camera sits at `2,1,-2`, looks at the origin with a 60° vertical field of view, and renders 1280x720 over an opaque black background:
 
-A voxel dataset is a pair of files with a shared stem, plus an optional collision mesh:
+```bash
+# Default 1280x720 render
+splat-transform input.ply view.webp
 
-```none
-scene.voxel.json       # header: bounds, resolution, tree statistics (this spec)
-scene.voxel.bin        # binary octree data (nodes + leafData)
-scene.collision.glb    # optional triangle mesh extracted from the voxels
+# Custom camera and resolution
+splat-transform input.ply view.webp \
+    --camera-pos 2,1,-2 --camera-target 0,0,0 \
+    --camera-fov 50 --resolution 1920x1080
+
+# Transparent background
+splat-transform input.ply view.webp --background 0,0,0,0
 ```
 
-- The header is always named `*.voxel.json`. Writers and readers derive the binary filename by replacing the `.voxel.json` suffix with `.voxel.bin`; the header does not reference it explicitly.
-- The `.collision.glb` (written only when collision mesh generation is requested) is a standard glTF binary and is not described further here.
+`--camera-up` sets the world up vector (default `0,1,0`). `--camera-near` sets the near clip distance (default `0.2`, matching the reference 3DGS rasterizer); splats closer to the camera than this are culled.
 
-## `*.voxel.json`
+## 360° Panoramas
 
-```ts
-interface VoxelMeta {
-    version: string;             // file format version, decimal string, e.g. "1.1"
-    asset?: {
-        generator?: string;      // tool/version that produced the file, e.g. "splat-transform v3.1.6"
-    };
-    gridBounds: {                // AABB of the voxel grid, aligned to 4-voxel block boundaries
-        min: number[];           // [x, y, z] — world position of the min corner of voxel (0, 0, 0)
-        max: number[];           // [x, y, z]
-    };
-    sceneBounds: {               // AABB of the source Gaussians (informational)
-        min: number[];
-        max: number[];
-    };
-    voxelResolution: number;     // edge length of one voxel, world units
-    leafSize: number;            // voxels per leaf-block edge; always 4
-    treeDepth: number;           // subdivision levels from the root cube down to leaf blocks (>= 1)
-    numInteriorNodes: number;    // number of interior nodes in `nodes`
-    numMixedLeaves: number;      // number of mixed leaves in `nodes`
-    nodeCount: number;           // total uint32 entries in the `nodes` array
-    leafDataCount: number;       // total uint32 entries in the `leafData` array (= 2 * numMixedLeaves)
-}
+`--projection equirect` renders a full 360°×180° equirectangular panorama from `--camera-pos`, with `--camera-target` setting the view direction at the center of the image. The resolution must be 2:1 (default 2048x1024), and `--camera-fov` must be omitted:
+
+```bash
+# 360° equirectangular panorama from camera position
+splat-transform input.ply pano.webp \
+    --projection equirect --camera-pos 0,1,0 --camera-target 0,1,1
 ```
 
-- `gridBounds` is the authoritative frame for the voxel data: voxel `(vx, vy, vz)` occupies the world-space box from `gridBounds.min + (vx, vy, vz) · voxelResolution` to `gridBounds.min + (vx+1, vy+1, vz+1) · voxelResolution`. Each axis spans a whole number of 4×4×4-voxel blocks: `nb = round((max − min) / (4 · voxelResolution))`.
-- `sceneBounds` records the bounds of the source Gaussian scene (each Gaussian's position expanded by its rotated, scaled extents at the renderer's sigma cutoff). It is informational; depending on fill/carve/crop options, `gridBounds` may be larger or smaller than `sceneBounds`.
-- `nodeCount` = `numInteriorNodes` + `numMixedLeaves` + the number of solid leaves (not stored separately).
+Depth of field is not available with this projection.
 
-### Coordinate space
+## Depth of Field
 
-All bounds are expressed in the PlayCanvas engine's coordinate frame — the frame the splat scene renders in. This differs from the source PLY's coordinate frame by the engine's standard splat import transform (a 180° rotation about the Z axis).
+`--f-stop` enables defocus blur, treating the camera as a lens with that aperture: smaller numbers give stronger blur. The focus plane defaults to the distance to `--camera-target`; set `--focus-distance` to focus elsewhere.
 
-## `*.voxel.bin`
+```bash
+# Defocus blur (focus on camera-target, f/2.8 aperture)
+splat-transform input.ply view.webp --f-stop 2.8
 
-The binary file is two concatenated little-endian `uint32` arrays with no header or padding:
+# Smoother aperture sampling for strongly defocused edges
+splat-transform input.ply view.webp --f-stop 1 --dof-samples 64
 
-| Offset (bytes) | Length (bytes) | Contents |
-| --- | --- | --- |
-| `0` | `nodeCount * 4` | `nodes` array |
-| `nodeCount * 4` | `leafDataCount * 4` | `leafData` array |
-
-The total file size is exactly `(nodeCount + leafDataCount) * 4` bytes. A scene with no solid voxels has `nodeCount = 0`, `leafDataCount = 0` and an empty binary file.
-
-## The octree
-
-The tree subdivides a cube of `2^treeDepth` blocks per axis (each block being `leafSize`³ = 4×4×4 voxels), anchored at `gridBounds.min`. Where the per-axis block counts are not equal powers of two, the root cube extends beyond `gridBounds.max`; that excess region is always empty (such octants are simply absent from their parents' child masks).
-
-Nodes at depth `treeDepth` are **leaf blocks** covering 4×4×4 voxels. `nodes[0]` is the root.
-
-### Octant numbering
-
-An interior node's eight octants are numbered by axis halves, X least significant:
-
-```none
-oct = x | (y << 1) | (z << 2)    // x, y, z = 0 for the lower half, 1 for the upper half
+# Defocus with explicit focus distance and a smaller world scale
+splat-transform input.ply view.webp \
+    --f-stop 2.8 --focus-distance 3 --sensor-size 0.1
 ```
 
-This matches Morton order: the path from the root to a leaf block at block coordinates `(bx, by, bz)` consumes the coordinates' bits from most to least significant — at depth `d` (root = 0), `oct = ((bx >> s) & 1) | (((by >> s) & 1) << 1) | (((bz >> s) & 1) << 2)` where `s = treeDepth − 1 − d`.
+An f-stop only means something relative to a sensor size. `--sensor-size` is the vertical sensor height in world units, and its default of `0.024` is a 35mm full-frame sensor when one world unit is one meter. Scale it with your scene's units: `0.24` if a world unit is a decimeter, `24` if it is a millimeter.
 
-### Node words
+Each image averages `--dof-samples` views across the aperture (default 32). More samples reduce sampling artifacts in strongly defocused areas, at the cost of more render passes.
 
-Each entry of `nodes` is one `uint32`, decoded as follows (test in order):
+## Motion Blur
 
-| Condition | Node kind | Meaning |
-| --- | --- | --- |
-| `word == 0xFF000000` | **Solid leaf** | The node's entire volume is solid. No children, no leaf data. May appear at any depth (a collapsed fully-solid subtree). |
-| `(word >>> 24) == 0` | **Mixed leaf** | `word` is an index `i` into `leafData` pairs: the node's voxel mask is `leafData[2i]` (lo) and `leafData[2i + 1]` (hi). Only appears at depth `treeDepth`. |
-| otherwise | **Interior** | `childMask = word >>> 24` (8 bits, one per octant); `firstChild = word & 0xFFFFFF` (index into `nodes`). |
+Setting `--camera-pos-end` enables camera motion blur. The camera moves from its start pose (`--camera-pos`, `--camera-target`, `--camera-up`) at shutter open to its end pose at shutter close, and the image averages renders at `--motion-samples` instants across the shutter. `--camera-target-end` and `--camera-up-end` default to the start values.
 
-The two leaf encodings are unambiguous:
-
-- An interior node always has at least one child, so its `childMask` is never `0` — a zero top byte uniquely identifies a mixed leaf.
-- Nodes are emitted in breadth-first order with children always following their parent, so an interior node's `firstChild` is never `0` — `0xFF000000` uniquely identifies a solid leaf.
-
-### Children
-
-An interior node's present children (set bits of `childMask`) are stored contiguously starting at `nodes[firstChild]`, ordered by ascending octant index. The child for octant `oct` (when `childMask & (1 << oct)` is set) is at:
-
-```none
-nodes[firstChild + popcount(childMask & ((1 << oct) - 1))]
+```bash
+# Camera motion blur (dolly from start to end pose over a 180° shutter, 16 instants averaged)
+splat-transform input.ply view.webp \
+    --camera-pos 2,1,-2 --camera-pos-end 3,1,-2 \
+    --shutter 0.5 --motion-samples 16
 ```
 
-A clear bit in `childMask` means that octant's entire volume is empty; no node is stored for it.
+`--shutter` is the fraction of the start→end movement that is averaged, centered on its midpoint: `1.0` covers the full movement and the default `0.5` is a 180° shutter. Rendering cost grows with `--motion-samples`; too few samples show as discrete copies wherever the motion between instants exceeds a couple of pixels.
 
-### Mixed-leaf voxel masks
+### Combining Effects
 
-A mixed leaf's 4×4×4 = 64 voxels are stored as a 64-bit occupancy mask split across two `uint32`s. For the voxel at local coordinates `(lx, ly, lz)`, each in `[0, 4)`:
+Depth of field and motion blur resolve visibility separately for each sample, then average in linear light before encoding the final image. Reconstructed splat colors are treated as sRGB; transparent outputs use premultiplied linear color during averaging. When both effects are enabled, each shutter instant uses `--dof-samples` aperture views, so the cost multiplies.
 
-```none
-bit = lx + (ly << 2) + (lz << 4)
-solid = bit < 32 ? (lo >>> bit) & 1 : (hi >>> (bit - 32)) & 1
-```
+## Camera Animations
 
-`leafData[2i]` holds bits 0–31 (`lo`), `leafData[2i + 1]` holds bits 32–63 (`hi`). A set bit means the voxel is solid. A mixed leaf's mask is never all-zero or all-one — such blocks are encoded as an absent octant or a solid leaf instead.
-
-### Query domain
-
-Queries outside `gridBounds` are outside the format's domain, and the appropriate convention depends on the use case. Navigation/collision consumers (e.g. the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md)) treat out-of-grid space as **solid**; outputs produced with the nav options (exterior fill, floor fill, carve) rely on this — the writer crops away fully-solid blocks beyond the navigable region precisely because the runtime treats everything outside the grid as solid anyway.
-
-## Limits
-
-`firstChild` and the mixed-leaf `leafData` index are 24-bit values, capping the format at 16,777,216 node entries and 16,777,216 mixed leaves. The writer fails with an error rather than exceed either limit.
-
-## Example `*.voxel.json`
-
-A 32 × 14 × 32-block grid at 5 cm resolution (block size 0.2):
+`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md) editor project, a [viewer settings](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
 
 ```json
 {
-    "version": "1.1",
-    "asset": {
-        "generator": "splat-transform v3.1.6"
-    },
-    "gridBounds": {
-        "min": [-3.2, -0.2, -3.2],
-        "max": [3.2, 2.6, 3.2]
-    },
-    "sceneBounds": {
-        "min": [-3.13, -0.08, -3.07],
-        "max": [3.11, 2.49, 3.08]
-    },
-    "voxelResolution": 0.05,
-    "leafSize": 4,
-    "treeDepth": 5,
-    "numInteriorNodes": 1201,
-    "numMixedLeaves": 5678,
-    "nodeCount": 9232,
-    "leafDataCount": 11356
+    "frameRate": 30,
+    "frames": [
+        { "position": [2, 1, -2], "target": [0, 0, 0], "fov": 60 },
+        { "position": [2.1, 1, -1.9], "target": [0, 0, 0], "fov": 60, "up": [0, 1, 0] }
+    ]
 }
 ```
 
-## Versioning & compatibility
-
-- `version` is a decimal `"major.minor"` string. Files conforming to this specification have `version: "1.1"`. Readers should reject files with a greater major version.
-- **1.0 → 1.1**: version 1.0 files store bounds and voxel data in the source PLY coordinate frame; 1.1 voxelizes in the PlayCanvas engine frame (see [Coordinate space](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md#coordinate-space)). The binary layout is unchanged.
-- The `asset` block was added after 1.1 shipped and may be absent from older 1.1 files.
-- Unknown fields should be ignored, allowing minor additive evolution without a version bump.
-
-## See also
-
-- [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) — generating voxel and collision data with splat-transform.
-- [splat-transform CLI reference](https://developer.playcanvas.com/user-manual/splat-transform.md) — full option reference including Voxel Output Options.
-
---------------------------------------------------------------------------------
-
-## Docker Backend
-
-URL: https://developer.playcanvas.com/user-manual/splat-transform/docker/
-Markdown: https://developer.playcanvas.com/user-manual/splat-transform/docker.md
-
-This guide explains how to run [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) as a containerised backend service on a Linux host with an NVIDIA GPU.
-
-## When you need this
-
-`splat-transform` is a Node.js CLI and the published npm package runs anywhere Node 22+ runs — Docker is not strictly required.
-
-A few features are **GPU-only** and will not run without WebGPU:
-
-- `--filter-cluster` and `--filter-floaters`.
-- `.voxel.json` output and `--collision-mesh` (see the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide).
-- `.webp` image output, including `--camera-track` frame sequences (see [Image Output Options](https://developer.playcanvas.com/user-manual/splat-transform.md#image-output-options)).
-
-A few are **GPU-accelerated but optional**:
-
-- `--decimate` and `--decimate-adaptive`, which use the GPU by default and run on the CPU with `-g cpu`.
-- SOG / `meta.json` / `lod-meta.json` / `.html` viewer output (see [SOG Compression Options](https://developer.playcanvas.com/user-manual/splat-transform.md#sog-compression-options)). The only step inside this writer that uses the GPU is k-means clustering of spherical-harmonic coefficients, so:
-  - Inputs **without** SH bands (e.g. `.splat`, SH-stripped PLYs, or anything piped through `-H 0` / `--filter-harmonics 0`) write SOG fully on the CPU.
-  - Inputs **with** SH bands work on the CPU too via `-g cpu`, but SH clustering is roughly 5-10x slower without a GPU.
-
-All GPU paths go through WebGPU, which on Linux is implemented over Vulkan. That sets the host and container requirements below.
-
-If you don't need the GPU-only features and you're happy paying the CPU cost for SH compression (or your inputs have no SH), skip to the [CPU-only variant](https://developer.playcanvas.com/user-manual/splat-transform/docker.md#cpu-only-variant).
-
-## Host prerequisites (outside Docker)
-
-These must be configured on the host machine — they cannot be installed from inside a container, because the container reuses the host's NVIDIA driver and Vulkan ICD.
-
-1. **NVIDIA GPU** with a driver that exposes a Vulkan ICD (most consumer drivers do; some headless cloud drivers do not by default).
-2. **Docker Engine** with the **[NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)** installed and configured. This is what makes `--gpus all` work and what projects the host's NVIDIA driver libraries (including the Vulkan ICD JSON) into the container at runtime.
-3. **(Optional) `vulkan-tools` on the host** — useful for sanity-checking the driver from outside Docker (e.g. `vulkaninfo --summary` on the host before launching containers). The container brings its own Vulkan loader via the `vulkan-tools` apt package installed in the Dockerfile below.
-
-### AWS GPU instances
-
-On AWS GPU instances (`g4dn`, `g5`, `g6`, etc.) running Amazon Linux 2023 the default driver is the *compute-only* Tesla driver and does not include Vulkan. To use any of the WebGPU paths you need to install the **NVIDIA GRID Driver v19.2 or newer** on the host — the GRID driver ships the Vulkan ICD that the Tesla driver lacks.
-
-NVIDIA hosts the GRID installer in an S3 bucket, so the EC2 instance role must have the `AmazonS3ReadOnlyAccess` policy attached.
-
-Update and reboot first:
+Editor projects and viewer settings are evaluated the way the editor and viewer play them back. A frame list is interpolated linearly between entries; `frameRate` defaults to 30, frames without a `fov` use `--camera-fov`, and frames without an `up` use `--camera-up`. Each frame is written as `<name>.NNNN.webp`, numbered by its frame index in the track.
 
 ```bash
-sudo dnf update -y
-sudo reboot
+# Render every frame of an extracted SuperSplat project's camera animation
+# (writes view.0000.webp, view.0001.webp, ...)
+splat-transform scene.ply view.webp --camera-track scene-project/
+
+# Render frames 0-47 at 1920x1080, motion-blurred over half of each frame interval
+splat-transform scene.ply view.webp --camera-track track.json \
+    --frames 0-47 --resolution 1920x1080 --shutter 0.5
 ```
 
-After the reboot, install the driver and reboot again:
+The track replaces `--camera-pos` and `--camera-target`, and its target is also the focus point for depth of field. Motion blur for a track comes from `--shutter` alone: it is off by default, and setting it blurs each frame over that fraction of the frame interval. `--camera-pos-end` cannot be combined with a track.
 
-```bash
-sudo aws s3 cp --recursive s3://ec2-linux-nvidia-drivers/grid-19.2/ .   # installs v580.x.x
-sudo chmod +x NVIDIA-Linux-x86_64*.run
-sudo ./NVIDIA-Linux-x86_64*.run
-sudo reboot
-```
+## See Also
 
-Install the Vulkan loader, tools, and `libXext` (which `vulkaninfo` links against):
-
-```bash
-sudo dnf install vulkan vulkan-tools libXext
-```
-
-Verify the driver and Vulkan ICD from the host:
-
-```bash
-nvidia-smi             # driver version, GPU model
-vulkaninfo --summary   # NVIDIA Vulkan ICD with a physical device
-```
-
-This is host/OS level — it cannot be done from inside the container. The Dockerfile in the next section assumes the driver and Vulkan packages are already installed on the host.
-
-## Minimal Dockerfile
-
-A minimal multi-stage Dockerfile that installs the published CLI on top of an NVIDIA CUDA + Vulkan base image:
-
-```dockerfile
-# syntax=docker/dockerfile:1.4
-
-# Pull Node.js from the official image rather than piping a remote
-# install script to bash.
-FROM node:22-slim AS node
-
-FROM nvidia/cuda:12.8.1-devel-ubuntu22.04
-
-# Expose compute + graphics + utility caps so the NVIDIA Container Toolkit
-# projects the host's NVIDIA driver libraries and Vulkan ICD into the
-# container at runtime.
-ENV NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        ca-certificates \
-        vulkan-tools \
-        libgl1 libglvnd0 libglx0 libegl1 libxext6 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Bring in Node.js and npm from the official image.
-COPY --from=node /usr/local/bin/ /usr/local/bin/
-COPY --from=node /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
-
-RUN npm install -g @playcanvas/splat-transform
-
-RUN useradd --create-home --uid 2000 splat
-USER splat
-WORKDIR /work
-
-ENTRYPOINT ["splat-transform"]
-```
-
-A few notes on what each part is doing:
-
-- `nvidia/cuda:...-devel-ubuntu22.04` — gives you a CUDA-aware base image that the NVIDIA Container Toolkit recognises. The CUDA toolkit itself is not used by `splat-transform`; we just need a base where `--gpus all` projects the host's NVIDIA driver and Vulkan ICD correctly.
-- `NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility` — `graphics` is the important one; without it the toolkit will not mount the Vulkan ICD.
-- `vulkan-tools` — provides `vulkaninfo` (useful for debugging) and pulls in the Vulkan loader the container needs.
-- `libgl1`, `libglvnd0`, `libglx0`, `libegl1`, `libxext6` — runtime libraries Vulkan/EGL drivers depend on.
-- `node:22-slim` stage + `COPY --from=node` — provides Node.js and npm without piping a third-party install script to `bash`.
-- `npm install -g @playcanvas/splat-transform` — installs the published CLI on the `PATH`.
-- The non-root `splat` user is a good default for batch workers and means files written into a host-mounted directory aren't owned by root.
-
-## Build and run
-
-Build the image:
-
-```bash
-docker build -t splat-transform .
-```
-
-Run a conversion, mounting the current directory as `/work`:
-
-```bash
-docker run --rm --gpus all -v "$PWD":/work splat-transform \
-    input.ply output.sog
-```
-
-The image runs as a non-root user (UID 2000), so any files written into a host-mounted directory will be owned by UID 2000 rather than your host user, and the container will fail to write at all if the host directory isn't writable by UID 2000. The portable fix is to pass `--user "$(id -u):$(id -g)"`:
-
-```bash
-docker run --rm --gpus all --user "$(id -u):$(id -g)" \
-    -v "$PWD":/work splat-transform input.ply output.sog
-```
-
-The remaining examples omit `--user` for brevity — add it to any invocation that mounts a host directory.
-
-Any normal `splat-transform` invocation works — see the [CLI reference](https://developer.playcanvas.com/user-manual/splat-transform.md) for the full CLI surface. For example:
-
-```bash
-# GPU SOG compression
-docker run --rm --gpus all -v "$PWD":/work splat-transform \
-    -i 20 input.ply output.sog
-
-# Voxel + collision mesh
-docker run --rm --gpus all -v "$PWD":/work splat-transform \
-    room.ply --filter-cluster --seed-pos 0,1,0 \
-    --voxel-external-fill --voxel-carve \
-    --collision-mesh room.voxel.json
-```
-
-## Verifying GPU access
-
-Two quick checks confirm the GPU is visible.
-
-List GPU adapters via the CLI:
-
-```bash
-docker run --rm --gpus all splat-transform --list-gpus
-```
-
-You should see at least one Vulkan adapter named after your GPU (e.g. `NVIDIA L4`, `Tesla T4`).
-
-Sanity-check Vulkan directly:
-
-```bash
-docker run --rm --gpus all --entrypoint vulkaninfo splat-transform --summary
-```
-
-`vulkaninfo` should print a `GPU0` section with an NVIDIA `driverID`. If this fails, the host setup (driver / NVIDIA Container Toolkit / Vulkan ICD) is the problem, not the image.
-
-## CPU-only variant
-
-If you don't need the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`) you can skip the GPU setup entirely and use a much smaller base image. SOG / `meta.json` / `lod-meta.json` / `.html` outputs still work in this image — the SH compression step falls back to CPU:
-
-```dockerfile
-FROM node:22-slim
-RUN npm install -g @playcanvas/splat-transform
-WORKDIR /work
-ENTRYPOINT ["splat-transform"]
-```
-
-Run it without `--gpus`:
-
-```bash
-docker run --rm -v "$PWD":/work splat-transform input.ply output.ply
-```
-
-Unlike the GPU image, `node:22-slim` runs as root by default, so without `--user` the files written into a bind-mounted host directory will be owned by root on the host. Pass `--user "$(id -u):$(id -g)"` (as described in [Build and run](https://developer.playcanvas.com/user-manual/splat-transform/docker.md#build-and-run)), or add a non-root `USER` line to the Dockerfile if this image is for shared use.
-
-If you keep the GPU image but want to force CPU mode for a single run, pass `-g cpu`:
-
-```bash
-docker run --rm -v "$PWD":/work splat-transform -g cpu input.ply output.sog
-```
-
-Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`). CPU-side SH compression also runs roughly 5-10x slower than GPU.
-
-## Troubleshooting
-
-- **`--list-gpus` reports no adapters.** The Vulkan ICD is not reaching the container. Check that you ran with `--gpus all`, that `NVIDIA_DRIVER_CAPABILITIES` includes `graphics`, and that the NVIDIA Container Toolkit is installed and configured on the host.
-- **`vulkaninfo` reports `Could not find a Vulkan ICD`.** The host NVIDIA driver does not expose Vulkan. On AWS, switch from the Tesla driver to the GRID driver (v19.2+) and reinstall, then install `vulkan vulkan-tools libXext` on the host.
-- **`vulkaninfo` segfaults or fails to load `libXext.so.6`.** `libxext6` is missing from the image — make sure the `apt-get install` line in the Dockerfile includes it (and on AWS, that `libXext` is also installed on the host).
-- **`docker: Error response from daemon: could not select device driver "" with capabilities: [[gpu]]`.** The NVIDIA Container Toolkit is not installed or the Docker daemon has not picked up its config. Reinstall the toolkit and restart Docker.
-- **Outputs in the bind-mounted directory aren't owned by my host user.** The container's default user (UID 2000 in the GPU image, root in the slim image) doesn't match your host UID. Pass `--user "$(id -u):$(id -g)"` to `docker run` to align them, or `chown` the output directory to the container UID before mounting.
-- **`Permission denied` writing to the bind-mounted directory.** The container's default user has no write access to the host directory. Use `--user "$(id -u):$(id -g)"`, or `chown` the host directory so the container user can write.
-- **`splat-transform: command not found` inside the container.** Make sure `npm install -g @playcanvas/splat-transform` ran successfully during the build. The default entrypoint already invokes the binary, so `docker run <image> --help` should work without specifying `splat-transform`.
+- [Image Output Options](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#image-output-options) — every rendering option with its default.
+- [SuperSplat Editor → Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) — authoring the camera animations that `--camera-track` renders.
+- [Library Usage](https://developer.playcanvas.com/user-manual/splat-transform/library.md) — rendering from JavaScript with `writeImage` and `loadCameraTrack`.
 
 --------------------------------------------------------------------------------
 
@@ -25795,6 +25440,384 @@ logger.setRenderer(new TextRenderer({
 
 logger.setVerbosity('quiet'); // 'quiet' | 'normal' | 'verbose'
 ```
+
+--------------------------------------------------------------------------------
+
+## Docker Backend
+
+URL: https://developer.playcanvas.com/user-manual/splat-transform/docker/
+Markdown: https://developer.playcanvas.com/user-manual/splat-transform/docker.md
+
+This guide explains how to run [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) as a containerised backend service on a Linux host with an NVIDIA GPU.
+
+## When you need this
+
+`splat-transform` is a Node.js CLI and the published npm package runs anywhere Node 22+ runs — Docker is not strictly required.
+
+A few features are **GPU-only** and will not run without WebGPU: `--filter-cluster`, `--filter-floaters`, `.voxel.json` output and `--collision-mesh` (see the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide), and `.webp` image output (see [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md)). Decimation and SOG output use the GPU by default but also run on the CPU; SOG output with spherical harmonics is roughly 5-10x slower that way. [Which Features Need a GPU](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#which-features-need-a-gpu) has the full breakdown.
+
+All GPU paths go through WebGPU, which on Linux is implemented over Vulkan. That sets the host and container requirements below.
+
+If you don't need the GPU-only features and you're happy paying the CPU cost for SH compression (or your inputs have no SH), skip to the [CPU-only variant](https://developer.playcanvas.com/user-manual/splat-transform/docker.md#cpu-only-variant).
+
+## Host prerequisites (outside Docker)
+
+These must be configured on the host machine — they cannot be installed from inside a container, because the container reuses the host's NVIDIA driver and Vulkan ICD.
+
+1. **NVIDIA GPU** with a driver that exposes a Vulkan ICD (most consumer drivers do; some headless cloud drivers do not by default).
+2. **Docker Engine** with the **[NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)** installed and configured. This is what makes `--gpus all` work and what projects the host's NVIDIA driver libraries (including the Vulkan ICD JSON) into the container at runtime.
+3. **(Optional) `vulkan-tools` on the host** — useful for sanity-checking the driver from outside Docker (e.g. `vulkaninfo --summary` on the host before launching containers). The container brings its own Vulkan loader via the `vulkan-tools` apt package installed in the Dockerfile below.
+
+### AWS GPU instances
+
+On AWS GPU instances (`g4dn`, `g5`, `g6`, etc.) running Amazon Linux 2023 the default driver is the *compute-only* Tesla driver and does not include Vulkan. To use any of the WebGPU paths you need to install the **NVIDIA GRID Driver v19.2 or newer** on the host — the GRID driver ships the Vulkan ICD that the Tesla driver lacks.
+
+NVIDIA hosts the GRID installer in an S3 bucket, so the EC2 instance role must have the `AmazonS3ReadOnlyAccess` policy attached.
+
+Update and reboot first:
+
+```bash
+sudo dnf update -y
+sudo reboot
+```
+
+After the reboot, install the driver and reboot again:
+
+```bash
+sudo aws s3 cp --recursive s3://ec2-linux-nvidia-drivers/grid-19.2/ .   # installs v580.x.x
+sudo chmod +x NVIDIA-Linux-x86_64*.run
+sudo ./NVIDIA-Linux-x86_64*.run
+sudo reboot
+```
+
+Install the Vulkan loader, tools, and `libXext` (which `vulkaninfo` links against):
+
+```bash
+sudo dnf install vulkan vulkan-tools libXext
+```
+
+Verify the driver and Vulkan ICD from the host:
+
+```bash
+nvidia-smi             # driver version, GPU model
+vulkaninfo --summary   # NVIDIA Vulkan ICD with a physical device
+```
+
+This is host/OS level — it cannot be done from inside the container. The Dockerfile in the next section assumes the driver and Vulkan packages are already installed on the host.
+
+## Minimal Dockerfile
+
+A minimal multi-stage Dockerfile that installs the published CLI on top of an NVIDIA CUDA + Vulkan base image:
+
+```dockerfile
+# syntax=docker/dockerfile:1.4
+
+# Pull Node.js from the official image rather than piping a remote
+# install script to bash.
+FROM node:22-slim AS node
+
+FROM nvidia/cuda:12.8.1-devel-ubuntu22.04
+
+# Expose compute + graphics + utility caps so the NVIDIA Container Toolkit
+# projects the host's NVIDIA driver libraries and Vulkan ICD into the
+# container at runtime.
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        vulkan-tools \
+        libgl1 libglvnd0 libglx0 libegl1 libxext6 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Bring in Node.js and npm from the official image.
+COPY --from=node /usr/local/bin/ /usr/local/bin/
+COPY --from=node /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
+
+RUN npm install -g @playcanvas/splat-transform
+
+RUN useradd --create-home --uid 2000 splat
+USER splat
+WORKDIR /work
+
+ENTRYPOINT ["splat-transform"]
+```
+
+A few notes on what each part is doing:
+
+- `nvidia/cuda:...-devel-ubuntu22.04` — gives you a CUDA-aware base image that the NVIDIA Container Toolkit recognises. The CUDA toolkit itself is not used by `splat-transform`; we just need a base where `--gpus all` projects the host's NVIDIA driver and Vulkan ICD correctly.
+- `NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility` — `graphics` is the important one; without it the toolkit will not mount the Vulkan ICD.
+- `vulkan-tools` — provides `vulkaninfo` (useful for debugging) and pulls in the Vulkan loader the container needs.
+- `libgl1`, `libglvnd0`, `libglx0`, `libegl1`, `libxext6` — runtime libraries Vulkan/EGL drivers depend on.
+- `node:22-slim` stage + `COPY --from=node` — provides Node.js and npm without piping a third-party install script to `bash`.
+- `npm install -g @playcanvas/splat-transform` — installs the published CLI on the `PATH`.
+- The non-root `splat` user is a good default for batch workers and means files written into a host-mounted directory aren't owned by root.
+
+## Build and run
+
+Build the image:
+
+```bash
+docker build -t splat-transform .
+```
+
+Run a conversion, mounting the current directory as `/work`:
+
+```bash
+docker run --rm --gpus all -v "$PWD":/work splat-transform \
+    input.ply output.sog
+```
+
+The image runs as a non-root user (UID 2000), so any files written into a host-mounted directory will be owned by UID 2000 rather than your host user, and the container will fail to write at all if the host directory isn't writable by UID 2000. The portable fix is to pass `--user "$(id -u):$(id -g)"`:
+
+```bash
+docker run --rm --gpus all --user "$(id -u):$(id -g)" \
+    -v "$PWD":/work splat-transform input.ply output.sog
+```
+
+The remaining examples omit `--user` for brevity — add it to any invocation that mounts a host directory.
+
+Any normal `splat-transform` invocation works — see the [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md) for the full CLI surface. For example:
+
+```bash
+# GPU SOG compression
+docker run --rm --gpus all -v "$PWD":/work splat-transform \
+    -i 20 input.ply output.sog
+
+# Voxel + collision mesh
+docker run --rm --gpus all -v "$PWD":/work splat-transform \
+    room.ply --filter-cluster --seed-pos 0,1,0 \
+    --voxel-external-fill --voxel-carve \
+    --collision-mesh room.voxel.json
+```
+
+## Verifying GPU access
+
+Two quick checks confirm the GPU is visible.
+
+List GPU adapters via the CLI:
+
+```bash
+docker run --rm --gpus all splat-transform --list-gpus
+```
+
+You should see at least one Vulkan adapter named after your GPU (e.g. `NVIDIA L4`, `Tesla T4`).
+
+Sanity-check Vulkan directly:
+
+```bash
+docker run --rm --gpus all --entrypoint vulkaninfo splat-transform --summary
+```
+
+`vulkaninfo` should print a `GPU0` section with an NVIDIA `driverID`. If this fails, the host setup (driver / NVIDIA Container Toolkit / Vulkan ICD) is the problem, not the image.
+
+## CPU-only variant
+
+If you don't need the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`, `.webp`) you can skip the GPU setup entirely and use a much smaller base image. SOG / `meta.json` / `lod-meta.json` / `.html` outputs still work in this image — the SH compression step falls back to CPU:
+
+```dockerfile
+FROM node:22-slim
+RUN npm install -g @playcanvas/splat-transform
+WORKDIR /work
+ENTRYPOINT ["splat-transform"]
+```
+
+Run it without `--gpus`:
+
+```bash
+docker run --rm -v "$PWD":/work splat-transform input.ply output.ply
+```
+
+Unlike the GPU image, `node:22-slim` runs as root by default, so without `--user` the files written into a bind-mounted host directory will be owned by root on the host. Pass `--user "$(id -u):$(id -g)"` (as described in [Build and run](https://developer.playcanvas.com/user-manual/splat-transform/docker.md#build-and-run)), or add a non-root `USER` line to the Dockerfile if this image is for shared use.
+
+If you keep the GPU image but want to force CPU mode for a single run, pass `-g cpu`:
+
+```bash
+docker run --rm -v "$PWD":/work splat-transform -g cpu input.ply output.sog
+```
+
+Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster`, `--filter-floaters`, `.voxel.json`, `--collision-mesh`, `.webp`). CPU-side SH compression also runs roughly 5-10x slower than GPU.
+
+## Troubleshooting
+
+- **`--list-gpus` reports no adapters.** The Vulkan ICD is not reaching the container. Check that you ran with `--gpus all`, that `NVIDIA_DRIVER_CAPABILITIES` includes `graphics`, and that the NVIDIA Container Toolkit is installed and configured on the host.
+- **`vulkaninfo` reports `Could not find a Vulkan ICD`.** The host NVIDIA driver does not expose Vulkan. On AWS, switch from the Tesla driver to the GRID driver (v19.2+) and reinstall, then install `vulkan vulkan-tools libXext` on the host.
+- **`vulkaninfo` segfaults or fails to load `libXext.so.6`.** `libxext6` is missing from the image — make sure the `apt-get install` line in the Dockerfile includes it (and on AWS, that `libXext` is also installed on the host).
+- **`docker: Error response from daemon: could not select device driver "" with capabilities: [[gpu]]`.** The NVIDIA Container Toolkit is not installed or the Docker daemon has not picked up its config. Reinstall the toolkit and restart Docker.
+- **Outputs in the bind-mounted directory aren't owned by my host user.** The container's default user (UID 2000 in the GPU image, root in the slim image) doesn't match your host UID. Pass `--user "$(id -u):$(id -g)"` to `docker run` to align them, or `chown` the output directory to the container UID before mounting.
+- **`Permission denied` writing to the bind-mounted directory.** The container's default user has no write access to the host directory. Use `--user "$(id -u):$(id -g)"`, or `chown` the host directory so the container user can write.
+- **`splat-transform: command not found` inside the container.** Make sure `npm install -g @playcanvas/splat-transform` ran successfully during the build. The default entrypoint already invokes the binary, so `docker run <image> --help` should work without specifying `splat-transform`.
+
+--------------------------------------------------------------------------------
+
+## Voxel Format
+
+URL: https://developer.playcanvas.com/user-manual/splat-transform/voxel-format/
+Markdown: https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md
+
+This document specifies version 1.1 of the **voxel** format. It describes the on-disk structure written by [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) when the output path ends in `.voxel.json` and consumed by runtimes such as the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) for collision detection and raycasts.
+
+The format stores a solid/empty voxelization of a Gaussian splat scene as a sparse voxel octree (SVO) in the Laine–Karras node layout: a JSON header describing the grid, plus a compact binary file holding the tree.
+
+For a step-by-step guide to generating this format (voxelization, exterior fill, nav carving, collision meshes), see the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide.
+
+## File set
+
+A voxel dataset is a pair of files with a shared stem, plus an optional collision mesh:
+
+```none
+scene.voxel.json       # header: bounds, resolution, tree statistics (this spec)
+scene.voxel.bin        # binary octree data (nodes + leafData)
+scene.collision.glb    # optional triangle mesh extracted from the voxels
+```
+
+- The header is always named `*.voxel.json`. Writers and readers derive the binary filename by replacing the `.voxel.json` suffix with `.voxel.bin`; the header does not reference it explicitly.
+- The `.collision.glb` (written only when collision mesh generation is requested) is a standard glTF binary and is not described further here.
+
+## `*.voxel.json`
+
+```ts
+interface VoxelMeta {
+    version: string;             // file format version, decimal string, e.g. "1.1"
+    asset?: {
+        generator?: string;      // tool/version that produced the file, e.g. "splat-transform v3.1.6"
+    };
+    gridBounds: {                // AABB of the voxel grid, aligned to 4-voxel block boundaries
+        min: number[];           // [x, y, z] — world position of the min corner of voxel (0, 0, 0)
+        max: number[];           // [x, y, z]
+    };
+    sceneBounds: {               // AABB of the source Gaussians (informational)
+        min: number[];
+        max: number[];
+    };
+    voxelResolution: number;     // edge length of one voxel, world units
+    leafSize: number;            // voxels per leaf-block edge; always 4
+    treeDepth: number;           // subdivision levels from the root cube down to leaf blocks (>= 1)
+    numInteriorNodes: number;    // number of interior nodes in `nodes`
+    numMixedLeaves: number;      // number of mixed leaves in `nodes`
+    nodeCount: number;           // total uint32 entries in the `nodes` array
+    leafDataCount: number;       // total uint32 entries in the `leafData` array (= 2 * numMixedLeaves)
+}
+```
+
+- `gridBounds` is the authoritative frame for the voxel data: voxel `(vx, vy, vz)` occupies the world-space box from `gridBounds.min + (vx, vy, vz) · voxelResolution` to `gridBounds.min + (vx+1, vy+1, vz+1) · voxelResolution`. Each axis spans a whole number of 4×4×4-voxel blocks: `nb = round((max − min) / (4 · voxelResolution))`.
+- `sceneBounds` records the bounds of the source Gaussian scene (each Gaussian's position expanded by its rotated, scaled extents at the renderer's sigma cutoff). It is informational; depending on fill/carve/crop options, `gridBounds` may be larger or smaller than `sceneBounds`.
+- `nodeCount` = `numInteriorNodes` + `numMixedLeaves` + the number of solid leaves (not stored separately).
+
+### Coordinate space
+
+All bounds are expressed in the PlayCanvas engine's coordinate frame — the frame the splat scene renders in. This differs from the source PLY's coordinate frame by the engine's standard splat import transform (a 180° rotation about the Z axis).
+
+## `*.voxel.bin`
+
+The binary file is two concatenated little-endian `uint32` arrays with no header or padding:
+
+| Offset (bytes) | Length (bytes) | Contents |
+| --- | --- | --- |
+| `0` | `nodeCount * 4` | `nodes` array |
+| `nodeCount * 4` | `leafDataCount * 4` | `leafData` array |
+
+The total file size is exactly `(nodeCount + leafDataCount) * 4` bytes. A scene with no solid voxels has `nodeCount = 0`, `leafDataCount = 0` and an empty binary file.
+
+## The octree
+
+The tree subdivides a cube of `2^treeDepth` blocks per axis (each block being `leafSize`³ = 4×4×4 voxels), anchored at `gridBounds.min`. Where the per-axis block counts are not equal powers of two, the root cube extends beyond `gridBounds.max`; that excess region is always empty (such octants are simply absent from their parents' child masks).
+
+Nodes at depth `treeDepth` are **leaf blocks** covering 4×4×4 voxels. `nodes[0]` is the root.
+
+### Octant numbering
+
+An interior node's eight octants are numbered by axis halves, X least significant:
+
+```none
+oct = x | (y << 1) | (z << 2)    // x, y, z = 0 for the lower half, 1 for the upper half
+```
+
+This matches Morton order: the path from the root to a leaf block at block coordinates `(bx, by, bz)` consumes the coordinates' bits from most to least significant — at depth `d` (root = 0), `oct = ((bx >> s) & 1) | (((by >> s) & 1) << 1) | (((bz >> s) & 1) << 2)` where `s = treeDepth − 1 − d`.
+
+### Node words
+
+Each entry of `nodes` is one `uint32`, decoded as follows (test in order):
+
+| Condition | Node kind | Meaning |
+| --- | --- | --- |
+| `word == 0xFF000000` | **Solid leaf** | The node's entire volume is solid. No children, no leaf data. May appear at any depth (a collapsed fully-solid subtree). |
+| `(word >>> 24) == 0` | **Mixed leaf** | `word` is an index `i` into `leafData` pairs: the node's voxel mask is `leafData[2i]` (lo) and `leafData[2i + 1]` (hi). Only appears at depth `treeDepth`. |
+| otherwise | **Interior** | `childMask = word >>> 24` (8 bits, one per octant); `firstChild = word & 0xFFFFFF` (index into `nodes`). |
+
+The two leaf encodings are unambiguous:
+
+- An interior node always has at least one child, so its `childMask` is never `0` — a zero top byte uniquely identifies a mixed leaf.
+- Nodes are emitted in breadth-first order with children always following their parent, so an interior node's `firstChild` is never `0` — `0xFF000000` uniquely identifies a solid leaf.
+
+### Children
+
+An interior node's present children (set bits of `childMask`) are stored contiguously starting at `nodes[firstChild]`, ordered by ascending octant index. The child for octant `oct` (when `childMask & (1 << oct)` is set) is at:
+
+```none
+nodes[firstChild + popcount(childMask & ((1 << oct) - 1))]
+```
+
+A clear bit in `childMask` means that octant's entire volume is empty; no node is stored for it.
+
+### Mixed-leaf voxel masks
+
+A mixed leaf's 4×4×4 = 64 voxels are stored as a 64-bit occupancy mask split across two `uint32`s. For the voxel at local coordinates `(lx, ly, lz)`, each in `[0, 4)`:
+
+```none
+bit = lx + (ly << 2) + (lz << 4)
+solid = bit < 32 ? (lo >>> bit) & 1 : (hi >>> (bit - 32)) & 1
+```
+
+`leafData[2i]` holds bits 0–31 (`lo`), `leafData[2i + 1]` holds bits 32–63 (`hi`). A set bit means the voxel is solid. A mixed leaf's mask is never all-zero or all-one — such blocks are encoded as an absent octant or a solid leaf instead.
+
+### Query domain
+
+Queries outside `gridBounds` are outside the format's domain, and the appropriate convention depends on the use case. Navigation/collision consumers (e.g. the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md)) treat out-of-grid space as **solid**; outputs produced with the nav options (exterior fill, floor fill, carve) rely on this — the writer crops away fully-solid blocks beyond the navigable region precisely because the runtime treats everything outside the grid as solid anyway.
+
+## Limits
+
+`firstChild` and the mixed-leaf `leafData` index are 24-bit values, capping the format at 16,777,216 node entries and 16,777,216 mixed leaves. The writer fails with an error rather than exceed either limit.
+
+## Example `*.voxel.json`
+
+A 32 × 14 × 32-block grid at 5 cm resolution (block size 0.2):
+
+```json
+{
+    "version": "1.1",
+    "asset": {
+        "generator": "splat-transform v3.1.6"
+    },
+    "gridBounds": {
+        "min": [-3.2, -0.2, -3.2],
+        "max": [3.2, 2.6, 3.2]
+    },
+    "sceneBounds": {
+        "min": [-3.13, -0.08, -3.07],
+        "max": [3.11, 2.49, 3.08]
+    },
+    "voxelResolution": 0.05,
+    "leafSize": 4,
+    "treeDepth": 5,
+    "numInteriorNodes": 1201,
+    "numMixedLeaves": 5678,
+    "nodeCount": 9232,
+    "leafDataCount": 11356
+}
+```
+
+## Versioning & compatibility
+
+- `version` is a decimal `"major.minor"` string. Files conforming to this specification have `version: "1.1"`. Readers should reject files with a greater major version.
+- **1.0 → 1.1**: version 1.0 files store bounds and voxel data in the source PLY coordinate frame; 1.1 voxelizes in the PlayCanvas engine frame (see [Coordinate space](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md#coordinate-space)). The binary layout is unchanged.
+- The `asset` block was added after 1.1 shipped and may be absent from older 1.1 files.
+- Unknown fields should be ignored, allowing minor additive evolution without a version bump.
+
+## See also
+
+- [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) — generating voxel and collision data with splat-transform.
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#voxel-output-options) — full option reference including Voxel Output Options.
 
 --------------------------------------------------------------------------------
 

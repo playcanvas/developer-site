@@ -9,7 +9,7 @@ For loading and rendering Streamed SOG in a PlayCanvas application, see the [LOD
 You can obtain the LOD levels in two ways:
 
 - **Supply your own LOD files** — provide a separate splat file for each level, for example produced during training or exported from another tool.
-- **Generate them by decimating a single source** — use [`--decimate`](https://developer.playcanvas.com/user-manual/splat-transform.md#actions) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately. `--decimate` removes Gaussians at a uniform rate everywhere; `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at higher memory cost.
+- **Generate them by decimating a single source** — use [`--decimate`](https://developer.playcanvas.com/user-manual/splat-transform.md#decimation) to create the lower-detail levels from one high-quality input, so you don't have to author each level separately. `--decimate` removes Gaussians at a uniform rate everywhere; `--decimate-adaptive` allocates removal by local error instead, which is much better on mixed-scale content such as skies, at higher memory cost.
 
 :::note
 
@@ -117,5 +117,5 @@ splat-transform scene/lod-meta.json --info null
 
 - [Streamed SOG format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) — the on-disk format specification.
 - [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md) — loading and rendering Streamed SOG in a PlayCanvas app.
-- [splat-transform CLI reference](https://developer.playcanvas.com/user-manual/splat-transform.md) — full option reference including LOD Input/Output Options.
+- [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#lod-input-options) — full option reference including LOD Input/Output Options.
 - [SuperSplat streaming](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) — generating Streamed SOG through the SuperSplat web UI.
